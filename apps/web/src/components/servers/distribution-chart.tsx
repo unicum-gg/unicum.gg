@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import { Bar, BarChart, Cell, ReferenceLine, XAxis, YAxis } from "recharts";
 import {
@@ -41,6 +43,8 @@ export function DistributionChart({
   marker?: number | null;
   markerLabel?: string;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/distribution-chart");
   const total = useMemo(
     () => buckets.reduce((sum, b) => sum + b.count, 0),
     [buckets],
@@ -85,8 +89,7 @@ export function DistributionChart({
   if (total === 0) {
     return (
       <p className="flex h-64 items-center justify-center text-sm text-fd-muted-foreground">
-        Nothing computed yet.
-      </p>
+        {t("nothing-computed-yet")}</p>
     );
   }
 
@@ -109,7 +112,7 @@ export function DistributionChart({
           tickLine={false}
           axisLine={false}
           width={52}
-          tickFormatter={formatPlayersCompact}
+          tickFormatter={(v: number) => formatPlayersCompact(v, locale)}
         />
         <ChartTooltip
           content={
@@ -119,8 +122,10 @@ export function DistributionChart({
               }
               formatter={(value, _name, item) => (
                 <span>
-                  {formatPlayers(Number(value))} players (
-                  {((item?.payload?.share ?? 0) * 100).toFixed(1)}%)
+                  {t("players-share", {
+                    players: formatPlayers(Number(value), locale),
+                    share: ((item?.payload?.share ?? 0) * 100).toFixed(1),
+                  })}
                 </span>
               )}
             />

@@ -1,0 +1,8 @@
+{
+  "previous": "Prethodna stranica",
+  "next": "Sljedeća stranica",
+  "rows-per-page": "Redova po stranici",
+  "all": "Sve",
+  "range": "{first}–{last} od {total}",
+  "page": "Stranica {page} / {total}"
+}

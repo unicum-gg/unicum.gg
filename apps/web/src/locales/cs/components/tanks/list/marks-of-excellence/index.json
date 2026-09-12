@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Záplata",
+      "tip": "1 Záplata: váš klouzavý průměr kombinovaného poškození (za posledních ~100 bitev) musí překonat 65 % konkurence, kterou tvoří hráči s tímto tankem za posledních 14 dní"
+    },
+    "mark2": {
+      "label": "2 Záplaty",
+      "tip": "2 Záplaty: váš klouzavý průměr kombinovaného poškození (za posledních ~100 bitev) musí překonat 85 % konkurence, kterou tvoří hráči s tímto tankem za posledních 14 dní"
+    },
+    "mark3": {
+      "label": "3 Záplaty",
+      "tip": "3 Záplaty: váš klouzavý průměr kombinovaného poškození (za posledních ~100 bitev) musí překonat 95 % konkurence, kterou tvoří hráči s tímto tankem za posledních 14 dní"
+    }
+  },
+  "rows-per-page": "Řádky na stránku",
+  "previous-page": "Předchozí stránka",
+  "page": "Stránka {current} / {totalPages}",
+  "next-page": "Další stránka",
+  "all": "Všechna"
+}

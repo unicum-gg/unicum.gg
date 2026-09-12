@@ -1,0 +1,8 @@
+{
+  "previous": "Trang trước",
+  "next": "Trang tiếp theo",
+  "rows-per-page": "Số hàng mỗi trang",
+  "all": "Tất cả",
+  "range": "{first}–{last} trên tổng số {total}",
+  "page": "Trang {page} / {total}"
+}

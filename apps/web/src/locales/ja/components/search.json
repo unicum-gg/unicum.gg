@@ -1,0 +1,27 @@
+{
+  "placeholder": "プレイヤー、クラン、戦車、マップ、用語を検索",
+  "type": "検索の車輌タイプ",
+  "types": {
+    "all": "全て",
+    "players": "プレイヤー",
+    "clans": "クラン",
+    "tanks": "戦車",
+    "maps": "マップ",
+    "glossary": "用語集"
+  },
+  "sections": {
+    "players": "プレイヤー",
+    "clans": "クラン",
+    "tanks": "戦車",
+    "maps": "マップ",
+    "glossary": "用語集",
+    "recent": "最近の検索",
+    "favorites": "お気に入り"
+  },
+  "searching": "検索中…",
+  "errored": "問題が発生しました。もう一度お試しください。",
+  "empty": "結果が見つかりませんでした",
+  "remove-recent": "最近の検索から削除",
+  "add-favorite": "お気に入りに追加",
+  "remove-favorite": "お気に入りから削除"
+}

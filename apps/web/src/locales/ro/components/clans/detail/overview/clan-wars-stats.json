@@ -1,0 +1,21 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Total",
+    "day": "Ultimele 24h",
+    "week": "Ultimele 7d",
+    "month": "Ultimele 30d"
+  },
+  "sections": {
+    "territory": "Teritoriu",
+    "t10": "Generația X",
+    "t8": "Generația VIII",
+    "t6": "Generația VI"
+  },
+  "rows": {
+    "provinces": "Provincii",
+    "elo": "ELO",
+    "battles": "Lupte",
+    "winrate": "Rată de câștig"
+  }
+}

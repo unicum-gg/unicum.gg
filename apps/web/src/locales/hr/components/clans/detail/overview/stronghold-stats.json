@@ -1,0 +1,22 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Ukupno",
+    "day": "Zadnjih 24h",
+    "week": "Zadnjih 7d",
+    "month": "Zadnjih 30d"
+  },
+  "sections": {
+    "elo": "ELO Razine X ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Razina X (7v7)",
+    "t8": "{skirmish} Razina VIII (7v7)",
+    "t6": "{skirmish} Razina VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Bitke",
+    "winrate": "Postotak pobjeda"
+  }
+}

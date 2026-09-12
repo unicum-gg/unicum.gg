@@ -1,0 +1,25 @@
+{
+  "tagline": "Napravljeno za World of Tanks zajednicu. Besplatne statistike za svakog igrača, klan, tenk i mapu širom EU, NA i Azije.",
+  "columns": {
+    "leaderboards": "Ljestvice",
+    "tanks": "Oklopna vozila",
+    "maps": "Mape",
+    "integrations": "Integracije",
+    "project": "Projekt"
+  },
+  "links": {
+    "top-tanks": "Najbolja oklopna vozila",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "API dokumentacija",
+    "badges": "Znakovi",
+    "glossary": "Rječnik",
+    "coverage": "Pokrivenost",
+    "support": "Podržite nas",
+    "source": "Izvorni kod",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Nije povezano s Wargamingom",
+  "cookies": "Upravljaj kolačićima"
+}

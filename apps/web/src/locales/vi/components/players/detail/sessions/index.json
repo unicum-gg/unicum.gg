@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Chưa có phiên nào. Phiên sẽ xuất hiện sau khi tài khoản này được lấy mẫu hai lần, với các trận đấu diễn ra ở giữa. Việc này tự động xảy ra khi tài khoản được chơi.",
+  "bar-height-is-battles-played": "Chiều cao thanh là số trận đấu đã chơi, màu sắc là {metric} của {granularity} đó, theo cùng các khoảng mà trang web sử dụng ở mọi nơi khác.",
+  "title": "Các phiên của {nickname}",
+  "title-count": "Các phiên của {nickname} ({count})",
+  "granularity": {
+    "day": "ngày",
+    "week": "tuần",
+    "month": "tháng",
+    "daily": "Hằng ngày",
+    "weekly": "Hằng tuần",
+    "monthly": "Hằng tháng"
+  },
+  "week-of": "Tuần bắt đầu từ {date}"
+}

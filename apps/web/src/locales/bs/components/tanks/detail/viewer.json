@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Vizualno",
+    "collision": "Kolizija",
+    "live": "Uživo"
+  },
+  "centre": {
+    "on": "Centriraj vozilo",
+    "off": "Vrati ga izvan centra"
+  },
+  "hull-down": {
+    "on": "Zadnja strana dole",
+    "off": "Izravnaj vozilo"
+  },
+  "tracks": {
+    "on": "Pokreni gusjenice",
+    "off": "Zaustavi gusjenice"
+  },
+  "textures": {
+    "on": "Teksture visoke rezolucije",
+    "off": "Standardne teksture"
+  },
+  "reset": "Resetuj prikaz",
+  "style": "Odaberi stil",
+  "style-worn": "Stil: {name}",
+  "search-styles": "Pretraži stilove",
+  "colours": "Značenje boja",
+  "cinematic": {
+    "off": "Filmska kamera: isključena",
+    "auto": "Filmska kamera: kada nema aktivnosti",
+    "on": "Filmska kamera: uvijek"
+  },
+  "open-tank": "Otvori drugi tenk",
+  "open-tank-placeholder": "Otvorite tenk...",
+  "more-actions": "Više akcija",
+  "marks-meaning": {
+    "0": "Nema oznaka izvrsnosti",
+    "1": "Jedna oznaka: ispred 65% igrača na ovom tenku",
+    "2": "Dvije oznake: ispred 85%",
+    "3": "Tri oznake: ispred 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Ispuni prozor",
+      "leave": "Nazad na stranicu"
+    },
+    "screen": {
+      "enter": "Ispuni ekran",
+      "leave": "Napusti cijeli ekran"
+    }
+  },
+  "marks-count": {
+    "0": "Nema oznaka izvrsnosti",
+    "one": "1 oznaka izvrsnosti",
+    "other": "{count} oznake izvrsnosti"
+  },
+  "compare-tank": "Poredi s drugim tenkom",
+  "compare-tank-placeholder": "Uporedi sa...",
+  "view-tooltips": {
+    "visual": "Tenk kako ga igra prikazuje",
+    "collision": "Debljina svake ploče",
+    "live": "Šta bi odabrana granata uradila"
+  },
+  "cinematic-tooltips": {
+    "off": "Filmska kamera: isključena, prikaz miruje",
+    "auto": "Filmska kamera: počinje nakon 30 sekundi bez aktivnosti",
+    "on": "Filmska kamera: uvijek, od trenutka kada je pustite"
+  }
+}

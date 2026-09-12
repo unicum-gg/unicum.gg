@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Cada voto proviene de una cuenta que ha jugado con este tanque.",
+  "every-vote-played-average": "Cada voto proviene de una cuenta que ha disputado una media de {battles} batallas con este tanque.",
+  "fun": "Diversión",
+  "how-good-the-tank-is": "Qué tan bien rinde el Tanque",
+  "how-much-people-enjoy-it": "Cuánto disfruta la gente de este Tanque",
+  "if-you-have-played-it": "Si has jugado con él, esta página te espera justo a ti.",
+  "nobody-has-rated-this-tank": "Nadie ha valorado todavía este Tanque.",
+  "overall": "General",
+  "votes": "{count} votos",
+  "votes-one": "{count} voto"
+}

@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "अभी कोई क्लस्टर दर्ज नहीं है।",
+  "server": "सर्वर",
+  "online": "ऑनलाइन",
+  "share": "साझा करें",
+  "peak": "चौक ({label})",
+  "average": "औसत ({label})",
+  "not-reported": "रिपोर्ट नहीं किया गया",
+  "total": "कुल"
+}

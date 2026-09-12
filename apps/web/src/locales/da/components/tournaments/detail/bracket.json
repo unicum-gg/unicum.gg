@@ -1,0 +1,7 @@
+{
+  "group": "Gruppe {order}",
+  "n-teams": "{count} hold",
+  "pts": "Pts",
+  "team": "Hold",
+  "top-n-advance": ", de bedste {count} går videre"
+}

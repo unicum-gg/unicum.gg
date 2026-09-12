@@ -1,0 +1,6 @@
+{
+  "title": "Legjobb játékosok a World of Tanks {mode} battle royale játékmódban ({region})",
+  "description": "{name}: {region} régiós ranglista a World of Tanks {mode} battle royale játékmódjához, a HR-értékelésünk (átlagos XP + győzelmi arány) alapján rangsorolva.",
+  "og-title": "Legjobb játékosok: {mode}",
+  "og-subtitle": "Battle royale-ranglista: {region}"
+}

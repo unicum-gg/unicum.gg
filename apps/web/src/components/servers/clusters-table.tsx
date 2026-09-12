@@ -1,7 +1,8 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import {
-  SERVER_STATS_RANGE_LABEL,
   type ServerClusterStat,
   serverDisplayName,
   type ServerRecord,
@@ -44,19 +45,21 @@ export function ClustersTable({
   peak: ServerRecord | null;
   average: number;
 }) {
+  const { locale } = useFormat();
+  const { t } = useTranslation("components/servers/clusters-table");
   // Before the early return: a hook must run on every render of this component,
   // and an empty cluster list is one of them.
   const zone = useDisplayZone();
+  const { t: tRange } = useTranslation("components/servers/ranges");
 
   if (clusters.length === 0) {
     return (
       <p className="px-4 py-3 text-sm text-fd-muted-foreground">
-        No cluster recorded yet.
-      </p>
+        {t("no-cluster-recorded-yet")}</p>
     );
   }
 
-  const label = SERVER_STATS_RANGE_LABEL[range];
+  const label = tRange(range);
   const rows = [...clusters].sort((a, b) =>
     serverDisplayName(region, a.server).localeCompare(
       serverDisplayName(region, b.server),
@@ -69,13 +72,12 @@ export function ClustersTable({
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-fd-border text-xs uppercase tracking-wide text-fd-muted-foreground">
-            <th className="px-4 py-2 text-left font-medium">Server</th>
-            <th className="px-4 py-2 text-right font-medium">Online</th>
-            <th className="px-4 py-2 text-right font-medium">Share</th>
-            <th className="px-4 py-2 text-right font-medium">Peak ({label})</th>
+            <th className="px-4 py-2 text-left font-medium">{t("server")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("online")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("share")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("peak", { label })}</th>
             <th className="px-4 py-2 text-right font-medium">
-              Average ({label})
-            </th>
+              {t("average", { label })}</th>
           </tr>
         </thead>
         <tbody>
@@ -94,53 +96,53 @@ export function ClustersTable({
                   // Absent from the last sample. Wargaming stops listing a
                   // cluster it has taken down rather than reporting it at zero,
                   // so an empty cell is the honest reading, not "0 players".
-                  <span className="text-fd-muted-foreground" title="Not reported">
+                  <span className="text-fd-muted-foreground" title={t("not-reported")}>
                     —
                   </span>
                 ) : (
-                  formatPlayers(cluster.current)
+                  formatPlayers(cluster.current, locale)
                 )}
               </td>
               <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
-                {cluster.share > 0 ? formatShare(cluster.share) : "—"}
+                {cluster.share > 0 ? formatShare(cluster.share, locale) : "—"}
               </td>
               <td
                 className="px-4 py-2 text-right tabular-nums"
-                title={cluster.peakAt ? formatMoment(cluster.peakAt, zone) : undefined}
+                title={cluster.peakAt ? formatMoment(cluster.peakAt, zone, locale) : undefined}
               >
-                {formatPlayers(cluster.peak)}
+                {formatPlayers(cluster.peak, locale)}
               </td>
               <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
-                {formatPlayers(cluster.average)}
+                {formatPlayers(cluster.average, locale)}
               </td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr className="border-t border-fd-border font-medium">
-            <td className="px-4 py-2">Total</td>
+            <td className="px-4 py-2">{t("total")}</td>
             <td className="px-4 py-2 text-right tabular-nums">
               {total == null ? (
-                <span className="text-fd-muted-foreground" title="Not reported">
+                <span className="text-fd-muted-foreground" title={t("not-reported")}>
                   —
                 </span>
               ) : (
-                formatPlayers(total)
+                formatPlayers(total, locale)
               )}
             </td>
             {/* The region is all of itself. Shown rather than left blank so the
                 column reads as shares of a whole that is named. */}
             <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
-              {total == null ? "—" : formatShare(1)}
+              {total == null ? "—" : formatShare(1, locale)}
             </td>
             <td
               className="px-4 py-2 text-right tabular-nums"
-              title={peak?.at ? formatMoment(peak.at, zone) : undefined}
+              title={peak?.at ? formatMoment(peak.at, zone, locale) : undefined}
             >
-              {peak == null ? "—" : formatPlayers(peak.players)}
+              {peak == null ? "—" : formatPlayers(peak.players, locale)}
             </td>
             <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
-              {formatPlayers(average)}
+              {formatPlayers(average, locale)}
             </td>
           </tr>
         </tfoot>

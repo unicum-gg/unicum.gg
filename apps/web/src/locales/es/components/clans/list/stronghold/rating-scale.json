@@ -1,0 +1,17 @@
+{
+  "average": "Promedio",
+  "bad": "Malo",
+  "below-avg": "Por debajo del promedio",
+  "color-thresholds-for-the-stronghold": "Umbrales de color para las clasificaciones de Fortaleza. Una única escala absoluta para todos los niveles, de modo que un SR (o SRB) representa la misma calidad de clan en todos ellos.",
+  "excellent": "Excelente",
+  "good": "Bueno",
+  "rating-colors": "Colores de calificación",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Súper",
+  "tier": "nivel",
+  "top": "Mejor",
+  "very-bad": "Muy malo",
+  "very-good": "Muy bueno",
+  "wr": "WR"
+}

@@ -1,0 +1,9 @@
+{
+  "boosts": "Tumataas {name}",
+  "directives": "Mga Direktiba",
+  "directive-name": "{name} na direktiba",
+  "grants-and-boosts": "Nagbibigay at nagpapalakas sa skill ng crew, kahit hindi trained.",
+  "grants-only": "Ibinibigay ang kasanayan ng Sampahan para sa labanan (walang nakalistang katangian).",
+  "enhances-mounted": "Pinapahusay ang nakamount na {name}.",
+  "mount-to-use": "I-mount ang {name} para magamit ang directive na ito."
+}

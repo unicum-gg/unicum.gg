@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name} के टैंक ({region}), खेले गए हर वाहन",
+    "description": "{name} ने {region} पर जो हर टैंक खेला है, उसके युद्ध, जीत दर, औसत क्षति और प्रति वाहन WN8।"
+  },
+  "achievements": {
+    "title": "{name} की उपलब्धियाँ ({region}), {medals} अर्जित पदक",
+    "description": "{name} ने {region} पर अर्जित किए World of Tanks के {medals} पदक, Kolobanov’s और Pool’s से लेकर मानद रैंक और महाकाव्य पदकों तक, साथ ही वे सभी जिन्हें अभी कमाना बाकी है।"
+  },
+  "tournaments": {
+    "title": "{name} के टूर्नामेंट ({region})",
+    "description": "{name} ने {region} पर जिन Wargaming टूर्नामेंट में भाग लिया: वह किस टीम के लिए खेले, प्रारूप और टीम कितनी दूर पहुँची। यह रिकॉर्ड Wargaming केवल टूर्नामेंट पक्ष से प्रकाशित करता है, खिलाड़ी पक्ष से कभी नहीं।"
+  },
+  "value": {
+    "title": "{name} के खाते का मूल्य ({region})",
+    "description": "{region} पर {name} का World of Tanks खाता कितने मूल्य का है: गैराज में मौजूद क्रेडिट, गोल्ड और अनुभव।"
+  },
+  "mode": {
+    "title": "{name} के {mode} आँकड़े ({region})",
+    "description": "{region} पर {mode} में {name}: इस मोड के युद्ध, जीत दर और रेटिंग, उनके रैंडम युद्ध के आधारभूत आँकड़ों के साथ।"
+  },
+  "overview": {
+    "title": "{name} के World of Tanks आँकड़े ({region}), {battles} युद्ध, {winrate}% WR",
+    "description": "{region} पर {name}: {battles} युद्ध, {winrate}% जीत दर, {rating} रेटिंग। टैंक-दर-टैंक विवरण, WN8, WNX और पूर्ण क्लान इतिहास।"
+  },
+  "locked": {
+    "title": "{name} का World of Tanks खाता लॉक है ({region})",
+    "description": "{name} ({region}) मौजूद है, लेकिन Wargaming ने यह खाता लॉक कर दिया है, इसलिए इसके World of Tanks आँकड़े उपलब्ध नहीं हैं।"
+  },
+  "empty": {
+    "title": "{name} के World of Tanks खिलाड़ी आँकड़े ({region})",
+    "description": "{name} ({region}) के World of Tanks खिलाड़ी आँकड़े: WN8, WNX रेटिंग, जीत दर, टैंक-दर-टैंक विवरण और पूर्ण क्लान इतिहास।"
+  }
+}

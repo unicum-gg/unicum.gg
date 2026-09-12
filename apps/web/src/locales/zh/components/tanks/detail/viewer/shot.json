@@ -1,0 +1,7 @@
+{
+  "firing": "正在发射{shell}，{pen}毫米。更换炮弹",
+  "no-such-round": "{mark}：该火炮没有此炮弹，请自行设置角度",
+  "own-round": "{mark}：该火炮自带的炮弹，数据完整",
+  "treat-it-as": "将其视为",
+  "treat-it-as-mark": "将其视为{mark}"
+}

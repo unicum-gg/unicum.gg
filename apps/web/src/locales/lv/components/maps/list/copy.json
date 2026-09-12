@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Katra no {count} World of Tanks kauju arēnām. Filtrē pēc kamuflāžas un spēles režīma, pēc tam atver karti, lai skatītu tās minikarti, izmēru un katra režīma bāzu karogus un sākumpunktus.",
+    "title": "Visas World of Tanks kartes ({region}), katra kauju arēna",
+    "description": "Pārlūko visas World of Tanks kartes vietnē {region}: minikartes, izmērs, kamuflāža un atbalstītie spēles režīmi, kā arī katra režīma bāzu karogi un sākumpunkti.",
+    "heading": "Visas <accent>kartes</accent>"
+  },
+  "battle-type": {
+    "intro": "{count} World of Tanks kartes, kurās spēlē režīmā {type}, {blurb}. Atver karti, lai skatītu tās minikarti, izmēru un katra režīma bāzu karogus un sākumpunktus.",
+    "title": "World of Tanks {type} kartes ({region}), katra arēna rotācijā",
+    "description": "Katra World of Tanks karte {type} rotācijā vietnē {region}: minikartes, izmērs, kamuflāža un atbalstītie spēles režīmi, kā arī bāzu karogi un sākumpunkti.",
+    "heading": "{type} <accent>kartes</accent>"
+  },
+  "blurbs": {
+    "random": "standarta 15 pret 15 rotācija",
+    "battle_royale": "režīms, kurā uzvar pēdējais tanks",
+    "frontline": "30 pret 30 liela mēroga režīms",
+    "onslaught": "ranžēts 7 pret 7 režīms",
+    "onslaught_night": "ranžēts 7 pret 7 režīms pēc tumsas iestāšanās, ar īsāku redzamības diapazonu, ko pašlaik var spēlēt Kopējā testā",
+    "grand_battle": "30 pret 30 X līmeņa režīms",
+    "clan_wars": "klanu kari un virzīšanās",
+    "waffentrager": "Waffenträger notikums",
+    "last_stand": "Last Stand notikums",
+    "arcade": "arkādes un īpašie notikumi",
+    "story_mode": "sižeta vadītas operācijas",
+    "training": "treniņu telpas un apmācības"
+  }
+}

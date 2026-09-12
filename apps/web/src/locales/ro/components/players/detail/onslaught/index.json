@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname} nu a ocupat un loc în clasamentul Violență.",
+  "live-season": "· sezon în desfășurare",
+  "loading-s-onslaught-record": "Se încarcă istoricul Violență al lui {nickname}...",
+  "onslaught": "Violență",
+  "onslaught-record": "Istoricul Violență al lui {nickname}",
+  "see-this-season-s-leaderboard": "Vezi clasamentul acestui sezon",
+  "standing-line": "{rating} puncte de rating · {battles} bătălii",
+  "the-board-only-lists-players": "Clasamentul afișează doar jucătorii care ating Campion, câteva mii pentru fiecare regiune, așa că aproape toate profilurile ajung aici. Se completează automat în sezonul în care ajung acolo.",
+  "updated": "Actualizat {when}"
+}

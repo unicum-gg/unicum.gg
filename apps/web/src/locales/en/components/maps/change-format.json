@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Play area width",
+    "height": "Play area height",
+    "round-length": "Battle timer",
+    "team-size": "Team size",
+    "camouflage": "Season",
+    "presence": "In the game",
+    "variant-version": "{type} version",
+    "play-area": "Play area",
+    "bases-team1": "Allied bases",
+    "bases-team2": "Enemy bases",
+    "spawns-team1": "Allied spawns",
+    "spawns-team2": "Enemy spawns",
+    "control-point": "Control point",
+    "artillery-headquarters": "Artillery Headquarters",
+    "comms-centers": "Comms Centers",
+    "observation-posts": "Observation Posts",
+    "points-of-interest": "Points of interest"
+  },
+  "summary": {
+    "added": "{name} added",
+    "removed": "{name} removed",
+    "added-to-game": "Added to the game",
+    "removed-from-game": "Removed from the game",
+    "added-on-test": "Added on the test client",
+    "removed-on-test": "Removed on the test client",
+    "mode-added": "{name} mode added",
+    "mode-removed": "{name} mode removed",
+    "now-played-in": "Now played in {name}",
+    "no-longer-played-in": "No longer played in {name}",
+    "event-added": "{name} can now happen mid-battle",
+    "event-removed": "{name} no longer happens",
+    "moved": "{name} moved",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

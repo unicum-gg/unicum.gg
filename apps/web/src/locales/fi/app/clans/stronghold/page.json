@@ -1,0 +1,4 @@
+{
+  "title": "Parhaat tason {tier} klaanit alueella {region}",
+  "description": "Alueen {region} tason {tier} klaanitulostaulukko. Rankattu SR:n (kahakka-arvosanan), ELOn, taistelujen ja voittoprosentin mukaan. Vähintään {battles} taistelua."
+}

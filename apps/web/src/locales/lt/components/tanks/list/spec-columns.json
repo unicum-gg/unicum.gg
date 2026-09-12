@@ -1,0 +1,162 @@
+{
+  "columns-label": "Stulpeliai",
+  "groups": {
+    "firepower": "Šaunamoji galia",
+    "gun-handling": "Ginklo valdymas",
+    "mobility": "Mobilumas",
+    "survivability": "Išgyvenamumas",
+    "other": "Kitas"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Žala per minutę"
+    },
+    "damage": {
+      "label": "Žala",
+      "tip": "Alpha žala"
+    },
+    "moduleDamage": {
+      "label": "Žala moduliams"
+    },
+    "splashRadius": {
+      "label": "Sprogimo spindulys"
+    },
+    "reload": {
+      "label": "Užsitaisymas",
+      "tip": "Perkrovimas (visa dėtuvė automatiniams pabūklams)"
+    },
+    "rof": {
+      "label": "Šaudymo sparta",
+      "tip": "Šūviai per minutę"
+    },
+    "intraClipReload": {
+      "label": "Vidinis užsitaisymas",
+      "tip": "Laikas tarp šūvių dėtuvėje (automatiniams pabūklams)"
+    },
+    "penetration": {
+      "label": "Pramušimas",
+      "tip": "Pramušimas (mm), numatytasis sviedinys"
+    },
+    "caliber": {
+      "label": "Kalibras",
+      "tip": "Sviedinio kalibras (mm)"
+    },
+    "shellVelocity": {
+      "label": "Sviedinio greitis",
+      "tip": "Sviedinio greitis (m/s)"
+    },
+    "accuracy": {
+      "label": "Tikslumas",
+      "tip": "Sklaida 100 m atstumu (mažesnė yra geresnė)"
+    },
+    "aimTime": {
+      "label": "Šaudymo laikas"
+    },
+    "dispMoving": {
+      "label": "Išsisklaidymas judant",
+      "tip": "Išsisklaidymo koeficientas judant"
+    },
+    "dispTankTraverse": {
+      "label": "Išsisklaidymas sukant tanką"
+    },
+    "dispTurretTraverse": {
+      "label": "Išsisklaidymas sukant bokštelį"
+    },
+    "dispAfterShot": {
+      "label": "Išsisklaidymas po šūvio"
+    },
+    "dispWhileDamaged": {
+      "label": "Išsisklaidymas pažeidus tanką"
+    },
+    "gunArc": {
+      "label": "Pabūklo sukimo kampas",
+      "tip": "Horizontalus pabūklo pasukimo lankas"
+    },
+    "depression": {
+      "label": "Pabūklo nuleidimas / pakėlimas",
+      "tip": "Pabūklo nuleidimas / pakėlimas"
+    },
+    "speed": {
+      "label": "Greitis (pirmyn / atgal)",
+      "tip": "Didžiausias greitis pirmyn / atgal (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Korpuso pasukimas"
+    },
+    "turretTraverse": {
+      "label": "Bokštelio Pasukimas"
+    },
+    "enginePower": {
+      "label": "Galia",
+      "tip": "Variklio galia (AG)"
+    },
+    "powerWeight": {
+      "label": "Galia/Masė",
+      "tip": "AG tonai"
+    },
+    "terrainHard": {
+      "label": "Kietas gruntas",
+      "tip": "Pasipriešinimas kietai dangai (mažesnis yra geresnis)"
+    },
+    "terrainMedium": {
+      "label": "Vidutiniokai"
+    },
+    "terrainSoft": {
+      "label": "Minkštas gruntas"
+    },
+    "health": {
+      "label": "Patvarumas",
+      "tip": "Gyvybės taškai"
+    },
+    "engineHealth": {
+      "label": "Variklio patvarumas"
+    },
+    "engineFireChance": {
+      "label": "Variklio užsidegimo tikimybė"
+    },
+    "hullArmorFront": {
+      "label": "Korpuso šarvai (priekiniai)",
+      "tip": "Priekiniai korpuso šarvai (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Bokštelio šarvai (priekiniai)",
+      "tip": "Priekiniai bokštelio šarvai (mm)"
+    },
+    "trackArmor": {
+      "label": "Vikšrų šarvai"
+    },
+    "trackHealth": {
+      "label": "Vikšrų patvarumas"
+    },
+    "trackRepairTime": {
+      "label": "Vikšro remonto laikas"
+    },
+    "ammoRackHealth": {
+      "label": "Šaudmenų stovo patvarumas"
+    },
+    "weight": {
+      "label": "Masė"
+    },
+    "viewRange": {
+      "label": "Apžvalgos atstumas",
+      "tip": "Matymo diapazonas (m)"
+    },
+    "radioRange": {
+      "label": "Radijo ryšio nuotolis",
+      "tip": "Signalo diapazonas (m)"
+    },
+    "camoStill": {
+      "label": "Maskuotė stovint"
+    },
+    "camoMoving": {
+      "label": "Maskuotė judant"
+    },
+    "camoStillFiring": {
+      "label": "Stovėjimo maskuotė po šūvio"
+    },
+    "camoMovingFiring": {
+      "label": "Judėjimo maskuotė po šūvio"
+    }
+  }
+}

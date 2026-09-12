@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Top spillere · Seneste 24 timer"
+    },
+    "week": {
+      "title": "Top spillere · Seneste 7 dage"
+    }
+  },
+  "rating-scale": {
+    "title": "Bedømmelsesskala"
+  },
+  "community": {
+    "title": "Bliv en del af fællesskabet",
+    "heading": "Forbind med WoT-spillere",
+    "description": "Deltag i vores Discord for at chatte om WoT-statistik, foreslå funktioner og rapportere fejl. Eller gå til GitHub for at se koden og bidrage.",
+    "discord": "Deltag på Discord",
+    "github": "Se på GitHub"
+  },
+  "features": {
+    "title": "Det finder du her",
+    "profiles": {
+      "title": "Spillerprofiler",
+      "description": "Detaljeret statistik med samlet udvikling samt udvikling over 24t / 7d / 30d, WN7, WN8, WNX og Personlig vurdering."
+    },
+    "clans": {
+      "title": "Klansider",
+      "description": "Medlemstabel med vurderinger, seneste aktivitetsfeed, beskrivelse og klanmetadata."
+    },
+    "history": {
+      "title": "Klanhistorik",
+      "description": "Komplet tidslinje over alle klaner, en spiller har været i, med roller og datoer."
+    },
+    "live": {
+      "title": "Liveopdateringer",
+      "description": "Sporede spillere opdateres i baggrunden hver 24. time via vores øjebliksbilledsystem."
+    },
+    "leaderboards": {
+      "title": "Toplister",
+      "description": "Top spillere (24t, 7d, nogensinde) og top klaner rangeret efter WNX, beregnet ud fra vores øjebliksbilleder."
+    },
+    "open-source": {
+      "title": "Open source · AGPL",
+      "description": "Koden er på GitHub. Se den, fork den, bidrag. Ingen reklamer, kun tilvalgt analyse."
+    }
+  },
+  "quick-start": {
+    "title": "Kom hurtigt i gang",
+    "search": {
+      "title": "🔍 Søg efter spillere eller klaner",
+      "description": "Tryk på {shortcut} for at åbne søgningen, og skriv derefter et kaldenavn eller klan-tag."
+    },
+    "region": {
+      "title": "🌍 Skift region",
+      "description": "Brug {selector}-vælgeren i navigationslinjen. Ranglisterne opdateres tilsvarende."
+    },
+    "leaderboards": {
+      "title": "🏆 Gennemse ranglister",
+      "description": "Top spillere (24t, 7d, nogensinde) og top klaner rangeret efter gennemsnitlig WNX, beregnet ud fra vores øjebliksbilleder."
+    },
+    "colors": {
+      "title": "📊 Læs farverne",
+      "description": "WR, WN7, WN8 og WNX bruger de samme niveaufarver (orange → grøn → cyan → lilla). Se skalaen ovenfor."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

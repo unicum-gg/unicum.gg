@@ -1,0 +1,6 @@
+{
+  "active-until": "Attiva fino a {tz}",
+  "n-left": "{count} rimanenti",
+  "no-reserves-in-stock-right": "Nessuna riserva disponibile al momento.",
+  "reserves-to-activate": "Riserve da attivare"
+}

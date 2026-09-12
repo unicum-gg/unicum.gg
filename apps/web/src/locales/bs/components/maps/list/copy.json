@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Svaka od {count} arena za bitke u igri World of Tanks. Filtrirajte po kamuflaži i režimu igre, a zatim otvorite mapu za njenu mini mapu, veličinu te zastavice baza i početne pozicije po režimima.",
+    "title": "Sve World of Tanks mape ({region}), svaka arena za bitke",
+    "description": "Pregledajte sve World of Tanks mape na regiji {region}: mini mape, veličinu, kamuflažu i podržane režime igre, sa zastavicama baza i početnim pozicijama po režimima.",
+    "heading": "Sve <accent>mape</accent>"
+  },
+  "battle-type": {
+    "intro": "{count} World of Tanks mapa koje se igraju u režimu {type}, {blurb}. Otvorite mapu za njenu mini mapu, veličinu te zastavice baza i početne pozicije po režimima.",
+    "title": "World of Tanks mape režima {type} ({region}), svaka arena u rotaciji",
+    "description": "Svaka World of Tanks mapa u rotaciji režima {type} na regiji {region}: mini mape, veličina, kamuflaža i podržani režimi igre, sa zastavicama baza i početnim pozicijama.",
+    "heading": "{type} <accent>mape</accent>"
+  },
+  "blurbs": {
+    "random": "standardna rotacija 15 na 15",
+    "battle_royale": "režim posljednjeg preživjelog tenka",
+    "frontline": "režim velikih razmjera 30 na 30",
+    "onslaught": "rangirano igranje 7 na 7",
+    "onslaught_night": "rangirano igranje 7 na 7 po mraku, s kraćim dometom pogleda, trenutno dostupno na Common Testu",
+    "grand_battle": "režim nivoa X, 30 na 30",
+    "clan_wars": "klanovski ratovi i ofanzive",
+    "waffentrager": "događaj Waffenträger",
+    "last_stand": "događaj Last Stand",
+    "arcade": "arkadne i posebne događaje",
+    "story_mode": "operacije vođene pričom",
+    "training": "prostorije za trening i tutorijali"
+  }
+}

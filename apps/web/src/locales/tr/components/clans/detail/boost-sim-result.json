@@ -1,0 +1,11 @@
+{
+  "already-running": "zaten çalışıyor",
+  "in-window": "pencerede",
+  "n-online": "/ {count} çevrim içi",
+  "no-reserves-selected": "Hiçbir rezerv seçilmedi.",
+  "no-stock-ready": "hazır stok yok",
+  "not-available": "mevcut değil",
+  "threshold": "eşik ({online}/{min})",
+  "would-activate": "aktifleştirir",
+  "would-not-fire": "Şu anda etkinleşmez."
+}

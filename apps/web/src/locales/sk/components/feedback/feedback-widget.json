@@ -1,0 +1,21 @@
+{
+  "trigger": "Spätná väzba",
+  "title": "Podeľte sa o spätnú väzbu",
+  "topic-placeholder": "Vyberte tému...",
+  "message-placeholder": "Vaša spätná väzba...",
+  "send": "Odoslať",
+  "sent": "Ďakujeme za vašu spätnú väzbu!",
+  "failed": "Spätnú väzbu sa nepodarilo odoslať. Skúste to znova.",
+  "topics": {
+    "bug": "Nahlásenie chyby",
+    "idea": "Návrh funkcie",
+    "data": "Presnosť dát",
+    "other": "Iné"
+  },
+  "sentiments": {
+    "awful": "Hrozné",
+    "bad": "Zlé",
+    "good": "Dobrý",
+    "great": "Skvelé"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "active-days": "稼働日数",
+  "add-workflow": "ワークフローを追加",
+  "connect-discord": "Discordに接続",
+  "discord-notifications": "Discord通知",
+  "each-workflow-activates-its-reserves": "各ワークフローは、十分なメンバーがライブゲームセッションに入ると、設定した時間帯にリザーブを有効化します。アカウント上で実行されるため、オンラインである必要はありません。必要な数だけ追加できます。",
+  "enabled": "有効",
+  "from": "から",
+  "get-a-discord-message-in": "ブーストが発動するたびに、選択したチャンネルへDiscordメッセージを送信します。クラン全体で発動中であることを確認できます。",
+  "log-in-with-wargaming-to": "Wargamingでログインして設定",
+  "min-online": "最小オンライン",
+  "officers": "オフィサー",
+  "only-an-officer-of-this": "このクランの役職者だけが設定できます。",
+  "schedule-preview": "スケジュールプレビュー",
+  "set-your-hours-and-reserves": "時間帯とリザーブを一度設定すれば、誰もボタンを押せない状況でもブーストが自動で時間どおりに発動します。",
+  "stronghold-boosts": "ストロングホールドブースト",
+  "times-are-in-your-timezone": "時刻はあなたのタイムゾーン（{tz}）で表示されます。",
+  "to": "対"
+}

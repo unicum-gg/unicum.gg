@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} batailles au total",
+  "checking-your-record-on-this": "Vérification de vos résultats avec ce char...",
+  "fetching-your-garage": "Récupération de votre garage",
+  "have-you-played": "Avez-vous joué avec {tank} ?",
+  "more-to-go": "Encore {count} batailles à disputer",
+  "more-to-go-one": "Encore {count} bataille à disputer",
+  "sign-in-to-rate-it": "Connectez-vous pour l’évaluer",
+  "sign-in-with-your-wargaming-account-to-rate-": "Connectez-vous avec votre compte Wargaming pour noter ce char. Nous consultons vos statistiques pour ce char précis, ce qui empêche cette page de devenir un sondage auprès de personnes qui ne l’ont jamais joué.",
+  "signed-in-on": "Connexion active sur {region}",
+  "too-few-battles": "Vous avez disputé {played} batailles avec ce char, {tank}. Nous en demandons {required} avant qu’un vote ne soit pris en compte, afin que cette moyenne reste celle de joueurs qui utilisent réellement ce char.",
+  "you-have-not-played": "Vous n’avez pas joué avec {tank}"
+}

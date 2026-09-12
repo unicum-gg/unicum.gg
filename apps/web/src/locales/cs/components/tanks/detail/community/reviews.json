@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "Bitev s tímto tankem: {battles}",
+  "damage": "{damage} poškození",
+  "n-marks": "{count, plural, one {# známka} few {# známky} many {# známek} other {# známek}}",
+  "no-written-opinions-yet-if": "Zatím nejsou žádné písemné názory. Pokud máte požadovaný počet Bitev, váš názor by byl první.",
+  "win-rate": "Míra výher: {toFixed} %",
+  "written-on": "napsáno ve verzi {gameVersion}"
+}

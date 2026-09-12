@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname}的军团历史",
+  "clans-in-clans": "{totalClans}个军团 · 在军团中{timeInClansSeconds}",
+  "current": "当前",
+  "duration": "持续时间",
+  "from": "来自",
+  "name": "坦克名称",
+  "no-clan-history": "没有军团历史。",
+  "role": "角色",
+  "tag": "标签",
+  "to": "至"
+}

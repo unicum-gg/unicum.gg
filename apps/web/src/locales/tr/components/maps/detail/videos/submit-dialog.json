@@ -1,0 +1,17 @@
+{
+  "close": "Kapat",
+  "format": "Format",
+  "here": "burada",
+  "in-the-queue": "Kuyrukta ve moderatör inceledikten sonra {where} görünecek. Bu arada seninki o sayfada gri gösterilir.",
+  "log-in-to-suggest-a": "Taktik önermek için giriş yap",
+  "on-map": "{map} üzerinde",
+  "players-per-team": "Takım başına oyuncu",
+  "sending": "Gönderiliyor…",
+  "suggest": "Öner",
+  "suggest-a-tactic": "Taktik öner",
+  "suggest-another": "Başka bir öner",
+  "suggestion-sent": "Öneri gönderildi",
+  "tier": "Seviye",
+  "what-to-submit": "Başladığı saniyede açılan rekabetçi bir savaş. Harita {map} üzerinde başlar ve videoyla birlikte ilerler, bir klan akşamı bir rotasyon boyunca devam eder. Oynandığı taraf, bir atış komutanının aradığı bilgidir, bu yüzden tahmin edilmek yerine sorulur.",
+  "what-was-played": "Ne oynandı"
+}

@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Voeg workflow toe",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Elke workflow activeert zijn reserves binnen een tijdvenster zodra genoeg leden een actieve spelsessie hebben. De workflow draait op je account, dus je hoeft niet online te zijn. Voeg er zoveel toe als je nodig hebt.",
+  "n-online": "/ {count} online",
+  "officer": "Officier",
+  "online": "Online",
+  "recent-activations": "recente activaties",
+  "reserve": "Reserve",
+  "stronghold-boosts": "Stronghold boosts",
+  "when": "Wanneer",
+  "workflow": "Workflow"
+}

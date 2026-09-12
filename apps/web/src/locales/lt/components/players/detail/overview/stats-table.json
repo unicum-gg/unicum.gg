@@ -1,0 +1,34 @@
+{
+  "stat": "Statistika",
+  "rows": {
+    "battles": "Mūšiai",
+    "tier": "lygis",
+    "wins": "Per勝imai",
+    "losses": "Pralaimėjimai",
+    "draws": "Lygiosios",
+    "survived": "Išgyventi mūšiai",
+    "destroyed": "Sunokdyti tankai",
+    "destruction-ratio": "Sunaikinimo koeficientas",
+    "spotted": "Pastebėti tankai",
+    "damages": "Žala",
+    "track-damages": "Visko žala",
+    "spotting-damages": "Aptikimo žala",
+    "assisting-damages": "Pagalbinė žala",
+    "combined-damages": "Kombinuota žala",
+    "base-capture": "Bazinės užėmimas",
+    "base-defense": "Bazės gynyba",
+    "experience": "Patirtis",
+    "hit-rate": "Pasiekimo procentas",
+    "personal-rating": "Asmeninis reitingas",
+    "wtr": "World of Tanks reitingas",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Viso",
+    "day": "Paskutinės 24 val.",
+    "week": "Paskutinės 7 d.",
+    "month": "Paskutinės 30 d."
+  }
+}

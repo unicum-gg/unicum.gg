@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Lenke til oppsett kopiert",
+  "copy-build-link": "Kopier lenke til oppsett",
+  "could-not-copy-link": "Kunne ikke kopiere lenken",
+  "include-setup": "Inkluder oppsett",
+  "share-build": "Del build",
+  "share-tank": "Del {tank}",
+  "share-text": "Se dette oppsettet for {tank} på {app}"
+}

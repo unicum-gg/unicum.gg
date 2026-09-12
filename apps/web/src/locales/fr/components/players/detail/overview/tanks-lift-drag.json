@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Amélioration de la note",
+    "blurb": "Chars qui tirent la note globale vers le haut : les retirer ferait baisser la note.",
+    "empty": "Aucun char n’améliore la note globale."
+  },
+  "drag": {
+    "heading": "Baisse de la note",
+    "blurb": "Chars qui tirent la note globale vers le bas : les retirer ferait monter la note.",
+    "empty": "Aucun char ne fait baisser la note globale."
+  },
+  "if-removed": "{delta} en cas de retrait"
+}

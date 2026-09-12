@@ -1,0 +1,17 @@
+{
+  "aim-time": "Czas celowania",
+  "ammo": "Amunicja",
+  "armor": "Pancerz",
+  "dispersion": "Rozrzut",
+  "fire-chance": "Szansa na pożar",
+  "gun-arc": "Kąt działa",
+  "hit-points": "Punkty życia",
+  "load-limit": "Limit ładunku",
+  "mounted-on": "Montowany w: {tanks}",
+  "power": "Moc",
+  "reload": "Przeładowanie",
+  "signal-range": "Zasięg sygnału",
+  "tier": "Poziom {tier}",
+  "traverse": "Obrót",
+  "view-range": "Zasięg widzenia"
+}

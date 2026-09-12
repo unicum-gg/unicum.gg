@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Topp spillere · siste 24 timer"
+    },
+    "week": {
+      "title": "Topp spillere · siste 7 dager"
+    }
+  },
+  "rating-scale": {
+    "title": "Vurderingsskala"
+  },
+  "community": {
+    "title": "Bli med i fellesskapet",
+    "heading": "Koble deg til WoT-spillere",
+    "description": "Bli med på Discord for å diskutere WoT-statistikk, foreslå funksjoner og rapportere feil. Eller gå til GitHub for å se gjennom koden og bidra.",
+    "discord": "Bli med på Discord",
+    "github": "Vis på GitHub"
+  },
+  "features": {
+    "title": "Dette finner du her",
+    "profiles": {
+      "title": "Spillerprofiler",
+      "description": "Detaljert statistikk med samlet utvikling samt endringer siste 24 timer, 7 dager og 30 dager, WN7, WN8, WNX og personlig rangering."
+    },
+    "clans": {
+      "title": "Klansider",
+      "description": "Medlemstabell med rangeringer, nylig aktivitetsstrøm, beskrivelse og klanmetadata."
+    },
+    "history": {
+      "title": "Klanhistorikk",
+      "description": "Full tidslinje over hver klan en spiller har vært medlem av, med roller og datoer."
+    },
+    "live": {
+      "title": "Direkteoppdateringer",
+      "description": "Sporede spillere oppdateres i bakgrunnen hver 24. time via systemet vårt for øyeblikksbilder."
+    },
+    "leaderboards": {
+      "title": "Rangeringer",
+      "description": "Topp spillere (24 timer, 7 dager, totalt) og topp klaner rangert etter WNX, beregnet fra øyeblikksbildene våre."
+    },
+    "open-source": {
+      "title": "Åpen kildekode · AGPL",
+      "description": "Koden er på GitHub. Se gjennom, lag en fork og bidra. Ingen annonser, bare valgfri analyse."
+    }
+  },
+  "quick-start": {
+    "title": "Kom raskt i gang",
+    "search": {
+      "title": "🔍 Søk etter spillere eller klaner",
+      "description": "Trykk {shortcut} for å åpne søket, og skriv deretter et kallenavn eller en klan-tag."
+    },
+    "region": {
+      "title": "🌍 Bytt region",
+      "description": "Bruk {selector}-velgeren i navigasjonsfeltet. Rangeringene oppdateres tilsvarende."
+    },
+    "leaderboards": {
+      "title": "🏆 Utforsk rangeringer",
+      "description": "Topp spillere (24 timer, 7 dager, totalt) og topp klaner rangert etter gjennomsnittlig WNX, beregnet fra øyeblikksbildene våre."
+    },
+    "colors": {
+      "title": "📊 Les fargene",
+      "description": "WR, WN7, WN8 og WNX bruker de samme nivåfargene (oransje → grønn → cyan → lilla). Se skalaen over."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

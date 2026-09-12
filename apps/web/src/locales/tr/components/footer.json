@@ -1,0 +1,25 @@
+{
+  "tagline": "World of Tanks topluluğu için geliştirildi. EU, NA ve Asya genelinde her oyuncu, klan, tank ve harita için ücretsiz istatistikler.",
+  "columns": {
+    "leaderboards": "Liderlik tabloları",
+    "tanks": "Tanklar",
+    "maps": "Haritalar",
+    "integrations": "Entegrasyonlar",
+    "project": "Proje"
+  },
+  "links": {
+    "top-tanks": "En iyi tanklar",
+    "bot": "Discord botu",
+    "mcp": "MCP sunucusu",
+    "docs": "API belgeleri",
+    "badges": "Rozetler",
+    "glossary": "Sözlük",
+    "coverage": "Kapsama",
+    "support": "Bizi destekle",
+    "source": "Kaynak kodu",
+    "status": "Durum",
+    "discord": "Discord"
+  },
+  "disclaimer": "Wargaming ile bağlantılı değildir",
+  "cookies": "Çerezleri yönet"
+}

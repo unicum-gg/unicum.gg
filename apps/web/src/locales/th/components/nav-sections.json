@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "ผู้เล่น",
+    "clans": "กองทัพ",
+    "tanks": "รถถัง",
+    "maps": "แผนที่",
+    "tournaments": "ทัวร์นาเมนต์",
+    "servers": "เซิร์ฟเวอร์"
+  },
+  "links": {
+    "top-players": {
+      "label": "ผู้เล่นที่ดีที่สุด",
+      "description": "ตารางอันดับผู้เล่นตลอดช่วงเวลา"
+    },
+    "players-onslaught": {
+      "description": "ตารางอันดับการบุกรุกแบบจัดอันดับ"
+    },
+    "players-steel-hunter": {
+      "description": "ตารางอันดับแบตเทิลรอยัล"
+    },
+    "top-clans": {
+      "label": "กลุ่มที่ดีที่สุด",
+      "description": "ตารางอันดับแคลนตลอดช่วงเวลา"
+    },
+    "stronghold": {
+      "description": "อันดับการปะทะ"
+    },
+    "advances": {
+      "description": "การจัดอันดับระดับ X แบบ 15 ต่อ 15"
+    },
+    "tank-performances": {
+      "label": "ผลการเล่น",
+      "description": "อัตราชนะและความเสียหายต่อรถถัง"
+    },
+    "tank-specs": {
+      "label": "ข้อมูลจำเพาะ",
+      "description": "สถิติของรถถังทุกคัน"
+    },
+    "tank-economics": {
+      "label": "เศรษฐศาสตร์",
+      "description": "รถถังที่ทำรายได้เครดิตและ XP"
+    },
+    "tank-moe": {
+      "description": "ความเสียหายสำหรับแต่ละเครื่องหมาย"
+    },
+    "tank-mom": {
+      "description": "เกณฑ์ตราความเชี่ยวชาญ"
+    },
+    "tank-changes": {
+      "label": "การเปลี่ยนแปลง",
+      "description": "การเพิ่มและลดความสามารถแยกตามอัปเดต"
+    },
+    "tank-community": {
+      "label": "การจัดอันดับของชุมชน",
+      "description": "ให้คะแนนโดยผู้เล่นที่เป็นเจ้าของรถถัง"
+    },
+    "tank-videos": {
+      "label": "วิดีโอ",
+      "description": "เกมเพลย์จากชุมชน"
+    },
+    "all-tournaments": {
+      "label": "ทัวร์นาเมนต์",
+      "description": "ทัวร์นาเมนต์ทุกรายการ ทั้งที่เปิดและปิดแล้ว"
+    },
+    "all-maps": {
+      "label": "แผนที่ทั้งหมด",
+      "description": "แผนที่ทุกแห่งในเกม"
+    },
+    "map-changes": {
+      "label": "การเปลี่ยนแปลง",
+      "description": "การปรับปรุงแผนที่แยกตามอัปเดต"
+    },
+    "battle-type": {
+      "description": "แผนที่ {type}"
+    },
+    "servers-population": {
+      "label": "จำนวนผู้เล่นในเซิร์ฟเวอร์",
+      "description": "ผู้เล่นออนไลน์ ทั้งในขณะนี้และตามช่วงเวลา"
+    }
+  }
+}

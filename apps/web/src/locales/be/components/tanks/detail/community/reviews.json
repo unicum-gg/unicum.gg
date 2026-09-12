@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} баёў на ім",
+  "damage": "{damage} Урон",
+  "n-marks": "{count, plural, one {# знак} few {# знакі} many {# знакаў} other {# знакі}}",
+  "no-written-opinions-yet-if": "Пісьмовых меркаванняў яшчэ няма. Калі ў вас ёсць патрэбная колькасць баёў, ваша меркаванне будзе першым.",
+  "win-rate": "Пераможнасць {toFixed}%",
+  "written-on": "напісана ў {gameVersion}"
+}

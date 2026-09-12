@@ -1,5 +1,6 @@
 "use client";
 
+import { dateFormat } from "@/lib/format";
 import { useMemo } from "react";
 import {
   Area,
@@ -10,7 +11,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ONSLAUGHT_TIER_LABEL, OnslaughtTier } from "@unicum.gg/shared";
+import { OnslaughtTier } from "@unicum.gg/shared";
 import {
   type ChartConfig,
   ChartContainer,
@@ -20,49 +21,32 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { type DisplayZone, formatMoment, formatPlayers } from "@/components/servers/format";
-import { CHAMPION, LEGEND_DARK, LEGEND_LIGHT } from "./season-race-colors";
+import { CHAMPION, LEGEND_DARK } from "./season-race-colors";
 import type { OnslaughtSeasonPoint } from "./season-race";
+import { useTranslation } from "@/hooks/use-translation";
+import { useLocale } from "@onruntime/translations/react";
 
 // Loaded on demand by the panel (recharts is ~107 KB gzipped and the panel sits
 // well below a leaderboard of a few thousand rows), which is also what keeps
 // these axes off the server: their ticks are formatted in the reader's own
 // timezone, and a prerendered tick would carry the container's instead.
 
-const cutoffConfig = {
-  legendPoints: {
-    label: ONSLAUGHT_TIER_LABEL[OnslaughtTier.Legend],
-    theme: { light: LEGEND_LIGHT, dark: LEGEND_DARK },
-  },
-  championPoints: {
-    label: ONSLAUGHT_TIER_LABEL[OnslaughtTier.Champion],
-    color: CHAMPION,
-  },
-} satisfies ChartConfig;
-
-const rankedConfig = {
-  ranked: { label: "Ranked players", color: "var(--chart-1)" },
-} satisfies ChartConfig;
-
-const points = new Intl.NumberFormat("en-US");
+// Built per render rather than at module scope: the two rank names and the
+// series title are the reader's language, which a module constant cannot know.
 
 // A season runs about six weeks and is read by the day, but its first days are
 // read by the hour: until the samples span more than one, every tick formats to
 // the same date and the axis says nothing.
 const WITHIN_A_DAY_MS = 36 * 60 * 60 * 1000;
 
-function tickFormatters(zone: DisplayZone) {
+/** The zone rides in the pattern, which is how `dateFormat` takes it. */
+const utc = (pattern: string, zone: DisplayZone) =>
+  zone === "local" ? pattern : `${pattern} /* UTC */`;
+
+function tickFormatters(zone: DisplayZone, locale: string) {
   return {
-    dayMonth: new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "numeric",
-      timeZone: zone === "local" ? undefined : "UTC",
-    }),
-    timeOfDay: new Intl.DateTimeFormat("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: zone === "local" ? undefined : "UTC",
-    }),
+    dayMonth: dateFormat(locale, utc("d MMM", zone)),
+    timeOfDay: dateFormat(locale, utc("HH:mm", zone)),
   };
 }
 
@@ -73,6 +57,25 @@ export function OnslaughtSeasonCharts({
   samples: OnslaughtSeasonPoint[];
   zone: DisplayZone;
 }) {
+  const { t } = useTranslation("components/players/list/onslaught/view");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { locale } = useLocale();
+  // The two rank names, the series title and both formatters are the reader's
+  // language, so they are built here rather than at module scope.
+  const cutoffConfig = {
+    legendPoints: {
+      label: tGame(`onslaught-tiers.${OnslaughtTier.Legend}`),
+      color: LEGEND_DARK,
+    },
+    championPoints: {
+      label: tGame(`onslaught-tiers.${OnslaughtTier.Champion}`),
+      color: CHAMPION,
+    },
+  } satisfies ChartConfig;
+  const rankedConfig = {
+    ranked: { label: t("race.ranked-players"), color: "var(--chart-1)" },
+  } satisfies ChartConfig;
+  const points = new Intl.NumberFormat(locale);
   // Instants ride as milliseconds on a real time axis, never as categories: the
   // capture can miss a window (a restart, an upstream blip), and a category axis
   // would space the samples evenly and hide the gap, drawing a slope across it
@@ -85,10 +88,10 @@ export function OnslaughtSeasonCharts({
   const tick = useMemo(() => {
     const span =
       data.length >= 2 ? data[data.length - 1].ms - data[0].ms : 0;
-    const { dayMonth, timeOfDay } = tickFormatters(zone);
+    const { dayMonth, timeOfDay } = tickFormatters(zone, locale);
     const fmt = span < WITHIN_A_DAY_MS ? timeOfDay : dayMonth;
     return (value: number) => fmt.format(new Date(value));
-  }, [data, zone]);
+  }, [data, zone, locale]);
 
   // The tooltip's own label arrives typed as a node rather than as the axis
   // value, so the instant is read back off the sample the tooltip is showing.
@@ -96,14 +99,14 @@ export function OnslaughtSeasonCharts({
     () =>
       (_: React.ReactNode, payload: readonly { payload?: { ms?: number } }[]) => {
         const ms = payload?.[0]?.payload?.ms;
-        return ms != null ? formatMoment(new Date(ms), zone) : "";
+        return ms != null ? formatMoment(new Date(ms), zone, locale) : "";
       },
-    [zone],
+    [zone, locale],
   );
 
   return (
     <div className="grid grid-cols-1 divide-y divide-fd-border border-t border-fd-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
-      <Figure title="Rank cutoffs">
+      <Figure title={t("race.rank-cutoffs")}>
         <ChartContainer config={cutoffConfig} className="h-56 w-full">
           <LineChart data={data} margin={{ left: 4, right: 12, top: 8 }}>
             <CartesianGrid vertical={false} strokeDasharray="3 3" />
@@ -139,7 +142,7 @@ export function OnslaughtSeasonCharts({
         </ChartContainer>
       </Figure>
 
-      <Figure title="Ranked players">
+      <Figure title={t("race.ranked-players")}>
         <ChartContainer config={rankedConfig} className="h-56 w-full">
           <AreaChart data={data} margin={{ left: 4, right: 12, top: 8 }}>
             <CartesianGrid vertical={false} strokeDasharray="3 3" />
@@ -148,7 +151,7 @@ export function OnslaughtSeasonCharts({
               tickLine={false}
               axisLine={false}
               width={48}
-              tickFormatter={(v: number) => formatPlayers(v)}
+              tickFormatter={(v: number) => formatPlayers(v, locale)}
             />
             <ChartTooltip
               content={<ChartTooltipContent labelFormatter={label} />}

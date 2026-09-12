@@ -1,0 +1,162 @@
+{
+  "columns-label": "列",
+  "groups": {
+    "firepower": "火力",
+    "gun-handling": "炮械操作",
+    "mobility": "机动",
+    "survivability": "防护",
+    "other": "其他"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "每分钟伤害"
+    },
+    "damage": {
+      "label": "损伤",
+      "tip": "单次损伤"
+    },
+    "moduleDamage": {
+      "label": "模块损伤"
+    },
+    "splashRadius": {
+      "label": "爆炸半径"
+    },
+    "reload": {
+      "label": "装填时间",
+      "tip": "装填时间（自动装填炮的完整弹匣）"
+    },
+    "rof": {
+      "label": "射速",
+      "tip": "每分钟发射数"
+    },
+    "intraClipReload": {
+      "label": "弹匣内装填时间",
+      "tip": "弹匣内两发炮弹之间的时间（自动装填炮）"
+    },
+    "penetration": {
+      "label": "穿透力",
+      "tip": "穿透力（毫米），默认炮弹"
+    },
+    "caliber": {
+      "label": "口径",
+      "tip": "炮弹口径（毫米）"
+    },
+    "shellVelocity": {
+      "label": "炮弹速度",
+      "tip": "炮弹速度（米/秒）"
+    },
+    "accuracy": {
+      "label": "准确性",
+      "tip": "100米处的散布（越低越好）"
+    },
+    "aimTime": {
+      "label": "瞄准时间"
+    },
+    "dispMoving": {
+      "label": "移动散布",
+      "tip": "移动时的散布系数"
+    },
+    "dispTankTraverse": {
+      "label": "车体转向散布"
+    },
+    "dispTurretTraverse": {
+      "label": "炮塔转向散布"
+    },
+    "dispAfterShot": {
+      "label": "开火后散布"
+    },
+    "dispWhileDamaged": {
+      "label": "受损时散布"
+    },
+    "gunArc": {
+      "label": "射界",
+      "tip": "火炮水平转动范围"
+    },
+    "depression": {
+      "label": "火炮俯角 / 仰角",
+      "tip": "火炮俯角 / 仰角"
+    },
+    "speed": {
+      "label": "速度（前进 / 倒车）",
+      "tip": "前进 / 倒车最高速度（千米/小时）"
+    },
+    "hullTraverse": {
+      "label": "车身旋转"
+    },
+    "turretTraverse": {
+      "label": "炮塔旋转"
+    },
+    "enginePower": {
+      "label": "火力",
+      "tip": "发动机功率（马力）"
+    },
+    "powerWeight": {
+      "label": "火力/重量",
+      "tip": "每吨马力"
+    },
+    "terrainHard": {
+      "label": "硬地面",
+      "tip": "坚硬地面上的地形阻力（越低越好）"
+    },
+    "terrainMedium": {
+      "label": "中级联队"
+    },
+    "terrainSoft": {
+      "label": "软地面"
+    },
+    "health": {
+      "label": "生命值",
+      "tip": "生命值"
+    },
+    "engineHealth": {
+      "label": "发动机耐久度"
+    },
+    "engineFireChance": {
+      "label": "发动机起火几率"
+    },
+    "hullArmorFront": {
+      "label": "车体装甲（正面）",
+      "tip": "车体正面装甲（毫米）"
+    },
+    "turretArmorFront": {
+      "label": "炮塔装甲（正面）",
+      "tip": "炮塔正面装甲（毫米）"
+    },
+    "trackArmor": {
+      "label": "履带装甲"
+    },
+    "trackHealth": {
+      "label": "履带耐久度"
+    },
+    "trackRepairTime": {
+      "label": "履带维修时间"
+    },
+    "ammoRackHealth": {
+      "label": "弹药架耐久度"
+    },
+    "weight": {
+      "label": "重量"
+    },
+    "viewRange": {
+      "label": "观察范围",
+      "tip": "观察范围（米）"
+    },
+    "radioRange": {
+      "label": "无线电台范围",
+      "tip": "信号范围（米）"
+    },
+    "camoStill": {
+      "label": "静止隐蔽性"
+    },
+    "camoMoving": {
+      "label": "移动隐蔽性"
+    },
+    "camoStillFiring": {
+      "label": "开火后静止伪装"
+    },
+    "camoMovingFiring": {
+      "label": "开火后移动伪装"
+    }
+  }
+}

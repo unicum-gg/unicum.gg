@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Izlabo visu, kas ir nepareizi, arī transportlīdzekli. Saglabājot, tas tiek nosūtīts atpakaļ uz moderēšanas rindu, tāpēc publicēts video tiek noņemts, līdz tas atkal tiek apstiprināts.",
+  "correct-a-suggestion": "Labot ieteikumu",
+  "could-not-load-that-suggestion": "Neizdevās ielādēt šo ieteikumu. Mēģini vēlreiz pēc brīža.",
+  "link-expired": "Šīs saites derīguma termiņš ir beidzies. Nospied Edit vēlreiz Discord kartītē, lai iegūtu jaunu saiti.",
+  "loading": "Ielādējas…",
+  "log-in": "Pieslēgties",
+  "log-in-with-the-account": "Piesakies ar kontu, kas ieteica šo video, lai to labotu.",
+  "no-suggestion-with-that-id": "Ieteikums ar šo ID nepastāv.",
+  "not-yours-to-correct": "Šis ieteikums nav tavs, tāpēc tu to nevari labot."
+}

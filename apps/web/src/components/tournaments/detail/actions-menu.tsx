@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   ArrowSquareOutIcon,
   DotsThreeVerticalIcon,
@@ -47,6 +48,8 @@ export function TournamentActionsMenu({
   path: string;
   ogImage?: string;
 }) {
+  const { t } = useTranslation("components/tournaments/detail/actions-menu");
+  const { t: tMenu } = useTranslation("components/actions-menu");
   const [shareOpen, setShareOpen] = useState(false);
   const url = `${APP.URL}${path}`;
   const portal = `https://${REGION_WOT_HOST[region]}/en/tournaments/${tournamentId}/${
@@ -57,7 +60,7 @@ export function TournamentActionsMenu({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
-          aria-label="More actions"
+          aria-label={t("more-actions")}
           className="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground focus-visible:outline-none aria-expanded:bg-fd-secondary aria-expanded:text-fd-foreground"
         >
           <DotsThreeVerticalIcon className="size-3.5" weight="bold" />
@@ -65,12 +68,12 @@ export function TournamentActionsMenu({
         <DropdownMenuContent align="end">
           <DropdownMenuItem onSelect={() => setShareOpen(true)}>
             <ShareNetworkIcon weight="bold" />
-            Share
+            {tMenu("share")}
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a href={portal} target="_blank" rel="nofollow noopener noreferrer">
               <ArrowSquareOutIcon weight="bold" />
-              Open on WoT portal
+              {tMenu("open-in", { target: "WoT portal" })}
               <ArrowSquareOutIcon className="ml-auto size-3 text-fd-muted-foreground" />
             </a>
           </DropdownMenuItem>
@@ -82,7 +85,7 @@ export function TournamentActionsMenu({
       <ShareModal
         open={shareOpen}
         onOpenChange={setShareOpen}
-        title={`Share ${title}`}
+        title={tMenu("share-title", { name: title })}
         url={url}
         shareText={`Check ${title} on ${APP.NAME}`}
         ogImage={ogImage}

@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname} atsitiktinių mūšių statistika",
+  "progression": "{nickname} {metricLabel} progresas",
+  "solid-line-is-overall-matches": "Ištisinė eilutė rodo bendrą {metricLabel} (sutampa su aukščiau esančiu stulpeliu „Iš viso“) ir pamažu kinta kaupiantis naujiems mūšiams. Punktyrinė eilutė rodo kiekvienos sesijos {metricLabel2}, apskaičiuotą pagal nuo ankstesnės momentinės kopijos sužaistus mūšius. Ji parodo gerus ir prastus etapus. Eilutės spalva priklauso nuo reitingo lygio.",
+  "tanks-shaping-s-rating": "Tankai, lemiantys {nickname} reitingą",
+  "tanks": "{nickname} tankai",
+  "stats": "{nickname} {strongholdLabel} statistika"
+}

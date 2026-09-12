@@ -1,0 +1,34 @@
+{
+  "stat": "Stat",
+  "rows": {
+    "battles": "Mga labanan",
+    "tier": "Antas",
+    "wins": "Panalo",
+    "losses": "Pagkatalo",
+    "draws": "Buhos",
+    "survived": "Mga labanan na nalampasan",
+    "destroyed": "Nawasak na mga tangke",
+    "destruction-ratio": "Dami ng pagkawasak",
+    "spotted": "Nakita na mga tangke",
+    "damages": "Pinsala",
+    "track-damages": "Pinsalang track",
+    "spotting-damages": "Pinsalang spotting",
+    "assisting-damages": "Pinsalang tulong",
+    "combined-damages": "Pinagsamang pinsala",
+    "base-capture": "Pagsakop ng base",
+    "base-defense": "Depensa ng base",
+    "experience": "Karanasan",
+    "hit-rate": "Tamang pagsalakay",
+    "personal-rating": "Personal na Ranggo",
+    "wtr": "World of Tanks Rating",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Kabuuan",
+    "day": "Huling 24h",
+    "week": "Huling 7d",
+    "month": "Huling 30d"
+  }
+}

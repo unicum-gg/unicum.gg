@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Topplista för {board}",
+  "carried-beside-a-clan-tag": "Bärs bredvid en klantagg. Ett placeringsemblem visar en placering i en tävling. Siffran på emblemet anger placeringen och färgen vilken topplista den gäller. Betyg ger inga sådana märken, eftersom ett högt WN8 inte är något som en klan vinner.",
+  "clan-badges": "Märken för klanen",
+  "clan-board": {
+    "name": "{board}, topp {rank}",
+    "how": "En placering bland de {rank} bästa på {board}. Märket behålls så länge klanen behåller placeringen och förloras när klanen tappar den."
+  },
+  "clan-overflow": "En klan med fler än tre placeringar samlar resten i ett {plus}-emblem, med den bästa först, så att taggen förblir läsbar. Håll pekaren över emblemet för att se deras namn.",
+  "featured-tournament-winner": {
+    "name": "Vinnare av utvald turnering",
+    "how": "Samma märke, men vunnet vid ett evenemang som Wargaming markerar som utvalt. Guld i stället för stål, precis som på spelarsidan."
+  },
+  "heading": "Varje {badge} och hur du får det",
+  "heading-accent": "märke",
+  "marks-carried-beside-a-nickname": "Märken som visas bredvid ett spelarnamn överallt där det förekommer på {NAME}: topplistor, klanlistor, sökresultat och turneringsträd.",
+  "n-badges": "{count} märken",
+  "onslaught-champion": {
+    "name": "Pansarstormmästare",
+    "how": "Nådde ranken Champion i Pansarstorm, vilket krävs för att över huvud taget synas på {standings}. Märket behålls därefter. Om rankningen senare faller under gränsen försvinner placeringen, men inte meriten att ha haft den."
+  },
+  "onslaught-legend": {
+    "name": "Pansarstorm Legend",
+    "how": "Höll en placering inom säsongens gräns för Legend, vilket är en placering snarare än ett poängvärde. Bara ett visst antal sådana platser finns samtidigt och gränsen bedöms utifrån den säsong då placeringen hölls. Violett i stället för stålblått, samma färg som själva topplistan använder för Legend."
+  },
+  "player-badges": "Märken för spelare",
+  "player-overflow": "En spelare med fler än tre märken samlar resten i ett {plus}-emblem, i ordningen ovan, så att spelarnamnet förblir läsbart i en tabell. Håll pekaren över emblemet för att se deras namn. Vart och ett länkar fortfarande till samma sida som det egna emblemet.",
+  "ranked-standings": "rankade resultat",
+  "streamer": {
+    "name": "Streamer",
+    "how": "En Twitch-kanal är länkad till kontot. Anslut Twitch i din egen profil för att verifiera den, så länkar emblemet till din kanal. Märket visas oavsett om du sänder live eller inte."
+  },
+  "streamer-who-is-on-air": "En streamare som sänder live har också en röd, pillerformad DIREKT-etikett. Den förtjänas inte och behålls inte: den visas när streamen börjar och försvinner när den slutar, så den fälls aldrig undan.",
+  "support-subscription": "understödsvagn prenumeration",
+  "supporter": {
+    "name": "Supporter"
+  },
+  "supporter-note": "Ett aktivt {link} som hålls offentligt. Den som är Supporter och väljer att förbli anonym bär inget märke, helt enligt eget val.",
+  "the-marks-a-player-or": "Märken på {NAME} som en spelare eller klan kan bära, vad vart och ett betyder och exakt vad som krävs för att få det.",
+  "tournament-winner": {
+    "name": "Turneringsvinnare",
+    "how": "Ett lag som har kopplats till klanen vann en turnering. Wargaming registrerar lag och konton, aldrig klaner, så kopplingen återskapas genom att jämföra varje laguppställning med klanmedlemskapet så som det såg ut den dag turneringen spelades."
+  },
+  "verified": {
+    "name": "Verifierad",
+    "how": "Ägaren har loggat in med sitt Wargaming.net ID och kopplat det här kontot. Inloggning är hela kravet och kostar ingenting."
+  }
+}

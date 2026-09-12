@@ -1,0 +1,12 @@
+{
+  "added": "添加",
+  "before-update": "更新{version}之前",
+  "common-test": "公共测试",
+  "every-update-that-changed-this": "每次改变这张地图的更新，最新的在前，数据直接读取自游戏客户端本身。",
+  "in-the-game": "游戏内",
+  "n-changes": "{count, plural, other {# 变更}}",
+  "not-released-wargaming-can-still": "尚未发布。在更新推出前，Wargaming 仍可能修改或取消其中任何内容。",
+  "removed": "移除",
+  "title": "{map}的变更",
+  "update": "更新 {version}"
+}

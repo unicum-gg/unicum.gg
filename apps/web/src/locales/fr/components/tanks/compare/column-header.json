@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Munitions, équipements, consommables, directives, équipage et progression pour cette colonne. Chaque modification met à jour les caractéristiques correspondantes dans le comparatif ci-dessous.",
+  "ammunition-equipment-crew-and-progression": "Munitions, équipement, équipage et progression",
+  "apply-to-every-column": "Appliquer à toutes les colonnes",
+  "compare-against": "Comparer avec {tank}",
+  "compare-the-others-against-this-one": "Comparer les autres avec celui-ci",
+  "configure-tank": "Configurer {tank}",
+  "highest-overall-score": "Score global le plus élevé",
+  "highest-overall-score-of-this": "Score global le plus élevé de cette comparaison",
+  "is-the-reference": "Référence : {tank}",
+  "overall": "Global",
+  "reference-column": "Colonne de référence",
+  "remove-tank": "Retirer {tank}",
+  "reset-all": "Réinitialiser tout",
+  "setup": "Configuration",
+  "stock": "Stock",
+  "tank-setup": "Configuration : {tank}",
+  "top": "Meilleurs",
+  "where-this-vehicle-sits-across": "Position de ce véhicule dans l’ensemble du catalogue, avec un maximum de {MAXSCORE} : la moyenne de ses quatre scores de catégorie, selon les réglages définis ici. C’est un résumé, pas un verdict. Un éclaireur et un char lourd peuvent obtenir le même score en excellant dans des domaines différents."
+}

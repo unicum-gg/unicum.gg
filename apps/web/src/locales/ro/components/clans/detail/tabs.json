@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Prezentare generală",
+    "tanks": "Tancuri",
+    "videos": "Videoclipuri",
+    "tournaments": "Turneele",
+    "manage": "Gestionează"
+  },
+  "section-count": "{section} ({count})"
+}

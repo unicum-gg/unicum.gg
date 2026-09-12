@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Duomenų dar nėra. Grįžkite, kai klanai bus atnaujinti.",
+  "heading": "Geriausi <accent>{tier}</accent> klanai",
+  "blurb": "{region} lyderių lentelė, reitinguojama pagal {sort} tarp visų stebimų klanų režime {format} (minimumas: {battles} mūšiai).",
+  "blurb-period": "{region} lyderių lentelė, reitinguojama pagal {sort} tarp visų stebimų klanų režime {format} per {period} (minimumas: {battles} mūšiai).",
+  "format-advances": "Puolimai (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Geriausi {count} {tier} klanai ·"
+}

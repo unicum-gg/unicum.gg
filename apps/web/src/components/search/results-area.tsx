@@ -1,6 +1,8 @@
 "use client";
 
+
 import { StarIcon, XIcon } from "@phosphor-icons/react";
+import { useTranslation } from "@/hooks/use-translation";
 import { useEffect, useRef } from "react";
 import {
   ClanRow,
@@ -36,6 +38,7 @@ export function ResultsArea({
   onToggleFavorite: (row: HistoryRow) => void;
   onRemoveRecent: (row: HistoryRow) => void;
 }) {
+  const { t } = useTranslation("components/search");
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -109,14 +112,14 @@ export function ResultsArea({
                 {historyRow.isRecent ? (
                   <RowActionButton
                     onClick={() => onRemoveRecent(historyRow)}
-                    label="Remove from recent"
+                    label={t("remove-recent")}
                   >
                     <XIcon className="size-3.5" weight="bold" />
                   </RowActionButton>
                 ) : null}
                 <RowActionButton
                   onClick={() => onToggleFavorite(historyRow)}
-                  label={fav ? "Remove from favorites" : "Add to favorites"}
+                  label={fav ? t("remove-favorite") : t("add-favorite")}
                 >
                   <StarIcon
                     className={cn("size-3.5", fav ? "text-fd-primary" : "")}
@@ -131,9 +134,9 @@ export function ResultsArea({
     );
   }
 
-  if (status.anyLoading) return <Status>Searching…</Status>;
-  if (status.allErrored) return <Status>Something went wrong. Try again.</Status>;
-  if (status.allEmpty) return <Status>No results found</Status>;
+  if (status.anyLoading) return <Status>{t("searching")}</Status>;
+  if (status.allErrored) return <Status>{t("errored")}</Status>;
+  if (status.allEmpty) return <Status>{t("empty")}</Status>;
   return null;
 }
 

@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Sinisingil sa euro, kino-convert sa {currency} ayon sa rate ngayon.",
+  "cost-breakdown": "Pagbawas ng gastos",
+  "estimated-annual-cost": "Tinatayang taunang gastos",
+  "fixed-month-bill-no-surprises": "Nakapirming singil na {totalAnnualEur}/buwan, walang sorpresa: isang nirentahang server, walang third-party SaaS sa daluyan ng datos. Tataas lamang ito kapag lumampas na tayo sa kapasidad ng server, dahil mas maraming Wargaming throughput ang nangangailangan ng mas maraming egress IP.",
+  "free": "libre",
+  "one-off-spend": "Isang beses na gastos",
+  "paid-once-so-it-is": "Isang beses lang binayaran, kaya hindi ito kasama sa buwanang singil sa itaas. Kasama pa rin ito sa kabuuang gastos ng proyekto hanggang ngayon.",
+  "previously": "Dati"
+}

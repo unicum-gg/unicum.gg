@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Vurdering (WN)",
+    "tip": "Vurdering for disse kampene alene, ikke for kontoen"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Seiersprosent for disse kampene"
+  },
+  "avgDamage": {
+    "label": "Gjennomsnittlig skade"
+  },
+  "avgFrags": {
+    "label": "Gjennomsnittlige frags",
+    "tip": "Ødelagte fiender per kamp"
+  },
+  "damageRatio": {
+    "label": "Skaderate",
+    "tip": "Påført skade sammenlignet med mottatt skade"
+  },
+  "kd": {
+    "label": "Bekjempelsesrate",
+    "tip": "Ødelagte fiender sammenlignet med tapte kjøretøy"
+  },
+  "survivalRate": {
+    "label": "Kamper overlevd"
+  },
+  "avgSpotted": {
+    "label": "Gjennomsnittlig oppdaget",
+    "tip": "Oppdagede fiender per kamp"
+  },
+  "avgDefense": {
+    "label": "Baseforsvar",
+    "tip": "Forsvarspoeng per kamp"
+  },
+  "avgXp": {
+    "label": "Gjennomsnitt XP"
+  }
+}

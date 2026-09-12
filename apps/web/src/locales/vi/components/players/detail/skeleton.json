@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Thống kê trận đấu ngẫu nhiên của {nickname}",
+  "progression": "Tiến trình {metricLabel} của {nickname}",
+  "solid-line-is-overall-matches": "Dòng liền là {metricLabel} tổng thể, khớp với cột Tổng ở trên và thay đổi chậm khi các trận đấu mới được cộng dồn. Dòng nét đứt là {metricLabel2} theo từng phiên, được tính từ các trận đấu đã chơi kể từ lần chụp trước. Dòng này cho thấy các chuỗi phong độ cao và thấp. Màu dòng tuân theo bậc chỉ số đánh giá.",
+  "tanks-shaping-s-rating": "Các xe tăng định hình chỉ số đánh giá của {nickname}",
+  "tanks": "Xe tăng của {nickname}",
+  "stats": "Thống kê {strongholdLabel} của {nickname}"
+}

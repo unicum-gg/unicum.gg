@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# stridsvogn} other {# stridsvogner}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Ingen endringer på stridsvogner er registrert ennå. Når Wargaming balanserer stridsvogner på nytt, vises forbedringer og svekkelser fra hver oppdatering her.",
+  "update": "Oppdatér {version}"
+}

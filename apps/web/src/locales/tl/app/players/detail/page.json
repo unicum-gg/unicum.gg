@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Mga tangke ni {name} ({region}), bawat sasakyang nilaro",
+    "description": "Bawat tangke na nilaro ni {name} sa {region}, kasama ang mga laban, antas ng panalo, karaniwang pinsala at WN8 bawat sasakyan."
+  },
+  "achievements": {
+    "title": "Mga achievement ni {name} ({region}), {medals} medalya ang kinita",
+    "description": "Ang {medals} medalya ng World of Tanks na kinita ni {name} sa {region}, mula sa mga medalya nina Kolobanov at Pool hanggang sa mga honorary rank at epic medalya, dagdag ang bawat isa na maaari pa niyang makuha."
+  },
+  "tournaments": {
+    "title": "Mga torneo ni {name} ({region})",
+    "description": "Bawat torneo ng Wargaming na sinalihan ni {name} sa {region}: ang koponang kanyang nilaruan, ang format at kung gaano kalayo ang narating nito. Rekord ito na inilalathala ng Wargaming mula lamang sa panig ng torneo, hindi kailanman sa panig ng manlalaro."
+  },
+  "value": {
+    "title": "Halaga ng account ni {name} ({region})",
+    "description": "Magkano ang halaga ng World of Tanks account ni {name} sa {region}: credits, gold at experience na nasa garahe."
+  },
+  "mode": {
+    "title": "{name} {mode} istatistika ({region})",
+    "description": "{name} sa {region} sa mode na {mode}: mga laban, rate ng panalo at mga rating para sa mode na ito, katabi ng batayan ng kanilang mga random na laban."
+  },
+  "overview": {
+    "title": "{name} World of Tanks istatistika ({region}), {battles} mga laban, {winrate}% rate ng panalo",
+    "description": "{name} sa {region}: {battles} mga laban, {winrate}% rate ng panalo, {rating} rating. Pagkakahati ayon sa tank, WN8, WNX at kumpletong kasaysayan ng mga clan."
+  },
+  "locked": {
+    "title": "{name} World of Tanks account na naka-lock ({region})",
+    "description": "Umiiral ang {name} ({region}), pero naka-lock ng Wargaming ang account na ito, kaya hindi magagamit ang World of Tanks istatistika nito."
+  },
+  "empty": {
+    "title": "{name} World of Tanks istatistika ng manlalaro ({region})",
+    "description": "World of Tanks istatistika ng manlalaro na si {name} ({region}): WN8, WNX mga rating, rate ng panalo, pagkakahati ayon sa tank at kumpletong kasaysayan ng mga clan."
+  }
+}

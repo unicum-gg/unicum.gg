@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Chi phí (tiền tín dụng)",
+    "buyGold": "Chi phí (vàng)",
+    "researchXp": "XP nghiên cứu",
+    "shellCost": "Chi phí đạn",
+    "ammoCost": "Chi phí đạn dược đầy đủ",
+    "class3": "Hạng 3",
+    "class2": "Hạng 2",
+    "class1": "Hạng 1",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Marks (85%)",
+    "mark3": "3 Marks (95%)"
+  }
+}

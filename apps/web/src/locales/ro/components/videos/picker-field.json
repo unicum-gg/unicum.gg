@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Golește câmpul {label}",
+  "credited-on-the-clan-s": "Creditat pe pagina proprie a clanului.",
+  "none": "Nimic",
+  "optional": "(opțional)",
+  "pick-the-vehicle": "Alege vehiculul",
+  "search-for-a-clan": "Caută un clan",
+  "search-for-a-vehicle": "Caută un vehicul",
+  "search-tank": "Caută tanc...",
+  "tank": "Tanc",
+  "tank-hint-optional": "O tactică aparține hărții sale, așa că merită să numești tancul doar când video-ul este și despre vehicul.",
+  "tank-hint-required": "O bătălie aleatorie este identificată după vehiculul cu care a fost jucată."
+}

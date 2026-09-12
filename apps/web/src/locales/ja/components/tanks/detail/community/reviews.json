@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "この戦車で {battles} 戦",
+  "damage": "{damage} ダメージ",
+  "n-marks": "{count, plural, other {#個のマーク}}",
+  "no-written-opinions-yet-if": "文章による意見はまだありません。戦闘数があるなら、あなたの意見が最初になります",
+  "win-rate": "勝率 {toFixed}%",
+  "written-on": "{gameVersion} に記入"
+}

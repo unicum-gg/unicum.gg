@@ -1,4 +1,6 @@
+import { numberFormat } from "@/lib/format";
 import type { PlayerMarkProgress } from "@unicum.gg/shared";
+import { useTranslation } from "@/hooks/use-translation";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   Panel,
@@ -11,7 +13,7 @@ import { MoMIcon } from "@/components/tanks/mom-icon";
 import { MarksMatrix, type MatrixLevel } from "./matrix";
 import { MarksReach } from "./reach";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /** Reach entries shown, split evenly across the two columns. The payload
  * carries more so a future filter has something to work with. */
@@ -48,11 +50,13 @@ export function PlayerMarksPanels({
   nickname,
   progress,
   tanksHref,
+  locale,
 }: {
   region: Region;
   nickname: string;
   progress: PlayerMarkProgress;
   tanksHref: string;
+  locale: string;
 }) {
   const { garage, marks, mastery, reach } = progress;
   const markedVehicles =
@@ -62,6 +66,9 @@ export function PlayerMarksPanels({
   const shown = reach.slice(0, REACH_SHOWN);
   const half = Math.ceil(shown.length / 2);
   const shownReach = { left: shown.slice(0, half), right: shown.slice(half) };
+  const { t } = useTranslation(
+    "components/players/detail/overview/marks/index",
+  );
   const hasMarks = marks.byTier.length > 0;
   const hasMastery = mastery.byTier.length > 0;
   if (!hasMarks && !hasMastery) return null;
@@ -69,19 +76,19 @@ export function PlayerMarksPanels({
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>{nickname}&apos;s marks and mastery</PanelTitle>
+        <PanelTitle>{t("title", { nickname })}</PanelTitle>
       </PanelHeader>
       <PanelContent className="p-0">
         <div className="grid gap-px bg-fd-border md:grid-cols-2">
           {hasMarks && (
             <Column
-              title="Marks of Excellence"
-              description="Vehicles by the marks on their gun. A mark is a sustained average: the game scores it on a rolling window of recent battles against what the region does on that vehicle."
+              title={t("excellence.title")}
+              description={t("excellence.description")}
               totals={
                 <>
-                  <Total count={marks.total.mark1} bars={1} />
-                  <Total count={marks.total.mark2} bars={2} />
-                  <Total count={marks.total.mark3} bars={3} />
+                  <Total count={marks.total.mark1} bars={1}  locale={locale} />
+                  <Total count={marks.total.mark2} bars={2}  locale={locale} />
+                  <Total count={marks.total.mark3} bars={3}  locale={locale} />
                 </>
               }
             >
@@ -102,7 +109,7 @@ export function PlayerMarksPanels({
                   },
                 }))}
                 levels={MARK_LEVELS}
-                emptyLabel="None"
+                emptyLabel={t("none")}
               />
               {/* Closes the table, which drops its own last border so that
                   whatever follows draws the line, and answers the same question
@@ -111,36 +118,35 @@ export function PlayerMarksPanels({
                   partly reached says so here instead of letting the gap read as
                   "no mark". */}
               <p className="mt-auto border-t border-fd-border px-4 py-2 text-sm text-fd-muted-foreground">
-                {marks.known < garage ? (
-                  <>
-                    Marks read for {intFmt.format(marks.known)} of{" "}
-                    {intFmt.format(garage)} vehicles. The rest fill in as the
-                    account is refreshed.
-                  </>
-                ) : (
-                  <>
-                    {intFmt.format(markedVehicles)} of {intFmt.format(garage)}{" "}
-                    vehicles carry a mark
-                    {garage > 0
-                      ? ` (${Math.round((markedVehicles / garage) * 100)}% of the garage)`
-                      : ""}
-                    .
-                  </>
-                )}
+                {marks.known < garage
+                  ? t("excellence.partial", {
+                      known: numberFormat(locale, INT_FORMAT).format(marks.known),
+                      garage: numberFormat(locale, INT_FORMAT).format(garage),
+                    })
+                  : t(
+                      garage > 0
+                        ? "excellence.note-share"
+                        : "excellence.note",
+                      {
+                        marked: numberFormat(locale, INT_FORMAT).format(markedVehicles),
+                        garage: numberFormat(locale, INT_FORMAT).format(garage),
+                        percent: Math.round((markedVehicles / garage) * 100),
+                      },
+                    )}
               </p>
             </Column>
           )}
 
           {hasMastery && (
             <Column
-              title="Marks of Mastery"
-              description="Vehicles by their best badge. A badge is one battle rather than an average: the game awards it on a single game's experience against what the region scores on that vehicle."
+              title={t("mastery.title")}
+              description={t("mastery.description")}
               totals={
                 <>
-                  <MasteryTotal count={mastery.total.class3} mastery={1} />
-                  <MasteryTotal count={mastery.total.class2} mastery={2} />
-                  <MasteryTotal count={mastery.total.class1} mastery={3} />
-                  <MasteryTotal count={mastery.total.ace} mastery={4} />
+                  <MasteryTotal count={mastery.total.class3} mastery={1}  locale={locale} />
+                  <MasteryTotal count={mastery.total.class2} mastery={2}  locale={locale} />
+                  <MasteryTotal count={mastery.total.class1} mastery={3}  locale={locale} />
+                  <MasteryTotal count={mastery.total.ace} mastery={4}  locale={locale} />
                 </>
               }
             >
@@ -162,15 +168,14 @@ export function PlayerMarksPanels({
                   },
                 }))}
                 levels={MASTERY_LEVELS}
-                emptyLabel="None"
+                emptyLabel={t("none")}
               />
               <p className="mt-auto border-t border-fd-border px-4 py-2 text-sm text-fd-muted-foreground">
-                {intFmt.format(mastery.total.ace)} of {intFmt.format(garage)}{" "}
-                vehicles carry an Ace Tanker
-                {garage > 0
-                  ? ` (${Math.round((mastery.total.ace / garage) * 100)}% of the garage)`
-                  : ""}
-                .
+                {t(garage > 0 ? "mastery.note-share" : "mastery.note", {
+                  aces: numberFormat(locale, INT_FORMAT).format(mastery.total.ace),
+                  garage: numberFormat(locale, INT_FORMAT).format(garage),
+                  percent: Math.round((mastery.total.ace / garage) * 100),
+                })}
               </p>
             </Column>
           )}
@@ -183,24 +188,22 @@ export function PlayerMarksPanels({
           <div className="border-t border-fd-border">
             <div className="px-4 py-2">
               <span className="text-sm font-semibold">
-                Playing above the gun
+                {t("reach.heading")}
               </span>
               <p className="mt-0.5 text-xs text-fd-muted-foreground">
-                Vehicles whose combined damage already clears a mark they do not
-                carry. The badge is that combined damage, coloured by the mark
-                it clears.
+                {t("reach.description")}
               </p>
             </div>
             <div className="grid gap-px border-t border-fd-border bg-fd-border md:grid-cols-2">
               <div className="bg-fd-card">
-                <MarksReach region={region} entries={shownReach.left} />
+                <MarksReach region={region} entries={shownReach.left}  locale={locale} />
               </div>
               {/* Only once there is something to put in it: a fixed half would
                   print the empty state beside a populated column whenever the
                   list holds fewer than two rows. */}
               {shownReach.right.length > 0 && (
                 <div className="bg-fd-card">
-                  <MarksReach region={region} entries={shownReach.right} />
+                  <MarksReach region={region} entries={shownReach.right}  locale={locale} />
                 </div>
               )}
             </div>
@@ -243,10 +246,10 @@ function Column({
   );
 }
 
-function Total({ count, bars }: { count: number; bars: 1 | 2 | 3 }) {
+function Total({ count, bars, locale }: { count: number; bars: 1| 2 | 3 ; locale: string }) {
   return (
     <span className="flex items-center gap-1">
-      {intFmt.format(count)}
+      {numberFormat(locale, INT_FORMAT).format(count)}
       <MoEIcon bars={bars} color={MOE_COLORS[bars]} />
     </span>
   );
@@ -255,13 +258,15 @@ function Total({ count, bars }: { count: number; bars: 1 | 2 | 3 }) {
 function MasteryTotal({
   count,
   mastery,
+  locale,
 }: {
   count: number;
   mastery: 1 | 2 | 3 | 4;
+  locale: string;
 }) {
   return (
     <span className="flex items-center gap-1">
-      {intFmt.format(count)}
+      {numberFormat(locale, INT_FORMAT).format(count)}
       <MoMIcon mastery={mastery} className="h-3.5" />
     </span>
   );

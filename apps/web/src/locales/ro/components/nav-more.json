@@ -1,0 +1,37 @@
+{
+  "label": "Mai multe",
+  "items": {
+    "tournaments": {
+      "label": "Turneele",
+      "description": "Grile, loturi și rezultate, pentru fiecare regiune"
+    },
+    "servers": {
+      "label": "Servere",
+      "description": "Jucători online, acum și în timp"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Statistici despre jucători, clanuri și tancuri sub formă de comenzi slash"
+    },
+    "mcp": {
+      "label": "Server MCP",
+      "description": "Conectează Claude, ChatGPT sau orice client MCP"
+    },
+    "api": {
+      "label": "API",
+      "description": "API REST public gratuit, fără cheie necesară"
+    },
+    "badges": {
+      "label": "Insigne",
+      "description": "Fiecare emblemă pe care o poate câștiga un jucător sau clan și modul de obținere"
+    },
+    "glossary": {
+      "label": "Glossar",
+      "description": "Fiecare termen din World of Tanks explicat"
+    },
+    "support": {
+      "label": "Susțineți-ne",
+      "description": "Menține {name} gratuit, deschis și fără reclame"
+    }
+  }
+}

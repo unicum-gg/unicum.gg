@@ -1,0 +1,6 @@
+{
+  "title": "Игроки World of Tanks только на языке {language} ({region})",
+  "description": "Таблица лидеров игроков {name} в регионе {region}, чей предполагаемый язык истории кланов исключительно {language}, с ранжированием по WNX.",
+  "og-title": "Только игроки на языке {language}",
+  "og-subtitle": "Таблица лидеров {region}"
+}

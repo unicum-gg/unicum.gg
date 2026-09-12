@@ -1,0 +1,21 @@
+{
+  "stat": "통계",
+  "periods": {
+    "total": "전체",
+    "day": "지난 24시간",
+    "week": "지난 7일",
+    "month": "지난 30일"
+  },
+  "sections": {
+    "territory": "영토",
+    "t10": "10단계",
+    "t8": "8단계",
+    "t6": "6단계"
+  },
+  "rows": {
+    "provinces": "영지",
+    "elo": "ELO",
+    "battles": "전투",
+    "winrate": "승률"
+  }
+}

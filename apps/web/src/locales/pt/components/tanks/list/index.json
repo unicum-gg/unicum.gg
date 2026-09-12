@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Custo (créditos)",
+    "buyGold": "Custo (ouro)",
+    "researchXp": "XP de pesquisa",
+    "shellCost": "Custo do projétil",
+    "ammoCost": "Custo total de munição",
+    "class3": "3ª Classe",
+    "class2": "2ª Classe",
+    "class1": "1ª Classe",
+    "ace": "Distribuidor Ace",
+    "mark1": "1 Marca (65%)",
+    "mark2": "2 Marcas (85%)",
+    "mark3": "3 Marcas (95%)"
+  }
+}

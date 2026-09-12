@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Аформленне адменена.",
+  "claim-your-supporter-role-on-discord": "Атрымаць ролю прыхільніка ў Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Маглі б дадаць ролю Discord. Паспрабуйце яшчэ раз.",
+  "could-not-open-the-billing-portal": "Маглі б адкрыць партал аплаты.",
+  "could-not-start-checkout-please-try-again": "Маглі б пачаць аплату. Паспрабуйце яшчэ раз.",
+  "could-not-update-your-preference": "Маглі б абнавіць вашы налады.",
+  "log-in-with-wargaming": "Увайсці праз Wargaming",
+  "log-in-with-wargaming-to": "Увайдзіце праз Wargaming, каб падтрымаць {NAME}.",
+  "manage-subscription": "Кіруйце падпіскай",
+  "only-active-supporters-can-claim-the-discord": "Толькі актыўныя прыхільнікі могуць атрымаць ролю Discord.",
+  "or-choose-your-own-amount": "Або выберыце ўласную суму",
+  "pay-what-you-want": "Плаціце колькі хочаце.",
+  "pick-an-amount": "Выберыце суму або ўвядзіце сваю, ад €{min}/месяц.",
+  "re-sync-discord-role": "Сінхранізаваць ролю Discord паўторна",
+  "secured-by-stripe": "Захоўваецца Stripe. Адмяніць можна ў любы час.",
+  "show-me-anonymously-on-the": "Паказваць мяне ананімна на п’едэстале",
+  "support-subscriptions-are-coming-soon": "Падпіскі на падтрымку з’явяцца ў бліжэйшы час.",
+  "supporter-role-added-on-discord": "Роля прыхільніка дададзеная ў Discord!",
+  "you-are-a-supporter-thank": "Вы прыхільнік. Дзякуй, што падтрымліваеце {NAME}."
+}

@@ -1,0 +1,7 @@
+{
+  "win-rate": "Win rate",
+  "versus": "{metric} laban sa {region}",
+  "top": "Ituktok {percent}%",
+  "ahead-of": "Nangunguna sa {percent}%",
+  "against": "Laban sa {players} sinusubaybayang account sa {region} na may hindi bababa sa {battles} mga laban."
+}

@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Értékelés (WN)",
+    "tip": "Csak ezeknek a csatáknak az értékelése, nem a fióké"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Győzelmi arány ezekben a csatákban"
+  },
+  "avgDamage": {
+    "label": "Átlagos sebzés"
+  },
+  "avgFrags": {
+    "label": "Átlag fragok",
+    "tip": "Megsemmisített ellenségek csatánként"
+  },
+  "damageRatio": {
+    "label": "Sebzés arány",
+    "tip": "Okozott sebzés a kapott sebzéshez képest"
+  },
+  "kd": {
+    "label": "Megsemmisítési arány",
+    "tip": "Megsemmisített ellenségek az elvesztett járművekhez képest"
+  },
+  "survivalRate": {
+    "label": "Túlélt csaták"
+  },
+  "avgSpotted": {
+    "label": "Átlagosan észlelt",
+    "tip": "Felfedezett ellenségek csatánként"
+  },
+  "avgDefense": {
+    "label": "Bázis védelem",
+    "tip": "Védelmi pontok csatánként"
+  },
+  "avgXp": {
+    "label": "Átlag XP"
+  }
+}

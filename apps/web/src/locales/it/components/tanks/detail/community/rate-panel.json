@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} battaglie complessive",
+  "checking-your-record-on-this": "Verifica dei tuoi risultati con questo carro...",
+  "fetching-your-garage": "Stiamo recuperando la tua Officina",
+  "have-you-played": "Hai giocato con {tank}?",
+  "more-to-go": "Ancora {count} battaglie da giocare",
+  "more-to-go-one": "Ancora {count} battaglia da giocare",
+  "sign-in-to-rate-it": "Accedi per valutarlo",
+  "sign-in-with-your-wargaming-account-to-rate-": "Accedi con il tuo account Wargaming per valutarlo. Verifichiamo le tue statistiche proprio su questo carro, evitando così che la pagina diventi un sondaggio tra persone che non lo hanno mai guidato.",
+  "signed-in-on": "Accesso effettuato su {region}",
+  "too-few-battles": "Hai disputato {played} battaglie usando il carro {tank}. Ne richiediamo {required} perché il voto venga conteggiato, così questa media riflette le valutazioni di chi lo usa davvero.",
+  "you-have-not-played": "Non hai giocato con {tank}"
+}

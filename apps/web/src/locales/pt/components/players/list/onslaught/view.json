@@ -1,0 +1,35 @@
+{
+  "heading": "Melhores jogadores no modo <accent>{mode}</accent>",
+  "intro": "{mode} é o modo competitivo 7 contra 7 de nível X do World of Tanks. A tabela de classificação da região {region}, diretamente da classificação oficial do jogo.",
+  "season": {
+    "range": "De {start} a {end}",
+    "final": "classificação final",
+    "live": "temporada em curso",
+    "updated": "atualizado {when}"
+  },
+  "board": "Os {count} melhores jogadores no modo {mode}",
+  "columns": {
+    "player": "Jogador",
+    "rank": "Posto",
+    "battles": "Batalhas",
+    "rating": "Pontos de Posto"
+  },
+  "alias": "(como {nickname})",
+  "ranks": {
+    "title": "Patentes",
+    "meaning": "Significado",
+    "tier": "Nível",
+    "intro": "Avanças nos escalões do modo {mode} ao vencer batalhas: cada vitória concede Pontos de Classificação consoante o teu desempenho. O escalão {champion} é o mais alto que podes alcançar apenas com pontos, e alcançá-lo coloca-te na tabela de classificação. O escalão {legend} não tem um limite fixo: reúne os jogadores de {champion} com a classificação mais alta, pelo que o limite varia consoante os participantes (em caso de empate, conta o número de batalhas disputadas). Os limites exatos de {legend} e {champion} são determinados pela temporada atual e estão assinalados na tabela.",
+    "legend-blurb": "Os jogadores de {champion} com a classificação mais alta. Em cada temporada, o jogo fixa o limite numa determinada posição da tabela de classificação (por isso, o número de jogadores varia consoante a temporada e a região), e não num valor fixo de pontos. Se caíres abaixo da última posição de {legend}, regressas ao escalão {champion}.",
+    "champion-blurb": "O escalão mais alto que podes alcançar com Pontos de Classificação e a porta de entrada para a tabela de classificação. Todos os jogadores classificados estão, pelo menos, no escalão {champion}."
+  },
+  "race": {
+    "title-live": "O que é preciso neste momento",
+    "title-ended": "Como decorreu a temporada",
+    "legend-cutoff": "Limite de {legend}",
+    "champion-cutoff": "Limite de {champion}",
+    "ranked-players": "jogadores ranqueados",
+    "rating-points": "pontos de classificação",
+    "rank-cutoffs": "Cortes de Posto"
+  }
+}

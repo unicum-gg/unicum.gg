@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. mjesto",
+    "2": "2. mjesto",
+    "3": "3. mjesto"
+  },
+  "streamer": "Streamer · gledaj igrača {name} na Twitchu",
+  "tournament": {
+    "one": "Pobjednička postava turnira {title}",
+    "many": "U {count} pobjedničkih postava, najbolji na turniru {title}",
+    "featured": "{text} · istaknuti događaj",
+    "unnamed": "Wargamingov turnir"
+  },
+  "tournament-wins": "{count, plural, one {# pobjeda na turniru} few {# pobjede na turniru} other {# pobjeda na turniru}}",
+  "watch-on-twitch": "Gledaj igrača {name} na Twitchu",
+  "watch-on-twitch-viewers": "Gledaj igrača {name} na Twitchu · {viewers} gledatelja"
+}

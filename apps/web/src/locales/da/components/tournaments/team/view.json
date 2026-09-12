@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Lodtrækningen er endnu ikke foretaget. Dette holds kampe vises her, når turneringen starter.",
+  "each-map-is-played-twice": "Hvert kort spilles to gange, én gang fra hver side. Det sidste kort er afgørelsen og spilles én gang.",
+  "first-battle-at": "Første kamp, {when}",
+  "lost": "Tabte",
+  "matches": "Kampe ({length})",
+  "never-played": "Dette hold spillede aldrig en kamp. Det blev registreret, men lodtrækningen nåede ikke frem til det, hvilket sker for en holdopstilling, der ikke blev bekræftet.",
+  "no-maps-recorded": "Ingen kort registreret for denne kamp.",
+  "no-roster-recorded-for-this": "Ingen holdopstilling registreret for dette hold.",
+  "of-players-on-the-day": "{members} af {length} spillere på dagen",
+  "played-on-uncatalogued": "Spillet på {maps}, som kortkataloget ikke indeholder.",
+  "roster": "Roster ({length})",
+  "stage-group": "{stage} · Gruppe {order}",
+  "team-1": "Hold 1",
+  "team-2": "Hold 2",
+  "tournaments": "Turneringer",
+  "when-the-first-battle-started": "Da den første kamp startede",
+  "won": "Vundet"
+}

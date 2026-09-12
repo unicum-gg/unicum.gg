@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { useTranslation } from "@/hooks/use-translation";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { isRegion, Region } from "@unicum.gg/wargaming";
@@ -20,6 +21,7 @@ export function TopClansLeaderboardLink({
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
+  const { t } = useTranslation("components/home/leaderboard-link");
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   return (
@@ -30,7 +32,7 @@ export function TopClansLeaderboardLink({
         "text-xs font-medium uppercase tracking-wide text-fd-muted-foreground",
       )}
     >
-      See all →
+      {t("see-all")}
     </Link>
   );
 }

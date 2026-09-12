@@ -1,0 +1,8 @@
+{
+  "busiest": "En yoğun {when} ({players})",
+  "not-enough-recorded-yet-to": "Haftalık ritmi göstermek için henüz yeterli kayıt yok. Örnekleme haftanın her saatini kapsadıkça dolacak.",
+  "not-sampled-yet": "Henüz örneklenmedi",
+  "players-on-average": "Ortalama {players} oyuncu",
+  "quietest": ", en sakin {when} ({players})",
+  "your-local-time": "Yerel zamanın"
+}

@@ -1,0 +1,8 @@
+{
+  "busiest": "Busiest {when} ({players})",
+  "not-enough-recorded-yet-to": "Not enough recorded yet to show a weekly rhythm. It fills in as the sampling covers each hour of the week.",
+  "not-sampled-yet": "Not sampled yet",
+  "players-on-average": "{players} players on average",
+  "quietest": ", quietest {when} ({players})",
+  "your-local-time": "Your local time"
+}

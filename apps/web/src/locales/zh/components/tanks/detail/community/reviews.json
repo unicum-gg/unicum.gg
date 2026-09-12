@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "使用它进行过{battles}场战斗",
+  "damage": "造成的损伤为 {damage} 损伤",
+  "n-marks": "{count, plural, other {# 标记}}",
+  "no-written-opinions-yet-if": "还没有文字评价。如果您有足够的战斗场次，您的评价将成为第一条。",
+  "win-rate": "{toFixed}%胜率",
+  "written-on": "撰写于{gameVersion}"
+}

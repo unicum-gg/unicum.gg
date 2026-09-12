@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import { PlusIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ export function SlotBox({
   roleCat: string | null;
   equip: Equipment | null;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/equipment/slot-box");
   const cat = slotCategory(slot, roleCat);
   const color = categoryColor(cat);
   const bonus = equip ? earnsCategoryBonus(equip, cat) : false;
@@ -63,7 +65,7 @@ export function SlotBox({
             <span
               className="absolute -right-2.5 -top-2.5 rounded-full px-1 text-[9px] font-bold text-white"
               style={{ backgroundColor: color }}
-              title="Category bonus active"
+              title={t("category-bonus-active")}
             >
               +
             </span>

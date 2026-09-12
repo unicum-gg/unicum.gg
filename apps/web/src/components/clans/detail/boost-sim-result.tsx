@@ -1,5 +1,7 @@
 "use client";
 
+import { statLabel } from "@/components/stat-label";
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import { UsersIcon } from "@phosphor-icons/react";
 import { reserveIconUrl } from "@unicum.gg/shared";
@@ -35,6 +37,8 @@ const SIM_LABEL: Record<SimDecision, string> = {
 
 /** The dry-run "Test run" outcome panel: threshold/window state + per-reserve. */
 export function BoostSimResult({ sim }: { sim: SimResult }) {
+  const { t } = useTranslation("components/clans/detail/boost-sim-result");
+  const { t: tLocal } = useTranslation("components/clans/detail/boost-sim-result");
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-fd-border bg-fd-secondary/20 p-3 text-sm">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
@@ -44,7 +48,7 @@ export function BoostSimResult({ sim }: { sim: SimResult }) {
             {sim.onlineNow}
           </span>
           <span className="text-fd-muted-foreground">
-            / {sim.membersCount} online
+            {t("n-online", { count: sim.membersCount })}
           </span>
         </span>
         <span
@@ -52,21 +56,21 @@ export function BoostSimResult({ sim }: { sim: SimResult }) {
             sim.thresholdMet ? "text-success" : "text-fd-muted-foreground"
           }
         >
-          {sim.thresholdMet ? "✓" : "✗"} threshold ({sim.onlineNow}/
-          {sim.minOnline})
+          {sim.thresholdMet ? "✓" : "✗"}{" "}
+          {t("threshold", { online: sim.onlineNow, min: sim.minOnline })}
         </span>
         <span
           className={
             sim.inWindow ? "text-success" : "text-fd-muted-foreground"
           }
         >
-          {sim.inWindow ? "✓" : "✗"} in window
+          {sim.inWindow ? "✓" : "✗"} {t("in-window")}
         </span>
       </div>
       <div className="font-medium text-fd-foreground">
         {sim.wouldFire
-          ? "Right now, it would activate:"
-          : "Right now, it would not fire."}
+          ? t("would-activate")
+          : t("would-not-fire")}
       </div>
       <ul className="flex flex-col gap-0.5 text-fd-muted-foreground">
         {sim.reserves.map((r) => (
@@ -80,13 +84,13 @@ export function BoostSimResult({ sim }: { sim: SimResult }) {
             />
             <span className="text-fd-foreground">{r.name}</span>
             <span>
-              {SIM_LABEL[r.decision]}
+              {statLabel(SIM_LABEL[r.decision], tLocal)}
               {r.decision === "would_activate" &&
                 ` L${r.level}${r.percent != null ? ` (+${r.percent}%)` : ""}`}
             </span>
           </li>
         ))}
-        {sim.reserves.length === 0 && <li>No reserves selected.</li>}
+        {sim.reserves.length === 0 && <li>{t("no-reserves-selected")}</li>}
       </ul>
     </div>
   );

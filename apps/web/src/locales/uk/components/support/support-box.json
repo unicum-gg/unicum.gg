@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Чек-аут скасовано.",
+  "claim-your-supporter-role-on-discord": "Отримати роль підтримувача в Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Не вдалося додати роль Discord. Спробуйте ще раз.",
+  "could-not-open-the-billing-portal": "Не вдалося відкрити платіжний портал.",
+  "could-not-start-checkout-please-try-again": "Не вдалося розпочати оформлення оплати. Спробуйте ще раз.",
+  "could-not-update-your-preference": "Можна не вдалося оновити ваш вибір.",
+  "log-in-with-wargaming": "Увійти через Загальний",
+  "log-in-with-wargaming-to": "Увійдіть через Загальний, щоб підтримати {NAME}.",
+  "manage-subscription": "Керувати підпискою",
+  "only-active-supporters-can-claim-the-discord": "Лише активні підтримувачі можуть отримати роль у Discord.",
+  "or-choose-your-own-amount": "Або виберіть власну суму",
+  "pay-what-you-want": "Платіть скільки хочете.",
+  "pick-an-amount": "Виберіть суму або введіть власну, від €{min}/місяць.",
+  "re-sync-discord-role": "Повторно синхронізувати роль Discord",
+  "secured-by-stripe": "Захищено Stripe. Скасувати можна будь-коли.",
+  "show-me-anonymously-on-the": "Показувати мене анонімно на п’єдесталі",
+  "support-subscriptions-are-coming-soon": "Підписки підтримки скоро з’являться.",
+  "supporter-role-added-on-discord": "Роль підтримувача додано в Discord!",
+  "you-are-a-supporter-thank": "Ви підтримувач. Дякуємо, що допомагаєте {NAME} працювати."
+}

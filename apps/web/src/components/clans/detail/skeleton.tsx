@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Panel,
   PanelContent,
@@ -22,6 +24,7 @@ import {
 } from "@/components/clans/detail/tabs";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 /** `[TAG] {children}` panel title, matching TaggedTitle in tabs-view. */
 function TaggedTitle({
@@ -45,9 +48,13 @@ function TaggedTitle({
 function StaticNav({
   items,
   activeId,
+  label,
 }: {
-  items: { id: string; label: string }[];
+  items: readonly { id: string }[];
   activeId: string;
+  /** How a tab names itself: the sections from the locale files, the battle
+   * modes from the game's own vocabulary. */
+  label: (id: string) => string;
 }) {
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
@@ -61,7 +68,7 @@ function StaticNav({
               : "text-fd-muted-foreground",
           )}
         >
-          {item.label}
+          {label(item.id)}
         </span>
       ))}
     </nav>
@@ -87,6 +94,9 @@ export function ClanProfileSkeleton({
   section: ClanSection;
   mode: ClanMode;
 }) {
+  const { t } = useTranslation("components/clans/detail/tabs");
+  const { t: tOwn } = useTranslation("components/clans/detail/skeleton");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const onTanks = section === ClanSection.Tanks;
 
   return (
@@ -100,7 +110,11 @@ export function ClanProfileSkeleton({
       <PanelSeparator />
       <Panel>
         <PanelHeader className="px-0! py-0!" screenLines={false}>
-          <StaticNav items={CLAN_SECTIONS} activeId={section} />
+          <StaticNav
+            items={CLAN_SECTIONS.map((id) => ({ id }))}
+            activeId={section}
+            label={(id) => t(`sections.${id}`)}
+          />
         </PanelHeader>
       </Panel>
 
@@ -136,7 +150,11 @@ export function ClanProfileSkeleton({
           <PanelSeparator />
           <Panel>
             <PanelHeader className="px-0! py-0!" screenLines={false}>
-              <StaticNav items={CLAN_MODES} activeId={mode} />
+              <StaticNav
+              items={CLAN_MODES}
+              activeId={mode}
+              label={(id) => tGame(`clan-modes.${id}`)}
+            />
             </PanelHeader>
           </Panel>
         </>
@@ -148,7 +166,7 @@ export function ClanProfileSkeleton({
           <Panel>
             <PanelHeader>
               <TaggedTitle tag={tag} color={color}>
-                tanks
+                {t("sections.tanks")}
               </TaggedTitle>
             </PanelHeader>
             <PanelContent className="p-0">
@@ -162,8 +180,7 @@ export function ClanProfileSkeleton({
           <Panel>
             <PanelHeader>
               <TaggedTitle tag={tag} color={color}>
-                stronghold stats
-              </TaggedTitle>
+                {tOwn("stronghold-stats")}</TaggedTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <ClanStrongholdStatsTable loading />
@@ -176,8 +193,7 @@ export function ClanProfileSkeleton({
           <Panel>
             <PanelHeader>
               <TaggedTitle tag={tag} color={color}>
-                clan wars stats
-              </TaggedTitle>
+                {tOwn("clan-wars-stats")}</TaggedTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <ClanWarsStatsTable loading />
@@ -190,8 +206,7 @@ export function ClanProfileSkeleton({
           <Panel>
             <PanelHeader>
               <TaggedTitle tag={tag} color={color}>
-                members random battles stats
-              </TaggedTitle>
+                {tOwn("members-random-battles-stats")}</TaggedTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <ClanMembersTable loading />
@@ -202,8 +217,7 @@ export function ClanProfileSkeleton({
           <Panel>
             <PanelHeader>
               <TaggedTitle tag={tag} color={color}>
-                recent activity
-              </TaggedTitle>
+                {tOwn("recent-activity")}</TaggedTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <ClanRecentActivity loading />

@@ -1,0 +1,17 @@
+{
+  "aim-time": "Nişan alma süresi",
+  "ammo": "Mühimmat",
+  "armor": "Zırh",
+  "dispersion": "Saçılma",
+  "fire-chance": "Yangın şansı",
+  "gun-arc": "Tüfek açısı",
+  "hit-points": "Can puanı",
+  "load-limit": "Yük limiti",
+  "mounted-on": "Şunlarda takılı: {tanks}",
+  "power": "Güç",
+  "reload": "Yükleme",
+  "signal-range": "Sinyal menzili",
+  "tier": "Seviye {tier}",
+  "traverse": "Dönüş",
+  "view-range": "Görüş menzili"
+}

@@ -8,10 +8,10 @@ export type Slot = TankLoadout["slots"][number];
 // (the game paints every specialization the same orange). The label matches the
 // game's own (`tank_params/relative*`) and the glyph is derived from the key, so
 // neither is duplicated here.
-export const CATEGORY: Record<string, { label: string; color: string }> = {
-  firepower: { label: "Firepower", color: "#e0524c" },
-  mobility: { label: "Mobility", color: "#7db61c" },
-  survivability: { label: "Survivability", color: "#4a9fe0" },
+export const CATEGORY: Record<string, { /** Key into `game/tank-params`, shared with the characteristics table. */ label: string; color: string }> = {
+  firepower: { label: "firepower", color: "#e0524c" },
+  mobility: { label: "mobility", color: "#7db61c" },
+  survivability: { label: "survivability", color: "#4a9fe0" },
   stealth: { label: "Concealment", color: "#e0b23a" },
 };
 
@@ -91,12 +91,19 @@ export function earnsCategoryBonus(
 
 /** The note shown in a cell's tooltip about what clicking it again does, when
  * the family has several variants (grades or experimental levels) to step
- * through. Returns nothing for single-variant families. */
-export function cycleHint(variants: Equipment[], cur: Equipment | null): string | undefined {
+ * through. Returns nothing for single-variant families.
+ *
+ * A key and its values rather than a sentence: the note is built here but read
+ * where the tooltip renders, which is the only place that knows the reader's
+ * language. */
+export function cycleHint(
+  variants: Equipment[],
+  cur: Equipment | null,
+): { key: string; next?: string } | undefined {
   if (variants.length <= 1) return undefined;
   const idx = cur ? variants.findIndex((v) => v.key === cur.key) : -1;
-  if (idx < 0) return "Click to mount, then again to step up the variant.";
+  if (idx < 0) return { key: "cycle-mount" };
   if (idx < variants.length - 1)
-    return `Click to switch to ${variants[idx + 1].name}.`;
-  return "Click again to remove.";
+    return { key: "cycle-switch", next: variants[idx + 1].name };
+  return { key: "cycle-remove" };
 }

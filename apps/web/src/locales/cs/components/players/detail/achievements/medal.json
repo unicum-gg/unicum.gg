@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, získané {count}×",
+  "aria-not-earned": "{name}, nezískané",
+  "no-longer-obtainable": "Již nelze získat.",
+  "not-earned": "Nezískané"
+}

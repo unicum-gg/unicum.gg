@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "ยังไม่มีคลัสเตอร์ที่บันทึกไว้",
+  "server": "เซิร์ฟเวอร์",
+  "online": "ออนไลน์",
+  "share": "แชร์",
+  "peak": "สูงสุด ({label})",
+  "average": "เฉลี่ย ({label})",
+  "not-reported": "ยังไม่ได้รายงาน",
+  "total": "ทั้งหมด"
+}

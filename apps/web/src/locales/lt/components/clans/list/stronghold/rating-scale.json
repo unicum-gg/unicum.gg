@@ -1,0 +1,17 @@
+{
+  "average": "Vidurkis",
+  "bad": "Blogas",
+  "below-avg": "Žemiau vidurkio",
+  "color-thresholds-for-the-stronghold": "Tvirtovės lentelių spalvų ribos. Vienoda absoliuti skalė kiekvienam lygiui, todėl SR arba SRB visur reiškia tokią pačią klano kokybę.",
+  "excellent": "Puikus",
+  "good": "Gerai",
+  "rating-colors": "Reitingo spalvos",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "lygis",
+  "top": "Viršuje",
+  "very-bad": "Labai blogas",
+  "very-good": "Labai geras",
+  "wr": "WR"
+}

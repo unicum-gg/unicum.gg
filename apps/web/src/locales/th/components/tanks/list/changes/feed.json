@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, other {# รถถัง}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "ยังไม่มีการบันทึกการเปลี่ยนแปลงรถถัง ขณะที่ Wargaming ปรับสมดุลรถถัง การเพิ่มและลดความสามารถของแต่ละอัปเดตจะแสดงที่นี่",
+  "update": "ปรับ {version}"
+}

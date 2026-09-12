@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank} World of Tanks istatistika ({region}), tier {tier} {nation}",
+    "description": "{tank} ({region}) World of Tanks mga espesipikasyon: armor, lakas ng putok, mobility, mga module, crew at mga field modification para sa tier {tier} {nation} na tank na ito."
+  },
+  "performances": {
+    "title": "{tank} pagganap ({region}), mga istatistika ng server at pinakamahusay na mga manlalaro",
+    "description": "{tank} ({region}) World of Tanks pagganap: karaniwang rate ng panalo, damage at assist sa server, ang pinakamahusay na mga manlalaro sa tier {tier} {nation} na tank na ito, dagdag ang WN8 at WNX expected values."
+  },
+  "marks": {
+    "title": "{tank} mga marka ng kahusayan at mastery ({region})",
+    "description": "{tank} ({region}) World of Tanks mga kinakailangan para sa mga marka ng kahusayan at mga marka ng mastery, kasama ang kasaysayan ng mga ito sa tier {tier} {nation} na tank na ito."
+  },
+  "history": {
+    "title": "{tank} kasaysayan ng mga pagbabago ({region}), mga pagpapalakas at mga nerf",
+    "description": "Bawat pagbabago sa katangian ng {tank} sa lahat ng update ng World of Tanks: mga pagpapalakas at mga nerf sa lakas ng putok, mobility, kakayahang makaligtas at pagtatago na ipinadala ng Wargaming sa tier {tier} {nation} na tank na ito, bersyon kada bersyon."
+  },
+  "videos": {
+    "title": "{tank} mga video ng gameplay ({region})",
+    "description": "Tingnan ang {tank} sa aksyon: mga laban na iminungkahi ng komunidad sa tier {tier} {nation} na tank na ito, na bawat isa ay nagbubukas sa sandaling nilaro ito, kasama ang mapa at resulta kung saan ito naganap."
+  },
+  "community": {
+    "title": "{tank} mga pagsusuri ng manlalaro at rating ng komunidad ({region})",
+    "description": "Ano ang palagay ng mga manlalaro tungkol sa {tank}: ang rating ng komunidad mula isa hanggang lima, hinati ayon sa galing ng mga bumoto maglaro, inihambing sa aktuwal na pagganap ng tier {tier} {nation} na tank na ito, dagdag ang mga nakasulat na pagsusuri mula sa mga account na may mga laban dito."
+  }
+}

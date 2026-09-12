@@ -1,0 +1,34 @@
+{
+  "stat": "Stat",
+  "rows": {
+    "battles": "Gevechten",
+    "tier": "niveau",
+    "wins": "Overwinningen",
+    "losses": "Verliezen",
+    "draws": "Gelijkspel",
+    "survived": "Gevechten overleefd",
+    "destroyed": "Verwoeste tanks",
+    "destruction-ratio": "Vernietigingsverhouding",
+    "spotted": "Opgespote tanks",
+    "damages": "Schade",
+    "track-damages": "Schade aan het loopwerk",
+    "spotting-damages": "Verkenningsschade",
+    "assisting-damages": "Hulpschade",
+    "combined-damages": "Gecombineerde schade",
+    "base-capture": "Basisverovering",
+    "base-defense": "Basisverdediging",
+    "experience": "Ervaring",
+    "hit-rate": "Treffercijfer",
+    "personal-rating": "Persoonlijke beoordeling",
+    "wtr": "World of Tanks-beoordeling",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Totaal",
+    "day": "Laatst 24u",
+    "week": "Laatst 7d",
+    "month": "Laatst 30d"
+  }
+}

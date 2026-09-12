@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "ยกเลิกการชำระเงินแล้ว.",
+  "claim-your-supporter-role-on-discord": "รับบทบาทผู้สนับสนุนของคุณบน Discord",
+  "could-not-add-the-discord-role-please-try-ag": "อาจเพิ่มบทบาท Discord ไม่ได้ โปรดลองอีกครั้ง",
+  "could-not-open-the-billing-portal": "อาจเปิดพอร์ทัลการเรียกเก็บเงินไม่ได้",
+  "could-not-start-checkout-please-try-again": "อาจเริ่มการชำระเงินไม่ได้ โปรดลองอีกครั้ง",
+  "could-not-update-your-preference": "อาจอัปเดตการตั้งค่าของคุณไม่ได้",
+  "log-in-with-wargaming": "เข้าสู่ระบบด้วย Wargaming",
+  "log-in-with-wargaming-to": "เข้าสู่ระบบด้วย Wargaming เพื่อสนับสนุน {NAME}",
+  "manage-subscription": "จัดการการสมัครสมาชิก",
+  "only-active-supporters-can-claim-the-discord": "เฉพาะผู้สนับสนุนที่ยังสนับสนุนอยู่เท่านั้นที่รับบทบาท Discord ได้",
+  "or-choose-your-own-amount": "หรือเลือกจำนวนเงินของคุณเอง",
+  "pay-what-you-want": "จ่ายเท่าที่คุณต้องการ",
+  "pick-an-amount": "เลือกจำนวนเงินหรือพิมพ์จำนวนที่ต้องการเอง เริ่มต้นที่ €{min}/เดือน",
+  "re-sync-discord-role": "ซิงค์บทบาท Discord ใหม่",
+  "secured-by-stripe": "รักษาความปลอดภัยด้วย Stripe ยกเลิกได้ทุกเมื่อ",
+  "show-me-anonymously-on-the": "แสดงฉันแบบไม่ระบุชื่อบนแท่นรางวัล",
+  "support-subscriptions-are-coming-soon": "การสมัครสมาชิกเพื่อสนับสนุนจะเปิดให้ใช้เร็ว ๆ นี้",
+  "supporter-role-added-on-discord": "เพิ่มบทบาทผู้สนับสนุนบน Discord แล้ว!",
+  "you-are-a-supporter-thank": "คุณคือผู้สนับสนุน ขอบคุณที่ช่วยให้ {NAME} ยังคงทำงานอยู่"
+}

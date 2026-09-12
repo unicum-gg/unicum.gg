@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Average over {rated} of {size} players",
+  "average-over-recent": "Average over the {rated} of {size} players who played in the last 30 days",
+  "metric-over-last-30-days": "{metric} over the last 30 days",
+  "n-confirmed": "{count} confirmed",
+  "no-team-matches-the-current": "No team matches the current filters.",
+  "no-teams-recorded-yet-registrations": "No teams recorded yet. Registrations appear here once this tournament has been read in full, which happens within minutes of it opening.",
+  "none-played-in-30-days": "None of this roster has played in the last 30 days",
+  "players": "Players",
+  "qualified": "Qualified",
+  "reward": "Reward",
+  "team": "Team",
+  "teams": "Teams ({length})",
+  "wr": "WR"
+}

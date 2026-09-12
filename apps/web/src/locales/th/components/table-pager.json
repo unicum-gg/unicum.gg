@@ -1,0 +1,8 @@
+{
+  "previous": "หน้าก่อนหน้า",
+  "next": "หน้าถัดไป",
+  "rows-per-page": "แถวต่อหน้า",
+  "all": "ทั้งหมด",
+  "range": "{first}–{last} จาก {total}",
+  "page": "หน้า {page} / {total}"
+}

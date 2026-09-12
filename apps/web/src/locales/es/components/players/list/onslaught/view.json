@@ -1,0 +1,35 @@
+{
+  "heading": "Mejores jugadores en <accent>{mode}</accent>",
+  "intro": "El modo {mode} es una modalidad competitiva con clasificación de World of Tanks, con batallas 7 contra 7 de nivel X. La tabla de clasificación de la región {region}, obtenida directamente de las posiciones oficiales del juego.",
+  "season": {
+    "range": "{start} a {end}",
+    "final": "clasificación final",
+    "live": "temporada en curso",
+    "updated": "actualizado {when}"
+  },
+  "board": "Los {count} mejores jugadores de {mode}",
+  "columns": {
+    "player": "Jugador",
+    "rank": "Rango",
+    "battles": "Batallas",
+    "rating": "Puntos de clasificación"
+  },
+  "alias": "(como {nickname})",
+  "ranks": {
+    "title": "Rangos",
+    "meaning": "Significado",
+    "tier": "nivel",
+    "intro": "Asciendes en los rangos del modo {mode} ganando batallas: cada victoria otorga Puntos de clasificación en función de tu rendimiento. {champion} es el rango más alto que puedes alcanzar solo con puntos, y al conseguirlo entras en la tabla de clasificación. El rango {legend} no tiene un umbral fijo: agrupa a los jugadores del rango {champion} con mayor Clasificación, por lo que el límite cambia según los participantes, y los empates se resuelven por el número de batallas disputadas. Los umbrales exactos de los rangos {legend} y {champion} proceden de la temporada actual y están marcados en la tabla.",
+    "legend-blurb": "Los jugadores del rango {champion} con mayor Clasificación. Cada temporada, el juego establece el límite en una posición concreta de la tabla de clasificación, por lo que su tamaño varía según la temporada y la región, en lugar de depender de una cantidad fija de puntos. Si caes por debajo del último jugador del rango {legend}, vuelves al rango {champion}.",
+    "champion-blurb": "El rango más alto que puedes alcanzar con Puntos de clasificación y la puerta de entrada a la tabla de clasificación. Todos los jugadores clasificados tienen como mínimo el rango {champion}."
+  },
+  "race": {
+    "title-live": "Lo que hace falta ahora mismo",
+    "title-ended": "Cómo fue la temporada",
+    "legend-cutoff": "Umbral de {legend}",
+    "champion-cutoff": "Umbral de {champion}",
+    "ranked-players": "Jugadores clasificados",
+    "rating-points": "puntos de clasificación",
+    "rank-cutoffs": "Umbrales de rango"
+  }
+}

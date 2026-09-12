@@ -18,10 +18,11 @@ import { cn } from "@/lib/utils";
 import type { ClanSearchResult, GlossarySummary } from "@unicum.gg/shared";
 import {
   glossaryAcronym,
-  GLOSSARY_CATEGORY_LABEL,
   type MapCamouflage,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
+import { mapName } from "@/components/game-name";
 
 /** `link` is off: the row itself is the click target and picks the result. The
  * crests keep their own links, which the row can hold now that it is an option
@@ -53,6 +54,7 @@ export function ClanRow({
   clan: ClanSearchResult;
   region: Region;
 }) {
+  const { t } = useTranslation("components/search/rows");
   return (
     <>
       {/* `link` off: the dialog already wraps the row in one, and a rank crest
@@ -68,7 +70,7 @@ export function ClanRow({
         nameClassName="text-sm"
       />
       <span className="shrink-0 text-xs text-fd-muted-foreground">
-        {clan.members_count} members
+        {t("n-members", { count: clan.members_count })}
       </span>
     </>
   );
@@ -111,6 +113,9 @@ export function TankRow({
 }
 
 export function MapRow({ map }: { map: MapSearchResult }) {
+  const { t: tCamo } = useTranslation("components/maps/list/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
   const camo = CAMO_META[map.camouflage as MapCamouflage];
   const CamoIcon = camo.icon;
   return (
@@ -124,9 +129,13 @@ export function MapRow({ map }: { map: MapSearchResult }) {
             sizes="24px"
           />
         </span>
-        <span className="truncate font-medium">{map.name}</span>
+        <span className="truncate font-medium">
+          {mapName(map.arena_id, map.name, tMaps)}
+        </span>
       </span>
-      <span className={cn("shrink-0", camo.className)} title={`${camo.label} map`}>
+      <span className={cn("shrink-0", camo.className)} title={tCamo("camouflage-map", {
+          camouflage: tGame(`map-camouflage.${map.camouflage}`),
+        })}>
         <CamoIcon weight="fill" className="size-3.5" />
       </span>
     </>
@@ -134,6 +143,7 @@ export function MapRow({ map }: { map: MapSearchResult }) {
 }
 
 export function GlossaryRow({ term }: { term: GlossarySummary }) {
+  const { t: tLabel } = useTranslation("components/labels");
   const acronym = glossaryAcronym(term);
   return (
     <>
@@ -157,7 +167,7 @@ export function GlossaryRow({ term }: { term: GlossarySummary }) {
         </span>
       </span>
       <span className="shrink-0 text-xs text-fd-muted-foreground">
-        {GLOSSARY_CATEGORY_LABEL[term.category]}
+        {tLabel(`glossary-categories.${term.category}`)}
       </span>
     </>
   );

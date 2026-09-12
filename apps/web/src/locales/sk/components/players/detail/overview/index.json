@@ -1,0 +1,7 @@
+{
+  "stats-title": "Štatistiky hráča {nickname} v náhodných bitkách",
+  "progression-title": "Vývoj hodnoty {metric} hráča {nickname}",
+  "lift-drag-title": "Tanky, ktoré formujú hodnotenie hráča {nickname}",
+  "progression-blurb": "Plná čiara znázorňuje celkovú hodnotu {metric} (zodpovedá stĺpcu Celkom vyššie), ktorá sa s pribúdajúcimi novými bitkami pomaly mení. Prerušovaná čiara znázorňuje hodnotu {metric} za jednotlivé herné relácie, vypočítanú z bitiek odohraných od predchádzajúcej snímky. Ukazuje série dobrých a zlých výsledkov. Farba čiary zodpovedá úrovni hodnotenia.",
+  "progression-empty": "Zatiaľ nie je k dispozícii dostatok historických údajov. Na vykreslenie krivky potrebujeme aspoň jednu snímku. Vráťte sa sem čoskoro."
+}

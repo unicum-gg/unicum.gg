@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "La répartition s’affiche à partir de {min}, la forme renseigne donc sur le char plutôt que sur une seule personne.",
+  "community-rating-by-axis": "Évaluation de la communauté par axe",
+  "from-votes": "D’après {count} votes détaillés.",
+  "from-votes-one": "D’après {count} vote détaillé.",
+  "nobody-yet": "Personne n’a encore renseigné les axes détaillés.",
+  "only-votes": "Seulement {count} votes détaillés pour le moment.",
+  "only-votes-one": "Seulement {count} vote détaillé pour le moment."
+}

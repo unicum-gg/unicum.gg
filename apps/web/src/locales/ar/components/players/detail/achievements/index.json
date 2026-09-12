@@ -1,0 +1,12 @@
+{
+  "achievements": "إنجازات {nickname}",
+  "filter-all": "الكل",
+  "filter-both": "كلاهما",
+  "filter-earned": "مكتسب",
+  "filter-missing": "مفقود",
+  "filter-obtainable": "قابل للكسب",
+  "filter-retired": "متقاعد",
+  "no-achievement-matches-these-filters": "لا يطابق أي إنجاز عوامل التصفية هذه.",
+  "search-achievements": "بحث عن الإنجازات",
+  "search-among-n-achievements": "البحث ضمن {count} إنجاز"
+}

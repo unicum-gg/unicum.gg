@@ -1,0 +1,6 @@
+{
+  "day": "Son 24 saatte {metric} değerine göre sıralanır (en az 20 savaş).",
+  "week": "Son 7 günde {metric} değerine göre sıralanır (en az 140 savaş).",
+  "month": "Son 30 günde {metric} değerine göre sıralanır (en az 600 savaş).",
+  "overall": "Tüm zamanlardaki {metric} değerine göre sıralanır (en az 20.000 savaş)."
+}

@@ -1,3 +1,8 @@
+import { useLocale } from "@onruntime/translations/react";
+import { dateLocale } from "@/lib/date-locale";
+import { clanRoleName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
+import type { TranslateFunction } from "@onruntime/translations";
 import {
   ArrowFatDownIcon,
   ArrowFatUpIcon,
@@ -13,11 +18,6 @@ import {
   type ClanRecentEvent,
 } from "@unicum.gg/wargaming";
 import type { Region } from "@unicum.gg/wargaming";
-
-function prettyRole(role: string): string {
-  if (!role) return "—";
-  return role.charAt(0).toUpperCase() + role.slice(1).replace(/_/g, " ");
-}
 
 function EventIcon({ event }: { event: ClanRecentEvent }) {
   switch (event.type) {
@@ -70,18 +70,24 @@ function EventIcon({ event }: { event: ClanRecentEvent }) {
   }
 }
 
-function changeText(e: ClanRecentEvent): React.ReactNode {
+// Takes the translator rather than reading one: it is a plain function, not a
+// component, so a hook cannot live here.
+function changeText(
+  e: ClanRecentEvent,
+  t: TranslateFunction,
+  tRoles: TranslateFunction,
+): React.ReactNode {
   switch (e.type) {
     case ClanEventType.JoinClan:
-      return <span className="text-foreground">Joined</span>;
+      return <span className="text-foreground">{t("joined")}</span>;
     case ClanEventType.LeaveClan:
-      return <span className="text-muted-foreground">Left</span>;
+      return <span className="text-muted-foreground">{t("left")}</span>;
     case ClanEventType.ChangeRole:
       return (
         <span>
-          <span className="text-muted-foreground">{prettyRole(e.oldRole ?? "")}</span>
+          <span className="text-muted-foreground">{clanRoleName(e.oldRole ?? "", tRoles)}</span>
           {" → "}
-          <span className="text-foreground">{prettyRole(e.newRole ?? "")}</span>
+          <span className="text-foreground">{clanRoleName(e.newRole ?? "", tRoles)}</span>
         </span>
       );
   }
@@ -90,6 +96,9 @@ function changeText(e: ClanRecentEvent): React.ReactNode {
 export function ClanRecentActivity(
   props: { loading: true } | { region: Region; events: ClanRecentEvent[] },
 ) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/clans/detail/overview/recent-activity");
+  const { t: tRoles } = useTranslation("game/clan-roles");
   if ("loading" in props) {
     return (
       <ul className="divide-y divide-fd-border">
@@ -127,9 +136,9 @@ export function ClanRecentActivity(
             link={Boolean(e.accountName)}
             player={{ nickname: e.accountName || `#${e.accountId}` }}
           />
-          <span>{changeText(e)}</span>
+          <span>{changeText(e, t, tRoles)}</span>
           <span className="ms-auto text-xs text-muted-foreground tabular-nums">
-            {format(e.createdAt, "MMM d, yyyy 'at' h:mm a")}
+            {format(e.createdAt, "d MMM yyyy 'at' HH:mm", { locale: dateLocale(locale) })}
           </span>
         </li>
       ))}

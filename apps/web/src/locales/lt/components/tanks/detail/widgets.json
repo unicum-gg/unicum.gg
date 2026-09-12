@@ -1,0 +1,12 @@
+{
+  "slot": "Lizdas {n}",
+  "slot-filled": "Vieta {n}: {name}",
+  "consumable-slot": "Eksploatacinės medžiagos vieta {n}",
+  "consumable-slot-filled": "Eksploatacinės medžiagos vieta {n}: {name}",
+  "level": "Lygis {n}",
+  "stock": "Kurti",
+  "specialize": "Spustelėkite, kad specializuotumėte šią vietą.",
+  "clear-specialization": "Spustelėkite, kad pašalintumėte šios vietos specializaciją.",
+  "crew-skills": "Įgulos įgūdžiai",
+  "shell-aria": "{name}: {damage} žala, {penetration} mm pramušimas"
+}

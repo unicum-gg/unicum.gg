@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "ランダム",
+    "battle_royale": "STEEL HUNTER",
+    "frontline": "フロントライン",
+    "onslaught": "オンスロート",
+    "onslaught_night": "{onslaught} 夜間",
+    "grand_battle": "グランドバトル",
+    "clan_wars": "クラン戦",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "アーケード",
+    "story_mode": "ストーリーモード",
+    "training": "訓練"
+  },
+  "player-modes": {
+    "overall": "ランダムバトル",
+    "skirmish": "前衛戦",
+    "advances": "進撃戦",
+    "grand": "大規模戦",
+    "ranked": "ランク戦",
+    "cw-x": "Clan Wars X",
+    "cw-viii": "Clan Wars VIII",
+    "cw-vi": "Clan Wars VI",
+    "steel-hunter": "STEEL HUNTER",
+    "onslaught": "オンスロート"
+  },
+  "stronghold-tiers": {
+    "advances": "進撃戦",
+    "t10": "前衛戦 T10",
+    "t8": "前衛戦 T8",
+    "t6": "前衛戦 T6"
+  },
+  "stronghold-periods": {
+    "24h": "過去24時間",
+    "7d": "過去7日",
+    "30d": "過去30日",
+    "overall": "総合"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "戦闘数",
+    "winrate": "勝率"
+  },
+  "clan-boards": {
+    "advances": "進撃戦",
+    "t10": "前衛戦 X",
+    "t8": "前衛戦 VIII",
+    "t6": "前衛戦 VI"
+  },
+  "map-modes": {
+    "standard": "標準",
+    "encounter": "遭遇戦",
+    "assault": "攻撃的",
+    "attack-defense": "攻撃/防衛戦"
+  },
+  "map-camouflage": {
+    "summer": "夏季",
+    "winter": "冬季",
+    "desert": "砂漠"
+  },
+  "map-poi": {
+    "1": "自走砲本部",
+    "2": "通信センター",
+    "3": "観測所"
+  },
+  "tournament-modes": {
+    "ctf": "標準",
+    "domination": "遭遇戦",
+    "assault2": "攻撃/防衛",
+    "comp7": "オンスロート"
+  },
+  "battle-formats": {
+    "random": "ランダム",
+    "clan_wars": "クラン戦",
+    "advances": "進撃戦",
+    "skirmish": "前衛戦",
+    "maneuvers": "Maneuvers",
+    "onslaught": "オンスロート",
+    "tournament": "トーナメント"
+  },
+  "battle-results": {
+    "victory": "勝利",
+    "defeat": "敗北",
+    "draw": "引き分け"
+  },
+  "spawn-directions": {
+    "north": "北",
+    "south": "南",
+    "east": "東",
+    "west": "西"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "開催予定",
+    "registration_started": "受付中",
+    "registration_finished": "登録終了",
+    "running": "進行中",
+    "finished": "終了間近",
+    "complete": "達成済み"
+  },
+  "onslaught-tiers": {
+    "legend": "レジェンド",
+    "champion": "チャンプ",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "重戦車",
+    "mediumTank": "ミディアム",
+    "lightTank": "ライト",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "攻撃的",
+    "break": "突破型",
+    "support": "支援型",
+    "universal": "万能型",
+    "sniper": "狙撃型",
+    "wheeled": "装輪型"
+  },
+  "mastery-badges": {
+    "class3": "3級",
+    "class2": "2級",
+    "class1": "1級",
+    "ace": "エースタンカー"
+  },
+  "clan-modes": {
+    "random": "ランダムバトル",
+    "stronghold": "拠点",
+    "skirmish": "前衛戦",
+    "clan-wars": "クラン戦"
+  },
+  "features": {
+    "stronghold": "拠点",
+    "skirmish": "前衛戦",
+    "marks-of-excellence": "優等マーク",
+    "marks-of-mastery": "マスターマーク",
+    "personal-rating": "パーソナルレーティング",
+    "world-of-tanks-rating": "World of Tanks レーティング",
+    "common-test": "共通テスト",
+    "tournaments": "トーナメント"
+  },
+  "marks": {
+    "1": "1マーク",
+    "2": "2マーク",
+    "3": "3マーク",
+    "name": "優等マーク"
+  }
+}

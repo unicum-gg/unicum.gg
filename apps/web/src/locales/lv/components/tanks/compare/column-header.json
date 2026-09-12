@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Munīcija, aprīkojums, patēriņa priekšmeti, direktīvas, apkalpe un šīs kolonnas progresija. Katra izmaiņa maina tās raksturlielumus zemāk redzamajā salīdzinājumā.",
+  "ammunition-equipment-crew-and-progression": "Munīcija, aprīkojums, apkalpe un progresija",
+  "apply-to-every-column": "Piemērot katrai kolonnai",
+  "compare-against": "Salīdzināt pret {tank}",
+  "compare-the-others-against-this-one": "Salīdzināt pārējos pret šo",
+  "configure-tank": "Konfigurēt {tank}",
+  "highest-overall-score": "Augstākais kopējais rezultāts",
+  "highest-overall-score-of-this": "Šī salīdzinājuma augstākais kopējais rezultāts",
+  "is-the-reference": "Atsauce: {tank}",
+  "overall": "Kopējā",
+  "reference-column": "Atsauces kolonna",
+  "remove-tank": "Noņemt {tank}",
+  "reset-all": "Atiestatīt visu",
+  "setup": "Uzstādījums",
+  "stock": "Standarta",
+  "tank-setup": "{tank} konfigurācija",
+  "top": "Labākie",
+  "where-this-vehicle-sits-across": "Šī transportlīdzekļa vieta visā katalogā no {MAXSCORE}: tā četru kategoriju rezultātu vidējais, konfigurēts šeit. Tas ir kopsavilkums, nevis spriedums, skauts un smagais tanks var sasniegt vienādu skaitli, būdami labi dažādās jomās."
+}

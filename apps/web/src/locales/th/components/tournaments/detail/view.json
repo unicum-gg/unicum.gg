@@ -1,0 +1,11 @@
+{
+  "closes": "ปิด {when}",
+  "map-pool": "แผนที่ในกลุ่ม",
+  "place": "ที่ตั้ง",
+  "prize": "รางวัล",
+  "prizes": "รางวัล",
+  "qualified": "ผ่านเข้ารอบ ({count})",
+  "register": "ลงทะเบียน",
+  "tournaments": "ทัวร์นาเมนต์",
+  "winner": "{count, plural, other {ผู้ชนะ}}"
+}

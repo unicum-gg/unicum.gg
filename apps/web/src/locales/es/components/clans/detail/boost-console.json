@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Agregar flujo de trabajo",
+  "boost": "Impulsar",
+  "each-workflow-activates-its-reserves": "Cada flujo de trabajo activa sus reservas durante una franja horaria en cuanto haya suficientes miembros en una sesión de juego activa. Se ejecuta en tu cuenta, sin que tengas que estar conectado. Añade tantos como necesites.",
+  "n-online": "/ {count} en línea",
+  "officer": "Oficial",
+  "online": "En línea",
+  "recent-activations": "activaciones recientes",
+  "reserve": "Reserva",
+  "stronghold-boosts": "refuerzos de fortaleza",
+  "when": "Cuando",
+  "workflow": "Flujo de trabajo"
+}

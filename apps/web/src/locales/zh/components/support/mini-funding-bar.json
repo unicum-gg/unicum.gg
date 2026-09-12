@@ -1,0 +1,6 @@
+{
+  "label": "社区资助",
+  "funded": "已筹得 {pct}%",
+  "tooltip": "上线以来支持者已承担{received}，目标为{goal}",
+  "tooltip-loading": "社区资助，无广告"
+}

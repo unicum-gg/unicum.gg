@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Logga in med Wargaming.net-ID",
+  "open-source": "{name} har öppen källkod. {link} innan du litar på tjänsten.",
+  "pick-the-region-your-world": "Välj den region som ditt World of Tanks-konto tillhör. Det behöver inte vara den region du besöker just nu.",
+  "read-the-login-code": "Läs inloggningskoden",
+  "what-wargaming-hands-back-is": "Wargaming skickar tillbaka en token som kan läsa uppgifter från ditt eget konto. Den lagras krypterat och förnyas så länge ditt konto är länkat. Den agerar bara åt dig i funktioner som du själv har konfigurerat, till exempel din klans reservschema.",
+  "you-sign-in-on-wargaming": "Du loggar in på Wargamings egen sida, inte här. Du skriver aldrig in ditt lösenord på {NAME}, och det skickas aldrig till oss."
+}

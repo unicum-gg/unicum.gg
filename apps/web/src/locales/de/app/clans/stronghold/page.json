@@ -1,0 +1,4 @@
+{
+  "title": "Top-Clans der Stufe {tier} ({region})",
+  "description": "Clan-Rangliste für {region} auf Stufe {tier}. Gewertet nach SR (Scharmützelwertung), ELO, Gefechten und Siegrate. Mindestens {battles} Gefechte."
+}

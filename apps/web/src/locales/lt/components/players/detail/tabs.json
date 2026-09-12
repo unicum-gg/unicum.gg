@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Apžvalga",
+    "tanks": "Tankai",
+    "sessions": "Sesijos",
+    "achievements": "Pasiekimai",
+    "tournaments": "Turnyrai",
+    "value": "Vertė"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

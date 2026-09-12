@@ -1,0 +1,9 @@
+{
+  "battle-starts-at": "Striden börjar vid",
+  "https-www-youtube-com-watch": "https://www.youtube.com/watch?v=…&t=1h05m30s",
+  "optional": "(valfritt)",
+  "that-is-not-a-youtube": "Det är inte en länk till en YouTube-video.",
+  "use-a-time-like-1": "Använd en tid som 1:05:30 eller lämna fältet tomt.",
+  "your-link-has-no-timestamp": "Din länk har ingen tidsstämpel. Spola i förhandsvisningen ovan tills striden börjar eller lämna tidsstämpeln tom om videon börjar med striden.",
+  "youtube-link": "YouTube-länk"
+}

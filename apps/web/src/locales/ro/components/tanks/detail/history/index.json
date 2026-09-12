@@ -1,0 +1,12 @@
+{
+  "before-update": "Înainte de actualizarea {version}",
+  "common-test": "Test Comun",
+  "in-common-test-not-released": "În Testul Comun, încă nelansat",
+  "introduced": "Introducere",
+  "lifecycle": "Ciclul de viață",
+  "n-buffed": "{count} îmbunătățite",
+  "n-nerfed": "{count} slăbite",
+  "not-released-wargaming-can-still": "Nerăspândit. Wargaming poate încă modifica sau elimina oricare dintre acestea înainte de lansarea actualizării.",
+  "status": "Stare",
+  "update": "Actualizează {version}"
+}

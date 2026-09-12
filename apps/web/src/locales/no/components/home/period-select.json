@@ -1,0 +1,7 @@
+{
+  "label": "Resultatliste periode",
+  "periods": {
+    "overall": "Totalt",
+    "30d": "Siste 30 dager"
+  }
+}

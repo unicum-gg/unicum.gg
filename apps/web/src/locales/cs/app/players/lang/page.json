@@ -1,0 +1,6 @@
+{
+  "title": "Nejlepší hráči World of Tanks podle jazyka: {language} ({region})",
+  "description": "Žebříček hráčů podle jazyka: {name}, region: {region}. Hráči jsou řazeni podle WNX, pokud jejich sada jazyků odhadnutá na základě historie klanů obsahuje {language}.",
+  "og-title": "Nejlepší hráči podle jazyka: {language}",
+  "og-subtitle": "Žebříček regionu {region}"
+}

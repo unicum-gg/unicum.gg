@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# Panzer} other {# Panzer}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Es wurden noch keine Panzeränderungen erfasst. Wenn Wargaming die Panzer neu ausbalanciert, werden hier die Verbesserungen und Abschwächungen jedes Updates angezeigt.",
+  "update": "Aktualisieren {version}"
+}

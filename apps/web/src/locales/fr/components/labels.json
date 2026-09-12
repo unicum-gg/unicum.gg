@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "En attente de la première capture",
+    "hidden": "Masqué par Wargaming",
+    "active_24h": "Actif < 24 h",
+    "active_7d": "Actif < 7 j",
+    "recent_30d": "Récent < 30 j",
+    "recent_90d": "Récent < 90 j",
+    "dormant_1y": "En sommeil < 1 an",
+    "inactive": "Inactif > 1 an"
+  },
+  "rating-hype": {
+    "overrated": "Surévalué",
+    "fair": "Évalué équitablement",
+    "underrated": "Sous-évalué"
+  },
+  "rating-consensus": {
+    "agreed": "Large accord",
+    "mixed": "Opinions partagées",
+    "divisive": "Divisant"
+  },
+  "rating-axes": {
+    "overall": "Global",
+    "fun": "Amusement",
+    "firepower": "Puissance de feu",
+    "armour": "Armure",
+    "mobility": "Mobilité",
+    "gunHandling": "Manipulation des armes",
+    "concealment": "Dissimulation",
+    "beginnerFriendliness": "Convient aux débutants",
+    "versatility": "Polyvalence"
+  },
+  "rating-axis-hints": {
+    "overall": "Que vaut ce char dans l’ensemble ?",
+    "fun": "À quel point est-il agréable à jouer ?",
+    "firepower": "Dégâts alpha, dégâts par minute et pénétration.",
+    "armour": "Sa capacité à faire ricocher les obus, en position caisse masquée comme à découvert.",
+    "mobility": "Vitesse, accélération et maniabilité.",
+    "gunHandling": "Temps de visée, dispersion et précision en mouvement.",
+    "concealment": "Camouflage et portée de vue.",
+    "beginnerFriendliness": "Sa capacité à pardonner les erreurs quand vous êtes encore en phase d’apprentissage.",
+    "versatility": "Est-il efficace sur n’importe quelle carte et dans n’importe quelle équipe ?"
+  },
+  "voter-brackets": {
+    "unknown": "Non classé",
+    "learning": "En apprentissage",
+    "average": "Moyenne",
+    "strong": "Fort",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Véhicules",
+    "gunnery": "Tir",
+    "armor": "Blindage",
+    "mobility": "Mobilité",
+    "vision": "Vision",
+    "crew": "Équipage",
+    "progression": "Progression",
+    "economy": "Économie",
+    "ratings": "Classements",
+    "statistics": "Statistiques",
+    "modes": "Modes de bataille",
+    "tactics": "Tactiques",
+    "slang": "Argot"
+  }
+}

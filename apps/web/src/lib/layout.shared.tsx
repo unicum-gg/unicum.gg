@@ -6,6 +6,7 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { NavLogo } from "@/components/nav-logo";
 import { NavMore } from "@/components/nav-more";
 import { NavSectionMenu } from "@/components/nav-section-menu";
+import { LocaleSelector } from "@/components/locale-selector";
 import { RatingSelector } from "@/components/rating-selector";
 import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
@@ -66,6 +67,11 @@ export async function baseOptions({
               type: "custom",
               secondary: true,
               children: <RegionSelector />,
+            },
+            {
+              type: "custom",
+              secondary: true,
+              children: <LocaleSelector />,
             },
           ] satisfies BaseLayoutProps["links"])
         : []),

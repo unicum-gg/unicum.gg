@@ -1,0 +1,12 @@
+{
+  "aria-build": "Přečíst v klientu Společného testu, sestavení {version}",
+  "aria-changes": "Změněno Společným testem: {changes} vlastností",
+  "aria-described": "Společný test: {description}",
+  "aria-vehicle": "Vozidlo Společného testu",
+  "common-test": "Společný test",
+  "common-test-build": "Společný test {version}",
+  "tip-build": "{label} · toto jsou hodnoty testovacího sestavení a Wargaming je může před vydáním aktualizace stále změnit",
+  "tip-changes": "Společný test, změny na tomto vozidle: {changes, plural, one {# vlastnost} few {# vlastnosti} many {# vlastností} other {# vlastností}}",
+  "tip-described": "Společný test · {description}",
+  "tip-vehicle": "Společný test · zatím nevydáno, takže nemá statistiky bitev a jeho vlastnosti se stále mohou změnit"
+}

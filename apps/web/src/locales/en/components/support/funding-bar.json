@@ -1,0 +1,18 @@
+{
+  "caught-up": "Fully caught up, thank you. Everything extra goes into more throughput and new features.",
+  "covered-label": "Covered",
+  "covered-sentence": "Supporters have covered {received} of the {spent} spent so far.",
+  "days-out-of-pocket": "{days} days, out of pocket",
+  "from-supporter-one": "from {count} supporter",
+  "from-supporters": "from {count} supporters",
+  "gap-growing": "{amount}/mo more stops the gap from growing.",
+  "goal": "goal {amount}",
+  "of-that-total": "of that total",
+  "pledges-cover": "Pledges now cover the monthly bill.",
+  "raised-amount": "{amount} raised",
+  "raised-label": "Raised",
+  "run-at-a-loss": "{name} has run at a loss since {since}.",
+  "run-rate": "Monthly run-rate: {pledged}/mo pledged vs {cost}/mo to run.",
+  "spent-since-launch": "Spent since launch",
+  "to-catch-up": "{amount} to fully catch up."
+}

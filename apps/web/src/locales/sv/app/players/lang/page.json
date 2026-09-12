@@ -1,0 +1,6 @@
+{
+  "title": "Topp spelare i World of Tanks med {language} som språk ({region})",
+  "description": "Topplista för {name}-spelare i {region} vars språkprofil, baserad på klanhistoriken, bedöms inkludera {language}, rankade efter WNX.",
+  "og-title": "Topp spelare med {language} som språk",
+  "og-subtitle": "Topplista för {region}"
+}

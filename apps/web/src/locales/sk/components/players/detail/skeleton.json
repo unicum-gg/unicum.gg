@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Štatistiky náhodných bitiek hráča {nickname}",
+  "progression": "Vývoj ukazovateľa {metricLabel} hráča {nickname}",
+  "solid-line-is-overall-matches": "Plná čiara znázorňuje celkovú hodnotu {metricLabel} (zodpovedá stĺpcu Celkom vyššie), ktorá sa s pribúdajúcimi bitkami pomaly mení. Prerušovaná čiara znázorňuje hodnotu {metricLabel2} za jednotlivé relácie. Vypočítava sa z bitiek odohraných od predchádzajúcej snímky a ukazuje série dobrých a slabých výsledkov. Farba čiary zodpovedá kategórii hodnotenia.",
+  "tanks-shaping-s-rating": "Tanky ovplyvňujúce hodnotenie hráča {nickname}",
+  "tanks": "Tanky {nickname}",
+  "stats": "Štatistiky hráča {nickname} v režime {strongholdLabel}"
+}

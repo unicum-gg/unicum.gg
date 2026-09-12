@@ -1,0 +1,17 @@
+{
+  "close": "Luk",
+  "format": "Format",
+  "here": "her",
+  "in-the-queue": "Den er i køen og vises {where}, når en moderator har set på den. Din er nedtonet på den side imens.",
+  "log-in-to-suggest-a": "Log ind for at foreslå en taktik",
+  "on-map": "på {map}",
+  "players-per-team": "Spillere pr. hold",
+  "sending": "Sender…",
+  "suggest": "Foreslå",
+  "suggest-a-tactic": "Foreslå en taktik",
+  "suggest-another": "Forslå en anden",
+  "suggestion-sent": "Forslag sendt",
+  "tier": "Niveau",
+  "what-to-submit": "En konkurrencekamp, der åbner i det sekund, den starter. Kampen starter på {map} og bevæger sig med videoen: en klanaften gennemløber en rotation. Den side, der blev spillet fra, er det, en skudkalder slår den op efter, så den bliver spurgt om i stedet for gættet.",
+  "what-was-played": "Hvad der blev spillet"
+}

@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visuel",
+    "collision": "Collision",
+    "live": "En direct"
+  },
+  "centre": {
+    "on": "Centrer le véhicule",
+    "off": "Remettre le véhicule en position décentrée"
+  },
+  "hull-down": {
+    "on": "Caisse basse",
+    "off": "Remettre le véhicule à l’horizontale"
+  },
+  "tracks": {
+    "on": "Mettre les chenilles en mouvement",
+    "off": "Arrêter les chenilles"
+  },
+  "textures": {
+    "on": "Textures haute définition",
+    "off": "Textures standard"
+  },
+  "reset": "Réinitialiser la vue",
+  "style": "Choisir un style",
+  "style-worn": "Style : {name}",
+  "search-styles": "Rechercher des styles",
+  "colours": "Signification des couleurs",
+  "cinematic": {
+    "off": "Caméra cinématique : désactivée",
+    "auto": "Caméra cinématique : en cas d’inactivité",
+    "on": "Caméra cinématique : toujours active"
+  },
+  "open-tank": "Ouvrir un autre char",
+  "open-tank-placeholder": "Ouvrir le char...",
+  "more-actions": "Plus d’actions",
+  "marks-meaning": {
+    "0": "Aucune marque d’excellence",
+    "1": "Une marque : devant 65 % des joueurs avec ce char",
+    "2": "Deux marques : devant 85 % des joueurs",
+    "3": "Trois marques : devant 95 % des joueurs"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Afficher dans toute la fenêtre",
+      "leave": "Revenir dans la page"
+    },
+    "screen": {
+      "enter": "Passer en plein écran",
+      "leave": "Quitter le plein écran"
+    }
+  },
+  "marks-count": {
+    "0": "Aucune marque d’excellence",
+    "one": "1 marque d’excellence",
+    "other": "{count} marques d’excellence"
+  },
+  "compare-tank": "Comparer avec un autre char",
+  "compare-tank-placeholder": "Comparer avec...",
+  "view-tooltips": {
+    "visual": "Le char tel que le jeu l’affiche",
+    "collision": "L’épaisseur de chaque plaque",
+    "live": "Ce que ferait l’obus sélectionné"
+  },
+  "cinematic-tooltips": {
+    "off": "Caméra cinématique : désactivée, la vue reste fixe",
+    "auto": "Caméra cinématique : s’active après 30 secondes d’inactivité",
+    "on": "Caméra cinématique : toujours, dès que vous relâchez la commande"
+  }
+}

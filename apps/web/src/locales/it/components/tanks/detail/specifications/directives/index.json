@@ -1,0 +1,9 @@
+{
+  "boosts": "Potenziali {name}",
+  "directives": "Direttive",
+  "directive-name": "Direttiva {name}",
+  "grants-and-boosts": "Conferisce e potenzia l’abilità dell’equipaggio, anche se non addestrata.",
+  "grants-only": "Conferisce l’abilità dell’equipaggio per la battaglia (nessuna caratteristica indicata).",
+  "enhances-mounted": "Potenzia l’equipaggiamento {name} montato.",
+  "mount-to-use": "Monta {name} per usare questa direttiva."
+}

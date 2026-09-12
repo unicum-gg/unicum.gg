@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Ingen kampvognsdata for denne klan endnu.",
+  "no-tanks-match-these-filters": "Ingen kampvogne matcher disse filtre.",
+  "nation": "Nation",
+  "type": "Type",
+  "tier": "Niveau",
+  "name": "Navn",
+  "members": "Medlemmer",
+  "battles": "Kampe",
+  "avg-damage": "Gns. skade",
+  "avg-xp": "Gns. XP",
+  "wr": "WR"
+}

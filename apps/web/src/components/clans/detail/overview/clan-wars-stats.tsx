@@ -1,5 +1,8 @@
 "use client";
 
+import type { NumberFormatter } from "@/lib/format";
+
+import { useFormat } from "@/hooks/use-format";
 import { Fragment } from "react";
 import {
   Table,
@@ -15,26 +18,27 @@ import { useStatsPeriod } from "@/hooks/use-period";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, RatingColor, StrongholdPeriod, type ClanGlobalMapStats, type ClanGlobalMapView } from "@unicum.gg/shared";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const signedIntFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const SIGNED_INT_FORMAT = {
   maximumFractionDigits: 0,
   signDisplay: "exceptZero",
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 type Cell = { primary: string; className?: string };
 const DASH: Cell = { primary: "—", className: "text-muted-foreground" };
 
-function eloCell(val: number | null, delta?: number | null): Cell {
+function eloCell(num: NumberFormatter, val: number | null, delta?: number | null): Cell {
   if (val === null) return DASH;
   if (delta !== undefined) {
     return {
-      primary: delta !== null ? signedIntFmt.format(delta) : "—",
+      primary: delta !== null ? num(SIGNED_INT_FORMAT).format(delta) : "—",
       className:
         delta === null
           ? "text-muted-foreground"
@@ -45,20 +49,20 @@ function eloCell(val: number | null, delta?: number | null): Cell {
               : "text-muted-foreground",
     };
   }
-  return { primary: intFmt.format(val) };
+  return { primary: num(INT_FORMAT).format(val) };
 }
 
-function battlesCell(val: number | null, delta?: number | null): Cell {
+function battlesCell(num: NumberFormatter, val: number | null, delta?: number | null): Cell {
   if (val === null) return DASH;
-  if (delta !== undefined) return { primary: delta !== null ? intFmt.format(delta) : "—" };
-  return { primary: intFmt.format(val) };
+  if (delta !== undefined) return { primary: delta !== null ? num(INT_FORMAT).format(delta) : "—" };
+  return { primary: num(INT_FORMAT).format(val) };
 }
 
-function provincesCell(val: number | null, delta?: number | null): Cell {
+function provincesCell(num: NumberFormatter, val: number | null, delta?: number | null): Cell {
   if (val === null) return DASH;
   if (delta !== undefined) {
     return {
-      primary: delta !== null ? signedIntFmt.format(delta) : "—",
+      primary: delta !== null ? num(SIGNED_INT_FORMAT).format(delta) : "—",
       className:
         delta === null
           ? "text-muted-foreground"
@@ -69,7 +73,7 @@ function provincesCell(val: number | null, delta?: number | null): Cell {
               : "text-muted-foreground",
     };
   }
-  return { primary: intFmt.format(val) };
+  return { primary: num(INT_FORMAT).format(val) };
 }
 
 function gwWrColor(ratio: number): RatingColor {
@@ -81,94 +85,99 @@ function gwWrColor(ratio: number): RatingColor {
   return RatingColor.Bad;
 }
 
-function wrCell(wins: number | null, battles: number | null): Cell {
+function wrCell(num: NumberFormatter, wins: number | null, battles: number | null): Cell {
   if (wins === null || battles === null || battles === 0)
     return { primary: "—", className: "text-muted-foreground" };
   const ratio = wins / battles;
   return {
-    primary: pctFmt.format(ratio),
+    primary: num(PCT_FORMAT).format(ratio),
     className: RATING_COLOR_CLASS[gwWrColor(ratio)],
   };
 }
 
 type RowDef = {
-  label: string;
-  current: (s: ClanGlobalMapStats) => Cell;
-  delta: (s: ClanGlobalMapStats) => Cell;
+  /** Key of the row's name in the same namespace. */
+  id: string;
+  /** `num` is passed in rather than read from a hook: a row definition is data
+   * and lives at module scope, so the reader's number formatting has to arrive
+   * from the component that renders it. */
+  current: (s: ClanGlobalMapStats, num: NumberFormatter) => Cell;
+  delta: (s: ClanGlobalMapStats, num: NumberFormatter) => Cell;
 };
 
 // One section per Global Map front, mirroring the stronghold table: each tier
 // keeps its ELO/battles/win rate together under a header, plus a "Territory"
 // section for the global province count. No links (there's no Clan Wars
 // leaderboard yet — that comes later).
-const SECTIONS: { title: string; rows: RowDef[] }[] = [
+// Ids: the wording is in `components/clans/detail/overview/clan-wars-stats`.
+const SECTIONS: { id: string; rows: RowDef[] }[] = [
   {
-    title: "Territory",
+    id: "territory",
     rows: [
       {
-        label: "Provinces",
-        current: (s) => provincesCell(s.gmProvinces),
-        delta: (s) => provincesCell(s.gmProvinces, s.gmProvinces),
+        id: "provinces",
+        current: (s, num) => provincesCell(num, s.gmProvinces),
+        delta: (s, num) => provincesCell(num, s.gmProvinces, s.gmProvinces),
       },
     ],
   },
   {
-    title: "Tier X",
+    id: "t10",
     rows: [
       {
-        label: "ELO",
-        current: (s) => eloCell(s.gmEloT10),
-        delta: (s) => eloCell(s.gmEloT10, s.gmEloT10),
+        id: "elo",
+        current: (s, num) => eloCell(num, s.gmEloT10),
+        delta: (s, num) => eloCell(num, s.gmEloT10, s.gmEloT10),
       },
       {
-        label: "Battles",
-        current: (s) => battlesCell(s.gmBattlesT10),
-        delta: (s) => battlesCell(s.gmBattlesT10, s.gmBattlesT10),
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.gmBattlesT10),
+        delta: (s, num) => battlesCell(num, s.gmBattlesT10, s.gmBattlesT10),
       },
       {
-        label: "Win rate",
-        current: (s) => wrCell(s.gmWinsT10, s.gmBattlesT10),
-        delta: (s) => wrCell(s.gmWinsT10, s.gmBattlesT10),
+        id: "winrate",
+        current: (s, num) => wrCell(num, s.gmWinsT10, s.gmBattlesT10),
+        delta: (s, num) => wrCell(num, s.gmWinsT10, s.gmBattlesT10),
       },
     ],
   },
   {
-    title: "Tier VIII",
+    id: "t8",
     rows: [
       {
-        label: "ELO",
-        current: (s) => eloCell(s.gmEloT8),
-        delta: (s) => eloCell(s.gmEloT8, s.gmEloT8),
+        id: "elo",
+        current: (s, num) => eloCell(num, s.gmEloT8),
+        delta: (s, num) => eloCell(num, s.gmEloT8, s.gmEloT8),
       },
       {
-        label: "Battles",
-        current: (s) => battlesCell(s.gmBattlesT8),
-        delta: (s) => battlesCell(s.gmBattlesT8, s.gmBattlesT8),
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.gmBattlesT8),
+        delta: (s, num) => battlesCell(num, s.gmBattlesT8, s.gmBattlesT8),
       },
       {
-        label: "Win rate",
-        current: (s) => wrCell(s.gmWinsT8, s.gmBattlesT8),
-        delta: (s) => wrCell(s.gmWinsT8, s.gmBattlesT8),
+        id: "winrate",
+        current: (s, num) => wrCell(num, s.gmWinsT8, s.gmBattlesT8),
+        delta: (s, num) => wrCell(num, s.gmWinsT8, s.gmBattlesT8),
       },
     ],
   },
   {
-    title: "Tier VI",
+    id: "t6",
     rows: [
       {
-        label: "ELO",
-        current: (s) => eloCell(s.gmEloT6),
-        delta: (s) => eloCell(s.gmEloT6, s.gmEloT6),
+        id: "elo",
+        current: (s, num) => eloCell(num, s.gmEloT6),
+        delta: (s, num) => eloCell(num, s.gmEloT6, s.gmEloT6),
       },
       {
-        label: "Battles",
-        current: (s) => battlesCell(s.gmBattlesT6),
-        delta: (s) => battlesCell(s.gmBattlesT6, s.gmBattlesT6),
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.gmBattlesT6),
+        delta: (s, num) => battlesCell(num, s.gmBattlesT6, s.gmBattlesT6),
       },
       {
-        label: "Win rate",
-        current: (s) => wrCell(s.gmWinsT6, s.gmBattlesT6),
-        delta: (s) => wrCell(s.gmWinsT6, s.gmBattlesT6),
+        id: "winrate",
+        current: (s, num) => wrCell(num, s.gmWinsT6, s.gmBattlesT6),
+        delta: (s, num) => wrCell(num, s.gmWinsT6, s.gmBattlesT6),
       },
     ],
   },
@@ -204,6 +213,10 @@ export function ClanWarsStatsTable(
     | { loading: true }
     | { latest: ClanGlobalMapStats; periods: ClanGlobalMapView["periods"] },
 ) {
+  const { num } = useFormat();
+  const { t } = useTranslation(
+    "components/clans/detail/overview/clan-wars-stats",
+  );
   const loading = "loading" in props;
 
   // Which of the four windows a phone shows, read once and passed down.
@@ -227,28 +240,28 @@ export function ClanWarsStatsTable(
       </colgroup>
       <TableHeader>
         <TableRow>
-          <TableHead>Stat</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Overall)}>Total</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Day)}>Last 24h</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Week)}>Last 7d</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Month)}>Last 30d</TableHead>
+          <TableHead>{t("stat")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Overall)}>{t("periods.total")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Day)}>{t("periods.day")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Week)}>{t("periods.week")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Month)}>{t("periods.month")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {SECTIONS.map((section) => (
-          <Fragment key={section.title}>
+          <Fragment key={section.id}>
             <TableRow>
               <TableCell
                 colSpan={5}
                 className="bg-muted/40 py-1! text-xs font-semibold text-muted-foreground uppercase"
               >
-                {section.title}
+                {t(`sections.${section.id}`)}
               </TableCell>
             </TableRow>
             {section.rows.map((row) => (
-              <TableRow key={section.title + row.label}>
+              <TableRow key={section.id + row.id}>
                 <TableCell className="py-1.5! font-medium">
-                  <GlossaryLabel>{row.label}</GlossaryLabel>
+                  <GlossaryLabel>{t(`rows.${row.id}`)}</GlossaryLabel>
                 </TableCell>
                 {loading ? (
                   <>
@@ -260,22 +273,22 @@ export function ClanWarsStatsTable(
                 ) : (
                   <>
                     <PeriodCell
-                      cell={row.current(props.latest)}
+                      cell={row.current(props.latest, num)}
                       hideOnMobile={off(StrongholdPeriod.Overall)}
                     />
                     <PeriodCell
                       cell={
-                        props.periods.h24 ? row.delta(props.periods.h24) : DASH
+                        props.periods.h24 ? row.delta(props.periods.h24, num) : DASH
                       }
                       hideOnMobile={off(StrongholdPeriod.Day)}
                     />
                     <PeriodCell
-                      cell={props.periods.d7 ? row.delta(props.periods.d7) : DASH}
+                      cell={props.periods.d7 ? row.delta(props.periods.d7, num) : DASH}
                       hideOnMobile={off(StrongholdPeriod.Week)}
                     />
                     <PeriodCell
                       cell={
-                        props.periods.d30 ? row.delta(props.periods.d30) : DASH
+                        props.periods.d30 ? row.delta(props.periods.d30, num) : DASH
                       }
                       hideOnMobile={off(StrongholdPeriod.Month)}
                     />

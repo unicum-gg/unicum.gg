@@ -1,0 +1,37 @@
+{
+  "label": "Thêm",
+  "items": {
+    "tournaments": {
+      "label": "Tour đấu",
+      "description": "Bảng đấu, danh sách đội và kết quả theo từng khu vực"
+    },
+    "servers": {
+      "label": "Máy chủ",
+      "description": "Người chơi trực tuyến, hiện tại và theo thời gian"
+    },
+    "bot": {
+      "label": "Bot Discord",
+      "description": "Thống kê người chơi, Clan và xe tăng dưới dạng lệnh slash"
+    },
+    "mcp": {
+      "label": "Máy chủ MCP",
+      "description": "Kết nối Claude, ChatGPT hoặc bất kỳ máy khách MCP nào"
+    },
+    "api": {
+      "label": "API",
+      "description": "REST API công khai miễn phí, không yêu cầu khóa"
+    },
+    "badges": {
+      "label": "Huy hiệu",
+      "description": "Mọi huy hiệu mà người chơi hoặc Clan có thể kiếm được và cách kiếm"
+    },
+    "glossary": {
+      "label": "Thuật ngữ",
+      "description": "Mọi thuật ngữ World of Tanks được giải thích"
+    },
+    "support": {
+      "label": "Hỗ trợ chúng tôi",
+      "description": "Giữ cho {name} miễn phí, mở và không có quảng cáo"
+    }
+  }
+}

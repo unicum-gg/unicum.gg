@@ -1,0 +1,162 @@
+{
+  "columns-label": "Sütunlar",
+  "groups": {
+    "firepower": "Ateş Gücü",
+    "gun-handling": "Silah Kullanımı",
+    "mobility": "Hareket Kabiliyeti",
+    "survivability": "Dayanıklılık",
+    "other": "Diğer"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Dakika başına hasar"
+    },
+    "damage": {
+      "label": "Hasar",
+      "tip": "Alpha hasar"
+    },
+    "moduleDamage": {
+      "label": "Modül hasarı"
+    },
+    "splashRadius": {
+      "label": "Patlama yarıçapı"
+    },
+    "reload": {
+      "label": "Yükleme",
+      "tip": "Yeniden doldurma (otomatik doldurucular için tam şarjör)"
+    },
+    "rof": {
+      "label": "Atış Hızı",
+      "tip": "Dakika başına mermi"
+    },
+    "intraClipReload": {
+      "label": "Şarjör içi yükleme",
+      "tip": "Şarjördeki atışlar arasındaki süre (otomatik doldurucular)"
+    },
+    "penetration": {
+      "label": "Delme Gücü",
+      "tip": "Delme Gücü (mm), varsayılan mermi"
+    },
+    "caliber": {
+      "label": "Kalibre",
+      "tip": "Mermi kalibresi (mm)"
+    },
+    "shellVelocity": {
+      "label": "Mermi Hızı",
+      "tip": "Mermi hızı (m/s)"
+    },
+    "accuracy": {
+      "label": "Doğruluk",
+      "tip": "100 m’de saçılma (daha düşük daha iyidir)"
+    },
+    "aimTime": {
+      "label": "Nişan Alma Süresi"
+    },
+    "dispMoving": {
+      "label": "Hareket Halinde Saçılma",
+      "tip": "Hareket halindeyken saçılma katsayısı"
+    },
+    "dispTankTraverse": {
+      "label": "Tank Dönüşünde Saçılma"
+    },
+    "dispTurretTraverse": {
+      "label": "Taret Dönüşünde Saçılma"
+    },
+    "dispAfterShot": {
+      "label": "Ateş Ettikten Sonra Saçılma"
+    },
+    "dispWhileDamaged": {
+      "label": "Hasarlıyken Saçılma"
+    },
+    "gunArc": {
+      "label": "Top dönüş açısı",
+      "tip": "Yatay top dönüş açısı"
+    },
+    "depression": {
+      "label": "Top Alçalması / Yükselmesi",
+      "tip": "Top alçalması / yükselmesi"
+    },
+    "speed": {
+      "label": "Hız (İleri / Geri)",
+      "tip": "İleri / geri azami hız (km/sa)"
+    },
+    "hullTraverse": {
+      "label": "Gövde Döndürme"
+    },
+    "turretTraverse": {
+      "label": "Taret Döndürme"
+    },
+    "enginePower": {
+      "label": "Güç",
+      "tip": "Motor gücü (bg)"
+    },
+    "powerWeight": {
+      "label": "Güç/ağırlık",
+      "tip": "Ton başına bg"
+    },
+    "terrainHard": {
+      "label": "Sert zemin",
+      "tip": "Sert zeminde arazi direnci (daha düşük daha iyidir)"
+    },
+    "terrainMedium": {
+      "label": "Orta zemin"
+    },
+    "terrainSoft": {
+      "label": "Yumuşak zemin"
+    },
+    "health": {
+      "label": "Can",
+      "tip": "Can puanı"
+    },
+    "engineHealth": {
+      "label": "Motor dayanıklılığı"
+    },
+    "engineFireChance": {
+      "label": "Motorda Yangın Olasılığı"
+    },
+    "hullArmorFront": {
+      "label": "Gövde Zırhı (ön)",
+      "tip": "Ön gövde zırhı (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Taret Zırhı (ön)",
+      "tip": "Ön taret zırhı (mm)"
+    },
+    "trackArmor": {
+      "label": "Palet zırhı"
+    },
+    "trackHealth": {
+      "label": "Palet dayanıklılığı"
+    },
+    "trackRepairTime": {
+      "label": "Palet Onarım Süresi"
+    },
+    "ammoRackHealth": {
+      "label": "Cephanelik Sağlığı"
+    },
+    "weight": {
+      "label": "Ağırlık"
+    },
+    "viewRange": {
+      "label": "Görüş Mesafesi",
+      "tip": "Görüş menzili (m)"
+    },
+    "radioRange": {
+      "label": "Telsiz menzili",
+      "tip": "Sinyal menzili (m)"
+    },
+    "camoStill": {
+      "label": "Hareketsiz kamuflaj"
+    },
+    "camoMoving": {
+      "label": "Hareketli kamuflaj"
+    },
+    "camoStillFiring": {
+      "label": "Ateş Ettikten Sonra Sabit Kamuflaj"
+    },
+    "camoMovingFiring": {
+      "label": "Ateş Ettikten Sonra Hareketli Kamuflaj"
+    }
+  }
+}

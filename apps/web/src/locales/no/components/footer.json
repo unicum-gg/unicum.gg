@@ -1,0 +1,25 @@
+{
+  "tagline": "Laget for World of Tanks-fellesskapet. Gratis statistikk for alle spillere, klaner, stridsvogner og kart i EU, NA og Asia.",
+  "columns": {
+    "leaderboards": "Rangeringer",
+    "tanks": "Kjøretøy",
+    "maps": "Kart",
+    "integrations": "Integrasjoner",
+    "project": "Prosjekt"
+  },
+  "links": {
+    "top-tanks": "Topp Kjøretøy",
+    "bot": "Discord bot",
+    "mcp": "MCP-server",
+    "docs": "API-dokumentasjon",
+    "badges": "Merker",
+    "glossary": "Ordlista",
+    "coverage": "Dekning",
+    "support": "Støtt oss",
+    "source": "Kildekode",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Ikke tilknyttet Wargaming",
+  "cookies": "Administrer informasjonskapsler"
+}

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "ภาพรวม",
+    "tanks": "รถถัง",
+    "sessions": "เซสชัน",
+    "achievements": "ความสำเร็จ",
+    "tournaments": "ทัวร์นาเมนต์",
+    "value": "ค่า"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "เบต้า"
+}

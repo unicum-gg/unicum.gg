@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Geriausi <accent>klanai</accent>",
+    "language": "Geriausi <accent>{language}</accent> klanai"
+  },
+  "intro": {
+    "all": "{region} lyderių lentelė, reitinguojama pagal {metric}, apskaičiuotą kaip stebimų kiekvieno klano narių vidurkį (minimumas: 50 narių, turinčių mūšių).",
+    "language": "{region} klanai, nurodę {language} kaip vieną iš savo kalbų, reitinguojami pagal {metric}, apskaičiuotą kaip jų stebimų narių vidurkį (minimumas: 25 nariai, turintys mūšių).",
+    "strict": "{region} klanai, nurodę {language} kaip vienintelę savo kalbą, reitinguojami pagal {metric}, apskaičiuotą kaip jų stebimų narių vidurkį (minimumas: 25 nariai, turintys mūšių)."
+  },
+  "board": {
+    "all": "Geriausi {count} klanai pagal {metric}",
+    "language": "Geriausi {count} {language} klanai pagal {metric}",
+    "strict": "Geriausi {count} tik {language} klanai pagal {metric}"
+  },
+  "members": "Nariai",
+  "strict-toggle": "Griežtas",
+  "any-toggle": "Bet kuris",
+  "all-languages": "Visos kalbos",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

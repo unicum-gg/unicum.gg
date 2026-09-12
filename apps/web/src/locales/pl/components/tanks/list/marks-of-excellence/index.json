@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: Twoja krocząca średnia łącznych uszkodzeń (z ostatnich około 100 bitew) musi być wyższa niż u 65% graczy grających tym czołgiem w ciągu ostatnich 14 dni"
+    },
+    "mark2": {
+      "label": "2 Marki",
+      "tip": "2 Marki: Twoja krocząca średnia łącznych uszkodzeń (z ostatnich około 100 bitew) musi być wyższa niż u 85% graczy grających tym czołgiem w ciągu ostatnich 14 dni"
+    },
+    "mark3": {
+      "label": "3 Marki",
+      "tip": "3 Marki: Twoja krocząca średnia łącznych uszkodzeń (z ostatnich około 100 bitew) musi być wyższa niż u 95% graczy grających tym czołgiem w ciągu ostatnich 14 dni"
+    }
+  },
+  "rows-per-page": "Wierszy na stronę",
+  "previous-page": "Poprzednia strona",
+  "page": "Strona {current} / {totalPages}",
+  "next-page": "Następna strona",
+  "all": "Wszystkie"
+}

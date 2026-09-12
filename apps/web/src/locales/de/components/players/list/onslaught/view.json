@@ -1,0 +1,35 @@
+{
+  "heading": "Top-Spieler in <accent>{mode}</accent>",
+  "intro": "{mode} ist der kompetitive 7-gegen-7-Ranglistenmodus von World of Tanks auf Stufe X. Die Bestenliste für {region}, direkt aus der Rangliste des Spiels.",
+  "season": {
+    "range": "{start} bis {end}",
+    "final": "Endstand",
+    "live": "laufende Saison",
+    "updated": "aktualisiert {when}"
+  },
+  "board": "Die besten {count} spieler in {mode}",
+  "columns": {
+    "player": "Spieler",
+    "rank": "Rang",
+    "battles": "Gefechte",
+    "rating": "Wertungspunkte"
+  },
+  "alias": "(als {nickname})",
+  "ranks": {
+    "title": "Ränge",
+    "meaning": "Bedeutung",
+    "tier": "Stufe",
+    "intro": "Du steigst in den Rängen von {mode} auf, indem du Gefechte gewinnst: Für jeden Sieg erhältst du Wertungspunkte, deren Anzahl davon abhängt, wie gut du gespielt hast. {champion} ist der höchste Rang, den du allein mit Wertungspunkten erreichen kannst. Sobald du ihn erreichst, kommst du auf die Bestenliste. Für {legend} gibt es keinen festen Schwellenwert: Dieser Rang umfasst die am höchsten gewertete Gruppe der Spieler mit Rang {champion}. Daher verschiebt sich der Grenzwert je nach Teilnehmerfeld (bei Gleichstand entscheidet die Anzahl der gespielten Gefechte). Die genauen Grenzwerte für {legend} und {champion} richten sich nach der aktuellen Saison und sind auf der Bestenliste markiert.",
+    "legend-blurb": "Die am höchsten gewerteten Spieler mit Rang {champion}. Das Spiel setzt die Grenze dafür in jeder Saison bei einer festgelegten Platzierung auf der Bestenliste (daher variiert die Zahl der Spieler je nach Saison und Region), nicht bei einem festen Punkteziel. Rutschst du unter den letzten Platz für {legend}, fällst du auf {champion} zurück.",
+    "champion-blurb": "Der höchste Rang, den du mit Wertungspunkten erreichen kannst, und dein Zugang zur Bestenliste. Jeder Spieler auf der Bestenliste hat mindestens den Rang {champion}."
+  },
+  "race": {
+    "title-live": "Was es aktuell braucht",
+    "title-ended": "So verlief die Saison",
+    "legend-cutoff": "Grenze für {legend}",
+    "champion-cutoff": "Grenze für {champion}",
+    "ranked-players": "Gerankte spieler",
+    "rating-points": "Wertungspunkte",
+    "rank-cutoffs": "Ranggrenzen"
+  }
+}

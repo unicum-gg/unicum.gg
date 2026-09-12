@@ -1,0 +1,7 @@
+{
+  "group": "Gruppo {order}",
+  "n-teams": "{count} Squadre",
+  "pts": "Punti",
+  "team": "Squadra",
+  "top-n-advance": ", avanzano i migliori {count}"
+}

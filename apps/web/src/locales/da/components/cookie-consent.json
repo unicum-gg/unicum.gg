@@ -1,0 +1,16 @@
+{
+  "title": "Vi bruger cookies",
+  "description": "Vi bruger cookies for at forbedre din browseroplevelse og analysere trafikken på webstedet.",
+  "functional": {
+    "title": "Funktionelle",
+    "description": "Påkrævet for at webstedet fungerer korrekt (præferencer, regionsvalg)."
+  },
+  "analytics": {
+    "title": "Besøgsmåling",
+    "description": "Google Analytics, som bruger cookies til at hjælpe os med at forstå, hvordan webstedet bruges. Anonym analyse uden cookies (Umami) forbliver aktiv uanset hvad."
+  },
+  "save": "Gem mine valg",
+  "decline": "Afvis alle",
+  "customize": "Tilpas",
+  "accept": "Accepter alle"
+}

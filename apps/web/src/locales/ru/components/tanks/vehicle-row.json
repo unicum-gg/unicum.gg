@@ -1,0 +1,4 @@
+{
+  "tier": "Уровень {tier}",
+  "battles": "{count} Бои"
+}

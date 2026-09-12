@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Savaş başına ortalama skor",
+  "general-parameters": "Genel parametreler",
+  "metric-progression": "{metric} gelişimi",
+  "not-enough-history-on-this": "Bu tank için henüz yeterli geçmiş yok. Çizgi oluşturmak için son 90 gün içinde en az iki anlık görüntü gerekir.",
+  "record-score": "Rekor skor",
+  "updated": "Güncellendi"
+}

@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "locul 1",
+    "2": "locul 2",
+    "3": "locul 3"
+  },
+  "streamer": "Streamer · urmărește-l pe {name} pe Twitch",
+  "tournament": {
+    "one": "Lista câștigătoare a turneului {title}",
+    "many": "În {count} liste câștigătoare, cel mai bun {title}",
+    "featured": "{text} · eveniment recomandat",
+    "unnamed": "un turneu Wargaming"
+  },
+  "tournament-wins": "{count, plural, one {# victorie în turneu} few {# victorii în turneu} other {# de victorii în turneu}}",
+  "watch-on-twitch": "Urmărește-l pe {name} pe Twitch",
+  "watch-on-twitch-viewers": "Urmărește-l pe {name} pe Twitch · {viewers} spectatori"
+}

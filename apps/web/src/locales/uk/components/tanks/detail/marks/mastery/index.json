@@ -1,0 +1,8 @@
+{
+  "last-days": "Останні {chartDays} днів",
+  "n-players": "{count, plural, one {# гравець} few {# гравці} many {# гравців} other {# гравців}}",
+  "rolling-average-combined-damage-to": "Ковзна середня сумарної шкоди, щоб перевершити 65 / 85 / 95% гравців.",
+  "single-battle-xp-to-beat": "Досвід за один бій, щоб перевершити 50 / 80 / 95 / 99% гравців.",
+  "tank-marks-of-excellence": "Відзнаки майстерності {tank}",
+  "tank-marks-of-mastery": "Знаки майстерності {tank}"
+}

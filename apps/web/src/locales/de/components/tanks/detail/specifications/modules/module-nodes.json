@@ -1,0 +1,17 @@
+{
+  "aim-time": "Zielzeit",
+  "ammo": "Munition",
+  "armor": "Panzerung",
+  "dispersion": "Streuung",
+  "fire-chance": "Brandchance",
+  "gun-arc": "Waffenbogen",
+  "hit-points": "Hitpoints",
+  "load-limit": "Ladegrenze",
+  "mounted-on": "Eingebaut in {tanks}",
+  "power": "Leistung",
+  "reload": "Nachladen",
+  "signal-range": "Signalreichweite",
+  "tier": "Stufe {tier}",
+  "traverse": "Drehung",
+  "view-range": "Sichtbereich"
+}

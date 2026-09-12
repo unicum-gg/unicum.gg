@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Có bao nhiêu người chơi trên mỗi máy chủ {label} ngay lúc này, con số đó thay đổi ra sao trong ngày và trong tuần, và khu vực này so với các khu vực khác như thế nào.",
+  "recording-just-started": "Việc ghi nhận vừa bắt đầu, nên biểu đồ sẽ dần lấp đầy từ đây.",
+  "series-starts": "Chuỗi bắt đầu vào {at}, thời điểm việc ghi nhận bắt đầu, và không thể khôi phục dữ liệu trước đó.",
+  "server-population": "Số người chơi trên máy chủ {label}",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "Wargaming đặt tên cho các cụm đầu tiên của một khu vực và để phần còn lại là mã định danh, vì vậy 203 được hiển thị là EU3, tiếp tục cách đánh số riêng của khu vực. Mã định danh là thứ chúng tôi ghi nhận và là thông tin tên hiển thị khi di chuột, đồng thời cũng là cơ sở của nhãn. Đánh số các cụm theo mức độ bận rộn sẽ khiến tên máy chủ thay đổi mỗi khi hai cụm đổi vị trí. Một máy chủ không xuất hiện trong mẫu là máy chủ hoàn toàn không được báo cáo, không đồng nghĩa với không có người chơi.",
+  "we-record-it": "Wargaming công bố số người chơi trên mỗi máy chủ theo thời điểm hiện tại và không lưu lịch sử, nên mọi con số sau phút hiện tại đều do chúng tôi tự ghi nhận, mỗi năm phút một lần.",
+  "where-battles-are-fought": "Các trận đấu {label} diễn ra ở đâu"
+}

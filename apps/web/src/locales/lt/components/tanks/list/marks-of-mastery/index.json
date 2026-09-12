@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3 klasė",
+      "tip": "3-ioji Klasė: XP, kurios reikia įveikti 50% žaidėjų"
+    },
+    "class2": {
+      "label": "2 klasė",
+      "tip": "2-oji Klasė: XP, kurios reikia įveikti 80% žaidėjų"
+    },
+    "class1": {
+      "label": "1 klasė",
+      "tip": "1-oji Klasė: XP, kurios reikia įveikti 95% žaidėjų"
+    },
+    "ace": {
+      "label": "Auksinis tankistas",
+      "tip": "Tūzas tankistas: XP, kurios reikia įveikti 99% žaidėjų"
+    }
+  },
+  "rows-per-page": "Eilutės per puslapį",
+  "previous-page": "Ankstesnis puslapis",
+  "page": "Puslapis {current} / {totalPages}",
+  "next-page": "Kita puslapis",
+  "all": "Visi"
+}

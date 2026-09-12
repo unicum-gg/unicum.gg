@@ -1,0 +1,13 @@
+{
+  "assists": "Asysty",
+  "close": "Zamknij",
+  "damage": "Zadane uszkodzenia",
+  "in-the-queue": "Jest w kolejce i pojawi się na tej karcie, gdy moderator ją sprawdzi.",
+  "optional": "(opcjonalnie)",
+  "paste-a-youtube-link": "Wklej link do YouTube, a następnie ustaw dokładny moment rozpoczęcia bitwy. Każdy, kto ją otworzy, trafi na tę sekundę, dlatego propozycja z nieprawidłowym znacznikiem czasu zostanie odrzucona podczas sprawdzania.",
+  "sending": "Wysyłanie…",
+  "suggest": "Zaproponuj",
+  "suggest-a-video": "Zaproponuj film",
+  "suggest-another": "Zaproponuj inny",
+  "suggestion-sent": "Propozycja wysłana"
+}

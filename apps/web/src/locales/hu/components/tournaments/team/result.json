@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Átlag a {size} játékos közül {rated} értékelt játékos alapján",
+  "average-over-recent": "Átlag a {size} játékos közül az elmúlt 30 napban játszott {rated} játékos alapján",
+  "avg-winrate": "Átlagos nyerési arány",
+  "finished": "Befejezve",
+  "record": "Rekord",
+  "won": "Nyert"
+}

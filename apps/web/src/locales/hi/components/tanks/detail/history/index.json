@@ -1,0 +1,12 @@
+{
+  "before-update": "अपडेट {version} से पहले",
+  "common-test": "सामान्य परीक्षण",
+  "in-common-test-not-released": "सामान्य परीक्षण में, अभी जारी नहीं किया गया",
+  "introduced": "परिचय",
+  "lifecycle": "जीवनचक्र",
+  "n-buffed": "{count} को बफ़ किया गया",
+  "n-nerfed": "{count} को nerf किया गया",
+  "not-released-wargaming-can-still": "जारी नहीं किया गया। अपडेट जारी होने से पहले Wargaming इसमें बदलाव या इसे हटाना जारी रख सकता है।",
+  "status": "स्थिति",
+  "update": "अपडेट {version}"
+}

@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Hledat mezi {count} tanky",
+    "rated-tanks": "Hledat mezi {count} hodnocenými tanky",
+    "videos": "Hledat mezi {count} videi",
+    "players": "Hledat mezi {count} hráči",
+    "clans": "Hledat mezi {count} klany",
+    "tournaments": "Hledat mezi {count} turnaji",
+    "teams": "Hledat mezi {count} týmy"
+  },
+  "min": "Min",
+  "max": "Max",
+  "none": "Žádný",
+  "common-test": "Změněno v rámci akce Společný test: nová a znovu vyvážená vozidla",
+  "category": {
+    "standard": "Standardní",
+    "premium": "Prémium",
+    "reward": "Odměna"
+  },
+  "moe": {
+    "0": "Zatím bez znaku",
+    "1": "1 známka",
+    "2": "2 známky",
+    "3": "3 známky"
+  },
+  "mom": {
+    "0": "Zatím bez odznaku",
+    "1": "3. Třída",
+    "2": "2. Třída",
+    "3": "1. Třída",
+    "4": "Esence Tankista"
+  }
+}

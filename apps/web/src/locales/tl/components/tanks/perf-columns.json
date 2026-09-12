@@ -1,0 +1,60 @@
+{
+  "columns-label": "Mga haligi",
+  "groups": {
+    "general": "Pangkalahatan",
+    "combat": "Labanan"
+  },
+  "columns": {
+    "battles": {
+      "label": "Mga labanan",
+      "tip": "Kabuuang mga laban na nilaro sa tank"
+    },
+    "count": {
+      "label": "Bilang",
+      "tip": "Bilang ng mga sinusubaybayang manlalaro sa sample"
+    },
+    "rating": {
+      "label": "Rating (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Antas ng panalo sa tank"
+    },
+    "playerWr": {
+      "label": "Player WR",
+      "tip": "Pangkaraniwang kabuuang antas ng panalo ng mga manlalarong gumagamit nito"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Karaniwang pinsala bawat laro"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Ratio ng kills / pagkamatay"
+    },
+    "assists": {
+      "label": "Tulong",
+      "tip": "Karaniwang tinulungang pinsala"
+    },
+    "hitPct": {
+      "label": "Tama %",
+      "tip": "Mga tama / mga putok"
+    },
+    "penPct": {
+      "label": "Pen %",
+      "tip": "Mga pagsira / mga tama"
+    },
+    "spots": {
+      "label": "Spots",
+      "tip": "Karaniwang mga spot bawat laro"
+    },
+    "blocked": {
+      "label": "Naharang",
+      "tip": "Karaniwang pinsalang hinarang ng baluti"
+    },
+    "survival": {
+      "label": "Buhay",
+      "tip": "Bahagi ng mga laban na nakaligtas"
+    }
+  }
+}

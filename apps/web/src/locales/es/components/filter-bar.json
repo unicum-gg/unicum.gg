@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Buscar entre {count} Tanques",
+    "rated-tanks": "Buscar entre {count} Tanques con clasificación",
+    "videos": "Buscar entre {count} Videos",
+    "players": "Buscar {count} jugadores",
+    "clans": "Buscar {count} Clanes",
+    "tournaments": "Buscar {count} Torneos",
+    "teams": "Buscar {count} Equipos"
+  },
+  "min": "Mín.",
+  "max": "Máx.",
+  "none": "Ninguno",
+  "common-test": "Cambiado por la Prueba común: vehículos nuevos y reequilibrados",
+  "category": {
+    "standard": "Estándar",
+    "premium": "Premium",
+    "reward": "Recompensa"
+  },
+  "moe": {
+    "0": "Aún sin marca",
+    "1": "1 marca",
+    "2": "2 marcas",
+    "3": "3 marcas"
+  },
+  "mom": {
+    "0": "Aún sin insignia",
+    "1": "3ª Clase",
+    "2": "2ª Clase",
+    "3": "1ª Clase",
+    "4": "As del Tanque"
+  }
+}

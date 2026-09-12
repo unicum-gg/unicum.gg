@@ -1,0 +1,11 @@
+{
+  "already-running": "белсенді болып жатыр",
+  "in-window": "терезеде",
+  "n-online": "/ желіде: {count}",
+  "no-reserves-selected": "Резервтер таңдалмаған.",
+  "no-stock-ready": "дайын резервтер жоқ",
+  "not-available": "қол жетімді емес",
+  "threshold": "шек ({online}/{min})",
+  "would-activate": "белсендіреді",
+  "would-not-fire": "Қазір іске қосылмайды."
+}

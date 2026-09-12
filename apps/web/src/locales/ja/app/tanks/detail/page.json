@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank}のWorld of Tanks戦績（{region}地域）、Tier {tier} {nation}",
+    "description": "{tank}（{region}地域）のWorld of Tanks性能。Tier {tier} {nation}戦車の装甲、火力、機動性、モジュール、搭乗員、野戦改修を確認できます。"
+  },
+  "performances": {
+    "title": "{tank}の戦績（{region}地域）、サーバー統計とトッププレイヤー",
+    "description": "{tank}（{region}地域）のWorld of Tanks戦績。サーバー平均の勝率、ダメージ、アシスト、Tier {tier} {nation}戦車の最高プレイヤー、WN8とWNXの期待値を表示します。"
+  },
+  "marks": {
+    "title": "{tank}の優秀戦車長マークとマスターバッジ（{region}地域）",
+    "description": "{tank}（{region}地域）のWorld of Tanks優秀戦車長マークとマスターバッジの獲得条件、およびTier {tier} {nation}戦車での履歴を表示します。"
+  },
+  "history": {
+    "title": "{tank}の変更履歴（{region}地域）、強化と弱体化",
+    "description": "World of Tanksの更新で行われた{tank}のすべての特性変更。WargamingがバージョンごとにTier {tier} {nation}戦車へ適用した火力、機動性、生存性、隠蔽性の強化と弱体化を確認できます。"
+  },
+  "videos": {
+    "title": "{tank}のゲームプレイ動画（{region}地域）",
+    "description": "{tank}のプレイ動画を視聴できます。Tier {tier} {nation}戦車のコミュニティ推薦戦闘を、プレイされた瞬間から再生し、発生したマップと結果も確認できます。"
+  },
+  "community": {
+    "title": "{tank}のプレイヤーレビューとコミュニティ評価（{region}地域）",
+    "description": "プレイヤーが考える{tank}の評価。投票者のプレイレベルごとに分けた5段階のコミュニティ評価を、Tier {tier} {nation}戦車の実際の性能と比較できます。戦闘記録を持つアカウントによるレビューも表示します。"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "Klan World of Tanks: [{tag}] {name} ({region}), počet členov: {members}",
+    "description": "Klan World of Tanks [{tag}] {name}, server {region}: počet členov {members}, úplná tabuľka členov s hodnoteniami WN8 a WNX, nedávne príchody a odchody členov a história klanu."
+  },
+  "stronghold": {
+    "title": "Štatistiky opevnenia: [{tag}] {name} ({region})",
+    "description": "Klan [{tag}] {name}, server {region}: výkonnosť v opevnení, hodnotenia v šarvátkach a ofenzívach, bitky a miera víťazstiev každého člena."
+  },
+  "clan-wars": {
+    "title": "Štatistiky klanových vojen: [{tag}] {name} ({region})",
+    "description": "Klan [{tag}] {name}, server {region}: výkonnosť v klanových vojnách, hodnotenia jednotlivých členov, bitky a miera víťazstiev v kampaniach na globálnej mape."
+  },
+  "tanks": {
+    "title": "Tanky: [{tag}] {name} ({region}), vozidlá klanu",
+    "description": "Všetky vozidlá, s ktorými hral klan [{tag}] {name} na serveri {region}, s počtom bitiek, mierou víťazstiev a priemerným poškodením súhrnne za všetkých členov klanu."
+  },
+  "manage": {
+    "title": "Zálohy opevnenia: [{tag}] {name} ({region})",
+    "description": "Klan [{tag}] {name}: aktivujte a naplánujte zálohy opevnenia. Len pre dôstojníkov."
+  },
+  "missing": {
+    "description": "Klan World of Tanks [{tag}], server {region}: tabuľka členov s hodnoteniami WN8/WNX, príchody a odchody členov, nedávne bitky a úplná história klanu."
+  }
+}

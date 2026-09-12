@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Noch keine Daten verfügbar. Schau wieder vorbei, sobald die Clans aktualisiert wurden.",
+  "heading": "Top-Clans der Stufe <accent>{tier}</accent>",
+  "blurb": "Bestenliste für {region}, sortiert nach {sort}, mit allen erfassten Clans im Format {format} (mindestens {battles} Gefechte).",
+  "blurb-period": "Bestenliste für {region}, sortiert nach {sort}, mit allen erfassten Clans im Format {format} im Zeitraum {period} (mindestens {battles} Gefechte).",
+  "format-advances": "Vorstöße (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "{count} Top-Clans der Stufe {tier} ·"
+}

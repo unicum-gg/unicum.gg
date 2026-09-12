@@ -1,0 +1,13 @@
+{
+  "heading": "Najbolji igrači u <accent>{mode}</accent>",
+  "intro": "{mode} je battle royale režim igre World of Tanks. Ljestvica za regiju {region}, rangirana prema HR-u, uz minimum od 100 bitaka u režimu {mode}.",
+  "board": "Najboljih {count} igrača režima {mode}",
+  "columns": {
+    "player": "Igrač",
+    "battles": "Bitke",
+    "survival": "Opstanak",
+    "survival-percent": "Opstanak %",
+    "damage": "Prosječna šteta"
+  },
+  "scale-description": "Pragovi boja za ljestvicu režima {mode}, podešeni prema populaciji igrača s najmanje 100 bitaka u režimu {mode}."
+}

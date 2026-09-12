@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, intjänad {count}×",
+  "aria-not-earned": "{name}, inte intjänad",
+  "no-longer-obtainable": "Kan inte längre erhållas.",
+  "not-earned": "Inte intjänad"
+}

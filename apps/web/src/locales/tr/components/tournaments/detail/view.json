@@ -1,0 +1,11 @@
+{
+  "closes": "Kapat {when}",
+  "map-pool": "Harita havuzu",
+  "place": "Sıralama",
+  "prize": "Ödül",
+  "prizes": "Ödüller",
+  "qualified": "Kalifiye olanlar ({count})",
+  "register": "Kaydol",
+  "tournaments": "Turnuvalar",
+  "winner": "{count, plural, one {Kazanan} other {Kazananlar}}"
+}

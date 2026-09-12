@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "チェックアウトがキャンセルされました.",
+  "claim-your-supporter-role-on-discord": "Discordで支援者ロールを取得",
+  "could-not-add-the-discord-role-please-try-ag": "Discordロールを追加できませんでした。もう一度お試しください。",
+  "could-not-open-the-billing-portal": "請求ポータルを開けませんでした。",
+  "could-not-start-checkout-please-try-again": "チェックアウトを開始できませんでした。もう一度お試しください。",
+  "could-not-update-your-preference": "設定を更新できませんでした。",
+  "log-in-with-wargaming": "Wargamingでログイン",
+  "log-in-with-wargaming-to": "Wargaming にログインして {NAME} を支援",
+  "manage-subscription": "サブスクリプションを管理する",
+  "only-active-supporters-can-claim-the-discord": "有効な支援者だけが Discord のロールを受け取れます",
+  "or-choose-your-own-amount": "または金額を自由に選択",
+  "pay-what-you-want": "好きな金額を支払う",
+  "pick-an-amount": "金額を選択するか、または自分で入力してください。月額€{min}からです。",
+  "re-sync-discord-role": "Discord のロールを再同期",
+  "secured-by-stripe": "Stripe によって保護されています。いつでもキャンセルできます",
+  "show-me-anonymously-on-the": "表彰台に匿名で表示",
+  "support-subscriptions-are-coming-soon": "支援サブスクリプションは近日開始予定です",
+  "supporter-role-added-on-discord": "Discord に支援者ロールを追加しました",
+  "you-are-a-supporter-thank": "あなたは支援者です。{NAME}を存続させてくださりありがとうございます。"
+}

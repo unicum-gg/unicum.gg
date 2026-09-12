@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/use-translation";
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import {
   Tooltip,
@@ -13,17 +14,17 @@ import APP from "@/constants/app";
  * design: connecting the account opts into a visible verified mark.
  */
 export function VerifiedBadge({ size = 16 }: { size?: number }) {
+  const { t } = useTranslation("components/entity/badges/verified-badge");
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <span className="inline-flex" aria-label="Verified account">
+          <span className="inline-flex" aria-label={t("verified-account")}>
             <Crest kind={CrestKind.Verified} size={size} />
           </span>
         </TooltipTrigger>
         <TooltipContent>
-          Verified account · connected on {APP.NAME}
-        </TooltipContent>
+          {t("verified-account-connected-on", { NAME: APP.NAME })}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

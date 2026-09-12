@@ -1,0 +1,21 @@
+{
+  "trigger": "Feedback",
+  "title": "Share your feedback",
+  "topic-placeholder": "Select a topic...",
+  "message-placeholder": "Your feedback...",
+  "send": "Send",
+  "sent": "Thanks for your feedback!",
+  "failed": "Could not send feedback. Please try again.",
+  "topics": {
+    "bug": "Bug report",
+    "idea": "Feature idea",
+    "data": "Data accuracy",
+    "other": "Other"
+  },
+  "sentiments": {
+    "awful": "Awful",
+    "bad": "Bad",
+    "good": "Good",
+    "great": "Great"
+  }
+}

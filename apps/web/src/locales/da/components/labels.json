@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Afventer første snapshot",
+    "hidden": "Skjult af Wargaming",
+    "active_24h": "Aktiv < 24 t",
+    "active_7d": "Aktiv < 7 dage",
+    "recent_30d": "Senest aktiv < 30 dage",
+    "recent_90d": "Senest aktiv < 90 dage",
+    "dormant_1y": "Inaktiv < 1 år",
+    "inactive": "Inaktiv > 1 år"
+  },
+  "rating-hype": {
+    "overrated": "Overvurderet",
+    "fair": "Retfærdigt bedømt",
+    "underrated": "Undervurderet"
+  },
+  "rating-consensus": {
+    "agreed": "Bred enighed",
+    "mixed": "Blandede meninger",
+    "divisive": "Delende meninger"
+  },
+  "rating-axes": {
+    "overall": "Samlet",
+    "fun": "Sjov",
+    "firepower": "Ildkraft",
+    "armour": "Panser",
+    "mobility": "Mobilitet",
+    "gunHandling": "Våbenhåndtering",
+    "concealment": "Sløring",
+    "beginnerFriendliness": "Begyndervenlig",
+    "versatility": "Alsidighed"
+  },
+  "rating-axis-hints": {
+    "overall": "Hvor god er denne kampvogn, alt taget i betragtning?",
+    "fun": "Hvor meget nyder du at spille den?",
+    "firepower": "Alpha, skade pr. minut og gennemslag.",
+    "armour": "Hvor meget den preller af, hull down og i det åbne.",
+    "mobility": "Hastighed, acceleration og hvordan den drejer.",
+    "gunHandling": "Sigtetid, spredning og præcision under bevægelse.",
+    "concealment": "Kamuflage og visningsrækkevidde.",
+    "beginnerFriendliness": "Hvor tilgivende den er, hvis du stadig lærer.",
+    "versatility": "Virker den på alle kort og på alle hold?"
+  },
+  "voter-brackets": {
+    "unknown": "Ikke bedømt",
+    "learning": "Lærer",
+    "average": "Gennemsnit",
+    "strong": "Stærk",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Køretøjer",
+    "gunnery": "Artilleri",
+    "armor": "Panser",
+    "mobility": "Mobilitet",
+    "vision": "Syn",
+    "crew": "Mandskab",
+    "progression": "Progression",
+    "economy": "Økonomi",
+    "ratings": "Bedømmelser",
+    "statistics": "Statistik",
+    "modes": "Slagsmodus",
+    "tactics": "Taktik",
+    "slang": "Slang"
+  }
+}

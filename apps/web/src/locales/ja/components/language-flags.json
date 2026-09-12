@@ -1,0 +1,8 @@
+{
+  "cta-clans": "クリックして{language}のトップクランを見る。",
+  "cta-players": "クリックして{language}のトッププレイヤーを見る。",
+  "declared": "{language}。クランが選択しました。",
+  "inferred": "{language}。このプレイヤーのクラン履歴から推測しています。クランに長く所属しているほど、そのクランの言語が強く反映されます。",
+  "top-language-clans": "{language}のトップクラン",
+  "top-language-players": "{language}のトッププレイヤー"
+}

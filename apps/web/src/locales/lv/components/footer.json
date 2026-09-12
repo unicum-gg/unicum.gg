@@ -1,0 +1,25 @@
+{
+  "tagline": "Veidots World of Tanks kopienai. Bezmaksas statistika par katru spēlētāju, klanu, tanku un karti EU, NA un Āzijā.",
+  "columns": {
+    "leaderboards": "Līderu saraksti",
+    "tanks": "Tvertne",
+    "maps": "Kartes",
+    "integrations": "Integrācijas",
+    "project": "Projekts"
+  },
+  "links": {
+    "top-tanks": "Labākās tvertnes",
+    "bot": "Discord bots",
+    "mcp": "MCP servers",
+    "docs": "API dokumentācija",
+    "badges": "Zīmes",
+    "glossary": "Vārdu krājums",
+    "coverage": "Pārklājums",
+    "support": "Atbalstiet mūs",
+    "source": "Pirmkods",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Nav saistīts ar Wargaming",
+  "cookies": "Pārvaldīt sīkfailus"
+}

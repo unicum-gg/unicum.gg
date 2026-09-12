@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Sådan sluttede det",
+  "loading-maps": "Indlæser kort…",
+  "map": "Kort",
+  "mode": "Tilstand",
+  "pick-a-map": "Vælg et kort",
+  "pick-a-mode": "Vælg en spiltilstand",
+  "result": "Resultat",
+  "spawn": "Spawne",
+  "team": "Hold {team}",
+  "team-spawn": "Hold {team} · {direction}",
+  "which-side-you-started": "Den side, du startede på"
+}

@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3rd Class",
+      "tip": "3rd Class: XP necesar pentru a depăși 50% dintre jucători"
+    },
+    "class2": {
+      "label": "2nd Class",
+      "tip": "2nd Class: XP necesar pentru a depăși 80% dintre jucători"
+    },
+    "class1": {
+      "label": "1st Class",
+      "tip": "1st Class: XP necesar pentru a depăși 95% dintre jucători"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Asul tancurilor: XP necesar pentru a depăși 99% dintre jucători"
+    }
+  },
+  "rows-per-page": "Rânduri pe pagină",
+  "previous-page": "Pagina anterioară",
+  "page": "Pagină {current} / {totalPages}",
+  "next-page": "Pagina următoare",
+  "all": "Toate"
+}

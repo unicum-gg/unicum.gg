@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Zatiaľ nebol zaznamenaný žiadny klaster.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Zdieľať",
+  "peak": "Maximum ({label})",
+  "average": "Priemer ({label})",
+  "not-reported": "Nehlásené",
+  "total": "Celkom"
+}

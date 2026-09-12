@@ -1,0 +1,6 @@
+{
+  "title": "Najbolji igrači igre World of Tanks ({region})",
+  "description": "{name} {region} ljestvica igrača, rangirana prema WNX-u, uz filter prema jeziku izvedenom iz historije klana.",
+  "og-title": "Najbolji igrači",
+  "og-subtitle": "Rang-lista za regiju {region}"
+}

@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Hiển thị các Clan hàng đầu trong {region} có hơn 50 thành viên từng tham gia trận đấu, xếp hạng theo {metric} trung bình.",
+    "month": "Hiển thị các Clan hàng đầu trong {region} có hơn 50 thành viên từng tham gia trận đấu, xếp hạng theo {metric} trong 30 ngày trước đây, tối thiểu 15 thành viên hoạt động."
+  },
+  "updated": "Cập nhật {when}.",
+  "empty": "Chưa có dữ liệu Clan cho khu vực này.",
+  "rank": "#",
+  "clan": "Clan",
+  "average": "TB {metric}"
+}

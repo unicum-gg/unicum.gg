@@ -1,0 +1,7 @@
+{
+  "label": "Período da tabela de classificação",
+  "periods": {
+    "overall": "Geral",
+    "30d": "Últimos 30 dias"
+  }
+}

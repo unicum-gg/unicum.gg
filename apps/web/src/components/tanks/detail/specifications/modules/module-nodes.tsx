@@ -1,7 +1,11 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useLocale } from "@onruntime/translations/react";
+import { joinNames } from "@/lib/list-format";
+import { Interpolate } from "@/components/interpolate";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { CheckIcon } from "lucide-react";
 import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
@@ -15,23 +19,18 @@ import {
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import { SHELL_LABEL, type VehicleMeta } from "@unicum.gg/shared";
+import { type VehicleMeta } from "@unicum.gg/shared";
 import type {
   ModuleStats,
   TankModuleNode,
 } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
+import { useTranslation } from "@/hooks/use-translation";
 
-const compactFmt = new Intl.NumberFormat("en-US", {
+const COMPACT_FORMAT = {
   notation: "compact",
   maximumFractionDigits: 1,
-});
-
-// "A, B and C" (no Oxford comma), for the "mounted on" tank list.
-const nameListFmt = new Intl.ListFormat("en-GB", {
-  style: "long",
-  type: "conjunction",
-});
+} as const;
 
 const n1 = (v: number) => v.toFixed(1);
 const n0 = (v: number) => Math.round(v).toString();
@@ -48,24 +47,26 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 /** The module's reference stats, laid out by class. */
 function ModuleStatsBlock({ stats }: { stats: ModuleStats }) {
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tr } = useTranslation("components/tanks/detail/specifications/modules/module-nodes");
   switch (stats.kind) {
     case "gun":
       return (
         <div className="space-y-0.5">
-          <Stat label="Reload" value={`${n1(stats.reloadTime)} s`} />
-          <Stat label="Aim time" value={`${n1(stats.aimTime)} s`} />
-          <Stat label="Dispersion" value={`${stats.dispersion.toFixed(2)} m`} />
+          <Stat label={tr("reload")} value={`${n1(stats.reloadTime)} s`} />
+          <Stat label={tr("aim-time")} value={`${n1(stats.aimTime)} s`} />
+          <Stat label={tr("dispersion")} value={`${stats.dispersion.toFixed(2)} m`} />
           <Stat
-            label="Gun arc"
+            label={tr("gun-arc")}
             value={`-${n0(stats.moveDownArc)}° / +${n0(stats.moveUpArc)}°`}
           />
-          <Stat label="Ammo" value={n0(stats.maxAmmo)} />
+          <Stat label={tr("ammo")} value={n0(stats.maxAmmo)} />
           {stats.shells.length > 0 && (
             <div className="mt-1 space-y-0.5 border-t border-background/20 pt-1">
               {stats.shells.map((s, i) => (
                 <Stat
                   key={i}
-                  label={SHELL_LABEL[s.type] ?? s.type}
+                  label={tGame(`shells.${s.type}`) ?? s.type}
                   value={`${n0(s.damage)} dmg · ${n0(s.penetration)} mm`}
                 />
               ))}
@@ -77,37 +78,42 @@ function ModuleStatsBlock({ stats }: { stats: ModuleStats }) {
       return (
         <div className="space-y-0.5">
           <Stat
-            label="Armor"
+            label={tr("armor")}
             value={`${n0(stats.armorFront)} / ${n0(stats.armorSides)} / ${n0(stats.armorRear)}`}
           />
-          <Stat label="View range" value={`${n0(stats.viewRange)} m`} />
-          <Stat label="Hit points" value={n0(stats.hp)} />
-          <Stat label="Traverse" value={`${n0(stats.traverseSpeed)}°/s`} />
+          <Stat label={tr("view-range")} value={`${n0(stats.viewRange)} m`} />
+          <Stat label={tr("hit-points")} value={n0(stats.hp)} />
+          <Stat label={tr("traverse")} value={`${n0(stats.traverseSpeed)}°/s`} />
         </div>
       );
     case "engine":
       return (
         <div className="space-y-0.5">
-          <Stat label="Power" value={`${n0(stats.power)} hp`} />
-          <Stat label="Fire chance" value={`${n0(stats.fireChance * 100)}%`} />
+          <Stat label={tr("power")} value={`${n0(stats.power)} hp`} />
+          <Stat label={tr("fire-chance")} value={`${n0(stats.fireChance * 100)}%`} />
         </div>
       );
     case "chassis":
       return (
         <div className="space-y-0.5">
-          <Stat label="Load limit" value={`${n1(stats.loadLimit)} t`} />
-          <Stat label="Traverse" value={`${n0(stats.traverseSpeed)}°/s`} />
+          <Stat label={tr("load-limit")} value={`${n1(stats.loadLimit)} t`} />
+          <Stat label={tr("traverse")} value={`${n0(stats.traverseSpeed)}°/s`} />
         </div>
       );
     case "radio":
-      return <Stat label="Signal range" value={`${n0(stats.signalRange)} m`} />;
+      return <Stat label={tr("signal-range")} value={`${n0(stats.signalRange)} m`} />;
   }
 }
 
 /** Everything about a module, shown on hover: reference stats + every vehicle
  * that can mount it. */
 function ModuleTooltip({ module }: { module: TankModuleNode }) {
-  const mountedList = nameListFmt.format(module.tanks.map((t) => t.name));
+  const { t: tr } = useTranslation("components/tanks/detail/specifications/modules/module-nodes");
+  const { locale } = useLocale();
+  const mountedList = joinNames(
+    module.tanks.map((t) => t.name),
+    locale,
+  );
   return (
     <div className="w-56 space-y-2 text-xs">
       <div className="font-medium">
@@ -115,15 +121,24 @@ function ModuleTooltip({ module }: { module: TankModuleNode }) {
         {module.tier ? (
           <span className="text-background/60">
             {" "}
-            · Tier {toRoman(module.tier)}
+            · {tr("tier", { tier: toRoman(module.tier) })}
           </span>
         ) : null}
       </div>
       {module.stats && <ModuleStatsBlock stats={module.stats} />}
       {module.tanks.length > 0 && (
-        <div className="border-t border-background/20 pt-1.5">
-          <span className="text-background/60">Mounted on </span>
-          <span className="text-background/90">{mountedList}</span>
+        <div className="border-t border-background/20 pt-1.5 text-background/60">
+          {/* One sentence with the list as a hole, not a label glued to a
+              value: the space between them belongs to the sentence, and so
+              does the order, which is not English's in every language. */}
+          <Interpolate
+            template={tr("mounted-on")}
+            values={{
+              tanks: (
+                <span className="text-background/90">{mountedList}</span>
+              ),
+            }}
+          />
         </div>
       )}
     </div>
@@ -141,6 +156,8 @@ export function ModuleNode({
   /** When set, the node is a button that switches to this module. */
   onSelect?: () => void;
 }) {
+  const { num } = useFormat();
+  const { t: tWidget } = useTranslation("components/tanks/detail/widgets");
   const selectable = !!onSelect;
   const body = (
     <div
@@ -198,17 +215,17 @@ export function ModuleNode({
               </span>
               {module.isDefault ? (
                 <span className="text-[10px] leading-none text-fd-muted-foreground">
-                  Stock
+                  {tWidget("stock")}
                 </span>
               ) : (
                 <div className="flex items-center gap-2 text-[10px] leading-none text-fd-muted-foreground">
                   <span className="flex items-center gap-0.5">
                     <CurrencyIcon type="xp" className="size-2.5" />
-                    {compactFmt.format(module.priceXp)}
+                    {num(COMPACT_FORMAT).format(module.priceXp)}
                   </span>
                   <span className="flex items-center gap-0.5">
                     <CurrencyIcon type="credits" className="h-2.5 w-auto" />
-                    {compactFmt.format(module.priceCredit)}
+                    {num(COMPACT_FORMAT).format(module.priceCredit)}
                   </span>
                 </div>
               )}
@@ -271,6 +288,7 @@ export function NextTankNode({
   region: Region;
   item: ResearchPathItem;
 }) {
+  const { num } = useFormat();
   const { meta } = item;
   return (
     <Link href={ROUTES.TANK(region, item.slug)} className="group">
@@ -296,7 +314,7 @@ export function NextTankNode({
           {item.researchXp ? (
             <span className="flex items-center gap-0.5 text-[10px] leading-none text-fd-muted-foreground">
               <CurrencyIcon type="xp" className="size-2.5" />
-              {compactFmt.format(item.researchXp)}
+              {num(COMPACT_FORMAT).format(item.researchXp)}
             </span>
           ) : null}
         </div>

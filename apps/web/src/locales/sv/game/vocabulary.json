@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Slumpvis",
+    "battle_royale": "Pansarjakt",
+    "frontline": "Frontstrid",
+    "onslaught": "Pansarstorm",
+    "onslaught_night": "{onslaught} Natt",
+    "grand_battle": "Pansarslag",
+    "clan_wars": "Klankrig",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Sista Striden",
+    "arcade": "Arkadläge",
+    "story_mode": "Berättelseläge",
+    "training": "Träning"
+  },
+  "player-modes": {
+    "overall": "Slumptävlingar",
+    "skirmish": "Skärmytsling",
+    "advances": "Offensiver",
+    "grand": "Storstrider",
+    "ranked": "Rankade strider",
+    "cw-x": "Klankrig X",
+    "cw-viii": "Klankrig VIII",
+    "cw-vi": "Klankrig VI",
+    "steel-hunter": "Pansarjakt",
+    "onslaught": "Pansarstorm"
+  },
+  "stronghold-tiers": {
+    "advances": "Offensiver",
+    "t10": "Skärmytsling T10",
+    "t8": "Skärmytsling T8",
+    "t6": "Skärmytsling T6"
+  },
+  "stronghold-periods": {
+    "24h": "Senaste 24 timmarna",
+    "7d": "Senaste 7 dagarna",
+    "30d": "Senaste 30 dagarna",
+    "overall": "Övergripande"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Strider",
+    "winrate": "Vinnande hastighet"
+  },
+  "clan-boards": {
+    "advances": "Offensiver",
+    "t10": "Skärmytsling X",
+    "t8": "Skärmytsling VIII",
+    "t6": "Skärmytsling VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Sammanstötning",
+    "assault": "Stormvagn",
+    "attack-defense": "Attack/Försvar"
+  },
+  "map-camouflage": {
+    "summer": "Sommar",
+    "winter": "Vinter",
+    "desert": "Öken"
+  },
+  "map-poi": {
+    "1": "Artillerihögkvarter",
+    "2": "Sambandscentral",
+    "3": "Observationspost"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Mötesstrid",
+    "assault2": "Anfall/Försvar",
+    "comp7": "Pansarstorm"
+  },
+  "battle-formats": {
+    "random": "Slumpvis",
+    "clan_wars": "Klankrig",
+    "advances": "Offensiver",
+    "skirmish": "Skärmytsling",
+    "maneuvers": "Manövrar",
+    "onslaught": "Pansarstorm",
+    "tournament": "Turnering"
+  },
+  "battle-results": {
+    "victory": "Seger",
+    "defeat": "Förlust",
+    "draw": "Oavgjort"
+  },
+  "spawn-directions": {
+    "north": "Norr",
+    "south": "Söder",
+    "east": "Öster",
+    "west": "Väster"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Kommande",
+    "registration_started": "Registrering öppen",
+    "registration_finished": "Registreringen stängd",
+    "running": "Pågår",
+    "finished": "Avslutande",
+    "complete": "Slutfört"
+  },
+  "onslaught-tiers": {
+    "legend": "Legend",
+    "champion": "Mästare",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Tung",
+    "mediumTank": "Mellanklass",
+    "lightTank": "Lätt",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Stormvagn",
+    "break": "Genombrottsvagn",
+    "support": "Understödsvagn",
+    "universal": "Mångsidig",
+    "sniper": "Prickskytt",
+    "wheeled": "Hjulburen"
+  },
+  "mastery-badges": {
+    "class3": "3:e klass",
+    "class2": "2:a klass",
+    "class1": "1:a klass",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Slumptävlingar",
+    "stronghold": "Befästning",
+    "skirmish": "Skärmytsling",
+    "clan-wars": "Klankrig"
+  },
+  "features": {
+    "stronghold": "Befästning",
+    "skirmish": "Skärmytsling",
+    "marks-of-excellence": "Skyttemärken",
+    "marks-of-mastery": "Mästermärken",
+    "personal-rating": "Spelarbetyg",
+    "world-of-tanks-rating": "World of Tanks-betyg",
+    "common-test": "Vanlig Test",
+    "tournaments": "Turneringar"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Mark",
+    "3": "3 Mark",
+    "name": "Skyttemärken"
+  }
+}

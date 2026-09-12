@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktyvūs dienos",
+  "add-workflow": "Pridėti darbo eigą",
+  "connect-discord": "Prijungti Discord",
+  "discord-notifications": "Discord pranešimai",
+  "each-workflow-activates-its-reserves": "Kiekviena eiga aktyvuoja savo atsargas nustatytu laiko langu, kai tiesioginėje žaidimo sesijoje būna pakankamai narių. Viskas vykdoma jūsų paskyroje, todėl nebūtina būti prisijungus. Pridėkite tiek, kiek reikia.",
+  "enabled": "Įjungtas",
+  "from": "Iš",
+  "get-a-discord-message-in": "Kiekvieną kartą aktyvavus pastiprinimą gaukite Discord pranešimą pasirinktame kanale, kad visas klanas žinotų, jog jis aktyvus.",
+  "log-in-with-wargaming-to": "Prisijunkite prie Wargaming, kad tai nustatytumėte",
+  "min-online": "Min. prisijungusių",
+  "officers": "Pareigūnai",
+  "only-an-officer-of-this": "Tai nustatyti gali tik šio klano karininkas.",
+  "schedule-preview": "Tvarkaraščio peržiūra",
+  "set-your-hours-and-reserves": "Vieną kartą nustatykite savo valandas ir atsargas. Pastiprinimai įsijungs laiku savaime, net kai nieko nebus šalia, kad paspaustų mygtuką.",
+  "stronghold-boosts": "Tvirtovės didinimai",
+  "times-are-in-your-timezone": "Laikas nurodytas pagal {tz}, jūsų laiko juostą.",
+  "to": "Iki"
+}

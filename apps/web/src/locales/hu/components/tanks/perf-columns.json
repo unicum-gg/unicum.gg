@@ -1,0 +1,60 @@
+{
+  "columns-label": "Oszlopok",
+  "groups": {
+    "general": "Általános",
+    "combat": "Harc"
+  },
+  "columns": {
+    "battles": {
+      "label": "Csaták",
+      "tip": "A tankkal játszott összes játék"
+    },
+    "count": {
+      "label": "Számbavétel",
+      "tip": "A mintában szereplő nyomon követett játékosok darabszáma"
+    },
+    "rating": {
+      "label": "Értékelés (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Győzelmi arány a tankkal"
+    },
+    "playerWr": {
+      "label": "Játékos WR",
+      "tip": "Az ezt vezető játékosok átlagos összesített győzelmi aránya"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Átlagos sebzés csatánként"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Ölések / halálok aránya"
+    },
+    "assists": {
+      "label": "Segítségek",
+      "tip": "Átlagos támogatott sebzés"
+    },
+    "hitPct": {
+      "label": "Találati %",
+      "tip": "Találatok / lövések"
+    },
+    "penPct": {
+      "label": "Áthatolási %",
+      "tip": "Átütések / találatok"
+    },
+    "spots": {
+      "label": "Feldobások",
+      "tip": "Átlagos felderítések csatánként"
+    },
+    "blocked": {
+      "label": "Lekérdezés",
+      "tip": "Páncélzat által átlagosan felfogott sebzés"
+    },
+    "survival": {
+      "label": "Túlélés",
+      "tip": "Túlélési arány a csatákból"
+    }
+  }
+}

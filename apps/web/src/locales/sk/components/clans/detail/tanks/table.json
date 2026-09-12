@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Pre tento klan zatiaľ nie sú k dispozícii žiadne údaje o tankoch.",
+  "no-tanks-match-these-filters": "Týmto filtrom nezodpovedajú žiadne tanky.",
+  "nation": "Národnosť",
+  "type": "Typ",
+  "tier": "Stopnja",
+  "name": "Názov",
+  "members": "Členovia",
+  "battles": "Bitky",
+  "avg-damage": "Priemerné poškodenie",
+  "avg-xp": "Priemerné XP",
+  "wr": "WR"
+}

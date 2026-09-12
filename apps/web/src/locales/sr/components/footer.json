@@ -1,0 +1,25 @@
+{
+  "tagline": "Направљено за заједницу игре World of Tanks. Бесплатна статистика за сваког играча, клан, тенк и мапу широм региона EU, NA и Asia.",
+  "columns": {
+    "leaderboards": "Tabela lidera",
+    "tanks": "Tenkovi",
+    "maps": "Mape",
+    "integrations": "Интеграције",
+    "project": "Пројекат"
+  },
+  "links": {
+    "top-tanks": "Najbolji tenkovi",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "API документација",
+    "badges": "Bedževi",
+    "glossary": "Rečnik",
+    "coverage": "Покривеност",
+    "support": "Podržite nas",
+    "source": "Изворни код",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Није повезано са компанијом Wargaming",
+  "cookies": "Управљајте колачићима"
+}

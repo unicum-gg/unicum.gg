@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Podizanje rejtinga",
+    "blurb": "Tenkovi koji podižu ukupni rejting, njihovo uklanjanje bi ga snizilo.",
+    "empty": "Nema tenka koji podiže ukupni rejting."
+  },
+  "drag": {
+    "heading": "Snižavanje rejtinga",
+    "blurb": "Tenkovi koji snižavaju ukupni rejting, njihovo uklanjanje bi ga povećalo.",
+    "empty": "Nema tenka koji snižava ukupni rejting."
+  },
+  "if-removed": "{delta} ako se ukloni"
+}

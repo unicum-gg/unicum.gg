@@ -1,0 +1,14 @@
+{
+  "date": "日期",
+  "featured-tournament": "特色赛事",
+  "format": "格式",
+  "mode": "模式",
+  "no-tournament-matches-the-current": "没有锦标赛符合当前筛选条件。",
+  "nothing-here-right-now-wargaming": "目前这里没有内容。Wargaming每天都会开启新的锦标赛，因此这里会自动恢复内容。",
+  "prize": "奖品",
+  "region-tournaments": "{region}锦标赛（{count}）",
+  "status": "状态",
+  "teams": "队伍",
+  "tier": "等级",
+  "tournament": "赛事"
+}

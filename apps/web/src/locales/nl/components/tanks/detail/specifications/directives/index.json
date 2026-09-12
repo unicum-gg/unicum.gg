@@ -1,0 +1,9 @@
+{
+  "boosts": "Boosts {name}",
+  "directives": "Gevechtsbevelen",
+  "directive-name": "{name} richtlijn",
+  "grants-and-boosts": "Kent de bemanningsvaardigheid toe en versterkt deze, zelfs als deze niet is getraind.",
+  "grants-only": "Kent de bemanningsvaardigheid toe voor het gevecht (geen vermelde eigenschap).",
+  "enhances-mounted": "Verbetert de werking van {name}, indien gemonteerd.",
+  "mount-to-use": "Monteer {name} om deze richtlijn te gebruiken."
+}

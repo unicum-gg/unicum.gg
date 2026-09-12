@@ -1,0 +1,16 @@
+{
+  "title": "Vi bruker informasjonskapsler",
+  "description": "Vi bruker informasjonskapsler for å forbedre nettleseropplevelsen din og analysere trafikken på nettstedet.",
+  "functional": {
+    "title": "Funksjonelle",
+    "description": "Nødvendig for at nettstedet skal fungere riktig (preferanser, regionvalg)."
+  },
+  "analytics": {
+    "title": "Besøksmåling",
+    "description": "Google Analytics, som setter informasjonskapsler for å hjelpe oss med å forstå hvordan nettstedet brukes. Anonym analyse uten informasjonskapsler (Umami) forblir aktiv uansett."
+  },
+  "save": "Lagre valgene mine",
+  "decline": "Avslå alle",
+  "customize": "Tilpass",
+  "accept": "Godta alle"
+}

@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks 클랜 ({region}), 구성원 {members}명",
+    "description": "{region}의 {name} [{tag}] 클랜입니다. 구성원 {members}명, WN8과 WNX 평점이 포함된 전체 구성원 표, 최근 가입 및 나가기 활동과 전체 클랜 기록을 제공합니다."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} 요새 통계 ({region})",
+    "description": "{region}에서의 {name} [{tag}] 요새 성과입니다. 각 구성원의 쟁탈전 및 진격 평점, 전투와 승률을 제공합니다."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} 클랜 전쟁 통계 ({region})",
+    "description": "{region}에서의 {name} [{tag}] 클랜 전쟁 성과입니다. 글로벌 지도 캠페인 전체에서 구성원별 평점, 전투와 승률을 제공합니다."
+  },
+  "tanks": {
+    "title": "[{tag}] {name} 전차 ({region}), 클랜의 차량",
+    "description": "{region}에서 {name} [{tag}]의 구성원들이 플레이한 모든 차량을 보여주며, 클랜 구성원 전체의 전투, 승률과 평균 피해를 집계합니다."
+  },
+  "manage": {
+    "title": "[{tag}] {name} 요새 예비 물자 ({region})",
+    "description": "{name} [{tag}] 요새 예비 물자를 활성화하고 일정을 설정합니다. 장교 전용."
+  },
+  "missing": {
+    "description": "{region}의 [{tag}] World of Tanks 클랜입니다. WN8/WNX 평점이 포함된 구성원 표, 가입 및 나가기 활동, 최근 전투와 전체 클랜 기록을 제공합니다."
+  }
+}

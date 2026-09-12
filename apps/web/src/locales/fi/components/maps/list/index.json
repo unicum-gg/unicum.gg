@@ -1,0 +1,9 @@
+{
+  "all": "Kaikki",
+  "camouflage-map": "{camouflage}-kartta",
+  "modes": "{count, plural, one {# pelimuoto} other {# pelimuodot}}",
+  "no-maps-match-your-filters": "Mikään kartta ei vastaa suodattimiasi.",
+  "search": "Hae {count} kartan joukosta",
+  "search-label": "Etsi kartat",
+  "special-map": "Erikoiskartta"
+}

@@ -1,0 +1,18 @@
+{
+  "search": "検索",
+  "search-open": "検索を開く",
+  "search-close": "検索を閉じる",
+  "search-empty": "結果が見つかりませんでした",
+  "theme-toggle": "テーマを切り替える",
+  "theme-light": "ライト",
+  "theme-dark": "ダーク",
+  "theme-system": "システム",
+  "toc": "このページの内容",
+  "toc-empty": "見出しがありません",
+  "sidebar-open": "サイドバーを開く",
+  "sidebar-close": "サイドバーを閉じる",
+  "sidebar-collapse": "サイドバーを折りたたむ",
+  "page-previous": "前のページ",
+  "page-next": "次のページ",
+  "language": "言語を選択"
+}

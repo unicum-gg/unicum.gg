@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Napsauta saavutettavaa solmua avataksesi sen. Jokainen solmu vaikuttaa yllä oleviin ominaisuuksiin. Värit ryhmittelevät solmut tulivoiman, liikkuvuuden, selviytymiskyvyn ja ajoneuvomekaniikan mukaan.",
+  "loadout-switch-no-effect": "Taistelunaikainen varustekokoonpanon vaihto. Ei ominaisuusvaikutusta.",
+  "title": "{tank}-panssarivaunun päivitykset",
+  "vehicle-mechanic-no-effect": "Ajoneuvomekaniikka. Ei ominaisuusvaikutusta."
+}

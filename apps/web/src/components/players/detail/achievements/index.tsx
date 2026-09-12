@@ -1,5 +1,10 @@
 "use client";
 
+import { numberFormat } from "@/lib/format";
+
+import { useLocale } from "@onruntime/translations/react";
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo, useState } from "react";
 import type { PlayerAchievements } from "@unicum.gg/shared";
 import {
@@ -14,11 +19,11 @@ import { Chip, ChipRow } from "@/components/ui/chip";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Medal } from "./medal";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   style: "percent",
   maximumFractionDigits: 0,
-});
+} as const;
 
 /** Whether a medal is shown at all, independently of the text search. */
 enum EarnedFilter {
@@ -45,6 +50,9 @@ export function AchievementsTab({
   data: PlayerAchievements | null;
   loading: boolean;
 }) {
+  const { locale } = useLocale();
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/detail/achievements/index");
   const [query, setQuery] = useState("");
   const [earned, setEarned] = useState(EarnedFilter.All);
   const [outdated, setOutdated] = useState(OutdatedFilter.Current);
@@ -95,14 +103,14 @@ export function AchievementsTab({
       <PanelSeparator />
       <Panel>
         <PanelHeader className="flex flex-wrap items-center gap-3">
-          <PanelTitle>{nickname}&apos;s achievements</PanelTitle>
+          <PanelTitle>{t("achievements", { nickname })}</PanelTitle>
           {!loading && data && (
             <span className="ml-auto flex items-baseline gap-2 text-sm text-muted-foreground">
               <span className="font-semibold tabular-nums text-foreground">
-                {intFmt.format(scope.earned)} / {intFmt.format(scope.total)}
+                {num(INT_FORMAT).format(scope.earned)} / {num(INT_FORMAT).format(scope.total)}
               </span>
               <span className="tabular-nums">
-                {pctFmt.format(scope.total > 0 ? scope.earned / scope.total : 0)}
+                {num(PCT_FORMAT).format(scope.total > 0 ? scope.earned / scope.total : 0)}
               </span>
             </span>
           )}
@@ -117,17 +125,19 @@ export function AchievementsTab({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={`Search among ${shown.length.toLocaleString("en-US")} achievements`}
-            aria-label="Search achievements"
+            placeholder={t("search-among-n-achievements", {
+              count: numberFormat(locale).format(shown.length),
+            })}
+            aria-label={t("search-achievements")}
             disabled={loading}
             className="h-7 w-64 rounded-md border border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:border-fd-ring focus:outline-none"
           />
 
           <ChipRow>
             {[
-              [EarnedFilter.All, "All"],
-              [EarnedFilter.Earned, "Earned"],
-              [EarnedFilter.Missing, "Missing"],
+              [EarnedFilter.All, t("filter-all")],
+              [EarnedFilter.Earned, t("filter-earned")],
+              [EarnedFilter.Missing, t("filter-missing")],
             ].map(([value, label]) => (
               <Chip
                 key={value}
@@ -141,9 +151,9 @@ export function AchievementsTab({
 
           <ChipRow>
             {[
-              [OutdatedFilter.Current, "Obtainable"],
-              [OutdatedFilter.Outdated, "Retired"],
-              [OutdatedFilter.All, "Both"],
+              [OutdatedFilter.Current, t("filter-obtainable")],
+              [OutdatedFilter.Outdated, t("filter-retired")],
+              [OutdatedFilter.All, t("filter-both")],
             ].map(([value, label]) => (
               <Chip
                 key={value}
@@ -182,8 +192,7 @@ export function AchievementsTab({
           <Panel>
             <PanelContent>
               <p className="text-sm text-muted-foreground">
-                No achievement matches these filters.
-              </p>
+                {t("no-achievement-matches-these-filters")}</p>
             </PanelContent>
           </Panel>
         </>
@@ -203,7 +212,7 @@ export function AchievementsTab({
                 </PanelHeader>
                 <PanelContent className="flex flex-wrap gap-2">
                   {g.items.map((a) => (
-                    <Medal key={a.id} achievement={a} />
+                    <Medal key={a.id} achievement={a}  locale={locale} />
                   ))}
                 </PanelContent>
               </Panel>

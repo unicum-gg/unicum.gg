@@ -1,0 +1,8 @@
+{
+  "last-days": "آخر {chartDays} أيام",
+  "n-players": "{count, plural, zero {# لاعب} one {# لاعب} two {# لاعبان} few {# اللاعبين} many {# اللاعبين} other {# لاعب}}",
+  "rolling-average-combined-damage-to": "متوسط الضرر المدمج المتحرك اللازم لتجاوز 65 / 85 / 95% من اللاعبين.",
+  "single-battle-xp-to-beat": "XP في معركة واحدة اللازمة لتجاوز 50 / 80 / 95 / 99% من اللاعبين.",
+  "tank-marks-of-excellence": "علامات التميز لـ {tank}",
+  "tank-marks-of-mastery": "علامات الإتقان لـ {tank}"
+}

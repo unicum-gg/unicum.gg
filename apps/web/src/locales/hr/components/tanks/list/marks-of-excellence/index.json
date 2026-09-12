@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: tvoj pomični prosjek kombinirane štete (posljednjih ~100 bitki) mora nadmašiti 65% igrača na ovom tenku tijekom posljednjih 14 dana"
+    },
+    "mark2": {
+      "label": "2 Marks",
+      "tip": "2 Marks: vaš pomični prosjek kombinirane štete (posljednjih ~100 bitaka) mora nadmašiti 85 % igrača na ovom tenku tijekom posljednjih 14 dana"
+    },
+    "mark3": {
+      "label": "3 Marks",
+      "tip": "3 Marks: vaš pomični prosjek kombinirane štete (posljednjih ~100 bitaka) mora nadmašiti 95 % igrača na ovom tenku tijekom posljednjih 14 dana"
+    }
+  },
+  "rows-per-page": "Redovi po stranici",
+  "previous-page": "Prethodna stranica",
+  "page": "Stranica {current} / {totalPages}",
+  "next-page": "Sljedeća stranica",
+  "all": "Svi"
+}

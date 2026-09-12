@@ -1,0 +1,4 @@
+{
+  "title": "상위 {tier} 클랜 ({region})",
+  "description": "{region} {tier} 클랜 순위표입니다. SR(쟁탈전 평점), ELO, 전투와 승률로 랭크합니다. 최소 전투 수는 {battles}입니다."
+}

@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "{region}にあるWorld of Tanksの{count}台すべての車両。Tier、国家、クラス、役割でフィルターし、戦車を開いてステータス、優秀なプレイヤー、期待値を確認できます。",
+    "title": "World of Tanksの全戦車（{region}）、すべての車両を閲覧",
+    "description": "{region}にあるWorld of Tanksのすべての戦車を閲覧。Tier、国家、クラス、役割でフィルターし、戦車ごとのステータス、トッププレイヤー、期待値を確認できます。",
+    "heading": "すべての<accent>戦車</accent>"
+  },
+  "specifications": {
+    "intro": "{region}にあるWorld of Tanksの{count}台すべての車両について、DPM、貫通力、装甲、視認範囲、機動性を掲載。任意の列で並べ替え、Tier、国家、クラス、役割でフィルターできます。",
+    "title": "World of Tanks戦車仕様（{region}）、すべての車両を比較",
+    "description": "{region}にあるWorld of Tanksのすべての戦車の仕様を比較。DPM、貫通力、装甲、視認範囲、機動性を、Tier、国家、クラス、役割で並べ替え・フィルターできます。",
+    "heading": "戦車<accent>仕様</accent>"
+  },
+  "economics": {
+    "intro": "{region}にあるWorld of Tanksの{count}台すべての車両について、購入・修理コスト、砲弾価格、クレジット収入を掲載。任意の列で並べ替え、Tier、国家、クラス、役割でフィルターできます。",
+    "title": "World of Tanks戦車の経済性（{region}）、クレジットとXPのコスト",
+    "description": "{region}にあるWorld of Tanksのすべての戦車のクレジット・XPコスト、修理費、砲弾価格。Tier、国家、クラス、役割で並べ替え・フィルターできます。",
+    "heading": "戦車<accent>経済</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "{region}にあるWorld of Tanksの{count}台すべての車両について、1、2、3個の優等マークに必要な移動平均ダメージを掲載。任意の列で並べ替え、Tier、国家、クラス、役割でフィルターできます。",
+    "title": "World of Tanks優等マーク取得条件（{region}）",
+    "description": "{region}にあるWorld of Tanksのすべての戦車で、1、2、3個の優等マークに必要なダメージ。Tier、国家、クラス、役割で並べ替え・フィルターできます。",
+    "heading": "<accent>優等マーク</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "{region}のWorld of Tanks全{count}車両におけるエースタンカーとマスタリーバッジのXP閾値です。任意の列で並べ替えた後、Tier、国家、クラス、役割でフィルターできます。",
+    "title": "World of Tanksのマスターマーク要件（{region}）",
+    "description": "{region}のWorld of Tanksに登場するすべての戦車のエースタンカーとマスタリーバッジのXP閾値です。Tier、国家、クラス、役割で並べ替えとフィルターが可能です。",
+    "heading": "<accent>マスターマーク</accent>"
+  },
+  "videos": {
+    "intro": "{region}でコミュニティがリンクした{count}件の戦闘です。各動画は開始した秒から開きます。戦車ページから提案され、ここに表示される前に確認されています。",
+    "title": "World of Tanksのゲームプレイ動画（{region}）",
+    "description": "コミュニティが提案した World of Tanks の{region}での戦闘。各動画は戦闘開始の秒から再生され、プレイされた戦車、マップ、戦闘の側、戦闘の結果を確認できます。",
+    "heading": "ゲームプレイ<accent>ビデオ</accent>"
+  }
+}

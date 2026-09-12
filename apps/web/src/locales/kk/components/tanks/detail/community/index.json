@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Әр ось бойынша",
+  "by-server": "Сервер бойынша",
+  "community-verdict": "Қоғамдық пікір",
+  "every-server-one-average": "Әр сервер, бір орташа мән",
+  "n-shown": ", {count} көрсетілді",
+  "opinion": "{count, plural, one {# пікір} other {# пікірлер}}",
+  "opinion-next-to-win-rate": "{tier} деңгейі ішіндегі пікір мен жеңіс көрсеткіші қатар көрсетілген",
+  "rate-the": "{tankName} танкін бағалаңыз",
+  "reputation-against-results": "Нәтижелерге қарсы бедел",
+  "same-tank-different-metas": "Бір танк, әртүрлі мета",
+  "the-same-tank-by-how": "Дауыс берушінің қаншалықты жақсы ойнайтынына қарай бір танк",
+  "what-players-wrote": "Ойыншылар не жазды",
+  "who-is-saying-it": "Мұны кім айтып жатыр"
+}

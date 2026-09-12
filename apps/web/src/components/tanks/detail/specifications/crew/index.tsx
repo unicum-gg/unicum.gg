@@ -1,5 +1,7 @@
 "use client";
 
+import { statLabel } from "@/components/stat-label";
+
 import Image from "next/image";
 import { CheckIcon } from "lucide-react";
 import type { TankCrew as TankCrewData } from "@unicum.gg/core/wargaming/wot/tanks/crew";
@@ -25,28 +27,14 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
+import { useTranslation } from "@/hooks/use-translation";
+import { tankParamName } from "@/components/game-name";
 
-// Human labels for the crew roles (WG role keys) and the characteristics a skill
-// effect maps to, for the member headers and the effect tooltips.
-const ROLE_LABEL: Record<string, string> = {
-  commander: "Commander",
-  gunner: "Gunner",
-  driver: "Driver",
-  loader: "Loader",
-  radioman: "Radio Operator",
-};
-
-const FIELD_LABEL: Partial<Record<keyof TankSpec, string>> = {
-  viewRange: "View range",
-  dispMoving: "Dispersion on the move",
-  accuracy: "Accuracy",
-  aimTime: "Aim time",
-  hullTraverse: "Hull traverse",
-  turretTraverse: "Turret traverse",
-  ammoRackHealth: "Ammo rack HP",
-  shellVelocity: "Shell velocity",
-  trackRepairTime: "Track repair time",
-};
+// The crew roles are Wargaming's own words, read from its API into
+// `game/crew-roles`, so a member header reads as the player's own garage does.
+// The characteristic a skill effect applies to is keyed by its `TankSpec` field,
+// which is the characteristics table's own row key, so it resolves through
+// `game/tank-params` rather than repeating that vocabulary here.
 
 /** The signed percentage a skill effect applies to its characteristic at the
  * given training level. Aim time improves inversely to the (aim-speed) factor. */
@@ -97,6 +85,9 @@ function SkillTooltip({
   level: number;
   crewSize: number;
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/tanks/detail/specifications/crew/index");
+  const { t: tParams } = useTranslation("game/tank-params");
   const lines = effects
     .map((e) => {
       const field = crewSkillField(e.attribute);
@@ -107,7 +98,7 @@ function SkillTooltip({
         e.attribute === "vehicleRepairSpeed"
           ? repairPercent(level, crewSize)
           : effectPercent(field, e.value, level);
-      return { label: FIELD_LABEL[field] ?? field, pct };
+      return { label: tankParamName(field, field, tParams), pct };
     })
     .filter((l): l is { label: string; pct: number } => l !== null);
   if (camouflage) {
@@ -132,30 +123,24 @@ function SkillTooltip({
               key={l.label}
               className="flex justify-between gap-3 tabular-nums"
             >
-              <span className="text-background/60">{l.label}</span>
+              <span className="text-background/60">{statLabel(l.label, tStats)}</span>
               <span>{`${l.pct > 0 ? "+" : ""}${l.pct}%`}</span>
             </div>
           ))}
           {crewAveraged ? (
             <div className="pt-1 text-[11px] text-background/50">
-              This member&apos;s share; each crew member adds the same again.
-            </div>
+              {t("this-member-s-share-each")}</div>
           ) : null}
         </div>
       ) : crewLevel > 0 ? (
         <div className="border-t border-background/20 pt-1.5 text-background/60">
-          Raises the whole crew&apos;s effective level, improving every
-          crew-affected stat (view range, reload, aiming, traverse, ...). Best
-          when the entire crew has it.
-        </div>
+          {t("raises-the-whole-crew-s")}</div>
       ) : (
         // No mapped characteristic: the skill acts on something the table does
         // not list (Fire Fighting shortens fires, others resist stun, save the
         // crew, ...), so training it here leaves the values unchanged.
         <div className="border-t border-background/20 pt-1.5 text-background/60">
-          Situational effect not shown in the characteristics above (e.g. fire
-          duration, stun resistance, crew survival).
-        </div>
+          {t("situational-effect-not-shown-in")}</div>
       )}
     </div>
   );
@@ -291,6 +276,9 @@ export function TankCrew({
   screenLines?: boolean;
   headerBorder?: boolean;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/crew/index");
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
+  const { t: tRoles } = useTranslation("game/crew-roles");
   if (crew.members.length === 0 || crew.skills.length === 0) return null;
   const byKey = new Map(crew.skills.map((s) => [s.key, s]));
   const pct = Math.round(level * 100);
@@ -305,11 +293,11 @@ export function TankCrew({
           )}
         >
           <div className="flex items-center gap-3">
-            <PanelTitle>Crew Skills</PanelTitle>
+            <PanelTitle>{tSection("crew-skills")}</PanelTitle>
             {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
           </div>
           <div className="flex items-center gap-2 text-xs text-fd-muted-foreground">
-            <span className="whitespace-nowrap">Crew level</span>
+            <span className="whitespace-nowrap">{tSection("crew-level")}</span>
             <Slider
               // In game the major qualification never drops below 50%
               // (a fresh crew starts there), so the simulator matches.
@@ -317,7 +305,7 @@ export function TankCrew({
               max={100}
               value={[pct]}
               onValueChange={([v]) => onLevel(v / 100)}
-              aria-label="Crew training level"
+              aria-label={t("crew-training-level")}
               className="w-28 [&_[data-slot=slider-range]]:bg-brand [&_[data-slot=slider-thumb]]:border-brand"
             />
             <span className="w-9 text-right tabular-nums text-fd-foreground">
@@ -381,7 +369,7 @@ export function TankCrew({
                     ) : null}
                   </span>
                   <span>
-                    {m.roles.map((r) => ROLE_LABEL[r] ?? r).join(" / ")}
+                    {m.roles.map((r) => tRoles(r)).join(" / ")}
                   </span>
                 </div>
                 <div className="space-y-2">

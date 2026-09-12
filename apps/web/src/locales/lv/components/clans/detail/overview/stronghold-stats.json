@@ -1,0 +1,22 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Kopā",
+    "day": "Pēdējās 24h",
+    "week": "Pēdējās 7d",
+    "month": "Pēdējās 30d"
+  },
+  "sections": {
+    "elo": "X līmeņa ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} X līmeņa (7v7)",
+    "t8": "{skirmish} VIII līmeņa (7v7)",
+    "t6": "{skirmish} VI līmeņa (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Kaujas",
+    "winrate": "Uzvaru procents"
+  }
+}

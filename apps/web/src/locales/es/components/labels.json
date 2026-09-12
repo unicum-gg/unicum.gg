@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Esperando primer instantánea",
+    "hidden": "Oculto por Wargaming",
+    "active_24h": "Activo < 24 h",
+    "active_7d": "Activo < 7 d",
+    "recent_30d": "Reciente < 30 d",
+    "recent_90d": "Reciente < 90 d",
+    "dormant_1y": "Latente < 1 año",
+    "inactive": "Inactivo > 1 año"
+  },
+  "rating-hype": {
+    "overrated": "Sobrevalorado",
+    "fair": "Calificado de manera justa",
+    "underrated": "Subestimado"
+  },
+  "rating-consensus": {
+    "agreed": "Acuerdo amplio",
+    "mixed": "Opiniones mixtas",
+    "divisive": "Divisivo"
+  },
+  "rating-axes": {
+    "overall": "General",
+    "fun": "Diversión",
+    "firepower": "Potencia de fuego",
+    "armour": "Blindaje",
+    "mobility": "Movilidad",
+    "gunHandling": "Manejo del arma",
+    "concealment": "Ocultación",
+    "beginnerFriendliness": "Amigable para principiantes",
+    "versatility": "Versatilidad"
+  },
+  "rating-axis-hints": {
+    "overall": "¿Qué tan bien rinde este tanque en general?",
+    "fun": "¿Cuánto disfrutas jugando con él?",
+    "firepower": "Daño alfa, daño por minuto y penetración.",
+    "armour": "Cuántos proyectiles hace rebotar con el chasis oculto y al descubierto.",
+    "mobility": "Velocidad, aceleración y capacidad de giro.",
+    "gunHandling": "Tiempo de apuntamiento, dispersión y precisión en movimiento.",
+    "concealment": "Camuflaje y alcance de visión.",
+    "beginnerFriendliness": "Cuánto margen de error ofrece si aún estás aprendiendo.",
+    "versatility": "¿Funciona en cualquier mapa y con cualquier equipo?"
+  },
+  "voter-brackets": {
+    "unknown": "No clasificado",
+    "learning": "Aprendiendo",
+    "average": "Promedio",
+    "strong": "Fuerte",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vehículos",
+    "gunnery": "Artillería",
+    "armor": "Blindaje",
+    "mobility": "Movilidad",
+    "vision": "Visión",
+    "crew": "Tripulación",
+    "progression": "Progresión",
+    "economy": "Economía",
+    "ratings": "Clasificaciones",
+    "statistics": "Estadísticas",
+    "modes": "Modos de batalla",
+    "tactics": "Tácticas",
+    "slang": "Jerga"
+  }
+}

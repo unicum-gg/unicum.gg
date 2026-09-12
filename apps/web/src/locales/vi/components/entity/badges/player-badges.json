@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "hạng 1",
+    "2": "hạng 2",
+    "3": "hạng 3"
+  },
+  "streamer": "Streamer · xem {name} trên Twitch",
+  "tournament": {
+    "one": "Danh sách chiến thắng của {title}",
+    "many": "Trong {count} danh sách chiến thắng, giải đấu hay nhất {title}",
+    "featured": "{text} · sự kiện nổi bật",
+    "unnamed": "một giải đấu Wargaming"
+  },
+  "tournament-wins": "{count, plural, other {# chiến thắng giải đấu}}",
+  "watch-on-twitch": "Xem {name} trên Twitch",
+  "watch-on-twitch-viewers": "Xem {name} trên Twitch · {viewers} người xem"
+}

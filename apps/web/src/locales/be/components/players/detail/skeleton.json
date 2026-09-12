@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Статыстыка выпадковых баёў: {nickname}",
+  "progression": "Прагрэс {metricLabel}: {nickname}",
+  "solid-line-is-overall-matches": "Суцэльны радок паказвае агульны {metricLabel} і адпавядае слупку Total вышэй, паступова змяняючыся па меры назапашвання новых баёў. Пункцірны радок паказвае {metricLabel2} за сесію, вылічаны на аснове баёў, згуляных пасля папярэдняга здымка. Ён паказвае гарачыя і халодныя серыі. Колер радка адпавядае ўзроўню рэйтынгу.",
+  "tanks-shaping-s-rating": "Танкі, якія фарміруюць рэйтынг: {nickname}",
+  "tanks": "Танкі {nickname}",
+  "stats": "Статыстыка {strongholdLabel}: {nickname}"
+}

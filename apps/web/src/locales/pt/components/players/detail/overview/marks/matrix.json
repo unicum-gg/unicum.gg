@@ -1,0 +1,7 @@
+{
+  "loading": "{count} veículos de nível {tier}, a carregar os nomes…",
+  "loading-one": "{count} veículo de nível {tier}, a carregar o nome…",
+  "and-more": "e mais {count}",
+  "hint": "Clique para os abrir no separador Tanques",
+  "tier": "Nível"
+}

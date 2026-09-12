@@ -1,0 +1,12 @@
+{
+  "slot": "الخانة {n}",
+  "slot-filled": "الخانة {n}: {name}",
+  "consumable-slot": "خانة المستهلكات {n}",
+  "consumable-slot-filled": "خانة المستهلكات {n}: {name}",
+  "level": "المستوى {n}",
+  "stock": "مخزون",
+  "specialize": "انقر لتخصيص هذه الخانة.",
+  "clear-specialization": "انقر لمسح تخصيص هذه الخانة.",
+  "crew-skills": "مهارات الطاقم",
+  "shell-aria": "{name}: ضرر {damage}، اختراق {penetration} مم"
+}

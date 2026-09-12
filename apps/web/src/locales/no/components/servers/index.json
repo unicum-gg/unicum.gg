@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Hvor mange spillere som er på hver {label}-server akkurat nå, hvordan antallet endres gjennom dagen og uken, og hvordan regionen sammenlignes med de andre.",
+  "recording-just-started": "Registreringen har nettopp startet, så diagrammene fylles ut herfra.",
+  "series-starts": "Serien starter {at}, da registreringen startet, og ingenting før dette kan gjenopprettes.",
+  "server-population": "Spillerantall på {label}-serveren",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "Wargaming navngir en regions første klynger og lar resten stå som rene identifikatorer, så 203 vises som EU3 i tråd med regionens egen nummerering. Identifikatoren er det vi registrerer, og det hvert navn viser ved peker. Det er også den etiketten følger. Å nummerere klyngene etter hvor travle de er, ville flyttet et navn fra én server til en annen når to av dem byttet plass. En server som mangler i en måling, ble ikke rapportert i det hele tatt, noe som ikke er det samme som tom.",
+  "we-record-it": "Wargaming publiserer hver servers spillerantall som et øyeblikksbilde og lagrer ingen historikk. Derfor er hvert tall etter inneværende minutt noe vi selv har registrert hvert femte minutt.",
+  "where-battles-are-fought": "Hvor {label}-kamper utkjempes"
+}

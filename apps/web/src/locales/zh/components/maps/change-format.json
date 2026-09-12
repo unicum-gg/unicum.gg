@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "播放区域宽度",
+    "height": "播放区域高度",
+    "round-length": "战斗计时器",
+    "team-size": "队伍规模",
+    "camouflage": "赛季",
+    "presence": "游戏内",
+    "variant-version": "{type}版本",
+    "play-area": "播放区域",
+    "bases-team1": "我方基地",
+    "bases-team2": "敌方基地",
+    "spawns-team1": "我方出生点",
+    "spawns-team2": "敌方出生点",
+    "control-point": "控制点",
+    "artillery-headquarters": "火炮总部",
+    "comms-centers": "通讯中心",
+    "observation-posts": "观察哨",
+    "points-of-interest": "焦点位置"
+  },
+  "summary": {
+    "added": "{name}已添加",
+    "removed": "{name}已移除",
+    "added-to-game": "已添加到游戏",
+    "removed-from-game": "已从游戏中移除",
+    "added-on-test": "已添加到测试客户端",
+    "removed-on-test": "已从测试客户端移除",
+    "mode-added": "{name}模式已添加",
+    "mode-removed": "{name}模式已移除",
+    "now-played-in": "现在在{name}中进行",
+    "no-longer-played-in": "不再在{name}中进行",
+    "event-added": "{name}现在可在战斗中发生",
+    "event-removed": "{name}不再发生",
+    "moved": "{name}已移动",
+    "count-changed": "{name}：{before} → {after}",
+    "value-changed": "{name}：{before} → {after}",
+    "value-set": "{name}：{after}"
+  },
+  "name-with-mode": "{name}（{mode}）"
+}

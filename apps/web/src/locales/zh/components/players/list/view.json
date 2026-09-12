@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "顶尖<accent>玩家</accent>",
+    "language": "<accent>{language}</accent>顶尖玩家"
+  },
+  "intro": {
+    "all": "{region}排行榜，按历史{metric}排名（最低20,000场战斗）。",
+    "language": "{region}中推断的军团历史语言集合包含{language}的玩家，按{metric}排名（最低10,000场战斗）。",
+    "strict": "{region}中推断的军团历史语言仅为{language}的玩家，按{metric}排名（最低10,000场战斗）。"
+  },
+  "board": {
+    "all": "按{metric}排名前{count}的玩家",
+    "language": "按{metric}排名前{count}的{language}玩家",
+    "strict": "按{metric}排名前{count}的纯{language}玩家"
+  },
+  "modes": {
+    "overall": "总体"
+  },
+  "columns": {
+    "player": "玩家"
+  },
+  "strict-toggle": "严格",
+  "any-toggle": "任意",
+  "all-languages": "所有语言",
+  "battles": "战斗场次",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

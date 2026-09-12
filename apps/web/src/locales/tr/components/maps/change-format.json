@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Oyun alanı genişliği",
+    "height": "Oyun alanı yüksekliği",
+    "round-length": "Savaş zamanlayıcısı",
+    "team-size": "Takım boyutu",
+    "camouflage": "Sezon",
+    "presence": "Oyunda",
+    "variant-version": "{type} sürümü",
+    "play-area": "Oyun alanı",
+    "bases-team1": "Müttefik üsleri",
+    "bases-team2": "Düşman üsleri",
+    "spawns-team1": "Müttefik doğma noktaları",
+    "spawns-team2": "Düşman doğma noktaları",
+    "control-point": "Kontrol noktası",
+    "artillery-headquarters": "Topçu Karargâhı",
+    "comms-centers": "İletişim merkezleri",
+    "observation-posts": "Gözetleme noktaları",
+    "points-of-interest": "İlgi noktaları"
+  },
+  "summary": {
+    "added": "{name} eklendi",
+    "removed": "{name} kaldırıldı",
+    "added-to-game": "Oyuna eklendi",
+    "removed-from-game": "Oyundan kaldırıldı",
+    "added-on-test": "Test istemcisine eklendi",
+    "removed-on-test": "Test istemcisinden kaldırıldı",
+    "mode-added": "{name} modu eklendi",
+    "mode-removed": "{name} modu kaldırıldı",
+    "now-played-in": "Artık {name} içinde oynanıyor",
+    "no-longer-played-in": "{name} içinde artık oynanmıyor",
+    "event-added": "{name} artık savaş sırasında gerçekleşebilir",
+    "event-removed": "{name} artık gerçekleşmiyor",
+    "moved": "{name} hareket ettirildi",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

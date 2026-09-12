@@ -1,0 +1,11 @@
+{
+  "closes": "Isara {when}",
+  "map-pool": "Pool ng mapa",
+  "place": "Lugar",
+  "prize": "Gantimpala",
+  "prizes": "Mga gantimpala",
+  "qualified": "Kwalipikado ({count})",
+  "register": "Magrehistro",
+  "tournaments": "Mga torneo",
+  "winner": "{count, plural, one {Nagwagi} other {Mga nagwagi}}"
+}

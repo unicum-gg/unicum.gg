@@ -1,0 +1,17 @@
+{
+  "close": "Fermer",
+  "format": "Format",
+  "here": "ici",
+  "in-the-queue": "Elle est dans la file d’attente et apparaîtra {where} dès qu’un modérateur l’aura vérifiée. En attendant, la vôtre est grisée sur cette page.",
+  "log-in-to-suggest-a": "Connectez-vous pour suggérer une tactique",
+  "on-map": "sur {map}",
+  "players-per-team": "Joueurs par équipe",
+  "sending": "Envoi…",
+  "suggest": "Suggérer",
+  "suggest-a-tactic": "Suggérer une tactique",
+  "suggest-another": "Suggérer un autre",
+  "suggestion-sent": "Suggestion envoyée",
+  "tier": "Niveau",
+  "what-to-submit": "Une bataille compétitive, dont la vidéo démarre à la seconde exacte où elle commence. La carte s’ouvre sur {map} et évolue avec la vidéo : une soirée de clan couvre ainsi toute une rotation. Le camp de départ est le critère utilisé par un stratège pour la retrouver. Il est donc demandé plutôt que deviné.",
+  "what-was-played": "Ce qui a été joué"
+}

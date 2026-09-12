@@ -1,0 +1,14 @@
+{
+  "ammunition": "Боеприпаси",
+  "characteristics": "Характеристики на танка {tank}",
+  "consumables": "Снаряжение",
+  "crew-level": "Ниво на екипажа",
+  "crew-skills": "Умения на екипажа",
+  "equipment": "Оборудване",
+  "field-mods": "Полеви модификации",
+  "historical-reference": "Историческа справка за танка {tank}",
+  "modules": "Модули на танка {tank}",
+  "research-path": "Клон в Техн. дърво за танка {tank}",
+  "similar": "Танкове, подобни на {tank}",
+  "videos": "Видеа за танка {tank}"
+}

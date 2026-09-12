@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Ilang salita pa: {count} ang kailangan.",
+  "at-winrate": "sa {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Maaaring hindi iyon ma-withdraw. Subukan muli pagkalipas ng ilang sandali.",
+  "hide-the-detailed-axes": "Itago ang mga detalyadong axis",
+  "not-enough-battles": "Hindi mo pa sapat na nilaro ang tank na ito para mabilang ang isang boto.",
+  "published-once-read": "Ilalathala kapag nabasa na ito ng isang moderator. Agad na mabibilang ang iyong mga star.",
+  "rate-it-in-detail": "I-rate ito nang detalyado (optional)",
+  "review": {
+    "none": "Na-save ang rating.",
+    "queued": "Na-save ang rating. Nasa moderator ang iyong pagsusuri.",
+    "published": "Na-save ang rating. Live na ang iyong pagsusuri.",
+    "pending": "Na-save ang rating. Naghihintay pa rin ng moderator ang iyong pagsusuri.",
+    "rejected": "Na-save ang rating. Hindi inilathala ang nauna mong pagsusuri, kaya mga star mo lamang ang mabibilang.",
+    "closed": "Na-save ang rating. Sarado ngayon ang mga nakasulat na opinyon, kaya hindi itinago ang teksto."
+  },
+  "save-failed": "Maaaring hindi iyon ma-save. Subukan muli pagkalipas ng ilang sandali.",
+  "say-why-optional": "Sabihin kung bakit (optional)",
+  "signed-with": "Nilagdaan gamit ang iyong {battles} mga laban",
+  "submit-my-rating": "Isumite ang aking rating",
+  "too-many-edits": "Napakaraming pagbabago nang sabay-sabay. Maghintay ng isang minuto.",
+  "update-my-rating": "I-update ang aking rating",
+  "what-it-is-good-at": "Kung saan ito maganda, kung saan hindi, at kung sino ang dapat maglaro nito.",
+  "withdraw": "Bawiin",
+  "your-rating-has-been-withdrawn": "Na-withdraw ang iyong rating.",
+  "your-review-is-waiting-on": "Naghihintay ng moderator ang iyong pagsusuri. Ikaw lamang ang makakakita nito rito.",
+  "your-review-was-not-published": "Hindi inilathala ang iyong pagsusuri. Mabibilang pa rin ang iyong mga star sa average."
+}

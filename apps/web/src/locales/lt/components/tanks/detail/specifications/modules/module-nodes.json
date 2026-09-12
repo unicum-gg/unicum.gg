@@ -1,0 +1,17 @@
+{
+  "aim-time": "Šaudymo laikas",
+  "ammo": "Šaudmenys",
+  "armor": "Šarvai",
+  "dispersion": "Išsisklaidymas",
+  "fire-chance": "Gaisro tikimybė",
+  "gun-arc": "Ginklo kampas",
+  "hit-points": "Gyvybės taškai",
+  "load-limit": "Krovimo riba",
+  "mounted-on": "Montuojama ant {tanks}",
+  "power": "Galia",
+  "reload": "Užsitaisymas",
+  "signal-range": "Signalo nuotolis",
+  "tier": "Lygis {tier}",
+  "traverse": "Sukimas",
+  "view-range": "Matymo nuotolis"
+}

@@ -1,0 +1,7 @@
+{
+  "firing": "Ammutaan {shell}, {pen} mm. Vaihda laukaus",
+  "no-such-round": "{mark}: tällä tykillä ei ole sitä, joten aseta kulmat itse",
+  "own-round": "{mark}: tämän tykin oma ammus kaikkine lukuineen",
+  "treat-it-as": "Käsittele sitä muodossa",
+  "treat-it-as-mark": "Käsittele sitä muodossa {mark}"
+}

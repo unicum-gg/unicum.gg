@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "Erittely näkyy vasta kohdassa {min}, joten muoto kertoo jotain panssarivaunusta eikä yhdestä henkilöstä.",
+  "community-rating-by-axis": "Yhteisön arvio akseleittain",
+  "from-votes": "Perustuu {count} yksityiskohtaiseen ääneen.",
+  "from-votes-one": "Perustuu {count} yksityiskohtaiseen ääneen.",
+  "nobody-yet": "Kukaan ei ole vielä täyttänyt yksityiskohtaisia akseleita.",
+  "only-votes": "Toistaiseksi vain {count} yksityiskohtaista ääntä.",
+  "only-votes-one": "Toistaiseksi vain {count} yksityiskohtainen ääni."
+}

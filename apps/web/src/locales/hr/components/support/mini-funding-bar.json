@@ -1,0 +1,6 @@
+{
+  "label": "Financira zajednica",
+  "funded": "{pct}% financirano",
+  "tooltip": "Podržavatelji su od pokretanja pokrili {received} od {goal}",
+  "tooltip-loading": "Financira zajednica, bez oglasa"
+}

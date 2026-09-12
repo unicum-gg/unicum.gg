@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Noen ord til: {count} igjen.",
+  "at-winrate": "ved {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Kunne ikke trekke tilbake. Prøv igjen om litt.",
+  "hide-the-detailed-axes": "Skjul de detaljerte aksene",
+  "not-enough-battles": "Du har ikke spilt denne stridsvognen nok til at en stemme kan telle.",
+  "published-once-read": "Publiseres når en moderator har lest den. Stjernene dine teller med en gang.",
+  "rate-it-in-detail": "Vurder den i detalj (valgfritt)",
+  "review": {
+    "none": "Vurdering lagret.",
+    "queued": "Vurdering lagret. Anmeldelsen din er hos en moderator.",
+    "published": "Vurdering lagret. Anmeldelsen din er allerede publisert.",
+    "pending": "Vurdering lagret. Anmeldelsen din venter fortsatt på en moderator.",
+    "rejected": "Vurdering lagret. Den forrige anmeldelsen din ble ikke publisert, så bare stjernene dine teller.",
+    "closed": "Vurdering lagret. Skrevne meninger er stengt akkurat nå, så teksten ble ikke beholdt."
+  },
+  "save-failed": "Kunne ikke lagre. Prøv igjen om litt.",
+  "say-why-optional": "Si hvorfor (valgfritt)",
+  "signed-with": "Signert med dine {battles} kamper i den",
+  "submit-my-rating": "Send inn vurderingen min",
+  "too-many-edits": "Det er mange endringer på én gang. Vent litt.",
+  "update-my-rating": "Oppdater vurderingen min",
+  "what-it-is-good-at": "Hva den er god på, hva den ikke er god på, og hvem som bør spille den.",
+  "withdraw": "Tilbakekall",
+  "your-rating-has-been-withdrawn": "Vurderingen din er trukket tilbake.",
+  "your-review-is-waiting-on": "Anmeldelsen din venter på en moderator. Bare du kan se den her.",
+  "your-review-was-not-published": "Anmeldelsen din ble ikke publisert. Stjernene dine teller fortsatt med i gjennomsnittet."
+}

@@ -1,0 +1,7 @@
+{
+  "label": "Tuloslistan jakso",
+  "periods": {
+    "overall": "Yhteensä",
+    "30d": "Viimeiset 30 päivää"
+  }
+}

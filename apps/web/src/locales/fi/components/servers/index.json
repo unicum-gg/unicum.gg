@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Kuinka monta pelaajaa kullakin {label}-palvelimella on juuri nyt, miten määrä muuttuu päivän ja viikon aikana ja miten alue vertautuu muihin.",
+  "recording-just-started": "Tallennus alkoi juuri, joten kaaviot täyttyvät tästä eteenpäin.",
+  "series-starts": "Sarja alkaa kohdasta {at}, jolloin tallennus alkoi, eikä sitä edeltäviä tietoja voida palauttaa.",
+  "server-population": "{label}-palvelimen pelaajamäärä",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "Wargaming nimeää alueen ensimmäiset klusterit ja jättää loput pelkiksi tunnisteiksi. Siksi 203 näkyy muodossa EU3 alueen oman numeroinnin mukaisesti. Tunniste on se, minkä tallennamme, ja nimi näkyy osoittamalla. Myös nimiö seuraa tunnistetta, koska klustereiden numeroiminen kiireisyyden mukaan siirtäisi nimen palvelimelta toiselle aina, kun kaksi niistä vaihtaisi paikkaa. Näytteestä puuttuvaa palvelinta ei ilmoitettu lainkaan, mikä ei tarkoita samaa kuin tyhjä palvelin.",
+  "we-record-it": "Wargaming julkaisee kunkin palvelimen pelaajamäärän hetkellisenä arvona eikä säilytä siitä historiaa. Siksi jokainen nykyhetkeä myöhempi luku on meidän itse tallentamamme, viiden minuutin välein.",
+  "where-battles-are-fought": "Missä {label}-taistelut käydään"
+}

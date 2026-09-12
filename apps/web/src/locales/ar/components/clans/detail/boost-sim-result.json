@@ -1,0 +1,11 @@
+{
+  "already-running": "يتم التشغيل بالفعل",
+  "in-window": "في النافذة",
+  "n-online": "/ {count} متصل",
+  "no-reserves-selected": "لم يتم اختيار أي احتياطيات.",
+  "no-stock-ready": "لا يوجد مخزون جاهز",
+  "not-available": "غير متوفر",
+  "threshold": "الحد الأدنى ({online}/{min})",
+  "would-activate": "سيتم تفعيله",
+  "would-not-fire": "لن يتم تفعيله الآن."
+}

@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Ammunisjon, utstyr, forbruksvarer, direktiver, mannskap og progresjon for denne kolonnen. Hver endring flytter egenskapene i sammenlikningen bak den.",
+  "ammunition-equipment-crew-and-progression": "Ammunisjon, utstyr, mannskap og progresjon",
+  "apply-to-every-column": "Bruk på alle kolonner",
+  "compare-against": "Sammenlikn med {tank}",
+  "compare-the-others-against-this-one": "Sammenlikn de andre med denne",
+  "configure-tank": "Konfigurer {tank}",
+  "highest-overall-score": "Høyeste totale poengsum",
+  "highest-overall-score-of-this": "Høyeste totale poengsum i denne sammenlikningen",
+  "is-the-reference": "{tank} er referansen",
+  "overall": "Totalt",
+  "reference-column": "Referansekolonne",
+  "remove-tank": "Fjern {tank}",
+  "reset-all": "Nullstill alt",
+  "setup": "Setup",
+  "stock": "Standard",
+  "tank-setup": "Oppsett: {tank}",
+  "top": "Topp",
+  "where-this-vehicle-sits-across": "Hvor dette kjøretøyet ligger i hele katalogen, av {MAXSCORE}: gjennomsnittet av de fire kategoripoengsummene, slik de er konfigurert her. En oppsummering, ikke en dom. En speider og en tungvogn kan nå samme tall ved å være gode på forskjellige ting."
+}

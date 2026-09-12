@@ -1,0 +1,5 @@
+{
+  "battles": "{count} gevechten",
+  "chart-label": "Gespeelde gevechten per {granularity}, ingekleurd op basis van {metric}",
+  "no-battles": "Geen gevechten"
+}

@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Tämän sarakkeen Ammukset, varusteet, kulutustarvikkeet, direktiivit, miehistö ja eteneminen. Jokainen muutos siirtää sen ominaisuuksia vertailun taustalla.",
+  "ammunition-equipment-crew-and-progression": "Ammukset, varusteet, miehistö ja eteneminen",
+  "apply-to-every-column": "Käytä jokaisessa sarakkeessa",
+  "compare-against": "Vertaile panssarivaunua {tank} vastaan",
+  "compare-the-others-against-this-one": "Vertaile muita tähän vastaan",
+  "configure-tank": "Määritä panssarivaunun {tank} kokoonpano",
+  "highest-overall-score": "Korkein kokonaistulos",
+  "highest-overall-score-of-this": "Tämän vertailun korkein kokonaistulos",
+  "is-the-reference": "Panssarivaunu {tank} on vertailukohta",
+  "overall": "Yhteensä",
+  "reference-column": "Vertailukohtasarake",
+  "remove-tank": "Poista panssarivaunu {tank}",
+  "reset-all": "Nollaa kaikki",
+  "setup": "Asetus",
+  "stock": "Varasto",
+  "tank-setup": "Panssarivaunun {tank} kokoonpano",
+  "top": "Parhaat",
+  "where-this-vehicle-sits-across": "Ajoneuvon sijoitus koko luettelossa, enintään {MAXSCORE}: sen neljän ominaisuusluokan tuloksen keskiarvo tässä määritetyllä kokoonpanolla. Yhteenveto, ei tuomio. Tiedustelija ja raskas panssarivaunu voivat saavuttaa saman luvun olemalla hyviä eri asioissa."
+}

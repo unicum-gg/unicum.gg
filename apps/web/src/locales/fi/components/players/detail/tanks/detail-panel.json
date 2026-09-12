@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Keskimääräinen tulos taistelua kohti",
+  "general-parameters": "Yleiset tilastot",
+  "metric-progression": "{metric}-kehitys",
+  "not-enough-history-on-this": "Tästä panssarivaunusta ei ole vielä riittävästi historiaa. Viivan piirtämiseen tarvitaan vähintään kaksi tilannekuvaa viimeisten 90 päivän ajalta.",
+  "record-score": "Ennätystulos",
+  "updated": "Päivitetty"
+}

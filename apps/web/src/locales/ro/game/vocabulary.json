@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Standard",
+    "battle_royale": "Vânătorul de oţel",
+    "frontline": "Front",
+    "onslaught": "Violență",
+    "onslaught_night": "{onslaught} Noapte",
+    "grand_battle": "Luptă Epică",
+    "clan_wars": "Războaie de clan",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arcade",
+    "story_mode": "Mod poveste",
+    "training": "Pregătire"
+  },
+  "player-modes": {
+    "overall": "Bătălii aleatorii",
+    "skirmish": "Raid",
+    "advances": "Ofensive",
+    "grand": "Bătălii mari",
+    "ranked": "Lupte de clasament",
+    "cw-x": "Războaie între clanuri X",
+    "cw-viii": "Războaie între clanuri VIII",
+    "cw-vi": "Războaie între clanuri VI",
+    "steel-hunter": "Vânătorul de oţel",
+    "onslaught": "Violență"
+  },
+  "stronghold-tiers": {
+    "advances": "Ofensive",
+    "t10": "Escarmușă T10",
+    "t8": "Escarmușă T8",
+    "t6": "Escarmușă T6"
+  },
+  "stronghold-periods": {
+    "24h": "Ultimele 24 de ore",
+    "7d": "Ultimele 7 zile",
+    "30d": "Ultimele 30 de zile",
+    "overall": "General"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Lupte",
+    "winrate": "Rată de câștig"
+  },
+  "clan-boards": {
+    "advances": "Ofensive",
+    "t10": "Escarmușă X",
+    "t8": "Escarmușă VIII",
+    "t6": "Escarmușă VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Contact",
+    "assault": "Assalt",
+    "attack-defense": "Atac/Apărare"
+  },
+  "map-camouflage": {
+    "summer": "Vară",
+    "winter": "Iarnă",
+    "desert": "Deșert"
+  },
+  "map-poi": {
+    "1": "Cartierul general al artileriei",
+    "2": "Centru de comunicații",
+    "3": "Post de observație"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Întâlnire",
+    "assault2": "Atac/Apărare",
+    "comp7": "Violență"
+  },
+  "battle-formats": {
+    "random": "Standard",
+    "clan_wars": "Războaie de clan",
+    "advances": "Ofensive",
+    "skirmish": "Raid",
+    "maneuvers": "Manevre",
+    "onslaught": "Violență",
+    "tournament": "Turneu"
+  },
+  "battle-results": {
+    "victory": "Victorie",
+    "defeat": "Înfrângere!",
+    "draw": "Egalitate!"
+  },
+  "spawn-directions": {
+    "north": "Nord",
+    "south": "Sud",
+    "east": "Est",
+    "west": "Vest"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Următorul",
+    "registration_started": "Înscriere deschisă",
+    "registration_finished": "Înscriere închisă",
+    "running": "În desfășurare",
+    "finished": "Finalizat",
+    "complete": "Finalizată"
+  },
+  "onslaught-tiers": {
+    "legend": "Legendă",
+    "champion": "Campion",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Greu",
+    "mediumTank": "Mediu",
+    "lightTank": "Ușor",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Assalt",
+    "break": "Spargere",
+    "support": "Asistență",
+    "universal": "Versatil",
+    "sniper": "Lunetist",
+    "wheeled": "Pe roți"
+  },
+  "mastery-badges": {
+    "class3": "3rd Class",
+    "class2": "2nd Class",
+    "class1": "1st Class",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Bătălii aleatorii",
+    "stronghold": "Fortăreață",
+    "skirmish": "Raid",
+    "clan-wars": "Războaie de clan"
+  },
+  "features": {
+    "stronghold": "Fortăreață",
+    "skirmish": "Raid",
+    "marks-of-excellence": "Însemne de Excelenţă",
+    "marks-of-mastery": "Marcajele de Măiestrie",
+    "personal-rating": "Scor personal",
+    "world-of-tanks-rating": "Rating World of Tanks",
+    "common-test": "Test Comun",
+    "tournaments": "Turneele"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Însemne de Excelenţă"
+  }
+}

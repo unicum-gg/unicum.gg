@@ -1,0 +1,12 @@
+{
+  "clans-history": "История кланов игрока {nickname}",
+  "clans-in-clans": "Кланы: {totalClans} · время в кланах: {timeInClansSeconds}",
+  "current": "текущий",
+  "duration": "Длительность",
+  "from": "От",
+  "name": "Название",
+  "no-clan-history": "Истории кланов нет.",
+  "role": "Роль",
+  "tag": "Тег",
+  "to": "К"
+}

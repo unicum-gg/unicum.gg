@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Оқ-дәрі, жабдық, шығын материалдары, директивалар, экипаж және осы бағандағы прогресс. Әр өзгеріс салыстырудағы сипаттамаларды өзгертеді.",
+  "ammunition-equipment-crew-and-progression": "Оқ-дәрі, жабдық, экипаж және прогресс",
+  "apply-to-every-column": "Әр бағанға қолдану",
+  "compare-against": "{tank} танкімен салыстыру",
+  "compare-the-others-against-this-one": "Қалғандарын осы танкке қарсы салыстыру",
+  "configure-tank": "{tank} танкін баптау",
+  "highest-overall-score": "Ең жоғары жалпы ұпай",
+  "highest-overall-score-of-this": "Осы салыстырудағы ең жоғары жалпы ұпай",
+  "is-the-reference": "Анықтамалық танк: {tank}",
+  "overall": "Жалпы",
+  "reference-column": "Анықтамалық баған",
+  "remove-tank": "{tank} танкін алып тастау",
+  "reset-all": "барлығын қалпына келтіру",
+  "setup": "Орнату",
+  "stock": "Қор",
+  "tank-setup": "{tank} жинағы",
+  "top": "Жоғары",
+  "where-this-vehicle-sits-across": "Бұл техника бүкіл каталогта {MAXSCORE} ішінен орналасқан орны. Мұнда бапталған төрт санат ұпайының орташа мәні алынды. Бұл қорытынды, үкім емес, барлаушы мен ауыр танк әртүрлі нәрседе жақсы болып, бірдей санға жете алады."
+}

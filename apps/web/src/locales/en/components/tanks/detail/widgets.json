@@ -1,0 +1,12 @@
+{
+  "slot": "Slot {n}",
+  "slot-filled": "Slot {n}: {name}",
+  "consumable-slot": "Consumable slot {n}",
+  "consumable-slot-filled": "Consumable slot {n}: {name}",
+  "level": "Level {n}",
+  "stock": "Stock",
+  "specialize": "Click to specialize this slot.",
+  "clear-specialization": "Click to clear this slot’s specialization.",
+  "crew-skills": "Crew skills",
+  "shell-aria": "{name}: {damage} damage, {penetration} mm penetration"
+}

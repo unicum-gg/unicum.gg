@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Wala pang datos. Bumalik kapag na-refresh na ang mga clan.",
+  "heading": "Mga nangungunang <accent>{tier}</accent> clan",
+  "blurb": "Talaan ng ranggo ng {region}, naka-rank ayon sa {sort} sa lahat ng sinusubaybayang clan sa {format} (pinakamababa ay {battles} laban).",
+  "blurb-period": "Talaan ng ranggo ng {region}, naka-rank ayon sa {sort} sa lahat ng sinusubaybayang clan sa {format} sa loob ng {period} (pinakamababa ay {battles} laban).",
+  "format-advances": "Advances (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Nangungunang {count} {tier} clan ·"
+}

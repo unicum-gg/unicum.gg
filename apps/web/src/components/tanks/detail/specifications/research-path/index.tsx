@@ -1,4 +1,7 @@
-import Link from "next/link";
+"use client";
+
+import { useFormat } from "@/hooks/use-format";
+import Link from "@/components/link";
 import { Fragment } from "react";
 import { toRoman } from "roman-numerals";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
@@ -14,11 +17,12 @@ import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
-const compactFmt = new Intl.NumberFormat("en-US", {
+const COMPACT_FORMAT = {
   notation: "compact",
   maximumFractionDigits: 1,
-});
+} as const;
 
 // The tank's tech-tree branch: the single cheapest lineage (tier-1 → this tank)
 // as a horizontal rail, then the tanks it unlocks. Several next tanks are
@@ -36,11 +40,12 @@ export function TankResearchPath({
   currentId: number;
   tankName: string;
 }) {
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
   if (lineage.length === 0) return null;
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>{tankName} tech tree branch</PanelTitle>
+        <PanelTitle>{tSection("research-path", { tank: tankName })}</PanelTitle>
       </PanelHeader>
       <PanelContent className="py-6">
         <ResearchRail>
@@ -128,6 +133,7 @@ function PathNode({
   region: Region;
   current: boolean;
 }) {
+  const { num } = useFormat();
   const { meta } = item;
   const tier = meta.tier ? toRoman(meta.tier) : String(meta.tier);
 
@@ -170,13 +176,13 @@ function PathNode({
             {item.researchXp ? (
               <span className="flex items-center gap-0.5">
                 <CurrencyIcon type="xp" className="size-2.5" />
-                {compactFmt.format(item.researchXp)}
+                {num(COMPACT_FORMAT).format(item.researchXp)}
               </span>
             ) : null}
             {item.buyCredits ? (
               <span className="flex items-center gap-0.5">
                 <CurrencyIcon type="credits" className="h-2.5 w-auto" />
-                {compactFmt.format(item.buyCredits)}
+                {num(COMPACT_FORMAT).format(item.buyCredits)}
               </span>
             ) : null}
           </div>

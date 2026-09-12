@@ -1,0 +1,12 @@
+{
+  "final": " · финал",
+  "has-not-held-a-place": "{nickname} не е заемал място в класацията на Атака.",
+  "live-season": "· текущ сезон",
+  "loading-s-onslaught-record": "Зареждане на записа за Атака на {nickname}...",
+  "onslaught": "Атака",
+  "onslaught-record": "Запис за Атака на {nickname}",
+  "see-this-season-s-leaderboard": "Виж класацията за този сезон",
+  "standing-line": "{rating} рейтингови точки · {battles} битки",
+  "the-board-only-lists-players": "Класацията показва само играчи, достигнали Шампион, няколко хиляди на регион, така че почти всеки профил се озовава тук. Тя се попълва автоматично през сезона, в който достигнат това ниво.",
+  "updated": "Актуализирано {when}"
+}

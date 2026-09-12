@@ -1,0 +1,37 @@
+{
+  "label": "المزيد",
+  "items": {
+    "tournaments": {
+      "label": "بطولات",
+      "description": "الجداول والقوائم والنتائج، منطقة تلو الأخرى"
+    },
+    "servers": {
+      "label": "الخوادم",
+      "description": "اللاعبون المتصلون الآن ومع مرور الوقت"
+    },
+    "bot": {
+      "label": "بوت ديسكورد",
+      "description": "إحصائيات اللاعبين والقبائل والدبابات كأوامر slash"
+    },
+    "mcp": {
+      "label": "خادم MCP",
+      "description": "وصّل Claude أو ChatGPT أو أي عميل MCP"
+    },
+    "api": {
+      "label": "API",
+      "description": "واجهة REST API عامة مجانية، لا حاجة إلى مفتاح"
+    },
+    "badges": {
+      "label": "شارات",
+      "description": "كل شارة يمكن للاعب أو قبيلة كسبها وكيفية ذلك"
+    },
+    "glossary": {
+      "label": "مسرد المصطلحات",
+      "description": "كل مصطلح في World of Tanks مع شرحه"
+    },
+    "support": {
+      "label": "ادعمنا",
+      "description": "حافظ على {name} مجانيًا ومفتوحًا وخاليًا من الإعلانات"
+    }
+  }
+}

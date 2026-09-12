@@ -1,0 +1,5 @@
+{
+  "battles": "{count} kamper",
+  "chart-label": "Kamper spilt per {granularity}, fargelagt etter {metric}",
+  "no-battles": "Ingen kamper"
+}

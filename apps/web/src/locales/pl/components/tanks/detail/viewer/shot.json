@@ -1,0 +1,7 @@
+{
+  "firing": "Wystrzeliwuje {shell}, {pen} mm. Zmień strzał",
+  "no-such-round": "{mark}: ta armata nie ma takiego pocisku, ustaw kąty samodzielnie",
+  "own-round": "{mark}: własny pocisk tej armaty, ze wszystkimi danymi",
+  "treat-it-as": "Traktuj to jako",
+  "treat-it-as-mark": "Traktuj jako {mark}"
+}

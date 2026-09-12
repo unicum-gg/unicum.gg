@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# άρμα} other {# άρματα}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Δεν έχουν καταγραφεί ακόμη αλλαγές σε άρματα. Καθώς η Wargaming επανεξισορροπεί τα άρματα, οι ενισχύσεις και οι αποδυναμώσεις κάθε ενημέρωσης θα εμφανίζονται εδώ.",
+  "update": "Ενημέρωση {version}"
+}

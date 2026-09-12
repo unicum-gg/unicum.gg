@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Linkul configurației a fost copiat",
+  "copy-build-link": "Copiază linkul configurației",
+  "could-not-copy-link": "Ar putea copia linkul",
+  "include-setup": "Include setup",
+  "share-build": "Împărtășește build",
+  "share-tank": "Partajează {tank}",
+  "share-text": "Vezi această configurație pentru {tank} pe {app}"
+}

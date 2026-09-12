@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -38,13 +39,14 @@ export function StrongholdTab({
   trailingRows?: RowDef[];
   winrateColorFn?: WinrateColorFn;
 }) {
+  const { t } = useTranslation("components/players/detail/overview/stronghold");
   return (
     <>
       <PanelSeparator />
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {nickname}&apos;s {label} stats
+            {t("title", { nickname, label })}
             {/* Only with a table under it: over the "no data yet" message it
                 offered a choice that changed nothing. */}
             {data.current !== null && <StatsPeriodSelect />}
@@ -60,8 +62,7 @@ export function StrongholdTab({
             />
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>
-              No {label} data yet. Check back after the next snapshot.
-            </div>
+              {t("no-data-yet-check-back", { label })}</div>
           )}
         </PanelContent>
       </Panel>

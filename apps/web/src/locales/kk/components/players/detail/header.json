@@ -1,0 +1,7 @@
+{
+  "joined": "Тіркелген күні: {date}",
+  "last-battle": "Соңғы шайқас: {when}",
+  "never-played": "Ешқашан ойнамаған",
+  "updated": "Жаңартылған {when}",
+  "clan-role-joined": "{role} · {date} күні қосылды"
+}

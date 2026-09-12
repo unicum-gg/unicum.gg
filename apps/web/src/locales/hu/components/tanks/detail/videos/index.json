@@ -1,0 +1,10 @@
+{
+  "empty": "Még nincsenek videók",
+  "see-all": "Összes megtekintése →",
+  "see-all-count": "Összes megtekintése ({count}) →",
+  "watch-on-youtube": "Megtekintés a YouTube-on",
+  "play": "{title} lejátszása",
+  "log-in": "Jelentkezz be videó javaslatához",
+  "dmg": "dmg",
+  "no-community-video-for-the": "Még nincs közösségi videó ehhez a tankhoz: {tankName}. Javasolj egyet, és a moderátori ellenőrzés után itt jelenik meg."
+}

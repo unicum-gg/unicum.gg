@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "도달 가능한 노드를 클릭하여 잠금 해제하세요. 각 노드는 위 특성에 효과를 적용합니다. 색상은 노드를 화력, 기동성, 생존성, 차량 정비로 구분합니다.",
+  "loadout-switch-no-effect": "전투 중 장비 구성 전환. 특성 효과 없음.",
+  "title": "전차 {tank}의 강화 요소",
+  "vehicle-mechanic-no-effect": "차량 정비. 특성 효과 없음."
+}

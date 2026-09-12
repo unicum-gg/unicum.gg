@@ -1,0 +1,6 @@
+{
+  "fun": "Cuánto lo disfrutan los jugadores, que a menudo no es lo mismo.",
+  "hype": "La posición que le da la comunidad dentro de su nivel, menos la posición que ocupa por porcentaje de victorias. Ordena de mayor a menor para ver los tanques más sobrevalorados del juego, o de menor a mayor para ver los más infravalorados.",
+  "overall": "Lo bien que los jugadores creen que rinde. Se clasifica mediante una media ajustada hacia la media del sitio, para que un tanque con cuatro votos no pueda superar a uno con cuatrocientos.",
+  "votes": "Votos emitidos, cada uno procedente de una cuenta que realmente ha jugado con el tanque."
+}

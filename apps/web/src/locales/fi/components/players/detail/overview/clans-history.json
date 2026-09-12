@@ -1,0 +1,12 @@
+{
+  "clans-history": "Nimimerkin {nickname} klaanihistoria",
+  "clans-in-clans": "{totalClans} klaania · {timeInClansSeconds} klaaneissa",
+  "current": "nykyinen",
+  "duration": "Kesto",
+  "from": "Alkaen",
+  "name": "Nimi",
+  "no-clan-history": "Ei klaanihistoriaa.",
+  "role": "Rooli",
+  "tag": "Tunnus",
+  "to": "Voittoon"
+}

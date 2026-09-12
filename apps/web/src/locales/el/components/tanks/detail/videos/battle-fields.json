@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Πώς τελείωσε",
+  "loading-maps": "Φόρτωση χαρτών…",
+  "map": "Χάρτης",
+  "mode": "Μόδα",
+  "pick-a-map": "Επιλογή χάρτη",
+  "pick-a-mode": "Επιλογή λειτουργίας",
+  "result": "Αποτέλεσμα",
+  "spawn": "Αναγέννηση",
+  "team": "Ομάδα {team}",
+  "team-spawn": "Ομάδα {team} · {direction}",
+  "which-side-you-started": "Από ποια πλευρά ξεκινήσατε"
+}

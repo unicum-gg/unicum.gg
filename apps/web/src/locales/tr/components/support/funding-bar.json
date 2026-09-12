@@ -1,0 +1,18 @@
+{
+  "caught-up": "Tamamen yetişildi, teşekkürler. Fazladan gelen her şey daha yüksek kapasiteye ve yeni özelliklere ayrılır.",
+  "covered-label": "Kaplanmış",
+  "covered-sentence": "Destekçiler şimdiye kadar harcanan {spent} miktarın {received} kadarını karşıladı.",
+  "days-out-of-pocket": "{days} gün, cepten karşılandı",
+  "from-supporter-one": "{count} destekçiden",
+  "from-supporters": "{count} destekçiden",
+  "gap-growing": "Ayda fazladan {amount}, açığın büyümesini durdurur.",
+  "goal": "hedef {amount}",
+  "of-that-total": "bu toplamın",
+  "pledges-cover": "Taahhütler artık aylık faturayı karşılıyor.",
+  "raised-amount": "{amount} toplandı",
+  "raised-label": "Toplandı",
+  "run-at-a-loss": "{name}, {since} tarihinden beri zarar ediyor.",
+  "run-rate": "Aylık gidişat: çalıştırma maliyeti {cost}/ay, taahhüt edilen {pledged}/ay.",
+  "spent-since-launch": "Yayından beri harcanan",
+  "to-catch-up": "Tamamlamak için {amount} kaldı."
+}

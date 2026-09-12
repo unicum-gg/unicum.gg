@@ -1,9 +1,9 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import { mutate } from "swr";
 import {
-  BATTLE_FORMAT_LABEL,
   BattleFormat,
   BattleResult,
   FORMAT_TEAM_SIZE,
@@ -76,6 +76,8 @@ export function VideoEditFields({
   /** Closes the dialog this sits in, once there is nothing left to say. */
   onDone: () => void;
 }) {
+  const { t } = useTranslation("components/videos/edit-fields");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const source = useVideoSource({
     url: video.url,
     startSeconds: video.startSeconds,
@@ -184,11 +186,9 @@ export function VideoEditFields({
     return (
       <div className="flex flex-col gap-3">
         <p className="text-sm">
-          Saved. It is in the moderation queue, and shows up on the site once a
-          moderator has looked at it.
-        </p>
+          {t("saved-it-is-in-the")}</p>
         <div className="flex justify-end">
-          <Button onClick={onDone}>Close</Button>
+          <Button onClick={onDone}>{t("close")}</Button>
         </div>
       </div>
     );
@@ -202,10 +202,10 @@ export function VideoEditFields({
           were turned down. */}
       {video.status === TankVideoStatus.Rejected && (
         <div className="rounded-md border border-red-500/30 bg-red-500/5 px-3 py-2 text-sm">
-          <p className="font-medium text-red-500">Turned down</p>
+          <p className="font-medium text-red-500">{t("turned-down")}</p>
           <p className="mt-0.5 whitespace-pre-line">
             {video.reviewNote?.trim() ||
-              "No reason was recorded, so this one is worth asking about on Discord before resending."}
+              t("no-reason-recorded")}
           </p>
         </div>
       )}
@@ -213,7 +213,7 @@ export function VideoEditFields({
       <VideoSourceFields source={source}>
         {!competitive && (
           <label className="flex flex-col gap-1 text-sm">
-            <span className="font-medium">Combined damage</span>
+            <span className="font-medium">{t("combined-damage")}</span>
             <input
               type="text"
               value={combined}
@@ -225,9 +225,7 @@ export function VideoEditFields({
               className={VIDEO_FORM_INPUT}
             />
             <span className="text-xs text-fd-muted-foreground">
-              Damage dealt plus assisted, as the after-battle screen adds them
-              up.
-            </span>
+              {t("damage-dealt-plus-assisted-as")}</span>
           </label>
         )}
       </VideoSourceFields>
@@ -240,18 +238,18 @@ export function VideoEditFields({
 
       <div className="grid grid-cols-2 gap-3">
         <label className="flex flex-col gap-1 text-sm">
-          <span className="font-medium">Format</span>
+          <span className="font-medium">{t("format")}</span>
           <Select
             value={format}
             onValueChange={(v) => setFormat(v as BattleFormat)}
           >
             <SelectTrigger className="h-9 w-full">
-              <SelectValue placeholder="What was played" />
+              <SelectValue placeholder={t("what-was-played")} />
             </SelectTrigger>
             <SelectContent>
               {Object.values(BattleFormat).map((f) => (
                 <SelectItem key={f} value={f}>
-                  {BATTLE_FORMAT_LABEL[f]}
+                  {tGame(`battle-formats.${f}`)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -271,7 +269,7 @@ export function VideoEditFields({
             would be a field for retyping a rule. */}
         {showsTeamSize && (
           <label className="flex flex-col gap-1 text-sm">
-            <span className="font-medium">Players per team</span>
+            <span className="font-medium">{t("players-per-team")}</span>
             <input
               type="text"
               value={teamSize}
@@ -286,7 +284,7 @@ export function VideoEditFields({
         )}
         {showsTier && (
           <label className="flex flex-col gap-1 text-sm">
-            <span className="font-medium">Tier</span>
+            <span className="font-medium">{t("tier")}</span>
             <input
               type="text"
               value={tier}
@@ -310,7 +308,7 @@ export function VideoEditFields({
 
       <div className="flex justify-end">
         <Button onClick={save} disabled={!complete || saving}>
-          {saving ? "Saving…" : "Save"}
+          {saving ? t("saving") : t("save")}
         </Button>
       </div>
     </div>

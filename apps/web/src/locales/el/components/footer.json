@@ -1,0 +1,25 @@
+{
+  "tagline": "Δημιουργημένο για την κοινότητα του World of Tanks. Δωρεάν στατιστικά για κάθε παίκτη, κλαν, άρμα και χάρτη σε EU, NA και Asia.",
+  "columns": {
+    "leaderboards": "Κατατάξεις",
+    "tanks": "Τανκς",
+    "maps": "Χάρτες",
+    "integrations": "Ενσωματώσεις",
+    "project": "Έργο"
+  },
+  "links": {
+    "top-tanks": "Καλύτερα τανκς",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "Τεκμηρίωση API",
+    "badges": "Σχετικά Σημάδια",
+    "glossary": "Γλωσσάριο",
+    "coverage": "Κάλυψη",
+    "support": "Υποστηρίξτε μας",
+    "source": "Πηγαίος κώδικας",
+    "status": "Κατάσταση",
+    "discord": "Discord"
+  },
+  "disclaimer": "Δεν συνδέεται με τη Wargaming",
+  "cookies": "Διαχείριση cookies"
+}

@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Top <accent>clanuri</accent>",
+    "language": "Clanuri de top <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Clasament {region}, clasat după {metric}, cu media calculată pentru membrii urmăriți ai fiecărui clan (minim 50 de membri cu bătălii).",
+    "language": "Clanuri din {region} care au declarat {language} drept una dintre limbile lor, clasate după {metric}, cu media calculată pentru membrii urmăriți (minim 25 de membri cu bătălii).",
+    "strict": "Clanuri din {region} care au declarat {language} drept singura lor limbă, clasate după {metric}, cu media calculată pentru membrii urmăriți (minim 25 de membri cu bătălii)."
+  },
+  "board": {
+    "all": "Primele {count} clanuri după {metric}",
+    "language": "Primele {count} clanuri {language} după {metric}",
+    "strict": "Primele {count} clanuri exclusiv {language} după {metric}"
+  },
+  "members": "Membri",
+  "strict-toggle": "Strict",
+  "any-toggle": "Orice",
+  "all-languages": "Toate limbile",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

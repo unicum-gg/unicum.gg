@@ -1,0 +1,6 @@
+{
+  "title": "Найкращі гравці World of Tanks із мовою {language} ({region})",
+  "description": "{name}: таблиця лідерів гравців у регіоні {region}, для яких припущена мова історії клану включає {language}, з рейтингом за WNX.",
+  "og-title": "Найкращі гравці з мовою {language}",
+  "og-subtitle": "Таблиця лідерів {region}"
+}

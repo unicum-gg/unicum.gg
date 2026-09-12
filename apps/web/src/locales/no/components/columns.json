@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "player": "Spiller",
+  "members": "Medlemmer",
+  "battles": "Kamper",
+  "avg-damage": "Gjennomsnittlig skade",
+  "avg-xp": "Gjennomsnitt XP",
+  "winrate": "Seiersprosent",
+  "result": "Resultat",
+  "tournament": "Turnering",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

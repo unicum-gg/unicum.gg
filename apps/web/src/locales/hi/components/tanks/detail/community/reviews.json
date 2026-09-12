@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "इसमें {battles} युद्ध",
+  "damage": "{damage} क्षति",
+  "n-marks": "{count, plural, one {# निशान} other {# निशान}}",
+  "no-written-opinions-yet-if": "अभी तक कोई लिखित राय नहीं। यदि आपके पास युद्ध हैं, तो आपकी राय पहली होगी।",
+  "win-rate": "{toFixed}% जीत दर",
+  "written-on": "{gameVersion} पर लिखी गई"
+}

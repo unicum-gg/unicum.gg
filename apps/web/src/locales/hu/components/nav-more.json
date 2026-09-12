@@ -1,0 +1,37 @@
+{
+  "label": "Továbbiak",
+  "items": {
+    "tournaments": {
+      "label": "Tornák",
+      "description": "Ágak, keretek és eredmények régiónként"
+    },
+    "servers": {
+      "label": "Szerverek",
+      "description": "Online játékosok, most és időben"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Játékos-, klán- és tankstatisztikák perjeles parancsokként"
+    },
+    "mcp": {
+      "label": "MCP szerver",
+      "description": "Kapcsold össze a Claude-ot, a ChatGPT-t vagy bármely MCP-klienst"
+    },
+    "api": {
+      "label": "API",
+      "description": "Ingyenes nyilvános REST API, nincs szükség kulcsra"
+    },
+    "badges": {
+      "label": "Jelek",
+      "description": "Minden címer, amelyet egy játékos vagy klán megszerezhet, és hogyan"
+    },
+    "glossary": {
+      "label": "Szótár",
+      "description": "Minden World of Tanks-kifejezés magyarázattal"
+    },
+    "support": {
+      "label": "Támogass minket",
+      "description": "Tartsd a {name} oldalt ingyenesen, nyitottan és reklámmentesen"
+    }
+  }
+}

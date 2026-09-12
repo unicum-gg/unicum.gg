@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Како се играчи региона {region} упоређују",
+  "median-n": "медијана {value}",
+  "metric-rating": "Рејтинг {metric}",
+  "tracked-accounts-with-at-least": "{players} праћених налога са најмање {minBattles} битака. Боје су исте траке које сајт користи свуда.",
+  "win-rate": "Procenat pobeda",
+  "win-rate-distribution-across-the-region-s-tr": "Расподела процента победа међу праћеним играчима региона"
+}

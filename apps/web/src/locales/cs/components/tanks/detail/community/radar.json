@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "Rozložení se zobrazí až při {min} hlasech, takže jeho tvar vypovídá spíše o tanku než o jednotlivci.",
+  "community-rating-by-axis": "Hodnocení komunity podle jednotlivých os",
+  "from-votes": "Od {count} podrobných hlasů.",
+  "from-votes-one": "Od {count} podrobného hlasu.",
+  "nobody-yet": "Podrobné hodnocení podle jednotlivých os zatím nikdo nevyplnil.",
+  "only-votes": "Zatím jen {count} podrobných hlasů.",
+  "only-votes-one": "Zatím jen {count} podrobný hlas."
+}

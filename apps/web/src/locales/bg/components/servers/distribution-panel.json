@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Сравнение на играчите от {region}",
+  "median-n": "медиана {value}",
+  "metric-rating": "Рейтинг {metric}",
+  "tracked-accounts-with-at-least": "{players} проследявани акаунта с поне {minBattles} битки. Цветовете са същите диапазони, които сайтът използва навсякъде другаде.",
+  "win-rate": "Процент на победи",
+  "win-rate-distribution-across-the-region-s-tr": "Разпределение на процента победи сред проследяваните играчи в региона"
+}

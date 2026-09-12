@@ -1,0 +1,7 @@
+{
+  "loader": "Punitelj",
+  "radioman": "Radiooperater",
+  "driver": "Vozač",
+  "gunner": "Ciljač",
+  "commander": "Zapovjednik"
+}

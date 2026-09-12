@@ -1,5 +1,8 @@
 "use client";
 
+import type { NumberFormatter } from "@/lib/format";
+
+import { useFormat } from "@/hooks/use-format";
 import {
   Table,
   TableBody,
@@ -14,21 +17,22 @@ import { useStatsPeriod } from "@/hooks/use-period";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { StrongholdPeriod, type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { useTranslation } from "@/hooks/use-translation";
 
-const integerFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const signedIntegerFmt = new Intl.NumberFormat("en-US", {
+const INTEGER_FORMAT = { maximumFractionDigits: 0 } as const;
+const SIGNED_INTEGER_FORMAT = {
   maximumFractionDigits: 0,
   signDisplay: "exceptZero",
-});
-const decimalFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const DECIMAL_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const percentFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PERCENT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 type Cell = { primary: string; secondary?: string; color?: RatingColor; className?: string };
 
@@ -46,32 +50,39 @@ type RowInput = {
 // data. Defined once, so the real table and its loading skeleton share the exact
 // same rows (labels + order) — the skeleton can never drift from the real table.
 type RowDef = {
+  /** Key of the row's wording in `components/players/detail/overview/stats-table`. */
+  id: string;
+  /** The English name, which is also what the glossary is keyed by. Not what a
+   * reader sees: `t(rows.<id>)` is. */
   label: string;
   /** The term to look up, when the row's wording is not the term's own: this
    * table's "Tier" is the average tier of the battles played, not a vehicle's. */
   term?: string;
   ratingRow?: "wn7" | "wn8" | "wnx";
-  cells: (input: RowInput) => PeriodCellSet;
+  /** Takes the reader's number formatting rather than reading a hook: a row
+   * definition is data at module scope. */
+  cells: (input: RowInput, num: NumberFormatter) => PeriodCellSet;
 };
 
-function pctOrDash(n: number, d: number): string {
-  return d <= 0 ? "—" : percentFmt.format(n / d);
+function pctOrDash(num: NumberFormatter, n: number, d: number): string {
+  return d <= 0 ? "—" : num(PERCENT_FORMAT).format(n / d);
 }
 
-function avgOrDash(n: number, d: number): string {
-  return d <= 0 ? "—" : decimalFmt.format(n / d);
+function avgOrDash(num: NumberFormatter, n: number, d: number): string {
+  return d <= 0 ? "—" : num(DECIMAL_FORMAT).format(n / d);
 }
 
 // Turns the server-computed numeric values into display cells, optionally
 // color-coding them with the matching rating scale.
 function cellsFrom(
+  num: NumberFormatter,
   values: PeriodValues,
   color?: (v: number) => RatingColor,
 ): PeriodCellSet {
   const cell = (value: number | null): Cell => {
     if (value === null) return EMPTY_CELL;
     return {
-      primary: decimalFmt.format(value),
+      primary: num(DECIMAL_FORMAT).format(value),
       color: color ? color(value) : undefined,
     };
   };
@@ -87,19 +98,21 @@ function cellsFrom(
 // period columns from the diffs). `renderDelta` formats the period cells when it
 // differs from the total (signed values for ratings).
 function statRow(
+  id: string,
   label: string,
-  render: (s: Stats) => Cell,
-  renderDelta?: (s: Stats) => Cell,
+  render: (s: Stats, num: NumberFormatter) => Cell,
+  renderDelta?: (s: Stats, num: NumberFormatter) => Cell,
 ): RowDef {
   return {
+    id,
     label,
-    cells: ({ current, periods }) => {
+    cells: ({ current, periods }, num) => {
       const delta = renderDelta ?? render;
       return {
-        total: render(current),
-        h24: periods.h24 ? delta(periods.h24) : EMPTY_CELL,
-        d7: periods.d7 ? delta(periods.d7) : EMPTY_CELL,
-        d30: periods.d30 ? delta(periods.d30) : EMPTY_CELL,
+        total: render(current, num),
+        h24: periods.h24 ? delta(periods.h24, num) : EMPTY_CELL,
+        d7: periods.d7 ? delta(periods.d7, num) : EMPTY_CELL,
+        d30: periods.d30 ? delta(periods.d30, num) : EMPTY_CELL,
       };
     },
   };
@@ -108,6 +121,7 @@ function statRow(
 // A row whose per-period values are pre-computed server-side (tank-breakdown
 // stats: tier, assistance damages, WN7/8/X).
 function derivedRow(
+  id: string,
   label: string,
   pick: (d: PlayerDerivedStats) => PeriodValues,
   options: {
@@ -117,72 +131,74 @@ function derivedRow(
   } = {},
 ): RowDef {
   return {
+    id,
     label,
     term: options.term,
     ratingRow: options.ratingRow,
-    cells: ({ derived }) => cellsFrom(pick(derived), options.color),
+    cells: ({ derived }, num) => cellsFrom(num, pick(derived), options.color),
   };
 }
 
 // The single source of truth for the table's rows and their order (Tier after
 // Battles, the four damage-breakdown rows after Damages, ratings last).
 const ROWS: RowDef[] = [
-  statRow("Battles", (s) => ({ primary: integerFmt.format(s.battles) })),
-  derivedRow("Tier", (d) => d.tier, { term: "Average tier" }),
-  statRow("Wins", (s) => ({
-    primary: integerFmt.format(s.wins),
-    secondary: pctOrDash(s.wins, s.battles),
+  statRow("battles", "Battles", (s, num) => ({ primary: num(INTEGER_FORMAT).format(s.battles) })),
+  derivedRow("tier", "Tier", (d) => d.tier, { term: "Average tier" }),
+  statRow("wins", "Wins", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.wins),
+    secondary: pctOrDash(num, s.wins, s.battles),
     color: s.battles > 0 ? winrateColor(s.wins / s.battles) : undefined,
   })),
-  statRow("Losses", (s) => ({
-    primary: integerFmt.format(s.losses),
-    secondary: pctOrDash(s.losses, s.battles),
+  statRow("losses", "Losses", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.losses),
+    secondary: pctOrDash(num, s.losses, s.battles),
   })),
-  statRow("Draws", (s) => ({
-    primary: integerFmt.format(s.draws),
-    secondary: pctOrDash(s.draws, s.battles),
+  statRow("draws", "Draws", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.draws),
+    secondary: pctOrDash(num, s.draws, s.battles),
   })),
-  statRow("Battles survived", (s) => ({
-    primary: integerFmt.format(s.survivedBattles),
-    secondary: pctOrDash(s.survivedBattles, s.battles),
+  statRow("survived", "Battles survived", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.survivedBattles),
+    secondary: pctOrDash(num, s.survivedBattles, s.battles),
   })),
-  statRow("Tanks destroyed", (s) => ({
-    primary: integerFmt.format(s.frags),
-    secondary: avgOrDash(s.frags, s.battles),
+  statRow("destroyed", "Tanks destroyed", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.frags),
+    secondary: avgOrDash(num, s.frags, s.battles),
   })),
-  statRow("Destruction ratio", (s) => ({
-    primary: avgOrDash(s.frags, s.battles - s.survivedBattles),
+  statRow("destruction-ratio", "Destruction ratio", (s, num) => ({
+    primary: avgOrDash(num, s.frags, s.battles - s.survivedBattles),
   })),
-  statRow("Tanks spotted", (s) => ({
-    primary: integerFmt.format(s.spotted),
-    secondary: avgOrDash(s.spotted, s.battles),
+  statRow("spotted", "Tanks spotted", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.spotted),
+    secondary: avgOrDash(num, s.spotted, s.battles),
   })),
-  statRow("Damages", (s) => ({
-    primary: avgOrDash(s.damageDealt, s.battles),
+  statRow("damages", "Damages", (s, num) => ({
+    primary: avgOrDash(num, s.damageDealt, s.battles),
   })),
-  derivedRow("Track damages", (d) => d.trackDamage),
-  derivedRow("Spotting damages", (d) => d.spottingDamage),
-  derivedRow("Assisting damages", (d) => d.assistingDamage),
-  derivedRow("Combined damages", (d) => d.combinedDamage),
-  statRow("Base capture", (s) => ({
-    primary: integerFmt.format(s.capturePoints),
-    secondary: avgOrDash(s.capturePoints, s.battles),
+  derivedRow("track-damages", "Track damages", (d) => d.trackDamage),
+  derivedRow("spotting-damages", "Spotting damages", (d) => d.spottingDamage),
+  derivedRow("assisting-damages", "Assisting damages", (d) => d.assistingDamage),
+  derivedRow("combined-damages", "Combined damages", (d) => d.combinedDamage),
+  statRow("base-capture", "Base capture", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.capturePoints),
+    secondary: avgOrDash(num, s.capturePoints, s.battles),
   })),
-  statRow("Base defense", (s) => ({
-    primary: integerFmt.format(s.droppedCapturePoints),
-    secondary: avgOrDash(s.droppedCapturePoints, s.battles),
+  statRow("base-defense", "Base defense", (s, num) => ({
+    primary: num(INTEGER_FORMAT).format(s.droppedCapturePoints),
+    secondary: avgOrDash(num, s.droppedCapturePoints, s.battles),
   })),
-  statRow("Experience", (s) => ({
-    primary: avgOrDash(s.xp, s.battles),
+  statRow("experience", "Experience", (s, num) => ({
+    primary: avgOrDash(num, s.xp, s.battles),
   })),
-  statRow("Hit rate", (s) => ({
-    primary: pctOrDash(s.hits, s.shots),
+  statRow("hit-rate", "Hit rate", (s, num) => ({
+    primary: pctOrDash(num, s.hits, s.shots),
   })),
   statRow(
+    "personal-rating",
     "Personal rating",
-    (s) => ({ primary: integerFmt.format(s.globalRating) }),
-    (s) => ({
-      primary: signedIntegerFmt.format(s.globalRating),
+    (s, num) => ({ primary: num(INTEGER_FORMAT).format(s.globalRating) }),
+    (s, num) => ({
+      primary: num(SIGNED_INTEGER_FORMAT).format(s.globalRating),
       className:
         s.globalRating > 0
           ? "text-emerald-500"
@@ -192,10 +208,11 @@ const ROWS: RowDef[] = [
     }),
   ),
   statRow(
+    "wtr",
     "World of Tanks Rating",
-    (s) => ({ primary: s.wtr === null ? "—" : integerFmt.format(s.wtr) }),
-    (s) => ({
-      primary: s.wtr === null ? "—" : signedIntegerFmt.format(s.wtr),
+    (s, num) => ({ primary: s.wtr === null ? "—" : num(INTEGER_FORMAT).format(s.wtr) }),
+    (s, num) => ({
+      primary: s.wtr === null ? "—" : num(SIGNED_INTEGER_FORMAT).format(s.wtr),
       className:
         s.wtr === null
           ? undefined
@@ -206,9 +223,9 @@ const ROWS: RowDef[] = [
               : undefined,
     }),
   ),
-  derivedRow("WN7", (d) => d.wn7, { color: wn7Color, ratingRow: "wn7" }),
-  derivedRow("WN8", (d) => d.wn8, { color: wn8Color, ratingRow: "wn8" }),
-  derivedRow("WNX", (d) => d.wnx, { color: wnxColor, ratingRow: "wnx" }),
+  derivedRow("wn7", "WN7", (d) => d.wn7, { color: wn7Color, ratingRow: "wn7" }),
+  derivedRow("wn8", "WN8", (d) => d.wn8, { color: wn8Color, ratingRow: "wn8" }),
+  derivedRow("wnx", "WNX", (d) => d.wnx, { color: wnxColor, ratingRow: "wnx" }),
 ];
 
 function PeriodCells({
@@ -280,6 +297,10 @@ export function PlayerStatsTable(
     | { loading: true }
     | { current: Stats; periods: PeriodStats; derived: PlayerDerivedStats },
 ) {
+  const { num } = useFormat();
+  const { t } = useTranslation(
+    "components/players/detail/overview/stats-table",
+  );
   const loading = "loading" in props;
   // Which of the four windows a phone shows. Read once here and passed down
   // rather than read per cell: the table is 23 rows of four periods, and each
@@ -309,7 +330,7 @@ export function PlayerStatsTable(
       </colgroup>
       <TableHeader>
         <TableRow>
-          <TableHead>Stat</TableHead>
+          <TableHead>{t("stat")}</TableHead>
           <TableHead
             className={cn(
               "text-right",
@@ -317,7 +338,7 @@ export function PlayerStatsTable(
             )}
             colSpan={2}
           >
-            Total
+            {t("periods.total")}
           </TableHead>
           <TableHead
             className={cn(
@@ -326,7 +347,7 @@ export function PlayerStatsTable(
             )}
             colSpan={2}
           >
-            Last 24h
+            {t("periods.day")}
           </TableHead>
           <TableHead
             className={cn(
@@ -335,7 +356,7 @@ export function PlayerStatsTable(
             )}
             colSpan={2}
           >
-            Last 7d
+            {t("periods.week")}
           </TableHead>
           <TableHead
             className={cn(
@@ -344,21 +365,21 @@ export function PlayerStatsTable(
             )}
             colSpan={2}
           >
-            Last 30d
+            {t("periods.month")}
           </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {ROWS.map((row) => {
-          const cells = loading ? null : row.cells(props);
+          const cells = loading ? null : row.cells(props, num);
           return (
             <TableRow
-              key={row.label}
+              key={row.id}
               data-rating-row={row.ratingRow}
             >
               <TableCell className="py-1.5! font-medium">
                 <GlossaryLabel label={row.term ?? row.label}>
-                  {row.label}
+                  {t(`rows.${row.id}`)}
                 </GlossaryLabel>
               </TableCell>
               {cells ? (

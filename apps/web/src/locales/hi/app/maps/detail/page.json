@@ -1,0 +1,5 @@
+{
+  "title": "{map}, World of Tanks मानचित्र ({region})",
+  "description": "{map}: {width} × {height} मीटर का World of Tanks मानचित्र।",
+  "description-modes": "{map}: {width} × {height} मीटर का World of Tanks मानचित्र, जिसमें {modes} खेला जाता है।"
+}

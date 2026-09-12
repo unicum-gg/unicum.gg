@@ -1,5 +1,7 @@
 "use client";
 
+import { statLabel } from "@/components/stat-label";
+import { useTranslation } from "@/hooks/use-translation";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { bestIndex, type MetricRow } from "@/components/compare/cells";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -109,11 +111,13 @@ export function ComparisonTable({
   rows: MetricRow[];
   headerWinners?: Set<number>;
 }) {
+  const { t } = useTranslation("components/clans/compare/comparison-table");
+  const { t: tStats } = useTranslation("components/stat-labels");
   return (
     <Table className="my-0! table-fixed [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td]:whitespace-nowrap [&_thead_th:first-child]:pl-4! [&_tbody_tr]:border-b [&_tbody_tr]:border-fd-border [&_thead_tr]:border-b [&_thead_tr]:border-fd-border [&_td]:border-r [&_th]:border-r [&_td]:border-fd-border [&_th]:border-fd-border [&_td:last-child]:border-r-0 [&_th:last-child]:border-r-0">
       <TableHeader>
         <TableRow>
-          <TableHead className="w-48">Stat</TableHead>
+          <TableHead className="w-48">{t("stat")}</TableHead>
           {slots.map((s, idx) => (
             <TableHead key={`${s.requested}-${idx}`} className="text-right">
               <span className="inline-flex items-center justify-end gap-1.5">
@@ -139,7 +143,9 @@ export function ComparisonTable({
           return (
             <TableRow key={row.label}>
               <TableCell className="font-medium">
-                <GlossaryLabel>{row.label}</GlossaryLabel>
+                <GlossaryLabel label={statLabel(row.label, tStats)}>
+                  {statLabel(row.label, tStats)}
+                </GlossaryLabel>
               </TableCell>
               {row.cells.map((cell, i) => (
                 <TableCell

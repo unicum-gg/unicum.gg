@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Štatistiky vo World of Tanks: {tank} ({region}), úroveň {tier}, národ {nation}",
+    "description": "{tank} ({region}): špecifikácie vo World of Tanks vrátane panciera, palebnej sily, pohyblivosti, modulov, posádky a poľných úprav pre toto vozidlo (úroveň {tier}, národ {nation})."
+  },
+  "performances": {
+    "title": "Výkony vo World of Tanks: {tank} ({region}), štatistiky servera a najlepší hráči",
+    "description": "{tank} ({region}): výkony vo World of Tanks vrátane priemernej miery víťazstiev, poškodenia a asistencie na serveri, najlepších hráčov s týmto vozidlom (úroveň {tier}, národ {nation}) a očakávaných hodnôt WN8 a WNX."
+  },
+  "marks": {
+    "title": "Znaky výnimočnosti a odznaky majstrovstva: {tank} ({region})",
+    "description": "{tank} ({region}): požiadavky na získanie znakov výnimočnosti a odznakov majstrovstva vo World of Tanks spolu s ich históriou pre toto vozidlo (úroveň {tier}, národ {nation})."
+  },
+  "history": {
+    "title": "História zmien: {tank} ({region}), vylepšenia a oslabenia",
+    "description": "{tank}: všetky zmeny vlastností naprieč aktualizáciami World of Tanks vrátane vylepšení a oslabení palebnej sily, pohyblivosti, odolnosti a maskovania, ktoré Wargaming zaviedol pre toto vozidlo (úroveň {tier}, národ {nation}), podľa jednotlivých verzií."
+  },
+  "videos": {
+    "title": "Videá z hrania: {tank} ({region})",
+    "description": "{tank} v akcii: pozrite si bitky navrhnuté komunitou s týmto vozidlom (úroveň {tier}, národ {nation}). Každé video sa spustí presne na začiatku bitky a uvádza mapu aj výsledok."
+  },
+  "community": {
+    "title": "Recenzie hráčov a hodnotenie komunity: {tank} ({region})",
+    "description": "{tank}: čo si myslia hráči. Hodnotenie komunity z piatich bodov rozdelené podľa hráčskej úrovne hlasujúcich, porovnané so skutočnými výkonmi tohto vozidla (úroveň {tier}, národ {nation}), spolu s písomnými recenziami z účtov, ktoré s ním odohrali bitky."
+  }
+}

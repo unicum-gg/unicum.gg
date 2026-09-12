@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "over {value} % av de vurderte stridsvognene på nivået",
+  "measured-hint": "Hvor seiersraten plasserer den blant de samme stridsvognene",
+  "not-enough-votes-yet-to": "Ikke nok stemmer ennå til å sammenlikne fellesskapets dom med hvordan stridsvognen faktisk presterer.",
+  "perceived-hint": "Hvor fellesskapet plasserer den blant vurderte stridsvogner på nivå {tier}",
+  "verdict": {
+    "overrated": "Fellesskapet vurderer den langt høyere enn det den faktisk oppnår.",
+    "fair": "Omdømme og resultater er enige om denne.",
+    "underrated": "Den presterer bedre enn noen gir den kreditt for."
+  },
+  "what-players-think": "Hva spillere synes",
+  "what-the-data-says": "Hva dataene sier"
+}

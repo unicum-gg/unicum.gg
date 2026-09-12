@@ -1,0 +1,14 @@
+{
+  "ammunition": "Amunicija",
+  "characteristics": "Charakteristikos tanko {tank}",
+  "consumables": "Ekipuotė",
+  "crew-level": "Įgulos lygis",
+  "crew-skills": "Įgulos įgūdžiai",
+  "equipment": "Įranga",
+  "field-mods": "Laurų modifikacijos",
+  "historical-reference": "Istorinė informacija apie tanką {tank}",
+  "modules": "Moduliai tanko {tank}",
+  "research-path": "Tobulinimo šaka tankui {tank}",
+  "similar": "Tankai, panašūs į tanką {tank}",
+  "videos": "Vaizdo įrašai apie tanką {tank}"
+}

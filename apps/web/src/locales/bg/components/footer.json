@@ -1,0 +1,25 @@
+{
+  "tagline": "Създадено за общността на World of Tanks. Безплатни статистики за всеки играч, клан, танк и карта в EU, NA и Asia.",
+  "columns": {
+    "leaderboards": "Таблици с лидери",
+    "tanks": "Танкове",
+    "maps": "Карти",
+    "integrations": "Интеграции",
+    "project": "Проект"
+  },
+  "links": {
+    "top-tanks": "Най-добрите танкове",
+    "bot": "Discord бот",
+    "mcp": "MCP сървър",
+    "docs": "API документация",
+    "badges": "Ленти",
+    "glossary": "Глосар",
+    "coverage": "Покритие",
+    "support": "Подкрепете ни",
+    "source": "Изходен код",
+    "status": "Статус",
+    "discord": "Discord"
+  },
+  "disclaimer": "Не е свързано с Общ",
+  "cookies": "Управление на бисквитките"
+}

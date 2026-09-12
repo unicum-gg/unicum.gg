@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Kirjaudu Wargaming.net-tunnuksella",
+  "open-source": "{name} on avointa lähdekoodia. {link} ennen kuin luotat siihen.",
+  "pick-the-region-your-world": "Valitse alue, jolla World of Tanks -tilisi on. Sen ei tarvitse olla alue, jota selaat.",
+  "read-the-login-code": "Lue kirjautumiskoodi",
+  "what-wargaming-hands-back-is": "Wargaming palauttaa tunnisteen, jolla luet oman tilisi tietoja. Se tallennetaan salattuna ja uusitaan niin kauan kuin tilisi pysyy yhdistettynä. Se toimii puolestasi vain siellä, missä olet itse määrittänyt sen toimimaan, kuten klaanisi reserviaikataulussa.",
+  "you-sign-in-on-wargaming": "Kirjaudut Wargamingin omalla sivulla, et täällä. Salasanaasi ei koskaan kirjoiteta sivustolle {NAME}, eikä se koskaan päädy meille."
+}

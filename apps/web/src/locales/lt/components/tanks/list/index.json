@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Kaina (kreditas)",
+    "buyGold": "Kaina (aukso)",
+    "researchXp": "Tyrimų XP",
+    "shellCost": "Šaudmenų kaina",
+    "ammoCost": "Viso šaudmenų kaina",
+    "class3": "3 klasė",
+    "class2": "2 klasė",
+    "class1": "1 klasė",
+    "ace": "Auksinis tankistas",
+    "mark1": "1 Markas (65%)",
+    "mark2": "2 Markai (85%)",
+    "mark3": "3 Markai (95%)"
+  }
+}

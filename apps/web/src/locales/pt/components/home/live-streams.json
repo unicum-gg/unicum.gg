@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Mostrar chat",
+    "hide": "Ocultar chat",
+    "show-streamers": "Mostrar streamers"
+  },
+  "heading": "Estatísticas de jogadores, clãs e tanques do World of Tanks: {name}",
+  "hide": "Ocultar streamers",
+  "player": "Jogador",
+  "stream-language": "Idioma da transmissão · {name}",
+  "stream-language-alt": "Idioma da transmissão: {name}",
+  "theater": {
+    "enter": "Modo teatro",
+    "exit": "Sair do modo de cinema"
+  },
+  "title": "Melhores jogadores em direto agora ·",
+  "viewer-count": "{count} espetadores",
+  "viewers": "Espetadores",
+  "watch": "Ver {nickname} na Twitch"
+}

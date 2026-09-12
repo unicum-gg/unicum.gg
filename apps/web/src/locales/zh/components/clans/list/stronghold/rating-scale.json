@@ -1,0 +1,17 @@
+{
+  "average": "平均值",
+  "bad": "差",
+  "below-avg": "低于平均",
+  "color-thresholds-for-the-stronghold": "要塞排行榜的颜色阈值。所有等级使用同一绝对范围，因此无论在哪里，SR 或 SRB 都表示相同的军团质量。",
+  "excellent": "优秀",
+  "good": "好",
+  "rating-colors": "评级颜色",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "超级",
+  "tier": "等级",
+  "top": "顶尖",
+  "very-bad": "非常差",
+  "very-good": "非常好",
+  "wr": "WR"
+}

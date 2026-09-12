@@ -1,3 +1,5 @@
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import { CostBreakdown } from "@/components/coverage/cost-breakdown";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import APP from "@/constants/app";
@@ -16,7 +18,8 @@ const MEDAL: Record<number, string> = { 1: "🥇", 2: "🥈", 3: "🥉" };
  * coverage page) and the supporters podium. A single column of full-width
  * panels so the page borders stay continuous down to the footer.
  */
-export async function SupportView() {
+export async function SupportView({ locale }: { locale: string }) {
+  const { t } = await getTranslation("components/support/support-view", locale);
   const [coverage, podium] = await Promise.all([
     unicum.region(Region.EU).coverage(),
     unicum.support.podium(),
@@ -37,16 +40,17 @@ export async function SupportView() {
       <Panel>
         <PanelContent className="px-4 py-12 text-center">
           <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
-            Community-funded · Ad-free
-          </div>
+            {t("community-funded-ad-free")}</div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            Support <span className="text-brand">{APP.NAME}</span>
+            <Interpolate
+              template={t("title")}
+              values={{
+                name: <span className="text-brand">{APP.NAME}</span>,
+              }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            {APP.NAME} is free, open-source and ad-free, and it runs at a loss.
-            No ads, ever. If it is useful to you, chip in what you want from €3
-            per month and keep the World of Tanks tracker alive and growing.
-          </p>
+            {t("is-free-open-source-and", { NAME: APP.NAME })}</p>
         </PanelContent>
       </Panel>
 
@@ -56,19 +60,11 @@ export async function SupportView() {
         <PanelContent className="grid grid-cols-1 p-0 md:grid-cols-2 md:divide-x md:divide-fd-border">
           <section className="space-y-6 p-6">
             <div className="space-y-3">
-              <h2 className="text-xl font-semibold">How {APP.NAME} is funded</h2>
+              <h2 className="text-xl font-semibold">{t("how-is-funded", { NAME: APP.NAME })}</h2>
               <p className="text-sm text-fd-muted-foreground">
-                No ads, no investors, no data selling. {APP.NAME} is funded
-                entirely by the people who use it.
-              </p>
+                {t("no-ads-no-investors-no", { NAME: APP.NAME })}</p>
               <p className="text-sm text-fd-muted-foreground">
-                It runs on a single rented server, and every euro goes back
-                into the project: the server, the database, the
-                Wargaming-whitelisted egress IPs that let us refresh more
-                players, and the occasional push to get it in front of more
-                people. Supporters cover the monthly bill; anything extra goes
-                into more throughput and new features.
-              </p>
+                {t("it-runs-on-a-single")}</p>
             </div>
             <FundingBar
               costs={costs}
@@ -80,13 +76,9 @@ export async function SupportView() {
           </section>
           <section className="space-y-6 p-6">
             <div className="space-y-3">
-              <h2 className="text-xl font-semibold">Become a supporter</h2>
+              <h2 className="text-xl font-semibold">{t("become-a-supporter")}</h2>
               <p className="text-sm text-fd-muted-foreground">
-                Every euro keeps {APP.NAME} running. Supporters get a badge on
-                their player page and a place on the podium below, but nothing
-                is ever locked behind it and there will never be ads. It is a
-                monthly subscription you fully control.
-              </p>
+                {t("every-euro-keeps-running-supporters", { NAME: APP.NAME })}</p>
             </div>
             <SupportBox />
           </section>
@@ -98,26 +90,30 @@ export async function SupportView() {
       <Panel>
         <PanelContent className="grid grid-cols-1 p-0 md:grid-cols-2 md:divide-x md:divide-fd-border">
           <section className="space-y-4 p-4">
-            <h2 className="text-xl font-semibold">Where your money goes</h2>
+            <h2 className="text-xl font-semibold">{t("where-your-money-goes")}</h2>
             <CostBreakdown costs={costs} />
             <p className="text-xs text-fd-muted-foreground">
-              The exact same numbers as the{" "}
-              <a
-                className="underline underline-offset-2 hover:opacity-80"
-                href={ROUTES.COVERAGE(Region.EU)}
-              >
-                coverage page
-              </a>
-              .
+              <Interpolate
+                template={t("same-numbers-as")}
+                values={{
+                  link: (
+                    <a
+                      className="underline underline-offset-2 hover:opacity-80"
+                      href={ROUTES.COVERAGE(Region.EU)}
+                    >
+                      {t("coverage-page")}
+                    </a>
+                  ),
+                }}
+              />
             </p>
           </section>
 
           <section className="space-y-6 p-4">
-            <h2 className="text-xl font-semibold">Top supporters</h2>
+            <h2 className="text-xl font-semibold">{t("top-supporters")}</h2>
             {supporters.length === 0 ? (
               <p className="py-10 text-center text-sm text-fd-muted-foreground">
-                No supporters yet. Be the first on the podium.
-              </p>
+                {t("no-supporters-yet-be-the")}</p>
             ) : (
               <div className="space-y-6">
                 <ol className="flex items-end justify-center gap-3">

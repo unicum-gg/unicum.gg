@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Ocjena (WN)",
+    "tip": "Ocjena samo ovih bitaka, ne računa"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Postotak pobjeda u ovim bitkama"
+  },
+  "avgDamage": {
+    "label": "Prosječna šteta"
+  },
+  "avgFrags": {
+    "label": "Prosječni fragovi",
+    "tip": "Uništeni neprijatelji po bitci"
+  },
+  "damageRatio": {
+    "label": "Odnos štete",
+    "tip": "Nanijeta šteta u odnosu na primljenu štetu"
+  },
+  "kd": {
+    "label": "Odnos uništenja",
+    "tip": "Uništeni neprijatelji u odnosu na izgubljene tenkove"
+  },
+  "survivalRate": {
+    "label": "Preživjelih bitaka"
+  },
+  "avgSpotted": {
+    "label": "Prosječno otkriveno",
+    "tip": "Uočeni neprijatelji po bitci"
+  },
+  "avgDefense": {
+    "label": "Odbrana baze",
+    "tip": "Obrambeni bodovi po bitci"
+  },
+  "avgXp": {
+    "label": "Prosječni XP"
+  }
+}

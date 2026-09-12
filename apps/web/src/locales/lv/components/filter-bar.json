@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Meklēt starp {count} tankiem",
+    "rated-tanks": "Meklēt starp {count} novērtētajiem tankiem",
+    "videos": "Meklēt starp {count} videoklipiem",
+    "players": "Meklēt {count} spēlētājus",
+    "clans": "Meklēt {count} klanus",
+    "tournaments": "Meklēt {count} turnīrus",
+    "teams": "Meklēt {count} komandas"
+  },
+  "min": "Min.",
+  "max": "Maks.",
+  "none": "Nav",
+  "common-test": "Mainīts Kopējā testa laikā: jauni transportlīdzekļi un līdzsvarotie transportlīdzekļi",
+  "category": {
+    "standard": "Standarts",
+    "premium": "Premium",
+    "reward": "Apmaksāšana"
+  },
+  "moe": {
+    "0": "Vēl nav izcilības zīmes",
+    "1": "1 atzīme",
+    "2": "2 atzīmes",
+    "3": "3 atzīmes"
+  },
+  "mom": {
+    "0": "Vēl nav nozīmītes",
+    "1": "3. klase",
+    "2": "2. klase",
+    "3": "1. klase",
+    "4": "Ace Tankers"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Thống kê World of Tanks của {tank} ({region}), cấp {tier} {nation}",
+    "description": "Thông số World of Tanks của {tank} ({region}): giáp, hỏa lực, tính cơ động, mô-đun, kíp lái và cải tiến dã chiến cho xe tăng {nation} cấp {tier} này."
+  },
+  "performances": {
+    "title": "Hiệu suất của {tank} ({region}), thống kê máy chủ và người chơi tốt nhất",
+    "description": "Hiệu suất World of Tanks của {tank} ({region}): tỷ lệ thắng, sát thương và hỗ trợ trung bình trên máy chủ, những người chơi tốt nhất với xe tăng {nation} cấp {tier} này, cộng với các giá trị kỳ vọng WN8 và WNX."
+  },
+  "marks": {
+    "title": "Các dấu xuất sắc và tinh thông của {tank} ({region})",
+    "description": "Yêu cầu về các dấu xuất sắc và các dấu tinh thông World of Tanks của {tank} ({region}), cùng lịch sử của chúng trên xe tăng {nation} cấp {tier} này."
+  },
+  "history": {
+    "title": "Lịch sử thay đổi của {tank} ({region}), tăng cường và giảm sức mạnh",
+    "description": "Mọi thay đổi chỉ số của {tank} trên khắp các bản cập nhật World of Tanks: các thay đổi tăng cường và giảm sức mạnh về hỏa lực, tính cơ động, khả năng sống sót và khả năng ngụy trang mà Wargaming đã phát hành cho xe tăng {nation} cấp {tier} này, theo từng phiên bản."
+  },
+  "videos": {
+    "title": "Video chơi {tank} ({region})",
+    "description": "Xem {tank} hành động: các trận đấu do cộng đồng đề xuất với xe tăng {nation} cấp {tier} này, mỗi video bắt đầu đúng thời điểm xe tăng được chơi, kèm bản đồ và kết quả của trận đấu."
+  },
+  "community": {
+    "title": "Đánh giá của người chơi và chỉ số đánh giá từ cộng đồng về {tank} ({region})",
+    "description": "Người chơi nghĩ gì về {tank}: chỉ số đánh giá của cộng đồng trên thang năm, được chia theo khả năng chơi của người bình chọn, đối chiếu với hiệu suất thực sự của xe tăng {nation} cấp {tier} này, cộng với các đánh giá bằng văn bản từ những tài khoản đã có trận đấu với xe tăng này."
+  }
+}

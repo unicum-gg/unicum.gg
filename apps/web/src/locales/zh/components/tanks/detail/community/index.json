@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "逐项分析",
+  "by-server": "按服务器分类",
+  "community-verdict": "社区评价",
+  "every-server-one-average": "每个服务器，一个平均值",
+  "n-shown": "，显示{count}条",
+  "opinion": "{count, plural, other {# 意见}}",
+  "opinion-next-to-win-rate": "{tier}等级内，评价与胜率并列显示",
+  "rate-the": "评价{tankName}",
+  "reputation-against-results": "声誉与结果对比",
+  "same-tank-different-metas": "同一辆坦克，不同环境",
+  "the-same-tank-by-how": "根据投票者的对战水平查看同一辆坦克",
+  "what-players-wrote": "玩家写下的内容",
+  "who-is-saying-it": "谁在这样说"
+}

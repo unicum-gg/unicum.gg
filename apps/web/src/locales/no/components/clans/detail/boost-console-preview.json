@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktive dager",
+  "add-workflow": "Legg til arbeidsflyt",
+  "connect-discord": "Koble til Discord",
+  "discord-notifications": "Discord-varsler",
+  "each-workflow-activates-its-reserves": "Hver arbeidsflyt aktiverer reservene sine i et tidsvindu når nok medlemmer er i en aktiv spilløkt. Kjøres på kontoen din, du trenger ikke være pålogget. Legg til så mange du trenger.",
+  "enabled": "Aktivert",
+  "from": "Fra",
+  "get-a-discord-message-in": "Få en Discord-melding i en kanal du velger hver gang en brann aktiveres, slik at hele klanen vet at den er aktiv.",
+  "log-in-with-wargaming-to": "Logg inn med Wargaming for å konfigurere dette",
+  "min-online": "Min online",
+  "officers": "Offiserer",
+  "only-an-officer-of-this": "Bare en offiser i denne klanen kan konfigurere dette.",
+  "schedule-preview": "Timeplan forhåndsvisning",
+  "set-your-hours-and-reserves": "Angi tidene og reservene dine én gang. Forbedringene aktiveres automatisk til riktig tid, selv når ingen er der for å trykke på knappen.",
+  "stronghold-boosts": "Festningstøtter",
+  "times-are-in-your-timezone": "Tidene er i {tz}, tidssonen din.",
+  "to": "Til"
+}

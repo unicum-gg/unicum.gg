@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "显示成员数超过50且有战斗记录的{region}顶尖军团，按平均{metric}排名。",
+    "month": "显示成员数超过50且有战斗记录的{region}顶尖军团，按过去30天的{metric}排名（至少活跃15场）。"
+  },
+  "updated": "更新于 {when}。",
+  "empty": "该地区暂时没有可用的军团数据。",
+  "rank": "#",
+  "clan": "军团",
+  "average": "平均 {metric}"
+}

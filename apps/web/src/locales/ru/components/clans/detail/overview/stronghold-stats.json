@@ -1,0 +1,22 @@
+{
+  "stat": "Статистика",
+  "periods": {
+    "total": "Всего",
+    "day": "Последние 24ч",
+    "week": "Последние 7д",
+    "month": "Последние 30д"
+  },
+  "sections": {
+    "elo": "ELO уровня X ({advances} + {skirmish})",
+    "advances": "{advances} (15 на 15)",
+    "t10": "{skirmish} уровня X (7 на 7)",
+    "t8": "{skirmish} уровня VIII (7 на 7)",
+    "t6": "{skirmish} уровня VI (7 на 7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Бои",
+    "winrate": "Процент побед"
+  }
+}

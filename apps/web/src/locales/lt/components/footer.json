@@ -1,0 +1,25 @@
+{
+  "tagline": "Sukurta World of Tanks bendruomenei. Nemokama kiekvieno žaidėjo, klano, tanko ir žemėlapio statistika EU, NA ir Azijoje.",
+  "columns": {
+    "leaderboards": "Reitingų lentelės",
+    "tanks": "Tankai",
+    "maps": "Žemėlapiai",
+    "integrations": "Integracijos",
+    "project": "Projektas"
+  },
+  "links": {
+    "top-tanks": "Geriausi tankai",
+    "bot": "Discord bot",
+    "mcp": "MCP serveris",
+    "docs": "API dokumentacija",
+    "badges": "Ženkleliai",
+    "glossary": "Terminų žodynas",
+    "coverage": "Aprėptis",
+    "support": "Palaikykite mus",
+    "source": "Pirminis kodas",
+    "status": "Statusas",
+    "discord": "Discord"
+  },
+  "disclaimer": "Nesusiję su Wargaming",
+  "cookies": "Tvarkyti slapukus"
+}

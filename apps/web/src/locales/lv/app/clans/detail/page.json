@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks klans ({region}), {members} biedri",
+    "description": "{name} [{tag}] reģionā {region}: {members} biedri, pilna biedru tabula ar WN8 un WNX vērtējumiem, nesenā pievienošanās un aiziešanas aktivitāte, kā arī klana vēsture."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} nocietinājuma statistika ({region})",
+    "description": "{name} [{tag}] sniegums nocietinājumā reģionā {region}: sadursmju un uzbrukumu vērtējumi, kaujas un uzvaru procents katram biedram."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} Klanu karu statistika ({region})",
+    "description": "{name} [{tag}] sniegums Klanu karos reģionā {region}: katra biedra vērtējumi, kaujas un uzvaru procents globālās kartes kampaņās."
+  },
+  "tanks": {
+    "title": "[{tag}] {name} tanki ({region}), klana transportlīdzekļi",
+    "description": "Katrs transportlīdzeklis, ko {name} [{tag}] spēlējis reģionā {region}, ar kaujām, uzvaru procentu un vidējiem bojājumiem, kas apkopoti par visiem klana biedriem."
+  },
+  "manage": {
+    "title": "[{tag}] {name} nocietinājuma rezerves ({region})",
+    "description": "Aktivizējiet un ieplānojiet {name} [{tag}] nocietinājuma rezerves. Tikai virsniekiem."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks klans reģionā {region}: biedru tabula ar WN8/WNX vērtējumiem, pievienošanās un aiziešanas aktivitāte, nesenās kaujas un pilna klana vēsture."
+  }
+}

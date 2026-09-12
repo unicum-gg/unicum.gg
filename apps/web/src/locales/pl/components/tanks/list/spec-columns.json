@@ -1,0 +1,162 @@
+{
+  "columns-label": "Kolumny",
+  "groups": {
+    "firepower": "Siła ognia",
+    "gun-handling": "Obsługa działa",
+    "mobility": "Mobilność",
+    "survivability": "Żywotność",
+    "other": "Inne"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Zadane uszkodzenia na minutę"
+    },
+    "damage": {
+      "label": "Zadane uszkodzenia",
+      "tip": "Zadane uszkodzenia"
+    },
+    "moduleDamage": {
+      "label": "Zadane uszkodzenia"
+    },
+    "splashRadius": {
+      "label": "Promień rażenia"
+    },
+    "reload": {
+      "label": "Przeładowanie",
+      "tip": "Przeładowanie (pełnego magazynka w pojazdach z automatem ładującym)"
+    },
+    "rof": {
+      "label": "Szybkostrzelność",
+      "tip": "Liczba strzałów na minutę"
+    },
+    "intraClipReload": {
+      "label": "Przeładowanie w magazynku",
+      "tip": "Czas między strzałami w magazynku (automaty ładujące)"
+    },
+    "penetration": {
+      "label": "Penetracja",
+      "tip": "Penetracja (mm), pocisk standardowy"
+    },
+    "caliber": {
+      "label": "Kaliber",
+      "tip": "Kaliber pocisku (mm)"
+    },
+    "shellVelocity": {
+      "label": "Prędkość pocisku",
+      "tip": "Prędkość pocisku (m/s)"
+    },
+    "accuracy": {
+      "label": "Celność",
+      "tip": "Rozrzut na 100 m (im mniej, tym lepiej)"
+    },
+    "aimTime": {
+      "label": "Czas celowania"
+    },
+    "dispMoving": {
+      "label": "Rozrzut podczas jazdy",
+      "tip": "Współczynnik rozrzutu podczas jazdy"
+    },
+    "dispTankTraverse": {
+      "label": "Rozrzut podczas obrotu czołgu"
+    },
+    "dispTurretTraverse": {
+      "label": "Rozrzut podczas obrotu wieżyczki"
+    },
+    "dispAfterShot": {
+      "label": "Rozrzut po strzale"
+    },
+    "dispWhileDamaged": {
+      "label": "Rozrzut przy uszkodzonym dziale"
+    },
+    "gunArc": {
+      "label": "Kąt obrotu działa",
+      "tip": "Poziomy kąt wychylenia działa"
+    },
+    "depression": {
+      "label": "Opuszczenie działa / podniesienie działa",
+      "tip": "Opad lufy / uniesienie lufy"
+    },
+    "speed": {
+      "label": "Prędkość (przód / tył)",
+      "tip": "Maksymalna prędkość do przodu / do tyłu (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Obrót kadłuba"
+    },
+    "turretTraverse": {
+      "label": "Obrót wieżyczki"
+    },
+    "enginePower": {
+      "label": "Moc",
+      "tip": "Moc silnika (KM)"
+    },
+    "powerWeight": {
+      "label": "Moc/masa",
+      "tip": "KM na tonę"
+    },
+    "terrainHard": {
+      "label": "Twardy teren",
+      "tip": "Odporność na teren na twardym podłożu (im mniej, tym lepiej)"
+    },
+    "terrainMedium": {
+      "label": "Seniorska teren"
+    },
+    "terrainSoft": {
+      "label": "Miękki teren"
+    },
+    "health": {
+      "label": "Wytrzymałość",
+      "tip": "Punkty życia"
+    },
+    "engineHealth": {
+      "label": "Stan silnika"
+    },
+    "engineFireChance": {
+      "label": "Możliwość pożaru silnika"
+    },
+    "hullArmorFront": {
+      "label": "Pancerz kadłuba (przód)",
+      "tip": "Pancerz kadłuba z przodu (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Pancerz wieży (przód)",
+      "tip": "Pancerz wieży z przodu (mm)"
+    },
+    "trackArmor": {
+      "label": "Pancerz gąsienic"
+    },
+    "trackHealth": {
+      "label": "Wytrzymałość gąsienic"
+    },
+    "trackRepairTime": {
+      "label": "Czas naprawy gąsienic"
+    },
+    "ammoRackHealth": {
+      "label": "Wytrzymałość magazynu amunicji"
+    },
+    "weight": {
+      "label": "Masa"
+    },
+    "viewRange": {
+      "label": "Zasięg widzenia",
+      "tip": "Zasięg widzenia (m)"
+    },
+    "radioRange": {
+      "label": "Zasięg radia",
+      "tip": "Zasięg sygnału (m)"
+    },
+    "camoStill": {
+      "label": "Kamuflaż w bezruchu"
+    },
+    "camoMoving": {
+      "label": "Kamuflaż w ruchu"
+    },
+    "camoStillFiring": {
+      "label": "Kamuflaż w bezruchu po strzale"
+    },
+    "camoMovingFiring": {
+      "label": "Kamuflaż w ruchu po strzale"
+    }
+  }
+}

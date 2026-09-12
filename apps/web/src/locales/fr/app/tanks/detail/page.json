@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Statistiques World of Tanks : {tank} ({region}), rang {tier}, {nation}",
+    "description": "{tank} ({region}) : caractéristiques dans World of Tanks, avec blindage, puissance de feu, mobilité, modules, équipage et modifications de terrain pour ce char de rang {tier} ({nation})."
+  },
+  "performances": {
+    "title": "Performances : {tank} ({region}), statistiques du serveur et meilleurs joueurs",
+    "description": "{tank} ({region}) : performances dans World of Tanks, avec les moyennes du serveur pour le taux de victoire, les dégâts et l’assistance, les meilleurs joueurs avec ce char de rang {tier} ({nation}), ainsi que les valeurs attendues WN8 et WNX."
+  },
+  "marks": {
+    "title": "Marques d’excellence et insignes de maîtrise : {tank} ({region})",
+    "description": "{tank} ({region}) : seuils des marques d’excellence et des insignes de maîtrise dans World of Tanks, avec leur historique pour ce char de rang {tier} ({nation})."
+  },
+  "history": {
+    "title": "Historique des modifications, buffs et nerfs : {tank} ({region})",
+    "description": "Tous les changements de caractéristiques du char {tank} au fil des mises à jour de World of Tanks : buffs et nerfs de puissance de feu, de mobilité, de survivabilité et de dissimulation déployés par Wargaming pour ce char de rang {tier} ({nation}), version après version."
+  },
+  "videos": {
+    "title": "Vidéos de gameplay : {tank} ({region})",
+    "description": "Découvrez le char {tank} en action : des batailles suggérées par la communauté avec ce char de rang {tier} ({nation}), chacune démarrant au moment où il est joué, avec la carte et le résultat de la bataille."
+  },
+  "community": {
+    "title": "Avis des joueurs et évaluation de la communauté : {tank} ({region})",
+    "description": "Avis des joueurs sur le char {tank} : note de la communauté sur cinq, ventilée selon le niveau de jeu des votants et comparée aux performances réelles de ce char de rang {tier} ({nation}), ainsi que des avis écrits par des comptes ayant disputé des batailles à son bord."
+  }
+}

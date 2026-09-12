@@ -1,10 +1,14 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { battleTypeName } from "@/components/game-name";
+import { BattleType } from "@unicum.gg/shared";
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import Link from "@/components/link";
 import useSWR from "swr";
 import {
-  ONSLAUGHT_TIER_LABEL,
   onslaughtRankIcon,
   onslaughtTier,
   OnslaughtTier,
@@ -31,12 +35,9 @@ const PlayerOnslaughtChart = dynamic(
   { ssr: false, loading: () => <div className="h-56 w-full" /> },
 );
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "short",
-});
+const DATE_PATTERN = "MMM yyyy";
 
 export type PlayerOnslaughtData = Awaited<
   ReturnType<ReturnType<ReturnType<typeof unicum.region>["players"]>["onslaught"]>
@@ -79,6 +80,7 @@ export function OnslaughtTab({
   loading: boolean;
   nickname: string;
 }) {
+  const { t } = useTranslation("components/players/detail/onslaught/index");
   const zone = useDisplayZone();
   const standings = data?.standings ?? [];
   const latest = standings[0] ?? null;
@@ -101,8 +103,7 @@ export function OnslaughtTab({
         <PanelSeparator />
         <Panel>
           <PanelContent className="px-4 py-10 text-center text-sm text-fd-muted-foreground">
-            Loading {nickname}&apos;s Onslaught record...
-          </PanelContent>
+            {t("loading-s-onslaught-record", { nickname })}</PanelContent>
         </Panel>
       </>
     );
@@ -114,17 +115,13 @@ export function OnslaughtTab({
         <PanelSeparator />
         <Panel>
           <PanelHeader>
-            <PanelTitle>Onslaught</PanelTitle>
+            <PanelTitle>{t("onslaught")}</PanelTitle>
           </PanelHeader>
           <PanelContent className="px-4 py-8 text-sm text-fd-muted-foreground">
             <p>
-              {nickname} has not held a place on the Onslaught leaderboard.
-            </p>
+              {t("has-not-held-a-place", { nickname })}</p>
             <p className="mt-2">
-              The board only lists players who reach Champion, a few thousand per
-              region, so this is where almost every profile lands. It fills in by
-              itself the season they get there.
-            </p>
+              {t("the-board-only-lists-players")}</p>
           </PanelContent>
         </Panel>
       </>
@@ -138,7 +135,7 @@ export function OnslaughtTab({
       <PanelSeparator />
       <Panel>
         <PanelHeader>
-          <PanelTitle>{nickname}&apos;s Onslaught record</PanelTitle>
+          <PanelTitle>{t("onslaught-record", { nickname })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <Current
@@ -180,6 +177,9 @@ function Current({
   region: Region;
   updatedAt: Date | null;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/detail/onslaught/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const tier = onslaughtTier(standing.rank, standing);
   const href = boardHref(region, standing, true);
   return (
@@ -200,27 +200,39 @@ function Current({
           <Link
             href={href}
             className="text-2xl font-semibold tabular-nums hover:underline"
-            title="See this season's leaderboard"
+            title={t("see-this-season-s-leaderboard")}
           >
-            #{intFmt.format(standing.rank)}
+            #{num(INT_FORMAT).format(standing.rank)}
           </Link>
         </div>
         <div className="text-sm text-fd-muted-foreground">
           <Link href={href} className="hover:underline">
-            {standing.codename ?? "Onslaught"}
+            {standing.codename ?? battleTypeName(BattleType.Onslaught, tGame)}
           </Link>
           {" · "}
-          {intFmt.format(standing.rating)} rating points
-          {" · "}
-          {intFmt.format(standing.battles)} battles
-          {standing.ended ? " · final" : " · live season"}
+          {t("standing-line", {
+            rating: num(INT_FORMAT).format(standing.rating),
+            battles: num(INT_FORMAT).format(standing.battles),
+          })}
+          {" "}
+          {standing.ended ? t("final") : t("live-season")}
         </div>
         {updatedAt ? (
           // The same reading the board carries: when these standings were last
           // true, from the source's own stamp. On a live season it is the
           // difference between a rank someone still holds and one they held.
           <div className="text-xs text-fd-muted-foreground">
-            Updated <RelativeTime date={updatedAt} title={updatedAt.toISOString()} />
+            <Interpolate
+              template={t("updated")}
+              values={{
+                when: (
+                  <RelativeTime
+                    date={updatedAt}
+                    title={updatedAt.toISOString()}
+                  />
+                ),
+              }}
+            />
           </div>
         ) : null}
       </div>
@@ -236,6 +248,8 @@ function PastSeason({
   standing: Standing;
   region: Region;
 }) {
+  const { num } = useFormat();
+  const { date } = useFormat();
   const tier = onslaughtTier(standing.rank, standing);
   const href = boardHref(region, standing, false);
   return (
@@ -257,11 +271,11 @@ function PastSeason({
         href={href}
         className="tabular-nums text-fd-muted-foreground hover:underline"
       >
-        #{intFmt.format(standing.rank)}
+        #{num(INT_FORMAT).format(standing.rank)}
       </Link>
       {tier ? <TierBadge tier={tier} /> : null}
       <span className="ml-auto text-fd-muted-foreground">
-        {standing.endDate ? dateFmt.format(new Date(standing.endDate)) : null}
+        {standing.endDate ? date(DATE_PATTERN).format(new Date(standing.endDate)) : null}
       </span>
     </li>
   );
@@ -269,11 +283,12 @@ function PastSeason({
 
 /** The rank's name in the rank's own colour, as the board draws it. */
 function TierBadge({ tier }: { tier: OnslaughtTier }) {
+  const { t: tGame } = useTranslation("game/vocabulary");
   return (
     <span
       className={`rounded px-1.5 py-0.5 text-xs font-semibold ${RATING_COLOR_CLASS[ONSLAUGHT_TIER_COLOR[tier]]}`}
     >
-      {ONSLAUGHT_TIER_LABEL[tier]}
+      {tGame(`onslaught-tiers.${tier}`)}
     </span>
   );
 }

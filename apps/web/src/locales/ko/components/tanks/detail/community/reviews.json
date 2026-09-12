@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "이 전차에서 {battles}회 전투",
+  "damage": "{damage} 피해량",
+  "n-marks": "{count, plural, other {#개 표식}}",
+  "no-written-opinions-yet-if": "아직 작성된 의견이 없습니다. 전투 기록이 있다면 첫 번째 의견을 남겨 주세요.",
+  "win-rate": "승률 {toFixed}%",
+  "written-on": "{gameVersion}에 작성됨"
+}

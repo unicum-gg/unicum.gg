@@ -1,0 +1,6 @@
+{
+  "title": "Meilleurs joueurs de World of Tanks en {mode} ({region})",
+  "description": "Classement {name} {region} pour {mode}, le mode compétitif classé en 7 contre 7 de World of Tanks, dans l’ordre du classement du jeu.",
+  "og-title": "Meilleurs joueurs de {mode}",
+  "og-subtitle": "Classement de la région {region}"
+}

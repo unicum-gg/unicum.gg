@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Katrs tanks novērtēts ar atzīmi no piecām, ko piešķīruši spēlētāji, kuri ar to spēlē. Balss tiek ieskaitīta tikai no konta, kas patiesībā ir izvedis transportlīdzekli kaujā, tāpēc šis nav vienkārši aptaujas rezultāts.",
+  "no-tank-has-been-rated": "Neviens tanks vēl nav novērtēts. Pirmās balsis var iesniegt tanku lapās, sadaļā Kopiena.",
+  "think": "domāt",
+  "title": "Ko spēlētāji {think}",
+  "votes-across-vehicles": "{totalVotes} balsis par {ratedTanks} transportlīdzekļiem."
+}

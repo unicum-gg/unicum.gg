@@ -1,0 +1,21 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Ukupno",
+    "day": "Poslednjih 24h",
+    "week": "Poslednjih 7d",
+    "month": "Poslednjih 30d"
+  },
+  "sections": {
+    "territory": "Територија",
+    "t10": "Nivo X",
+    "t8": "Nivo VIII",
+    "t6": "Nivo VI"
+  },
+  "rows": {
+    "provinces": "Провинције",
+    "elo": "ELO",
+    "battles": "Borbi",
+    "winrate": "Procenat pobeda"
+  }
+}

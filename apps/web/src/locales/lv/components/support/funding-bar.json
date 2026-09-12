@@ -1,0 +1,18 @@
+{
+  "caught-up": "Pilnībā panākts, paldies. Viss pārpalikums tiek novirzīts lielākai veiktspējai un jaunām funkcijām.",
+  "covered-label": "Apscovers",
+  "covered-sentence": "Atbalstītāji līdz šim ir segusi {received} no iztērētajiem {spent}.",
+  "days-out-of-pocket": "{days} dienas no savas kabatas",
+  "from-supporter-one": "no {count} atbalstītāja",
+  "from-supporters": "no {count} atbalstītājiem",
+  "gap-growing": "Vēl {amount}/mēn. novērš starpības palielināšanos.",
+  "goal": "mērķis {amount}",
+  "of-that-total": "no šīs kopsummas",
+  "pledges-cover": "Solījumi tagad sedz mēneša rēķinu.",
+  "raised-amount": "{amount} savāktas",
+  "raised-label": "Savāktas",
+  "run-at-a-loss": "{name} kopš {since} darbojas ar zaudējumiem.",
+  "run-rate": "Mēneša temps: apsolīti {pledged}/mēn. pret {cost}/mēn. darbībai.",
+  "spent-since-launch": "Iztērēts kopš palaišanas",
+  "to-catch-up": "Lai pilnībā panāktu pārējo, nepieciešami {amount}."
+}

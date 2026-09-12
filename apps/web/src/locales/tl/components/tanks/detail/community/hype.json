@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "mas mataas sa {value}% ng mga namarkahang tank sa tier nito",
+  "measured-hint": "Kung saan niraranggo ng rate ng panalo nito ang tank sa mga kaparehong tank",
+  "not-enough-votes-yet-to": "Hindi pa sapat ang mga boto para ihambing ang hatol ng komunidad sa aktuwal na performance ng tank.",
+  "perceived-hint": "Kung saan ito niraranggo ng komunidad sa mga namarkahang tank na tier {tier}",
+  "verdict": {
+    "overrated": "Mas mataas nang malaki ang marka rito ng komunidad kaysa sa aktuwal nitong nakakamit.",
+    "fair": "Magkatugma ang reputasyon at mga resulta rito.",
+    "underrated": "Mas mahusay ang performance nito kaysa sa pagkilalang ibinibigay rito ng lahat."
+  },
+  "what-players-think": "Ano ang iniisip ng mga manlalaro",
+  "what-the-data-says": "Ano ang sinasabi ng datos"
+}

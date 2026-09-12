@@ -1,0 +1,14 @@
+{
+  "clan": "Клан",
+  "player": "Гравець",
+  "members": "Члени",
+  "battles": "Бої",
+  "avg-damage": "Середній шкода",
+  "avg-xp": "Середній XP",
+  "winrate": "% перемог",
+  "result": "Результат",
+  "tournament": "Турнір",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

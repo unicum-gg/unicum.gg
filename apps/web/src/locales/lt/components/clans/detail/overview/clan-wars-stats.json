@@ -1,0 +1,21 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Viso",
+    "day": "Paskutinės 24 val.",
+    "week": "Paskutinės 7 d.",
+    "month": "Paskutinės 30 d."
+  },
+  "sections": {
+    "territory": "Teritorija",
+    "t10": "X lygis",
+    "t8": "VIII lygis",
+    "t6": "VI lygis"
+  },
+  "rows": {
+    "provinces": "Provincijos",
+    "elo": "ELO",
+    "battles": "Mūšiai",
+    "winrate": "Pergalės rodiklis"
+  }
+}

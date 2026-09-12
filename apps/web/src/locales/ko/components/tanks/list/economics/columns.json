@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "비용 (크레딧)",
+      "tip": "크레딧 구매 가격 (연구소 탱크)"
+    },
+    "buyGold": {
+      "label": "비용 (골드)",
+      "tip": "골드 구매 가격 (프리미엄 탱크)"
+    },
+    "researchXp": {
+      "label": "연구 XP",
+      "tip": "잠금 해제에 필요한 XP (최저 비용 경로)"
+    },
+    "totalFreeXp": {
+      "label": "자유 XP (T{tier})",
+      "tip": "단계 {tier}부터 연구하는 데 필요한 누적 XP, 선행 모듈 포함"
+    },
+    "shellCost": {
+      "label": "포탄 비용",
+      "tip": "기본 포탄 가격 (크레딧)"
+    },
+    "ammoCost": {
+      "label": "전체 탄약 비용",
+      "tip": "기본 포탄 가격 × 탄약 적재량"
+    },
+    "acquireMoney": {
+      "label": "구매 비용 ({currency})",
+      "tip": "탱크를 획득하는 데 필요한 실제 비용 추정치 (연구 + 구매), {currency} 기준"
+    },
+    "freeXpMoney": {
+      "label": "자유 XP ({currency})",
+      "tip": "단계 {tier}에서 탱크를 자유 XP로 연구하는 데 필요한 실제 비용 추정치, {currency} 기준"
+    }
+  },
+  "selector": {
+    "buyCredits": "비용 (크레딧)",
+    "buyGold": "비용 (골드)",
+    "researchXp": "연구 XP",
+    "totalFreeXp": "무료 XP",
+    "shellCost": "포탄 비용",
+    "ammoCost": "전체 탄약 비용",
+    "acquireMoney": "구매 비용 (크레딧)",
+    "freeXpMoney": "무료 XP (크레딧)"
+  }
+}

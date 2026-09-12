@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Még néhány szó: {count} hiányzik.",
+  "at-winrate": "n {winrate}%-on",
+  "could-not-withdraw-that-try-again-in-a-momen": "Nem sikerült visszavonni. Próbáld meg egy pillanat múlva.",
+  "hide-the-detailed-axes": "Részletes tengelyek elrejtése",
+  "not-enough-battles": "Nem játszottál eleget ezzel a tankkal ahhoz, hogy a szavazatod számítson.",
+  "published-once-read": "A moderátor elolvasása után jelenik meg. A csillagaid azonnal számítanak.",
+  "rate-it-in-detail": "Részletes értékelés (opcionális)",
+  "review": {
+    "none": "Értékelés mentve.",
+    "queued": "Értékelés mentve. A véleményed egy moderátornál van.",
+    "published": "Értékelés mentve. A véleményed már elérhető.",
+    "pending": "Értékelés mentve. A véleményed még moderátorra vár.",
+    "rejected": "Értékelés mentve. A korábbi véleményed nem jelent meg, ezért csak a csillagaid számítanak.",
+    "closed": "Értékelés mentve. Az írott vélemények jelenleg le vannak zárva, ezért a szöveg nem lett megtartva."
+  },
+  "save-failed": "Nem sikerült menteni. Próbáld meg egy pillanat múlva.",
+  "say-why-optional": "Írd le, miért (opcionális)",
+  "signed-with": "A(z) {battles} csatáddal aláírva",
+  "submit-my-rating": "Értékelésem elküldése",
+  "too-many-edits": "Ez egyszerre túl sok módosítás. Várj egy percet.",
+  "update-my-rating": "Értékelésem frissítése",
+  "what-it-is-good-at": "Miben jó, miben nem, és kinek érdemes játszania vele.",
+  "withdraw": "Visszavonás",
+  "your-rating-has-been-withdrawn": "Az értékelésed vissza lett vonva.",
+  "your-review-is-waiting-on": "A véleményed moderátorra vár. Itt csak te láthatod.",
+  "your-review-was-not-published": "A véleményed nem jelent meg. A csillagaid továbbra is beleszámítanak az átlagba."
+}

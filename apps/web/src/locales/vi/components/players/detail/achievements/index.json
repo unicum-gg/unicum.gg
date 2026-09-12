@@ -1,0 +1,12 @@
+{
+  "achievements": "Thành tích của {nickname}",
+  "filter-all": "Tất cả",
+  "filter-both": "Cả hai",
+  "filter-earned": "Đã kiếm được",
+  "filter-missing": "Còn thiếu",
+  "filter-obtainable": "Có thể kiếm được",
+  "filter-retired": "Đã ngừng phát hành",
+  "no-achievement-matches-these-filters": "Không có thành tích nào khớp với các bộ lọc này.",
+  "search-achievements": "Tìm thành tích",
+  "search-among-n-achievements": "Tìm kiếm trong {count} thành tích"
+}

@@ -1,0 +1,14 @@
+{
+  "date": "Datum",
+  "featured-tournament": "Uitgelicht toernooi",
+  "format": "Formaat",
+  "mode": "Modus",
+  "no-tournament-matches-the-current": "Geen enkel toernooi komt overeen met de huidige filters.",
+  "nothing-here-right-now-wargaming": "Momenteel is hier niets. Wargaming opent dagelijks nieuwe toernooien, dus dit wordt vanzelf weer aangevuld.",
+  "prize": "Prijs",
+  "region-tournaments": "Toernooien in {region} ({count})",
+  "status": "Status",
+  "teams": "Teams",
+  "tier": "niveau",
+  "tournament": "Toernooi"
+}

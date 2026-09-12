@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Cost (credits)",
+    "buyGold": "Cost (gold)",
+    "researchXp": "अनुसंधान XP",
+    "shellCost": "गोला लागत",
+    "ammoCost": "पूर्ण गोला बारूद लागत",
+    "class3": "3rd कक्षा",
+    "class2": "2nd कक्षा",
+    "class1": "1st कक्षा",
+    "ace": "एस टैंकर",
+    "mark1": "1 मार्क (65%)",
+    "mark2": "2 मार्क्स (85%)",
+    "mark3": "3 मार्क्स (95%)"
+  }
+}

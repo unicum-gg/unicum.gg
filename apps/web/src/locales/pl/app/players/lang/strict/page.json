@@ -1,0 +1,6 @@
+{
+  "title": "Ścisły ranking graczy World of Tanks według języka: {language} ({region})",
+  "description": "{name}: ranking graczy w regionie {region}, obejmujący wyłącznie graczy, których język ustalony na podstawie historii klanowej to {language}, uszeregowanych według WNX.",
+  "og-title": "Ścisły ranking graczy według języka: {language}",
+  "og-subtitle": "Klasyfikacja {region}"
+}

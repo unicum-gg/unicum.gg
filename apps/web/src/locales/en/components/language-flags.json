@@ -1,0 +1,8 @@
+{
+  "cta-clans": "Click to see top {language} clans.",
+  "cta-players": "Click to see top {language} players.",
+  "declared": "{language}. Picked by the clan.",
+  "inferred": "{language}. Our guess from this player’s clan history. The longer they stay in a clan, the more its languages count.",
+  "top-language-clans": "Top {language} clans",
+  "top-language-players": "Top {language} players"
+}

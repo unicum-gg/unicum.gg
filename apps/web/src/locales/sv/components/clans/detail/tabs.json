@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Översikt",
+    "tanks": "Tanken",
+    "videos": "Videor",
+    "tournaments": "Turneringar",
+    "manage": "Hantera"
+  },
+  "section-count": "{section} ({count})"
+}

@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Een cel toont het aantal overwinningen van de groep op dat niveau gedeeld door het aantal gevechten op dat niveau, voor alle voertuigen waarmee een speler ten minste {minBattles} gevechten heeft gespeeld. Zo geeft de cel de niveaus weer zoals ze worden gespeeld door de spelers die erop spelen. Cellen die op minder dan {TIERWINRATETHINCELL} gevechten zijn gebaseerd, worden lichter weergegeven: ze veranderen om andere redenen dan vaardigheid. De kleuren komen overeen met dezelfde winstpercentagecategorieën die overal elders op de site worden gebruikt.",
+  "cell-no-sample": "{where}, geen steekproef",
+  "cell-winrate": "{where}, winstpercentage van {winrate} over {battles} gevechten",
+  "metric-band": "{metric}-band",
+  "nothing-recorded": "Nog niets geregistreerd voor {metric}. Het raster wordt elke nacht opnieuw opgebouwd.",
+  "over-battles-from-accounts": "{winrate} over {battles} gevechten van {players} accounts",
+  "over-n-battles": "over {battles} gevechten",
+  "what-players-win-by-tier": "Wat spelers in categorie {label} per niveau winnen"
+}

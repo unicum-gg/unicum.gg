@@ -1,0 +1,4 @@
+{
+  "chart-label": "지난 {range} 동안 지역별 온라인 플레이어",
+  "not-enough-recorded-yet-for": "이 범위의 기록이 아직 충분하지 않습니다. 샘플링이 계속되면 채워집니다."
+}

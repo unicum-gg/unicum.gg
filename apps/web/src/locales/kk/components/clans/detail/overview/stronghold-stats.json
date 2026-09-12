@@ -1,0 +1,22 @@
+{
+  "stat": "Статистика",
+  "periods": {
+    "total": "Жалпы",
+    "day": "Соңғы 24 сағ",
+    "week": "Соңғы 7 күн",
+    "month": "Соңғы 30 күн"
+  },
+  "sections": {
+    "elo": "X деңгейдегі ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} X деңгейі (7v7)",
+    "t8": "{skirmish} VIII деңгейі (7v7)",
+    "t6": "{skirmish} VI деңгейі (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Соғыстар",
+    "winrate": "Жеңіс коэффициенті"
+  }
+}

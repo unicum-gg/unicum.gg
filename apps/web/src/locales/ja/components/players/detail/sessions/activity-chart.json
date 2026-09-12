@@ -1,0 +1,5 @@
+{
+  "battles": "{count} 戦闘数",
+  "chart-label": "{granularity}あたりのプレイ戦闘数。{metric}で色分け",
+  "no-battles": "いいえ 戦闘数"
+}

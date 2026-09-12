@@ -1,3 +1,5 @@
+import type { TranslateFunction } from "@onruntime/translations";
+import { statLabel } from "@/components/stat-label";
 import { ArrowRightIcon } from "lucide-react";
 import type { FormattedChange } from "@/components/tanks/change-format";
 import { cn } from "@/lib/utils";
@@ -11,9 +13,17 @@ import { cn } from "@/lib/utils";
 export function ChangeRow({
   change,
   className,
+  tStats,
 }: {
   change: FormattedChange;
   className?: string;
+  /**
+   * The `components/stat-labels` translator, passed in rather than read from a
+   * hook: this row is rendered from a server component (the tank's History tab)
+   * AND from a client one (the changes feed), so it can hold neither
+   * `useTranslation` nor an `await`. Each side resolves it the way it can.
+   */
+  tStats: TranslateFunction;
 }) {
   return (
     <li
@@ -23,7 +33,7 @@ export function ChangeRow({
       )}
     >
       <span className="min-w-0 truncate text-fd-muted-foreground">
-        {change.label}
+        {statLabel(change.label, tStats)}
       </span>
       <div className="flex shrink-0 items-center gap-2 tabular-nums">
         <span className="text-fd-muted-foreground">{change.before}</span>

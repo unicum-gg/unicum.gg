@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "修改任何错误内容，包括车辆。保存后会将其送回审核队列，因此已经上线的视频会暂时下架，直到再次通过审核。",
+  "correct-a-suggestion": "修正建议",
+  "could-not-load-that-suggestion": "无法加载该建议。请稍后再试。",
+  "link-expired": "该链接已过期。请在 Discord 的卡片上再次点击“编辑”以获取新链接。",
+  "loading": "加载中…",
+  "log-in": "登录",
+  "log-in-with-the-account": "请使用提出该视频建议的账号登录，以便修正该建议。",
+  "no-suggestion-with-that-id": "没有找到该编号对应的建议。",
+  "not-yours-to-correct": "您无权修正该建议。"
+}

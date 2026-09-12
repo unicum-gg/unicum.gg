@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name} tanks ({region}), every vehicle played",
+    "description": "Every tank {name} has played on {region}, with battles, win rate, average damage and WN8 per vehicle."
+  },
+  "achievements": {
+    "title": "{name} achievements ({region}), {medals} medals earned",
+    "description": "The {medals} World of Tanks medals {name} has earned on {region}, from Kolobanov’s and Pool’s to the honorary ranks and epic medals, plus every one still left to earn."
+  },
+  "tournaments": {
+    "title": "{name} tournaments ({region})",
+    "description": "Every Wargaming tournament {name} has entered on {region}: the team they played for, the format, and how far it got. A record Wargaming publishes from the tournament’s side only, never the player’s."
+  },
+  "value": {
+    "title": "{name} account value ({region})",
+    "description": "What {name}’s World of Tanks account on {region} is worth: credits, gold and experience tied up in the garage."
+  },
+  "mode": {
+    "title": "{name} {mode} stats ({region})",
+    "description": "{name} on {region} in {mode}: battles, win rate and ratings for this mode, next to their random-battles baseline."
+  },
+  "overview": {
+    "title": "{name} World of Tanks stats ({region}), {battles} battles, {winrate}% WR",
+    "description": "{name} on {region}: {battles} battles, {winrate}% winrate, {rating} rating. Tank-by-tank breakdown, WN8, WNX and full clans history."
+  },
+  "locked": {
+    "title": "{name} World of Tanks account locked ({region})",
+    "description": "{name} ({region}) exists but Wargaming has locked this account, so its World of Tanks stats are not available."
+  },
+  "empty": {
+    "title": "{name} World of Tanks player stats ({region})",
+    "description": "{name} ({region}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history."
+  }
+}

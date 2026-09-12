@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "费用（信用）",
+      "tip": "银币购买价格（科技树坦克）"
+    },
+    "buyGold": {
+      "label": "费用（金币）",
+      "tip": "金币购买价格（高级坦克）"
+    },
+    "researchXp": {
+      "label": "研究经验",
+      "tip": "解锁所需经验（最便宜路线）"
+    },
+    "totalFreeXp": {
+      "label": "全局经验（T{tier}）",
+      "tip": "从{tier}级开始研发所需的累计经验，包括前置模块"
+    },
+    "shellCost": {
+      "label": "弹药成本",
+      "tip": "默认炮弹价格（银币）"
+    },
+    "ammoCost": {
+      "label": "满弹药费用",
+      "tip": "默认炮弹价格 × 弹药容量"
+    },
+    "acquireMoney": {
+      "label": "购买费用（{currency}）",
+      "tip": "获得该坦克所需的预估真实费用（研发 + 购买），单位为{currency}"
+    },
+    "freeXpMoney": {
+      "label": "全局经验（{currency}）",
+      "tip": "从{tier}级开始使用全局经验研发该坦克所需的预估真实费用，单位为{currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "费用（信用）",
+    "buyGold": "费用（金币）",
+    "researchXp": "研究经验",
+    "totalFreeXp": "免费经验",
+    "shellCost": "弹药成本",
+    "ammoCost": "满弹药费用",
+    "acquireMoney": "购买费用（货币）",
+    "freeXpMoney": "免费经验（货币）"
+  }
+}

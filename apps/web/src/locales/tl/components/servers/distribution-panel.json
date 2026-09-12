@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Paano nagkukumpara ang mga manlalaro sa {region}",
+  "median-n": "median na {value}",
+  "metric-rating": "Rating ng {metric}",
+  "tracked-accounts-with-at-least": "{players} sinusubaybayang account na may hindi bababa sa {minBattles} mga laban. Pareho ang mga kulay sa mga saklaw na ginagamit ng website sa iba pang bahagi.",
+  "win-rate": "Win rate",
+  "win-rate-distribution-across-the-region-s-tr": "Distribusyon ng rate ng panalo sa mga sinusubaybayang manlalaro ng rehiyon"
+}

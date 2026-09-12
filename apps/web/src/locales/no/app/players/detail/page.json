@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name} stridsvogner ({region}), alle kjøretøy spilt",
+    "description": "Alle stridsvogner {name} har spilt på {region}, med kamper, seiersprosent, gjennomsnittlig skade og WN8 per kjøretøy."
+  },
+  "achievements": {
+    "title": "{name} prestasjoner ({region}), {medals} medaljer opptjent",
+    "description": "De {medals} World of Tanks-medaljene {name} har opptjent på {region}, fra Kolobanovs og Pools til æresgrader og episke medaljer, pluss alle som fortsatt kan opptjenes."
+  },
+  "tournaments": {
+    "title": "{name} turneringer ({region})",
+    "description": "Alle Wargaming-turneringer {name} har deltatt i på {region}: laget spilleren spilte for, formatet og hvor langt det kom. En oversikt Wargaming publiserer kun fra turneringens side, aldri spillerens."
+  },
+  "value": {
+    "title": "{name} kontoverdi ({region})",
+    "description": "Hva {name} sin World of Tanks-konto på {region} er verdt: kreditter, gull og erfaring bundet opp i garasjen."
+  },
+  "mode": {
+    "title": "{name} {mode}-statistikk ({region})",
+    "description": "{name} på {region} i {mode}: kamper, seiersprosent og vurderinger for denne modusen, ved siden av grunnlaget fra tilfeldige kamper."
+  },
+  "overview": {
+    "title": "{name} World of Tanks-statistikk ({region}), {battles} kamper, {winrate}% SP",
+    "description": "{name} på {region}: {battles} kamper, {winrate}% seiersprosent, {rating} vurdering. Oppdeling per stridsvogn, WN8, WNX og fullstendig klanhistorikk."
+  },
+  "locked": {
+    "title": "{name} World of Tanks-konto låst ({region})",
+    "description": "{name} ({region}) finnes, men Wargaming har låst denne kontoen, så World of Tanks-statistikken er ikke tilgjengelig."
+  },
+  "empty": {
+    "title": "{name} World of Tanks-spillerstatistikk ({region})",
+    "description": "{name} ({region}) World of Tanks-spillerstatistikk: WN8- og WNX-vurderinger, seiersprosent, oppdeling per stridsvogn og fullstendig klanhistorikk."
+  }
+}

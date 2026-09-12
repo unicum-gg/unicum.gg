@@ -1,0 +1,16 @@
+{
+  "title": "Folosim cookie-uri",
+  "description": "Folosim cookie-uri pentru a îmbunătăți experiența de navigare și pentru a analiza traficul site-ului.",
+  "functional": {
+    "title": "Funcționale",
+    "description": "Necesare pentru funcționarea corectă a site-ului (preferințe, selectarea regiunii)."
+  },
+  "analytics": {
+    "title": "Măsurarea audienței",
+    "description": "Google Analytics, care setează cookie-uri pentru a ne ajuta să înțelegem modul în care este folosit site-ul. Analiza anonimă fără cookie-uri (Umami) rămâne activă indiferent de alegere."
+  },
+  "save": "Salvează alegerile mele",
+  "decline": "Refuză tot",
+  "customize": "Personalizează",
+  "accept": "Confirmare toate"
+}

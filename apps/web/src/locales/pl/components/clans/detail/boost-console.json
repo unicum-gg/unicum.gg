@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Dodaj przepływ pracy",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Każdy schemat automatyzacji aktywuje przypisane do niego rezerwy w określonym przedziale czasowym, gdy wystarczająca liczba członków bierze udział w aktywnej sesji gry. Działa na Twoim koncie, więc nie musisz być online. Dodaj tyle schematów, ile potrzebujesz.",
+  "n-online": "/ {count} online",
+  "officer": "Oficer",
+  "online": "Online",
+  "recent-activations": "niedawne aktywacje",
+  "reserve": "Rezerwa",
+  "stronghold-boosts": "Wzmocnienia Fortecy",
+  "when": "Kiedy",
+  "workflow": "Workflow"
+}

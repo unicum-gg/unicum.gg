@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "玩家",
+    "clans": "军团",
+    "tanks": "坦克",
+    "maps": "地图",
+    "tournaments": "赛事",
+    "servers": "服务器"
+  },
+  "links": {
+    "top-players": {
+      "label": "顶级玩家",
+      "description": "历史玩家排行榜"
+    },
+    "players-onslaught": {
+      "description": "天梯战排名阶梯"
+    },
+    "players-steel-hunter": {
+      "description": "大逃杀排行榜"
+    },
+    "top-clans": {
+      "label": "顶级车队",
+      "description": "历史军团排行榜"
+    },
+    "stronghold": {
+      "description": "冲突战梯子"
+    },
+    "advances": {
+      "description": "十级15v15排名"
+    },
+    "tank-performances": {
+      "label": "表现",
+      "description": "每辆坦克的胜率和伤害"
+    },
+    "tank-specs": {
+      "label": "规格",
+      "description": "每辆坦克的数据"
+    },
+    "tank-economics": {
+      "label": "经济",
+      "description": "赚取银币和经验的坦克"
+    },
+    "tank-moe": {
+      "description": "每个标记所需的伤害"
+    },
+    "tank-mom": {
+      "description": "精通徽章阈值"
+    },
+    "tank-changes": {
+      "label": "改动",
+      "description": "按更新查看增强和削弱"
+    },
+    "tank-community": {
+      "label": "社区评分",
+      "description": "由拥有它们的玩家评分"
+    },
+    "tank-videos": {
+      "label": "视频",
+      "description": "社区实战视频"
+    },
+    "all-tournaments": {
+      "label": "赛事",
+      "description": "每场已开始和已结束的比赛"
+    },
+    "all-maps": {
+      "label": "所有地图",
+      "description": "游戏中的每张地图"
+    },
+    "map-changes": {
+      "label": "改动",
+      "description": "按更新查看地图重制"
+    },
+    "battle-type": {
+      "description": "{type} 地图"
+    },
+    "servers-population": {
+      "label": "服务器人数",
+      "description": "当前及历史在线玩家数"
+    }
+  }
+}

@@ -1,5 +1,9 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { Fragment, useMemo } from "react";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { GlossaryLabel } from "@/components/glossary/label";
@@ -17,7 +21,7 @@ import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
-import { dec2Fmt } from "@/components/compare/cells";
+import { DEC2_FORMAT } from "@/components/compare/cells";
 import { type ClanCompareSlot } from "./comparison-table";
 
 const TOP_N = 10;
@@ -43,6 +47,8 @@ export function TopMembersTab({
   region: Region;
   slots: ClanCompareSlot[];
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/clans/compare/top-members-tab");
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -103,8 +109,7 @@ export function TopMembersTab({
             {slots.map((_, idx) => (
               <Fragment key={idx}>
                 <TableHead className="text-xs text-muted-foreground">
-                  Player
-                </TableHead>
+                  {t("player")}</TableHead>
                 <TableHead className="text-right text-xs text-muted-foreground">
                   <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
                 </TableHead>
@@ -141,7 +146,7 @@ export function TopMembersTab({
                         : "text-muted-foreground",
                     )}
                   >
-                    {cell?.rating != null ? dec2Fmt.format(cell.rating) : "—"}
+                    {cell?.rating != null ? numberFormat(locale, DEC2_FORMAT).format(cell.rating) : "—"}
                   </TableCell>
                 </Fragment>
               ))}

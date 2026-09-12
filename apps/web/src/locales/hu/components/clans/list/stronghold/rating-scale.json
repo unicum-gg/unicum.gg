@@ -1,0 +1,17 @@
+{
+  "average": "Átlag",
+  "bad": "Rossz",
+  "below-avg": "Átlag alatti",
+  "color-thresholds-for-the-stronghold": "Az erődítmény-ranglisták színküszöbei. Minden szinthez egyetlen abszolút skála tartozik, így az SR (vagy SRB) mindenhol ugyanazt a klánminőséget jelenti.",
+  "excellent": "Kiváló",
+  "good": "Jó",
+  "rating-colors": "Értékelési színek",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Szuper",
+  "tier": "szint",
+  "top": "Legjobb",
+  "very-bad": "Nagyon rossz",
+  "very-good": "Nagyon jó",
+  "wr": "WR"
+}

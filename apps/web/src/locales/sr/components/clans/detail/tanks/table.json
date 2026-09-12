@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Још нема података о тенковима за овај клан.",
+  "no-tanks-match-these-filters": "Ниједан тенк не одговара овим филтерима.",
+  "nation": "Nacije",
+  "type": "Tip",
+  "tier": "Nivo",
+  "name": "Naziv",
+  "members": "Članovi",
+  "battles": "Borbi",
+  "avg-damage": "Prosečna šteta",
+  "avg-xp": "Prosečan XP",
+  "wr": "WR"
+}

@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "战斗结果",
+  "loading-maps": "正在加载地图…",
+  "map": "地图",
+  "mode": "模式",
+  "pick-a-map": "选择地图",
+  "pick-a-mode": "选择模式",
+  "result": "结果",
+  "spawn": "重生",
+  "team": "队伍 {team}",
+  "team-spawn": "{team}队 · {direction}",
+  "which-side-you-started": "你的出生方"
+}

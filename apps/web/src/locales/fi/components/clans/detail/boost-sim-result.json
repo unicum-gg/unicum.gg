@@ -1,0 +1,11 @@
+{
+  "already-running": "käynnissä jo",
+  "in-window": "ikkunassa",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Reservejä ei ole valittu.",
+  "no-stock-ready": "varastossa ei ole valmista",
+  "not-available": "ei saatavilla",
+  "threshold": "raja ({online}/{min})",
+  "would-activate": "aktivoituisi",
+  "would-not-fire": "Se ei käynnistyisi juuri nyt."
+}

@@ -1,0 +1,14 @@
+{
+  "ammunition": "Munice",
+  "characteristics": "Charakteristiky tanku {tank}",
+  "consumables": "Spotřební doplňky",
+  "crew-level": "Úroveň posádky",
+  "crew-skills": "Dovednosti posádky",
+  "equipment": "Vybavení",
+  "field-mods": "Úpravy pole",
+  "historical-reference": "Historické údaje o tanku {tank}",
+  "modules": "Moduly tanku {tank}",
+  "research-path": "Větev výzkumu tanku {tank}",
+  "similar": "Tanky podobné tanku {tank}",
+  "videos": "Videa tanku {tank}"
+}

@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Endre alt som er feil, inkludert kjøretøyet. Når du lagrer, sendes det tilbake til modereringskøen, så en video som er publisert tas ned til den er godkjent på nytt.",
+  "correct-a-suggestion": "Korriger et forslag",
+  "could-not-load-that-suggestion": "Kunne ikke laste inn forslaget. Prøv igjen om et øyeblikk.",
+  "link-expired": "Denne lenken har utløpt. Trykk på Edit igjen på kortet i Discord for å få en ny.",
+  "loading": "Laster…",
+  "log-in": "Logg inn",
+  "log-in-with-the-account": "Logg inn med kontoen som foreslo denne videoen, for å korrigere den.",
+  "no-suggestion-with-that-id": "Det finnes ikke noe forslag med denne ID-en.",
+  "not-yours-to-correct": "Dette forslaget er ikke ditt å korrigere."
+}

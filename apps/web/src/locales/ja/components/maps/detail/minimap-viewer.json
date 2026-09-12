@@ -1,0 +1,10 @@
+{
+  "after": "変更後:",
+  "after-the-event": "イベント後",
+  "base": "基本",
+  "control-point": "制圧ポイント",
+  "danger-zone": "危険地帯:",
+  "grid": "グリッド",
+  "random-events": "ランダムイベント",
+  "team": "チーム {n}"
+}

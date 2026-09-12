@@ -17,16 +17,19 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
+import { useTranslation } from "@/hooks/use-translation";
+import { tankParamName } from "@/components/game-name";
 
 const SLOTS = 3;
 
-// The characteristic a consumable's passive effect reads as, for the tooltip.
-const EFFECT_LABEL: Record<string, string> = {
-  enginePowerFactor: "Engine power",
-  turretRotationSpeedFactor: "Turret traverse",
-  fireStartingChanceFactor: "Fire chance",
-  maxSpeedFactor: "Top speed",
-  crewLevelIncrease: "Crew skills",
+// The characteristic a consumable's passive effect reads as, against the
+// characteristics table's own row key, so the tooltip says what the table says.
+// Crew skills is not a characteristic, so it keeps a key of its own.
+const EFFECT_ROW: Record<string, string> = {
+  enginePowerFactor: "enginePower",
+  turretRotationSpeedFactor: "turretTraverse",
+  fireStartingChanceFactor: "engineFireChance",
+  maxSpeedFactor: "speedForward",
 };
 
 /** A `mul` factor as a signed percentage; `crewLevelIncrease` is already a flat
@@ -38,6 +41,9 @@ function fmtEffect(attribute: string, value: number): string {
 }
 
 function ConsumableTooltip({ consumable }: { consumable: LoadoutConsumable }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/consumables/index");
+  const { t: tWidget } = useTranslation("components/tanks/detail/widgets");
+  const { t: tParams } = useTranslation("game/tank-params");
   return (
     <div className="w-52 space-y-2 text-xs">
       <div className="font-medium">{consumable.name}</div>
@@ -52,7 +58,13 @@ function ConsumableTooltip({ consumable }: { consumable: LoadoutConsumable }) {
               className="flex justify-between gap-3 tabular-nums"
             >
               <span className="text-background/60">
-                {EFFECT_LABEL[e.attribute] ?? e.attribute}
+                {e.attribute === "crewLevelIncrease"
+                  ? tWidget("crew-skills")
+                  : tankParamName(
+                      EFFECT_ROW[e.attribute] ?? e.attribute,
+                      e.attribute,
+                      tParams,
+                    )}
               </span>
               <span>{fmtEffect(e.attribute, e.value)}</span>
             </div>
@@ -60,8 +72,7 @@ function ConsumableTooltip({ consumable }: { consumable: LoadoutConsumable }) {
         </div>
       ) : (
         <div className="border-t border-background/20 pt-1.5 text-background/60">
-          No characteristic effect.
-        </div>
+          {t("no-characteristic-effect")}</div>
       )}
     </div>
   );
@@ -100,6 +111,8 @@ export function TankConsumables({
   /** A local under-title line (column-width), when stacked below another panel. */
   headerBorder?: boolean;
 }) {
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
+  const { t: tWidget } = useTranslation("components/tanks/detail/widgets");
   if (consumables.length === 0) return null;
   const byKey = new Map(consumables.map((c) => [c.key, c]));
   const mountedSet = new Set(slots.filter((k): k is string => !!k));
@@ -113,7 +126,7 @@ export function TankConsumables({
             headerBorder && "border-b border-fd-border",
           )}
         >
-          <PanelTitle>Consumables</PanelTitle>
+          <PanelTitle>{tSection("consumables")}</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="space-y-5 px-4 py-6">
@@ -127,7 +140,11 @@ export function TankConsumables({
                   type="button"
                   onClick={() => onSelectSlot(i)}
                   aria-pressed={activeSlot === i}
-                  aria-label={`Consumable slot ${i + 1}${c ? `: ${c.name}` : ""}`}
+                  aria-label={
+                    c
+                      ? tWidget("consumable-slot-filled", { n: i + 1, name: c.name })
+                      : tWidget("consumable-slot", { n: i + 1 })
+                  }
                   className={cn(
                     "cursor-pointer rounded-lg transition-shadow",
                     activeSlot === i

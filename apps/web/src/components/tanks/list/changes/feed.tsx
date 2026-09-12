@@ -1,7 +1,10 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
-import Link from "next/link";
+import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import { TankIcon } from "@/components/tanks/tank-icon";
@@ -39,11 +42,7 @@ export type FeedVersion = {
   tanks: FeedTank[];
 };
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const DATE_PATTERN = "d MMM yyyy";
 
 /**
  * The global tank-changes feed: every rebalanced tank, grouped by game version
@@ -60,6 +59,7 @@ export function TankChangesFeed({
   region: Region;
   versions: FeedVersion[];
 }) {
+  const { t } = useTranslation("components/tanks/list/changes/feed");
   // One entry per (version, tank); paginate the flat list so a huge patch does
   // not render hundreds of tanks at once.
   const entries = useMemo(
@@ -75,9 +75,7 @@ export function TankChangesFeed({
     return (
       <Panel>
         <PanelContent className="px-4 py-12 text-center text-sm text-fd-muted-foreground">
-          No tank changes have been recorded yet. As Wargaming rebalances tanks,
-          the buffs and nerfs of each update will appear here.
-        </PanelContent>
+          {t("no-tank-changes-have-been")}</PanelContent>
       </Panel>
     );
   }
@@ -105,25 +103,32 @@ export function TankChangesFeed({
 }
 
 function VersionHeader({ version }: { version: FeedVersion }) {
+  const { date } = useFormat();
+  const { t } = useTranslation("components/tanks/list/changes/feed");
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-fd-border bg-fd-secondary/20 px-4 py-2.5">
       <h2 className="font-heading text-sm font-semibold">
-        Update {version.gameVersion}
+        {t("update", { version: version.gameVersion })}
         <span className="ml-2 text-xs font-normal text-fd-muted-foreground">
-          {dateFmt.format(new Date(version.capturedAt))}
+          {date(DATE_PATTERN).format(new Date(version.capturedAt))}
         </span>
       </h2>
       <span className="text-xs text-fd-muted-foreground tabular-nums">
-        {version.tanks.length} tank{version.tanks.length === 1 ? "" : "s"}
+        {t("n-tanks", {
+          count: version.tanks.length,
+        })}
       </span>
     </div>
   );
 }
 
 function TankBlock({ region, tank }: { region: Region; tank: FeedTank }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/tanks/list/changes/feed");
+  const { t: tStats } = useTranslation("components/stat-labels");
   const { identity } = tank;
   const changes = tank.changes
-    .map((c) => formatSpecChange(c.field, c.previous, c.next))
+    .map((c) => formatSpecChange(c.field, c.previous, c.next, locale))
     .filter((c): c is FormattedChange => c !== null);
   if (changes.length === 0) return null;
   const buffs = changes.filter((c) => c.isBuff === true).length;
@@ -155,17 +160,26 @@ function TankBlock({ region, tank }: { region: Region; tank: FeedTank }) {
           </div>
           <div className="mt-0.5 flex gap-2 text-xs tabular-nums">
             {buffs > 0 ? (
-              <span className="text-emerald-500">{buffs} buffed</span>
+              <span className="text-emerald-500">
+                {t("buffed", { count: buffs })}
+              </span>
             ) : null}
             {nerfs > 0 ? (
-              <span className="text-red-500">{nerfs} nerfed</span>
+              <span className="text-red-500">
+                {t("nerfed", { count: nerfs })}
+              </span>
             ) : null}
           </div>
         </div>
       </Link>
       <ul className="flex-1 divide-y divide-fd-border sm:border-l sm:border-fd-border">
         {changes.map((change) => (
-          <ChangeRow key={change.field} change={change} className="px-4" />
+          <ChangeRow
+            key={change.field}
+            change={change}
+            className="px-4"
+            tStats={tStats}
+          />
         ))}
       </ul>
     </div>

@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "暂无数据。军团刷新后再来查看。",
+  "heading": "顶级 <accent>{tier}</accent> 军团",
+  "blurb": "{region} 排行榜，按 {sort} 对 {format} 中所有已追踪军团进行排位（最低 {battles} 场战斗）。",
+  "blurb-period": "{region} 排行榜，按 {sort} 对 {period} 内 {format} 中所有已追踪军团进行排位（最低 {battles} 场战斗）。",
+  "format-advances": "攻城战 (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "前 {count} 名 {tier} 军团 ·"
+}

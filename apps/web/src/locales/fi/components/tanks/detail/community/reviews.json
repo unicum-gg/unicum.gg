@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} taistelua sillä",
+  "damage": "{damage} Vahinkoa aiheutettu",
+  "n-marks": "{count, plural, one {# merkki} other {# merkit}}",
+  "no-written-opinions-yet-if": "Ei vielä kirjallisia mielipiteitä. Jos sinulla on taisteluita, omasi olisi ensimmäinen.",
+  "win-rate": "{toFixed} % voittoprosentti",
+  "written-on": "kirjoitettu versiolla {gameVersion}"
+}

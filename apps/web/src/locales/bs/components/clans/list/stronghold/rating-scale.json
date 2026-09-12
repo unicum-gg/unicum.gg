@@ -1,0 +1,17 @@
+{
+  "average": "Prosjek",
+  "bad": "Loš",
+  "below-avg": "Ispod prosjeka",
+  "color-thresholds-for-the-stronghold": "Pragovi boja za ploče utvrde. Jedinstvena apsolutna skala za svaki nivo, tako da SR (ili SRB) svuda znači isti kvalitet klana.",
+  "excellent": "Izvrsno",
+  "good": "Dobar",
+  "rating-colors": "Boje ocjena",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Nivo",
+  "top": "Najbolji",
+  "very-bad": "Veoma loše",
+  "very-good": "Veoma dobro",
+  "wr": "WR"
+}

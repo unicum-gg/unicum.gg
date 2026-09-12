@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistika nasumičnih bitaka korisnika {nickname}",
+  "progression-title": "Napredak parametra {metric} korisnika {nickname}",
+  "lift-drag-title": "Tenki koji oblikuju ocjenu korisnika {nickname}",
+  "progression-blurb": "Puna crta prikazuje ukupni parametar {metric} i odgovara stupcu Ukupno iznad, a polako se mijenja kako se dodaju nove bitke. Isprekidana crta prikazuje parametar {metric} po sesiji, izračunat iz bitaka odigranih od prethodne snimke. Prikazuje nizove dobrih i loših rezultata. Boja crte prati razinu ocjene.",
+  "progression-empty": "Još nema dovoljno povijesti. Potrebna nam je barem jedna snimka za crtanje krivulje. Provjeri ponovno uskoro."
+}

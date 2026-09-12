@@ -1,3 +1,6 @@
+import { numberFormat } from "@/lib/format";
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import { JsonLd } from "@/components/json-ld";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import APP from "@/constants/app";
@@ -9,7 +12,7 @@ import { CommunityBoard } from "./board";
 import { Extremes } from "./extremes";
 import type { CommunityBoardRow } from "./row";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /** How many of the ranked vehicles the list markup names. Enough to describe
  * the page, short of restating the whole table. */
@@ -23,7 +26,8 @@ const RANKED_IN_SCHEMA = 50;
  * ISR-cached like the other tank landings; the rollup behind it moves once an
  * hour, so the page being a few minutes behind costs nothing.
  */
-export async function TankCommunityView({ region }: { region: Region }) {
+export async function TankCommunityView({ region, locale }: { region: Region; locale: string }) {
+  const { t } = await getTranslation("components/tanks/list/community/view", locale);
   const board = await buildSafe(() => unicum.region(region).tanks.ratings(), {
     results: [],
     totalVotes: 0,
@@ -66,24 +70,21 @@ export async function TankCommunityView({ region }: { region: Region }) {
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            What players <span className="text-brand">think</span>
+            <Interpolate
+              template={t("title")}
+              values={{ think: <span className="text-brand">{t("think")}</span> }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            Every tank rated out of five by the people who play it. A vote only
-            counts from an account that has actually taken the vehicle into
-            battle, which is what separates this from a poll of whoever showed
-            up.
-          </p>
+            {t("every-tank-rated-out-of")}</p>
           {board.totalVotes > 0 ? (
             <p className="mx-auto mt-3 text-sm text-fd-muted-foreground tabular-nums">
-              {intFmt.format(board.totalVotes)} votes across{" "}
-              {intFmt.format(board.ratedTanks)} vehicles.
-            </p>
+              {t("votes-across-vehicles", { totalVotes: numberFormat(locale, INT_FORMAT).format(board.totalVotes), ratedTanks: numberFormat(locale, INT_FORMAT).format(board.ratedTanks) })}</p>
           ) : null}
         </PanelContent>
       </Panel>
 
-      {rows.length > 0 ? <Extremes region={region} rows={rows} /> : null}
+      {rows.length > 0 ? <Extremes locale={locale} region={region} rows={rows} /> : null}
 
       <PanelSeparator />
 
@@ -91,9 +92,7 @@ export async function TankCommunityView({ region }: { region: Region }) {
         <Panel>
           <PanelContent>
             <p className="text-sm text-fd-muted-foreground">
-              No tank has been rated yet. The first votes are on the tank pages,
-              under Community.
-            </p>
+              {t("no-tank-has-been-rated")}</p>
           </PanelContent>
         </Panel>
       ) : (

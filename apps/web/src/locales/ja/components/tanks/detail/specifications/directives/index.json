@@ -1,0 +1,9 @@
+{
+  "boosts": "ブースト {name}",
+  "directives": "ディレクティブ",
+  "directive-name": "{name} 指令",
+  "grants-and-boosts": "未訓練の場合でも搭乗員スキルを付与し、強化します。",
+  "grants-only": "戦闘中、搭乗員スキルを付与します（表示される特性はありません）。",
+  "enhances-mounted": "搭載中の{name}を強化します。",
+  "mount-to-use": "このディレクティブを使用するには{name}を搭載してください。"
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
 import dynamic from "next/dynamic";
 import { MountOnVisible } from "@/components/mount-on-visible";
 import {
@@ -31,6 +32,8 @@ import type {
 // A value, not just a type: the percentile panel is keyed by the metric enum.
 import { RatingMetric } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 
 // recharts is the heaviest dependency in the client bundle (107 KB gzipped,
 // 372 KB parsed) and this chart is the only thing on the profile that draws
@@ -91,6 +94,11 @@ export function OverallTab({
   tanksHref,
   nowMs,
 }: OverallData & { region: Region; nickname: string }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation(
+    "components/players/detail/overview/index",
+  );
+
   return (
     <>
       <PanelSeparator />
@@ -98,7 +106,7 @@ export function OverallTab({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {nickname}&apos;s random battles stats
+            {t("stats-title", { nickname })}
             {/* Phone-only: the table has room for the stat names and one
                 column of figures, and this is which one. */}
             <StatsPeriodSelect />
@@ -134,18 +142,17 @@ export function OverallTab({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {nickname}&apos;s <RatingMetricInlineSelect /> progression
+            <Interpolate
+              template={t("progression-title", { nickname })}
+              values={{ metric: <RatingMetricInlineSelect /> }}
+            />
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           {ratingData.length > 0 ? (
             <>
               <div className={`p-4 ${styles.mutedDescription}`}>
-                Solid line is overall {metricLabel} (matches the Total column
-                above), drifting slowly as new battles accumulate. Dashed line
-                is per-session {metricLabel}, computed from the battles played
-                since the previous snapshot. It shows hot and cold streaks. Line
-                color follows the rating tier.
+                {t("progression-blurb", { metric: metricLabel })}
               </div>
               <MountOnVisible
                 className="px-4 pb-4"
@@ -160,8 +167,7 @@ export function OverallTab({
             </>
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>
-              Not enough history yet. We need at least one snapshot to draw the
-              curve. Check back soon.
+              {t("progression-empty")}
             </div>
           )}
         </PanelContent>
@@ -171,7 +177,7 @@ export function OverallTab({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Tanks shaping {nickname}&apos;s rating</PanelTitle>
+          <PanelTitle>{t("lift-drag-title", { nickname })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <TanksLiftDrag
@@ -192,6 +198,7 @@ export function OverallTab({
           <>
             <PanelSeparator />
             <PlayerMarksPanels
+              locale={locale}
               region={region}
               nickname={nickname}
               progress={markProgress}

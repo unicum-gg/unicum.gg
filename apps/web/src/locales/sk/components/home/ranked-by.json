@@ -1,0 +1,6 @@
+{
+  "day": "Zoradené podľa {metric} za posledných 24 hodín (min. 20 bitiek).",
+  "week": "Zoradené podľa {metric} za posledných 7 dní (min. 140 bitiek).",
+  "month": "Zoradené podľa {metric} za posledných 30 dní (min. 600 bitiek).",
+  "overall": "Zoradené podľa {metric} za celé obdobie (min. 20 000 bitiek)."
+}

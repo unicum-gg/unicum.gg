@@ -1,0 +1,22 @@
+{
+  "search": "{count}件の用語を検索",
+  "search-label": "用語集を検索",
+  "all": "全て",
+  "jump": "文字にジャンプ",
+  "empty": "「{query}」に一致する用語はありません。",
+  "categories": {
+    "vehicles": "車輌",
+    "gunnery": "射撃",
+    "armor": "装甲",
+    "mobility": "機動性",
+    "vision": "視界",
+    "crew": "搭乗員",
+    "progression": "進行",
+    "economy": "経済",
+    "ratings": "評価",
+    "statistics": "成績",
+    "modes": "バトルモード",
+    "tactics": "戦術",
+    "slang": "スラング"
+  }
+}

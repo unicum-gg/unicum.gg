@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Classifica {board}",
+  "carried-beside-a-clan-tag": "Mostrati accanto al tag di un clan. Uno stemma di classifica indica un piazzamento in una competizione: il numero riportato corrisponde alla posizione, mentre il colore indica la classifica. Le valutazioni non ne fanno ottenere alcuno, perché avere un WN8 alto non è qualcosa che un clan possa vincere.",
+  "clan-badges": "Distintivi clan",
+  "clan-board": {
+    "name": "Primi {rank} in {board}",
+    "how": "Un posto tra i primi {rank} della classifica {board}. Lo stemma resta finché il clan mantiene la posizione e viene perso quando non la mantiene più."
+  },
+  "clan-overflow": "Un clan che occupa più di tre posizioni raggruppa le altre in uno stemma {plus}, in ordine dalla migliore, così che il tag resti leggibile. Passandoci sopra con il cursore ne vengono mostrati i nomi.",
+  "featured-tournament-winner": {
+    "name": "Vincitore di un torneo in evidenza",
+    "how": "Lo stesso riconoscimento, ottenuto in un evento che Wargaming segnala come in evidenza. Oro anziché acciaio, esattamente come per i giocatori."
+  },
+  "heading": "Ogni {badge} e come ottenerlo",
+  "heading-accent": "distintivo",
+  "marks-carried-beside-a-nickname": "Contrassegni mostrati accanto a un nickname ovunque compaia su {NAME}: classifiche, elenchi dei clan, ricerca, tabelloni dei tornei.",
+  "n-badges": "{count} distintivi",
+  "onslaught-champion": {
+    "name": "Campione di Aggressione",
+    "how": "Ha raggiunto il grado Campione in Aggressione, necessario per comparire nelle {standings}. Conservato in seguito: una valutazione che scende sotto la soglia perde il posto, non il fatto di averlo occupato."
+  },
+  "onslaught-legend": {
+    "name": "Leggenda di Aggressione",
+    "how": "Ha occupato un posto entro la soglia Leggenda della stagione. Conta la posizione, non il punteggio: i posti disponibili nello stesso momento sono limitati e la soglia viene valutata in base alla stagione in cui il posto è stato occupato. Viola anziché blu acciaio, lo stesso colore con cui la classifica contrassegna Leggenda."
+  },
+  "player-badges": "Distintivi giocatore",
+  "player-overflow": "Un giocatore che ne possiede più di tre raggruppa gli altri in uno stemma {plus}, nell’ordine indicato sopra, così che il nickname resti leggibile in una tabella. Passandoci sopra con il cursore se ne vedono i nomi e ciascuno mantiene il collegamento del proprio stemma.",
+  "ranked-standings": "classifiche classificate",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Un canale Twitch collegato all’account. Collega Twitch dal tuo profilo per confermarlo e lo stemma rimanderà al tuo canale. Viene mostrato sia quando sei in diretta sia quando non lo sei."
+  },
+  "streamer-who-is-on-air": "Uno streamer in diretta mostra anche un’etichetta LIVE rossa. Questa non si ottiene e non si conserva: compare quando inizia la diretta e scompare quando finisce, quindi non viene mai raggruppata.",
+  "support-subscription": "abbonamento al supporto",
+  "supporter": {
+    "name": "Sostenitore"
+  },
+  "supporter-note": "Occorre che {link} sia in stato attivo e visibile pubblicamente. I sostenitori che scelgono di restare anonimi non mostrano alcun badge, per loro scelta.",
+  "the-marks-a-player-or": "I contrassegni che un giocatore o un clan può mostrare su {NAME}, che cosa indica ciascuno e i requisiti esatti per ottenerlo.",
+  "tournament-winner": {
+    "name": "Vincitore del torneo",
+    "how": "Una squadra attribuita al clan ha vinto un torneo. Wargaming registra le squadre e gli account, mai i clan, quindi l’attribuzione viene ricostruita confrontando ogni formazione con l’appartenenza ai clan risultante il giorno in cui si è disputato il torneo."
+  },
+  "verified": {
+    "name": "Verificato",
+    "how": "Il proprietario ha effettuato l’accesso con il proprio Wargaming.net ID e ha collegato questo account. L’accesso è l’unico requisito ed è gratuito."
+  }
+}

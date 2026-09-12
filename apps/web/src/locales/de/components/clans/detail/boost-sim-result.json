@@ -1,0 +1,11 @@
+{
+  "already-running": "bereits aktiv",
+  "in-window": "im Fenster",
+  "n-online": "/ {count} Online",
+  "no-reserves-selected": "Keine Reserven ausgewählt.",
+  "no-stock-ready": "Standard Bereit: nein",
+  "not-available": "nicht verfügbar",
+  "threshold": "Schwelle ({online}/{min})",
+  "would-activate": "würde aktivieren",
+  "would-not-fire": "Jetzt würde es nicht ausgelöst werden."
+}

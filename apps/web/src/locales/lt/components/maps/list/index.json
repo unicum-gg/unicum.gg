@@ -1,0 +1,9 @@
+{
+  "all": "Visi",
+  "camouflage-map": "{camouflage} žemėlapis",
+  "modes": "{count, plural, one {# režimas} few {# režimai} other {# režimai}}",
+  "no-maps-match-your-filters": "Jokie žemėlapiai neatitinka jūsų filtrų.",
+  "search": "Ieškoti tarp {count} žemėlapių",
+  "search-label": "Paieška žemėlapių",
+  "special-map": "Specialus žemėlapis"
+}

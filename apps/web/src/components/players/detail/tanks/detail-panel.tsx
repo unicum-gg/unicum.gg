@@ -1,7 +1,11 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { statLabel } from "@/components/stat-label";
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
 import {
   DEFAULT_RATING_METRIC,
@@ -67,6 +71,8 @@ export function PlayerTankDetailPanel({
    * do not know them yet, which shows no section rather than an empty one. */
   awards: PlayerAchievement[] | null;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/detail/tanks/detail-panel");
   const name = detail.shortName || detail.name || `#${detail.tankId}`;
   const [storedMetric] = useCookie(
     STORAGE.COOKIES.RATING,
@@ -144,16 +150,19 @@ export function PlayerTankDetailPanel({
       </PanelHeader>
 
       <div className="flex flex-col gap-4 overflow-y-auto p-4">
-        <Block title="General parameters" rows={generalRows(detail)} />
-        <Block title="Average score per battle" rows={averageRows(detail)} />
-        <Block title="Record score" rows={recordRows(detail)} />
+        <Block title={t("general-parameters")} rows={generalRows(detail, locale)} />
+        <Block title={t("average-score-per-battle")} rows={averageRows(detail, locale)} />
+        <Block title={t("record-score")} rows={recordRows(detail, locale)} />
 
         <div>
           {/* The same inline picker the profile's chart carries: the metric is
               a reading preference, so it belongs where the reader is looking
               rather than only in the navbar. */}
           <h4 className="mb-1.5 text-sm font-semibold">
-            <RatingMetricInlineSelect /> progression
+            <Interpolate
+              template={t("metric-progression")}
+              values={{ metric: <RatingMetricInlineSelect /> }}
+            />
           </h4>
           {chartable >= 2 ? (
             <MountOnVisible placeholder={<div className="h-56 w-full" />}>
@@ -165,19 +174,17 @@ export function PlayerTankDetailPanel({
             </MountOnVisible>
           ) : (
             <p className={styles.mutedDescription}>
-              Not enough history on this tank yet. It needs at least two
-              snapshots in the last 90 days to draw a line.
-            </p>
+              {t("not-enough-history-on-this")}</p>
           )}
         </div>
 
         {/* Last, the way the game orders its own vehicle record. Rendered
             straight from the payload: the medals come stored, so there is
             nothing to wait for and nothing to defer. */}
-        {awards ? <TankAwards awards={awards} /> : null}
+        {awards ? <TankAwards awards={awards} locale={locale} /> : null}
 
         <p className={`text-xs ${styles.mutedText}`}>
-          Updated <RelativeTime date={new Date(detail.updatedAt)} />
+          {t("updated")} <RelativeTime date={new Date(detail.updatedAt)} />
         </p>
       </div>
     </div>
@@ -185,6 +192,7 @@ export function PlayerTankDetailPanel({
 }
 
 function Block({ title, rows }: { title: string; rows: DetailRow[] }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
   if (rows.length === 0) return null;
   return (
     <div>
@@ -209,7 +217,7 @@ function Block({ title, rows }: { title: string; rows: DetailRow[] }) {
                   metric's name, so making it the control costs no room and puts
                   the switch on the number it changes. All three rows carry one,
                   and the CSS shows the one whose metric is selected. */}
-              {r.metric ? <RatingMetricInlineSelect /> : r.label}
+              {r.metric ? <RatingMetricInlineSelect /> : statLabel(r.label, tStats)}
             </dt>
             <span
               aria-hidden

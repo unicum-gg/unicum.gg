@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. Klasse",
+      "tip": "3. Klasse: XP-behov for at slå 50 % af spillerne"
+    },
+    "class2": {
+      "label": "2nd Klasse",
+      "tip": "2. Klasse: XP-behov for at slå 80 % af spillerne"
+    },
+    "class1": {
+      "label": "1st Klasse",
+      "tip": "1. Klasse: XP-behov for at slå 95 % af spillerne"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: XP-behov for at slå 99 % af spillerne"
+    }
+  },
+  "rows-per-page": "Rækker pr. side",
+  "previous-page": "Forrige side",
+  "page": "Side {current} / {totalPages}",
+  "next-page": "Næste side",
+  "all": "Alle"
+}

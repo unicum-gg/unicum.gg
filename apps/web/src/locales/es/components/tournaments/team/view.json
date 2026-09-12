@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "El sorteo aún no se ha realizado. Los enfrentamientos de este equipo aparecerán aquí cuando comience el torneo.",
+  "each-map-is-played-twice": "Cada mapa se juega dos veces, una desde cada lado. El último mapa es el decisivo y se juega una sola vez.",
+  "first-battle-at": "Primera batalla, {when}",
+  "lost": "Perdido",
+  "matches": "Partidos ({length})",
+  "never-played": "Este equipo nunca disputó ningún enfrentamiento. Se inscribió, pero no llegó a entrar en el sorteo, como ocurre con una plantilla que quedó sin confirmar.",
+  "no-maps-recorded": "No hay ningún mapa registrado para este enfrentamiento.",
+  "no-roster-recorded-for-this": "No hay ninguna alineación registrada para este equipo.",
+  "of-players-on-the-day": "{members} de {length} jugadores ese día",
+  "played-on-uncatalogued": "Jugado en {maps}, que el catálogo de mapas no lleva.",
+  "roster": "Plantilla ({length})",
+  "stage-group": "{stage} · Grupo {order}",
+  "team-1": "Equipo 1",
+  "team-2": "Equipo 2",
+  "tournaments": "Torneos",
+  "when-the-first-battle-started": "Cuando comenzó la primera batalla",
+  "won": "Ganado"
+}

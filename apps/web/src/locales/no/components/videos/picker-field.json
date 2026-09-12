@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "clear-the-field": "Tøm {label}",
+  "credited-on-the-clan-s": "Kreditert på klanens egen side.",
+  "none": "Ingen",
+  "optional": "(valgfritt)",
+  "pick-the-vehicle": "Velg kjøretøyet",
+  "search-for-a-clan": "Søk etter en klan",
+  "search-for-a-vehicle": "Søk etter et kjøretøy",
+  "search-tank": "Søk etter tank...",
+  "tank": "Kampvogn",
+  "tank-hint-optional": "En taktikk hører til kartet sitt, så det er bare verdt å navngi dette når videoen også handler om kjøretøyet.",
+  "tank-hint-required": "En tilfeldig kamp slås opp etter kjøretøyet den ble spilt i."
+}

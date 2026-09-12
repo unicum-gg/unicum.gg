@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Aucune donnée de char disponible pour ce clan pour le moment.",
+  "no-tanks-match-these-filters": "Aucun char ne correspond à ces filtres.",
+  "nation": "Nation",
+  "type": "Type",
+  "tier": "Niveau",
+  "name": "Nom",
+  "members": "Membres",
+  "battles": "Batailles",
+  "avg-damage": "Dommage moyen",
+  "avg-xp": "XP moyen",
+  "wr": "WR"
+}

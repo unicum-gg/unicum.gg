@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "Clan de World of Tanks [{tag}] {name} ({region}), {members} miembros",
+    "description": "El clan [{tag}] {name} en {region}: {members} miembros, tabla completa de miembros con puntuaciones WN8 y WNX, actividad reciente de incorporaciones y salidas e historial del clan."
+  },
+  "stronghold": {
+    "title": "Clan [{tag}] {name}: estadísticas de bastiones ({region})",
+    "description": "Rendimiento en fortalezas del clan [{tag}] {name} en {region}: puntuaciones de escaramuzas y avances, batallas y porcentaje de victorias de cada miembro."
+  },
+  "clan-wars": {
+    "title": "Clan [{tag}] {name}: estadísticas de guerras de clanes ({region})",
+    "description": "Rendimiento en guerras de clanes del clan [{tag}] {name} en {region}: puntuaciones, batallas y porcentaje de victorias por miembro en las campañas del mapa global."
+  },
+  "tanks": {
+    "title": "Clan [{tag}] {name}: tanques ({region}), los vehículos del clan",
+    "description": "Todos los vehículos usados por el clan [{tag}] {name} en {region}, con las batallas, el porcentaje de victorias y el daño medio agregados de todos los miembros del clan."
+  },
+  "manage": {
+    "title": "Clan [{tag}] {name}: reservas de bastión ({region})",
+    "description": "Activar y programar las reservas de fortalezas del clan [{tag}] {name}. Solo para oficiales."
+  },
+  "missing": {
+    "description": "Clan de World of Tanks [{tag}] en {region}: tabla de miembros con puntuaciones WN8/WNX, actividad de incorporaciones y salidas, batallas recientes e historial completo del clan."
+  }
+}

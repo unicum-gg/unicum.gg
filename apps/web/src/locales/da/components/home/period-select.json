@@ -1,0 +1,7 @@
+{
+  "label": "Periode for rangliste",
+  "periods": {
+    "overall": "Samlet",
+    "30d": "Sidste 30 dage"
+  }
+}

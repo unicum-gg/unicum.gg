@@ -1,0 +1,21 @@
+{
+  "title": "Skala ocjenjivanja",
+  "description": "Pragovi boja koji se upotrebljavaju na cijeloj stranici za postotak pobjeda i parametar ocjene odabran na navigacijskoj traci.",
+  "tier": "Razina",
+  "tiers": {
+    "top": "Najbolji",
+    "excellent": "Izvrsno",
+    "super": "Super",
+    "very-good": "Vrlo dobro",
+    "good": "Dobro",
+    "average": "Prosjek",
+    "below-avg": "Ispod prosjeka",
+    "bad": "Loše",
+    "very-bad": "Vrlo loše"
+  },
+  "rating-colors": "Boje ocjene",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

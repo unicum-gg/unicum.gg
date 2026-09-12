@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "الذخيرة والمعدات والمستهلكات والتوجيهات والطاقم والتقدم لهذا العمود. كل تغيير يحرّك خصائصه في المقارنة الموجودة خلفه.",
+  "ammunition-equipment-crew-and-progression": "الذخيرة والمعدات والطاقم والتقدم",
+  "apply-to-every-column": "تطبيق على كل عمود",
+  "compare-against": "مقارنة ضد {tank}",
+  "compare-the-others-against-this-one": "مقارنة الآخرين ضد هذه",
+  "configure-tank": "تهيئة {tank}",
+  "highest-overall-score": "أعلى نتيجة إجمالية",
+  "highest-overall-score-of-this": "أعلى نتيجة إجمالية في هذه المقارنة",
+  "is-the-reference": "المرجع: {tank}",
+  "overall": "بشكل عام",
+  "reference-column": "عمود المرجع",
+  "remove-tank": "إزالة {tank}",
+  "reset-all": "إعادة تعيين الكل",
+  "setup": "إعداد",
+  "stock": "مخزون",
+  "tank-setup": "تجميعة {tank}",
+  "top": "الأفضل",
+  "where-this-vehicle-sits-across": "موضع هذه المركبة عبر الكتالوج الكامل، من أصل {MAXSCORE}: متوسط نتائج فئاتها الأربع، وفق الإعداد هنا. هذا ملخص، وليس حكمًا، إذ تصل دبابة كشافة ودبابة ثقيلة إلى النتيجة نفسها بكون كل منهما جيدًا في أشياء مختلفة."
+}

@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Legg til arbeidsflyt",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Hver arbeidsflyt aktiverer reservene sine i et tidsvindu når nok medlemmer er i en aktiv spilløkt. Kjøres på kontoen din, du trenger ikke være pålogget. Legg til så mange du trenger.",
+  "n-online": "/ {count} på nett",
+  "officer": "Offiser",
+  "online": "Online",
+  "recent-activations": "nylige aktiveringer",
+  "reserve": "Reserve",
+  "stronghold-boosts": "Festningstøtter",
+  "when": "Når",
+  "workflow": "Arbeidsflyt"
+}

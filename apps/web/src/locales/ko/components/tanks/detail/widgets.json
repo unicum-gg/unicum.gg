@@ -1,0 +1,12 @@
+{
+  "slot": "슬롯 {n}",
+  "slot-filled": "슬롯 {n}: {name}",
+  "consumable-slot": "소모품 슬롯 {n}",
+  "consumable-slot-filled": "소모품 슬롯 {n}: {name}",
+  "level": "레벨 {n}",
+  "stock": "재고",
+  "specialize": "클릭하여 이 슬롯을 특화하세요.",
+  "clear-specialization": "클릭하여 이 슬롯의 특화를 해제하세요.",
+  "crew-skills": "승무원 스킬",
+  "shell-aria": "{name}: 피해량 {damage}, 관통력 {penetration} mm"
+}

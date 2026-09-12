@@ -1,5 +1,13 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { dateLocale } from "@/lib/date-locale";
+import type { NumberFormatter } from "@/lib/format";
+
+import { useFormat } from "@/hooks/use-format";
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { format } from "date-fns";
 import Image from "next/image";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -38,12 +46,12 @@ import {
 } from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 
-const DAY_FORMAT = "MMM d, yyyy";
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const DAY_FORMAT = "d MMM yyyy";
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
+} as const;
 
 type MetricCell = {
   label: string;
@@ -58,36 +66,37 @@ type MetricSet = {
 };
 
 function metricCell(
+  num: NumberFormatter,
   label: string,
   value: number | null,
   color: (v: number) => RatingColor,
 ): MetricCell {
   return {
     label,
-    value: value === null ? "—" : intFmt.format(value),
+    value: value === null ? "—" : num(INT_FORMAT).format(value),
     color: value === null ? null : color(value),
   };
 }
 
-function computeMetrics(r: ClanRatings): {
+function computeMetrics(num: NumberFormatter, r: ClanRatings): {
   recent: MetricSet;
   lifetime: MetricSet;
   avgWinrate: MetricCell;
 } {
   return {
     recent: {
-      wn7: metricCell("Avg WN7 · 30d", r.recent.wn7, wn7Color),
-      wn8: metricCell("Avg WN8 · 30d", r.recent.wn8, wn8Color),
-      wnx: metricCell("Avg WNX · 30d", r.recent.wnx, wnxColor),
+      wn7: metricCell(num, "Avg WN7 · 30d", r.recent.wn7, wn7Color),
+      wn8: metricCell(num, "Avg WN8 · 30d", r.recent.wn8, wn8Color),
+      wnx: metricCell(num, "Avg WNX · 30d", r.recent.wnx, wnxColor),
     },
     lifetime: {
-      wn7: metricCell("Avg WN7", r.lifetime.wn7, wn7Color),
-      wn8: metricCell("Avg WN8", r.lifetime.wn8, wn8Color),
-      wnx: metricCell("Avg WNX", r.lifetime.wnx, wnxColor),
+      wn7: metricCell(num, "Avg WN7", r.lifetime.wn7, wn7Color),
+      wn8: metricCell(num, "Avg WN8", r.lifetime.wn8, wn8Color),
+      wnx: metricCell(num, "Avg WNX", r.lifetime.wnx, wnxColor),
     },
     avgWinrate: {
       label: "Avg winrate",
-      value: r.avgWinrate === null ? "—" : `${pctFmt.format(r.avgWinrate)}%`,
+      value: r.avgWinrate === null ? "—" : `${num(PCT_FORMAT).format(r.avgWinrate)}%`,
       color: r.avgWinrate === null ? null : winrateColor(r.avgWinrate / 100),
     },
   };
@@ -109,6 +118,7 @@ export function ClanHeader(
         tournamentBestTitle: string | null;
       },
 ) {
+  const { num } = useFormat();
   const loading = "loading" in props;
   // Run the beacon once here (the header renders its meta line twice, for the
   // desktop and mobile layouts); both InfoRows render the indicator from this
@@ -126,7 +136,7 @@ export function ClanHeader(
   }
 
   const { region, clan, members, ratings } = props;
-  const metrics = computeMetrics(ratings);
+  const metrics = computeMetrics(num, ratings);
   // Same roster-level boost share the stronghold boards flag, computed from the
   // current members so the clan page carries the warning too.
   const boostRatio = rosterBoostRatio(members);
@@ -227,13 +237,14 @@ function MetricColumn({
   metric: MetricCell;
   ratingCol?: string;
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
   return (
     <div
       data-rating-col={ratingCol}
       className="flex flex-1 flex-col border-l border-fd-border max-sm:first:border-l-0 sm:w-32 sm:flex-none sm:shrink-0"
     >
       <div className="px-4 py-2 text-center text-xs text-muted-foreground">
-        {metric.label}
+        {statLabel(metric.label, tStats)}
       </div>
       <div
         className={cn(
@@ -262,6 +273,8 @@ function InfoRow({
   className?: string;
   flagWrapperClassName?: string;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/clans/detail/header");
   const commanderName =
     members.find((m) => m.role === ClanRole.Commander)?.name ?? clan.leaderName;
   return (
@@ -276,12 +289,12 @@ function InfoRow({
         className="flex flex-col items-start gap-y-0.5 px-4 py-1 text-xs text-muted-foreground sm:flex-row sm:flex-nowrap sm:items-center sm:gap-x-2 sm:py-0 sm:whitespace-nowrap"
       >
         <span>
-          <span className="font-medium">Members:</span> {clan.membersCount}
+          <span className="font-medium">{t("members")}</span> {clan.membersCount}
         </span>
         <span className="hidden sm:inline">·</span>
         <span>
-          <span className="font-medium">Created:</span>{" "}
-          {format(clan.createdAt, DAY_FORMAT)} by{" "}
+          <span className="font-medium">{t("created")}</span>{" "}
+          {format(clan.createdAt, DAY_FORMAT, { locale: dateLocale(locale) })} by{" "}
           <PlayerName
             region={region}
             player={{ nickname: clan.creatorName }}
@@ -290,7 +303,7 @@ function InfoRow({
         </span>
         <span className="hidden sm:inline">·</span>
         <span>
-          <span className="font-medium">Commander:</span>{" "}
+          <span className="font-medium">{t("commander")}</span>{" "}
           <PlayerName
             region={region}
             player={{ nickname: commanderName }}
@@ -300,17 +313,17 @@ function InfoRow({
         {clan.isDisbanded && (
           <>
             <span className="hidden sm:inline">·</span>
-            <span className="font-medium text-destructive">Disbanded</span>
+            <span className="font-medium text-destructive">{t("disbanded")}</span>
           </>
         )}
         {clan.updatedAt && (
           <>
             <span className="hidden sm:inline">·</span>
             <span>
-              <span className="font-medium">Updated</span>{" "}
+              <span className="font-medium">{t("updated")}</span>{" "}
               <RelativeTime
                 date={clan.updatedAt}
-                title={format(clan.updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
+                title={format(clan.updatedAt, "d MMM yyyy 'at' HH:mm:ss", { locale: dateLocale(locale) })}
               />
             </span>
           </>

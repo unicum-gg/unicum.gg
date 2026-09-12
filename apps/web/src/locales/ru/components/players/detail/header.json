@@ -1,0 +1,7 @@
+{
+  "joined": "Дата регистрации: {date}",
+  "last-battle": "Последний бой: {when}",
+  "never-played": "Не играл",
+  "updated": "Обновлено {when}",
+  "clan-role-joined": "{role} · вступил {date}"
+}

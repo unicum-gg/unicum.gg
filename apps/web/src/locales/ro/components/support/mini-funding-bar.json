@@ -1,0 +1,6 @@
+{
+  "label": "Finanțat de comunitate",
+  "funded": "Finanțat în proporție de {pct}%",
+  "tooltip": "{received} din {goal} acoperiți de susținători de la lansare",
+  "tooltip-loading": "Finanțat de comunitate, fără reclame"
+}

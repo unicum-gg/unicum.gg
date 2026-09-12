@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Cada uno de los {count} vehículos de World of Tanks en {region}. Filtra por nivel, nación, clase y rol, y abre un Tanque para ver sus estadísticas, mejores jugadores y valores esperados.",
+    "title": "Todos los Tanques de World of Tanks ({region}), consulta todos los vehículos",
+    "description": "Consulta todos los Tanques de World of Tanks en {region}: filtra por nivel, nación, clase y rol, y profundiza en las estadísticas de cada Tanque, los mejores jugadores y los valores esperados.",
+    "heading": "Todos los <accent>tanques</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, penetración, blindaje, alcance de visión y movilidad de los {count} vehículos de World of Tanks en {region}. Ordena por cualquier columna y filtra por nivel, nación, clase y rol.",
+    "title": "Especificaciones de los Tanques de World of Tanks ({region}), Comparar todos los vehículos",
+    "description": "Comparar las especificaciones de todos los Tanques de World of Tanks en {region}: DPM, penetración, blindaje, alcance de visión y movilidad, con opciones para ordenar y filtrar por nivel, nación, clase y rol.",
+    "heading": "Especificaciones del <accent>tanque</accent>"
+  },
+  "economics": {
+    "intro": "Costes de compra y reparación, precios de proyectiles e ingresos en créditos de los {count} vehículos de World of Tanks en {region}. Ordena por cualquier columna y filtra por nivel, nación, clase y rol.",
+    "title": "Economía de los Tanques de World of Tanks ({region}), costes en créditos y XP",
+    "description": "Costes en créditos y XP, reparaciones y precios de proyectiles de todos los Tanques de World of Tanks en {region}, con opciones para ordenar y filtrar por nivel, nación, clase y rol.",
+    "heading": "Economía del <accent>tanque</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Media móvil de Daño necesaria para obtener una, dos y tres marcas en los {count} vehículos de World of Tanks en {region}. Ordena por cualquier columna y filtra por nivel, nación, clase y rol.",
+    "title": "Requisitos de las marcas de excelencia de World of Tanks ({region})",
+    "description": "Daño necesario para obtener una, dos y tres marcas de excelencia en todos los Tanques de World of Tanks en {region}, con opciones para ordenar y filtrar por nivel, nación, clase y rol.",
+    "heading": "<accent>Marcas de excelencia</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Umbrales de XP para As del Tanque y las insignias de maestría de los {count} vehículos de World of Tanks en {region}. Ordena por cualquier columna y filtra por nivel, nación, clase y rol.",
+    "title": "Requisitos de las insignias de maestría de World of Tanks ({region})",
+    "description": "Umbrales de XP para As del Tanque y las insignias de maestría de todos los Tanques de World of Tanks en {region}, con opciones para ordenar y filtrar por nivel, nación, clase y rol.",
+    "heading": "<accent>Marcas de Maestría</accent>"
+  },
+  "videos": {
+    "intro": "{count} batallas enlazadas por la comunidad en {region}, cada una se abre justo en el segundo en que comienza. Se sugieren desde las páginas de los Tanques y se revisan antes de aparecer aquí.",
+    "title": "Vídeos de partidas de World of Tanks ({region})",
+    "description": "Batallas de World of Tanks sugeridas por la comunidad en {region}, cada una se abre justo en el segundo en que comienza: el Tanque utilizado, el mapa, el lado del mapa y cómo terminó la batalla.",
+    "heading": "Videos de <accent>jugabilidad</accent>"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Najlepšie klany World of Tanks podľa jazyka: {language} ({region})",
+  "description": "Rebríček klanov {name} v regióne {region} pre klany, ktoré uviedli „{language}“ ako jeden zo svojich jazykov, zoradený podľa WNX.",
+  "og-title": "Najlepšie klany podľa jazyka: {language}",
+  "og-subtitle": "Rebríček regiónu {region}"
+}

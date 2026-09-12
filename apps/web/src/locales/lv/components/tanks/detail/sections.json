@@ -1,0 +1,14 @@
+{
+  "ammunition": "Munīcija",
+  "characteristics": "Tanka {tank} raksturlielumi",
+  "consumables": "Aprīkojums",
+  "crew-level": "Apkalpes līmenis",
+  "crew-skills": "Apkalpes prasmes",
+  "equipment": "Moduļi",
+  "field-mods": "Lauka modifikācijas",
+  "historical-reference": "Tanka {tank} vēsturiskā informācija",
+  "modules": "Tanka {tank} moduļi",
+  "research-path": "Tanka {tank} izpētes zars",
+  "similar": "Tvertne, kas ir līdzīga {tank}",
+  "videos": "Tanka {tank} video"
+}

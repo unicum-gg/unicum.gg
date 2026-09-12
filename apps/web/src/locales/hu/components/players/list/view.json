@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Legjobb <accent>játékosok</accent>",
+    "language": "Legjobb <accent>{language}</accent> játékosok"
+  },
+  "intro": {
+    "all": "A(z) {region} ranglista, minden idők {metric} értéke szerint rendezve, minimum 20 000 csatával.",
+    "language": "A(z) {region} játékosai, akiknek a feltételezett klántörténeti nyelvkészlete tartalmazza a(z) {language} nyelvet, {metric} szerint rendezve, minimum 10 000 csatával.",
+    "strict": "A(z) {region} játékosai, akiknek a feltételezett klántörténeti nyelve kizárólag a(z) {language}, {metric} szerint rendezve, minimum 10 000 csatával."
+  },
+  "board": {
+    "all": "A(z) {metric} szerinti legjobb {count} játékos",
+    "language": "A(z) {metric} szerinti legjobb {count} {language} játékos",
+    "strict": "A(z) {metric} szerinti legjobb {count} kizárólag {language} játékos"
+  },
+  "modes": {
+    "overall": "Összesen"
+  },
+  "columns": {
+    "player": "Játékos"
+  },
+  "strict-toggle": "Szigorú",
+  "any-toggle": "Bármilyen",
+  "all-languages": "Minden nyelv",
+  "battles": "Csaták",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

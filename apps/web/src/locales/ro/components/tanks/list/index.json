@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Cost (credite)",
+    "buyGold": "Cost (aur)",
+    "researchXp": "XP de cercetare",
+    "shellCost": "Cost proiectil",
+    "ammoCost": "Cost total muniție",
+    "class3": "3rd Class",
+    "class2": "2nd Class",
+    "class1": "1st Class",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Marks (85%)",
+    "mark3": "3 Marks (95%)"
+  }
+}

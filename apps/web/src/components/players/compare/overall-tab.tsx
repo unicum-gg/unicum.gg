@@ -1,19 +1,22 @@
 "use client";
 
+import { numberFormat } from "@/lib/format";
+
+import { useLocale } from "@onruntime/translations/react";
 import { useMemo } from "react";
 import { type VehicleMeta, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import {
   avgCell,
   bestIndex,
   dashCell,
-  dec2Fmt,
-  intFmt,
+  DEC2_FORMAT,
+  INT_FORMAT,
   type MetricCell,
   type MetricKind,
   type MetricRow,
   numCell,
   pctCell,
-  pctFmt,
+  PCT_FORMAT,
   ratingCell,
   winratePctCell,
 } from "@/components/compare/cells";
@@ -37,6 +40,7 @@ export function OverallTab({
   wnxExpected: Map<number, WNXExpected>;
   wn8Fallback: Map<string, WN8Expected>;
 }) {
+  const { locale } = useLocale();
 
   const { rows, headerWinners } = useMemo(() => {
     const overallAggs = slots.map((s) => aggregateTanks(s.tanks));
@@ -80,16 +84,16 @@ export function OverallTab({
       };
     }
 
-    const wn8Cells = wn8Values.map((v) => ratingCell(v, wn8Color));
+    const wn8Cells = wn8Values.map((v) => ratingCell(v, wn8Color, locale));
     const allRows: MetricRow[] = [
-      statRow("Battles", "higher", (s) => numCell(s.latest!.battles, intFmt)),
+      statRow("Battles", "higher", (s) => numCell(s.latest!.battles, locale, INT_FORMAT)),
       statRow("Win rate", "higher", (s) =>
-        winratePctCell(s.latest!.wins, s.latest!.battles),
+        winratePctCell(s.latest!.wins, s.latest!.battles, locale),
       ),
       {
         label: "WN7",
         kind: "higher",
-        cells: wn7Values.map((v) => ratingCell(v, wn7Color)),
+        cells: wn7Values.map((v) => ratingCell(v, wn7Color, locale)),
       },
       {
         label: "WN8",
@@ -99,45 +103,45 @@ export function OverallTab({
       {
         label: "WNX",
         kind: "higher",
-        cells: wnxValues.map((v) => ratingCell(v, wnxColor)),
+        cells: wnxValues.map((v) => ratingCell(v, wnxColor, locale)),
       },
-      statRow("WTR", "higher", (s) => numCell(s.latest!.wtr, intFmt)),
+      statRow("WTR", "higher", (s) => numCell(s.latest!.wtr, locale, INT_FORMAT)),
       statRow("Personal Rating", "higher", (s) =>
-        numCell(s.latest!.globalRating, intFmt),
+        numCell(s.latest!.globalRating, locale, INT_FORMAT),
       ),
       statRow("Avg damage", "higher", (s) =>
-        avgCell(s.latest!.damageDealt, s.latest!.battles),
+        avgCell(s.latest!.damageDealt, s.latest!.battles, locale),
       ),
       statRow("Avg XP", "higher", (s) =>
-        avgCell(s.latest!.xp, s.latest!.battles),
+        avgCell(s.latest!.xp, s.latest!.battles, locale),
       ),
       statRow("Avg frags", "higher", (s) =>
-        avgCell(s.latest!.frags, s.latest!.battles, dec2Fmt),
+        avgCell(s.latest!.frags, s.latest!.battles, locale, DEC2_FORMAT),
       ),
       statRow("Avg spots", "higher", (s) =>
-        avgCell(s.latest!.spotted, s.latest!.battles, dec2Fmt),
+        avgCell(s.latest!.spotted, s.latest!.battles, locale, DEC2_FORMAT),
       ),
       {
         label: "Avg tier",
         kind: "higher",
-        cells: avgTiers.map((t) => numCell(t, dec2Fmt)),
+        cells: avgTiers.map((t) => numCell(t, locale, DEC2_FORMAT)),
       },
       // "Hit rate", like the player page: this is hits over shots, not the gun
       // accuracy the tank pages measure in metres of dispersion.
       statRow("Hit rate", "higher", (s) => {
         if (s.latest!.shots <= 0) return dashCell();
         const ratio = s.latest!.hits / s.latest!.shots;
-        return { display: pctFmt.format(ratio), numeric: ratio };
+        return { display: numberFormat(locale, PCT_FORMAT).format(ratio), numeric: ratio };
       }),
       statRow("Survivability", "higher", (s) =>
-        pctCell(s.latest!.survivedBattles, s.latest!.battles),
+        pctCell(s.latest!.survivedBattles, s.latest!.battles, locale),
       ),
     ];
     return {
       rows: allRows,
       headerWinners: bestIndex(wn8Cells, "higher"),
     };
-  }, [slots, encyclopedia, wn8Expected, wn8Fallback, wnxExpected]);
+  }, [slots, encyclopedia, wn8Expected, wn8Fallback, wnxExpected, locale]);
 
   return (
     <ComparisonTable

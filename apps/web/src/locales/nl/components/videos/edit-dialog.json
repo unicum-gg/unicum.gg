@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Wijzig alles wat niet klopt, inclusief het voertuig. Als je opslaat, wordt de video teruggestuurd naar de moderatiewachtrij. Een video die online staat, wordt dus offline gehaald totdat deze opnieuw is goedgekeurd.",
+  "correct-a-suggestion": "Een suggestie corrigeren",
+  "could-not-load-that-suggestion": "Deze suggestie zou niet kunnen worden geladen. Probeer het over een moment opnieuw.",
+  "link-expired": "Die link is verlopen. Druk opnieuw op Bewerken op de kaart in Discord voor een nieuwe.",
+  "loading": "Laden…",
+  "log-in": "Inloggen",
+  "log-in-with-the-account": "Inloggen met het account waarmee deze video is voorgesteld om de video te corrigeren.",
+  "no-suggestion-with-that-id": "Er is geen suggestie met die id.",
+  "not-yours-to-correct": "Deze suggestie is niet van jou om te corrigeren."
+}

@@ -1,0 +1,162 @@
+{
+  "columns-label": "Colonnes",
+  "groups": {
+    "firepower": "Puissance de feu",
+    "gun-handling": "Manipulation des armes",
+    "mobility": "Mobilité",
+    "survivability": "Capacité de survie",
+    "other": "Autre"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Dégâts par minute"
+    },
+    "damage": {
+      "label": "Dégâts",
+      "tip": "Dégâts alpha"
+    },
+    "moduleDamage": {
+      "label": "Dégâts aux éléments"
+    },
+    "splashRadius": {
+      "label": "Rayon d’explosion"
+    },
+    "reload": {
+      "label": "Recharger",
+      "tip": "Temps de rechargement (barillet complet pour les chargeurs automatiques)"
+    },
+    "rof": {
+      "label": "Cadence de tir",
+      "tip": "Obus par minute"
+    },
+    "intraClipReload": {
+      "label": "Rechargement intra-clip",
+      "tip": "Temps entre les tirs d’un barillet (chargeurs automatiques)"
+    },
+    "penetration": {
+      "label": "Pénétration",
+      "tip": "Pénétration (mm), obus par défaut"
+    },
+    "caliber": {
+      "label": "Calibre",
+      "tip": "Calibre de l’obus (mm)"
+    },
+    "shellVelocity": {
+      "label": "Vélocité des obus",
+      "tip": "Vitesse de l’obus (m/s)"
+    },
+    "accuracy": {
+      "label": "Précision",
+      "tip": "Dispersion à 100 m (plus faible = mieux)"
+    },
+    "aimTime": {
+      "label": "Temps de visée"
+    },
+    "dispMoving": {
+      "label": "Dispersion en mouvement",
+      "tip": "Coefficient de dispersion en mouvement"
+    },
+    "dispTankTraverse": {
+      "label": "Dispersion lors de la rotation de la caisse"
+    },
+    "dispTurretTraverse": {
+      "label": "Dispersion lors de la rotation de la tourelle"
+    },
+    "dispAfterShot": {
+      "label": "Dispersion après le tir"
+    },
+    "dispWhileDamaged": {
+      "label": "Dispersion lorsque le canon est endommagé"
+    },
+    "gunArc": {
+      "label": "Arc de tir",
+      "tip": "Arc de débattement horizontal du canon"
+    },
+    "depression": {
+      "label": "Dépression / élévation du canon",
+      "tip": "Dépression / élévation du canon"
+    },
+    "speed": {
+      "label": "Vitesse (avant / arrière)",
+      "tip": "Vitesse maximale en marche avant / arrière (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Rotation de la coque"
+    },
+    "turretTraverse": {
+      "label": "Rotation de la tourelle"
+    },
+    "enginePower": {
+      "label": "Puissance",
+      "tip": "Puissance du moteur (ch)"
+    },
+    "powerWeight": {
+      "label": "Puissance/poids",
+      "tip": "ch par tonne"
+    },
+    "terrainHard": {
+      "label": "Terrain dur",
+      "tip": "Résistance au terrain sur sol dur (plus elle est faible, mieux c’est)"
+    },
+    "terrainMedium": {
+      "label": "Terrain moyen"
+    },
+    "terrainSoft": {
+      "label": "Terrain meuble"
+    },
+    "health": {
+      "label": "Points de structure",
+      "tip": "Points de vie"
+    },
+    "engineHealth": {
+      "label": "Points de structure du moteur"
+    },
+    "engineFireChance": {
+      "label": "Risque d’incendie du moteur"
+    },
+    "hullArmorFront": {
+      "label": "Blindage de la caisse (avant)",
+      "tip": "Blindage frontal de la caisse (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Blindage de la tourelle (avant)",
+      "tip": "Blindage frontal de la tourelle (mm)"
+    },
+    "trackArmor": {
+      "label": "Blindage des chenilles"
+    },
+    "trackHealth": {
+      "label": "Points de structure des chenilles"
+    },
+    "trackRepairTime": {
+      "label": "Temps de réparation des chenilles"
+    },
+    "ammoRackHealth": {
+      "label": "Points de structure du râtelier de munitions"
+    },
+    "weight": {
+      "label": "Poids"
+    },
+    "viewRange": {
+      "label": "Portée de vue",
+      "tip": "Portée de vue (m)"
+    },
+    "radioRange": {
+      "label": "Portée radio",
+      "tip": "Portée du signal radio (m)"
+    },
+    "camoStill": {
+      "label": "Dissimulation à l’arrêt"
+    },
+    "camoMoving": {
+      "label": "Dissimulation en mouvement"
+    },
+    "camoStillFiring": {
+      "label": "Camouflage à l’arrêt après un tir"
+    },
+    "camoMovingFiring": {
+      "label": "Camouflage en mouvement après un tir"
+    }
+  }
+}

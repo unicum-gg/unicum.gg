@@ -1,0 +1,6 @@
+{
+  "title": "Top-Spieler von World of Tanks: {language} ({region})",
+  "description": "Bestenliste der {name}-{region}-spieler, deren anhand des Clanverlaufs ermittelter Sprachensatz {language} enthält, sortiert nach WNX.",
+  "og-title": "Top-Spieler: {language}",
+  "og-subtitle": "{region}-Bestenliste"
+}

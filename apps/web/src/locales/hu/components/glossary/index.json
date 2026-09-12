@@ -1,0 +1,22 @@
+{
+  "search": "{count} kifejezés keresése",
+  "search-label": "Keresés a szójegyzékben",
+  "all": "Mind",
+  "jump": "Ugrás a betűhöz",
+  "empty": "Egyetlen kifejezés sem felel meg ennek: „{query}”.",
+  "categories": {
+    "vehicles": "Járművek",
+    "gunnery": "Tüzérség",
+    "armor": "Páncélzat",
+    "mobility": "Mobilitás",
+    "vision": "Látás",
+    "crew": "Legénység",
+    "progression": "Fejlődés",
+    "economy": "Gazdaság",
+    "ratings": "Értékelések",
+    "statistics": "Statisztika",
+    "modes": "Csata módok",
+    "tactics": "Taktikák",
+    "slang": "Szleng"
+  }
+}

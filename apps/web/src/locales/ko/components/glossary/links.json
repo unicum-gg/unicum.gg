@@ -1,0 +1,18 @@
+{
+  "player-leaderboard": "플레이어 순위표",
+  "clan-leaderboard": "클랜 순위표",
+  "every-tank": "모든 탱크",
+  "tank-economics": "탱크 경제",
+  "marks-of-excellence-by-tank": "전차별 숙련의 증표",
+  "mastery-thresholds-by-tank": "전차별 숙련도 기준",
+  "buffs-and-nerfs-by-update": "업데이트별 버프 및 너프",
+  "every-map": "모든 맵",
+  "stronghold-ladder": "요새 사다리",
+  "advances-ranking": "원정 랭킹",
+  "onslaught-ladder": "격전 사다리",
+  "steel-hunter-leaderboard": "강철 사냥꾼 순위표",
+  "tracking-coverage": "추적 범위",
+  "api-reference": "API 참조",
+  "this-tank": "이 탱크",
+  "this-map": "이 맵"
+}

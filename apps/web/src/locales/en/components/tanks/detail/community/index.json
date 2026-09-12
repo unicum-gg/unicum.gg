@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Axis by axis",
+  "by-server": "By server",
+  "community-verdict": "Community verdict",
+  "every-server-one-average": "Every server, one average",
+  "n-shown": ", {count} shown",
+  "opinion": "{count, plural, one {# opinion} other {# opinions}}",
+  "opinion-next-to-win-rate": "Opinion next to win rate, within tier {tier}",
+  "rate-the": "Rate the {tankName}",
+  "reputation-against-results": "Reputation against results",
+  "same-tank-different-metas": "Same tank, different metas",
+  "the-same-tank-by-how": "The same tank, by how well the voter plays",
+  "what-players-wrote": "What players wrote",
+  "who-is-saying-it": "Who is saying it"
+}

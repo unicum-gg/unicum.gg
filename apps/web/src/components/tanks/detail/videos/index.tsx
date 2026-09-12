@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/link";
 import { Video } from "lucide-react";
 import type { Region } from "@unicum.gg/wargaming";
 import {
@@ -28,6 +28,7 @@ import { useTankVideoPlayer } from "./player";
 import { SubmitVideoDialogSlot } from "./submit-dialog-slot";
 import { VideosTable } from "./table";
 import { useVideosView, VideosView, VideosViewToggle } from "./view-toggle";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * The empty state both video sections share: an invitation to seed the first
@@ -43,17 +44,17 @@ function NoVideosEmpty({
   slug: string;
   tankName: string;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/index");
+  const { t: tVideos } = useTranslation("components/tanks/detail/videos/index");
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <Video />
         </EmptyMedia>
-        <EmptyTitle>No videos yet</EmptyTitle>
+        <EmptyTitle>{tVideos("empty")}</EmptyTitle>
         <EmptyDescription>
-          No community video for the {tankName} yet. Suggest one and it shows up
-          here once a moderator has looked at it.
-        </EmptyDescription>
+          {t("no-community-video-for-the", { tankName })}</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <SubmitVideoDialogSlot region={region} slug={slug} />
@@ -82,6 +83,7 @@ export function TankVideosTab({
   tankName: string;
   videos: TankVideoCardData[];
 }) {
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
   // The provider merges in the reader's own queued battles, so the list and
   // the player's seek bar show the same set.
   const player = useTankVideoPlayer();
@@ -90,7 +92,7 @@ export function TankVideosTab({
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center gap-3">
-        <PanelTitle>{tankName} videos</PanelTitle>
+        <PanelTitle>{tSection("videos", { tank: tankName })}</PanelTitle>
         {all.length > 0 && (
           <span className="ml-auto flex items-center gap-3">
             <VideosViewToggle view={view} onChange={setView} />
@@ -141,6 +143,8 @@ export function TankVideosPreview({
   tankName: string;
   videos: TankVideoCardData[];
 }) {
+  const { t: tVideos } = useTranslation("components/tanks/detail/videos/index");
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
   // Read from the provider like the tab does, so the preview picks up a video
   // approved since the shell was cached (the shell's Live wrapper revalidates
   // the list). The prop is the server render, kept as the fallback.
@@ -153,7 +157,7 @@ export function TankVideosPreview({
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center gap-3">
-        <PanelTitle>{tankName} videos</PanelTitle>
+        <PanelTitle>{tSection("videos", { tank: tankName })}</PanelTitle>
         {groups.length > 0 && (
           <>
             {/* The form lives here too, not only on the tab: a video plays in
@@ -169,7 +173,9 @@ export function TankVideosPreview({
             >
               {/* Counts videos, like the cards below, not battles: the two
                   differ as soon as one recording holds several. */}
-              See all{groups.length > PREVIEW_VIDEO_COUNT ? ` (${groups.length})` : ""} →
+              {groups.length > PREVIEW_VIDEO_COUNT
+                ? tVideos("see-all-count", { count: groups.length })
+                : tVideos("see-all")}
             </Link>
           </>
         )}

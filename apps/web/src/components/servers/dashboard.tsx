@@ -1,9 +1,12 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import useSWR from "swr";
 import {
-  SERVER_STATS_RANGE_LABEL,
   SERVER_STATS_RANGES,
   type ServerComparison,
   type ServerStats,
@@ -51,6 +54,8 @@ export function ServersDashboard({
   initialStats: ServerStats;
   initialComparison: ServerComparison;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/dashboard");
   const [range, setRange] = useState(initialRange);
   const isInitial = range === initialRange;
 
@@ -76,6 +81,7 @@ export function ServersDashboard({
     },
   );
 
+  const { t: tRange } = useTranslation("components/servers/ranges");
   const label = REGION_LABEL[region];
   const shown = stats ?? initialStats;
   const shownRange = shown.range;
@@ -85,11 +91,11 @@ export function ServersDashboard({
     <>
       <Panel>
         <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-          <PanelTitle>{label} players online over time</PanelTitle>
+          <PanelTitle>{t("players-online-over-time", { label })}</PanelTitle>
           <SegmentedControl
             segments={SERVER_STATS_RANGES.map((id) => ({
               id,
-              label: SERVER_STATS_RANGE_LABEL[id],
+              label: tRange(id),
             }))}
             active={range}
             onSelect={setRange}
@@ -117,7 +123,7 @@ export function ServersDashboard({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>{label} servers</PanelTitle>
+          <PanelTitle>{t("region-servers", { region: label })}</PanelTitle>
         </PanelHeader>
         {/* No padding: the table carries it on its own cells, so its rules run
             edge to edge and meet the panel's borders. */}
@@ -137,7 +143,7 @@ export function ServersDashboard({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>When {label} players are online</PanelTitle>
+          <PanelTitle>{t("when-players-are-online", { label })}</PanelTitle>
         </PanelHeader>
         <PanelContent>
           <RhythmHeatmap rhythm={shown.rhythm} />
@@ -148,7 +154,7 @@ export function ServersDashboard({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Every region compared</PanelTitle>
+          <PanelTitle>{t("every-region-compared")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="space-y-4">
           {comparison ? (
@@ -171,7 +177,7 @@ export function ServersDashboard({
                     <span className="tabular-nums text-fd-muted-foreground">
                       {series.current == null
                         ? "—"
-                        : series.current.toLocaleString("en-US")}
+                        : numberFormat(locale).format(series.current)}
                     </span>
                   </li>
                 ))}

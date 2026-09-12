@@ -1,0 +1,4 @@
+{
+  "chart-label": "Jogadores online por região nos últimos {range}",
+  "not-enough-recorded-yet-for": "Ainda não foram registados dados suficientes para este intervalo. O gráfico será preenchido à medida que a amostragem prosseguir."
+}

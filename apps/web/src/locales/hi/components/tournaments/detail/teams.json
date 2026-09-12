@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "{size} खिलाड़ियों में से {rated} का औसत",
+  "average-over-recent": "पिछले 30 दिनों में खेले गए {size} खिलाड़ियों में से {rated} का औसत",
+  "metric-over-last-30-days": "पिछले 30 दिनों में {metric}",
+  "n-confirmed": "{count} पुष्ट",
+  "no-team-matches-the-current": "वर्तमान फ़िल्टर से कोई टीम मेल नहीं खाती।",
+  "no-teams-recorded-yet-registrations": "अभी तक कोई टीम दर्ज नहीं है। इस टूर्नामेंट को पूरी तरह पढ़ लेने के बाद पंजीकरण यहाँ दिखाई देते हैं, जो इसके खुलने के कुछ मिनटों के भीतर हो जाता है।",
+  "none-played-in-30-days": "इस रोस्टर में से किसी ने भी पिछले 30 दिनों में नहीं खेला",
+  "players": "खिलाड़ी",
+  "qualified": "क्वालीफाइड",
+  "reward": "इनाम",
+  "team": "टीम",
+  "teams": "टीम ({length})",
+  "wr": "WR"
+}

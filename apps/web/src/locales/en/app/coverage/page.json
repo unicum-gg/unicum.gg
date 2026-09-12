@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks data coverage ({region})",
+  "description": "How many World of Tanks players and clans {name} tracks on {region}, snapshot refresh rate, data depth, infrastructure cost and uptime.",
+  "og-title": "Data coverage",
+  "og-subtitle": "{region} players & clans"
+}

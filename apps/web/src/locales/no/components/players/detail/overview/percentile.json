@@ -1,0 +1,7 @@
+{
+  "win-rate": "Seiersrate",
+  "versus": "{metric} mot {region}",
+  "top": "Topp {percent}%",
+  "ahead-of": "Foran {percent} %",
+  "against": "Mot {players} registrerte {region}-kontoer med minst {battles} kamper."
+}

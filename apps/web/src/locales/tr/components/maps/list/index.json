@@ -1,0 +1,9 @@
+{
+  "all": "Tümü",
+  "camouflage-map": "{camouflage} haritası",
+  "modes": "{count, plural, one {# mod} other {# modlar}}",
+  "no-maps-match-your-filters": "Filtrelerinle eşleşen harita yok.",
+  "search": "{count} harita arasında ara",
+  "search-label": "Haritaları ara",
+  "special-map": "Özel harita"
+}

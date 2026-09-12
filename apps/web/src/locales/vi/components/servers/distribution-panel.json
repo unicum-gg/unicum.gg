@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "So sánh người chơi {region}",
+  "median-n": "trung vị {value}",
+  "metric-rating": "Chỉ số đánh giá {metric}",
+  "tracked-accounts-with-at-least": "{players} tài khoản được theo dõi có ít nhất {minBattles} trận đấu. Màu sắc là cùng các khoảng mà trang web sử dụng ở mọi nơi khác.",
+  "win-rate": "Tỷ lệ thắng",
+  "win-rate-distribution-across-the-region-s-tr": "Phân bố tỷ lệ thắng của những người chơi được theo dõi trong khu vực"
+}

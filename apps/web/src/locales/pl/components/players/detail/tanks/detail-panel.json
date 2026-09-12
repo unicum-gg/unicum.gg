@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Średnia liczba punktów na bitwę",
+  "general-parameters": "Parametry ogólne",
+  "metric-progression": "Postęp: {metric}",
+  "not-enough-history-on-this": "Za mało danych historycznych dla tego czołgu. Potrzebne są co najmniej dwa zapisy stanu z ostatnich 90 dni, aby narysować linię.",
+  "record-score": "Rekordowy wynik",
+  "updated": "Zaktualizowane"
+}

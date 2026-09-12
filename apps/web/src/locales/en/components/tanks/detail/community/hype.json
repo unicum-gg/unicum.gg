@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "above {value}% of the rated tanks in its tier",
+  "measured-hint": "Where its win rate ranks it among the same tanks",
+  "not-enough-votes-yet-to": "Not enough votes yet to compare the community’s verdict against how the tank actually performs.",
+  "perceived-hint": "Where the community ranks it among the rated tier {tier} tanks",
+  "verdict": {
+    "overrated": "The community rates it well above what it actually achieves.",
+    "fair": "Reputation and results agree on this one.",
+    "underrated": "It performs better than anybody gives it credit for."
+  },
+  "what-players-think": "What players think",
+  "what-the-data-says": "What the data says"
+}

@@ -1,0 +1,5 @@
+{
+  "battles": "{count} युद्ध",
+  "chart-label": "प्रति {granularity} खेले गए युद्ध, {metric} के अनुसार रंगीन",
+  "no-battles": "कोई युद्ध नहीं"
+}

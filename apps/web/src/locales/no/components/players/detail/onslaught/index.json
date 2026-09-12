@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname} har ikke hatt en plass på Onslaught-rangeringen.",
+  "live-season": "· pågående sesong",
+  "loading-s-onslaught-record": "Laster inn Onslaught-resultatene til {nickname}...",
+  "onslaught": "Onslaught",
+  "onslaught-record": "Onslaught-resultatene til {nickname}",
+  "see-this-season-s-leaderboard": "Se denne sesongens rangering",
+  "standing-line": "{rating} vurderingspoeng · {battles} kamper",
+  "the-board-only-lists-players": "Rangeringen viser bare spillere som når Champion, noen få tusen per region, så dette er stedet nesten alle profiler havner. Den fylles ut automatisk den sesongen de når dit.",
+  "updated": "Oppdatert {when}"
+}

@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} nangungunang listahan",
+  "carried-beside-a-clan-tag": "Carry sa tabi ng tag ng klano. Ang sagisag ng ranggo ay isang lugar sa isang kompetisyon: ang numero rito ang lugar na iyon, at ang kulay nito ang nagsasabi kung aling talaan. Walang nakukuha ang mga rating, dahil ang pagiging mataas sa WN8 ay hindi isang bagay na napapanalunan ng klano.",
+  "clan-badges": "Mga badge ng Klan",
+  "clan-board": {
+    "name": "{board}, pinakamahusay na {rank}",
+    "how": "Isang lugar sa pinakamahusay na {rank} ng {board}. Nanatili ito habang hawak ng klano ang lugar, at nawawala kapag hindi na."
+  },
+  "clan-overflow": "Kapag higit sa tatlong lugar ang hawak ng isang klano, tinutupi nito ang iba pa sa isang sagisag na {plus}, mula sa pinakamahusay pababa, para manatiling madaling basahin ang tag. Kapag itinapat dito ang cursor, ipinapakita ang mga pangalan nila.",
+  "featured-tournament-winner": {
+    "name": "Itinatampok na nagwagi sa torneo",
+    "how": "Pareho ito, ngunit napanalunan sa isang kaganapang minarkahan ng Wargaming bilang itinatampok. Gold sa halip na asero, eksakto tulad sa panig ng manlalaro."
+  },
+  "heading": "Lahat ng {badge} at kung paano ito kikitain",
+  "heading-accent": "insignia",
+  "marks-carried-beside-a-nickname": "Mga markang carry sa tabi ng palayaw saanman ito lumitaw sa {NAME}: mga talaan ng ranggo, talaan ng mga miyembro ng klano, paghahanap, at mga bracket ng torneo.",
+  "n-badges": "{count} na insignia",
+  "onslaught-champion": {
+    "name": "Sugod Champion",
+    "how": "Naabot ang ranggong Champion sa Sugod, na kinakailangan para lumitaw sa {standings}. Pinananatili pagkatapos: ang rating na bumalik sa ibaba ng pamantayan ang pumapalit sa lugar, hindi ang katotohanang minsan itong hawak."
+  },
+  "onslaught-legend": {
+    "name": "Sugod Legend",
+    "how": "Hawak ang isang lugar sa loob ng cutoff ng Legend ngayong season, na isang posisyon at hindi score: iilan lamang ang maaaring umiral nang sabay-sabay, at hinuhusgahan ang pamantayan laban sa season kung kailan ito hawak. Violet sa halip na steel blue, ang kulay na ginagamit mismo ng ranggo para sa Legend."
+  },
+  "player-badges": "Mga badge ng Manlalaro",
+  "player-overflow": "Kapag ang isang manlalaro ay may higit sa tatlong insignia, tinutupi nito ang iba pa sa isang sagisag na {plus}, ayon sa pagkakasunod sa itaas, para manatiling madaling basahin ang palayaw sa isang talahanayan. Kapag itinapat dito ang cursor, ipinapakita ang mga pangalan nila, at may link pa rin ang bawat isa kung saan may link ang sarili nitong sagisag.",
+  "ranked-standings": "nakasalang na standings",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Isang Twitch channel na nakakonekta sa account. Ikonekta ang Twitch sa sarili mong profile para kumpirmahin ito, at may link ang sagisag sa channel mo. Ipinapakita nito kung live ka man o hindi."
+  },
+  "streamer-who-is-on-air": "Ang streamer na nasa ere ay may dala ring pulang LIVE pill. Hindi ito kinikita at hindi ito nananatili: lumilitaw ito kapag nagsimula ang stream at napupunta kapag natapos, kaya hindi ito kailanman tinutupi.",
+  "support-subscription": "suporta sa subscription",
+  "supporter": {
+    "name": "Sumusuporta"
+  },
+  "supporter-note": "Isang aktibong {link}, na nananatiling pampubliko. Ang mga supporter na piniling manatiling anonymous ay walang dalang insignia, ayon sa sarili nilang pasya.",
+  "the-marks-a-player-or": "Ang mga markang maaaring dalhin ng manlalaro o klano sa {NAME}, ang sinasabi ng bawat isa, at eksakto kung ano ang kailangan para makuha ito.",
+  "tournament-winner": {
+    "name": "Nagwagi ng torneo",
+    "how": "Nanalo sa isang torneo ang isang koponang iniuugnay sa klano. Ang itinatala ng Wargaming ay mga koponan at account, hindi kailanman mga klano, kaya binabawi ang ugnayan sa pamamagitan ng pagtutugma sa bawat talaan laban sa pagiging miyembro ng klano noong araw ng laro."
+  },
+  "verified": {
+    "name": "Nakapag-verify",
+    "how": "Nag-sign in ang may-ari gamit ang kanilang Wargaming.net ID at ikinonekta ang account na ito. Ang pag-sign in ang buong kailangan, at wala itong gastos."
+  }
+}

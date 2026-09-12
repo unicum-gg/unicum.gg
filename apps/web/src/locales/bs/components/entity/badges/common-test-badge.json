@@ -1,0 +1,12 @@
+{
+  "aria-build": "Pročitano na klijentu Zajedničkog testa, izgradnja {version}",
+  "aria-changes": "Izmijenjeno u Zajedničkom testu: {changes} karakteristika",
+  "aria-described": "Zajednički test: {description}",
+  "aria-vehicle": "Vozilo sa Zajedničkog testa",
+  "common-test": "Zajednički test",
+  "common-test-build": "Zajednički test {version}",
+  "tip-build": "{label} · ovo su vrijednosti testne izgradnje, a Wargaming ih još može promijeniti prije objave ažuriranja",
+  "tip-changes": "Promjene Zajedničkog testa: {changes, plural, one {# karakteristika} few {# karakteristike} other {# karakteristika}} na ovom vozilu",
+  "tip-described": "Zajednički test · {description}",
+  "tip-vehicle": "Zajednički test · još nije objavljeno, zato nema statistike bitaka, a karakteristike se još mogu promijeniti"
+}

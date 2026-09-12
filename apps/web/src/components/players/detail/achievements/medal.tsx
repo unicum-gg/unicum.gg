@@ -1,3 +1,5 @@
+import { numberFormat } from "@/lib/format";
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import {
   achievementFace,
@@ -11,14 +13,15 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /**
  * One medal tile. Earned medals show their artwork at full strength with the
  * count (or the tier reached) badged on the corner; unearned ones are drained
  * of colour so the cabinet reads at a glance without hiding what is left.
  */
-export function Medal({ achievement }: { achievement: PlayerAchievement }) {
+export function Medal({ achievement, locale }: { achievement: PlayerAchievement ; locale: string }) {
+  const { t } = useTranslation("components/players/detail/achievements/medal");
   const face = achievementFace(achievement);
   const earned = achievement.count > 0;
   const description = unwrapWgText(achievement.description);
@@ -39,8 +42,11 @@ export function Medal({ achievement }: { achievement: PlayerAchievement }) {
           role="img"
           aria-label={
             earned
-              ? `${face.name}, earned ${achievement.count}×`
-              : `${face.name}, not earned`
+              ? t("aria-earned", {
+                  name: face.name,
+                  count: achievement.count,
+                })
+              : t("aria-not-earned", { name: face.name })
           }
           className={cn(
             "relative flex size-16 items-center justify-center transition-opacity outline-none focus-visible:ring-2 focus-visible:ring-ring sm:size-20",
@@ -68,7 +74,7 @@ export function Medal({ achievement }: { achievement: PlayerAchievement }) {
               the tier is already what the artwork shows. */}
           {earned && face.tierName === null && achievement.count > 1 && (
             <span className="absolute right-0 bottom-0 rounded-sm bg-background/90 px-1 text-[10px] font-semibold tabular-nums">
-              {intFmt.format(achievement.count)}
+              {numberFormat(locale, INT_FORMAT).format(achievement.count)}
             </span>
           )}
         </div>
@@ -86,8 +92,8 @@ export function Medal({ achievement }: { achievement: PlayerAchievement }) {
           <span className="font-semibold">{face.name}</span>
           <span className="shrink-0 text-xs opacity-70">
             {earned
-              ? (face.tierName ?? `${intFmt.format(achievement.count)}×`)
-              : "Not earned"}
+              ? (face.tierName ?? `${numberFormat(locale, INT_FORMAT).format(achievement.count)}×`)
+              : t("not-earned")}
           </span>
         </div>
 
@@ -112,7 +118,7 @@ export function Medal({ achievement }: { achievement: PlayerAchievement }) {
         )}
 
         {achievement.outdated && (
-          <p className="italic opacity-70">No longer obtainable.</p>
+          <p className="italic opacity-70">{t("no-longer-obtainable")}</p>
         )}
       </TooltipContent>
     </Tooltip>

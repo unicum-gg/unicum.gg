@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Thêm vài từ nữa: còn {count} từ.",
+  "at-winrate": "tại {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Không thể rút đánh giá đó. Hãy thử lại sau giây lát.",
+  "hide-the-detailed-axes": "Ẩn các trục chi tiết",
+  "not-enough-battles": "Bạn chưa chơi xe tăng này đủ nhiều để lượt bình chọn được tính.",
+  "published-once-read": "Sẽ được đăng sau khi người kiểm duyệt đọc. Số sao của bạn được tính ngay.",
+  "rate-it-in-detail": "Đánh giá chi tiết (tùy chọn)",
+  "review": {
+    "none": "Đã lưu đánh giá.",
+    "queued": "Đã lưu đánh giá. Đánh giá của bạn đang chờ người kiểm duyệt.",
+    "published": "Đã lưu đánh giá. Đánh giá của bạn đã được đăng.",
+    "pending": "Đã lưu đánh giá. Đánh giá của bạn vẫn đang chờ người kiểm duyệt.",
+    "rejected": "Đã lưu đánh giá. Đánh giá trước đó của bạn chưa được đăng, nên chỉ số sao được tính.",
+    "closed": "Đã lưu đánh giá. Ý kiến bằng văn bản hiện đang đóng, nên phần văn bản không được giữ lại."
+  },
+  "save-failed": "Không thể lưu. Hãy thử lại sau giây lát.",
+  "say-why-optional": "Nêu lý do (tùy chọn)",
+  "signed-with": "Được ký với {battles} trận đấu của bạn",
+  "submit-my-rating": "Gửi đánh giá của tôi",
+  "too-many-edits": "Bạn đã chỉnh sửa quá nhiều cùng lúc. Hãy chờ một phút.",
+  "update-my-rating": "Cập nhật đánh giá của tôi",
+  "what-it-is-good-at": "Nó giỏi điều gì, không giỏi điều gì và ai nên chơi nó.",
+  "withdraw": "Rút lại",
+  "your-rating-has-been-withdrawn": "Đánh giá của bạn đã được rút.",
+  "your-review-is-waiting-on": "Đánh giá của bạn đang chờ người kiểm duyệt. Chỉ bạn có thể xem nó tại đây.",
+  "your-review-was-not-published": "Đánh giá của bạn chưa được đăng. Số sao của bạn vẫn được tính vào giá trị trung bình."
+}

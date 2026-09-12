@@ -1,0 +1,37 @@
+{
+  "label": "Higit pa",
+  "items": {
+    "tournaments": {
+      "label": "Mga torneo",
+      "description": "Mga bracket, roster at resulta, bawat rehiyon"
+    },
+    "servers": {
+      "label": "Mga server",
+      "description": "Mga manlalarong online, ngayon at sa paglipas ng oras"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Istatistika ng manlalaro, klano at tank bilang slash command"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Ikonekta ang Claude, ChatGPT o anumang MCP client"
+    },
+    "api": {
+      "label": "API",
+      "description": "Libreng pampublikong REST API, hindi kailangan ng key"
+    },
+    "badges": {
+      "label": "Mga badge",
+      "description": "Bawat insignia na maaaring makuha ng manlalaro o klano, at kung paano"
+    },
+    "glossary": {
+      "label": "Glosaryo",
+      "description": "Bawat termino sa World of Tanks, ipinaliwanag"
+    },
+    "support": {
+      "label": "Suportahan kami",
+      "description": "Panatilihing libre, bukas at walang ad ang {name}"
+    }
+  }
+}

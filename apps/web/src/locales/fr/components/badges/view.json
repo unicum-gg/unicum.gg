@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Classement de {board}",
+  "carried-beside-a-clan-tag": "Affichés à côté d’un tag de clan. Un écusson de classement représente une place dans une compétition : son numéro indique cette place et sa couleur, le classement concerné. Les cotes n’en attribuent aucun, car un WN8 élevé ne constitue pas une victoire de clan.",
+  "clan-badges": "Badges de Clan",
+  "clan-board": {
+    "name": "Classement {board}, top {rank}",
+    "how": "Une place parmi les {rank} premiers du classement {board}. Conservé tant que le clan occupe cette place, puis perdu dès que ce n’est plus le cas."
+  },
+  "clan-overflow": "Un clan qui occupe plus de trois places regroupe les autres dans un écusson {plus}, de la meilleure à la moins bonne, afin que le tag reste lisible. Leurs noms s’affichent au survol.",
+  "featured-tournament-winner": {
+    "name": "Vainqueur d’un tournoi mis à l’honneur",
+    "how": "Le même écusson, remporté lors d’un événement désigné comme vedette par Wargaming. En or plutôt qu’en acier, exactement comme pour les joueurs."
+  },
+  "heading": "Tous les badges {badge} et comment les obtenir",
+  "heading-accent": "badge",
+  "marks-carried-beside-a-nickname": "Insignes affichés à côté d’un pseudonyme partout où il apparaît sur {NAME} : classements, effectifs des clans, recherche et tableaux de tournoi.",
+  "n-badges": "{count} badges",
+  "onslaught-champion": {
+    "name": "Champion de l’Offensive",
+    "how": "A atteint le rang Champion en Assaut, le minimum requis pour figurer dans le {standings}. Conservé par la suite : si la cote retombe sous le seuil, c’est la place qui disparaît, pas le fait de l’avoir occupée."
+  },
+  "onslaught-legend": {
+    "name": "Légende de l’Offensive",
+    "how": "A occupé une place comprise dans le quota Légende de la saison. Il s’agit d’une position et non d’un score : leur nombre est limité et le seuil est déterminé selon la saison durant laquelle la place a été occupée. Violet plutôt que bleu acier, la couleur que le classement lui-même attribue au rang Légende."
+  },
+  "player-badges": "Badges de Joueur",
+  "player-overflow": "Un joueur qui porte plus de trois insignes regroupe les autres dans un écusson {plus}, dans l’ordre indiqué ci-dessus, afin que son pseudonyme reste lisible dans un tableau. Leurs noms s’affichent au survol et chacun renvoie toujours vers la même page que son propre écusson.",
+  "ranked-standings": "classements classés",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Une chaîne Twitch associée au compte. Connectez Twitch depuis votre propre profil pour la confirmer, et l’écusson renverra vers votre chaîne. Il reste affiché, que vous soyez en direct ou non."
+  },
+  "streamer-who-is-on-air": "Un streamer en direct porte également une pastille rouge LIVE. Celle-ci ne s’obtient pas et n’est pas conservée : elle apparaît au début du stream et disparaît à la fin, elle n’est donc jamais regroupée avec les autres.",
+  "support-subscription": "abonnement de soutien",
+  "supporter": {
+    "name": "Supporter"
+  },
+  "supporter-note": "Un {link} actif et affiché publiquement. Les supporters qui choisissent de rester anonymes ne portent aucun badge, conformément à leur choix.",
+  "the-marks-a-player-or": "Les insignes qu’un joueur ou un clan peut porter sur {NAME}, ce que chacun signifie et les conditions exactes pour l’obtenir.",
+  "tournament-winner": {
+    "name": "Vainqueur de tournoi",
+    "how": "Une équipe rattachée au clan a remporté un tournoi. Wargaming enregistre les équipes et les comptes, jamais les clans. Ce rattachement est donc reconstitué en comparant chaque effectif à la composition du clan telle qu’elle était le jour du tournoi."
+  },
+  "verified": {
+    "name": "Vérifié",
+    "how": "Le propriétaire s’est connecté avec son Wargaming.net ID et a associé ce compte. La connexion est la seule condition requise et elle est gratuite."
+  }
+}

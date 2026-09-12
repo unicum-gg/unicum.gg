@@ -1,0 +1,8 @@
+{
+  "busiest": "Vilkkain {when} ({players})",
+  "not-enough-recorded-yet-to": "Viikoittaisen rytmin näyttämiseen ei ole vielä tallennettu riittävästi tietoja. Se täyttyy, kun näytteenotto kattaa kaikki viikon tunnit.",
+  "not-sampled-yet": "Ei vielä näytettä",
+  "players-on-average": "Keskimäärin {players} pelaajaa",
+  "quietest": ", hiljaisin {when} ({players})",
+  "your-local-time": "Paikallinen aikasi"
+}

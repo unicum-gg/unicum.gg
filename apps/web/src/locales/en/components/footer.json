@@ -1,0 +1,25 @@
+{
+  "tagline": "Built for the World of Tanks community. Free stats for every player, clan, tank and map across EU, NA and Asia.",
+  "columns": {
+    "leaderboards": "Leaderboards",
+    "tanks": "Tanks",
+    "maps": "Maps",
+    "integrations": "Integrations",
+    "project": "Project"
+  },
+  "links": {
+    "top-tanks": "Top tanks",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "API docs",
+    "badges": "Badges",
+    "glossary": "Glossary",
+    "coverage": "Coverage",
+    "support": "Support us",
+    "source": "Source code",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Not affiliated with Wargaming",
+  "cookies": "Manage cookies"
+}

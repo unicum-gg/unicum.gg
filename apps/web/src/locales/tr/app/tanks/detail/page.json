@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank} World of Tanks istatistikleri ({region}), {tier} seviye {nation}",
+    "description": "{tank} ({region}) World of Tanks özellikleri: bu {tier} seviye {nation} tankı için zırh, ateş gücü, hareket kabiliyeti, modüller, mürettebat ve saha değişiklikleri."
+  },
+  "performances": {
+    "title": "{tank} performansı ({region}), sunucu istatistikleri ve en iyi oyuncular",
+    "description": "{tank} ({region}) World of Tanks performansı: sunucu ortalaması galibiyet oranı, hasar ve yardım, bu {tier} seviye {nation} tankındaki en iyi oyuncular, ayrıca WN8 ve WNX beklenen değerleri."
+  },
+  "marks": {
+    "title": "{tank} üstünlük ve ustalık işaretleri ({region})",
+    "description": "{tank} ({region}) World of Tanks üstünlük işaretleri ve ustalık işareti gereksinimleri, bu {tier} seviye {nation} tankındaki geçmişleriyle birlikte."
+  },
+  "history": {
+    "title": "{tank} değişiklik geçmişi ({region}), güçlendirmeler ve zayıflatmalar",
+    "description": "World of Tanks güncellemeleri boyunca {tank} için yapılan her özellik değişikliği: Wargaming’in sürüm sürüm bu {tier} seviye {nation} tankına gönderdiği ateş gücü, hareket, dayanıklılık ve kamuflaj güçlendirmeleri ile zayıflatmaları."
+  },
+  "videos": {
+    "title": "{tank} oynanış videoları ({region})",
+    "description": "{tank} ile aksiyonu izleyin: bu {tier} seviye {nation} tankında topluluk tarafından önerilen savaşlar, her biri oynandığı anda açılır ve gerçekleştiği harita ile sonucu gösterir."
+  },
+  "community": {
+    "title": "{tank} oyuncu incelemeleri ve topluluk puanı ({region})",
+    "description": "Oyuncular {tank} hakkında ne düşünüyor: topluluğun beş üzerinden puanı, oy verenlerin ne kadar iyi oynadığına göre ayrılmış olarak, bu {tier} seviye {nation} tankının gerçek performansıyla karşılaştırılır. Ayrıca tankta savaşları bulunan hesapların yazılı incelemeleri."
+  }
+}

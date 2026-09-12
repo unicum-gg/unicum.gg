@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Još nema sesije. Pojavljuju se kada ovaj račun bude uzorkovan dva puta, s bitkama između, što se dešava automatski tokom igranja.",
+  "bar-height-is-battles-played": "Visina trake predstavlja odigrane bitke, a boja predstavlja {metric} za {granularity}, u istim rasponima koje stranica koristi svuda drugdje.",
+  "title": "Sesije {nickname}",
+  "title-count": "Sesije nadimka {nickname} ({count})",
+  "granularity": {
+    "day": "dan",
+    "week": "sedmica",
+    "month": "mjesec",
+    "daily": "Dnevno",
+    "weekly": "Nedeljno",
+    "monthly": "Mjesečno"
+  },
+  "week-of": "Sedmica od {date}"
+}

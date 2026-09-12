@@ -1,0 +1,4 @@
+{
+  "chart-label": "Spelare online per region under de senaste {range}",
+  "not-enough-recorded-yet-for": "Det finns ännu inte tillräckligt med registrerade data för det här intervallet. Diagrammet fylls på i takt med att datainsamlingen fortsätter."
+}

@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Non sono ancora disponibili dati sui carri armati di questo clan.",
+  "no-tanks-match-these-filters": "Nessun carro armato corrisponde a questi filtri.",
+  "nation": "Nazione",
+  "type": "Tipo",
+  "tier": "Livello",
+  "name": "Nome",
+  "members": "Membri",
+  "battles": "Battaglie",
+  "avg-damage": "Danno medio",
+  "avg-xp": "XP medio",
+  "wr": "WR"
+}

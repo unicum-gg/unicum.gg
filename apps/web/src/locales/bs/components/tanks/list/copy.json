@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Svako od {count} vozila World of Tanks na regiji {region}. Filtrirajte prema nivou, naciji, klasi i ulozi, zatim otvorite tenk za njegove statistike, najbolje igrače i očekivane vrijednosti.",
+    "title": "Svi tenkovi World of Tanks ({region}), pregled svakog vozila",
+    "description": "Pregledajte svaki tenk World of Tanks na regiji {region}: filtrirajte prema nivou, naciji, klasi i ulozi, zatim pogledajte statistike pojedinačnih tenkova, najbolje igrače i očekivane vrijednosti.",
+    "heading": "Sva <accent>oklopna vozila</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, probojnost, oklop, domet vida i pokretljivost za svih {count} vozila World of Tanks na regiji {region}. Sortirajte prema bilo kojoj koloni, zatim filtrirajte prema nivou, naciji, klasi i ulozi.",
+    "title": "Specifikacije tenkova World of Tanks ({region}), poređenje svakog vozila",
+    "description": "Poredite specifikacije svakog tenka World of Tanks na regiji {region}: DPM, probojnost, oklop, domet vida i pokretljivost, uz sortiranje i filtriranje prema nivou, naciji, klasi i ulozi.",
+    "heading": "Specifikacije <accent>tenka</accent>"
+  },
+  "economics": {
+    "intro": "Troškovi kupovine i popravke, cijene granata i zarada kredita za svih {count} vozila World of Tanks na regiji {region}. Sortirajte prema bilo kojoj koloni, zatim filtrirajte prema nivou, naciji, klasi i ulozi.",
+    "title": "Ekonomija tenkova World of Tanks ({region}), troškovi kredita i XP-a",
+    "description": "Troškovi kredita i XP-a, cijene popravke i granata za svaki tenk World of Tanks na regiji {region}, uz sortiranje i filtriranje prema nivou, naciji, klasi i ulozi.",
+    "heading": "Ekonomija <accent>tenka</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Pokretni prosjek štete potrebne za jednu, dvije i tri oznake na svih {count} vozila World of Tanks na regiji {region}. Sortirajte prema bilo kojoj koloni, zatim filtrirajte prema nivou, naciji, klasi i ulozi.",
+    "title": "Uslovi za oznake izvrsnosti u igri World of Tanks ({region})",
+    "description": "Šteta potrebna za jednu, dvije i tri oznake izvrsnosti na svakom tenku World of Tanks na regiji {region}, uz sortiranje i filtriranje prema nivou, naciji, klasi i ulozi.",
+    "heading": "<accent>Oznake izvrsnosti</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "XP pragovi za Ace Tanker i oznaku majstorstva za svih {count} vozila World of Tanks na regiji {region}. Sortirajte prema bilo kojoj koloni, zatim filtrirajte prema nivou, naciji, klasi i ulozi.",
+    "title": "Uslovi za oznake majstorstva u igri World of Tanks ({region})",
+    "description": "XP pragovi za Ace Tanker i oznaku majstorstva za svaki tenk World of Tanks na regiji {region}, uz sortiranje i filtriranje prema nivou, naciji, klasi i ulozi.",
+    "heading": "<accent>Oznake majstorstva</accent>"
+  },
+  "videos": {
+    "intro": "{count} bitke koje je zajednica povezala na regiji {region}, a svaka se otvara u sekundi početka. Predložene sa stranica tenkova i provjerene prije nego što se pojave ovdje.",
+    "title": "Videozapisi igranja World of Tanks ({region})",
+    "description": "Bitke World of Tanks koje je zajednica predložila na regiji {region}, a svaka se otvara u sekundi početka: igrani tenk, mapa, njegova strana i način završetka bitke.",
+    "heading": "Video <accent>igranja</accent>"
+  }
+}

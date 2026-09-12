@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} تم تحسينه",
+  "n-tanks": "{count, plural, zero {# دبابة} one {# دبابة} two {# دبابَتان} few {# الدبابات} many {# الدبابات} other {# دبابة}}",
+  "nerfed": "{count} تم تخفيضه",
+  "no-tank-changes-have-been": "لم تُسجّل أي تغييرات على الدبابات بعد. عند إعادة Wargaming موازنة الدبابات، ستظهر هنا التحسينات والتخفيضات لكل تحديث.",
+  "update": "تحديث {version}"
+}

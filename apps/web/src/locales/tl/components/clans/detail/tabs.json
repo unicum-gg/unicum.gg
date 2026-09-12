@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Pangkalahatang-ideya",
+    "tanks": "MMga tangke",
+    "videos": "Mga video",
+    "tournaments": "Mga torneo",
+    "manage": "Pamahalaan"
+  },
+  "section-count": "{section} ({count})"
+}

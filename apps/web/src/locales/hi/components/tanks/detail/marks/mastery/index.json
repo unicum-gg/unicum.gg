@@ -1,0 +1,8 @@
+{
+  "last-days": "पिछले {chartDays} दिन",
+  "n-players": "{count, plural, one {# खिलाड़ी} other {# खिलाड़ी}}",
+  "rolling-average-combined-damage-to": "65 / 85 / 95% खिलाड़ियों को हराने के लिए चलायमान औसत संयुक्त क्षति।",
+  "single-battle-xp-to-beat": "50 / 80 / 95 / 99% खिलाड़ियों को हराने के लिए एकल-युद्ध XP।",
+  "tank-marks-of-excellence": "{tank} उत्कृष्टता के अंक",
+  "tank-marks-of-mastery": "{tank} महारत के अंक"
+}

@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "A mostrar os melhores clãs da região {region} com mais de 50 membros que participaram em batalhas, ordenados pela média de {metric}.",
+    "month": "A mostrar os melhores clãs da região {region} com mais de 50 membros que participaram em batalhas, ordenados com base em {metric} nos últimos 30 dias (mín. 15 ativos)."
+  },
+  "updated": "Atualizado {when}.",
+  "empty": "Ainda não há dados de clãs disponíveis para esta região.",
+  "rank": "#",
+  "clan": "Clã",
+  "average": "Média de {metric}"
+}

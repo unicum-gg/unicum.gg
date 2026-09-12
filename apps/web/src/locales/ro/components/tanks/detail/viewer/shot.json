@@ -1,0 +1,7 @@
+{
+  "firing": "Se trage cu {shell}, {pen} mm. Schimbă lovitura",
+  "no-such-round": "{mark}: acest tun nu are acest tip de obuz, așa că setează singur unghiurile",
+  "own-round": "{mark}: obuzul propriu al acestui tun, cu toate valorile incluse",
+  "treat-it-as": "Tratează-l ca",
+  "treat-it-as-mark": "Tratează-l ca {mark}"
+}

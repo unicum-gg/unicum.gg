@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Estatísticas de World of Tanks do veículo {tank} ({region}), nível {tier}, nação: {nation}",
+    "description": "Consulte as especificações do veículo {tank} ({region}) no World of Tanks, incluindo blindagem, poder de fogo, mobilidade, módulos, tripulação e modificações de campo, para este veículo de nível {tier}, nação: {nation}."
+  },
+  "performances": {
+    "title": "Desempenho do veículo {tank} ({region}), estatísticas do servidor e melhores jogadores",
+    "description": "Desempenho do veículo {tank} ({region}) no World of Tanks: médias do servidor de taxa de vitórias, dano e assistência, os melhores jogadores com este veículo de nível {tier}, nação: {nation}, além dos valores esperados de WN8 e WNX."
+  },
+  "marks": {
+    "title": "Marcas de excelência e distintivos de mestria do veículo {tank} ({region})",
+    "description": "Requisitos das marcas de excelência e dos distintivos de mestria do veículo {tank} ({region}) no World of Tanks, com o respetivo histórico para este veículo de nível {tier}, nação: {nation}."
+  },
+  "history": {
+    "title": "Histórico de alterações do veículo {tank} ({region}), buffs e nerfs",
+    "description": "Todas as alterações às características do veículo {tank} ao longo das atualizações de World of Tanks: os buffs e nerfs de poder de fogo, mobilidade, capacidade de sobrevivência e ocultação lançados pela Wargaming para este veículo de nível {tier}, nação: {nation}, versão a versão."
+  },
+  "videos": {
+    "title": "Vídeos de jogabilidade do veículo {tank} ({region})",
+    "description": "Veja o veículo {tank} em ação: batalhas sugeridas pela comunidade com este veículo de nível {tier}, nação: {nation}, cada vídeo a começar no momento em que o veículo entra em jogo e a indicar o mapa e o resultado da batalha."
+  },
+  "community": {
+    "title": "Avaliações dos jogadores e classificação da comunidade para o veículo {tank} ({region})",
+    "description": "O que os jogadores pensam do veículo {tank}: a classificação atribuída pela comunidade numa escala de cinco, discriminada pelo nível de desempenho dos votantes e comparada com o desempenho real deste veículo de nível {tier}, nação: {nation}, além de avaliações escritas por contas com batalhas disputadas neste veículo."
+  }
+}

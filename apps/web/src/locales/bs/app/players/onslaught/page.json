@@ -1,0 +1,6 @@
+{
+  "title": "Najbolji igrači igre World of Tanks u režimu {mode} ({region})",
+  "description": "{name} {region} ljestvica za režim {mode}, takmičarski rangirani režim 7 na 7 igre World of Tanks, prema redoslijedu iz same ljestvice igre.",
+  "og-title": "Najbolji igrači režima {mode}",
+  "og-subtitle": "Rangirana ljestvica regije {region}"
+}

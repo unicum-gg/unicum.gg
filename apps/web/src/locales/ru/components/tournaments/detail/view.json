@@ -1,0 +1,11 @@
+{
+  "closes": "Закрыть {when}",
+  "map-pool": "Игровая карта",
+  "place": "Место",
+  "prize": "Приз",
+  "prizes": "Призы",
+  "qualified": "Прошли квалификацию ({count})",
+  "register": "Регистрация",
+  "tournaments": "Турниры",
+  "winner": "{count, plural, one {Победитель} few {Победителя} many {Победителей} other {Победителя}}"
+}

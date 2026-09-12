@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffolt",
+  "n-tanks": "{count, plural, one {# tank} other {# tankok}}",
+  "nerfed": "{count} nerfelt",
+  "no-tank-changes-have-been": "Még nem rögzítettünk tankváltoztatásokat. Ahogy a Wargaming újraegyensúlyozza a tankokat, minden frissítés erősítései és gyengítései itt jelennek meg.",
+  "update": "Frissítés {version}"
+}

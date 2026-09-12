@@ -2,6 +2,7 @@
 
 import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
 import { useState } from "react";
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
 /**
@@ -15,6 +16,7 @@ export function CopySnippet({
   text: string;
   className?: string;
 }) {
+  const { t } = useTranslation("components/copy-snippet");
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -40,7 +42,7 @@ export function CopySnippet({
       <button
         type="button"
         onClick={copy}
-        aria-label={copied ? "Copied" : "Copy to clipboard"}
+        aria-label={copied ? t("copied") : t("copy-to-clipboard")}
         className="absolute top-2 right-2 rounded-md border border-fd-border bg-fd-background p-1.5 text-fd-muted-foreground transition-colors hover:text-fd-foreground"
       >
         {copied ? (

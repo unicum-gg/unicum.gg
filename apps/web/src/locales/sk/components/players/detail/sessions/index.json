@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Zatiaľ žiadne relácie. Zobrazia sa, keď sa údaje o tomto účte zaznamenajú dvakrát a účet medzi týmito záznamami odohrá bitky. Pri hraní sa to stane automaticky.",
+  "bar-height-is-battles-played": "Výška stĺpca predstavuje počet odohraných bitiek a farba príslušnú hodnotu {metric} za dané obdobie ({granularity}) v rovnakých pásmach, aké web používa všade inde.",
+  "title": "Relácie {nickname}",
+  "title-count": "Relácie: {nickname} ({count})",
+  "granularity": {
+    "day": "deň",
+    "week": "týždeň",
+    "month": "mesiac",
+    "daily": "Denný",
+    "weekly": "Týždenný",
+    "monthly": "Mesičný"
+  },
+  "week-of": "Týždeň od {date}"
+}

@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Chat tonen",
+    "hide": "Chat verbergen",
+    "show-streamers": "Streamers tonen"
+  },
+  "heading": "World of Tanks-statistieken voor spelers, clans en tanks: {name}",
+  "hide": "Streamers verbergen",
+  "player": "Speler",
+  "stream-language": "Streamtaal · {name}",
+  "stream-language-alt": "Streamtaal: {name}",
+  "theater": {
+    "enter": "Theatermodus",
+    "exit": "Sluiten van theatermodus"
+  },
+  "title": "Top spelers die nu streamen ·",
+  "viewer-count": "{count} kijkers",
+  "viewers": "Kijkers",
+  "watch": "Bekijk {nickname} op Twitch"
+}

@@ -1,0 +1,13 @@
+{
+  "heading": "Cei mai buni jucători în <accent>{mode}</accent>",
+  "intro": "{mode} este modul battle royale din World of Tanks. Clasamentul pentru {region}, ordonat după HR, cu minimum 100 de bătălii {mode}.",
+  "board": "Cei mai buni {count} jucători de {mode}",
+  "columns": {
+    "player": "Jucător",
+    "battles": "Lupte",
+    "survival": "Supraviețuire",
+    "survival-percent": "Supraviețuire %",
+    "damage": "Daune medii"
+  },
+  "scale-description": "Pragurile de culoare pentru clasamentul {mode}, calibrate pe populația jucătorilor cu cel puțin 100 de bătălii {mode}."
+}

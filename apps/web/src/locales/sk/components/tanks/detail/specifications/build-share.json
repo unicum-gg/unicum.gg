@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Odkaz na zostavu bol skopírovaný",
+  "copy-build-link": "Kopírovať odkaz na zostavu",
+  "could-not-copy-link": "Odkaz sa nepodarilo skopírovať",
+  "include-setup": "Vključi nastavitev",
+  "share-build": "Zdieľať build",
+  "share-tank": "Zdieľať tank {tank}",
+  "share-text": "Pozrite si túto zostavu tanku {tank} na stránke {app}"
+}

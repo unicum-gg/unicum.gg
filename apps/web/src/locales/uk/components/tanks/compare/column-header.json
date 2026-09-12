@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Боєзапас, обладнання, спорядження, директиви, екіпаж і прогрес для цього стовпця. Кожна зміна змінює його характеристики в порівнянні позаду.",
+  "ammunition-equipment-crew-and-progression": "Боєзапас, обладнання, екіпаж і прогрес",
+  "apply-to-every-column": "Застосувати до кожного стовпця",
+  "compare-against": "Порівняти проти {tank}",
+  "compare-the-others-against-this-one": "Порівняти інші проти цього",
+  "configure-tank": "Налаштувати {tank}",
+  "highest-overall-score": "Найвищий бал загалом",
+  "highest-overall-score-of-this": "Найвищий бал загалом у цьому порівнянні",
+  "is-the-reference": "Еталон: {tank}",
+  "overall": "Всього",
+  "reference-column": "Еталонний стовпець",
+  "remove-tank": "Вилучити {tank}",
+  "reset-all": "Скинути всі",
+  "setup": "Налаштування",
+  "stock": "Стандартний",
+  "tank-setup": "Збірка: {tank}",
+  "top": "Найкращі",
+  "where-this-vehicle-sits-across": "Місце цієї техніки в усьому каталозі, із {MAXSCORE}: середнє значення чотирьох категорій її балів, налаштованих тут. Це підсумок, а не вирок. Розвідник і важкий танк можуть отримати однакове число, добре виконуючи різні завдання."
+}

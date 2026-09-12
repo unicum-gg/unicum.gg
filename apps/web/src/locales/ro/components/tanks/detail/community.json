@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Ce cred jucătorii despre acest tanc",
+  "not-rated": "Nu a fost evaluat încă, fii primul",
+  "votes": "{count} voturi",
+  "votes-one": "{count} votează",
+  "stars": "{value} din {max}",
+  "not-rated-short": "Nu este evaluat"
+}

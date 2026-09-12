@@ -1,0 +1,7 @@
+{
+  "firing": "Kilőve: {shell}, {pen} mm. Lövés módosítása",
+  "no-such-round": "{mark}: ez a löveg nem használ ilyet, ezért állítsd be magad a szögeket",
+  "own-round": "{mark}: a löveg saját lövedéke, minden adatával együtt",
+  "treat-it-as": "Kezeld így",
+  "treat-it-as-mark": "Kezeld így: {mark}"
+}

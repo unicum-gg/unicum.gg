@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "نظرة عامة",
+    "tanks": "دبابات",
+    "sessions": "الجلسات",
+    "achievements": "الإنجازات",
+    "tournaments": "بطولات",
+    "value": "القيمة"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "تجريبي"
+}

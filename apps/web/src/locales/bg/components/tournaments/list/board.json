@@ -1,0 +1,14 @@
+{
+  "date": "Дата",
+  "featured-tournament": "Избрано състезание",
+  "format": "Формат",
+  "mode": "Режим",
+  "no-tournament-matches-the-current": "Няма турнир, съответстващ на текущите филтри.",
+  "nothing-here-right-now-wargaming": "В момента тук няма нищо. Wargaming отваря нови турнири всеки ден, така че списъкът ще се попълни сам.",
+  "prize": "Награда",
+  "region-tournaments": "Турнири в {region} ({count})",
+  "status": "Статус",
+  "teams": "Отбори",
+  "tier": "Ниво",
+  "tournament": "Турнир"
+}

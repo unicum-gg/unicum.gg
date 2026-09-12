@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/use-translation";
 import { WarningIcon } from "@phosphor-icons/react";
 import {
   Tooltip,
@@ -18,6 +19,7 @@ export function RosterBoostBadge({
 }: {
   boostRatio: number | null;
 }) {
+  const { t } = useTranslation("components/clans/roster-boost-badge");
   if (boostRatio === null || boostRatio < BOOST_BADGE_MIN) return null;
   const pct = Math.round(boostRatio * 100);
   return (
@@ -30,9 +32,7 @@ export function RosterBoostBadge({
           </span>
         </TooltipTrigger>
         <TooltipContent>
-          {pct}% of this roster read as boost accounts (very few random battles,
-          used to inflate stronghold results). This discounts the SR.
-        </TooltipContent>
+          {t("of-this-roster-read-as", { pct })}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

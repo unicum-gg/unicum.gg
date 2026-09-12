@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import Link from "@/components/link";
 import type { Region } from "@unicum.gg/wargaming";
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import ROUTES from "@/constants/routes";
@@ -8,6 +10,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTranslation } from "@/hooks/use-translation";
+import { onslaughtCrestName } from "@/components/game-name";
 
 /**
  * Onslaught crest, worn by a player who has held a place on the ranked board.
@@ -44,11 +48,12 @@ export function OnslaughtBadge({
   nickname?: string | null;
   size?: number;
 }) {
+  const { t } = useTranslation("components/entity/badges/onslaught-badge");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const legend = tier === "legend";
   if (!legend && tier !== "champion") return null;
 
-  const rank = legend ? "Legend" : "Champion";
-  const label = `Onslaught ${rank}`;
+  const label = onslaughtCrestName(legend ? "legend" : "champion", tGame);
   const crest = (
     <Crest
       kind={legend ? CrestKind.OnslaughtLegend : CrestKind.OnslaughtChampion}
@@ -62,9 +67,9 @@ export function OnslaughtBadge({
   // then whether it was a one-off. "Reached" rather than "is", since the crest
   // is a record and not a current standing.
   const detail = [
-    `Reached ${rank} in Onslaught`,
-    bestRank != null ? `best #${bestRank}` : null,
-    seasons > 1 ? `${seasons} seasons` : null,
+    t("reached", { crest: label }),
+    bestRank != null ? t("best-rank", { rank: bestRank }) : null,
+    seasons > 1 ? t("seasons", { count: seasons }) : null,
   ]
     .filter(Boolean)
     .join(" · ");

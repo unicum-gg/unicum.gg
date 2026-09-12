@@ -1,0 +1,12 @@
+{
+  "final": "· Finale",
+  "has-not-held-a-place": "{nickname} hatte noch keinen Platz auf der Ansturm-Rangliste.",
+  "live-season": "· laufende Saison",
+  "loading-s-onslaught-record": "Ansturm-Bilanz von {nickname} wird geladen...",
+  "onslaught": "Ansturm",
+  "onslaught-record": "Ansturm-Bilanz von {nickname}",
+  "see-this-season-s-leaderboard": "Bestenliste dieser Saison ansehen",
+  "standing-line": "{rating} Wertungspunkte · {battles} Gefechte",
+  "the-board-only-lists-players": "Die Rangliste führt nur spieler auf, die Meister erreichen, also einige Tausend pro Region. Deshalb landen hier fast alle Profile. Sobald sie Meister erreichen, wird die jeweilige Saison automatisch eingetragen.",
+  "updated": "Aktualisiert {when}"
+}

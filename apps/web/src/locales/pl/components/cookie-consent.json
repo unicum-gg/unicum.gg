@@ -1,0 +1,16 @@
+{
+  "title": "Używamy plików cookie",
+  "description": "Używamy plików cookie, aby poprawić komfort przeglądania i analizować ruch w witrynie.",
+  "functional": {
+    "title": "Funkcjonalne",
+    "description": "Niezbędne do prawidłowego działania witryny (preferencje, wybór regionu)."
+  },
+  "analytics": {
+    "title": "Pomiar ruchu",
+    "description": "Google Analytics zapisuje pliki cookie, które pomagają nam zrozumieć, w jaki sposób użytkownicy korzystają z witryny. Anonimowa analityka bez plików cookie (Umami) pozostaje włączona niezależnie od wyboru."
+  },
+  "save": "Zapisz moje wybory",
+  "decline": "Odrzuć wszystkie",
+  "customize": "Dostosuj",
+  "accept": "Zaakceptuj wszystkie"
+}

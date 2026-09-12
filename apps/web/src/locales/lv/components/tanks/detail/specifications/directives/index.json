@@ -1,0 +1,9 @@
+{
+  "boosts": "Palielinājumi {name}",
+  "directives": "Direktīvas",
+  "directive-name": "{name} direktīva",
+  "grants-and-boosts": "Piešķir un pastiprina apkalpes prasmi, pat ja tā nav apgūta.",
+  "grants-only": "Piešķir apkalpes prasmi kaujai, bet nemaina norādītos raksturlielumus.",
+  "enhances-mounted": "Uzlabo uzstādīto {name}.",
+  "mount-to-use": "Uzstādiet {name}, lai izmantotu šo direktīvu."
+}

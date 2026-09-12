@@ -1,9 +1,12 @@
-import Link from "next/link";
+"use client";
+
+import Link from "@/components/link";
 import { Panel, PanelHeader } from "@/components/panel";
 import ROUTES from "@/constants/routes";
-import { STRONGHOLD_TIER_LABEL, StrongholdTier } from "@unicum.gg/shared";
+import { StrongholdTier } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 function tabClass(active: boolean): string {
   return cn(
@@ -24,6 +27,10 @@ export function StrongholdTierTabs({
   region: Region;
   activeTier?: StrongholdTier;
 }) {
+  const { t } = useTranslation(
+    "components/clans/list/stronghold/tier-tabs",
+  );
+  const { t: tGame } = useTranslation("game/vocabulary");
   return (
     <Panel>
       <PanelHeader className="px-0! py-0!" screenLines={false}>
@@ -32,15 +39,15 @@ export function StrongholdTierTabs({
             href={ROUTES.CLANS(region)}
             className={tabClass(activeTier === undefined)}
           >
-            Overall
+            {t("overall")}
           </Link>
-          {(Object.values(StrongholdTier) as StrongholdTier[]).map((t) => (
+          {(Object.values(StrongholdTier) as StrongholdTier[]).map((tier) => (
             <Link
-              key={t}
-              href={ROUTES.STRONGHOLD(region, t)}
-              className={tabClass(t === activeTier)}
+              key={tier}
+              href={ROUTES.STRONGHOLD(region, tier)}
+              className={tabClass(tier === activeTier)}
             >
-              {STRONGHOLD_TIER_LABEL[t]}
+              {tGame(`stronghold-tiers.${tier}`)}
             </Link>
           ))}
         </nav>

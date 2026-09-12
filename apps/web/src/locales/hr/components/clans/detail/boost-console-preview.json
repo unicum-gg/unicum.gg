@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktivni dani",
+  "add-workflow": "Dodaj radni tok",
+  "connect-discord": "Poveži Discord",
+  "discord-notifications": "Discord obavijesti",
+  "each-workflow-activates-its-reserves": "Svaki tijek rada aktivira svoje zalihe tijekom vremenskog prozora, kada je dovoljno članova u aktivnoj sesiji igre. Izvodi se na vašem računu, bez potrebe da budete na mreži. Dodajte koliko god ih trebate.",
+  "enabled": "Uključeno",
+  "from": "Od",
+  "get-a-discord-message-in": "Primite Discord poruku na kanalu po svom izboru svaki put kada se aktivira pojačanje, kako bi cijeli klan znao da je aktivno.",
+  "log-in-with-wargaming-to": "Prijavite se putem Wargaminga da biste ga postavili",
+  "min-online": "Min na mreži",
+  "officers": "Oficiri",
+  "only-an-officer-of-this": "Samo časnik ovog klana može to postaviti.",
+  "schedule-preview": "Pregled rasporeda",
+  "set-your-hours-and-reserves": "Jednom postavite svoje sate i zalihe. Pojačanja će se aktivirati na vrijeme sama od sebe, čak i kada nikoga nema da pritisne gumb.",
+  "stronghold-boosts": "Poboljšanja tvrđave",
+  "times-are-in-your-timezone": "Vremena su navedena u vašoj vremenskoj zoni {tz}.",
+  "to": "Do"
+}

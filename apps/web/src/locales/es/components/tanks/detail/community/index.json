@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Eje por eje",
+  "by-server": "Por servidor",
+  "community-verdict": "Veredicto de la comunidad",
+  "every-server-one-average": "Todos los servidores, una sola media",
+  "n-shown": ", {count} mostrados",
+  "opinion": "{count, plural, one {# opinión} other {# opiniones}}",
+  "opinion-next-to-win-rate": "Opinión junto a la tasa de victorias, en el nivel {tier}",
+  "rate-the": "Valora {tankName}",
+  "reputation-against-results": "Reputación frente a resultados",
+  "same-tank-different-metas": "Mismo tanque, distintos metajuegos",
+  "the-same-tank-by-how": "El mismo tanque, según el rendimiento del votante",
+  "what-players-wrote": "Lo que escribieron los jugadores",
+  "who-is-saying-it": "Quién lo dice"
+}

@@ -1,0 +1,17 @@
+{
+  "close": "Zamknij",
+  "format": "Format",
+  "here": "tutaj",
+  "in-the-queue": "Materiał znajduje się w kolejce i pojawi się {where}, gdy moderator go sprawdzi. Do tego czasu Twój materiał będzie na tej stronie wyszarzony.",
+  "log-in-to-suggest-a": "Zaloguj się, aby zaproponować taktykę",
+  "on-map": "na {map}",
+  "players-per-team": "Graczy na drużynę",
+  "sending": "Wysyłanie…",
+  "suggest": "Zaproponuj",
+  "suggest-a-tactic": "Zaproponuj taktykę",
+  "suggest-another": "Zaproponuj inny",
+  "suggestion-sent": "Propozycja wysłana",
+  "tier": "Poziom",
+  "what-to-submit": "Film z bitwy rywalizacyjnej, rozpoczynający się dokładnie w sekundzie jej rozpoczęcia. Na początku widoczna jest mapa {map}, a widok zmienia się wraz z filmem, ponieważ wieczór klanowy obejmuje całą rotację map. Dowódca wyszukuje bitwę według strony, po której została rozegrana, dlatego należy ją podać, a nie pozostawiać do odgadnięcia.",
+  "what-was-played": "Co zostało zagrane"
+}

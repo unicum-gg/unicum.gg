@@ -1,0 +1,9 @@
+{
+  "boosts": "Boosts {name}",
+  "directives": "Directives",
+  "directive-name": "Directive {name}",
+  "grants-and-boosts": "Confère et améliore l’aptitude de l’équipage, même si elle n’est pas entraînée.",
+  "grants-only": "Confère l’aptitude de l’équipage pour la bataille (aucune caractéristique indiquée).",
+  "enhances-mounted": "Améliore les performances de l’équipement installé : {name}.",
+  "mount-to-use": "Pour utiliser cette directive, installez l’équipement suivant : {name}."
+}

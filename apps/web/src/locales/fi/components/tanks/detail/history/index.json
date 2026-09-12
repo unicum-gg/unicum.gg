@@ -1,0 +1,12 @@
+{
+  "before-update": "Ennen päivitystä {version}",
+  "common-test": "Yhteinen testi",
+  "in-common-test-not-released": "Yleisessä testissä, ei vielä julkaistu",
+  "introduced": "Esitelty",
+  "lifecycle": "Elinkaari",
+  "n-buffed": "{count} parannettua",
+  "n-nerfed": "{count} heikennettyä",
+  "not-released-wargaming-can-still": "Ei julkaistu. Wargaming voi vielä muuttaa tai poistaa mitä tahansa tästä ennen päivityksen julkaisua.",
+  "status": "Tila",
+  "update": "Päivitä {version}"
+}

@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Gastos (credits)",
+      "tip": "Presyo ng pagbili sa credits, para sa mga tangke sa tech tree"
+    },
+    "buyGold": {
+      "label": "Gastos (ginto)",
+      "tip": "Presyo ng pagbili sa gold, para sa mga premium na tangke"
+    },
+    "researchXp": {
+      "label": "Research XP",
+      "tip": "XP para ma-unlock, pinakamurang daan"
+    },
+    "totalFreeXp": {
+      "label": "Libreng XP (T{tier})",
+      "tip": "Pinagsama-samang XP para magsaliksik mula tier {tier}, kasama ang mga kinakailangang module"
+    },
+    "shellCost": {
+      "label": "Gastos ng bala",
+      "tip": "Default na presyo ng bala, sa credits"
+    },
+    "ammoCost": {
+      "label": "Buong gastos ng bala",
+      "tip": "Default na presyo ng bala × kapasidad ng amunisyon"
+    },
+    "acquireMoney": {
+      "label": "Gastos sa pagbili ({currency})",
+      "tip": "Tinatayang totoong perang kailangan para makuha ang tank, pananaliksik at pagbili, sa {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Libreng XP ({currency})",
+      "tip": "Tinatayang totoong perang kailangan para gawing Libreng XP ang tank mula tier {tier}, sa {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Gastos (credits)",
+    "buyGold": "Gastos (ginto)",
+    "researchXp": "Research XP",
+    "totalFreeXp": "Libreng XP",
+    "shellCost": "Gastos ng bala",
+    "ammoCost": "Buong gastos ng bala",
+    "acquireMoney": "Gastos sa pagbili (pera)",
+    "freeXpMoney": "Libreng XP (pera)"
+  }
+}

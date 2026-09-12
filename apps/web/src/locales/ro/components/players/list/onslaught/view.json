@@ -1,0 +1,35 @@
+{
+  "heading": "Cei mai buni jucători în <accent>{mode}</accent>",
+  "intro": "{mode} este modul competitiv clasat 7v7 de nivel X din World of Tanks. Clasamentul pentru {region}, preluat direct din clasamentul jocului.",
+  "season": {
+    "range": "{start} până la {end}",
+    "final": "clasament final",
+    "live": "sezon în desfășurare",
+    "updated": "actualizat {when}"
+  },
+  "board": "Cei mai buni {count} jucători de {mode}",
+  "columns": {
+    "player": "Jucător",
+    "rank": "Grad",
+    "battles": "Lupte",
+    "rating": "Punctele de clasament"
+  },
+  "alias": "(ca {nickname})",
+  "ranks": {
+    "title": "Ranguri",
+    "meaning": "Semnificație",
+    "tier": "nivel",
+    "intro": "Urcați în rangurile {mode} câștigând bătălii. Fiecare victorie oferă puncte de rating în funcție de cât de bine ați jucat. {champion} este cel mai înalt rang pe care îl puteți atinge doar prin puncte, iar atingerea lui vă introduce în clasament. {legend} nu are un prag fix, ci reprezintă grupul de {champion} cu cel mai mare rating, astfel încât limita se schimbă în funcție de concurență, cu egalitățile departajate prin numărul de bătălii jucate. Limitele exacte pentru {legend} și {champion} provin din sezonul curent și sunt marcate pe clasament.",
+    "legend-blurb": "Cei mai bine evaluați jucători {champion}. Jocul limitează acest rang la o poziție stabilită în clasament pentru fiecare sezon, astfel încât dimensiunea lui variază după sezon și regiune, nu după un prag fix de puncte. Dacă coborâți sub ultimul {legend}, reveniți la {champion}.",
+    "champion-blurb": "Cel mai înalt rang la care puteți urca prin puncte de rating și intrarea în clasament. Fiecare jucător clasat este cel puțin {champion}."
+  },
+  "race": {
+    "title-live": "Ce este necesar acum",
+    "title-ended": "Cum a decurs sezonul",
+    "legend-cutoff": "Prag pentru {legend}",
+    "champion-cutoff": "Prag pentru {champion}",
+    "ranked-players": "jucători clasati",
+    "rating-points": "punctele de clasament",
+    "rank-cutoffs": "Limitele de grad"
+  }
+}

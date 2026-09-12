@@ -1,0 +1,10 @@
+{
+  "empty": "動画はまだありません",
+  "see-all": "すべて表示 →",
+  "see-all-count": "すべて表示（{count}）→",
+  "watch-on-youtube": "YouTubeで見る",
+  "play": "{title}を再生",
+  "log-in": "ログインして動画を提案",
+  "dmg": "ダメージ",
+  "no-community-video-for-the": "{tankName}のコミュニティ動画はまだありません。動画を提案すると、モデレーターの確認後にここへ表示されます。"
+}

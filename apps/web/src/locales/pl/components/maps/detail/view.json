@@ -1,0 +1,9 @@
+{
+  "battle-time": "Czas bitwy",
+  "camouflage": "Kamuflaż {camouflage}",
+  "mode": "Tryb",
+  "n-random-events": "{count, plural, one {# losowe wydarzenie} few {# losowe wydarzenia} many {# losowych wydarzeń} other {# losowych wydarzeń}}",
+  "random-events": "Losowe wydarzenia",
+  "size": "Rozmiar",
+  "team-size": "Wielkość drużyny"
+}

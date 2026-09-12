@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Une cellule indique le taux de victoires de la tranche à ce rang, calculé sur toutes les batailles disputées avec chaque véhicule sur lequel un joueur compte au moins {minBattles} batailles. Elle décrit donc les rangs tels qu’ils sont joués par ceux qui les jouent. Les cellules reposant sur moins de {TIERWINRATETHINCELL} batailles sont affichées en pâle : elles varient pour des raisons autres que le niveau de jeu. Les couleurs correspondent aux mêmes tranches de taux de victoires que partout ailleurs sur le site.",
+  "cell-no-sample": "{where}, aucun échantillon",
+  "cell-winrate": "{where}, taux de victoire de {winrate} sur {battles} batailles",
+  "metric-band": "Bande de {metric}",
+  "nothing-recorded": "Aucune donnée enregistrée pour {metric} pour le moment. La grille est reconstruite chaque nuit.",
+  "over-battles-from-accounts": "{winrate} sur {battles} batailles issues de {players} comptes",
+  "over-n-battles": "sur {battles} batailles",
+  "what-players-win-by-tier": "Taux de victoire des joueurs {label} par rang"
+}

@@ -1,0 +1,6 @@
+{
+  "fun": "How much players enjoy it, which is regularly not the same question.",
+  "hype": "Where the community ranks it in its tier, minus where its win rate ranks it. Sort descending for the most overrated tanks in the game, ascending for the most underrated.",
+  "overall": "How good players think it is. Ranked on a mean shrunk towards the site average, so a tank with four votes cannot outrank one with four hundred.",
+  "votes": "Votes cast, every one from an account that has actually played the tank."
+}

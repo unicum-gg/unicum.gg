@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Region } from "@unicum.gg/wargaming";
-import Link from "next/link";
+import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import type { PlayerIdentity } from "@/components/entity/player-identity";

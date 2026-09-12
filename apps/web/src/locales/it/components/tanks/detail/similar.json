@@ -1,0 +1,11 @@
+{
+  "compare": "Confronta con i {count} più simili",
+  "match": "partita",
+  "subtitle": "Stessa posizione tra i veicoli del proprio livello",
+  "verdict": {
+    "overall": "Giudizio globale",
+    "closest": "Più simile per {axes}",
+    "closest-furthest": "Più simile per {axes}, più diverso per {apart}",
+    "and": " e "
+  }
+}

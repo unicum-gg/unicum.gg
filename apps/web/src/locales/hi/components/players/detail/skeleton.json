@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname} के रैंडम युद्धों के आँकड़े",
+  "progression": "{nickname} की {metricLabel} प्रगति",
+  "solid-line-is-overall-matches": "ठोस पंक्ति कुल {metricLabel} है, जो ऊपर दिए गए कुल कॉलम से मेल खाती है और नए युद्ध जुड़ने पर धीरे-धीरे बदलती है। टूटी हुई पंक्ति प्रति-सत्र {metricLabel2} है, जिसकी गणना पिछले स्नैपशॉट के बाद खेले गए युद्धों से की जाती है। यह अच्छे और खराब दौर दिखाती है। पंक्ति का रंग रेटिंग स्तर के अनुसार है।",
+  "tanks-shaping-s-rating": "{nickname} की रेटिंग को प्रभावित करने वाले टैंक",
+  "tanks": "{nickname} के टैंकों",
+  "stats": "{nickname} के {strongholdLabel} आँकड़े"
+}

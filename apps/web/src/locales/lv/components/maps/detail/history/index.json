@@ -1,0 +1,12 @@
+{
+  "added": "Pievienots",
+  "before-update": "Pirms atjauninājuma {version}",
+  "common-test": "Kopējais tests",
+  "every-update-that-changed-this": "Katrs atjauninājums, kas mainīja šo karti, sākot ar jaunāko, nolasīts no pašas spēles klienta.",
+  "in-the-game": "Spēlē",
+  "n-changes": "{count, plural, zero {# izmaiņas} one {# izmaiņa} other {# izmaiņas}}",
+  "not-released-wargaming-can-still": "Nav izlaists. Wargaming vēl var mainīt vai atteikties no jebkuras šīs daļas, pirms atjauninājums tiek izlaists.",
+  "removed": "Noņemt",
+  "title": "Izmaiņas kartē {map}",
+  "update": "Atjaunināt {version}"
+}

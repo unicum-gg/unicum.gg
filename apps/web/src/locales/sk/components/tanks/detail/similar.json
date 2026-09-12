@@ -1,0 +1,11 @@
+{
+  "compare": "Porovnať s najbližšími vozidlami ({count})",
+  "match": "bitka",
+  "subtitle": "Rovnaké postavenie v rámci vlastnej úrovne",
+  "verdict": {
+    "overall": "Celkovo podobné",
+    "closest": "Najväčšia podobnosť: {axes}",
+    "closest-furthest": "Najväčšia podobnosť: {axes}, najväčší rozdiel: {apart}",
+    "and": " a "
+  }
+}

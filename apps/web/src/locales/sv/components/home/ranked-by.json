@@ -1,0 +1,6 @@
+{
+  "day": "Rankning efter {metric} under de senaste 24 timmarna (min. 20 strider).",
+  "week": "Rankning efter {metric} under de senaste 7 dagarna (min. 140 strider).",
+  "month": "Rankning efter {metric} under de senaste 30 dagarna (min. 600 strider).",
+  "overall": "Rankning efter {metric} genom tiderna (min. 20 000 strider)."
+}

@@ -1,0 +1,11 @@
+{
+  "already-running": "กำลังทำงานอยู่",
+  "in-window": "ในหน้าต่าง",
+  "n-online": "/ {count} ออนไลน์",
+  "no-reserves-selected": "ไม่ได้เลือกกำลังสำรอง",
+  "no-stock-ready": "ไม่มีกำลังสำรองพร้อมใช้งาน",
+  "not-available": "ไม่สามารถใช้งานได้",
+  "threshold": "เกณฑ์ ({online}/{min})",
+  "would-activate": "จะเปิดใช้งาน",
+  "would-not-fire": "ขณะนี้จะไม่ทำงาน"
+}

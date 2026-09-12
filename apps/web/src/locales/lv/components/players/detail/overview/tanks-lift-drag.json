@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Vērtējuma paaugstināšana",
+    "blurb": "Tanki, kas paaugstina kopējo vērtējumu: to izņemšana vērtējumu pazeminātu.",
+    "empty": "Nav tanka, kas paaugstinātu kopējo vērtējumu."
+  },
+  "drag": {
+    "heading": "Vērtējuma pazemināšana",
+    "blurb": "Tanki, kas pazemina kopējo vērtējumu: to izņemšana vērtējumu paaugstinātu.",
+    "empty": "Nav tanka, kas pazeminātu kopējo vērtējumu."
+  },
+  "if-removed": "{delta}, ja izņemts"
+}

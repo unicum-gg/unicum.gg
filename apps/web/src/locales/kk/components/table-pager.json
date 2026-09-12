@@ -1,0 +1,8 @@
+{
+  "previous": "алдыңғы бет",
+  "next": "келесі бет",
+  "rows-per-page": "беттегі жолдар",
+  "all": "Барлығы",
+  "range": "{first}–{last} / {total}",
+  "page": "{page} / {total} бет"
+}

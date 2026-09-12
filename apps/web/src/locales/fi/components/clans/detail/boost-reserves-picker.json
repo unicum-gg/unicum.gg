@@ -1,0 +1,6 @@
+{
+  "active-until": "Aktiivinen asti {tz}",
+  "n-left": "{count} jäljellä",
+  "no-reserves-in-stock-right": "Varastossa ei ole tällä hetkellä reservejä.",
+  "reserves-to-activate": "Aktivoitavat reservit"
+}

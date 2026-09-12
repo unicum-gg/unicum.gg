@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "Bitwy tym pojazdem: {battles}",
+  "damage": "{damage} zadane uszkodzenia",
+  "n-marks": "{count, plural, one {# odznaka} few {# odznaki} many {# odznak} other {# odznak}}",
+  "no-written-opinions-yet-if": "Brak jeszcze pisemnych opinii. Jeśli masz rozegrane Bitwy tym pojazdem, Twoja opinia może być pierwsza.",
+  "win-rate": "Wskaźnik zwycięstw: {toFixed}%",
+  "written-on": "napisano dla wersji {gameVersion}"
+}

@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3e Klasse",
+      "tip": "3e Klasse: benodigde XP om 50% van de spelers te verslaan"
+    },
+    "class2": {
+      "label": "2e Klasse",
+      "tip": "2e Klasse: benodigde XP om 80% van de spelers te verslaan"
+    },
+    "class1": {
+      "label": "1e Klasse",
+      "tip": "1e Klasse: benodigde XP om 95% van de spelers te verslaan"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: benodigde XP om 99% van de spelers te verslaan"
+    }
+  },
+  "rows-per-page": "Rijen per pagina",
+  "previous-page": "Vorige pagina",
+  "page": "Pagina {current} / {totalPages}",
+  "next-page": "Volgende pagina",
+  "all": "Allen"
+}

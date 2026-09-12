@@ -1,0 +1,6 @@
+{
+  "title": "Valami hiba történt",
+  "description": "A Wargaming API nem válaszolt megfelelően. Ez általában egy átmeneti probléma a részükről.",
+  "try-again": "Próbáld újra",
+  "back": "Vissza a kezdőoldalra"
+}

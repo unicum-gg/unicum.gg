@@ -1,0 +1,17 @@
+{
+  "average": "Media",
+  "bad": "Scarso",
+  "below-avg": "Sotto la media",
+  "color-thresholds-for-the-stronghold": "Soglie di colore per le classifiche della Roccaforte. Un’unica scala assoluta per tutti i livelli, così un SR (o SRB) indica ovunque la stessa qualità del clan.",
+  "excellent": "Eccellente",
+  "good": "Buono",
+  "rating-colors": "Colori del rating",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Livello",
+  "top": "Top",
+  "very-bad": "Molto male",
+  "very-good": "Molto bene",
+  "wr": "WR"
+}

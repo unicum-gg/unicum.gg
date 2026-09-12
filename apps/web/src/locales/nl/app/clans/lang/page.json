@@ -1,0 +1,6 @@
+{
+  "title": "Top clans met {language} als taal in World of Tanks ({region})",
+  "description": "Clanklassement van {name} voor clans uit {region} die {language} als een van hun talen hebben opgegeven, gerangschikt op basis van WNX.",
+  "og-title": "Top clans met {language} als taal",
+  "og-subtitle": "{region} klassement"
+}

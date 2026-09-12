@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Höjer Rankning",
+    "blurb": "Tanken som höjer helhetsresultatet: att ta bort dem skulle ge lägre Rankning.",
+    "empty": "Ingen Tank höjer helhetsresultatet."
+  },
+  "drag": {
+    "heading": "Sänker Rankning",
+    "blurb": "Tanken som sänker helhetsresultatet: att ta bort dem skulle ge högre Rankning.",
+    "empty": "Ingen Tank sänker helhetsresultatet."
+  },
+  "if-removed": "{delta} vid borttagning"
+}

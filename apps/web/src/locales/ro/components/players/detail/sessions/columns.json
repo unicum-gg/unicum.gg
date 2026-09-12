@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Clasament (WN)",
+    "tip": "Ratingul acestor bătălii בלבד, nu al contului"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Rata de victorii în aceste bătălii"
+  },
+  "avgDamage": {
+    "label": "Daune medii"
+  },
+  "avgFrags": {
+    "label": "Fragmente medii",
+    "tip": "Inamici distruși pe bătălie"
+  },
+  "damageRatio": {
+    "label": "Raport distrugere",
+    "tip": "Daune provocate raportate la daunele primite"
+  },
+  "kd": {
+    "label": "Raport vehicule distruse",
+    "tip": "Inamici distruși raportat la vehiculele pierdute"
+  },
+  "survivalRate": {
+    "label": "Lupte finalizate în acţiune"
+  },
+  "avgSpotted": {
+    "label": "Medie observări",
+    "tip": "Inamici detectați pe bătălie"
+  },
+  "avgDefense": {
+    "label": "Apărare bază",
+    "tip": "Puncte de apărare pe bătălie"
+  },
+  "avgXp": {
+    "label": "XP medie"
+  }
+}

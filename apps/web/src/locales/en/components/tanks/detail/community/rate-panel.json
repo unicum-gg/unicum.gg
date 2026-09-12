@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} battles overall",
+  "checking-your-record-on-this": "Checking your record on this tank...",
+  "fetching-your-garage": "We are fetching your garage",
+  "have-you-played": "Have you played the {tank}?",
+  "more-to-go": "{count} more battles to go",
+  "more-to-go-one": "{count} more battle to go",
+  "sign-in-to-rate-it": "Sign in to rate it",
+  "sign-in-with-your-wargaming-account-to-rate-": "Sign in with your Wargaming account to rate it. We read your record on this exact tank, which is what stops this page from becoming a poll of people who have never driven it.",
+  "signed-in-on": "Signed in on {region}",
+  "too-few-battles": "You have {played} battles in the {tank}. We ask for {required} before a vote counts, so that this average stays an average of people who actually play it.",
+  "you-have-not-played": "You have not played the {tank}"
+}

@@ -1,0 +1,22 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Totalt",
+    "day": "Siste 24t",
+    "week": "Siste 7d",
+    "month": "Siste 30d"
+  },
+  "sections": {
+    "elo": "Nivå 10 ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} nivå 10 (7 mot 7)",
+    "t8": "{skirmish} nivå 8 (7 mot 7)",
+    "t6": "{skirmish} nivå 6 (7 mot 7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Kamper",
+    "winrate": "Seiersrate"
+  }
+}

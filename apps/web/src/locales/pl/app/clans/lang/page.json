@@ -1,0 +1,6 @@
+{
+  "title": "Najlepsze klany World of Tanks: {language} ({region})",
+  "description": "{name}: ranking klanów z regionu {region}, w których {language} jest jednym z zadeklarowanych języków, uporządkowany według WNX.",
+  "og-title": "Najlepsze klany: {language}",
+  "og-subtitle": "Klasyfikacja {region}"
+}

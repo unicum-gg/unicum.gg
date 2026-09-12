@@ -1,0 +1,8 @@
+{
+  "previous": "الصفحة السابقة",
+  "next": "الصفحة التالية",
+  "rows-per-page": "الصفوف لكل صفحة",
+  "all": "الكل",
+  "range": "{first}–{last} من أصل {total}",
+  "page": "صفحة {page} / {total}"
+}

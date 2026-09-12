@@ -1,0 +1,12 @@
+{
+  "final": "Finale",
+  "grand-final": "Veliko finale",
+  "loser-bracket-final": "Finale gubitničkog žrijeba",
+  "loser-round": "Runda gubitničkog žrijeba {round}",
+  "quarter-finals": "Četvrtfinale",
+  "round-of": "Runda od {teams}",
+  "semi-finals": "Polufinale",
+  "third-place": "Treće mjesto",
+  "winner-bracket-final": "Finale pobjedničkog žrijeba",
+  "winner-round": "Runda pobjedničkog žrijeba {round}"
+}

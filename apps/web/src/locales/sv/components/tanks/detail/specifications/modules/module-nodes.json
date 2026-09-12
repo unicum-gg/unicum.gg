@@ -1,0 +1,17 @@
+{
+  "aim-time": "Aim tid",
+  "ammo": "Ammunition",
+  "armor": "Pansar",
+  "dispersion": "Spridning",
+  "fire-chance": "Eld chans",
+  "gun-arc": "Kanonbåge",
+  "hit-points": "Livpoäng",
+  "load-limit": "Lastgräns",
+  "mounted-on": "Monterad på {tanks}",
+  "power": "Kraft",
+  "reload": "Omladdning",
+  "signal-range": "Signalfält",
+  "tier": "Klass {tier}",
+  "traverse": "Svängning",
+  "view-range": "Siktefält"
+}

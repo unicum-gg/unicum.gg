@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Офицер по кадрам",
+  "personnel_officer": "Офицер штаба",
+  "quartermaster": "Офицер снабжения",
+  "executive_officer": "Заместитель командующего",
+  "recruit": "Новобранец",
+  "private": "Боец",
+  "commander": "Командующий",
+  "reservist": "Резервист",
+  "combat_officer": "Командир подразделения",
+  "junior_officer": "Младший офицер",
+  "intelligence_officer": "Офицер разведки"
+}

@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Venter på første snapshots",
+    "hidden": "Skjult av Wargaming",
+    "active_24h": "Aktiv < 24 t",
+    "active_7d": "Aktiv < 7 d",
+    "recent_30d": "Nylig < 30 d",
+    "recent_90d": "Nylig < 90 d",
+    "dormant_1y": "Inaktiv < 1 år",
+    "inactive": "Inaktiv > 1 år"
+  },
+  "rating-hype": {
+    "overrated": "Overvurdert",
+    "fair": "Rettferdig vurdert",
+    "underrated": "Undervurdert"
+  },
+  "rating-consensus": {
+    "agreed": "Bred enighet",
+    "mixed": "Blandet meninger",
+    "divisive": "Delende"
+  },
+  "rating-axes": {
+    "overall": "Totalt",
+    "fun": "Moro",
+    "firepower": "Ildkraft",
+    "armour": "Panser",
+    "mobility": "Mobilitet",
+    "gunHandling": "Våpenhåndtering",
+    "concealment": "Kamuflasje",
+    "beginnerFriendliness": "Nybegynner vennlig",
+    "versatility": "Allsidighet"
+  },
+  "rating-axis-hints": {
+    "overall": "Hvor god er denne stridsvognen, alt tatt i betraktning?",
+    "fun": "Hvor mye liker du å spille den?",
+    "firepower": "Alfa, skade per minutt og penetrasjon.",
+    "armour": "Hvor mye den preller av, skrog-skjult og i det åpne.",
+    "mobility": "Fart, akselerasjon og hvordan den svinger.",
+    "gunHandling": "Siktetid, spredning og presisjon i bevegelse.",
+    "concealment": "Kamuflasje og synsvidde.",
+    "beginnerFriendliness": "Hvor tilgivende den er mens du fortsatt lærer.",
+    "versatility": "Fungerer den på alle kart og i alle lag?"
+  },
+  "voter-brackets": {
+    "unknown": "Ikke vurdert",
+    "learning": "Lærer",
+    "average": "Gjennomsnitt",
+    "strong": "Sterk",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Kjøretøy",
+    "gunnery": "Skytesenter",
+    "armor": "Pansring",
+    "mobility": "Mobilitet",
+    "vision": "Syn",
+    "crew": "Besetning",
+    "progression": "Fremgang",
+    "economy": "Økonomi",
+    "ratings": "Vurderinger",
+    "statistics": "Statistikk",
+    "modes": "Slagmodi",
+    "tactics": "Taktikk",
+    "slang": "Slang"
+  }
+}

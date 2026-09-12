@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tanques de {name} ({region}), todos los vehículos utilizados",
+    "description": "Todos los tanques con los que {name} ha jugado en {region}, con batallas, porcentaje de victorias, daño medio y WN8 por vehículo."
+  },
+  "achievements": {
+    "title": "Logros de {name} ({region}), {medals} medallas conseguidas",
+    "description": "Las {medals} medallas de World of Tanks que {name} ha conseguido en {region}, desde las de Kolobanov y Pool hasta los rangos honoríficos y las medallas épicas, además de todas las que aún puede conseguir."
+  },
+  "tournaments": {
+    "title": "Torneos de {name} ({region})",
+    "description": "Todos los torneos de Wargaming en los que {name} ha participado en {region}: el equipo con el que jugó, el formato y hasta dónde llegó. Un registro que Wargaming publica únicamente desde la perspectiva del torneo, nunca desde la del jugador."
+  },
+  "value": {
+    "title": "Valor de la cuenta de {name} ({region})",
+    "description": "El valor de la cuenta de World of Tanks de {name} en {region}: créditos, oro y experiencia acumulados en el garaje."
+  },
+  "mode": {
+    "title": "Estadísticas de {name} en {mode} ({region})",
+    "description": "Rendimiento de {name} en {region} en {mode}: batallas, porcentaje de victorias y puntuaciones en este modo, junto a sus valores de referencia en batallas aleatorias."
+  },
+  "overview": {
+    "title": "Estadísticas de World of Tanks de {name} ({region}), {battles} batallas, {winrate}% WR",
+    "description": "Rendimiento de {name} en {region}: {battles} batallas, {winrate}% de victorias y {rating} de puntuación. Desglose por tanque, WN8, WNX e historial completo de clanes."
+  },
+  "locked": {
+    "title": "Cuenta de World of Tanks bloqueada: {name} ({region})",
+    "description": "La cuenta de {name} ({region}) existe, pero Wargaming la ha bloqueado, por lo que sus estadísticas de World of Tanks no están disponibles."
+  },
+  "empty": {
+    "title": "Estadísticas del jugador de World of Tanks: {name} ({region})",
+    "description": "Estadísticas del jugador de World of Tanks {name} ({region}): puntuaciones WN8 y WNX, porcentaje de victorias, desglose por tanque e historial completo de clanes."
+  }
+}

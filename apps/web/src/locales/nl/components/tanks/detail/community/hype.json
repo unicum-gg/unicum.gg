@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "beter dan {value}% van de beoordeelde tanks van hetzelfde niveau",
+  "measured-hint": "De positie op basis van het winstpercentage onder dezelfde tanks",
+  "not-enough-votes-yet-to": "Nog niet genoeg stemmen om het oordeel van de community te vergelijken met hoe de tank daadwerkelijk presteert.",
+  "perceived-hint": "De positie volgens de community onder de beoordeelde tanks van niveau {tier}",
+  "verdict": {
+    "overrated": "De community schat de tank veel hoger in dan de daadwerkelijke prestaties rechtvaardigen.",
+    "fair": "Hier komen reputatie en resultaten overeen.",
+    "underrated": "De tank presteert beter dan spelers denken."
+  },
+  "what-players-think": "Wat spelers vinden",
+  "what-the-data-says": "Wat de gegevens zeggen"
+}

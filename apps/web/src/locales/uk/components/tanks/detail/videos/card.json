@@ -1,0 +1,3 @@
+{
+  "n-battles": "{count, plural, one {# бій} few {# бої} many {# боїв} other {# боїв}}"
+}

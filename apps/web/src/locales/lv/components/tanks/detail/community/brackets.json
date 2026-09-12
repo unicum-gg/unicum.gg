@@ -1,0 +1,8 @@
+{
+  "battles": "{count} kaujas",
+  "no-votes": "nē balsu",
+  "rated-higher": "Spēcīgāki spēlētāji to vērtē par {stars} zvaigznēm augstāk nekā pārējais serveris. Šis tanks atalgo prasmi.",
+  "rated-lower": "Spēcīgāki spēlētāji to vērtē par {stars} zvaigznēm zemāk nekā pārējais serveris. Tas glaimo, līdz no tā tiek prasīts kaut kas konkrēts.",
+  "votes": "{count} balsis",
+  "votes-one": "{count} balss"
+}

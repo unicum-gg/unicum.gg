@@ -1,5 +1,10 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { tankParamName } from "@/components/game-name";
+import { tankHeadingKey } from "@/lib/tank-params";
+import { useTranslation } from "@/hooks/use-translation";
+
 import type { ReactNode } from "react";
 import { TrendDownIcon, TrendUpIcon } from "@phosphor-icons/react";
 import type { TankSpec } from "@unicum.gg/shared";
@@ -58,6 +63,7 @@ function ValueCell({
    * itself and when nothing is pinned. */
   reference: number | null;
 }) {
+  const { locale } = useLocale();
   if (value == null) {
     return <span className="text-fd-muted-foreground">—</span>;
   }
@@ -75,7 +81,7 @@ function ValueCell({
           )}
         >
           {delta > 0 ? "+" : ""}
-          {formatSpecValue(delta, row.digits)}
+          {formatSpecValue(locale, delta, row.digits)}
           {delta > 0 ? (
             <TrendUpIcon className="size-3" weight="bold" />
           ) : (
@@ -84,11 +90,11 @@ function ValueCell({
         </span>
       )}
       <span className={cn("font-medium", isBest && "text-emerald-500")}>
-        {formatSpecValue(value, row.digits)}
+        {formatSpecValue(locale, value, row.digits)}
         {typeof secondary === "number" && (
           <span className="text-fd-muted-foreground/70">
             {" / "}
-            {formatSpecValue(secondary, row.digits)}
+            {formatSpecValue(locale, secondary, row.digits)}
           </span>
         )}
         {row.currency ? (
@@ -193,6 +199,11 @@ function SpecGroupRows({
   ranges: SpecRanges;
   pinned: number | null;
 }) {
+  const { t } = useTranslation("components/tanks/compare/characteristics-grid");
+  // The same catalogue the detail page reads its headings from, so the two
+  // tables cannot name a group differently.
+  const { t: tParams } = useTranslation("game/tank-params");
+  const heading = tankParamName(tankHeadingKey(group.title), group.title, tParams);
   const hidden = hiddenRowIndexes(group, columns);
   const scores = columns.map((c) => categoryScore(c.specs, group, ranges));
   const bestScore = Math.max(...scores.map((s) => s ?? -1));
@@ -201,13 +212,16 @@ function SpecGroupRows({
     <tbody className="border-b border-fd-border last:border-b-0">
       <tr className="border-b border-fd-border bg-fd-secondary/30">
         <th className="sticky left-0 bg-fd-secondary px-4 py-2 text-left text-sm font-semibold tracking-wide uppercase">
-          {group.title}
+          {heading}
         </th>
         {scores.map((score, i) => (
           <td
             key={i}
             className="border-l border-fd-border px-3 py-2 text-right tabular-nums"
-            title={`Where this vehicle sits in the catalogue on ${group.title.toLowerCase()}, out of ${MAX_SCORE}`}
+            title={t("score-tip", {
+              group: heading.toLowerCase(),
+              max: MAX_SCORE,
+            })}
           >
             {score == null ? (
               <span className="text-fd-muted-foreground">—</span>
@@ -235,7 +249,7 @@ function SpecGroupRows({
               >
                 {/* A cell spanning the whole row has no room to stick, so the
                     label inside it is what stays put on a sideways scroll. */}
-                <span className="sticky left-4 inline-block">{row.label}</span>
+                <span className="sticky left-4 inline-block">{tankParamName(row.key ?? tankHeadingKey(row.label), row.label, tParams)}</span>
               </th>
             </tr>
           );
@@ -258,7 +272,7 @@ function SpecGroupRows({
                 row.sub && "pl-7 text-fd-muted-foreground/75",
               )}
             >
-              {row.label}
+              {tankParamName(row.key ?? tankHeadingKey(row.label), row.label, tParams)}
             </td>
             {values.map((value, i) => {
               const isPinned = pinned === i;

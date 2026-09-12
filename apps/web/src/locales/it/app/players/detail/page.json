@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Carri armati di {name} ({region}), tutti i veicoli utilizzati",
+    "description": "Tutti i carri armati usati da {name} su {region}, con battaglie, percentuale di vittorie, danno medio e WN8 per veicolo."
+  },
+  "achievements": {
+    "title": "Onorificenze di {name} ({region}), {medals} medaglie ottenute",
+    "description": "Le {medals} medaglie di World of Tanks ottenute da {name} su {region}, da quelle di Kolobanov e Pool ai gradi onorari e alle medaglie epiche, più tutte quelle ancora da ottenere."
+  },
+  "tournaments": {
+    "title": "Tornei di {name} ({region})",
+    "description": "Tutti i tornei Wargaming a cui {name} ha partecipato su {region}: la squadra con cui ha giocato, il formato e fin dove è arrivata. Un resoconto che Wargaming pubblica solo dal punto di vista del torneo, mai da quello del giocatore."
+  },
+  "value": {
+    "title": "Valore dell’account di {name} ({region})",
+    "description": "Quanto vale l’account World of Tanks di {name} su {region}: crediti, oro ed esperienza investiti nel garage."
+  },
+  "mode": {
+    "title": "Statistiche di {name} in modalità {mode} ({region})",
+    "description": "Le statistiche di {name} su {region} in modalità {mode}: battaglie, percentuale di vittorie e valutazioni per questa modalità, accanto ai suoi valori di riferimento nelle battaglie casuali."
+  },
+  "overview": {
+    "title": "Statistiche World of Tanks di {name} ({region}), {battles} battaglie, {winrate}% WR",
+    "description": "Statistiche di {name} su {region}: {battles} battaglie, {winrate}% di vittorie, valutazione {rating}. Analisi carro per carro, WN8, WNX e cronologia completa delle affiliazioni ai clan."
+  },
+  "locked": {
+    "title": "Account World of Tanks di {name} bloccato ({region})",
+    "description": "L’account {name} ({region}) esiste, ma Wargaming lo ha bloccato, quindi le sue statistiche di World of Tanks non sono disponibili."
+  },
+  "empty": {
+    "title": "Statistiche di {name} su World of Tanks ({region})",
+    "description": "Statistiche World of Tanks di {name} ({region}): valutazioni WN8 e WNX, percentuale di vittorie, analisi carro per carro e cronologia completa delle affiliazioni ai clan."
+  }
+}

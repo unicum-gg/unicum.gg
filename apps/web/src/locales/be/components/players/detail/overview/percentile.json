@@ -1,0 +1,7 @@
+{
+  "win-rate": "Коэфіцыент перамог",
+  "versus": "{metric} супраць {region}",
+  "top": "Топ {percent}%",
+  "ahead-of": "Наперадзе за {percent}%",
+  "against": "Супраць {players} адсочваных уліковых запісаў рэгіёна {region} з не менш чым {battles} баямі."
+}

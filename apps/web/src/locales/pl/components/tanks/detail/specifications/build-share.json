@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Skopiowano link do konfiguracji",
+  "copy-build-link": "Kopiuj link do konfiguracji",
+  "could-not-copy-link": "Nie udało się skopiować linku",
+  "include-setup": "Dołącz ustawienia",
+  "share-build": "Udostępnij build",
+  "share-tank": "Udostępnij {tank}",
+  "share-text": "Zobacz konfigurację czołgu {tank} w serwisie {app}"
+}

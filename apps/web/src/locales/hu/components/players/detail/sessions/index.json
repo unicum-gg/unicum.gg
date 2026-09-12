@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Még nincs munkamenet. Akkor jelennek meg, ha ezt a fiókot kétszer mintavételeztük, és közben csaták zajlottak. Ez játék közben automatikusan megtörténik.",
+  "bar-height-is-battles-played": "Az oszlop magassága a lejátszott csaták számát mutatja, a színe pedig az adott {granularity} {metric} értékét, ugyanazokban a sávokban, amelyeket a webhely máshol is használ.",
+  "title": "{nickname} sessionjei",
+  "title-count": "{nickname} munkamenetei ({count})",
+  "granularity": {
+    "day": "nap",
+    "week": "hét",
+    "month": "hónap",
+    "daily": "Napi",
+    "weekly": "Heti",
+    "monthly": "Havi"
+  },
+  "week-of": "{date} hete"
+}

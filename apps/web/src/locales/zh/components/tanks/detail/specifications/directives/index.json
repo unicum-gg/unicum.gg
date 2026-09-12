@@ -1,0 +1,9 @@
+{
+  "boosts": "提升 {name}",
+  "directives": "指令",
+  "directive-name": "{name} 指令",
+  "grants-and-boosts": "即使未训练，也会赋予并提升乘员技能。",
+  "grants-only": "为本场战斗赋予乘员技能（没有列出的特性）。",
+  "enhances-mounted": "强化已安装的{name}。",
+  "mount-to-use": "安装{name}后才能使用此指令。"
+}

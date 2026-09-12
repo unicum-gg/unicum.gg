@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} kamper i den",
+  "damage": "{damage} skade",
+  "n-marks": "{count, plural, one {# merke} other {# merker}}",
+  "no-written-opinions-yet-if": "Ingen skrevne meninger ennå. Hvis du har kampene, blir din den første.",
+  "win-rate": "{toFixed} % seiersrate",
+  "written-on": "skrevet i {gameVersion}"
+}

@@ -1,0 +1,22 @@
+{
+  "search": "Zoeken in {count} termen",
+  "search-label": "Zoeken in het glossarium",
+  "all": "Allen",
+  "jump": "Naar letter springen",
+  "empty": "Geen term komt overeen met “{query}”.",
+  "categories": {
+    "vehicles": "Voertuigen",
+    "gunnery": "Schieten",
+    "armor": "Bepantsering",
+    "mobility": "Mobiliteit",
+    "vision": "Zicht",
+    "crew": "Bemanning",
+    "progression": "Progressie",
+    "economy": "Economie",
+    "ratings": "Beoordelingen",
+    "statistics": "Statistieken",
+    "modes": "Gevechtsmodi",
+    "tactics": "Tactieken",
+    "slang": "Jargon"
+  }
+}

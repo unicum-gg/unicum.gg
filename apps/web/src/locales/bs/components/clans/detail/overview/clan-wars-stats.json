@@ -1,0 +1,21 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Ukupno",
+    "day": "Posljednjih 24h",
+    "week": "Posljednjih 7d",
+    "month": "Posljednjih 30d"
+  },
+  "sections": {
+    "territory": "Teritorija",
+    "t10": "Nivo X",
+    "t8": "Nivo VIII",
+    "t6": "Nivo VI"
+  },
+  "rows": {
+    "provinces": "Provincije",
+    "elo": "ELO",
+    "battles": "Bitke",
+    "winrate": "Postotak pobjeda"
+  }
+}

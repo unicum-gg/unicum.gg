@@ -1,0 +1,8 @@
+{
+  "busiest": "Massima attività: {when} ({players})",
+  "not-enough-recorded-yet-to": "Non sono ancora stati raccolti dati sufficienti per mostrare il ritmo settimanale. La mappa si completa man mano che il campionamento copre ogni ora della settimana.",
+  "not-sampled-yet": "Dati non ancora rilevati",
+  "players-on-average": "{players} giocatori in media",
+  "quietest": ", minima attività: {when} ({players})",
+  "your-local-time": "La tua ora locale"
+}

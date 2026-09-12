@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Henüz veri yok. Klanlar yenilendikten sonra tekrar kontrol edin.",
+  "heading": "En iyi <accent>{tier}</accent> klanlar",
+  "blurb": "{region} liderlik tablosu, {format} içindeki takip edilen tüm klanlarda {sort} sıralamasına göre düzenlenmiştir (minimum {battles} savaş).",
+  "blurb-period": "{region} liderlik tablosu, {format} içindeki takip edilen tüm klanlarda {period} boyunca {sort} sıralamasına göre düzenlenmiştir (minimum {battles} savaş).",
+  "format-advances": "İlerlemeler (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "{count} en iyi {tier} klan ·"
+}

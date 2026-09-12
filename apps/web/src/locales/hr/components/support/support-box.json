@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Naplatua je otkazana.",
+  "claim-your-supporter-role-on-discord": "Preuzmi svoju ulogu podržavatelja na Discordu",
+  "could-not-add-the-discord-role-please-try-ag": "Mogao bi dodati ulogu na Discordu. Pokušaj ponovno.",
+  "could-not-open-the-billing-portal": "Mogao bi otvoriti portal za naplatu.",
+  "could-not-start-checkout-please-try-again": "Mogao bi pokrenuti naplatu. Pokušaj ponovno.",
+  "could-not-update-your-preference": "Mogao bi ažurirati svoju postavku.",
+  "log-in-with-wargaming": "Prijava putem Wargaminga",
+  "log-in-with-wargaming-to": "Prijavite se putem Wargaminga kako biste podržali {NAME}.",
+  "manage-subscription": "Upravljajte pretplatom",
+  "only-active-supporters-can-claim-the-discord": "Samo aktivni podržavatelji mogu preuzeti ulogu na Discordu.",
+  "or-choose-your-own-amount": "Ili odaberite vlastiti iznos",
+  "pay-what-you-want": "Platite koliko želite.",
+  "pick-an-amount": "Odaberite iznos ili unesite vlastiti, od €{min}/mjesec.",
+  "re-sync-discord-role": "Ponovno sinkroniziraj ulogu na Discordu",
+  "secured-by-stripe": "Zaštićeno putem Stripea. Otkažite bilo kada.",
+  "show-me-anonymously-on-the": "Prikaži me anonimno na podiju",
+  "support-subscriptions-are-coming-soon": "Pretplate potpore uskoro stižu.",
+  "supporter-role-added-on-discord": "Uloga podržavatelja dodana je na Discordu!",
+  "you-are-a-supporter-thank": "Podržavatelj ste. Hvala što održavate {NAME} aktivnim."
+}

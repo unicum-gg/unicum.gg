@@ -1,0 +1,8 @@
+{
+  "description": "Kaikki Wargamingin turnaukset alueella {region}: päivittäiset kultatulostaulukot, klaanimestaruuskilpailut, osallistujat ja voittajat. Täydelliset kaaviot, tulokset ja kokoonpanot.",
+  "live-many": "{count} turnausta avoinna tai pelattavana alueella {region} juuri nyt,",
+  "live-one": "{count} turnaus avoinna tai pelattavana alueella {region} juuri nyt,",
+  "no-live": "Turnauksia järjestetään alueella {region} joka päivä,",
+  "title": "World of Tanks -{tournaments}",
+  "what-you-find": "1v1-liigoista, joissa pelataan kullasta, klaanimestaruuskilpailuihin, joissa pelataan rahasta. Täydelliset kaaviot ja tulokset, jokainen joukkue kokoonpanoineen sekä kummalla puolella se aloitti, kartta kartalta."
+}

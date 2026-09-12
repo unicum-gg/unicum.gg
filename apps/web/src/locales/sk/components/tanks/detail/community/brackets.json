@@ -1,0 +1,8 @@
+{
+  "battles": "{count} bitky",
+  "no-votes": "žiadne hlasy",
+  "rated-higher": "Silnejší hráči mu dávajú o {stars} ★ vyššie hodnotenie než zvyšok servera. Tento tank odmeňuje hráčov, ktorí vedia, čo robia.",
+  "rated-lower": "Silnejší hráči mu dávajú o {stars} ★ nižšie hodnotenie než zvyšok servera. Budí dobrý dojem, kým od neho nechcete, aby niečo dokázal.",
+  "votes": "{count} hlasy",
+  "votes-one": "{count} hlas"
+}

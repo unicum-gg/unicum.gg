@@ -1,0 +1,12 @@
+{
+  "aria-build": "Ortak Test istemcisinde okuma, derleme {version}",
+  "aria-changes": "Ortak Test tarafından değiştirilen {changes} özellik",
+  "aria-described": "Ortak Test: {description}",
+  "aria-vehicle": "Ortak Test aracı",
+  "common-test": "Ortak Test",
+  "common-test-build": "Ortak Test {version}",
+  "tip-build": "{label} · bunlar test derlemesinin değerleridir ve Wargaming güncelleme yayınlanmadan önce bunları değiştirebilir",
+  "tip-changes": "Bu araçtaki Ortak Test değişiklikleri: {changes, plural, one {# özellik} other {# özellikler}}",
+  "tip-described": "Ortak Test · {description}",
+  "tip-vehicle": "Ortak Test · henüz yayınlanmadı, bu nedenle savaş istatistikleri yok ve özellikleri hâlâ değişebilir"
+}

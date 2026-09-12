@@ -52,7 +52,11 @@ export const CINEMATIC_LABEL: Record<Cinematic, string> = {
   [Cinematic.On]: "Cinematic camera: always",
 };
 
-/** And what that position does, in the tooltip the mark cannot say itself. */
+/** And what that position does, in the tooltip the mark cannot say itself.
+ *
+ * The English source and the key side: the control reads
+ * `cinematic-tooltips.<position>` so the sentence reaches a reader in their own
+ * language, and this stays the one place it is written. */
 export const CINEMATIC_TOOLTIP: Record<Cinematic, string> = {
   [Cinematic.Off]: "Cinematic camera: off, the view stays put",
   [Cinematic.Auto]: "Cinematic camera: starts after 30 seconds alone",

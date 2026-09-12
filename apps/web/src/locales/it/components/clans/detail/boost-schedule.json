@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Seleziona una riserva per visualizzare l’anteprima del programma.",
+  "schedule": "Nei tuoi giorni attivi, si attiva agli orari {times} (ogni attivazione dura {hours} h), coprendo {window} una volta raggiunta la soglia minima di giocatori online."
+}

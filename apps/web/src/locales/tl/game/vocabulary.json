@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Random",
+    "battle_royale": "Steel Hunter",
+    "frontline": "Frontline",
+    "onslaught": "Sugod",
+    "onslaught_night": "{onslaught} sa Gabi",
+    "grand_battle": "Malawakang Laban",
+    "clan_wars": "Digmaan ng Clans",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arcade",
+    "story_mode": "Mode ng Kuwento",
+    "training": "Pagsasanay"
+  },
+  "player-modes": {
+    "overall": "Randong Labanan",
+    "skirmish": "Skirmish",
+    "advances": "Advances",
+    "grand": "Mga Malawakang Laban",
+    "ranked": "Mga Laban na may Ranggo",
+    "cw-x": "Clan Wars X",
+    "cw-viii": "Clan Wars VIII",
+    "cw-vi": "Clan Wars VI",
+    "steel-hunter": "Steel Hunter",
+    "onslaught": "Sugod"
+  },
+  "stronghold-tiers": {
+    "advances": "Advances",
+    "t10": "Skirmish T10",
+    "t8": "Skirmish T8",
+    "t6": "Skirmish T6"
+  },
+  "stronghold-periods": {
+    "24h": "Nakaraang 24 na oras",
+    "7d": "Nakaraang 7 araw",
+    "30d": "Nakaraang 30 araw",
+    "overall": "Pangkalahatan"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Mga labanan",
+    "winrate": "Win rate"
+  },
+  "clan-boards": {
+    "advances": "Advances",
+    "t10": "Skirmish X",
+    "t8": "Skirmish VIII",
+    "t6": "Skirmish VI"
+  },
+  "map-modes": {
+    "standard": "Pamantayan",
+    "encounter": "Engkuwentro",
+    "assault": "Pagsalakay",
+    "attack-defense": "Pag-atake/Depensa"
+  },
+  "map-camouflage": {
+    "summer": "Tag-init",
+    "winter": "Taglamig",
+    "desert": "Disyerto"
+  },
+  "map-poi": {
+    "1": "Punong-tanggapan ng Artilerya",
+    "2": "Sentro ng Komunikasyon",
+    "3": "Puwesto ng Obserbasyon"
+  },
+  "tournament-modes": {
+    "ctf": "Pamantayan",
+    "domination": "Engkuwentro",
+    "assault2": "Pag-atake/Depensa",
+    "comp7": "Sugod"
+  },
+  "battle-formats": {
+    "random": "Random",
+    "clan_wars": "Digmaan ng Clans",
+    "advances": "Advances",
+    "skirmish": "Skirmish",
+    "maneuvers": "Mga Maneuver",
+    "onslaught": "Sugod",
+    "tournament": "Torneo"
+  },
+  "battle-results": {
+    "victory": "Tagumpay",
+    "defeat": "Pagkatalo",
+    "draw": "Tabla"
+  },
+  "spawn-directions": {
+    "north": "Hilaga",
+    "south": "Timog",
+    "east": "Silangan",
+    "west": "Kanluran"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Darating",
+    "registration_started": "Nagsimula ang pagpaparehistro",
+    "registration_finished": "Sarado ang pagpaparehistro",
+    "running": "Nasa proseso",
+    "finished": "Nagwawakas",
+    "complete": "Kumpleto"
+  },
+  "onslaught-tiers": {
+    "legend": "Alamat",
+    "champion": "Kampeon",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Mabigat",
+    "mediumTank": "Katamtaman",
+    "lightTank": "Magaan",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Pangsugod",
+    "break": "Panlusob",
+    "support": "Suporta",
+    "universal": "Maraming Gamit",
+    "sniper": "Sniper",
+    "wheeled": "De-gulong"
+  },
+  "mastery-badges": {
+    "class3": "3rd Class",
+    "class2": "2nd Class",
+    "class1": "1st Class",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Randong Labanan",
+    "stronghold": "Stronghold",
+    "skirmish": "Skirmish",
+    "clan-wars": "Digmaan ng Clans"
+  },
+  "features": {
+    "stronghold": "Stronghold",
+    "skirmish": "Skirmish",
+    "marks-of-excellence": "Mga marka ng kahusayan",
+    "marks-of-mastery": "Mga marka ng kasanayan",
+    "personal-rating": "Personal na Ranggo",
+    "world-of-tanks-rating": "Rating ng World of Tanks",
+    "common-test": "Karaniwang Pagsubok",
+    "tournaments": "Mga torneo"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Mga marka ng kahusayan"
+  }
+}

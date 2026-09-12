@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 
@@ -30,6 +31,7 @@ export function StreamChat({
   parent: string;
   open: boolean;
 }) {
+  const { t } = useTranslation("components/home/stream-chat");
   const { resolvedTheme } = useTheme();
   const url = `https://www.twitch.tv/embed/${encodeURIComponent(login)}/chat?parent=${parent}${resolvedTheme === "dark" ? "&darkpopout" : ""}`;
   // One piece of state covers both rules: `null` until the first open (nothing
@@ -47,7 +49,7 @@ export function StreamChat({
   // background).
   return (
     <div className="h-96 w-full pb-0.5 lg:h-full">
-      <iframe src={shownUrl} title={`${nickname} Twitch chat`} className="size-full" />
+      <iframe src={shownUrl} title={t("twitch-chat", { nickname })} className="size-full" />
     </div>
   );
 }

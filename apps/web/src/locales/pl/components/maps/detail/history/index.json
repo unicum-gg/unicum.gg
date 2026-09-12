@@ -1,0 +1,12 @@
+{
+  "added": "Dodano",
+  "before-update": "Przed Odśwież {version}",
+  "common-test": "Test ogólny",
+  "every-update-that-changed-this": "Każde Odśwież, które zmieniło tę mapę, od najnowszego, odczytane bezpośrednio z klienta gry.",
+  "in-the-game": "W grze",
+  "n-changes": "{count, plural, one {# zmiana} few {# zmiany} many {# zmian} other {# zmian}}",
+  "not-released-wargaming-can-still": "Nie wydano. Wargaming może jeszcze zmienić lub usunąć dowolny z tych elementów, zanim Odśwież zostanie udostępnione.",
+  "removed": "Usunięto",
+  "title": "Zmiany na mapie {map}",
+  "update": "Odśwież {version}"
+}

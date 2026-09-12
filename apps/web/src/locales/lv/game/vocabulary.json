@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Nejauša",
+    "battle_royale": "Tērauda Mednieks",
+    "frontline": "Frontes līnija",
+    "onslaught": "Uzbrukums",
+    "onslaught_night": "{onslaught} Nakts",
+    "grand_battle": "Galvenā kauja",
+    "clan_wars": "Klanu kari",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arkāde",
+    "story_mode": "Stāsta režīms",
+    "training": "Apmācība"
+  },
+  "player-modes": {
+    "overall": "Nejaušas kaujas",
+    "skirmish": "Sadursme",
+    "advances": "Uzbrukumi",
+    "grand": "Lielās kaujas",
+    "ranked": "Ranga kaujas",
+    "cw-x": "Klanu kari X",
+    "cw-viii": "Klanu kari VIII",
+    "cw-vi": "Klanu kari VI",
+    "steel-hunter": "Tērauda Mednieks",
+    "onslaught": "Uzbrukums"
+  },
+  "stronghold-tiers": {
+    "advances": "Uzbrukumi",
+    "t10": "Sadursme T10",
+    "t8": "Sadursme T8",
+    "t6": "Sadursme T6"
+  },
+  "stronghold-periods": {
+    "24h": "Pēdējās 24 stundas",
+    "7d": "Pēdējās 7 dienas",
+    "30d": "Pēdējās 30 dienas",
+    "overall": "Kopējā"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Kaujas",
+    "winrate": "Uzvaru procents"
+  },
+  "clan-boards": {
+    "advances": "Uzbrukumi",
+    "t10": "Sadursme X",
+    "t8": "Sadursme VIII",
+    "t6": "Sadursme VI"
+  },
+  "map-modes": {
+    "standard": "Standarts",
+    "encounter": "Sadursmes kauja",
+    "assault": "Uzbrucējs",
+    "attack-defense": "Uzbrukums/Aizsardzība"
+  },
+  "map-camouflage": {
+    "summer": "Vasaras",
+    "winter": "Ziemas",
+    "desert": "Tuksneša"
+  },
+  "map-poi": {
+    "1": "Artilērijas štābs",
+    "2": "Sakaru centrs",
+    "3": "Novērošanas postenis"
+  },
+  "tournament-modes": {
+    "ctf": "Standarts",
+    "domination": "Sastapšanās",
+    "assault2": "Uzbrukums/aizsardzība",
+    "comp7": "Uzbrukums"
+  },
+  "battle-formats": {
+    "random": "Nejauša",
+    "clan_wars": "Klanu kari",
+    "advances": "Uzbrukumi",
+    "skirmish": "Sadursme",
+    "maneuvers": "Manevri",
+    "onslaught": "Uzbrukums",
+    "tournament": "Turnīrs"
+  },
+  "battle-results": {
+    "victory": "Uzvara",
+    "defeat": "Zaudējums",
+    "draw": "Neizšķirts"
+  },
+  "spawn-directions": {
+    "north": "Ziemeļi",
+    "south": "Dienvidi",
+    "east": "Austrumi",
+    "west": "Rietumi"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Nācējie",
+    "registration_started": "Reģistrācija ir atvērta",
+    "registration_finished": "Reģistrācija slēgta",
+    "running": "Norisinās",
+    "finished": "Pabeigts",
+    "complete": "Izpildīta"
+  },
+  "onslaught-tiers": {
+    "legend": "Leģenda",
+    "champion": "Čempions",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Smagais",
+    "mediumTank": "Vidējā",
+    "lightTank": "Viegls",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Uzbrucējs",
+    "break": "Izlauzējs",
+    "support": "Atbalstītājs",
+    "universal": "Universālis",
+    "sniper": "Snaiperis",
+    "wheeled": "Riteņu"
+  },
+  "mastery-badges": {
+    "class3": "3. klase",
+    "class2": "2. klase",
+    "class1": "1. klase",
+    "ace": "Ace Tankers"
+  },
+  "clan-modes": {
+    "random": "Nejaušas kaujas",
+    "stronghold": "Stronghold",
+    "skirmish": "Sadursme",
+    "clan-wars": "Klanu kari"
+  },
+  "features": {
+    "stronghold": "Stronghold",
+    "skirmish": "Sadursme",
+    "marks-of-excellence": "Izcilības zīmes",
+    "marks-of-mastery": "Meistarības atzīmes",
+    "personal-rating": "Personīgais reitings",
+    "world-of-tanks-rating": "World of Tanks reitings",
+    "common-test": "Kopējais tests",
+    "tournaments": "Turnīri"
+  },
+  "marks": {
+    "1": "1 Marka",
+    "2": "2 Markas",
+    "3": "3 Markas",
+    "name": "Izcilības zīmes"
+  }
+}

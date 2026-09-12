@@ -1,0 +1,22 @@
+{
+  "stat": "Στατιστικό",
+  "periods": {
+    "total": "Σύνολο",
+    "day": "Τελευταίες 24 ώρες",
+    "week": "Τελευταίες 7 ημέρες",
+    "month": "Τελευταίες 30 ημέρες"
+  },
+  "sections": {
+    "elo": "ELO βαθμίδας X ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} βαθμίδας X (7v7)",
+    "t8": "{skirmish} βαθμίδας VIII (7v7)",
+    "t6": "{skirmish} βαθμίδας VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Μάχες",
+    "winrate": "Ποσοστό νικών"
+  }
+}

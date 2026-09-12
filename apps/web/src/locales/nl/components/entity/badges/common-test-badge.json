@@ -1,0 +1,12 @@
+{
+  "aria-build": "Lees op de Algemene Test-client, build {version}",
+  "aria-changes": "Gewijzigd door de Algemene Test: {changes} kenmerken",
+  "aria-described": "Algemene Test: {description}",
+  "aria-vehicle": "Voertuig van de Algemene Test",
+  "common-test": "Algemene Test",
+  "common-test-build": "Algemene Test {version}",
+  "tip-build": "{label} · dit zijn de waarden van de testbuild, en Wargaming kan ze nog wijzigen voordat de update uitkomt",
+  "tip-changes": "Wijzigingen van de Algemene Test aan dit voertuig {changes, plural, one {# kenmerk} other {# kenmerken}}",
+  "tip-described": "Algemene Test · {description}",
+  "tip-vehicle": "Algemene Test · nog niet uitgebracht, dus het heeft geen gevechtsstatistieken en de kenmerken kunnen nog wijzigen"
+}

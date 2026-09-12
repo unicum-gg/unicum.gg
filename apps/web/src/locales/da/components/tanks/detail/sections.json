@@ -1,0 +1,14 @@
+{
+  "ammunition": "Ammunition",
+  "characteristics": "Karakteristika for kampvognen {tank}",
+  "consumables": "Forbrugsvarer",
+  "crew-level": "Mandskabsniveau",
+  "crew-skills": "Besætningsfærdigheder",
+  "equipment": "Udstyr",
+  "field-mods": "Feltmodifikationer",
+  "historical-reference": "Historisk reference for kampvognen {tank}",
+  "modules": "Moduler til kampvognen {tank}",
+  "research-path": "Gren på teknologitræet for kampvognen {tank}",
+  "similar": "Tanks tæt på {tank}",
+  "videos": "Videoer om kampvognen {tank}"
+}

@@ -1,0 +1,11 @@
+{
+  "already-running": "is al aan het draaien",
+  "in-window": "in venster",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Geen reserves geselecteerd.",
+  "no-stock-ready": "geen Stock Gereed",
+  "not-available": "niet beschikbaar",
+  "threshold": "drempel ({online}/{min})",
+  "would-activate": "zou activeren",
+  "would-not-fire": "Op dit moment zou het niet afgaan."
+}

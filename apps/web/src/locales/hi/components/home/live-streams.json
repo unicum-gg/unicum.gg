@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "चैट दिखाएँ",
+    "hide": "चैट छिपाएँ",
+    "show-streamers": "स्ट्रीमर्स दिखाएँ"
+  },
+  "heading": "World of Tanks के खिलाड़ी, क्लान और टैंक के आँकड़े: {name}",
+  "hide": "स्ट्रीमर्स छिपाएँ",
+  "player": "खिलाड़ी",
+  "stream-language": "स्ट्रीम भाषा · {name}",
+  "stream-language-alt": "स्ट्रीम भाषा: {name}",
+  "theater": {
+    "enter": "थियेटर मोड",
+    "exit": "थिएटर मोड से बाहर निकलें"
+  },
+  "title": "अभी स्ट्रीम कर रहे सर्वश्रेष्ठ खिलाड़ी ·",
+  "viewer-count": "{count} दर्शक",
+  "viewers": "दर्शक",
+  "watch": "Twitch पर {nickname} को देखें"
+}

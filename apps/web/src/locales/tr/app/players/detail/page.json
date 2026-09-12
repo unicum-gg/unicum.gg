@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name} tankları ({region}), oynanan her araç",
+    "description": "{name} tarafından {region} bölgesinde oynanan her tank, araç başına savaşlar, galibiyet oranı, ortalama hasar ve WN8 ile birlikte."
+  },
+  "achievements": {
+    "title": "{name} başarıları ({region}), kazanılan {medals} madalya",
+    "description": "{name} tarafından {region} bölgesinde kazanılan {medals} World of Tanks madalyası: Kolobanov ve Pool madalyalarından onur rütbelerine ve destansı madalyalara kadar, ayrıca hâlâ kazanılmayı bekleyen her biri."
+  },
+  "tournaments": {
+    "title": "{name} turnuvaları ({region})",
+    "description": "{name} tarafından {region} bölgesinde katılınan her Wargaming turnuvası: oynadığı takım, biçim ve ne kadar ilerlediği. Wargaming’in turnuvanın tarafından yayınladığı, oyuncunun tarafından asla yayınlamadığı bir kayıt."
+  },
+  "value": {
+    "title": "{name} hesap değeri ({region})",
+    "description": "{name} adlı oyuncunun {region} bölgesindeki World of Tanks hesabının değeri: garajda bağlı bulunan kredi, altın ve deneyim."
+  },
+  "mode": {
+    "title": "{name} {mode} istatistikleri ({region})",
+    "description": "{name}, {region} bölgesinde {mode} modunda: bu mod için savaşlar, galibiyet oranı ve puanlar, rastgele savaşlar temel değerinin yanında."
+  },
+  "overview": {
+    "title": "{name} World of Tanks istatistikleri ({region}), {battles} savaş, %{winrate} GO",
+    "description": "{name}, {region}: {battles} savaş, %{winrate} galibiyet oranı, {rating} puan. Tank tank ayrıntıları, WN8, WNX ve tam klan geçmişi."
+  },
+  "locked": {
+    "title": "{name} World of Tanks hesabı kilitli ({region})",
+    "description": "{name} ({region}) mevcut, ancak Wargaming bu hesabı kilitlediği için World of Tanks istatistikleri kullanılamıyor."
+  },
+  "empty": {
+    "title": "{name} World of Tanks oyuncu istatistikleri ({region})",
+    "description": "{name} ({region}) World of Tanks oyuncu istatistikleri: WN8, WNX puanları, galibiyet oranı, tank tank ayrıntıları ve tam klan geçmişi."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "label": "Finansieret af fællesskabet",
+  "funded": "{pct}% finansieret",
+  "tooltip": "{received} af {goal} dækket af bidragydere siden lanceringen",
+  "tooltip-loading": "Finansieret af fællesskabet, reklamefri"
+}

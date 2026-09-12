@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Pregled",
+    "tanks": "Tenki",
+    "videos": "Video",
+    "tournaments": "Turniri",
+    "manage": "Upravljanje"
+  },
+  "section-count": "{section} ({count})"
+}

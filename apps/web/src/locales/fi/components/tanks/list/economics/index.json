@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "Rivit per sivu",
+  "free-xp-from": "Vapaata XP:tä lähteestä",
+  "xp-1-gold": "XP = 1 kultaa",
+  "previous-page": "Edellinen sivu",
+  "page": "Sivu {current} / {totalPages}",
+  "next-page": "Seuraava sivu",
+  "all": "Kaikki"
+}

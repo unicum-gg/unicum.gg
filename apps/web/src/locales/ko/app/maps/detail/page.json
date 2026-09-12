@@ -1,0 +1,5 @@
+{
+  "title": "{map}, World of Tanks 지도 ({region})",
+  "description": "{map}: {width} × {height}m 크기의 World of Tanks 지도입니다.",
+  "description-modes": "{map}: {width} × {height}m 크기이며 {modes} 모드를 플레이할 수 있는 World of Tanks 지도입니다."
+}

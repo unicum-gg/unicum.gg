@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname}, Hücum liderlik tablosunda hiç yer almadı.",
+  "live-season": "· canlı sezon",
+  "loading-s-onslaught-record": "{nickname} adlı oyuncunun Hücum kaydı yükleniyor...",
+  "onslaught": "Hücum",
+  "onslaught-record": "{nickname} adlı oyuncunun Hücum kaydı",
+  "see-this-season-s-leaderboard": "Bu sezonun liderlik tablosunu gör",
+  "standing-line": "{rating} puan · {battles} savaş",
+  "the-board-only-lists-players": "Tablo yalnızca Şampiyon’a ulaşan, bölge başına birkaç bin oyuncuyu listeler, bu yüzden profillerin neredeyse tamamı burada yer alır. Oyuncu oraya ulaştığı sezonda tablo kendiliğinden dolar.",
+  "updated": "Güncellendi {when}"
+}

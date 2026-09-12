@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Среднее по {rated} из {size} игроков",
+  "average-over-recent": "Среднее по {rated} из {size} игроков, игравших за последние 30 дней",
+  "avg-winrate": "Средняя побед率",
+  "finished": "Завершён",
+  "record": "Рекорд",
+  "won": "Победил"
+}

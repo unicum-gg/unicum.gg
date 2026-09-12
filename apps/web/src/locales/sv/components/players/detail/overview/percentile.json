@@ -1,0 +1,7 @@
+{
+  "win-rate": "Vinnande hastighet",
+  "versus": "{metric} jämfört med {region}",
+  "top": "Topp {percent}%",
+  "ahead-of": "Bättre än {percent} %",
+  "against": "Jämfört med {players} spårade konton i regionen {region} med minst {battles} strider."
+}

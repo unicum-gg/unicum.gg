@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Billed in euros, converted to {currency} at today’s rate.",
+  "cost-breakdown": "Cost breakdown",
+  "estimated-annual-cost": "Estimated annual cost",
+  "fixed-month-bill-no-surprises": "A fixed {totalAnnualEur}/month bill, no surprises: one rented server, no third-party SaaS in the data path. It only grows when we outgrow the server (more Wargaming throughput means more egress IPs).",
+  "free": "free",
+  "one-off-spend": "One-off spend",
+  "paid-once-so-it-is": "Paid once, so it is not part of the monthly bill above. It still counts toward what the project has cost so far.",
+  "previously": "Previously"
+}

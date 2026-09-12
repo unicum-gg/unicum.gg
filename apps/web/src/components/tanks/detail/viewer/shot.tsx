@@ -1,5 +1,8 @@
 "use client";
 
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { SHELL_LABEL, iconUrl } from "@unicum.gg/shared";
@@ -70,18 +73,21 @@ export function ShotPicker({
   /** The kinds this gun actually carries, which is not every kind offered. */
   carried: string[];
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t } = useTranslation("components/tanks/detail/viewer/shot");
   const on = shells[round];
   // **What the button says is the shot, not the round.** A reader who typed
   // their own penetration is asking about a shell nobody has, and the mark
   // would otherwise still be showing them the one they started from.
-  const short = SHELL_LABEL[kind as keyof typeof SHELL_LABEL] ?? kind;
+  const short = tGame(`shells.${kind as keyof typeof SHELL_LABEL}`) ?? kind;
   const edited = pen !== String(on?.shot.penetration ?? "");
   return (
     <Popover>
         <PopoverTrigger asChild>
           <button
             type="button"
-            aria-label={`Firing ${short}, ${pen} mm. Change the shot`}
+            aria-label={t("firing", { shell: short, pen })}
             className="flex items-center gap-2 rounded-md py-1 pl-1.5 pr-1 transition-colors hover:bg-fd-secondary/60"
           >
             {on ? (
@@ -159,8 +165,7 @@ export function ShotPicker({
           */}
           <div className="p-2">
             <p className="px-1 pb-1.5 text-[10px] font-semibold uppercase tracking-wide text-fd-muted-foreground">
-              Treat it as
-            </p>
+              {t("treat-it-as")}</p>
             <div className="flex flex-wrap items-center gap-0.5">
               {Object.entries(SHELL_LABEL).map(([raw, mark]) => {
                 // **A kind this vehicle carries is a different offer.** Picking
@@ -177,7 +182,7 @@ export function ShotPicker({
                         type="button"
                         onClick={() => onKind(raw)}
                         aria-pressed={kind === raw}
-                        aria-label={`Treat it as ${mark}`}
+                        aria-label={t("treat-it-as-mark", { mark })}
                         className={`rounded px-1.5 py-1 text-[11px] font-semibold tracking-wide transition-colors ${
                           kind === raw
                             ? "bg-brand/20 text-brand"
@@ -191,8 +196,8 @@ export function ShotPicker({
                     </TooltipTrigger>
                     <TooltipContent side="top">
                       {real
-                        ? `${mark}: this gun's own round, figures and all`
-                        : `${mark}: this gun has none, so set the angles yourself`}
+                        ? t("own-round", { mark })
+                        : t("no-such-round", { mark })}
                     </TooltipContent>
                   </Tooltip>
                 );
@@ -233,7 +238,7 @@ export function ShotPicker({
               ).map((figure) => (
                 <label key={figure.key} className="flex flex-col gap-1">
                   <span className="px-1 text-[10px] uppercase tracking-wide text-fd-muted-foreground">
-                    {figure.label}
+                    {statLabel(figure.label, tStats)}
                   </span>
                   <span className="relative">
                     <input

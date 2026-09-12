@@ -1,0 +1,21 @@
+{
+  "title": "평가 척도",
+  "description": "사이트 전반에서 승률과 내비게이션 바에서 선택한 평점 지표에 사용하는 색상 기준입니다.",
+  "tier": "단계",
+  "tiers": {
+    "top": "상위",
+    "excellent": "우수",
+    "super": "슈퍼",
+    "very-good": "매우 좋음",
+    "good": "좋은",
+    "average": "평균",
+    "below-avg": "평균 이하",
+    "bad": "나쁜",
+    "very-bad": "매우 나쁨"
+  },
+  "rating-colors": "등급 색상",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

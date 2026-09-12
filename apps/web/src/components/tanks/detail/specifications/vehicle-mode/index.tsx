@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { VehicleModeKind, type VehicleMode } from "@unicum.gg/shared";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -26,30 +27,36 @@ function ModeTooltip({
   mode: VehicleMode;
   mechanic: string | null;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/vehicle-mode/index");
+  const { t: tEffects } = useTranslation(
+    "components/tanks/detail/specifications/field-mods/index",
+  );
   return (
     <div className="w-56 space-y-2 text-xs">
-      <div className="font-medium">{modeLabel(mechanic, mode.kind)} mode</div>
+      <div className="font-medium">
+        {t("mode-heading", { mode: modeLabel(mechanic, mode.kind) })}
+      </div>
       <div className="space-y-0.5 border-t border-background/20 pt-1.5 tabular-nums">
         {mode.factors.map((e, i) => (
           <div key={i} className="flex justify-between gap-3">
-            <span className="text-background/60">{effectLabel(e.attribute)}</span>
+            <span className="text-background/60">{effectLabel(e.attribute, tEffects)}</span>
             <span>{fmtEffect(e.type, e.value, e.attribute)}</span>
           </div>
         ))}
         {mode.depression !== null ? (
           <div className="flex justify-between gap-3">
-            <span className="text-background/60">Gun depression</span>
+            <span className="text-background/60">{t("gun-depression")}</span>
             <span>{mode.depression}&deg;</span>
           </div>
         ) : null}
         {mode.elevation !== null ? (
           <div className="flex justify-between gap-3">
-            <span className="text-background/60">Gun elevation</span>
+            <span className="text-background/60">{t("gun-elevation")}</span>
             <span>{mode.elevation}&deg;</span>
           </div>
         ) : null}
         <div className="flex justify-between gap-3">
-          <span className="text-background/60">Switch on / off</span>
+          <span className="text-background/60">{t("switch-on-off")}</span>
           <span>
             {mode.switchOnTime}s / {mode.switchOffTime}s
           </span>

@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffattuja",
+  "n-tanks": "{count, plural, one {# panssarivaunu} other {# panssarivaunut}}",
+  "nerfed": "{count} nerfatut",
+  "no-tank-changes-have-been": "Panssarivaunujen muutoksia ei ole vielä kirjattu. Kun Wargaming tasapainottaa panssarivaunuja, kunkin päivityksen parannukset ja heikennykset näkyvät täällä.",
+  "update": "Päivitä {version}"
+}

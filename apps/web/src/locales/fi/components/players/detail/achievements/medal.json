@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, ansaittu {count}×",
+  "aria-not-earned": "{name}, ei ansaittu",
+  "no-longer-obtainable": "Ei enää saatavilla.",
+  "not-earned": "Ei ansaittu"
+}

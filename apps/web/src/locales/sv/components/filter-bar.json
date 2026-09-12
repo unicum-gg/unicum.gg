@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Hitta bland {count} Tanken",
+    "rated-tanks": "Hitta bland {count} rankade Tanken",
+    "videos": "Hitta bland {count} Videor",
+    "players": "Sök spelare bland totalt {count}",
+    "clans": "Hitta bland {count} Klaner",
+    "tournaments": "Hitta bland {count} Turneringar",
+    "teams": "Hitta bland {count} Lag"
+  },
+  "min": "Min",
+  "max": "Max",
+  "none": "Inga",
+  "common-test": "Ändring genom Vanlig Test: nya och ombalanserade fordon",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belöning"
+  },
+  "moe": {
+    "0": "Inget märke ännu",
+    "1": "1 märke",
+    "2": "2 märk",
+    "3": "3 märk"
+  },
+  "mom": {
+    "0": "Ingen utmärkelse ännu",
+    "1": "3:e klass",
+    "2": "2:a klass",
+    "3": "1:a klass",
+    "4": "Ace Tanker"
+  }
+}

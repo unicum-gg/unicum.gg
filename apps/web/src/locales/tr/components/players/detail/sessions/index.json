@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Henüz oturum yok. Bu hesap, arada savaşlar olacak şekilde iki kez örneklendiğinde görünürler. Bu, hesap oynandıkça kendiliğinden gerçekleşir.",
+  "bar-height-is-battles-played": "Çubuk yüksekliği oynanan savaş sayısını, rengi ise sitenin başka yerlerde de kullandığı aynı aralıklardaki {granularity} {metric} değerini gösterir.",
+  "title": "{nickname}’in oturumları",
+  "title-count": "{nickname} oturumları ({count})",
+  "granularity": {
+    "day": "gün",
+    "week": "hafta",
+    "month": "ay",
+    "daily": "Günlük",
+    "weekly": "Haftalık",
+    "monthly": "Aylık"
+  },
+  "week-of": "{date} haftası"
+}

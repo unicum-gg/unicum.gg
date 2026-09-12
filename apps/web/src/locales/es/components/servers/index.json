@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Cuántos jugadores hay ahora mismo en cada servidor de {label}, cómo varía esa cifra a lo largo del día y de la semana y cómo se compara la región con las demás.",
+  "recording-just-started": "El registro acaba de comenzar, así que los gráficos empiezan a completarse a partir de ahora.",
+  "series-starts": "La serie comienza el {at}, cuando se inició el registro, y no se puede recuperar ningún dato anterior.",
+  "server-population": "Población del servidor {label}",
+  "title": "World of Tanks: {population}",
+  "wargaming-names-a-region-s": "Wargaming da nombre a los primeros clústeres de una región y deja el resto como meros identificadores, por lo que 203 se muestra como EU3, siguiendo la numeración propia de la región. Registramos el identificador, que también muestra cada nombre al pasar el cursor por encima, y la etiqueta sigue esa numeración: numerar los clústeres según su nivel de actividad haría que un nombre pasara de un servidor a otro cada vez que dos intercambiaran posiciones. Si un servidor no aparece en una muestra, significa que no se notificó en absoluto, lo que no equivale a que estuviera vacío.",
+  "we-record-it": "Wargaming publica la población de cada servidor como un dato instantáneo y no conserva ningún historial, así que todos los datos anteriores al minuto actual proceden de nuestros propios registros, realizados cada cinco minutos.",
+  "where-battles-are-fought": "Dónde se libran las Batallas de {label}"
+}

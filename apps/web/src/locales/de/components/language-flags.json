@@ -1,0 +1,8 @@
+{
+  "cta-clans": "Klicken, um die besten Clans mit {language} als Sprache zu sehen.",
+  "cta-players": "Klicken, um die besten spieler mit {language} als Sprache zu sehen.",
+  "declared": "{language}. Vom Clan ausgewählt.",
+  "inferred": "{language}. Unsere Vermutung anhand des Clanverlaufs dieses Spielers. Je länger die Mitgliedschaft in einem Clan dauert, desto stärker werden dessen Sprachen gewichtet.",
+  "top-language-clans": "Beste {language}-Clans",
+  "top-language-players": "Beste {language}-spieler"
+}

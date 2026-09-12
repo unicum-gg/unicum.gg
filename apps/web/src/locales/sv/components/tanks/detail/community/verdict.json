@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Varje röst kommer från ett konto som har spelat med den här tanken.",
+  "every-vote-played-average": "Varje röst kommer från ett konto som har spelat med den här tanken, i genomsnitt {battles} strider med den.",
+  "fun": "Roligt",
+  "how-good-the-tank-is": "Hur bra tanken är",
+  "how-much-people-enjoy-it": "Hur mycket spelarna tycker om den",
+  "if-you-have-played-it": "Om du har spelat med den är det precis dig den här sidan väntar på.",
+  "nobody-has-rated-this-tank": "Ingen har betygsatt den här tanken än.",
+  "overall": "Övergripande",
+  "votes": "{count} röster",
+  "votes-one": "{count} röst"
+}

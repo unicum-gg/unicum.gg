@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { Swords } from "lucide-react";
 import type { Region } from "@unicum.gg/wargaming";
 import { Panel } from "@/components/panel";
@@ -80,6 +81,7 @@ function ClanVideos({
   region: Region;
   tag: string;
 }) {
+  const { t } = useTranslation("components/clans/detail/videos/index");
   const player = useTankVideoPlayer();
   const [view, setView] = useVideosView();
   // The provider merges in the reader's own queued rows for this clan, so the
@@ -106,7 +108,7 @@ function ClanVideos({
       <Panel>
         <VideoSection
           region={region}
-          title={`[${tag}] videos`}
+          title={t("clan-videos", { tag })}
           battles={all}
           view={view}
           onViewChange={setView}
@@ -126,18 +128,16 @@ function ClanVideos({
  * zero, so this is reachable by anyone reading the clan's page, and the way in
  * is the button in the section header above it. */
 function ClanVideosEmpty({ tag }: { tag: string }) {
+  const { t } = useTranslation("components/clans/detail/videos/index");
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <Swords />
         </EmptyMedia>
-        <EmptyTitle>No tactics yet</EmptyTitle>
+        <EmptyTitle>{t("no-tactics-yet")}</EmptyTitle>
         <EmptyDescription>
-          Nobody has credited [{tag}] on a tactic yet. Suggest one and pick the
-          map it was played on. It shows up here once a moderator has looked at
-          it.
-        </EmptyDescription>
+          {t("nobody-has-credited-on-a", { tag })}</EmptyDescription>
       </EmptyHeader>
     </Empty>
   );

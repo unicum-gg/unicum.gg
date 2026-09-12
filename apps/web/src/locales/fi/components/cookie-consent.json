@@ -1,0 +1,16 @@
+{
+  "title": "Käytämme evästeitä",
+  "description": "Käytämme evästeitä selauskokemuksen parantamiseen ja sivuston liikenteen analysointiin.",
+  "functional": {
+    "title": "Toiminnalliset",
+    "description": "Tarvitaan sivuston asianmukaiseen toimintaan (asetukset, alueen valinta)."
+  },
+  "analytics": {
+    "title": "Kävijämäärän mittaus",
+    "description": "Google Analytics asettaa evästeitä auttaakseen meitä ymmärtämään, miten sivustoa käytetään. Anonyymi, evästeetön analytiikka (Umami) toimii joka tapauksessa."
+  },
+  "save": "Tallenna valintani",
+  "decline": "Hylkää kaikki",
+  "customize": "Mukauta",
+  "accept": "Hyväksy kaikki"
+}

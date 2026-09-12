@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: az összesített sebzésed gördülő átlaga az utolsó körülbelül 100 csatában felülmúlja az ezen a tankon az elmúlt 14 napban játszott játékosok 65%-át"
+    },
+    "mark2": {
+      "label": "2 Mark",
+      "tip": "2 Mark: az összesített sebzésed gördülő átlaga az utolsó körülbelül 100 csatában felülmúlja az ezen a tankon az elmúlt 14 napban játszott játékosok 85%-át"
+    },
+    "mark3": {
+      "label": "3 Mark",
+      "tip": "3 Mark: az összesített sebzésed gördülő átlaga az utolsó körülbelül 100 csatában felülmúlja az ezen a tankon az elmúlt 14 napban játszott játékosok 95%-át"
+    }
+  },
+  "rows-per-page": "Sorok száma oldalanként",
+  "previous-page": "Előző oldal",
+  "page": "Oldal {current} / {totalPages}",
+  "next-page": "Következő oldal",
+  "all": "Mind"
+}

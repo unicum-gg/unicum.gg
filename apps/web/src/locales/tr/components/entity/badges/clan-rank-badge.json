@@ -1,0 +1,9 @@
+{
+  "aria-rank": "{board} sıralamasında {rank}. Kademe",
+  "board": {
+    "advances": "Tahkimat İlerlemeleri puanı",
+    "skirmish-t10": "Seviye X Çatışma puanı",
+    "skirmish-t6": "Seviye VI Çatışma puanı",
+    "skirmish-t8": "Seviye VIII Çatışma puanı"
+  }
+}

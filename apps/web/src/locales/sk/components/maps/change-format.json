@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Šírka hernej oblasti",
+    "height": "Výška hernej oblasti",
+    "round-length": "Časovač bitky",
+    "team-size": "Veľkosť tímu",
+    "camouflage": "Sezóna",
+    "presence": "V igri",
+    "variant-version": "Verzia {type}",
+    "play-area": "Hracia oblasť",
+    "bases-team1": "Spojenecké základne",
+    "bases-team2": "Nepriateľské základne",
+    "spawns-team1": "Spojenecké miesta nasadenia",
+    "spawns-team2": "Nepriateľské miesta nasadenia",
+    "control-point": "Kontrolna točka",
+    "artillery-headquarters": "Topniški štab",
+    "comms-centers": "Komunikačné centrá",
+    "observation-posts": "Pozorovacie stanovištia",
+    "points-of-interest": "Body záujmu"
+  },
+  "summary": {
+    "added": "{name}: dodano",
+    "removed": "{name}: odstranjeno",
+    "added-to-game": "Dodano do hry",
+    "removed-from-game": "Odstranjeno iz igre",
+    "added-on-test": "Dodano v test klientovi",
+    "removed-on-test": "Odstranjeno iz test klienta",
+    "mode-added": "Režim {name}: dodano",
+    "mode-removed": "Režim {name}: odstranjeno",
+    "now-played-in": "Odohrané v {name}",
+    "no-longer-played-in": "Už sa neodohráva v {name}",
+    "event-added": "{name}: dodano, teraz sa môže vyskytnúť uprostred bitky",
+    "event-removed": "{name}: odstranjeno, už sa nevyskytuje",
+    "moved": "{name}: presun",
+    "count-changed": "Počet {name}: {before} → {after}",
+    "value-changed": "Hodnota {name}: {before} → {after}",
+    "value-set": "Hodnota {name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

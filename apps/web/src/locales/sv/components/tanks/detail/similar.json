@@ -1,0 +1,11 @@
+{
+  "compare": "Jämför med de {count} mest liknande",
+  "match": "match",
+  "subtitle": "Samma placering bland fordon på den egna nivån",
+  "verdict": {
+    "overall": "Liknande övergripande",
+    "closest": "Mest lik vad gäller {axes}",
+    "closest-furthest": "Mest lik vad gäller {axes}, minst lik vad gäller {apart}",
+    "and": " och "
+  }
+}

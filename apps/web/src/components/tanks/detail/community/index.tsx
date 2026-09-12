@@ -1,3 +1,4 @@
+import { getTranslation } from "@/lib/translations.server";
 import type { TankRatingSummary } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import {
@@ -29,24 +30,26 @@ import { CommunityVerdict } from "./verdict";
  * page a reader can act on, and burying it under six panels of somebody else's
  * opinions is how a community feature ends up with no community.
  */
-export function CommunityTab({
+export async function CommunityTab({
   region,
   slug,
   tankName,
   tier,
-  summary,
+  summary, locale,
 }: {
   region: Region;
   slug: string;
   tankName: string;
   tier: number;
   summary: TankRatingSummary;
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/tanks/detail/community/index", locale);
   return (
     <>
       <Panel>
         <PanelHeader>
-          <PanelTitle>Rate the {tankName}</PanelTitle>
+          <PanelTitle>{t("rate-the", { tankName })}</PanelTitle>
         </PanelHeader>
         <PanelContent>
           <RatePanel region={region} slug={slug} tankName={tankName} />
@@ -57,13 +60,12 @@ export function CommunityTab({
 
       <Panel>
         <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <PanelTitle>Community verdict</PanelTitle>
+          <PanelTitle>{t("community-verdict")}</PanelTitle>
           <span className="text-xs text-fd-muted-foreground">
-            Every server, one average
-          </span>
+            {t("every-server-one-average")}</span>
         </PanelHeader>
         <PanelContent>
-          <CommunityVerdict summary={summary} />
+          <CommunityVerdict locale={locale} summary={summary} />
         </PanelContent>
       </Panel>
 
@@ -74,13 +76,12 @@ export function CommunityTab({
           <PanelSeparator />
           <Panel>
             <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-              <PanelTitle>Who is saying it</PanelTitle>
+              <PanelTitle>{t("who-is-saying-it")}</PanelTitle>
               <span className="text-xs text-fd-muted-foreground">
-                The same tank, by how well the voter plays
-              </span>
+                {t("the-same-tank-by-how")}</span>
             </PanelHeader>
             <PanelContent>
-              <BracketSplit brackets={summary.brackets} />
+              <BracketSplit brackets={summary.brackets} locale={locale} />
             </PanelContent>
           </Panel>
         </>
@@ -91,13 +92,12 @@ export function CommunityTab({
           <PanelSeparator />
           <Panel>
             <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-              <PanelTitle>Reputation against results</PanelTitle>
+              <PanelTitle>{t("reputation-against-results")}</PanelTitle>
               <span className="text-xs text-fd-muted-foreground">
-                Opinion next to win rate, within tier {tier}
-              </span>
+                {t("opinion-next-to-win-rate", { tier })}</span>
             </PanelHeader>
             <PanelContent>
-              <HypeGauge
+              <HypeGauge locale={locale}
                 hype={summary.hype}
                 perceived={summary.perceivedPercentile}
                 measured={summary.measuredPercentile}
@@ -113,10 +113,10 @@ export function CommunityTab({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>Axis by axis</PanelTitle>
+              <PanelTitle>{t("axis-by-axis")}</PanelTitle>
             </PanelHeader>
             <PanelContent>
-              <AxisRadar axes={summary.axes} axisVotes={summary.axisVotes} />
+              <AxisRadar locale={locale} axes={summary.axes} axisVotes={summary.axisVotes} />
             </PanelContent>
           </Panel>
         </>
@@ -127,13 +127,12 @@ export function CommunityTab({
           <PanelSeparator />
           <Panel>
             <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-              <PanelTitle>By server</PanelTitle>
+              <PanelTitle>{t("by-server")}</PanelTitle>
               <span className="text-xs text-fd-muted-foreground">
-                Same tank, different metas
-              </span>
+                {t("same-tank-different-metas")}</span>
             </PanelHeader>
             <PanelContent>
-              <RegionSplit regions={summary.regions} />
+              <RegionSplit regions={summary.regions}  locale={locale} />
             </PanelContent>
           </Panel>
         </>
@@ -142,23 +141,22 @@ export function CommunityTab({
       <PanelSeparator />
       <Panel>
         <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <PanelTitle>What players wrote</PanelTitle>
+          <PanelTitle>{t("what-players-wrote")}</PanelTitle>
           {summary.reviewCount > 0 ? (
             <span className="text-xs text-fd-muted-foreground">
               {/* The real total, not the length of the list below it. The list
                 is capped, so counting it would say "30 opinions" on a tank with
                 three hundred, and contradict the reviewCount this same page
                 publishes in its structured data. */}
-              {summary.reviewCount}{" "}
-              {summary.reviewCount === 1 ? "opinion" : "opinions"}
+              {t("opinion", { count: summary.reviewCount })}
               {summary.reviewCount > summary.reviews.length
-                ? `, ${summary.reviews.length} shown`
+                ? t("n-shown", { count: summary.reviews.length })
                 : null}
             </span>
           ) : null}
         </PanelHeader>
         <PanelContent>
-          <TankReviews reviews={summary.reviews} />
+          <TankReviews locale={locale} reviews={summary.reviews} />
         </PanelContent>
       </Panel>
     </>

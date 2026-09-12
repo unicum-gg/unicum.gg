@@ -1,0 +1,5 @@
+{
+  "title": "{map}, karta igre World of Tanks ({region})",
+  "description": "{map}: karta igre World of Tanks veličine {width} × {height} m.",
+  "description-modes": "{map}: karta igre World of Tanks veličine {width} × {height} m, s igranjem načina {modes}."
+}

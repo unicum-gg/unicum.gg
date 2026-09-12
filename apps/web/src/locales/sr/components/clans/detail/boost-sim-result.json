@@ -1,0 +1,11 @@
+{
+  "already-running": "već se izvršava",
+  "in-window": "u prozoru",
+  "n-online": "/ {count} на мрежи",
+  "no-reserves-selected": "Нису изабране резерве.",
+  "no-stock-ready": "нема спремних залиха",
+  "not-available": "nije dostupno",
+  "threshold": "prag ({online}/{min})",
+  "would-activate": "bi aktivirao",
+  "would-not-fire": "Тренутно се не би активирало."
+}

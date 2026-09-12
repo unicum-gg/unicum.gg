@@ -1,0 +1,9 @@
+{
+  "battle-time": "Timp de bătălie",
+  "camouflage": "Camuflaj {camouflage}",
+  "mode": "Mod",
+  "n-random-events": "{count, plural, one {# eveniment aleatoriu} few {# evenimente aleatorii} other {# de evenimente aleatorii}}",
+  "random-events": "Evenimente aleatorii",
+  "size": "Dimensiune",
+  "team-size": "Dimensiune echipă"
+}

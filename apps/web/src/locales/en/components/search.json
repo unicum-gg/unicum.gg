@@ -1,0 +1,27 @@
+{
+  "placeholder": "Search players, clans, tanks, maps or terms",
+  "type": "Search type",
+  "types": {
+    "all": "All",
+    "players": "Players",
+    "clans": "Clans",
+    "tanks": "Tanks",
+    "maps": "Maps",
+    "glossary": "Glossary"
+  },
+  "sections": {
+    "players": "Players",
+    "clans": "Clans",
+    "tanks": "Tanks",
+    "maps": "Maps",
+    "glossary": "Glossary",
+    "recent": "Recent",
+    "favorites": "Favorites"
+  },
+  "searching": "Searching…",
+  "errored": "Something went wrong. Try again.",
+  "empty": "No results found",
+  "remove-recent": "Remove from recent",
+  "add-favorite": "Add to favorites",
+  "remove-favorite": "Remove from favorites"
+}

@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Achse für Achse",
+  "by-server": "Nach Server",
+  "community-verdict": "Gemeinschaftsmeinung",
+  "every-server-one-average": "Alle Server, ein Durchschnitt",
+  "n-shown": ", {count} angezeigt",
+  "opinion": "{count, plural, one {# Meinung} other {# Meinungen}}",
+  "opinion-next-to-win-rate": "Meinung im Vergleich zur Siegrate innerhalb der Stufe {tier}",
+  "rate-the": "Bewerte {tankName}",
+  "reputation-against-results": "Reputation im Vergleich zu Ergebnissen",
+  "same-tank-different-metas": "Derselbe Panzer, unterschiedliche Metas",
+  "the-same-tank-by-how": "Derselbe Panzer, aufgeschlüsselt nach Spielstärke der Abstimmenden",
+  "what-players-wrote": "Was spieler geschrieben haben",
+  "who-is-saying-it": "Wer das sagt"
+}

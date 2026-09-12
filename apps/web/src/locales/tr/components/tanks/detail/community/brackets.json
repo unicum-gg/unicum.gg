@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Savaşlar",
+  "no-votes": "hayır oy",
+  "rated-higher": "Daha güçlü oyuncular bunu sunucunun geri kalanından {stars} yıldız daha yüksek puanlıyor. Bu tank, ne yaptığınızı bilmenizi ödüllendirir.",
+  "rated-lower": "Daha güçlü oyuncular bunu sunucunun geri kalanından {stars} yıldız daha düşük puanlıyor. Bir şey yapması istenene kadar olduğundan iyi görünür.",
+  "votes": "{count} oy",
+  "votes-one": "{count} oy"
+}

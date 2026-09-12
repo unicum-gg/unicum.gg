@@ -20,31 +20,21 @@ export enum TankTab {
   Videos = "videos",
 }
 
+/** The bar's order and each tab's URL segment. The wording is not here: the nav
+ * reads it from `components/tanks/list/tabs`, keyed by the tab id, so this file
+ * stays callable from a Server Component. */
 export const TANK_TABS: {
   id: TankTab;
-  label: string;
   segment: string | null;
 }[] = [
-  { id: TankTab.Performances, label: "Performances", segment: null },
-  {
-    id: TankTab.Specifications,
-    label: "Specifications",
-    segment: "specifications",
-  },
-  { id: TankTab.Economics, label: "Economics", segment: "economics" },
-  {
-    id: TankTab.MarksOfExcellence,
-    label: "Marks of Excellence",
-    segment: "marks-of-excellence",
-  },
-  {
-    id: TankTab.MarksOfMastery,
-    label: "Marks of Mastery",
-    segment: "marks-of-mastery",
-  },
+  { id: TankTab.Performances, segment: null },
+  { id: TankTab.Specifications, segment: "specifications" },
+  { id: TankTab.Economics, segment: "economics" },
+  { id: TankTab.MarksOfExcellence, segment: "marks-of-excellence" },
+  { id: TankTab.MarksOfMastery, segment: "marks-of-mastery" },
   // Not a view of the tank table like the others: a list of what the community
   // has linked, which is why it carries its own panel rather than a column set.
-  { id: TankTab.Videos, label: "Videos", segment: "videos" },
+  { id: TankTab.Videos, segment: "videos" },
 ];
 
 /** Parent segment of the non-default tabs, keeping them out of the slug space. */

@@ -1,0 +1,34 @@
+{
+  "stat": "Estadística",
+  "rows": {
+    "battles": "Batallas",
+    "tier": "nivel",
+    "wins": "Victorias",
+    "losses": "Pérdidas",
+    "draws": "Empates",
+    "survived": "Batallas como superviviente",
+    "destroyed": "Tanques destruidos",
+    "destruction-ratio": "Tasa de destrucción",
+    "spotted": "Tanques detectados",
+    "damages": "Daños",
+    "track-damages": "Daños en las orugas",
+    "spotting-damages": "Daños por detección",
+    "assisting-damages": "Daños de apoyo",
+    "combined-damages": "Daños combinados",
+    "base-capture": "Captura de base",
+    "base-defense": "Defensa de base",
+    "experience": "Experiencia",
+    "hit-rate": "Tasa de aciertos",
+    "personal-rating": "Clasificación personal",
+    "wtr": "Clasificación de World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Total",
+    "day": "Últimas 24h",
+    "week": "Últimos 7d",
+    "month": "Últimos 30d"
+  }
+}

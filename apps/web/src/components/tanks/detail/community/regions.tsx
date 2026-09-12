@@ -1,8 +1,10 @@
+import { numberFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
 import type { RegionVerdict } from "@unicum.gg/shared";
 import { REGION_LABEL } from "@unicum.gg/wargaming";
 import { Stars, StarValue } from "./stars";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * The same tank, as each server sees it.
@@ -17,7 +19,17 @@ const intFmt = new Intl.NumberFormat("en-US");
  * Only servers that actually voted appear. An absent region is a fact about our
  * sign-ups, not about the tank.
  */
-export function RegionSplit({ regions }: { regions: RegionVerdict[] }) {
+export async function RegionSplit({
+  regions,
+  locale,
+}: {
+  regions: RegionVerdict[];
+  locale: string;
+}) {
+  const { t } = await getTranslation(
+    "components/tanks/detail/community/regions",
+    locale,
+  );
   const voted = regions.filter((r) => r.votes > 0);
   if (voted.length < 2) return null;
 
@@ -36,8 +48,9 @@ export function RegionSplit({ regions }: { regions: RegionVerdict[] }) {
             <Stars value={region.overall} size={12} />
           </div>
           <span className="text-xs text-fd-muted-foreground tabular-nums">
-            {intFmt.format(region.votes)}{" "}
-            {region.votes === 1 ? "vote" : "votes"}
+            {t("n-votes", {
+              count: numberFormat(locale, INT_FORMAT).format(region.votes),
+            })}
           </span>
         </div>
       ))}

@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name}, World of Tanks -klaani alueella {region}, {members} jäsentä",
+    "description": "{name} [{tag}] alueella {region}: {members} jäsentä, täysi jäsentaulukko WN8- ja WNX-arvosanoilla, viimeaikainen liittymis- ja poistumisaktiivisuus sekä klaanin historia."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name}, linnoituksen tilastot alueella {region}",
+    "description": "{name} [{tag}] -linnoituksen suorituskyky alueella {region}: kahakka- ja etenemisarvosanat, taistelut ja voittoprosentti jokaiselle jäsenelle."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name}, klaanisotien tilastot alueella {region}",
+    "description": "{name} [{tag}] -klaanisotien suorituskyky alueella {region}: jäsenten arvosanat, taistelut ja voittoprosentti maailmanlaajuisen kartan kampanjoissa."
+  },
+  "tanks": {
+    "title": "[{tag}] {name}, panssarivaunut alueella {region}, klaanin ajoneuvot",
+    "description": "Jokainen {name} [{tag}] -klaanin pelaama ajoneuvo alueella {region}, ja taistelut, voittoprosentti sekä keskimääräinen vahinko koottuna klaanin jäsenten yli."
+  },
+  "manage": {
+    "title": "[{tag}] {name}, linnoituksen reservit alueella {region}",
+    "description": "Aktivoi ja ajasta {name} [{tag}] -linnoituksen reservit. Vain upseereille."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks -klaani alueella {region}: jäsentaulukko WN8/WNX-arvosanoilla, liittymis- ja poistumisaktiivisuus, viimeaikaiset taistelut ja klaanin täysi historia."
+  }
+}

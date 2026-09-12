@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import { CheckIcon } from "lucide-react";
 import {
@@ -34,8 +35,9 @@ export function DeviceBox({
   activeCat: string | null;
   onClick: () => void;
   onRemove?: () => void;
-  tooltipHint?: string;
+  tooltipHint?: { key: string; next?: string };
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/equipment/device-box");
   const button = (
     <button
       type="button"
@@ -118,8 +120,7 @@ export function DeviceBox({
       <ContextMenuContent>
         <ContextMenuLabel>{e.name}</ContextMenuLabel>
         <ContextMenuItem variant="destructive" onSelect={onRemove}>
-          Remove
-        </ContextMenuItem>
+          {t("remove")}</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   );

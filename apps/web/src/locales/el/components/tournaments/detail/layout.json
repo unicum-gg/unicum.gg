@@ -1,0 +1,12 @@
+{
+  "final": "Τελικός",
+  "grand-final": "Μεγάλος τελικός",
+  "loser-bracket-final": "Τελικός ταμπλό ηττημένων",
+  "loser-round": "Γύρος ηττημένων {round}",
+  "quarter-finals": "Προημιτελικά",
+  "round-of": "Γύρος των {teams}",
+  "semi-finals": "Ημιτελικά",
+  "third-place": "Τρίτη θέση",
+  "winner-bracket-final": "Τελικός ταμπλό Νικητών",
+  "winner-round": "Γύρος Νικητών {round}"
+}

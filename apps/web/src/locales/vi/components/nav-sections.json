@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Người chơi",
+    "clans": "Clan",
+    "tanks": "Xe tăng",
+    "maps": "Bản đồ",
+    "tournaments": "Tour đấu",
+    "servers": "Máy chủ"
+  },
+  "links": {
+    "top-players": {
+      "label": "Người chơi hàng đầu",
+      "description": "Bảng xếp hạng người chơi mọi thời điểm"
+    },
+    "players-onslaught": {
+      "description": "Bảng xếp hạng Cường kích"
+    },
+    "players-steel-hunter": {
+      "description": "Bảng xếp hạng battle royale"
+    },
+    "top-clans": {
+      "label": "Bang hội hàng đầu",
+      "description": "Bảng xếp hạng Clan mọi thời điểm"
+    },
+    "stronghold": {
+      "description": "Bảng xếp hạng tranh chấp"
+    },
+    "advances": {
+      "description": "Xếp hạng 15v15 cấp X"
+    },
+    "tank-performances": {
+      "label": "Hiệu suất",
+      "description": "Tỷ lệ thắng và sát thương trên mỗi xe tăng"
+    },
+    "tank-specs": {
+      "label": "Thông số kỹ thuật",
+      "description": "Thống kê của mọi xe tăng"
+    },
+    "tank-economics": {
+      "label": "Kinh tế",
+      "description": "Các xe tăng kiếm Credit và XP"
+    },
+    "tank-moe": {
+      "description": "Sát thương cho từng dấu"
+    },
+    "tank-mom": {
+      "description": "Ngưỡng huy hiệu Mastery"
+    },
+    "tank-changes": {
+      "label": "Thay đổi",
+      "description": "Tăng và giảm sức mạnh theo từng bản cập nhật"
+    },
+    "tank-community": {
+      "label": "Xếp hạng cộng đồng",
+      "description": "Được đánh giá bởi những người chơi sở hữu chúng"
+    },
+    "tank-videos": {
+      "label": "Video",
+      "description": "Lối chơi từ cộng đồng"
+    },
+    "all-tournaments": {
+      "label": "Tour đấu",
+      "description": "Mọi giải đấu, đang mở và đã kết thúc"
+    },
+    "all-maps": {
+      "label": "Tất cả các bản đồ",
+      "description": "Mọi bản đồ trong trò chơi"
+    },
+    "map-changes": {
+      "label": "Thay đổi",
+      "description": "Chỉnh sửa bản đồ theo từng bản cập nhật"
+    },
+    "battle-type": {
+      "description": "Bản đồ {type}"
+    },
+    "servers-population": {
+      "label": "Dân số máy chủ",
+      "description": "Người chơi trực tuyến, hiện tại và theo thời gian"
+    }
+  }
+}

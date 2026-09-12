@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
 // Inline SVG copies of the icons WoT tankopedia uses for its Nation and Type
@@ -14,12 +15,13 @@ export function TankopediaHeaderIcon({
   name: "nation" | "type";
   className?: string;
 }) {
+  const { t } = useTranslation("components/tanks/tankopedia-header-icon");
   if (name === "nation") {
     return (
       <svg
         viewBox="0 0 13.48 13.48"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label="Nation"
+        aria-label={t("nation")}
         className={cn(
           "inline-block h-4 w-auto align-middle text-fd-muted-foreground",
           className,
@@ -37,7 +39,7 @@ export function TankopediaHeaderIcon({
     <svg
       viewBox="0 0 20.995 15.557"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="Type"
+      aria-label={t("type")}
       className={cn(
         "inline-block h-4 w-auto align-middle text-fd-muted-foreground",
         className,

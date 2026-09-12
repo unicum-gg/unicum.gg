@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "费用（信用）",
+    "buyGold": "费用（金币）",
+    "researchXp": "研究经验",
+    "shellCost": "弹药成本",
+    "ammoCost": "满弹药费用",
+    "class3": "三等",
+    "class2": "二等",
+    "class1": "一等",
+    "ace": "顶尖坦克手",
+    "mark1": "1星（65%）",
+    "mark2": "2星（85%）",
+    "mark3": "3星（95%）"
+  }
+}

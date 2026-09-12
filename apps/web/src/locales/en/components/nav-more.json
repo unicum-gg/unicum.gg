@@ -1,0 +1,37 @@
+{
+  "label": "More",
+  "items": {
+    "tournaments": {
+      "label": "Tournaments",
+      "description": "Brackets, rosters and results, region by region"
+    },
+    "servers": {
+      "label": "Servers",
+      "description": "Players online, now and over time"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Player, clan and tank stats as slash commands"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Connect Claude, ChatGPT or any MCP client"
+    },
+    "api": {
+      "label": "API",
+      "description": "Free public REST API, no key required"
+    },
+    "badges": {
+      "label": "Badges",
+      "description": "Every crest a player or clan can earn, and how"
+    },
+    "glossary": {
+      "label": "Glossary",
+      "description": "Every World of Tanks term, explained"
+    },
+    "support": {
+      "label": "Support us",
+      "description": "Keep {name} free, open and ad-free"
+    }
+  }
+}

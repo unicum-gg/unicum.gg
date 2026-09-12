@@ -1,11 +1,15 @@
 "use client";
 
-import Link from "next/link";
+import type { NumberFormatter } from "@/lib/format";
+
+import { useFormat } from "@/hooks/use-format";
+import { statLabel } from "@/components/stat-label";
+
+import Link from "@/components/link";
 import { useMemo, useState, type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
 import {
   RATING_COLOR_CLASS,
-  RATING_HYPE_LABEL,
   ratingHype,
   RatingHype,
   starRatingColor,
@@ -29,8 +33,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { CommunityBoardRow } from "./row";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
 /**
@@ -60,14 +65,14 @@ enum Column {
 
 type ValueColumn = {
   key: Column;
+  /** The heading, and, keyed by `key`, the explanation the tooltip shows. */
   label: string;
-  tip: string;
   /** What the column sorts on, which is not always what it prints. */
   sort: (r: CommunityBoardRow) => number | null;
   /** What the cell shows, and the class the cell itself wears. A rating is a
    * filled block in the site's palette, the way WNX and win rate already are on
    * the performance table, so the three read as the same kind of column. */
-  cell: (r: CommunityBoardRow) => { node: ReactNode; className?: string };
+  cell: (r: CommunityBoardRow, num: NumberFormatter) => { node: ReactNode; className?: string };
 };
 
 /**
@@ -100,28 +105,24 @@ const VALUE_COLUMNS: ValueColumn[] = [
   {
     key: Column.Overall,
     label: "Overall",
-    tip: "How good players think it is. Ranked on a mean shrunk towards the site average, so a tank with four votes cannot outrank one with four hundred.",
     sort: (r) => r.overallBayes ?? r.overall,
     cell: (r) => score(r.overall),
   },
   {
     key: Column.Fun,
     label: "Fun",
-    tip: "How much players enjoy it, which is regularly not the same question.",
     sort: (r) => r.funBayes ?? r.fun,
     cell: (r) => score(r.fun),
   },
   {
     key: Column.Votes,
     label: "Votes",
-    tip: "Votes cast, every one from an account that has actually played the tank.",
     sort: (r) => r.votes,
-    cell: (r) => ({ node: intFmt.format(r.votes) }),
+    cell: (r, num) => ({ node: num(INT_FORMAT).format(r.votes) }),
   },
   {
     key: Column.Hype,
     label: "Reputation gap",
-    tip: "Where the community ranks it in its tier, minus where its win rate ranks it. Sort descending for the most overrated tanks in the game, ascending for the most underrated.",
     sort: (r) => r.hype,
     cell: (r) => ({ node: <Gap hype={r.hype} /> }),
   },
@@ -152,6 +153,10 @@ export function CommunityTable({
   region: Region;
   rows: CommunityBoardRow[];
 }) {
+  const { num } = useFormat();
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tTable } = useTranslation("components/tanks/table");
+  const { t: tTips } = useTranslation("components/tanks/list/community/table");
   const [sort, setSort] = useState<SortState>({
     key: Column.Overall,
     direction: SortDirection.Desc,
@@ -204,7 +209,7 @@ export function CommunityTable({
                 col={Column.Nation}
                 onToggle={toggleSort}
                 align="center"
-                tip="Nation"
+                tip={tTable("nation")}
                 headClassName="w-[72px] min-w-[72px]"
               >
                 <TankopediaHeaderIcon name="nation" />
@@ -214,7 +219,7 @@ export function CommunityTable({
                 col={Column.Type}
                 onToggle={toggleSort}
                 align="center"
-                tip="Type"
+                tip={tTable("type")}
                 headClassName="w-[72px] min-w-[72px]"
               >
                 <TankopediaHeaderIcon name="type" />
@@ -224,7 +229,7 @@ export function CommunityTable({
                 col={Column.Tier}
                 onToggle={toggleSort}
                 align="center"
-                tip="Tier"
+                tip={tTable("tier")}
                 headClassName="w-[72px] min-w-[72px]"
               >
                 <span className="text-xs font-medium tracking-tight text-fd-muted-foreground">
@@ -237,7 +242,7 @@ export function CommunityTable({
                 onToggle={toggleSort}
                 headClassName="min-w-52"
               >
-                Name
+                {tTable("name")}
               </SortHead>
               {VALUE_COLUMNS.map((c) => (
                 <SortHead
@@ -246,9 +251,9 @@ export function CommunityTable({
                   col={c.key}
                   onToggle={toggleSort}
                   align="end"
-                  tip={c.tip}
+                  tip={tTips(`${c.key}`)}
                 >
-                  {c.label}
+                  {statLabel(c.label, tStats)}
                 </SortHead>
               ))}
             </TableRow>
@@ -291,7 +296,7 @@ export function CommunityTable({
                   </Link>
                 </TableCell>
                 {VALUE_COLUMNS.map((c) => {
-                  const { node, className } = c.cell(t);
+                  const { node, className } = c.cell(t, num);
                   return (
                     <TableCell
                       key={c.key}
@@ -320,12 +325,13 @@ export function CommunityTable({
  * filled blocks in a row would also read as three of the same thing.
  */
 function Gap({ hype }: { hype: number | null }) {
+  const { t: tLabel } = useTranslation("components/labels");
   const verdict = ratingHype(hype);
   if (verdict == null || hype == null) return DASH;
   return (
     <span
       className={cn("font-medium", HYPE_CLASS[verdict])}
-      title={RATING_HYPE_LABEL[verdict]}
+      title={tLabel(`rating-hype.${verdict}`)}
     >
       {hype > 0 ? "+" : ""}
       {(hype * 100).toFixed(0)}

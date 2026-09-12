@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Meilleurs <accent>joueurs</accent>",
+    "language": "Meilleurs joueurs ayant <accent>{language}</accent> comme langue"
+  },
+  "intro": {
+    "all": "Classement {region} selon {metric} sur l’ensemble de la carrière (20 000 batailles minimum).",
+    "language": "Joueurs {region} dont les langues déduites de l’historique des clans incluent {language}, classés selon {metric} (10 000 batailles minimum).",
+    "strict": "Joueurs {region} dont la langue déduite de l’historique des clans est exclusivement {language}, classés selon {metric} (10 000 batailles minimum)."
+  },
+  "board": {
+    "all": "Les {count} meilleurs joueurs selon {metric}",
+    "language": "Les {count} meilleurs joueurs ayant {language} comme langue selon {metric}",
+    "strict": "Les {count} meilleurs joueurs ayant exclusivement {language} comme langue selon {metric}"
+  },
+  "modes": {
+    "overall": "Global"
+  },
+  "columns": {
+    "player": "Joueur"
+  },
+  "strict-toggle": "Strict",
+  "any-toggle": "Tout",
+  "all-languages": "Toutes les langues",
+  "battles": "Batailles",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

@@ -1,0 +1,8 @@
+{
+  "last-days": "Laatste {chartDays} dagen",
+  "n-players": "{count, plural, one {# speler} other {# spelers}}",
+  "rolling-average-combined-damage-to": "Voortschrijdend gemiddelde van gecombineerde schade om 65 / 85 / 95% van de spelers te overtreffen.",
+  "single-battle-xp-to-beat": "XP in één gevecht om 50 / 80 / 95 / 99% van de spelers te overtreffen.",
+  "tank-marks-of-excellence": "Markeringen voor uitmuntendheid: {tank}",
+  "tank-marks-of-mastery": "Marks of Mastery voor {tank}"
+}

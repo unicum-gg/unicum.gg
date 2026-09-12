@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
 import { useCallback, useMemo } from "react";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { TablePager, usePagination } from "@/components/table-pager";
@@ -11,6 +12,8 @@ import {
 import { RATING_METRIC_LABEL, type RatingMetric } from "@unicum.gg/shared";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
 import type { Region } from "@unicum.gg/wargaming";
+import { FilterSubject } from "@/components/filter-subject";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * One metric's leaderboard, paginated client-side over the full ranking (up to
@@ -28,6 +31,8 @@ export function TopPlayersBoard({
   metric: RatingMetric;
   results: TopPlayerByLanguageResult[];
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/list/view");
   const searchFields = useCallback(
     (r: TopPlayerByLanguageResult) => [r.nickname, r.clan_tag],
     [],
@@ -35,14 +40,14 @@ export function TopPlayersBoard({
   const rangeCols = useMemo<RangeColumn<TopPlayerByLanguageResult>[]>(
     () => [
       { key: "rating", label: RATING_METRIC_LABEL[metric], value: (r) => r.wnx },
-      { key: "battles", label: "Battles", value: (r) => r.battles },
+      { key: "battles", label: t("battles"), value: (r) => r.battles },
       {
         key: "winrate",
         label: "WR %",
         value: (r) => (r.winrate != null ? r.winrate * 100 : null),
       },
     ],
-    [metric],
+    [metric, t],
   );
   const { filtered, filters } = useLeaderboardFilter(results, {
     searchFields,
@@ -56,9 +61,10 @@ export function TopPlayersBoard({
   return (
     <>
       <div className="border-b border-fd-border px-4 py-2.5">
-        <LeaderboardFilterBar filters={filters} searchNoun="players" />
+        <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Players} />
       </div>
       <TopPlayersList
+        locale={locale}
         region={region}
         results={paged}
         metric={metric}

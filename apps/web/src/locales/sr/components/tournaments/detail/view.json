@@ -1,0 +1,11 @@
+{
+  "closes": "Zatvori {when}",
+  "map-pool": "Mapa",
+  "place": "Mesto",
+  "prize": "Nagrada",
+  "prizes": "Nagrade",
+  "qualified": "Квалификовани ({count})",
+  "register": "Registruj se",
+  "tournaments": "Turniri",
+  "winner": "{count, plural, one {Pobednik} few {Pobednici} other {Pobednici}}"
+}

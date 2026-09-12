@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Hány játékos van jelenleg minden {label} szerveren, hogyan változik ez a szám a nap és a hét során, és hogyan viszonyul a régió a többihez.",
+  "recording-just-started": "A rögzítés most kezdődött, ezért a grafikonok innentől töltődnek fel.",
+  "series-starts": "A sorozat {at} időpontban kezdődik, amikor a rögzítés elindult. Az ez előtti adatok nem állíthatók helyre.",
+  "server-population": "A(z) {label} szerver létszáma",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "A Wargaming megadja egy régió első fürtjeinek nevét, a többit pedig azonosítóként hagyja, ezért a 203 EU3-ként jelenik meg, folytatva a régió saját számozását. Mi az azonosítót rögzítjük, és minden név ezt fedi fel rámutatáskor. A címke is ezt követi: ha a fürtöket terheltség szerint számoznánk, egy név egyik szerverről a másikra kerülne, valahányszor kettő helyet cserél. Ha egy szerver hiányzik egy mintából, arról egyáltalán nem érkezett jelentés, ami nem ugyanaz, mint az üresség.",
+  "we-record-it": "A Wargaming pillanatnyi adatként teszi közzé minden szerver létszámát, és nem őriz róla előzményeket, ezért az aktuális percen túli minden adatot mi rögzítettünk, ötpercenként.",
+  "where-battles-are-fought": "Hol zajlanak a(z) {label} csatái"
+}

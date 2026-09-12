@@ -1,0 +1,5 @@
+{
+  "no-matching-tanks": "Подходящих танков нет.",
+  "searching": "Поиск…",
+  "type-at-least-characters": "Введите не менее {MINQUERYLENGTH} символов."
+}

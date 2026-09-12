@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>igrači</accent>",
+    "language": "Најбољи играчи који користе <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Ранг-листа за {region}, рангирана према укупном {metric} током целе историје, уз минимум од 20.000 битака.",
+    "language": "Играчи из региона {region} чији претпостављени језик историје кланова укључује {language}, рангирани према {metric}, уз минимум од 10.000 битака.",
+    "strict": "Играчи из региона {region} чији је претпостављени језик историје кланова искључиво {language}, рангирани према {metric}, уз минимум од 10.000 битака."
+  },
+  "board": {
+    "all": "Најбољих {count} играча према {metric}",
+    "language": "Најбољих {count} играча који користе {language}, према {metric}",
+    "strict": "Најбољих {count} искључиво {language} играча према {metric}"
+  },
+  "modes": {
+    "overall": "Ukupno"
+  },
+  "columns": {
+    "player": "Igrač"
+  },
+  "strict-toggle": "Strog",
+  "any-toggle": "Bilo koji",
+  "all-languages": "Sve jezike",
+  "battles": "Borbi",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

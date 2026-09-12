@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Kostnad (kreditter)",
+      "tip": "Kjøpspris i credits (stridsvogner fra teknologitreet)"
+    },
+    "buyGold": {
+      "label": "Kostnad (gull)",
+      "tip": "Kjøpspris i gull (premiumstridsvogner)"
+    },
+    "researchXp": {
+      "label": "Forskning XP",
+      "tip": "XP for å låse opp (billigste vei)"
+    },
+    "totalFreeXp": {
+      "label": "Gratis XP (T{tier})",
+      "tip": "Samlet XP som kreves for å forske fra nivå {tier}, inkludert nødvendige moduler"
+    },
+    "shellCost": {
+      "label": "Projiseringskostnad",
+      "tip": "Standard granatpris (credits)"
+    },
+    "ammoCost": {
+      "label": "Full ammunisjonskostnad",
+      "tip": "Standard granatpris × ammunisjonskapasitet"
+    },
+    "acquireMoney": {
+      "label": "Kjøpskostnad ({currency})",
+      "tip": "Beregnet faktisk pengebeløp for å skaffe stridsvognen (forskning + kjøp), i {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Gratis XP ({currency})",
+      "tip": "Anslått kostnad i ekte penger for å bruke Gratis XP på stridsvognen fra nivå {tier}, i {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Kostnad (kreditter)",
+    "buyGold": "Kostnad (gull)",
+    "researchXp": "Forskning XP",
+    "totalFreeXp": "Gratis XP",
+    "shellCost": "Projiseringskostnad",
+    "ammoCost": "Full ammunisjonskostnad",
+    "acquireMoney": "Kjøpskostnad (penger)",
+    "freeXpMoney": "Gratis XP (penger)"
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { Interpolate } from "@/components/interpolate";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useSWR from "swr";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
@@ -21,11 +22,14 @@ import {
   type RangeColumn,
   useLeaderboardFilter,
 } from "@/hooks/use-leaderboard-filter";
-import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS } from "@unicum.gg/shared";
+import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, TIER_SORT_OPTIONS } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
 import { isStrongholdPeriod, useStrongholdPeriod } from "@/hooks/use-period";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+import { FilterSubject } from "@/components/filter-subject";
+import { RatingScaleTitle } from "@/components/home/rating-scale";
+import { useTranslation } from "@/hooks/use-translation";
 
 // The board's own menu order, which is the enum's: shortest window first,
 // Overall last. Deliberately not the stats tables' `STATS_PERIODS`, whose
@@ -41,6 +45,9 @@ export function StrongholdLeaderboardView({
   tier: StrongholdTier;
   initialResults: StrongholdLeaderboardEntry[];
 }) {
+  const { t } = useTranslation("components/clans/list/stronghold/view");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tCol } = useTranslation("components/columns");
   // Sort is per-tier local state (not shared); period IS the shared
   // `unicum.period` cookie (same one the home leaderboards use), so picking it
   // here carries back to them and vice versa. Read through the stronghold-aware
@@ -81,18 +88,18 @@ export function StrongholdLeaderboardView({
   );
   const rangeCols = useMemo<RangeColumn<RankedStrongholdEntry>[]>(
     () => [
-      { key: "sr", label: "SR", value: (r) => r.sr },
-      { key: "srb", label: "SRB", value: (r) => r.srb },
-      { key: "elo", label: "ELO", value: (r) => r.elo },
-      { key: "battles", label: "Battles", value: (r) => r.battles },
+      { key: "sr", label: tCol("sr"), value: (r) => r.sr },
+      { key: "srb", label: tCol("srb"), value: (r) => r.srb },
+      { key: "elo", label: tCol("elo"), value: (r) => r.elo },
+      { key: "battles", label: tCol("battles"), value: (r) => r.battles },
       {
         key: "winrate",
-        label: "WR %",
+        label: tCol("winrate"),
         value: (r) => (r.battles > 0 ? (r.wins / r.battles) * 100 : null),
       },
-      { key: "members", label: "Members", value: (r) => r.membersCount },
+      { key: "members", label: tCol("members"), value: (r) => r.membersCount },
     ],
-    [],
+    [tCol],
   );
   // The board is a single table (unlike the three metric boards on /clans), so
   // the filter can own `?q=&rc=&min=&max=` without fighting a sibling over them.
@@ -156,22 +163,35 @@ export function StrongholdLeaderboardView({
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </p>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            Top{" "}
-            <span className="text-brand">
-              {STRONGHOLD_TIER_LABEL[tier]}
-            </span>{" "}
-            clans
+            <Interpolate
+              template={t("heading", {
+                tier: tGame(`stronghold-tiers.${tier}`),
+              })}
+              wrap={{
+                accent: (text) => <span className="text-brand">{text}</span>,
+              }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            {REGION_LABEL[region]} leaderboard, ranked by{" "}
-            {STRONGHOLD_SORT_LABEL[sort]} across all tracked clans
-            {tier === StrongholdTier.Advances
-              ? " in Advances (15v15)"
-              : ` in ${STRONGHOLD_TIER_LABEL[tier]} (7v7)`}
-            {period === StrongholdPeriod.Overall
-              ? ""
-              : ` over the ${STRONGHOLD_PERIOD_LABEL[period].replace(/^Past /, "past ")}`}{" "}
-            (minimum {STRONGHOLD_MIN_BATTLES[tier][period]} battles).
+            {/* One sentence with holes rather than five fragments joined: the
+                format, the window and the floor all sit somewhere else in half
+                the languages we publish, and concatenating them fixed the
+                English order. */}
+            {t(
+              period === StrongholdPeriod.Overall ? "blurb" : "blurb-period",
+              {
+                region: REGION_LABEL[region],
+                sort: tGame(`stronghold-sorts.${sort}`),
+                format:
+                  tier === StrongholdTier.Advances
+                    ? t("format-advances")
+                    : t("format-skirmish", {
+                        tier: tGame(`stronghold-tiers.${tier}`),
+                      }),
+                period: tGame(`stronghold-periods.${period}`),
+                battles: STRONGHOLD_MIN_BATTLES[tier][period],
+              },
+            )}
           </p>
         </PanelContent>
       </Panel>
@@ -185,11 +205,14 @@ export function StrongholdLeaderboardView({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            Top {results.length} {STRONGHOLD_TIER_LABEL[tier]} clans ·{" "}
+            {t("panel-title", {
+              count: results.length,
+              tier: tGame(`stronghold-tiers.${tier}`),
+            })}{" "}
             <PeriodInlineSelect
               period={period}
               periods={BOARD_PERIODS}
-              label={(p) => STRONGHOLD_PERIOD_LABEL[p]}
+              label={(p) => tGame(`stronghold-periods.${p}`)}
               onChange={setPeriod}
             />
           </PanelTitle>
@@ -197,12 +220,11 @@ export function StrongholdLeaderboardView({
         <PanelContent className="p-0">
           {results.length === 0 ? (
             <p className="p-4 text-sm text-muted-foreground">
-              No data yet. Check back once clans have been refreshed.
-            </p>
+              {t("no-data-yet-check-back")}</p>
           ) : (
             <>
               <div className="border-b border-fd-border px-4 py-2.5">
-                <LeaderboardFilterBar filters={filters} searchNoun="clans" />
+                <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Clans} />
               </div>
               <StrongholdTable
                 region={region}
@@ -220,7 +242,9 @@ export function StrongholdLeaderboardView({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Rating scale</PanelTitle>
+          <PanelTitle>
+            <RatingScaleTitle />
+          </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <StrongholdRatingScale />

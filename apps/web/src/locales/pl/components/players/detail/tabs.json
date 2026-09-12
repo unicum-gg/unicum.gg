@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Przegląd",
+    "tanks": "Czołgi",
+    "sessions": "Sesje",
+    "achievements": "Osiągnięcia",
+    "tournaments": "Turnieje",
+    "value": "Wartość"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

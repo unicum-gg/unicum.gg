@@ -1,0 +1,11 @@
+{
+  "compare": "Palyginti su {count} artimiausiais",
+  "match": "mūšis",
+  "subtitle": "Ta pati padėtis tarp savo lygio tankų",
+  "verdict": {
+    "overall": "Panašus bendrai",
+    "closest": "Artimiausias pagal {axes}",
+    "closest-furthest": "Artimiausias pagal {axes}, tolimiausias pagal {apart}",
+    "and": " ir "
+  }
+}

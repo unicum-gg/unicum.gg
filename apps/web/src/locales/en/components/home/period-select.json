@@ -1,0 +1,7 @@
+{
+  "label": "Leaderboard period",
+  "periods": {
+    "overall": "Overall",
+    "30d": "Past 30 days"
+  }
+}

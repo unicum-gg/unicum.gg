@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Betyg (WN)",
+    "tip": "Rankning enbart för dessa Strider, inte för kontot"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Vinnande hastighet för dessa Strider"
+  },
+  "avgDamage": {
+    "label": "Genomsnittlig skada"
+  },
+  "avgFrags": {
+    "label": "Avg frags",
+    "tip": "Förstörda fiender per strid"
+  },
+  "damageRatio": {
+    "label": "Skadeförhållande",
+    "tip": "Förhållandet mellan Åsamkad skada och Mottagen skada"
+  },
+  "kd": {
+    "label": "Utslagningsförhållande",
+    "tip": "Förhållandet mellan förstörda fiender och förlorade Vagnar"
+  },
+  "survivalRate": {
+    "label": "Överlevda strider"
+  },
+  "avgSpotted": {
+    "label": "Genomsnittligt upptäckte",
+    "tip": "Upptäckta fiender per strid"
+  },
+  "avgDefense": {
+    "label": "Basförsvar",
+    "tip": "Försvarspoäng per strid"
+  },
+  "avgXp": {
+    "label": "Genomsnittlig XP"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "player": "Spelare",
+  "members": "Medlemmar",
+  "battles": "Strider",
+  "avg-damage": "Genomsnittlig skada",
+  "avg-xp": "Genomsnittlig XP",
+  "winrate": "WR %",
+  "result": "Resultat",
+  "tournament": "Turnering",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

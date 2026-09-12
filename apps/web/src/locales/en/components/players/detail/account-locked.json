@@ -1,0 +1,5 @@
+{
+  "title": "Account locked",
+  "body": "{nickname} exists on {region}, but Wargaming has locked this account, so its stats are not available.",
+  "back-to-home": "Back to home"
+}

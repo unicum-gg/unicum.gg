@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Показати чат",
+    "hide": "Сховати чат",
+    "show-streamers": "Показати стримерів"
+  },
+  "heading": "{name}: статистика гравців, кланів і танків World of Tanks",
+  "hide": "Сховати стримерів",
+  "player": "Гравець",
+  "stream-language": "Мова трансляції · {name}",
+  "stream-language-alt": "Мова трансляції: {name}",
+  "theater": {
+    "enter": "Режим театру",
+    "exit": "Вийти з театрального режиму"
+  },
+  "title": "Найкращі гравці транслюють зараз ·",
+  "viewer-count": "{count} глядачів",
+  "viewers": "Глядачі",
+  "watch": "Дивитися {nickname} на Twitch"
+}

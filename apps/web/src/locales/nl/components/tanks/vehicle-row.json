@@ -1,0 +1,4 @@
+{
+  "tier": "Niveau {tier}",
+  "battles": "{count} gevechten"
+}

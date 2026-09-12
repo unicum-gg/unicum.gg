@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "Lignes par page",
+  "free-xp-from": "EXP. libre à partir de",
+  "xp-1-gold": "EXP. = 1 pièce d’or",
+  "previous-page": "Page précédente",
+  "page": "Page {current} sur {totalPages}",
+  "next-page": "Page suivante",
+  "all": "Tous"
+}

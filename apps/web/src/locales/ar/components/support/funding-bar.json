@@ -1,0 +1,18 @@
+{
+  "caught-up": "اكتمل الدعم، شكرًا لك. يذهب كل ما يزيد إلى تحسين القدرة الاستيعابية وإضافة ميزات جديدة.",
+  "covered-label": "مغطاة",
+  "covered-sentence": "غطّى الداعمون {received} من أصل {spent} المصروفة حتى الآن.",
+  "days-out-of-pocket": "{days} أيام على نفقتنا",
+  "from-supporter-one": "من {count} داعم",
+  "from-supporters": "من {count} من الداعمين",
+  "gap-growing": "إضافة {amount}/شهريًا تمنع الفجوة من الاتساع.",
+  "goal": "الهدف {amount}",
+  "of-that-total": "من ذلك الإجمالي",
+  "pledges-cover": "تغطي التعهدات الآن الفاتورة الشهرية.",
+  "raised-amount": "{amount} تم جمعها",
+  "raised-label": "تم جمعها",
+  "run-at-a-loss": "يعمل {name} بخسارة منذ {since}.",
+  "run-rate": "معدل التشغيل الشهري: تعهدات بقيمة {pledged}/شهريًا مقابل {cost}/شهريًا للتشغيل.",
+  "spent-since-launch": "الإنفاق منذ الإطلاق",
+  "to-catch-up": "متبقٍ {amount} للوصول إلى التمويل الكامل."
+}

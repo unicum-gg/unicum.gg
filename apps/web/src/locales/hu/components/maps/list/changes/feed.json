@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, other {# pályák}}",
+  "no-map-changes-have-been": "Még nem rögzítettünk pályaváltozásokat. Ahogy a Wargaming átdolgozza a pályákat, itt jelenik meg, hogy az egyes frissítések mit változtattak.",
+  "update": "Frissítés {version}"
+}

@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Xe tăng của {name} ({region}), mọi xe tăng đã chơi",
+    "description": "Mọi xe tăng {name} đã chơi trên {region}, cùng số trận đấu, tỷ lệ thắng, sát thương trung bình và WN8 cho từng xe tăng."
+  },
+  "achievements": {
+    "title": "Thành tích của {name} ({region}), đã kiếm được {medals} huy chương",
+    "description": "{medals} huy chương World of Tanks {name} đã kiếm được trên {region}, từ Kolobanov và Pool đến các cấp bậc danh dự và huy chương sử thi, cùng mọi huy chương vẫn còn có thể kiếm được."
+  },
+  "tournaments": {
+    "title": "Các giải đấu của {name} ({region})",
+    "description": "Mọi giải đấu Wargaming {name} đã tham gia trên {region}: đội mà họ đã chơi cho, thể thức và họ đã tiến xa đến đâu. Đây là hồ sơ Wargaming công bố chỉ từ phía giải đấu, không bao giờ từ phía người chơi."
+  },
+  "value": {
+    "title": "Giá trị tài khoản của {name} ({region})",
+    "description": "Tài khoản World of Tanks của {name} trên {region} có giá trị bao nhiêu: bạc, vàng và kinh nghiệm đang nằm trong nhà chứa xe."
+  },
+  "mode": {
+    "title": "Thống kê {name} {mode} ({region})",
+    "description": "{name} trên {region} ở {mode}: trận đấu, tỷ lệ thắng và các chỉ số đánh giá cho chế độ này, bên cạnh số liệu cơ sở của các trận đấu ngẫu nhiên."
+  },
+  "overview": {
+    "title": "Thống kê World of Tanks của {name} ({region}), {battles} trận đấu, tỷ lệ thắng {winrate}%",
+    "description": "{name} trên {region}: {battles} trận đấu, tỷ lệ thắng {winrate}%, chỉ số đánh giá {rating}. Phân tích chi tiết từng xe tăng, WN8, WNX và lịch sử Clan đầy đủ."
+  },
+  "locked": {
+    "title": "Tài khoản World of Tanks của {name} bị khóa ({region})",
+    "description": "{name} ({region}) tồn tại nhưng Wargaming đã khóa tài khoản này, vì vậy không có thống kê World of Tanks."
+  },
+  "empty": {
+    "title": "Thống kê người chơi World of Tanks {name} ({region})",
+    "description": "Thống kê người chơi World of Tanks {name} ({region}): chỉ số đánh giá WN8, WNX, tỷ lệ thắng, phân tích chi tiết từng xe tăng và lịch sử Clan đầy đủ."
+  }
+}

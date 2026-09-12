@@ -1,0 +1,11 @@
+{
+  "player": "Pelaaja",
+  "role": "Rooli",
+  "battles": "Taisteluita",
+  "joined": "Liittynyt",
+  "period": "30 pv {metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

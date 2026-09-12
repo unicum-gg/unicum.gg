@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Một ô là số trận thắng của khoảng đó ở cấp tương ứng trên tổng số trận đấu tại cấp đó, tính trên mọi xe mà người chơi đã có ít nhất {minBattles} trận đấu. Vì vậy, nó mô tả các cấp theo cách những người chơi chúng vận hành. Các ô dựa trên dưới {TIERWINRATETHINCELL} trận đấu sẽ được hiển thị mờ vì chúng thay đổi vì những lý do khác ngoài kỹ năng. Màu sắc là cùng các khoảng tỷ lệ thắng mà trang web sử dụng ở mọi nơi khác.",
+  "cell-no-sample": "{where}, không có mẫu",
+  "cell-winrate": "{where}, tỷ lệ thắng {winrate} qua {battles} trận đấu",
+  "metric-band": "Khoảng {metric}",
+  "nothing-recorded": "Chưa ghi nhận gì đối với {metric}. Lưới được dựng lại mỗi đêm.",
+  "over-battles-from-accounts": "{winrate} qua {battles} trận đấu từ {players} tài khoản",
+  "over-n-battles": "qua {battles} trận đấu",
+  "what-players-win-by-tier": "Người chơi {label} thắng gì theo cấp"
+}

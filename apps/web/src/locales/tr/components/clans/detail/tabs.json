@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Genel Bakış",
+    "tanks": "Tanklar",
+    "videos": "Videolar",
+    "tournaments": "Turnuvalar",
+    "manage": "Yönet"
+  },
+  "section-count": "{section} ({count})"
+}

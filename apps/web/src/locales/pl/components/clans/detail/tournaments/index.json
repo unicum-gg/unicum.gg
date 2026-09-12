@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "Klan [{tag}] nie wziął udziału w żadnym śledzonym przez nas turnieju. Drużynę uznajemy za należącą do tego klanu, jeśli w dniu jej meczu co najmniej jedna czwarta składu należała do klanu.",
+  "won": "{count} wygrane"
+}

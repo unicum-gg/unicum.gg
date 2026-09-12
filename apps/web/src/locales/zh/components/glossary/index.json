@@ -1,0 +1,22 @@
+{
+  "search": "搜 索 {count} 个术语",
+  "search-label": "搜 索术语表",
+  "all": "全部",
+  "jump": "跳转到字母",
+  "empty": "没有术语匹配“{query}”。",
+  "categories": {
+    "vehicles": "坦克",
+    "gunnery": "炮击",
+    "armor": "装甲",
+    "mobility": "机动",
+    "vision": "视野",
+    "crew": "乘员",
+    "progression": "进展",
+    "economy": "经济",
+    "ratings": "评分",
+    "statistics": "统计",
+    "modes": "战斗模式",
+    "tactics": "战术",
+    "slang": "俚语"
+  }
+}

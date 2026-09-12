@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Top-Spieler · Letzte 24 Stunden"
+    },
+    "week": {
+      "title": "Top-Spieler · Letzte 7 Tage"
+    }
+  },
+  "rating-scale": {
+    "title": "Bewertungsskala"
+  },
+  "community": {
+    "title": "Der Community beitreten",
+    "heading": "Mit WoT-Spielern vernetzen",
+    "description": "Tritt unserem Discord bei, um über WoT-Statistiken zu chatten, Funktionen anzufragen und Fehler zu melden. Oder schau auf GitHub vorbei, um den Code anzusehen und mitzuarbeiten.",
+    "discord": "Discord beitreten",
+    "github": "Auf GitHub ansehen"
+  },
+  "features": {
+    "title": "Das findest du hier",
+    "profiles": {
+      "title": "Spielerprofile",
+      "description": "Detaillierte Statistiken mit Gesamtwerten und Veränderungen über 24 Std. / 7 T. / 30 T., WN7, WN8, WNX und Persönliche Wertung."
+    },
+    "clans": {
+      "title": "Clanseiten",
+      "description": "Tabelle mit Mitgliedern und ihren Wertungen, Feed zur vergangenen Aktivität, Beschreibung und Clan-Metadaten."
+    },
+    "history": {
+      "title": "Clanverlauf",
+      "description": "Vollständige Zeitleiste aller Clans, denen ein Spieler angehört hat, mit Rollen und Datumsangaben."
+    },
+    "live": {
+      "title": "Live-Updates",
+      "description": "Erfasste spieler werden über unser Snapshot-System alle 24 Std. im Hintergrund aktualisiert."
+    },
+    "leaderboards": {
+      "title": "Ranglisten",
+      "description": "Top-Spieler (24 Std., 7 T., Gesamtzeitraum) und Top-Clans nach WNX, berechnet anhand unserer Snapshots."
+    },
+    "open-source": {
+      "title": "Open Source · AGPL",
+      "description": "Der Code ist auf GitHub. Ansehen, forken, mitarbeiten. Keine Werbung, Analysen nur nach Einwilligung."
+    }
+  },
+  "quick-start": {
+    "title": "Schnellstart",
+    "search": {
+      "title": "🔍 Spieler oder Clans suchen",
+      "description": "Drücke {shortcut}, um die Suche zu öffnen, und gib dann einen Spielernamen oder ein Clan-Kürzel ein."
+    },
+    "region": {
+      "title": "🌍 Region wechseln",
+      "description": "Verwende die Auswahl {selector} in der Navigationsleiste. Die Ranglisten werden entsprechend aktualisiert."
+    },
+    "leaderboards": {
+      "title": "🏆 Ranglisten durchsuchen",
+      "description": "Top-Spieler (24 Std., 7 T., Gesamtzeitraum) und Top-Clans nach durchschnittlichem WNX, berechnet anhand unserer Snapshots."
+    },
+    "colors": {
+      "title": "📊 Farben verstehen",
+      "description": "WR, WN7, WN8 und WNX verwenden dieselben Stufenfarben (Orange → Grün → Cyan → Violett). Siehe die Skala oben."
+    }
+  },
+  "ctrl": "Strg",
+  "eu-na-asia": "EU / NA / ASIA"
+}

@@ -1,0 +1,7 @@
+{
+  "count": "Sayı",
+  "cumulative": "Biriken",
+  "daily": "Günlük",
+  "heading-cumulative": "{title} (kümülatif)",
+  "heading-daily": "Günlük {title}"
+}

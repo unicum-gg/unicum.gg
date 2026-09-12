@@ -1,0 +1,9 @@
+{
+  "boosts": "Güçlendirmeler {name}",
+  "directives": "Yönergeler",
+  "directive-name": "{name} direktifi",
+  "grants-and-boosts": "Mürettebat becerisini, eğitimli olmasa bile sağlar ve güçlendirir.",
+  "grants-only": "Savaş için mürettebat becerisini verir (listelenen özellik yok).",
+  "enhances-mounted": "Takılı {name} öğesini geliştirir.",
+  "mount-to-use": "Bu yönergeyi kullanmak için {name} takın."
+}

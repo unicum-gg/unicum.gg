@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. vieta",
+    "2": "2. vieta",
+    "3": "3. vieta"
+  },
+  "streamer": "Straumētājs · skatīties {name} Twitch",
+  "tournament": {
+    "one": "Uzvarētāju sastāvs turnīrā {title}",
+    "many": "{count} uzvarētāju sastāvos, labākais turnīrā {title}",
+    "featured": "{text} · īpaši izcelts pasākums",
+    "unnamed": "Wargaming turnīrs"
+  },
+  "tournament-wins": "{count, plural, zero {# uzvaras turnīrā} one {# uzvara turnīrā} other {# uzvaras turnīrā}}",
+  "watch-on-twitch": "Skatīties {name} Twitch",
+  "watch-on-twitch-viewers": "Skatīties {name} Twitch · {viewers} skatītāji"
+}

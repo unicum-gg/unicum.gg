@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Chacune des {count} arènes de combat de World of Tanks. Filtrez-les par type de camouflage et mode de jeu, puis ouvrez une carte pour afficher sa minicarte, ses dimensions ainsi que les drapeaux de base et les points d’apparition propres à chaque mode.",
+    "title": "Toutes les cartes de World of Tanks ({region}), toutes les arènes de combat",
+    "description": "Parcourez toutes les cartes de World of Tanks sur {region} : minicartes, dimensions, types de camouflage et modes de jeu disponibles, avec les drapeaux de base et les points d’apparition propres à chaque mode.",
+    "heading": "Toutes les <accent>cartes</accent>"
+  },
+  "battle-type": {
+    "intro": "Les {count} cartes de World of Tanks utilisées dans le mode {type}, {blurb}. Ouvrez une carte pour afficher sa minicarte, ses dimensions ainsi que les drapeaux de base et les points d’apparition propres à chaque mode.",
+    "title": "Cartes de World of Tanks du mode {type} ({region}), toutes les arènes de la rotation",
+    "description": "Toutes les cartes de World of Tanks dans la rotation du mode {type} sur {region} : minicartes, dimensions, types de camouflage et modes de jeu disponibles, avec les drapeaux de base et les points d’apparition.",
+    "heading": "<accent>Cartes</accent> {type}"
+  },
+  "blurbs": {
+    "random": "la rotation standard en 15 contre 15",
+    "battle_royale": "le mode où le dernier char en lice l’emporte",
+    "frontline": "le mode à grande échelle en 30 contre 30",
+    "onslaught": "le mode classé en 7 contre 7",
+    "onslaught_night": "le mode classé en 7 contre 7 de nuit, avec une portée de vue réduite, actuellement disponible sur le serveur de test public",
+    "grand_battle": "le mode de rang X en 30 contre 30",
+    "clan_wars": "les guerres de clans et les incursions",
+    "waffentrager": "l’événement Waffenträger",
+    "last_stand": "l’événement Last Stand",
+    "arcade": "les événements arcade et spéciaux",
+    "story_mode": "les opérations scénarisées",
+    "training": "les salles d’entraînement et les didacticiels"
+  }
+}

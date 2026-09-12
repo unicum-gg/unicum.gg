@@ -1,0 +1,21 @@
+{
+  "trigger": "Feedback",
+  "title": "Teilen Sie Ihr Feedback",
+  "topic-placeholder": "Thema auswählen...",
+  "message-placeholder": "Dein Feedback...",
+  "send": "Senden",
+  "sent": "Vielen Dank für Ihr Feedback!",
+  "failed": "Feedback konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+  "topics": {
+    "bug": "Fehlerbericht",
+    "idea": "Funktionsvorschlag",
+    "data": "Genauigkeit der Daten",
+    "other": "Sonstiges"
+  },
+  "sentiments": {
+    "awful": "Schrecklich",
+    "bad": "Schlecht",
+    "good": "Gut",
+    "great": "Großartig"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Nimimerkin {nickname} merkit ja mestaruus",
+  "excellence": {
+    "title": "Merkit erinomaisuudesta",
+    "description": "Ajoneuvot tykin merkkeihin perustuen. Merkki on pitkän ajan keskiarvo. Peli laskee sen viimeaikaisten taisteluiden liukuvasta ikkunasta verrattuna siihen, mitä alueella tehdään kyseisellä ajoneuvolla.",
+    "partial": "Merkit luettu {known}/{garage} ajoneuvolle. Loput täyttyvät, kun tili päivitetään.",
+    "note": "{marked}/{garage} ajoneuvolla on merkki.",
+    "note-share": "{marked}/{garage} ajoneuvolla on merkki ({percent}% tallista)."
+  },
+  "mastery": {
+    "title": "Mestaruusmerkit",
+    "description": "Ajoneuvot parhaan merkkinsä mukaan. Merkki perustuu yhteen taisteluun eikä keskiarvoon. Peli myöntää sen yksittäisen pelin kokemuksen perusteella verrattuna siihen, mitä alueella saavutetaan kyseisellä ajoneuvolla.",
+    "note": "{aces}/{garage} ajoneuvolla on Ace Tanker.",
+    "note-share": "{aces}/{garage} ajoneuvolla on Ace Tanker ({percent}% tallista)."
+  },
+  "reach": {
+    "heading": "Tykin edellä pelaaminen",
+    "description": "Ajoneuvot, joiden yhteenlaskettu vahinko ylittää jo merkin, jota niillä ei ole. Merkki on tämä yhteenlaskettu vahinko, joka on väritetty sen ylittämän merkin mukaan."
+  },
+  "none": "Ei mitään"
+}

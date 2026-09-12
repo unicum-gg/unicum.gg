@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Niciun cluster înregistrat încă.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Împărtășește",
+  "peak": "Vârf ({label})",
+  "average": "Medie ({label})",
+  "not-reported": "Ne raportat",
+  "total": "Total"
+}

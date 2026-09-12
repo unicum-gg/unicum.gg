@@ -1,0 +1,21 @@
+{
+  "title": "Znaki i mistrzostwo: {nickname}",
+  "excellence": {
+    "title": "Odznaki biegłości",
+    "description": "Pojazdy według odznak biegłości na lufach. Odznaka odpowiada średniej utrzymywanej przez dłuższy czas: gra oblicza ją w ruchomym oknie ostatnich bitew, porównując wynik z rezultatami osiąganymi tym pojazdem w regionie.",
+    "partial": "Dane o odznakach biegłości odczytano dla {known} z {garage} pojazdów. Dane pozostałych pojawią się po odświeżeniu konta.",
+    "note": "{marked} z {garage} pojazdów ma co najmniej jedną odznakę biegłości.",
+    "note-share": "{marked} z {garage} pojazdów ma co najmniej jedną odznakę biegłości ({percent}% pojazdów w garażu)."
+  },
+  "mastery": {
+    "title": "Marki Mistrzostwa",
+    "description": "Pojazdy według najlepszej zdobytej odznaki. Odznaka dotyczy jednej bitwy, a nie średniej: gra przyznaje ją na podstawie doświadczenia zdobytego w pojedynczej bitwie w porównaniu z wynikami osiąganymi tym pojazdem w regionie.",
+    "note": "{aces} z {garage} pojazdów ma odznakę Ace Tanker.",
+    "note-share": "{aces} z {garage} pojazdów ma odznakę Ace Tanker ({percent}% pojazdów w garażu)."
+  },
+  "reach": {
+    "heading": "Gra powyżej poziomu odznak na lufie",
+    "description": "Pojazdy, których łączne uszkodzenia przekraczają już próg odznaki, której jeszcze nie mają. Znacznik pokazuje wartość tych łącznych uszkodzeń, a jego kolor odpowiada przekroczonemu progowi odznaki."
+  },
+  "none": "Brak"
+}

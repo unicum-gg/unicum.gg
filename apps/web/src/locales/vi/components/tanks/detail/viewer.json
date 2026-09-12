@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Hình ảnh",
+    "collision": "Va chạm",
+    "live": "Trực tiếp"
+  },
+  "centre": {
+    "on": "Đưa xe tăng vào giữa",
+    "off": "Đưa xe tăng lệch khỏi giữa"
+  },
+  "hull-down": {
+    "on": "Chở xuống",
+    "off": "Đặt xe tăng nằm ngang"
+  },
+  "tracks": {
+    "on": "Cho xích chạy",
+    "off": "Dừng xích"
+  },
+  "textures": {
+    "on": "Kết cấu độ phân giải cao",
+    "off": "Kết cấu tiêu chuẩn"
+  },
+  "reset": "Đặt lại góc nhìn",
+  "style": "Chọn kiểu dáng",
+  "style-worn": "Phong cách: {name}",
+  "search-styles": "Tìm kiếm phong cách",
+  "colours": "Ý nghĩa của màu sắc",
+  "cinematic": {
+    "off": "Camera điện ảnh: tắt",
+    "auto": "Camera điện ảnh: khi không thao tác",
+    "on": "Camera điện ảnh: luôn bật"
+  },
+  "open-tank": "Mở xe tăng khác",
+  "open-tank-placeholder": "Mở xe tăng...",
+  "more-actions": "Hành động khác",
+  "marks-meaning": {
+    "0": "Không có dấu xuất sắc",
+    "1": "Một dấu: vượt qua 65% người chơi xe tăng này",
+    "2": "Hai dấu: vượt qua 85%",
+    "3": "Ba dấu: vượt qua 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Lấp đầy cửa sổ",
+      "leave": "Quay lại trang"
+    },
+    "screen": {
+      "enter": "Lấp đầy màn hình",
+      "leave": "Thoát toàn màn hình"
+    }
+  },
+  "marks-count": {
+    "0": "Không có dấu xuất sắc",
+    "one": "1 dấu xuất sắc",
+    "other": "{count} dấu xuất sắc"
+  },
+  "compare-tank": "So sánh với xe tăng khác",
+  "compare-tank-placeholder": "So sánh với...",
+  "view-tooltips": {
+    "visual": "Xe tăng do trò chơi dựng nên",
+    "collision": "Độ dày của từng tấm giáp",
+    "live": "Đạn đã chọn sẽ gây ra điều gì"
+  },
+  "cinematic-tooltips": {
+    "off": "Camera điện ảnh: tắt, góc nhìn giữ nguyên",
+    "auto": "Camera điện ảnh: bắt đầu sau 30 giây không thao tác",
+    "on": "Camera điện ảnh: luôn bật, bắt đầu từ lúc bạn buông tay"
+  }
+}

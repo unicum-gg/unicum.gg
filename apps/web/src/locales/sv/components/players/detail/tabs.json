@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Översikt",
+    "tanks": "Tanken",
+    "sessions": "Sessioner",
+    "achievements": "Prestationer",
+    "tournaments": "Turneringar",
+    "value": "Värde"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

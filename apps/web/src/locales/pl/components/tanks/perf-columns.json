@@ -1,0 +1,60 @@
+{
+  "columns-label": "Kolumny",
+  "groups": {
+    "general": "Ogólny",
+    "combat": "Walka"
+  },
+  "columns": {
+    "battles": {
+      "label": "Bitwy",
+      "tip": "Suma bitew rozegranych tym czołgiem"
+    },
+    "count": {
+      "label": "Liczba",
+      "tip": "Liczba monitorowanych graczy w próbie"
+    },
+    "rating": {
+      "label": "Ocena (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Wskaźnik zwycięstw na tym czołgu"
+    },
+    "playerWr": {
+      "label": "WR gracza",
+      "tip": "Średni ogólny wskaźnik zwycięstw graczy używających tego czołgu"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Średnie uszkodzenia na bitwę"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Stosunek zniszczeń do śmierci"
+    },
+    "assists": {
+      "label": "Asysty",
+      "tip": "Średnie uszkodzenia dzięki asyście"
+    },
+    "hitPct": {
+      "label": "Celność %",
+      "tip": "Trafienia / Strzałów"
+    },
+    "penPct": {
+      "label": "Przenikliwość %",
+      "tip": "Penetracje / Trafienia"
+    },
+    "spots": {
+      "label": "Spoty",
+      "tip": "Średnia liczba spotów na bitwę"
+    },
+    "blocked": {
+      "label": "Blokowane",
+      "tip": "Średnie uszkodzenia zablokowane przez pancerz"
+    },
+    "survival": {
+      "label": "Przeżycie",
+      "tip": "Odsetek przetrwanych bitew"
+    }
+  }
+}

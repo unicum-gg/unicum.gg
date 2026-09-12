@@ -1,0 +1,34 @@
+{
+  "stat": "Статистика",
+  "rows": {
+    "battles": "Соғыстар",
+    "tier": "Деңгей",
+    "wins": "Жеңістер",
+    "losses": "Жеңістер",
+    "draws": "Тең ойындар",
+    "survived": "Тірі қалған шайқастар",
+    "destroyed": "Жойылған танктер",
+    "destruction-ratio": "Жою коэффициенті",
+    "spotted": "Көрінген танктер",
+    "damages": "Зақымдар",
+    "track-damages": "Дәліз зақымдары",
+    "spotting-damages": "Көріну зақымдары",
+    "assisting-damages": "Көмек көрсету зақымдары",
+    "combined-damages": "Біріккен зақымдар",
+    "base-capture": "Негізгі захват",
+    "base-defense": "Негізгі қорғаныс",
+    "experience": "Тәжірибе",
+    "hit-rate": "Соғып алу пайызы",
+    "personal-rating": "Жеке рейтинг",
+    "wtr": "World of Tanks Рейтинг",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Жалпы",
+    "day": "Соңғы 24 сағ",
+    "week": "Соңғы 7 күн",
+    "month": "Соңғы 30 күн"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "stat": "统计",
+  "periods": {
+    "total": "总计",
+    "day": "过去24小时",
+    "week": "过去7天",
+    "month": "过去30天"
+  },
+  "sections": {
+    "territory": "领土",
+    "t10": "X级",
+    "t8": "VIII级",
+    "t6": "VI级"
+  },
+  "rows": {
+    "provinces": "领地",
+    "elo": "ELO",
+    "battles": "战斗场次",
+    "winrate": "胜率"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Apmokėjimas atšauktas.",
+  "claim-your-supporter-role-on-discord": "Pasiimkite rėmėjo vaidmenį Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Nepavyko pridėti Discord vaidmens. Bandykite dar kartą.",
+  "could-not-open-the-billing-portal": "Nepavyko atidaryti atsiskaitymo portalo.",
+  "could-not-start-checkout-please-try-again": "Nepavyko pradėti atsiskaitymo. Bandykite dar kartą.",
+  "could-not-update-your-preference": "Nepavyko atnaujinti jūsų nuostatos.",
+  "log-in-with-wargaming": "Prisijungti naudojant Wargaming",
+  "log-in-with-wargaming-to": "Prisijunkite naudodami Wargaming, kad paremtumėte {NAME}.",
+  "manage-subscription": "Tvarkyti užsakymą",
+  "only-active-supporters-can-claim-the-discord": "Tik aktyvūs rėmėjai gali gauti Discord vaidmenį.",
+  "or-choose-your-own-amount": "Arba pasirinkite savo sumą",
+  "pay-what-you-want": "Mokėkite tiek, kiek norite.",
+  "pick-an-amount": "Pasirinkite sumą arba įveskite savo, nuo €{min}/mėn.",
+  "re-sync-discord-role": "Iš naujo sinchronizuoti Discord vaidmenį",
+  "secured-by-stripe": "Apsaugota Stripe. Atšaukti galite bet kada.",
+  "show-me-anonymously-on-the": "Rodyti mane anonimiškai pakyloje",
+  "support-subscriptions-are-coming-soon": "Netrukus galėsite prenumeruoti paramą.",
+  "supporter-role-added-on-discord": "Discord pridėtas rėmėjo vaidmuo!",
+  "you-are-a-supporter-thank": "Esate rėmėjas. Ačiū, kad padedate {NAME} gyvuoti."
+}

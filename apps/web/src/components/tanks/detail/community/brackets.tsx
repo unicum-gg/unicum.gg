@@ -1,15 +1,17 @@
+import { numberFormat } from "@/lib/format";
+import { Interpolate } from "@/components/interpolate";
 import {
   MAX_STARS,
   RATING_COLOR_HEX,
   starRatingColor,
-  VOTER_BRACKET_LABEL,
   VoterBracket,
   wn8Color,
   type BracketVerdict,
 } from "@unicum.gg/shared";
+import { getTranslation } from "@/lib/translations.server";
 import { Stars, StarValue } from "./stars";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * The same tank, rated by four different populations.
@@ -42,7 +44,17 @@ const BRACKET_ANCHOR: Record<VoterBracket, number | null> = {
   [VoterBracket.Unknown]: null,
 };
 
-export function BracketSplit({ brackets }: { brackets: BracketVerdict[] }) {
+export async function BracketSplit({
+  brackets,
+  locale,
+}: {
+  brackets: BracketVerdict[];
+  locale: string;
+}) {
+  const { t } = await getTranslation(
+    "components/tanks/detail/community/brackets",
+    locale,
+  );
   const rated = brackets.filter((b) => b.votes > 0);
   if (rated.length === 0) return null;
 
@@ -53,44 +65,47 @@ export function BracketSplit({ brackets }: { brackets: BracketVerdict[] }) {
     <div className="flex flex-col gap-4">
       {gap ? (
         <p className="text-sm text-fd-muted-foreground">
-          {gap.direction === "up" ? (
-            <>
-              Stronger players rate it{" "}
-              <span className="font-medium text-fd-foreground tabular-nums">
-                {gap.delta.toFixed(1)}
-              </span>{" "}
-              stars higher than the rest of the server. This one rewards knowing
-              what you are doing.
-            </>
-          ) : (
-            <>
-              Stronger players rate it{" "}
-              <span className="font-medium text-fd-foreground tabular-nums">
-                {gap.delta.toFixed(1)}
-              </span>{" "}
-              stars lower than the rest of the server. It flatters until it is
-              asked to do something.
-            </>
-          )}
+          <Interpolate
+            template={t(gap.direction === "up" ? "rated-higher" : "rated-lower")}
+            values={{
+              stars: (
+                <span className="font-medium text-fd-foreground tabular-nums">
+                  {gap.delta.toFixed(1)}
+                </span>
+              ),
+            }}
+          />
         </p>
       ) : null}
 
       <div className="flex flex-col divide-y divide-fd-border">
         {brackets.map((bracket) => (
-          <BracketRow key={bracket.bracket} verdict={bracket} scale={scale} />
+          <BracketRow
+            key={bracket.bracket}
+            verdict={bracket}
+            scale={scale}
+            locale={locale}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-function BracketRow({
+async function BracketRow({
   verdict,
   scale,
+  locale,
 }: {
   verdict: BracketVerdict;
   scale: number;
+  locale: string;
 }) {
+  const { t: tLabel } = await getTranslation("components/labels", locale);
+  const { t } = await getTranslation(
+    "components/tanks/detail/community/brackets",
+    locale,
+  );
   const anchor = BRACKET_ANCHOR[verdict.bracket];
   const labelColor = anchor == null ? undefined : RATING_COLOR_HEX[wn8Color(anchor)];
   const empty = verdict.votes === 0;
@@ -105,7 +120,7 @@ function BracketRow({
         className="text-sm font-medium"
         style={labelColor ? { color: labelColor } : undefined}
       >
-        {VOTER_BRACKET_LABEL[verdict.bracket]}
+        {tLabel(`voter-brackets.${verdict.bracket}`)}
       </span>
 
       <div className="flex items-center gap-2">
@@ -131,10 +146,17 @@ function BracketRow({
         </div>
         <span className="whitespace-nowrap text-xs text-fd-muted-foreground tabular-nums">
           {empty
-            ? "no votes"
-            : `${intFmt.format(verdict.votes)} ${verdict.votes === 1 ? "vote" : "votes"}`}
+            ? t("no-votes")
+            : t(verdict.votes === 1 ? "votes-one" : "votes", {
+                count: numberFormat(locale, INT_FORMAT).format(verdict.votes),
+              })}
           {verdict.avgBattles != null ? (
-            <> &middot; {intFmt.format(Math.round(verdict.avgBattles))} battles</>
+            <>
+              {" · "}
+              {t("battles", {
+                count: numberFormat(locale, INT_FORMAT).format(Math.round(verdict.avgBattles)),
+              })}
+            </>
           ) : null}
         </span>
       </div>

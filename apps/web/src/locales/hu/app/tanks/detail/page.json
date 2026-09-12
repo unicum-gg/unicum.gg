@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "World of Tanks-statisztikák: {tank} ({region}), {tier}. szintű {nation} Tank",
+    "description": "World of Tanks műszaki adatok: {tank} ({region}). Páncélzat, tűzerő, mobilitás, modulok, legénység és harctéri módosítások a {tier}. szintű {nation} Tank esetében."
+  },
+  "performances": {
+    "title": "Teljesítmény: {tank} ({region}), szerverstatisztikák és legjobb játékosok",
+    "description": "World of Tanks-teljesítményadatok: {tank} ({region}). Szerverátlagos győzelmi arány, sebzés és assziszt, a legjobb játékosok eredményei a {tier}. szintű {nation} Tank esetében, valamint a WN8 és a WNX várható értékei."
+  },
+  "marks": {
+    "title": "Kiválóságjelek és mesterjelvények: {tank} ({region})",
+    "description": "World of Tanks: a kiválóságjelek és mesterjelvények követelményei, valamint azok változásai a {tier}. szintű {nation} Tank esetében: {tank} ({region})."
+  },
+  "history": {
+    "title": "Változástörténet: {tank} ({region}), erősítések és gyengítések",
+    "description": "Teljes változástörténet verzióról verzióra: {tank}. A Wargaming által a World of Tanks frissítéseiben bevezetett összes tűzerő-, mobilitás-, túlélőképesség- és álcázáserősítés és -gyengítés a {tier}. szintű {nation} Tank esetében."
+  },
+  "videos": {
+    "title": "Videók a játékmenetről: {tank} ({region})",
+    "description": "Nézd meg akció közben: {tank}. A közösség által ajánlott csaták a {tier}. szintű {nation} Tank használatával, mindegyik pontosan ott indul, ahol a játékmenet kezdődik, az adott csata pályájával és eredményével."
+  },
+  "community": {
+    "title": "Közösségi pontszám és játékosok értékelései: {tank} ({region})",
+    "description": "Közösségi vélemények: {tank}. Ötből adott közösségi pontszám a szavazók játéktudása szerinti bontásban, összevetve a {tier}. szintű {nation} Tank tényleges teljesítményével, valamint írásos értékelések olyan fiókoktól, amelyeknek vannak csatáik vele."
+  }
+}

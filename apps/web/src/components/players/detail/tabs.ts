@@ -1,3 +1,7 @@
+import { PlayerMode, PLAYER_MODE_LABEL } from "./modes";
+
+export { PlayerMode, PLAYER_MODE_LABEL };
+
 // Pure, framework-free tab definitions shared by the server page (which renders
 // the active section/mode) and the client nav. Kept out of the "use client"
 // `tabs-nav.tsx` so these stay callable from Server Components.
@@ -28,18 +32,6 @@ export enum PlayerSection {
   Tournaments = "tournaments",
 }
 
-export enum PlayerMode {
-  Overall = "overall",
-  Skirmish = "skirmish",
-  Advances = "advances",
-  GrandBattles = "grand",
-  RankedBattles = "ranked",
-  ClanWarsX = "cw-x",
-  ClanWarsVIII = "cw-viii",
-  ClanWarsVI = "cw-vi",
-  SteelHunter = "steel-hunter",
-  Onslaught = "onslaught",
-}
 
 /** A reachable (section, mode) pair, and the segment that addresses it. The
  * default pair lives at the bare player path, hence the null segment. */
@@ -50,22 +42,27 @@ export type PlayerView = {
   label: string;
 };
 
-const MODE_VIEWS: PlayerView[] = [
-  [PlayerMode.Overall, null, "Random Battles"],
-  [PlayerMode.Skirmish, "skirmish", "Skirmish"],
-  [PlayerMode.Advances, "advances", "Advances"],
-  [PlayerMode.GrandBattles, "grand", "Grand Battles"],
-  [PlayerMode.RankedBattles, "ranked", "Ranked Battles"],
-  [PlayerMode.ClanWarsX, "cw-x", "Clan Wars X"],
-  [PlayerMode.ClanWarsVIII, "cw-viii", "Clan Wars VIII"],
-  [PlayerMode.ClanWarsVI, "cw-vi", "Clan Wars VI"],
-  [PlayerMode.SteelHunter, "steel-hunter", "Steel Hunter"],
-  [PlayerMode.Onslaught, "onslaught", "Onslaught"],
-].map(([mode, segment, label]) => ({
+
+const MODE_SEGMENT: Record<PlayerMode, string | null> = {
+  [PlayerMode.Overall]: null,
+  [PlayerMode.Skirmish]: "skirmish",
+  [PlayerMode.Advances]: "advances",
+  [PlayerMode.GrandBattles]: "grand",
+  [PlayerMode.RankedBattles]: "ranked",
+  [PlayerMode.ClanWarsX]: "cw-x",
+  [PlayerMode.ClanWarsVIII]: "cw-viii",
+  [PlayerMode.ClanWarsVI]: "cw-vi",
+  [PlayerMode.SteelHunter]: "steel-hunter",
+  [PlayerMode.Onslaught]: "onslaught",
+};
+
+const MODE_VIEWS: PlayerView[] = (
+  Object.keys(PLAYER_MODE_LABEL) as PlayerMode[]
+).map((mode) => ({
   section: PlayerSection.Overview,
-  mode: mode as PlayerMode,
-  segment: segment as string | null,
-  label: label as string,
+  mode,
+  segment: MODE_SEGMENT[mode],
+  label: PLAYER_MODE_LABEL[mode],
 }));
 
 export const PLAYER_VIEWS: PlayerView[] = [
@@ -102,14 +99,17 @@ export const PLAYER_VIEWS: PlayerView[] = [
   },
 ];
 
-/** Sections in top-row order. */
-export const PLAYER_SECTIONS: { id: PlayerSection; label: string }[] = [
-  { id: PlayerSection.Overview, label: "Overview" },
-  { id: PlayerSection.Tanks, label: "Tanks" },
-  { id: PlayerSection.Sessions, label: "Sessions" },
-  { id: PlayerSection.Achievements, label: "Achievements" },
-  { id: PlayerSection.Tournaments, label: "Tournaments" },
-  { id: PlayerSection.Value, label: "Value" },
+/** Sections in top-row order. Ids only: the nav reads their wording from
+ * `components/players/detail/tabs`. The battle MODES keep their labels here,
+ * because those are Wargaming's own names for a game mode and the game shows
+ * them to the player in their language already. */
+export const PLAYER_SECTIONS: PlayerSection[] = [
+  PlayerSection.Overview,
+  PlayerSection.Tanks,
+  PlayerSection.Sessions,
+  PlayerSection.Achievements,
+  PlayerSection.Tournaments,
+  PlayerSection.Value,
 ];
 
 /** Modes in bottom-row order (only shown under Overview). */

@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Претражи међу {count} тенкова",
+    "rated-tanks": "Претражи међу {count} оцењених тенкова",
+    "videos": "Претражи међу {count} видео-снимака",
+    "players": "Претражи {count} играча",
+    "clans": "Претражи {count} кланова",
+    "tournaments": "Претражи {count} турнира",
+    "teams": "Претражи {count} тимова"
+  },
+  "min": "Мин.",
+  "max": "Макс.",
+  "none": "Nema",
+  "common-test": "Промене у Зajедничком тесту: нова и ребалансирана возила",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premijum",
+    "reward": "Nagrada"
+  },
+  "moe": {
+    "0": "Још нема ознаке",
+    "1": "1 знак",
+    "2": "2 знака",
+    "3": "3 знака"
+  },
+  "mom": {
+    "0": "Још нема значке",
+    "1": "3. razred",
+    "2": "2. razred",
+    "3": "1. razred",
+    "4": "As Tenkista"
+  }
+}

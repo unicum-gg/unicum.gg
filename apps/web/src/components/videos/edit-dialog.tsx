@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useCallback, useSyncExternalStore } from "react";
 import useSWR from "swr";
 import type { Region } from "@unicum.gg/wargaming";
@@ -76,6 +77,7 @@ export function VideoEditDialog({
   token?: string;
   onClose: () => void;
 }) {
+  const { t } = useTranslation("components/videos/edit-dialog");
   return (
     <Dialog open onOpenChange={(next) => !next && onClose()}>
       {/* Wider and scrollable, like the suggestion form it mirrors: the preview
@@ -84,12 +86,9 @@ export function VideoEditDialog({
           primitive caps itself with `sm:max-w-md`. */}
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
         <DialogHeader>
-          <DialogTitle>Correct a suggestion</DialogTitle>
+          <DialogTitle>{t("correct-a-suggestion")}</DialogTitle>
           <DialogDescription>
-            Change anything that is wrong, the vehicle included. Saving sends it
-            back to the moderation queue, so a video that is live comes down
-            until it is approved again.
-          </DialogDescription>
+            {t("change-anything-that-is-wrong")}</DialogDescription>
         </DialogHeader>
         <EditBody region={region} id={id} token={token} onDone={onClose} />
       </DialogContent>
@@ -117,6 +116,7 @@ function EditBody({
   token?: string;
   onDone: () => void;
 }) {
+  const { t } = useTranslation("components/videos/edit-dialog");
   const { data, error, isLoading } = useSWR(
     `video-edit:${region}:${id}:${token ?? ""}`,
     () =>
@@ -134,7 +134,7 @@ function EditBody({
   );
 
   if (isLoading) {
-    return <p className="text-sm text-fd-muted-foreground">Loading…</p>;
+    return <p className="text-sm text-fd-muted-foreground">{t("loading")}</p>;
   }
   if (error || !data) {
     return <EditError status={error ? apiErrorStatus(error) : 404} token={token} />;
@@ -158,16 +158,15 @@ function EditBody({
  * a moderator retrying a link that will never work again.
  */
 function EditError({ status, token }: { status: number; token?: string }) {
+  const { t } = useTranslation("components/videos/edit-dialog");
   if (status === 401) {
     return (
       <div className="flex flex-col items-start gap-3">
         <p className="text-sm">
-          Log in with the account that suggested this video to correct it.
-        </p>
+          {t("log-in-with-the-account")}</p>
         <LoginButton>
           <Button variant="outline" size="sm">
-            Log in
-          </Button>
+            {t("log-in")}</Button>
         </LoginButton>
       </div>
     );
@@ -176,11 +175,11 @@ function EditError({ status, token }: { status: number; token?: string }) {
     <p className="text-sm">
       {status === 403
         ? token
-          ? "That link has expired. Press Edit again on the card in Discord for a fresh one."
-          : "This suggestion is not yours to correct."
+          ? t("link-expired")
+          : t("not-yours-to-correct")
         : status === 404
-          ? "There is no suggestion with that id."
-          : "Could not load that suggestion. Try again in a moment."}
+          ? t("no-suggestion-with-that-id")
+          : t("could-not-load-that-suggestion")}
     </p>
   );
 }

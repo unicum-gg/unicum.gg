@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "개요",
+    "tanks": "탱크",
+    "sessions": "세션",
+    "achievements": "공적",
+    "tournaments": "토너먼트",
+    "value": "값"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "베타"
+}

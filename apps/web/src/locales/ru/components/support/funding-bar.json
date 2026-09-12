@@ -1,0 +1,18 @@
+{
+  "caught-up": "Всё полностью покрыто, спасибо. Всё сверх этого пойдёт на повышение производительности и новые функции.",
+  "covered-label": "Покрыто",
+  "covered-sentence": "Спонсоры уже покрыли {received} из {spent}, потраченных на данный момент.",
+  "days-out-of-pocket": "{days} дней за свой счёт",
+  "from-supporter-one": "от {count} спонсора",
+  "from-supporters": "от {count} спонсоров",
+  "gap-growing": "Дополнительные {amount}/мес. не дадут разрыву расти.",
+  "goal": "цель {amount}",
+  "of-that-total": "от этой суммы",
+  "pledges-cover": "Обещанные взносы теперь покрывают ежемесячный счёт.",
+  "raised-amount": "Собрано {amount}",
+  "raised-label": "Собрано",
+  "run-at-a-loss": "{name} работает в убыток с {since}.",
+  "run-rate": "Ежемесячный темп: взносы {pledged}/мес. против расходов {cost}/мес.",
+  "spent-since-launch": "Потрачено с момента запуска",
+  "to-catch-up": "{amount} для полного покрытия."
+}

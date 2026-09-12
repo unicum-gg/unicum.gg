@@ -1,0 +1,13 @@
+{
+  "assists": "Segítségek",
+  "close": "Bezárás",
+  "damage": "Sebzés",
+  "in-the-queue": "Sorba került, és a moderátori ellenőrzés után megjelenik ezen a lapon.",
+  "optional": "(opcionális)",
+  "paste-a-youtube-link": "Illessz be egy YouTube-hivatkozást, majd állítsd be a csata kezdetének pontos pillanatát. Mindenki, aki megnyitja, annál a másodpercnél érkezik a videóhoz, ezért a pontatlan időbélyegű javaslatokat az értékelés során elutasítjuk.",
+  "sending": "Küldés…",
+  "suggest": "Javasolj",
+  "suggest-a-video": "Videó javaslata",
+  "suggest-another": "Javasolj egy másikat",
+  "suggestion-sent": "Javaslat elküldve"
+}

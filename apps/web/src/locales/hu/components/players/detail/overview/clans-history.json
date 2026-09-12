@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname} klán-előzményei",
+  "clans-in-clans": "{totalClans} klán · {timeInClansSeconds} klánokban töltött idő",
+  "current": "jelenlegi",
+  "duration": "Időtartam",
+  "from": "Tól/Től",
+  "name": "Név",
+  "no-clan-history": "Nincs klán-előzmény.",
+  "role": "Szerep",
+  "tag": "Címke",
+  "to": "Egybe"
+}

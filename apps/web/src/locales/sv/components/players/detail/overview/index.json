@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistik för {nickname} i Slumptävlingar",
+  "progression-title": "Progression för {nickname} i {metric}",
+  "lift-drag-title": "Tanken som påverkar Rankning för {nickname}",
+  "progression-blurb": "Den heldragna linjen visar {metric} totalt (motsvarar kolumnen Totalt ovan) och förändras långsamt när nya Strider tillkommer. Den streckade linjen visar {metric} per session. Beräkningen baseras på de Strider som spelats sedan föregående mätpunkt. Den visar perioder med med- och motgångar. Linjens färg följer nivån i Rankning.",
+  "progression-empty": "Det finns inte tillräckligt med historik än. Vi behöver minst en mätpunkt för att rita kurvan. Kom tillbaka snart."
+}

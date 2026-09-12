@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Oyuncular",
+    "clans": "Klanlar",
+    "tanks": "Tanklar",
+    "maps": "Haritalar",
+    "tournaments": "Turnuvalar",
+    "servers": "Sunucular"
+  },
+  "links": {
+    "top-players": {
+      "label": "En iyi oyuncular",
+      "description": "Tüm zamanların oyuncu liderlik tablosu"
+    },
+    "players-onslaught": {
+      "description": "Dereceli Hücum merdiveni"
+    },
+    "players-steel-hunter": {
+      "description": "Battle royale liderlik tablosu"
+    },
+    "top-clans": {
+      "label": "En iyi klanlar",
+      "description": "Tüm zamanların klan liderlik tablosu"
+    },
+    "stronghold": {
+      "description": "Çatışmalar merdiveni"
+    },
+    "advances": {
+      "description": "Seviye X 15’e 15 sıralaması"
+    },
+    "tank-performances": {
+      "label": "Performanslar",
+      "description": "Tank başına galibiyet oranı ve hasar"
+    },
+    "tank-specs": {
+      "label": "Özellikler",
+      "description": "Her tank için istatistikler"
+    },
+    "tank-economics": {
+      "label": "Ekonomi",
+      "description": "Kredi ve DP kazandıranlar"
+    },
+    "tank-moe": {
+      "description": "Her işaret için hasar"
+    },
+    "tank-mom": {
+      "description": "Ustalık rozeti eşikleri"
+    },
+    "tank-changes": {
+      "label": "Değişiklikler",
+      "description": "Güncellemeye göre güçlendirmeler ve zayıflatmalar"
+    },
+    "tank-community": {
+      "label": "Topluluk değerlendirmeleri",
+      "description": "Onlara sahip oyuncular tarafından puanlandı"
+    },
+    "tank-videos": {
+      "label": "Videolar",
+      "description": "Topluluktan oynanış videoları"
+    },
+    "all-tournaments": {
+      "label": "Turnuvalar",
+      "description": "Açık ve tamamlanmış her turnuva"
+    },
+    "all-maps": {
+      "label": "Tüm haritalar",
+      "description": "Oyundaki her harita"
+    },
+    "map-changes": {
+      "label": "Değişiklikler",
+      "description": "Güncellemeye göre harita yeniden düzenlemeleri"
+    },
+    "battle-type": {
+      "description": "{type} haritaları"
+    },
+    "servers-population": {
+      "label": "Sunucu nüfusu",
+      "description": "Şu anda ve zaman içindeki çevrimiçi oyuncular"
+    }
+  }
+}

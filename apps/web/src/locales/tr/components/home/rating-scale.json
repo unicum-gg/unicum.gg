@@ -1,0 +1,21 @@
+{
+  "title": "Derecelendirme ölçeği",
+  "description": "Site genelinde galibiyet oranı ve navbar’da seçilen puan metriği için kullanılan renk eşikleri.",
+  "tier": "Seviye",
+  "tiers": {
+    "top": "En İyi",
+    "excellent": "Mükemmel",
+    "super": "Süper",
+    "very-good": "Çok iyi",
+    "good": "İyi",
+    "average": "Ortalama",
+    "below-avg": "Aşağı ortalama",
+    "bad": "Kötü",
+    "very-bad": "Çok kötü"
+  },
+  "rating-colors": "Derecelendirme renkleri",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

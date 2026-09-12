@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Laukiama pirmo snapshot",
+    "hidden": "Paslėpta Wargaming",
+    "active_24h": "Aktyvus < 24 val.",
+    "active_7d": "Aktyvus < 7 d.",
+    "recent_30d": "Neseniai aktyvus < 30 d.",
+    "recent_90d": "Neseniai aktyvus < 90 d.",
+    "dormant_1y": "Neaktyvus > 1 m.",
+    "inactive": "Neaktyvus > 1 m."
+  },
+  "rating-hype": {
+    "overrated": "Pervertintas",
+    "fair": "Teisingai įvertintas",
+    "underrated": "Nepakankamai įvertintas"
+  },
+  "rating-consensus": {
+    "agreed": "Platus sutarimas",
+    "mixed": "Mišrios nuomonės",
+    "divisive": "Keliantis ginčus"
+  },
+  "rating-axes": {
+    "overall": "Bendrai",
+    "fun": "Pramoga",
+    "firepower": "Šaunamoji galia",
+    "armour": "Armor",
+    "mobility": "Mobilumas",
+    "gunHandling": "Ginklo valdymas",
+    "concealment": "Maskuotė",
+    "beginnerFriendliness": "Draugiškas naujokams",
+    "versatility": "Universalumas"
+  },
+  "rating-axis-hints": {
+    "overall": "Kiek geras šis tankas, įvertinus viską?",
+    "fun": "Kiek jums patinka juo žaisti?",
+    "firepower": "Alfa, žala per minutę ir pramušimas.",
+    "armour": "Kiek jis atmuša, kai slepiamas korpusas ir atviroje vietoje.",
+    "mobility": "Greitis, įsibėgėjimas ir posūkiai.",
+    "gunHandling": "Taikymosi laikas, sklaida ir tikslumas judant.",
+    "concealment": "Maskuotė ir matymo nuotolis.",
+    "beginnerFriendliness": "Kiek jis atlaidus, jei dar mokotės.",
+    "versatility": "Ar jis veikia bet kuriame žemėlapyje ir bet kurioje komandoje?"
+  },
+  "voter-brackets": {
+    "unknown": "Neįvertintas",
+    "learning": "Mokymasis",
+    "average": "Vidurkis",
+    "strong": "Stiprus",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Technika",
+    "gunnery": "Šaudymas",
+    "armor": "Šarvai",
+    "mobility": "Mobilumas",
+    "vision": "Matymas",
+    "crew": "Įgula",
+    "progression": "Progresija",
+    "economy": "Ekonomika",
+    "ratings": "Reitingai",
+    "statistics": "Statistika",
+    "modes": "Mūšių režimai",
+    "tactics": "Taktika",
+    "slang": "Šnekta"
+  }
+}

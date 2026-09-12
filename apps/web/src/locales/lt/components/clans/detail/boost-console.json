@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Pridėti darbo eigą",
+  "boost": "Padidinti",
+  "each-workflow-activates-its-reserves": "Kiekviena eiga aktyvuoja savo atsargas nustatytu laiko langu, kai tiesioginėje žaidimo sesijoje būna pakankamai narių. Viskas vykdoma jūsų paskyroje, todėl nebūtina būti prisijungus. Pridėkite tiek, kiek reikia.",
+  "n-online": "/ {count} prisijungę",
+  "officer": "Vadas",
+  "online": "Internete",
+  "recent-activations": "neseni aktyvavimai",
+  "reserve": "Atsarga",
+  "stronghold-boosts": "Tvirtovės didinimai",
+  "when": "Kai",
+  "workflow": "Darbo procesas"
+}

@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Pagtataas ng rating",
+    "blurb": "Mga tank na sumusuporta sa pangkalahatang rating: kapag inalis ang mga ito, bababa ang rating.",
+    "empty": "Walang tank na sumusuporta sa pangkalahatang rating."
+  },
+  "drag": {
+    "heading": "Pagbaba ng rating",
+    "blurb": "Mga tank na nagpapababa sa pangkalahatang rating: kapag inalis ang mga ito, tataas ang rating.",
+    "empty": "Walang tank na nagpapababa sa pangkalahatang rating."
+  },
+  "if-removed": "{delta} kapag inalis"
+}

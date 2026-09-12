@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "clear-the-field": "Rensa {label}",
+  "credited-on-the-clan-s": "Krediteras på den egna sidan för Klan.",
+  "none": "Inga",
+  "optional": "(valfritt)",
+  "pick-the-vehicle": "Välj fordon",
+  "search-for-a-clan": "Hitta en Klan",
+  "search-for-a-vehicle": "Hitta ett fordon",
+  "search-tank": "Sök stridsvagn...",
+  "tank": "Tank",
+  "tank-hint-optional": "En taktik hör till sin karta, så det är bara värd att namnge den när videon också handlar om fordon.",
+  "tank-hint-required": "En slumpmässig strid slås upp med det fordon som den spelade i."
+}

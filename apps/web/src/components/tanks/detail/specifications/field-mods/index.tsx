@@ -21,6 +21,9 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
+import type { TranslateFunction } from "@onruntime/translations";
+import { statLabel } from "@/components/stat-label";
+import { useTranslation } from "@/hooks/use-translation";
 
 // Short labels for the characteristics a field-mod attribute moves, for the
 // effect tooltips. Unlisted attributes (damaged-state fines, stun, ...) show
@@ -107,9 +110,15 @@ const warnedAttrs = new Set<string>();
  * a warning: skill-tree effects are pre-filtered to characteristics we apply, so
  * an unlabeled one is a gap to fill (surfaces new tier-XI attributes without a
  * manual audit). */
-export function effectLabel(attribute: string): string {
+export function effectLabel(
+  attribute: string,
+  t: TranslateFunction,
+): string {
   const label = EFFECT_LABEL[attribute];
-  if (label) return label;
+  // `EFFECT_LABEL` stays the English source AND the key side: the namespace is
+  // keyed by our own name slugged rather than by the wot-src attribute, so two
+  // attributes that mean the same characteristic share one entry to translate.
+  if (label) return statLabel(label, t);
   if (process.env.NODE_ENV !== "production" && !warnedAttrs.has(attribute)) {
     warnedAttrs.add(attribute);
     console.warn(
@@ -140,6 +149,9 @@ export function fmtEffect(
 }
 
 function ModTooltip({ item }: { item: FieldModItem }) {
+  const { t: tEffects } = useTranslation(
+    "components/tanks/detail/specifications/field-mods/index",
+  );
   return (
     <div className="w-56 space-y-2 text-xs">
       <div className="font-medium">{item.name}</div>
@@ -148,7 +160,7 @@ function ModTooltip({ item }: { item: FieldModItem }) {
           {item.effects.map((e, i) => (
             <div key={i} className="flex justify-between gap-3 tabular-nums">
               <span className="text-background/60">
-                {effectLabel(e.attribute)}
+                {effectLabel(e.attribute, tEffects)}
               </span>
               <span>{fmtEffect(e.type, e.value, e.attribute)}</span>
             </div>
@@ -246,6 +258,11 @@ export function TankFieldModifications({
   /** A local under-title line (column-width), when stacked below another panel. */
   headerBorder?: boolean;
 }) {
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
+  const { t: tWidget } = useTranslation("components/tanks/detail/widgets");
+  const { t } = useTranslation(
+    "components/tanks/detail/specifications/field-mods/index",
+  );
   const levels = [...new Set(fieldMods.steps.map((s) => s.level))].sort(
     (a, b) => a - b,
   );
@@ -259,7 +276,7 @@ export function TankFieldModifications({
             headerBorder && "border-b border-fd-border",
           )}
         >
-          <PanelTitle>Field Modifications</PanelTitle>
+          <PanelTitle>{tSection("field-mods")}</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="overflow-x-auto px-4 py-6">
@@ -287,7 +304,7 @@ export function TankFieldModifications({
                         // last node also toggles off.
                         onClick={() => onLevel(lv === level ? lv - 1 : lv)}
                         aria-pressed={unlocked}
-                        aria-label={`Level ${lv}`}
+                        aria-label={tWidget("level", { n: lv })}
                         className="cursor-pointer"
                       >
                         <span
@@ -328,11 +345,11 @@ export function TankFieldModifications({
                       ) : (
                         <div className="w-48 text-xs">
                           <div className="font-medium">
-                            {main?.feature?.name ?? `Level ${lv}`}
+                            {main?.feature?.name ?? tWidget("level", { n: lv })}
                           </div>
                           <div className="mt-1 text-background/60">
                             {main?.feature?.description ??
-                              "No characteristic effect."}
+                              t("no-characteristic-effect")}
                           </div>
                         </div>
                       )}

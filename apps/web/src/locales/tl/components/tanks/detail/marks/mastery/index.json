@@ -1,0 +1,8 @@
+{
+  "last-days": "Huling {chartDays} araw",
+  "n-players": "{count, plural, one {# manlalaro} other {# mga manlalaro}}",
+  "rolling-average-combined-damage-to": "Rolling average ng pinagsamang pinsala para talunin ang 65 / 85 / 95% ng mga manlalaro.",
+  "single-battle-xp-to-beat": "XP sa isang labanan para talunin ang 50 / 80 / 95 / 99% ng mga manlalaro.",
+  "tank-marks-of-excellence": "Mga Mark of Excellence ng {tank}",
+  "tank-marks-of-mastery": "Mga Mark of Mastery ng {tank}"
+}

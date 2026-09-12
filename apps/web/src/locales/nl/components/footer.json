@@ -1,0 +1,25 @@
+{
+  "tagline": "Gemaakt voor de World of Tanks-community. Beschikbaar zonder kosten: statistieken voor elke speler, clan, Tank en map in de regio’s EU, NA en Azië.",
+  "columns": {
+    "leaderboards": "Ranglijsten",
+    "tanks": "Tanks",
+    "maps": "Kaarten",
+    "integrations": "Integraties",
+    "project": "Project"
+  },
+  "links": {
+    "top-tanks": "Top tanks",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "API-documentatie",
+    "badges": "Badges",
+    "glossary": "Glossarium",
+    "coverage": "Dekking",
+    "support": "Steun ons",
+    "source": "Broncode",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Niet gelieerd aan Wargaming",
+  "cookies": "Cookies beheren"
+}

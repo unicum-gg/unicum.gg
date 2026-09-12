@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Vidurkis pagal {rated} iš {size} žaidėjų",
+  "average-over-recent": "Vidurkis pagal {rated} iš {size} žaidėjų, žaidusių per pastarąsias 30 dienų",
+  "metric-over-last-30-days": "{metric} per pastarąsias 30 dienų",
+  "n-confirmed": "Patvirtinta: {count}",
+  "no-team-matches-the-current": "Nė viena komanda neatitinka dabartinių filtrų.",
+  "no-teams-recorded-yet-registrations": "Komandų dar neužfiksuota. Registracijos čia pasirodo, kai šis turnyras visiškai perskaitomas, o tai įvyksta per kelias minutes nuo jo atidarymo.",
+  "none-played-in-30-days": "Nė vienas iš šios sudėties nežaidė per pastarąsias 30 dienų",
+  "players": "Žaidėjai",
+  "qualified": "Kvalifikuoti",
+  "reward": "Atlygis",
+  "team": "Komanda",
+  "teams": "Komandos ({length})",
+  "wr": "WR"
+}

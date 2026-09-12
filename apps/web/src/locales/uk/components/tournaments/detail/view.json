@@ -1,0 +1,11 @@
+{
+  "closes": "Закрити {when}",
+  "map-pool": "Басейн карт",
+  "place": "Місце",
+  "prize": "Приз",
+  "prizes": "Призи",
+  "qualified": "Кваліфікувалися ({count})",
+  "register": "Реєстрація",
+  "tournaments": "Турніри",
+  "winner": "{count, plural, one {Переможець} few {Переможці} many {Переможців} other {Переможців}}"
+}

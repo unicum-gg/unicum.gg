@@ -1,0 +1,8 @@
+{
+  "last-days": "Последните {chartDays} дни",
+  "n-players": "{count, plural, one {# играч} other {# игачи}}",
+  "rolling-average-combined-damage-to": "Пълзяща средна стойност на комбинираните щети, нужни за победа над 65 / 85 / 95% от играчите.",
+  "single-battle-xp-to-beat": "XP от една битка, нужни за победа над 50 / 80 / 95 / 99% от играчите.",
+  "tank-marks-of-excellence": "Знаци за отличие на {tank}",
+  "tank-marks-of-mastery": "Знаци за майсторство на {tank}"
+}

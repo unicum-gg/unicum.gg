@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "プレイヤー",
+    "clans": "クラン",
+    "tanks": "戦車",
+    "maps": "マップ",
+    "tournaments": "トーナメント",
+    "servers": "サーバー"
+  },
+  "links": {
+    "top-players": {
+      "label": "トッププレイヤー",
+      "description": "全期間のプレイヤーランキング"
+    },
+    "players-onslaught": {
+      "description": "ランク戦オンスロートのランキング"
+    },
+    "players-steel-hunter": {
+      "description": "バトルロイヤルのランキング"
+    },
+    "top-clans": {
+      "label": "トップクラン",
+      "description": "全期間のクランランキング"
+    },
+    "stronghold": {
+      "description": "前衛戦ランキング"
+    },
+    "advances": {
+      "description": "Tier X 15対15ランキング"
+    },
+    "tank-performances": {
+      "label": "パフォーマンス",
+      "description": "戦車ごとの勝率とダメージ"
+    },
+    "tank-specs": {
+      "label": "仕様",
+      "description": "すべての戦車の戦績"
+    },
+    "tank-economics": {
+      "label": "経済",
+      "description": "クレジットと経験値の獲得量"
+    },
+    "tank-moe": {
+      "description": "各マークに必要なダメージ"
+    },
+    "tank-mom": {
+      "description": "マスターバッジの基準値"
+    },
+    "tank-changes": {
+      "label": "変更履歴",
+      "description": "更新ごとの強化と弱体化"
+    },
+    "tank-community": {
+      "label": "コミュニティ評価",
+      "description": "所有者による評価"
+    },
+    "tank-videos": {
+      "label": "ビデオ",
+      "description": "コミュニティのプレイ動画"
+    },
+    "all-tournaments": {
+      "label": "トーナメント",
+      "description": "開催済みと終了済みを含むすべてのトーナメント"
+    },
+    "all-maps": {
+      "label": "すべてのマップ",
+      "description": "ゲーム内のすべてのマップ"
+    },
+    "map-changes": {
+      "label": "変更履歴",
+      "description": "更新ごとのマップ改修"
+    },
+    "battle-type": {
+      "description": "{type} マップ"
+    },
+    "servers-population": {
+      "label": "サーバー人口",
+      "description": "現在および時間推移のオンラインプレイヤー数"
+    }
+  }
+}

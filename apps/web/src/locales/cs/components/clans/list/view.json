@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Nejlepší <accent>klany</accent>",
+    "language": "Nejlepší klany s jazykem <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Žebříček pro region {region}, seřazený podle průměrné hodnoty {metric} u sledovaných členů každého klanu (alespoň 50 členů, kteří odehráli bitvy).",
+    "language": "Klany v regionu {region}, u nichž je mezi uvedenými jazyky {language}, seřazené podle průměrné hodnoty {metric} u sledovaných členů (alespoň 25 členů, kteří odehráli bitvy).",
+    "strict": "Klany v regionu {region}, jejichž jediným uvedeným jazykem je {language}, seřazené podle průměrné hodnoty {metric} u sledovaných členů (alespoň 25 členů, kteří odehráli bitvy)."
+  },
+  "board": {
+    "all": "Nejlepších {count} klanů podle {metric}",
+    "language": "Nejlepších {count} klanů s jazykem {language} podle {metric}",
+    "strict": "Nejlepších {count} klanů výhradně s jazykem {language} podle {metric}"
+  },
+  "members": "Členové",
+  "strict-toggle": "Přísný",
+  "any-toggle": "Jakýkoli",
+  "all-languages": "Všechny jazyky",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

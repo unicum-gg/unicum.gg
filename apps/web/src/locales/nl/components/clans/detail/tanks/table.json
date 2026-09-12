@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Nog geen tankgegevens voor deze clan.",
+  "no-tanks-match-these-filters": "Geen tanks die aan deze filters voldoen.",
+  "nation": "Natie",
+  "type": "Type",
+  "tier": "niveau",
+  "name": "Naam",
+  "members": "Leden",
+  "battles": "Gevechten",
+  "avg-damage": "Gem. schade",
+  "avg-xp": "Gem. XP",
+  "wr": "WR"
+}

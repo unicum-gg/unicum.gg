@@ -1,0 +1,162 @@
+{
+  "columns-label": "Kolommen",
+  "groups": {
+    "firepower": "Vuurkracht",
+    "gun-handling": "Wapen hantering",
+    "mobility": "Mobiliteit",
+    "survivability": "Overlevingsvermogen",
+    "other": "Overig"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Beschadig per minuut"
+    },
+    "damage": {
+      "label": "Beschadig",
+      "tip": "Alpha beschadig"
+    },
+    "moduleDamage": {
+      "label": "Module beschadig"
+    },
+    "splashRadius": {
+      "label": "Explosieradius"
+    },
+    "reload": {
+      "label": "Herladen",
+      "tip": "Herladen (volledig magazijn voor autoloaders)"
+    },
+    "rof": {
+      "label": "Vuursnelheid",
+      "tip": "Schoten per minuut"
+    },
+    "intraClipReload": {
+      "label": "Intra-Clip herladen",
+      "tip": "Tijd tussen schoten in een magazijn (autoloaders)"
+    },
+    "penetration": {
+      "label": "Penetratie",
+      "tip": "Penetratie (mm), standaardgranaat"
+    },
+    "caliber": {
+      "label": "Kaliber",
+      "tip": "Kaliber van granaat (mm)"
+    },
+    "shellVelocity": {
+      "label": "Granaatsnelheid",
+      "tip": "Projectielsnelheid (m/s)"
+    },
+    "accuracy": {
+      "label": "Nauwkeurigheid",
+      "tip": "Verspreiding op 100 m (lager is beter)"
+    },
+    "aimTime": {
+      "label": "Aim tijd"
+    },
+    "dispMoving": {
+      "label": "Verspreiding tijdens bewegen",
+      "tip": "Factor voor Verspreiding tijdens beweging"
+    },
+    "dispTankTraverse": {
+      "label": "Verspreiding bij het draaien van de Tank"
+    },
+    "dispTurretTraverse": {
+      "label": "Verspreiding bij Turretrotering"
+    },
+    "dispAfterShot": {
+      "label": "Verspreiding na het schieten"
+    },
+    "dispWhileDamaged": {
+      "label": "Verspreiding bij beschadiging"
+    },
+    "gunArc": {
+      "label": "Kanonhoek",
+      "tip": "Horizontale richtboog van het Kanon"
+    },
+    "depression": {
+      "label": "Kanondepressie / elevatie",
+      "tip": "Gun depressie / elevatie"
+    },
+    "speed": {
+      "label": "Snelheid (vooruit / achteruit)",
+      "tip": "Hoge snelheid vooruit / achteruit (km/u)"
+    },
+    "hullTraverse": {
+      "label": "Romprichting"
+    },
+    "turretTraverse": {
+      "label": "Turretrotering"
+    },
+    "enginePower": {
+      "label": "Vermogen",
+      "tip": "Motorvermogen (pk)"
+    },
+    "powerWeight": {
+      "label": "Vermogen/gewicht",
+      "tip": "pk per ton"
+    },
+    "terrainHard": {
+      "label": "Harde ondergrond",
+      "tip": "Terreinweerstand op harde ondergrond (lager is beter)"
+    },
+    "terrainMedium": {
+      "label": "Middelharde ondergrond"
+    },
+    "terrainSoft": {
+      "label": "Zachte ondergrond"
+    },
+    "health": {
+      "label": "Levenspunten",
+      "tip": "Hitpoints"
+    },
+    "engineHealth": {
+      "label": "Duurzaamheid motor"
+    },
+    "engineFireChance": {
+      "label": "Kans op motorbrand"
+    },
+    "hullArmorFront": {
+      "label": "Rompbepantsering (voorzijde)",
+      "tip": "Romp pantser aan de voorzijde (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Koepelbepantsering (voorzijde)",
+      "tip": "Koepel pantser aan de voorzijde (mm)"
+    },
+    "trackArmor": {
+      "label": "Track bepantsering"
+    },
+    "trackHealth": {
+      "label": "Duurzaamheid rupsbanden"
+    },
+    "trackRepairTime": {
+      "label": "Hersteltijd rupsband"
+    },
+    "ammoRackHealth": {
+      "label": "Duurzaamheid munitierek"
+    },
+    "weight": {
+      "label": "Gewicht"
+    },
+    "viewRange": {
+      "label": "Zichtbereik",
+      "tip": "Zicht bereik (m)"
+    },
+    "radioRange": {
+      "label": "Radiobereik",
+      "tip": "Signaal bereik (m)"
+    },
+    "camoStill": {
+      "label": "Camouflage bij stilstand"
+    },
+    "camoMoving": {
+      "label": "Camouflage tijdens rijden"
+    },
+    "camoStillFiring": {
+      "label": "Camouflage na het schieten (stilstaand)"
+    },
+    "camoMovingFiring": {
+      "label": "Camouflage na het schieten (in beweging)"
+    }
+  }
+}

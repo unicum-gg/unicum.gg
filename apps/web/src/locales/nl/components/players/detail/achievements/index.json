@@ -1,0 +1,12 @@
+{
+  "achievements": "Onderscheidingen van {nickname}",
+  "filter-all": "Alle",
+  "filter-both": "Beide",
+  "filter-earned": "Verdiend",
+  "filter-missing": "Ontbrekend",
+  "filter-obtainable": "Te verdienen",
+  "filter-retired": "Niet meer beschikbaar",
+  "no-achievement-matches-these-filters": "Geen enkele onderscheiding komt overeen met deze filters.",
+  "search-achievements": "Zoeken naar onderscheidingen",
+  "search-among-n-achievements": "Zoeken in {count} prestaties"
+}

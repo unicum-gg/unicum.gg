@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Bunka vyjadruje podiel víťazstiev danej skupiny na príslušnej úrovni zo všetkých jej bitiek na tejto úrovni, a to naprieč všetkými vozidlami, s ktorými hráč odohral aspoň {minBattles} bitiek. Opisuje teda jednotlivé úrovne podľa výsledkov ľudí, ktorí na nich hrajú. Bunky založené na menej ako {TIERWINRATETHINCELL} bitkách sú zobrazené nevýrazne, pretože ich hodnoty kolíšu aj z iných dôvodov než pre schopnosti hráčov. Farby zodpovedajú rovnakým pásmam miery víťazstiev, aké sa používajú na celom webe.",
+  "cell-no-sample": "{where}, bez vzorky",
+  "cell-winrate": "{where}, miera víťazstiev {winrate} v {battles} bitkách",
+  "metric-band": "Pásmo hodnoty {metric}",
+  "nothing-recorded": "Pre metriku {metric} zatiaľ nie sú zaznamenané žiadne údaje. Mriežka sa každú noc zostavuje nanovo.",
+  "over-battles-from-accounts": "{winrate} za {battles} bitiek z {players} účtov",
+  "over-n-battles": "v {battles} bitkách",
+  "what-players-win-by-tier": "Miera víťazstiev hráčov kategórie {label} podľa úrovne"
+}

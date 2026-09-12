@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks-klan ({region}), {members} medlemmer",
+    "description": "{name} [{tag}] på {region}: {members} medlemmer, fuld medlemstabel med WN8- og WNX-vurderinger, seneste ind- og udmeldelser samt klanhistorik."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} højborgsstatistik ({region})",
+    "description": "{name} [{tag}]: højborgsresultater på {region}, med vurderinger, kampe og sejrsrate for træfninger og fremstød for hvert medlem."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} Clan Wars-statistik ({region})",
+    "description": "{name} [{tag}]: Clan Wars-resultater på {region} med vurderinger, kampe og sejrsrate pr. medlem på tværs af kampagnerne på det globale kort."
+  },
+  "tanks": {
+    "title": "[{tag}] {name}-kampvogne ({region}), klanens køretøjer",
+    "description": "Alle køretøjer, {name} [{tag}] har spillet på {region}, med kampe, sejrsrate og gennemsnitlig skade samlet på tværs af klanens medlemmer."
+  },
+  "manage": {
+    "title": "[{tag}] {name} højborgsreserver ({region})",
+    "description": "Aktivér og planlæg højborgsreserver for {name} [{tag}]. Kun officerer."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks-klan på {region}: medlemstabel med WN8-/WNX-vurderinger, ind- og udmeldelser, seneste kampe og fuld klanhistorik."
+  }
+}

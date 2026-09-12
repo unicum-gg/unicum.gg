@@ -3,6 +3,7 @@
 import { SlidersHorizontalIcon } from "@phosphor-icons/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useCookie } from "@/hooks/use-cookie";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * Cookie-backed set of visible column keys for a tanks table, shared between the
@@ -40,11 +41,16 @@ export function ColumnSelector({
   items,
   selected,
   onToggle,
+  label,
 }: {
-  items: readonly { key: string; label: string }[];
+  items: readonly { key: string }[];
   selected: Set<string>;
   onToggle: (key: string) => void;
+  /** How a column names itself. The tables hold keys, not wording: each one
+   * looks its own up in its own namespace. */
+  label: (key: string) => string;
 }) {
+  const { t } = useTranslation("components/tanks/list/column-visibility");
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -65,7 +71,7 @@ export function ColumnSelector({
         className="flex h-7 cursor-pointer items-center gap-1.5 rounded-md border border-fd-border px-3 text-xs font-medium transition-colors hover:bg-fd-secondary/40"
       >
         <SlidersHorizontalIcon weight="bold" className="size-3.5" />
-        Columns
+        {t("columns")}
         <span className="text-fd-muted-foreground">
           {selected.size}/{items.length}
         </span>
@@ -83,7 +89,7 @@ export function ColumnSelector({
                 onChange={() => onToggle(c.key)}
                 className="size-3.5 accent-brand"
               />
-              <span>{c.label}</span>
+              <span>{label(c.key)}</span>
             </label>
           ))}
         </div>

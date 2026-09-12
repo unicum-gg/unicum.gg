@@ -1,0 +1,162 @@
+{
+  "columns-label": "Cột",
+  "groups": {
+    "firepower": "Hỏa lực",
+    "gun-handling": "Khả năng xử lý súng",
+    "mobility": "Độ Cơ động",
+    "survivability": "Khả năng Sống sót",
+    "other": "Khác"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Sát thương mỗi phút"
+    },
+    "damage": {
+      "label": "Sát thương",
+      "tip": "Sát thương Alpha"
+    },
+    "moduleDamage": {
+      "label": "Sát thương mô-đun"
+    },
+    "splashRadius": {
+      "label": "Bán kính nổ"
+    },
+    "reload": {
+      "label": "Tái nạp",
+      "tip": "Nạp đạn (băng đạn đầy đủ với xe tăng nạp tự động)"
+    },
+    "rof": {
+      "label": "Tốc độ Bắn",
+      "tip": "Số viên đạn mỗi phút"
+    },
+    "intraClipReload": {
+      "label": "Tái nạp Trong Băng Đạn",
+      "tip": "Thời gian giữa các phát bắn trong một băng đạn (xe tăng nạp tự động)"
+    },
+    "penetration": {
+      "label": "Độ xuyên",
+      "tip": "Độ xuyên (mm), đạn mặc định"
+    },
+    "caliber": {
+      "label": "Cỡ nòng",
+      "tip": "Cỡ đạn (mm)"
+    },
+    "shellVelocity": {
+      "label": "Vận tốc Đạn",
+      "tip": "Vận tốc đạn (m/s)"
+    },
+    "accuracy": {
+      "label": "Độ chính xác",
+      "tip": "Độ phân tán ở 100 m (thấp hơn sẽ tốt hơn)"
+    },
+    "aimTime": {
+      "label": "Thời gian ngắm"
+    },
+    "dispMoving": {
+      "label": "Khuếch tán Khi Di Chuyển",
+      "tip": "Hệ số Khuếch tán khi di chuyển"
+    },
+    "dispTankTraverse": {
+      "label": "Khuếch tán khi xoay thân xe tăng"
+    },
+    "dispTurretTraverse": {
+      "label": "Khuếch tán khi xoay tháp pháo"
+    },
+    "dispAfterShot": {
+      "label": "Khuếch tán sau khi bắn"
+    },
+    "dispWhileDamaged": {
+      "label": "Khuếch tán khi bị hư hại"
+    },
+    "gunArc": {
+      "label": "Góc quay pháo",
+      "tip": "Góc xoay ngang của nòng pháo"
+    },
+    "depression": {
+      "label": "Góc hạ / nâng nòng pháo",
+      "tip": "Góc hạ / nâng nòng pháo"
+    },
+    "speed": {
+      "label": "Tốc độ (tiến / lùi)",
+      "tip": "Tốc độ tối đa khi tiến / lùi (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Quay Thân Xe"
+    },
+    "turretTraverse": {
+      "label": "Quay Tháp Pháo"
+    },
+    "enginePower": {
+      "label": "Công suất",
+      "tip": "Công suất động cơ (hp)"
+    },
+    "powerWeight": {
+      "label": "Công suất/trọng lượng",
+      "tip": "hp mỗi tấn"
+    },
+    "terrainHard": {
+      "label": "Địa hình cứng",
+      "tip": "Sức cản địa hình trên nền đất cứng (thấp hơn sẽ tốt hơn)"
+    },
+    "terrainMedium": {
+      "label": "Địa Hình Medium"
+    },
+    "terrainSoft": {
+      "label": "Địa hình mềm"
+    },
+    "health": {
+      "label": "Độ bền",
+      "tip": "Điểm hit"
+    },
+    "engineHealth": {
+      "label": "Độ bền động cơ"
+    },
+    "engineFireChance": {
+      "label": "Tỷ lệ Cháy Động Cơ"
+    },
+    "hullArmorFront": {
+      "label": "Giáp thân xe (phía trước)",
+      "tip": "Giáp thân xe phía trước (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Giáp tháp pháo (phía trước)",
+      "tip": "Giáp tháp pháo phía trước (mm)"
+    },
+    "trackArmor": {
+      "label": "Giáp xích"
+    },
+    "trackHealth": {
+      "label": "Độ bền xích"
+    },
+    "trackRepairTime": {
+      "label": "Thời gian sửa xích"
+    },
+    "ammoRackHealth": {
+      "label": "Độ bền giá đạn"
+    },
+    "weight": {
+      "label": "Trọng lượng"
+    },
+    "viewRange": {
+      "label": "Tầm Nhìn",
+      "tip": "Tầm nhìn (m)"
+    },
+    "radioRange": {
+      "label": "Tầm liên lạc",
+      "tip": "Phạm vi tín hiệu (m)"
+    },
+    "camoStill": {
+      "label": "Ngụy trang khi đứng yên"
+    },
+    "camoMoving": {
+      "label": "Ngụy trang khi di chuyển"
+    },
+    "camoStillFiring": {
+      "label": "Ngụy trang khi đứng yên sau khi bắn"
+    },
+    "camoMovingFiring": {
+      "label": "Ngụy trang khi di chuyển sau khi bắn"
+    }
+  }
+}

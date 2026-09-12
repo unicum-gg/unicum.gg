@@ -1,0 +1,60 @@
+{
+  "columns-label": "Stĺpce",
+  "groups": {
+    "general": "Všeobecné",
+    "combat": "Boj"
+  },
+  "columns": {
+    "battles": {
+      "label": "Bitky",
+      "tip": "Celkový počet bitiek odohraných s tankom"
+    },
+    "count": {
+      "label": "Počet",
+      "tip": "Počet sledovaných hráčov vo vzorke"
+    },
+    "rating": {
+      "label": "Hodnotenie (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Miera víťazstiev s tankom"
+    },
+    "playerWr": {
+      "label": "WR hráča",
+      "tip": "Priemerná celková miera víťazstiev hráčov, ktorí s ním hrajú"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Priemerné poškodenie za bitku"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Pomer zničení / úmrtí"
+    },
+    "assists": {
+      "label": "Asistencie",
+      "tip": "Priemerné asistované poškodenie"
+    },
+    "hitPct": {
+      "label": "Hit %",
+      "tip": "Zásahy / výstrely"
+    },
+    "penPct": {
+      "label": "Pen %",
+      "tip": "Priestrely / zásahy"
+    },
+    "spots": {
+      "label": "Zasadenia",
+      "tip": "Priemerný počet odhalení za bitku"
+    },
+    "blocked": {
+      "label": "Blokované",
+      "tip": "Priemerné poškodenie zablokované pancierom"
+    },
+    "survival": {
+      "label": "Prežitie",
+      "tip": "Podiel prežitých bitiek"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Facturat în euro, convertit în {currency} la cursul de astăzi.",
+  "cost-breakdown": "Detalierea costului",
+  "estimated-annual-cost": "Cost anual estimat",
+  "fixed-month-bill-no-surprises": "O factură fixă de {totalAnnualEur}/lună, fără surprize: un server închiriat, fără SaaS terț pe traseul datelor. Crește doar când depășim capacitatea serverului (un volum mai mare de date Wargaming înseamnă mai multe IP-uri de ieșire).",
+  "free": "gratuit",
+  "one-off-spend": "Cheltuială unică",
+  "paid-once-so-it-is": "Plătit o singură dată, deci nu face parte din factura lunară de mai sus. Totuși, este inclus în costul total de până acum al proiectului.",
+  "previously": "Anterior"
+}

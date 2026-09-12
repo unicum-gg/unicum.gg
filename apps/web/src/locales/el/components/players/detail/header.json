@@ -1,0 +1,7 @@
+{
+  "joined": "Εγγράφηκε {date}",
+  "last-battle": "Τελευταία μάχη {when}",
+  "never-played": "Δεν έχει παίξει ποτέ",
+  "updated": "Ενημερωμένο {when}",
+  "clan-role-joined": "{role} · έγινε μέλος στις {date}"
+}

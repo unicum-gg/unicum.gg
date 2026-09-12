@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Všech {count} bitevních arén ve World of Tanks. Filtrujte podle typu kamufláže a herního režimu, poté otevřete mapu a zobrazte její minimapu, rozměry, vlajky základen a místa nasazení pro jednotlivé režimy.",
+    "title": "Všechny mapy World of Tanks ({region}), každá bitevní aréna",
+    "description": "Procházejte všechny mapy World of Tanks na serveru {region}: minimapy, rozměry, typy kamufláže a podporované herní režimy včetně vlajek základen a míst nasazení pro jednotlivé režimy.",
+    "heading": "Všechny <accent>mapy</accent>"
+  },
+  "battle-type": {
+    "intro": "Přehled všech {count} map World of Tanks pro režim {type}: {blurb}. Otevřete mapu a zobrazte její minimapu, rozměry, vlajky základen a místa nasazení pro jednotlivé režimy.",
+    "title": "Mapy World of Tanks pro režim {type} ({region}), všechny arény v rotaci",
+    "description": "Všechny mapy World of Tanks v rotaci pro režim {type} na serveru {region}: minimapy, rozměry, typy kamufláže a podporované herní režimy včetně vlajek základen a míst nasazení.",
+    "heading": "{type} <accent>mapy</accent>"
+  },
+  "blurbs": {
+    "random": "standardní rotace 15v15",
+    "battle_royale": "režim, ve kterém vítězí poslední přeživší tank",
+    "frontline": "rozsáhlý režim 30v30",
+    "onslaught": "hodnocený režim 7v7",
+    "onslaught_night": "hodnocený režim 7v7 po setmění s kratším dohledem, aktuálně hratelný v klientu Společný test",
+    "grand_battle": "režim 30v30 určený pro X. úroveň",
+    "clan_wars": "Klanoé války a Ofenzívy",
+    "waffentrager": "událost Waffenträger",
+    "last_stand": "událost Poslední vzdor",
+    "arcade": "arkádové a speciální události",
+    "story_mode": "příběhové operace",
+    "training": "Výcvikové mapy a výukové lekce"
+  }
+}

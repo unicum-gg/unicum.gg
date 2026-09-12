@@ -1,0 +1,12 @@
+{
+  "aria-build": "تمت قراءته على عميل الاختبار المشترك، الإصدار {version}",
+  "aria-changes": "غيّر الاختبار المشترك {changes} من الخصائص",
+  "aria-described": "الاختبار المشترك: {description}",
+  "aria-vehicle": "مركبة في الاختبار المشترك",
+  "common-test": "اختبار مشترك",
+  "common-test-build": "اختبار مشترك {version}",
+  "tip-build": "{label} · هذه قيم إصدار الاختبار، ولا يزال بإمكان Wargaming تغييرها قبل إصدار التحديث",
+  "tip-changes": "تغييرات اختبار مشترك {changes, plural, zero {# خاصية} one {# خاصية} two {# خاصيتان} few {# خصائص} many {# خاصية} other {# خاصية}} على هذه المركبة",
+  "tip-described": "اختبار مشترك · {description}",
+  "tip-vehicle": "اختبار مشترك · لم تُصدر بعد، لذلك لا تملك إحصائيات معارك، ولا تزال خصائصها قابلة للتغيير"
+}

@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "أفضل <accent>اللاعبين</accent>",
+    "language": "أفضل لاعبي <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "قائمة متصدري {region}، مرتبة حسب {metric} طوال الوقت، بحد أدنى 20,000 معركة.",
+    "language": "لاعبو {region} الذين تتضمن مجموعة لغاتهم المستنتجة من تاريخ القبائل {language}، مرتبين حسب {metric}، بحد أدنى 10,000 معركة.",
+    "strict": "لاعبو {region} الذين لغتهم المستنتجة من تاريخ القبائل هي {language} حصريًا، مرتبين حسب {metric}، بحد أدنى 10,000 معركة."
+  },
+  "board": {
+    "all": "أفضل {count} اللاعبين حسب {metric}",
+    "language": "أفضل {count} من اللاعبين الناطقين بـ{language} حسب {metric}",
+    "strict": "أفضل {count} من اللاعبين الناطقين حصراً بـ{language} حسب {metric}"
+  },
+  "modes": {
+    "overall": "بشكل عام"
+  },
+  "columns": {
+    "player": "لاعب"
+  },
+  "strict-toggle": "صارم",
+  "any-toggle": "أي",
+  "all-languages": "جميع اللغات",
+  "battles": "معارك",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

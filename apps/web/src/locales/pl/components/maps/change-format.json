@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Szerokość obszaru gry",
+    "height": "Wysokość obszaru gry",
+    "round-length": "Czasomierz bitwy",
+    "team-size": "Wielkość drużyny",
+    "camouflage": "Sezon",
+    "presence": "W grze",
+    "variant-version": "Wersja {type}",
+    "play-area": "Obszar gry",
+    "bases-team1": "Bazy sojusznicze",
+    "bases-team2": "Bazy przeciwnika",
+    "spawns-team1": "Punkty odrodzenia sojuszników",
+    "spawns-team2": "Punkty odrodzenia przeciwnika",
+    "control-point": "Punkt kontrolny",
+    "artillery-headquarters": "Kwatera artylerii",
+    "comms-centers": "Centra łączności",
+    "observation-posts": "Posterunki obserwacyjne",
+    "points-of-interest": "Punkty docelowe"
+  },
+  "summary": {
+    "added": "Dodano {name}",
+    "removed": "Usunięto {name}",
+    "added-to-game": "Dodano do gry",
+    "removed-from-game": "Usunięto z gry",
+    "added-on-test": "Dodano w kliencie testowym",
+    "removed-on-test": "Usunięto z klienta testowego",
+    "mode-added": "Dodano tryb {name}",
+    "mode-removed": "Usunięto tryb {name}",
+    "now-played-in": "Teraz rozgrywane w {name}",
+    "no-longer-played-in": "Nie są już dłużej rozgrywane w {name}",
+    "event-added": "{name} może teraz wystąpić w trakcie bitwy",
+    "event-removed": "{name} już nie występuje",
+    "moved": "Przeniesiono {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

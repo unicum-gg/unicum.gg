@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Podnoszenie klasyfikacji",
+    "blurb": "Czołgi podnoszące klasyfikację ogólną: ich usunięcie obniżyłoby ją.",
+    "empty": "Żaden czołg nie podnosi klasyfikacji ogólnej."
+  },
+  "drag": {
+    "heading": "Obniżanie klasyfikacji",
+    "blurb": "Czołgi obniżające klasyfikację ogólną: ich usunięcie podniosłoby ją.",
+    "empty": "Żaden czołg nie obniża klasyfikacji ogólnej."
+  },
+  "if-removed": "{delta} po usunięciu"
+}

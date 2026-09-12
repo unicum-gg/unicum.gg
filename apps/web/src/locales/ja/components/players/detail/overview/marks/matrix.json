@@ -1,0 +1,7 @@
+{
+  "loading": "Tier {tier}の車両{count}両、名前を読み込み中…",
+  "loading-one": "Tier {tier}の車両{count}両、名前を読み込み中…",
+  "and-more": "さらに{count}件",
+  "hint": "クリックして戦車タブで開く",
+  "tier": "Tier"
+}

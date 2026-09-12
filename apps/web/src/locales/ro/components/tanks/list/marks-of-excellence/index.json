@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: daunele medii combinate pe o perioadă mobilă (ultimele ~100 de bătălii) trebuie să depășească 65% dintre jucători pe acest tanc în ultimele 14 zile"
+    },
+    "mark2": {
+      "label": "2 Marks",
+      "tip": "2 Marks: media ta mobilă a daunelor combinate (ultimele ~100 de bătălii) trebuie să depășească rezultatele a 85% dintre jucătorii cu acest tanc în ultimele 14 zile"
+    },
+    "mark3": {
+      "label": "3 Marks",
+      "tip": "3 Marks: media ta mobilă a daunelor combinate (ultimele ~100 de bătălii) trebuie să depășească rezultatele a 95% dintre jucătorii cu acest tanc în ultimele 14 zile"
+    }
+  },
+  "rows-per-page": "Rânduri pe pagină",
+  "previous-page": "Pagina anterioară",
+  "page": "Pagină {current} / {totalPages}",
+  "next-page": "Pagina următoare",
+  "all": "Toate"
+}

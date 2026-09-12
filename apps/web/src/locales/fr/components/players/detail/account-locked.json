@@ -1,0 +1,5 @@
+{
+  "title": "Compte verrouillé",
+  "body": "Le compte de {nickname} existe sur {region}, mais Wargaming l’a verrouillé. Ses statistiques ne sont donc pas disponibles.",
+  "back-to-home": "Retour à l’accueil"
+}

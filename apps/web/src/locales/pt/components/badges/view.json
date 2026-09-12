@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Tabela de Classificação de {board}",
+  "carried-beside-a-clan-tag": "Apresentado junto a uma tag de clã. Um emblema de classificação representa uma posição numa competição. O número indica a posição e a cor identifica a tabela. As classificações por pontuação não atribuem nenhum, pois uma posição elevada no WN8 não é algo que um clã possa ganhar.",
+  "clan-badges": "Emblemas de Clã",
+  "clan-board": {
+    "name": "Entre os {rank} primeiros na tabela {board}",
+    "how": "Uma posição entre as {rank} primeiras na tabela {board}. Mantido enquanto o clã ocupar essa posição e perdido quando deixar de a ocupar."
+  },
+  "clan-overflow": "Quando um clã ocupa mais de três posições, as restantes são agrupadas num emblema {plus}, começando pela melhor, para que a tag continue legível. Ao passar o cursor sobre o emblema, são apresentados os respetivos nomes.",
+  "featured-tournament-winner": {
+    "name": "Vencedor de torneio em destaque",
+    "how": "Conquistado da mesma forma, mas num evento que a Wargaming assinala como destaque. Dourado em vez de cor de aço, exatamente como na versão para jogadores."
+  },
+  "heading": "Cada {badge} e como o obter",
+  "heading-accent": "distintivo",
+  "marks-carried-beside-a-nickname": "Marcas apresentadas junto a uma alcunha onde quer que apareça em {NAME}: tabelas classificativas, listas de clãs, pesquisas e quadros de torneios.",
+  "n-badges": "{count} distintivos",
+  "onslaught-champion": {
+    "name": "Campeão de Massacre",
+    "how": "Alcançou a classificação de Campeão em Investida, o requisito mínimo para sequer aparecer em {standings}. Mantido posteriormente: se a pontuação voltar a cair abaixo do limite, perde-se a posição, mas não o facto de a ter alcançado."
+  },
+  "onslaught-legend": {
+    "name": "Lenda de Massacre",
+    "how": "Ocupou uma posição dentro do limite de Lenda da temporada, que corresponde a uma posição e não a uma pontuação. Só existe um número limitado dessas posições de cada vez e o limite é determinado pela temporada em que a posição foi ocupada. Violeta em vez de azul-aço, a cor usada pela própria classificação para Lenda."
+  },
+  "player-badges": "Emblemas de Jogador",
+  "player-overflow": "Quando um jogador apresenta mais de três marcas, as restantes são agrupadas num emblema {plus}, pela ordem acima, para que a alcunha continue legível numa tabela. Ao passar o cursor sobre o emblema, são apresentados os respetivos nomes, e cada marca continua a apontar para o mesmo destino que o seu próprio emblema.",
+  "ranked-standings": "classificações ranqueadas",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Um canal Twitch associado à conta. Associe a Twitch no seu próprio perfil para o confirmar, e o emblema passará a apontar para o seu canal. É apresentado quer esteja ou não em direto."
+  },
+  "streamer-who-is-on-air": "Um streamer que esteja em direto também apresenta um indicador vermelho «EM DIRETO». Este não é conquistado nem mantido. Aparece quando a transmissão começa e desaparece quando termina, por isso nunca é agrupado.",
+  "support-subscription": "assinatura de suporte",
+  "supporter": {
+    "name": "Apoiador"
+  },
+  "supporter-note": "Subscrição ativa e pública: {link}. Os apoiantes que optem pelo anonimato não apresentam qualquer distintivo, por sua própria escolha.",
+  "the-marks-a-player-or": "As marcas que um jogador ou um clã pode apresentar em {NAME}, o significado de cada uma e os requisitos exatos para as obter.",
+  "tournament-winner": {
+    "name": "Vencedor do torneio",
+    "how": "Uma equipa atribuída ao clã venceu um torneio. A Wargaming regista equipas e contas, nunca clãs, por isso a atribuição é recuperada comparando cada plantel com os membros do clã no dia em que o torneio foi disputado."
+  },
+  "verified": {
+    "name": "Verificado",
+    "how": "O proprietário iniciou sessão com o respetivo ID Wargaming.net e associou esta conta. Iniciar sessão é o único requisito e não tem qualquer custo."
+  }
+}

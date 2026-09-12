@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "Sorok száma oldalanként",
+  "free-xp-from": "Ingyen XP innen",
+  "xp-1-gold": "XP = 1 arany",
+  "previous-page": "Előző oldal",
+  "page": "Oldal {current} / {totalPages}",
+  "next-page": "Következő oldal",
+  "all": "Mind"
+}

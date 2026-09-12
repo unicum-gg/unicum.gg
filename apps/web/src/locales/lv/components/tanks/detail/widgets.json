@@ -1,0 +1,12 @@
+{
+  "slot": "Vieta {n}",
+  "slot-filled": "Slots {n}: {name}",
+  "consumable-slot": "Patērējamā priekšmeta slots {n}",
+  "consumable-slot-filled": "Patērējamā priekšmeta slots {n}: {name}",
+  "level": "Līmenis {n}",
+  "stock": "Standarta",
+  "specialize": "Klikšķināt, lai specializētu šo slotu.",
+  "clear-specialization": "Klikšķināt, lai noņemtu šī slota specializāciju.",
+  "crew-skills": "Apkalpes prasmes",
+  "shell-aria": "{name}: {damage} bojājumi, {penetration} mm caursišana"
+}

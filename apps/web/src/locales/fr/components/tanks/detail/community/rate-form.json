@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Encore quelques mots : {count} restants.",
+  "at-winrate": "à {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Impossible de retirer votre avis. Réessayez dans un instant.",
+  "hide-the-detailed-axes": "Masquer les axes détaillés",
+  "not-enough-battles": "Vous n’avez pas joué assez de parties avec ce char pour que votre vote soit pris en compte.",
+  "published-once-read": "Publié après lecture par un modérateur. Votre note est comptabilisée immédiatement.",
+  "rate-it-in-detail": "Évaluer en détail (facultatif)",
+  "review": {
+    "none": "Évaluation enregistrée.",
+    "queued": "Note enregistrée. Votre avis a été transmis à un modérateur.",
+    "published": "Note enregistrée. Votre avis est déjà en ligne.",
+    "pending": "Note enregistrée. Votre avis est toujours en attente de validation par un modérateur.",
+    "rejected": "Note enregistrée. Votre précédent avis n’a pas été publié, seules vos étoiles sont donc prises en compte.",
+    "closed": "Note enregistrée. Il n’est pas possible de publier un avis écrit pour le moment, le texte n’a donc pas été conservé."
+  },
+  "save-failed": "Impossible d’enregistrer. Réessayez dans un instant.",
+  "say-why-optional": "Expliquez pourquoi (facultatif)",
+  "signed-with": "Signé avec vos {battles} batailles à son bord",
+  "submit-my-rating": "Envoyer mon évaluation",
+  "too-many-edits": "Cela fait beaucoup de modifications d’un coup. Attendez une minute.",
+  "update-my-rating": "Mettre à jour mon évaluation",
+  "what-it-is-good-at": "Ses points forts, ses points faibles et le type de joueur auquel il convient.",
+  "withdraw": "Retirer",
+  "your-rating-has-been-withdrawn": "Votre note a été retirée.",
+  "your-review-is-waiting-on": "Votre avis est en attente de validation par un modérateur. Il n’est visible ici que par vous.",
+  "your-review-was-not-published": "Votre avis n’a pas été publié. Vos étoiles sont toujours prises en compte dans la moyenne."
+}

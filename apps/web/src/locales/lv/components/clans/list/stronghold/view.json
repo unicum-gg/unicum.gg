@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Vēl nav datu. Pārbaudiet vēlreiz, kad klani būs atsvaidzināti.",
+  "heading": "Top <accent>{tier}</accent> klani",
+  "blurb": "{region} līderu saraksts, ranžēts pēc {sort} visos izsekotajos klanos {format} (minimums {battles} kaujas).",
+  "blurb-period": "{region} līderu saraksts, ranžēts pēc {sort} visos izsekotajos klanos {format} pēdējā {period} (minimums {battles} kaujas).",
+  "format-advances": "Uzbrukumi (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Top {count} {tier} klani ·"
+}

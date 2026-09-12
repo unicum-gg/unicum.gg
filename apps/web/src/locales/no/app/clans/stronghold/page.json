@@ -1,0 +1,4 @@
+{
+  "title": "Beste {tier}-klaner ({region})",
+  "description": "{region} {tier}-klanrangering. Rangert etter SR (trefningsvurdering), ELO, kamper og seiersprosent. Minst {battles} kamper."
+}

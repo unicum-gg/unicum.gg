@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { CrownSimpleIcon } from "@phosphor-icons/react";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { PlayerName } from "@/components/entity/player-name";
@@ -29,12 +31,12 @@ import type { Region } from "@unicum.gg/wargaming";
 
 const DASH = "—";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 export type RosterEntry = {
   accountId: number;
@@ -88,6 +90,8 @@ export function TeamRosterTable({
   players: RosterEntry[];
   ownerAccountId: number | null;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tournaments/team/roster-table");
   const [stored] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
   const metric = isRatingMetric(stored) ? stored : DEFAULT_RATING_METRIC;
   // Best first, and everyone we have no rating for last: an unsampled account
@@ -111,12 +115,12 @@ export function TeamRosterTable({
     >
       <TableHeader>
         <TableRow>
-          <TableHead>Player</TableHead>
+          <TableHead>{t("player")}</TableHead>
           <TableHead className="w-28 text-right! tabular-nums">
-            <GlossaryLabel>Battles</GlossaryLabel>
+            <GlossaryLabel>{t("battles")}</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
-            <GlossaryLabel>WR</GlossaryLabel>
+            <GlossaryLabel>{t("wr")}</GlossaryLabel>
           </TableHead>
           <TableHead className="w-24 text-right!">
             <GlossaryLabel label={RATING_METRIC_LABEL[metric]}>
@@ -163,7 +167,7 @@ export function TeamRosterTable({
                         <CrownSimpleIcon
                           weight="fill"
                           className="size-3.5 shrink-0 text-amber-500"
-                          aria-label="Team captain"
+                          aria-label={t("team-captain")}
                         />
                       )}
                       {/* What they were called AND what they wore, the way the
@@ -176,7 +180,7 @@ export function TeamRosterTable({
                       {recorded && (
                         <span
                           className="shrink-0 truncate text-xs text-fd-muted-foreground"
-                          title={`Registered as ${p.nickname}`}
+                          title={t("registered-as", { nickname: p.nickname })}
                         >
                           (as {p.nickname}
                           {p.recordedClanTag && (
@@ -200,7 +204,7 @@ export function TeamRosterTable({
                 {p.battles === null ? (
                   <span className="text-fd-muted-foreground">{DASH}</span>
                 ) : (
-                  intFmt.format(p.battles)
+                  num(INT_FORMAT).format(p.battles)
                 )}
               </TableCell>
               {/* Colour on the cell, not on a span around the number: the
@@ -217,7 +221,7 @@ export function TeamRosterTable({
                 {p.winrate === null ? (
                   <span className="font-normal text-fd-muted-foreground">{DASH}</span>
                 ) : (
-                  pctFmt.format(p.winrate)
+                  num(PCT_FORMAT).format(p.winrate)
                 )}
               </TableCell>
               <TableCell
@@ -229,7 +233,7 @@ export function TeamRosterTable({
                 {rating === null ? (
                   <span className="font-normal text-fd-muted-foreground">{DASH}</span>
                 ) : (
-                  intFmt.format(rating)
+                  num(INT_FORMAT).format(rating)
                 )}
               </TableCell>
             </TableRow>

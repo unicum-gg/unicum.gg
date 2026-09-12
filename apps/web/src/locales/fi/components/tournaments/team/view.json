@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Arvontaa ei ole vielä tehty. Tämän joukkueen taistelut näkyvät täällä, kun turnaus alkaa.",
+  "each-map-is-played-twice": "Jokainen kartta pelataan kahdesti, kerran kummaltakin puolelta. Viimeinen kartta on ratkaiseva, ja se pelataan kerran.",
+  "first-battle-at": "Ensimmäinen taistelu, {when}",
+  "lost": "Hävisi",
+  "matches": "Ottelut ({length})",
+  "never-played": "Tämä joukkue ei koskaan pelannut taistelua. Se rekisteröityi, mutta arvonta ei yltänyt siihen, kuten tapahtuu vahvistamatta jääneelle kokoonpanolle.",
+  "no-maps-recorded": "Tästä taistelusta ei ole tallennettu karttoja.",
+  "no-roster-recorded-for-this": "Tästä joukkueesta ei ole tallennettu kokoonpanoa.",
+  "of-players-on-the-day": "{members}/{length} pelaajasta kyseisenä päivänä",
+  "played-on-uncatalogued": "Pelattu kartalla {maps}, jota karttaluettelo ei sisällä.",
+  "roster": "Rosters ({length})",
+  "stage-group": "{stage} · Ryhmä {order}",
+  "team-1": "Joukkue 1",
+  "team-2": "Joukkue 2",
+  "tournaments": "Turnaukset",
+  "when-the-first-battle-started": "Ensimmäisen taistelun alkamisaika",
+  "won": "Voitettu"
+}

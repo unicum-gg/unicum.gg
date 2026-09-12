@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Durchschnitt der {rated} von {size} spieler",
+  "average-over-recent": "Durchschnitt der {rated} von {size} spieler, die in den letzten 30 Tage Gespielt haben",
+  "avg-winrate": "Durchschnittliche Siegesrate",
+  "finished": "Beendet",
+  "record": "Aufzeichnung",
+  "won": "Gewonnen"
+}

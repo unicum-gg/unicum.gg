@@ -1,0 +1,12 @@
+{
+  "slot": "Pozice {n}",
+  "slot-filled": "Pozice {n}: {name}",
+  "consumable-slot": "Pozice spotřebního doplňku {n}",
+  "consumable-slot-filled": "Pozice spotřebního doplňku {n}: {name}",
+  "level": "Úroveň {n}",
+  "stock": "Základní",
+  "specialize": "Kliknutím specializujete tuto pozici.",
+  "clear-specialization": "Kliknutím zrušíte specializaci této pozice.",
+  "crew-skills": "Dovednosti posádky",
+  "shell-aria": "{name}: poškození {damage}, průbojnost {penetration} mm"
+}

@@ -1,0 +1,9 @@
+{
+  "all": "Lahat",
+  "camouflage-map": "Mapa para sa {camouflage}",
+  "modes": "{count, plural, one {# mode} other {# mga mode}}",
+  "no-maps-match-your-filters": "Walang mapang tumutugma sa iyong mga filter.",
+  "search": "Maghanap sa {count} mga mapa",
+  "search-label": "Maghanap ng mga mapa",
+  "special-map": "Espesyal na mapa"
+}

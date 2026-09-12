@@ -1,8 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import type { TranslateFunction } from "@onruntime/translations";
+import { mapModeName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
+import { useRouter } from "@/hooks/use-router";
 import { useMemo, useState } from "react";
-import { BATTLE_FORMAT_LABEL, MAP_GAME_MODE_LABEL } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { BATTLE_PARAM } from "@/components/tanks/detail/videos/battle-param";
 import {
@@ -22,6 +24,7 @@ import { VideoTableRow, type VideoColumns } from "./table-row";
 import { useTankVideoPlayer } from "./player";
 
 function sortValue(
+  tGame: TranslateFunction,
   battle: TankVideoCardData,
   key: string,
 ): number | string | null {
@@ -39,11 +42,14 @@ function sortValue(
     case "map":
       return battle.mapName;
     case "format":
-      return battle.format ? BATTLE_FORMAT_LABEL[battle.format] : null;
+      return battle.format ? tGame(`battle-formats.${battle.format}`) : null;
     case "mode":
-      return battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : null;
+      return battle.mode ? mapModeName(battle.mode, tGame) : null;
     case "spawn":
-      return battle.directionLabel;
+      // The reader's own word, so the column sorts the way it reads.
+      return battle.direction
+        ? tGame(`spawn-directions.${battle.direction}`)
+        : battle.directionLabel;
     case "result":
       return battle.result;
     case "channel":
@@ -87,6 +93,8 @@ export function VideosTable({
    * to watch it from the community index. */
   onPlay?: (battle: TankVideoCardData) => void;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/table");
+  const { t: tGame } = useTranslation("game/vocabulary");
   // Which row is playing, when there is a hero above to play it. Read from the
   // player rather than from the click, so it follows the playhead into the next
   // battle of the same video, exactly like the cards.
@@ -161,8 +169,8 @@ export function VideosTable({
   const rows = useMemo(() => {
     const sorted = [...battles];
     sorted.sort((a, b) => {
-      const va = sortValue(a, sort.key);
-      const vb = sortValue(b, sort.key);
+      const va = sortValue(tGame, a, sort.key);
+      const vb = sortValue(tGame, b, sort.key);
       // Missing values sink whichever way the column is sorted: an unknown map
       // is not the smallest map.
       if (va === null) return 1;
@@ -174,7 +182,7 @@ export function VideosTable({
       return sort.direction === SortDirection.Asc ? cmp : -cmp;
     });
     return sorted;
-  }, [battles, sort]);
+  }, [battles, sort, tGame]);
 
   return (
     <TooltipProvider>
@@ -193,7 +201,7 @@ export function VideosTable({
                     onToggle={toggle}
                     align="center"
                   >
-                    <span className="sr-only">Nation</span>
+                    <span className="sr-only">{t("nation")}</span>
                   </SortHead>
                   <SortHead
                     sort={sort}
@@ -201,7 +209,7 @@ export function VideosTable({
                     onToggle={toggle}
                     align="center"
                   >
-                    <span className="sr-only">Class</span>
+                    <span className="sr-only">{t("class")}</span>
                   </SortHead>
                   <SortHead
                     sort={sort}
@@ -209,8 +217,7 @@ export function VideosTable({
                     onToggle={toggle}
                     align="center"
                   >
-                    Tier
-                  </SortHead>
+                    {t("tier")}</SortHead>
                 </>
               )}
               {showIdentity && (
@@ -223,43 +230,36 @@ export function VideosTable({
                       "Clan" rather than offering a word for something none of
                       its rows have. */}
                   {hasTanks && showClan
-                    ? "Tank / Clan"
+                    ? t("tank-clan")
                     : showClan
-                      ? "Clan"
-                      : "Tank"}
+                      ? t("clan")
+                      : t("tank")}
                 </SortHead>
               )}
               {showMap && (
                 <SortHead sort={sort} col="map" onToggle={toggle}>
-                  Map
-                </SortHead>
+                  {t("map")}</SortHead>
               )}
               <SortHead sort={sort} col="format" onToggle={toggle}>
-                Format
-              </SortHead>
+                {t("format")}</SortHead>
               <SortHead sort={sort} col="mode" onToggle={toggle}>
-                Mode
-              </SortHead>
+                {t("mode")}</SortHead>
               <SortHead sort={sort} col="spawn" onToggle={toggle}>
-                Spawn
-              </SortHead>
+                {t("spawn")}</SortHead>
               <SortHead sort={sort} col="result" onToggle={toggle}>
-                Result
-              </SortHead>
+                {t("result")}</SortHead>
               {showDamage && (
                 <SortHead
                   sort={sort}
                   col="damage"
                   onToggle={toggle}
                   align="end"
-                  tip="Damage dealt plus assisted, as declared by the submitter."
+                  tip={t("damage-dealt-plus-assisted-as-declared-by-th")}
                 >
-                  Combined
-                </SortHead>
+                  {t("combined")}</SortHead>
               )}
               <SortHead sort={sort} col="channel" onToggle={toggle}>
-                Channel
-              </SortHead>
+                {t("channel")}</SortHead>
             </TableRow>
           </TableHeader>
           <TableBody>

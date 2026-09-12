@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Inga sessioner ännu. De visas när kontots statistik har hämtats två gånger med strider däremellan, vilket sker automatiskt när kontot används för att spela.",
+  "bar-height-is-battles-played": "Stapelns höjd visar antalet spelade strider, och färgen visar {metric} för respektive {granularity}, enligt samma intervall som webbplatsen använder överallt annars.",
+  "title": "{nickname}’s sessioner",
+  "title-count": "Sessioner för {nickname} ({count})",
+  "granularity": {
+    "day": "dag",
+    "week": "vecka",
+    "month": "månad",
+    "daily": "Dagligen",
+    "weekly": "Veckovis",
+    "monthly": "Månatligen"
+  },
+  "week-of": "Veckan som börjar {date}"
+}

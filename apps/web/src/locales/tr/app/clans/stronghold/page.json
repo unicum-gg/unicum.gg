@@ -1,0 +1,4 @@
+{
+  "title": "En iyi {tier} klanları ({region})",
+  "description": "{region} {tier} klan liderlik tablosu. SR (çatışma puanı), ELO, savaşlar ve galibiyet oranına göre sıralanır. Minimum {battles} savaş."
+}

@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanksクラン（{region}地域）、{members}メンバー",
+    "description": "{region}地域の{name} [{tag}]。{members}メンバー、WN8とWNXのレーティング付き完全なメンバー表、最近の加入・脱退履歴、クランの完全な履歴を確認できます。"
+  },
+  "stronghold": {
+    "title": "[{tag}] {name}の拠点戦績（{region}地域）",
+    "description": "{region}地域における{name} [{tag}]の拠点戦績。各メンバーの小競り合いと進撃のレーティング、戦闘数、勝率を表示します。"
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name}のクランウォーズ戦績（{region}地域）",
+    "description": "{region}地域における{name} [{tag}]のクランウォーズ戦績。グローバルマップのキャンペーン全体について、メンバーごとのレーティング、戦闘数、勝率を表示します。"
+  },
+  "tanks": {
+    "title": "[{tag}] {name}の戦車（{region}地域）、クランの車両",
+    "description": "{region}地域で{name} [{tag}]のメンバーがプレイしたすべての車両。クランメンバー全体の戦闘数、勝率、平均ダメージを集計しています。"
+  },
+  "manage": {
+    "title": "[{tag}] {name}の拠点リザーブ（{region}地域）",
+    "description": "{name} [{tag}]の拠点リザーブを有効化・予約します。役職者のみ利用できます。"
+  },
+  "missing": {
+    "description": "{region}地域の[{tag}] World of Tanksクラン。WN8とWNXのレーティング付きメンバー表、加入・脱退履歴、最近の戦闘、クランの完全な履歴を表示します。"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Modifică orice este greșit, inclusiv vehiculul. Salvarea îl trimite înapoi în coada de moderare, așa că un video publicat este retras până când este aprobat din nou.",
+  "correct-a-suggestion": "Corectează o sugestie",
+  "could-not-load-that-suggestion": "Sugestia nu a putut fi încărcată. Încearcă din nou peste câteva momente.",
+  "link-expired": "Linkul respectiv a expirat. Apasă din nou pe Editare pe cardul din Discord pentru unul nou.",
+  "loading": "Se încarcă…",
+  "log-in": "Conectare",
+  "log-in-with-the-account": "Conectează-te cu contul care a sugerat acest video pentru a-l corecta.",
+  "no-suggestion-with-that-id": "Nu există nicio sugestie cu acel ID.",
+  "not-yours-to-correct": "Această sugestie nu îți aparține pentru a o corecta."
+}

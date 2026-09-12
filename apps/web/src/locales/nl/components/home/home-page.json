@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Top spelers · Afgelopen 24 uur"
+    },
+    "week": {
+      "title": "Top spelers · Afgelopen 7 dagen"
+    }
+  },
+  "rating-scale": {
+    "title": "Beoordelingsschaal"
+  },
+  "community": {
+    "title": "Sluit je aan bij de community",
+    "heading": "Kom in contact met WoT-spelers",
+    "description": "Word lid van onze Discord om over WoT-statistieken te praten, functies aan te vragen en bugs te melden. Of ga naar GitHub om de code te bekijken en bij te dragen.",
+    "discord": "Word lid van Discord",
+    "github": "Bekijk op GitHub"
+  },
+  "features": {
+    "title": "Wat je hier vindt",
+    "profiles": {
+      "title": "Spelersprofielen",
+      "description": "Gedetailleerde statistieken met totaalwaarden en verschillen over 24 u / 7 d / 30 d, WN7, WN8, WNX en Persoonlijke beoordeling."
+    },
+    "clans": {
+      "title": "Clanpagina’s",
+      "description": "Tabel met leden, beoordelingen, recente activiteit, beschrijving en clanmetadata."
+    },
+    "history": {
+      "title": "Clangeschiedenis",
+      "description": "Volledige tijdlijn van elke clan waarvan een speler lid is geweest, inclusief rollen en datums."
+    },
+    "live": {
+      "title": "Live-updates",
+      "description": "Gevolgde spelers worden via ons momentopnamesysteem elke 24 uur op de achtergrond bijgewerkt."
+    },
+    "leaderboards": {
+      "title": "Ranglijsten",
+      "description": "Top spelers (24 u, 7 d, aller tijden) en beste clans, gerangschikt op WNX en berekend op basis van onze momentopnames."
+    },
+    "open-source": {
+      "title": "Open source · AGPL",
+      "description": "De code staat op GitHub. Bekijk, fork en draag bij. Geen advertenties, alleen analyses na toestemming."
+    }
+  },
+  "quick-start": {
+    "title": "Snel aan de slag",
+    "search": {
+      "title": "🔍 Spelers of clans zoeken",
+      "description": "Druk op {shortcut} om de zoekfunctie te openen en typ daarna een nickname of clantag."
+    },
+    "region": {
+      "title": "🌍 Van regio wisselen",
+      "description": "Gebruik de selectieknop {selector} in de navigatiebalk. De ranglijsten worden hierop aangepast."
+    },
+    "leaderboards": {
+      "title": "🏆 Ranglijsten bekijken",
+      "description": "Top spelers (24 u, 7 d, aller tijden) en beste clans, gerangschikt op gemiddelde WNX en berekend op basis van onze momentopnames."
+    },
+    "colors": {
+      "title": "📊 De kleuren begrijpen",
+      "description": "WR, WN7, WN8 en WNX gebruiken dezelfde kleuren per niveau (oranje → groen → cyaan → paars). Bekijk de schaal hierboven."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / AZIË"
+}

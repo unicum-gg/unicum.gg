@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>người chơi</accent>",
+    "language": "Những người chơi <accent>{language}</accent> hàng đầu"
+  },
+  "intro": {
+    "all": "Bảng xếp hạng khu vực {region}, xếp theo {metric} mọi thời đại, tối thiểu 20.000 trận đấu.",
+    "language": "Những người chơi khu vực {region} có tập ngôn ngữ suy ra từ lịch sử Clan bao gồm {language}, xếp theo {metric}, tối thiểu 10.000 trận đấu.",
+    "strict": "Những người chơi khu vực {region} có ngôn ngữ suy ra từ lịch sử Clan chỉ là {language}, xếp theo {metric}, tối thiểu 10.000 trận đấu."
+  },
+  "board": {
+    "all": "{count} người chơi hàng đầu theo {metric}",
+    "language": "{count} người chơi {language} hàng đầu theo {metric}",
+    "strict": "{count} người chơi chỉ dùng {language} hàng đầu theo {metric}"
+  },
+  "modes": {
+    "overall": "Tổng thể"
+  },
+  "columns": {
+    "player": "Người chơi"
+  },
+  "strict-toggle": "Nghiêm ngặt",
+  "any-toggle": "Bất kỳ",
+  "all-languages": "Tất cả ngôn ngữ",
+  "battles": "Số trận",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

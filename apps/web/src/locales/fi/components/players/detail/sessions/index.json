@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Istuntoja ei vielä ole. Ne näkyvät, kun tästä tilistä on otettu kaksi tilannekuvaa, joiden välissä on pelattu taisteluita. Tämä tapahtuu automaattisesti pelaamisen myötä.",
+  "bar-height-is-battles-played": "Palkin korkeus kertoo pelattujen taisteluiden määrän ja väri kyseisen {granularity}-jakson {metric}-arvon samoilla tasoilla, joita sivusto käyttää kaikkialla muualla.",
+  "title": "{nickname}n sessiot",
+  "title-count": "Nimimerkin {nickname} istunnot ({count})",
+  "granularity": {
+    "day": "päivä",
+    "week": "viikko",
+    "month": "kuukausi",
+    "daily": "Päivittäinen",
+    "weekly": "Viikoittainen",
+    "monthly": "Kuukausittainen"
+  },
+  "week-of": "Viikko alkaen {date}"
+}

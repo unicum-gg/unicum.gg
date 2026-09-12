@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Thêm quy trình",
+  "boost": "Tăng cường",
+  "each-workflow-activates-its-reserves": "Mỗi quy trình kích hoạt lượng dự trữ trong một khoảng thời gian, khi đã có đủ các thành viên trong một phiên chơi trực tiếp. Chạy trên tài khoản của bạn, không cần trực tuyến. Thêm bao nhiêu tùy ý.",
+  "n-online": "/ {count} trực tuyến",
+  "officer": "Sĩ quan",
+  "online": "Trực tuyến",
+  "recent-activations": "các kích hoạt gần đây",
+  "reserve": "Dự trữ",
+  "stronghold-boosts": "Tăng cường Fort",
+  "when": "Khi",
+  "workflow": "Workflow"
+}

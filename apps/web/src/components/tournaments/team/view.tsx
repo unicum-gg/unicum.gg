@@ -1,7 +1,11 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { dateLocale } from "@/lib/date-locale";
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { format } from "date-fns";
-import Link from "next/link";
+import Link from "@/components/link";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { Panel, PanelContent, PanelHeader, PanelSeparator, PanelTitle } from "@/components/panel";
 import { Fragment } from "react";
@@ -19,7 +23,6 @@ import {
   isTournamentOpen,
   ordinal,
   teamFormat,
-  TOURNAMENT_GAME_MODE_LABEL,
 } from "@unicum.gg/shared";
 import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
 import {
@@ -31,7 +34,7 @@ import {
   bestOfLabel,
   seriesBattles,
 } from "@/components/tournaments/detail/match-format";
-import { mapHrefIndex } from "@/components/tournaments/detail/map-pool";
+import { mapPoolIndex, type PoolMapRef } from "@/components/tournaments/detail/map-pool";
 import { MatchMinimap } from "@/components/tournaments/detail/match-minimap";
 import type { TournamentRecord, TournamentTeam } from "@/components/tournaments/detail/record";
 import { TeamSlot, teamRun, type TeamMatch } from "@/components/tournaments/detail/team-run";
@@ -40,12 +43,7 @@ import { TeamMetrics, TeamResult } from "./result";
 
 const DASH = "—";
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const DATE_PATTERN = "d MMM yyyy" /* UTC */;
 
 /**
  * When the first battle started, in the reader's OWN time zone.
@@ -58,6 +56,9 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
  * reader's own the moment the client takes over.
  */
 function KickOff({ at }: { at: Date }) {
+  const { locale } = useLocale();
+  const { date } = useFormat();
+  const { t } = useTranslation("components/tournaments/team/view");
   const hydrated = useHydrated();
   return (
     <time
@@ -65,28 +66,22 @@ function KickOff({ at }: { at: Date }) {
       className="text-xs text-fd-muted-foreground tabular-nums"
       title={
         hydrated
-          ? `First battle, ${format(at, "EEEE d MMMM yyyy 'at' HH:mm")}`
-          : "When the first battle started"
+          ? t("first-battle-at", { when: format(at, "EEEE d MMMM yyyy 'at' HH:mm", { locale: dateLocale(locale) }) })
+          : t("when-the-first-battle-started")
       }
     >
       {hydrated
-        ? format(at, "MMM d, HH:mm")
-        : utcFmt.format(at)}
+        ? format(at, "d MMM, HH:mm", { locale: dateLocale(locale) })
+        : date(UTC_PATTERN).format(at)}
     </time>
   );
 }
 
-const utcFmt = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-  timeZone: "UTC",
-});
+const UTC_PATTERN = "d MMM, HH:mm" /* UTC */;
 
 /** Which side of the draw the team was on, in the tournament's own terms. */
 function SlotPill({ slot }: { slot: TeamSlot }) {
+  const { t } = useTranslation("components/tournaments/team/view");
   const one = slot === TeamSlot.One;
   return (
     <span
@@ -97,7 +92,7 @@ function SlotPill({ slot }: { slot: TeamSlot }) {
           : "bg-red-500/15 text-red-600 dark:text-red-400",
       )}
     >
-      {one ? "Team 1" : "Team 2"}
+      {one ? t("team-1") : t("team-2")}
     </span>
   );
 }
@@ -121,8 +116,10 @@ function TieBlock({
   region: Region;
   tournamentId: number;
   /** Map name (lowercased) to its page, from the tournament's own pool. */
-  mapLinks: Map<string, string>;
+  mapLinks: Map<string, PoolMapRef>;
 }) {
+  const { t } = useTranslation("components/tournaments/team/view");
+  const { t: tLayout } = useTranslation("components/tournaments/detail/layout");
   const drawable = m.maps.filter((map) => map.pool?.minimapUrl);
   // Truncated to the battles actually played: a series stops once it is decided.
   const battles = seriesBattles(
@@ -134,11 +131,11 @@ function TieBlock({
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <span className="text-xs tracking-wide text-fd-muted-foreground uppercase">
           {m.groupCount > 1
-            ? `${m.stageTitle} · Group ${m.groupOrder}`
+            ? t("stage-group", { stage: m.stageTitle, order: m.groupOrder })
             : m.stageTitle}
         </span>
         <span className="text-sm font-medium">
-          {roundLabel(m.round, m.bracketType)}
+          {roundLabel(m.round, m.bracketType, tLayout)}
         </span>
         {/* The format is nowhere in the source: it follows from the map count,
             which IS the number of wins the series needs. */}
@@ -158,7 +155,7 @@ function TieBlock({
                 : "text-fd-muted-foreground",
           )}
         >
-          {m.won === null ? DASH : m.won ? "Won" : "Lost"}
+          {m.won === null ? DASH : m.won ? t("won") : t("lost")}
         </span>
         <span className="text-sm tabular-nums">
           {m.scoreFor ?? DASH}
@@ -207,22 +204,22 @@ function TieBlock({
                 viewingSlot={m.slot}
                 battle={battle}
                 swapped={swapped}
-                href={mapLinks.get(map.label.toLowerCase())}
+                href={mapLinks.get(map.label.toLowerCase())?.href ?? undefined}
               />
             ))}
           </div>
           {battles.length > 1 && (
             <p className="text-xs text-fd-muted-foreground">
-              Each map is played twice, once from each side. The last map is the
-              decider, played once.
-            </p>
+              {t("each-map-is-played-twice")}</p>
           )}
         </>
       ) : (
         <p className="text-sm text-fd-muted-foreground">
           {m.maps.length > 0
-            ? `Played on ${m.maps.map((map) => map.label).join(", ")}, which the map catalogue does not carry.`
-            : "No maps recorded for this tie."}
+            ? t("played-on-uncatalogued", {
+                maps: m.maps.map((map) => map.label).join(", "),
+              })
+            : t("no-maps-recorded")}
         </p>
       )}
     </div>
@@ -250,6 +247,10 @@ export function TournamentTeamView({
    * failed, in which case the page still renders the run. */
   roster: RosterEntry[] | null;
 }) {
+  const { date } = useFormat();
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
+  const { t } = useTranslation("components/tournaments/team/view");
   const placements = new Map(
     finalPlacements(tournament.stages).map((p) => [p.teamId, p.position]),
   );
@@ -265,15 +266,15 @@ export function TournamentTeamView({
   // Built from the pool, where the arena ids behind the organiser's map names
   // were already resolved, so a minimap opens the same view the tournament's
   // own map grid does.
-  const mapLinks = mapHrefIndex(region, tournament.mapPool, tournament.gameModes);
+  const mapLinks = mapPoolIndex(region, tournament.mapPool, tournament.gameModes, tMaps);
 
   // The meta strip, in the order a reader arriving from the bracket needs it:
   // which tournament, where, when, and what it was played as. Built as a list so
   // an absent one drops out instead of leaving a dangling dot.
   const metaParts = [
     REGION_LABEL[region],
-    dateFmt.format(tournament.startAt),
-    tournament.gameModes.map((m) => TOURNAMENT_GAME_MODE_LABEL[m]).join(", "),
+    date(DATE_PATTERN).format(tournament.startAt),
+    tournament.gameModes.map((m) => tGame(`tournament-modes.${m}`)).join(", "),
     tierLabel(tournament.tierFrom, tournament.tierTo),
     teamFormat(tournament.minPlayersInTeam),
     // The roster against its cap, the way every other count on the site reads:
@@ -354,8 +355,7 @@ export function TournamentTeamView({
                   href={ROUTES.TOURNAMENTS(region)}
                   className="shrink-0 hover:text-fd-foreground hover:underline"
                 >
-                  Tournaments
-                </Link>
+                  {t("tournaments")}</Link>
                 <span className="shrink-0 text-fd-border">·</span>
                 <Link
                   href={ROUTES.TOURNAMENT(region, tournament.id)}
@@ -391,8 +391,7 @@ export function TournamentTeamView({
                     {team.clan.clanName && <span>{team.clan.clanName}</span>}
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    {team.clan.members} of {team.players.length} players on the day
-                  </div>
+                    {t("of-players-on-the-day", { members: team.clan.members, length: team.players.length })}</div>
                 </div>
                 {team.clan.clanEmblem && (
                   <div className="flex size-24 shrink-0 items-center justify-center border-l border-fd-border p-3">
@@ -428,7 +427,7 @@ export function TournamentTeamView({
       <PanelSeparator />
       <Panel>
         <PanelHeader screenLines={false} className="border-b border-fd-border">
-          <PanelTitle>Roster ({team.players.length})</PanelTitle>
+          <PanelTitle>{t("roster", { length: team.players.length })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           {roster && roster.length > 0 ? (
@@ -439,8 +438,7 @@ export function TournamentTeamView({
             />
           ) : (
             <p className="p-4 text-sm text-fd-muted-foreground">
-              No roster recorded for this team.
-            </p>
+              {t("no-roster-recorded-for-this")}</p>
           )}
         </PanelContent>
       </Panel>
@@ -451,7 +449,7 @@ export function TournamentTeamView({
           screenLines={false}
           className="border-b border-fd-border"
         >
-          <PanelTitle>Matches ({run.length})</PanelTitle>
+          <PanelTitle>{t("matches", { length: run.length })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           {run.length === 0 ? (
@@ -462,8 +460,8 @@ export function TournamentTeamView({
             // the bracket.
             <p className="p-4 text-sm text-fd-muted-foreground">
               {isTournamentOpen(tournament.status)
-                ? "The draw has not been made yet. This team's ties appear here once the tournament starts."
-                : "This team never played a tie. It registered but the draw did not reach it, which is what happens to a roster left unconfirmed."}
+                ? t("draw-not-made")
+                : t("never-played")}
             </p>
           ) : (
             run.map((m) => (

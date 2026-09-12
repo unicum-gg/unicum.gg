@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "同 Tier の評価済み戦車の {value}% より上位",
+  "measured-hint": "同じ戦車の中での勝率の順位",
+  "not-enough-votes-yet-to": "コミュニティの評判と戦車の実際の性能を比較するには、まだ投票が不足しています",
+  "perceived-hint": "Tier {tier} 戦車の中でのコミュニティによる順位",
+  "verdict": {
+    "overrated": "コミュニティは、実際の成果を大幅に上回る評価をしています",
+    "fair": "この戦車では評判と結果が一致しています",
+    "underrated": "誰も評価していないほどの性能を発揮します"
+  },
+  "what-players-think": "プレイヤーの評価",
+  "what-the-data-says": "データが示すこと"
+}

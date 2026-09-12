@@ -1,0 +1,12 @@
+{
+  "before-update": "ก่อนอัปเดต {version}",
+  "common-test": "การทดสอบทั่วไป",
+  "in-common-test-not-released": "อยู่ในการทดสอบทั่วไป ยังไม่เปิดตัว",
+  "introduced": "นำเสนอ",
+  "lifecycle": "วงจรชีวิต",
+  "n-buffed": "เพิ่มประสิทธิภาพ {count} รายการ",
+  "n-nerfed": "ลดประสิทธิภาพ {count} รายการ",
+  "not-released-wargaming-can-still": "ยังไม่เปิดตัว Wargaming ยังสามารถเปลี่ยนแปลงหรือตัดสิ่งใด ๆ ออกก่อนอัปเดตเปิดให้ใช้งาน",
+  "status": "สถานะ",
+  "update": "ปรับ {version}"
+}

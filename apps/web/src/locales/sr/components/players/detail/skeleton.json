@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Статистика насумичних битака налога {nickname}",
+  "progression": "Напредак {metricLabel} налога {nickname}",
+  "solid-line-is-overall-matches": "Пуна линија је укупни {metricLabel} који се поклапа са колоном Укупно изнад и полако се мења како се додају нове битке. Испрекидана линија је {metricLabel2} по сесији, израчунат из битака одиграних од претходног снимка. Приказује добре и лоше низове. Боја линије прати ниво рејтинга.",
+  "tanks-shaping-s-rating": "Тенкови који обликују рејтинг налога {nickname}",
+  "tanks": "Tenkovi {nickname}",
+  "stats": "Статистика {strongholdLabel} налога {nickname}"
+}

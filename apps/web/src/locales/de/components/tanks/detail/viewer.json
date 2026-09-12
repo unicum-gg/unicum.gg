@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visuell",
+    "collision": "Kollision",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Panzer zentrieren",
+    "off": "Panzer wieder aus der Mitte rücken"
+  },
+  "hull-down": {
+    "on": "Turm runter",
+    "off": "Panzer waagerecht ausrichten"
+  },
+  "tracks": {
+    "on": "Ketten laufen lassen",
+    "off": "Ketten anhalten"
+  },
+  "textures": {
+    "on": "Hochauflösende Texturen",
+    "off": "Standard Texturen"
+  },
+  "reset": "Ansicht zurücksetzen",
+  "style": "Stil auswählen",
+  "style-worn": "Stil: {name}",
+  "search-styles": "Stile suchen",
+  "colours": "Bedeutung der Farben",
+  "cinematic": {
+    "off": "Filmische Kamera: aus",
+    "auto": "Filmische Kamera: bei Inaktivität",
+    "on": "Filmische Kamera: immer"
+  },
+  "open-tank": "Anderen Panzer öffnen",
+  "open-tank-placeholder": "Panzer öffnen...",
+  "more-actions": "Weitere Aktionen",
+  "marks-meaning": {
+    "0": "Keine Erfolgsmarkierungen",
+    "1": "Eine Erfolgsmarkierung: besser als 65 % der spieler auf diesem Panzer",
+    "2": "Zwei Markierungen: besser als 85 %",
+    "3": "Drei Markierungen: besser als 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Fenster ausfüllen",
+      "leave": "Zurück zur Seite"
+    },
+    "screen": {
+      "enter": "Bildschirm ausfüllen",
+      "leave": "Vollbildmodus verlassen"
+    }
+  },
+  "marks-count": {
+    "0": "Keine Erfolgsmarkierungen",
+    "one": "1 Erfolgsmarkierung",
+    "other": "{count} Erfolgsmarkierungen"
+  },
+  "compare-tank": "Mit einem anderen Panzer vergleichen",
+  "compare-tank-placeholder": "Vergleichen mit...",
+  "view-tooltips": {
+    "visual": "Wie der Panzer im Spiel dargestellt wird",
+    "collision": "Wie dick die einzelnen Panzerplatten sind",
+    "live": "Was das ausgewählte Geschoss bewirken würde"
+  },
+  "cinematic-tooltips": {
+    "off": "Filmische Kamera: aus, die Ansicht bleibt unverändert",
+    "auto": "Filmische Kamera: startet nach 30 Sekunden Inaktivität",
+    "on": "Filmische Kamera: immer, sobald du loslässt"
+  }
+}

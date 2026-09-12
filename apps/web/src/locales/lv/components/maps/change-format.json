@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Spēles laukuma platums",
+    "height": "Spēles laukuma augstums",
+    "round-length": "Kaujas taimeris",
+    "team-size": "Komandas lielums",
+    "camouflage": "Sezona",
+    "presence": "Spēlē",
+    "variant-version": "{type} versija",
+    "play-area": "Spēles laukums",
+    "bases-team1": "Sabiedroto bāzes",
+    "bases-team2": "Pretinieku bāzes",
+    "spawns-team1": "Sabiedroto sākumpunkti",
+    "spawns-team2": "Pretinieku sākumpunkti",
+    "control-point": "Kontroles punkts",
+    "artillery-headquarters": "Artilērijas štābs",
+    "comms-centers": "Sakaru centri",
+    "observation-posts": "Novērošanas posteņi",
+    "points-of-interest": "Galvenie punkti"
+  },
+  "summary": {
+    "added": "{name} pievienots",
+    "removed": "{name} noņemts",
+    "added-to-game": "Pievienots spēlei",
+    "removed-from-game": "Noņemts no spēles",
+    "added-on-test": "Pievienots testa klientā",
+    "removed-on-test": "Noņemts no testa klienta",
+    "mode-added": "Pievienots režīms {name}",
+    "mode-removed": "Noņemts režīms {name}",
+    "now-played-in": "Tagad spēlēts režīmā {name}",
+    "no-longer-played-in": "Vairs netiek spēlēts režīmā {name}",
+    "event-added": "{name} tagad var notikt kaujas laikā",
+    "event-removed": "{name} vairs nenotiek",
+    "moved": "{name} pārvietots",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

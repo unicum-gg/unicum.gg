@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "En celle viser intervallets sejre på det niveau fordelt på dets kampe dér, på tværs af alle kampvogne, som en spiller har mindst {minBattles} kampe på. Den beskriver derfor niveauerne, som de spilles af de mennesker, der spiller dem. Celler baseret på færre end {TIERWINRATETHINCELL} kampe vises svagt. De ændrer sig af andre grunde end færdighed. Farverne er de samme sejrsrateintervaller, som webstedet bruger alle andre steder.",
+  "cell-no-sample": "{where}, ingen stikprøve",
+  "cell-winrate": "{where}, {winrate} sejrsrate over {battles} kampe",
+  "metric-band": "{metric}-interval",
+  "nothing-recorded": "Intet er endnu registreret mod {metric}. Gitteret genopbygges hver nat.",
+  "over-battles-from-accounts": "{winrate} over {battles} kampe fra {players} konti",
+  "over-n-battles": "over {battles} kampe",
+  "what-players-win-by-tier": "Hvad {label}-spillere vinder efter niveau"
+}

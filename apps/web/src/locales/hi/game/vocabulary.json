@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "रैंडम",
+    "battle_royale": "स्टील हंटर",
+    "frontline": "Frontline",
+    "onslaught": "ऑन्स्लॉट",
+    "onslaught_night": "{onslaught} नाइट",
+    "grand_battle": "विशाल लड़ाई",
+    "clan_wars": "क्लान युद्ध",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "आर्केड",
+    "story_mode": "कहानी मोड",
+    "training": "प्रशिक्षण"
+  },
+  "player-modes": {
+    "overall": "यादृच्छिक लड़ाई",
+    "skirmish": "झड़प",
+    "advances": "अग्रिम अभियान",
+    "grand": "विशाल लड़ाइयाँ",
+    "ranked": "रैंक वाली लड़ाइयाँ",
+    "cw-x": "क्लैन युद्ध X",
+    "cw-viii": "क्लैन युद्ध VIII",
+    "cw-vi": "क्लैन युद्ध VI",
+    "steel-hunter": "स्टील हंटर",
+    "onslaught": "ऑन्स्लॉट"
+  },
+  "stronghold-tiers": {
+    "advances": "अग्रिम अभियान",
+    "t10": "झड़प T10",
+    "t8": "झड़प T8",
+    "t6": "झड़प T6"
+  },
+  "stronghold-periods": {
+    "24h": "पिछले 24 घंटे",
+    "7d": "पिछले 7 दिन",
+    "30d": "पिछले 30 दिन",
+    "overall": "कुल मिलाकर"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "युद्ध",
+    "winrate": "जीत दर"
+  },
+  "clan-boards": {
+    "advances": "अग्रिम अभियान",
+    "t10": "झड़प X",
+    "t8": "झड़प VIII",
+    "t6": "झड़प VI"
+  },
+  "map-modes": {
+    "standard": "मानक",
+    "encounter": "मुठभेड़",
+    "assault": "आक्रमण",
+    "attack-defense": "आक्रमण/रक्षा"
+  },
+  "map-camouflage": {
+    "summer": "ग्रीष्मकालीन",
+    "winter": "शीतकालीन",
+    "desert": "रेगिस्तानी"
+  },
+  "map-poi": {
+    "1": "तोपखाना मुख्यालय",
+    "2": "संचार केंद्र",
+    "3": "निगरानी चौकी"
+  },
+  "tournament-modes": {
+    "ctf": "मानक",
+    "domination": "मुठभेड़",
+    "assault2": "आक्रमण/रक्षा",
+    "comp7": "ऑन्स्लॉट"
+  },
+  "battle-formats": {
+    "random": "रैंडम",
+    "clan_wars": "क्लान युद्ध",
+    "advances": "अग्रिम अभियान",
+    "skirmish": "झड़प",
+    "maneuvers": "युद्धाभ्यास",
+    "onslaught": "ऑन्स्लॉट",
+    "tournament": "टूर्नामेंट"
+  },
+  "battle-results": {
+    "victory": "जीत",
+    "defeat": "हार",
+    "draw": "ड्रॉ"
+  },
+  "spawn-directions": {
+    "north": "उत्तर",
+    "south": "दक्षिण",
+    "east": "पूर्व",
+    "west": "पश्चिम"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "आगामी",
+    "registration_started": "पंजीकरण खुला",
+    "registration_finished": "पंजीकरण बंद",
+    "running": "प्रगति पर",
+    "finished": "समापन",
+    "complete": "पूर्ण"
+  },
+  "onslaught-tiers": {
+    "legend": "दिग्गज",
+    "champion": "चैंपियन",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "भारी",
+    "mediumTank": "मध्यम",
+    "lightTank": "हल्का",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "आक्रामक",
+    "break": "मोर्चा तोड़ने वाला",
+    "support": "सहायता",
+    "universal": "बहुमुखी",
+    "sniper": "स्नाइपर",
+    "wheeled": "पहिएदार"
+  },
+  "mastery-badges": {
+    "class3": "3rd कक्षा",
+    "class2": "2nd कक्षा",
+    "class1": "1st कक्षा",
+    "ace": "एस टैंकर"
+  },
+  "clan-modes": {
+    "random": "यादृच्छिक लड़ाई",
+    "stronghold": "गढ़",
+    "skirmish": "मुठभेड़",
+    "clan-wars": "क्लान युद्ध"
+  },
+  "features": {
+    "stronghold": "गढ़",
+    "skirmish": "मुठभेड़",
+    "marks-of-excellence": "उच्चता के मार्क्स",
+    "marks-of-mastery": "कौशल के मार्क्स",
+    "personal-rating": "व्यक्तिगत रेटिंग",
+    "world-of-tanks-rating": "World of Tanks रेटिंग",
+    "common-test": "सामान्य परीक्षण",
+    "tournaments": "टूर्नामेंट्स"
+  },
+  "marks": {
+    "1": "1 मार्क",
+    "2": "2 मार्क्स",
+    "3": "3 मार्क्स",
+    "name": "उच्चता के मार्क्स"
+  }
+}

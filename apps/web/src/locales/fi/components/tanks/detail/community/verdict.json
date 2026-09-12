@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Jokainen ääni tulee tililtä, jolla on pelattu tällä panssarivaunulla.",
+  "every-vote-played-average": "Jokainen ääni tulee tililtä, jolla on pelattu tällä panssarivaunulla keskimäärin {battles} taistelua.",
+  "fun": "Hauskuus",
+  "how-good-the-tank-is": "Kuinka hyvä panssarivaunu on",
+  "how-much-people-enjoy-it": "Kuinka paljon pelaajat nauttivat siitä",
+  "if-you-have-played-it": "Jos olet pelannut sillä, olet juuri se pelaaja, jota tämä sivu odottaa.",
+  "nobody-has-rated-this-tank": "Kukaan ei ole vielä arvioinut tätä panssarivaunua.",
+  "overall": "Yhteensä",
+  "votes": "{count} ääntä",
+  "votes-one": "{count} ääni"
+}

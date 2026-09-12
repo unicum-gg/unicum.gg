@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Visos {count} World of Tanks transporto priemonės regione {region}. Filtruokite pagal lygį, tautą, klasę ir vaidmenį, tada atidarykite tanką, kad pamatytumėte jo statistiką, geriausius žaidėjus ir numatomas reikšmes.",
+    "title": "Visi World of Tanks tankai ({region}), peržiūrėkite kiekvieną transporto priemonę",
+    "description": "Peržiūrėkite kiekvieną World of Tanks tanką regione {region}: filtruokite pagal lygį, tautą, klasę ir vaidmenį, tada išsamiai peržiūrėkite kiekvieno tanko statistiką, geriausius žaidėjus ir numatomas reikšmes.",
+    "heading": "Visi <accent>tankai</accent>"
+  },
+  "specifications": {
+    "intro": "Žala per minutę, pramušimas, šarvai, matymo nuotolis ir mobilumas visoms {count} World of Tanks transporto priemonėms regione {region}. Rikiuokite pagal bet kurį stulpelį, tada filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
+    "title": "World of Tanks tankų specifikacijos ({region}), palyginkite kiekvieną transporto priemonę",
+    "description": "Palyginkite kiekvieno World of Tanks tanko regione {region} specifikacijas: žalą per minutę, pramušimą, šarvus, matymo nuotolį ir mobilumą. Rikiuokite ir filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
+    "heading": "Tankas <accent>specifikacijos</accent>"
+  },
+  "economics": {
+    "intro": "Pirkimo ir remonto kainos, sviedinių kainos ir kreditų pajamos visoms {count} World of Tanks transporto priemonėms regione {region}. Rikiuokite pagal bet kurį stulpelį, tada filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
+    "title": "World of Tanks tankų ekonomika ({region}), kreditų ir XP kainos",
+    "description": "Kreditų ir XP kainos, remonto ir sviedinių kainos kiekvienam World of Tanks tankui regione {region}. Rikiuokite ir filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
+    "heading": "Tankas <accent>ekonomika</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Kintamasis vidurkis žalos, reikalingos vienam, dviem ir trims ženklams, visoms {count} World of Tanks transporto priemonėms regione {region}. Rikiuokite pagal bet kurį stulpelį, tada filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
+    "title": "World of Tanks meistriškumo ženklų reikalavimai ({region})",
+    "description": "Žala, reikalinga vienam, dviem ir trims meistriškumo ženklams su kiekvienu World of Tanks tanku regione {region}. Rikiuokite ir filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
+    "heading": "<accent>Meistriškumo ženklai</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Auksinio tankisto ir meistriškumo ženklelio XP slenksčiai visoms {count} World of Tanks transporto priemonėms regione: {region}. Rikiuokite pagal bet kurį stulpelį, tada naudokite filtrą pagal lygį, tautą, klasę ir vaidmenį.",
+    "title": "World of Tanks meistriškumo ženklų reikalavimai (regionas: {region})",
+    "description": "Auksinio tankisto ir meistriškumo ženklelio XP slenksčiai kiekvienam World of Tanks tankui regione: {region}, su galimybe rikiuoti ir filtruoti pagal lygį, tautą, klasę ir vaidmenį.",
+    "heading": "<accent>Meistriškumo ženklai</accent>"
+  },
+  "videos": {
+    "intro": "{count} mūšiai, kuriuos bendruomenė susiejo su regionu: {region}, kiekvienas atidaromas nuo mūšio pradžios sekundės. Jie pasiūlyti iš tankų puslapių ir patikrinti prieš jiems pasirodant čia.",
+    "title": "World of Tanks žaidimo vaizdo įrašai (regionas: {region})",
+    "description": "Bendruomenės pasiūlyti World of Tanks mūšiai regione: {region}, kiekvienas atidaromas nuo mūšio pradžios sekundės: žaistas tankas, žemėlapis, pusė, kurioje žaista, ir kaip baigėsi mūšis.",
+    "heading": "Žaidimo <accent>vaizdo įrašai</accent>"
+  }
+}

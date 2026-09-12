@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Cik spēlētāju pašlaik ir katrā {label} serverī, kā šis skaits mainās dienas un nedēļas gaitā un kā reģions salīdzinās ar citiem.",
+  "recording-just-started": "Ierakstīšana tikko sākusies, tāpēc diagrammas no šī brīža aizpildīsies.",
+  "series-starts": "Sērija sākas {at}, kad sākās ierakstīšana, un neko pirms tā atgūt nevar.",
+  "server-population": "{label} servera populācija",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "Wargaming nosauc reģiona pirmos klasterus, bet pārējos atstāj kā vienkāršus identifikatorus, tāpēc 203 tiek rādīts kā EU3, turpinot reģiona paša numerāciju. Identifikators ir tas, ko mēs reģistrējam un ko katrs nosaukums atklāj, uz tā novietojot kursoru. Tam seko arī etiķete, jo klasteru numerēšana pēc noslodzes pārvietotu nosaukumu no viena servera uz citu, kad divi no tiem apmainītos vietām. Paraugā trūkstošs serveris vispār netika ziņots, kas nav tas pats, kas tukšs.",
+  "we-record-it": "Wargaming publicē katra servera populāciju kā momenta vērtību un neglabā tās vēsturi, tāpēc katru skaitli pēc pašreizējās minūtes esam reģistrējuši paši ik pēc piecām minūtēm.",
+  "where-battles-are-fought": "Kur notiek {label} kaujas"
+}

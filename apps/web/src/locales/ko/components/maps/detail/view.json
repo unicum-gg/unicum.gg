@@ -1,0 +1,9 @@
+{
+  "battle-time": "전투 시간",
+  "camouflage": "{camouflage} 은폐",
+  "mode": "모드",
+  "n-random-events": "{count, plural, other {#개 무작위 이벤트}}",
+  "random-events": "무작위 이벤트",
+  "size": "크기",
+  "team-size": "팀 크기"
+}

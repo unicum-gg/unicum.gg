@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Lőszer, felszerelés, fogyócikkek, direktívák, legénység és fejlődés ehhez az oszlophoz. Minden változtatás módosítja az összehasonlításban mögötte látható jellemzőket.",
+  "ammunition-equipment-crew-and-progression": "Lőszer, felszerelés, legénység és fejlődés",
+  "apply-to-every-column": "Alkalmazás minden oszlopra",
+  "compare-against": "Összehasonlítás ezzel: {tank}",
+  "compare-the-others-against-this-one": "A többi összehasonlítása ezzel",
+  "configure-tank": "{tank} beállítása",
+  "highest-overall-score": "Legmagasabb összesített pontszám",
+  "highest-overall-score-of-this": "Az összehasonlítás legmagasabb összesített pontszáma",
+  "is-the-reference": "Referencia: {tank}",
+  "overall": "Összesen",
+  "reference-column": "Referenciaoszlop",
+  "remove-tank": "{tank} eltávolítása",
+  "reset-all": "Mindent visszaállít",
+  "setup": "Beállítás",
+  "stock": "Alapállapot",
+  "tank-setup": "{tank} összeállítása",
+  "top": "Legjobb",
+  "where-this-vehicle-sits-across": "A jármű helye a teljes katalógusban, {MAXSCORE} közül. Az itt beállított négy kategóriapontszám átlaga. Összefoglaló, nem ítélet, egy felderítő és egy nehéz tank is elérheti ugyanazt a számot különböző erősségekkel."
+}

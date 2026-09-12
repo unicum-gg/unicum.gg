@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Kliknij dostępny węzeł, aby go odblokować. Każdy z nich wpływa na powyższe parametry. Kolory grupują węzły według siły ognia, mobilności, żywotności i mechaniki pojazdu.",
+  "loadout-switch-no-effect": "Zmiana wyposażenia w bitwie. Brak efektu charakterystyki.",
+  "title": "Ulepszenia czołgu {tank}",
+  "vehicle-mechanic-no-effect": "Mechanika pojazdu. Brak efektu charakterystyki."
+}

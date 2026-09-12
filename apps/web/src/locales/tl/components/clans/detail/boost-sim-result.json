@@ -1,0 +1,11 @@
+{
+  "already-running": "nakaandar na",
+  "in-window": "sa bintana",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Walang napiling mga reserba.",
+  "no-stock-ready": "walang nakahandang stock",
+  "not-available": "hindi magagamit",
+  "threshold": "threshold ({online}/{min})",
+  "would-activate": "mag-aactivate",
+  "would-not-fire": "Sa ngayon, hindi ito mag-a-activate."
+}

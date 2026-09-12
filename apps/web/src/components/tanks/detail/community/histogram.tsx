@@ -1,10 +1,11 @@
+import { numberFormat } from "@/lib/format";
 import {
   RATING_COLOR_HEX,
   starRatingColor,
   type StarDistribution,
 } from "@unicum.gg/shared";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * The shape of the vote, five bars, best at the top.
@@ -17,7 +18,7 @@ const intFmt = new Intl.NumberFormat("en-US");
  * Each bar is painted at the colour its own score would earn, so the weight of
  * a distribution is readable before any of the numbers are.
  */
-export function StarHistogram({ bars }: { bars: StarDistribution[] }) {
+export function StarHistogram({ bars, locale }: { bars: StarDistribution[] ; locale: string }) {
   const total = bars.reduce((sum, b) => sum + b.votes, 0);
   if (total === 0) return null;
 
@@ -40,7 +41,7 @@ export function StarHistogram({ bars }: { bars: StarDistribution[] }) {
             />
           </div>
           <span className="w-10 text-right text-fd-muted-foreground tabular-nums">
-            {intFmt.format(bar.votes)}
+            {numberFormat(locale, INT_FORMAT).format(bar.votes)}
           </span>
         </div>
       ))}

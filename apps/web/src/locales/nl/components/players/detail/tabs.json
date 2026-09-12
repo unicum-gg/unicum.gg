@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Overzicht",
+    "tanks": "Tanks",
+    "sessions": "Sessies",
+    "achievements": "Onderscheidingen",
+    "tournaments": "Toernooien",
+    "value": "Waarde"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "bèta"
+}

@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
+import { statLabel } from "@/components/stat-label";
 import type { ReactNode } from "react";
 import { RATING_COLOR_CLASS } from "@unicum.gg/shared";
 import type { CompareVehicle } from "@unicum.gg/core/wargaming/wot/tanks/compare-assemble";
@@ -24,6 +27,8 @@ export function TankComparePerformancesGrid({
   headers: ReactNode[];
   labelWidth?: string;
 }) {
+  const { locale } = useLocale();
+  const { t: tStats } = useTranslation("components/stat-labels");
   // The horizontal scroll is only offered where it is needed (narrow screens):
   // a scroll container becomes the sticky header's containing block, so from
   // `lg`, where the table fits, the page itself scrolls and the vehicles stay in
@@ -73,7 +78,9 @@ export function TankComparePerformancesGrid({
               >
                 {/* A cell spanning the whole row has no room to stick, so the
                     title inside it is what stays put on a sideways scroll. */}
-                <span className="sticky left-4 inline-block">{group.title}</span>
+                <span className="sticky left-4 inline-block">
+                  {statLabel(group.title, tStats)}
+                </span>
               </th>
             </tr>
             {group.rows.map((row) => {
@@ -90,7 +97,7 @@ export function TankComparePerformancesGrid({
                   className="border-b border-fd-border/60 last:border-b-0 hover:bg-fd-secondary/20"
                 >
                   <td className="sticky left-0 bg-fd-background px-4 py-1.5 text-fd-muted-foreground">
-                    {row.label}
+                    {statLabel(row.label, tStats)}
                   </td>
                   {values.map((value, i) => {
                     // The rating colour dresses the whole cell, as it does in
@@ -114,7 +121,7 @@ export function TankComparePerformancesGrid({
                                 isBest && "text-emerald-500",
                         )}
                       >
-                        {value == null ? "—" : row.format(value)}
+                        {value == null ? "—" : row.format(value, locale)}
                         {/* On a coloured cell the green would be invisible, so
                             the winner keeps the dot the other comparisons use. */}
                         {color && isBest && (

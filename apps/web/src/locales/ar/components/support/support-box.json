@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "تم إلغاء عملية الدفع.",
+  "claim-your-supporter-role-on-discord": "احصل على دور الداعم الخاص بك على Discord",
+  "could-not-add-the-discord-role-please-try-ag": "يمكن تعذّر إضافة دور Discord. يُرجى المحاولة مجددًا.",
+  "could-not-open-the-billing-portal": "يمكن تعذّر فتح بوابة الفوترة.",
+  "could-not-start-checkout-please-try-again": "يمكن تعذّر بدء الدفع. يُرجى المحاولة مجددًا.",
+  "could-not-update-your-preference": "يمكن تعذّر تحديث تفضيلك.",
+  "log-in-with-wargaming": "تسجيل الدخول باستخدام Wargaming",
+  "log-in-with-wargaming-to": "سجّل الدخول باستخدام Wargaming لدعم {NAME}.",
+  "manage-subscription": "إدارة الاشتراك",
+  "only-active-supporters-can-claim-the-discord": "يمكن للداعمين النشطين فقط الحصول على دور Discord.",
+  "or-choose-your-own-amount": "أو اختر المبلغ الذي تريده",
+  "pay-what-you-want": "ادفع ما تريد.",
+  "pick-an-amount": "اختر مبلغًا أو اكتب مبلغك الخاص، بدءًا من €{min}/شهر.",
+  "re-sync-discord-role": "إعادة مزامنة دور Discord",
+  "secured-by-stripe": "مؤمّن بواسطة Stripe. ألغِ الاشتراك في أي وقت.",
+  "show-me-anonymously-on-the": "اعرضني بشكل مجهول على المنصة",
+  "support-subscriptions-are-coming-soon": "اشتراكات الدعم ستتوفر قريبًا.",
+  "supporter-role-added-on-discord": "تمت إضافة دور الداعم على Discord!",
+  "you-are-a-supporter-thank": "أنت داعم. شكرًا لإبقاء {NAME} قيد التشغيل."
+}

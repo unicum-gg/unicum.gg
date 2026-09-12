@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Brak danych o czołgach tego klanu.",
+  "no-tanks-match-these-filters": "Żadne czołgi nie pasują do tych filtrów.",
+  "nation": "Kraj",
+  "type": "Typ",
+  "tier": "Poziom",
+  "name": "Nazwa",
+  "members": "Członkowie",
+  "battles": "Bitwy",
+  "avg-damage": "Średnie obrażenia",
+  "avg-xp": "Średnie XP",
+  "wr": "WR"
+}

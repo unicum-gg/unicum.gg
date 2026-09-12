@@ -1,0 +1,6 @@
+{
+  "title": "Najlepsi gracze World of Tanks w trybie {mode} ({region})",
+  "description": "Klasyfikacja {name} dla regionu {region} w trybie {mode}, rankingowym trybie rywalizacji 7 na 7 w World of Tanks, uszeregowana zgodnie z kolejnością w grze.",
+  "og-title": "Najlepsi gracze w trybie {mode}",
+  "og-subtitle": "Klasyfikacja rankingowa: {region}"
+}

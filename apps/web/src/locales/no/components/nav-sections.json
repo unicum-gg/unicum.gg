@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Spillere",
+    "clans": "Klaner",
+    "tanks": "Kjøretøy",
+    "maps": "Kart",
+    "tournaments": "Turneringer",
+    "servers": "Servere"
+  },
+  "links": {
+    "top-players": {
+      "label": "Topp spillere",
+      "description": "Spillerrangering totalt"
+    },
+    "players-onslaught": {
+      "description": "Rangert Onslaught-stige"
+    },
+    "players-steel-hunter": {
+      "description": "Rangering for battle royale"
+    },
+    "top-clans": {
+      "label": "Topp klaner",
+      "description": "Klanrangering totalt"
+    },
+    "stronghold": {
+      "description": "Rangering i trefninger"
+    },
+    "advances": {
+      "description": "Rangering for nivå X med 15 mot 15"
+    },
+    "tank-performances": {
+      "label": "Ytelse",
+      "description": "Seiersprosent og skade per stridsvogn"
+    },
+    "tank-specs": {
+      "label": "Spesifikasjoner",
+      "description": "Statistikk for alle stridsvogner"
+    },
+    "tank-economics": {
+      "label": "Økonomi",
+      "description": "Kreditt- og XP-tjenere"
+    },
+    "tank-moe": {
+      "description": "Skade for hvert merke"
+    },
+    "tank-mom": {
+      "description": "Grenser for ekspertmerke"
+    },
+    "tank-changes": {
+      "label": "Endringer",
+      "description": "Forbedringer og svekkelser per oppdatering"
+    },
+    "tank-community": {
+      "label": "Fellesskapsvurderinger",
+      "description": "Vurdert av spillere som eier dem"
+    },
+    "tank-videos": {
+      "label": "Videoer",
+      "description": "Spillvideoer fra fellesskapet"
+    },
+    "all-tournaments": {
+      "label": "Turneringer",
+      "description": "Alle turneringer, åpne og avsluttede"
+    },
+    "all-maps": {
+      "label": "Alle kart",
+      "description": "Alle kart i spillet"
+    },
+    "map-changes": {
+      "label": "Endringer",
+      "description": "Kartendringer per oppdatering"
+    },
+    "battle-type": {
+      "description": "{type} kart"
+    },
+    "servers-population": {
+      "label": "Serverbefolkning",
+      "description": "Spillere pålogget nå og over tid"
+    }
+  }
+}

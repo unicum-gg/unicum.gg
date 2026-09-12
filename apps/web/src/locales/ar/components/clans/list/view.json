@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "أفضل <accent>العشائر</accent>",
+    "language": "أفضل عشائر <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "قائمة المتصدرين في {region}، مصنّفة حسب {metric} المحسوب كمتوسط لدى الأعضاء المتتبّعين لكل عشيرة، بحد أدنى 50 عضوًا خاضوا معارك.",
+    "language": "عشائر {region} التي أعلنت {language} إحدى لغاتها، مصنّفة حسب {metric} المحسوب كمتوسط لدى أعضائها المتتبّعين، بحد أدنى 25 عضوًا خاضوا معارك.",
+    "strict": "عشائر {region} التي أعلنت {language} لغتها الوحيدة، مصنّفة حسب {metric} المحسوب كمتوسط لدى أعضائها المتتبّعين، بحد أدنى 25 عضوًا خاضوا معارك."
+  },
+  "board": {
+    "all": "أفضل {count} عشائر حسب {metric}",
+    "language": "أفضل {count} عشائر {language} حسب {metric}",
+    "strict": "أفضل {count} عشائر {language} فقط حسب {metric}"
+  },
+  "members": "الأعضاء",
+  "strict-toggle": "صارم",
+  "any-toggle": "أي",
+  "all-languages": "جميع اللغات",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

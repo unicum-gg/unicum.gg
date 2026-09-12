@@ -1,0 +1,12 @@
+{
+  "before-update": "Pre ažuriranja {version}",
+  "common-test": "Zajednički test",
+  "in-common-test-not-released": "U Uobičajenom testu, još nije objavljeno",
+  "introduced": "Uvedeno",
+  "lifecycle": "Životni ciklus",
+  "n-buffed": "{count} poboljšano",
+  "n-nerfed": "{count} oslabljeno",
+  "not-released-wargaming-can-still": "Nije objavljeno. Wargaming i dalje može promeniti ili ukloniti bilo šta od ovoga pre nego što ažuriranje bude objavljeno.",
+  "status": "Status",
+  "update": "Osveži {version}"
+}

@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} bătălii cu acesta",
+  "damage": "{damage} daune produse",
+  "n-marks": "{count, plural, one {# semn} few {# semne} other {# de semne}}",
+  "no-written-opinions-yet-if": "Nu există încă opinii scrise. Dacă ai suficiente bătălii, a ta ar fi prima.",
+  "win-rate": "Rată de victorii de {toFixed}%",
+  "written-on": "scrisă în {gameVersion}"
+}

@@ -1,0 +1,17 @@
+{
+  "close": "Zavřít",
+  "format": "Formát",
+  "here": "zde",
+  "in-the-queue": "Příspěvek je ve frontě a zobrazí se {where}, jakmile ho zkontroluje moderátor. Do té doby je na dané stránce váš příspěvek zobrazen šedě.",
+  "log-in-to-suggest-a": "Přihlásit se a navrhnout taktiku",
+  "on-map": "na {map}",
+  "players-per-team": "Hráčů na tým",
+  "sending": "Odesílání…",
+  "suggest": "Navrhnout",
+  "suggest-a-tactic": "Navrhnout taktiku",
+  "suggest-another": "Navrhnout další",
+  "suggestion-sent": "Návrh odeslán",
+  "tier": "Úroveň",
+  "what-to-submit": "Soutěžní bitva s videem spuštěným přesně v okamžiku jejího začátku. Výchozí mapa: {map}. Mapa se mění spolu s videem, protože během klanového večera se mapy střídají. Je třeba uvést stranu, za kterou se hrálo, protože právě podle ní si video vyhledává velitel týmu. Proto ji necháváme zadat, místo abychom ji odhadovali.",
+  "what-was-played": "Co bylo hráno"
+}

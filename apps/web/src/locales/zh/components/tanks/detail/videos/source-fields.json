@@ -1,0 +1,9 @@
+{
+  "battle-starts-at": "战斗开始时间",
+  "https-www-youtube-com-watch": "https://www.youtube.com/watch?v=…&t=1h05m30s",
+  "optional": "（可选）",
+  "that-is-not-a-youtube": "这不是YouTube视频链接。",
+  "use-a-time-like-1": "使用类似1:05:30的时间，或留空。",
+  "your-link-has-no-timestamp": "你的链接没有时间戳。将上方预览拖动到战斗开始处，或在视频从该处开始时留空。",
+  "youtube-link": "YouTube链接"
+}

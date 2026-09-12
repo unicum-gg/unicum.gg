@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Kilidini açmak için erişilebilir bir düğmeye tıkla. Her düğme etkisini yukarıdaki özelliklere uygular. Renkler düğmeleri ateş gücü, hareket kabiliyeti, dayanıklılık ve araç mekaniklerine göre gruplandırır.",
+  "loadout-switch-no-effect": "Savaş içi donanım düzeni değişimi. Özellik etkisi yok.",
+  "title": "{tank} tankının yükseltmeleri",
+  "vehicle-mechanic-no-effect": "Araç mekaniği. Özellik etkisi yok."
+}

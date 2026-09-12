@@ -1,0 +1,4 @@
+{
+  "columns": "Colonnes",
+  "n-marks-of-excellence": "{count, plural, one {# marque d’excellence} other {# marques d’excellence}}"
+}

@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>players</accent>",
+    "language": "Top <accent>{language}</accent> players"
+  },
+  "intro": {
+    "all": "{region} leaderboard, ranked by all-time {metric} (minimum 20,000 battles).",
+    "language": "{region} players whose inferred clan-history language set includes {language}, ranked by {metric} (minimum 10,000 battles).",
+    "strict": "{region} players whose inferred clan-history language is exclusively {language}, ranked by {metric} (minimum 10,000 battles)."
+  },
+  "board": {
+    "all": "Top {count} players by {metric}",
+    "language": "Top {count} {language} players by {metric}",
+    "strict": "Top {count} strictly {language} players by {metric}"
+  },
+  "modes": {
+    "overall": "Overall"
+  },
+  "columns": {
+    "player": "Player"
+  },
+  "strict-toggle": "Strict",
+  "any-toggle": "Any",
+  "all-languages": "All languages",
+  "battles": "Battles",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

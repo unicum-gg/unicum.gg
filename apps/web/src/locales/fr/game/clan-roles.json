@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Recruteur",
+  "personnel_officer": "Officier du personnel",
+  "quartermaster": "Quartier-maître",
+  "executive_officer": "Commandant en second",
+  "recruit": "Recrue",
+  "private": "Soldat",
+  "commander": "Commandant",
+  "reservist": "Réserviste",
+  "combat_officer": "Officier de combat",
+  "junior_officer": "Officier subalterne",
+  "intelligence_officer": "Officier du renseignement"
+}

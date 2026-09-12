@@ -1,0 +1,35 @@
+{
+  "heading": "Najbolji igrači u <accent>{mode}</accent>",
+  "intro": "{mode} je takmičarski rangirani režim World of Tanksa 7 na 7 na Tier X. Ljestvica za regiju {region}, direktno iz plasmana same igre.",
+  "season": {
+    "range": "{start} do {end}",
+    "final": "konačni poredak",
+    "live": "sezona u toku",
+    "updated": "ažurirano {when}"
+  },
+  "board": "Najboljih {count} igrača režima {mode}",
+  "columns": {
+    "player": "Igrač",
+    "rank": "Rang",
+    "battles": "Bitke",
+    "rating": "Bodovi rejtinga"
+  },
+  "alias": "(kao {nickname})",
+  "ranks": {
+    "title": "Rangovi",
+    "meaning": "Značenje",
+    "tier": "Nivo",
+    "intro": "Napredujete kroz rangove režima {mode} pobjedama u bitkama. Svaka pobjeda donosi bodove rejtinga na osnovu toga koliko ste dobro igrali. {champion} je najviši rang koji možete doseći samo bodovima, a njegovo dostizanje vas stavlja na ljestvicu. {legend} nije fiksni prag, već najbolje ocijenjeni dio igrača ranga {champion}, pa se granica mijenja u zavisnosti od konkurencije, uz izjednačenja koja se rješavaju brojem odigranih bitaka. Tačne granice za {legend} i {champion} dolaze iz trenutne sezone i označene su na ljestvici.",
+    "legend-blurb": "Najbolje ocijenjeni igrači ranga {champion}. Igra ograničava ovaj rang na određenu poziciju na ljestvici u svakoj sezoni, pa njegova veličina zavisi od sezone i regije, a ne od fiksnog broja bodova. Ako padnete ispod posljednjeg igrača ranga {legend}, vraćate se na {champion}.",
+    "champion-blurb": "Najviši rang do kojeg možete napredovati pomoću bodova rejtinga i ulaz na ljestvicu. Svaki rangirani igrač ima najmanje rang {champion}."
+  },
+  "race": {
+    "title-live": "Šta je trenutno potrebno",
+    "title-ended": "Kako je sezona prošla",
+    "legend-cutoff": "Granica za {legend}",
+    "champion-cutoff": "Granica za {champion}",
+    "ranked-players": "Rangirani igrači",
+    "rating-points": "bodovi rejtinga",
+    "rank-cutoffs": "Granice rangova"
+  }
+}

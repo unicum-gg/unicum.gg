@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Gefechte",
+  "no-votes": "nein Abstimmungen",
+  "rated-higher": "Stärkere spieler bewerten das Fahrzeug um {stars} Sterne höher als der Rest des Servers. Hier zahlt es sich aus, zu wissen, was man tut.",
+  "rated-lower": "Stärkere spieler bewerten das Fahrzeug um {stars} Sterne niedriger als der Rest des Servers. Es lässt einen gut aussehen, bis es wirklich etwas leisten soll.",
+  "votes": "{count} Abstimmungen",
+  "votes-one": "{count} Abstimmung"
+}

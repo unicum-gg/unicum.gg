@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "{size} oyuncunun {rated} puanlanan oyuncusu üzerinden ortalama",
+  "average-over-recent": "Son 30 gün içinde oynayan {size} oyuncunun {rated} oyuncusu üzerinden ortalama",
+  "avg-winrate": "Ortalama kazanma oranı",
+  "finished": "Bitti",
+  "record": "Kayıt",
+  "won": "Kazandı"
+}

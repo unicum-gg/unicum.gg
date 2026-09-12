@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Žrebovanie ešte neprebehlo. Zápasy tohto tímu sa tu zobrazia po začiatku turnaja.",
+  "each-map-is-played-twice": "Každá mapa sa hrá dvakrát, raz za každú stranu. Posledná mapa rozhoduje a hrá sa iba raz.",
+  "first-battle-at": "Prvá bitka, {when}",
+  "lost": "Prehral",
+  "matches": "Zápasy ({length})",
+  "never-played": "Tento tím neodohral ani jeden zápas. Zaregistroval sa, ale nebol zaradený do žrebovania, čo sa stáva, keď súpiska zostane nepotvrdená.",
+  "no-maps-recorded": "Pre tento zápas nie sú zaznamenané žiadne mapy.",
+  "no-roster-recorded-for-this": "Tento tím nemá zaznamenanú súpisku.",
+  "of-players-on-the-day": "{members} z {length} hráčov v daný deň",
+  "played-on-uncatalogued": "Odohrané na {maps}, ktoré katalóg máp neobsahuje.",
+  "roster": "Zoznam ({length})",
+  "stage-group": "{stage} · Skupina {order}",
+  "team-1": "Ekipa 1",
+  "team-2": "Ekipa 2",
+  "tournaments": "Turnaje",
+  "when-the-first-battle-started": "Kedy sa začala prvá bitka",
+  "won": "Vyhrané"
+}

@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Топ <accent>гравці</accent>",
+    "language": "Найкращі гравці з мовою <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Таблиця лідерів регіону {region}, упорядкована за {metric} за весь час, мінімум 20 000 боїв.",
+    "language": "Гравці регіону {region}, у наборі мов їхньої передбачуваної історії кланів є {language}, упорядковані за {metric}, мінімум 10 000 боїв.",
+    "strict": "Гравці регіону {region}, єдиною мовою їхньої передбачуваної історії кланів є {language}, упорядковані за {metric}, мінімум 10 000 боїв."
+  },
+  "board": {
+    "all": "Найкращі {count} гравців за {metric}",
+    "language": "Найкращі {count} гравців із мовою {language} за {metric}",
+    "strict": "Найкращі {count} гравців винятково з мовою {language} за {metric}"
+  },
+  "modes": {
+    "overall": "Всього"
+  },
+  "columns": {
+    "player": "Гравець"
+  },
+  "strict-toggle": "Суворий",
+  "any-toggle": "Будь-який",
+  "all-languages": "Усі мови",
+  "battles": "Бої",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

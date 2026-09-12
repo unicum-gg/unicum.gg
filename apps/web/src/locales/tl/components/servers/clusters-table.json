@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Wala pang cluster na naitala.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Ibahagi",
+  "peak": "Tuktok ({label})",
+  "average": "Pangkaraniwan ({label})",
+  "not-reported": "Hindi naiulat",
+  "total": "Kabuuan"
+}

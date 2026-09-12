@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "wyżej niż {value}% ocenionych czołgów na swoim poziomie",
+  "measured-hint": "Pozycja pod względem współczynnika zwycięstw wśród takich samych czołgów",
+  "not-enough-votes-yet-to": "Za mało głosów, by porównać werdykt społeczności z faktycznymi osiągami czołgu.",
+  "perceived-hint": "Pozycja według społeczności wśród ocenianych czołgów poziomu {tier}",
+  "verdict": {
+    "overrated": "Społeczność ocenia go znacznie wyżej, niż wskazują jego rzeczywiste wyniki.",
+    "fair": "W tym przypadku reputacja pokrywa się z wynikami.",
+    "underrated": "Osiąga lepsze wyniki, niż wynikałoby to z opinii graczy."
+  },
+  "what-players-think": "Opinia graczy",
+  "what-the-data-says": "Co mówią dane"
+}

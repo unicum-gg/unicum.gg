@@ -1,0 +1,6 @@
+{
+  "title": "لاعبو World of Tanks الناطقون بـ{language} فقط ({region})",
+  "description": "قائمة متصدري لاعبي {name} في {region} للاعبين الذين لغتهم المستنتجة من تاريخ العشيرة هي {language} فقط، مرتبة حسب WNX.",
+  "og-title": "اللاعبون الناطقون بـ{language} فقط",
+  "og-subtitle": "لوحة صدارة {region}"
+}

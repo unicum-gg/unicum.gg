@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Change anything that is wrong, the vehicle included. Saving sends it back to the moderation queue, so a video that is live comes down until it is approved again.",
+  "correct-a-suggestion": "Correct a suggestion",
+  "could-not-load-that-suggestion": "Could not load that suggestion. Try again in a moment.",
+  "link-expired": "That link has expired. Press Edit again on the card in Discord for a fresh one.",
+  "loading": "Loading…",
+  "log-in": "Log in",
+  "log-in-with-the-account": "Log in with the account that suggested this video to correct it.",
+  "no-suggestion-with-that-id": "There is no suggestion with that id.",
+  "not-yours-to-correct": "This suggestion is not yours to correct."
+}

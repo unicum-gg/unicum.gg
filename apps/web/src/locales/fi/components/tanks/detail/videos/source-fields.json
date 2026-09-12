@@ -1,0 +1,9 @@
+{
+  "battle-starts-at": "Taistelu alkaa kohdassa",
+  "https-www-youtube-com-watch": "https://www.youtube.com/watch?v=…&t=1h05m30s",
+  "optional": "(valinnainen)",
+  "that-is-not-a-youtube": "Tämä ei ole YouTube-videon linkki.",
+  "use-a-time-like-1": "Käytä aikaa muodossa 1:05:30 tai jätä kenttä tyhjäksi.",
+  "your-link-has-no-timestamp": "Linkissäsi ei ole aikaleimaa. Siirry yllä olevassa esikatselussa taisteluun tai jätä se ennalleen, jos video alkaa siitä.",
+  "youtube-link": "YouTube-linkki"
+}

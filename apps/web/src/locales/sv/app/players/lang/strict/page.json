@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks-spelare med enbart {language} som språk ({region})",
+  "description": "{name}: topplista över {region}-spelare vars språk, baserat på klanhistoriken, bedöms vara enbart {language}, rankade efter WNX.",
+  "og-title": "Spelare med enbart {language} som språk",
+  "og-subtitle": "{region} topplista"
+}

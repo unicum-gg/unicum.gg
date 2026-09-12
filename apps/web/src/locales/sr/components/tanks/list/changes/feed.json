@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# тенк} few {# тенкови} other {# тенкови}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Промене тенкова још нису забележене. Како Wargaming ребалансира тенкове, побољшања и ослабљења сваког ажурирања појавиће се овде.",
+  "update": "Osveži {version}"
+}

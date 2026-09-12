@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Ingen økt ennå. De vises når denne kontoen er registrert to ganger med kamper imellom. Dette skjer automatisk når kontoen spilles.",
+  "bar-height-is-battles-played": "Søylehøyden er antall kamper spilt, fargen er {granularity}s {metric}, i de samme intervallene som nettstedet bruker ellers.",
+  "title": "{nickname}’s økter",
+  "title-count": "Økter for {nickname} ({count})",
+  "granularity": {
+    "day": "dag",
+    "week": "uke",
+    "month": "måned",
+    "daily": "Daglig",
+    "weekly": "Ukentlig",
+    "monthly": "Månedlig"
+  },
+  "week-of": "Uke fra {date}"
+}

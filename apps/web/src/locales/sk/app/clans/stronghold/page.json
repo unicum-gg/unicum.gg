@@ -1,0 +1,4 @@
+{
+  "title": "Najlepšie klany úrovne {tier} ({region})",
+  "description": "Rebríček klanov úrovne {tier}, región: {region}. Poradie podľa SR (hodnotenia v šarvátkach), ELO, počtu bitiek a miery víťazstiev. Minimálne {battles} bitiek."
+}

@@ -1,0 +1,15 @@
+{
+  "become-a-supporter": "成为支持者",
+  "community-funded-ad-free": "社区资助 · 无广告",
+  "coverage-page": "覆盖页面",
+  "every-euro-keeps-running-supporters": "每一欧元都让 {NAME} 继续运行。支持者会在玩家页面获得徽章，并出现在下方的领奖台上，但这里从不锁定任何内容，也永远不会有广告。这是一项由你完全掌控的月度订阅。",
+  "how-is-funded": "{NAME} 的资金来源",
+  "is-free-open-source-and": "{NAME}免费、开源且无广告，并且一直处于亏损运营状态。永远没有广告。如果它对您有用，可以每月支付至少€3，帮助 World of Tanks 追踪器持续运行并发展。",
+  "it-runs-on-a-single": "它运行在一台租用的服务器上，每一欧元都会回到项目中：服务器、数据库、默认列入白名单的出口IP，用于刷新更多玩家的数据，以及偶尔进行推广，让更多人发现它。支持者承担每月账单，额外资金则用于提高吞吐量和开发新功能。",
+  "no-ads-no-investors-no": "否广告，否投资者，否出售数据。{NAME} 完全由使用它的玩家提供资金。",
+  "no-supporters-yet-be-the": "还没有支持者。成为排行榜上的第一位。",
+  "same-numbers-as": "与{link}完全相同的数据。",
+  "title": "支援型 {name}",
+  "top-supporters": "顶尖支持者",
+  "where-your-money-goes": "您的资金去向"
+}

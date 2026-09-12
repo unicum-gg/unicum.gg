@@ -1,0 +1,6 @@
+{
+  "active-until": "Активно до {tz}",
+  "n-left": "Осталось: {count}",
+  "no-reserves-in-stock-right": "Сейчас нет резервов в наличии.",
+  "reserves-to-activate": "Резервы для активации"
+}

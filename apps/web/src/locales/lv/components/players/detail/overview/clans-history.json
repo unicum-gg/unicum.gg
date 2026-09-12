@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname} klanu vēsture",
+  "clans-in-clans": "{totalClans} klani · {timeInClansSeconds} klanos",
+  "current": "pašreizējais",
+  "duration": "Darbības ilgums",
+  "from": "No",
+  "name": "Nosaukums",
+  "no-clan-history": "Klanu vēstures nav.",
+  "role": "Loma",
+  "tag": "tag",
+  "to": "līdz"
+}

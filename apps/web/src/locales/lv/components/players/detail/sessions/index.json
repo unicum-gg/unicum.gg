@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Pagaidām nav nevienas sesijas. Tās parādās, kad šis konts ir paraugots divreiz un starp paraugošanām ir notikušas kaujas. Tas notiek automātiski, kontu spēlējot.",
+  "bar-height-is-battles-played": "Joslas augstums ir spēlēto kauju skaits, bet krāsa ir šī {granularity} {metric}, izmantojot tās pašas joslas, ko vietne izmanto visur citur.",
+  "title": "{nickname} sesijas",
+  "title-count": "{nickname} sesijas ({count})",
+  "granularity": {
+    "day": "diena",
+    "week": "nedēļa",
+    "month": "mēnesis",
+    "daily": "Ikdienas",
+    "weekly": "Nedēļas",
+    "monthly": "Mēneša"
+  },
+  "week-of": "Nedēļa no {date}"
+}

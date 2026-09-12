@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Najbolji <accent>klanovi</accent>",
+    "language": "Najbolji klanovi na jeziku <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Ljestvica za regiju {region}, rangirano prema {metric}, kao prosjek za praćene članove svakog klana (minimum 50 članova s bitkama).",
+    "language": "Klanovi iz regije {region} koji su naveli {language} kao jedan od svojih jezika, rangirani prema {metric}, kao prosjek njihovih praćenih članova (minimum 25 članova s bitkama).",
+    "strict": "Klanovi iz regije {region} koji su naveli {language} kao svoj jedini jezik, rangirani prema {metric}, kao prosjek njihovih praćenih članova (minimum 25 članova s bitkama)."
+  },
+  "board": {
+    "all": "Najboljih {count} klanova prema {metric}",
+    "language": "Najboljih {count} klanova na jeziku {language} prema {metric}",
+    "strict": "Najboljih {count} klanova isključivo na jeziku {language} prema {metric}"
+  },
+  "members": "Članovi",
+  "strict-toggle": "Strogo",
+  "any-toggle": "Bilo koji",
+  "all-languages": "Svi jezici",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

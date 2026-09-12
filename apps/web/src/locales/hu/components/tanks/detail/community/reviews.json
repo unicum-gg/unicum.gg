@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} csata vele",
+  "damage": "{damage} Sebzés",
+  "n-marks": "{count, plural, one {# jel} other {# jelek}}",
+  "no-written-opinions-yet-if": "Még nincsenek írott vélemények. Ha megvannak a csatáid, a tiéd lehet az első.",
+  "win-rate": "{toFixed}% győzelmi arány",
+  "written-on": "írva: {gameVersion}"
+}

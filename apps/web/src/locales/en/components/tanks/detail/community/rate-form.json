@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "A few more words: {count} to go.",
+  "at-winrate": "at {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Could not withdraw that. Try again in a moment.",
+  "hide-the-detailed-axes": "Hide the detailed axes",
+  "not-enough-battles": "You have not played this tank enough for a vote to count.",
+  "published-once-read": "Published once a moderator has read it. Your stars count straight away.",
+  "rate-it-in-detail": "Rate it in detail (optional)",
+  "review": {
+    "none": "Rating saved.",
+    "queued": "Rating saved. Your review is with a moderator.",
+    "published": "Rating saved. Your review is already live.",
+    "pending": "Rating saved. Your review is still waiting on a moderator.",
+    "rejected": "Rating saved. Your earlier review was not published, so only your stars count.",
+    "closed": "Rating saved. Written opinions are closed right now, so the text was not kept."
+  },
+  "save-failed": "Could not save that. Try again in a moment.",
+  "say-why-optional": "Say why (optional)",
+  "signed-with": "Signed with your {battles} battles in it",
+  "submit-my-rating": "Submit my rating",
+  "too-many-edits": "That is a lot of edits at once. Give it a minute.",
+  "update-my-rating": "Update my rating",
+  "what-it-is-good-at": "What it is good at, what it is not, and who should play it.",
+  "withdraw": "Withdraw",
+  "your-rating-has-been-withdrawn": "Your rating has been withdrawn.",
+  "your-review-is-waiting-on": "Your review is waiting on a moderator. Only you can see it here.",
+  "your-review-was-not-published": "Your review was not published. Your stars still count towards the average."
+}

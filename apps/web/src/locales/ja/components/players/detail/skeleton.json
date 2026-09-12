@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname}のランダムバトル戦績",
+  "progression": "{nickname}の{metricLabel}進行状況",
+  "solid-line-is-overall-matches": "実線は全体の{metricLabel}です。上の合計列と一致し、新しい戦闘が蓄積されるにつれてゆっくり変化します。破線はセッションごとの{metricLabel2}で、前回のスナップショット以降にプレイされた戦闘から算出されます。好調・不調の連続を示します。線の色はレーティング帯に従います。",
+  "tanks-shaping-s-rating": "{nickname}のレーティングを左右する戦車",
+  "tanks": "{nickname}の戦車",
+  "stats": "{nickname}の{strongholdLabel}戦績"
+}

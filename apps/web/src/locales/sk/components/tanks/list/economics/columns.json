@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Cena (kredity)",
+      "tip": "Nákupná cena v kreditoch (tanky z technologického stromu)"
+    },
+    "buyGold": {
+      "label": "Cena (zlato)",
+      "tip": "Nákupná cena v zlate (prémiové tanky)"
+    },
+    "researchXp": {
+      "label": "XP za výskum",
+      "tip": "XP potrebné na odomknutie (najlacnejšia cesta)"
+    },
+    "totalFreeXp": {
+      "label": "Voľné XP (T{tier})",
+      "tip": "Celkové XP potrebné na výskum od úrovne {tier} vrátane požadovaných modulov"
+    },
+    "shellCost": {
+      "label": "Cena granátu",
+      "tip": "Cena predvoleného granátu (kredity)"
+    },
+    "ammoCost": {
+      "label": "Cena plnej munície",
+      "tip": "Cena predvoleného granátu × kapacita munície"
+    },
+    "acquireMoney": {
+      "label": "Cena nákupu ({currency})",
+      "tip": "Odhadované náklady v reálnych peniazoch na získanie tanku (výskum + nákup), vyjadrené v mene {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Voľné XP ({currency})",
+      "tip": "Odhadované náklady v reálnych peniazoch na odomknutie tanku pomocou voľných XP od úrovne {tier}, vyjadrené v mene {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Cena (kredity)",
+    "buyGold": "Cena (zlato)",
+    "researchXp": "XP za výskum",
+    "totalFreeXp": "Voľný XP",
+    "shellCost": "Cena granátu",
+    "ammoCost": "Cena plnej munície",
+    "acquireMoney": "Cena nákupu (peniaze)",
+    "freeXpMoney": "Voľné XP (peniaze)"
+  }
+}

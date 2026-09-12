@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Bitwy losowe: statystyki, gracz {nickname}",
+  "progression": "Progresja {metricLabel}, gracz: {nickname}",
+  "solid-line-is-overall-matches": "Linia ciągła pokazuje ogólną wartość {metricLabel} (zgodną z widoczną powyżej kolumną Suma), która zmienia się powoli, w miarę jak przybywają nowe Bitwy. Linia przerywana pokazuje wartość {metricLabel2} dla każdej sesji. Jej podstawę stanowią Bitwy rozegrane od poprzedniego zapisu stanu. Pokazuje serie dobrej i słabej formy. Kolor linii odpowiada poziomowi w kategorii Klasyfikacja.",
+  "tanks-shaping-s-rating": "Czołgi kształtujące poziom w kategorii Klasyfikacja, gracz: {nickname}",
+  "tanks": "Czołgi {nickname}",
+  "stats": "Statystyki {strongholdLabel}, gracz: {nickname}"
+}

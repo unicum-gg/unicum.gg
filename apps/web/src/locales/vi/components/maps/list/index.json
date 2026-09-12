@@ -1,0 +1,9 @@
+{
+  "all": "Tất cả",
+  "camouflage-map": "Bản đồ {camouflage}",
+  "modes": "{count, plural, other {# các chế độ}}",
+  "no-maps-match-your-filters": "Không có bản đồ nào khớp với bộ lọc của bạn.",
+  "search": "Tìm kiếm trong {count} bản đồ",
+  "search-label": "Tìm kiếm bản đồ",
+  "special-map": "Bản đồ đặc biệt"
+}

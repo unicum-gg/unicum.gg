@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   ArrowsInSimpleIcon,
   ArrowsOutSimpleIcon,
@@ -9,12 +10,15 @@ import {
   UsersIcon,
   XIcon,
 } from "@phosphor-icons/react/dist/ssr";
+import { useLocale } from "@onruntime/translations/react";
+import { languageDisplayName } from "@/lib/language-name";
 import Image from "next/image";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
 import { FeaturedPlayer } from "@/components/home/featured-player";
 import { usePeriod } from "@/hooks/use-period";
+import { useTranslation } from "@/hooks/use-translation";
 import { PeriodSelect } from "@/components/home/period-select";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
@@ -49,7 +53,7 @@ import { cn } from "@/lib/utils";
 import { StreamChat } from "./stream-chat";
 import type { Region } from "@unicum.gg/wargaming";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 function thumb(url: string, w: number, h: number): string {
   return url.replace("{width}", String(w)).replace("{height}", String(h));
@@ -62,6 +66,8 @@ export function LiveStreams({
   initial: LiveStreamer[];
   onHide?: () => void;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/home/live-streams");
   // Deduped with every 🔴 badge on the page (same SWR key), SSR-seeded so the
   // rail paints without a flash.
   const streamers = useLiveStreamers(initial);
@@ -113,9 +119,9 @@ export function LiveStreams({
   // reads as bringing the list back; in theater both are visible side by side.
   const chatLabel = chatOpen
     ? theater
-      ? "Hide chat"
-      : "Show streamers"
-    : "Show chat";
+      ? t("chat.hide")
+      : t("chat.show-streamers")
+    : t("chat.show");
   const chatIcon = chatOpen ? (
     theater ? (
       <ChatCircleSlashIcon className="size-4" />
@@ -134,9 +140,12 @@ export function LiveStreams({
           browser honours, and opaque so the rows do not read through it. */}
       <TableHeader className="[&_th]:sticky [&_th]:top-0 [&_th]:z-10 [&_th]:bg-fd-background">
         <TableRow>
-          <TableHead className="pl-4!">Player</TableHead>
-          <TableHead className="w-20 whitespace-nowrap text-right!">
-            Viewers
+          <TableHead className="pl-4!">{t("player")}</TableHead>
+          {/* Wide enough for the longest translation of "Viewers" rather than
+              for the English word: at `w-20` the French "Spectateurs" was
+              clipped mid-word by the `whitespace-nowrap` beside it. */}
+          <TableHead className="w-28 whitespace-nowrap text-right!">
+            {t("viewers")}
           </TableHead>
           <TableHead className="w-20 pr-4 text-right!">
             <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
@@ -159,14 +168,12 @@ export function LiveStreams({
   );
   return (
     <>
-      <h1 className="sr-only">
-        {APP.NAME}: World of Tanks player, clan and tank stats
-      </h1>
+      <h1 className="sr-only">{t("heading", { name: APP.NAME })}</h1>
       <Panel className="flex flex-col">
         <PanelHeader className="flex items-center justify-between gap-3">
           <PanelTitle>
             <span className="mr-2 text-[#eb0400]">●</span>
-            Top players streaming now ·{" "}
+            {t("title")}{" "}
             <PeriodSelect period={period} onChange={setPeriod} />
           </PanelTitle>
           <div className="flex items-center gap-1.5">
@@ -175,8 +182,8 @@ export function LiveStreams({
               <button
                 type="button"
                 onClick={onHide}
-                aria-label="Hide streamers"
-                title="Hide streamers"
+                aria-label={t("hide")}
+                title={t("hide")}
                 className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
               >
                 <XIcon className="size-4" />
@@ -224,7 +231,9 @@ export function LiveStreams({
                       className="inline-flex align-baseline text-fd-foreground"
                     />
                     {" · "}
-                    {intFmt.format(active.viewerCount)} viewers
+                    {t("viewer-count", {
+                      count: num(INT_FORMAT).format(active.viewerCount),
+                    })}
                     <StreamLanguageFlag
                       language={active.language}
                       region={active.region}
@@ -256,7 +265,9 @@ export function LiveStreams({
                         size="icon-sm"
                         onClick={() => setTheater((t) => !t)}
                         aria-pressed={theater}
-                        aria-label={theater ? "Exit theater mode" : "Theater mode"}
+                        aria-label={
+                          theater ? t("theater.exit") : t("theater.enter")
+                        }
                         className="hidden shrink-0 lg:inline-flex"
                       >
                         {theater ? (
@@ -267,7 +278,7 @@ export function LiveStreams({
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent side="top">
-                      {theater ? "Exit theater mode" : "Theater mode"}
+                      {theater ? t("theater.exit") : t("theater.enter")}
                     </TooltipContent>
                   </Tooltip>
                   <Tooltip>
@@ -282,14 +293,16 @@ export function LiveStreams({
                           href={`https://www.twitch.tv/${active.twitchLogin}`}
                           target="_blank"
                           rel="nofollow noopener noreferrer"
-                          aria-label={`Watch ${active.nickname} on Twitch`}
+                          aria-label={t("watch", {
+                            nickname: active.nickname,
+                          })}
                         >
                           <TwitchLogoIcon className="size-4" />
                         </a>
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent side="top">
-                      Watch {active.nickname} on Twitch
+                      {t("watch", { nickname: active.nickname })}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -368,8 +381,6 @@ export function LiveStreams({
   );
 }
 
-const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
-
 /** The stream's spoken language (from Twitch) as a small inline flag. */
 function StreamLanguageFlag({
   language,
@@ -378,23 +389,25 @@ function StreamLanguageFlag({
   language: string;
   region: Region;
 }) {
+  const { locale } = useLocale();
+  const { t: tr } = useTranslation("components/home/live-streams");
   // Tolerate payloads predating the field (stale SSE snapshots, old caches).
   const country = language ? languageToCountryCode(language, region) : null;
   if (!country) return null;
-  const name = LANGUAGE_NAMES.of(language) ?? language.toUpperCase();
+  const name = languageDisplayName(language, locale);
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <Image
             src={`/flags/s/${country}.svg`}
-            alt={`Stream language: ${name}`}
+            alt={tr("stream-language-alt", { name })}
             width={16}
             height={12}
             className="ml-2 inline-block rounded-[2px] align-baseline"
           />
         </TooltipTrigger>
-        <TooltipContent side="top">Stream language · {name}</TooltipContent>
+        <TooltipContent side="top">{tr("stream-language", { name })}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, {count}× megszerezve",
+  "aria-not-earned": "{name}, nincs megszerezve",
+  "no-longer-obtainable": "Már nem szerezhető meg.",
+  "not-earned": "Nincs megszerezve"
+}

@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Slučajno",
+    "battle_royale": "Čelični lovac",
+    "frontline": "Bojišnica",
+    "onslaught": "Navala",
+    "onslaught_night": "{onslaught} Noć",
+    "grand_battle": "Velika bitka",
+    "clan_wars": "Klanske ratove",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arkadna",
+    "story_mode": "Priča",
+    "training": "Obuka"
+  },
+  "player-modes": {
+    "overall": "Slučajne Bitke",
+    "skirmish": "Okršaji",
+    "advances": "Napretci",
+    "grand": "Velike bitke",
+    "ranked": "Rangirane bitke",
+    "cw-x": "Klanski ratovi X",
+    "cw-viii": "Klanski ratovi VIII",
+    "cw-vi": "Klanski ratovi VI",
+    "steel-hunter": "Čelični lovac",
+    "onslaught": "Navala"
+  },
+  "stronghold-tiers": {
+    "advances": "Napretci",
+    "t10": "Okršaj T10",
+    "t8": "Okršaj T8",
+    "t6": "Okršaj T6"
+  },
+  "stronghold-periods": {
+    "24h": "Posljednjih 24 sata",
+    "7d": "Posljednjih 7 dana",
+    "30d": "Posljednjih 30 dana",
+    "overall": "Sveukupno"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Bitke",
+    "winrate": "Postotak pobjeda"
+  },
+  "clan-boards": {
+    "advances": "Napretci",
+    "t10": "Okršaj X",
+    "t8": "Okršaj VIII",
+    "t6": "Okršaj VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Bitka susreta",
+    "assault": "Juriš",
+    "attack-defense": "Napad/Obrana"
+  },
+  "map-camouflage": {
+    "summer": "Ljetna",
+    "winter": "Zimska",
+    "desert": "Pustinjska"
+  },
+  "map-poi": {
+    "1": "Stožer topništva",
+    "2": "Komunikacijski centar",
+    "3": "Promatračnica"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Susretna",
+    "assault2": "Napad/obrana",
+    "comp7": "Navala"
+  },
+  "battle-formats": {
+    "random": "Slučajno",
+    "clan_wars": "Klanske ratove",
+    "advances": "Napretci",
+    "skirmish": "Okršaji",
+    "maneuvers": "Manevri",
+    "onslaught": "Navala",
+    "tournament": "Turnir"
+  },
+  "battle-results": {
+    "victory": "Pobjeda",
+    "defeat": "Poraz",
+    "draw": "Nerješeno"
+  },
+  "spawn-directions": {
+    "north": "Sjever",
+    "south": "Jug",
+    "east": "Istok",
+    "west": "Zapad"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Nadolazeći",
+    "registration_started": "Prijava otvorena",
+    "registration_finished": "Registracija zatvorena",
+    "running": "U tijeku",
+    "finished": "Završava",
+    "complete": "Izvršeno"
+  },
+  "onslaught-tiers": {
+    "legend": "Legenda",
+    "champion": "Prvak",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Teški",
+    "mediumTank": "Srednja",
+    "lightTank": "Lagani",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Juriš",
+    "break": "Probojni",
+    "support": "Potpora",
+    "universal": "Svestrani",
+    "sniper": "Snajperski",
+    "wheeled": "Kotačni"
+  },
+  "mastery-badges": {
+    "class3": "3. razred",
+    "class2": "2. razred",
+    "class1": "1. razred",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Slučajne Bitke",
+    "stronghold": "Utvrda",
+    "skirmish": "Okršaji",
+    "clan-wars": "Klanske ratove"
+  },
+  "features": {
+    "stronghold": "Utvrda",
+    "skirmish": "Okršaji",
+    "marks-of-excellence": "Oznake izvrsnosti",
+    "marks-of-mastery": "Oznake majstorstva",
+    "personal-rating": "Osobni rejting",
+    "world-of-tanks-rating": "World of Tanks rejting",
+    "common-test": "Zajedničko testiranje",
+    "tournaments": "Turniri"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Oznake izvrsnosti"
+  }
+}

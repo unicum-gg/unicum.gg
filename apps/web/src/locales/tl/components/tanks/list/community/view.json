@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Bawat tank ay namarkahan mula isa hanggang lima ng mga taong naglalaro nito. Boto lamang mula sa account na talagang nagdala ng sasakyan sa labanan ang binibilang, kaya naiiba ito sa poll ng sinumang napadaan.",
+  "no-tank-has-been-rated": "Wala pang tank na namarkahan. Makikita ang mga unang boto sa mga pahina ng tank, sa ilalim ng Komunidad.",
+  "think": "palagay",
+  "title": "Ano ang {think} ng mga manlalaro",
+  "votes-across-vehicles": "{totalVotes} mga boto sa lahat ng {ratedTanks} sasakyan."
+}

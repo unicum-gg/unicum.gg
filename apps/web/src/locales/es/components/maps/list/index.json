@@ -1,0 +1,9 @@
+{
+  "all": "Todo",
+  "camouflage-map": "Mapa de {camouflage}",
+  "modes": "{count, plural, one {# modo} other {# modos}}",
+  "no-maps-match-your-filters": "Ningún mapa coincide con tus filtros.",
+  "search": "Buscar entre {count} mapas",
+  "search-label": "Buscar mapas",
+  "special-map": "Mapa especial"
+}

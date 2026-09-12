@@ -1,0 +1,35 @@
+{
+  "heading": "<accent>{mode}</accent> 최고의 플레이어들",
+  "intro": "{mode}은(는) 단계 10에서 진행되는 World of Tanks의 경쟁 7대7 랭크 모드입니다. 게임 자체 순위에서 가져온 {region} 순위표입니다.",
+  "season": {
+    "range": "{start}부터 {end}까지",
+    "final": "최종 순위",
+    "live": "진행 중인 시즌",
+    "updated": "업데이트됨 {when}"
+  },
+  "board": "{mode} 최고의 플레이어 {count}명",
+  "columns": {
+    "player": "플레이어",
+    "rank": "랭크",
+    "battles": "전투",
+    "rating": "레이팅 점수"
+  },
+  "alias": "(닉네임: {nickname})",
+  "ranks": {
+    "title": "랭크",
+    "meaning": "의미",
+    "tier": "단계",
+    "intro": "전투에서 승리하면 {mode}의 순위가 올라갑니다. 플레이 결과에 따라 매번 평점 점수를 획득합니다. {champion}은(는) 점수만으로 도달할 수 있는 가장 높은 순위이며, 도달하면 순위표에 오릅니다. {legend}은(는) 고정된 기준점이 아니라 {champion} 중 평점이 가장 높은 일부이므로, 기준점은 참가자에 따라 달라집니다. 동점이면 플레이한 전투 수로 결정합니다. 정확한 {legend} 및 {champion} 기준점은 현재 시즌에서 가져오며 순위표에 표시됩니다.",
+    "legend-blurb": "평점이 가장 높은 {champion}입니다. 게임은 시즌마다 정해진 순위표 순위에서 인원을 제한하므로, 인원은 시즌과 지역에 따라 달라지며 고정 점수 기준이 아닙니다. 마지막 {legend} 아래로 내려가면 {champion}으로 돌아갑니다.",
+    "champion-blurb": "평점 점수로 올라갈 수 있는 가장 높은 순위이며 순위표 진입 기준입니다. 모든 랭크 플레이어는 최소 {champion}입니다."
+  },
+  "race": {
+    "title-live": "현재 필요한 점수",
+    "title-ended": "시즌 결과",
+    "legend-cutoff": "{legend} 커트라인",
+    "champion-cutoff": "{champion} 커트라인",
+    "ranked-players": "랭크 플레이어들",
+    "rating-points": "레이팅 점수",
+    "rank-cutoffs": "랭크 기준선"
+  }
+}

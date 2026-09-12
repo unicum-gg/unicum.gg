@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Genomsnitt: poäng per strid",
+  "general-parameters": "Allmänna parametrar",
+  "metric-progression": "{metric}-utveckling",
+  "not-enough-history-on-this": "Det finns ännu inte tillräckligt med historik för den här stridsvagnen. Minst två ögonblicksbilder under de senaste 90 dagarna krävs för att rita en linje.",
+  "record-score": "Rekordpoäng",
+  "updated": "Uppdaterad"
+}

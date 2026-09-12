@@ -1,0 +1,16 @@
+{
+  "title": "Sütiket használunk",
+  "description": "Sütiket használunk a böngészési élmény javításához és a webhely forgalmának elemzéséhez.",
+  "functional": {
+    "title": "Funkcionális",
+    "description": "A webhely megfelelő működéséhez szükséges (beállítások, régió kiválasztása)."
+  },
+  "analytics": {
+    "title": "Látogatottság mérése",
+    "description": "A Google Analytics sütiket helyez el, amelyek segítségével megérthetjük, hogyan használják a webhelyet. Az anonim, sütik nélküli analitika (Umami) mindenképpen aktív marad."
+  },
+  "save": "Választásaim mentése",
+  "decline": "Összes elutasítása",
+  "customize": "Testreszabás",
+  "accept": "Összes elfogadása"
+}

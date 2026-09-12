@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Pangkalahatang-ideya",
+    "tanks": "MMga tangke",
+    "sessions": "Mga Sesyon",
+    "achievements": "Mga Nakamit",
+    "tournaments": "Mga torneo",
+    "value": "Halaga"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

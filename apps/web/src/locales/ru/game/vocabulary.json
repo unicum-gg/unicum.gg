@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Случайно",
+    "battle_royale": "Стальной охотник",
+    "frontline": "Линия фронта",
+    "onslaught": "Натиск",
+    "onslaught_night": "{onslaught} Ночь",
+    "grand_battle": "Генеральное сражение",
+    "clan_wars": "Клановые войны",
+    "waffentrager": "Ваффентрагер",
+    "last_stand": "Последний рубеж",
+    "arcade": "Аркада",
+    "story_mode": "Сюжетный режим",
+    "training": "Обучение"
+  },
+  "player-modes": {
+    "overall": "Случайные бои",
+    "skirmish": "Вылазка",
+    "advances": "Наступления",
+    "grand": "Генеральные сражения",
+    "ranked": "Игра в Ладдере",
+    "cw-x": "Клановые войны X",
+    "cw-viii": "Клановые войны VIII",
+    "cw-vi": "Клановые войны VI",
+    "steel-hunter": "Стальной охотник",
+    "onslaught": "Натиск"
+  },
+  "stronghold-tiers": {
+    "advances": "Наступления",
+    "t10": "Вылазки T10",
+    "t8": "Вылазки T8",
+    "t6": "Вылазки T6"
+  },
+  "stronghold-periods": {
+    "24h": "Последние 24 часа",
+    "7d": "Последние 7 дней",
+    "30d": "Последние 30 дней",
+    "overall": "Общее"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Бои",
+    "winrate": "Процент побед"
+  },
+  "clan-boards": {
+    "advances": "Наступления",
+    "t10": "Вылазки X",
+    "t8": "Вылазки VIII",
+    "t6": "Вылазки VI"
+  },
+  "map-modes": {
+    "standard": "Стандарт",
+    "encounter": "Встречный бой",
+    "assault": "Штурм",
+    "attack-defense": "Атака/Оборона"
+  },
+  "map-camouflage": {
+    "summer": "Летний",
+    "winter": "Зимний",
+    "desert": "Пустынный"
+  },
+  "map-poi": {
+    "1": "Артиллерийский штаб",
+    "2": "Узел связи",
+    "3": "Наблюдательный пункт"
+  },
+  "tournament-modes": {
+    "ctf": "Стандарт",
+    "domination": "Встречный бой",
+    "assault2": "Атака/оборона",
+    "comp7": "Натиск"
+  },
+  "battle-formats": {
+    "random": "Случайно",
+    "clan_wars": "Клановые войны",
+    "advances": "Наступления",
+    "skirmish": "Вылазка",
+    "maneuvers": "Манёвры",
+    "onslaught": "Натиск",
+    "tournament": "Турнир"
+  },
+  "battle-results": {
+    "victory": "Победа",
+    "defeat": "Поражение",
+    "draw": "Ничья"
+  },
+  "spawn-directions": {
+    "north": "Север",
+    "south": "Юг",
+    "east": "Восток",
+    "west": "Запад"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Предстоящий",
+    "registration_started": "Регистрация открыта",
+    "registration_finished": "Регистрация закрыта",
+    "running": "В процессе",
+    "finished": "Завершение",
+    "complete": "Выполнено"
+  },
+  "onslaught-tiers": {
+    "legend": "Легенда",
+    "champion": "Чемпион",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Тяжёлый",
+    "mediumTank": "Средний",
+    "lightTank": "Легкий",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Штурм",
+    "break": "Прорыв",
+    "support": "Поддержка",
+    "universal": "Универсальность",
+    "sniper": "Снайперский",
+    "wheeled": "Колёсный"
+  },
+  "mastery-badges": {
+    "class3": "3-й класс",
+    "class2": "2-й класс",
+    "class1": "1-й класс",
+    "ace": "Ас игрока"
+  },
+  "clan-modes": {
+    "random": "Случайные бои",
+    "stronghold": "Укрепрайон",
+    "skirmish": "Вылазка",
+    "clan-wars": "Клановые войны"
+  },
+  "features": {
+    "stronghold": "Укрепрайон",
+    "skirmish": "Вылазка",
+    "marks-of-excellence": "Отличительные отметки",
+    "marks-of-mastery": "Знаки мастерства",
+    "personal-rating": "Личный рейтинг",
+    "world-of-tanks-rating": "Рейтинг World of Tanks",
+    "common-test": "Общий тест",
+    "tournaments": "Турниры"
+  },
+  "marks": {
+    "1": "1 Знак",
+    "2": "2 Знака",
+    "3": "3 Знака",
+    "name": "Отличительные отметки"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Naghihintay ng unang snapshot",
+    "hidden": "Itinago ng Wargaming",
+    "active_24h": "Aktibo < 24 na oras",
+    "active_7d": "Aktibo < 7 mga araw",
+    "recent_30d": "Kamakailan < 30 mga araw",
+    "recent_90d": "Kamakailan < 90 mga araw",
+    "dormant_1y": "Hindi aktibo < 1 taon",
+    "inactive": "Hindi aktibo > 1 taon"
+  },
+  "rating-hype": {
+    "overrated": "Sobra ang pag-pahalaga",
+    "fair": "Tamang pag-pahalaga",
+    "underrated": "Kulang sa pag-pahalaga"
+  },
+  "rating-consensus": {
+    "agreed": "Malawak na kasunduan",
+    "mixed": "Halu-halong opinyon",
+    "divisive": "Nahahatid"
+  },
+  "rating-axes": {
+    "overall": "Pangkalahatan",
+    "fun": "Kasiyahan",
+    "firepower": "Lakas ng apoy",
+    "armour": "Armour",
+    "mobility": "Kalikasan",
+    "gunHandling": "Pamamahala ng baril",
+    "concealment": "Pagkakatago",
+    "beginnerFriendliness": "Mabuti para sa mga nagsisimula",
+    "versatility": "Kakayahang umangkop"
+  },
+  "rating-axis-hints": {
+    "overall": "Gaano kaganda ang tank na ito sa kabuuan?",
+    "fun": "Gaano mo kasayang laruin ito?",
+    "firepower": "Alpha, pinsala kada minuto at penetration.",
+    "armour": "Gaano ito kadalas mag-bounce, kapag hull down at nasa bukas.",
+    "mobility": "Bilis, acceleration at kung paano ito lumiko.",
+    "gunHandling": "Oras ng pag-aim, dispersion at accuracy habang gumagalaw.",
+    "concealment": "Kamalayan at layo ng pagtingin.",
+    "beginnerFriendliness": "Gaano ito kapagpatawad kung nag-aaral ka pa.",
+    "versatility": "Gumagana ba ito sa anumang mapa at sa anumang koponan?"
+  },
+  "voter-brackets": {
+    "unknown": "Walang rating",
+    "learning": "Natututo",
+    "average": "Pangkaraniwan",
+    "strong": "Malakas",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Mga sasakyan",
+    "gunnery": "Pagsasanay sa baril",
+    "armor": "Armour",
+    "mobility": "Kalikasan",
+    "vision": "Bisyon",
+    "crew": "Crew",
+    "progression": "Pag-unlad",
+    "economy": "Ekonomiya",
+    "ratings": "Mga rating",
+    "statistics": "Estadistika",
+    "modes": "Mga paraan ng labanan",
+    "tactics": "Taktika",
+    "slang": "Salitang balbal"
+  }
+}

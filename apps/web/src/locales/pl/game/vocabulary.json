@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Losowa",
+    "battle_royale": "Stalowy łowca",
+    "frontline": "Linia frontu",
+    "onslaught": "Natarcie",
+    "onslaught_night": "{onslaught} Noc",
+    "grand_battle": "Wielka bitwa",
+    "clan_wars": "Wojny klanowe",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Ostatni bastion",
+    "arcade": "Salon gier",
+    "story_mode": "Tryb fabularny",
+    "training": "Szkolenie"
+  },
+  "player-modes": {
+    "overall": "Bitwy losowe",
+    "skirmish": "Potyczka",
+    "advances": "Natarcia",
+    "grand": "Wielkie bitwy",
+    "ranked": "Bitwy rankingowe",
+    "cw-x": "Wojny klanów X",
+    "cw-viii": "Wojny klanów VIII",
+    "cw-vi": "Wojny klanów VI",
+    "steel-hunter": "Stalowy łowca",
+    "onslaught": "Natarcie"
+  },
+  "stronghold-tiers": {
+    "advances": "Natarcia",
+    "t10": "Potyczki T10",
+    "t8": "Potyczki T8",
+    "t6": "Potyczki T6"
+  },
+  "stronghold-periods": {
+    "24h": "Ostatnie 24 godziny",
+    "7d": "Ostatnie 7 dni",
+    "30d": "Ostatnie 30 dni",
+    "overall": "Ogółem"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Bitwy",
+    "winrate": "Wskaźnik zwycięstw"
+  },
+  "clan-boards": {
+    "advances": "Natarcia",
+    "t10": "Potyczki X",
+    "t8": "Potyczki VIII",
+    "t6": "Potyczki VI"
+  },
+  "map-modes": {
+    "standard": "Standardowy",
+    "encounter": "Bitwa spotkaniowa",
+    "assault": "Szturmowiec",
+    "attack-defense": "Atak/Obrona"
+  },
+  "map-camouflage": {
+    "summer": "Letni",
+    "winter": "Zimowy",
+    "desert": "Pustynny"
+  },
+  "map-poi": {
+    "1": "Kwatera artylerii",
+    "2": "Centrum łączności",
+    "3": "Punkt obserwacyjny"
+  },
+  "tournament-modes": {
+    "ctf": "Standardowy",
+    "domination": "Spotkaniowa",
+    "assault2": "Atak/Obrona",
+    "comp7": "Natarcie"
+  },
+  "battle-formats": {
+    "random": "Losowa",
+    "clan_wars": "Wojny klanowe",
+    "advances": "Natarcia",
+    "skirmish": "Potyczka",
+    "maneuvers": "Manewry",
+    "onslaught": "Natarcie",
+    "tournament": "Turniej"
+  },
+  "battle-results": {
+    "victory": "Wygrana",
+    "defeat": "Porażka",
+    "draw": "Remis"
+  },
+  "spawn-directions": {
+    "north": "Północ",
+    "south": "Południe",
+    "east": "Wschód",
+    "west": "Zachód"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Nadchodzący",
+    "registration_started": "Rejestracja otwarta",
+    "registration_finished": "Rejestracja zamknięta",
+    "running": "W toku",
+    "finished": "Kończący się",
+    "complete": "Ukończona"
+  },
+  "onslaught-tiers": {
+    "legend": "Legenda",
+    "champion": "Mistrz",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Ciężki",
+    "mediumTank": "Seniorska",
+    "lightTank": "Lekki",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Szturmowiec",
+    "break": "Przełamanie",
+    "support": "Wsparcie",
+    "universal": "Uniwersalny",
+    "sniper": "Snajper",
+    "wheeled": "Kołowy"
+  },
+  "mastery-badges": {
+    "class3": "3. klasa",
+    "class2": "2. klasa",
+    "class1": "1. klasa",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Bitwy losowe",
+    "stronghold": "Twierdza",
+    "skirmish": "Potyczka",
+    "clan-wars": "Wojny klanowe"
+  },
+  "features": {
+    "stronghold": "Twierdza",
+    "skirmish": "Potyczka",
+    "marks-of-excellence": "Odznaki biegłości",
+    "marks-of-mastery": "Marki Mistrzostwa",
+    "personal-rating": "Klasyfikacja osobista",
+    "world-of-tanks-rating": "Ranking World of Tanks",
+    "common-test": "Test ogólny",
+    "tournaments": "Turnieje"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marki",
+    "3": "3 Marki",
+    "name": "Odznaki biegłości"
+  }
+}

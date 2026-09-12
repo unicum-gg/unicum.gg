@@ -1,0 +1,18 @@
+{
+  "caught-up": "पूरी तरह बराबरी हो गई, धन्यवाद। अतिरिक्त राशि अधिक क्षमता और नई सुविधाओं में लगती है।",
+  "covered-label": "कवर किया हुआ",
+  "covered-sentence": "समर्थक अब तक खर्च की गई {spent} राशि में से {received} राशि जुटा चुके हैं।",
+  "days-out-of-pocket": "{days} दिन अपनी जेब से",
+  "from-supporter-one": "{count} समर्थक से",
+  "from-supporters": "{count} समर्थकों से",
+  "gap-growing": "अंतर को बढ़ने से रोकने के लिए प्रति माह {amount} अधिक चाहिए।",
+  "goal": "लक्ष्य {amount}",
+  "of-that-total": "उस कुल का",
+  "pledges-cover": "प्रतिज्ञाएँ अब मासिक बिल को कवर करती हैं।",
+  "raised-amount": "{amount} जुटाए गए",
+  "raised-label": "जुटाए गए",
+  "run-at-a-loss": "{name} {since} से घाटे में चल रहा है।",
+  "run-rate": "मासिक दर: {pledged}/माह प्रतिज्ञा बनाम संचालन के लिए {cost}/माह।",
+  "spent-since-launch": "लॉन्च के बाद से खर्च",
+  "to-catch-up": "पूरी तरह बराबरी करने के लिए {amount}।"
+}

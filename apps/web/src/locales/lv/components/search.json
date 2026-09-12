@@ -1,0 +1,27 @@
+{
+  "placeholder": "Meklēt spēlētājus, klanus, tankus, kartes vai terminus",
+  "type": "Meklēt tips",
+  "types": {
+    "all": "Visus",
+    "players": "Spēlētāji",
+    "clans": "Klani",
+    "tanks": "Tvertne",
+    "maps": "Kartes",
+    "glossary": "Vārdu krājums"
+  },
+  "sections": {
+    "players": "Spēlētāji",
+    "clans": "Klani",
+    "tanks": "Tvertne",
+    "maps": "Kartes",
+    "glossary": "Vārdu krājums",
+    "recent": "Nesenie",
+    "favorites": "Izlase"
+  },
+  "searching": "Meklē…",
+  "errored": "Kaut kas nogāja greizi. Mēģiniet vēlreiz.",
+  "empty": "Nav atrasti rezultāti",
+  "remove-recent": "Noņemt no nesenajiem",
+  "add-favorite": "Pievienot izlasei",
+  "remove-favorite": "Noņemt no izlases"
+}

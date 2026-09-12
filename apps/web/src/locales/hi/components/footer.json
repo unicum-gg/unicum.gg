@@ -1,0 +1,25 @@
+{
+  "tagline": "World of Tanks समुदाय के लिए बनाया गया। EU, NA और Asia में हर खिलाड़ी, क्लान, टैंक और मैप के लिए निःशुल्क आँकड़े।",
+  "columns": {
+    "leaderboards": "लीडरबोर्ड्स",
+    "tanks": "टैंक",
+    "maps": "मैप्स",
+    "integrations": "इंटीग्रेशन",
+    "project": "प्रोजेक्ट"
+  },
+  "links": {
+    "top-tanks": "शीर्ष टैंक",
+    "bot": "Discord बॉट",
+    "mcp": "MCP सर्वर",
+    "docs": "API दस्तावेज़",
+    "badges": "बैजेस",
+    "glossary": "ग्लॉसरी",
+    "coverage": "कवरेज",
+    "support": "हमें समर्थन करें",
+    "source": "सोर्स कोड",
+    "status": "स्थिति",
+    "discord": "Discord"
+  },
+  "disclaimer": "Wargaming से संबद्ध नहीं",
+  "cookies": "कुकीज़ प्रबंधित करें"
+}

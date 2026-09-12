@@ -1,0 +1,35 @@
+{
+  "heading": "<accent>{mode}</accent>のトッププレイヤー",
+  "intro": "{mode}はTier XのWorld of Tanks公式競技7対7ランク戦モードです。ゲーム内ランキングをもとにした{region}ランキングです。",
+  "season": {
+    "range": "{start}から{end}まで",
+    "final": "最終順位",
+    "live": "開催中のシーズン",
+    "updated": "更新日期 {when}"
+  },
+  "board": "{mode}のトップ{count}プレイヤー",
+  "columns": {
+    "player": "プレイヤー",
+    "rank": "ランク",
+    "battles": "戦闘数",
+    "rating": "レーティング・ポイント"
+  },
+  "alias": "（{nickname}名義）",
+  "ranks": {
+    "title": "ランク",
+    "meaning": "概要",
+    "tier": "Tier",
+    "intro": "戦闘に勝利して{mode}のランクを上げます。勝利するたび、プレイ内容に応じたレーティングポイントを獲得します。{champion}はポイントだけで到達できる最高ランクで、到達するとランキングに載ります。{legend}に固定の基準値はありません。{champion}の中でレーティング上位の層であり、参加者によってその境界が変わります（同点の場合はプレイ済み戦闘数で決着）。現在のシーズンにおける{legend}と{champion}の正確な境界は、ランキング上に表示されます。",
+    "legend-blurb": "レーティングが最も高い{champion}です。ゲームによってシーズンごとのランキング順位が上限として設定されるため、人数はシーズンと地域によって変わり、ポイントの固定目標ではありません。最後の{legend}を下回ると{champion}に戻ります。",
+    "champion-blurb": "レーティングポイントで到達できる最高ランクで、ランキングへの入口です。ランク戦プレイヤーは全員、少なくとも{champion}です。"
+  },
+  "race": {
+    "title-live": "現在必要なもの",
+    "title-ended": "シーズンの結果",
+    "legend-cutoff": "{legend}のボーダー",
+    "champion-cutoff": "{champion}のボーダー",
+    "ranked-players": "ランク付きプレイヤー",
+    "rating-points": "レーティング・ポイント",
+    "rank-cutoffs": "ランクの基準値"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "boosts": "Mejoras {name}",
+  "directives": "Directivas",
+  "directive-name": "Directiva {name}",
+  "grants-and-boosts": "Otorga y potencia la habilidad de la tripulación, incluso si no está entrenada.",
+  "grants-only": "Otorga la habilidad de la tripulación durante la batalla (sin característica indicada).",
+  "enhances-mounted": "Mejora el {name} montado.",
+  "mount-to-use": "Monta {name} para usar esta directiva."
+}

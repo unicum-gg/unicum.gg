@@ -1,0 +1,5 @@
+{
+  "battles": "{count} 전투",
+  "chart-label": "{granularity}당 플레이한 전투 수, {metric}으로 색상 표시",
+  "no-battles": "전투 없음"
+}

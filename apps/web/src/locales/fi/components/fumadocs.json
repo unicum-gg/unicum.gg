@@ -1,0 +1,18 @@
+{
+  "search": "Etsi",
+  "search-open": "Avaa Etsi",
+  "search-close": "Sulje Etsi",
+  "search-empty": "Ei tuloksia löytynyt",
+  "theme-toggle": "Vaihda teema",
+  "theme-light": "Kevyt",
+  "theme-dark": "Tumma",
+  "theme-system": "Järjestelmä",
+  "toc": "Tällä sivulla",
+  "toc-empty": "Ei alaotsikoita",
+  "sidebar-open": "Avaa sivupalkki",
+  "sidebar-close": "Sulje sivupalkki",
+  "sidebar-collapse": "Pienennä sivupalkkia",
+  "page-previous": "Edellinen sivu",
+  "page-next": "Seuraava sivu",
+  "language": "Valitse kieli"
+}

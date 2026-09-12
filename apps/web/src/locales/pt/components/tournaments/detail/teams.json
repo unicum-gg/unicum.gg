@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Média de {rated} dos {size} jogadores",
+  "average-over-recent": "Média dos {rated} jogadores entre os {size} que jogaram nos últimos 30 dias",
+  "metric-over-last-30-days": "{metric} nos últimos 30 dias",
+  "n-confirmed": "{count} confirmados",
+  "no-team-matches-the-current": "Nenhuma equipa corresponde aos filtros atuais.",
+  "no-teams-recorded-yet-registrations": "Ainda não há equipas registadas. As inscrições aparecem aqui assim que todos os dados deste torneio forem processados, o que acontece poucos minutos após a sua abertura.",
+  "none-played-in-30-days": "Ninguém desta lista jogou nos últimos 30 dias",
+  "players": "Jogadores",
+  "qualified": "Qualificados",
+  "reward": "Recompensa",
+  "team": "Equipa",
+  "teams": "Equipas ({length})",
+  "wr": "WR"
+}

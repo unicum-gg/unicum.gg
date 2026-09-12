@@ -1,0 +1,7 @@
+{
+  "count": "Nombre",
+  "cumulative": "Cumulatif",
+  "daily": "Quotidien",
+  "heading-cumulative": "{title} (cumulatif)",
+  "heading-daily": "Par jour : {title}"
+}

@@ -1,0 +1,9 @@
+{
+  "aria-rank": "{board}에서 랭크 {rank}",
+  "board": {
+    "advances": "원정 요새 평점",
+    "skirmish-t10": "10단계 쟁탈전 평점",
+    "skirmish-t6": "6단계 쟁탈전 평점",
+    "skirmish-t8": "8단계 쟁탈전 평점"
+  }
+}

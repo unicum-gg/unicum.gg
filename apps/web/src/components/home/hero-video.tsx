@@ -1,6 +1,7 @@
 'use client';
 
 import { PauseIcon, PlayIcon, SpinnerIcon } from '@phosphor-icons/react';
+import { useTranslation } from "@/hooks/use-translation";
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { promoVideoAssetUrl } from '@unicum.gg/wargaming';
 import STORAGE from '@/constants/storage';
@@ -9,6 +10,7 @@ import { useVideoControl } from '@/hooks/use-video-control';
 import { cn } from '@/lib/utils';
 
 export function HeroVideo() {
+  const { t } = useTranslation("components/home/hero-video");
   const { region } = useRegion();
   const { videoRef, isPlaying, isLoading, isVideoVisible, toggle } = useVideoControl({
     storageKey: STORAGE.LOCAL_STORAGE.HERO_VIDEO_PLAYING,
@@ -39,7 +41,7 @@ export function HeroVideo() {
           buttonVariants({ size: "icon-xs" }),
           "absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 backdrop-blur-sm border border-white/20 cursor-pointer"
         )}
-        aria-label="Play/Pause video"
+        aria-label={t("toggle")}
       >
         {isLoading ? (
           <SpinnerIcon className="size-4 animate-spin text-white" />

@@ -1,10 +1,11 @@
 "use client";
 
 import { ScalesIcon } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import type { Region } from "@unicum.gg/wargaming";
 import { TankSearchPopover } from "@/components/tanks/tank-search-popover";
 import ROUTES from "@/constants/routes";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   encodeSetups,
   SETUP_PARAM,
@@ -36,6 +37,7 @@ export function CompareWithTank({
   setupToken: string | null;
   triggerClassName?: string;
 }) {
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
   const router = useRouter();
 
   return (
@@ -47,9 +49,9 @@ export function CompareWithTank({
         const setups = encodeSetups([setupToken, null]);
         router.push(setups ? `${href}?${SETUP_PARAM}=${setups}` : href);
       }}
-      triggerAriaLabel="Compare with another tank"
-      tooltip="Compare with another tank"
-      placeholder="Compare with..."
+      triggerAriaLabel={tView("compare-tank")}
+      tooltip={tView("compare-tank")}
+      placeholder={tView("compare-tank-placeholder")}
       triggerClassName={triggerClassName}
       triggerContent={<ScalesIcon className="size-3.5" weight="bold" />}
     />

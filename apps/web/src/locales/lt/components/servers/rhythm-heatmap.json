@@ -1,0 +1,8 @@
+{
+  "busiest": "Aktyviausias {when} ({players})",
+  "not-enough-recorded-yet-to": "Dar neužfiksuota pakankamai duomenų savaitės ritmui parodyti. Jis pildysis, kai atranka apims kiekvieną savaitės valandą.",
+  "not-sampled-yet": "Dar neatrinkta",
+  "players-on-average": "Vidutiniškai {players} žaidėjai",
+  "quietest": ", ramiausias {when} ({players})",
+  "your-local-time": "Jūsų vietos laikas"
+}

@@ -1,0 +1,17 @@
+{
+  "aim-time": "Tempo di mira",
+  "ammo": "Munizioni",
+  "armor": "Corazza",
+  "dispersion": "Dispersione",
+  "fire-chance": "Probabilità di incendio",
+  "gun-arc": "Arco del cannoniere",
+  "hit-points": "Punti colpi",
+  "load-limit": "Limite di carico",
+  "mounted-on": "Installato su: {tanks}",
+  "power": "Potenza",
+  "reload": "Ricarica",
+  "signal-range": "Portata segnale",
+  "tier": "Livello {tier}",
+  "traverse": "Giro",
+  "view-range": "Portata di visione"
+}

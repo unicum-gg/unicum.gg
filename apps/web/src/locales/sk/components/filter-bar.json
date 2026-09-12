@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Hľadať medzi tankami ({count})",
+    "rated-tanks": "Hľadať medzi hodnotenými tankami ({count})",
+    "videos": "Hľadať medzi videami ({count})",
+    "players": "Hľadať medzi hráčmi ({count})",
+    "clans": "Hľadať medzi klanmi ({count})",
+    "tournaments": "Hľadať medzi turnajmi ({count})",
+    "teams": "Hľadať medzi tímami ({count})"
+  },
+  "min": "Min.",
+  "max": "Max.",
+  "none": "Žiadny",
+  "common-test": "Zmenené v Spoločnom teste: nové vozidlá a vozidlá s upraveným vyvážením",
+  "category": {
+    "standard": "Štandard",
+    "premium": "Prémiový",
+    "reward": "Odmena"
+  },
+  "moe": {
+    "0": "Zatiaľ žiadny znak",
+    "1": "1 značka",
+    "2": "2 značky",
+    "3": "3 značky"
+  },
+  "mom": {
+    "0": "Zatiaľ žiadny odznak",
+    "1": "3. trieda",
+    "2": "2. trieda",
+    "3": "1. trieda",
+    "4": "Jazdec elitných tankov"
+  }
+}

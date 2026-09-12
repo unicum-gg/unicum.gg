@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname} nije zauzeo mjesto na ljestvici Navale.",
+  "live-season": "· sezona u tijeku",
+  "loading-s-onslaught-record": "Učitavanje zapisa Navale korisnika {nickname}...",
+  "onslaught": "Navala",
+  "onslaught-record": "Zapis Navale korisnika {nickname}",
+  "see-this-season-s-leaderboard": "Pogledaj ljestvicu ove sezone",
+  "standing-line": "{rating} bodova ocjene · {battles} bitaka",
+  "the-board-only-lists-players": "Ljestvica prikazuje samo igrače koji dosegnu razinu Champion, njih nekoliko tisuća po regiji, pa ovdje završava gotovo svaki profil. Popunjava se sama u sezoni u kojoj je dosegnu.",
+  "updated": "Ažurirano {when}"
+}

@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visual",
+    "collision": "Colisión",
+    "live": "En vivo"
+  },
+  "centre": {
+    "on": "Centrar el vehículo",
+    "off": "Volver a descentrar el vehículo"
+  },
+  "hull-down": {
+    "on": "Cuerpo abajo",
+    "off": "Nivelar el vehículo"
+  },
+  "tracks": {
+    "on": "Poner las orugas en marcha",
+    "off": "Detener las orugas"
+  },
+  "textures": {
+    "on": "Texturas de alta definición",
+    "off": "Texturas estándar"
+  },
+  "reset": "Reiniciar vista",
+  "style": "Elegir un estilo",
+  "style-worn": "Estilo: {name}",
+  "search-styles": "Buscar estilos",
+  "colours": "Significado de los colores",
+  "cinematic": {
+    "off": "Cámara cinemática: desactivada",
+    "auto": "Cámara cinemática: cuando no hay interacción",
+    "on": "Cámara cinemática: siempre"
+  },
+  "open-tank": "Abrir otro tanque",
+  "open-tank-placeholder": "Abrir tanque...",
+  "more-actions": "Más acciones",
+  "marks-meaning": {
+    "0": "Sin Marcas de excelencia",
+    "1": "Una marca: por delante del 65 % de los jugadores con este tanque",
+    "2": "Dos marcas: mejor que el 85 %",
+    "3": "Tres marcas: mejor que el 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Ocupar toda la ventana",
+      "leave": "Volver a la página"
+    },
+    "screen": {
+      "enter": "Ocupar toda la pantalla",
+      "leave": "Salir de pantalla completa"
+    }
+  },
+  "marks-count": {
+    "0": "Sin Marcas de excelencia",
+    "one": "1 marca de excelencia",
+    "other": "{count} marcas de excelencia"
+  },
+  "compare-tank": "Comparar con otro tanque",
+  "compare-tank-placeholder": "Comparar con...",
+  "view-tooltips": {
+    "visual": "El tanque tal como se muestra en el juego",
+    "collision": "El grosor de cada placa",
+    "live": "Qué haría el proyectil seleccionado"
+  },
+  "cinematic-tooltips": {
+    "off": "Cámara cinemática: desactivada, la vista no se mueve",
+    "auto": "Cámara cinemática: se activa tras 30 segundos sin interacción",
+    "on": "Cámara cinematográfica: siempre, desde el momento en que sueltas los controles"
+  }
+}

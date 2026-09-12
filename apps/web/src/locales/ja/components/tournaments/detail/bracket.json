@@ -1,0 +1,7 @@
+{
+  "group": "グループ {order}",
+  "n-teams": "{count}チーム",
+  "pts": "ポイント",
+  "team": "チーム",
+  "top-n-advance": "、上位{count}チームが勝ち上がり"
+}

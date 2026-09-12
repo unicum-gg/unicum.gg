@@ -1,0 +1,21 @@
+{
+  "stat": "Statistik",
+  "periods": {
+    "total": "Totalt",
+    "day": "Senaste 24h",
+    "week": "Senaste 7d",
+    "month": "Senaste 30d"
+  },
+  "sections": {
+    "territory": "Territorium",
+    "t10": "Klass X",
+    "t8": "Klass VIII",
+    "t6": "Klass VI"
+  },
+  "rows": {
+    "provinces": "Provinser",
+    "elo": "ELO",
+    "battles": "Strider",
+    "winrate": "Vinnande hastighet"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Odkaz na sestavu zkopírován",
+  "copy-build-link": "Kopírovat odkaz na sestavu",
+  "could-not-copy-link": "Odkaz se nepodařilo zkopírovat",
+  "include-setup": "Zahrnout nastavení",
+  "share-build": "Sdílet build",
+  "share-tank": "Sdílet tank {tank}",
+  "share-text": "Podívejte se na sestavení tanku {tank} v aplikaci {app}"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Vērtēšanas skala",
+  "description": "Krāsu sliekšņi, kas visā vietnē tiek izmantoti uzvaru attiecībai un navigācijas joslā izvēlētajam vērtējuma rādītājam.",
+  "tier": "Līmenis",
+  "tiers": {
+    "top": "Augstākie",
+    "excellent": "Izcils",
+    "super": "Super",
+    "very-good": "Ļoti labi",
+    "good": "Labi",
+    "average": "Vidējais",
+    "below-avg": "Zem vidējiem",
+    "bad": "Slikts",
+    "very-bad": "Ļoti slikti"
+  },
+  "rating-colors": "Vērtējuma krāsas",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

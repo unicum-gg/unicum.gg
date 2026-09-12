@@ -1,0 +1,14 @@
+{
+  "clan": "Klana",
+  "clear-the-field": "Obriši {label}",
+  "credited-on-the-clan-s": "Naveden je na stranici klana.",
+  "none": "Nema",
+  "optional": "(opcionalno)",
+  "pick-the-vehicle": "Izaberite vozilo",
+  "search-for-a-clan": "Pretraži klan",
+  "search-for-a-vehicle": "Pretraži vozilo",
+  "search-tank": "Pretraži tenk...",
+  "tank": "TenK",
+  "tank-hint-optional": "Taktika pripada svojoj mapi, pa tenk vrijedi navesti samo kada je video i o vozilu.",
+  "tank-hint-required": "Nasumična bitka se pronalazi prema vozilu kojim je odigrana."
+}

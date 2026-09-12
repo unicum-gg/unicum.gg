@@ -1,0 +1,7 @@
+{
+  "back-to": "{seconds}(으)로 돌아가기",
+  "drag-to-the-battle": "전투로 드래그한 다음 {keys}(으)로 조정하세요. 한 번 누를 때마다 1초씩 이동합니다. 선택한 순간에 영상이 일시 정지되며 나머지 정보를 입력하는 동안 그 상태가 유지됩니다.",
+  "moment-the-battle-starts": "전투가 시작되는 순간",
+  "use-the-current-moment": "현재 순간 사용",
+  "video-being-suggested": "제안 중인 영상"
+}

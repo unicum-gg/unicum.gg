@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   RatingMetric,
   RATING_COLOR_CLASS,
@@ -38,7 +39,7 @@ const METRIC_COLOR: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
 };
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /** One live streamer in the rail's table, coloured like the leaderboards. */
 export function StreamRow({
@@ -54,6 +55,7 @@ export function StreamRow({
   active: boolean;
   onSelect: () => void;
 }) {
+  const { num } = useFormat();
   const value = METRIC_VALUE[period][metric](streamer);
   return (
     <TableRow
@@ -77,7 +79,7 @@ export function StreamRow({
         </div>
       </TableCell>
       <TableCell className="text-right tabular-nums text-fd-muted-foreground">
-        {intFmt.format(streamer.viewerCount)}
+        {num(INT_FORMAT).format(streamer.viewerCount)}
       </TableCell>
       <TableCell
         className={cn(
@@ -85,7 +87,7 @@ export function StreamRow({
           value != null && METRIC_COLOR[metric](value),
         )}
       >
-        {value != null ? intFmt.format(value) : "—"}
+        {value != null ? num(INT_FORMAT).format(value) : "—"}
       </TableCell>
     </TableRow>
   );

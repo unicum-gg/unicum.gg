@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Average score per battle",
+  "general-parameters": "General parameters",
+  "metric-progression": "{metric} progression",
+  "not-enough-history-on-this": "Not enough history on this tank yet. It needs at least two snapshots in the last 90 days to draw a line.",
+  "record-score": "Record score",
+  "updated": "Updated"
+}

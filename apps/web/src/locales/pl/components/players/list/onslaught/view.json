@@ -1,0 +1,35 @@
+{
+  "heading": "Najlepsi gracze w trybie <accent>{mode}</accent>",
+  "intro": "{mode} to rankingowy tryb rywalizacji World of Tanks 7 na 7 dla pojazdów X poziomu. Tabela rankingowa regionu {region} pochodzi bezpośrednio z klasyfikacji w grze.",
+  "season": {
+    "range": "Od {start} do {end}",
+    "final": "końcowa klasyfikacja",
+    "live": "trwający sezon",
+    "updated": "zaktualizowane {when}"
+  },
+  "board": "Najlepsi gracze w trybie {mode}: {count}",
+  "columns": {
+    "player": "Gracz",
+    "rank": "Stopień",
+    "battles": "Bitwy",
+    "rating": "Punkty rankingowe"
+  },
+  "alias": "(jako {nickname})",
+  "ranks": {
+    "title": "Rangi",
+    "meaning": "Znaczenie",
+    "tier": "Poziom",
+    "intro": "Kolejne rangi w trybie {mode} zdobywasz, wygrywając bitwy. Każde zwycięstwo zapewnia Punkty rankingowe zależnie od tego, jak dobrze zagrasz. Ranga {champion} jest najwyższą rangą, jaką można osiągnąć wyłącznie za punkty, a jej zdobycie zapewnia miejsce w tabeli rankingowej. Ranga {legend} nie ma stałego progu. Obejmuje część graczy z rangą {champion} o najwyższej klasyfikacji, dlatego jej próg zmienia się zależnie od wyników pozostałych graczy, a remisy rozstrzyga liczba rozegranych bitew. Dokładne progi rang {legend} i {champion} pochodzą z bieżącego sezonu i są zaznaczone w tabeli.",
+    "legend-blurb": "Gracze z rangą {champion} o najwyższej klasyfikacji. W każdym sezonie gra wyznacza limit tej grupy na określonej pozycji w tabeli rankingowej, więc jej wielkość zależy od sezonu i regionu, a nie od stałego progu punktowego. Jeśli spadniesz poniżej ostatniej pozycji należącej do rangi {legend}, wrócisz do rangi {champion}.",
+    "champion-blurb": "Najwyższa ranga, jaką można osiągnąć, zdobywając Punkty rankingowe, oraz przepustka do tabeli rankingowej. Każdy gracz uwzględniony w rankingu ma co najmniej rangę {champion}."
+  },
+  "race": {
+    "title-live": "Czego potrzeba w tej chwili",
+    "title-ended": "Jak przebiegł sezon",
+    "legend-cutoff": "Cięcie {legend}",
+    "champion-cutoff": "Cięcie {champion}",
+    "ranked-players": "Gracze rankowani",
+    "rating-points": "punkty rankingowe",
+    "rank-cutoffs": "Odcięcia stopnia"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Top <accent>clans</accent>",
+    "language": "Top <accent>{language}</accent> clans"
+  },
+  "intro": {
+    "all": "{region} leaderboard, ranked by {metric} averaged across the tracked members of each clan (minimum 50 members with battles).",
+    "language": "{region} clans that declared {language} as one of their languages, ranked by {metric} averaged across their tracked members (minimum 25 members with battles).",
+    "strict": "{region} clans that declared {language} as their only language, ranked by {metric} averaged across their tracked members (minimum 25 members with battles)."
+  },
+  "board": {
+    "all": "Top {count} clans by {metric}",
+    "language": "Top {count} {language} clans by {metric}",
+    "strict": "Top {count} strictly {language} clans by {metric}"
+  },
+  "members": "Members",
+  "strict-toggle": "Strict",
+  "any-toggle": "Any",
+  "all-languages": "All languages",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

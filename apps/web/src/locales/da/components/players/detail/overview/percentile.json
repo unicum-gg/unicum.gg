@@ -1,0 +1,7 @@
+{
+  "win-rate": "Vindrate",
+  "versus": "{metric} mod {region}",
+  "top": "Top {percent}%",
+  "ahead-of": "Foran {percent} %",
+  "against": "Mod {players} fulgte {region}-konti med mindst {battles} kampe."
+}

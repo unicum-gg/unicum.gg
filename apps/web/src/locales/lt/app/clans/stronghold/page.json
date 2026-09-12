@@ -1,0 +1,4 @@
+{
+  "title": "Geriausi {tier} klanai ({region})",
+  "description": "{region} {tier} klanų lyderių lentelė. Reitinguojama pagal SR (susirėmimų reitingą), ELO, mūšius ir pergalių procentą. Mažiausiai {battles} mūšių."
+}

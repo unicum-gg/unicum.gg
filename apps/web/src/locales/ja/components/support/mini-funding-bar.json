@@ -1,0 +1,6 @@
+{
+  "label": "コミュニティ支援で運営",
+  "funded": "{pct}% 達成",
+  "tooltip": "開始以来、支援者が{goal}のうち{received}をカバー",
+  "tooltip-loading": "コミュニティ支援で運営、広告なし"
+}

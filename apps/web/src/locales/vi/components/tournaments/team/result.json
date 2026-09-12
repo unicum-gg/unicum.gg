@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Trung bình trên {rated} trong số {size} người chơi",
+  "average-over-recent": "Trung bình trên {rated} trong số {size} người chơi đã chơi trong 30 ngày gần nhất",
+  "avg-winrate": "Trung bình tỷ lệ thắng",
+  "finished": "Đã kết thúc",
+  "record": "Kỷ lục",
+  "won": "Chiến thắng"
+}

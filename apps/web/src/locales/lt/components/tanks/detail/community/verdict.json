@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Kiekvienas balsas gautas iš paskyros, kuri žaidė su šiuo tanku.",
+  "every-vote-played-average": "Kiekvienas balsas gautas iš paskyros, kuri žaidė su šiuo tanku, vidutiniškai {battles} mūšių.",
+  "fun": "Pramoga",
+  "how-good-the-tank-is": "Koks geras yra tankas",
+  "how-much-people-enjoy-it": "Kiek žmonėms patinka juo žaisti",
+  "if-you-have-played-it": "Jei žaidėte su juo, esate būtent tas žmogus, kurio laukia šis puslapis.",
+  "nobody-has-rated-this-tank": "Šio tanko dar niekas neįvertino.",
+  "overall": "Bendrai",
+  "votes": "{count} balsai",
+  "votes-one": "{count} balsas"
+}

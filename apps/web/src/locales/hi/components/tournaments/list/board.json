@@ -1,0 +1,14 @@
+{
+  "date": "तारीख",
+  "featured-tournament": "विशेषित टूर्नामेंट",
+  "format": "स्वरूप",
+  "mode": "मोड",
+  "no-tournament-matches-the-current": "वर्तमान फ़िल्टर से कोई टूर्नामेंट मेल नहीं खाता।",
+  "nothing-here-right-now-wargaming": "अभी यहाँ कुछ नहीं है। Wargaming हर दिन नए टूर्नामेंट खोलता है, इसलिए यह अपने आप फिर भर जाएगा।",
+  "prize": "इनाम",
+  "region-tournaments": "{region} टूर्नामेंट ({count})",
+  "status": "स्थिति",
+  "teams": "टीमों",
+  "tier": "स्तर",
+  "tournament": "टूर्नामेंट"
+}

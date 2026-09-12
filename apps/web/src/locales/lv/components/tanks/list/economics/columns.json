@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Izmaksas (kredīti)",
+      "tip": "Iegādes cena kredītos (tehnoloģiju koka tanki)"
+    },
+    "buyGold": {
+      "label": "Izmaksas (zelts)",
+      "tip": "Iegādes cena zeltā (premium tanki)"
+    },
+    "researchXp": {
+      "label": "Pētniecības XP",
+      "tip": "XP atbloķēšanai (lētākais ceļš)"
+    },
+    "totalFreeXp": {
+      "label": "Brīvs XP (T{tier})",
+      "tip": "Kopējais XP izpētei no līmeņa {tier}, iekļauts arī priekšnosacījumu moduļu izpētei"
+    },
+    "shellCost": {
+      "label": "Šāviņu izmaksas",
+      "tip": "Noklusējuma lādiņa cena (kredīti)"
+    },
+    "ammoCost": {
+      "label": "Pilna munīcijas izmaksas",
+      "tip": "Noklusējuma lādiņa cena × munīcijas ietilpība"
+    },
+    "acquireMoney": {
+      "label": "Iegādes izmaksas ({currency})",
+      "tip": "Aprēķinātā reālās naudas summa, lai iegūtu tanku (izpēte + iegāde), {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Brīvs XP ({currency})",
+      "tip": "Aprēķinātā reālās naudas summa, lai ar Brīvs XP atbloķētu tanku no {tier} līmeņa, {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Izmaksas (kredīti)",
+    "buyGold": "Izmaksas (zelts)",
+    "researchXp": "Pētniecības XP",
+    "totalFreeXp": "Brīvs XP",
+    "shellCost": "Šāviņu izmaksas",
+    "ammoCost": "Pilna munīcijas izmaksas",
+    "acquireMoney": "Iegādes izmaksas (nauda)",
+    "freeXpMoney": "Brīvs XP (nauda)"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "what-players-think": "ผู้เล่นคิดอย่างไรกับรถถังคันนี้",
+  "not-rated": "ยังไม่มีการประเมิน มาเป็นคนแรก",
+  "votes": "{count} โหวต",
+  "votes-one": "{count} ลงคะแนน",
+  "stars": "{value} จาก {max}",
+  "not-rated-short": "ยังไม่ได้ให้คะแนน"
+}

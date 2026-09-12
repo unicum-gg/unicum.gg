@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Hæver vurderingen",
+    "blurb": "Kampvogne, der hæver den samlede vurdering: Hvis de fjernes, falder vurderingen.",
+    "empty": "Ingen kampvogn hæver den samlede vurdering."
+  },
+  "drag": {
+    "heading": "Trækker vurderingen ned",
+    "blurb": "Kampvogne, der trækker den samlede vurdering ned: Hvis de fjernes, stiger vurderingen.",
+    "empty": "Ingen kampvogn trækker den samlede vurdering ned."
+  },
+  "if-removed": "{delta} hvis fjernet"
+}

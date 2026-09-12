@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "محورًا تلو الآخر",
+  "by-server": "حسب الخادم",
+  "community-verdict": "حكم المجتمع",
+  "every-server-one-average": "كل خادم، متوسط واحد",
+  "n-shown": "، مع عرض {count}",
+  "opinion": "{count, plural, zero {# رأي} one {# رأي} two {# رأيان} few {# آراء} many {# رأيًا} other {# رأي}}",
+  "opinion-next-to-win-rate": "الرأي بجانب معدل الفوز، ضمن المستوى {tier}",
+  "rate-the": "قيّم {tankName}",
+  "reputation-against-results": "السمعة ضد النتائج",
+  "same-tank-different-metas": "الدبابة نفسها، أنماط لعب مختلفة",
+  "the-same-tank-by-how": "الدبابة نفسها، حسب مدى جودة لعب المُصوّت",
+  "what-players-wrote": "ما كتبه اللاعبون",
+  "who-is-saying-it": "من يقول ذلك"
+}

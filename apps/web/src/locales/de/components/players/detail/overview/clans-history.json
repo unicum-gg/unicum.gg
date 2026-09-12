@@ -1,0 +1,12 @@
+{
+  "clans-history": "Clanverlauf von {nickname}",
+  "clans-in-clans": "{totalClans} Clans · {timeInClansSeconds} in Clans",
+  "current": "aktuell",
+  "duration": "Dauer",
+  "from": "Von",
+  "name": "Name",
+  "no-clan-history": "Kein Clanverlauf.",
+  "role": "Rolle",
+  "tag": "Tag",
+  "to": "Zu"
+}

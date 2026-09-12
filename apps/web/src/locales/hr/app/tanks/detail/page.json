@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Statistika tenka {tank} igre World of Tanks ({region}), razina {tier}, {nation}",
+    "description": "Specifikacije tenka {tank} ({region}) igre World of Tanks: oklop, vatrena moć, pokretljivost, moduli, posada i terenske izmjene za ovaj tenk razine {tier}, nacije {nation}."
+  },
+  "performances": {
+    "title": "Izvedba tenka {tank} ({region}), statistika poslužitelja i najbolji igrači",
+    "description": "Izvedba tenka {tank} ({region}) u igri World of Tanks: prosječni postotak pobjeda, šteta i pomoć na poslužitelju, najbolji igrači ovog tenka razine {tier}, nacije {nation}, uz očekivane vrijednosti WN8 i WNX."
+  },
+  "marks": {
+    "title": "Oznake izvrsnosti i majstorstva tenka {tank} ({region})",
+    "description": "Zahtjevi za Oznake izvrsnosti i Oznake majstorstva tenka {tank} ({region}) u igri World of Tanks, uz njihovu povijest za ovaj tenk razine {tier}, nacije {nation}."
+  },
+  "history": {
+    "title": "Povijest promjena tenka {tank} ({region}), poboljšanja i oslabljivanja",
+    "description": "Svaka promjena karakteristika tenka {tank} kroz ažuriranja igre World of Tanks: poboljšanja i oslabljivanja vatrene moći, pokretljivosti, preživljavanja i prikrivenosti koja je Wargaming isporučio za ovaj tenk razine {tier}, nacije {nation}, verziju po verziju."
+  },
+  "videos": {
+    "title": "Videozapisi igranja tenka {tank} ({region})",
+    "description": "Pogledajte tenk {tank} na djelu: bitke koje je predložila zajednica za ovaj tenk razine {tier}, nacije {nation}, pri čemu se svaka otvara u trenutku igranja, uz kartu i rezultat na kojima se dogodila."
+  },
+  "community": {
+    "title": "Recenzije igrača i ocjena zajednice za tenk {tank} ({region})",
+    "description": "Što igrači misle o tenku {tank}: ocjena zajednice od jedan do pet, podijeljena prema tome koliko dobro glasači igraju, uspoređena sa stvarnom izvedbom ovog tenka razine {tier}, nacije {nation}, uz pisane recenzije računa koji imaju bitke u njemu."
+  }
+}

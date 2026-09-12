@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Wala pang datos ng tank para sa clan na ito.",
+  "no-tanks-match-these-filters": "Walang mga tangke ang tumutugma sa mga filter na ito.",
+  "nation": "Bansa",
+  "type": "Uri",
+  "tier": "Antas",
+  "name": "Pangalan",
+  "members": "Mga miyembro",
+  "battles": "Mga labanan",
+  "avg-damage": "Avg na pinsala",
+  "avg-xp": "Karaniwang XP",
+  "wr": "WR"
+}

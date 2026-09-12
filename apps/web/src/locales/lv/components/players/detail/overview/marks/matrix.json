@@ -1,0 +1,7 @@
+{
+  "loading": "{count} {tier}. līmeņa transportlīdzekļi, ielādē to nosaukumus…",
+  "loading-one": "{count} {tier}. līmeņa transportlīdzeklis, ielādē tā nosaukumu…",
+  "and-more": "un vēl {count}",
+  "hint": "Klikšķināt, lai tos atvērtu Tvertņu cilnē",
+  "tier": "Līmenis"
+}

@@ -1,0 +1,10 @@
+{
+  "after": "Jälkeen:",
+  "after-the-event": "Tapahtuman jälkeen",
+  "base": "Tukikohta",
+  "control-point": "Valtauspiste",
+  "danger-zone": "Vaaravyöhyke:",
+  "grid": "Ruudukko",
+  "random-events": "Satunnaiset tapahtumat",
+  "team": "Joukkue {n}"
+}

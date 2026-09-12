@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   CaretDownIcon,
   CaretUpDownIcon,
@@ -48,15 +49,18 @@ import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
   ONSLAUGHT_TIER_COLOR,
-  ONSLAUGHT_TIER_LABEL,
   onslaughtRankIcon,
   onslaughtTier,
   OnslaughtTier,
   RATING_COLOR_CLASS,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { FilterSubject } from "@/components/filter-subject";
+import { useTranslation } from "@/hooks/use-translation";
+import { BattleType } from "@unicum.gg/shared";
+import { battleTypeName } from "@/components/game-name";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 const INITIAL_PAGE_SIZE = 100;
 
@@ -98,14 +102,18 @@ function SortHead({
         )
       }
       className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+        "inline-flex cursor-pointer items-center gap-1.5 max-w-full min-w-0 font-medium select-none hover:text-foreground",
         active ? "text-foreground" : "",
       )}
     >
-      {children}
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
       <Icon
         weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
       />
     </button>
   );
@@ -160,6 +168,11 @@ export function OnslaughtBoard({
   seasons: OnslaughtSeasonRef[];
   currentSeasonId: string | null;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/list/onslaught/view");
+  const { t: tOwn } = useTranslation("components/players/list/onslaught/board");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const mode = battleTypeName(BattleType.Onslaught, tGame);
   // Filter over the fully-loaded standings: search matches the current AND
   // recorded nickname/clan (findable by who they are now or the name they held
   // when ranked), plus a min/max range on Battles or Rating Points.
@@ -174,10 +187,10 @@ export function OnslaughtBoard({
   );
   const rangeCols = useMemo<RangeColumn<OnslaughtRow>[]>(
     () => [
-      { key: "rating", label: "Rating Points", value: (r) => r.rating },
-      { key: "battles", label: "Battles", value: (r) => r.battles },
+      { key: "rating", label: t("columns.rating"), value: (r) => r.rating },
+      { key: "battles", label: t("columns.battles"), value: (r) => r.battles },
     ],
-    [],
+    [t],
   );
   const { filtered, filters } = useLeaderboardFilter(results, {
     searchFields,
@@ -270,24 +283,24 @@ export function OnslaughtBoard({
 
   const rankChips = (
     <ChipRow className="h-7">
-      {TIERS.map((t) => (
+      {TIERS.map((rank) => (
         <Chip
-          key={t}
-          active={tierSel.has(t)}
-          onClick={() => toggleTier(t)}
+          key={rank}
+          active={tierSel.has(rank)}
+          onClick={() => toggleTier(rank)}
           className="flex h-full items-center py-0"
         >
           <span className="inline-flex items-center gap-1.5">
             <Image
-              src={onslaughtRankIcon(t, seasonOrdinal, assetsRef)}
+              src={onslaughtRankIcon(rank, seasonOrdinal, assetsRef)}
               alt=""
               width={16}
               height={16}
               className="h-4 w-4"
             />
-            {ONSLAUGHT_TIER_LABEL[t]}
+            {tGame(`onslaught-tiers.${rank}`)}
             <span className="text-fd-muted-foreground/70 tabular-nums">
-              ({intFmt.format(tierCounts[t])})
+              ({num(INT_FORMAT).format(tierCounts[rank])})
             </span>
           </span>
         </Chip>
@@ -298,7 +311,9 @@ export function OnslaughtBoard({
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-        <PanelTitle>Top {results.length} Onslaught players</PanelTitle>
+        <PanelTitle>
+          {t("board", { count: results.length, mode })}
+        </PanelTitle>
         <OnslaughtSeasonSelect
           seasons={seasons}
           current={currentSeasonId}
@@ -310,19 +325,17 @@ export function OnslaughtBoard({
           <div className="border-b border-fd-border px-4 py-2.5">
             <LeaderboardFilterBar
               filters={filters}
-              searchNoun="players"
+              searchNoun={FilterSubject.Players}
               extra={rankChips}
             />
           </div>
         )}
         {results.length === 0 ? (
           <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-            No Onslaught standings yet.
-          </div>
+            {tOwn("no-onslaught-standings-yet")}</div>
         ) : processed.length === 0 ? (
           <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-            No player matches the current filters.
-          </div>
+            {tOwn("no-player-matches-the-current")}</div>
         ) : (
           <Table
             className={cn(
@@ -335,11 +348,11 @@ export function OnslaughtBoard({
             <TableHeader>
               <TableRow>
                 <TableHead className="w-16 text-center!">#</TableHead>
-                <TableHead>Player</TableHead>
+                <TableHead>{t("columns.player")}</TableHead>
                 <TableHead className="hidden w-28 text-right! sm:table-cell">
                   {/* The mode's own ladder, not a leaderboard position: the
                       row's number is in the first column. */}
-                  <GlossaryLabel label="Onslaught">Rank</GlossaryLabel>
+                  <GlossaryLabel label={tOwn("onslaught")}>{t("columns.rank")}</GlossaryLabel>
                 </TableHead>
                 <SortHead
                   col="battles"
@@ -347,7 +360,7 @@ export function OnslaughtBoard({
                   setSort={setSort}
                   className="w-24"
                 >
-                  Battles
+                  {t("columns.battles")}
                 </SortHead>
                 <SortHead
                   col="rating"
@@ -355,7 +368,7 @@ export function OnslaughtBoard({
                   setSort={setSort}
                   className="w-32"
                 >
-                  Rating Points
+                  {t("columns.rating")}
                 </SortHead>
               </TableRow>
             </TableHeader>
@@ -390,8 +403,11 @@ export function OnslaughtBoard({
                         {r.recordedNickname !== r.nickname ||
                         r.recordedClanTag !== r.clan_tag ? (
                           <span className="shrink-0 text-xs text-muted-foreground">
-                            (as {r.recordedNickname}
-                            {r.recordedClanTag ? ` [${r.recordedClanTag}]` : ""})
+                            {t("alias", {
+                              nickname: r.recordedClanTag
+                                ? `${r.recordedNickname} [${r.recordedClanTag}]`
+                                : r.recordedNickname,
+                            })}
                           </span>
                         ) : null}
                       </div>
@@ -412,7 +428,7 @@ export function OnslaughtBoard({
                               colorClass,
                             )}
                           >
-                            {ONSLAUGHT_TIER_LABEL[tier]}
+                            {tGame(`onslaught-tiers.${tier}`)}
                           </span>
                         </span>
                       ) : (
@@ -420,7 +436,7 @@ export function OnslaughtBoard({
                       )}
                     </TableCell>
                     <TableCell className="text-right text-muted-foreground tabular-nums">
-                      {intFmt.format(r.battles)}
+                      {num(INT_FORMAT).format(r.battles)}
                     </TableCell>
                     <TableCell
                       className={cn(
@@ -428,7 +444,7 @@ export function OnslaughtBoard({
                         colorClass,
                       )}
                     >
-                      {intFmt.format(r.rating)}
+                      {num(INT_FORMAT).format(r.rating)}
                     </TableCell>
                   </TableRow>
                 );

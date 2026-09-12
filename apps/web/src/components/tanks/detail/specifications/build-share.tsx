@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import {
   CheckIcon,
@@ -32,6 +33,8 @@ export function BuildShare({
   /** The current setup token (from `encodeSetup`); the affordance appends it. */
   setupToken: string;
 }) {
+  const { t: tCopy } = useTranslation("components/tanks/detail/specifications/build-share");
+  const { t } = useTranslation("components/tanks/detail/specifications/build-share");
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -43,10 +46,10 @@ export function BuildShare({
     try {
       await navigator.clipboard.writeText(buildUrl);
       setCopied(true);
-      toast.success("Build link copied");
+      toast.success(t("build-link-copied"));
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      toast.error("Could not copy link");
+      toast.error(t("could-not-copy-link"));
     }
   }
 
@@ -59,12 +62,11 @@ export function BuildShare({
           className="inline-flex cursor-pointer items-center gap-1.5 rounded-md bg-brand px-2.5 py-1 text-xs font-medium text-white transition-colors hover:bg-brand/90"
         >
           <ShareNetworkIcon className="size-3.5" weight="bold" />
-          Share build
-        </button>
+          {tCopy("share-build")}</button>
         <button
           type="button"
           onClick={copy}
-          aria-label="Copy build link"
+          aria-label={t("copy-build-link")}
           className="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
         >
           {copied ? (
@@ -78,12 +80,12 @@ export function BuildShare({
       <ShareModal
         open={open}
         onOpenChange={setOpen}
-        title={`Share ${tankName}`}
+        title={t("share-tank", { tank: tankName })}
         url={cleanUrl}
-        shareText={`Check out this ${tankName} build on ${APP.NAME}`}
+        shareText={t("share-text", { tank: tankName, app: APP.NAME })}
         ogImage={unicumPublic.og.region(region).tanks(slug).url()}
         setupParams={setupParams}
-        setupLabel="Include setup"
+        setupLabel={t("include-setup")}
       />
     </>
   );

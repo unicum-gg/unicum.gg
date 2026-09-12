@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "A World of Tanks összes harci arénája, szám szerint {count}. Szűrj álcázás és Mód szerint, majd nyiss meg egy pályát, hogy lásd a minitérképét, méretét, valamint a Módonkénti báziszászlókat és kezdőpontokat.",
+    "title": "A World of Tanks összes pályája ({region}), minden harci aréna",
+    "description": "Böngészd a World of Tanks összes pályáját a megadott régióban (régió: {region}): minitérképek, méret, álcázás és támogatott Módok, valamint Módonkénti báziszászlók és kezdőpontok.",
+    "heading": "Minden <accent>pályák</accent>"
+  },
+  "battle-type": {
+    "intro": "A World of Tanks összesen {count} pályája játszható a következő Módban: {type}, {blurb}. Nyiss meg egy pályát, hogy lásd a minitérképét, méretét, valamint a Módonkénti báziszászlókat és kezdőpontokat.",
+    "title": "World of Tanks-pályák, Mód: {type} ({region}), a rotáció minden arénája",
+    "description": "A World of Tanks teljes pályarotációja a megadott beállításokkal (Mód: {type}, régió: {region}): minitérképek, méret, álcázás és támogatott Módok, valamint báziszászlók és kezdőpontok.",
+    "heading": "{type} <accent>pályák</accent>"
+  },
+  "blurbs": {
+    "random": "a Standard 15v15-ös rotáció",
+    "battle_royale": "az utolsóként talpon maradó Tank Mód",
+    "frontline": "a nagyszabású 30v30-as Mód",
+    "onslaught": "a rangsorolt 7v7-es Mód",
+    "onslaught_night": "a rangsorolt 7v7-es Mód sötétedés után, rövidebb látótávval, jelenleg a Közönséges Teszt keretében játszható",
+    "grand_battle": "a 30v30-as Mód, ahol a követelmény: X-es szint",
+    "clan_wars": "a Klán Háborúk és az Előrenyomulások",
+    "waffentrager": "a Waffenträger esemény",
+    "last_stand": "a Végső ellenállás esemény",
+    "arcade": "az árkád- és Speciális események",
+    "story_mode": "a történetközpontú műveletek",
+    "training": "a Gyakorló szobák és az oktatóanyagok"
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import { CheckIcon } from "lucide-react";
 import type { LoadoutDirective } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
@@ -16,6 +17,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { statLabel } from "@/components/stat-label";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 
 // The characteristic a directive attribute reads as, for the hover tooltip. The
@@ -45,6 +47,8 @@ function DirectiveTooltip({
   directive: LoadoutDirective;
   mounted: boolean;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/directives/index");
+  const { t: tStats } = useTranslation("components/stat-labels");
   if (directive.crew) {
     const boost =
       directive.boostKind === "level"
@@ -52,26 +56,33 @@ function DirectiveTooltip({
         : `×${directive.boostValue} efficiency`;
     return (
       <div className="w-52 space-y-2 text-xs">
-        <div className="font-medium">{directive.name} directive</div>
+        <div className="font-medium">
+          {t("directive-name", { name: directive.name })}
+        </div>
         {directive.description ? (
           <div className="text-background/60">{directive.description}</div>
         ) : null}
         <div className="flex justify-between gap-3">
-          <span className="text-background/60">Boosts {directive.name}</span>
+          <span className="text-background/60">{t("boosts", { name: directive.name })}</span>
           <span className="tabular-nums">{boost}</span>
         </div>
         <div className="border-t border-background/20 pt-1.5 text-background/60">
           {directive.effects.length > 0 || directive.camouflage
-            ? "Grants and boosts the crew skill, even when untrained."
-            : "Grants the crew skill for the battle (no listed characteristic)."}
+            ? t("grants-and-boosts")
+            : t("grants-only")}
         </div>
       </div>
     );
   }
-  const label = DIRECTIVE_LABEL[directive.attribute] ?? directive.attribute;
+  // The map stays the English source and the key side, like the equipment and
+  // field-mod tables: the same characteristic is named once for the whole site.
+  const named = DIRECTIVE_LABEL[directive.attribute];
+  const label = named ? statLabel(named, tStats) : directive.attribute;
   return (
     <div className="w-52 space-y-2 text-xs">
-      <div className="font-medium">{directive.name} directive</div>
+      <div className="font-medium">
+          {t("directive-name", { name: directive.name })}
+        </div>
       {directive.description ? (
         <div className="text-background/60">{directive.description}</div>
       ) : null}
@@ -81,8 +92,8 @@ function DirectiveTooltip({
       </div>
       <div className="border-t border-background/20 pt-1.5 text-background/60">
         {mounted
-          ? `Enhances the mounted ${directive.name}.`
-          : `Mount ${directive.name} to use this directive.`}
+          ? t("enhances-mounted", { name: directive.name })
+          : t("mount-to-use", { name: directive.name })}
       </div>
     </div>
   );
@@ -122,6 +133,7 @@ export function TankDirectives({
    * when stacked below another panel, where no full-width line reaches here. */
   headerBorder?: boolean;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/directives/index");
   if (directives.length === 0) return null;
   return (
     <TooltipProvider delayDuration={100}>
@@ -133,7 +145,7 @@ export function TankDirectives({
             headerBorder && "border-b border-fd-border",
           )}
         >
-          <PanelTitle>Directives</PanelTitle>
+          <PanelTitle>{t("directives")}</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="px-4 py-6">

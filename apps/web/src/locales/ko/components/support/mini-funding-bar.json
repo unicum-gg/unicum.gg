@@ -1,0 +1,6 @@
+{
+  "label": "커뮤니티 후원으로 운영",
+  "funded": "{pct}% 후원 달성",
+  "tooltip": "출시 후 후원자들이 목표 {goal} 중 {received}을 충당함",
+  "tooltip-loading": "커뮤니티 후원으로 운영, 광고 없음"
+}

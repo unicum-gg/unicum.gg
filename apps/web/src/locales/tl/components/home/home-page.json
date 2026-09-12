@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Mga nangungunang manlalaro · Nakaraang 24 oras"
+    },
+    "week": {
+      "title": "Mga nangungunang manlalaro · Nakaraang 7 araw"
+    }
+  },
+  "rating-scale": {
+    "title": "Sukatan ng rating"
+  },
+  "community": {
+    "title": "Sumali sa komunidad",
+    "heading": "Kumonekta sa mga manlalaro ng WoT",
+    "description": "Sumali sa aming Discord upang pag-usapan ang istatistika ng WoT, humiling ng mga feature at mag-ulat ng mga bug. O pumunta sa GitHub upang suriin ang code at mag-ambag.",
+    "discord": "Sumali sa Discord",
+    "github": "Tingnan sa GitHub"
+  },
+  "features": {
+    "title": "Makikita mo rito",
+    "profiles": {
+      "title": "Mga profile ng manlalaro",
+      "description": "Detalyadong istatistika na may pangkalahatan at 24h / 7d / 30d na pagbabago, WN7, WN8, WNX, at Personal na Ranggo."
+    },
+    "clans": {
+      "title": "Mga pahina ng Klan",
+      "description": "Talaan ng mga miyembro na may rating, kamakailang activity feed, paglalarawan at metadata ng clan."
+    },
+    "history": {
+      "title": "Kasaysayan ng Klan",
+      "description": "Buong timeline ng bawat clan na kinabilangan ng isang manlalaro, kasama ang mga role at petsa."
+    },
+    "live": {
+      "title": "Mga live na update",
+      "description": "Ang mga sinusubaybayang manlalaro ay nire-refresh sa background bawat 24 oras gamit ang aming snapshot system."
+    },
+    "leaderboards": {
+      "title": "Mga leaderboard",
+      "description": "Mga nangungunang manlalaro (24h, 7d, all-time) at mga nangungunang clan na naka-rank ayon sa WNX, kinakalkula mula sa aming mga snapshot."
+    },
+    "open-source": {
+      "title": "Open source · AGPL",
+      "description": "Nasa GitHub ang code. Suriin, i-fork, mag-ambag. Walang ads, opt-in analytics lamang."
+    }
+  },
+  "quick-start": {
+    "title": "Mabilisang pagsisimula",
+    "search": {
+      "title": "🔍 Maghanap ng mga manlalaro o clan",
+      "description": "Pindutin ang {shortcut} upang buksan ang paghahanap, pagkatapos ay mag-type ng palayaw o clan tag."
+    },
+    "region": {
+      "title": "🌍 Magpalit ng rehiyon",
+      "description": "Gamitin ang {selector} selector sa navbar. Awtomatikong nag-a-update ang mga talaan ng ranggo."
+    },
+    "leaderboards": {
+      "title": "🏆 Mag-browse ng mga talaan ng ranggo",
+      "description": "Mga nangungunang manlalaro (24h, 7d, all-time) at mga nangungunang clan na naka-rank ayon sa karaniwang WNX, kinakalkula mula sa aming mga snapshot."
+    },
+    "colors": {
+      "title": "📊 Basahin ang mga kulay",
+      "description": "Pare-pareho ang mga kulay ng tier ng WR, WN7, WN8 at WNX (orange → green → cyan → purple). Tingnan ang scale sa itaas."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Άξονας προς άξονα",
+  "by-server": "Κατά διακομιστή",
+  "community-verdict": "Απόφαση κοινότητας",
+  "every-server-one-average": "Κάθε διακομιστής, ένας μέσος όρος",
+  "n-shown": ", εμφανίζονται {count}",
+  "opinion": "{count, plural, one {# γνώμη} other {# γνώμες}}",
+  "opinion-next-to-win-rate": "Άποψη δίπλα στο ποσοστό νικών, στο επίπεδο {tier}",
+  "rate-the": "Αξιολογήστε το {tankName}",
+  "reputation-against-results": "Φήμη εναντίον αποτελεσμάτων",
+  "same-tank-different-metas": "Ίδιο άρμα, διαφορετικά meta",
+  "the-same-tank-by-how": "Το ίδιο άρμα, ανάλογα με το πόσο καλά παίζει ο ψηφοφόρος",
+  "what-players-wrote": "Τι έγραψαν οι παίκτες",
+  "who-is-saying-it": "Ποιος το λέει"
+}

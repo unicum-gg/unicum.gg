@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} batailles à son bord",
+  "damage": "{damage} dégâts",
+  "n-marks": "{count, plural, one {# marque} other {# marques}}",
+  "no-written-opinions-yet-if": "Aucun avis écrit pour le moment. Si vous avez disputé suffisamment de batailles, le vôtre serait le premier.",
+  "win-rate": "{toFixed} % de victoires",
+  "written-on": "rédigé avec la version {gameVersion}"
+}

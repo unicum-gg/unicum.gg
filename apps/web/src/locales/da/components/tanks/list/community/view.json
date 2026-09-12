@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Alle kampvogne bedømt fra én til fem af dem, der spiller dem. En stemme tæller kun fra en konto, der faktisk har taget køretøjet med i kamp, hvilket adskiller dette fra en afstemning blandt alle, der dukkede op.",
+  "no-tank-has-been-rated": "Ingen kampvogn er blevet bedømt endnu. De første stemmer findes på kampvognssiderne under Fællesskab.",
+  "think": "tænke",
+  "title": "Hvad spillerne {think}",
+  "votes-across-vehicles": "{totalVotes} stemmer på tværs af {ratedTanks} køretøjer."
+}

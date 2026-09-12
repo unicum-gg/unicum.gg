@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Näytä keskustelu",
+    "hide": "Piilota keskustelu",
+    "show-streamers": "Näytä striimaajat"
+  },
+  "heading": "{name}: World of Tanks -pelaajien, klaanien ja panssarivaunujen tilastot",
+  "hide": "Piilota striimaajat",
+  "player": "Pelaaja",
+  "stream-language": "Lähetyksen kieli · {name}",
+  "stream-language-alt": "Lähetyksen kieli: {name}",
+  "theater": {
+    "enter": "Teatteritila",
+    "exit": "Poistu teatteritilasta"
+  },
+  "title": "Parhaat pelaajat striimaavat nyt ·",
+  "viewer-count": "{count} katsojaa",
+  "viewers": "Katsojat",
+  "watch": "Katso nimimerkkiä {nickname} Twitchissä"
+}

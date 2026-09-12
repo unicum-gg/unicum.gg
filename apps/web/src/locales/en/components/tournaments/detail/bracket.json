@@ -1,0 +1,7 @@
+{
+  "group": "Group {order}",
+  "n-teams": "{count} teams",
+  "pts": "Pts",
+  "team": "Team",
+  "top-n-advance": ", top {count} advance"
+}

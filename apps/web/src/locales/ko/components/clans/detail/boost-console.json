@@ -1,0 +1,13 @@
+{
+  "add-workflow": "워크플로 추가",
+  "boost": "부스트",
+  "each-workflow-activates-its-reserves": "각 워크플로는 충분한 구성원이 실시간 게임 세션에 들어오면 지정된 시간 동안 예비 물자를 활성화합니다. 계정에서 실행되므로 온라인 상태일 필요가 없습니다. 필요한 만큼 추가하세요.",
+  "n-online": "/ {count}명 온라인",
+  "officer": "장교",
+  "online": "온라인",
+  "recent-activations": "최근 활성화",
+  "reserve": "리저브",
+  "stronghold-boosts": "요새 보너스",
+  "when": "언제",
+  "workflow": "워크플로우"
+}

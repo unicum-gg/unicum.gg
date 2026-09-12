@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "A elevar a classificação",
+    "blurb": "Tanques que elevam a classificação geral: removê-los faria baixar a classificação.",
+    "empty": "Nenhum tanque eleva a classificação geral."
+  },
+  "drag": {
+    "heading": "A baixar a classificação",
+    "blurb": "Tanques que baixam a classificação geral: removê-los faria subir a classificação.",
+    "empty": "Nenhum tanque baixa a classificação geral."
+  },
+  "if-removed": "{delta} se removido"
+}

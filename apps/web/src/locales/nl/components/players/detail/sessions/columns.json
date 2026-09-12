@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Rating (WN)",
+    "tip": "Beoordeling op basis van alleen deze gevechten, niet van het account"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Winstpercentage over deze gevechten"
+  },
+  "avgDamage": {
+    "label": "Gem. schade"
+  },
+  "avgFrags": {
+    "label": "Gem. kills",
+    "tip": "Vernietigde vijanden per gevecht"
+  },
+  "damageRatio": {
+    "label": "Schadeverhouding",
+    "tip": "Schade veroorzaakt gedeeld door Schade ontvangen"
+  },
+  "kd": {
+    "label": "Vernietigingsverhouding",
+    "tip": "Vernietigde vijanden gedeeld door verloren voertuigen"
+  },
+  "survivalRate": {
+    "label": "Gevechten overleefd"
+  },
+  "avgSpotted": {
+    "label": "Gemiddeld gespot",
+    "tip": "Gespotte vijanden per gevecht"
+  },
+  "avgDefense": {
+    "label": "Basisverdediging",
+    "tip": "Verdedigingspunten per gevecht"
+  },
+  "avgXp": {
+    "label": "Gem. XP"
+  }
+}

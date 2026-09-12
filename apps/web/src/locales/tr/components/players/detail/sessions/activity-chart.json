@@ -1,0 +1,5 @@
+{
+  "battles": "{count} savaşlar",
+  "chart-label": "Her {granularity} oynanan savaşlar, {metric} değerine göre renklendirilir",
+  "no-battles": "Hayır savaşlar"
+}

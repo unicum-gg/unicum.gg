@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Toate cele {count} arene de bătălie din World of Tanks. Filtrează după camuflaj și mod de joc, apoi deschide o hartă pentru minimapă, dimensiune și indicatoarele bazelor și punctele de apariție pentru fiecare mod.",
+    "title": "Toate hărțile World of Tanks ({region}), fiecare arenă de bătălie",
+    "description": "Explorează fiecare hartă World of Tanks din {region}: minimape, dimensiune, camuflaj și moduri de joc acceptate, cu indicatoare ale bazelor și puncte de apariție pentru fiecare mod.",
+    "heading": "Toate <accent>hărţile</accent>"
+  },
+  "battle-type": {
+    "intro": "Cele {count} hărți World of Tanks jucate în {type}, {blurb}. Deschide o hartă pentru minimapă, dimensiune și indicatoarele bazelor și punctele de apariție pentru fiecare mod.",
+    "title": "Hărți World of Tanks pentru {type} ({region}), fiecare arenă din rotație",
+    "description": "Fiecare hartă World of Tanks din rotația {type} în {region}: minimape, dimensiune, camuflaj și moduri de joc acceptate, cu indicatoare ale bazelor și puncte de apariție pentru fiecare mod.",
+    "heading": "{type} <accent>hărţile</accent>"
+  },
+  "blurbs": {
+    "random": "rotația standard 15v15",
+    "battle_royale": "modul ultimului tanc rămas",
+    "frontline": "modul de amploare 30v30",
+    "onslaught": "modul clasat 7v7",
+    "onslaught_night": "modul clasat 7v7 după lăsarea întunericului, cu o rază de vizibilitate mai scurtă, disponibil momentan în Testul Comun",
+    "grand_battle": "modul 30v30 de nivel X",
+    "clan_wars": "Războaiele clanurilor și avansuri",
+    "waffentrager": "evenimentul Waffenträger",
+    "last_stand": "evenimentul Last Stand",
+    "arcade": "evenimente arcade și speciale",
+    "story_mode": "operațiunile bazate pe poveste",
+    "training": "camere de antrenament și tutoriale"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "ทุกโหวตมาจากบัญชีที่เคยเล่นรถถังคันนี้",
+  "every-vote-played-average": "ทุกโหวตมาจากบัญชีที่เคยเล่นรถถังคันนี้ โดยเฉลี่ย {battles} การรบ",
+  "fun": "สนุก",
+  "how-good-the-tank-is": "รถถังคันนี้ดีแค่ไหน",
+  "how-much-people-enjoy-it": "ผู้เล่นสนุกกับมันมากแค่ไหน",
+  "if-you-have-played-it": "หากคุณเคยเล่น คุณคือคนที่หน้านี้กำลังรออยู่",
+  "nobody-has-rated-this-tank": "ยังไม่มีใครประเมินรถถังคันนี้",
+  "overall": "โดยรวม",
+  "votes": "{count} ลงคะแนน",
+  "votes-one": "{count} ลงคะแนน"
+}

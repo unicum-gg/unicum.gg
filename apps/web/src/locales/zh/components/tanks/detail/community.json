@@ -1,0 +1,8 @@
+{
+  "what-players-think": "玩家如何评价这辆坦克",
+  "not-rated": "尚未评级，成为第一位",
+  "votes": "{count} 投票",
+  "votes-one": "{count} 投票",
+  "stars": "{value}/{max}",
+  "not-rated-short": "尚未评分"
+}

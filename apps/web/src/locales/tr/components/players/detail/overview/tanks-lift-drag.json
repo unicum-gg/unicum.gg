@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Puanı yükseltenler",
+    "blurb": "Geneli yukarı taşıyan tanklar: onları bırakmak puanı düşürür.",
+    "empty": "Geneli yukarı taşıyan tank yok."
+  },
+  "drag": {
+    "heading": "Puanı aşağı çekenler",
+    "blurb": "Geneli aşağı çeken tanklar: onları bırakmak puanı yükseltir.",
+    "empty": "Geneli aşağı çeken tank yok."
+  },
+  "if-removed": "Kaldırılırsa {delta}"
+}

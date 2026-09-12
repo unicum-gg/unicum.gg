@@ -1,0 +1,19 @@
+{
+  "active-days": "Ngày hoạt động",
+  "add-workflow": "Thêm quy trình",
+  "connect-discord": "Kết nối Discord",
+  "discord-notifications": "Thông báo Discord",
+  "each-workflow-activates-its-reserves": "Mỗi quy trình kích hoạt lượng dự trữ trong một khoảng thời gian, khi đã có đủ các thành viên trong một phiên chơi trực tiếp. Chạy trên tài khoản của bạn, không cần trực tuyến. Thêm bao nhiêu tùy ý.",
+  "enabled": "Đã kích hoạt",
+  "from": "Từ",
+  "get-a-discord-message-in": "Nhận tin nhắn Discord trong kênh bạn chọn mỗi khi tăng cường hỏa hoạn, để toàn bộ Clan biết rằng nó đang hoạt động.",
+  "log-in-with-wargaming-to": "Đăng nhập bằng Wargaming để thiết lập",
+  "min-online": "Tối thiểu trực tuyến",
+  "officers": "Sĩ quan",
+  "only-an-officer-of-this": "Chỉ sĩ quan của Clan này mới có thể thiết lập.",
+  "schedule-preview": "Xem trước lịch trình",
+  "set-your-hours-and-reserves": "Thiết lập giờ và lượng dự trữ một lần, các đợt tăng cường sẽ tự hỏa hoạn đúng giờ, ngay cả khi không có ai ở đó để nhấn nút.",
+  "stronghold-boosts": "Tăng cường Fort",
+  "times-are-in-your-timezone": "Thời gian theo {tz}, múi giờ của bạn.",
+  "to": "Đến"
+}

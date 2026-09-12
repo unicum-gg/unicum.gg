@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: din rullerende gjennomsnittlige samlede skade (de siste ~100 kampene) må slå 65 % av spillerne på denne stridsvognen de siste 14 dagene"
+    },
+    "mark2": {
+      "label": "2 Marks",
+      "tip": "2 Marks: ditt rullerende gjennomsnitt for samlet skade, de siste ~100 kampene, må slå 85 % av spillerne på denne stridsvognen de siste 14 dagene"
+    },
+    "mark3": {
+      "label": "3 Marks",
+      "tip": "3 Marks: ditt rullerende gjennomsnitt for samlet skade, de siste ~100 kampene, må slå 95 % av spillerne på denne stridsvognen de siste 14 dagene"
+    }
+  },
+  "rows-per-page": "Rader per side",
+  "previous-page": "Forrige side",
+  "page": "Side {current} / {totalPages}",
+  "next-page": "Neste side",
+  "all": "Alle"
+}

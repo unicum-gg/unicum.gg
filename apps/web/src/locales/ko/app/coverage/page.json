@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks 데이터 제공 범위 ({region})",
+  "description": "{name}의 {region} 지역 World of Tanks 플레이어와 클랜 추적 수, 스냅샷 새로 고침 빈도, 데이터 깊이, 인프라 비용 및 가동 시간입니다.",
+  "og-title": "데이터 수집 범위",
+  "og-subtitle": "{region} 지역 플레이어 및 클랜"
+}

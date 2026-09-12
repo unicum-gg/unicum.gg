@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "[{tag}] ei ole osallistunut yhteenkään peilaamaamme turnaukseen. Joukkue lasketaan tämän klaanin joukkueeksi, kun neljännes sen kokoonpanosta oli ottelupäivänä klaanin jäseniä.",
+  "won": "{count} voitettu"
+}

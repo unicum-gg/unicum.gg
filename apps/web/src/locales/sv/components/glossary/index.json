@@ -1,0 +1,22 @@
+{
+  "search": "Hitta bland {count} termer",
+  "search-label": "Hitta i Ordlista",
+  "all": "Alla",
+  "jump": "Hoppa Till bokstav",
+  "empty": "Ingen term matchar ”{query}”.",
+  "categories": {
+    "vehicles": "Vagnar",
+    "gunnery": "Skjutteknik",
+    "armor": "Pansar",
+    "mobility": "Rörlighet",
+    "vision": "Sikt",
+    "crew": "Besättning",
+    "progression": "Progression",
+    "economy": "Ekonomi",
+    "ratings": "Betyg",
+    "statistics": "Statistik",
+    "modes": "Stridslägen",
+    "tactics": "Taktik",
+    "slang": "Slang"
+  }
+}

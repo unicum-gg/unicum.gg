@@ -1,0 +1,8 @@
+{
+  "description": "Tous les tournois Wargaming sur {region} : les classements quotidiens avec de l’or à la clé, les championnats de clans, les participants et les vainqueurs. Tableaux, scores et effectifs complets.",
+  "live-many": "{count} tournois ouverts ou en cours sur {region} en ce moment,",
+  "live-one": "{count} tournoi ouvert ou en cours sur {region} en ce moment,",
+  "no-live": "Des tournois ont lieu sur {region} tous les jours,",
+  "title": "World of Tanks : {tournaments}",
+  "what-you-find": "allant des classements 1v1 avec de l’or à la clé aux championnats de clans offrant des récompenses en argent réel. Tableaux et scores complets, ainsi que l’effectif et le camp de départ de chaque équipe, carte par carte."
+}

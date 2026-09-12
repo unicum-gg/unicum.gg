@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Topp <accent>klaner</accent>",
+    "language": "Toppklaner med <accent>{language}</accent> som språk"
+  },
+  "intro": {
+    "all": "Topplista för {region}, rangordnad efter genomsnittet för {metric} bland de spårade medlemmarna i varje klan (minst 50 medlemmar med strider).",
+    "language": "Klaner i {region} som har angett {language} som ett av sina språk, rangordnade efter genomsnittet för {metric} bland sina spårade medlemmar (minst 25 medlemmar med strider).",
+    "strict": "Klaner i {region} som har angett {language} som sitt enda språk, rangordnade efter genomsnittet för {metric} bland sina spårade medlemmar (minst 25 medlemmar med strider)."
+  },
+  "board": {
+    "all": "Toppklaner efter {metric}: de {count} högst rankade",
+    "language": "Toppklaner med {language} som språk efter {metric}: de {count} högst rankade",
+    "strict": "Toppklaner med endast {language} efter {metric}: de {count} högst rankade"
+  },
+  "members": "Medlemmar",
+  "strict-toggle": "Strikt",
+  "any-toggle": "Vilken som helst",
+  "all-languages": "Alla språk",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

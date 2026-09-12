@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Chiều rộng khu vực chơi",
+    "height": "Chiều cao khu vực chơi",
+    "round-length": "Thời gian trận đấu",
+    "team-size": "Kích thước đội",
+    "camouflage": "Mùa",
+    "presence": "Trong game",
+    "variant-version": "Phiên bản {type}",
+    "play-area": "Khu vực chơi",
+    "bases-team1": "Căn cứ phe ta",
+    "bases-team2": "Căn cứ Phe địch",
+    "spawns-team1": "Điểm xuất hiện phe ta",
+    "spawns-team2": "Điểm xuất hiện Phe địch",
+    "control-point": "Điểm kiểm soát",
+    "artillery-headquarters": "Sở chỉ huy Pháo binh",
+    "comms-centers": "Trung tâm liên lạc",
+    "observation-posts": "Đài quan sát",
+    "points-of-interest": "Điểm then chốt"
+  },
+  "summary": {
+    "added": "Đã thêm {name}",
+    "removed": "Đã xóa {name}",
+    "added-to-game": "Đã thêm vào trò chơi",
+    "removed-from-game": "Đã xóa khỏi trò chơi",
+    "added-on-test": "Đã thêm trên máy khách thử nghiệm",
+    "removed-on-test": "Đã xóa trên máy khách thử nghiệm",
+    "mode-added": "Đã thêm chế độ {name}",
+    "mode-removed": "Đã xóa chế độ {name}",
+    "now-played-in": "Hiện đã chơi trong {name}",
+    "no-longer-played-in": "Không còn chơi trong {name}",
+    "event-added": "Giờ đây {name} có thể xảy ra giữa trận đấu",
+    "event-removed": "{name} không còn xảy ra",
+    "moved": "Đã di chuyển {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

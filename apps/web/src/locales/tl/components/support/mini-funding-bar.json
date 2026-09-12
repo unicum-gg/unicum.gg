@@ -1,0 +1,6 @@
+{
+  "label": "Pinopondohan ng komunidad",
+  "funded": "{pct}% napondohan",
+  "tooltip": "{received} sa {goal} ang sinagot ng mga tagasuporta mula nang ilunsad",
+  "tooltip-loading": "Pinopondohan ng komunidad, walang ad"
+}

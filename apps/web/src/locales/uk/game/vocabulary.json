@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Випадково",
+    "battle_royale": "Сталевий мисливець",
+    "frontline": "Лінія фронту",
+    "onslaught": "Натиск",
+    "onslaught_night": "{onslaught} Ніч",
+    "grand_battle": "Генеральна битва",
+    "clan_wars": "Кланові війни",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Останній рубіж",
+    "arcade": "Аркада",
+    "story_mode": "Сюжетний режим",
+    "training": "Навчання"
+  },
+  "player-modes": {
+    "overall": "Випадкові бої",
+    "skirmish": "Вилазка",
+    "advances": "Наступи",
+    "grand": "Генеральні бої",
+    "ranked": "Гра в Ладдері",
+    "cw-x": "Кланові війни X",
+    "cw-viii": "Кланові війни VIII",
+    "cw-vi": "Кланові війни VI",
+    "steel-hunter": "Сталевий мисливець",
+    "onslaught": "Натиск"
+  },
+  "stronghold-tiers": {
+    "advances": "Наступи",
+    "t10": "Вилазка T10",
+    "t8": "Вилазка T8",
+    "t6": "Вилазка T6"
+  },
+  "stronghold-periods": {
+    "24h": "Останні 24 години",
+    "7d": "Останні 7 днів",
+    "30d": "Останні 30 днів",
+    "overall": "Всього"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Бої",
+    "winrate": "Процент виграшу"
+  },
+  "clan-boards": {
+    "advances": "Наступи",
+    "t10": "Вилазка X",
+    "t8": "Вилазка VIII",
+    "t6": "Вилазка VI"
+  },
+  "map-modes": {
+    "standard": "Стандартний",
+    "encounter": "Зустрічний бій",
+    "assault": "Штурм",
+    "attack-defense": "Атака/Захист"
+  },
+  "map-camouflage": {
+    "summer": "Літній",
+    "winter": "Зимовий",
+    "desert": "Пустельний"
+  },
+  "map-poi": {
+    "1": "Артилерійський штаб",
+    "2": "Центр зв’язку",
+    "3": "Спостережний пункт"
+  },
+  "tournament-modes": {
+    "ctf": "Стандартний",
+    "domination": "Зустрічний бій",
+    "assault2": "Атака/Оборона",
+    "comp7": "Натиск"
+  },
+  "battle-formats": {
+    "random": "Випадково",
+    "clan_wars": "Кланові війни",
+    "advances": "Наступи",
+    "skirmish": "Вилазка",
+    "maneuvers": "Маневри",
+    "onslaught": "Натиск",
+    "tournament": "Турнір"
+  },
+  "battle-results": {
+    "victory": "Перемога",
+    "defeat": "Поразка",
+    "draw": "Нічия"
+  },
+  "spawn-directions": {
+    "north": "Північ",
+    "south": "Південь",
+    "east": "Схід",
+    "west": "Захід"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Найближчий",
+    "registration_started": "Реєстрація відкрита",
+    "registration_finished": "Реєстрація закрита",
+    "running": "В процесі",
+    "finished": "Завершується",
+    "complete": "Виконано"
+  },
+  "onslaught-tiers": {
+    "legend": "Легенда",
+    "champion": "Чемпіон",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Важкий",
+    "mediumTank": "Середній",
+    "lightTank": "Легкий",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Штурм",
+    "break": "Прорив",
+    "support": "Підтримка",
+    "universal": "Універсальний",
+    "sniper": "Снайперський",
+    "wheeled": "Колісний"
+  },
+  "mastery-badges": {
+    "class3": "3-й клас",
+    "class2": "2-й клас",
+    "class1": "1-й клас",
+    "ace": "Ас бойовик"
+  },
+  "clan-modes": {
+    "random": "Випадкові бої",
+    "stronghold": "Укріпрайон",
+    "skirmish": "Вилазка",
+    "clan-wars": "Кланові війни"
+  },
+  "features": {
+    "stronghold": "Укріпрайон",
+    "skirmish": "Вилазка",
+    "marks-of-excellence": "Відмітні позначки",
+    "marks-of-mastery": "Мітки майстерності",
+    "personal-rating": "Особистий рейтинг",
+    "world-of-tanks-rating": "Рейтинг World of Tanks",
+    "common-test": "Загальний тест",
+    "tournaments": "Турніри"
+  },
+  "marks": {
+    "1": "1 Мітка",
+    "2": "2 Мітки",
+    "3": "3 Мітки",
+    "name": "Відмітні позначки"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tankok: {name} ({region}), minden használt jármű",
+    "description": "Minden Tank, amellyel {name} játszott {region} régióban, járművenkénti csataszámmal, győzelmi aránnyal, átlagsebzéssel és WN8 értékkel."
+  },
+  "achievements": {
+    "title": "Kitüntetések: {name} ({region}), {medals} megszerzett medál",
+    "description": "A {medals} World of Tanks-medál, amelyet {name} szerzett {region} régióban, a Kolobanov- és Pool-medáltól a tiszteletbeli rangokig és az epikus medálokig, valamint az összes még megszerezhető medál."
+  },
+  "tournaments": {
+    "title": "Tornák: {name} ({region})",
+    "description": "Minden, a Wargaming által rendezett torna, amelyen {name} részt vett {region} régióban: a csapata, a formátum és hogy meddig jutott. A Wargaming ezeket az adatokat kizárólag a torna oldalán teszi közzé, a játékosén soha."
+  },
+  "value": {
+    "title": "Érték: {name} fiókja ({region})",
+    "description": "Ennyit ér {name} World of Tanks-fiókja {region} régióban: a garázsban felhalmozott kredit, arany és tapasztalat."
+  },
+  "mode": {
+    "title": "Játékmód-statisztikák: {name}, {mode} ({region})",
+    "description": "{name} eredményei {region} régióban, {mode} módban: csaták, győzelmi arány és értékelések, a véletlenszerű csaták alapadatai mellett."
+  },
+  "overview": {
+    "title": "World of Tanks-statisztikák: {name} ({region}), {battles} csata, {winrate}% WR",
+    "description": "{name} {region} régióban: {battles} csata, {winrate}% győzelmi arány, {rating} értékelés. Tankonkénti részletes bontás, WN8, WNX és teljes klántörténet."
+  },
+  "locked": {
+    "title": "Zárolt World of Tanks-fiók: {name} ({region})",
+    "description": "{name} ({region}) létezik, de a Wargaming zárolta ezt a fiókot, ezért a World of Tanks-statisztikái nem érhetők el."
+  },
+  "empty": {
+    "title": "World of Tanks-játékosstatisztikák: {name} ({region})",
+    "description": "{name} ({region}) World of Tanks-játékosstatisztikái: WN8- és WNX-értékelések, győzelmi arány, tankonkénti bontás és teljes klántörténet."
+  }
+}

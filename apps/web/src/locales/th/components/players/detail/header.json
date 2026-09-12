@@ -1,0 +1,7 @@
+{
+  "joined": "เข้าร่วมเมื่อ {date}",
+  "last-battle": "การรบล่าสุด {when}",
+  "never-played": "ไม่เคยเล่น",
+  "updated": "อัปเดตเมื่อ {when}",
+  "clan-role-joined": "{role} · เข้าร่วมเมื่อ {date}"
+}

@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "軸ごとの詳細",
+  "by-server": "サーバー別",
+  "community-verdict": "コミュニティの判定",
+  "every-server-one-average": "すべてのサーバー、1 つの平均",
+  "n-shown": "、{count} 件を表示",
+  "opinion": "{count, plural, other {#件の意見}}",
+  "opinion-next-to-win-rate": "Tier {tier} 内で、勝率と並べた意見",
+  "rate-the": "{tankName} を評価",
+  "reputation-against-results": "評判と結果の比較",
+  "same-tank-different-metas": "同じ戦車、異なるメタ",
+  "the-same-tank-by-how": "投票者のプレイの上手さごとの同じ戦車",
+  "what-players-wrote": "プレイヤーが書いた内容",
+  "who-is-saying-it": "誰がそう言っているか"
+}

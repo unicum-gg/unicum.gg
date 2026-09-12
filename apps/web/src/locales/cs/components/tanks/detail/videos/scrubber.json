@@ -1,0 +1,7 @@
+{
+  "back-to": "Zpět do času {seconds}",
+  "drag-to-the-battle": "Přetáhněte posuvník na začátek bitvy a poté čas upravte pomocí {keys}, každým stisknutím o jednu sekundu. Video se pozastaví ve vybraném okamžiku a zůstane pozastavené, dokud nevyplníte zbytek.",
+  "moment-the-battle-starts": "Okamžik zahájení bitvy",
+  "use-the-current-moment": "Stávající okamžik použít",
+  "video-being-suggested": "Navrhované video"
+}

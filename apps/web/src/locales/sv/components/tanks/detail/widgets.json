@@ -1,0 +1,12 @@
+{
+  "slot": "Plats {n}",
+  "slot-filled": "Plats {n}: {name}",
+  "consumable-slot": "Plats {n} för förbrukningsvara",
+  "consumable-slot-filled": "Plats {n} för förbrukningsvara: {name}",
+  "level": "Nivå {n}",
+  "stock": "Standard",
+  "specialize": "Klicka för att specialisera den här platsen.",
+  "clear-specialization": "Klicka för att ta bort specialiseringen för den här platsen.",
+  "crew-skills": "Besättningsfärdigheter",
+  "shell-aria": "{name}: {damage} skada, {penetration} mm genomslag"
+}

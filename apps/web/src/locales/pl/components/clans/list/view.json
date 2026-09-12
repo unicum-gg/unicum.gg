@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Najlepsze <accent>klany</accent>",
+    "language": "Najlepsze klany, język: <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Ranking regionu {region} według wartości wskaźnika {metric} uśrednionej dla monitorowanych członków każdego klanu (co najmniej 50 członków z rozegranymi bitwami).",
+    "language": "Klany z regionu {region}, dla których jednym z zadeklarowanych języków jest {language}, uszeregowane według wartości wskaźnika {metric} uśrednionej dla monitorowanych członków (co najmniej 25 członków z rozegranymi bitwami).",
+    "strict": "Klany z regionu {region}, dla których jedynym zadeklarowanym językiem jest {language}, uszeregowane według wartości wskaźnika {metric} uśrednionej dla monitorowanych członków (co najmniej 25 członków z rozegranymi bitwami)."
+  },
+  "board": {
+    "all": "Najlepsze klany według wskaźnika {metric}, liczba pozycji: {count}",
+    "language": "Najlepsze klany według wskaźnika {metric}, język: {language}, liczba pozycji: {count}",
+    "strict": "Najlepsze klany według wskaźnika {metric}, jedyny język: {language}, liczba pozycji: {count}"
+  },
+  "members": "Członkowie",
+  "strict-toggle": "Ścisły",
+  "any-toggle": "Dowolny",
+  "all-languages": "Wszystkie języki",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

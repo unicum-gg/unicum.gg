@@ -1,0 +1,11 @@
+{
+  "closes": "Затвори {when}",
+  "map-pool": "Избор на карти",
+  "place": "Място",
+  "prize": "Награда",
+  "prizes": "Награди",
+  "qualified": "Класирани ({count})",
+  "register": "Регистриране",
+  "tournaments": "Турнири",
+  "winner": "{count, plural, one {Победител} other {Победители}}"
+}

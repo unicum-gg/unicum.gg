@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Zvyšovanie hodnotenia",
+    "blurb": "Tanky, ktoré zvyšujú celkové hodnotenie: ich vylúčenie by ho znížilo.",
+    "empty": "Žiadny tank nezvyšuje celkové hodnotenie."
+  },
+  "drag": {
+    "heading": "Znižovanie hodnotenia",
+    "blurb": "Tanky, ktoré znižujú celkové hodnotenie: ich vylúčenie by ho zvýšilo.",
+    "empty": "Žiadny tank neznižuje celkové hodnotenie."
+  },
+  "if-removed": "{delta} po vylúčení"
+}

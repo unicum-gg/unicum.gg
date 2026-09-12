@@ -1,0 +1,18 @@
+{
+  "player-leaderboard": "Pelaajien tuloslista",
+  "clan-leaderboard": "Klaanin tuloslista",
+  "every-tank": "Jokainen panssarihyökkäys",
+  "tank-economics": "Panssarihyökkäysten taloustiede",
+  "marks-of-excellence-by-tank": "Erinomaisuuden merkit panssarivaunuittain",
+  "mastery-thresholds-by-tank": "Mestaruusrajat panssarivaunuittain",
+  "buffs-and-nerfs-by-update": "Päivitysten vahvistukset ja heikennykset",
+  "every-map": "Jokainen kartta",
+  "stronghold-ladder": "Vahvistuksen sijoituslista",
+  "advances-ranking": "Hyökkäysoperaatioiden sijoitus",
+  "onslaught-ladder": "Rynnistyksen tuloslista",
+  "steel-hunter-leaderboard": "Teräsmetsästäjän tulostaulukko",
+  "tracking-coverage": "Seurannan peitto",
+  "api-reference": "API-viittaus",
+  "this-tank": "Tämä panssarihyökkäys",
+  "this-map": "Tämä kartta"
+}

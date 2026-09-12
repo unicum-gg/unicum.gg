@@ -1,0 +1,22 @@
+{
+  "search": "Cerca tra {count} termini",
+  "search-label": "Cerca nel glossario",
+  "all": "Tutti",
+  "jump": "Vai alla lettera",
+  "empty": "Nessun termine corrisponde a “{query}”.",
+  "categories": {
+    "vehicles": "Veicoli",
+    "gunnery": "Tiro",
+    "armor": "Corazza",
+    "mobility": "Mobilità",
+    "vision": "Visione",
+    "crew": "Equipaggio",
+    "progression": "Progressione",
+    "economy": "Economia",
+    "ratings": "Valutazioni",
+    "statistics": "Statistiche",
+    "modes": "Modalità di battaglia",
+    "tactics": "Tattiche",
+    "slang": "Gergo"
+  }
+}

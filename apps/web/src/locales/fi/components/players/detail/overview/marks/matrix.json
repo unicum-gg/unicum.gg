@@ -1,0 +1,7 @@
+{
+  "loading": "Ladataan {count} tason {tier} ajoneuvon nimiä…",
+  "loading-one": "Ladataan {count} tason {tier} ajoneuvon nimeä…",
+  "and-more": "ja {count} muuta",
+  "hint": "Napsauta avataksesi ne Panssarivaunut-välilehdellä",
+  "tier": "Taso"
+}

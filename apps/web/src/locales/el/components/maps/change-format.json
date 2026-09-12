@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Πλάτος περιοχής παιχνιδιού",
+    "height": "Ύψος περιοχής παιχνιδιού",
+    "round-length": "Χρονόμετρο μάχης",
+    "team-size": "Μέγεθος ομάδας",
+    "camouflage": "Σεζόν",
+    "presence": "Στο παιχνίδι",
+    "variant-version": "Έκδοση {type}",
+    "play-area": "Περιοχή παιχνιδιού",
+    "bases-team1": "Βάσεις συμμάχων",
+    "bases-team2": "Βάσεις αντιπάλων",
+    "spawns-team1": "Σημεία εμφάνισης συμμάχων",
+    "spawns-team2": "Σημεία εμφάνισης αντιπάλων",
+    "control-point": "Σημείο ελέγχου",
+    "artillery-headquarters": "Αρχηγείο Πυροβολικού",
+    "comms-centers": "Κέντρα επικοινωνιών",
+    "observation-posts": "Παρατηρητήρια",
+    "points-of-interest": "Σημεία-κλειδιά"
+  },
+  "summary": {
+    "added": "{name} προστέθηκε",
+    "removed": "{name} αφαιρέθηκε",
+    "added-to-game": "Προστέθηκε στο παιχνίδι",
+    "removed-from-game": "Αφαιρέθηκε από το παιχνίδι",
+    "added-on-test": "Προστέθηκε στον πελάτη δοκιμής",
+    "removed-on-test": "Αφαιρέθηκε από τον πελάτη δοκιμής",
+    "mode-added": "Η λειτουργία {name} προστέθηκε",
+    "mode-removed": "Η λειτουργία {name} αφαιρέθηκε",
+    "now-played-in": "Πλέον παίζεται στη λειτουργία {name}",
+    "no-longer-played-in": "Δεν παίζεται πλέον στη λειτουργία {name}",
+    "event-added": "{name} μπορεί πλέον να συμβεί κατά τη διάρκεια της μάχης",
+    "event-removed": "{name} δεν συμβαίνει πλέον",
+    "moved": "{name}: έγινε κίνηση",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

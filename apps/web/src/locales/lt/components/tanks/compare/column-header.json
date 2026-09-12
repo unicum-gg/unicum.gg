@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Amunicija, įranga, vartojimo reikmenys, direktyvos, įgula ir šio stulpelio progresas. Kiekvienas pakeitimas perkelia jo charakteristikas palyginime dešinėje.",
+  "ammunition-equipment-crew-and-progression": "Amunicija, įranga, įgula ir progresas",
+  "apply-to-every-column": "Taikyti kiekvienam stulpeliui",
+  "compare-against": "Palyginti su {tank}",
+  "compare-the-others-against-this-one": "Palyginti kitus su šiuo",
+  "configure-tank": "Konfigūruoti {tank}",
+  "highest-overall-score": "Aukščiausias bendras rezultatas",
+  "highest-overall-score-of-this": "Aukščiausias šio palyginimo bendras rezultatas",
+  "is-the-reference": "Etalonas: {tank}",
+  "overall": "Bendrai",
+  "reference-column": "Etaloninis stulpelis",
+  "remove-tank": "Pašalinti {tank}",
+  "reset-all": "Atstatyti viską",
+  "setup": "Sukonfigūruoti",
+  "stock": "Kurti",
+  "tank-setup": "Sąranka: {tank}",
+  "top": "Geriausi",
+  "where-this-vehicle-sits-across": "Šios transporto priemonės vieta visame kataloge iš {MAXSCORE}: čia sukonfigūruotų keturių kategorijų rezultatų vidurkis. Tai santrauka, o ne nuosprendis. Žvalgas ir sunkusis tankas gali pasiekti tą patį skaičių būdami geri skirtinguose dalykuose."
+}

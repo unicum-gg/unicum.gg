@@ -1,0 +1,9 @@
+{
+  "battle-starts-at": "Бой начинается с",
+  "https-www-youtube-com-watch": "https://www.youtube.com/watch?v=…&t=1h05m30s",
+  "optional": "(опционально)",
+  "that-is-not-a-youtube": "Это не ссылка на видео YouTube.",
+  "use-a-time-like-1": "Используйте время вроде 1:05:30 или оставьте поле пустым.",
+  "your-link-has-no-timestamp": "В вашей ссылке нет отметки времени. Переместите бегунок выше к нужному моменту боя или оставьте его без изменений, если видео начинается с этого момента.",
+  "youtube-link": "Ссылка на YouTube"
+}

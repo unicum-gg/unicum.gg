@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Miten se päättyi",
+  "loading-maps": "Ladataan karttoja…",
+  "map": "Kartta",
+  "mode": "Tila",
+  "pick-a-map": "Valitse kartta",
+  "pick-a-mode": "Valitse pelimuoto",
+  "result": "Tulokset",
+  "spawn": "Synnyttää",
+  "team": "Joukkue {team}",
+  "team-spawn": "Joukkue {team} · {direction}",
+  "which-side-you-started": "Miltä puolelta aloitit"
+}

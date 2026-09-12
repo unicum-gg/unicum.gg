@@ -1,0 +1,34 @@
+{
+  "stat": "Статистика",
+  "rows": {
+    "battles": "Бої",
+    "tier": "Рівень",
+    "wins": "Перемоги",
+    "losses": "Поразки",
+    "draws": "Нічия",
+    "survived": "Живучість",
+    "destroyed": "Знищені танки",
+    "destruction-ratio": "Коефіцієнт знищення",
+    "spotted": "Виявлені танки",
+    "damages": "Дабарення",
+    "track-damages": "Дабарення траків",
+    "spotting-damages": "Дабарення спостереження",
+    "assisting-damages": "Дабарення допомоги",
+    "combined-damages": "Комбіновані дабарення",
+    "base-capture": "Захоплення бази",
+    "base-defense": "Захист бази",
+    "experience": "Досвід",
+    "hit-rate": "Процент влучень",
+    "personal-rating": "Особистий рейтинг",
+    "wtr": "Рейтинг World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Разом",
+    "day": "Останні 24 год",
+    "week": "Останні 7 дн.",
+    "month": "Останні 30 дн."
+  }
+}

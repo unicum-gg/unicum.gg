@@ -1,0 +1,12 @@
+{
+  "clans-history": "Историја кланова надимка {nickname}",
+  "clans-in-clans": "{totalClans} кланови · {timeInClansSeconds} у клановима",
+  "current": "тренутни",
+  "duration": "Trajanje",
+  "from": "Od",
+  "name": "Naziv",
+  "no-clan-history": "Нема историје кланова.",
+  "role": "Uloga",
+  "tag": "Tag",
+  "to": "Za"
+}

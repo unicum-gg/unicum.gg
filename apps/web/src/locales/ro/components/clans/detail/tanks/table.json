@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Nu există încă date despre tancuri pentru acest clan.",
+  "no-tanks-match-these-filters": "Niciun tanc nu corespunde acestor filtre.",
+  "nation": "Ţara",
+  "type": "Tip",
+  "tier": "nivel",
+  "name": "Nume",
+  "members": "Membri",
+  "battles": "Lupte",
+  "avg-damage": "Daune medii",
+  "avg-xp": "XP medie",
+  "wr": "WR"
+}

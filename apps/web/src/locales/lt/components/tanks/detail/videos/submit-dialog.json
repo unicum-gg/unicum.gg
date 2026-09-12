@@ -1,0 +1,13 @@
+{
+  "assists": "Pagalba",
+  "close": "Uždaryti",
+  "damage": "Žala",
+  "in-the-queue": "Jis įtrauktas į eilę ir pasirodys šiame skirtuke, kai moderatorius jį peržiūrės.",
+  "optional": "(neprivaloma)",
+  "paste-a-youtube-link": "Įklijuokite YouTube nuorodą ir nustatykite tikslią mūšio pradžios akimirką. Visi, kurie ją atidarys, pateks į tą sekundę, todėl pasiūlymas su netiksla laiko žyma bus atmestas per apžvalgą.",
+  "sending": "Siunčiama…",
+  "suggest": "Siūlyti",
+  "suggest-a-video": "Siūlyti vaizdo įrašą",
+  "suggest-another": "Pasiūlyti kitą",
+  "suggestion-sent": "Pasiūlymas išsiųstas"
+}

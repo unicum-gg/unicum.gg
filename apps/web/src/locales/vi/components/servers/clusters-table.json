@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Chưa có cụm nào được ghi nhận.",
+  "server": "Máy chủ",
+  "online": "Trực tuyến",
+  "share": "Chia sẻ",
+  "peak": "Đỉnh ({label})",
+  "average": "Trung bình ({label})",
+  "not-reported": "Chưa được báo cáo",
+  "total": "Tổng"
+}

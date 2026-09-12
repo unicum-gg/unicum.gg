@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Arată chatul",
+    "hide": "Ascunde chatul",
+    "show-streamers": "Arată streamerii"
+  },
+  "heading": "{name}: statistici pentru jucători, clanuri și tancuri din World of Tanks",
+  "hide": "Ascunde streamerii",
+  "player": "Jucător",
+  "stream-language": "Limbă transmisie · {name}",
+  "stream-language-alt": "Limbă transmisie: {name}",
+  "theater": {
+    "enter": "Mod teatru",
+    "exit": "Ieși din modul teatru"
+  },
+  "title": "Cei mai buni jucători transmit acum ·",
+  "viewer-count": "{count} spectatori",
+  "viewers": "Spectatori",
+  "watch": "Urmărește-l pe {nickname} pe Twitch"
+}

@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Әзірге кластер жазылмаған.",
+  "server": "Сервер",
+  "online": "Онлайн",
+  "share": "Бөлісу",
+  "peak": "Шектік ({label})",
+  "average": "Орташа ({label})",
+  "not-reported": "Баяндалған жоқ",
+  "total": "Жалпы"
+}

@@ -1,7 +1,10 @@
-import Link from "next/link";
+"use client";
+
+import Link from "@/components/link";
 import type { Region } from "@unicum.gg/wargaming";
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import ROUTES from "@/constants/routes";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Tooltip,
   TooltipContent,
@@ -47,9 +50,12 @@ export function TournamentBadge({
   href?: string;
   size?: number;
 }) {
+  const { t } = useTranslation("components/entity/badges/player-badges");
   if (wins <= 0) return null;
   const featured = featuredWins > 0;
-  const label = `${wins} tournament ${wins === 1 ? "win" : "wins"}`;
+  const label = t("tournament-wins",
+    { count: wins },
+  );
   const crest = (
     <Crest
       kind={featured ? CrestKind.TournamentFeatured : CrestKind.Tournament}
@@ -84,10 +90,15 @@ export function TournamentBadge({
           )}
         </TooltipTrigger>
         <TooltipContent>
-          {wins === 1 ? "Winning roster of" : `On ${wins} winning rosters,`}{" "}
-          {wins === 1 ? "" : "the best "}
-          {bestTitle ?? "a Wargaming tournament"}
-          {featured && wins > 1 ? " · a featured event" : ""}
+          {(() => {
+            const roster = t(wins === 1 ? "tournament.one" : "tournament.many", {
+              count: wins,
+              title: bestTitle ?? t("tournament.unnamed"),
+            });
+            return featured && wins > 1
+              ? t("tournament.featured", { text: roster })
+              : roster;
+          })()}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

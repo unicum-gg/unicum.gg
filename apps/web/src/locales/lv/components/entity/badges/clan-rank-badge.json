@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rangs {rank} sadaļā {board}",
+  "board": {
+    "advances": "Vērtējums: Uzbrukumi, Stronghold",
+    "skirmish-t10": "Vērtējums: X līmenis, Sadursme",
+    "skirmish-t6": "Vērtējums: VI līmenis, Sadursme",
+    "skirmish-t8": "Vērtējums: VIII līmenis, Sadursme"
+  }
+}

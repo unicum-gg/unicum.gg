@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3ª Clase",
+      "tip": "3ª Clase: XP necesarios para superar al 50 % de los jugadores"
+    },
+    "class2": {
+      "label": "2ª Clase",
+      "tip": "2ª Clase: XP necesarios para superar al 80 % de los jugadores"
+    },
+    "class1": {
+      "label": "1ª Clase",
+      "tip": "1ª Clase: XP necesarios para superar al 95 % de los jugadores"
+    },
+    "ace": {
+      "label": "As del Tanque",
+      "tip": "As del Tanque: XP necesarios para superar al 99 % de los jugadores"
+    }
+  },
+  "rows-per-page": "Filas por página",
+  "previous-page": "Página anterior",
+  "page": "Página {current} / {totalPages}",
+  "next-page": "Siguiente página",
+  "all": "Todo"
+}

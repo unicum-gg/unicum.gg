@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "A(z) {region} játékosainak összehasonlítása",
+  "median-n": "medián: {value}",
+  "metric-rating": "{metric} értékelés",
+  "tracked-accounts-with-at-least": "{players} figyelt fiók legalább {minBattles} csatával. A színek ugyanazokat a sávokat használják, mint a webhely minden más része.",
+  "win-rate": "Győzelmi arány",
+  "win-rate-distribution-across-the-region-s-tr": "A győzelmi arány eloszlása a régió figyelt játékosai között"
+}

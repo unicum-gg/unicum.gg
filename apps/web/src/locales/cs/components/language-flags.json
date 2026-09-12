@@ -1,0 +1,8 @@
+{
+  "cta-clans": "Kliknutím se zobrazí nejlepší klany. Jazyk: {language}.",
+  "cta-players": "Kliknutím se zobrazí nejlepší hráči. Jazyk: {language}.",
+  "declared": "{language}. Tento jazyk vybral klan.",
+  "inferred": "{language}. Náš odhad vychází z historie klanů tohoto hráče. Čím déle byl hráč v daném klanu, tím větší váhu mají jazyky tohoto klanu.",
+  "top-language-clans": "Nejlepší klany v jazyce {language}",
+  "top-language-players": "Nejlepší hráči v jazyce {language}"
+}

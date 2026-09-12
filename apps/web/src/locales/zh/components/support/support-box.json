@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "结账已取消.",
+  "claim-your-supporter-role-on-discord": "在Discord领取你的支持者身份组",
+  "could-not-add-the-discord-role-please-try-ag": "无法添加Discord身份组，请重试。",
+  "could-not-open-the-billing-portal": "无法打开账单门户。",
+  "could-not-start-checkout-please-try-again": "无法开始结算，请重试。",
+  "could-not-update-your-preference": "无法更新您的偏好设置。",
+  "log-in-with-wargaming": "使用默认登录",
+  "log-in-with-wargaming-to": "使用默认登录，以支持 {NAME}。",
+  "manage-subscription": "管理订阅",
+  "only-active-supporters-can-claim-the-discord": "只有活跃支持者可以领取 Discord 身份组。",
+  "or-choose-your-own-amount": "或自行选择金额",
+  "pay-what-you-want": "随心支付。",
+  "pick-an-amount": "选择金额或输入自定义金额，最低为每月€{min}。",
+  "re-sync-discord-role": "重新同步 Discord 身份组",
+  "secured-by-stripe": "由 Stripe 提供安全保障。随时可以取消。",
+  "show-me-anonymously-on-the": "匿名显示在排行榜上",
+  "support-subscriptions-are-coming-soon": "支援订阅即将推出。",
+  "supporter-role-added-on-discord": "Discord 上已添加支持者身份组！",
+  "you-are-a-supporter-thank": "你是支持者。感谢你让 {NAME} 保持运行。"
+}

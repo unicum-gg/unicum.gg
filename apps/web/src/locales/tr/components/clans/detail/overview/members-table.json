@@ -1,0 +1,11 @@
+{
+  "player": "Oyuncu",
+  "role": "Rol",
+  "battles": "Savaşlar",
+  "joined": "Katıldı",
+  "period": "30g {metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

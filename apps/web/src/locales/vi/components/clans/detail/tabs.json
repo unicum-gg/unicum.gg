@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Tổng quan",
+    "tanks": "Xe tăng",
+    "videos": "Video",
+    "tournaments": "Tour đấu",
+    "manage": "Quản lý"
+  },
+  "section-count": "{section} ({count})"
+}

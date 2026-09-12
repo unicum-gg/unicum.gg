@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "每场平均得分",
+  "general-parameters": "基本战斗数据",
+  "metric-progression": "{metric}进展",
+  "not-enough-history-on-this": "这辆坦克的历史记录还不够。过去90天内至少需要两次快照才能绘制曲线。",
+  "record-score": "最高战斗数据",
+  "updated": "更新"
+}

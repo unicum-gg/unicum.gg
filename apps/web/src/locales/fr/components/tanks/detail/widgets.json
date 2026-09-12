@@ -1,0 +1,12 @@
+{
+  "slot": "Emplacement {n}",
+  "slot-filled": "Emplacement {n} : {name}",
+  "consumable-slot": "Emplacement de consommable {n}",
+  "consumable-slot-filled": "Emplacement de consommable {n} : {name}",
+  "level": "Niveau {n}",
+  "stock": "Stock",
+  "specialize": "Cliquez pour spécialiser cet emplacement.",
+  "clear-specialization": "Cliquez pour supprimer la spécialisation de cet emplacement.",
+  "crew-skills": "Compétences de l’équipage",
+  "shell-aria": "{name} : {damage} dégâts, {penetration} mm de pénétration"
+}

@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rang {rank} na ljestvici {board}",
+  "board": {
+    "advances": "Rejting napredovanja u Utvrdi",
+    "skirmish-t10": "Rejting okršaja nivoa X",
+    "skirmish-t6": "Rejting okršaja nivoa VI",
+    "skirmish-t8": "Rejting okršaja nivoa VIII"
+  }
+}

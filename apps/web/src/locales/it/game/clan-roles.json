@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Ufficiale Reclutatore",
+  "personnel_officer": "Ufficiale Risorse Umane",
+  "quartermaster": "Tesoriere",
+  "executive_officer": "Ufficiale esecutivo",
+  "recruit": "Recluta",
+  "private": "Soldato",
+  "commander": "Comandante",
+  "reservist": "Riservista",
+  "combat_officer": "Ufficiale di Combattimento",
+  "junior_officer": "Sottufficiale",
+  "intelligence_officer": "Ufficiale Intelligence"
+}

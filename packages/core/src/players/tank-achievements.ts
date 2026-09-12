@@ -3,7 +3,7 @@ import {
   playerTankAchievementsByRegion,
   type PlayerAchievement,
 } from "@unicum.gg/shared";
-import type { Region } from "@unicum.gg/wargaming";
+import type { Region, WgLanguage } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
 import { cachedInRedis } from "@unicum.gg/core/redis";
 import { wg } from "@unicum.gg/core/wargaming/client";
@@ -249,9 +249,10 @@ export async function getTankAwards(
   playerId: number,
   accountId: number,
   tankId: number,
+  language?: WgLanguage,
 ): Promise<PlayerAchievement[] | null> {
   const [catalog, counts] = await Promise.all([
-    getCatalog(region),
+    getCatalog(region, language),
     getTankCounts(region, playerId, accountId, tankId),
   ]);
   if (!counts) return null;

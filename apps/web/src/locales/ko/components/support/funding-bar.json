@@ -1,0 +1,18 @@
+{
+  "caught-up": "완전히 충당되었습니다. 감사합니다. 남는 금액은 처리량 확대와 새로운 기능에 사용됩니다.",
+  "covered-label": "지원된",
+  "covered-sentence": "후원자들이 지금까지 지출한 {spent} 중 {received}을 충당했습니다.",
+  "days-out-of-pocket": "{days}일 동안 자비 부담",
+  "from-supporter-one": "후원자 {count}명으로부터",
+  "from-supporters": "후원자 {count}명으로부터",
+  "gap-growing": "월 {amount}을 추가하면 격차가 커지지 않습니다.",
+  "goal": "목표 {amount}",
+  "of-that-total": "전체 중",
+  "pledges-cover": "현재 후원 약정으로 월 비용을 충당할 수 있습니다.",
+  "raised-amount": "모금된 {amount}",
+  "raised-label": "모금된",
+  "run-at-a-loss": "{name}은(는) {since}부터 적자로 운영되고 있습니다.",
+  "run-rate": "월 운영비: 약정 {pledged}/월, 운영 비용 {cost}/월",
+  "spent-since-launch": "출시 후 지출",
+  "to-catch-up": "완전히 따라잡으려면 {amount}"
+}

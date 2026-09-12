@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/format";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { ClanName } from "@/components/entity/clan-name";
 import { clanIdentityFromRow } from "@/components/entity/clan-identity";
@@ -15,13 +16,14 @@ import {
 import { cn } from "@/lib/utils";
 import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
@@ -35,6 +37,7 @@ export function TopClansList({
   metric,
   omitBoard,
   rankOffset = 0,
+  locale,
 }: {
   region: Region;
   results: TopClanByLanguageResult[];
@@ -48,12 +51,14 @@ export function TopClansList({
   // Global rank of the first row (the page offset), so paginated pages keep the
   // true leaderboard rank instead of restarting at 1.
   rankOffset?: number;
+  locale: string;
 }) {
+  const { t } = useTranslation("components/clans/list/top-clans-list");
+  const { t: tCol } = useTranslation("components/columns");
   if (results.length === 0) {
     return (
       <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-        No clans match this filter yet.
-      </div>
+        {t("no-clans-match-this-filter")}</div>
     );
   }
   const colorFor = COLOR_FOR_METRIC[metric];
@@ -72,10 +77,10 @@ export function TopClansList({
       <TableHeader>
         <TableRow>
           <TableHead className="w-12 text-center!">#</TableHead>
-          <TableHead>Clan</TableHead>
-          <TableHead className="w-24 text-center!">Members</TableHead>
+          <TableHead>{t("clan")}</TableHead>
+          <TableHead className="w-24 text-center!">{tCol("members")}</TableHead>
           <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
-            <GlossaryLabel>WR</GlossaryLabel>
+            <GlossaryLabel>{t("wr")}</GlossaryLabel>
           </TableHead>
           <TableHead className="w-24 text-right!">
             <GlossaryLabel label={RATING_METRIC_LABEL[metric]}>
@@ -122,7 +127,7 @@ export function TopClansList({
                 />
               </TableCell>
               <TableCell className="text-center text-muted-foreground tabular-nums">
-                {intFmt.format(r.members_count)}
+                {numberFormat(locale, INT_FORMAT).format(r.members_count)}
               </TableCell>
               <TableCell
                 className={cn(
@@ -130,7 +135,7 @@ export function TopClansList({
                   r.winrate != null && RATING_COLOR_CLASS[winrateColor(r.winrate)],
                 )}
               >
-                {r.winrate != null ? pctFmt.format(r.winrate) : "—"}
+                {r.winrate != null ? numberFormat(locale, PCT_FORMAT).format(r.winrate) : "—"}
               </TableCell>
               <TableCell
                 className={cn(
@@ -138,7 +143,7 @@ export function TopClansList({
                   colorFor(r.avg_value),
                 )}
               >
-                {intFmt.format(r.avg_value)}
+                {numberFormat(locale, INT_FORMAT).format(r.avg_value)}
               </TableCell>
             </TableRow>
           );

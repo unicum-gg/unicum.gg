@@ -1,0 +1,11 @@
+{
+  "date": "Datum",
+  "featured-tournament": "Utvald turnering",
+  "format": "Format",
+  "n-of-the-roster-were-in-the-clan": "{count} av laguppställningen var i klanen",
+  "no-tournament-matches-the-current": "Ingen turnering matchar de aktuella filtren.",
+  "played-as": "Spelad som",
+  "result": "Resultat",
+  "status": "Status",
+  "tier": "Nivå"
+}

@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} バフされた",
+  "n-tanks": "{count, plural, other {#両の戦車}}",
+  "nerfed": "{count} ナーフされた",
+  "no-tank-changes-have-been": "戦車の変更はまだ記録されていません。Wargamingが戦車のバランスを調整すると、各更新の強化と弱体化がここに表示されます。",
+  "update": "更新 {version}"
+}

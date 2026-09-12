@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Bitwy",
+  "no-votes": "nie głosów",
+  "rated-higher": "W ocenach lepszych graczy wypada o {stars} gwiazdek wyżej niż w ocenach reszty serwera. Tu opłaca się wiedzieć, co się robi.",
+  "rated-lower": "W ocenach lepszych graczy wypada o {stars} gwiazdek niżej niż w ocenach reszty serwera. Dobrze wygląda, dopóki nie trzeba od niego czegoś wymagać.",
+  "votes": "{count} głosów",
+  "votes-one": "{count} głos"
+}

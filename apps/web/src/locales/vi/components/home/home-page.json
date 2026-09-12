@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Người chơi hàng đầu · 24 giờ qua"
+    },
+    "week": {
+      "title": "Người chơi hàng đầu · 7 ngày qua"
+    }
+  },
+  "rating-scale": {
+    "title": "Thang đánh giá"
+  },
+  "community": {
+    "title": "Tham gia cộng đồng",
+    "heading": "Kết nối với người chơi WoT",
+    "description": "Tham gia Discord của chúng tôi để trò chuyện về thống kê WoT, yêu cầu tính năng và báo lỗi. Hoặc truy cập GitHub để xem mã nguồn và đóng góp.",
+    "discord": "Tham gia Discord",
+    "github": "Xem trên GitHub"
+  },
+  "features": {
+    "title": "Bạn sẽ tìm thấy gì ở đây",
+    "profiles": {
+      "title": "Hồ sơ người chơi",
+      "description": "Thống kê chi tiết với biến động tổng thể và trong 24 giờ, 7 ngày, 30 ngày, WN7, WN8, WNX và Xếp hạng Cá nhân."
+    },
+    "clans": {
+      "title": "Trang bang hội",
+      "description": "Bảng thành viên với xếp hạng, hoạt động gần đây, mô tả và thông tin Clan."
+    },
+    "history": {
+      "title": "Lịch sử bang hội",
+      "description": "Dòng thời gian đầy đủ của mọi Clan mà một người chơi từng tham gia, cùng vai trò và ngày tháng."
+    },
+    "live": {
+      "title": "Cập nhật trực tiếp",
+      "description": "Người chơi được theo dõi được làm mới trong nền mỗi 24 giờ thông qua hệ thống ảnh chụp nhanh."
+    },
+    "leaderboards": {
+      "title": "Bảng xếp hạng",
+      "description": "Người chơi hàng đầu (24 giờ, 7 ngày, mọi thời gian) và Các Clan hàng đầu xếp hạng theo WNX, được tính từ các ảnh chụp nhanh của chúng tôi."
+    },
+    "open-source": {
+      "title": "Mã nguồn mở · AGPL",
+      "description": "Mã nguồn trên GitHub. Xem, phân nhánh, đóng góp. Không quảng cáo, chỉ phân tích khi bạn chọn tham gia."
+    }
+  },
+  "quick-start": {
+    "title": "Bắt đầu nhanh",
+    "search": {
+      "title": "🔍 Tìm người chơi hoặc Clan",
+      "description": "Nhấn {shortcut} để mở tìm kiếm, sau đó nhập tên người chơi hoặc thẻ Clan."
+    },
+    "region": {
+      "title": "🌍 Chuyển khu vực",
+      "description": "Sử dụng bộ chọn {selector} trên thanh điều hướng. Bảng xếp hạng sẽ cập nhật tương ứng."
+    },
+    "leaderboards": {
+      "title": "🏆 Xem bảng xếp hạng",
+      "description": "Người chơi hàng đầu (24 giờ, 7 ngày, mọi thời gian) và Các Clan hàng đầu xếp hạng theo WNX trung bình, được tính từ các ảnh chụp nhanh của chúng tôi."
+    },
+    "colors": {
+      "title": "📊 Đọc màu sắc",
+      "description": "WR, WN7, WN8 và WNX dùng chung màu cấp (cam → xanh lá → xanh lục lam → tím). Xem thang màu ở trên."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

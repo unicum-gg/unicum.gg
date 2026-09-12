@@ -1,0 +1,7 @@
+{
+  "firing": "Střelba municí {shell}, {pen} mm. Změnit výstřel",
+  "no-such-round": "{mark}: toto dělo ji nemá, úhly tedy nastavte sami",
+  "own-round": "{mark}: vlastní munice tohoto děla, včetně všech údajů",
+  "treat-it-as": "Považovat za",
+  "treat-it-as-mark": "Považovat za {mark}"
+}

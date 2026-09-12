@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Estadísticas de World of Tanks: {tank} ({region}), tanque de nivel {tier} de {nation}",
+    "description": "Especificaciones de World of Tanks para el Tanque {tank} ({region}): blindaje, potencia de fuego, movilidad, módulos, tripulación y modificaciones de campo de este vehículo de {nation} de nivel {tier}."
+  },
+  "performances": {
+    "title": "Rendimiento: {tank} ({region}), estadísticas del servidor y mejores jugadores",
+    "description": "Rendimiento en World of Tanks: {tank} ({region}), con los promedios del servidor de porcentaje de victorias, daño y asistencia, los mejores jugadores con este tanque de nivel {tier} de {nation} y los valores esperados de WN8 y WNX."
+  },
+  "marks": {
+    "title": "Marcas de excelencia y maestría: {tank} ({region})",
+    "description": "Requisitos de las marcas de excelencia y las insignias de maestría en World of Tanks: {tank} ({region}), junto con su historial para este tanque de nivel {tier} de {nation}."
+  },
+  "history": {
+    "title": "Historial de cambios, mejoras y debilitamientos: {tank} ({region})",
+    "description": "Todos los cambios de características a lo largo de las actualizaciones de World of Tanks: {tank}. Incluye, versión por versión, los ajustes al alza y a la baja de la potencia de fuego, la movilidad, la supervivencia y el camuflaje que Wargaming aplicó a este tanque de nivel {tier} de {nation}."
+  },
+  "videos": {
+    "title": "Videos de partidas: {tank} ({region})",
+    "description": "Mira {tank} en acción: batallas sugeridas por la comunidad con este tanque de nivel {tier} de {nation}, cada una abierta justo en el momento en que se juega e indicando el mapa y el resultado de la partida."
+  },
+  "community": {
+    "title": "Reseñas de jugadores y valoración de la comunidad: {tank} ({region})",
+    "description": "Qué opinan los jugadores sobre {tank}: la valoración de la comunidad sobre cinco, desglosada según el nivel de juego de los votantes y comparada con el rendimiento real de este tanque de nivel {tier} de {nation}, además de reseñas escritas por cuentas que han disputado batallas con él."
+  }
+}

@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import { VEHICLE_CLASS_LABEL, VEHICLE_CLASSES, type VehicleMeta, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
@@ -7,8 +9,8 @@ import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import {
   avgCell,
   bestIndex,
-  dec2Fmt,
-  intFmt,
+  DEC2_FORMAT,
+  INT_FORMAT,
   type MetricCell,
   type MetricRow,
   numCell,
@@ -65,6 +67,8 @@ export function BucketTab({
   wn8Fallback: Map<string, WN8Expected>;
   bucketKey: BucketKey;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/compare/bucket-tab");
 
   const data = useMemo(() => {
     const slotBuckets = slots.map((s) =>
@@ -78,8 +82,7 @@ export function BucketTab({
   if (data.keys.length === 0) {
     return (
       <p className="p-4 text-sm text-muted-foreground">
-        Not enough tank data to compare.
-      </p>
+        {t("not-enough-tank-data-to")}</p>
     );
   }
 
@@ -115,7 +118,7 @@ export function BucketTab({
           t.length > 0 ? computeWNX(t, wnxExpected) : null,
         );
         const wn8MetricCells: MetricCell[] = wn8s.map((v) =>
-          ratingCell(v, wn8Color),
+          ratingCell(v, wn8Color, locale),
         );
         const headerWinners = bestIndex(wn8MetricCells, "higher");
 
@@ -123,47 +126,47 @@ export function BucketTab({
           {
             label: "Battles",
             kind: "higher",
-            cells: aggs.map((a) => numCell(a.battles, intFmt)),
+            cells: aggs.map((a) => numCell(a.battles, locale, INT_FORMAT)),
           },
           {
             label: "Win rate",
             kind: "higher",
-            cells: aggs.map((a) => winratePctCell(a.wins, a.battles)),
+            cells: aggs.map((a) => winratePctCell(a.wins, a.battles, locale)),
           },
           {
             label: "WN7",
             kind: "higher",
-            cells: wn7s.map((v) => ratingCell(v, wn7Color)),
+            cells: wn7s.map((v) => ratingCell(v, wn7Color, locale)),
           },
           {
             label: "WN8",
             kind: "higher",
-            cells: wn8s.map((v) => ratingCell(v, wn8Color)),
+            cells: wn8s.map((v) => ratingCell(v, wn8Color, locale)),
           },
           {
             label: "WNX",
             kind: "higher",
-            cells: wnxs.map((v) => ratingCell(v, wnxColor)),
+            cells: wnxs.map((v) => ratingCell(v, wnxColor, locale)),
           },
           {
             label: "Avg damage",
             kind: "higher",
-            cells: aggs.map((a) => avgCell(a.damageDealt, a.battles)),
+            cells: aggs.map((a) => avgCell(a.damageDealt, a.battles, locale)),
           },
           {
             label: "Avg frags",
             kind: "higher",
-            cells: aggs.map((a) => avgCell(a.frags, a.battles, dec2Fmt)),
+            cells: aggs.map((a) => avgCell(a.frags, a.battles, locale, DEC2_FORMAT)),
           },
           {
             label: "Avg spots",
             kind: "higher",
-            cells: aggs.map((a) => avgCell(a.spotted, a.battles, dec2Fmt)),
+            cells: aggs.map((a) => avgCell(a.spotted, a.battles, locale, DEC2_FORMAT)),
           },
           {
             label: "Avg XP",
             kind: "higher",
-            cells: aggs.map((a) => avgCell(a.xp, a.battles)),
+            cells: aggs.map((a) => avgCell(a.xp, a.battles, locale)),
           },
         ];
 

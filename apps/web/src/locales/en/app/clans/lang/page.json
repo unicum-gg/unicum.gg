@@ -1,0 +1,6 @@
+{
+  "title": "Top {language} World of Tanks clans ({region})",
+  "description": "{name} {region} clan leaderboard for clans that declared {language} as one of their languages, ranked by WNX.",
+  "og-title": "Top {language} clans",
+  "og-subtitle": "{region} leaderboard"
+}

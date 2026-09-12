@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, type MouseEvent } from "react";
+import { useLocale } from "@onruntime/translations/react";
+import { Interpolate } from "@/components/interpolate";
+import { joinNames } from "@/lib/list-format";
+import { useTranslation } from "@/hooks/use-translation";
 
 const HHMM = (min: number) => {
   const m = ((min % 1440) + 1440) % 1440;
@@ -26,6 +30,8 @@ export function BoostSchedulePreview({
   blockMin: number;
   reserves: { type: string; name: string; percent: number | null }[];
 }) {
+  const { t } = useTranslation("components/clans/detail/boost-schedule");
+  const { locale } = useLocale();
   const blocks: { start: number; end: number }[] = [];
   if (blockMin > 0) {
     for (let t = windowStart; t < windowEnd; t += blockMin) {
@@ -50,19 +56,26 @@ export function BoostSchedulePreview({
     <div className="flex flex-col gap-2">
       <div className="text-xs text-fd-muted-foreground">
         {reserves.length === 0 || blocks.length === 0 ? (
-          "Pick a reserve to preview the schedule."
+          t("pick-a-reserve")
         ) : (
-          <>
-            On your active days, it activates at{" "}
-            <span className="font-medium text-fd-foreground">
-              {fireTimes.join(", ")}
-            </span>{" "}
-            (each lasts {Math.round(blockMin / 60)}h), covering{" "}
-            <span className="font-medium text-fd-foreground">
-              {HHMM(windowStart)}-{HHMM(lastEnd)}
-            </span>{" "}
-            once at least the online threshold is met.
-          </>
+          /* One sentence with three holes rather than five fragments: the
+             order of "at X, covering Y" is not English's in every language. */
+          <Interpolate
+            template={t("schedule")}
+            values={{
+              times: (
+                <span className="font-medium text-fd-foreground">
+                  {joinNames(fireTimes, locale)}
+                </span>
+              ),
+              hours: Math.round(blockMin / 60),
+              window: (
+                <span className="font-medium text-fd-foreground">
+                  {HHMM(windowStart)}-{HHMM(lastEnd)}
+                </span>
+              ),
+            }}
+          />
         )}
       </div>
 

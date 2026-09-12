@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Топ <accent>гульцы</accent>",
+    "language": "Лепшыя гульцы на <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Табліца лідараў рэгіёна {region}, упарадкаваная паводле {metric} за ўвесь час, мінімум 20 000 баёў.",
+    "language": "{region} гульцы, чый вызначаны набор моваў у гісторыя клана ўключае {language}, з рэйтынгам паводле {metric} (мінімум 10 000 баі).",
+    "strict": "{region} гульцы, чый вызначаны набор моваў у гісторыя клана выключна {language}, з рэйтынгам паводле {metric} (мінімум 10 000 баі)."
+  },
+  "board": {
+    "all": "Найлепшыя {count} гульцоў па {metric}",
+    "language": "Найлепшыя {count} гульцоў з мовай {language} па {metric}",
+    "strict": "Найлепшыя {count} гульцоў выключна з мовай {language} па {metric}"
+  },
+  "modes": {
+    "overall": "У цэлым"
+  },
+  "columns": {
+    "player": "Игрок"
+  },
+  "strict-toggle": "Суровая",
+  "any-toggle": "Усякі",
+  "all-languages": "Усё мовы",
+  "battles": "Бої",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

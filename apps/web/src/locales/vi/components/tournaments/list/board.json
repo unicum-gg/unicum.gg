@@ -1,0 +1,14 @@
+{
+  "date": "Ngày",
+  "featured-tournament": "Giải đấu nổi bật",
+  "format": "Định dạng",
+  "mode": "Chế độ",
+  "no-tournament-matches-the-current": "Không có giải đấu nào phù hợp với các bộ lọc hiện tại.",
+  "nothing-here-right-now-wargaming": "Hiện chưa có gì ở đây. Wargaming mở các giải đấu mới mỗi ngày, nên danh sách này sẽ tự động được cập nhật lại.",
+  "prize": "Giải thưởng",
+  "region-tournaments": "Giải đấu {region} ({count})",
+  "status": "Trạng thái",
+  "teams": "Đội",
+  "tier": "Cấp",
+  "tournament": "Giải đấu"
+}

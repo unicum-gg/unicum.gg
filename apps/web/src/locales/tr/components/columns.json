@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "player": "Oyuncu",
+  "members": "Üyeler",
+  "battles": "Savaşlar",
+  "avg-damage": "Ortalama hasar",
+  "avg-xp": "Ortalama XP",
+  "winrate": "Kazanma %",
+  "result": "Sonuç",
+  "tournament": "Turnuva",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

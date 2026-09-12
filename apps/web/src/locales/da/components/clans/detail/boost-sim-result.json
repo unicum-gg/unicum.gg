@@ -1,0 +1,11 @@
+{
+  "already-running": "kører allerede",
+  "in-window": "i vindue",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Ingen reserver valgt.",
+  "no-stock-ready": "ingen reserver klar",
+  "not-available": "ikke tilgængelig",
+  "threshold": "grænse ({online}/{min})",
+  "would-activate": "vil aktivere",
+  "would-not-fire": "Lige nu ville den ikke blive aktiveret."
+}

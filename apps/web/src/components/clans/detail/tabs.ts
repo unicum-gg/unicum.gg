@@ -87,13 +87,16 @@ export const CLAN_VIEWS: ClanView[] = [
   },
 ];
 
-/** Sections in top-row order, each pointing at the segment that opens it. */
-export const CLAN_SECTIONS: { id: ClanSection; label: string }[] = [
-  { id: ClanSection.Overview, label: "Overview" },
-  { id: ClanSection.Tanks, label: "Tanks" },
-  { id: ClanSection.Videos, label: "Videos" },
-  { id: ClanSection.Tournaments, label: "Tournaments" },
-  { id: ClanSection.Manage, label: "Manage" },
+/** Sections in top-row order. Ids only: the nav reads their wording from
+ * `components/clans/detail/tabs`. The MODES beside them keep their labels,
+ * because those are Wargaming's names for a game mode and are looked up in
+ * `game/vocabulary` instead. */
+export const CLAN_SECTIONS: ClanSection[] = [
+  ClanSection.Overview,
+  ClanSection.Tanks,
+  ClanSection.Videos,
+  ClanSection.Tournaments,
+  ClanSection.Manage,
 ];
 
 /** Modes in bottom-row order (only shown under Overview). */

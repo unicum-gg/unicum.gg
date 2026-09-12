@@ -1,0 +1,12 @@
+{
+  "before-update": "更新{version}前",
+  "common-test": "公共测试",
+  "in-common-test-not-released": "处于公共测试中，尚未发布",
+  "introduced": "引入",
+  "lifecycle": "生命周期",
+  "n-buffed": "{count}项增强",
+  "n-nerfed": "{count}项削弱",
+  "not-released-wargaming-can-still": "尚未发布。默认仍可在更新上线前更改或删除其中任何内容。",
+  "status": "状态",
+  "update": "更新 {version}"
+}

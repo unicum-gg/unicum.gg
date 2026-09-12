@@ -1,0 +1,8 @@
+{
+  "description": "Bawat torneo ng Wargaming sa {region}: ang araw-araw na mga ladder para sa gold, mga kampeonato ng clan, kung sino ang sumali at kung sino ang nanalo. Kumpletong mga bracket, score at roster.",
+  "live-many": "{count} mga torneo ang bukas o nilalaro sa {region} ngayon,",
+  "live-one": "{count} torneo ang bukas o nilalaro sa {region} ngayon,",
+  "no-live": "Araw-araw ginaganap ang mga torneo sa {region},",
+  "title": "Mga torneo ng World of Tanks na {tournaments}",
+  "what-you-find": "mula sa mga 1v1 ladder na naglalaro para sa gold hanggang sa mga kampeonato ng klano na naglalaro para sa pera. Buong mga bracket at score, bawat koponan kasama ang talaan nito, at ang panig kung saan nagsimula ang bawat isa, mapa kada mapa."
+}

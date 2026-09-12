@@ -1,6 +1,7 @@
 "use client";
 
 import { TwitchLogoIcon } from "@phosphor-icons/react/dist/ssr";
+import { useTranslation } from "@/hooks/use-translation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/login-button";
@@ -15,6 +16,7 @@ import { authClient, useSession } from "@/lib/auth-client";
  * Hidden once the account already has Twitch linked (nothing left to add).
  */
 export function AddChannelCta() {
+  const { t } = useTranslation("components/home/add-channel-cta");
   const { data: session, isPending } = useSession();
   const loggedIn = !!session?.user;
 
@@ -51,7 +53,7 @@ export function AddChannelCta() {
   const label = (
     <>
       <TwitchLogoIcon weight="bold" className="mr-1.5 size-4" />
-      Add your channel
+      {t("label")}
     </>
   );
 

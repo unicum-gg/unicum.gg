@@ -1,0 +1,8 @@
+{
+  "description": "{region}的每场默认锦标赛：每日金币排行榜、军团锦标赛、参赛者和获胜者。完整对阵表、比分和阵容。",
+  "live-many": "目前{region}有{count}场锦标赛开放或正在进行，",
+  "live-one": "目前{region}有{count}场锦标赛开放或正在进行，",
+  "no-live": "{region}每天都会举办锦标赛，",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "从争夺金币的 1v1 排行赛到争夺现金的军团锦标赛。完整对阵表和比分，每支队伍及其阵容，以及每队开始时所在的侧，逐地图显示。"
+}

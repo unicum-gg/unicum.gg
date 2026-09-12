@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Tilfeldige kamper for {nickname}",
+  "progression": "{metricLabel}-utvikling for {nickname}",
+  "solid-line-is-overall-matches": "Heltrukken linje er samlet {metricLabel}, som samsvarer med kolonnen Totalt ovenfor, og endres gradvis når nye kamper legges til. Stiplet linje er {metricLabel2} per økt, beregnet ut fra kampene som er spilt siden forrige registrering. Den viser gode og dårlige perioder. Linjefargen følger vurderingsnivået.",
+  "tanks-shaping-s-rating": "Stridsvogner som former vurderingen til {nickname}",
+  "tanks": "Kjøretøyene til {nickname}",
+  "stats": "{strongholdLabel}-statistikk for {nickname}"
+}

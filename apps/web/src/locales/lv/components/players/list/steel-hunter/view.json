@@ -1,0 +1,13 @@
+{
+  "heading": "Labākie spēlētāji režīmā <accent>{mode}</accent>",
+  "intro": "{mode} ir World of Tanks battle royale režīms. {region} līderu saraksts ir sakārtots pēc HR, ņemot vērā vismaz 100 {mode} kaujas.",
+  "board": "Labākie {count} spēlētāji režīmā {mode}",
+  "columns": {
+    "player": "Spēlētājs",
+    "battles": "Kaujas",
+    "survival": "Izdzīvošana",
+    "survival-percent": "Izdzīvošana %",
+    "damage": "Vid. bojājumi"
+  },
+  "scale-description": "Krāsu sliekšņi {mode} tabulai, kalibrēti pēc spēlētāju kopas ar vismaz 100 {mode} kaujām."
+}

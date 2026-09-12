@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   CheckIcon,
   CopyIcon,
@@ -57,6 +58,7 @@ export function ShareModal({
   setupParams?: string;
   setupLabel?: string;
 }) {
+  const { t } = useTranslation("components/share-modal");
   const [copied, setCopied] = useState(false);
   // The preview that has finished loading, rather than a "loaded" flag: the
   // flag had to be cleared from an effect every time the image changed, and it
@@ -81,10 +83,10 @@ export function ShareModal({
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
-      toast.success("Link copied");
+      toast.success(t("link-copied"));
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      toast.error("Could not copy link");
+      toast.error(t("could-not-copy-link"));
     }
   }
 
@@ -111,9 +113,9 @@ export function ShareModal({
   async function copyForDiscord() {
     try {
       await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-      toast.success("Copied, paste in Discord");
+      toast.success(t("copied-paste-in-discord"));
     } catch {
-      toast.error("Could not copy link");
+      toast.error(t("could-not-copy-link"));
     }
   }
 
@@ -184,7 +186,7 @@ export function ShareModal({
                   will hit, where the optimizer's server-side fetch does not. */}
               <Image
                 src={ogImagePath(ogImage)}
-                alt="Share preview"
+                alt={t("share-preview")}
                 width={1200}
                 height={630}
                 unoptimized
@@ -201,8 +203,7 @@ export function ShareModal({
               htmlFor="share-link"
               className="block text-xs font-medium text-muted-foreground"
             >
-              Link
-            </label>
+              {t("link")}</label>
             <div className="flex gap-2">
               <Input
                 id="share-link"
@@ -213,7 +214,7 @@ export function ShareModal({
               <button
                 type="button"
                 onClick={copyLink}
-                aria-label="Copy link"
+                aria-label={t("copy-link")}
                 className={cn(
                   "inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground",
                   copied && "text-fd-foreground",
@@ -239,8 +240,7 @@ export function ShareModal({
 
           <div className="space-y-2">
             <span className="block text-xs font-medium text-muted-foreground">
-              Share with
-            </span>
+              {t("share-with")}</span>
             <div className="grid grid-cols-3 gap-2">
               {targets.map((t) => (
                 <button

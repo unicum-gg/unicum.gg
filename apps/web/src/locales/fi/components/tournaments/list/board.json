@@ -1,0 +1,14 @@
+{
+  "date": "Päivämäärä",
+  "featured-tournament": "Ominaisuuskilpailu",
+  "format": "Muoto",
+  "mode": "Tila",
+  "no-tournament-matches-the-current": "Mikään turnaus ei vastaa nykyisiä suodattimia.",
+  "nothing-here-right-now-wargaming": "Täällä ei ole juuri nyt mitään. Wargaming avaa uusia turnauksia päivittäin, joten sisältö palautuu tänne automaattisesti.",
+  "prize": "Palkinto",
+  "region-tournaments": "Alueen {region} turnaukset ({count})",
+  "status": "Tila",
+  "teams": "Tiimit",
+  "tier": "Taso",
+  "tournament": "Turnaus"
+}

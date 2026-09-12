@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "تم نسخ رابط التجميعة",
+  "copy-build-link": "نسخ رابط التجميعة",
+  "could-not-copy-link": "يمكن تعذّر نسخ الرابط",
+  "include-setup": "تضمين الإعدادات",
+  "share-build": "مشاركة البناء",
+  "share-tank": "مشاركة {tank}",
+  "share-text": "اطّلع على تجميعة {tank} هذه على {app}"
+}

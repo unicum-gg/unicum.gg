@@ -1,0 +1,22 @@
+{
+  "search": "Ieškoti tarp {count} terminų",
+  "search-label": "Ieškoti žodynėlyje",
+  "all": "Visi",
+  "jump": "Pereiti prie raidės",
+  "empty": "Nė vienas terminas neatitinka „{query}“.",
+  "categories": {
+    "vehicles": "Technika",
+    "gunnery": "Šaudymas",
+    "armor": "Šarvai",
+    "mobility": "Mobilumas",
+    "vision": "Matymas",
+    "crew": "Įgula",
+    "progression": "Progresija",
+    "economy": "Ekonomika",
+    "ratings": "Reitingai",
+    "statistics": "Statistika",
+    "modes": "Mūšių režimai",
+    "tactics": "Taktika",
+    "slang": "Šnekta"
+  }
+}

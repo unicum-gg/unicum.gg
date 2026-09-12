@@ -1,0 +1,27 @@
+{
+  "placeholder": "Maghanap ng mga manlalaro, klano, tank, mapa o termino",
+  "type": "Uri ng paghahanap",
+  "types": {
+    "all": "Lahat",
+    "players": "Mga manlalaro",
+    "clans": "Mga klan",
+    "tanks": "MMga tangke",
+    "maps": "Mga mapa",
+    "glossary": "Glosaryo"
+  },
+  "sections": {
+    "players": "Mga manlalaro",
+    "clans": "Mga klan",
+    "tanks": "MMga tangke",
+    "maps": "Mga mapa",
+    "glossary": "Glosaryo",
+    "recent": "Kamakailan",
+    "favorites": "Mga paborito"
+  },
+  "searching": "Naghahanap…",
+  "errored": "May nangyaring mali. Subukan muli.",
+  "empty": "Walang nahanap na resulta",
+  "remove-recent": "Alisin sa mga kamakailan",
+  "add-favorite": "Idagdag sa paborito",
+  "remove-favorite": "Alisin sa paborito"
+}

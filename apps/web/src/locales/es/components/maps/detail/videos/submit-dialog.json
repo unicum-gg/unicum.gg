@@ -1,0 +1,17 @@
+{
+  "close": "Cerrar",
+  "format": "Formato",
+  "here": "aquí",
+  "in-the-queue": "Está en la cola y aparecerá {where} cuando un moderador lo haya revisado. Mientras tanto, el tuyo aparecerá atenuado en esa página.",
+  "log-in-to-suggest-a": "Inicia sesión para sugerir una táctica",
+  "on-map": "en {map}",
+  "players-per-team": "Jugadores por equipo",
+  "sending": "Enviando…",
+  "suggest": "Sugerir",
+  "suggest-a-tactic": "Sugerir una táctica",
+  "suggest-another": "Sugerir otro",
+  "suggestion-sent": "Sugerencia enviada",
+  "tier": "nivel",
+  "what-to-submit": "Una batalla competitiva, desde el segundo exacto en que empieza. El mapa comienza en {map} y avanza con el vídeo, ya que una sesión de clan recorre toda una rotación. El lado desde el que se jugó es el criterio que usa un comandante de batalla para buscarla, por eso se solicita en lugar de deducirlo.",
+  "what-was-played": "Lo que se jugó"
+}

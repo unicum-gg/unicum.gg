@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Връзката към конфигурацията е копирана",
+  "copy-build-link": "Копирай връзката към конфигурацията",
+  "could-not-copy-link": "Връзката не можа да бъде копирана",
+  "include-setup": "Включи настройките",
+  "share-build": "Сподели build",
+  "share-tank": "Сподели {tank}",
+  "share-text": "Виж тази конфигурация на {tank} в {app}"
+}

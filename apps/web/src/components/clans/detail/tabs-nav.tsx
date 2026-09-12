@@ -1,6 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import Link from "@/components/link";
 import type { MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -11,6 +14,7 @@ import {
   clanModeHref,
   clanSectionHref,
 } from "./tabs";
+import { useTranslation } from "@/hooks/use-translation";
 
 // Returns true for a plain left click (the case we intercept for client-side
 // nav). Modifier and middle clicks fall through so the anchor opens a new tab
@@ -77,27 +81,42 @@ export function ClanSectionNav({
   // either way, so nothing appears and then vanishes.
   videoCount?: number;
 }) {
+  const { locale } = useLocale();
   // Videos is shown even at zero, unlike the count-gated Tanks tab: an empty
   // video tab is an invitation for a clan's first tactic, not a dead end, and
   // the empty page is noindexed so it never competes as thin content.
-  const sections = CLAN_SECTIONS;
+  const { t } = useTranslation("components/clans/detail/tabs");
+
+  // A count rides the label only where one is known: Tanks always carries it,
+  // Videos only once there is something to count.
+  function label(id: ClanSection, locale: string): string {
+    const name = t(`sections.${id}`);
+    const count =
+      id === ClanSection.Tanks && tankCount !== undefined
+        ? tankCount
+        : id === ClanSection.Videos && videoCount
+          ? videoCount
+          : null;
+    return count === null
+      ? name
+      : t("section-count", {
+          section: name,
+          count: numberFormat(locale).format(count),
+        });
+  }
 
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
-      {sections.map((s) => (
+      {CLAN_SECTIONS.map((id) => (
         <NavAnchor
-          key={s.id}
-          href={clanSectionHref(basePath, s.id)}
-          active={section === s.id}
+          key={id}
+          href={clanSectionHref(basePath, id)}
+          active={section === id}
           onActivate={() => {
-            if (section !== s.id) onSelect(s.id);
+            if (section !== id) onSelect(id);
           }}
         >
-          {s.id === ClanSection.Tanks && tankCount !== undefined
-            ? `${s.label} (${tankCount.toLocaleString("en-US")})`
-            : s.id === ClanSection.Videos && videoCount
-              ? `${s.label} (${videoCount.toLocaleString("en-US")})`
-              : s.label}
+          {label(id, locale)}
         </NavAnchor>
       ))}
     </nav>
@@ -115,6 +134,8 @@ export function ClanModeNav({
   mode: ClanMode;
   onSelect: (mode: ClanMode) => void;
 }) {
+  const { t: tGame } = useTranslation("game/vocabulary");
+
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
       {CLAN_MODES.map((m) => (
@@ -124,7 +145,7 @@ export function ClanModeNav({
           active={mode === m.id}
           onActivate={() => onSelect(m.id)}
         >
-          {m.label}
+          {tGame(`clan-modes.${m.id}`)}
         </NavAnchor>
       ))}
     </nav>

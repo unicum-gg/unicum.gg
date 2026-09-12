@@ -1,0 +1,60 @@
+{
+  "columns-label": "Kolumner",
+  "groups": {
+    "general": "Allmän",
+    "combat": "Strid"
+  },
+  "columns": {
+    "battles": {
+      "label": "Strider",
+      "tip": "Totalt antal Strider spelade med Tank"
+    },
+    "count": {
+      "label": "Antal",
+      "tip": "Antal spårade spelare i urvalet"
+    },
+    "rating": {
+      "label": "Betyg (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Vinnande hastighet med Tank"
+    },
+    "playerWr": {
+      "label": "Spelar WR",
+      "tip": "Genomsnitt för total Vinnande hastighet bland spelare som kör den"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Genomsnittlig skada per strid"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Förhållande mellan dödade och dödsfall"
+    },
+    "assists": {
+      "label": "Assister",
+      "tip": "Genomsnitt för assisterad Skada"
+    },
+    "hitPct": {
+      "label": "Träff %",
+      "tip": "Träffar / Skott"
+    },
+    "penPct": {
+      "label": "Pen %",
+      "tip": "Pansargenomslag / Träffar"
+    },
+    "spots": {
+      "label": "Spottade",
+      "tip": "Genomsnitt för Spottade per strid"
+    },
+    "blocked": {
+      "label": "Blockerat",
+      "tip": "Genomsnittlig skada som Pansar har Blockerat"
+    },
+    "survival": {
+      "label": "Överlevnad",
+      "tip": "Dela av Överlevda strider"
+    }
+  }
+}

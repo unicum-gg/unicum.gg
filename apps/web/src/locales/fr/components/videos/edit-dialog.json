@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Corrigez tout ce qui est erroné, y compris le véhicule. L’enregistrement renvoie la vidéo dans la file de modération. Si elle est déjà publiée, elle est retirée jusqu’à sa prochaine approbation.",
+  "correct-a-suggestion": "Corriger une suggestion",
+  "could-not-load-that-suggestion": "Impossible de charger cette suggestion. Réessayez dans un moment.",
+  "link-expired": "Ce lien a expiré. Appuyez de nouveau sur Modifier sur la carte dans Discord pour en obtenir un nouveau.",
+  "loading": "Chargement…",
+  "log-in": "Se connecter",
+  "log-in-with-the-account": "Connectez-vous avec le compte qui a proposé cette vidéo pour la corriger.",
+  "no-suggestion-with-that-id": "Aucune suggestion ne possède cet identifiant.",
+  "not-yours-to-correct": "Cette suggestion n’est pas la vôtre à corriger."
+}

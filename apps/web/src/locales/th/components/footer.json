@@ -1,0 +1,25 @@
+{
+  "tagline": "สร้างขึ้นเพื่อชุมชน World of Tanks สถิติฟรีสำหรับผู้เล่น แคลน รถถัง และแผนที่ทุกแห่งใน EU, NA และเอเชีย",
+  "columns": {
+    "leaderboards": "ตารางคะแนน",
+    "tanks": "รถถัง",
+    "maps": "แผนที่",
+    "integrations": "การเชื่อมต่อ",
+    "project": "โปรเจกต์"
+  },
+  "links": {
+    "top-tanks": "รถถังอันดับต้น ๆ",
+    "bot": "บอท Discord",
+    "mcp": "MCP เซิร์ฟเวอร์",
+    "docs": "เอกสาร API",
+    "badges": "เหรียญตรา",
+    "glossary": "พจนานุกรม",
+    "coverage": "ความครอบคลุม",
+    "support": "สนับสนุนเรา",
+    "source": "ซอร์สโค้ด",
+    "status": "สถานะ",
+    "discord": "Discord"
+  },
+  "disclaimer": "ไม่มีส่วนเกี่ยวข้องกับ Wargaming",
+  "cookies": "จัดการคุกกี้"
+}

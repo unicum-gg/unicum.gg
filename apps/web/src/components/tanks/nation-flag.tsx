@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { Region, nationFilterFlagUrl, nationWavingFlagUrl } from "@unicum.gg/wargaming";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 // Natural size of every filter-<nation>.png on WG CDN.
 const NATURAL_W = 29;
@@ -37,6 +40,11 @@ export function NationFlag({
   // waving emblem used on the tank detail hero.
   variant?: "filter" | "flag";
 }) {
+  // Wargaming's own name for the nation, read from its API into `game/nations`.
+  // `nationLabel` stays the English fallback for a nation the API has not named
+  // yet, which is what a new one looks like on the day it ships.
+  const { t: tNations } = useTranslation("game/nations");
+  const name = tNations(nation) === nation ? nationLabel(nation) : tNations(nation);
   if (!nation) return null;
   if (variant === "flag") {
     // The waving-flag emblem WG's tankopedia detail page shows next to the
@@ -45,8 +53,8 @@ export function NationFlag({
     return (
       <Image
         src={nationWavingFlagUrl(region, nation)}
-        alt={nationLabel(nation)}
-        title={nationLabel(nation)}
+        alt={name}
+        title={name}
         width={0}
         height={0}
         sizes="32px"
@@ -57,8 +65,8 @@ export function NationFlag({
   return (
     <Image
       src={nationFilterFlagUrl(region, nation)}
-      alt={nationLabel(nation)}
-      title={nationLabel(nation)}
+      alt={name}
+      title={name}
       width={NATURAL_W}
       height={NATURAL_H}
       className={cn("inline-block h-4 w-auto align-middle", className)}

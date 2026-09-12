@@ -1,5 +1,8 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 import {
@@ -24,7 +27,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 const COLOR_FN: Record<RatingMetric, (v: number) => RatingColor> = {
   [RatingMetric.Wn7]: wn7Color,
@@ -64,6 +67,14 @@ export function PlayerActivityChart({
   metric: RatingMetric;
   metricLabel: string;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation(
+    "components/players/detail/sessions/activity-chart",
+  );
+  // `GRANULARITY_NOUN` holds keys of the sessions index namespace, which is
+  // where the same nouns are already read from beside this chart.
+  const { t: tSessions } = useTranslation("components/players/detail/sessions/index");
+  const { locale } = useLocale();
   const colorFn = COLOR_FN[metric];
 
   const data = useMemo(() => {
@@ -73,8 +84,8 @@ export function PlayerActivityChart({
       const rating = s ? s[metric] : null;
       return {
         period,
-        label: sessionAxisLabel(period, granularity),
-        full: sessionLabel(period, granularity),
+        label: sessionAxisLabel(period, granularity, locale),
+        full: sessionLabel(period, granularity, locale, t),
         battles: s?.battles ?? 0,
         rating,
         winrate: s ? s.winrate : null,
@@ -84,7 +95,7 @@ export function PlayerActivityChart({
             : "var(--fd-muted-foreground)",
       };
     });
-  }, [sessions, granularity, metric, colorFn]);
+  }, [sessions, granularity, metric, colorFn, locale, t]);
 
   const config = useMemo(
     () => ({ battles: { label: "Battles" } }) satisfies ChartConfig,
@@ -95,7 +106,10 @@ export function PlayerActivityChart({
     <ChartContainer
       config={config}
       className="aspect-auto h-48 w-full"
-      aria-label={`Battles played per ${GRANULARITY_NOUN[granularity]}, coloured by ${metricLabel}`}
+      aria-label={t("chart-label", {
+        granularity: tSessions(GRANULARITY_NOUN[granularity]),
+        metric: metricLabel,
+      })}
     >
       <BarChart data={data} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
         <XAxis
@@ -121,12 +135,12 @@ export function PlayerActivityChart({
               formatter={(value, _name, item) => {
                 const rating = item?.payload?.rating as number | null;
                 const battles = Number(value);
-                if (battles === 0) return <span>No battles</span>;
+                if (battles === 0) return <span>{t("no-battles")}</span>;
                 return (
                   <span>
-                    {intFmt.format(battles)} battles
+                    {t("battles", { count: num(INT_FORMAT).format(battles) })}
                     {rating != null
-                      ? `, ${intFmt.format(rating)} ${metricLabel}`
+                      ? `, ${num(INT_FORMAT).format(rating)} ${metricLabel}`
                       : ""}
                   </span>
                 );

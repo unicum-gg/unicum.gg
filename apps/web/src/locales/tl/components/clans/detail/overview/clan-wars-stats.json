@@ -1,0 +1,21 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Kabuuan",
+    "day": "Huling 24h",
+    "week": "Huling 7d",
+    "month": "Huling 30d"
+  },
+  "sections": {
+    "territory": "Teritoryo",
+    "t10": "Antas X",
+    "t8": "Antas VIII",
+    "t6": "Antas VI"
+  },
+  "rows": {
+    "provinces": "Mga probinsya",
+    "elo": "ELO",
+    "battles": "Mga labanan",
+    "winrate": "Win rate"
+  }
+}

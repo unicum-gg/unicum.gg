@@ -1,0 +1,22 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Kaikkiaan",
+    "day": "Viimeiset 24h",
+    "week": "Viimeiset 7pv",
+    "month": "Viimeiset 30pv"
+  },
+  "sections": {
+    "elo": "Taso X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Taso X (7v7)",
+    "t8": "{skirmish} Taso VIII (7v7)",
+    "t6": "{skirmish} Taso VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Taisteluita",
+    "winrate": "Voittoaste"
+  }
+}

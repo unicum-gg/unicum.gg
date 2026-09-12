@@ -1,0 +1,9 @@
+{
+  "all": "सभी",
+  "camouflage-map": "{camouflage} मैप",
+  "modes": "{count, plural, one {# मोड} other {# मोड}}",
+  "no-maps-match-your-filters": "आपके फ़िल्टर से कोई मानचित्र मेल नहीं खाता।",
+  "search": "{count} मानचित्रों में खोजें",
+  "search-label": "मैप्स खोजें",
+  "special-map": "विशेष मैप"
+}

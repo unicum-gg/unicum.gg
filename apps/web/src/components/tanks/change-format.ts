@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/format";
 import {
   displaySpecValue,
   MECHANICS_PREFIX,
@@ -27,15 +28,15 @@ export type FormattedChange = {
   isBuff: boolean | null;
 };
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
-function fmt(value: number | null, digits?: number): string {
+function fmt(value: number | null, locale: string, digits?: number): string {
   if (value === null) return "—";
-  if (digits === undefined) return intFmt.format(value);
-  return value.toLocaleString("en-US", {
+  if (digits === undefined) return numberFormat(locale, INT_FORMAT).format(value);
+  return numberFormat(locale, {
     minimumFractionDigits: digits,
     maximumFractionDigits: digits,
-  });
+  }).format(value);
 }
 
 /**
@@ -60,7 +61,7 @@ function mechanicLabel(path: string): string {
     .join(" · ");
 }
 
-const trimFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 });
+const TRIM_FORMAT = { maximumFractionDigits: 3 } as const;
 
 /** A tier-XI ability parameter change. No universal buff/nerf direction (each
  * mechanic is bespoke), so it renders neutral: labelled before -> after, no
@@ -68,7 +69,7 @@ const trimFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 });
 function formatMechanicChange(
   field: string,
   previous: number | null,
-  next: number | null,
+  next: number | null, locale: string,
 ): FormattedChange {
   const before = previous === null ? null : Number(previous);
   const after = next === null ? null : Number(next);
@@ -80,12 +81,12 @@ function formatMechanicChange(
     field,
     label: mechanicLabel(field.slice(MECHANICS_PREFIX.length)),
     unit: undefined,
-    before: before === null ? "—" : trimFmt.format(before),
-    after: after === null ? "—" : trimFmt.format(after),
+    before: before === null ? "—" : numberFormat(locale, TRIM_FORMAT).format(before),
+    after: after === null ? "—" : numberFormat(locale, TRIM_FORMAT).format(after),
     delta:
       deltaNum === null || deltaNum === 0
         ? ""
-        : `${deltaNum > 0 ? "+" : ""}${trimFmt.format(deltaNum)}`,
+        : `${deltaNum > 0 ? "+" : ""}${numberFormat(locale, TRIM_FORMAT).format(deltaNum)}`,
     color: undefined,
     isBuff: null,
   };
@@ -94,10 +95,10 @@ function formatMechanicChange(
 export function formatSpecChange(
   field: string,
   previous: number | null,
-  next: number | null,
+  next: number | null, locale: string,
 ): FormattedChange | null {
   if (field.startsWith(MECHANICS_PREFIX)) {
-    return formatMechanicChange(field, previous, next);
+    return formatMechanicChange(field, previous, next, locale);
   }
   const meta = resolveTrackedField(field);
   if (!meta) return null;
@@ -125,14 +126,14 @@ export function formatSpecChange(
       ? Number((after - before).toFixed(digits ?? 0))
       : null;
   const delta =
-    deltaNum === null ? "" : `${deltaNum > 0 ? "+" : ""}${fmt(deltaNum, digits)}`;
+    deltaNum === null ? "" : `${deltaNum > 0 ? "+" : ""}${fmt(deltaNum, locale, digits)}`;
 
   return {
     field,
     label: meta.label,
     unit: meta.unit,
-    before: fmt(before, digits),
-    after: fmt(after, digits),
+    before: fmt(before, locale, digits),
+    after: fmt(after, locale, digits),
     delta,
     color,
     isBuff,

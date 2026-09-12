@@ -1,0 +1,9 @@
+{
+  "battle-time": "Csata időtartama",
+  "camouflage": "{camouflage} álcázás",
+  "mode": "Mód",
+  "n-random-events": "{count, plural, one {# véletlenszerű esemény} other {# véletlenszerű események}}",
+  "random-events": "Véletlenszerű események",
+  "size": "Méret",
+  "team-size": "Csapatméret"
+}

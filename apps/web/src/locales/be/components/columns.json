@@ -1,0 +1,14 @@
+{
+  "clan": "Клан",
+  "player": "Игрок",
+  "members": "Члены",
+  "battles": "Бої",
+  "avg-damage": "Сярэдні ўрон",
+  "avg-xp": "Сярэдні XP",
+  "winrate": "Перамогі, %",
+  "result": "Рэзультат",
+  "tournament": "Турнір",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

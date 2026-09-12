@@ -1,0 +1,11 @@
+{
+  "closes": "Tắt {when}",
+  "map-pool": "Bể bản đồ",
+  "place": "Thứ hạng",
+  "prize": "Giải thưởng",
+  "prizes": "Giải thưởng",
+  "qualified": "Đã đủ điều kiện ({count})",
+  "register": "Đăng ký",
+  "tournaments": "Tour đấu",
+  "winner": "{count, plural, other {Winner}}"
+}

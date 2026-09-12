@@ -1,0 +1,9 @@
+{
+  "all": "전체",
+  "camouflage-map": "{camouflage} 지도",
+  "modes": "{count, plural, other {#개 모드}}",
+  "no-maps-match-your-filters": "필터와 일치하는 지도가 없습니다.",
+  "search": "지도 {count}개 중 검색",
+  "search-label": "지도 검색",
+  "special-map": "특별 지도"
+}

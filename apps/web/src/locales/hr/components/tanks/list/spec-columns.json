@@ -1,0 +1,162 @@
+{
+  "columns-label": "Stupci",
+  "groups": {
+    "firepower": "Vatrena moć",
+    "gun-handling": "Upravljanje topom",
+    "mobility": "Pokretljivost",
+    "survivability": "Vitalnost",
+    "other": "Ostalo"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Šteta po minuti"
+    },
+    "damage": {
+      "label": "Šteta",
+      "tip": "Alpha šteta"
+    },
+    "moduleDamage": {
+      "label": "Šteta modula"
+    },
+    "splashRadius": {
+      "label": "Polumjer eksplozije"
+    },
+    "reload": {
+      "label": "Punjenje",
+      "tip": "Punjenje (cijeli spremnik za automatske punjače)"
+    },
+    "rof": {
+      "label": "Brzina paljbe",
+      "tip": "Granata po minuti"
+    },
+    "intraClipReload": {
+      "label": "Punjenje unutar spremnika",
+      "tip": "Vrijeme između hitaca u spremniku (automatski punjači)"
+    },
+    "penetration": {
+      "label": "Probojnost",
+      "tip": "Probojnost (mm), zadana granata"
+    },
+    "caliber": {
+      "label": "Kalibar",
+      "tip": "Kalibar granate (mm)"
+    },
+    "shellVelocity": {
+      "label": "Brzina granate",
+      "tip": "Brzina granate (m/s)"
+    },
+    "accuracy": {
+      "label": "Točnost",
+      "tip": "Raspršenje na 100 m (manje je bolje)"
+    },
+    "aimTime": {
+      "label": "Vrijeme ciljanja"
+    },
+    "dispMoving": {
+      "label": "Raspršenje pri kretanju",
+      "tip": "Faktor raspršenja tijekom kretanja"
+    },
+    "dispTankTraverse": {
+      "label": "Raspršenje pri okretanju tenka"
+    },
+    "dispTurretTraverse": {
+      "label": "Raspršenje pri okretanju kupole"
+    },
+    "dispAfterShot": {
+      "label": "Raspršenje nakon paljbe"
+    },
+    "dispWhileDamaged": {
+      "label": "Raspršenje dok je oštećen"
+    },
+    "gunArc": {
+      "label": "Kut zakretanja topa",
+      "tip": "Vodoravni luk okretanja topa"
+    },
+    "depression": {
+      "label": "Spuštanje / podizanje topa",
+      "tip": "Spuštanje / podizanje topa"
+    },
+    "speed": {
+      "label": "Brzina (naprijed / natrag)",
+      "tip": "Maksimalna brzina naprijed / natrag (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Okretanje trupa"
+    },
+    "turretTraverse": {
+      "label": "Okretanje kupole"
+    },
+    "enginePower": {
+      "label": "Snaga",
+      "tip": "Snaga motora (KS)"
+    },
+    "powerWeight": {
+      "label": "Snaga/Masa",
+      "tip": "KS po toni"
+    },
+    "terrainHard": {
+      "label": "Tvrda podloga",
+      "tip": "Otpor terena na tvrdom tlu (manje je bolje)"
+    },
+    "terrainMedium": {
+      "label": "Srednja terenska"
+    },
+    "terrainSoft": {
+      "label": "Meka podloga"
+    },
+    "health": {
+      "label": "Izdržljivost",
+      "tip": "Pojmovi"
+    },
+    "engineHealth": {
+      "label": "Izdržljivost motora"
+    },
+    "engineFireChance": {
+      "label": "Vjerojatnost požara motora"
+    },
+    "hullArmorFront": {
+      "label": "Oklop trupa (sprijeda)",
+      "tip": "Oklop prednjeg dijela trupa (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Oklop kupole (sprijeda)",
+      "tip": "Oklop prednjeg dijela kupole (mm)"
+    },
+    "trackArmor": {
+      "label": "Oklop gusjenica"
+    },
+    "trackHealth": {
+      "label": "Izdržljivost gusjenica"
+    },
+    "trackRepairTime": {
+      "label": "Vrijeme popravka gusjenice"
+    },
+    "ammoRackHealth": {
+      "label": "Izdržljivost stalka za streljivo"
+    },
+    "weight": {
+      "label": "Masa"
+    },
+    "viewRange": {
+      "label": "Vidokrug",
+      "tip": "Domet pogleda (m)"
+    },
+    "radioRange": {
+      "label": "Domet radija",
+      "tip": "Domet signala (m)"
+    },
+    "camoStill": {
+      "label": "Kamuflaža u mirovanju"
+    },
+    "camoMoving": {
+      "label": "Kamuflaža u kretanju"
+    },
+    "camoStillFiring": {
+      "label": "Kamuflaža u mirovanju nakon paljbe"
+    },
+    "camoMovingFiring": {
+      "label": "Kamuflaža u kretanju nakon paljbe"
+    }
+  }
+}

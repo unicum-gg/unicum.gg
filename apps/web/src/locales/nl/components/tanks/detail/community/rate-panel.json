@@ -1,0 +1,13 @@
+{
+  "battles-overall": "In totaal {battles} gevechten",
+  "checking-your-record-on-this": "Je resultaten met deze tank controleren...",
+  "fetching-your-garage": "Je garage wordt opgehaald",
+  "have-you-played": "Heb je met {tank} gespeeld?",
+  "more-to-go": "Nog {count} gevechten te gaan",
+  "more-to-go-one": "Nog {count} gevecht te gaan",
+  "sign-in-to-rate-it": "Log in om hem te beoordelen",
+  "sign-in-with-your-wargaming-account-to-rate-": "Log in met je Wargaming-account om hem te beoordelen. We bekijken je resultaten met precies deze tank. Zo voorkomen we dat deze pagina een peiling wordt onder mensen die er nog nooit mee hebben gereden.",
+  "signed-in-on": "Ingelogd op {region}",
+  "too-few-battles": "Je hebt {played} gevechten gespeeld met {tank}. We vragen om {required} gevechten voordat een stem meetelt, zodat dit het gemiddelde blijft van mensen die er daadwerkelijk mee spelen.",
+  "you-have-not-played": "Je hebt niet met {tank} gespeeld"
+}

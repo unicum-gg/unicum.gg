@@ -1,0 +1,19 @@
+{
+  "active-days": "Días activos",
+  "add-workflow": "Agregar flujo de trabajo",
+  "connect-discord": "Conectar Discord",
+  "discord-notifications": "Notificaciones de Discord",
+  "each-workflow-activates-its-reserves": "Cada flujo de trabajo activa sus reservas durante una franja horaria cuando haya suficientes miembros en una sesión de juego activa. Se ejecuta en tu cuenta, no hace falta que estés conectado. Añade tantos como necesites.",
+  "enabled": "Activada",
+  "from": "Desde",
+  "get-a-discord-message-in": "Recibe un mensaje de Discord en el canal que elijas cada vez que se active una bonificación, para que todo el clan sepa que está activa.",
+  "log-in-with-wargaming-to": "Iniciar sesión con Wargaming para configurarlo",
+  "min-online": "Min en línea",
+  "officers": "Oficiales",
+  "only-an-officer-of-this": "Solo un oficial de este clan puede configurarlo.",
+  "schedule-preview": "Vista previa del horario",
+  "set-your-hours-and-reserves": "Configura tus horarios y reservas una sola vez. Las bonificaciones se activarán automáticamente a su hora, aunque no haya nadie para pulsar el botón.",
+  "stronghold-boosts": "refuerzos de fortaleza",
+  "times-are-in-your-timezone": "Las horas se muestran en {tz}, tu zona horaria.",
+  "to": "A"
+}

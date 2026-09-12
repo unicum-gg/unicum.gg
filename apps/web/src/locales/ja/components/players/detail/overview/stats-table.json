@@ -1,0 +1,34 @@
+{
+  "stat": "統計",
+  "rows": {
+    "battles": "戦闘数",
+    "tier": "Tier",
+    "wins": "勝利",
+    "losses": "敗北",
+    "draws": "引き分け",
+    "survived": "生還率",
+    "destroyed": "撃破した車両",
+    "destruction-ratio": "撃破効率",
+    "spotted": "発見した車両",
+    "damages": "ダメージ",
+    "track-damages": "履帯のダメージ",
+    "spotting-damages": "索敵性によるダメージ",
+    "assisting-damages": "支援によるダメージ",
+    "combined-damages": "合計ダメージ",
+    "base-capture": "拠点占領",
+    "base-defense": "基地防御",
+    "experience": "EXP",
+    "hit-rate": "命中率",
+    "personal-rating": "パーソナルレーティング",
+    "wtr": "World of Tanksレーティング",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "計",
+    "day": "過去24時間",
+    "week": "過去7日",
+    "month": "過去30日"
+  }
+}

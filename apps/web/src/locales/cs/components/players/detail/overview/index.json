@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistiky režimu Náhodné bitvy: {nickname}",
+  "progression-title": "Postup ukazatele {metric}: {nickname}",
+  "lift-drag-title": "Tanky ovlivňující Hodnocení: {nickname}",
+  "progression-blurb": "Plná čára zobrazuje celkovou hodnotu {metric} (odpovídá sloupci Celkem výše), která se s rostoucím počtem Bitev pomalu mění. Přerušovaná čára zobrazuje hodnotu {metric} za každou herní relaci, vypočítanou z Bitev odehraných od předchozího snímku dat. Ukazuje série dobrých i špatných výkonů. Barva čáry odpovídá úrovni Hodnocení.",
+  "progression-empty": "Zatím není k dispozici dostatek historie. K vykreslení křivky potřebujeme alespoň jeden snímek dat. Vraťte se brzy."
+}

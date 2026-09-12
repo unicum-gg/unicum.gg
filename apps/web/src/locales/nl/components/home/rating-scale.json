@@ -1,0 +1,21 @@
+{
+  "title": "Beoordelingsschaal",
+  "description": "Kleurgrenzen die op de hele site worden gebruikt voor het winstpercentage en de in de navigatiebalk geselecteerde ratingmaatstaf.",
+  "tier": "niveau",
+  "tiers": {
+    "top": "Top",
+    "excellent": "Uitstekend",
+    "super": "Super",
+    "very-good": "Zeer goed",
+    "good": "Goed",
+    "average": "Gemiddeld",
+    "below-avg": "Onder gemiddeld",
+    "bad": "Slecht",
+    "very-bad": "Zeer slecht"
+  },
+  "rating-colors": "Rating kleuren",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

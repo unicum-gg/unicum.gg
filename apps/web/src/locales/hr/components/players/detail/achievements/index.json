@@ -1,0 +1,12 @@
+{
+  "achievements": "Dostignuća {nickname}",
+  "filter-all": "Sve",
+  "filter-both": "Oboje",
+  "filter-earned": "Zarađeno",
+  "filter-missing": "Nedostaje",
+  "filter-obtainable": "Dostupno za zaradu",
+  "filter-retired": "Povućeno",
+  "no-achievement-matches-these-filters": "Nijedno postignuće ne odgovara ovim filtrima.",
+  "search-achievements": "Traži Dostignuća",
+  "search-among-n-achievements": "Pretraži među {count} postignuća"
+}

@@ -17,15 +17,14 @@ import {
 } from "@/components/ui/select";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import UMAMI from "@/constants/umami";
 import {
   FeedbackTopic,
   MESSAGE_MAX_LENGTH,
   SENTIMENT_EMOJI,
-  SENTIMENT_LABELS,
   SENTIMENT_ORDER,
-  TOPIC_LABELS,
   type FeedbackBody,
   type FeedbackSentiment,
 } from "./schema";
@@ -40,6 +39,7 @@ const TOPICS = Object.values(FeedbackTopic);
  * in). Rendered only when the feature is configured (see the top-bar).
  */
 export function FeedbackWidget() {
+  const { t } = useTranslation("components/feedback/feedback-widget");
   const [open, setOpen] = useState(false);
   const [topic, setTopic] = useState<FeedbackTopic | "">("");
   const [sentiment, setSentiment] = useState<FeedbackSentiment | null>(null);
@@ -73,11 +73,11 @@ export function FeedbackWidget() {
         body: JSON.stringify(body),
       });
       if (!res.ok) throw new Error(String(res.status));
-      toast.success("Thanks for your feedback!");
+      toast.success(t("sent"));
       reset();
       setOpen(false);
     } catch {
-      toast.error("Could not send feedback. Please try again.");
+      toast.error(t("failed"));
     } finally {
       setBusy(false);
     }
@@ -90,25 +90,25 @@ export function FeedbackWidget() {
           type="button"
           className="shrink-0 cursor-pointer font-medium text-fd-muted-foreground transition-colors hover:text-fd-foreground"
         >
-          Feedback
+          {t("trigger")}
         </button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80 p-3">
         <div className="flex flex-col gap-2.5">
           <div className="text-sm font-medium text-fd-foreground">
-            Share your feedback
+            {t("title")}
           </div>
           <Select
             value={topic}
             onValueChange={(v) => setTopic(v as FeedbackTopic)}
           >
             <SelectTrigger className="w-full" size="sm">
-              <SelectValue placeholder="Select a topic..." />
+              <SelectValue placeholder={t("topic-placeholder")} />
             </SelectTrigger>
             <SelectContent>
-              {TOPICS.map((t) => (
-                <SelectItem key={t} value={t}>
-                  {TOPIC_LABELS[t]}
+              {TOPICS.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {t(`topics.${option}`)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -117,7 +117,7 @@ export function FeedbackWidget() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             maxLength={MESSAGE_MAX_LENGTH}
-            placeholder="Your feedback..."
+            placeholder={t("message-placeholder")}
             className="min-h-24 resize-none text-sm"
           />
           <div className="flex items-center justify-between">
@@ -126,7 +126,7 @@ export function FeedbackWidget() {
                 <button
                   key={s}
                   type="button"
-                  aria-label={SENTIMENT_LABELS[s]}
+                  aria-label={t(`sentiments.${s}`)}
                   aria-pressed={sentiment === s}
                   onClick={() => setSentiment((cur) => (cur === s ? null : s))}
                   className={cn(
@@ -141,7 +141,7 @@ export function FeedbackWidget() {
               ))}
             </div>
             <Button size="sm" onClick={submit} disabled={!canSend}>
-              {busy ? <Spinner className="size-4" /> : "Send"}
+              {busy ? <Spinner className="size-4" /> : t("send")}
             </Button>
           </div>
         </div>

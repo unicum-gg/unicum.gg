@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "概览",
+    "tanks": "坦克",
+    "sessions": "会话",
+    "achievements": "成就",
+    "tournaments": "赛事",
+    "value": "价值"
+  },
+  "section-count": "{section}（{count}）",
+  "beta": "测试版"
+}

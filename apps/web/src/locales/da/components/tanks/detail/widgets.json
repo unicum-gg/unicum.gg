@@ -1,0 +1,12 @@
+{
+  "slot": "Plads {n}",
+  "slot-filled": "Plads {n}: {name}",
+  "consumable-slot": "Forbrugsplads {n}",
+  "consumable-slot-filled": "Forbrugsplads {n}: {name}",
+  "level": "Niveau {n}",
+  "stock": "Standard",
+  "specialize": "Klik for at specialisere denne plads.",
+  "clear-specialization": "Klik for at rydde specialiseringen af denne plads.",
+  "crew-skills": "Besætningsfærdigheder",
+  "shell-aria": "{name}: {damage} skade, {penetration} mm gennemtrængning"
+}

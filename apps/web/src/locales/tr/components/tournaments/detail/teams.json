@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "{size} oyuncunun {rated} puanlanan oyuncusu üzerinden ortalama",
+  "average-over-recent": "Son 30 gün içinde oynayan {size} oyuncunun {rated} oyuncusu üzerinden ortalama",
+  "metric-over-last-30-days": "Son 30 gün içindeki {metric}",
+  "n-confirmed": "{count} onaylandı",
+  "no-team-matches-the-current": "Mevcut filtrelerle eşleşen takım yok.",
+  "no-teams-recorded-yet-registrations": "Henüz takım kaydedilmedi. Kayıtlar, bu turnuva tamamen okunduğunda burada görünür. Bu, turnuva açıldıktan sonraki birkaç dakika içinde gerçekleşir.",
+  "none-played-in-30-days": "Bu kadrodakilerin hiçbiri son 30 gün içinde oynamadı",
+  "players": "Oyuncular",
+  "qualified": "Nitelikli",
+  "reward": "Ödül",
+  "team": "Ekip",
+  "teams": "Ekipler ({length})",
+  "wr": "WR"
+}

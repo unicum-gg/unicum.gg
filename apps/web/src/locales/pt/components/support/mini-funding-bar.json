@@ -1,0 +1,6 @@
+{
+  "label": "Financiado pela comunidade",
+  "funded": "{pct}% financiado",
+  "tooltip": "{received} de {goal} cobertos por apoiantes desde o lançamento",
+  "tooltip-loading": "Financiado pela comunidade, sem publicidade"
+}

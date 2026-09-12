@@ -1,0 +1,35 @@
+{
+  "heading": "Najbolji igrači u <accent>{mode}</accent>",
+  "intro": "{mode} je natjecateljski rangirani način 7 na 7 u igri World of Tanks na razini X. Ljestvica za regiju {region}, izravno iz plasmana same igre.",
+  "season": {
+    "range": "{start} do {end}",
+    "final": "konačni poredak",
+    "live": "sezona u tijeku",
+    "updated": "ažurirano {when}"
+  },
+  "board": "Najboljih {count} igrača načina {mode}",
+  "columns": {
+    "player": "Igrač",
+    "rank": "Rang",
+    "battles": "Bitke",
+    "rating": "Bodovi rejtinga"
+  },
+  "alias": "(kao {nickname})",
+  "ranks": {
+    "title": "Rangovi",
+    "meaning": "Značenje",
+    "tier": "Razina",
+    "intro": "Penješ se kroz činove načina {mode} pobjedama u bitkama. Svaka pobjeda dodjeljuje bodove rejtinga na temelju toga koliko si dobro igrao. {champion} je najviši čin koji možeš dosegnuti samo bodovima, a njegovo dosezanje stavlja te na ljestvicu. {legend} nije fiksni prag, već najbolje ocijenjeni dio igrača s činom {champion}, pa se prag mijenja ovisno o konkurenciji, a kod izjednačenja odlučuju odigrane bitke. Točni pragovi za {legend} i {champion} ovise o trenutačnoj sezoni i označeni su na ljestvici.",
+    "legend-blurb": "Igrači s činom {champion} i najvišim ocjenama. Igra ograničava broj na određen položaj na ljestvici svake sezone, pa se veličina mijenja prema sezoni i regiji, a ne prema fiksnom broju bodova. Ako padneš ispod posljednjeg igrača s činom {legend}, vraćaš se na {champion}.",
+    "champion-blurb": "Najviši čin koji možeš dosegnuti bodovima rejtinga i ulaz na ljestvicu. Svaki rangirani igrač ima barem čin {champion}."
+  },
+  "race": {
+    "title-live": "Što je potrebno sada",
+    "title-ended": "Kako je sezona prošla",
+    "legend-cutoff": "Prag za {legend}",
+    "champion-cutoff": "Prag za {champion}",
+    "ranked-players": "Rangirani igrači",
+    "rating-points": "bodovi rejtinga",
+    "rank-cutoffs": "Granice rangova"
+  }
+}

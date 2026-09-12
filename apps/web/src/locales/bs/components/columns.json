@@ -1,0 +1,14 @@
+{
+  "clan": "Klana",
+  "player": "Igrač",
+  "members": "Članovi",
+  "battles": "Bitke",
+  "avg-damage": "Prosječna šteta",
+  "avg-xp": "Prosječan XP",
+  "winrate": "Pobjede %",
+  "result": "Rezultat",
+  "tournament": "Turnir",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

@@ -1,0 +1,11 @@
+{
+  "closes": "Κλείσιμο {when}",
+  "map-pool": "Πίστα χαρτών",
+  "place": "Θέση",
+  "prize": "Βραβείο",
+  "prizes": "Βραβεία",
+  "qualified": "Προκρίθηκαν ({count})",
+  "register": "Εγγραφή",
+  "tournaments": "Τουρνουά",
+  "winner": "{count, plural, one {Νικητής} other {Νικητές}}"
+}

@@ -160,6 +160,10 @@ export const loadoutEquipment = z.object({
   description: z.string().meta({
     description: "The device's in-game description, from the client localization.",
   }),
+  descriptionKey: z.string().meta({
+    description:
+      "The client catalogue entry that description came from, which is not always the device's own key: a grade variant carries the base device's. A reader's language resolves the blurb through this.",
+  }),
   image: z.string().nullable(),
   grade: z
     .enum(["standard", "bond", "bounty", "bountyUpgraded", "experimental"])
@@ -291,6 +295,14 @@ export const skillNode = z.object({
   }),
   isFeature: z.boolean(),
   name: z.string(),
+  nameKey: z.string().meta({
+    description:
+      "The client key the name and description were resolved from, so a reader's language can resolve the same key.",
+  }),
+  descriptionValue: z.number().nullable().meta({
+    description:
+      "The figure filling the {value} hole in the description, as a magnitude the sentence's own wording gives a direction and a unit to.",
+  }),
   description: z.string().nullable(),
   image: z.string().nullable(),
   effects: z.array(

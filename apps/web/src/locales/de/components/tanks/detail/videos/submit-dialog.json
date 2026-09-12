@@ -1,0 +1,13 @@
+{
+  "assists": "Hilfen",
+  "close": "Schließen",
+  "damage": "Schaden",
+  "in-the-queue": "Es befindet sich in der Warteschlange und erscheint auf diesem Tab, sobald ein Moderator es geprüft hat.",
+  "optional": "(optional)",
+  "paste-a-youtube-link": "Füge einen YouTube-Link ein und lege dann den genauen Beginn des Gefechts fest. Jeder, der ihn öffnet, landet bei dieser Sekunde. Daher werden Vorschläge mit falschem Zeitstempel bei der Prüfung abgelehnt.",
+  "sending": "Senden…",
+  "suggest": "Vorschlagen",
+  "suggest-a-video": "Video vorschlagen",
+  "suggest-another": "Vorschlage einen anderen",
+  "suggestion-sent": "Vorschlag gesendet"
+}

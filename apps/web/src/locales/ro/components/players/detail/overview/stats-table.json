@@ -1,0 +1,34 @@
+{
+  "stat": "Stat",
+  "rows": {
+    "battles": "Lupte",
+    "tier": "nivel",
+    "wins": "Victorie",
+    "losses": "Înfrângeri",
+    "draws": "Remize",
+    "survived": "Lupte finalizate în acţiune",
+    "destroyed": "Tancuri distruse",
+    "destruction-ratio": "Raport vehicule distruse",
+    "spotted": "Tancuri observate",
+    "damages": "Daune",
+    "track-damages": "Daune de șenile",
+    "spotting-damages": "Daune de Observare",
+    "assisting-damages": "Daune de Asistență",
+    "combined-damages": "Daune combinate",
+    "base-capture": "Capturare bază",
+    "base-defense": "Apărare bază",
+    "experience": "Experienţă",
+    "hit-rate": "Rată de lovire",
+    "personal-rating": "Scor personal",
+    "wtr": "Clasament World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Total",
+    "day": "Ultimele 24h",
+    "week": "Ultimele 7d",
+    "month": "Ultimele 30d"
+  }
+}

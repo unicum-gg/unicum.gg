@@ -1,0 +1,6 @@
+{
+  "title": "Giocatori di World of Tanks online ({region})",
+  "description": "Quanti giocatori sono connessi in questo momento a ciascun server {region} di World of Tanks, con l’andamento della popolazione nelle ultime 24 ore, nell’ultima settimana e nell’ultimo anno, il record assoluto e gli orari di maggiore affluenza della settimana.",
+  "og-title": "Popolazione server",
+  "og-subtitle": "Giocatori online: {region}"
+}

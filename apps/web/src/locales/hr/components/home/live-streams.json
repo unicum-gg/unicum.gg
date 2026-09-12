@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Prikaži chat",
+    "hide": "Sakrij chat",
+    "show-streamers": "Prikaži streamere"
+  },
+  "heading": "{name}: statistika igrača, klana i tenkova u igri World of Tanks",
+  "hide": "Sakrij streamere",
+  "player": "Igrač",
+  "stream-language": "Jezik emitiranja · {name}",
+  "stream-language-alt": "Jezik prijenosa: {name}",
+  "theater": {
+    "enter": "Način teatra",
+    "exit": "Izađi iz kazališnog načina"
+  },
+  "title": "Najbolji igrači koji trenutačno prenose ·",
+  "viewer-count": "{count} gledatelja",
+  "viewers": "Gledatelji",
+  "watch": "Gledaj {nickname} na Twitchu"
+}

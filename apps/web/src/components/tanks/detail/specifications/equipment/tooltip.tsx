@@ -1,3 +1,6 @@
+import type { TranslateFunction } from "@onruntime/translations";
+import { statLabel } from "@/components/stat-label";
+import { useTranslation } from "@/hooks/use-translation";
 import type { EquipmentEffect } from "@unicum.gg/wargaming";
 import { CATEGORY, categoryColor, GRADE_LABEL, type Equipment } from "./category";
 import { CategoryGlyph } from "./category-glyph";
@@ -42,8 +45,20 @@ const ATTR_LABEL: Record<string, string> = {
   rotationFactor: "Terrain resistance",
 };
 
-function attrLabel(attribute: string): string {
-  return ATTR_LABEL[attribute] ?? attribute.replace("miscAttrs/", "");
+/**
+ * The name of the characteristic an equipment changes, in the reader's
+ * language.
+ *
+ * `ATTR_LABEL` stays the English source and the KEY side of the lookup: the
+ * wot-src attribute is what the payload carries, our English name is what the
+ * locale files are written from, so the namespace is keyed by that name slugged
+ * and two attributes that mean the same thing share one entry. An attribute we
+ * have no name for reads as its own bare key, which is what it did before.
+ */
+function attrLabel(attribute: string, t: TranslateFunction): string {
+  const label = ATTR_LABEL[attribute];
+  if (!label) return attribute.replace("miscAttrs/", "");
+  return statLabel(label, t);
 }
 
 /** A signed, human value for an effect level (a `mul` reads as a percentage,
@@ -68,9 +83,13 @@ export function EquipmentTooltip({
 }: {
   equip: Equipment;
   /** A note about what the next click does (mount / switch variant / remove). */
-  cycleHint?: string;
+  cycleHint?: { key: string; next?: string };
 }) {
-  const gradeLabel = GRADE_LABEL[equip.grade];
+  const { t } = useTranslation("components/tanks/detail/specifications/equipment/tooltip");
+  // The grade table stays the English source and the key side, like the
+  // attribute names above it.
+  const grade = GRADE_LABEL[equip.grade];
+  const gradeLabel = grade ? statLabel(grade, t) : undefined;
   return (
     <div className="w-56 space-y-2 text-xs">
       <div className="font-medium">{equip.name}</div>
@@ -94,7 +113,7 @@ export function EquipmentTooltip({
               {meta ? (
                 <CategoryGlyph category={c} className="size-3" color="#fff" />
               ) : null}
-              {meta?.label ?? c}
+              {meta ? t(`category.${c}`) : c}
             </span>
           );
         })}
@@ -103,13 +122,13 @@ export function EquipmentTooltip({
         <div className="space-y-0.5 border-t border-background/20 pt-1.5">
           {equip.effects.map((e) => (
             <div key={e.attribute} className="flex justify-between gap-3 tabular-nums">
-              <span className="text-background/60">{attrLabel(e.attribute)}</span>
+              <span className="text-background/60">{attrLabel(e.attribute, t)}</span>
               <span>
                 {fmtValue(e, e.base)}
                 {e.bonus !== e.base ? (
                   <span className="text-background/60">
                     {" "}
-                    ({fmtValue(e, e.bonus)} matched)
+                    {t("matched", { value: fmtValue(e, e.bonus) })}
                   </span>
                 ) : null}
               </span>
@@ -118,12 +137,11 @@ export function EquipmentTooltip({
         </div>
       ) : (
         <div className="border-t border-background/20 pt-1.5 text-background/60">
-          No stat effect modelled.
-        </div>
+          {t("no-stat-effect-modelled")}</div>
       )}
       {cycleHint ? (
         <div className="border-t border-background/20 pt-1.5 text-background/60">
-          {cycleHint}
+          {t(cycleHint.key, { next: cycleHint.next ?? "" })}
         </div>
       ) : null}
     </div>

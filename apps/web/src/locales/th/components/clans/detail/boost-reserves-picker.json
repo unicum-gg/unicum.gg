@@ -1,0 +1,6 @@
+{
+  "active-until": "ใช้งานจนถึง {tz}",
+  "n-left": "เหลือ {count}",
+  "no-reserves-in-stock-right": "ขณะนี้ไม่มีกำลังสำรองในคลัง",
+  "reserves-to-activate": "กำลังสำรองที่จะเปิดใช้งาน"
+}

@@ -1,0 +1,13 @@
+{
+  "assists": "도움",
+  "close": "닫기",
+  "damage": "피해량",
+  "in-the-queue": "대기열에 추가되었습니다. 관리자가 검토한 후 이 탭에 표시됩니다.",
+  "optional": "(선택 사항)",
+  "paste-a-youtube-link": "YouTube 링크를 붙여 넣은 다음 전투가 시작되는 정확한 순간을 설정하세요. 링크를 여는 모든 사람은 해당 초부터 보게 되므로 타임스탬프가 맞지 않는 제안은 리뷰에서 거부됩니다.",
+  "sending": "전송 중…",
+  "suggest": "제안",
+  "suggest-a-video": "영상 제안",
+  "suggest-another": "다른 제안하기",
+  "suggestion-sent": "제안이 전송됨"
+}

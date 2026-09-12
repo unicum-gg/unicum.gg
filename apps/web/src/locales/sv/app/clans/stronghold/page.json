@@ -1,0 +1,4 @@
+{
+  "title": "Toppklaner på nivå {tier} ({region})",
+  "description": "Topplista för klaner på nivå {tier} i {region}. Klanerna rangordnas efter SR (betyg för skärmytslingar), ELO, antal strider och segerprocent. Minst {battles} strider."
+}

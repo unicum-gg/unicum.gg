@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name}, клан World of Tanks ({region}), {members} чланови",
+    "description": "{name} [{tag}] na regionu {region}: {members} чланови, potpuna табела članova sa WN8 i WNX рејтинзима, nedavna aktivnost pridruživanja i napuštanja i istorija клана."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name}, статистика утврђења ({region})",
+    "description": "Učinak утврђења клана {name} [{tag}] na regionu {region}: рејтинзи okršaja i napredovanja, bitke i проценат победа za svakog člana."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name}, статистика klanskih ratova ({region})",
+    "description": "Učinak klanskih ratova клана {name} [{tag}] na regionu {region}: рејтинзи po članu, bitke i проценат победа širom kampanja na globalnoj mapi."
+  },
+  "tanks": {
+    "title": "[{tag}] {name}, Tenkovi ({region}), vozila клана",
+    "description": "Svako возило koje je igrao клан {name} [{tag}] na regionu {region}, sa bitkama, procentom pobeda i prosečnom štetom sabranim širom članova клана."
+  },
+  "manage": {
+    "title": "[{tag}] {name}, резерве утврђења ({region})",
+    "description": "Aktiviraj i zakaži резерве утврђења клана {name} [{tag}]. Samo za oficire."
+  },
+  "missing": {
+    "description": "[{tag}] клан World of Tanks na regionu {region}: табела članova sa WN8/WNX рејтинзима, aktivnost pridruživanja i napuštanja, nedavne bitke i potpuna istorija клана."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "already-running": "deja în execuție",
+  "in-window": "în fereastră",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Nu au fost selectate rezerve.",
+  "no-stock-ready": "fără rezerve disponibile",
+  "not-available": "nu este disponibil",
+  "threshold": "prag ({online}/{min})",
+  "would-activate": "ar activa",
+  "would-not-fire": "Momentan, nu s-ar activa."
+}

@@ -1,0 +1,12 @@
+{
+  "clans-history": "Historia klanów gracza {nickname}",
+  "clans-in-clans": "{totalClans} klanów · {timeInClansSeconds} w klanach",
+  "current": "obecny",
+  "duration": "Czas trwania",
+  "from": "Od",
+  "name": "Nazwa",
+  "no-clan-history": "Brak historii klanowej.",
+  "role": "Rola",
+  "tag": "Tag",
+  "to": "Do"
+}

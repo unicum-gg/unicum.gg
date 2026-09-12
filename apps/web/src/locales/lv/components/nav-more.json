@@ -1,0 +1,37 @@
+{
+  "label": "Vairāk",
+  "items": {
+    "tournaments": {
+      "label": "Turnīri",
+      "description": "Režģi, sastāvi un rezultāti katram reģionam"
+    },
+    "servers": {
+      "label": "Serveri",
+      "description": "Tiešsaistes spēlētāji tagad un laika gaitā"
+    },
+    "bot": {
+      "label": "Discord bots",
+      "description": "Spēlētāju, klanu un tanku statistika kā slīpsvītras komandas"
+    },
+    "mcp": {
+      "label": "MCP servers",
+      "description": "Savienot Claude, ChatGPT vai jebkuru MCP klientu"
+    },
+    "api": {
+      "label": "API",
+      "description": "Bezmaksas publiska REST API, atslēga nav nepieciešama"
+    },
+    "badges": {
+      "label": "Zīmes",
+      "description": "Katra nozīmīte, ko spēlētājs vai klans var nopelnīt, un kā to izdarīt"
+    },
+    "glossary": {
+      "label": "Vārdu krājums",
+      "description": "Katrs World of Tanks termins ar skaidrojumu"
+    },
+    "support": {
+      "label": "Atbalstiet mūs",
+      "description": "Palīdzi uzturēt {name} bezmaksas, atvērtu un bez reklāmām"
+    }
+  }
+}

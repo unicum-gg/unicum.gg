@@ -1,0 +1,7 @@
+{
+  "joined": "Katılma tarihi {date}",
+  "last-battle": "Son savaş {when}",
+  "never-played": "Hiç oynamadı",
+  "updated": "Güncellendi {when}",
+  "clan-role-joined": "{role} · {date} tarihinde katıldı"
+}

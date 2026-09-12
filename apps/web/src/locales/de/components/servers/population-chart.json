@@ -1,0 +1,4 @@
+{
+  "chart-label": "Spieler online pro Server in den letzten {range}",
+  "not-enough-recorded-yet-for": "Für diesen Zeitraum wurden noch nicht genügend Daten erfasst. Mit fortschreitender Datenerfassung wird das Diagramm vervollständigt."
+}

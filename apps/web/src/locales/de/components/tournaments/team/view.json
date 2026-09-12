@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Die Auslosung hat noch nicht stattgefunden. Die Begegnungen dieses Teams werden hier angezeigt, sobald das Turnier beginnt.",
+  "each-map-is-played-twice": "Jede Karte wird zweimal gespielt, einmal auf jeder Seite. Die letzte Karte entscheidet und wird nur einmal gespielt.",
+  "first-battle-at": "Erstes Gefecht: {when}",
+  "lost": "verloren",
+  "matches": "Spiele ({length})",
+  "never-played": "Dieses Team hat noch nie eine Begegnung gespielt. Es hatte sich angemeldet, wurde aber bei der Auslosung nicht berücksichtigt. Das passiert, wenn die Aufstellung nicht bestätigt wird.",
+  "no-maps-recorded": "Für diese Begegnung wurden keine Karten erfasst.",
+  "no-roster-recorded-for-this": "Für dieses Team wurde keine Aufstellung erfasst.",
+  "of-players-on-the-day": "{members} von {length} spieler an diesem Tag",
+  "played-on-uncatalogued": "Gespielt wurde auf {maps}, die der Kartenkatalog nicht tragen kann.",
+  "roster": "Aufstellung ({length})",
+  "stage-group": "{stage} · Gruppe {order}",
+  "team-1": "Team 1",
+  "team-2": "Team 2",
+  "tournaments": "Turniere",
+  "when-the-first-battle-started": "Beginn des ersten Gefechts",
+  "won": "Gewonnen"
+}

@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Vizualizācija",
+    "collision": "Sadursme",
+    "live": "Tiešraidē"
+  },
+  "centre": {
+    "on": "Nocentrēt transportlīdzekli",
+    "off": "Novietot atpakaļ ārpus centra"
+  },
+  "hull-down": {
+    "on": "Gremdēts",
+    "off": "Izlīdzināt transportlīdzekli"
+  },
+  "tracks": {
+    "on": "Iedarbināt kāpurķēdes",
+    "off": "Apturēt kāpurķēdes"
+  },
+  "textures": {
+    "on": "Augstas izšķirtspējas tekstūras",
+    "off": "Standarta tekstūras"
+  },
+  "reset": "Atjaunot skatu",
+  "style": "Izvēlēties stilu",
+  "style-worn": "Stils: {name}",
+  "search-styles": "Meklēt stilus",
+  "colours": "Ko nozīmē krāsas",
+  "cinematic": {
+    "off": "Kinematogrāfiskā kamera: izslēgta",
+    "auto": "Kinematogrāfiskā kamera: kad paliekat neaktīvs",
+    "on": "Kinematogrāfiskā kamera: vienmēr"
+  },
+  "open-tank": "Atvērt citu tanku",
+  "open-tank-placeholder": "Atvērt tanku...",
+  "more-actions": "Vairāk darbību",
+  "marks-meaning": {
+    "0": "Nav izcilības atzīmju",
+    "1": "Viena atzīme: priekšā 65% spēlētāju ar šo tanku",
+    "2": "Divas atzīmes: priekšā 85%",
+    "3": "Trīs atzīmes: priekšā 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Aizpildīt logu",
+      "leave": "Atpakaļ lapā"
+    },
+    "screen": {
+      "enter": "Aizpildīt ekrānu",
+      "leave": "Iziet no pilnekrāna režīma"
+    }
+  },
+  "marks-count": {
+    "0": "Nav izcilības atzīmju",
+    "one": "1 izcilības atzīme",
+    "other": "{count} izcilības atzīmes"
+  },
+  "compare-tank": "Salīdzināt ar citu tanku",
+  "compare-tank-placeholder": "Salīdzināt ar...",
+  "view-tooltips": {
+    "visual": "Tanks, kā to uzzīmē spēle",
+    "collision": "Cik bieza ir katra bruņu plāksne",
+    "live": "Ko darītu izvēlētais lādiņš"
+  },
+  "cinematic-tooltips": {
+    "off": "Kinematogrāfiskā kamera: izslēgta, skats paliek nekustīgs",
+    "auto": "Kinematogrāfiskā kamera: sāk darboties pēc 30 sekundēm neaktivitātes",
+    "on": "Kinematogrāfiskā kamera: vienmēr, no brīža, kad atlaižat vadību"
+  }
+}

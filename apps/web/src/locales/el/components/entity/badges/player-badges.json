@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1η θέση",
+    "2": "2η θέση",
+    "3": "3η θέση"
+  },
+  "streamer": "Streamer · παρακολουθήστε τον {name} στο Twitch",
+  "tournament": {
+    "one": "Νικηφόρο ρόστερ του {title}",
+    "many": "Σε {count} νικηφόρα ρόστερ, το καλύτερο {title}",
+    "featured": "{text} · επιλεγμένη διοργάνωση",
+    "unnamed": "ένα τουρνουά Wargaming"
+  },
+  "tournament-wins": "{count, plural, one {# νίκη σε τουρνουά} other {# νίκες σε τουρνουά}}",
+  "watch-on-twitch": "Παρακολουθήστε τον {name} στο Twitch",
+  "watch-on-twitch-viewers": "Παρακολουθήστε τον {name} στο Twitch · {viewers} θεατές"
+}

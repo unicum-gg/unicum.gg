@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Uma célula representa as vitórias da faixa nesse nível em relação às batalhas aí disputadas, considerando todos os veículos com que um jogador tenha disputado pelo menos {minBattles} batalhas. Assim, reflete o desempenho em cada nível dos jogadores que nele jogam. As células baseadas em menos de {TIERWINRATETHINCELL} batalhas são apresentadas de forma esbatida, pois podem variar por motivos não relacionados com a habilidade. As cores correspondem às mesmas faixas de taxa de vitórias usadas no resto do site.",
+  "cell-no-sample": "{where}, sem amostra",
+  "cell-winrate": "{where}, taxa de vitória de {winrate} em {battles} batalhas",
+  "metric-band": "Faixa de {metric}",
+  "nothing-recorded": "Ainda não há dados registados para {metric}. A grelha é reconstruída todas as noites.",
+  "over-battles-from-accounts": "{winrate} em {battles} batalhas de {players} contas",
+  "over-n-battles": "em {battles} batalhas",
+  "what-players-win-by-tier": "Taxa de vitórias por nível dos jogadores da faixa {label}"
+}

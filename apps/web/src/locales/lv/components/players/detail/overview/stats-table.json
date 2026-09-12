@@ -1,0 +1,34 @@
+{
+  "stat": "Statistika",
+  "rows": {
+    "battles": "Kaujas",
+    "tier": "Līmenis",
+    "wins": "Uzvaras",
+    "losses": "Zaudējumi",
+    "draws": "Neizšķirti",
+    "survived": "Kaujas, kurās izdzīvoja",
+    "destroyed": "Iznīcinātie tanki",
+    "destruction-ratio": "Iznīcināšanas koeficients",
+    "spotted": "Pamanītie tanki",
+    "damages": "Bojājumi",
+    "track-damages": "trakšu bojājumi",
+    "spotting-damages": "Atklāšanas bojājumi",
+    "assisting-damages": "palīdzības bojājumi",
+    "combined-damages": "apvienotie bojājumi",
+    "base-capture": "Bāzes ieņemšana",
+    "base-defense": "Bāzes aizsardzība",
+    "experience": "Pieredze",
+    "hit-rate": "Padevība",
+    "personal-rating": "Personīgais reitings",
+    "wtr": "World of Tanks vērtējums",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Kopā",
+    "day": "Pēdējās 24h",
+    "week": "Pēdējās 7d",
+    "month": "Pēdējās 30d"
+  }
+}

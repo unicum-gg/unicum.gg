@@ -1,0 +1,12 @@
+{
+  "added": "Přidáno",
+  "before-update": "Před provedením Aktualizovat pro verzi {version}",
+  "common-test": "Společný test",
+  "every-update-that-changed-this": "Všechna vydání Aktualizovat, která změnila tuto mapu, seřazená od nejnovějšího a načtená přímo z herního klienta.",
+  "in-the-game": "Ve hře",
+  "n-changes": "{count, plural, one {# změna} few {# změny} many {# změn} other {# změn}}",
+  "not-released-wargaming-can-still": "Dosud nevydáno. Wargaming může cokoli z toho ještě změnit nebo zrušit, než bude Aktualizovat vydáno.",
+  "removed": "Odstraněno",
+  "title": "Změny na mapě {map}",
+  "update": "Aktualizovat {version}"
+}

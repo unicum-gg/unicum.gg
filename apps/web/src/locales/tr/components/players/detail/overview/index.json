@@ -1,0 +1,7 @@
+{
+  "stats-title": "{nickname} adlı oyuncunun rastgele savaş istatistikleri",
+  "progression-title": "{nickname} adlı oyuncunun {metric} ilerlemesi",
+  "lift-drag-title": "{nickname} adlı oyuncunun puanını şekillendiren tanklar",
+  "progression-blurb": "Düz satır genel {metric} değeridir, yukarıdaki Toplam sütunuyla eşleşir ve yeni savaşlar biriktikçe yavaşça değişir. Kesikli satır, önceki anlık görüntüden bu yana oynanan savaşlardan hesaplanan savaş başına {metric} değeridir. İyi ve kötü serileri gösterir. Satır rengi puan kademesini izler.",
+  "progression-empty": "Henüz yeterli geçmiş yok. Eğriyi çizmek için en az bir anlık görüntüsüne ihtiyacımız var. Yakında tekrar kontrol et."
+}

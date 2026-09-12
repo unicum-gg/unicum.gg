@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -27,10 +29,10 @@ import { GRANULARITY_NOUN, sessionLabel } from "./labels";
 import { PlayerActivityChart } from "./activity-chart-lazy";
 import { PlayerSessionsTable } from "./table";
 
-const GRANULARITIES = [
-  { id: SessionGranularity.Daily, label: "Daily" },
-  { id: SessionGranularity.Weekly, label: "Weekly" },
-  { id: SessionGranularity.Monthly, label: "Monthly" },
+const GRANULARITY_IDS = [
+  SessionGranularity.Daily,
+  SessionGranularity.Weekly,
+  SessionGranularity.Monthly,
 ];
 
 /**
@@ -56,6 +58,8 @@ export function SessionsTab({
   granularity: SessionGranularity;
   onGranularity: (g: SessionGranularity) => void;
 }) {
+  const { t } = useTranslation("components/players/detail/sessions/index");
+  const { locale } = useLocale();
   const [storedMetric] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -73,15 +77,19 @@ export function SessionsTab({
           className="flex flex-wrap items-center justify-between gap-2 border-b border-fd-border"
         >
           <PanelTitle>
-            {nickname}&apos;s sessions
-            {loading ? "" : ` (${sessions.length})`}
+            {loading
+              ? t("title", { nickname })
+              : t("title-count", { nickname, count: sessions.length })}
           </PanelTitle>
           {/* Three ways to read the same battles, not three datasets: a week is
               recomputed from its own totals, never averaged from its days. The
               site's segmented switch, the same one the language boards use for
               Any/Strict. */}
           <SegmentedControl
-            segments={GRANULARITIES}
+            segments={GRANULARITY_IDS.map((id) => ({
+              id,
+              label: t(`granularity.${id}`),
+            }))}
             active={granularity}
             onSelect={onGranularity}
           />
@@ -91,10 +99,7 @@ export function SessionsTab({
             <TableSkeleton rail columns={SESSIONS_SKELETON_COLUMNS} rows={10} />
           ) : sessions.length === 0 ? (
             <p className={cn(styles.mutedDescription, "p-4")}>
-              No session yet. They appear once this account has been sampled
-              twice with battles in between, which happens on its own as it is
-              played.
-            </p>
+              {t("no-session-yet-they-appear")}</p>
           ) : (
             <>
               {/* The shape of the same rows the table lists: when they played
@@ -113,17 +118,16 @@ export function SessionsTab({
                   </MountOnVisible>
                 </div>
                 <p className="p-4 text-sm text-fd-muted-foreground">
-                  Bar height is battles played, colour is that{" "}
-                  {GRANULARITY_NOUN[granularity]}&apos;s{" "}
-                  {RATING_METRIC_LABEL[metric]}, in the same bands the site uses
-                  everywhere else.
-                </p>
+                  {t("bar-height-is-battles-played", {
+                    granularity: t(GRANULARITY_NOUN[granularity]),
+                    metric: RATING_METRIC_LABEL[metric],
+                  })}</p>
               </div>
               <PlayerSessionsTable
                 region={region}
                 sessions={sessions}
                 metric={metric}
-                dateLabel={(p) => sessionLabel(p, granularity)}
+                dateLabel={(p) => sessionLabel(p, granularity, locale, t)}
               />
             </>
           )}

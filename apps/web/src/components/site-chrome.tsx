@@ -7,7 +7,9 @@ import { Footer } from "@/components/footer";
 import { NavDebug } from "@/components/nav-debug";
 import { RatingMetricRoot } from "@/components/rating-metric-root";
 import { baseOptions } from "@/lib/layout.shared";
+import { isFeedbackEnabled } from "@/services/discord/feedback";
 import { unicum } from "@/services/sdk";
+import { DEFAULT_LOCALE } from "@/lib/translations";
 
 const NO_ANCHORS: GlossaryAnchorPayload = {
   terms: [],
@@ -21,7 +23,12 @@ const NO_ANCHORS: GlossaryAnchorPayload = {
 // is chrome-less so `/docs` can be standalone).
 export async function SiteChrome({
   children,
-}: Readonly<{ children: ReactNode }>) {
+  locale,
+}: Readonly<{
+  children: ReactNode;
+  /** The route's own segment, so the tooltips read the reader's glossary. */
+  locale?: string;
+}>) {
   const layoutProps = await baseOptions();
   // Loaded for the whole group rather than per section. It is ~15 KB of JSON
   // (4 KB on the wire) on every page, including the ones that name no term
@@ -36,7 +43,7 @@ export async function SiteChrome({
   // down for a decorative payload: the tooltips are what a failure may cost,
   // and nothing else.
   const anchors = await unicum.glossary
-    .anchors()
+    .anchors(locale ?? DEFAULT_LOCALE)
     .then((payload) => payload as GlossaryAnchorPayload)
     .catch((error: unknown) => {
       console.warn("[glossary] anchors unavailable, tooltips disabled:", error);
@@ -46,7 +53,7 @@ export async function SiteChrome({
     <>
       <NavDebug />
       <RatingMetricRoot />
-      <TopBar />
+      <TopBar feedbackEnabled={isFeedbackEnabled()} />
       <HomeLayout {...layoutProps}>
         <GlossaryAnchorProvider payload={anchors}>
           <div id="page-content" className="flex flex-col">

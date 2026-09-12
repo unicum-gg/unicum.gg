@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Η διαδικασία πληρωμής ακυρώθηκε.",
+  "claim-your-supporter-role-on-discord": "Αποκτήστε τον ρόλο υποστηρικτή σας στο Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Δεν ήταν δυνατή η προσθήκη του ρόλου στο Discord. Δοκιμάστε ξανά.",
+  "could-not-open-the-billing-portal": "Δεν ήταν δυνατό το άνοιγμα της πύλης χρέωσης.",
+  "could-not-start-checkout-please-try-again": "Δεν ήταν δυνατή η έναρξη της πληρωμής. Δοκιμάστε ξανά.",
+  "could-not-update-your-preference": "Δεν ήταν δυνατή η ενημέρωση της προτίμησής σας.",
+  "log-in-with-wargaming": "Σύνδεση με Wargaming",
+  "log-in-with-wargaming-to": "Συνδεθείτε με Wargaming για να υποστηρίξετε το {NAME}.",
+  "manage-subscription": "Διαχείριση συνδρομής",
+  "only-active-supporters-can-claim-the-discord": "Μόνο οι ενεργοί υποστηρικτές μπορούν να αποκτήσουν τον ρόλο στο Discord.",
+  "or-choose-your-own-amount": "Ή επιλέξτε το δικό σας ποσό",
+  "pay-what-you-want": "Πληρώστε ό,τι θέλετε.",
+  "pick-an-amount": "Επιλέξτε ένα ποσό ή πληκτρολογήστε το δικό σας, από €{min}/μήνα.",
+  "re-sync-discord-role": "Επανασυγχρονισμός ρόλου Discord",
+  "secured-by-stripe": "Ασφαλίζεται από τη Stripe. Ακυρώστε οποτεδήποτε.",
+  "show-me-anonymously-on-the": "Εμφάνισή μου ανώνυμα στο βάθρο",
+  "support-subscriptions-are-coming-soon": "Οι συνδρομές υποστήριξης έρχονται σύντομα.",
+  "supporter-role-added-on-discord": "Ο ρόλος υποστηρικτή προστέθηκε στο Discord!",
+  "you-are-a-supporter-thank": "Είστε υποστηρικτής. Ευχαριστούμε που κρατάτε το {NAME} ενεργό."
+}

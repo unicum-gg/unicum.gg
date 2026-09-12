@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Panoramica",
+    "tanks": "Carri",
+    "videos": "Video",
+    "tournaments": "Tornei",
+    "manage": "Gestisci"
+  },
+  "section-count": "{section} ({count})"
+}

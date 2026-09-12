@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname}s klanhistorik",
+  "clans-in-clans": "{totalClans} klaner · {timeInClansSeconds} i klaner",
+  "current": "nuværende",
+  "duration": "Varighed",
+  "from": "Fra",
+  "name": "Navn",
+  "no-clan-history": "Ingen klanhistorik.",
+  "role": "Rolle",
+  "tag": "Tag",
+  "to": "Til"
+}

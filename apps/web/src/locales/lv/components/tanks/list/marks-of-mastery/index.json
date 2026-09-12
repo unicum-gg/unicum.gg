@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. klase",
+      "tip": "3. Klase: XP, kas vajadzīgs, lai pārspētu 50% spēlētāju"
+    },
+    "class2": {
+      "label": "2. klase",
+      "tip": "2. Klase: XP, kas vajadzīgs, lai pārspētu 80% spēlētāju"
+    },
+    "class1": {
+      "label": "1. klase",
+      "tip": "1. Klase: XP, kas vajadzīgs, lai pārspētu 95% spēlētāju"
+    },
+    "ace": {
+      "label": "Ace Tankers",
+      "tip": "Dūža tankists: XP, kas vajadzīgs, lai pārspētu 99% spēlētāju"
+    }
+  },
+  "rows-per-page": "Rindas uz lapu",
+  "previous-page": "Iepriekšējā lapa",
+  "page": "Lapa {current} / {totalPages}",
+  "next-page": "Nākamā lapa",
+  "all": "Visus"
+}

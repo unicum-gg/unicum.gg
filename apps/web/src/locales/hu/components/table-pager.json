@@ -1,0 +1,8 @@
+{
+  "previous": "Előző oldal",
+  "next": "Következő oldal",
+  "rows-per-page": "Sorok száma oldalanként",
+  "all": "Mind",
+  "range": "{first}–{last} / {total}",
+  "page": "{page}. oldal / {total}"
+}

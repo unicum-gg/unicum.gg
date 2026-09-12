@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "{size}人のプレイヤーのうち評価済み{rated}人の平均",
+  "average-over-recent": "過去30日間にプレイした{size}人のプレイヤーのうち{rated}人の平均",
+  "avg-winrate": "平均勝率",
+  "finished": "終了済み",
+  "record": "記録",
+  "won": "勝利"
+}

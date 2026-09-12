@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}，获得{count}次",
+  "aria-not-earned": "{name}，未获得",
+  "no-longer-obtainable": "不再可获得。",
+  "not-earned": "未获得"
+}

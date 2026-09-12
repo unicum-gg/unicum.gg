@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Noch ein paar Worte: {count} fehlen.",
+  "at-winrate": "bei {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Das konnte nicht zurückgezogen werden. Versuche es gleich noch einmal.",
+  "hide-the-detailed-axes": "Detaillierte Achsen ausblenden",
+  "not-enough-battles": "Du hast mit diesem Panzer nicht genügend Gefechte gespielt, damit deine Stimme zählt.",
+  "published-once-read": "Wird veröffentlicht, sobald ein Moderator sie gelesen hat. Deine Sterne zählen sofort.",
+  "rate-it-in-detail": "Detailliert bewerten (optional)",
+  "review": {
+    "none": "Bewertung gespeichert.",
+    "queued": "Wertung gespeichert. Deine Rezension liegt einem Moderator zur Prüfung vor.",
+    "published": "Wertung gespeichert. Deine Rezension ist bereits online.",
+    "pending": "Wertung gespeichert. Deine Rezension wartet weiterhin auf einen Moderator.",
+    "rejected": "Wertung gespeichert. Deine frühere Rezension wurde nicht veröffentlicht, daher zählen nur deine Sterne.",
+    "closed": "Wertung gespeichert. Schriftliche Meinungen sind derzeit nicht möglich, daher wurde dein Text nicht gespeichert."
+  },
+  "save-failed": "Das konnte nicht gespeichert werden. Versuche es gleich noch einmal.",
+  "say-why-optional": "Begründe deine Wertung (optional)",
+  "signed-with": "Mit deinen {battles} Gefechten in diesem Panzer signiert",
+  "submit-my-rating": "Meine Wertung absenden",
+  "too-many-edits": "Das sind zu viele Änderungen auf einmal. Warte eine Minute.",
+  "update-my-rating": "Meine Wertung aktualisieren",
+  "what-it-is-good-at": "Worin der Panzer gut ist, worin nicht und für wen er geeignet ist.",
+  "withdraw": "Zurückziehen",
+  "your-rating-has-been-withdrawn": "Deine Wertung wurde zurückgezogen.",
+  "your-review-is-waiting-on": "Deine Rezension wartet auf einen Moderator. Nur du kannst sie hier sehen.",
+  "your-review-was-not-published": "Deine Rezension wurde nicht veröffentlicht. Deine Sterne zählen weiterhin für den Durchschnitt."
+}

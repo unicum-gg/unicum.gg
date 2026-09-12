@@ -1,0 +1,14 @@
+{
+  "date": "Datum",
+  "featured-tournament": "Zvýrazněný turnaj",
+  "format": "Formát",
+  "mode": "Režim",
+  "no-tournament-matches-the-current": "Žádný turnaj neodpovídá aktuálním filtrům.",
+  "nothing-here-right-now-wargaming": "Momentálně tu nic není. Wargaming vypisuje nové turnaje každý den, takže se seznam automaticky znovu zaplní.",
+  "prize": "Cena",
+  "region-tournaments": "Turnaje v regionu {region} ({count})",
+  "status": "Stav",
+  "teams": "Týmy",
+  "tier": "Úroveň",
+  "tournament": "Turnaj"
+}

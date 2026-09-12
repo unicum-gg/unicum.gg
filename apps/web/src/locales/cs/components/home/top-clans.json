@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Zobrazují se nejlepší klany v regionu {region} s více než 50 členy, kteří odehráli bitvy, seřazené podle průměrné hodnoty {metric}.",
+    "month": "Zobrazují se nejlepší klany v regionu {region} s více než 50 členy, kteří odehráli bitvy, seřazené podle hodnoty {metric} za posledních 30 dní (min. 15 aktivních členů)."
+  },
+  "updated": "Aktualizováno {when}.",
+  "empty": "Pro tento region zatím nejsou k dispozici žádná data o klanech.",
+  "rank": "#",
+  "clan": "Klan",
+  "average": "Prům. {metric}"
+}

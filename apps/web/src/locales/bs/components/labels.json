@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Čekanje prvog snimka",
+    "hidden": "Sakriveno od strane Wargaminga",
+    "active_24h": "Aktivan < 24 h",
+    "active_7d": "Aktivan < 7 dana",
+    "recent_30d": "Nedavno aktivan < 30 dana",
+    "recent_90d": "Nedavno aktivan < 90 dana",
+    "dormant_1y": "Neaktivan < 1 godine",
+    "inactive": "Neaktivan > 1 godine"
+  },
+  "rating-hype": {
+    "overrated": "Precenjeno",
+    "fair": "Pravilno ocenjeno",
+    "underrated": "Podcenjeno"
+  },
+  "rating-consensus": {
+    "agreed": "Širok dogovor",
+    "mixed": "Pomešani stavovi",
+    "divisive": "Raspravljeno"
+  },
+  "rating-axes": {
+    "overall": "Sveukupno",
+    "fun": "Zabava",
+    "firepower": "Vatra",
+    "armour": "Oklop",
+    "mobility": "Mobilnost",
+    "gunHandling": "Upravljanje oružjem",
+    "concealment": "Prikrivenost",
+    "beginnerFriendliness": "Prijateljski prema početnicima",
+    "versatility": "Svestranost"
+  },
+  "rating-axis-hints": {
+    "overall": "Koliko je ovaj tenk dobar, uzimajući sve u obzir?",
+    "fun": "Koliko uživate u igranju s njim?",
+    "firepower": "Alfa, šteta po minuti i probojnost.",
+    "armour": "Koliko odbija granate, iza oklopa i na otvorenom.",
+    "mobility": "Brzina, ubrzanje i način skretanja.",
+    "gunHandling": "Vrijeme nišanjenja, rasipanje i preciznost u pokretu.",
+    "concealment": "Kamuflaža i domet pogleda.",
+    "beginnerFriendliness": "Koliko oprašta greške dok još učite.",
+    "versatility": "Funkcioniše li na svakoj mapi i u svakom timu?"
+  },
+  "voter-brackets": {
+    "unknown": "Nepoznato",
+    "learning": "Učenje",
+    "average": "Prosjek",
+    "strong": "Jak",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vozila",
+    "gunnery": "Pucanje",
+    "armor": "Oklop",
+    "mobility": "Mobilnost",
+    "vision": "Vid",
+    "crew": "Posada",
+    "progression": "Napredovanje",
+    "economy": "Ekonomija",
+    "ratings": "Ocjene",
+    "statistics": "Statistika",
+    "modes": "Modovi bitke",
+    "tactics": "Taktika",
+    "slang": "Žargon"
+  }
+}

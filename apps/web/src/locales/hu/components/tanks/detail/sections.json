@@ -1,0 +1,14 @@
+{
+  "ammunition": "Lőszer",
+  "characteristics": "Jellemzők a(z) {tank} tankról",
+  "consumables": "Fogyócikkek",
+  "crew-level": "Legénység szintje",
+  "crew-skills": "Személyzet Készségek",
+  "equipment": "Felszerelés",
+  "field-mods": "Mezőmódosítások",
+  "historical-reference": "Történelmi háttér a(z) {tank} tankról",
+  "modules": "Modulok a(z) {tank} tankhoz",
+  "research-path": "Fejlesztési ág a(z) {tank} tankhoz",
+  "similar": "{tank} közelében lévő Tankok",
+  "videos": "Videók a(z) {tank} tankról"
+}

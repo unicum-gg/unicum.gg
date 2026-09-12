@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Jucători de top · Ultimele 24 de ore"
+    },
+    "week": {
+      "title": "Jucători de top · Ultimele 7 zile"
+    }
+  },
+  "rating-scale": {
+    "title": "Scarǎ de evaluare"
+  },
+  "community": {
+    "title": "Alătură-te comunității",
+    "heading": "Conectează-te cu jucătorii WoT",
+    "description": "Alătură-te serverului nostru Discord pentru a discuta despre statisticile WoT, a solicita funcții și a raporta erori. Sau intră pe GitHub pentru a examina codul și a contribui.",
+    "discord": "Intră pe Discord",
+    "github": "Vezi pe GitHub"
+  },
+  "features": {
+    "title": "Ce vei găsi aici",
+    "profiles": {
+      "title": "Profiluri de jucători",
+      "description": "Statistici detaliate cu diferențe generale și pentru 24h / 7z / 30z, WN7, WN8, WNX și Rating personal."
+    },
+    "clans": {
+      "title": "Pagini de clan",
+      "description": "Tabelul membrilor cu evaluări, flux de activitate recentă, descriere și metadate ale clanului."
+    },
+    "history": {
+      "title": "Istoricul clanurilor",
+      "description": "Cronologia completă a fiecărui clan în care s-a aflat un jucător, cu roluri și date."
+    },
+    "live": {
+      "title": "Actualizări în timp real",
+      "description": "Jucătorii urmăriți sunt reîmprospătați în fundal la fiecare 24 de ore prin sistemul nostru de capturi."
+    },
+    "leaderboards": {
+      "title": "Clasamente",
+      "description": "Jucători de top (24h, 7z, din toate timpurile) și clanuri de top clasate după WNX, calculat din capturile noastre."
+    },
+    "open-source": {
+      "title": "Open source · AGPL",
+      "description": "Codul este pe GitHub. Examinează-l, creează un fork, contribuie. Fără reclame, doar analiză cu acordul utilizatorului."
+    }
+  },
+  "quick-start": {
+    "title": "Pornire rapidă",
+    "search": {
+      "title": "🔍 Caută jucători sau clanuri",
+      "description": "Apasă {shortcut} pentru a deschide căutarea, apoi introdu un nume de jucător sau o etichetă de clan."
+    },
+    "region": {
+      "title": "🌍 Schimbă regiunea",
+      "description": "Folosește selectorul {selector} din bara de navigare. Clasamentele se actualizează corespunzător."
+    },
+    "leaderboards": {
+      "title": "🏆 Răsfoiește clasamentele",
+      "description": "Jucători de top (24h, 7z, din toate timpurile) și clanuri de top clasate după media WNX, calculată din capturile noastre."
+    },
+    "colors": {
+      "title": "📊 Înțelege culorile",
+      "description": "WR, WN7, WN8 și WNX folosesc aceleași culori pentru niveluri (portocaliu → verde → cyan → mov). Vezi scara de mai sus."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

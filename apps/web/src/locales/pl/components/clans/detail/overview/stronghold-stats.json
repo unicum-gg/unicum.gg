@@ -1,0 +1,22 @@
+{
+  "stat": "Statystyka",
+  "periods": {
+    "total": "Suma",
+    "day": "Ostatnie 24h",
+    "week": "Ostatnie 7d",
+    "month": "Ostatnie 30d"
+  },
+  "sections": {
+    "elo": "Poziom X: ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15 na 15)",
+    "t10": "Poziom X: {skirmish} (7 na 7)",
+    "t8": "Poziom VIII: {skirmish} (7 na 7)",
+    "t6": "Poziom VI: {skirmish} (7 na 7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Bitwy",
+    "winrate": "Wskaźnik zwycięstw"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} na-boost",
+  "n-tanks": "{count, plural, one {# tank} other {# mga tank}}",
+  "nerfed": "{count} na nerfed",
+  "no-tank-changes-have-been": "Wala pang naitalang pagbabago sa mga tangke. Habang nire-rebalance ng Wargaming ang mga tangke, lalabas dito ang mga buff at nerf ng bawat update.",
+  "update": "I-update ang {version}"
+}

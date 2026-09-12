@@ -1,0 +1,6 @@
+{
+  "label": "Community-funded",
+  "funded": "{pct}% funded",
+  "tooltip": "{received} of {goal} covered by supporters since launch",
+  "tooltip-loading": "Community-funded, ad-free"
+}

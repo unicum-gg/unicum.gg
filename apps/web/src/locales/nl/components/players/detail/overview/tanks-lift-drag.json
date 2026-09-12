@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Beoordeling omhoogtrekken",
+    "blurb": "Tanks die de totale Beoordeling omhoogtrekken: als je ze weglaat, daalt de Beoordeling.",
+    "empty": "Geen Tanks die de totale Beoordeling omhoogtrekken."
+  },
+  "drag": {
+    "heading": "Beoordeling omlaagtrekken",
+    "blurb": "Tanks die de totale Beoordeling omlaagtrekken: als je ze weglaat, stijgt de Beoordeling.",
+    "empty": "Geen Tanks die de totale Beoordeling omlaagtrekken."
+  },
+  "if-removed": "{delta} indien verwijderd"
+}

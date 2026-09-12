@@ -1,0 +1,21 @@
+{
+  "title": "Hodnotiaca škála",
+  "description": "Farebné hranice používané na celom webe pre mieru víťazstiev a metriku hodnotenia vybranú v navigačnom paneli.",
+  "tier": "Stopnja",
+  "tiers": {
+    "top": "Najboljši",
+    "excellent": "Vynikajúce",
+    "super": "Super",
+    "very-good": "Veľmi dobré",
+    "good": "Dobrý",
+    "average": "Priemer",
+    "below-avg": "Pod priemerom",
+    "bad": "Zlé",
+    "very-bad": "Veľmi zlé"
+  },
+  "rating-colors": "Farby hodnotenia",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

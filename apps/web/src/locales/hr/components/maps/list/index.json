@@ -1,0 +1,9 @@
+{
+  "all": "Svi",
+  "camouflage-map": "{camouflage} karta",
+  "modes": "{count, plural, one {# način} few {# načina} other {# načina}}",
+  "no-maps-match-your-filters": "Nijedna mapa ne odgovara tvojim filtrima.",
+  "search": "Pretraži među {count} mapa",
+  "search-label": "Traži Mape",
+  "special-map": "Posebna karta"
+}

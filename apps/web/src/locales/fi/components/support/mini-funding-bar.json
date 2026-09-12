@@ -1,0 +1,6 @@
+{
+  "label": "Yhteisön rahoittama",
+  "funded": "{pct} % rahoitettu",
+  "tooltip": "Tukijat ovat kattaneet julkaisusta lähtien {received} / {goal}",
+  "tooltip-loading": "Yhteisön rahoittama, mainokseton"
+}

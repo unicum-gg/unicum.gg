@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Tank {tank}: statistiky ve World of Tanks ({region}), úroveň {tier}, národ {nation}",
+    "description": "Specifikace pro tank {tank} ({region}) ve World of Tanks: pancíř, palebná síla, pohyblivost, moduly, posádka a polní modifikace tohoto tanku úrovně {tier} ({nation})."
+  },
+  "performances": {
+    "title": "Tank {tank}: výkony ({region}), statistiky serveru a nejlepší hráči",
+    "description": "Výkony tanku {tank} ({region}) ve World of Tanks: průměrná míra vítězství, poškození a asistované poškození na serveru, nejlepší hráči s tímto tankem úrovně {tier} ({nation}) a očekávané hodnoty WN8 a WNX."
+  },
+  "marks": {
+    "title": "Tank {tank}: znaky kvality a odznaky mistrovství ({region})",
+    "description": "Požadavky ve World of Tanks na znaky kvality a odznaky mistrovství pro tank {tank} ({region}), včetně jejich historického vývoje u tohoto tanku úrovně {tier} ({nation})."
+  },
+  "history": {
+    "title": "Tank {tank}: historie změn ({region}), posílení a oslabení",
+    "description": "Všechny změny parametrů tanku {tank} v aktualizacích World of Tanks: posílení a oslabení palebné síly, pohyblivosti, odolnosti a maskování, která Wargaming zavedl u tohoto tanku úrovně {tier} ({nation}), verzi po verzi."
+  },
+  "videos": {
+    "title": "Videa ze hry s tankem {tank} ({region})",
+    "description": "Podívejte se na tank {tank} v akci: bitvy doporučené komunitou s tímto tankem úrovně {tier} ({nation}), přičemž každé video začíná v okamžiku jeho nasazení a uvádí mapu a výsledek bitvy."
+  },
+  "community": {
+    "title": "Tank {tank}: recenze, které napsali hráči, a hodnocení komunity ({region})",
+    "description": "Co si hráči myslí o tanku {tank}: hodnocení komunity na pětibodové škále rozdělené podle hráčské úrovně hlasujících, porovnané se skutečnými výkony tohoto tanku úrovně {tier} ({nation}), a písemné recenze z účtů, které s ním mají odehrané bitvy."
+  }
+}

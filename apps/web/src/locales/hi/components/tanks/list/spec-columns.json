@@ -1,0 +1,162 @@
+{
+  "columns-label": "कॉलम्स",
+  "groups": {
+    "firepower": "आग शक्ति",
+    "gun-handling": "गन हैंडलिंग",
+    "mobility": "गतिशीलता",
+    "survivability": "जीवित रहने की क्षमता",
+    "other": "अन्य"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "प्रति मिनट क्षति"
+    },
+    "damage": {
+      "label": "क्षति",
+      "tip": "Alpha क्षति"
+    },
+    "moduleDamage": {
+      "label": "मॉड्यूल क्षति"
+    },
+    "splashRadius": {
+      "label": "विस्फोट त्रिज्या"
+    },
+    "reload": {
+      "label": "रीलोड",
+      "tip": "रीलोड, ऑटोलोडर के लिए पूर्ण मैगज़ीन"
+    },
+    "rof": {
+      "label": "फायरिंग की दर",
+      "tip": "प्रति मिनट गोले"
+    },
+    "intraClipReload": {
+      "label": "क्लिप के भीतर रीलोड",
+      "tip": "मैगज़ीन में गोलियों के बीच का समय, ऑटोलोडर"
+    },
+    "penetration": {
+      "label": "छेदन",
+      "tip": "छेदन (मिमी), डिफ़ॉल्ट गोला"
+    },
+    "caliber": {
+      "label": "कैलिबर",
+      "tip": "गोले का कैलिबर (मिमी)"
+    },
+    "shellVelocity": {
+      "label": "गोला_velocity",
+      "tip": "गोले की गति (मी/सेकंड)"
+    },
+    "accuracy": {
+      "label": "सटीकता",
+      "tip": "100 मीटर पर विसरण, कम बेहतर है"
+    },
+    "aimTime": {
+      "label": "निशाना लगाने का समय"
+    },
+    "dispMoving": {
+      "label": "विसरण चलते हुए",
+      "tip": "चलते समय विसरण गुणक"
+    },
+    "dispTankTraverse": {
+      "label": "टैंक घूमने पर विसरण"
+    },
+    "dispTurretTraverse": {
+      "label": "टर्रेट घूमने पर विसरण"
+    },
+    "dispAfterShot": {
+      "label": "फायरिंग के बाद विसरण"
+    },
+    "dispWhileDamaged": {
+      "label": "क्षतिग्रस्त होने पर विसरण"
+    },
+    "gunArc": {
+      "label": "गन चाप",
+      "tip": "बंदूक के क्षैतिज घूमने का कोण"
+    },
+    "depression": {
+      "label": "बंदूक का झुकाव / उत्थान",
+      "tip": "बंदूक का झुकाव / उत्थान"
+    },
+    "speed": {
+      "label": "गति (आगे / पीछे)",
+      "tip": "आगे / पीछे की अधिकतम गति (किमी/घंटा)"
+    },
+    "hullTraverse": {
+      "label": "हुल ट्रैवर्स"
+    },
+    "turretTraverse": {
+      "label": "टॉरट ट्रैवर्स"
+    },
+    "enginePower": {
+      "label": "शक्ति",
+      "tip": "इंजन की शक्ति (hp)"
+    },
+    "powerWeight": {
+      "label": "शक्ति/वजन",
+      "tip": "प्रति टन hp"
+    },
+    "terrainHard": {
+      "label": "कठोर भूभाग",
+      "tip": "कठोर भूमि पर भू-प्रतिरोध, कम बेहतर है"
+    },
+    "terrainMedium": {
+      "label": "मध्यम भूभाग"
+    },
+    "terrainSoft": {
+      "label": "नरम भूभाग"
+    },
+    "health": {
+      "label": "हेल्थ",
+      "tip": "हिट अंक"
+    },
+    "engineHealth": {
+      "label": "इंजन हेल्थ"
+    },
+    "engineFireChance": {
+      "label": "इंजन आग का अवसर"
+    },
+    "hullArmorFront": {
+      "label": "हुल गति (सामने)",
+      "tip": "सामने के हुल का कवच (मिमी)"
+    },
+    "turretArmorFront": {
+      "label": "टर्रेट गति (सामने)",
+      "tip": "सामने के टर्रेट का कवच (मिमी)"
+    },
+    "trackArmor": {
+      "label": "ट्रैक गति"
+    },
+    "trackHealth": {
+      "label": "ट्रैक हेल्थ"
+    },
+    "trackRepairTime": {
+      "label": "ट्रैक मरम्मत समय"
+    },
+    "ammoRackHealth": {
+      "label": "गोला-बारूद रैक का स्वास्थ्य"
+    },
+    "weight": {
+      "label": "वजन"
+    },
+    "viewRange": {
+      "label": "दृश्य सीमा",
+      "tip": "दृश्य सीमा (मी)"
+    },
+    "radioRange": {
+      "label": "रेडियो सीमा",
+      "tip": "सिग्नल सीमा (मी)"
+    },
+    "camoStill": {
+      "label": "स्थिर छद्मावरण"
+    },
+    "camoMoving": {
+      "label": "चलते समय छद्मावरण"
+    },
+    "camoStillFiring": {
+      "label": "फायरिंग के बाद स्थिर कैमो"
+    },
+    "camoMovingFiring": {
+      "label": "फायरिंग के बाद गतिशील कैमो"
+    }
+  }
+}

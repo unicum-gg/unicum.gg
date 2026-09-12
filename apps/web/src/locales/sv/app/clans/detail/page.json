@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "World of Tanks-klanen [{tag}] {name} ({region}), {members} medlemmar",
+    "description": "Klanen [{tag}] {name} på {region}: {members} medlemmar, fullständig medlemstabell med WN8- och WNX-betyg, senaste medlemsinträden och medlemsutträden samt klanhistorik."
+  },
+  "stronghold": {
+    "title": "Klanen [{tag}] {name}: fäste statistik ({region})",
+    "description": "Klanen [{tag}] {name} på {region}: prestationer i fästet, betyg för skärmytslingar och framryckningar, strider och vinstprocent för varje medlem."
+  },
+  "clan-wars": {
+    "title": "Klanen [{tag}] {name}: klan krig statistik ({region})",
+    "description": "Klanen [{tag}] {name} på {region}: prestationer i klankrig, betyg, strider och vinstprocent per medlem i kampanjerna på den globala kartan."
+  },
+  "tanks": {
+    "title": "Klanen [{tag}] {name}: Tanken ({region}), klanens fordon",
+    "description": "Klanen [{tag}] {name} på {region}: alla spelade fordon, med antal strider, vinstprocent och genomsnittlig skada sammanställda för alla klanmedlemmar."
+  },
+  "manage": {
+    "title": "Fästesreserver: klanen [{tag}] {name} ({region})",
+    "description": "Aktivera och schemalägg fästesreserver för klanen [{tag}] {name}. Endast officerare."
+  },
+  "missing": {
+    "description": "World of Tanks-klanen [{tag}] på {region}: medlemstabell med WN8/WNX-betyg, medlemsinträden och medlemsutträden, senaste striderna och fullständig klanhistorik."
+  }
+}

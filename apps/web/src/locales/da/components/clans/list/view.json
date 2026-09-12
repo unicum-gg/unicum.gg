@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Bedste <accent>klaner</accent>",
+    "language": "Top <accent>{language}</accent>-klaner"
+  },
+  "intro": {
+    "all": "{region}-rangliste, rangeret efter {metric}, beregnet som gennemsnittet for de sporede medlemmer af hver klan (minimum 50 medlemmer med kampe).",
+    "language": "{region}-klaner, der har angivet {language} som et af deres sprog, rangeret efter {metric}, beregnet som gennemsnittet for deres sporede medlemmer (minimum 25 medlemmer med kampe).",
+    "strict": "{region}-klaner, der har angivet {language} som deres eneste sprog, rangeret efter {metric}, beregnet som gennemsnittet for deres sporede medlemmer (minimum 25 medlemmer med kampe)."
+  },
+  "board": {
+    "all": "Top {count} klaner efter {metric}",
+    "language": "Top {count} {language}-klaner efter {metric}",
+    "strict": "Top {count} udelukkende {language}-klaner efter {metric}"
+  },
+  "members": "Medlemmer",
+  "strict-toggle": "Streng",
+  "any-toggle": "Enhver",
+  "all-languages": "Alle sprog",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

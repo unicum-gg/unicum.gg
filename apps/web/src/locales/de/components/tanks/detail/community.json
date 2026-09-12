@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Was Spieler von diesem Panzer halten",
+  "not-rated": "Noch nicht bewertet, sei der Erste",
+  "votes": "{count} Stimmen",
+  "votes-one": "{count} Abstimmung",
+  "stars": "{value} von {max}",
+  "not-rated-short": "Nicht bewertet"
+}

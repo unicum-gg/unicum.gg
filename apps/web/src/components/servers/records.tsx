@@ -1,7 +1,9 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import {
-  SERVER_STATS_RANGE_LABEL,
   type ServerRecord,
   type ServerStats,
   type ServerStatsRange,
@@ -30,18 +32,21 @@ export function ServerRecords({
   stats: ServerStats;
   range: ServerStatsRange;
 }) {
-  const label = SERVER_STATS_RANGE_LABEL[range];
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/records");
+  const { t: tRange } = useTranslation("components/servers/ranges");
+  const label = tRange(range);
   const zone = useDisplayZone();
   return (
     <dl className="flex flex-col divide-y divide-fd-border md:flex-row md:divide-x md:divide-y-0">
-      <Cell title={`Peak, last ${label}`} record={stats.peak} zone={zone} />
-      <Cell title={`Low, last ${label}`} record={stats.trough} zone={zone} />
+      <Cell title={t("peak-last", { label })} record={stats.peak} zone={zone} />
+      <Cell title={t("low-last", { label })} record={stats.trough} zone={zone} />
       <Cell
-        title={`Average, last ${label}`}
-        value={stats.average > 0 ? formatPlayers(stats.average) : null}
+        title={t("average-last", { label })}
+        value={stats.average > 0 ? formatPlayers(stats.average, locale) : null}
         zone={zone}
       />
-      <Cell title="All-time record" record={stats.allTimePeak} zone={zone} />
+      <Cell title={t("all-time-record")} record={stats.allTimePeak} zone={zone} />
     </dl>
   );
 }
@@ -57,7 +62,8 @@ function Cell({
   value?: string | null;
   zone: DisplayZone;
 }) {
-  const shown = value ?? (record ? formatPlayers(record.players) : null);
+  const { locale } = useFormat();
+  const shown = value ?? (record ? formatPlayers(record.players, locale) : null);
   return (
     <div className="flex flex-1 flex-col gap-1 p-4">
       <dt className="text-xs uppercase tracking-wide text-fd-muted-foreground">
@@ -65,7 +71,7 @@ function Cell({
       </dt>
       <dd className="text-2xl font-semibold tabular-nums">{shown ?? "—"}</dd>
       <dd className="text-xs text-fd-muted-foreground">
-        {record ? formatMoment(record.at, zone) : " "}
+        {record ? formatMoment(record.at, zone, locale) : " "}
       </dd>
     </div>
   );

@@ -1,0 +1,12 @@
+{
+  "aria-build": "공통 테스트 클라이언트에서 확인, 빌드 {version}",
+  "aria-changes": "공통 테스트에서 변경됨: 특성 {changes}개",
+  "aria-described": "공통 테스트: {description}",
+  "aria-vehicle": "공통 테스트 차량",
+  "common-test": "공통 테스트",
+  "common-test-build": "공통 테스트 {version}",
+  "tip-build": "{label} · 테스트 빌드의 값이며 업데이트 출시 전 워게이밍이 변경할 수 있습니다",
+  "tip-changes": "이 차량의 공통 테스트 특성 변경: {changes, plural, other {#개 특성}}",
+  "tip-described": "공통 테스트 · {description}",
+  "tip-vehicle": "공통 테스트 · 아직 출시되지 않아 전투 통계가 없으며 특성이 변경될 수 있습니다"
+}

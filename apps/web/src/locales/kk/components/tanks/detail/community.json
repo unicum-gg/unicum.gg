@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Ойыншылар бұл танк туралы не ойлайды",
+  "not-rated": "Әлі бағаланбаған, бірінші болып бағалаңыз",
+  "votes": "{count} дауыс",
+  "votes-one": "{count} дауыс",
+  "stars": "{max} ішінен {value}",
+  "not-rated-short": "Бағаланбаған"
+}

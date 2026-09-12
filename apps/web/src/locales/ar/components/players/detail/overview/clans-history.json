@@ -1,0 +1,12 @@
+{
+  "clans-history": "تاريخ عشائر {nickname}",
+  "clans-in-clans": "{totalClans} عشائر · {timeInClansSeconds} في العشائر",
+  "current": "الحالي",
+  "duration": "المدة",
+  "from": "من",
+  "name": "الاسم",
+  "no-clan-history": "لا يوجد تاريخ للعشائر.",
+  "role": "الدور",
+  "tag": "علامة",
+  "to": "إلى"
+}

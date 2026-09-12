@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Les {count} véhicules de World of Tanks sur {region}. Filtrez-les par rang, nation, classe et rôle, puis ouvrez la fiche d’un char pour consulter ses statistiques, ses meilleurs joueurs et ses valeurs attendues.",
+    "title": "Tous les chars de World of Tanks ({region}), parcourez tous les véhicules",
+    "description": "Parcourez tous les chars de World of Tanks sur {region} : filtrez-les par rang, nation, classe et rôle, puis consultez les statistiques de chaque char, ses meilleurs joueurs et ses valeurs attendues.",
+    "heading": "Tous les <accent>chars</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, pénétration, blindage, portée de vue et mobilité des {count} véhicules de World of Tanks sur {region}. Triez selon n’importe quelle colonne, puis filtrez par rang, nation, classe et rôle.",
+    "title": "Caractéristiques des chars de World of Tanks ({region}), comparez tous les véhicules",
+    "description": "Comparez les caractéristiques de tous les chars de World of Tanks sur {region} : DPM, pénétration, blindage, portée de vue et mobilité, avec tri et filtres par rang, nation, classe et rôle.",
+    "heading": "Spécifications du <accent>char</accent>"
+  },
+  "economics": {
+    "intro": "Coûts d’achat et de réparation, prix des obus et gains de crédits pour les {count} véhicules de World of Tanks sur {region}. Triez selon n’importe quelle colonne, puis filtrez par rang, nation, classe et rôle.",
+    "title": "Économie des chars de World of Tanks ({region}), coûts en crédits et en XP",
+    "description": "Coûts en crédits et en XP, prix des réparations et des obus pour tous les chars de World of Tanks sur {region}, avec tri et filtres par rang, nation, classe et rôle.",
+    "heading": "Économie du <accent>char</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Dégâts en moyenne mobile nécessaires pour obtenir une, deux ou trois marques sur les {count} véhicules de World of Tanks sur {region}. Triez selon n’importe quelle colonne, puis filtrez par rang, nation, classe et rôle.",
+    "title": "Seuils des marques d’excellence dans World of Tanks ({region})",
+    "description": "Dégâts nécessaires pour obtenir une, deux ou trois marques d’excellence sur tous les chars de World of Tanks sur {region}, avec tri et filtres par rang, nation, classe et rôle.",
+    "heading": "<accent>Marques d’excellence</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Seuils d’XP pour l’insigne As du char et les autres insignes de maîtrise des {count} véhicules de World of Tanks sur {region}. Triez selon n’importe quelle colonne, puis filtrez par rang, nation, classe et rôle.",
+    "title": "Seuils des insignes de maîtrise dans World of Tanks ({region})",
+    "description": "Seuils d’XP pour l’insigne As du char et les autres insignes de maîtrise de tous les chars de World of Tanks sur {region}, avec tri et filtres par rang, nation, classe et rôle.",
+    "heading": "<accent>Insignes de maîtrise</accent>"
+  },
+  "videos": {
+    "intro": "{count} batailles référencées par la communauté sur {region}, chaque vidéo s’ouvrant à la seconde précise où la bataille commence. Proposées depuis les pages des chars et vérifiées avant leur publication ici.",
+    "title": "Vidéos de gameplay de World of Tanks ({region})",
+    "description": "Batailles de World of Tanks proposées par la communauté sur {region}, chaque vidéo s’ouvrant à la seconde précise où la bataille commence : le char joué, la carte, le côté de départ et l’issue de la bataille.",
+    "heading": "Vidéos de <accent>gameplay</accent>"
+  }
+}

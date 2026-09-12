@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Chưa có dữ liệu xe tăng cho Clan này.",
+  "no-tanks-match-these-filters": "Không có xe tăng nào phù hợp với các bộ lọc này.",
+  "nation": "Quốc gia",
+  "type": "Loại",
+  "tier": "Cấp",
+  "name": "Tên",
+  "members": "Thành viên",
+  "battles": "Số trận",
+  "avg-damage": "Thiệt hại trung bình",
+  "avg-xp": "Trung bình XP",
+  "wr": "WR"
+}

@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -44,6 +47,8 @@ export function DistributionPanel({
   distribution: PlayerDistribution;
   region: Region;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/distribution-panel");
   // The same cookie the navbar selector writes, so the histogram follows the
   // metric chosen anywhere on the site rather than keeping its own idea of one.
   const [stored] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
@@ -55,13 +60,13 @@ export function DistributionPanel({
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>How {REGION_LABEL[region]} players compare</PanelTitle>
+        <PanelTitle>{t("how-players-compare", { region: REGION_LABEL[region] })}</PanelTitle>
       </PanelHeader>
       {/* No padding on the panel: each section carries its own, so its heading
           rule runs edge to edge like the panel's own does. */}
       <PanelContent className="p-0">
         <Series
-          title="Win rate"
+          title={t("win-rate")}
           median={medianOf(distribution.winrate)}
           format={formatWinrateCoarse}
         >
@@ -69,15 +74,16 @@ export function DistributionPanel({
             buckets={distribution.winrate}
             colorOf={winrateColor}
             formatEdge={formatWinrateCoarse}
-            ariaLabel="Win rate distribution across the region's tracked players"
+            ariaLabel={t("win-rate-distribution-across-the-region-s-tr")}
           />
         </Series>
 
         <Series
           title={
-            <>
-              <RatingMetricInlineSelect /> rating
-            </>
+            <Interpolate
+              template={t("metric-rating")}
+              values={{ metric: <RatingMetricInlineSelect /> }}
+            />
           }
           median={medianOf(ratingBuckets)}
           format={formatRating}
@@ -91,10 +97,7 @@ export function DistributionPanel({
         </Series>
 
         <p className="p-4 text-sm text-fd-muted-foreground">
-          {formatPlayers(distribution.players)} tracked accounts with at least{" "}
-          {formatPlayers(distribution.minBattles)} battles. The colours are the
-          same bands the site uses everywhere else.
-        </p>
+          {t("tracked-accounts-with-at-least", { players: formatPlayers(distribution.players, locale), minBattles: formatPlayers(distribution.minBattles, locale) })}</p>
       </PanelContent>
     </Panel>
   );
@@ -119,6 +122,7 @@ function Series({
   format: (value: number) => string;
   children: React.ReactNode;
 }) {
+  const { t } = useTranslation("components/servers/distribution-panel");
   return (
     <section className="border-b border-fd-border">
       {/* The panel's own shape one level down: a heading band closed by a rule,
@@ -130,10 +134,16 @@ function Series({
         </PanelTitle>
         {median === null ? null : (
           <span className="text-sm text-fd-muted-foreground">
-            median{" "}
-            <span className="font-medium tabular-nums text-fd-foreground">
-              {format(median)}
-            </span>
+            <Interpolate
+              template={t("median-n")}
+              values={{
+                value: (
+                  <span className="font-medium tabular-nums text-fd-foreground">
+                    {format(median)}
+                  </span>
+                ),
+              }}
+            />
           </span>
         )}
       </div>

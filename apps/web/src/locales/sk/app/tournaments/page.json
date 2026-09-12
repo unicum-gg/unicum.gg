@@ -1,0 +1,8 @@
+{
+  "description": "Všetky turnaje spoločnosti Wargaming na serveri {region}: denné rebríčky o zlato, klanové majstrovstvá, kto sa zúčastnil a kto vyhral. Kompletné pavúky, výsledky a súpisky.",
+  "live-many": "Práve teraz je na serveri {region} otvorených alebo rozohraných {count} turnajov,",
+  "live-one": "Práve teraz je na serveri {region} otvorený alebo rozohraný {count} turnaj,",
+  "no-live": "Turnaje sa na serveri {region} konajú každý deň,",
+  "title": "World of Tanks: {tournaments}",
+  "what-you-find": "od rebríčkov 1v1 o zlato až po klanové majstrovstvá o peniaze. Kompletné pavúky a výsledky, súpisky všetkých tímov a pri každej mape aj strana, na ktorej tím začínal."
+}

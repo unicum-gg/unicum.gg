@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Cost (credits)",
+      "tip": "Purchase price in credits (tech-tree tanks)"
+    },
+    "buyGold": {
+      "label": "Cost (gold)",
+      "tip": "Purchase price in gold (premium tanks)"
+    },
+    "researchXp": {
+      "label": "Research XP",
+      "tip": "XP to unlock (cheapest path)"
+    },
+    "totalFreeXp": {
+      "label": "Free XP (T{tier})",
+      "tip": "Cumulative XP to research from tier {tier}, prerequisite modules included"
+    },
+    "shellCost": {
+      "label": "Shell cost",
+      "tip": "Default shell price (credits)"
+    },
+    "ammoCost": {
+      "label": "Full ammo cost",
+      "tip": "Default shell price × ammo capacity"
+    },
+    "acquireMoney": {
+      "label": "Buy cost ({currency})",
+      "tip": "Estimated real money to acquire the tank (research + purchase), in {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Free XP ({currency})",
+      "tip": "Estimated real money to free-XP the tank from tier {tier}, in {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Cost (credits)",
+    "buyGold": "Cost (gold)",
+    "researchXp": "Research XP",
+    "totalFreeXp": "Free XP",
+    "shellCost": "Shell cost",
+    "ammoCost": "Full ammo cost",
+    "acquireMoney": "Buy cost (money)",
+    "freeXpMoney": "Free XP (money)"
+  }
+}

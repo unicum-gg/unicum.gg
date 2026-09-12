@@ -1,0 +1,18 @@
+{
+  "caught-up": "Deficit je úplne vyrovnaný, ďakujeme. Všetko navyše ide na zvýšenie kapacity a nové funkcie.",
+  "covered-label": "Pokryté",
+  "covered-sentence": "Podporovatelia pokryli {received} z doteraz vynaložených {spent}.",
+  "days-out-of-pocket": "{days} dní z vlastného vrecka",
+  "from-supporter-one": "od {count} podporovateľa",
+  "from-supporters": "od {count} podporovateľov",
+  "gap-growing": "{amount}/mes. navyše zabráni prehlbovaniu deficitu.",
+  "goal": "cilj {amount}",
+  "of-that-total": "z tejto celkovej sumy",
+  "pledges-cover": "Prisľúbené príspevky už pokrývajú mesačné náklady.",
+  "raised-amount": "{amount} vyzbieraných",
+  "raised-label": "Vyzbierané",
+  "run-at-a-loss": "Projekt {name} je od {since} prevádzkovaný so stratou.",
+  "run-rate": "Mesačná bilancia: prisľúbených {pledged}/mes. oproti prevádzkovým nákladom {cost}/mes.",
+  "spent-since-launch": "Výdavky od spustenia",
+  "to-catch-up": "Na úplné vyrovnanie chýba {amount}."
+}

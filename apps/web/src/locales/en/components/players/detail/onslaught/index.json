@@ -1,0 +1,12 @@
+{
+  "final": "· final",
+  "has-not-held-a-place": "{nickname} has not held a place on the Onslaught leaderboard.",
+  "live-season": "· live season",
+  "loading-s-onslaught-record": "Loading {nickname}’s Onslaught record...",
+  "onslaught": "Onslaught",
+  "onslaught-record": "{nickname}’s Onslaught record",
+  "see-this-season-s-leaderboard": "See this season’s leaderboard",
+  "standing-line": "{rating} rating points · {battles} battles",
+  "the-board-only-lists-players": "The board only lists players who reach Champion, a few thousand per region, so this is where almost every profile lands. It fills in by itself the season they get there.",
+  "updated": "Updated {when}"
+}

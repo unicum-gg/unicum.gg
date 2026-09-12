@@ -1,0 +1,13 @@
+{
+  "assists": "Assister",
+  "close": "Stäng",
+  "damage": "Skada",
+  "in-the-queue": "Den står i kön och visas på denna flik när en moderator har tittat på den.",
+  "optional": "(valfritt)",
+  "paste-a-youtube-link": "Klistra in en YouTube-länk och ange sedan exakt när striden börjar. Alla som öppnar den hamnar vid den sekunden, så ett förslag med felaktig tidsstämpel avslås vid granskningen.",
+  "sending": "Skickar…",
+  "suggest": "Föreslå",
+  "suggest-a-video": "Föreslå en video",
+  "suggest-another": "Föreslå en annan",
+  "suggestion-sent": "Förslag skickat"
+}

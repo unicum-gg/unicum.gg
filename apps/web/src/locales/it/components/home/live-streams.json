@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Mostra chat",
+    "hide": "Nascondi chat",
+    "show-streamers": "Mostra streamer"
+  },
+  "heading": "Portale {name}: statistiche di giocatori, clan e carri in World of Tanks",
+  "hide": "Nascondi streamer",
+  "player": "Giocatore",
+  "stream-language": "Lingua dello streaming · {name}",
+  "stream-language-alt": "Lingua della diretta: {name}",
+  "theater": {
+    "enter": "Modalità teatro",
+    "exit": "Esci dalla modalità cinema"
+  },
+  "title": "Migliori giocatori in streaming ora ·",
+  "viewer-count": "{count} spettatori",
+  "viewers": "Spettatori",
+  "watch": "Guarda {nickname} su Twitch"
+}

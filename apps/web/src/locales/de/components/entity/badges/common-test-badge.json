@@ -1,0 +1,12 @@
+{
+  "aria-build": "Im Client des Gemeinsamen Tests gelesen, Build {version}",
+  "aria-changes": "Vom Gemeinsamen Test geändert: {changes} Eigenschaften",
+  "aria-described": "Gemeinsamer Test: {description}",
+  "aria-vehicle": "Fahrzeug des Gemeinsamen Tests",
+  "common-test": "Gemeinsamer Test",
+  "common-test-build": "Gemeinsamer Test {version}",
+  "tip-build": "{label} · dies sind die Werte des Test-Builds und Wargaming kann sie vor Veröffentlichung der Aktualisierung noch ändern",
+  "tip-changes": "Änderungen des Gemeinsamen Tests: {changes, plural, one {# Eigenschaft} other {# Eigenschaften}} an diesem Fahrzeug",
+  "tip-described": "Gemeinsamer Test · {description}",
+  "tip-vehicle": "Gemeinsamer Test · noch nicht veröffentlicht, daher ohne Gefechtsstatistiken und mit möglicherweise noch veränderlichen Eigenschaften"
+}

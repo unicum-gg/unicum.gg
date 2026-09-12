@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} Līderu Saraksts",
+  "carried-beside-a-clan-tag": "Nēsā blakus klana birkai. Ranga emblēma ir vieta sacensībās: skaitlis uz tās ir šī vieta, bet krāsa norāda, kurš līderu saraksts. Vērtējumi neko nenopelna, jo augsta vieta WN8 nav tas, ko klans uzvar.",
+  "clan-badges": "Klana zīmes",
+  "clan-board": {
+    "name": "{board}, labāko {rank}",
+    "how": "Vieta {board} labāko {rank} vidū. To saglabā, kamēr klans šo vietu ieņem, un zaudē, kad vairs neieņem."
+  },
+  "clan-overflow": "Klans, kas ieņem vairāk nekā trīs vietas, pārējās apvieno {plus} emblēmā, vispirms labākās, lai birka paliktu salasāma. Uzvirzot kursoru, tiek parādīti to nosaukumi.",
+  "featured-tournament-winner": {
+    "name": "Izceltā turnīra uzvarētājs",
+    "how": "Tas pats, tikai uzvara gūta pasākumā, ko Wargaming atzīmējis kā izceltu. Tērauda vietā zelts, tieši tāpat kā spēlētāja pusē."
+  },
+  "heading": "Katra {badge} un kā to nopelnīt",
+  "heading-accent": "nozīmīte",
+  "marks-carried-beside-a-nickname": "Zīmes, kas tiek nēsātas blakus segvārdam, kad tas parādās vietnē {NAME}: līderu sarakstos, klanu sastāvos, meklēšanā un turnīru tabulās.",
+  "n-badges": "{count} nozīmītes",
+  "onslaught-champion": {
+    "name": "Uzbrukums čempions",
+    "how": "Sasniedza Čempiona rangu režīmā Uzbrukums, kas ir nepieciešams, lai vispār parādītos sadaļā {standings}. Pēc tam saglabāts: vērtējums, kas nokrīt zem latiņas, ieņem vietu, nevis fakts, ka tas tika noturēts."
+  },
+  "onslaught-legend": {
+    "name": "Uzbrukums leģenda",
+    "how": "Ieņemta vieta sezonas Leģendas sliekšņa robežās, kas ir pozīcija, nevis rezultāts: vienlaikus pastāv tikai noteikts skaits vietu, un slieksni vērtē attiecībā pret sezonu, kurā vieta tika ieņemta. Violetā, nevis tēraudzilā krāsā, tāpat kā Leģendu iekrāso pats līderu saraksts."
+  },
+  "player-badges": "Spēlētāju zīmes",
+  "player-overflow": "Spēlētājs, kas nēsā vairāk nekā trīs nozīmītes, pārējās apvieno {plus} emblēmā iepriekš minētajā secībā, lai segvārds tabulā paliktu salasāms. Uzvirzot kursoru, tiek parādīti to nosaukumi, un katra joprojām ved uz to pašu vietu, kur veda tās emblēma.",
+  "ranked-standings": "reitinga stāvokļi",
+  "streamer": {
+    "name": "Straumētājs",
+    "how": "Twitch kanāls, kas piesaistīts kontam. Pievienojiet Twitch savā profilā, lai to apstiprinātu, un emblēma vedīs uz jūsu kanālu. Tā rāda, vai pašlaik notiek tiešraide."
+  },
+  "streamer-who-is-on-air": "Straumētājs, kurš pašlaik raida, papildus nēsā sarkanu TIEŠRAIDE marķieri. Tas nav nopelnīts un netiek saglabāts: tas parādās, kad sākas straume, un pazūd, kad tā beidzas, tāpēc nekad netiek apvienots.",
+  "support-subscription": "Atbalstītāja abonements",
+  "supporter": {
+    "name": "Atbalstītājs"
+  },
+  "supporter-note": "Aktīva {link} īpašnieks, kas tiek rādīts publiski. Atbalstītāji, kuri izvēlas palikt anonīmi, pēc savas izvēles nenēsā nozīmīti.",
+  "the-marks-a-player-or": "Zīmes, ko spēlētājs vai klans var nēsāt vietnē {NAME}, ko katra nozīmē un precīzi, kas nepieciešams, lai to iegūtu.",
+  "tournament-winner": {
+    "name": "Turnīra uzvarētājs",
+    "how": "Komanda, kas piesaistīta klanam, uzvarēja turnīrā. Wargaming reģistrē komandas un kontus, nevis klanus, tāpēc piesaiste tiek atjaunota, salīdzinot katru sastāvu ar klana biedru sarakstu spēles dienā."
+  },
+  "verified": {
+    "name": "Verificēts",
+    "how": "Īpašnieks ir pieteicies ar savu Wargaming.net ID un savienojis šo kontu. Pieteikšanās ir vienīgā prasība, un tā neko nemaksā."
+  }
+}

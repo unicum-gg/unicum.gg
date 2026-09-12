@@ -1,0 +1,21 @@
+{
+  "title": "Semnele și măiestria lui {nickname}",
+  "excellence": {
+    "title": "Însemne de Excelenţă",
+    "description": "Vehicule ordonate după semnele de pe tun. Un semn este o medie susținută: jocul îl calculează pe o fereastră glisantă de bătălii recente, comparând cu performanța regiunii pentru acel vehicul.",
+    "partial": "Semne citite pentru {known} din {garage} vehicule. Restul se completează pe măsură ce contul este actualizat.",
+    "note": "{marked} din {garage} vehicule au un semn.",
+    "note-share": "{marked} din {garage} vehicule au un semn ({percent}% din garaj)."
+  },
+  "mastery": {
+    "title": "Marcajele de Măiestrie",
+    "description": "Vehicule ordonate după cea mai bună insignă. O insignă reprezintă o singură bătălie, nu o medie: jocul o acordă pentru experiența dintr-o singură partidă, comparată cu scorul regiunii pentru acel vehicul.",
+    "note": "{aces} din {garage} vehicule au un Ace al tanchiștilor.",
+    "note-share": "{aces} din {garage} vehicule au un Ace al tanchiștilor ({percent}% din garaj)."
+  },
+  "reach": {
+    "heading": "Joc peste nivelul tunului",
+    "description": "Vehicule ale căror daune combinate depășesc deja pragul unui semn pe care nu îl au. Insigna reprezintă acele daune combinate, colorate după semnul depășit."
+  },
+  "none": "Nimic"
+}

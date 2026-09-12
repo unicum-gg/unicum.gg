@@ -2,6 +2,10 @@
 
 export const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+// The two `Intl` uses in this file are not date formatting and have no
+// `date-fns` equivalent: one reads the browser's IANA zone name, the other
+// reads a GMT offset token. Everything that PRINTS a date on this site goes
+// through `date-fns`.
 export const browserTz = (): string => {
   try {
     return Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Paris";
@@ -12,6 +16,9 @@ export const browserTz = (): string => {
 
 export const tzLabel = (tz: string): string => {
   try {
+    // Fixed rather than the reader's locale, and deliberately: what is read
+    // out of this is the shortOffset token ("GMT+2"), which every locale
+    // renders the same way, and the label it goes into is a timezone id.
     const offset = new Intl.DateTimeFormat("en-US", {
       timeZone: tz,
       timeZoneName: "shortOffset",

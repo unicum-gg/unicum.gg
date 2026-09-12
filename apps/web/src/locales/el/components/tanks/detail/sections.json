@@ -1,0 +1,14 @@
+{
+  "ammunition": "Πυρομαχικά",
+  "characteristics": "Χαρακτηριστικά του {tank}",
+  "consumables": "Αναλώσιμα",
+  "crew-level": "Επίπεδο Πληρώματος",
+  "crew-skills": "Δεξιότητες Πληρώματος",
+  "equipment": "Εξοπλισμός",
+  "field-mods": "Επιτόπιες Τροποποιήσεις",
+  "historical-reference": "Ιστορική αναφορά του {tank}",
+  "modules": "Εξαρτήματα του {tank}",
+  "research-path": "Πίνακας Τεχνολογίας του {tank}",
+  "similar": "Τανκς κοντά στο άρμα {tank}",
+  "videos": "Βίντεο του {tank}"
+}

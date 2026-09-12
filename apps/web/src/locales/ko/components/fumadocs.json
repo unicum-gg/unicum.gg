@@ -1,0 +1,18 @@
+{
+  "search": "검색",
+  "search-open": "검색 열기",
+  "search-close": "검색 닫기",
+  "search-empty": "결과를 찾을 수 없음",
+  "theme-toggle": "테마 전환",
+  "theme-light": "경량",
+  "theme-dark": "다크",
+  "theme-system": "시스템",
+  "toc": "이 페이지에서",
+  "toc-empty": "제목이 없습니다",
+  "sidebar-open": "사이드바 열기",
+  "sidebar-close": "사이드바 닫기",
+  "sidebar-collapse": "사이드바 축소",
+  "page-previous": "이전 페이지",
+  "page-next": "다음 페이지",
+  "language": "언어 선택"
+}

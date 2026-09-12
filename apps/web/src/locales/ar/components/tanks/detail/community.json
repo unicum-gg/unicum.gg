@@ -1,0 +1,8 @@
+{
+  "what-players-think": "ما يعتقده اللاعبون عن هذه الدبابة",
+  "not-rated": "لم يتم تقييمها بعد، كن أول من يقيّمها",
+  "votes": "{count} أصوات",
+  "votes-one": "{count} صوت",
+  "stars": "{value} من أصل {max}",
+  "not-rated-short": "لم يتم تقييمها"
+}

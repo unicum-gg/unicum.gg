@@ -1,0 +1,7 @@
+{
+  "loading": "{count} tier {tier} vehicles, loading their names…",
+  "loading-one": "{count} tier {tier} vehicle, loading its name…",
+  "and-more": "and {count} more",
+  "hint": "Click to open them in the Tanks tab",
+  "tier": "Tier"
+}

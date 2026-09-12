@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Vizualus",
+    "collision": "Kollision",
+    "live": "Tiesiogiai"
+  },
+  "centre": {
+    "on": "Centruoti transporto priemonę",
+    "off": "Grąžinti nuo centro"
+  },
+  "hull-down": {
+    "on": "Korpusas žemyn",
+    "off": "Išlyginti transporto priemonę"
+  },
+  "tracks": {
+    "on": "Paleisti vikšrus",
+    "off": "Sustabdyti vikšrus"
+  },
+  "textures": {
+    "on": "Didelės raiškos tekstūros",
+    "off": "Standartinis tekstūros"
+  },
+  "reset": "Atstatyti vaizdą",
+  "style": "Pasirinkite stilių",
+  "style-worn": "Stilius: {name}",
+  "search-styles": "Paieška stiliams",
+  "colours": "Ką reiškia spalvos",
+  "cinematic": {
+    "off": "Kinematografinė kamera: išjungta",
+    "auto": "Kinematografinė kamera: kai nenaudojama",
+    "on": "Kinematografinė kamera: visada"
+  },
+  "open-tank": "Atidaryti kitą tanką",
+  "open-tank-placeholder": "Atidaryti tanką...",
+  "more-actions": "Daugiau veiksmų",
+  "marks-meaning": {
+    "0": "Meistriškumo ženklų nėra",
+    "1": "Vienas ženklas: lenkiate 65 % šio tanko žaidėjų",
+    "2": "Du ženklai: lenkiate 85 %",
+    "3": "Trys ženklai: lenkiate 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Išdidinti langą",
+      "leave": "Grįžti į puslapį"
+    },
+    "screen": {
+      "enter": "Išdidinti ekraną",
+      "leave": "Išeiti iš viso ekrano režimo"
+    }
+  },
+  "marks-count": {
+    "0": "Meistriškumo ženklų nėra",
+    "one": "1 meistriškumo ženklas",
+    "other": "{count} meistriškumo ženklai"
+  },
+  "compare-tank": "Palyginti su kitu tanku",
+  "compare-tank-placeholder": "Palyginti su...",
+  "view-tooltips": {
+    "visual": "Tankas, kaip jį nubraižo žaidimas",
+    "collision": "Koks storas kiekvienas šarvų lapas",
+    "live": "Ką padarytų pasirinktas sviedinys"
+  },
+  "cinematic-tooltips": {
+    "off": "Kinematografinė kamera: išjungta, vaizdas nejuda",
+    "auto": "Kinematografinė kamera: įsijungia po 30 sekundžių neveikimo",
+    "on": "Kinematografinė kamera: visada, nuo akimirkos, kai paleidžiate"
+  }
+}

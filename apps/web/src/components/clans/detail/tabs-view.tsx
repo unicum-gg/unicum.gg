@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import { useEffect } from "react";
 import useSWR from "swr";
 import { ExpandableDescription } from "@/components/clans/detail/description";

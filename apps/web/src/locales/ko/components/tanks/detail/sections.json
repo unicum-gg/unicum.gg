@@ -1,0 +1,14 @@
+{
+  "ammunition": "탄약",
+  "characteristics": "전차 {tank}의 성능",
+  "consumables": "소모품",
+  "crew-level": "승무원 숙련도",
+  "crew-skills": "승무원 스킬",
+  "equipment": "장비",
+  "field-mods": "전장 수정",
+  "historical-reference": "전차 {tank}의 역사적 참고 자료",
+  "modules": "전차 {tank}의 부품",
+  "research-path": "전차 {tank}의 기술 계통도 분기",
+  "similar": "{tank}와 비슷한 전차",
+  "videos": "전차 {tank}의 비디오"
+}

@@ -1,0 +1,14 @@
+{
+  "ammunition": "Ammukset",
+  "characteristics": "{tank}-panssarivaunun ominaisuudet",
+  "consumables": "Kulutustarvikkeet",
+  "crew-level": "Miehistön taso",
+  "crew-skills": "Miehistön taidot",
+  "equipment": "Varusteet",
+  "field-mods": "Kenttämuutokset",
+  "historical-reference": "{tank}-panssarivaunun historiallinen tausta",
+  "modules": "{tank}-panssarivaunun moduulit",
+  "research-path": "{tank}-panssarivaunun kehityspuuhaara",
+  "similar": "Panssarivaunut, jotka ovat lähellä panssarivaunua {tank}",
+  "videos": "{tank}-panssarivaunun videot"
+}

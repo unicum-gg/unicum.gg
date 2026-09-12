@@ -1,0 +1,12 @@
+{
+  "clans-history": "Historial de Clanes: {nickname}",
+  "clans-in-clans": "{totalClans} Clanes · {timeInClansSeconds} en Clanes",
+  "current": "actual",
+  "duration": "Duración",
+  "from": "Desde",
+  "name": "Nombre",
+  "no-clan-history": "No hay historial de Clanes.",
+  "role": "Rol",
+  "tag": "Etiqueta",
+  "to": "A"
+}

@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Najlepsi gracze · Ostatnie 24 godziny"
+    },
+    "week": {
+      "title": "Najlepsi gracze · Ostatnie 7 dni"
+    }
+  },
+  "rating-scale": {
+    "title": "Skala oceny"
+  },
+  "community": {
+    "title": "Dołącz do społeczności",
+    "heading": "Nawiąż kontakt z graczami WoT",
+    "description": "Dołącz do naszego serwera Discord, aby porozmawiać o statystykach WoT, proponować nowe funkcje i zgłaszać błędy. Możesz też odwiedzić GitHub, przejrzeć kod i pomóc w jego rozwoju.",
+    "discord": "Dołącz do Discorda",
+    "github": "Zobacz na GitHub"
+  },
+  "features": {
+    "title": "Co tu znajdziesz",
+    "profiles": {
+      "title": "Profile graczy",
+      "description": "Szczegółowe statystyki ogólne i zmiany z 24 godz. / 7 dn. / 30 dn., a także WN7, WN8, WNX i Klasyfikacja osobista."
+    },
+    "clans": {
+      "title": "Strony klanów",
+      "description": "Zestawienie Członkowie z klasyfikacjami, sekcja ostatnia aktywność, opis i metadane klanu."
+    },
+    "history": {
+      "title": "Historia klanów",
+      "description": "Pełna historia wszystkich klanów, do których należał gracz, wraz z rolami i datami."
+    },
+    "live": {
+      "title": "Aktualizacje na bieżąco",
+      "description": "Dane śledzonych graczy są odświeżane w tle co 24 godz. przez nasz system migawek."
+    },
+    "leaderboards": {
+      "title": "Tablice wyników",
+      "description": "Najlepsi gracze (24 godz., 7 dn., wszech czasów) oraz najlepsze klany według WNX, wyłonieni na podstawie naszych migawek."
+    },
+    "open-source": {
+      "title": "Otwarty kod źródłowy · AGPL",
+      "description": "Kod znajdziesz na GitHub. Przeglądaj, twórz własne wersje i pomagaj w rozwoju. Bez reklam, analityka tylko za zgodą."
+    }
+  },
+  "quick-start": {
+    "title": "Szybki start",
+    "search": {
+      "title": "🔍 Szukaj graczy lub klanów",
+      "description": "Naciśnij {shortcut}, aby otworzyć wyszukiwanie, a następnie wpisz pseudonim lub tag klanu."
+    },
+    "region": {
+      "title": "🌍 Zmień region",
+      "description": "Użyj selektora {selector} na pasku nawigacyjnym. Tablice wyników zostaną odpowiednio zaktualizowane."
+    },
+    "leaderboards": {
+      "title": "🏆 Przeglądaj tablice wyników",
+      "description": "Najlepsi gracze (24 godz., 7 dn., wszech czasów) oraz najlepsze klany według średniego WNX, wyłonieni na podstawie naszych migawek."
+    },
+    "colors": {
+      "title": "📊 Odczytuj kolory",
+      "description": "WR, WN7, WN8 i WNX używają tych samych kolorów poziomów (pomarańczowy → zielony → cyjanowy → fioletowy). Zobacz skalę powyżej."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Statistiche di World of Tanks: {tank} ({region}), carro {nation} di livello {tier}",
+    "description": "Specifiche di World of Tanks, {tank} ({region}): corazzatura, potenza di fuoco, mobilità, moduli, equipaggio e modifiche migliorative per questo carro {nation} di livello {tier}."
+  },
+  "performances": {
+    "title": "Prestazioni: {tank} ({region}), statistiche del server e migliori giocatori",
+    "description": "Prestazioni in World of Tanks, {tank} ({region}): percentuale di vittorie media del server, danni e assistenza medi, migliori giocatori su questo carro {nation} di livello {tier}, oltre ai valori attesi WN8 e WNX."
+  },
+  "marks": {
+    "title": "Marchi d’eccellenza e maestria: {tank} ({region})",
+    "description": "Requisiti per i marchi d’eccellenza e i distintivi di maestria in World of Tanks, {tank} ({region}), con la relativa cronologia per questo carro {nation} di livello {tier}."
+  },
+  "history": {
+    "title": "Cronologia delle modifiche: {tank} ({region}), potenziamenti e depotenziamenti",
+    "description": "Tutte le modifiche alle caratteristiche di questo carro, {tank}, nei vari aggiornamenti di World of Tanks: i miglioramenti e i peggioramenti a potenza di fuoco, mobilità, capacità di sopravvivenza e mimetizzazione introdotti da Wargaming per questo carro {nation} di livello {tier}, versione per versione."
+  },
+  "videos": {
+    "title": "Video di gameplay: {tank} ({region})",
+    "description": "Guarda {tank} in azione: battaglie suggerite dalla community con questo carro {nation} di livello {tier}, ciascuna avviata nel momento in cui il carro compare, con la mappa e il risultato corrispondenti."
+  },
+  "community": {
+    "title": "Recensioni dei giocatori e valutazione della community: {tank} ({region})",
+    "description": "Il carro {tank} secondo i giocatori: valutazione della community su cinque, suddivisa per livello di abilità dei votanti e confrontata con le prestazioni effettive di questo carro {nation} di livello {tier}, oltre alle recensioni scritte dagli account che hanno disputato battaglie con il carro."
+  }
+}

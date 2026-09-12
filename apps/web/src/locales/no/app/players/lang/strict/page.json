@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks-spillere kun på {language} ({region})",
+  "description": "{name} {region}-spillerrangering for spillere hvis utledede språk fra klanhistorikken utelukkende er {language}, rangert etter WNX.",
+  "og-title": "Spillere kun på {language}",
+  "og-subtitle": "Resultatliste for {region}"
+}

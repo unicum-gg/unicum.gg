@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "player": "Jugador",
+  "members": "Miembros",
+  "battles": "Batallas",
+  "avg-damage": "Daño medio",
+  "avg-xp": "XP media",
+  "winrate": "Victorias %",
+  "result": "Resultado",
+  "tournament": "Torneo",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

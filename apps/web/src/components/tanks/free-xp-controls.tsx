@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * "Free XP from tier N" picker. `maxTier` caps the options to the tank's own
@@ -27,6 +28,7 @@ export function FreeXpTierSelect({
   maxTier?: number;
   triggerClassName?: string;
 }) {
+  const { t } = useTranslation("components/tanks/detail/cost");
   const tiers = Array.from(
     { length: Math.max(1, maxTier) },
     (_, i) => i + 1,
@@ -35,7 +37,7 @@ export function FreeXpTierSelect({
     <Select value={String(value)} onValueChange={(v) => onChange(Number(v))}>
       <SelectTrigger
         size="sm"
-        aria-label="Free XP from tier"
+        aria-label={t("free-xp-from-tier")}
         className={cn(
           "h-6! w-fit gap-1 px-1.5! py-0! text-xs [&_svg]:size-3",
           triggerClassName,
@@ -44,9 +46,9 @@ export function FreeXpTierSelect({
         <SelectValue>{`T${value}`}</SelectValue>
       </SelectTrigger>
       <SelectContent>
-        {tiers.map((t) => (
-          <SelectItem key={t} value={String(t)}>
-            Tier {toRoman(t)}
+        {tiers.map((tier) => (
+          <SelectItem key={tier} value={String(tier)}>
+            {t("tier", { tier: toRoman(tier) })}
           </SelectItem>
         ))}
       </SelectContent>
@@ -64,6 +66,7 @@ export function XpRateInput({
   onChange: (value: string) => void;
   className?: string;
 }) {
+  const { t } = useTranslation("components/tanks/detail/cost");
   return (
     <input
       type="number"
@@ -71,7 +74,7 @@ export function XpRateInput({
       min={1}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      aria-label="XP per gold rate"
+      aria-label={t("xp-per-gold-rate")}
       className={cn(
         "w-10 rounded border border-current/30 bg-transparent px-1 py-0.5 text-center text-xs tabular-nums [appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
         className,

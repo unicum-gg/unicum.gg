@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
 import { useEffect, useRef } from "react";
 
 // Temporary navigation profiler. Off by default; enable from the browser

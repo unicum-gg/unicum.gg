@@ -1,5 +1,10 @@
 "use client";
 
+import type { NumberFormatter } from "@/lib/format";
+
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { SlidersHorizontalIcon } from "@phosphor-icons/react";
 import {
   type ReactNode,
@@ -18,15 +23,15 @@ import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.player_vehicle_columns";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const dec2Fmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const DEC2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pct2Fmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
 export function ratingForMetric(
@@ -44,7 +49,17 @@ function ratingColorClass(value: number, metric: RatingMetric): string {
   return RATING_COLOR_CLASS[wnxColor(value)];
 }
 
-export type PlayerCellCtx = { region: Region; metric: RatingMetric };
+/** What a cell needs beyond its own row. `num` rides here rather than being a
+ * third parameter: the context already exists for exactly this, and a column
+ * definition is data at module scope that cannot read a hook. */
+export type PlayerCellCtx = {
+  region: Region;
+  metric: RatingMetric;
+  num: NumberFormatter;
+  /** This file's own namespace, handed in like `num`: a column is a module
+   * constant, so it has no hook of its own to read a string with. */
+  t: ReturnType<typeof useTranslation>["t"];
+};
 export type PlayerCell = { node: ReactNode; className?: string };
 export type PlayerColumn = {
   key: string;
@@ -80,14 +95,16 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     align: "center",
     defaultVisible: true,
     hideOnMobile: true,
-    cell: (r) => {
+    cell: (r, ctx) => {
       const marks = r.moe;
       if (!marks || marks < 1 || marks > 3) return { node: DASH };
       const bars = marks as 1 | 2 | 3;
       return {
         node: (
           <span
-            title={`${marks} mark${marks > 1 ? "s" : ""} of excellence`}
+            title={ctx.t("n-marks-of-excellence",
+              { count: marks },
+            )}
             className="flex justify-center"
           >
             <MoEIcon bars={bars} color={MOE_COLORS[bars]} />
@@ -103,7 +120,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     tip: "Total games played on the tank",
     align: "end",
     defaultVisible: true,
-    cell: (r) => ({ node: intFmt.format(r.battles) }),
+    cell: (r, { num }) => ({ node: num(INT_FORMAT).format(r.battles) }),
     sortValue: (r) => r.battles,
   },
   {
@@ -111,7 +128,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     label: "Avg damage",
     align: "end",
     defaultVisible: true,
-    cell: (r) => ({ node: r.avgDamage != null ? intFmt.format(r.avgDamage) : DASH }),
+    cell: (r, { num }) => ({ node: r.avgDamage != null ? num(INT_FORMAT).format(r.avgDamage) : DASH }),
     sortValue: (r) => r.avgDamage ?? -1,
   },
   {
@@ -120,7 +137,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     align: "end",
     defaultVisible: true,
     hideOnMobile: true,
-    cell: (r) => ({ node: r.avgXp != null ? intFmt.format(r.avgXp) : DASH }),
+    cell: (r, { num }) => ({ node: r.avgXp != null ? num(INT_FORMAT).format(r.avgXp) : DASH }),
     sortValue: (r) => r.avgXp ?? -1,
   },
   {
@@ -129,8 +146,8 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     tip: "Overall (lifetime) win rate",
     align: "end",
     defaultVisible: true,
-    cell: (r) => ({
-      node: r.winrate != null ? `${pct2Fmt.format(r.winrate * 100)}%` : DASH,
+    cell: (r, { num }) => ({
+      node: r.winrate != null ? `${num(PCT2_FORMAT).format(r.winrate * 100)}%` : DASH,
       className:
         r.winrate != null ? RATING_COLOR_CLASS[winrateColor(r.winrate)] : undefined,
     }),
@@ -142,10 +159,10 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     align: "end",
     defaultVisible: true,
     header: (m) => metricLabel(m),
-    cell: (r, { metric }) => {
+    cell: (r, { metric, num }) => {
       const v = ratingForMetric(r, metric);
       return {
-        node: v != null ? dec2Fmt.format(v) : DASH,
+        node: v != null ? num(DEC2_FORMAT).format(v) : DASH,
         className: v != null ? ratingColorClass(v, metric) : undefined,
       };
     },
@@ -203,6 +220,10 @@ export function usePlayerColumns(): [Set<string>, (key: string) => void] {
 }
 
 export function PlayerColumnSelector() {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation(
+    "components/players/detail/tanks/vehicle-columns",
+  );
   const [selected, onToggle] = usePlayerColumns();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -224,7 +245,7 @@ export function PlayerColumnSelector() {
         className="flex h-7 cursor-pointer items-center gap-1.5 rounded-md border border-fd-border px-3 text-xs font-medium transition-colors hover:bg-fd-secondary/40"
       >
         <SlidersHorizontalIcon weight="bold" className="size-3.5" />
-        Columns
+        {t("columns")}
         <span className="text-fd-muted-foreground">
           {selected.size}/{PLAYER_COLUMNS.length}
         </span>
@@ -242,7 +263,7 @@ export function PlayerColumnSelector() {
                 onChange={() => onToggle(c.key)}
                 className="size-3.5 accent-brand"
               />
-              <span>{c.label}</span>
+              <span>{statLabel(c.label, tStats)}</span>
             </label>
           ))}
         </div>

@@ -1,7 +1,11 @@
 "use client";
 
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { useEffect, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import { PlusIcon } from "@phosphor-icons/react";
 import type { Region } from "@unicum.gg/wargaming";
 import type {
@@ -77,6 +81,8 @@ export function TankCompareView({
   catalog: CompareCatalog;
   ranges: SpecRanges;
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/tanks/compare/view");
   const router = useRouter();
   const searchParams = useSearchParams();
   // Client state, not a route: `router.replace` would re-render the server page
@@ -204,9 +210,9 @@ export function TankCompareView({
                 region={region}
                 excludeSlugs={new Set(vehicles.map((v) => v.slug))}
                 onPick={(tank) => onAdd(tank.slug)}
-                triggerAriaLabel="Add a vehicle"
-                tooltip="Add a vehicle"
-                placeholder="Add a tank..."
+                triggerAriaLabel={t("add-a-vehicle")}
+                tooltip={t("add-a-vehicle")}
+                placeholder={t("add-a-tank")}
                 triggerClassName="inline-flex h-7 cursor-pointer items-center gap-1 rounded-full border border-fd-border bg-fd-secondary/30 px-2.5 text-xs text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
                 triggerContent={
                   <>
@@ -218,7 +224,7 @@ export function TankCompareView({
             )}
           </div>
           <ShareButton
-            title="Share comparison"
+            title={t("share-comparison")}
             url={shareUrl}
             shareText={`${names.join(" vs ")} compared on ${APP.NAME}`}
             ogImage={unicumPublic.og
@@ -241,7 +247,7 @@ export function TankCompareView({
                   : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
               )}
             >
-              {t.label}
+              {statLabel(t.label, tStats)}
             </button>
           ))}
         </nav>

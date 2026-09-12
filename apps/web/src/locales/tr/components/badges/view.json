@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} Skor Tahtası",
+  "carried-beside-a-clan-tag": "Klan etiketinin yanında taşınır. Rütbe arması bir yarışmadaki yerdir: üzerindeki sayı o yeri, rengi ise hangi tabloyu gösterir. Puanlar hiçbir rozet kazandırmaz, çünkü WN8’de üst sıralarda olmak bir klanın kazandığı bir şey değildir.",
+  "clan-badges": "Klan rozetleri",
+  "clan-board": {
+    "name": "{board}, ilk {rank}",
+    "how": "{board} tablosunda ilk {rank} içindeki bir yer. Klan o yeri koruduğu sürece tutulur, koruyamadığında kaybedilir."
+  },
+  "clan-overflow": "Üçten fazla yer tutan bir klan, etiketi okunabilir kalsın diye geri kalanları en iyisi önce olacak şekilde {plus} armasında toplar. Üzerine gelindiğinde isimleri gösterilir.",
+  "featured-tournament-winner": {
+    "name": "Öne çıkan turnuva kazananı",
+    "how": "Aynısı, Wargaming’in öne çıkan olarak işaretlediği bir etkinlikte kazanılmıştır. Oyuncu tarafında olduğu gibi çelik yerine altın."
+  },
+  "heading": "Her {badge} ve nasıl kazanılacağı",
+  "heading-accent": "rozet",
+  "marks-carried-beside-a-nickname": "{NAME} üzerinde göründüğü her yerde, liderlik tablolarında, klan kadrolarında, aramada ve turnuva fikstürlerinde takma adın yanında taşınan işaretler.",
+  "n-badges": "{count} rozet",
+  "onslaught-champion": {
+    "name": "Hücum Şampiyonu",
+    "how": "Hücum’da Şampiyon rütbesine ulaştı. {standings} üzerinde görünmek için gereken tek şey budur. Sonrasında da korunur: puan eşiğin altına geri düşerse yer kaybedilir, ancak bu rütbeye daha önce ulaşılmış olması silinmez."
+  },
+  "onslaught-legend": {
+    "name": "Hücum Efsanesi",
+    "how": "Sezonun Legend kesim noktası içinde bir yer tutuldu. Bu bir puan değil, konumdur: aynı anda yalnızca belirli sayıda bulunur ve eşik, tutulduğu sezona göre değerlendirilir. Liderlik tablolarının Legend için kullandığı renk olan çelik mavisi yerine mor."
+  },
+  "player-badges": "Oyuncu rozetleri",
+  "player-overflow": "Üçten fazla rozet taşıyan bir oyuncu, tablo içinde takma ad okunabilir kalsın diye geri kalanları yukarıdaki sırayla bir {plus} armasında toplar. Üzerine gelindiğinde isimleri gösterilir ve her biri kendi arması gibi bağlantısını korur.",
+  "ranked-standings": "dereceli sıralamalar",
+  "streamer": {
+    "name": "Yayıncı",
+    "how": "Hesaba bağlı bir Twitch kanalı. Onaylamak için kendi profilinizde Twitch’i bağlayın. Arma kanalınıza bağlantı verir. Canlı olup olmadığınızı gösterir."
+  },
+  "streamer-who-is-on-air": "Yayında olan bir yayıncı ayrıca kırmızı CANLI etiketi taşır. Bu kazanılan veya korunan bir şey değildir: yayın başladığında görünür ve bittiğinde kaybolur, bu yüzden asla bir armanın içinde toplanmaz.",
+  "support-subscription": "destekçi aboneliği",
+  "supporter": {
+    "name": "Destekçi"
+  },
+  "supporter-note": "Herkese açık tutulan etkin bir {link}. Anonim kalmayı seçen destekçiler kendi tercihleriyle rozet taşımaz.",
+  "the-marks-a-player-or": "Bir oyuncunun veya klanın {NAME} üzerinde taşıyabileceği işaretler, her birinin anlattığı ve onu kazanmak için tam olarak gerekenler.",
+  "tournament-winner": {
+    "name": "Turnuva kazananı",
+    "how": "Klana atfedilen bir takım turnuva kazandı. Wargaming takımları ve hesapları kaydeder, klanları değil. Bu nedenle atıf, her kadronun oynandığı günkü klan üyeliğiyle karşılaştırılmasıyla bulunur."
+  },
+  "verified": {
+    "name": "Doğrulanmış",
+    "how": "Sahibi Wargaming.net kimliğiyle giriş yaptı ve bu hesabı bağladı. Giriş yapmak tek gerekliliktir ve ücretsizdir."
+  }
+}

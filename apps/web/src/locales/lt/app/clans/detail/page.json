@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "World of Tanks klanas [{tag}] {name} ({region}), {members} nariai",
+    "description": "{name} [{tag}] klanas regione {region}: {members} nariai, pilna narių lentelė su WN8 ir WNX reitingais, pastarasis prisijungimų ir išėjimų aktyvumas bei klano istorija."
+  },
+  "stronghold": {
+    "title": "Klanas [{tag}] {name}, tvirtovės statistika ({region})",
+    "description": "{name} [{tag}] tvirtovės rezultatai regione {region}: susirėmimų ir puolimų reitingai, mūšiai ir pergalių procentas kiekvienam nariui."
+  },
+  "clan-wars": {
+    "title": "Klanas [{tag}] {name}, Klano karų statistika ({region})",
+    "description": "{name} [{tag}] Klano karų rezultatai regione {region}: kiekvieno nario reitingai, mūšiai ir pergalių procentas pasaulio žemėlapio kampanijose."
+  },
+  "tanks": {
+    "title": "Klanas [{tag}] {name}, tankai ({region}), klano transporto priemonės",
+    "description": "Kiekviena transporto priemonė, kurią regione {region} žaidė {name} [{tag}], su visų klano narių mūšių, pergalių procento ir vidutinės žalos suvestine."
+  },
+  "manage": {
+    "title": "Klanas [{tag}] {name}, tvirtovės atsargos ({region})",
+    "description": "Aktyvuoti ir suplanuoti {name} [{tag}] tvirtovės atsargas. Tik karininkams."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks klanas regione {region}: narių lentelė su WN8/WNX reitingais, prisijungimų ir išėjimų aktyvumas, pastarieji mūšiai bei pilna klano istorija."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Dar keli žodžiai: liko {count}.",
+  "at-winrate": "su {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Nepavyko atšaukti. Pabandykite dar kartą netrukus.",
+  "hide-the-detailed-axes": "Slėpti išsamias ašis",
+  "not-enough-battles": "Šiuo tanku žaidėte nepakankamai, kad jūsų balsas būtų įskaičiuotas.",
+  "published-once-read": "Bus paskelbta, kai moderatorius perskaitys. Jūsų žvaigždutės įskaičiuojamos iš karto.",
+  "rate-it-in-detail": "Įvertinti išsamiai (neprivaloma)",
+  "review": {
+    "none": "Įvertinimas išsaugotas.",
+    "queued": "Reitingas išsaugotas. Jūsų apžvalgą nagrinėja moderatorius.",
+    "published": "Reitingas išsaugotas. Jūsų apžvalga jau paskelbta.",
+    "pending": "Reitingas išsaugotas. Jūsų apžvalgos dar laukia moderatorius.",
+    "rejected": "Reitingas išsaugotas. Ankstesnė jūsų apžvalga nebuvo paskelbta, todėl įskaičiuojamos tik žvaigždutės.",
+    "closed": "Reitingas išsaugotas. Rašytinės nuomonės šiuo metu uždarytos, todėl tekstas neišsaugotas."
+  },
+  "save-failed": "Nepavyko išsaugoti. Pabandykite dar kartą netrukus.",
+  "say-why-optional": "Pasakykite kodėl (neprivaloma)",
+  "signed-with": "Pasirašyta jūsų {battles} mūšiais",
+  "submit-my-rating": "Pateikti mano reitingą",
+  "too-many-edits": "Vienu metu atlikta labai daug pakeitimų. Palaukite minutę.",
+  "update-my-rating": "Atnaujinti mano reitingą",
+  "what-it-is-good-at": "Kam jis geras, kam ne, ir kas turėtų juo žaisti.",
+  "withdraw": "Atšaukti",
+  "your-rating-has-been-withdrawn": "Jūsų reitingas atšauktas.",
+  "your-review-is-waiting-on": "Jūsų apžvalgos laukia moderatorius. Čia ją matote tik jūs.",
+  "your-review-was-not-published": "Jūsų apžvalga nebuvo paskelbta. Jūsų žvaigždutės vis tiek įskaičiuojamos į vidurkį."
+}

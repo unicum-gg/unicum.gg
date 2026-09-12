@@ -1,0 +1,17 @@
+{
+  "aim-time": "Timp de miră",
+  "ammo": "Muniție",
+  "armor": "Blindaj",
+  "dispersion": "Dispersie",
+  "fire-chance": "Șansă de incendiu",
+  "gun-arc": "Arcul tunului",
+  "hit-points": "Puncte de viață",
+  "load-limit": "Limită de încărcare",
+  "mounted-on": "Montat pe {tanks}",
+  "power": "Putere",
+  "reload": "Reîncarcare",
+  "signal-range": "Distanță de semnal",
+  "tier": "Generaţie {tier}",
+  "traverse": "Rotație",
+  "view-range": "Distanță de observație"
+}

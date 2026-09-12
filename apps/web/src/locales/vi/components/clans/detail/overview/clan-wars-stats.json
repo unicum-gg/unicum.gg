@@ -1,0 +1,21 @@
+{
+  "stat": "Thống kê",
+  "periods": {
+    "total": "Tổng",
+    "day": "24 giờ qua",
+    "week": "7 ngày qua",
+    "month": "30 ngày qua"
+  },
+  "sections": {
+    "territory": "Lãnh thổ",
+    "t10": "Cấp X",
+    "t8": "Cấp VIII",
+    "t6": "Cấp VI"
+  },
+  "rows": {
+    "provinces": "Các tỉnh",
+    "elo": "ELO",
+    "battles": "Số trận",
+    "winrate": "Tỷ lệ thắng"
+  }
+}

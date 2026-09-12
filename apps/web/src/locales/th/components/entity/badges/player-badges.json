@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "อันดับ 1",
+    "2": "อันดับ 2",
+    "3": "อันดับ 3"
+  },
+  "streamer": "สตรีมเมอร์ · รับชม {name} บน Twitch",
+  "tournament": {
+    "one": "รายชื่อผู้เล่นที่ชนะ {title}",
+    "many": "อยู่ในรายชื่อผู้เล่นที่ชนะ {count} รายการ ผู้เล่นที่ดีที่สุดใน {title}",
+    "featured": "{text} · อีเวนต์แนะนำ",
+    "unnamed": "การแข่งขัน Wargaming"
+  },
+  "tournament-wins": "{count, plural, other {# ชัยชนะในการแข่งขัน}}",
+  "watch-on-twitch": "รับชม {name} บน Twitch",
+  "watch-on-twitch-viewers": "รับชม {name} บน Twitch · ผู้ชม {viewers} คน"
+}

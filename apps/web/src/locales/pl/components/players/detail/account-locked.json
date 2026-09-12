@@ -1,0 +1,5 @@
+{
+  "title": "Konto zablokowane",
+  "body": "Konto gracza {nickname} istnieje w regionie {region}, ale zostało zablokowane przez Wargaming, więc jego statystyki są niedostępne.",
+  "back-to-home": "Powrót do domu"
+}

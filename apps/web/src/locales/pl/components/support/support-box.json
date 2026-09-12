@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Zakup anulowany.",
+  "claim-your-supporter-role-on-discord": "Odbierz w serwisie Discord status „Rola Supporter”",
+  "could-not-add-the-discord-role-please-try-ag": "Nie udało się dodać statusu „Rola Supporter” w serwisie Discord. Spróbuj ponownie.",
+  "could-not-open-the-billing-portal": "Nie udało się otworzyć portalu rozliczeniowego.",
+  "could-not-start-checkout-please-try-again": "Nie udało się rozpocząć procesu płatności. Spróbuj ponownie.",
+  "could-not-update-your-preference": "Nie udało się zaktualizować Twojego ustawienia.",
+  "log-in-with-wargaming": "Zaloguj się przez Wargaming",
+  "log-in-with-wargaming-to": "Zaloguj się przez Wargaming, aby wesprzeć {NAME}.",
+  "manage-subscription": "Zarządzaj subskrypcją",
+  "only-active-supporters-can-claim-the-discord": "Tylko osoby z aktywnym statusem Supporter mogą odebrać w serwisie Discord status „Rola Supporter”.",
+  "or-choose-your-own-amount": "Lub wybierz własną kwotę",
+  "pay-what-you-want": "Zapłać, ile chcesz.",
+  "pick-an-amount": "Wybierz kwotę lub wpisz własną, od €{min} miesięcznie.",
+  "re-sync-discord-role": "Ponownie zsynchronizuj w serwisie Discord status „Rola Supporter”",
+  "secured-by-stripe": "Płatności zabezpiecza Stripe. Anuluj w dowolnym momencie.",
+  "show-me-anonymously-on-the": "Wyświetlaj mnie anonimowo na podium",
+  "support-subscriptions-are-coming-soon": "Subskrypcje w ramach opcji Wsparcie będą dostępne wkrótce.",
+  "supporter-role-added-on-discord": "Status „Rola Supporter” został dodany w serwisie Discord!",
+  "you-are-a-supporter-thank": "Masz status Supporter. Dziękujemy, że pomagasz utrzymać {NAME} przy życiu."
+}

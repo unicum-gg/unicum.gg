@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. razred",
+      "tip": "3. razred: XP potreban za nadmašivanje 50% igrača"
+    },
+    "class2": {
+      "label": "2. razred",
+      "tip": "2. razred: XP potreban za nadmašivanje 80% igrača"
+    },
+    "class1": {
+      "label": "1. razred",
+      "tip": "1. razred: XP potreban za nadmašivanje 95% igrača"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: XP potreban za nadmašivanje 99% igrača"
+    }
+  },
+  "rows-per-page": "Redova po stranici",
+  "previous-page": "Prethodna stranica",
+  "page": "Stranica {current} / {totalPages}",
+  "next-page": "Sljedeća stranica",
+  "all": "Sve"
+}

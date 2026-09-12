@@ -1,0 +1,7 @@
+{
+  "live": "Live",
+  "the-vehicle-as-it-is": "The vehicle as it is in the game right now.",
+  "common-test": "Common Test",
+  "common-test-2": "Common Test {testVersion}",
+  "the-vehicle-as-the-test": "The vehicle as the test build has it. Not released: Wargaming can still change or drop any of it before the update ships."
+}

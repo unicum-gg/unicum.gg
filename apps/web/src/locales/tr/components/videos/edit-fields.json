@@ -1,0 +1,14 @@
+{
+  "close": "Kapat",
+  "combined-damage": "Birleşik hasar",
+  "damage-dealt-plus-assisted-as": "Verilen hasar ve destek hasarı birlikte gösterilir, çünkü savaş sonrası ekran bunları toplar.",
+  "format": "Format",
+  "no-reason-recorded": "Herhangi bir neden kaydedilmedi. Bu nedenle yeniden göndermeden önce Discord’da sormaya değer.",
+  "players-per-team": "Takım başına oyuncu",
+  "save": "Kaydet",
+  "saved-it-is-in-the": "Kaydedildi. Moderasyon sırasında ve bir moderatör inceledikten sonra sitede görünür.",
+  "saving": "Kaydediliyor…",
+  "tier": "Seviye",
+  "turned-down": "Reddedildi",
+  "what-was-played": "Ne oynandı"
+}

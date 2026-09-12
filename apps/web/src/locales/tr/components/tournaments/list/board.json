@@ -1,0 +1,14 @@
+{
+  "date": "Tarih",
+  "featured-tournament": "Öne çıkan turnuva",
+  "format": "Format",
+  "mode": "Mod",
+  "no-tournament-matches-the-current": "Mevcut filtrelerle eşleşen turnuva yok.",
+  "nothing-here-right-now-wargaming": "Şu anda burada hiçbir şey yok. Wargaming her gün yeni turnuvalar açar, bu nedenle liste kendiliğinden yeniden dolar.",
+  "prize": "Ödül",
+  "region-tournaments": "{region} turnuvaları ({count})",
+  "status": "Durum",
+  "teams": "Takımlar",
+  "tier": "Seviye",
+  "tournament": "Turnuva"
+}

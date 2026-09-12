@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistik for tilfældige kampe for {nickname}",
+  "progression": "{metricLabel}-udvikling for {nickname}",
+  "solid-line-is-overall-matches": "Den fuldt optrukne linje er samlet {metricLabel} (matcher kolonnen I alt ovenfor) og ændrer sig langsomt, efterhånden som nye kampe bliver tilføjet. Den stiplede linje er {metricLabel2} pr. session, beregnet ud fra kampene, der er spillet siden det forrige øjebliksbillede. Den viser varme og kolde perioder. Linjens farve følger vurderingsniveauet.",
+  "tanks-shaping-s-rating": "Kampvogne, der former vurderingen for {nickname}",
+  "tanks": "{nickname}’s tanks",
+  "stats": "Statistik for {nickname}s {strongholdLabel}"
+}

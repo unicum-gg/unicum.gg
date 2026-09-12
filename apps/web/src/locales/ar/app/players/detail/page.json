@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "دبابات {name} ({region})، كل مركبة تم لعبها",
+    "description": "كل دبابة لعبها {name} في {region}، مع المعارك ونسبة الفوز ومتوسط الضرر وWN8 لكل مركبة."
+  },
+  "achievements": {
+    "title": "إنجازات {name} ({region})، {medals} ميدالية مكتسبة",
+    "description": "ميداليات World of Tanks الـ{medals} التي كسبها {name} في {region}، من ميداليتي Kolobanov وPool إلى الرتب الفخرية والميداليات الملحمية، إضافة إلى كل ميدالية ما زالت بانتظاره."
+  },
+  "tournaments": {
+    "title": "بطولات {name} ({region})",
+    "description": "كل بطولة Wargaming شارك فيها {name} في {region}: الفريق الذي لعب له، والصيغة، والمدى الذي بلغه. سجل تنشره Wargaming من جهة البطولة فقط، وليس من جهة اللاعب."
+  },
+  "value": {
+    "title": "قيمة حساب {name} ({region})",
+    "description": "قيمة حساب World of Tanks الخاص بـ{name} في {region}: الأرصدة والذهب والخبرة المحتجزة في المرآب."
+  },
+  "mode": {
+    "title": "إحصائيات {name} في نمط {mode} ({region})",
+    "description": "{name} في {region} ضمن نمط {mode}: المعارك ونسبة الفوز والتقييمات لهذا النمط، إلى جانب خطه الأساسي في المعارك العشوائية."
+  },
+  "overview": {
+    "title": "إحصائيات World of Tanks لـ{name} ({region})، {battles} معركة، نسبة الفوز {winrate}%",
+    "description": "{name} في {region}: {battles} معركة، نسبة الفوز {winrate}%، تقييم {rating}. تفصيل لكل دبابة، وWN8 وWNX، وتاريخ العشائر الكامل."
+  },
+  "locked": {
+    "title": "حساب World of Tanks لـ{name} مقفل ({region})",
+    "description": "يوجد {name} ({region})، لكن Wargaming أقفل هذا الحساب، لذلك لا تتوفر إحصائيات World of Tanks الخاصة به."
+  },
+  "empty": {
+    "title": "إحصائيات لاعب World of Tanks {name} ({region})",
+    "description": "إحصائيات لاعب World of Tanks {name} ({region}): تقييمات WN8 وWNX، ونسبة الفوز، وتفصيل لكل دبابة، وتاريخ العشائر الكامل."
+  }
+}

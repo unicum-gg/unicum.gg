@@ -1,0 +1,7 @@
+{
+  "loading": "{count} Fahrzeuge der Stufe {tier}, Namen werden geladen…",
+  "loading-one": "{count} Fahrzeug der Stufe {tier}, Name wird geladen…",
+  "and-more": "und {count} weitere",
+  "hint": "Klicken, um sie im Tab „Panzer“ zu öffnen",
+  "tier": "Stufe"
+}

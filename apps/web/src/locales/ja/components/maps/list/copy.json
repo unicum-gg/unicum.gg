@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "全{count}件のWorld of Tanks戦闘アリーナ。迷彩とゲームモードで絞り込み、マップを開いてミニマップ、サイズ、モードごとの基地フラグと出撃地点を確認できます。",
+    "title": "World of Tanksの全マップ（{region}）、すべての戦闘アリーナ",
+    "description": "{region}のWorld of Tanksマップをすべて閲覧できます。ミニマップ、サイズ、迷彩、対応ゲームモード、モードごとの基地フラグと出撃地点を掲載しています。",
+    "heading": "すべての <accent>マップ</accent>"
+  },
+  "battle-type": {
+    "intro": "{type}でプレイされるWorld of Tanksの{count}マップ、{blurb}。マップを開いてミニマップ、サイズ、モードごとの基地フラグと出撃地点を確認できます。",
+    "title": "World of Tanksの{type}マップ（{region}）、ローテーション中のすべてのアリーナ",
+    "description": "{region}の{type}ローテーションにあるWorld of Tanksマップをすべて掲載しています。ミニマップ、サイズ、迷彩、対応ゲームモード、基地フラグと出撃地点を確認できます。",
+    "heading": "{type} <accent>マップ</accent>"
+  },
+  "blurbs": {
+    "random": "標準15対15ローテーション",
+    "battle_royale": "最後の1両が生き残るモード",
+    "frontline": "30対30の大規模モード",
+    "onslaught": "ランク戦の7対7モード",
+    "onslaught_night": "暗闇の中、短い視認範囲で行われるランク戦 7対7 モード。現在は共通テストでプレイ可能",
+    "grand_battle": "30対30のTier Xモード",
+    "clan_wars": "クランウォーズと進撃戦",
+    "waffentrager": "Waffenträgerイベント",
+    "last_stand": "Last Standイベント",
+    "arcade": "アーケードと特別イベント",
+    "story_mode": "ストーリー重視の作戦",
+    "training": "トレーニングルームとチュートリアル"
+  }
+}

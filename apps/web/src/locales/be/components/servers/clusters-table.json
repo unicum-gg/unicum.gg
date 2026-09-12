@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Кластар яшчэ не запісаны.",
+  "server": "Сервер",
+  "online": "Онлайн",
+  "share": "Падзяліцца",
+  "peak": "Пік ({label})",
+  "average": "Сярэдняе ({label})",
+  "not-reported": "Не паведамлена",
+  "total": "Агульны"
+}

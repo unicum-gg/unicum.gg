@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktive Tage",
+  "add-workflow": "Workflow hinzufügen",
+  "connect-discord": "Discord verbinden",
+  "discord-notifications": "Discord-Benachrichtigungen",
+  "each-workflow-activates-its-reserves": "Jeder Workflow aktiviert seine Reserven innerhalb eines Zeitfensters, sobald genügend Mitglieder gerade spielen. Er läuft über dein Konto, du musst nicht online sein. Füge so viele hinzu, wie du brauchst.",
+  "enabled": "Aktiviert",
+  "from": "Von",
+  "get-a-discord-message-in": "Erhalte jedes Mal, wenn ein Boost aktiviert wird, eine Discord-Nachricht in einem Kanal deiner Wahl, damit der gesamte Clan weiß, dass er aktiv ist.",
+  "log-in-with-wargaming-to": "Mit Wargaming anmelden, um es einzurichten",
+  "min-online": "Min online",
+  "officers": "Offiziere",
+  "only-an-officer-of-this": "Nur ein Offizier dieses Clans kann dies einrichten.",
+  "schedule-preview": "Zeitplanvorschau",
+  "set-your-hours-and-reserves": "Lege deine Zeiten und Reserven einmal fest. Die Boosts werden dann selbstständig pünktlich aktiviert, auch wenn niemand da ist, um den Knopf zu drücken.",
+  "stronghold-boosts": "Festungsboni",
+  "times-are-in-your-timezone": "Zeitangaben erfolgen in {tz}, deiner Zeitzone.",
+  "to": "Zu"
+}

@@ -1,0 +1,60 @@
+{
+  "columns-label": "Kolonner",
+  "groups": {
+    "general": "Generel",
+    "combat": "Kamp"
+  },
+  "columns": {
+    "battles": {
+      "label": "Kampe",
+      "tip": "Samlet antal kampe spillet på kampvognen"
+    },
+    "count": {
+      "label": "Tælling",
+      "tip": "Antal registrerede spillere i stikprøven"
+    },
+    "rating": {
+      "label": "Rating (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Sejrsrate på kampvognen"
+    },
+    "playerWr": {
+      "label": "Spiller WR",
+      "tip": "Gennemsnitlig samlet sejrsrate for spillere, der kører den"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Gennemsnitlig skade pr. spil"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Drab / dødsfald-forhold"
+    },
+    "assists": {
+      "label": "Assists",
+      "tip": "Gennemsnitlig assisteret skade"
+    },
+    "hitPct": {
+      "label": "Ramt %",
+      "tip": "Træffere / skud"
+    },
+    "penPct": {
+      "label": "Pen %",
+      "tip": "Gennembrydninger / træffere"
+    },
+    "spots": {
+      "label": "Spotter",
+      "tip": "Gennemsnitligt antal opdagede fjender pr. spil"
+    },
+    "blocked": {
+      "label": "Blokeret",
+      "tip": "Gennemsnitlig skade blokeret af panser"
+    },
+    "survival": {
+      "label": "Overlevelse",
+      "tip": "Andel overlevede kampe"
+    }
+  }
+}

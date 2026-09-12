@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Cena (krediti)",
+    "buyGold": "Cena (zlato)",
+    "researchXp": "Istraživački XP",
+    "shellCost": "Cena projekta",
+    "ammoCost": "Cena pune municije",
+    "class3": "3. razred",
+    "class2": "2. razred",
+    "class1": "1. razred",
+    "ace": "As Tenkista",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Marka (85%)",
+    "mark3": "3 Marke (95%)"
+  }
+}

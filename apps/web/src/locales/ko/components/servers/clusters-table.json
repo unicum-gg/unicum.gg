@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "아직 기록된 클러스터가 없습니다.",
+  "server": "서버",
+  "online": "온라인",
+  "share": "공유",
+  "peak": "최대 ({label})",
+  "average": "평균 ({label})",
+  "not-reported": "보고되지 않음",
+  "total": "전체"
+}

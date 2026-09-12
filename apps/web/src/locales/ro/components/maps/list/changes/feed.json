@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# hartă} few {# hărți} other {# hărți}}",
+  "no-map-changes-have-been": "Nu au fost înregistrate încă schimbări ale hărților. Pe măsură ce Wargaming reface hărțile, aici va apărea ce a schimbat fiecare actualizare.",
+  "update": "Actualizează {version}"
+}

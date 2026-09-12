@@ -1,0 +1,13 @@
+{
+  "assists": "Asistencias",
+  "close": "Cerrar",
+  "damage": "Daño",
+  "in-the-queue": "Está en la cola y aparecerá en esta pestaña cuando un moderador lo haya revisado.",
+  "optional": "(opcional)",
+  "paste-a-youtube-link": "Pega un enlace de YouTube y establece el momento exacto en que comienza la batalla. Todos los que lo abran llegarán a ese segundo, por lo que una sugerencia con una marca de tiempo incorrecta se rechazará durante la revisión.",
+  "sending": "Enviando…",
+  "suggest": "Sugerir",
+  "suggest-a-video": "Sugerir un vídeo",
+  "suggest-another": "Sugerir otro",
+  "suggestion-sent": "Sugerencia enviada"
+}

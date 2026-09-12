@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Rijen per pagina",
+  "previous-page": "Vorige pagina",
+  "page": "Pagina {current} / {totalPages}",
+  "next-page": "Volgende pagina",
+  "all": "Allen"
+}

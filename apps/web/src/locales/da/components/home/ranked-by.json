@@ -1,0 +1,6 @@
+{
+  "day": "Rangeret efter {metric} de seneste 24 timer (min. 20 kampe).",
+  "week": "Rangeret efter {metric} de seneste 7 dage (min. 140 kampe).",
+  "month": "Rangeret efter {metric} de seneste 30 dage (min. 600 kampe).",
+  "overall": "Rangeret efter {metric} gennem hele historikken (min. 20.000 kampe)."
+}

@@ -1,0 +1,12 @@
+{
+  "clans-history": "ประวัติแคลนของ {nickname}",
+  "clans-in-clans": "แคลน {totalClans} แคลน · {timeInClansSeconds} ในแคลน",
+  "current": "ปัจจุบัน",
+  "duration": "ระยะเวลา",
+  "from": "จาก",
+  "name": "ชื่อ",
+  "no-clan-history": "ไม่มีประวัติแคลน",
+  "role": "บทบาท",
+  "tag": "แท็ก",
+  "to": "ถึง"
+}

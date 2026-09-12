@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Trung bình trên {rated} trong số {size} người chơi",
+  "average-over-recent": "Trung bình trên {rated} trong số {size} người chơi đã chơi trong 30 ngày gần nhất",
+  "metric-over-last-30-days": "{metric} trong 30 ngày gần nhất",
+  "n-confirmed": "{count} đã xác nhận",
+  "no-team-matches-the-current": "Không có đội nào phù hợp với các bộ lọc hiện tại.",
+  "no-teams-recorded-yet-registrations": "Chưa có đội nào được ghi nhận. Danh sách đăng ký xuất hiện ở đây sau khi giải đấu này được đọc đầy đủ, thường trong vài phút kể từ khi giải đấu mở đăng ký.",
+  "none-played-in-30-days": "Không ai trong danh sách này đã chơi trong 30 ngày gần nhất",
+  "players": "Người chơi",
+  "qualified": "Đã đủ điều kiện",
+  "reward": "Phần thưởng",
+  "team": "Đội",
+  "teams": "Các đội ({length})",
+  "wr": "WR"
+}

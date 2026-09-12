@@ -1,5 +1,7 @@
 "use client";
 
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   ArrowRightIcon,
   ArrowSquareOutIcon,
@@ -8,7 +10,7 @@ import {
   KeyIcon,
   ShieldCheckIcon,
 } from "@phosphor-icons/react";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
 import type { ReactNode } from "react";
 import {
   DialogContent,
@@ -59,6 +61,7 @@ export function LoginModal({
    */
   callbackURL?: string;
 }) {
+  const { t } = useTranslation("components/login-modal");
   const { region: browsing } = useRegion();
   // Read from `window` rather than `useSearchParams`, which would opt every
   // page carrying the top-bar widget out of static rendering. Safe here because
@@ -87,11 +90,9 @@ export function LoginModal({
        though the reassurance block makes it taller than it is wide. */
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Log in with Wargaming.net ID</DialogTitle>
+        <DialogTitle>{t("log-in-with-wargaming-net")}</DialogTitle>
         <DialogDescription>
-          Pick the region your World of Tanks account is on. It does not have to
-          be the region you are browsing.
-        </DialogDescription>
+          {t("pick-the-region-your-world")}</DialogDescription>
       </DialogHeader>
 
       <div className="flex flex-col gap-2">
@@ -125,30 +126,32 @@ export function LoginModal({
  * above), what we get back, and where to read the code that does it.
  */
 function Assurances() {
+  const { t: tCopy } = useTranslation("components/login-modal");
+  const { t } = useTranslation("components/login-modal");
   return (
     <div className="flex flex-col gap-2.5 rounded-lg border border-fd-border bg-fd-secondary/20 p-3">
       <Assurance icon={ShieldCheckIcon}>
-        You sign in on Wargaming&apos;s own page, not here. Your password is
-        never typed on {APP.NAME} and never reaches us.
-      </Assurance>
+        {t("you-sign-in-on-wargaming", { NAME: APP.NAME })}</Assurance>
       <Assurance icon={KeyIcon}>
-        What Wargaming hands back is a token that reads your own account data.
-        It is stored encrypted and renewed while your account stays linked, and
-        it only ever acts for you where you set that up yourself, like your
-        clan&apos;s reserve schedule.
-      </Assurance>
+        {t("what-wargaming-hands-back-is")}</Assurance>
       <Assurance icon={GithubLogoIcon}>
-        {APP.NAME} is open source.{" "}
-        <a
-          href={AUTH_SOURCE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-fd-foreground underline underline-offset-2 hover:text-brand"
-        >
-          Read the login code
-          <ArrowSquareOutIcon className="size-3" weight="bold" />
-        </a>{" "}
-        before you trust it.
+        <Interpolate
+          template={tCopy("open-source")}
+          values={{
+            name: APP.NAME,
+            link: (
+              <a
+                href={AUTH_SOURCE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-fd-foreground underline underline-offset-2 hover:text-brand"
+              >
+                {tCopy("read-the-login-code")}
+                <ArrowSquareOutIcon className="size-3" weight="bold" />
+              </a>
+            ),
+          }}
+        />
       </Assurance>
     </div>
   );

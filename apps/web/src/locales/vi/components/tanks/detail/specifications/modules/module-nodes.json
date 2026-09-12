@@ -1,0 +1,17 @@
+{
+  "aim-time": "Thời gian ngắm",
+  "ammo": "Đạn dược",
+  "armor": "Giáp",
+  "dispersion": "Khuếch tán",
+  "fire-chance": "Xác suất cháy",
+  "gun-arc": "Góc súng",
+  "hit-points": "Điểm hit",
+  "load-limit": "Giới hạn tải trọng",
+  "mounted-on": "Lắp trên {tanks}",
+  "power": "Công suất",
+  "reload": "Tái nạp",
+  "signal-range": "Phạm vi tín hiệu",
+  "tier": "Cấp {tier}",
+  "traverse": "Quay",
+  "view-range": "Phạm vi nhìn"
+}

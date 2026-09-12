@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "إحصاءات المعارك العشوائية لـ{nickname}",
+  "progression": "تقدم {metricLabel} لدى {nickname}",
+  "solid-line-is-overall-matches": "السطر المتصل هو {metricLabel} الإجمالي، ويطابق عمود الإجمالي أعلاه، ويتغير ببطء مع تراكم المعارك الجديدة. السطر المتقطع هو {metricLabel2} لكل جلسة، محسوب من المعارك التي تم لعبها منذ اللقطة السابقة. وهو يوضح سلاسل الأداء الجيد والسيئ. ويتبع لون السطر فئة التقييم.",
+  "tanks-shaping-s-rating": "الدبابات التي تشكّل تقييم {nickname}",
+  "tanks": "دبابات {nickname}",
+  "stats": "إحصاءات {strongholdLabel} لدى {nickname}"
+}

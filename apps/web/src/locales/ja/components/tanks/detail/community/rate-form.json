@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "もう少し詳しく: 残り {count} 文字",
+  "at-winrate": "{winrate}%の時に",
+  "could-not-withdraw-that-try-again-in-a-momen": "取り消せませんでした。しばらくしてから再試行してください",
+  "hide-the-detailed-axes": "詳細軸を非表示",
+  "not-enough-battles": "この戦車のプレイ数が少なすぎるため、投票を集計できません",
+  "published-once-read": "モデレーターが既読にすると公開されます。星の数はすぐに集計されます",
+  "rate-it-in-detail": "詳細に評価 (オプショナル)",
+  "review": {
+    "none": "評価が保存されました。",
+    "queued": "レーティングを保存しました。レビューはモデレーターの確認待ちです",
+    "published": "レーティングを保存しました。レビューはすでに公開されています",
+    "pending": "レーティングを保存しました。レビューはまだモデレーターの確認待ちです",
+    "rejected": "レーティングを保存しました。以前のレビューは公開されなかったため、星の数だけが集計されます",
+    "closed": "レーティングを保存しました。現在は文章による意見を受け付けていないため、本文は保存されませんでした"
+  },
+  "save-failed": "保存できませんでした。しばらくしてから再試行してください",
+  "say-why-optional": "理由を記入 (オプショナル)",
+  "signed-with": "{battles} 戦の戦績を添えて送信",
+  "submit-my-rating": "評価を送信",
+  "too-many-edits": "一度に多くの変更が行われました。少し時間を置いてください",
+  "update-my-rating": "評価を更新",
+  "what-it-is-good-at": "得意なこと、苦手なこと、そして誰がプレイすべきか",
+  "withdraw": "取り下げる",
+  "your-rating-has-been-withdrawn": "あなたの評価は取り消されました",
+  "your-review-is-waiting-on": "レビューはモデレーターの確認待ちです。ここで見られるのはあなただけです",
+  "your-review-was-not-published": "レビューは公開されませんでした。星の数は平均に引き続き反映されます"
+}

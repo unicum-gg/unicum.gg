@@ -1,0 +1,3 @@
+{
+  "n-battles": "{count, plural, zero {# معركة} one {# معركة} two {# معركتان} few {# المعارك} many {# المعارك} other {# معركة}}"
+}

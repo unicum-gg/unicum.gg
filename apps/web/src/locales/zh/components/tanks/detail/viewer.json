@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "可视化",
+    "collision": "碰撞",
+    "live": "实时"
+  },
+  "centre": {
+    "on": "将车辆置于中央",
+    "off": "将车辆移回偏离中央的位置"
+  },
+  "hull-down": {
+    "on": "炮塔下",
+    "off": "调平车辆"
+  },
+  "tracks": {
+    "on": "运行履带",
+    "off": "停止履带"
+  },
+  "textures": {
+    "on": "高清纹理",
+    "off": "标准纹理"
+  },
+  "reset": "重置视图",
+  "style": "选择样式",
+  "style-worn": "样式: {name}",
+  "search-styles": "搜 索 风格",
+  "colours": "颜色含义",
+  "cinematic": {
+    "off": "电影镜头：关闭",
+    "auto": "电影镜头：闲置时启用",
+    "on": "电影镜头：始终启用"
+  },
+  "open-tank": "打开另一辆坦克",
+  "open-tank-placeholder": "打开坦克...",
+  "more-actions": "更多操作",
+  "marks-meaning": {
+    "0": "无卓越标记",
+    "1": "一个标记：超过该坦克65%的玩家",
+    "2": "两个标记：超过85%的玩家",
+    "3": "三个标记：超过95%的玩家"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "填充窗口",
+      "leave": "返回页面"
+    },
+    "screen": {
+      "enter": "填充屏幕",
+      "leave": "退出全屏"
+    }
+  },
+  "marks-count": {
+    "0": "无卓越标记",
+    "one": "1个卓越标记",
+    "other": "{count}个卓越标记"
+  },
+  "compare-tank": "与另一辆坦克对比",
+  "compare-tank-placeholder": "比较...",
+  "view-tooltips": {
+    "visual": "游戏绘制出的坦克",
+    "collision": "每块装甲板的厚度",
+    "live": "所选炮弹会造成的效果"
+  },
+  "cinematic-tooltips": {
+    "off": "电影镜头：关闭，视角保持不动",
+    "auto": "电影镜头：独处30秒后开始",
+    "on": "电影镜头：始终启用，从你松手的那一刻开始"
+  }
+}

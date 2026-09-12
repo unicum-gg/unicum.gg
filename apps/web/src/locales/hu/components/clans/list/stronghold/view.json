@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Még nincs adat. Nézz vissza, miután frissültek a klánok.",
+  "heading": "Legjobb <accent>{tier}</accent> klánok",
+  "blurb": "Régiós ranglista: {region}, az összes nyomon követett klán {sort} szerinti rangsora {format} formátumban (legalább {battles} csata).",
+  "blurb-period": "Régiós ranglista: {region}, az összes nyomon követett klán {sort} szerinti rangsora {format} formátumban az elmúlt {period} során (legalább {battles} csata).",
+  "format-advances": "Előrenyomulások (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Legjobb {count} {tier} klán ·"
+}

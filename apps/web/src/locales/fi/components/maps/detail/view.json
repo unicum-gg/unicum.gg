@@ -1,0 +1,9 @@
+{
+  "battle-time": "Taisteluaika",
+  "camouflage": "{camouflage} suojaus",
+  "mode": "Tila",
+  "n-random-events": "{count, plural, one {# satunnainen tapahtuma} other {# satunnaiset tapahtumat}}",
+  "random-events": "Satunnaiset tapahtumat",
+  "size": "Koko",
+  "team-size": "Tiikokoko"
+}

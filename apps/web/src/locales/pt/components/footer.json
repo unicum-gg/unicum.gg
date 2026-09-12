@@ -1,0 +1,25 @@
+{
+  "tagline": "Criado para a comunidade de World of Tanks. Estatísticas gratuitas para todos os jogadores, clãs, tanques e mapas nas regiões EU, NA e Ásia.",
+  "columns": {
+    "leaderboards": "Classificações",
+    "tanks": "Tanques",
+    "maps": "Mapas",
+    "integrations": "Integrações",
+    "project": "Projeto"
+  },
+  "links": {
+    "top-tanks": "Tanques principais",
+    "bot": "Bot do Discord",
+    "mcp": "Servidor MCP",
+    "docs": "Documentação da API",
+    "badges": "Emblemas",
+    "glossary": "Glossário",
+    "coverage": "Cobertura",
+    "support": "Apoie-nos",
+    "source": "Código-fonte",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Não afiliado à Wargaming",
+  "cookies": "Gerir cookies"
+}

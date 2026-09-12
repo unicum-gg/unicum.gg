@@ -1,0 +1,9 @@
+{
+  "battle-time": "Kamp tid",
+  "camouflage": "{camouflage} kamuflage",
+  "mode": "Tilstand",
+  "n-random-events": "{count, plural, one {# tilfældig begivenhed} other {# tilfældige begivenheder}}",
+  "random-events": "Tilfældige begivenheder",
+  "size": "Størrelse",
+  "team-size": "Teamstørrelse"
+}

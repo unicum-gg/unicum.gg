@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "빌드 링크가 복사되었습니다",
+  "copy-build-link": "빌드 링크 복사",
+  "could-not-copy-link": "링크를 복사할 수 없습니다",
+  "include-setup": "설정 포함",
+  "share-build": "공유 빌드",
+  "share-tank": "{tank} 공유",
+  "share-text": "{app}에서 이 {tank} 빌드를 확인하세요"
+}

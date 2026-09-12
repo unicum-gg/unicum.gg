@@ -1,3 +1,5 @@
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
 import { ClanName } from "@/components/entity/clan-name";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
@@ -13,18 +15,22 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import type { PreviousClanRow } from "@/services/clans/previous-clans";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 export function PreviousClansTable(
   props: { loading: true } | { region: Region; rows: PreviousClanRow[] },
 ) {
+  const { locale } = useLocale();
+  const { t } = useTranslation(
+    "components/clans/detail/overview/previous-clans-table",
+  );
   const loading = "loading" in props;
   if (!loading && props.rows.length === 0) {
     return (
       <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-        No previous-clan history recorded for the current roster.
-      </div>
+        {t("no-previous-clan-history-recorded")}</div>
     );
   }
   return (
@@ -38,11 +44,11 @@ export function PreviousClansTable(
     >
       <TableHeader>
         <TableRow>
-          <TableHead className="w-12 text-center!">#</TableHead>
-          <TableHead>Clan</TableHead>
-          <TableHead className="w-20 text-right!">Total</TableHead>
+          <TableHead className="w-12 text-center!">{t("rank")}</TableHead>
+          <TableHead>{t("clan")}</TableHead>
+          <TableHead className="w-20 text-right!">{t("total")}</TableHead>
           <TableHead className="w-28 whitespace-nowrap text-right!">
-            Came from
+            {t("came-from")}
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -101,10 +107,10 @@ export function PreviousClansTable(
                 />
               </TableCell>
               <TableCell className="text-right tabular-nums">
-                {intFmt.format(r.totalCount)}
+                {numberFormat(locale, INT_FORMAT).format(r.totalCount)}
               </TableCell>
               <TableCell className="text-right text-muted-foreground tabular-nums">
-                {r.cameFromCount > 0 ? intFmt.format(r.cameFromCount) : "—"}
+                {r.cameFromCount > 0 ? numberFormat(locale, INT_FORMAT).format(r.cameFromCount) : "—"}
               </TableCell>
             </TableRow>
           );

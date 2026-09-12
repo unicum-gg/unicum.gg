@@ -1,0 +1,9 @@
+{
+  "boosts": "Povečuje {name}",
+  "directives": "Direktívy",
+  "directive-name": "{name} direktiva",
+  "grants-and-boosts": "Udeľuje a zvyšuje zručnosť posádky aj vtedy, keď nie je vycvičená.",
+  "grants-only": "Udeľuje zručnosť posádky na bitku (bez uvedenej vlastnosti).",
+  "enhances-mounted": "Vylepšuje namontovaný prvok {name}.",
+  "mount-to-use": "Na použitie tejto smernice namontujte {name}."
+}

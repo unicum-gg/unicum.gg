@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Lupte",
+  "no-votes": "nu Votează",
+  "rated-higher": "Jucătorii mai buni îi acordă cu {stars} stele mai mult decât restul serverului. Acesta răsplătește faptul că știi ce faci.",
+  "rated-lower": "Jucătorii mai buni îi acordă cu {stars} stele mai puțin decât restul serverului. Te flatează până când i se cere să facă ceva.",
+  "votes": "{count} Votează",
+  "votes-one": "{count} Votează"
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import type { ReserveOption } from "@/hooks/use-boost-console";
 import { clockTime } from "@/components/clans/detail/boost-time";
@@ -37,15 +38,14 @@ export function BoostReservesPicker({
   // they would, just non-interactive.
   disabled?: boolean;
 }) {
+  const { t } = useTranslation("components/clans/detail/boost-reserves-picker");
   return (
     <div className="flex flex-col gap-2">
       <Label className="text-xs text-fd-muted-foreground">
-        Reserves to activate
-      </Label>
+        {t("reserves-to-activate")}</Label>
       {reserves.length === 0 && (
         <p className="text-sm text-fd-muted-foreground">
-          No reserves in stock right now.
-        </p>
+          {t("no-reserves-in-stock-right")}</p>
       )}
       <div className="grid gap-2 sm:grid-cols-2">
         {reserves.map((r) => {
@@ -99,8 +99,7 @@ export function BoostReservesPicker({
                   </span>
                   {r.activeUntil && (
                     <span className="text-xs font-medium text-brand">
-                      Active until {clockTime(r.activeUntil, tz)}
-                    </span>
+                      {t("active-until", { tz: clockTime(r.activeUntil, tz) })}</span>
                   )}
                 </span>
               </Label>
@@ -120,7 +119,7 @@ export function BoostReservesPicker({
                       <SelectItem key={l.level} value={String(l.level)}>
                         Lvl {l.level}
                         {l.percent != null ? ` · +${l.percent}%` : ""} ·{" "}
-                        {l.amount} left
+                        {t("n-left", { count: l.amount })}
                       </SelectItem>
                     ))}
                   </SelectContent>

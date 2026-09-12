@@ -1,0 +1,60 @@
+{
+  "columns-label": "Colonne",
+  "groups": {
+    "general": "Generale",
+    "combat": "Combattimento"
+  },
+  "columns": {
+    "battles": {
+      "label": "Battaglie",
+      "tip": "Battaglie totali disputate con il carro"
+    },
+    "count": {
+      "label": "Conteggio",
+      "tip": "Numero di giocatori monitorati nel campione"
+    },
+    "rating": {
+      "label": "Valutazione (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Percentuale di vittorie con il carro"
+    },
+    "playerWr": {
+      "label": "WR giocatore",
+      "tip": "Percentuale media di vittorie complessiva dei giocatori che lo usano"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Danno medio per battaglia"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Rapporto distruzioni / morti"
+    },
+    "assists": {
+      "label": "Assistenze",
+      "tip": "Danno medio assistito"
+    },
+    "hitPct": {
+      "label": "Percentuale colpi",
+      "tip": "Colpi a segno / colpi sparati"
+    },
+    "penPct": {
+      "label": "Percentuale penetrazione",
+      "tip": "Penetrazioni / colpi a segno"
+    },
+    "spots": {
+      "label": "Avvistamenti",
+      "tip": "Avvistamenti medi per battaglia"
+    },
+    "blocked": {
+      "label": "Bloccato",
+      "tip": "Danno medio bloccato dalla corazza"
+    },
+    "survival": {
+      "label": "Sopravvivenza",
+      "tip": "Percentuale di battaglie in cui si è sopravvissuti"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Jokainen {count} World of Tanks -taisteluareenasta. Suodata naamioinnin ja pelimuodon mukaan ja avaa kartta nähdäksesi sen minimapin, koon sekä pelimuotokohtaiset tukikohtamerkit ja lähtöpisteet.",
+    "title": "Kaikki World of Tanks -kartat ({region}), jokainen taisteluareena",
+    "description": "Selaa kaikkia alueen {region} World of Tanks -karttoja: minimapit, koko, naamiointi ja tuetut pelimuodot sekä pelimuotokohtaiset tukikohtamerkit ja lähtöpisteet.",
+    "heading": "Kaikki <accent>kartat</accent>"
+  },
+  "battle-type": {
+    "intro": "{count} World of Tanks -karttaa, joita pelataan pelimuodossa {type}, {blurb}. Avaa kartta nähdäksesi sen minimapin, koon sekä pelimuotokohtaiset tukikohtamerkit ja lähtöpisteet.",
+    "title": "World of Tanks -pelimuodon {type} kartat ({region}), jokainen kierrossa oleva areena",
+    "description": "Jokainen alueen {region} pelimuodon {type} kierrossa oleva World of Tanks -kartta: minimapit, koko, naamiointi ja tuetut pelimuodot sekä tukikohtamerkit ja lähtöpisteet.",
+    "heading": "{type} <accent>kartat</accent>"
+  },
+  "blurbs": {
+    "random": "tavallinen 15 vastaan 15 -kierto",
+    "battle_royale": "viimeinen panssarivaunu elossa -pelimuoto",
+    "frontline": "30 vastaan 30 -laajamittainen pelimuoto",
+    "onslaught": "rankattu 7 vastaan 7 -pelimuoto",
+    "onslaught_night": "rankattu 7 vastaan 7 -pelimuoto pimeän jälkeen, lyhyemmällä näkyvyysalueella, tällä hetkellä pelattavissa Common Testissä",
+    "grand_battle": "30 vastaan 30 -tason X pelimuoto",
+    "clan_wars": "klaanisodat ja etenemiset",
+    "waffentrager": "Waffenträger-tapahtuma",
+    "last_stand": "Last Stand -tapahtuma",
+    "arcade": "arcade- ja erikoistapahtumat",
+    "story_mode": "tarinavetoiset operaatiot",
+    "training": "harjoitushuoneet ja opastukset"
+  }
+}

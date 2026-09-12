@@ -1,5 +1,8 @@
 "use client"
 
+import { useTranslation } from "@/hooks/use-translation";
+import { statLabel } from "@/components/stat-label";
+
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 import type { TooltipValueType } from "recharts"
@@ -292,6 +295,7 @@ function ChartLegendContent({
   hideIcon?: boolean
   nameKey?: string
 } & RechartsPrimitive.DefaultLegendContentProps) {
+  const { t: tStats } = useTranslation("components/stat-labels");
   const { config } = useChart()
 
   if (!payload?.length) {
@@ -329,7 +333,7 @@ function ChartLegendContent({
                   }}
                 />
               )}
-              {itemConfig?.label}
+              {statLabel(itemConfig?.label, tStats)}
             </div>
           )
         })}

@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Pārskats",
+    "tanks": "Tvertne",
+    "videos": "Video",
+    "tournaments": "Turnīri",
+    "manage": "Pārvaldīt"
+  },
+  "section-count": "{section} ({count})"
+}

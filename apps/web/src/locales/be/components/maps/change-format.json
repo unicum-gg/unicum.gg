@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Шырыня гульнявой зоны",
+    "height": "Вышыня гульнявой зоны",
+    "round-length": "Таймер бою",
+    "team-size": "Памер каманды",
+    "camouflage": "Сезон",
+    "presence": "У гульні",
+    "variant-version": "Версія {type}",
+    "play-area": "Гульнявая зона",
+    "bases-team1": "Саюзныя базы",
+    "bases-team2": "Варожыя базы",
+    "spawns-team1": "Саюзныя кропкі з’яўлення",
+    "spawns-team2": "Варожыя кропкі з’яўлення",
+    "control-point": "Кантрольная кропка",
+    "artillery-headquarters": "Штаб артылерыі",
+    "comms-centers": "Цэнтры сувязі",
+    "observation-posts": "Назіральныя пункты",
+    "points-of-interest": "Ачкі цікавасці"
+  },
+  "summary": {
+    "added": "{name} дададзены",
+    "removed": "{name} выдалены",
+    "added-to-game": "Дададзены ў гульню",
+    "removed-from-game": "Выдалены з гульні",
+    "added-on-test": "Дададзены на тэставым кліенце",
+    "removed-on-test": "Выдалены з тэставага кліента",
+    "mode-added": "Дададзены рэжым {name}",
+    "mode-removed": "Выдалены рэжым {name}",
+    "now-played-in": "Цяпер гуляюць на карце {name}",
+    "no-longer-played-in": "Больш не гуляюць на карце {name}",
+    "event-added": "Падзея {name} цяпер можа адбыцца падчас бою",
+    "event-removed": "Падзея {name} больш не адбываецца",
+    "moved": "Перамяшчэнне {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

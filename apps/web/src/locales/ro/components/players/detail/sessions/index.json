@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Nicio sesiune încă. Apar după ce acest cont este eșantionat de două ori, cu bătălii între eșantionări. Acest lucru se întâmplă automat pe măsură ce este folosit.",
+  "bar-height-is-battles-played": "Înălțimea barei reprezintă bătăliile jucate, iar culoarea reprezintă {metric} din acea {granularity}, în aceleași intervale folosite de site peste tot.",
+  "title": "Sesiunile lui {nickname}",
+  "title-count": "Sesiunile poreclei {nickname} ({count})",
+  "granularity": {
+    "day": "zi",
+    "week": "săptămână",
+    "month": "lună",
+    "daily": "Zilnic",
+    "weekly": "Săptămânal",
+    "monthly": "Lunar"
+  },
+  "week-of": "Săptămâna din {date}"
+}

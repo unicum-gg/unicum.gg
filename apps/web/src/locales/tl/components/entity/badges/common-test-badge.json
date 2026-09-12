@@ -1,0 +1,12 @@
+{
+  "aria-build": "Basahin sa Karaniwang Pagsubok client, build {version}",
+  "aria-changes": "Binago ng Karaniwang Pagsubok: {changes} katangian",
+  "aria-described": "Karaniwang Pagsubok: {description}",
+  "aria-vehicle": "Sasakyan sa Karaniwang Pagsubok",
+  "common-test": "Karaniwang Pagsubok",
+  "common-test-build": "Karaniwang Pagsubok {version}",
+  "tip-build": "{label} · mga value ito ng test build, at maaari pa ring baguhin ng Wargaming bago ilabas ang update",
+  "tip-changes": "Mga pagbabago sa Karaniwang Pagsubok: {changes, plural, one {# katangian} other {# mga katangian}} sa sasakyang ito",
+  "tip-described": "Karaniwang Pagsubok · {description}",
+  "tip-vehicle": "Karaniwang Pagsubok · hindi pa inilabas, kaya wala itong istatistika ng labanan at maaari pang magbago ang mga katangian nito"
+}

@@ -1,0 +1,8 @@
+{
+  "cta-clans": "点击查看顶尖{language}军团。",
+  "cta-players": "点击查看顶尖{language}玩家。",
+  "declared": "{language}。由军团选择。",
+  "inferred": "{language}。根据该玩家的军团历史推测。玩家在军团中停留越久，该军团的语言权重越高。",
+  "top-language-clans": "顶尖{language}军团",
+  "top-language-players": "顶尖{language}玩家"
+}

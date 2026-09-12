@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Hver stemme kommer fra en konto, der har spillet denne kampvogn.",
+  "every-vote-played-average": "Hver stemme kommer fra en konto, der har spillet denne kampvogn, i gennemsnit {battles} kampe i den.",
+  "fun": "Sjov",
+  "how-good-the-tank-is": "Hvor god kampvognen er",
+  "how-much-people-enjoy-it": "Hvor meget personer kan lide den",
+  "if-you-have-played-it": "Hvis du har spillet den, er du præcis den, denne side venter på.",
+  "nobody-has-rated-this-tank": "Ingen har bedømt denne kampvogn endnu.",
+  "overall": "Samlet",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stemme"
+}

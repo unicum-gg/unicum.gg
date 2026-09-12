@@ -1,0 +1,13 @@
+{
+  "heading": "Mejores jugadores en <accent>{mode}</accent>",
+  "intro": "{mode} es el modo battle royale de World of Tanks. La clasificación de la región {region}, ordenada por HR (mínimo de 100 batallas de {mode}).",
+  "board": "Los {count} mejores jugadores de {mode}",
+  "columns": {
+    "player": "Jugador",
+    "battles": "Batallas",
+    "survival": "Supervivencia",
+    "survival-percent": "Supervivencia %",
+    "damage": "Daño medio"
+  },
+  "scale-description": "Umbrales de color para la clasificación de {mode}, calibrados según la población de jugadores con al menos 100 batallas de {mode}."
+}

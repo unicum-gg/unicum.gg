@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Řádky na stránku",
+  "previous-page": "Předchozí stránka",
+  "page": "Stránka {current} / {totalPages}",
+  "next-page": "Další stránka",
+  "all": "Všechna"
+}

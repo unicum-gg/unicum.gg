@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Rekrutteringsofficer",
+  "personnel_officer": "Personnelofficer",
+  "quartermaster": "Kvartermester",
+  "executive_officer": "Ledende officer",
+  "recruit": "Rekrut",
+  "private": "Menig",
+  "commander": "Kommandør",
+  "reservist": "Reservist",
+  "combat_officer": "Kampofficer",
+  "junior_officer": "Juniorofficer",
+  "intelligence_officer": "Efterretningsofficer"
+}

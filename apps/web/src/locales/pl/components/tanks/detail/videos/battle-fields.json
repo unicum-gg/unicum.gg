@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Jak zakończyła się bitwa",
+  "loading-maps": "Wczytywanie map…",
+  "map": "Mapa",
+  "mode": "Tryb",
+  "pick-a-map": "Wybierz mapę",
+  "pick-a-mode": "Wybierz tryb",
+  "result": "Wynik",
+  "spawn": "Odrodzenie",
+  "team": "Drużyna {team}",
+  "team-spawn": "Drużyna {team} · {direction}",
+  "which-side-you-started": "Po której stronie zaczynałeś"
+}

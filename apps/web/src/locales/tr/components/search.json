@@ -1,0 +1,27 @@
+{
+  "placeholder": "Oyuncu, klan, tank, harita veya terim ara",
+  "type": "Ara türü",
+  "types": {
+    "all": "Tümü",
+    "players": "Oyuncular",
+    "clans": "Klanlar",
+    "tanks": "Tanklar",
+    "maps": "Haritalar",
+    "glossary": "Sözlük"
+  },
+  "sections": {
+    "players": "Oyuncular",
+    "clans": "Klanlar",
+    "tanks": "Tanklar",
+    "maps": "Haritalar",
+    "glossary": "Sözlük",
+    "recent": "Son aramalar",
+    "favorites": "Favoriler"
+  },
+  "searching": "Aranıyor…",
+  "errored": "Bir şeyler ters gitti. Tekrar dene.",
+  "empty": "Sonuç bulunamadı",
+  "remove-recent": "Son aramalardan kaldır",
+  "add-favorite": "Favorilere ekle",
+  "remove-favorite": "Favorilerden çıkar"
+}

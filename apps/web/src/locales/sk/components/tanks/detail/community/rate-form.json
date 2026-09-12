@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Ešte pár slov: zostáva {count}.",
+  "at-winrate": "pri {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Hodnotenie sa nepodarilo stiahnuť. Skúste to znova o chvíľu.",
+  "hide-the-detailed-axes": "Skryť podrobné osi",
+  "not-enough-battles": "S týmto tankom ste neodohrali dosť bitiek, aby sa váš hlas započítal.",
+  "published-once-read": "Zverejní sa po prečítaní moderátorom. Počet hviezdičiek sa započíta okamžite.",
+  "rate-it-in-detail": "Ohodnotiť podrobne (možné)",
+  "review": {
+    "none": "Hodnotenie uložené.",
+    "queued": "Hodnotenie bolo uložené. Vašu recenziu posudzuje moderátor.",
+    "published": "Hodnotenie bolo uložené. Vaša recenzia je už zverejnená.",
+    "pending": "Hodnotenie bolo uložené. Vaša recenzia stále čaká na posúdenie moderátorom.",
+    "rejected": "Hodnotenie bolo uložené. Vaša predchádzajúca recenzia nebola zverejnená, preto sa započítajú iba vaše hviezdičky.",
+    "closed": "Hodnotenie bolo uložené. Písomné recenzie sa momentálne neprijímajú, preto sa text neuložil."
+  },
+  "save-failed": "Nepodarilo sa to uložiť. Skúste to znova o chvíľu.",
+  "say-why-optional": "Napíšte prečo (voliteľné)",
+  "signed-with": "Podpísané vašimi {battles} bitkami s týmto tankom",
+  "submit-my-rating": "Odoslať moje hodnotenie",
+  "too-many-edits": "To je priveľa úprav naraz. Počkajte minútu.",
+  "update-my-rating": "Aktualizovať moje hodnotenie",
+  "what-it-is-good-at": "V čom vyniká, aké má slabiny a pre koho je vhodný.",
+  "withdraw": "Umik",
+  "your-rating-has-been-withdrawn": "Vaše hodnotenie bolo stiahnuté.",
+  "your-review-is-waiting-on": "Vaša recenzia čaká na posúdenie moderátorom. Tu ju vidíte iba vy.",
+  "your-review-was-not-published": "Vaša recenzia nebola zverejnená. Vaše hviezdičky sa naďalej započítavajú do priemeru."
+}

@@ -1,0 +1,21 @@
+{
+  "trigger": "Opinie",
+  "title": "Udostępnij swoją opinię",
+  "topic-placeholder": "Wybierz temat...",
+  "message-placeholder": "Twoja opinia...",
+  "send": "Wyślij",
+  "sent": "Dziękujemy za opinię!",
+  "failed": "Nie udało się wysłać opinii. Spróbuj ponownie.",
+  "topics": {
+    "bug": "Zgłoszenie błędu",
+    "idea": "Pomysł na funkcję",
+    "data": "Celność danych",
+    "other": "Inne"
+  },
+  "sentiments": {
+    "awful": "Okropnie",
+    "bad": "Zły",
+    "good": "Dobry",
+    "great": "Świetnie"
+  }
+}

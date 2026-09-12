@@ -1,0 +1,14 @@
+{
+  "clan": "Klans",
+  "clear-the-field": "Notīrīt {label}",
+  "credited-on-the-clan-s": "Norādīts klana lapā.",
+  "none": "Nav",
+  "optional": "(pēc izvēles)",
+  "pick-the-vehicle": "Izvēlēties transportlīdzekli",
+  "search-for-a-clan": "Meklēt klanu",
+  "search-for-a-vehicle": "Meklēt transportlīdzekli",
+  "search-tank": "Meklēt tanku...",
+  "tank": "Tanks",
+  "tank-hint-optional": "Taktika pieder tās kartei, tāpēc tanku ir vērts norādīt tikai tad, ja video ir arī par šo transportlīdzekli.",
+  "tank-hint-required": "Nejauša kauja tiek atrasta pēc transportlīdzekļa, ar kuru tā tika spēlēta."
+}

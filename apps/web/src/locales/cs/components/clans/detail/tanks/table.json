@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Pro tento klan zatím nejsou k dispozici žádné údaje o tancích.",
+  "no-tanks-match-these-filters": "Těmto filtrům neodpovídají žádné tanky.",
+  "nation": "Národ",
+  "type": "Typ",
+  "tier": "Úroveň",
+  "name": "Název",
+  "members": "Členové",
+  "battles": "Bitev",
+  "avg-damage": "Průměrná poškození",
+  "avg-xp": "Průměr XP",
+  "wr": "WR"
+}

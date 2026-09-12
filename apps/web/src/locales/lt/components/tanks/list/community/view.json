@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Kiekvieną tanką nuo vieno iki penkių įvertino žmonės, kurie juo žaidžia. Balsas įskaitomas tik iš paskyros, kuri iš tikrųjų išvedė transporto priemonę į mūšį, todėl tai skiriasi nuo apklausos, kurioje balsuoja bet kas.",
+  "no-tank-has-been-rated": "Kol kas nė vienas tankas neįvertintas. Pirmuosius balsus rasite tankų puslapiuose, skiltyje „Bendruomenė“.",
+  "think": "manyti",
+  "title": "Ką žaidėjai {think}",
+  "votes-across-vehicles": "{totalVotes} balsai už {ratedTanks} transporto priemones."
+}

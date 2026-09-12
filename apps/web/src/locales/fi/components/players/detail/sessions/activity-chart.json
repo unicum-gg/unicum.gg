@@ -1,0 +1,5 @@
+{
+  "battles": "{count} taisteluita",
+  "chart-label": "Pelatut taistelut per {granularity}, värin mukaan: {metric}",
+  "no-battles": "Ei taisteluita"
+}

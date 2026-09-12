@@ -1,0 +1,22 @@
+{
+  "stat": "统计",
+  "periods": {
+    "total": "总计",
+    "day": "过去24小时",
+    "week": "过去7天",
+    "month": "过去30天"
+  },
+  "sections": {
+    "elo": "X级 ELO（{advances} + {skirmish}）",
+    "advances": "{advances}（15v15）",
+    "t10": "{skirmish} X级（7v7）",
+    "t8": "{skirmish} VIII级（7v7）",
+    "t6": "{skirmish} VI级（7v7）"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "战斗场次",
+    "winrate": "胜率"
+  }
+}

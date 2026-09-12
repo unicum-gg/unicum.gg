@@ -14,6 +14,10 @@ import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import type { TankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
 import type { TankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
 import type { TankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
+import { localizeBuild } from "@/components/tanks/detail/localize-build";
+import { getTranslation } from "@/lib/translations.server";
+import { WARGAMING_LANGUAGE } from "@/lib/game-vocabulary";
+import { isLocale } from "@/lib/translations";
 import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import type { TankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
@@ -23,7 +27,7 @@ import type { Region } from "@unicum.gg/wargaming";
 
 /** What the vehicle is: where it sits in its line, what it is made of, and what
  * it was. The default tab, and the one most of a tank page is read on. */
-export function SpecificationsTab({
+export async function SpecificationsTab({
   region,
   slug,
   tankId,
@@ -31,13 +35,14 @@ export function SpecificationsTab({
   specs,
   modules,
   configs,
-  loadout,
-  crew,
-  fieldMods,
+  loadout: rawLoadout,
+  crew: rawCrew,
+  fieldMods: rawFieldMods,
   skillTree,
   modes,
   mechanic,
   researchPath,
+  locale,
   videos,
   similar,
   testVersion,
@@ -62,7 +67,59 @@ export function SpecificationsTab({
   similar: SimilarTankRow[];
   /** The Common Test build that rebalances this vehicle, null when none does. */
   testVersion: string | null;
+  /** The route's own segment, for the two server-only game catalogues below. */
+  locale: string;
 }) {
+  // Wargaming's own name for every piece of equipment, consumable, directive,
+  // field modification and crew skill, resolved here rather than in the browser:
+  // the two catalogues are 21 KB that would otherwise ride every page of the
+  // site (see `SERVER_ONLY_NAMESPACES`).
+  const [
+    { t: tEquipment },
+    { t: tEquipmentDescriptions },
+    { t: tPerks },
+    { t: tPerkDescriptions },
+    { t: tSkillTree },
+    { t: tFeatureDescriptions },
+    { t: tSection },
+  ] = await Promise.all([
+    getTranslation("game/equipment", locale),
+    getTranslation("game/equipment-descriptions", locale),
+    getTranslation("game/crew-perks", locale),
+    getTranslation("game/crew-perk-descriptions", locale),
+    getTranslation("game/skill-tree", locale),
+    getTranslation("game/skill-tree-descriptions", locale),
+    getTranslation("components/tanks/detail/sections", locale),
+  ]);
+  // Wargaming writes this paragraph in every language its encyclopedia answers
+  // in, and the nightly spec cron stores the lot. Optional access throughout: a
+  // payload cached before the column existed simply has none, and reads as the
+  // English it already carried.
+  const historicalReference =
+    specs?.descriptionI18n?.[
+      (isLocale(locale) && WARGAMING_LANGUAGE[locale]) || ""
+    ] ??
+    specs?.description ??
+    null;
+
+  const {
+    loadout,
+    crew,
+    fieldMods,
+    skillTree: localizedSkillTree,
+  } = localizeBuild(
+    { loadout: rawLoadout, crew: rawCrew, fieldMods: rawFieldMods, skillTree },
+    {
+      equipment: tEquipment,
+      perks: tPerks,
+      equipmentDescriptions: tEquipmentDescriptions,
+      perkDescriptions: tPerkDescriptions,
+      featureDescriptions: tFeatureDescriptions,
+      skillTree: tSkillTree,
+      skillTreeDescriptions: tFeatureDescriptions,
+    },
+  );
+
   return (
     <>
       {researchPath.lineage.length > 0 && (
@@ -89,23 +146,25 @@ export function SpecificationsTab({
           loadout={loadout}
           crew={crew}
           fieldMods={fieldMods}
-          skillTree={skillTree}
+          skillTree={localizedSkillTree}
           modes={modes}
           mechanic={mechanic}
           nextTanks={researchPath.next}
           testVersion={testVersion}
         />
       )}
-      {specs?.description && (
+      {historicalReference && (
         <>
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>{meta.name} historical reference</PanelTitle>
+              <PanelTitle>
+                {tSection("historical-reference", { tank: meta.name })}
+              </PanelTitle>
             </PanelHeader>
             <PanelContent className="px-4 py-4">
               <p className="max-w-3xl text-sm leading-relaxed text-fd-muted-foreground">
-                {specs.description}
+                {historicalReference}
               </p>
             </PanelContent>
           </Panel>

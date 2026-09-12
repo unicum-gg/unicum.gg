@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>igrači</accent>",
+    "language": "Najbolji igrači na jeziku <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Ljestvica regije {region}, rangirana prema ukupnom {metric} kroz cijelu historiju, uz minimum od 20.000 bitaka.",
+    "language": "Igrači iz regije {region} čiji skup jezika izveden iz historije klana uključuje {language}, rangirani prema {metric}, uz minimum od 10.000 bitaka.",
+    "strict": "Igrači iz regije {region} čiji je jezik izveden iz historije klana isključivo {language}, rangirani prema {metric}, uz minimum od 10.000 bitaka."
+  },
+  "board": {
+    "all": "Najboljih {count} igrača prema {metric}",
+    "language": "Najboljih {count} igrača na jeziku {language} prema {metric}",
+    "strict": "Najboljih {count} igrača isključivo na jeziku {language} prema {metric}"
+  },
+  "modes": {
+    "overall": "Sveukupno"
+  },
+  "columns": {
+    "player": "Igrač"
+  },
+  "strict-toggle": "Strog",
+  "any-toggle": "Bilo koji",
+  "all-languages": "Sve jezike",
+  "battles": "Bitke",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

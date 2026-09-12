@@ -1,0 +1,7 @@
+{
+  "firing": "Đang bắn {shell}, {pen} mm. Đổi phát bắn",
+  "no-such-round": "{mark}: pháo này không có loại đạn đó, hãy tự đặt góc",
+  "own-round": "{mark}: đạn riêng của pháo này, đầy đủ thông số",
+  "treat-it-as": "Coi như",
+  "treat-it-as-mark": "Coi như {mark}"
+}

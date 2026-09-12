@@ -1,0 +1,5 @@
+{
+  "no-matching-tanks": "没有匹配的坦克。",
+  "searching": "搜索中…",
+  "type-at-least-characters": "请输入至少 {MINQUERYLENGTH} 个字符。"
+}

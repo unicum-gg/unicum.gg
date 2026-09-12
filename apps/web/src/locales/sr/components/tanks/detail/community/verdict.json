@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Svaki glas dolazi od naloga koji je igrao ovaj tenk.",
+  "every-vote-played-average": "Svaki glas dolazi od naloga koji je igrao ovaj tenk, prosečno {battles} bitaka sa njim.",
+  "fun": "Zabava",
+  "how-good-the-tank-is": "Koliko je tenk dobar",
+  "how-much-people-enjoy-it": "Koliko ljudi uživaju u njemu",
+  "if-you-have-played-it": "Ako si ga igrao, upravo ti si osoba koju ova stranica čeka.",
+  "nobody-has-rated-this-tank": "Još niko nije ocenio ovaj tenk.",
+  "overall": "Ukupno",
+  "votes": "{count} glasova",
+  "votes-one": "{count} glas"
+}

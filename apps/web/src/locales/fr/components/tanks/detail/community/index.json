@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Axe par axe",
+  "by-server": "Par serveur",
+  "community-verdict": "Verdict de la communauté",
+  "every-server-one-average": "Tous les serveurs, une seule moyenne",
+  "n-shown": ", {count} affichés",
+  "opinion": "{count, plural, one {# avis} other {# avis}}",
+  "opinion-next-to-win-rate": "Avis par rapport au taux de victoires, au rang {tier}",
+  "rate-the": "Notez ce char : {tankName}",
+  "reputation-against-results": "Réputation face aux résultats",
+  "same-tank-different-metas": "Un même char, des métas différentes",
+  "the-same-tank-by-how": "Le même char, selon les performances du votant",
+  "what-players-wrote": "Ce que les joueurs ont écrit",
+  "who-is-saying-it": "Qui le dit"
+}

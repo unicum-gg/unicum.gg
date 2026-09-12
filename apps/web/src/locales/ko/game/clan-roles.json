@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "모병 장교",
+  "personnel_officer": "인사 장교",
+  "quartermaster": "회계 장교",
+  "executive_officer": "부사령관",
+  "recruit": "신병",
+  "private": "사병",
+  "commander": "사령관",
+  "reservist": "보충병",
+  "combat_officer": "작전 장교",
+  "junior_officer": "부사관",
+  "intelligence_officer": "정보 장교"
+}

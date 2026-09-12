@@ -1,7 +1,9 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
+import { poolMapName } from "@/components/tournaments/detail/map-pool";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import {
   BASE,
   CONTROL_POINT,
@@ -53,6 +55,7 @@ function TeamOnMap({
   name: string | null;
   isViewing: boolean;
 }) {
+  const { t } = useTranslation("components/tournaments/detail/match-minimap");
   const one = slot === TeamSlot.One;
   const fromRight = at.left > 55;
   const nearBottom = at.top > 70;
@@ -73,7 +76,7 @@ function TeamOnMap({
         })`,
       }}
     >
-      {name ?? (one ? "Team 1" : "Team 2")}
+      {name ?? (one ? t("team-1") : t("team-2"))}
     </span>
   );
 }
@@ -118,7 +121,12 @@ export function MatchMinimap({
    * team stands on each of them. */
   swapped?: boolean;
 }) {
+  const { t } = useTranslation("components/tournaments/detail/match-minimap");
+  const { t: tMaps } = useTranslation("game/maps");
   if (!map.minimapUrl) return null;
+  // The organiser's own English only when the catalogue cannot name the arena:
+  // Wargaming names it in every language the game ships in.
+  const name = poolMapName(map, tMaps);
   const spawns: Sides = map.spawns;
   const bases: Sides = map.bases;
   const side1Name = swapped ? team2Name : team1Name;
@@ -147,7 +155,7 @@ export function MatchMinimap({
     <div className="relative aspect-square w-56 overflow-hidden rounded-sm border border-fd-border">
         <Image
           src={map.minimapUrl}
-          alt={`${map.name ?? map.arenaId} minimap`}
+          alt={`${name} minimap`}
           fill
           sizes="224px"
           className="object-cover"
@@ -233,10 +241,10 @@ export function MatchMinimap({
           )}
           {href ? (
             <Link href={href} className="truncate hover:text-brand hover:underline">
-              {map.name ?? map.arenaId}
+              {name}
             </Link>
           ) : (
-            <span className="truncate">{map.name ?? map.arenaId}</span>
+            <span className="truncate">{name}</span>
           )}
         </span>
         {hasGeometry ? null : (
@@ -246,8 +254,7 @@ export function MatchMinimap({
           // somewhere different per mode, and a plausible wrong corner is worse
           // than an honest blank.
           <span className="text-xs text-fd-muted-foreground">
-            No sides published for this battle type
-          </span>
+            {t("no-sides-published-for-this")}</span>
         )}
       </figcaption>
     </figure>

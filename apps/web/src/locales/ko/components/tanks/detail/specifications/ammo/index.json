@@ -1,0 +1,8 @@
+{
+  "damage": "피해량",
+  "penetration": "관통력",
+  "velocity": "속도",
+  "splash": "범위 피해",
+  "cost": "가격",
+  "at-500m": "500m에서…"
+}

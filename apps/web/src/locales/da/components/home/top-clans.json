@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Viser de bedste {region}-klan(er) med mere end 50 medlemmer med kampe, rangeret efter gennemsnitlig {metric}.",
+    "month": "Viser de bedste {region}-klan(er) med mere end 50 medlemmer med kampe, rangeret efter {metric} de seneste 30 dage (min. 15 aktive)."
+  },
+  "updated": "Opdateret {when}.",
+  "empty": "Ingen klan-data tilgængelig endnu for denne region.",
+  "rank": "#",
+  "clan": "Klan",
+  "average": "Gns. {metric}"
+}

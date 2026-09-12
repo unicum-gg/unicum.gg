@@ -1,7 +1,6 @@
 import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
+import Link from "@/components/link";
 import {
-  GLOSSARY_CATEGORY_LABEL,
   glossaryAcronym,
   type GlossaryTermDetail,
 } from "@unicum.gg/shared";
@@ -15,6 +14,8 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import ROUTES from "@/constants/routes";
+import { getTranslation } from "@/lib/translations.server";
+import { Interpolate } from "@/components/interpolate";
 
 /**
  * One term's page: the definition first, then the entry, then the ways out
@@ -24,7 +25,19 @@ import ROUTES from "@/constants/routes";
  * up with the navbar instead of drawing a narrower frame of their own. Reading
  * width is held on the prose itself, which is where it belongs.
  */
-export function GlossaryTermView({ term }: { term: GlossaryTermDetail }) {
+export async function GlossaryTermView({
+  term,
+  locale,
+}: {
+  term: GlossaryTermDetail;
+  /** The route's own segment: this renders on the server, so it has no request
+   * to read the language from. */
+  locale: string;
+}) {
+  const [{ t }, { t: tCategories }] = await Promise.all([
+    getTranslation("components/glossary/term-view", locale),
+    getTranslation("components/glossary/index", locale),
+  ]);
   // The initialism sits next to the name rather than replacing it: the entry is
   // "Damage per minute", and the reader arrived looking for "DPM".
   const acronym = glossaryAcronym(term);
@@ -34,14 +47,14 @@ export function GlossaryTermView({ term }: { term: GlossaryTermDetail }) {
         <PanelContent className="max-w-3xl px-4 py-8 sm:py-12">
           <nav className="mb-4 flex items-center gap-2 text-sm text-fd-muted-foreground">
             <Link href={ROUTES.GLOSSARY} className="hover:text-fd-foreground">
-              Glossary
+              {t("glossary")}
             </Link>
             <span aria-hidden>/</span>
             <Link
               href={ROUTES.GLOSSARY_CATEGORY(term.category)}
               className="hover:text-fd-foreground"
             >
-              {GLOSSARY_CATEGORY_LABEL[term.category]}
+              {tCategories(`categories.${term.category}`)}
             </Link>
           </nav>
 
@@ -57,11 +70,16 @@ export function GlossaryTermView({ term }: { term: GlossaryTermDetail }) {
 
           {term.aliases.length ? (
             <p className="mt-4 text-sm text-fd-muted-foreground">
-              Also known as{" "}
-              <span className="text-fd-foreground">
-                {term.aliases.join(", ")}
-              </span>
-              .
+              <Interpolate
+                template={t("also-known-as", { aliases: "{aliases}" })}
+                values={{
+                  aliases: (
+                    <span className="text-fd-foreground">
+                      {term.aliases.join(", ")}
+                    </span>
+                  ),
+                }}
+              />
             </p>
           ) : null}
         </PanelContent>
@@ -80,7 +98,7 @@ export function GlossaryTermView({ term }: { term: GlossaryTermDetail }) {
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>See it on the site</PanelTitle>
+              <PanelTitle>{t("on-site")}</PanelTitle>
             </PanelHeader>
             <PanelContent className="px-4 pb-6">
               <GlossarySiteLinks links={term.links} />
@@ -94,7 +112,7 @@ export function GlossaryTermView({ term }: { term: GlossaryTermDetail }) {
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>Related terms</PanelTitle>
+              <PanelTitle>{t("related")}</PanelTitle>
             </PanelHeader>
             <PanelContent className="px-4 pb-6">
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -130,7 +148,7 @@ export function GlossaryTermView({ term }: { term: GlossaryTermDetail }) {
             className="flex w-fit items-center gap-2 text-sm text-fd-muted-foreground transition-colors hover:text-fd-foreground"
           >
             <ArrowLeftIcon className="size-4" />
-            Every World of Tanks term
+            {t("every-term")}
           </Link>
         </PanelContent>
       </Panel>

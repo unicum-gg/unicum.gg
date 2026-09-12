@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Bestenliste von {board}",
+  "carried-beside-a-clan-tag": "Wird neben einem Clan-Tag angezeigt. Ein Rangwappen steht für eine Platzierung in einem Wettbewerb: Die Zahl darauf gibt den Platz an, die Farbe zeigt die zugehörige Rangliste. Für Bewertungen gibt es keines, denn ein hoher WN8-Wert ist nichts, was ein Clan gewinnen kann.",
+  "clan-badges": "Clanabzeichen",
+  "clan-board": {
+    "name": "Top {rank} auf {board}",
+    "how": "Ein Platz unter den besten {rank} auf der Rangliste {board}. Bleibt erhalten, solange der Clan diesen Platz belegt, und geht verloren, sobald das nicht mehr der Fall ist."
+  },
+  "clan-overflow": "Belegt ein Clan mehr als drei Plätze, werden die übrigen in einem {plus}-Wappen zusammengefasst, mit dem besten zuerst, damit der Tag lesbar bleibt. Wenn man den Mauszeiger darüberführt, werden ihre Namen angezeigt.",
+  "featured-tournament-winner": {
+    "name": "Ausgewähltes Turnier: Gewinner",
+    "how": "Dasselbe, aber bei einem Event gewonnen, das Wargaming als hervorgehoben kennzeichnet. Gold statt Stahl, genau wie bei den Spielern."
+  },
+  "heading": "Alle {badge} und wie man sie verdient",
+  "heading-accent": "Abzeichen",
+  "marks-carried-beside-a-nickname": "Markierungen neben einem Nickname, wo immer er auf {NAME} erscheint: Bestenlisten, Clanaufstellungen, Suche und Turnierbäume.",
+  "n-badges": "{count} Abzeichen",
+  "onslaught-champion": {
+    "name": "Ansturm Meister",
+    "how": "Den Rang Meister in Ansturm erreicht. Das ist überhaupt erst die Voraussetzung, um in der {standings} zu erscheinen. Bleibt danach erhalten: Fällt die Wertung wieder unter die Schwelle, geht zwar der Platz verloren, nicht aber die Tatsache, ihn erreicht zu haben."
+  },
+  "onslaught-legend": {
+    "name": "Ansturm Legende",
+    "how": "Einen Platz innerhalb des Legende-Bereichs der Saison belegt. Dabei geht es um eine Position und nicht um eine Punktzahl: Es gibt gleichzeitig nur eine begrenzte Zahl solcher Plätze, und maßgeblich ist die Saison, in der der Platz belegt wurde. Violett statt Stahlblau, entsprechend der Farbe, mit der die Rangliste selbst Legende kennzeichnet."
+  },
+  "player-badges": "Spielerabzeichen",
+  "player-overflow": "Trägt ein Spieler mehr als drei, werden die übrigen in der oben genannten Reihenfolge in einem {plus}-Wappen zusammengefasst, damit der Nickname in einer Tabelle lesbar bleibt. Wenn man den Mauszeiger darüberführt, werden ihre Namen angezeigt, und jede Markierung verlinkt weiterhin auf dasselbe Ziel wie ihr eigenes Wappen.",
+  "ranked-standings": "Ranglisten",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Ein mit dem Konto verknüpfter Twitch-Kanal. Verknüpfe Twitch in deinem eigenen Profil, um ihn zu bestätigen. Das Wappen verlinkt dann auf deinen Kanal. Es wird unabhängig davon angezeigt, ob du live bist."
+  },
+  "streamer-who-is-on-air": "Ein Streamer, der gerade auf Sendung ist, trägt außerdem ein rotes LIVE-Label. Dieses wird weder verdient noch behalten: Es erscheint beim Start des Streams und verschwindet, wenn er endet, weshalb es nie zusammengefasst wird.",
+  "support-subscription": "Unterstützungsabonnement",
+  "supporter": {
+    "name": "Unterstützer"
+  },
+  "supporter-note": "{link} muss aktiv sein und öffentlich sichtbar bleiben. Unterstützer, die anonym bleiben möchten, tragen auf eigenen Wunsch kein Abzeichen.",
+  "the-marks-a-player-or": "Die Markierungen, die ein Spieler oder Clan auf {NAME} tragen kann, wofür jede steht und was genau nötig ist, um sie zu erhalten.",
+  "tournament-winner": {
+    "name": "Gewinner des Turniers",
+    "how": "Ein dem Clan zugeordnetes Team hat ein Turnier gewonnen. Wargaming erfasst Teams und Konten, niemals Clans. Daher wird die Zuordnung rekonstruiert, indem jede Aufstellung mit der Clanmitgliedschaft am Tag des Turniers abgeglichen wird."
+  },
+  "verified": {
+    "name": "Verifiziert",
+    "how": "Der Inhaber hat sich mit seiner Wargaming.net ID angemeldet und dieses Konto verknüpft. Die Anmeldung ist die einzige Voraussetzung und kostenlos."
+  }
+}

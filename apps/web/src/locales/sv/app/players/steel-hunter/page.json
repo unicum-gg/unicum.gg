@@ -1,0 +1,6 @@
+{
+  "title": "Topp spelare i battle royale-läget {mode} i World of Tanks ({region})",
+  "description": "Topplista på {name} för {mode} i regionen {region}, battle royale-läget i World of Tanks, rankad enligt vårt HR-betyg (genomsnittlig XP + vinstprocent).",
+  "og-title": "Topp spelare i {mode}",
+  "og-subtitle": "Topplista för battle royale i regionen {region}"
+}

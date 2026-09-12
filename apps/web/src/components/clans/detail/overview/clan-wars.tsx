@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -24,6 +25,7 @@ export function ClanWarsTab({
   color: string;
   clanWars: ClanGlobalMapView;
 }) {
+  const { t } = useTranslation("components/clans/detail/overview/clan-wars");
   return (
     <>
       <PanelSeparator />
@@ -31,8 +33,7 @@ export function ClanWarsTab({
         <PanelHeader>
           <PanelTitle>
             <TaggedTitle tag={tag} color={color}>
-              clan wars stats
-            </TaggedTitle>
+              {t("clan-wars-stats")}</TaggedTitle>
             {clanWars.latest && <StatsPeriodSelect />}
           </PanelTitle>
         </PanelHeader>
@@ -44,8 +45,7 @@ export function ClanWarsTab({
             />
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>
-              No Clan Wars data yet. Check back after the next clan refresh.
-            </div>
+              {t("no-clan-wars-data-yet")}</div>
           )}
         </PanelContent>
       </Panel>

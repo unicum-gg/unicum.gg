@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/link";
 import useSWR from "swr";
 import ROUTES from "@/constants/routes";
 import { useMoney } from "@/hooks/use-money";
+import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
 import {
   Tooltip,
@@ -21,6 +22,7 @@ import {
  */
 export function MiniFundingBar() {
   const money = useMoney();
+  const { t } = useTranslation("components/support/mini-funding-bar");
   const { data } = useSWR("support-funding", () => unicum.support.funding(), {
     revalidateOnFocus: false,
     dedupingInterval: 60_000,
@@ -36,7 +38,7 @@ export function MiniFundingBar() {
             className="flex items-center gap-2 whitespace-nowrap transition-opacity hover:opacity-80"
           >
             <span className="hidden shrink-0 text-fd-muted-foreground sm:inline">
-              Community-funded
+              {t("label")}
             </span>
             <span className="relative h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-fd-border/70 sm:w-32">
               <span
@@ -45,14 +47,17 @@ export function MiniFundingBar() {
               />
             </span>
             <span className="shrink-0 font-medium tabular-nums text-brand">
-              {pct}% funded
+              {t("funded", { pct })}
             </span>
           </Link>
         </TooltipTrigger>
         <TooltipContent>
           {data
-            ? `${money.format(data.receivedEur)} of ${money.format(data.goalEur)} covered by supporters since launch`
-            : "Community-funded, ad-free"}
+            ? t("tooltip", {
+                received: money.format(data.receivedEur),
+                goal: money.format(data.goalEur),
+              })
+            : t("tooltip-loading")}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

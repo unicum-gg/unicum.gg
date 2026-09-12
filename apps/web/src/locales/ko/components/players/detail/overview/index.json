@@ -1,0 +1,7 @@
+{
+  "stats-title": "{nickname}의 무작위 전투 통계",
+  "progression-title": "{nickname}의 {metric} 진행 과정",
+  "lift-drag-title": "{nickname}의 평점을 형성하는 전차",
+  "progression-blurb": "실선은 종합 {metric}입니다. 위의 총계 열과 일치하며 새로운 전투가 누적될 때 천천히 변합니다. 점선은 세션별 {metric}으로, 이전 스냅샷 이후 플레이한 전투를 기준으로 계산됩니다. 연승과 연패를 보여줍니다. 선 색상은 평점 단계에 따릅니다.",
+  "progression-empty": "아직 기록이 충분하지 않습니다. 곡선을 그리려면 최소 하나의 스냅샷이 필요합니다. 잠시 후 다시 확인하세요."
+}

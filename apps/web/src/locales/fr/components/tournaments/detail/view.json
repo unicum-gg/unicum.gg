@@ -1,0 +1,11 @@
+{
+  "closes": "Fermer {when}",
+  "map-pool": "Pool de cartes",
+  "place": "Place",
+  "prize": "Prix",
+  "prizes": "Prix",
+  "qualified": "Qualifiés ({count})",
+  "register": "S’inscrire",
+  "tournaments": "Tournois",
+  "winner": "{count, plural, one {Vainqueur} other {Vainqueurs}}"
+}

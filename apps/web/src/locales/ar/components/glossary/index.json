@@ -1,0 +1,22 @@
+{
+  "search": "بحث في {count} من المصطلحات",
+  "search-label": "بحث في المسرد",
+  "all": "الكل",
+  "jump": "انتقل إلى الحرف",
+  "empty": "لا يوجد مصطلح يطابق “{query}”.",
+  "categories": {
+    "vehicles": "المركبات",
+    "gunnery": "الرماية",
+    "armor": "درع",
+    "mobility": "تنقل",
+    "vision": "الرؤية",
+    "crew": "الطاقم",
+    "progression": "التقدم",
+    "economy": "الاقتصاد",
+    "ratings": "التقييمات",
+    "statistics": "الإحصائيات",
+    "modes": "أوضاع المعركة",
+    "tactics": "التكتيكات",
+    "slang": "العامية"
+  }
+}

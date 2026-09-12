@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Marchio: la tua media mobile del danno combinato (ultime ~100 battaglie) deve superare quella del 65% dei giocatori con questo carro negli ultimi 14 giorni"
+    },
+    "mark2": {
+      "label": "2 Marks",
+      "tip": "2 Marchi: la tua media mobile del danno combinato (ultime ~100 battaglie) deve superare quella dell’85% dei giocatori con questo carro negli ultimi 14 giorni"
+    },
+    "mark3": {
+      "label": "3 Marks",
+      "tip": "3 Marchi: la tua media mobile del danno combinato (ultime ~100 battaglie) deve superare quella del 95% dei giocatori con questo carro negli ultimi 14 giorni"
+    }
+  },
+  "rows-per-page": "Righe per pagina",
+  "previous-page": "Pagina precedente",
+  "page": "Pagina {current} / {totalPages}",
+  "next-page": "Pagina successiva",
+  "all": "Tutti"
+}

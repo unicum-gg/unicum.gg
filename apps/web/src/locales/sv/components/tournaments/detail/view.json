@@ -1,0 +1,11 @@
+{
+  "closes": "Stänger {when}",
+  "map-pool": "Karta pool",
+  "place": "Plats",
+  "prize": "Pris",
+  "prizes": "Priser",
+  "qualified": "Kvalificerade ({count})",
+  "register": "Registrera",
+  "tournaments": "Turneringar",
+  "winner": "{count, plural, one {Vinnare} other {Vinnare}}"
+}

@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Toàn bộ {count} đấu trường trận đấu của World of Tanks. Lọc theo ngụy trang và chế độ chơi, sau đó mở bản đồ để xem bản đồ nhỏ, kích thước, cờ căn cứ và điểm xuất phát theo từng chế độ.",
+    "title": "Tất cả bản đồ World of Tanks ({region}), mọi đấu trường trận đấu",
+    "description": "Xem mọi bản đồ World of Tanks trên {region}: bản đồ nhỏ, kích thước, ngụy trang và các chế độ chơi được hỗ trợ, cùng cờ căn cứ và điểm xuất phát theo từng chế độ.",
+    "heading": "Tất cả các <accent>bản đồ</accent>"
+  },
+  "battle-type": {
+    "intro": "{count} bản đồ World of Tanks được chơi trong {type}, {blurb}. Mở bản đồ để xem bản đồ nhỏ, kích thước, cờ căn cứ và điểm xuất phát theo từng chế độ.",
+    "title": "Bản đồ {type} của World of Tanks ({region}), mọi đấu trường trong vòng xoay",
+    "description": "Mọi bản đồ World of Tanks trong vòng xoay {type} trên {region}: bản đồ nhỏ, kích thước, ngụy trang và các chế độ chơi được hỗ trợ, cùng cờ căn cứ và điểm xuất phát.",
+    "heading": "{type} <accent>bản đồ</accent>"
+  },
+  "blurbs": {
+    "random": "vòng xoay tiêu chuẩn 15v15",
+    "battle_royale": "chế độ xe tăng cuối cùng còn sống",
+    "frontline": "chế độ quy mô lớn 30v30",
+    "onslaught": "chế độ xếp hạng 7v7",
+    "onslaught_night": "chế độ 7v7 xếp hạng sau khi trời tối, với phạm vi xem ngắn hơn, hiện có thể chơi trên Kiểm tra chung",
+    "grand_battle": "chế độ cấp X 30v30",
+    "clan_wars": "chiến tranh Clan và các cuộc tiến công",
+    "waffentrager": "sự kiện Waffenträger",
+    "last_stand": "sự kiện Last Stand",
+    "arcade": "arcade và các sự kiện đặc biệt",
+    "story_mode": "các chiến dịch theo cốt truyện",
+    "training": "phòng huấn luyện và hướng dẫn"
+  }
+}

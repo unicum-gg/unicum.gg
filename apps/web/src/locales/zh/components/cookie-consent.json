@@ -1,0 +1,16 @@
+{
+  "title": "我们使用 Cookie",
+  "description": "我们使用 Cookie 来改善你的浏览体验并分析网站流量。",
+  "functional": {
+    "title": "功能性",
+    "description": "网站正常运行所必需（偏好设置、地区选择）。"
+  },
+  "analytics": {
+    "title": "访问统计",
+    "description": "Google Analytics 会设置 Cookie，帮助我们了解网站的使用方式。匿名且无需 Cookie 的分析（Umami）无论如何都会保留。"
+  },
+  "save": "保存我的选择",
+  "decline": "全部拒绝",
+  "customize": "自定义",
+  "accept": "全部接受"
+}

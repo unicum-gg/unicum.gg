@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: kailangang malampasan ng iyong gumugulong na karaniwang pinagsamang pinsala (huling ~100 laban) ang 65% ng mga manlalaro sa tank na ito sa nakalipas na 14 mga araw"
+    },
+    "mark2": {
+      "label": "2 Marks",
+      "tip": "2 Marks: ang karaniwang pinagsamang pinsala mo sa humigit-kumulang na huling 100 laban ay kailangang talunin ang 85% ng mga manlalaro sa tank na ito sa nakalipas na 14 na mga araw"
+    },
+    "mark3": {
+      "label": "3 Marks",
+      "tip": "3 Marks: ang karaniwang pinagsamang pinsala mo sa humigit-kumulang na huling 100 laban ay kailangang talunin ang 95% ng mga manlalaro sa tank na ito sa nakalipas na 14 na mga araw"
+    }
+  },
+  "rows-per-page": "Mga hilera bawat pahina",
+  "previous-page": "Nakaraang pahina",
+  "page": "Pahina {current} / {totalPages}",
+  "next-page": "Susunod na pahina",
+  "all": "Lahat"
+}

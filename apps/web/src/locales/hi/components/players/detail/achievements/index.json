@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname} की उपलब्धियाँ",
+  "filter-all": "सभी",
+  "filter-both": "दोनों",
+  "filter-earned": "अर्जित",
+  "filter-missing": "अनुपलब्ध",
+  "filter-obtainable": "प्राप्त करने योग्य",
+  "filter-retired": "सेवानिवृत्त",
+  "no-achievement-matches-these-filters": "इन फ़िल्टर से कोई उपलब्धि मेल नहीं खाती।",
+  "search-achievements": "उपलब्धियों को खोजें",
+  "search-among-n-achievements": "{count} उपलब्धियों में खोजें"
+}

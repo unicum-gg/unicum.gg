@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   mergeServerOnline,
   rhythmDeviation,
@@ -34,6 +36,8 @@ export function ServersLiveHeader({
   /** The weekly rhythm, to say whether right now is busy for the hour it is. */
   rhythm: ServerRhythmCell[];
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/live-header");
   const live = usePlayersOnline(region);
 
   const { total, servers: clusters } = mergeServerOnline(
@@ -68,9 +72,9 @@ export function ServersLiveHeader({
           aria-hidden
         />
         <span className="font-heading text-4xl font-bold tabular-nums md:text-5xl">
-          {total == null ? "—" : formatPlayers(total)}
+          {total == null ? "—" : formatPlayers(total, locale)}
         </span>
-        <span className="text-fd-muted-foreground">players online</span>
+        <span className="text-fd-muted-foreground">{t("players-online")}</span>
       </div>
 
       {deviation === null ? null : <DeviationNote deviation={deviation} />}
@@ -86,7 +90,7 @@ export function ServersLiveHeader({
                 {serverDisplayName(region, cluster.server)}
               </span>
               <span className="tabular-nums text-fd-muted-foreground">
-                {cluster.players == null ? "—" : formatPlayers(cluster.players)}
+                {cluster.players == null ? "—" : formatPlayers(cluster.players, locale)}
               </span>
             </li>
           ))}
@@ -100,12 +104,12 @@ export function ServersLiveHeader({
  * inside a tenth reads as "about usual": the sampling is five-minutely and the
  * average is over four weeks, so a few percent is noise, not news. */
 function DeviationNote({ deviation }: { deviation: number }) {
+  const { t } = useTranslation("components/servers/live-header");
   const delta = Math.round((deviation - 1) * 100);
   if (Math.abs(delta) < 10) {
     return (
       <p className="text-sm text-fd-muted-foreground">
-        About as busy as usual for this time of week.
-      </p>
+        {t("about-as-busy-as-usual")}</p>
     );
   }
   return (
@@ -113,7 +117,7 @@ function DeviationNote({ deviation }: { deviation: number }) {
       <span className={delta > 0 ? "text-brand font-medium" : "font-medium"}>
         {delta > 0 ? `+${delta}%` : `${delta}%`}
       </span>{" "}
-      {delta > 0 ? "busier" : "quieter"} than usual for this time of week.
+      {t(delta > 0 ? "busier-than-usual" : "quieter-than-usual")}
     </p>
   );
 }

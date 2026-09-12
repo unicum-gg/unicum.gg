@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "За кожною віссю",
+  "by-server": "За сервером",
+  "community-verdict": "Вирок спільноти",
+  "every-server-one-average": "Кожен сервер, одне середнє",
+  "n-shown": ", показано {count}",
+  "opinion": "{count, plural, one {# думка} few {# думки} many {# думок} other {# думок}}",
+  "opinion-next-to-win-rate": "Думка поруч із відсотком перемог, у межах рівня {tier}",
+  "rate-the": "Оцініть {tankName}",
+  "reputation-against-results": "Репутація проти результатів",
+  "same-tank-different-metas": "Той самий танк, різні мета",
+  "the-same-tank-by-how": "Той самий танк, залежно від того, наскільки добре грає оцінювач",
+  "what-players-wrote": "Що написали гравці",
+  "who-is-saying-it": "Хто це каже"
+}

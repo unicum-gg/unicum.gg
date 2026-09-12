@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Redova po stranici",
+  "previous-page": "Prethodna stranica",
+  "page": "страница {current} / {totalPages}",
+  "next-page": "Sledeća stranica",
+  "all": "Sve"
+}

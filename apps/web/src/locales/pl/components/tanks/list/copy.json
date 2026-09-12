@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Każdy z {count} pojazdów World of Tanks w regionie {region}. Filtruj według poziomu, nacji, klasy i roli, a następnie wybierz pojazd, aby sprawdzić jego statystyki, najlepszych graczy i wartości oczekiwane.",
+    "title": "Czołgi World of Tanks ({region}), wszystkie pojazdy w jednym miejscu",
+    "description": "Przeglądaj wszystkie pojazdy World of Tanks w regionie {region}: filtruj według poziomu, nacji, klasy i roli, a następnie sprawdzaj statystyki poszczególnych pojazdów, najlepszych graczy i wartości oczekiwane.",
+    "heading": "Wszystkie <accent>czołgi</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, penetracja, pancerz, zasięg widzenia i mobilność wszystkich {count} pojazdów World of Tanks w regionie {region}. Sortuj według dowolnej kolumny, a następnie filtruj według poziomu, nacji, klasy i roli.",
+    "title": "Specyfikacje pojazdów World of Tanks ({region}). Porównaj wszystkie pojazdy",
+    "description": "Porównaj specyfikacje wszystkich pojazdów World of Tanks w regionie {region}: DPM, penetrację, pancerz, zasięg widzenia i mobilność, z możliwością sortowania i filtrowania według poziomu, nacji, klasy i roli.",
+    "heading": "Specyfikacje <accent>czołgu</accent>"
+  },
+  "economics": {
+    "intro": "Koszty zakupu i napraw, ceny pocisków oraz zarobki w kredytach dla wszystkich {count} pojazdów World of Tanks w regionie {region}. Sortuj według dowolnej kolumny, a następnie filtruj według poziomu, nacji, klasy i roli.",
+    "title": "Ekonomia pojazdów World of Tanks ({region}), koszty w kredytach i PD",
+    "description": "Koszty w kredytach i PD oraz koszty napraw i ceny pocisków dla każdego pojazdu World of Tanks w regionie {region}, z możliwością sortowania i filtrowania według poziomu, nacji, klasy i roli.",
+    "heading": "Ekonomia <accent>czołgu</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Odznaki biegłości dla wszystkich {count} pojazdów World of Tanks w regionie {region}: wymagana średnia krocząca wskaźnika Zadane uszkodzenia na pierwszy, drugi i trzeci poziom. Sortuj według dowolnej kolumny, a następnie filtruj według poziomu, nacji, klasy i roli.",
+    "title": "World of Tanks: wymagania na Odznaki biegłości ({region})",
+    "description": "Odznaki biegłości dla każdego pojazdu World of Tanks w regionie {region}: wymagana wartość wskaźnika Zadane uszkodzenia na pierwszy, drugi i trzeci poziom, z możliwością sortowania i filtrowania według poziomu, nacji, klasy i roli.",
+    "heading": "<accent>Odznaki biegłości</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Progi PD dla wszystkich {count} pojazdów World of Tanks w regionie {region}: Ace Tanker i Marki Mistrzostwa. Sortuj według dowolnej kolumny, a następnie filtruj według poziomu, nacji, klasy i roli.",
+    "title": "World of Tanks: Marki Mistrzostwa, wymagania ({region})",
+    "description": "Ace Tanker i Marki Mistrzostwa dla każdego pojazdu World of Tanks w regionie {region}: progi PD z możliwością sortowania i filtrowania według poziomu, nacji, klasy i roli.",
+    "heading": "<accent>Marki Mistrzostwa</accent>"
+  },
+  "videos": {
+    "intro": "{count} bitew udostępnionych przez społeczność w regionie {region}. Każdy film uruchamia się dokładnie w momencie rozpoczęcia bitwy. Materiały są zgłaszane ze stron pojazdów i sprawdzane, zanim pojawią się tutaj.",
+    "title": "Filmy z rozgrywki World of Tanks ({region})",
+    "description": "Bitwy World of Tanks w regionie {region} zgłoszone przez społeczność, z filmami uruchamianymi dokładnie w momencie rozpoczęcia bitwy: Czołg użyty w bitwie, mapa, strona mapy i wynik bitwy.",
+    "heading": "Filmy <accent>rozgrywki</accent>"
+  }
+}

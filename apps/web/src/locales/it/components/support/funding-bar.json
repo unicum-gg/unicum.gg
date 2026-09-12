@@ -1,0 +1,18 @@
+{
+  "caught-up": "Tutto coperto, grazie. Ogni contributo extra viene investito in maggiore capacità e nuove funzionalità.",
+  "covered-label": "Coperto",
+  "covered-sentence": "I sostenitori hanno coperto {received} su un totale di {spent} spesi finora.",
+  "days-out-of-pocket": "{days} giorni, pagati di tasca propria",
+  "from-supporter-one": "da {count} sostenitore",
+  "from-supporters": "da {count} sostenitori",
+  "gap-growing": "Con {amount}/mese in più, il divario smette di crescere.",
+  "goal": "obiettivo {amount}",
+  "of-that-total": "di quel totale",
+  "pledges-cover": "Le donazioni ora coprono la spesa mensile.",
+  "raised-amount": "{amount} raccolti",
+  "raised-label": "Raccolti",
+  "run-at-a-loss": "{name} è in perdita da {since}.",
+  "run-rate": "Andamento mensile: {pledged}/mese in contributi promessi contro {cost}/mese di costi operativi.",
+  "spent-since-launch": "Speso dal lancio",
+  "to-catch-up": "Mancano {amount} per tornare completamente in pari."
+}

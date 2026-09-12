@@ -1,0 +1,8 @@
+{
+  "busiest": "Najviac hráčov {when} ({players})",
+  "not-enough-recorded-yet-to": "Zatiaľ nie je zaznamenaných dostatok údajov na zobrazenie týždenného rytmu. Mapa sa dopĺňa, ako vzorkovanie postupne pokrýva každú hodinu týždňa.",
+  "not-sampled-yet": "Zatiaľ bez údajov",
+  "players-on-average": "Priemerný počet hráčov: {players}",
+  "quietest": ", najmenej hráčov {when} ({players})",
+  "your-local-time": "Váš miestny čas"
+}

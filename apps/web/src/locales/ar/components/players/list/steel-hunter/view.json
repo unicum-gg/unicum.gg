@@ -1,0 +1,13 @@
+{
+  "heading": "أفضل اللاعبين في <accent>{mode}</accent>",
+  "intro": "‏{mode} هو نمط باتل رويال في World of Tanks. قائمة متصدري {region}، مرتبة حسب HR، بحد أدنى 100 معركة في {mode}.",
+  "board": "أفضل {count} لاعبين في {mode}",
+  "columns": {
+    "player": "لاعب",
+    "battles": "معارك",
+    "survival": "البقاء",
+    "survival-percent": "نسبة البقاء %",
+    "damage": "متوسط الضرر"
+  },
+  "scale-description": "حدود الألوان لقائمة {mode}، معايرة حسب مجموعة اللاعبين الذين لديهم 100 معركة على الأقل في {mode}."
+}

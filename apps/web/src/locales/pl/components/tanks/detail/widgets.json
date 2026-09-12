@@ -1,0 +1,12 @@
+{
+  "slot": "Miejsce {n}",
+  "slot-filled": "Miejsce {n}: {name}",
+  "consumable-slot": "Miejsce na materiały eksploatacyjne {n}",
+  "consumable-slot-filled": "Miejsce na materiały eksploatacyjne {n}: {name}",
+  "level": "Poziom {n}",
+  "stock": "Stan",
+  "specialize": "Kliknij, aby ustawić specjalizację tego miejsca.",
+  "clear-specialization": "Kliknij, aby usunąć specjalizację tego miejsca.",
+  "crew-skills": "Umiejętności załogi",
+  "shell-aria": "{name}: uszkodzenia {damage}, penetracja {penetration} mm"
+}

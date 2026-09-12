@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} reitingas",
+  "carried-beside-a-clan-tag": "Nešamas šalia klano žymos. Reitingo herbas reiškia vietą varžybose: skaičius ant jo nurodo tą vietą, o spalva parodo, kurios lentelės tai vieta. Reitingai jų negauna, nes aukštas WN8 nėra tai, ką laimi klanas.",
+  "clan-badges": "Klanų ženkleliai",
+  "clan-board": {
+    "name": "{board}, tarp geriausiųjų: {rank} vieta",
+    "how": "Vieta tarp {rank} geriausiųjų lentelėje „{board}“. Išlieka, kol klanas išlaiko šią vietą, ir prarandama, kai jos nebeišlaiko."
+  },
+  "clan-overflow": "Klanas, užimantis daugiau nei tris vietas, likusią dalį sutraukia į {plus} herbą, pirmiausia rodydamas geriausią vietą, kad žyma išliktų įskaitoma. Užvedus pelę rodomi vardai.",
+  "featured-tournament-winner": {
+    "name": "Iškeltas turnyro nugalėtojas",
+    "how": "Tas pats ženklelis, laimėtas įvykyje, kurį Wargaming pažymėjo kaip iškeltą. Plieną pakeičia auksas, tiksliai kaip žaidėjo pusėje."
+  },
+  "heading": "Visi {badge} ir kaip juos uždirbti",
+  "heading-accent": "ženklelis",
+  "marks-carried-beside-a-nickname": "Ženklai, nešami šalia slapyvardžio visur, kur jis rodomas {NAME}: lyderių lentelėse, klanų sudėtyse, paieškoje ir turnyrų lentelėse.",
+  "n-badges": "{count} ženklelių",
+  "onslaught-champion": {
+    "name": "Prasiveržimo ČEMPIONAS",
+    "how": "Pasiektas čempiono rangas režime Prasiveržimas, kurio reikia, kad apskritai pasirodytumėte {standings}. Vėliau išsaugoma vieta, o ne faktas, kad reitingas buvo pasiektas, jei jis nukrenta žemiau ribos."
+  },
+  "onslaught-legend": {
+    "name": "Prasiveržimo Legenda",
+    "how": "Užimta vieta sezono Legend ribos viduje. Tai vieta, o ne rezultatas: vienu metu jų yra tik tam tikras skaičius, o riba vertinama pagal sezoną, kuriame vieta buvo užimta. Violetinė spalva vietoj plieno mėlynos, tokia spalva Legend nudažyta pačioje įskaitoje."
+  },
+  "player-badges": "Žaidėjo ženkleliai",
+  "player-overflow": "Žaidėjas, nešantis daugiau nei tris ženklelius, likusią dalį sutraukia į {plus} herbą aukščiau nurodyta tvarka, kad slapyvardis lentelėje išliktų įskaitomas. Užvedus pelę rodomi vardai, o kiekvienas ženklelis vis dar nukreipia ten, kur nukreipė jo paties herbas.",
+  "ranked-standings": "įvertinimų reitingas",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Su paskyra susietas Twitch kanalas. Prijunkite Twitch savo profilyje, kad tai patvirtintumėte, o herbas nukreips į jūsų kanalą. Jis rodo, ar transliuojate tiesiogiai."
+  },
+  "streamer-who-is-on-air": "Tiesiogiai transliuojantis asmuo taip pat nešioja raudoną LIVE žymą. Ji neuždirbama ir neišlaikoma: pasirodo prasidėjus transliacijai ir dingsta jai pasibaigus, todėl niekada nesutraukiama.",
+  "support-subscription": "pagalbininko prenumerata",
+  "supporter": {
+    "name": "Rėmėjas"
+  },
+  "supporter-note": "Aktyvi {link}, išlaikyta vieša. Rėmėjai, pasirinkę likti anonimiški, savo pasirinkimu nenešioja jokio ženklelio.",
+  "the-marks-a-player-or": "Ženklai, kuriuos žaidėjas arba klanas gali nešioti {NAME}, ką kiekvienas jų sako ir ko tiksliai reikia, kad jį uždirbtumėte.",
+  "tournament-winner": {
+    "name": "Turnyro nugalėtojas",
+    "how": "Komanda, priskirta klanui, laimėjo turnyrą. Wargaming registruoja komandas ir paskyras, niekada ne klanus, todėl priskyrimas atkuriamas palyginus kiekvieną sudėtį su klano naryste tą dieną, kai buvo žaidžiama."
+  },
+  "verified": {
+    "name": "Patvirtinta",
+    "how": "Savininkas prisijungė naudodamas savo Wargaming.net ID ir prijungė šią paskyrą. Prisijungimas yra vienintelis reikalavimas ir nieko nekainuoja."
+  }
+}

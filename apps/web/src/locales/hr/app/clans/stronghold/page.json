@@ -1,0 +1,4 @@
+{
+  "title": "Najbolji klanovi razine {tier} ({region})",
+  "description": "Ljestvica klanova razine {tier} na regiji {region}. Rangirano prema SR-u (ocjena okršaja), ELO-u, bitkama i postotku pobjeda. Najmanje {battles} bitaka."
+}

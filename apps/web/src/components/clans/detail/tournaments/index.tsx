@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -36,6 +37,8 @@ export function ClanTournamentsTab({
   /** Undefined while loading, null when the read failed. */
   data: ClanTournamentRecord | null | undefined;
 }) {
+  const { t } = useTranslation("components/clans/detail/tournaments/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const entries = data?.entries ?? [];
   return (
     <>
@@ -51,11 +54,12 @@ export function ClanTournamentsTab({
             most clans, and showing it before the read lands states the one
             thing the tab exists to deny. */}
         <PanelTitle>
-          Tournaments{data ? ` (${entries.length})` : ""}
+          {tGame("features.tournaments")}
+          {data ? ` (${entries.length})` : ""}
         </PanelTitle>
         {data && data.wins > 0 && (
           <span className="text-xs text-fd-muted-foreground">
-            {data.wins} won
+            {t("won", { count: data.wins })}
           </span>
         )}
       </PanelHeader>
@@ -69,10 +73,7 @@ export function ClanTournamentsTab({
           // Never entering one is the norm for most clans, so this says so
           // rather than reading as a section that failed to load.
           <p className={cn(styles.mutedDescription, "p-4")}>
-            [{tag}] has not entered a tournament we have mirrored. A team counts
-            as this clan&apos;s once a quarter of its roster were members on the
-            day it played.
-          </p>
+            {t("has-not-entered-a-tournament", { tag })}</p>
         ) : (
           <ClanTournamentsTable region={region} entries={entries} />
         )}

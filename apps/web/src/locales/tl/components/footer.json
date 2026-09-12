@@ -1,0 +1,25 @@
+{
+  "tagline": "Ginawa para sa komunidad ng World of Tanks. Libreng istatistika para sa bawat manlalaro, clan, tank at map sa EU, NA at Asia.",
+  "columns": {
+    "leaderboards": "Mga leaderboard",
+    "tanks": "MMga tangke",
+    "maps": "Mga mapa",
+    "integrations": "Mga integrasyon",
+    "project": "Proyekto"
+  },
+  "links": {
+    "top-tanks": "Pinakamahusay na MMga tangke",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "Dokumentasyon ng API",
+    "badges": "Mga badge",
+    "glossary": "Glosaryo",
+    "coverage": "Saklaw",
+    "support": "Suportahan kami",
+    "source": "Source code",
+    "status": "Katayuan",
+    "discord": "Discord"
+  },
+  "disclaimer": "Hindi kaakibat ng Wargaming",
+  "cookies": "Pamahalaan ang cookies"
+}

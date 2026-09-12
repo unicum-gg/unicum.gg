@@ -1,0 +1,6 @@
+{
+  "title": "Qualcosa è andato storto",
+  "description": "L’API di Wargaming non ha risposto correttamente. Di solito si tratta di un problema temporaneo da parte loro.",
+  "try-again": "Riprova",
+  "back": "Torna alla home"
+}

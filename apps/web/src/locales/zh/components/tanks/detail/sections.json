@@ -1,0 +1,14 @@
+{
+  "ammunition": "弹药",
+  "characteristics": "坦克{tank}的特性",
+  "consumables": "给养",
+  "crew-level": "乘员等级",
+  "crew-skills": "组员技能",
+  "equipment": "配件",
+  "field-mods": "现场改装",
+  "historical-reference": "坦克{tank}的历史资料",
+  "modules": "坦克{tank}的模块",
+  "research-path": "坦克{tank}的升级路线",
+  "similar": "与 {tank} 接近的坦克",
+  "videos": "坦克{tank}的视频"
+}

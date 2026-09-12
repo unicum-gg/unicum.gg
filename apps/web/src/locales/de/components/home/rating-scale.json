@@ -1,0 +1,21 @@
+{
+  "title": "Bewertungsskala",
+  "description": "Farbschwellen, die auf der gesamten Website für die Siegrate und die in der Navigationsleiste ausgewählte Bewertungsmetrik verwendet werden.",
+  "tier": "Stufe",
+  "tiers": {
+    "top": "Beste",
+    "excellent": "Ausgezeichnet",
+    "super": "Super",
+    "very-good": "Sehr gut",
+    "good": "Gut",
+    "average": "Durchschnitt",
+    "below-avg": "Unterdurchschnittlich",
+    "bad": "Schlecht",
+    "very-bad": "Sehr schlecht"
+  },
+  "rating-colors": "Bewertungsfarben",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

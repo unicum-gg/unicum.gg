@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Tilfeldig",
+    "battle_royale": "Steel Hunter",
+    "frontline": "Frontlinje",
+    "onslaught": "Onslaught",
+    "onslaught_night": "{onslaught} Natt",
+    "grand_battle": "Storkamp",
+    "clan_wars": "Klankriger",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arkade",
+    "story_mode": "Historiemodus",
+    "training": "Trening"
+  },
+  "player-modes": {
+    "overall": "Tilfeldige kamper",
+    "skirmish": "Trefning",
+    "advances": "Fremrykkinger",
+    "grand": "Store slag",
+    "ranked": "Rangerte kamper",
+    "cw-x": "Klankriger X",
+    "cw-viii": "Klankriger VIII",
+    "cw-vi": "Klankriger VI",
+    "steel-hunter": "Steel Hunter",
+    "onslaught": "Onslaught"
+  },
+  "stronghold-tiers": {
+    "advances": "Fremrykkinger",
+    "t10": "Trefning T10",
+    "t8": "Trefning T8",
+    "t6": "Trefning T6"
+  },
+  "stronghold-periods": {
+    "24h": "Siste 24 timer",
+    "7d": "Siste 7 dager",
+    "30d": "Siste 30 dager",
+    "overall": "Totalt"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Kamper",
+    "winrate": "Seiersrate"
+  },
+  "clan-boards": {
+    "advances": "Fremrykkinger",
+    "t10": "Trefning X",
+    "t8": "Trefning VIII",
+    "t6": "Trefning VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Møtekamp",
+    "assault": "Angrep",
+    "attack-defense": "Angrep/Forsvar"
+  },
+  "map-camouflage": {
+    "summer": "Sommer",
+    "winter": "Vinter",
+    "desert": "Ørken"
+  },
+  "map-poi": {
+    "1": "Artillerihovedkvarter",
+    "2": "Kommunikasjonssenter",
+    "3": "Observasjonspost"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Møteslag",
+    "assault2": "Angrep/forsvar",
+    "comp7": "Onslaught"
+  },
+  "battle-formats": {
+    "random": "Tilfeldig",
+    "clan_wars": "Klankriger",
+    "advances": "Fremrykkinger",
+    "skirmish": "Trefning",
+    "maneuvers": "Manøvrer",
+    "onslaught": "Onslaught",
+    "tournament": "Turnering"
+  },
+  "battle-results": {
+    "victory": "Seier",
+    "defeat": "Tap",
+    "draw": "Uavgjort"
+  },
+  "spawn-directions": {
+    "north": "Nord",
+    "south": "Sør",
+    "east": "Øst",
+    "west": "Vest"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Kommende",
+    "registration_started": "Påmelding åpen",
+    "registration_finished": "Registrering stengt",
+    "running": "Pågår",
+    "finished": "Avsluttende",
+    "complete": "Fullført"
+  },
+  "onslaught-tiers": {
+    "legend": "Legend",
+    "champion": "Champion",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Tung",
+    "mediumTank": "Medium",
+    "lightTank": "Lett",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Angrep",
+    "break": "Gjennombrudd",
+    "support": "Støtte",
+    "universal": "Allsidig",
+    "sniper": "Skarpskytter",
+    "wheeled": "Hjulgående"
+  },
+  "mastery-badges": {
+    "class3": "3. klasse",
+    "class2": "2. klasse",
+    "class1": "1. klasse",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Tilfeldige kamper",
+    "stronghold": "Festning",
+    "skirmish": "Trefning",
+    "clan-wars": "Klankriger"
+  },
+  "features": {
+    "stronghold": "Festning",
+    "skirmish": "Trefning",
+    "marks-of-excellence": "Marks of Excellence",
+    "marks-of-mastery": "Mestringsmerker",
+    "personal-rating": "Personlig rangering",
+    "world-of-tanks-rating": "World of Tanks-vurdering",
+    "common-test": "Vanlig test",
+    "tournaments": "Turneringer"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Marks of Excellence"
+  }
+}

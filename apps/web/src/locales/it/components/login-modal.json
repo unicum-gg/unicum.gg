@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Accedi con Wargaming.net ID",
+  "open-source": "{name} è open source. {link} prima di considerarlo affidabile.",
+  "pick-the-region-your-world": "Scegli la regione in cui si trova il tuo account World of Tanks. Non deve necessariamente coincidere con la regione che stai consultando.",
+  "read-the-login-code": "Leggi il codice di accesso",
+  "what-wargaming-hands-back-is": "Wargaming restituisce un token che consente di leggere i dati del tuo account. Viene archiviato in forma crittografata e rinnovato finché il tuo account rimane collegato. Agisce per tuo conto solo per le funzioni che hai configurato personalmente, come la programmazione delle riserve del tuo clan.",
+  "you-sign-in-on-wargaming": "Accedi dalla pagina di Wargaming, non da qui. La tua password non viene mai digitata su {NAME} e non ci viene mai trasmessa."
+}

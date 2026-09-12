@@ -1,5 +1,8 @@
+"use client";
+
 import { MAX_STARS, RATING_COLOR_HEX, starRatingColor } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * A five-star score, drawn to the tenth.
@@ -77,6 +80,7 @@ export function Stars({
   className?: string;
   tone?: StarTone;
 }) {
+  const { t } = useTranslation("components/tanks/detail/community");
   const filled = value == null ? 0 : Math.max(0, Math.min(MAX_STARS, value));
   const inherit = tone === StarTone.Inherit;
   const color =
@@ -89,7 +93,9 @@ export function Stars({
       className={cn("relative inline-flex", className)}
       role="img"
       aria-label={
-        value == null ? "Not rated" : `${value.toFixed(2)} out of ${MAX_STARS}`
+        value == null
+          ? t("not-rated-short")
+          : t("stars", { value: value.toFixed(2), max: MAX_STARS })
       }
     >
       <StarRow

@@ -1,0 +1,8 @@
+{
+  "description": "Alle Wargaming-turneringer på {region}: daglige gullrangeringer, klanmesterskap, hvem som deltok og hvem som vant. Fullstendige sluttspill, resultater og lagoppstillinger.",
+  "live-many": "{count} turneringer er åpne eller spilles på {region} akkurat nå,",
+  "live-one": "{count} turnering er åpen eller spilles på {region} akkurat nå,",
+  "no-live": "Turneringer spilles på {region} hver dag,",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "fra 1 mot 1-rangeringer om gull til klanmesterskap om penger. Fullstendige sluttspill og resultater, hvert lag med lagoppstillingen sin og hvilken side det startet på, kart for kart."
+}

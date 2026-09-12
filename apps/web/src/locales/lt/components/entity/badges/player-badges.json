@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1 vieta",
+    "2": "2 vieta",
+    "3": "3 vieta"
+  },
+  "streamer": "Transliuotojas · žiūrėti {name} per Twitch",
+  "tournament": {
+    "one": "Laimėjusi {title} sudėtis",
+    "many": "{count} laimėjusiose sudėtyse, geriausias {title}",
+    "featured": "{text} · išskirtinis renginys",
+    "unnamed": "Wargaming turnyras"
+  },
+  "tournament-wins": "{count, plural, one {# turnyro pergalė} few {# turnyro pergalės} other {# turnyro pergalės}}",
+  "watch-on-twitch": "Žiūrėti {name} per Twitch",
+  "watch-on-twitch-viewers": "Žiūrėti {name} per Twitch · žiūrovų: {viewers}"
+}

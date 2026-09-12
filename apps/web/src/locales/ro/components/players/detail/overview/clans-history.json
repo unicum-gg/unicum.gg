@@ -1,0 +1,12 @@
+{
+  "clans-history": "Istoricul clanurilor lui {nickname}",
+  "clans-in-clans": "{totalClans} clanuri · {timeInClansSeconds} în clanuri",
+  "current": "curent",
+  "duration": "Durata",
+  "from": "De la",
+  "name": "Nume",
+  "no-clan-history": "Nu există istoric al clanurilor.",
+  "role": "Rol",
+  "tag": "Etichetă",
+  "to": "Către"
+}

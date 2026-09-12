@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} 被增强",
+  "n-tanks": "{count, plural, other {# 坦克}}",
+  "nerfed": "{count} 被削弱",
+  "no-tank-changes-have-been": "尚未记录坦克变更。随着Wargaming重新平衡坦克，每次更新的增强和削弱都会显示在这里。",
+  "update": "更新 {version}"
+}

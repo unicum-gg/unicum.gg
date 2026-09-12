@@ -1,0 +1,11 @@
+{
+  "closes": "Aizvērt {when}",
+  "map-pool": "Kartes baseins",
+  "place": "Vieta",
+  "prize": "Balva",
+  "prizes": "Balvas",
+  "qualified": "Kvalificējušies ({count})",
+  "register": "Reģistrēties",
+  "tournaments": "Turnīri",
+  "winner": "{count, plural, zero {Uzvarētāji} one {Uzvarētājs} other {Uzvarētāji}}"
+}

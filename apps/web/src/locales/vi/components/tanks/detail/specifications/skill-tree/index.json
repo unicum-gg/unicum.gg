@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Nhấp vào một nút có thể tiếp cận để mở khóa. Mỗi nút áp dụng hiệu ứng lên các chỉ số bên trên. Màu sắc nhóm các nút theo hỏa lực, tính cơ động, khả năng sống sót và cơ chế xe tăng.",
+  "loadout-switch-no-effect": "Chuyển đổi trang bị trong trận đấu. Không có hiệu ứng chỉ số.",
+  "title": "Nâng cấp của xe tăng {tank}",
+  "vehicle-mechanic-no-effect": "Cơ chế xe tăng. Không có hiệu ứng chỉ số."
+}

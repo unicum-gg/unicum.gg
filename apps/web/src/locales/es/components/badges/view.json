@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Tabla clasificatoria de {board}",
+  "carried-beside-a-clan-tag": "Se muestra junto a una etiqueta de clan. Una insignia de puesto representa una posición en una competición: el número indica ese puesto y el color, la tabla a la que pertenece. Las Clasificaciones no otorgan ninguna, porque una posición alta en WN8 no es algo que un clan pueda ganar.",
+  "clan-badges": "Insignias de clan",
+  "clan-board": {
+    "name": "Entre los {rank} mejores en {board}",
+    "how": "Un puesto entre los {rank} primeros en la tabla {board}. Se conserva mientras el clan mantenga ese puesto y se pierde cuando deja de ocuparlo."
+  },
+  "clan-overflow": "Si un clan ocupa más de tres puestos, agrupa el resto en una insignia {plus}, empezando por el mejor, para que la etiqueta siga siendo legible. Al pasar el cursor por encima, se muestran todos.",
+  "featured-tournament-winner": {
+    "name": "Ganador del Torneo destacado",
+    "how": "Lo mismo, pero obtenido en un evento que Wargaming destaca como especial. Es de oro en lugar de acero, exactamente igual que para los jugadores."
+  },
+  "heading": "Cada {badge} y cómo conseguirla",
+  "heading-accent": "insignia",
+  "marks-carried-beside-a-nickname": "Marcas que se muestran junto a un apodo dondequiera que aparezca en {NAME}: tablas de clasificación, listas de clanes, búsquedas y cuadros de torneos.",
+  "n-badges": "{count} insignias",
+  "onslaught-champion": {
+    "name": "Campeón de Asedio",
+    "how": "Haber alcanzado el rango Campeón en Asedio, lo necesario para aparecer siquiera en la tabla {standings}. Se conserva después: si la Clasificación vuelve a caer por debajo del umbral, se pierde el puesto, no el hecho de haberlo ocupado."
+  },
+  "onslaught-legend": {
+    "name": "Leyenda de Asedio",
+    "how": "Haber ocupado un puesto dentro del corte de Leyenda de la temporada, que es una posición y no una puntuación: solo hay un número limitado de puestos a la vez y el umbral se evalúa según la temporada en la que se ocupó el puesto. Es violeta en lugar de azul acero, el color que la propia clasificación asigna a Leyenda."
+  },
+  "player-badges": "Insignias de jugador",
+  "player-overflow": "Si un jugador lleva más de tres marcas, agrupa el resto en una insignia {plus}, en el orden indicado arriba, para que el apodo siga siendo legible en una tabla. Al pasar el cursor por encima, se muestran todas, y cada una conserva el enlace de su propia insignia.",
+  "ranked-standings": "clasificaciones clasificadas",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Un canal de Twitch vinculado a la cuenta. Conecta Twitch desde tu perfil para confirmarlo y la insignia enlazará a tu canal. Se muestra tanto si estás en directo como si no."
+  },
+  "streamer-who-is-on-air": "Un streamer que está en directo también lleva una etiqueta roja LIVE. Esta no se obtiene ni se conserva: aparece cuando comienza la transmisión y desaparece cuando termina, por lo que nunca se oculta al agrupar insignias.",
+  "support-subscription": "suscripción de apoyo",
+  "supporter": {
+    "name": "Soporte"
+  },
+  "supporter-note": "Tener {link} activo y visible públicamente. Los usuarios con Soporte que eligen permanecer en el anonimato no llevan insignia, por decisión propia.",
+  "the-marks-a-player-or": "Las marcas que un jugador o un clan puede llevar en {NAME}, qué significa cada una y los requisitos exactos para obtenerla.",
+  "tournament-winner": {
+    "name": "Ganador del torneo",
+    "how": "Un equipo atribuido al clan ganó un torneo. Wargaming registra equipos y cuentas, nunca clanes, por lo que la atribución se recupera comparando cada plantilla con los miembros del clan en la fecha en que se disputó el torneo."
+  },
+  "verified": {
+    "name": "Verificado",
+    "how": "El propietario ha iniciado sesión con su ID de Wargaming.net y ha vinculado esta cuenta. Iniciar sesión es el único requisito y no cuesta nada."
+  }
+}

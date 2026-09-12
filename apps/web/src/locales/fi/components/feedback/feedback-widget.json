@@ -1,0 +1,21 @@
+{
+  "trigger": "Palaute",
+  "title": "Jaa palautteesi",
+  "topic-placeholder": "Valitse aihe...",
+  "message-placeholder": "Palautteesi...",
+  "send": "Lähetä",
+  "sent": "Kiitos palautteestasi!",
+  "failed": "Palautetta ei voitu lähettää. Yritä uudelleen.",
+  "topics": {
+    "bug": "Virheraportti",
+    "idea": "Ominaisuusidea",
+    "data": "Tietojen tarkkuus",
+    "other": "Muut"
+  },
+  "sentiments": {
+    "awful": "Kamala",
+    "bad": "Huono",
+    "good": "Hyvä",
+    "great": "Erinomainen"
+  }
+}

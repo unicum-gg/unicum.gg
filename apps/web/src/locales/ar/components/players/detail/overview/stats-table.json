@@ -1,0 +1,34 @@
+{
+  "stat": "إحصائية",
+  "rows": {
+    "battles": "معارك",
+    "tier": "المستوى",
+    "wins": "الانتصارات",
+    "losses": "الخسائر",
+    "draws": "تعادلات",
+    "survived": "المعارك الناجية",
+    "destroyed": "الدبابات المد destroyed",
+    "destruction-ratio": "نسبة التدمير",
+    "spotted": "الدبابات المكتشفة",
+    "damages": "الأضرار",
+    "track-damages": "الأضرار الناتجة عن المسارات",
+    "spotting-damages": "الأضرار الناتجة عن الكشف",
+    "assisting-damages": "الأضرار الناتجة عن المساعدة",
+    "combined-damages": "الأضرار المجمعة",
+    "base-capture": "قبض القاعدة",
+    "base-defense": "دفاع القاعدة",
+    "experience": "الخبرة",
+    "hit-rate": "معدل الإصابة",
+    "personal-rating": "التصنيف الشخصي",
+    "wtr": "تقييم World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "الإجمالي",
+    "day": "آخر 24 ساعة",
+    "week": "آخر 7 أيام",
+    "month": "آخر 30 يوم"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "fun": "Hvor mye spillerne liker den, noe som ofte ikke er det samme spørsmålet.",
+  "hype": "Hvor fellesskapet rangerer den i nivået sitt, minus hvor seiersraten rangerer den. Sorter synkende for de mest overvurderte stridsvognene i spillet, stigende for de mest undervurderte.",
+  "overall": "Hvor god spillerne synes den er. Rangert etter et gjennomsnitt trukket mot sidens gjennomsnitt, slik at en stridsvogn med fire stemmer ikke kan gå forbi en med fire hundre.",
+  "votes": "Avgitte stemmer, alle fra en konto som faktisk har spilt stridsvognen."
+}

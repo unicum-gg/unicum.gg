@@ -1,0 +1,60 @@
+{
+  "columns-label": "Cột",
+  "groups": {
+    "general": "Chung",
+    "combat": "Chiến đấu"
+  },
+  "columns": {
+    "battles": {
+      "label": "Số trận",
+      "tip": "Tổng số trận đấu đã chơi trên xe tăng"
+    },
+    "count": {
+      "label": "Số lượng",
+      "tip": "Số lượng người chơi được theo dõi trong mẫu"
+    },
+    "rating": {
+      "label": "Xếp hạng (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Tỷ lệ thắng trên xe tăng"
+    },
+    "playerWr": {
+      "label": "Tỷ lệ thắng người chơi",
+      "tip": "Tỷ lệ thắng tổng thể trung bình của những người chơi điều khiển xe tăng này"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Sát thương trung bình mỗi trận đấu"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Tỷ lệ hạ gục / tử trận"
+    },
+    "assists": {
+      "label": "Hỗ trợ",
+      "tip": "Sát thương hỗ trợ trung bình"
+    },
+    "hitPct": {
+      "label": "Tỷ lệ trúng %",
+      "tip": "Số lần trúng / số phát bắn"
+    },
+    "penPct": {
+      "label": "Tỷ lệ xuyên %",
+      "tip": "Số lần xuyên / số lần trúng"
+    },
+    "spots": {
+      "label": "Phát hiện",
+      "tip": "Số lần phát hiện trung bình mỗi trận đấu"
+    },
+    "blocked": {
+      "label": "Chặn",
+      "tip": "Sát thương trung bình bị giáp chặn"
+    },
+    "survival": {
+      "label": "Tồn tại",
+      "tip": "Tỷ lệ trận đấu sống sót"
+    }
+  }
+}

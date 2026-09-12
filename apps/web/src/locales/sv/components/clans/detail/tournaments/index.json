@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "[{tag}] har inte deltagit i någon turnering som vi har speglat. Ett lag räknas till den här klanen om minst en fjärdedel av laguppställningen var medlemmar i klanen den dag laget spelade.",
+  "won": "{count} vunnit"
+}

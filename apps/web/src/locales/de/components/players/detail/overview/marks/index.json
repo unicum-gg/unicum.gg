@@ -1,0 +1,21 @@
+{
+  "title": "Markierungen und Überlegenheit von {nickname}",
+  "excellence": {
+    "title": "Erfolgsmarkierungen",
+    "description": "Fahrzeuge nach den Markierungen auf ihrem Geschütz. Eine Markierung basiert auf einem dauerhaft gehaltenen Durchschnitt: Das Spiel berechnet sie anhand eines gleitenden Fensters der letzten Gefechte und vergleicht die Leistung mit den regionalen Werten für dieses Fahrzeug.",
+    "partial": "Für {known} von {garage} Fahrzeugen wurden Markierungen erfasst. Die übrigen werden ergänzt, sobald das Konto aktualisiert wird.",
+    "note": "{marked} von {garage} Fahrzeugen tragen eine Markierung.",
+    "note-share": "{marked} von {garage} Fahrzeugen tragen eine Markierung ({percent}% der Garage)."
+  },
+  "mastery": {
+    "title": "Meisterschaftsmarken",
+    "description": "Fahrzeuge nach ihrem besten Abzeichen. Ein Abzeichen beruht anders als ein Durchschnitt auf einem einzelnen Gefecht: Das Spiel verleiht es für die in diesem Gefecht erzielte Erfahrung im Vergleich zu den regionalen Werten für dieses Fahrzeug.",
+    "note": "Auf {aces} von {garage} Fahrzeugen wurde Ace Tanker erreicht.",
+    "note-share": "Auf {aces} von {garage} Fahrzeugen wurde Ace Tanker erreicht ({percent}% der Garage)."
+  },
+  "reach": {
+    "heading": "Mehr aus dem Geschütz herausholen",
+    "description": "Fahrzeuge, deren kombinierter Schaden bereits den Schwellenwert einer Markierung übertrifft, die sie noch nicht tragen. Das Abzeichen zeigt diesen kombinierten Schaden und ist entsprechend der überschrittenen Markierung eingefärbt."
+  },
+  "none": "Keine"
+}

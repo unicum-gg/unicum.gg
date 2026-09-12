@@ -9,6 +9,7 @@ import {
 } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Select,
   SelectContent,
@@ -18,6 +19,7 @@ import {
 } from "@/components/ui/select";
 
 export function RatingSelector() {
+  const { t } = useTranslation("components/rating-selector");
   const [stored, setStored] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -44,7 +46,7 @@ export function RatingSelector() {
     >
       <SelectTrigger
         size="sm"
-        aria-label="Rating metric"
+        aria-label={t("label")}
         className="h-8 w-fit gap-1.5 rounded-full border-fd-border bg-fd-secondary/50 px-2.5 text-xs font-medium uppercase"
       >
         <SelectValue>{RATING_METRIC_LABEL[metric]}</SelectValue>

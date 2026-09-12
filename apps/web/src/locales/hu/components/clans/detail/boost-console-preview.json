@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktív napok",
+  "add-workflow": "Munkafolyamat hozzáadása",
+  "connect-discord": "Csatlakozás a Discordhoz",
+  "discord-notifications": "Discord értesítések",
+  "each-workflow-activates-its-reserves": "Minden munkafolyamat egy megadott időablakban aktiválja a tartalékait, amint elegendő tag játszik éppen. A fiókodban fut, neked nem kell online lenned. Annyit adhatsz hozzá, amennyire szükséged van.",
+  "enabled": "Engedélyezve",
+  "from": "Tól/Től",
+  "get-a-discord-message-in": "Minden tartalék aktiválásakor üzenetet kaphatsz az általad kiválasztott Discord-csatornán, így az egész klán tudni fogja, hogy aktív.",
+  "log-in-with-wargaming-to": "Bejelentkezés Wargaming-fiókkal a beállításhoz",
+  "min-online": "Min. online",
+  "officers": "Tisztek",
+  "only-an-officer-of-this": "Ezt csak a klán egyik tisztje állíthatja be.",
+  "schedule-preview": "Menetrend előnézet",
+  "set-your-hours-and-reserves": "Állítsd be egyszer az időpontokat és a tartalékokat. Ezután automatikusan, időben aktiválódnak, még akkor is, ha senki sincs ott, hogy megnyomja a gombot.",
+  "stronghold-boosts": "Erődítő bónuszok",
+  "times-are-in-your-timezone": "Az időpontok a saját időzónád szerint vannak megadva: {tz}.",
+  "to": "Egybe"
+}

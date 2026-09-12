@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Det finns ännu ingen stridsvagnsdata för den här klanen.",
+  "no-tanks-match-these-filters": "Inga stridsvagnar matchar dessa filter.",
+  "nation": "Nation",
+  "type": "Typ",
+  "tier": "Nivå",
+  "name": "Namn",
+  "members": "Medlemmar",
+  "battles": "Strider",
+  "avg-damage": "Genomsnittlig skada",
+  "avg-xp": "Genomsnittlig XP",
+  "wr": "WR"
+}

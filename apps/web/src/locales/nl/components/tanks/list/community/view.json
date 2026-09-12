@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Elke tank wordt op een schaal van vijf beoordeeld door de spelers die ermee spelen. Een stem telt alleen mee als deze afkomstig is van een account dat daadwerkelijk met het voertuig een gevecht heeft gespeeld. Dat onderscheidt dit van een peiling onder iedereen die toevallig kwam opdagen.",
+  "no-tank-has-been-rated": "Nog geen enkele tank is beoordeeld. De eerste stemmen kunnen op de tankpagina’s worden uitgebracht, onder Community.",
+  "think": "denken",
+  "title": "Wat spelers {think}",
+  "votes-across-vehicles": "{totalVotes} stemmen verdeeld over {ratedTanks} voertuigen."
+}

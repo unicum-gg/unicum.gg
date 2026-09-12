@@ -1,0 +1,27 @@
+{
+  "placeholder": "Cerca giocatori, clan, carri armati, mappe o termini",
+  "type": "Trova tipo",
+  "types": {
+    "all": "Tutti",
+    "players": "Giocatori",
+    "clans": "Clan",
+    "tanks": "Carri",
+    "maps": "Mappe",
+    "glossary": "Glossario"
+  },
+  "sections": {
+    "players": "Giocatori",
+    "clans": "Clan",
+    "tanks": "Carri",
+    "maps": "Mappe",
+    "glossary": "Glossario",
+    "recent": "Recenti",
+    "favorites": "Preferiti"
+  },
+  "searching": "Ricerca…",
+  "errored": "Qualcosa è andato storto. Riprova.",
+  "empty": "Nessun risultato trovato",
+  "remove-recent": "Rimuovi dalle ricerche recenti",
+  "add-favorite": "Aggiungi ai preferiti",
+  "remove-favorite": "Rimuovi dai preferiti"
+}

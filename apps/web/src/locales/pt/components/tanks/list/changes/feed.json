@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# tanque} other {# tanques}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Ainda não foram registadas alterações aos tanques. À medida que a Wargaming reequilibrar os tanques, os buffs e nerfs de cada atualização aparecerão aqui.",
+  "update": "Actualizar {version}"
+}

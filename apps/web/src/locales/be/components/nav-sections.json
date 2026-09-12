@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Гульцы",
+    "clans": "Кланы",
+    "tanks": "Танкі",
+    "maps": "Карты",
+    "tournaments": "Турніры",
+    "servers": "Серверы"
+  },
+  "links": {
+    "top-players": {
+      "label": "Топ гульцы",
+      "description": "Табліца лідараў гульцоў за ўвесь час"
+    },
+    "players-onslaught": {
+      "description": "Рэйтынгавая табліца Наступу"
+    },
+    "players-steel-hunter": {
+      "description": "Табліца лідараў каралеўскай бітвы"
+    },
+    "top-clans": {
+      "label": "Топ кланы",
+      "description": "Табліца лідараў кланаў за ўвесь час"
+    },
+    "stronghold": {
+      "description": "Рэйтынг вылазак"
+    },
+    "advances": {
+      "description": "Рэйтынг баёў 15 на 15 для X узроўню"
+    },
+    "tank-performances": {
+      "label": "Эфектыўнасць",
+      "description": "Працэнт перамог і страты для кожнага танка"
+    },
+    "tank-specs": {
+      "label": "Спецыфікацыі",
+      "description": "Статыстыка для кожнага танка"
+    },
+    "tank-economics": {
+      "label": "Экономіка",
+      "description": "Танкі, на якіх зарабляюць крэдыты і вопыт"
+    },
+    "tank-moe": {
+      "description": "Страты для кожнага знака"
+    },
+    "tank-mom": {
+      "description": "Парогі значкоў майстэрства"
+    },
+    "tank-changes": {
+      "label": "Змены",
+      "description": "Узмацненні і паслабленні па абнаўленнях"
+    },
+    "tank-community": {
+      "label": "Рэйтынгі супольнасці",
+      "description": "Ацэнкі гульцоў, якія валодаюць гэтымі танкамі"
+    },
+    "tank-videos": {
+      "label": "Відэа",
+      "description": "Гульнявыя відэа ад супольнасці"
+    },
+    "all-tournaments": {
+      "label": "Турніры",
+      "description": "Кожны адкрыты і завершаны турнір"
+    },
+    "all-maps": {
+      "label": "Усе карты",
+      "description": "Кожная карта ў гульні"
+    },
+    "map-changes": {
+      "label": "Змены",
+      "description": "Пераробкі карт па абнаўленнях"
+    },
+    "battle-type": {
+      "description": "Карты {type}"
+    },
+    "servers-population": {
+      "label": "Насельніцтва сервера",
+      "description": "Гульцы анлайн цяпер і ў дынаміцы"
+    }
+  }
+}

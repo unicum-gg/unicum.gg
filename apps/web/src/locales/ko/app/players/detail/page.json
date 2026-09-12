@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name}의 전차 ({region}), 플레이한 모든 차량",
+    "description": "{name}이(가) {region} 지역에서 플레이한 모든 전차의 전투 수, 승률, 평균 피해 및 차량별 WN8입니다."
+  },
+  "achievements": {
+    "title": "{name}의 업적 ({region}), {medals}개 훈장 획득",
+    "description": "{name}이(가) {region} 지역에서 획득한 {medals}개의 World of Tanks 훈장입니다. 콜로바노프 훈장과 풀 훈장부터 명예 계급 및 영웅 훈장까지 포함하며, 아직 획득하지 못한 모든 훈장도 확인할 수 있습니다."
+  },
+  "tournaments": {
+    "title": "{name}의 토너먼트 ({region})",
+    "description": "{name}이(가) {region} 지역에서 참가한 모든 Wargaming 토너먼트입니다. 함께 플레이한 팀, 형식 및 진출 결과를 확인할 수 있습니다. Wargaming이 토너먼트 측에서만 게시하는 기록이며, 플레이어 측 기록은 절대 아닙니다."
+  },
+  "value": {
+    "title": "{name}의 계정 가치 ({region})",
+    "description": "{name}의 {region} 지역 World of Tanks 계정 가치입니다. 차고에 보유한 크레딧, 골드 및 경험치를 기준으로 계산합니다."
+  },
+  "mode": {
+    "title": "{name} {mode} 통계 ({region})",
+    "description": "{name}의 {region} {mode}: 전투, 승률 및 이 모드의 평점, 일반 전투 기준 통계와 함께 제공됩니다."
+  },
+  "overview": {
+    "title": "{name} World of Tanks 통계 ({region}), 전투 {battles}회, 승률 {winrate}%",
+    "description": "{name}의 {region} 통계: 전투 {battles}회, 승률 {winrate}%, 평점 {rating}. 전차별 분류, WN8, WNX 및 전체 클랜 기록입니다."
+  },
+  "locked": {
+    "title": "{name} World of Tanks 계정 잠김 ({region})",
+    "description": "{name} ({region})은(는) 존재하지만 워게이밍이 이 계정을 잠갔으므로 World of Tanks 통계를 이용할 수 없습니다."
+  },
+  "empty": {
+    "title": "{name} World of Tanks 플레이어 통계 ({region})",
+    "description": "{name} ({region}) World of Tanks 플레이어 통계: WN8, WNX 평점, 승률, 전차별 분류 및 전체 클랜 기록입니다."
+  }
+}

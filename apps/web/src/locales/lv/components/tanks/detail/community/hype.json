@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "virs {value}% novērtēto sava līmeņa tanku",
+  "measured-hint": "Vieta, ko tam piešķir uzvaru biežums starp tādiem pašiem tankiem",
+  "not-enough-votes-yet-to": "Vēl nav pietiekami daudz balsu, lai salīdzinātu kopienas spriedumu ar tanka faktisko sniegumu.",
+  "perceived-hint": "Vieta, ko kopiena tam piešķir starp novērtētajiem {tier}. līmeņa tankiem",
+  "verdict": {
+    "overrated": "Kopiena to vērtē krietni augstāk, nekā tas patiesībā sasniedz.",
+    "fair": "Šajā gadījumā reputācija un rezultāti sakrīt.",
+    "underrated": "Tas darbojas labāk, nekā jebkurš tam atzīst."
+  },
+  "what-players-think": "Ko domā spēlētāji",
+  "what-the-data-says": "Ko saka dati"
+}

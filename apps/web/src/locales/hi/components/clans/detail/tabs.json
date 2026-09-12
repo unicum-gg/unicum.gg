@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "सारांश",
+    "tanks": "टैंक",
+    "videos": "वीडियो",
+    "tournaments": "टूर्नामेंट्स",
+    "manage": "प्रबंधित करें"
+  },
+  "section-count": "{section} ({count})"
+}

@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname} sasniegumi",
+  "filter-all": "Visi",
+  "filter-both": "Abi",
+  "filter-earned": "Nopelnītie",
+  "filter-missing": "Trūkstošie",
+  "filter-obtainable": "Iegūstamie",
+  "filter-retired": "Noņemti",
+  "no-achievement-matches-these-filters": "Neviens sasniegums neatbilst šiem filtriem.",
+  "search-achievements": "Meklēt sasniegumus",
+  "search-among-n-achievements": "Meklēt starp {count} sasniegumiem"
+}

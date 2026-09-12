@@ -1,0 +1,7 @@
+{
+  "badge-title": "합산 피해 {combined}, 해당 표식 기준 {threshold} 상대",
+  "empty": "이 계정의 플레이 결과보다 뒤처진 주포가 없습니다.",
+  "gun-carries": "주포가 {marks}을 보유함",
+  "none": "없음",
+  "recent-window": " (30일)"
+}

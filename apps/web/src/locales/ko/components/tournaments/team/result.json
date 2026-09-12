@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "플레이어 {size}명 중 평가됨 {rated}명의 평균",
+  "average-over-recent": "최근 30일 동안 플레이한 플레이어 {size}명 중 {rated}명의 평균",
+  "avg-winrate": "평균 승률",
+  "finished": "종료",
+  "record": "기록",
+  "won": "승리"
+}

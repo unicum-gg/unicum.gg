@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname} kitüntetései",
+  "filter-all": "Mind",
+  "filter-both": "Mindkettő",
+  "filter-earned": "Megszerezve",
+  "filter-missing": "Hiányzó",
+  "filter-obtainable": "Megszerezhető",
+  "filter-retired": "Visszavont",
+  "no-achievement-matches-these-filters": "Egyetlen eredmény sem felel meg ezeknek a szűrőknek.",
+  "search-achievements": "Kitüntetések keresése",
+  "search-among-n-achievements": "Keresés {count} eredmény között"
+}

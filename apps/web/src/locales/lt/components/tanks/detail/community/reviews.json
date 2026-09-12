@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} mūšių su juo",
+  "damage": "{damage} žala",
+  "n-marks": "{count, plural, one {# ženklas} few {# ženklai} other {# ženklai}}",
+  "no-written-opinions-yet-if": "Rašytinių nuomonių dar nėra. Jei turite pakankamai mūšių, jūsų nuomonė būtų pirmoji.",
+  "win-rate": "{toFixed}% pergalių rodiklis",
+  "written-on": "parašyta naudojant {gameVersion}"
+}

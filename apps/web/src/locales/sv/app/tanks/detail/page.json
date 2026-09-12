@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "World of Tanks-statistik för {tank} ({region}), nivå {tier}, {nation}",
+    "description": "World of Tanks-specifikationer för {tank} ({region}): pansar, eldkraft, rörlighet, moduler, besättning och fältmodifieringar för denna tank från {nation} på nivå {tier}."
+  },
+  "performances": {
+    "title": "Prestanda för {tank} ({region}), serverstatistik och bästa spelare",
+    "description": "Prestanda i World of Tanks för {tank} ({region}): genomsnittlig segerfrekvens, skada och assisterad skada på servern, bästa spelare med denna tank från {nation} på nivå {tier}, samt förväntade värden för WN8 och WNX."
+  },
+  "marks": {
+    "title": "Utmärkelsemärken och expertutmärkelser för {tank} ({region})",
+    "description": "Krav för utmärkelsemärken och expertutmärkelser i World of Tanks för {tank} ({region}), med historik för denna tank från {nation} på nivå {tier}."
+  },
+  "history": {
+    "title": "Ändringshistorik för {tank} ({region}), förbättringar och försämringar",
+    "description": "Alla ändringar av egenskaperna hos {tank} i World of Tanks-uppdateringar: de förbättringar och försämringar av eldkraft, rörlighet, överlevnadsförmåga och kamouflage som Wargaming infört för denna tank från {nation} på nivå {tier}, version för version."
+  },
+  "videos": {
+    "title": "Videor med {tank} i strid ({region})",
+    "description": "Se {tank} i strid: strider som communityn har föreslagit med denna tank från {nation} på nivå {tier}, där varje video öppnas vid tidpunkten då tanken spelas och visar stridens karta och resultat."
+  },
+  "community": {
+    "title": "Recensioner från spelare och communitybetyg för {tank} ({region})",
+    "description": "Vad spelare tycker om {tank}: communityns betyg av fem, uppdelat efter hur skickliga de röstande är, jämfört med hur denna tank från {nation} på nivå {tier} faktiskt presterar, samt skrivna recensioner från konton som har spelat strider med tanken."
+  }
+}

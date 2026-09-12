@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Axă cu axă",
+  "by-server": "După server",
+  "community-verdict": "Verdictul comunității",
+  "every-server-one-average": "Fiecare server, o singură medie",
+  "n-shown": ", {count} afișate",
+  "opinion": "{count, plural, one {# opinie} few {# opinii} other {# de opinii}}",
+  "opinion-next-to-win-rate": "Opinia alături de rata de victorii, în cadrul nivelului {tier}",
+  "rate-the": "Evaluează {tankName}",
+  "reputation-against-results": "Reputația comparată cu rezultatele",
+  "same-tank-different-metas": "Același tanc, meta diferită",
+  "the-same-tank-by-how": "Același tanc, în funcție de cât de bine joacă alegătorul",
+  "what-players-wrote": "Ce au scris jucătorii",
+  "who-is-saying-it": "Cine spune asta"
+}

@@ -1,0 +1,8 @@
+{
+  "last-days": "Posledních {chartDays} dní",
+  "n-players": "{count, plural, one {# hráč} few {# hráči} many {# hráčů} other {# hráčů}}",
+  "rolling-average-combined-damage-to": "Klouzavý průměr kombinovaného poškození potřebný k tomu, aby za vámi skončili hráči tvořící 65 / 85 / 95 % hodnocených.",
+  "single-battle-xp-to-beat": "Počet ZK za jednu bitvu potřebný k tomu, aby za vámi skončili hráči tvořící 50 / 80 / 95 / 99 % hodnocených.",
+  "tank-marks-of-excellence": "Známky výbornosti tanku {tank}",
+  "tank-marks-of-mastery": "Známky mistrovství tanku {tank}"
+}

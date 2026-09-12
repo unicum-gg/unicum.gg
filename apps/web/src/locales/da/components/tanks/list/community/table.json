@@ -1,0 +1,6 @@
+{
+  "fun": "Hvor meget spillerne nyder den, hvilket ofte ikke er det samme spørgsmål.",
+  "hype": "Hvor fællesskabet placerer den på dens niveau, minus hvor dens sejrsrate placerer den. Sortér faldende for at se spillets mest overvurderede kampvogne og stigende for de mest undervurderede.",
+  "overall": "Hvor god spillerne synes, den er. Rangeret efter et gennemsnit, der er trukket mod sidens gennemsnit, så en kampvogn med fire stemmer ikke kan overgå en med fire hundrede.",
+  "votes": "Afgivne stemmer, alle fra en konto, der faktisk har spillet kampvognen."
+}

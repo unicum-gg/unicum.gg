@@ -1,16 +1,14 @@
 "use client";
 
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
+import { useFormat } from "@/hooks/use-format";
 import { fundingProgress, PROJECT_START } from "@unicum.gg/shared";
 import type { InfraCosts } from "@/components/coverage/cost-breakdown";
 import APP from "@/constants/app";
 import { useMoney } from "@/hooks/use-money";
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  month: "long",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const PROJECT_START_PATTERN = "d MMMM yyyy" /* UTC */;
 
 function Stat({
   label,
@@ -68,7 +66,9 @@ export function FundingBar({
   supporterCount: number;
   nowMs: number;
 }) {
+  const { t } = useTranslation("components/support/funding-bar");
   const money = useMoney();
+  const { date } = useFormat();
   const {
     daysRunning,
     goalEur: spentSoFarEur,
@@ -77,22 +77,30 @@ export function FundingBar({
   const monthlyCostEur = costs.totalAnnualEur / 12;
   const gapEur = Math.max(0, spentSoFarEur - receivedEur);
   const monthlyGapEur = Math.max(0, monthlyCostEur - monthlyPledgedEur);
-  const supporters = `${supporterCount} supporter${supporterCount === 1 ? "" : "s"}`;
+  const supporters = t(
+    supporterCount === 1 ? "from-supporter-one" : "from-supporters",
+    { count: supporterCount },
+  );
 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 divide-x divide-fd-border rounded-lg border border-fd-border">
         <Stat
-          label="Raised"
+          label={t("raised-label")}
           value={money.format(receivedEur)}
-          sub={`from ${supporters}`}
+          sub={supporters}
         />
         <Stat
-          label="Spent since launch"
+          label={t("spent-since-launch")}
           value={money.format(spentSoFarEur)}
-          sub={`${daysRunning} days, out of pocket`}
+          sub={t("days-out-of-pocket", { days: daysRunning })}
         />
-        <Stat label="Covered" value={`${pct}%`} sub="of that total" accent />
+        <Stat
+          label={t("covered-label")}
+          value={`${pct}%`}
+          sub={t("of-that-total")}
+          accent
+        />
       </div>
 
       <div>
@@ -103,33 +111,44 @@ export function FundingBar({
           />
         </div>
         <div className="mt-1 flex justify-between text-[11px] tabular-nums text-fd-muted-foreground">
-          <span>{money.format(receivedEur)} raised</span>
-          <span>goal {money.format(spentSoFarEur)}</span>
+          <span>{t("raised-amount", { amount: money.format(receivedEur) })}</span>
+          <span>{t("goal", { amount: money.format(spentSoFarEur) })}</span>
         </div>
       </div>
 
       <p className="text-sm text-fd-muted-foreground">
-        {APP.NAME} has run at a loss since {dateFmt.format(PROJECT_START)}.
-        Supporters have covered{" "}
-        <span className="font-semibold text-fd-foreground">
-          {money.format(receivedEur)}
-        </span>{" "}
-        of the{" "}
-        <span className="font-semibold text-fd-foreground">
-          {money.format(spentSoFarEur)}
-        </span>{" "}
-        spent so far.{" "}
+        {t("run-at-a-loss", {
+          name: APP.NAME,
+          since: date(PROJECT_START_PATTERN).format(PROJECT_START),
+        })}{" "}
+        <Interpolate
+          template={t("covered-sentence")}
+          values={{
+            received: (
+              <span className="font-semibold text-fd-foreground">
+                {money.format(receivedEur)}
+              </span>
+            ),
+            spent: (
+              <span className="font-semibold text-fd-foreground">
+                {money.format(spentSoFarEur)}
+              </span>
+            ),
+          }}
+        />{" "}
         {gapEur > 0
-          ? `${money.format(gapEur)} to fully catch up.`
-          : "Fully caught up, thank you. Everything extra goes into more throughput and new features."}
+          ? t("to-catch-up", { amount: money.format(gapEur) })
+          : t("caught-up")}
       </p>
 
       <p className="text-xs text-fd-muted-foreground">
-        Monthly run-rate: {money.format(monthlyPledgedEur)}/mo pledged vs{" "}
-        {money.format(monthlyCostEur)}/mo to run.
+        {t("run-rate", {
+          pledged: money.format(monthlyPledgedEur),
+          cost: money.format(monthlyCostEur),
+        })}{" "}
         {monthlyGapEur > 0
-          ? ` ${money.format(monthlyGapEur)}/mo more stops the gap from growing.`
-          : " Pledges now cover the monthly bill."}
+          ? t("gap-growing", { amount: money.format(monthlyGapEur) })
+          : t("pledges-cover")}
       </p>
     </div>
   );

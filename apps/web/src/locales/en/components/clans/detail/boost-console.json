@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Add workflow",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Each workflow activates its reserves during a time window, once enough members are in a live game session. Runs on your account, no need to be online. Add as many as you need.",
+  "n-online": "/ {count} online",
+  "officer": "Officer",
+  "online": "Online",
+  "recent-activations": "recent activations",
+  "reserve": "Reserve",
+  "stronghold-boosts": "Stronghold boosts",
+  "when": "When",
+  "workflow": "Workflow"
+}

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/link";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { DocsBody, DocsPage, DocsTitle } from "fumadocs-ui/layouts/docs/page";
 import ROUTES from "@/constants/routes";

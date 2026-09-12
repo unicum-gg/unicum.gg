@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Borbi",
+  "no-votes": "ne glasova",
+  "rated-higher": "Bolji igrači ga ocenjuju sa {stars} zvezdica više od ostatka servera. Ovaj tenk nagrađuje znanje.",
+  "rated-lower": "Bolji igrači ga ocenjuju sa {stars} zvezdica manje od ostatka servera. Laska ti dok se od njega ne zatraži da nešto uradi.",
+  "votes": "{count} glasova",
+  "votes-one": "{count} glas"
+}

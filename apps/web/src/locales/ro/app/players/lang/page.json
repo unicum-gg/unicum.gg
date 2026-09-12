@@ -1,0 +1,6 @@
+{
+  "title": "Cei mai buni jucători {language} de World of Tanks ({region})",
+  "description": "{name} {region}: clasament al jucătorilor pentru jucătorii al căror set de limbi dedus din istoricul clanului include {language}, clasat după WNX.",
+  "og-title": "Cei mai buni jucători {language}",
+  "og-subtitle": "Clasamentul {region}"
+}

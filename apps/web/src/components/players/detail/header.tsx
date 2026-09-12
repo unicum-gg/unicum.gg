@@ -1,6 +1,6 @@
-import { format, formatDistanceToNow } from "date-fns";
+import { clanRoleName } from "@/components/game-name";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { buildPlayerBadges } from "@/components/entity/badges/player-badges";
 import { BadgeCluster } from "@/components/entity/badges/badge-cluster";
@@ -16,9 +16,10 @@ import { LiveBadge } from "@/components/live-badge";
 import { PlayerActionsMenu } from "@/components/players/detail/actions-menu";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import type { ClanStint } from "@unicum.gg/shared";
+import { Interpolate } from "@/components/interpolate";
+import { DateShape, useDateFormat } from "@/components/local-date";
+import { useTranslation } from "@/hooks/use-translation";
 
-const MONTH_FORMAT = "MMM yyyy";
-const DAY_FORMAT = "MMM d, yyyy";
 
 export function PlayerHeader(
   props:
@@ -44,6 +45,11 @@ export function PlayerHeader(
         twitchLogin: string | null;
       },
 ) {
+  const { t } = useTranslation("components/players/detail/header");
+  const { t: tRoles } = useTranslation("game/clan-roles");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tBadges } = useTranslation("components/entity/badges/player-badges");
+  const formatDate = useDateFormat();
   if ("loading" in props) {
     return <PlayerHeaderSkeleton nickname={props.nickname} />;
   }
@@ -73,6 +79,8 @@ export function PlayerHeader(
   // than a boolean: this is the only surface that shows the owner-only "hidden"
   // and "invite" variants, which the inline cluster never sees.
   const badges = buildPlayerBadges({
+    t: tBadges,
+    tGame,
     region,
     nickname,
     isVerified: verified,
@@ -121,24 +129,34 @@ export function PlayerHeader(
             containerClassName="flex-1"
             className="flex flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-nowrap sm:items-center sm:gap-x-2 sm:whitespace-nowrap"
           >
-            <span title={format(createdAt, DAY_FORMAT)}>
-              Joined {format(createdAt, MONTH_FORMAT)}
+            <span title={formatDate(createdAt, DateShape.Day)}>
+              {t("joined", {
+                date: formatDate(createdAt, DateShape.MonthShort),
+              })}
             </span>
             <span className="hidden sm:inline">·</span>
             {lastBattleAt ? (
-              <span title={format(lastBattleAt, "MMM d, yyyy 'at' h:mm a")}>
-                Last battle{" "}
-                {formatDistanceToNow(lastBattleAt, { addSuffix: true })}
+              <span title={formatDate(lastBattleAt, DateShape.DateTime)}>
+                <Interpolate
+                  template={t("last-battle")}
+                  values={{ when: <RelativeTime date={lastBattleAt} /> }}
+                />
               </span>
             ) : (
-              <span>Never played</span>
+              <span>{t("never-played")}</span>
             )}
             <span className="hidden sm:inline">·</span>
             <span>
-              Updated{" "}
-              <RelativeTime
-                date={updatedAt}
-                title={format(updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
+              <Interpolate
+                template={t("updated")}
+                values={{
+                  when: (
+                    <RelativeTime
+                      date={updatedAt}
+                      title={formatDate(updatedAt, DateShape.DateTimeSeconds)}
+                    />
+                  ),
+                }}
               />
             </span>
             <RefreshBeacon
@@ -175,8 +193,10 @@ export function PlayerHeader(
               <span>{currentStint.clan.name}</span>
             </div>
             <div className="text-xs text-muted-foreground">
-              {currentStint.roleLocalized} · joined{" "}
-              {format(currentStint.joinedAt, DAY_FORMAT)}
+              {t("clan-role-joined", {
+                role: clanRoleName(currentStint.role, tRoles),
+                date: formatDate(currentStint.joinedAt, DateShape.Day),
+              })}
             </div>
           </div>
           <div className="flex size-24 shrink-0 items-center justify-center border-l border-fd-border p-3">

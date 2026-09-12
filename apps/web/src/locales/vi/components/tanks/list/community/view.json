@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Mọi xe tăng được những người chơi nó đánh giá theo thang điểm năm. Lượt bình chọn chỉ được tính từ tài khoản đã thực sự đưa xe tăng vào trận đấu, giúp phân biệt mục này với một cuộc thăm dò bất kỳ.",
+  "no-tank-has-been-rated": "Chưa có xe tăng nào được đánh giá. Các lượt bình chọn đầu tiên nằm trên trang xe tăng, trong mục Cộng đồng.",
+  "think": "nghĩ",
+  "title": "Người chơi {think}",
+  "votes-across-vehicles": "{totalVotes} lượt bình chọn trên {ratedTanks} xe tăng."
+}

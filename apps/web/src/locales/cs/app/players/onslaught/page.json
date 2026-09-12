@@ -1,0 +1,6 @@
+{
+  "title": "Nejlepší hráči World of Tanks v režimu {mode} ({region})",
+  "description": "Žebříček {name} pro region {region} v režimu {mode}, což je soutěžní hodnocený režim 7 proti 7 ve World of Tanks, seřazený podle pořadí přímo ve hře.",
+  "og-title": "Nejlepší hráči v režimu {mode}",
+  "og-subtitle": "Hodnocený žebříček pro region {region}"
+}

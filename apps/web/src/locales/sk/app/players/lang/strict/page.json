@@ -1,0 +1,6 @@
+{
+  "title": "Výhradne {language}: hráči World of Tanks ({region})",
+  "description": "Rebríček hráčov v regióne {region}: {name}. Zahŕňa hráčov, ktorých jazyk bol na základe histórie klanov určený výhradne ako {language}, zoradených podľa WNX.",
+  "og-title": "Výhradne {language}: hráči",
+  "og-subtitle": "Rebríček pre región {region}"
+}

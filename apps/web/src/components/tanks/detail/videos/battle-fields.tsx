@@ -1,13 +1,11 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
+import { mapModeName } from "@/components/game-name";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import {
-  BATTLE_RESULT_LABEL,
   BattleResult,
-  MAP_GAME_MODE_LABEL,
-  MapGameMode,
-  SPAWN_DIRECTION_LABEL,
   spawnDirection,
   type MapDetail,
   type MapSummary,
@@ -69,6 +67,8 @@ export function BattleFields({
   value: BattleContext;
   onChange: (patch: Partial<BattleContext>) => void;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/battle-fields");
+  const { t: tGame } = useTranslation("game/vocabulary");
   // Fetched here rather than handed down from the page. The catalogue is 23 KB
   // and exists only for this selector, so shipping it in every tank page's
   // payload would charge everyone for a form almost nobody opens. Cached by
@@ -87,7 +87,7 @@ export function BattleFields({
   return (
     <div className="grid grid-cols-2 gap-3">
       <label className="flex flex-col gap-1 text-sm">
-        <span className="font-medium">Map</span>
+        <span className="font-medium">{t("map")}</span>
         {/* `w-full` on every trigger overrides the primitive's `w-fit`, which
             sizes to the current value and left the four controls ragged. */}
         <Select
@@ -96,7 +96,7 @@ export function BattleFields({
         >
           <SelectTrigger className="h-9 w-full">
             <SelectValue
-              placeholder={maps.length === 0 ? "Loading maps…" : "Pick a map"}
+              placeholder={maps.length === 0 ? t("loading-maps") : t("pick-a-map")}
             />
           </SelectTrigger>
           <SelectContent>
@@ -110,19 +110,19 @@ export function BattleFields({
       </label>
 
       <label className="flex flex-col gap-1 text-sm">
-        <span className="font-medium">Mode</span>
+        <span className="font-medium">{t("mode")}</span>
         <Select
           value={value.mode}
           onValueChange={(v) => onChange({ mode: v })}
           disabled={modes.length === 0}
         >
           <SelectTrigger className="h-9 w-full">
-            <SelectValue placeholder="Pick a mode" />
+            <SelectValue placeholder={t("pick-a-mode")} />
           </SelectTrigger>
           <SelectContent>
             {modes.map((m) => (
               <SelectItem key={m} value={m}>
-                {MAP_GAME_MODE_LABEL[m as MapGameMode]}
+                {mapModeName(m, tGame)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -133,13 +133,13 @@ export function BattleFields({
         {/* The team, not the compass: a player remembers which side of the
             minimap they started on, and the direction is worked out from the
             map's own geometry. */}
-        <span className="font-medium">Spawn</span>
+        <span className="font-medium">{t("spawn")}</span>
         <Select
           value={value.spawnTeam}
           onValueChange={(v) => onChange({ spawnTeam: v })}
         >
           <SelectTrigger className="h-9 w-full">
-            <SelectValue placeholder="Which side you started" />
+            <SelectValue placeholder={t("which-side-you-started")} />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="1">{teamLabel(1)}</SelectItem>
@@ -149,18 +149,18 @@ export function BattleFields({
       </label>
 
       <label className="flex flex-col gap-1 text-sm">
-        <span className="font-medium">Result</span>
+        <span className="font-medium">{t("result")}</span>
         <Select
           value={value.result}
           onValueChange={(v) => onChange({ result: v })}
         >
           <SelectTrigger className="h-9 w-full">
-            <SelectValue placeholder="How it ended" />
+            <SelectValue placeholder={t("how-it-ended")} />
           </SelectTrigger>
           <SelectContent>
             {Object.values(BattleResult).map((r) => (
               <SelectItem key={r} value={r}>
-                {BATTLE_RESULT_LABEL[r]}
+                {tGame(`battle-results.${r}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -183,6 +183,8 @@ function useSpawnLabels(
   selectedMap: MapSummary | undefined,
   mode: string,
 ): (team: 1 | 2) => string {
+  const { t } = useTranslation("components/tanks/detail/videos/battle-fields");
+  const { t: tGame } = useTranslation("game/vocabulary");
   // Stored with the map it describes, and read back only while the two agree.
   // Clearing it on every map change would mean writing state from the effect
   // body, and would still leave the previous map's geometry on screen for the
@@ -212,8 +214,11 @@ function useSpawnLabels(
     const geometry = geometryFor?.geometry.find((g) => g.mode === mode);
     const direction = geometry ? spawnDirection(geometry, team) : null;
     return direction
-      ? `Team ${team} · ${SPAWN_DIRECTION_LABEL[direction]}`
-      : `Team ${team}`;
+      ? t("team-spawn", {
+          team,
+          direction: tGame(`spawn-directions.${direction}`),
+        })
+      : t("team", { team });
   };
 }
 

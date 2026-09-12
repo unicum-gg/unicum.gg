@@ -1,12 +1,14 @@
 "use client";
 
+
 import { DiscordLogoIcon, GithubLogoIcon } from "@phosphor-icons/react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { useEffect, useRef, useState } from "react";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { useRegion } from "@/hooks/use-region";
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import { styles } from "@/lib/styles";
 import { FooterBottomBar } from "./bottom-bar";
@@ -22,6 +24,10 @@ export function Footer() {
   // render the line once the spacer has actual vertical room.
   const [showTopLine, setShowTopLine] = useState(false);
   const { region } = useRegion();
+  const { t } = useTranslation("components/footer");
+  const { t: tOwn } = useTranslation("components/footer/index");
+  const { t: tNav } = useTranslation("components/nav-sections");
+  const { t: tGame } = useTranslation("game/vocabulary");
 
   useEffect(() => {
     const el = spacerRef.current;
@@ -62,24 +68,23 @@ export function Footer() {
               <span className="font-semibold">{APP.NAME}</span>
             </Link>
             <p className={`max-w-56 ${styles.mutedDescription}`}>
-              Built for the World of Tanks community. Free stats for every
-              player, clan, tank and map across EU, NA and Asia.
+              {t("tagline")}
             </p>
             <div className="flex items-center gap-3">
               <SocialLink
                 href={APP.EXTERNAL.DISCORD}
-                label="Discord"
+                label={tOwn("discord")}
                 icon={<DiscordLogoIcon weight="fill" className="size-5" />}
               />
               <SocialLink
                 href={APP.EXTERNAL.GITHUB}
-                label="GitHub"
+                label={tOwn("github")}
                 icon={<GithubLogoIcon weight="fill" className="size-5" />}
               />
             </div>
           </div>
 
-          {footerColumns(region).map((column) => (
+          {footerColumns(region, t, tNav, tGame).map((column) => (
             <nav key={column.title} aria-label={column.title}>
               <h2 className="mb-3 text-sm font-semibold">{column.title}</h2>
               <ul className="space-y-2">

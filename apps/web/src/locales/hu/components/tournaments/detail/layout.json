@@ -1,0 +1,12 @@
+{
+  "final": "Döntő",
+  "grand-final": "Nagydöntő",
+  "loser-bracket-final": "Vesztes ág döntője",
+  "loser-round": "Vesztes ág {round}. fordulója",
+  "quarter-finals": "Negyeddöntő",
+  "round-of": "Legjobb {teams}",
+  "semi-finals": "Elődöntő",
+  "third-place": "Harmadik hely",
+  "winner-bracket-final": "Győztes ág döntője",
+  "winner-round": "Győztes ág {round}. fordulója"
+}

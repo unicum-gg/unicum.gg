@@ -1,0 +1,7 @@
+{
+  "loading": "{count} vozila razine {tier}, učitavanje njihovih imena…",
+  "loading-one": "{count} vozilo razine {tier}, učitavanje njegova imena…",
+  "and-more": "i još {count}",
+  "hint": "Klikni za otvaranje u kartici Tenki",
+  "tier": "Razina"
+}

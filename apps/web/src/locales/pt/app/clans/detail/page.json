@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "Clã de World of Tanks [{tag}] {name} ({region}), {members} membros",
+    "description": "Clã {name} [{tag}] na região {region}: {members} membros, tabela completa de membros com classificações WN8 e WNX, atividade recente de entradas e saídas e histórico do clã."
+  },
+  "stronghold": {
+    "title": "Estatísticas da fortaleza: [{tag}] {name} ({region})",
+    "description": "Desempenho do clã {name} [{tag}] na fortaleza, na região {region}: classificações de escaramuças e avanços, batalhas e taxa de vitórias de cada membro."
+  },
+  "clan-wars": {
+    "title": "Estatísticas das guerras de clãs: [{tag}] {name} ({region})",
+    "description": "Desempenho do clã {name} [{tag}] nas guerras de clãs da região {region}: classificações por membro, batalhas e taxa de vitórias nas campanhas do mapa global."
+  },
+  "tanks": {
+    "title": "Tanques do clã [{tag}] {name} ({region}), os veículos do clã",
+    "description": "Todos os veículos utilizados pelo clã {name} [{tag}] na região {region}, com dados agregados de todos os membros do clã sobre batalhas, taxa de vitórias e dano médio."
+  },
+  "manage": {
+    "title": "Reservas da fortaleza: [{tag}] {name} ({region})",
+    "description": "Ative e programe as reservas da fortaleza do clã {name} [{tag}]. Apenas para oficiais."
+  },
+  "missing": {
+    "description": "Clã de World of Tanks [{tag}] na região {region}: tabela de membros com classificações WN8/WNX, atividade de entradas e saídas, batalhas recentes e histórico completo do clã."
+  }
+}

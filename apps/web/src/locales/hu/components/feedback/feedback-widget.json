@@ -1,0 +1,21 @@
+{
+  "trigger": "Visszajelzés",
+  "title": "Visszajelzés megosztása",
+  "topic-placeholder": "Válassz témát...",
+  "message-placeholder": "Visszajelzésed...",
+  "send": "Küldés",
+  "sent": "Köszönjük a visszajelzésedet!",
+  "failed": "Nem sikerült elküldeni a visszajelzést. Kérjük, próbáld újra.",
+  "topics": {
+    "bug": "Hibajelentés",
+    "idea": "Funkcióötlet",
+    "data": "Adat pontosság",
+    "other": "Egyéb"
+  },
+  "sentiments": {
+    "awful": "Borzalmas",
+    "bad": "Rossz",
+    "good": "Jó",
+    "great": "Nagyszerű"
+  }
+}

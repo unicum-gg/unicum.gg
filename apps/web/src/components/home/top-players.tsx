@@ -1,6 +1,8 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import { GlossaryLabel } from "@/components/glossary/label";
+import { Interpolate } from "@/components/interpolate";
 import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
 import { RankMedal } from "@/components/rank-medal";
@@ -8,6 +10,7 @@ import { RelativeTime } from "@/components/relative-time";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Table,
   TableBody,
@@ -27,7 +30,7 @@ const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
 };
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 export type TopPlayersInitial = Record<
   Region,
@@ -46,6 +49,7 @@ export function TopPlayers({
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
+  const { t } = useTranslation("components/home/top-players");
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   const metricLabel = RATING_METRIC_LABEL[metric];
@@ -58,13 +62,16 @@ export function TopPlayers({
         {computedAt ? (
           <>
             {" "}
-            Updated <RelativeTime date={computedAt} />.
+            <Interpolate
+              template={t("updated")}
+              values={{ when: <RelativeTime date={computedAt} /> }}
+            />
           </>
         ) : null}
       </div>
       {results.length === 0 ? (
         <div className="mt-auto border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
-          No data available yet.
+          {t("empty")}
         </div>
       ) : (
         <div className="mt-auto">
@@ -72,9 +79,9 @@ export function TopPlayers({
             <TableHeader>
               <TableRow>
                 <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
-                  #
+                  {t("rank")}
                 </TableHead>
-                <TableHead>Player</TableHead>
+                <TableHead>{t("player")}</TableHead>
                 <TableHead className="w-24 pr-4 text-right!">
                   <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
                 </TableHead>
@@ -109,6 +116,7 @@ function PlayerRow({
   region: Region;
   metric: RatingMetric;
 }) {
+  const { num } = useFormat();
   const colorClass = COLOR_FOR_METRIC[metric](player.wnx);
   return (
     <TableRow>
@@ -125,7 +133,7 @@ function PlayerRow({
       <TableCell
         className={cn("pr-4 text-right font-semibold tabular-nums", colorClass)}
       >
-        {intFmt.format(player.wnx)}
+        {num(INT_FORMAT).format(player.wnx)}
       </TableCell>
     </TableRow>
   );

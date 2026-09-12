@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Câți jucători sunt acum pe fiecare server {label}, cum se schimbă numărul de-a lungul zilei și săptămânii și cum se compară regiunea cu celelalte.",
+  "recording-just-started": "Înregistrarea abia a început, astfel încât graficele se completează de aici înainte.",
+  "series-starts": "Seria începe la {at}, când a început înregistrarea, iar nimic de dinainte nu poate fi recuperat.",
+  "server-population": "Populația serverului {label}",
+  "title": "{population} World of Tanks",
+  "wargaming-names-a-region-s": "Wargaming denumește primele clustere ale unei regiuni și lasă restul ca identificatori simpli, astfel încât 203 este afișat ca EU3, continuând numerotarea proprie a regiunii. Identificatorul este ceea ce înregistrăm și ceea ce dezvăluie fiecare nume la trecerea cursorului, iar eticheta îl urmează. Numerotarea clusterelor după gradul lor de ocupare ar muta un nume de la un server la altul ori de câte ori două dintre ele și-ar schimba locurile. Un server absent dintr-un eșantion nu a fost raportat deloc, ceea ce nu înseamnă că era gol.",
+  "we-record-it": "Wargaming publică populația fiecărui server ca valoare instantanee și nu păstrează istoricul ei, astfel încât fiecare cifră mai veche de minutul curent este înregistrată de noi, la fiecare cinci minute.",
+  "where-battles-are-fought": "Unde au loc bătăliile {label}"
+}

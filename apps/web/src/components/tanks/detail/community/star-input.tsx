@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import {
   MAX_STARS,
@@ -36,6 +37,7 @@ export function StarInput({
   size?: number;
   disabled?: boolean;
 }) {
+  const { t } = useTranslation("components/tanks/detail/community/star-input");
   const [hovered, setHovered] = useState<number | null>(null);
   const shown = hovered ?? value;
   const colour = shown == null ? undefined : RATING_COLOR_HEX[starRatingColor(shown)];
@@ -81,8 +83,7 @@ export function StarInput({
               <path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.31l-5.8 3.05 1.11-6.46-4.7-4.58 6.49-.94z" />
             </svg>
             <span className="sr-only">
-              {step} out of {MAX_STARS}
-            </span>
+              {t("out-of", { step, MAXSTARS: MAX_STARS })}</span>
           </label>
         );
       })}

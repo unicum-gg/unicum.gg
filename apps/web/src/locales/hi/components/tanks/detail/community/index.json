@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "एक-एक अक्ष",
+  "by-server": "सर्वर के अनुसार",
+  "community-verdict": "सामुदायिक निर्णय",
+  "every-server-one-average": "हर सर्वर, एक औसत",
+  "n-shown": ", {count} दिखाए गए",
+  "opinion": "{count, plural, one {# राय} other {# राय}}",
+  "opinion-next-to-win-rate": "टियर {tier} में जीत दर के साथ राय",
+  "rate-the": "{tankName} को रेट करें",
+  "reputation-against-results": "परिणामों के विरुद्ध प्रतिष्ठा",
+  "same-tank-different-metas": "एक ही टैंक, अलग-अलग मेटा",
+  "the-same-tank-by-how": "वोट देने वाला कितना अच्छा खेलता है, उसके अनुसार वही टैंक",
+  "what-players-wrote": "खिलाड़ियों ने क्या लिखा",
+  "who-is-saying-it": "यह कौन कह रहा है"
+}

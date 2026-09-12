@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Zatím žádná relace. Zobrazí se, jakmile budou údaje tohoto účtu zaznamenány dvakrát a mezi oběma záznamy budou odehrány bitvy. Při hraní k tomu dochází automaticky.",
+  "bar-height-is-battles-played": "Výška sloupce udává počet odehraných bitev, barva ukazuje metriku {metric} podle členění {granularity} a používá přitom stejná pásma jako všude jinde na webu.",
+  "title": "Relace {nickname}",
+  "title-count": "Relace hráče {nickname} ({count})",
+  "granularity": {
+    "day": "den",
+    "week": "týden",
+    "month": "měsíc",
+    "daily": "Denní",
+    "weekly": "Týdenní",
+    "monthly": "Měsíční"
+  },
+  "week-of": "Týden od {date}"
+}

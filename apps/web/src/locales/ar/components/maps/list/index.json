@@ -1,0 +1,9 @@
+{
+  "all": "الكل",
+  "camouflage-map": "خريطة {camouflage}",
+  "modes": "{count, plural, zero {# نمط} one {# نمط} two {# نمطان} few {# أنماط} many {# نمطًا} other {# نمط}}",
+  "no-maps-match-your-filters": "لا تطابق أي خريطة عوامل التصفية الخاصة بك.",
+  "search": "البحث ضمن {count} خريطة",
+  "search-label": "ابحث عن الخرائط",
+  "special-map": "خريطة خاصة"
+}

@@ -1,0 +1,17 @@
+{
+  "aim-time": "Doba zaměření",
+  "ammo": "Munice",
+  "armor": "Pancíř",
+  "dispersion": "Vydění",
+  "fire-chance": "Šance na požár",
+  "gun-arc": "Úhel kanonu",
+  "hit-points": "Zdraví",
+  "load-limit": "Limit zatížení",
+  "mounted-on": "Namontováno na: {tanks}",
+  "power": "Síla",
+  "reload": "Nabití",
+  "signal-range": "Dosah signálu",
+  "tier": "Úroveň {tier}",
+  "traverse": "Otáčení",
+  "view-range": "Dosah vidění"
+}

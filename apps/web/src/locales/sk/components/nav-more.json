@@ -1,0 +1,37 @@
+{
+  "label": "Viac",
+  "items": {
+    "tournaments": {
+      "label": "Turnaje",
+      "description": "Turnajové pavúky, súpisky a výsledky podľa jednotlivých regiónov"
+    },
+    "servers": {
+      "label": "Servery",
+      "description": "Hráči online teraz aj v priebehu času"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Štatistiky hráčov, klanov a tankov vo forme príkazov s lomkou"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Pripojte Claude, ChatGPT alebo ľubovoľného klienta MCP"
+    },
+    "api": {
+      "label": "API",
+      "description": "Bezplatné verejné REST API bez potreby kľúča"
+    },
+    "badges": {
+      "label": "Odznaky",
+      "description": "Všetky odznaky, ktoré môže hráč alebo klan získať, aj ako ich získať"
+    },
+    "glossary": {
+      "label": "Prehľad pojmov",
+      "description": "Vysvetlenia všetkých pojmov z World of Tanks"
+    },
+    "support": {
+      "label": "Podporte nás",
+      "description": "Pomôžte, aby web {name} zostal bezplatný, otvorený a bez reklám"
+    }
+  }
+}

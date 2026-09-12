@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>jucători</accent>",
+    "language": "Cei mai buni jucători <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Clasamentul pentru {region}, ordonat după {metric} din toate timpurile, cu minimum 20.000 de bătălii.",
+    "language": "Jucători din {region} al căror istoric de clan dedus include limba {language}, ordonați după {metric}, cu minimum 10.000 de bătălii.",
+    "strict": "Jucători din {region} al căror istoric de clan dedus este exclusiv în limba {language}, ordonați după {metric}, cu minimum 10.000 de bătălii."
+  },
+  "board": {
+    "all": "Cei mai buni {count} jucători după {metric}",
+    "language": "Cei mai buni {count} jucători {language} după {metric}",
+    "strict": "Cei mai buni {count} jucători strict {language} după {metric}"
+  },
+  "modes": {
+    "overall": "General"
+  },
+  "columns": {
+    "player": "Jucător"
+  },
+  "strict-toggle": "Strict",
+  "any-toggle": "Orice",
+  "all-languages": "Toate limbile",
+  "battles": "Lupte",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

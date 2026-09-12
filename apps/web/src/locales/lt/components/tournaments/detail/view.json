@@ -1,0 +1,11 @@
+{
+  "closes": "Uždaryti {when}",
+  "map-pool": "Žemėlapių rinkinys",
+  "place": "Vieta",
+  "prize": "Premija",
+  "prizes": "Premijos",
+  "qualified": "Kvalifikavosi ({count})",
+  "register": "Užsiregistruoti",
+  "tournaments": "Turnyrai",
+  "winner": "{count, plural, one {Nugalėtojai} few {Nugalėtojai} other {Nugalėtojai}}"
+}

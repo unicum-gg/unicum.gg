@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname} pasiekimai",
+  "filter-all": "Visi",
+  "filter-both": "Abu",
+  "filter-earned": "Uždirbti",
+  "filter-missing": "Trūkstami",
+  "filter-obtainable": "Gaunami",
+  "filter-retired": "Nebenaudojami",
+  "no-achievement-matches-these-filters": "Joks pasiekimas neatitinka šių filtrų.",
+  "search-achievements": "Pasiekimų paieška",
+  "search-among-n-achievements": "Ieškoti tarp {count} pasiekimų"
+}

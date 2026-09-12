@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Gennemsnit for {rated} af {size} spillere",
+  "average-over-recent": "Gennemsnit for {rated} af de {size} spillere, der spillede i de seneste 30 dage",
+  "avg-winrate": "Gns. vindrate",
+  "finished": "Færdiggjort",
+  "record": "Record",
+  "won": "Vundet"
+}

@@ -1,6 +1,8 @@
+"use client";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import {
-  TOURNAMENT_STATUS_LABEL,
   isTournamentLive,
   isTournamentOpen,
 } from "@unicum.gg/shared";
@@ -31,6 +33,7 @@ export function TournamentStatusBadge({
   settled?: boolean;
   className?: string;
 }) {
+  const { t: tGame } = useTranslation("game/vocabulary");
   const done = status === TournamentStatus.Complete;
   if (done && !settled) return null;
   const open = isTournamentOpen(status);
@@ -48,7 +51,7 @@ export function TournamentStatusBadge({
         className,
       )}
     >
-      {TOURNAMENT_STATUS_LABEL[status]}
+      {tGame(`tournament-statuses.${status}`)}
     </span>
   );
 }

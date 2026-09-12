@@ -1,0 +1,6 @@
+{
+  "active-until": "Activa hasta {tz}",
+  "n-left": "Quedan {count}",
+  "no-reserves-in-stock-right": "No hay reservas disponibles ahora mismo.",
+  "reserves-to-activate": "Reservas para activar"
+}

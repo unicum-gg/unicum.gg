@@ -1,0 +1,17 @@
+{
+  "average": "Vidējais",
+  "bad": "Slikts",
+  "below-avg": "Zem vidējiem",
+  "color-thresholds-for-the-stronghold": "Krāsu sliekšņi cietokšņa tabulām. Viena absolūta skala katram līmenim, tāpēc SR (vai SRB) visur nozīmē vienādu klana kvalitāti.",
+  "excellent": "Izcils",
+  "good": "Labi",
+  "rating-colors": "Vērtējuma krāsas",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Līmenis",
+  "top": "Augstākais",
+  "very-bad": "Ļoti slikti",
+  "very-good": "Ļoti labi",
+  "wr": "WR"
+}

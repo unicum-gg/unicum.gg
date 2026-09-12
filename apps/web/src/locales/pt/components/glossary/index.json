@@ -1,0 +1,22 @@
+{
+  "search": "Pesquisar {count} termos",
+  "search-label": "Pesquisar no glossário",
+  "all": "Tudo",
+  "jump": "Ir para a letra",
+  "empty": "Nenhum termo corresponde a “{query}”.",
+  "categories": {
+    "vehicles": "Veículos",
+    "gunnery": "Artilharia",
+    "armor": "Blindagem",
+    "mobility": "Mobilidade",
+    "vision": "Visão",
+    "crew": "Tripulação",
+    "progression": "Progressão",
+    "economy": "Economia",
+    "ratings": "Classificações",
+    "statistics": "Estatísticas",
+    "modes": "Modos de batalha",
+    "tactics": "Táticas",
+    "slang": "Gíria"
+  }
+}

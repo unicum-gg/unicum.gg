@@ -1,0 +1,19 @@
+{
+  "active-days": "활성화된 날짜",
+  "add-workflow": "워크플로 추가",
+  "connect-discord": "디스코드 연결",
+  "discord-notifications": "디스코드 알림",
+  "each-workflow-activates-its-reserves": "각 워크플로는 충분한 구성원이 실시간 게임 세션에 들어오면 지정된 시간 동안 예비 물자를 활성화합니다. 계정에서 실행되므로 온라인 상태일 필요가 없습니다. 필요한 만큼 추가하세요.",
+  "enabled": "활성화",
+  "from": "에서",
+  "get-a-discord-message-in": "부스트가 작동할 때마다 선택한 채널로 Discord 메시지를 받아 전체 클랜이 활성 상태임을 알 수 있습니다.",
+  "log-in-with-wargaming-to": "워게이밍으로 로그인하여 설정하기",
+  "min-online": "최소 온라인",
+  "officers": "임원",
+  "only-an-officer-of-this": "이 클랜의 장교만 설정할 수 있습니다.",
+  "schedule-preview": "일정 미리보기",
+  "set-your-hours-and-reserves": "시간과 예비 물자를 한 번 설정하면, 아무도 버튼을 누르지 않아도 부스트가 정시에 자동으로 작동합니다.",
+  "stronghold-boosts": "요새 보너스",
+  "times-are-in-your-timezone": "시간은 {tz}, 즉 사용자의 시간대 기준입니다.",
+  "to": "대상"
+}

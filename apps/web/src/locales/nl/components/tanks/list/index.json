@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Kosten (credits)",
+    "buyGold": "Kosten (goud)",
+    "researchXp": "Onderzoek XP",
+    "shellCost": "Kogelkosten",
+    "ammoCost": "Volledige munitiekosten",
+    "class3": "3e Klasse",
+    "class2": "2e Klasse",
+    "class1": "1e Klasse",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Marks (85%)",
+    "mark3": "3 Markeringen (95%)"
+  }
+}

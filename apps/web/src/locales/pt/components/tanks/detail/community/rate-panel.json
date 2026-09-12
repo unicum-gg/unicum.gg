@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} batalhas no total",
+  "checking-your-record-on-this": "A verificar o seu registo neste tanque...",
+  "fetching-your-garage": "Buscando sua garagem",
+  "have-you-played": "Você já jogou com {tank}?",
+  "more-to-go": "Faltam {count} batalhas",
+  "more-to-go-one": "Falta {count} batalha",
+  "sign-in-to-rate-it": "Inicie sessão para o avaliar",
+  "sign-in-with-your-wargaming-account-to-rate-": "Inicie sessão com a sua conta Wargaming para o avaliar. Consultamos o seu registo neste tanque específico, o que impede que esta página se transforme numa sondagem feita a pessoas que nunca jogaram com ele.",
+  "signed-in-on": "Sessão iniciada na região {region}",
+  "too-few-battles": "Tem {played} batalhas disputadas no tanque {tank}. Exigimos {required} antes de contabilizar um voto, para que esta média continue a basear-se apenas nas avaliações de quem realmente joga com este tanque.",
+  "you-have-not-played": "Você não jogou com {tank}"
+}

@@ -1,0 +1,27 @@
+{
+  "placeholder": "Rechercher des joueurs, des clans, des chars, des cartes ou des termes",
+  "type": "Type de recherche",
+  "types": {
+    "all": "Tous",
+    "players": "Joueurs",
+    "clans": "Clans",
+    "tanks": "Chars",
+    "maps": "Cartes",
+    "glossary": "Glossaire"
+  },
+  "sections": {
+    "players": "Joueurs",
+    "clans": "Clans",
+    "tanks": "Chars",
+    "maps": "Cartes",
+    "glossary": "Glossaire",
+    "recent": "Récent",
+    "favorites": "Favoris"
+  },
+  "searching": "Recherche…",
+  "errored": "Une erreur s’est produite. Réessayez.",
+  "empty": "Aucun résultat trouvé",
+  "remove-recent": "Retirer des recherches récentes",
+  "add-favorite": "Ajouter aux favoris",
+  "remove-favorite": "Retirer des favoris"
+}

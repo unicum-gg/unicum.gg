@@ -1,0 +1,22 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Viso",
+    "day": "Paskutinės 24 val.",
+    "week": "Paskutinės 7 d.",
+    "month": "Paskutinės 30 d."
+  },
+  "sections": {
+    "elo": "Lygio X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15 prieš 15)",
+    "t10": "{skirmish} lygio X (7v7)",
+    "t8": "{skirmish} lygio VIII (7v7)",
+    "t6": "{skirmish} lygio VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Mūšiai",
+    "winrate": "Pergalės rodiklis"
+  }
+}

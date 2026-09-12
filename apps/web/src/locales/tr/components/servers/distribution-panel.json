@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "{region} oyuncuları nasıl karşılaştırılıyor",
+  "median-n": "medyan {value}",
+  "metric-rating": "{metric} puanı",
+  "tracked-accounts-with-at-least": "En az {minBattles} savaşı olan {players} takip edilen hesap. Renkler, sitenin başka yerlerde kullandığı aralıkların aynısıdır.",
+  "win-rate": "Kazanma oranı",
+  "win-rate-distribution-across-the-region-s-tr": "Bölgenin takip edilen oyuncularındaki galibiyet oranı dağılımı"
+}

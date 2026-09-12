@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Nu există încă date. Revino după reîmprospătarea clanurilor.",
+  "heading": "Clanuri de top <accent>{tier}</accent>",
+  "blurb": "Clasament {region}, clasat după {sort} în toate clanurile urmărite din {format} (minim {battles} bătălii).",
+  "blurb-period": "Clasament {region}, clasat după {sort} în toate clanurile urmărite din {format} în perioada de {period} (minim {battles} bătălii).",
+  "format-advances": "Ofensive (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Primele {count} clanuri {tier} ·"
+}

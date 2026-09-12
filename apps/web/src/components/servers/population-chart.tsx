@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import {
   Area,
@@ -60,6 +62,9 @@ export function PopulationChart({
   range: ServerStatsRange;
   region: Region;
 }) {
+  const { locale } = useFormat();
+  const { t } = useTranslation("components/servers/population-chart");
+  const { t: tRange } = useTranslation("components/servers/ranges");
   /**
    * The clusters in identity order, carrying the payload index their values
    * live at.
@@ -133,9 +138,7 @@ export function PopulationChart({
   if (points.length < 2) {
     return (
       <p className="flex h-64 items-center justify-center px-4 text-center text-sm text-fd-muted-foreground">
-        Not enough recorded yet for this range. It fills in as the sampling
-        continues.
-      </p>
+        {t("not-enough-recorded-yet-for")}</p>
     );
   }
 
@@ -143,7 +146,7 @@ export function PopulationChart({
     <ChartContainer
       config={config}
       className="aspect-auto h-64 w-full"
-      aria-label={`Players online per server over the last ${range}`}
+      aria-label={t("chart-label", { range: tRange(range) })}
     >
       <ComposedChart data={data} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
         <CartesianGrid vertical={false} strokeDasharray="3 3" opacity={0.2} />
@@ -156,7 +159,7 @@ export function PopulationChart({
           axisLine={false}
           tickMargin={8}
           minTickGap={48}
-          tickFormatter={(value: number) => formatTick(new Date(value), range, zone)}
+          tickFormatter={(value: number) => formatTick(new Date(value), range, zone, locale)}
         />
         <YAxis
           tickLine={false}
@@ -165,14 +168,14 @@ export function PopulationChart({
           // Anchored at zero: a population chart that crops its baseline turns a
           // routine evening dip into a cliff.
           domain={[0, Math.ceil(peak * 1.05)]}
-          tickFormatter={formatPlayersCompact}
+          tickFormatter={(v: number) => formatPlayersCompact(v, locale)}
         />
         <ChartTooltip
           content={
             <ChartTooltipContent
               labelFormatter={(_, payload) => {
                 const t = payload?.[0]?.payload?.t as number | undefined;
-                return t === undefined ? "" : formatMoment(new Date(t), zone);
+                return t === undefined ? "" : formatMoment(new Date(t), zone, locale);
               }}
             />
           }

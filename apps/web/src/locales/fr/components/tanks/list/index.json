@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Coût (crédits)",
+    "buyGold": "Coût (or)",
+    "researchXp": "XP de recherche",
+    "shellCost": "Coût des obus",
+    "ammoCost": "Coût complet des munitions",
+    "class3": "3ème Classe",
+    "class2": "2ème Classe",
+    "class1": "1ère Classe",
+    "ace": "As du char",
+    "mark1": "1 marque (65 %)",
+    "mark2": "2 marques (85 %)",
+    "mark3": "3 marques (95 %)"
+  }
+}

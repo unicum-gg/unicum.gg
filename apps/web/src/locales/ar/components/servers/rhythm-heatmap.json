@@ -1,0 +1,8 @@
+{
+  "busiest": "الأكثر انشغالًا {when} ({players})",
+  "not-enough-recorded-yet-to": "لا توجد سجلات كافية لعرض نمط أسبوعي بعد. يكتمل عندما تغطي العينات كل ساعة من الأسبوع.",
+  "not-sampled-yet": "لم تؤخذ عينة بعد",
+  "players-on-average": "{players} لاعبًا في المتوسط",
+  "quietest": "، الأقل انشغالًا {when} ({players})",
+  "your-local-time": "وقتك المحلي"
+}

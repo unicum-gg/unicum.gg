@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Willekeurig",
+    "battle_royale": "Staaljager",
+    "frontline": "Frontlinie",
+    "onslaught": "Bestorming",
+    "onslaught_night": "{onslaught} Nacht",
+    "grand_battle": "Groots gevecht",
+    "clan_wars": "Clanoorlogen",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arcade",
+    "story_mode": "Verhaalmodus",
+    "training": "Training"
+  },
+  "player-modes": {
+    "overall": "Willekeurige Gevechten",
+    "skirmish": "Schermutseling",
+    "advances": "Offensieven",
+    "grand": "Grote gevechten",
+    "ranked": "Klassementsgevechten",
+    "cw-x": "Clan Wars X",
+    "cw-viii": "Clan Wars VIII",
+    "cw-vi": "Clan Wars VI",
+    "steel-hunter": "Staaljager",
+    "onslaught": "Bestorming"
+  },
+  "stronghold-tiers": {
+    "advances": "Offensieven",
+    "t10": "Schermutseling T10",
+    "t8": "Schermutseling T8",
+    "t6": "Schermutseling T6"
+  },
+  "stronghold-periods": {
+    "24h": "Afgelopen 24 uur",
+    "7d": "Afgelopen 7 dagen",
+    "30d": "Afgelopen 30 dagen",
+    "overall": "Totaal"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Gevechten",
+    "winrate": "Winstpercentage"
+  },
+  "clan-boards": {
+    "advances": "Offensieven",
+    "t10": "Schermutseling X",
+    "t8": "Schermutseling VIII",
+    "t6": "Schermutseling VI"
+  },
+  "map-modes": {
+    "standard": "Standaard",
+    "encounter": "Ontmoetingsgevecht",
+    "assault": "Aanval",
+    "attack-defense": "Aanval/Verdediging"
+  },
+  "map-camouflage": {
+    "summer": "Zomer",
+    "winter": "Winter",
+    "desert": "Woestijn"
+  },
+  "map-poi": {
+    "1": "Artilleriehoofdkwartier",
+    "2": "Communicatiecentrum",
+    "3": "Observatiepost"
+  },
+  "tournament-modes": {
+    "ctf": "Standaard",
+    "domination": "Ontmoetingsgevecht",
+    "assault2": "Aanval/verdediging",
+    "comp7": "Bestorming"
+  },
+  "battle-formats": {
+    "random": "Willekeurig",
+    "clan_wars": "Clanoorlogen",
+    "advances": "Offensieven",
+    "skirmish": "Schermutseling",
+    "maneuvers": "Maneuvers",
+    "onslaught": "Bestorming",
+    "tournament": "Toernooi"
+  },
+  "battle-results": {
+    "victory": "Overwinning",
+    "defeat": "Verloren",
+    "draw": "Gelijkspel"
+  },
+  "spawn-directions": {
+    "north": "Noord",
+    "south": "Zuid",
+    "east": "Oost",
+    "west": "West"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Aankomend",
+    "registration_started": "Registratie geopend",
+    "registration_finished": "Registratie gesloten",
+    "running": "In uitvoering",
+    "finished": "Afgerond",
+    "complete": "Voltooid"
+  },
+  "onslaught-tiers": {
+    "legend": "Legende",
+    "champion": "Kampioen",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Zwaar",
+    "mediumTank": "Medium",
+    "lightTank": "Licht",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Aanval",
+    "break": "Doorbraak",
+    "support": "Ondersteuning",
+    "universal": "Veelzijdig",
+    "sniper": "Sluipschutter",
+    "wheeled": "Op wielen"
+  },
+  "mastery-badges": {
+    "class3": "3e Klasse",
+    "class2": "2e Klasse",
+    "class1": "1e Klasse",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Willekeurige Gevechten",
+    "stronghold": "Bolwerk",
+    "skirmish": "Schermutseling",
+    "clan-wars": "Clanoorlogen"
+  },
+  "features": {
+    "stronghold": "Bolwerk",
+    "skirmish": "Schermutseling",
+    "marks-of-excellence": "Markeringen van uitmuntendheid",
+    "marks-of-mastery": "Marks of Mastery",
+    "personal-rating": "Persoonlijke beoordeling",
+    "world-of-tanks-rating": "World of Tanks-beoordeling",
+    "common-test": "Algemene Test",
+    "tournaments": "Toernooien"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Markeringen van uitmuntendheid"
+  }
+}

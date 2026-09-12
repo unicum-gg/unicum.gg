@@ -1,0 +1,25 @@
+{
+  "tagline": "Được xây dựng cho cộng đồng World of Tanks. Thống kê miễn phí cho mọi người chơi, Clan, xe tăng và bản đồ trên khắp EU, NA và Asia.",
+  "columns": {
+    "leaderboards": "Bảng xếp hạng",
+    "tanks": "Xe tăng",
+    "maps": "Bản đồ",
+    "integrations": "Tích hợp",
+    "project": "Dự án"
+  },
+  "links": {
+    "top-tanks": "Xe tăng hàng đầu",
+    "bot": "Bot Discord",
+    "mcp": "Máy chủ MCP",
+    "docs": "Tài liệu API",
+    "badges": "Huy hiệu",
+    "glossary": "Thuật ngữ",
+    "coverage": "Độ bao phủ",
+    "support": "Hỗ trợ chúng tôi",
+    "source": "Mã nguồn",
+    "status": "Trạng thái",
+    "discord": "Discord"
+  },
+  "disclaimer": "Không liên kết với Wargaming",
+  "cookies": "Quản lý cookie"
+}

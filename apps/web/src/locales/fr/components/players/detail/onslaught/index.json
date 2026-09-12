@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname} n’a jamais figuré au classement de l’Assaut.",
+  "live-season": "· saison en cours",
+  "loading-s-onslaught-record": "Chargement du bilan en Assaut de {nickname}...",
+  "onslaught": "Offensive",
+  "onslaught-record": "Bilan en Assaut de {nickname}",
+  "see-this-season-s-leaderboard": "Voir le classement de cette saison",
+  "standing-line": "{rating} points de cote · {battles} batailles",
+  "the-board-only-lists-players": "Le classement ne recense que les joueurs ayant atteint le rang Champion, soit quelques milliers par région. C’est pourquoi ce message apparaît sur presque tous les profils. Cette section se remplit automatiquement pendant la saison où le joueur atteint ce rang.",
+  "updated": "Mis à jour {when}"
+}

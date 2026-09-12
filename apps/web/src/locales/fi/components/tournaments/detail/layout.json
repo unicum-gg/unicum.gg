@@ -1,0 +1,12 @@
+{
+  "final": "Finaali",
+  "grand-final": "Suurfinaali",
+  "loser-bracket-final": "Häviäjäkaavion finaali",
+  "loser-round": "Häviäjäkierros {round}",
+  "quarter-finals": "Puolivälierät",
+  "round-of": "{teams} joukkueen kierros",
+  "semi-finals": "Välierät",
+  "third-place": "Kolmas sijoitus",
+  "winner-bracket-final": "Voittajakaavion finaali",
+  "winner-round": "Voittajakierros {round}"
+}

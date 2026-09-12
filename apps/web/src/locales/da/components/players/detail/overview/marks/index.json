@@ -1,0 +1,21 @@
+{
+  "title": "{nickname}s mærker og mesterskaber",
+  "excellence": {
+    "title": "Fortræffelighedsmærker",
+    "description": "Køretøjer efter mærkerne på deres kanon. Et mærke er et vedvarende gennemsnit: spillet beregner det over et rullende vindue af seneste kampe mod det, regionen præsterer med det køretøj.",
+    "partial": "Mærker læst for {known} af {garage} køretøjer. Resten udfyldes, når kontoen opdateres.",
+    "note": "{marked} af {garage} køretøjer bærer et mærke.",
+    "note-share": "{marked} af {garage} køretøjer bærer et mærke ({percent}% af garagen)."
+  },
+  "mastery": {
+    "title": "Mærker for Mesterlighed",
+    "description": "Køretøjer efter deres bedste mærke. Et mærke gælder for én kamp i stedet for et gennemsnit: spillet tildeler det ud fra erfaringen i én kamp sammenlignet med det, regionen scorer med det køretøj.",
+    "note": "{aces} af {garage} køretøjer bærer et Ace Tanker.",
+    "note-share": "{aces} af {garage} køretøjer bærer et Ace Tanker ({percent}% af garagen)."
+  },
+  "reach": {
+    "heading": "Spil over kanonens niveau",
+    "description": "Køretøjer, hvis samlede skade allerede overstiger et mærke, de ikke bærer. Mærket er den samlede skade, farvelagt efter det mærke, den overstiger."
+  },
+  "none": "Ingen"
+}

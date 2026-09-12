@@ -1,0 +1,162 @@
+{
+  "columns-label": "列",
+  "groups": {
+    "firepower": "火力",
+    "gun-handling": "砲の取り扱い",
+    "mobility": "機動性",
+    "survivability": "生存性",
+    "other": "その他"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "1分あたりのダメージ"
+    },
+    "damage": {
+      "label": "ダメージ",
+      "tip": "アメリカダメージ"
+    },
+    "moduleDamage": {
+      "label": "モジュールダメージ"
+    },
+    "splashRadius": {
+      "label": "爆発半径"
+    },
+    "reload": {
+      "label": "連射性能",
+      "tip": "リロード（自動装填砲では弾倉全体）"
+    },
+    "rof": {
+      "label": "発射速度",
+      "tip": "1分あたりの砲弾数"
+    },
+    "intraClipReload": {
+      "label": "連射性能",
+      "tip": "弾倉内の射撃間隔（自動装填砲）"
+    },
+    "penetration": {
+      "label": "貫通力",
+      "tip": "貫通力 (mm)、標準砲弾"
+    },
+    "caliber": {
+      "label": "口径",
+      "tip": "砲弾口径 (mm)"
+    },
+    "shellVelocity": {
+      "label": "弾速",
+      "tip": "砲弾速度 (m/s)"
+    },
+    "accuracy": {
+      "label": "精度",
+      "tip": "100 mでの拡散率（低いほど良い）"
+    },
+    "aimTime": {
+      "label": "照準時間"
+    },
+    "dispMoving": {
+      "label": "移動時の拡散率",
+      "tip": "移動中の拡散率係数"
+    },
+    "dispTankTraverse": {
+      "label": "車体旋回時の拡散率"
+    },
+    "dispTurretTraverse": {
+      "label": "砲塔旋回時の拡散率"
+    },
+    "dispAfterShot": {
+      "label": "射撃後の拡散率"
+    },
+    "dispWhileDamaged": {
+      "label": "損傷中の拡散率"
+    },
+    "gunArc": {
+      "label": "射界",
+      "tip": "主砲の水平旋回角度"
+    },
+    "depression": {
+      "label": "主砲の俯角 / 仰角",
+      "tip": "主砲の俯角 / 仰角"
+    },
+    "speed": {
+      "label": "速度（前進 / 後退）",
+      "tip": "前進 / 後退時の最高速度 (km/h)"
+    },
+    "hullTraverse": {
+      "label": "車体旋回"
+    },
+    "turretTraverse": {
+      "label": "砲塔旋回"
+    },
+    "enginePower": {
+      "label": "火力",
+      "tip": "エンジン出力 (hp)"
+    },
+    "powerWeight": {
+      "label": "火力/重量",
+      "tip": "1トンあたりのhp"
+    },
+    "terrainHard": {
+      "label": "硬地",
+      "tip": "硬い地面での地形抵抗（低いほど良い）"
+    },
+    "terrainMedium": {
+      "label": "ミディアム地形"
+    },
+    "terrainSoft": {
+      "label": "軟地"
+    },
+    "health": {
+      "label": "耐久値",
+      "tip": "ヒットポイント"
+    },
+    "engineHealth": {
+      "label": "エンジン耐久値"
+    },
+    "engineFireChance": {
+      "label": "エンジンの火災発生率"
+    },
+    "hullArmorFront": {
+      "label": "車体装甲（前面）",
+      "tip": "車体前面装甲 (mm)"
+    },
+    "turretArmorFront": {
+      "label": "砲塔装甲（前面）",
+      "tip": "砲塔前面装甲 (mm)"
+    },
+    "trackArmor": {
+      "label": "履帯装甲"
+    },
+    "trackHealth": {
+      "label": "履帯耐久値"
+    },
+    "trackRepairTime": {
+      "label": "履帯修理時間"
+    },
+    "ammoRackHealth": {
+      "label": "弾薬庫耐久値"
+    },
+    "weight": {
+      "label": "重量"
+    },
+    "viewRange": {
+      "label": "視認範囲",
+      "tip": "視認範囲 (m)"
+    },
+    "radioRange": {
+      "label": "無線機の通信範囲",
+      "tip": "通信範囲 (m)"
+    },
+    "camoStill": {
+      "label": "静止時隠蔽率"
+    },
+    "camoMoving": {
+      "label": "移動時隠蔽率"
+    },
+    "camoStillFiring": {
+      "label": "静止中の射撃後迷彩"
+    },
+    "camoMovingFiring": {
+      "label": "移動中の射撃後迷彩"
+    }
+  }
+}

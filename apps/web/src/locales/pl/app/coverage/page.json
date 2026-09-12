@@ -1,0 +1,6 @@
+{
+  "title": "Zakres danych World of Tanks ({region})",
+  "description": "Liczba graczy i klanów World of Tanks śledzonych przez {name} w regionie {region}, częstotliwość odświeżania migawek, zakres danych, koszty infrastruktury i dostępność.",
+  "og-title": "Zakres danych",
+  "og-subtitle": "Gracze i klany: {region}"
+}

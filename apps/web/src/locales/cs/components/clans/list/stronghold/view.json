@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Zatím nejsou k dispozici žádná data. Vraťte se sem po aktualizaci klanů.",
+  "heading": "Nejlepší klany úrovně <accent>{tier}</accent>",
+  "blurb": "Žebříček všech sledovaných klanů pro region {region} ve formátu {format}, seřazený podle ukazatele {sort} (alespoň {battles} bitev).",
+  "blurb-period": "Žebříček všech sledovaných klanů pro region {region} ve formátu {format} za období {period}, seřazený podle ukazatele {sort} (alespoň {battles} bitev).",
+  "format-advances": "Ofenzívy (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Nejlepších {count} klanů úrovně {tier} ·"
+}

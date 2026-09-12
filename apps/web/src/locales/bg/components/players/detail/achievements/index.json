@@ -1,0 +1,12 @@
+{
+  "achievements": "Постижения на {nickname}",
+  "filter-all": "Всички",
+  "filter-both": "И двете",
+  "filter-earned": "Спечелени",
+  "filter-missing": "Липсващи",
+  "filter-obtainable": "Получими",
+  "filter-retired": "Оттеглени",
+  "no-achievement-matches-these-filters": "Няма постижения, съответстващи на тези филтри.",
+  "search-achievements": "Търсене на постижения",
+  "search-among-n-achievements": "Търсене сред {count} постижения"
+}

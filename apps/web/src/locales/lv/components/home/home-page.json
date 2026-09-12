@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Top spēlētāji · pēdējās 24 stundas"
+    },
+    "week": {
+      "title": "Top spēlētāji · pēdējās 7 dienas"
+    }
+  },
+  "rating-scale": {
+    "title": "Vērtēšanas skala"
+  },
+  "community": {
+    "title": "Pievienojieties kopienai",
+    "heading": "Sazinieties ar WoT spēlētājiem",
+    "description": "Pievienojieties mūsu Discord, lai apspriestu WoT statistiku, pieprasītu funkcijas un ziņotu par kļūdām. Vai arī apmeklējiet GitHub, lai apskatītu kodu un sniegtu ieguldījumu.",
+    "discord": "Pievienojies Discord",
+    "github": "Skatīt GitHub"
+  },
+  "features": {
+    "title": "Ko jūs šeit atradīsiet",
+    "profiles": {
+      "title": "Spēlētāju profili",
+      "description": "Detalizēta statistika ar kopējiem un 24 h / 7 dienu / 30 dienu izmaiņu rādītājiem, WN7, WN8, WNX un personīgo reitingu."
+    },
+    "clans": {
+      "title": "Klanu lapas",
+      "description": "Biedru tabula ar reitingiem, neseno aktivitāšu plūsmu, aprakstu un klana metadatiem."
+    },
+    "history": {
+      "title": "Klanu vēsture",
+      "description": "Pilna laika līnija ar katru klanu, kurā spēlētājs ir bijis, kā arī lomām un datumiem."
+    },
+    "live": {
+      "title": "Aktuālie atjauninājumi",
+      "description": "Izsekotie spēlētāji tiek atsvaidzināti fonā ik pēc 24 stundām, izmantojot mūsu momentuzņēmumu sistēmu."
+    },
+    "leaderboards": {
+      "title": "Līderu saraksti",
+      "description": "Top spēlētāji (24 h, 7 dienas, visā vēsturē) un klani, ranžēti pēc WNX, kas aprēķināts no mūsu momentuzņēmumiem."
+    },
+    "open-source": {
+      "title": "Atvērtais pirmkods · AGPL",
+      "description": "Kods ir GitHub. Apskatiet, izveidojiet atzarojumu, sniedziet ieguldījumu. Bez reklāmām, tikai pēc izvēles izmantojama analītika."
+    }
+  },
+  "quick-start": {
+    "title": "Ātrā darba sākšana",
+    "search": {
+      "title": "🔍 Meklēt spēlētājus vai klanus",
+      "description": "Nospiediet {shortcut}, lai atvērtu meklēšanu, pēc tam ievadiet segvārdu vai klana tagu."
+    },
+    "region": {
+      "title": "🌍 Mainīt reģionu",
+      "description": "Izmantojiet {selector} atlasītāju navigācijas joslā. Līderu saraksti tiks atjaunināti atbilstoši."
+    },
+    "leaderboards": {
+      "title": "🏆 Pārlūkot līderu sarakstus",
+      "description": "Top spēlētāji (24 h, 7 dienas, visā vēsturē) un klani, ranžēti pēc vidējā WNX, kas aprēķināts no mūsu momentuzņēmumiem."
+    },
+    "colors": {
+      "title": "📊 Izprast krāsas",
+      "description": "WR, WN7, WN8 un WNX izmanto vienādas līmeņu krāsas (oranža → zaļa → ciāna → violeta). Skatiet skalu iepriekš."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ĀZIJA"
+}

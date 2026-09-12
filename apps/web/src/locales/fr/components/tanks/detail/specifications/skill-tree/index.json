@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Cliquez sur un nœud accessible pour le déverrouiller. Chacun applique son effet aux caractéristiques ci-dessus. Les couleurs regroupent les nœuds selon la puissance de feu, la mobilité, la capacité de survie et les mécaniques du véhicule.",
+  "loadout-switch-no-effect": "Changement de configuration en bataille. Aucun effet sur les caractéristiques.",
+  "title": "Améliorations du {tank}",
+  "vehicle-mechanic-no-effect": "Mécanique du véhicule. Aucun effet sur les caractéristiques."
+}

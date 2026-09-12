@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { numberFormat } from "@/lib/format";
+import Link from "@/components/link";
+import { useTranslation } from "@/hooks/use-translation";
 import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
 import { TankIcon } from "@/components/tanks/tank-icon";
@@ -10,7 +12,7 @@ import {
   PANEL_ROW_VALUE_CELL_CLASS,
 } from "@/components/entity/panel-row";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /**
  * One vehicle in a profile list: its icon, its name over tier/class/battles,
@@ -38,6 +40,7 @@ export function VehicleRow({
   battlesNote,
   badge,
   caption,
+  locale,
 }: {
   region: Region;
   tag: string;
@@ -50,7 +53,9 @@ export function VehicleRow({
   battlesNote?: string;
   badge: React.ReactNode;
   caption: React.ReactNode;
+  locale: string;
 }) {
+  const { t } = useTranslation("components/tanks/vehicle-row");
   return (
     <li className={ROW_CLASS}>
       <span className={ICON_CELL_CLASS}>
@@ -72,14 +77,14 @@ export function VehicleRow({
           )}
         </div>
         <div className="flex items-center gap-1.5 text-xs text-fd-muted-foreground">
-          <span>Tier {toRoman(tier)}</span>
+          <span>{t("tier", { tier: toRoman(tier) })}</span>
           <VehicleTypeIcon
             type={type}
             premium={isPremium}
             className="size-3.5"
           />
           <span>
-            · {intFmt.format(battles)} battles
+            · {t("battles", { count: numberFormat(locale, INT_FORMAT).format(battles) })}
             {battlesNote ?? ""}
           </span>
         </div>

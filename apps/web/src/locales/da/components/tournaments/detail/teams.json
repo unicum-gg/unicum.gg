@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Gennemsnit for {rated} af {size} spillere",
+  "average-over-recent": "Gennemsnit for {rated} af de {size} spillere, der spillede i de seneste 30 dage",
+  "metric-over-last-30-days": "{metric} i de seneste 30 dage",
+  "n-confirmed": "{count} bekræftet",
+  "no-team-matches-the-current": "Intet hold matcher de nuværende filtre.",
+  "no-teams-recorded-yet-registrations": "Ingen hold er registreret endnu. Tilmeldinger vises her, når denne turnering er læst helt ind, hvilket sker få minutter efter åbningen.",
+  "none-played-in-30-days": "Ingen på denne holdopstilling har spillet i de seneste 30 dage",
+  "players": "Spillere",
+  "qualified": "Kvalificeret",
+  "reward": "Belønning",
+  "team": "Hold",
+  "teams": "Hold ({length})",
+  "wr": "WR"
+}

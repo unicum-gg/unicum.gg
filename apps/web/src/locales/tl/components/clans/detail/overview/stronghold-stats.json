@@ -1,0 +1,22 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Kabuuan",
+    "day": "Huling 24h",
+    "week": "Huling 7d",
+    "month": "Huling 30d"
+  },
+  "sections": {
+    "elo": "Antas X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Antas X (7v7)",
+    "t8": "{skirmish} Antas VIII (7v7)",
+    "t6": "{skirmish} Antas VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Mga labanan",
+    "winrate": "Win rate"
+  }
+}

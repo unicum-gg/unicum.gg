@@ -1,0 +1,5 @@
+{
+  "title": "{map}, World of Tanks karte ({region})",
+  "description": "{map}: {width} × {height} mm World of Tanks karte.",
+  "description-modes": "{map}: {width} × {height} mm World of Tanks karte, kurā tiek spēlēti {modes}."
+}

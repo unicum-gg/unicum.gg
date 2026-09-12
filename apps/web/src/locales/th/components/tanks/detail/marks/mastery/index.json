@@ -1,0 +1,8 @@
+{
+  "last-days": "{chartDays} วันที่ผ่านมา",
+  "n-players": "{count, plural, other {# ผู้เล่น}}",
+  "rolling-average-combined-damage-to": "ค่าเฉลี่ยเคลื่อนที่ของความเสียหายรวมเพื่อเอาชนะผู้เล่น 65 / 85 / 95%",
+  "single-battle-xp-to-beat": "XP จากการรบครั้งเดียวเพื่อเอาชนะผู้เล่น 50 / 80 / 95 / 99%",
+  "tank-marks-of-excellence": "เครื่องหมายความเป็นเลิศของ {tank}",
+  "tank-marks-of-mastery": "เครื่องหมายความเชี่ยวชาญของ {tank}"
+}

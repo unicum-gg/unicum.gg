@@ -1,0 +1,9 @@
+{
+  "boosts": "Boosts {name}",
+  "directives": "Directives",
+  "directive-name": "{name} directive",
+  "grants-and-boosts": "Grants and boosts the crew skill, even when untrained.",
+  "grants-only": "Grants the crew skill for the battle (no listed characteristic).",
+  "enhances-mounted": "Enhances the mounted {name}.",
+  "mount-to-use": "Mount {name} to use this directive."
+}

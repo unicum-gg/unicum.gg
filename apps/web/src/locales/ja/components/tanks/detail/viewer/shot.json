@@ -1,0 +1,7 @@
+{
+  "firing": "{shell}を発射中、{pen} mm。射撃を変更",
+  "no-such-round": "{mark}：この主砲にはないため、角度を自分で設定してください",
+  "own-round": "{mark}：この主砲固有の砲弾、性能を含む",
+  "treat-it-as": "次として扱う",
+  "treat-it-as-mark": "{mark}として扱う"
+}

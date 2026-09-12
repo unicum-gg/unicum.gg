@@ -1,0 +1,12 @@
+{
+  "clans-history": "Ιστορικό κλαν του {nickname}",
+  "clans-in-clans": "{totalClans} κλαν · {timeInClansSeconds} σε κλαν",
+  "current": "τρέχων",
+  "duration": "Διάρκεια",
+  "from": "Από",
+  "name": "Όνομα",
+  "no-clan-history": "Δεν υπάρχει ιστορικό κλαν.",
+  "role": "Ρόλος",
+  "tag": "Ετικέτα",
+  "to": "Για"
+}

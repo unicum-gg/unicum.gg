@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Faktureres i euro, omregnet til {currency} efter dagens kurs.",
+  "cost-breakdown": "Prisoversigt",
+  "estimated-annual-cost": "Anslået årlig pris",
+  "fixed-month-bill-no-surprises": "En fast regning på {totalAnnualEur}/måned uden overraskelser: én lejet server, ingen tredjeparts-SaaS i datastien. Den vokser kun, når vi vokser fra serveren (mere Wargaming-gennemstrømning kræver flere udgående IP’er).",
+  "free": "gratis",
+  "one-off-spend": "Engangsudgift",
+  "paid-once-so-it-is": "Betalt én gang, så det er ikke en del af den månedlige regning ovenfor. Det tæller stadig med i projektets samlede pris indtil videre.",
+  "previously": "Tidligere"
+}

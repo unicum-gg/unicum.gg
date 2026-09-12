@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Nog een paar woorden: nog {count} te gaan.",
+  "at-winrate": "bij {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Intrekken mislukt. Probeer het zo opnieuw.",
+  "hide-the-detailed-axes": "Gedetailleerde assen verbergen",
+  "not-enough-battles": "Je hebt niet genoeg gevechten met deze tank gespeeld om je stem mee te laten tellen.",
+  "published-once-read": "Wordt gepubliceerd zodra een moderator het heeft gelezen. Je sterren tellen meteen mee.",
+  "rate-it-in-detail": "Beoordeel het in detail (optioneel)",
+  "review": {
+    "none": "Beoordeling opgeslagen.",
+    "queued": "Beoordeling opgeslagen. Je recensie is naar een moderator gestuurd.",
+    "published": "Beoordeling opgeslagen. Je recensie is al gepubliceerd.",
+    "pending": "Beoordeling opgeslagen. Je recensie wacht nog op een moderator.",
+    "rejected": "Beoordeling opgeslagen. Je eerdere recensie is niet gepubliceerd, dus alleen je sterren tellen mee.",
+    "closed": "Beoordeling opgeslagen. Geschreven meningen zijn momenteel niet mogelijk, dus de tekst is niet bewaard."
+  },
+  "save-failed": "Opslaan mislukt. Probeer het zo opnieuw.",
+  "say-why-optional": "Vertel waarom (optioneel)",
+  "signed-with": "Ondertekend met je {battles} gevechten in deze tank",
+  "submit-my-rating": "Mijn beoordeling indienen",
+  "too-many-edits": "Dat zijn veel wijzigingen tegelijk. Wacht een minuut.",
+  "update-my-rating": "Mijn beoordeling bijwerken",
+  "what-it-is-good-at": "Waar deze tank goed in is, waar niet in en voor wie hij geschikt is.",
+  "withdraw": "Terugtrekken",
+  "your-rating-has-been-withdrawn": "Je beoordeling is ingetrokken.",
+  "your-review-is-waiting-on": "Je recensie wacht op een moderator. Alleen jij kunt hem hier zien.",
+  "your-review-was-not-published": "Je recensie is niet gepubliceerd. Je sterren tellen nog steeds mee voor het gemiddelde."
+}

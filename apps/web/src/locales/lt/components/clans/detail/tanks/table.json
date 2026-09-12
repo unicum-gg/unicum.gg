@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Šio klano tankų duomenų dar nėra.",
+  "no-tanks-match-these-filters": "Nė vienas tankas neatitinka šių filtrų.",
+  "nation": "Nacija",
+  "type": "Tipas",
+  "tier": "lygis",
+  "name": "Pavadinimas",
+  "members": "Nariai",
+  "battles": "Mūšiai",
+  "avg-damage": "Vid. žala",
+  "avg-xp": "Vid. XP",
+  "wr": "WR"
+}

@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Vsa bojišča igre World of Tanks, skupaj {count}. Filtrirajte jih po kamuflaži in načinu igre, nato pa odprite zemljevid ter si oglejte njegov minizemljevid, velikost, zastave baz in začetne točke za vsak način posebej.",
+    "title": "Vsi zemljevidi igre World of Tanks ({region}), vsa bojišča",
+    "description": "Regija {region}: prebrskajte vse zemljevide igre World of Tanks z minizemljevidi, velikostjo, kamuflažo, podprtimi načini igre ter zastavami baz in začetnimi točkami za vsak način posebej.",
+    "heading": "Všetky <accent>mapy</accent>"
+  },
+  "battle-type": {
+    "intro": "Način {type}, {blurb}, vključuje zemljevide igre World of Tanks, skupaj {count}. Odprite zemljevid ter si oglejte njegov minizemljevid, velikost, zastave baz in začetne točke za vsak način posebej.",
+    "title": "Zemljevidi igre World of Tanks za način {type} ({region}), vsa bojišča v naboru",
+    "description": "Način {type}, regija {region}: oglejte si vse zemljevide igre World of Tanks v naboru, njihove minizemljevide, velikost, kamuflažo, podprte načine igre, zastave baz in začetne točke.",
+    "heading": "{type} <accent>mapy</accent>"
+  },
+  "blurbs": {
+    "random": "standardni nabor bojev 15 na 15",
+    "battle_royale": "boj, v katerem zmaga zadnji preživeli tank",
+    "frontline": "obsežni način 30 na 30",
+    "onslaught": "način z lestvico 7 na 7",
+    "onslaught_night": "nočni način z lestvico 7 na 7, krajšim dosegom pogleda in trenutno na voljo v Skupnem preizkusu",
+    "grand_battle": "način 30 na 30 z vozili stopnje X",
+    "clan_wars": "klanske vojne in napredovanja",
+    "waffentrager": "dogodek Waffenträger",
+    "last_stand": "dogodek Zadnji odpor",
+    "arcade": "arkadni in posebni dogodki",
+    "story_mode": "operacije z zgodbo",
+    "training": "vadbene sobe in vadnice"
+  }
+}

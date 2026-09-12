@@ -1,0 +1,12 @@
+{
+  "aria-build": "Citit în clientul Test Comun, versiunea {version}",
+  "aria-changes": "Modificat de Testul Comun: {changes} caracteristici",
+  "aria-described": "Test Comun: {description}",
+  "aria-vehicle": "Vehicul din Testul Comun",
+  "common-test": "Test Comun",
+  "common-test-build": "Test Comun {version}",
+  "tip-build": "{label} · acestea sunt valorile versiunii de test, iar Wargaming le poate modifica înainte de lansarea actualizării",
+  "tip-changes": "Test Comun: {changes, plural, one {# caracteristică} few {# caracteristici} other {# de caracteristici}} schimbate la acest vehicul",
+  "tip-described": "Test Comun · {description}",
+  "tip-vehicle": "Test Comun · încă nelansat, deci nu are statistici de bătălie, iar caracteristicile sale se pot modifica în continuare"
+}

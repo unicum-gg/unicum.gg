@@ -1,0 +1,8 @@
+{
+  "previous": "Edellinen sivu",
+  "next": "Seuraava sivu",
+  "rows-per-page": "Rivit per sivu",
+  "all": "Kaikki",
+  "range": "{first}–{last} / {total}",
+  "page": "Sivu {page} / {total}"
+}

@@ -1,0 +1,19 @@
+{
+  "active-days": "Giorni attivi",
+  "add-workflow": "Aggiungi flusso di lavoro",
+  "connect-discord": "Connetti Discord",
+  "discord-notifications": "Notifiche Discord",
+  "each-workflow-activates-its-reserves": "Ogni automazione attiva le proprie riserve durante una fascia oraria, non appena un numero sufficiente di membri è in una sessione di gioco attiva. Funziona tramite il tuo account, senza che tu debba essere online. Aggiungine quante te ne servono.",
+  "enabled": "Attivato",
+  "from": "Da",
+  "get-a-discord-message-in": "Ricevi un messaggio Discord in un canale a tua scelta ogni volta che si attiva un potenziamento, così tutto il clan sa che è attivo.",
+  "log-in-with-wargaming-to": "Accedi con Wargaming per configurarlo",
+  "min-online": "Min online",
+  "officers": "Ufficiali",
+  "only-an-officer-of-this": "Solo un ufficiale di questo clan può configurarlo.",
+  "schedule-preview": "Anteprima programma",
+  "set-your-hours-and-reserves": "Imposta una sola volta gli orari e le riserve. I potenziamenti si attivano automaticamente all’ora stabilita, anche quando non c’è nessuno a premere il pulsante.",
+  "stronghold-boosts": "Bonus della Fortezza",
+  "times-are-in-your-timezone": "Gli orari sono espressi nel tuo fuso orario, {tz}.",
+  "to": "A"
+}

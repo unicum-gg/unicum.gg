@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "हर वोट उस खाते से आता है जिसने यह टैंक खेला है।",
+  "every-vote-played-average": "हर वोट उस खाते से आता है जिसने यह टैंक खेला है, औसतन इसमें {battles} युद्ध खेले हैं।",
+  "fun": "मज़ा",
+  "how-good-the-tank-is": "टैंक कितना अच्छा है",
+  "how-much-people-enjoy-it": "लोग इसे कितना पसंद करते हैं",
+  "if-you-have-played-it": "यदि आपने इसे खेला है, तो यह पेज ठीक आपकी प्रतीक्षा कर रहा है।",
+  "nobody-has-rated-this-tank": "अभी तक किसी ने इस टैंक को रेट नहीं किया है।",
+  "overall": "कुल मिलाकर",
+  "votes": "{count} वोट",
+  "votes-one": "{count} वोट"
+}

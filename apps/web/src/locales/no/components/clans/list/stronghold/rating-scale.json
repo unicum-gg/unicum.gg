@@ -1,0 +1,17 @@
+{
+  "average": "Gjennomsnitt",
+  "bad": "Dårlig",
+  "below-avg": "Under gjennomsnitt",
+  "color-thresholds-for-the-stronghold": "Fargegrenser for festningsrangeringene. Én absolutt skala for alle nivåer, slik at en SR (eller SRB) betyr samme klankvalitet overalt.",
+  "excellent": "Fremragende",
+  "good": "Bra",
+  "rating-colors": "Vurderingsfarger",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Nivå",
+  "top": "Topp",
+  "very-bad": "Veldig dårlig",
+  "very-good": "Veldig bra",
+  "wr": "WR"
+}

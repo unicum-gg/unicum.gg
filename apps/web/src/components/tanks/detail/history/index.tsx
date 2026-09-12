@@ -1,3 +1,5 @@
+import { dateFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
 import { Fragment } from "react";
 import {
   Panel,
@@ -12,13 +14,9 @@ import {
 } from "@/components/tanks/change-format";
 import { ChangeRow } from "@/components/tanks/change-row";
 import { TANK_HISTORY_TRACKING_START } from "@unicum.gg/shared";
-import type { TankHistoryVersions } from "@/app/(site)/[region]/tanks/[slug]/detail";
+import type { TankHistoryVersions } from "@/app/[locale]/(site)/[region]/tanks/[slug]/detail";
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const DATE_PATTERN = "d MMM yyyy";
 
 /**
  * The History tab: every characteristic change a tank has gone through, grouped
@@ -29,13 +27,13 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
  * archive of past client versions), so the first version shown is the first one
  * that changed this tank, not the tank's whole life.
  */
-export function TankChangesHistory({
+export async function TankChangesHistory({
   versions,
   testVersion,
   testChanges,
   devVersion,
   releasedVersion,
-  releasedAt,
+  releasedAt, locale,
 }: {
   versions: TankHistoryVersions;
   /** The Common Test build `testChanges` was read from, null when none runs. */
@@ -52,7 +50,11 @@ export function TankChangesHistory({
   releasedVersion: string | null;
   releasedAt: Date | null;
   tankName: string;
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/tanks/detail/history/index", locale);
+  const { t: tStats } = await getTranslation("components/stat-labels", locale);
+  const { t: tGame } = await getTranslation("game/vocabulary", locale);
   // Each version is a section; sections are joined by the site's diagonal
   // spacer (PanelSeparator), not a margin gap. Versions whose changes are all
   // untracked fields are dropped up front, so the spacer interleaving stays right.
@@ -60,13 +62,13 @@ export function TankChangesHistory({
     .map((version) => ({
       version,
       changes: version.changes
-        .map((c) => formatSpecChange(c.field, c.previous, c.next))
+        .map((c) => formatSpecChange(c.field, c.previous, c.next, locale))
         .filter((c): c is FormattedChange => c !== null),
     }))
     .filter((s) => s.changes.length > 0);
 
   const pending = testChanges
-    .map((c) => formatSpecChange(c.field, c.previous, c.next))
+    .map((c) => formatSpecChange(c.field, c.previous, c.next, locale))
     .filter((c): c is FormattedChange => c !== null);
 
   return (
@@ -77,7 +79,7 @@ export function TankChangesHistory({
         <Panel className="border border-brand/40" screenLines={false}>
           <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
             <PanelTitle>
-              <span className="text-brand">Common Test</span>
+              <span className="text-brand">{tGame("features.common-test")}</span>
               {testVersion ? (
                 <span className="ml-2 text-xs font-normal text-fd-muted-foreground">
                   {testVersion}
@@ -87,24 +89,31 @@ export function TankChangesHistory({
             <div className="flex items-center gap-3 text-xs tabular-nums">
               {pending.filter((c) => c.isBuff === true).length > 0 ? (
                 <span className="text-emerald-500">
-                  {pending.filter((c) => c.isBuff === true).length} buffed
+                  {t("n-buffed", {
+                    count: pending.filter((c) => c.isBuff === true).length,
+                  })}
                 </span>
               ) : null}
               {pending.filter((c) => c.isBuff === false).length > 0 ? (
                 <span className="text-red-500">
-                  {pending.filter((c) => c.isBuff === false).length} nerfed
+                  {t("n-nerfed", {
+                    count: pending.filter((c) => c.isBuff === false).length,
+                  })}
                 </span>
               ) : null}
             </div>
           </PanelHeader>
           <PanelContent className="p-0">
             <p className="px-4 pt-3 text-xs text-fd-muted-foreground">
-              Not released. Wargaming can still change or drop any of this before
-              the update ships.
-            </p>
+              {t("not-released-wargaming-can-still")}</p>
             <ul className="divide-y divide-fd-border">
               {pending.map((change) => (
-                <ChangeRow key={change.field} change={change} className="px-4" />
+                <ChangeRow
+                  key={change.field}
+                  change={change}
+                  className="px-4"
+                  tStats={tStats}
+                />
               ))}
             </ul>
           </PanelContent>
@@ -120,17 +129,21 @@ export function TankChangesHistory({
             <Panel>
               <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                 <PanelTitle>
-                  Update {version.gameVersion}
+                  {t("update", { version: version.gameVersion })}
                   <span className="ml-2 text-xs font-normal text-fd-muted-foreground">
-                    {dateFmt.format(new Date(version.capturedAt))}
+                    {dateFormat(locale, DATE_PATTERN).format(new Date(version.capturedAt))}
                   </span>
                 </PanelTitle>
                 <div className="flex items-center gap-3 text-xs tabular-nums">
                   {buffs > 0 ? (
-                    <span className="text-emerald-500">{buffs} buffed</span>
+                    <span className="text-emerald-500">
+                      {t("n-buffed", { count: buffs })}
+                    </span>
                   ) : null}
                   {nerfs > 0 ? (
-                    <span className="text-red-500">{nerfs} nerfed</span>
+                    <span className="text-red-500">
+                      {t("n-nerfed", { count: nerfs })}
+                    </span>
                   ) : null}
                 </div>
               </PanelHeader>
@@ -138,6 +151,7 @@ export function TankChangesHistory({
                 <ul className="divide-y divide-fd-border">
                   {changes.map((change) => (
                     <ChangeRow
+                      tStats={tStats}
                       key={change.field}
                       change={change}
                       className="px-4"
@@ -154,13 +168,14 @@ export function TankChangesHistory({
         {sections.length > 0 ? <PanelSeparator /> : null}
         <Panel>
           <PanelHeader>
-            <PanelTitle>Lifecycle</PanelTitle>
+            <PanelTitle>{t("lifecycle")}</PanelTitle>
           </PanelHeader>
           <PanelContent className="p-0">
             <ul className="divide-y divide-fd-border">
               {releasedVersion ? (
                 <LifecycleRow
-                  label="Introduced"
+                  locale={locale}
+                  label={t("introduced")}
                   version={releasedVersion}
                   at={releasedAt}
                 />
@@ -169,14 +184,15 @@ export function TankChangesHistory({
                 // introduction to state, and saying it predates our tracking
                 // would date an unreleased tank to the past.
                 <li className="flex items-center justify-between gap-4 px-4 py-2.5 text-sm">
-                  <span className="text-fd-muted-foreground">Status</span>
-                  <span className="font-medium">In Common Test, not released yet</span>
+                  <span className="text-fd-muted-foreground">{t("status")}</span>
+                  <span className="font-medium">{t("in-common-test-not-released")}</span>
                 </li>
               ) : (
                 // Present before our tracking started: the real introduction date
                 // is unknown, so we can only say it predates that update.
                 <LifecycleRow
-                  label="Introduced"
+                  locale={locale}
+                  label={t("introduced")}
                   version={TANK_HISTORY_TRACKING_START.version}
                   at={null}
                   before
@@ -190,29 +206,34 @@ export function TankChangesHistory({
   );
 }
 
-function LifecycleRow({
+async function LifecycleRow({
   label,
   version,
   at,
   before = false,
+  locale,
 }: {
   label: string;
   version: string;
   at: Date | null;
   /** Render "Before update X" (the tank predates our tracking window). */
   before?: boolean;
+  locale: string;
 }) {
+  const { t } = await getTranslation(
+    "components/tanks/detail/history/index",
+    locale,
+  );
   return (
     <li className="flex items-center justify-between gap-4 px-4 py-2.5 text-sm">
       <span className="text-fd-muted-foreground">{label}</span>
       <span className="tabular-nums">
         <span className="font-medium">
-          {before ? "Before update " : "Update "}
-          {version}
+          {t(before ? "before-update" : "update", { version })}
         </span>
         {at ? (
           <span className="ml-2 text-xs text-fd-muted-foreground">
-            {dateFmt.format(new Date(at))}
+            {dateFormat(locale, DATE_PATTERN).format(new Date(at))}
           </span>
         ) : null}
       </span>

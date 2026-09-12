@@ -1,0 +1,17 @@
+{
+  "average": "Medie",
+  "bad": "Rău",
+  "below-avg": "Sub medie",
+  "color-thresholds-for-the-stronghold": "Pragurile de culoare pentru clasamentele fortăreței. O singură scară absolută pentru fiecare nivel, astfel încât un SR (sau SRB) să însemne aceeași calitate a clanului peste tot.",
+  "excellent": "Excelent",
+  "good": "Bine",
+  "rating-colors": "Culori rating",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "nivel",
+  "top": "Top",
+  "very-bad": "Foarte rău",
+  "very-good": "Foarte bine",
+  "wr": "WR"
+}

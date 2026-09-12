@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { useFormat } from "@/hooks/use-format";
+import Link from "@/components/link";
 import useSWR from "swr";
 import {
   mergeServerOnline,
@@ -17,9 +18,10 @@ import {
 import ROUTES from "@/constants/routes";
 import { usePlayersOnline } from "@/hooks/use-players-online";
 import { useRegion } from "@/hooks/use-region";
+import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
 
-const fmt = new Intl.NumberFormat("en-US");
+const FMT_FORMAT = {} as const;
 
 // The range the servers page renders, so the two read the same recorded figure.
 // `current` and each cluster's own are the last recorded sample whatever the
@@ -27,7 +29,9 @@ const fmt = new Intl.NumberFormat("en-US");
 const FALLBACK_RANGE = ServerStatsRange.Day;
 
 export function PlayersOnline() {
+  const { num } = useFormat();
   const { region } = useRegion();
+  const { t } = useTranslation("components/players-online");
   const live = usePlayersOnline(region);
 
   // The same fallback the servers page is handed by the server: the last
@@ -66,7 +70,7 @@ export function PlayersOnline() {
       href={ROUTES.SERVERS(region)}
       className="shrink-0 font-medium tabular-nums text-fd-muted-foreground transition-colors hover:text-fd-foreground"
     >
-      {total == null ? "—" : fmt.format(total)} players online
+      {t("count", { count: total == null ? "—" : num(FMT_FORMAT).format(total) })}
     </Link>
   );
 
@@ -89,7 +93,7 @@ export function PlayersOnline() {
                   {serverDisplayName(region, s.server)}
                 </span>
                 <span className="font-medium">
-                  {s.players == null ? "—" : fmt.format(s.players)}
+                  {s.players == null ? "—" : num(FMT_FORMAT).format(s.players)}
                 </span>
               </div>
             ))}

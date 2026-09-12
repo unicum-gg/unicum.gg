@@ -1,0 +1,6 @@
+{
+  "title": "Exclusiv jucători {language} de World of Tanks ({region})",
+  "description": "{name} {region}: clasament al jucătorilor pentru jucătorii a căror limbă dedusă din istoricul clanului este exclusiv {language}, clasat după WNX.",
+  "og-title": "Exclusiv jucători {language}",
+  "og-subtitle": "Clasamentul {region}"
+}

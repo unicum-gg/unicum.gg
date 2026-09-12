@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Klik op een bereikbaar knooppunt om het te ontgrendelen. Elk knooppunt past zijn effect toe op de bovenstaande kenmerken. De kleuren groeperen knooppunten op basis van vuurkracht, mobiliteit, overlevingsvermogen en voertuigmechanieken.",
+  "loadout-switch-no-effect": "Wisselen van uitrusting tijdens het gevecht. Geen effect op kenmerken.",
+  "title": "Upgrades van de {tank}",
+  "vehicle-mechanic-no-effect": "Voertuigmechanisme. Geen effect op kenmerken."
+}

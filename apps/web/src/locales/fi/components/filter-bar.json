@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Etsi {count} panssarivaunun joukosta",
+    "rated-tanks": "Etsi {count} rankatun panssarivaunun joukosta",
+    "videos": "Etsi {count} videon joukosta",
+    "players": "Etsi {count} pelaajaa",
+    "clans": "Etsi {count} klaania",
+    "tournaments": "Etsi {count} turnausta",
+    "teams": "Etsi {count} joukkuetta"
+  },
+  "min": "Min.",
+  "max": "Maks.",
+  "none": "Ei mitään",
+  "common-test": "Yhteisen testin muuttamat: uudet ajoneuvot ja tasapainotetut ajoneuvot",
+  "category": {
+    "standard": "Standardi",
+    "premium": "Premium",
+    "reward": "Palkkio"
+  },
+  "moe": {
+    "0": "Ei merkkiä vielä",
+    "1": "1 merkki",
+    "2": "2 merkkiä",
+    "3": "3 merkkiä"
+  },
+  "mom": {
+    "0": "Ei merkkiä vielä",
+    "1": "3. Luokka",
+    "2": "2. Luokka",
+    "3": "1. Luokka",
+    "4": "Ace Tanker"
+  }
+}

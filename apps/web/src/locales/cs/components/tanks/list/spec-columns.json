@@ -1,0 +1,162 @@
+{
+  "columns-label": "Sloupce",
+  "groups": {
+    "firepower": "Palebná síla",
+    "gun-handling": "Obsluha zbraně",
+    "mobility": "Pohyblivost",
+    "survivability": "Odolnost",
+    "other": "Jiný"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Poškození za minutu"
+    },
+    "damage": {
+      "label": "Poškození",
+      "tip": "Alpha poškození"
+    },
+    "moduleDamage": {
+      "label": "Poškození modulů"
+    },
+    "splashRadius": {
+      "label": "Poloměr výbuchu"
+    },
+    "reload": {
+      "label": "Nabití",
+      "tip": "Nabití (celého zásobníku u automatického nabíjení)"
+    },
+    "rof": {
+      "label": "Rychlost palby",
+      "tip": "Výstřelů za minutu"
+    },
+    "intraClipReload": {
+      "label": "Nabití mezi náboji",
+      "tip": "Doba mezi výstřely v zásobníku (automatické nabíjení)"
+    },
+    "penetration": {
+      "label": "Průbojnost",
+      "tip": "Průbojnost výchozího granátu (mm)"
+    },
+    "caliber": {
+      "label": "Ráže",
+      "tip": "Ráže granátu (mm)"
+    },
+    "shellVelocity": {
+      "label": "Rychlost granátu",
+      "tip": "Rychlost střely (m/s)"
+    },
+    "accuracy": {
+      "label": "Přesnost",
+      "tip": "Vydění na 100 m (nižší je lepší)"
+    },
+    "aimTime": {
+      "label": "Doba zaměření"
+    },
+    "dispMoving": {
+      "label": "Vydění při pohybu",
+      "tip": "Koeficient Vydění při pohybu"
+    },
+    "dispTankTraverse": {
+      "label": "Vydění při otáčení tanku"
+    },
+    "dispTurretTraverse": {
+      "label": "Vydění při Otáčení věže"
+    },
+    "dispAfterShot": {
+      "label": "Vydění po výstřelu"
+    },
+    "dispWhileDamaged": {
+      "label": "Vydění při poškození"
+    },
+    "gunArc": {
+      "label": "Odměr děla",
+      "tip": "Vodorovný rozsah otáčení děla"
+    },
+    "depression": {
+      "label": "Roztpyl děla / náměr",
+      "tip": "Sklon děla / náměr"
+    },
+    "speed": {
+      "label": "Rychlost (vpřed / vzad)",
+      "tip": "Maximální rychlost vpřed / vzad (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Otáčení korby"
+    },
+    "turretTraverse": {
+      "label": "Otáčení věže"
+    },
+    "enginePower": {
+      "label": "Síla",
+      "tip": "Výkon motoru (hp)"
+    },
+    "powerWeight": {
+      "label": "Síla/Hmotnost",
+      "tip": "hp na tunu"
+    },
+    "terrainHard": {
+      "label": "Tvrdý terén",
+      "tip": "Odolnost vůči terénu na tvrdém povrchu (nižší je lepší)"
+    },
+    "terrainMedium": {
+      "label": "Standardní panel"
+    },
+    "terrainSoft": {
+      "label": "Měkký terén"
+    },
+    "health": {
+      "label": "Výdrž",
+      "tip": "Zdraví"
+    },
+    "engineHealth": {
+      "label": "Zdraví motoru"
+    },
+    "engineFireChance": {
+      "label": "Šance na zapálení motoru"
+    },
+    "hullArmorFront": {
+      "label": "Pancíř korby (čelní)",
+      "tip": "Pancíř korby, čelo (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Pancíř věže (čelní)",
+      "tip": "Pancíř věže, čelo (mm)"
+    },
+    "trackArmor": {
+      "label": "Pancíř pásů"
+    },
+    "trackHealth": {
+      "label": "Výdrž pásů"
+    },
+    "trackRepairTime": {
+      "label": "Čas opravy pásů"
+    },
+    "ammoRackHealth": {
+      "label": "Odolnost bedny s municí"
+    },
+    "weight": {
+      "label": "Hmotnost"
+    },
+    "viewRange": {
+      "label": "Dohled",
+      "tip": "Dosah vidění (m)"
+    },
+    "radioRange": {
+      "label": "Dosah rádia",
+      "tip": "Dosah signálu (m)"
+    },
+    "camoStill": {
+      "label": "Maskování v klidu"
+    },
+    "camoMoving": {
+      "label": "Maskování za pohybu"
+    },
+    "camoStillFiring": {
+      "label": "Maskování při stání po výstřelu"
+    },
+    "camoMovingFiring": {
+      "label": "Maskování za pohybu po výstřelu"
+    }
+  }
+}

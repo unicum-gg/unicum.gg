@@ -1,0 +1,7 @@
+{
+  "loading": "{count} fordon på nivå {tier}, läser in deras namn…",
+  "loading-one": "{count} fordon på nivå {tier}, läser in dess namn…",
+  "and-more": "och {count} till",
+  "hint": "Klicka för att öppna dem på fliken Tanken",
+  "tier": "Nivå"
+}

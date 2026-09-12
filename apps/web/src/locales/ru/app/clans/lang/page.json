@@ -1,0 +1,6 @@
+{
+  "title": "Лучшие кланы World of Tanks на языке {language} ({region})",
+  "description": "Таблица лидеров кланов {name} в регионе {region}, указавших {language} одним из своих языков, с ранжированием по WNX.",
+  "og-title": "Лучшие кланы на языке {language}",
+  "og-subtitle": "Таблица лидеров {region}"
+}

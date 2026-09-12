@@ -1,0 +1,22 @@
+{
+  "stat": "إحصائية",
+  "periods": {
+    "total": "الإجمالي",
+    "day": "آخر 24 ساعة",
+    "week": "آخر 7 أيام",
+    "month": "آخر 30 يوم"
+  },
+  "sections": {
+    "elo": "ELO للمرتبة X ({advances} + {skirmish})",
+    "advances": "{advances} (15 ضد 15)",
+    "t10": "{skirmish} المرتبة X (7 ضد 7)",
+    "t8": "{skirmish} المرتبة VIII (7 ضد 7)",
+    "t6": "{skirmish} المرتبة VI (7 ضد 7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "معارك",
+    "winrate": "معدل الفوز"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "live": "실시간",
+  "the-vehicle-as-it-is": "현재 게임에 적용된 차량입니다.",
+  "common-test": "공통 테스트",
+  "common-test-2": "공통 테스트 {testVersion}",
+  "the-vehicle-as-the-test": "테스트 빌드에 적용된 차량입니다. 출시되지 않았으며 업데이트가 적용되기 전에 워게이밍이 내용을 변경하거나 삭제할 수 있습니다."
+}

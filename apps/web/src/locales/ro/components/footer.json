@@ -1,0 +1,25 @@
+{
+  "tagline": "Creat pentru comunitatea World of Tanks. Statistici gratuite pentru fiecare jucător, clan, tanc și hartă din EU, NA și Asia.",
+  "columns": {
+    "leaderboards": "Clasamente",
+    "tanks": "Tancuri",
+    "maps": "Hărţile",
+    "integrations": "Integrări",
+    "project": "Proiect"
+  },
+  "links": {
+    "top-tanks": "Tancuri de top",
+    "bot": "Discord bot",
+    "mcp": "Server MCP",
+    "docs": "Documentație API",
+    "badges": "Insigne",
+    "glossary": "Glossar",
+    "coverage": "Acoperire",
+    "support": "Susțineți-ne",
+    "source": "Cod sursă",
+    "status": "Stare",
+    "discord": "Discord"
+  },
+  "disclaimer": "Nu este afiliat cu Wargaming",
+  "cookies": "Gestionează cookie-urile"
+}

@@ -1,0 +1,8 @@
+{
+  "previous": "Προηγούμενη σελίδα",
+  "next": "Επόμενη σελίδα",
+  "rows-per-page": "Γραμμές ανά σελίδα",
+  "all": "Όλα",
+  "range": "{first}–{last} από {total}",
+  "page": "Σελίδα {page} / {total}"
+}

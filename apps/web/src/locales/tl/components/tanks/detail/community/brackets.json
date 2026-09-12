@@ -1,0 +1,8 @@
+{
+  "battles": "{count} mga laban",
+  "no-votes": "walang boto",
+  "rated-higher": "Mas mataas ng {stars} star ang marka rito ng mas mahuhusay na manlalaro kaysa sa iba sa server. Ginagantimpalaan nito ang pag-alam sa iyong ginagawa.",
+  "rated-lower": "Mas mababa ng {stars} star ang marka rito ng mas mahuhusay na manlalaro kaysa sa iba sa server. Nagmumukha itong magaling hanggang sa hilingin dito na gumawa ng isang bagay.",
+  "votes": "{count} boto",
+  "votes-one": "{count} boto"
+}

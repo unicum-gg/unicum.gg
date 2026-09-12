@@ -1,0 +1,21 @@
+{
+  "title": "Markeringen en meesterschap van {nickname}",
+  "excellence": {
+    "title": "Markeringen van uitmuntendheid",
+    "description": "Voertuigen op basis van de markeringen op hun kanon. Een markering is gebaseerd op een doorlopend gemiddelde: het spel berekent deze over een steeds opschuivende reeks recente gevechten, afgezet tegen de prestaties met dat voertuig in de regio.",
+    "partial": "Van {known} van de {garage} voertuigen zijn de markeringen bekend. De rest wordt aangevuld wanneer het account wordt bijgewerkt.",
+    "note": "{marked} van de {garage} voertuigen hebben een markering.",
+    "note-share": "{marked} van de {garage} voertuigen hebben een markering ({percent}% van de garage)."
+  },
+  "mastery": {
+    "title": "Marks of Mastery",
+    "description": "Voertuigen op basis van hun beste onderscheiding. Een onderscheiding is gebaseerd op één gevecht in plaats van op een gemiddelde: het spel kent deze toe op basis van de behaalde ervaring in één gevecht, afgezet tegen de scores met dat voertuig in de regio.",
+    "note": "{aces} van de {garage} voertuigen hebben de onderscheiding Ace Tanker.",
+    "note-share": "{aces} van de {garage} voertuigen hebben de onderscheiding Ace Tanker ({percent}% van de garage)."
+  },
+  "reach": {
+    "heading": "Beter spelen dan het kanon aangeeft",
+    "description": "Voertuigen waarvan de gecombineerde schade al de drempel overschrijdt voor een markering die ze nog niet hebben. Het label toont die gecombineerde schade, in de kleur van de markering waarvan de drempel wordt overschreden."
+  },
+  "none": "Geen"
+}

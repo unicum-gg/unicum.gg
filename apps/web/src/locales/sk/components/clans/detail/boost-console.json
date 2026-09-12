@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Pridať pracovný tok",
+  "boost": "Zvýšiť",
+  "each-workflow-activates-its-reserves": "Každý pracovný postup aktivuje priradené rezervy počas stanoveného časového okna, keď je v aktívnej hernej relácii dostatok členov. Funguje vo vašom účte, takže nemusíte byť online. Pridajte si ich toľko, koľko potrebujete.",
+  "n-online": "/ {count} online",
+  "officer": "Oficer",
+  "online": "Online",
+  "recent-activations": "nedávne aktivácie",
+  "reserve": "Rezerva",
+  "stronghold-boosts": "Posilnenia Pevnosti",
+  "when": "Kedy",
+  "workflow": "Pracovný tok"
+}

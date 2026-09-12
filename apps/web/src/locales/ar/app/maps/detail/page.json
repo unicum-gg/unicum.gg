@@ -1,0 +1,5 @@
+{
+  "title": "{map}، خريطة World of Tanks ({region})",
+  "description": "{map}: خريطة World of Tanks بحجم {width} × {height} م.",
+  "description-modes": "{map}: خريطة World of Tanks بحجم {width} × {height} م، تُلعب فيها {modes}."
+}

@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Random",
+    "battle_royale": "Steel Hunter",
+    "frontline": "Frontline",
+    "onslaught": "Onslaught",
+    "onslaught_night": "{onslaught} Night",
+    "grand_battle": "Grand Battle",
+    "clan_wars": "Clan Wars",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arcade",
+    "story_mode": "Story Mode",
+    "training": "Training"
+  },
+  "player-modes": {
+    "overall": "Random Battles",
+    "skirmish": "Skirmish",
+    "advances": "Advances",
+    "grand": "Grand Battles",
+    "ranked": "Ranked Battles",
+    "cw-x": "Clan Wars X",
+    "cw-viii": "Clan Wars VIII",
+    "cw-vi": "Clan Wars VI",
+    "steel-hunter": "Steel Hunter",
+    "onslaught": "Onslaught"
+  },
+  "stronghold-tiers": {
+    "advances": "Advances",
+    "t10": "Skirmish T10",
+    "t8": "Skirmish T8",
+    "t6": "Skirmish T6"
+  },
+  "stronghold-periods": {
+    "24h": "Past 24 hours",
+    "7d": "Past 7 days",
+    "30d": "Past 30 days",
+    "overall": "Overall"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Battles",
+    "winrate": "Win rate"
+  },
+  "clan-boards": {
+    "advances": "Advances",
+    "t10": "Skirmish X",
+    "t8": "Skirmish VIII",
+    "t6": "Skirmish VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Encounter",
+    "assault": "Assault",
+    "attack-defense": "Attack/Defense"
+  },
+  "map-camouflage": {
+    "summer": "Summer",
+    "winter": "Winter",
+    "desert": "Desert"
+  },
+  "map-poi": {
+    "1": "Artillery Headquarters",
+    "2": "Comms Center",
+    "3": "Observation Post"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Encounter",
+    "assault2": "Attack/Defense",
+    "comp7": "Onslaught"
+  },
+  "battle-formats": {
+    "random": "Random",
+    "clan_wars": "Clan Wars",
+    "advances": "Advances",
+    "skirmish": "Skirmish",
+    "maneuvers": "Maneuvers",
+    "onslaught": "Onslaught",
+    "tournament": "Tournament"
+  },
+  "battle-results": {
+    "victory": "Victory",
+    "defeat": "Defeat",
+    "draw": "Draw"
+  },
+  "spawn-directions": {
+    "north": "North",
+    "south": "South",
+    "east": "East",
+    "west": "West"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Upcoming",
+    "registration_started": "Registration open",
+    "registration_finished": "Registration closed",
+    "running": "In progress",
+    "finished": "Finishing",
+    "complete": "Completed"
+  },
+  "onslaught-tiers": {
+    "legend": "Legend",
+    "champion": "Champion",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Heavy",
+    "mediumTank": "Medium",
+    "lightTank": "Light",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Assault",
+    "break": "Breakthrough",
+    "support": "Support",
+    "universal": "Versatile",
+    "sniper": "Sniper",
+    "wheeled": "Wheeled"
+  },
+  "mastery-badges": {
+    "class3": "3rd Class",
+    "class2": "2nd Class",
+    "class1": "1st Class",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Random Battles",
+    "stronghold": "Stronghold",
+    "skirmish": "Skirmish",
+    "clan-wars": "Clan Wars"
+  },
+  "features": {
+    "stronghold": "Stronghold",
+    "skirmish": "Skirmish",
+    "marks-of-excellence": "Marks of Excellence",
+    "marks-of-mastery": "Marks of Mastery",
+    "personal-rating": "Personal Rating",
+    "world-of-tanks-rating": "World of Tanks Rating",
+    "common-test": "Common Test",
+    "tournaments": "Tournaments"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Marks of Excellence"
+  }
+}

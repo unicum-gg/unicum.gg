@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "单元格表示该分段玩家在该等级的战斗中的胜场，统计范围涵盖玩家至少进行过{minBattles}场战斗的所有车辆，因此反映的是实际进行这些等级对战的玩家。少于{TIERWINRATETHINCELL}场战斗的单元格会以浅色显示，因为它们的变化原因可能并非技能。颜色使用网站其他地方相同的胜率分段。",
+  "cell-no-sample": "{where}，无样本",
+  "cell-winrate": "{where}，{battles}场战斗中的{winrate}胜率",
+  "metric-band": "{metric}分段",
+  "nothing-recorded": "尚未记录针对{metric}的数据。网格每晚重建。",
+  "over-battles-from-accounts": "{players}个账号进行{battles}场战斗的{winrate}",
+  "over-n-battles": "进行{battles}场战斗",
+  "what-players-win-by-tier": "{label}玩家在各等级的胜率"
+}

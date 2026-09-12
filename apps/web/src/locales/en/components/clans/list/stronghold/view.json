@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "No data yet. Check back once clans have been refreshed.",
+  "heading": "Top <accent>{tier}</accent> clans",
+  "blurb": "{region} leaderboard, ranked by {sort} across all tracked clans in {format} (minimum {battles} battles).",
+  "blurb-period": "{region} leaderboard, ranked by {sort} across all tracked clans in {format} over the {period} (minimum {battles} battles).",
+  "format-advances": "Advances (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Top {count} {tier} clans ·"
+}

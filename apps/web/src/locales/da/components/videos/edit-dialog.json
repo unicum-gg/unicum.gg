@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Ret alt, der er forkert, inklusive køretøjet. Når du gemmer, sendes det tilbage til moderationskøen, så en video, der er live, fjernes, indtil den er godkendt igen.",
+  "correct-a-suggestion": "Ret et forslag",
+  "could-not-load-that-suggestion": "Forslaget kunne ikke indlæses. Prøv igen om et øjeblik.",
+  "link-expired": "Dette link er udløbet. Tryk på Rediger igen på kortet i Discord for at få et nyt.",
+  "loading": "Indlæser…",
+  "log-in": "Log ind",
+  "log-in-with-the-account": "Log ind med den konto, der foreslog denne video, for at rette den.",
+  "no-suggestion-with-that-id": "Der findes ikke noget forslag med dette id.",
+  "not-yours-to-correct": "Dette forslag er ikke dit at rette."
+}

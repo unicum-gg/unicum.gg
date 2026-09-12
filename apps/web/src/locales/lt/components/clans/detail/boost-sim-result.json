@@ -1,0 +1,11 @@
+{
+  "already-running": "jau veikia",
+  "in-window": "langoje",
+  "n-online": "/ {count} prisijungę",
+  "no-reserves-selected": "Atsargos nepasirinktos.",
+  "no-stock-ready": "paruoštų atsargų nėra",
+  "not-available": "nepasiekiama",
+  "threshold": "slenkstis ({online}/{min})",
+  "would-activate": "aktyvuotų",
+  "would-not-fire": "Šiuo metu jos nebūtų aktyvuotos."
+}

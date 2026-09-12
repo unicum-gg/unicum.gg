@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, зарађено {count}×",
+  "aria-not-earned": "{name}, није зарађено",
+  "no-longer-obtainable": "Више није доступно.",
+  "not-earned": "Није зарађено"
+}

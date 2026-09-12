@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import type { RegionPopulationSeries, ServerStatsRange } from "@unicum.gg/shared";
@@ -37,6 +39,9 @@ export function RegionsChart({
   regions: RegionPopulationSeries[];
   range: ServerStatsRange;
 }) {
+  const { locale } = useFormat();
+  const { t } = useTranslation("components/servers/regions-chart");
+  const { t: tRange } = useTranslation("components/servers/ranges");
   const zone = useDisplayZone();
   const config = useMemo(
     () =>
@@ -72,9 +77,7 @@ export function RegionsChart({
   if (data.length < 2) {
     return (
       <p className="flex h-56 items-center justify-center px-4 text-center text-sm text-fd-muted-foreground">
-        Not enough recorded yet for this range. It fills in as the sampling
-        continues.
-      </p>
+        {t("not-enough-recorded-yet-for")}</p>
     );
   }
 
@@ -82,7 +85,7 @@ export function RegionsChart({
     <ChartContainer
       config={config}
       className="aspect-auto h-56 w-full"
-      aria-label={`Players online per region over the last ${range}`}
+      aria-label={t("chart-label", { range: tRange(range) })}
     >
       <LineChart data={data} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
         <CartesianGrid vertical={false} strokeDasharray="3 3" opacity={0.2} />
@@ -95,20 +98,20 @@ export function RegionsChart({
           axisLine={false}
           tickMargin={8}
           minTickGap={48}
-          tickFormatter={(value: number) => formatTick(new Date(value), range, zone)}
+          tickFormatter={(value: number) => formatTick(new Date(value), range, zone, locale)}
         />
         <YAxis
           tickLine={false}
           axisLine={false}
           width={52}
-          tickFormatter={formatPlayersCompact}
+          tickFormatter={(v: number) => formatPlayersCompact(v, locale)}
         />
         <ChartTooltip
           content={
             <ChartTooltipContent
               labelFormatter={(_, payload) => {
                 const t = payload?.[0]?.payload?.t as number | undefined;
-                return t === undefined ? "" : formatMoment(new Date(t), zone);
+                return t === undefined ? "" : formatMoment(new Date(t), zone, locale);
               }}
             />
           }

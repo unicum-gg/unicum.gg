@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. Klasse",
+      "tip": "3. Klasse: Benötigte EP, um 50 % der spieler zu übertreffen"
+    },
+    "class2": {
+      "label": "2. Klasse",
+      "tip": "2. Klasse: Benötigte EP, um 80 % der spieler zu übertreffen"
+    },
+    "class1": {
+      "label": "1. Klasse",
+      "tip": "1. Klasse: Benötigte EP, um 95 % der spieler zu übertreffen"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: Benötigte EP, um 99 % der spieler zu übertreffen"
+    }
+  },
+  "rows-per-page": "Reihen pro Seite",
+  "previous-page": "Vorherige Seite",
+  "page": "Seite {current} / {totalPages}",
+  "next-page": "Nächste Seite",
+  "all": "Alle"
+}

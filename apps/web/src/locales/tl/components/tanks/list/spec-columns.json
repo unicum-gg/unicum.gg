@@ -1,0 +1,162 @@
+{
+  "columns-label": "Mga haligi",
+  "groups": {
+    "firepower": "Lakas ng apoy",
+    "gun-handling": "Pamamahala ng baril",
+    "mobility": "Kalikasan",
+    "survivability": "Kakayahang mabuhay",
+    "other": "Iba pa"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Pinsala bawat minuto"
+    },
+    "damage": {
+      "label": "Pinsala",
+      "tip": "Alpha na pinsala"
+    },
+    "moduleDamage": {
+      "label": "Pinsala sa module"
+    },
+    "splashRadius": {
+      "label": "Saklaw ng pagsabog"
+    },
+    "reload": {
+      "label": "Pag-reload",
+      "tip": "Pag-reload (kumpletong magazine para sa autoloader)"
+    },
+    "rof": {
+      "label": "Antas ng Pagpapaputok",
+      "tip": "Mga bala bawat minuto"
+    },
+    "intraClipReload": {
+      "label": "Pag-reload sa clip",
+      "tip": "Oras sa pagitan ng mga putok sa isang magazine (mga autoloader)"
+    },
+    "penetration": {
+      "label": "Pagsira",
+      "tip": "Pagsira (mm), default na bala"
+    },
+    "caliber": {
+      "label": "Kalibre",
+      "tip": "Kalibre ng Bala (mm)"
+    },
+    "shellVelocity": {
+      "label": "Bilis ng Bala",
+      "tip": "Bilis ng Bala (m/s)"
+    },
+    "accuracy": {
+      "label": "Katumpakan",
+      "tip": "Pangalat sa 100 m, mas mababa ay mas mainam"
+    },
+    "aimTime": {
+      "label": "Oras ng pagtuon"
+    },
+    "dispMoving": {
+      "label": "Pangalat habang gumagalaw",
+      "tip": "Salik ng Pangalat habang gumagalaw"
+    },
+    "dispTankTraverse": {
+      "label": "Pangalat sa pag-ikot ng tangke"
+    },
+    "dispTurretTraverse": {
+      "label": "Pangalat sa Pag-ikot ng Tore"
+    },
+    "dispAfterShot": {
+      "label": "Pangalat Pagkatapos Magpaputok"
+    },
+    "dispWhileDamaged": {
+      "label": "Pangalat Habang Napipinsala"
+    },
+    "gunArc": {
+      "label": "Saklaw ng pag-ikot ng baril",
+      "tip": "Pahalang na saklaw ng pag-ikot ng baril"
+    },
+    "depression": {
+      "label": "Pagbaba / Pagtaas ng Baril",
+      "tip": "Pagbaba / pagtaas ng baril"
+    },
+    "speed": {
+      "label": "Bilis (Pasulong / Paatras)",
+      "tip": "Pinakamataas na bilis pasulong / paatras (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Pag-ikot ng katawan"
+    },
+    "turretTraverse": {
+      "label": "Pag-ikot ng tore"
+    },
+    "enginePower": {
+      "label": "Lakas",
+      "tip": "Lakas ng Makina (hp)"
+    },
+    "powerWeight": {
+      "label": "Lakas/Timbang",
+      "tip": "hp bawat tonelada"
+    },
+    "terrainHard": {
+      "label": "Matigas na lupa",
+      "tip": "Resistensya sa lupang matigas, mas mababa ay mas mainam"
+    },
+    "terrainMedium": {
+      "label": "Katamtamang lupa"
+    },
+    "terrainSoft": {
+      "label": "Malambot na lupa"
+    },
+    "health": {
+      "label": "Buhay",
+      "tip": "Hit points"
+    },
+    "engineHealth": {
+      "label": "Tibay ng makina"
+    },
+    "engineFireChance": {
+      "label": "Tsansa ng Sunog sa makina"
+    },
+    "hullArmorFront": {
+      "label": "Baluti ng Kasko (harap)",
+      "tip": "Baluti ng harapang kasko (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Baluti ng Tore (harap)",
+      "tip": "Baluti ng harapang tore (mm)"
+    },
+    "trackArmor": {
+      "label": "Armour ng track"
+    },
+    "trackHealth": {
+      "label": "Tibay ng track"
+    },
+    "trackRepairTime": {
+      "label": "Oras ng Pagkukumpuni ng Track"
+    },
+    "ammoRackHealth": {
+      "label": "Kalusugan ng Ammo Rack"
+    },
+    "weight": {
+      "label": "Timbang"
+    },
+    "viewRange": {
+      "label": "Saklaw ng pagtingin",
+      "tip": "Saklaw ng pagtingin (m)"
+    },
+    "radioRange": {
+      "label": "Saklaw ng radyo",
+      "tip": "Saklaw ng signal (m)"
+    },
+    "camoStill": {
+      "label": "Camo habang nakahinto"
+    },
+    "camoMoving": {
+      "label": "Camo habang umaandar"
+    },
+    "camoStillFiring": {
+      "label": "Camouflage Habang Nakatigil Pagkatapos Magpaputok"
+    },
+    "camoMovingFiring": {
+      "label": "Camouflage Habang Gumagalaw Pagkatapos Magpaputok"
+    }
+  }
+}

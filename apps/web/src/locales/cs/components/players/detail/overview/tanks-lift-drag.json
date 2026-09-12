@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Zvyšování hodnocení",
+    "blurb": "Tanky, které zvyšují celkové hodnocení: jejich odebrání by hodnocení snížilo.",
+    "empty": "Žádný tank nezvyšuje celkové hodnocení."
+  },
+  "drag": {
+    "heading": "Snižování hodnocení",
+    "blurb": "Tanky, které snižují celkové hodnocení: jejich odebrání by hodnocení zvýšilo.",
+    "empty": "Žádný tank nesnižuje celkové hodnocení."
+  },
+  "if-removed": "Po odebrání: {delta}"
+}

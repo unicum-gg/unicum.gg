@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "各セルは、そのTierでのその帯の戦闘における勝利数を示します。少なくとも{minBattles}戦した全車両を対象としており、そのTierをプレイする人々がどのようにプレイしているかを表します。{TIERWINRATETHINCELL}戦未満に基づくセルは薄く表示されます。スキル以外の理由で変動するためです。色分けはサイト全体で使われている勝率帯と同じです。",
+  "cell-no-sample": "{where}、サンプルなし",
+  "cell-winrate": "{where}、{battles}戦で勝率{winrate}",
+  "metric-band": "{metric}帯",
+  "nothing-recorded": "{metric}に対する記録はまだありません。グリッドは毎晩再構築されます。",
+  "over-battles-from-accounts": "{players}アカウントの{battles}戦における{winrate}",
+  "over-n-battles": "{battles}戦における",
+  "what-players-win-by-tier": "{label}プレイヤーがTierごとに勝ち取るもの"
+}

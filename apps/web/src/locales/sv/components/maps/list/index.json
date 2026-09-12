@@ -1,0 +1,9 @@
+{
+  "all": "Alla",
+  "camouflage-map": "{camouflage}-karta",
+  "modes": "{count, plural, one {# läge} other {# lägen}}",
+  "no-maps-match-your-filters": "Inga kartor matchar dina filter.",
+  "search": "Hitta bland {count} kartor",
+  "search-label": "Hitta kartor",
+  "special-map": "Specialkarta"
+}

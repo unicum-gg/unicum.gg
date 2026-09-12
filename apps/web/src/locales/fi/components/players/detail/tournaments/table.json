@@ -1,0 +1,12 @@
+{
+  "roster-of": "Kokoonpano: {roster}",
+  "date": "Päivämäärä",
+  "tournament": "Turnaus",
+  "mode": "Tila",
+  "tier": "Taso",
+  "format": "Muoto",
+  "team": "Joukkue",
+  "result": "Tulokset",
+  "team-captain": "Tiimin kapteeni",
+  "registered-and-captained-this-team": "Ilmoittautui ja toimi tämän joukkueen kapteenina"
+}

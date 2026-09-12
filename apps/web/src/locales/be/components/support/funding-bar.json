@@ -1,0 +1,18 @@
+{
+  "caught-up": "Усё цалкам пакрыта, дзякуй. Усё дадатковае ідзе на большую прапускную здольнасць і новыя функцыі.",
+  "covered-label": "Пакрыта",
+  "covered-sentence": "Падтрымка пакрыла {received} з {spent}, выдаткаваных дагэтуль.",
+  "days-out-of-pocket": "{days} дні з уласнай кішэні",
+  "from-supporter-one": "ад {count} прыхільніка",
+  "from-supporters": "ад {count} прыхільнікаў",
+  "gap-growing": "Яшчэ {amount}/мес. спыніць рост дэфіцыту.",
+  "goal": "мэта {amount}",
+  "of-that-total": "ад гэтай сумы",
+  "pledges-cover": "Цяпер абяцаныя ўнёскі пакрываюць штомесячны рахунак.",
+  "raised-amount": "Забрана {amount}",
+  "raised-label": "Забрана",
+  "run-at-a-loss": "{name} працуе са стратамі з {since}.",
+  "run-rate": "Штомесячны тэмп: абяцана {pledged}/мес. супраць {cost}/мес. на працу.",
+  "spent-since-launch": "Выдаткавана з моманту запуску",
+  "to-catch-up": "{amount}, каб цалкам ліквідаваць адставанне."
+}

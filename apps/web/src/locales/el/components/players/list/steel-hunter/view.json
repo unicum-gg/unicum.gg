@@ -1,0 +1,13 @@
+{
+  "heading": "Κορυφαίοι παίκτες στη <accent>{mode}</accent>",
+  "intro": "Η {mode} είναι η λειτουργία battle royale του World of Tanks. Ο πίνακας κατάταξης της {region}, ταξινομημένος κατά HR, με ελάχιστο 100 μάχες {mode}.",
+  "board": "Κορυφαίοι {count} παίκτες στη {mode}",
+  "columns": {
+    "player": "Παίχτης",
+    "battles": "Μάχες",
+    "survival": "Επιβίωση",
+    "survival-percent": "Επιβίωση %",
+    "damage": "Μέση ζημιά"
+  },
+  "scale-description": "Όρια χρώματος για τον πίνακα {mode}, βαθμονομημένα στον πληθυσμό παικτών με τουλάχιστον 100 μάχες {mode}."
+}

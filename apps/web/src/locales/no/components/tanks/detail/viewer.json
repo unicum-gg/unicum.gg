@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visuell",
+    "collision": "Kollisjon",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Sentrer kjøretøyet",
+    "off": "Flytt det tilbake fra midten"
+  },
+  "hull-down": {
+    "on": "Senk kjøretøyet",
+    "off": "Rett opp kjøretøyet"
+  },
+  "tracks": {
+    "on": "Kjør beltene",
+    "off": "Stopp beltene"
+  },
+  "textures": {
+    "on": "Teksturer i høy oppløsning",
+    "off": "Standard teksturer"
+  },
+  "reset": "Nullstill visning",
+  "style": "Velg en stil",
+  "style-worn": "Stil: {name}",
+  "search-styles": "Søk stiler",
+  "colours": "Hva fargene betyr",
+  "cinematic": {
+    "off": "Filmisk kamera: av",
+    "auto": "Filmisk kamera: når det står uten aktivitet",
+    "on": "Filmisk kamera: alltid"
+  },
+  "open-tank": "Åpne en annen stridsvogn",
+  "open-tank-placeholder": "Åpne tank...",
+  "more-actions": "Flere handlinger",
+  "marks-meaning": {
+    "0": "Ingen dyktighetsmerker",
+    "1": "Ett merke: foran 65 % av spillerne på denne stridsvognen",
+    "2": "To merker: foran 85 %",
+    "3": "Tre merker: foran 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Fyll vinduet",
+      "leave": "Tilbake til siden"
+    },
+    "screen": {
+      "enter": "Fyll skjermen",
+      "leave": "Avslutt fullskjerm"
+    }
+  },
+  "marks-count": {
+    "0": "Ingen dyktighetsmerker",
+    "one": "1 dyktighetsmerke",
+    "other": "{count} dyktighetsmerker"
+  },
+  "compare-tank": "Sammenlikn med en annen stridsvogn",
+  "compare-tank-placeholder": "Sammenlign med...",
+  "view-tooltips": {
+    "visual": "Stridsvognen slik spillet tegner den",
+    "collision": "Hvor tykk hver plate er",
+    "live": "Hva den valgte granaten ville gjort"
+  },
+  "cinematic-tooltips": {
+    "off": "Filmisk kamera: av, visningen står stille",
+    "auto": "Filmisk kamera: starter etter 30 sekunder uten aktivitet",
+    "on": "Filmisk kamera: alltid, fra øyeblikket du slipper"
+  }
+}

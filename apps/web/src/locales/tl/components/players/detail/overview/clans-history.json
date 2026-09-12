@@ -1,0 +1,12 @@
+{
+  "clans-history": "Kasaysayan ng mga klano ni {nickname}",
+  "clans-in-clans": "{totalClans} mga klano · {timeInClansSeconds} sa mga klano",
+  "current": "kasalukuyan",
+  "duration": "Tagal",
+  "from": "Mula",
+  "name": "Pangalan",
+  "no-clan-history": "Walang kasaysayan ng klano.",
+  "role": "Papel",
+  "tag": "Tag",
+  "to": "Sa"
+}

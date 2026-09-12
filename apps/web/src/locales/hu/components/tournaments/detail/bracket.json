@@ -1,0 +1,7 @@
+{
+  "group": "{order}. csoport",
+  "n-teams": "{count} csapat",
+  "pts": "Pontok",
+  "team": "Csapat",
+  "top-n-advance": ", a legjobb {count} továbbjut"
+}

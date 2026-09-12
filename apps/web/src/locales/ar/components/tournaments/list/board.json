@@ -1,0 +1,14 @@
+{
+  "date": "التاريخ",
+  "featured-tournament": "بطولة مميزة",
+  "format": "تنسيق",
+  "mode": "وضع",
+  "no-tournament-matches-the-current": "لا توجد بطولة تطابق المرشحات الحالية.",
+  "nothing-here-right-now-wargaming": "لا يوجد شيء هنا الآن. تفتح Wargaming بطولات جديدة يوميًا، لذا سيُملأ هذا القسم مجددًا تلقائيًا.",
+  "prize": "جائزة",
+  "region-tournaments": "بطولات {region} ({count})",
+  "status": "حالة",
+  "teams": "الفرق",
+  "tier": "المستوى",
+  "tournament": "بطولة"
+}

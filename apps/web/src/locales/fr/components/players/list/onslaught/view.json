@@ -1,0 +1,35 @@
+{
+  "heading": "Meilleurs joueurs en <accent>{mode}</accent>",
+  "intro": "Le mode {mode} est le mode classé compétitif en 7 contre 7 de World of Tanks, réservé aux véhicules de rang X. Voici le classement {region}, directement issu du classement officiel du jeu.",
+  "season": {
+    "range": "Du {start} au {end}",
+    "final": "classement final",
+    "live": "saison en cours",
+    "updated": "mis à jour {when}"
+  },
+  "board": "Les {count} meilleurs joueurs de {mode}",
+  "columns": {
+    "player": "Joueur",
+    "rank": "Rang",
+    "battles": "Batailles",
+    "rating": "Points de rang"
+  },
+  "alias": "(sous le nom {nickname})",
+  "ranks": {
+    "title": "Rangs",
+    "meaning": "Signification",
+    "tier": "Niveau",
+    "intro": "Vous gravissez les rangs du mode {mode} en remportant des batailles : chaque victoire rapporte des points de classement selon vos performances. {champion} est le rang le plus élevé que vous pouvez atteindre uniquement avec des points, et l’atteindre vous fait entrer dans le classement. Le rang {legend} n’a pas de seuil fixe : il regroupe les joueurs les mieux classés ayant atteint le rang {champion}, son seuil évolue donc selon le niveau des participants (en cas d’égalité, le nombre de batailles jouées départage les joueurs). Les seuils exacts pour les rangs {legend} et {champion} sont ceux de la saison en cours et sont indiqués dans le classement.",
+    "legend-blurb": "Les joueurs les mieux classés parmi ceux ayant atteint le rang {champion}. À chaque saison, le jeu limite ce rang à une position définie dans le classement, sa taille varie donc selon la saison et la région, plutôt que de fixer un nombre de points à atteindre. Si vous passez sous le dernier joueur au rang {legend}, vous redescendez au rang {champion}.",
+    "champion-blurb": "Le rang le plus élevé que vous pouvez atteindre grâce aux points de classement, et celui qui donne accès au classement. Tout joueur figurant au classement a au moins atteint le rang {champion}."
+  },
+  "race": {
+    "title-live": "Ce qu’il faut actuellement",
+    "title-ended": "Bilan de la saison",
+    "legend-cutoff": "Seuil de {legend}",
+    "champion-cutoff": "Seuil de {champion}",
+    "ranked-players": "Joueurs classés",
+    "rating-points": "points de rang",
+    "rank-cutoffs": "Seuils de rang"
+  }
+}

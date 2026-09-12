@@ -1,0 +1,4 @@
+{
+  "compare-the-live-and-common": "เปรียบเทียบเวอร์ชันสดกับการทดสอบทั่วไป",
+  "compare-live-against-common-test": "เปรียบเทียบเวอร์ชันสดกับการทดสอบทั่วไป {testVersion}"
+}

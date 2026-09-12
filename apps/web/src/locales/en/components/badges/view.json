@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} leaderboard",
+  "carried-beside-a-clan-tag": "Carried beside a clan tag. A rank crest is a place in a competition: the number on it is that place, its colour says which board. Ratings earn none, because being high on WN8 is not something a clan wins.",
+  "clan-badges": "Clan badges",
+  "clan-board": {
+    "name": "{board}, top {rank}",
+    "how": "A place in the top {rank} of the {board}. Held while the clan holds the place, and lost when it does not."
+  },
+  "clan-overflow": "A clan holding more than three places folds the rest into a {plus} crest, best first, so the tag stays readable. Hovering it names them.",
+  "featured-tournament-winner": {
+    "name": "Featured tournament winner",
+    "how": "The same, won at an event Wargaming flags as featured. Gold instead of steel, exactly as on the player side."
+  },
+  "heading": "Every {badge} and how to earn it",
+  "heading-accent": "badge",
+  "marks-carried-beside-a-nickname": "Marks carried beside a nickname wherever it appears on {NAME}: leaderboards, clan rosters, search, tournament brackets.",
+  "n-badges": "{count} badges",
+  "onslaught-champion": {
+    "name": "Onslaught Champion",
+    "how": "Reached the Champion rank in Onslaught, which is what it takes to appear on the {standings} at all. Kept afterwards: a rating that falls back below the bar takes the place, not the fact that it was held."
+  },
+  "onslaught-legend": {
+    "name": "Onslaught Legend",
+    "how": "Held a place inside the season’s Legend cutoff, which is a position rather than a score: only so many exist at once, and the bar is judged against the season it was held in. Violet instead of steel blue, the colour the standings themselves paint Legend."
+  },
+  "player-badges": "Player badges",
+  "player-overflow": "A player carrying more than three folds the rest into a {plus} crest, in the order above, so a nickname stays readable in a table. Hovering it names them, and each one still links where its own crest did.",
+  "ranked-standings": "ranked standings",
+  "streamer": {
+    "name": "Streamer",
+    "how": "A Twitch channel linked to the account. Connect Twitch on your own profile to confirm it, and the crest links to your channel. It shows whether or not you are live."
+  },
+  "streamer-who-is-on-air": "A streamer who is on air also carries a red LIVE pill. That one is not earned and not kept: it appears when the stream starts and goes when it ends, so it is never folded away.",
+  "support-subscription": "support subscription",
+  "supporter": {
+    "name": "Supporter"
+  },
+  "supporter-note": "An active {link}, kept public. Supporters who choose to stay anonymous carry no badge, by their own choice.",
+  "the-marks-a-player-or": "The marks a player or a clan can carry on {NAME}, what each one says, and exactly what it takes to get it.",
+  "tournament-winner": {
+    "name": "Tournament winner",
+    "how": "A team attributed to the clan won a tournament. Wargaming records teams and accounts, never clans, so the attribution is recovered by matching each roster against clan membership as it stood on the day it was played."
+  },
+  "verified": {
+    "name": "Verified",
+    "how": "The owner has signed in with their Wargaming.net ID and connected this account. Signing in is the whole requirement, and it costs nothing."
+  }
+}

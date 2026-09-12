@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname} nejaušo kauju statistika",
+  "progression": "{nickname} {metricLabel} attīstība",
+  "solid-line-is-overall-matches": "Nepārtrauktā rinda ir kopējais {metricLabel} (atbilst iepriekš redzamajai kolonnai Kopā), kas lēnām mainās, uzkrājoties jaunām kaujām. Pārtrauktā rinda ir katras sesijas {metricLabel2}, kas aprēķināts no kaujām, kuras spēlētas kopš iepriekšējā momentuzņēmuma. Tā rāda labu un sliktu spēļu sērijas. Rindas krāsa atbilst vērtējuma līmenim.",
+  "tanks-shaping-s-rating": "Tanki, kas veido {nickname} vērtējumu",
+  "tanks": "{nickname} tvertnes",
+  "stats": "{nickname} {strongholdLabel} statistika"
+}

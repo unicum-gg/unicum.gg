@@ -1,4 +1,5 @@
 import { AUTH_REGION_COOKIE } from "@unicum.gg/shared";
+import { LOCALE_COOKIE } from "@/lib/translations";
 
 const STORAGE = {
   LOCAL_STORAGE: {
@@ -23,6 +24,12 @@ const STORAGE = {
   },
   COOKIES: {
     REGION: "unicum.region",
+    // Interface language. Written by the proxy on every localized request and
+    // by the language menu, so a reader who once picked one lands on it from a
+    // bare URL afterwards. Distinct from REGION (the server whose data is being
+    // read) and from AUTH_REGION (where the player's account lives): a French
+    // reader on the NA leaderboards is an ordinary combination.
+    LOCALE: LOCALE_COOKIE,
     // Region of the player's Wargaming ACCOUNT, written by the WG callback once
     // a login has actually been verified. Distinct from REGION, which is only
     // the data the reader is browsing: a NA player reading EU clans logs in on

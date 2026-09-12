@@ -1,0 +1,6 @@
+{
+  "active-until": "{tz} tarihine kadar aktif",
+  "n-left": "{count} kaldı",
+  "no-reserves-in-stock-right": "Şu anda stokta rezerv yok.",
+  "reserves-to-activate": "Etkinleştirilecek rezervler"
+}

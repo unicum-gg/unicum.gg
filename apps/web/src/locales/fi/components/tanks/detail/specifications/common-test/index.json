@@ -1,0 +1,7 @@
+{
+  "live": "Lähetä",
+  "the-vehicle-as-it-is": "Ajoneuvo sellaisena kuin se on pelissä juuri nyt.",
+  "common-test": "Yhteinen testi",
+  "common-test-2": "Yhteinen testi {testVersion}",
+  "the-vehicle-as-the-test": "Ajoneuvo sellaisena kuin testiversio sen sisältää. Ei julkaistu. Wargaming voi vielä muuttaa tai poistaa mitä tahansa tästä ennen päivityksen julkaisua."
+}

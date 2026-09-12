@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import { ClanName } from "@/components/entity/clan-name";
@@ -30,13 +31,14 @@ import {
 } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 /**
  * A board entry carrying the rank it holds in the server ranking, so the #
@@ -69,14 +71,18 @@ function SortableHead({
       type="button"
       onClick={() => onSort(sortKey)}
       className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+        "inline-flex cursor-pointer items-center gap-1.5 max-w-full min-w-0 font-medium select-none hover:text-foreground",
         active ? "text-foreground" : "",
       )}
     >
-      {children}
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
       <Icon
         weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
       />
     </button>
   );
@@ -109,6 +115,9 @@ export function StrongholdTable({
   onSort: (s: StrongholdSort) => void;
   rows: RankedStrongholdEntry[];
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/clans/list/stronghold/table");
+  const { t: tCol } = useTranslation("components/columns");
   return (
     <TooltipProvider delayDuration={150}>
       <Table
@@ -122,48 +131,43 @@ export function StrongholdTable({
         <TableHeader>
           <TableRow>
             <TableHead className="w-12 text-center!">#</TableHead>
-            <TableHead>Clan</TableHead>
-            <TableHead className="w-24 text-center!">Members</TableHead>
+            <TableHead>{tCol("clan")}</TableHead>
+            <TableHead className="w-24 text-center!">{tCol("members")}</TableHead>
             <SortableHead
               sortKey={StrongholdSort.Elo}
               active={sort === StrongholdSort.Elo}
               onSort={onSort}
               className="w-24"
             >
-              ELO
-            </SortableHead>
+              {t("elo")}</SortableHead>
             <SortableHead
               sortKey={StrongholdSort.Battles}
               active={sort === StrongholdSort.Battles}
               onSort={onSort}
               className="w-24"
             >
-              Battles
-            </SortableHead>
+              {t("battles")}</SortableHead>
             <SortableHead
               sortKey={StrongholdSort.Winrate}
               active={sort === StrongholdSort.Winrate}
               onSort={onSort}
               className="w-28"
             >
-              WR
-            </SortableHead>
+              {t("wr")}</SortableHead>
             <SortableHead
               sortKey={StrongholdSort.Rating}
               active={sort === StrongholdSort.Rating}
               onSort={onSort}
               className="w-24"
             >
-              SR
-            </SortableHead>
+              {t("sr")}</SortableHead>
             <SortableHead
               sortKey={StrongholdSort.RatingBattles}
               active={sort === StrongholdSort.RatingBattles}
               onSort={onSort}
               className="w-24"
             >
-              SRB
-            </SortableHead>
+              {t("srb")}</SortableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -173,8 +177,7 @@ export function StrongholdTable({
                 colSpan={8}
                 className="px-4 py-12 text-center text-sm text-muted-foreground"
               >
-                No clan matches the current filters.
-              </TableCell>
+                {t("no-clan-matches-the-current")}</TableCell>
             </TableRow>
           )}
           {rows.map((entry) => {
@@ -222,13 +225,13 @@ export function StrongholdTable({
                   />
                 </TableCell>
                 <TableCell className="text-center text-muted-foreground tabular-nums">
-                  {intFmt.format(entry.membersCount)}
+                  {num(INT_FORMAT).format(entry.membersCount)}
                 </TableCell>
                 <TableCell className="text-right font-semibold tabular-nums">
-                  {entry.elo !== null ? intFmt.format(entry.elo) : "—"}
+                  {entry.elo !== null ? num(INT_FORMAT).format(entry.elo) : "—"}
                 </TableCell>
                 <TableCell className="text-right font-semibold tabular-nums">
-                  {intFmt.format(entry.battles)}
+                  {num(INT_FORMAT).format(entry.battles)}
                 </TableCell>
                 <TableCell
                   className={cn(
@@ -239,7 +242,7 @@ export function StrongholdTable({
                       ],
                   )}
                 >
-                  {winrate !== null ? pctFmt.format(winrate) : "—"}
+                  {winrate !== null ? num(PCT_FORMAT).format(winrate) : "—"}
                 </TableCell>
                 <TableCell
                   className={cn(
@@ -250,7 +253,7 @@ export function StrongholdTable({
                       ],
                   )}
                 >
-                  {entry.sr !== null ? intFmt.format(entry.sr) : "—"}
+                  {entry.sr !== null ? num(INT_FORMAT).format(entry.sr) : "—"}
                 </TableCell>
                 <TableCell
                   className={cn(
@@ -261,7 +264,7 @@ export function StrongholdTable({
                       ],
                   )}
                 >
-                  {entry.srb !== null ? intFmt.format(entry.srb) : "—"}
+                  {entry.srb !== null ? num(INT_FORMAT).format(entry.srb) : "—"}
                 </TableCell>
               </TableRow>
             );

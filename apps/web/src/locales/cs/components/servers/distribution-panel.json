@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Porovnat, jak si vedou hráči v regionu {region}",
+  "median-n": "medián {value}",
+  "metric-rating": "Hodnocení {metric}",
+  "tracked-accounts-with-at-least": "Každý z {players} sledovaných účtů má alespoň {minBattles} Bitev. Barvy odpovídají stejným pásmům, která web používá všude jinde.",
+  "win-rate": "Míra výher",
+  "win-rate-distribution-across-the-region-s-tr": "Míra výher: rozložení mezi sledovanými hráči v regionu"
+}

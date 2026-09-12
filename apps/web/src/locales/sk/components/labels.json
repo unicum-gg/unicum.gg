@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Čakám na prvý snímok",
+    "hidden": "Skryté spoločnosťou Wargaming",
+    "active_24h": "Aktívny za posledných 24 h",
+    "active_7d": "Aktívny za posledných 7 dní",
+    "recent_30d": "Aktívny za posledných 30 dní",
+    "recent_90d": "Aktívny za posledných 90 dní",
+    "dormant_1y": "Nečinný menej ako 1 rok",
+    "inactive": "Neaktívny viac ako 1 rok"
+  },
+  "rating-hype": {
+    "overrated": "Nadhodnotený",
+    "fair": "Správne hodnotený",
+    "underrated": "Podhodnotený"
+  },
+  "rating-consensus": {
+    "agreed": "Široké zhodnutie",
+    "mixed": "Rôzne názory",
+    "divisive": "K rozdielnym názorom"
+  },
+  "rating-axes": {
+    "overall": "Celkovo",
+    "fun": "Zábava",
+    "firepower": "Palebná sila",
+    "armour": "Pancierovanie",
+    "mobility": "Pohybovosť",
+    "gunHandling": "Manipulácia s kanónom",
+    "concealment": "Utajenie",
+    "beginnerFriendliness": "Priateľský k začiatočníkom",
+    "versatility": "Univerzálnosť"
+  },
+  "rating-axis-hints": {
+    "overall": "Aký dobrý je tento tank celkovo?",
+    "fun": "Ako veľmi vás baví hrať s týmto tankom?",
+    "firepower": "Alfa poškodenie, poškodenie za minútu a prieraznosť.",
+    "armour": "Ako dobre odráža strely s ukrytou korbou a na otvorenom priestranstve.",
+    "mobility": "Rýchlosť, zrýchlenie a zatáčanie.",
+    "gunHandling": "Čas zamerania, rozptyl a presnosť za pohybu.",
+    "concealment": "Maskovanie a dohľad.",
+    "beginnerFriendliness": "Ako veľmi odpúšťa chyby, keď sa ešte len učíte.",
+    "versatility": "Osvedčí sa na každej mape a v každom tíme?"
+  },
+  "voter-brackets": {
+    "unknown": "Neohodnotené",
+    "learning": "Učí sa",
+    "average": "Priemer",
+    "strong": "Silný",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vozidlá",
+    "gunnery": "Dostrel",
+    "armor": "Pancierovanie",
+    "mobility": "Pohybovosť",
+    "vision": "Vízia",
+    "crew": "Posadka",
+    "progression": "Pokrok",
+    "economy": "Ekonomika",
+    "ratings": "Hodnotenia",
+    "statistics": "Štatistiky",
+    "modes": "Bitkové módy",
+    "tactics": "Taktiky",
+    "slang": "Slang"
+  }
+}

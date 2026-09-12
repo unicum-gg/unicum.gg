@@ -1,0 +1,12 @@
+{
+  "aria-build": "Leia no cliente do Teste Comum, compilação {version}",
+  "aria-changes": "Alterado pelo Teste Comum: {changes} características",
+  "aria-described": "Teste Comum: {description}",
+  "aria-vehicle": "veículo do Teste Comum",
+  "common-test": "Teste Comum",
+  "common-test-build": "Teste Comum {version}",
+  "tip-build": "{label} · estes são os valores da compilação de teste, e a Wargaming ainda pode alterá-los antes do lançamento da atualização",
+  "tip-changes": "Alterações do Teste Comum neste veículo: {changes, plural, one {# característica} other {# características}}",
+  "tip-described": "Teste Comum · {description}",
+  "tip-vehicle": "Teste Comum · ainda não lançado, portanto não possui estatísticas de batalha e suas características ainda podem mudar"
+}

@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "беттегі жолдар",
+  "previous-page": "алдыңғы бет",
+  "page": "{current} / {totalPages} бет",
+  "next-page": "келесі бет",
+  "all": "Барлығы"
+}

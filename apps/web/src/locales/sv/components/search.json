@@ -1,0 +1,27 @@
+{
+  "placeholder": "Sök spelare, klaner, stridsvagnar, kartor eller termer",
+  "type": "Hitta typ",
+  "types": {
+    "all": "Alla",
+    "players": "Spelare",
+    "clans": "Klaner",
+    "tanks": "Tanken",
+    "maps": "Kartor",
+    "glossary": "Ordlista"
+  },
+  "sections": {
+    "players": "Spelare",
+    "clans": "Klaner",
+    "tanks": "Tanken",
+    "maps": "Kartor",
+    "glossary": "Ordlista",
+    "recent": "Senaste",
+    "favorites": "Favoriter"
+  },
+  "searching": "Söker…",
+  "errored": "Något gick fel. Försök igen.",
+  "empty": "Inga resultat funna",
+  "remove-recent": "Ta bort från senaste",
+  "add-favorite": "Lägg till favoriter",
+  "remove-favorite": "Ta bort från favoriter"
+}

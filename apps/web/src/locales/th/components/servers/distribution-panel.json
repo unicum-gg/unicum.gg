@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "ผู้เล่นใน {region} เปรียบเทียบกันอย่างไร",
+  "median-n": "ค่ามัธยฐาน {value}",
+  "metric-rating": "คะแนนประเมิน {metric}",
+  "tracked-accounts-with-at-least": "บัญชีที่ติดตาม {players} บัญชี มีการรบอย่างน้อย {minBattles} ครั้ง สีใช้ช่วงเดียวกับที่เว็บไซต์ใช้ในส่วนอื่นทั้งหมด",
+  "win-rate": "อัตราชนะ",
+  "win-rate-distribution-across-the-region-s-tr": "การกระจายอัตราชนะของผู้เล่นในภูมิภาคที่ติดตาม"
+}

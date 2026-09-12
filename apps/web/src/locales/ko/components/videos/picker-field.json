@@ -1,0 +1,14 @@
+{
+  "clan": "클랜",
+  "clear-the-field": "{label} 지우기",
+  "credited-on-the-clan-s": "클랜 자체 페이지에 크레딧이 표시됩니다.",
+  "none": "없음",
+  "optional": "(선택 사항)",
+  "pick-the-vehicle": "차량 선택",
+  "search-for-a-clan": "클랜 검색",
+  "search-for-a-vehicle": "차량 검색",
+  "search-tank": "탱크 검색...",
+  "tank": "탱크",
+  "tank-hint-optional": "전술은 지도에 연결되므로 영상이 해당 차량과도 관련된 경우에만 차량 이름을 지정할 가치가 있습니다.",
+  "tank-hint-required": "무작위 전투는 플레이한 차량을 기준으로 조회됩니다."
+}

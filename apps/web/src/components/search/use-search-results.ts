@@ -21,6 +21,7 @@ import {
   previousOf,
 } from "@/components/search/row-model";
 import { mergeSearchChunks } from "@/lib/search-merge";
+import { useLocale } from "@onruntime/translations/react";
 import { unicum } from "@/services/sdk";
 import {
   SearchSource,
@@ -76,6 +77,7 @@ export function useSearchResults({
    * the keyboard highlight back on the first row. */
   onFirstResults: () => void;
 }) {
+  const { locale } = useLocale();
   const [players, setPlayers] = useState<Outcome<SearchPlayerResult> | null>(
     null,
   );
@@ -195,7 +197,12 @@ export function useSearchResults({
           // abort signal, so a superseded answer is dropped on arrival rather
           // than cancelled in flight — it costs one local request, and going
           // around the SDK to save it is not allowed.
-          const { results } = await unicum.glossary.search(trimmedQuery);
+          // The glossary is prose, not proper nouns, so the search matches and
+          // answers in the reader's own language.
+          const { results } = await unicum.glossary.search({
+            q: trimmedQuery,
+            language: locale,
+          });
           if (cancelled) return;
           setGlossary({
             status: "ok",
@@ -216,7 +223,7 @@ export function useSearchResults({
       cancelled = true;
       clearTimeout(timer);
     };
-  }, [trimmedQuery, minQueryLength, wantGlossary]);
+  }, [trimmedQuery, minQueryLength, wantGlossary, locale]);
 
   const playersSection = useMemo(
     () => deriveSection(wantPlayers, trimmedQuery, minQueryLength, players),

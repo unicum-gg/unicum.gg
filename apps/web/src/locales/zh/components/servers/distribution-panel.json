@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "{region}玩家对比",
+  "median-n": "中位数 {value}",
+  "metric-rating": "{metric}评分",
+  "tracked-accounts-with-at-least": "{players}个已追踪账号，至少进行过{minBattles}场战斗。颜色分段与网站其他地方使用的相同。",
+  "win-rate": "胜率",
+  "win-rate-distribution-across-the-region-s-tr": "该地区已追踪玩家的胜率分布"
+}

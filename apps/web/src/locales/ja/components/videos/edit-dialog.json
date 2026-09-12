@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "車両を含め、間違っているものはすべて変更してください。保存すると再びモデレーションキューに送られるため、公開中の動画は再承認されるまで非公開になります。",
+  "correct-a-suggestion": "提案を修正",
+  "could-not-load-that-suggestion": "その提案を読み込めませんでした。しばらくしてからもう一度お試しください。",
+  "link-expired": "このリンクは期限切れです。Discordのカードで「編集」をもう一度押して、新しいリンクを取得してください。",
+  "loading": "読み込み中…",
+  "log-in": "ログイン",
+  "log-in-with-the-account": "この動画を提案したアカウントでログインして修正してください。",
+  "no-suggestion-with-that-id": "そのIDの提案はありません。",
+  "not-yours-to-correct": "この提案を修正できるのはあなたではありません。"
+}

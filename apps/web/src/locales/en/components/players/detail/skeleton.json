@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname}’s random battles stats",
+  "progression": "{nickname}’s {metricLabel} progression",
+  "solid-line-is-overall-matches": "Solid line is overall {metricLabel} (matches the Total column above), drifting slowly as new battles accumulate. Dashed line is per-session {metricLabel2}, computed from the battles played since the previous snapshot. It shows hot and cold streaks. Line color follows the rating tier.",
+  "tanks-shaping-s-rating": "Tanks shaping {nickname}’s rating",
+  "tanks": "{nickname}’s tanks",
+  "stats": "{nickname}’s {strongholdLabel} stats"
+}

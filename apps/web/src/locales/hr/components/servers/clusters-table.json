@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Još nema zabilježenih klastera.",
+  "server": "Server",
+  "online": "Na mreži",
+  "share": "Dijeli",
+  "peak": "Maksimum ({label})",
+  "average": "Prosjek ({label})",
+  "not-reported": "Nije prijavljeno",
+  "total": "Ukupno"
+}

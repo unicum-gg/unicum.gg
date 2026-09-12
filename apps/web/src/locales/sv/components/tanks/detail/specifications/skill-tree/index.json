@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Klicka på en nod som går att nå för att låsa upp den. Varje nod tillämpar sin effekt på egenskaperna ovan. Färgerna grupperar noderna efter eldkraft, rörlighet, överlevnadsförmåga och fordonsmekanik.",
+  "loadout-switch-no-effect": "Byte av utrustning under strid. Ingen effekt på egenskapen.",
+  "title": "Uppgraderingar för {tank}",
+  "vehicle-mechanic-no-effect": "Fordonsmekanik. Ingen effekt på egenskapen."
+}

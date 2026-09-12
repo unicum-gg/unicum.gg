@@ -1,0 +1,6 @@
+{
+  "all-time-record": "Visu laiku rekords",
+  "average-last": "Vidējais, pēdējās {label}",
+  "low-last": "Zemākais, pēdējās {label}",
+  "peak-last": "Maksimums, pēdējās {label}"
+}

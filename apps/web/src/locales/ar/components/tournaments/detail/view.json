@@ -1,0 +1,11 @@
+{
+  "closes": "إغلاق {when}",
+  "map-pool": "مجموعة الخرائط",
+  "place": "المركز",
+  "prize": "جائزة",
+  "prizes": "جوائز",
+  "qualified": "المتأهلون ({count})",
+  "register": "تسجيل",
+  "tournaments": "بطولات",
+  "winner": "{count, plural, zero {فائزون} one {فائز} two {فائزان} few {فائزون} many {فائزون} other {فائز}}"
+}

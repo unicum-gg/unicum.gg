@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "아직 세션이 없습니다. 이 계정이 전투를 플레이한 상태로 두 번 샘플링되면 세션이 표시됩니다. 플레이하면 자동으로 진행됩니다.",
+  "bar-height-is-battles-played": "막대 높이는 플레이한 전투 수이며, 색상은 해당 {granularity}의 {metric}입니다. 다른 곳에서 사이트가 사용하는 것과 같은 구간을 적용합니다.",
+  "title": "{nickname}의 세션",
+  "title-count": "{nickname}의 세션 ({count})",
+  "granularity": {
+    "day": "일",
+    "week": "주",
+    "month": "월",
+    "daily": "일일",
+    "weekly": "주간",
+    "monthly": "월간"
+  },
+  "week-of": "{date}이 포함된 주"
+}

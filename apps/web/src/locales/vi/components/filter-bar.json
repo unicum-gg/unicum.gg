@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Tìm trong số {count} xe tăng",
+    "rated-tanks": "Tìm trong số {count} xe tăng được đánh giá",
+    "videos": "Tìm trong số {count} video",
+    "players": "Tìm {count} người chơi",
+    "clans": "Tìm {count} Clan",
+    "tournaments": "Tìm {count} giải đấu",
+    "teams": "Tìm {count} đội"
+  },
+  "min": "Tối thiểu",
+  "max": "Tối đa",
+  "none": "Không có",
+  "common-test": "Được thay đổi bởi Kiểm tra chung: xe tăng mới và xe tăng được cân bằng lại",
+  "category": {
+    "standard": "Tiêu chuẩn",
+    "premium": "Premium",
+    "reward": "Phần thưởng"
+  },
+  "moe": {
+    "0": "Chưa có dấu hiệu",
+    "1": "1 điểm",
+    "2": "2 điểm",
+    "3": "3 điểm"
+  },
+  "mom": {
+    "0": "Chưa có huy hiệu",
+    "1": "Hạng 3",
+    "2": "Hạng 2",
+    "3": "Hạng 1",
+    "4": "Ace Tanker"
+  }
+}

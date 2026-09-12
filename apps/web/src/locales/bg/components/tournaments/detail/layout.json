@@ -1,0 +1,12 @@
+{
+  "final": "Финал",
+  "grand-final": "Гранд финал",
+  "loser-bracket-final": "Финал на схемата на губещите",
+  "loser-round": "Кръг на губещите {round}",
+  "quarter-finals": "Четвъртфинали",
+  "round-of": "Кръг с {teams} отбора",
+  "semi-finals": "Полуфинали",
+  "third-place": "Трето място",
+  "winner-bracket-final": "Финал на схемата на Победител",
+  "winner-round": "Кръг на Победител {round}"
+}

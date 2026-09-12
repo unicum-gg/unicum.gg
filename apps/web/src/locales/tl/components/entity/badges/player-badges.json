@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "unang puwesto",
+    "2": "ikalawang puwesto",
+    "3": "ikatlong puwesto"
+  },
+  "streamer": "Streamer · panoorin si {name} sa Twitch",
+  "tournament": {
+    "one": "Talaan ng nanalong torneo ng {title}",
+    "many": "Kasama sa {count} nanalong talaan, ang pinakamahusay na {title}",
+    "featured": "{text} · isang tampok na event",
+    "unnamed": "isang torneo ng Wargaming"
+  },
+  "tournament-wins": "{count, plural, one {# panalo sa torneo} other {# mga panalo sa torneo}}",
+  "watch-on-twitch": "Panoorin si {name} sa Twitch",
+  "watch-on-twitch-viewers": "Panoorin si {name} sa Twitch · {viewers} manonood"
+}

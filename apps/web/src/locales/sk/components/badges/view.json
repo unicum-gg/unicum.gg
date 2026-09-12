@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Rebríček {board}",
+  "carried-beside-a-clan-tag": "Zobrazuje sa vedľa značky klanu. Odznak umiestnenia vyjadruje miesto v súťaži: číslo na ňom označuje dané miesto a jeho farba určuje rebríček. Za samotné hodnotenie sa neudeľuje, pretože vysoké WN8 nie je niečo, čo môže klan vyhrať.",
+  "clan-badges": "Odznaky clanu",
+  "clan-board": {
+    "name": "Rebríček {board}: medzi {rank} najlepšími",
+    "how": "Umiestnenie medzi {rank} najlepšími v rebríčku {board}. Odznak zostáva, kým si klan drží dané miesto, a stratí ho, keď o toto miesto príde."
+  },
+  "clan-overflow": "Ak klan drží viac než tri umiestnenia, ostatné sa skryjú pod odznak {plus}, zoradené od najlepšieho, aby značka zostala čitateľná. Po umiestnení kurzora sa zobrazia ich názvy.",
+  "featured-tournament-winner": {
+    "name": "Víťaz významného turnaja",
+    "how": "Rovnaký odznak za víťazstvo na podujatí, ktoré Wargaming označil ako významné. Je zlatý namiesto oceľového, presne ako pri hráčoch."
+  },
+  "heading": "Každý {badge} a ako ho získať",
+  "heading-accent": "značka",
+  "marks-carried-beside-a-nickname": "Označenia zobrazované vedľa prezývky všade, kde sa na webe {NAME} objaví: v rebríčkoch, zoznamoch členov klanov, vo vyhľadávaní a v pavúkoch turnajov.",
+  "n-badges": "{count} značiek",
+  "onslaught-champion": {
+    "name": "Osvojitelj Ofenzíve",
+    "how": "Dosiahnutie hodnosti Šampión v režime Ofenzíva je podmienkou na zobrazenie v poradí {standings}. Neskôr zostáva iba hodnotenie, ktoré po poklese pod hranicu nahradí pôvodné miesto, nie skutočnosť, že ste ho dosiahli."
+  },
+  "onslaught-legend": {
+    "name": "Legenda Ofenzíve",
+    "how": "Obsadil miesto nad sezónnou hranicou hodnosti Legenda, ktorá závisí od umiestnenia, nie od skóre. Naraz existuje iba obmedzený počet takýchto miest a hranica sa posudzuje podľa sezóny, v ktorej hráč miesto držal. Odznak je fialový namiesto oceľovomodrého, teda vo farbe, ktorou samotný rebríček označuje hodnosť Legenda."
+  },
+  "player-badges": "Odznaky hráča",
+  "player-overflow": "Ak má hráč viac než tri označenia, ostatné sa skryjú pod odznak {plus} v poradí uvedenom vyššie, aby prezývka zostala v tabuľke čitateľná. Po umiestnení kurzora sa zobrazia ich názvy a každé z nich naďalej vedie tam, kam viedol jeho samostatný odznak.",
+  "ranked-standings": "rebríček",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Účet má prepojený kanál Twitch. Prepojte Twitch vo svojom profile, aby ste ho potvrdili, a odznak potom bude viesť na váš kanál. Zobrazuje sa bez ohľadu na to, či práve vysielate."
+  },
+  "streamer-who-is-on-air": "Streamer, ktorý práve vysiela, má aj červený štítok LIVE. Ten sa nezískava ani nezostáva natrvalo. Objaví sa pri spustení vysielania a zmizne po jeho skončení, takže sa nikdy neskryje pod súhrnný odznak.",
+  "support-subscription": "predplatné na podporu",
+  "supporter": {
+    "name": "Podpornik"
+  },
+  "supporter-note": "Aktívna a verejne zobrazená podpora: {link}. Podporovatelia, ktorí sa rozhodnú zostať anonymní, nemajú z vlastného rozhodnutia žiadny odznak.",
+  "the-marks-a-player-or": "Označenia, ktoré môžu mať hráči alebo klany na webe {NAME}, význam každého z nich a presné podmienky ich získania.",
+  "tournament-winner": {
+    "name": "Víťaz turnaja",
+    "how": "Tím priradený ku klanu vyhral turnaj. Wargaming zaznamenáva tímy a účty, nikdy nie klany, preto sa toto priradenie obnovuje porovnaním každej súpisky s členstvom v klane platným v deň konania turnaja."
+  },
+  "verified": {
+    "name": "Overený",
+    "how": "Majiteľ sa prihlásil pomocou svojho Wargaming.net ID a prepojil tento účet. Jedinou podmienkou je prihlásenie a je bezplatné."
+  }
+}

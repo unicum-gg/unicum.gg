@@ -1,0 +1,14 @@
+{
+  "ammunition": "กระสุน",
+  "characteristics": "ลักษณะเฉพาะของ {tank}",
+  "consumables": "ยุทธปัจจัย",
+  "crew-level": "ระดับพลรถถัง",
+  "crew-skills": "ทักษะลูกเรือ",
+  "equipment": "อุปกรณ์",
+  "field-mods": "การปรับปรุงสนาม",
+  "historical-reference": "ข้อมูลอ้างอิงทางประวัติศาสตร์ของ {tank}",
+  "modules": "ชิ้นส่วนของ {tank}",
+  "research-path": "สาขาผังวิทยาการของ {tank}",
+  "similar": "รถถังที่ใกล้เคียงกับรถถัง {tank}",
+  "videos": "วิดีโอของ {tank}"
+}

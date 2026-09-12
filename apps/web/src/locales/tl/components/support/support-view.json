@@ -1,0 +1,15 @@
+{
+  "become-a-supporter": "Maging tagasuporta",
+  "community-funded-ad-free": "Pinopondohan ng komunidad · Walang patalastas",
+  "coverage-page": "coverage page",
+  "every-euro-keeps-running-supporters": "Bawat euro ay nagpapatakbo kay {NAME}. Makakakuha ang mga tagasuporta ng badge sa kanilang pahina ng manlalaro at puwesto sa podium sa ibaba, ngunit walang anumang ikinukubli sa likod nito at hindi kailanman magkakaroon ng mga patalastas. Isa itong buwanang subscription na ganap mong kontrolado.",
+  "how-is-funded": "Paano pinopondohan si {NAME}",
+  "is-free-open-source-and": "Libre, open-source at walang patalastas si {NAME}, at nalulugi ito sa pagpapatakbo. Walang patalastas, kailanman. Kung kapaki-pakinabang ito sa iyo, mag-ambag ng halagang gusto mo mula €3 bawat buwan at panatilihing buhay at lumalago ang tracker ng World of Tanks.",
+  "it-runs-on-a-single": "Tumatakbo ito sa isang inuupahang server, at bawat euro ay ibinabalik sa proyekto: sa server, database, mga egress IP na naka-whitelist ng Wargaming na nagpapahintulot sa aming mag-refresh ng mas maraming manlalaro, at paminsan-minsang pagtulak para maipakilala ito sa mas maraming tao. Sinasagot ng mga tagasuporta ang buwanang bayarin, at napupunta ang anumang sobra sa mas malaking throughput at mga bagong feature.",
+  "no-ads-no-investors-no": "Walang patalastas, walang investor, walang pagbebenta ng datos. Ang {NAME} ay ganap na pinopondohan ng mga taong gumagamit nito.",
+  "no-supporters-yet-be-the": "Wala pang tagasuporta. Mauna sa podium.",
+  "same-numbers-as": "Eksaktong parehong mga numero gaya ng nasa {link}.",
+  "title": "Suportahan si {name}",
+  "top-supporters": "Nangungunang mga sumusuporta",
+  "where-your-money-goes": "Saan napupunta ang iyong pera"
+}

@@ -1,0 +1,7 @@
+{
+  "joined": "Inscrit le {date}",
+  "last-battle": "Dernière bataille {when}",
+  "never-played": "N’a jamais joué",
+  "updated": "Mis à jour {when}",
+  "clan-role-joined": "{role} · membre depuis le {date}"
+}

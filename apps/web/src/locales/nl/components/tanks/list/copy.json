@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Alle {count} voertuigen van World of Tanks in regio {region}. Filter op niveau, natie, klasse en rol en open vervolgens een Tank voor de statistieken, beste spelers en verwachte waarden.",
+    "title": "Alle Tanks in World of Tanks ({region}), bekijk elk voertuig",
+    "description": "Bekijk elke Tank in World of Tanks in regio {region}: filter op niveau, natie, klasse en rol en bekijk daarna de statistieken, beste spelers en verwachte waarden per Tank.",
+    "heading": "Alle <accent>tanks</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, penetratie, pantser, zichtbereik en mobiliteit voor alle {count} voertuigen van World of Tanks in regio {region}. Sorteer op een kolom naar keuze en filter daarna op niveau, natie, klasse en rol.",
+    "title": "Specificaties van Tanks in World of Tanks ({region}), vergelijk elk voertuig",
+    "description": "Vergelijk de specificaties van elke Tank in World of Tanks in regio {region}: DPM, penetratie, pantser, zichtbereik en mobiliteit, sorteerbaar en filterbaar op niveau, natie, klasse en rol.",
+    "heading": "Tank <accent>specificaties</accent>"
+  },
+  "economics": {
+    "intro": "Aanschaf- en reparatiekosten, granaatprijzen en opbrengsten in credits voor alle {count} voertuigen van World of Tanks in regio {region}. Sorteer op een kolom naar keuze en filter daarna op niveau, natie, klasse en rol.",
+    "title": "Economie van Tanks in World of Tanks ({region}), kosten in credits en XP",
+    "description": "Kosten in credits en XP, reparatiekosten en granaatprijzen voor elke Tank in World of Tanks in regio {region}, sorteerbaar en filterbaar op niveau, natie, klasse en rol.",
+    "heading": "Tank <accent>economie</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Hoeveel Beschadig volgens het voortschrijdend gemiddelde nodig is voor één, twee en drie Markeringen van uitmuntendheid op alle {count} voertuigen van World of Tanks in regio {region}. Sorteer op een kolom naar keuze en filter daarna op niveau, natie, klasse en rol.",
+    "title": "Vereisten voor Markeringen van uitmuntendheid in World of Tanks ({region})",
+    "description": "Hoeveel Beschadig nodig is voor één, twee en drie Markeringen van uitmuntendheid op elke Tank in World of Tanks in regio {region}, sorteerbaar en filterbaar op niveau, natie, klasse en rol.",
+    "heading": "<accent>Markeringen van uitmuntendheid</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "XP-drempelwaarden voor Ace Tanker en insignes voor Meesterschap voor alle {count} voertuigen van World of Tanks in regio {region}. Sorteer op een kolom naar keuze en filter daarna op niveau, natie, klasse en rol.",
+    "title": "Vereisten voor Marks of Mastery in World of Tanks ({region})",
+    "description": "XP-drempelwaarden voor Ace Tanker en insignes voor Meesterschap voor elke Tank in World of Tanks in regio {region}, sorteerbaar en filterbaar op niveau, natie, klasse en rol.",
+    "heading": "<accent>Markeringen van Meesterschap</accent>"
+  },
+  "videos": {
+    "intro": "{count} gevechten die de community in regio {region} heeft gelinkt, elk precies openend op de seconde waarop het gevecht begint. Voorgesteld via de pagina’s van Tanks en gecontroleerd voordat ze hier verschijnen.",
+    "title": "Gameplayvideo’s van World of Tanks ({region})",
+    "description": "Door de community voorgestelde gevechten van World of Tanks in regio {region}, elk met een video die precies opent op de seconde waarop het gevecht begint: de gespeelde Tank, de kaart, de startzijde en de afloop van het gevecht.",
+    "heading": "Gameplay <accent>video’s</accent>"
+  }
+}

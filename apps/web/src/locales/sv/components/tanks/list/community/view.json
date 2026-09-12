@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Varje stridsvagn får ett betyg av fem av spelarna som använder den. En röst räknas bara om den kommer från ett konto som faktiskt har använt fordonet i strid, vilket skiljer detta från en omröstning bland alla som råkade dyka upp.",
+  "no-tank-has-been-rated": "Ingen stridsvagn har fått något betyg än. De första rösterna kan läggas på stridsvagnssidorna under Community.",
+  "think": "tycka",
+  "title": "Vad spelare {think}",
+  "votes-across-vehicles": "{totalVotes} röster fördelade på {ratedTanks} fordon."
+}

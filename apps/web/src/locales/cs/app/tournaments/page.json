@@ -1,0 +1,8 @@
+{
+  "description": "Všechny turnaje Wargaming v regionu {region}: denní žebříčky s výhrami v podobě zlaťáků, klanová mistrovství, kdo se zúčastnil a kdo vyhrál. Kompletní pavouky, skóre a soupisky.",
+  "live-many": "Právě teď je v regionu {region} otevřeno nebo rozehráno {count} turnajů,",
+  "live-one": "Právě teď je v regionu {region} otevřený nebo rozehraný {count} turnaj,",
+  "no-live": "Turnaje se v regionu {region} konají každý den,",
+  "title": "World of Tanks: {tournaments}",
+  "what-you-find": "od žebříčků 1v1 s výhrami v podobě zlaťáků až po klanová mistrovství o peněžní výhry. Kompletní pavouky a skóre, každý tým se svou soupiskou a stranou, na které začínal, mapu po mapě."
+}

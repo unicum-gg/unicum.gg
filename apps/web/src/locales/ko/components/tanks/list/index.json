@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "비용 (크레딧)",
+    "buyGold": "비용 (골드)",
+    "researchXp": "연구 XP",
+    "shellCost": "포탄 비용",
+    "ammoCost": "전체 탄약 비용",
+    "class3": "3급",
+    "class2": "2급",
+    "class1": "1급",
+    "ace": "에이스 탱커",
+    "mark1": "1 마크 (65%)",
+    "mark2": "2 마크 (85%)",
+    "mark3": "3 마크 (95%)"
+  }
+}

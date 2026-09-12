@@ -1,0 +1,7 @@
+{
+  "firing": "Ispaljuje se {shell}, {pen} mm. Promijeni hitac",
+  "no-such-round": "{mark}: ovaj top nema tu granatu, pa sami podesite uglove",
+  "own-round": "{mark}: vlastita granata ovog topa, sa svim podacima",
+  "treat-it-as": "Tretiraj kao",
+  "treat-it-as-mark": "Tretiraj kao {mark}"
+}

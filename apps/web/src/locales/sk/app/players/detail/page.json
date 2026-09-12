@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tanky: {name} ({region}), všetky hrané vozidlá",
+    "description": "Všetky tanky, ktoré {name} hral na serveri {region}, s počtom bitiek, mierou víťazstiev, priemerným poškodením a WN8 pre každé vozidlo."
+  },
+  "achievements": {
+    "title": "Úspechy: {name} ({region}), získané medaily: {medals}",
+    "description": "Prehľad medailí World of Tanks na serveri {region}: {name} ich má {medals}, od Kolobanovovej medaily a Poolovej medaily až po čestné hodnosti a epické medaily, vrátane všetkých, ktoré ešte možno získať."
+  },
+  "tournaments": {
+    "title": "Turnaje: {name} ({region})",
+    "description": "Všetky turnaje Wargaming na serveri {region}, kde súťažil hráč {name}: tím, za ktorý hral, formát a kam až sa tím dostal. Ide o záznam, ktorý Wargaming zverejňuje iba z pohľadu turnaja, nikdy nie z pohľadu hráča."
+  },
+  "value": {
+    "title": "Hodnota účtu: {name} ({region})",
+    "description": "Akú hodnotu má účet World of Tanks {name} na serveri {region}: kredity, zlato a skúsenosti uložené v garáži."
+  },
+  "mode": {
+    "title": "Štatistiky: {name}, režim {mode} ({region})",
+    "description": "{name} na serveri {region} v režime {mode}: bitky, miera víťazstiev a hodnotenia pre tento režim v porovnaní so základnými výsledkami v náhodných bitkách."
+  },
+  "overview": {
+    "title": "Štatistiky World of Tanks: {name} ({region}), {battles} bitiek, {winrate} % víťazstiev",
+    "description": "{name} na serveri {region}: {battles} bitiek, miera víťazstiev {winrate} %, hodnotenie {rating}. Podrobný prehľad podľa tankov, WN8, WNX a kompletná história členstva v klanoch."
+  },
+  "locked": {
+    "title": "Uzamknutý účet World of Tanks: {name} ({region})",
+    "description": "Účet {name} ({region}) existuje, ale Wargaming ho uzamkol, preto jeho štatistiky World of Tanks nie sú dostupné."
+  },
+  "empty": {
+    "title": "Štatistiky hráča World of Tanks: {name} ({region})",
+    "description": "Štatistiky hráča World of Tanks: {name} ({region}), WN8, hodnotenie WNX, miera víťazstiev, podrobný prehľad podľa tankov a kompletná história členstva v klanoch."
+  }
+}

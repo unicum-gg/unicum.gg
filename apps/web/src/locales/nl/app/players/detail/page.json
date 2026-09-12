@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tanks van {name} ({region}), elk gespeeld voertuig",
+    "description": "Elke Tank waarmee {name} op {region} heeft gespeeld, met gevechten, winstpercentage, gemiddelde schade en WN8 per voertuig."
+  },
+  "achievements": {
+    "title": "Prestaties van {name} ({region}), {medals} medailles behaald",
+    "description": "De {medals} World of Tanks-medailles die {name} op {region} heeft behaald, van de medailles van Kolobanov en Pool tot ererangen en epische medailles, plus alle medailles die nog te behalen zijn."
+  },
+  "tournaments": {
+    "title": "Toernooien van {name} ({region})",
+    "description": "Elk Wargaming-toernooi waaraan {name} op {region} heeft deelgenomen: het team waarvoor de speler uitkwam, de opzet en hoe ver dat team kwam. Een overzicht dat Wargaming alleen via het toernooi publiceert, nooit via de speler."
+  },
+  "value": {
+    "title": "Waarde van het account van {name} ({region})",
+    "description": "Wat het World of Tanks-account van {name} op {region} waard is: credits, Goud en ervaring die in de garage vastzitten."
+  },
+  "mode": {
+    "title": "Statistieken van {name} voor {mode} ({region})",
+    "description": "Statistieken van {name} op {region} in {mode}: gevechten, winstpercentage en beoordelingen voor deze modus, naast de uitgangswaarden voor willekeurige gevechten."
+  },
+  "overview": {
+    "title": "World of Tanks-statistieken van {name} ({region}), {battles} gevechten, {winrate}% WR",
+    "description": "Statistieken van {name} op {region}: {battles} gevechten, {winrate}% winstpercentage, rating {rating}. Overzicht per Tank, WN8, WNX en volledige clanhistorie."
+  },
+  "locked": {
+    "title": "World of Tanks-account van {name} vergrendeld ({region})",
+    "description": "Het account van {name} ({region}) bestaat, maar Wargaming heeft dit account vergrendeld, waardoor de World of Tanks-statistieken niet beschikbaar zijn."
+  },
+  "empty": {
+    "title": "World of Tanks-spelersstatistieken van {name} ({region})",
+    "description": "World of Tanks-spelersstatistieken van {name} ({region}): WN8, WNX-beoordelingen, winstpercentage, overzicht per Tank en volledige clanhistorie."
+  }
+}

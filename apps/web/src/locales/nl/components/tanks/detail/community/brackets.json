@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Gevechten",
+  "no-votes": "geen stemmen",
+  "rated-higher": "Sterkere spelers beoordelen deze tank {stars} sterren hoger dan de rest van de spelers op de server. Met deze tank loont het om te weten wat je doet.",
+  "rated-lower": "Sterkere spelers beoordelen deze tank {stars} sterren lager dan de rest van de spelers op de server. Hij flatteert je totdat hij echt iets moet presteren.",
+  "votes": "{count} stemmen",
+  "votes-one": "{count} stem"
+}

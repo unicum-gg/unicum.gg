@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Zmień wszystko, co jest nieprawidłowe, w tym pojazd. Zapisanie zmian spowoduje ponowne wysłanie filmu do kolejki moderacji, więc opublikowany film zostanie ukryty do czasu ponownego zatwierdzenia.",
+  "correct-a-suggestion": "Popraw sugestię",
+  "could-not-load-that-suggestion": "Mógłby nie wczytać tej sugestii. Spróbuj ponownie za moment.",
+  "link-expired": "Ten link wygasł. Naciśnij ponownie Edytuj na karcie w Discord, aby otrzymać nowy.",
+  "loading": "Ładowanie…",
+  "log-in": "Zaloguj się",
+  "log-in-with-the-account": "Zaloguj się na konto, z którego zasugerowano ten film, aby go poprawić.",
+  "no-suggestion-with-that-id": "Nie ma sugestii z tym identyfikatorem.",
+  "not-yours-to-correct": "Ta sugestia nie należy do ciebie, więc nie możesz jej poprawić."
+}

@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, {count}× kazanıldı",
+  "aria-not-earned": "{name}, kazanılmadı",
+  "no-longer-obtainable": "Artık kazanılamaz.",
+  "not-earned": "Kazanılmadı"
+}

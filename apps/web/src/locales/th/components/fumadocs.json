@@ -1,0 +1,18 @@
+{
+  "search": "ค้นหา",
+  "search-open": "เปิดการค้นหา",
+  "search-close": "ปิดการค้นหา",
+  "search-empty": "ไม่พบผลลัพธ์",
+  "theme-toggle": "เปลี่ยนธีม",
+  "theme-light": "เบา",
+  "theme-dark": "ธีมมืด",
+  "theme-system": "ตามระบบ",
+  "toc": "ในหน้านี้",
+  "toc-empty": "ไม่มีหัวข้อ",
+  "sidebar-open": "เปิดแถบด้านข้าง",
+  "sidebar-close": "ปิดแถบด้านข้าง",
+  "sidebar-collapse": "ย่อแถบด้านข้าง",
+  "page-previous": "หน้าก่อนหน้า",
+  "page-next": "หน้าถัดไป",
+  "language": "เลือกภาษา"
+}

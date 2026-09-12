@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Đăng nhập bằng ID Wargaming.net",
+  "open-source": "{name} là mã nguồn mở. Hãy {link} trước khi tin dùng.",
+  "pick-the-region-your-world": "Chọn khu vực mà tài khoản World of Tanks của bạn đang sử dụng. Khu vực đó không nhất thiết phải là khu vực bạn đang xem.",
+  "read-the-login-code": "Đọc mã đăng nhập",
+  "what-wargaming-hands-back-is": "Wargaming trả lại một token để đọc dữ liệu tài khoản của chính bạn. Token được lưu trữ dưới dạng mã hóa và được gia hạn khi tài khoản của bạn vẫn còn liên kết, đồng thời chỉ hoạt động thay bạn ở nơi bạn tự thiết lập, chẳng hạn như lịch dự trữ của Clan.",
+  "you-sign-in-on-wargaming": "Bạn đăng nhập trên trang riêng của Wargaming, không phải tại đây. Mật khẩu của bạn không bao giờ được nhập trên {NAME} và không bao giờ được gửi đến chúng tôi."
+}

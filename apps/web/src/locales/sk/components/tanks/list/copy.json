@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Všetkých {count} vozidiel World of Tanks v regióne {region}. Filtrujte podľa úrovne, národa, triedy a roly, potom si otvorte tank a pozrite si jeho štatistiky, najlepších hráčov a očakávané hodnoty.",
+    "title": "Všetky tanky World of Tanks ({region}), prehľad všetkých vozidiel",
+    "description": "Prezrite si všetky tanky World of Tanks v regióne {region}: filtrujte podľa úrovne, národa, triedy a roly, potom preskúmajte štatistiky jednotlivých tankov, najlepších hráčov a očakávané hodnoty.",
+    "heading": "Všetky <accent>tanky</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, prieraznosť, pancier, dohľad a pohyblivosť všetkých {count} vozidiel World of Tanks v regióne {region}. Zoraďte podľa ľubovoľného stĺpca, potom filtrujte podľa úrovne, národa, triedy a roly.",
+    "title": "Technické parametre tankov World of Tanks ({region}), porovnanie všetkých vozidiel",
+    "description": "Porovnajte technické parametre všetkých tankov World of Tanks v regióne {region}: DPM, prieraznosť, pancier, dohľad a pohyblivosť s možnosťou zoradenia a filtrovania podľa úrovne, národa, triedy a roly.",
+    "heading": "Špecifikácie <accent>tankov</accent>"
+  },
+  "economics": {
+    "intro": "Nákupné náklady, náklady na opravu, ceny granátov a zisk kreditov pre všetkých {count} vozidiel World of Tanks v regióne {region}. Zoraďte podľa ľubovoľného stĺpca, potom filtrujte podľa úrovne, národa, triedy a roly.",
+    "title": "Ekonomika tankov World of Tanks ({region}), náklady v kreditoch a XP",
+    "description": "Náklady v kreditoch a XP, náklady na opravu a ceny granátov pre všetky tanky World of Tanks v regióne {region} s možnosťou zoradenia a filtrovania podľa úrovne, národa, triedy a roly.",
+    "heading": "Ekonomika <accent>tankov</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Kĺzavý priemer poškodenia potrebný na jeden, dva a tri znaky pri všetkých {count} vozidlách World of Tanks v regióne {region}. Zoraďte podľa ľubovoľného stĺpca, potom filtrujte podľa úrovne, národa, triedy a roly.",
+    "title": "Požiadavky na znaky výnimočnosti vo World of Tanks ({region})",
+    "description": "Poškodenie potrebné na jeden, dva a tri znaky výnimočnosti pri každom tanku World of Tanks v regióne {region} s možnosťou zoradenia a filtrovania podľa úrovne, národa, triedy a roly.",
+    "heading": "<accent>Znaky výnimočnosti</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Hranice XP pre Tankové eso a odznaky majstrovstva pri všetkých {count} vozidlách World of Tanks v regióne {region}. Zoraďte podľa ľubovoľného stĺpca, potom filtrujte podľa úrovne, národa, triedy a roly.",
+    "title": "Požiadavky na odznaky majstrovstva vo World of Tanks ({region})",
+    "description": "Hranice XP pre Tankové eso a odznaky majstrovstva pri každom tanku World of Tanks v regióne {region} s možnosťou zoradenia a filtrovania podľa úrovne, národa, triedy a roly.",
+    "heading": "<accent>Odznaky majstrovstva</accent>"
+  },
+  "videos": {
+    "intro": "Komunita prepojila {count} bitiek v regióne {region}, pričom každá sa otvorí presne v sekunde svojho začiatku. Návrhy pochádzajú zo stránok tankov a pred zobrazením tu prechádzajú kontrolou.",
+    "title": "Videá z hrania World of Tanks ({region})",
+    "description": "Bitky World of Tanks navrhnuté komunitou v regióne {region}, pričom každá sa otvorí presne v sekunde svojho začiatku: hraný tank, mapa, jej strana a výsledok bitky.",
+    "heading": "Gameplay <accent>videá</accent>"
+  }
+}

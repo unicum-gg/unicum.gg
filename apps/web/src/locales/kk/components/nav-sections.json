@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Ойыншылар",
+    "clans": "Кландар",
+    "tanks": "Танкылар",
+    "maps": "Карталар",
+    "tournaments": "Турнирлер",
+    "servers": "Серверлер"
+  },
+  "links": {
+    "top-players": {
+      "label": "Ең жақсы ойыншылар",
+      "description": "Барлық уақыттағы ойыншылардың жетекші таблицасы"
+    },
+    "players-onslaught": {
+      "description": "Рейтингтік Шабуыл сатысы"
+    },
+    "players-steel-hunter": {
+      "description": "Battle royale жетекші таблицасы"
+    },
+    "top-clans": {
+      "label": "Ең жақсы кланлар",
+      "description": "Барлық уақыттағы кландардың жетекші таблицасы"
+    },
+    "stronghold": {
+      "description": "Қақтығыстар рейтингі"
+    },
+    "advances": {
+      "description": "X деңгейіндегі 15v15 рейтингі"
+    },
+    "tank-performances": {
+      "label": "Өнімділіктер",
+      "description": "Әр танк бойынша жеңіс пайызы мен зақым"
+    },
+    "tank-specs": {
+      "label": "Техникалық сипаттамалар",
+      "description": "Әр танктің статистикасы"
+    },
+    "tank-economics": {
+      "label": "Экономика",
+      "description": "Кредит пен тәжірибе табатындар"
+    },
+    "tank-moe": {
+      "description": "Әр белгі үшін зақым"
+    },
+    "tank-mom": {
+      "description": "Шеберлік белгісінің шектері"
+    },
+    "tank-changes": {
+      "label": "Өзгерістер",
+      "description": "Жаңарту бойынша күшейтулер мен әлсіретулер"
+    },
+    "tank-community": {
+      "label": "Қоғамдық рейтингтер",
+      "description": "Оларға ие ойыншылар бағалаған"
+    },
+    "tank-videos": {
+      "label": "Бейнелер",
+      "description": "Қауымдастықтың ойын бейнелері"
+    },
+    "all-tournaments": {
+      "label": "Турнирлер",
+      "description": "Барлық ашық және аяқталған турнир"
+    },
+    "all-maps": {
+      "label": "Барлық карталар",
+      "description": "Ойындағы барлық карта"
+    },
+    "map-changes": {
+      "label": "Өзгерістер",
+      "description": "Жаңарту бойынша карта өзгерістері"
+    },
+    "battle-type": {
+      "description": "{type} карталары"
+    },
+    "servers-population": {
+      "label": "Сервер популяциясы",
+      "description": "Қазір және уақыт бойынша желідегі ойыншылар"
+    }
+  }
+}

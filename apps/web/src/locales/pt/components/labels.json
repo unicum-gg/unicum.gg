@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Aguardando o primeiro instantâneo",
+    "hidden": "Oculto pela Wargaming",
+    "active_24h": "Atividade nas últimas 24 h",
+    "active_7d": "Atividade nos últimos 7 dias",
+    "recent_30d": "Atividade nos últimos 30 dias",
+    "recent_90d": "Atividade nos últimos 90 dias",
+    "dormant_1y": "Sem atividade há menos de 1 ano",
+    "inactive": "Sem atividade há mais de 1 ano"
+  },
+  "rating-hype": {
+    "overrated": "Superestimado",
+    "fair": "Justamente avaliado",
+    "underrated": "Subestimado"
+  },
+  "rating-consensus": {
+    "agreed": "Grande concordância",
+    "mixed": "Opiniões mistas",
+    "divisive": "Divisivo"
+  },
+  "rating-axes": {
+    "overall": "Geral",
+    "fun": "Diversão",
+    "firepower": "Poder de fogo",
+    "armour": "Blindagem",
+    "mobility": "Mobilidade",
+    "gunHandling": "Manuseio de armas",
+    "concealment": "Ocultação",
+    "beginnerFriendliness": "Amigável para iniciantes",
+    "versatility": "Versatilidade"
+  },
+  "rating-axis-hints": {
+    "overall": "No geral, quão bom é este tanque?",
+    "fun": "Quanto gostas de jogar com ele?",
+    "firepower": "Dano alfa, dano por minuto e penetração.",
+    "armour": "Quanto faz ricochetear os disparos, em hull-down e a descoberto.",
+    "mobility": "Velocidade, aceleração e manobrabilidade.",
+    "gunHandling": "Tempo de mira, dispersão e precisão em movimento.",
+    "concealment": "Camuflagem e alcance de visão.",
+    "beginnerFriendliness": "Até que ponto perdoa erros se ainda estás a aprender.",
+    "versatility": "Funciona em qualquer mapa e com qualquer equipa?"
+  },
+  "voter-brackets": {
+    "unknown": "Não avaliado",
+    "learning": "Aprendendo",
+    "average": "Média",
+    "strong": "Forte",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Veículos",
+    "gunnery": "Artilharia",
+    "armor": "Blindagem",
+    "mobility": "Mobilidade",
+    "vision": "Visão",
+    "crew": "Tripulação",
+    "progression": "Progressão",
+    "economy": "Economia",
+    "ratings": "Classificações",
+    "statistics": "Estatísticas",
+    "modes": "Modos de batalha",
+    "tactics": "Táticas",
+    "slang": "Gíria"
+  }
+}

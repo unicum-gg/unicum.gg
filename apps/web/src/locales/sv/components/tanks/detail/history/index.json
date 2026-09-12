@@ -1,0 +1,12 @@
+{
+  "before-update": "Före uppdatering {version}",
+  "common-test": "Vanlig Test",
+  "in-common-test-not-released": "I Vanlig Test, inte släppt ännu",
+  "introduced": "Introducerad",
+  "lifecycle": "Livscykel",
+  "n-buffed": "{count} förbättrade",
+  "n-nerfed": "{count} försämrade",
+  "not-released-wargaming-can-still": "Inte släppt. Wargaming kan fortfarande ändra eller ta bort allt detta innan uppdateringen släpps.",
+  "status": "Status",
+  "update": "Uppdatera {version}"
+}

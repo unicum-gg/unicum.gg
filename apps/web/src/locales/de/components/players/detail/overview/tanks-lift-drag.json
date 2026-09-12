@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Steigert die Wertung",
+    "blurb": "Panzer, die die Gesamtwertung nach oben ziehen: Würde man sie herausrechnen, würde die Wertung sinken.",
+    "empty": "Kein Panzer steigert die Gesamtwertung."
+  },
+  "drag": {
+    "heading": "Senkt die Wertung",
+    "blurb": "Panzer, die die Gesamtwertung nach unten ziehen: Würde man sie herausrechnen, würde die Wertung steigen.",
+    "empty": "Kein Panzer senkt die Gesamtwertung."
+  },
+  "if-removed": "{delta} bei Ausschluss"
+}

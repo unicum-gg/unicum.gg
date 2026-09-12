@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Alle stridsvogner vurdert fra én til fem av spillerne som bruker dem. En stemme teller bare fra en konto som faktisk har tatt kjøretøyet med i kamp, og det er det som skiller dette fra en avstemning blant hvem som helst.",
+  "no-tank-has-been-rated": "Ingen stridsvogner er vurdert ennå. De første stemmene finnes på stridsvognenes sider, under Fellesskap.",
+  "think": "synes",
+  "title": "Hva spillere {think}",
+  "votes-across-vehicles": "{totalVotes} stemmer på tvers av {ratedTanks} kjøretøy."
+}

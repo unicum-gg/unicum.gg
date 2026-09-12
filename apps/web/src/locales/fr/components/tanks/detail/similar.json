@@ -1,0 +1,11 @@
+{
+  "compare": "Comparer avec les {count} chars les plus proches",
+  "match": "bataille",
+  "subtitle": "Même position parmi les chars de leur rang respectif",
+  "verdict": {
+    "overall": "Globalement similaire",
+    "closest": "Le plus proche pour {axes}",
+    "closest-furthest": "Le plus proche pour {axes}, le plus éloigné pour {apart}",
+    "and": " et "
+  }
+}

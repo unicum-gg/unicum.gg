@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Ehhez a klánhoz még nincsenek tankadatok.",
+  "no-tanks-match-these-filters": "Egy tank sem felel meg ezeknek a szűrőknek.",
+  "nation": "Nemzet",
+  "type": "Típus",
+  "tier": "szint",
+  "name": "Név",
+  "members": "Tagok",
+  "battles": "Csaták",
+  "avg-damage": "Átlagos sebzés",
+  "avg-xp": "Átlag XP",
+  "wr": "WR"
+}

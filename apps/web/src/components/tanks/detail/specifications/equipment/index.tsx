@@ -19,6 +19,8 @@ import { ResetButton } from "@/components/tanks/detail/specifications/reset-butt
 import { SlotBox } from "./slot-box";
 import { DeviceBox } from "./device-box";
 import { CategoryGlyph } from "./category-glyph";
+import { useTranslation } from "@/hooks/use-translation";
+import { tankParamName } from "@/components/game-name";
 import {
   CATEGORY,
   cycleHint,
@@ -68,6 +70,9 @@ export function TankEquipment({
   /** A local under-title line (column-width), when stacked below another panel. */
   headerBorder?: boolean;
 }) {
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
+  const { t: tWidget } = useTranslation("components/tanks/detail/widgets");
+  const { t: tParams } = useTranslation("game/tank-params");
   const byKey = new Map(loadout.equipment.map((e) => [e.key, e]));
 
   // The selected slot: there is always one, so picking equipment always has a
@@ -148,7 +153,7 @@ export function TankEquipment({
             headerBorder && "border-b border-fd-border",
           )}
         >
-          <PanelTitle>Equipment</PanelTitle>
+          <PanelTitle>{tSection("equipment")}</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="space-y-5 px-4 py-6">
@@ -162,7 +167,11 @@ export function TankEquipment({
                     type="button"
                     onClick={() => setActiveSlot(i)}
                     aria-pressed={activeSlot === i}
-                    aria-label={`Slot ${i + 1}${equip ? `: ${equip.name}` : ""}`}
+                    aria-label={
+                      equip
+                        ? tWidget("slot-filled", { n: i + 1, name: equip.name })
+                        : tWidget("slot", { n: i + 1 })
+                    }
                     className={cn(
                       "cursor-pointer rounded-lg transition-shadow",
                       activeSlot === i
@@ -185,7 +194,7 @@ export function TankEquipment({
                                 onClick={() =>
                                   onRoleCategory(i, active ? null : opt)
                                 }
-                                aria-label={c?.label ?? opt}
+                                aria-label={tankParamName(c?.label ?? opt, opt, tParams)}
                                 className={cn(
                                   "flex size-5 items-center justify-center rounded transition-opacity",
                                   active ? "" : "opacity-40 hover:opacity-75",
@@ -204,12 +213,12 @@ export function TankEquipment({
                             <TooltipContent>
                               <div className="space-y-0.5 text-xs">
                                 <div className="font-medium">
-                                  {c?.label ?? opt}
+                                  {tankParamName(c?.label ?? opt, opt, tParams)}
                                 </div>
                                 <div className="text-background/60">
                                   {active
-                                    ? "Click to clear this slot's specialization."
-                                    : "Click to specialize this slot."}
+                                    ? tWidget("clear-specialization")
+                                    : tWidget("specialize")}
                                 </div>
                               </div>
                             </TooltipContent>

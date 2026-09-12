@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "O celulă reprezintă victoriile intervalului la acel nivel în raport cu bătăliile sale de acolo, pentru fiecare vehicul cu cel puțin {minBattles} bătălii jucate de un jucător. Astfel sunt descrise nivelurile așa cum sunt jucate de cei care le joacă. Celulele bazate pe mai puțin de {TIERWINRATETHINCELL} bătălii sunt afișate pal, deoarece se modifică și din alte motive decât abilitatea. Culorile sunt aceleași intervale ale ratei de victorii folosite de site peste tot.",
+  "cell-no-sample": "{where}, fără eșantion",
+  "cell-winrate": "{where}, rată de victorii de {winrate} în {battles} bătălii",
+  "metric-band": "Interval {metric}",
+  "nothing-recorded": "Nimic înregistrat încă pentru {metric}. Grila este reconstruită în fiecare noapte.",
+  "over-battles-from-accounts": "{winrate} în {battles} bătălii de la {players} conturi",
+  "over-n-battles": "în {battles} bătălii",
+  "what-players-win-by-tier": "Ce câștigă jucătorii {label} la fiecare nivel"
+}

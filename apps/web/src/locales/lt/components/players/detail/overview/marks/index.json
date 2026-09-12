@@ -1,0 +1,21 @@
+{
+  "title": "{nickname} ženklai ir meistriškumas",
+  "excellence": {
+    "title": "Meistriškumo žymos",
+    "description": "Transporto priemonės pagal ženklus ant jų patrankų. Ženklas yra ilgalaikis vidurkis, kurį žaidimas apskaičiuoja pagal slenkantį naujausių mūšių laikotarpį ir palygina su regiono rezultatais naudojant tą transporto priemonę.",
+    "partial": "Ženklai nuskaityti {known} iš {garage} transporto priemonių. Likę duomenys bus užpildyti atnaujinus paskyrą.",
+    "note": "{marked} iš {garage} transporto priemonių turi ženklą.",
+    "note-share": "{marked} iš {garage} transporto priemonių turi ženklą, tai sudaro {percent}% garažo."
+  },
+  "mastery": {
+    "title": "Meistriškumo ženklai",
+    "description": "Transporto priemonės pagal geriausią jų ženklelį. Ženklelis priklauso nuo vieno mūšio, o ne nuo vidurkio, žaidimas jį skiria pagal vieno žaidimo patirtį, palygintą su regiono rezultatais naudojant tą transporto priemonę.",
+    "note": "{aces} iš {garage} transporto priemonių turi Tūzo tankisto ženklelį.",
+    "note-share": "{aces} iš {garage} transporto priemonių turi Tūzo tankisto ženklelį, tai sudaro {percent}% garažo."
+  },
+  "reach": {
+    "heading": "Žaidimas virš patrankos lygio",
+    "description": "Transporto priemonės, kurių bendra žala jau viršija ženklui reikalingą ribą, nors jos jo neturi. Ženklelis rodo šią bendrą žalą, nuspalvintą pagal viršytą ženklą."
+  },
+  "none": "Nėra"
+}

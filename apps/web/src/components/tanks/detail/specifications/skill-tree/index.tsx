@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import Image from "next/image";
 import { BRAND_COLOR } from "@unicum.gg/shared";
@@ -47,6 +48,12 @@ const NODE_SIZE: Record<string, number> = {
 };
 
 function NodeTooltip({ node }: { node: SkillNode }) {
+  const { t } = useTranslation(
+    "components/tanks/detail/specifications/skill-tree/index",
+  );
+  const { t: tEffects } = useTranslation(
+    "components/tanks/detail/specifications/field-mods/index",
+  );
   return (
     <div className="w-52 space-y-2 text-xs">
       <div>
@@ -61,7 +68,7 @@ function NodeTooltip({ node }: { node: SkillNode }) {
           {node.effects.map((e, i) => (
             <div key={i} className="flex justify-between gap-3 tabular-nums">
               <span className="text-background/60">
-                {effectLabel(e.attribute)}
+                {effectLabel(e.attribute, tEffects)}
               </span>
               <span>{fmtEffect(e.type, e.value, e.attribute)}</span>
             </div>
@@ -70,8 +77,8 @@ function NodeTooltip({ node }: { node: SkillNode }) {
       ) : node.description ? null : (
         <div className="border-t border-background/20 pt-1.5 text-background/60">
           {node.isFeature
-            ? "In-battle loadout switch. No characteristic effect."
-            : "Vehicle mechanic. No characteristic effect."}
+            ? t("loadout-switch-no-effect")
+            : t("vehicle-mechanic-no-effect")}
         </div>
       )}
     </div>
@@ -107,6 +114,7 @@ export function TankSkillTree({
    * elements. Off inside a dialog, where they would overflow it sideways. */
   screenLines?: boolean;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/skill-tree/index");
   const { nodes } = skillTree;
   const byId = useMemo(
     () => new Map(nodes.map((n) => [n.id, n])),
@@ -151,7 +159,11 @@ export function TankSkillTree({
           screenLines={screenLines}
           className="flex items-center justify-between gap-4"
         >
-          <PanelTitle>{tankName} upgrades</PanelTitle>
+          {/* The game names this progression "Upgrades", and the word is the
+              client's in every language it ships in: the term sheet settles it
+              before the model is asked, so the heading reads "Ameliorations de
+              KR-1" rather than a guess. */}
+          <PanelTitle>{t("title", { tank: tankName })}</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="px-4 py-6">
@@ -252,10 +264,7 @@ export function TankSkillTree({
             })}
           </div>
           <p className="mt-4 text-xs text-fd-muted-foreground">
-            Click a reachable node to unlock it; each applies its effect to the
-            characteristics above. Colours group nodes by firepower, mobility,
-            survivability and vehicle mechanics.
-          </p>
+            {t("click-a-reachable-node-to")}</p>
         </PanelContent>
       </Panel>
     </TooltipProvider>

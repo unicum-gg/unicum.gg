@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. sıra",
+    "2": "2. sıra",
+    "3": "3. sıra"
+  },
+  "streamer": "Yayıncı · {name} adlı oyuncuyu Twitch’te izle",
+  "tournament": {
+    "one": "{title} turnuvasının kazanan kadrosu",
+    "many": "{count} kazanan kadroda, en iyi {title}",
+    "featured": "{text} · öne çıkan etkinlik",
+    "unnamed": "bir Wargaming turnuvası"
+  },
+  "tournament-wins": "{count, plural, one {# turnuva galibiyeti} other {# turnuva galibiyetleri}}",
+  "watch-on-twitch": "{name} adlı oyuncuyu Twitch’te izle",
+  "watch-on-twitch-viewers": "{name} adlı oyuncuyu Twitch’te izle · {viewers} izleyici"
+}

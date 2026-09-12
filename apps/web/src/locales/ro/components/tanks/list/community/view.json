@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Fiecare tanc evaluat de la unu la cinci de cei care îl joacă. Un vot contează doar de la un cont care a dus efectiv vehiculul în bătălie, ceea ce diferențiază acest sistem de un sondaj pentru oricine a apărut.",
+  "no-tank-has-been-rated": "Niciun tanc nu a fost încă evaluat. Primele voturi se află pe paginile tancurilor, la Comunitate.",
+  "think": "credeți",
+  "title": "Ce {think} jucătorii",
+  "votes-across-vehicles": "{totalVotes} voturi pentru {ratedTanks} vehicule."
+}

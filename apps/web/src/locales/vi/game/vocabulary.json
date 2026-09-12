@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Ngẫu nhiên",
+    "battle_royale": "Săn Thiết giáp",
+    "frontline": "Chiến tuyến",
+    "onslaught": "Cường kích",
+    "onslaught_night": "{onslaught} Đêm",
+    "grand_battle": "Đại Chiến",
+    "clan_wars": "Clan Wars",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arcade",
+    "story_mode": "Story Mode",
+    "training": "Đào tạo"
+  },
+  "player-modes": {
+    "overall": "Trận đấu ngẫu nhiên",
+    "skirmish": "Tranh chấp",
+    "advances": "Tiến công",
+    "grand": "Đại Chiến",
+    "ranked": "Trận đấu Xếp hạng",
+    "cw-x": "Clan Wars X",
+    "cw-viii": "Clan Wars VIII",
+    "cw-vi": "Clan Wars VI",
+    "steel-hunter": "Săn Thiết giáp",
+    "onslaught": "Cường kích"
+  },
+  "stronghold-tiers": {
+    "advances": "Tiến công",
+    "t10": "Giao tranh T10",
+    "t8": "Giao tranh T8",
+    "t6": "Giao tranh T6"
+  },
+  "stronghold-periods": {
+    "24h": "24 giờ qua",
+    "7d": "7 ngày qua",
+    "30d": "30 ngày qua",
+    "overall": "Tổng thể"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Số trận",
+    "winrate": "Tỷ lệ thắng"
+  },
+  "clan-boards": {
+    "advances": "Tiến công",
+    "t10": "Giao tranh X",
+    "t8": "Giao tranh VIII",
+    "t6": "Giao tranh VI"
+  },
+  "map-modes": {
+    "standard": "Tiêu chuẩn",
+    "encounter": "Chế độ Đôi công",
+    "assault": "Tấn công",
+    "attack-defense": "Tấn công/Phòng thủ"
+  },
+  "map-camouflage": {
+    "summer": "Mùa hè",
+    "winter": "Mùa đông",
+    "desert": "Sa mạc"
+  },
+  "map-poi": {
+    "1": "Sở chỉ huy Pháo binh",
+    "2": "Trung tâm Liên lạc",
+    "3": "Trạm Quan sát"
+  },
+  "tournament-modes": {
+    "ctf": "Tiêu chuẩn",
+    "domination": "Chạm trán",
+    "assault2": "Tấn công/Phòng thủ",
+    "comp7": "Cường kích"
+  },
+  "battle-formats": {
+    "random": "Ngẫu nhiên",
+    "clan_wars": "Clan Wars",
+    "advances": "Tiến công",
+    "skirmish": "Tranh chấp",
+    "maneuvers": "Maneuvers",
+    "onslaught": "Cường kích",
+    "tournament": "Giải đấu"
+  },
+  "battle-results": {
+    "victory": "Thắng",
+    "defeat": "Thất bại",
+    "draw": "Hòa"
+  },
+  "spawn-directions": {
+    "north": "Bắc",
+    "south": "Nam",
+    "east": "Đông",
+    "west": "Tây"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Sắp tới",
+    "registration_started": "Đăng ký đã mở",
+    "registration_finished": "Đăng ký đã đóng",
+    "running": "Đang diễn ra",
+    "finished": "Hoàn thành",
+    "complete": "Đã hoàn tất"
+  },
+  "onslaught-tiers": {
+    "legend": "Legend",
+    "champion": "Vô địch",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Hạng nặng",
+    "mediumTank": "Medium",
+    "lightTank": "Nhẹ",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Tấn công",
+    "break": "Xuyên phá",
+    "support": "Hỗ trợ",
+    "universal": "Toàn diện",
+    "sniper": "Bắn tỉa",
+    "wheeled": "Bánh lốp"
+  },
+  "mastery-badges": {
+    "class3": "Hạng 3",
+    "class2": "Hạng 2",
+    "class1": "Hạng 1",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Trận đấu ngẫu nhiên",
+    "stronghold": "Pháo đài",
+    "skirmish": "Tranh chấp",
+    "clan-wars": "Clan Wars"
+  },
+  "features": {
+    "stronghold": "Pháo đài",
+    "skirmish": "Tranh chấp",
+    "marks-of-excellence": "Dấu hiệu Thiện chiến",
+    "marks-of-mastery": "Dấu ấn thành thạo",
+    "personal-rating": "Chỉ số Cá nhân",
+    "world-of-tanks-rating": "Xếp hạng World of Tanks",
+    "common-test": "Kiểm tra chung",
+    "tournaments": "Tour đấu"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Dấu hiệu Thiện chiến"
+  }
+}

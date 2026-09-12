@@ -1,0 +1,6 @@
+{
+  "label": "Finansuojama bendruomenės",
+  "funded": "Surinkta {pct}%",
+  "tooltip": "Rėmėjai nuo paleidimo padengė {received} iš {goal}",
+  "tooltip-loading": "Finansuojama bendruomenės, be reklamų"
+}

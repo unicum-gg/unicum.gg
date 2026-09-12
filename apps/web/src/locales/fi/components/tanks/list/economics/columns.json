@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Hinta (kreditit)",
+      "tip": "Ostohinta krediitteinä (teknologiapuun panssarivaunut)"
+    },
+    "buyGold": {
+      "label": "Hinta (kulta)",
+      "tip": "Ostohinta kultana (premium-panssarivaunut)"
+    },
+    "researchXp": {
+      "label": "Tutkimus XP",
+      "tip": "Avaukseen tarvittava XP (halvin reitti)"
+    },
+    "totalFreeXp": {
+      "label": "Ilmainen XP (T{tier})",
+      "tip": "Kumulatiivinen XP, joka tarvitaan tutkimiseen tasolta {tier}, vaaditut moduulit mukaan lukien"
+    },
+    "shellCost": {
+      "label": "Kuoren hinta",
+      "tip": "Oletusammuksen hinta (krediitit)"
+    },
+    "ammoCost": {
+      "label": "Täyden ammuksen hinta",
+      "tip": "Oletusammuksen hinta × ammuskapasiteetti"
+    },
+    "acquireMoney": {
+      "label": "Ostohinta ({currency})",
+      "tip": "Arvioitu todellisen rahan määrä panssarivaunun hankkimiseen (tutkimus + osto), valuutassa {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Ilmainen XP ({currency})",
+      "tip": "Arvioitu todellisen rahan määrä panssarivaunun muuntamiseen ilmaisella XP:llä tasolta {tier}, valuutassa {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Hinta (kreditit)",
+    "buyGold": "Hinta (kulta)",
+    "researchXp": "Tutkimus XP",
+    "totalFreeXp": "Ilmainen XP",
+    "shellCost": "Kuoren hinta",
+    "ammoCost": "Täyden ammuksen hinta",
+    "acquireMoney": "Ostohinta (raha)",
+    "freeXpMoney": "Ilmainen XP (raha)"
+  }
+}

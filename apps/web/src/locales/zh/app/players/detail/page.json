@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name}的坦克（{region}），进行过的每辆车辆",
+    "description": "{name}在{region}进行过的每辆坦克，包含每辆车辆的战斗场次、胜率、平均伤害和 WN8。"
+  },
+  "achievements": {
+    "title": "{name}的成就（{region}），获得{medals}枚奖章",
+    "description": "{name}在{region}获得的{medals}枚 World of Tanks 奖章，从科洛巴诺夫和普尔奖章到荣誉军衔和史诗奖章，以及仍未获得的每一枚奖章。"
+  },
+  "tournaments": {
+    "title": "{name}的锦标赛（{region}）",
+    "description": "{name}在{region}参加过的每场默认锦标赛：所属队伍、比赛形式以及队伍走了多远。这是默认从锦标赛一方发布的记录，不代表玩家一方。"
+  },
+  "value": {
+    "title": "{name}的账号价值（{region}）",
+    "description": "{name}在{region}的 World of Tanks 账号价值：车库中存放的银币、金币和经验。"
+  },
+  "mode": {
+    "title": "{name}的{mode}数据（{region}）",
+    "description": "{name}在{region}的{mode}：此模式的战斗场次、胜率和评分，以及其随机战基准。"
+  },
+  "overview": {
+    "title": "{name}的 World of Tanks 数据（{region}），{battles}场战斗，{winrate}%胜率",
+    "description": "{name}在{region}：{battles}场战斗，{winrate}%胜率，{rating}评分。逐坦克分析、WN8、WNX 和完整军团历史。"
+  },
+  "locked": {
+    "title": "{name}的 World of Tanks 账号已锁定（{region}）",
+    "description": "{name}（{region}）存在，但默认已锁定此账号，因此其 World of Tanks 数据不可用。"
+  },
+  "empty": {
+    "title": "{name}的 World of Tanks 玩家数据（{region}）",
+    "description": "{name}（{region}）的 World of Tanks 玩家数据：WN8、WNX 评分、胜率、逐坦克分析和完整军团历史。"
+  }
+}

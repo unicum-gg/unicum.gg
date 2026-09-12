@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo, useState } from "react";
 import {
   formatTimestamp,
@@ -77,21 +78,22 @@ export function VideoSourceFields({
    * same after-battle screen. */
   children?: React.ReactNode;
 }) {
+  const { t: tCopy } = useTranslation("components/tanks/detail/videos/source-fields");
+  const { t } = useTranslation("components/tanks/detail/videos/source-fields");
   return (
     <>
       <label className="flex flex-col gap-1 text-sm">
-        <span className="font-medium">YouTube link</span>
+        <span className="font-medium">{t("youtube-link")}</span>
         <input
           type="url"
           value={source.url}
           onChange={(e) => source.setUrl(e.target.value)}
-          placeholder="https://www.youtube.com/watch?v=…&t=1h05m30s"
+          placeholder={t("https-www-youtube-com-watch")}
           className={INPUT}
         />
         {source.url.trim() && !source.ref && (
           <span className="text-xs text-red-500">
-            That is not a YouTube video link.
-          </span>
+            {t("that-is-not-a-youtube")}</span>
         )}
       </label>
 
@@ -109,9 +111,9 @@ export function VideoSourceFields({
       <div className="grid grid-cols-2 gap-3">
         <label className="flex flex-col gap-1 text-sm">
           <span className="font-medium">
-            Battle starts at{" "}
+            {tCopy("battle-starts-at")}{" "}
             <span className="font-normal text-fd-muted-foreground">
-              (optional)
+              {tCopy("optional")}
             </span>
           </span>
           <input
@@ -124,13 +126,10 @@ export function VideoSourceFields({
           />
           {source.invalid ? (
             <span className="text-xs text-red-500">
-              Use a time like 1:05:30, or leave it empty.
-            </span>
+              {t("use-a-time-like-1")}</span>
           ) : source.missing ? (
             <span className="text-xs text-amber-500">
-              Your link has no timestamp. Scrub the preview above to the battle,
-              or leave it if the video starts on it.
-            </span>
+              {t("your-link-has-no-timestamp")}</span>
           ) : null}
         </label>
         {children}

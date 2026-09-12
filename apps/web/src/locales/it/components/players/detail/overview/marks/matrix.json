@@ -1,0 +1,7 @@
+{
+  "loading": "{count} veicoli di livello {tier}, caricamento dei nomi…",
+  "loading-one": "{count} veicolo di livello {tier}, caricamento del nome…",
+  "and-more": "e altri {count}",
+  "hint": "Fai clic per aprirli nella scheda Carri",
+  "tier": "Livello"
+}

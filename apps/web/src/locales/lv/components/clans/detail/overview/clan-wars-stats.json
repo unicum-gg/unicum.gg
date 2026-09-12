@@ -1,0 +1,21 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Kopā",
+    "day": "Pēdējās 24h",
+    "week": "Pēdējās 7d",
+    "month": "Pēdējās 30d"
+  },
+  "sections": {
+    "territory": "Teritorija",
+    "t10": "X līmenis",
+    "t8": "VIII līmenis",
+    "t6": "VI līmenis"
+  },
+  "rows": {
+    "provinces": "Provinces",
+    "elo": "ELO",
+    "battles": "Kaujas",
+    "winrate": "Uzvaru procents"
+  }
+}

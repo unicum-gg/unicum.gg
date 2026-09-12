@@ -1,0 +1,7 @@
+{
+  "heavyTank": "중전차",
+  "AT-SPG": "구축전차",
+  "mediumTank": "중형전차",
+  "lightTank": "경전차",
+  "SPG": "자주포"
+}

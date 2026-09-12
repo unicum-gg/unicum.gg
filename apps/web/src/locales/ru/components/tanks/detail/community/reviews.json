@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} боёв на нём",
+  "damage": "{damage} Нанесено урона",
+  "n-marks": "{count, plural, one {# отметка} few {# отметки} many {# отметок} other {# отметки}}",
+  "no-written-opinions-yet-if": "Письменных мнений пока нет. Если у вас есть бои, ваше станет первым.",
+  "win-rate": "Процент побед: {toFixed}%",
+  "written-on": "написано в версии {gameVersion}"
+}

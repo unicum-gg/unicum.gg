@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Žaidimo zonos plotis",
+    "height": "Žaidimo zonos aukštis",
+    "round-length": "Mūšio laikmatis",
+    "team-size": "Komandos dydis",
+    "camouflage": "Sezonas",
+    "presence": "Žaidime",
+    "variant-version": "{type} versija",
+    "play-area": "Žaidimo zona",
+    "bases-team1": "Sąjungininkų bazės",
+    "bases-team2": "Priešo bazės",
+    "spawns-team1": "Sąjungininkų atsiradimo vietos",
+    "spawns-team2": "Priešo atsiradimo vietos",
+    "control-point": "Valdymo taškas",
+    "artillery-headquarters": "Artilerijos būstinė",
+    "comms-centers": "Ryšių centrai",
+    "observation-posts": "Stebėjimo postai",
+    "points-of-interest": "Svarbūs taškai"
+  },
+  "summary": {
+    "added": "{name} pridėta",
+    "removed": "{name} pašalintas",
+    "added-to-game": "Pridėta į žaidimą",
+    "removed-from-game": "Pašalintas iš žaidimo",
+    "added-on-test": "Pridėta testavimo kliente",
+    "removed-on-test": "Pašalintas iš testavimo kliento",
+    "mode-added": "{name} režimas pridėtas",
+    "mode-removed": "{name} režimas pašalintas",
+    "now-played-in": "Dabar žaidžiama žemėlapyje {name}",
+    "no-longer-played-in": "Daugiau nebežaidžiama žemėlapyje {name}",
+    "event-added": "{name} dabar gali įvykti mūšio viduryje",
+    "event-removed": "{name} daugiau nebevyksta",
+    "moved": "{name} perkelta",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

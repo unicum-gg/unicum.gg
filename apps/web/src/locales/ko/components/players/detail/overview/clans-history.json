@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname}의 클랜 기록",
+  "clans-in-clans": "클랜 {totalClans}개 · 클랜 활동 시간 {timeInClansSeconds}",
+  "current": "현재",
+  "duration": "지속 시간",
+  "from": "에서",
+  "name": "이름",
+  "no-clan-history": "클랜 기록이 없습니다.",
+  "role": "역할",
+  "tag": "태그",
+  "to": "대상"
+}

@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "คะแนนเฉลี่ยต่อการรบ",
+  "general-parameters": "ค่าตัวแปรทั่วไป",
+  "metric-progression": "พัฒนาการของ {metric}",
+  "not-enough-history-on-this": "ยังมีประวัติของรถถังคันนี้ไม่เพียงพอ ต้องมีภาพบันทึกอย่างน้อยสองภาพในช่วง 90 วันที่ผ่านมาเพื่อวาดเส้น",
+  "record-score": "คะแนนสถิติ",
+  "updated": "อัปเดต"
+}

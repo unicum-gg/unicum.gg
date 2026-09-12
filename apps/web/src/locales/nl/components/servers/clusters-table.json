@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Nog geen cluster geregistreerd.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Delen",
+  "peak": "Piek ({label})",
+  "average": "Gemiddeld ({label})",
+  "not-reported": "Niet gerapporteerd",
+  "total": "Totaal"
+}

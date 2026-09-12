@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Valitse reservi nähdäksesi aikataulun esikatselun.",
+  "schedule": "Aktiivisina päivinä se aktivoituu aikaan {times} (kukin kestää {hours} tuntia) ja kattaa ajan {window}, kun online-käyttäjien vähimmäismäärä täyttyy."
+}

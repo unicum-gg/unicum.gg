@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Pelialueen leveys",
+    "height": "Pelialueen korkeus",
+    "round-length": "Taisteluajastin",
+    "team-size": "Tiikokoko",
+    "camouflage": "Kausi",
+    "presence": "Pelissä",
+    "variant-version": "{type}-versio",
+    "play-area": "Pelialue",
+    "bases-team1": "Liittolaisten tukikohdat",
+    "bases-team2": "Viholliset, tukikohdat",
+    "spawns-team1": "Liittolaisten lähtöpaikat",
+    "spawns-team2": "Viholliset, lähtöpaikat",
+    "control-point": "Valtauspiste",
+    "artillery-headquarters": "Tykistön päämaja",
+    "comms-centers": "Viestintäkeskukset",
+    "observation-posts": "Tähystyspaikat",
+    "points-of-interest": "Kohdealueet"
+  },
+  "summary": {
+    "added": "{name} lisätty",
+    "removed": "{name} poistettu",
+    "added-to-game": "Lisätty peliin",
+    "removed-from-game": "Poistettu pelistä",
+    "added-on-test": "Lisätty testi-asiakasohjelmaan",
+    "removed-on-test": "Poistettu testi-asiakasohjelmasta",
+    "mode-added": "Pelimuoto {name} lisätty",
+    "mode-removed": "Pelimuoto {name} poistettu",
+    "now-played-in": "Nyt pelattu kartalla {name}",
+    "no-longer-played-in": "Kartalla {name} ei ole enää pelattu",
+    "event-added": "Taistelu: {name} voi nyt tapahtua kesken pelin",
+    "event-removed": "Taistelu: {name} ei enää tapahdu",
+    "moved": "Siirto tehty: {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

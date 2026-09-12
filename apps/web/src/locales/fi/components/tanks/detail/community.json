@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Mitä pelaajat ajattelevat tästä panssarivaunusta",
+  "not-rated": "Ei vielä arvioita, ole ensimmäinen",
+  "votes": "{count} ääntä",
+  "votes-one": "{count} Äänestä",
+  "stars": "{value} / {max}",
+  "not-rated-short": "Ei arvioitu"
+}

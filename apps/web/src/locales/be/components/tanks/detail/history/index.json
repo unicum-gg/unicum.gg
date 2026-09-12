@@ -1,0 +1,12 @@
+{
+  "before-update": "Да абнаўлення {version}",
+  "common-test": "Агульны тест",
+  "in-common-test-not-released": "У Агульным тэсце, яшчэ не выпушчана",
+  "introduced": "Уведзена",
+  "lifecycle": "Цыкл жыцця",
+  "n-buffed": "{count} узмоцнена",
+  "n-nerfed": "{count} аслаблена",
+  "not-released-wargaming-can-still": "Не выпушчана. Wargaming яшчэ можа змяніць або прыбраць што-небудзь з гэтага да выхаду абнаўлення.",
+  "status": "Статус",
+  "update": "Абнаўленне {version}"
+}

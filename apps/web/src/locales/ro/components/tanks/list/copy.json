@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Toate cele {count} vehicule World of Tanks de pe {region}. Filtrează după nivel, națiune, clasă și rol, apoi deschide un tanc pentru statisticile sale, cei mai buni jucători și valorile așteptate.",
+    "title": "Toate tancurile World of Tanks ({region}), răsfoiește fiecare vehicul",
+    "description": "Răsfoiește toate tancurile World of Tanks de pe {region}: filtrează după nivel, națiune, clasă și rol, apoi explorează statisticile fiecărui tanc, cei mai buni jucători și valorile așteptate.",
+    "heading": "Toate <accent>tancurile</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, penetrare, blindaj, rază de vizualizare și mobilitate pentru toate cele {count} vehicule World of Tanks de pe {region}. Sortează după orice coloană, apoi filtrează după nivel, națiune, clasă și rol.",
+    "title": "Specificațiile tancurilor World of Tanks ({region}), compară fiecare vehicul",
+    "description": "Compară specificațiile fiecărui tanc World of Tanks de pe {region}: DPM, penetrare, blindaj, rază de vizualizare și mobilitate, cu sortare și filtrare după nivel, națiune, clasă și rol.",
+    "heading": "Specificațiile <accent>tancurilor</accent>"
+  },
+  "economics": {
+    "intro": "Costuri de achiziție și reparație, prețuri ale obuzelor și câștiguri de credite pentru toate cele {count} vehicule World of Tanks de pe {region}. Sortează după orice coloană, apoi filtrează după nivel, națiune, clasă și rol.",
+    "title": "Economia tancurilor World of Tanks ({region}), costuri în credite și XP",
+    "description": "Costuri în credite și XP, prețuri de reparație și ale obuzelor pentru fiecare tanc World of Tanks de pe {region}, cu sortare și filtrare după nivel, națiune, clasă și rol.",
+    "heading": "Economia <accent>tancurilor</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Daunele medii mobile necesare pentru unul, două și trei semne pentru toate cele {count} vehicule World of Tanks de pe {region}. Sortează după orice coloană, apoi filtrează după nivel, națiune, clasă și rol.",
+    "title": "Cerințe pentru semnele de excelență în World of Tanks ({region})",
+    "description": "Daunele necesare pentru unul, două și trei semne de excelență pentru fiecare tanc World of Tanks de pe {region}, cu sortare și filtrare după nivel, națiune, clasă și rol.",
+    "heading": "<accent>Semne de excelență</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Pragurile de XP pentru Asul tanchiștilor și insignele de măiestrie pentru toate cele {count} vehicule World of Tanks de pe {region}. Sortează după orice coloană, apoi filtrează după nivel, națiune, clasă și rol.",
+    "title": "Cerințe pentru semnele de măiestrie în World of Tanks ({region})",
+    "description": "Pragurile de XP pentru Asul tanchiștilor și insignele de măiestrie pentru fiecare tanc World of Tanks de pe {region}, cu sortare și filtrare după nivel, națiune, clasă și rol.",
+    "heading": "<accent>Semne de măiestrie</accent>"
+  },
+  "videos": {
+    "intro": "{count} bătălii asociate de comunitate pe {region}, fiecare deschizându-se în secunda în care începe. Sugerate de pe paginile tancurilor și verificate înainte să apară aici.",
+    "title": "Videoclipuri de joc World of Tanks ({region})",
+    "description": "Bătălii World of Tanks sugerate de comunitate pe {region}, fiecare deschizându-se în secunda în care începe: tancul folosit, harta, partea sa și modul în care s-a încheiat bătălia.",
+    "heading": "Videoclipuri de <accent>gameplay</accent>"
+  }
+}

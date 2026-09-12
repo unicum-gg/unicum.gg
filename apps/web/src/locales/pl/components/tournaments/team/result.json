@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Średnia z {rated} ocenianych z {size} graczy",
+  "average-over-recent": "Średnia z {rated} z {size} graczy, którzy rozegrali bitwy w ciągu ostatnich 30 dni",
+  "avg-winrate": "Średni wskaźnik wygranych",
+  "finished": "Zakończony",
+  "record": "Rekord",
+  "won": "Wygrane"
+}

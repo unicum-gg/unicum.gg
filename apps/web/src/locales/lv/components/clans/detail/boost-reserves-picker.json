@@ -1,0 +1,6 @@
+{
+  "active-until": "Aktīvs līdz {tz}",
+  "n-left": "Atlikušas {count}",
+  "no-reserves-in-stock-right": "Šobrīd krājumā nav rezervju.",
+  "reserves-to-activate": "Aktivizējamās rezerves"
+}

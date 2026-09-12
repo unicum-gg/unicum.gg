@@ -1,0 +1,11 @@
+{
+  "compare": "Ihambing sa {count} pinakamalapit",
+  "match": "laban",
+  "subtitle": "Parehong puwesto sa sarili nilang tier",
+  "verdict": {
+    "overall": "Pangkalahatan na katulad",
+    "closest": "Pinakamalapit sa {axes}",
+    "closest-furthest": "Pinakamalapit sa {axes}, pinakamalayo sa {apart}",
+    "and": " at "
+  }
+}

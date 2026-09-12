@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} bătălii în total",
+  "checking-your-record-on-this": "Se verifică istoricul tău pentru acest tanc...",
+  "fetching-your-garage": "Îți preluăm garajul",
+  "have-you-played": "Ai jucat cu {tank}?",
+  "more-to-go": "Mai sunt necesare {count} bătălii",
+  "more-to-go-one": "Mai este necesară încă {count} bătălie",
+  "sign-in-to-rate-it": "Conectează-te pentru a-l evalua",
+  "sign-in-with-your-wargaming-account-to-rate-": "Conectează-te cu contul tău Wargaming pentru a-l evalua. Îți citim istoricul pentru acest tanc exact, ceea ce împiedică transformarea acestei pagini într-un sondaj al persoanelor care nu l-au condus niciodată.",
+  "signed-in-on": "Conectat pe {region}",
+  "too-few-battles": "Ai {played} bătălii cu {tank}. Solicităm {required} înainte ca un vot să fie luat în calcul, pentru ca această medie să rămână o medie a persoanelor care chiar îl joacă.",
+  "you-have-not-played": "Nu ai jucat cu {tank}"
+}

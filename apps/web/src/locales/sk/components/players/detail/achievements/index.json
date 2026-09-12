@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname}’s úspehi",
+  "filter-all": "Všetky",
+  "filter-both": "Oboje",
+  "filter-earned": "Získané",
+  "filter-missing": "Chýbajúce",
+  "filter-obtainable": "Získateľné",
+  "filter-retired": "Vyradené",
+  "no-achievement-matches-these-filters": "Týmto filtrom nezodpovedá žiadny úspech.",
+  "search-achievements": "Išči úspehe",
+  "search-among-n-achievements": "Hľadať medzi {count} oceneniami"
+}

@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Bậc {rank} trên bảng {board}",
+  "board": {
+    "advances": "Chỉ số đánh giá Tiến công Pháo đài",
+    "skirmish-t10": "Chỉ số đánh giá Tranh chấp Cấp X",
+    "skirmish-t6": "Chỉ số đánh giá Tranh chấp Cấp VI",
+    "skirmish-t8": "Chỉ số đánh giá Tranh chấp Cấp VIII"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "busiest": "Najopterećenije {when} ({players})",
+  "not-enough-recorded-yet-to": "Još nema dovoljno zabilježenih podataka za prikaz tjednog ritma. Popunjava se kako uzorkovanje obuhvaća svaki sat u tjednu.",
+  "not-sampled-yet": "Još nije uzorkovano",
+  "players-on-average": "{players} igrača u prosjeku",
+  "quietest": ", najmirnije {when} ({players})",
+  "your-local-time": "Tvoje lokalno vrijeme"
+}

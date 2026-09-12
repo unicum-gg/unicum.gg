@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "무작위",
+    "battle_royale": "배틀 로얄",
+    "frontline": "전선 대격돌",
+    "onslaught": "격전",
+    "onslaught_night": "{onslaught} 야간",
+    "grand_battle": "대규모 전투",
+    "clan_wars": "클랜 전쟁",
+    "waffentrager": "바펜트레거",
+    "last_stand": "Last Stand",
+    "arcade": "아케이드",
+    "story_mode": "스토리 모드",
+    "training": "훈련"
+  },
+  "player-modes": {
+    "overall": "무작위 전투",
+    "skirmish": "쟁탈전",
+    "advances": "원정",
+    "grand": "대규모 전투",
+    "ranked": "순위 전투",
+    "cw-x": "클랜전 X",
+    "cw-viii": "클랜전 VIII",
+    "cw-vi": "클랜전 VI",
+    "steel-hunter": "배틀 로얄",
+    "onslaught": "격전"
+  },
+  "stronghold-tiers": {
+    "advances": "원정",
+    "t10": "쟁탈전 T10",
+    "t8": "쟁탈전 T8",
+    "t6": "쟁탈전 T6"
+  },
+  "stronghold-periods": {
+    "24h": "지난 24시간",
+    "7d": "최근 7일",
+    "30d": "최근 30일",
+    "overall": "전체"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "전투",
+    "winrate": "승률"
+  },
+  "clan-boards": {
+    "advances": "원정",
+    "t10": "쟁탈전 X",
+    "t8": "쟁탈전 VIII",
+    "t6": "쟁탈전 VI"
+  },
+  "map-modes": {
+    "standard": "기준",
+    "encounter": "조우전",
+    "assault": "강습",
+    "attack-defense": "공방전"
+  },
+  "map-camouflage": {
+    "summer": "하계",
+    "winter": "동계",
+    "desert": "사막"
+  },
+  "map-poi": {
+    "1": "자주포 사령부",
+    "2": "통신 센터",
+    "3": "관측소"
+  },
+  "tournament-modes": {
+    "ctf": "기준",
+    "domination": "조우전",
+    "assault2": "공격/방어",
+    "comp7": "격전"
+  },
+  "battle-formats": {
+    "random": "무작위",
+    "clan_wars": "클랜 전쟁",
+    "advances": "원정",
+    "skirmish": "쟁탈전",
+    "maneuvers": "기동 훈련",
+    "onslaught": "격전",
+    "tournament": "토너먼트"
+  },
+  "battle-results": {
+    "victory": "승리",
+    "defeat": "패배",
+    "draw": "무승부"
+  },
+  "spawn-directions": {
+    "north": "북쪽",
+    "south": "남쪽",
+    "east": "동쪽",
+    "west": "서쪽"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "예정",
+    "registration_started": "등록 시작",
+    "registration_finished": "등록 마감",
+    "running": "진행 중",
+    "finished": "종료 예정",
+    "complete": "완료"
+  },
+  "onslaught-tiers": {
+    "legend": "레전드",
+    "champion": "챔피언",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "중전차",
+    "mediumTank": "미디움",
+    "lightTank": "경량",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "강습",
+    "break": "돌파",
+    "support": "지원",
+    "universal": "다목적",
+    "sniper": "저격",
+    "wheeled": "차륜"
+  },
+  "mastery-badges": {
+    "class3": "3급",
+    "class2": "2급",
+    "class1": "1급",
+    "ace": "에이스 탱커"
+  },
+  "clan-modes": {
+    "random": "무작위 전투",
+    "stronghold": "요새",
+    "skirmish": "쟁탈전",
+    "clan-wars": "클랜 전쟁"
+  },
+  "features": {
+    "stronghold": "요새",
+    "skirmish": "쟁탈전",
+    "marks-of-excellence": "화력의 증표",
+    "marks-of-mastery": "숙련도 마크",
+    "personal-rating": "개인 성적",
+    "world-of-tanks-rating": "월드 오브 탱크 레이팅",
+    "common-test": "공통 테스트",
+    "tournaments": "토너먼트"
+  },
+  "marks": {
+    "1": "1 마크",
+    "2": "2 마크",
+    "3": "3 마크",
+    "name": "화력의 증표"
+  }
+}

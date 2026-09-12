@@ -1,0 +1,18 @@
+{
+  "caught-up": "Tudo em dia, obrigado. Qualquer valor extra será investido em mais capacidade e novas funcionalidades.",
+  "covered-label": "Coberto",
+  "covered-sentence": "Os apoiantes cobriram {received} dos {spent} gastos até agora.",
+  "days-out-of-pocket": "{days} dias pagos do próprio bolso",
+  "from-supporter-one": "de {count} apoiante",
+  "from-supporters": "de {count} apoiantes",
+  "gap-growing": "Com mais {amount}/mês, o défice deixa de aumentar.",
+  "goal": "meta {amount}",
+  "of-that-total": "desse total",
+  "pledges-cover": "Os compromissos já cobrem os custos mensais.",
+  "raised-amount": "{amount} arrecadados",
+  "raised-label": "Arrecadado",
+  "run-at-a-loss": "Desde {since}, {name} funciona com prejuízo.",
+  "run-rate": "Balanço mensal: {pledged}/mês prometidos contra {cost}/mês de custos.",
+  "spent-since-launch": "Total gasto desde o lançamento",
+  "to-catch-up": "Faltam {amount} para ficar totalmente em dia."
+}

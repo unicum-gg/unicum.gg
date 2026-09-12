@@ -1,0 +1,21 @@
+{
+  "title": "Értékelési skála",
+  "description": "A webhely egészén használt színküszöbök a győzelmi arányhoz és a navigációs sávban kiválasztott értékelési mutatóhoz.",
+  "tier": "szint",
+  "tiers": {
+    "top": "Legjobb",
+    "excellent": "Kiváló",
+    "super": "Szuper",
+    "very-good": "Nagyon jó",
+    "good": "Jó",
+    "average": "Átlag",
+    "below-avg": "Átlag alatti",
+    "bad": "Rossz",
+    "very-bad": "Nagyon rossz"
+  },
+  "rating-colors": "Értékelési színek",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

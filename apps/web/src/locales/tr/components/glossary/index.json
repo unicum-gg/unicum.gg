@@ -1,0 +1,22 @@
+{
+  "search": "{count} terim ara",
+  "search-label": "Sözlükte ara",
+  "all": "Tümü",
+  "jump": "Harfe git",
+  "empty": "“{query}” ile eşleşen terim yok.",
+  "categories": {
+    "vehicles": "Araçlar",
+    "gunnery": "Topçuluk",
+    "armor": "Zırh",
+    "mobility": "Hareket Kabiliyeti",
+    "vision": "Görüş",
+    "crew": "Mürettebat",
+    "progression": "İlerleme",
+    "economy": "Ekonomi",
+    "ratings": "Değerlendirmeler",
+    "statistics": "İstatistikler",
+    "modes": "Savaş modları",
+    "tactics": "Taktikler",
+    "slang": "Argo"
+  }
+}

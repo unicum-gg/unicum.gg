@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Aucune session pour le moment. Elles apparaissent dès que ce compte a fait l’objet de deux relevés séparés par des batailles, ce qui se fait automatiquement lorsque des parties sont jouées sur ce compte.",
+  "bar-height-is-battles-played": "La hauteur de la barre représente le nombre de batailles jouées. Sa couleur indique la valeur de {metric} à la granularité {granularity}, selon les mêmes tranches que dans le reste du site.",
+  "title": "Sessions de {nickname}",
+  "title-count": "Sessions de {nickname} ({count})",
+  "granularity": {
+    "day": "jour",
+    "week": "semaine",
+    "month": "mois",
+    "daily": "Quotidien",
+    "weekly": "Hebdomadaire",
+    "monthly": "Mensuel"
+  },
+  "week-of": "Semaine du {date}"
+}

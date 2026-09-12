@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Top <accent>clans</accent>",
+    "language": "Top clans met <accent>{language}</accent> als taal"
+  },
+  "intro": {
+    "all": "{region}-klassement, gerangschikt op basis van {metric}, gemiddeld over de bijgehouden leden van elke clan (minimaal 50 leden die gevechten hebben gespeeld).",
+    "language": "{region}-clans die {language} als een van hun talen hebben opgegeven, gerangschikt op basis van {metric}, gemiddeld over hun bijgehouden leden (minimaal 25 leden die gevechten hebben gespeeld).",
+    "strict": "{region}-clans die {language} als hun enige taal hebben opgegeven, gerangschikt op basis van {metric}, gemiddeld over hun bijgehouden leden (minimaal 25 leden die gevechten hebben gespeeld)."
+  },
+  "board": {
+    "all": "Top {count} clans op basis van {metric}",
+    "language": "Top {count} clans met {language} als taal op basis van {metric}",
+    "strict": "Top {count} clans met uitsluitend {language} als taal op basis van {metric}"
+  },
+  "members": "Leden",
+  "strict-toggle": "Streng",
+  "any-toggle": "Iedereen",
+  "all-languages": "Alle talen",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

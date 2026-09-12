@@ -1,0 +1,8 @@
+{
+  "busiest": "가장 붐비는 {when} ({players}명)",
+  "not-enough-recorded-yet-to": "주간 패턴을 표시할 기록이 아직 충분하지 않습니다. 일주일의 각 시간을 샘플링하면 채워집니다.",
+  "not-sampled-yet": "아직 샘플링되지 않음",
+  "players-on-average": "평균 플레이어 {players}명",
+  "quietest": ", 가장 한산한 {when} ({players}명)",
+  "your-local-time": "현지 시간"
+}

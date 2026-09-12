@@ -1,0 +1,12 @@
+{
+  "final": " · finální",
+  "has-not-held-a-place": "Hráč {nickname} zatím nemá umístění v Žebříčku pro Nápor.",
+  "live-season": "· probíhající sezóna",
+  "loading-s-onslaught-record": "Načítá se záznam hráče {nickname} v režimu Nápor...",
+  "onslaught": "Nápor",
+  "onslaught-record": "Záznam hráče {nickname} v režimu Nápor",
+  "see-this-season-s-leaderboard": "Zobrazit Žebříček pro tuto sezónu",
+  "standing-line": "{rating} Body hodnocení · {battles} Bitev",
+  "the-board-only-lists-players": "Žebříček uvádí pouze hráče, kteří dosáhnou hodnosti Šampion, tedy jen několik tisíc v každém regionu, takže zde skončí téměř každý profil. V sezóně, kdy se na něj dostanou, se údaje doplní automaticky.",
+  "updated": "Aktualizováno {when}"
+}

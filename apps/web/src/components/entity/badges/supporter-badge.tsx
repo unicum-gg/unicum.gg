@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { useTranslation } from "@/hooks/use-translation";
+import Link from "@/components/link";
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import {
   Tooltip,
@@ -38,6 +39,7 @@ export function SupporterBadge({
   state: SupporterBadgeState;
   size?: number;
 }) {
+  const { t } = useTranslation("components/entity/badges/supporter-badge");
   const active = state === SupporterBadgeState.Active;
   return (
     <TooltipProvider>
@@ -46,7 +48,7 @@ export function SupporterBadge({
           <Link
             href={ROUTES.SUPPORT}
             className="inline-flex"
-            aria-label="Supporter"
+            aria-label={t("supporter")}
           >
             <Crest kind={CrestKind.Supporter} size={size} muted={!active} />
           </Link>

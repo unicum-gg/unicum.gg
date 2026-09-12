@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   CaretLeftIcon,
   CaretRightIcon,
@@ -40,16 +41,15 @@ import {
 import type { TankSelection } from "@/hooks/use-compare-selection";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
 type MoeColumn = {
   key: string;
-  label: string;
   marks: 1 | 2 | 3;
-  tip: string;
   value: (t: TankListItem) => number | null;
 };
 
@@ -59,23 +59,17 @@ type MoeColumn = {
 const MOE_COLUMNS: MoeColumn[] = [
   {
     key: "mark1",
-    label: "1 Mark",
     marks: 1,
-    tip: "1 Mark: your rolling average combined damage (last ~100 battles) must beat 65% of players on this tank over the last 14 days",
     value: (t) => t.moe?.mark1 ?? null,
   },
   {
     key: "mark2",
-    label: "2 Marks",
     marks: 2,
-    tip: "2 Marks: your rolling average combined damage (last ~100 battles) must beat 85% of players on this tank over the last 14 days",
     value: (t) => t.moe?.mark2 ?? null,
   },
   {
     key: "mark3",
-    label: "3 Marks",
     marks: 3,
-    tip: "3 Marks: your rolling average combined damage (last ~100 battles) must beat 95% of players on this tank over the last 14 days",
     value: (t) => t.moe?.mark3 ?? null,
   },
 ];
@@ -114,9 +108,15 @@ function useMoeColumns() {
 }
 
 export function MoeColumnSelector() {
+  const { t: tGame } = useTranslation("game/vocabulary");
   const [selected, onToggle] = useMoeColumns();
   return (
-    <ColumnSelector items={MOE_COLUMNS} selected={selected} onToggle={onToggle} />
+    <ColumnSelector
+      items={MOE_COLUMNS}
+      selected={selected}
+      onToggle={onToggle}
+      label={(key) => tGame(`marks.${key.replace("mark", "")}`)}
+    />
   );
 }
 
@@ -151,6 +151,10 @@ export function TanksMoeTable({
   /** When set, each row offers a comparison checkbox. */
   selection?: TankSelection;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tanks/list/marks-of-excellence/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tTable } = useTranslation("components/tanks/table");
   const [sort, setSort] = useState<SortState>({
     key: "mark3",
     direction: SortDirection.Desc,
@@ -226,23 +230,23 @@ export function TanksMoeTable({
           <TableHeader>
             <TableRow>
               <TankCompareHead selection={selection} />
-              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip={tTable("nation")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="nation" />
               </SortHead>
-              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip="Type" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip={tTable("type")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="type" />
               </SortHead>
-              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip="Tier" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip={tTable("tier")} headClassName="w-[72px] min-w-[72px]">
                 <span className="text-xs font-medium tracking-tight text-fd-muted-foreground">
                   I-XI
                 </span>
               </SortHead>
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
-                Name
+                {tTable("name")}
               </SortHead>
               {columns.map((c) => (
-                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
-                  <MarkIcon marks={c.marks} label={c.label} />
+                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={t(`columns.${c.key}.tip`)}>
+                  <MarkIcon marks={c.marks} label={tGame(`marks.${c.marks}`)} />
                 </SortHead>
               ))}
             </TableRow>
@@ -278,7 +282,7 @@ export function TanksMoeTable({
                   const v = c.value(t);
                   return (
                     <TableCell key={c.key} className="text-right tabular-nums">
-                      {v != null ? intFmt.format(v) : DASH}
+                      {v != null ? num(INT_FORMAT).format(v) : DASH}
                     </TableCell>
                   );
                 })}
@@ -290,7 +294,7 @@ export function TanksMoeTable({
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
         <div className="flex items-center gap-2">
-          <span>Rows per page</span>
+          <span>{t("rows-per-page")}</span>
           <Select
             value={String(pageSize)}
             onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
@@ -304,7 +308,7 @@ export function TanksMoeTable({
                   {n}
                 </SelectItem>
               ))}
-              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="all">{t("all")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -317,19 +321,18 @@ export function TanksMoeTable({
               type="button"
               onClick={() => setPage(current - 1)}
               disabled={current <= 1}
-              aria-label="Previous page"
+              aria-label={t("previous-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretLeftIcon weight="bold" className="size-3.5" />
             </button>
             <span className="min-w-16 text-center tabular-nums">
-              Page {current} / {totalPages}
-            </span>
+              {t("page", { current, totalPages })}</span>
             <button
               type="button"
               onClick={() => setPage(current + 1)}
               disabled={current >= totalPages}
-              aria-label="Next page"
+              aria-label={t("next-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretRightIcon weight="bold" className="size-3.5" />

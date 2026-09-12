@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tenkovi igrača {name} ({region}), svako odigrano vozilo",
+    "description": "Svaki tenk kojim je {name} igrao na regiji {region}, s bitkama, procentom pobjeda, prosječnom štetom i WN8 po vozilu."
+  },
+  "achievements": {
+    "title": "Postignuća igrača {name} ({region}), zarađeno medalja: {medals}",
+    "description": "{medals} medalja igre World of Tanks koje je {name} zaradio na regiji {region}, od Kolobanovljeve i Poolove do počasnih činova i epskih medalja, plus svaka koja još nije zarađena."
+  },
+  "tournaments": {
+    "title": "Turniri igrača {name} ({region})",
+    "description": "Svaki Wargaming turnir na kojem je {name} učestvovao na regiji {region}: tim za koji je igrao, format i dokle je stigao. Wargaming objavljuje zapis samo iz perspektive turnira, nikad igrača."
+  },
+  "value": {
+    "title": "Vrijednost računa igrača {name} ({region})",
+    "description": "Koliko vrijedi račun igre World of Tanks igrača {name} na regiji {region}: krediti, zlato i iskustvo vezani u garaži."
+  },
+  "mode": {
+    "title": "Statistike igrača {name} u režimu {mode} ({region})",
+    "description": "{name} na regiji {region} u režimu {mode}: bitke, procenat pobjeda i rejtingzi za ovaj režim, uz osnovu nasumičnih bitaka."
+  },
+  "overview": {
+    "title": "Statistike igrača {name} u igri World of Tanks ({region}), {battles} bitaka, {winrate}% PP",
+    "description": "{name} na regiji {region}: {battles} bitaka, {winrate}% procenat pobjeda, rejting {rating}. Pregled po tenkovima, WN8, WNX i puna historija klanova."
+  },
+  "locked": {
+    "title": "Račun igre World of Tanks igrača {name} zaključan ({region})",
+    "description": "{name} ({region}) postoji, ali je Wargaming zaključao ovaj račun, pa njegove statistike igre World of Tanks nisu dostupne."
+  },
+  "empty": {
+    "title": "Statistike igrača {name} igre World of Tanks ({region})",
+    "description": "Statistike igrača {name} igre World of Tanks ({region}): WN8 i WNX rejtingzi, procenat pobjeda, pregled po tenkovima i puna historija klana."
+  }
+}

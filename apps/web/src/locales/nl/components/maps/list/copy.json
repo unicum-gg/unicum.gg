@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Alle {count} strijdtonelen van World of Tanks. Filter op camouflage en Modus en open daarna een map voor de minimap, de afmetingen en de basisvlaggen en spawnpunten voor elke Modus.",
+    "title": "Alle World of Tanks-maps ({region}), elk strijdtoneel",
+    "description": "Bekijk elke World of Tanks-map op {region}, met minimaps, afmetingen, camouflage en ondersteuning per Modus, plus basisvlaggen en spawnpunten voor elke Modus.",
+    "heading": "Alle <accent>kaarten</accent>"
+  },
+  "battle-type": {
+    "intro": "De {count} World of Tanks-maps die worden gespeeld in de Modus {type}, {blurb}. Open een map voor de minimap, de afmetingen en de basisvlaggen en spawnpunten voor elke Modus.",
+    "title": "World of Tanks-maps voor {type} ({region}), elk strijdtoneel in de rotatie",
+    "description": "Elke World of Tanks-map in de rotatie van de Modus {type} op {region}, met minimaps, afmetingen, camouflage en ondersteuning per Modus, plus basisvlaggen en spawnpunten.",
+    "heading": "{type} <accent>kaarten</accent>"
+  },
+  "blurbs": {
+    "random": "de Standaard-rotatie voor 15 tegen 15",
+    "battle_royale": "de Modus waarin de laatst overgebleven Tank wint",
+    "frontline": "de grootschalige Modus voor 30 tegen 30",
+    "onslaught": "de 7-tegen-7-Modus met klassement",
+    "onslaught_night": "de 7-tegen-7-Modus met klassement in het donker en met een kortere zichtafstand, momenteel speelbaar op de Algemene Test",
+    "grand_battle": "de Modus voor 30 tegen 30 op Niveau X",
+    "clan_wars": "Clanoorlogen en Offensieven",
+    "waffentrager": "het Waffenträger-evenement",
+    "last_stand": "het Last Stand-evenement",
+    "arcade": "arcade- en Actie-evenementen",
+    "story_mode": "de verhaalgedreven operaties",
+    "training": "Trainingsruimtes en tutorials"
+  }
+}

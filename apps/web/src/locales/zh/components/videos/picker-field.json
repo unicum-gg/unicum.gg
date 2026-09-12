@@ -1,0 +1,14 @@
+{
+  "clan": "军团",
+  "clear-the-field": "清除{label}",
+  "credited-on-the-clan-s": "已记入军团专属页面。",
+  "none": "无",
+  "optional": "（可选）",
+  "pick-the-vehicle": "选择车辆",
+  "search-for-a-clan": "搜索军团",
+  "search-for-a-vehicle": "搜索车辆",
+  "search-tank": "搜索坦克...",
+  "tank": "坦克",
+  "tank-hint-optional": "战术属于其地图，因此只有当视频也与该车辆有关时，才值得填写车辆名称。",
+  "tank-hint-required": "随机战斗会根据进行战斗时使用的车辆进行查找。"
+}

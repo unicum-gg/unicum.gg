@@ -67,6 +67,10 @@ export type OnslaughtRow = {
 export type OnslaughtSeasonRef = {
   key: string;
   label: string;
+  /** The ordinal the client releases the season under (`first`, `second`), so a
+   * reader sees the season's own name in their language rather than the English
+   * codename resolved here. Null for the year archives, which are not seasons. */
+  ordinal: string | null;
   available: boolean;
   eventId: string | null;
 };
@@ -248,6 +252,7 @@ export async function getOnslaughtLeaderboard(
     seasonsList.push({
       key: eid ?? `season:${s.ordinal}`,
       label: s.name,
+      ordinal: s.ordinal,
       available: eid != null,
       eventId: eid,
     });
@@ -261,6 +266,7 @@ export async function getOnslaughtLeaderboard(
     seasonsList.push({
       key: s.eventId,
       label: s.codename ?? s.name,
+      ordinal: s.seasonOrdinal ?? null,
       available: true,
       eventId: s.eventId,
     });
@@ -269,6 +275,7 @@ export async function getOnslaughtLeaderboard(
     seasonsList.push({
       key: `archive:${year}`,
       label: `Year of the ${year}`,
+      ordinal: null,
       available: false,
       eventId: null,
     });

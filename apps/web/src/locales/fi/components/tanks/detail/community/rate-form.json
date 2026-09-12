@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Muutama sana lisää: vielä {count}.",
+  "at-winrate": "tasonsa {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Sen peruuttaminen ei onnistunut. Yritä hetken kuluttua uudelleen.",
+  "hide-the-detailed-axes": "Piilota yksityiskohtaiset akselit",
+  "not-enough-battles": "Et ole pelannut tätä panssarivaunua tarpeeksi, jotta äänesi laskettaisiin.",
+  "published-once-read": "Julkaistaan, kun moderaattori on lukenut sen. Tähdistäsi lasketaan heti.",
+  "rate-it-in-detail": "Arvioi yksityiskohtaisesti (valinnainen)",
+  "review": {
+    "none": "Arviointi tallennettu.",
+    "queued": "Arvosana tallennettu. Arvostelusi on moderaattorin käsiteltävänä.",
+    "published": "Arvosana tallennettu. Arvostelusi on jo julkaistu.",
+    "pending": "Arvosana tallennettu. Arvostelusi odottaa yhä moderaattoria.",
+    "rejected": "Arvosana tallennettu. Aiempi arvostelusi ei ollut julkaistu, joten vain tähtesi lasketaan.",
+    "closed": "Arvosana tallennettu. Kirjalliset mielipiteet ovat juuri nyt suljettuina, joten tekstiä ei säilytetty."
+  },
+  "save-failed": "Tallentaminen ei onnistunut. Yritä hetken kuluttua uudelleen.",
+  "say-why-optional": "Kerro miksi (valinnainen)",
+  "signed-with": "Vahvistettu {battles} taistelullasi",
+  "submit-my-rating": "Lähetä arvosanani",
+  "too-many-edits": "Muokkauksia on kerralla paljon. Odota hetki.",
+  "update-my-rating": "Päivitä arvosanani",
+  "what-it-is-good-at": "Missä se on hyvä, missä ei ja kenen pitäisi pelata sillä.",
+  "withdraw": "Peruuta",
+  "your-rating-has-been-withdrawn": "Arvosanasi on peruttu.",
+  "your-review-is-waiting-on": "Arvostelusi odottaa moderaattoria. Vain sinä voit nähdä sen täällä.",
+  "your-review-was-not-published": "Arvosteluasi ei julkaistu. Tähtesi lasketaan silti keskiarvoon."
+}

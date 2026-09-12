@@ -1,0 +1,8 @@
+{
+  "busiest": "Plus forte affluence {when} ({players})",
+  "not-enough-recorded-yet-to": "Pas encore assez de données enregistrées pour afficher un rythme hebdomadaire. La carte se complète à mesure que l’échantillonnage couvre chaque heure de la semaine.",
+  "not-sampled-yet": "Pas encore de données",
+  "players-on-average": "{players} joueurs en moyenne",
+  "quietest": ", plus faible affluence {when} ({players})",
+  "your-local-time": "Votre heure locale"
+}

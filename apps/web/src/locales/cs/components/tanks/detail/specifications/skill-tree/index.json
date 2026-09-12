@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Kliknutím na dostupný uzel jej odemknete. Každý z nich ovlivňuje výše uvedené vlastnosti. Barvy seskupují uzly podle palebné síly, mobility, odolnosti a mechanik vozidla.",
+  "loadout-switch-no-effect": "Přepnutí sestavy v bitvě. Žádný efekt na vlastnost.",
+  "title": "Vylepšení tanku {tank}",
+  "vehicle-mechanic-no-effect": "Mechanik vozidla. Žádný efekt na vlastnost."
+}

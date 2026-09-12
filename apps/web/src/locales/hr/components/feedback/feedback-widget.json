@@ -1,0 +1,21 @@
+{
+  "trigger": "Povratne informacije",
+  "title": "Podijelite svoje mišljenje",
+  "topic-placeholder": "Odaberite temu...",
+  "message-placeholder": "Vaše povratne informacije...",
+  "send": "Pošalji",
+  "sent": "Hvala na povratnim informacijama!",
+  "failed": "Slanje povratnih informacija nije uspjelo. Pokušajte ponovno.",
+  "topics": {
+    "bug": "Prijava greške",
+    "idea": "Prijedlog nove značajke",
+    "data": "Točnost podataka",
+    "other": "Ostalo"
+  },
+  "sentiments": {
+    "awful": "Užasno",
+    "bad": "Loše",
+    "good": "Dobro",
+    "great": "Odlično"
+  }
+}

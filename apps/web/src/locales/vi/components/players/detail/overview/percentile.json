@@ -1,0 +1,7 @@
+{
+  "win-rate": "Tỷ lệ thắng",
+  "versus": "{metric} so với {region}",
+  "top": "Hàng đầu {percent}",
+  "ahead-of": "Vượt trước {percent}%",
+  "against": "Đối đầu với {players} tài khoản {region} được theo dõi, có ít nhất {battles} trận đấu."
+}

@@ -1,0 +1,4 @@
+{
+  "chart-label": "Gracze online na serwer w ciągu ostatnich {range}",
+  "not-enough-recorded-yet-for": "Nie zarejestrowano jeszcze wystarczająco dużo danych dla tego zakresu. Wykres będzie się uzupełniać w miarę pobierania kolejnych próbek."
+}

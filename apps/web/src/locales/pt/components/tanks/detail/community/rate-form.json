@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Mais algumas palavras: faltam {count}.",
+  "at-winrate": "em {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Não foi possível retirar. Tente novamente daqui a instantes.",
+  "hide-the-detailed-axes": "Ocultar os eixos detalhados",
+  "not-enough-battles": "Ainda não jogou batalhas suficientes com este tanque para o seu voto contar.",
+  "published-once-read": "Publicado depois que um moderador ler. Suas estrelas são contabilizadas imediatamente.",
+  "rate-it-in-detail": "Avaliar em detalhes (opcional)",
+  "review": {
+    "none": "Classificação salva.",
+    "queued": "Avaliação guardada. A sua opinião está com um moderador.",
+    "published": "Avaliação guardada. A sua opinião já está publicada.",
+    "pending": "Avaliação guardada. A sua opinião continua a aguardar um moderador.",
+    "rejected": "Avaliação guardada. A sua opinião anterior não foi publicada, por isso só as suas estrelas contam.",
+    "closed": "Avaliação guardada. De momento, não são aceites opiniões escritas, por isso o texto não foi guardado."
+  },
+  "save-failed": "Não foi possível guardar. Tente novamente daqui a instantes.",
+  "say-why-optional": "Diga porquê (opcional)",
+  "signed-with": "Assinado com as suas {battles} batalhas neste tanque",
+  "submit-my-rating": "Enviar minha avaliação",
+  "too-many-edits": "Fez demasiadas alterações de uma só vez. Aguarde um minuto.",
+  "update-my-rating": "Atualizar minha avaliação",
+  "what-it-is-good-at": "Em que se destaca, quais são os seus pontos fracos e quem o deve jogar.",
+  "withdraw": "Retirar",
+  "your-rating-has-been-withdrawn": "A sua avaliação foi retirada.",
+  "your-review-is-waiting-on": "A sua opinião aguarda um moderador. Aqui, só é visível para si.",
+  "your-review-was-not-published": "A sua opinião não foi publicada. As suas estrelas continuam a contar para a média."
+}

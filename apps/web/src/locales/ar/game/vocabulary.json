@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "عشوائي",
+    "battle_royale": "صياد الصلب",
+    "frontline": "خط المواجهة",
+    "onslaught": "الهجوم",
+    "onslaught_night": "{onslaught} الليلي",
+    "grand_battle": "معركة كبرى",
+    "clan_wars": "حروب العشائر",
+    "waffentrager": "Waffenträger",
+    "last_stand": "الصمود الأخير",
+    "arcade": "أركيد",
+    "story_mode": "طور القصة",
+    "training": "تدريب"
+  },
+  "player-modes": {
+    "overall": "المعارك العشوائية",
+    "skirmish": "مناوشة",
+    "advances": "تقدّمات",
+    "grand": "المعارك الكبرى",
+    "ranked": "المعارك المصنّفة",
+    "cw-x": "حروب العشائر X",
+    "cw-viii": "حروب العشائر VIII",
+    "cw-vi": "حروب العشائر VI",
+    "steel-hunter": "صياد الصلب",
+    "onslaught": "الهجوم"
+  },
+  "stronghold-tiers": {
+    "advances": "تقدّمات",
+    "t10": "مناوشة T10",
+    "t8": "مناوشة T8",
+    "t6": "مناوشة T6"
+  },
+  "stronghold-periods": {
+    "24h": "آخر 24 ساعة",
+    "7d": "آخر 7 أيام",
+    "30d": "آخر 30 يوم",
+    "overall": "بشكل عام"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "معارك",
+    "winrate": "معدل الفوز"
+  },
+  "clan-boards": {
+    "advances": "تقدّمات",
+    "t10": "مناوشة X",
+    "t8": "مناوشة VIII",
+    "t6": "مناوشة VI"
+  },
+  "map-modes": {
+    "standard": "قياسي",
+    "encounter": "مواجهة",
+    "assault": "هجوم",
+    "attack-defense": "هجوم/دفاع"
+  },
+  "map-camouflage": {
+    "summer": "صيفي",
+    "winter": "شتوي",
+    "desert": "صحراوي"
+  },
+  "map-poi": {
+    "1": "مقر المدفعية",
+    "2": "مركز الاتصالات",
+    "3": "نقطة المراقبة"
+  },
+  "tournament-modes": {
+    "ctf": "قياسي",
+    "domination": "مواجهة",
+    "assault2": "هجوم/دفاع",
+    "comp7": "الهجوم"
+  },
+  "battle-formats": {
+    "random": "عشوائي",
+    "clan_wars": "حروب العشائر",
+    "advances": "تقدّمات",
+    "skirmish": "مناوشة",
+    "maneuvers": "مناورات",
+    "onslaught": "الهجوم",
+    "tournament": "بطولة"
+  },
+  "battle-results": {
+    "victory": "انتصار",
+    "defeat": "هزيمة",
+    "draw": "تعادل"
+  },
+  "spawn-directions": {
+    "north": "شمال",
+    "south": "جنوب",
+    "east": "شرق",
+    "west": "غرب"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "قريباً",
+    "registration_started": "التسجيل مفتوح",
+    "registration_finished": "التسجيل مغلق",
+    "running": "جاري التنفيذ",
+    "finished": "الانتهاء",
+    "complete": "مكتمل"
+  },
+  "onslaught-tiers": {
+    "legend": "أسطورة",
+    "champion": "بطل",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "ثقيلة",
+    "mediumTank": "متوسطة",
+    "lightTank": "خفيفة",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "هجومية",
+    "break": "اختراق",
+    "support": "الدعم",
+    "universal": "متعددة المهام",
+    "sniper": "قنّاصة",
+    "wheeled": "بعجلات"
+  },
+  "mastery-badges": {
+    "class3": "الدرجة الثالثة",
+    "class2": "الدرجة الثانية",
+    "class1": "الدرجة الأولى",
+    "ace": "أفضل سائق دبابات"
+  },
+  "clan-modes": {
+    "random": "المعارك العشوائية",
+    "stronghold": "المعقل",
+    "skirmish": "مناوشة",
+    "clan-wars": "حروب العشائر"
+  },
+  "features": {
+    "stronghold": "المعقل",
+    "skirmish": "مناوشة",
+    "marks-of-excellence": "علامات التميز",
+    "marks-of-mastery": "علامات الإتقان",
+    "personal-rating": "التصنيف الشخصي",
+    "world-of-tanks-rating": "تصنيف World of Tanks",
+    "common-test": "اختبار مشترك",
+    "tournaments": "بطولات"
+  },
+  "marks": {
+    "1": "علامة 1",
+    "2": "علامتين 2",
+    "3": "3 علامات",
+    "name": "علامات التميز"
+  }
+}

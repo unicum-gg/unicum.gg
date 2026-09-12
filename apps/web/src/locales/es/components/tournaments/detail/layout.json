@@ -1,0 +1,12 @@
+{
+  "final": "Final",
+  "grand-final": "Gran final",
+  "loser-bracket-final": "Final del bastidor de perdedores",
+  "loser-round": "Ronda de perdedores {round}",
+  "quarter-finals": "Cuartos de final",
+  "round-of": "Ronda de {teams} equipos",
+  "semi-finals": "Semifinales",
+  "third-place": "Tercera posición",
+  "winner-bracket-final": "Final del bastidor de Ganador",
+  "winner-round": "Ronda de Ganador {round}"
+}

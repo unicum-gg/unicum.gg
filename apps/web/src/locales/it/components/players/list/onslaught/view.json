@@ -1,0 +1,35 @@
+{
+  "heading": "Migliori giocatori in <accent>{mode}</accent>",
+  "intro": "{mode} è la modalità classificata competitiva 7 contro 7 di World of Tanks per veicoli di livello X. La classifica della regione {region}, direttamente dalle graduatorie del gioco.",
+  "season": {
+    "range": "Da {start} a {end}",
+    "final": "classifica finale",
+    "live": "stagione in corso",
+    "updated": "aggiornato {when}"
+  },
+  "board": "I {count} migliori giocatori di {mode}",
+  "columns": {
+    "player": "Giocatore",
+    "rank": "Rango",
+    "battles": "Battaglie",
+    "rating": "Punti Classifica"
+  },
+  "alias": "(come {nickname})",
+  "ranks": {
+    "title": "Ranghi",
+    "meaning": "Significato",
+    "tier": "Livello",
+    "intro": "Si scalano i ranghi di {mode} vincendo battaglie: ogni vittoria assegna Punti di valutazione in base alla prestazione. Il rango {champion} è il più alto che puoi raggiungere con i soli punti e raggiungerlo ti fa entrare in classifica. Il rango {legend} non ha una soglia fissa: comprende la fascia con la valutazione più alta tra i giocatori di rango {champion}, quindi il limite varia in base ai partecipanti (in caso di parità, conta il numero di battaglie giocate). Le soglie esatte dei ranghi {legend} e {champion} sono quelle della stagione in corso e sono indicate nella classifica.",
+    "legend-blurb": "I giocatori di rango {champion} con la valutazione più alta. Ogni stagione, il limite viene fissato in base a una specifica posizione in classifica (quindi il numero di giocatori inclusi varia in base alla stagione e alla regione), non a un punteggio prestabilito. Se scendi al di sotto dell’ultima posizione valida per il rango {legend}, torni al rango {champion}.",
+    "champion-blurb": "Il rango più alto raggiungibile con i Punti di valutazione e quello che dà accesso alla classifica. Ogni giocatore in classifica è almeno di rango {champion}."
+  },
+  "race": {
+    "title-live": "Cosa serve adesso",
+    "title-ended": "Com’è andata la stagione",
+    "legend-cutoff": "Soglia di {legend}",
+    "champion-cutoff": "Soglia di {champion}",
+    "ranked-players": "Giocatori classificati",
+    "rating-points": "Punti Classifica",
+    "rank-cutoffs": "Soglie di Rango"
+  }
+}

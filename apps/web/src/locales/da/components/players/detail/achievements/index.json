@@ -1,0 +1,12 @@
+{
+  "achievements": "Bedrifter fra {nickname}",
+  "filter-all": "Alle",
+  "filter-both": "Begge",
+  "filter-earned": "Optjente",
+  "filter-missing": "Mangler",
+  "filter-obtainable": "Kan optjenes",
+  "filter-retired": "Udgåede",
+  "no-achievement-matches-these-filters": "Ingen præstation matcher disse filtre.",
+  "search-achievements": "Søg bedrifter",
+  "search-among-n-achievements": "Søg blandt {count} præstationer"
+}

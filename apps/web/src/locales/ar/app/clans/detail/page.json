@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name}، قبيلة World of Tanks ({region})، {members} أعضاء",
+    "description": "{name} [{tag}] في {region}: {members} أعضاء، جدول أعضاء كامل مع تقييمات WN8 وWNX، ونشاط الانضمام والمغادرة الأخير، وتاريخ القبيلة."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name}، إحصائيات المعقل ({region})",
+    "description": "أداء معقل {name} [{tag}] في {region}: تقييمات المناوشات والتقدم، والمعارك ونسبة الفوز لكل عضو."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name}، إحصائيات حروب العشائر ({region})",
+    "description": "أداء حروب عشائر {name} [{tag}] في {region}: تقييمات كل عضو، والمعارك ونسبة الفوز عبر حملات الخريطة العالمية."
+  },
+  "tanks": {
+    "title": "[{tag}] {name}، دبابات ({region})، مركبات القبيلة",
+    "description": "كل مركبة لعبها {name} [{tag}] في {region}، مع إجمالي المعارك ونسبة الفوز ومتوسط الضرر عبر أعضاء القبيلة."
+  },
+  "manage": {
+    "title": "[{tag}] {name}، احتياطيات المعقل ({region})",
+    "description": "فعّل وجدول احتياطيات معقل {name} [{tag}]. للضباط فقط."
+  },
+  "missing": {
+    "description": "قبيلة World of Tanks [{tag}] في {region}: جدول أعضاء مع تقييمات WN8/WNX، ونشاط الانضمام والمغادرة، والمعارك الأخيرة، وتاريخ القبيلة الكامل."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktive dage",
+  "add-workflow": "Tilføj arbejdsgang",
+  "connect-discord": "Forbind Discord",
+  "discord-notifications": "Discord-notifikationer",
+  "each-workflow-activates-its-reserves": "Hver arbejdsgang aktiverer sine reserver i et tidsvindue, når nok medlemmer er i en live spilsession. Den kører på din konto, uden at du behøver være online. Tilføj så mange, du har brug for.",
+  "enabled": "Aktiveret",
+  "from": "Fra",
+  "get-a-discord-message-in": "Få en Discord-meddelelse i en valgfri kanal, hver gang en boost aktiveres, så hele klanen ved, at den er live.",
+  "log-in-with-wargaming-to": "Log ind med Wargaming for at konfigurere det",
+  "min-online": "Min online",
+  "officers": "Officers",
+  "only-an-officer-of-this": "Kun en officer i denne klan kan konfigurere det.",
+  "schedule-preview": "Planlægningsoversigt",
+  "set-your-hours-and-reserves": "Indstil dine tidspunkter og reserver én gang. Boosts aktiveres derefter automatisk til tiden, selv når ingen er til stede for at trykke på knappen.",
+  "stronghold-boosts": "Stronghold boosts",
+  "times-are-in-your-timezone": "Tidspunkterne er i {tz}, din tidszone.",
+  "to": "Til"
+}

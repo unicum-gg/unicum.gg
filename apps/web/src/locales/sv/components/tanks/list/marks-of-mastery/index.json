@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3:e klass",
+      "tip": "3:e klass: XP som krävs för att slå 50 % av alla spelare"
+    },
+    "class2": {
+      "label": "2:a klass",
+      "tip": "2:a klass: XP som krävs för att slå 80 % av alla spelare"
+    },
+    "class1": {
+      "label": "1:a klass",
+      "tip": "1:a klass: XP som krävs för att slå 95 % av alla spelare"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: XP som krävs för att slå 99 % av alla spelare"
+    }
+  },
+  "rows-per-page": "Rader per sida",
+  "previous-page": "Föregående sida",
+  "page": "Sida {current} / {totalPages}",
+  "next-page": "Nästa sida",
+  "all": "Alla"
+}

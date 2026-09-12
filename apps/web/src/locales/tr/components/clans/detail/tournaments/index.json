@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "[{tag}] takip ettiğimiz hiçbir turnuvaya katılmadı. Bir takım, oynadığı gün kadrosunun dörtte biri bu klanın üyesiyse bu klanın takımı sayılır.",
+  "won": "{count} kazandı"
+}

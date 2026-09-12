@@ -1,0 +1,12 @@
+{
+  "slot": "Hely {n}",
+  "slot-filled": "{n}. rekesz: {name}",
+  "consumable-slot": "{n}. fogyócikkrekesz",
+  "consumable-slot-filled": "{n}. fogyócikkrekesz: {name}",
+  "level": "Szint {n}",
+  "stock": "Alapállapot",
+  "specialize": "Kattints a rekesz specializálásához.",
+  "clear-specialization": "Kattints a rekesz specializálásának törléséhez.",
+  "crew-skills": "Személyzet Készségek",
+  "shell-aria": "{name}: {damage} sebzés, {penetration} mm átütés"
+}

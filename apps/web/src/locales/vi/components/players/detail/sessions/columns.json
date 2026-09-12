@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Xếp hạng (WN)",
+    "tip": "Chỉ số đánh giá chỉ tính riêng các trận đấu này, không phải của tài khoản"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Tỷ lệ thắng trong các trận đấu này"
+  },
+  "avgDamage": {
+    "label": "Thiệt hại trung bình"
+  },
+  "avgFrags": {
+    "label": "Trung bình hạ gục",
+    "tip": "Số kẻ địch bị tiêu diệt mỗi trận đấu"
+  },
+  "damageRatio": {
+    "label": "Hệ số Sát thương",
+    "tip": "Sát thương gây ra trên sát thương nhận vào"
+  },
+  "kd": {
+    "label": "Tỷ lệ Phá hủy",
+    "tip": "Số kẻ địch bị tiêu diệt trên số xe bị mất"
+  },
+  "survivalRate": {
+    "label": "Số trận sống sót"
+  },
+  "avgSpotted": {
+    "label": "Trung bình bị phát hiện",
+    "tip": "Số kẻ địch phát hiện mỗi trận đấu"
+  },
+  "avgDefense": {
+    "label": "Phòng thủ căn cứ",
+    "tip": "Điểm phòng thủ mỗi trận đấu"
+  },
+  "avgXp": {
+    "label": "Trung bình XP"
+  }
+}

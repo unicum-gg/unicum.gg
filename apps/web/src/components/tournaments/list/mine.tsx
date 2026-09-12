@@ -1,7 +1,9 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import useSWR from "swr";
-import Link from "next/link";
+import Link from "@/components/link";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { PanelSeparator } from "@/components/panel";
 import { RankMedal } from "@/components/rank-medal";
@@ -19,12 +21,7 @@ import type { PlayerTournamentRecord } from "@/components/players/detail/tournam
  * tab, which is one click away. */
 const SHOWN = 5;
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const DATE_PATTERN = "d MMM yyyy" /* UTC */;
 
 /**
  * The signed-in player's own tournament record, on the catalogue page.
@@ -39,6 +36,8 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
  * yours") on a page full of real data is an advert, not a feature.
  */
 export function MyTournaments() {
+  const { date } = useFormat();
+  const { t } = useTranslation("components/tournaments/list/mine");
   const { data: session } = useSession();
   const identity = wgIdentityFromEmail(session?.user.email);
   const nickname = session?.user.name ?? null;
@@ -66,12 +65,13 @@ export function MyTournaments() {
           screenLines={false}
           className="flex flex-wrap items-center justify-between gap-2 border-b border-fd-border"
         >
-          <PanelTitle>Your tournaments ({data.entries.length})</PanelTitle>
+          <PanelTitle>{t("your-tournaments", { length: data.entries.length })}</PanelTitle>
           <Link
             href={`${ROUTES.PLAYER(identity.region, nickname)}/tournaments`}
             className="text-xs text-fd-muted-foreground hover:text-fd-foreground hover:underline"
           >
-            {data.wins > 0 ? `${data.wins} won · ` : ""}See all
+            {data.wins > 0 ? `${t("won", { count: data.wins })} · ` : ""}
+            {t("see-all")}
           </Link>
         </PanelHeader>
         <PanelContent className="flex flex-col gap-1.5 p-4">
@@ -81,7 +81,7 @@ export function MyTournaments() {
               className="flex min-w-0 items-baseline gap-2 text-sm"
             >
               <span className="shrink-0 text-xs text-fd-muted-foreground tabular-nums">
-                {dateFmt.format(e.startAt)}
+                {date(DATE_PATTERN).format(e.startAt)}
               </span>
               <Link
                 href={ROUTES.TOURNAMENT(identity.region, e.tournamentId)}

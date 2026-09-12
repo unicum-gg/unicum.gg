@@ -1,0 +1,13 @@
+{
+  "heading": "Top players in <accent>{mode}</accent>",
+  "intro": "{mode} is World of Tanks’ battle royale mode. The {region} leaderboard, ranked by HR (minimum 100 {mode} battles).",
+  "board": "Top {count} {mode} players",
+  "columns": {
+    "player": "Player",
+    "battles": "Battles",
+    "survival": "Survival",
+    "survival-percent": "Survival %",
+    "damage": "Avg damage"
+  },
+  "scale-description": "Color thresholds for the {mode} board, calibrated on the population of players with at least 100 {mode} battles."
+}

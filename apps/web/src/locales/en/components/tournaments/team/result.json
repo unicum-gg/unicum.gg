@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Average over {rated} of {size} players",
+  "average-over-recent": "Average over the {rated} of {size} players who played in the last 30 days",
+  "avg-winrate": "Avg winrate",
+  "finished": "Finished",
+  "record": "Record",
+  "won": "Won"
+}

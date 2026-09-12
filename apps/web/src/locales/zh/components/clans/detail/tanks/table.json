@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "该军团暂无坦克数据。",
+  "no-tanks-match-these-filters": "没有坦克符合这些筛选条件。",
+  "nation": "系别",
+  "type": "类型",
+  "tier": "等级",
+  "name": "坦克名称",
+  "members": "成员",
+  "battles": "战斗场次",
+  "avg-damage": "平均伤害",
+  "avg-xp": "平均经验",
+  "wr": "WR"
+}

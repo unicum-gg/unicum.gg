@@ -1,0 +1,13 @@
+{
+  "assists": "アシスト",
+  "close": "閉じる",
+  "damage": "ダメージ",
+  "in-the-queue": "キューに追加されました。モデレーターの確認後、このタブに表示されます。",
+  "optional": "(オプショナル)",
+  "paste-a-youtube-link": "YouTubeリンクを貼り付け、戦闘開始の正確な時点を設定してください。開いた人は全員その秒から再生されるため、タイムスタンプがずれている提案はレビューで却下されます。",
+  "sending": "送信中…",
+  "suggest": "提案",
+  "suggest-a-video": "動画を提案",
+  "suggest-another": "別の提案をする",
+  "suggestion-sent": "提案を送信しました"
+}

@@ -1,8 +1,10 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { StarIcon } from "@phosphor-icons/react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { tierBand } from "@/components/tournaments/tier-label";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
@@ -34,7 +36,6 @@ import {
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import {
-  TOURNAMENT_GAME_MODE_LABEL,
   isTournamentLive,
   isTournamentOpen,
   teamFormat,
@@ -51,6 +52,7 @@ import {
   TournamentSortColumn,
   type TournamentSortState,
 } from "./sorting";
+import { FilterSubject } from "@/components/filter-subject";
 
 /** The band as this table shows it: the numeral, or its own placeholder. */
 const tierBandOrDash = (from: number | null, to: number | null) =>
@@ -58,12 +60,7 @@ const tierBandOrDash = (from: number | null, to: number | null) =>
 
 const DASH = "—";
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const DATE_PATTERN = "d MMM yyyy" /* UTC */;
 
 export type TournamentListRow = {
   id: number;
@@ -142,6 +139,9 @@ export function TournamentsBoard({
   region: Region;
   rows: TournamentListRow[];
 }) {
+  const { date } = useFormat();
+  const { t } = useTranslation("components/tournaments/list/board");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const [filter, setFilter] = useState(DEFAULT_FILTER);
   const [sort, setSort] = useState<TournamentSortState>(null);
 
@@ -163,9 +163,9 @@ export function TournamentsBoard({
     (r: TournamentListRow) => [
       r.title,
       r.prize,
-      ...r.gameModes.map((m) => TOURNAMENT_GAME_MODE_LABEL[m]),
+      ...r.gameModes.map((m) => tGame(`tournament-modes.${m}`)),
     ],
-    [],
+    [tGame],
   );
   const rangeCols = useMemo<RangeColumn<TournamentListRow>[]>(
     () => [
@@ -208,7 +208,7 @@ export function TournamentsBoard({
     );
     if (fromUrl) setSort(fromUrl);
     /* eslint-enable react-hooks/set-state-in-effect */
-  }, []);
+  }, [, tGame]);
 
   function changeFilter(next: TournamentFilter) {
     setFilter(next);
@@ -230,7 +230,10 @@ export function TournamentsBoard({
         className="flex flex-wrap items-center justify-between gap-2 border-b border-fd-border"
       >
         <PanelTitle>
-          {REGION_LABEL[region]} tournaments ({visible.length})
+          {t("region-tournaments", {
+            region: REGION_LABEL[region],
+            count: visible.length,
+          })}
         </PanelTitle>
         <SegmentedControl
           segments={FILTERS}
@@ -241,19 +244,16 @@ export function TournamentsBoard({
       <PanelContent className="p-0">
         {visible.length === 0 ? (
           <p className={cn(styles.mutedDescription, "p-4")}>
-            Nothing here right now. Wargaming opens new tournaments daily, so this
-            fills back in on its own.
-          </p>
+            {t("nothing-here-right-now-wargaming")}</p>
         ) : (
           <>
             <div className="flex flex-col gap-2 border-b border-fd-border px-4 py-2.5">
-              <LeaderboardFilterBar filters={filters} searchNoun="tournaments" />
+              <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Tournaments} />
               <TournamentFacetBar facets={facets} />
             </div>
             {filtered.length === 0 ? (
               <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-                No tournament matches the current filters.
-              </div>
+                {t("no-tournament-matches-the-current")}</div>
             ) : (
               <Table
                 className={cn(
@@ -276,51 +276,45 @@ export function TournamentsBoard({
                       onToggle={toggleSort}
                       className="w-32 whitespace-nowrap"
                     >
-                      Date
-                    </SortHead>
+                      {t("date")}</SortHead>
                     <SortHead
                       column={TournamentSortColumn.Title}
                       state={sort}
                       onToggle={toggleSort}
                     >
-                      Tournament
-                    </SortHead>
-                    <TableHead className="w-40">Status</TableHead>
+                      {t("tournament")}</SortHead>
+                    <TableHead className="w-40">{t("status")}</TableHead>
                     <TableHead className="hidden w-32 whitespace-nowrap md:table-cell">
-                      Mode
-                    </TableHead>
+                      {t("mode")}</TableHead>
                     <SortHead
                       column={TournamentSortColumn.Tier}
                       state={sort}
                       onToggle={toggleSort}
                       className="w-20 text-end!"
                     >
-                      Tier
-                    </SortHead>
+                      {t("tier")}</SortHead>
                     <SortHead
                       column={TournamentSortColumn.Format}
                       state={sort}
                       onToggle={toggleSort}
                       className="w-24 text-end! whitespace-nowrap"
                     >
-                      Format
-                    </SortHead>
+                      {t("format")}</SortHead>
                     <SortHead
                       column={TournamentSortColumn.Teams}
                       state={sort}
                       onToggle={toggleSort}
                       className="w-24 text-end!"
                     >
-                      Teams
-                    </SortHead>
-                    <TableHead className="hidden w-28 lg:table-cell">Prize</TableHead>
+                      {t("teams")}</SortHead>
+                    <TableHead className="hidden w-28 lg:table-cell">{t("prize")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {paged.map((r) => (
                     <TableRow key={r.id}>
                       <TableCell className="whitespace-nowrap text-fd-muted-foreground tabular-nums">
-                        {dateFmt.format(r.startAt)}
+                        {date(DATE_PATTERN).format(r.startAt)}
                       </TableCell>
                       <TableCell className="truncate">
                         {/* The organiser's logo, which is what tells two
@@ -342,7 +336,7 @@ export function TournamentsBoard({
                           <StarIcon
                             weight="fill"
                             className="mr-1.5 inline size-3.5 align-[-2px] text-amber-500"
-                            aria-label="Featured tournament"
+                            aria-label={t("featured-tournament")}
                           />
                         )}
                         <Link
@@ -358,7 +352,7 @@ export function TournamentsBoard({
                       </TableCell>
                       <TableCell className="hidden truncate text-fd-muted-foreground md:table-cell">
                         {r.gameModes
-                          .map((m) => TOURNAMENT_GAME_MODE_LABEL[m])
+                          .map((m) => tGame(`tournament-modes.${m}`))
                           .join(", ") || DASH}
                       </TableCell>
                       <TableCell className="text-end tabular-nums">

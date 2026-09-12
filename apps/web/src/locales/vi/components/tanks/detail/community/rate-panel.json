@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Tổng cộng {battles} trận đấu",
+  "checking-your-record-on-this": "Đang kiểm tra thành tích của bạn với xe tăng này...",
+  "fetching-your-garage": "Đang lấy dữ liệu nhà xe của bạn",
+  "have-you-played": "Bạn đã chơi {tank} chưa?",
+  "more-to-go": "Còn {count} trận đấu nữa",
+  "more-to-go-one": "Còn {count} trận đấu nữa",
+  "sign-in-to-rate-it": "Đăng nhập để đánh giá",
+  "sign-in-with-your-wargaming-account-to-rate-": "Đăng nhập bằng tài khoản Wargaming để đánh giá. Chúng tôi đọc thành tích của bạn trên chính xe tăng này, nhờ đó trang không trở thành cuộc bình chọn của những người chưa từng điều khiển nó.",
+  "signed-in-on": "Đã đăng nhập tại {region}",
+  "too-few-battles": "Bạn có {played} trận đấu với {tank}. Chúng tôi yêu cầu {required} trận trước khi lượt bình chọn được tính, để giá trị trung bình này thực sự là trung bình của những người đã chơi xe này.",
+  "you-have-not-played": "Bạn chưa chơi {tank}"
+}

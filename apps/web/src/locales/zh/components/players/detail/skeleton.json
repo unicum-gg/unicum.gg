@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname}的随机战斗数据",
+  "progression": "{nickname}的{metricLabel}进展",
+  "solid-line-is-overall-matches": "实线表示总体{metricLabel}，与上方“总计”列一致，会随着新战斗累积而缓慢变化。虚线表示每次对战的{metricLabel2}，根据上次快照以来进行的战斗场次计算，用于显示连胜和连败。线条颜色对应评分等级。",
+  "tanks-shaping-s-rating": "影响{nickname}评分的坦克",
+  "tanks": "{nickname}的坦克",
+  "stats": "{nickname}的{strongholdLabel}数据"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Märken och förtjänsttecken för {nickname}",
+  "excellence": {
+    "title": "Skyttemärken",
+    "description": "Vagnar efter skyttemärken på kanonen. Ett märke kräver ett varaktigt genomsnitt: spelet beräknar det över ett rullande intervall av de senaste striderna jämfört med vad regionen presterar i samma vagn.",
+    "partial": "Märken har lästs in för {known} av {garage} vagnar. Resten fylls i allteftersom kontot uppdateras.",
+    "note": "{marked} av {garage} vagnar har ett märke.",
+    "note-share": "{marked} av {garage} vagnar har ett märke ({percent} % av garaget)."
+  },
+  "mastery": {
+    "title": "Mästermärken",
+    "description": "Vagnar efter sitt bästa förtjänsttecken. Ett förtjänsttecken bygger på en strid i stället för ett genomsnitt: spelet delar ut det utifrån erfarenheten från en enskild strid jämfört med vad regionen får i samma vagn.",
+    "note": "{aces} av {garage} vagnar har märket Ace Tanker.",
+    "note-share": "{aces} av {garage} vagnar har märket Ace Tanker ({percent} % av garaget)."
+  },
+  "reach": {
+    "heading": "Presterar bättre än kanonen visar",
+    "description": "Vagnar vars kombinerade skada redan överstiger gränsen för ett märke de inte har. Etiketten visar den kombinerade skadan och färgas efter märket vars gräns den överstiger."
+  },
+  "none": "Inga"
+}

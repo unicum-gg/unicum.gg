@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "ユーロで請求され、今日の為替レートで{currency}に換算されます。",
+  "cost-breakdown": "コスト内訳",
+  "estimated-annual-cost": "年間推定コスト",
+  "fixed-month-bill-no-surprises": "月額{totalAnnualEur}の固定料金で、追加費用はありません。レンタルサーバー1台のみで、データ経路にサードパーティ製SaaSはありません。サーバーの性能を超えた場合のみ増加します（Wargamingの処理量が増えると、より多くの外向きIPが必要になります）。",
+  "free": "無料",
+  "one-off-spend": "一回限りの支出",
+  "paid-once-so-it-is": "一度だけ支払うため、上記の月額料金には含まれません。ただし、これまでのプロジェクトのコストには加算されます。",
+  "previously": "以前の"
+}

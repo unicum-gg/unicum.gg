@@ -1,0 +1,25 @@
+{
+  "tagline": "A World of Tanks közösségének készült. Ingyen elérhető statisztikák minden játékosról, klánról, tankról és pályáról az EU-ban, NA-ban és Ázsiában.",
+  "columns": {
+    "leaderboards": "Feliratkozási listák",
+    "tanks": "Tankok",
+    "maps": "Pályák",
+    "integrations": "Integrációk",
+    "project": "Projekt"
+  },
+  "links": {
+    "top-tanks": "Legjobb tankok",
+    "bot": "Discord bot",
+    "mcp": "MCP szerver",
+    "docs": "API-dokumentáció",
+    "badges": "Jelek",
+    "glossary": "Szótár",
+    "coverage": "Lefedettség",
+    "support": "Támogass minket",
+    "source": "Forráskód",
+    "status": "Állapot",
+    "discord": "Discord"
+  },
+  "disclaimer": "Nem áll kapcsolatban a Wargaming vállalattal",
+  "cookies": "Sütik kezelése"
+}

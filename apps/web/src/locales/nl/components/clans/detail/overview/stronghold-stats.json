@@ -1,0 +1,22 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Totaal",
+    "day": "Laatst 24u",
+    "week": "Laatst 7d",
+    "month": "Laatst 30d"
+  },
+  "sections": {
+    "elo": "ELO voor Niveau X ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "Niveau X: {skirmish} (7v7)",
+    "t8": "Niveau VIII: {skirmish} (7v7)",
+    "t6": "Niveau VI: {skirmish} (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Gevechten",
+    "winrate": "Winstpercentage"
+  }
+}

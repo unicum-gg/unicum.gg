@@ -1,0 +1,9 @@
+{
+  "battle-time": "Savaş süresi",
+  "camouflage": "{camouflage} kamuflaj",
+  "mode": "Mod",
+  "n-random-events": "{count, plural, one {# rastgele etkinlik} other {# rastgele etkinlikler}}",
+  "random-events": "Rastgele etkinlikler",
+  "size": "Boyut",
+  "team-size": "Takım boyutu"
+}

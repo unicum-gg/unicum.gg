@@ -1,0 +1,9 @@
+{
+  "all": "Барлығы",
+  "camouflage-map": "{camouflage} карта",
+  "modes": "{count, plural, one {# режим} other {# режимдер}}",
+  "no-maps-match-your-filters": "Сүзгілеріңізге сәйкес карталар жоқ.",
+  "search": "{count} карта арасынан іздеу",
+  "search-label": "Карталарды іздеу",
+  "special-map": "Арнайы карта"
+}

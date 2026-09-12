@@ -1,0 +1,9 @@
+{
+  "battle-time": "Tijd van de strijd",
+  "camouflage": "{camouflage} camouflage",
+  "mode": "Modus",
+  "n-random-events": "{count, plural, one {# willekeurig evenement} other {# willekeurige evenementen}}",
+  "random-events": "Willekeurige evenementen",
+  "size": "Grootte",
+  "team-size": "Teamgrootte"
+}

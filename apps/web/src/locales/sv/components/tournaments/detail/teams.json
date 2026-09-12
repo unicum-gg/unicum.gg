@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Genomsnitt för {rated} av {size} spelare",
+  "average-over-recent": "Genomsnitt för {rated} av de {size} spelare som spelade under de senaste 30 dagar",
+  "metric-over-last-30-days": "{metric} under de senaste 30 dagar",
+  "n-confirmed": "{count} bekräftade",
+  "no-team-matches-the-current": "Inget lag matchar de aktuella filtren.",
+  "no-teams-recorded-yet-registrations": "Inga lag har registrerats ännu. Registreringarna visas här när hela turneringen har lästs in, vilket sker inom några minuter efter att den öppnat.",
+  "none-played-in-30-days": "Ingen i denna laguppställning spelade under de senaste 30 dagar",
+  "players": "Spelare",
+  "qualified": "Kvalificerade",
+  "reward": "Belöning",
+  "team": "Lag",
+  "teams": "Lag ({length})",
+  "wr": "WR"
+}

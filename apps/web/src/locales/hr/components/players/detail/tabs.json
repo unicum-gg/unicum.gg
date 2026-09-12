@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Pregled",
+    "tanks": "Tenki",
+    "sessions": "Sesije",
+    "achievements": "Dostignuća",
+    "tournaments": "Turniri",
+    "value": "Vrijednost"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

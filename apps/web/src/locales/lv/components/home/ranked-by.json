@@ -1,0 +1,6 @@
+{
+  "day": "Rangs pēc {metric} pēdējo 24 stundu laikā (vismaz 20 kaujas).",
+  "week": "Rangs pēc {metric} pēdējo 7 dienu laikā (vismaz 140 kaujas).",
+  "month": "Rangs pēc {metric} pēdējo 30 dienu laikā (vismaz 600 kaujas).",
+  "overall": "Rangs pēc visa laika {metric} (vismaz 20 000 kaujas)."
+}

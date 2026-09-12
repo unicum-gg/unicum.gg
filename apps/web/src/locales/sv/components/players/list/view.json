@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>spelare</accent>",
+    "language": "Topp spelare på <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Topplista för {region}, rankad efter {metric} för hela speltiden (minst 20 000 strider).",
+    "language": "Spelare i {region} vars uppskattade språkprofil baserad på klanhistoriken inkluderar {language}, rankade efter {metric} (minst 10 000 strider).",
+    "strict": "Spelare i {region} vars uppskattade språkprofil baserad på klanhistoriken endast innehåller {language}, rankade efter {metric} (minst 10 000 strider)."
+  },
+  "board": {
+    "all": "Topp {count} spelare efter {metric}",
+    "language": "Topp {count} spelare på {language} efter {metric}",
+    "strict": "Topp {count} spelare med enbart {language} i språkprofilen efter {metric}"
+  },
+  "modes": {
+    "overall": "Övergripande"
+  },
+  "columns": {
+    "player": "Spelare"
+  },
+  "strict-toggle": "Strikt",
+  "any-toggle": "Vilken som helst",
+  "all-languages": "Alla språk",
+  "battles": "Strider",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# танк} few {# танки} many {# танків} other {# танків}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Зміни танків ще не зафіксовано. Коли Wargaming змінює баланс танків, посилення та послаблення з кожного оновлення з’являються тут.",
+  "update": "Оновити {version}"
+}

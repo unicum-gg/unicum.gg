@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "Klan [{tag}] se nezúčastnil žádného turnaje, jehož data jsme převzali. Tým se započítává tomuto klanu, pokud alespoň čtvrtinu jeho soupisky tvořili v den utkání členové klanu.",
+  "won": "{count} vyhráno"
+}

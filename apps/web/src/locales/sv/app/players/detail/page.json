@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tanken för {name} ({region}), alla fordon som spelats",
+    "description": "Varje Tank som {name} har spelat på {region}, med strider, vinstprocent, genomsnittlig skada och WN8 per fordon."
+  },
+  "achievements": {
+    "title": "Prestationer för {name} ({region}), {medals} intjänade medaljer",
+    "description": "De {medals} World of Tanks-medaljer som {name} har tjänat in på {region}, från Kolobanovs och Pools medaljer till hedersgrader och episka medaljer, samt alla som fortfarande är borta från samlingen och kan tjänas in."
+  },
+  "tournaments": {
+    "title": "Turneringar för {name} ({region})",
+    "description": "Varje Wargaming-turnering som {name} har deltagit i på {region}: laget som spelaren representerade, formatet och hur långt laget gick. En förteckning som Wargaming enbart publicerar ur turneringens perspektiv, aldrig spelarens."
+  },
+  "value": {
+    "title": "Värde på konto: {name} ({region})",
+    "description": "Så mycket är World of Tanks-kontot för {name} på {region} värt: krediter, guld och erfarenhet som är bundna i garaget."
+  },
+  "mode": {
+    "title": "Statistik för {name} i {mode} ({region})",
+    "description": "Statistik för {name} på {region} i {mode}: strider, vinstprocent och betyg för detta läge, jämfört med spelarens grundvärden från slumpstrider."
+  },
+  "overview": {
+    "title": "World of Tanks-statistik för {name} ({region}), {battles} strider, {winrate}% WR",
+    "description": "{name} på {region}: {battles} strider, {winrate}% vinstprocent, {rating} i betyg. Uppdelning Tank för Tank, WN8, WNX och fullständig klanhistorik."
+  },
+  "locked": {
+    "title": "Låst World of Tanks-konto: {name} ({region})",
+    "description": "Kontot för {name} ({region}) finns, men Wargaming har låst det, så dess World of Tanks-statistik är inte tillgänglig."
+  },
+  "empty": {
+    "title": "World of Tanks-spelarstatistik för {name} ({region})",
+    "description": "World of Tanks-spelarstatistik för {name} ({region}): WN8- och WNX-betyg, vinstprocent, uppdelning Tank för Tank och fullständig klanhistorik."
+  }
+}

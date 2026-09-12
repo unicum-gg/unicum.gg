@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Prijavi se s Wargaming.net ID-om",
+  "open-source": "{name} je otvorenog koda. {link} prije nego što mu ukažete povjerenje.",
+  "pick-the-region-your-world": "Odaberite regiju na kojoj je vaš World of Tanks račun. Ne mora biti regija koju pregledate.",
+  "read-the-login-code": "Pročitaj kod za prijavu",
+  "what-wargaming-hands-back-is": "Wargaming vraća token koji čita podatke vašeg računa. Čuva se šifriran i obnavlja dok je vaš račun povezan, a djeluje samo u vaše ime na mjestima koja sami podesite, poput rasporeda rezervi vašeg klana.",
+  "you-sign-in-on-wargaming": "Prijavljujete se na vlastitoj stranici Wargaminga, ne ovdje. Vaša lozinka se nikad ne unosi na stranici {NAME} niti dolazi do nas."
+}

@@ -1,0 +1,25 @@
+{
+  "tagline": "Skabt til World of Tanks-fællesskabet. Gratis statistik for alle spillere, klaner, kampvogne og kort på tværs af EU, NA og Asien.",
+  "columns": {
+    "leaderboards": "Toplister",
+    "tanks": "Tanks",
+    "maps": "Kort",
+    "integrations": "Integrationer",
+    "project": "Projekt"
+  },
+  "links": {
+    "top-tanks": "Bedste kampvogne",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "API-dokumentation",
+    "badges": "Mærker",
+    "glossary": "Ordbog",
+    "coverage": "Dækning",
+    "support": "Støt os",
+    "source": "Kildekode",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Ikke tilknyttet Wargaming",
+  "cookies": "Administrer cookies"
+}

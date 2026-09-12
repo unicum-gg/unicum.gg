@@ -1,0 +1,6 @@
+{
+  "title": "Tiukasti {language}-kieliset World of Tanks -klaanit alueella {region}",
+  "description": "{name} {region} -klaanitulostaulukko klaaneille, jotka ovat ilmoittaneet {language}n ainoaksi kielekseen, rankattuna WNX:n mukaan.",
+  "og-title": "Vain {language}-kieliset klaanit",
+  "og-subtitle": "{region} Tuloslista"
+}

@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# carro armato} other {# carri armati}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Non è stata ancora registrata alcuna modifica ai carri. Man mano che Wargaming ribilancia i carri, qui appariranno i buff e i nerf di ogni aggiornamento.",
+  "update": "Aggiorna {version}"
+}

@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, gagné {count}×",
+  "aria-not-earned": "{name}, non gagné",
+  "no-longer-obtainable": "Ne peut plus être obtenue.",
+  "not-earned": "Non gagné"
+}

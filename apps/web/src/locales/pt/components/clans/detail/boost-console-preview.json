@@ -1,0 +1,19 @@
+{
+  "active-days": "Dias ativos",
+  "add-workflow": "Adicionar fluxo de trabalho",
+  "connect-discord": "Conectar Discord",
+  "discord-notifications": "Notificações do Discord",
+  "each-workflow-activates-its-reserves": "Cada fluxo de trabalho ativa as respetivas reservas durante um período definido, assim que houver membros suficientes numa sessão de jogo em curso. É executado na sua conta, sem precisar de estar online. Adicione quantos precisar.",
+  "enabled": "Activado",
+  "from": "De",
+  "get-a-discord-message-in": "Receba uma mensagem no Discord, num canal à sua escolha, sempre que um bónus for ativado, para que todo o clã saiba que está ativo.",
+  "log-in-with-wargaming-to": "Inicie sessão com a Wargaming para configurar isto",
+  "min-online": "Min online",
+  "officers": "Oficiais",
+  "only-an-officer-of-this": "Apenas um oficial deste clã pode configurar isto.",
+  "schedule-preview": "Pré-visualização da agenda",
+  "set-your-hours-and-reserves": "Configure os horários e as reservas uma única vez. Os bónus são ativados automaticamente à hora certa, mesmo quando não está ninguém por perto para carregar no botão.",
+  "stronghold-boosts": "Impulsos de Fortaleza",
+  "times-are-in-your-timezone": "Os horários são apresentados em {tz}, o seu fuso horário.",
+  "to": "Para"
+}

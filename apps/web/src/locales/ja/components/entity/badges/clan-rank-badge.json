@@ -1,0 +1,9 @@
+{
+  "aria-rank": "「{board}」のランク {rank}",
+  "board": {
+    "advances": "進撃戦レーティング",
+    "skirmish-t10": "Tier X前衛戦レーティング",
+    "skirmish-t6": "Tier VI前衛戦レーティング",
+    "skirmish-t8": "Tier VIII前衛戦レーティング"
+  }
+}

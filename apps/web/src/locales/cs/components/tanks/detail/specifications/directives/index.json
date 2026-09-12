@@ -1,0 +1,9 @@
+{
+  "boosts": "Boosty {name}",
+  "directives": "Směrnice",
+  "directive-name": "{name} direktiva",
+  "grants-and-boosts": "Aktivuje a vylepšuje schopnost posádky, i když není vycvičena.",
+  "grants-only": "Aktivuje schopnost posádky pro danou bitvu (bez uvedené vlastnosti).",
+  "enhances-mounted": "Zvyšuje účinek namontovaného vybavení {name}.",
+  "mount-to-use": "Chcete-li tuto směrnici použít, namontujte vybavení {name}."
+}

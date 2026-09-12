@@ -1,7 +1,9 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { CrownSimpleIcon } from "@phosphor-icons/react";
-import Link from "next/link";
+import Link from "@/components/link";
 import { tierBand } from "@/components/tournaments/tier-label";
 import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
@@ -24,7 +26,6 @@ import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { TournamentStatusBadge } from "@/components/tournaments/status-badge";
 import {
-  TOURNAMENT_GAME_MODE_LABEL,
   ordinal,
   rosterLimits,
   teamFormat,
@@ -43,12 +44,7 @@ const DASH = "—";
 // the tier band and the team size only qualify a tournament already found.
 const HIDE = styles.hiddenColumn;
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const DATE_PATTERN = "d MMM yyyy" /* UTC */;
 
 /** The tier band as a player reads it: "X", or "VI-X" when the format spans. */
 /**
@@ -75,6 +71,7 @@ function Result({ position }: { position: number | null }) {
 /** The battle size, with the registrable roster behind it when a team may bring
  * a bench. */
 function FormatCell({ min, max }: { min: number; max: number }) {
+  const { t } = useTranslation("components/players/detail/tournaments/table");
   const roster = rosterLimits(min, max);
   const label = teamFormat(min);
   if (!roster) return <>{label}</>;
@@ -85,7 +82,7 @@ function FormatCell({ min, max }: { min: number; max: number }) {
           {label}
         </span>
       </TooltipTrigger>
-      <TooltipContent>Roster of {roster}</TooltipContent>
+      <TooltipContent>{t("roster-of", { roster })}</TooltipContent>
     </Tooltip>
   );
 }
@@ -104,6 +101,9 @@ export function PlayerTournamentsTable({
   region: Region;
   entries: PlayerTournamentEntry[];
 }) {
+  const { date } = useFormat();
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t } = useTranslation("components/players/detail/tournaments/table");
   // `syncUrl` off: the profile can show a second pager (the tank list) and they
   // would clobber each other's shared `?page=` param.
   const { paged, pager } = usePagination(entries, 25, false);
@@ -117,22 +117,21 @@ export function PlayerTournamentsTable({
       >
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[1%] whitespace-nowrap">Date</TableHead>
-            <TableHead>Tournament</TableHead>
-            <TableHead className={cn("whitespace-nowrap", HIDE)}>Mode</TableHead>
-            <TableHead className={cn("text-end", HIDE)}>Tier</TableHead>
+            <TableHead className="w-[1%] whitespace-nowrap">{t("date")}</TableHead>
+            <TableHead>{t("tournament")}</TableHead>
+            <TableHead className={cn("whitespace-nowrap", HIDE)}>{t("mode")}</TableHead>
+            <TableHead className={cn("text-end", HIDE)}>{t("tier")}</TableHead>
             <TableHead className={cn("text-end whitespace-nowrap", HIDE)}>
-              Format
-            </TableHead>
-            <TableHead>Team</TableHead>
-            <TableHead className="text-end whitespace-nowrap">Result</TableHead>
+              {t("format")}</TableHead>
+            <TableHead>{t("team")}</TableHead>
+            <TableHead className="text-end whitespace-nowrap">{t("result")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {paged.map((e) => (
             <TableRow key={`${e.tournamentId}:${e.teamId}`}>
               <TableCell className="whitespace-nowrap text-fd-muted-foreground tabular-nums">
-                {dateFmt.format(e.startAt)}
+                {date(DATE_PATTERN).format(e.startAt)}
               </TableCell>
               <TableCell>
                 {/* The team rather than the tournament: this row is a record
@@ -153,7 +152,7 @@ export function PlayerTournamentsTable({
                   HIDE,
                 )}
               >
-                {e.gameModes.map((m) => TOURNAMENT_GAME_MODE_LABEL[m]).join(", ") ||
+                {e.gameModes.map((m) => tGame(`tournament-modes.${m}`)).join(", ") ||
                   DASH}
               </TableCell>
               <TableCell className={cn("text-end tabular-nums", HIDE)}>
@@ -176,12 +175,11 @@ export function PlayerTournamentsTable({
                         <CrownSimpleIcon
                           weight="fill"
                           className="size-3.5 shrink-0 text-amber-500"
-                          aria-label="Team captain"
+                          aria-label={t("team-captain")}
                         />
                       </TooltipTrigger>
                       <TooltipContent>
-                        Registered and captained this team
-                      </TooltipContent>
+                        {t("registered-and-captained-this-team")}</TooltipContent>
                     </Tooltip>
                   )}
                 </span>

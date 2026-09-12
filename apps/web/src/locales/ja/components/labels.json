@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "初回スナップショット待機中",
+    "hidden": "Wargamingにより非表示",
+    "active_24h": "アクティブ < 24時間",
+    "active_7d": "アクティブ < 7日",
+    "recent_30d": "最近の活動 < 30日",
+    "recent_90d": "最近の活動 < 90日",
+    "dormant_1y": "休眠中 < 1年",
+    "inactive": "非アクティブ > 1年"
+  },
+  "rating-hype": {
+    "overrated": "過大評価",
+    "fair": "公平な評価",
+    "underrated": "過小評価"
+  },
+  "rating-consensus": {
+    "agreed": "広く合意された",
+    "mixed": "意見が分かれる",
+    "divisive": "分かれる"
+  },
+  "rating-axes": {
+    "overall": "総合",
+    "fun": "楽しさ",
+    "firepower": "火力",
+    "armour": "装甲",
+    "mobility": "機動性",
+    "gunHandling": "砲の取り扱い",
+    "concealment": "隠蔽性",
+    "beginnerFriendliness": "初心者向け",
+    "versatility": "汎用性"
+  },
+  "rating-axis-hints": {
+    "overall": "あらゆる要素を考慮した場合、この戦車の性能はどの程度ですか？",
+    "fun": "この戦車をプレイするのをどの程度楽しめますか？",
+    "firepower": "単発ダメージ、毎分ダメージ、貫通力。",
+    "armour": "跳弾性能、ハルダウン時、開けた場所での防御力。",
+    "mobility": "速度、加速力、旋回性能。",
+    "gunHandling": "照準時間、拡散、移動中の命中精度。",
+    "concealment": "隠蔽性と視認範囲。",
+    "beginnerFriendliness": "まだ学習中の場合に、どの程度ミスを許容してくれるか。",
+    "versatility": "どのマップでも、どのチームでも機能しますか？"
+  },
+  "voter-brackets": {
+    "unknown": "評価なし",
+    "learning": "学習中",
+    "average": "平均",
+    "strong": "強い",
+    "unicum": "ユニクム"
+  },
+  "glossary-categories": {
+    "vehicles": "車輌",
+    "gunnery": "射撃",
+    "armor": "装甲",
+    "mobility": "機動性",
+    "vision": "視界",
+    "crew": "搭乗員",
+    "progression": "進行",
+    "economy": "経済",
+    "ratings": "評価",
+    "statistics": "成績",
+    "modes": "バトルモード",
+    "tactics": "戦術",
+    "slang": "スラング"
+  }
+}

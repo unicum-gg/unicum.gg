@@ -1,0 +1,16 @@
+{
+  "title": "We gebruiken cookies",
+  "description": "We gebruiken cookies om je browse-ervaring te verbeteren en het websiteverkeer te analyseren.",
+  "functional": {
+    "title": "Functioneel",
+    "description": "Vereist om de website goed te laten werken (voorkeuren, regioselectie)."
+  },
+  "analytics": {
+    "title": "Bezoekersmeting",
+    "description": "Google Analytics plaatst cookies om ons inzicht te geven in hoe de website wordt gebruikt. Anonieme analyses zonder cookies (Umami) blijven hoe dan ook actief."
+  },
+  "save": "Mijn keuzes opslaan",
+  "decline": "Alles weigeren",
+  "customize": "Aanpassen",
+  "accept": "Akkoord alle"
+}

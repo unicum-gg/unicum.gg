@@ -1,0 +1,12 @@
+{
+  "final": "Fināls",
+  "grand-final": "Lielais fināls",
+  "loser-bracket-final": "Zaudētāju zara fināls",
+  "loser-round": "Zaudētāju raunds {round}",
+  "quarter-finals": "Ceturtdaļfināli",
+  "round-of": "Kārta ar {teams} komandām",
+  "semi-finals": "Pusfināli",
+  "third-place": "Trešā vieta",
+  "winner-bracket-final": "Uzvarētāju zara fināls",
+  "winner-round": "Uzvarētāju raunds {round}"
+}

@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "إظهار الدردشة",
+    "hide": "إخفاء الدردشة",
+    "show-streamers": "إظهار مقدمي البث"
+  },
+  "heading": "{name}: إحصائيات لاعب وعشيرة ودبابة في World of Tanks",
+  "hide": "إخفاء مقدمي البث",
+  "player": "لاعب",
+  "stream-language": "لغة البث · {name}",
+  "stream-language-alt": "لغة البث: {name}",
+  "theater": {
+    "enter": "وضع المسرح",
+    "exit": "الخروج من وضع المسرح"
+  },
+  "title": "أفضل اللاعبين الذين يبثون الآن ·",
+  "viewer-count": "{count} مشاهدًا",
+  "viewers": "المشاهدون",
+  "watch": "مشاهدة {nickname} على Twitch"
+}

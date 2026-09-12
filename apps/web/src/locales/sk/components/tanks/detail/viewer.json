@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Vizualizácia",
+    "collision": "Kolízia",
+    "live": "Živé"
+  },
+  "centre": {
+    "on": "Vycentrovať vozidlo",
+    "off": "Vrátiť vozidlo na pôvodné miesto"
+  },
+  "hull-down": {
+    "on": "Korpus nadol",
+    "off": "Vyrovnať vozidlo"
+  },
+  "tracks": {
+    "on": "Rozpohybovať pásy",
+    "off": "Zastaviť pásy"
+  },
+  "textures": {
+    "on": "Textúry vo vysokom rozlíšení",
+    "off": "Štandardné textúry"
+  },
+  "reset": "Resetovať zobrazenie",
+  "style": "Vybrať štýl",
+  "style-worn": "Štýl: {name}",
+  "search-styles": "Hľadať štýly",
+  "colours": "Význam farieb",
+  "cinematic": {
+    "off": "Filmová kamera: vypnutá",
+    "auto": "Filmová kamera: pri nečinnosti",
+    "on": "Filmová kamera: vždy"
+  },
+  "open-tank": "Otvoriť iný tank",
+  "open-tank-placeholder": "Otvorte tank...",
+  "more-actions": "Ďalšie akcie",
+  "marks-meaning": {
+    "0": "Žiadne znaky výnimočnosti",
+    "1": "Jeden znak: lepší ako 65 % hráčov s týmto tankom",
+    "2": "Dva znaky: lepší ako 85 %",
+    "3": "Tri znaky: lepší ako 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Vyplniť okno",
+      "leave": "Späť na stránku"
+    },
+    "screen": {
+      "enter": "Zobraziť na celej obrazovke",
+      "leave": "Opustiť režim celej obrazovky"
+    }
+  },
+  "marks-count": {
+    "0": "Žiadne znaky výnimočnosti",
+    "one": "1 znak výnimočnosti",
+    "other": "Počet znakov výnimočnosti: {count}"
+  },
+  "compare-tank": "Porovnať s iným tankom",
+  "compare-tank-placeholder": "Porovnať s...",
+  "view-tooltips": {
+    "visual": "Tank tak, ako ho vykresľuje hra",
+    "collision": "Hrúbka jednotlivých pancierových plátov",
+    "live": "Účinok vybraného granátu"
+  },
+  "cinematic-tooltips": {
+    "off": "Filmová kamera: vypnutá, pohľad zostane nehybný",
+    "auto": "Filmová kamera: spustí sa po 30 sekundách nečinnosti",
+    "on": "Filmová kamera: vždy, hneď ako prestanete ovládať pohľad"
+  }
+}

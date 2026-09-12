@@ -1,0 +1,7 @@
+{
+  "back-to": "返回{seconds}",
+  "drag-to-the-battle": "拖动到战斗开始处，再使用{keys}调整，每次按键移动一秒。视频会暂停在你选择的时刻，并在你填写其余信息时保持暂停。",
+  "moment-the-battle-starts": "战斗开始时刻",
+  "use-the-current-moment": "使用当前时刻",
+  "video-being-suggested": "正在建议的视频"
+}

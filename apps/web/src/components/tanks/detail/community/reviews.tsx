@@ -1,6 +1,8 @@
+import { numberFormat } from "@/lib/format";
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import {
   RATING_COLOR_HEX,
-  VOTER_BRACKET_LABEL,
   VoterBracket,
   wn8Color,
   type TankReview,
@@ -10,7 +12,7 @@ import { RelativeTime } from "@/components/relative-time";
 import { PlayerName } from "@/components/entity/player-name";
 import { Stars } from "./stars";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * What players wrote about the tank.
@@ -26,26 +28,27 @@ const intFmt = new Intl.NumberFormat("en-US");
  * verdict formed two rebalances ago is not wrong, it is dated, and only the
  * stamp can say which.
  */
-export function TankReviews({ reviews }: { reviews: TankReview[] }) {
+export async function TankReviews({ reviews, locale }: { reviews: TankReview[]; locale: string }) {
+  const { t } = await getTranslation("components/tanks/detail/community/reviews", locale);
   if (reviews.length === 0) {
     return (
       <p className="text-sm text-fd-muted-foreground">
-        No written opinions yet. If you have the battles, yours would be the
-        first.
-      </p>
+        {t("no-written-opinions-yet-if")}</p>
     );
   }
 
   return (
     <div className="flex flex-col divide-y divide-fd-border">
       {reviews.map((review) => (
-        <ReviewCard key={review.id} review={review} />
+        <ReviewCard locale={locale} key={review.id} review={review} />
       ))}
     </div>
   );
 }
 
-function ReviewCard({ review }: { review: TankReview }) {
+async function ReviewCard({ review, locale }: { review: TankReview; locale: string }) {
+  const { t: tLabel } = await getTranslation("components/labels", locale);
+  const { t } = await getTranslation("components/tanks/detail/community/reviews", locale);
   const bracketColor =
     review.playerWn8 == null
       ? undefined
@@ -64,7 +67,7 @@ function ReviewCard({ review }: { review: TankReview }) {
             className="text-xs font-medium"
             style={bracketColor ? { color: bracketColor } : undefined}
           >
-            {VOTER_BRACKET_LABEL[review.bracket]}
+            {tLabel(`voter-brackets.${review.bracket}`)}
           </span>
         )}
         <span className="text-xs text-fd-muted-foreground">
@@ -83,23 +86,35 @@ function ReviewCard({ review }: { review: TankReview }) {
         is what tells a reader how much of the opinion to take. */}
       <p className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-fd-muted-foreground tabular-nums">
         <span>
-          <span className="font-medium text-fd-foreground">
-            {intFmt.format(review.battles)}
-          </span>{" "}
-          battles in it
+          <Interpolate
+            template={t("battles-in-it")}
+            values={{
+              battles: (
+                <span className="font-medium text-fd-foreground">
+                  {numberFormat(locale, INT_FORMAT).format(review.battles)}
+                </span>
+              ),
+            }}
+          />
         </span>
         {review.winrate != null ? (
-          <span>{(review.winrate * 100).toFixed(1)}% win rate</span>
+          <span>{t("win-rate", { toFixed: (review.winrate * 100).toFixed(1) })}</span>
         ) : null}
         {review.avgDamage != null ? (
-          <span>{intFmt.format(Math.round(review.avgDamage))} damage</span>
+          <span>
+            {t("damage", {
+              damage: numberFormat(locale, INT_FORMAT).format(Math.round(review.avgDamage)),
+            })}
+          </span>
         ) : null}
         {review.marksOnGun ? (
           <span>
-            {review.marksOnGun} {review.marksOnGun === 1 ? "mark" : "marks"}
+            {t("n-marks", {
+              count: review.marksOnGun,
+            })}
           </span>
         ) : null}
-        {review.gameVersion ? <span>written on {review.gameVersion}</span> : null}
+        {review.gameVersion ? <span>{t("written-on", { gameVersion: review.gameVersion })}</span> : null}
       </p>
 
       {/* Plain text, rendered as text: a review is prose, and the one place a

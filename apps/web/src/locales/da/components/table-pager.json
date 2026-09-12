@@ -1,0 +1,8 @@
+{
+  "previous": "Forrige side",
+  "next": "Næste side",
+  "rows-per-page": "Rækker pr. side",
+  "all": "Alle",
+  "range": "{first}–{last} af {total}",
+  "page": "Side {page} / {total}"
+}

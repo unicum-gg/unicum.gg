@@ -1,0 +1,12 @@
+{
+  "added": "Toegevoegd",
+  "before-update": "Vóór Updaten {version}",
+  "common-test": "Algemene Test",
+  "every-update-that-changed-this": "Elke Updaten die deze kaart heeft gewijzigd, met de nieuwste eerst, rechtstreeks uit de gameclient gehaald.",
+  "in-the-game": "In het spel",
+  "n-changes": "{count, plural, one {# wijziging} other {# wijzigingen}}",
+  "not-released-wargaming-can-still": "Nog niet uitgebracht. Wargaming kan dit nog wijzigen of laten vervallen voordat de Updaten uitkomt.",
+  "removed": "Verwijderd",
+  "title": "Wijzigingen aan {map}",
+  "update": "Updaten {version}"
+}

@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1位",
+    "2": "2位",
+    "3": "3位"
+  },
+  "streamer": "ストリーマー · Twitchで{name}を見る",
+  "tournament": {
+    "one": "{title}の優勝ロスター",
+    "many": "優勝ロスター{count}件で、{title}の最高成績",
+    "featured": "{text} · 注目イベント",
+    "unnamed": "Wargamingのトーナメント"
+  },
+  "tournament-wins": "{count, plural, other {#回のトーナメント勝利}}",
+  "watch-on-twitch": "Twitchで{name}を見る",
+  "watch-on-twitch-viewers": "Twitchで{name}を見る · 視聴者{viewers}人"
+}

@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Adaugă fluxul de lucru",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Fiecare flux își activează rezervele într-un interval de timp, după ce suficienți membri intră într-o sesiune de joc live. Rulează în contul tău, fără să fie nevoie să fii online. Adaugă câte ai nevoie.",
+  "n-online": "/ {count} online",
+  "officer": "Ofițer",
+  "online": "Online",
+  "recent-activations": "activări recente",
+  "reserve": "Rezervă",
+  "stronghold-boosts": "Îmbunătățiri de Fortăreață",
+  "when": "Când",
+  "workflow": "Flux de lucru"
+}

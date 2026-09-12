@@ -1,11 +1,12 @@
 "use client";
 
 import { ListMagnifyingGlassIcon } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import type { Region } from "@unicum.gg/wargaming";
 
 import { TankSearchPopover } from "@/components/tanks/tank-search-popover";
 import ROUTES from "@/constants/routes";
+import { useTranslation } from "@/hooks/use-translation";
 
 /** The chrome the hero's corner controls share. */
 const MARK =
@@ -32,15 +33,16 @@ export function HeroOpenTank({
   region: Region;
   slug: string;
 }) {
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
   const router = useRouter();
   return (
     <TankSearchPopover
       region={region}
       excludeSlugs={new Set([slug])}
       onPick={(tank) => router.push(ROUTES.TANK(region, tank.slug))}
-      triggerAriaLabel="Open another tank"
-      tooltip="Open another tank"
-      placeholder="Open tank..."
+      triggerAriaLabel={tView("open-tank")}
+      tooltip={tView("open-tank")}
+      placeholder={tView("open-tank-placeholder")}
       triggerClassName={MARK}
       triggerContent={
         <ListMagnifyingGlassIcon className="size-3.5" weight="bold" />

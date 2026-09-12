@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "実際にプレイした人が5段階で評価したすべての戦車。車両を実際に戦闘へ出したアカウントからの投票だけを数えるため、訪れた人全員を対象にした投票とは異なります。",
+  "no-tank-has-been-rated": "まだ評価された戦車はありません。最初の投票は戦車ページの「コミュニティ」から行えます。",
+  "think": "考える",
+  "title": "プレイヤーの{think}",
+  "votes-across-vehicles": "{ratedTanks}車両に対する{totalVotes}票。"
+}

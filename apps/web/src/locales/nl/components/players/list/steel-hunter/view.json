@@ -1,0 +1,13 @@
+{
+  "heading": "Top spelers in <accent>{mode}</accent>",
+  "intro": "De modus {mode} is de battle-royalemodus van World of Tanks. Het klassement voor de regio {region}, gerangschikt op HR (minimaal 100 gevechten in {mode}).",
+  "board": "Top {count} spelers in {mode}",
+  "columns": {
+    "player": "Speler",
+    "battles": "Gevechten",
+    "survival": "Overleving",
+    "survival-percent": "Overleving %",
+    "damage": "Gem. schade"
+  },
+  "scale-description": "Kleurdrempels voor het klassement van de modus {mode}, afgestemd op de spelerspopulatie met minstens 100 gevechten in {mode}."
+}

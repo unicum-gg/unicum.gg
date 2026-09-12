@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Løfter vurderingen",
+    "blurb": "Stridsvogner som løfter totalen: å fjerne dem ville senke vurderingen.",
+    "empty": "Ingen stridsvogn som løfter totalen."
+  },
+  "drag": {
+    "heading": "Trekker ned vurderingen",
+    "blurb": "Stridsvogner som trekker totalen ned: å fjerne dem ville heve vurderingen.",
+    "empty": "Ingen stridsvogn som trekker totalen ned."
+  },
+  "if-removed": "{delta} hvis fjernet"
+}

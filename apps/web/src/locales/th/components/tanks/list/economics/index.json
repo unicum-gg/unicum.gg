@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "แถวต่อหน้า",
+  "free-xp-from": "XP ฟรีจาก",
+  "xp-1-gold": "XP = 1 ทอง",
+  "previous-page": "หน้าก่อนหน้า",
+  "page": "หน้า {current} / {totalPages}",
+  "next-page": "หน้าถัดไป",
+  "all": "ทั้งหมด"
+}

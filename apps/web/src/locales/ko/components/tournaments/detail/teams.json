@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "플레이어 {size}명 중 평가됨 {rated}명의 평균",
+  "average-over-recent": "최근 30일 동안 플레이한 플레이어 {size}명 중 {rated}명의 평균",
+  "metric-over-last-30-days": "최근 30일 동안의 {metric}",
+  "n-confirmed": "{count}명 확인됨",
+  "no-team-matches-the-current": "현재 필터와 일치하는 팀이 없습니다.",
+  "no-teams-recorded-yet-registrations": "아직 기록된 팀이 없습니다. 이 토너먼트의 전체 정보가 읽히면 등록된 팀이 여기에 표시됩니다. 토너먼트 시작 후 몇 분 이내에 처리됩니다.",
+  "none-played-in-30-days": "이 명단의 누구도 최근 30일 동안 플레이하지 않았습니다",
+  "players": "플레이어",
+  "qualified": "자격 있음",
+  "reward": "보상",
+  "team": "팀",
+  "teams": "팀 ({length})",
+  "wr": "WR"
+}

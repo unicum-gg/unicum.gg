@@ -1,0 +1,6 @@
+{
+  "title": "Top spelers van World of Tanks met {language} als taal ({region})",
+  "description": "Spelersklassement van {name} voor {region}, gerangschikt op WNX, voor spelers bij wie {language} op basis van hun clangeschiedenis als taal is afgeleid.",
+  "og-title": "Top spelers met {language} als taal",
+  "og-subtitle": "{region} klassement"
+}

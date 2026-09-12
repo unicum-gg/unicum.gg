@@ -1,0 +1,8 @@
+{
+  "battles": "{count} battles",
+  "no-votes": "no votes",
+  "rated-higher": "Stronger players rate it {stars} stars higher than the rest of the server. This one rewards knowing what you are doing.",
+  "rated-lower": "Stronger players rate it {stars} stars lower than the rest of the server. It flatters until it is asked to do something.",
+  "votes": "{count} votes",
+  "votes-one": "{count} vote"
+}

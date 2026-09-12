@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Mit gondolnak a játékosok erről a tankról",
+  "not-rated": "Még nincs értékelve, legyél az első",
+  "votes": "{count} szavazat",
+  "votes-one": "{count} szavazat",
+  "stars": "{value} / {max}",
+  "not-rated-short": "Nincs értékelve"
+}

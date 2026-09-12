@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Altere tudo o que estiver errado, incluindo o veículo. Ao guardar, o vídeo volta para a fila de moderação. Se estiver publicado, fica indisponível até ser novamente aprovado.",
+  "correct-a-suggestion": "Corrigir uma sugestão",
+  "could-not-load-that-suggestion": "Não foi possível carregar essa sugestão. Tente novamente dentro de um momento.",
+  "link-expired": "Esse link expirou. Pressione Editar novamente no cartão do Discord para obter um novo.",
+  "loading": "Carregando…",
+  "log-in": "Entrar",
+  "log-in-with-the-account": "Inicie sessão com a conta utilizada para sugerir este vídeo para o poder corrigir.",
+  "no-suggestion-with-that-id": "Não existe nenhuma sugestão com esse id.",
+  "not-yours-to-correct": "Essa sugestão não é sua para corrigir."
+}

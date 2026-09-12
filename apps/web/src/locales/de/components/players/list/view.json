@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>spieler</accent>",
+    "language": "Top-Spieler: <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Rangliste der spieler aus {region}, geordnet nach der bisherigen Gesamtwertung in {metric} (mindestens 20.000 Gefechte).",
+    "language": "Rangliste der spieler aus {region}, deren anhand der Clanhistorie ermittelte Sprachauswahl {language} umfasst, geordnet nach {metric} (mindestens 10.000 Gefechte).",
+    "strict": "Rangliste der spieler aus {region}, deren anhand der Clanhistorie ermittelte Sprache ausschließlich {language} ist, geordnet nach {metric} (mindestens 10.000 Gefechte)."
+  },
+  "board": {
+    "all": "Die besten {count} Spieler nach {metric}",
+    "language": "Die besten {count} Spieler ({language}) nach {metric}",
+    "strict": "Die besten {count} Spieler (ausschließlich {language}) nach {metric}"
+  },
+  "modes": {
+    "overall": "Insgesamt"
+  },
+  "columns": {
+    "player": "Spieler"
+  },
+  "strict-toggle": "Streng",
+  "any-toggle": "Alle",
+  "all-languages": "Alle Sprachen",
+  "battles": "Gefechte",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

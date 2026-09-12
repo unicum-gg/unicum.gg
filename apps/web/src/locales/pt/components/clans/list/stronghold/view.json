@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Ainda não há dados. Consulte novamente após a atualização dos clãs.",
+  "heading": "Melhores clãs da categoria <accent>{tier}</accent>",
+  "blurb": "Classificação de {region}, ordenada por {sort} entre todos os clãs monitorizados no formato {format} (mínimo de {battles} batalhas).",
+  "blurb-period": "Classificação de {region}, ordenada por {sort} entre todos os clãs monitorizados no formato {format} durante {period} (mínimo de {battles} batalhas).",
+  "format-advances": "Avanços (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Os {count} melhores clãs da categoria {tier} ·"
+}

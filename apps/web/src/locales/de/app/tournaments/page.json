@@ -1,0 +1,8 @@
+{
+  "description": "Alle Wargaming-Turniere auf {region}: tägliche Gold-Ranglisten, Clanmeisterschaften sowie Informationen dazu, wer teilgenommen und wer gewonnen hat. Vollständige Turnierbäume, Ergebnisse und Aufstellungen.",
+  "live-many": "Auf {region} sind derzeit {count} Turniere zur Anmeldung offen oder laufen,",
+  "live-one": "Auf {region} ist derzeit {count} Turnier zur Anmeldung offen oder läuft,",
+  "no-live": "Auf {region} finden täglich Turniere statt,",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "von 1v1-Ranglisten um Gold bis hin zu Clanmeisterschaften um Preisgeld. Vollständige Turnierbäume und Ergebnisse, jedes Team mit seiner Aufstellung und für jede Karte die Seite, auf der es gestartet ist."
+}

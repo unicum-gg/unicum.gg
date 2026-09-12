@@ -1,0 +1,13 @@
+{
+  "assists": "协助",
+  "close": "关闭",
+  "damage": "损伤",
+  "in-the-queue": "已加入队列，版主查看后会显示在此标签页中。",
+  "optional": "（可选）",
+  "paste-a-youtube-link": "粘贴YouTube链接，然后设置战斗开始的准确时刻。每个打开链接的人都会从该秒开始观看，因此时间戳不准确的建议会在评价时被拒绝。",
+  "sending": "发送中…",
+  "suggest": "建议",
+  "suggest-a-video": "建议视频",
+  "suggest-another": "再建议一个",
+  "suggestion-sent": "建议已发送"
+}

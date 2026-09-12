@@ -1,0 +1,16 @@
+{
+  "channel": "Canal",
+  "clan": "Clan",
+  "class": "Classe",
+  "combined": "Combiné",
+  "damage-dealt-plus-assisted-as-declared-by-th": "Dégâts infligés et dégâts par assistance, tels que déclarés par l’auteur de l’envoi.",
+  "format": "Format",
+  "map": "Carte",
+  "mode": "Mode",
+  "nation": "Nation",
+  "result": "Résultat",
+  "spawn": "Apparition",
+  "tank": "Char",
+  "tank-clan": "Char / Clan",
+  "tier": "Niveau"
+}

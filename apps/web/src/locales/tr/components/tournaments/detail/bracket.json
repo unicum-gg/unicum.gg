@@ -1,0 +1,7 @@
+{
+  "group": "Grup {order}",
+  "n-teams": "{count} takım",
+  "pts": "Pts",
+  "team": "Ekip",
+  "top-n-advance": ", en iyi {count} takım ilerler"
+}

@@ -1,0 +1,14 @@
+{
+  "date": "Fecha",
+  "featured-tournament": "Torneo destacado",
+  "format": "Formato",
+  "mode": "Modo",
+  "no-tournament-matches-the-current": "Ningún torneo coincide con los filtros actuales.",
+  "nothing-here-right-now-wargaming": "No hay nada aquí ahora mismo. Wargaming abre nuevos torneos a diario, así que esta lista volverá a llenarse sola.",
+  "prize": "Premio",
+  "region-tournaments": "Torneos de {region} ({count})",
+  "status": "Estado",
+  "teams": "Equipos",
+  "tier": "nivel",
+  "tournament": "Torneo"
+}

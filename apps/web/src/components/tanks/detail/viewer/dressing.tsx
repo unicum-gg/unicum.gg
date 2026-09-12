@@ -9,13 +9,12 @@ import {
   Mark,
 } from "@/components/tanks/detail/viewer/control-group";
 import {
-  MARKS_MEANING,
   MARKS_MOST,
-  marksLabel,
   nextMarks,
 } from "@/components/tanks/detail/viewer/marks";
 import { WardrobePicker } from "@/components/tanks/detail/viewer/wardrobe";
 import type { SkinFace } from "@/services/tank-viewer/styles";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * What the vehicle is wearing and what it is doing, on the view that draws it.
@@ -66,6 +65,7 @@ export function DressingControls({
   season: string;
   onSeason: (next: string) => void;
 }) {
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
   const dressable = wardrobe.length > 0 || cuts.length > 0;
   if (!dressable && markable === 0 && !sharpenable) return null;
   return (
@@ -103,8 +103,15 @@ export function DressingControls({
       {markable > 0 ? (
         <Mark
           onClick={() => onMarks(nextMarks(marks, markable))}
-          says={marksLabel(marks)}
-          tooltip={MARKS_MEANING[Math.min(marks, MARKS_MOST)]}
+          says={tView(
+            marks === 0
+              ? "marks-count.0"
+              : marks > 1
+                ? "marks-count.other"
+                : "marks-count.one",
+            { count: marks },
+          )}
+          tooltip={tView(`marks-meaning.${Math.min(marks, MARKS_MOST)}`)}
           wide
         >
           <ChevronsUp
@@ -128,7 +135,7 @@ export function DressingControls({
         <Mark
           on={sharp}
           onClick={onSharpen}
-          says={sharp ? "High definition textures" : "Standard textures"}
+          says={tView(sharp ? "textures.on" : "textures.off")}
         >
           {/* **The words players already use**, rather than a mark for them to
               learn. Every game that ships two texture sets calls them this, and

@@ -1,0 +1,22 @@
+{
+  "stat": "Statisztika",
+  "periods": {
+    "total": "Összesen",
+    "day": "Utolsó 24 óra",
+    "week": "Utolsó 7 nap",
+    "month": "Utolsó 30 nap"
+  },
+  "sections": {
+    "elo": "X-es szint: ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "X-es szint: {skirmish} (7v7)",
+    "t8": "VIII-as szint: {skirmish} (7v7)",
+    "t6": "VI-os szint: {skirmish} (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Csaták",
+    "winrate": "Győzelmi arány"
+  }
+}

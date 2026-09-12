@@ -1,0 +1,60 @@
+{
+  "columns-label": "Spalten",
+  "groups": {
+    "general": "Allgemein",
+    "combat": "Kampf"
+  },
+  "columns": {
+    "battles": {
+      "label": "Gefechte",
+      "tip": "Gesamt: mit dem Panzer gespielte Gefechte"
+    },
+    "count": {
+      "label": "Anzahl",
+      "tip": "Anzahl der in der Stichprobe erfassten spieler"
+    },
+    "rating": {
+      "label": "Bewertung (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Gewinnrate mit dem Panzer"
+    },
+    "playerWr": {
+      "label": "Spieler WR",
+      "tip": "Durchschnitt der Gesamtsiegquote für spieler, die dieses Fahrzeug fahren"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Mittlerer Schaden pro Gefecht"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Verhältnis Abschüsse / Tode"
+    },
+    "assists": {
+      "label": "Hilfen",
+      "tip": "Durchschnitt: assistierter Schaden"
+    },
+    "hitPct": {
+      "label": "Treffer %",
+      "tip": "Treffer / Schüsse"
+    },
+    "penPct": {
+      "label": "Durchschlag %",
+      "tip": "Durchschlagskraft / Treffer"
+    },
+    "spots": {
+      "label": "Spots",
+      "tip": "Durchschnitt: Spots pro Gefecht"
+    },
+    "blocked": {
+      "label": "Blockiert",
+      "tip": "Durchschnitt: Schaden durch Panzerung Blockiert"
+    },
+    "survival": {
+      "label": "Überleben",
+      "tip": "Teilen: Überlebte Gefechte"
+    }
+  }
+}

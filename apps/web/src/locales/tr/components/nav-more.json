@@ -1,0 +1,37 @@
+{
+  "label": "Daha fazla",
+  "items": {
+    "tournaments": {
+      "label": "Turnuvalar",
+      "description": "Bölge bölge fikstürler, kadrolar ve sonuçlar"
+    },
+    "servers": {
+      "label": "Sunucular",
+      "description": "Şu anda ve zaman içindeki çevrimiçi oyuncular"
+    },
+    "bot": {
+      "label": "Discord botu",
+      "description": "Eğik çizgi komutlarıyla oyuncu, klan ve tank istatistikleri"
+    },
+    "mcp": {
+      "label": "MCP sunucusu",
+      "description": "Claude, ChatGPT veya herhangi bir MCP istemcisine bağlan"
+    },
+    "api": {
+      "label": "API",
+      "description": "Ücretsiz herkese açık REST API, anahtar gerekmez"
+    },
+    "badges": {
+      "label": "Rozetler",
+      "description": "Bir oyuncunun veya klanın kazanabileceği her arma ve nasıl kazanılacağı"
+    },
+    "glossary": {
+      "label": "Sözlük",
+      "description": "Açıklanan tüm World of Tanks terimleri"
+    },
+    "support": {
+      "label": "Bizi destekle",
+      "description": "{name} hizmetini ücretsiz, açık ve reklamsız tut"
+    }
+  }
+}

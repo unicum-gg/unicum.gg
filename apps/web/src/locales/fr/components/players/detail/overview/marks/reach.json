@@ -1,0 +1,7 @@
+{
+  "badge-title": "{combined} points de dégâts combinés, contre {threshold} requis pour cette marque",
+  "empty": "Aucun canon n’explique à lui seul ce que ce compte parvient à en tirer.",
+  "gun-carries": "le canon porte {marks}",
+  "none": "aucun",
+  "recent-window": " (30j)"
+}

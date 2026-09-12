@@ -1,0 +1,9 @@
+{
+  "all": "Все",
+  "camouflage-map": "{camouflage} карта",
+  "modes": "{count, plural, one {# режим} few {# режима} many {# режимов} other {# режима}}",
+  "no-maps-match-your-filters": "Нет карт, соответствующих вашим фильтрам.",
+  "search": "Поиск среди карт: {count}",
+  "search-label": "Искать карты",
+  "special-map": "Особая Карта"
+}

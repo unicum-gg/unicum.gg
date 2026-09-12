@@ -1,0 +1,12 @@
+{
+  "slot": "Слот {n}",
+  "slot-filled": "Место {n}: {name}",
+  "consumable-slot": "Место за потрошни материјал {n}",
+  "consumable-slot-filled": "Место за потрошни материјал {n}: {name}",
+  "level": "Ниво {n}",
+  "stock": "Zaliha",
+  "specialize": "Klikni за специјализацију овог места.",
+  "clear-specialization": "Klikni за уклањање специјализације овог места.",
+  "crew-skills": "Veštine posade",
+  "shell-aria": "{name}: {damage} штете, {penetration} mm пробојности"
+}

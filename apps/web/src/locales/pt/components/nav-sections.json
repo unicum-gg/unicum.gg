@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Jogadores",
+    "clans": "Clãs",
+    "tanks": "Tanques",
+    "maps": "Mapas",
+    "tournaments": "Torneios",
+    "servers": "Servidores"
+  },
+  "links": {
+    "top-players": {
+      "label": "Top jogadores",
+      "description": "Classificação histórica de jogadores"
+    },
+    "players-onslaught": {
+      "description": "classificação do Massacre classificatório"
+    },
+    "players-steel-hunter": {
+      "description": "Classificação do modo battle royale"
+    },
+    "top-clans": {
+      "label": "Top clãs",
+      "description": "Classificação histórica de clãs"
+    },
+    "stronghold": {
+      "description": "Classificação de escaramuças"
+    },
+    "advances": {
+      "description": "Classificação 15 contra 15 de nível X"
+    },
+    "tank-performances": {
+      "label": "Desempenhos",
+      "description": "Taxa de vitórias e dano por tanque"
+    },
+    "tank-specs": {
+      "label": "Especificações",
+      "description": "Estatísticas de todos os tanques"
+    },
+    "tank-economics": {
+      "label": "Economia",
+      "description": "Tanques que mais rendem créditos e XP"
+    },
+    "tank-moe": {
+      "description": "Dano necessário para cada marca"
+    },
+    "tank-mom": {
+      "description": "Limiares dos emblemas de mestria"
+    },
+    "tank-changes": {
+      "label": "Alterações",
+      "description": "Buffs e nerfs por atualização"
+    },
+    "tank-community": {
+      "label": "Classificações da comunidade",
+      "description": "Avaliados por jogadores que os possuem"
+    },
+    "tank-videos": {
+      "label": "Vídeos",
+      "description": "Partidas da comunidade"
+    },
+    "all-tournaments": {
+      "label": "Torneios",
+      "description": "Todos os torneios, abertos e concluídos"
+    },
+    "all-maps": {
+      "label": "Todas as mapas",
+      "description": "Todos os mapas do jogo"
+    },
+    "map-changes": {
+      "label": "Alterações",
+      "description": "Reformulações de mapas por atualização"
+    },
+    "battle-type": {
+      "description": "Mapas de {type}"
+    },
+    "servers-population": {
+      "label": "População do servidor",
+      "description": "Jogadores online, agora e ao longo do tempo"
+    }
+  }
+}

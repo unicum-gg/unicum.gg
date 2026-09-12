@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Pick a reserve to preview the schedule.",
+  "schedule": "On your active days, it activates at {times} (each lasts {hours}h), covering {window} once at least the online threshold is met."
+}

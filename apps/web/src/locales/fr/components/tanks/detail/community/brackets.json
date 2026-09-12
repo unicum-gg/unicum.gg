@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Batailles",
+  "no-votes": "non votes",
+  "rated-higher": "Les joueurs les plus performants lui accordent {stars} étoiles de plus que le reste du serveur. Il récompense ceux qui savent ce qu’ils font.",
+  "rated-lower": "Les joueurs les plus performants lui accordent {stars} étoiles de moins que le reste du serveur. Il donne une impression flatteuse jusqu’à ce qu’on lui en demande vraiment quelque chose.",
+  "votes": "{count} Votes",
+  "votes-one": "{count} Vote"
+}

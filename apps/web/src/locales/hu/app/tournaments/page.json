@@ -1,0 +1,8 @@
+{
+  "description": "A Wargaming minden tornája {region} régióban: napi ranglétraversenyek aranyért, klánbajnokságok, a nevezők és a győztesek. Teljes ágrajzok, eredmények és csapatnévsorok.",
+  "live-many": "Jelenleg {count} torna áll nyitva nevezésre vagy zajlik {region} régióban,",
+  "live-one": "Jelenleg {count} torna áll nyitva nevezésre vagy zajlik {region} régióban,",
+  "no-live": "Mindennap rendeznek tornákat {region} régióban,",
+  "title": "World of Tanks: {tournaments}",
+  "what-you-find": "az aranyért zajló 1v1 ranglétraversenyektől a pénzdíjas klánbajnokságokig. Teljes ágrajzok és eredmények, minden csapat teljes névsora, valamint pályánként az oldal, ahonnan indultak."
+}

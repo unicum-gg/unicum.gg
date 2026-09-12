@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
 import {
   type ReactNode,
@@ -46,8 +47,12 @@ import {
 } from "@unicum.gg/shared";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
+import { FilterSubject } from "@/components/filter-subject";
+import { useTranslation } from "@/hooks/use-translation";
+import { battleTypeName } from "@/components/game-name";
+import { BattleType } from "@unicum.gg/shared";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
 
 // Mirror the API contract (PLAYERS_TOP_MAX_LIMIT): pull the whole ranking (up
@@ -102,14 +107,18 @@ function SortableHead({
       type="button"
       onClick={() => onSort(sortKey)}
       className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+        "inline-flex cursor-pointer items-center gap-1.5 max-w-full min-w-0 font-medium select-none hover:text-foreground",
         active ? "text-foreground" : "",
       )}
     >
-      {children}
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
       <Icon
         weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
       />
     </button>
   );
@@ -131,6 +140,12 @@ export function SteelHunterBoard({
   region: Region;
   initialResults: SteelHunterRow[];
 }) {
+
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/list/steel-hunter/view");
+  const { t: tOwn } = useTranslation("components/players/list/steel-hunter/board");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const mode = battleTypeName(BattleType.BattleRoyale, tGame);
   // The page is prerendered (ISR) at the canonical view (HR sort), seeded here
   // with the full ranking as `initialResults`, then paginated client-side. A
   // column click re-ranks the WHOLE board, so it re-fetches the full ranking in
@@ -150,7 +165,7 @@ export function SteelHunterBoard({
     () => [
       { key: "hr", label: "HR", value: (r) => r.hr },
       { key: "hrb", label: "HRB", value: (r) => r.hrb },
-      { key: "battles", label: "Battles", value: (r) => r.battles },
+      { key: "battles", label: t("columns.battles"), value: (r) => r.battles },
       {
         key: "winrate",
         label: "WR %",
@@ -158,16 +173,16 @@ export function SteelHunterBoard({
       },
       {
         key: "survival",
-        label: "Survival %",
+        label: t("columns.survival-percent"),
         value: (r) => (r.battles > 0 ? (r.survived / r.battles) * 100 : null),
       },
       {
         key: "damage",
-        label: "Avg damage",
+        label: t("columns.damage"),
         value: (r) => (r.battles > 0 ? r.damage / r.battles : null),
       },
     ],
-    [],
+    [t],
   );
   const { filtered, filters } = useLeaderboardFilter(results, {
     searchFields,
@@ -228,22 +243,22 @@ export function SteelHunterBoard({
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>Top {results.length} Steel Hunter players</PanelTitle>
+        <PanelTitle>
+          {t("board", { count: results.length, mode })}
+        </PanelTitle>
       </PanelHeader>
       <PanelContent className="p-0">
         {results.length > 0 && (
           <div className="border-b border-fd-border px-4 py-2.5">
-            <LeaderboardFilterBar filters={filters} searchNoun="players" />
+            <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Players} />
           </div>
         )}
         {results.length === 0 ? (
           <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-            No ranked Steel Hunter players yet.
-          </div>
+            {tOwn("no-ranked-steel-hunter-players")}</div>
         ) : filtered.length === 0 ? (
           <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-            No player matches the current filters.
-          </div>
+            {tOwn("no-player-matches-the-current")}</div>
         ) : (
           <Table
             aria-busy={loading}
@@ -259,14 +274,14 @@ export function SteelHunterBoard({
             <TableHeader>
               <TableRow>
                 <TableHead className="w-12 text-center!">#</TableHead>
-                <TableHead>Player</TableHead>
+                <TableHead>{t("columns.player")}</TableHead>
                 <SortableHead
                   sortKey={SteelHunterSort.Battles}
                   active={sort === SteelHunterSort.Battles}
                   onSort={changeSort}
                   className="w-24"
                 >
-                  Battles
+                  {t("columns.battles")}
                 </SortableHead>
                 <SortableHead
                   sortKey={SteelHunterSort.Survival}
@@ -274,7 +289,7 @@ export function SteelHunterBoard({
                   onSort={changeSort}
                   className="hidden w-24 md:table-cell"
                 >
-                  Survival
+                  {t("columns.survival")}
                 </SortableHead>
                 <SortableHead
                   sortKey={SteelHunterSort.Damage}
@@ -282,7 +297,7 @@ export function SteelHunterBoard({
                   onSort={changeSort}
                   className="hidden w-28 md:table-cell"
                 >
-                  Avg damage
+                  {t("columns.damage")}
                 </SortableHead>
                 <SortableHead
                   sortKey={SteelHunterSort.Winrate}
@@ -290,24 +305,21 @@ export function SteelHunterBoard({
                   onSort={changeSort}
                   className="hidden w-24 sm:table-cell"
                 >
-                  WR
-                </SortableHead>
+                  {tOwn("wr")}</SortableHead>
                 <SortableHead
                   sortKey={SteelHunterSort.Hr}
                   active={sort === SteelHunterSort.Hr}
                   onSort={changeSort}
                   className="w-24"
                 >
-                  HR
-                </SortableHead>
+                  {tOwn("hr")}</SortableHead>
                 <SortableHead
                   sortKey={SteelHunterSort.Hrb}
                   active={sort === SteelHunterSort.Hrb}
                   onSort={changeSort}
                   className="w-24"
                 >
-                  HRB
-                </SortableHead>
+                  {tOwn("hrb")}</SortableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -332,13 +344,13 @@ export function SteelHunterBoard({
                       </span>
                     </TableCell>
                     <TableCell className="text-right text-muted-foreground tabular-nums">
-                      {intFmt.format(r.battles)}
+                      {num(INT_FORMAT).format(r.battles)}
                     </TableCell>
                     <TableCell className="hidden text-right text-muted-foreground tabular-nums md:table-cell">
                       {r.battles > 0 ? pct(r.survived / r.battles) : "—"}
                     </TableCell>
                     <TableCell className="hidden text-right text-muted-foreground tabular-nums md:table-cell">
-                      {r.battles > 0 ? intFmt.format(r.damage / r.battles) : "—"}
+                      {r.battles > 0 ? num(INT_FORMAT).format(r.damage / r.battles) : "—"}
                     </TableCell>
                     <TableCell
                       className={cn(
@@ -357,7 +369,7 @@ export function SteelHunterBoard({
                         RATING_COLOR_CLASS[hrColor(r.hr)],
                       )}
                     >
-                      {intFmt.format(r.hr)}
+                      {num(INT_FORMAT).format(r.hr)}
                     </TableCell>
                     <TableCell
                       className={cn(
@@ -365,7 +377,7 @@ export function SteelHunterBoard({
                         RATING_COLOR_CLASS[hrbColor(r.hrb)],
                       )}
                     >
-                      {intFmt.format(r.hrb)}
+                      {num(INT_FORMAT).format(r.hrb)}
                     </TableCell>
                   </TableRow>
                 );

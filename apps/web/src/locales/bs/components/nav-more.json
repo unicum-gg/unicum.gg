@@ -1,0 +1,37 @@
+{
+  "label": "Više",
+  "items": {
+    "tournaments": {
+      "label": "Turniri",
+      "description": "Žrijebovi, sastavi i rezultati po regijama"
+    },
+    "servers": {
+      "label": "Serveri",
+      "description": "Igrači online, sada i kroz vrijeme"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Statistike igrača, klanova i tenkova kao slash naredbe"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Povežite Claude, ChatGPT ili bilo koji MCP klijent"
+    },
+    "api": {
+      "label": "API",
+      "description": "Besplatni javni REST API, ključ nije potreban"
+    },
+    "badges": {
+      "label": "Znakovi",
+      "description": "Svaka značka koju igrač ili klan može zaraditi i način zarade"
+    },
+    "glossary": {
+      "label": "Rječnik",
+      "description": "Svaki World of Tanks pojam, objašnjen"
+    },
+    "support": {
+      "label": "Podržite nas",
+      "description": "Podržite da {name} ostane besplatan, otvoren i bez oglasa"
+    }
+  }
+}

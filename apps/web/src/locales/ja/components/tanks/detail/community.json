@@ -1,0 +1,8 @@
+{
+  "what-players-think": "プレイヤーがこの戦車についてどう考えているか",
+  "not-rated": "まだ評価されていません。最初に評価しましょう",
+  "votes": "{count} 件の投票",
+  "votes-one": "{count} 件の投票",
+  "stars": "{max} 中 {value}",
+  "not-rated-short": "評価なし"
+}

@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Kostnad (krediter)",
+    "buyGold": "Kostnad (guld)",
+    "researchXp": "Forsknings XP",
+    "shellCost": "Kostnad för projektil",
+    "ammoCost": "Kostnad för fulla ammunitionen",
+    "class3": "3:e klass",
+    "class2": "2:a klass",
+    "class1": "1:a klass",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Mark (85%)",
+    "mark3": "3 Mark (95%)"
+  }
+}

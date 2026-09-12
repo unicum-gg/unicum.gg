@@ -1,0 +1,35 @@
+{
+  "heading": "Topp spelare i <accent>{mode}</accent>",
+  "intro": "{mode} är World of Tanks tävlingsinriktade rankade 7 mot 7-läge på nivå X. Topplistan för {region}, direkt från spelets egen ställning.",
+  "season": {
+    "range": "{start} till {end}",
+    "final": "slutställning",
+    "live": "pågående säsong",
+    "updated": "uppdaterad {when}"
+  },
+  "board": "Topp {count} spelare i {mode}",
+  "columns": {
+    "player": "Spelare",
+    "rank": "Grad",
+    "battles": "Strider",
+    "rating": "Gradpoäng"
+  },
+  "alias": "(som {nickname})",
+  "ranks": {
+    "title": "Ranker",
+    "meaning": "Betydelse",
+    "tier": "Nivå",
+    "intro": "Du klättrar i rankerna i {mode} genom att vinna strider. Varje seger ger Gradpoäng utifrån hur bra du spelade. {champion} är den högsta graden du kan nå enbart med poäng, och när du når den kommer du med på topplistan. {legend} har ingen fast gräns. Det är gruppen med högst Rankning bland spelare med graden {champion}, så kvalgränsen ändras beroende på startfältet, och vid lika poäng avgör antalet spelade strider. De exakta kvalgränserna för {legend} och {champion} hämtas från den aktuella säsongen och är markerade på topplistan.",
+    "legend-blurb": "Spelarna med högst Rankning bland dem som har graden {champion}. Spelet begränsar gruppen till en bestämd placering på topplistan varje säsong, så antalet varierar mellan säsonger och regioner, i stället för ett fast poängkrav. Om du hamnar under den sista spelaren med graden {legend} faller du tillbaka till {champion}.",
+    "champion-blurb": "Den högsta graden du kan nå med Gradpoäng och inträdet till topplistan. Varje rankad spelare har minst graden {champion}."
+  },
+  "race": {
+    "title-live": "Vad som krävs just nu",
+    "title-ended": "Så gick säsongen",
+    "legend-cutoff": "Gräns för {legend}",
+    "champion-cutoff": "Gräns för {champion}",
+    "ranked-players": "Rankade spelare",
+    "rating-points": "gradpoäng",
+    "rank-cutoffs": "Gradsgränser"
+  }
+}

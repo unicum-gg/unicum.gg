@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistieken van {nickname} voor Willekeurige Gevechten",
+  "progression-title": "Progressie van {nickname} in {metric}",
+  "lift-drag-title": "Tanks die de Beoordeling van {nickname} beïnvloeden",
+  "progression-blurb": "De ononderbroken lijn toont de totale {metric} (komt overeen met de kolom Totaal hierboven) en verandert langzaam naarmate er nieuwe Gevechten bijkomen. De stippellijn toont de {metric} per sessie, berekend op basis van de Gevechten die sinds de vorige momentopname zijn gespeeld. Zo worden sterke en zwakke reeksen zichtbaar. De kleur van de lijn volgt het niveau van de Beoordeling.",
+  "progression-empty": "Nog niet genoeg geschiedenis. We hebben minstens één momentopname nodig om de curve te tekenen. Kijk binnenkort nog eens."
+}

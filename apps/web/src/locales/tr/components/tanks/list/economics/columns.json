@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Maliyet (kredi)",
+      "tip": "Kredi cinsinden satın alma fiyatı (teknoloji ağacı tankları)"
+    },
+    "buyGold": {
+      "label": "Maliyet (altın)",
+      "tip": "Altın cinsinden satın alma fiyatı (premium tanklar)"
+    },
+    "researchXp": {
+      "label": "Araştırma XP",
+      "tip": "Kilidi açmak için gereken XP (en ucuz yol)"
+    },
+    "totalFreeXp": {
+      "label": "Ücretsiz XP (T{tier})",
+      "tip": "{tier} seviyeden araştırmak için gereken toplam XP, ön koşul modülleri dâhil"
+    },
+    "shellCost": {
+      "label": "Mühimmat maliyeti",
+      "tip": "Varsayılan mermi fiyatı (kredi)"
+    },
+    "ammoCost": {
+      "label": "Tam mühimmat maliyeti",
+      "tip": "Varsayılan mermi fiyatı × mühimmat kapasitesi"
+    },
+    "acquireMoney": {
+      "label": "Satın alma maliyeti ({currency})",
+      "tip": "Tankı edinmek için tahmini gerçek para maliyeti (araştırma + satın alma), {currency} cinsinden"
+    },
+    "freeXpMoney": {
+      "label": "Ücretsiz XP ({currency})",
+      "tip": "Tankı {tier} seviyeden Ücretsiz XP ile açmak için tahmini gerçek para maliyeti, {currency} cinsinden"
+    }
+  },
+  "selector": {
+    "buyCredits": "Maliyet (kredi)",
+    "buyGold": "Maliyet (altın)",
+    "researchXp": "Araştırma XP",
+    "totalFreeXp": "Ücretsiz XP",
+    "shellCost": "Mühimmat maliyeti",
+    "ammoCost": "Tam mühimmat maliyeti",
+    "acquireMoney": "Satın alma maliyeti (para)",
+    "freeXpMoney": "Ücretsiz XP (para)"
+  }
+}

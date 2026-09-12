@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Scor mediu pe bătălie",
+  "general-parameters": "Parametri generali",
+  "metric-progression": "Progresul pentru {metric}",
+  "not-enough-history-on-this": "Nu există încă suficient istoric pentru acest tanc. Sunt necesare cel puțin două eșantionări în ultimele 90 de zile pentru a desena o linie.",
+  "record-score": "Scor record",
+  "updated": "Actualizat"
+}

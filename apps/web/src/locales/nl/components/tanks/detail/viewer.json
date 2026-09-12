@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visueel",
+    "collision": "Botsing",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Voertuig centreren",
+    "off": "Voertuig weer uit het midden plaatsen"
+  },
+  "hull-down": {
+    "on": "Huid naar beneden",
+    "off": "Voertuig horizontaal zetten"
+  },
+  "tracks": {
+    "on": "Rupsbanden laten draaien",
+    "off": "Rupsbanden stoppen"
+  },
+  "textures": {
+    "on": "Texturen in hoge definitie",
+    "off": "Standaard texturen"
+  },
+  "reset": "Reset weergave",
+  "style": "Kies een stijl",
+  "style-worn": "Stijl: {name}",
+  "search-styles": "Stijlen zoeken",
+  "colours": "Wat de kleuren betekenen",
+  "cinematic": {
+    "off": "Cinematische camera: uit",
+    "auto": "Cinematische camera: bij inactiviteit",
+    "on": "Cinematische camera: altijd"
+  },
+  "open-tank": "Een andere tank openen",
+  "open-tank-placeholder": "Open tank...",
+  "more-actions": "Meer acties",
+  "marks-meaning": {
+    "0": "Geen Markeringen van uitmuntendheid",
+    "1": "Eén markering: beter dan 65% van de spelers met deze tank",
+    "2": "Twee markeringen: beter dan 85%",
+    "3": "Drie markeringen: beter dan 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Venster vullen",
+      "leave": "Terug naar de pagina"
+    },
+    "screen": {
+      "enter": "Scherm vullen",
+      "leave": "Volledig scherm verlaten"
+    }
+  },
+  "marks-count": {
+    "0": "Geen Markeringen van uitmuntendheid",
+    "one": "1 mark van uitmuntendheid",
+    "other": "{count} markeringen van uitmuntendheid"
+  },
+  "compare-tank": "Vergelijken met een andere tank",
+  "compare-tank-placeholder": "Vergelijk met...",
+  "view-tooltips": {
+    "visual": "De tank zoals die in het spel wordt weergegeven",
+    "collision": "Hoe dik elke pantserplaat is",
+    "live": "Wat de gekozen granaat zou doen"
+  },
+  "cinematic-tooltips": {
+    "off": "Cinematische camera: uit, het beeld blijft stilstaan",
+    "auto": "Cinematische camera: start na 30 seconden inactiviteit",
+    "on": "Cinematische camera: altijd, vanaf het moment dat je loslaat"
+  }
+}

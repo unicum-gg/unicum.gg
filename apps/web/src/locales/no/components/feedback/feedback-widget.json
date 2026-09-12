@@ -1,0 +1,21 @@
+{
+  "trigger": "Tilbakemelding",
+  "title": "Del tilbakemeldingen din",
+  "topic-placeholder": "Velg et emne...",
+  "message-placeholder": "Din tilbakemelding...",
+  "send": "Send",
+  "sent": "Takk for tilbakemeldingen!",
+  "failed": "Kunne ikke sende tilbakemeldingen. Prøv igjen.",
+  "topics": {
+    "bug": "Feilrapport",
+    "idea": "Forslag til ny funksjon",
+    "data": "Nøyaktighet av data",
+    "other": "Annet"
+  },
+  "sentiments": {
+    "awful": "Forferdelig",
+    "bad": "Dårlig",
+    "good": "Bra",
+    "great": "Fantastisk"
+  }
+}

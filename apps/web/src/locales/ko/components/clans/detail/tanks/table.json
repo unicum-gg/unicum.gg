@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "이 클랜의 전차 데이터가 아직 없습니다.",
+  "no-tanks-match-these-filters": "이 필터와 일치하는 전차가 없습니다.",
+  "nation": "국가",
+  "type": "유형",
+  "tier": "단계",
+  "name": "이름",
+  "members": "회원",
+  "battles": "전투",
+  "avg-damage": "평균 피해",
+  "avg-xp": "평균 경험치",
+  "wr": "WR"
+}

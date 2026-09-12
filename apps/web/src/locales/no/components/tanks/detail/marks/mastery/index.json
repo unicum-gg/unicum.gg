@@ -1,0 +1,8 @@
+{
+  "last-days": "Siste {chartDays} dager",
+  "n-players": "{count, plural, one {# spiller} other {# spillere}}",
+  "rolling-average-combined-damage-to": "Rullerende gjennomsnittlig samlet skade for å slå 65 / 85 / 95 % av spillere.",
+  "single-battle-xp-to-beat": "XP i én kamp for å slå 50 / 80 / 95 / 99 % av spillere.",
+  "tank-marks-of-excellence": "Utmerkelsesmerker for {tank}",
+  "tank-marks-of-mastery": "Mesterskapsmerker for {tank}"
+}

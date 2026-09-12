@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { Info } from "lucide-react";
 
 import {
@@ -59,13 +60,14 @@ export function ArmourLegend({
   view: View;
   range: [number, number];
 }) {
+  const { t } = useTranslation("components/tanks/detail/viewer/legend");
   if (view === View.Visual) return null;
   return (
     <Popover>
       <PopoverTrigger asChild>
         <button
           type="button"
-          aria-label="What the colours mean"
+          aria-label={t("what-the-colours-mean")}
           className={CONTROL}
         >
           <Info className="size-4" aria-hidden />
@@ -79,12 +81,12 @@ export function ArmourLegend({
 }
 
 function Key({ view, range }: { view: View; range: [number, number] }) {
+  const { t } = useTranslation("components/tanks/detail/viewer/legend");
   const reading = view === View.Collision;
   return (
     <>
       <div className="mb-2 font-medium uppercase tracking-wide text-fd-muted-foreground">
-        Reading
-      </div>
+        {t("reading")}</div>
       <div
         className="h-2 rounded-sm"
         style={{
@@ -101,8 +103,8 @@ function Key({ view, range }: { view: View; range: [number, number] }) {
           </>
         ) : (
           <>
-            <span>never gets through</span>
-            <span>always does</span>
+            <span>{t("never-gets-through")}</span>
+            <span>{t("always-does")}</span>
           </>
         )}
       </div>
@@ -124,10 +126,10 @@ function Key({ view, range }: { view: View; range: [number, number] }) {
               background: "linear-gradient(to right, #00c8ff, #c000ff)",
             }}
           />
-          <span>a screen, heavy to bare</span>
+          <span>{t("screen-heavy-to-bare")}</span>
         </div>
-        <Swatch colour={NOT_ARMOUR}>a module or a track</Swatch>
-        <Swatch colour={OPTICS}>an observation device</Swatch>
+        <Swatch colour={NOT_ARMOUR}>{t("module-or-a-track")}</Swatch>
+        <Swatch colour={OPTICS}>{t("an-observation-device")}</Swatch>
       </div>
     </>
   );

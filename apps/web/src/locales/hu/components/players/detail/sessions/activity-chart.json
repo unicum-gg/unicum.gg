@@ -1,0 +1,5 @@
+{
+  "battles": "{count} csaták",
+  "chart-label": "Lejátszott csaták {granularity} szerint, {metric} alapján színezve",
+  "no-battles": "Nincsenek csaták"
+}

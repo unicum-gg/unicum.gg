@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Cijena (krediti)",
+    "buyGold": "Cijena (zlato)",
+    "researchXp": "XP za istraživanje",
+    "shellCost": "Cijena projektila",
+    "ammoCost": "Cijena punih municija",
+    "class3": "3. razred",
+    "class2": "2. razred",
+    "class1": "1. razred",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Marks (85%)",
+    "mark3": "3 Marks (95%)"
+  }
+}

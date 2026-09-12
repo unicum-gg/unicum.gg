@@ -1,0 +1,11 @@
+{
+  "date": "Datum",
+  "featured-tournament": "Izdvojeni turnir",
+  "format": "Format",
+  "n-of-the-roster-were-in-the-clan": "{count} чланова састава било је у клану",
+  "no-tournament-matches-the-current": "Ниједан турнир не одговара тренутним филтерима.",
+  "played-as": "Igrao kao",
+  "result": "Rezultat",
+  "status": "Status",
+  "tier": "Nivo"
+}

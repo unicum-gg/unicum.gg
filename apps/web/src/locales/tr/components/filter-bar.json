@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "{count} tank arasında ara",
+    "rated-tanks": "{count} dereceli tank arasında ara",
+    "videos": "{count} video arasında ara",
+    "players": "{count} oyuncu ara",
+    "clans": "{count} klan ara",
+    "tournaments": "{count} turnuva ara",
+    "teams": "{count} takım ara"
+  },
+  "min": "Min",
+  "max": "Maks",
+  "none": "Hiçbiri",
+  "common-test": "Ortak Test tarafından değiştirilenler: yeni araçlar ve dengelenen araçlar",
+  "category": {
+    "standard": "Standart",
+    "premium": "Premium",
+    "reward": "Ödül"
+  },
+  "moe": {
+    "0": "Henüz nişan yok",
+    "1": "1 puan",
+    "2": "2 puan",
+    "3": "3 puan"
+  },
+  "mom": {
+    "0": "Henüz rozet yok",
+    "1": "3. Sınıf",
+    "2": "2. Sınıf",
+    "3": "1. Sınıf",
+    "4": "Ace Tanker"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "columns": "Kolumny",
+  "n-marks-of-excellence": "{count, plural, one {# odznaka biegłości} few {# odznaki biegłości} many {# odznak biegłości} other {# odznak biegłości}}"
+}

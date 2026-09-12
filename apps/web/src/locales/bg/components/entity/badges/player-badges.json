@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1-во място",
+    "2": "2-ро място",
+    "3": "3-то място"
+  },
+  "streamer": "Стриймър · гледай {name} в Twitch",
+  "tournament": {
+    "one": "Победил състав на {title}",
+    "many": "В {count} победили състава, най-добрият в {title}",
+    "featured": "{text} · представено събитие",
+    "unnamed": "турнир на Общ"
+  },
+  "tournament-wins": "{count, plural, one {# победа в турнир} other {# победи в турнири}}",
+  "watch-on-twitch": "Гледай {name} в Twitch",
+  "watch-on-twitch-viewers": "Гледай {name} в Twitch · {viewers} зрители"
+}

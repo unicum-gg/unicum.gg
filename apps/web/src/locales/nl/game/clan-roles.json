@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Rekruteringsofficier",
+  "personnel_officer": "Personeelsofficier",
+  "quartermaster": "Kwartiermeester",
+  "executive_officer": "Uitvoerende officier",
+  "recruit": "Rekruut",
+  "private": "Soldaat",
+  "commander": "Commandant",
+  "reservist": "Reservist",
+  "combat_officer": "Gevechtsofficier",
+  "junior_officer": "Junior officier",
+  "intelligence_officer": "Inlichtingenofficier"
+}

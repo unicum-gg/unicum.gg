@@ -1,0 +1,11 @@
+{
+  "date": "Дата",
+  "featured-tournament": "Рекомендуемый турнир",
+  "format": "Формат",
+  "n-of-the-roster-were-in-the-clan": "{count} состава состояли в клане",
+  "no-tournament-matches-the-current": "Турниров, соответствующих текущим фильтрам, нет.",
+  "played-as": "Играл как",
+  "result": "Результат",
+  "status": "Статус",
+  "tier": "Уровень"
+}

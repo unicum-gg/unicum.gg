@@ -1,0 +1,11 @@
+{
+  "compare": "Összehasonlítás a(z) {count} legközelebbi tankkal",
+  "match": "csata",
+  "subtitle": "Azonos helyezés a saját szintjükön",
+  "verdict": {
+    "overall": "Hasonló összesen",
+    "closest": "Legközelebb ezen: {axes}",
+    "closest-furthest": "Legközelebb ezen: {axes}, legtávolabb ezen: {apart}",
+    "and": " és "
+  }
+}

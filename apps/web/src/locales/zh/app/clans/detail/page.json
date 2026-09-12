@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks 军团（{region}），{members}名成员",
+    "description": "{name} [{tag}]，位于{region}：{members}名成员，包含 WN8 和 WNX 评分的完整成员表、近期加入与离开活动以及军团历史。"
+  },
+  "stronghold": {
+    "title": "[{tag}] {name}要塞数据（{region}）",
+    "description": "{name} [{tag}]在{region}的要塞表现：每名成员的遭遇战和推进战评分、战斗场次及胜率。"
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name}军团战争数据（{region}）",
+    "description": "{name} [{tag}]在{region}的军团战争表现：全球地图战役中的成员评分、战斗场次和胜率。"
+  },
+  "tanks": {
+    "title": "[{tag}] {name}的坦克（{region}），军团的车辆",
+    "description": "{name} [{tag}]在{region}进行过的每辆车辆，汇总军团成员的战斗场次、胜率和平均伤害。"
+  },
+  "manage": {
+    "title": "[{tag}] {name}要塞储备（{region}）",
+    "description": "激活并安排{name} [{tag}]的要塞储备。仅限军官。"
+  },
+  "missing": {
+    "description": "[{tag}]位于{region}的 World of Tanks 军团：包含 WN8/WNX 评分的成员表、加入与离开活动、近期战斗和完整军团历史。"
+  }
+}

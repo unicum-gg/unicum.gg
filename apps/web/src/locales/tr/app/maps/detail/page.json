@@ -1,0 +1,5 @@
+{
+  "title": "{map}, World of Tanks haritası ({region})",
+  "description": "{map}: {width} × {height} m boyutunda bir World of Tanks haritası.",
+  "description-modes": "{map}: {width} × {height} m boyutunda, {modes} oynanan bir World of Tanks haritası."
+}

@@ -1,0 +1,22 @@
+{
+  "stat": "Statistik",
+  "periods": {
+    "total": "I alt",
+    "day": "Sidste 24 timer",
+    "week": "Sidste 7 dage",
+    "month": "Sidste 30 dage"
+  },
+  "sections": {
+    "elo": "Niveau X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Niveau X (7v7)",
+    "t8": "{skirmish} Niveau VIII (7v7)",
+    "t6": "{skirmish} Niveau VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Kampe",
+    "winrate": "Vindrate"
+  }
+}

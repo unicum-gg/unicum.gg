@@ -1,0 +1,7 @@
+{
+  "group": "그룹 {order}",
+  "n-teams": "{count}개 팀",
+  "pts": "점수",
+  "team": "팀",
+  "top-n-advance": ", 상위 {count}개 팀 진출"
+}

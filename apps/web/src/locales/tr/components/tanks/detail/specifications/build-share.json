@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Kurulum bağlantısı kopyalandı",
+  "copy-build-link": "Kurulum bağlantısını kopyala",
+  "could-not-copy-link": "Bağlantı kopyalanamadı",
+  "include-setup": "Kurulumu dahil et",
+  "share-build": "Paylaş build",
+  "share-tank": "Paylaş: {tank}",
+  "share-text": "Bu {tank} kurulumunu {app} üzerinde kontrol et"
+}

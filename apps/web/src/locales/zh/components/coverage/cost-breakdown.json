@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "以欧元计费，按今日汇率转换为 {currency}。",
+  "cost-breakdown": "成本细分",
+  "estimated-annual-cost": "预计年度成本",
+  "fixed-month-bill-no-surprises": "每月固定账单 {totalAnnualEur}，没有意外：一台租用服务器，数据路径中不使用第三方 SaaS。只有当服务器不够用时才会增加（更多默认吞吐量意味着更多出口 IP）。",
+  "free": "免费",
+  "one-off-spend": "一次性支出",
+  "paid-once-so-it-is": "一次性付费，因此不计入上述月度账单，但仍会计入项目迄今为止的成本。",
+  "previously": "之前"
+}

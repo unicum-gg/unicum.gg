@@ -1,0 +1,6 @@
+{
+  "active-until": "Ενεργό έως {tz}",
+  "n-left": "Απομένουν {count}",
+  "no-reserves-in-stock-right": "Δεν υπάρχουν διαθέσιμα αποθέματα αυτήν τη στιγμή.",
+  "reserves-to-activate": "Αποθέματα προς ενεργοποίηση"
+}

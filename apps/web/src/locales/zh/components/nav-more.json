@@ -1,0 +1,37 @@
+{
+  "label": "更多",
+  "items": {
+    "tournaments": {
+      "label": "赛事",
+      "description": "按地区查看赛程、参赛名单和结果"
+    },
+    "servers": {
+      "label": "服务器",
+      "description": "当前及历史在线玩家数"
+    },
+    "bot": {
+      "label": "Discord 机器人",
+      "description": "通过斜杠命令查询玩家、军团和坦克数据"
+    },
+    "mcp": {
+      "label": "MCP 服务器",
+      "description": "连接 Claude、ChatGPT 或任何 MCP 客户端"
+    },
+    "api": {
+      "label": "API",
+      "description": "免费公共 REST API，无需密钥"
+    },
+    "badges": {
+      "label": "徽章",
+      "description": "玩家或军团可以获得的每个徽章，以及获得方式"
+    },
+    "glossary": {
+      "label": "词汇表",
+      "description": "解释每个 World of Tanks 术语"
+    },
+    "support": {
+      "label": "支持我们",
+      "description": "支持{name}保持免费、开放且无广告"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Přidat pracovní postup",
+  "boost": "Zesílení",
+  "each-workflow-activates-its-reserves": "Každý pracovní postup aktivuje své zálohy v nastaveném časovém okně, jakmile je dostatek členů v aktivní herní relaci. Běží na vašem účtu, takže nemusíte být online. Přidejte jich, kolik potřebujete.",
+  "n-online": "/ {count} online",
+  "officer": "Důstojník",
+  "online": "Online",
+  "recent-activations": "nedávné aktivace",
+  "reserve": "Rezerva",
+  "stronghold-boosts": "Posílení pevnosti",
+  "when": "Kdy",
+  "workflow": "Workflow"
+}

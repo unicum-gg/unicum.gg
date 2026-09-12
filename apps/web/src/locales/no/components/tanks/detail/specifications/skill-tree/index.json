@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Klikk på en tilgjengelig node for å låse den opp. Hver node påvirker egenskapene ovenfor. Fargene grupperer noder etter ildkraft, mobilitet, overlevelsesevne og kjøretøymekanikk.",
+  "loadout-switch-no-effect": "Bytte av utrustning i kamp. Ingen effekt på egenskaper.",
+  "title": "Oppgraderinger for stridsvognen {tank}",
+  "vehicle-mechanic-no-effect": "Kjøretøymekanikk. Ingen effekt på egenskaper."
+}

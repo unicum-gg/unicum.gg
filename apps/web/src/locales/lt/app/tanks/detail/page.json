@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank} World of Tanks statistika ({region}), {tier} lygio {nation} tankas",
+    "description": "{tank} ({region}) World of Tanks charakteristikos: šarvai, ugnies galia, mobilumas, moduliai, įgula ir lauko modifikacijos, skirtos šiam {tier} lygio {nation} tankui."
+  },
+  "performances": {
+    "title": "{tank} rezultatai ({region}), serverio statistika ir geriausi žaidėjai",
+    "description": "{tank} ({region}) World of Tanks rezultatai: serverio pergalių procento, žalos ir pagalbos vidurkis, geriausi šio {tier} lygio {nation} tanko žaidėjai, taip pat WN8 ir WNX tikėtinos reikšmės."
+  },
+  "marks": {
+    "title": "{tank} meistriškumo ir meistriškumo ženklai ({region})",
+    "description": "{tank} ({region}) World of Tanks meistriškumo ženklų ir meistriškumo reikalavimai bei jų istorija su šiuo {tier} lygio {nation} tanku."
+  },
+  "history": {
+    "title": "{tank} pakeitimų istorija ({region}), sustiprinimai ir susilpninimai",
+    "description": "Kiekvienas {tank} charakteristikų pakeitimas per World of Tanks atnaujinimus: Wargaming pateikti ugnies galios, mobilumo, išgyvenamumo ir maskuotės sustiprinimai bei susilpninimai šiam {tier} lygio {nation} tankui, versija po versijos."
+  },
+  "videos": {
+    "title": "{tank} žaidimo vaizdo įrašai ({region})",
+    "description": "Žiūrėkite {tank} veiksmą: bendruomenės pasiūlyti mūšiai su šiuo {tier} lygio {nation} tanku, kiekvienas atidaromas tuo momentu, kai buvo žaista, kartu nurodant žemėlapį ir rezultatą."
+  },
+  "community": {
+    "title": "{tank} žaidėjų apžvalgos ir bendruomenės reitingas ({region})",
+    "description": "Ką žaidėjai mano apie {tank}: bendruomenės įvertinimas penkių balų skalėje, suskirstytas pagal rinkėjų žaidimo lygį ir palygintas su tuo, kaip šis {tier} lygio {nation} tankas iš tikrųjų veikia, taip pat pateikiamos paskyrų, turinčių su juo mūšių, rašytinės apžvalgos."
+  }
+}

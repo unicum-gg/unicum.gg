@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Checkout annulleret.",
+  "claim-your-supporter-role-on-discord": "Gør krav på din bidragyderrolle på Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Kunne ikke tilføje Discord-rollen. Prøv igen.",
+  "could-not-open-the-billing-portal": "Kunne ikke åbne betalingsportalen.",
+  "could-not-start-checkout-please-try-again": "Kunne ikke starte betalingen. Prøv igen.",
+  "could-not-update-your-preference": "Kunne ikke opdatere din indstilling.",
+  "log-in-with-wargaming": "Log ind med Wargaming",
+  "log-in-with-wargaming-to": "Log ind med Wargaming for at støtte {NAME}.",
+  "manage-subscription": "Administrer abonnement",
+  "only-active-supporters-can-claim-the-discord": "Kun aktive bidragydere kan gøre krav på Discord-rollen.",
+  "or-choose-your-own-amount": "Eller vælg dit eget beløb",
+  "pay-what-you-want": "Betal, hvad du vil.",
+  "pick-an-amount": "Vælg et beløb eller indtast dit eget, fra €{min}/måned.",
+  "re-sync-discord-role": "Synkronisér Discord-rollen igen",
+  "secured-by-stripe": "Sikret af Stripe. Opsig når som helst.",
+  "show-me-anonymously-on-the": "Vis mig anonymt på podiet",
+  "support-subscriptions-are-coming-soon": "Støtteabonnementer kommer snart.",
+  "supporter-role-added-on-discord": "Bidragyderrollen er tilføjet på Discord!",
+  "you-are-a-supporter-thank": "Du er bidragyder. Tak, fordi du holder {NAME} i live."
+}

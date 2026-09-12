@@ -1,0 +1,4 @@
+{
+  "chart-label": "Giocatori online per server nell’ultimo {range}",
+  "not-enough-recorded-yet-for": "Non ci sono ancora abbastanza dati per questo intervallo. Il grafico si riempirà man mano che il campionamento prosegue."
+}

@@ -1,0 +1,13 @@
+{
+  "heading": "Những người chơi hàng đầu trong <accent>{mode}</accent>",
+  "intro": "{mode} là chế độ battle royale của World of Tanks. Bảng xếp hạng khu vực {region}, xếp hạng theo HR, tối thiểu 100 trận đấu {mode}.",
+  "board": "{count} người chơi {mode} hàng đầu",
+  "columns": {
+    "player": "Người chơi",
+    "battles": "Số trận",
+    "survival": "Tồn tại",
+    "survival-percent": "Tồn tại %",
+    "damage": "Thiệt hại trung bình"
+  },
+  "scale-description": "Các ngưỡng màu cho bảng {mode}, được hiệu chỉnh theo nhóm người chơi có ít nhất 100 trận đấu {mode}."
+}

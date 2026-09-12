@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Áttekintés",
+    "tanks": "Tankok",
+    "sessions": "Munkamenetek",
+    "achievements": "Kitüntetések",
+    "tournaments": "Tornák",
+    "value": "Érték"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "béta"
+}

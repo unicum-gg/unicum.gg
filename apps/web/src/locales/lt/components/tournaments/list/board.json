@@ -1,0 +1,14 @@
+{
+  "date": "Data",
+  "featured-tournament": "Išskirtinis turnyras",
+  "format": "Formatas",
+  "mode": "Režimas",
+  "no-tournament-matches-the-current": "Nė vienas turnyras neatitinka dabartinių filtrų.",
+  "nothing-here-right-now-wargaming": "Šiuo metu čia nieko nėra. Wargaming kasdien atidaro naujus turnyrus, todėl sąrašas netrukus užsipildys savaime.",
+  "prize": "Premija",
+  "region-tournaments": "{region} turnyrai ({count})",
+  "status": "Statusas",
+  "teams": "Komandos",
+  "tier": "lygis",
+  "tournament": "Turnyras"
+}

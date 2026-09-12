@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Ang isang cell ay ang mga panalo ng band sa tier na iyon sa mga laban nito roon, sa lahat ng sasakyang may hindi bababa sa {minBattles} laban ang isang manlalaro, kaya inilalarawan nito ang mga tier ayon sa paraan ng paglalaro ng mga taong naglalaro sa mga ito. Malabo ang pagkakaguhit sa mga cell na wala pang {TIERWINRATETHINCELL} laban dahil nagbabago ang mga ito sa mga dahilang hindi kasanayan. Pareho ang mga kulay sa mga saklaw ng rate ng panalo na ginagamit ng website sa iba pang bahagi.",
+  "cell-no-sample": "{where}, walang sample",
+  "cell-winrate": "{where}, {winrate} rate ng panalo sa {battles} mga laban",
+  "metric-band": "Band ng {metric}",
+  "nothing-recorded": "Wala pang naitala laban sa {metric}. Binubuo muli ang grid gabi-gabi.",
+  "over-battles-from-accounts": "{winrate} sa {battles} mga laban mula sa {players} mga account",
+  "over-n-battles": "sa {battles} mga laban",
+  "what-players-win-by-tier": "Ano ang napapanalunan ng mga manlalaro ng {label} ayon sa tier"
+}

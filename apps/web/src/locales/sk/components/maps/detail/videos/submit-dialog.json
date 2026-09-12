@@ -1,0 +1,17 @@
+{
+  "close": "Zavrieť",
+  "format": "Formát",
+  "here": "tukaj",
+  "in-the-queue": "Návrh je zaradený do poradia a zobrazí sa {where}, keď si ho pozrie moderátor. Dovtedy je na tej stránke váš návrh zobrazený sivou farbou.",
+  "log-in-to-suggest-a": "Ak chcete navrhnúť taktiku, prihláste sa",
+  "on-map": "na {map}",
+  "players-per-team": "Hráči na tím",
+  "sending": "Pošiljanje …",
+  "suggest": "Predlagaj",
+  "suggest-a-tactic": "Navrhnúť taktiku",
+  "suggest-another": "Navrhnúť iný",
+  "suggestion-sent": "Predlog poslan",
+  "tier": "Stopnja",
+  "what-to-submit": "Súťažný zápas s videom spusteným presne v sekunde, keď sa začne. Počiatočná mapa je {map} a potom sa mení spolu s videom, pretože počas klanového večera sa mapy striedajú. Strana, za ktorú sa hralo, je údaj, podľa ktorého veliteľ záznam vyhľadáva, preto sa na ňu pýtame namiesto toho, aby sme ju hádali.",
+  "what-was-played": "Čo bolo hrané"
+}

@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Mejores jugadores · Últimas 24 horas"
+    },
+    "week": {
+      "title": "Mejores jugadores · Últimos 7 días"
+    }
+  },
+  "rating-scale": {
+    "title": "Escala de calificación"
+  },
+  "community": {
+    "title": "Únete a la comunidad",
+    "heading": "Conecta con jugadores de WoT",
+    "description": "Únete a nuestro Discord para hablar sobre estadísticas de WoT, solicitar funciones e informar de errores. O pásate por GitHub para revisar el código y contribuir.",
+    "discord": "Unirse a Discord",
+    "github": "Ver en GitHub"
+  },
+  "features": {
+    "title": "Lo que encontrarás aquí",
+    "profiles": {
+      "title": "Perfiles de jugadores",
+      "description": "Estadísticas detalladas con datos generales + variaciones de 24 h / 7 d / 30 d, WN7, WN8, WNX y Clasificación personal."
+    },
+    "clans": {
+      "title": "Páginas de clanes",
+      "description": "Tabla de Miembros con clasificaciones, registro de actividad reciente, descripción y metadatos del clan."
+    },
+    "history": {
+      "title": "Historial de clanes",
+      "description": "Cronología completa de todos los clanes a los que ha pertenecido un jugador, con sus roles y fechas."
+    },
+    "live": {
+      "title": "Actualizaciones en directo",
+      "description": "Los jugadores en seguimiento se actualizan en segundo plano cada 24 h mediante nuestro sistema de instantáneas."
+    },
+    "leaderboards": {
+      "title": "Clasificaciones",
+      "description": "Mejores jugadores (24 h, 7 d y de todos los tiempos) y mejores clanes ordenados por WNX según nuestras instantáneas."
+    },
+    "open-source": {
+      "title": "Código abierto · AGPL",
+      "description": "El código está en GitHub. Revísalo, crea un fork y contribuye. Sin anuncios, solo analítica con consentimiento."
+    }
+  },
+  "quick-start": {
+    "title": "Inicio rápido",
+    "search": {
+      "title": "🔍 Buscar jugadores o Clanes",
+      "description": "Pulsa {shortcut} para abrir la búsqueda y después escribe un apodo o la etiqueta de un clan."
+    },
+    "region": {
+      "title": "🌍 Cambiar de región",
+      "description": "Usa el selector {selector} de la barra de navegación. Las Clasificaciones se actualizan en consecuencia."
+    },
+    "leaderboards": {
+      "title": "🏆 Explorar Clasificaciones",
+      "description": "Mejores jugadores (24 h, 7 d y de todos los tiempos) y mejores clanes ordenados por WNX medio según nuestras instantáneas."
+    },
+    "colors": {
+      "title": "📊 Interpretar los colores",
+      "description": "WR, WN7, WN8 y WNX comparten los mismos colores de nivel (naranja → verde → cian → morado). Consulta la escala de arriba."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

@@ -1,0 +1,12 @@
+{
+  "final": "Фінал",
+  "grand-final": "Гранд-фінал",
+  "loser-bracket-final": "Фінал нижньої сітки",
+  "loser-round": "Раунд нижньої сітки {round}",
+  "quarter-finals": "Чвертьфінали",
+  "round-of": "Раунд із {teams} команд",
+  "semi-finals": "Півфінали",
+  "third-place": "Третє місце",
+  "winner-bracket-final": "Фінал сітки «Переможець»",
+  "winner-round": "Раунд сітки «Переможець» {round}"
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Panel,
   PanelContent,
@@ -25,6 +27,7 @@ import {
 } from "@/components/players/detail/tabs";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 // Mode → panel-title label, mirroring STRONGHOLD_MODES in tabs-view.
 const STRONGHOLD_LABEL: Partial<Record<PlayerMode, string>> = {
@@ -43,9 +46,13 @@ const STRONGHOLD_LABEL: Partial<Record<PlayerMode, string>> = {
 function StaticNav({
   items,
   activeId,
+  label,
 }: {
-  items: { id: string; label: string }[];
+  items: readonly { id: string }[];
   activeId: string;
+  /** How a tab names itself. The sections read from the locale files, the
+   * battle modes carry Wargaming's own names. */
+  label: (id: string) => string;
 }) {
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
@@ -59,7 +66,7 @@ function StaticNav({
               : "text-fd-muted-foreground",
           )}
         >
-          {item.label}
+          {label(item.id)}
         </span>
       ))}
     </nav>
@@ -75,12 +82,13 @@ function OverviewSkeleton({
   nickname: string;
   metricLabel: string;
 }) {
+  const { t } = useTranslation("components/players/detail/skeleton");
   return (
     <>
       <PanelSeparator />
       <Panel>
         <PanelHeader>
-          <PanelTitle>{nickname}&apos;s random battles stats</PanelTitle>
+          <PanelTitle>{t("random-battles-stats", { nickname })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <PlayerStatsTable loading />
@@ -91,19 +99,13 @@ function OverviewSkeleton({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {nickname}&apos;s {metricLabel} progression
-          </PanelTitle>
+            {t("progression", { nickname, metricLabel })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           {/* The description is static text, so render it for real (matches the
               loaded page's height); the chart area mirrors the h-56 placeholder. */}
           <div className={`p-4 ${styles.mutedDescription}`}>
-            Solid line is overall {metricLabel} (matches the Total column above),
-            drifting slowly as new battles accumulate. Dashed line is per-session{" "}
-            {metricLabel}, computed from the battles played since the previous
-            snapshot. It shows hot and cold streaks. Line color follows the
-            rating tier.
-          </div>
+            {t("solid-line-is-overall-matches", { metricLabel, metricLabel2: metricLabel })}</div>
           <div className="px-4 pb-4">
             <Skeleton className="h-56 w-full rounded-md" />
           </div>
@@ -113,7 +115,7 @@ function OverviewSkeleton({
       <PanelSeparator />
       <Panel>
         <PanelHeader>
-          <PanelTitle>Tanks shaping {nickname}&apos;s rating</PanelTitle>
+          <PanelTitle>{t("tanks-shaping-s-rating", { nickname })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <TanksLiftDrag loading metricLabel={metricLabel} />
@@ -144,6 +146,9 @@ export function PlayerProfileSkeleton({
   section: PlayerSection;
   mode: PlayerMode;
 }) {
+  const { t } = useTranslation("components/players/detail/tabs");
+  const { t: tOwn } = useTranslation("components/players/detail/skeleton");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const onValue = section === PlayerSection.Value;
   const onTanks = section === PlayerSection.Tanks;
   // The mode row only shows under Overview, matching PlayerTabsView.
@@ -161,7 +166,11 @@ export function PlayerProfileSkeleton({
       <PanelSeparator />
       <Panel>
         <PanelHeader className="px-0! py-0!" screenLines={false}>
-          <StaticNav items={PLAYER_SECTIONS} activeId={section} />
+          <StaticNav
+            items={PLAYER_SECTIONS.map((id) => ({ id }))}
+            activeId={section}
+            label={(id) => t(`sections.${id}`)}
+          />
         </PanelHeader>
       </Panel>
 
@@ -170,7 +179,11 @@ export function PlayerProfileSkeleton({
           <PanelSeparator />
           <Panel>
             <PanelHeader className="px-0! py-0!" screenLines={false}>
-              <StaticNav items={PLAYER_MODES} activeId={mode} />
+              <StaticNav
+              items={PLAYER_MODES}
+              activeId={mode}
+              label={(id) => tGame(`player-modes.${id}`)}
+            />
             </PanelHeader>
           </Panel>
         </>
@@ -183,7 +196,7 @@ export function PlayerProfileSkeleton({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>{nickname}&apos;s tanks</PanelTitle>
+              <PanelTitle>{tOwn("tanks", { nickname })}</PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <TableSkeleton columns={TANKS_SKELETON_COLUMNS} rows={12} />
@@ -196,8 +209,7 @@ export function PlayerProfileSkeleton({
           <Panel>
             <PanelHeader>
               <PanelTitle>
-                {nickname}&apos;s {strongholdLabel} stats
-              </PanelTitle>
+                {tOwn("stats", { nickname, strongholdLabel })}</PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <StrongholdStatsTable

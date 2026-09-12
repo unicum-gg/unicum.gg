@@ -1,0 +1,15 @@
+{
+  "become-a-supporter": "Bli Supporter",
+  "community-funded-ad-free": "Finansierad av communityn · Annonsfri",
+  "coverage-page": "täcksida",
+  "every-euro-keeps-running-supporters": "Varje euro håller {NAME} igång. De som är Supporter får ett märke på sin spelarsida och en plats på prispallen nedan, men inget innehåll låses bakom stödet och det kommer aldrig att finnas annonser. Det är en månadsprenumeration som du har full kontroll över.",
+  "how-is-funded": "Så finansieras {NAME}",
+  "is-free-open-source-and": "{NAME} är Gratis, har öppen källkod och är annonsfri, men drivs med förlust. Inga annonser, någonsin. Om tjänsten är användbar för dig kan du bidra med valfritt belopp från €3 per månad och hålla statistikverktyget för World of Tanks igång och under fortsatt utveckling.",
+  "it-runs-on-a-single": "Tjänsten körs på en enda hyrd server och varje euro går tillbaka till projektet: servern, databasen, de utgående IP-adresser som vitlistats av Wargaming och gör att vi kan uppdatera fler spelare samt enstaka satsningar för att nå ut till fler. De som är Supporter täcker månadskostnaden. Allt därutöver går till högre kapacitet och nya funktioner.",
+  "no-ads-no-investors-no": "Inga annonser, inga investerare, ingen försäljning av data. {NAME} finansieras helt av dem som använder tjänsten.",
+  "no-supporters-yet-be-the": "Ingen är Supporter ännu. Bli först på prispallen.",
+  "same-numbers-as": "Exakt samma siffror som i {link}.",
+  "title": "Understödsvagn {name}",
+  "top-supporters": "Topp Supporter",
+  "where-your-money-goes": "Dit går dina pengar"
+}

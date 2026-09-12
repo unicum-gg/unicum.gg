@@ -8,8 +8,10 @@ import {
   type CookiePreferences,
   useCookieConsent,
 } from "@/contexts/cookie-consent";
+import { useTranslation } from "@/hooks/use-translation";
 
 export function CookieConsent() {
+  const { t } = useTranslation("components/cookie-consent");
   const [isVisible, setIsVisible] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const { consent, preferences, acceptAll, declineAll, saveCustom, loaded } =
@@ -68,10 +70,9 @@ export function CookieConsent() {
           </div>
           <div className="flex-1 space-y-3">
             <div className="space-y-1">
-              <p className="text-sm font-medium">We use cookies</p>
+              <p className="text-sm font-medium">{t("title")}</p>
               <p className="text-xs text-muted-foreground">
-                We use cookies to improve your browsing experience and analyze
-                site traffic.
+                {t("description")}
               </p>
             </div>
 
@@ -79,10 +80,11 @@ export function CookieConsent() {
               <div className="space-y-3 border-t pt-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-medium">Functional</p>
+                    <p className="text-xs font-medium">
+                      {t("functional.title")}
+                    </p>
                     <p className="text-xs text-muted-foreground">
-                      Required for the site to work properly (preferences,
-                      region selection).
+                      {t("functional.description")}
                     </p>
                   </div>
                   <Switch checked disabled />
@@ -90,11 +92,11 @@ export function CookieConsent() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-medium">Audience measurement</p>
+                    <p className="text-xs font-medium">
+                      {t("analytics.title")}
+                    </p>
                     <p className="text-xs text-muted-foreground">
-                      Google Analytics, which sets cookies to help us understand
-                      how the site is used. Anonymous, cookieless analytics
-                      (Umami) stay on either way.
+                      {t("analytics.description")}
                     </p>
                   </div>
                   <Switch
@@ -113,7 +115,7 @@ export function CookieConsent() {
                   onClick={handleSaveCustom}
                   className="w-full"
                 >
-                  Save my choices
+                  {t("save")}
                 </Button>
               </div>
             )}
@@ -126,7 +128,7 @@ export function CookieConsent() {
                   onClick={handleDeclineAll}
                   className="w-full sm:w-auto sm:flex-1"
                 >
-                  Decline all
+                  {t("decline")}
                 </Button>
                 <Button
                   size="sm"
@@ -134,14 +136,14 @@ export function CookieConsent() {
                   onClick={() => setShowCustomize(true)}
                   className="w-full sm:w-auto sm:flex-1"
                 >
-                  Customize
+                  {t("customize")}
                 </Button>
                 <Button
                   size="sm"
                   onClick={handleAcceptAll}
                   className="w-full sm:w-auto sm:flex-1"
                 >
-                  Accept all
+                  {t("accept")}
                 </Button>
               </div>
             )}

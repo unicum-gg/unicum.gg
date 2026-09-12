@@ -1,0 +1,5 @@
+{
+  "title": "账户已锁定",
+  "body": "{nickname}存在于{region}，但 Wargaming 已锁定此账号，因此其数据不可用。",
+  "back-to-home": "返回首页"
+}

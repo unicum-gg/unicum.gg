@@ -1,0 +1,12 @@
+{
+  "slot": "槽位 {n}",
+  "slot-filled": "槽位{n}：{name}",
+  "consumable-slot": "消耗品槽位{n}",
+  "consumable-slot-filled": "消耗品槽位{n}：{name}",
+  "level": "等级 {n}",
+  "stock": "库存",
+  "specialize": "点击专精此槽位。",
+  "clear-specialization": "点击清除此槽位的专精。",
+  "crew-skills": "乘员技能",
+  "shell-aria": "{name}：{damage}伤害，{penetration}毫米穿透力"
+}

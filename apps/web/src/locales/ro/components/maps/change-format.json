@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Lățimea zonei de joc",
+    "height": "Înălțimea zonei de joc",
+    "round-length": "Cronometrul bătăliei",
+    "team-size": "Dimensiune echipă",
+    "camouflage": "Sezon",
+    "presence": "În joc",
+    "variant-version": "Versiunea {type}",
+    "play-area": "Zonă de joc",
+    "bases-team1": "Baze aliate",
+    "bases-team2": "Baze ale inamicilor",
+    "spawns-team1": "Puncte de apariție aliate",
+    "spawns-team2": "Puncte de apariție ale inamicilor",
+    "control-point": "Punct de control",
+    "artillery-headquarters": "Cartierul general al artileriei",
+    "comms-centers": "Centre de comunicații",
+    "observation-posts": "Posturi de observație",
+    "points-of-interest": "Puncte de interes"
+  },
+  "summary": {
+    "added": "S-a adăugat {name}",
+    "removed": "S-a eliminat {name}",
+    "added-to-game": "Adăugat în joc",
+    "removed-from-game": "Eliminat din joc",
+    "added-on-test": "Adăugat pe clientul de test",
+    "removed-on-test": "Eliminat de pe clientul de test",
+    "mode-added": "A fost adăugat modul {name}",
+    "mode-removed": "A fost eliminat modul {name}",
+    "now-played-in": "Se joacă acum în {name}",
+    "no-longer-played-in": "Nu se mai joacă în {name}",
+    "event-added": "În timpul bătăliei poate avea loc acum evenimentul {name}",
+    "event-removed": "Evenimentul {name} nu mai are loc",
+    "moved": "S-a efectuat o mutare pentru {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Klicke auf einen erreichbaren Knoten, um ihn freizuschalten. Jeder Knoten wirkt sich auf die oben angezeigten Werte aus. Die Knoten sind farblich nach Feuerkraft, Mobilität, Überlebensfähigkeit und Fahrzeugmechanik gruppiert.",
+  "loadout-switch-no-effect": "Wechsel der Gefechtsausstattung. Kein Effekt auf Eigenschaften.",
+  "title": "Verbesserungen des {tank}",
+  "vehicle-mechanic-no-effect": "Fahrzeugmechanik. Kein Effekt auf Eigenschaften."
+}

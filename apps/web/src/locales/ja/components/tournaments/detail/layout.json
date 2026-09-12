@@ -1,0 +1,12 @@
+{
+  "final": "決勝",
+  "grand-final": "グランド・ファイナル",
+  "loser-bracket-final": "敗者ブラケット決勝",
+  "loser-round": "敗者ラウンド {round}",
+  "quarter-finals": "準々決勝",
+  "round-of": "{teams}チーム戦",
+  "semi-finals": "準決勝",
+  "third-place": "3位決定戦",
+  "winner-bracket-final": "勝者ブラケット決勝",
+  "winner-round": "勝者ラウンド {round}"
+}

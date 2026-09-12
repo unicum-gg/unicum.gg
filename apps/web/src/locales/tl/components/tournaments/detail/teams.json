@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Pangkaraniwan sa {rated} sa {size} mga manlalaro",
+  "average-over-recent": "Pangkaraniwan sa {rated} sa {size} mga manlalarong naglaro sa nakalipas na 30 mga araw",
+  "metric-over-last-30-days": "{metric} sa nakalipas na 30 mga araw",
+  "n-confirmed": "{count} nakumpirma",
+  "no-team-matches-the-current": "Walang koponang tumutugma sa kasalukuyang mga filter.",
+  "no-teams-recorded-yet-registrations": "Wala pang naitalang mga koponan. Lumilitaw dito ang mga pagpaparehistro kapag ganap nang nabasa ang torneyong ito, na nangyayari ilang minuto matapos itong magbukas.",
+  "none-played-in-30-days": "Walang sinuman sa talaang ito ang naglaro sa nakalipas na 30 mga araw",
+  "players": "Mga manlalaro",
+  "qualified": "Kwalipikado",
+  "reward": "Gantimpala",
+  "team": "Koponan",
+  "teams": "Mga koponan ({length})",
+  "wr": "WR"
+}

@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Στρατολόγος",
+  "personnel_officer": "Προσωπάρχης",
+  "quartermaster": "Θησαυροφύλακας",
+  "executive_officer": "Υπαρχηγός",
+  "recruit": "Νεοσύλλεκτος",
+  "private": "Στρατιώτης",
+  "commander": "Αρχηγός",
+  "reservist": "Έφεδρος",
+  "combat_officer": "Διοικητής Μάχης",
+  "junior_officer": "Υπαξιωματικός",
+  "intelligence_officer": "Αξιωματικός Πληροφοριών"
+}

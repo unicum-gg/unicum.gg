@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Resumen",
+    "tanks": "Tanques",
+    "sessions": "Sesiones",
+    "achievements": "Logros",
+    "tournaments": "Torneos",
+    "value": "Valor"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Još nema podataka. Provjeri ponovo nakon osvježavanja klanova.",
+  "heading": "Najbolji <accent>{tier}</accent> klanovi",
+  "blurb": "Ljestvica za regiju {region}, rangirano prema {sort} među svim praćenim klanovima u formatu {format} (minimum {battles} bitaka).",
+  "blurb-period": "Ljestvica za regiju {region}, rangirano prema {sort} među svim praćenim klanovima u formatu {format} tokom perioda {period} (minimum {battles} bitaka).",
+  "format-advances": "Napredovanja (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Najboljih {count} klanova nivoa {tier} ·"
+}

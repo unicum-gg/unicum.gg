@@ -1,0 +1,21 @@
+{
+  "trigger": "Feedback",
+  "title": "Dela din feedback",
+  "topic-placeholder": "Välj ett ämne...",
+  "message-placeholder": "Din feedback...",
+  "send": "Skicka",
+  "sent": "Tack för din feedback!",
+  "failed": "Det gick inte att skicka feedback. Försök igen.",
+  "topics": {
+    "bug": "Felrapport",
+    "idea": "Förslag på ny funktion",
+    "data": "Precision av data",
+    "other": "Övrigt"
+  },
+  "sentiments": {
+    "awful": "Uselt",
+    "bad": "Dålig",
+    "good": "Bra",
+    "great": "Mycket bra"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "columns-label": "Kolumner",
+  "groups": {
+    "firepower": "Eldkraft",
+    "gun-handling": "Vapenkontroll",
+    "mobility": "Rörlighet",
+    "survivability": "Överlevnad",
+    "other": "Övrigt"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Skada per minut"
+    },
+    "damage": {
+      "label": "Skada",
+      "tip": "Alpha skada"
+    },
+    "moduleDamage": {
+      "label": "Modulskada"
+    },
+    "splashRadius": {
+      "label": "Stänkradie"
+    },
+    "reload": {
+      "label": "Omladdning",
+      "tip": "Omladdning (hela magasinet för automatladdare)"
+    },
+    "rof": {
+      "label": "Eldhastighet",
+      "tip": "Skott per minut"
+    },
+    "intraClipReload": {
+      "label": "Omladdning inom magasinet",
+      "tip": "Tid mellan skott i ett magasin (automatladdare)"
+    },
+    "penetration": {
+      "label": "Pansargenomslag",
+      "tip": "Pansargenomslag (mm), standardgranat"
+    },
+    "caliber": {
+      "label": "Kaliber",
+      "tip": "Granatens Kaliber (mm)"
+    },
+    "shellVelocity": {
+      "label": "Utgångshastighet",
+      "tip": "Granathastighet (m/s)"
+    },
+    "accuracy": {
+      "label": "Precision",
+      "tip": "Spridning på 100 m (lägre är bättre)"
+    },
+    "aimTime": {
+      "label": "Aim tid"
+    },
+    "dispMoving": {
+      "label": "Spridning vid körning",
+      "tip": "Spridningsfaktor under körning"
+    },
+    "dispTankTraverse": {
+      "label": "Spridning vid sväng med Tank"
+    },
+    "dispTurretTraverse": {
+      "label": "Spridning vid Torn sväng"
+    },
+    "dispAfterShot": {
+      "label": "Spridning efter avfyrning"
+    },
+    "dispWhileDamaged": {
+      "label": "Spridning med skadad Kanon"
+    },
+    "gunArc": {
+      "label": "Kanonens sidriktfält",
+      "tip": "Horisontellt svängområde för Kanon"
+    },
+    "depression": {
+      "label": "Kanondumpningsförmåga / höjning",
+      "tip": "Kanonelevation / höjning"
+    },
+    "speed": {
+      "label": "Hastighet (framåt / bakåt)",
+      "tip": "Topphastighet framåt / bakåt (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Chassi sväng"
+    },
+    "turretTraverse": {
+      "label": "Torn sväng"
+    },
+    "enginePower": {
+      "label": "Kraft",
+      "tip": "Motoreffekt (hk)"
+    },
+    "powerWeight": {
+      "label": "Kraft/Vikt",
+      "tip": "hk per ton"
+    },
+    "terrainHard": {
+      "label": "Hårt underlag",
+      "tip": "Terrängmotstånd på hårt underlag (lägre är bättre)"
+    },
+    "terrainMedium": {
+      "label": "Mellanklass Terräng"
+    },
+    "terrainSoft": {
+      "label": "Mjukt underlag"
+    },
+    "health": {
+      "label": "Hållbarhet",
+      "tip": "Livpoäng"
+    },
+    "engineHealth": {
+      "label": "Motorns hållbarhet"
+    },
+    "engineFireChance": {
+      "label": "Risk för motorbrand"
+    },
+    "hullArmorFront": {
+      "label": "Skrovpansar (fram)",
+      "tip": "Skrovarmor framtill (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Tornpansar (fram)",
+      "tip": "Torn-armor framtill (mm)"
+    },
+    "trackArmor": {
+      "label": "Bandpansar"
+    },
+    "trackHealth": {
+      "label": "Bandens hållbarhet"
+    },
+    "trackRepairTime": {
+      "label": "Kedje-reparationstid"
+    },
+    "ammoRackHealth": {
+      "label": "Ammunitionsställets hållbarhet"
+    },
+    "weight": {
+      "label": "Vikt"
+    },
+    "viewRange": {
+      "label": "Siktsträcka",
+      "tip": "Siktefält (m)"
+    },
+    "radioRange": {
+      "label": "Radioräckvidd",
+      "tip": "Signalfält (m)"
+    },
+    "camoStill": {
+      "label": "Kamouflage vid stillastående"
+    },
+    "camoMoving": {
+      "label": "Kamouflage under körning"
+    },
+    "camoStillFiring": {
+      "label": "Kamouflage vid stillastående efter avfyrning"
+    },
+    "camoMovingFiring": {
+      "label": "Kamouflage under rörelse efter avfyrning"
+    }
+  }
+}

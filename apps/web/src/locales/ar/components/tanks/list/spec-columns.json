@@ -1,0 +1,162 @@
+{
+  "columns-label": "أعمدة",
+  "groups": {
+    "firepower": "قوة النيران",
+    "gun-handling": "التعامل مع المدفع",
+    "mobility": "تنقل",
+    "survivability": "القدرة على البقاء",
+    "other": "آخر"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "الضرر في الدقيقة"
+    },
+    "damage": {
+      "label": "ضرر",
+      "tip": "ضرر ألفا"
+    },
+    "moduleDamage": {
+      "label": "ضرر المكونات"
+    },
+    "splashRadius": {
+      "label": "نطاق الانفجار"
+    },
+    "reload": {
+      "label": "إعادة تحميل",
+      "tip": "إعادة التلقيم (المخزن الكامل للمُلقمات الآلية)"
+    },
+    "rof": {
+      "label": "معدل إطلاق النار",
+      "tip": "الطلقات في الدقيقة"
+    },
+    "intraClipReload": {
+      "label": "إعادة تحميل بين الطلقات",
+      "tip": "الوقت بين الطلقات في المخزن (المُلقمات الآلية)"
+    },
+    "penetration": {
+      "label": "اختراق",
+      "tip": "الاختراق (ملم)، القذيفة الافتراضية"
+    },
+    "caliber": {
+      "label": "عيار",
+      "tip": "عيار القذيفة (ملم)"
+    },
+    "shellVelocity": {
+      "label": "سرعة القذيفة",
+      "tip": "سرعة القذيفة (م/ث)"
+    },
+    "accuracy": {
+      "label": "الدقة",
+      "tip": "التشتيت على مسافة 100 م (الأقل أفضل)"
+    },
+    "aimTime": {
+      "label": "وقت التهديف"
+    },
+    "dispMoving": {
+      "label": "تشتيت أثناء الحركة",
+      "tip": "عامل التشتيت أثناء الحركة"
+    },
+    "dispTankTraverse": {
+      "label": "تشتيت دوران الدبابة"
+    },
+    "dispTurretTraverse": {
+      "label": "تشتيت دوران البرج"
+    },
+    "dispAfterShot": {
+      "label": "التشتيت بعد إطلاق النار"
+    },
+    "dispWhileDamaged": {
+      "label": "التشتيت أثناء التعرض للضرر"
+    },
+    "gunArc": {
+      "label": "زاوية حركة المدفع",
+      "tip": "قوس الدوران الأفقي للمدفع"
+    },
+    "depression": {
+      "label": "انخفاض المدفع / ارتفاعه",
+      "tip": "انخفاض المدفع / ارتفاعه"
+    },
+    "speed": {
+      "label": "السرعة (أمام / خلف)",
+      "tip": "السرعة القصوى إلى الأمام / الخلف (كم/س)"
+    },
+    "hullTraverse": {
+      "label": "دوران الهيكل"
+    },
+    "turretTraverse": {
+      "label": "دوران البرج"
+    },
+    "enginePower": {
+      "label": "قوة",
+      "tip": "قوة المحرك (حصان)"
+    },
+    "powerWeight": {
+      "label": "القوة/الوزن",
+      "tip": "حصان لكل طن"
+    },
+    "terrainHard": {
+      "label": "التضاريس الصلبة",
+      "tip": "مقاومة التضاريس على الأرض الصلبة (الأقل أفضل)"
+    },
+    "terrainMedium": {
+      "label": "التضاريس المتوسطة"
+    },
+    "terrainSoft": {
+      "label": "التضاريس الرخوة"
+    },
+    "health": {
+      "label": "نقاط الصحة",
+      "tip": "نقاط الإصابة"
+    },
+    "engineHealth": {
+      "label": "متانة المحرك"
+    },
+    "engineFireChance": {
+      "label": "احتمال نشوب حريق في المحرك"
+    },
+    "hullArmorFront": {
+      "label": "تدريع الهيكل (الأمامي)",
+      "tip": "تدريع الهيكل الأمامي (ملم)"
+    },
+    "turretArmorFront": {
+      "label": "تدريع البرج (الأمامي)",
+      "tip": "تدريع البرج الأمامي (ملم)"
+    },
+    "trackArmor": {
+      "label": "درع الجنزير"
+    },
+    "trackHealth": {
+      "label": "متانة الجنزير"
+    },
+    "trackRepairTime": {
+      "label": "وقت إصلاح الجنزير"
+    },
+    "ammoRackHealth": {
+      "label": "متانة حامل الذخيرة"
+    },
+    "weight": {
+      "label": "وزن"
+    },
+    "viewRange": {
+      "label": "نطاق الرؤية",
+      "tip": "نطاق الرؤية (م)"
+    },
+    "radioRange": {
+      "label": "مدى اللاسلكي",
+      "tip": "نطاق الإشارة (م)"
+    },
+    "camoStill": {
+      "label": "التمويه أثناء الثبات"
+    },
+    "camoMoving": {
+      "label": "التمويه أثناء الحركة"
+    },
+    "camoStillFiring": {
+      "label": "التمويه الثابت بعد إطلاق النار"
+    },
+    "camoMovingFiring": {
+      "label": "التمويه أثناء الحركة بعد إطلاق النار"
+    }
+  }
+}

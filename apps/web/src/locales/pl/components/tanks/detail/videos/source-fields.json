@@ -1,0 +1,9 @@
+{
+  "battle-starts-at": "Bitwa zaczyna się o",
+  "https-www-youtube-com-watch": "https://www.youtube.com/watch?v=…&t=1h05m30s",
+  "optional": "(opcjonalnie)",
+  "that-is-not-a-youtube": "To nie jest link do filmu na YouTube.",
+  "use-a-time-like-1": "Użyj czasu w formacie 1:05:30 lub pozostaw pole puste.",
+  "your-link-has-no-timestamp": "Twój link nie zawiera znacznika czasu. Ustaw podgląd powyżej na moment rozpoczęcia bitwy lub nic nie zmieniaj, jeśli film zaczyna się od bitwy.",
+  "youtube-link": "Link YouTube"
+}

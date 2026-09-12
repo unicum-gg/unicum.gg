@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Eksen eksen",
+  "by-server": "Sunucuya göre",
+  "community-verdict": "Topluluk kararı",
+  "every-server-one-average": "Her sunucu, tek ortalama",
+  "n-shown": ", {count} gösteriliyor",
+  "opinion": "{count, plural, one {# görüş} other {# görüşler}}",
+  "opinion-next-to-win-rate": "Seviye {tier} içinde kazanma oranının yanında görüş",
+  "rate-the": "{tankName} için puan ver",
+  "reputation-against-results": "İtibar ve sonuçlar",
+  "same-tank-different-metas": "Aynı tank, farklı metalar",
+  "the-same-tank-by-how": "Aynı tank, oy veren oyuncunun ne kadar iyi oynadığına göre",
+  "what-players-wrote": "Oyuncular ne yazdı",
+  "who-is-saying-it": "Bunu kim söylüyor"
+}

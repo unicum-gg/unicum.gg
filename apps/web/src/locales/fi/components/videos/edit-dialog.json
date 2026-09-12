@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Muuta kaikki virheellinen, myös ajoneuvo. Tallentaminen lähettää sen takaisin moderointijonoon, joten julkaistu video poistetaan näkyvistä, kunnes se hyväksytään uudelleen.",
+  "correct-a-suggestion": "Korjaa ehdotus",
+  "could-not-load-that-suggestion": "Ehdotusta ei voitu ladata. Yritä hetken kuluttua uudelleen.",
+  "link-expired": "Linkki on vanhentunut. Hae uusi painamalla Discordissa kortin Muokkaa-painiketta.",
+  "loading": "Ladataan…",
+  "log-in": "Kirjaudu sisään",
+  "log-in-with-the-account": "Kirjaudu tilille, jolla ehdotit tätä videota, jotta voit korjata sen.",
+  "no-suggestion-with-that-id": "Tällä tunnisteella ei ole ehdotusta.",
+  "not-yours-to-correct": "Tämä ehdotus ei ole sinun korjattavaksesi."
+}

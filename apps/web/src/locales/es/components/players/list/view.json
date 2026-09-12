@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Mejores <accent>jugadores</accent>",
+    "language": "Mejores jugadores en <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Clasificación de jugadores de la región {region}, ordenada por {metric} de todos los tiempos (mínimo: 20.000 batallas).",
+    "language": "Jugadores de la región {region} cuyo conjunto de idiomas, inferido a partir del historial de clanes, incluye {language}, clasificados por {metric} (mínimo: 10.000 batallas).",
+    "strict": "Jugadores de la región {region} cuyo idioma, inferido a partir del historial de clanes, es exclusivamente {language}, clasificados por {metric} (mínimo: 10.000 batallas)."
+  },
+  "board": {
+    "all": "Los {count} mejores jugadores según {metric}",
+    "language": "Los {count} mejores jugadores en {language} según {metric}",
+    "strict": "Los {count} mejores jugadores exclusivamente en {language} según {metric}"
+  },
+  "modes": {
+    "overall": "General"
+  },
+  "columns": {
+    "player": "Jugador"
+  },
+  "strict-toggle": "Estricto",
+  "any-toggle": "Cualquiera",
+  "all-languages": "Todos los idiomas",
+  "battles": "Batallas",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

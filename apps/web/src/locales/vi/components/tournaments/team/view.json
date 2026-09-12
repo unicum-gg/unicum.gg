@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Chưa bốc thăm. Các cặp đấu của đội này sẽ xuất hiện ở đây khi giải đấu bắt đầu.",
+  "each-map-is-played-twice": "Mỗi bản đồ được chơi hai lần, mỗi lần từ một bên. Bản đồ cuối cùng là trận quyết định và chỉ được chơi một lần.",
+  "first-battle-at": "Trận đấu đầu tiên, {when}",
+  "lost": "Thua",
+  "matches": "Trận đấu ({length})",
+  "never-played": "Đội này chưa từng chơi một trận đấu nào. Đội đã đăng ký nhưng lượt bốc thăm không đến đội, như trường hợp danh sách chưa được xác nhận.",
+  "no-maps-recorded": "Không có bản đồ nào được ghi nhận cho trận đấu này.",
+  "no-roster-recorded-for-this": "Chưa có danh sách nào được ghi nhận cho đội này.",
+  "of-players-on-the-day": "{members} trong số {length} người chơi vào ngày thi đấu",
+  "played-on-uncatalogued": "Đã chơi trên {maps}, bản đồ không có trong danh mục bản đồ.",
+  "roster": "Danh sách ({length})",
+  "stage-group": "{stage} · Nhóm {order}",
+  "team-1": "Đội 1",
+  "team-2": "Đội 2",
+  "tournaments": "Tour đấu",
+  "when-the-first-battle-started": "Thời điểm trận đấu đầu tiên bắt đầu",
+  "won": "Chiến thắng"
+}

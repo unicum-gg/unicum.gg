@@ -1,0 +1,8 @@
+{
+  "damage": "Damage",
+  "penetration": "Penetration",
+  "velocity": "Velocity",
+  "splash": "Splash",
+  "cost": "Cost",
+  "at-500m": "… at 500m"
+}

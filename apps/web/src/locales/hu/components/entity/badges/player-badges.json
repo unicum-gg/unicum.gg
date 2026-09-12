@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. hely",
+    "2": "2. hely",
+    "3": "3. hely"
+  },
+  "streamer": "Streamer · {name}: Nézd a Twitchen!",
+  "tournament": {
+    "one": "Torna · győztes keret: {title}",
+    "many": "Torna · {count} győztes keret, közülük a legjobb: {title}",
+    "featured": "{text} · Kiemelt esemény",
+    "unnamed": "A Wargaming Torna"
+  },
+  "tournament-wins": "{count, plural, one {# versenygyőzelem} other {# versenygyőzelem}}",
+  "watch-on-twitch": "{name}: Nézd a Twitchen!",
+  "watch-on-twitch-viewers": "{name}: Nézd a Twitchen! · {viewers} néző"
+}

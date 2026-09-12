@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Pasirinkite atsargas, kad peržiūrėtumėte tvarkaraštį.",
+  "schedule": "Aktyviomis dienomis jos aktyvuojamos {times} (kiekvienos trukmė: {hours} val.), apimdamos {window}, kai pasiekiamas minimalus prisijungusiųjų skaičius."
+}

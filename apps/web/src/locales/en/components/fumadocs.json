@@ -1,0 +1,18 @@
+{
+  "search": "Search",
+  "search-open": "Open Search",
+  "search-close": "Close Search",
+  "search-empty": "No results found",
+  "theme-toggle": "Toggle Theme",
+  "theme-light": "Light",
+  "theme-dark": "Dark",
+  "theme-system": "System",
+  "toc": "On this page",
+  "toc-empty": "No Headings",
+  "sidebar-open": "Open Sidebar",
+  "sidebar-close": "Close Sidebar",
+  "sidebar-collapse": "Collapse Sidebar",
+  "page-previous": "Previous Page",
+  "page-next": "Next Page",
+  "language": "Choose a language"
+}

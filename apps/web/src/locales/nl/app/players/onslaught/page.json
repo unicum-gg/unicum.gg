@@ -1,0 +1,6 @@
+{
+  "title": "Top spelers in World of Tanks voor {mode} ({region})",
+  "description": "{name}: {region}-klassement voor {mode}, de competitieve 7-tegen-7-modus met rangschikking van World of Tanks, in de eigen klassementsvolgorde van de game.",
+  "og-title": "Top spelers voor {mode}",
+  "og-subtitle": "Rangklassement voor {region}"
+}

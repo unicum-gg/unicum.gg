@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Какво мислят играчите за този танк",
+  "not-rated": "Все още няма оценка, бъди първият",
+  "votes": "{count} гласа",
+  "votes-one": "{count} гласувай",
+  "stars": "{value} от {max}",
+  "not-rated-short": "Не е оценен"
+}

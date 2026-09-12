@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Larghezza dell’area di gioco",
+    "height": "Altezza dell’area di gioco",
+    "round-length": "Timer della battaglia",
+    "team-size": "Dimensione della squadra",
+    "camouflage": "Stagione",
+    "presence": "In gioco",
+    "variant-version": "Versione {type}",
+    "play-area": "Area di gioco",
+    "bases-team1": "Basi alleate",
+    "bases-team2": "Basi nemiche",
+    "spawns-team1": "Punti di spawn alleati",
+    "spawns-team2": "Punti di spawn nemici",
+    "control-point": "Punto di controllo",
+    "artillery-headquarters": "Quartier generale dell’artiglieria",
+    "comms-centers": "Centri di comunicazione",
+    "observation-posts": "Postazioni di osservazione",
+    "points-of-interest": "Punti di interesse"
+  },
+  "summary": {
+    "added": "Aggiunto {name}",
+    "removed": "Rimosso {name}",
+    "added-to-game": "Aggiunto al gioco",
+    "removed-from-game": "Rimosso dal gioco",
+    "added-on-test": "Aggiunto sul client di test",
+    "removed-on-test": "Rimosso dal client di test",
+    "mode-added": "Aggiunto {name} come modalità",
+    "mode-removed": "Rimosso {name} come modalità",
+    "now-played-in": "Giocato ora in {name}",
+    "no-longer-played-in": "Non più giocato in {name}",
+    "event-added": "{name} può ora verificarsi durante la battaglia",
+    "event-removed": "{name} non si verifica più",
+    "moved": "Movimento di {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

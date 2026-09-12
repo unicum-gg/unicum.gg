@@ -1,0 +1,19 @@
+{
+  "active-days": "活跃天数",
+  "add-workflow": "添加工作流",
+  "connect-discord": "连接 Discord",
+  "discord-notifications": "Discord 通知",
+  "each-workflow-activates-its-reserves": "每个工作流都会在时间窗口内激活储备，条件是有足够成员处于实时游戏对战中。任务在你的账号上运行，无需你在线。需要多少就添加多少。",
+  "enabled": "启用",
+  "from": "来自",
+  "get-a-discord-message-in": "每次增益开火时，在你选择的频道中接收 Discord 消息，让整个军团知道它已生效。",
+  "log-in-with-wargaming-to": "使用默认登录以进行设置",
+  "min-online": "在线最少人数",
+  "officers": "官员",
+  "only-an-officer-of-this": "只有该军团的军官可以进行设置。",
+  "schedule-preview": "日程预览",
+  "set-your-hours-and-reserves": "一次设置时间和储备，增益会自行按时开火，即使没人在线点击按钮。",
+  "stronghold-boosts": "要塞增益",
+  "times-are-in-your-timezone": "时间采用{tz}，即你的时区。",
+  "to": "至"
+}

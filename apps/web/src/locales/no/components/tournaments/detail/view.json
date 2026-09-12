@@ -1,0 +1,11 @@
+{
+  "closes": "Avslutt {when}",
+  "map-pool": "Kartbasseng",
+  "place": "Plass",
+  "prize": "Premie",
+  "prizes": "Premier",
+  "qualified": "Kvalifisert ({count})",
+  "register": "Registrer",
+  "tournaments": "Turneringer",
+  "winner": "{count, plural, one {Vinner} other {Vinnere}}"
+}

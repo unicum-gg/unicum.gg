@@ -1,0 +1,14 @@
+{
+  "ammunition": "Munition",
+  "characteristics": "Technische Daten des {tank}",
+  "consumables": "Verbrauchsmaterial",
+  "crew-level": "Ausbildungsstand der Besatzung",
+  "crew-skills": "Besatzungsfertigkeiten",
+  "equipment": "Zubehör",
+  "field-mods": "Feldmodifikationen",
+  "historical-reference": "Historischer Hintergrund des {tank}",
+  "modules": "Module des {tank}",
+  "research-path": "Forschungszweig des {tank}",
+  "similar": "Ähnliche Panzer wie {tank}",
+  "videos": "Videos des {tank}"
+}

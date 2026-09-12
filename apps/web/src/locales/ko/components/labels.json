@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "첫 스냅샷 대기 중",
+    "hidden": "워게이밍이 숨김",
+    "active_24h": "활동 중 < 24시간",
+    "active_7d": "활동 중 < 7일",
+    "recent_30d": "최근 활동 < 30일",
+    "recent_90d": "최근 활동 < 90일",
+    "dormant_1y": "휴면 < 1년",
+    "inactive": "비활성 > 1년"
+  },
+  "rating-hype": {
+    "overrated": "과대평가됨",
+    "fair": "공정하게 평가됨",
+    "underrated": "저평가됨"
+  },
+  "rating-consensus": {
+    "agreed": "폭넓은 합의",
+    "mixed": "혼합된 의견",
+    "divisive": "이견이 있는"
+  },
+  "rating-axes": {
+    "overall": "전체",
+    "fun": "재미",
+    "firepower": "화력",
+    "armour": "장갑",
+    "mobility": "기동",
+    "gunHandling": "사격 조작",
+    "concealment": "위장",
+    "beginnerFriendliness": "초보자 친화적",
+    "versatility": "다재다능"
+  },
+  "rating-axis-hints": {
+    "overall": "모든 요소를 고려했을 때 이 전차는 얼마나 좋은가요?",
+    "fun": "이 전차를 플레이하는 것이 얼마나 즐거운가요?",
+    "firepower": "알파 피해, 분당 피해 및 관통력입니다.",
+    "armour": "도탄 능력, 헐다운 성능 및 개방된 지형에서의 방어력입니다.",
+    "mobility": "속도, 가속력 및 선회 성능입니다.",
+    "gunHandling": "조준 시간, 분산도 및 이동 중 명중률입니다.",
+    "concealment": "위장 및 시야 범위입니다.",
+    "beginnerFriendliness": "아직 배우는 중일 때 얼마나 실수를 보완해 주는가요?",
+    "versatility": "어떤 지도와 어떤 팀에서도 잘 작동하나요?"
+  },
+  "voter-brackets": {
+    "unknown": "평가되지 않음",
+    "learning": "학습 중",
+    "average": "평균",
+    "strong": "강함",
+    "unicum": "유니쿰"
+  },
+  "glossary-categories": {
+    "vehicles": "전차",
+    "gunnery": "포병",
+    "armor": "장갑",
+    "mobility": "기동",
+    "vision": "시야",
+    "crew": "승무원",
+    "progression": "진행",
+    "economy": "경제",
+    "ratings": "평점",
+    "statistics": "전적",
+    "modes": "전투 모드",
+    "tactics": "전술",
+    "slang": "은어"
+  }
+}

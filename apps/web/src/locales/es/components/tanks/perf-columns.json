@@ -1,0 +1,60 @@
+{
+  "columns-label": "Columnas",
+  "groups": {
+    "general": "General",
+    "combat": "Combate"
+  },
+  "columns": {
+    "battles": {
+      "label": "Batallas",
+      "tip": "Total de Batallas jugadas con el Tanque"
+    },
+    "count": {
+      "label": "Conteo",
+      "tip": "Número de jugadores registrados en la muestra"
+    },
+    "rating": {
+      "label": "Clasificación (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Tasa de victorias con el Tanque"
+    },
+    "playerWr": {
+      "label": "WR de jugador",
+      "tip": "Promedio del porcentaje general de victorias de los jugadores que usan este vehículo"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Daño medio por batalla"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Relación de bajas / muertes"
+    },
+    "assists": {
+      "label": "Asistencias",
+      "tip": "Daño medio por asistencia"
+    },
+    "hitPct": {
+      "label": "Porcentaje de aciertos",
+      "tip": "Impactos / Disparos"
+    },
+    "penPct": {
+      "label": "Porcentaje de penetración",
+      "tip": "Penetración / Impactos"
+    },
+    "spots": {
+      "label": "Avistamientos",
+      "tip": "Promedio de Avistamientos por batalla"
+    },
+    "blocked": {
+      "label": "Bloqueado",
+      "tip": "Daño medio Bloqueado por el Blindaje"
+    },
+    "survival": {
+      "label": "Supervivencia",
+      "tip": "Compartir de Batallas como superviviente"
+    }
+  }
+}

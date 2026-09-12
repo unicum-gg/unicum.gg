@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Oversikt",
+    "tanks": "Kjøretøy",
+    "sessions": "Økter",
+    "achievements": "Utmerkelser",
+    "tournaments": "Turneringer",
+    "value": "Verdi"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

@@ -1,0 +1,8 @@
+{
+  "battles": "{count} kampe",
+  "no-votes": "nej stemmer",
+  "rated-higher": "Stærkere spillere bedømmer den {stars} stjerner højere end resten af serveren. Denne belønner, at man ved, hvad man laver.",
+  "rated-lower": "Stærkere spillere bedømmer den {stars} stjerner lavere end resten af serveren. Den smigrer, indtil den bliver bedt om at gøre noget.",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stemme"
+}

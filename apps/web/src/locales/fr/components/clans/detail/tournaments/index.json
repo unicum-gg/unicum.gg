@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "[{tag}] n’a participé à aucun tournoi dont nous avons importé les données. Une équipe est attribuée à ce clan si au moins un quart de ses joueurs appartenaient à ce clan le jour du match.",
+  "won": "{count} Gagné"
+}

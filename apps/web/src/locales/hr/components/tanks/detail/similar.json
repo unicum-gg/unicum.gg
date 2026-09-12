@@ -1,0 +1,11 @@
+{
+  "compare": "Usporedi s {count} najbližih",
+  "match": "bitka",
+  "subtitle": "Isto mjesto unutar vlastite razine",
+  "verdict": {
+    "overall": "Slični sveukupno",
+    "closest": "Najbliži prema {axes}",
+    "closest-furthest": "Najbliži prema {axes}, najudaljeniji prema {apart}",
+    "and": " i "
+  }
+}

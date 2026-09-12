@@ -1,0 +1,12 @@
+{
+  "slot": "ช่อง {n}",
+  "slot-filled": "ช่อง {n}: {name}",
+  "consumable-slot": "ช่องยุทธปัจจัย {n}",
+  "consumable-slot-filled": "ช่องยุทธปัจจัย {n}: {name}",
+  "level": "ระดับ {n}",
+  "stock": "สต็อก",
+  "specialize": "คลิกเพื่อกำหนดความเชี่ยวชาญให้ช่องนี้",
+  "clear-specialization": "คลิกเพื่อล้างความเชี่ยวชาญของช่องนี้",
+  "crew-skills": "ทักษะลูกเรือ",
+  "shell-aria": "{name}: ความเสียหาย {damage}, การเจาะเกราะ {penetration} มม."
+}

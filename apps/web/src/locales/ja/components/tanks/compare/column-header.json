@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "この列の砲弾、装備、消耗品、ディレクティブ、搭乗員、進行状況。変更するたびに、後ろの比較における特性が移動します",
+  "ammunition-equipment-crew-and-progression": "砲弾、装備、搭乗員、進行状況",
+  "apply-to-every-column": "すべての列に適用",
+  "compare-against": "{tank} と比較",
+  "compare-the-others-against-this-one": "他をこれと比較",
+  "configure-tank": "{tank} を設定",
+  "highest-overall-score": "最高総合スコア",
+  "highest-overall-score-of-this": "この比較での最高総合スコア",
+  "is-the-reference": "基準車両: {tank}",
+  "overall": "総合",
+  "reference-column": "基準列",
+  "remove-tank": "{tank} を削除",
+  "reset-all": "全てリセット",
+  "setup": "セットアップ",
+  "stock": "ストック",
+  "tank-setup": "{tank} のセットアップ",
+  "top": "トップ",
+  "where-this-vehicle-sits-across": "この車両が全カタログ全体の中でどの位置にあるかを、{MAXSCORE}点満点で示します。ここで設定された4カテゴリのスコアの平均です。要約であり判定ではありません。偵察車両と重戦車は、異なる長所によって同じ数値に到達できます。"
+}

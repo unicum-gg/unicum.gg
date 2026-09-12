@@ -1,0 +1,4 @@
+{
+  "compare-the-live-and-common": "Comparar as versões do servidor principal e do Teste Comum",
+  "compare-live-against-common-test": "Comparar a versão do servidor principal com a versão {testVersion} do Teste Comum"
+}

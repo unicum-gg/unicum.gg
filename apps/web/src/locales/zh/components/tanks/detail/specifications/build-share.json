@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "配置链接已复制",
+  "copy-build-link": "复制配置链接",
+  "could-not-copy-link": "无法复制链接",
+  "include-setup": "包含设置",
+  "share-build": "分享构建",
+  "share-tank": "分享{tank}",
+  "share-text": "在{app}上查看此{tank}配置"
+}

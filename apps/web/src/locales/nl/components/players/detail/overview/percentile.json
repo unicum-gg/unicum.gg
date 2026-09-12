@@ -1,0 +1,7 @@
+{
+  "win-rate": "Winstpercentage",
+  "versus": "{metric} versus {region}",
+  "top": "Top {percent}%",
+  "ahead-of": "Beter dan {percent}%",
+  "against": "Vergeleken met {players} bijgehouden accounts in {region} met minstens {battles} gevechten."
+}

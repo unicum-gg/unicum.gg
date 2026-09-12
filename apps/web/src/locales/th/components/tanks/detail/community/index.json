@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "แยกตามแต่ละแกน",
+  "by-server": "แยกตามเซิร์ฟเวอร์",
+  "community-verdict": "คำตัดสินจากชุมชน",
+  "every-server-one-average": "ทุกเซิร์ฟเวอร์ ค่าเฉลี่ยเดียว",
+  "n-shown": ", แสดง {count} รายการ",
+  "opinion": "{count, plural, other {# ความคิดเห็น}}",
+  "opinion-next-to-win-rate": "ความคิดเห็นเทียบกับอัตราชนะในระดับ {tier}",
+  "rate-the": "ประเมิน {tankName}",
+  "reputation-against-results": "ชื่อเสียงเทียบกับผลงานจริง",
+  "same-tank-different-metas": "รถถังคันเดียวกัน เมตาต่างกัน",
+  "the-same-tank-by-how": "รถถังคันเดียวกัน แยกตามฝีมือการเล่นของผู้โหวต",
+  "what-players-wrote": "สิ่งที่ผู้เล่นเขียน",
+  "who-is-saying-it": "ใครเป็นคนพูด"
+}

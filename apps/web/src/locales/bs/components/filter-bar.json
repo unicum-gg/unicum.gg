@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Pretraži među {count} tenkova",
+    "rated-tanks": "Pretraži među {count} rangiranih tenkova",
+    "videos": "Pretraži među {count} videozapisa",
+    "players": "Pretraži {count} igrača",
+    "clans": "Pretraži {count} klanova",
+    "tournaments": "Pretraži {count} turnira",
+    "teams": "Pretraži {count} timova"
+  },
+  "min": "Min",
+  "max": "Maks",
+  "none": "Nema",
+  "common-test": "Izmijenjeno u Zajedničkom testu: nova i rebalansirana vozila",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Nagrada"
+  },
+  "moe": {
+    "0": "Još nema oznake",
+    "1": "1 oznaka",
+    "2": "2 oznake",
+    "3": "3 oznake"
+  },
+  "mom": {
+    "0": "Još nema bedža",
+    "1": "3. razred",
+    "2": "2. razred",
+    "3": "1. razred",
+    "4": "Ace Tanker"
+  }
+}

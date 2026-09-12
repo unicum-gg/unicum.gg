@@ -1,0 +1,22 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Total",
+    "day": "Last 24h",
+    "week": "Last 7d",
+    "month": "Last 30d"
+  },
+  "sections": {
+    "elo": "Tier X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Tier X (7v7)",
+    "t8": "{skirmish} Tier VIII (7v7)",
+    "t6": "{skirmish} Tier VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Battles",
+    "winrate": "Win rate"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "placeholder": "Spieler, Clans, Panzer, Karten oder Begriffe suchen",
+  "type": "Suchtyp",
+  "types": {
+    "all": "Alle",
+    "players": "Spieler",
+    "clans": "Clans",
+    "tanks": "Panzer",
+    "maps": "Karten",
+    "glossary": "Glossar"
+  },
+  "sections": {
+    "players": "Spieler",
+    "clans": "Clans",
+    "tanks": "Panzer",
+    "maps": "Karten",
+    "glossary": "Glossar",
+    "recent": "Zuletzt verwendet",
+    "favorites": "Favoriten"
+  },
+  "searching": "Suchen…",
+  "errored": "Etwas ist schiefgegangen. Versuche es erneut.",
+  "empty": "Keine Ergebnisse gefunden",
+  "remove-recent": "Von den letzten Suchanfragen entfernen",
+  "add-favorite": "Zu den Favoriten hinzufügen",
+  "remove-favorite": "Von den Favoriten entfernen"
+}

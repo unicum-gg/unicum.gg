@@ -1,0 +1,21 @@
+{
+  "title": "Mga marka at mastery ni {nickname}",
+  "excellence": {
+    "title": "Mga marka ng kahusayan",
+    "description": "Mga sasakyan ayon sa mga marka sa kanilang baril. Ang marka ay isang tuloy-tuloy na karaniwan: binibigyan ito ng laro batay sa rolling window ng mga kamakailang laban kumpara sa nagagawa ng rehiyon sa sasakyang iyon.",
+    "partial": "Nabasa ang mga marka para sa {known} sa {garage} mga sasakyan. Mapupunan ang iba habang nire-refresh ang account.",
+    "note": "May marka ang {marked} sa {garage} mga sasakyan.",
+    "note-share": "May marka ang {marked} sa {garage} mga sasakyan, {percent}% ng garahe."
+  },
+  "mastery": {
+    "title": "Mga marka ng kasanayan",
+    "description": "Mga sasakyan ayon sa pinakamaganda nilang insignia. Ang insignia ay mula sa isang labanan, hindi isang karaniwan: iginagawad ito ng laro batay sa experience sa isang laban kumpara sa score ng rehiyon sa sasakyang iyon.",
+    "note": "May Ace Tanker ang {aces} sa {garage} mga sasakyan.",
+    "note-share": "May Ace Tanker ang {aces} sa {garage} mga sasakyan, {percent}% ng garahe."
+  },
+  "reach": {
+    "heading": "Naglalaro nang higit sa baril",
+    "description": "Mga sasakyang ang pinagsamang pinsala ay lumalagpas na sa markang wala sa kanila. Ang insignia ay ang pinagsamang pinsalang iyon, na kinulayan ayon sa markang nalalagpasan nito."
+  },
+  "none": "Wala"
+}

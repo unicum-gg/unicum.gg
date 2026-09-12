@@ -1,0 +1,12 @@
+{
+  "before-update": "Πριν από την ενημέρωση {version}",
+  "common-test": "Κοινό Τεστ",
+  "in-common-test-not-released": "Στο Κοινό Τεστ, δεν έχει κυκλοφορήσει ακόμη",
+  "introduced": "Εισήχθη",
+  "lifecycle": "Κύκλος ζωής",
+  "n-buffed": "{count} ενισχυμένα",
+  "n-nerfed": "{count} αποδυναμωμένα",
+  "not-released-wargaming-can-still": "Δεν έχει κυκλοφορήσει. Η Wargaming μπορεί ακόμη να αλλάξει ή να αφαιρέσει οτιδήποτε από αυτά πριν κυκλοφορήσει η ενημέρωση.",
+  "status": "Κατάσταση",
+  "update": "Ενημέρωση {version}"
+}

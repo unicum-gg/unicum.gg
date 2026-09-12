@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Clasamentul {board}",
+  "carried-beside-a-clan-tag": "Purtată lângă eticheta unui clan. O emblemă de rang reprezintă un loc într-o competiție: numărul indică locul, iar culoarea arată clasamentul. Ratingurile nu oferă astfel de embleme, deoarece un clan nu câștigă pentru că are un WN8 mare.",
+  "clan-badges": "Insigne clan",
+  "clan-board": {
+    "name": "{board}, top {rank}",
+    "how": "Un loc în top {rank} al clasamentului {board}. Este păstrat cât timp clanul ocupă locul și pierdut când nu îl mai ocupă."
+  },
+  "clan-overflow": "Un clan care ocupă mai mult de trei locuri grupează restul într-o emblemă {plus}, începând cu cel mai bun, astfel încât eticheta să rămână lizibilă. Trecerea cursorului peste ea le afișează numele.",
+  "featured-tournament-winner": {
+    "name": "Câștigător al turneului recomandat",
+    "how": "La fel, câștigată la un eveniment marcat de Wargaming ca recomandat. Aur în loc de oțel, exact ca în secțiunea jucătorului."
+  },
+  "heading": "Fiecare {badge} și cum o câștigi",
+  "heading-accent": "insignă",
+  "marks-carried-beside-a-nickname": "Emblemele purtate lângă o poreclă oriunde apare pe {NAME}: clasamente, liste de clan, căutare și tabele de turnee.",
+  "n-badges": "{count} insigne",
+  "onslaught-champion": {
+    "name": "Campionul Violenței",
+    "how": "A atins Gradul de Campion în Violență, condiția necesară pentru a apărea în {standings}. Ulterior se păstrează ratingul: dacă scade sub prag, se pierde poziția, nu faptul că a fost deținută."
+  },
+  "onslaught-legend": {
+    "name": "Legenda Violenței",
+    "how": "A ocupat un loc în limita Legend a sezonului, care este o poziție, nu un scor: există doar un anumit număr de astfel de locuri simultan, iar pragul este evaluat în raport cu sezonul în care locul a fost ocupat. Violet în loc de albastru-oțel, culoarea cu care clasamentul însuși afișează Legend."
+  },
+  "player-badges": "Insigne jucător",
+  "player-overflow": "Un jucător care poartă mai mult de trei insigne grupează restul într-o emblemă {plus}, în ordinea de mai sus, astfel încât porecla să rămână lizibilă într-un tabel. Trecerea cursorului peste ea îi afișează numele, iar fiecare insignă păstrează linkul propriu.",
+  "ranked-standings": "clasamente rankate",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Un canal Twitch conectat la cont. Conectează Twitch din profilul propriu pentru confirmare, iar emblema va trimite la canal. Arată dacă ești live sau nu."
+  },
+  "streamer-who-is-on-air": "Un streamer care este live poartă și o etichetă roșie LIVE. Aceasta nu se câștigă și nu se păstrează: apare când începe transmisia și dispare când se termină, astfel că nu este niciodată grupată.",
+  "support-subscription": "asistență pentru abonament",
+  "supporter": {
+    "name": "Suportator"
+  },
+  "supporter-note": "Un {link} activ, păstrat public. Susținătorii care aleg să rămână anonimi nu poartă nicio insignă, la propria alegere.",
+  "the-marks-a-player-or": "Emblemele pe care un jucător sau clan le poate purta pe {NAME}, ce spune fiecare și exact ce trebuie făcut pentru a o obține.",
+  "tournament-winner": {
+    "name": "Câștigător de turneu",
+    "how": "O echipă atribuită clanului a câștigat un turneu. Wargaming înregistrează echipe și conturi, nu clanuri, astfel că atribuirea este recuperată prin compararea fiecărei componențe cu membrii clanului din ziua în care s-a jucat."
+  },
+  "verified": {
+    "name": "Verificat",
+    "how": "Proprietarul s-a conectat cu ID-ul Wargaming.net și a conectat acest cont. Conectarea este singura condiție și nu costă nimic."
+  }
+}

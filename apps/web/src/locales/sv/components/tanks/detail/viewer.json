@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visuell",
+    "collision": "Kollisionsdetaljer",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Centrera fordonet",
+    "off": "Flytta tillbaka fordonet från mitten"
+  },
+  "hull-down": {
+    "on": "Hull down",
+    "off": "Nivellera fordonet"
+  },
+  "tracks": {
+    "on": "Kör larvbanden",
+    "off": "Stoppa larvbanden"
+  },
+  "textures": {
+    "on": "Högupplösta texturer",
+    "off": "Standardtexturer"
+  },
+  "reset": "Återställ vy",
+  "style": "Välj en stil",
+  "style-worn": "Stil: {name}",
+  "search-styles": "Hitta stilar",
+  "colours": "Vad färgerna betyder",
+  "cinematic": {
+    "off": "Cinematisk kamera: av",
+    "auto": "Cinematisk kamera: vid inaktivitet",
+    "on": "Cinematisk kamera: alltid"
+  },
+  "open-tank": "Öppna en annan Tank",
+  "open-tank-placeholder": "Öppna tank...",
+  "more-actions": "Fler åtgärder",
+  "marks-meaning": {
+    "0": "Inga skyttemärken",
+    "1": "Ett märke: bättre än 65 % av alla spelare med denna Tank",
+    "2": "Två märken: bättre än 85 %",
+    "3": "Tre märken: bättre än 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Fyll fönstret",
+      "leave": "Bakåt till sidan"
+    },
+    "screen": {
+      "enter": "Fyll skärmen",
+      "leave": "Avsluta helskärmsläget"
+    }
+  },
+  "marks-count": {
+    "0": "Inga skyttemärken",
+    "one": "1 skyttemärke",
+    "other": "{count} skyttemärken"
+  },
+  "compare-tank": "Jämför med en annan Tank",
+  "compare-tank-placeholder": "Jämför med...",
+  "view-tooltips": {
+    "visual": "Denna Tank så som spelet återger den",
+    "collision": "Hur tjock varje pansarplåt är",
+    "live": "Vad den valda granaten skulle göra"
+  },
+  "cinematic-tooltips": {
+    "off": "Cinematisk kamera: av, vyn står stilla",
+    "auto": "Cinematisk kamera: startar efter 30 sekunders inaktivitet",
+    "on": "Cinematisk kamera: alltid, så fort du släpper reglagen"
+  }
+}

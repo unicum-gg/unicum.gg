@@ -1,0 +1,162 @@
+{
+  "columns-label": "Kolonner",
+  "groups": {
+    "firepower": "Ildkraft",
+    "gun-handling": "Våpenhåndtering",
+    "mobility": "Mobilitet",
+    "survivability": "Overlevelsesevne",
+    "other": "Annet"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Skade per minutt"
+    },
+    "damage": {
+      "label": "Skade",
+      "tip": "Alpha skade"
+    },
+    "moduleDamage": {
+      "label": "Modulskade"
+    },
+    "splashRadius": {
+      "label": "Eksplosjonsradius"
+    },
+    "reload": {
+      "label": "Lad om",
+      "tip": "Ladetid (fullstendig magasin for autoladere)"
+    },
+    "rof": {
+      "label": "Skuddtakt",
+      "tip": "Skudd per minutt"
+    },
+    "intraClipReload": {
+      "label": "Intra-Clip Lad om",
+      "tip": "Tid mellom skudd i et magasin (autoladere)"
+    },
+    "penetration": {
+      "label": "Penetrasjon",
+      "tip": "Penetrasjon (mm), standardskudd"
+    },
+    "caliber": {
+      "label": "Kaliber",
+      "tip": "Granatkaliber (mm)"
+    },
+    "shellVelocity": {
+      "label": "Granatens utgangshastighet",
+      "tip": "Granathastighet (m/s)"
+    },
+    "accuracy": {
+      "label": "Nøyaktighet",
+      "tip": "Spredning på 100 m, lavere er bedre"
+    },
+    "aimTime": {
+      "label": "Tid til sikting"
+    },
+    "dispMoving": {
+      "label": "Spredning i bevegelse",
+      "tip": "Spredningsfaktor under bevegelse"
+    },
+    "dispTankTraverse": {
+      "label": "Spredning ved dreining av stridsvogn"
+    },
+    "dispTurretTraverse": {
+      "label": "Spredning ved dreining av tårn"
+    },
+    "dispAfterShot": {
+      "label": "Spredning etter avfyring"
+    },
+    "dispWhileDamaged": {
+      "label": "Spredning mens skadet"
+    },
+    "gunArc": {
+      "label": "Kanonens sideretningsfelt",
+      "tip": "Horisontal dreievinkel for kanonen"
+    },
+    "depression": {
+      "label": "Kanonsenking / -heving",
+      "tip": "Kanonens senking / heving"
+    },
+    "speed": {
+      "label": "Hastighet (fremover / bakover)",
+      "tip": "Maksimal hastighet fremover / bakover (km/t)"
+    },
+    "hullTraverse": {
+      "label": "Skrogsvung"
+    },
+    "turretTraverse": {
+      "label": "Tårnsvung"
+    },
+    "enginePower": {
+      "label": "Kraft",
+      "tip": "Motoreffekt (hk)"
+    },
+    "powerWeight": {
+      "label": "Kraft/Vekt",
+      "tip": "hk per tonn"
+    },
+    "terrainHard": {
+      "label": "Hardt terreng",
+      "tip": "Terrengmotstand på hardt underlag, lavere er bedre"
+    },
+    "terrainMedium": {
+      "label": "Middels terreng"
+    },
+    "terrainSoft": {
+      "label": "Mykt terreng"
+    },
+    "health": {
+      "label": "Treffpoeng",
+      "tip": "Livpoeng"
+    },
+    "engineHealth": {
+      "label": "Motorens holdbarhet"
+    },
+    "engineFireChance": {
+      "label": "Sjanse for motorbrann"
+    },
+    "hullArmorFront": {
+      "label": "Skrogpansring (front)",
+      "tip": "Frontpansring på skrog (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Tårnpansring (front)",
+      "tip": "Frontpansring på tårn (mm)"
+    },
+    "trackArmor": {
+      "label": "Beltepansring"
+    },
+    "trackHealth": {
+      "label": "Beltenes holdbarhet"
+    },
+    "trackRepairTime": {
+      "label": "Reparasjonstid for belter"
+    },
+    "ammoRackHealth": {
+      "label": "Holdbarhet for ammunisjonsstativ"
+    },
+    "weight": {
+      "label": "Vekt"
+    },
+    "viewRange": {
+      "label": "Synsrekkevidde",
+      "tip": "Siktvidde (m)"
+    },
+    "radioRange": {
+      "label": "Radiorekkevidde",
+      "tip": "Signalrekkevidde (m)"
+    },
+    "camoStill": {
+      "label": "Kamuflasje ved stillstand"
+    },
+    "camoMoving": {
+      "label": "Kamuflasje i bevegelse"
+    },
+    "camoStillFiring": {
+      "label": "Stillestående kamuflasje etter avfyring"
+    },
+    "camoMovingFiring": {
+      "label": "Kamuflasje i bevegelse etter avfyring"
+    }
+  }
+}

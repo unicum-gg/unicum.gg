@@ -1,0 +1,7 @@
+{
+  "win-rate": "Ποσοστό νικών",
+  "versus": "{metric} έναντι {region}",
+  "top": "Κορυφαίο {percent}%",
+  "ahead-of": "Μπροστά από το {percent}%",
+  "against": "Έναντι {players} καταγεγραμμένων λογαριασμών της {region} με τουλάχιστον {battles} μάχες."
+}

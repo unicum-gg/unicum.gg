@@ -1,0 +1,7 @@
+{
+  "count": "Skaičius",
+  "cumulative": "Kaupiamas",
+  "daily": "Kasdien",
+  "heading-cumulative": "{title} (kumulatyviniai)",
+  "heading-daily": "{title} per dieną"
+}

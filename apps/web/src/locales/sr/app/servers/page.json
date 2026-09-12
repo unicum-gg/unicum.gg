@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks igrači онлајн ({region})",
+  "description": "Колико је igrači тренутно на сваком World of Tanks серверу у региону {region}, са бројевима популације за последња 24 сата, недељу и годину, рекордом svih vremena и најпрометнијим сатима у недељи.",
+  "og-title": "Populacija servera",
+  "og-subtitle": "Igrači онлајн на {region}"
+}

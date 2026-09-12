@@ -1,0 +1,9 @@
+{
+  "battle-starts-at": "La bataille commence à",
+  "https-www-youtube-com-watch": "https://www.youtube.com/watch?v=…&t=1h05m30s",
+  "optional": "(optionnel)",
+  "that-is-not-a-youtube": "Ce lien ne correspond pas à une vidéo YouTube.",
+  "use-a-time-like-1": "Utilisez un horodatage comme 1:05:30, ou laissez ce champ vide.",
+  "your-link-has-no-timestamp": "Votre lien ne contient aucun horodatage. Déplacez le curseur de l’aperçu ci-dessus jusqu’au combat, ou laissez le lien tel quel si la vidéo commence directement par le combat.",
+  "youtube-link": "Lien YouTube"
+}

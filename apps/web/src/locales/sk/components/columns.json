@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "player": "Hráč",
+  "members": "Členovia",
+  "battles": "Bitky",
+  "avg-damage": "Priemerné poškodenie",
+  "avg-xp": "Priemerné XP",
+  "winrate": "Výhry %",
+  "result": "Výsledok",
+  "tournament": "Turnaj",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

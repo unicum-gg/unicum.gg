@@ -1,0 +1,14 @@
+{
+  "close": "Avslutt",
+  "combined-damage": "Kombinert skade",
+  "damage-dealt-plus-assisted-as": "Utdelt skade pluss assistert skade, slik kampskjermen legger dem sammen.",
+  "format": "Format",
+  "no-reason-recorded": "Ingen grunn ble registrert, så dette kan være verdt å spørre om på Discord før du sender inn på nytt.",
+  "players-per-team": "Spillere per lag",
+  "save": "Lagre",
+  "saved-it-is-in-the": "Lagret. Det ligger i modereringskøen og vises på siden når en moderator har sett på det.",
+  "saving": "Lagrer …",
+  "tier": "Nivå",
+  "turned-down": "Avslått",
+  "what-was-played": "Hva ble spilt"
+}

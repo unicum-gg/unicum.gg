@@ -1,0 +1,6 @@
+{
+  "title": "Topp spelare i {mode} i World of Tanks ({region})",
+  "description": "Topplista: {name}, för {region} i {mode}, det tävlingsinriktade rankade 7v7-läget i World of Tanks, sorterad enligt spelets egen tabellordning.",
+  "og-title": "Topp spelare i {mode}",
+  "og-subtitle": "Topplista för {region} efter rankning"
+}

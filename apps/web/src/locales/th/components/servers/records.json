@@ -1,0 +1,6 @@
+{
+  "all-time-record": "สถิติทั้งหมด",
+  "average-last": "ค่าเฉลี่ย ช่วง {label} ล่าสุด",
+  "low-last": "ค่าต่ำสุด ช่วง {label} ล่าสุด",
+  "peak-last": "ค่าสูงสุด ช่วง {label} ล่าสุด"
+}

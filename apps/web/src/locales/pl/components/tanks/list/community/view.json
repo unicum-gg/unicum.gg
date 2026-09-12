@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Każdy czołg jest oceniany w skali od jednego do pięciu przez graczy, którzy nim grają. Głos liczy się tylko wtedy, gdy pochodzi z konta, na którym rzeczywiście użyto tego pojazdu w bitwie. To właśnie odróżnia ten system od ankiety, w której może wziąć udział każdy.",
+  "no-tank-has-been-rated": "Żaden czołg nie został jeszcze oceniony. Pierwsze głosy można oddać na stronach czołgów, w sekcji Społeczność.",
+  "think": "myśleć",
+  "title": "Gracze {think}",
+  "votes-across-vehicles": "Łącznie {totalVotes} głosów na {ratedTanks} pojazdów."
+}

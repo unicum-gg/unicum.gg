@@ -1,0 +1,21 @@
+{
+  "trigger": "Comentarios",
+  "title": "Compartir tus comentarios",
+  "topic-placeholder": "Selecciona un tema...",
+  "message-placeholder": "Tus comentarios...",
+  "send": "Enviar",
+  "sent": "¡Gracias por tus comentarios!",
+  "failed": "No se pudieron enviar tus comentarios. Inténtalo de nuevo.",
+  "topics": {
+    "bug": "Informar de un error",
+    "idea": "Idea para una función",
+    "data": "Precisión de datos",
+    "other": "Otro"
+  },
+  "sentiments": {
+    "awful": "Horrible",
+    "bad": "Malo",
+    "good": "Bueno",
+    "great": "Genial"
+  }
+}

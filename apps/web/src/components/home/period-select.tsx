@@ -1,6 +1,7 @@
 "use client";
 
-import { Period, PERIOD_LABEL } from "@/hooks/use-period";
+import { Period } from "@/hooks/use-period";
+import { useTranslation } from "@/hooks/use-translation";
 import { PeriodInlineSelect } from "@/components/period-inline-select";
 
 const PERIODS = Object.values(Period);
@@ -21,13 +22,15 @@ export function PeriodSelect({
   period: Period;
   onChange: (next: Period) => void;
 }) {
+  const { t } = useTranslation("components/home/period-select");
+
   return (
     <PeriodInlineSelect
       period={period}
       periods={PERIODS}
-      label={(p) => PERIOD_LABEL[p]}
+      label={(p) => t(`periods.${p}`)}
       onChange={onChange}
-      ariaLabel="Leaderboard period"
+      ariaLabel={t("label")}
     />
   );
 }

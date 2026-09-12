@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "トップ <accent>プレイヤー</accent>",
+    "language": "<accent>{language}</accent>のトッププレイヤー"
+  },
+  "intro": {
+    "all": "{region}のランキングです。通算{metric}で順位付けしています（最低20,000戦）。",
+    "language": "クラン履歴から推定した言語セットに{language}を含む{region}のプレイヤーを、{metric}で順位付けしています（最低10,000戦）。",
+    "strict": "クラン履歴から推定した言語が{language}のみである{region}のプレイヤーを、{metric}で順位付けしています（最低10,000戦）。"
+  },
+  "board": {
+    "all": "{metric}によるトップ{count}プレイヤー",
+    "language": "{metric}による{language}のトップ{count}プレイヤー",
+    "strict": "{metric}による厳密な{language}のトップ{count}プレイヤー"
+  },
+  "modes": {
+    "overall": "総合"
+  },
+  "columns": {
+    "player": "プレイヤー"
+  },
+  "strict-toggle": "厳密",
+  "any-toggle": "任意",
+  "all-languages": "全言語",
+  "battles": "戦闘数",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

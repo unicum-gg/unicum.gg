@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "nad {value} % hodnotených tankov na svojej úrovni",
+  "measured-hint": "Poradie podľa miery víťazstiev medzi rovnakými tankami",
+  "not-enough-votes-yet-to": "Zatiaľ nie je dosť hlasov na porovnanie hodnotenia komunity so skutočnými výsledkami tanku.",
+  "perceived-hint": "Poradie komunity medzi hodnotenými tankami úrovne {tier}",
+  "verdict": {
+    "overrated": "Komunita ho hodnotí oveľa vyššie, než aké výsledky v skutočnosti dosahuje.",
+    "fair": "V tomto prípade sa povesť zhoduje s výsledkami.",
+    "underrated": "Vedie si lepšie, než mu ktokoľvek priznáva."
+  },
+  "what-players-think": "Čo si myslia hráči",
+  "what-the-data-says": "Čo hovoria údaje"
+}

@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname}s prestationer",
+  "filter-all": "Alla",
+  "filter-both": "Båda",
+  "filter-earned": "Intjänade",
+  "filter-missing": "Saknade",
+  "filter-obtainable": "Tillgängliga",
+  "filter-retired": "Utgångna",
+  "no-achievement-matches-these-filters": "Ingen utmärkelse matchar dessa filter.",
+  "search-achievements": "Hitta prestationer",
+  "search-among-n-achievements": "Hitta bland {count} prestationer"
+}

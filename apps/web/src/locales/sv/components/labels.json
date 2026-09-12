@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Väntar på första ögonblicksbild",
+    "hidden": "Dold av Wargaming",
+    "active_24h": "Aktiv < 24 t",
+    "active_7d": "Aktiv < 7 d",
+    "recent_30d": "Nyligen aktiv < 30 d",
+    "recent_90d": "Nyligen aktiv < 90 d",
+    "dormant_1y": "Vilande < 1 år",
+    "inactive": "Inaktiv > 1 år"
+  },
+  "rating-hype": {
+    "overrated": "Övervurderad",
+    "fair": "Rättvist bedömd",
+    "underrated": "Undervurderad"
+  },
+  "rating-consensus": {
+    "agreed": "Bred enighet",
+    "mixed": "Blandade åsikter",
+    "divisive": "Delande åsikter"
+  },
+  "rating-axes": {
+    "overall": "Övergripande",
+    "fun": "Roligt",
+    "firepower": "Eldkraft",
+    "armour": "Skal",
+    "mobility": "Rörlighet",
+    "gunHandling": "Vapenkontroll",
+    "concealment": "Kamouflage",
+    "beginnerFriendliness": "Nykomlarvänlig",
+    "versatility": "Mångsidighet"
+  },
+  "rating-axis-hints": {
+    "overall": "Hur bra är den här stridsvagnen, allt sammantaget?",
+    "fun": "Hur mycket tycker du om att spela den?",
+    "firepower": "Alfaskada, skada per minut och genomslag.",
+    "armour": "Hur väl pansaret studsar skott, i skrovdolt läge och ute i det öppna.",
+    "mobility": "Hastighet, acceleration och svängförmåga.",
+    "gunHandling": "Aim tid, spridning och precision under körning.",
+    "concealment": "Kamouflage och synräckvidd.",
+    "beginnerFriendliness": "Hur förlåtande den är om du fortfarande håller på att lära dig.",
+    "versatility": "Fungerar den på alla kartor och i alla lag?"
+  },
+  "voter-brackets": {
+    "unknown": "Obedömd",
+    "learning": "Lärande",
+    "average": "Genomsnitt",
+    "strong": "Stark",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vagnar",
+    "gunnery": "Skjutteknik",
+    "armor": "Pansar",
+    "mobility": "Rörlighet",
+    "vision": "Sikt",
+    "crew": "Besättning",
+    "progression": "Progression",
+    "economy": "Ekonomi",
+    "ratings": "Betyg",
+    "statistics": "Statistik",
+    "modes": "Stridslägen",
+    "tactics": "Taktik",
+    "slang": "Slang"
+  }
+}

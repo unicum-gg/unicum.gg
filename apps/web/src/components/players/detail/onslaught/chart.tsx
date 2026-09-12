@@ -1,5 +1,8 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import type { TranslateFunction } from "@onruntime/translations";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import {
   Bar,
@@ -9,7 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ONSLAUGHT_TIER_LABEL, OnslaughtTier } from "@unicum.gg/shared";
+import { OnslaughtTier } from "@unicum.gg/shared";
 import {
   type ChartConfig,
   ChartContainer,
@@ -35,16 +38,22 @@ export type ClimbPoint = {
 };
 export type CutoffPoint = { t: number; legendPoints: number | null };
 
-const config = {
-  played: { label: "Battles played", color: "var(--chart-2)" },
-  rating: { label: "Rating points", color: "var(--chart-1)" },
-  legend: {
-    label: `${ONSLAUGHT_TIER_LABEL[OnslaughtTier.Legend]} cutoff`,
-    theme: { light: LEGEND_LIGHT, dark: LEGEND_DARK },
-  },
-} satisfies ChartConfig;
+/** Built inside the component rather than beside it: one of its three labels
+ * names the Legend tier, which is a word the reader's own client has. */
+function chartConfig(t: TranslateFunction, tGame: TranslateFunction) {
+  return {
+    played: { label: t("battles-played"), color: "var(--chart-2)" },
+    rating: { label: t("rating-points"), color: "var(--chart-1)" },
+    legend: {
+      label: t("legend-cutoff", {
+        tier: tGame(`onslaught-tiers.${OnslaughtTier.Legend}`),
+      }),
+      theme: { light: LEGEND_LIGHT, dark: LEGEND_DARK },
+    },
+  } satisfies ChartConfig;
+}
 
-const points = new Intl.NumberFormat("en-US");
+const POINTS_FORMAT = {} as const;
 const WITHIN_A_DAY_MS = 36 * 60 * 60 * 1000;
 
 type Row = {
@@ -95,6 +104,11 @@ export function PlayerOnslaughtChart({
   cutoffs: CutoffPoint[];
   zone: DisplayZone;
 }) {
+  const { num } = useFormat();
+  const { locale } = useFormat();
+  const { date } = useFormat();
+  const { t } = useTranslation("components/players/detail/onslaught/chart");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const data = useMemo(() => {
     const byInstant = new Map<number, Row>();
     for (const c of cutoffs) {
@@ -141,14 +155,10 @@ export function PlayerOnslaughtChart({
 
   const tick = useMemo(() => {
     const span = data.length >= 2 ? data[data.length - 1].ms - data[0].ms : 0;
-    const fmt = new Intl.DateTimeFormat("en-US", {
-      ...(span < WITHIN_A_DAY_MS
-        ? { hour: "2-digit", minute: "2-digit", hour12: false }
-        : { month: "short", day: "numeric" }),
-      timeZone: zone === "local" ? undefined : "UTC",
-    });
+    const pattern = span < WITHIN_A_DAY_MS ? "HH:mm" : "d MMM";
+    const fmt = date(zone === "local" ? pattern : `${pattern} /* UTC */`);
     return (value: number) => fmt.format(new Date(value));
-  }, [data, zone]);
+  }, [data, zone, date]);
 
   const label = useMemo(
     () =>
@@ -159,19 +169,18 @@ export function PlayerOnslaughtChart({
         // a reading a player wants beside the points and it shares no scale
         // with them. Battles have their own axis, so the tooltip prints them
         // already.
-        const parts = [formatMoment(new Date(row.ms), zone)];
+        const parts = [formatMoment(new Date(row.ms), zone, locale)];
         if (row.rank != null) parts.push(`rank #${row.rank}`);
         return parts.join(" · ");
       },
-    [zone],
+    [zone, locale],
   );
 
   return (
     <figure className="border-t border-fd-border p-4">
       <figcaption className="mb-2 text-xs uppercase tracking-wide text-fd-muted-foreground">
-        This season&apos;s climb
-      </figcaption>
-      <ChartContainer config={config} className="h-56 w-full">
+        {t("this-season-s-climb")}</figcaption>
+      <ChartContainer config={chartConfig(t, tGame)} className="h-56 w-full">
         <ComposedChart data={data} margin={{ left: 4, right: 12, top: 8 }}>
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
           <TimeAxis tick={tick} />
@@ -184,7 +193,7 @@ export function PlayerOnslaughtChart({
             // Rating points sit in a narrow band well above zero, so the axis
             // frames the band it is drawing rather than the origin.
             domain={["dataMin - 40", "dataMax + 40"]}
-            tickFormatter={(v: number) => points.format(v)}
+            tickFormatter={(v: number) => num(POINTS_FORMAT).format(v)}
           />
           {/* Battles get their own axis, on the right, because they are a
               count and the lines are a score: one scale each, each labelled, so
@@ -199,7 +208,7 @@ export function PlayerOnslaughtChart({
             axisLine={false}
             width={44}
             domain={[0, (max: number) => Math.ceil(Math.max(1, max) * 1.6)]}
-            tickFormatter={(v: number) => points.format(v)}
+            tickFormatter={(v: number) => num(POINTS_FORMAT).format(v)}
           />
           <ChartTooltip content={<ChartTooltipContent labelFormatter={label} />} />
           <ChartLegend content={<ChartLegendContent />} />

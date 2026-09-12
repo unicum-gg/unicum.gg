@@ -1,0 +1,11 @@
+{
+  "compare": "Poredi sa {count} najsličnijih",
+  "match": "меч",
+  "subtitle": "Isto mesto među tenkovima sopstvenog nivoa",
+  "verdict": {
+    "overall": "Sličan ukupno",
+    "closest": "Najbliži po osama {axes}",
+    "closest-furthest": "Najbliži po osama {axes}, najudaljeniji po {apart}",
+    "and": " и "
+  }
+}

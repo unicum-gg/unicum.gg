@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Every tank rated out of five by the people who play it. A vote only counts from an account that has actually taken the vehicle into battle, which is what separates this from a poll of whoever showed up.",
+  "no-tank-has-been-rated": "No tank has been rated yet. The first votes are on the tank pages, under Community.",
+  "think": "think",
+  "title": "What players {think}",
+  "votes-across-vehicles": "{totalVotes} votes across {ratedTanks} vehicles."
+}

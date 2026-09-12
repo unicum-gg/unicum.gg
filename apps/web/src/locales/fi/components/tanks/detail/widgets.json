@@ -1,0 +1,12 @@
+{
+  "slot": "Paikka {n}",
+  "slot-filled": "Paikka {n}: {name}",
+  "consumable-slot": "Kulutustarvikepaikka {n}",
+  "consumable-slot-filled": "Kulutustarvikepaikka {n}: {name}",
+  "level": "Taso {n}",
+  "stock": "Varasto",
+  "specialize": "Napsauta erikoistaaksesi tämän paikan.",
+  "clear-specialization": "Napsauta poistaaksesi tämän paikan erikoistumisen.",
+  "crew-skills": "Miehistön taidot",
+  "shell-aria": "{name}: {damage} vahinkoa, {penetration} mm läpäisyä"
+}

@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Średnia z {rated} ocenianych z {size} graczy",
+  "average-over-recent": "Średnia z {rated} z {size} graczy, którzy rozegrali bitwy w ciągu ostatnich 30 dni",
+  "metric-over-last-30-days": "{metric} w ciągu ostatnich 30 dni",
+  "n-confirmed": "Potwierdzono: {count}",
+  "no-team-matches-the-current": "Żadna drużyna nie pasuje do aktualnych filtrów.",
+  "no-teams-recorded-yet-registrations": "Nie zarejestrowano jeszcze żadnych drużyn. Zgłoszenia pojawią się tutaj po pełnym wczytaniu turnieju, co następuje w ciągu kilku minut od jego otwarcia.",
+  "none-played-in-30-days": "Nikt z tego składu nie rozegrał bitwy w ciągu ostatnich 30 dni",
+  "players": "Gracze",
+  "qualified": "Zakwalifikowany",
+  "reward": "Nagroda",
+  "team": "Drużyna",
+  "teams": "Drużyny ({length})",
+  "wr": "WR"
+}

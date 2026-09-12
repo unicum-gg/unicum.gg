@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1-е месца",
+    "2": "2-е месца",
+    "3": "3-е месца"
+  },
+  "streamer": "Стрымер · глядзець {name} на Twitch",
+  "tournament": {
+    "one": "Пераможны склад турніру {title}",
+    "many": "У {count} пераможных складах, найлепшы вынік у {title}",
+    "featured": "{text} · рэкамендаванае падзея",
+    "unnamed": "турнір Wargaming"
+  },
+  "tournament-wins": "{count, plural, one {# перамога ў турніры} few {# перамогі ў турніры} many {# перамог у турніры} other {# перамогі ў турніры}}",
+  "watch-on-twitch": "Глядзець {name} на Twitch",
+  "watch-on-twitch-viewers": "Глядзець {name} на Twitch · гледачоў: {viewers}"
+}

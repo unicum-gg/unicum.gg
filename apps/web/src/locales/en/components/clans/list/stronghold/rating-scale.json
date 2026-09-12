@@ -1,0 +1,17 @@
+{
+  "average": "Average",
+  "bad": "Bad",
+  "below-avg": "Below avg",
+  "color-thresholds-for-the-stronghold": "Color thresholds for the stronghold boards. One absolute scale for every tier, so an SR (or SRB) means the same clan quality everywhere.",
+  "excellent": "Excellent",
+  "good": "Good",
+  "rating-colors": "Rating colors",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Tier",
+  "top": "Top",
+  "very-bad": "Very bad",
+  "very-good": "Very good",
+  "wr": "WR"
+}

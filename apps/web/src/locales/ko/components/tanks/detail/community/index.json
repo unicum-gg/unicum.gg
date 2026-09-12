@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "축별 분석",
+  "by-server": "서버별로",
+  "community-verdict": "커뮤니티 의견",
+  "every-server-one-average": "모든 서버, 하나의 평균",
+  "n-shown": ", {count}개 표시",
+  "opinion": "{count, plural, other {#개 의견}}",
+  "opinion-next-to-win-rate": "단계 {tier} 내 의견과 승률 비교",
+  "rate-the": "{tankName} 평가",
+  "reputation-against-results": "평판과 결과 비교",
+  "same-tank-different-metas": "같은 전차, 다른 메타",
+  "the-same-tank-by-how": "투표자의 플레이 실력에 따른 같은 전차의 평가",
+  "what-players-wrote": "플레이어들이 작성한 내용",
+  "who-is-saying-it": "누가 말하고 있는가"
+}

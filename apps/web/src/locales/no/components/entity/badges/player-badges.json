@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. plass",
+    "2": "2. plass",
+    "3": "3. plass"
+  },
+  "streamer": "Strømmer · se {name} på Twitch",
+  "tournament": {
+    "one": "Vinnerlagoppstilling i {title}",
+    "many": "På {count} vinnerlagoppstillinger, det beste i {title}",
+    "featured": "{text} · et fremhevet arrangement",
+    "unnamed": "en Wargaming-turnering"
+  },
+  "tournament-wins": "{count, plural, one {# seier i turnering} other {# seire i turnering}}",
+  "watch-on-twitch": "Se {name} på Twitch",
+  "watch-on-twitch-viewers": "Se {name} på Twitch · {viewers} seere"
+}

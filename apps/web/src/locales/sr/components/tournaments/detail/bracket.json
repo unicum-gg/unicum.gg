@@ -1,0 +1,7 @@
+{
+  "group": "Група {order}",
+  "n-teams": "{count} тимова",
+  "pts": "Poeni",
+  "team": "Tim",
+  "top-n-advance": ", најбољих {count} пролази даље"
+}

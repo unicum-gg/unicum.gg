@@ -1,0 +1,6 @@
+{
+  "active-until": "Aktibo hanggang {tz}",
+  "n-left": "{count} ang natitira",
+  "no-reserves-in-stock-right": "Walang mga reserba sa stock ngayon.",
+  "reserves-to-activate": "Mga reserbang ia-activate"
+}

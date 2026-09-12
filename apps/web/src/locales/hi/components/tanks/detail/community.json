@@ -1,0 +1,8 @@
+{
+  "what-players-think": "खिलाड़ी इस टैंक के बारे में क्या सोचते हैं",
+  "not-rated": "अभी रेटेड नहीं है, पहले आप रेट करें",
+  "votes": "{count} मत",
+  "votes-one": "{count} वोट",
+  "stars": "{max} में से {value}",
+  "not-rated-short": "रेटेड नहीं"
+}

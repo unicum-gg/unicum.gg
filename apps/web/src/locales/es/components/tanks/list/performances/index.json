@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Filas por página",
+  "previous-page": "Página anterior",
+  "page": "Página {current} / {totalPages}",
+  "next-page": "Siguiente página",
+  "all": "Todo"
+}

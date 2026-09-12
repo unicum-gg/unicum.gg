@@ -1,0 +1,35 @@
+{
+  "heading": "Top players in <accent>{mode}</accent>",
+  "intro": "{mode} is World of Tanks’ competitive 7v7 ranked mode on tier X. The {region} leaderboard, straight from the game’s own standings.",
+  "season": {
+    "range": "{start} to {end}",
+    "final": "final standings",
+    "live": "live season",
+    "updated": "updated {when}"
+  },
+  "board": "Top {count} {mode} players",
+  "columns": {
+    "player": "Player",
+    "rank": "Rank",
+    "battles": "Battles",
+    "rating": "Rating Points"
+  },
+  "alias": "(as {nickname})",
+  "ranks": {
+    "title": "Ranks",
+    "meaning": "Meaning",
+    "tier": "Tier",
+    "intro": "You climb {mode}’s ranks by winning battles: every victory awards Rating Points based on how well you played. {champion} is the highest rank you can reach on points alone, and reaching it puts you on the leaderboard. {legend} isn’t a fixed threshold: it’s the top-rated slice of {champion}s, so its cutoff shifts with the field (ties broken by battles played). The exact {legend} and {champion} cutoffs come from the current season and are marked on the board.",
+    "legend-blurb": "The highest-rated {champion}s. The game caps it at a set leaderboard position each season (so its size varies by season and region), not a fixed points target. Slip below the last {legend} and you drop back to {champion}.",
+    "champion-blurb": "The highest rank you can climb to on Rating Points, and the entry to the leaderboard. Every ranked player is at least {champion}."
+  },
+  "race": {
+    "title-live": "What it takes right now",
+    "title-ended": "How the season went",
+    "legend-cutoff": "{legend} cutoff",
+    "champion-cutoff": "{champion} cutoff",
+    "ranked-players": "Ranked players",
+    "rating-points": "rating points",
+    "rank-cutoffs": "Rank cutoffs"
+  }
+}

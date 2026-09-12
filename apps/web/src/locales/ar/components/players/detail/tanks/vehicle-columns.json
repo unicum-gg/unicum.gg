@@ -1,0 +1,4 @@
+{
+  "columns": "أعمدة",
+  "n-marks-of-excellence": "{count, plural, zero {# علامة التميز} one {# علامة التميز} two {# علامتا التميز} few {# علامات التميز} many {# علامة التميز} other {# علامة التميز}}"
+}

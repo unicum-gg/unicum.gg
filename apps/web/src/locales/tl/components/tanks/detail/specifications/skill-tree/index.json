@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "I-click ang maaabot na node para i-unlock ito. Ilalapat ng bawat isa ang epekto nito sa mga katangian sa itaas. Pinapangkat ng mga kulay ang mga node ayon sa firepower, mobility, survivability at mekanika ng sasakyan.",
+  "loadout-switch-no-effect": "Paglipat ng loadout sa labanan. Walang epekto sa katangian.",
+  "title": "Mga Upgrade ng {tank}",
+  "vehicle-mechanic-no-effect": "Mekanika ng sasakyan. Walang epekto sa katangian."
+}

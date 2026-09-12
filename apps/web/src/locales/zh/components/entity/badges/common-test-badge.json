@@ -1,0 +1,12 @@
+{
+  "aria-build": "在公共测试客户端中查看，构建版本 {version}",
+  "aria-changes": "公共测试变更了 {changes} 项特性",
+  "aria-described": "公共测试：{description}",
+  "aria-vehicle": "公共测试车辆",
+  "common-test": "公共测试",
+  "common-test-build": "公共测试 {version}",
+  "tip-build": "{label} · 这些是测试构建版本的数值，默认仍可能在更新发布前进行变更",
+  "tip-changes": "公共测试在此车辆上的变更 {changes, plural, other {# 特性}}",
+  "tip-described": "公共测试 · {description}",
+  "tip-vehicle": "公共测试 · 尚未发布，因此没有战斗数据，其特性仍可能变更"
+}

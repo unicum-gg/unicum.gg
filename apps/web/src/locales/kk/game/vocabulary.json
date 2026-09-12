@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Кездейсоқ",
+    "battle_royale": "Сталеви аңшы",
+    "frontline": "Майдан шебі",
+    "onslaught": "Шабуыл",
+    "onslaught_night": "{onslaught} Түні",
+    "grand_battle": "Үлкен шайқас",
+    "clan_wars": "клан соғыстары",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Соңғы шеп",
+    "arcade": "Аркада",
+    "story_mode": "Оқиға режимі",
+    "training": "Жаттығу"
+  },
+  "player-modes": {
+    "overall": "кездейсоқ шайқастар",
+    "skirmish": "Айқас",
+    "advances": "Шабуылдар",
+    "grand": "Үлкен шайқастар",
+    "ranked": "Рейтингтік шайқастар",
+    "cw-x": "Клан соғыстары X",
+    "cw-viii": "Клан соғыстары VIII",
+    "cw-vi": "Клан соғыстары VI",
+    "steel-hunter": "Сталеви аңшы",
+    "onslaught": "Шабуыл"
+  },
+  "stronghold-tiers": {
+    "advances": "Шабуылдар",
+    "t10": "Айқас T10",
+    "t8": "Айқас T8",
+    "t6": "Айқас T6"
+  },
+  "stronghold-periods": {
+    "24h": "Соңғы 24 сағат",
+    "7d": "Соңғы 7 күн",
+    "30d": "Соңғы 30 күн",
+    "overall": "Жалпы"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Соғыстар",
+    "winrate": "Жеңіс коэффициенті"
+  },
+  "clan-boards": {
+    "advances": "Шабуылдар",
+    "t10": "Айқас X",
+    "t8": "Айқас VIII",
+    "t6": "Айқас VI"
+  },
+  "map-modes": {
+    "standard": "Стандарт",
+    "encounter": "Қарсы шайқас",
+    "assault": "Штурм",
+    "attack-defense": "Шабуыл/Қорғаныс"
+  },
+  "map-camouflage": {
+    "summer": "Жазғы",
+    "winter": "Қысқы",
+    "desert": "Шөлдік"
+  },
+  "map-poi": {
+    "1": "Артиллерия штабы",
+    "2": "Байланыс орталығы",
+    "3": "Бақылау бекеті"
+  },
+  "tournament-modes": {
+    "ctf": "Стандарт",
+    "domination": "Қарсы шайқас",
+    "assault2": "Шабуыл/Қорғаныс",
+    "comp7": "Шабуыл"
+  },
+  "battle-formats": {
+    "random": "Кездейсоқ",
+    "clan_wars": "клан соғыстары",
+    "advances": "Шабуылдар",
+    "skirmish": "Айқас",
+    "maneuvers": "Маневрлер",
+    "onslaught": "Шабуыл",
+    "tournament": "Турнир"
+  },
+  "battle-results": {
+    "victory": "Жеңіс",
+    "defeat": "Жеңіліс",
+    "draw": "Тең ойын"
+  },
+  "spawn-directions": {
+    "north": "Солтүстік",
+    "south": "Оңтүстік",
+    "east": "Шығыс",
+    "west": "Батыс"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Алдағы",
+    "registration_started": "Тіркеу ашық",
+    "registration_finished": "Тіркеу жабық",
+    "running": "Жалғасуда",
+    "finished": "Соңғы стадиида",
+    "complete": "аяқталған"
+  },
+  "onslaught-tiers": {
+    "legend": "Аңыз",
+    "champion": "Чемпион",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Ауыр",
+    "mediumTank": "Орта",
+    "lightTank": "Жеңіл",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Штурмдық",
+    "break": "Бұзып өтуші",
+    "support": "Қолдау",
+    "universal": "Әмбебап",
+    "sniper": "Мерген",
+    "wheeled": "Дөңгелекті"
+  },
+  "mastery-badges": {
+    "class3": "3-дәрежелі",
+    "class2": "2-дәрежелі",
+    "class1": "1-дәрежелі",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "кездейсоқ шайқастар",
+    "stronghold": "Бекініс",
+    "skirmish": "Айқас",
+    "clan-wars": "клан соғыстары"
+  },
+  "features": {
+    "stronghold": "Бекініс",
+    "skirmish": "Айқас",
+    "marks-of-excellence": "Жетістік белгілері",
+    "marks-of-mastery": "Шеберлік белгілері",
+    "personal-rating": "Жеке Рейтинг",
+    "world-of-tanks-rating": "World of Tanks рейтингі",
+    "common-test": "Жалпы Тест",
+    "tournaments": "Турнирлер"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Mark",
+    "3": "3 Mark",
+    "name": "Жетістік белгілері"
+  }
+}

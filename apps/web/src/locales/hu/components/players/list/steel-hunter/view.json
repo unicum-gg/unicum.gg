@@ -1,0 +1,13 @@
+{
+  "heading": "Legjobb játékosok a <accent>{mode}</accent> játékmódban",
+  "intro": "A(z) {mode} a World of Tanks battle royale játékmódja. A(z) {region} ranglista HR szerint rendezve, legalább 100 {mode} csatával.",
+  "board": "A(z) {mode} legjobb {count} játékosa",
+  "columns": {
+    "player": "Játékos",
+    "battles": "Csaták",
+    "survival": "Túlélés",
+    "survival-percent": "Túlélési arány",
+    "damage": "Átlagos sebzés"
+  },
+  "scale-description": "A(z) {mode} ranglistájának színküszöbei, legalább 100 {mode} csatával rendelkező játékosok népességére kalibrálva."
+}

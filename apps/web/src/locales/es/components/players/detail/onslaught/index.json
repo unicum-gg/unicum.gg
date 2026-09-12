@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname} no ha ocupado ningún puesto en la clasificación de Asedio.",
+  "live-season": "· temporada en curso",
+  "loading-s-onslaught-record": "Cargando el historial de Asedio de {nickname}...",
+  "onslaught": "Asedio",
+  "onslaught-record": "Historial de Asedio de {nickname}",
+  "see-this-season-s-leaderboard": "Ver la Tabla clasificatoria de esta temporada",
+  "standing-line": "{rating} Puntos de clasificación · {battles} Batallas",
+  "the-board-only-lists-players": "La clasificación solo incluye a los jugadores que alcanzan el rango Campeón, unos pocos miles por región, así que casi todos los perfiles terminan aquí. La información se completa automáticamente en la temporada en que lo consiguen.",
+  "updated": "Actualizado {when}"
+}

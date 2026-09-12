@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Taisteluita",
+  "no-votes": "ei äänestä",
+  "rated-higher": "Paremmat pelaajat arvioivat sen {stars} tähteä palvelimen muita panssarivaunuja korkeammalle. Tämä palkitsee osaamisen.",
+  "rated-lower": "Paremmat pelaajat arvioivat sen {stars} tähteä palvelimen muita panssarivaunuja matalammalle. Se imartelee, kunnes siltä vaaditaan jotain.",
+  "votes": "{count} äänestä",
+  "votes-one": "{count} ääni"
+}

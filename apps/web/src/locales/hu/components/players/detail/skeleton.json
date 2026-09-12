@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname} véletlen csatáinak statisztikái",
+  "progression": "{nickname} {metricLabel} fejlődése",
+  "solid-line-is-overall-matches": "A folytonos sor az összesített {metricLabel} értéke, amely megegyezik a fenti Összesen oszloppal, és az új csaták hozzáadásával lassan változik. A szaggatott sor munkamenetenkénti {metricLabel2} értéket mutat, amelyet az előző pillanatkép óta lejátszott csatákból számítunk. Megmutatja a jobb és rosszabb sorozatokat. A sor színe az értékelési szintet követi.",
+  "tanks-shaping-s-rating": "{nickname} értékelését alakító tankok",
+  "tanks": "{nickname} tankjai",
+  "stats": "{nickname} {strongholdLabel} statisztikái"
+}

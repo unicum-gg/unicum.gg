@@ -1,0 +1,37 @@
+{
+  "label": "Lisää",
+  "items": {
+    "tournaments": {
+      "label": "Turnaukset",
+      "description": "Kaaviot, kokoonpanot ja tulokset alueittain"
+    },
+    "servers": {
+      "label": "Palvelimet",
+      "description": "Paikalla olevat pelaajat nyt ja ajan mittaan"
+    },
+    "bot": {
+      "label": "Discord-botti",
+      "description": "Pelaaja-, klaani- ja panssarivaunutilastot slash-komentoina"
+    },
+    "mcp": {
+      "label": "MCP-palvelin",
+      "description": "Yhdistä Claude, ChatGPT tai mikä tahansa MCP-asiakas"
+    },
+    "api": {
+      "label": "API",
+      "description": "Ilmainen julkinen REST API, avainta ei tarvita"
+    },
+    "badges": {
+      "label": "Merkit",
+      "description": "Jokainen pelaajan tai klaanin ansaittavissa oleva vaakuna ja sen ansaintatapa"
+    },
+    "glossary": {
+      "label": "Sanasto",
+      "description": "Jokainen World of Tanks -termi selitettynä"
+    },
+    "support": {
+      "label": "Tukee meitä",
+      "description": "Pidä {name} ilmaisena, avoimena ja mainoksettomana"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Estatísticas de batalhas aleatórias de {nickname}",
+  "progression": "Progressão de {nickname} em {metricLabel}",
+  "solid-line-is-overall-matches": "O valor da linha contínua é o valor global de {metricLabel} (igual ao da coluna Total acima) e varia lentamente à medida que se acumulam novas batalhas. A linha tracejada mostra o valor de {metricLabel2} por sessão, calculado a partir das batalhas disputadas desde o registo anterior. Revela séries de bons e maus resultados. A cor da linha segue o nível da classificação.",
+  "tanks-shaping-s-rating": "Tanques que influenciam a classificação de {nickname}",
+  "tanks": "Tanques de {nickname}",
+  "stats": "Estatísticas de {nickname} em {strongholdLabel}"
+}

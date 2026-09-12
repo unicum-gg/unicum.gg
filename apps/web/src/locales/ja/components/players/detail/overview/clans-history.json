@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname}のクラン履歴",
+  "clans-in-clans": "{totalClans}クラン · クラン在籍{timeInClansSeconds}",
+  "current": "現在",
+  "duration": "持続時間",
+  "from": "から",
+  "name": "名称",
+  "no-clan-history": "クラン履歴はありません。",
+  "role": "役割",
+  "tag": "タグ",
+  "to": "対"
+}

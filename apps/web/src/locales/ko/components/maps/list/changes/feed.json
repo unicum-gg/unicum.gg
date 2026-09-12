@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, other {# 지도}}",
+  "no-map-changes-have-been": "아직 기록된 지도 변경 사항이 없습니다. 워게이밍이 지도를 개편하면 각 업데이트에서 변경된 내용이 여기에 표시됩니다.",
+  "update": "업데이트 {version}"
+}

@@ -1,0 +1,11 @@
+{
+  "date": "Ημερομηνία",
+  "featured-tournament": "Δημοφιλές τουρνουά",
+  "format": "Μορφή",
+  "n-of-the-roster-were-in-the-clan": "{count} από το ρόστερ ήταν στο κλαν",
+  "no-tournament-matches-the-current": "Κανένα τουρνουά δεν αντιστοιχεί στα τρέχοντα φίλτρα.",
+  "played-as": "Παιγμένο ως",
+  "result": "Αποτέλεσμα",
+  "status": "Κατάσταση",
+  "tier": "επίπεδο"
+}

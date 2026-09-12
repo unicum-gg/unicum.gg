@@ -1,0 +1,6 @@
+{
+  "day": "Rangert etter {metric} de siste 24 timene (min. 20 kamper).",
+  "week": "Rangert etter {metric} de siste 7 dager (min. 140 kamper).",
+  "month": "Rangert etter {metric} de siste 30 dager (min. 600 kamper).",
+  "overall": "Rangert etter {metric} totalt (min. 20 000 kamper)."
+}

@@ -1,0 +1,4 @@
+{
+  "chart-label": "Online játékosok szerverenként az elmúlt {range} során",
+  "not-enough-recorded-yet-for": "Még nincs elegendő rögzített adat ehhez a tartományhoz. A mintavételezés folytatásával kitöltődik."
+}

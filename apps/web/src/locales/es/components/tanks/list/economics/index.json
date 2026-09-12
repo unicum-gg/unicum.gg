@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "Filas por página",
+  "free-xp-from": "XP gratis desde",
+  "xp-1-gold": "XP = 1 oro",
+  "previous-page": "Página anterior",
+  "page": "Página {current} / {totalPages}",
+  "next-page": "Siguiente página",
+  "all": "Todo"
+}

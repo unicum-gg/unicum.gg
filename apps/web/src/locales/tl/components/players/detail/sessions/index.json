@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Wala pang session. Lumilitaw ang mga ito kapag dalawang beses nang nasample ang account na may mga laban sa pagitan, na awtomatikong nangyayari habang naglalaro ito.",
+  "bar-height-is-battles-played": "Ang taas ng bar ay ang mga laban na nilaro, at ang kulay ay ang {metric} ng {granularity} na iyon, gamit ang parehong mga saklaw na ginagamit ng website sa iba pang bahagi.",
+  "title": "Mga session ni {nickname}",
+  "title-count": "Mga session ni {nickname} ({count})",
+  "granularity": {
+    "day": "araw",
+    "week": "linggo",
+    "month": "buwan",
+    "daily": "Araw-araw",
+    "weekly": "Lingguhan",
+    "monthly": "Buwanang"
+  },
+  "week-of": "Linggo ng {date}"
+}

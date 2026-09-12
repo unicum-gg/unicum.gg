@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Unas palabras más: faltan {count}.",
+  "at-winrate": "a {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "No se pudo retirar. Inténtalo de nuevo dentro de un momento.",
+  "hide-the-detailed-axes": "Ocultar los ejes detallados",
+  "not-enough-battles": "No has jugado suficientes batallas con este tanque para que tu voto cuente.",
+  "published-once-read": "Se publicará cuando un moderador la haya leído. Tus estrellas cuentan de inmediato.",
+  "rate-it-in-detail": "Valóralo en detalle (opcional)",
+  "review": {
+    "none": "Calificación guardada.",
+    "queued": "Clasificación guardada. Tu reseña está pendiente de revisión por un moderador.",
+    "published": "Clasificación guardada. Tu reseña ya está publicada.",
+    "pending": "Clasificación guardada. Tu reseña sigue pendiente de revisión por un moderador.",
+    "rejected": "Clasificación guardada. Tu reseña anterior no se publicó, así que solo cuentan tus estrellas.",
+    "closed": "Clasificación guardada. Ahora mismo no se admiten opiniones escritas, por lo que el texto no se guardó."
+  },
+  "save-failed": "No se pudo guardar. Inténtalo de nuevo dentro de un momento.",
+  "say-why-optional": "Di por qué (opcional)",
+  "signed-with": "Firmada con tus {battles} batallas en este vehículo",
+  "submit-my-rating": "Enviar mi valoración",
+  "too-many-edits": "Son demasiados cambios de golpe. Espera un minuto.",
+  "update-my-rating": "Actualizar mi valoración",
+  "what-it-is-good-at": "Qué hace bien, qué no y quién debería jugar con él.",
+  "withdraw": "Retirar",
+  "your-rating-has-been-withdrawn": "Tu clasificación ha sido retirada.",
+  "your-review-is-waiting-on": "Tu reseña está pendiente de revisión por un moderador. Solo tú puedes verla aquí.",
+  "your-review-was-not-published": "Tu reseña no se publicó. Tus estrellas siguen contando para la media."
+}

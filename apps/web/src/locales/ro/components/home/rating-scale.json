@@ -1,0 +1,21 @@
+{
+  "title": "Scarǎ de evaluare",
+  "description": "Pragurile de culoare folosite pe site pentru rata victoriilor și pentru indicatorul de rating selectat în bara de navigare.",
+  "tier": "nivel",
+  "tiers": {
+    "top": "Cei mai buni",
+    "excellent": "Excelent",
+    "super": "Super",
+    "very-good": "Foarte bine",
+    "good": "Bine",
+    "average": "Medie",
+    "below-avg": "Sub medie",
+    "bad": "Rău",
+    "very-bad": "Foarte rău"
+  },
+  "rating-colors": "Culori rating",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

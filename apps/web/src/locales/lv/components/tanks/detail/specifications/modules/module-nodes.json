@@ -1,0 +1,17 @@
+{
+  "aim-time": "Mērķēšanas laiks",
+  "ammo": "Munīcija",
+  "armor": "Bruņas",
+  "dispersion": "Izkliede",
+  "fire-chance": "Uguns iespēja",
+  "gun-arc": "Šautenes leņķis",
+  "hit-points": "Uzturēšanas punkti",
+  "load-limit": "Kravas limits",
+  "mounted-on": "Uzstādīts uz {tanks}",
+  "power": "Jauda",
+  "reload": "Pārlāde",
+  "signal-range": "Signāla diapazons",
+  "tier": "Līmenis {tier}",
+  "traverse": "Pārvietošanās",
+  "view-range": "Skata diapazons"
+}

@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "Išskaidymas rodomas nuo {min}, todėl forma pasako ką nors apie tanką, o ne apie vieną žmogų.",
+  "community-rating-by-axis": "Bendruomenės vertinimas pagal ašis",
+  "from-votes": "Remiantis {count} išsamiais balsais.",
+  "from-votes-one": "Remiantis {count} išsamiu balsu.",
+  "nobody-yet": "Dar niekas neužpildė išsamių ašių.",
+  "only-votes": "Kol kas tik {count} išsamių balsų.",
+  "only-votes-one": "Kol kas tik {count} išsamus balsas."
+}

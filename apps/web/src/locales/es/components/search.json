@@ -1,0 +1,27 @@
+{
+  "placeholder": "Buscar jugadores, clanes, tanques, mapas o términos",
+  "type": "Tipo",
+  "types": {
+    "all": "Todo",
+    "players": "Jugadores",
+    "clans": "Clanes",
+    "tanks": "Tanques",
+    "maps": "Mapas",
+    "glossary": "Glosario"
+  },
+  "sections": {
+    "players": "Jugadores",
+    "clans": "Clanes",
+    "tanks": "Tanques",
+    "maps": "Mapas",
+    "glossary": "Glosario",
+    "recent": "Recientes",
+    "favorites": "Favoritos"
+  },
+  "searching": "Buscando…",
+  "errored": "Algo salió mal. Inténtalo de nuevo.",
+  "empty": "No se encontraron resultados",
+  "remove-recent": "Eliminar de recientes",
+  "add-favorite": "Agregar a favoritos",
+  "remove-favorite": "Eliminar de favoritos"
+}

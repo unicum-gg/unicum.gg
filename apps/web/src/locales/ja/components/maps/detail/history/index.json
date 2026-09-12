@@ -1,0 +1,12 @@
+{
+  "added": "追加された",
+  "before-update": "更新{version}以前",
+  "common-test": "共通テスト",
+  "every-update-that-changed-this": "このマップを変更したすべての更新。新しいものから順に、ゲームクライアント自体から読み取っています。",
+  "in-the-game": "ゲーム内",
+  "n-changes": "{count, plural, other {#件の変更}}",
+  "not-released-wargaming-can-still": "未リリース。更新が配信される前に、Wargamingはこれらを変更またはドロップする可能性があります。",
+  "removed": "削除された",
+  "title": "{map}の変更",
+  "update": "更新 {version}"
+}

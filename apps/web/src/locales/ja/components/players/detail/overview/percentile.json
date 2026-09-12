@@ -1,0 +1,7 @@
+{
+  "win-rate": "勝率",
+  "versus": "{metric} 対 {region}",
+  "top": "トップ {percent}%",
+  "ahead-of": "{percent}%を上回る",
+  "against": "{battles}戦闘以上をプレイした、追跡対象の{region}アカウント{players}件との比較。"
+}

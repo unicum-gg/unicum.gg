@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Workflow hinzufügen",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Jeder Workflow aktiviert seine Reserven innerhalb eines Zeitfensters, sobald genügend Mitglieder an einer laufenden Spielsitzung teilnehmen. Er wird über dein Konto ausgeführt, du musst also nicht online sein. Füge so viele hinzu, wie du brauchst.",
+  "n-online": "/ {count} Online",
+  "officer": "Offizier",
+  "online": "Online",
+  "recent-activations": "letzte Aktivierungen",
+  "reserve": "Reserve",
+  "stronghold-boosts": "Festungsboni",
+  "when": "Wenn",
+  "workflow": "Workflow"
+}

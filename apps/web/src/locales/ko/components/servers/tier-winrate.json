@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "각 셀은 플레이어가 최소 {minBattles}회 전투를 플레이한 모든 전차를 대상으로 해당 단계에서 해당 구간이 기록한 전투 승리 비율입니다. 따라서 해당 단계를 플레이하는 사람들의 실제 플레이를 나타냅니다. {TIERWINRATETHINCELL}회 미만의 전투를 바탕으로 한 셀은 희미하게 표시됩니다. 실력 이외의 이유로 변동하기 때문입니다. 색상은 사이트의 다른 곳에서 사용하는 것과 같은 승률 구간입니다.",
+  "cell-no-sample": "{where}, 샘플 없음",
+  "cell-winrate": "{where}, {battles}전투 기준 승률 {winrate}",
+  "metric-band": "{metric} 구간",
+  "nothing-recorded": "아직 {metric}에 대한 기록이 없습니다. 표는 매일 밤 다시 생성됩니다.",
+  "over-battles-from-accounts": "{players}개 계정의 {battles}전투 기준 {winrate}",
+  "over-n-battles": "{battles}전투 기준",
+  "what-players-win-by-tier": "{label} 플레이어들이 단계별로 승리하는 것"
+}

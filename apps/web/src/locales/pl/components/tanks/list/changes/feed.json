@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} dn.",
+  "n-tanks": "{count, plural, one {# czołg} few {# czołgi} many {# czołgów} other {# czołgów}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Nie odnotowano jeszcze żadnych zmian w czołgach. Gdy Wargaming będzie zmieniać balans czołgów, tutaj pojawią się wzmocnienia i osłabienia z każdej aktualizacji.",
+  "update": "Odśwież {version}"
+}

@@ -1,0 +1,16 @@
+{
+  "channel": "Kanal",
+  "clan": "Klan",
+  "class": "Typ",
+  "combined": "Kombinerad",
+  "damage-dealt-plus-assisted-as-declared-by-th": "Utdelad skada plus assisterad skada, enligt inskickarens uppgifter.",
+  "format": "Format",
+  "map": "Karta",
+  "mode": "Läge",
+  "nation": "Nation",
+  "result": "Resultat",
+  "spawn": "Spawn",
+  "tank": "Tank",
+  "tank-clan": "Tank / Klan",
+  "tier": "Nivå"
+}

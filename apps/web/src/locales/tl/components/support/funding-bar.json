@@ -1,0 +1,18 @@
+{
+  "caught-up": "Ganap nang nakahabol, salamat. Ang lahat ng sobra ay napupunta sa mas malaking throughput at mga bagong feature.",
+  "covered-label": "Naka-saklaw",
+  "covered-sentence": "Nasagot na ng mga tagasuporta ang {received} sa {spent} na nagastos hanggang ngayon.",
+  "days-out-of-pocket": "{days} mga araw na sariling gastos",
+  "from-supporter-one": "mula sa {count} tagasuporta",
+  "from-supporters": "mula sa {count} mga tagasuporta",
+  "gap-growing": "Ang dagdag na {amount}/buwan ang pumipigil sa paglaki ng kakulangan.",
+  "goal": "layunin {amount}",
+  "of-that-total": "mula sa kabuuang iyon",
+  "pledges-cover": "Sinasagot na ng mga pledge ang buwanang bayarin.",
+  "raised-amount": "{amount} na nakalimas",
+  "raised-label": "Nakalimas",
+  "run-at-a-loss": "Nalulugi si {name} mula pa noong {since}.",
+  "run-rate": "Buwanang gastusin: {pledged}/buwan ang ipinangako kumpara sa {cost}/buwan para patakbuhin ito.",
+  "spent-since-launch": "Nagastos mula nang ilunsad",
+  "to-catch-up": "{amount} para ganap na makahabol."
+}

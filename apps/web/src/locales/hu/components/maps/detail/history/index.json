@@ -1,0 +1,12 @@
+{
+  "added": "Hozzáadva",
+  "before-update": "Frissítés előtt: {version}",
+  "common-test": "Közönséges Teszt",
+  "every-update-that-changed-this": "A térképet módosító összes frissítés, a legújabbal kezdve, közvetlenül a játékkliensből kiolvasva.",
+  "in-the-game": "A játékban",
+  "n-changes": "{count, plural, one {# változás} other {# változások}}",
+  "not-released-wargaming-can-still": "Még nem jelent meg. A Wargaming a Frissítés kiadása előtt még bármit megváltoztathat vagy elvethet ezek közül.",
+  "removed": "Eltávolítva",
+  "title": "Változások a(z) {map} térképen",
+  "update": "Frissítés {version}"
+}

@@ -1,0 +1,17 @@
+{
+  "aim-time": "Oras ng pagtuon",
+  "ammo": "Amunisyon",
+  "armor": "Armour",
+  "dispersion": "Pangalat",
+  "fire-chance": "Tsansa ng apoy",
+  "gun-arc": "Arko ng baril",
+  "hit-points": "Hit points",
+  "load-limit": "Hangganan ng karga",
+  "mounted-on": "Naka-mount sa {tanks}",
+  "power": "Lakas",
+  "reload": "Pag-reload",
+  "signal-range": "Saklaw ng signal",
+  "tier": "Antas {tier}",
+  "traverse": "Pag-ikot",
+  "view-range": "Saklaw ng pagtingin"
+}

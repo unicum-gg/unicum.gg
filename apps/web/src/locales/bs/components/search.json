@@ -1,0 +1,27 @@
+{
+  "placeholder": "Pretražite igrače, klanove, tenkove, mape ili pojmove",
+  "type": "Tip",
+  "types": {
+    "all": "Sve",
+    "players": "Igrači",
+    "clans": "Klana",
+    "tanks": "Oklopna vozila",
+    "maps": "Mape",
+    "glossary": "Rječnik"
+  },
+  "sections": {
+    "players": "Igrači",
+    "clans": "Klana",
+    "tanks": "Oklopna vozila",
+    "maps": "Mape",
+    "glossary": "Rječnik",
+    "recent": "Nedavno",
+    "favorites": "Favoriti"
+  },
+  "searching": "Pretraživanje…",
+  "errored": "Nešto nije u redu. Pokušajte ponovo.",
+  "empty": "Nema rezultata",
+  "remove-recent": "Ukloni iz nedavnih",
+  "add-favorite": "Dodaj u omiljene",
+  "remove-favorite": "Ukloni iz omiljenih"
+}

@@ -1,0 +1,17 @@
+{
+  "aim-time": "निशाना लगाने का समय",
+  "ammo": "गोला-बारूद",
+  "armor": "गति",
+  "dispersion": "विसरण",
+  "fire-chance": "आग लगने की संभावना",
+  "gun-arc": "गन आर्क",
+  "hit-points": "हिट अंक",
+  "load-limit": "Load limit",
+  "mounted-on": "{tanks} पर लगा हुआ",
+  "power": "शक्ति",
+  "reload": "रीलोड",
+  "signal-range": "संकेत दूरी",
+  "tier": "टियर {tier}",
+  "traverse": "Traverse",
+  "view-range": "दृश्य सीमा"
+}

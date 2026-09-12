@@ -1,5 +1,10 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
+import { useLocale } from "@onruntime/translations/react";
+import { Interpolate } from "@/components/interpolate";
+import { joinNames } from "@/lib/list-format";
 import { useId, useState } from "react";
 import { toast } from "sonner";
 import type { KeyedMutator } from "swr";
@@ -44,6 +49,9 @@ type Form = {
   picked: Record<string, number>;
 };
 
+// A moment rather than a day: this is when the reserve last fired.
+const DATE_PATTERN = "d MMM yyyy, HH:mm";
+
 const draftForm = (): Form => ({
   name: "",
   enabled: true,
@@ -81,6 +89,9 @@ export function WorkflowCard({
   mutate: KeyedMutator<BoostConsoleData>;
   onDiscardDraft?: () => void;
 }) {
+  const { t } = useTranslation("components/clans/detail/boost-workflow-card");
+  const { date } = useFormat();
+  const { locale } = useLocale();
   const [form, setForm] = useState<Form>(() =>
     workflow ? formFrom(workflow) : draftForm(),
   );
@@ -148,7 +159,7 @@ export function WorkflowCard({
       onDiscardDraft?.();
       toast.success(claim ? "Now running on your account" : "Workflow saved");
     } catch {
-      toast.error("Could not save the workflow");
+      toast.error(t("could-not-save-the-workflow"));
     } finally {
       setSaving(false);
     }
@@ -164,9 +175,9 @@ export function WorkflowCard({
       const res = await fetch(`${key}?id=${workflow.id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(String(res.status));
       await mutate();
-      toast.success("Workflow removed");
+      toast.success(t("workflow-removed"));
     } catch {
-      toast.error("Could not remove the workflow");
+      toast.error(t("could-not-remove-the-workflow"));
     } finally {
       setSaving(false);
     }
@@ -183,7 +194,7 @@ export function WorkflowCard({
       if (!res.ok) throw new Error(String(res.status));
       setSim(await res.json());
     } catch {
-      toast.error("Test run failed");
+      toast.error(t("test-run-failed"));
     } finally {
       setSimming(false);
     }
@@ -197,7 +208,7 @@ export function WorkflowCard({
           <Input
             value={form.name}
             onChange={(e) => patch({ name: e.target.value })}
-            placeholder="Workflow name (e.g. Weekday evenings)"
+            placeholder={t("workflow-name-e-g-weekday")}
             className="h-8 max-w-xs font-medium"
           />
           <div className="flex items-center gap-2">
@@ -207,7 +218,7 @@ export function WorkflowCard({
               id={`en-${uid}`}
             />
             <Label htmlFor={`en-${uid}`} className="cursor-pointer text-sm">
-              {form.enabled ? "Enabled" : "Disabled"}
+              {form.enabled ? t("enabled") : t("disabled")}
             </Label>
           </div>
         </PanelHeader>
@@ -216,8 +227,7 @@ export function WorkflowCard({
           <div className="flex flex-wrap items-end gap-5">
             <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-fd-muted-foreground">
-                Active days
-              </Label>
+                {t("active-days")}</Label>
               <div className="flex gap-1">
                 {DAY_LABELS.map((d, i) => {
                   const on = (form.days & (1 << i)) !== 0;
@@ -239,7 +249,7 @@ export function WorkflowCard({
               </div>
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs text-fd-muted-foreground">From</Label>
+              <Label className="text-xs text-fd-muted-foreground">{t("from")}</Label>
               <Input
                 type="time"
                 value={form.start}
@@ -248,7 +258,7 @@ export function WorkflowCard({
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs text-fd-muted-foreground">To</Label>
+              <Label className="text-xs text-fd-muted-foreground">{t("to")}</Label>
               <Input
                 type="time"
                 value={form.end}
@@ -258,8 +268,7 @@ export function WorkflowCard({
             </div>
             <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-fd-muted-foreground">
-                Min online
-              </Label>
+                {t("min-online")}</Label>
               <Input
                 type="number"
                 min={1}
@@ -273,18 +282,14 @@ export function WorkflowCard({
 
           <div className="-mt-2 flex flex-col gap-1">
             <p className="text-xs text-fd-muted-foreground">
-              Times are in {tzLabel(tz)}, your timezone.
-            </p>
+              {t("times-are-in-your-timezone", { tz: tzLabel(tz) })}</p>
             {!windowValid && (
               <p className="text-xs text-red-500">
-                The end time must be after the start time. A window cannot run
-                past midnight.
-              </p>
+                {t("the-end-time-must-be")}</p>
             )}
             {!minOnlineValid && (
               <p className="text-xs text-red-500">
-                Minimum online must be between 1 and 100.
-              </p>
+                {t("minimum-online-must-be-between")}</p>
             )}
           </div>
 
@@ -298,8 +303,7 @@ export function WorkflowCard({
 
           <div className="flex flex-col gap-2">
             <Label className="text-xs text-fd-muted-foreground">
-              Schedule preview
-            </Label>
+              {t("schedule-preview")}</Label>
             <BoostSchedulePreview
               windowStart={startMin}
               windowEnd={endMin}
@@ -307,12 +311,22 @@ export function WorkflowCard({
               reserves={scheduleReserves}
             />
             {activeSelected.length > 0 && (
+              /* One sentence with the reserves as a hole, and its own key for
+                 the plural: a language does not necessarily change the verb
+                 where English changes "is" to "are". */
               <p className="text-xs text-fd-muted-foreground">
-                {activeSelected.map((r) => r.name).join(", ")}{" "}
-                {activeSelected.length > 1 ? "are" : "is"} already running. The
-                workflow never stacks, it waits for that to expire, then
-                re-activates if you are still in the window (so it starts later
-                than {form.start} today).
+                {t(
+                  activeSelected.length > 1
+                    ? "already-running-many"
+                    : "already-running-one",
+                  {
+                    reserves: joinNames(
+                      activeSelected.map((r) => r.name),
+                      locale,
+                    ),
+                    start: form.start,
+                  },
+                )}
               </p>
             )}
           </div>
@@ -323,19 +337,27 @@ export function WorkflowCard({
             <div className="text-xs text-fd-muted-foreground">
               {workflow && (
                 <span>
-                  Runs on{" "}
-                  <span className="font-medium text-fd-foreground">
-                    {isOwner
-                      ? "your account"
-                      : workflow.ownerName || "another officer"}
-                  </span>
-                  .{" "}
+                  <Interpolate
+                    template={t("runs-on")}
+                    values={{
+                      owner: (
+                        <span className="font-medium text-fd-foreground">
+                          {isOwner
+                            ? t("your-account")
+                            : workflow.ownerName || t("another-officer")}
+                        </span>
+                      ),
+                    }}
+                  />{" "}
                 </span>
               )}
-              {workflow?.status === "token_expired" &&
-                "That Wargaming session expired, it needs a fresh login to keep running. "}
+              {workflow?.status === "token_expired" && `${t("session-expired")} `}
               {workflow?.lastActivatedAt &&
-                `Last activated ${new Date(workflow.lastActivatedAt).toLocaleString()}.`}
+                `${t("last-activated", {
+                  when: date(DATE_PATTERN).format(
+                    new Date(workflow.lastActivatedAt),
+                  ),
+                })} `}
             </div>
             <div className="flex gap-2">
               <Button
@@ -343,11 +365,11 @@ export function WorkflowCard({
                 onClick={testRun}
                 disabled={simming || !formValid}
               >
-                {simming ? "Testing…" : "Test run"}
+                {simming ? t("testing") : t("test-run")}
               </Button>
               {(workflow || onDiscardDraft) && (
                 <Button variant="ghost" onClick={remove} disabled={saving}>
-                  {workflow ? "Delete" : "Discard"}
+                  {workflow ? t("delete") : t("discard")}
                 </Button>
               )}
               {workflow && !isOwner && (
@@ -356,11 +378,10 @@ export function WorkflowCard({
                   onClick={() => save(true)}
                   disabled={saving || !formValid}
                 >
-                  Run on my account
-                </Button>
+                  {t("run-on-my-account")}</Button>
               )}
               <Button onClick={() => save()} disabled={saving || !formValid}>
-                {saving ? "Saving…" : "Save"}
+                {saving ? t("saving") : t("save")}
               </Button>
             </div>
           </div>

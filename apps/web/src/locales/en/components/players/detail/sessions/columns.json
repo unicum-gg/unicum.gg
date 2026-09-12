@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Rating (WN)",
+    "tip": "Rating of these battles alone, not of the account"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Win rate over these battles"
+  },
+  "avgDamage": {
+    "label": "Avg damage"
+  },
+  "avgFrags": {
+    "label": "Avg frags",
+    "tip": "Enemies destroyed per battle"
+  },
+  "damageRatio": {
+    "label": "Damage ratio",
+    "tip": "Damage caused over damage received"
+  },
+  "kd": {
+    "label": "Destruction ratio",
+    "tip": "Enemies destroyed over vehicles lost"
+  },
+  "survivalRate": {
+    "label": "Battles survived"
+  },
+  "avgSpotted": {
+    "label": "Avg spotted",
+    "tip": "Enemies spotted per battle"
+  },
+  "avgDefense": {
+    "label": "Base defense",
+    "tip": "Defence points per battle"
+  },
+  "avgXp": {
+    "label": "Avg XP"
+  }
+}

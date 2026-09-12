@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Hodnotenie (WN)",
+    "tip": "Hodnotenie iba za tieto bitky, nie za celý účet"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Miera víťazstiev v týchto bitkách"
+  },
+  "avgDamage": {
+    "label": "Priemerné poškodenie"
+  },
+  "avgFrags": {
+    "label": "Priemerné zásahy",
+    "tip": "Počet zničených nepriateľov na bitku"
+  },
+  "damageRatio": {
+    "label": "Poměr poškodenia",
+    "tip": "Pomer spôsobeného poškodenia k prijatému poškodeniu"
+  },
+  "kd": {
+    "label": "Pomer zničenia",
+    "tip": "Pomer zničených nepriateľov k strateným vozidlám"
+  },
+  "survivalRate": {
+    "label": "Prežité bitky"
+  },
+  "avgSpotted": {
+    "label": "Priemerné odhalenie",
+    "tip": "Počet odhalených nepriateľov na bitku"
+  },
+  "avgDefense": {
+    "label": "Obrana základne",
+    "tip": "Počet bodov obrany na bitku"
+  },
+  "avgXp": {
+    "label": "Priemerné XP"
+  }
+}

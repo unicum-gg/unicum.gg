@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "player": "Speler",
+  "members": "Leden",
+  "battles": "Gevechten",
+  "avg-damage": "Gem. schade",
+  "avg-xp": "Gem. XP",
+  "winrate": "WR %",
+  "result": "Resultaat",
+  "tournament": "Toernooi",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

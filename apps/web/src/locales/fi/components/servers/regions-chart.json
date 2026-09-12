@@ -1,0 +1,4 @@
+{
+  "chart-label": "Paikalla olevat pelaajat aluetta kohti viimeisten {range} aikana",
+  "not-enough-recorded-yet-for": "Tästä vaihteluvälistä ei ole vielä tallennettu riittävästi tietoja. Se täyttyy näytteenoton jatkuessa."
+}

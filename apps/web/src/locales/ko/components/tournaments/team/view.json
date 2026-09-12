@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "아직 대진이 정해지지 않았습니다. 토너먼트가 시작된 후 이 팀의 대진이 여기에 표시됩니다.",
+  "each-map-is-played-twice": "각 지도는 양쪽 진영에서 한 번씩 총 두 번 플레이합니다. 마지막 지도는 한 번만 플레이하며 승부를 결정합니다.",
+  "first-battle-at": "첫 전투, {when}",
+  "lost": "패배",
+  "matches": "매치 ({length})",
+  "never-played": "이 팀은 대진에 한 번도 참여하지 않았습니다. 등록은 했지만 대진이 팀에 배정되지 않았으며, 이는 확인되지 않은 명단에 발생하는 일입니다.",
+  "no-maps-recorded": "이 대진에 기록된 지도가 없습니다.",
+  "no-roster-recorded-for-this": "이 팀에 기록된 명단이 없습니다.",
+  "of-players-on-the-day": "당일 플레이어 {length}명 중 {members}명",
+  "played-on-uncatalogued": "지도 목록에 없는 {maps}에서 플레이함.",
+  "roster": "로스터 ({length})",
+  "stage-group": "{stage} · 그룹 {order}",
+  "team-1": "1팀",
+  "team-2": "2팀",
+  "tournaments": "토너먼트",
+  "when-the-first-battle-started": "첫 전투가 시작된 시간",
+  "won": "승리"
+}

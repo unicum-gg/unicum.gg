@@ -1,7 +1,8 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/link";
 import {
   CopySimpleIcon,
   PushPinIcon,
@@ -47,6 +48,7 @@ import { cn } from "@/lib/utils";
  * needs before opening the full setup: what the vehicle ships with, and what it
  * becomes fully researched. */
 function ModulePreset({ build }: { build: TankBuild }) {
+  const { t } = useTranslation("components/tanks/compare/column-header");
   // Nothing to switch between when stock and top are the same configuration,
   // which every tier X now is (WG stopped shipping them with stock modules).
   // Note this is not `isStockModules === isTopModules`: on a configuration the
@@ -65,8 +67,7 @@ function ModulePreset({ build }: { build: TankBuild }) {
             : "text-fd-muted-foreground hover:bg-fd-secondary/50",
         )}
       >
-        Stock
-      </button>
+        {t("stock")}</button>
       <button
         type="button"
         onClick={build.selectTopModules}
@@ -77,8 +78,7 @@ function ModulePreset({ build }: { build: TankBuild }) {
             : "text-fd-muted-foreground hover:bg-fd-secondary/50",
         )}
       >
-        Top
-      </button>
+        {t("top")}</button>
     </div>
   );
 }
@@ -118,6 +118,8 @@ export function TankCompareColumnHeader({
   /** Put this column's setup on every other column. */
   onApplyToAll?: (setupToken: string) => void;
 }) {
+  const { t: tCopy } = useTranslation("components/tanks/compare/column-header");
+  const { t } = useTranslation("components/tanks/compare/column-header");
   const [open, setOpen] = useState(false);
   const { meta } = vehicle;
   const onTest = isTestColumn(vehicle);
@@ -180,8 +182,16 @@ export function TankCompareColumnHeader({
           <button
             type="button"
             onClick={onPin}
-            aria-label={pinned ? `${meta.name} is the reference` : `Compare against ${meta.name}`}
-            title={pinned ? "Reference column" : "Compare the others against this one"}
+            aria-label={
+              pinned
+                ? t("is-the-reference", { tank: meta.name })
+                : t("compare-against", { tank: meta.name })
+            }
+            title={
+              pinned
+                ? t("reference-column")
+                : t("compare-the-others-against-this-one")
+            }
             className={cn(
               "inline-flex size-5 cursor-pointer items-center justify-center rounded transition-colors",
               pinned
@@ -195,7 +205,7 @@ export function TankCompareColumnHeader({
             <button
               type="button"
               onClick={onRemove}
-              aria-label={`Remove ${meta.name}`}
+              aria-label={t("remove-tank", { tank: meta.name })}
               className="inline-flex size-5 cursor-pointer items-center justify-center rounded text-fd-muted-foreground/60 transition-colors hover:bg-fd-border/50 hover:text-fd-foreground"
             >
               <XIcon className="size-3.5" weight="bold" />
@@ -228,11 +238,11 @@ export function TankCompareColumnHeader({
           <Tooltip>
             <TooltipTrigger asChild>
               <span
-                aria-label="Highest overall score"
+                aria-label={t("highest-overall-score")}
                 className="inline-block size-1.5 shrink-0 translate-y-[-1px] rounded-full bg-fd-primary"
               />
             </TooltipTrigger>
-            <TooltipContent>Highest overall score of this comparison</TooltipContent>
+            <TooltipContent>{t("highest-overall-score-of-this")}</TooltipContent>
           </Tooltip>
         )}
       </div>
@@ -247,7 +257,7 @@ export function TankCompareColumnHeader({
         <Tooltip>
           <TooltipTrigger asChild>
             <div className="flex w-fit cursor-help items-baseline gap-1.5">
-              <span className="text-xs text-fd-muted-foreground">Overall</span>
+              <span className="text-xs text-fd-muted-foreground">{t("overall")}</span>
               <span
                 className={cn(
                   "text-sm font-semibold tabular-nums",
@@ -259,11 +269,7 @@ export function TankCompareColumnHeader({
             </div>
           </TooltipTrigger>
           <TooltipContent className="max-w-64">
-            Where this vehicle sits across the whole catalogue, out of{" "}
-            {MAX_SCORE}: the average of its four category scores, as configured
-            here. A summary, not a verdict, a scout and a heavy reach the same
-            number by being good at different things.
-          </TooltipContent>
+            {t("where-this-vehicle-sits-across", { MAXSCORE: MAX_SCORE })}</TooltipContent>
         </Tooltip>
       )}
 
@@ -280,8 +286,8 @@ export function TankCompareColumnHeader({
           <DialogTrigger asChild>
             <button
               type="button"
-              aria-label={`Configure ${meta.name}`}
-              title="Ammunition, equipment, crew and progression"
+              aria-label={t("configure-tank", { tank: meta.name })}
+              title={t("ammunition-equipment-crew-and-progression")}
               className={cn(
                 "inline-flex cursor-pointer items-center gap-1 rounded-md border px-1.5 py-0.5 text-[0.6875rem] transition-colors",
                 build.canResetAll
@@ -290,8 +296,7 @@ export function TankCompareColumnHeader({
               )}
             >
               <SlidersHorizontalIcon className="size-3" weight="bold" />
-              Setup
-            </button>
+              {tCopy("setup")}</button>
           </DialogTrigger>
           <DialogContent className="max-h-[85vh] gap-0 overflow-y-auto p-0 sm:max-w-3xl">
             {/* `pr-12` keeps the header's actions clear of the dialog's own
@@ -299,13 +304,10 @@ export function TankCompareColumnHeader({
             <DialogHeader className="flex-row flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-fd-border py-3 pr-12 pl-4">
               <div>
                 <DialogTitle className="text-base">
-                  {meta.name} setup
+                  {t("tank-setup", { tank: meta.name })}
                 </DialogTitle>
                 <DialogDescription className="sr-only">
-                  Ammunition, equipment, consumables, directives, crew and
-                  progression for this column. Every change moves its
-                  characteristics in the comparison behind.
-                </DialogDescription>
+                  {t("ammunition-equipment-consumables-directives-crew")}</DialogDescription>
               </div>
               <div className="flex items-center gap-3">
                 {/* Comparing vehicles that are not equipped alike compares the
@@ -323,8 +325,7 @@ export function TankCompareColumnHeader({
                     className="inline-flex cursor-pointer items-center gap-1.5 text-xs text-fd-muted-foreground hover:text-fd-foreground hover:underline"
                   >
                     <CopySimpleIcon className="size-3.5" weight="bold" />
-                    Apply to every column
-                  </button>
+                    {tCopy("apply-to-every-column")}</button>
                 )}
                 {build.canResetAll && (
                   <button
@@ -332,8 +333,7 @@ export function TankCompareColumnHeader({
                     onClick={build.resetAll}
                     className="cursor-pointer text-xs text-fd-muted-foreground hover:text-fd-foreground hover:underline"
                   >
-                    Reset all
-                  </button>
+                    {t("reset-all")}</button>
                 )}
               </div>
             </DialogHeader>

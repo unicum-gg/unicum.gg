@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Für diesen Clan sind noch keine Panzerdaten verfügbar.",
+  "no-tanks-match-these-filters": "Keine Panzer entsprechen diesen Filtern.",
+  "nation": "Nation",
+  "type": "Typ",
+  "tier": "Stufe",
+  "name": "Name",
+  "members": "Mitglieder",
+  "battles": "Gefechte",
+  "avg-damage": "Durchschnittsschaden",
+  "avg-xp": "Durchschnittliche XP",
+  "wr": "WR"
+}

@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Tengelyenként",
+  "by-server": "Szerver szerint",
+  "community-verdict": "Közösségi vélemény",
+  "every-server-one-average": "Minden szerver, egy átlag",
+  "n-shown": ", {count} látható",
+  "opinion": "{count, plural, one {# vélemény} other {# vélemények}}",
+  "opinion-next-to-win-rate": "Vélemény a győzelmi arány mellett, a(z) {tier}. szinten belül",
+  "rate-the": "Értékeld: {tankName}",
+  "reputation-against-results": "Hírnév az eredményekkel szemben",
+  "same-tank-different-metas": "Ugyanaz a tank, különböző meták",
+  "the-same-tank-by-how": "Ugyanaz a tank a szavazó teljesítménye szerint",
+  "what-players-wrote": "Mit írtak a játékosok",
+  "who-is-saying-it": "Ki mondja ezt"
+}

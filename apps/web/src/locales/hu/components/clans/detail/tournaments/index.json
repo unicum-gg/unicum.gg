@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "[{tag}] még nem indult az általunk nyilvántartott bajnokságok egyikén sem. Egy csapat akkor számít ehhez a klánhoz tartozónak, ha a játék napján a játékoskeretének legalább a negyede a klán tagja volt.",
+  "won": "{count} nyert"
+}

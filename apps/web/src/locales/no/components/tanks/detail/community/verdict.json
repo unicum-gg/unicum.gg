@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Hver stemme kommer fra en konto som har spilt denne stridsvognen.",
+  "every-vote-played-average": "Hver stemme kommer fra en konto som har spilt denne stridsvognen, i gjennomsnitt {battles} kamper i den.",
+  "fun": "Moro",
+  "how-good-the-tank-is": "Hvor god stridsvognen er",
+  "how-much-people-enjoy-it": "Hvor mye personer liker den",
+  "if-you-have-played-it": "Hvis du har spilt den, er du akkurat den denne siden venter på.",
+  "nobody-has-rated-this-tank": "Ingen har vurdert denne stridsvognen ennå.",
+  "overall": "Totalt",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stem"
+}

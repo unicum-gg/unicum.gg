@@ -1,0 +1,14 @@
+{
+  "date": "วันที่",
+  "featured-tournament": "ทัวร์นาเมนต์ที่โดดเด่น",
+  "format": "รูปแบบ",
+  "mode": "โหมด",
+  "no-tournament-matches-the-current": "ไม่มีการแข่งขันที่ตรงกับตัวกรองปัจจุบัน",
+  "nothing-here-right-now-wargaming": "ตอนนี้ยังไม่มีอะไรที่นี่ Wargaming เปิดการแข่งขันใหม่ทุกวัน รายการนี้จึงจะกลับมาแสดงเอง",
+  "prize": "รางวัล",
+  "region-tournaments": "การแข่งขันภูมิภาค {region} ({count})",
+  "status": "สถานะ",
+  "teams": "ทีม",
+  "tier": "ระดับ",
+  "tournament": "ทัวร์นาเมนต์"
+}

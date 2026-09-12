@@ -1,0 +1,6 @@
+{
+  "title": "Czołówka graczy World of Tanks ({region})",
+  "description": "Ranking graczy {name} w regionie {region}, ustalany według WNX, z możliwością filtrowania według języka określonego na podstawie historii przynależności do klanów.",
+  "og-title": "Najlepsi gracze",
+  "og-subtitle": "Klasyfikacja {region}"
+}

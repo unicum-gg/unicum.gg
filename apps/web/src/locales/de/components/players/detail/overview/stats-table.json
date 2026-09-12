@@ -1,0 +1,34 @@
+{
+  "stat": "Statistik",
+  "rows": {
+    "battles": "Gefechte",
+    "tier": "Stufe",
+    "wins": "Siege",
+    "losses": "Niederlagen",
+    "draws": "Unentschieden",
+    "survived": "Überlebte Gefechte",
+    "destroyed": "Zerstörte Panzer",
+    "destruction-ratio": "Zerstörungs-Verhältnis",
+    "spotted": "Entdeckte Panzer",
+    "damages": "Schaden",
+    "track-damages": "Schaden an den Ketten",
+    "spotting-damages": "Schaden durch Aufklärung",
+    "assisting-damages": "Schaden durch Unterstützung",
+    "combined-damages": "Kombinierter Schaden",
+    "base-capture": "Basiserfassung",
+    "base-defense": "Basisverteidigung",
+    "experience": "Erfahrung",
+    "hit-rate": "Trefferquote",
+    "personal-rating": "Persönliche Wertung",
+    "wtr": "World of Tanks-Wertung",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Gesamt",
+    "day": "Letzte 24h",
+    "week": "Letzte 7d",
+    "month": "Letzte 30d"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "label": "Mer",
+  "items": {
+    "tournaments": {
+      "label": "Turneringar",
+      "description": "Turneringsträd, laguppställningar och resultat, region för region"
+    },
+    "servers": {
+      "label": "Servrar",
+      "description": "Spelare online, nu och över tid"
+    },
+    "bot": {
+      "label": "Discord-bot",
+      "description": "Statistik för Spelare, klan och Tank via snedstreckskommandon"
+    },
+    "mcp": {
+      "label": "MCP-server",
+      "description": "Anslut Claude, ChatGPT eller valfri MCP-klient"
+    },
+    "api": {
+      "label": "API",
+      "description": "Gratis offentligt REST API, ingen nyckel krävs"
+    },
+    "badges": {
+      "label": "Märken",
+      "description": "Spelare och klaner: alla emblem de kan förtjäna och hur"
+    },
+    "glossary": {
+      "label": "Ordlista",
+      "description": "Alla termer i World of Tanks, förklarade"
+    },
+    "support": {
+      "label": "Stöd oss",
+      "description": "Hjälp {name} att förbli Gratis, med öppen källkod och utan reklam"
+    }
+  }
+}

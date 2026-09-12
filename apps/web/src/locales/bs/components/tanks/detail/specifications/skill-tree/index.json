@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Kliknite na dostupni čvor da ga otključate. Svaki čvor primjenjuje svoj efekat na navedene karakteristike. Boje grupišu čvorove prema vatrenoj moći, pokretljivosti, preživljavanju i mehanici vozila.",
+  "loadout-switch-no-effect": "Prebacivanje kompleta opreme u bitci. Nema efekta na karakteristiku.",
+  "title": "Nadogradnje tenka {tank}",
+  "vehicle-mechanic-no-effect": "Mehanika vozila. Nema efekta na karakteristiku."
+}

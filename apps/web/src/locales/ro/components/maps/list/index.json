@@ -1,0 +1,9 @@
+{
+  "all": "Toate",
+  "camouflage-map": "Hartă {camouflage}",
+  "modes": "{count, plural, one {# mod} few {# moduri} other {# de moduri}}",
+  "no-maps-match-your-filters": "Nicio hartă nu corespunde filtrelor tale.",
+  "search": "Caută printre {count} hărți",
+  "search-label": "Caută Hărţile",
+  "special-map": "Hartă specială"
+}

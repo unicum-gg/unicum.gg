@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Hogyan ért véget",
+  "loading-maps": "Térképek betöltése…",
+  "map": "Pálya",
+  "mode": "Mód",
+  "pick-a-map": "Válassz térképet",
+  "pick-a-mode": "Válassz játékmódot",
+  "result": "Eredmény",
+  "spawn": "Megjelenés",
+  "team": "Csapat {team}",
+  "team-spawn": "{team} csapat · {direction}",
+  "which-side-you-started": "Melyik oldalon kezdtél"
+}

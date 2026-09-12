@@ -1,0 +1,7 @@
+{
+  "win-rate": "معدل الفوز",
+  "versus": "{metric} مقابل {region}",
+  "top": "الأعلى {percent}%",
+  "ahead-of": "متقدم على {percent}%",
+  "against": "مقارنةً بـ {players} حسابًا في {region} تتم متابعتها، وتضم  {battles} معركة على الأقل."
+}

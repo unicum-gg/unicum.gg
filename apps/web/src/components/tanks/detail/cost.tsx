@@ -1,5 +1,8 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { statLabel } from "@/components/stat-label";
+
 import type { TankSpec } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { CurrencyIcon, type Currency } from "@/components/tanks/currency-icon";
@@ -8,6 +11,7 @@ import {
   XpRateInput,
 } from "@/components/tanks/free-xp-controls";
 import { useFreeXpSettings } from "@/hooks/use-free-xp";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Tooltip,
   TooltipContent,
@@ -21,7 +25,7 @@ import {
   moneyFmt,
 } from "@unicum.gg/shared";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 type CostRow = {
   label: string;
@@ -49,6 +53,9 @@ export function TankCost({
   region: Region;
   isReward: boolean;
 }) {
+  const { num } = useFormat();
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/tanks/detail/cost");
   const { tier, setTier, rate, rateInput, setRate } = useFreeXpSettings();
   const fmt = moneyFmt(region);
   const price = (gold: number) => goldToMoney(region, gold)?.amount ?? null;
@@ -59,32 +66,36 @@ export function TankCost({
   if (specs.researchXp && specs.researchXp > 0) {
     const gold = specs.researchXp / rate;
     rows.push({
-      label: "XP cost",
+      label: t("xp-cost"),
       unit: "XP",
       value: specs.researchXp,
       gold,
       money: price(gold),
       icon: "xp",
-      rate: `${intFmt.format(rate)} XP = 1 gold`,
+      rate: t("xp-per-gold", { xp: num(INT_FORMAT).format(rate), gold: t("gold") }),
     });
   }
   if (specs.buyCredits && specs.buyCredits > 0) {
     const gold = specs.buyCredits / CREDITS_PER_GOLD;
     rows.push({
-      label: "Credits cost",
+      label: t("credits-cost"),
       unit: "credits",
       value: specs.buyCredits,
       gold,
       money: price(gold),
       icon: "credits",
-      rate: `${CREDITS_PER_GOLD} credits = 1 gold`,
+      rate: t("credits-per-gold", {
+        amount: CREDITS_PER_GOLD,
+        credits: t("credits"),
+        gold: t("gold"),
+      }),
     });
   }
   // Reward tanks aren't store-purchasable; their `buyGold` is a restore-price
   // placeholder, so showing it as a cost would mislead (see the economics table).
   if (!isReward && specs.buyGold && specs.buyGold > 0) {
     rows.push({
-      label: "Cost",
+      label: t("gold-cost"),
       unit: "gold",
       value: specs.buyGold,
       gold: specs.buyGold,
@@ -121,12 +132,12 @@ export function TankCost({
             key={r.label}
             className="flex items-end justify-between gap-1 whitespace-nowrap"
           >
-            <span className="text-sm opacity-80">{r.label}</span>
+            <span className="text-sm opacity-80">{statLabel(r.label, tStats)}</span>
             <span className="mx-2 mb-1 flex-1 border-b border-dotted border-white/40" />
             <Tooltip>
               <TooltipTrigger asChild>
                 <span className="flex cursor-help items-center gap-1.5 text-sm font-bold tabular-nums">
-                  {intFmt.format(r.value)}
+                  {num(INT_FORMAT).format(r.value)}
                   {money(r.money) && (
                     <span className="text-white/60">({money(r.money)})</span>
                   )}
@@ -137,8 +148,16 @@ export function TankCost({
                 <div className="text-center">
                   <p>
                     {r.unit === "gold"
-                      ? `${intFmt.format(r.value)} gold${money(r.money) ? ` = ${money(r.money)}` : ""}`
-                      : `${intFmt.format(r.value)} ${r.unit} = ${intFmt.format(r.gold)} gold${money(r.money) ? ` = ${money(r.money)}` : ""}`}
+                      ? t(money(r.money) ? "gold-line-money" : "gold-line", {
+                          value: num(INT_FORMAT).format(r.value),
+                          money: money(r.money),
+                        })
+                      : t(money(r.money) ? "unit-line-money" : "unit-line", {
+                          value: num(INT_FORMAT).format(r.value),
+                          unit: r.unit,
+                          gold: num(INT_FORMAT).format(r.gold),
+                          money: money(r.money),
+                        })}
                   </p>
                   {r.rate && (
                     <p className="mt-1 text-xs opacity-70">{r.rate}</p>
@@ -151,7 +170,7 @@ export function TankCost({
         {rows.length > 1 && totalMoney != null && (
           <div className="flex items-end justify-between gap-1 whitespace-nowrap pt-0.5">
             <span className="text-sm font-semibold text-emerald-400">
-              Total cost
+              {t("total-cost")}
             </span>
             <span className="mx-2 mb-1 flex-1 border-b border-dotted border-white/40" />
             <Tooltip>
@@ -167,8 +186,7 @@ export function TankCost({
                     {money(totalMoney)}
                   </p>
                   <p className="mt-1 text-xs opacity-70">
-                    Priced from the WoT gold bundles
-                  </p>
+                    {t("priced-from-the-wot-gold")}</p>
                 </div>
               </TooltipContent>
             </Tooltip>
@@ -177,7 +195,7 @@ export function TankCost({
         {freeXp != null && (
           <div className="flex items-center justify-between gap-1 whitespace-nowrap">
             <span className="flex items-center gap-1 text-sm opacity-80">
-              Free XP
+              {t("free-xp")}
               <FreeXpTierSelect
                 value={effectiveTier}
                 onChange={setTier}
@@ -189,7 +207,7 @@ export function TankCost({
             <Tooltip>
               <TooltipTrigger asChild>
                 <span className="flex cursor-help items-center gap-1.5 text-sm font-bold tabular-nums">
-                  {intFmt.format(freeXp)}
+                  {num(INT_FORMAT).format(freeXp)}
                   {money(freeXpMoney) && (
                     <span className="text-white/60">({money(freeXpMoney)})</span>
                   )}
@@ -199,15 +217,19 @@ export function TankCost({
               <TooltipContent>
                 <div className="text-center">
                   <p>
-                    {intFmt.format(freeXp)} XP ={" "}
-                    {intFmt.format(Math.round((freeXpGold ?? 0)))} gold
-                    {money(freeXpMoney) ? ` = ${money(freeXpMoney)}` : ""}
+                    {t(
+                      money(freeXpMoney) ? "free-xp-line-money" : "free-xp-line",
+                      {
+                        xp: num(INT_FORMAT).format(freeXp),
+                        gold: num(INT_FORMAT).format(
+                          Math.round(freeXpGold ?? 0),
+                        ),
+                        money: money(freeXpMoney),
+                      },
+                    )}
                   </p>
                   <p className="mt-1 text-xs opacity-70">
-                    Cumulative XP to research from tier {effectiveTier},
-                    prerequisite modules included · {intFmt.format(rate)} XP = 1
-                    gold
-                  </p>
+                    {t("cumulative-xp-to-research-from", { effectiveTier, rate: num(INT_FORMAT).format(rate) })}</p>
                 </div>
               </TooltipContent>
             </Tooltip>
@@ -215,7 +237,7 @@ export function TankCost({
         )}
         {rows.some((r) => r.unit === "XP") || freeXp != null ? (
           <div className="mt-1 flex items-center gap-1 border-t border-white/10 pt-1.5 text-xs text-white/50">
-            <span>Rate</span>
+            <span>{t("rate")}</span>
             <span className="mx-1 mb-1 flex-1 self-end border-b border-dotted border-white/25" />
             <span className="flex items-center gap-1.5 whitespace-nowrap text-white/70">
               <XpRateInput
@@ -223,7 +245,7 @@ export function TankCost({
                 onChange={setRate}
                 className="h-5! border-white/25 text-white hover:border-white/40"
               />
-              XP = 1 gold
+              {t("xp-equals-gold", { gold: t("gold") })}
             </span>
           </div>
         ) : null}

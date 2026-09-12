@@ -1,0 +1,12 @@
+{
+  "before-update": "До оновлення {version}",
+  "common-test": "Загальний тест",
+  "in-common-test-not-released": "У Загальному тесті, ще не випущено",
+  "introduced": "Введено",
+  "lifecycle": "Життєвий цикл",
+  "n-buffed": "Посилено: {count}",
+  "n-nerfed": "Послаблено: {count}",
+  "not-released-wargaming-can-still": "Не випущено. Загальний ще може змінити або скасувати будь-яку з цих змін до виходу оновлення.",
+  "status": "Статус",
+  "update": "Оновити {version}"
+}

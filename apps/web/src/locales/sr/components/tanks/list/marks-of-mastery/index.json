@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. razred",
+      "tip": "3. Klasa: XP потребан за надмашити 50% igrači"
+    },
+    "class2": {
+      "label": "2. razred",
+      "tip": "2. Klasa: XP потребан за надмашити 80% igrači"
+    },
+    "class1": {
+      "label": "1. razred",
+      "tip": "1. Klasa: XP потребан за надмашити 95% igrači"
+    },
+    "ace": {
+      "label": "As Tenkista",
+      "tip": "As Tenkista: XP potreban za nadmašiti 99% igrača"
+    }
+  },
+  "rows-per-page": "Redova po stranici",
+  "previous-page": "Prethodna stranica",
+  "page": "страница {current} / {totalPages}",
+  "next-page": "Sledeća stranica",
+  "all": "Sve"
+}

@@ -1,0 +1,9 @@
+{
+  "boosts": "Erősítések {name}",
+  "directives": "Direktívák",
+  "directive-name": "{name} irányelv",
+  "grants-and-boosts": "A legénységi képességet adja és erősíti, még képzetlen állapotban is.",
+  "grants-only": "A csatára adja a legénységi képességet (nincs felsorolt jellemző).",
+  "enhances-mounted": "A felszerelt elem hatását javítja: {name}.",
+  "mount-to-use": "Használatához szerelje fel: {name}."
+}

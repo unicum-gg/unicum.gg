@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks-adatlefedettség ({region})",
+  "description": "{name} által {region} régiójában nyomon követett World of Tanks-játékosok és -klánok száma, a pillanatképek frissítési gyakorisága, az adatelőzmények mélysége, az infrastruktúra költsége és az üzemidő.",
+  "og-title": "Adatlefedettség",
+  "og-subtitle": "Játékosok és klánok: {region}"
+}

@@ -1,0 +1,13 @@
+{
+  "heading": "Topp spelare i <accent>{mode}</accent>",
+  "intro": "{mode} är ett battle royale-läge i World of Tanks. Topplistan för {region}, rankad efter HR (minst 100 strider i {mode}).",
+  "board": "Topp {count} spelare i {mode}",
+  "columns": {
+    "player": "Spelare",
+    "battles": "Strider",
+    "survival": "Överlevnad",
+    "survival-percent": "Överlevnad %",
+    "damage": "Genomsnittlig skada"
+  },
+  "scale-description": "Färggränser för topplistan i {mode}, kalibrerade utifrån populationen av spelare med minst 100 strider i {mode}."
+}

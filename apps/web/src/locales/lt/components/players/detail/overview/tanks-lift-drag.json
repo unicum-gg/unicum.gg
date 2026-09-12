@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Reitingo kėlimas",
+    "blurb": "Tankai, keliantys bendrą reitingą, juos pašalinus reitingas sumažėtų.",
+    "empty": "Nė vienas tankas nekelia bendro reitingo."
+  },
+  "drag": {
+    "heading": "Reitingo tempimas žemyn",
+    "blurb": "Tankai, mažinantys bendrą reitingą, juos pašalinus reitingas padidėtų.",
+    "empty": "Nė vienas tankas nemažina bendro reitingo."
+  },
+  "if-removed": "{delta}, jei pašalinta"
+}

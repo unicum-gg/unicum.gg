@@ -1,0 +1,27 @@
+{
+  "placeholder": "Hľadať hráčov, klany, tanky, mapy alebo výrazy",
+  "type": "Typ vyhľadávania",
+  "types": {
+    "all": "Všetky",
+    "players": "Hráči",
+    "clans": "Clany",
+    "tanks": "Tanky",
+    "maps": "Mapy",
+    "glossary": "Prehľad pojmov"
+  },
+  "sections": {
+    "players": "Hráči",
+    "clans": "Clany",
+    "tanks": "Tanky",
+    "maps": "Mapy",
+    "glossary": "Prehľad pojmov",
+    "recent": "Nedávne",
+    "favorites": "Obľúbené"
+  },
+  "searching": "Iskanje …",
+  "errored": "Vyskytla sa chyba. Skúste to znova.",
+  "empty": "Nenašli sa žiadne výsledky",
+  "remove-recent": "Odstrániť z nedávnych vyhľadávaní",
+  "add-favorite": "Pridať k obľúbeným",
+  "remove-favorite": "Odstrániť z obľúbených"
+}

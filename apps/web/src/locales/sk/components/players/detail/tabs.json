@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Prehľad",
+    "tanks": "Tanky",
+    "sessions": "Relácie",
+    "achievements": "Úspechy",
+    "tournaments": "Turnaje",
+    "value": "Hodnota"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

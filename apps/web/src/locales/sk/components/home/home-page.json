@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Najlepší hráči · posledných 24 hodín"
+    },
+    "week": {
+      "title": "Najlepší hráči · posledných 7 dní"
+    }
+  },
+  "rating-scale": {
+    "title": "Hodnotiaca škála"
+  },
+  "community": {
+    "title": "Zapojte sa do komunity",
+    "heading": "Spojte sa s hráčmi WoT",
+    "description": "Pridajte sa na náš Discord, diskutujte o štatistikách WoT, navrhujte nové funkcie a hláste chyby. Alebo navštívte GitHub, prezrite si kód a prispejte.",
+    "discord": "Pridať sa na Discord",
+    "github": "Zobraziť na GitHub"
+  },
+  "features": {
+    "title": "Čo tu nájdete",
+    "profiles": {
+      "title": "Profily hráčov",
+      "description": "Podrobné štatistiky s celkovými hodnotami a zmenami za 24 h / 7 dní / 30 dní, WN7, WN8, WNX a osobným hodnotením."
+    },
+    "clans": {
+      "title": "Stránky klanov",
+      "description": "Tabuľka členov s hodnoteniami, prehľadom nedávnej aktivity, opisom a metadátami klanu."
+    },
+    "history": {
+      "title": "História klanov",
+      "description": "Úplná časová os všetkých klanov, ktorých bol hráč členom, vrátane rolí a dátumov."
+    },
+    "live": {
+      "title": "Priebežné aktualizácie",
+      "description": "Údaje sledovaných hráčov sa prostredníctvom nášho systému snímok aktualizujú na pozadí každých 24 hodín."
+    },
+    "leaderboards": {
+      "title": "Rebríčky",
+      "description": "Rebríčky najlepších hráčov (24 h, 7 dní, celé obdobie) a klanov podľa WNX vypočítaného z našich snímok."
+    },
+    "open-source": {
+      "title": "Otvorený zdrojový kód · AGPL",
+      "description": "Kód nájdete na GitHub. Prezrite si ho, vytvorte fork a prispejte. Bez reklám, analytika len po udelení súhlasu."
+    }
+  },
+  "quick-start": {
+    "title": "Rýchly začiatok",
+    "search": {
+      "title": "🔍 Vyhľadajte hráčov alebo klany",
+      "description": "Stlačením {shortcut} otvorte vyhľadávanie a potom zadajte prezývku alebo značku klanu."
+    },
+    "region": {
+      "title": "🌍 Zmeňte región",
+      "description": "Použite prepínač {selector} v navigačnom paneli. Rebríčky sa podľa toho aktualizujú."
+    },
+    "leaderboards": {
+      "title": "🏆 Prezrite si rebríčky",
+      "description": "Rebríčky najlepších hráčov (24 h, 7 dní, celé obdobie) a klanov podľa priemerného WNX vypočítaného z našich snímok."
+    },
+    "colors": {
+      "title": "📊 Význam farieb",
+      "description": "WR, WN7, WN8 a WNX používajú rovnaké farby úrovní (oranžová → zelená → azúrová → fialová). Pozrite si stupnicu vyššie."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ÁZIA"
+}

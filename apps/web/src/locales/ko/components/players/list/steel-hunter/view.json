@@ -1,0 +1,13 @@
+{
+  "heading": "<accent>{mode}</accent> 최고의 플레이어들",
+  "intro": "{mode}은(는) World of Tanks의 배틀 로얄 모드입니다. HR로 순위를 매긴 {region} 순위표입니다. 최소 {mode} 전투 100회가 필요합니다.",
+  "board": "{mode} 최고의 플레이어 {count}명",
+  "columns": {
+    "player": "플레이어",
+    "battles": "전투",
+    "survival": "생존",
+    "survival-percent": "생존율 %",
+    "damage": "평균 피해"
+  },
+  "scale-description": "{mode} 순위표의 색상 기준입니다. {mode} 전투를 최소 100회 플레이한 플레이어 집단을 기준으로 조정했습니다."
+}

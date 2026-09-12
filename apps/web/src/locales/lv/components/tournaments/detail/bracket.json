@@ -1,0 +1,7 @@
+{
+  "group": "Grupa {order}",
+  "n-teams": "{count} komandas",
+  "pts": "Pti",
+  "team": "Komanda",
+  "top-n-advance": ", tālāk tiek {count} labākās"
+}

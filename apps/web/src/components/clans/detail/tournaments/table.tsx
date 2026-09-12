@@ -1,7 +1,8 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { useMemo } from "react";
 import { StarIcon } from "@phosphor-icons/react";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
@@ -24,6 +25,8 @@ import { TournamentStatusBadge } from "@/components/tournaments/status-badge";
 import { ordinal, teamFormat } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanTournamentEntry } from "./row";
+import { FilterSubject } from "@/components/filter-subject";
+import { useTranslation } from "@/hooks/use-translation";
 
 /** The band as this table shows it: the numeral, or its own placeholder. */
 const tierBandOrDash = (from: number | null, to: number | null) =>
@@ -31,12 +34,7 @@ const tierBandOrDash = (from: number | null, to: number | null) =>
 
 const DASH = "—";
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const DATE_PATTERN = "d MMM yyyy" /* UTC */;
 
 /**
  * A placement, weighted by what it took. The top three carry the site's rank
@@ -73,6 +71,9 @@ export function ClanTournamentsTable({
   region: Region;
   entries: ClanTournamentEntry[];
 }) {
+  const { date } = useFormat();
+  const { t } = useTranslation("components/clans/detail/tournaments/table");
+  const { t: tCol } = useTranslation("components/columns");
   // The catalogue's own filters, over this clan's entries: a clan that plays
   // weekly has a hundred of them, and the questions asked of that list are the
   // same ones asked of the catalogue ("the 7v7 Onslaughts", "tier X only").
@@ -90,11 +91,11 @@ export function ClanTournamentsTable({
     () => [
       {
         key: "result",
-        label: "Result",
+        label: tCol("result"),
         value: (e: ClanTournamentEntry) => e.bestPosition,
       },
     ],
-    [],
+    [tCol],
   );
   const { filtered: searched, filters } = useLeaderboardFilter(filtered, {
     searchFields,
@@ -108,13 +109,12 @@ export function ClanTournamentsTable({
   return (
     <>
       <div className="flex flex-col gap-2 border-b border-fd-border px-4 py-2.5">
-        <LeaderboardFilterBar filters={filters} searchNoun="tournaments" />
+        <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Tournaments} />
         <TournamentFacetBar facets={facets} />
       </div>
       {searched.length === 0 ? (
         <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-          No tournament matches the current filters.
-        </div>
+          {t("no-tournament-matches-the-current")}</div>
       ) : (
       <>
       <Table className="my-0! table-fixed [&_td]:min-w-0 [&_td]:py-2! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!">
@@ -123,20 +123,20 @@ export function ClanTournamentsTable({
             {/* Wide enough for the longest date plus a real gap: at `w-28` the
                 text ran 4px past its own cell and butted against the next
                 column's logo, since a fixed table does not grow to fit. */}
-            <TableHead className="w-32 whitespace-nowrap">Date</TableHead>
-            <TableHead>Tournament</TableHead>
-            <TableHead className="w-40">Played as</TableHead>
-            <TableHead className="hidden w-32 md:table-cell">Status</TableHead>
-            <TableHead className="hidden w-20 text-end! lg:table-cell">Tier</TableHead>
-            <TableHead className="hidden w-24 text-end! lg:table-cell">Format</TableHead>
-            <TableHead className="w-24 text-end!">Result</TableHead>
+            <TableHead className="w-32 whitespace-nowrap">{t("date")}</TableHead>
+            <TableHead>{tCol("tournament")}</TableHead>
+            <TableHead className="w-40">{t("played-as")}</TableHead>
+            <TableHead className="hidden w-32 md:table-cell">{t("status")}</TableHead>
+            <TableHead className="hidden w-20 text-end! lg:table-cell">{t("tier")}</TableHead>
+            <TableHead className="hidden w-24 text-end! lg:table-cell">{t("format")}</TableHead>
+            <TableHead className="w-24 text-end!">{t("result")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {paged.map((e) => (
             <TableRow key={`${e.tournamentId}:${e.teamId}`}>
               <TableCell className="whitespace-nowrap text-fd-muted-foreground tabular-nums">
-                {dateFmt.format(e.startAt)}
+                {date(DATE_PATTERN).format(e.startAt)}
               </TableCell>
               <TableCell className="truncate">
                 {/* The organiser's logo and Wargaming's featured flag, drawn
@@ -156,7 +156,7 @@ export function ClanTournamentsTable({
                   <StarIcon
                     weight="fill"
                     className="mr-1.5 inline size-3.5 align-[-2px] text-amber-500"
-                    aria-label="Featured tournament"
+                    aria-label={t("featured-tournament")}
                   />
                 )}
                 <Link
@@ -177,7 +177,7 @@ export function ClanTournamentsTable({
                   title={
                     e.clanMembers === null
                       ? undefined
-                      : `${e.clanMembers} of the roster were in the clan`
+                      : t("n-of-the-roster-were-in-the-clan", { count: e.clanMembers })
                   }
                 >
                   {e.teamTitle}

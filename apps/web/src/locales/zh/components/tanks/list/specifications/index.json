@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "每页行数",
+  "previous-page": "上一页",
+  "page": "第 {current} / {totalPages} 页面",
+  "next-page": "下一页",
+  "all": "全部"
+}

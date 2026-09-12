@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "ความกว้างพื้นที่เล่น",
+    "height": "ความสูงพื้นที่เล่น",
+    "round-length": "เวลาการรบ",
+    "team-size": "ขนาดทีม",
+    "camouflage": "ฤดูกาล",
+    "presence": "ในเกม",
+    "variant-version": "เวอร์ชัน {type}",
+    "play-area": "พื้นที่เล่น",
+    "bases-team1": "ฐานฝ่ายพันธมิตร",
+    "bases-team2": "ฐานข้าศึก",
+    "spawns-team1": "จุดเกิดฝ่ายพันธมิตร",
+    "spawns-team2": "จุดเกิดข้าศึก",
+    "control-point": "จุดควบคุม",
+    "artillery-headquarters": "กองบัญชาการปืนใหญ่",
+    "comms-centers": "ศูนย์สื่อสาร",
+    "observation-posts": "จุดสังเกตการณ์",
+    "points-of-interest": "จุดสนใจ"
+  },
+  "summary": {
+    "added": "เพิ่ม {name} แล้ว",
+    "removed": "{name} ถูกนำออกแล้ว",
+    "added-to-game": "เพิ่มในเกมแล้ว",
+    "removed-from-game": "ถูกนำออกจากเกมแล้ว",
+    "added-on-test": "เพิ่มในไคลเอนต์ทดสอบแล้ว",
+    "removed-on-test": "ถูกนำออกจากไคลเอนต์ทดสอบแล้ว",
+    "mode-added": "เพิ่มโหมด {name} แล้ว",
+    "mode-removed": "นำโหมด {name} ออกแล้ว",
+    "now-played-in": "เล่นใน {name} แล้ว",
+    "no-longer-played-in": "ไม่เล่นใน {name} อีกต่อไป",
+    "event-added": "ขณะนี้ {name} สามารถเกิดขึ้นระหว่างการรบได้",
+    "event-removed": "{name} ไม่เกิดขึ้นอีกต่อไป",
+    "moved": "{name} มีการเคลื่อนที่",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

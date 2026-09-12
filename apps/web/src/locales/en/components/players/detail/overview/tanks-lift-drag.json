@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Lifting the rating",
+    "blurb": "Tanks that prop the overall up: dropping them would lower the rating.",
+    "empty": "No tank propping up the overall."
+  },
+  "drag": {
+    "heading": "Dragging the rating",
+    "blurb": "Tanks that weigh the overall down: dropping them would raise the rating.",
+    "empty": "No tank dragging the overall down."
+  },
+  "if-removed": "{delta} if removed"
+}

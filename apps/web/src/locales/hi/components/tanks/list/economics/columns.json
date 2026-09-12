@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Cost (credits)",
+      "tip": "क्रेडिट्स में खरीद मूल्य (टेक-ट्री टैंक)"
+    },
+    "buyGold": {
+      "label": "Cost (gold)",
+      "tip": "गोल्ड में खरीद मूल्य (प्रीमियम टैंक)"
+    },
+    "researchXp": {
+      "label": "अनुसंधान XP",
+      "tip": "अनलॉक करने के लिए XP (सबसे सस्ता मार्ग)"
+    },
+    "totalFreeXp": {
+      "label": "फ़्री XP (T{tier})",
+      "tip": "टियर {tier} से शोध करने के लिए संचयी XP, आवश्यक मॉड्यूल सहित"
+    },
+    "shellCost": {
+      "label": "गोला लागत",
+      "tip": "डिफ़ॉल्ट गोले की कीमत (क्रेडिट्स)"
+    },
+    "ammoCost": {
+      "label": "पूर्ण गोला बारूद लागत",
+      "tip": "डिफ़ॉल्ट गोले की कीमत × गोला-बारूद क्षमता"
+    },
+    "acquireMoney": {
+      "label": "खरीद लागत ({currency})",
+      "tip": "टैंक प्राप्त करने के लिए अनुमानित वास्तविक धन (शोध + खरीद), {currency} में"
+    },
+    "freeXpMoney": {
+      "label": "फ़्री XP ({currency})",
+      "tip": "टियर {tier} से टैंक को फ्री XP करने की अनुमानित वास्तविक धनराशि, {currency} में"
+    }
+  },
+  "selector": {
+    "buyCredits": "Cost (credits)",
+    "buyGold": "Cost (gold)",
+    "researchXp": "अनुसंधान XP",
+    "totalFreeXp": "फ्री XP",
+    "shellCost": "गोला लागत",
+    "ammoCost": "पूर्ण गोला बारूद लागत",
+    "acquireMoney": "खरीदने की लागत (धन)",
+    "freeXpMoney": "फ्री XP (धन)"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "title": "{region}排名最佳的 World of Tanks {mode}玩家",
+  "description": "{name} {region}的{mode}排行榜，{mode}是 World of Tanks 的竞技 7v7 排位模式，顺序采用游戏自身的排名。",
+  "og-title": "最佳{mode}玩家",
+  "og-subtitle": "{region}排位排行榜"
+}

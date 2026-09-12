@@ -1,0 +1,16 @@
+{
+  "title": "Naudojame slapukus",
+  "description": "Naudojame slapukus naršymo patirčiai gerinti ir svetainės lankomumui analizuoti.",
+  "functional": {
+    "title": "Funkciniai",
+    "description": "Būtina, kad svetainė tinkamai veiktų, pavyzdžiui, nuostatoms ir regiono pasirinkimui."
+  },
+  "analytics": {
+    "title": "Auditorijos vertinimas",
+    "description": "Google Analytics nustato slapukus, padedančius suprasti, kaip naudojama svetainė. Anoniminė analizė be slapukų, Umami, veikia bet kuriuo atveju."
+  },
+  "save": "Išsaugoti mano pasirinkimus",
+  "decline": "Atmesti visus",
+  "customize": "Tinkinti",
+  "accept": "Priimti visus"
+}

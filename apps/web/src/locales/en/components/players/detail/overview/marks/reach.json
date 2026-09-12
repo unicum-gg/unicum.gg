@@ -1,0 +1,7 @@
+{
+  "badge-title": "{combined} combined damage, against {threshold} for that mark",
+  "empty": "No gun is behind what this account does with it.",
+  "gun-carries": "the gun carries {marks}",
+  "none": "none",
+  "recent-window": "(30d)"
+}

@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "暂无对战记录。账号被采样两次且期间进行过战斗后，这些记录才会出现。账号进行对战后会自动完成采样。",
+  "bar-height-is-battles-played": "柱高表示进行的战斗场次，颜色表示该{granularity}的{metric}，分段与网站其他地方使用的相同。",
+  "title": "{nickname}的会话",
+  "title-count": "{nickname}的对战记录（{count}）",
+  "granularity": {
+    "day": "天",
+    "week": "周",
+    "month": "月",
+    "daily": "每日",
+    "weekly": "每周",
+    "monthly": "每月"
+  },
+  "week-of": "{date}所在周"
+}

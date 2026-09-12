@@ -1,0 +1,22 @@
+{
+  "columns-label": "Columns",
+  "groups": {
+    "general": "General",
+    "combat": "Combat"
+  },
+  "columns": {
+    "battles": { "label": "Battles", "tip": "Total games played on the tank" },
+    "count": { "label": "Count", "tip": "Number of tracked players in the sample" },
+    "rating": { "label": "Rating (WN)" },
+    "wr": { "label": "WR", "tip": "Win rate on the tank" },
+    "playerWr": { "label": "Player WR", "tip": "Average overall win rate of players who drive it" },
+    "dpg": { "label": "DPG", "tip": "Average damage per game" },
+    "kdr": { "label": "KDR", "tip": "Kills / deaths ratio" },
+    "assists": { "label": "Assists", "tip": "Average assisted damage" },
+    "hitPct": { "label": "Hit %", "tip": "Hits / shots" },
+    "penPct": { "label": "Pen %", "tip": "Penetrations / hits" },
+    "spots": { "label": "Spots", "tip": "Average spots per game" },
+    "blocked": { "label": "Blocked", "tip": "Average damage blocked by armor" },
+    "survival": { "label": "Survival", "tip": "Share of battles survived" }
+  }
+}

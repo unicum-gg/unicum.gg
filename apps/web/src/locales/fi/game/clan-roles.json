@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Värvääjä",
+  "personnel_officer": "Henkilöstöupseeri",
+  "quartermaster": "Rahastonhoitaja",
+  "executive_officer": "Apulaisjohtaja",
+  "recruit": "Alokas",
+  "private": "Sotilas",
+  "commander": "Johtaja",
+  "reservist": "Reserviläinen",
+  "combat_officer": "Komentaja",
+  "junior_officer": "Nuorempi upseeri",
+  "intelligence_officer": "Diplomaatti"
+}

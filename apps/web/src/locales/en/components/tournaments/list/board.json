@@ -1,0 +1,14 @@
+{
+  "date": "Date",
+  "featured-tournament": "Featured tournament",
+  "format": "Format",
+  "mode": "Mode",
+  "no-tournament-matches-the-current": "No tournament matches the current filters.",
+  "nothing-here-right-now-wargaming": "Nothing here right now. Wargaming opens new tournaments daily, so this fills back in on its own.",
+  "prize": "Prize",
+  "region-tournaments": "{region} tournaments ({count})",
+  "status": "Status",
+  "teams": "Teams",
+  "tier": "Tier",
+  "tournament": "Tournament"
+}

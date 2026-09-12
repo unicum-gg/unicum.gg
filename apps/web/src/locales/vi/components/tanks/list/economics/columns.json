@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Chi phí (tiền tín dụng)",
+      "tip": "Giá mua bằng bạc (xe tăng cây công nghệ)"
+    },
+    "buyGold": {
+      "label": "Chi phí (vàng)",
+      "tip": "Giá mua bằng vàng (xe tăng cao cấp)"
+    },
+    "researchXp": {
+      "label": "XP nghiên cứu",
+      "tip": "X để mở khóa (đường rẻ nhất)"
+    },
+    "totalFreeXp": {
+      "label": "X tự do (T{tier})",
+      "tip": "Tổng X cần để nghiên cứu từ cấp {tier}, bao gồm các mô-đun bắt buộc trước đó"
+    },
+    "shellCost": {
+      "label": "Chi phí đạn",
+      "tip": "Giá đạn mặc định (bạc)"
+    },
+    "ammoCost": {
+      "label": "Chi phí đạn dược đầy đủ",
+      "tip": "Giá đạn mặc định × cơ số đạn"
+    },
+    "acquireMoney": {
+      "label": "Chi phí mua ({currency})",
+      "tip": "Ước tính số tiền thực tế để sở hữu xe tăng (nghiên cứu + mua), bằng {currency}"
+    },
+    "freeXpMoney": {
+      "label": "X tự do ({currency})",
+      "tip": "Ước tính số tiền thực tế để dùng X tự do nghiên cứu xe tăng từ cấp {tier}, bằng {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Chi phí (tiền tín dụng)",
+    "buyGold": "Chi phí (vàng)",
+    "researchXp": "XP nghiên cứu",
+    "totalFreeXp": "XP miễn phí",
+    "shellCost": "Chi phí đạn",
+    "ammoCost": "Chi phí đạn dược đầy đủ",
+    "acquireMoney": "Chi phí mua (tiền)",
+    "freeXpMoney": "XP miễn phí (tiền)"
+  }
+}

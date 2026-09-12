@@ -1,0 +1,6 @@
+{
+  "title": "Beste {language} World of Tanks-spillere ({region})",
+  "description": "{name} {region}-spillerrangering for spillere hvis utledede språksett fra klanhistorikken inkluderer {language}, rangert etter WNX.",
+  "og-title": "Beste {language}-spillere",
+  "og-subtitle": "Resultatliste for {region}"
+}

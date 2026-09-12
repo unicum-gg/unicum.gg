@@ -1,0 +1,6 @@
+{
+  "title": "Prisijungę World of Tanks žaidėjai ({region})",
+  "description": "Kiek žaidėjų šiuo metu yra kiekviename World of Tanks {region} serveryje, kartu pateikiant žaidėjų skaičių per pastarąsias 24 valandas, savaitę ir metus, visų laikų rekordą bei aktyviausias savaitės valandas.",
+  "og-title": "Serverio populiacija",
+  "og-subtitle": "{region} prisijungę žaidėjai"
+}

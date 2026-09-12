@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Az értékelés emelése",
+    "blurb": "Tankok, amelyek felhúzzák az összesített értékelést: elhagyásuk csökkentené az értékelést.",
+    "empty": "Nincs az összesített értékelést felhúzó tank."
+  },
+  "drag": {
+    "heading": "Az értékelést lehúzó tankok",
+    "blurb": "Az összesített értékelést lehúzó tankok: eltávolításuk növelné az értékelést.",
+    "empty": "Nincs az összesített értékelést lehúzó tank."
+  },
+  "if-removed": "{delta} eltávolítás esetén"
+}

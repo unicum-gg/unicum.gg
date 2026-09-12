@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "채팅 표시",
+    "hide": "채팅 숨기기",
+    "show-streamers": "스트리머 표시"
+  },
+  "heading": "{name}: World of Tanks 플레이어, 클랜, 전차 통계",
+  "hide": "스트리머 숨기기",
+  "player": "플레이어",
+  "stream-language": "스트리밍 언어 · {name}",
+  "stream-language-alt": "스트리밍 언어: {name}",
+  "theater": {
+    "enter": "극장 모드",
+    "exit": "극장 모드 나가기"
+  },
+  "title": "지금 스트리밍 중인 최고의 플레이어 ·",
+  "viewer-count": "시청자 {count}명",
+  "viewers": "시청자",
+  "watch": "Twitch에서 {nickname} 시청"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "{nickname}的标记和精通",
+  "excellence": {
+    "title": "特级标识",
+    "description": "按炮管上的标记显示车辆。标记是持续平均值：游戏会在近期战斗的滚动窗口中，根据该地区使用该车辆的表现进行评分。",
+    "partial": "已读取{known}/{garage}辆车辆的标记。账号刷新后会补充其余车辆。",
+    "note": "{marked}/{garage}辆车辆带有标记。",
+    "note-share": "{marked}/{garage}辆车辆带有标记（车库的{percent}%）。"
+  },
+  "mastery": {
+    "title": "掌握标记",
+    "description": "按最佳徽章显示车辆。徽章取决于单场战斗，而不是平均值：游戏会根据单场战斗经验，对比该地区使用该车辆的评分来授予徽章。",
+    "note": "{aces}/{garage}辆车辆带有王牌坦克徽章。",
+    "note-share": "{aces}/{garage}辆车辆带有王牌坦克徽章（车库的{percent}%）。"
+  },
+  "reach": {
+    "heading": "火炮表现超越标记",
+    "description": "综合伤害已经超过某个尚未拥有的标记的车辆。徽章代表该综合伤害，并以其超过的标记着色。"
+  },
+  "none": "无"
+}

@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Spieler",
+    "clans": "Clans",
+    "tanks": "Panzer",
+    "maps": "Karten",
+    "tournaments": "Turniere",
+    "servers": "Server"
+  },
+  "links": {
+    "top-players": {
+      "label": "Top-Spieler",
+      "description": "Ewige Bestenliste der Spieler"
+    },
+    "players-onslaught": {
+      "description": "Rangliste für Ansturm"
+    },
+    "players-steel-hunter": {
+      "description": "Battle-Royale-Bestenliste"
+    },
+    "top-clans": {
+      "label": "Top-Clans",
+      "description": "Ewige Bestenliste der Clans"
+    },
+    "stronghold": {
+      "description": "Scharmützel-Rangliste"
+    },
+    "advances": {
+      "description": "15-gegen-15-Rangliste für Stufe X"
+    },
+    "tank-performances": {
+      "label": "Leistungen",
+      "description": "Siegquote und Schaden je Panzer"
+    },
+    "tank-specs": {
+      "label": "Spezifikationen",
+      "description": "Statistik für jeden Panzer"
+    },
+    "tank-economics": {
+      "label": "Ökonomie",
+      "description": "Verdienst von Kreditpunkten und EP"
+    },
+    "tank-moe": {
+      "description": "Benötigter Schaden für jede Gefechtsmarkierung"
+    },
+    "tank-mom": {
+      "description": "Schwellenwerte für Abzeichen der Überlegenheit"
+    },
+    "tank-changes": {
+      "label": "Änderungen",
+      "description": "Buffs und Nerfs bei jedem Aktualisieren"
+    },
+    "tank-community": {
+      "label": "Community-Bewertungen",
+      "description": "Bewertet von Spielern, die sie besitzen"
+    },
+    "tank-videos": {
+      "label": "Videos",
+      "description": "Gameplay aus der Community"
+    },
+    "all-tournaments": {
+      "label": "Turniere",
+      "description": "Alle offenen und abgeschlossenen Turniere"
+    },
+    "all-maps": {
+      "label": "Alle Karten",
+      "description": "Jede Karte im Spiel"
+    },
+    "map-changes": {
+      "label": "Änderungen",
+      "description": "Kartenüberarbeitungen bei jedem Aktualisieren"
+    },
+    "battle-type": {
+      "description": "{type}-Karten"
+    },
+    "servers-population": {
+      "label": "Serverpopulation",
+      "description": "Spieler online, aktuell und im Zeitverlauf"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "firing": "Nagpapaputok ng {shell}, {pen} mm. Baguhin ang putok",
+  "no-such-round": "{mark}: wala nito ang baril na ito, kaya ikaw mismo ang magtakda ng mga anggulo",
+  "own-round": "{mark}: sariling bala ng baril na ito, kasama ang lahat ng numero",
+  "treat-it-as": "Ituring ito bilang",
+  "treat-it-as-mark": "Ituring ito bilang {mark}"
+}

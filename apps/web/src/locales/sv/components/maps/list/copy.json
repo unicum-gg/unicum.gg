@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Samtliga {count} stridsarenor i World of Tanks. Filtrera efter kamouflage och spelläge och öppna sedan en karta för att se dess minikarta, storlek samt basflaggor och startpunkter för varje läge.",
+    "title": "Alla World of Tanks-kartor ({region}), samtliga stridsarenor",
+    "description": "Utforska alla World of Tanks-kartor på {region}: minikartor, storlek, kamouflage och spellägen som stöds, med basflaggor och startpunkter för varje läge.",
+    "heading": "Alla <accent>kartor</accent>"
+  },
+  "battle-type": {
+    "intro": "De {count} World of Tanks-kartorna som spelas i {type}, {blurb}. Öppna en karta för att se dess minikarta, storlek samt basflaggor och startpunkter för varje läge.",
+    "title": "World of Tanks-kartor för {type} ({region}), alla arenor i rotationen",
+    "description": "Alla World of Tanks-kartor i rotationen för {type} på {region}: minikartor, storlek, kamouflage och spellägen som stöds, med basflaggor och startpunkter.",
+    "heading": "{type} <accent>kartor</accent>"
+  },
+  "blurbs": {
+    "random": "standardrotationen med 15 mot 15",
+    "battle_royale": "läget där den sista tanken står kvar",
+    "frontline": "det storskaliga 30 mot 30-läget",
+    "onslaught": "det rankade 7 mot 7-läget",
+    "onslaught_night": "det rankade 7 mot 7-läget efter mörkrets inbrott, med kortare sikträckvidd, som för närvarande går att spela på Vanlig Test",
+    "grand_battle": "30 mot 30-läget i Klass X",
+    "clan_wars": "Klankrig och Offensiver",
+    "waffentrager": "Waffenträger-evenemanget",
+    "last_stand": "Last Stand-evenemanget",
+    "arcade": "arkadlägen och specialevenemang",
+    "story_mode": "de berättelsedrivna operationerna",
+    "training": "Träningsrum och handledningar"
+  }
+}

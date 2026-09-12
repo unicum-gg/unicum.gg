@@ -1,0 +1,7 @@
+{
+  "win-rate": "Wskaźnik zwycięstw",
+  "versus": "{metric} na tle regionu {region}",
+  "top": "Najlepszy {percent}%",
+  "ahead-of": "Wyprzedza {percent}% graczy",
+  "against": "W porównaniu z {players} monitorowanymi kontami w regionie {region}, na których rozegrano co najmniej {battles} bitew."
+}

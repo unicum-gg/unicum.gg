@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Преглед",
+    "tanks": "Танкове",
+    "sessions": "Сесии",
+    "achievements": "Постижения",
+    "tournaments": "Турнири",
+    "value": "Стойност"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "бета"
+}

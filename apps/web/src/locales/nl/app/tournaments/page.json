@@ -1,0 +1,8 @@
+{
+  "description": "Alle Toernooien van Wargaming op {region}: de dagelijkse ladders om Goud, de clankampioenschappen, wie deelnam en wie won. Volledige toernooischema’s, scores en spelerslijsten.",
+  "live-many": "Er zijn momenteel {count} Toernooien op {region} waarvoor de inschrijving open is of die worden gespeeld,",
+  "live-one": "Er is momenteel {count} Toernooi op {region} waarvoor de inschrijving open is of dat wordt gespeeld,",
+  "no-live": "Elke dag zijn er Toernooien op {region},",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "van 1-tegen-1-ladders om Goud tot clankampioenschappen om geldprijzen. Volledige toernooischema’s en scores, elk team met zijn spelerslijst en per map de zijde waarop het begon."
+}

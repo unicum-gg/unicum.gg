@@ -1,0 +1,14 @@
+{
+  "ammunition": "Munitions",
+  "characteristics": "Caractéristiques du {tank}",
+  "consumables": "Consommables",
+  "crew-level": "Niveau de l’équipage",
+  "crew-skills": "Compétences de l’équipage",
+  "equipment": "Équipements",
+  "field-mods": "Modifications de terrain",
+  "historical-reference": "Référence historique du {tank}",
+  "modules": "Éléments du {tank}",
+  "research-path": "Branche de l’Arbre technologique du {tank}",
+  "similar": "Chars proches du {tank}",
+  "videos": "Vidéos du {tank}"
+}

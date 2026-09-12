@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Brak jeszcze sesji. Pojawią się, gdy dane tego konta zostaną pobrane dwukrotnie, a między pobraniami zostaną rozegrane bitwy. Dzieje się to automatycznie w miarę grania na koncie.",
+  "bar-height-is-battles-played": "Wysokość słupka oznacza liczbę rozegranych bitew, a kolor wartość wskaźnika {metric} dla danego okresu ({granularity}), z podziałem na te same przedziały co w pozostałych częściach witryny.",
+  "title": "Sesje {nickname}",
+  "title-count": "Sesje gracza: {nickname} ({count})",
+  "granularity": {
+    "day": "dzień",
+    "week": "tydzień",
+    "month": "miesiąc",
+    "daily": "Codzienny",
+    "weekly": "Tygodniowy",
+    "monthly": "Miesięczny"
+  },
+  "week-of": "Tydzień od {date}"
+}

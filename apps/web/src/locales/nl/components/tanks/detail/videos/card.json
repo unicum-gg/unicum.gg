@@ -1,0 +1,3 @@
+{
+  "n-battles": "{count, plural, one {# gevecht} other {# gevechten}}"
+}

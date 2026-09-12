@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Eine Zelle zeigt die Siegrate der jeweiligen Gruppe auf dieser Stufe über alle Fahrzeuge hinweg, mit denen ein Spieler mindestens {minBattles} Gefechte bestritten hat. Sie beschreibt somit die Stufen so, wie sie von den jeweiligen Spielern gespielt werden. Zellen, die auf weniger als {TIERWINRATETHINCELL} Gefechten basieren, werden blasser dargestellt, da ihre Werte aus anderen Gründen als der Spielstärke schwanken. Die Farben entsprechen denselben Siegratenbereichen, die auch überall sonst auf der Website verwendet werden.",
+  "cell-no-sample": "{where}, keine Stichprobe",
+  "cell-winrate": "{where}, {winrate} Siegrate über {battles} Gefechte",
+  "metric-band": "{metric}-Band",
+  "nothing-recorded": "Für {metric} wurde noch nichts erfasst. Das Raster wird jede Nacht neu erstellt.",
+  "over-battles-from-accounts": "Von {players} Konten: {winrate} über {battles} Gefechte",
+  "over-n-battles": "über {battles} Gefechte",
+  "what-players-win-by-tier": "Nach Stufe: Wie oft {label}-Spieler gewinnen"
+}

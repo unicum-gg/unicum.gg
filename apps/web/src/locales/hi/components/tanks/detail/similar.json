@@ -1,0 +1,11 @@
+{
+  "compare": "सबसे निकट के {count} से तुलना करें",
+  "match": "मुकाबला",
+  "subtitle": "अपने टियर में समान स्थान",
+  "verdict": {
+    "overall": "कुल मिलाकर समान",
+    "closest": "{axes} पर सबसे निकट",
+    "closest-furthest": "{axes} पर सबसे निकट, {apart} पर सबसे दूर",
+    "and": " और "
+  }
+}

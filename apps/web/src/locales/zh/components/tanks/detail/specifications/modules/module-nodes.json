@@ -1,0 +1,17 @@
+{
+  "aim-time": "瞄准时间",
+  "ammo": "弹药",
+  "armor": "装甲",
+  "dispersion": "散布",
+  "fire-chance": "着火几率",
+  "gun-arc": "炮弧",
+  "hit-points": "生命值",
+  "load-limit": "负载限制",
+  "mounted-on": "安装于{tanks}",
+  "power": "火力",
+  "reload": "装填时间",
+  "signal-range": "信号范围",
+  "tier": "等级 {tier}",
+  "traverse": "旋转",
+  "view-range": "视野范围"
+}

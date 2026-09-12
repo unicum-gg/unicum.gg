@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Kies een reserve om het schema vooraf te bekijken.",
+  "schedule": "Op je actieve dagen wordt de reserve om {times} geactiveerd (elke activatie duurt {hours} u) en wordt {window} gedekt zodra de drempel voor het aantal online spelers is bereikt."
+}

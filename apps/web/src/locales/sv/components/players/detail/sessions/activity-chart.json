@@ -1,0 +1,5 @@
+{
+  "battles": "{count} strider",
+  "chart-label": "Spelade strider per {granularity}, färgkodade efter {metric}",
+  "no-battles": "Inga strider"
+}

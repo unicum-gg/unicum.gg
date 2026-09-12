@@ -1,3 +1,11 @@
+"use client";
+
+// A client component, unlike the content components the boundary rule is
+// written for: its whole translated surface is one accessible label on an SVG,
+// and threading a `locale` through fifteen callers to render `aria-label` would
+// cost more than the icon weighs.
+
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
 // The laurel wreath from RankMedal with its roman numeral stripped out (the
@@ -24,11 +32,13 @@ export const MOM_COLORS: Record<1 | 2 | 3 | 4, string> = {
   1: "#9E5A24",
 };
 
-const MOM_LABEL: Record<1 | 2 | 3 | 4, string> = {
-  4: "Ace Tanker",
-  3: "1st Class",
-  2: "2nd Class",
-  1: "3rd Class",
+/** The badge a mastery level is, keyed the way `game/vocabulary` names it: the
+ * payload counts 1 to 4, the vocabulary is keyed by the badge. */
+const MOM_KEY: Record<1 | 2 | 3 | 4, string> = {
+  4: "ace",
+  3: "class1",
+  2: "class2",
+  1: "class3",
 };
 
 export function MoMIcon({
@@ -38,17 +48,18 @@ export function MoMIcon({
   mastery: 1 | 2 | 3 | 4;
   className?: string;
 }) {
+  const { t: tGame } = useTranslation("game/vocabulary");
   return (
     <svg
       viewBox="0 0 30 26"
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid"
       role="img"
-      aria-label={MOM_LABEL[mastery]}
+      aria-label={tGame(`mastery-badges.${MOM_KEY[mastery]}`)}
       className={cn("mx-auto block h-5 w-auto", className)}
       style={{ color: MOM_COLORS[mastery] }}
     >
-      <title>{MOM_LABEL[mastery]}</title>
+      <title>{tGame(`mastery-badges.${MOM_KEY[mastery]}`)}</title>
       <path d={WREATH} fill="currentColor" fillRule="evenodd" />
       <text
         x="15"

@@ -1,0 +1,35 @@
+{
+  "heading": "Những người chơi hàng đầu trong <accent>{mode}</accent>",
+  "intro": "{mode} là chế độ xếp hạng cạnh tranh 7v7 của World of Tanks ở Cấp X. Bảng xếp hạng khu vực {region}, lấy thẳng từ bảng xếp hạng của trò chơi.",
+  "season": {
+    "range": "{start} đến {end}",
+    "final": "bảng xếp hạng chung cuộc",
+    "live": "mùa giải đang diễn ra",
+    "updated": "Đã cập nhật {when}"
+  },
+  "board": "{count} người chơi {mode} hàng đầu",
+  "columns": {
+    "player": "Người chơi",
+    "rank": "Bậc",
+    "battles": "Số trận",
+    "rating": "Điểm Xếp hạng"
+  },
+  "alias": "(với tên {nickname})",
+  "ranks": {
+    "title": "Các bậc",
+    "meaning": "Ý nghĩa",
+    "tier": "Cấp",
+    "intro": "Bạn thăng hạng trong {mode} bằng cách thắng trận đấu. Mỗi chiến thắng trao Điểm Đánh giá dựa trên màn thể hiện của bạn. {champion} là cấp cao nhất có thể đạt được chỉ bằng điểm, và đạt đến đó sẽ đưa bạn lên bảng xếp hạng. {legend} không có ngưỡng cố định mà là nhóm {champion} có chỉ số đánh giá cao nhất, nên mốc này thay đổi theo nhóm người chơi, với trường hợp bằng điểm được phân định bằng số trận đấu đã chơi. Các mốc chính xác của {legend} và {champion} lấy từ mùa hiện tại và được đánh dấu trên bảng.",
+    "legend-blurb": "Các {champion} có chỉ số đánh giá cao nhất. Trò chơi giới hạn cấp này ở một vị trí cố định trên bảng xếp hạng mỗi mùa, nên quy mô thay đổi theo mùa và khu vực, chứ không theo một mục tiêu điểm cố định. Rơi xuống dưới {legend} cuối cùng sẽ đưa bạn trở lại {champion}.",
+    "champion-blurb": "Cấp cao nhất có thể đạt được bằng Điểm Đánh giá và là điều kiện để vào bảng xếp hạng. Mọi người chơi xếp hạng đều ít nhất đạt {champion}."
+  },
+  "race": {
+    "title-live": "Cần đạt gì ngay lúc này",
+    "title-ended": "Mùa giải đã diễn ra thế nào",
+    "legend-cutoff": "Ngưỡng {legend}",
+    "champion-cutoff": "Ngưỡng {champion}",
+    "ranked-players": "Người chơi xếp hạng",
+    "rating-points": "Điểm xếp hạng",
+    "rank-cutoffs": "Bậc cắt giới hạn"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "caught-up": "Đã hoàn toàn bắt kịp, cảm ơn bạn. Mọi khoản dư sẽ được dùng cho công suất lớn hơn và các tính năng mới.",
+  "covered-label": "Đã được hỗ trợ",
+  "covered-sentence": "Những người ủng hộ đã trang trải {received} trong số {spent} đã chi cho đến nay.",
+  "days-out-of-pocket": "{days} ngày tự chi trả",
+  "from-supporter-one": "từ {count} người ủng hộ",
+  "from-supporters": "từ {count} người ủng hộ",
+  "gap-growing": "Thêm {amount}/tháng sẽ ngăn khoảng thiếu hụt tăng lên.",
+  "goal": "mục tiêu {amount}",
+  "of-that-total": "trong tổng số đó",
+  "pledges-cover": "Các khoản cam kết hiện đã đủ trang trải hóa đơn hằng tháng.",
+  "raised-amount": "Đã quyên góp {amount}",
+  "raised-label": "Tăng lên",
+  "run-at-a-loss": "{name} đã hoạt động thua lỗ kể từ {since}.",
+  "run-rate": "Chi phí hằng tháng: đã cam kết {pledged}/tháng so với {cost}/tháng để vận hành.",
+  "spent-since-launch": "Đã chi kể từ khi ra mắt",
+  "to-catch-up": "Cần {amount} để hoàn toàn bắt kịp."
+}

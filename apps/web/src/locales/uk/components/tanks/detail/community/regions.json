@@ -1,0 +1,3 @@
+{
+  "n-votes": "{count, plural, one {# голос} few {# голоси} many {# голосів} other {# голосів}}"
+}

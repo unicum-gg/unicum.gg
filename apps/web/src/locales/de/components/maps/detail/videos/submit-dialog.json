@@ -1,0 +1,17 @@
+{
+  "close": "Schließen",
+  "format": "Format",
+  "here": "hier",
+  "in-the-queue": "Es befindet sich in der Warteschlange und erscheint unter {where}, sobald ein Moderator es geprüft hat. Bis dahin ist dein Beitrag dort ausgegraut.",
+  "log-in-to-suggest-a": "Anmelden, um eine Taktik vorzuschlagen",
+  "on-map": "auf {map}",
+  "players-per-team": "Spieler pro Team",
+  "sending": "Senden…",
+  "suggest": "Vorschlagen",
+  "suggest-a-tactic": "Taktik vorschlagen",
+  "suggest-another": "Vorschlage einen anderen",
+  "suggestion-sent": "Vorschlag gesendet",
+  "tier": "Stufe",
+  "what-to-submit": "Ein kompetitives Gefecht, dessen Video genau mit dem Beginn des Gefechts startet. Die Kartenanzeige beginnt mit {map} und wechselt synchron mit dem Video, da ein Clanabend eine ganze Kartenrotation umfassen kann. Die gespielte Seite dient einem Shotcaller als Suchkriterium, weshalb sie abgefragt und nicht erraten wird.",
+  "what-was-played": "Was gespielt wurde"
+}

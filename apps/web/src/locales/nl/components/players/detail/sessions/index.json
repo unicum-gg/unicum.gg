@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Nog geen sessie. Sessies verschijnen zodra dit account twee keer is uitgelezen en er tussendoor gevechten zijn gespeeld. Dat gebeurt vanzelf wanneer er met dit account wordt gespeeld.",
+  "bar-height-is-battles-played": "De balkhoogte geeft het aantal gespeelde gevechten aan en de kleur staat voor {metric} in die {granularity}, met dezelfde categorieën als overal elders op de site.",
+  "title": "Sessies van {nickname}",
+  "title-count": "Sessies van {nickname} ({count})",
+  "granularity": {
+    "day": "dag",
+    "week": "week",
+    "month": "maand",
+    "daily": "Dagelijks",
+    "weekly": "Wekelijks",
+    "monthly": "Maandelijks"
+  },
+  "week-of": "Week van {date}"
+}

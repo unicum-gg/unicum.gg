@@ -1,0 +1,17 @@
+{
+  "aim-time": "照準時間",
+  "ammo": "弾薬",
+  "armor": "装甲",
+  "dispersion": "拡散率",
+  "fire-chance": "発火率",
+  "gun-arc": "砲の弧",
+  "hit-points": "ヒットポイント",
+  "load-limit": "積載制限",
+  "mounted-on": "{tanks}に搭載",
+  "power": "火力",
+  "reload": "連射性能",
+  "signal-range": "信号範囲",
+  "tier": "Tier {tier}",
+  "traverse": "旋回",
+  "view-range": "視界範囲"
+}

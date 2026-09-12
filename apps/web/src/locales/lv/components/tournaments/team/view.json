@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Izloze vēl nav veikta. Šīs komandas mači parādīsies šeit, kad sāksies turnīrs.",
+  "each-map-is-played-twice": "Katra karte tiek spēlēta divreiz, pa reizei no katras puses. Pēdējā karte ir izšķirošā un tiek spēlēta vienreiz.",
+  "first-battle-at": "Pirmā kauja, {when}",
+  "lost": "Zaudēts",
+  "matches": "Mači ({length})",
+  "never-played": "Šī komanda nekad nav spēlējusi maču. Tā reģistrējās, bet izloze līdz tai nenonāca, kā tas notiek ar neapstiprinātu sastāvu.",
+  "no-maps-recorded": "Šim mačam nav reģistrētu karšu.",
+  "no-roster-recorded-for-this": "Šai komandai nav reģistrēta sastāva.",
+  "of-players-on-the-day": "{members} no {length} spēlētājiem tajā dienā",
+  "played-on-uncatalogued": "Spēlēts kartē {maps}, kas nav iekļauta karšu katalogā.",
+  "roster": "Sastāvs ({length})",
+  "stage-group": "{stage} · Grupa {order}",
+  "team-1": "1. komanda",
+  "team-2": "2. komanda",
+  "tournaments": "Turnīri",
+  "when-the-first-battle-started": "Kad sākās pirmā kauja",
+  "won": "uzvarēts"
+}

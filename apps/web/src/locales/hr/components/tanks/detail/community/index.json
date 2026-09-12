@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Os po os",
+  "by-server": "Prema poslužitelju",
+  "community-verdict": "Odluka zajednice",
+  "every-server-one-average": "Svaki poslužitelj, jedan prosjek",
+  "n-shown": ", prikazano {count}",
+  "opinion": "{count, plural, one {# mišljenje} few {# mišljenja} other {# mišljenja}}",
+  "opinion-next-to-win-rate": "Mišljenje uz stopu pobjeda, unutar razine {tier}",
+  "rate-the": "Ocijenite {tankName}",
+  "reputation-against-results": "Ugled nasuprot rezultatima",
+  "same-tank-different-metas": "Isti tenk, različite mete",
+  "the-same-tank-by-how": "Isti tenk, prema tome koliko dobro glasač igra",
+  "what-players-wrote": "Što su igrači napisali",
+  "who-is-saying-it": "Tko to govori"
+}

@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "clear-the-field": "{label} alanını temizle",
+  "credited-on-the-clan-s": "Klanın kendi sayfasında belirtilir.",
+  "none": "Hiçbiri",
+  "optional": "(isteğe bağlı)",
+  "pick-the-vehicle": "Aracı seç",
+  "search-for-a-clan": "Klan ara",
+  "search-for-a-vehicle": "Araç ara",
+  "search-tank": "Tank ara...",
+  "tank": "Tank",
+  "tank-hint-optional": "Bir taktik haritasına aittir, bu nedenle videoda araç da konu edilmediği sürece adını belirtmeye gerek yoktur.",
+  "tank-hint-required": "Rastgele bir savaş, oynandığı araç üzerinden incelenir."
+}

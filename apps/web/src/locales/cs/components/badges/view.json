@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Žebříček {board}",
+  "carried-beside-a-clan-tag": "Zobrazuje se vedle značky klanu. Hodnostní odznak označuje umístění v soutěži: číslo na něm udává pořadí a jeho barva příslušný žebříček. Za Hodnocení se žádný neuděluje, protože vysoké WN8 není něco, co by klan mohl vyhrát.",
+  "clan-badges": "Odznaky klanu",
+  "clan-board": {
+    "name": "Žebříček {board}, prvních {rank}",
+    "how": "Umístění mezi prvními {rank} v žebříčku {board}. Klan má odznak, dokud si umístění drží, a ztratí ho, jakmile o něj přijde."
+  },
+  "clan-overflow": "Pokud klan drží více než tři umístění, ostatní sloučí do odznaku {plus}, od nejlepšího, aby jeho značka zůstala čitelná. Po najetí se zobrazí, která to jsou.",
+  "featured-tournament-winner": {
+    "name": "Zvýrazněný turnaj: Vítěz",
+    "how": "Totéž, ale získané na akci, kterou Wargaming označil štítkem Hlavní. Odznak je zlatý, nikoli ocelový, přesně jako u hráčů."
+  },
+  "heading": "Každý {badge} a jak ho získat",
+  "heading-accent": "odznak",
+  "marks-carried-beside-a-nickname": "Značky zobrazované vedle přezdívky všude, kde se na webu {NAME} objeví: v žebříčcích, soupiskách klanů, hledání a pavoucích turnajů.",
+  "n-badges": "{count} odznaků",
+  "onslaught-champion": {
+    "name": "Šampion Náporu",
+    "how": "Dosáhl hodnosti Šampion v režimu Nápor, což je podmínkou pro samotné zařazení do žebříčku {standings}. Odznak mu pak zůstává: pokud Hodnocení znovu klesne pod hranici, hráč přijde o umístění, ne o skutečnost, že ho dosáhl."
+  },
+  "onslaught-legend": {
+    "name": "Legenda Náporu",
+    "how": "Udržel se na místě v rámci sezónní hranice pro hodnost Legenda, která představuje pořadí, nikoli skóre: míst je vždy jen omezený počet a hranice se posuzuje podle sezóny, v níž hráč místo držel. Odznak je fialový místo ocelově modrého, tedy v barvě, kterou samotný žebříček používá pro hodnost Legenda."
+  },
+  "player-badges": "Odznaky hráče",
+  "player-overflow": "Pokud má hráč více než tři odznaky, ostatní sloučí do odznaku {plus} v pořadí uvedeném výše, aby přezdívka zůstala v tabulce čitelná. Po najetí se zobrazí, které to jsou, a každý stále odkazuje tam, kam odkazoval jeho vlastní odznak.",
+  "ranked-standings": "žebříčky",
+  "streamer": {
+    "name": "Streamer",
+    "how": "S účtem je propojen kanál Twitch. Pro potvrzení propojte Twitch ve vlastním profilu a odznak bude odkazovat na váš kanál. Zobrazuje se bez ohledu na to, zda právě vysíláte."
+  },
+  "streamer-who-is-on-air": "Streamer, který právě vysílá, má také červený štítek LIVE. Ten se nezískává ani neuchovává: objeví se při zahájení vysílání a po jeho skončení zmizí, takže se nikdy nesloučí s ostatními odznaky.",
+  "support-subscription": "podpůrné předplatné",
+  "supporter": {
+    "name": "Podporovatel"
+  },
+  "supporter-note": "Aktivní {link}, který zůstává veřejně viditelný. Uživatelé s rolí Podporovatel, kteří chtějí zůstat anonymní, žádný odznak nemají, a to z vlastní volby.",
+  "the-marks-a-player-or": "Značky, které mohou hráč nebo klan používat na webu {NAME}, co každá znamená a co přesně je k jejímu získání potřeba.",
+  "tournament-winner": {
+    "name": "Vítěz turnaje",
+    "how": "Turnaj vyhrál tým přiřazený ke klanu. Wargaming eviduje týmy a účty, nikdy ne klany, takže se přiřazení obnovuje porovnáním každé soupisky s členstvím v klanu platným v den, kdy se hrálo."
+  },
+  "verified": {
+    "name": "Ověřený",
+    "how": "Majitel se přihlásil pomocí svého Wargaming.net ID a propojil tento účet. Jedinou podmínkou je přihlášení a je zdarma."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Insgesamt {battles} Gefechte",
+  "checking-your-record-on-this": "Deine Bilanz mit diesem Panzer wird geprüft...",
+  "fetching-your-garage": "Deine Garage wird abgerufen",
+  "have-you-played": "Hast du den {tank} gespielt?",
+  "more-to-go": "Noch {count} Gefechte erforderlich",
+  "more-to-go-one": "Noch {count} Gefecht erforderlich",
+  "sign-in-to-rate-it": "Anmelden, um ihn zu bewerten",
+  "sign-in-with-your-wargaming-account-to-rate-": "Melde dich mit deinem Wargaming-Konto an, um den Panzer zu bewerten. Wir lesen deine Statistik für genau dieses Fahrzeug aus. So wird diese Seite nicht zu einer Umfrage unter Leuten, die es noch nie gefahren haben.",
+  "signed-in-on": "In der Region {region} angemeldet",
+  "too-few-battles": "Du hast {played} Gefechte mit {tank} bestritten. Damit deine Stimme zählt, setzen wir {required} Gefechte voraus. So basiert dieser Durchschnitt weiterhin auf den Bewertungen von Spielern, die das Fahrzeug tatsächlich spielen.",
+  "you-have-not-played": "Du hast den {tank} nicht gespielt"
+}

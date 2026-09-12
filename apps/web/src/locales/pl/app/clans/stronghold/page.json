@@ -1,0 +1,4 @@
+{
+  "title": "Najlepsze klany {tier} ({region})",
+  "description": "Ranking klanów {tier} w regionie {region}. Klasyfikacja według SR (rankingu potyczek), ELO, liczby bitew i współczynnika zwycięstw. Minimum {battles} bitew."
+}

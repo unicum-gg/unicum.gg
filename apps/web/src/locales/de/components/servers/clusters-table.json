@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Noch kein Cluster erfasst.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Teilen",
+  "peak": "Höchstwert ({label})",
+  "average": "Durchschnitt ({label})",
+  "not-reported": "Nicht gemeldet",
+  "total": "Gesamt"
+}

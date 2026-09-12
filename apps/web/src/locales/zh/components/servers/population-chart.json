@@ -1,0 +1,4 @@
+{
+  "chart-label": "过去{range}内每台服务器的在线玩家数",
+  "not-enough-recorded-yet-for": "该范围内的记录还不够。随着采样继续进行，数据会逐渐填充。"
+}

@@ -1,0 +1,12 @@
+{
+  "aria-build": "Läs i Vanlig Test-klienten, version {version}",
+  "aria-changes": "Ändrad av Vanlig Test: {changes} egenskaper",
+  "aria-described": "Vanlig Test: {description}",
+  "aria-vehicle": "Vanlig Test-fordon",
+  "common-test": "Vanlig Test",
+  "common-test-build": "Vanlig Test {version}",
+  "tip-build": "{label} · detta är testversionens värden och Wargaming kan fortfarande ändra dem innan uppdateringen släpps",
+  "tip-changes": "Förändringar i Vanlig Test på detta fordon: {changes, plural, one {# egenskap} other {# egenskaper}}",
+  "tip-described": "Vanlig Test · {description}",
+  "tip-vehicle": "Vanlig Test · ännu inte släppt, så det saknar stridsstatistik och dess egenskaper kan fortfarande ändras"
+}

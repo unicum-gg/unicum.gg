@@ -1,0 +1,21 @@
+{
+  "title": "Betygsskala",
+  "description": "Färggränser som används på hela webbplatsen för vinstprocent och det rankningsmått som valts i navigeringsfältet.",
+  "tier": "Nivå",
+  "tiers": {
+    "top": "Bästa",
+    "excellent": "Utmärkt",
+    "super": "Super",
+    "very-good": "Mycket bra",
+    "good": "Bra",
+    "average": "Genomsnitt",
+    "below-avg": "Under medel",
+    "bad": "Dålig",
+    "very-bad": "Mycket dålig"
+  },
+  "rating-colors": "Betygsfärger",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

@@ -1,0 +1,34 @@
+{
+  "stat": "Statystyka",
+  "rows": {
+    "battles": "Bitwy",
+    "tier": "Poziom",
+    "wins": "Wygrane",
+    "losses": "Straty",
+    "draws": "Remisy",
+    "survived": "Przetrwał bitew",
+    "destroyed": "Zniszczone czołgi",
+    "destruction-ratio": "Współczynnik zniszczeń",
+    "spotted": "Wykryte czołgi",
+    "damages": "Obrażenia",
+    "track-damages": "Obrażenia torów",
+    "spotting-damages": "Obrażenia wykrywania",
+    "assisting-damages": "Obrażenia wspomagania",
+    "combined-damages": "Obrażenia łączne",
+    "base-capture": "Przechwycenie bazy",
+    "base-defense": "Obrona bazy",
+    "experience": "Doświadczenie",
+    "hit-rate": "Skuteczność trafień",
+    "personal-rating": "Klasyfikacja osobista",
+    "wtr": "Klasyfikacja World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Suma",
+    "day": "Ostatnie 24h",
+    "week": "Ostatnie 7d",
+    "month": "Ostatnie 30d"
+  }
+}

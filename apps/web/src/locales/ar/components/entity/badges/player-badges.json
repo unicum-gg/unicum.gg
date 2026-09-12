@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "المركز الأول",
+    "2": "المركز الثاني",
+    "3": "المركز الثالث"
+  },
+  "streamer": "بث مباشر · شاهد {name} على Twitch",
+  "tournament": {
+    "one": "التشكيلة الفائزة في {title}",
+    "many": "ضمن {count} تشكيلات فائزة، أفضل {title}",
+    "featured": "{text} · فعالية مميزة",
+    "unnamed": "بطولة Wargaming"
+  },
+  "tournament-wins": "{count, plural, zero {# فوز في البطولة} one {# فوز في البطولة} two {# فوزان في البطولة} few {# انتصارات في البطولة} many {# فوزًا في البطولة} other {# فوز في البطولة}}",
+  "watch-on-twitch": "شاهد {name} على Twitch",
+  "watch-on-twitch-viewers": "شاهد {name} على Twitch · {viewers} من المشاهدين"
+}

@@ -1,0 +1,5 @@
+{
+  "battles": "{count} kaujas",
+  "chart-label": "Spēlētās kaujas vienā {granularity}, iekrāsotas pēc {metric}",
+  "no-battles": "nē kaujas"
+}

@@ -1,0 +1,22 @@
+{
+  "stat": "Статистика",
+  "periods": {
+    "total": "Общо",
+    "day": "Последни 24ч",
+    "week": "Последни 7д",
+    "month": "Последни 30д"
+  },
+  "sections": {
+    "elo": "Ниво X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Ниво X (7v7)",
+    "t8": "{skirmish} Ниво VIII (7v7)",
+    "t6": "{skirmish} Ниво VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Битки",
+    "winrate": "Процент на победи"
+  }
+}

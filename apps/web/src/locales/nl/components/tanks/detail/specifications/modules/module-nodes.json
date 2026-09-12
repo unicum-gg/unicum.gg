@@ -1,0 +1,17 @@
+{
+  "aim-time": "Aim tijd",
+  "ammo": "Munitie",
+  "armor": "Bepantsering",
+  "dispersion": "Verspreiding",
+  "fire-chance": "Brand kans",
+  "gun-arc": "Kanon boog",
+  "hit-points": "Hitpoints",
+  "load-limit": "Lading limiet",
+  "mounted-on": "Gemonteerd op {tanks}",
+  "power": "Vermogen",
+  "reload": "Herladen",
+  "signal-range": "Signaal bereik",
+  "tier": "Niveau {tier}",
+  "traverse": "Draaien",
+  "view-range": "Zicht bereik"
+}

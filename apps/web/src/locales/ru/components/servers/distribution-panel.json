@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Сравнение игроков региона {region}",
+  "median-n": "медиана {value}",
+  "metric-rating": "Рейтинг {metric}",
+  "tracked-accounts-with-at-least": "Отслеживаемые аккаунты: {players}, минимум {minBattles} боёв. Цвета соответствуют тем же диапазонам, которые сайт использует повсюду.",
+  "win-rate": "Процент побед",
+  "win-rate-distribution-across-the-region-s-tr": "Распределение процента побед среди отслеживаемых игроков региона"
+}

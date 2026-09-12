@@ -42,6 +42,12 @@ export interface LoadoutEquipment {
   name: string;
   /** The device's in-game description, from the client localization. */
   description: string;
+  /**
+   * The artefacts entry that description came from, which is not always the
+   * device's own `key`: a grade variant carries the base device's, and the site
+   * needs it to show the blurb in the reader's language.
+   */
+  descriptionKey: string;
   image: string | null;
   /** Acquisition grade: standard (credits), bond, or experimental. */
   grade: EquipmentGrade;
@@ -119,13 +125,23 @@ function httpsUrl(url: string | null | undefined): string | null {
  * equals the wot-src key) for the localized name and icon. Returns null when the
  * wot-src catalogue has nothing for the tank.
  */
+/**
+ * Bumped whenever the shape below changes, because this cache outlives a
+ * deploy: a field added to the payload is absent on every hit until the TTL
+ * runs out, and the page reads the old shape without any error to show for it.
+ * The tank detail cache beside it carries the same counter for the same reason.
+ */
+const LOADOUT_SHAPE_VERSION = 1;
+
 export function getTankLoadout(
   region: Region,
   tankId: number,
   branch?: WotSrcBranch,
 ): Promise<TankLoadout | null> {
-  return cachedInRedis(`wotsrc:loadout:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
-    computeTankLoadout(region, tankId, branch),
+  return cachedInRedis(
+    `wotsrc:loadout:v${LOADOUT_SHAPE_VERSION}:${region}${branch ? `:${branch}` : ""}:${tankId}`,
+    WOTSRC_TTL_SECONDS,
+    () => computeTankLoadout(region, tankId, branch),
   );
 }
 
@@ -177,6 +193,7 @@ async function computeTankLoadout(
       key: e.key,
       name: p?.name ?? e.key,
       description: e.description,
+      descriptionKey: e.descriptionKey,
       image: httpsUrl(p?.image),
       grade: e.grade,
       icon: e.icon,

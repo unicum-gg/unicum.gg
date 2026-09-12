@@ -1,0 +1,7 @@
+{
+  "firing": "{shell} abgefeuert, {pen} mm. Schuss ändern",
+  "no-such-round": "{mark}: Dieses Geschütz hat keine, also Winkel selbst festlegen",
+  "own-round": "{mark}: eigene Munition dieses Geschützes, mit allen Werten",
+  "treat-it-as": "Behandeln als",
+  "treat-it-as-mark": "Als {mark} behandeln"
+}

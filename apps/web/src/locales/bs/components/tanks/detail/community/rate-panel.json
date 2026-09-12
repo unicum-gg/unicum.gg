@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Ukupno {battles} bitki",
+  "checking-your-record-on-this": "Provjeravamo tvoju evidenciju za ovaj tenk...",
+  "fetching-your-garage": "Dohvatamo tvoju garažu",
+  "have-you-played": "Jesi li igrao {tank}?",
+  "more-to-go": "Preostaje još {count} bitki",
+  "more-to-go-one": "Preostaje još {count} bitka",
+  "sign-in-to-rate-it": "Prijavi se da ga ocijeniš",
+  "sign-in-with-your-wargaming-account-to-rate-": "Prijavi se svojim Wargaming računom da ga ocijeniš. Čitamo tvoju evidenciju baš za ovaj tenk, što sprečava da ova stranica postane anketa ljudi koji ga nikada nisu vozili.",
+  "signed-in-on": "Prijavljen na {region}",
+  "too-few-battles": "Imaš {played} bitki u tenku {tank}. Tražimo {required} prije nego što se glas računa, kako bi ovaj prosjek ostao prosjek ljudi koji ga zaista igraju.",
+  "you-have-not-played": "Nisi igrao tenk {tank}"
+}

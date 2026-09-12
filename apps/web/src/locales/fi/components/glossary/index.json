@@ -1,0 +1,22 @@
+{
+  "search": "Etsi {count} termin joukosta",
+  "search-label": "Etsi sanastosta",
+  "all": "Kaikki",
+  "jump": "Siirry kirjaimeen",
+  "empty": "Yksikään termi ei vastaa hakua ”{query}”.",
+  "categories": {
+    "vehicles": "Vaunut",
+    "gunnery": "Ampuminen",
+    "armor": "Selviytymiskyk",
+    "mobility": "Liikkuvuus",
+    "vision": "Näkemys",
+    "crew": "Miehistö",
+    "progression": "Eteneminen",
+    "economy": "Talous",
+    "ratings": "Arvioinnit",
+    "statistics": "Tilastot",
+    "modes": "Taistelutilat",
+    "tactics": "Taktiikka",
+    "slang": "Slangi"
+  }
+}

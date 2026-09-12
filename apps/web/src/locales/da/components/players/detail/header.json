@@ -1,0 +1,7 @@
+{
+  "joined": "Tilmeldt {date}",
+  "last-battle": "Seneste kamp {when}",
+  "never-played": "Har aldrig spillet",
+  "updated": "Opdateret {when}",
+  "clan-role-joined": "{role} · tilsluttet {date}"
+}

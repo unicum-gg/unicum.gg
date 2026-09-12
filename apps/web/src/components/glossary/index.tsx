@@ -1,11 +1,10 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
+import Link from "@/components/link";
 import { useMemo, useState } from "react";
 import {
   GLOSSARY_CATEGORIES,
-  GLOSSARY_CATEGORY_LABEL,
   glossaryAcronym,
   glossaryLetter,
   searchGlossaryTerms,
@@ -17,10 +16,12 @@ import { Chip, ChipRow } from "@/components/ui/chip";
 import { Input } from "@/components/ui/input";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 const LETTERS = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ", "#"];
 
 function TermCard({ term }: { term: GlossarySummary }) {
+  const { t: tLabel } = useTranslation("components/labels");
   const acronym = glossaryAcronym(term);
   return (
     <Link
@@ -37,7 +38,7 @@ function TermCard({ term }: { term: GlossarySummary }) {
           ) : null}
         </span>
         <span className="shrink-0 text-xs uppercase tracking-wide text-fd-muted-foreground">
-          {GLOSSARY_CATEGORY_LABEL[term.category]}
+          {tLabel(`glossary-categories.${term.category}`)}
         </span>
       </div>
       <p className="text-sm text-fd-muted-foreground line-clamp-3">
@@ -63,6 +64,7 @@ export function GlossaryIndex({
   terms: GlossarySummary[];
   activeCategory?: GlossaryCategory;
 }) {
+  const { t } = useTranslation("components/glossary/index");
   const [query, setQuery] = useState("");
 
   const groups = useMemo(() => {
@@ -99,26 +101,26 @@ export function GlossaryIndex({
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder={`Search ${terms.length} terms`}
-            aria-label="Search the glossary"
+            placeholder={t("search", { count: terms.length })}
+            aria-label={t("search-label")}
             className="pl-9"
           />
         </div>
         <ChipRow className="text-sm max-w-full">
           <Chip active={!activeCategory} asChild>
-            <Link href={ROUTES.GLOSSARY}>All</Link>
+            <Link href={ROUTES.GLOSSARY}>{t("all")}</Link>
           </Chip>
           {GLOSSARY_CATEGORIES.map((category) => (
             <Chip key={category} active={activeCategory === category} asChild>
               <Link href={ROUTES.GLOSSARY_CATEGORY(category)}>
-                {GLOSSARY_CATEGORY_LABEL[category]}
+                {t(`categories.${category}`)}
               </Link>
             </Chip>
           ))}
         </ChipRow>
       </div>
 
-      <nav aria-label="Jump to letter" className="flex flex-wrap gap-1">
+      <nav aria-label={t("jump")} className="flex flex-wrap gap-1">
         {LETTERS.map((letter) => {
           const has = groups.some((group) => group.letter === letter);
           return has ? (
@@ -144,7 +146,7 @@ export function GlossaryIndex({
       {shown === 0 ? (
         <Panel>
           <PanelContent className="px-4 py-12 text-center text-fd-muted-foreground">
-            No term matches “{query}”.
+            {t("empty", { query })}
           </PanelContent>
         </Panel>
       ) : (

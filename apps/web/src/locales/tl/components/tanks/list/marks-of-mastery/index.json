@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3rd Class",
+      "tip": "3rd Class: XP na kailangan upang talunin ang 50% ng mga manlalaro"
+    },
+    "class2": {
+      "label": "2nd Class",
+      "tip": "2nd Class: XP na kailangan upang talunin ang 80% ng mga manlalaro"
+    },
+    "class1": {
+      "label": "1st Class",
+      "tip": "1st Class: XP na kailangan upang talunin ang 95% ng mga manlalaro"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: XP na kailangan para talunin ang 99% ng mga manlalaro"
+    }
+  },
+  "rows-per-page": "Mga hilera bawat pahina",
+  "previous-page": "Nakaraang pahina",
+  "page": "Pahina {current} / {totalPages}",
+  "next-page": "Susunod na pahina",
+  "all": "Lahat"
+}

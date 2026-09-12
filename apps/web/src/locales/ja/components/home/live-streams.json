@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "チャットを表示",
+    "hide": "チャットを非表示",
+    "show-streamers": "配信者を表示"
+  },
+  "heading": "{name}：World of Tanksのプレイヤー、クラン、戦車の戦績",
+  "hide": "配信者を非表示",
+  "player": "プレイヤー",
+  "stream-language": "配信言語 · {name}",
+  "stream-language-alt": "配信言語：{name}",
+  "theater": {
+    "enter": "シアターモード",
+    "exit": "シアターモードを終了"
+  },
+  "title": "現在配信中のトッププレイヤー ·",
+  "viewer-count": "視聴者{count}人",
+  "viewers": "視聴者",
+  "watch": "Twitchで{nickname}を見る"
+}

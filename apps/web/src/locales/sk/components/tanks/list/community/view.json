@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Každý tank hodnotia na päťbodovej stupnici hráči, ktorí s ním hrajú. Hlas sa započíta iba z účtu, na ktorom bolo dané vozidlo skutočne použité v bitke. Práve tým sa toto hodnotenie líši od ankety medzi náhodnými návštevníkmi.",
+  "no-tank-has-been-rated": "Zatiaľ nebol ohodnotený žiadny tank. Prvé hlasy nájdete na stránkach tankov v časti Komunita.",
+  "think": "myslieť",
+  "title": "Čo si hráči {think}",
+  "votes-across-vehicles": "Hlasy celkom: {totalVotes}. Hodnotené vozidlá: {ratedTanks}."
+}

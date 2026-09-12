@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Komórka przedstawia odsetek zwycięstw grupy na danym poziomie we wszystkich rozegranych tam bitwach, z uwzględnieniem każdego pojazdu, którym gracz rozegrał co najmniej {minBattles} bitew. Opisuje więc poziomy z perspektywy osób, które na nich grają. Komórki oparte na mniej niż {TIERWINRATETHINCELL} bitwach są wyświetlane blado: ich wartości zmieniają się z powodów innych niż umiejętności. Kolory odpowiadają tym samym przedziałom współczynnika zwycięstw, których witryna używa we wszystkich innych miejscach.",
+  "cell-no-sample": "{where}, brak próby",
+  "cell-winrate": "{where}, współczynnik zwycięstw {winrate} w {battles} bitwach",
+  "metric-band": "Przedział: {metric}",
+  "nothing-recorded": "Brak jeszcze danych dla {metric}. Siatka jest przebudowywana co noc.",
+  "over-battles-from-accounts": "Od {players} kont: {winrate} w {battles} bitwach",
+  "over-n-battles": "w {battles} bitwach",
+  "what-players-win-by-tier": "Wg poziomu: współczynnik zwycięstw graczy z grupy {label}"
+}

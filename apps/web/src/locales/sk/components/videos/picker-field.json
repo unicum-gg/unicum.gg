@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Vymazať {label}",
+  "credited-on-the-clan-s": "Uvedené na vlastnej stránke klanu.",
+  "none": "Žiadny",
+  "optional": "(možné)",
+  "pick-the-vehicle": "Izberi vozidlo",
+  "search-for-a-clan": "Vyhľadať klan",
+  "search-for-a-vehicle": "Vyhľadať vozidlo",
+  "search-tank": "Hľadať tank...",
+  "tank": "Tank",
+  "tank-hint-optional": "Taktika patrí k svojej mape, takže vozidlo má zmysel pomenovať iba vtedy, keď je video aj o ňom.",
+  "tank-hint-required": "Náhodná bitka sa vyhľadáva podľa vozidla, v ktorom bola odohraná."
+}

@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "A részletezés {min} értéknél jelenik meg, így az alakzat inkább a tankról mond valamit, nem egyetlen személyről.",
+  "community-rating-by-axis": "A közösség tengelyenkénti értékelése",
+  "from-votes": "{count} részletes szavazat alapján.",
+  "from-votes-one": "{count} részletes szavazat alapján.",
+  "nobody-yet": "Még senki sem töltötte ki a részletes tengelyeket.",
+  "only-votes": "Eddig csak {count} részletes szavazat érkezett.",
+  "only-votes-one": "Eddig csak {count} részletes szavazat érkezett."
+}

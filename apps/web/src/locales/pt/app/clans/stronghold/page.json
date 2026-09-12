@@ -1,0 +1,4 @@
+{
+  "title": "Melhores clãs de nível {tier} ({region})",
+  "description": "Classificação dos clãs de nível {tier} na região {region}. Ordenados por SR (classificação de escaramuças), ELO, batalhas e taxa de vitórias. Mínimo de {battles} batalhas."
+}

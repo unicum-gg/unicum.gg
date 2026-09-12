@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Šūna rāda joslas uzvaras šajā līmenī, ņemot vērā tās kaujas ar visiem transportlīdzekļiem, ar kuriem spēlētājam ir vismaz {minBattles} kaujas. Tādējādi tā raksturo līmeņus, kādos tos spēlē attiecīgie spēlētāji. Šūnas, kuru pamatā ir mazāk nekā {TIERWINRATETHINCELL} kauju, tiek attēlotas blāvāk, jo tās mainās arī citu iemeslu, ne tikai prasmes dēļ. Krāsas ir tās pašas uzvaru procenta joslas, ko vietne izmanto visur citur.",
+  "cell-no-sample": "{where}, nav parauga",
+  "cell-winrate": "{where}, {winrate} uzvaru procents {battles} kaujās",
+  "metric-band": "{metric} josla",
+  "nothing-recorded": "Pret {metric} vēl nekas nav reģistrēts. Režģis tiek atjaunots katru nakti.",
+  "over-battles-from-accounts": "{winrate} {battles} kaujās no {players} kontiem",
+  "over-n-battles": "{battles} kaujās",
+  "what-players-win-by-tier": "Ko {label} spēlētāji uzvar pēc līmeņa"
+}

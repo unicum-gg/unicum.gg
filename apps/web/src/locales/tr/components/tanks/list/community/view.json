@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Onu kullanan oyuncular tarafından beş üzerinden puanlanan her tank. Oy yalnızca aracı gerçekten savaşa sokmuş bir hesaptan geldiğinde sayılır. Bu da onu, karşısına çıkan herkesin katıldığı bir anketten ayırır.",
+  "no-tank-has-been-rated": "Henüz hiçbir tank puanlanmadı. İlk oylar tank sayfalarında, Topluluk bölümünde verilebilir.",
+  "think": "düşün",
+  "title": "Oyuncular ne {think}yor",
+  "votes-across-vehicles": "{ratedTanks} araç için toplam {totalVotes} oy."
+}

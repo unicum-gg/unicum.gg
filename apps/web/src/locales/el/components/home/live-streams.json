@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Εμφάνιση συνομιλίας",
+    "hide": "Απόκρυψη συνομιλίας",
+    "show-streamers": "Εμφάνιση streamer"
+  },
+  "heading": "{name}: στατιστικά παίκτη, κλαν και άρματος του World of Tanks",
+  "hide": "Απόκρυψη streamer",
+  "player": "Παίχτης",
+  "stream-language": "Γλώσσα μετάδοσης · {name}",
+  "stream-language-alt": "Γλώσσα μετάδοσης: {name}",
+  "theater": {
+    "enter": "Μόδα θεάτρου",
+    "exit": "Έξοδος από τη λειτουργία θεάτρου"
+  },
+  "title": "Κορυφαίοι παίκτες που κάνουν streaming τώρα ·",
+  "viewer-count": "{count} θεατές",
+  "viewers": "Θεατές",
+  "watch": "Παρακολουθήστε το Twitch του {nickname}"
+}

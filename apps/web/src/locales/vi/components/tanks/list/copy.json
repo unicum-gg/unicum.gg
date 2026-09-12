@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Tất cả {count} xe tăng World of Tanks tại {region}. Lọc theo cấp, quốc gia, hạng và vai trò, sau đó mở một xe tăng để xem chỉ số, người chơi giỏi nhất và giá trị kỳ vọng.",
+    "title": "Tất cả xe tăng World of Tanks ({region}), duyệt mọi xe tăng",
+    "description": "Duyệt mọi xe tăng World of Tanks tại {region}: lọc theo cấp, quốc gia, hạng và vai trò, sau đó xem sâu hơn các chỉ số riêng của xe, người chơi giỏi nhất và giá trị kỳ vọng.",
+    "heading": "Tất cả <accent>xe tăng</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, xuyên giáp, giáp, tầm nhìn và tính cơ động của tất cả {count} xe tăng World of Tanks tại {region}. Sắp xếp theo bất kỳ cột nào, sau đó lọc theo cấp, quốc gia, hạng và vai trò.",
+    "title": "Thông số xe tăng World of Tanks ({region}), so sánh mọi xe tăng",
+    "description": "So sánh thông số của mọi xe tăng World of Tanks tại {region}: DPM, xuyên giáp, giáp, tầm nhìn và tính cơ động, có thể sắp xếp và lọc theo cấp, quốc gia, hạng và vai trò.",
+    "heading": "Thông số kỹ thuật của Xe tăng <accent>specifications</accent>"
+  },
+  "economics": {
+    "intro": "Chi phí mua và sửa chữa, giá đạn và thu nhập bạc của tất cả {count} xe tăng World of Tanks tại {region}. Sắp xếp theo bất kỳ cột nào, sau đó lọc theo cấp, quốc gia, hạng và vai trò.",
+    "title": "Kinh tế xe tăng World of Tanks ({region}), chi phí bạc và X",
+    "description": "Chi phí bạc và X, giá sửa chữa và đạn của mọi xe tăng World of Tanks tại {region}, có thể sắp xếp và lọc theo cấp, quốc gia, hạng và vai trò.",
+    "heading": "Kinh tế <accent>xe tăng</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Sát thương trung bình trượt cần thiết để đạt một, hai và ba dấu trên tất cả {count} xe tăng World of Tanks tại {region}. Sắp xếp theo bất kỳ cột nào, sau đó lọc theo cấp, quốc gia, hạng và vai trò.",
+    "title": "Yêu cầu dấu xuất sắc của World of Tanks ({region})",
+    "description": "Sát thương cần thiết để đạt một, hai và ba dấu xuất sắc trên mọi xe tăng World of Tanks tại {region}, có thể sắp xếp và lọc theo cấp, quốc gia, hạng và vai trò.",
+    "heading": "<accent>Các dấu xuất sắc</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Các ngưỡng X để đạt Ace Tanker và huy hiệu tinh thông cho tất cả {count} xe tăng World of Tanks tại {region}. Sắp xếp theo bất kỳ cột nào, sau đó lọc theo cấp, quốc gia, hạng và vai trò.",
+    "title": "Yêu cầu dấu tinh thông của World of Tanks ({region})",
+    "description": "Các ngưỡng X để đạt Ace Tanker và huy hiệu tinh thông cho mọi xe tăng World of Tanks tại {region}, có thể sắp xếp và lọc theo cấp, quốc gia, hạng và vai trò.",
+    "heading": "<accent>Các dấu tinh thông</accent>"
+  },
+  "videos": {
+    "intro": "{count} trận đấu mà cộng đồng đã liên kết tại {region}, mỗi video mở đúng tại giây bắt đầu trận đấu. Được đề xuất từ các trang xe tăng và kiểm tra trước khi xuất hiện ở đây.",
+    "title": "Video trận đấu World of Tanks ({region})",
+    "description": "Các trận đấu World of Tanks do cộng đồng đề xuất tại {region}, mỗi video mở đúng tại giây bắt đầu trận đấu: xe tăng được sử dụng, bản đồ, phía tham chiến và cách trận đấu kết thúc.",
+    "heading": "Video <accent>gameplay</accent>"
+  }
+}

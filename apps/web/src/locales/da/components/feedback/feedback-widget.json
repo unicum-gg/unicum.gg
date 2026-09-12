@@ -1,0 +1,21 @@
+{
+  "trigger": "Feedback",
+  "title": "Del din feedback",
+  "topic-placeholder": "Vælg et emne...",
+  "message-placeholder": "Din feedback...",
+  "send": "Send",
+  "sent": "Tak for din feedback!",
+  "failed": "Kunne ikke sende feedback. Prøv igen.",
+  "topics": {
+    "bug": "Fejlrapport",
+    "idea": "Idé til ny funktion",
+    "data": "Data nøjagtighed",
+    "other": "Andet"
+  },
+  "sentiments": {
+    "awful": "Forfærdeligt",
+    "bad": "Dårlig",
+    "good": "God",
+    "great": "Fremragende"
+  }
+}

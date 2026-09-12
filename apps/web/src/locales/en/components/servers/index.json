@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "How many players are on each {label} server right now, how that number moves through the day and the week, and how the region compares with the others.",
+  "recording-just-started": "Recording has just started, so the charts fill in from here.",
+  "series-starts": "The series starts on {at}, when the recording started, and nothing before it can be recovered.",
+  "server-population": "{label} server population",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "Wargaming names a region’s first clusters and leaves the rest as bare identifiers, so 203 is shown as EU3, continuing the region’s own numbering. The identifier is what we record and what each name reveals on hover, and it is what the label follows: numbering the clusters by how busy they are would move a name from one server to another whenever two of them traded places. A server missing from a sample was not reported at all, which is not the same as empty.",
+  "we-record-it": "Wargaming publishes each server’s population as an instant and keeps no history of it, so every figure past the current minute is one we recorded ourselves, every five minutes.",
+  "where-battles-are-fought": "Where {label} battles are fought"
+}

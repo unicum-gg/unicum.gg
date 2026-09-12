@@ -1,0 +1,21 @@
+{
+  "title": "Marcas y Maestría de {nickname}",
+  "excellence": {
+    "title": "Marcas de excelencia",
+    "description": "Vehículos según las Marcas de su cañón. Una Marca representa una media sostenida: el juego la calcula mediante una ventana móvil de batallas recientes y la compara con el rendimiento de la región con ese vehículo.",
+    "partial": "Se conocen las Marcas de {known} de {garage} Vehículos. Las demás se añadirán a medida que se actualice la cuenta.",
+    "note": "De los {garage} vehículos, {marked} llevan una marca.",
+    "note-share": "{marked} de {garage} Vehículos tienen una Marca ({percent}% del garaje)."
+  },
+  "mastery": {
+    "title": "Marcas de Maestría",
+    "description": "Vehículos según su mejor insignia. Una insignia corresponde a una sola batalla, no a una media: el juego la concede según la experiencia obtenida en una partida, comparada con la que consigue la región con ese vehículo.",
+    "note": "{aces} de {garage} Vehículos tienen la insignia As del Tanque.",
+    "note-share": "{aces} de {garage} Vehículos tienen la insignia As del Tanque ({percent}% del garaje)."
+  },
+  "reach": {
+    "heading": "Jugando por encima del Cañón",
+    "description": "Vehículos cuyo daño combinado ya supera el umbral de una Marca que aún no tienen. La insignia muestra ese daño combinado, con el color de la Marca cuyo umbral supera."
+  },
+  "none": "Ninguno"
+}

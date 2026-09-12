@@ -1,0 +1,25 @@
+{
+  "tagline": "World of Tanks 커뮤니티를 위해 제작되었습니다. EU, NA, 아시아의 모든 플레이어, 클랜, 전차, 지도에 대한 무료 통계를 제공합니다.",
+  "columns": {
+    "leaderboards": "리더보드",
+    "tanks": "탱크",
+    "maps": "지도",
+    "integrations": "연동",
+    "project": "프로젝트"
+  },
+  "links": {
+    "top-tanks": "최고 탱크",
+    "bot": "Discord 봇",
+    "mcp": "MCP 서버",
+    "docs": "API 문서",
+    "badges": "배지",
+    "glossary": "용어집",
+    "coverage": "데이터 범위",
+    "support": "후원해 주세요",
+    "source": "소스 코드",
+    "status": "상태",
+    "discord": "Discord"
+  },
+  "disclaimer": "워게이밍과 제휴하지 않음",
+  "cookies": "쿠키 관리"
+}

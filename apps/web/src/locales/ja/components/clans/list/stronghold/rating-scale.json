@@ -1,0 +1,17 @@
+{
+  "average": "平均",
+  "bad": "悪い",
+  "below-avg": "平均未満",
+  "color-thresholds-for-the-stronghold": "要塞戦ランキングの色のしきい値。すべてのTierで同じ絶対スケールを使用するため、SR（またはSRB）はどこでも同じクラン品質を意味します。",
+  "excellent": "優秀",
+  "good": "良い",
+  "rating-colors": "レーティングカラー",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "スーパー",
+  "tier": "Tier",
+  "top": "トップ",
+  "very-bad": "非常に悪い",
+  "very-good": "非常に良い",
+  "wr": "WR"
+}

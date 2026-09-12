@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, спечелени {count}×",
+  "aria-not-earned": "{name}, не е спечелено",
+  "no-longer-obtainable": "Вече не може да бъде получено.",
+  "not-earned": "Не е спечелено"
+}

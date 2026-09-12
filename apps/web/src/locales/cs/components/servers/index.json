@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Hráči online v regionu {label}: jejich aktuální počet pro každý Server, jeho změny během dne a týdne a srovnání regionu s ostatními.",
+  "recording-just-started": "Zaznamenávání právě začalo, takže grafy se budou plnit až od tohoto okamžiku.",
+  "series-starts": "Řada začíná v okamžiku {at}, kdy bylo spuštěno zaznamenávání. Dřívější data nelze obnovit.",
+  "server-population": "Populace serveru: {label}",
+  "title": "World of Tanks: {population}",
+  "wargaming-names-a-region-s": "Wargaming pojmenovává první clustery daného regionu a ostatní ponechává pouze pod jejich identifikátory, takže 203 se zobrazuje jako EU3 a pokračuje tak ve vlastním číslování regionu. Zaznamenáváme právě identifikátor, který se také zobrazí u každého názvu po najetí myší, a označení z něj vychází. Kdyby se clustery číslovaly podle vytíženosti, název by se při každé výměně jejich pořadí přesunul z jednoho na druhý. Server, který v některém vzorku chybí, nebyl vůbec nahlášen, což není totéž jako nulová populace.",
+  "we-record-it": "Wargaming zveřejňuje pro každý Server pouze aktuální hodnotu metriky „Populace serveru“ a její historii neuchovává. Každou hodnotu starší než aktuální minuta jsme proto zaznamenali sami, vždy po pěti minutách.",
+  "where-battles-are-fought": "Místa konání Bitev v regionu {label}"
+}

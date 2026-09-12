@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Mostra i migliori clan della regione {region} con più di 50 membri che hanno disputato battaglie, classificati in base alla media della metrica {metric}.",
+    "month": "Mostra i migliori clan della regione {region} con più di 50 membri che hanno disputato battaglie, classificati in base alla metrica {metric} negli ultimi 30 giorni (min. 15 attivi)."
+  },
+  "updated": "Aggiornato {when}.",
+  "empty": "Non sono ancora disponibili dati sui clan per questa regione.",
+  "rank": "#",
+  "clan": "Clan",
+  "average": "Media {metric}"
+}

@@ -25,7 +25,11 @@ export const VIEW_LABEL: Record<View, string> = {
   [View.Live]: "Live",
 };
 
-/** And what it answers, for anyone the word does not tell. */
+/** And what it answers, for anyone the word does not tell.
+ *
+ * The English source and the key side: the controls read
+ * `view-tooltips.<view>` so a French reader gets the sentence in French, and
+ * this stays the one place the wording is written. */
 export const VIEW_TOOLTIP: Record<View, string> = {
   [View.Visual]: "The tank as the game draws it",
   [View.Collision]: "How thick each plate is",

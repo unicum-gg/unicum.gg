@@ -1,0 +1,6 @@
+{
+  "day": "Ranked by {metric} over the past 24 hours (min. 20 battles).",
+  "week": "Ranked by {metric} over the past 7 days (min. 140 battles).",
+  "month": "Ranked by {metric} over the past 30 days (min. 600 battles).",
+  "overall": "Ranked by all-time {metric} (min. 20,000 battles)."
+}

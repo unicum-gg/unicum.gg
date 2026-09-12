@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1.º lugar",
+    "2": "2.º lugar",
+    "3": "3.º lugar"
+  },
+  "streamer": "Streamer · ver {name} na Twitch",
+  "tournament": {
+    "one": "Equipa vencedora do torneio {title}",
+    "many": "Em {count} equipas vencedoras, a melhor foi a do torneio {title}",
+    "featured": "{text} · um evento em destaque",
+    "unnamed": "um torneio da Wargaming"
+  },
+  "tournament-wins": "{count, plural, one {# vitória em torneio} other {# vitórias em torneios}}",
+  "watch-on-twitch": "Ver {name} na Twitch",
+  "watch-on-twitch-viewers": "Ver {name} na Twitch · {viewers} espectadores"
+}

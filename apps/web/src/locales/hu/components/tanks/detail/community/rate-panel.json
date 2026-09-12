@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Összesen {battles} csata",
+  "checking-your-record-on-this": "A tankon elért eredményeid ellenőrzése...",
+  "fetching-your-garage": "Garázsod lekérése",
+  "have-you-played": "Játszottál már a(z) {tank} tankkal?",
+  "more-to-go": "Még {count} csata szükséges",
+  "more-to-go-one": "Még {count} csata szükséges",
+  "sign-in-to-rate-it": "Jelentkezz be az értékeléshez",
+  "sign-in-with-your-wargaming-account-to-rate-": "Jelentkezz be Wargaming-fiókoddal az értékeléshez. A pontosan ezen a tankon elért eredményeidet olvassuk ki, így az oldal nem válik olyan játékosok szavazásává, akik soha nem vezették.",
+  "signed-in-on": "Bejelentkezve: {region}",
+  "too-few-battles": "{played} csatád van a(z) {tank} tankkal. {required} csatát kérünk, mielőtt a szavazat számítana, hogy ez az átlag tényleg azok átlaga maradjon, akik valóban játszanak vele.",
+  "you-have-not-played": "Nem játszottál a(z) {tank} tankkal"
+}

@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name}:n panssarivaunut ({region}), kaikki pelatut ajoneuvot",
+    "description": "Kaikki panssarivaunut, joilla {name} on pelannut alueella {region}, sekä taistelut, voittoprosentti, keskimääräinen vahinko ja ajoneuvokohtainen WN8."
+  },
+  "achievements": {
+    "title": "{name}:n saavutukset ({region}), {medals} ansaittua mitalia",
+    "description": "{name}:n alueella {region} ansaitsemat {medals} World of Tanks -mitalia Kolobanovin ja Poolin mitaleista kunniamerkkeihin ja eeppisiin mitaleihin sekä kaikki vielä ansaitsematta olevat mitalit."
+  },
+  "tournaments": {
+    "title": "{name}:n turnaukset ({region})",
+    "description": "Jokainen Wargaming-turnaus, johon {name} on osallistunut alueella {region}: joukkue, jossa hän pelasi, pelimuoto ja saavutettu vaihe. Wargaming julkaisee tiedot vain turnauksen näkökulmasta, ei koskaan pelaajan näkökulmasta."
+  },
+  "value": {
+    "title": "{name}:n tilin arvo ({region})",
+    "description": "Minkä arvoinen {name}:n World of Tanks -tili alueella {region} on: talliin sidotut krediitit, kulta ja kokemus."
+  },
+  "mode": {
+    "title": "{name}: {mode}-tilastot ({region})",
+    "description": "{name} alueella {region} pelimuodossa {mode}: taistelut, voittoprosentti ja arvosanat tässä pelimuodossa satunnaistaistelujen vertailutason rinnalla."
+  },
+  "overview": {
+    "title": "{name}: World of Tanks -tilastot ({region}), {battles} taistelua, {winrate} % voittoprosentti",
+    "description": "{name} alueella {region}: {battles} taistelua, {winrate} % voittoprosentti, {rating} arvosana. Panssarivaunukohtainen erittely, WN8, WNX ja täysi klaanihistoria."
+  },
+  "locked": {
+    "title": "{name}: lukittu World of Tanks -tili ({region})",
+    "description": "{name} ({region}) on olemassa, mutta Wargaming on lukinnut tämän tilin, joten sen World of Tanks -tilastot eivät ole saatavilla."
+  },
+  "empty": {
+    "title": "{name}: World of Tanks -pelaajan tilastot ({region})",
+    "description": "{name} ({region}) World of Tanks -pelaajan tilastot: WN8- ja WNX-arvosanat, voittoprosentti, panssarivaunukohtainen erittely ja täysi klaanihistoria."
+  }
+}

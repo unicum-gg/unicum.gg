@@ -1,0 +1,12 @@
+{
+  "achievements": "Faits d’armes de {nickname}",
+  "filter-all": "Tous",
+  "filter-both": "Les deux",
+  "filter-earned": "Gagnés",
+  "filter-missing": "Manquants",
+  "filter-obtainable": "À gagner",
+  "filter-retired": "Retirés",
+  "no-achievement-matches-these-filters": "Aucun accomplissement ne correspond à ces filtres.",
+  "search-achievements": "Chercher des faits d’armes",
+  "search-among-n-achievements": "Chercher parmi {count} succès"
+}

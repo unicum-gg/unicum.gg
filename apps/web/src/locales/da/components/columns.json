@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "player": "Spiller",
+  "members": "Medlemmer",
+  "battles": "Kampe",
+  "avg-damage": "Gns. skade",
+  "avg-xp": "Gns. XP",
+  "winrate": "Sejrsrate %",
+  "result": "Resultat",
+  "tournament": "Turnering",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

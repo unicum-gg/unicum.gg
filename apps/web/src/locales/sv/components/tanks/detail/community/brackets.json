@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Strider",
+  "no-votes": "nej röster",
+  "rated-higher": "Skickligare spelare ger den {stars} stjärnor högre betyg än resten av servern. Den här belönar spelare som vet vad de gör.",
+  "rated-lower": "Skickligare spelare ger den {stars} stjärnor lägre betyg än resten av servern. Den får dig att verka bättre än du är, tills den sätts på prov.",
+  "votes": "{count} röster",
+  "votes-one": "{count} röst"
+}

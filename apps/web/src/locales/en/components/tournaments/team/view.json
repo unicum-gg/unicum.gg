@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "The draw has not been made yet. This team’s ties appear here once the tournament starts.",
+  "each-map-is-played-twice": "Each map is played twice, once from each side. The last map is the decider, played once.",
+  "first-battle-at": "First battle, {when}",
+  "lost": "Lost",
+  "matches": "Matches ({length})",
+  "never-played": "This team never played a tie. It registered but the draw did not reach it, which is what happens to a roster left unconfirmed.",
+  "no-maps-recorded": "No maps recorded for this tie.",
+  "no-roster-recorded-for-this": "No roster recorded for this team.",
+  "of-players-on-the-day": "{members} of {length} players on the day",
+  "played-on-uncatalogued": "Played on {maps}, which the map catalogue does not carry.",
+  "roster": "Roster ({length})",
+  "stage-group": "{stage} · Group {order}",
+  "team-1": "Team 1",
+  "team-2": "Team 2",
+  "tournaments": "Tournaments",
+  "when-the-first-battle-started": "When the first battle started",
+  "won": "Won"
+}

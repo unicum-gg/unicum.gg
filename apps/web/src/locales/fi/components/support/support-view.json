@@ -1,0 +1,15 @@
+{
+  "become-a-supporter": "Ryhdy tukijaksi",
+  "community-funded-ad-free": "Yhteisön rahoittama · Mainokseton",
+  "coverage-page": "katsojan sivu",
+  "every-euro-keeps-running-supporters": "Jokainen euro pitää käyttäjän {NAME} toiminnassa. Tukijat saavat merkin pelaajasivulleen ja paikan alla olevalle palkintokorokkeelle, mutta mitään ei koskaan lukita tämän taakse eikä mainoksia tule koskaan. Kyseessä on kuukausitilaus, jota hallitset täysin.",
+  "how-is-funded": "Miten käyttäjä {NAME} rahoitetaan",
+  "is-free-open-source-and": "Käyttäjä {NAME} on ilmainen, avoimen lähdekoodin ja mainokseton, ja se toimii tappiolla. Ei mainoksia, koskaan. Jos siitä on sinulle hyötyä, lahjoita haluamasi summa alkaen 3 € kuukaudessa ja pidä World of Tanks -seuranta toiminnassa ja kasvavana.",
+  "it-runs-on-a-single": "Se toimii yhdellä vuokratulla palvelimella, ja jokainen euro palautuu projektiin: palvelimeen, tietokantaan, Wargamingin hyväksymiin ulospäin suuntautuviin IP-osoitteisiin, joiden avulla voimme päivittää useampien pelaajien tiedot, sekä satunnaisiin mainoksiin, joilla se saadaan useampien ihmisten nähtäville. Tukijat kattavat kuukausilaskun. Ylimääräinen käytetään suurempaan läpimenokykyyn ja uusiin ominaisuuksiin.",
+  "no-ads-no-investors-no": "Ei mainoksia, ei sijoittajia, ei tietojen myyntiä. Käyttäjän {NAME} rahoittavat kokonaan sitä käyttävät pelaajat.",
+  "no-supporters-yet-be-the": "Ei vielä tukijoita. Ole ensimmäinen palkintokorokkeella.",
+  "same-numbers-as": "Täsmälleen samat luvut kuin lähteessä {link}.",
+  "title": "Tukija {name}",
+  "top-supporters": "Parhaat tukijat",
+  "where-your-money-goes": "Mihin rahasi menevät"
+}

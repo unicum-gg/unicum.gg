@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Topp spelare · Senaste 24 timmarna"
+    },
+    "week": {
+      "title": "Topp spelare · Senaste 7 dagarna"
+    }
+  },
+  "rating-scale": {
+    "title": "Betygsskala"
+  },
+  "community": {
+    "title": "Gå med i gemenskapen",
+    "heading": "Kom i kontakt med WoT-spelare",
+    "description": "Gå med i vår Discord för att prata om WoT-statistik, föreslå funktioner och rapportera buggar. Eller gå till GitHub för att granska koden och bidra.",
+    "discord": "Gå med på Discord",
+    "github": "Visa på GitHub"
+  },
+  "features": {
+    "title": "Det här hittar du här",
+    "profiles": {
+      "title": "Spelarprofiler",
+      "description": "Detaljerad statistik med totalvärden + förändringar för 24 t / 7 d / 30 d, WN7, WN8, WNX och Spelarbetyg."
+    },
+    "clans": {
+      "title": "Klansidor",
+      "description": "Medlemmar i en tabell med rankningar, flöde för senaste aktivitet, beskrivning och klanmetadata."
+    },
+    "history": {
+      "title": "Klanhistorik",
+      "description": "Fullständig tidslinje över alla klaner som en spelare har varit med i, med roller och datum."
+    },
+    "live": {
+      "title": "Löpande uppdateringar",
+      "description": "Spårade spelare uppdateras i bakgrunden var 24:e timme via vårt system för ögonblicksbilder."
+    },
+    "leaderboards": {
+      "title": "Leaderboard",
+      "description": "Topp spelare (24 t, 7 d, genom tiderna) och toppklaner rankade efter WNX utifrån våra ögonblicksbilder."
+    },
+    "open-source": {
+      "title": "Öppen källkod · AGPL",
+      "description": "Koden finns på GitHub. Granska, forka och bidra. Inga annonser, endast analys som du själv väljer att delta i."
+    }
+  },
+  "quick-start": {
+    "title": "Snabbstart",
+    "search": {
+      "title": "🔍 Sök spelare eller klaner",
+      "description": "Tryck på {shortcut} för att öppna sökningen och skriv sedan ett smeknamn eller en klantagg."
+    },
+    "region": {
+      "title": "🌍 Byt region",
+      "description": "Använd väljaren {selector} i navigeringsfältet. Leaderboard uppdateras i enlighet med valet."
+    },
+    "leaderboards": {
+      "title": "🏆 Utforska Leaderboard",
+      "description": "Topp spelare (24 t, 7 d, genom tiderna) och toppklaner rankade efter genomsnittlig WNX utifrån våra ögonblicksbilder."
+    },
+    "colors": {
+      "title": "📊 Tolka färgerna",
+      "description": "WR, WN7, WN8 och WNX använder samma nivåfärger (orange → grön → cyan → lila). Se skalan ovan."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

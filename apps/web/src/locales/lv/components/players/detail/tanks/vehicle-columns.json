@@ -1,0 +1,4 @@
+{
+  "columns": "Kolonnas",
+  "n-marks-of-excellence": "{count, plural, zero {# izcilības atzīmju} one {# izcilības atzīme} other {# izcilības atzīmes}}"
+}

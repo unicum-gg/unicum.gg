@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "World of Tanks 的全部{count}个战斗场地。按迷彩和游戏模式筛选，然后打开地图查看小地图、大小以及各模式的基地标志和出生点。",
+    "title": "全部 World of Tanks 地图（{region}），每个战斗场地",
+    "description": "浏览{region}上的每张 World of Tanks 地图：小地图、大小、迷彩和支持的游戏模式，以及各模式的基地标志和出生点。",
+    "heading": "所有<accent>地图</accent>"
+  },
+  "battle-type": {
+    "intro": "在{type}中进行的{count}张 World of Tanks 地图，{blurb}。打开地图查看小地图、大小以及各模式的基地标志和出生点。",
+    "title": "World of Tanks {type}地图（{region}），轮换中的每个战斗场地",
+    "description": "{region}上{type}轮换中的每张 World of Tanks 地图：小地图、大小、迷彩和支持的游戏模式，以及基地标志和出生点。",
+    "heading": "{type} <accent>地图</accent>"
+  },
+  "blurbs": {
+    "random": "标准15v15轮换",
+    "battle_royale": "最后一辆坦克存活模式",
+    "frontline": "30v30大规模模式",
+    "onslaught": "排位7v7模式",
+    "onslaught_night": "夜间排位7v7模式，视野范围更短，目前可在公共测试中进行",
+    "grand_battle": "30v30十级模式",
+    "clan_wars": "军团战和推进战",
+    "waffentrager": "Waffenträger活动",
+    "last_stand": "Last Stand活动",
+    "arcade": "街机和特殊活动",
+    "story_mode": "剧情驱动的行动",
+    "training": "训练房和教程"
+  }
+}

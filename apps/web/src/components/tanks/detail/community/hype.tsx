@@ -1,10 +1,11 @@
+import { numberFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
 import {
-  RATING_HYPE_LABEL,
   ratingHype,
   RatingHype,
 } from "@unicum.gg/shared";
 
-const pctFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const PCT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /**
  * What players think, next to what the tank actually does.
@@ -19,24 +20,25 @@ const pctFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
  * hold both halves. A tank the server adores and that loses games is a tank
  * whose reputation is doing the work.
  */
-export function HypeGauge({
+export async function HypeGauge({
   hype,
   perceived,
   measured,
-  tier,
+  tier, locale,
 }: {
   hype: number | null;
   perceived: number | null;
   measured: number | null;
   tier: number;
+  locale: string;
 }) {
+  const { t: tLabel } = await getTranslation("components/labels", locale);
+  const { t } = await getTranslation("components/tanks/detail/community/hype", locale);
   const verdict = ratingHype(hype);
   if (verdict == null || perceived == null || measured == null) {
     return (
       <p className="text-sm text-fd-muted-foreground">
-        Not enough votes yet to compare the community&apos;s verdict against how
-        the tank actually performs.
-      </p>
+        {t("not-enough-votes-yet-to")}</p>
     );
   }
 
@@ -47,23 +49,23 @@ export function HypeGauge({
           className="rounded-md px-2 py-0.5 text-sm font-semibold text-white"
           style={{ backgroundColor: HYPE_COLOR[verdict] }}
         >
-          {RATING_HYPE_LABEL[verdict]}
+          {tLabel(`rating-hype.${verdict}`)}
         </span>
         <span className="text-sm text-fd-muted-foreground">
-          {VERDICT_LINE[verdict]}
+          {t(VERDICT_KEY[verdict])}
         </span>
       </div>
 
       <div className="flex flex-col gap-3">
-        <PercentileBar
-          label="What players think"
-          hint={`Where the community ranks it among the rated tier ${tier} tanks`}
+        <PercentileBar locale={locale}
+          label={t("what-players-think")}
+          hint={t("perceived-hint", { tier })}
           value={perceived}
           tone="var(--color-fd-primary)"
         />
-        <PercentileBar
-          label="What the data says"
-          hint={`Where its win rate ranks it among the same tanks`}
+        <PercentileBar locale={locale}
+          label={t("what-the-data-says")}
+          hint={t("measured-hint")}
           value={measured}
           tone="var(--color-fd-muted-foreground)"
         />
@@ -82,24 +84,25 @@ export function HypeGauge({
  * community half can be ranked over at all, and ranking the two over different
  * sets would make their difference measure which tanks people bothered to rate.
  */
-function PercentileBar({
+async function PercentileBar({
   label,
   hint,
   value,
-  tone,
+  tone, locale,
 }: {
   label: string;
   hint: string;
   value: number;
   tone: string;
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/tanks/detail/community/hype", locale);
   return (
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3">
         <span className="text-sm font-medium">{label}</span>
         <span className="text-xs text-fd-muted-foreground tabular-nums">
-          above {pctFmt.format(value * 100)}% of the rated tanks in its tier
-        </span>
+          {t("above-of-the-rated-tanks", { value: numberFormat(locale, PCT_FORMAT).format(value * 100) })}</span>
       </div>
       <div className="h-2 w-full overflow-hidden rounded-sm bg-fd-border/60">
         <div
@@ -118,10 +121,11 @@ const HYPE_COLOR: Record<RatingHype, string> = {
   [RatingHype.Underrated]: "#6D9521",
 };
 
-const VERDICT_LINE: Record<RatingHype, string> = {
-  [RatingHype.Overrated]:
-    "The community rates it well above what it actually achieves.",
-  [RatingHype.Fair]: "Reputation and results agree on this one.",
-  [RatingHype.Underrated]:
-    "It performs better than anybody gives it credit for.",
+/** The sentence under the verdict, keyed by the verdict rather than spelled
+ * here, so the three readings live in the locale files like every other
+ * string. */
+const VERDICT_KEY: Record<RatingHype, string> = {
+  [RatingHype.Overrated]: "verdict.overrated",
+  [RatingHype.Fair]: "verdict.fair",
+  [RatingHype.Underrated]: "verdict.underrated",
 };

@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/format";
 import type { ReactNode } from "react";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import {
@@ -10,15 +11,15 @@ import {
   type SessionStats,
 } from "@unicum.gg/shared";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const dec2Fmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const DEC2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pct1Fmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT1_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
+} as const;
 
 export const DASH: ReactNode = (
   <span className="text-fd-muted-foreground">&mdash;</span>
@@ -40,7 +41,13 @@ export type SessionColumn = {
   tip?: string;
   /** The rating column follows the reader's metric, so its header moves. */
   header?: (metric: RatingMetric) => string;
-  cell: (s: SessionStats, metric: RatingMetric) => SessionCell;
+  /** `locale` rides along like `metric`: a column definition is data at module
+   * scope, so the reader's number formatting arrives from its renderer. */
+  cell: (
+    s: SessionStats,
+    metric: RatingMetric,
+    locale: string,
+  ) => SessionCell;
   /**
    * Left out below `sm`.
    *
@@ -70,8 +77,12 @@ function ratingColorClass(value: number, metric: RatingMetric): string {
   return RATING_COLOR_CLASS[wnxColor(value)];
 }
 
-const num = (v: number | null, fmt: Intl.NumberFormat): SessionCell => ({
-  node: v == null ? DASH : fmt.format(v),
+const num = (
+  v: number | null,
+  options: Intl.NumberFormatOptions,
+  locale: string,
+): SessionCell => ({
+  node: v == null ? DASH : numberFormat(locale, options).format(v),
 });
 
 export const SESSION_COLUMNS: SessionColumn[] = [
@@ -80,10 +91,10 @@ export const SESSION_COLUMNS: SessionColumn[] = [
     label: "Rating (WN)",
     header: (m) => metricLabel(m),
     tip: "Rating of these battles alone, not of the account",
-    cell: (s, metric) => {
+    cell: (s, metric, locale) => {
       const v = ratingOf(s, metric);
       return {
-        node: v == null ? DASH : intFmt.format(v),
+        node: v == null ? DASH : numberFormat(locale, INT_FORMAT).format(v),
         className: v == null ? undefined : ratingColorClass(v, metric),
       };
     },
@@ -92,29 +103,29 @@ export const SESSION_COLUMNS: SessionColumn[] = [
     key: "winrate",
     label: "WR",
     tip: "Win rate over these battles",
-    cell: (s) => ({
-      node: `${pct1Fmt.format(s.winrate * 100)}%`,
+    cell: (s, _metric, locale) => ({
+      node: `${numberFormat(locale, PCT1_FORMAT).format(s.winrate * 100)}%`,
       className: RATING_COLOR_CLASS[winrateColor(s.winrate)],
     }),
   },
   {
     key: "avgDamage",
     label: "Avg damage",
-    cell: (s) => num(s.avgDamage, intFmt),
+    cell: (s, _metric, locale) => num(s.avgDamage, INT_FORMAT, locale),
   },
   {
     key: "avgFrags",
     label: "Avg frags",
     hideOnMobile: true,
     tip: "Enemies destroyed per battle",
-    cell: (s) => num(s.avgFrags, dec2Fmt),
+    cell: (s, _metric, locale) => num(s.avgFrags, DEC2_FORMAT, locale),
   },
   {
     key: "damageRatio",
     label: "Damage ratio",
     hideOnMobile: true,
     tip: "Damage caused over damage received",
-    cell: (s) => num(s.damageRatio, dec2Fmt),
+    cell: (s, _metric, locale) => num(s.damageRatio, DEC2_FORMAT, locale),
     has: (s) => s.damageRatio != null,
   },
   {
@@ -122,16 +133,16 @@ export const SESSION_COLUMNS: SessionColumn[] = [
     label: "Destruction ratio",
     hideOnMobile: true,
     tip: "Enemies destroyed over vehicles lost",
-    cell: (s) => num(s.kd, dec2Fmt),
+    cell: (s, _metric, locale) => num(s.kd, DEC2_FORMAT, locale),
     has: (s) => s.kd != null,
   },
   {
     key: "survivalRate",
     label: "Battles survived",
     hideOnMobile: true,
-    cell: (s) => ({
+    cell: (s, _metric, locale) => ({
       node:
-        s.survivalRate == null ? DASH : `${pct1Fmt.format(s.survivalRate * 100)}%`,
+        s.survivalRate == null ? DASH : `${numberFormat(locale, PCT1_FORMAT).format(s.survivalRate * 100)}%`,
     }),
     has: (s) => s.survivalRate != null,
   },
@@ -140,20 +151,20 @@ export const SESSION_COLUMNS: SessionColumn[] = [
     label: "Avg spotted",
     hideOnMobile: true,
     tip: "Enemies spotted per battle",
-    cell: (s) => num(s.avgSpotted, dec2Fmt),
+    cell: (s, _metric, locale) => num(s.avgSpotted, DEC2_FORMAT, locale),
   },
   {
     key: "avgDefense",
     label: "Base defense",
     hideOnMobile: true,
     tip: "Defence points per battle",
-    cell: (s) => num(s.avgDefense, dec2Fmt),
+    cell: (s, _metric, locale) => num(s.avgDefense, DEC2_FORMAT, locale),
   },
   {
     key: "avgXp",
     label: "Avg XP",
     hideOnMobile: true,
-    cell: (s) => num(s.avgXp, intFmt),
+    cell: (s, _metric, locale) => num(s.avgXp, INT_FORMAT, locale),
     has: (s) => s.avgXp != null,
   },
 ];
@@ -165,4 +176,4 @@ export function visibleSessionColumns(
   return SESSION_COLUMNS.filter((c) => !c.has || sessions.some(c.has));
 }
 
-export { intFmt as sessionIntFmt };
+export { INT_FORMAT as sessionIntFmt };

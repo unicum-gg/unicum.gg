@@ -1,0 +1,14 @@
+{
+  "ammunition": "Streljivo",
+  "characteristics": "Karakteristike tenka {tank}",
+  "consumables": "Potrošni materijal",
+  "crew-level": "Nivo posade",
+  "crew-skills": "Vještine posade",
+  "equipment": "Oprema",
+  "field-mods": "Terenske modifikacije",
+  "historical-reference": "Povijesni pregled tenka {tank}",
+  "modules": "Moduli tenka {tank}",
+  "research-path": "Tehnološko stablo tenka {tank}",
+  "similar": "Tenki slični tenku {tank}",
+  "videos": "Video tenka {tank}"
+}

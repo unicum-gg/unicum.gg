@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Promedio de {rated} de {size} jugadores",
+  "average-over-recent": "Promedio de los {rated} de {size} jugadores que jugaron en los últimos 30 días",
+  "avg-winrate": "Prom. tasa de victoria",
+  "finished": "Finalizado",
+  "record": "Récord",
+  "won": "Ganado"
+}

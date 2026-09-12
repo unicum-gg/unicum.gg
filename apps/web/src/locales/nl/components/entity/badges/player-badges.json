@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1e plaats",
+    "2": "2e plaats",
+    "3": "3e plaats"
+  },
+  "streamer": "Streamer · bekijk {name} op Twitch",
+  "tournament": {
+    "one": "Winnende selectie van {title}",
+    "many": "Deel van {count} winnende selecties, met {title} als beste resultaat",
+    "featured": "{text} · een uitgelicht evenement",
+    "unnamed": "een Wargaming-toernooi"
+  },
+  "tournament-wins": "{count, plural, one {# toernooiwinst} other {# toernooiwinsten}}",
+  "watch-on-twitch": "Bekijk {name} op Twitch",
+  "watch-on-twitch-viewers": "Bekijk {name} op Twitch · {viewers} kijkers"
+}

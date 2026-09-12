@@ -1,0 +1,11 @@
+{
+  "already-running": "już działa",
+  "in-window": "w oknie",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Nie wybrano rezerw.",
+  "no-stock-ready": "Stan: nie Gotowe",
+  "not-available": "niedostępne",
+  "threshold": "próg ({online}/{min})",
+  "would-activate": "aktywowałby",
+  "would-not-fire": "Obecnie nie zostałoby uruchomione."
+}

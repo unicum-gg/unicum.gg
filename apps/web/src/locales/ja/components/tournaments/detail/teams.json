@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "{size}人のプレイヤーのうち評価済み{rated}人の平均",
+  "average-over-recent": "過去30日間にプレイした{size}人のプレイヤーのうち{rated}人の平均",
+  "metric-over-last-30-days": "過去30日間の{metric}",
+  "n-confirmed": "{count}人が確認済み",
+  "no-team-matches-the-current": "現在のフィルターに一致するチームはありません。",
+  "no-teams-recorded-yet-registrations": "まだチームは記録されていません。このトーナメント全体の読み込みが完了すると登録チームがここに表示されます。読み込みはトーナメント開始から数分以内に行われます。",
+  "none-played-in-30-days": "このロスターには過去30日間にプレイしたプレイヤーがいません",
+  "players": "プレイヤー",
+  "qualified": "予選通過",
+  "reward": "報酬",
+  "team": "チーム",
+  "teams": "チーム ({length})",
+  "wr": "WR"
+}

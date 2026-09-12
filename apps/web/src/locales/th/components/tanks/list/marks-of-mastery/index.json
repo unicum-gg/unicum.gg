@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3rd Class",
+      "tip": "3rd Class: XP ที่ต้องการเพื่อเอาชนะผู้เล่น 50%"
+    },
+    "class2": {
+      "label": "2nd Class",
+      "tip": "2nd Class: XP ที่ต้องการเพื่อเอาชนะผู้เล่น 80%"
+    },
+    "class1": {
+      "label": "1st Class",
+      "tip": "1st Class: XP ที่ต้องการเพื่อเอาชนะผู้เล่น 95%"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: XP ที่ต้องการเพื่อเอาชนะผู้เล่น 99%"
+    }
+  },
+  "rows-per-page": "แถวต่อหน้า",
+  "previous-page": "หน้าก่อนหน้า",
+  "page": "หน้า {current} / {totalPages}",
+  "next-page": "หน้าถัดไป",
+  "all": "ทั้งหมด"
+}

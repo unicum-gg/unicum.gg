@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname} rastgele savaş istatistikleri",
+  "progression": "{nickname} {metricLabel} gelişimi",
+  "solid-line-is-overall-matches": "Düz çizgi, yeni savaşlar biriktikçe yavaşça değişen genel {metricLabel} değeridir ve yukarıdaki Toplam sütunuyla eşleşir. Kesikli çizgi, önceki anlık görüntüden beri oynanan savaşlardan hesaplanan oturum başına {metricLabel2} değeridir. İyi ve kötü serileri gösterir. Çizgi rengi puan kademesini izler.",
+  "tanks-shaping-s-rating": "{nickname} puanını şekillendiren tanklar",
+  "tanks": "{nickname}’in tankları",
+  "stats": "{nickname} {strongholdLabel} istatistikleri"
+}

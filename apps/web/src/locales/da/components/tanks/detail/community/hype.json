@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "over {value}% af de bedømte kampvogne på dens niveau",
+  "measured-hint": "Hvor dens sejrsrate placerer den blandt de samme kampvogne",
+  "not-enough-votes-yet-to": "Der er endnu ikke nok stemmer til at sammenligne fællesskabets dom med, hvordan kampvognen faktisk klarer sig.",
+  "perceived-hint": "Hvor fællesskabet placerer den blandt de bedømte kampvogne på niveau {tier}",
+  "verdict": {
+    "overrated": "Fællesskabet bedømmer den langt højere, end hvad den faktisk opnår.",
+    "fair": "Omdømme og resultater er enige om denne.",
+    "underrated": "Den klarer sig bedre, end nogen giver den kredit for."
+  },
+  "what-players-think": "Hvad spillere synes",
+  "what-the-data-says": "Hvad dataene siger"
+}

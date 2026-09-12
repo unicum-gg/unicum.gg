@@ -1,0 +1,25 @@
+{
+  "tagline": "为 World of Tanks 社区打造。为 EU、NA 和 Asia 的每位玩家、每个军团、每辆坦克和每张地图提供免费数据。",
+  "columns": {
+    "leaderboards": "排行榜",
+    "tanks": "坦克",
+    "maps": "地图",
+    "integrations": "集成",
+    "project": "项目"
+  },
+  "links": {
+    "top-tanks": "最佳坦克",
+    "bot": "Discord 机器人",
+    "mcp": "MCP 服务器",
+    "docs": "API 文档",
+    "badges": "徽章",
+    "glossary": "词汇表",
+    "coverage": "数据覆盖率",
+    "support": "支持我们",
+    "source": "源代码",
+    "status": "状态",
+    "discord": "Discord"
+  },
+  "disclaimer": "与默认无关联",
+  "cookies": "管理 Cookie"
+}

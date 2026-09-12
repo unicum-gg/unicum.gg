@@ -1,0 +1,13 @@
+{
+  "heading": "Nejlepší hráči v režimu <accent>{mode}</accent>",
+  "intro": "{mode} je režim battle royale ve World of Tanks. Žebříček pro region {region}, seřazený podle HR (minimálně 100 bitev v režimu {mode}).",
+  "board": "Nejlepších {count} hráčů v režimu {mode}",
+  "columns": {
+    "player": "Hráč",
+    "battles": "Bitev",
+    "survival": "Životnost",
+    "survival-percent": "Životnost %",
+    "damage": "Průměrná poškození"
+  },
+  "scale-description": "Barevné prahové hodnoty pro žebříček režimu {mode}, kalibrované podle populace hráčů s alespoň 100 bitvami v režimu {mode}."
+}

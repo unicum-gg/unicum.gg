@@ -1,0 +1,12 @@
+{
+  "final": " · 결승",
+  "has-not-held-a-place": "{nickname}은 격전 순위표에 순위를 기록한 적이 없습니다.",
+  "live-season": "· 진행 중인 시즌",
+  "loading-s-onslaught-record": "{nickname}의 격전 기록 불러오는 중...",
+  "onslaught": "격전",
+  "onslaught-record": "{nickname}의 격전 기록",
+  "see-this-season-s-leaderboard": "이번 시즌 순위표 보기",
+  "standing-line": "{rating} 평점 점수 · 전투 {battles}회",
+  "the-board-only-lists-players": "순위표에는 챔피언에 도달한 플레이어만 표시됩니다. 지역별로 수천 명뿐이므로 거의 모든 프로필이 이곳에 해당하지 않습니다. 해당 등급에 도달한 시즌에 자동으로 채워집니다.",
+  "updated": "업데이트됨 {when}"
+}

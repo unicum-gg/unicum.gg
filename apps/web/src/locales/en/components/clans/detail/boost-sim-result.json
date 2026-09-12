@@ -1,0 +1,11 @@
+{
+  "already-running": "already running",
+  "in-window": "in window",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "No reserves selected.",
+  "no-stock-ready": "no stock ready",
+  "not-available": "not available",
+  "threshold": "threshold ({online}/{min})",
+  "would-activate": "Right now, it would activate:",
+  "would-not-fire": "Right now, it would not fire."
+}

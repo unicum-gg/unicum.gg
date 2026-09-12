@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Yhteenveto",
+    "tanks": "Panssarivaunut",
+    "videos": "Videot",
+    "tournaments": "Turnaukset",
+    "manage": "Hallitse"
+  },
+  "section-count": "{section} ({count})"
+}

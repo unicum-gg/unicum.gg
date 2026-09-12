@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} taistelua yhteensä",
+  "checking-your-record-on-this": "Tarkistetaan ennätystäsi tällä panssarivaunulla...",
+  "fetching-your-garage": "Haemme autotalliasi",
+  "have-you-played": "Oletko pelannut panssarivaunulla {tank}?",
+  "more-to-go": "Vielä {count} taistelua",
+  "more-to-go-one": "Vielä {count} taistelu",
+  "sign-in-to-rate-it": "Kirjaudu sisään arvioidaksesi sen",
+  "sign-in-with-your-wargaming-account-to-rate-": "Kirjaudu Wargaming-tililläsi arvioidaksesi sen. Luemme ennätyksesi tällä täsmälleen samalla panssarivaunulla, mikä estää sivua muuttumasta kyselyksi, johon vastaavat sitä koskaan ajamattomat pelaajat.",
+  "signed-in-on": "Kirjautuneena alueella {region}",
+  "too-few-battles": "Sinulla on {played} taistelua panssarivaunulla {tank}. Pyydämme vähintään {required} taistelua ennen äänen laskemista, jotta tämä keskiarvo pysyy sitä oikeasti pelaavien pelaajien keskiarvona.",
+  "you-have-not-played": "Et ole pelannut panssarivaunulla {tank}"
+}

@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Wierszy na stronę",
+  "previous-page": "Poprzednia strona",
+  "page": "Strona {current} / {totalPages}",
+  "next-page": "Następna strona",
+  "all": "Wszystkie"
+}

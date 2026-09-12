@@ -1,0 +1,18 @@
+{
+  "caught-up": "Sve je podmireno, hvala. Sve dodatno ulaže se u veći kapacitet i nove značajke.",
+  "covered-label": "Pokrito",
+  "covered-sentence": "Podržavatelji su pokrili {received} od dosad potrošenih {spent}.",
+  "days-out-of-pocket": "{days} dana iz vlastitog džepa",
+  "from-supporter-one": "od {count} podržavatelja",
+  "from-supporters": "od {count} podržavatelja",
+  "gap-growing": "Dodatnih {amount}/mj. sprječava povećanje manjka.",
+  "goal": "cilj {amount}",
+  "of-that-total": "od tog ukupnog iznosa",
+  "pledges-cover": "Obećane donacije sada pokrivaju mjesečni račun.",
+  "raised-amount": "{amount} prikupljeno",
+  "raised-label": "Prikupljeno",
+  "run-at-a-loss": "{name} posluje s gubitkom od {since}.",
+  "run-rate": "Mjesečna stopa: obećano {pledged}/mj. u odnosu na {cost}/mj. za rad.",
+  "spent-since-launch": "Potrošeno od pokretanja",
+  "to-catch-up": "{amount} za potpuno podmirenje."
+}

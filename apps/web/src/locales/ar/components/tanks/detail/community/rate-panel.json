@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} معركة إجمالًا",
+  "checking-your-record-on-this": "جارٍ التحقق من سجلك على هذه الدبابة...",
+  "fetching-your-garage": "جارٍ جلب مرآبك",
+  "have-you-played": "هل لعبت بالدبابة {tank}؟",
+  "more-to-go": "متبقٍ {count} معارك",
+  "more-to-go-one": "متبقٍ {count} معركة",
+  "sign-in-to-rate-it": "سجّل الدخول لتقييمها",
+  "sign-in-with-your-wargaming-account-to-rate-": "سجّل الدخول باستخدام حساب Wargaming لتقييمها. نقرأ سجلك على هذه الدبابة تحديدًا، وهذا ما يمنع تحول الصفحة إلى استطلاع لأشخاص لم يقودوها قط.",
+  "signed-in-on": "تم تسجيل الدخول على {region}",
+  "too-few-battles": "لديك {played} معارك في الدبابة {tank}. نطلب {required} قبل احتساب التصويت، حتى يظل هذا المتوسط متوسطًا لأشخاص يلعبون بها فعليًا.",
+  "you-have-not-played": "لم تلعب بالدبابة {tank}"
+}

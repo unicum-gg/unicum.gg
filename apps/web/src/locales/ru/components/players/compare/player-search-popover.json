@@ -1,0 +1,6 @@
+{
+  "search-player": "Поиск игрока...",
+  "type-at-least-characters": "Введите не менее {MINQUERYLENGTH} символов.",
+  "searching": "Поиск...",
+  "no-matching-players": "Подходящих игроков нет."
+}

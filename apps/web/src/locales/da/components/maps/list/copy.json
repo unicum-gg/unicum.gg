@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Samtlige {count} World of Tanks-kamparealer. Filtrér efter camouflage og spiltilstand, og åbn derefter et kort for dets minimap, størrelse samt baseflag og startpositioner pr. spiltilstand.",
+    "title": "Alle World of Tanks-kort ({region}), alle kamparealer",
+    "description": "Gennemse alle World of Tanks-kort på {region}: minimaps, størrelse, camouflage og understøttede spiltilstande med baseflag og startpositioner for hver spiltilstand.",
+    "heading": "Alle <accent>kort</accent>"
+  },
+  "battle-type": {
+    "intro": "De {count} World of Tanks-kort, der spilles i {type}, {blurb}. Åbn et kort for dets minimap, størrelse samt baseflag og startpositioner pr. spiltilstand.",
+    "title": "World of Tanks {type}-kort ({region}), alle kamparealer i rotationen",
+    "description": "Alle World of Tanks-kort i {type}-rotationen på {region}: minimaps, størrelse, camouflage og understøttede spiltilstande med baseflag og startpositioner.",
+    "heading": "{type} <accent>kort</accent>"
+  },
+  "blurbs": {
+    "random": "den almindelige 15-mod-15-rotation",
+    "battle_royale": "spiltilstanden, hvor sidste kampvogn står",
+    "frontline": "den storstilede 30-mod-30-spiltilstand",
+    "onslaught": "den rangerede 7-mod-7-spiltilstand",
+    "onslaught_night": "den rangerede 7v7-tilstand efter mørkets frembrud, med kortere visningsrækkevidde, som i øjeblikket kan spilles på den Offentlige Test",
+    "grand_battle": "niveau X-spiltilstanden med 30 mod 30",
+    "clan_wars": "klankrige og fremrykninger",
+    "waffentrager": "Waffenträger-begivenheden",
+    "last_stand": "Last Stand-begivenheden",
+    "arcade": "arkade- og særlige begivenheder",
+    "story_mode": "de historiedrevne operationer",
+    "training": "træningsrum og vejledninger"
+  }
+}

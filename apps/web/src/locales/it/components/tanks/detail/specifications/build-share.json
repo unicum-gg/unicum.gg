@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Link della configurazione copiato",
+  "copy-build-link": "Copia il link della configurazione",
+  "could-not-copy-link": "Impossibile copiare il link",
+  "include-setup": "Includi configurazione",
+  "share-build": "Condividi build",
+  "share-tank": "Condividi {tank}",
+  "share-text": "Scopri questa configurazione di {tank} su {app}"
+}

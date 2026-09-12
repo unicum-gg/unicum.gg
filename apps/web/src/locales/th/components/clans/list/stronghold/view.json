@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "ยังไม่มีข้อมูล ตรวจสอบอีกครั้งเมื่อรีเฟรชแคลนแล้ว",
+  "heading": "แคลนชั้นนำระดับ <accent>{tier}</accent>",
+  "blurb": "ตารางอันดับ{region} จัดอันดับตาม {sort} จากแคลนที่ติดตามแล้วทั้งหมดใน {format} (ขั้นต่ำ {battles} การรบ)",
+  "blurb-period": "ตารางอันดับ{region} จัดอันดับตาม {sort} จากแคลนที่ติดตามแล้วทั้งหมดใน {format} ตลอดช่วง {period} (ขั้นต่ำ {battles} การรบ)",
+  "format-advances": "การรบรุกคืบ (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "แคลน {tier} ที่ดีที่สุด {count} แคลน ·"
+}

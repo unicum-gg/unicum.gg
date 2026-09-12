@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "كيفية مقارنة لاعبي {region}",
+  "median-n": "الوسيط {value}",
+  "metric-rating": "تقييم {metric}",
+  "tracked-accounts-with-at-least": "{players} حسابات متابَعة لديها {minBattles} معركة على الأقل. الألوان هي النطاقات نفسها التي يستخدمها الموقع في كل مكان آخر.",
+  "win-rate": "معدل الفوز",
+  "win-rate-distribution-across-the-region-s-tr": "توزيع نسبة الفوز بين اللاعبين المتابَعين في المنطقة"
+}

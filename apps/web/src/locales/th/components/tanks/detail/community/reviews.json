@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "การรบกับรถถังคันนี้ {battles} ครั้ง",
+  "damage": "ความเสียหาย {damage}",
+  "n-marks": "{count, plural, other {# เครื่องหมาย}}",
+  "no-written-opinions-yet-if": "ยังไม่มีความคิดเห็นที่เขียนไว้ หากคุณมีจำนวนการรบมากพอ ความคิดเห็นของคุณจะเป็นคนแรก",
+  "win-rate": "อัตราชนะ {toFixed}%",
+  "written-on": "เขียนเมื่อ {gameVersion}"
+}

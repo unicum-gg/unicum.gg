@@ -1,0 +1,8 @@
+{
+  "last-days": "Son {chartDays} gün",
+  "n-players": "{count, plural, one {# oyuncu} other {# oyuncular}}",
+  "rolling-average-combined-damage-to": "Oyuncuların %65 / %85 / %95’ini aşmak için hareketli ortalama birleşik hasar.",
+  "single-battle-xp-to-beat": "Oyuncuların %50 / %80 / %95 / %99’unu aşmak için tek savaş XP’si.",
+  "tank-marks-of-excellence": "{tank} Mükemmellik İşaretleri",
+  "tank-marks-of-mastery": "{tank} Ustalık İşaretleri"
+}

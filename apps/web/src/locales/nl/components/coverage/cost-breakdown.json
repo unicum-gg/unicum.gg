@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Gefactureerd in euro’s, omgerekend naar {currency} tegen de koers van vandaag.",
+  "cost-breakdown": "Prijsopbouw",
+  "estimated-annual-cost": "Geschatte prijs per jaar",
+  "fixed-month-bill-no-surprises": "Een vast maandbedrag van {totalAnnualEur}, zonder verrassingen: één gehuurde server en geen SaaS van derden in het datapad. Het bedrag stijgt alleen wanneer de server niet meer volstaat (meer doorvoer van Wargaming betekent meer uitgaande IP-adressen).",
+  "free": "gratis",
+  "one-off-spend": "Eenmalige uitgave",
+  "paid-once-so-it-is": "Eenmalig betaald, dus dit maakt geen deel uit van het bovenstaande maandbedrag. Het telt nog wel mee voor wat het project tot nu toe heeft gekost.",
+  "previously": "Eerder"
+}

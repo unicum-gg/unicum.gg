@@ -1,0 +1,6 @@
+{
+  "title": "Igrači igre World of Tanks na mreži ({region})",
+  "description": "Koliko je igrača trenutačno na svakom poslužitelju igre World of Tanks na regiji {region}, uz broj igrača tijekom posljednja 24 sata, tjedna i godine, rekord svih vremena i najprometnije sate u tjednu.",
+  "og-title": "Broj igrača na serveru",
+  "og-subtitle": "Igrači na mreži na regiji {region}"
+}

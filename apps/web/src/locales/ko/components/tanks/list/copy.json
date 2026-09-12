@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "{region}의 World of Tanks 차량 {count}대 전체입니다. 단계, 국가, 병과, 역할로 필터링한 다음 탱크를 열어 통계, 최고 플레이어와 기대값을 확인하세요.",
+    "title": "World of Tanks 탱크 전체 ({region}), 모든 차량 둘러보기",
+    "description": "{region}의 World of Tanks 탱크를 모두 둘러보세요. 단계, 국가, 병과, 역할로 필터링한 다음 탱크별 통계, 최고 플레이어와 기대값을 확인할 수 있습니다.",
+    "heading": "모든 <accent>탱크</accent>"
+  },
+  "specifications": {
+    "intro": "{region}의 World of Tanks 차량 {count}대 전체의 DPM, 관통력, 장갑, 시야 범위와 기동성입니다. 모든 열을 기준으로 정렬한 다음 단계, 국가, 병과, 역할로 필터링하세요.",
+    "title": "World of Tanks 탱크 제원 ({region}), 모든 차량 비교",
+    "description": "{region}의 모든 World of Tanks 탱크 제원을 비교하세요. DPM, 관통력, 장갑, 시야 범위와 기동성을 단계, 국가, 병과, 역할별로 정렬하고 필터링할 수 있습니다.",
+    "heading": "탱크 <accent>사양</accent>"
+  },
+  "economics": {
+    "intro": "{region}의 World of Tanks 차량 {count}대 전체의 구매 및 수리 비용, 포탄 가격과 크레딧 수익입니다. 모든 열을 기준으로 정렬한 다음 단계, 국가, 병과, 역할로 필터링하세요.",
+    "title": "World of Tanks 탱크 경제 ({region}), 크레딧 및 XP 비용",
+    "description": "{region}의 모든 World of Tanks 탱크에 대한 크레딧 및 XP 비용, 수리 및 포탄 가격입니다. 단계, 국가, 병과, 역할별로 정렬하고 필터링할 수 있습니다.",
+    "heading": "탱크 <accent>경제학</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "{region}의 World of Tanks 차량 {count}대 전체에서 우수성 증표 1개, 2개, 3개를 획득하는 데 필요한 이동 평균 피해량입니다. 모든 열을 기준으로 정렬한 다음 단계, 국가, 병과, 역할로 필터링하세요.",
+    "title": "World of Tanks 우수성 증표 요구 조건 ({region})",
+    "description": "{region}의 모든 World of Tanks 탱크에서 우수성 증표 1개, 2개, 3개를 획득하는 데 필요한 피해량입니다. 단계, 국가, 병과, 역할별로 정렬하고 필터링할 수 있습니다.",
+    "heading": "<accent>우수성 증표</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "{region}의 World of Tanks 차량 {count}대 전체의 에이스 탱커 및 숙련도 배지 XP 기준입니다. 모든 열을 기준으로 정렬한 다음 단계, 국가, 병과, 역할로 필터링하세요.",
+    "title": "World of Tanks 숙련도 증표 요구 조건 ({region})",
+    "description": "{region}의 모든 World of Tanks 탱크에 대한 에이스 탱커 및 숙련도 배지 XP 기준입니다. 단계, 국가, 병과, 역할별로 정렬하고 필터링할 수 있습니다.",
+    "heading": "<accent>숙련도 증표</accent>"
+  },
+  "videos": {
+    "intro": "커뮤니티가 {region}에 링크한 전투 {count}개입니다. 각 영상은 전투가 시작되는 초부터 열립니다. 탱크 페이지에서 제안되며 여기에 표시되기 전에 확인됩니다.",
+    "title": "World of Tanks 게임플레이 영상 ({region})",
+    "description": "{region}의 커뮤니티 제안 World of Tanks 전투 영상입니다. 각 영상은 전투가 시작되는 초부터 열리며, 플레이한 탱크, 지도, 진영과 전투 종료 방식을 확인할 수 있습니다.",
+    "heading": "게임플레이 <accent>비디오</accent>"
+  }
+}

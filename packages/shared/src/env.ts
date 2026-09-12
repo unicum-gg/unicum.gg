@@ -86,6 +86,12 @@ export const env = createEnv({
     // OpenAI key for the changelog writer (AI SDK). Optional, same reason:
     // no key, no cron. Worker-only.
     OPENAI_API_KEY: z.string().optional(),
+    // The translator's own key (`scripts/generate-translations.ts`), so the two
+    // uses can be billed, rate-limited and revoked apart: the changelog writes
+    // one message a day from a worker, the translator writes a few hundred files
+    // in a burst from CI. Falls back to OPENAI_API_KEY when unset, which is what
+    // a checkout with one key does. Never read at runtime, only by the script.
+    OPENAI_API_KEY_TRANSLATIONS: z.string().optional(),
     // Cron expression for the changelog digest, so the cadence can move (daily
     // now, Thursdays later) without a deploy. Unset = the daily default.
     CHANGELOG_CRON: z.string().optional(),
@@ -133,6 +139,7 @@ export const env = createEnv({
     DISCORD_VIDEO_CHANNEL_ID: process.env.DISCORD_VIDEO_CHANNEL_ID,
     DISCORD_REVIEW_CHANNEL_ID: process.env.DISCORD_REVIEW_CHANNEL_ID,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    OPENAI_API_KEY_TRANSLATIONS: process.env.OPENAI_API_KEY_TRANSLATIONS,
     CHANGELOG_CRON: process.env.CHANGELOG_CRON,
     DISCORD_SUPPORTER_ROLE_ID: process.env.DISCORD_SUPPORTER_ROLE_ID,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,

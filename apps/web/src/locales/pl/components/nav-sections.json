@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Gracze",
+    "clans": "Klany",
+    "tanks": "Czołgi",
+    "maps": "Mapy",
+    "tournaments": "Turnieje",
+    "servers": "Serwery"
+  },
+  "links": {
+    "top-players": {
+      "label": "Najlepsi gracze",
+      "description": "Klasyfikacja graczy wszech czasów"
+    },
+    "players-onslaught": {
+      "description": "Drabinka rankingowa w trybie Natarcie"
+    },
+    "players-steel-hunter": {
+      "description": "Klasyfikacja trybu battle royale"
+    },
+    "top-clans": {
+      "label": "Najlepsze klany",
+      "description": "Klasyfikacja klanów wszech czasów"
+    },
+    "stronghold": {
+      "description": "Klasyfikacja potyczek"
+    },
+    "advances": {
+      "description": "Klasyfikacja 15 na 15, Poziom X"
+    },
+    "tank-performances": {
+      "label": "Wydajność",
+      "description": "Zadane uszkodzenia i procent zwycięstw dla każdego czołgu"
+    },
+    "tank-specs": {
+      "label": "Specyfikacje",
+      "description": "Statystyka każdego czołgu"
+    },
+    "tank-economics": {
+      "label": "Ekonomia",
+      "description": "Czołgi zarabiające najwięcej kredytów i PD"
+    },
+    "tank-moe": {
+      "description": "Zadane uszkodzenia wymagane dla każdej odznaki"
+    },
+    "tank-mom": {
+      "description": "Mistrzostwo: progi odznak"
+    },
+    "tank-changes": {
+      "label": "Zmiany",
+      "description": "Odśwież: buffy i nerfy"
+    },
+    "tank-community": {
+      "label": "Oceny społeczności",
+      "description": "Oceny graczy, którzy je posiadają"
+    },
+    "tank-videos": {
+      "label": "Filmy",
+      "description": "Rozgrywki społeczności"
+    },
+    "all-tournaments": {
+      "label": "Turnieje",
+      "description": "Wszystkie turnieje, otwarte i rozstrzygnięte"
+    },
+    "all-maps": {
+      "label": "Wszystkie mapy",
+      "description": "Każda mapa w grze"
+    },
+    "map-changes": {
+      "label": "Zmiany",
+      "description": "Odśwież: przeróbki map"
+    },
+    "battle-type": {
+      "description": "Mapy {type}"
+    },
+    "servers-population": {
+      "label": "Ludność serwera",
+      "description": "Gracze online teraz i na przestrzeni czasu"
+    }
+  }
+}

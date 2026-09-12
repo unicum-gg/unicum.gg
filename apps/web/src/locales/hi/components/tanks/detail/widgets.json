@@ -1,0 +1,12 @@
+{
+  "slot": "स्लॉट {n}",
+  "slot-filled": "स्लॉट {n}: {name}",
+  "consumable-slot": "उपभोज्य स्लॉट {n}",
+  "consumable-slot-filled": "उपभोज्य स्लॉट {n}: {name}",
+  "level": "स्तर {n}",
+  "stock": "स्टॉक",
+  "specialize": "इस स्लॉट को विशेषज्ञ बनाने के लिए क्लिक करें।",
+  "clear-specialization": "इस स्लॉट की विशेषज्ञता हटाने के लिए क्लिक करें।",
+  "crew-skills": "क्रू कौशल",
+  "shell-aria": "{name}: {damage} क्षति, {penetration} मिमी भेदन"
+}

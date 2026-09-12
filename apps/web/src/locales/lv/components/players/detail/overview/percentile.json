@@ -1,0 +1,7 @@
+{
+  "win-rate": "Uzvaru procents",
+  "versus": "{metric} pret {region}",
+  "top": "Top {percent}%",
+  "ahead-of": "Priekšā {percent}%",
+  "against": "Pret {players} izsekotiem {region} kontiem ar vismaz {battles} kaujām."
+}

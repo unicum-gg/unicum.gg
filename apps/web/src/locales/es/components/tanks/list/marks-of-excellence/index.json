@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Marca",
+      "tip": "1 Marca: tu media móvil de daño combinado (últimas ~100 batallas) debe superar la del 65 % de los jugadores con este tanque durante los últimos 14 días"
+    },
+    "mark2": {
+      "label": "2 Marcas",
+      "tip": "2 Marcas: tu media móvil de daño combinado (últimas ~100 batallas) debe superar la del 85 % de los jugadores con este tanque durante los últimos 14 días"
+    },
+    "mark3": {
+      "label": "3 Marcas",
+      "tip": "3 Marcas: tu media móvil de daño combinado (últimas ~100 batallas) debe superar la del 95 % de los jugadores con este tanque durante los últimos 14 días"
+    }
+  },
+  "rows-per-page": "Filas por página",
+  "previous-page": "Página anterior",
+  "page": "Página {current} / {totalPages}",
+  "next-page": "Siguiente página",
+  "all": "Todo"
+}

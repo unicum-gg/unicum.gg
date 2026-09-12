@@ -1,0 +1,4 @@
+{
+  "title": "Top clans van niveau {tier} ({region})",
+  "description": "Ranglijst voor clans van niveau {tier} in {region}. Gerangschikt op SR (schermutselingsrating), ELO, gevechten en winstpercentage. Minimaal {battles} gevechten."
+}

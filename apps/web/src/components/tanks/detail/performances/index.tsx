@@ -1,3 +1,6 @@
+import { numberFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
+import { Interpolate } from "@/components/interpolate";
 import type { ReactNode } from "react";
 import {
   RATING_METRIC_LABEL,
@@ -34,26 +37,26 @@ const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {
   [RatingMetric.Wnx]: "wnx",
 };
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const decFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const DEC_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT_FORMAT = {
   style: "percent",
   maximumFractionDigits: 1,
-});
+} as const;
 
 /** The Performances tab: server-average stats, top players per rating metric,
  * and the WN8/WNX expected values. */
-export function Performances({
+export async function Performances({
   region,
   tankId,
   meta,
   serverStats,
   topByMetric,
   wn8Expected,
-  wnxExpected,
+  wnxExpected, locale,
 }: {
   region: Region;
   tankId: number;
@@ -62,45 +65,52 @@ export function Performances({
   topByMetric: TopTankPlayersByMetric;
   wn8Expected: WN8Expected | null;
   wnxExpected: WNXExpected | null;
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/tanks/detail/performances/index", locale);
   return (
     <>
       {serverStats && (
         <>
           <Panel>
             <PanelHeader>
-              <PanelTitle>{meta.name} server average</PanelTitle>
+              <PanelTitle>{t("server-average", { name: meta.name })}</PanelTitle>
             </PanelHeader>
             <PanelContent className="space-y-3 p-4">
               <p className="text-sm text-fd-muted-foreground">
-                How the average tracked {REGION_LABEL[region]} player performs on
-                the {meta.shortName} ({intFmt.format(serverStats.players)} players
+                {t("how-the-average-performs", {
+                  region: REGION_LABEL[region],
+                  tank: meta.shortName,
+                  players: numberFormat(locale, INT_FORMAT).format(serverStats.players),
+                })}
                 {serverStats.total_battles !== null
-                  ? `, ${intFmt.format(serverStats.total_battles)} battles, min. 100 each`
-                  : ", min. 100 battles each"}
+                  ? t("with-battles", {
+                      battles: numberFormat(locale, INT_FORMAT).format(serverStats.total_battles),
+                    })
+                  : t("min-battles-each")}
                 ).
               </p>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
                 <Stat
-                  label="Avg battles"
-                  value={intFmt.format(serverStats.avg_battles)}
+                  label={t("avg-battles")}
+                  value={numberFormat(locale, INT_FORMAT).format(serverStats.avg_battles)}
                 />
                 <Stat
-                  label="Avg damage"
-                  value={intFmt.format(serverStats.avg_damage)}
+                  label={t("avg-damage")}
+                  value={numberFormat(locale, INT_FORMAT).format(serverStats.avg_damage)}
                 />
                 <Stat
-                  label="Win rate"
-                  value={pctFmt.format(serverStats.winrate / 100)}
+                  label={t("win-rate")}
+                  value={numberFormat(locale, PCT_FORMAT).format(serverStats.winrate / 100)}
                   colorClass={
                     RATING_COLOR_CLASS[winrateColor(serverStats.winrate / 100)]
                   }
                 />
                 <Stat
-                  label="Player WR"
+                  label={t("player-wr")}
                   value={
                     serverStats.player_wr !== null
-                      ? pctFmt.format(serverStats.player_wr / 100)
+                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.player_wr / 100)
                       : "—"
                   }
                   colorClass={
@@ -118,7 +128,7 @@ export function Performances({
                     label={<RatingMetricInlineSelect />}
                     value={
                       serverStats.wn7 !== null
-                        ? intFmt.format(serverStats.wn7)
+                        ? numberFormat(locale, INT_FORMAT).format(serverStats.wn7)
                         : "—"
                     }
                     colorClass={
@@ -133,7 +143,7 @@ export function Performances({
                     label={<RatingMetricInlineSelect />}
                     value={
                       serverStats.wn8 !== null
-                        ? intFmt.format(serverStats.wn8)
+                        ? numberFormat(locale, INT_FORMAT).format(serverStats.wn8)
                         : "—"
                     }
                     colorClass={
@@ -148,7 +158,7 @@ export function Performances({
                     label={<RatingMetricInlineSelect />}
                     value={
                       serverStats.wnx !== null
-                        ? intFmt.format(serverStats.wnx)
+                        ? numberFormat(locale, INT_FORMAT).format(serverStats.wnx)
                         : "—"
                     }
                     colorClass={
@@ -159,58 +169,58 @@ export function Performances({
                   />
                 </div>
                 <Stat
-                  label="Assists"
+                  label={t("assists")}
                   value={
                     serverStats.avg_assist !== null
-                      ? intFmt.format(serverStats.avg_assist)
+                      ? numberFormat(locale, INT_FORMAT).format(serverStats.avg_assist)
                       : "—"
                   }
                 />
                 <Stat
-                  label="Spots"
+                  label={t("spots")}
                   value={
                     serverStats.avg_spots !== null
-                      ? decFmt.format(serverStats.avg_spots)
+                      ? numberFormat(locale, DEC_FORMAT).format(serverStats.avg_spots)
                       : "—"
                   }
                 />
                 <Stat
-                  label="KDR"
+                  label={t("kdr")}
                   value={
                     serverStats.kdr !== null
-                      ? decFmt.format(serverStats.kdr)
+                      ? numberFormat(locale, DEC_FORMAT).format(serverStats.kdr)
                       : "—"
                   }
                 />
                 <Stat
-                  label="Hit %"
+                  label={t("hit")}
                   value={
                     serverStats.hit_pct !== null
-                      ? pctFmt.format(serverStats.hit_pct / 100)
+                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.hit_pct / 100)
                       : "—"
                   }
                 />
                 <Stat
-                  label="Pen %"
+                  label={t("pen")}
                   value={
                     serverStats.pen_pct !== null
-                      ? pctFmt.format(serverStats.pen_pct / 100)
+                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.pen_pct / 100)
                       : "—"
                   }
                 />
                 <Stat
-                  label="Blocked"
+                  label={t("blocked")}
                   value={
                     serverStats.avg_blocked !== null
-                      ? intFmt.format(serverStats.avg_blocked)
+                      ? numberFormat(locale, INT_FORMAT).format(serverStats.avg_blocked)
                       : "—"
                   }
                 />
                 <Stat
-                  label="Survival"
+                  label={t("survival")}
                   value={
                     serverStats.survival !== null
-                      ? pctFmt.format(serverStats.survival / 100)
+                      ? numberFormat(locale, PCT_FORMAT).format(serverStats.survival / 100)
                       : "—"
                   }
                 />
@@ -224,16 +234,20 @@ export function Performances({
       <Panel>
         <PanelHeader className="flex items-center justify-between gap-3">
           <PanelTitle>
-            Top {meta.name} players{" "}
-            <span className="text-fd-muted-foreground">by</span>{" "}
-            <RatingMetricInlineSelect />
+            <Interpolate
+              template={t("top-tank-players-by", { tank: meta.name })}
+              values={{
+                by: (
+                  <span className="text-fd-muted-foreground">{t("by")}</span>
+                ),
+                metric: <RatingMetricInlineSelect />,
+              }}
+            />
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <div className="px-4 py-3 text-sm text-fd-muted-foreground">
-            Best {meta.shortName} players on {REGION_LABEL[region]}, ranked by
-            single-tank rating (min. 100 battles on the tank).
-          </div>
+            {t("best-players-on-ranked-by", { shortName: meta.shortName, region: REGION_LABEL[region] })}</div>
           {RATING_METRICS.map((m) => (
             <div key={m} data-rating-col={RATING_COL[m]}>
               <TankTopPlayers
@@ -252,35 +266,31 @@ export function Performances({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>{meta.name} expected values</PanelTitle>
+              <PanelTitle>{t("expected-values", { name: meta.name })}</PanelTitle>
             </PanelHeader>
             <PanelContent className="space-y-4 p-4">
               <p className="text-sm text-fd-muted-foreground">
-                Reference targets for an average game on this tank. Beat these
-                and your WN8 / WNX climb above 50%.
-              </p>
+                {t("reference-targets-for-an-average")}</p>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 {wn8Expected && (
                   <>
-                    <Stat label="Exp. damage (WN8)" value={intFmt.format(wn8Expected.expDamage)} />
-                    <Stat label="Exp. frags (WN8)" value={decFmt.format(wn8Expected.expFrag)} />
-                    <Stat label="Exp. spots (WN8)" value={decFmt.format(wn8Expected.expSpot)} />
-                    <Stat label="Exp. win rate (WN8)" value={pctFmt.format(wn8Expected.expWinRate / 100)} />
+                    <Stat label={t("exp-damage-wn8")} value={numberFormat(locale, INT_FORMAT).format(wn8Expected.expDamage)} />
+                    <Stat label={t("exp-frags-wn8")} value={numberFormat(locale, DEC_FORMAT).format(wn8Expected.expFrag)} />
+                    <Stat label={t("exp-spots-wn8")} value={numberFormat(locale, DEC_FORMAT).format(wn8Expected.expSpot)} />
+                    <Stat label={t("exp-win-rate-wn8")} value={numberFormat(locale, PCT_FORMAT).format(wn8Expected.expWinRate / 100)} />
                   </>
                 )}
                 {wnxExpected && (
                   <>
-                    <Stat label="Exp. damage (WNX)" value={intFmt.format(wnxExpected.damage)} />
-                    <Stat label="Exp. frags (WNX)" value={decFmt.format(wnxExpected.frags)} />
-                    <Stat label="Exp. spots (WNX)" value={decFmt.format(wnxExpected.spots)} />
-                    <Stat label="Exp. assist (WNX)" value={intFmt.format(wnxExpected.assist)} />
+                    <Stat label={t("exp-damage-wnx")} value={numberFormat(locale, INT_FORMAT).format(wnxExpected.damage)} />
+                    <Stat label={t("exp-frags-wnx")} value={numberFormat(locale, DEC_FORMAT).format(wnxExpected.frags)} />
+                    <Stat label={t("exp-spots-wnx")} value={numberFormat(locale, DEC_FORMAT).format(wnxExpected.spots)} />
+                    <Stat label={t("exp-assist-wnx")} value={numberFormat(locale, INT_FORMAT).format(wnxExpected.assist)} />
                   </>
                 )}
               </div>
               <p className="text-xs text-fd-muted-foreground">
-                Tank id {tankId}. Expected values are sourced from the community
-                WN8 / WNX datasets and refresh automatically.
-              </p>
+                {t("tank-id-expected-values-are", { tankId })}</p>
             </PanelContent>
           </Panel>
         </>

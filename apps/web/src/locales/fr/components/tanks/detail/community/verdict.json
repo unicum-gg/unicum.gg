@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Chaque vote provient d’un compte ayant joué avec ce char.",
+  "every-vote-played-average": "Chaque vote provient d’un compte ayant disputé en moyenne {battles} batailles avec ce char.",
+  "fun": "Amusement",
+  "how-good-the-tank-is": "À quel point le char est performant",
+  "how-much-people-enjoy-it": "À quel point les joueurs l’apprécient",
+  "if-you-have-played-it": "Si vous avez joué avec ce char, c’est précisément votre avis que cette page attend.",
+  "nobody-has-rated-this-tank": "Personne n’a encore évalué ce char.",
+  "overall": "Global",
+  "votes": "{count} votes",
+  "votes-one": "{count} vote"
+}

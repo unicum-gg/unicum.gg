@@ -1,0 +1,12 @@
+{
+  "clans-history": "Гісторыя кланаў {nickname}",
+  "clans-in-clans": "{totalClans} кланаў · {timeInClansSeconds} у кланах",
+  "current": "бягучы",
+  "duration": "Трываласць",
+  "from": "З",
+  "name": "Імя",
+  "no-clan-history": "Гісторыя кланаў адсутнічае.",
+  "role": "Роля",
+  "tag": "Тэг",
+  "to": "Да"
+}

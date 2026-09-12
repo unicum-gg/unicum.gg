@@ -1,0 +1,8 @@
+{
+  "busiest": "Mest aktivitet {when} ({players})",
+  "not-enough-recorded-yet-to": "Det har ännu inte registrerats tillräckligt med data för att visa en veckorytm. Den fylls i i takt med att mätningarna täcker veckans alla timmar.",
+  "not-sampled-yet": "Inte mätt ännu",
+  "players-on-average": "{players} spelare i genomsnitt",
+  "quietest": ", minst aktivitet {when} ({players})",
+  "your-local-time": "Din lokala tid"
+}

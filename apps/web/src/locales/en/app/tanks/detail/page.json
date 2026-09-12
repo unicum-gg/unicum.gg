@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank} World of Tanks stats ({region}), tier {tier} {nation}",
+    "description": "{tank} ({region}) World of Tanks specifications: armour, firepower, mobility, modules, crew and field modifications for this tier {tier} {nation} tank."
+  },
+  "performances": {
+    "title": "{tank} performances ({region}), server stats and best players",
+    "description": "{tank} ({region}) World of Tanks performances: server-average winrate, damage and assist, the best players on this tier {tier} {nation} tank, plus WN8 and WNX expected values."
+  },
+  "marks": {
+    "title": "{tank} marks of excellence and mastery ({region})",
+    "description": "{tank} ({region}) World of Tanks marks of excellence and marks of mastery requirements, with their history on this tier {tier} {nation} tank."
+  },
+  "history": {
+    "title": "{tank} changes history ({region}), buffs and nerfs",
+    "description": "Every characteristic change to the {tank} across World of Tanks updates: the firepower, mobility, survivability and concealment buffs and nerfs Wargaming shipped to this tier {tier} {nation} tank, version by version."
+  },
+  "videos": {
+    "title": "{tank} gameplay videos ({region})",
+    "description": "Watch the {tank} in action: community-suggested battles on this tier {tier} {nation} tank, each opening at the moment it is played, with the map and result they happened on."
+  },
+  "community": {
+    "title": "{tank} player reviews and community rating ({region})",
+    "description": "What players think of the {tank}: the community’s rating out of five, split by how well the voters play, set against how this tier {tier} {nation} tank actually performs, plus written reviews from accounts that have the battles in it."
+  }
+}

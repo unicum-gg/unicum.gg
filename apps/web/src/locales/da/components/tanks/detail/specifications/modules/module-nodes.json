@@ -1,0 +1,17 @@
+{
+  "aim-time": "Sigttid",
+  "ammo": "Ammunition",
+  "armor": "Panser",
+  "dispersion": "Spredning",
+  "fire-chance": "Brandchance",
+  "gun-arc": "Kanontøjning",
+  "hit-points": "Livspunkter",
+  "load-limit": "Lastgrænse",
+  "mounted-on": "Monteret på {tanks}",
+  "power": "Kraft",
+  "reload": "Lad",
+  "signal-range": "Signalområde",
+  "tier": "Niveau {tier}",
+  "traverse": "Drejning",
+  "view-range": "Sigtområde"
+}

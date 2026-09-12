@@ -1,0 +1,35 @@
+{
+  "heading": "Mga nangungunang manlalaro sa <accent>{mode}</accent>",
+  "intro": "Ang {mode} ay competitive ranked mode na 7v7 ng World of Tanks sa tier X. Ang talaan ng ranggo ng {region}, diretso mula sa sariling standings ng laro.",
+  "season": {
+    "range": "{start} hanggang {end}",
+    "final": "pinal na ranggo",
+    "live": "kasalukuyang season",
+    "updated": "na-update {when}"
+  },
+  "board": "Nangungunang {count} manlalaro sa {mode}",
+  "columns": {
+    "player": "Manlalaro",
+    "rank": "Ranggo",
+    "battles": "Mga labanan",
+    "rating": "Mga puntos sa rating"
+  },
+  "alias": "(bilang {nickname})",
+  "ranks": {
+    "title": "Mga ranggo",
+    "meaning": "Kahulugan",
+    "tier": "Antas",
+    "intro": "Umaakyat ka sa mga ranggo ng {mode} sa pamamagitan ng pagkapanalo sa mga laban. Bawat panalo ay nagbibigay ng Rating Points batay sa ganda ng iyong paglalaro. Ang {champion} ang pinakamataas na ranggong maaabot mo gamit lamang ang mga puntos, at kapag naabot mo ito, mapupunta ka sa talaan ng ranggo. Ang {legend} ay hindi nakapirming threshold. Ito ang pinakamataas na bahagdan ng mga {champion}, kaya nagbabago ang cutoff nito depende sa mga kalaban, at ang tabla ay pinagpapasyahan ayon sa mga laban na nilaro. Ang eksaktong cutoff ng {legend} at {champion} ay mula sa kasalukuyang season at minamarkahan sa board.",
+    "legend-blurb": "Ang mga {champion} na may pinakamataas na rating. Nililimitahan ito ng laro sa isang nakatakdang posisyon sa leaderboard bawat season, kaya nag-iiba ang laki nito ayon sa season at rehiyon, hindi ayon sa nakapirming target na puntos. Kapag bumaba ka sa huling {legend}, babalik ka sa {champion}.",
+    "champion-blurb": "Ang pinakamataas na ranggo na maaakyatan gamit ang Rating Points, at ang pasukan sa leaderboard. Ang bawat ranked na manlalaro ay hindi bababa sa {champion}."
+  },
+  "race": {
+    "title-live": "Ano ang kailangan sa ngayon",
+    "title-ended": "Kung paano naganap ang season",
+    "legend-cutoff": "Pagputol ng {legend}",
+    "champion-cutoff": "Pagputol ng {champion}",
+    "ranked-players": "Mga ranggong manlalaro",
+    "rating-points": "mga puntos sa rating",
+    "rank-cutoffs": "Mga kinakailangang ranggo"
+  }
+}

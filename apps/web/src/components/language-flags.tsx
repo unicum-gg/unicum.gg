@@ -1,7 +1,11 @@
 "use client";
 
+import type { TranslateFunction } from "@onruntime/translations";
+import { useTranslation } from "@/hooks/use-translation";
+import { useLocale } from "@onruntime/translations/react";
+import { languageDisplayName } from "@/lib/language-name";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import {
   Tooltip,
   TooltipContent,
@@ -13,17 +17,11 @@ import { languageToCountryCode } from "@/lib/language-flags";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
-const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
-
 const FLAG_DIMENSIONS = {
   s: { width: 16, height: 12 },
   m: { width: 20, height: 15 },
   l: { width: 32, height: 24 },
 } as const;
-
-function displayName(code: string): string {
-  return LANGUAGE_NAMES.of(code) ?? code.toUpperCase();
-}
 
 /**
  * Why the language flags are shown. The clan case is plain public data the
@@ -37,17 +35,17 @@ function tooltipFor(
   code: string,
   source: LanguageSource,
   clickable: boolean,
+  locale: string,
+  t: TranslateFunction,
 ): string {
-  const name = displayName(code);
-  const origin =
-    source === "declared"
-      ? `${name}. Picked by the clan.`
-      : `${name}. Our guess from this player's clan history. The longer they stay in a clan, the more its languages count.`;
+  const language = languageDisplayName(code, locale);
+  const origin = t(source === "declared" ? "declared" : "inferred", {
+    language,
+  });
   if (!clickable) return origin;
-  const cta =
-    source === "declared"
-      ? `Click to see top ${name} clans.`
-      : `Click to see top ${name} players.`;
+  const cta = t(source === "declared" ? "cta-clans" : "cta-players", {
+    language,
+  });
   return `${origin} ${cta}`;
 }
 
@@ -74,6 +72,8 @@ export function LanguageFlags({
   region?: Region;
   link?: boolean;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/language-flags");
   if (languages.length === 0) return null;
   const clickable = link && region != null;
   return (
@@ -86,7 +86,7 @@ export function LanguageFlags({
       >
         {languages.map((lang) => {
           const code = languageToCountryCode(lang, region);
-          const tip = tooltipFor(lang, source, clickable);
+          const tip = tooltipFor(lang, source, clickable, locale, t);
           const visual = code ? (
             <Image
               src={`/flags/${size}/${code}.svg`}
@@ -110,8 +110,12 @@ export function LanguageFlags({
               className="inline-flex h-full items-center transition-opacity hover:opacity-80"
               aria-label={
                 source === "declared"
-                  ? `Top ${displayName(lang)} clans`
-                  : `Top ${displayName(lang)} players`
+                  ? t("top-language-clans", {
+                      language: languageDisplayName(lang, locale),
+                    })
+                  : t("top-language-players", {
+                      language: languageDisplayName(lang, locale),
+                    })
               }
             >
               {visual}

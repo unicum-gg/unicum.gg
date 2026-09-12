@@ -1,0 +1,7 @@
+{
+  "win-rate": "Míra výher",
+  "versus": "{metric} oproti regionu {region}",
+  "top": "Nejlepší {percent}%",
+  "ahead-of": "Lepší než {percent} %",
+  "against": "V porovnání se sledovanými účty v regionu {region}, kterých je {players} a mají alespoň {battles} bitev."
+}

@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Sayfada satır",
+  "previous-page": "Önceki sayfa",
+  "page": "Sayfa {current} / {totalPages}",
+  "next-page": "Sonraki sayfa",
+  "all": "Tümü"
+}

@@ -1,0 +1,17 @@
+{
+  "average": "Genomsnitt",
+  "bad": "Dålig",
+  "below-avg": "Under medel",
+  "color-thresholds-for-the-stronghold": "Färggränser för befästningens topplistor. En absolut skala för alla nivåer, så att ett SR (eller SRB) anger samma klankvalitet överallt.",
+  "excellent": "Utmärkt",
+  "good": "Bra",
+  "rating-colors": "Betygsfärger",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Nivå",
+  "top": "Bästa",
+  "very-bad": "Mycket dålig",
+  "very-good": "Mycket bra",
+  "wr": "WR"
+}

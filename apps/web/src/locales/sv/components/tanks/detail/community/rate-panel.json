@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Övergripande antal Strider: {battles}",
+  "checking-your-record-on-this": "Kontrollerar din statistik för den här stridsvagnen...",
+  "fetching-your-garage": "Vi hämtar ditt garage",
+  "have-you-played": "Har du spelat {tank}?",
+  "more-to-go": "Strider kvar: {count}",
+  "more-to-go-one": "Ytterligare {count} strid krävs",
+  "sign-in-to-rate-it": "Logga in för att betygsätta den",
+  "sign-in-with-your-wargaming-account-to-rate-": "Logga in med ditt Wargaming-konto för att betygsätta den. Vi läser av din statistik för just den här stridsvagnen, vilket förhindrar att sidan blir en omröstning bland personer som aldrig har kört den.",
+  "signed-in-on": "Inloggad i regionen {region}",
+  "too-few-battles": "Strider med {tank}: {played}. Vi kräver {required} innan din röst räknas, så att genomsnittet även fortsättningsvis baseras på personer som faktiskt kör den.",
+  "you-have-not-played": "Du har inte spelat {tank}"
+}

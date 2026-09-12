@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>플레이어들</accent>",
+    "language": "<accent>{language}</accent> 최고의 플레이어들"
+  },
+  "intro": {
+    "all": "전체 기간 {metric}으로 순위를 매긴 {region} 순위표입니다. 최소 전투 20,000회입니다.",
+    "language": "클랜 기록에서 추정한 언어 집합에 {language}이(가) 포함된 {region} 플레이어들입니다. {metric}으로 순위를 매겼으며 최소 전투 10,000회입니다.",
+    "strict": "클랜 기록에서 추정한 언어가 {language} 하나뿐인 {region} 플레이어들입니다. {metric}으로 순위를 매겼으며 최소 전투 10,000회입니다."
+  },
+  "board": {
+    "all": "{metric} 기준 최고의 플레이어 {count}명",
+    "language": "{metric} 기준 최고의 {language} 플레이어 {count}명",
+    "strict": "{metric} 기준 엄선된 {language} 플레이어 {count}명"
+  },
+  "modes": {
+    "overall": "전체"
+  },
+  "columns": {
+    "player": "플레이어"
+  },
+  "strict-toggle": "엄격한",
+  "any-toggle": "아무",
+  "all-languages": "모든 언어",
+  "battles": "전투",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

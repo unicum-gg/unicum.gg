@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Даных яшчэ няма. Праверце пасля абнаўлення кланаў.",
+  "heading": "Топ <accent>{tier}</accent> кланаў",
+  "blurb": "Табліца лідараў рэгіёна {region}, рэйтынг па {sort} сярод усіх адсочаных кланаў у фармаце {format}, мінімум {battles} баёў.",
+  "blurb-period": "Табліца лідараў рэгіёна {region}, рэйтынг па {sort} сярод усіх адсочаных кланаў у фармаце {format} за перыяд {period}, мінімум {battles} баёў.",
+  "format-advances": "Авансы (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Топ {count} кланаў {tier} ·"
+}

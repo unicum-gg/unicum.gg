@@ -1,0 +1,4 @@
+{
+  "compare-the-live-and-common": "Comparer la version actuelle à celle du Test public",
+  "compare-live-against-common-test": "Comparer la version actuelle à celle du Test public {testVersion}"
+}

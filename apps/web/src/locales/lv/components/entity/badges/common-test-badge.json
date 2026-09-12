@@ -1,0 +1,12 @@
+{
+  "aria-build": "Apskatīt Kopējā testa klientā, būvējums {version}",
+  "aria-changes": "Kopējais tests mainīja {changes} raksturlielumus",
+  "aria-described": "Kopējais tests: {description}",
+  "aria-vehicle": "Kopējā testa transportlīdzeklis",
+  "common-test": "Kopējais tests",
+  "common-test-build": "Kopējais tests {version}",
+  "tip-build": "{label} · šīs ir testa būvējuma vērtības, un Wargaming vēl var tās mainīt pirms atjauninājuma izlaišanas",
+  "tip-changes": "Kopējā testa izmaiņas šim transportlīdzeklim: {changes, plural, one {# raksturlielums} other {# raksturlielumi}}",
+  "tip-described": "Kopējais tests · {description}",
+  "tip-vehicle": "Kopējais tests · vēl nav izlaists, tāpēc tam nav kauju statistikas un tā raksturlielumi vēl var mainīties"
+}

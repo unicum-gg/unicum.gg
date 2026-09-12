@@ -1,0 +1,14 @@
+{
+  "ammunition": "Ammunisjon",
+  "characteristics": "Egenskaper for stridsvognen {tank}",
+  "consumables": "Forbruksmateriell",
+  "crew-level": "Besetningsnivå",
+  "crew-skills": "Mannskapsferdigheter",
+  "equipment": "Utstyr",
+  "field-mods": "Feltmodifikasjoner",
+  "historical-reference": "Historisk referanse for stridsvognen {tank}",
+  "modules": "Moduler for stridsvognen {tank}",
+  "research-path": "Utviklingstre for stridsvognen {tank}",
+  "similar": "Kjøretøy nær {tank}",
+  "videos": "Videoer for stridsvognen {tank}"
+}

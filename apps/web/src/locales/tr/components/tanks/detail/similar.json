@@ -1,0 +1,11 @@
+{
+  "compare": "En yakın {count} araçla karşılaştır",
+  "match": "maç",
+  "subtitle": "Kendi seviyeleri arasındaki aynı konum",
+  "verdict": {
+    "overall": "Benzer genel",
+    "closest": "{axes} açısından en yakın",
+    "closest-furthest": "{axes} açısından en yakın, {apart} açısından en uzak",
+    "and": " ve "
+  }
+}

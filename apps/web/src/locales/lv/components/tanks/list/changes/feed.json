@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, zero {# tanku} one {# tanks} other {# tanki}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Pagaidām nav reģistrētas izmaiņas tankos. Wargaming līdzsvarojot tankus, katra atjauninājuma uzlabojumi un pasliktinājumi parādīsies šeit.",
+  "update": "Atjaunināt {version}"
+}

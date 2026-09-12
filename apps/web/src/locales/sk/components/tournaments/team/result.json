@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Priemer {rated} hodnotených z {size} hráčov",
+  "average-over-recent": "Priemer z {rated} z {size} hráčov, ktorí hrali za posledných 30 dní",
+  "avg-winrate": "Priemerné výherné percento",
+  "finished": "Končano",
+  "record": "Zapis",
+  "won": "Vyhrané"
+}

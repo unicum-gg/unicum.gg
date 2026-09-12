@@ -1,0 +1,11 @@
+{
+  "date": "날짜",
+  "featured-tournament": "특집 토너먼트",
+  "format": "형식",
+  "n-of-the-roster-were-in-the-clan": "명단의 {count}명이 클랜에 있었습니다",
+  "no-tournament-matches-the-current": "현재 필터와 일치하는 토너먼트가 없습니다.",
+  "played-as": "플레이한 것으로",
+  "result": "결과",
+  "status": "상태",
+  "tier": "단계"
+}

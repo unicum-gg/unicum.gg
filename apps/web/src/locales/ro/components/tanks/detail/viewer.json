@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Vizual",
+    "collision": "Coliziune",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Centrează vehiculul",
+    "off": "Readu-l în afara centrului"
+  },
+  "hull-down": {
+    "on": "Cannonul în jos",
+    "off": "Nivelează vehiculul"
+  },
+  "tracks": {
+    "on": "Pornește șenilele",
+    "off": "Oprește șenilele"
+  },
+  "textures": {
+    "on": "Texturi de înaltă definiție",
+    "off": "Texturi standard"
+  },
+  "reset": "Resetează vederea",
+  "style": "Alege un stil",
+  "style-worn": "Stil: {name}",
+  "search-styles": "Caută stiluri",
+  "colours": "Ce înseamnă culorile",
+  "cinematic": {
+    "off": "Cameră cinematografică: dezactivată",
+    "auto": "Cameră cinematografică: când este lăsată nesupravegheată",
+    "on": "Cameră cinematografică: permanent"
+  },
+  "open-tank": "Deschide alt tanc",
+  "open-tank-placeholder": "Deschide tank...",
+  "more-actions": "Mai multe acțiuni",
+  "marks-meaning": {
+    "0": "Niciun semn de excelență",
+    "1": "Un semn: înaintea a 65% dintre jucătorii cu acest tanc",
+    "2": "Două semne: înaintea a 85%",
+    "3": "Trei semne: înaintea a 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Umple fereastra",
+      "leave": "Înapoi în pagină"
+    },
+    "screen": {
+      "enter": "Umple ecranul",
+      "leave": "Ieși din modul ecran complet"
+    }
+  },
+  "marks-count": {
+    "0": "Niciun semn de excelență",
+    "one": "1 semn de excelență",
+    "other": "{count} semne de excelență"
+  },
+  "compare-tank": "Compară cu alt tanc",
+  "compare-tank-placeholder": "Compară cu...",
+  "view-tooltips": {
+    "visual": "Tancul așa cum îl desenează jocul",
+    "collision": "Cât de groasă este fiecare placă",
+    "live": "Ce ar face obuzul ales"
+  },
+  "cinematic-tooltips": {
+    "off": "Cameră cinematografică: dezactivată, vizualizarea rămâne fixă",
+    "auto": "Cameră cinematografică: începe după 30 de secunde de inactivitate",
+    "on": "Cameră cinematografică: permanent, din momentul în care eliberezi controlul"
+  }
+}

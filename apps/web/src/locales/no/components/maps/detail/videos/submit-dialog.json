@@ -1,0 +1,17 @@
+{
+  "close": "Avslutt",
+  "format": "Format",
+  "here": "her",
+  "in-the-queue": "Den er i køen og vises {where} når en moderator har sett på den. Din er gråtonet på den siden i mellomtiden.",
+  "log-in-to-suggest-a": "Logg inn for å foreslå en taktikk",
+  "on-map": "på {map}",
+  "players-per-team": "Spillere per lag",
+  "sending": "Sender …",
+  "suggest": "Foreslå",
+  "suggest-a-tactic": "Foreslå en taktikk",
+  "suggest-another": "Foreslå en annen",
+  "suggestion-sent": "Forslag sendt",
+  "tier": "Nivå",
+  "what-to-submit": "En konkurransekamp, med åpning fra sekundet den starter. Kartet starter på {map} og følger videoen: en klangkveld går gjennom en rotasjon. Siden den ble spilt fra, er det skuddlederen slår den opp etter, så den blir spurt om i stedet for gjettet.",
+  "what-was-played": "Hva ble spilt"
+}

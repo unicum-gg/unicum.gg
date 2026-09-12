@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "トッププレイヤー · 過去24時間"
+    },
+    "week": {
+      "title": "トッププレイヤー · 過去7日間"
+    }
+  },
+  "rating-scale": {
+    "title": "評価スケール"
+  },
+  "community": {
+    "title": "コミュニティに参加",
+    "heading": "WoTプレイヤーとつながる",
+    "description": "Discordに参加してWoTの戦績について話し、機能をリクエストしたりバグを報告したりできます。GitHubでコードを確認し、開発に貢献することもできます。",
+    "discord": "Discordに参加",
+    "github": "GitHubで見る"
+  },
+  "features": {
+    "title": "ここで確認できること",
+    "profiles": {
+      "title": "プレイヤープロフィール",
+      "description": "総合戦績と24時間 / 7日 / 30日の変動、WN7、WN8、WNX、パーソナルレーティングを含む詳細な戦績。"
+    },
+    "clans": {
+      "title": "クランページ",
+      "description": "レーティング、最近のアクティビティフィード、説明、クラン情報を含むメンバーテーブル。"
+    },
+    "history": {
+      "title": "クラン履歴",
+      "description": "プレイヤーが所属したすべてのクランの完全な時系列。役職と日付も確認できます。"
+    },
+    "live": {
+      "title": "ライブ更新",
+      "description": "追跡済みプレイヤーは、スナップショットシステムにより24時間ごとにバックグラウンドで更新されます。"
+    },
+    "leaderboards": {
+      "title": "リーダーボード",
+      "description": "トッププレイヤー（24時間、7日間、全期間）と、スナップショットから算出したWNXによるトップクランのランキング。"
+    },
+    "open-source": {
+      "title": "オープンソース · AGPL",
+      "description": "コードはGitHubにあります。確認、フォーク、貢献が可能です。広告はなく、分析はオプトインのみです。"
+    }
+  },
+  "quick-start": {
+    "title": "クイックスタート",
+    "search": {
+      "title": "🔍 プレイヤーまたはクランを検索",
+      "description": "{shortcut}を押して検索を開き、ニックネームまたはクランタグを入力します。"
+    },
+    "region": {
+      "title": "🌍 地域を切り替え",
+      "description": "ナビゲーションバーの{selector}セレクターを使用します。ランキングもそれに応じて更新されます。"
+    },
+    "leaderboards": {
+      "title": "🏆 ランキングを見る",
+      "description": "トッププレイヤー（24時間、7日間、全期間）と、スナップショットから算出した平均WNXによるトップクランのランキング。"
+    },
+    "colors": {
+      "title": "📊 色を確認",
+      "description": "WR、WN7、WN8、WNXは同じTier色（オレンジ → 緑 → シアン → 紫）を使用します。上のスケールを確認してください。"
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

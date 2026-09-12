@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "랭킹 (WN)",
+    "tip": "계정이 아닌 해당 전투만의 평점"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "해당 전투의 승률"
+  },
+  "avgDamage": {
+    "label": "평균 피해"
+  },
+  "avgFrags": {
+    "label": "평균 처치",
+    "tip": "전투당 격파한 적"
+  },
+  "damageRatio": {
+    "label": "피해 비율",
+    "tip": "입힌 피해와 받은 피해의 비율"
+  },
+  "kd": {
+    "label": "격파 비율",
+    "tip": "격파한 적과 잃은 전차의 비율"
+  },
+  "survivalRate": {
+    "label": "생존율"
+  },
+  "avgSpotted": {
+    "label": "평균 발견",
+    "tip": "전투당 발견한 적"
+  },
+  "avgDefense": {
+    "label": "기지 방어",
+    "tip": "전투당 방어 점수"
+  },
+  "avgXp": {
+    "label": "평균 경험치"
+  }
+}

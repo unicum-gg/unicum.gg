@@ -1,0 +1,7 @@
+{
+  "buffed": "${count} 강화됨",
+  "n-tanks": "{count, plural, other {#대 전차}}",
+  "nerfed": "${count} 약화됨",
+  "no-tank-changes-have-been": "아직 기록된 전차 변경 사항이 없습니다. Wargaming이 전차를 재조정하면 각 업데이트의 상향 및 하향 내용이 여기에 표시됩니다.",
+  "update": "업데이트 {version}"
+}

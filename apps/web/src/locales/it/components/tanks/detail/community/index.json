@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Asse per asse",
+  "by-server": "Per server",
+  "community-verdict": "Verdetto della community",
+  "every-server-one-average": "Tutti i server, una sola media",
+  "n-shown": ", {count} visualizzati",
+  "opinion": "{count, plural, one {# opinione} other {# opinioni}}",
+  "opinion-next-to-win-rate": "Opinione rispetto al tasso di vittorie, tra i carri di livello {tier}",
+  "rate-the": "Dai un voto: {tankName}",
+  "reputation-against-results": "Reputazione a confronto con i risultati",
+  "same-tank-different-metas": "Stesso carro, meta diversi",
+  "the-same-tank-by-how": "Lo stesso carro, in base all’abilità del votante",
+  "what-players-wrote": "Cosa hanno scritto i giocatori",
+  "who-is-saying-it": "Chi lo dice"
+}

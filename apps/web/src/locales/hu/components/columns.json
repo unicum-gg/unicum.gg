@@ -1,0 +1,14 @@
+{
+  "clan": "Klán",
+  "player": "Játékos",
+  "members": "Tagok",
+  "battles": "Csaták",
+  "avg-damage": "Átlagos sebzés",
+  "avg-xp": "Átlag XP",
+  "winrate": "Győzelmi arány %",
+  "result": "Eredmény",
+  "tournament": "Torna",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

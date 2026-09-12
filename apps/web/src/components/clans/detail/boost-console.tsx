@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
 import { useState } from "react";
 import { PlusIcon, UsersIcon } from "@phosphor-icons/react";
@@ -42,6 +43,8 @@ export function ClanBoostConsole({
   tag: string;
   clanId: number;
 }) {
+  const { t: tCopy } = useTranslation("components/clans/detail/boost-console");
+  const { t } = useTranslation("components/clans/detail/boost-console");
   const { data, mutate } = useBoostConsole(region, tag);
   const [drafts, setDrafts] = useState<number[]>([]);
 
@@ -78,31 +81,26 @@ export function ClanBoostConsole({
       <Panel screenLines={false}>
         <PanelHeader className="flex min-h-14 flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <PanelTitle className="flex items-center gap-2">
-            Stronghold boosts
+            {t("stronghold-boosts")}
             <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-medium text-brand">
-              Officer
-            </span>
+              {t("officer")}</span>
           </PanelTitle>
           <span className="flex items-center gap-1.5 text-sm text-fd-muted-foreground">
             <UsersIcon className="size-4" />
             <span className="font-medium tabular-nums text-fd-foreground">
               {onlineNow}
             </span>
-            <span>/ {membersCount} online</span>
+            <span>{t("n-online", { count: membersCount })}</span>
           </span>
         </PanelHeader>
         <PanelContent className="flex flex-col items-start gap-4">
           <p className="text-sm text-fd-muted-foreground">
-            Each workflow activates its reserves during a time window, once enough
-            members are in a live game session. Runs on your account, no need to
-            be online. Add as many as you need.
-          </p>
+            {t("each-workflow-activates-its-reserves")}</p>
           <Button
             variant="secondary"
             onClick={() => setDrafts((d) => [...d, (d[d.length - 1] ?? 0) + 1])}
           >
-            <PlusIcon className="size-4" /> Add workflow
-          </Button>
+            <PlusIcon className="size-4" /> {tCopy("add-workflow")}</Button>
         </PanelContent>
       </Panel>
         <ClanBoostDiscord
@@ -152,17 +150,17 @@ export function ClanBoostConsole({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>recent activations</PanelTitle>
+              <PanelTitle>{t("recent-activations")}</PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!">
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Reserve</TableHead>
-                    <TableHead>Boost</TableHead>
-                    <TableHead>Workflow</TableHead>
-                    <TableHead className="text-right!">Online</TableHead>
-                    <TableHead className="text-right!">When</TableHead>
+                    <TableHead>{t("reserve")}</TableHead>
+                    <TableHead>{t("boost")}</TableHead>
+                    <TableHead>{t("workflow")}</TableHead>
+                    <TableHead className="text-right!">{t("online")}</TableHead>
+                    <TableHead className="text-right!">{t("when")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>

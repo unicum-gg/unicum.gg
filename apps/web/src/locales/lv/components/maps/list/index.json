@@ -1,0 +1,9 @@
+{
+  "all": "Visus",
+  "camouflage-map": "{camouflage} karte",
+  "modes": "{count, plural, zero {# režīmu} one {# režīms} other {# režīmi}}",
+  "no-maps-match-your-filters": "Neviena karte neatbilst taviem filtriem.",
+  "search": "Meklēt starp {count} kartēm",
+  "search-label": "Meklēt kartes",
+  "special-map": "Īpaša karte"
+}

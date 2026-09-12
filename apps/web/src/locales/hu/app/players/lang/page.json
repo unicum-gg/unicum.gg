@@ -1,0 +1,6 @@
+{
+  "title": "Legjobb {language} nyelvű World of Tanks-játékosok ({region})",
+  "description": "{name} {region} játékosranglista azoknak a játékosoknak, akiknél a klántörténet alapján kikövetkeztetett nyelvek között {language} is szerepel, WNX szerint rangsorolva.",
+  "og-title": "Legjobb {language} nyelvű játékosok",
+  "og-subtitle": "{region} ranglista"
+}

@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Addebitato in euro, convertito in {currency} al tasso odierno.",
+  "cost-breakdown": "Dettaglio del Prezzo",
+  "estimated-annual-cost": "Costo annuo stimato",
+  "fixed-month-bill-no-surprises": "Una fattura fissa di {totalAnnualEur} al mese, senza sorprese: un solo server a noleggio, nessun SaaS di terze parti nel percorso dei dati. Il costo aumenta solo quando le esigenze superano la capacità del server (un maggiore traffico da Wargaming richiede più IP di uscita).",
+  "free": "gratuito",
+  "one-off-spend": "Spesa una tantum",
+  "paid-once-so-it-is": "Pagato una sola volta, quindi non fa parte della fattura mensile indicata sopra. Contribuisce comunque al costo sostenuto finora per il progetto.",
+  "previously": "In precedenza"
+}

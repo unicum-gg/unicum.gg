@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
+import { useRouter } from "@/hooks/use-router";
 import ROUTES from "@/constants/routes";
 import {
   MAPS_TAB_ROOT as TAB_ROOT,
@@ -8,6 +9,7 @@ import {
   mapsTabHref,
 } from "@/components/maps/list/tabs";
 import { useRegion } from "@/hooks/use-region";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Select,
   SelectContent,
@@ -111,6 +113,7 @@ export function RegionSelector() {
   const pathname = usePathname();
   const router = useRouter();
   const { region, setRegion } = useRegion();
+  const { t } = useTranslation("components/region-selector");
 
   function selectRegion(next: Region) {
     setRegion(next);
@@ -130,7 +133,7 @@ export function RegionSelector() {
     >
       <SelectTrigger
         size="sm"
-        aria-label="Region"
+        aria-label={t("label")}
         className="h-8 w-fit gap-1.5 rounded-full border-fd-border bg-fd-secondary/50 px-2.5 text-xs font-medium uppercase"
       >
         <SelectValue>

@@ -1,0 +1,17 @@
+{
+  "close": "Aizvērt",
+  "format": "Formāts",
+  "here": "šeit",
+  "in-the-queue": "Tā ir rindā un parādīsies {where}, kad moderators to būs pārskatījis. Tikmēr tavējā šajā lapā būs pelēkota.",
+  "log-in-to-suggest-a": "Pieteikties, lai ieteiktu taktiku",
+  "on-map": "uz {map}",
+  "players-per-team": "Spēlētāji komandā",
+  "sending": "Sūta…",
+  "suggest": "Ieteikt",
+  "suggest-a-tactic": "Ieteikt taktiku",
+  "suggest-another": "Ieteikt citu",
+  "suggestion-sent": "Ieteikums nosūtīts",
+  "tier": "Līmenis",
+  "what-to-submit": "Sacensību kauja, kas sākas tās sākuma sekundē. Karte sākas vietnē {map} un virzās kopā ar video: klana vakars iziet cauri rotācijai. Puses, no kuras tika spēlēts, ir tas, pēc kā kaujas vadītājs to meklē, tāpēc to jautā, nevis uzmin.",
+  "what-was-played": "Kas tika spēlēts"
+}

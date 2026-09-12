@@ -1,0 +1,6 @@
+{
+  "fun": "Cât de mult le place jucătorilor, ceea ce de obicei nu este aceeași întrebare.",
+  "hype": "Poziția acordată de comunitate în nivelul său, minus poziția ratei victoriilor. Sortează descrescător pentru cele mai supraevaluate tancuri din joc și crescător pentru cele mai subevaluate.",
+  "overall": "Cât de bun cred jucătorii că este. Clasat pe o medie ajustată spre media site-ului, astfel încât un tanc cu patru voturi să nu-l poată depăși pe unul cu patru sute.",
+  "votes": "Voturi exprimate, fiecare de la un cont care a jucat efectiv cu tancul."
+}

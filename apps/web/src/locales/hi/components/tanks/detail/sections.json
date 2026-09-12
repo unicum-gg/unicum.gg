@@ -1,0 +1,14 @@
+{
+  "ammunition": "गोला-बारूद",
+  "characteristics": "टैंक {tank} की विशेषताएँ",
+  "consumables": "उपयोग्य सामान",
+  "crew-level": "क्रू स्तर",
+  "crew-skills": "क्रू कौशल",
+  "equipment": "उपकरण",
+  "field-mods": "क्षेत्र संशोधन",
+  "historical-reference": "टैंक {tank} का ऐतिहासिक संदर्भ",
+  "modules": "टैंक {tank} के मॉड्यूल",
+  "research-path": "टैंक {tank} की तकनीकी वृक्ष शाखा",
+  "similar": "{tank} के समान टैंक",
+  "videos": "टैंक {tank} के वीडियो"
+}

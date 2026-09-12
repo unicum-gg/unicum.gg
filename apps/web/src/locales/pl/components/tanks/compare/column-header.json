@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Amunicja, wyposażenie, materiały eksploatacyjne, dyrektywy, załoga i postęp dla tej kolumny. Każda zmiana wpływa na pozycję parametrów pojazdu w porównaniu widocznym w tle.",
+  "ammunition-equipment-crew-and-progression": "Amunicja, wyposażenie, załoga i postęp",
+  "apply-to-every-column": "Zastosuj do każdej kolumny",
+  "compare-against": "Porównaj z {tank}",
+  "compare-the-others-against-this-one": "Porównaj pozostałe z tym",
+  "configure-tank": "Skonfiguruj {tank}",
+  "highest-overall-score": "Najwyższy wynik w kategorii Ogółem",
+  "highest-overall-score-of-this": "Najwyższy wynik w kategorii Ogółem w tym porównaniu",
+  "is-the-reference": "{tank} jest punktem odniesienia",
+  "overall": "Ogółem",
+  "reference-column": "Kolumna odniesienia",
+  "remove-tank": "Usuń {tank}",
+  "reset-all": "Zresetuj wszystko",
+  "setup": "Konfiguracja",
+  "stock": "Stan",
+  "tank-setup": "Konfiguracja: {tank}",
+  "top": "Najlepsi",
+  "where-this-vehicle-sits-across": "Pozycja tego pojazdu na tle całego katalogu w skali do {MAXSCORE}: średnia jego wyników w czterech kategoriach przy wybranej tutaj konfiguracji. To podsumowanie, a nie werdykt. Zwiadowca i czołg ciężki mogą osiągnąć ten sam wynik dzięki mocnym stronom w różnych obszarach."
+}

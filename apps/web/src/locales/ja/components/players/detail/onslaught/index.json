@@ -1,0 +1,12 @@
+{
+  "final": " · 最終",
+  "has-not-held-a-place": "{nickname}はオンスロートのランキングに掲載されたことがありません。",
+  "live-season": "· 開催中のシーズン",
+  "loading-s-onslaught-record": "{nickname}のオンスロート記録を読み込み中...",
+  "onslaught": "オンスロート",
+  "onslaught-record": "{nickname}のオンスロート記録",
+  "see-this-season-s-leaderboard": "今シーズンのランキングを見る",
+  "standing-line": "{rating}レーティングポイント · {battles}戦闘",
+  "the-board-only-lists-players": "このランキングにはチャンピオンに到達したプレイヤーのみが掲載されます。地域ごとに数千人しかいないため、ほとんどのプロフィールはここに表示されません。到達したシーズンに自動で反映されます。",
+  "updated": "更新日期 {when}"
+}

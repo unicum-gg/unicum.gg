@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Ipakita ang chat",
+    "hide": "Itago ang chat",
+    "show-streamers": "Ipakita ang mga streamer"
+  },
+  "heading": "{name}: istatistika ng manlalaro, clan at tank sa World of Tanks",
+  "hide": "Itago ang mga streamer",
+  "player": "Manlalaro",
+  "stream-language": "Wika ng stream · {name}",
+  "stream-language-alt": "Wika ng stream: {name}",
+  "theater": {
+    "enter": "Theater mode",
+    "exit": "Lumabas sa theater mode"
+  },
+  "title": "Mga nangungunang manlalarong nag-i-stream ngayon ·",
+  "viewer-count": "{count} manonood",
+  "viewers": "Mga manonood",
+  "watch": "Panoorin si {nickname} sa Twitch"
+}

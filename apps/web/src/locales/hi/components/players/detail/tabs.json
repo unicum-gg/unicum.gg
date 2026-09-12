@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "सारांश",
+    "tanks": "टैंक",
+    "sessions": "सत्र",
+    "achievements": "उपलब्धियाँ",
+    "tournaments": "टूर्नामेंट्स",
+    "value": "मान"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "बीटा"
+}

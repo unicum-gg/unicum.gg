@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: je voortschrijdend gemiddelde van de gecombineerde schade (laatste ~100 gevechten) moet hoger zijn dan dat van 65% van de spelers die de afgelopen 14 dagen met deze tank speelden"
+    },
+    "mark2": {
+      "label": "2 Marks",
+      "tip": "2 Marks: je voortschrijdende gemiddelde gecombineerde schade (laatste ~100 gevechten) moet die van 85% van de spelers met deze tank in de afgelopen 14 dagen verslaan"
+    },
+    "mark3": {
+      "label": "3 Marks",
+      "tip": "3 Marks: je voortschrijdende gemiddelde gecombineerde schade (laatste ~100 gevechten) moet die van 95% van de spelers met deze tank in de afgelopen 14 dagen verslaan"
+    }
+  },
+  "rows-per-page": "Rijen per pagina",
+  "previous-page": "Vorige pagina",
+  "page": "Pagina {current} / {totalPages}",
+  "next-page": "Volgende pagina",
+  "all": "Allen"
+}

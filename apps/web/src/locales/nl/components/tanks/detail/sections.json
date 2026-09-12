@@ -1,0 +1,14 @@
+{
+  "ammunition": "Munitie",
+  "characteristics": "Kenmerken van de {tank}",
+  "consumables": "Verbruiksartikelen",
+  "crew-level": "Bemanningsniveau",
+  "crew-skills": "Bemanning Vaardigheden",
+  "equipment": "Uitrusting",
+  "field-mods": "Veldmodificaties",
+  "historical-reference": "Historische referentie van de {tank}",
+  "modules": "Modules van de {tank}",
+  "research-path": "Onderzoekstak van de {tank}",
+  "similar": "Tanks vergelijkbaar met {tank}",
+  "videos": "Video’s van de {tank}"
+}

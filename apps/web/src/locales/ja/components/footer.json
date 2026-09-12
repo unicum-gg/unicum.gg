@@ -1,0 +1,25 @@
+{
+  "tagline": "World of Tanksコミュニティのために構築。EU、NA、Asiaのすべてのプレイヤー、クラン、戦車、マップの無料戦績。",
+  "columns": {
+    "leaderboards": "リーダーボード",
+    "tanks": "戦車",
+    "maps": "マップ",
+    "integrations": "連携",
+    "project": "プロジェクト"
+  },
+  "links": {
+    "top-tanks": "トップ戦車",
+    "bot": "Discordボット",
+    "mcp": "MCPサーバー",
+    "docs": "APIドキュメント",
+    "badges": "バッジ",
+    "glossary": "用語集",
+    "coverage": "カバー率",
+    "support": "サポートしてください",
+    "source": "ソースコード",
+    "status": "ステータス",
+    "discord": "Discord"
+  },
+  "disclaimer": "Wargamingとは提携していません",
+  "cookies": "Cookieを管理"
+}

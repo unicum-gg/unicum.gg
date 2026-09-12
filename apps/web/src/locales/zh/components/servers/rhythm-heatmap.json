@@ -1,0 +1,8 @@
+{
+  "busiest": "最繁忙的{when}（{players}）",
+  "not-enough-recorded-yet-to": "记录还不够，无法显示每周节奏。随着采样覆盖每周的每个小时，数据会逐渐填充。",
+  "not-sampled-yet": "尚未采样",
+  "players-on-average": "平均{players}名玩家",
+  "quietest": "，最安静的{when}（{players}）",
+  "your-local-time": "你的本地时间"
+}

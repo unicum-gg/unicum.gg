@@ -1,0 +1,14 @@
+{
+  "date": "Күні",
+  "featured-tournament": "ерекше турнир",
+  "format": "Формат",
+  "mode": "Режим",
+  "no-tournament-matches-the-current": "Ағымдағы фильтрлерге сәйкес турнир жоқ.",
+  "nothing-here-right-now-wargaming": "Қазір мұнда ештеңе жоқ. Wargaming күн сайын жаңа турнирлер ашады, сондықтан бұл тізім өздігінен қайта толтырылады.",
+  "prize": "Жүлде",
+  "region-tournaments": "{region} турнирлері ({count})",
+  "status": "Статус",
+  "teams": "командалар",
+  "tier": "Деңгей",
+  "tournament": "Турнир"
+}

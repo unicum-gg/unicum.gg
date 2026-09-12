@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "يظهر التفصيل عند {min}، لذا يعكس الشكل شيئًا عن الدبابة لا عن شخص واحد.",
+  "community-rating-by-axis": "تقييم المجتمع حسب المحور",
+  "from-votes": "من {count} صوتًا مفصلًا.",
+  "from-votes-one": "من {count} تصويت مفصل.",
+  "nobody-yet": "لم يُكمل أحد المحاور التفصيلية بعد.",
+  "only-votes": "فقط {count} أصوات مفصلة حتى الآن.",
+  "only-votes-one": "فقط {count} تصويت مفصل حتى الآن."
+}

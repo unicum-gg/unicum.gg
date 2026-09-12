@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Көру",
+    "tanks": "Танкылар",
+    "sessions": "сессиялар",
+    "achievements": "жетістіктер",
+    "tournaments": "Турнирлер",
+    "value": "құн"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "бета"
+}

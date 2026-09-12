@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "इस क्लान के लिए अभी तक टैंक का कोई डेटा नहीं है।",
+  "no-tanks-match-these-filters": "इन फ़िल्टर से कोई टैंक मेल नहीं खाता।",
+  "nation": "राष्ट्र",
+  "type": "प्रकार",
+  "tier": "स्तर",
+  "name": "नाम",
+  "members": "सदस्य",
+  "battles": "युद्ध",
+  "avg-damage": "औसत क्षति",
+  "avg-xp": "औसत XP",
+  "wr": "WR"
+}

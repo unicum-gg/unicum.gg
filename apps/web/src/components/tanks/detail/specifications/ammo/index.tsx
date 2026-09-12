@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import Image from "next/image";
 import { CheckIcon } from "lucide-react";
 import type { ModuleShell } from "@unicum.gg/core/wargaming/wot/tanks/modules";
@@ -19,12 +20,13 @@ import {
 import { cn } from "@/lib/utils";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
+import { useTranslation } from "@/hooks/use-translation";
 
 // WG's own shell-type icons, from our wot.assets mirror (keyed by the raw shell
 // type, which matches the file name), served through next/image.
 const AMMO_ICON = iconUrl("ammopanel/ammo");
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /** The current gun's shells, shown as slot-style boxes (one per shell type)
  * with the WG icon and the damage / penetration underneath. Clicking one selects
@@ -61,6 +63,10 @@ export function TankAmmo({
   /** A local under-title line (column-width), when stacked below another panel. */
   headerBorder?: boolean;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tanks/detail/specifications/ammo/index");
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
+  const { t: tWidget } = useTranslation("components/tanks/detail/widgets");
   if (shells.length === 0) return null;
   return (
     <TooltipProvider delayDuration={100}>
@@ -72,7 +78,7 @@ export function TankAmmo({
             headerBorder && "border-b border-fd-border",
           )}
         >
-          <PanelTitle>Ammunition</PanelTitle>
+          <PanelTitle>{tSection("ammunition")}</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="px-4 py-6">
@@ -91,7 +97,11 @@ export function TankAmmo({
                       type="button"
                       onClick={() => onSelect(i)}
                       aria-pressed={selected}
-                      aria-label={`${name}: ${s.damage} damage, ${s.penetration} mm penetration`}
+                      aria-label={tWidget("shell-aria", {
+                        name,
+                        damage: s.damage,
+                        penetration: s.penetration,
+                      })}
                       className="flex cursor-pointer flex-col items-center gap-1.5"
                     >
                       <span
@@ -143,36 +153,36 @@ export function TankAmmo({
                         <div className="text-background/50">{kindName}</div>
                       ) : null}
                       <div className="flex justify-between gap-4 tabular-nums">
-                        <span className="text-background/60">Damage</span>
+                        <span className="text-background/60">{t("damage")}</span>
                         <span>{s.damage}</span>
                       </div>
                       <div className="flex justify-between gap-4 tabular-nums">
-                        <span className="text-background/60">Penetration</span>
+                        <span className="text-background/60">{t("penetration")}</span>
                         <span>{s.penetration} mm</span>
                       </div>
                       {typeof s.pen500 === "number" ? (
                         <div className="flex justify-between gap-4 tabular-nums">
-                          <span className="text-background/60">… at 500m</span>
+                          <span className="text-background/60">{t("at-500m")}</span>
                           <span>{s.pen500} mm</span>
                         </div>
                       ) : null}
                       {typeof s.velocity === "number" ? (
                         <div className="flex justify-between gap-4 tabular-nums">
-                          <span className="text-background/60">Velocity</span>
-                          <span>{intFmt.format(s.velocity)} m/s</span>
+                          <span className="text-background/60">{t("velocity")}</span>
+                          <span>{num(INT_FORMAT).format(s.velocity)} m/s</span>
                         </div>
                       ) : null}
                       {typeof s.splash === "number" && s.splash > 0 ? (
                         <div className="flex justify-between gap-4 tabular-nums">
-                          <span className="text-background/60">Splash</span>
+                          <span className="text-background/60">{t("splash")}</span>
                           <span>{s.splash} m</span>
                         </div>
                       ) : null}
                       {typeof s.cost === "number" && s.cost > 0 ? (
                         <div className="flex justify-between gap-4 tabular-nums">
-                          <span className="text-background/60">Cost</span>
+                          <span className="text-background/60">{t("cost")}</span>
                           <span className="flex items-center gap-1">
-                            {intFmt.format(s.cost)}
+                            {num(INT_FORMAT).format(s.cost)}
                             <CurrencyIcon
                               type="credits"
                               className="text-background/70"

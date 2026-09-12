@@ -1,0 +1,5 @@
+{
+  "battles": "{count} 战斗场次",
+  "chart-label": "每{granularity}进行的战斗场次，按{metric}着色",
+  "no-battles": "否战斗场次"
+}

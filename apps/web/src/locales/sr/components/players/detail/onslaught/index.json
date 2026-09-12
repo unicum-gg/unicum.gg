@@ -1,0 +1,12 @@
+{
+  "final": " · završni",
+  "has-not-held-a-place": "Надимак {nickname} није заузимао место на Juriš ранг-листи.",
+  "live-season": "· сезона у току",
+  "loading-s-onslaught-record": "Учитава се Juriš рекорд надимка {nickname}...",
+  "onslaught": "Juriš",
+  "onslaught-record": "Juriš рекорд надимка {nickname}",
+  "see-this-season-s-leaderboard": "Погледај ранг-листу ове сезоне",
+  "standing-line": "{rating} рејтинг бодова · {battles} bitke",
+  "the-board-only-lists-players": "Ранг-листа приказује само играче који достигну шампиона, њих неколико хиљада по региону, па се ту налази скоро сваки профил. Попуњава се сама током сезоне у којој то достигну.",
+  "updated": "Ažurirano {when}"
+}

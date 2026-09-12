@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -11,7 +13,7 @@ import { PlayerPanelList } from "@/components/entity/player-panel-list";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanTournamentPlayer } from "./row";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /**
  * Which of the clan's own members to field.
@@ -35,6 +37,8 @@ export function ClanTournamentLineup({
   tag: string;
   players: ClanTournamentPlayer[];
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/clans/detail/tournaments/lineup");
   // A clan whose members have never entered one has nothing to show, and an
   // empty panel reads as a section that failed rather than as an answer.
   if (players.length === 0) return null;
@@ -44,14 +48,12 @@ export function ClanTournamentLineup({
       <PanelSeparator />
       <Panel>
         <PanelHeader>
-          <PanelTitle>[{tag}] tournament players</PanelTitle>
+          <PanelTitle>{t("tournament-players", { tag })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <div className="px-4 py-2">
             <p className="text-xs text-fd-muted-foreground">
-              Members who compete: those who have won one first, then the most
-              active. Their whole record, not only what they did with this clan.
-            </p>
+              {t("members-who-compete-those-who")}</p>
           </div>
           <PlayerPanelList
             region={region}
@@ -64,8 +66,8 @@ export function ClanTournamentLineup({
               // way round. Everyone else leads with how much they play, because
               // that is their claim. A "0" announced the one thing they have
               // not done and hid the one thing they have.
-              value: intFmt.format(p.wins > 0 ? p.wins : p.entered),
-              caption: p.wins > 0 ? `of ${intFmt.format(p.entered)}` : "entered",
+              value: num(INT_FORMAT).format(p.wins > 0 ? p.wins : p.entered),
+              caption: p.wins > 0 ? `of ${num(INT_FORMAT).format(p.entered)}` : "entered",
               player: {
                 nickname: p.nickname,
                 accountId: p.accountId,

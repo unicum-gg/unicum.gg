@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Breite des Spielbereichs",
+    "height": "Höhe des Spielbereichs",
+    "round-length": "Gefechtstimer",
+    "team-size": "Teamgröße",
+    "camouflage": "Saison",
+    "presence": "Im Spiel",
+    "variant-version": "{type}-Version",
+    "play-area": "Spielbereich",
+    "bases-team1": "Basen der Verbündeten",
+    "bases-team2": "Gegnerbasen",
+    "spawns-team1": "Startpunkte der Verbündeten",
+    "spawns-team2": "Startpunkte der Gegner",
+    "control-point": "Kontrollpunkt",
+    "artillery-headquarters": "Artillerie-Hauptquartier",
+    "comms-centers": "Kommunikationszentren",
+    "observation-posts": "Beobachtungsposten",
+    "points-of-interest": "Sonderziele"
+  },
+  "summary": {
+    "added": "{name} hinzugefügt",
+    "removed": "{name} entfernt",
+    "added-to-game": "Zum Spiel hinzugefügt",
+    "removed-from-game": "Aus dem Spiel entfernt",
+    "added-on-test": "Zum Test-Client hinzugefügt",
+    "removed-on-test": "Aus dem Test-Client entfernt",
+    "mode-added": "{name}-Modus hinzugefügt",
+    "mode-removed": "{name}-Modus entfernt",
+    "now-played-in": "Jetzt in {name} gespielt",
+    "no-longer-played-in": "Nicht mehr in {name} gespielt",
+    "event-added": "{name} kann jetzt während des Gefechts stattfinden",
+    "event-removed": "{name} findet nicht mehr statt",
+    "moved": "{name} verschoben",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

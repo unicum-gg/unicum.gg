@@ -1,0 +1,60 @@
+{
+  "columns-label": "Stupci",
+  "groups": {
+    "general": "Opća",
+    "combat": "Borba"
+  },
+  "columns": {
+    "battles": {
+      "label": "Bitke",
+      "tip": "Ukupan broj odigranih bitki na tenku"
+    },
+    "count": {
+      "label": "Broj",
+      "tip": "Broj praćenih igrača u uzorku"
+    },
+    "rating": {
+      "label": "Ocjena (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Stopa pobjeda na tenku"
+    },
+    "playerWr": {
+      "label": "WR igrača",
+      "tip": "Prosječna ukupna stopa pobjeda igrača koji ga voze"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Prosječna šteta po igri"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Omjer ubojstava i smrti"
+    },
+    "assists": {
+      "label": "Asistencije",
+      "tip": "Prosječna asistirana šteta"
+    },
+    "hitPct": {
+      "label": "Pogodak %",
+      "tip": "Pogoci / hici"
+    },
+    "penPct": {
+      "label": "Proboj %",
+      "tip": "Proboji / pogoci"
+    },
+    "spots": {
+      "label": "Spotovi",
+      "tip": "Prosječan broj otkrivenih igrača po igri"
+    },
+    "blocked": {
+      "label": "Blokirano",
+      "tip": "Prosječna šteta blokirana oklopom"
+    },
+    "survival": {
+      "label": "Opstanak",
+      "tip": "Udio preživljenih bitki"
+    }
+  }
+}

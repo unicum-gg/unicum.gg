@@ -1,0 +1,14 @@
+{
+  "ammunition": "Đạn",
+  "characteristics": "Đặc tính của xe tăng {tank}",
+  "consumables": "Vật phẩm",
+  "crew-level": "Cấp độ kíp lái",
+  "crew-skills": "Kỹ năng kíp xe",
+  "equipment": "Thiết bị",
+  "field-mods": "Sửa đổi hiện trường",
+  "historical-reference": "Tư liệu lịch sử về xe tăng {tank}",
+  "modules": "Mô-đun của xe tăng {tank}",
+  "research-path": "Nhánh Sơ đồ Công nghệ của xe tăng {tank}",
+  "similar": "Xe tăng gần với {tank}",
+  "videos": "Video về xe tăng {tank}"
+}

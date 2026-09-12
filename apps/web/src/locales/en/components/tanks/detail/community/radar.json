@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "The breakdown appears at {min}, so the shape says something about the tank rather than about one person.",
+  "community-rating-by-axis": "Community rating by axis",
+  "from-votes": "From {count} detailed votes.",
+  "from-votes-one": "From {count} detailed vote.",
+  "nobody-yet": "Nobody has filled in the detailed axes yet.",
+  "only-votes": "Only {count} detailed votes so far.",
+  "only-votes-one": "Only {count} detailed vote so far."
+}

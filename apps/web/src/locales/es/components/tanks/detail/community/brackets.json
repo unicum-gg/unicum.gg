@@ -1,0 +1,8 @@
+{
+  "battles": "{count} batallas",
+  "no-votes": "no votos",
+  "rated-higher": "Los jugadores más hábiles le dan {stars} estrellas más que el resto del servidor. Este tanque premia saber lo que haces.",
+  "rated-lower": "Los jugadores más hábiles le dan {stars} estrellas menos que el resto del servidor. Te hace quedar bien hasta que se le exige de verdad.",
+  "votes": "{count} votos",
+  "votes-one": "{count} voto"
+}

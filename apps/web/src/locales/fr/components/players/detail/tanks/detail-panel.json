@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Score moyen par bataille",
+  "general-parameters": "Paramètres généraux",
+  "metric-progression": "Progression de {metric}",
+  "not-enough-history-on-this": "Pas assez d’historique sur ce char pour l’instant. Il a besoin d’au moins deux captures sur les 90 derniers jours pour tracer une ligne.",
+  "record-score": "Score record",
+  "updated": "Mis à jour"
+}

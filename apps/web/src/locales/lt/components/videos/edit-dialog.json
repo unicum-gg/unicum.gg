@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Pakeiskite viską, kas neteisinga, įskaitant transporto priemonę. Išsaugojus vaizdo įrašas grįš į moderavimo eilę, todėl paskelbtas vaizdo įrašas bus pašalintas, kol vėl bus patvirtintas.",
+  "correct-a-suggestion": "Pataisyti pasiūlymą",
+  "could-not-load-that-suggestion": "Nepavyko įkelti šio pasiūlymo. Po akimirkos bandykite dar kartą.",
+  "link-expired": "Šios nuorodos galiojimo laikas baigėsi. Discord kortelėje dar kartą paspauskite „Redaguoti“, kad gautumėte naują nuorodą.",
+  "loading": "Kraunasi…",
+  "log-in": "Prisijungti",
+  "log-in-with-the-account": "Prisijunkite prie paskyros, iš kurios buvo pasiūlytas šis vaizdo įrašas, kad galėtumėte jį pataisyti.",
+  "no-suggestion-with-that-id": "Pasiūlymo su šiuo ID nėra.",
+  "not-yours-to-correct": "Šis pasiūlymas nėra jūsų, todėl negalite jo pataisyti."
+}

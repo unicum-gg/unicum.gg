@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { BroadcastIcon, FlaskIcon } from "@phosphor-icons/react";
 import { TankClient } from "@unicum.gg/shared";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -38,34 +39,32 @@ export function TankClientSwitch({
   pending: boolean;
   onSelect: (client: TankClient) => void;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/common-test/index");
   if (!testVersion) return null;
   return (
     <TooltipProvider delayDuration={100}>
       <SegmentedControl>
         <Segment
-          label="Live"
+          label={t("live")}
           icon={LIVE_ICON}
           active={client === TankClient.Live}
           onClick={() => onSelect(TankClient.Live)}
           tooltip={
             <div className="w-56 text-xs">
-              The vehicle as it is in the game right now.
-            </div>
+              {t("the-vehicle-as-it-is")}</div>
           }
         />
         <Segment
-          label="Common Test"
+          label={t("common-test")}
           icon={TEST_ICON}
           active={client === TankClient.CommonTest}
           disabled={pending}
           onClick={() => onSelect(TankClient.CommonTest)}
           tooltip={
             <div className="w-56 space-y-1 text-xs">
-              <div className="font-medium">Common Test {testVersion}</div>
+              <div className="font-medium">{t("common-test-2", { testVersion })}</div>
               <p className="text-background/60">
-                The vehicle as the test build has it. Not released: Wargaming can
-                still change or drop any of it before the update ships.
-              </p>
+                {t("the-vehicle-as-the-test")}</p>
             </div>
           }
         />

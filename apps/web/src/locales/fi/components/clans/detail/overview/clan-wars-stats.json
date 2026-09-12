@@ -1,0 +1,21 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Kaikkiaan",
+    "day": "Viimeiset 24h",
+    "week": "Viimeiset 7pv",
+    "month": "Viimeiset 30pv"
+  },
+  "sections": {
+    "territory": "Alue",
+    "t10": "Taso X",
+    "t8": "Taso VIII",
+    "t6": "Taso VI"
+  },
+  "rows": {
+    "provinces": "Provinssit",
+    "elo": "ELO",
+    "battles": "Taisteluita",
+    "winrate": "Voittoaste"
+  }
+}

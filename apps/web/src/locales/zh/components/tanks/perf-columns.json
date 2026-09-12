@@ -1,0 +1,60 @@
+{
+  "columns-label": "列",
+  "groups": {
+    "general": "公共聊天",
+    "combat": "战斗"
+  },
+  "columns": {
+    "battles": {
+      "label": "战斗场次",
+      "tip": "使用该坦克进行过的战斗场次"
+    },
+    "count": {
+      "label": "数量",
+      "tip": "样本中已追踪玩家的数量"
+    },
+    "rating": {
+      "label": "评级 (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "该坦克的胜率"
+    },
+    "playerWr": {
+      "label": "玩家胜率",
+      "tip": "驾驶该坦克的玩家的总体平均胜率"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "每场游戏平均伤害"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "击杀 / 死亡比例"
+    },
+    "assists": {
+      "label": "协助",
+      "tip": "平均助攻伤害"
+    },
+    "hitPct": {
+      "label": "命中率 %",
+      "tip": "命中数 / 射击数"
+    },
+    "penPct": {
+      "label": "穿透率 %",
+      "tip": "穿透数 / 命中数"
+    },
+    "spots": {
+      "label": "探测",
+      "tip": "每场游戏平均发现数"
+    },
+    "blocked": {
+      "label": "阻挡",
+      "tip": "平均装甲阻挡伤害"
+    },
+    "survival": {
+      "label": "生存",
+      "tip": "存活战斗占比"
+    }
+  }
+}

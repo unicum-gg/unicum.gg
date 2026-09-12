@@ -1,0 +1,5 @@
+{
+  "title": "Účet zablokován",
+  "body": "Hráč {nickname} má účet v regionu {region}, ale Wargaming tento účet zablokoval, takže jeho statistiky nejsou k dispozici.",
+  "back-to-home": "Zpět na domovskou stránku"
+}

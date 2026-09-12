@@ -1,0 +1,7 @@
+{
+  "firing": "Šaudoma {shell}, {pen} mm. Keisti šūvį",
+  "no-such-round": "{mark}: šis pabūklas tokio neturi, todėl kampus nustatykite patys",
+  "own-round": "{mark}: šio pabūklo nuosavas sviedinys su visais skaičiais",
+  "treat-it-as": "Laikyti jį",
+  "treat-it-as-mark": "Laikyti jį {mark}"
+}

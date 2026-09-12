@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Minden tank ötből értékelve az azt használó játékosok által. Csak olyan fiók szavazata számít, amely ténylegesen csatába vitte a járművet. Ez különbözteti meg az oldalt egy bárki által kitölthető szavazástól.",
+  "no-tank-has-been-rated": "Még egyetlen tankot sem értékeltek. Az első szavazatokat a tankoldalakon, a Közösség alatt adhatod le.",
+  "think": "gondolj",
+  "title": "Mit {think} a játékosok",
+  "votes-across-vehicles": "{totalVotes} szavazat {ratedTanks} járműről."
+}

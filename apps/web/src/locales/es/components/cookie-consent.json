@@ -1,0 +1,16 @@
+{
+  "title": "Usamos cookies",
+  "description": "Usamos cookies para mejorar tu experiencia de navegación y analizar el tráfico del sitio.",
+  "functional": {
+    "title": "Funcionales",
+    "description": "Necesarias para que el sitio funcione correctamente (preferencias, selección de región)."
+  },
+  "analytics": {
+    "title": "Medición de audiencia",
+    "description": "Google Analytics utiliza cookies para ayudarnos a entender cómo se usa el sitio. Las estadísticas anónimas sin cookies (Umami) permanecen activas en cualquier caso."
+  },
+  "save": "Guardar mis preferencias",
+  "decline": "Rechazar todo",
+  "customize": "Personalizar",
+  "accept": "Aceptar todo"
+}

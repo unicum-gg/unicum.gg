@@ -1,0 +1,17 @@
+{
+  "aim-time": "وقت التهديف",
+  "ammo": "ذخيرة",
+  "armor": "درع",
+  "dispersion": "تشتيت",
+  "fire-chance": "فرصة الحريق",
+  "gun-arc": "زاوية المدفع",
+  "hit-points": "نقاط الإصابة",
+  "load-limit": "حد التحميل",
+  "mounted-on": "مركّب على {tanks}",
+  "power": "قوة",
+  "reload": "إعادة تحميل",
+  "signal-range": "نطاق الإشارة",
+  "tier": "مرتبة {tier}",
+  "traverse": "تدوير",
+  "view-range": "نطاق الرؤية"
+}

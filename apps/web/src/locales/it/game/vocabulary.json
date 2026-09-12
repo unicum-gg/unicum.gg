@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Casuale",
+    "battle_royale": "Cacciatore d’acciaio",
+    "frontline": "Prima Linea",
+    "onslaught": "Aggressione",
+    "onslaught_night": "Notte di {onslaught}",
+    "grand_battle": "Gran battaglia",
+    "clan_wars": "Clan Wars",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Ultima resistenza",
+    "arcade": "Arcade",
+    "story_mode": "Modalità Storia",
+    "training": "Addestramento"
+  },
+  "player-modes": {
+    "overall": "Battaglie casuali",
+    "skirmish": "Schermaglia",
+    "advances": "Offensive",
+    "grand": "Grandi battaglie",
+    "ranked": "Battaglie qualificate",
+    "cw-x": "Clan Wars X",
+    "cw-viii": "Clan Wars VIII",
+    "cw-vi": "Clan Wars VI",
+    "steel-hunter": "Cacciatore d’acciaio",
+    "onslaught": "Aggressione"
+  },
+  "stronghold-tiers": {
+    "advances": "Offensive",
+    "t10": "Schermaglia T10",
+    "t8": "Schermaglia T8",
+    "t6": "Schermaglia T6"
+  },
+  "stronghold-periods": {
+    "24h": "Ultime 24 ore",
+    "7d": "Ultimi 7 giorni",
+    "30d": "Ultimi 30 giorni",
+    "overall": "Globale"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Battaglie",
+    "winrate": "Percentuale di vittorie"
+  },
+  "clan-boards": {
+    "advances": "Offensive",
+    "t10": "Schermaglia X",
+    "t8": "Schermaglia VIII",
+    "t6": "Schermaglia VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Predominio",
+    "assault": "Assalto",
+    "attack-defense": "Attacco/Difesa"
+  },
+  "map-camouflage": {
+    "summer": "Estiva",
+    "winter": "Invernale",
+    "desert": "Desertica"
+  },
+  "map-poi": {
+    "1": "Quartier generale dell’artiglieria",
+    "2": "Centro comunicazioni",
+    "3": "Posto di osservazione"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Incontro",
+    "assault2": "Attacco/Difesa",
+    "comp7": "Aggressione"
+  },
+  "battle-formats": {
+    "random": "Casuale",
+    "clan_wars": "Clan Wars",
+    "advances": "Offensive",
+    "skirmish": "Schermaglia",
+    "maneuvers": "Manovre",
+    "onslaught": "Aggressione",
+    "tournament": "Torneo"
+  },
+  "battle-results": {
+    "victory": "Vittoria",
+    "defeat": "Sconfitta",
+    "draw": "Stallo"
+  },
+  "spawn-directions": {
+    "north": "Nord",
+    "south": "Sud",
+    "east": "Est",
+    "west": "Ovest"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "In arrivo",
+    "registration_started": "Registrazione aperta",
+    "registration_finished": "Registrazione chiusa",
+    "running": "In corso",
+    "finished": "In fase di conclusione",
+    "complete": "Completata"
+  },
+  "onslaught-tiers": {
+    "legend": "Leggenda",
+    "champion": "Campione",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Pesante",
+    "mediumTank": "Medium",
+    "lightTank": "Leggero",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Assalto",
+    "break": "Sfondamento",
+    "support": "Supporto",
+    "universal": "Versatile",
+    "sniper": "Cecchino",
+    "wheeled": "Su ruote"
+  },
+  "mastery-badges": {
+    "class3": "3° Classe",
+    "class2": "2° Classe",
+    "class1": "1° Classe",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Battaglie casuali",
+    "stronghold": "Roccaforte",
+    "skirmish": "Schermaglia",
+    "clan-wars": "Clan Wars"
+  },
+  "features": {
+    "stronghold": "Roccaforte",
+    "skirmish": "Schermaglia",
+    "marks-of-excellence": "Marchi d’Eccellenza",
+    "marks-of-mastery": "Segni di Maestria",
+    "personal-rating": "Punteggio Personale",
+    "world-of-tanks-rating": "Valutazione di World of Tanks",
+    "common-test": "Test comune",
+    "tournaments": "Tornei"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Marchi d’Eccellenza"
+  }
+}

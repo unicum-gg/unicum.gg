@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Celkovo {battles} bitiek",
+  "checking-your-record-on-this": "Kontrolujeme vaše výsledky s týmto tankom...",
+  "fetching-your-garage": "Načítava sa vaša garáž",
+  "have-you-played": "Hrávali ste tank {tank}?",
+  "more-to-go": "Zostáva odohrať ešte {count} bitiek",
+  "more-to-go-one": "Zostáva odohrať ešte {count} bitku",
+  "sign-in-to-rate-it": "Prihláste sa a ohodnoťte ho",
+  "sign-in-with-your-wargaming-account-to-rate-": "Prihláste sa pomocou svojho účtu Wargaming a ohodnoťte ho. Načítame vaše výsledky presne s týmto tankom, aby sa táto stránka nestala anketou ľudí, ktorí s ním nikdy nehrali.",
+  "signed-in-on": "Účet prihlásený v regióne {region}",
+  "too-few-battles": "Tank {tank}: máte odohraných {played} bitiek. Aby sa váš hlas započítal, požadujeme aspoň {required} bitiek. Priemer tak bude vychádzať z hodnotení ľudí, ktorí tento tank naozaj hrajú.",
+  "you-have-not-played": "Tank {tank} ste nehrali"
+}

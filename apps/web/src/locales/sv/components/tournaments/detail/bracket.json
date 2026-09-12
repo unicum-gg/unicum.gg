@@ -1,0 +1,7 @@
+{
+  "group": "Grupp {order}",
+  "n-teams": "{count} lag",
+  "pts": "Pts",
+  "team": "Lag",
+  "top-n-advance": ", de {count} bästa går vidare"
+}

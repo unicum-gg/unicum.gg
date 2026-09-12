@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Buňka udává poměr počtu výher dané skupiny k počtu Bitev pro danou Úroveň. Zahrnuje všechna vozidla, se kterými má hráč alespoň {minBattles} Bitev, takže ukazuje jednotlivé úrovně tak, jak na nich hrají lidé, kteří je skutečně hrají. Buňky, u nichž je počet Bitev nižší než {TIERWINRATETHINCELL}, jsou zobrazeny bledě, protože jejich hodnoty kolísají z jiných důvodů než kvůli schopnostem. Barvy odpovídají stejným pásmům míry výher, která web používá i všude jinde.",
+  "cell-no-sample": "{where}, bez vzorku",
+  "cell-winrate": "{where}, poměr vítězství {winrate} v {battles} bitvách",
+  "metric-band": "Pásmo {metric}",
+  "nothing-recorded": "Pro {metric} zatím nejsou zaznamenána žádná data. Mřížka se přepočítává každou noc.",
+  "over-battles-from-accounts": "Od {players} účtů: {winrate} za {battles} Bitev",
+  "over-n-battles": "v {battles} bitvách",
+  "what-players-win-by-tier": "Podle úrovně: jak často vyhrávají hráči ze skupiny {label}"
+}

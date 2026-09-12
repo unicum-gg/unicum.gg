@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktywne dni",
+  "add-workflow": "Dodaj przepływ pracy",
+  "connect-discord": "Połącz z Discordem",
+  "discord-notifications": "Powiadomienia z Discorda",
+  "each-workflow-activates-its-reserves": "Każda automatyzacja aktywuje swoje rezerwy w określonym przedziale czasowym, gdy wystarczająca liczba członków rozgrywa bitwy. Działa na Twoim koncie, więc nie musisz być online. Dodaj tyle automatyzacji, ile potrzebujesz.",
+  "enabled": "Włączona",
+  "from": "Od",
+  "get-a-discord-message-in": "Otrzymuj wiadomość na wybranym kanale Discord za każdym razem, gdy aktywuje się wzmocnienie, aby cały klan wiedział, że jest aktywne.",
+  "log-in-with-wargaming-to": "Zaloguj się przez Wargaming, aby to skonfigurować",
+  "min-online": "Min online",
+  "officers": "Oficerowie",
+  "only-an-officer-of-this": "Tylko oficer tego klanu może to skonfigurować.",
+  "schedule-preview": "Podgląd harmonogramu",
+  "set-your-hours-and-reserves": "Ustaw godziny i rezerwy tylko raz. Wzmocnienia będą aktywować się automatycznie o właściwej porze, nawet gdy nie będzie nikogo, kto mógłby nacisnąć przycisk.",
+  "stronghold-boosts": "Wzmocnienia Fortecy",
+  "times-are-in-your-timezone": "Godziny są podane dla strefy czasowej {tz}, czyli Twojej strefy.",
+  "to": "Do"
+}

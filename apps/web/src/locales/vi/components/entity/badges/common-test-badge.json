@@ -1,0 +1,12 @@
+{
+  "aria-build": "Đọc trên máy khách Kiểm tra chung, bản dựng {version}",
+  "aria-changes": "Được thay đổi bởi Kiểm tra chung: {changes} chỉ số",
+  "aria-described": "Kiểm tra chung: {description}",
+  "aria-vehicle": "Xe tăng Kiểm tra chung",
+  "common-test": "Kiểm tra chung",
+  "common-test-build": "Kiểm tra chung {version}",
+  "tip-build": "{label} · đây là các giá trị của bản dựng thử nghiệm, Wargaming vẫn có thể thay đổi trước khi bản cập nhật phát hành",
+  "tip-changes": "Thay đổi trong Kiểm tra chung trên xe tăng này: {changes, plural, one {# chỉ số} other {# các chỉ số}}",
+  "tip-described": "Kiểm tra chung · {description}",
+  "tip-vehicle": "Kiểm tra chung · chưa phát hành nên chưa có thống kê trận đấu và các chỉ số vẫn có thể thay đổi"
+}

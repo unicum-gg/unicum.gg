@@ -1,0 +1,7 @@
+{
+  "loading": "{count} vehicule de nivel {tier}, se încarcă numele…",
+  "loading-one": "{count} vehicul de nivel {tier}, se încarcă numele…",
+  "and-more": "și încă {count}",
+  "hint": "Clic pentru a le deschide în fila Tancuri",
+  "tier": "nivel"
+}

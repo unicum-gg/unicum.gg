@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Zoeken tussen {count} tanks",
+    "rated-tanks": "Zoeken tussen {count} beoordeelde tanks",
+    "videos": "Zoeken tussen {count} video’s",
+    "players": "Zoeken tussen {count} spelers",
+    "clans": "Zoeken tussen {count} clans",
+    "tournaments": "Zoeken tussen {count} toernooien",
+    "teams": "Zoeken tussen {count} teams"
+  },
+  "min": "Min",
+  "max": "Max",
+  "none": "Geen",
+  "common-test": "Veranderd door de Algemene Test: nieuwe en opnieuw gebalanceerde voertuigen",
+  "category": {
+    "standard": "Standaard",
+    "premium": "Premium",
+    "reward": "Beloning"
+  },
+  "moe": {
+    "0": "Nog geen markering",
+    "1": "1 mark",
+    "2": "2 marken",
+    "3": "3 marken"
+  },
+  "mom": {
+    "0": "Nog geen badge",
+    "1": "3e Klasse",
+    "2": "2e Klasse",
+    "3": "1e Klasse",
+    "4": "Ace Tanker"
+  }
+}

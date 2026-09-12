@@ -1,31 +1,37 @@
 "use client";
 
+import type { NumberFormatter } from "@/lib/format";
+
 import { SlidersHorizontalIcon } from "@phosphor-icons/react";
+import type { TranslateFunction } from "@onruntime/translations";
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TankStatsRow } from "@/components/tanks/list";
 import { useCookie } from "@/hooks/use-cookie";
 import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { useTranslation } from "@/hooks/use-translation";
 
 const COLS_COOKIE = "unicum.perf_columns";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const dec2Fmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const DEC2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pct1Fmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT1_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
-const pct2Fmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
+/** Ids, not headings: the wording is in `components/tanks/perf-columns` under
+ * `groups`, so the selector reads the same group in every language. */
 export enum PerfGroup {
-  General = "General",
-  Combat = "Combat",
+  General = "general",
+  Combat = "combat",
 }
 export const PERF_GROUP_ORDER: PerfGroup[] = [PerfGroup.General, PerfGroup.Combat];
 
@@ -50,45 +56,63 @@ export function metricLabel(metric: RatingMetric): string {
 export type PerfCell = { node: ReactNode; className?: string };
 export type PerfColumn = {
   key: string;
-  label: string;
   group: PerfGroup;
-  tip?: string;
+  /** Whether this column explains itself on hover. The sentence is in the
+   * locale file under `columns.<key>.tip`. */
+  tipped?: boolean;
   defaultVisible: boolean;
-  // The rating column's header follows the selected metric.
-  header?: (metric: RatingMetric) => string;
-  cell: (s: TankStatsRow | null, metric: RatingMetric) => PerfCell;
+  /** The rating column's header is the selected metric's own name, not a word
+   * a translator writes. */
+  metricHeaded?: boolean;
+  /** `num` is passed in rather than read from a hook: this is a data table,
+   * not a component, and the reader's number formatting has to reach it from
+   * the component that renders it. */
+  cell: (
+    s: TankStatsRow | null,
+    metric: RatingMetric,
+    num: NumberFormatter,
+  ) => PerfCell;
   sortValue: (s: TankStatsRow | null, metric: RatingMetric) => number | null;
 };
+
+/** A column's heading: the rating one names the metric, the rest read their
+ * wording from `components/tanks/perf-columns`. */
+export function perfColumnLabel(
+  column: PerfColumn,
+  metric: RatingMetric,
+  t: TranslateFunction,
+): string {
+  return column.metricHeaded
+    ? metricLabel(metric)
+    : t(`columns.${column.key}.label`);
+}
 
 export const PERF_COLUMNS: PerfColumn[] = [
   {
     key: "battles",
-    label: "Battles",
+    tipped: true,
     group: PerfGroup.General,
-    tip: "Total games played on the tank",
     defaultVisible: true,
-    cell: (s) => ({ node: s?.battles != null ? intFmt.format(s.battles) : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.battles != null ? num(INT_FORMAT).format(s.battles) : DASH }),
     sortValue: (s) => s?.battles ?? null,
   },
   {
     key: "count",
-    label: "Count",
+    tipped: true,
     group: PerfGroup.General,
-    tip: "Number of tracked players in the sample",
     defaultVisible: true,
-    cell: (s) => ({ node: s ? intFmt.format(s.players) : DASH }),
+    cell: (s, _metric, num) => ({ node: s ? num(INT_FORMAT).format(s.players) : DASH }),
     sortValue: (s) => (s ? s.players : null),
   },
   {
     key: "rating",
-    label: "Rating (WN)",
     group: PerfGroup.General,
     defaultVisible: true,
-    header: (m) => metricLabel(m),
-    cell: (s, m) => {
+    metricHeaded: true,
+    cell: (s, m, num) => {
       const v = s ? ratingValue(s, m) : null;
       return {
-        node: v != null ? intFmt.format(v) : DASH,
+        node: v != null ? num(INT_FORMAT).format(v) : DASH,
         className: v != null ? ratingColorClass(v, m) : undefined,
       };
     },
@@ -96,24 +120,22 @@ export const PERF_COLUMNS: PerfColumn[] = [
   },
   {
     key: "wr",
-    label: "WR",
+    tipped: true,
     group: PerfGroup.General,
-    tip: "Win rate on the tank",
     defaultVisible: true,
-    cell: (s) => ({
-      node: s ? `${pct2Fmt.format(s.wr)}%` : DASH,
+    cell: (s, _metric, num) => ({
+      node: s ? `${num(PCT2_FORMAT).format(s.wr)}%` : DASH,
       className: s ? RATING_COLOR_CLASS[winrateColor(s.wr / 100)] : undefined,
     }),
     sortValue: (s) => s?.wr ?? null,
   },
   {
     key: "playerWr",
-    label: "Player WR",
+    tipped: true,
     group: PerfGroup.General,
-    tip: "Average overall win rate of players who drive it",
     defaultVisible: true,
-    cell: (s) => ({
-      node: s?.playerWr != null ? `${pct2Fmt.format(s.playerWr)}%` : DASH,
+    cell: (s, _metric, num) => ({
+      node: s?.playerWr != null ? `${num(PCT2_FORMAT).format(s.playerWr)}%` : DASH,
       className:
         s?.playerWr != null
           ? RATING_COLOR_CLASS[winrateColor(s.playerWr / 100)]
@@ -123,74 +145,66 @@ export const PERF_COLUMNS: PerfColumn[] = [
   },
   {
     key: "dpg",
-    label: "DPG",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Average damage per game",
     defaultVisible: true,
-    cell: (s) => ({ node: s ? intFmt.format(s.dpg) : DASH }),
+    cell: (s, _metric, num) => ({ node: s ? num(INT_FORMAT).format(s.dpg) : DASH }),
     sortValue: (s) => s?.dpg ?? null,
   },
   {
     key: "kdr",
-    label: "KDR",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Kills / deaths ratio",
     defaultVisible: false,
-    cell: (s) => ({ node: s?.kdr != null ? dec2Fmt.format(s.kdr) : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.kdr != null ? num(DEC2_FORMAT).format(s.kdr) : DASH }),
     sortValue: (s) => s?.kdr ?? null,
   },
   {
     key: "assists",
-    label: "Assists",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Average assisted damage",
     defaultVisible: true,
-    cell: (s) => ({ node: s?.assists != null ? intFmt.format(s.assists) : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.assists != null ? num(INT_FORMAT).format(s.assists) : DASH }),
     sortValue: (s) => s?.assists ?? null,
   },
   {
     key: "hitPct",
-    label: "Hit %",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Hits / shots",
     defaultVisible: false,
-    cell: (s) => ({ node: s?.hitPct != null ? `${pct1Fmt.format(s.hitPct)}%` : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.hitPct != null ? `${num(PCT1_FORMAT).format(s.hitPct)}%` : DASH }),
     sortValue: (s) => s?.hitPct ?? null,
   },
   {
     key: "penPct",
-    label: "Pen %",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Penetrations / hits",
     defaultVisible: false,
-    cell: (s) => ({ node: s?.penPct != null ? `${pct1Fmt.format(s.penPct)}%` : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.penPct != null ? `${num(PCT1_FORMAT).format(s.penPct)}%` : DASH }),
     sortValue: (s) => s?.penPct ?? null,
   },
   {
     key: "spots",
-    label: "Spots",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Average spots per game",
     defaultVisible: true,
-    cell: (s) => ({ node: s?.spots != null ? dec2Fmt.format(s.spots) : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.spots != null ? num(DEC2_FORMAT).format(s.spots) : DASH }),
     sortValue: (s) => s?.spots ?? null,
   },
   {
     key: "blocked",
-    label: "Blocked",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Average damage blocked by armor",
     defaultVisible: false,
-    cell: (s) => ({ node: s?.blocked != null ? intFmt.format(s.blocked) : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.blocked != null ? num(INT_FORMAT).format(s.blocked) : DASH }),
     sortValue: (s) => s?.blocked ?? null,
   },
   {
     key: "survival",
-    label: "Survival",
+    tipped: true,
     group: PerfGroup.Combat,
-    tip: "Share of battles survived",
     defaultVisible: false,
-    cell: (s) => ({ node: s?.survival != null ? `${pct1Fmt.format(s.survival)}%` : DASH }),
+    cell: (s, _metric, num) => ({ node: s?.survival != null ? `${num(PCT1_FORMAT).format(s.survival)}%` : DASH }),
     sortValue: (s) => s?.survival ?? null,
   },
 ];
@@ -227,6 +241,7 @@ export function usePerfColumns(): [Set<string>, (key: string) => void] {
 }
 
 export function PerfColumnSelector() {
+  const { t } = useTranslation("components/tanks/perf-columns");
   const [selected, onToggle] = usePerfColumns();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -248,7 +263,7 @@ export function PerfColumnSelector() {
         className="flex h-7 cursor-pointer items-center gap-1.5 rounded-md border border-fd-border px-3 text-xs font-medium transition-colors hover:bg-fd-secondary/40"
       >
         <SlidersHorizontalIcon weight="bold" className="size-3.5" />
-        Columns
+        {t("columns-label")}
         <span className="text-fd-muted-foreground">
           {selected.size}/{PERF_COLUMNS.length}
         </span>
@@ -258,7 +273,7 @@ export function PerfColumnSelector() {
           {PERF_GROUP_ORDER.map((group) => (
             <div key={group} className="mb-2 last:mb-0">
               <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-fd-muted-foreground">
-                {group}
+                {t(`groups.${group}`)}
               </div>
               {PERF_COLUMNS.filter((c) => c.group === group).map((c) => (
                 <label
@@ -271,7 +286,7 @@ export function PerfColumnSelector() {
                     onChange={() => onToggle(c.key)}
                     className="size-3.5 accent-brand"
                   />
-                  <span>{c.label}</span>
+                  <span>{t(`columns.${c.key}.label`)}</span>
                 </label>
               ))}
             </div>

@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, {count}회 획득함",
+  "aria-not-earned": "{name}, 미획득",
+  "no-longer-obtainable": "더 이상 획득할 수 없습니다.",
+  "not-earned": "미획득"
+}

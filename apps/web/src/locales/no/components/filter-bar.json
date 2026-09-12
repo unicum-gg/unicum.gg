@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Søk blant {count} stridsvogner",
+    "rated-tanks": "Søk blant {count} rangerte stridsvogner",
+    "videos": "Søk blant {count} videoer",
+    "players": "Søk blant {count} spillere",
+    "clans": "Søk blant {count} klaner",
+    "tournaments": "Søk blant {count} turneringer",
+    "teams": "Søk blant {count} lag"
+  },
+  "min": "Min",
+  "max": "Maks",
+  "none": "Ingen",
+  "common-test": "Endret av Vanlig test: nye kjøretøy og ombalanserte kjøretøy",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belønning"
+  },
+  "moe": {
+    "0": "Ingen merke ennå",
+    "1": "1 merket",
+    "2": "2 merkede",
+    "3": "3 merkede"
+  },
+  "mom": {
+    "0": "Ingen merke ennå",
+    "1": "3. klasse",
+    "2": "2. klasse",
+    "3": "1. klasse",
+    "4": "Ace Tanker"
+  }
+}

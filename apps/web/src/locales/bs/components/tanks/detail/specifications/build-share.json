@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Veza konfiguracije kopirana",
+  "copy-build-link": "Kopiraj vezu konfiguracije",
+  "could-not-copy-link": "Moglo bi biti da veza nije kopirana",
+  "include-setup": "Uključi postavke",
+  "share-build": "Podijeli build",
+  "share-tank": "Podijeli {tank}",
+  "share-text": "Pogledaj ovu konfiguraciju tenka {tank} na aplikaciji {app}"
+}

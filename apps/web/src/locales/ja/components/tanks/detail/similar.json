@@ -1,0 +1,11 @@
+{
+  "compare": "最も近い {count} 件と比較",
+  "match": "戦闘",
+  "subtitle": "それぞれの Tier 内での同じ位置",
+  "verdict": {
+    "overall": "総合的に似ています",
+    "closest": "{axes} で最も近い",
+    "closest-furthest": "{axes} で最も近く、{apart} で最も遠い",
+    "and": "と"
+  }
+}

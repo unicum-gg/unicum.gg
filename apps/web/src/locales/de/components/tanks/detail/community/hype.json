@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "besser als {value} % der bewerteten Panzer seiner Stufe",
+  "measured-hint": "Position seiner Siegrate unter den gleichen Panzern",
+  "not-enough-votes-yet-to": "Es gibt noch nicht genügend Stimmen, um das Urteil der Community mit der tatsächlichen Leistung des Panzers zu vergleichen.",
+  "perceived-hint": "Position der Community unter den bewerteten Panzern der Stufe {tier}",
+  "verdict": {
+    "overrated": "Die Community bewertet ihn deutlich besser, als seine tatsächlichen Leistungen rechtfertigen.",
+    "fair": "Ruf und Ergebnisse stimmen hier überein.",
+    "underrated": "Er schneidet besser ab, als ihm irgendjemand zutraut."
+  },
+  "what-players-think": "Was spieler denken",
+  "what-the-data-says": "Was die Daten sagen"
+}

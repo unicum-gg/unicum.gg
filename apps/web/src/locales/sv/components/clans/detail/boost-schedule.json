@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Välj en reserv för att förhandsgranska schemat.",
+  "schedule": "På dina aktiva dagar aktiveras den klockan {times} (varje aktivering varar i {hours} t) och täcker tidsintervallet {window} så snart minimigränsen för antalet spelare online har nåtts."
+}

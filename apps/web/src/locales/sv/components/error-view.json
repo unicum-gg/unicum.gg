@@ -1,0 +1,6 @@
+{
+  "title": "Något gick fel",
+  "description": "Wargaming API svarade inte korrekt. Det här är vanligtvis ett tillfälligt problem på deras sida.",
+  "try-again": "Försök igen",
+  "back": "Tillbaka till hem"
+}

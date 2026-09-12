@@ -1,0 +1,7 @@
+{
+  "loading": "{count} vozidel {tier}. úrovně, načítají se jejich názvy…",
+  "loading-one": "{count} vozidlo {tier}. úrovně, načítá se jeho název…",
+  "and-more": "a dalších {count}",
+  "hint": "Kliknutím je otevřete na kartě Tanky",
+  "tier": "Úroveň"
+}

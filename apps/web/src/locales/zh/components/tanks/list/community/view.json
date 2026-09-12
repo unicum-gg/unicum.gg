@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "每辆坦克都由使用它的玩家按五分制评级。只有实际驾驶该车辆参加过战斗的账号所投的票才会计入，这正是它与面向所有到访者的投票不同之处。",
+  "no-tank-has-been-rated": "尚无坦克获得评级。首批投票位于坦克页面的社区部分。",
+  "think": "想法",
+  "title": "玩家{think}",
+  "votes-across-vehicles": "{totalVotes}票，涵盖{ratedTanks}辆车辆。"
+}

@@ -1,0 +1,60 @@
+{
+  "columns-label": "Kolonnas",
+  "groups": {
+    "general": "Kopējā",
+    "combat": "Kauja"
+  },
+  "columns": {
+    "battles": {
+      "label": "Kaujas",
+      "tip": "Kopējais ar tanku aizvadīto kauju skaits"
+    },
+    "count": {
+      "label": "Skaits",
+      "tip": "Izlasē izsekoto spēlētāju skaits"
+    },
+    "rating": {
+      "label": "Reitings (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Uzvaru līmenis ar tanku"
+    },
+    "playerWr": {
+      "label": "Spēlētāja WR",
+      "tip": "Vidējais kopējais uzvaru līmenis spēlētājiem, kuri to vada"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Vidējie bojājumi spēlē"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Nogalināto / nāvju attiecība"
+    },
+    "assists": {
+      "label": "Palīgi",
+      "tip": "Vidējie palīdzētie bojājumi"
+    },
+    "hitPct": {
+      "label": "Trāpījumu %",
+      "tip": "Trāpījumi / šāvieni"
+    },
+    "penPct": {
+      "label": "Pen %",
+      "tip": "Cauršaušanas / trāpījumi"
+    },
+    "spots": {
+      "label": "Redzēti",
+      "tip": "Vidējais atklāto pretinieku skaits spēlē"
+    },
+    "blocked": {
+      "label": "Bloķēts",
+      "tip": "Vidējie ar bruņām bloķētie bojājumi"
+    },
+    "survival": {
+      "label": "Izdzīvošana",
+      "tip": "Izdzīvoto kauju daļa"
+    }
+  }
+}

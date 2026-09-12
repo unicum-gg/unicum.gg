@@ -1,0 +1,25 @@
+{
+  "tagline": "World of Tanks қауымдастығы үшін жасалған. EU, NA және Asia аймақтарындағы әр ойыншы, клан, танк және карта үшін тегін статистика.",
+  "columns": {
+    "leaderboards": "Рейтингтер",
+    "tanks": "Танкылар",
+    "maps": "Карталар",
+    "integrations": "Интеграциялар",
+    "project": "Жоба"
+  },
+  "links": {
+    "top-tanks": "Ең жақсы Танкылар",
+    "bot": "Discord боты",
+    "mcp": "MCP сервері",
+    "docs": "API құжаттамасы",
+    "badges": "Белгілер",
+    "glossary": "Глоссарий",
+    "coverage": "Қамту",
+    "support": "Бізді қолдаңыз",
+    "source": "Бастапқы код",
+    "status": "Статус",
+    "discord": "Discord"
+  },
+  "disclaimer": "Wargaming-пен байланысы жоқ",
+  "cookies": "Cookie файлдарын басқару"
+}

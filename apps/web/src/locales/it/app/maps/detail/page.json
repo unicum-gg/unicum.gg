@@ -1,0 +1,5 @@
+{
+  "title": "Mappa di World of Tanks: {map} ({region})",
+  "description": "{map}: una mappa di World of Tanks di {width} × {height} m.",
+  "description-modes": "{map}: una mappa di World of Tanks di {width} × {height} m, disponibile nelle modalità {modes}."
+}

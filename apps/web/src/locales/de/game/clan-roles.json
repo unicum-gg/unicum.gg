@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Rekrutierungsoffizier",
+  "personnel_officer": "Personaloffizier",
+  "quartermaster": "Quartiermeister",
+  "executive_officer": "Ausführender Offizier",
+  "recruit": "Rekrut",
+  "private": "Gefreiter",
+  "commander": "Kommandant",
+  "reservist": "Reservist",
+  "combat_officer": "Kampfoffizier",
+  "junior_officer": "Unteroffizier",
+  "intelligence_officer": "Geheimdienstoffizier"
+}

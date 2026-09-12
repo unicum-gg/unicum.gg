@@ -1,0 +1,6 @@
+{
+  "title": "Strictly {language} World of Tanks players ({region})",
+  "description": "{name} {region} player leaderboard for players whose inferred clan-history language is exclusively {language}, ranked by WNX.",
+  "og-title": "Strictly {language} players",
+  "og-subtitle": "{region} leaderboard"
+}

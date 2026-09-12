@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>spillere</accent>",
+    "language": "Bedste spillere med <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Rangliste for {region}, rangeret efter {metric} gennem hele historikken, med minimum 20.000 kampe.",
+    "language": "Spillere fra {region}, hvis udledte sprog fra klanhistorikken omfatter {language}, rangeret efter {metric}, med minimum 10.000 kampe.",
+    "strict": "Spillere fra {region}, hvis udledte sprog fra klanhistorikken udelukkende er {language}, rangeret efter {metric}, med minimum 10.000 kampe."
+  },
+  "board": {
+    "all": "De bedste {count} spillere efter {metric}",
+    "language": "De bedste {count} spillere med {language} efter {metric}",
+    "strict": "De bedste {count} spillere udelukkende med {language} efter {metric}"
+  },
+  "modes": {
+    "overall": "Samlet"
+  },
+  "columns": {
+    "player": "Spiller"
+  },
+  "strict-toggle": "Streng",
+  "any-toggle": "Enhver",
+  "all-languages": "Alle sprog",
+  "battles": "Kampe",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

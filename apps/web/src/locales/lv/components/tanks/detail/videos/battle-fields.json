@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Kā tas beidzās",
+  "loading-maps": "Ielādē kartes…",
+  "map": "Karte",
+  "mode": "Režīms",
+  "pick-a-map": "Izvēlēties karti",
+  "pick-a-mode": "Izvēlēties režīmu",
+  "result": "Rezultāts",
+  "spawn": "Ierašanās punkts",
+  "team": "Komanda {team}",
+  "team-spawn": "Komanda {team} · {direction}",
+  "which-side-you-started": "Kurā pusē sākāt"
+}

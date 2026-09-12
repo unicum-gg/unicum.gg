@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. klasa",
+      "tip": "3. klasa: PD potrzebne, by uzyskać wynik lepszy niż 50% graczy"
+    },
+    "class2": {
+      "label": "2. klasa",
+      "tip": "2. klasa: PD potrzebne, by uzyskać wynik lepszy niż 80% graczy"
+    },
+    "class1": {
+      "label": "1. klasa",
+      "tip": "1. klasa: PD potrzebne, by uzyskać wynik lepszy niż 95% graczy"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: PD potrzebne, by uzyskać wynik lepszy niż 99% graczy"
+    }
+  },
+  "rows-per-page": "Wierszy na stronę",
+  "previous-page": "Poprzednia strona",
+  "page": "Strona {current} / {totalPages}",
+  "next-page": "Następna strona",
+  "all": "Wszystkie"
+}

@@ -1,0 +1,11 @@
+{
+  "compare": "Poredi s {count} najbližih",
+  "match": "bitka",
+  "subtitle": "Isto mjesto među tenkovima vlastitog nivoa",
+  "verdict": {
+    "overall": "Sveukupno slično",
+    "closest": "Najbliži po {axes}",
+    "closest-furthest": "Najbliži po {axes}, najudaljeniji po {apart}",
+    "and": " i "
+  }
+}

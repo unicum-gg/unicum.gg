@@ -1,3 +1,6 @@
+import type { TranslateFunction } from "@onruntime/translations";
+import { numberFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
 import {
   type BattleShare,
   RATING_COLOR_HEX,
@@ -11,6 +14,14 @@ import {
 import { PanelTitle } from "@/components/panel";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { formatShare, formatWinrate } from "./format";
+
+/** Wargaming's own name for a vehicle class, from the catalogue their API
+ * publishes per language. Our English is the fallback for a class the
+ * catalogue has not been fetched for yet, never a translation of our own. */
+function className(type: string, tClasses: TranslateFunction): string {
+  const name = tClasses(type);
+  return name === type ? (VEHICLE_CLASS_LABEL_FULL[type] ?? type) : name;
+}
 
 /**
  * Where the region's battles are actually fought: by tier, and by vehicle
@@ -28,10 +39,10 @@ import { formatShare, formatWinrate } from "./format";
  * contradicting the other.
  */
 
-const compact = new Intl.NumberFormat("en-US", {
+const COMPACT_FORMAT = {
   notation: "compact",
   maximumFractionDigits: 2,
-});
+} as const;
 
 const ROMAN = [
   "",
@@ -48,13 +59,16 @@ const ROMAN = [
   "XI",
 ];
 
-export function BattleShares({
+export async function BattleShares({
   byTier,
-  byType,
+  byType, locale,
 }: {
   byTier: TierShare[];
   byType: TypeShare[];
+  locale: string;
 }) {
+  const { t: tr } = await getTranslation("components/servers/battle-shares", locale);
+  const { t: tClasses } = await getTranslation("game/vehicle-classes", locale);
   // Ordered by the site's own class order rather than by the alphabet the
   // database returns.
   const types = [...byType].sort(
@@ -66,19 +80,19 @@ export function BattleShares({
     // what says they are separate readings of the same panel and not one list
     // that happens to wrap.
     <div className="grid divide-y divide-fd-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
-      <ShareTable
-        title="By tier"
-        unit="Tier"
+      <ShareTable locale={locale}
+        title={tr("by-tier")}
+        unit={tr("unit-tier")}
         rows={byTier.map((t) => ({
           label: ROMAN[t.tier] ?? String(t.tier),
           ...t,
         }))}
       />
-      <ShareTable
-        title="By class"
-        unit="Class"
+      <ShareTable locale={locale}
+        title={tr("by-class")}
+        unit={tr("unit-class")}
         rows={types.map((t) => ({
-          label: VEHICLE_CLASS_LABEL_FULL[t.type] ?? t.type,
+          label: className(t.type, tClasses),
           // The game's own class glyph, the same one the tank tables and the
           // player pages carry, so a class is recognised before it is read.
           icon: <VehicleTypeIcon type={t.type} size={14} />,
@@ -89,17 +103,19 @@ export function BattleShares({
   );
 }
 
-function ShareTable({
+async function ShareTable({
   title,
   unit,
-  rows,
+  rows, locale,
 }: {
   title: string;
   /** What the first column names, so its header says "Tier" or "Class" instead
    * of repeating the section's own title. */
   unit: string;
   rows: (BattleShare & { label: string; icon?: React.ReactNode })[];
+  locale: string;
 }) {
+  const { t: tr } = await getTranslation("components/servers/battle-shares", locale);
   const total = totalBattles(rows);
   // The bar is scaled against the biggest row rather than against the total, so
   // the smallest rows stay a visible bar instead of a sliver. It draws the very
@@ -122,10 +138,9 @@ function ShareTable({
             <tr className="border-b border-fd-border text-xs uppercase tracking-wide text-fd-muted-foreground">
               <th className="px-4 py-2 text-left font-medium">{unit}</th>
               <th className="px-4 py-2 text-left font-medium">
-                Share of battles
-              </th>
-              <th className="px-4 py-2 text-right font-medium">Battles</th>
-              <th className="px-4 py-2 text-right font-medium">Win rate</th>
+                {tr("share-of-battles")}</th>
+              <th className="px-4 py-2 text-right font-medium">{tr("battles")}</th>
+              <th className="px-4 py-2 text-right font-medium">{tr("win-rate")}</th>
             </tr>
           </thead>
           <tbody>
@@ -155,18 +170,18 @@ function ShareTable({
                       />
                     </span>
                     <span className="w-12 shrink-0 text-right tabular-nums">
-                      {total > 0 ? formatShare(row.battles / total) : "—"}
+                      {total > 0 ? formatShare(row.battles / total, locale) : "—"}
                     </span>
                   </span>
                 </td>
                 <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
-                  {compact.format(row.battles)}
+                  {numberFormat(locale, COMPACT_FORMAT).format(row.battles)}
                 </td>
                 <td
                   className="px-4 py-2 text-right tabular-nums"
                   style={{ color: RATING_COLOR_HEX[winrateColor(row.winrate)] }}
                 >
-                  {formatWinrate(row.winrate)}
+                  {formatWinrate(row.winrate, locale)}
                 </td>
               </tr>
             ))}

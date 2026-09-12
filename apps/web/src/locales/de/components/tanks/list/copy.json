@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Alle {count} World of Tanks-Fahrzeuge in der Region {region}. Filtern Sie nach Stufe, Nation, Klasse und Rolle und rufen Sie anschließend einen Panzer auf, um seine Statistiken, besten spieler und Erwartungswerte anzuzeigen.",
+    "title": "Alle World of Tanks-Panzer ({region}), jedes Fahrzeug durchsuchen",
+    "description": "Durchsuchen Sie alle World of Tanks-Panzer in der Region {region}: Filtern Sie nach Stufe, Nation, Klasse und Rolle und sehen Sie sich dann die Statistiken, besten spieler und Erwartungswerte jedes Panzers an.",
+    "heading": "Alle <accent>Panzer</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, Durchschlag, Panzerung, Sichtweite und Mobilität für alle {count} World of Tanks-Fahrzeuge in der Region {region}. Sortieren Sie nach einer beliebigen Spalte und filtern Sie dann nach Stufe, Nation, Klasse und Rolle.",
+    "title": "World of Tanks-Panzerspezifikationen ({region}), alle Fahrzeuge vergleichen",
+    "description": "Vergleichen Sie die Spezifikationen aller World of Tanks-Panzer in der Region {region}: DPM, Durchschlag, Panzerung, Sichtweite und Mobilität, sortier- und filterbar nach Stufe, Nation, Klasse und Rolle.",
+    "heading": "Panzer <accent>Spezifikationen</accent>"
+  },
+  "economics": {
+    "intro": "Kauf- und Reparaturkosten, Granatenpreise und Einnahmen an Kreditpunkten für alle {count} World of Tanks-Fahrzeuge in der Region {region}. Sortieren Sie nach einer beliebigen Spalte und filtern Sie dann nach Stufe, Nation, Klasse und Rolle.",
+    "title": "World of Tanks-Panzerökonomie ({region}), Kreditpunkte- und EP-Kosten",
+    "description": "Kreditpunkte- und EP-Kosten sowie Reparaturkosten und Granatenpreise für jeden World of Tanks-Panzer in der Region {region}, sortier- und filterbar nach Stufe, Nation, Klasse und Rolle.",
+    "heading": "Panzer <accent>Ökonomie</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Im gleitenden Durchschnitt erforderlicher Schaden für eine, zwei und drei Gefechtsmarkierungen auf allen {count} World of Tanks-Fahrzeugen in der Region {region}. Sortieren Sie nach einer beliebigen Spalte und filtern Sie dann nach Stufe, Nation, Klasse und Rolle.",
+    "title": "Anforderungen für World of Tanks-Gefechtsmarkierungen ({region})",
+    "description": "Erforderlicher Schaden für eine, zwei und drei Gefechtsmarkierungen auf jedem World of Tanks-Panzer in der Region {region}, sortier- und filterbar nach Stufe, Nation, Klasse und Rolle.",
+    "heading": "<accent>Erfolgsmarkierungen</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "EP-Grenzwerte für Ace Tanker und Meisterschaftsabzeichen für alle {count} World of Tanks-Fahrzeuge in der Region {region}. Sortieren Sie nach einer beliebigen Spalte und filtern Sie dann nach Stufe, Nation, Klasse und Rolle.",
+    "title": "Anforderungen für World of Tanks-Meisterschaftsabzeichen ({region})",
+    "description": "EP-Grenzwerte für Ace Tanker und Meisterschaftsabzeichen für jeden World of Tanks-Panzer in der Region {region}, sortier- und filterbar nach Stufe, Nation, Klasse und Rolle.",
+    "heading": "<accent>Meisterschaftsmarken</accent>"
+  },
+  "videos": {
+    "intro": "Die Community hat {count} Gefechte in der Region {region} verlinkt. Jeder Link öffnet das Video sekundengenau zum Gefechtsbeginn. Die Videos werden auf den Panzerseiten vorgeschlagen und geprüft, bevor sie hier erscheinen.",
+    "title": "World of Tanks-Gameplay-Videos ({region})",
+    "description": "Von der Community vorgeschlagene World of Tanks-Gefechte in der Region {region}, die jeweils sekundengenau zum Gefechtsbeginn starten: der gespielte Panzer, die Karte, die Kartenseite und der Ausgang des Gefechts.",
+    "heading": "Gameplay <accent>Videos</accent>"
+  }
+}

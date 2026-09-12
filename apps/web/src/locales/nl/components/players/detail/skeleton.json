@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistieken van {nickname} in Willekeurige Gevechten",
+  "progression": "Progressie van {nickname} voor {metricLabel}",
+  "solid-line-is-overall-matches": "De doorgetrokken lijn toont de algemene {metricLabel} (komt overeen met de kolom Totaal hierboven) en verandert langzaam naarmate er nieuwe Gevechten bijkomen. De stippellijn toont {metricLabel2} per sessie, berekend op basis van de Gevechten die sinds de vorige momentopname zijn gespeeld. Deze toont periodes met goede en slechte prestaties. De lijnkleur volgt het niveau van de Beoordeling.",
+  "tanks-shaping-s-rating": "Tanks die de Beoordeling van {nickname} bepalen",
+  "tanks": "{nickname}’s tanks",
+  "stats": "Statistieken van {nickname} voor {strongholdLabel}"
+}

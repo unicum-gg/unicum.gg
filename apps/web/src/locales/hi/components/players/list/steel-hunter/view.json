@@ -1,0 +1,13 @@
+{
+  "heading": "<accent>{mode}</accent> में शीर्ष खिलाड़ी",
+  "intro": "{mode}, World of Tanks का बैटल रॉयल मोड है। {region} का लीडरबोर्ड, HR के अनुसार रैंक्ड, कम से कम 100 {mode} युद्धों के आधार पर।",
+  "board": "{mode} के शीर्ष {count} खिलाड़ी",
+  "columns": {
+    "player": "खिलाड़ी",
+    "battles": "युद्ध",
+    "survival": "जिंदगी",
+    "survival-percent": "जिंदगी %",
+    "damage": "औसत क्षति"
+  },
+  "scale-description": "{mode} बोर्ड के लिए रंग सीमाएँ, कम से कम 100 {mode} युद्धों वाले खिलाड़ियों की संख्या के आधार पर निर्धारित।"
+}

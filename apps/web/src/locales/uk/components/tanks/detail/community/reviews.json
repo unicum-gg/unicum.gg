@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} боїв на ньому",
+  "damage": "{damage} завдано шкоди",
+  "n-marks": "{count, plural, one {# відмітка} few {# відмітки} many {# відміток} other {# відміток}}",
+  "no-written-opinions-yet-if": "Письмових думок ще немає. Якщо у вас є бої, ваша думка буде першою.",
+  "win-rate": "{toFixed}% перемог",
+  "written-on": "написано у версії {gameVersion}"
+}

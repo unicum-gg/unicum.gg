@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Najlepsi <accent>gracze</accent>",
+    "language": "Najlepsi gracze, język: <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Ranking graczy z regionu {region} według wskaźnika {metric} z całego okresu (minimum 20 000 bitew).",
+    "language": "Gracze z regionu {region}, których zbiór języków ustalony na podstawie historii przynależności do klanów obejmuje język {language}, sklasyfikowani według wskaźnika {metric} (minimum 10 000 bitew).",
+    "strict": "Gracze z regionu {region}, dla których na podstawie historii przynależności do klanów ustalono wyłącznie język {language}, sklasyfikowani według wskaźnika {metric} (minimum 10 000 bitew)."
+  },
+  "board": {
+    "all": "{count} najlepszych graczy według wskaźnika {metric}",
+    "language": "{count} najlepszych graczy według wskaźnika {metric}, język: {language}",
+    "strict": "{count} najlepszych graczy według wskaźnika {metric}, język: wyłącznie {language}"
+  },
+  "modes": {
+    "overall": "Ogółem"
+  },
+  "columns": {
+    "player": "Gracz"
+  },
+  "strict-toggle": "Ścisły",
+  "any-toggle": "Dowolny",
+  "all-languages": "Wszystkie języki",
+  "battles": "Bitwy",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "三等",
+      "tip": "3级：击败50%玩家所需的经验值"
+    },
+    "class2": {
+      "label": "二等",
+      "tip": "2级：击败80%玩家所需的经验值"
+    },
+    "class1": {
+      "label": "一等",
+      "tip": "1级：击败95%玩家所需的经验值"
+    },
+    "ace": {
+      "label": "顶尖坦克手",
+      "tip": "王牌坦克手：击败99%玩家所需的经验值"
+    }
+  },
+  "rows-per-page": "每页行数",
+  "previous-page": "上一页",
+  "page": "第 {current} / {totalPages} 页面",
+  "next-page": "下一页",
+  "all": "全部"
+}

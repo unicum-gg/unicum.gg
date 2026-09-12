@@ -1,0 +1,162 @@
+{
+  "columns-label": "Columns",
+  "groups": {
+    "firepower": "Firepower",
+    "gun-handling": "Gun Handling",
+    "mobility": "Mobility",
+    "survivability": "Survivability",
+    "other": "Other"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Damage per minute"
+    },
+    "damage": {
+      "label": "Damage",
+      "tip": "Alpha damage"
+    },
+    "moduleDamage": {
+      "label": "Module Damage"
+    },
+    "splashRadius": {
+      "label": "Splash Radius"
+    },
+    "reload": {
+      "label": "Reload",
+      "tip": "Reload (full magazine for autoloaders)"
+    },
+    "rof": {
+      "label": "Rate of Fire",
+      "tip": "Rounds per minute"
+    },
+    "intraClipReload": {
+      "label": "Intra-Clip Reload",
+      "tip": "Time between shots in a magazine (autoloaders)"
+    },
+    "penetration": {
+      "label": "Penetration",
+      "tip": "Penetration (mm), default shell"
+    },
+    "caliber": {
+      "label": "Caliber",
+      "tip": "Shell caliber (mm)"
+    },
+    "shellVelocity": {
+      "label": "Shell Velocity",
+      "tip": "Shell velocity (m/s)"
+    },
+    "accuracy": {
+      "label": "Accuracy",
+      "tip": "Dispersion at 100 m (lower is better)"
+    },
+    "aimTime": {
+      "label": "Aim Time"
+    },
+    "dispMoving": {
+      "label": "Dispersion Moving",
+      "tip": "Dispersion factor while moving"
+    },
+    "dispTankTraverse": {
+      "label": "Dispersion Tank Traverse"
+    },
+    "dispTurretTraverse": {
+      "label": "Dispersion Turret Traverse"
+    },
+    "dispAfterShot": {
+      "label": "Dispersion After Firing"
+    },
+    "dispWhileDamaged": {
+      "label": "Dispersion While Damaged"
+    },
+    "gunArc": {
+      "label": "Gun Arc",
+      "tip": "Horizontal gun traverse arc"
+    },
+    "depression": {
+      "label": "Gun Depression / Elevation",
+      "tip": "Gun depression / elevation"
+    },
+    "speed": {
+      "label": "Speed (Fwd / Bwd)",
+      "tip": "Top speed forward / backward (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Hull Traverse"
+    },
+    "turretTraverse": {
+      "label": "Turret Traverse"
+    },
+    "enginePower": {
+      "label": "Power",
+      "tip": "Engine power (hp)"
+    },
+    "powerWeight": {
+      "label": "Power/Weight",
+      "tip": "hp per ton"
+    },
+    "terrainHard": {
+      "label": "Hard Terrain",
+      "tip": "Terrain resistance on hard ground (lower is better)"
+    },
+    "terrainMedium": {
+      "label": "Medium Terrain"
+    },
+    "terrainSoft": {
+      "label": "Soft Terrain"
+    },
+    "health": {
+      "label": "Health",
+      "tip": "Hit points"
+    },
+    "engineHealth": {
+      "label": "Engine Health"
+    },
+    "engineFireChance": {
+      "label": "Engine Fire Chance"
+    },
+    "hullArmorFront": {
+      "label": "Hull Armor (front)",
+      "tip": "Front hull armor (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Turret Armor (front)",
+      "tip": "Front turret armor (mm)"
+    },
+    "trackArmor": {
+      "label": "Track Armor"
+    },
+    "trackHealth": {
+      "label": "Track Health"
+    },
+    "trackRepairTime": {
+      "label": "Track Repair Time"
+    },
+    "ammoRackHealth": {
+      "label": "Ammo Rack Health"
+    },
+    "weight": {
+      "label": "Weight"
+    },
+    "viewRange": {
+      "label": "View Range",
+      "tip": "View range (m)"
+    },
+    "radioRange": {
+      "label": "Radio Range",
+      "tip": "Signal range (m)"
+    },
+    "camoStill": {
+      "label": "Stationary Camo"
+    },
+    "camoMoving": {
+      "label": "Moving Camo"
+    },
+    "camoStillFiring": {
+      "label": "Stationary Camo After Firing"
+    },
+    "camoMovingFiring": {
+      "label": "Moving Camo After Firing"
+    }
+  }
+}

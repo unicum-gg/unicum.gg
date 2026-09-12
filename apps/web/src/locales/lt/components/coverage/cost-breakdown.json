@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Sąskaita pateikiama eurais, perskaičiuota į {currency} pagal šiandienos kursą.",
+  "cost-breakdown": "Kainos analizė",
+  "estimated-annual-cost": "Numatomos metinės išlaidos",
+  "fixed-month-bill-no-surprises": "Fiksuota {totalAnnualEur}/mėn. sąskaita be netikėtumų: vienas nuomojamas serveris, duomenų kelyje nenaudojama trečiųjų šalių SaaS. Išlaidos didėja tik tada, kai išaugame serverio pajėgumus, o didesnis Wargaming srautas reiškia daugiau išėjimo IP adresų.",
+  "free": "nemokamas",
+  "one-off-spend": "Vienkartiniai išlaidos",
+  "paid-once-so-it-is": "Sumokėta vieną kartą, todėl tai neįtraukta į pirmiau nurodytą mėnesio sąskaitą. Vis dėlto ši suma įskaičiuojama į iki šiol projekto patirtas išlaidas.",
+  "previously": "Anksčiau"
+}

@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Paras <accent>pelaajat</accent>",
+    "language": "Parhaat <accent>{language}</accent>-pelaajat"
+  },
+  "intro": {
+    "all": "{region}-alueen tulostaulukko, rankattuna kaikkien aikojen {metric}-arvon mukaan, vähintään 20 000 taistelua.",
+    "language": "{region}-alueen pelaajat, joiden päätelty klaanihistorian kielijoukko sisältää kielen {language}, rankattuna {metric}-arvon mukaan, vähintään 10 000 taistelua.",
+    "strict": "{region}-alueen pelaajat, joiden päätelty klaanihistorian kieli on yksinomaan {language}, rankattuna {metric}-arvon mukaan, vähintään 10 000 taistelua."
+  },
+  "board": {
+    "all": "{count} parasta pelaajaa arvon {metric} mukaan",
+    "language": "{count} parasta {language}-pelaajaa arvon {metric} mukaan",
+    "strict": "Parhaat {count} pelaajat, jotka pelaavat ainoastaan kielellä {language}, mittarin {metric} mukaan"
+  },
+  "modes": {
+    "overall": "Yhteensä"
+  },
+  "columns": {
+    "player": "Pelaaja"
+  },
+  "strict-toggle": "Tiukka",
+  "any-toggle": "Mikä tahansa",
+  "all-languages": "Kaikki kielet",
+  "battles": "Taisteluita",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

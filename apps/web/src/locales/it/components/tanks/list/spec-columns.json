@@ -1,0 +1,162 @@
+{
+  "columns-label": "Colonne",
+  "groups": {
+    "firepower": "Potenza di fuoco",
+    "gun-handling": "Maneggevolezza del cannone",
+    "mobility": "Mobilità",
+    "survivability": "Resistenza",
+    "other": "Altro"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Danno al minuto"
+    },
+    "damage": {
+      "label": "Danno",
+      "tip": "Danno alpha"
+    },
+    "moduleDamage": {
+      "label": "Danno ai moduli"
+    },
+    "splashRadius": {
+      "label": "Raggio d’esplosione"
+    },
+    "reload": {
+      "label": "Ricarica",
+      "tip": "Ricarica (caricatore completo per gli autocaricatori)"
+    },
+    "rof": {
+      "label": "Cadenza di fuoco",
+      "tip": "Colpi al minuto"
+    },
+    "intraClipReload": {
+      "label": "Ricarica tra i colpi",
+      "tip": "Tempo tra i colpi nel caricatore (autocaricatori)"
+    },
+    "penetration": {
+      "label": "Perforazione",
+      "tip": "Penetrazione (mm), proiettile predefinito"
+    },
+    "caliber": {
+      "label": "Calibro",
+      "tip": "Calibro del proiettile (mm)"
+    },
+    "shellVelocity": {
+      "label": "Velocità dei proiettili",
+      "tip": "Velocità del proiettile (m/s)"
+    },
+    "accuracy": {
+      "label": "Precisione",
+      "tip": "Dispersione a 100 m (un valore più basso è migliore)"
+    },
+    "aimTime": {
+      "label": "Tempo di mira"
+    },
+    "dispMoving": {
+      "label": "Dispersione in movimento",
+      "tip": "Coefficiente di dispersione in movimento"
+    },
+    "dispTankTraverse": {
+      "label": "Dispersione durante la rotazione dello scafo"
+    },
+    "dispTurretTraverse": {
+      "label": "Dispersione durante la rotazione della torretta"
+    },
+    "dispAfterShot": {
+      "label": "Dispersione dopo lo sparo"
+    },
+    "dispWhileDamaged": {
+      "label": "Dispersione con cannone danneggiato"
+    },
+    "gunArc": {
+      "label": "Arco di brandeggio",
+      "tip": "Arco di brandeggio orizzontale del cannone"
+    },
+    "depression": {
+      "label": "Depressione / elevazione del cannone",
+      "tip": "Depressione / elevazione del cannone"
+    },
+    "speed": {
+      "label": "Velocità (avanti / retromarcia)",
+      "tip": "Velocità massima in avanti / retromarcia (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Rotazione scafo"
+    },
+    "turretTraverse": {
+      "label": "Rotazione torretta"
+    },
+    "enginePower": {
+      "label": "Potenza",
+      "tip": "Potenza del motore (CV)"
+    },
+    "powerWeight": {
+      "label": "Potenza/peso",
+      "tip": "CV per tonnellata"
+    },
+    "terrainHard": {
+      "label": "Terreno duro",
+      "tip": "Resistenza al terreno su suolo duro (più bassa è, meglio è)"
+    },
+    "terrainMedium": {
+      "label": "Terreno medio"
+    },
+    "terrainSoft": {
+      "label": "Terreno morbido"
+    },
+    "health": {
+      "label": "Integrità",
+      "tip": "Punti colpi"
+    },
+    "engineHealth": {
+      "label": "Integrità motore"
+    },
+    "engineFireChance": {
+      "label": "Probabilità incendio del motore"
+    },
+    "hullArmorFront": {
+      "label": "Corazza dello scafo (frontale)",
+      "tip": "Corazza frontale dello scafo (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Corazza della torretta (frontale)",
+      "tip": "Corazza frontale della torretta (mm)"
+    },
+    "trackArmor": {
+      "label": "Corazza cingoli"
+    },
+    "trackHealth": {
+      "label": "Integrità cingoli"
+    },
+    "trackRepairTime": {
+      "label": "Tempo di riparazione dei cingoli"
+    },
+    "ammoRackHealth": {
+      "label": "Integrità della stiva munizioni"
+    },
+    "weight": {
+      "label": "Peso"
+    },
+    "viewRange": {
+      "label": "Raggio visivo",
+      "tip": "Raggio visivo (m)"
+    },
+    "radioRange": {
+      "label": "Portata radio",
+      "tip": "Portata del segnale (m)"
+    },
+    "camoStill": {
+      "label": "Mimetismo da fermo"
+    },
+    "camoMoving": {
+      "label": "Mimetismo in movimento"
+    },
+    "camoStillFiring": {
+      "label": "Mimetizzazione da fermo dopo lo sparo"
+    },
+    "camoMovingFiring": {
+      "label": "Mimetizzazione in movimento dopo lo sparo"
+    }
+  }
+}

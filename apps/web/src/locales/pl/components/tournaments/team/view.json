@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Losowanie jeszcze się nie odbyło. Spotkania tej drużyny pojawią się tutaj po rozpoczęciu turnieju.",
+  "each-map-is-played-twice": "Każda mapa jest rozgrywana dwa razy, po razie z każdej strony. Ostatnia mapa jest rozstrzygająca i rozgrywa się ją tylko raz.",
+  "first-battle-at": "Pierwsza bitwa: {when}",
+  "lost": "Utracone",
+  "matches": "Mecze ({length})",
+  "never-played": "Ta drużyna nie rozegrała żadnego spotkania. Zarejestrowała się, ale nie została uwzględniona w losowaniu, co zdarza się w przypadku niepotwierdzonego składu.",
+  "no-maps-recorded": "Nie zarejestrowano map dla tego spotkania.",
+  "no-roster-recorded-for-this": "Nie zarejestrowano składu tej drużyny.",
+  "of-players-on-the-day": "{members} z {length} graczy w danym dniu",
+  "played-on-uncatalogued": "Rozegrane na {maps}, których katalog map nie carry.",
+  "roster": "Skład ({length})",
+  "stage-group": "Etap {stage} · grupa {order}",
+  "team-1": "Drużyna 1",
+  "team-2": "Drużyna 2",
+  "tournaments": "Turnieje",
+  "when-the-first-battle-started": "W chwili rozpoczęcia pierwszej bitwy",
+  "won": "Wygrane"
+}

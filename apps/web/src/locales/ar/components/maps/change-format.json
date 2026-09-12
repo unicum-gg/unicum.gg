@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "عرض ساحة اللعب",
+    "height": "ارتفاع ساحة اللعب",
+    "round-length": "مؤقت المعركة",
+    "team-size": "حجم الفريق",
+    "camouflage": "موسم",
+    "presence": "في اللعبة",
+    "variant-version": "إصدار {type}",
+    "play-area": "ساحة اللعب",
+    "bases-team1": "قواعد الحلفاء",
+    "bases-team2": "قواعد الأعداء",
+    "spawns-team1": "نقاط ظهور الحلفاء",
+    "spawns-team2": "نقاط ظهور الأعداء",
+    "control-point": "نقطة السيطرة",
+    "artillery-headquarters": "مقر المدفعية",
+    "comms-centers": "مراكز الاتصالات",
+    "observation-posts": "مراكز المراقبة",
+    "points-of-interest": "نقاط الاهتمام"
+  },
+  "summary": {
+    "added": "تمت إضافة {name}",
+    "removed": "تمت إزالة {name}",
+    "added-to-game": "تمت الإضافة إلى اللعبة",
+    "removed-from-game": "تمت الإزالة من اللعبة",
+    "added-on-test": "تمت الإضافة إلى عميل الاختبار",
+    "removed-on-test": "تمت الإزالة من عميل الاختبار",
+    "mode-added": "تمت إضافة نمط {name}",
+    "mode-removed": "تمت إزالة نمط {name}",
+    "now-played-in": "تم لعبها الآن في {name}",
+    "no-longer-played-in": "لم تعد تُلعب في {name}",
+    "event-added": "يمكن أن تحدث {name} الآن أثناء المعركة",
+    "event-removed": "لم تعد {name} تحدث",
+    "moved": "تم تحريك {name}",
+    "count-changed": "تم تغيير {name}: {before} → {after}",
+    "value-changed": "تم تغيير {name}: {before} → {after}",
+    "value-set": "تم تعيين {name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

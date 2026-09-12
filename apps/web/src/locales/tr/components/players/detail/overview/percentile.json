@@ -1,0 +1,7 @@
+{
+  "win-rate": "Kazanma oranı",
+  "versus": "{metric} ve {region} karşılaştırması",
+  "top": "En iyi {percent}%",
+  "ahead-of": "Oyuncuların %{percent} kadarının önünde",
+  "against": "En az {battles} savaş yapmış, takip edilen {region} hesaplarındaki {players} oyuncuya karşı."
+}

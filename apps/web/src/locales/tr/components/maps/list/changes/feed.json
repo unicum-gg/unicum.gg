@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, other {# haritalar}}",
+  "no-map-changes-have-been": "Henüz hiçbir harita değişikliği kaydedilmedi. Wargaming haritaları yeniden düzenledikçe her güncellemenin neleri değiştirdiği burada görünecek.",
+  "update": "Güncelle {version}"
+}

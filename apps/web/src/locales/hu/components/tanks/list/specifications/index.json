@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Sorok száma oldalanként",
+  "previous-page": "Előző oldal",
+  "page": "Oldal {current} / {totalPages}",
+  "next-page": "Következő oldal",
+  "all": "Mind"
+}

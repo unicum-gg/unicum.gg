@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "전투 종료 방식",
+  "loading-maps": "지도 불러오는 중…",
+  "map": "지도",
+  "mode": "모드",
+  "pick-a-map": "지도 선택",
+  "pick-a-mode": "모드 선택",
+  "result": "결과",
+  "spawn": "스폰",
+  "team": "팀 {team}",
+  "team-spawn": "{team} 팀 · {direction}",
+  "which-side-you-started": "시작한 진영"
+}

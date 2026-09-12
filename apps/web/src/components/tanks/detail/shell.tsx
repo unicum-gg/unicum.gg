@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
@@ -36,11 +38,10 @@ import ROUTES from "@/constants/routes";
 import {
   type TankSpec,
   type VehicleMeta,
-  VEHICLE_CLASS_LABEL_FULL,
-  VEHICLE_ROLE_LABEL,
   roleSuffix,
 } from "@unicum.gg/shared";
 import { Region, REGION_LABEL, hangarBgUrl } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * Everything a tank page keeps while you move around it: the hero, the tab bar
@@ -108,8 +109,16 @@ export function TankShell({
   }[];
   children: React.ReactNode;
 }) {
+  const { t } = useTranslation("components/tanks/detail/shell");
+  const { t: tShell } = useTranslation("components/tanks/detail/shell");
+  const { t: tNations } = useTranslation("game/nations");
+  const { t: tClasses } = useTranslation("game/vehicle-classes");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
-  const classLabel = VEHICLE_CLASS_LABEL_FULL[meta.type] ?? meta.type;
+  // Wargaming's own words for the class and the nation, read from its API into
+  // `game/vehicle-classes` and `game/nations`, so the pill and the sentence say
+  // what the player's garage says.
+  const classLabel = tClasses(meta.type);
   const roleSfx = roleSuffix(meta.role);
 
   const favoriteItem: SearchHistoryItem = {
@@ -315,13 +324,13 @@ export function TankShell({
                         {roleSfx && (
                           <span className="flex items-center gap-1">
                             <VehicleRoleIcon role={roleSfx} size={14} />
-                            {VEHICLE_ROLE_LABEL[roleSfx]}
+                            {tGame(`vehicle-roles.${roleSfx}`)}
                           </span>
                         )}
                         {meta.isReward ? (
-                          <span className="text-[#4FC4D9]">Reward</span>
+                          <span className="text-[#4FC4D9]">{t("reward")}</span>
                         ) : meta.isPremium ? (
-                          <span className="text-[#FAB81B]">Premium</span>
+                          <span className="text-[#FAB81B]">{t("premium")}</span>
                         ) : null}
                         {meta.isCommonTest && (
                           <span className="pointer-events-auto">
@@ -333,9 +342,13 @@ export function TankShell({
                         <VehicleName name={meta.name} variant={meta.variant} />
                       </h1>
                       <p className="max-w-sm text-sm text-fd-muted-foreground">
-                        World of Tanks {REGION_LABEL[region]} statistics for the{" "}
-                        {tierLabel} {meta.nation.toUpperCase()}{" "}
-                        {classLabel.toLowerCase()} {meta.name}.
+                        {tShell("subtitle", {
+                          region: REGION_LABEL[region],
+                          tier: tierLabel,
+                          nation: tNations(meta.nation),
+                          class: classLabel.toLowerCase(),
+                          tank: meta.name,
+                        })}
                       </p>
                       {/* **What the tank is underneath.** A reissue, an event variant or
                   a reskin is another vehicle wearing something else, and the
@@ -344,7 +357,7 @@ export function TankShell({
                   line, because it is the same tank to shoot at. */}
                       {basedOn ? (
                         <p className="pointer-events-auto max-w-sm text-sm text-fd-muted-foreground">
-                          Based on{" "}
+                          {tShell("based-on")}{" "}
                           <Link
                             href={`/${region}/tanks/${basedOn.slug}`}
                             className="font-medium text-fd-foreground underline-offset-4 transition-colors hover:text-brand hover:underline"

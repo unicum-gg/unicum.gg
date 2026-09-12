@@ -1,0 +1,12 @@
+{
+  "achievements": "Erfolge von {nickname}",
+  "filter-all": "Alle",
+  "filter-both": "Beide",
+  "filter-earned": "Verdient",
+  "filter-missing": "Fehlend",
+  "filter-obtainable": "Erhältlich",
+  "filter-retired": "Nicht mehr erhältlich",
+  "no-achievement-matches-these-filters": "Keine Auszeichnung entspricht diesen Filtern.",
+  "search-achievements": "Erfolge suchen",
+  "search-among-n-achievements": "Unter {count} Auszeichnungen suchen"
+}

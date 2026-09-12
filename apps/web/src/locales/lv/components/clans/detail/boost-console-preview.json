@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktīvās dienas",
+  "add-workflow": "Pievienot darba plūsmu",
+  "connect-discord": "Savienot Discord",
+  "discord-notifications": "Discord paziņojumi",
+  "each-workflow-activates-its-reserves": "Katra darbplūsma aktivizē savas rezerves noteiktā laika logā, kad pietiekami daudz biedru atrodas aktīvā spēles sesijā. Tā darbojas jūsu kontā, jums nav jābūt tiešsaistē. Pievienojiet tik daudz, cik nepieciešams.",
+  "enabled": "Uzstādīts",
+  "from": "No",
+  "get-a-discord-message-in": "Saņemiet Discord ziņojumu jūsu izvēlētā kanālā ikreiz, kad tiek aktivizēts uzlabojums, lai viss klans zinātu, ka tas darbojas.",
+  "log-in-with-wargaming-to": "Piesakieties ar Wargaming, lai to iestatītu",
+  "min-online": "Min online",
+  "officers": "Oficiāļi",
+  "only-an-officer-of-this": "To var iestatīt tikai šī klana virsnieks.",
+  "schedule-preview": "Grafika priekšskatījums",
+  "set-your-hours-and-reserves": "Iestatiet savas stundas un rezerves vienreiz, un uzlabojumi tiks aktivizēti laikā paši, pat ja neviena nav, kas nospiež pogu.",
+  "stronghold-boosts": "Cietokšņa uzlabojumi",
+  "times-are-in-your-timezone": "Laiki norādīti jūsu laika joslā {tz}.",
+  "to": "līdz"
+}

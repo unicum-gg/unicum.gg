@@ -1,0 +1,12 @@
+{
+  "added": "जोड़ा गया",
+  "before-update": "अपडेट {version} से पहले",
+  "common-test": "सामान्य परीक्षण",
+  "every-update-that-changed-this": "इस मानचित्र में बदलाव करने वाला हर अपडेट, सबसे नए से शुरू करके, सीधे गेम क्लाइंट से पढ़ा गया।",
+  "in-the-game": "गेम में",
+  "n-changes": "{count, plural, one {# बदलाव} other {# बदलाव}}",
+  "not-released-wargaming-can-still": "जारी नहीं किया गया। अपडेट आने से पहले Wargaming इसमें से कुछ भी बदल या ड्रॉप कर सकता है।",
+  "removed": "हटाएं",
+  "title": "मैप {map} में बदलाव",
+  "update": "अद्यतन {version}"
+}

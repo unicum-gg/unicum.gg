@@ -1,0 +1,7 @@
+{
+  "firing": "Firing {shell}, {pen} mm. Change the shot",
+  "no-such-round": "{mark}: this gun has none, so set the angles yourself",
+  "own-round": "{mark}: this gun’s own round, figures and all",
+  "treat-it-as": "Treat it as",
+  "treat-it-as-mark": "Treat it as {mark}"
+}

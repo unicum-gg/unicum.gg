@@ -1,17 +1,46 @@
 "use client";
 
-import { formatDistanceToNow } from "date-fns";
+import { useLocale } from "@onruntime/translations/react";
 import { useSyncExternalStore } from "react";
+import { DEFAULT_LOCALE } from "@/lib/translations";
 
-function formatRelative(date: Date, now: number): string {
-  const diffMs = now - date.getTime();
-  const future = diffMs < 0;
-  const absSeconds = Math.round(Math.abs(diffMs) / 1000);
-  if (absSeconds < 60) {
-    if (absSeconds <= 1) return future ? "in a moment" : "just now";
-    return future ? `in ${absSeconds} seconds` : `${absSeconds} seconds ago`;
+/** Largest first, so the first unit the distance fills is the one it reads in. */
+const UNITS: readonly [Intl.RelativeTimeFormatUnit, number][] = [
+  ["year", 31_536_000],
+  ["month", 2_592_000],
+  ["week", 604_800],
+  ["day", 86_400],
+  ["hour", 3_600],
+  ["minute", 60],
+  ["second", 1],
+];
+
+// Building one costs more than formatting with it, and a leaderboard renders
+// thirty on the same tick.
+const formatters = new Map<string, Intl.RelativeTimeFormat>();
+
+function formatterFor(locale: string): Intl.RelativeTimeFormat {
+  let formatter = formatters.get(locale);
+  if (!formatter) {
+    formatter = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+    formatters.set(locale, formatter);
   }
-  return formatDistanceToNow(date, { addSuffix: true });
+  return formatter;
+}
+
+/**
+ * `Intl.RelativeTimeFormat` rather than a formatting library, because the site
+ * publishes in 27 languages and this is the one wording that cannot come from
+ * the locale files: it depends on a number only known at render time. The
+ * platform already carries every language's rules, so nothing is shipped for
+ * them, and `numeric: "auto"` is what turns "in 0 seconds" into "now".
+ */
+function formatRelative(date: Date, now: number, locale: string): string {
+  const seconds = Math.round((date.getTime() - now) / 1000);
+  const distance = Math.abs(seconds);
+  const [unit, size] =
+    UNITS.find(([, size]) => distance >= size) ?? UNITS[UNITS.length - 1];
+  return formatterFor(locale).format(Math.round(seconds / size), unit);
 }
 
 /**
@@ -61,10 +90,11 @@ export function RelativeTime({
   const now = useSyncExternalStore(subscribeToClock, readClock, () =>
     date.getTime(),
   );
+  const { locale } = useLocale();
 
   return (
     <time className={className} dateTime={date.toISOString()} title={title}>
-      {formatRelative(date, now)}
+      {formatRelative(date, now, locale || DEFAULT_LOCALE)}
     </time>
   );
 }

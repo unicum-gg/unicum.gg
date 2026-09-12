@@ -1,0 +1,13 @@
+{
+  "assists": "Asistence",
+  "close": "Zavřít",
+  "damage": "Poškození",
+  "in-the-queue": "Je ve frontě a na této kartě se zobrazí, jakmile ji zkontroluje moderátor.",
+  "optional": "(volitelné)",
+  "paste-a-youtube-link": "Vložte odkaz na YouTube a nastavte přesný okamžik začátku bitvy. Každý, kdo odkaz otevře, se dostane na danou sekundu, takže návrh s nepřesným časovým údajem bude při kontrole zamítnut.",
+  "sending": "Odesílání…",
+  "suggest": "Navrhnout",
+  "suggest-a-video": "Navrhnout video",
+  "suggest-another": "Navrhnout další",
+  "suggestion-sent": "Návrh odeslán"
+}

@@ -1,0 +1,7 @@
+{
+  "group": "第 {order} 组",
+  "n-teams": "{count} 支队伍",
+  "pts": "分数",
+  "team": "队伍",
+  "top-n-advance": "，前 {count} 名晋级"
+}

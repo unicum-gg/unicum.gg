@@ -1,0 +1,12 @@
+{
+  "slot": "Слот {n}",
+  "slot-filled": "Комірка {n}: {name}",
+  "consumable-slot": "Комірка для спорядження {n}",
+  "consumable-slot-filled": "Комірка для спорядження {n}: {name}",
+  "level": "Рівень {n}",
+  "stock": "Стандартний",
+  "specialize": "Натисніть, щоб спеціалізувати цю комірку.",
+  "clear-specialization": "Натисніть, щоб скасувати спеціалізацію цієї комірки.",
+  "crew-skills": "Навички екіпажу",
+  "shell-aria": "{name}: шкода {damage}, пробиття {penetration} мм"
+}

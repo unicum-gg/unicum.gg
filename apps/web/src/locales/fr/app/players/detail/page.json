@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Chars du joueur {name} ({region}), tous les véhicules joués",
+    "description": "Tous les chars joués par {name} sur {region}, avec le nombre de batailles, le taux de victoires, les dégâts moyens et le WN8 par véhicule."
+  },
+  "achievements": {
+    "title": "Faits d’armes du joueur {name} ({region}), {medals} médailles obtenues",
+    "description": "Les {medals} médailles World of Tanks obtenues par {name} sur {region}, des médailles de Kolobanov et de Pool aux grades honorifiques et aux médailles épiques, ainsi que toutes celles qu’il lui reste à obtenir."
+  },
+  "tournaments": {
+    "title": "Tournois du joueur {name} ({region})",
+    "description": "Tous les tournois Wargaming auxquels {name} a participé sur {region} : l’équipe représentée, le format et jusqu’où elle est allée. Un historique publié par Wargaming uniquement du point de vue du tournoi, jamais de celui du joueur."
+  },
+  "value": {
+    "title": "Valeur du compte du joueur {name} ({region})",
+    "description": "Ce que vaut le compte World of Tanks de {name} sur {region} : crédits, or et expérience stockés dans le garage."
+  },
+  "mode": {
+    "title": "Statistiques du joueur {name} en mode {mode} ({region})",
+    "description": "Performances de {name} sur {region} en {mode} : batailles, taux de victoires et cotes pour ce mode, comparés à ses résultats de référence en batailles aléatoires."
+  },
+  "overview": {
+    "title": "Statistiques World of Tanks de {name} ({region}), {battles} batailles, {winrate} % de victoires",
+    "description": "Sur {region}, {name} compte {battles} batailles, {winrate} % de victoires et une cote de {rating}. Détail char par char, WN8, WNX et historique complet des clans."
+  },
+  "locked": {
+    "title": "Compte World of Tanks du joueur {name} verrouillé ({region})",
+    "description": "Le compte {name} ({region}) existe, mais Wargaming l’a verrouillé. Ses statistiques World of Tanks ne sont donc pas disponibles."
+  },
+  "empty": {
+    "title": "Statistiques World of Tanks du joueur {name} ({region})",
+    "description": "Statistiques World of Tanks, {name} ({region}) : cotes WN8 et WNX, taux de victoires, détail char par char et historique complet des clans."
+  }
+}

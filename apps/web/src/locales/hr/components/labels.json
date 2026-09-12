@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Čekanje na prvi presjek",
+    "hidden": "Sakriveno putem Wargaminga",
+    "active_24h": "Aktivno < 24 h",
+    "active_7d": "Aktivno < 7 d",
+    "recent_30d": "Nedavno < 30 d",
+    "recent_90d": "Nedavno < 90 d",
+    "dormant_1y": "Neaktivno < 1 g.",
+    "inactive": "Neaktivno > 1 g."
+  },
+  "rating-hype": {
+    "overrated": "Preuveličan",
+    "fair": "Prikladno ocijenjen",
+    "underrated": "Podcijenjen"
+  },
+  "rating-consensus": {
+    "agreed": "Široko suglasje",
+    "mixed": "Pomešani stavovi",
+    "divisive": "Kontroverzan"
+  },
+  "rating-axes": {
+    "overall": "Sveukupno",
+    "fun": "Zabava",
+    "firepower": "Vatrena moć",
+    "armour": "Oklop",
+    "mobility": "Pokretljivost",
+    "gunHandling": "Upravljanje topom",
+    "concealment": "Skrivenost",
+    "beginnerFriendliness": "Prijateljski prema početnicima",
+    "versatility": "Svestranost"
+  },
+  "rating-axis-hints": {
+    "overall": "Koliko je ovaj tenk dobar kad se sve uzme u obzir?",
+    "fun": "Koliko uživaš u igranju s njim?",
+    "firepower": "Alfa, šteta po minuti i probojnost.",
+    "armour": "Koliko često odbija granate, igra iz zaklona kupole i na otvorenom.",
+    "mobility": "Brzina, ubrzanje i način skretanja.",
+    "gunHandling": "Vrijeme ciljanja, rasipanje i preciznost u pokretu.",
+    "concealment": "Kamuflaža i domet vida.",
+    "beginnerFriendliness": "Koliko oprašta pogreške dok još učiš.",
+    "versatility": "Funkcionira li na svakoj mapi i u svakoj ekipi?"
+  },
+  "voter-brackets": {
+    "unknown": "Neocijenjeno",
+    "learning": "Učenje",
+    "average": "Prosjek",
+    "strong": "Jak",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vozila",
+    "gunnery": "Topništvo",
+    "armor": "Oklop",
+    "mobility": "Pokretljivost",
+    "vision": "Vid",
+    "crew": "Posada",
+    "progression": "Napredovanje",
+    "economy": "Ekonomija",
+    "ratings": "Ocjene",
+    "statistics": "Statistika",
+    "modes": "Način bitke",
+    "tactics": "Taktika",
+    "slang": "Žargon"
+  }
+}

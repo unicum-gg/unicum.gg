@@ -1,0 +1,12 @@
+{
+  "slot": "Vak {n}",
+  "slot-filled": "Vak {n}: {name}",
+  "consumable-slot": "Vak voor verbruiksartikelen {n}",
+  "consumable-slot-filled": "Vak voor verbruiksartikelen {n}: {name}",
+  "level": "Niveau {n}",
+  "stock": "Stock",
+  "specialize": "Klik om dit vak te specialiseren.",
+  "clear-specialization": "Klik om de specialisatie van dit vak te wissen.",
+  "crew-skills": "Bemanning vaardigheden",
+  "shell-aria": "{name}: {damage} schade, {penetration} mm penetratie"
+}

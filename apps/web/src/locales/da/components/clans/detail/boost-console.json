@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Tilføj arbejdsgang",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Hver arbejdsgang aktiverer sine reserver i et tidsvindue, når nok medlemmer er i en live spilsession. Den kører på din konto, uden at du behøver være online. Tilføj så mange, du har brug for.",
+  "n-online": "/ {count} online",
+  "officer": "Officer",
+  "online": "Online",
+  "recent-activations": "seneste aktiveringer",
+  "reserve": "Reserve",
+  "stronghold-boosts": "Stronghold boosts",
+  "when": "Når",
+  "workflow": "Workflow"
+}

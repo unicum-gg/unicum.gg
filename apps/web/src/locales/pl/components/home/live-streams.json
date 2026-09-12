@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Pokaż czat",
+    "hide": "Ukryj czat",
+    "show-streamers": "Pokaż streamerów"
+  },
+  "heading": "{name}: statystyki gracza, klanu i czołgów w World of Tanks",
+  "hide": "Ukryj streamerów",
+  "player": "Gracz",
+  "stream-language": "Język transmisji · {name}",
+  "stream-language-alt": "Język transmisji: {name}",
+  "theater": {
+    "enter": "Tryb teatralny",
+    "exit": "Opuść tryb kinowy"
+  },
+  "title": "Najlepsi gracze transmitujący teraz ·",
+  "viewer-count": "{count} widzów",
+  "viewers": "Widzowie",
+  "watch": "Oglądaj na Twitchu: {nickname}"
+}

@@ -1,0 +1,6 @@
+{
+  "day": "Clasificación por {metric} durante las últimas 24 horas (mín. 20 batallas).",
+  "week": "Clasificación por {metric} durante los últimos 7 días (mín. 140 batallas).",
+  "month": "Clasificación por {metric} durante los últimos 30 días (mín. 600 batallas).",
+  "overall": "Clasificación histórica según {metric} (mín. 20 000 batallas)."
+}

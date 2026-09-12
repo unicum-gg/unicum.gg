@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname}’s achievements",
+  "filter-all": "All",
+  "filter-both": "Both",
+  "filter-earned": "Earned",
+  "filter-missing": "Missing",
+  "filter-obtainable": "Obtainable",
+  "filter-retired": "Retired",
+  "no-achievement-matches-these-filters": "No achievement matches these filters.",
+  "search-achievements": "Search achievements",
+  "search-among-n-achievements": "Search among {count} achievements"
+}

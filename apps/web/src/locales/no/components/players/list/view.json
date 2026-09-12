@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Topp <accent>spillere</accent>",
+    "language": "Beste <accent>{language}</accent>-spillere"
+  },
+  "intro": {
+    "all": "Rangering for {region}, rangert etter samlet {metric} gjennom hele perioden, minimum 20 000 kamper.",
+    "language": "Spillere fra {region} hvis utledede språksett fra klanhistorikken inkluderer {language}, rangert etter {metric}, minimum 10 000 kamper.",
+    "strict": "Spillere fra {region} hvis utledede språk fra klanhistorikken utelukkende er {language}, rangert etter {metric}, minimum 10 000 kamper."
+  },
+  "board": {
+    "all": "De {count} beste spillerne etter {metric}",
+    "language": "De {count} beste {language}-spillerne etter {metric}",
+    "strict": "De {count} beste spillerne som utelukkende bruker {language}, etter {metric}"
+  },
+  "modes": {
+    "overall": "Totalt"
+  },
+  "columns": {
+    "player": "Spiller"
+  },
+  "strict-toggle": "Streng",
+  "any-toggle": "Enhver",
+  "all-languages": "Alle språk",
+  "battles": "Kamper",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

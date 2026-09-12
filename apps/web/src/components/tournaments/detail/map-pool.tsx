@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { gameModeFromRaw, markerUrl } from "@unicum.gg/shared";
 import { CONTROL_POINT, poiUrl } from "@/components/maps/detail/minimap-overlay";
 import { TournamentGameMode } from "@unicum.gg/wargaming";
@@ -9,6 +9,9 @@ import { ONSLAUGHT_VIEW } from "@/components/maps/detail/views";
 import type { Region } from "@unicum.gg/wargaming";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import ROUTES from "@/constants/routes";
+import type { TranslateFunction } from "@onruntime/translations";
+import { mapName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 import type { TournamentRecord } from "./record";
 
 /**
@@ -48,29 +51,49 @@ function poolHref(
   return view ? `${href}?view=${view}` : href;
 }
 
+/** What the pool knows about a map the organiser only named in prose. */
+export type PoolMapRef = { href: string | null; name: string };
+
 /**
- * The pool as a lookup from map NAME to its page, for the places that only have
- * the organiser's text.
+ * The pool as a lookup from the organiser's map NAME to what we know about it.
  *
  * A match records the maps it was played on as prose ("Cliff, Sand River"), so a
- * bracket card cannot link them on its own. The pool is where those names were
+ * bracket card has nothing but that text. The pool is where those names were
  * already resolved to arenas, and it carries the tournament's battle type, so
  * the index built here sends a bracket's map to exactly the view the map tile
  * beside it opens. Keyed lowercased, since the two spellings come from different
  * fields of the same source.
+ *
+ * It carries the name as well as the link, because the organiser writes English
+ * and the reader may not: the arena is what Wargaming names in every language,
+ * so a French bracket reads "Falaise" while still matching on the "Cliff" the
+ * match was recorded with.
  */
-export function mapHrefIndex(
+export function mapPoolIndex(
   region: Region,
   maps: TournamentRecord["mapPool"],
   gameModes: TournamentRecord["gameModes"],
-): Map<string, string> {
+  tMaps: TranslateFunction,
+): Map<string, PoolMapRef> {
   const view = poolViewParam(gameModes);
-  const out = new Map<string, string>();
+  const out = new Map<string, PoolMapRef>();
   for (const map of maps) {
-    const href = poolHref(region, map, view);
-    if (map.name && href) out.set(map.name.toLowerCase(), href);
+    if (!map.name) continue;
+    out.set(map.name.toLowerCase(), {
+      href: poolHref(region, map, view),
+      name: poolMapName(map, tMaps),
+    });
   }
   return out;
+}
+
+/** A pool map named the way the reader's game names it, falling back to the
+ * organiser's own text for an arena the catalogue does not carry. */
+export function poolMapName(
+  map: TournamentRecord["mapPool"][number],
+  tMaps: TranslateFunction,
+): string {
+  return mapName(map.arenaId, map.name ?? map.arenaId, tMaps);
 }
 
 // The game's own minimap markers, the same ones the map gallery and the match
@@ -134,6 +157,7 @@ export function TournamentMapPool({
   /** The tournament's battle types, which decide the view each tile opens. */
   gameModes: TournamentRecord["gameModes"];
 }) {
+  const { t: tMaps } = useTranslation("game/maps");
   if (maps.length === 0) return null;
   const view = poolViewParam(gameModes);
   return (
@@ -153,13 +177,14 @@ export function TournamentMapPool({
     <div className="-mr-px grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))]">
       {maps.map((map) => {
         const href = poolHref(region, map, view);
+        const name = poolMapName(map, tMaps);
         const tile = (
           <div className="relative aspect-square w-full overflow-hidden bg-fd-muted">
             {map.minimapUrl && (
               <MinimapImage
                 src={map.minimapUrl}
                 arenaId={map.arenaId}
-                alt={`${map.name ?? map.arenaId} minimap`}
+                alt={`${name} minimap`}
                 sizes="(max-width: 640px) 45vw, 200px"
                 className="transition-transform duration-300 group-hover:scale-105"
               />
@@ -177,7 +202,7 @@ export function TournamentMapPool({
                 light. */}
             <span className="pointer-events-none absolute inset-0 bg-radial-[at_0%_100%] from-fd-background/95 from-0% via-fd-background/35 via-30% to-transparent to-55%" />
             <span className="absolute inset-x-0 bottom-0 truncate px-2 pb-1.5 text-xs font-medium [text-shadow:0_1px_3px_var(--color-fd-background),0_0_6px_var(--color-fd-background)] group-hover:text-brand">
-              {map.name ?? map.arenaId}
+              {name}
             </span>
           </div>
         );

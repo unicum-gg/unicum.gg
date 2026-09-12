@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Coût (crédits)",
+      "tip": "Prix d’achat en crédits (chars de l’arbre technologique)"
+    },
+    "buyGold": {
+      "label": "Coût (or)",
+      "tip": "Prix d’achat en pièces d’or (chars premium)"
+    },
+    "researchXp": {
+      "label": "XP de recherche",
+      "tip": "XP nécessaire pour débloquer (chemin le moins coûteux)"
+    },
+    "totalFreeXp": {
+      "label": "Expérience libre (rang {tier})",
+      "tip": "XP cumulée nécessaire pour débloquer le char à partir du rang {tier}, modules prérequis inclus"
+    },
+    "shellCost": {
+      "label": "Coût des obus",
+      "tip": "Prix de l’obus par défaut (crédits)"
+    },
+    "ammoCost": {
+      "label": "Coût complet des munitions",
+      "tip": "Prix de l’obus par défaut × capacité en munitions"
+    },
+    "acquireMoney": {
+      "label": "Coût d’achat ({currency})",
+      "tip": "Coût estimé en argent réel pour obtenir le char (recherche + achat), en {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Expérience libre ({currency})",
+      "tip": "Coût estimé en argent réel pour débloquer le char avec de l’XP libre à partir du rang {tier}, en {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Coût (crédits)",
+    "buyGold": "Coût (or)",
+    "researchXp": "XP de recherche",
+    "totalFreeXp": "XP gratuit",
+    "shellCost": "Coût des obus",
+    "ammoCost": "Coût complet des munitions",
+    "acquireMoney": "Coût d’achat (argent réel)",
+    "freeXpMoney": "Expérience libre (argent réel)"
+  }
+}

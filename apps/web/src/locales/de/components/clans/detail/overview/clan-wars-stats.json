@@ -1,0 +1,21 @@
+{
+  "stat": "Statistik",
+  "periods": {
+    "total": "Gesamt",
+    "day": "Letzte 24h",
+    "week": "Letzte 7d",
+    "month": "Letzte 30d"
+  },
+  "sections": {
+    "territory": "Gebiet",
+    "t10": "Stufe X",
+    "t8": "Stufe VIII",
+    "t6": "Stufe VI"
+  },
+  "rows": {
+    "provinces": "Provinzen",
+    "elo": "ELO",
+    "battles": "Gefechte",
+    "winrate": "Gewinnrate"
+  }
+}

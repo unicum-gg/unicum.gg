@@ -1,0 +1,6 @@
+{
+  "active-until": "نشط حتى {tz}",
+  "n-left": "المتبقي: {count}",
+  "no-reserves-in-stock-right": "لا توجد احتياطيات في المخزون حاليًا.",
+  "reserves-to-activate": "الاحتياطيات المطلوب تفعيلها"
+}

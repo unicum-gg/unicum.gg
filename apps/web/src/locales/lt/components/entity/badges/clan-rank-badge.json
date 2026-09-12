@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rangas {rank} reitingų lentelėje {board}",
+  "board": {
+    "advances": "Puolimai Tvirtovė reitingas",
+    "skirmish-t10": "X lygis Išpuolis reitingas",
+    "skirmish-t6": "VI lygis Išpuolis reitingas",
+    "skirmish-t8": "VIII lygis Išpuolis reitingas"
+  }
+}

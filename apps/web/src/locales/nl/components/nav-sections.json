@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Spelers",
+    "clans": "Clans",
+    "tanks": "Tanks",
+    "maps": "Kaarten",
+    "tournaments": "Toernooien",
+    "servers": "Servers"
+  },
+  "links": {
+    "top-players": {
+      "label": "Top spelers",
+      "description": "Klassement aller tijden voor spelers"
+    },
+    "players-onslaught": {
+      "description": "Klassement voor gerangschikte Bestorming"
+    },
+    "players-steel-hunter": {
+      "description": "Klassement voor battle royale"
+    },
+    "top-clans": {
+      "label": "Top clans",
+      "description": "Klassement aller tijden voor Clans"
+    },
+    "stronghold": {
+      "description": "Ranglijst voor schermutselingen"
+    },
+    "advances": {
+      "description": "Klassement voor Niveau X, 15 tegen 15"
+    },
+    "tank-performances": {
+      "label": "Prestaties",
+      "description": "Winstpercentage en Beschadig per Tank"
+    },
+    "tank-specs": {
+      "label": "Specificaties",
+      "description": "Statistieken voor elke Tank"
+    },
+    "tank-economics": {
+      "label": "Economics",
+      "description": "Verdieners van credits en XP"
+    },
+    "tank-moe": {
+      "description": "Benodigde Beschadig per markering"
+    },
+    "tank-mom": {
+      "description": "Drempelwaarden voor badges van Meesterschap"
+    },
+    "tank-changes": {
+      "label": "Wijzigingen",
+      "description": "Buffs en nerfs per Updaten"
+    },
+    "tank-community": {
+      "label": "Gemeenschapsbeoordelingen",
+      "description": "Beoordeeld door spelers die ze bezitten"
+    },
+    "tank-videos": {
+      "label": "Video’s",
+      "description": "Gameplay van de community"
+    },
+    "all-tournaments": {
+      "label": "Toernooien",
+      "description": "Elk toernooi, open en afgerond"
+    },
+    "all-maps": {
+      "label": "Alle kaarten",
+      "description": "Elke Kaart in het spel"
+    },
+    "map-changes": {
+      "label": "Wijzigingen",
+      "description": "Herwerkingen van Kaarten per Updaten"
+    },
+    "battle-type": {
+      "description": "{type} kaarten"
+    },
+    "servers-population": {
+      "label": "Server populatie",
+      "description": "Spelers online, nu en in de loop van de tijd"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "columns": "Колони",
+  "n-marks-of-excellence": "{count, plural, one {# знак за отличие} other {# знаци за отличие}}"
+}

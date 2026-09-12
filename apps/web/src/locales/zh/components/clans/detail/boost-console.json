@@ -1,0 +1,13 @@
+{
+  "add-workflow": "添加工作流",
+  "boost": "提升",
+  "each-workflow-activates-its-reserves": "每个工作流都会在时间窗口内激活储备，条件是有足够成员处于实时游戏对战中。任务在你的账号上运行，无需你在线。需要多少就添加多少。",
+  "n-online": "/ {count}人在线",
+  "officer": "官员",
+  "online": "在线",
+  "recent-activations": "最近激活",
+  "reserve": "储备",
+  "stronghold-boosts": "要塞增益",
+  "when": "什么时候",
+  "workflow": "工作流程"
+}

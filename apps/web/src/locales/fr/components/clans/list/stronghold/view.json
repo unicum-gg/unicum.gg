@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Pas encore de données. Revenez une fois les clans actualisés.",
+  "heading": "Meilleurs clans de rang <accent>{tier}</accent>",
+  "blurb": "Classement de la région {region}, établi selon {sort} pour tous les clans suivis au format {format} (minimum {battles} batailles).",
+  "blurb-period": "Classement de la région {region}, établi selon {sort} pour tous les clans suivis au format {format} durant la période {period} (minimum {battles} batailles).",
+  "format-advances": "Incursions (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Meilleurs {count} clans de rang {tier} ·"
+}

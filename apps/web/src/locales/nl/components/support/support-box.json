@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Afrekening geannuleerd.",
+  "claim-your-supporter-role-on-discord": "Claim je Rol als Supporter op Discord",
+  "could-not-add-the-discord-role-please-try-ag": "De Rol op Discord kon niet worden toegevoegd. Probeer het opnieuw.",
+  "could-not-open-the-billing-portal": "Het factureringsportaal kon niet worden geopend.",
+  "could-not-start-checkout-please-try-again": "Het afrekenen kon niet worden gestart. Probeer het opnieuw.",
+  "could-not-update-your-preference": "Je voorkeur kon niet worden bijgewerkt.",
+  "log-in-with-wargaming": "Inloggen met Wargaming",
+  "log-in-with-wargaming-to": "Inloggen met Wargaming om {NAME} te ondersteunen.",
+  "manage-subscription": "Beheer abonnement",
+  "only-active-supporters-can-claim-the-discord": "Alleen actieve Supporters kunnen de Rol op Discord claimen.",
+  "or-choose-your-own-amount": "Of kies je eigen bedrag",
+  "pay-what-you-want": "Betaal wat je wilt.",
+  "pick-an-amount": "Kies een bedrag of voer zelf een bedrag in, vanaf €{min} per maand.",
+  "re-sync-discord-role": "Rol op Discord opnieuw synchroniseren",
+  "secured-by-stripe": "Beveiligd door Stripe. Annuleren kan op elk moment.",
+  "show-me-anonymously-on-the": "Geef mij anoniem weer op het podium",
+  "support-subscriptions-are-coming-soon": "Abonnementen voor Ondersteuning zijn binnenkort beschikbaar.",
+  "supporter-role-added-on-discord": "Rol als Supporter toegevoegd op Discord!",
+  "you-are-a-supporter-thank": "Je bent Supporter. Bedankt dat je {NAME} in leven houdt."
+}

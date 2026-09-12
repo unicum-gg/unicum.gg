@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Munitie, uitrusting, verbruiksartikelen, directieven, bemanning en voortgang voor deze kolom. Elke wijziging verandert de kenmerken ervan in de onderliggende vergelijking.",
+  "ammunition-equipment-crew-and-progression": "Munitie, uitrusting, bemanning en voortgang",
+  "apply-to-every-column": "Op elke kolom toepassen",
+  "compare-against": "Vergelijken met {tank}",
+  "compare-the-others-against-this-one": "De andere tanks met deze vergelijken",
+  "configure-tank": "{tank} configureren",
+  "highest-overall-score": "Hoogste score voor Totaal",
+  "highest-overall-score-of-this": "Hoogste score voor Totaal in deze vergelijking",
+  "is-the-reference": "Referentie: {tank}",
+  "overall": "Totaal",
+  "reference-column": "Referentiekolom",
+  "remove-tank": "{tank} verwijderen",
+  "reset-all": "Reset alles",
+  "setup": "Setup",
+  "stock": "Stock",
+  "tank-setup": "Configuratie van {tank}",
+  "top": "Beste",
+  "where-this-vehicle-sits-across": "De positie van dit voertuig in de volledige catalogus, op een totaal van {MAXSCORE}: het gemiddelde van de vier categoriescores, zoals hier ingesteld. Een samenvatting, geen oordeel. Een verkenningstank en een zware tank kunnen hetzelfde getal bereiken door in verschillende dingen goed te zijn."
+}

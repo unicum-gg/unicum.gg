@@ -1,0 +1,35 @@
+{
+  "heading": "Parhaat pelaajat pelimuodossa <accent>{mode}</accent>",
+  "intro": "{mode} on World of Tanksin kilpailullinen rankattu 7 vastaan 7 -pelimuoto tasolla X. {region}-alueen tulostaulukko suoraan pelin omista sijoituksista.",
+  "season": {
+    "range": "{start}–{end}",
+    "final": "lopullinen sijoitustilanne",
+    "live": "käynnissä oleva kausi",
+    "updated": "päivitetty {when}"
+  },
+  "board": "{count} parasta pelimuodon {mode} pelaajaa",
+  "columns": {
+    "player": "Pelaaja",
+    "rank": "Sijoitusluokka",
+    "battles": "Taisteluita",
+    "rating": "Luokituspisteet"
+  },
+  "alias": "(nimellä {nickname})",
+  "ranks": {
+    "title": "Arvot",
+    "meaning": "Merkitys",
+    "tier": "Taso",
+    "intro": "Nouset pelimuodon {mode} sijoituksissa voittamalla taisteluita. Jokainen voitto antaa Luokitus-pisteitä sen perusteella, miten hyvin pelasit. {champion} on korkein rankki, jonka voit saavuttaa pelkillä pisteillä, ja sen saavuttaminen nostaa sinut tulostaulukkoon. {legend} ei ole kiinteä raja, vaan {champion}-pelaajien parhaiten arvioitu joukko, joten raja muuttuu osallistujien mukaan. Tasatilanteet ratkaistaan pelattujen taisteluiden määrällä. Nykyisen kauden tarkat {legend}- ja {champion}-rajat näkyvät tulostaulukossa.",
+    "legend-blurb": "Korkeimman arvosanan saaneet {champion}-pelaajat. Peli rajaa määrän kullakin kaudella tiettyyn tulostaulukon sijoitukseen, joten koko vaihtelee kauden ja alueen mukaan, eikä kyse ole kiinteästä pistemäärästä. Jos putoat viimeisen {legend}-pelaajan alapuolelle, palaat tasolle {champion}.",
+    "champion-blurb": "Korkein rankki, jonka voit saavuttaa Luokitus-pisteillä, ja pääsy tulostaulukkoon. Jokainen rankattu pelaaja on vähintään tasolla {champion}."
+  },
+  "race": {
+    "title-live": "Mitä juuri nyt vaaditaan",
+    "title-ended": "Miten kausi sujui",
+    "legend-cutoff": "Arvon {legend} raja",
+    "champion-cutoff": "Arvon {champion} raja",
+    "ranked-players": "Rankatut pelaajat",
+    "rating-points": "luokituspisteet",
+    "rank-cutoffs": "sijoitusluokat"
+  }
+}

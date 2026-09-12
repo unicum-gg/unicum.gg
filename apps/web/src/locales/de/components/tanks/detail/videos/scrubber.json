@@ -1,0 +1,7 @@
+{
+  "back-to": "Zurück zu {seconds}",
+  "drag-to-the-battle": "Ziehe den Regler zum Gefecht und passe die Position dann mit {keys} an, pro Tastendruck um eine Sekunde. Das Video pausiert an der ausgewählten Stelle und bleibt dort, während du die restlichen Angaben ausfüllst.",
+  "moment-the-battle-starts": "Zeitpunkt, an dem das Gefecht beginnt",
+  "use-the-current-moment": "Aktuellen Zeitpunkt verwenden",
+  "video-being-suggested": "Video wird vorgeschlagen"
+}

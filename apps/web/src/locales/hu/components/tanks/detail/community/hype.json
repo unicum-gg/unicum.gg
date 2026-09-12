@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "a szintjén értékelt tankok {value}%-ánál magasabban",
+  "measured-hint": "A helyezése az azonos tankok között a győzelmi aránya alapján",
+  "not-enough-votes-yet-to": "Még nincs elég szavazat ahhoz, hogy összevessük a közösség ítéletét a tank tényleges teljesítményével.",
+  "perceived-hint": "A közösség helyezése a(z) {tier}. szint értékelt tankjai között",
+  "verdict": {
+    "overrated": "A közösség jóval magasabbra értékeli, mint amit valójában teljesít.",
+    "fair": "A hírnév és az eredmények ezúttal egyetértenek.",
+    "underrated": "Jobban teljesít, mint amennyire bárki elismeri."
+  },
+  "what-players-think": "Mit gondolnak a játékosok",
+  "what-the-data-says": "Mit mondanak az adatok"
+}

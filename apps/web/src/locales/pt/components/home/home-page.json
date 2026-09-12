@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Melhores jogadores · Últimas 24 horas"
+    },
+    "week": {
+      "title": "Melhores jogadores · Últimos 7 dias"
+    }
+  },
+  "rating-scale": {
+    "title": "Escala de avaliação"
+  },
+  "community": {
+    "title": "Junte-se à comunidade",
+    "heading": "Ligue-se a jogadores de WoT",
+    "description": "Junte-se ao nosso Discord para conversar sobre estatísticas de WoT, pedir novas funcionalidades e comunicar erros. Ou visite o GitHub para analisar o código e contribuir.",
+    "discord": "Juntar ao Discord",
+    "github": "Ver no GitHub"
+  },
+  "features": {
+    "title": "O que encontrará aqui",
+    "profiles": {
+      "title": "Perfis de jogadores",
+      "description": "Estatísticas detalhadas com dados gerais, variações de 24 h / 7 d / 30 d, WN7, WN8, WNX e Classificação Pessoal."
+    },
+    "clans": {
+      "title": "Páginas de clãs",
+      "description": "Tabela de membros com classificações, feed de atividade recente, descrição e metadados do clã."
+    },
+    "history": {
+      "title": "Histórico de clãs",
+      "description": "Cronologia completa de todos os clãs a que um jogador pertenceu, com funções e datas."
+    },
+    "live": {
+      "title": "Atualizações em tempo real",
+      "description": "Os jogadores monitorizados são atualizados em segundo plano a cada 24 h através do nosso sistema de registos."
+    },
+    "leaderboards": {
+      "title": "Classificações",
+      "description": "Melhores jogadores (24 h, 7 d, desde sempre) e melhores clãs ordenados por WNX, com base nos nossos registos."
+    },
+    "open-source": {
+      "title": "Código aberto · AGPL",
+      "description": "O código está no GitHub. Analise-o, faça um fork e contribua. Sem anúncios, com dados analíticos apenas mediante consentimento."
+    }
+  },
+  "quick-start": {
+    "title": "Início rápido",
+    "search": {
+      "title": "🔍 Pesquisar jogadores ou clãs",
+      "description": "Prima {shortcut} para abrir a pesquisa e, em seguida, introduza um nome de jogador ou uma tag de clã."
+    },
+    "region": {
+      "title": "🌍 Mudar de região",
+      "description": "Use o seletor {selector} na barra de navegação. As tabelas de classificação são atualizadas de acordo com a região."
+    },
+    "leaderboards": {
+      "title": "🏆 Consultar tabelas de classificação",
+      "description": "Melhores jogadores (24 h, 7 d, desde sempre) e melhores clãs ordenados por WNX médio, com base nos nossos registos."
+    },
+    "colors": {
+      "title": "📊 Interpretar as cores",
+      "description": "WR, WN7, WN8 e WNX partilham as mesmas cores por escalão (laranja → verde → ciano → roxo). Consulte a escala acima."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

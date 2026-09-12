@@ -1,0 +1,6 @@
+{
+  "title": "Algo salió mal",
+  "description": "La API de Wargaming no respondió correctamente. Normalmente se trata de un problema temporal por su parte.",
+  "try-again": "Intenta de nuevo",
+  "back": "Volver a inicio"
+}

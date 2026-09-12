@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Näytetään alueen {region} parhaat klaanit, joissa on yli 50 taisteluita pelannutta jäsentä, järjestettynä keskimääräisen mittarin {metric} mukaan.",
+    "month": "Näytetään alueen {region} parhaat klaanit, joissa on yli 50 taisteluita pelannutta jäsentä, järjestettynä mittarin {metric} mukaan viimeisten 30 päivän ajalta (vähintään 15 aktiivista)."
+  },
+  "updated": "Päivitetty {when}.",
+  "empty": "Tästä alueesta ei ole vielä saatavilla klaanitietoja.",
+  "rank": "#",
+  "clan": "Klaani",
+  "average": "Keskim. {metric}"
+}

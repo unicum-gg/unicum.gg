@@ -1,0 +1,11 @@
+{
+  "already-running": "đang chạy",
+  "in-window": "trong cửa sổ",
+  "n-online": "/ {count} đang trực tuyến",
+  "no-reserves-selected": "Chưa chọn khoản dự trữ nào.",
+  "no-stock-ready": "không có hàng sẵn sàng",
+  "not-available": "không khả dụng",
+  "threshold": "ngưỡng ({online}/{min})",
+  "would-activate": "sẽ kích hoạt",
+  "would-not-fire": "Hiện tại, tính năng này sẽ không kích hoạt."
+}

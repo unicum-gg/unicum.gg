@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Najlepšie <accent>clany</accent>",
+    "language": "Najlepšie klany používajúce jazyk <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Rebríček regiónu {region}, zoradený podľa priemeru ukazovateľa {metric} u sledovaných členov každého klanu (minimálne 50 členov s bitkami).",
+    "language": "Klany v regióne {region}, ktoré uviedli jazyk {language} ako jeden zo svojich jazykov, zoradené podľa priemeru ukazovateľa {metric} u sledovaných členov (minimálne 25 členov s bitkami).",
+    "strict": "Klany v regióne {region}, ktoré uviedli jazyk {language} ako svoj jediný jazyk, zoradené podľa priemeru ukazovateľa {metric} u sledovaných členov (minimálne 25 členov s bitkami)."
+  },
+  "board": {
+    "all": "Najlepších {count} klanov podľa ukazovateľa {metric}",
+    "language": "Najlepších {count} klanov používajúcich jazyk {language} podľa ukazovateľa {metric}",
+    "strict": "Najlepších {count} klanov používajúcich iba jazyk {language} podľa ukazovateľa {metric}"
+  },
+  "members": "Členovia",
+  "strict-toggle": "Prísny",
+  "any-toggle": "Akýkoľvek",
+  "all-languages": "Všetky jazyky",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

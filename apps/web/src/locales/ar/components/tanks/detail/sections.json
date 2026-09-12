@@ -1,0 +1,14 @@
+{
+  "ammunition": "ذخيرة",
+  "characteristics": "خصائص الدبابة {tank}",
+  "consumables": "مستهلكات",
+  "crew-level": "مستوى الطاقم",
+  "crew-skills": "مهارات الطاقم",
+  "equipment": "معدات",
+  "field-mods": "تعديلات ميدانية",
+  "historical-reference": "المرجع التاريخي للدبابة {tank}",
+  "modules": "وحدات الدبابة {tank}",
+  "research-path": "فرع شجرة تقنيات الدبابة {tank}",
+  "similar": "دبابات قريبة من {tank}",
+  "videos": "مقاطع الفيديو للدبابة {tank}"
+}

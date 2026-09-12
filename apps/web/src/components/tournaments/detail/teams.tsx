@@ -1,6 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
+import Link from "@/components/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
@@ -50,15 +52,16 @@ import {
   type TeamRow,
   type TeamSortState,
 } from "./teams-sort";
+import { FilterSubject } from "@/components/filter-subject";
 
 const DASH = "—";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 /** The range a team's stored place covers, which is what both the shown place
  * and the reward are read from. */
@@ -123,6 +126,8 @@ export function TournamentTeams({
    * reader is sizing up the field rather than reading history. */
   scouting: boolean;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tournaments/detail/teams");
   const metric = useRatingMetric();
   const [sort, setSort] = useState<TeamSortState>(null);
 
@@ -220,10 +225,13 @@ export function TournamentTeams({
         screenLines={false}
         className="flex flex-wrap items-center justify-between gap-2 border-b border-fd-border"
       >
-        <PanelTitle>Teams ({teams.length})</PanelTitle>
+        <PanelTitle>{t("teams", { length: teams.length })}</PanelTitle>
         <span className="text-xs text-fd-muted-foreground">
-          {teams.filter((t) => t.status === TournamentTeamStatus.Confirmed).length}{" "}
-          confirmed
+          {t("n-confirmed", {
+            count: teams.filter(
+              (team) => team.status === TournamentTeamStatus.Confirmed,
+            ).length,
+          })}
         </span>
       </PanelHeader>
       <PanelContent className="p-0">
@@ -232,19 +240,15 @@ export function TournamentTeams({
           // the normal state for one that opened since the last sync. Saying so
           // beats a headed table and a pager over nothing.
           <p className={cn(styles.mutedDescription, "p-4")}>
-            No teams recorded yet. Registrations appear here once this
-            tournament has been read in full, which happens within minutes of it
-            opening.
-          </p>
+            {t("no-teams-recorded-yet-registrations")}</p>
         ) : (
           <>
             <div className="border-b border-fd-border px-4 py-2.5">
-              <LeaderboardFilterBar filters={filters} searchNoun="teams" />
+              <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Teams} />
             </div>
             {filtered.length === 0 ? (
               <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-                No team matches the current filters.
-              </div>
+                {t("no-team-matches-the-current")}</div>
             ) : (
               <Table
                 className={cn(
@@ -272,12 +276,10 @@ export function TournamentTeams({
                       state={sort}
                       onToggle={toggleSort}
                     >
-                      Team
-                    </SortHead>
+                      {t("team")}</SortHead>
                     {bands.length > 0 && ranked && (
                       <TableHead className="hidden w-56 lg:table-cell">
-                        Reward
-                      </TableHead>
+                        {t("reward")}</TableHead>
                     )}
                     <SortHead
                       column={TeamSortColumn.Players}
@@ -285,17 +287,15 @@ export function TournamentTeams({
                       onToggle={toggleSort}
                       className="w-24 text-right!"
                     >
-                      Players
-                    </SortHead>
+                      {t("players")}</SortHead>
                     <SortHead
                       column={TeamSortColumn.Winrate}
                       state={sort}
                       onToggle={toggleSort}
                       className="hidden w-24 text-right! sm:table-cell"
-                      label="WR"
+                      label={t("wr")}
                     >
-                      WR
-                    </SortHead>
+                      {t("wr")}</SortHead>
                     {/* Form beside career, and only while the tournament is
                         still ahead or in play: the window is the last 30 days
                         from now, so on a settled draw the column would rate the
@@ -307,7 +307,9 @@ export function TournamentTeams({
                         state={sort}
                         onToggle={toggleSort}
                         className="hidden w-28 text-right! sm:table-cell"
-                        label={`${RATING_METRIC_LABEL[metric]} over the last 30 days`}
+                        label={t("metric-over-last-30-days", {
+                          metric: RATING_METRIC_LABEL[metric],
+                        })}
                       >
                         {RATING_METRIC_LABEL[metric]} · 30d
                       </SortHead>
@@ -360,8 +362,7 @@ export function TournamentTeams({
                             through, and a badge beside them would repeat it. */}
                         {went && (
                           <span className="ml-2 inline-block rounded-sm bg-emerald-500/15 px-1.5 py-0.5 align-middle text-[10px] font-semibold tracking-wide whitespace-nowrap text-emerald-600 uppercase dark:text-emerald-400">
-                            Qualified
-                          </span>
+                            {t("qualified")}</span>
                         )}
                       </TableCell>
                       {bands.length > 0 && ranked && (
@@ -399,7 +400,7 @@ export function TournamentTeams({
                             {DASH}
                           </span>
                         ) : (
-                          pctFmt.format(winrate)
+                          num(PCT_FORMAT).format(winrate)
                         )}
                       </TableCell>
                       {scouting && (
@@ -410,8 +411,11 @@ export function TournamentTeams({
                           )}
                           title={
                             recent === null
-                              ? "None of this roster has played in the last 30 days"
-                              : `Average over the ${team.rated30dPlayers} of ${size} players who played in the last 30 days`
+                              ? t("none-played-in-30-days")
+                              : t("average-over-recent", {
+                                  rated: team.rated30dPlayers,
+                                  size,
+                                })
                           }
                         >
                           {recent === null ? (
@@ -419,7 +423,7 @@ export function TournamentTeams({
                               {DASH}
                             </span>
                           ) : (
-                            intFmt.format(recent)
+                            num(INT_FORMAT).format(recent)
                           )}
                         </TableCell>
                       )}
@@ -435,7 +439,10 @@ export function TournamentTeams({
                         title={
                           rating === null
                             ? undefined
-                            : `Average over ${team.ratedPlayers} of ${size} players`
+                            : t("average-over-rated", {
+                                rated: team.ratedPlayers,
+                                size,
+                              })
                         }
                       >
                         {rating === null ? (
@@ -443,7 +450,7 @@ export function TournamentTeams({
                             {DASH}
                           </span>
                         ) : (
-                          intFmt.format(rating)
+                          num(INT_FORMAT).format(rating)
                         )}
                       </TableCell>
                     </TableRow>

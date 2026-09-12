@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname} klanų istorija",
+  "clans-in-clans": "{totalClans} klanai · {timeInClansSeconds} klanuose",
+  "current": "dabartinis",
+  "duration": "Trukmė",
+  "from": "Iš",
+  "name": "Pavadinimas",
+  "no-clan-history": "Klanų istorijos nėra.",
+  "role": "Vaidmuo",
+  "tag": "Žymė",
+  "to": "Iki"
+}

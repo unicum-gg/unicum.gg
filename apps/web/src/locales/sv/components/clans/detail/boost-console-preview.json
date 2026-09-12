@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktiva dagar",
+  "add-workflow": "Lägg till arbetsflöde",
+  "connect-discord": "Anslut Discord",
+  "discord-notifications": "Discord-notiser",
+  "each-workflow-activates-its-reserves": "Varje arbetsflöde aktiverar sina reserver inom ett tidsfönster när tillräckligt många medlemmar deltar i en pågående spelsession. Det körs på ditt konto, så du behöver inte vara online. Lägg till så många arbetsflöden du behöver.",
+  "enabled": "Aktiverad",
+  "from": "Från",
+  "get-a-discord-message-in": "Få ett Discord-meddelande i en kanal du väljer varje gång en förstärkning aktiveras, så att hela klanen vet att den är aktiv.",
+  "log-in-with-wargaming-to": "Logga in med Wargaming för att konfigurera det",
+  "min-online": "Min online",
+  "officers": "Officers",
+  "only-an-officer-of-this": "Endast en officer i den här klanen kan konfigurera detta.",
+  "schedule-preview": "Schemapreview",
+  "set-your-hours-and-reserves": "Ställ in tider och reserver en gång. Förstärkningarna aktiveras sedan automatiskt i tid, även när ingen är där för att trycka på knappen.",
+  "stronghold-boosts": "Fästningsbonusar",
+  "times-are-in-your-timezone": "Tiderna anges i {tz}, din tidszon.",
+  "to": "Till"
+}

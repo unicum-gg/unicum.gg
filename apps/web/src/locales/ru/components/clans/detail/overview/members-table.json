@@ -1,0 +1,11 @@
+{
+  "player": "Игрок",
+  "role": "Роль",
+  "battles": "Бои",
+  "joined": "Присоединился",
+  "period": "30 д. {metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

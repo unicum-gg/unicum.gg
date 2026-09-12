@@ -1,0 +1,16 @@
+{
+  "title": "Chúng tôi sử dụng cookie",
+  "description": "Chúng tôi sử dụng cookie để cải thiện trải nghiệm duyệt web và phân tích lưu lượng trang web.",
+  "functional": {
+    "title": "Chức năng",
+    "description": "Cần thiết để trang web hoạt động đúng cách (tùy chọn, chọn khu vực)."
+  },
+  "analytics": {
+    "title": "Đo lường lượt truy cập",
+    "description": "Google Analytics, đặt cookie để giúp chúng tôi hiểu cách trang web được sử dụng. Phân tích ẩn danh không dùng cookie (Umami) vẫn hoạt động trong mọi trường hợp."
+  },
+  "save": "Lưu lựa chọn của tôi",
+  "decline": "Từ chối tất cả",
+  "customize": "Tùy chỉnh",
+  "accept": "Chấp nhận tất cả"
+}

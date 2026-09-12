@@ -53,8 +53,12 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *     calibrating gun deploys, which of the seven mechanics the vehicle's
  *     second state is, the vehicle this one was made from, and the gun's
  *     depression and elevation, which were each other's.
+ * v11: the historical description in every language the WG encyclopedia answers
+ *     in. Reading it is guarded (an entry without it falls back to the English
+ *     already on the payload), so this bump is about the 26 hours a French
+ *     reader would otherwise keep being served the English one, not a crash.
  */
-const SHAPE_VERSION = 10;
+const SHAPE_VERSION = 19;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

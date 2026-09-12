@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Válassz egy rekeszt az ütemezés előnézetéhez.",
+  "schedule": "Az aktív napokon {times} időpontban aktiválódik, alkalmanként {hours} órán át, és {window} időszakot fed le, amint eléri az online küszöbértéket."
+}

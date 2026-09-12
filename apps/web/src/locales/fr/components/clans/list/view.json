@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Meilleurs <accent>clans</accent>",
+    "language": "Meilleurs clans <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Classement {region}, établi selon la moyenne de {metric} des membres suivis de chaque clan (au moins 50 membres ayant disputé des batailles).",
+    "language": "Clans {region} ayant déclaré {language} comme l’une de leurs langues, classés selon la moyenne de {metric} de leurs membres suivis (au moins 25 membres ayant disputé des batailles).",
+    "strict": "Clans {region} ayant déclaré {language} comme seule langue, classés selon la moyenne de {metric} de leurs membres suivis (au moins 25 membres ayant disputé des batailles)."
+  },
+  "board": {
+    "all": "Les {count} meilleurs clans selon {metric}",
+    "language": "Les {count} meilleurs clans {language} selon {metric}",
+    "strict": "Les {count} meilleurs clans exclusivement {language} selon {metric}"
+  },
+  "members": "Membres",
+  "strict-toggle": "Strict",
+  "any-toggle": "Tout",
+  "all-languages": "Toutes les langues",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

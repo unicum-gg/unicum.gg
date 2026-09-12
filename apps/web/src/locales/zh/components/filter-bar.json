@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "在 {count} 辆坦克中搜 索",
+    "rated-tanks": "在 {count} 辆评级坦克中搜 索",
+    "videos": "在 {count} 个视频中搜 索",
+    "players": "搜 索 {count} 名玩家",
+    "clans": "搜 索 {count} 个军团",
+    "tournaments": "搜 索 {count} 个锦标赛",
+    "teams": "搜 索 {count} 支队伍"
+  },
+  "min": "最小",
+  "max": "最大",
+  "none": "无",
+  "common-test": "公共测试变更：新车辆和重新平衡的车辆",
+  "category": {
+    "standard": "标准",
+    "premium": "高级账号",
+    "reward": "奖励"
+  },
+  "moe": {
+    "0": "暂无标记",
+    "1": "1分",
+    "2": "2分",
+    "3": "3分"
+  },
+  "mom": {
+    "0": "暂无徽章",
+    "1": "三等",
+    "2": "二等",
+    "3": "一等",
+    "4": "顶尖坦克手"
+  }
+}

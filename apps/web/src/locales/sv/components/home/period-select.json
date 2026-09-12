@@ -1,0 +1,7 @@
+{
+  "label": "Period för topplistan",
+  "periods": {
+    "overall": "Övergripande",
+    "30d": "Senaste 30 dagarna"
+  }
+}

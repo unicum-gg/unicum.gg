@@ -1,7 +1,14 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { CaretRightIcon } from "@phosphor-icons/react";
-import Link from "next/link";
+import Link from "@/components/link";
 import { Fragment, useState } from "react";
 import { toRoman } from "roman-numerals";
 import type { PlayerSession, RatingMetric } from "@unicum.gg/shared";
@@ -21,12 +28,12 @@ import ROUTES from "@/constants/routes";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
-import { DASH, sessionIntFmt as intFmt, visibleSessionColumns } from "./columns";
+import { DASH, visibleSessionColumns } from "./columns";
 
-const dec1Fmt = new Intl.NumberFormat("en-US", {
+const DEC1_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
+} as const;
 
 /**
  * One row per bucket of play, expandable into the vehicles that made it.
@@ -48,6 +55,12 @@ export function PlayerSessionsTable({
   /** How a bucket's date reads, which depends on its size. */
   dateLabel: (period: string) => string;
 }) {
+  const { locale } = useLocale();
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/detail/sessions/table");
+  const { t: tCols } = useTranslation(
+    "components/players/detail/sessions/columns",
+  );
   const [open, setOpen] = useState<string | null>(null);
   const columns = visibleSessionColumns(sessions);
 
@@ -64,14 +77,14 @@ export function PlayerSessionsTable({
       >
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[1%] whitespace-nowrap">Date</TableHead>
+            <TableHead className="w-[1%] whitespace-nowrap">{t("date")}</TableHead>
             <TableHead className="text-end">
-              <GlossaryLabel>Battles</GlossaryLabel>
+              <GlossaryLabel>{t("battles")}</GlossaryLabel>
             </TableHead>
             <TableHead className={cn("text-end whitespace-nowrap", styles.hiddenColumn)}>
-              <GlossaryLabel>Avg tier</GlossaryLabel>
+              <GlossaryLabel>{t("avg-tier")}</GlossaryLabel>
             </TableHead>
-            <TableHead className={cn("text-end", styles.hiddenColumn)}>Tanks</TableHead>
+            <TableHead className={cn("text-end", styles.hiddenColumn)}>{t("tanks")}</TableHead>
             {columns.map((c) => {
               // The rating column's heading follows the reader's metric, so it
               // is looked up on what it currently says ("WN8"), never on the
@@ -85,8 +98,16 @@ export function PlayerSessionsTable({
                     c.hideOnMobile && styles.hiddenColumn,
                   )}
                 >
-                  <GlossaryLabel label={heading} tip={c.tip}>
-                    {heading}
+                  {/* Two different strings: `label` is the ANCHOR the glossary
+                      matches on and stays English by construction, while the
+                      children are what the reader sees. The rating column is
+                      the exception, since its heading is the metric's own name
+                      ("WN8"), which is a name in every language. */}
+                  <GlossaryLabel
+                    label={heading}
+                    tip={c.tip ? tCols(`${c.key}.tip`) : undefined}
+                  >
+                    {c.header ? heading : tCols(`${c.key}.label`)}
                   </GlossaryLabel>
                 </TableHead>
               );
@@ -115,16 +136,16 @@ export function PlayerSessionsTable({
                     </span>
                   </TableCell>
                   <TableCell className="text-end">
-                    {intFmt.format(s.battles)}
+                    {numberFormat(locale, INT_FORMAT).format(s.battles)}
                   </TableCell>
                   <TableCell className={cn("text-end", styles.hiddenColumn)}>
-                    {s.avgTier == null ? DASH : dec1Fmt.format(s.avgTier)}
+                    {s.avgTier == null ? DASH : num(DEC1_FORMAT).format(s.avgTier)}
                   </TableCell>
                   <TableCell className={cn("text-end", styles.hiddenColumn)}>
                     {s.tanks}
                   </TableCell>
                   {columns.map((c) => {
-                    const cell = c.cell(s, metric);
+                    const cell = c.cell(s, metric, locale);
                     return (
                       <TableCell
                         key={c.key}
@@ -168,7 +189,7 @@ export function PlayerSessionsTable({
                         </span>
                       </TableCell>
                       <TableCell className="text-end">
-                        {intFmt.format(v.battles)}
+                        {numberFormat(locale, INT_FORMAT).format(v.battles)}
                       </TableCell>
                       {/* The two the breakdown has nothing to put in (a vehicle
                           is one tier and one tank), hidden with the columns
@@ -176,7 +197,7 @@ export function PlayerSessionsTable({
                       <TableCell className={styles.hiddenColumn} />
                       <TableCell className={styles.hiddenColumn} />
                       {columns.map((c) => {
-                        const cell = c.cell(v, metric);
+                        const cell = c.cell(v, metric, locale);
                         return (
                           <TableCell
                             key={c.key}

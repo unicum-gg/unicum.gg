@@ -1,0 +1,6 @@
+{
+  "active-until": "{tz}까지 활성",
+  "n-left": "{count}개 남음",
+  "no-reserves-in-stock-right": "현재 보유한 예비 물자가 없습니다.",
+  "reserves-to-activate": "활성화할 예비 물자"
+}

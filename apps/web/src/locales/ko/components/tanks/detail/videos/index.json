@@ -1,0 +1,10 @@
+{
+  "empty": "아직 영상 없음",
+  "see-all": "모두 보기 →",
+  "see-all-count": "모두 보기 ({count}) →",
+  "watch-on-youtube": "YouTube에서 보기",
+  "play": "{title} 재생",
+  "log-in": "로그인하여 영상 제안",
+  "dmg": "대미지",
+  "no-community-video-for-the": "아직 {tankName} 커뮤니티 영상이 없습니다. 제안하면 관리자가 검토한 후 여기에 표시됩니다."
+}

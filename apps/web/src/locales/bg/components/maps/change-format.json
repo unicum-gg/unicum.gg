@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Ширина на игровата зона",
+    "height": "Височина на игровата зона",
+    "round-length": "Таймер на битката",
+    "team-size": "Размер на отбора",
+    "camouflage": "Сезон",
+    "presence": "В играта",
+    "variant-version": "Версия на {type}",
+    "play-area": "Игрална зона",
+    "bases-team1": "Бази на съюзниците",
+    "bases-team2": "Бази на Враг",
+    "spawns-team1": "Точки за поява на съюзниците",
+    "spawns-team2": "Точки за поява на Враг",
+    "control-point": "Контролна точка",
+    "artillery-headquarters": "Артилерийски щаб",
+    "comms-centers": "Центрове за комуникации",
+    "observation-posts": "Наблюдателни постове",
+    "points-of-interest": "Важни точки"
+  },
+  "summary": {
+    "added": "Добавено: {name}",
+    "removed": "Премахнато: {name}",
+    "added-to-game": "Добавено към играта",
+    "removed-from-game": "Премахнато от играта",
+    "added-on-test": "Добавено в тестовия клиент",
+    "removed-on-test": "Премахнато от тестовия клиент",
+    "mode-added": "Добавен режим: {name}",
+    "mode-removed": "Премахнат режим: {name}",
+    "now-played-in": "Сега се играе в {name}",
+    "no-longer-played-in": "Вече не се играе в {name}",
+    "event-added": "{name} вече може да се случи по време на битката",
+    "event-removed": "{name} вече не се случва",
+    "moved": "Преместено: {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

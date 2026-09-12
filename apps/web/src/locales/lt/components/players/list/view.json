@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>žaidėjai</accent>",
+    "language": "Geriausi <accent>{language}</accent> žaidėjai"
+  },
+  "intro": {
+    "all": "{region} lyderių lentelė, surikiuota pagal visų laikų {metric} (mažiausiai 20 000 mūšių).",
+    "language": "{region} žaidėjai, kurių numanomame klano istorijos kalbų rinkinyje yra {language}, surikiuoti pagal {metric} (mažiausiai 10 000 mūšių).",
+    "strict": "{region} žaidėjai, kurių numanoma klano istorijos kalba yra tik {language}, surikiuoti pagal {metric} (mažiausiai 10 000 mūšių)."
+  },
+  "board": {
+    "all": "{count} geriausi žaidėjai pagal {metric}",
+    "language": "{count} geriausi {language} žaidėjai pagal {metric}",
+    "strict": "{count} geriausi tik {language} žaidėjai pagal {metric}"
+  },
+  "modes": {
+    "overall": "Bendrai"
+  },
+  "columns": {
+    "player": "Žaidėjas"
+  },
+  "strict-toggle": "Griežtas",
+  "any-toggle": "Bet kuris",
+  "all-languages": "Visos kalbos",
+  "battles": "Mūšiai",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

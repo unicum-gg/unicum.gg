@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Cosa pensano i giocatori di questo carro",
+  "not-rated": "Non ancora valutato, valutalo per primo",
+  "votes": "{count} voti",
+  "votes-one": "{count} voto",
+  "stars": "{value} su {max}",
+  "not-rated-short": "Non valutato"
+}

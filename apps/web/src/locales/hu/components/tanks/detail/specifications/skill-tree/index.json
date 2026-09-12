@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Kattints egy elérhető csomópontra a feloldásához. Mindegyik a fenti jellemzőkre fejti ki hatását. A színek a tűzerő, a mozgékonyság, a túlélőképesség és a járműmechanika szerint csoportosítják a csomópontokat.",
+  "loadout-switch-no-effect": "Csata közbeni felszerelésváltás. Nincs jellemzőre gyakorolt hatás.",
+  "title": "Fejlesztések a(z) {tank} tankhoz",
+  "vehicle-mechanic-no-effect": "Járműmechanika. Nincs jellemzőre gyakorolt hatás."
+}

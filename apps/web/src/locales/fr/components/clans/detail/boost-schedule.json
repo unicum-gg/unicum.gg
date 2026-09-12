@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Sélectionnez une réserve pour afficher un aperçu du calendrier.",
+  "schedule": "Lors de vos jours actifs, il s’active aux horaires suivants : {times} (chaque activation dure {hours} h) et couvre {window} dès que le seuil minimal de joueurs en ligne est atteint."
+}

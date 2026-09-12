@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Танкове на {name} ({region}), всяка изиграна бойна машина",
+    "description": "Всеки танк, с който {name} е играл в {region}, с битки, процент победи, средни щети и WN8 за всяка бойна машина."
+  },
+  "achievements": {
+    "title": "Постижения на {name} ({region}), спечелени {medals} медала",
+    "description": "{medals} медала от World of Tanks, спечелени от {name} в {region}, от Колобанов и Пул до почетните звания и епичните медали, плюс всички, които още предстои да бъдат спечелени."
+  },
+  "tournaments": {
+    "title": "Турнири на {name} ({region})",
+    "description": "Всеки турнир на Wargaming, в който {name} е участвал в {region}: отборът, за който е играл, форматът и докъде е стигнал. Запис, публикуван от Wargaming само от страната на турнира, никога от страната на играча."
+  },
+  "value": {
+    "title": "Стойност на акаунта на {name} ({region})",
+    "description": "Колко струва акаунтът на {name} в World of Tanks в {region}: кредити, злато и опит, вложени в гаража."
+  },
+  "mode": {
+    "title": "Статистики на {name} в режим {mode} ({region})",
+    "description": "{name} в {region}, в режим {mode}: битки, процент победи и рейтинги за този режим, сравнени с базовите му резултати в случайни битки."
+  },
+  "overview": {
+    "title": "Статистики на {name} в World of Tanks ({region}), {battles} битки, {winrate}% процент победи",
+    "description": "{name} в {region}: {battles} битки, {winrate}% процент победи, рейтинг {rating}. Разбивка по танкове, WN8, WNX и пълна история на клановете."
+  },
+  "locked": {
+    "title": "Акаунтът на {name} в World of Tanks е заключен ({region})",
+    "description": "{name} ({region}) съществува, но Общ е заключил този акаунт, затова статистиките му за World of Tanks не са достъпни."
+  },
+  "empty": {
+    "title": "Статистики за играча {name} в World of Tanks ({region})",
+    "description": "Статистики за играча {name} в World of Tanks ({region}): рейтинги WN8 и WNX, процент победи, разбивка по танкове и пълна история на клановете."
+  }
+}

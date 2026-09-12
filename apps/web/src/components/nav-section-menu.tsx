@@ -1,7 +1,8 @@
 "use client";
 
+
 import type { ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
 import { regionFromPathname } from "@unicum.gg/wargaming";
 import {
   ChartLineUpIcon,
@@ -29,6 +30,7 @@ import {
 import { NavMoreMenu } from "@/components/nav-more-menu";
 import { navSections, type NavSectionId } from "@/components/nav-sections";
 import { useRegion } from "@/hooks/use-region";
+import { useTranslation } from "@/hooks/use-translation";
 
 /** An icon per sub-link, keyed by its stable `navSections` id. Kept here rather
  * than in `navSections` so that file stays a plain, footer-safe data module. */
@@ -67,7 +69,9 @@ const LINK_ICON: Record<string, ReactNode> = {
 export function NavSectionMenu({ section }: { section: NavSectionId }) {
   const { region } = useRegion();
   const pathname = usePathname();
-  const data = navSections(region).find((s) => s.id === section);
+  const { t } = useTranslation("components/nav-sections");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const data = navSections(region, t, tGame).find((s) => s.id === section);
   if (!data) return null;
 
   // Active when the section segment matches, region prefix aside, like the

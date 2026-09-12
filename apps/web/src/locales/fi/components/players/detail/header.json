@@ -1,0 +1,7 @@
+{
+  "joined": "Liittynyt {date}",
+  "last-battle": "Viimeisin taistelu {when}",
+  "never-played": "Ei ole koskaan pelannut",
+  "updated": "Päivitetty {when}",
+  "clan-role-joined": "{role} · liittyi {date}"
+}

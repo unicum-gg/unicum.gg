@@ -1,0 +1,12 @@
+{
+  "added": "Dodano",
+  "before-update": "Prije ažuriranja {version}",
+  "common-test": "Zajedničko testiranje",
+  "every-update-that-changed-this": "Svako ažuriranje koje je promijenilo ovu mapu, od najnovijeg prema najstarijem, pročitano iz samog klijenta igre.",
+  "in-the-game": "U igri",
+  "n-changes": "{count, plural, one {# promjena} few {# promjene} other {# promjena}}",
+  "not-released-wargaming-can-still": "Nije objavljeno. Wargaming još može promijeniti ili ukloniti bilo koji od ovih podataka prije objave ažuriranja.",
+  "removed": "Uklonjeno",
+  "title": "Promjene na karti {map}",
+  "update": "Obnovi {version}"
+}

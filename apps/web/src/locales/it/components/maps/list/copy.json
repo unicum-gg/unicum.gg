@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Tutte le {count} arene di battaglia di World of Tanks. Filtra per mimetizzazione e modalità di gioco, poi apri una mappa per visualizzarne la minimappa, le dimensioni, le bandiere delle basi e i punti di generazione specifici per modalità.",
+    "title": "Tutte le mappe di World of Tanks ({region}), ogni arena di battaglia",
+    "description": "Esplora tutte le mappe di World of Tanks nella regione {region}: minimappe, dimensioni, mimetizzazione e modalità di gioco supportate, con bandiere delle basi e punti di generazione specifici per modalità.",
+    "heading": "Tutte le <accent>mappe</accent>"
+  },
+  "battle-type": {
+    "intro": "Le {count} mappe di World of Tanks giocate in modalità {type}, {blurb}. Apri una mappa per visualizzarne la minimappa, le dimensioni, le bandiere delle basi e i punti di generazione specifici per modalità.",
+    "title": "Mappe di World of Tanks per la modalità {type} ({region}), tutte le arene della rotazione",
+    "description": "Tutte le mappe di World of Tanks nella rotazione della modalità {type} nella regione {region}: minimappe, dimensioni, mimetizzazione e modalità di gioco supportate, con bandiere delle basi e punti di generazione.",
+    "heading": "<accent>mappe</accent> {type}"
+  },
+  "blurbs": {
+    "random": "la rotazione standard 15 contro 15",
+    "battle_royale": "la modalità in cui vince l’ultimo carro rimasto",
+    "frontline": "la modalità su larga scala 30 contro 30",
+    "onslaught": "la modalità classificata 7 contro 7",
+    "onslaught_night": "la modalità classificata 7 contro 7 dopo il tramonto, con visuale ridotta, attualmente giocabile nel Test comune",
+    "grand_battle": "la modalità 30 contro 30 di livello X",
+    "clan_wars": "guerre tra clan e avanzate",
+    "waffentrager": "l’evento Waffenträger",
+    "last_stand": "l’evento Ultima resistenza",
+    "arcade": "eventi arcade e speciali",
+    "story_mode": "le operazioni narrative",
+    "training": "stanze di addestramento e tutorial"
+  }
+}

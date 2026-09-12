@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { CardsThreeIcon, RowsIcon } from "@phosphor-icons/react";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -33,19 +34,20 @@ export function VideosViewToggle({
   view: VideosView;
   onChange: (view: VideosView) => void;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/view-toggle");
   return (
     <div className="flex items-center rounded-md border border-fd-border">
       <ViewButton
         active={view === VideosView.Cards}
         onClick={() => onChange(VideosView.Cards)}
-        label="Cards"
+        label={t("cards")}
       >
         <CardsThreeIcon className="size-4" />
       </ViewButton>
       <ViewButton
         active={view === VideosView.Table}
         onClick={() => onChange(VideosView.Table)}
-        label="Table"
+        label={t("table")}
       >
         <RowsIcon className="size-4" />
       </ViewButton>

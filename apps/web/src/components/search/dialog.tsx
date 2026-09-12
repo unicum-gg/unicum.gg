@@ -10,7 +10,8 @@ import {
   SearchDialogOverlay,
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
+import { useRouter } from "@/hooks/use-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
 import { ResultsArea } from "@/components/search/results-area";
@@ -35,6 +36,7 @@ import {
   Region,
   regionFromPathname,
 } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 const MIN_QUERY_LENGTH = 3;
 
@@ -101,6 +103,7 @@ export default function SearchDialog(props: SharedProps) {
     if (props.open) void refreshHistory();
   }, [props.open, refreshHistory]);
 
+  const { t } = useTranslation("components/search");
   const trimmedQuery = query.trim();
   const onFirstResults = useCallback(() => setActiveIndex(0), []);
   const { sections, anyLoading, allErrored, allEmpty, reset } = useSearchResults(
@@ -118,12 +121,12 @@ export default function SearchDialog(props: SharedProps) {
   // they start typing.
   const queryIsEmpty = trimmedQuery.length < MIN_QUERY_LENGTH;
   const historyRows = useMemo(
-    () => (queryIsEmpty ? flattenHistory(recent, favorites) : []),
-    [queryIsEmpty, recent, favorites],
+    () => (queryIsEmpty ? flattenHistory(recent, favorites, t) : []),
+    [queryIsEmpty, recent, favorites, t],
   );
   const searchRows = useMemo(
-    () => flattenSections(region, sections),
-    [region, sections],
+    () => flattenSections(region, sections, t),
+    [region, sections, t],
   );
   const rows = queryIsEmpty ? historyRows : searchRows;
   const selectable = useMemo(() => selectableRows(rows), [rows]);
@@ -224,7 +227,7 @@ export default function SearchDialog(props: SharedProps) {
           <SearchDialogHeader>
             <SearchDialogIcon />
             <SearchDialogInput
-              placeholder="Search players, clans, tanks, maps or terms"
+              placeholder={t("placeholder")}
               onKeyDown={onKeyDown}
             />
             <SearchDialogClose />

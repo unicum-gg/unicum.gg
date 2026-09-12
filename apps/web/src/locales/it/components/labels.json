@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "In attesa del primo snapshot",
+    "hidden": "Nascosto da Wargaming",
+    "active_24h": "Attivo < 24 h",
+    "active_7d": "Attivo < 7 giorni",
+    "recent_30d": "Recente < 30 giorni",
+    "recent_90d": "Recente < 90 giorni",
+    "dormant_1y": "Dormiente < 1 anno",
+    "inactive": "Inattivo > 1 anno"
+  },
+  "rating-hype": {
+    "overrated": "Sopravvalutato",
+    "fair": "Valutato equamente",
+    "underrated": "Sottovalutato"
+  },
+  "rating-consensus": {
+    "agreed": "Ampia convergenza",
+    "mixed": "Opinioni miste",
+    "divisive": "Divisivo"
+  },
+  "rating-axes": {
+    "overall": "Globale",
+    "fun": "Divertimento",
+    "firepower": "Potenza di fuoco",
+    "armour": "Corazza",
+    "mobility": "Mobilità",
+    "gunHandling": "Maneggevolezza del cannone",
+    "concealment": "Mimetismo",
+    "beginnerFriendliness": "Amichevole per i principianti",
+    "versatility": "Versatilità"
+  },
+  "rating-axis-hints": {
+    "overall": "Quanto è valido questo carro, considerando tutti gli aspetti?",
+    "fun": "Quanto ti diverti a usarlo?",
+    "firepower": "Danno alfa, danno al minuto e penetrazione.",
+    "armour": "Quanto riesce a far rimbalzare i colpi, in hull-down e allo scoperto.",
+    "mobility": "Velocità, accelerazione e capacità di sterzata.",
+    "gunHandling": "Tempo di puntamento, dispersione e precisione in movimento.",
+    "concealment": "Occultamento e raggio visivo.",
+    "beginnerFriendliness": "Quanto perdona gli errori se stai ancora imparando.",
+    "versatility": "È efficace su qualsiasi mappa e in qualsiasi squadra?"
+  },
+  "voter-brackets": {
+    "unknown": "Non valutato",
+    "learning": "In fase di apprendimento",
+    "average": "Media",
+    "strong": "Forte",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Veicoli",
+    "gunnery": "Tiro",
+    "armor": "Corazza",
+    "mobility": "Mobilità",
+    "vision": "Visione",
+    "crew": "Equipaggio",
+    "progression": "Progressione",
+    "economy": "Economia",
+    "ratings": "Valutazioni",
+    "statistics": "Statistiche",
+    "modes": "Modalità di battaglia",
+    "tactics": "Tattiche",
+    "slang": "Gergo"
+  }
+}

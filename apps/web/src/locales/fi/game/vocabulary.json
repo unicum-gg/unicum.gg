@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Satunnainen",
+    "battle_royale": "Teräksen metsästäjä",
+    "frontline": "Etulinja",
+    "onslaught": "Rynnistys",
+    "onslaught_night": "{onslaught} Yö",
+    "grand_battle": "Suurtaistelu",
+    "clan_wars": "Klaanisodat",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arcade",
+    "story_mode": "Tarinatila",
+    "training": "Koulutus"
+  },
+  "player-modes": {
+    "overall": "Satunnaista taistelua",
+    "skirmish": "Kahakka",
+    "advances": "Hyökkäysoperaatiot",
+    "grand": "Suurtaistelut",
+    "ranked": "Liigataistelut",
+    "cw-x": "Klaanisodat X",
+    "cw-viii": "Klaanisodat VIII",
+    "cw-vi": "Klaanisodat VI",
+    "steel-hunter": "Teräksen metsästäjä",
+    "onslaught": "Rynnistys"
+  },
+  "stronghold-tiers": {
+    "advances": "Hyökkäysoperaatiot",
+    "t10": "Kahakka T10",
+    "t8": "Kahakka T8",
+    "t6": "Kahakka T6"
+  },
+  "stronghold-periods": {
+    "24h": "Viimeiset 24 tuntia",
+    "7d": "Viimeiset 7 päivää",
+    "30d": "Viimeiset 30 päivää",
+    "overall": "Yhteensä"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Taisteluita",
+    "winrate": "Voittoaste"
+  },
+  "clan-boards": {
+    "advances": "Hyökkäysoperaatiot",
+    "t10": "Kahakka X",
+    "t8": "Kahakka VIII",
+    "t6": "Kahakka VI"
+  },
+  "map-modes": {
+    "standard": "Standardi",
+    "encounter": "Kohtaamistaistelu",
+    "assault": "Rynnäköijä",
+    "attack-defense": "Hyökkäys/Puolustus"
+  },
+  "map-camouflage": {
+    "summer": "Kesä",
+    "winter": "Talvi",
+    "desert": "Aavikko"
+  },
+  "map-poi": {
+    "1": "Tykistön päämaja",
+    "2": "Comms Center",
+    "3": "Observation Post"
+  },
+  "tournament-modes": {
+    "ctf": "Standardi",
+    "domination": "Kohtaamistaistelu",
+    "assault2": "Hyökkäys/Puolustus",
+    "comp7": "Rynnistys"
+  },
+  "battle-formats": {
+    "random": "Satunnainen",
+    "clan_wars": "Klaanisodat",
+    "advances": "Hyökkäysoperaatiot",
+    "skirmish": "Kahakka",
+    "maneuvers": "Manööverit",
+    "onslaught": "Rynnistys",
+    "tournament": "Turnaus"
+  },
+  "battle-results": {
+    "victory": "Voitto",
+    "defeat": "Tappio",
+    "draw": "Tasapeli"
+  },
+  "spawn-directions": {
+    "north": "Pohjoinen",
+    "south": "Etelä",
+    "east": "Itä",
+    "west": "Länsi"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Tulevat",
+    "registration_started": "Rekisteröinti avoinna",
+    "registration_finished": "Rekisteröinti suljettu",
+    "running": "Käynnissä",
+    "finished": "Päättymässä",
+    "complete": "Suoritettu"
+  },
+  "onslaught-tiers": {
+    "legend": "Legenda",
+    "champion": "Mestari",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Raskas",
+    "mediumTank": "Keskitaso",
+    "lightTank": "Kevyt",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Rynnäköijä",
+    "break": "Läpimurto",
+    "support": "Tukija",
+    "universal": "Monipuolinen",
+    "sniper": "Tarkka-ampuja",
+    "wheeled": "Pyörillä varustettu"
+  },
+  "mastery-badges": {
+    "class3": "3. Luokka",
+    "class2": "2. Luokka",
+    "class1": "1. Luokka",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Satunnaista taistelua",
+    "stronghold": "Linnoitus",
+    "skirmish": "Kahakka",
+    "clan-wars": "Klaanisodat"
+  },
+  "features": {
+    "stronghold": "Linnoitus",
+    "skirmish": "Kahakka",
+    "marks-of-excellence": "Merkit erinomaisuudesta",
+    "marks-of-mastery": "Mestaruusmerkit",
+    "personal-rating": "Henkilökohtainen luokitus",
+    "world-of-tanks-rating": "World of Tanks -luokitus",
+    "common-test": "Yhteinen testi",
+    "tournaments": "Turnaukset"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Markkia",
+    "3": "3 Markkia",
+    "name": "Merkit erinomaisuudesta"
+  }
+}

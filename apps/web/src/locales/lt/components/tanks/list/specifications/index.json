@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Eilutės per puslapį",
+  "previous-page": "Ankstesnis puslapis",
+  "page": "Puslapis {current} / {totalPages}",
+  "next-page": "Kita puslapis",
+  "all": "Visi"
+}

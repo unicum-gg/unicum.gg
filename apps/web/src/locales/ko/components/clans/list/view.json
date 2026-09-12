@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "상위 <accent>클랜</accent>",
+    "language": "상위 <accent>{language}</accent> 클랜"
+  },
+  "intro": {
+    "all": "{region} 순위표, 각 클랜의 추적된 구성원 전체의 평균 {metric} 기준 랭크, 전투가 있는 구성원 최소 50명.",
+    "language": "{language}을(를) 언어 중 하나로 선언한 {region} 클랜을 추적된 구성원의 평균 {metric} 기준으로 랭크, 전투가 있는 구성원 최소 25명.",
+    "strict": "{language}만을 언어로 선언한 {region} 클랜을 추적된 구성원의 평균 {metric} 기준으로 랭크, 전투가 있는 구성원 최소 25명."
+  },
+  "board": {
+    "all": "{metric} 기준 상위 {count}개 클랜",
+    "language": "{metric} 기준 상위 {count}개 {language} 클랜",
+    "strict": "{metric} 기준 상위 {count}개 순수 {language} 클랜"
+  },
+  "members": "회원",
+  "strict-toggle": "엄격한",
+  "any-toggle": "아무",
+  "all-languages": "모든 언어",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

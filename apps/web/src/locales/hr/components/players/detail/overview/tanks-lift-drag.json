@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Podizanje ocjene",
+    "blurb": "Tenki koji podupiru ukupnu ocjenu, njihovo bi uklanjanje snizilo ocjenu.",
+    "empty": "Nema tenka koji podupire ukupnu ocjenu."
+  },
+  "drag": {
+    "heading": "Snižavanje ocjene",
+    "blurb": "Tenki koji snižavaju ukupnu ocjenu, njihovo bi uklanjanje povisilo ocjenu.",
+    "empty": "Nijedan tenk ne snižava ukupnu ocjenu."
+  },
+  "if-removed": "{delta} ako se ukloni"
+}

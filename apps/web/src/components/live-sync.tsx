@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 import type { LiveUpdate, Unsubscribe } from "@unicum.gg/sdk";

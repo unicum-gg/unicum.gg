@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. Luokka",
+      "tip": "3. Luokka: XP:tä, joka tarvitaan 50 % pelaajista päihittämiseen"
+    },
+    "class2": {
+      "label": "2. Luokka",
+      "tip": "2. Luokka: XP:tä, joka tarvitaan 80 % pelaajista päihittämiseen"
+    },
+    "class1": {
+      "label": "1. Luokka",
+      "tip": "1. Luokka: XP:tä, joka tarvitaan 95 % pelaajista päihittämiseen"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Ace Tanker: XP:tä, joka tarvitaan 99 % pelaajista päihittämiseen"
+    }
+  },
+  "rows-per-page": "Rivit per sivu",
+  "previous-page": "Edellinen sivu",
+  "page": "Sivu {current} / {totalPages}",
+  "next-page": "Seuraava sivu",
+  "all": "Kaikki"
+}

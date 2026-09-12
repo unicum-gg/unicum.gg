@@ -1,0 +1,27 @@
+{
+  "placeholder": "Hae pelaajia, klaaneja, panssarivaunuja, karttoja tai termejä",
+  "type": "Etsi tyyppi",
+  "types": {
+    "all": "Kaikki",
+    "players": "Pelaajat",
+    "clans": "Klaanit",
+    "tanks": "Panssarivaunut",
+    "maps": "Kartat",
+    "glossary": "Sanasto"
+  },
+  "sections": {
+    "players": "Pelaajat",
+    "clans": "Klaanit",
+    "tanks": "Panssarivaunut",
+    "maps": "Kartat",
+    "glossary": "Sanasto",
+    "recent": "Viimeisimmät",
+    "favorites": "Suosikit"
+  },
+  "searching": "Haetaan…",
+  "errored": "Jokin meni pieleen. Yritä uudelleen.",
+  "empty": "Ei tuloksia löytynyt",
+  "remove-recent": "Poista viimeaikaisista",
+  "add-favorite": "Lisää suosikkeihin",
+  "remove-favorite": "Poista suosikeista"
+}

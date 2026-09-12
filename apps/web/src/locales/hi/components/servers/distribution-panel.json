@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "{region} के खिलाड़ियों की तुलना",
+  "median-n": "मध्यिका {value}",
+  "metric-rating": "{metric} रेटिंग",
+  "tracked-accounts-with-at-least": "कम से कम {minBattles} युद्ध वाले {players} ट्रैक किए गए खाते। रंग वही बैंड हैं जिनका उपयोग साइट हर जगह करती है।",
+  "win-rate": "जीत दर",
+  "win-rate-distribution-across-the-region-s-tr": "क्षेत्र के ट्रैक किए गए खिलाड़ियों में जीत दर का वितरण"
+}

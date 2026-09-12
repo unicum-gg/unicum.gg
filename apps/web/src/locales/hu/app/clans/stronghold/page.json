@@ -1,0 +1,4 @@
+{
+  "title": "Legjobb {tier} szintű klánok ({region})",
+  "description": "{region} régió {tier} szintű klánjainak ranglistája. Rangsorolás SR (csatározási értékelés), ELO, csaták száma és győzelmi arány alapján. Legalább {battles} csata."
+}

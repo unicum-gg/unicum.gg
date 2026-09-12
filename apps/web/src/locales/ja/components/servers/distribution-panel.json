@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "{region}プレイヤーの比較",
+  "median-n": "中央値 {value}",
+  "metric-rating": "{metric}レーティング",
+  "tracked-accounts-with-at-least": "{minBattles}戦以上の{players}追跡アカウント。色分けはサイト全体で使われているものと同じです。",
+  "win-rate": "勝率",
+  "win-rate-distribution-across-the-region-s-tr": "地域の追跡プレイヤーにおける勝率の分布"
+}

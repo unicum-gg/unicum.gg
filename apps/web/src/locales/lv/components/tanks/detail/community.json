@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Ko spēlētāji domā par šo tanku",
+  "not-rated": "Vēl nav novērtēts, esi pirmais",
+  "votes": "{count} balsis",
+  "votes-one": "{count} balsošana",
+  "stars": "{value} no {max}",
+  "not-rated-short": "Nav vērtēts"
+}

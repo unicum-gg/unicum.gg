@@ -1,0 +1,17 @@
+{
+  "average": "Ortalama",
+  "bad": "Kötü",
+  "below-avg": "Aşağı ortalama",
+  "color-thresholds-for-the-stronghold": "Kale tabloları için renk eşikleri. Her seviye için tek bir mutlak ölçek kullanılır, böylece SR veya SRB her yerde aynı klan kalitesi anlamına gelir.",
+  "excellent": "Mükemmel",
+  "good": "İyi",
+  "rating-colors": "Derecelendirme renkleri",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Süper",
+  "tier": "Seviye",
+  "top": "En iyi",
+  "very-bad": "Çok kötü",
+  "very-good": "Çok iyi",
+  "wr": "WR"
+}

@@ -1,0 +1,6 @@
+{
+  "search-player": "搜索玩家...",
+  "type-at-least-characters": "请输入至少 {MINQUERYLENGTH} 个字符。",
+  "searching": "搜索中...",
+  "no-matching-players": "没有匹配的玩家。"
+}

@@ -1,0 +1,13 @@
+{
+  "heading": "Beste spillere i <accent>{mode}</accent>",
+  "intro": "{mode} er World of Tanks’ battle royale-modus. Rangeringen for {region}, rangert etter HR, minimum 100 {mode}-kamper.",
+  "board": "De {count} beste spillerne i {mode}",
+  "columns": {
+    "player": "Spiller",
+    "battles": "Kamper",
+    "survival": "Overlevelse",
+    "survival-percent": "Overlevelse %",
+    "damage": "Gjennomsnittlig skade"
+  },
+  "scale-description": "Fargegrenser for {mode}-brettet, kalibrert etter spillerbestanden med minst 100 {mode}-kamper."
+}

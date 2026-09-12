@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Ändra allt som är fel, även fordonet. När du sparar skickas videon tillbaka till modereringskön, så en publicerad video tas ned tills den har godkänts igen.",
+  "correct-a-suggestion": "Korrigera ett förslag",
+  "could-not-load-that-suggestion": "Kunde inte läsa in det förslaget. Försök igen om ett ögonblick.",
+  "link-expired": "Den länken har gått ut. Tryck på Redigera igen på kortet i Discord för att få en ny.",
+  "loading": "Laddar…",
+  "log-in": "Logga in",
+  "log-in-with-the-account": "Logga in med kontot som användes för att föreslå videon för att korrigera den.",
+  "no-suggestion-with-that-id": "Det finns inget förslag med det id:t.",
+  "not-yours-to-correct": "Du kan inte korrigera det här förslaget."
+}

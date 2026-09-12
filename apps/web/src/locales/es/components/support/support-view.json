@@ -1,0 +1,15 @@
+{
+  "become-a-supporter": "Hazte Soporte",
+  "community-funded-ad-free": "Financiado por la comunidad · Sin anuncios",
+  "coverage-page": "página de cobertura",
+  "every-euro-keeps-running-supporters": "Cada euro mantiene {NAME} en funcionamiento. Los usuarios con Soporte reciben una insignia en su página de jugador y un lugar en el podio de abajo, pero nunca se restringe nada a quienes no contribuyen y jamás habrá anuncios. Es una suscripción mensual que controlas por completo.",
+  "how-is-funded": "Cómo se financia {NAME}",
+  "is-free-open-source-and": "{NAME} es gratuito, de código abierto y sin anuncios, y funciona con pérdidas. Nunca habrá anuncios. Si te resulta útil, aporta lo que quieras a partir de 3 € al mes y ayuda a mantener vivo y en crecimiento el rastreador de World of Tanks.",
+  "it-runs-on-a-single": "Funciona en un único servidor alquilado y cada euro se reinvierte en el proyecto: el servidor, la base de datos, las IP de salida incluidas en la lista blanca de Wargaming que nos permiten actualizar los datos de más jugadores y alguna promoción ocasional para llegar a más gente. Los usuarios con Soporte cubren la factura mensual. Todo ingreso adicional se destina a aumentar la capacidad y añadir nuevas funciones.",
+  "no-ads-no-investors-no": "Sin anuncios, sin inversores y sin venta de datos. {NAME} se financia íntegramente gracias a quienes lo usan.",
+  "no-supporters-yet-be-the": "Todavía no hay usuarios con Soporte. Sé el primero en el podio.",
+  "same-numbers-as": "Exactamente las mismas cifras que en {link}.",
+  "title": "Apoyo {name}",
+  "top-supporters": "Mejores patrocinadores",
+  "where-your-money-goes": "Adónde va tu dinero"
+}

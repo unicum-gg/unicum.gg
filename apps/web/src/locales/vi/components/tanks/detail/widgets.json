@@ -1,0 +1,12 @@
+{
+  "slot": "Ô {n}",
+  "slot-filled": "Ô {n}: {name}",
+  "consumable-slot": "Ô vật tư tiêu hao {n}",
+  "consumable-slot-filled": "Ô vật tư tiêu hao {n}: {name}",
+  "level": "Cấp {n}",
+  "stock": "Dự trữ",
+  "specialize": "Nhấp để chuyên môn hóa ô này.",
+  "clear-specialization": "Nhấp để xóa chuyên môn hóa của ô này.",
+  "crew-skills": "Kỹ năng kíp xe",
+  "shell-aria": "{name}: {damage} sát thương, {penetration} mm xuyên giáp"
+}

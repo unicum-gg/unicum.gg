@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Mga nangungunang <accent>klan</accent>",
+    "language": "Mga nangungunang <accent>{language}</accent> clan"
+  },
+  "intro": {
+    "all": "Talaan ng ranggo ng {region}, naka-rank ayon sa {metric} na naka-average sa mga sinusubaybayang miyembro ng bawat clan (pinakamababa ay 50 miyembrong may mga laban).",
+    "language": "Mga clan sa {region} na nagdeklara sa {language} bilang isa sa kanilang mga wika, naka-rank ayon sa {metric} na naka-average sa kanilang mga sinusubaybayang miyembro (pinakamababa ay 25 miyembrong may mga laban).",
+    "strict": "Mga clan sa {region} na nagdeklara sa {language} bilang tanging wika nila, naka-rank ayon sa {metric} na naka-average sa kanilang mga sinusubaybayang miyembro (pinakamababa ay 25 miyembrong may mga laban)."
+  },
+  "board": {
+    "all": "Nangungunang {count} clan ayon sa {metric}",
+    "language": "Nangungunang {count} {language} clan ayon sa {metric}",
+    "strict": "Nangungunang {count} clan na puro {language} ayon sa {metric}"
+  },
+  "members": "Mga miyembro",
+  "strict-toggle": "Mahigpit",
+  "any-toggle": "Anuman",
+  "all-languages": "Lahat ng wika",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

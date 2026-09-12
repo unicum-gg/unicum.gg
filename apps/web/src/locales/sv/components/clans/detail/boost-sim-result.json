@@ -1,0 +1,11 @@
+{
+  "already-running": "redan igång",
+  "in-window": "i fönster",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Valda reserver: nej.",
+  "no-stock-ready": "Standard Redo: nej",
+  "not-available": "inte tillgänglig",
+  "threshold": "tröskel ({online}/{min})",
+  "would-activate": "skulle aktivera",
+  "would-not-fire": "Just nu skulle den inte aktiveras."
+}

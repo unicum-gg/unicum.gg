@@ -1,0 +1,13 @@
+{
+  "assists": "Assists",
+  "close": "Close",
+  "damage": "Damage",
+  "in-the-queue": "It is in the queue, and shows up on this tab once a moderator has looked at it.",
+  "optional": "(optional)",
+  "paste-a-youtube-link": "Paste a YouTube link, then set the exact moment the battle starts. Everyone who opens it lands on that second, so a suggestion whose timestamp is off is turned down in review.",
+  "sending": "Sending…",
+  "suggest": "Suggest",
+  "suggest-a-video": "Suggest a video",
+  "suggest-another": "Suggest another",
+  "suggestion-sent": "Suggestion sent"
+}

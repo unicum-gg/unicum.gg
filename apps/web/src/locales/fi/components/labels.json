@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Odottaa ensimmäistä kuvaa",
+    "hidden": "Wargamingin piilottama",
+    "active_24h": "Aktiivinen < 24 t",
+    "active_7d": "Aktiivinen < 7 p",
+    "recent_30d": "Äskettäinen < 30 p",
+    "recent_90d": "Äskettäinen < 90 p",
+    "dormant_1y": "Käyttämätön < 1 v",
+    "inactive": "Epäaktiivinen > 1 v"
+  },
+  "rating-hype": {
+    "overrated": "Ylätetty",
+    "fair": "Kohtuullisesti arvioitu",
+    "underrated": "Alaarvostettu"
+  },
+  "rating-consensus": {
+    "agreed": "Laaja yhteisymmärrys",
+    "mixed": "Sekalaisia mielipiteitä",
+    "divisive": "Jakava"
+  },
+  "rating-axes": {
+    "overall": "Yhteensä",
+    "fun": "Hauskuus",
+    "firepower": "Tulivoima",
+    "armour": "Panssarointi",
+    "mobility": "Liikkuvuus",
+    "gunHandling": "Aseenkäsittely",
+    "concealment": "Naamiointi",
+    "beginnerFriendliness": "Aloittelijaystävällinen",
+    "versatility": "Monikäyttöisyys"
+  },
+  "rating-axis-hints": {
+    "overall": "Kuinka hyvä tämä panssarivaunu on kaikki huomioon ottaen?",
+    "fun": "Kuinka paljon nautit sillä pelaamisesta?",
+    "firepower": "Alfavahinko, vahinko minuutissa ja läpäisy.",
+    "armour": "Kuinka paljon se kimpoaa, runko piilossa ja avoimella alueella.",
+    "mobility": "Nopeus, kiihtyvyys ja kääntyminen.",
+    "gunHandling": "Tähtäysaika, hajonta ja tarkkuus liikkeessä.",
+    "concealment": "Naamiointi ja näkyvyysalue.",
+    "beginnerFriendliness": "Kuinka anteeksiantava se on, jos vielä opettelet.",
+    "versatility": "Toimiiko se millä tahansa kartalla ja missä tahansa joukkueessa?"
+  },
+  "voter-brackets": {
+    "unknown": "Arvioimaton",
+    "learning": "Oppiminen",
+    "average": "Keskimääräinen",
+    "strong": "Vahva",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vaunut",
+    "gunnery": "Ampuminen",
+    "armor": "Selviytymiskyk",
+    "mobility": "Liikkuvuus",
+    "vision": "Näkemys",
+    "crew": "Miehistö",
+    "progression": "Eteneminen",
+    "economy": "Talous",
+    "ratings": "Arvioinnit",
+    "statistics": "Tilastot",
+    "modes": "Taistelutilat",
+    "tactics": "Taktiikka",
+    "slang": "Slangi"
+  }
+}

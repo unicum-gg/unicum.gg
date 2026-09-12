@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "1戦あたりの平均スコア",
+  "general-parameters": "通算スコア",
+  "metric-progression": "{metric}の推移",
+  "not-enough-history-on-this": "この戦車の履歴はまだ不十分です。推移を表示するには、過去90日間に少なくとも2回のスナップショットが必要です。",
+  "record-score": "最高スコア",
+  "updated": "更新日期"
+}

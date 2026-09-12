@@ -1,0 +1,7 @@
+{
+  "loader": "Loader",
+  "radioman": "Radio Operator",
+  "driver": "Driver",
+  "gunner": "Gunner",
+  "commander": "Commander"
+}

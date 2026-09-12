@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Build link copied",
+  "copy-build-link": "Copy build link",
+  "could-not-copy-link": "Could not copy link",
+  "include-setup": "Include setup",
+  "share-build": "Share build",
+  "share-tank": "Share {tank}",
+  "share-text": "Check out this {tank} build on {app}"
+}

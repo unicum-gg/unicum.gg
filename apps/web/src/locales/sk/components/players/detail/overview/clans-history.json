@@ -1,0 +1,12 @@
+{
+  "clans-history": "História členstva v klanoch: {nickname}",
+  "clans-in-clans": "{totalClans} klanov · {timeInClansSeconds} v klanoch",
+  "current": "aktuálne",
+  "duration": "Trvanie",
+  "from": "Od",
+  "name": "Názov",
+  "no-clan-history": "Žiadna história členstva v klanoch.",
+  "role": "Úloha",
+  "tag": "Štítok",
+  "to": "K"
+}

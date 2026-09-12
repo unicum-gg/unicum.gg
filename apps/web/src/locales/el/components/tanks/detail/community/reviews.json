@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} μάχες με αυτό",
+  "damage": "{damage} Φθορά",
+  "n-marks": "{count, plural, one {# σήμα} other {# σήματα}}",
+  "no-written-opinions-yet-if": "Δεν υπάρχουν ακόμη γραπτές απόψεις. Αν έχετε τις μάχες, η δική σας θα είναι η πρώτη.",
+  "win-rate": "{toFixed}% ποσοστό νικών",
+  "written-on": "γράφτηκε στις {gameVersion}"
+}

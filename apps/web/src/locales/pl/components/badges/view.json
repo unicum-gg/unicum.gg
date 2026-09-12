@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Klasyfikacja {board}",
+  "carried-beside-a-clan-tag": "Wyświetlany obok tagu klanu. Emblemat pozycji oznacza miejsce w rywalizacji. Widniejąca na nim liczba wskazuje to miejsce, a kolor określa ranking. Za Oceny nie przyznaje się emblematu, ponieważ wysoka pozycja w WN8 nie jest czymś, co klan może wygrać.",
+  "clan-badges": "Odznaki klanu",
+  "clan-board": {
+    "name": "Ranking {board}, {rank}. miejsce",
+    "how": "Zajęcie {rank}. miejsca w rankingu {board}. Emblemat jest wyświetlany, dopóki klan utrzymuje to miejsce, i znika po jego utracie."
+  },
+  "clan-overflow": "Jeśli klan zajmuje więcej niż trzy miejsca, pozostałe są grupowane w emblemacie {plus}, od najlepszego, aby tag pozostał czytelny. Po najechaniu na emblemat wyświetlane są ich nazwy.",
+  "featured-tournament-winner": {
+    "name": "Wyróżniony turniej: zwycięzca",
+    "how": "Taka sama odznaka, lecz zdobywana podczas wydarzenia oznaczonego przez Wargaming jako Wyróżnione. Złota zamiast stalowej, dokładnie tak jak w przypadku graczy."
+  },
+  "heading": "Wszystkie odznaki {badge} i sposoby ich zdobycia",
+  "heading-accent": "odznaka",
+  "marks-carried-beside-a-nickname": "Znaki wyświetlane obok pseudonimu wszędzie tam, gdzie pojawia się on w serwisie {NAME}: w rankingach, składach klanów, wynikach wyszukiwania i drabinkach turniejowych.",
+  "n-badges": "{count} odznak",
+  "onslaught-champion": {
+    "name": "MISTRZ Natarcia",
+    "how": "Osiągnięcie rangi Czempion w trybie Natarcie, co jest minimalnym wymogiem, aby w ogóle pojawić się tutaj: {standings}. Odznaka pozostaje później na stałe. Spadek Klasyfikacji poniżej progu odbiera miejsce, ale nie zmienia faktu, że wcześniej zostało ono zajęte."
+  },
+  "onslaught-legend": {
+    "name": "Legenda Natarcia",
+    "how": "Zajęcie miejsca mieszczącego się w sezonowym limicie dla rangi Legenda. Jest to pozycja, a nie wynik, więc jednocześnie dostępna jest tylko określona liczba miejsc, a próg ocenia się względem sezonu, w którym miejsce zostało zajęte. Fiolet zamiast stalowego błękitu, czyli kolor, którym sama klasyfikacja oznacza rangę Legenda."
+  },
+  "player-badges": "Odznaki gracza",
+  "player-overflow": "Jeśli gracz ma więcej niż trzy odznaki, pozostałe są grupowane w emblemacie {plus} w podanej wyżej kolejności, aby pseudonim w tabeli pozostał czytelny. Po najechaniu na emblemat wyświetlane są ich nazwy, a każda nadal prowadzi do tego samego miejsca co jej własny emblemat.",
+  "ranked-standings": "ranking",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Kanał Twitch połączony z kontem. Połącz Twitch ze swoim profilem, aby go potwierdzić, a emblemat będzie prowadzić do Twojego kanału. Jest wyświetlany niezależnie od tego, czy trwa transmisja."
+  },
+  "streamer-who-is-on-air": "Streamer prowadzący transmisję otrzymuje również czerwoną etykietę LIVE. Nie trzeba jej zdobywać i nie pozostaje na stałe. Pojawia się wraz z rozpoczęciem transmisji i znika po jej zakończeniu, dlatego nigdy nie jest grupowana z innymi odznakami.",
+  "support-subscription": "wsparcie subskrypcyjne",
+  "supporter": {
+    "name": "Supporter"
+  },
+  "supporter-note": "Aktywne {link}, widoczne publicznie. Osoby ze statusem Supporter, które wolą pozostać anonimowe, zgodnie ze swoim wyborem nie otrzymują odznaki.",
+  "the-marks-a-player-or": "Znaki, które gracz lub klan może mieć w serwisie {NAME}, znaczenie każdego z nich oraz dokładne warunki ich zdobycia.",
+  "tournament-winner": {
+    "name": "Zwycięzca turnieju",
+    "how": "Turniej wygrany przez drużynę przypisaną do klanu. Wargaming rejestruje drużyny i konta, ale nigdy klany, dlatego przypisanie jest odtwarzane przez porównanie każdego składu z członkostwem w klanie według stanu z dnia zawodów."
+  },
+  "verified": {
+    "name": "Zweryfikowany",
+    "how": "Właściciel zalogował się za pomocą Wargaming.net ID i połączył to konto. Zalogowanie się jest jedynym wymogiem i nic nie kosztuje."
+  }
+}

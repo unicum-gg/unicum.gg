@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "{count} Panzer durchsuchen",
+    "rated-tanks": "{count} gewertete Panzer durchsuchen",
+    "videos": "{count} Videos durchsuchen",
+    "players": "{count} Spieler suchen",
+    "clans": "{count} Clans durchsuchen",
+    "tournaments": "{count} Turniere durchsuchen",
+    "teams": "{count} Teams durchsuchen"
+  },
+  "min": "Min.",
+  "max": "Max.",
+  "none": "Keine",
+  "common-test": "Geändert durch den Gemeinsamen Test: neue und neu ausbalancierte Fahrzeuge",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belohnung"
+  },
+  "moe": {
+    "0": "Noch keine Erfolgsmarkierung",
+    "1": "1 Punkt",
+    "2": "2 Punkte",
+    "3": "3 Punkte"
+  },
+  "mom": {
+    "0": "Noch kein Meisterschaftsabzeichen",
+    "1": "3. Klasse",
+    "2": "2. Klasse",
+    "3": "1. Klasse",
+    "4": "Ace Tanker"
+  }
+}

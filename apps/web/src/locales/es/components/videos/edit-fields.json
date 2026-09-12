@@ -1,0 +1,14 @@
+{
+  "close": "Cerrar",
+  "combined-damage": "Daño combinado",
+  "damage-dealt-plus-assisted-as": "Daño infligido más daño asistido, tal como los suma la pantalla posterior a la batalla.",
+  "format": "Formato",
+  "no-reason-recorded": "No se ha registrado ningún motivo, así que tiene valor preguntarlo en Discord antes de volver a enviarlo.",
+  "players-per-team": "Jugadores por equipo",
+  "save": "Guardar",
+  "saved-it-is-in-the": "Guardado. Está en la cola de moderación y aparecerá en el sitio cuando un moderador lo haya revisado.",
+  "saving": "Guardando…",
+  "tier": "nivel",
+  "turned-down": "Rechazado",
+  "what-was-played": "Lo que se jugó"
+}

@@ -1,0 +1,162 @@
+{
+  "columns-label": "Colunas",
+  "groups": {
+    "firepower": "Poder de fogo",
+    "gun-handling": "Manuseio de armas",
+    "mobility": "Mobilidade",
+    "survivability": "Sobrevivência",
+    "other": "Outro"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Dano por minuto"
+    },
+    "damage": {
+      "label": "Dano",
+      "tip": "Dano Alpha"
+    },
+    "moduleDamage": {
+      "label": "Dano em módulos"
+    },
+    "splashRadius": {
+      "label": "Raio de explosão"
+    },
+    "reload": {
+      "label": "Recarregamento",
+      "tip": "Recarga (carregador completo nos veículos com carregamento automático)"
+    },
+    "rof": {
+      "label": "Cadência de Tiro",
+      "tip": "Disparos por minuto"
+    },
+    "intraClipReload": {
+      "label": "Recarregamento Intra-Clip",
+      "tip": "Tempo entre disparos no carregador (veículos com carregamento automático)"
+    },
+    "penetration": {
+      "label": "Penetração",
+      "tip": "Penetração (mm), projétil padrão"
+    },
+    "caliber": {
+      "label": "Calibre",
+      "tip": "Calibre do projétil (mm)"
+    },
+    "shellVelocity": {
+      "label": "Velocidade da Munição",
+      "tip": "Velocidade do projétil (m/s)"
+    },
+    "accuracy": {
+      "label": "Precisão",
+      "tip": "Dispersão a 100 m (quanto menor, melhor)"
+    },
+    "aimTime": {
+      "label": "Tempo de Mira"
+    },
+    "dispMoving": {
+      "label": "Dispersão em movimento",
+      "tip": "Fator de dispersão em movimento"
+    },
+    "dispTankTraverse": {
+      "label": "Dispersão ao virar o veículo"
+    },
+    "dispTurretTraverse": {
+      "label": "Dispersão ao rodar a torre"
+    },
+    "dispAfterShot": {
+      "label": "Dispersão após disparar"
+    },
+    "dispWhileDamaged": {
+      "label": "Dispersão com o veículo danificado"
+    },
+    "gunArc": {
+      "label": "Arco do canhão",
+      "tip": "Arco horizontal de rotação do canhão"
+    },
+    "depression": {
+      "label": "Depressão / elevação do canhão",
+      "tip": "Depressão / elevação do canhão"
+    },
+    "speed": {
+      "label": "Velocidade (frente / marcha-atrás)",
+      "tip": "Velocidade máxima para a frente / marcha-atrás (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Virada do Casco"
+    },
+    "turretTraverse": {
+      "label": "Virada da Torre"
+    },
+    "enginePower": {
+      "label": "Poder",
+      "tip": "Potência do motor (cv)"
+    },
+    "powerWeight": {
+      "label": "Poder/Peso",
+      "tip": "cv por tonelada"
+    },
+    "terrainHard": {
+      "label": "Terreno duro",
+      "tip": "Resistência em terreno duro (quanto menor, melhor)"
+    },
+    "terrainMedium": {
+      "label": "Terreno médio"
+    },
+    "terrainSoft": {
+      "label": "Terreno macio"
+    },
+    "health": {
+      "label": "Vida",
+      "tip": "Pontos de vida"
+    },
+    "engineHealth": {
+      "label": "Pontos de vida do motor"
+    },
+    "engineFireChance": {
+      "label": "Chance de Incêndio no Motor"
+    },
+    "hullArmorFront": {
+      "label": "Blindagem do casco (frontal)",
+      "tip": "Blindagem frontal do casco (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Blindagem da torre (frontal)",
+      "tip": "Blindagem frontal da torre (mm)"
+    },
+    "trackArmor": {
+      "label": "Blindagem das lagartas"
+    },
+    "trackHealth": {
+      "label": "Pontos de vida das lagartas"
+    },
+    "trackRepairTime": {
+      "label": "Tempo de reparação das lagartas"
+    },
+    "ammoRackHealth": {
+      "label": "Durabilidade do paiol de munições"
+    },
+    "weight": {
+      "label": "Peso"
+    },
+    "viewRange": {
+      "label": "Alcance de Visão",
+      "tip": "Alcance de visão (m)"
+    },
+    "radioRange": {
+      "label": "Alcance do rádio",
+      "tip": "Alcance do sinal (m)"
+    },
+    "camoStill": {
+      "label": "Camuflagem parado"
+    },
+    "camoMoving": {
+      "label": "Camuflagem em movimento"
+    },
+    "camoStillFiring": {
+      "label": "Camuflagem após disparar com o veículo parado"
+    },
+    "camoMovingFiring": {
+      "label": "Camuflagem após disparar em movimento"
+    }
+  }
+}

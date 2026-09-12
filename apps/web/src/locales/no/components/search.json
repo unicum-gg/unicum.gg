@@ -1,0 +1,27 @@
+{
+  "placeholder": "Søk etter spillere, klaner, stridsvogner, kart eller uttrykk",
+  "type": "Søketype",
+  "types": {
+    "all": "Alle",
+    "players": "Spillere",
+    "clans": "Klaner",
+    "tanks": "Kjøretøy",
+    "maps": "Kart",
+    "glossary": "Ordlista"
+  },
+  "sections": {
+    "players": "Spillere",
+    "clans": "Klaner",
+    "tanks": "Kjøretøy",
+    "maps": "Kart",
+    "glossary": "Ordlista",
+    "recent": "Nylige",
+    "favorites": "Favoritter"
+  },
+  "searching": "Søker …",
+  "errored": "Noe gikk galt. Prøv igjen.",
+  "empty": "Ingen resultater funnet",
+  "remove-recent": "Fjern fra nylige",
+  "add-favorite": "Legg til i favoritter",
+  "remove-favorite": "Fjern fra favoritter"
+}

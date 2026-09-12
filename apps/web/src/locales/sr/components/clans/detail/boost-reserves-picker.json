@@ -1,0 +1,6 @@
+{
+  "active-until": "Активно до {tz}",
+  "n-left": "Преостало: {count}",
+  "no-reserves-in-stock-right": "Тренутно нема резерви на залихама.",
+  "reserves-to-activate": "Резерве за активирање"
+}

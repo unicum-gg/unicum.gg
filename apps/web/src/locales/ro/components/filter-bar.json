@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Caută printre {count} tancuri",
+    "rated-tanks": "Caută printre {count} tancuri clasate",
+    "videos": "Caută printre {count} videoclipuri",
+    "players": "Caută {count} jucători",
+    "clans": "Caută {count} clanuri",
+    "tournaments": "Caută {count} turnee",
+    "teams": "Caută {count} echipe"
+  },
+  "min": "Min",
+  "max": "Max",
+  "none": "Nimic",
+  "common-test": "Modificat de Testul Comun: vehicule noi și vehicule reechilibrate",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Recompensă"
+  },
+  "moe": {
+    "0": "Nicio marcă încă",
+    "1": "1 marcă",
+    "2": "2 mărci",
+    "3": "3 mărci"
+  },
+  "mom": {
+    "0": "Nicio insignă încă",
+    "1": "3rd Class",
+    "2": "2nd Class",
+    "3": "1st Class",
+    "4": "Ace Tanker"
+  }
+}

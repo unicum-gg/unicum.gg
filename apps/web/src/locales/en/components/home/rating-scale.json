@@ -1,0 +1,21 @@
+{
+  "title": "Rating scale",
+  "description": "Color thresholds used across the site for win rate and the rating metric selected in the navbar.",
+  "tier": "Tier",
+  "tiers": {
+    "top": "Top",
+    "excellent": "Excellent",
+    "super": "Super",
+    "very-good": "Very good",
+    "good": "Good",
+    "average": "Average",
+    "below-avg": "Below avg",
+    "bad": "Bad",
+    "very-bad": "Very bad"
+  },
+  "rating-colors": "Rating colors",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

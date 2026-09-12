@@ -1,0 +1,11 @@
+{
+  "closes": "बंद करें {when}",
+  "map-pool": "मानचित्र समूह",
+  "place": "स्थान",
+  "prize": "इनाम",
+  "prizes": "इनाम",
+  "qualified": "योग्य ({count})",
+  "register": "पंजीकरण करें",
+  "tournaments": "टूर्नामेंट्स",
+  "winner": "{count, plural, one {विजेता} other {विजेता}}"
+}

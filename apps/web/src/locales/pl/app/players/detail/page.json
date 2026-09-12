@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Czołgi: {name} ({region}), wszystkie używane pojazdy",
+    "description": "Każdy Czołg używany przez gracza {name} na serwerze {region}, z liczbą bitew, współczynnikiem zwycięstw, średnimi uszkodzeniami i WN8 dla każdego pojazdu."
+  },
+  "achievements": {
+    "title": "Osiągnięcia: {name} ({region}), zdobyte medale: {medals}",
+    "description": "Konto gracza {name} na serwerze {region}: zdobyte medale World of Tanks: {medals}, od medalu Kołobanowa i medalu Poola po odznaki honorowe i medale epickie, a także wszystkie, które wciąż można zdobyć."
+  },
+  "tournaments": {
+    "title": "Turnieje: {name} ({region})",
+    "description": "Każdy turniej Wargaming z udziałem gracza {name} na serwerze {region}: reprezentowana drużyna, format i osiągnięty etap. Są to dane publikowane przez Wargaming wyłącznie z perspektywy turnieju, nigdy z perspektywy gracza."
+  },
+  "value": {
+    "title": "Wartość konta: {name} ({region})",
+    "description": "Ile warte jest konto World of Tanks należące do gracza {name} na serwerze {region}: kredyty, złota i doświadczenie zgromadzone w garażu."
+  },
+  "mode": {
+    "title": "Statystyki: {name}, tryb {mode} ({region})",
+    "description": "Statystyki gracza {name} na serwerze {region} w trybie {mode}: bitwy, współczynnik zwycięstw i oceny dla tego trybu w porównaniu z bazowymi wynikami bitew losowych."
+  },
+  "overview": {
+    "title": "Statystyki World of Tanks: {name} ({region}), bitwy: {battles}, WR: {winrate}%",
+    "description": "Gracz {name} na serwerze {region}: bitwy: {battles}, współczynnik zwycięstw: {winrate}%, ocena: {rating}. Statystyki każdego czołgu, WN8, WNX i pełna historia przynależności do klanów."
+  },
+  "locked": {
+    "title": "Zablokowane konto World of Tanks: {name} ({region})",
+    "description": "Konto {name} ({region}) istnieje, ale Wargaming je zablokował, dlatego jego statystyki World of Tanks są niedostępne."
+  },
+  "empty": {
+    "title": "Statystyki gracza World of Tanks: {name} ({region})",
+    "description": "Statystyki gracza World of Tanks: {name} ({region}), WN8, WNX, współczynnik zwycięstw, statystyki każdego czołgu i pełna historia przynależności do klanów."
+  }
+}

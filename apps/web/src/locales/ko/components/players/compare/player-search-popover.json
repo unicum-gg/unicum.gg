@@ -1,0 +1,6 @@
+{
+  "search-player": "플레이어 검색...",
+  "type-at-least-characters": "유형을 {MINQUERYLENGTH}자 이상 입력하세요.",
+  "searching": "검색 중...",
+  "no-matching-players": "일치하는 플레이어가 없습니다."
+}

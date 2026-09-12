@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Euro cinsinden ücretlendirilir ve bugünkü kurla {currency} para birimine dönüştürülür.",
+  "cost-breakdown": "Maliyet dökümü",
+  "estimated-annual-cost": "Tahmini yıllık maliyet",
+  "fixed-month-bill-no-surprises": "Sürprizsiz, sabit aylık {totalAnnualEur} tutarında fatura: kiralık tek sunucu, veri yolunda üçüncü taraf SaaS yok. Yalnızca sunucuyu aştığımızda büyür. Daha fazla Wargaming aktarımı, daha fazla çıkış IP’si anlamına gelir.",
+  "free": "ücretsiz",
+  "one-off-spend": "Tek seferlik harcama",
+  "paid-once-so-it-is": "Bir kez ödendiği için yukarıdaki aylık faturaya dahil değildir. Projenin şu ana kadarki maliyetine yine de dahildir.",
+  "previously": "Önceki"
+}

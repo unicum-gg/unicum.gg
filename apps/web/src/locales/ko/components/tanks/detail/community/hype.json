@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "같은 단계에서 평가된 전차 중 상위 {value}% 이상",
+  "measured-hint": "같은 전차들 중 승률 순위",
+  "not-enough-votes-yet-to": "아직 투표가 부족하여 커뮤니티의 평가와 전차의 실제 성능을 비교할 수 없습니다.",
+  "perceived-hint": "단계 {tier}에서 평가된 전차 중 커뮤니티 순위",
+  "verdict": {
+    "overrated": "커뮤니티는 실제 성과보다 훨씬 높게 평가합니다.",
+    "fair": "이 전차에 대한 평판과 결과가 일치합니다.",
+    "underrated": "누구도 인정하는 것보다 실제 성능이 더 좋습니다."
+  },
+  "what-players-think": "플레이어들의 생각",
+  "what-the-data-says": "데이터가 말하는 것"
+}

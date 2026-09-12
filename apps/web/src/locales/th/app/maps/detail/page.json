@@ -1,0 +1,5 @@
+{
+  "title": "{map}: แผนที่ World of Tanks ({region})",
+  "description": "{map}: แผนที่ World of Tanks ขนาด {width} × {height} มม.",
+  "description-modes": "{map}: แผนที่ World of Tanks ขนาด {width} × {height} มม. ที่เล่นในโหมด {modes}"
+}

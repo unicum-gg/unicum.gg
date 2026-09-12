@@ -1,0 +1,6 @@
+{
+  "title": "Meilleurs clans de World of Tanks ({region})",
+  "description": "Classement des clans : {name}, région {region}, selon le WNX, avec filtrage par langue déclarée du clan.",
+  "og-title": "Meilleurs clans",
+  "og-subtitle": "Classement de la région {region}"
+}

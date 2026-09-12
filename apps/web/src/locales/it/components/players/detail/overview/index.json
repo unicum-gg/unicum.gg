@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistiche delle battaglie casuali di {nickname}",
+  "progression-title": "Progressione di {nickname} in {metric}",
+  "lift-drag-title": "Carri armati che influenzano la valutazione di {nickname}",
+  "progression-blurb": "La linea continua rappresenta il valore complessivo di {metric} (corrisponde alla colonna Totale qui sopra) e varia lentamente con l’accumularsi di nuove battaglie. La linea tratteggiata rappresenta il valore di {metric} per sessione, calcolato in base alle battaglie giocate dall’istantanea precedente. Mostra i periodi positivi e negativi. Il colore della linea segue la fascia di valutazione.",
+  "progression-empty": "Non ci sono ancora dati storici sufficienti. Serve almeno un’istantanea per tracciare la curva. Riprova tra poco."
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Cookieを使用しています",
+  "description": "閲覧体験の向上とサイトのトラフィック分析のためにCookieを使用しています。",
+  "functional": {
+    "title": "機能",
+    "description": "サイトを正常に機能させるために必要です（設定、地域の選択）。"
+  },
+  "analytics": {
+    "title": "利用状況の測定",
+    "description": "Google Analyticsは、サイトの利用状況を把握するためにCookieを設定します。匿名でCookieを使わない分析（Umami）は、どちらを選んでも利用されます。"
+  },
+  "save": "選択内容を保存",
+  "decline": "すべて拒否",
+  "customize": "カスタマイズ",
+  "accept": "承諾すべて"
+}

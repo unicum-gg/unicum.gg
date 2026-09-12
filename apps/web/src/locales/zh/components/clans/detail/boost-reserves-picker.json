@@ -1,0 +1,6 @@
+{
+  "active-until": "活跃至 {tz}",
+  "n-left": "剩余 {count} 个",
+  "no-reserves-in-stock-right": "当前没有库存储备。",
+  "reserves-to-activate": "要激活的储备"
+}

@@ -1,0 +1,7 @@
+{
+  "joined": "登録日 {date}",
+  "last-battle": "最後の戦闘 {when}",
+  "never-played": "戦闘履歴なし",
+  "updated": "更新日期 {when}",
+  "clan-role-joined": "{role} · {date}に加入"
+}

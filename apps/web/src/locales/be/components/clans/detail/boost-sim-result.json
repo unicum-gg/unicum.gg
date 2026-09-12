@@ -1,0 +1,11 @@
+{
+  "already-running": "уже працуе",
+  "in-window": "у акне",
+  "n-online": "/ {count} анлайн",
+  "no-reserves-selected": "Рэзервы не выбраны.",
+  "no-stock-ready": "няма гатовых запасаў",
+  "not-available": "недоступна",
+  "threshold": "параметр ({online}/{min})",
+  "would-activate": "актывізуе",
+  "would-not-fire": "Зараз ён не спрацуе."
+}

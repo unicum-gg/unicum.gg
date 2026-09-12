@@ -8,6 +8,7 @@ import type { Region } from "@unicum.gg/wargaming";
 import type { ClanSearchResult, GlossarySummary } from "@unicum.gg/shared";
 import type { TankSearchResult } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import type { MapSearchResult } from "@unicum.gg/core/wargaming/wot/maps";
+import { DEFAULT_LOCALE } from "@/lib/translations";
 
 export type SearchHistoryItem =
   | { kind: "player"; region: Region; player: SearchPlayerResult }
@@ -174,10 +175,13 @@ async function refreshFromApi(): Promise<void> {
   lastRefreshAt = now;
 
   const before = sharedState;
-  const fresh = await resolveHistoryItems([
-    ...before.recent,
-    ...before.favorites,
-  ]);
+  // The document's own language, not a hook: this runs from a module-level
+  // refresh with no React context, and `<html lang>` is what the page already
+  // states it is.
+  const fresh = await resolveHistoryItems(
+    [...before.recent, ...before.favorites],
+    document.documentElement.lang || DEFAULT_LOCALE,
+  );
   if (fresh.size === 0) {
     // Nothing came back (no entries, or every region's call failed). Let the
     // next open try again rather than sitting out the interval.

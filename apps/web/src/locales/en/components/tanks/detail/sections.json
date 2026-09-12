@@ -1,0 +1,14 @@
+{
+  "ammunition": "Ammunition",
+  "characteristics": "Characteristics of the {tank}",
+  "consumables": "Consumables",
+  "crew-level": "Crew level",
+  "crew-skills": "Crew Skills",
+  "equipment": "Equipment",
+  "field-mods": "Field Modifications",
+  "historical-reference": "Historical reference of the {tank}",
+  "modules": "Modules of the {tank}",
+  "research-path": "Tech tree branch of the {tank}",
+  "similar": "Tanks close to the {tank}",
+  "videos": "Videos of the {tank}"
+}

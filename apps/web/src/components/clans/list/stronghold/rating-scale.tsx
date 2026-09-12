@@ -1,3 +1,5 @@
+import { statLabel } from "@/components/stat-label";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Table,
   TableBody,
@@ -44,29 +46,30 @@ const TIER_LABEL: Record<RatingColor, string> = {
 /** Color thresholds for the stronghold board: win rate, SR and SRB. One
  * absolute scale for every tier, like WNX, so a value means the same everywhere. */
 export function StrongholdRatingScale() {
+  const { t: tCopy } = useTranslation("components/clans/list/stronghold/rating-scale");
+  const { t } = useTranslation("components/clans/list/stronghold/rating-scale");
+  const { t: tLocal } = useTranslation("components/clans/list/stronghold/rating-scale");
   const rows = strongholdScaleRanges();
   return (
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
-        Color thresholds for the stronghold boards. One absolute scale for every
-        tier, so an SR (or SRB) means the same clan quality everywhere.
-      </div>
+        {tCopy("color-thresholds-for-the-stronghold")}</div>
       <div className="mt-auto">
         <Table className="mb-px! [&_td]:min-w-0! [&_th]:min-w-0! [&_tr]:h-11">
           <TableHeader>
             <TableRow>
               {/* The rows are the colour bands, not vehicle tiers. */}
               <TableHead className="pl-4!">
-                <GlossaryLabel label="Rating colors">Tier</GlossaryLabel>
+                <GlossaryLabel label={t("rating-colors")}>{t("tier")}</GlossaryLabel>
               </TableHead>
               <TableHead className="text-right!">
-                <GlossaryLabel>WR</GlossaryLabel>
+                <GlossaryLabel>{t("wr")}</GlossaryLabel>
               </TableHead>
               <TableHead className="text-right!">
-                <GlossaryLabel>SR</GlossaryLabel>
+                <GlossaryLabel>{t("sr")}</GlossaryLabel>
               </TableHead>
               <TableHead className="pr-4 text-right!">
-                <GlossaryLabel>SRB</GlossaryLabel>
+                <GlossaryLabel>{t("srb")}</GlossaryLabel>
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -79,7 +82,7 @@ export function StrongholdRatingScale() {
                     RATING_COLOR_CLASS[r.color],
                   )}
                 >
-                  {TIER_LABEL[r.color]}
+                  {statLabel(TIER_LABEL[r.color], tLocal)}
                 </TableCell>
                 <TableCell className="text-right tabular-nums text-muted-foreground whitespace-nowrap">
                   {WR_RANGE[r.color]}

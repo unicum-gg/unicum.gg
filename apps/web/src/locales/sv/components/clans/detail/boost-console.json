@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Lägg till arbetsflöde",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Varje arbetsflöde aktiverar sina reserver under ett tidsfönster när tillräckligt många medlemmar deltar i en aktiv spelsession. Körs på ditt konto utan att du behöver vara online. Lägg till så många du behöver.",
+  "n-online": "/ {count} online",
+  "officer": "Officer",
+  "online": "Online",
+  "recent-activations": "senaste aktiveringar",
+  "reserve": "Reserve",
+  "stronghold-boosts": "Fästningsbonusar",
+  "when": "När",
+  "workflow": "Workflow"
+}

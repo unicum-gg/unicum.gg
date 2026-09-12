@@ -1,0 +1,35 @@
+{
+  "heading": "Legjobb játékosok a <accent>{mode}</accent> játékmódban",
+  "intro": "A(z) {mode} a World of Tanks kompetitív, 7v7-es rangsorolt játékmódja X. szinten. A(z) {region} ranglista közvetlenül a játék saját rangsorából.",
+  "season": {
+    "range": "{start} – {end}",
+    "final": "végeredmény",
+    "live": "folyamatban lévő szezon",
+    "updated": "frissítve: {when}"
+  },
+  "board": "A(z) {mode} legjobb {count} játékosa",
+  "columns": {
+    "player": "Játékos",
+    "rank": "Rang",
+    "battles": "Csaták",
+    "rating": "Értékelési pontok"
+  },
+  "alias": "({nickname} néven)",
+  "ranks": {
+    "title": "Rangok",
+    "meaning": "Jelentés",
+    "tier": "szint",
+    "intro": "A(z) {mode} ranglétráján csaták megnyerésével jutsz feljebb. Minden győzelem Értékelési pontokat ad a teljesítményed alapján. A(z) {champion} a pontokkal elérhető legmagasabb rang, amelynek elérése feljuttat a ranglistára. A(z) {legend} nem rögzített küszöbérték: a(z) {champion} játékosok legmagasabbra értékelt része, ezért a határa a mezőnnyel együtt változik, pontegyenlőség esetén a lejátszott csaták döntenek. A pontos {legend} és {champion} határokat az aktuális szezon adatai alapján jelöljük a ranglistán.",
+    "legend-blurb": "A legmagasabb értékelésű {champion} játékosok. A játék minden szezonban a ranglista egy meghatározott helyénél húzza meg a határt, ezért a mérete szezontól és régiótól függ, nem egy rögzített ponthatártól. Ha a(z) utolsó {legend} alá csúszol, visszaesel {champion} rangra.",
+    "champion-blurb": "A legmagasabb rang, amelyre Értékelési pontokkal feljuthatsz, és a ranglista belépője. Minden rangsorolt játékos legalább {champion}."
+  },
+  "race": {
+    "title-live": "Mi kell hozzá most",
+    "title-ended": "Így alakult a szezon",
+    "legend-cutoff": "{legend} ponthatára",
+    "champion-cutoff": "{champion} ponthatára",
+    "ranked-players": "Rangsorolt játékosok",
+    "rating-points": "értékelési pontok",
+    "rank-cutoffs": "Ranghatárok"
+  }
+}

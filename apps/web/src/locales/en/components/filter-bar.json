@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Search among {count} tanks",
+    "rated-tanks": "Search among {count} rated tanks",
+    "videos": "Search among {count} videos",
+    "players": "Search {count} players",
+    "clans": "Search {count} clans",
+    "tournaments": "Search {count} tournaments",
+    "teams": "Search {count} teams"
+  },
+  "min": "Min",
+  "max": "Max",
+  "none": "None",
+  "common-test": "Changed by the Common Test: new vehicles and rebalanced ones",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Reward"
+  },
+  "moe": {
+    "0": "No mark yet",
+    "1": "1 mark",
+    "2": "2 marks",
+    "3": "3 marks"
+  },
+  "mom": {
+    "0": "No badge yet",
+    "1": "3rd Class",
+    "2": "2nd Class",
+    "3": "1st Class",
+    "4": "Ace Tanker"
+  }
+}

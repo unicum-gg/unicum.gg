@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Vidējais rādītājs {rated} no {size} spēlētājiem",
+  "average-over-recent": "Vidējais rādītājs {rated} no {size} spēlētājiem, kuri spēlēja pēdējo 30 dienu laikā",
+  "avg-winrate": "Vidējais uzvaru procents",
+  "finished": "Pabeigts",
+  "record": "Rekords",
+  "won": "uzvarēts"
+}

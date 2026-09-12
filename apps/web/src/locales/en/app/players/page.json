@@ -1,0 +1,6 @@
+{
+  "title": "Top World of Tanks players ({region})",
+  "description": "{name} {region} player leaderboard, ranked by WNX, filterable by inferred clan-history language.",
+  "og-title": "Top players",
+  "og-subtitle": "{region} leaderboard"
+}

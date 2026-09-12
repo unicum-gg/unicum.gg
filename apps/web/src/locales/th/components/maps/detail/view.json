@@ -1,0 +1,9 @@
+{
+  "battle-time": "เวลาการต่อสู้",
+  "camouflage": "การพรางตัว {camouflage}",
+  "mode": "โหมด",
+  "n-random-events": "{count, plural, other {# กิจกรรมสุ่ม}}",
+  "random-events": "เหตุการณ์สุ่ม",
+  "size": "ขนาด",
+  "team-size": "ขนาดทีม"
+}

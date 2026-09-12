@@ -1,0 +1,8 @@
+{
+  "last-days": "Соңғы {chartDays} күн",
+  "n-players": "{count, plural, one {# ойыншы} other {# ойыншылар}}",
+  "rolling-average-combined-damage-to": "Ойыншылардың 65 / 85 / 95%-ынан асып түсуге қажет жылжымалы орташа жиынтық зақым.",
+  "single-battle-xp-to-beat": "Ойыншылардың 50 / 80 / 95 / 99%-ынан асып түсуге қажет бір шайқастағы XP.",
+  "tank-marks-of-excellence": "{tank} үздік белгісі",
+  "tank-marks-of-mastery": "{tank} шеберлік белгісі"
+}

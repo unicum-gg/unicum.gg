@@ -1,0 +1,7 @@
+{
+  "loading": "{count} xe tăng cấp {tier}, đang tải tên…",
+  "loading-one": "{count} xe tăng cấp {tier}, đang tải tên…",
+  "and-more": "và {count} xe tăng khác",
+  "hint": "Nhấp để mở chúng trong thẻ Xe tăng",
+  "tier": "Cấp"
+}

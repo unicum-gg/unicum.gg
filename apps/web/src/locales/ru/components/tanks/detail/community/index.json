@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "По каждой оси",
+  "by-server": "По серверу",
+  "community-verdict": "Вердикт сообщества",
+  "every-server-one-average": "Все серверы, одно среднее",
+  "n-shown": ", показано: {count}",
+  "opinion": "{count, plural, one {# мнение} few {# мнения} many {# мнений} other {# мнения}}",
+  "opinion-next-to-win-rate": "Мнение рядом с процентом побед для уровня {tier}",
+  "rate-the": "Оценить {tankName}",
+  "reputation-against-results": "Репутация против результатов",
+  "same-tank-different-metas": "Один танк, разные меты",
+  "the-same-tank-by-how": "Один танк с учётом того, насколько хорошо играет голосующий",
+  "what-players-wrote": "Что написали игроки",
+  "who-is-saying-it": "Кто это говорит"
+}

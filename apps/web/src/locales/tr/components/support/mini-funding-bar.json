@@ -1,0 +1,6 @@
+{
+  "label": "Topluluk destekli",
+  "funded": "%{pct} finanse edildi",
+  "tooltip": "Başlangıçtan bu yana destekçiler tarafından karşılanan {received} / {goal}",
+  "tooltip-loading": "Topluluk destekli, reklamsız"
+}

@@ -1,0 +1,14 @@
+{
+  "ammunition": "Muniție",
+  "characteristics": "Caracteristici ale tancului {tank}",
+  "consumables": "Consumabile",
+  "crew-level": "Nivelul echipajului",
+  "crew-skills": "Abilități echipaj",
+  "equipment": "Echipament",
+  "field-mods": "Modificări de teren",
+  "historical-reference": "Referință istorică a tancului {tank}",
+  "modules": "Module ale tancului {tank}",
+  "research-path": "Ramura Dezvoltării tancului {tank}",
+  "similar": "Tancuri apropiate de {tank}",
+  "videos": "Videoclipuri despre tancul {tank}"
+}

@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# kartta} other {# kartat}}",
+  "no-map-changes-have-been": "Karttamuutoksia ei ole vielä tallennettu. Kun Wargaming muokkaa karttoja, kunkin päivityksen muutokset näkyvät täällä.",
+  "update": "Päivitä {version}"
+}

@@ -1,0 +1,6 @@
+{
+  "label": "Financované komunitou",
+  "funded": "Financované na {pct} %",
+  "tooltip": "Od spustenia pokryli podporovatelia {received} z cieľovej sumy {goal}",
+  "tooltip-loading": "Financované komunitou, bez reklám"
+}

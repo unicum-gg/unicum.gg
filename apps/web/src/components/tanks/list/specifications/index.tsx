@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
 import {
   CaretLeftIcon,
   CaretRightIcon,
@@ -45,23 +46,24 @@ import type { TankSelection } from "@/hooks/use-compare-selection";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 const COLS_COOKIE = "unicum.spec_columns";
 
 
-function sortValue(t: TankListItem, key: string): number | string | null {
+function sortValue(row: TankListItem, key: string): number | string | null {
   switch (key) {
     case "tier":
-      return t.tier;
+      return row.tier;
     case "name":
-      return (t.shortName || t.name).toLowerCase();
+      return (row.shortName || row.name).toLowerCase();
     case "nation":
-      return t.nation;
+      return row.nation;
     case "type":
-      return t.type;
+      return row.type;
     default: {
       const col = SPEC_COLUMN_BY_KEY[key];
-      return col && t.specs ? col.sortValue(t.specs) : null;
+      return col && row.specs ? col.sortValue(row.specs) : null;
     }
   }
 }
@@ -104,6 +106,10 @@ export function TanksSpecsTable({
   /** When set, each row offers a comparison checkbox. */
   selection?: TankSelection;
 }) {
+  const { locale } = useLocale();
+  const { t: tTable } = useTranslation("components/tanks/table");
+  const { t: tOwn } = useTranslation("components/tanks/list/specifications/index");
+  const { t } = useTranslation("components/tanks/list/spec-columns");
   const [selected] = useSpecColumns();
   // Keep the canonical (grouped) order regardless of toggle order.
   const visible: SpecColumn[] = useMemo(
@@ -178,58 +184,65 @@ export function TanksSpecsTable({
           <TableHeader>
             <TableRow>
               <TankCompareHead selection={selection} />
-              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip={tTable("nation")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="nation" />
               </SortHead>
-              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip="Type" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip={tTable("type")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="type" />
               </SortHead>
-              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip="Tier" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip={tTable("tier")} headClassName="w-[72px] min-w-[72px]">
                 <span className="text-xs font-medium tracking-tight text-fd-muted-foreground">
                   I-XI
                 </span>
               </SortHead>
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
-                Name
+                {tTable("name")}
               </SortHead>
               {visible.map((c) => (
-                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
-                  {c.label}
+                <SortHead
+                  key={c.key}
+                  sort={sort}
+                  col={c.key}
+                  onToggle={toggleSort}
+                  align="end"
+                  tip={c.tipped ? t(`columns.${c.key}.tip`) : undefined}
+                >
+                  {t(`columns.${c.key}.label`)}
                 </SortHead>
               ))}
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paged.map((t) => (
-              <TableRow key={t.tankId}>
+            {paged.map((tank) => (
+              <TableRow key={tank.tankId}>
                 <TankCompareCell
                   selection={selection}
-                  slug={t.slug}
-                  name={t.shortName || t.name}
+                  slug={tank.slug}
+                  name={tank.shortName || tank.name}
                 />
                 <TableCell className="text-center">
-                  <NationFlag nation={t.nation} region={region} />
+                  <NationFlag nation={tank.nation} region={region} />
                 </TableCell>
                 <TableCell className="text-center">
-                  <VehicleTypeIcon type={t.type} premium={t.isPremium} />
+                  <VehicleTypeIcon type={tank.type} premium={tank.isPremium} />
                 </TableCell>
                 <TableCell
                   className={cn(
                     "text-center font-medium tabular-nums",
-                    t.isPremium && "text-[#FAB81B]",
+                    tank.isPremium && "text-[#FAB81B]",
                   )}
                 >
-                  {toRoman(t.tier)}
+                  {toRoman(tank.tier)}
                 </TableCell>
                 <TableCell
-                  className={cn("font-medium", t.isPremium && "text-[#FAB81B]")}
+                  className={cn("font-medium", tank.isPremium && "text-[#FAB81B]")}
                 >
-                  <TankRowName region={region} tank={t} />
+                  <TankRowName region={region} tank={tank} />
                 </TableCell>
                 {visible.map((c) => (
                   <TableCell key={c.key} className="text-right tabular-nums">
-                    {t.specs ? (
-                      c.render(t.specs)
+                    {tank.specs ? (
+                      c.render(tank.specs, locale)
                     ) : (
                       <span className="text-fd-muted-foreground">—</span>
                     )}
@@ -243,7 +256,7 @@ export function TanksSpecsTable({
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
         <div className="flex items-center gap-2">
-          <span>Rows per page</span>
+          <span>{tOwn("rows-per-page")}</span>
           <Select
             value={String(pageSize)}
             onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
@@ -257,7 +270,7 @@ export function TanksSpecsTable({
                   {n}
                 </SelectItem>
               ))}
-              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="all">{tOwn("all")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -270,19 +283,18 @@ export function TanksSpecsTable({
               type="button"
               onClick={() => setPage(current - 1)}
               disabled={current <= 1}
-              aria-label="Previous page"
+              aria-label={tOwn("previous-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretLeftIcon weight="bold" className="size-3.5" />
             </button>
             <span className="min-w-16 text-center tabular-nums">
-              Page {current} / {totalPages}
-            </span>
+              {tOwn("page", { current, totalPages })}</span>
             <button
               type="button"
               onClick={() => setPage(current + 1)}
               disabled={current >= totalPages}
-              aria-label="Next page"
+              aria-label={tOwn("next-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretRightIcon weight="bold" className="size-3.5" />
@@ -295,6 +307,7 @@ export function TanksSpecsTable({
 }
 
 export function SpecColumnSelector() {
+  const { t } = useTranslation("components/tanks/list/spec-columns");
   const [selected, onToggle] = useSpecColumns();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -316,7 +329,7 @@ export function SpecColumnSelector() {
         className="flex h-7 cursor-pointer items-center gap-1.5 rounded-md border border-fd-border px-3 text-xs font-medium transition-colors hover:bg-fd-secondary/40"
       >
         <SlidersHorizontalIcon weight="bold" className="size-3.5" />
-        Columns
+        {t("columns-label")}
         <span className="text-fd-muted-foreground">
           {selected.size}/{SPEC_COLUMNS.length}
         </span>
@@ -326,7 +339,7 @@ export function SpecColumnSelector() {
           {SPEC_GROUP_ORDER.map((group) => (
             <div key={group} className="mb-2 last:mb-0">
               <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-fd-muted-foreground">
-                {group}
+                {t(`groups.${group}`)}
               </div>
               {SPEC_COLUMNS.filter((c) => c.group === group).map((c) => (
                 <label
@@ -339,7 +352,7 @@ export function SpecColumnSelector() {
                     onChange={() => onToggle(c.key)}
                     className="size-3.5 accent-brand"
                   />
-                  <span>{c.label}</span>
+                  <span>{t(`columns.${c.key}.label`)}</span>
                 </label>
               ))}
             </div>

@@ -1,0 +1,14 @@
+{
+  "close": "닫기",
+  "combined-damage": "종합 피해량",
+  "damage-dealt-plus-assisted-as": "전투 후 화면에서 합산하는 피해량과 지원 피해량입니다.",
+  "format": "형식",
+  "no-reason-recorded": "기록된 사유가 없으므로 다시 보내기 전에 Discord에서 문의해 보는 것이 좋습니다.",
+  "players-per-team": "팀당 플레이어 수",
+  "save": "저장",
+  "saved-it-is-in-the": "저장되었습니다. 검토 대기열에 추가되며, 검토자가 확인한 후 사이트에 표시됩니다.",
+  "saving": "저장 중…",
+  "tier": "단계",
+  "turned-down": "거부됨",
+  "what-was-played": "플레이한 것"
+}

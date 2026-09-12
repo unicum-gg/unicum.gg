@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Xóa {label}",
+  "credited-on-the-clan-s": "Được ghi nhận trên trang riêng của Clan.",
+  "none": "Không có",
+  "optional": "(tùy chọn)",
+  "pick-the-vehicle": "Chọn xe tăng",
+  "search-for-a-clan": "Tìm Clan",
+  "search-for-a-vehicle": "Tìm xe tăng",
+  "search-tank": "Tìm xe tăng...",
+  "tank": "Xe tăng",
+  "tank-hint-optional": "Chiến thuật thuộc về bản đồ, vì vậy chỉ cần nêu tên xe tăng khi video cũng nói về xe tăng đó.",
+  "tank-hint-required": "Một trận đấu ngẫu nhiên được tra cứu theo xe tăng đã được sử dụng để chơi trận đấu đó."
+}

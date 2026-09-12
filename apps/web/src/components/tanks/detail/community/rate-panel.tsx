@@ -1,7 +1,9 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import useSWR, { mutate } from "swr";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import { RATING_BLOCK_MESSAGE, RatingBlock } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { Button } from "@/components/ui/button";
@@ -12,7 +14,7 @@ import { useSession } from "@/lib/auth-client";
 import { unicum } from "@/services/sdk";
 import { Prompt, RateForm } from "./rate-form";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /** SWR key for the reader's own state on this tank. Dropped after a write so
  * the panel reflects what was just saved rather than what it loaded with. */
@@ -44,6 +46,7 @@ export function RatePanel({
   slug: string;
   tankName: string;
 }) {
+  const { t } = useTranslation("components/tanks/detail/community/rate-panel");
   const router = useRouter();
   const { data: session, isPending: sessionLoading } = useSession();
   const { data: me, isLoading } = useSWR(
@@ -67,19 +70,18 @@ export function RatePanel({
   if (!hydrated || sessionLoading) {
     return (
       <p className="text-sm text-fd-muted-foreground">
-        Checking your record on this tank...
-      </p>
+        {t("checking-your-record-on-this")}</p>
     );
   }
 
   if (!session?.user) {
     return (
       <Prompt
-        title={`Have you played the ${tankName}?`}
-        body="Sign in with your Wargaming account to rate it. We read your record on this exact tank, which is what stops this page from becoming a poll of people who have never driven it."
+        title={t("have-you-played", { tank: tankName })}
+        body={t("sign-in-with-your-wargaming-account-to-rate-")}
       >
         <LoginButton callbackURL={`${ROUTES.TANK(region, slug)}/community`}>
-          <Button size="sm">Sign in to rate it</Button>
+          <Button size="sm">{t("sign-in-to-rate-it")}</Button>
         </LoginButton>
       </Prompt>
     );
@@ -88,8 +90,7 @@ export function RatePanel({
   if (isLoading || !me) {
     return (
       <p className="text-sm text-fd-muted-foreground">
-        Checking your record on this tank...
-      </p>
+        {t("checking-your-record-on-this")}</p>
     );
   }
 
@@ -130,14 +131,22 @@ function Blocked({
   me: OwnRatingState;
   tankName: string;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tanks/detail/community/rate-panel");
   const played = me.record?.battles ?? 0;
   const missing = Math.max(0, me.required - played);
 
   if (me.block === RatingBlock.TooFewBattles) {
     return (
       <Prompt
-        title={`${intFmt.format(missing)} more ${missing === 1 ? "battle" : "battles"} to go`}
-        body={`You have ${intFmt.format(played)} battles in the ${tankName}. We ask for ${me.required} before a vote counts, so that this average stays an average of people who actually play it.`}
+        title={t(missing === 1 ? "more-to-go-one" : "more-to-go", {
+          count: num(INT_FORMAT).format(missing),
+        })}
+        body={t("too-few-battles", {
+          played: num(INT_FORMAT).format(played),
+          tank: tankName,
+          required: me.required,
+        })}
       >
         <div className="h-1.5 w-full max-w-xs overflow-hidden rounded-sm bg-fd-border/60">
           <div
@@ -153,8 +162,8 @@ function Blocked({
     <Prompt
       title={
         me.block === RatingBlock.NoRecord
-          ? "We are fetching your garage"
-          : `You have not played the ${tankName}`
+          ? t("fetching-your-garage")
+          : t("you-have-not-played", { tank: tankName })
       }
       body={
         me.block
@@ -168,10 +177,12 @@ function Blocked({
             reading the EU copy of a tank page was being told "Signed in on EU"
             beside their NA battle count, on the one screen whose whole job is
             explaining the refusal. */}
-          Signed in on {me.votingRegion.toUpperCase()}
-          {me.player.battles != null ? (
-            <> &middot; {intFmt.format(me.player.battles)} battles overall</>
-          ) : null}
+          {t("signed-in-on", { region: me.votingRegion.toUpperCase() })}
+          {me.player.battles != null
+            ? ` · ${t("battles-overall", {
+                battles: num(INT_FORMAT).format(me.player.battles),
+              })}`
+            : null}
         </p>
       ) : null}
     </Prompt>

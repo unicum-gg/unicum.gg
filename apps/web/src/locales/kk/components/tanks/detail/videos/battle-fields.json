@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Қалай аяқталды",
+  "loading-maps": "Карталар жүктелуде…",
+  "map": "Карта",
+  "mode": "Режим",
+  "pick-a-map": "Картаны таңдаңыз",
+  "pick-a-mode": "Режимді таңдаңыз",
+  "result": "Нәтиже",
+  "spawn": "Туған жер",
+  "team": "Команда {team}",
+  "team-spawn": "{team} командасы · {direction}",
+  "which-side-you-started": "Қай жақтан бастадыңыз"
+}

@@ -1,0 +1,22 @@
+{
+  "stat": "Thống kê",
+  "periods": {
+    "total": "Tổng",
+    "day": "24 giờ qua",
+    "week": "7 ngày qua",
+    "month": "30 ngày qua"
+  },
+  "sections": {
+    "elo": "ELO Cấp X ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Cấp X (7v7)",
+    "t8": "{skirmish} Cấp VIII (7v7)",
+    "t6": "{skirmish} Cấp VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Số trận",
+    "winrate": "Tỷ lệ thắng"
+  }
+}

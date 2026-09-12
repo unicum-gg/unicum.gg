@@ -1,6 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import { useFormat } from "@/hooks/use-format";
+import { statLabel } from "@/components/stat-label";
+
+import Link from "@/components/link";
 import { useState } from "react";
 import useSWR from "swr";
 import { toRoman } from "roman-numerals";
@@ -21,6 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { unicum } from "@/services/sdk";
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
 /**
@@ -40,7 +44,7 @@ import { cn } from "@/lib/utils";
  * response instead of asking again.
  */
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /** Vehicles named in the hover before it falls back to counting the rest. */
 const PREVIEW_LIMIT = 8;
@@ -85,6 +89,8 @@ export function MarksMatrix<K extends string>({
   param: "moe" | "mom";
   levelOf: (tank: PlayerTankRow) => number | null;
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/players/detail/overview/marks/matrix");
   // Armed by the first hover, never on mount: the panel is above the fold on
   // every profile and this list is a few hundred rows.
   const [armed, setArmed] = useState(false);
@@ -106,11 +112,11 @@ export function MarksMatrix<K extends string>({
       <Table className="my-0! table-fixed [&_td]:min-w-0 [&_td]:py-0.5! [&_th]:py-1! [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border">
         <TableHeader>
           <TableRow>
-            <TableHead>Tier</TableHead>
+            <TableHead>{t("tier")}</TableHead>
             {columns.map((c) => (
               <TableHead key={c.key} className="text-right">
                 <span className="inline-flex items-center justify-end">
-                  {c.label}
+                  {statLabel(c.label, tStats)}
                 </span>
               </TableHead>
             ))}
@@ -186,11 +192,17 @@ function CellPreview({
   levelOf: (tank: PlayerTankRow) => number | null;
   count: number;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation(
+    "components/players/detail/overview/marks/matrix",
+  );
   if (!tanks) {
     return (
       <span className="text-xs">
-        {intFmt.format(count)} tier {toRoman(tier)}{" "}
-        {count === 1 ? "vehicle" : "vehicles"}, loading their names…
+        {t(count === 1 ? "loading-one" : "loading", {
+          count: num(INT_FORMAT).format(count),
+          tier: toRoman(tier),
+        })}
       </span>
     );
   }
@@ -208,15 +220,17 @@ function CellPreview({
           <li key={t.tankId} className="flex items-baseline justify-between gap-3">
             <span className="truncate">{t.shortName ?? t.name}</span>
             <span className="shrink-0 tabular-nums opacity-70">
-              {intFmt.format(t.battles)}
+              {num(INT_FORMAT).format(t.battles)}
             </span>
           </li>
         ))}
       </ul>
       {rest > 0 && (
-        <p className="mt-1 opacity-70">and {intFmt.format(rest)} more</p>
+        <p className="mt-1 opacity-70">
+          {t("and-more", { count: num(INT_FORMAT).format(rest) })}
+        </p>
       )}
-      <p className="mt-1 opacity-70">Click to open them in the Tanks tab</p>
+      <p className="mt-1 opacity-70">{t("hint")}</p>
     </div>
   );
 }

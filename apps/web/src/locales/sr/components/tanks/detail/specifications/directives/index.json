@@ -1,0 +1,9 @@
+{
+  "boosts": "Povećanja {name}",
+  "directives": "Direktive",
+  "directive-name": "{name} директива",
+  "grants-and-boosts": "Daje i pojačava veštinu posade, čak i kada nije obučena.",
+  "grants-only": "Daje veštinu posade za bitku, bez navedene karakteristike.",
+  "enhances-mounted": "Poboljšava ugrađeni {name}.",
+  "mount-to-use": "Ugradi {name} da bi koristio ovu direktivu."
+}

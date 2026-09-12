@@ -1,0 +1,21 @@
+{
+  "trigger": "Geri bildirim",
+  "title": "Geri bildiriminizi paylaşın",
+  "topic-placeholder": "Bir konu seçin...",
+  "message-placeholder": "Geri bildiriminiz...",
+  "send": "Gönder",
+  "sent": "Geri bildiriminiz için teşekkürler!",
+  "failed": "Geri bildirim gönderilemedi. Lütfen tekrar deneyin.",
+  "topics": {
+    "bug": "Hata bildirimi",
+    "idea": "Özellik önerisi",
+    "data": "Veri doğruluğu",
+    "other": "Diğer"
+  },
+  "sentiments": {
+    "awful": "Berbat",
+    "bad": "Kötü",
+    "good": "İyi",
+    "great": "Harika"
+  }
+}

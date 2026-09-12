@@ -1,0 +1,14 @@
+{
+  "clan": "军团",
+  "player": "玩家",
+  "members": "成员",
+  "battles": "战斗场次",
+  "avg-damage": "平均伤害",
+  "avg-xp": "平均经验",
+  "winrate": "胜率 %",
+  "result": "结果",
+  "tournament": "赛事",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

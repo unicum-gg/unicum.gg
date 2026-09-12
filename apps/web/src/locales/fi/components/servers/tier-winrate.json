@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Solu näyttää tason voittoprosenttikaistan voitot kyseisellä tasolla pelatuissa taisteluissa. Mukana ovat kaikki ajoneuvot, joilla pelaajalla on vähintään {minBattles} taistelua, joten se kuvaa tasoja niitä pelaavien ihmisten perusteella. Alle {TIERWINRATETHINCELL} taisteluun perustuvat solut näkyvät haaleina, koska niihin vaikuttavat muutkin syyt kuin taito. Värit ovat samoja voittoprosenttikaistoja, joita sivusto käyttää kaikkialla muualla.",
+  "cell-no-sample": "{where}, ei näytettä",
+  "cell-winrate": "{where}, {winrate} voittoprosentti {battles} taistelusta",
+  "metric-band": "{metric}-kaista",
+  "nothing-recorded": "Arvoa {metric} vastaan ei ole vielä tallennettu. Ruudukko rakennetaan uudelleen joka yö.",
+  "over-battles-from-accounts": "{winrate} {battles} taistelusta ja {players} tililtä",
+  "over-n-battles": "{battles} taistelusta",
+  "what-players-win-by-tier": "Mitä {label}-pelaajat voittavat tasoittain"
+}

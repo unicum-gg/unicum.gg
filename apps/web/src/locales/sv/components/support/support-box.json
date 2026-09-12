@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Utcheckning avbruten.",
+  "claim-your-supporter-role-on-discord": "Hämta din Roll som Supporter på Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Det gick inte att lägga till Roll på Discord. Försök igen.",
+  "could-not-open-the-billing-portal": "Det gick inte att öppna betalningsportalen.",
+  "could-not-start-checkout-please-try-again": "Det gick inte att starta betalningen. Försök igen.",
+  "could-not-update-your-preference": "Det gick inte att uppdatera din inställning.",
+  "log-in-with-wargaming": "Logga in med Wargaming",
+  "log-in-with-wargaming-to": "Logga in med Wargaming för att stötta {NAME}.",
+  "manage-subscription": "Hantera prenumeration",
+  "only-active-supporters-can-claim-the-discord": "Du måste vara aktiv Supporter för att hämta Roll på Discord.",
+  "or-choose-your-own-amount": "Eller välj ett eget belopp",
+  "pay-what-you-want": "Betala vad du vill.",
+  "pick-an-amount": "Välj ett belopp eller ange ett eget, från €{min}/månad.",
+  "re-sync-discord-role": "Synkronisera Roll på Discord igen",
+  "secured-by-stripe": "Säkras av Stripe. Avbryt när som helst.",
+  "show-me-anonymously-on-the": "Visa mig anonymt på prispallen",
+  "support-subscriptions-are-coming-soon": "Supporterprenumerationer kommer snart.",
+  "supporter-role-added-on-discord": "Roll som Supporter har lagts till på Discord!",
+  "you-are-a-supporter-thank": "Du är Supporter. Tack för att du håller {NAME} vid liv."
+}

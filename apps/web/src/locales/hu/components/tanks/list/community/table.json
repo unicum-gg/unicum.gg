@@ -1,0 +1,6 @@
+{
+  "fun": "Mennyire élvezik a játékosok, ami rendszerint nem ugyanaz a kérdés.",
+  "hype": "A közösség által adott helyezés a szintjén, mínusz a győzelmi aránya szerinti helyezés. Csökkenő sorrendben a játék leginkább túlértékelt tankjai, növekvő sorrendben a leginkább alulértékeltek.",
+  "overall": "Mennyire tartják jónak a játékosok. A webhely átlagához igazított átlag alapján rangsorolva, így négy szavazattal egy tank nem előzhet meg egy négyszáz szavazatost.",
+  "votes": "Leadott szavazatok, mind olyan fiókokból, amelyek ténylegesen játszottak a tankkal."
+}

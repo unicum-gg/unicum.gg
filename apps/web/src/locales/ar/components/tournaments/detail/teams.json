@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "المتوسط لأفضل {rated} من أصل {size} لاعبين",
+  "average-over-recent": "المتوسط لأفضل {rated} من أصل {size} لاعبين لعبوا خلال آخر 30 يومًا",
+  "metric-over-last-30-days": "{metric} خلال آخر 30 يومًا",
+  "n-confirmed": "تم تأكيد {count}",
+  "no-team-matches-the-current": "لا يوجد فريق يطابق المرشحات الحالية.",
+  "no-teams-recorded-yet-registrations": "لا توجد فرق مسجلة بعد. تظهر التسجيلات هنا بمجرد قراءة هذه البطولة بالكامل، ويحدث ذلك خلال دقائق من افتتاحها.",
+  "none-played-in-30-days": "لم يلعب أي فرد من هذه التشكيلة خلال آخر 30 يومًا",
+  "players": "اللاعبون",
+  "qualified": "مؤهلون",
+  "reward": "مكافأة",
+  "team": "فريق",
+  "teams": "الفرق ({length})",
+  "wr": "WR"
+}

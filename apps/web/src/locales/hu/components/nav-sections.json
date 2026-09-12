@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Játékosok",
+    "clans": "Klánok",
+    "tanks": "Tankok",
+    "maps": "Pályák",
+    "tournaments": "Tornák",
+    "servers": "Szerverek"
+  },
+  "links": {
+    "top-players": {
+      "label": "Legjobb játékosok",
+      "description": "Játékosok teljes idős ranglistája"
+    },
+    "players-onslaught": {
+      "description": "Roham ranglétra"
+    },
+    "players-steel-hunter": {
+      "description": "Battle royale ranglista"
+    },
+    "top-clans": {
+      "label": "Legjobb klánok",
+      "description": "Klánok teljes idős ranglistája"
+    },
+    "stronghold": {
+      "description": "Csatározások ranglistája"
+    },
+    "advances": {
+      "description": "X-es szintű 15v15 rangsor"
+    },
+    "tank-performances": {
+      "label": "Teljesítmények",
+      "description": "Győzelmi arány és sebzés tankonként"
+    },
+    "tank-specs": {
+      "label": "Műszaki adatok",
+      "description": "Minden tank statisztikái"
+    },
+    "tank-economics": {
+      "label": "Gazdaság",
+      "description": "Kredit- és XP-szerzők"
+    },
+    "tank-moe": {
+      "description": "Sebzés minden jelhez"
+    },
+    "tank-mom": {
+      "description": "Osztály-jelvények küszöbértékei"
+    },
+    "tank-changes": {
+      "label": "Változások",
+      "description": "Erősítések és gyengítések frissítésenként"
+    },
+    "tank-community": {
+      "label": "Közösségi értékelések",
+      "description": "Az őket birtokló játékosok értékelései alapján"
+    },
+    "tank-videos": {
+      "label": "Videók",
+      "description": "Közösségi játékmenetek"
+    },
+    "all-tournaments": {
+      "label": "Tornák",
+      "description": "Minden nyitott és lezárt verseny"
+    },
+    "all-maps": {
+      "label": "Minden pálya",
+      "description": "A játék minden térképe"
+    },
+    "map-changes": {
+      "label": "Változások",
+      "description": "Térkép-átalakítások frissítésenként"
+    },
+    "battle-type": {
+      "description": "{type} pályák"
+    },
+    "servers-population": {
+      "label": "Szerver népsűrűség",
+      "description": "Online játékosok, most és időben"
+    }
+  }
+}

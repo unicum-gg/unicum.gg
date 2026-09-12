@@ -1,0 +1,14 @@
+{
+  "clan": "Klanas",
+  "clear-the-field": "Išvalyti lauką {label}",
+  "credited-on-the-clan-s": "Nurodyta klano puslapyje.",
+  "none": "Nėra",
+  "optional": "(neprivaloma)",
+  "pick-the-vehicle": "Pasirinkite transporto priemonę",
+  "search-for-a-clan": "Ieškoti klano",
+  "search-for-a-vehicle": "Ieškoti transporto priemonės",
+  "search-tank": "Ieškoti tanko...",
+  "tank": "Tankas",
+  "tank-hint-optional": "Taktika priklauso jos žemėlapiui, todėl transporto priemonę verta nurodyti tik tada, kai vaizdo įrašas yra ir apie ją.",
+  "tank-hint-required": "Atsitiktinis mūšis randamas pagal transporto priemonę, kuria jame žaista."
+}

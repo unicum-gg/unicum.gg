@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Svaki tenk ocijenjen od jedan do pet prema mišljenju igrača koji ga koriste. Glas vrijedi samo s računa koji je vozilo stvarno odveo u bitku, što ovo razlikuje od ankete među slučajnim posjetiteljima.",
+  "no-tank-has-been-rated": "Još nijedan tenk nije ocijenjen. Prvi glasovi nalaze se na stranicama tenkova, u odjeljku Zajednica.",
+  "think": "misliti",
+  "title": "Što igrači {think}",
+  "votes-across-vehicles": "{totalVotes} glasova za {ratedTanks} vozila."
+}

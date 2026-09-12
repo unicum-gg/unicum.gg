@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Ranggo {rank} sa talahanayan na {board}",
+  "board": {
+    "advances": "Rating ng Stronghold sa mga pag-usad",
+    "skirmish-t10": "rating ng sagupaan sa Antas X",
+    "skirmish-t6": "rating ng sagupaan sa Antas VI",
+    "skirmish-t8": "rating ng sagupaan sa Antas VIII"
+  }
+}

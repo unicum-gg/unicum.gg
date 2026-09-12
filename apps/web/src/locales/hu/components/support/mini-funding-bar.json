@@ -1,0 +1,6 @@
+{
+  "label": "Közösségi finanszírozású",
+  "funded": "{pct}%-ban finanszírozva",
+  "tooltip": "Indulás óta a támogatók {received} összeget fedeztek a {goal} célból",
+  "tooltip-loading": "Közösségi finanszírozású, reklámmentes"
+}

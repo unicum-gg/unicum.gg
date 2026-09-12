@@ -1,3 +1,5 @@
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import {
   TankChangesFeed,
   type FeedVersion,
@@ -10,7 +12,8 @@ import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 // global tank-rebalance feed, built forward from the moment tracking started
 // (Wargaming publishes no archive of past client versions). ISR-cached like the
 // other tank pages.
-export async function TankChangesView({ region }: { region: Region }) {
+export async function TankChangesView({ region, locale }: { region: Region; locale: string }) {
+  const { t } = await getTranslation("components/tanks/list/changes/view", locale);
   const { versions } = await buildSafe(
     () => unicum.region(region).tanks.changes(),
     { versions: [] as FeedVersion[] },
@@ -24,13 +27,15 @@ export async function TankChangesView({ region }: { region: Region }) {
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            World of Tanks <span className="text-brand">changes</span>
+            <Interpolate
+              template={t("title")}
+              values={{
+                changes: <span className="text-brand">{t("changes")}</span>,
+              }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            Every tank characteristic Wargaming has buffed or nerfed on{" "}
-            {REGION_LABEL[region]}, update by update. Tracked from the game
-            client itself, so it is the real numbers, not patch-note wording.
-          </p>
+            {t("every-tank-characteristic-wargaming-has", { region: REGION_LABEL[region] })}</p>
         </PanelContent>
       </Panel>
 

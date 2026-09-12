@@ -1,0 +1,21 @@
+{
+  "title": "{nickname} adlı oyuncunun işaretleri ve ustalığı",
+  "excellence": {
+    "title": "Mükemmellik İşaretleri",
+    "description": "Toplarındaki işaretlere göre araçlar. İşaret, sürdürülen bir ortalamadır: oyun bunu, o araçta bölgenin elde ettiği değerlere karşı son savaşlardan oluşan kayan bir pencere üzerinden puanlar.",
+    "partial": "{garage} aracın {known} tanesi için işaretler okundu. Hesap yenilendikçe geri kalanı tamamlanır.",
+    "note": "{garage} aracın {marked} tanesi bir işaret taşıyor.",
+    "note-share": "{garage} aracın {marked} tanesi bir işaret taşıyor (garajın %{percent} kadarı)."
+  },
+  "mastery": {
+    "title": "Ustalık İşaretleri",
+    "description": "En iyi rozetlerine göre araçlar. Rozet, ortalama yerine tek bir savaştır: oyun bunu, o araçta bölgenin puanladığı değerlere karşı tek bir oyundaki deneyim üzerinden verir.",
+    "note": "{garage} aracın {aces} tanesi As Tankçı rozeti taşıyor.",
+    "note-share": "{garage} aracın {aces} tanesi As Tankçı rozeti taşıyor (garajın %{percent} kadarı)."
+  },
+  "reach": {
+    "heading": "Topun seviyesinin üzerinde oynamak",
+    "description": "Birlikte verilen hasarı, taşımadıkları bir işareti şimdiden aşan araçlar. Rozet, aştığı işaretle renklendirilen bu toplam hasardır."
+  },
+  "none": "Hiçbiri"
+}

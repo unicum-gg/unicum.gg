@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "चेकआउट रद्द कर दिया गया।",
+  "claim-your-supporter-role-on-discord": "Discord पर अपनी समर्थक भूमिका प्राप्त करें",
+  "could-not-add-the-discord-role-please-try-ag": "Discord भूमिका जोड़ी नहीं जा सकी। कृपया फिर कोशिश करें।",
+  "could-not-open-the-billing-portal": "बिलिंग पोर्टल खोला नहीं जा सका।",
+  "could-not-start-checkout-please-try-again": "चेकआउट शुरू नहीं हो सकता है। कृपया फिर से कोशिश करें।",
+  "could-not-update-your-preference": "आपकी पसंद अपडेट नहीं हो सकी।",
+  "log-in-with-wargaming": "Wargaming से लॉग इन करें",
+  "log-in-with-wargaming-to": "{NAME} की सहायता करने के लिए Wargaming से लॉग इन करें।",
+  "manage-subscription": "सदस्यता प्रबंधित करें",
+  "only-active-supporters-can-claim-the-discord": "केवल सक्रिय समर्थक ही Discord भूमिका प्राप्त कर सकते हैं।",
+  "or-choose-your-own-amount": "या अपनी राशि चुनें",
+  "pay-what-you-want": "आप जितना चाहें उतना भुगतान करें।",
+  "pick-an-amount": "कोई राशि चुनें या अपनी राशि लिखें, €{min}/महीना से।",
+  "re-sync-discord-role": "Discord भूमिका फिर से सिंक करें",
+  "secured-by-stripe": "Stripe द्वारा सुरक्षित। कभी भी रद्द करें।",
+  "show-me-anonymously-on-the": "मुझे पोडियम पर गुमनाम रूप से दिखाएँ",
+  "support-subscriptions-are-coming-soon": "सहायता सदस्यताएँ जल्द आ रही हैं।",
+  "supporter-role-added-on-discord": "Discord पर समर्थक भूमिका जोड़ दी गई है!",
+  "you-are-a-supporter-thank": "आप समर्थक हैं। {NAME} को चलाए रखने के लिए धन्यवाद।"
+}

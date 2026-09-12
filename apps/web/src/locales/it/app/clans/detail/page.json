@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name}, clan di World of Tanks ({region}), {members} membri",
+    "description": "Il clan {name} [{tag}] su {region}: {members} membri, tabella completa dei membri con valutazioni WN8 e WNX, attività recente relativa a ingressi e uscite e cronologia del clan."
+  },
+  "stronghold": {
+    "title": "Statistiche della roccaforte del clan [{tag}] {name} ({region})",
+    "description": "Prestazioni nelle Roccaforti del clan {name} [{tag}] su {region}: valutazioni di schermaglie e avanzate, battaglie e percentuale di vittorie per ogni membro."
+  },
+  "clan-wars": {
+    "title": "Statistiche del clan [{tag}] {name} nelle guerre tra clan ({region})",
+    "description": "Prestazioni nelle guerre tra clan di {name} [{tag}] su {region}: valutazioni per membro, battaglie e percentuale di vittorie nelle campagne della Mappa Globale."
+  },
+  "tanks": {
+    "title": "Carri armati del clan [{tag}] {name} ({region}), i veicoli del clan",
+    "description": "Tutti i veicoli utilizzati dal clan {name} [{tag}] su {region}, con battaglie, percentuale di vittorie e danno medio calcolati complessivamente per tutti i membri del clan."
+  },
+  "manage": {
+    "title": "Riserve della roccaforte del clan [{tag}] {name} ({region})",
+    "description": "Attiva e programma le riserve della Roccaforte del clan {name} [{tag}]. Solo per gli ufficiali."
+  },
+  "missing": {
+    "description": "Clan di World of Tanks [{tag}] su {region}: tabella dei membri con valutazioni WN8/WNX, attività relativa a ingressi e uscite, battaglie recenti e cronologia completa del clan."
+  }
+}

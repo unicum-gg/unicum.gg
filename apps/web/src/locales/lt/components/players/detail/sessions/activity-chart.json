@@ -1,0 +1,5 @@
+{
+  "battles": "{count} mūšiai",
+  "chart-label": "Sužaisti mūšiai per {granularity}, nuspalvinti pagal {metric}",
+  "no-battles": "Ne mūšiai"
+}

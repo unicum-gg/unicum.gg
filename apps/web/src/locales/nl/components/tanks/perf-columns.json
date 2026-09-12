@@ -1,0 +1,60 @@
+{
+  "columns-label": "Kolommen",
+  "groups": {
+    "general": "Algemeen",
+    "combat": "Gevecht"
+  },
+  "columns": {
+    "battles": {
+      "label": "Gevechten",
+      "tip": "Totaal aantal gevechten gespeeld met de Tank"
+    },
+    "count": {
+      "label": "Aantal",
+      "tip": "Aantal gevolgde spelers in de steekproef"
+    },
+    "rating": {
+      "label": "Rating (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Winstpercentage met de Tank"
+    },
+    "playerWr": {
+      "label": "Speler WR",
+      "tip": "Gemiddeld algemeen Winstpercentage van spelers die ermee spelen"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Gemiddelde schade per gevecht"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Verhouding kills / deaths"
+    },
+    "assists": {
+      "label": "Assists",
+      "tip": "Gemiddeld aan geassisteerde schade"
+    },
+    "hitPct": {
+      "label": "Hit %",
+      "tip": "Treffers / Schoten"
+    },
+    "penPct": {
+      "label": "Pen %",
+      "tip": "Penetratie / Treffers"
+    },
+    "spots": {
+      "label": "Spotten",
+      "tip": "Gemiddeld Spotten per gevecht"
+    },
+    "blocked": {
+      "label": "Geblokkeerd",
+      "tip": "Gemiddelde schade, Geblokkeerd door Bepantsering"
+    },
+    "survival": {
+      "label": "Overleving",
+      "tip": "Delen van alle gevechten: Gevechten overleefd"
+    }
+  }
+}

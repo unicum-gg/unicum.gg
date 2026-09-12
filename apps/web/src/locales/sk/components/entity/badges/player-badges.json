@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. miesto",
+    "2": "2. miesto",
+    "3": "3. miesto"
+  },
+  "streamer": "Streamer · sledujte na Twitchi: {name}",
+  "tournament": {
+    "one": "Víťazná zostava, podujatie: {title}",
+    "many": "Člen {count} víťazných zostáv, najvýznamnejšie podujatie: {title}",
+    "featured": "{text} · vybrané podujatie",
+    "unnamed": "turnaj spoločnosti Wargaming"
+  },
+  "tournament-wins": "{count, plural, one {# víťazstvo v turnaji} few {# víťazstvá v turnaji} other {# víťazstiev v turnaji}}",
+  "watch-on-twitch": "Sledujte na Twitchi: {name}",
+  "watch-on-twitch-viewers": "Sledujte na Twitchi: {name} · počet divákov: {viewers}"
+}

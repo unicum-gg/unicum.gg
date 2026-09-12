@@ -1,0 +1,6 @@
+{
+  "title": "{region}排名最佳的 World of Tanks {mode}大逃杀玩家",
+  "description": "{name} {region}的{mode}排行榜，{mode}是 World of Tanks 的大逃杀模式，按我们的 HR 评分（平均经验 + 胜率）排名。",
+  "og-title": "最佳{mode}玩家",
+  "og-subtitle": "{region}大逃杀排行榜"
+}

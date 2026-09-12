@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} битки с него",
+  "damage": "{damage} поражения",
+  "n-marks": "{count, plural, one {# знак} other {# знаци}}",
+  "no-written-opinions-yet-if": "Все още няма писмени мнения. Ако имаш достатъчно битки, твоето ще е първото.",
+  "win-rate": "{toFixed}% процент победи",
+  "written-on": "написано във версия {gameVersion}"
+}

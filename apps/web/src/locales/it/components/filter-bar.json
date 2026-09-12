@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Cerca tra {count} carri armati",
+    "rated-tanks": "Cerca tra {count} carri armati classificati",
+    "videos": "Cerca tra {count} video",
+    "players": "Cerca tra {count} giocatori",
+    "clans": "Cerca tra {count} clan",
+    "tournaments": "Cerca tra {count} tornei",
+    "teams": "Cerca tra {count} squadre"
+  },
+  "min": "Min",
+  "max": "Max",
+  "none": "Nessuno",
+  "common-test": "Modificati dal Test pubblico: veicoli nuovi e ribilanciati",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Ricompensa"
+  },
+  "moe": {
+    "0": "Nessun marchio per ora",
+    "1": "1 punto",
+    "2": "2 punti",
+    "3": "3 punti"
+  },
+  "mom": {
+    "0": "Nessun distintivo per ora",
+    "1": "3° Classe",
+    "2": "2° Classe",
+    "3": "1° Classe",
+    "4": "Ace Tanker"
+  }
+}

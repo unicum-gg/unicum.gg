@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Tutti i {count} veicoli di World of Tanks nella regione {region}. Filtra per livello, nazione, classe e ruolo, poi apri un carro armato per consultarne le statistiche, i migliori giocatori e i valori attesi.",
+    "title": "Tutti i carri armati di World of Tanks ({region}), sfoglia ogni veicolo",
+    "description": "Sfoglia tutti i carri armati di World of Tanks nella regione {region}: filtra per livello, nazione, classe e ruolo, poi consulta le statistiche di ogni carro armato, i migliori giocatori e i valori attesi.",
+    "heading": "Tutti <accent>i carri</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, perforazione, corazza, raggio visivo e mobilità per tutti i {count} veicoli di World of Tanks nella regione {region}. Ordina in base a qualsiasi colonna, poi filtra per livello, nazione, classe e ruolo.",
+    "title": "Specifiche dei carri armati di World of Tanks ({region}), confronta ogni veicolo",
+    "description": "Confronta le specifiche di tutti i carri armati di World of Tanks nella regione {region}: DPM, perforazione, corazza, raggio visivo e mobilità, con ordinamento e filtri per livello, nazione, classe e ruolo.",
+    "heading": "Specifiche <accent>del carro</accent>"
+  },
+  "economics": {
+    "intro": "Costi di acquisto e riparazione, prezzi dei proiettili e guadagni in crediti per tutti i {count} veicoli di World of Tanks nella regione {region}. Ordina in base a qualsiasi colonna, poi filtra per livello, nazione, classe e ruolo.",
+    "title": "Economia dei carri armati di World of Tanks ({region}), costi in crediti e XP",
+    "description": "Costi in crediti e XP, prezzi delle riparazioni e dei proiettili per tutti i carri armati di World of Tanks nella regione {region}, con ordinamento e filtri per livello, nazione, classe e ruolo.",
+    "heading": "Economia <accent>del carro</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Danno medio mobile necessario per ottenere uno, due o tre marchi su tutti i {count} veicoli di World of Tanks nella regione {region}. Ordina in base a qualsiasi colonna, poi filtra per livello, nazione, classe e ruolo.",
+    "title": "Requisiti dei marchi d’eccellenza di World of Tanks ({region})",
+    "description": "Danno necessario per ottenere uno, due o tre marchi d’eccellenza su tutti i carri armati di World of Tanks nella regione {region}, con ordinamento e filtri per livello, nazione, classe e ruolo.",
+    "heading": "<accent>Marchi d’eccellenza</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Soglie di XP per Asso carrista e distintivi di maestria per tutti i {count} veicoli di World of Tanks nella regione {region}. Ordina in base a qualsiasi colonna, poi filtra per livello, nazione, classe e ruolo.",
+    "title": "Requisiti dei distintivi di maestria di World of Tanks ({region})",
+    "description": "Soglie di XP per Asso carrista e distintivi di maestria per tutti i carri armati di World of Tanks nella regione {region}, con ordinamento e filtri per livello, nazione, classe e ruolo.",
+    "heading": "<accent>Distintivi di maestria</accent>"
+  },
+  "videos": {
+    "intro": "{count} battaglie segnalate dalla community nella regione {region}, ciascuna si apre al secondo esatto in cui inizia. Sono state proposte dalle pagine dei carri armati e controllate prima di apparire qui.",
+    "title": "Video di gameplay di World of Tanks ({region})",
+    "description": "Battaglie di World of Tanks suggerite dalla community nella regione {region}, ciascuna si apre al secondo esatto in cui inizia: il carro armato usato, la mappa, il lato della mappa e l’esito della battaglia.",
+    "heading": "Video di <accent>gameplay</accent>"
+  }
+}

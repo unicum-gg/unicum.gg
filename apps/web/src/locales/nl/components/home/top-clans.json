@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Toont de beste clans in {region} met meer dan 50 leden die gevechten hebben gespeeld, gerangschikt op gemiddelde {metric}.",
+    "month": "Toont de beste clans in {region} met meer dan 50 leden die gevechten hebben gespeeld, gerangschikt op {metric} over de afgelopen 30 dagen (min. 15 actieve leden)."
+  },
+  "updated": "Bijgewerkt {when}.",
+  "empty": "Nog geen clangegevens beschikbaar voor deze regio.",
+  "rank": "#",
+  "clan": "Clan",
+  "average": "Gem. {metric}"
+}

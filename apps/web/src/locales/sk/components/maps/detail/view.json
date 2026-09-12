@@ -1,0 +1,9 @@
+{
+  "battle-time": "Čas bitke",
+  "camouflage": "Maskovanie {camouflage}",
+  "mode": "Mód",
+  "n-random-events": "{count, plural, one {# náhodná udalosť} few {# náhodné udalosti} other {# náhodných udalostí}}",
+  "random-events": "Náhodné udalosti",
+  "size": "Velikost",
+  "team-size": "Veľkosť tímu"
+}

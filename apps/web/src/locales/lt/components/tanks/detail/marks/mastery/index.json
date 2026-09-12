@@ -1,0 +1,8 @@
+{
+  "last-days": "Paskutinės {chartDays} dienos",
+  "n-players": "{count, plural, one {# žaidėjas} few {# žaidėjai} other {# žaidėjai}}",
+  "rolling-average-combined-damage-to": "Slenkamasis bendros žalos vidurkis, reikalingas įveikti 65 / 85 / 95% žaidėjų.",
+  "single-battle-xp-to-beat": "Vieno mūšio XP, reikalinga įveikti 50 / 80 / 95 / 99% žaidėjų.",
+  "tank-marks-of-excellence": "{tank} meistriškumo ženklai",
+  "tank-marks-of-mastery": "{tank} meistriškumo ženkleliai"
+}

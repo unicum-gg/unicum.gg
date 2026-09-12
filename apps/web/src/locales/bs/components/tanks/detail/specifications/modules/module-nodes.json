@@ -1,0 +1,17 @@
+{
+  "aim-time": "Vrijeme ciljana",
+  "ammo": "Municija",
+  "armor": "Oklop",
+  "dispersion": "Raspršenje",
+  "fire-chance": "Šansa za požar",
+  "gun-arc": "Luk topa",
+  "hit-points": "Hit poeni",
+  "load-limit": "Granična težina",
+  "mounted-on": "Postavljeno na {tanks}",
+  "power": "Snaga",
+  "reload": "Ponovno punjenje",
+  "signal-range": "Signalni domet",
+  "tier": "Nivo {tier}",
+  "traverse": "Okretanje",
+  "view-range": "Domet pregleda"
+}

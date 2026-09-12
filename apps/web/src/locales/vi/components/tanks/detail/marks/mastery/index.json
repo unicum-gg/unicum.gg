@@ -1,0 +1,8 @@
+{
+  "last-days": "{chartDays} giờ gần nhất",
+  "n-players": "{count, plural, other {# người chơi}}",
+  "rolling-average-combined-damage-to": "Sát thương kết hợp trung bình trượt để vượt qua 65 / 85 / 95% người chơi.",
+  "single-battle-xp-to-beat": "XP trong một trận đấu để vượt qua 50 / 80 / 95 / 99% người chơi.",
+  "tank-marks-of-excellence": "Dấu Ưu tú của {tank}",
+  "tank-marks-of-mastery": "Dấu Lão luyện của {tank}"
+}

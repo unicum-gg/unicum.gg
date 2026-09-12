@@ -1,0 +1,34 @@
+{
+  "stat": "Stat",
+  "rows": {
+    "battles": "Kamper",
+    "tier": "Nivå",
+    "wins": "Seire",
+    "losses": "Tap",
+    "draws": "Uavgjort",
+    "survived": "Kamper overlevd",
+    "destroyed": "Ødelagte tanks",
+    "destruction-ratio": "Bekjempelsesrate",
+    "spotted": "Oppdagede tanks",
+    "damages": "Skader",
+    "track-damages": "Spor skader",
+    "spotting-damages": "Skader fra oppdagelse",
+    "assisting-damages": "Hjelpe skader",
+    "combined-damages": "Kombinerte skader",
+    "base-capture": "Basetaking",
+    "base-defense": "Baseforsvar",
+    "experience": "Erfaring",
+    "hit-rate": "Ttreffprosent",
+    "personal-rating": "Personlig rangering",
+    "wtr": "World of Tanks-vurdering",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Totalt",
+    "day": "Siste 24t",
+    "week": "Siste 7d",
+    "month": "Siste 30d"
+  }
+}

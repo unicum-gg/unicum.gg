@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Jucători",
+    "clans": "Clanuri",
+    "tanks": "Tancuri",
+    "maps": "Hărţile",
+    "tournaments": "Turneele",
+    "servers": "Servere"
+  },
+  "links": {
+    "top-players": {
+      "label": "Jucători de top",
+      "description": "Clasamentul jucătorilor din toate timpurile"
+    },
+    "players-onslaught": {
+      "description": "Clasamentul Violență"
+    },
+    "players-steel-hunter": {
+      "description": "Clasamentul battle royale"
+    },
+    "top-clans": {
+      "label": "Clanuri de top",
+      "description": "Clasamentul clanurilor din toate timpurile"
+    },
+    "stronghold": {
+      "description": "Clasamentul raidurilor"
+    },
+    "advances": {
+      "description": "Clasament 15v15 de nivel X"
+    },
+    "tank-performances": {
+      "label": "Performanțe",
+      "description": "Rata victoriilor și daunele pentru fiecare tanc"
+    },
+    "tank-specs": {
+      "label": "Specificații",
+      "description": "Statistici pentru fiecare tanc"
+    },
+    "tank-economics": {
+      "label": "Economia",
+      "description": "Câștiguri de credite și experiență"
+    },
+    "tank-moe": {
+      "description": "Daune pentru fiecare semn"
+    },
+    "tank-mom": {
+      "description": "Praguri pentru insignele de măiestrie"
+    },
+    "tank-changes": {
+      "label": "Modificări",
+      "description": "Îmbunătățiri și slăbiri în funcție de actualizare"
+    },
+    "tank-community": {
+      "label": "Clasamentele comunităţii",
+      "description": "Evaluate de jucătorii care le dețin"
+    },
+    "tank-videos": {
+      "label": "Videoclipuri",
+      "description": "Meciuri jucate de comunitate"
+    },
+    "all-tournaments": {
+      "label": "Turneele",
+      "description": "Fiecare turneu, deschis sau încheiat"
+    },
+    "all-maps": {
+      "label": "Toate hărţile",
+      "description": "Fiecare hartă din joc"
+    },
+    "map-changes": {
+      "label": "Modificări",
+      "description": "Refacerea hărților în funcție de actualizare"
+    },
+    "battle-type": {
+      "description": "Hărţile de tip {type}"
+    },
+    "servers-population": {
+      "label": "Populație server",
+      "description": "Jucători online, acum și în timp"
+    }
+  }
+}

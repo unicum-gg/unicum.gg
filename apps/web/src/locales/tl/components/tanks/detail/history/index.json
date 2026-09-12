@@ -1,0 +1,12 @@
+{
+  "before-update": "Bago ang update {version}",
+  "common-test": "Karaniwang Pagsubok",
+  "in-common-test-not-released": "Nasa Karaniwang Pagsubok, hindi pa inilabas",
+  "introduced": "Ipinakilala",
+  "lifecycle": "Buhay ng Siklo",
+  "n-buffed": "{count} pinahusay",
+  "n-nerfed": "{count} pinahina",
+  "not-released-wargaming-can-still": "Hindi pa inilabas. Maaari pa ring baguhin o alisin ng Wargaming ang alinman dito bago ilabas ang update.",
+  "status": "Katayuan",
+  "update": "I-update ang {version}"
+}

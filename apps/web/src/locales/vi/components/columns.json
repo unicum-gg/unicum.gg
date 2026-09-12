@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "player": "Người chơi",
+  "members": "Thành viên",
+  "battles": "Số trận",
+  "avg-damage": "Thiệt hại trung bình",
+  "avg-xp": "Trung bình XP",
+  "winrate": "Tỷ lệ thắng %",
+  "result": "Kết quả",
+  "tournament": "Giải đấu",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

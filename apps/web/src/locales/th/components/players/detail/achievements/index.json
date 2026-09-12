@@ -1,0 +1,12 @@
+{
+  "achievements": "ความสำเร็จของ {nickname}",
+  "filter-all": "ทั้งหมด",
+  "filter-both": "ทั้งสองประเภท",
+  "filter-earned": "ได้รับแล้ว",
+  "filter-missing": "ยังขาด",
+  "filter-obtainable": "รับได้",
+  "filter-retired": "เลิกใช้แล้ว",
+  "no-achievement-matches-these-filters": "ไม่มีความสำเร็จตรงกับตัวกรองเหล่านี้",
+  "search-achievements": "ค้นหาความสำเร็จ",
+  "search-among-n-achievements": "ค้นหาจากความสำเร็จ {count} รายการ"
+}

@@ -14,6 +14,7 @@ import { ClanRecentActivity } from "@/components/clans/detail/overview/recent-ac
 import type { ClanMemberStats } from "@unicum.gg/shared";
 import type { ClanRecentEvent, Region } from "@unicum.gg/wargaming";
 import type { PreviousClanRow } from "@/services/clans/previous-clans";
+import { useTranslation } from "@/hooks/use-translation";
 
 /** The Overview section under the default Random Battles mode: the members
  * table (random-battles ratings), plus members' previous clans and recent
@@ -33,6 +34,10 @@ export function RandomBattlesTab({
   previousClans: PreviousClanRow[];
   events: ClanRecentEvent[];
 }) {
+  const { t } = useTranslation(
+    "components/clans/detail/overview/index",
+  );
+
   return (
     <>
       <PanelSeparator />
@@ -40,7 +45,7 @@ export function RandomBattlesTab({
         <PanelHeader>
           <PanelTitle>
             <TaggedTitle tag={tag} color={color}>
-              members random battles stats
+              {t("members-stats")}
             </TaggedTitle>
           </PanelTitle>
         </PanelHeader>
@@ -56,7 +61,7 @@ export function RandomBattlesTab({
             <PanelHeader>
               <PanelTitle>
                 <TaggedTitle tag={tag} color={color}>
-                  members previous clans
+                  {t("previous-clans")}
                 </TaggedTitle>
               </PanelTitle>
             </PanelHeader>
@@ -74,7 +79,7 @@ export function RandomBattlesTab({
             <PanelHeader>
               <PanelTitle>
                 <TaggedTitle tag={tag} color={color}>
-                  recent activity
+                  {t("recent-activity")}
                 </TaggedTitle>
               </PanelTitle>
             </PanelHeader>

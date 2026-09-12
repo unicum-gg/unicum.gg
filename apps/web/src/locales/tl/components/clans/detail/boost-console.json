@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Magdagdag ng daloy-ng-trabaho",
+  "boost": "Pagsuporta",
+  "each-workflow-activates-its-reserves": "Ina-activate ng bawat workflow ang mga reserba nito sa loob ng isang takdang oras, kapag sapat na ang mga miyembrong nasa isang live na session ng laro. Tumatakbo ito sa account mo, kaya hindi kailangang online ka. Magdagdag ng kahit ilan pa ang kailangan mo.",
+  "n-online": "/ {count} online",
+  "officer": "Opisyal",
+  "online": "Online",
+  "recent-activations": "mga recent na aktibasyon",
+  "reserve": "Rekurso",
+  "stronghold-boosts": "Pagsuporta ng Stronghold",
+  "when": "Kailan",
+  "workflow": "Daloy ng trabaho"
+}

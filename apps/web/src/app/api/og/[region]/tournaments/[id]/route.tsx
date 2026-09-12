@@ -1,3 +1,5 @@
+import { DEFAULT_LOCALE } from "@/lib/translations";
+import { getTranslation } from "@/lib/translations.server";
 import { ImageResponse } from "next/og";
 import { type NextRequest } from "next/server";
 import sharp from "sharp";
@@ -7,13 +9,8 @@ import { getTournamentRow } from "@unicum.gg/core/tournaments/read";
 import {
   teamFormat,
   TOURNAMENT_GAME_MODE_LABEL,
-  TOURNAMENT_STATUS_LABEL,
 } from "@unicum.gg/shared";
-import {
-  isRegion,
-  type TournamentGameMode,
-  type TournamentStatus,
-} from "@unicum.gg/wargaming";
+import { isRegion, type TournamentGameMode } from "@unicum.gg/wargaming";
 import { tierBand } from "@/components/tournaments/tier-label";
 
 export const runtime = "nodejs";
@@ -55,6 +52,7 @@ export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ region: string; id: string }> },
 ) {
+  const { t: tGame } = await getTranslation("game/vocabulary", DEFAULT_LOCALE);
   const { region, id } = await params;
   const assets = await loadOgAssets();
 
@@ -73,7 +71,7 @@ export async function GET(
     const t = await getTournamentRow(region, numericId);
     if (t) {
       title = t.title;
-      statusLabel = TOURNAMENT_STATUS_LABEL[t.status as TournamentStatus] ?? "";
+      statusLabel = tGame(`tournament-statuses.${t.status}`) ?? "";
       teamsLabel = String(t.confirmedTeams);
       formatLabel = teamFormat(t.minPlayersInTeam);
       tier = tierBand(t.tierFrom, t.tierTo) ?? "—";

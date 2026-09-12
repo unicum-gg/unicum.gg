@@ -1,0 +1,7 @@
+{
+  "back-to": "Bakåt till {seconds}",
+  "drag-to-the-battle": "Dra till när striden börjar och finjustera sedan med {keys}, en sekund per tryckning. Videon pausas vid den tidpunkt du väljer och förblir pausad där medan du fyller i resten.",
+  "moment-the-battle-starts": "Tidpunkten då striden börjar",
+  "use-the-current-moment": "Använd den nuvarande tidpunkten",
+  "video-being-suggested": "Video som föreslås"
+}

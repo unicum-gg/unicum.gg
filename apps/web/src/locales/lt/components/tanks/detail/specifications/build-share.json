@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Sąrankos nuoroda nukopijuota",
+  "copy-build-link": "Kopijuoti sąrankos nuorodą",
+  "could-not-copy-link": "Nepavyko nukopijuoti nuorodos",
+  "include-setup": "Įtraukti nustatymus",
+  "share-build": "Dalintis su statymu",
+  "share-tank": "Bendrinti {tank}",
+  "share-text": "Peržiūrėkite šią {tank} sąranką svetainėje {app}"
+}

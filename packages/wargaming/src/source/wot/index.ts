@@ -1,5 +1,6 @@
 export * from "./mirror";
 export * from "./localization";
+export * from "./game-locales";
 export * from "./arenas";
 export * from "./vehicles";
 export * from "./specs";

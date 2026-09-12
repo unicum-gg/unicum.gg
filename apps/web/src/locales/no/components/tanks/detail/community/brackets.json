@@ -1,0 +1,8 @@
+{
+  "battles": "{count} kamper",
+  "no-votes": "nei stemmer",
+  "rated-higher": "Dyktigere spillere vurderer den {stars} stjerner høyere enn resten av serveren. Denne belønner deg for å vite hva du gjør.",
+  "rated-lower": "Dyktigere spillere vurderer den {stars} stjerner lavere enn resten av serveren. Den smigrer helt til den blir bedt om å gjøre noe.",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stemme"
+}

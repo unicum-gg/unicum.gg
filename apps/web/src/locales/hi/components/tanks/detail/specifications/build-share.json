@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "बिल्ड लिंक कॉपी किया गया",
+  "copy-build-link": "बिल्ड लिंक कॉपी करें",
+  "could-not-copy-link": "लिंक कॉपी नहीं हो सका",
+  "include-setup": "सेटअप शामिल करें",
+  "share-build": "साझा करें निर्माण",
+  "share-tank": "{tank} साझा करें",
+  "share-text": "{app} पर यह {tank} बिल्ड देखें"
+}

@@ -1,0 +1,5 @@
+{
+  "battles": "{count} bitky",
+  "chart-label": "Odohrané bitky za {granularity}, vyfarbené podľa {metric}",
+  "no-battles": "Žiadne bitky"
+}

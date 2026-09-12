@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/format";
 import {
   RATING_COLOR_HEX,
   RatingColor,
@@ -9,16 +10,16 @@ import {
   type PlayerTankDetail,
 } from "@unicum.gg/shared";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const ratioFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const RATIO_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 export type DetailRow = {
   label: string;
@@ -70,22 +71,22 @@ function coloredPct(
 function ratingRow(
   metric: RatingMetric,
   value: number | null,
-  tier: (v: number) => RatingColor,
+  tier: (v: number) => RatingColor, locale: string,
 ): DetailRow[] {
   if (value === null) return [];
   const color = tier(value);
   return row(
     metric.toUpperCase(),
-    intFmt.format(value),
+    numberFormat(locale, INT_FORMAT).format(value),
     false,
     color === RatingColor.VeryBad ? undefined : RATING_COLOR_HEX[color],
     metric,
   );
 }
 
-const pct = (v: number | null) => (v === null ? null : pctFmt.format(v));
-const ratio = (v: number | null) => (v === null ? null : ratioFmt.format(v));
-const int = (v: number | null) => (v === null ? null : intFmt.format(v));
+const pct = (v: number | null, locale: string) => (v === null ? null : numberFormat(locale, PCT_FORMAT).format(v));
+const ratio = (v: number | null, locale: string) => (v === null ? null : numberFormat(locale, RATIO_FORMAT).format(v));
+const int = (v: number | null, locale: string) => (v === null ? null : numberFormat(locale, INT_FORMAT).format(v));
 
 /**
  * The "General Parameters" block, in the game's order.
@@ -94,16 +95,16 @@ const int = (v: number | null) => (v === null ? null : intFmt.format(v));
  * the game's own behaviour: every tank reports zero, and a column of zeroes on
  * a heavy says nothing about it.
  */
-export function generalRows(d: PlayerTankDetail): DetailRow[] {
+export function generalRows(d: PlayerTankDetail, locale: string): DetailRow[] {
   return [
-    ...row("Battles", int(d.battles)),
-    ...row("Victories", pct(d.winrate), false, coloredPct(d.winrate, winrateColor)),
-    ...row("Battles survived", pct(d.survivalRate)),
-    ...row("Hits", pct(d.hitRate)),
-    ...row("Damage ratio", ratio(d.damageRatio)),
-    ...row("Destruction ratio", ratio(d.destructionRatio)),
-    ...row("Armor-use efficiency", ratio(d.armorUseEfficiency)),
-    ...(d.stuns ? row("Number of stuns", int(d.stuns)) : []),
+    ...row("Battles", int(d.battles, locale)),
+    ...row("Victories", pct(d.winrate, locale), false, coloredPct(d.winrate, winrateColor)),
+    ...row("Battles survived", pct(d.survivalRate, locale)),
+    ...row("Hits", pct(d.hitRate, locale)),
+    ...row("Damage ratio", ratio(d.damageRatio, locale)),
+    ...row("Destruction ratio", ratio(d.destructionRatio, locale)),
+    ...row("Armor-use efficiency", ratio(d.armorUseEfficiency, locale)),
+    ...(d.stuns ? row("Number of stuns", int(d.stuns, locale)) : []),
   ];
 }
 
@@ -114,35 +115,35 @@ export function generalRows(d: PlayerTankDetail): DetailRow[] {
  * source in Wargaming's API: the field exists only inside the battle-mode
  * blocks, and those answer 0 for every tank of every account tried.
  */
-export function recordRows(d: PlayerTankDetail): DetailRow[] {
+export function recordRows(d: PlayerTankDetail, locale: string): DetailRow[] {
   return [
-    ...row("Maximum experience", int(d.maxXp)),
-    ...row("Maximum destroyed", int(d.maxFrags)),
+    ...row("Maximum experience", int(d.maxXp, locale)),
+    ...row("Maximum destroyed", int(d.maxFrags, locale)),
   ];
 }
 
 /** The "Average Score per Battle" block, in the game's order. */
-export function averageRows(d: PlayerTankDetail): DetailRow[] {
+export function averageRows(d: PlayerTankDetail, locale: string): DetailRow[] {
   return [
     // The rating first: it is the one line that answers "was this any good",
     // and the rest of the block is what it was computed from.
-    ...ratingRow(RatingMetric.Wn7, d.wn7, wn7Color),
-    ...ratingRow(RatingMetric.Wn8, d.wn8, wn8Color),
-    ...ratingRow(RatingMetric.Wnx, d.wnx, wnxColor),
-    ...row("Experience", int(d.avgXp)),
-    ...row("Damage caused", int(d.avgDamage)),
-    ...row("Damage received", int(d.avgDamageReceived)),
-    ...row("Damage blocked", int(d.avgBlocked)),
+    ...ratingRow(RatingMetric.Wn7, d.wn7, wn7Color, locale),
+    ...ratingRow(RatingMetric.Wn8, d.wn8, wn8Color, locale),
+    ...ratingRow(RatingMetric.Wnx, d.wnx, wnxColor, locale),
+    ...row("Experience", int(d.avgXp, locale)),
+    ...row("Damage caused", int(d.avgDamage, locale)),
+    ...row("Damage received", int(d.avgDamageReceived, locale)),
+    ...row("Damage blocked", int(d.avgBlocked, locale)),
     // Only on a vehicle that lands stuns, like the general block above: every
     // other tank reports a flat zero, which says nothing about it.
-    ...(d.avgStuns ? row("Number of stuns", ratio(d.avgStuns)) : []),
-    ...row("Damage assisted", int(d.avgAssist)),
-    ...row("by spotting", int(d.avgAssistRadio), true),
-    ...row("by tracking", int(d.avgAssistTrack), true),
-    ...(d.avgAssistStun ? row("by stunning", int(d.avgAssistStun), true) : []),
-    ...row("Enemies spotted", ratio(d.avgSpotted)),
-    ...row("Enemies destroyed", ratio(d.avgFrags)),
-    ...row("Base capture", ratio(d.avgCapture)),
-    ...row("Base defense", ratio(d.avgDefense)),
+    ...(d.avgStuns ? row("Number of stuns", ratio(d.avgStuns, locale)) : []),
+    ...row("Damage assisted", int(d.avgAssist, locale)),
+    ...row("by spotting", int(d.avgAssistRadio, locale), true),
+    ...row("by tracking", int(d.avgAssistTrack, locale), true),
+    ...(d.avgAssistStun ? row("by stunning", int(d.avgAssistStun, locale), true) : []),
+    ...row("Enemies spotted", ratio(d.avgSpotted, locale)),
+    ...row("Enemies destroyed", ratio(d.avgFrags, locale)),
+    ...row("Base capture", ratio(d.avgCapture, locale)),
+    ...row("Base defense", ratio(d.avgDefense, locale)),
   ];
 }

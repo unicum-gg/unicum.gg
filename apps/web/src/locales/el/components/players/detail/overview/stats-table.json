@@ -1,0 +1,34 @@
+{
+  "stat": "Στατιστικό",
+  "rows": {
+    "battles": "Μάχες",
+    "tier": "επίπεδο",
+    "wins": "Νίκες",
+    "losses": "Ήττες",
+    "draws": "Ισοπαλίες",
+    "survived": "Επιβίωση σε Μάχες",
+    "destroyed": "Κατεστραμμένα τανκς",
+    "destruction-ratio": "Συντελεστής καταστροφής",
+    "spotted": "Ανιχνευμένα τανκς",
+    "damages": "Ζημιές",
+    "track-damages": "Ζημιές στις ταινίες",
+    "spotting-damages": "Ζημιές Εντοπισμού",
+    "assisting-damages": "Ζημιές από υποστήριξη",
+    "combined-damages": "Συνδυασμένες ζημιές",
+    "base-capture": "Κατάληψη βάσης",
+    "base-defense": "Άμυνα βάσης",
+    "experience": "Experience",
+    "hit-rate": "Ποσοστό επιτυχίας",
+    "personal-rating": "Προσωπική Βαθμολογία",
+    "wtr": "Βαθμολογία World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Σύνολο",
+    "day": "Τελευταίες 24 ώρες",
+    "week": "Τελευταίες 7 ημέρες",
+    "month": "Τελευταίες 30 ημέρες"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "joined": "加入时间：{date}",
+  "last-battle": "上次战斗 {when}",
+  "never-played": "从未进行过战斗",
+  "updated": "更新时间：{when}",
+  "clan-role-joined": "{role} · 加入于{date}"
+}

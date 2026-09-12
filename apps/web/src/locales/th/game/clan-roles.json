@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "สัสดี",
+  "personnel_officer": "นายทหารฝ่ายกำลังพล",
+  "quartermaster": "นายทหารพลาธิการ",
+  "executive_officer": "รองผู้บังคับการ",
+  "recruit": "ทหารเกณฑ์",
+  "private": "พลทหาร",
+  "commander": "ผู้บังคับการ",
+  "reservist": "กองหนุน",
+  "combat_officer": "เจ้าหน้าที่การรบ",
+  "junior_officer": "นายทหารชั้นผู้น้อย",
+  "intelligence_officer": "เจ้าหน้าที่ข่าวกรอง"
+}

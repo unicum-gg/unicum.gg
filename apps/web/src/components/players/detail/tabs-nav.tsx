@@ -1,7 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import Link from "@/components/link";
+import { usePathname } from "@/hooks/use-pathname";
 import type { MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -12,6 +15,7 @@ import {
   playerModeHref,
   playerSectionHref,
 } from "./tabs";
+import { useTranslation } from "@/hooks/use-translation";
 
 // Returns true for a plain left click (the case we intercept for client-side
 // nav). Modifier and middle clicks fall through so the anchor opens a new tab
@@ -78,6 +82,8 @@ export function PlayerSectionNav({
   achievementCount: number;
   onSelect: (section: PlayerSection) => void;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/detail/tabs");
   const pathname = usePathname();
   // One count per section rather than a chain of ternaries in the JSX, so a
   // third counted section is a line here instead of another special case.
@@ -92,23 +98,26 @@ export function PlayerSectionNav({
     <nav className="flex items-center overflow-x-auto text-sm">
       {PLAYER_SECTIONS.map((s) => (
         <NavAnchor
-          key={s.id}
-          href={playerSectionHref(basePath, s.id)}
-          active={section === s.id}
+          key={s}
+          href={playerSectionHref(basePath, s)}
+          active={section === s}
           onActivate={() => {
             // Compared on the URL, not on the section: a vehicle record lives
             // under Tanks at a deeper path (`/tanks/is-7`), so "already on this
             // section" would swallow the one click that closes it and leave no
             // way back to the plain list.
-            if (pathname !== playerSectionHref(basePath, s.id)) onSelect(s.id);
+            if (pathname !== playerSectionHref(basePath, s)) onSelect(s);
           }}
         >
-          {counts[s.id] !== undefined
-            ? `${s.label} (${counts[s.id]!.toLocaleString("en-US")})`
-            : s.label}
-          {beta.has(s.id) && (
+          {counts[s] !== undefined
+            ? t("section-count", {
+                section: t(`sections.${s}`),
+                count: numberFormat(locale).format(counts[s]!),
+              })
+            : t(`sections.${s}`)}
+          {beta.has(s) && (
             <span className="ml-1.5 rounded-sm bg-fd-secondary px-1 py-0.5 align-middle text-[10px] font-semibold tracking-wide text-fd-muted-foreground uppercase">
-              beta
+              {t("beta")}
             </span>
           )}
         </NavAnchor>
@@ -128,6 +137,8 @@ export function PlayerModeNav({
   mode: PlayerMode;
   onSelect: (mode: PlayerMode) => void;
 }) {
+  const { t } = useTranslation("game/vocabulary");
+
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
       {PLAYER_MODES.map((m) => (
@@ -137,7 +148,7 @@ export function PlayerModeNav({
           active={mode === m.id}
           onActivate={() => onSelect(m.id)}
         >
-          {m.label}
+          {t(`player-modes.${m.id}`)}
         </NavAnchor>
       ))}
     </nav>

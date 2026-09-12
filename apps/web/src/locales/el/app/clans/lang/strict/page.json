@@ -1,0 +1,6 @@
+{
+  "title": "Αποκλειστικά κλαν World of Tanks στα {language} ({region})",
+  "description": "Πίνακας κατάταξης κλαν: {name} {region}, για κλαν που έχουν δηλωμένα τα εξής ως μοναδική τους γλώσσα: {language}, με κατάταξη βάσει WNX.",
+  "og-title": "Αποκλειστικά κλαν στα {language}",
+  "og-subtitle": "Πίνακας Κατάταξης {region}"
+}

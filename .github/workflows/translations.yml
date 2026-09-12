@@ -1,0 +1,87 @@
+# Writes every language but English, from the English files, and commits the
+# result.
+#
+# English is the only locale anyone edits. The other 35 exist because this ran,
+# which is what makes adding a string a one-file change rather than a
+# twenty-seven-file one. The generator only fills in what a locale is MISSING, so
+# a hand correction committed afterwards survives every later run.
+#
+# Separate from the image build on purpose: that one prerenders against the
+# production database through an SSH tunnel and is manual for reasons of its own,
+# while this needs nothing but the repository and a model.
+name: Translations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/src/locales/en/**"
+      - "apps/web/scripts/generate-translations.ts"
+      - "apps/web/src/lib/translations.ts"
+      - "apps/web/src/lib/game-vocabulary.ts"
+  workflow_dispatch:
+
+concurrency:
+  group: translations
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    # Without this the run's own commit retriggers the workflow, which finds
+    # nothing to do and commits nothing, but pays for a run every time.
+    if: github.actor != 'github-actions[bot]'
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: "pnpm"
+
+      # The workspace's postinstall runs the OpenAPI and route generators, which
+      # need no network and no database, so a plain install is enough here.
+      - run: pnpm install --frozen-lockfile
+
+      # Wargaming's half first, so the model never has to guess at a term the
+      # game already has a name for: the four namespaces it owns are overwritten
+      # from the API, in the twelve languages it answers about.
+      - name: Read the game's own vocabulary from Wargaming
+        env:
+          WARGAMING_APPLICATION_ID_EU: ${{ secrets.WARGAMING_APPLICATION_ID_EU }}
+        run: pnpm --filter @unicum.gg/web vocabulary
+
+      # Then the client's half, which reaches further: the API serves thirteen
+      # languages and the game is played in thirty-three, and the maps are in
+      # neither the API nor anywhere else. Needs no credentials, only the wot-src
+      # mirror's LOCALES branch.
+      - name: Read the game's own names from the client
+        run: pnpm --filter @unicum.gg/web game-locales
+
+      # Its own key, not the changelog writer's: this run is a burst of a few
+      # hundred requests and the two should be billed and rate-limited apart.
+      - name: Fill in the missing translations
+        env:
+          OPENAI_API_KEY_TRANSLATIONS: ${{ secrets.OPENAI_API_KEY_TRANSLATIONS }}
+        run: pnpm --filter @unicum.gg/web translate
+
+      # Runs after the generator so a failure names the key that is still
+      # missing rather than the ones the run was about to write.
+      - name: Check the locale tree
+        run: pnpm --filter @unicum.gg/web test
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps/web/src/locales/
+          if ! git diff --staged --quiet; then
+            COUNT=$(git diff --staged --name-only | wc -l | tr -d ' ')
+            git commit -m "🌐 add ${COUNT} generated translation files"
+            git push
+          fi

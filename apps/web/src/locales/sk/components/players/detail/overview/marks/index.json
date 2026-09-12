@@ -1,0 +1,21 @@
+{
+  "title": "Znaky a majstrovstvo: {nickname}",
+  "excellence": {
+    "title": "Značky excelencie",
+    "description": "Vozidlá podľa znakov na hlavni. Znak predstavuje dlhodobo udržiavaný priemer. Hra ho vyhodnocuje v kĺzavom okne posledných bitiek a porovnáva s výsledkami regiónu na danom vozidle.",
+    "partial": "Údaje o znakoch sú načítané pre {known} z {garage} vozidiel. Ostatné sa doplnia pri aktualizácii účtu.",
+    "note": "Počet vozidiel so znakom: {marked} z {garage}.",
+    "note-share": "Počet vozidiel so znakom: {marked} z {garage} ({percent} % garáže)."
+  },
+  "mastery": {
+    "title": "Značky majstrovstva",
+    "description": "Vozidlá podľa najlepšieho získaného odznaku. Odznak vychádza z jednej bitky, nie z priemeru. Hra ho udeľuje podľa skúseností získaných v jednej bitke v porovnaní s výsledkami regiónu na danom vozidle.",
+    "note": "Počet vozidiel s odznakom Tankové eso: {aces} z {garage}.",
+    "note-share": "Počet vozidiel s odznakom Tankové eso: {aces} z {garage} ({percent} % garáže)."
+  },
+  "reach": {
+    "heading": "Výkon nad úrovňou znaku na hlavni",
+    "description": "Vozidlá, ktorých kombinované poškodenie už prekračuje hranicu znaku, ktorý ešte nemajú. Odznak zobrazuje toto kombinované poškodenie a jeho farba zodpovedá prekonanému znaku."
+  },
+  "none": "Žiadny"
+}

@@ -1,6 +1,8 @@
-import Link from "next/link";
+"use client";
+
+import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
-import { isFeedbackEnabled } from "@/services/discord/feedback";
+import { useTranslation } from "@/hooks/use-translation";
 import { FeedbackWidget } from "./feedback/feedback-widget";
 import { LoginWidget } from "./login-widget";
 import { MiniFundingBar } from "./support/mini-funding-bar";
@@ -11,8 +13,14 @@ import { PlayersOnline } from "./players-online";
  * left, the community funding bar in the middle, and the "Support us" CTA plus
  * the login widget on the right. Present on every page so the funding progress
  * and call to action are always in view.
+ *
+ * A Client Component, so its label reads the interface language off the context
+ * rather than needing it threaded in: the 404 boundary renders this chrome and
+ * has no route params to read the language from.
  */
-export function TopBar() {
+export function TopBar({ feedbackEnabled }: { feedbackEnabled: boolean }) {
+  const { t } = useTranslation("components/top-bar");
+
   return (
     <div className="border-b border-fd-border bg-fd-background">
       <div className="mx-auto w-full max-w-7xl">
@@ -25,9 +33,9 @@ export function TopBar() {
               href={ROUTES.SUPPORT}
               className="shrink-0 font-medium text-brand transition-opacity hover:opacity-80"
             >
-              Support us
+              {t("support")}
             </Link>
-            {isFeedbackEnabled() && <FeedbackWidget />}
+            {feedbackEnabled && <FeedbackWidget />}
             <LoginWidget />
           </div>
           {/* Centered on the container (page content) rather than the leftover

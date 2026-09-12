@@ -1,0 +1,12 @@
+{
+  "final": " · نهائي",
+  "has-not-held-a-place": "لم يحتل {nickname} مكانًا في قائمة المتصدرين للهجوم.",
+  "live-season": "· موسم جارٍ",
+  "loading-s-onslaught-record": "جارٍ تحميل سجل الهجوم الخاص بـ {nickname}...",
+  "onslaught": "الهجوم",
+  "onslaught-record": "سجل الهجوم الخاص بـ {nickname}",
+  "see-this-season-s-leaderboard": "عرض قائمة المتصدرين لهذا الموسم",
+  "standing-line": "{rating} نقاط تقييم · {battles} معركة",
+  "the-board-only-lists-players": "تعرض القائمة اللاعبين الذين يصلون إلى رتبة البطل فقط، وهم بضعة آلاف في كل منطقة، لذلك تنتهي معظم الملفات الشخصية هنا. وتُملأ تلقائيًا في الموسم الذي يصلون فيه إلى تلك الرتبة.",
+  "updated": "محدث {when}"
+}

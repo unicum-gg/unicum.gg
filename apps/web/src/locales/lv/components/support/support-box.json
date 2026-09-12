@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Pasūtījums atcelts.",
+  "claim-your-supporter-role-on-discord": "Pieprasīt savu atbalstītāja lomu Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Neizdevās pievienot Discord lomu. Lūdzu, mēģini vēlreiz.",
+  "could-not-open-the-billing-portal": "Neizdevās atvērt norēķinu portālu.",
+  "could-not-start-checkout-please-try-again": "Neizdevās sākt apmaksu. Lūdzu, mēģini vēlreiz.",
+  "could-not-update-your-preference": "Neizdevās atjaunināt tavu izvēli.",
+  "log-in-with-wargaming": "Pieteikties ar Wargaming",
+  "log-in-with-wargaming-to": "Piesakies ar Wargaming, lai atbalstītu {NAME}.",
+  "manage-subscription": "Pārvaldīt abonementu",
+  "only-active-supporters-can-claim-the-discord": "Discord lomu var pieprasīt tikai aktīvi atbalstītāji.",
+  "or-choose-your-own-amount": "Vai izvēlies savu summu",
+  "pay-what-you-want": "Maksā, cik vēlies.",
+  "pick-an-amount": "Izvēlies summu vai ievadi savu, sākot no €{min}/mēnesī.",
+  "re-sync-discord-role": "Atkārtoti sinhronizēt Discord lomu",
+  "secured-by-stripe": "Nodrošina Stripe. Atcel jebkurā laikā.",
+  "show-me-anonymously-on-the": "Rādīt mani anonīmi uz pjedestāla",
+  "support-subscriptions-are-coming-soon": "Atbalsta abonementi drīzumā būs pieejami.",
+  "supporter-role-added-on-discord": "Atbalstītāja loma pievienota Discord!",
+  "you-are-a-supporter-thank": "Tu esi atbalstītājs. Paldies, ka uzturi {NAME} dzīvu."
+}

@@ -1,0 +1,11 @@
+{
+  "compare": "مقارنة مع أقرب {count}",
+  "match": "معركة",
+  "subtitle": "المكانة نفسها ضمن مستواها",
+  "verdict": {
+    "overall": "مشابه بشكل عام",
+    "closest": "الأقرب على {axes}",
+    "closest-furthest": "الأقرب على {axes}، والأبعد على {apart}",
+    "and": " و "
+  }
+}

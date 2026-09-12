@@ -1,0 +1,8 @@
+{
+  "what-players-think": "O que os jogadores acham deste tanque",
+  "not-rated": "Ainda sem avaliações, seja o primeiro",
+  "votes": "{count} votos",
+  "votes-one": "{count} Votar",
+  "stars": "{value} de {max}",
+  "not-rated-short": "Não avaliado"
+}

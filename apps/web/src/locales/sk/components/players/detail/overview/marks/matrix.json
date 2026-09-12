@@ -1,0 +1,7 @@
+{
+  "loading": "Načítavajú sa názvy vozidiel úrovne {tier} (počet: {count})…",
+  "loading-one": "Načítava sa názov vozidla úrovne {tier} (počet: {count})…",
+  "and-more": "a {count} navyše",
+  "hint": "Kliknutím ich otvoríte na karte Tanky",
+  "tier": "Stopnja"
+}

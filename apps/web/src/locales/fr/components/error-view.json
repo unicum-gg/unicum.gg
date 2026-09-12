@@ -1,0 +1,6 @@
+{
+  "title": "Une erreur s’est produite",
+  "description": "L’API Wargaming n’a pas répondu correctement. Il s’agit généralement d’un problème temporaire de leur côté.",
+  "try-again": "Réessayer",
+  "back": "Retour à l’accueil"
+}

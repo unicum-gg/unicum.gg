@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Every one of the {count} World of Tanks battle arenas. Filter by camouflage and game mode, then open a map for its minimap, size and per-mode base flags and spawn points.",
+    "title": "All World of Tanks maps ({region}), every battle arena",
+    "description": "Browse every World of Tanks map on {region}: minimaps, size, camouflage and supported game modes, with per-mode base flags and spawn points.",
+    "heading": "All <accent>maps</accent>"
+  },
+  "battle-type": {
+    "intro": "The {count} World of Tanks maps played in {type}, {blurb}. Open a map for its minimap, size and per-mode base flags and spawn points.",
+    "title": "World of Tanks {type} maps ({region}), every arena in the rotation",
+    "description": "Every World of Tanks map in the {type} rotation on {region}: minimaps, size, camouflage and supported game modes, with base flags and spawn points.",
+    "heading": "{type} <accent>maps</accent>"
+  },
+  "blurbs": {
+    "random": "the standard 15v15 rotation",
+    "battle_royale": "the last-tank-standing mode",
+    "frontline": "the 30v30 large-scale mode",
+    "onslaught": "the ranked 7v7 mode",
+    "onslaught_night": "the ranked 7v7 mode after dark, on shorter view range, currently playable on the Common Test",
+    "grand_battle": "the 30v30 tier X mode",
+    "clan_wars": "clan wars and advances",
+    "waffentrager": "the Waffenträger event",
+    "last_stand": "the Last Stand event",
+    "arcade": "arcade and special events",
+    "story_mode": "the story-driven operations",
+    "training": "training rooms and tutorials"
+  }
+}

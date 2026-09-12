@@ -1,0 +1,7 @@
+{
+  "joined": "Pievienojās {date}",
+  "last-battle": "Pēdējā kauja {when}",
+  "never-played": "Nav spēlējis",
+  "updated": "Atjaunots {when}",
+  "clan-role-joined": "{role} · pievienojās {date}"
+}

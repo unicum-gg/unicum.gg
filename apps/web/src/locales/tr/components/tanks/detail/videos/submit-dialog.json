@@ -1,0 +1,13 @@
+{
+  "assists": "Destek",
+  "close": "Kapat",
+  "damage": "Hasar",
+  "in-the-queue": "Kuyruğa alındı. Moderatör inceledikten sonra bu sekmede görünür.",
+  "optional": "(isteğe bağlı)",
+  "paste-a-youtube-link": "Bir YouTube bağlantısı yapıştır, ardından savaşın başladığı tam anı ayarla. Bağlantıyı açan herkes o saniyeye gider. Bu nedenle zaman damgası hatalı olan öneriler incelemede reddedilir.",
+  "sending": "Gönderiliyor…",
+  "suggest": "Öner",
+  "suggest-a-video": "Video öner",
+  "suggest-another": "Başka bir öner",
+  "suggestion-sent": "Öneri gönderildi"
+}

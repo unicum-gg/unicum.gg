@@ -1,0 +1,35 @@
+{
+  "heading": "Najlepší hráči v režime <accent>{mode}</accent>",
+  "intro": "Režim {mode} je kompetitívny hodnotený režim World of Tanks vo formáte 7 proti 7 s vozidlami X. úrovne. Rebríček pre región {region}, priamo z poradia v hre.",
+  "season": {
+    "range": "{start} až {end}",
+    "final": "konečné poradie",
+    "live": "prebiehajúca sezóna",
+    "updated": "aktualizované {when}"
+  },
+  "board": "Režim {mode}: {count} najlepších hráčov",
+  "columns": {
+    "player": "Hráč",
+    "rank": "Hodnosť",
+    "battles": "Bitky",
+    "rating": "Body hodnotenia"
+  },
+  "alias": "(ako {nickname})",
+  "ranks": {
+    "title": "Hodnosti",
+    "meaning": "Význam",
+    "tier": "Stopnja",
+    "intro": "V režime {mode} postupujete na vyššie hodnosti víťazstvami v bitkách. Za každé víťazstvo získate body hodnotenia podľa toho, ako dobre ste hrali. Hodnosť {champion} je najvyššia hodnosť, ktorú môžete dosiahnuť iba pomocou bodov, a po jej dosiahnutí sa dostanete do rebríčka. Hodnosť {legend} nemá pevnú hranicu. Patrí najlepšie hodnotenej časti hráčov s hodnosťou {champion}, takže jej hranica sa mení podľa výsledkov ostatných hráčov. Pri zhode rozhoduje počet odohraných bitiek. Presné hranice pre hodnosť {legend} a hodnosť {champion} vychádzajú z aktuálnej sezóny a sú vyznačené v rebríčku.",
+    "legend-blurb": "Najvyššie hodnotení hráči s hodnosťou {champion}. Hra ju každú sezónu obmedzuje pevne stanovenou pozíciou v rebríčku, takže jej veľkosť sa líši podľa sezóny a regiónu, nie pevnou bodovou hranicou. Ak klesnete pod posledného hráča s hodnosťou {legend}, vrátite sa na hodnosť {champion}.",
+    "champion-blurb": "Najvyššia hodnosť, ktorú môžete dosiahnuť pomocou bodov hodnotenia, a vstupná hodnosť do rebríčka. Každý hráč v rebríčku má prinajmenšom hodnosť {champion}."
+  },
+  "race": {
+    "title-live": "Čo je potrebné práve teraz",
+    "title-ended": "Ako prebiehala sezóna",
+    "legend-cutoff": "Hranica hodnosti {legend}",
+    "champion-cutoff": "Hranica hodnosti {champion}",
+    "ranked-players": "Hráči s hodnotením",
+    "rating-points": "body hodnotenia",
+    "rank-cutoffs": "Hranice hodností"
+  }
+}

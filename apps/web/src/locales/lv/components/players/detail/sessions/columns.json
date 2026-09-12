@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Reitings (WN)",
+    "tip": "Tikai šo kauju vērtējums, nevis konta vērtējums"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Uzvaru procents šajās kaujās"
+  },
+  "avgDamage": {
+    "label": "Vid. bojājumi"
+  },
+  "avgFrags": {
+    "label": "Vid. iznīcinājumi",
+    "tip": "Iznīcinātie ienaidnieki vienā kaujā"
+  },
+  "damageRatio": {
+    "label": "Bojājumu koeficients",
+    "tip": "Radītie bojājumi pret saņemtajiem bojājumiem"
+  },
+  "kd": {
+    "label": "Iznīcināšanas koeficients",
+    "tip": "Iznīcinātie ienaidnieki pret zaudētajiem transportlīdzekļiem"
+  },
+  "survivalRate": {
+    "label": "Kaujas, kurās izdzīvoja"
+  },
+  "avgSpotted": {
+    "label": "Vidējais novērotais",
+    "tip": "Atklātie ienaidnieki vienā kaujā"
+  },
+  "avgDefense": {
+    "label": "Bāzes aizsardzība",
+    "tip": "Aizsardzības punkti vienā kaujā"
+  },
+  "avgXp": {
+    "label": "Vid. XP"
+  }
+}

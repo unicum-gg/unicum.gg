@@ -1,0 +1,12 @@
+{
+  "final": "Final",
+  "grand-final": "Grand Final",
+  "loser-bracket-final": "Loser Bracket Final",
+  "loser-round": "Loser Round {round}",
+  "quarter-finals": "Quarter-finals",
+  "round-of": "Round of {teams}",
+  "semi-finals": "Semi-finals",
+  "third-place": "Third place",
+  "winner-bracket-final": "Winner Bracket Final",
+  "winner-round": "Winner Round {round}"
+}

@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Awaiting first snapshot",
+    "hidden": "Hidden by Wargaming",
+    "active_24h": "Active < 24h",
+    "active_7d": "Active < 7d",
+    "recent_30d": "Recent < 30d",
+    "recent_90d": "Recent < 90d",
+    "dormant_1y": "Dormant < 1y",
+    "inactive": "Inactive > 1y"
+  },
+  "rating-hype": {
+    "overrated": "Overrated",
+    "fair": "Fairly rated",
+    "underrated": "Underrated"
+  },
+  "rating-consensus": {
+    "agreed": "Broad agreement",
+    "mixed": "Mixed opinions",
+    "divisive": "Divisive"
+  },
+  "rating-axes": {
+    "overall": "Overall",
+    "fun": "Fun",
+    "firepower": "Firepower",
+    "armour": "Armour",
+    "mobility": "Mobility",
+    "gunHandling": "Gun handling",
+    "concealment": "Concealment",
+    "beginnerFriendliness": "Beginner friendly",
+    "versatility": "Versatility"
+  },
+  "rating-axis-hints": {
+    "overall": "How good is this tank, all things considered?",
+    "fun": "How much do you enjoy playing it?",
+    "firepower": "Alpha, damage per minute and penetration.",
+    "armour": "How much it bounces, hull down and in the open.",
+    "mobility": "Speed, acceleration and how it turns.",
+    "gunHandling": "Aim time, dispersion and accuracy on the move.",
+    "concealment": "Camouflage and view range.",
+    "beginnerFriendliness": "How forgiving it is if you are still learning.",
+    "versatility": "Does it work on any map, in any team?"
+  },
+  "voter-brackets": {
+    "unknown": "Unrated",
+    "learning": "Learning",
+    "average": "Average",
+    "strong": "Strong",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vehicles",
+    "gunnery": "Gunnery",
+    "armor": "Armor",
+    "mobility": "Mobility",
+    "vision": "Vision",
+    "crew": "Crew",
+    "progression": "Progression",
+    "economy": "Economy",
+    "ratings": "Ratings",
+    "statistics": "Statistics",
+    "modes": "Battle modes",
+    "tactics": "Tactics",
+    "slang": "Slang"
+  }
+}

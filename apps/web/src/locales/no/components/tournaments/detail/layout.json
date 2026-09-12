@@ -1,0 +1,12 @@
+{
+  "final": "Finale",
+  "grand-final": "Storfinale",
+  "loser-bracket-final": "Finale i taperbraketten",
+  "loser-round": "Taperomgang {round}",
+  "quarter-finals": "Kvartfinaler",
+  "round-of": "Runde med {teams} lag",
+  "semi-finals": "Semifinaler",
+  "third-place": "Tredjeplass",
+  "winner-bracket-final": "Finale i Vinnerbraketten",
+  "winner-round": "Vinneromgang {round}"
+}

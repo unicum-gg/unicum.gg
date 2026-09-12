@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Log in with Wargaming.net ID",
+  "open-source": "{name} is open source. {link} before you trust it.",
+  "pick-the-region-your-world": "Pick the region your World of Tanks account is on. It does not have to be the region you are browsing.",
+  "read-the-login-code": "Read the login code",
+  "what-wargaming-hands-back-is": "What Wargaming hands back is a token that reads your own account data. It is stored encrypted and renewed while your account stays linked, and it only ever acts for you where you set that up yourself, like your clan’s reserve schedule.",
+  "you-sign-in-on-wargaming": "You sign in on Wargaming’s own page, not here. Your password is never typed on {NAME} and never reaches us."
+}

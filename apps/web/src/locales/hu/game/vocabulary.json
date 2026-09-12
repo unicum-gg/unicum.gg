@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Véletlenszerű",
+    "battle_royale": "Acélvadász",
+    "frontline": "Frontvonal",
+    "onslaught": "Roham",
+    "onslaught_night": "{onslaught} Éjszaka",
+    "grand_battle": "Nagy csata",
+    "clan_wars": "Klán Háborúk",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Végső ellenállás",
+    "arcade": "Arcade",
+    "story_mode": "Történet mód",
+    "training": "Képzés"
+  },
+  "player-modes": {
+    "overall": "Véletlenszerű Csata",
+    "skirmish": "Csatározás",
+    "advances": "Előrenyomulások",
+    "grand": "Nagy csaták",
+    "ranked": "Rangsorolt csaták",
+    "cw-x": "Klánháborúk X",
+    "cw-viii": "Klánháborúk VIII",
+    "cw-vi": "Klánháborúk VI",
+    "steel-hunter": "Acélvadász",
+    "onslaught": "Roham"
+  },
+  "stronghold-tiers": {
+    "advances": "Előrenyomulások",
+    "t10": "Csatározás T10",
+    "t8": "Csatározás T8",
+    "t6": "Csatározás T6"
+  },
+  "stronghold-periods": {
+    "24h": "Elmúlt 24 óra",
+    "7d": "Elmúlt 7 nap",
+    "30d": "Elmúlt 30 nap",
+    "overall": "Összesen"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Csaták",
+    "winrate": "Győzelmi arány"
+  },
+  "clan-boards": {
+    "advances": "Előrenyomulások",
+    "t10": "Csatározás X",
+    "t8": "Csatározás VIII",
+    "t6": "Csatározás VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Csata ütközet",
+    "assault": "Támadó",
+    "attack-defense": "Támadás/Védekezés"
+  },
+  "map-camouflage": {
+    "summer": "Nyári",
+    "winter": "Téli",
+    "desert": "Sivatagi"
+  },
+  "map-poi": {
+    "1": "Tüzérségi főhadiszállás",
+    "2": "Kommunikációs központ",
+    "3": "Megfigyelőállás"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Találkozó ütközet",
+    "assault2": "Támadás/Védekezés",
+    "comp7": "Roham"
+  },
+  "battle-formats": {
+    "random": "Véletlenszerű",
+    "clan_wars": "Klán Háborúk",
+    "advances": "Előrenyomulások",
+    "skirmish": "Csatározás",
+    "maneuvers": "Hadgyakorlatok",
+    "onslaught": "Roham",
+    "tournament": "Torna"
+  },
+  "battle-results": {
+    "victory": "Győzelem",
+    "defeat": "Vereség",
+    "draw": "Döntetlen"
+  },
+  "spawn-directions": {
+    "north": "Észak",
+    "south": "Dél",
+    "east": "Kelet",
+    "west": "Nyugat"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Közelgő",
+    "registration_started": "Jelentkezés nyitva",
+    "registration_finished": "Regisztráció lezárva",
+    "running": "Folyamatban",
+    "finished": "Befejezés alatt",
+    "complete": "Teljesítve"
+  },
+  "onslaught-tiers": {
+    "legend": "Legenda",
+    "champion": "Bajnok",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Nehéz",
+    "mediumTank": "Közepes",
+    "lightTank": "Könnyű",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Támadó",
+    "break": "Áttörő",
+    "support": "Támogató",
+    "universal": "Sokoldalú",
+    "sniper": "Mesterlövész",
+    "wheeled": "Kerekes"
+  },
+  "mastery-badges": {
+    "class3": "3. Osztály",
+    "class2": "2. Osztály",
+    "class1": "1. Osztály",
+    "ace": "Asztali Tankér"
+  },
+  "clan-modes": {
+    "random": "Véletlenszerű Csata",
+    "stronghold": "Erődítmény",
+    "skirmish": "Csatározás",
+    "clan-wars": "Klán Háborúk"
+  },
+  "features": {
+    "stronghold": "Erődítmény",
+    "skirmish": "Csatározás",
+    "marks-of-excellence": "Kiválóság jele",
+    "marks-of-mastery": "Mestermarkok",
+    "personal-rating": "Személyes értékelés",
+    "world-of-tanks-rating": "World of Tanks-értékelés",
+    "common-test": "Közönséges Teszt",
+    "tournaments": "Tornák"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Mark",
+    "3": "3 Mark",
+    "name": "Kiválóság jele"
+  }
+}

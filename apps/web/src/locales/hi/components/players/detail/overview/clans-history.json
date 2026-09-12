@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname} का क्लान इतिहास",
+  "clans-in-clans": "{totalClans} क्लान · क्लान में {timeInClansSeconds}",
+  "current": "वर्तमान",
+  "duration": "अवधि",
+  "from": "से",
+  "name": "नाम",
+  "no-clan-history": "कोई क्लान इतिहास नहीं।",
+  "role": "भूमिका",
+  "tag": "टैग",
+  "to": "से"
+}

@@ -1,0 +1,7 @@
+{
+  "stats-title": "{nickname}のランダム戦戦績",
+  "progression-title": "{nickname}の{metric}推移",
+  "lift-drag-title": "{nickname}のレーティングを形作る戦車",
+  "progression-blurb": "実線は総合{metric}（上の合計列と一致）で、新しい戦闘が蓄積されるにつれてゆっくり変化します。破線はセッションごとの{metric}で、前回のスナップショット以降にプレイした戦闘から算出されます。好調と不調の連続を示します。線の色はレーティングTierに従います。",
+  "progression-empty": "履歴がまだ不十分です。曲線を描くには少なくとも1つのスナップショットが必要です。しばらくしてから確認してください。"
+}

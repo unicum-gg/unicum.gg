@@ -1,0 +1,8 @@
+{
+  "busiest": "Travleste {when} ({players})",
+  "not-enough-recorded-yet-to": "Der er endnu ikke registreret nok til at vise en ugentlig rytme. Den udfyldes, efterhånden som stikprøvetagningen dækker hver time i ugen.",
+  "not-sampled-yet": "Ikke udtaget endnu",
+  "players-on-average": "{players} spillere i gennemsnit",
+  "quietest": ", mest stille {when} ({players})",
+  "your-local-time": "Din lokale tid"
+}

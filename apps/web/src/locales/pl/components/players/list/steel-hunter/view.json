@@ -1,0 +1,13 @@
+{
+  "heading": "Najlepsi gracze w trybie <accent>{mode}</accent>",
+  "intro": "W World of Tanks {mode} to tryb battle royale. Ranking graczy z regionu {region} według HR (minimum 100 bitew w trybie {mode}).",
+  "board": "{count} najlepszych graczy w trybie {mode}",
+  "columns": {
+    "player": "Gracz",
+    "battles": "Bitwy",
+    "survival": "Przeżycie",
+    "survival-percent": "Przeżycie %",
+    "damage": "Średnie obrażenia"
+  },
+  "scale-description": "Progi kolorystyczne rankingu trybu {mode}, skalibrowane na podstawie populacji graczy, którzy rozegrali co najmniej 100 bitew w trybie {mode}."
+}

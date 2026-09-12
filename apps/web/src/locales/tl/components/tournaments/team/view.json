@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Hindi pa nagagawa ang draw. Lumilitaw dito ang mga laban ng koponang ito kapag nagsimula ang torneo.",
+  "each-map-is-played-twice": "Dalawang beses nilalaro ang bawat mapa, isang beses mula sa bawat panig. Ang huling mapa ang nagpapasya, at isang beses lang ito nilalaro.",
+  "first-battle-at": "Unang labanan, {when}",
+  "lost": "Natalo",
+  "matches": "Mga laban ({length})",
+  "never-played": "Hindi kailanman naglaro ng laban ang koponang ito. Nagparehistro ito ngunit hindi ito naabot ng draw, na nangyayari sa isang talaang hindi nakumpirma.",
+  "no-maps-recorded": "Walang mga mapang naitala para sa laban na ito.",
+  "no-roster-recorded-for-this": "Walang talaang naitala para sa koponang ito.",
+  "of-players-on-the-day": "{members} sa {length} mga manlalaro noong araw na iyon",
+  "played-on-uncatalogued": "Nilaro sa {maps}, na hindi kasama sa katalogo ng mapa.",
+  "roster": "Roster ({length})",
+  "stage-group": "{stage} · Pangkat {order}",
+  "team-1": "Koponan 1",
+  "team-2": "Koponan 2",
+  "tournaments": "Mga torneo",
+  "when-the-first-battle-started": "Nang magsimula ang unang labanan",
+  "won": "Nanalo"
+}

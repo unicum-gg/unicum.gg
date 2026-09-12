@@ -1,0 +1,7 @@
+{
+  "group": "Ryhmä {order}",
+  "n-teams": "{count} joukkuetta",
+  "pts": "Pts",
+  "team": "Joukkue",
+  "top-n-advance": ", parhaat {count} jatkavat"
+}

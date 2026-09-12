@@ -1,0 +1,12 @@
+{
+  "before-update": "A(z) {version} frissítés előtt",
+  "common-test": "Közönséges Teszt",
+  "in-common-test-not-released": "A Közönséges Tesztben, még nem jelent meg",
+  "introduced": "Bevezetés",
+  "lifecycle": "Életciklus",
+  "n-buffed": "{count} erősítve",
+  "n-nerfed": "{count} gyengítve",
+  "not-released-wargaming-can-still": "Még nem jelent meg. A Wargaming a frissítés kiadásáig még módosíthatja vagy elvetheti ezeket.",
+  "status": "Állapot",
+  "update": "Frissítés {version}"
+}

@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visual",
+    "collision": "Collision",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Center the vehicle",
+    "off": "Put it back off centre"
+  },
+  "hull-down": {
+    "on": "Hull down",
+    "off": "Level the vehicle"
+  },
+  "tracks": {
+    "on": "Run the tracks",
+    "off": "Stop the tracks"
+  },
+  "textures": {
+    "on": "High definition textures",
+    "off": "Standard textures"
+  },
+  "reset": "Reset view",
+  "style": "Choose a style",
+  "style-worn": "Style: {name}",
+  "search-styles": "Search styles",
+  "colours": "What the colours mean",
+  "cinematic": {
+    "off": "Cinematic camera: off",
+    "auto": "Cinematic camera: when left alone",
+    "on": "Cinematic camera: always"
+  },
+  "open-tank": "Open another tank",
+  "open-tank-placeholder": "Open tank...",
+  "more-actions": "More actions",
+  "marks-meaning": {
+    "0": "No marks of excellence",
+    "1": "One mark: ahead of 65% of players on this tank",
+    "2": "Two marks: ahead of 85%",
+    "3": "Three marks: ahead of 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Fill the window",
+      "leave": "Back into the page"
+    },
+    "screen": {
+      "enter": "Fill the screen",
+      "leave": "Leave full screen"
+    }
+  },
+  "marks-count": {
+    "0": "No marks of excellence",
+    "one": "1 mark of excellence",
+    "other": "{count} marks of excellence"
+  },
+  "compare-tank": "Compare with another tank",
+  "compare-tank-placeholder": "Compare with...",
+  "view-tooltips": {
+    "visual": "The tank as the game draws it",
+    "collision": "How thick each plate is",
+    "live": "What the chosen shell would do"
+  },
+  "cinematic-tooltips": {
+    "off": "Cinematic camera: off, the view stays put",
+    "auto": "Cinematic camera: starts after 30 seconds alone",
+    "on": "Cinematic camera: always, from the moment you let go"
+  }
+}

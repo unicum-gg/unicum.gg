@@ -1,0 +1,14 @@
+{
+  "clan": "Klán",
+  "clear-the-field": "A(z) {label} törlése",
+  "credited-on-the-clan-s": "A klán saját oldalán van feltüntetve.",
+  "none": "Nincs",
+  "optional": "(opcionális)",
+  "pick-the-vehicle": "Jármű kiválasztása",
+  "search-for-a-clan": "Klán keresése",
+  "search-for-a-vehicle": "Jármű keresése",
+  "search-tank": "Tank keresése...",
+  "tank": "Tank",
+  "tank-hint-optional": "Egy taktika a pályához tartozik, ezért csak akkor érdemes megadni, ha a videó a járműről is szól.",
+  "tank-hint-required": "Egy véletlen csata a jármű alapján kereshető meg, amellyel játszották."
+}

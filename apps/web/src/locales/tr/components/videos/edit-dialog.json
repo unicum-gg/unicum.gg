@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Araç dahil yanlış olan her şeyi değiştirin. Kaydetmek videoyu yeniden moderasyon sırasına gönderir, bu nedenle yayındaki video tekrar onaylanana kadar kaldırılır.",
+  "correct-a-suggestion": "Bir öneriyi düzelt",
+  "could-not-load-that-suggestion": "Bu öneri yüklenemedi. Biraz sonra tekrar deneyin.",
+  "link-expired": "Bu bağlantının süresi doldu. Yeni bir bağlantı almak için Discord’daki kartta Düzenle’ye tekrar basın.",
+  "loading": "Yükleniyor…",
+  "log-in": "Giriş yap",
+  "log-in-with-the-account": "Düzeltmek için bu videoyu öneren hesapla giriş yapın.",
+  "no-suggestion-with-that-id": "Bu kimliğe sahip bir öneri yok.",
+  "not-yours-to-correct": "Bu öneriyi düzeltme yetkiniz yok."
+}

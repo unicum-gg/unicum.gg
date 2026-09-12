@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Kosten (Credits)",
+      "tip": "Kaufpreis in Kreditpunkten (Forschungsbaum-Panzer)"
+    },
+    "buyGold": {
+      "label": "Kosten (Gold)",
+      "tip": "Kaufpreis in Gold (Premium-Panzer)"
+    },
+    "researchXp": {
+      "label": "Forschungs-XP",
+      "tip": "XP zum Freischalten (günstigster Weg)"
+    },
+    "totalFreeXp": {
+      "label": "Freie XP (Stufe {tier})",
+      "tip": "Kumulierte EP für die Erforschung ab Stufe {tier}, einschließlich erforderlicher Module"
+    },
+    "shellCost": {
+      "label": "Geschosskosten",
+      "tip": "Preis der Standardgranate (Kreditpunkte)"
+    },
+    "ammoCost": {
+      "label": "Kosten für volle Munition",
+      "tip": "Preis der Standardgranate × Munitionskapazität"
+    },
+    "acquireMoney": {
+      "label": "Kaufpreis ({currency})",
+      "tip": "Geschätzte Echtgeldkosten für den Erwerb des Panzers (Erforschung + Kauf), in {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Freie XP ({currency})",
+      "tip": "Geschätzte Echtgeldkosten, um den Panzer ab Stufe {tier} mit freien EP zu erforschen, in {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Kosten (Credits)",
+    "buyGold": "Kosten (Gold)",
+    "researchXp": "Forschungs-XP",
+    "totalFreeXp": "Freie XP",
+    "shellCost": "Geschosskosten",
+    "ammoCost": "Kosten für volle Munition",
+    "acquireMoney": "Kaufpreis (Geld)",
+    "freeXpMoney": "Freie XP (Geld)"
+  }
+}

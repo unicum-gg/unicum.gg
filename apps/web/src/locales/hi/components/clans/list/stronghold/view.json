@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "अभी तक कोई डेटा नहीं है। क्लान रीफ़्रेश होने के बाद फिर जाँचें।",
+  "heading": "शीर्ष <accent>{tier}</accent> क्लान",
+  "blurb": "{region} लीडरबोर्ड, {format} में सभी ट्रैक किए गए क्लान में {sort} के अनुसार रैंक्ड, न्यूनतम {battles} युद्ध।",
+  "blurb-period": "{region} लीडरबोर्ड, {period} के दौरान {format} में सभी ट्रैक किए गए क्लान में {sort} के अनुसार रैंक्ड, न्यूनतम {battles} युद्ध।",
+  "format-advances": "एडवांस (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "शीर्ष {count} {tier} क्लान ·"
+}

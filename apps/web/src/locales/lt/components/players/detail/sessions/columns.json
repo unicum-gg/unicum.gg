@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Reitingas (WN)",
+    "tip": "Tik šių mūšių reitingas, ne paskyros"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Pergalių procentas per šiuos mūšius"
+  },
+  "avgDamage": {
+    "label": "Vid. žala"
+  },
+  "avgFrags": {
+    "label": "Vid. frags",
+    "tip": "Sunaikinti priešai per mūšį"
+  },
+  "damageRatio": {
+    "label": "Žalos koeficientas",
+    "tip": "Padaryta žala, palyginti su gauta žala"
+  },
+  "kd": {
+    "label": "Sunaikinimo koeficientas",
+    "tip": "Sunaikinti priešai, palyginti su prarastais automobiliais"
+  },
+  "survivalRate": {
+    "label": "Išgyventi mūšiai"
+  },
+  "avgSpotted": {
+    "label": "Vid. pastebėti",
+    "tip": "Pastebėti priešai per mūšį"
+  },
+  "avgDefense": {
+    "label": "Bazės gynyba",
+    "tip": "Gynybos taškai per mūšį"
+  },
+  "avgXp": {
+    "label": "Vid. XP"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "{region}的{count}辆World of Tanks车辆。按等级、国家、类型和角色筛选，然后打开坦克查看其数据、最佳玩家和预期值。",
+    "title": "所有World of Tanks坦克（{region}），浏览每辆车辆",
+    "description": "浏览{region}的每辆World of Tanks坦克：按等级、国家、类型和角色筛选，然后深入查看单车数据、最佳玩家和预期值。",
+    "heading": "所有<accent>坦克</accent>"
+  },
+  "specifications": {
+    "intro": "{region}全部{count}辆World of Tanks车辆的每分钟伤害、穿透力、装甲、查看范围和机动性。按任意列排序，然后按等级、国家、类型和角色筛选。",
+    "title": "World of Tanks坦克规格（{region}），对比每辆车辆",
+    "description": "对比{region}每辆World of Tanks坦克的规格：每分钟伤害、穿透力、装甲、查看范围和机动性，并可按等级、国家、类型和角色排序及筛选。",
+    "heading": "坦克<accent>规格</accent>"
+  },
+  "economics": {
+    "intro": "{region}全部{count}辆World of Tanks车辆的购买和修理费用、炮弹价格及银币收益。按任意列排序，然后按等级、国家、类型和角色筛选。",
+    "title": "World of Tanks坦克经济（{region}），银币和经验费用",
+    "description": "{region}每辆World of Tanks坦克的银币和经验费用、修理及炮弹价格，可按等级、国家、类型和角色排序及筛选。",
+    "heading": "坦克<accent>经济学</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "{region}全部{count}辆World of Tanks车辆获得一、二、三个卓越标记所需的移动平均伤害。按任意列排序，然后按等级、国家、类型和角色筛选。",
+    "title": "World of Tanks卓越标记要求（{region}）",
+    "description": "{region}每辆World of Tanks坦克获得一、二、三个卓越标记所需的伤害，可按等级、国家、类型和角色排序及筛选。",
+    "heading": "<accent>卓越标记</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "{region}全部{count}辆World of Tanks车辆的王牌坦克和精通徽章经验门槛。按任意列排序，然后按等级、国家、类型和角色筛选。",
+    "title": "World of Tanks精通标记要求（{region}）",
+    "description": "{region}每辆World of Tanks坦克的王牌坦克和精通徽章经验门槛，可按等级、国家、类型和角色排序及筛选。",
+    "heading": "<accent>精通标记</accent>"
+  },
+  "videos": {
+    "intro": "社区在{region}链接的{count}场战斗，每个视频都会从战斗开始的那一秒播放。视频由坦克页面建议，并在显示于此之前经过检查。",
+    "title": "World of Tanks对战视频（{region}）",
+    "description": "社区建议的{region}World of Tanks战斗视频，每个视频都会从战斗开始的那一秒播放：包括使用的坦克、地图、所在方以及战斗结果。",
+    "heading": "游戏<accent>视频</accent>"
+  }
+}

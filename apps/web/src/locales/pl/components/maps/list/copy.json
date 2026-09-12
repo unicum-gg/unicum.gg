@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Każda z {count} aren bitewnych World of Tanks. Filtruj według kamuflażu i trybu gry, a następnie otwórz mapę, aby zobaczyć jej minimapę, rozmiar oraz flagi baz i punkty startowe dla każdego trybu.",
+    "title": "Wszystkie mapy World of Tanks ({region}), wszystkie areny bitewne",
+    "description": "Przeglądaj wszystkie mapy World of Tanks w regionie {region}: minimapy, rozmiary, kamuflaże i obsługiwane tryby gry, a także flagi baz i punkty startowe dla każdego trybu.",
+    "heading": "Wszystkie <accent>mapy</accent>"
+  },
+  "battle-type": {
+    "intro": "W trybie {type}, czyli {blurb}, liczba dostępnych map World of Tanks wynosi {count}. Otwórz mapę, aby zobaczyć jej minimapę, rozmiar oraz flagi baz i punkty startowe dla każdego trybu.",
+    "title": "Mapy World of Tanks w trybie {type} ({region}), wszystkie areny w rotacji",
+    "description": "Wszystkie mapy World of Tanks dostępne w regionie {region} w rotacji trybu o nazwie {type}: minimapy, rozmiary, kamuflaże i obsługiwane tryby gry, a także flagi baz i punkty startowe.",
+    "heading": "<accent>mapy</accent> {type}"
+  },
+  "blurbs": {
+    "random": "Standardowy zestaw map 15 na 15",
+    "battle_royale": "rozgrywka, w której ostatni Czołg na polu bitwy wygrywa",
+    "frontline": "rozgrywka 30 na 30 na dużą skalę",
+    "onslaught": "rankingowa rozgrywka 7 na 7",
+    "onslaught_night": "rankingowa rozgrywka 7 na 7 po zmroku, z ograniczonym zasięgiem widzenia, obecnie dostępna w środowisku Test ogólny",
+    "grand_battle": "rozgrywka 30 na 30 ograniczona do kategorii Poziom X",
+    "clan_wars": "Wojny klanowe i Natarcia",
+    "waffentrager": "wydarzenie Waffenträger",
+    "last_stand": "wydarzenie Ostatni bastion",
+    "arcade": "rozgrywki zręcznościowe oraz wydarzenia z kategorii Specjalne",
+    "story_mode": "operacje fabularne",
+    "training": "Lista pokojów szkoleniowych i samouczki"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Pa asīm",
+  "by-server": "Pēc servera",
+  "community-verdict": "Kopienas spriedums",
+  "every-server-one-average": "Katrs serveris, viens vidējais",
+  "n-shown": ", parādīti {count}",
+  "opinion": "{count, plural, zero {# viedokļu} one {# viedoklis} other {# viedokļi}}",
+  "opinion-next-to-win-rate": "Viedoklis blakus uzvaru biežumam {tier}. līmeņa ietvaros",
+  "rate-the": "Novērtēt {tankName}",
+  "reputation-against-results": "Reputācija pret rezultātiem",
+  "same-tank-different-metas": "Tas pats tanks, atšķirīgas metas",
+  "the-same-tank-by-how": "Tas pats tanks, pēc tā, cik labi spēlē balsotājs",
+  "what-players-wrote": "Ko uzrakstīja spēlētāji",
+  "who-is-saying-it": "Kas to saka"
+}

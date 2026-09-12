@@ -1,0 +1,8 @@
+{
+  "battles": "{count} 战斗场次",
+  "no-votes": "否投票",
+  "rated-higher": "实力更强的玩家给它的评分比服务器其他玩家高{stars}颗星。这辆坦克会奖励真正了解玩法的玩家。",
+  "rated-lower": "实力更强的玩家给它的评分比服务器其他玩家低{stars}颗星。它在被要求完成任务前都会让人觉得不错。",
+  "votes": "{count} 投票",
+  "votes-one": "{count} 投票"
+}

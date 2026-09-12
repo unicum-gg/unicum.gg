@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Көру",
+    "tanks": "Танкылар",
+    "videos": "Бейнелер",
+    "tournaments": "Турнирлер",
+    "manage": "басқару"
+  },
+  "section-count": "{section} ({count})"
+}

@@ -1,9 +1,10 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { StarIcon } from "@phosphor-icons/react";
 import { toRoman } from "roman-numerals";
 import { Chip, ChipRow } from "@/components/ui/chip";
-import { TOURNAMENT_GAME_MODE_LABEL, teamFormat } from "@unicum.gg/shared";
+import { teamFormat } from "@unicum.gg/shared";
 import type { TournamentFacets } from "./facets";
 
 /**
@@ -15,6 +16,9 @@ import type { TournamentFacets } from "./facets";
  * between, and a row of one chip is a control that cannot do anything.
  */
 export function TournamentFacetBar({ facets }: { facets: TournamentFacets }) {
+  const { t: tCopy } = useTranslation("components/tournaments/list/facet-bar");
+  const { t } = useTranslation("components/tournaments/list/facet-bar");
+  const { t: tGame } = useTranslation("game/vocabulary");
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-xs">
       {/* First, because it is the coarsest cut anyone makes here: the big
@@ -26,8 +30,7 @@ export function TournamentFacetBar({ facets }: { facets: TournamentFacets }) {
               weight={facets.featuredOnly ? "fill" : "regular"}
               className="size-3.5"
             />
-            Featured
-          </Chip>
+            {tCopy("featured")}</Chip>
         </ChipRow>
       )}
       {facets.modes.length > 1 && (
@@ -38,7 +41,7 @@ export function TournamentFacetBar({ facets }: { facets: TournamentFacets }) {
               active={facets.modesSel.has(mode)}
               onClick={() => facets.toggleMode(mode)}
             >
-              {TOURNAMENT_GAME_MODE_LABEL[mode]}
+              {tGame(`tournament-modes.${mode}`)}
             </Chip>
           ))}
         </ChipRow>
@@ -75,8 +78,7 @@ export function TournamentFacetBar({ facets }: { facets: TournamentFacets }) {
           onClick={facets.clear}
           className="cursor-pointer text-fd-muted-foreground underline-offset-2 hover:text-fd-foreground hover:underline"
         >
-          Clear
-        </button>
+          {t("clear")}</button>
       )}
     </div>
   );

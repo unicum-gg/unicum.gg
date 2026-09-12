@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Carri che migliorano il punteggio",
+    "blurb": "Carri armati che migliorano la valutazione complessiva: senza di loro, la valutazione scenderebbe.",
+    "empty": "Nessun carro migliora il punteggio complessivo."
+  },
+  "drag": {
+    "heading": "Carri che peggiorano il punteggio",
+    "blurb": "Carri armati che penalizzano la valutazione complessiva: senza di loro, la valutazione salirebbe.",
+    "empty": "Nessun carro abbassa il punteggio complessivo."
+  },
+  "if-removed": "{delta} se rimosso"
+}

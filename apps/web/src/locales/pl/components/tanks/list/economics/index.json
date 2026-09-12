@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "Wierszy na stronę",
+  "free-xp-from": "Darmowe XP od",
+  "xp-1-gold": "XP = 1 złota",
+  "previous-page": "Poprzednia strona",
+  "page": "Strona {current} / {totalPages}",
+  "next-page": "Następna strona",
+  "all": "Wszystkie"
+}

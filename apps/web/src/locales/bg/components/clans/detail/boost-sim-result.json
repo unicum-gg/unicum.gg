@@ -1,0 +1,11 @@
+{
+  "already-running": "вече работи",
+  "in-window": "в прозорец",
+  "n-online": "/ {count} онлайн",
+  "no-reserves-selected": "Няма избрани резерви.",
+  "no-stock-ready": "няма готови наличности",
+  "not-available": "не е наличен",
+  "threshold": "праг ({online}/{min})",
+  "would-activate": "ще активирай",
+  "would-not-fire": "В момента тя няма да се активира."
+}

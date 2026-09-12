@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Lapad ng lugar ng paglalaruan",
+    "height": "Taas ng lugar ng paglalaruan",
+    "round-length": "Oras ng labanan",
+    "team-size": "Sukat ng koponan",
+    "camouflage": "season",
+    "presence": "Sa laro",
+    "variant-version": "Bersyon ng {type}",
+    "play-area": "Lugar ng paglalaruan",
+    "bases-team1": "Mga base ng kakampi",
+    "bases-team2": "Mga base ng kaaway",
+    "spawns-team1": "Mga spawn ng kakampi",
+    "spawns-team2": "Mga spawn ng kaaway",
+    "control-point": "Punto ng kontrol",
+    "artillery-headquarters": "Punong-tanggapan ng Artilerya",
+    "comms-centers": "Mga sentro ng komunikasyon",
+    "observation-posts": "Mga puwesto ng pagmamasid",
+    "points-of-interest": "Mga punto ng interes"
+  },
+  "summary": {
+    "added": "Idinagdag: {name}",
+    "removed": "Inalis: {name}",
+    "added-to-game": "Idinagdag sa laro",
+    "removed-from-game": "Inalis sa laro",
+    "added-on-test": "Idinagdag sa client ng pagsubok",
+    "removed-on-test": "Inalis sa client ng pagsubok",
+    "mode-added": "Idinagdag ang mode na {name}",
+    "mode-removed": "Inalis ang mode na {name}",
+    "now-played-in": "Nilaro na sa {name}",
+    "no-longer-played-in": "Hindi na nilaro sa {name}",
+    "event-added": "Maaari nang mangyari sa kalagitnaan ng labanan: {name}",
+    "event-removed": "Hindi na nangyayari: {name}",
+    "moved": "Galaw: {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks spēlētāji tiešsaistē ({region})",
+  "description": "Cik spēlētāju pašlaik atrodas katrā World of Tanks {region} serverī, kā arī iedzīvotāju skaits pēdējās 24 stundās, nedēļā un gadā, visu laiku rekords un noslogotākās nedēļas stundas.",
+  "og-title": "Servera apdzīvotība",
+  "og-subtitle": "{region} spēlētāji tiešsaistē"
+}

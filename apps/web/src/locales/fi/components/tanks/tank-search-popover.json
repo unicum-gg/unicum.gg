@@ -1,0 +1,5 @@
+{
+  "no-matching-tanks": "Vastaavia panssarivaunuja ei löytynyt.",
+  "searching": "Haetaan…",
+  "type-at-least-characters": "Kirjoita vähintään {MINQUERYLENGTH} merkkiä."
+}

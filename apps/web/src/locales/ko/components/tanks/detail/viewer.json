@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "시각적",
+    "collision": "충돌",
+    "live": "실시간"
+  },
+  "centre": {
+    "on": "차량 중앙 정렬",
+    "off": "차량을 다시 중앙에서 벗어나게 하기"
+  },
+  "hull-down": {
+    "on": "헐 다운",
+    "off": "차량 수평 맞추기"
+  },
+  "tracks": {
+    "on": "궤도 작동",
+    "off": "궤도 정지"
+  },
+  "textures": {
+    "on": "고화질 텍스처",
+    "off": "기준 텍스처"
+  },
+  "reset": "뷰 초기화",
+  "style": "스타일 선택",
+  "style-worn": "스타일: {name}",
+  "search-styles": "스타일 검색",
+  "colours": "색상 의미",
+  "cinematic": {
+    "off": "시네마틱 카메라: 끄기",
+    "auto": "시네마틱 카메라: 조작하지 않을 때",
+    "on": "시네마틱 카메라: 항상"
+  },
+  "open-tank": "다른 탱크 열기",
+  "open-tank-placeholder": "탱크 열기...",
+  "more-actions": "추가 작업",
+  "marks-meaning": {
+    "0": "우수성 증표 없음",
+    "1": "증표 1개: 이 탱크로 플레이한 플레이어들 중 65%보다 앞섬",
+    "2": "증표 2개: 85%보다 앞섬",
+    "3": "증표 3개: 95%보다 앞섬"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "창 채우기",
+      "leave": "페이지로 돌아가기"
+    },
+    "screen": {
+      "enter": "화면 채우기",
+      "leave": "전체 화면 나가기"
+    }
+  },
+  "marks-count": {
+    "0": "우수성 증표 없음",
+    "one": "우수성 증표 1개",
+    "other": "우수성 증표 {count}개"
+  },
+  "compare-tank": "다른 탱크와 비교",
+  "compare-tank-placeholder": "비교...",
+  "view-tooltips": {
+    "visual": "게임에서 그려 내는 탱크 모습",
+    "collision": "각 장갑판의 두께",
+    "live": "선택한 포탄의 효과"
+  },
+  "cinematic-tooltips": {
+    "off": "시네마틱 카메라: 끄기, 보기가 고정됩니다",
+    "auto": "시네마틱 카메라: 30초 동안 조작하지 않으면 시작",
+    "on": "시네마틱 카메라: 항상, 손을 놓는 순간부터"
+  }
+}

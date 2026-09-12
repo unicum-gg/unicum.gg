@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "选择储备以预览计划。",
+  "schedule": "在活跃日，它会于 {times} 激活（每次持续 {hours}小时），在达到最低在线人数后覆盖 {window}。"
+}

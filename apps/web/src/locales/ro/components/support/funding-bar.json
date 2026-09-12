@@ -1,0 +1,18 @@
+{
+  "caught-up": "Totul este acoperit, mulțumim. Orice sumă suplimentară merge către un debit mai mare și funcții noi.",
+  "covered-label": "Acoperit",
+  "covered-sentence": "Susținătorii au acoperit {received} din cei {spent} cheltuiți până acum.",
+  "days-out-of-pocket": "{days} zile plătite din buzunar",
+  "from-supporter-one": "de la {count} susținător",
+  "from-supporters": "de la {count} susținători",
+  "gap-growing": "Încă {amount}/lună împiedică deficitul să crească.",
+  "goal": "obiectiv {amount}",
+  "of-that-total": "din totalul respectiv",
+  "pledges-cover": "Promisiunile de susținere acoperă acum costul lunar.",
+  "raised-amount": "{amount} strânși",
+  "raised-label": "Strânși",
+  "run-at-a-loss": "{name} funcționează în pierdere din {since}.",
+  "run-rate": "Cost lunar: {pledged}/lună promiși față de {cost}/lună pentru funcționare.",
+  "spent-since-launch": "Cheltuit de la lansare",
+  "to-catch-up": "Mai sunt necesari {amount} pentru acoperirea completă."
+}

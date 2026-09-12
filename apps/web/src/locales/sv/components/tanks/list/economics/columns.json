@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Kostnad (krediter)",
+      "tip": "Inköpspris i krediter (stridsvagnar i teknikträdet)"
+    },
+    "buyGold": {
+      "label": "Kostnad (guld)",
+      "tip": "Inköpspris i guld (premiumstridsvagnar)"
+    },
+    "researchXp": {
+      "label": "Forsknings XP",
+      "tip": "XP för att låsa upp (billigaste vägen)"
+    },
+    "totalFreeXp": {
+      "label": "Gratis XP (T{tier})",
+      "tip": "Sammanlagd XP för forskning från nivå {tier}, inklusive nödvändiga moduler"
+    },
+    "shellCost": {
+      "label": "Kostnad för projektil",
+      "tip": "Standardgranatens pris (krediter)"
+    },
+    "ammoCost": {
+      "label": "Kostnad för fulla ammunitionen",
+      "tip": "Standardgranatens pris × ammunitionskapacitet"
+    },
+    "acquireMoney": {
+      "label": "Kostnad för köp ({currency})",
+      "tip": "Beräknad kostnad i riktiga pengar för att skaffa stridsvagnen (forskning + köp), i {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Gratis XP ({currency})",
+      "tip": "Beräknad kostnad i riktiga pengar för att forska fram stridsvagnen med Gratis XP från nivå {tier}, i {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Kostnad (krediter)",
+    "buyGold": "Kostnad (guld)",
+    "researchXp": "Forsknings XP",
+    "totalFreeXp": "Gratis XP",
+    "shellCost": "Kostnad för projektil",
+    "ammoCost": "Kostnad för fulla ammunitionen",
+    "acquireMoney": "Kostnad för köp (pengar)",
+    "freeXpMoney": "Gratis XP (pengar)"
+  }
+}

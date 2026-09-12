@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rang {rank} du classement {board}",
+  "board": {
+    "advances": "Notation des Incursions en Bastion",
+    "skirmish-t10": "Notation des Escarmouches de Rang X",
+    "skirmish-t6": "Notation des Escarmouches de Rang VI",
+    "skirmish-t8": "Notation des Escarmouches de Rang VIII"
+  }
+}

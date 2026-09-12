@@ -1,0 +1,17 @@
+{
+  "aim-time": "เวลาล็อคเป้า",
+  "ammo": "กระสุน",
+  "armor": "เกราะ",
+  "dispersion": "การกระจายตัว",
+  "fire-chance": "โอกาสติดไฟ",
+  "gun-arc": "มุมปืน",
+  "hit-points": "HP",
+  "load-limit": "ขีดจำกัดในการบรรทุก",
+  "mounted-on": "ติดตั้งอยู่บน {tanks}",
+  "power": "พลัง",
+  "reload": "การบรรจุ",
+  "signal-range": "เขตสัญญาณ",
+  "tier": "ระดับ {tier}",
+  "traverse": "การหมุนส้าย-ขวา",
+  "view-range": "เขตมองเห็น"
+}

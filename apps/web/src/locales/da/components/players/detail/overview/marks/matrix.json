@@ -1,0 +1,7 @@
+{
+  "loading": "{count} niveau-{tier}-køretøjer, indlæser deres navne…",
+  "loading-one": "{count} niveau-{tier}-køretøj, indlæser dets navn…",
+  "and-more": "og {count} mere",
+  "hint": "Klik for at åbne dem under fanen Tanks",
+  "tier": "Niveau"
+}

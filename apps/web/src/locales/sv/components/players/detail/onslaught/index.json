@@ -1,0 +1,12 @@
+{
+  "final": " · slutlig",
+  "has-not-held-a-place": "{nickname} har inte placerat sig på topplistan för Pansarstorm.",
+  "live-season": "· pågående säsong",
+  "loading-s-onslaught-record": "Läser in Pansarstorm-resultat för {nickname}...",
+  "onslaught": "Pansarstorm",
+  "onslaught-record": "Pansarstorm-resultat för {nickname}",
+  "see-this-season-s-leaderboard": "Se den här säsongens topplista",
+  "standing-line": "{rating} gradpoäng · {battles} strider",
+  "the-board-only-lists-players": "Topplistan visar bara spelare som når Champion, några tusen per region, så det är här nästan alla profiler hamnar. Uppgifterna fylls i automatiskt den säsong spelaren når dit.",
+  "updated": "Uppdaterad {when}"
+}

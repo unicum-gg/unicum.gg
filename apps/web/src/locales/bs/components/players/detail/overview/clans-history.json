@@ -1,0 +1,12 @@
+{
+  "clans-history": "Historija klanova igrača {nickname}",
+  "clans-in-clans": "{totalClans} klanova · {timeInClansSeconds} u klanovima",
+  "current": "trenutni",
+  "duration": "Trajanje",
+  "from": "Od",
+  "name": "Ime",
+  "no-clan-history": "Nema historije klanova.",
+  "role": "Uloga",
+  "tag": "Oznaka",
+  "to": "Do"
+}

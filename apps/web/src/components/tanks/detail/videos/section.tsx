@@ -1,6 +1,7 @@
 "use client";
 
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 import { PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { TankVideoCard, type TankVideoCardData } from "./card";
 import { BattleFilterBar } from "./battle-filter-bar";
@@ -59,6 +60,7 @@ export function VideoSection({
    * does, and there the map is the first thing worth reading. */
   showMap?: boolean;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/section");
   const player = useTankVideoPlayer();
   const state = useBattleFilters(battles);
   const groups = groupBattlesByVideo(state.filtered);
@@ -101,7 +103,7 @@ export function VideoSection({
             <p className="py-8 text-center text-sm text-fd-muted-foreground">
               {battles.length === 0
                 ? emptyText
-                : "No battle matches these filters."}
+                : t("no-battle-matches")}
             </p>
           )}
         </PanelContent>

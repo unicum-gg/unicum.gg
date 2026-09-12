@@ -1,0 +1,6 @@
+{
+  "day": "Järjestetty mittarin {metric} mukaan viimeisten 24 tunnin ajalta (vähintään 20 taistelua).",
+  "week": "Järjestetty mittarin {metric} mukaan viimeisten 7 päivän ajalta (vähintään 140 taistelua).",
+  "month": "Järjestetty mittarin {metric} mukaan viimeisten 30 päivän ajalta (vähintään 600 taistelua).",
+  "overall": "Järjestetty kaikkien aikojen mittarin {metric} mukaan (vähintään 20 000 taistelua)."
+}

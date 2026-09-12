@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Confronto tra i giocatori della regione {region}",
+  "median-n": "mediana {value}",
+  "metric-rating": "Valutazione di {metric}",
+  "tracked-accounts-with-at-least": "{players} account monitorati con almeno {minBattles} battaglie. I colori corrispondono alle stesse fasce usate nel resto del sito.",
+  "win-rate": "Percentuale di vittorie",
+  "win-rate-distribution-across-the-region-s-tr": "Distribuzione del tasso di vittorie tra i giocatori monitorati della regione"
+}

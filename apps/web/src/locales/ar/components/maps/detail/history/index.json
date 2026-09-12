@@ -1,0 +1,12 @@
+{
+  "added": "تم الإضافة",
+  "before-update": "قبل التحديث {version}",
+  "common-test": "اختبار مشترك",
+  "every-update-that-changed-this": "كل تحديث غيّر هذه الخريطة، من الأحدث إلى الأقدم، وفقًا لما قرأه عميل اللعبة نفسه.",
+  "in-the-game": "في اللعبة",
+  "n-changes": "{count, plural, zero {# تغيير} one {# تغيير} two {# تغييران} few {# تغييرات} many {# تغييرًا} other {# تغيير}}",
+  "not-released-wargaming-can-still": "لم يُطرح بعد. ما زال بإمكان Wargaming تغيير أي من هذه الأمور أو إلغائها قبل إصدار التحديث.",
+  "removed": "إزالة",
+  "title": "تغييرات على الخريطة {map}",
+  "update": "تحديث {version}"
+}

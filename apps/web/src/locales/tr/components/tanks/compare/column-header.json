@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Bu sütun için mühimmat, ekipman, sarf malzemeleri, yönergeler, mürettebat ve ilerleme. Her değişiklik, karşılaştırmadaki özelliklerini değiştirir.",
+  "ammunition-equipment-crew-and-progression": "Mühimmat, ekipman, mürettebat ve ilerleme",
+  "apply-to-every-column": "Her sütuna uygula",
+  "compare-against": "{tank} ile karşılaştır",
+  "compare-the-others-against-this-one": "Diğerlerini bununla karşılaştır",
+  "configure-tank": "{tank} yapılandırması",
+  "highest-overall-score": "En yüksek genel skor",
+  "highest-overall-score-of-this": "Bu karşılaştırmanın en yüksek genel skoru",
+  "is-the-reference": "Referans: {tank}",
+  "overall": "Genel",
+  "reference-column": "Referans sütunu",
+  "remove-tank": "{tank} kaldır",
+  "reset-all": "Hepsini sıfırla",
+  "setup": "Kurulum",
+  "stock": "Stok",
+  "tank-setup": "{tank} kurulumu",
+  "top": "En iyiler",
+  "where-this-vehicle-sits-across": "Bu aracın {MAXSCORE} üzerinden tüm katalogdaki yeri: burada yapılandırıldığı hâliyle dört kategori skorunun ortalaması. Bu bir özet, hüküm değil. Bir keşif tankı ve bir ağır tank, farklı alanlarda iyi olarak aynı sayıya ulaşabilir."
+}

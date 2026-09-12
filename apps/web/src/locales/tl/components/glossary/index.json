@@ -1,0 +1,22 @@
+{
+  "search": "Maghanap ng {count} termino",
+  "search-label": "Maghanap sa glossary",
+  "all": "Lahat",
+  "jump": "Lumaktaw sa titik",
+  "empty": "Walang terminong tumutugma sa “{query}”.",
+  "categories": {
+    "vehicles": "Mga sasakyan",
+    "gunnery": "Pagsasanay sa baril",
+    "armor": "Armour",
+    "mobility": "Kalikasan",
+    "vision": "Bisyon",
+    "crew": "Crew",
+    "progression": "Pag-unlad",
+    "economy": "Ekonomiya",
+    "ratings": "Mga rating",
+    "statistics": "Estadistika",
+    "modes": "Mga paraan ng labanan",
+    "tactics": "Taktika",
+    "slang": "Salitang balbal"
+  }
+}

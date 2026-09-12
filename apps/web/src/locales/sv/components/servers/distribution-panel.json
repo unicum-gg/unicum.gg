@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Så står sig spelare i {region} mot varandra",
+  "median-n": "median {value}",
+  "metric-rating": "{metric}-betyg",
+  "tracked-accounts-with-at-least": "{players} spårade konton med minst {minBattles} strider. Färgerna motsvarar samma intervall som används på resten av webbplatsen.",
+  "win-rate": "Vinnande hastighet",
+  "win-rate-distribution-across-the-region-s-tr": "Fördelning av vinnande hastighet bland regionens spårade spelare"
+}

@@ -1,3 +1,7 @@
+import { numberFormat } from "@/lib/format";
+import { dateLocale } from "@/lib/date-locale";
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import { format } from "date-fns";
 import {
   Panel,
@@ -11,7 +15,6 @@ import APP from "@/constants/app";
 import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import {
-  ACTIVITY_BUCKET_LABEL,
   formatCadence,
 } from "@unicum.gg/shared";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
@@ -19,26 +22,26 @@ import { ChartMode } from "./chart-mode";
 import { CoverageAreaChart } from "./coverage-charts-lazy";
 import { CostBreakdown } from "./cost-breakdown";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const decFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const DEC_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT_FORMAT = {
   style: "percent",
   maximumFractionDigits: 0,
-});
+} as const;
 
-function formatOnTime(onTime: number, total: number): string {
+function formatOnTime(onTime: number, total: number, locale: string): string {
   if (total === 0) return "n/a";
-  return pctFmt.format(onTime / total);
+  return numberFormat(locale, PCT_FORMAT).format(onTime / total);
 }
 
-function formatYear(d: Date | null): string {
-  return d ? format(d, "MMMM yyyy") : "n/a";
+function formatYear(d: Date | null, locale: string): string {
+  return d ? format(d, "MMMM yyyy", { locale: dateLocale(locale) }) : "n/a";
 }
 
-function formatBytes(bytes: number): string {
+function formatBytes(bytes: number, locale: string): string {
   if (bytes < 1024) return `${bytes} B`;
   const units = ["KB", "MB", "GB", "TB"];
   let value = bytes / 1024;
@@ -47,10 +50,12 @@ function formatBytes(bytes: number): string {
     value /= 1024;
     unitIndex += 1;
   }
-  return `${decFmt.format(value)} ${units[unitIndex]}`;
+  return `${numberFormat(locale, DEC_FORMAT).format(value)} ${units[unitIndex]}`;
 }
 
-export async function CoverageView({ region }: { region: Region }) {
+export async function CoverageView({ region, locale }: { region: Region; locale: string }) {
+  const { t: tLabel } = await getTranslation("components/labels", locale);
+  const { t: tr } = await getTranslation("components/coverage/coverage-view", locale);
   const stats = await unicum.region(region).coverage();
 
   // How many tracked players already have at least one snapshot, which is what
@@ -70,23 +75,29 @@ export async function CoverageView({ region }: { region: Region }) {
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            Tracking{" "}
-            <span className="text-brand">
-              {intFmt.format(stats.players)}
-            </span>{" "}
-            players across{" "}
-            <span className="text-brand">{intFmt.format(stats.clans)}</span>{" "}
-            clans
+            {/* One sentence with both figures as holes: "Tracking X players
+                across Y clans" is not built in that order everywhere. */}
+            <Interpolate
+              template={tr("tracking")}
+              values={{
+                players: (
+                  <span className="text-brand">
+                    {numberFormat(locale, INT_FORMAT).format(stats.players)}
+                  </span>
+                ),
+                clans: (
+                  <span className="text-brand">{numberFormat(locale, INT_FORMAT).format(stats.clans)}</span>
+                ),
+              }}
+            />
           </h1>
           <p className="mt-4 text-fd-muted-foreground">
-            Refreshed on an adaptive cadence: active players every few hours,
-            dormants every weeks. Open source, no ads.{" "}
+            {tr("adaptive-cadence")}{" "}
             <a
               href={APP.EXTERNAL.GITHUB}
               className="underline-offset-2 hover:underline"
             >
-              Code on GitHub
-            </a>
+              {tr("code-on-github")}</a>
             .
           </p>
         </PanelContent>
@@ -96,12 +107,12 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Activity</PanelTitle>
+          <PanelTitle>{tr("activity")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="space-y-4 p-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <StatCell
-              label="Last player snapshot"
+              label={tr("last-player-snapshot")}
               value={
                 stats.activity.lastPlayerSnapshotAt ? (
                   <RelativeTime date={stats.activity.lastPlayerSnapshotAt} />
@@ -111,7 +122,7 @@ export async function CoverageView({ region }: { region: Region }) {
               }
             />
             <StatCell
-              label="Last clan refresh"
+              label={tr("last-clan-refresh")}
               value={
                 stats.activity.lastClanRefreshAt ? (
                   <RelativeTime date={stats.activity.lastClanRefreshAt} />
@@ -121,32 +132,28 @@ export async function CoverageView({ region }: { region: Region }) {
               }
             />
             <StatCell
-              label="Player snapshots in 24h"
-              value={intFmt.format(stats.activity.playerSnapshotsLast24h)}
+              label={tr("player-snapshots-in-24h")}
+              value={numberFormat(locale, INT_FORMAT).format(stats.activity.playerSnapshotsLast24h)}
             />
             <StatCell
-              label="Clans refreshed in 24h"
-              value={intFmt.format(stats.activity.clansRefreshedLast24h)}
+              label={tr("clans-refreshed-in-24h")}
+              value={numberFormat(locale, INT_FORMAT).format(stats.activity.clansRefreshedLast24h)}
             />
             <StatCell
-              label="Players on-time"
+              label={tr("players-on-time")}
               value={formatOnTime(
                 stats.activity.snapshotFreshness.onTime,
                 stats.activity.snapshotFreshness.fetched,
-              )}
+              locale,
+            )}
             />
             <StatCell
-              label="Awaiting first snapshot"
-              value={intFmt.format(stats.activity.awaitingFirstSnapshot)}
+              label={tr("awaiting-first-snapshot")}
+              value={numberFormat(locale, INT_FORMAT).format(stats.activity.awaitingFirstSnapshot)}
             />
           </div>
           <p className="text-xs text-fd-muted-foreground">
-            Snapshot cadence adapts to each player based on their last-battle
-            recency. Active players (last 24h) refresh every 6h, dormants on
-            longer windows up to 90 days. On-time counts players we re-checked
-            within their target bucket cadence. The breakdown below shows the
-            policy in detail.
-          </p>
+            {tr("snapshot-cadence-adapts-to-each")}</p>
         </PanelContent>
       </Panel>
 
@@ -154,18 +161,17 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Refresh policy</PanelTitle>
+          <PanelTitle>{tr("refresh-policy")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-fd-border text-xs uppercase tracking-wide text-fd-muted-foreground">
-                <th className="px-4 py-2 text-left font-medium">Bucket</th>
-                <th className="px-4 py-2 text-right font-medium">Players</th>
+                <th className="px-4 py-2 text-left font-medium">{tr("bucket")}</th>
+                <th className="px-4 py-2 text-right font-medium">{tr("players")}</th>
                 <th className="px-4 py-2 text-right font-medium">
-                  Target cadence
-                </th>
-                <th className="px-4 py-2 text-right font-medium">On-time</th>
+                  {tr("target-cadence")}</th>
+                <th className="px-4 py-2 text-right font-medium">{tr("on-time")}</th>
               </tr>
             </thead>
             <tbody>
@@ -175,16 +181,16 @@ export async function CoverageView({ region }: { region: Region }) {
                   className="border-b border-fd-border last:border-b-0"
                 >
                   <td className="px-4 py-2">
-                    {ACTIVITY_BUCKET_LABEL[row.bucket]}
+                    {tLabel(`activity-buckets.${row.bucket}`)}
                   </td>
                   <td className="px-4 py-2 text-right tabular-nums">
-                    {intFmt.format(row.total)}
+                    {numberFormat(locale, INT_FORMAT).format(row.total)}
                   </td>
                   <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
                     {formatCadence(row.cadenceMs)}
                   </td>
                   <td className="px-4 py-2 text-right tabular-nums">
-                    {formatOnTime(row.onTime, row.total)}
+                    {formatOnTime(row.onTime, row.total, locale)}
                   </td>
                 </tr>
               ))}
@@ -197,34 +203,34 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Trends, last 30 days</PanelTitle>
+          <PanelTitle>{tr("trends-last-30-days")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="grid grid-cols-1 gap-6 p-4 lg:grid-cols-2">
           <CoverageAreaChart
-            title="New players discovered"
+            title={tr("new-players-discovered")}
             data={stats.trends.playersDiscoveredDaily}
-            ariaLabel="New players discovered, last 30 days"
+            ariaLabel={tr("new-players-discovered-last-30-days")}
             defaultMode={ChartMode.Cumulative}
             total={stats.players}
           />
           <CoverageAreaChart
-            title="New clans discovered"
+            title={tr("new-clans-discovered")}
             data={stats.trends.clansDiscoveredDaily}
-            ariaLabel="New clans discovered, last 30 days"
+            ariaLabel={tr("new-clans-discovered-last-30-days")}
             defaultMode={ChartMode.Cumulative}
             total={stats.clans}
           />
           <CoverageAreaChart
-            title="Player snapshots"
+            title={tr("player-snapshots")}
             data={stats.trends.playerSnapshotsDaily}
-            ariaLabel="Player snapshots, last 30 days"
+            ariaLabel={tr("player-snapshots-last-30-days")}
             defaultMode={ChartMode.Daily}
             total={stats.playerSnapshots}
           />
           <CoverageAreaChart
-            title="First-time snapshots"
+            title={tr("first-time-snapshots")}
             data={stats.trends.firstSnapshotsDaily}
-            ariaLabel="First-ever snapshots per day, last 30 days"
+            ariaLabel={tr("first-ever-snapshots-per-day-last-30-days")}
             defaultMode={ChartMode.Daily}
             total={playersWithSnapshot}
           />
@@ -235,24 +241,24 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Data corpus</PanelTitle>
+          <PanelTitle>{tr("data-corpus")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4">
           <StatCell
-            label="Player snapshots"
-            value={intFmt.format(stats.playerSnapshots)}
+            label={tr("player-snapshots")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.playerSnapshots)}
           />
           <StatCell
-            label="Tank snapshots"
-            value={intFmt.format(stats.tankSnapshots)}
+            label={tr("tank-snapshots")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.tankSnapshots)}
           />
           <StatCell
-            label="Clan member rows"
-            value={intFmt.format(stats.clanMembers)}
+            label={tr("clan-member-rows")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.clanMembers)}
           />
           <StatCell
-            label="Clan events"
-            value={intFmt.format(stats.clanRecentEvents)}
+            label={tr("clan-events")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.clanRecentEvents)}
           />
         </PanelContent>
       </Panel>
@@ -261,23 +267,23 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Refresh queues</PanelTitle>
+          <PanelTitle>{tr("refresh-queues")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="flex flex-col divide-y divide-fd-border p-0 md:flex-row md:divide-x md:divide-y-0">
           <QueueCell
-            label="Snapshot backlog"
-            value={intFmt.format(stats.snapshotBacklog)}
-            description="Players past their adaptive refresh target plus those awaiting first snapshot. The cron drains continuously, unfetched players first."
+            label={tr("snapshot-backlog")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.snapshotBacklog)}
+            description={tr("players-past-their-adaptive-refresh")}
           />
           <QueueCell
-            label="Clan refresh queue"
-            value={intFmt.format(stats.clanRefreshQueue)}
-            description="On-demand: page hits enqueue at priority 10, discovery feeds priority 0. Drained every 10s."
+            label={tr("clan-refresh-queue")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.clanRefreshQueue)}
+            description={tr("on-demand-page-hits-enqueue")}
           />
           <QueueCell
-            label="Player refresh queue"
-            value={intFmt.format(stats.playerRefreshQueue)}
-            description="On-demand: page hits enqueue at priority 10 when the cached snapshot is older than 5 min. Drained every 10s."
+            label={tr("player-refresh-queue")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.playerRefreshQueue)}
+            description={tr("on-demand-page-hits-enqueue-2")}
           />
         </PanelContent>
       </Panel>
@@ -286,19 +292,18 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Infrastructure</PanelTitle>
+          <PanelTitle>{tr("infrastructure")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="space-y-6 p-4">
           <CostBreakdown costs={stats.infrastructure.costs} />
           <StatCell
-            label="Database size"
-            value={formatBytes(stats.infrastructure.databaseBytes)}
+            label={tr("database-size")}
+            value={formatBytes(stats.infrastructure.databaseBytes, locale)}
           />
           {stats.infrastructure.tables.length > 0 && (
             <div className="space-y-1.5">
               <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-                Top tables
-              </div>
+                {tr("top-tables")}</div>
               <ul className="divide-y divide-fd-border text-sm">
                 {stats.infrastructure.tables.map((t) => (
                   <li
@@ -308,16 +313,14 @@ export async function CoverageView({ region }: { region: Region }) {
                     <span className="font-mono text-fd-muted-foreground">
                       {t.name}
                     </span>
-                    <span className="tabular-nums">{formatBytes(t.bytes)}</span>
+                    <span className="tabular-nums">{formatBytes(t.bytes, locale)}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
           <p className="text-xs text-fd-muted-foreground">
-            Open source, community-funded. Numbers above are global (shared
-            across all regions).
-          </p>
+            {tr("open-source-community-funded-numbers")}</p>
         </PanelContent>
       </Panel>
 
@@ -325,21 +328,24 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Fun facts</PanelTitle>
+          <PanelTitle>{tr("fun-facts")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
           <StatCell
-            label="Tracking since"
-            value={formatYear(stats.funFacts.oldestPlayerSnapshotAt)}
+            label={tr("tracking-since")}
+            value={formatYear(stats.funFacts.oldestPlayerSnapshotAt, locale)}
           />
           <StatCell
-            label="Biggest tracked clan"
+            label={tr("biggest-tracked-clan")}
             value={
               stats.funFacts.biggestClan ? (
                 <span>
                   [{stats.funFacts.biggestClan.tag}] ·{" "}
-                  {intFmt.format(stats.funFacts.biggestClan.membersCount)}{" "}
-                  members
+                  {tr("n-members", {
+                    count: numberFormat(locale, INT_FORMAT).format(
+                      stats.funFacts.biggestClan.membersCount,
+                    ),
+                  })}
                 </span>
               ) : (
                 "n/a"
@@ -347,15 +353,15 @@ export async function CoverageView({ region }: { region: Region }) {
             }
           />
           <StatCell
-            label="Battles tracked"
-            value={intFmt.format(stats.funFacts.totalBattlesTracked)}
+            label={tr("battles-tracked")}
+            value={numberFormat(locale, INT_FORMAT).format(stats.funFacts.totalBattlesTracked)}
           />
           <StatCell
-            label="Discord servers"
+            label={tr("discord-servers")}
             value={
               stats.funFacts.discordServers === null
                 ? "n/a"
-                : intFmt.format(stats.funFacts.discordServers)
+                : numberFormat(locale, INT_FORMAT).format(stats.funFacts.discordServers)
             }
           />
         </PanelContent>

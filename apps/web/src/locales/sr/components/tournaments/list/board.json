@@ -1,0 +1,14 @@
+{
+  "date": "Datum",
+  "featured-tournament": "Izdvojeni turnir",
+  "format": "Format",
+  "mode": "Mod",
+  "no-tournament-matches-the-current": "Ниједан турнир не одговара тренутним филтерима.",
+  "nothing-here-right-now-wargaming": "Тренутно овде нема ничега. Wargaming свакодневно отвара нове турнире, па ће се садржај сам допунити.",
+  "prize": "Nagrada",
+  "region-tournaments": "Турнири региона {region} ({count})",
+  "status": "Status",
+  "teams": "Timovi",
+  "tier": "Nivo",
+  "tournament": "Turnir"
+}

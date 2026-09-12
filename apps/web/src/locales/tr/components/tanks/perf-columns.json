@@ -1,0 +1,60 @@
+{
+  "columns-label": "Sütunlar",
+  "groups": {
+    "general": "Genel",
+    "combat": "Savaş"
+  },
+  "columns": {
+    "battles": {
+      "label": "Savaşlar",
+      "tip": "Tankta oynanan toplam oyun sayısı"
+    },
+    "count": {
+      "label": "Sayı",
+      "tip": "Örnekteki takip edilen oyuncu sayısı"
+    },
+    "rating": {
+      "label": "Derece (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Tankla kazanma oranı"
+    },
+    "playerWr": {
+      "label": "Oyuncu WR",
+      "tip": "Bu tankı kullanan oyuncuların genel ortalama kazanma oranı"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Oyun başına ortalama hasar"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Öldürme / ölüm oranı"
+    },
+    "assists": {
+      "label": "Destek",
+      "tip": "Ortalama destek hasarı"
+    },
+    "hitPct": {
+      "label": "Isabet %",
+      "tip": "İsabetler / atışlar"
+    },
+    "penPct": {
+      "label": "Delme %",
+      "tip": "Delmeler / isabetler"
+    },
+    "spots": {
+      "label": "Görmeler",
+      "tip": "Oyun başına ortalama tespit"
+    },
+    "blocked": {
+      "label": "Engellenen",
+      "tip": "Zırhla engellenen ortalama hasar"
+    },
+    "survival": {
+      "label": "Hayatta kalma",
+      "tip": "Hayatta kalınan savaşların payı"
+    }
+  }
+}

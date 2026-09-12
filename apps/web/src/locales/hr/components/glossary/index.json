@@ -1,0 +1,22 @@
+{
+  "search": "Traži {count} pojmova",
+  "search-label": "Pretraži pojmovnik",
+  "all": "Svi",
+  "jump": "Prijeđi na slovo",
+  "empty": "Nijedan pojam ne odgovara upitu „{query}”.",
+  "categories": {
+    "vehicles": "Vozila",
+    "gunnery": "Topništvo",
+    "armor": "Oklop",
+    "mobility": "Pokretljivost",
+    "vision": "Vid",
+    "crew": "Posada",
+    "progression": "Napredovanje",
+    "economy": "Ekonomija",
+    "ratings": "Ocjene",
+    "statistics": "Statistika",
+    "modes": "Način bitke",
+    "tactics": "Taktika",
+    "slang": "Žargon"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "all-time-record": "Kaikki aikojen ennätys",
+  "average-last": "Keskiarvo, viimeiset {label}",
+  "low-last": "Alin, viimeiset {label}",
+  "peak-last": "Huippu, viimeiset {label}"
+}

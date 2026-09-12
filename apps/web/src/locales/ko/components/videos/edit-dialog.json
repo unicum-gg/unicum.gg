@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "차량을 포함해 잘못된 내용을 수정하세요. 저장하면 다시 검토 대기열로 전송되므로 이미 공개된 영상은 재승인될 때까지 사이트에서 내려갑니다.",
+  "correct-a-suggestion": "제안 수정",
+  "could-not-load-that-suggestion": "해당 제안을 불러올 수 없습니다. 잠시 후 다시 시도하세요.",
+  "link-expired": "해당 링크가 만료되었습니다. Discord의 카드에서 다시 편집을 눌러 새 링크를 받으세요.",
+  "loading": "로딩 중…",
+  "log-in": "로그인",
+  "log-in-with-the-account": "이 영상을 제안한 계정으로 로그인하여 수정하세요.",
+  "no-suggestion-with-that-id": "해당 ID의 제안이 없습니다.",
+  "not-yours-to-correct": "이 제안은 수정할 수 있는 권한이 없습니다."
+}

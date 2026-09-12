@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Каждый голос от аккаунта, игравшего на этом танке.",
+  "every-vote-played-average": "Каждый голос от аккаунта, игравшего на этом танке в среднем {battles} боёв.",
+  "fun": "Веселье",
+  "how-good-the-tank-is": "Насколько хорош танк",
+  "how-much-people-enjoy-it": "Насколько он нравится людям",
+  "if-you-have-played-it": "Если вы играли на нём, именно вас ждёт эта страница.",
+  "nobody-has-rated-this-tank": "Пока никто не оценил этот танк.",
+  "overall": "Общее",
+  "votes": "{count} голосов",
+  "votes-one": "{count} голос"
+}

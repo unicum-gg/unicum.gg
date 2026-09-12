@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Modifica qualsiasi informazione errata, incluso il veicolo. Al salvataggio, il video torna nella coda di moderazione, quindi se è già online viene rimosso fino a nuova approvazione.",
+  "correct-a-suggestion": "Correggi una proposta",
+  "could-not-load-that-suggestion": "Potrebbe non essere stato possibile caricare quel suggerimento. Riprova tra un momento.",
+  "link-expired": "Quel link è scaduto. Premi di nuovo Modifica sulla scheda in Discord per ottenerne uno nuovo.",
+  "loading": "Caricamento…",
+  "log-in": "Accedi",
+  "log-in-with-the-account": "Accedi con l’account usato per proporre questo video per correggerlo.",
+  "no-suggestion-with-that-id": "Non esiste alcun suggerimento con quell’ID.",
+  "not-yours-to-correct": "Questo suggerimento non spetta a te correggerlo."
+}

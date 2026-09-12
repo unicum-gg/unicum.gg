@@ -1,16 +1,17 @@
+import { numberFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
 import {
   drawableAxes,
   MAX_STARS,
   MIN_AXIS_VOTES,
   RATING_COLOR_HEX,
   starRatingColor,
-  TANK_RATING_AXIS_LABEL,
   TANK_RATING_AXIS_SHORT,
   type AxisVerdict,
 } from "@unicum.gg/shared";
 import { Stars, StarValue } from "./stars";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * The community's read of a tank, axis by axis.
@@ -62,16 +63,19 @@ function polygon(points: Point[]): string {
   return points.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
 }
 
-export function AxisRadar({
+export async function AxisRadar({
   axes,
-  axisVotes,
+  axisVotes, locale,
 }: {
   axes: AxisVerdict[];
   axisVotes: number;
+  locale: string;
 }) {
+  const { t: tLabel } = await getTranslation("components/labels", locale);
+  const { t } = await getTranslation("components/tanks/detail/community/radar", locale);
   const drawable = drawableAxes(axes);
   if (drawable.length < 3 || axisVotes < MIN_AXIS_VOTES) {
-    return <NotEnoughAxisVotes votes={axisVotes} />;
+    return <NotEnoughAxisVotes votes={axisVotes} locale={locale} />;
   }
 
   const count = drawable.length;
@@ -90,7 +94,7 @@ export function AxisRadar({
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full max-w-[300px] shrink-0"
         role="img"
-        aria-label="Community rating by axis"
+        aria-label={t("community-rating-by-axis")}
       >
         {Array.from({ length: RINGS }, (_, ring) => (
           <polygon
@@ -165,29 +169,41 @@ export function AxisRadar({
             className="grid grid-cols-[1fr_auto_auto] items-center gap-3 text-sm"
           >
             <span className="text-fd-muted-foreground">
-              {TANK_RATING_AXIS_LABEL[axis.axis]}
+              {tLabel(`rating-axes.${axis.axis}`)}
             </span>
             <Stars value={axis.value} size={12} />
             <StarValue value={axis.value} className="w-9 text-right text-xs" />
           </li>
         ))}
         <li className="pt-1 text-xs text-fd-muted-foreground">
-          From {intFmt.format(axisVotes)} detailed{" "}
-          {axisVotes === 1 ? "vote" : "votes"}.
+          {t(axisVotes === 1 ? "from-votes-one" : "from-votes", {
+            count: numberFormat(locale, INT_FORMAT).format(axisVotes),
+          })}
         </li>
       </ul>
     </div>
   );
 }
 
-function NotEnoughAxisVotes({ votes }: { votes: number }) {
+async function NotEnoughAxisVotes({
+  votes,
+  locale,
+}: {
+  votes: number;
+  locale: string;
+}) {
+  const { t } = await getTranslation(
+    "components/tanks/detail/community/radar",
+    locale,
+  );
   return (
     <p className="text-sm text-fd-muted-foreground">
       {votes === 0
-        ? "Nobody has filled in the detailed axes yet."
-        : `Only ${intFmt.format(votes)} detailed ${votes === 1 ? "vote" : "votes"} so far.`}{" "}
-      The breakdown appears at {MIN_AXIS_VOTES}, so the shape says something
-      about the tank rather than about one person.
+        ? t("nobody-yet")
+        : t(votes === 1 ? "only-votes-one" : "only-votes", {
+            count: numberFormat(locale, INT_FORMAT).format(votes),
+          })}{" "}
+      {t("breakdown-appears-at", { min: MIN_AXIS_VOTES })}
     </p>
   );
 }

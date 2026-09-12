@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Losování ještě neproběhlo. Utkání tohoto týmu se zde zobrazí po zahájení turnaje.",
+  "each-map-is-played-twice": "Každá mapa se hraje dvakrát, jednou za každou stranu. Poslední mapa je rozhodující a hraje se jen jednou.",
+  "first-battle-at": "První bitva, {when}",
+  "lost": "Ztraceno",
+  "matches": "Zápasy ({length})",
+  "never-played": "Tento tým neodehrál žádné utkání. Zaregistroval se, ale losování ho nezahrnulo, což se stává, když soupiska zůstane nepotvrzená.",
+  "no-maps-recorded": "Pro toto utkání nejsou zaznamenány žádné mapy.",
+  "no-roster-recorded-for-this": "Pro tento tým není zaznamenána žádná soupiska.",
+  "of-players-on-the-day": "Hráči v daný den: {members} z {length}",
+  "played-on-uncatalogued": "Odehráno na mapách {maps}, které katalog map netáhne.",
+  "roster": "Soupiska ({length})",
+  "stage-group": "{stage} · Skupina {order}",
+  "team-1": "Tým 1",
+  "team-2": "Tým 2",
+  "tournaments": "Turnaje",
+  "when-the-first-battle-started": "Kdy začala první bitva",
+  "won": "Vyhráno"
+}

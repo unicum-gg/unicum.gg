@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Случайна",
+    "battle_royale": "Стоманен ловец",
+    "frontline": "Фронтова линия",
+    "onslaught": "Атака",
+    "onslaught_night": "{onslaught} Нощ",
+    "grand_battle": "Генерално сражение",
+    "clan_wars": "Кланови войни",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Аркаден режим",
+    "story_mode": "Сюжетен режим",
+    "training": "Обучение"
+  },
+  "player-modes": {
+    "overall": "Случайни битки",
+    "skirmish": "Схватка",
+    "advances": "Настъпления",
+    "grand": "Грандиозни битки",
+    "ranked": "Битки за Класацията",
+    "cw-x": "Кланови войни X",
+    "cw-viii": "Кланови войни VIII",
+    "cw-vi": "Кланови войни VI",
+    "steel-hunter": "Стоманен ловец",
+    "onslaught": "Атака"
+  },
+  "stronghold-tiers": {
+    "advances": "Настъпления",
+    "t10": "Схватка T10",
+    "t8": "Схватка T8",
+    "t6": "Схватка T6"
+  },
+  "stronghold-periods": {
+    "24h": "Последни 24 часа",
+    "7d": "Последни 7 дни",
+    "30d": "Последни 30 дни",
+    "overall": "Общо"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Битки",
+    "winrate": "Процент на победи"
+  },
+  "clan-boards": {
+    "advances": "Настъпления",
+    "t10": "Схватка X",
+    "t8": "Схватка VIII",
+    "t6": "Схватка VI"
+  },
+  "map-modes": {
+    "standard": "Стандарт",
+    "encounter": "Насрещна битка",
+    "assault": "Щурмови",
+    "attack-defense": "Атака/Отбрана"
+  },
+  "map-camouflage": {
+    "summer": "Летен",
+    "winter": "Зимен",
+    "desert": "Пустинен"
+  },
+  "map-poi": {
+    "1": "Артилерийски щаб",
+    "2": "Комуникационен център",
+    "3": "Наблюдателен пост"
+  },
+  "tournament-modes": {
+    "ctf": "Стандарт",
+    "domination": "Среща",
+    "assault2": "Атака/Отбрана",
+    "comp7": "Атака"
+  },
+  "battle-formats": {
+    "random": "Случайна",
+    "clan_wars": "Кланови войни",
+    "advances": "Настъпления",
+    "skirmish": "Схватка",
+    "maneuvers": "Маневри",
+    "onslaught": "Атака",
+    "tournament": "Турнир"
+  },
+  "battle-results": {
+    "victory": "Победа",
+    "defeat": "Загуба",
+    "draw": "Реми"
+  },
+  "spawn-directions": {
+    "north": "Север",
+    "south": "Юг",
+    "east": "Изток",
+    "west": "Запад"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Предстоящ",
+    "registration_started": "Регистрацията е отворена",
+    "registration_finished": "Регистрацията е затворена",
+    "running": "В процес",
+    "finished": "Завършване",
+    "complete": "Изпълнено"
+  },
+  "onslaught-tiers": {
+    "legend": "Легенда",
+    "champion": "Шампион",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Тежък",
+    "mediumTank": "Среден",
+    "lightTank": "Лек",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Щурмови",
+    "break": "Пробивен",
+    "support": "Поддръжка",
+    "universal": "Универсален",
+    "sniper": "Снайперист",
+    "wheeled": "Колесен"
+  },
+  "mastery-badges": {
+    "class3": "3-ти клас",
+    "class2": "2-ри клас",
+    "class1": "1-и клас",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Случайни битки",
+    "stronghold": "Укрепление",
+    "skirmish": "Схватка",
+    "clan-wars": "Кланови войни"
+  },
+  "features": {
+    "stronghold": "Укрепление",
+    "skirmish": "Схватка",
+    "marks-of-excellence": "Знаци за отлични постижения",
+    "marks-of-mastery": "Знаци на майсторство",
+    "personal-rating": "Личен рейтинг",
+    "world-of-tanks-rating": "Рейтинг на World of Tanks",
+    "common-test": "Общ тест",
+    "tournaments": "Турнири"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Mark",
+    "3": "3 Mark",
+    "name": "Знаци за отлични постижения"
+  }
+}

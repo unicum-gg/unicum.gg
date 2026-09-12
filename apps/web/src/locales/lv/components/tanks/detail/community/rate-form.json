@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Vēl daži vārdi: atlikušas {count}.",
+  "at-winrate": "pie {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Neizdevās atsaukt. Pēc brīža mēģini vēlreiz.",
+  "hide-the-detailed-axes": "Paslēpt detalizētās asis",
+  "not-enough-battles": "Tu šo tanku neesi spēlējis pietiekami, lai tava balss tiktu ieskaitīta.",
+  "published-once-read": "Publicēts pēc tam, kad moderators to būs izlasījis. Tavas zvaigznes tiek ieskaitītas uzreiz.",
+  "rate-it-in-detail": "Novērtēt detalizēti (pēc izvēles)",
+  "review": {
+    "none": "Vērtējums saglabāts.",
+    "queued": "Vērtējums saglabāts. Tavs apskats ir pie moderatora.",
+    "published": "Vērtējums saglabāts. Tavs apskats jau ir publicēts.",
+    "pending": "Vērtējums saglabāts. Tavs apskats joprojām gaida moderatoru.",
+    "rejected": "Vērtējums saglabāts. Tavs iepriekšējais apskats netika publicēts, tāpēc tiek ieskaitītas tikai tavas zvaigznes.",
+    "closed": "Vērtējums saglabāts. Rakstiskie viedokļi pašlaik ir slēgti, tāpēc teksts netika saglabāts."
+  },
+  "save-failed": "Neizdevās saglabāt. Pēc brīža mēģini vēlreiz.",
+  "say-why-optional": "Pasaki, kāpēc (pēc izvēles)",
+  "signed-with": "Apstiprināts ar tavām {battles} kaujām",
+  "submit-my-rating": "Iesniegt manu vērtējumu",
+  "too-many-edits": "Tās ir pārāk daudzas izmaiņas uzreiz. Uzgaidi minūti.",
+  "update-my-rating": "Atjaunināt manu vērtējumu",
+  "what-it-is-good-at": "Kam tas ir labs, kam nav un kam to vajadzētu spēlēt.",
+  "withdraw": "Atcelt",
+  "your-rating-has-been-withdrawn": "Tavs vērtējums ir atsaukts.",
+  "your-review-is-waiting-on": "Tavs apskats gaida moderatoru. Šeit to vari redzēt tikai tu.",
+  "your-review-was-not-published": "Tavs apskats netika publicēts. Tavas zvaigznes joprojām tiek ieskaitītas vidējā vērtējumā."
+}

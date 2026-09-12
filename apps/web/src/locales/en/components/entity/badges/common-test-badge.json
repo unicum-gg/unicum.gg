@@ -1,0 +1,12 @@
+{
+  "aria-build": "Read on the Common Test client, build {version}",
+  "aria-changes": "Changed by the Common Test: {changes} characteristics",
+  "aria-described": "Common Test: {description}",
+  "aria-vehicle": "Common Test vehicle",
+  "common-test": "Common Test",
+  "common-test-build": "Common Test {version}",
+  "tip-build": "{label} · these are the test build’s values, and Wargaming can still change them before the update ships",
+  "tip-changes": "Common Test changes {changes, plural, one {# characteristic} other {# characteristics}} on this vehicle",
+  "tip-described": "Common Test · {description}",
+  "tip-vehicle": "Common Test · not released yet, so it has no battle statistics and its characteristics can still change"
+}

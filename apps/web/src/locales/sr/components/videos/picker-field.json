@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "clear-the-field": "Обриши {label}",
+  "credited-on-the-clan-s": "Приписано на сопственој страници клана.",
+  "none": "Nema",
+  "optional": "(opciono)",
+  "pick-the-vehicle": "Изаберите возило",
+  "search-for-a-clan": "Претражи клан",
+  "search-for-a-vehicle": "Претражи возило",
+  "search-tank": "Pretraži tenk...",
+  "tank": "Tenajk",
+  "tank-hint-optional": "Тактика припада својој мапи, па возило треба навести само када се видео односи и на њега.",
+  "tank-hint-required": "Случајна битка се проналази према возилу у којем је одиграна."
+}

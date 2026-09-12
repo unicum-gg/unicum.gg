@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rang {rank} na tabli {board}",
+  "board": {
+    "advances": "рејтинг за Napadi у Утврђењу",
+    "skirmish-t10": "рејтинг Чарки, Nivo X",
+    "skirmish-t6": "рејтинг Чарки, Nivo VI",
+    "skirmish-t8": "рејтинг Чарки, Nivo VIII"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Alle {count} World of Tanks-kamparenaene. Filtrer etter kamuflasje og spillmodus, og åpne deretter et kart for minimap, størrelse og baseflagg og startpunkter per modus.",
+    "title": "Alle World of Tanks-kart ({region}), hver kamparena",
+    "description": "Se gjennom alle World of Tanks-kart på {region}: minimap, størrelse, kamuflasje og støttede spillmoduser, med baseflagg og startpunkter per modus.",
+    "heading": "Alle <accent>kart</accent>"
+  },
+  "battle-type": {
+    "intro": "De {count} World of Tanks-kartene som spilles i {type}, {blurb}. Åpne et kart for minimap, størrelse og baseflagg og startpunkter per modus.",
+    "title": "World of Tanks-kart for {type} ({region}), hver arena i rotasjonen",
+    "description": "Alle World of Tanks-kart i {type}-rotasjonen på {region}: minimap, størrelse, kamuflasje og støttede spillmoduser, med baseflagg og startpunkter per modus.",
+    "heading": "{type} <accent>kart</accent>"
+  },
+  "blurbs": {
+    "random": "standardrotasjonen med 15 mot 15",
+    "battle_royale": "modusen der siste stridsvogn står igjen",
+    "frontline": "storskalamodusen med 30 mot 30",
+    "onslaught": "den rangerte modusen med 7 mot 7",
+    "onslaught_night": "den rangerte 7v7-modusen etter mørkets frembrudd, med kortere synsrekkevidde, som nå kan spilles på Vanlig test",
+    "grand_battle": "nivå X-modusen med 30 mot 30",
+    "clan_wars": "klanekriger og fremrykninger",
+    "waffentrager": "Waffenträger-hendelsen",
+    "last_stand": "Last Stand-hendelsen",
+    "arcade": "arkade- og spesialhendelser",
+    "story_mode": "de historiedrevne operasjonene",
+    "training": "treningsrom og opplæringer"
+  }
+}

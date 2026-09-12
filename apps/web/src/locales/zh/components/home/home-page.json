@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "顶级玩家 · 过去 24小时"
+    },
+    "week": {
+      "title": "顶级玩家 · 过去 7天"
+    }
+  },
+  "rating-scale": {
+    "title": "评分标准"
+  },
+  "community": {
+    "title": "加入社区",
+    "heading": "与 WoT 玩家交流",
+    "description": "加入我们的 Discord，讨论 WoT 数据、请求功能并报告错误。也可以访问 GitHub 查看代码并参与贡献。",
+    "discord": "加入 Discord",
+    "github": "在 GitHub 上查看"
+  },
+  "features": {
+    "title": "你将在这里找到什么",
+    "profiles": {
+      "title": "玩家档案",
+      "description": "详细数据，包含总体数据及 24h / 7d / 30d 变化、WN7、WN8、WNX 和个人评级。"
+    },
+    "clans": {
+      "title": "军团页面",
+      "description": "成员表格，包含评级、近期活动动态、描述和军团元数据。"
+    },
+    "history": {
+      "title": "军团历史",
+      "description": "玩家加入过的每个军团的完整时间线，包含职位和日期。"
+    },
+    "live": {
+      "title": "实时更新",
+      "description": "已追踪玩家通过我们的快照系统在后台每 24小时刷新一次。"
+    },
+    "leaderboards": {
+      "title": "排行榜",
+      "description": "顶级玩家（24小时、7天、全部时间）和按 WNX 排位的顶级军团，数据根据我们的快照计算。"
+    },
+    "open-source": {
+      "title": "打开源代码 · AGPL",
+      "description": "代码位于 GitHub。查看、派生、贡献。无广告，仅使用自愿开启的分析功能。"
+    }
+  },
+  "quick-start": {
+    "title": "快速开始",
+    "search": {
+      "title": "🔍 搜 索玩家或军团",
+      "description": "按下 {shortcut} 打开搜 索，然后输入昵称或军团标签。"
+    },
+    "region": {
+      "title": "🌍 切换地区",
+      "description": "使用导航栏中的 {selector} 选择器。排行榜会相应更新。"
+    },
+    "leaderboards": {
+      "title": "🏆 浏览排行榜",
+      "description": "顶级玩家（24小时、7天、全部时间）和按平均 WNX 排位的顶级军团，数据根据我们的快照计算。"
+    },
+    "colors": {
+      "title": "📊 了解颜色",
+      "description": "WR、WN7、WN8 和 WNX 使用相同的等级颜色（橙色 → 绿色 → 青色 → 紫色）。请查看上方的范围。"
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Euróban számlázva, a mai árfolyamon {currency} pénznemre átváltva.",
+  "cost-breakdown": "Költség-összesítés",
+  "estimated-annual-cost": "Becsült éves költség",
+  "fixed-month-bill-no-surprises": "Fix, havi {totalAnnualEur} eurós számla, meglepetések nélkül: egy bérelt szerver, harmadik féltől származó SaaS nélkül az adatútvonalon. Csak akkor nő, ha kinőjük a szervert, vagyis nagyobb Wargaming-adatforgalom több kimenő IP-címet jelent.",
+  "free": "ingyenes",
+  "one-off-spend": "Egyszeri kiadás",
+  "paid-once-so-it-is": "Egyszeri fizetés volt, ezért nem része a fenti havi számlának. Ettől még beleszámít abba, amennyibe a projekt eddig került.",
+  "previously": "Előzőleg"
+}

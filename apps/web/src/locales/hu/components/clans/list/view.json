@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Top <accent>klánok</accent>",
+    "language": "Legjobb <accent>{language}</accent> nyelvű klánok"
+  },
+  "intro": {
+    "all": "{region} régió ranglistája, az egyes klánok nyomon követett tagjai körében számított átlagos {metric} alapján rangsorolva (klánonként legalább 50 már csatázott tag).",
+    "language": "{region} régió azon klánjai, amelyek egyik megadott nyelve {language}, a nyomon követett tagjaik körében számított átlagos {metric} alapján rangsorolva (klánonként legalább 25 már csatázott tag).",
+    "strict": "{region} régió azon klánjai, amelyek egyetlen megadott nyelve {language}, a nyomon követett tagjaik körében számított átlagos {metric} alapján rangsorolva (klánonként legalább 25 már csatázott tag)."
+  },
+  "board": {
+    "all": "Legjobb {count} klán {metric} alapján",
+    "language": "Legjobb {count} {language} nyelvű klán {metric} alapján",
+    "strict": "Legjobb {count} kizárólag {language} nyelvű klán {metric} alapján"
+  },
+  "members": "Tagok",
+  "strict-toggle": "Szigorú",
+  "any-toggle": "Bármilyen",
+  "all-languages": "Minden nyelv",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Top <accent>klani</accent>",
+    "language": "Top <accent>{language}</accent> klani"
+  },
+  "intro": {
+    "all": "{region} līderu saraksts, ranžēts pēc {metric}, kas aprēķināts kā vidējais rādītājs katra klana izsekotajiem biedriem (minimums 50 biedru ar kaujām).",
+    "language": "{region} klani, kuri par vienu no savām valodām norādījuši {language}, ranžēti pēc {metric}, kas aprēķināts kā vidējais rādītājs to izsekotajiem biedriem (minimums 25 biedru ar kaujām).",
+    "strict": "{region} klani, kuri par savu vienīgo valodu norādījuši {language}, ranžēti pēc {metric}, kas aprēķināts kā vidējais rādītājs to izsekotajiem biedriem (minimums 25 biedru ar kaujām)."
+  },
+  "board": {
+    "all": "Top {count} klani pēc {metric}",
+    "language": "Top {count} {language} klani pēc {metric}",
+    "strict": "Top {count} tikai {language} klani pēc {metric}"
+  },
+  "members": "Dalībnieki",
+  "strict-toggle": "Ierobežots",
+  "any-toggle": "Jebkura",
+  "all-languages": "Visas valodas",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

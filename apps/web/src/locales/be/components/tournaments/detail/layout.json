@@ -1,0 +1,12 @@
+{
+  "final": "Фінал",
+  "grand-final": "Вялікі фінал",
+  "loser-bracket-final": "Фінал сеткі тых, хто прайграў",
+  "loser-round": "Раунд {round} у сетцы тых, хто прайграў",
+  "quarter-finals": "Чвэрцьфіналы",
+  "round-of": "Раунд для {teams} каманд",
+  "semi-finals": "Паўфіналы",
+  "third-place": "Трэцяе месца",
+  "winner-bracket-final": "Фінал сеткі пераможцаў",
+  "winner-round": "Раунд {round} у сетцы пераможцаў"
+}

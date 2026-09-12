@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "จบลงอย่างไร",
+  "loading-maps": "กำลังโหลดแผนที่…",
+  "map": "แผนที่",
+  "mode": "โหมด",
+  "pick-a-map": "เลือกแผนที่",
+  "pick-a-mode": "เลือกโหมด",
+  "result": "ผลลัพธ์",
+  "spawn": "เกิดขึ้นใหม่",
+  "team": "ทีม {team}",
+  "team-spawn": "ทีม {team} · {direction}",
+  "which-side-you-started": "คุณเริ่มจากฝ่ายใด"
+}

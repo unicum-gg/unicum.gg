@@ -1,5 +1,7 @@
+import { useTranslation } from "@/hooks/use-translation";
+import { statLabel } from "@/components/stat-label";
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/link";
 import { Crest, type Tincture } from "@/components/entity/badges/crest";
 import {
   Tooltip,
@@ -90,13 +92,15 @@ export function OverflowCrest({
   hidden: ClusterBadge[];
   size: number;
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/entity/badges/badge-cluster");
   return (
     <TooltipProvider>
       <Tooltip disableHoverableContent={false}>
         <TooltipTrigger asChild>
           <span
             className="inline-flex shrink-0 cursor-default"
-            aria-label={`${hidden.length} more badges`}
+            aria-label={t("n-more-badges", { count: hidden.length })}
           >
             <Crest
               tincture={
@@ -116,7 +120,7 @@ export function OverflowCrest({
               const row = (
                 <>
                   <span className="inline-flex shrink-0">{b.crest}</span>
-                  <span>{b.label}</span>
+                  <span>{statLabel(b.label, tStats)}</span>
                 </>
               );
               return b.href ? (

@@ -1,0 +1,6 @@
+{
+  "title": "問題が発生しました",
+  "description": "Wargaming APIが正しく応答しませんでした。通常、Wargaming側の一時的な問題です。",
+  "try-again": "再試行",
+  "back": "ホームに戻る"
+}

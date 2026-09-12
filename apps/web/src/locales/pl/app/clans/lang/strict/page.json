@@ -1,0 +1,6 @@
+{
+  "title": "Klany World of Tanks używające wyłącznie języka {language} ({region})",
+  "description": "Ranking klanów {name} w regionie {region}, które zadeklarowały język {language} jako jedyny, uszeregowanych według WNX.",
+  "og-title": "Klany używające wyłącznie języka {language}",
+  "og-subtitle": "Klasyfikacja {region}"
+}

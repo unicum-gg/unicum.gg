@@ -1,4 +1,5 @@
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
+import type { TranslateFunction } from "@onruntime/translations";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
 import type { MapSearchResult } from "@/app/api/[region]/maps/search/route";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
@@ -156,11 +157,12 @@ export type SearchSections = {
 export function flattenSections(
   region: Region,
   sections: SearchSections,
+  t: TranslateFunction,
 ): Row[] {
   const rows: Row[] = [];
   const { players, clans, tanks, maps, glossary } = sections;
   if (players && players.length > 0) {
-    rows.push({ type: "header", label: "Players", key: "h-players" });
+    rows.push({ type: "header", label: t("sections.players"), key: "h-players" });
     for (const player of players) {
       rows.push({
         type: "player",
@@ -171,7 +173,7 @@ export function flattenSections(
     }
   }
   if (clans && clans.length > 0) {
-    rows.push({ type: "header", label: "Clans", key: "h-clans" });
+    rows.push({ type: "header", label: t("sections.clans"), key: "h-clans" });
     for (const clan of clans) {
       rows.push({
         type: "clan",
@@ -182,7 +184,7 @@ export function flattenSections(
     }
   }
   if (tanks && tanks.length > 0) {
-    rows.push({ type: "header", label: "Tanks", key: "h-tanks" });
+    rows.push({ type: "header", label: t("sections.tanks"), key: "h-tanks" });
     for (const tank of tanks) {
       rows.push({
         type: "tank",
@@ -193,7 +195,7 @@ export function flattenSections(
     }
   }
   if (maps && maps.length > 0) {
-    rows.push({ type: "header", label: "Maps", key: "h-maps" });
+    rows.push({ type: "header", label: t("sections.maps"), key: "h-maps" });
     for (const map of maps) {
       rows.push({
         type: "map",
@@ -204,7 +206,7 @@ export function flattenSections(
     }
   }
   if (glossary && glossary.length > 0) {
-    rows.push({ type: "header", label: "Glossary", key: "h-glossary" });
+    rows.push({ type: "header", label: t("sections.glossary"), key: "h-glossary" });
     for (const term of glossary) {
       rows.push({ type: "glossary", term, key: `g-${term.slug}` });
     }
@@ -232,6 +234,7 @@ function sameItem(a: SearchHistoryItem, b: SearchHistoryItem): boolean {
 export function flattenHistory(
   recent: SearchHistoryItem[],
   favorites: SearchHistoryItem[],
+  t: TranslateFunction,
 ): Row[] {
   // Hide recents that are already pinned as favorites to avoid showing the
   // same row twice in two sections back-to-back.
@@ -240,11 +243,11 @@ export function flattenHistory(
   );
   const rows: Row[] = [];
   if (dedupedRecent.length > 0) {
-    rows.push({ type: "header", label: "Recent", key: "h-recent" });
+    rows.push({ type: "header", label: t("sections.recent"), key: "h-recent" });
     for (const item of dedupedRecent) rows.push(itemToRow(item, true));
   }
   if (favorites.length > 0) {
-    rows.push({ type: "header", label: "Favorites", key: "h-favorites" });
+    rows.push({ type: "header", label: t("sections.favorites"), key: "h-favorites" });
     for (const item of favorites) rows.push(itemToRow(item, false));
   }
   return rows;

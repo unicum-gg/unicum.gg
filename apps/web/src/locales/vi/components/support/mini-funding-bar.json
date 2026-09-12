@@ -1,0 +1,6 @@
+{
+  "label": "Do cộng đồng tài trợ",
+  "funded": "Đã tài trợ {pct}%",
+  "tooltip": "{received} trong mục tiêu {goal} được những người ủng hộ trang trải kể từ khi ra mắt",
+  "tooltip-loading": "Do cộng đồng tài trợ, không quảng cáo"
+}

@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tancurile lui {name} ({region}), fiecare vehicul jucat",
+    "description": "Fiecare tanc jucat de {name} în {region}, cu bătălii, rată de victorii, daune medii și WN8 pentru fiecare vehicul."
+  },
+  "achievements": {
+    "title": "Realizările lui {name} ({region}), {medals} medalii câștigate",
+    "description": "Cele {medals} medalii World of Tanks câștigate de {name} în {region}, de la Kolobanov și Pool până la gradele onorifice și medaliile epice, plus toate cele care mai pot fi câștigate."
+  },
+  "tournaments": {
+    "title": "Turneele lui {name} ({region})",
+    "description": "Fiecare turneu Wargaming la care a participat {name} în {region}: echipa pentru care a jucat, formatul și cât de departe a ajuns. O înregistrare publicată de Wargaming doar din perspectiva turneului, niciodată a jucătorului."
+  },
+  "value": {
+    "title": "Valoarea contului lui {name} ({region})",
+    "description": "Cât valorează contul World of Tanks al lui {name} din {region}: creditele, aurul și experiența investite în garaj."
+  },
+  "mode": {
+    "title": "Statisticile lui {name} în modul {mode} ({region})",
+    "description": "{name} în {region}, în modul {mode}: bătălii, rată de victorii și ratinguri pentru acest mod, alături de baza lor din bătăliile aleatorii."
+  },
+  "overview": {
+    "title": "Statisticile World of Tanks ale lui {name} ({region}), {battles} bătălii, {winrate}% RV",
+    "description": "{name} în {region}: {battles} bătălii, rată de victorii de {winrate}%, rating {rating}. Analiză tanc cu tanc, WN8, WNX și istoricul complet al clanurilor."
+  },
+  "locked": {
+    "title": "Contul World of Tanks al lui {name} este blocat ({region})",
+    "description": "{name} ({region}) există, dar Wargaming a blocat acest cont, astfel că statisticile sale World of Tanks nu sunt disponibile."
+  },
+  "empty": {
+    "title": "Statisticile jucătorului World of Tanks {name} ({region})",
+    "description": "Statisticile jucătorului World of Tanks {name} ({region}): ratinguri WN8 și WNX, rată de victorii, analiză tanc cu tanc și istoricul complet al clanurilor."
+  }
+}

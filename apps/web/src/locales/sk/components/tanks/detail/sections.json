@@ -1,0 +1,14 @@
+{
+  "ammunition": "Munícia",
+  "characteristics": "Charakteristiky tanku {tank}",
+  "consumables": "Spotrebný materiál",
+  "crew-level": "Úroveň posádky",
+  "crew-skills": "Zručnosti posádky",
+  "equipment": "Výbava",
+  "field-mods": "Súťažné úpravy",
+  "historical-reference": "Historické informácie o tanku {tank}",
+  "modules": "Moduly tanku {tank}",
+  "research-path": "Vetva technologického stromu tanku {tank}",
+  "similar": "Tanky podobné tanku {tank}",
+  "videos": "Videá o tanku {tank}"
+}

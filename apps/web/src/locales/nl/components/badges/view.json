@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} klassement",
+  "carried-beside-a-clan-tag": "Wordt naast een clantag gedragen. Een rangembleem staat voor een plaats in een competitie: het getal erop is die plaats en de kleur geeft aan om welk klassement het gaat. Beoordelingen leveren geen embleem op, want hoog staan op basis van WN8 is niet iets wat een clan wint.",
+  "clan-badges": "Clan badges",
+  "clan-board": {
+    "name": "Beste {rank} in {board}",
+    "how": "Een plaats bij de beste {rank} in {board}. Wordt gedragen zolang de clan die plaats behoudt en verdwijnt zodra dat niet meer zo is."
+  },
+  "clan-overflow": "Een clan die meer dan drie plaatsen bezet, bundelt de rest in een {plus}-embleem, met de beste eerst, zodat de tag leesbaar blijft. Als je erover beweegt, zie je welke het zijn.",
+  "featured-tournament-winner": {
+    "name": "Winnaar van een Uitgelicht toernooi",
+    "how": "Hetzelfde, maar gewonnen tijdens een evenement dat Wargaming als Uitgelicht aanmerkt. Goud in plaats van staal, precies zoals aan de spelerskant."
+  },
+  "heading": "Elke {badge} en hoe je die verdient",
+  "heading-accent": "badge",
+  "marks-carried-beside-a-nickname": "Markeringen die naast een spelersnaam worden weergegeven, waar die ook op {NAME} verschijnt: klassementen, clanledenlijsten, zoekresultaten en toernooischema’s.",
+  "n-badges": "{count} badges",
+  "onslaught-champion": {
+    "name": "Bestorming Kampioen",
+    "how": "De rang Kampioen bereikt in Bestorming, wat vereist is om überhaupt in het {standings} te verschijnen. De markering blijft daarna behouden: als een Beoordeling weer onder de grens daalt, verdwijnt de plaats, maar niet het feit dat die ooit is behaald."
+  },
+  "onslaught-legend": {
+    "name": "Bestorming Legende",
+    "how": "Een plaats bezet binnen de seizoensgrens voor Legende. Die grens is een positie en geen score: er bestaan er maar een beperkt aantal tegelijk en de grens wordt beoordeeld aan de hand van het seizoen waarin de plaats werd bezet. Violet in plaats van staalblauw, de kleur die het klassement zelf voor Legende gebruikt."
+  },
+  "player-badges": "Speler badges",
+  "player-overflow": "Een speler met meer dan drie bundelt de rest in een {plus}-embleem, in de bovenstaande volgorde, zodat een spelersnaam in een tabel leesbaar blijft. Als je erover beweegt, zie je hun namen en elk ervan linkt nog steeds naar dezelfde pagina als het eigen embleem.",
+  "ranked-standings": "gerangschikte standen",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Een Twitch-kanaal dat aan het account is gekoppeld. Koppel Twitch via je eigen profiel om het te bevestigen. Het embleem linkt naar je kanaal en wordt weergegeven ongeacht of je live bent."
+  },
+  "streamer-who-is-on-air": "Een streamer die live is, draagt ook een rood LIVE-label. Dat wordt niet verdiend en niet behouden: het verschijnt wanneer de stream begint en verdwijnt wanneer die eindigt, zodat het nooit wordt samengevoegd.",
+  "support-subscription": "ondersteuning abonnement",
+  "supporter": {
+    "name": "Supporter"
+  },
+  "supporter-note": "Een actieve {link} die openbaar blijft. Wie als Supporter anoniem wil blijven, draagt naar eigen keuze geen badge.",
+  "the-marks-a-player-or": "De Markeringen die een speler of clan op {NAME} kan dragen, wat elk ervan betekent en precies wat ervoor nodig is om ze te krijgen.",
+  "tournament-winner": {
+    "name": "Toernooiwinnaar",
+    "how": "Een aan de clan toegeschreven team heeft een Toernooi gewonnen. Wargaming registreert teams en accounts, nooit clans. Daarom wordt de toeschrijving herleid door elke teamopstelling te vergelijken met het clanlidmaatschap zoals dat op de speeldag was."
+  },
+  "verified": {
+    "name": "Geverifieerd",
+    "how": "De eigenaar heeft ingelogd met een Wargaming.net ID en dit account gekoppeld. Inloggen is de enige vereiste en kost niets."
+  }
+}

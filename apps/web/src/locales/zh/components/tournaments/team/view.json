@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "抽签尚未进行。锦标赛开始后，该队伍的对战关系会显示在这里。",
+  "each-map-is-played-twice": "每张地图进行两次对战，双方各进行一次。最后一张地图为决胜局，只进行一次。",
+  "first-battle-at": "首场战斗：{when}",
+  "lost": "战败",
+  "matches": "比赛 ({length})",
+  "never-played": "该队伍从未进行过对战。它完成了报名，但抽签未轮到它，未确认的名单就会出现这种情况。",
+  "no-maps-recorded": "该场对战没有已记录的地图。",
+  "no-roster-recorded-for-this": "该队伍没有已记录的名单。",
+  "of-players-on-the-day": "比赛当天{length}名玩家中的{members}人",
+  "played-on-uncatalogued": "在{maps}上进行过对战，地图目录中没有收录这些地图。",
+  "roster": "名单 ({length})",
+  "stage-group": "{stage} · 第 {order} 组",
+  "team-1": "队伍 1",
+  "team-2": "队伍 2",
+  "tournaments": "赛事",
+  "when-the-first-battle-started": "首场战斗开始时间",
+  "won": "获胜"
+}

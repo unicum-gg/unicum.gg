@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Módosíts bármit, ami hibás, a járművet is beleértve. A mentés visszaküldi a moderációs sorba, ezért az élő videó addig lekerül, amíg újra jóvá nem hagyják.",
+  "correct-a-suggestion": "Javaslat javítása",
+  "could-not-load-that-suggestion": "A javaslat nem tölthető be. Próbáld újra egy pillanat múlva.",
+  "link-expired": "Ez a hivatkozás lejárt. Nyomd meg újra a Szerkesztés gombot a Discord-kártyán egy új hivatkozásért.",
+  "loading": "Betöltés…",
+  "log-in": "Bejelentkezés",
+  "log-in-with-the-account": "Jelentkezz be azzal a fiókkal, amely ezt a videót javasolta, hogy javíthasd.",
+  "no-suggestion-with-that-id": "Nincs ilyen azonosítójú javaslat.",
+  "not-yours-to-correct": "Ezt a javaslatot nem te javíthatod."
+}

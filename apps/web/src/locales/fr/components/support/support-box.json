@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Commande annulée.",
+  "claim-your-supporter-role-on-discord": "Obtenez votre rôle de supporter sur Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Impossible d’ajouter le rôle Discord. Veuillez réessayer.",
+  "could-not-open-the-billing-portal": "Impossible d’ouvrir le portail de facturation.",
+  "could-not-start-checkout-please-try-again": "Impossible de lancer le paiement. Veuillez réessayer.",
+  "could-not-update-your-preference": "Impossible de mettre à jour votre préférence.",
+  "log-in-with-wargaming": "Se connecter avec Wargaming",
+  "log-in-with-wargaming-to": "Connectez-vous avec Wargaming pour soutenir {NAME}.",
+  "manage-subscription": "Gérer l’abonnement",
+  "only-active-supporters-can-claim-the-discord": "Seuls les supporters actifs peuvent obtenir le rôle Discord.",
+  "or-choose-your-own-amount": "Ou choisissez votre propre montant",
+  "pay-what-you-want": "Payez ce que vous voulez.",
+  "pick-an-amount": "Choisissez un montant ou saisissez le vôtre, à partir de {min} €/mois.",
+  "re-sync-discord-role": "Resynchroniser le rôle Discord",
+  "secured-by-stripe": "Sécurisé par Stripe. Annulez à tout moment.",
+  "show-me-anonymously-on-the": "M’afficher anonymement sur le podium",
+  "support-subscriptions-are-coming-soon": "Les abonnements de soutien seront bientôt disponibles.",
+  "supporter-role-added-on-discord": "Rôle de supporter ajouté sur Discord !",
+  "you-are-a-supporter-thank": "Vous êtes supporter. Merci de faire vivre {NAME}."
+}

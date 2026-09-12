@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname} nije zauzimao mjesto na ljestvici Ofenzive.",
+  "live-season": "· sezona uživo",
+  "loading-s-onslaught-record": "Učitavanje rekorda Ofenzive igrača {nickname}...",
+  "onslaught": "Ofenziva",
+  "onslaught-record": "Rekord Ofenzive igrača {nickname}",
+  "see-this-season-s-leaderboard": "Pogledajte ljestvicu ove sezone",
+  "standing-line": "{rating} rejting bodova · {battles} bitki",
+  "the-board-only-lists-players": "Ljestvica prikazuje samo igrače koji dosegnu rang Šampiona, njih nekoliko hiljada po regiji, pa se gotovo svaki profil nalazi ovdje. Popunjava se sama u sezoni u kojoj ga dosegnu.",
+  "updated": "Ažurirano {when}"
+}

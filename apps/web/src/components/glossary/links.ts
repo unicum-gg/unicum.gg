@@ -3,6 +3,8 @@ import {
   StrongholdTier,
   type GlossaryLink,
 } from "@unicum.gg/shared";
+import type { TranslateFunction } from "@onruntime/translations";
+import { statLabel } from "@/components/stat-label";
 import type { Region } from "@unicum.gg/wargaming";
 import { TankTab, tankTabHref } from "@/components/tanks/list/tabs";
 import ROUTES from "@/constants/routes";
@@ -74,6 +76,19 @@ const LABEL: Record<GlossaryLinkTarget, string> = {
   [GlossaryLinkTarget.Map]: "This map",
 };
 
-export function glossaryLinkLabel(link: GlossaryLink): string {
-  return link.label ?? LABEL[link.target];
+/**
+ * What a "see also" link is called, in the reader's language.
+ *
+ * An entry may name its own label, which is the entry author's wording and is
+ * translated with the rest of the glossary; otherwise the destination has a
+ * default one here. `LABEL` stays the English source AND the key side, slugged,
+ * so a destination we add reads as its English name until the next translation
+ * run rather than as a raw enum member.
+ */
+export function glossaryLinkLabel(
+  link: GlossaryLink,
+  t: TranslateFunction,
+): string {
+  if (link.label) return link.label;
+  return statLabel(LABEL[link.target], t);
 }

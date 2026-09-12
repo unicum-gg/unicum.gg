@@ -1,0 +1,12 @@
+{
+  "achievements": "Utmerkelser til {nickname}",
+  "filter-all": "Alle",
+  "filter-both": "Begge",
+  "filter-earned": "Opptjent",
+  "filter-missing": "Mangler",
+  "filter-obtainable": "Oppnåelig",
+  "filter-retired": "Utgått",
+  "no-achievement-matches-these-filters": "Ingen prestasjoner samsvarer med disse filtrene.",
+  "search-achievements": "Søk etter utmerkelser",
+  "search-among-n-achievements": "Søk blant {count} prestasjoner"
+}

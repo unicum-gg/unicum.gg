@@ -1,0 +1,22 @@
+{
+  "search": "용어 {count}개 검색",
+  "search-label": "용어집 검색",
+  "all": "전체",
+  "jump": "문자로 이동",
+  "empty": "“{query}”와 일치하는 용어가 없습니다.",
+  "categories": {
+    "vehicles": "전차",
+    "gunnery": "포병",
+    "armor": "장갑",
+    "mobility": "기동",
+    "vision": "시야",
+    "crew": "승무원",
+    "progression": "진행",
+    "economy": "경제",
+    "ratings": "평점",
+    "statistics": "전적",
+    "modes": "전투 모드",
+    "tactics": "전술",
+    "slang": "은어"
+  }
+}

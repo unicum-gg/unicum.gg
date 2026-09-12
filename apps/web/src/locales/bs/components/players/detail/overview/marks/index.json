@@ -1,0 +1,21 @@
+{
+  "title": "Oznake i majstorstvo igrača {nickname}",
+  "excellence": {
+    "title": "Oznake izvrsnosti",
+    "description": "Vozila prema oznakama na topu. Oznaka je dugoročni prosjek, a igra je izračunava u kliznom prozoru nedavnih bitki u poređenju s onim što regija ostvaruje tim vozilom.",
+    "partial": "Oznake su pročitane za {known} od {garage} vozila. Ostale će se popuniti pri osvježavanju računa.",
+    "note": "{marked} od {garage} vozila nose oznaku.",
+    "note-share": "{marked} od {garage} vozila nose oznaku ({percent}% garaže)."
+  },
+  "mastery": {
+    "title": "Oznake majstorstva",
+    "description": "Vozila prema najboljoj znački. Značka se zasniva na jednoj bitki, a ne na prosjeku, i igra je dodjeljuje za iskustvo iz jedne bitke u poređenju s onim što regija ostvaruje tim vozilom.",
+    "note": "{aces} od {garage} vozila nose značku Ace Tanker.",
+    "note-share": "{aces} od {garage} vozila nose značku Ace Tanker ({percent}% garaže)."
+  },
+  "reach": {
+    "heading": "Igranje iznad topa",
+    "description": "Vozila čija ukupna šteta već doseže oznaku koju ne nose. Značka prikazuje tu ukupnu štetu, obojenu prema oznaci koju doseže."
+  },
+  "none": "Nema"
+}

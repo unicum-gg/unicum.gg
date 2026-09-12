@@ -1,0 +1,7 @@
+{
+  "stats-title": "{nickname}’s random battles stats",
+  "progression-title": "{nickname}’s {metric} progression",
+  "lift-drag-title": "Tanks shaping {nickname}’s rating",
+  "progression-blurb": "Solid line is overall {metric} (matches the Total column above), drifting slowly as new battles accumulate. Dashed line is per-session {metric}, computed from the battles played since the previous snapshot. It shows hot and cold streaks. Line color follows the rating tier.",
+  "progression-empty": "Not enough history yet. We need at least one snapshot to draw the curve. Check back soon."
+}

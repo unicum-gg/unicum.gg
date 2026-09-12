@@ -1,0 +1,11 @@
+{
+  "compare": "Sammenlign med de {count} nærmeste",
+  "match": "kamp",
+  "subtitle": "Samme placering blandt deres eget niveau",
+  "verdict": {
+    "overall": "Lignende samlet",
+    "closest": "Nærmest på {axes}",
+    "closest-furthest": "Nærmest på {axes}, længst fra på {apart}",
+    "and": " og "
+  }
+}

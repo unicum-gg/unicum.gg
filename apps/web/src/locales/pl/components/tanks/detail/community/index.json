@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Oś po osi",
+  "by-server": "Według serwera",
+  "community-verdict": "Werdykt społeczności",
+  "every-server-one-average": "Wszystkie serwery, jedna średnia",
+  "n-shown": ", pokazano: {count}",
+  "opinion": "{count, plural, one {# opinia} few {# opinie} many {# opinii} other {# opinii}}",
+  "opinion-next-to-win-rate": "Opinia na tle współczynnika zwycięstw w ramach poziomu {tier}",
+  "rate-the": "Oceń {tankName}",
+  "reputation-against-results": "Reputacja a wyniki",
+  "same-tank-different-metas": "Ten sam czołg, różne mety",
+  "the-same-tank-by-how": "Ten sam czołg według poziomu umiejętności głosujących",
+  "what-players-wrote": "Wypowiedzi graczy",
+  "who-is-saying-it": "Kto tak uważa"
+}

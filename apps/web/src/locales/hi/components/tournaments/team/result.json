@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "{size} खिलाड़ियों में से {rated} का औसत",
+  "average-over-recent": "पिछले 30 दिनों में खेले गए {size} खिलाड़ियों में से {rated} का औसत",
+  "avg-winrate": "औसत जीत दर",
+  "finished": "समाप्त",
+  "record": "रिकॉर्ड",
+  "won": "जीते"
+}

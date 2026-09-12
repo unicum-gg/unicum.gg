@@ -1,0 +1,14 @@
+{
+  "date": "Dátum",
+  "featured-tournament": "Kiemelt verseny",
+  "format": "Formátum",
+  "mode": "Mód",
+  "no-tournament-matches-the-current": "Egyetlen verseny sem felel meg a jelenlegi szűrőknek.",
+  "nothing-here-right-now-wargaming": "Jelenleg nincs itt semmi. A Wargaming naponta nyit új versenyeket, így ez a lista magától újra feltöltődik.",
+  "prize": "Díj",
+  "region-tournaments": "{region} versenyei ({count})",
+  "status": "Állapot",
+  "teams": "Csapatok",
+  "tier": "szint",
+  "tournament": "Torna"
+}

@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Wähle eine Reserve aus, um eine Vorschau des Zeitplans anzuzeigen.",
+  "schedule": "An deinen aktiven Tagen wird er zu den Zeiten {times} aktiviert (jeweils für {hours} Std.) und deckt {window} ab, sobald die Mindestanzahl an Online-Spielern erreicht ist."
+}

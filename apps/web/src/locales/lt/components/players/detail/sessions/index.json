@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Sesijų dar nėra. Jos pasirodo, kai ši paskyra du kartus užfiksuojama su tarp jų sužaistais mūšiais. Tai įvyksta savaime, kai paskyra naudojama.",
+  "bar-height-is-battles-played": "Juostos aukštis rodo sužaistus mūšius, o spalva rodo to {granularity} {metric}, naudojant tas pačias juostas, kurias svetainė naudoja visur kitur.",
+  "title": "{nickname} sesijos",
+  "title-count": "{nickname} sesijos ({count})",
+  "granularity": {
+    "day": "diena",
+    "week": "savaitė",
+    "month": "mėnuo",
+    "daily": "Kasdien",
+    "weekly": "Kiekvieną savaitę",
+    "monthly": "Kiekvieną mėnesį"
+  },
+  "week-of": "Savaitė nuo {date}"
+}

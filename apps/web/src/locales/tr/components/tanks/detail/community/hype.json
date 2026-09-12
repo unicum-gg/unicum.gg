@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "Seviyesindeki puanlanan tankların %{value} kadarının üstünde",
+  "measured-hint": "Kazanma oranının aynı tanklar arasındaki sıralaması",
+  "not-enough-votes-yet-to": "Topluluğun hükmünü tankın gerçek performansıyla karşılaştırmak için henüz yeterli oy yok.",
+  "perceived-hint": "Topluluğun puanlanan seviye {tier} tankları arasındaki sıralaması",
+  "verdict": {
+    "overrated": "Topluluk, tankı gerçekte başardıklarının çok üzerinde değerlendiriyor.",
+    "fair": "İtibarı ve sonuçları bu tankta örtüşüyor.",
+    "underrated": "Herkesin düşündüğünden daha iyi performans gösteriyor."
+  },
+  "what-players-think": "Oyuncular ne düşünüyor",
+  "what-the-data-says": "Veriler ne söylüyor"
+}

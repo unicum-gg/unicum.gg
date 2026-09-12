@@ -1,0 +1,37 @@
+{
+  "label": "Περισσότερα",
+  "items": {
+    "tournaments": {
+      "label": "Τουρνουά",
+      "description": "Ταμπλό, ρόστερ και αποτελέσματα, ανά περιοχή"
+    },
+    "servers": {
+      "label": "Servers",
+      "description": "Παίκτες online, τώρα και με την πάροδο του χρόνου"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Στατιστικά παίκτη, κλαν και άρματος ως εντολές slash"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Σύνδεση Claude, ChatGPT ή οποιουδήποτε πελάτη MCP"
+    },
+    "api": {
+      "label": "API",
+      "description": "Δωρεάν δημόσιο REST API, χωρίς να απαιτείται κλειδί"
+    },
+    "badges": {
+      "label": "Σχετικά Σημάδια",
+      "description": "Κάθε έμβλημα που μπορεί να κερδίσει ένας παίκτης ή μια κλαν, και ο τρόπος"
+    },
+    "glossary": {
+      "label": "Γλωσσάριο",
+      "description": "Κάθε όρος του World of Tanks, επεξηγημένος"
+    },
+    "support": {
+      "label": "Υποστηρίξτε μας",
+      "description": "Κρατήστε το {name} δωρεάν, ανοιχτό και χωρίς διαφημίσεις"
+    }
+  }
+}

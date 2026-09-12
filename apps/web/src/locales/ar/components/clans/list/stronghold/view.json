@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "لا توجد بيانات بعد. تحقق مجددًا بعد تحديث العشائر.",
+  "heading": "أفضل عشائر <accent>{tier}</accent>",
+  "blurb": "قائمة المتصدرين في {region}، مصنّفة حسب {sort} بين جميع العشائر المتتبعة في {format}، بحد أدنى {battles} من المعارك.",
+  "blurb-period": "قائمة المتصدرين في {region}، مصنّفة حسب {sort} بين جميع العشائر المتتبعة في {format} خلال {period}، بحد أدنى {battles} من المعارك.",
+  "format-advances": "الاندفاعات (15vs15)",
+  "format-skirmish": "{tier} (7vs7)",
+  "panel-title": "أفضل {count} عشائر من {tier} ·"
+}

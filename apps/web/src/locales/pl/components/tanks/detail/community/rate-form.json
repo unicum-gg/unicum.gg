@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Jeszcze kilka słów: pozostało {count}.",
+  "at-winrate": "przy {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Nie udało się tego wycofać. Spróbuj ponownie za chwilę.",
+  "hide-the-detailed-axes": "Ukryj szczegółowe osie",
+  "not-enough-battles": "Nie rozegrano tym czołgiem wystarczającej liczby bitew, aby głos został uwzględniony.",
+  "published-once-read": "Opublikowane po przeczytaniu przez moderatora. Liczba gwiazdek zostanie zaktualizowana od razu.",
+  "rate-it-in-detail": "Oceń szczegółowo (opcjonalnie)",
+  "review": {
+    "none": "Ocena zapisana.",
+    "queued": "Klasyfikacja zapisana. Twoja opinia została przekazana moderatorowi.",
+    "published": "Klasyfikacja zapisana. Twoja opinia jest już opublikowana.",
+    "pending": "Klasyfikacja zapisana. Twoja opinia nadal czeka na moderatora.",
+    "rejected": "Klasyfikacja zapisana. Twoja wcześniejsza opinia nie została opublikowana, dlatego liczą się tylko Twoje gwiazdki.",
+    "closed": "Klasyfikacja zapisana. Możliwość dodawania pisemnych opinii jest obecnie wyłączona, więc tekst nie został zapisany."
+  },
+  "save-failed": "Nie udało się tego zapisać. Spróbuj ponownie za chwilę.",
+  "say-why-optional": "Napisz, dlaczego (opcjonalnie)",
+  "signed-with": "Podpisano liczbą bitew rozegranych przez Ciebie tym czołgiem: {battles}",
+  "submit-my-rating": "Prześlij moją ocenę",
+  "too-many-edits": "To zbyt wiele zmian naraz. Odczekaj minutę.",
+  "update-my-rating": "Zaktualizuj moją ocenę",
+  "what-it-is-good-at": "W czym jest świetna, w czym nie i kto powinien nią grać.",
+  "withdraw": "Wycofaj",
+  "your-rating-has-been-withdrawn": "Twoja Klasyfikacja została wycofana.",
+  "your-review-is-waiting-on": "Twoja opinia czeka na moderatora. Tylko Ty ją tutaj widzisz.",
+  "your-review-was-not-published": "Twoja opinia nie została opublikowana. Twoje gwiazdki nadal są uwzględniane w średniej."
+}

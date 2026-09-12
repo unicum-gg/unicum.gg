@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} bitiek s týmto vozidlom",
+  "damage": "{damage} poškodenie",
+  "n-marks": "{count, plural, one {# značka} few {# značky} other {# značiek}}",
+  "no-written-opinions-yet-if": "Zatiaľ žiadne písomné názory. Ak máte dostatok bitiek, váš môže byť prvý.",
+  "win-rate": "{toFixed} % miera víťazstiev",
+  "written-on": "napísané vo verzii {gameVersion}"
+}

@@ -1,9 +1,13 @@
-import Link from "next/link";
+"use client";
+
+import { useFormat } from "@/hooks/use-format";
+import Link from "@/components/link";
 import type { Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 import { Stars, StarValue } from "./stars";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * The community's verdict, in the hero, next to the tank's name.
@@ -28,6 +32,8 @@ export function CommunityHeroBadge({
   overall: number | null;
   votes: number;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tanks/detail/community");
   const href = `${ROUTES.TANK(region, slug)}/community`;
 
   if (votes === 0 || overall == null) {
@@ -37,7 +43,7 @@ export function CommunityHeroBadge({
         className="inline-flex w-fit items-center gap-1.5 text-xs text-fd-muted-foreground transition-colors hover:text-fd-foreground"
       >
         <Stars value={null} size={13} />
-        <span>Not rated yet, be the first</span>
+        <span>{t("not-rated")}</span>
       </Link>
     );
   }
@@ -46,12 +52,12 @@ export function CommunityHeroBadge({
     <Link
       href={href}
       className="inline-flex w-fit items-center gap-2 transition-opacity hover:opacity-80"
-      title="What players think of this tank"
+      title={t("what-players-think")}
     >
       <StarValue value={overall} className="text-sm" />
       <Stars value={overall} size={13} />
       <span className="text-xs text-fd-muted-foreground tabular-nums">
-        {intFmt.format(votes)} {votes === 1 ? "vote" : "votes"}
+        {t(votes === 1 ? "votes-one" : "votes", { count: num(INT_FORMAT).format(votes) })}
       </span>
     </Link>
   );

@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "체크아웃이 취소되었습니다.",
+  "claim-your-supporter-role-on-discord": "Discord에서 후원자 역할 받기",
+  "could-not-add-the-discord-role-please-try-ag": "Discord 역할을 추가할 수 없습니다. 다시 시도해 주세요.",
+  "could-not-open-the-billing-portal": "결제 포털을 열 수 없습니다.",
+  "could-not-start-checkout-please-try-again": "결제를 시작할 수 없습니다. 다시 시도해 주세요.",
+  "could-not-update-your-preference": "환경설정을 업데이트할 수 없습니다.",
+  "log-in-with-wargaming": "워게이밍으로 로그인",
+  "log-in-with-wargaming-to": "워게이밍으로 로그인하여 {NAME}을 지원하세요.",
+  "manage-subscription": "구독 관리",
+  "only-active-supporters-can-claim-the-discord": "현재 활동 중인 후원자만 Discord 역할을 받을 수 있습니다.",
+  "or-choose-your-own-amount": "또는 원하는 금액 선택",
+  "pay-what-you-want": "원하는 금액을 결제하세요.",
+  "pick-an-amount": "금액을 선택하거나 직접 입력하세요. 월 €{min}부터 시작합니다.",
+  "re-sync-discord-role": "Discord 역할 다시 동기화",
+  "secured-by-stripe": "Stripe로 안전하게 보호됩니다. 언제든지 취소할 수 있습니다.",
+  "show-me-anonymously-on-the": "순위표에 익명으로 표시",
+  "support-subscriptions-are-coming-soon": "후원 구독이 곧 제공됩니다.",
+  "supporter-role-added-on-discord": "Discord에 후원자 역할이 추가되었습니다!",
+  "you-are-a-supporter-thank": "후원자입니다. {NAME}을 계속 운영할 수 있도록 도와주셔서 감사합니다."
+}

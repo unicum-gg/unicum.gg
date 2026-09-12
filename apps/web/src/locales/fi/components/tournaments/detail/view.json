@@ -1,0 +1,11 @@
+{
+  "closes": "Sulje {when}",
+  "map-pool": "Karttakokoelma",
+  "place": "Sijoitus",
+  "prize": "Palkinto",
+  "prizes": "Palkinnot",
+  "qualified": "Karsinnasta selvinneet ({count})",
+  "register": "Rekisteröidy",
+  "tournaments": "Turnaukset",
+  "winner": "{count, plural, one {Voittaja} other {Voittajat}}"
+}

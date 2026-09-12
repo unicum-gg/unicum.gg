@@ -1,0 +1,6 @@
+{
+  "title": "Cobertura de datos de World of Tanks ({region})",
+  "description": "Cuántos jugadores y clanes de World of Tanks monitoriza {name} en {region}, frecuencia de actualización de las instantáneas, profundidad de los datos, coste de la infraestructura y tiempo de actividad.",
+  "og-title": "Cobertura de datos",
+  "og-subtitle": "Jugadores y clanes de {region}"
+}

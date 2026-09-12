@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import { toast } from "sonner";
 import {
@@ -9,8 +11,6 @@ import {
   normalizeReview,
   QUICK_AXES,
   ReviewOutcome,
-  TANK_RATING_AXIS_HINT,
-  TANK_RATING_AXIS_LABEL,
   TankRatingAxis,
   TankReviewStatus,
 } from "@unicum.gg/shared";
@@ -22,7 +22,7 @@ import { unicum } from "@/services/sdk";
 import { StarInput } from "./star-input";
 import type { OwnRatingState } from "./rate-panel";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 type Answers = Partial<Record<TankRatingAxis, number>>;
 
@@ -33,15 +33,20 @@ type Answers = Partial<Record<TankRatingAxis, number>>;
  * cheap version ("your review is with a moderator" whenever text was sent) is a
  * claim the author cannot check and that is false in four of them.
  */
-const REVIEW_MESSAGE: Record<ReviewOutcome, string> = {
-  [ReviewOutcome.None]: "Rating saved.",
-  [ReviewOutcome.Queued]: "Rating saved. Your review is with a moderator.",
-  [ReviewOutcome.Published]: "Rating saved. Your review is already live.",
-  [ReviewOutcome.Pending]: "Rating saved. Your review is still waiting on a moderator.",
-  [ReviewOutcome.Rejected]:
-    "Rating saved. Your earlier review was not published, so only your stars count.",
-  [ReviewOutcome.Closed]:
-    "Rating saved. Written opinions are closed right now, so the text was not kept.",
+/**
+ * What the toast says, by what became of the written half of a rating.
+ *
+ * The outcome is the key rather than the sentence, so the six readings live in
+ * the locale files like every other string and a new outcome is a key that does
+ * not resolve rather than a sentence in English.
+ */
+const REVIEW_KEY: Record<ReviewOutcome, string> = {
+  [ReviewOutcome.None]: "review.none",
+  [ReviewOutcome.Queued]: "review.queued",
+  [ReviewOutcome.Published]: "review.published",
+  [ReviewOutcome.Pending]: "review.pending",
+  [ReviewOutcome.Rejected]: "review.rejected",
+  [ReviewOutcome.Closed]: "review.closed",
 };
 
 export function RateForm({
@@ -55,6 +60,9 @@ export function RateForm({
   me: OwnRatingState;
   onSaved: () => void;
 }) {
+  const { num } = useFormat();
+  const { t: tLabel } = useTranslation("components/labels");
+  const { t } = useTranslation("components/tanks/detail/community/rate-form");
   const existing = me.rating;
   const [overall, setOverall] = useState<number | null>(
     existing?.overall ?? null,
@@ -106,7 +114,9 @@ export function RateForm({
           // it alone", which is not what an emptied field says.
           review: reviewLength > 0 ? review : null,
         });
-      toast.success(REVIEW_MESSAGE[result.review as ReviewOutcome] ?? "Rating saved.");
+      toast.success(
+        t(REVIEW_KEY[result.review as ReviewOutcome] ?? "review.none"),
+      );
       onSaved();
     } catch (err) {
       // 403 is the eligibility gate closing between the check and the press,
@@ -115,12 +125,12 @@ export function RateForm({
       const status = err instanceof UnicumError ? err.status : 0;
       toast.error(
         status === 403
-          ? "You have not played this tank enough for a vote to count."
+          ? t("not-enough-battles")
           : status === 429
-            ? "That is a lot of edits at once. Give it a minute."
+            ? t("too-many-edits")
             : status === 400
               ? `Your review needs to be between ${MIN_REVIEW_LENGTH} and ${MAX_REVIEW_LENGTH} characters.`
-              : "Could not save that. Try again in a moment.",
+              : t("save-failed"),
       );
     } finally {
       setSaving(false);
@@ -131,10 +141,10 @@ export function RateForm({
     setSaving(true);
     try {
       await unicum.region(region).tanks(slug).rateWithdraw();
-      toast.success("Your rating has been withdrawn.");
+      toast.success(t("your-rating-has-been-withdrawn"));
       onSaved();
     } catch {
-      toast.error("Could not withdraw that. Try again in a moment.");
+      toast.error(t("could-not-withdraw-that-try-again-in-a-momen"));
     } finally {
       setSaving(false);
     }
@@ -146,16 +156,16 @@ export function RateForm({
         {QUICK_AXES.map((axis) => (
           <div key={axis} className="flex flex-col gap-1">
             <span className="text-sm font-medium">
-              {TANK_RATING_AXIS_LABEL[axis]}
+              {tLabel(`rating-axes.${axis}`)}
             </span>
             <StarInput
-              name={TANK_RATING_AXIS_LABEL[axis]}
+              name={tLabel(`rating-axes.${axis}`)}
               value={axis === TankRatingAxis.Overall ? overall : fun}
               onChange={axis === TankRatingAxis.Overall ? setOverall : setFun}
               disabled={saving}
             />
             <span className="text-xs text-fd-muted-foreground">
-              {TANK_RATING_AXIS_HINT[axis]}
+              {tLabel(`rating-axis-hints.${axis}`)}
             </span>
           </div>
         ))}
@@ -167,7 +177,7 @@ export function RateForm({
           onClick={() => setDetailOpen((open) => !open)}
           className="w-fit cursor-pointer text-sm text-fd-muted-foreground underline-offset-4 hover:underline"
         >
-          {detailOpen ? "Hide the detailed axes" : "Rate it in detail (optional)"}
+          {detailOpen ? t("hide-the-detailed-axes") : t("rate-it-in-detail")}
         </button>
 
         {detailOpen ? (
@@ -179,14 +189,14 @@ export function RateForm({
               >
                 <div className="flex flex-col">
                   <span className="text-sm">
-                    {TANK_RATING_AXIS_LABEL[axis]}
+                    {tLabel(`rating-axes.${axis}`)}
                   </span>
                   <span className="text-xs text-fd-muted-foreground">
-                    {TANK_RATING_AXIS_HINT[axis]}
+                    {tLabel(`rating-axis-hints.${axis}`)}
                   </span>
                 </div>
                 <StarInput
-                  name={TANK_RATING_AXIS_LABEL[axis]}
+                  name={tLabel(`rating-axes.${axis}`)}
                   value={axes[axis] ?? null}
                   onChange={(value) =>
                     setAxes((prev) => ({ ...prev, [axis]: value }))
@@ -203,22 +213,23 @@ export function RateForm({
       {me.reviewsOpen ? (
         <div className="flex flex-col gap-1.5">
           <label htmlFor="tank-review" className="text-sm font-medium">
-            Say why (optional)
-          </label>
+            {t("say-why-optional")}</label>
           <Textarea
             id="tank-review"
             value={review}
             maxLength={MAX_REVIEW_LENGTH}
             disabled={saving}
             onChange={(e) => setReview(e.target.value)}
-            placeholder="What it is good at, what it is not, and who should play it."
+            placeholder={t("what-it-is-good-at")}
             className="min-h-24"
           />
           <p className="flex flex-wrap items-baseline justify-between gap-x-3 text-xs text-fd-muted-foreground">
             <span>
               {reviewTooShort
-                ? `A few more words: ${MIN_REVIEW_LENGTH - reviewLength} to go.`
-                : "Published once a moderator has read it. Your stars count straight away."}
+                ? t("a-few-more-words", {
+                    count: MIN_REVIEW_LENGTH - reviewLength,
+                  })
+                : t("published-once-read")}
             </span>
             <span className="tabular-nums">
               {reviewLength}/{MAX_REVIEW_LENGTH}
@@ -226,21 +237,18 @@ export function RateForm({
           </p>
           {existing?.reviewStatus === TankReviewStatus.Pending ? (
             <p className="text-xs text-amber-500">
-              Your review is waiting on a moderator. Only you can see it here.
-            </p>
+              {t("your-review-is-waiting-on")}</p>
           ) : null}
           {existing?.reviewStatus === TankReviewStatus.Rejected ? (
             <p className="text-xs text-fd-muted-foreground">
-              Your review was not published. Your stars still count towards the
-              average.
-            </p>
+              {t("your-review-was-not-published")}</p>
           ) : null}
         </div>
       ) : null}
 
       <div className="flex flex-wrap items-center gap-3">
         <Button size="sm" onClick={save} disabled={!canSave}>
-          {existing ? "Update my rating" : "Submit my rating"}
+          {existing ? t("update-my-rating") : t("submit-my-rating")}
         </Button>
         {existing ? (
           <Button
@@ -249,15 +257,18 @@ export function RateForm({
             onClick={withdraw}
             disabled={saving}
           >
-            Withdraw
-          </Button>
+            {t("withdraw")}</Button>
         ) : null}
         {me.record ? (
           <span className="text-xs text-fd-muted-foreground tabular-nums">
-            Signed with your {intFmt.format(me.record.battles)} battles in it
-            {me.record.winrate != null ? (
-              <> at {(me.record.winrate * 100).toFixed(1)}%</>
-            ) : null}
+            {t("signed-with", {
+              battles: num(INT_FORMAT).format(me.record.battles),
+            })}
+            {me.record.winrate != null
+              ? ` ${t("at-winrate", {
+                  winrate: (me.record.winrate * 100).toFixed(1),
+                })}`
+              : null}
           </span>
         ) : null}
       </div>

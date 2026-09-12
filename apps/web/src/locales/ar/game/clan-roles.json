@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "ضابط التجنيد",
+  "personnel_officer": "ضابط الأفراد",
+  "quartermaster": "رئيس إمدادات",
+  "executive_officer": "ضابط التنفيذ",
+  "recruit": "مجند",
+  "private": "جندي",
+  "commander": "القائد",
+  "reservist": "احتياطي",
+  "combat_officer": "ضابط القتال",
+  "junior_officer": "ضابط صغير",
+  "intelligence_officer": "ضابط الاستخبارات"
+}

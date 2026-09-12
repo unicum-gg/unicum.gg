@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Рядків на сторінці",
+  "previous-page": "Попередня сторінка",
+  "page": "Сторінка {current} / {totalPages}",
+  "next-page": "Наступна сторінка",
+  "all": "Всі"
+}

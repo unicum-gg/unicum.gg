@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktivní dny",
+  "add-workflow": "Přidat pracovní postup",
+  "connect-discord": "Připojit Discord",
+  "discord-notifications": "Oznámení na Discordu",
+  "each-workflow-activates-its-reserves": "Každý pracovní postup aktivuje své rezervy během nastaveného časového okna, jakmile je dostatek členů v aktivní herní relaci. Běží na vašem účtu, takže nemusíte být online. Přidejte jich, kolik potřebujete.",
+  "enabled": "Zapnuto",
+  "from": "Od",
+  "get-a-discord-message-in": "Při každém spuštění bonusu dostanete zprávu Discord v kanálu, který si zvolíte, takže celý klan bude vědět, že je bonus aktivní.",
+  "log-in-with-wargaming-to": "Přihlásit se pomocí Wargaming a nastavit vše",
+  "min-online": "Min online",
+  "officers": "Oficíři",
+  "only-an-officer-of-this": "Nastavit to může pouze důstojník tohoto klanu.",
+  "schedule-preview": "Náhled plánu",
+  "set-your-hours-and-reserves": "Nastavte jednou časy a rezervy. Bonusy se pak spustí automaticky a včas, i když není nikdo, kdo by stiskl tlačítko.",
+  "stronghold-boosts": "Posílení pevnosti",
+  "times-are-in-your-timezone": "Všechny časy jsou uvedeny ve vašem časovém pásmu {tz}.",
+  "to": "Do"
+}

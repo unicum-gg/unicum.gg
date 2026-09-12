@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "このクランの戦車データはまだありません。",
+  "no-tanks-match-these-filters": "これらのフィルターに一致する戦車はありません。",
+  "nation": "国家",
+  "type": "車輌タイプ",
+  "tier": "Tier",
+  "name": "名称",
+  "members": "メンバー",
+  "battles": "戦闘数",
+  "avg-damage": "平均ダメージ",
+  "avg-xp": "平均XP",
+  "wr": "WR"
+}

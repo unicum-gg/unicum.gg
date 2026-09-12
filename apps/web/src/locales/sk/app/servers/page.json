@@ -1,0 +1,6 @@
+{
+  "title": "Hráči World of Tanks online ({region})",
+  "description": "Koľko hráčov je práve teraz na jednotlivých serveroch World of Tanks v regióne {region}, spolu s vývojom počtu hráčov počas posledných 24 hodín, posledného týždňa a posledného roka, historickým maximom a najvyťaženejšími hodinami týždňa.",
+  "og-title": "Počet hráčov na serveri",
+  "og-subtitle": "Hráči online v regióne {region}"
+}

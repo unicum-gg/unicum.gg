@@ -1,0 +1,21 @@
+{
+  "title": "Skala oceny",
+  "description": "Progi kolorów stosowane w całym serwisie dla współczynnika zwycięstw i wskaźnika oceny wybranego na pasku nawigacyjnym.",
+  "tier": "Poziom",
+  "tiers": {
+    "top": "Najlepsi",
+    "excellent": "Doskonały",
+    "super": "Super",
+    "very-good": "Bardzo dobry",
+    "good": "Dobry",
+    "average": "Średnia",
+    "below-avg": "Poniżej średniej",
+    "bad": "Zły",
+    "very-bad": "Bardzo zły"
+  },
+  "rating-colors": "Kolory ocen",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

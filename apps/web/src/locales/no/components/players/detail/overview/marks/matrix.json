@@ -1,0 +1,7 @@
+{
+  "loading": "{count} kjøretøy på nivå {tier}, laster inn navnene…",
+  "loading-one": "{count} kjøretøy på nivå {tier}, laster inn navnet…",
+  "and-more": "og {count} til",
+  "hint": "Klikk for å åpne dem i Kjøretøy-fanen",
+  "tier": "Nivå"
+}

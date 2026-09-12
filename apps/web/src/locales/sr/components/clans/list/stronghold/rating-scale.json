@@ -1,0 +1,17 @@
+{
+  "average": "Prosek",
+  "bad": "Loš",
+  "below-avg": "Ispod proseka",
+  "color-thresholds-for-the-stronghold": "Прагови боја за табеле утврђења. Једна апсолутна скала за сваки ниво, тако да SR (или SRB) свуда означава исти квалитет клана.",
+  "excellent": "Izvrstan",
+  "good": "Dobar",
+  "rating-colors": "Boje rejtinga",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Nivo",
+  "top": "Najbolji",
+  "very-bad": "Veoma loš",
+  "very-good": "Veoma dobar",
+  "wr": "WR"
+}

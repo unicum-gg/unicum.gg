@@ -1,0 +1,25 @@
+{
+  "tagline": "Створено для спільноти World of Tanks. Безкоштовна статистика кожного гравця, клану, танка та карти в EU, NA та Asia.",
+  "columns": {
+    "leaderboards": "Рейтинги",
+    "tanks": "Танки",
+    "maps": "Мапи",
+    "integrations": "Інтеграції",
+    "project": "Проєкт"
+  },
+  "links": {
+    "top-tanks": "Найкращі танки",
+    "bot": "Discord бот",
+    "mcp": "MCP сервер",
+    "docs": "Документація API",
+    "badges": "Відзнаки",
+    "glossary": "Глосарій",
+    "coverage": "Охоплення",
+    "support": "Підтримайте нас",
+    "source": "Вихідний код",
+    "status": "Статус",
+    "discord": "Discord"
+  },
+  "disclaimer": "Не пов’язано із Загальний",
+  "cookies": "Керувати файлами cookie"
+}

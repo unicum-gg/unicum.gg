@@ -1,0 +1,12 @@
+{
+  "final": " · 决赛",
+  "has-not-held-a-place": "{nickname}从未在天梯战排行榜上占据名次。",
+  "live-season": "· 当前赛季",
+  "loading-s-onslaught-record": "正在加载{nickname}的天梯战纪录...",
+  "onslaught": "天梯战",
+  "onslaught-record": "{nickname}的天梯战纪录",
+  "see-this-season-s-leaderboard": "查看本赛季排行榜",
+  "standing-line": "{rating}评分点数 · {battles}场战斗",
+  "the-board-only-lists-players": "排行榜只列出达到冠军段位的玩家，每个地区仅几千人，因此几乎所有个人资料都会落在这里。玩家达到该段位的赛季会自动填入。",
+  "updated": "更新 {when}"
+}

@@ -1,0 +1,34 @@
+{
+  "stat": "İstatistik",
+  "rows": {
+    "battles": "Savaşlar",
+    "tier": "Seviye",
+    "wins": "Galibiyetler",
+    "losses": "Kaybetmeler",
+    "draws": "Beraberlikler",
+    "survived": "Sağ kalınan savaşlar",
+    "destroyed": "İmha edilen tanklar",
+    "destruction-ratio": "Yok Etme oranı",
+    "spotted": "Görüntülenen tanklar",
+    "damages": "Hasarlar",
+    "track-damages": "Palet hasarları",
+    "spotting-damages": "Görme hasarları",
+    "assisting-damages": "Destek hasarları",
+    "combined-damages": "Kombine hasarlar",
+    "base-capture": "Üs yakalama",
+    "base-defense": "Üs savunması",
+    "experience": "Deneyim",
+    "hit-rate": "Vuruş oranı",
+    "personal-rating": "Kişisel Reyting",
+    "wtr": "World of Tanks Puanı",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Toplam",
+    "day": "Son 24saat",
+    "week": "Son 7gün",
+    "month": "Son 30gün"
+  }
+}

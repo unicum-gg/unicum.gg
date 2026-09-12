@@ -1,0 +1,14 @@
+{
+  "close": "关闭",
+  "combined-damage": "综合损伤",
+  "damage-dealt-plus-assisted-as": "造成伤害加助攻伤害，因为战斗结束界面会将两者相加。",
+  "format": "格式",
+  "no-reason-recorded": "没有记录原因，因此重新提交前，最好先在 Discord 上询问一下。",
+  "players-per-team": "每队玩家数",
+  "save": "保存",
+  "saved-it-is-in-the": "已保存。内容已进入审核队列，审核人员查看后便会显示在网站上。",
+  "saving": "保存中…",
+  "tier": "等级",
+  "turned-down": "拒绝",
+  "what-was-played": "所玩内容"
+}

@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Geriausi žaidėjai · per pastarąsias 24 val."
+    },
+    "week": {
+      "title": "Geriausi žaidėjai · per pastarąsias 7 dienas"
+    }
+  },
+  "rating-scale": {
+    "title": "Reitingo skalė"
+  },
+  "community": {
+    "title": "Prisijunkite prie bendruomenės",
+    "heading": "Bendraukite su WoT žaidėjais",
+    "description": "Prisijunkite prie mūsų Discord ir kalbėkitės apie WoT statistiką, siūlykite funkcijas bei praneškite apie klaidas. Arba apsilankykite GitHub, peržiūrėkite kodą ir prisidėkite.",
+    "discord": "Prisijungti prie Discord",
+    "github": "Peržiūrėti GitHub"
+  },
+  "features": {
+    "title": "Ką čia rasite",
+    "profiles": {
+      "title": "Žaidėjų profiliai",
+      "description": "Išsami statistika su bendra bei 24 val., 7 d. ir 30 d. pokyčiais, WN7, WN8, WNX ir asmeniniu reitingu."
+    },
+    "clans": {
+      "title": "Klanų puslapiai",
+      "description": "Narių lentelė su reitingais, naujausios veiklos srautu, aprašymu ir klano metaduomenimis."
+    },
+    "history": {
+      "title": "Klanų istorija",
+      "description": "Visa kiekvieno klano, kuriame žaidėjas buvo, istorija su vaidmenimis ir datomis."
+    },
+    "live": {
+      "title": "Tiesioginiai atnaujinimai",
+      "description": "Stebimi žaidėjai atnaujinami fone kas 24 val. naudojant mūsų momentinių kopijų sistemą."
+    },
+    "leaderboards": {
+      "title": "Reitingų lentelės",
+      "description": "Geriausi žaidėjai (24 val., 7 d., visų laikų) ir geriausi klanai, reitinguojami pagal WNX, apskaičiuotą iš mūsų momentinių kopijų."
+    },
+    "open-source": {
+      "title": "Atvirasis kodas · AGPL",
+      "description": "Kodas yra GitHub. Peržiūrėkite, sukurkite atšaką, prisidėkite. Be reklamų, tik pasirenkama analizė."
+    }
+  },
+  "quick-start": {
+    "title": "Greitoji pradžia",
+    "search": {
+      "title": "🔍 Ieškoti žaidėjų arba klanų",
+      "description": "Paspauskite {shortcut}, kad atidarytumėte paiešką, tada įveskite slapyvardį arba klano žymą."
+    },
+    "region": {
+      "title": "🌍 Keisti regioną",
+      "description": "Naudokite {selector} parinkiklį navigacijos juostoje. Lyderių lentelės atnaujinamos atitinkamai."
+    },
+    "leaderboards": {
+      "title": "🏆 Naršyti lyderių lenteles",
+      "description": "Geriausi žaidėjai (24 val., 7 d., visų laikų) ir geriausi klanai, reitinguojami pagal vidutinį WNX, apskaičiuotą iš mūsų momentinių kopijų."
+    },
+    "colors": {
+      "title": "📊 Skaityti spalvas",
+      "description": "WR, WN7, WN8 ir WNX naudoja tas pačias lygių spalvas (oranžinė → žalia → žydra → violetinė). Žr. pirmiau pateiktą skalę."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

@@ -1,0 +1,34 @@
+{
+  "stat": "Stat",
+  "rows": {
+    "battles": "Taisteluita",
+    "tier": "Taso",
+    "wins": "Voitot",
+    "losses": "Häviöt",
+    "draws": "Tasapelit",
+    "survived": "Selvittyjä taisteluita",
+    "destroyed": "Tuhotut säiliöt",
+    "destruction-ratio": "Tuhoamissuhde",
+    "spotted": "Havaitut säiliöt",
+    "damages": "Vauriot",
+    "track-damages": "Alustojen vauriot",
+    "spotting-damages": "Havaitsemisen vauriot",
+    "assisting-damages": "Avustavat vauriot",
+    "combined-damages": "Yhteensä vauriot",
+    "base-capture": "Perusvaltauksen valtauks",
+    "base-defense": "Perustason puolustus",
+    "experience": "Kokemusta",
+    "hit-rate": "Osumistodennäköisyys",
+    "personal-rating": "Henkilökohtainen luokitus",
+    "wtr": "World of Tanks -arvosana",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Kaikkiaan",
+    "day": "Viimeiset 24h",
+    "week": "Viimeiset 7pv",
+    "month": "Viimeiset 30pv"
+  }
+}

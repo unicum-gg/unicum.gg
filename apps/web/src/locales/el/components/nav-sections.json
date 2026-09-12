@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Παίκτες",
+    "clans": "Clans",
+    "tanks": "Τανκς",
+    "maps": "Χάρτες",
+    "tournaments": "Τουρνουά",
+    "servers": "Servers"
+  },
+  "links": {
+    "top-players": {
+      "label": "Κορυφαίοι παίκτες",
+      "description": "Πίνακας κατάταξης παικτών όλων των εποχών"
+    },
+    "players-onslaught": {
+      "description": "Πίνακας κατάταξης Επέλασης"
+    },
+    "players-steel-hunter": {
+      "description": "Πίνακας κατάταξης battle royale"
+    },
+    "top-clans": {
+      "label": "Κορυφαίοι κλάδοι",
+      "description": "Πίνακας κατάταξης κλαν όλων των εποχών"
+    },
+    "stronghold": {
+      "description": "Σκαλοπάτι Αψιμαχιών"
+    },
+    "advances": {
+      "description": "Κατάταξη 15v15 επιπέδου X"
+    },
+    "tank-performances": {
+      "label": "Επιδόσεις",
+      "description": "Ποσοστό νικών και ζημιά ανά άρμα"
+    },
+    "tank-specs": {
+      "label": "Προδιαγραφές",
+      "description": "Στατιστικά για κάθε άρμα"
+    },
+    "tank-economics": {
+      "label": "Οικονομία",
+      "description": "Άρματα που κερδίζουν credits και XP"
+    },
+    "tank-moe": {
+      "description": "Ζημιά για κάθε σήμα"
+    },
+    "tank-mom": {
+      "description": "Όρια εμβλημάτων αριστείας"
+    },
+    "tank-changes": {
+      "label": "Αλλαγές",
+      "description": "Ενισχύσεις και αποδυναμώσεις ανά ενημέρωση"
+    },
+    "tank-community": {
+      "label": "Αξιολογήσεις κοινότητας",
+      "description": "Βαθμολογημένα από παίκτες που τα έχουν"
+    },
+    "tank-videos": {
+      "label": "Βίντεο",
+      "description": "Βίντεο μαχών από την κοινότητα"
+    },
+    "all-tournaments": {
+      "label": "Τουρνουά",
+      "description": "Κάθε τουρνουά, ανοιχτό και ολοκληρωμένο"
+    },
+    "all-maps": {
+      "label": "Όλες οι χάρτες",
+      "description": "Κάθε χάρτης του παιχνιδιού"
+    },
+    "map-changes": {
+      "label": "Αλλαγές",
+      "description": "Επεξεργασίες χαρτών ανά ενημέρωση"
+    },
+    "battle-type": {
+      "description": "Χάρτες {type}"
+    },
+    "servers-population": {
+      "label": "Πληθυσμός server",
+      "description": "Παίκτες online, τώρα και με την πάροδο του χρόνου"
+    }
+  }
+}

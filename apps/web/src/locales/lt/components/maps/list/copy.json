@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Visos {count} World of Tanks mūšių arenos. Filtruokite pagal maskuotę ir žaidimo režimą, tada atidarykite žemėlapį, kad pamatytumėte jo minimapą, dydį, bazių vėliavas ir atsiradimo taškus pagal režimą.",
+    "title": "Visi World of Tanks žemėlapiai ({region}), kiekviena mūšio arena",
+    "description": "Naršykite kiekvieną World of Tanks žemėlapį regione {region}: minimapas, dydis, maskuotė ir palaikomi žaidimo režimai su bazių vėliavomis ir atsiradimo taškais pagal režimą.",
+    "heading": "Visi <accent>žemėlapiai</accent>"
+  },
+  "battle-type": {
+    "intro": "{count} World of Tanks žemėlapiai, kuriuose žaidžiama režimu {type}, {blurb}. Atidarykite žemėlapį, kad pamatytumėte jo minimapą, dydį, bazių vėliavas ir atsiradimo taškus pagal režimą.",
+    "title": "World of Tanks {type} žemėlapiai ({region}), kiekviena rotacijos arena",
+    "description": "Kiekvienas World of Tanks žemėlapis režimo {type} rotacijoje regione {region}: minimapas, dydis, maskuotė ir palaikomi žaidimo režimai su bazių vėliavomis ir atsiradimo taškais pagal režimą.",
+    "heading": "{type} <accent>žemėlapiai</accent>"
+  },
+  "blurbs": {
+    "random": "standartinė 15 prieš 15 rotacija",
+    "battle_royale": "paskutinio išlikusio tanko režimas",
+    "frontline": "didelio masto 30 prieš 30 režimas",
+    "onslaught": "reitinguojamas 7 prieš 7 režimas",
+    "onslaught_night": "reitinguojamas 7v7 režimas sutemus, su trumpesniu matomumo diapazonu, šiuo metu žaidžiamas Bendrajame teste",
+    "grand_battle": "30 prieš 30 X lygio režimas",
+    "clan_wars": "klanų karai ir puolimai",
+    "waffentrager": "Waffenträger įvykis",
+    "last_stand": "Last Stand įvykis",
+    "arcade": "arkadiniai ir specialūs įvykiai",
+    "story_mode": "siužetinės operacijos",
+    "training": "mokymo kambariai ir pamokos"
+  }
+}

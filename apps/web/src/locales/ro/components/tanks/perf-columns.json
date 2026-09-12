@@ -1,0 +1,60 @@
+{
+  "columns-label": "Coloane",
+  "groups": {
+    "general": "General",
+    "combat": "Luptă"
+  },
+  "columns": {
+    "battles": {
+      "label": "Lupte",
+      "tip": "Numărul total de jocuri jucat cu tancul"
+    },
+    "count": {
+      "label": "Număr",
+      "tip": "Numărul jucătorilor urmăriți din eșantion"
+    },
+    "rating": {
+      "label": "Clasament (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Rata victoriilor cu tancul"
+    },
+    "playerWr": {
+      "label": "WR jucător",
+      "tip": "Rata medie generală a victoriilor jucătorilor care îl conduc"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Medie daune pe joc"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Raport distrugeri / morți"
+    },
+    "assists": {
+      "label": "Asistențe",
+      "tip": "Medie daune asistate"
+    },
+    "hitPct": {
+      "label": "Procent realizări",
+      "tip": "Lovituri / focuri"
+    },
+    "penPct": {
+      "label": "Procent penetrare",
+      "tip": "Penetrări / lovituri"
+    },
+    "spots": {
+      "label": "Locații",
+      "tip": "Medie de detectări pe joc"
+    },
+    "blocked": {
+      "label": "Blocat",
+      "tip": "Medie daune blocate de blindaj"
+    },
+    "survival": {
+      "label": "Supraviețuire",
+      "tip": "Proporția bătăliilor supraviețuite"
+    }
+  }
+}

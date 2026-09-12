@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "En iyi <accent>oyuncular</accent>",
+    "language": "<accent>{language}</accent> oyuncuları arasındaki en iyiler"
+  },
+  "intro": {
+    "all": "Tüm zamanlardaki {metric} değerine göre sıralanan {region} liderlik tablosu, minimum 20.000 savaş.",
+    "language": "Tahmin edilen klan geçmişi dil kümesinde {language} bulunan {region} oyuncuları, {metric} değerine göre sıralanır, minimum 10.000 savaş.",
+    "strict": "Tahmin edilen klan geçmişi dili yalnızca {language} olan {region} oyuncuları, {metric} değerine göre sıralanır, minimum 10.000 savaş."
+  },
+  "board": {
+    "all": "{metric} değerine göre en iyi {count} oyuncu",
+    "language": "{metric} değerine göre en iyi {count} {language} oyuncusu",
+    "strict": "Yalnızca {language} olan en iyi {count} oyuncu, {metric} değerine göre"
+  },
+  "modes": {
+    "overall": "Genel"
+  },
+  "columns": {
+    "player": "Oyuncu"
+  },
+  "strict-toggle": "Sıkı",
+  "any-toggle": "Herhangi bir",
+  "all-languages": "Tüm diller",
+  "battles": "Savaşlar",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

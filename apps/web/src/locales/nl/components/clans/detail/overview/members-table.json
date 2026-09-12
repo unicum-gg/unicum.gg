@@ -1,0 +1,11 @@
+{
+  "player": "Speler",
+  "role": "Rol",
+  "battles": "Gevechten",
+  "joined": "Toegevoegd",
+  "period": "30 d {metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

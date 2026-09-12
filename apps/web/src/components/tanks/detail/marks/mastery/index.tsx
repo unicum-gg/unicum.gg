@@ -1,3 +1,6 @@
+import { numberFormat } from "@/lib/format";
+import { statLabel } from "@/components/stat-label";
+import { getTranslation } from "@/lib/translations.server";
 import type { ReactNode } from "react";
 import type { MomValues } from "@unicum.gg/core/mom";
 import type { MomHistoryPoint } from "@unicum.gg/core/mom/poliroid";
@@ -16,7 +19,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 // Rows are listed hardest-first so the top row lines up with the top line on the
 // chart (both descend by threshold). `mastery` is the mark_of_mastery value the
@@ -67,11 +70,23 @@ const seriesColor = (series: MarksSeries[], key: string) =>
 
 // Cumulative count of tracked players who reached this level. Null until the
 // by-tank cron has computed it (and, for MoE, as players get portal-refreshed).
-function HolderLine({ count }: { count: number | null }) {
+async function HolderLine({
+  count,
+  locale,
+}: {
+  count: number | null;
+  locale: string;
+}) {
+  const { t } = await getTranslation(
+    "components/tanks/detail/marks/mastery/index",
+    locale,
+  );
   if (count == null) return null;
   return (
     <span className="block text-xs font-normal text-fd-muted-foreground tabular-nums">
-      {intFmt.format(count)} {count === 1 ? "player" : "players"}
+      {t("n-players", {
+        count: numberFormat(locale, INT_FORMAT).format(count),
+      })}
     </span>
   );
 }
@@ -81,19 +96,21 @@ function HolderLine({ count }: { count: number | null }) {
 // (1/3) and a chart column (2/3). The split uses plain contained borders — a
 // vertical divider from `lg` up, a horizontal one when the columns stack below
 // `lg` — so nothing overlaps the way two adjacent screen-lined panels would.
-function MarksSection({
+async function MarksSection({
   title,
   description,
   values,
   chart,
-  chartDays,
+  chartDays, locale,
 }: {
   title: string;
   description: string;
   values: ReactNode;
   chart: ReactNode | null;
   chartDays: number;
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/tanks/detail/marks/mastery/index", locale);
   const valuesColumn = (
     <>
       <PanelHeader screenLines={false} className="border-b border-fd-border">
@@ -119,7 +136,7 @@ function MarksSection({
             screenLines={false}
             className="border-b border-fd-border"
           >
-            <PanelTitle>Last {chartDays} days</PanelTitle>
+            <PanelTitle>{t("last-days", { chartDays })}</PanelTitle>
           </PanelHeader>
           <PanelContent>{chart}</PanelContent>
         </div>
@@ -128,13 +145,13 @@ function MarksSection({
   );
 }
 
-export function TankMarksMastery({
+export async function TankMarksMastery({
   moe,
   mom,
   moeHistory,
   momHistory,
   serverStats,
-  tankName,
+  tankName, locale,
 }: {
   moe: MoeValues | null;
   mom: MomValues | null;
@@ -142,14 +159,17 @@ export function TankMarksMastery({
   momHistory: MomHistoryPoint[];
   serverStats: TankServerStats | null;
   tankName: string;
+  locale: string;
 }) {
+  const { t: tStats } = await getTranslation("components/stat-labels", locale);
+  const { t } = await getTranslation("components/tanks/detail/marks/mastery/index", locale);
   if (!moe && !mom) return null;
   return (
     <>
       {moe && (
-        <MarksSection
-          title={`${tankName} Marks of Excellence`}
-          description="Rolling-average combined damage to beat 65 / 85 / 95% of players."
+        <MarksSection locale={locale}
+          title={t("tank-marks-of-excellence", { tank: tankName })}
+          description={t("rolling-average-combined-damage-to")}
           chartDays={moeHistory.length}
           chart={
             moeHistory.length >= 2 ? (
@@ -167,13 +187,14 @@ export function TankMarksMastery({
             >
               <dt className="flex items-center gap-2 text-fd-muted-foreground">
                 <MoEIcon bars={row.bars} color={seriesColor(MOE_SERIES, row.key)} />
-                {row.label}
+                {statLabel(row.label, tStats)}
               </dt>
               <dd className="text-right">
                 <span className="font-semibold tabular-nums">
-                  {intFmt.format(moe[row.key])}
+                  {numberFormat(locale, INT_FORMAT).format(moe[row.key])}
                 </span>
                 <HolderLine
+                  locale={locale}
                   count={serverStats ? serverStats[row.holdersKey] : null}
                 />
               </dd>
@@ -183,9 +204,9 @@ export function TankMarksMastery({
       )}
       {moe && mom && <PanelSeparator />}
       {mom && (
-        <MarksSection
-          title={`${tankName} Marks of Mastery`}
-          description="Single-battle XP to beat 50 / 80 / 95 / 99% of players."
+        <MarksSection locale={locale}
+          title={t("tank-marks-of-mastery", { tank: tankName })}
+          description={t("single-battle-xp-to-beat")}
           chartDays={momHistory.length}
           chart={
             momHistory.length >= 2 ? (
@@ -203,13 +224,14 @@ export function TankMarksMastery({
             >
               <dt className="flex items-center gap-2 text-fd-muted-foreground">
                 <MoMIcon mastery={row.mastery} className="mx-0 h-5" />
-                {row.label}
+                {statLabel(row.label, tStats)}
               </dt>
               <dd className="text-right">
                 <span className="font-semibold tabular-nums">
-                  {intFmt.format(mom[row.key])}
+                  {numberFormat(locale, INT_FORMAT).format(mom[row.key])}
                 </span>
                 <HolderLine
+                  locale={locale}
                   count={serverStats ? serverStats[row.holdersKey] : null}
                 />
               </dd>

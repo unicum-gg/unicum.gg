@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Opsætningslink kopieret",
+  "copy-build-link": "Kopiér opsætningslink",
+  "could-not-copy-link": "Kunne ikke kopiere linket",
+  "include-setup": "Inkluder opsætning",
+  "share-build": "Del build",
+  "share-tank": "Del {tank}",
+  "share-text": "Se denne opsætning til {tank} på {app}"
+}

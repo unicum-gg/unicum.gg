@@ -11,7 +11,7 @@ import {
 } from "@unicum.gg/shared";
 import { PlayIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import Link from "@/components/link";
 import type { Region } from "@unicum.gg/wargaming";
 import { ClanTag } from "@/components/entity/clan-tag";
 import ROUTES from "@/constants/routes";
@@ -19,6 +19,7 @@ import type { TankVideoGroup } from "./group";
 import { BattleRow, Thumbnail } from "./card-parts";
 import { useTankVideoPlayer } from "./player";
 import { BATTLE_PARAM } from "./battle-param";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   TankDetailTab,
   tankDetailTabHref,
@@ -33,6 +34,9 @@ export type TankVideoCardData = {
   title: string;
   channelName: string;
   mapName: string | null;
+  /** The arena the battle was played on, so the map can be named in the
+   * reader's language rather than in the English the row was stored with. */
+  arenaId: string | null;
   mode: MapGameMode | null;
   /** The compass side, derived from the map's own geometry, and its label. The
    * raw value is what a filter matches on; the label is what a row reads. */
@@ -104,6 +108,8 @@ export function TankVideoCard({
   /** For the links to the tanks a video covers, on the community index. */
   region: Region;
 }) {
+  const { t: tVideos } = useTranslation("components/tanks/detail/videos/index");
+  const { t } = useTranslation("components/tanks/detail/videos/card");
   const player = useTankVideoPlayer();
   // Which row is lit follows the playhead, not the last click: the player
   // publishes it, since only something mounted beside it can watch its clock.
@@ -165,7 +171,9 @@ export function TankVideoCard({
                 in review is a receipt for its submitter, not something the
                 video offers yet. */}
           <span className="absolute right-2 bottom-2 rounded-sm bg-black/80 px-1.5 py-0.5 text-xs text-white">
-            {publishedCount} {publishedCount > 1 ? "battles" : "battle"}
+            {t("n-battles", {
+              count: publishedCount,
+            })}
           </span>
         </Thumbnail>
       </div>
@@ -237,7 +245,7 @@ export function TankVideoCard({
             rel="nofollow noopener noreferrer"
             className="hover:text-fd-foreground hover:underline"
           >
-            Watch on YouTube
+            {tVideos("watch-on-youtube")}
           </a>
         </div>
 

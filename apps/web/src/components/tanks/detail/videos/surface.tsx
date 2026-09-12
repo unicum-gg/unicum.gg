@@ -1,8 +1,9 @@
 "use client";
 
+import { mapModeName, mapName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 import { useEffect, useMemo, useState } from "react";
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
-import { MAP_GAME_MODE_LABEL } from "@unicum.gg/shared";
 import { useSession } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { ActiveBattleTracker } from "./active-battle-tracker";
@@ -23,6 +24,10 @@ const PlyrPlayer = dynamic(() => import("./plyr-player"), { ssr: false });
  * band of its own above the list.
  */
 export function VideoPlayerSurface() {
+  const { t: tCopy } = useTranslation("components/tanks/detail/videos/surface");
+  const { t } = useTranslation("components/tanks/detail/videos/surface");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
   const player = useTankVideoPlayer();
   // Signed out the form renders a log-in link instead of a dialog, so the
   // shortcut would hand a moment to nothing.
@@ -41,15 +46,19 @@ export function VideoPlayerSurface() {
       (siblings ?? []).map((battle) => ({
         time: battle.startSeconds,
         label: [
-          battle.mapName,
-          battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : null,
-          battle.directionLabel,
-          battle.pending ? "in review" : null,
+          battle.arenaId
+            ? mapName(battle.arenaId, battle.mapName ?? battle.arenaId, tMaps)
+            : battle.mapName,
+          battle.mode ? mapModeName(battle.mode, tGame) : null,
+          battle.direction
+            ? tGame(`spawn-directions.${battle.direction}`)
+            : battle.directionLabel,
+          battle.pending ? t("in-review") : null,
         ]
           .filter(Boolean)
           .join(" · "),
       })),
-    [siblings],
+    [siblings, t, tGame, tMaps],
   );
 
   useEffect(() => {
@@ -59,7 +68,7 @@ export function VideoPlayerSurface() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [video, stop]);
+  }, [video, stop, tGame]);
 
   if (!video) return null;
 
@@ -92,7 +101,7 @@ export function VideoPlayerSurface() {
               className="plyr__controls__item plyr__control"
             >
               <PlusIcon className="size-4" weight="bold" />
-              <span className="plyr__tooltip">Suggest this moment</span>
+              <span className="plyr__tooltip">{t("suggest-this-moment")}</span>
             </button>
           ) : undefined
         }
@@ -116,7 +125,7 @@ export function VideoPlayerSurface() {
       <button
         type="button"
         onClick={stop}
-        aria-label="Close the video"
+        aria-label={t("close-the-video")}
         // Above `.vds-blocker`, the layer the player puts over the embed to
         // catch clicks. It is `z-index: 1` in this same stacking context, so an
         // unpositioned button sits under it and every click on Close was
@@ -124,8 +133,7 @@ export function VideoPlayerSurface() {
         className={cn("absolute right-3 top-3 z-10", CHROME_BUTTON)}
       >
         <XIcon className="size-4" />
-        Close
-      </button>
+        {tCopy("close")}</button>
     </div>
   );
 }

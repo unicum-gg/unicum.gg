@@ -6,7 +6,7 @@ import {
   type PlayerAchievement,
   type PlayerAchievements,
 } from "@unicum.gg/shared";
-import type { Region } from "@unicum.gg/wargaming";
+import { WgLanguage, type Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
 import { cachedInRedis } from "@unicum.gg/core/redis";
 import { wg } from "@unicum.gg/core/wargaming/client";
@@ -62,6 +62,24 @@ type CatalogEntry = Omit<PlayerAchievement, "count">;
 
 type Catalog = { entries: CatalogEntry[]; sections: Record<string, string> };
 
+/**
+ * The one HTML entity Wargaming leaves in this catalogue's prose.
+ *
+ * Measured rather than assumed, on all four languages checked: `&nbsp;` and
+ * nothing else, 49 occurrences, zero tags. It is deliberate on their side, it
+ * holds a vehicle's name together ("Object&nbsp;252U", "IS-6&nbsp;B"), so the
+ * right output is a real non-breaking space rather than a plain one.
+ *
+ * Done by hand rather than through `sanitize-html`, which is already a
+ * dependency and does decode this correctly, because it re-encodes a bare `&`
+ * on the way out. One medal has one, in its Rambo tie-in: `RAMBO & 2025
+ * STUDIOCANAL S.A.`, which would come back reading `&amp;`. A decoder that
+ * only ever decodes cannot introduce that.
+ */
+function decodeEntities(text: string): string {
+  return text.replaceAll("&nbsp;", "\u00a0");
+}
+
 // WG serves the medal art over plain http. Left as-is the browser blocks it as
 // mixed content on our https origin, and `next/image` refuses it outright (the
 // remote pattern for `api.worldoftanks.*` is https-only). The host answers on
@@ -70,24 +88,28 @@ function https(url: string): string {
   return url.startsWith("http://") ? `https://${url.slice(7)}` : url;
 }
 
-async function fetchCatalog(region: Region): Promise<Catalog> {
+async function fetchCatalog(
+  region: Region,
+  language: WgLanguage,
+): Promise<Catalog> {
   const api = wg.region(region).api.wot.encyclopedia;
   const [medals, info] = await Promise.all([
-    api.achievements(),
-    api.info({ fields: ["achievement_sections"] }),
+    api.achievements({ language }),
+    api.info({ fields: ["achievement_sections"], language }),
   ]);
 
   const sectionMeta = info.achievement_sections ?? {};
   const sections: Record<string, string> = {};
-  for (const [id, s] of Object.entries(sectionMeta)) sections[id] = s.name;
+  for (const [id, s] of Object.entries(sectionMeta))
+    sections[id] = decodeEntities(s.name);
 
   const entries: CatalogEntry[] = Object.entries(medals)
     .filter(([, m]) => isDisplayableMedal(m))
     .map(([id, m]) => ({
       id,
-      name: m.name_i18n || m.name || id,
-      description: m.description ?? "",
-      condition: m.condition ?? "",
+      name: decodeEntities(m.name_i18n || m.name || id),
+      description: decodeEntities(m.description ?? ""),
+      condition: decodeEntities(m.condition ?? ""),
       image: https(m.image_big ?? m.image ?? ""),
       section: m.section ?? "",
       sectionName: sections[m.section ?? ""] ?? m.section ?? "",
@@ -96,7 +118,7 @@ async function fetchCatalog(region: Region): Promise<Catalog> {
       type: m.type ?? "",
       outdated: m.outdated === true,
       tiers: (m.options ?? []).map((o) => ({
-        name: o.name_i18n ?? "",
+        name: decodeEntities(o.name_i18n ?? ""),
         image: https(o.image_big ?? o.image ?? ""),
       })),
     }));
@@ -104,15 +126,32 @@ async function fetchCatalog(region: Region): Promise<Catalog> {
   return { entries, sections };
 }
 
-/** The medal catalogue for a region, shared across every player, and across
- * the profile's cabinet and one vehicle's Awards. */
-export function getCatalog(region: Region): Promise<Catalog> {
+/**
+ * The medal catalogue for a region, shared across every player, and across the
+ * profile's cabinet and one vehicle's Awards.
+ *
+ * Cached per language as well as per region, because a medal's name, its
+ * description and its conditions are Wargaming's own words and the API says
+ * them in the reader's language: "Crucial Shot" is `Tir crucial` in French and
+ * `Entscheidender Treffer` in German, and the section headings translate with
+ * them. Ten of our locales are answered (see `WARGAMING_LANGUAGE`), the rest
+ * fall back to English, which is what a caller passing nothing gets. Two WG
+ * calls a day per language actually read, so a language nobody browses in costs
+ * nothing.
+ */
+export function getCatalog(
+  region: Region,
+  language: WgLanguage = WgLanguage.English,
+): Promise<Catalog> {
   return cachedInRedis<Catalog>(
-    `wg:achievements:catalog:${region}`,
+    `wg:achievements:catalog:${region}:${language}`,
     (c) => (c.entries.length > 0 ? CATALOG_TTL_S : EMPTY_TTL_S),
     () =>
-      fetchCatalog(region).catch((err) => {
-        console.error(`[achievements] catalog fetch failed (${region}):`, err);
+      fetchCatalog(region, language).catch((err) => {
+        console.error(
+          `[achievements] catalog fetch failed (${region}/${language}):`,
+          err,
+        );
         return { entries: [], sections: {} };
       }),
   );
@@ -293,6 +332,7 @@ export enum PlayerAchievementsError {
 export async function loadPlayerAchievements(
   region: Region,
   nickname: string,
+  language?: WgLanguage,
 ): Promise<PlayerAchievements | PlayerAchievementsError> {
   const players = playersByRegion[region];
   const [row] = await db
@@ -306,7 +346,7 @@ export async function loadPlayerAchievements(
   if (!row) return PlayerAchievementsError.PlayerUnknown;
 
   const [catalog, counts] = await Promise.all([
-    getCatalog(region),
+    getCatalog(region, language),
     getPlayerCounts(region, row.id, row.accountId),
   ]);
 

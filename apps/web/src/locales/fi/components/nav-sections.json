@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Pelaajat",
+    "clans": "Klaanit",
+    "tanks": "Panssarivaunut",
+    "maps": "Kartat",
+    "tournaments": "Turnaukset",
+    "servers": "Palvelimet"
+  },
+  "links": {
+    "top-players": {
+      "label": "Parhaat pelaajat",
+      "description": "Pelaajien kaikkien aikojen tulostaulukko"
+    },
+    "players-onslaught": {
+      "description": "Rankatun Rynnistyksen sijoituslista"
+    },
+    "players-steel-hunter": {
+      "description": "Battle royale -tulostaulukko"
+    },
+    "top-clans": {
+      "label": "Parhaat klaanit",
+      "description": "Klaanien kaikkien aikojen tulostaulukko"
+    },
+    "stronghold": {
+      "description": "Kahakat-portaat"
+    },
+    "advances": {
+      "description": "Tason X 15 vastaan 15 -sijoitus"
+    },
+    "tank-performances": {
+      "label": "Suoritukset",
+      "description": "Voittoprosentti ja vahinko panssarivaunua kohden"
+    },
+    "tank-specs": {
+      "label": "Tiedot",
+      "description": "Jokaisen panssarivaunun tilastot"
+    },
+    "tank-economics": {
+      "label": "Taloustiede",
+      "description": "Parhaat krediittien ja kokemuksen ansaitsijat"
+    },
+    "tank-moe": {
+      "description": "Vahinko kutakin merkkiä varten"
+    },
+    "tank-mom": {
+      "description": "Mestarimerkin rajat"
+    },
+    "tank-changes": {
+      "label": "Muutokset",
+      "description": "Parannukset ja heikennykset päivityksittäin"
+    },
+    "tank-community": {
+      "label": "Yhteisön arvioinnit",
+      "description": "Niiden omistavien pelaajien arvioimat"
+    },
+    "tank-videos": {
+      "label": "Videot",
+      "description": "Yhteisön pelivideot"
+    },
+    "all-tournaments": {
+      "label": "Turnaukset",
+      "description": "Jokainen avoin ja päättynyt turnaus"
+    },
+    "all-maps": {
+      "label": "Kaikki kartat",
+      "description": "Jokainen pelin kartta"
+    },
+    "map-changes": {
+      "label": "Muutokset",
+      "description": "Karttojen muutokset päivityksittäin"
+    },
+    "battle-type": {
+      "description": "{type} kartat"
+    },
+    "servers-population": {
+      "label": "Palvelimen populaatio",
+      "description": "Paikalla olevat pelaajat nyt ja ajan mittaan"
+    }
+  }
+}

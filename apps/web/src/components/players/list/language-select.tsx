@@ -1,7 +1,11 @@
 "use client";
 
+import { numberFormat } from "@/lib/format";
+
+import { useLocale } from "@onruntime/translations/react";
+import { languageDisplayName } from "@/lib/language-name";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import {
   Select,
   SelectContent,
@@ -12,12 +16,7 @@ import {
 import ROUTES from "@/constants/routes";
 import { languageToCountryCode } from "@/lib/language-flags";
 import type { Region } from "@unicum.gg/wargaming";
-
-const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
-
-function displayName(code: string): string {
-  return LANGUAGE_NAMES.of(code) ?? code.toUpperCase();
-}
+import { useTranslation } from "@/hooks/use-translation";
 
 export type PlayerLanguageOption = {
   code: string;
@@ -43,6 +42,8 @@ export function PlayerLanguageSelect({
   region: Region;
   strict?: boolean;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/list/view");
   const router = useRouter();
   const onChange = (value: string) => {
     router.push(
@@ -60,7 +61,7 @@ export function PlayerLanguageSelect({
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value={ALL}>All languages</SelectItem>
+        <SelectItem value={ALL}>{t("all-languages")}</SelectItem>
         {available.map((lang) => {
           const flag = languageToCountryCode(lang.code, region);
           return (
@@ -75,9 +76,9 @@ export function PlayerLanguageSelect({
                     className="h-3 w-auto"
                   />
                 )}
-                <span>{displayName(lang.code)}</span>
+                <span>{languageDisplayName(lang.code, locale)}</span>
                 <span className="text-fd-muted-foreground/70 tabular-nums">
-                  {lang.playersCount.toLocaleString("en-US")}
+                  {numberFormat(locale).format(lang.playersCount)}
                 </span>
               </span>
             </SelectItem>

@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Tính phí bằng euro, quy đổi sang {currency} theo tỷ giá hôm nay.",
+  "cost-breakdown": "Phân tích giá",
+  "estimated-annual-cost": "Chi phí hằng năm ước tính",
+  "fixed-month-bill-no-surprises": "Hóa đơn cố định {totalAnnualEur}/tháng, không phát sinh bất ngờ: một máy chủ thuê, không có SaaS bên thứ ba trong đường dẫn dữ liệu. Chi phí chỉ tăng khi chúng tôi vượt quá khả năng máy chủ (lưu lượng Wargaming lớn hơn cần nhiều IP đầu ra hơn).",
+  "free": "miễn phí",
+  "one-off-spend": "Chi tiêu một lần",
+  "paid-once-so-it-is": "Đã thanh toán một lần nên không nằm trong hóa đơn hằng tháng ở trên. Khoản này vẫn được tính vào tổng chi phí của dự án cho đến nay.",
+  "previously": "Trước đây"
+}

@@ -1,6 +1,8 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import { GlossaryLabel } from "@/components/glossary/label";
+import { Interpolate } from "@/components/interpolate";
 import { ClanName } from "@/components/entity/clan-name";
 import { clanIdentityFromRow } from "@/components/entity/clan-identity";
 import { Period } from "@/hooks/use-period";
@@ -10,6 +12,7 @@ import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Col
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Table,
   TableBody,
@@ -34,7 +37,7 @@ import {
   REGION_LABEL,
 } from "@unicum.gg/wargaming";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 export type TopClansInitial = Record<
   Region,
@@ -53,6 +56,7 @@ export function TopClans({
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
+  const { t } = useTranslation("components/home/top-clans");
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   const metricLabel = RATING_METRIC_LABEL[metric];
@@ -61,29 +65,30 @@ export function TopClans({
   return (
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
-        {period === Period.Month ? (
-          <>
-            Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
-            more than 50 members with battles, ranked by{" "}
-            <RatingMetricInlineSelect /> over the past 30 days (min. 15 active).
-          </>
-        ) : (
-          <>
-            Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
-            more than 50 members with battles, ranked by average{" "}
-            <RatingMetricInlineSelect />.
-          </>
-        )}
+        <Interpolate
+          template={t(
+            period === Period.Month
+              ? "description.month"
+              : "description.overall",
+          )}
+          values={{
+            region: `${REGION_EMOJI[region]} ${REGION_LABEL[region]}`,
+            metric: <RatingMetricInlineSelect />,
+          }}
+        />
         {computedAt ? (
           <>
             {" "}
-            Updated <RelativeTime date={computedAt} />.
+            <Interpolate
+              template={t("updated")}
+              values={{ when: <RelativeTime date={computedAt} /> }}
+            />
           </>
         ) : null}
       </div>
       {results.length === 0 ? (
         <div className="mt-auto border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
-          No clan data available yet for this region.
+          {t("empty")}
         </div>
       ) : (
         <div className="mt-auto">
@@ -91,14 +96,14 @@ export function TopClans({
             <TableHeader>
               <TableRow>
                 <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
-                  #
+                  {t("rank")}
                 </TableHead>
-                <TableHead>Clan</TableHead>
+                <TableHead>{t("clan")}</TableHead>
                 <TableHead className="w-24 pr-4 text-right!">
                   {/* "Avg WN8" is WN8, averaged over the roster: a reader
                       hovering it wants the rating, not the arithmetic. */}
                   <GlossaryLabel label={metricLabel}>
-                    Avg {metricLabel}
+                    {t("average", { metric: metricLabel })}
                   </GlossaryLabel>
                 </TableHead>
               </TableRow>
@@ -132,6 +137,7 @@ function ClanRow({
   region: Region;
   metric: RatingMetric;
 }) {
+  const { num } = useFormat();
   const colorClass = COLOR_FOR_METRIC[metric](clan.avg_wnx);
   return (
     <TableRow>
@@ -157,7 +163,7 @@ function ClanRow({
           colorClass,
         )}
       >
-        {intFmt.format(clan.avg_wnx)}
+        {num(INT_FORMAT).format(clan.avg_wnx)}
       </TableCell>
     </TableRow>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useId } from "react";
 import { DiscordLogoIcon, PlusIcon } from "@phosphor-icons/react";
 import type { Region } from "@unicum.gg/wargaming";
@@ -87,6 +88,8 @@ export function BoostConsolePreview({
    * whether to invite a login or explain the officer requirement. */
   loggedOut?: boolean;
 }) {
+  const { t: tCopy } = useTranslation("components/clans/detail/boost-console-preview");
+  const { t } = useTranslation("components/clans/detail/boost-console-preview");
   const uid = useId();
   const tz = browserTz();
   const scheduleReserves = SAMPLE_RESERVES.filter(
@@ -107,38 +110,29 @@ export function BoostConsolePreview({
         <Panel screenLines={false}>
           <PanelHeader className="flex min-h-14 flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <PanelTitle className="flex items-center gap-2">
-              Stronghold boosts
+              {t("stronghold-boosts")}
               <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-medium text-brand">
-                Officers
-              </span>
+                {t("officers")}</span>
             </PanelTitle>
           </PanelHeader>
           <PanelContent className="flex flex-col items-start gap-4">
             <p className="text-sm text-fd-muted-foreground">
-              Each workflow activates its reserves during a time window, once
-              enough members are in a live game session. Runs on your account, no
-              need to be online. Add as many as you need.
-            </p>
+              {t("each-workflow-activates-its-reserves")}</p>
             <Button variant="secondary" disabled>
-              <PlusIcon className="size-4" /> Add workflow
-            </Button>
+              <PlusIcon className="size-4" /> {tCopy("add-workflow")}</Button>
           </PanelContent>
         </Panel>
         <Panel screenLines={false} className="md:border-l-0">
           <PanelHeader className="flex min-h-14 items-center">
             <PanelTitle className="flex items-center gap-2">
-              Discord notifications
-              <DiscordLogoIcon className="size-5 text-fd-muted-foreground" />
+              {tCopy("discord-notifications")}<DiscordLogoIcon className="size-5 text-fd-muted-foreground" />
             </PanelTitle>
           </PanelHeader>
           <PanelContent className="flex flex-col items-start gap-4">
             <p className="max-w-2xl text-sm text-fd-muted-foreground">
-              Get a Discord message in a channel you choose every time a boost
-              fires, so the whole clan knows it is live.
-            </p>
+              {t("get-a-discord-message-in")}</p>
             <Button disabled>
-              <DiscordLogoIcon className="size-4" /> Connect Discord
-            </Button>
+              <DiscordLogoIcon className="size-4" /> {tCopy("connect-discord")}</Button>
           </PanelContent>
         </Panel>
       </div>
@@ -155,8 +149,7 @@ export function BoostConsolePreview({
           <div className="flex items-center gap-2">
             <Switch checked disabled id={`en-${uid}`} />
             <Label htmlFor={`en-${uid}`} className="text-sm">
-              Enabled
-            </Label>
+              {t("enabled")}</Label>
           </div>
         </PanelHeader>
 
@@ -164,8 +157,7 @@ export function BoostConsolePreview({
           <div className="flex flex-wrap items-end gap-5">
             <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-fd-muted-foreground">
-                Active days
-              </Label>
+                {t("active-days")}</Label>
               <div className="flex gap-1">
                 {DAY_LABELS.map((d) => (
                   <button
@@ -180,24 +172,22 @@ export function BoostConsolePreview({
               </div>
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs text-fd-muted-foreground">From</Label>
+              <Label className="text-xs text-fd-muted-foreground">{t("from")}</Label>
               <Input type="time" value={START} disabled className="w-28" />
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label className="text-xs text-fd-muted-foreground">To</Label>
+              <Label className="text-xs text-fd-muted-foreground">{t("to")}</Label>
               <Input type="time" value={END} disabled className="w-28" />
             </div>
             <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-fd-muted-foreground">
-                Min online
-              </Label>
+                {t("min-online")}</Label>
               <Input type="number" value={10} disabled className="w-20" />
             </div>
           </div>
 
           <p className="-mt-2 text-xs text-fd-muted-foreground">
-            Times are in {tzLabel(tz)}, your timezone.
-          </p>
+            {t("times-are-in-your-timezone", { tz: tzLabel(tz) })}</p>
 
           <BoostReservesPicker
             reserves={SAMPLE_RESERVES}
@@ -210,8 +200,7 @@ export function BoostConsolePreview({
 
           <div className="flex flex-col gap-2">
             <Label className="text-xs text-fd-muted-foreground">
-              Schedule preview
-            </Label>
+              {t("schedule-preview")}</Label>
             <BoostSchedulePreview
               windowStart={fromHHMM(START)}
               windowEnd={fromHHMM(END)}
@@ -222,9 +211,7 @@ export function BoostConsolePreview({
 
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border pt-4">
             <p className="text-sm text-fd-muted-foreground">
-              Set your hours and reserves once; the boosts fire on time on their
-              own, even when nobody is around to press the button.
-            </p>
+              {t("set-your-hours-and-reserves")}</p>
             {loggedOut === undefined ? null : loggedOut ? (
               <LoginButton
                 callbackURL={clanViewHref(
@@ -232,12 +219,11 @@ export function BoostConsolePreview({
                   MANAGE_CLAN_VIEW,
                 )}
               >
-                <Button>Log in with Wargaming to set it up</Button>
+                <Button>{t("log-in-with-wargaming-to")}</Button>
               </LoginButton>
             ) : (
               <p className="text-sm text-fd-muted-foreground">
-                Only an officer of this clan can set this up.
-              </p>
+                {t("only-an-officer-of-this")}</p>
             )}
           </div>
         </PanelContent>

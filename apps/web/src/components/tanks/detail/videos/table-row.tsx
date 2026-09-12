@@ -1,14 +1,16 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import { mapModeName, mapName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { PencilSimpleIcon } from "@phosphor-icons/react";
 import { toRoman } from "roman-numerals";
 import {
-  BATTLE_FORMAT_LABEL,
-  BATTLE_RESULT_LABEL,
   formatTimestamp,
-  MAP_GAME_MODE_LABEL,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -66,6 +68,10 @@ export function VideoTableRow({
   /** Opens the correction dialog, on a queued row of one's own. */
   onEdit?: () => void;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/tanks/detail/videos/table-row");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
   const row = (
     <TableRow
       key={battle.id}
@@ -80,7 +86,9 @@ export function VideoTableRow({
         event.preventDefault();
         onOpen();
       }}
-      aria-label={`Watch at ${formatTimestamp(battle.startSeconds)}`}
+      aria-label={t("watch-at", {
+        timestamp: formatTimestamp(battle.startSeconds),
+      })}
       className={cn(
         "cursor-pointer",
         battle.pending && "text-fd-muted-foreground/50",
@@ -155,20 +163,32 @@ export function VideoTableRow({
           )}
         </TableCell>
       )}
-      {columns.map && <TableCell>{battle.mapName ?? "—"}</TableCell>}
+      {columns.map && (
+        <TableCell>
+          {battle.arenaId
+            ? mapName(battle.arenaId, battle.mapName ?? battle.arenaId, tMaps)
+            : (battle.mapName ?? "—")}
+        </TableCell>
+      )}
       <TableCell>
-        {battle.format ? BATTLE_FORMAT_LABEL[battle.format] : "—"}
+        {battle.format ? tGame(`battle-formats.${battle.format}`) : "—"}
       </TableCell>
       <TableCell>
-        {battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : "—"}
+        {battle.mode ? mapModeName(battle.mode, tGame) : "—"}
       </TableCell>
-      <TableCell>{battle.directionLabel ?? "—"}</TableCell>
+      <TableCell>
+        {battle.direction
+          ? tGame(`spawn-directions.${battle.direction}`)
+          : (battle.directionLabel ?? "—")}
+      </TableCell>
       <TableCell className={cn(battle.result && RESULT_CLASS[battle.result])}>
-        {battle.result ? BATTLE_RESULT_LABEL[battle.result] : "—"}
+        {battle.result ? tGame(`battle-results.${battle.result}`) : "—"}
       </TableCell>
       {columns.damage && (
         <TableCell className="text-right tabular-nums">
-          {battle.combinedDamage?.toLocaleString("en-US") ?? "—"}
+          {battle.combinedDamage != null
+            ? numberFormat(locale).format(battle.combinedDamage)
+            : "—"}
         </TableCell>
       )}
       <TableCell className="text-fd-muted-foreground">
@@ -188,7 +208,7 @@ export function VideoTableRow({
                 event.stopPropagation();
                 onEdit();
               }}
-              aria-label="Correct this suggestion"
+              aria-label={t("correct-this-suggestion")}
               className="shrink-0 cursor-pointer rounded-md p-1 transition-colors hover:bg-fd-muted hover:text-fd-foreground"
             >
               <PencilSimpleIcon className="size-3.5" />
@@ -206,8 +226,7 @@ export function VideoTableRow({
     <Tooltip>
       <TooltipTrigger asChild>{row}</TooltipTrigger>
       <TooltipContent>
-        Waiting on a moderator. Only you can see it.
-      </TooltipContent>
+        {t("waiting-on-a-moderator-only")}</TooltipContent>
     </Tooltip>
   );
 }

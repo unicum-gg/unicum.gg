@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { statLabel } from "@/components/stat-label";
+
 import {
   CaretLeftIcon,
   CaretRightIcon,
@@ -48,14 +51,17 @@ import {
   ECON_COLUMN_META,
   type EconColumn,
 } from "./columns";
+import { useTranslation } from "@/hooks/use-translation";
 
 export function EconColumnSelector() {
+  const { t } = useTranslation("components/tanks/list/economics/columns");
   const [selected, onToggle] = useEconColumns();
   return (
     <ColumnSelector
       items={ECON_COLUMN_META}
       selected={selected}
       onToggle={onToggle}
+      label={(key) => t(`selector.${key}`)}
     />
   );
 }
@@ -91,17 +97,22 @@ export function TanksEconTable({
   /** When set, each row offers a comparison checkbox. */
   selection?: TankSelection;
 }) {
+  const { locale } = useLocale();
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tTable } = useTranslation("components/tanks/table");
   const [sort, setSort] = useState<SortState>({
     key: "buyCredits",
     direction: SortDirection.Desc,
   });
 
+  const { t } = useTranslation("components/tanks/list/economics/columns");
+  const { t: tOwn } = useTranslation("components/tanks/list/economics/index");
   const { tier, setTier, rate, rateInput, setRate } = useFreeXpSettings();
   const [selected] = useEconColumns();
   const columns = useMemo(
     () =>
-      buildEconColumns(region, tier, rate).filter((c) => selected.has(c.key)),
-    [region, selected, tier, rate],
+      buildEconColumns(region, tier, rate, t, locale).filter((c) => selected.has(c.key)),
+    [region, selected, tier, rate, t, locale],
   );
   // The free-XP controls only matter when a free-XP column is on screen.
   const showFreeXpControls =
@@ -171,23 +182,23 @@ export function TanksEconTable({
           <TableHeader>
             <TableRow>
               <TankCompareHead selection={selection} />
-              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip={tTable("nation")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="nation" />
               </SortHead>
-              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip="Type" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip={tTable("type")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="type" />
               </SortHead>
-              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip="Tier" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip={tTable("tier")} headClassName="w-[72px] min-w-[72px]">
                 <span className="text-xs font-medium tracking-tight text-fd-muted-foreground">
                   I-XI
                 </span>
               </SortHead>
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
-                Name
+                {tTable("name")}
               </SortHead>
               {columns.map((c) => (
-                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
-                  {c.label}
+                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={statLabel(c.tip, tStats)}>
+                  {statLabel(c.label, tStats)}
                 </SortHead>
               ))}
             </TableRow>
@@ -233,7 +244,7 @@ export function TanksEconTable({
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <div className="flex items-center gap-2">
-            <span>Rows per page</span>
+            <span>{tOwn("rows-per-page")}</span>
             <Select
               value={String(pageSize)}
               onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
@@ -247,17 +258,17 @@ export function TanksEconTable({
                     {n}
                   </SelectItem>
                 ))}
-                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="all">{tOwn("all")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
           {showFreeXpControls && (
             <div className="flex items-center gap-2">
-              <span>Free XP from</span>
+              <span>{tOwn("free-xp-from")}</span>
               <FreeXpTierSelect value={tier} onChange={setTier} maxTier={10} />
               <span className="ml-1">at</span>
               <XpRateInput value={rateInput} onChange={setRate} />
-              <span>XP = 1 gold</span>
+              <span>{tOwn("xp-1-gold")}</span>
             </div>
           )}
         </div>
@@ -270,19 +281,18 @@ export function TanksEconTable({
               type="button"
               onClick={() => setPage(current - 1)}
               disabled={current <= 1}
-              aria-label="Previous page"
+              aria-label={tOwn("previous-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretLeftIcon weight="bold" className="size-3.5" />
             </button>
             <span className="min-w-16 text-center tabular-nums">
-              Page {current} / {totalPages}
-            </span>
+              {tOwn("page", { current, totalPages })}</span>
             <button
               type="button"
               onClick={() => setPage(current + 1)}
               disabled={current >= totalPages}
-              aria-label="Next page"
+              aria-label={tOwn("next-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretRightIcon weight="bold" className="size-3.5" />

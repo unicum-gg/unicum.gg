@@ -1,0 +1,14 @@
+{
+  "ammunition": "Ammunisyon",
+  "characteristics": "Mga Katangian ng {tank}",
+  "consumables": "Mga Consumable",
+  "crew-level": "Antas ng Sampahan",
+  "crew-skills": "Mga Kasanayan ng Crew",
+  "equipment": "Kagamitan",
+  "field-mods": "Mga Pagbabagong Aksyon",
+  "historical-reference": "Sanggunian sa kasaysayan ng {tank}",
+  "modules": "Mga Module ng {tank}",
+  "research-path": "Sangay ng puno ng teknolohiya ng {tank}",
+  "similar": "Mga tangke na Isara sa {tank}",
+  "videos": "Mga video ng {tank}"
+}

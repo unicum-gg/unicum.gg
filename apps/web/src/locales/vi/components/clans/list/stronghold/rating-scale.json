@@ -1,0 +1,17 @@
+{
+  "average": "Trung bình",
+  "bad": "Kém",
+  "below-avg": "Dưới trung bình",
+  "color-thresholds-for-the-stronghold": "Ngưỡng màu cho bảng xếp hạng Pháo đài. Một thang tuyệt đối cho mọi cấp, vì vậy SR (hoặc SRB) thể hiện chất lượng Clan giống nhau ở mọi nơi.",
+  "excellent": "Xuất sắc",
+  "good": "Tốt",
+  "rating-colors": "Màu xếp hạng",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Siêu",
+  "tier": "Cấp",
+  "top": "Top",
+  "very-bad": "Rất tệ",
+  "very-good": "Rất tốt",
+  "wr": "WR"
+}

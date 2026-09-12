@@ -1,0 +1,7 @@
+{
+  "win-rate": "Győzelmi arány",
+  "versus": "{metric} a(z) {region} ellen",
+  "top": "Legjobb {percent}%",
+  "ahead-of": "A(z) {percent}%-nál előrébb",
+  "against": "{players} nyomon követett, legalább {battles} csatával rendelkező {region} régiós fiók ellen."
+}

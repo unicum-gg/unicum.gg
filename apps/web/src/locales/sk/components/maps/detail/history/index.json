@@ -1,0 +1,12 @@
+{
+  "added": "Dodano",
+  "before-update": "Pred aktualizáciou {version}",
+  "common-test": "Všeobecný test",
+  "every-update-that-changed-this": "Všetky aktualizácie, ktoré zmenili túto mapu, zoradené od najnovšej a načítané priamo z herného klienta.",
+  "in-the-game": "V igri",
+  "n-changes": "{count, plural, one {# zmena} few {# zmeny} other {# zmien}}",
+  "not-released-wargaming-can-still": "Nevydané. Wargaming môže pred vydaním aktualizácie čokoľvek z toho zmeniť alebo odstrániť.",
+  "removed": "Odstraneno",
+  "title": "Zmeny na mape {map}",
+  "update": "Posodobitev {version}"
+}

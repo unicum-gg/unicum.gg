@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Toplam {battles} savaş",
+  "checking-your-record-on-this": "Bu tanktaki kaydınız kontrol ediliyor...",
+  "fetching-your-garage": "Garajınız getiriliyor",
+  "have-you-played": "{tank} ile oynadınız mı?",
+  "more-to-go": "{count} savaş daha kaldı",
+  "more-to-go-one": "{count} savaş daha kaldı",
+  "sign-in-to-rate-it": "Puan vermek için giriş yapın",
+  "sign-in-with-your-wargaming-account-to-rate-": "Puan vermek için Wargaming hesabınızla giriş yapın. Bu sayfanın onu hiç sürmemiş kişilerin katıldığı bir ankete dönüşmesini önlemek için tam olarak bu tanktaki kaydınızı okuyoruz.",
+  "signed-in-on": "{region} üzerinde giriş yapıldı",
+  "too-few-battles": "{tank} ile {played} savaşınız var. Bir oyun sayılmadan önce {required} savaş istiyoruz, böylece bu ortalama gerçekten onu oynayan kişilerin ortalaması olarak kalır.",
+  "you-have-not-played": "{tank} ile oynamadınız"
+}

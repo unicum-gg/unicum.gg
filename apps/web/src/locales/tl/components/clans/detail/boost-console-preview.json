@@ -1,0 +1,19 @@
+{
+  "active-days": "Mga Aktibong Araw",
+  "add-workflow": "Magdagdag ng daloy-ng-trabaho",
+  "connect-discord": "Ikonekta ang Discord",
+  "discord-notifications": "Mga abiso sa Discord",
+  "each-workflow-activates-its-reserves": "Ina-activate ng bawat workflow ang mga reserba nito sa loob ng isang takdang oras, kapag sapat na ang mga miyembrong nasa isang live na session ng laro. Tumatakbo ito sa account mo, kaya hindi kailangang online ka. Magdagdag ng kahit ilan pa ang kailangan mo.",
+  "enabled": "Pinagana",
+  "from": "Mula",
+  "get-a-discord-message-in": "Tumanggap ng mensahe sa Discord sa channel na pipiliin mo sa tuwing may boost na nagpapaputok, para malaman ng buong klano na live ito.",
+  "log-in-with-wargaming-to": "Mag-log in gamit ang Wargaming para i-set up ito",
+  "min-online": "Min online",
+  "officers": "Mga Opisyal",
+  "only-an-officer-of-this": "Isang opisyal lamang ng klanong ito ang maaaring mag-set up nito.",
+  "schedule-preview": "Paunang Tanaw ng Iskedyul",
+  "set-your-hours-and-reserves": "Itakda nang isang beses ang mga oras at mga reserba mo. Awtomatikong nagpapaputok ang mga boost sa tamang oras, kahit walang naroon para pindutin ang button.",
+  "stronghold-boosts": "Pagsuporta ng Stronghold",
+  "times-are-in-your-timezone": "Ang mga oras ay nasa {tz}, ang timezone mo.",
+  "to": "Sa"
+}

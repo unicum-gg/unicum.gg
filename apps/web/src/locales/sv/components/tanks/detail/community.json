@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Vad spelare tycker om den här stridsvagnen",
+  "not-rated": "Inte betygsatt än, bli först",
+  "votes": "{count} röster",
+  "votes-one": "{count} rösta",
+  "stars": "{value} av {max}",
+  "not-rated-short": "Inte bedömd"
+}

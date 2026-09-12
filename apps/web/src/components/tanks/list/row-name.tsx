@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/link";
 import type { Region } from "@unicum.gg/wargaming";
 import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
 import { TankIcon } from "@/components/tanks/tank-icon";

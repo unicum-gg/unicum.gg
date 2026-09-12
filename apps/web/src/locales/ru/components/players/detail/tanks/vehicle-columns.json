@@ -1,0 +1,4 @@
+{
+  "columns": "Столбцы",
+  "n-marks-of-excellence": "{count, plural, one {# отметка отличия} few {# отметки отличия} many {# отметок отличия} other {# отметки отличия}}"
+}

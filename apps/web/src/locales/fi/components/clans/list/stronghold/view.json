@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Tietoja ei ole vielä. Tarkista uudelleen, kun klaanit on päivitetty.",
+  "heading": "Parhaat <accent>{tier}</accent> klaanit",
+  "blurb": "Alueen {region} tulostaulukko, rankattu mittarin {sort} mukaan kaikista seuratuista klaaneista pelimuodossa {format} (vähintään {battles} taistelua).",
+  "blurb-period": "Alueen {region} tulostaulukko, rankattu mittarin {sort} mukaan kaikista seuratuista klaaneista pelimuodossa {format} ajanjaksolta {period} (vähintään {battles} taistelua).",
+  "format-advances": "Hyökkäysoperaatiot (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Parhaat {count} tason {tier} klaanit ·"
+}

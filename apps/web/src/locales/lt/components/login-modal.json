@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Prisijungti naudojant Wargaming.net ID",
+  "open-source": "{name} yra atvirojo kodo. Prieš pasitikėdami perskaitykite {link}.",
+  "pick-the-region-your-world": "Pasirinkite regioną, kuriame yra jūsų World of Tanks paskyra. Jis nebūtinai turi sutapti su regionu, kurį naršote.",
+  "read-the-login-code": "Perskaityti prisijungimo kodą",
+  "what-wargaming-hands-back-is": "Wargaming grąžina prieigos raktą, kuris skaito jūsų paskyros duomenis. Jis saugomas užšifruotas ir atnaujinamas, kol jūsų paskyra lieka susieta, ir veikia tik jūsų vardu ten, kur tai nustatėte patys, pavyzdžiui, jūsų klano rezervo tvarkaraštyje.",
+  "you-sign-in-on-wargaming": "Prisijungiate pačiame Wargaming puslapyje, ne čia. Jūsų slaptažodis niekada neįvedamas į {NAME} ir mūsų nepasiekia."
+}

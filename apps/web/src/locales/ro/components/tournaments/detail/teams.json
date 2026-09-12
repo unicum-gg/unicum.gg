@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Medie peste {rated} din {size} jucători",
+  "average-over-recent": "Medie peste {rated} din {size} jucători care au jucat în ultimele 30 de zile",
+  "metric-over-last-30-days": "{metric} în ultimele 30 de zile",
+  "n-confirmed": "{count} confirmați",
+  "no-team-matches-the-current": "Nicio echipă nu corespunde filtrelor curente.",
+  "no-teams-recorded-yet-registrations": "Nicio echipă nu a fost înregistrată încă. Înscrierile apar aici după ce acest turneu este citit integral, la câteva minute de la deschidere.",
+  "none-played-in-30-days": "Niciun membru al acestei liste nu a jucat în ultimele 30 de zile",
+  "players": "Jucători",
+  "qualified": "Calificați",
+  "reward": "Recompensă",
+  "team": "Echipă",
+  "teams": "Echipe ({length})",
+  "wr": "WR"
+}

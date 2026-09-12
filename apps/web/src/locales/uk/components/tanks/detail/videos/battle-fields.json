@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Як завершився бій",
+  "loading-maps": "Завантаження мап…",
+  "map": "Мапа",
+  "mode": "Режим",
+  "pick-a-map": "Оберіть мапу",
+  "pick-a-mode": "Оберіть режим",
+  "result": "Результат",
+  "spawn": "Спавн",
+  "team": "Команда {team}",
+  "team-spawn": "Команда {team} · {direction}",
+  "which-side-you-started": "На якому боці ви почали"
+}

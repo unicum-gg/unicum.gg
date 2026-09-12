@@ -1,0 +1,11 @@
+{
+  "date": "日期",
+  "featured-tournament": "特色赛事",
+  "format": "格式",
+  "n-of-the-roster-were-in-the-clan": "名单中有 {count} 人属于该军团",
+  "no-tournament-matches-the-current": "没有锦标赛符合当前筛选条件。",
+  "played-as": "以...身份参与",
+  "result": "结果",
+  "status": "状态",
+  "tier": "等级"
+}

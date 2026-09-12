@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Genel Bakış",
+    "tanks": "Tanklar",
+    "sessions": "Oturumlar",
+    "achievements": "Başarılar",
+    "tournaments": "Turnuvalar",
+    "value": "Değer"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

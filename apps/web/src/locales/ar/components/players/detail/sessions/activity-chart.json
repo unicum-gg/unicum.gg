@@ -1,0 +1,5 @@
+{
+  "battles": "{count} معارك",
+  "chart-label": "المعارك التي تم لعبها لكل {granularity}، ملوّنة حسب {metric}",
+  "no-battles": "لا توجد معارك"
+}

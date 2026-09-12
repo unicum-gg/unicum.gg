@@ -1,0 +1,6 @@
+{
+  "day": "Niranggo ayon sa {metric} sa nakaraang 24 na oras, hindi bababa sa 20 mga laban.",
+  "week": "Niranggo ayon sa {metric} sa nakaraang 7 mga araw, hindi bababa sa 140 mga laban.",
+  "month": "Niranggo ayon sa {metric} sa nakaraang 30 mga araw, hindi bababa sa 600 mga laban.",
+  "overall": "Niranggo ayon sa pangkalahatang {metric} sa lahat ng oras, hindi bababa sa 20,000 mga laban."
+}

@@ -24,6 +24,26 @@ export interface SkillNode {
   /** Feature label for feature nodes; else the raw node loc key (a stat name or
    * a vehicle-specific mechanic key) the front turns into a readable label. */
   name: string;
+  /**
+   * The client key `name` and `description` were resolved from, so the front can
+   * resolve the same key in the reader's language.
+   *
+   * The payload is built once from the English catalogue and cached per region,
+   * so the text on it is English whoever is reading. Carrying the key is what
+   * lets the tooltip look the node up in `game/skill-tree`, exactly as a device
+   * carries its `descriptionKey`.
+   */
+  nameKey: string;
+  /**
+   * The figure that fills the `{value}` hole in the node's own description,
+   * already reduced to what the sentence asks for.
+   *
+   * The sentence carries the direction and the unit ("Increases ... by {value}%",
+   * "Reduces the cooldown ... by {value} s"), so what goes in the hole is the
+   * magnitude: a `mul` of 1.1 or 0.9 is 10 (percent), an `add` of -5 is 5. Null
+   * for a node whose description has no hole.
+   */
+  descriptionValue: number | null;
   /** The feature's client description (feature nodes only); null otherwise. */
   description: string | null;
   /** The client perk icon (wot.assets), keyed by node type + the node's image. */
@@ -61,13 +81,43 @@ const skillIcon = (base: string, type: string, img: string): string | null =>
  * and apply unlocked nodes to the characteristics. Null when the vehicle has no
  * skill tree (every tier <= X vehicle, which uses field modifications instead).
  */
+/**
+ * Bumped whenever the node shape below changes.
+ *
+ * This cache sits UNDER the tank detail cache and outlives a deploy on its own,
+ * so bumping the outer one is not enough: the detail payload is recomputed and
+ * reads a node this still holds without the new field, for a full day, with no
+ * error to show for it. `getTankLoadout` carries the same counter after the
+ * same day of chasing a field that was written and never arrived.
+ */
+const SKILL_TREE_SHAPE_VERSION = 2;
+
+/**
+ * The magnitude a `{value}` hole wants, from the node's `kpi` entry.
+ *
+ * A `mul` is a factor either side of 1 and the sentence names the direction, so
+ * the distance from 1 is what it asks for, as a percentage. Rounded to one
+ * decimal because the factors are authored with two (1.075 is 7.5%) and the
+ * float arithmetic would otherwise print 7.499999999999996.
+ */
+function descriptionValue(
+  kpi: { type: "mul" | "add"; value: number } | null,
+): number | null {
+  if (!kpi) return null;
+  const magnitude =
+    kpi.type === "mul" ? Math.abs(kpi.value - 1) * 100 : Math.abs(kpi.value);
+  return Math.round(magnitude * 10) / 10;
+}
+
 export function getTankSkillTree(
   region: Region,
   tankId: number,
   branch?: WotSrcBranch,
 ): Promise<TankSkillTree | null> {
-  return cachedInRedis(`wotsrc:skill-tree:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
-    computeTankSkillTree(region, tankId, branch),
+  return cachedInRedis(
+    `wotsrc:skill-tree:v${SKILL_TREE_SHAPE_VERSION}:${region}${branch ? `:${branch}` : ""}:${tankId}`,
+    WOTSRC_TTL_SECONDS,
+    () => computeTankSkillTree(region, tankId, branch),
   );
 }
 
@@ -93,6 +143,8 @@ async function computeTankSkillTree(
         category: "",
         isFeature: true,
         name: titles[n.value]?.name ?? n.value,
+        nameKey: n.value,
+        descriptionValue: null,
         description: titles[n.value]?.description || null,
         image: skillIcon(iconBase, n.type, camel(n.value)),
         effects: [],
@@ -109,6 +161,8 @@ async function computeTankSkillTree(
       category: mod?.category ?? "",
       isFeature: false,
       name: titles[loc]?.name ?? loc,
+      nameKey: loc,
+      descriptionValue: descriptionValue(mod?.kpi ?? null),
       description: titles[loc]?.description || null,
       image: skillIcon(iconBase, n.type, mod?.imgName ?? ""),
       // Only effects that move a displayed characteristic; a vehicle-mechanic

@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Hur det slutade",
+  "loading-maps": "Laddar kartor…",
+  "map": "Karta",
+  "mode": "Läge",
+  "pick-a-map": "Välj en karta",
+  "pick-a-mode": "Välj ett läge",
+  "result": "Resultat",
+  "spawn": "Spawn",
+  "team": "Lag {team}",
+  "team-spawn": "Lag {team} · {direction}",
+  "which-side-you-started": "Vilken sida du startade på"
+}

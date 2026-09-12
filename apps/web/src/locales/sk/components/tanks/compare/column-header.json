@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Munícia, vybavenie, spotrebné doplnky, smernice, posádka a postup pre tento stĺpec. Každá zmena sa premietne do charakteristík vozidla v porovnaní nižšie.",
+  "ammunition-equipment-crew-and-progression": "Munícia, vybavenie, posádka a postup",
+  "apply-to-every-column": "Použiť na každý stĺpec",
+  "compare-against": "Porovnať s tankom {tank}",
+  "compare-the-others-against-this-one": "Porovnať ostatné s týmto",
+  "configure-tank": "Konfigurovať tank {tank}",
+  "highest-overall-score": "Najvyššie celkové skóre",
+  "highest-overall-score-of-this": "Najvyššie celkové skóre v tomto porovnaní",
+  "is-the-reference": "Referenčný tank: {tank}",
+  "overall": "Celkovo",
+  "reference-column": "Referenčný stĺpec",
+  "remove-tank": "Odstrániť tank {tank}",
+  "reset-all": "Resetovať všetko",
+  "setup": "Nastavitev",
+  "stock": "Zásoby",
+  "tank-setup": "Zostava tanku {tank}",
+  "top": "Najboljši",
+  "where-this-vehicle-sits-across": "Umiestnenie tohto vozidla v rámci celého katalógu z {MAXSCORE}: priemer skóre v jeho štyroch kategóriách pri tomto nastavení. Je to súhrn, nie verdikt. Prieskumník aj ťažký tank môžu dosiahnuť rovnaké skóre, pretože každý vyniká v niečom inom."
+}

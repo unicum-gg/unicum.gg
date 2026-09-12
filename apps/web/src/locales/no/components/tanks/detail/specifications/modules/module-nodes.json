@@ -1,0 +1,17 @@
+{
+  "aim-time": "Tid til sikting",
+  "ammo": "Ammunisjon",
+  "armor": "Pansring",
+  "dispersion": "Spredning",
+  "fire-chance": "Brannsjansen",
+  "gun-arc": "Kanalarc",
+  "hit-points": "Livpoeng",
+  "load-limit": "Lastegrense",
+  "mounted-on": "Montert på {tanks}",
+  "power": "Kraft",
+  "reload": "Lad om",
+  "signal-range": "Signal rekkevidde",
+  "tier": "Nivå {tier}",
+  "traverse": "Svinge",
+  "view-range": "Se rekkevidde"
+}

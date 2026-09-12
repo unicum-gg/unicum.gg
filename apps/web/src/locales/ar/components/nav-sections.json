@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "اللاعبون",
+    "clans": "عشائر",
+    "tanks": "دبابات",
+    "maps": "خرائط",
+    "tournaments": "بطولات",
+    "servers": "الخوادم"
+  },
+  "links": {
+    "top-players": {
+      "label": "أفضل اللاعبين",
+      "description": "قائمة المتصدرين للاعبين طوال الوقت"
+    },
+    "players-onslaught": {
+      "description": "سلم الهجوم التصنيفي"
+    },
+    "players-steel-hunter": {
+      "description": "قائمة المتصدرين للمعركة الملكية"
+    },
+    "top-clans": {
+      "label": "أفضل العشائر",
+      "description": "قائمة المتصدرين للعشائر طوال الوقت"
+    },
+    "stronghold": {
+      "description": "سلم المناوشات"
+    },
+    "advances": {
+      "description": "تصنيف المستوى X ‏15 ضد 15"
+    },
+    "tank-performances": {
+      "label": "الأداءات",
+      "description": "نسبة الفوز والضرر لكل دبابة"
+    },
+    "tank-specs": {
+      "label": "المواصفات",
+      "description": "إحصائيات كل دبابة"
+    },
+    "tank-economics": {
+      "label": "اقتصاديات",
+      "description": "الدبابات الأكثر كسبًا للائتمانات والخبرة"
+    },
+    "tank-moe": {
+      "description": "الضرر المطلوب لكل علامة تميز"
+    },
+    "tank-mom": {
+      "description": "حدود شارة الإتقان"
+    },
+    "tank-changes": {
+      "label": "التغييرات",
+      "description": "التعزيزات والإضعافات حسب التحديث"
+    },
+    "tank-community": {
+      "label": "التقييمات المجتمعية",
+      "description": "تقييمات اللاعبين الذين يملكونها"
+    },
+    "tank-videos": {
+      "label": "مقاطع الفيديو",
+      "description": "لقطات لعب من المجتمع"
+    },
+    "all-tournaments": {
+      "label": "بطولات",
+      "description": "كل البطولات، المفتوحة والمكتملة"
+    },
+    "all-maps": {
+      "label": "جميع الخرائط",
+      "description": "كل خريطة في اللعبة"
+    },
+    "map-changes": {
+      "label": "التغييرات",
+      "description": "إعادة تصميم الخرائط حسب التحديث"
+    },
+    "battle-type": {
+      "description": "خرائط {type}"
+    },
+    "servers-population": {
+      "label": "عدد اللاعبين على الخادم",
+      "description": "اللاعبون المتصلون الآن ومع مرور الوقت"
+    }
+  }
+}

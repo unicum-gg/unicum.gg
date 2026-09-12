@@ -1,0 +1,162 @@
+{
+  "columns-label": "Kolonnas",
+  "groups": {
+    "firepower": "Ugunsjauda",
+    "gun-handling": "Ieroču apstrāde",
+    "mobility": "Mobilitāte",
+    "survivability": "Dzīvīgums",
+    "other": "Cits"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Bojājumi minūtē"
+    },
+    "damage": {
+      "label": "Bojājumi",
+      "tip": "Alfa bojājumi"
+    },
+    "moduleDamage": {
+      "label": "Moduļu bojājumi"
+    },
+    "splashRadius": {
+      "label": "Sprādziena rādiuss"
+    },
+    "reload": {
+      "label": "Pārlāde",
+      "tip": "Pārlāde (pilns magazīns automātiskās lādēšanas tankiem)"
+    },
+    "rof": {
+      "label": "Šaušanas Ātrums",
+      "tip": "Šāvieni minūtē"
+    },
+    "intraClipReload": {
+      "label": "Pārlāde starp šāvieniem",
+      "tip": "Laiks starp šāvieniem magazīnā (automātiskās lādēšanas tankiem)"
+    },
+    "penetration": {
+      "label": "Cauršaušana",
+      "tip": "Cauršaušana (mm), noklusējuma lādiņš"
+    },
+    "caliber": {
+      "label": "Kalibrs",
+      "tip": "Lādiņa kalibrs (mm)"
+    },
+    "shellVelocity": {
+      "label": "Čaulītes Ātrums",
+      "tip": "Lādiņa ātrums (m/s)"
+    },
+    "accuracy": {
+      "label": "Precizitāte",
+      "tip": "Izkliede 100 m attālumā (mazāka ir labāka)"
+    },
+    "aimTime": {
+      "label": "Mērķēšanas laiks"
+    },
+    "dispMoving": {
+      "label": "Izkliede kustībā",
+      "tip": "Izkliedes koeficients kustības laikā"
+    },
+    "dispTankTraverse": {
+      "label": "Izkliede, pagriežot tanku"
+    },
+    "dispTurretTraverse": {
+      "label": "Izkliede, pagriežot torni"
+    },
+    "dispAfterShot": {
+      "label": "Izkliede pēc šāviena"
+    },
+    "dispWhileDamaged": {
+      "label": "Izkliede bojājumu laikā"
+    },
+    "gunArc": {
+      "label": "Lielgabala pagriešanas leņķis",
+      "tip": "Lielgabala horizontālais pagriešanas leņķis"
+    },
+    "depression": {
+      "label": "Lielgabala nolaišana / pacelšana",
+      "tip": "Lielgabala nolaišana / pacelšana"
+    },
+    "speed": {
+      "label": "Ātrums (uz priekšu / atpakaļ)",
+      "tip": "Maksimālais ātrums uz priekšu / atpakaļ (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Korpusa pagrieziens"
+    },
+    "turretTraverse": {
+      "label": "Tornīša pagrieziens"
+    },
+    "enginePower": {
+      "label": "Jauda",
+      "tip": "Dzinēja jauda (ZS)"
+    },
+    "powerWeight": {
+      "label": "Jauda/svars",
+      "tip": "ZS uz tonnu"
+    },
+    "terrainHard": {
+      "label": "Cieta grunts",
+      "tip": "Pretestība uz cieta reljefa (mazāka ir labāka)"
+    },
+    "terrainMedium": {
+      "label": "Vidējā reljefa"
+    },
+    "terrainSoft": {
+      "label": "Mīksta grunts"
+    },
+    "health": {
+      "label": "Izturība",
+      "tip": "Uzturēšanas punkti"
+    },
+    "engineHealth": {
+      "label": "Dzinēja veselība"
+    },
+    "engineFireChance": {
+      "label": "Dzinēja ugunsgrēka iespējamība"
+    },
+    "hullArmorFront": {
+      "label": "Korpusa bruņas (priekšā)",
+      "tip": "Korpusa priekšējās bruņas (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Torņa bruņas (priekšā)",
+      "tip": "Torņa priekšējās bruņas (mm)"
+    },
+    "trackArmor": {
+      "label": "Kāpurķēžu bruņas"
+    },
+    "trackHealth": {
+      "label": "Kāpurķēžu izturība"
+    },
+    "trackRepairTime": {
+      "label": "Kāpurķēžu remonta laiks"
+    },
+    "ammoRackHealth": {
+      "label": "Munīcijas plaukta izturība"
+    },
+    "weight": {
+      "label": "Svars"
+    },
+    "viewRange": {
+      "label": "Redzamība",
+      "tip": "Redzamības diapazons (m)"
+    },
+    "radioRange": {
+      "label": "Radiostaciju diapazons",
+      "tip": "Signāla diapazons (m)"
+    },
+    "camoStill": {
+      "label": "Maskēšanās stāvot"
+    },
+    "camoMoving": {
+      "label": "Maskēšanās kustībā"
+    },
+    "camoStillFiring": {
+      "label": "Stāvoša tankā kamuflāža pēc šaušanas"
+    },
+    "camoMovingFiring": {
+      "label": "Kustības kamuflāža pēc šaušanas"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "close": "Zatvori",
+  "format": "Format",
+  "here": "ovdje",
+  "in-the-queue": "U redu je i pojavit će se {where} nakon što je moderator pregleda. Tvoja će do tada na toj stranici biti zasivljena.",
+  "log-in-to-suggest-a": "Prijavi se za predlaganje taktike",
+  "on-map": "na {map}",
+  "players-per-team": "Igrača po timu",
+  "sending": "Slanje…",
+  "suggest": "Predloži",
+  "suggest-a-tactic": "Predloži taktiku",
+  "suggest-another": "Predloži drugi",
+  "suggestion-sent": "Prijedlog je poslan",
+  "tier": "Razina",
+  "what-to-submit": "Natjecateljska bitka, snimljena od sekunde kada počinje. Mapa počinje na {map} i prati video: klanska večer prolazi kroz rotaciju. Strana s koje se igralo jest podatak prema kojem je vođa napada traži, pa se unosi umjesto da se nagađa.",
+  "what-was-played": "Što je igrano"
+}

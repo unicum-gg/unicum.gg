@@ -1,0 +1,7 @@
+{
+  "badge-title": "合計ダメージ{combined}、このマークの基準値は{threshold}",
+  "empty": "このアカウントのプレイに対して、性能が不足している砲はありません。",
+  "gun-carries": "砲身が{marks}をキャリー",
+  "none": "なし",
+  "recent-window": " (30日)"
+}

@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Nâng chỉ số đánh giá",
+    "blurb": "Những xe tăng nâng chỉ số tổng thể lên: bỏ chúng đi sẽ làm giảm chỉ số đánh giá.",
+    "empty": "Không có xe tăng nào nâng chỉ số tổng thể."
+  },
+  "drag": {
+    "heading": "Kéo tụt chỉ số đánh giá",
+    "blurb": "Xe tăng kéo tụt tổng thể: loại bỏ chúng sẽ nâng chỉ số đánh giá.",
+    "empty": "Không có xe tăng nào kéo tụt tổng thể."
+  },
+  "if-removed": "{delta} nếu bị loại bỏ"
+}

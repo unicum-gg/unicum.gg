@@ -1,0 +1,34 @@
+{
+  "stat": "สถิติ",
+  "rows": {
+    "battles": "การรบ",
+    "tier": "ระดับ",
+    "wins": "การชนะ",
+    "losses": "การแพ้",
+    "draws": "เสมอ",
+    "survived": "การรบที่รอดชีวิต",
+    "destroyed": "รถถังที่ทำลายได้",
+    "destruction-ratio": "อัตราส่วนการทำลาย",
+    "spotted": "รถถังที่ถูกตรวจพบ",
+    "damages": "ความเสียหาย",
+    "track-damages": "ความเสียหายจากล้อ",
+    "spotting-damages": "ความเสียหายจากการตรวจจับ",
+    "assisting-damages": "ความเสียหายจากการช่วยเหลือ",
+    "combined-damages": "ความเสียหายรวม",
+    "base-capture": "การยึดฐาน",
+    "base-defense": "การป้องกันฐาน",
+    "experience": "ประสบการณ์",
+    "hit-rate": "อัตราการโจมตีถูกต้อง",
+    "personal-rating": "ลำดับส่วนตัว",
+    "wtr": "คะแนนประเมิน World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "ทั้งหมด",
+    "day": "24 ชั่วโมงที่ผ่านมา",
+    "week": "7 วันที่ผ่านมา",
+    "month": "30 วันที่ผ่านมา"
+  }
+}

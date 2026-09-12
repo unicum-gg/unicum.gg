@@ -1,0 +1,9 @@
+{
+  "boosts": "Tăng cường {name}",
+  "directives": "Ứ.dụng K.thuật",
+  "directive-name": "Chỉ đạo {name}",
+  "grants-and-boosts": "Cung cấp và tăng cường kỹ năng kíp lái, ngay cả khi chưa được huấn luyện.",
+  "grants-only": "Cung cấp kỹ năng kíp lái trong trận đấu, không có chỉ số được liệt kê.",
+  "enhances-mounted": "Tăng cường {name} đã lắp.",
+  "mount-to-use": "Lắp {name} để sử dụng chỉ lệnh này."
+}

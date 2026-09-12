@@ -1,0 +1,9 @@
+{
+  "battle-time": "Thời gian chiến đấu",
+  "camouflage": "{camouflage} ngụy trang",
+  "mode": "Chế độ",
+  "n-random-events": "{count, plural, other {# sự kiện ngẫu nhiên}}",
+  "random-events": "Sự kiện ngẫu nhiên",
+  "size": "Kích thước",
+  "team-size": "Kích thước đội"
+}

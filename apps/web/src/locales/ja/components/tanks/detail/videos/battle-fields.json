@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "終了時の状況",
+  "loading-maps": "マップを読み込み中…",
+  "map": "マップ",
+  "mode": "モード",
+  "pick-a-map": "マップを選択",
+  "pick-a-mode": "モードを選択",
+  "result": "結果",
+  "spawn": "出現",
+  "team": "チーム {team}",
+  "team-spawn": "チーム{team} · {direction}",
+  "which-side-you-started": "開始した側"
+}

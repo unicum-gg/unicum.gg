@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Apžvalga",
+    "tanks": "Tankai",
+    "videos": "Vaizdo įrašai",
+    "tournaments": "Turnyrai",
+    "manage": "Tvarkyti"
+  },
+  "section-count": "{section} ({count})"
+}

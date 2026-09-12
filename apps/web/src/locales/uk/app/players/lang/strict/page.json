@@ -1,0 +1,6 @@
+{
+  "title": "Суворо гравці World of Tanks із мовою {language} ({region})",
+  "description": "{name}: таблиця лідерів гравців у регіоні {region}, для яких припущена мова історії клану виключно {language}, з рейтингом за WNX.",
+  "og-title": "Суворо гравці з мовою {language}",
+  "og-subtitle": "Таблиця лідерів {region}"
+}

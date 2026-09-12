@@ -1,0 +1,12 @@
+{
+  "roster-of": "Sastav: {roster}",
+  "date": "Datum",
+  "tournament": "Turnir",
+  "mode": "Način",
+  "tier": "Nivo",
+  "format": "Format",
+  "team": "Tim",
+  "result": "Rezultat",
+  "team-captain": "Kapetan tima",
+  "registered-and-captained-this-team": "Registrovao se i bio kapiten ovog tima"
+}

@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Szukaj wśród {count} czołgów",
+    "rated-tanks": "Szukaj wśród {count} sklasyfikowanych czołgów",
+    "videos": "Szukaj wśród {count} filmów",
+    "players": "Szukaj wśród {count} graczy",
+    "clans": "Szukaj wśród {count} klanów",
+    "tournaments": "Szukaj wśród {count} turniejów",
+    "teams": "Szukaj wśród {count} drużyn"
+  },
+  "min": "Min.",
+  "max": "Maks.",
+  "none": "Brak",
+  "common-test": "Zmieniono w wersji Test ogólny: nowe i ponownie zbalansowane pojazdy",
+  "category": {
+    "standard": "Standardowy",
+    "premium": "Premium",
+    "reward": "Nagroda"
+  },
+  "moe": {
+    "0": "Jeszcze nie ma odznaki biegłości",
+    "1": "1 znaczek",
+    "2": "2 znaczki",
+    "3": "3 znaczki"
+  },
+  "mom": {
+    "0": "Jeszcze nie ma odznaki",
+    "1": "3. klasa",
+    "2": "2. klasa",
+    "3": "1. klasa",
+    "4": "Ace Tanker"
+  }
+}

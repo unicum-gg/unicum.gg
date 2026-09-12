@@ -1,0 +1,7 @@
+{
+  "group": "Група {order}",
+  "n-teams": "{count} каманд",
+  "pts": "Pts",
+  "team": "Каманда",
+  "top-n-advance": ", далей праходзяць лепшыя {count}"
+}

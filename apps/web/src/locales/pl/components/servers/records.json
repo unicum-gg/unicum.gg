@@ -1,0 +1,6 @@
+{
+  "all-time-record": "Wszystkie czasy rekord",
+  "average-last": "Średnia, ostatnie: {label}",
+  "low-last": "Minimum, ostatnie: {label}",
+  "peak-last": "Maksimum, ostatnie: {label}"
+}

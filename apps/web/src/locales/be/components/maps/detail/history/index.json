@@ -1,0 +1,12 @@
+{
+  "added": "Дададзена",
+  "before-update": "Да абнаўлення {version}",
+  "common-test": "Агульны тест",
+  "every-update-that-changed-this": "Кожнае абнаўленне, якое змяніла гэтую карту, спачатку новыя, паводле даных самога гульнявога кліента.",
+  "in-the-game": "У гульні",
+  "n-changes": "{count, plural, one {# змена} few {# змены} many {# змен} other {# змены}}",
+  "not-released-wargaming-can-still": "Не выпушчана. Wargaming яшчэ можа змяніць або скасаваць што заўгодна з гэтага да выхаду абнаўлення.",
+  "removed": "Выдаліць",
+  "title": "Змены на {map}",
+  "update": "Абнаўленне {version}"
+}

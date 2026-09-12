@@ -1,0 +1,12 @@
+{
+  "aria-build": "Dane z klienta Testu ogólnego, kompilacja {version}",
+  "aria-changes": "Zmienione przez Test ogólny: {changes} charakterystyk",
+  "aria-described": "Test ogólny: {description}",
+  "aria-vehicle": "Pojazd z Testu ogólnego",
+  "common-test": "Test ogólny",
+  "common-test-build": "Test ogólny {version}",
+  "tip-build": "{label} · to wartości z kompilacji testowej, które Wargaming może jeszcze zmienić przed wydaniem aktualizacji",
+  "tip-changes": "Zmiany Testu ogólnego na tym pojeździe {changes, plural, one {# charakterystyka} few {# charakterystyki} many {# charakterystyk} other {# charakterystyk}}",
+  "tip-described": "Test ogólny · {description}",
+  "tip-vehicle": "Test ogólny · jeszcze niewydany, więc nie ma statystyk bitew, a jego charakterystyki mogą się jeszcze zmienić"
+}

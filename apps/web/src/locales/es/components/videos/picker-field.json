@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Limpiar {label}",
+  "credited-on-the-clan-s": "Acreditado en la propia página del Clan.",
+  "none": "Ninguno",
+  "optional": "(opcional)",
+  "pick-the-vehicle": "Elegir el vehículo",
+  "search-for-a-clan": "Buscar un Clan",
+  "search-for-a-vehicle": "Buscar un vehículo",
+  "search-tank": "Buscar tanque...",
+  "tank": "Tanque",
+  "tank-hint-optional": "A táctica pertenece a su mapa, así que solo tiene valor indicar el vehículo cuando el vídeo también trata sobre él.",
+  "tank-hint-required": "Una batalla aleatoria se identifica por el vehículo con el que se ha visto que se jugó."
+}

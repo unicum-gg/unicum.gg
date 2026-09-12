@@ -1,0 +1,13 @@
+{
+  "heading": "Mga nangungunang manlalaro sa <accent>{mode}</accent>",
+  "intro": "Ang {mode} ay battle royale mode ng World of Tanks. Ang talaan ng ranggo ng {region}, niraranggo ayon sa HR, na may pinakamababang 100 labanan sa {mode}.",
+  "board": "Nangungunang {count} manlalaro sa {mode}",
+  "columns": {
+    "player": "Manlalaro",
+    "battles": "Mga labanan",
+    "survival": "Buhay",
+    "survival-percent": "Buhay %",
+    "damage": "Avg na pinsala"
+  },
+  "scale-description": "Mga threshold ng kulay para sa board ng {mode}, na naka-calibrate sa populasyon ng mga manlalarong may hindi bababa sa 100 laban sa {mode}."
+}

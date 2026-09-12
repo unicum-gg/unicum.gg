@@ -1,0 +1,18 @@
+{
+  "search": "Buscar",
+  "search-open": "Buscar",
+  "search-close": "Cerrar Buscar",
+  "search-empty": "No se encontraron resultados",
+  "theme-toggle": "Cambiar tema",
+  "theme-light": "Ligero",
+  "theme-dark": "Oscuro",
+  "theme-system": "Sistema",
+  "toc": "En esta página",
+  "toc-empty": "Sin encabezados",
+  "sidebar-open": "Abrir barra lateral",
+  "sidebar-close": "Cerrar barra lateral",
+  "sidebar-collapse": "Colapsar barra lateral",
+  "page-previous": "Página anterior",
+  "page-next": "Siguiente página",
+  "language": "Elige un idioma"
+}

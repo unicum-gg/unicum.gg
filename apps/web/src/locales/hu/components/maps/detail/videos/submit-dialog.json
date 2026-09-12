@@ -1,0 +1,17 @@
+{
+  "close": "Bezárás",
+  "format": "Formátum",
+  "here": "itt",
+  "in-the-queue": "A várólistán van, és megjelenik {where}, amint egy moderátor ellenőrizte. Addig a te beküldésed szürkítve látható azon az oldalon.",
+  "log-in-to-suggest-a": "Bejelentkezés taktika javaslatához",
+  "on-map": "a {map}-on",
+  "players-per-team": "Játékosok csapatonként",
+  "sending": "Küldés…",
+  "suggest": "Javasolj",
+  "suggest-a-tactic": "Taktika javaslata",
+  "suggest-another": "Javasolj egy másikat",
+  "suggestion-sent": "Javaslat elküldve",
+  "tier": "szint",
+  "what-to-submit": "Egy kompetitív csata, amely pontosan a kezdés pillanatában indul. A kezdő pálya {map}, majd a térkép a videóval együtt vált, mivel egy klánest során a pályák rotációban követik egymást. A csataparancsnok a játszott oldal alapján keres rá, ezért ezt meg kell adni, nem pedig megtippelni.",
+  "what-was-played": "Mi volt lejátszva"
+}

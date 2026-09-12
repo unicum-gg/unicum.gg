@@ -1,0 +1,8 @@
+{
+  "battles": "{count} bitke",
+  "no-votes": "nema glasova",
+  "rated-higher": "Iskusniji igrači ga ocjenjuju {stars} zvjezdica više od ostatka servera. Ovaj tenk nagrađuje znanje.",
+  "rated-lower": "Iskusniji igrači ga ocjenjuju {stars} zvjezdica niže od ostatka servera. Laska ti dok se od njega ne zatraži da nešto uradi.",
+  "votes": "{count} glasova",
+  "votes-one": "{count} glas"
+}

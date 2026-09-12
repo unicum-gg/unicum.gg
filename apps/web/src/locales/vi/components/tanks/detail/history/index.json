@@ -1,0 +1,12 @@
+{
+  "before-update": "Trước bản cập nhật {version}",
+  "common-test": "Kiểm tra chung",
+  "in-common-test-not-released": "Trong Kiểm tra chung, chưa phát hành",
+  "introduced": "Được giới thiệu",
+  "lifecycle": "Chu kỳ sống",
+  "n-buffed": "{count} được tăng sức mạnh",
+  "n-nerfed": "{count} bị giảm sức mạnh",
+  "not-released-wargaming-can-still": "Chưa phát hành. Wargaming vẫn có thể thay đổi hoặc loại bỏ bất kỳ nội dung nào trước khi bản cập nhật được phát hành.",
+  "status": "Trạng thái",
+  "update": "Cập nhật {version}"
+}

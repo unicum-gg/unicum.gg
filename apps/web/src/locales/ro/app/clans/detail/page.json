@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name}, clan World of Tanks ({region}), {members} membri",
+    "description": "{name} [{tag}] în {region}: {members} membri, tabel complet al membrilor cu ratinguri WN8 și WNX, activitate recentă de intrare și plecare și istoricul clanului."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name}, statistici de fortăreață ({region})",
+    "description": "Performanța în fortăreață a clanului {name} [{tag}] în {region}: ratinguri pentru încăierări și avansuri, bătălii și rată de victorii pentru fiecare membru."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name}, statistici Clan Wars ({region})",
+    "description": "Performanța clanului {name} [{tag}] în Clan Wars în {region}: ratinguri, bătălii și rată de victorii pentru fiecare membru în campaniile de pe harta globală."
+  },
+  "tanks": {
+    "title": "[{tag}] {name}, tancuri ({region}), vehiculele clanului",
+    "description": "Fiecare vehicul jucat de {name} [{tag}] în {region}, cu bătălii, rată de victorii și daune medii agregate pentru membrii clanului."
+  },
+  "manage": {
+    "title": "[{tag}] {name}, rezerve de fortăreață ({region})",
+    "description": "Activează și programează rezervele de fortăreață ale clanului {name} [{tag}]. Doar pentru ofițeri."
+  },
+  "missing": {
+    "description": "[{tag}] Clan World of Tanks în {region}: tabelul membrilor cu ratinguri WN8/WNX, activitate de intrare și plecare, bătălii recente și istoricul complet al clanului."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Verbuotojas",
+  "personnel_officer": "Personalo karininkas",
+  "quartermaster": "Iždininkas",
+  "executive_officer": "Vado pavaduotojas",
+  "recruit": "Naujokas",
+  "private": "Eilinis",
+  "commander": "Vadas",
+  "reservist": "Rezervistas",
+  "combat_officer": "Karo lauko vadas",
+  "junior_officer": "Jaunesnysis karininkas",
+  "intelligence_officer": "Žvalgybos karininkas"
+}

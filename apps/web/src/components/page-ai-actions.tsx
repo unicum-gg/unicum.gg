@@ -1,13 +1,14 @@
 "use client";
 
 import { ArrowSquareOutIcon } from "@phosphor-icons/react";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
 import {
   AnthropicIcon,
   OpenAiIcon,
   SciraIcon,
 } from "@/components/brand-icons";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { useTranslation } from "@/hooks/use-translation";
 import APP from "@/constants/app";
 
 /**
@@ -21,23 +22,24 @@ import APP from "@/constants/app";
  * it. It answered from its own index instead of ever requesting the page.
  */
 export function PageAiActions() {
+  const { t } = useTranslation("components/actions-menu");
   const pathname = usePathname();
   const mdUrl = `${APP.URL}${pathname}.md`;
   const q = `Read this World of Tanks stats page and help me analyze it: ${mdUrl}`;
 
   const targets = [
     {
-      label: "Open in ChatGPT",
+      name: "ChatGPT",
       icon: <OpenAiIcon />,
       href: `https://chatgpt.com/?${new URLSearchParams({ hints: "search", prompt: q })}`,
     },
     {
-      label: "Open in Claude",
+      name: "Claude",
       icon: <AnthropicIcon />,
       href: `https://claude.ai/new?${new URLSearchParams({ q })}`,
     },
     {
-      label: "Open in Scira AI",
+      name: "Scira AI",
       icon: <SciraIcon />,
       href: `https://scira.ai/?${new URLSearchParams({ q })}`,
     },
@@ -45,11 +47,13 @@ export function PageAiActions() {
 
   return (
     <>
-      {targets.map((t) => (
-        <DropdownMenuItem key={t.href} asChild>
-          <a href={t.href} target="_blank" rel="nofollow noopener noreferrer">
-            {t.icon}
-            {t.label}
+      {targets.map((target) => (
+        <DropdownMenuItem key={target.href} asChild>
+          <a href={target.href} target="_blank" rel="nofollow noopener noreferrer">
+            {target.icon}
+            {/* One sentence with the product as a hole, not three labels: the
+                three differ only by a name that is never translated. */}
+            {t("open-in", { target: target.name })}
             <ArrowSquareOutIcon className="ml-auto size-3 text-fd-muted-foreground" />
           </a>
         </DropdownMenuItem>

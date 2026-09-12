@@ -1,0 +1,5 @@
+{
+  "compare-tank": "เปรียบเทียบ {tank}",
+  "pick-up-to-vehicles-to": "เลือกยานพาหนะได้สูงสุด {max} คันเพื่อเปรียบเทียบ",
+  "remove-from-comparison": "นำ {tank} ออกจากการเปรียบเทียบ"
+}

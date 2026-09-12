@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Munition, Zubehör, Verbrauchsmaterial, Direktiven, Besatzung und Fortschritt für diese Spalte. Jede Änderung wirkt sich auf die Werte dieses Fahrzeugs im nachfolgenden Vergleich aus.",
+  "ammunition-equipment-crew-and-progression": "Munition, Zubehör, Besatzung und Fortschritt",
+  "apply-to-every-column": "Auf jede Spalte anwenden",
+  "compare-against": "Mit {tank} vergleichen",
+  "compare-the-others-against-this-one": "Die anderen mit diesem vergleichen",
+  "configure-tank": "{tank} konfigurieren",
+  "highest-overall-score": "Höchste Wertung insgesamt",
+  "highest-overall-score-of-this": "Insgesamt höchste Wertung in diesem Vergleich",
+  "is-the-reference": "{tank} ist die Referenz",
+  "overall": "Insgesamt",
+  "reference-column": "Referenzspalte",
+  "remove-tank": "{tank} entfernen",
+  "reset-all": "Alles zurücksetzen",
+  "setup": "Setup",
+  "stock": "Standard",
+  "tank-setup": "{tank}-Setup",
+  "top": "Beste",
+  "where-this-vehicle-sits-across": "Wo dieses Fahrzeug im gesamten Katalog steht, bei maximal {MAXSCORE} Punkten: der Durchschnitt seiner vier Kategoriewertungen mit der hier gewählten Konfiguration. Eine Zusammenfassung, kein Urteil. Ein Aufklärer und ein schwerer Panzer erreichen dieselbe Punktzahl, weil sie in unterschiedlichen Bereichen gut sind."
+}

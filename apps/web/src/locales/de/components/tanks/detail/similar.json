@@ -1,0 +1,11 @@
+{
+  "compare": "Vergleichen mit den {count} ähnlichsten",
+  "match": "Gefecht",
+  "subtitle": "Gleicher Rang innerhalb der jeweiligen Stufe",
+  "verdict": {
+    "overall": "Ähnlich insgesamt",
+    "closest": "Am ähnlichsten bei {axes}",
+    "closest-furthest": "Am ähnlichsten bei {axes}, am unähnlichsten bei {apart}",
+    "and": "und"
+  }
+}

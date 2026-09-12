@@ -1,0 +1,12 @@
+{
+  "added": "Lagt til",
+  "before-update": "Før oppdatering {version}",
+  "common-test": "Vanlig test",
+  "every-update-that-changed-this": "Hver oppdatering som endret dette kartet, nyeste først, lest direkte fra spillklienten.",
+  "in-the-game": "I spillet",
+  "n-changes": "{count, plural, one {# endring} other {# endringer}}",
+  "not-released-wargaming-can-still": "Ikke utgitt. Wargaming kan fortsatt endre eller forkaste dette før oppdateringen leveres.",
+  "removed": "Fjernet",
+  "title": "Endringer for {map}",
+  "update": "Oppdatér {version}"
+}

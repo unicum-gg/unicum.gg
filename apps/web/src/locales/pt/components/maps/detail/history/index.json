@@ -1,0 +1,12 @@
+{
+  "added": "Adicionado",
+  "before-update": "Antes da atualização {version}",
+  "common-test": "Teste Comum",
+  "every-update-that-changed-this": "Todas as atualizações que alteraram este mapa, da mais recente para a mais antiga, obtidas diretamente do cliente do jogo.",
+  "in-the-game": "No jogo",
+  "n-changes": "{count, plural, one {# alteração} other {# alterações}}",
+  "not-released-wargaming-can-still": "Ainda não foi lançado. Wargaming ainda pode alterar ou remover qualquer parte deste conteúdo antes de a atualização ser lançada.",
+  "removed": "Removido",
+  "title": "Alterações em {map}",
+  "update": "Atualizar {version}"
+}

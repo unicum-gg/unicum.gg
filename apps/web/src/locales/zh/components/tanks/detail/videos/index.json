@@ -1,0 +1,10 @@
+{
+  "empty": "暂无视频",
+  "see-all": "查看全部 →",
+  "see-all-count": "查看全部（{count}）→",
+  "watch-on-youtube": "在YouTube上查看",
+  "play": "播放 {title}",
+  "log-in": "登录后建议视频",
+  "dmg": "伤害",
+  "no-community-video-for-the": "{tankName}暂无社区视频。建议一个视频，版主查看后就会显示在这里。"
+}

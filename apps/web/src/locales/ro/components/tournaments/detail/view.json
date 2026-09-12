@@ -1,0 +1,11 @@
+{
+  "closes": "Închide {when}",
+  "map-pool": "Piața hărților",
+  "place": "Loc",
+  "prize": "Premiu",
+  "prizes": "Premii",
+  "qualified": "Calificați ({count})",
+  "register": "Înregistrare",
+  "tournaments": "Turneele",
+  "winner": "{count, plural, one {Câștigător} few {Câștigători} other {Câștigători}}"
+}

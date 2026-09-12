@@ -1,0 +1,22 @@
+{
+  "search": "Caută {count} termeni",
+  "search-label": "Caută în glosar",
+  "all": "Toate",
+  "jump": "Sari la literă",
+  "empty": "Niciun termen nu corespunde cu „{query}”.",
+  "categories": {
+    "vehicles": "Vehicule",
+    "gunnery": "Artilerie",
+    "armor": "Blindaj",
+    "mobility": "Mobilitate",
+    "vision": "Viziune",
+    "crew": "Echipaj",
+    "progression": "Progresie",
+    "economy": "Economia",
+    "ratings": "Clasamente",
+    "statistics": "Statistici",
+    "modes": "Moduri de bătălie",
+    "tactics": "Tactici",
+    "slang": "Argou"
+  }
+}

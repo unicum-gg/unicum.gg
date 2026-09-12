@@ -1,0 +1,7 @@
+{
+  "loading": "Liczba pojazdów poziomu {tier}: {count}. Wczytywanie nazw…",
+  "loading-one": "Pojazd poziomu {tier}: {count}. Wczytywanie jego nazwy…",
+  "and-more": "i jeszcze {count}",
+  "hint": "Kliknij, aby otworzyć je w zakładce Czołgi",
+  "tier": "Poziom"
+}

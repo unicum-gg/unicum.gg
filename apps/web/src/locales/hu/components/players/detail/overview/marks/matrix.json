@@ -1,0 +1,7 @@
+{
+  "loading": "{count} {tier}. szintű jármű, nevek betöltése…",
+  "loading-one": "{count} {tier}. szintű jármű, nevének betöltése…",
+  "and-more": "és még {count}",
+  "hint": "Kattints rájuk a Tankok lapon való megnyitáshoz",
+  "tier": "szint"
+}

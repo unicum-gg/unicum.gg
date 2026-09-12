@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   CaretDownIcon,
   CaretUpDownIcon,
@@ -26,16 +27,18 @@ import { TablePager, usePagination } from "@/components/table-pager";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
 import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
 import { cn } from "@/lib/utils";
+import { FilterSubject } from "@/components/filter-subject";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const decFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const DEC_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 enum SortColumn {
   Name = "name",
@@ -137,10 +140,14 @@ function SortableHead({
         active ? "text-foreground" : "",
       )}
     >
-      {children}
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
       <Icon
         weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
       />
     </button>
   );
@@ -166,6 +173,9 @@ export function ClanVehiclesTable({
 }: {
   vehicles: ClanVehicleRow[];
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/clans/detail/tanks/table");
+  const { t: tCol } = useTranslation("components/columns");
   const { region } = useRegion();
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
@@ -191,13 +201,13 @@ export function ClanVehiclesTable({
   // selected metric, like the column it filters.
   const rangeCols: RangeColumn<Row>[] = useMemo(
     () => [
-      { key: "members", label: "Members", value: (r) => r.memberCount },
-      { key: "battles", label: "Battles", value: (r) => r.battles },
-      { key: "avgDamage", label: "Avg damage", value: (r) => r.avgDamage },
-      { key: "avgXp", label: "Avg XP", value: (r) => r.avgXp },
+      { key: "members", label: tCol("members"), value: (r) => r.memberCount },
+      { key: "battles", label: tCol("battles"), value: (r) => r.battles },
+      { key: "avgDamage", label: tCol("avg-damage"), value: (r) => r.avgDamage },
+      { key: "avgXp", label: tCol("avg-xp"), value: (r) => r.avgXp },
       {
         key: "winrate",
-        label: "WR %",
+        label: tCol("winrate"),
         value: (r) => (r.winrate != null ? r.winrate * 100 : null),
       },
       {
@@ -206,7 +216,7 @@ export function ClanVehiclesTable({
         value: (r) => r.rating,
       },
     ],
-    [metric],
+    [metric, tCol],
   );
 
   const { filtered, filters } = useTankFilters(rows, rangeCols, "battles");
@@ -231,8 +241,7 @@ export function ClanVehiclesTable({
   if (rows.length === 0) {
     return (
       <p className="p-4 text-sm text-muted-foreground">
-        No tank data for this clan yet.
-      </p>
+        {t("no-tank-data-for-this")}</p>
     );
   }
 
@@ -247,13 +256,12 @@ export function ClanVehiclesTable({
   return (
     <>
       <div className="p-4">
-        <TankFilterBar filters={filters} searchNoun="tanks" />
+        <TankFilterBar filters={filters} searchNoun={FilterSubject.Tanks} />
       </div>
       <div className="border-t border-fd-border">
         {sorted.length === 0 ? (
           <p className="p-4 text-sm text-muted-foreground">
-            No tanks match these filters.
-          </p>
+            {t("no-tanks-match-these-filters")}</p>
         ) : (
           <>
             <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
@@ -267,8 +275,7 @@ export function ClanVehiclesTable({
                     hideOnMobile
                     headClassName="w-px"
                   >
-                    Nation
-                  </SortableHead>
+                    {t("nation")}</SortableHead>
                   <SortableHead
                     column={SortColumn.Type}
                     state={sort}
@@ -277,8 +284,7 @@ export function ClanVehiclesTable({
                     hideOnMobile
                     headClassName="w-px"
                   >
-                    Type
-                  </SortableHead>
+                    {t("type")}</SortableHead>
                   <SortableHead
                     column={SortColumn.Tier}
                     state={sort}
@@ -287,39 +293,34 @@ export function ClanVehiclesTable({
                     hideOnMobile
                     headClassName="w-px"
                   >
-                    Tier
-                  </SortableHead>
+                    {t("tier")}</SortableHead>
                   <SortableHead
                     column={SortColumn.Name}
                     state={sort}
                     onToggle={toggleSort}
                   >
-                    Name
-                  </SortableHead>
+                    {t("name")}</SortableHead>
                   <SortableHead
                     column={SortColumn.Members}
                     state={sort}
                     onToggle={toggleSort}
                     align="end"
                   >
-                    Members
-                  </SortableHead>
+                    {t("members")}</SortableHead>
                   <SortableHead
                     column={SortColumn.Battles}
                     state={sort}
                     onToggle={toggleSort}
                     align="end"
                   >
-                    Battles
-                  </SortableHead>
+                    {t("battles")}</SortableHead>
                   <SortableHead
                     column={SortColumn.AvgDamage}
                     state={sort}
                     onToggle={toggleSort}
                     align="end"
                   >
-                    Avg damage
-                  </SortableHead>
+                    {t("avg-damage")}</SortableHead>
                   <SortableHead
                     column={SortColumn.AvgXp}
                     state={sort}
@@ -327,16 +328,14 @@ export function ClanVehiclesTable({
                     align="end"
                     hideOnMobile
                   >
-                    Avg XP
-                  </SortableHead>
+                    {t("avg-xp")}</SortableHead>
                   <SortableHead
                     column={SortColumn.WinRate}
                     state={sort}
                     onToggle={toggleSort}
                     align="end"
                   >
-                    WR
-                  </SortableHead>
+                    {t("wr")}</SortableHead>
                   <SortableHead
                     column={SortColumn.Rating}
                     state={sort}
@@ -383,18 +382,18 @@ export function ClanVehiclesTable({
                         {r.shortName || r.name || `#${r.tankId}`}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
-                        {intFmt.format(r.memberCount)}
+                        {num(INT_FORMAT).format(r.memberCount)}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
-                        {intFmt.format(r.battles)}
+                        {num(INT_FORMAT).format(r.battles)}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
                         {r.avgDamage !== null
-                          ? intFmt.format(r.avgDamage)
+                          ? num(INT_FORMAT).format(r.avgDamage)
                           : "—"}
                       </TableCell>
                       <TableCell className="hidden text-right tabular-nums sm:table-cell">
-                        {r.avgXp !== null ? intFmt.format(r.avgXp) : "—"}
+                        {r.avgXp !== null ? num(INT_FORMAT).format(r.avgXp) : "—"}
                       </TableCell>
                       <TableCell
                         className={cn(
@@ -404,7 +403,7 @@ export function ClanVehiclesTable({
                         )}
                       >
                         {r.winrate !== null
-                          ? `${pctFmt.format(r.winrate * 100)}%`
+                          ? `${num(PCT_FORMAT).format(r.winrate * 100)}%`
                           : "—"}
                       </TableCell>
                       <TableCell
@@ -414,7 +413,7 @@ export function ClanVehiclesTable({
                             RATING_COLOR_CLASS[ratingColor(r.rating)],
                         )}
                       >
-                        {r.rating !== null ? decFmt.format(r.rating) : "—"}
+                        {r.rating !== null ? num(DEC_FORMAT).format(r.rating) : "—"}
                       </TableCell>
                     </TableRow>
                   );

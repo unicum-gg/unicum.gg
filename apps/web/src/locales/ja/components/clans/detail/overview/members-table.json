@@ -1,0 +1,11 @@
+{
+  "player": "プレイヤー",
+  "role": "役割",
+  "battles": "戦闘数",
+  "joined": "参加した",
+  "period": "30日間の{metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

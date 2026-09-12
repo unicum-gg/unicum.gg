@@ -1,19 +1,14 @@
 "use client";
 
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
+import { useFormat } from "@/hooks/use-format";
 import type { ExpenseLedger } from "@unicum.gg/shared";
 import { useMoney } from "@/hooks/use-money";
 
-const monthFmt = new Intl.DateTimeFormat("en-US", {
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-});
-const rangeFmt = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const MONTH_PATTERN = "MMMM yyyy" /* UTC */;
+const RANGE_PATTERN = "d MMM yyyy" /* UTC */;
 
 export type InfraCosts = ExpenseLedger;
 
@@ -34,27 +29,24 @@ export type InfraCosts = ExpenseLedger;
  * therefore the currency) is only known in the browser.
  */
 export function CostBreakdown({ costs }: { costs: InfraCosts }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { date } = useFormat();
+  const { t } = useTranslation("components/coverage/cost-breakdown");
   const money = useMoney();
   return (
     <div className="space-y-6">
       <div className="space-y-1">
         <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-          Estimated annual cost
-        </div>
+          {t("estimated-annual-cost")}</div>
         <div className="font-heading text-4xl font-bold tabular-nums text-brand">
           {money.format(costs.totalAnnualEur, 2)}
         </div>
         <div className="text-sm text-fd-muted-foreground">
-          A fixed {money.format(costs.totalAnnualEur / 12, 2)}/month bill, no
-          surprises: one rented server, no third-party SaaS in the data path. It
-          only grows when we outgrow the server (more Wargaming throughput means
-          more egress IPs).
-        </div>
+          {t("fixed-month-bill-no-surprises", { totalAnnualEur: money.format(costs.totalAnnualEur / 12, 2) })}</div>
       </div>
       <div className="space-y-1.5">
         <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-          Cost breakdown
-        </div>
+          {t("cost-breakdown")}</div>
         <ul className="divide-y divide-fd-border text-sm">
           {costs.recurring.map((line) => (
             <li
@@ -62,7 +54,7 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
               className="flex items-start justify-between gap-4 py-2"
             >
               <span>
-                <span className="text-fd-foreground">{line.label}</span>
+                <span className="text-fd-foreground">{statLabel(line.label, tStats)}</span>
                 {line.note && (
                   <span className="block text-xs text-fd-muted-foreground">
                     {line.note}
@@ -70,7 +62,7 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
                 )}
               </span>
               <span className="tabular-nums">
-                {line.eurAnnual > 0 ? money.format(line.eurAnnual, 2) : "free"}
+                {line.eurAnnual > 0 ? money.format(line.eurAnnual, 2) : t("free")}
               </span>
             </li>
           ))}
@@ -79,8 +71,7 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
       {costs.past.length > 0 && (
         <div className="space-y-1.5">
           <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-            Previously
-          </div>
+            {t("previously")}</div>
           <ul className="divide-y divide-fd-border text-sm">
             {costs.past.map((line) => (
               <li
@@ -88,9 +79,9 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
                 className="flex items-start justify-between gap-4 py-2"
               >
                 <span>
-                  <span className="text-fd-foreground">{line.label}</span>
+                  <span className="text-fd-foreground">{statLabel(line.label, tStats)}</span>
                   <span className="block text-xs text-fd-muted-foreground">
-                    {rangeFmt.formatRange(
+                    {date(RANGE_PATTERN).formatRange(
                       new Date(line.from),
                       new Date(line.to ?? line.from),
                     )}
@@ -110,8 +101,7 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
       {costs.oneOff.length > 0 && (
         <div className="space-y-1.5">
           <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-            One-off spend
-          </div>
+            {t("one-off-spend")}</div>
           <ul className="divide-y divide-fd-border text-sm">
             {costs.oneOff.map((line) => (
               <li
@@ -119,9 +109,9 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
                 className="flex items-start justify-between gap-4 py-2"
               >
                 <span>
-                  <span className="text-fd-foreground">{line.label}</span>
+                  <span className="text-fd-foreground">{statLabel(line.label, tStats)}</span>
                   <span className="block text-xs text-fd-muted-foreground">
-                    {monthFmt.format(new Date(line.incurredAt))}
+                    {date(MONTH_PATTERN).format(new Date(line.incurredAt))}
                     {line.note ? ` · ${line.note}` : ""}
                   </span>
                 </span>
@@ -130,14 +120,12 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
             ))}
           </ul>
           <p className="text-xs text-fd-muted-foreground">
-            Paid once, so it is not part of the monthly bill above. It still
-            counts toward what the project has cost so far.
-          </p>
+            {t("paid-once-so-it-is")}</p>
         </div>
       )}
       {money.converted && (
         <p className="text-xs text-fd-muted-foreground">
-          {`Billed in euros, converted to ${money.currency} at today's rate.`}
+          {t("billed-in-euros", { currency: money.currency })}
         </p>
       )}
     </div>

@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Slik endte det",
+  "loading-maps": "Laster inn kart…",
+  "map": "Kart",
+  "mode": "Modus",
+  "pick-a-map": "Velg et kart",
+  "pick-a-mode": "Velg en modus",
+  "result": "Resultat",
+  "spawn": "Spawning",
+  "team": "Lag {team}",
+  "team-spawn": "Lag {team} · {direction}",
+  "which-side-you-started": "Hvilken side du startet på"
+}

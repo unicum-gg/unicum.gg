@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Alles ändern, was falsch ist, einschließlich des Fahrzeugs. Beim Speichern wird das Video erneut in die Moderationswarteschlange gestellt. Ein bereits veröffentlichtes Video wird daher offline genommen, bis es erneut freigegeben wird.",
+  "correct-a-suggestion": "Einen Vorschlag korrigieren",
+  "could-not-load-that-suggestion": "Könnte diesen Vorschlag nicht laden. Versuche es gleich noch einmal.",
+  "link-expired": "Dieser Link ist abgelaufen. Drücke auf der Karte in Discord erneut auf Bearbeiten, um einen neuen zu erhalten.",
+  "loading": "Laden…",
+  "log-in": "Anmelden",
+  "log-in-with-the-account": "Anmelden mit dem Konto, von dem dieses Video vorgeschlagen wurde, um es zu korrigieren.",
+  "no-suggestion-with-that-id": "Es gibt keinen Vorschlag mit dieser ID.",
+  "not-yours-to-correct": "Du kannst diesen Vorschlag nicht korrigieren."
+}

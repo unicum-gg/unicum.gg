@@ -1,0 +1,8 @@
+{
+  "busiest": "सबसे व्यस्त {when} ({players})",
+  "not-enough-recorded-yet-to": "साप्ताहिक लय दिखाने के लिए अभी पर्याप्त रिकॉर्ड दर्ज नहीं हैं। सप्ताह के हर घंटे का नमूना मिलने पर यह भरता जाएगा।",
+  "not-sampled-yet": "अभी नमूना नहीं लिया गया",
+  "players-on-average": "औसतन {players} खिलाड़ी",
+  "quietest": ", सबसे शांत {when} ({players})",
+  "your-local-time": "आपका स्थानीय समय"
+}

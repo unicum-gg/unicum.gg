@@ -1,0 +1,7 @@
+{
+  "label": "Perioda Tabele",
+  "periods": {
+    "overall": "Ukupno",
+    "30d": "Poslednjih 30 dana"
+  }
+}

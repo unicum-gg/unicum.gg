@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. miejsce",
+    "2": "2. miejsce",
+    "3": "3. miejsce"
+  },
+  "streamer": "Streamer · oglądaj na Twitchu: {name}",
+  "tournament": {
+    "one": "Zwycięski skład · {title}",
+    "many": "W {count} zwycięskich składach, najlepszy wynik: {title}",
+    "featured": "{text} · wyróżnione wydarzenie",
+    "unnamed": "turniej Wargaming"
+  },
+  "tournament-wins": "{count, plural, one {# wygrana w turnieju} few {# wygrane w turnieju} many {# wygranych w turnieju} other {# wygranych w turnieju}}",
+  "watch-on-twitch": "Oglądaj na Twitchu: {name}",
+  "watch-on-twitch-viewers": "Oglądaj na Twitchu: {name} · {viewers} widzów"
+}

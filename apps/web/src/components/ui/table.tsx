@@ -87,7 +87,15 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
       data-slot="table-head"
-      className={cn("p-2 font-medium text-foreground first:ps-0", className)}
+      // `overflow-hidden` so a heading can never spill into the next column.
+      // Column widths are set for the English, and a translation is routinely
+      // longer: "Rating points" is "Points de classement" in French, half again
+      // as wide, and without this it was drawn straight over the numbers beside
+      // it. The heading gives way, not the layout.
+      className={cn(
+        "overflow-hidden p-2 font-medium text-foreground first:ps-0",
+        className,
+      )}
       {...props}
     />
   )

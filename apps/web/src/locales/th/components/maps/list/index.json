@@ -1,0 +1,9 @@
+{
+  "all": "ทั้งหมด",
+  "camouflage-map": "แผนที่{camouflage}",
+  "modes": "{count, plural, other {# โหมด}}",
+  "no-maps-match-your-filters": "ไม่มีแผนที่ตรงกับตัวกรองของคุณ",
+  "search": "ค้นหาจากแผนที่ {count} แห่ง",
+  "search-label": "ค้นหาแผนที่",
+  "special-map": "แผนที่พิเศษ"
+}

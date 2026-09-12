@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Link from "@/components/link";
+import { useRouter } from "@/hooks/use-router";
+import { useTranslation } from "@/hooks/use-translation";
 import type { MouseEvent } from "react";
 import { PanelHeader } from "@/components/panel";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,7 @@ export function TanksTabNav({
   basePath: string;
 }) {
   const router = useRouter();
+  const { t } = useTranslation("components/tanks/list/tabs");
 
   function selectTab(e: MouseEvent, next: TankTab) {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
@@ -40,19 +42,19 @@ export function TanksTabNav({
   return (
     <PanelHeader className="px-0! py-0!">
       <nav className="flex items-center overflow-x-auto text-sm">
-        {TANK_TABS.map((t) => (
+        {TANK_TABS.map((tab) => (
           <Link
-            key={t.id}
-            href={tankTabHref(basePath, t.id)}
-            onClick={(e) => selectTab(e, t.id)}
+            key={tab.id}
+            href={tankTabHref(basePath, tab.id)}
+            onClick={(e) => selectTab(e, tab.id)}
             className={cn(
               "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-              active === t.id
+              active === tab.id
                 ? "bg-fd-secondary/40 text-fd-foreground"
                 : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
             )}
           >
-            {t.label}
+            {t(tab.id)}
           </Link>
         ))}
       </nav>

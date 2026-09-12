@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Arvio (WN)",
+    "tip": "Näiden taisteluiden arvosana, ei tilin arvosana"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Voittoprosentti näistä taisteluista"
+  },
+  "avgDamage": {
+    "label": "Keskiv. vaurio"
+  },
+  "avgFrags": {
+    "label": "Keskimääräiset tappot",
+    "tip": "Tuhotut viholliset taistelua kohti"
+  },
+  "damageRatio": {
+    "label": "Vahinkosuhde",
+    "tip": "Aiheutettu vahinko suhteessa saatuun vahinkoon"
+  },
+  "kd": {
+    "label": "Tuhoamissuhde",
+    "tip": "Tuhotut viholliset suhteessa menetettyihin ajoneuvoihin"
+  },
+  "survivalRate": {
+    "label": "Selvittyjä taisteluita"
+  },
+  "avgSpotted": {
+    "label": "Kesk. havaittu",
+    "tip": "Havaitut viholliset taistelua kohti"
+  },
+  "avgDefense": {
+    "label": "Perustason puolustus",
+    "tip": "Puolustuspisteet taistelua kohti"
+  },
+  "avgXp": {
+    "label": "Kesk. XP"
+  }
+}

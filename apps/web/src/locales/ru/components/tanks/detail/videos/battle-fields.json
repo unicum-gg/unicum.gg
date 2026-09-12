@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Чем закончился бой",
+  "loading-maps": "Загрузка карт…",
+  "map": "Карта",
+  "mode": "Режим",
+  "pick-a-map": "Выбрать карту",
+  "pick-a-mode": "Выбрать режим",
+  "result": "Результат",
+  "spawn": "Появление",
+  "team": "Команда {team}",
+  "team-spawn": "Команда {team} · {direction}",
+  "which-side-you-started": "На какой стороне вы начали"
+}

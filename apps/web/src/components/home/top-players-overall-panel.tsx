@@ -1,7 +1,9 @@
 "use client";
 
+import { Interpolate } from "@/components/interpolate";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { Period, usePeriod } from "@/hooks/use-period";
+import { useTranslation } from "@/hooks/use-translation";
 import { PeriodSelect } from "@/components/home/period-select";
 import {
   TopPlayers,
@@ -35,6 +37,8 @@ export function TopPlayersOverallPanel({
   regionOverride?: Region;
 }) {
   const [period, setPeriod] = usePeriod();
+  const { t } = useTranslation("components/home/top-players-overall-panel");
+  const { t: tRanked } = useTranslation("components/home/ranked-by");
   const isOverall = period === Period.Overall;
   const data = isOverall ? overallByMetric : monthByMetric;
 
@@ -45,7 +49,7 @@ export function TopPlayersOverallPanel({
         className="flex items-center justify-between gap-3"
       >
         <PanelTitle>
-          Top players ·{" "}
+          {t("title")}{" "}
           <PeriodSelect period={period} onChange={setPeriod} />
         </PanelTitle>
         {isOverall && (
@@ -57,17 +61,10 @@ export function TopPlayersOverallPanel({
           <div key={m} data-rating-col={RATING_COL[m]}>
             <TopPlayers
               description={
-                isOverall ? (
-                  <>
-                    Ranked by all-time <RatingMetricInlineSelect /> (min. 20,000
-                    battles).
-                  </>
-                ) : (
-                  <>
-                    Ranked by <RatingMetricInlineSelect /> over the past 30 days
-                    (min. 600 battles).
-                  </>
-                )
+                <Interpolate
+                  template={tRanked(isOverall ? "overall" : "month")}
+                  values={{ metric: <RatingMetricInlineSelect /> }}
+                />
               }
               initial={data[i]}
               metric={m}

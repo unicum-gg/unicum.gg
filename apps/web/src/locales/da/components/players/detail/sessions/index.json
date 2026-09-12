@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Ingen session endnu. De vises, når denne konto er blevet udtaget to gange med kampe imellem, hvilket sker automatisk, når den spilles.",
+  "bar-height-is-battles-played": "Søjlehøjden er antal spillede kampe, farven er {granularity}s {metric}, i de samme intervaller som webstedet bruger alle andre steder.",
+  "title": "{nickname}’s sessioner",
+  "title-count": "Sessioner for {nickname} ({count})",
+  "granularity": {
+    "day": "dag",
+    "week": "uge",
+    "month": "måned",
+    "daily": "Daglig",
+    "weekly": "Ugentlig",
+    "monthly": "Månedlig"
+  },
+  "week-of": "Ugen fra {date}"
+}

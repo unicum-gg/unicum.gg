@@ -1,0 +1,18 @@
+{
+  "caught-up": "Fullt ajour, takk. Alt ekstra går til høyere kapasitet og nye funksjoner.",
+  "covered-label": "Dekket",
+  "covered-sentence": "Støttespillere har dekket {received} av de {spent} som er brukt så langt.",
+  "days-out-of-pocket": "{days} dager betalt av egen lomme",
+  "from-supporter-one": "fra {count} støttespiller",
+  "from-supporters": "fra {count} støttespillere",
+  "gap-growing": "{amount}/mnd mer hindrer gapet i å vokse.",
+  "goal": "mål {amount}",
+  "of-that-total": "av dette totalbeløpet",
+  "pledges-cover": "Tilsagnene dekker nå den månedlige regningen.",
+  "raised-amount": "{amount} samlet inn",
+  "raised-label": "Innsamlet",
+  "run-at-a-loss": "{name} har gått med underskudd siden {since}.",
+  "run-rate": "Månedlig kostnad: {pledged}/mnd lovet mot {cost}/mnd for drift.",
+  "spent-since-launch": "Brukt siden lansering",
+  "to-catch-up": "{amount} for å komme helt ajour."
+}

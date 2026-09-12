@@ -20,9 +20,8 @@ import type { Presentation } from "@/components/tanks/detail/viewer/presentation
 import { ShotPicker } from "@/components/tanks/detail/viewer/shot";
 import type { SkinFace } from "@/services/tank-viewer/styles";
 import type { HeroShell } from "@/components/tanks/detail/viewer/shell-rules";
+import { useTranslation } from "@/hooks/use-translation";
 import {
-  VIEW_LABEL,
-  VIEW_TOOLTIP,
   View,
 } from "@/components/tanks/detail/viewer/views";
 
@@ -152,6 +151,7 @@ export function ViewerControls({
   views: View[];
   onView: (next: View) => void;
 }) {
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
   const steel = view !== View.Visual;
   return (
     <TooltipProvider>
@@ -183,10 +183,12 @@ export function ViewerControls({
                         : "text-fd-muted-foreground hover:bg-fd-secondary/60 hover:text-fd-foreground"
                     }`}
                   >
-                    {VIEW_LABEL[one]}
+                    {tView(`views.${one}`)}
                   </button>
                 </TooltipTrigger>
-                <TooltipContent side="top">{VIEW_TOOLTIP[one]}</TooltipContent>
+                <TooltipContent side="top">
+                  {tView(`view-tooltips.${one}`)}
+                </TooltipContent>
               </Tooltip>
             ))}
           </Group>

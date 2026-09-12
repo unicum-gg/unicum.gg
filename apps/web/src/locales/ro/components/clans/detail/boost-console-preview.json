@@ -1,0 +1,19 @@
+{
+  "active-days": "Zile active",
+  "add-workflow": "Adaugă fluxul de lucru",
+  "connect-discord": "Conectează Discord",
+  "discord-notifications": "Notificări Discord",
+  "each-workflow-activates-its-reserves": "Fiecare flux își activează rezervele într-un interval de timp, după ce suficienți membri intră într-o sesiune de joc live. Rulează în contul tău, fără să fie nevoie să fii online. Adaugă câte ai nevoie.",
+  "enabled": "Activată",
+  "from": "De la",
+  "get-a-discord-message-in": "Primește un mesaj Discord pe un canal ales de tine de fiecare dată când se activează un bonus, astfel încât întregul clan să știe că este live.",
+  "log-in-with-wargaming-to": "Conectează-te cu Wargaming pentru configurare",
+  "min-online": "Min online",
+  "officers": "Ofițeri",
+  "only-an-officer-of-this": "Doar un ofițer al acestui clan poate face configurarea.",
+  "schedule-preview": "Previzualizare program",
+  "set-your-hours-and-reserves": "Setează o dată orele și rezervele. Bonusurile se activează singure la timp, chiar și când nu este nimeni prezent să apese butonul.",
+  "stronghold-boosts": "Îmbunătățiri de Fortăreață",
+  "times-are-in-your-timezone": "Orele sunt afișate în {tz}, fusul tău orar.",
+  "to": "Către"
+}

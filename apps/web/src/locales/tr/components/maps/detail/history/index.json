@@ -1,0 +1,12 @@
+{
+  "added": "Eklendi",
+  "before-update": "{version} güncellemesinden önce",
+  "common-test": "Ortak Test",
+  "every-update-that-changed-this": "Bu haritayı değiştiren her güncelleme, en yeniden başlayarak, doğrudan oyun istemcisinden okunur.",
+  "in-the-game": "Oyunda",
+  "n-changes": "{count, plural, one {# değişiklik} other {# değişiklikler}}",
+  "not-released-wargaming-can-still": "Yayınlanmadı. Wargaming, güncelleme yayınlanmadan önce bunların herhangi birini değiştirebilir veya kaldırabilir.",
+  "removed": "Kaldırıldı",
+  "title": "Değişiklikler {map} haritasında",
+  "update": "Güncelle {version}"
+}

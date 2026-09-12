@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "第 1 名",
+    "2": "第 2 名",
+    "3": "第 3 名"
+  },
+  "streamer": "主播 · 在 Twitch 上观看 {name}",
+  "tournament": {
+    "one": "{title} 的获胜名单成员",
+    "many": "加入过 {count} 个获胜名单，最佳成绩为 {title}",
+    "featured": "{text} · 特色活动",
+    "unnamed": "一场默认锦标赛"
+  },
+  "tournament-wins": "{count, plural, other {# 锦标赛胜利}}",
+  "watch-on-twitch": "在 Twitch 上观看 {name}",
+  "watch-on-twitch-viewers": "在 Twitch 上观看 {name} · {viewers} 名观众"
+}

@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks klanı ({region}), {members} üye",
+    "description": "{name} [{tag}], {region}: {members} üye, WN8 ve WNX puanlarının bulunduğu tam üye tablosu, son katılma/ayrılma etkinliği ve klan geçmişi."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} Kale istatistikleri ({region})",
+    "description": "{name} [{tag}] klanının {region} bölgesindeki Kale performansı: her üye için çatışma ve ilerleme puanları, savaşlar ve galibiyet oranı."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} Klan Savaşları istatistikleri ({region})",
+    "description": "{name} [{tag}] klanının {region} bölgesindeki Klan Savaşları performansı: küresel harita kampanyalarındaki üye başına puanlar, savaşlar ve galibiyet oranı."
+  },
+  "tanks": {
+    "title": "[{tag}] {name} tankları ({region}), klanın araçları",
+    "description": "{name} [{tag}] tarafından {region} bölgesinde oynanan her araç, klan üyelerinin genelinde hesaplanan savaşlar, galibiyet oranı ve ortalama hasarla birlikte."
+  },
+  "manage": {
+    "title": "[{tag}] {name} Kale rezervleri ({region})",
+    "description": "{name} [{tag}] Kale rezervlerini etkinleştirin ve zamanlayın. Yalnızca subaylar için."
+  },
+  "missing": {
+    "description": "[{tag}] {region} bölgesindeki World of Tanks klanı: WN8/WNX puanlarının bulunduğu üye tablosu, katılma/ayrılma etkinliği, son savaşlar ve tam klan geçmişi."
+  }
+}

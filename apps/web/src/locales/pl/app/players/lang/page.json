@@ -1,0 +1,6 @@
+{
+  "title": "Najlepsi gracze World of Tanks posługujący się językiem {language} ({region})",
+  "description": "{name}: ranking graczy z regionu {region}, których zestaw języków ustalony na podstawie historii przynależności do klanów obejmuje {language}, uszeregowanych według WNX.",
+  "og-title": "Najlepsi gracze posługujący się językiem {language}",
+  "og-subtitle": "Klasyfikacja {region}"
+}

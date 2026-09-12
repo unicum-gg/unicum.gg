@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Ingen data endnu. Tjek igen, når klaner er blevet opdateret.",
+  "heading": "Top <accent>{tier}</accent>-klaner",
+  "blurb": "{region}-rangliste, rangeret efter {sort} på tværs af alle sporede klaner i {format} (minimum {battles} kampe).",
+  "blurb-period": "{region}-rangliste, rangeret efter {sort} på tværs af alle sporede klaner i {format} over {period} (minimum {battles} kampe).",
+  "format-advances": "Fremrykninger (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Top {count} {tier}-klaner ·"
+}

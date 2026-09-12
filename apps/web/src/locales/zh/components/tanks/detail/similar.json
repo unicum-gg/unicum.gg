@@ -1,0 +1,11 @@
+{
+  "compare": "对比最接近的{count}个",
+  "match": "对战",
+  "subtitle": "在各自等级中的排名相同",
+  "verdict": {
+    "overall": "总体相似",
+    "closest": "在{axes}上最接近",
+    "closest-furthest": "在{axes}上最接近，在{apart}上相距最远",
+    "and": " 和 "
+  }
+}

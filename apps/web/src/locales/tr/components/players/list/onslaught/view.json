@@ -1,0 +1,35 @@
+{
+  "heading": "<accent>{mode}</accent> modundaki en iyi oyuncular",
+  "intro": "{mode}, World of Tanks’taki Seviye X rekabetçi dereceli 7v7 modudur. Doğrudan oyunun kendi sıralamasından alınan {region} liderlik tablosu.",
+  "season": {
+    "range": "{start} - {end}",
+    "final": "nihai sıralama",
+    "live": "devam eden sezon",
+    "updated": "güncellendi {when}"
+  },
+  "board": "En iyi {count} {mode} oyuncusu",
+  "columns": {
+    "player": "Oyuncu",
+    "rank": "Kademe",
+    "battles": "Savaşlar",
+    "rating": "Reyting Puanı"
+  },
+  "alias": "({nickname} olarak)",
+  "ranks": {
+    "title": "Rütbeler",
+    "meaning": "Anlamı",
+    "tier": "Seviye",
+    "intro": "Savaşları kazanarak {mode} rütbelerinde yükselirsin: her zafer, ne kadar iyi oynadığına bağlı olarak Reyting Puanı verir. {champion}, yalnızca puanlarla ulaşabileceğin en yüksek rütbedir ve ona ulaşmak seni liderlik tablosuna sokar. {legend} sabit bir eşik değildir: {champion} rütbesindekilerin en yüksek puanlı bölümüdür, bu nedenle eşiği oyuncu grubuna göre değişir. Eşitlikler oynanan savaş sayısıyla bozulur. Kesin {legend} ve {champion} eşikleri mevcut sezondan alınır ve tabloda işaretlenir.",
+    "legend-blurb": "En yüksek puanlı {champion} rütbesindeki oyuncular. Oyun, her sezonda bunu belirli bir liderlik tablosu konumuyla sınırlar, bu nedenle büyüklüğü sezon ve bölgeye göre değişir. Son {legend} oyuncusunun altına düşersen {champion} rütbesine geri dönersin.",
+    "champion-blurb": "Reyting Puanı ile ulaşabileceğin en yüksek rütbe ve liderlik tablosuna giriş noktasıdır. Her dereceli oyuncu en az {champion} rütbesindedir."
+  },
+  "race": {
+    "title-live": "Şu anda gerekenler",
+    "title-ended": "Sezon nasıl geçti",
+    "legend-cutoff": "{legend} sınırı",
+    "champion-cutoff": "{champion} sınırı",
+    "ranked-players": "Sıralı oyuncular",
+    "rating-points": "reyting puanı",
+    "rank-cutoffs": "Kademe kesim noktaları"
+  }
+}

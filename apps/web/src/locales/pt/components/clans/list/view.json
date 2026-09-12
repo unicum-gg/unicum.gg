@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Top <accent>clãs</accent>",
+    "language": "Melhores clãs de língua <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Classificação da região {region}, ordenada pela média de {metric} dos membros monitorizados de cada clã (mínimo de 50 membros com batalhas).",
+    "language": "Clãs da região {region} que declararam {language} como um dos seus idiomas, ordenados pela média de {metric} dos respetivos membros monitorizados (mínimo de 25 membros com batalhas).",
+    "strict": "Clãs da região {region} que declararam {language} como o seu único idioma, ordenados pela média de {metric} dos respetivos membros monitorizados (mínimo de 25 membros com batalhas)."
+  },
+  "board": {
+    "all": "Os {count} melhores clãs por {metric}",
+    "language": "Os {count} melhores clãs de língua {language} por {metric}",
+    "strict": "Os {count} melhores clãs exclusivamente de língua {language} por {metric}"
+  },
+  "members": "Membros",
+  "strict-toggle": "Estrito",
+  "any-toggle": "Qualquer",
+  "all-languages": "Todos os idiomas",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

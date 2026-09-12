@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "ผู้เล่น <accent>ที่ดีที่สุด</accent>",
+    "language": "ผู้เล่น <accent>{language}</accent> ชั้นนำ"
+  },
+  "intro": {
+    "all": "ตารางอันดับของ {region} จัดอันดับตาม {metric} ตลอดกาล (ขั้นต่ำ 20,000 การรบ)",
+    "language": "ผู้เล่นจาก {region} ที่ชุดภาษาจากประวัติแคลนโดยอนุมานมี {language} จัดอันดับตาม {metric} (ขั้นต่ำ 10,000 การรบ)",
+    "strict": "ผู้เล่นจาก {region} ที่ภาษาจากประวัติแคลนโดยอนุมานมีเพียง {language} จัดอันดับตาม {metric} (ขั้นต่ำ 10,000 การรบ)"
+  },
+  "board": {
+    "all": "ผู้เล่นชั้นนำ {count} คนตาม {metric}",
+    "language": "ผู้เล่น {language} ชั้นนำ {count} คนตาม {metric}",
+    "strict": "ผู้เล่น {language} โดยเฉพาะชั้นนำ {count} คนตาม {metric}"
+  },
+  "modes": {
+    "overall": "โดยรวม"
+  },
+  "columns": {
+    "player": "ผู้เล่น"
+  },
+  "strict-toggle": "เข้มงวด",
+  "any-toggle": "ใดๆ",
+  "all-languages": "ทุกภาษา",
+  "battles": "การรบ",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

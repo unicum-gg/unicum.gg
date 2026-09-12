@@ -1,0 +1,17 @@
+{
+  "close": "Tắt",
+  "format": "Định dạng",
+  "here": "ở đây",
+  "in-the-queue": "Đã được đưa vào hàng đợi và sẽ xuất hiện tại {where} sau khi người kiểm duyệt xem xét. Trong lúc đó, đề xuất của bạn sẽ bị làm mờ trên trang đó.",
+  "log-in-to-suggest-a": "Đăng nhập để đề xuất chiến thuật",
+  "on-map": "trên {map}",
+  "players-per-team": "Người chơi mỗi đội",
+  "sending": "Đang gửi…",
+  "suggest": "Đề xuất",
+  "suggest-a-tactic": "Đề xuất chiến thuật",
+  "suggest-another": "Gợi ý cái khác",
+  "suggestion-sent": "Đã gửi đề xuất",
+  "tier": "Cấp",
+  "what-to-submit": "Một trận đấu cạnh tranh, bắt đầu từ đúng giây trận đấu diễn ra. Bản đồ bắt đầu tại {map} và di chuyển cùng video: một buổi chơi Clan đi qua một vòng xoay. Hướng đã chơi là thông tin mà người chỉ huy trận đấu tra cứu, vì vậy cần hỏi thay vì đoán.",
+  "what-was-played": "Những gì đã chơi"
+}

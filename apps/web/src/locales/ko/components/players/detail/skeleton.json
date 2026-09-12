@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "{nickname}의 무작위 전투 통계",
+  "progression": "{nickname}의 {metricLabel} 진행도",
+  "solid-line-is-overall-matches": "실선은 전체 {metricLabel}입니다. 위의 전체 열과 일치하며, 새로운 전투가 누적되면서 천천히 변합니다. 점선은 이전 스냅샷 이후 플레이한 전투를 바탕으로 계산한 세션별 {metricLabel2}입니다. 상승세와 하락세를 보여 줍니다. 행 색상은 평점 단계에 따라 표시됩니다.",
+  "tanks-shaping-s-rating": "{nickname}의 평점에 영향을 주는 전차",
+  "tanks": "{nickname}의 탱크",
+  "stats": "{nickname}의 {strongholdLabel} 통계"
+}

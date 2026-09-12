@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "Số hàng mỗi trang",
+  "free-xp-from": "XP miễn phí từ",
+  "xp-1-gold": "XP = 1 vàng",
+  "previous-page": "Trang trước",
+  "page": "Trang {current} / {totalPages}",
+  "next-page": "Trang tiếp theo",
+  "all": "Tất cả"
+}

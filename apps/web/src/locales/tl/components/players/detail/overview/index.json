@@ -1,0 +1,7 @@
+{
+  "stats-title": "Istatistika ng mga random na laban ni {nickname}",
+  "progression-title": "Progresyon ni {nickname} sa {metric}",
+  "lift-drag-title": "Mga tank na humuhubog sa rating ni {nickname}",
+  "progression-blurb": "Ang solidong linya ay pangkalahatang {metric} (tumutugma sa kolum na Kabuuan sa itaas), at dahan-dahang nagbabago habang nadaragdagan ang mga bagong laban. Ang putol-putol na linya ay {metric} bawat session, nakalkula mula sa mga laban na nilaro mula noong nakaraang snapshot. Nagpapakita ito ng maiinit at malamig na sunod-sunod na laro. Sinusunod ng kulay ng linya ang tier ng rating.",
+  "progression-empty": "Hindi pa sapat ang kasaysayan. Kailangan namin ng kahit isang snapshot para iguhit ang kurba. Bumalik muli sa lalong madaling panahon."
+}

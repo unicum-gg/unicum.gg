@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Šířka hrací plochy",
+    "height": "Výška hrací plochy",
+    "round-length": "Časovač bitvy",
+    "team-size": "Velikost týmu",
+    "camouflage": "Sezóna",
+    "presence": "Ve hře",
+    "variant-version": "Verze {type}",
+    "play-area": "Hrací plocha",
+    "bases-team1": "Základny spojenců",
+    "bases-team2": "Základny nepřítele",
+    "spawns-team1": "Body nasazení spojenců",
+    "spawns-team2": "Body nasazení nepřítele",
+    "control-point": "Kontrolní bod",
+    "artillery-headquarters": "Dělostřelecké velitelství",
+    "comms-centers": "Komunikační centra",
+    "observation-posts": "Pozorovací stanoviště",
+    "points-of-interest": "Body zájmu"
+  },
+  "summary": {
+    "added": "Přidáno: {name}",
+    "removed": "Odstraněno: {name}",
+    "added-to-game": "Přidáno do hry",
+    "removed-from-game": "Odstraněno ze hry",
+    "added-on-test": "Přidáno do testovacího klienta",
+    "removed-on-test": "Odstraněno z testovacího klienta",
+    "mode-added": "Režim {name} byl přidán",
+    "mode-removed": "Režim {name} byl odstraněn",
+    "now-played-in": "Nyní se hraje v režimu {name}",
+    "no-longer-played-in": "V režimu {name} se již nehraje",
+    "event-added": "Událost {name} se nyní může stát během bitvy",
+    "event-removed": "Událost {name} se již neděje",
+    "moved": "Přesunuto: {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

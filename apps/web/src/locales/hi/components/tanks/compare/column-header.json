@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "इस कॉलम के लिए गोला-बारूद, उपकरण, उपभोग्य वस्तुएँ, निर्देश, क्रू और प्रगति। हर बदलाव पीछे की तुलना में इसकी विशेषताओं को बदलता है।",
+  "ammunition-equipment-crew-and-progression": "गोला-बारूद, उपकरण, क्रू और प्रगति",
+  "apply-to-every-column": "हर कॉलम पर लागू करें",
+  "compare-against": "{tank} के विरुद्ध तुलना करें",
+  "compare-the-others-against-this-one": "दूसरों की इसके विरुद्ध तुलना करें",
+  "configure-tank": "{tank} कॉन्फ़िगर करें",
+  "highest-overall-score": "सर्वाधिक कुल स्कोर",
+  "highest-overall-score-of-this": "इस तुलना का सर्वाधिक कुल स्कोर",
+  "is-the-reference": "संदर्भ: {tank}",
+  "overall": "कुल मिलाकर",
+  "reference-column": "संदर्भ कॉलम",
+  "remove-tank": "{tank} हटाएँ",
+  "reset-all": "सभी रीसेट करें",
+  "setup": "सेटअप",
+  "stock": "स्टॉक",
+  "tank-setup": "{tank} का सेटअप",
+  "top": "शीर्ष",
+  "where-this-vehicle-sits-across": "पूरे कैटलॉग में यह वाहन कहाँ स्थित है, {MAXSCORE} में से: यहाँ कॉन्फ़िगर किए गए अनुसार इसकी चार श्रेणी के स्कोर का औसत। यह सारांश है, निर्णय नहीं। अलग-अलग चीज़ों में अच्छा होने के कारण स्काउट और हेवी एक ही संख्या तक पहुंच सकते हैं।"
+}

@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}، مكتسب {count}×",
+  "aria-not-earned": "{name}، غير مكتسب",
+  "no-longer-obtainable": "لم يعد قابلًا للكسب.",
+  "not-earned": "غير مكتسب"
+}

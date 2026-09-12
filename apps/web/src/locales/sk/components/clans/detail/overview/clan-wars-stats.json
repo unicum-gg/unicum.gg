@@ -1,0 +1,21 @@
+{
+  "stat": "Štatistika",
+  "periods": {
+    "total": "Celkom",
+    "day": "Posledných 24 hodín",
+    "week": "Posledných 7 dní",
+    "month": "Posledných 30 dní"
+  },
+  "sections": {
+    "territory": "Územie",
+    "t10": "Trieda X",
+    "t8": "Trieda VIII",
+    "t6": "Trieda VI"
+  },
+  "rows": {
+    "provinces": "Provincie",
+    "elo": "ELO",
+    "battles": "Bitky",
+    "winrate": "Miera výhier"
+  }
+}

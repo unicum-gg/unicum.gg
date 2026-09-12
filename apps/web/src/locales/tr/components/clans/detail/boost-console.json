@@ -1,0 +1,13 @@
+{
+  "add-workflow": "İş akışı ekle",
+  "boost": "Güçlendirme",
+  "each-workflow-activates-its-reserves": "Her iş akışı, yeterli sayıda üye canlı bir oyun oturumundayken rezervlerini belirli bir zaman aralığında etkinleştirir. Hesabınızda çalışır, çevrimiçi olmanız gerekmez. İhtiyacınız kadar ekleyin.",
+  "n-online": "/ {count} çevrimiçi",
+  "officer": "Görevli",
+  "online": "Çevrimiçi",
+  "recent-activations": "son etkinleştirmeler",
+  "reserve": "Rezerv",
+  "stronghold-boosts": "Sığınak destekleri",
+  "when": "Ne zaman",
+  "workflow": "İş akışı"
+}

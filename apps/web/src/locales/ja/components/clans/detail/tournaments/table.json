@@ -1,0 +1,11 @@
+{
+  "date": "日付",
+  "featured-tournament": "注目のトーナメント",
+  "format": "フォーマット",
+  "n-of-the-roster-were-in-the-clan": "ロスターの{count}人がクランに所属",
+  "no-tournament-matches-the-current": "現在のフィルターに一致するトーナメントはありません。",
+  "played-as": "プレイした車両",
+  "result": "結果",
+  "status": "ステータス",
+  "tier": "Tier"
+}

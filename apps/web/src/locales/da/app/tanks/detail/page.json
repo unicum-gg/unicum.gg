@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank} World of Tanks-statistik ({region}), niveau {tier} {nation}",
+    "description": "{tank} ({region}) World of Tanks-specifikationer: panser, ildkraft, mobilitet, moduler, besætning og feltmodifikationer for denne niveau {tier} {nation}-kampvogn."
+  },
+  "performances": {
+    "title": "{tank}-resultater ({region}), serverstatistik og bedste spillere",
+    "description": "{tank} ({region}) World of Tanks-resultater: serverens gennemsnitlige sejrsrate, skade og assistance, de bedste spillere på denne niveau {tier} {nation}-kampvogn samt forventede WN8- og WNX-værdier."
+  },
+  "marks": {
+    "title": "{tank} Marks of Excellence og mastery ({region})",
+    "description": "{tank} ({region}) World of Tanks-krav til Marks of Excellence og Marks of Mastery med deres historik for denne niveau {tier} {nation}-kampvogn."
+  },
+  "history": {
+    "title": "{tank}-ændringshistorik ({region}), forbedringer og nerfs",
+    "description": "Alle ændringer af {tank}s egenskaber gennem World of Tanks-opdateringer: forbedringer og nerfs af ildkraft, mobilitet, overlevelsesevne og camouflage, som Wargaming har udsendt til denne niveau {tier} {nation}-kampvogn, version for version."
+  },
+  "videos": {
+    "title": "{tank}-gameplayvideoer ({region})",
+    "description": "Se {tank} i aktion: fællesskabsforeslåede kampe i denne niveau {tier} {nation}-kampvogn, hver åbnet på det øjeblik, den spilles, med kortet og resultatet fra kampen."
+  },
+  "community": {
+    "title": "{tank}-spillervurderinger og fællesskabets bedømmelse ({region})",
+    "description": "Hvad spillerne synes om {tank}: fællesskabets bedømmelse fra én til fem, opdelt efter hvor godt vælgerne spiller, sammenholdt med hvordan denne niveau {tier} {nation}-kampvogn faktisk klarer sig, plus skriftlige anmeldelser fra konti, der har kampe i den."
+  }
+}

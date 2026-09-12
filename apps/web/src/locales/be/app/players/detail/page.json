@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Танкі {name} ({region}), усе згуляныя машыны",
+    "description": "Усе танкі, на якіх {name} гуляў у рэгіёне {region}, з баямі, працэнтам перамог, сярэднім уронам і WN8 для кожнай машыны."
+  },
+  "achievements": {
+    "title": "Дасягненні {name} ({region}), зароблена медалёў: {medals}",
+    "description": "Медалі World of Tanks у колькасці {medals}, якія {name} зарабіў у рэгіёне {region}, ад медалёў Калабанава і Пула да ганаровых званняў і эпічных медалёў, а таксама ўсе яшчэ недасягнутыя."
+  },
+  "tournaments": {
+    "title": "Турніры {name} ({region})",
+    "description": "Кожны турнір Wargaming, у якім {name} удзельнічаў у рэгіёне {region}: каманда, за якую ён гуляў, фармат і дасягнуты вынік. Гэта запіс, які Wargaming публікуе толькі з боку турніру, а не гульца."
+  },
+  "value": {
+    "title": "Кошт уліковага запісу {name} ({region})",
+    "description": "Колькі каштуе ўліковы запіс World of Tanks {name} у рэгіёне {region}: крэдыты, золата і вопыт, укладзеныя ў ангар."
+  },
+  "mode": {
+    "title": "Статыстыка {name} у рэжыме {mode} ({region})",
+    "description": "{name} у рэгіёне {region} у рэжыме {mode}: баі, працэнт перамог і рэйтынгі для гэтага рэжыму побач з базавымі паказчыкамі выпадковых баёў."
+  },
+  "overview": {
+    "title": "Статыстыка World of Tanks гульца {name} ({region}), {battles} баёў, {winrate}% перамог",
+    "description": "{name} у рэгіёне {region}: {battles} баёў, {winrate}% перамог, рэйтынг {rating}. Разбор па танках, WN8, WNX і поўная гісторыя кланаў."
+  },
+  "locked": {
+    "title": "Уліковы запіс World of Tanks гульца {name} заблакаваны ({region})",
+    "description": "{name} ({region}) існуе, але Wargaming заблакаваў гэты ўліковы запіс, таму яго статыстыка World of Tanks недаступная."
+  },
+  "empty": {
+    "title": "Статыстыка гульца World of Tanks {name} ({region})",
+    "description": "Статыстыка гульца World of Tanks {name} ({region}): рэйтынгі WN8 і WNX, працэнт перамог, разбор па танках і поўная гісторыя кланаў."
+  }
+}

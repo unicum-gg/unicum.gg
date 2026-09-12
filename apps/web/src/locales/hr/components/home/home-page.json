@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Najbolji igrači · posljednja 24 sata"
+    },
+    "week": {
+      "title": "Najbolji igrači · posljednjih 7 dana"
+    }
+  },
+  "rating-scale": {
+    "title": "Skala ocjenjivanja"
+  },
+  "community": {
+    "title": "Pridružite se zajednici",
+    "heading": "Povežite se s igračima WoT-a",
+    "description": "Pridružite se našem Discordu za razgovor o WoT statistici, zahtjeve za značajke i prijavu bugova. Ili posjetite GitHub kako biste pregledali kod i doprinijeli.",
+    "discord": "Pridružite se na Discordu",
+    "github": "Pogledajte na GitHubu"
+  },
+  "features": {
+    "title": "Što ćete ovdje pronaći",
+    "profiles": {
+      "title": "Profili igrača",
+      "description": "Detaljna statistika s ukupnim i promjenama za 24 h, 7 d i 30 d, WN7, WN8, WNX i osobnom ocjenom."
+    },
+    "clans": {
+      "title": "Stranice klanova",
+      "description": "Tablica članova s ocjenama, feedom nedavne aktivnosti, opisom i metapodacima klana."
+    },
+    "history": {
+      "title": "Povijest klanova",
+      "description": "Potpuna vremenska crta svakog klana čiji je igrač bio član, s ulogama i datumima."
+    },
+    "live": {
+      "title": "Ažuriranja uživo",
+      "description": "Praćeni igrači osvježavaju se u pozadini svakih 24 h putem našeg sustava snimki."
+    },
+    "leaderboards": {
+      "title": "Ljestvice",
+      "description": "Najbolji igrači (24 h, 7 d, svih vremena) i najbolji klanovi rangirani prema WNX-u, izračunatom iz naših snimki."
+    },
+    "open-source": {
+      "title": "Otvorenog koda · AGPL",
+      "description": "Kod je na GitHubu. Pregledajte ga, izradite fork, doprinesite. Bez oglasa, samo analitika uz pristanak."
+    }
+  },
+  "quick-start": {
+    "title": "Brzi početak",
+    "search": {
+      "title": "🔍 Traži igrače ili klanove",
+      "description": "Pritisnite {shortcut} za otvaranje pretraživanja, a zatim upišite nadimak ili oznaku klana."
+    },
+    "region": {
+      "title": "🌍 Promijeni regiju",
+      "description": "Upotrijebite izbornik {selector} na navigacijskoj traci. Ljestvice će se ažurirati u skladu s tim."
+    },
+    "leaderboards": {
+      "title": "🏆 Pregledaj ljestvice",
+      "description": "Najbolji igrači (24 h, 7 d, svih vremena) i najbolji klanovi rangirani prema prosječnom WNX-u, izračunatom iz naših snimki."
+    },
+    "colors": {
+      "title": "📊 Protumači boje",
+      "description": "WR, WN7, WN8 i WNX dijele iste boje razina (narančasta → zelena → cijan → ljubičasta). Pogledajte gornju ljestvicu."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / AZIJA"
+}

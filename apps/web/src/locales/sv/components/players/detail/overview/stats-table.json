@@ -1,0 +1,34 @@
+{
+  "stat": "Statistik",
+  "rows": {
+    "battles": "Strider",
+    "tier": "Nivå",
+    "wins": "Vinster",
+    "losses": "Förluster",
+    "draws": "Oavgjorda",
+    "survived": "Överlevda strider",
+    "destroyed": "Tanks förstörda",
+    "destruction-ratio": "Utslagningsförhållande",
+    "spotted": "Tanks spottade",
+    "damages": "Skador",
+    "track-damages": "Skador på klätterverk",
+    "spotting-damages": "Observation skador",
+    "assisting-damages": "Skador från assistans",
+    "combined-damages": "Kombinerade skador",
+    "base-capture": "Bas fångst",
+    "base-defense": "Basförsvar",
+    "experience": "Erfarenhet",
+    "hit-rate": "Trefffrekvens",
+    "personal-rating": "Spelarbetyg",
+    "wtr": "Rankning i World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Totalt",
+    "day": "Senaste 24h",
+    "week": "Senaste 7d",
+    "month": "Senaste 30d"
+  }
+}

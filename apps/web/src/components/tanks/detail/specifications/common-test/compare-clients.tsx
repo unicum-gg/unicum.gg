@@ -1,7 +1,8 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { ArrowsLeftRightIcon } from "@phosphor-icons/react";
-import Link from "next/link";
+import Link from "@/components/link";
 import { formatTankRef, TankClient } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import {
@@ -45,6 +46,7 @@ export function CompareClients({
   /** The build's portable setup token, or null when it is pristine. */
   setupToken: string | null;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/common-test/compare-clients");
   if (!testVersion) return null;
   const href = ROUTES.COMPARE_TANKS(region, [
     slug,
@@ -57,15 +59,14 @@ export function CompareClients({
         <TooltipTrigger asChild>
           <Link
             href={setups ? `${href}?${SETUP_PARAM}=${setups}` : href}
-            aria-label="Compare the live and Common Test versions"
+            aria-label={t("compare-the-live-and-common")}
             className="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
           >
             <ArrowsLeftRightIcon className="size-3.5" weight="bold" />
           </Link>
         </TooltipTrigger>
         <TooltipContent>
-          Compare live against Common Test {testVersion}
-        </TooltipContent>
+          {t("compare-live-against-common-test", { testVersion })}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

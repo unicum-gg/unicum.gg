@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Bu klan için henüz tank verisi yok.",
+  "no-tanks-match-these-filters": "Hiçbir tank bu filtrelerle eşleşmiyor.",
+  "nation": "Ülke",
+  "type": "Tür",
+  "tier": "Seviye",
+  "name": "İsim",
+  "members": "Üyeler",
+  "battles": "Savaşlar",
+  "avg-damage": "Ortalama hasar",
+  "avg-xp": "Ortalama XP",
+  "wr": "WR"
+}

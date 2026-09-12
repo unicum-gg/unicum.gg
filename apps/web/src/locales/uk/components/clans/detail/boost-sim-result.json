@@ -1,0 +1,11 @@
+{
+  "already-running": "вже працює",
+  "in-window": "вікно",
+  "n-online": "/ {count} онлайн",
+  "no-reserves-selected": "Резерви не вибрано.",
+  "no-stock-ready": "немає готових запасів",
+  "not-available": "недоступно",
+  "threshold": "поріг ({online}/{min})",
+  "would-activate": "активував би",
+  "would-not-fire": "Зараз активації не відбудеться."
+}

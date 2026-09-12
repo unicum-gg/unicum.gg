@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistiques de {nickname} en batailles aléatoires",
+  "progression": "Progression de {nickname} pour {metricLabel}",
+  "solid-line-is-overall-matches": "La ligne pleine est le {metricLabel} général (correspond à la colonne Total ci-dessus), dérivant lentement à mesure que de nouvelles batailles s’accumulent. La ligne pointillée est le {metricLabel2} par session, calculé à partir des batailles jouées depuis la capture précédente. Elle montre les séries chaudes et froides. La couleur de la ligne suit le niveau de notation.",
+  "tanks-shaping-s-rating": "Chars influençant la cote de {nickname}",
+  "tanks": "Les chars de {nickname}",
+  "stats": "Statistiques de {nickname} pour {strongholdLabel}"
+}

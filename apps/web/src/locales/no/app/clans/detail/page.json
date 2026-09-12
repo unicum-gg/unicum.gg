@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks-klan ({region}), {members} medlemmer",
+    "description": "{name} [{tag}] på {region}: {members} medlemmer, fullstendig medlemstabell med WN8- og WNX-vurderinger, nylig inn- og utmelding og klanhistorikk."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} festningsstatistikk ({region})",
+    "description": "{name} [{tag}] festningsprestasjoner på {region}: vurderinger, kamper og seiersprosent for trefninger og fremrykninger for hvert medlem."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} klankrigsstatistikk ({region})",
+    "description": "{name} [{tag}] klankrigsprestasjoner på {region}: vurderinger, kamper og seiersprosent per medlem på tvers av kampanjene på det globale kartet."
+  },
+  "tanks": {
+    "title": "[{tag}] {name} kjøretøy ({region}), klanens stridsvogner",
+    "description": "Alle kjøretøy {name} [{tag}] har spilt på {region}, med kamper, seiersprosent og gjennomsnittlig skade samlet på tvers av klanens medlemmer."
+  },
+  "manage": {
+    "title": "[{tag}] {name} festningsreserver ({region})",
+    "description": "Aktiver og planlegg festningsreservene til {name} [{tag}]. Bare offiserer."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks-klan på {region}: medlemstabell med WN8/WNX-vurderinger, inn- og utmeldinger, nylige kamper og fullstendig klanhistorikk."
+  }
+}

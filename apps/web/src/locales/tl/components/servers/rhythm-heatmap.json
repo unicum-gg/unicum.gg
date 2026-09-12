@@ -1,0 +1,8 @@
+{
+  "busiest": "Pinaka-busy na {when} ({players})",
+  "not-enough-recorded-yet-to": "Hindi pa sapat ang naitala para ipakita ang ritmo bawat linggo. Napupunan ito habang nasasample ang bawat oras ng linggo.",
+  "not-sampled-yet": "Hindi pa nasample",
+  "players-on-average": "{players} manlalaro sa karaniwan",
+  "quietest": ", pinakatahimik na {when} ({players})",
+  "your-local-time": "Iyong lokal na oras"
+}

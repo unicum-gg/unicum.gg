@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "คัดลอกลิงก์บิลด์แล้ว",
+  "copy-build-link": "คัดลอกลิงก์บิลด์",
+  "could-not-copy-link": "อาจคัดลอกลิงก์ไม่ได้",
+  "include-setup": "รวมการตั้งค่า",
+  "share-build": "แชร์การสร้าง",
+  "share-tank": "แชร์ {tank}",
+  "share-text": "ดูบิลด์ {tank} นี้บน {app}"
+}

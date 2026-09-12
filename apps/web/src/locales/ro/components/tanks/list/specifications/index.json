@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Rânduri pe pagină",
+  "previous-page": "Pagina anterioară",
+  "page": "Pagină {current} / {totalPages}",
+  "next-page": "Pagina următoare",
+  "all": "Toate"
+}

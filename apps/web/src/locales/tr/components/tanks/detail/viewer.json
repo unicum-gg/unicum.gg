@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Görsel",
+    "collision": "Çarpışma",
+    "live": "Canlı"
+  },
+  "centre": {
+    "on": "Aracı ortala",
+    "off": "Aracı tekrar merkezden çıkar"
+  },
+  "hull-down": {
+    "on": "Zırh aşağı",
+    "off": "Aracı düzleştir"
+  },
+  "tracks": {
+    "on": "Paletleri çalıştır",
+    "off": "Paletleri durdur"
+  },
+  "textures": {
+    "on": "Yüksek çözünürlüklü dokular",
+    "off": "Standart dokular"
+  },
+  "reset": "Görünümü sıfırla",
+  "style": "Tarz seç",
+  "style-worn": " stil: {name}",
+  "search-styles": "Stil ara",
+  "colours": "Renklerin anlamı",
+  "cinematic": {
+    "off": "Sinematik kamera: kapalı",
+    "auto": "Sinematik kamera: boş bırakıldığında",
+    "on": "Sinematik kamera: her zaman"
+  },
+  "open-tank": "Başka bir tank aç",
+  "open-tank-placeholder": "Tank aç...",
+  "more-actions": "Daha fazla işlem",
+  "marks-meaning": {
+    "0": "Üstünlük işareti yok",
+    "1": "Bir işaret: bu tanktaki oyuncuların %65’inden önde",
+    "2": "İki işaret: %85’inden önde",
+    "3": "Üç işaret: %95’inden önde"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Pencereyi doldur",
+      "leave": "Sayfaya dön"
+    },
+    "screen": {
+      "enter": "Ekranı doldur",
+      "leave": "Tam ekrandan çık"
+    }
+  },
+  "marks-count": {
+    "0": "Üstünlük işareti yok",
+    "one": "1 üstünlük işareti",
+    "other": "{count} üstünlük işareti"
+  },
+  "compare-tank": "Başka bir tankla karşılaştır",
+  "compare-tank-placeholder": "Karşılaştır...",
+  "view-tooltips": {
+    "visual": "Oyunun çizdiği tank",
+    "collision": "Her zırh plakasının kalınlığı",
+    "live": "Seçilen merminin yapacağı şey"
+  },
+  "cinematic-tooltips": {
+    "off": "Sinematik kamera: kapalı, görünüm sabit kalır",
+    "auto": "Sinematik kamera: 30 saniye boyunca boşta kaldıktan sonra başlar",
+    "on": "Sinematik kamera: her zaman, bıraktığın andan itibaren"
+  }
+}

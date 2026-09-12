@@ -1,0 +1,12 @@
+{
+  "final": " · lopullinen",
+  "has-not-held-a-place": "Nimimerkki {nickname} ei ole ollut sijalla Rynnistyksen tulostaulukossa.",
+  "live-season": "· käynnissä oleva kausi",
+  "loading-s-onslaught-record": "Ladataan nimimerkin {nickname} Rynnistysennätystä...",
+  "onslaught": "Rynnistys",
+  "onslaught-record": "Nimimerkin {nickname} Rynnistysennätys",
+  "see-this-season-s-leaderboard": "Katso tämän kauden tulostaulukko",
+  "standing-line": "{rating} arvosanapistettä · {battles} taistelua",
+  "the-board-only-lists-players": "Taulukossa ovat vain Championin saavuttaneet pelaajat, muutama tuhat aluetta kohden, joten lähes jokainen profiili päätyy tänne. Se täyttyy automaattisesti sillä kaudella, jolloin pelaaja saavuttaa sen.",
+  "updated": "Päivitetty {when}"
+}

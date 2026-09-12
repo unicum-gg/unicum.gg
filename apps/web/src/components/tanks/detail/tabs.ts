@@ -15,19 +15,14 @@ export enum TankDetailTab {
 
 export const TANK_DETAIL_TABS: {
   id: TankDetailTab;
-  label: string;
   segment: string | null;
 }[] = [
-  { id: TankDetailTab.Specifications, label: "Specifications", segment: null },
-  {
-    id: TankDetailTab.Performances,
-    label: "Performances",
-    segment: "performances",
-  },
-  { id: TankDetailTab.Marks, label: "Marks", segment: "marks" },
-  { id: TankDetailTab.History, label: "History", segment: "history" },
-  { id: TankDetailTab.Videos, label: "Videos", segment: "videos" },
-  { id: TankDetailTab.Community, label: "Community", segment: "community" },
+  { id: TankDetailTab.Specifications, segment: null },
+  { id: TankDetailTab.Performances, segment: "performances" },
+  { id: TankDetailTab.Marks, segment: "marks" },
+  { id: TankDetailTab.History, segment: "history" },
+  { id: TankDetailTab.Videos, segment: "videos" },
+  { id: TankDetailTab.Community, segment: "community" },
 ];
 
 export function tankDetailTabHref(basePath: string, tab: TankDetailTab): string {

@@ -1,0 +1,12 @@
+{
+  "before-update": "Prieš atnaujinimą {version}",
+  "common-test": "Bendras testas",
+  "in-common-test-not-released": "Bendrame teste, dar neišleista",
+  "introduced": "Įvesta",
+  "lifecycle": "Gyvavimo ciklas",
+  "n-buffed": "{count} sustiprinta",
+  "n-nerfed": "{count} susilpninta",
+  "not-released-wargaming-can-still": "Neišleista. Wargaming dar gali visa tai pakeisti arba pašalinti prieš išleidžiant atnaujinimą.",
+  "status": "Statusas",
+  "update": "Atnaujinti {version}"
+}

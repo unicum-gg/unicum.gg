@@ -1,0 +1,16 @@
+{
+  "title": "Gumagamit kami ng cookies",
+  "description": "Gumagamit kami ng cookies upang pagandahin ang iyong karanasan sa pagba-browse at suriin ang trapiko sa website.",
+  "functional": {
+    "title": "Paggana",
+    "description": "Kailangan upang gumana nang maayos ang website (mga preference, pagpili ng rehiyon)."
+  },
+  "analytics": {
+    "title": "Pagsukat sa audience",
+    "description": "Google Analytics, na nagse-set ng cookies upang maunawaan namin kung paano ginagamit ang website. Mananatiling aktibo kahit ano pa ang piliin mo ang anonymous na analytics na walang cookies (Umami)."
+  },
+  "save": "I-save ang aking mga pinili",
+  "decline": "Tanggihan lahat",
+  "customize": "I-customize",
+  "accept": "Tanggapin lahat"
+}

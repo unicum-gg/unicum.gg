@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Đã sao chép liên kết cấu hình",
+  "copy-build-link": "Sao chép liên kết cấu hình",
+  "could-not-copy-link": "Không thể sao chép liên kết",
+  "include-setup": "Bao gồm cấu hình",
+  "share-build": "Chia sẻ build",
+  "share-tank": "Chia sẻ {tank}",
+  "share-text": "Xem cấu hình {tank} này trên {app}"
+}

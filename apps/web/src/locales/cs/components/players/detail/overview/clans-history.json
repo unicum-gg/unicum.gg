@@ -1,0 +1,12 @@
+{
+  "clans-history": "Klany: historie hráče {nickname}",
+  "clans-in-clans": "Klany: {totalClans} · členství: {timeInClansSeconds}",
+  "current": "aktuální",
+  "duration": "Trvání",
+  "from": "Od",
+  "name": "Název",
+  "no-clan-history": "Klany: žádná historie.",
+  "role": "Role",
+  "tag": "Tag",
+  "to": "Do"
+}

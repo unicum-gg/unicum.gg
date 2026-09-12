@@ -1,0 +1,6 @@
+{
+  "title": "Top World of Tanks {mode} battle royale players ({region})",
+  "description": "{name} {region} leaderboard for {mode}, World of Tanks’ battle royale mode, ranked by our HR rating (average XP + win rate).",
+  "og-title": "Top {mode} players",
+  "og-subtitle": "{region} battle royale leaderboard"
+}

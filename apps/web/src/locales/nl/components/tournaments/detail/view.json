@@ -1,0 +1,11 @@
+{
+  "closes": "Sluiten {when}",
+  "map-pool": "Map pool",
+  "place": "Plaats",
+  "prize": "Prijs",
+  "prizes": "Prijzen",
+  "qualified": "Gekwalificeerd ({count})",
+  "register": "Registreren",
+  "tournaments": "Toernooien",
+  "winner": "{count, plural, one {Winnaar} other {Winnaars}}"
+}

@@ -1,0 +1,8 @@
+{
+  "busiest": "Ең белсенді {when} ({players})",
+  "not-enough-recorded-yet-to": "Апталық ырғақты көрсету үшін әзірге жазба жеткіліксіз. Үлгі алу аптаның әр сағатын қамтыған сайын толтырылады.",
+  "not-sampled-yet": "Әзірге үлгі алынбаған",
+  "players-on-average": "Орташа {players} ойыншы",
+  "quietest": ", ең тыныш {when} ({players})",
+  "your-local-time": "Жергілікті уақытыңыз"
+}

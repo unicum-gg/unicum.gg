@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Koszt (kredyty)",
+      "tip": "Cena zakupu w kredytach (pojazdy z drzewa technologicznego)"
+    },
+    "buyGold": {
+      "label": "Koszt (złoto)",
+      "tip": "Cena zakupu wyrażona liczbą jednostek złota (pojazdy premium)"
+    },
+    "researchXp": {
+      "label": "XP badawcze",
+      "tip": "XP potrzebne do odblokowania (najtańsza ścieżka)"
+    },
+    "totalFreeXp": {
+      "label": "Darmowe XP (T{tier})",
+      "tip": "Łączna liczba XP potrzebna do opracowania od poziomu {tier}, wraz z wymaganymi modułami"
+    },
+    "shellCost": {
+      "label": "Koszt pocisku",
+      "tip": "Domyślna cena pocisku (kredyty)"
+    },
+    "ammoCost": {
+      "label": "Koszt pełnego amunicji",
+      "tip": "Domyślna cena pocisku × liczba pocisków w pełnym zapasie amunicji"
+    },
+    "acquireMoney": {
+      "label": "Koszt zakupu ({currency})",
+      "tip": "Szacowany koszt zdobycia pojazdu za prawdziwe pieniądze (opracowanie + zakup), w walucie {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Darmowe XP ({currency})",
+      "tip": "Szacowany koszt opracowania pojazdu od poziomu {tier} za pomocą opcji Darmowe XP, w walucie {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Koszt (kredyty)",
+    "buyGold": "Koszt (złoto)",
+    "researchXp": "XP badawcze",
+    "totalFreeXp": "Darmowe XP",
+    "shellCost": "Koszt pocisku",
+    "ammoCost": "Koszt pełnego amunicji",
+    "acquireMoney": "Koszt zakupu (pieniądze)",
+    "freeXpMoney": "Darmowe XP (pieniądze)"
+  }
+}

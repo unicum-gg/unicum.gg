@@ -1,0 +1,6 @@
+{
+  "title": "Jugadores de World of Tanks en línea ({region})",
+  "description": "Cuántos jugadores hay ahora mismo en cada servidor de World of Tanks de {region}, con la población de las últimas 24 horas, la última semana y el último año, el récord histórico y las horas de mayor actividad de la semana.",
+  "og-title": "Población del servidor",
+  "og-subtitle": "Jugadores en línea en {region}"
+}

@@ -1,0 +1,35 @@
+{
+  "heading": "Beste spillere i <accent>{mode}</accent>",
+  "intro": "{mode} er World of Tanks’ konkurransemodus med rangert 7v7 på nivå 10. Rangeringen for {region}, hentet direkte fra spillets egne resultater.",
+  "season": {
+    "range": "{start} til {end}",
+    "final": "sluttstilling",
+    "live": "pågående sesong",
+    "updated": "oppdatert {when}"
+  },
+  "board": "De {count} beste spillerne i {mode}",
+  "columns": {
+    "player": "Spiller",
+    "rank": "Rang",
+    "battles": "Kamper",
+    "rating": "Rangeringspoeng"
+  },
+  "alias": "(som {nickname})",
+  "ranks": {
+    "title": "Ranger",
+    "meaning": "Betydning",
+    "tier": "Nivå",
+    "intro": "Du klatrer i gradene i {mode} ved å vinne kamper. Hver seier gir vurderingspoeng basert på hvor godt du spilte. {champion} er den høyeste graden du kan nå med poeng alene, og når du når den, kommer du på rangeringen. {legend} er ikke en fast grense. Det er den best vurderte delen av {champion}-spillerne, så grensen endres med spillerfeltet, med kamper spilt som tie-breaker. De nøyaktige grensene for {legend} og {champion} kommer fra den nåværende sesongen og er markert på brettet.",
+    "legend-blurb": "De best vurderte {champion}-spillerne. Spillet begrenser graden til en bestemt plassering på rangeringen hver sesong, så størrelsen varierer etter sesong og region, ikke etter et fast poengmål. Faller du under den siste {legend}, går du tilbake til {champion}.",
+    "champion-blurb": "Den høyeste graden du kan klatre til med vurderingspoeng, og inngangen til rangeringen. Alle rangerte spillere er minst {champion}."
+  },
+  "race": {
+    "title-live": "Hva som kreves akkurat nå",
+    "title-ended": "Slik gikk sesongen",
+    "legend-cutoff": "Grense for {legend}",
+    "champion-cutoff": "Grense for {champion}",
+    "ranked-players": "Rangerte spillere",
+    "rating-points": "rangeringspoeng",
+    "rank-cutoffs": "Ranggrenser"
+  }
+}

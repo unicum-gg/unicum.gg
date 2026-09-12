@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Aléatoire",
+    "battle_royale": "Traqueur d’acier",
+    "frontline": "Ligne de front",
+    "onslaught": "Offensive",
+    "onslaught_night": "{onslaught} de nuit",
+    "grand_battle": "Grande bataille",
+    "clan_wars": "Guerres de clan",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Ultime combat",
+    "arcade": "Borne d’arcade",
+    "story_mode": "Mode Histoire",
+    "training": "Entraînement"
+  },
+  "player-modes": {
+    "overall": "Battles aléatoires",
+    "skirmish": "Escarmouche",
+    "advances": "Incursions",
+    "grand": "Grandes batailles",
+    "ranked": "Batailles classées",
+    "cw-x": "Guerres de clans X",
+    "cw-viii": "Guerres de clans VIII",
+    "cw-vi": "Guerres de clans VI",
+    "steel-hunter": "Traqueur d’acier",
+    "onslaught": "Offensive"
+  },
+  "stronghold-tiers": {
+    "advances": "Incursions",
+    "t10": "Escarmouche T10",
+    "t8": "Escarmouche T8",
+    "t6": "Escarmouche T6"
+  },
+  "stronghold-periods": {
+    "24h": "Dernières 24 heures",
+    "7d": "7 derniers jours",
+    "30d": "30 derniers jours",
+    "overall": "Global"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Batailles",
+    "winrate": "Taux de victoire"
+  },
+  "clan-boards": {
+    "advances": "Incursions",
+    "t10": "Escarmouche X",
+    "t8": "Escarmouche VIII",
+    "t6": "Escarmouche VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Bataille impromptue",
+    "assault": "Assaillant",
+    "attack-defense": "Attaque/Défense"
+  },
+  "map-camouflage": {
+    "summer": "Été",
+    "winter": "Hiver",
+    "desert": "Désert"
+  },
+  "map-poi": {
+    "1": "Quartier général de l’artillerie",
+    "2": "Centre de communications",
+    "3": "Poste d’observation"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Bataille impromptue",
+    "assault2": "Attaque/Défense",
+    "comp7": "Offensive"
+  },
+  "battle-formats": {
+    "random": "Aléatoire",
+    "clan_wars": "Guerres de clan",
+    "advances": "Incursions",
+    "skirmish": "Escarmouche",
+    "maneuvers": "Manœuvres",
+    "onslaught": "Offensive",
+    "tournament": "Tournoi"
+  },
+  "battle-results": {
+    "victory": "Victoire",
+    "defeat": "Défaite",
+    "draw": "Égalité"
+  },
+  "spawn-directions": {
+    "north": "Nord",
+    "south": "Sud",
+    "east": "Est",
+    "west": "Ouest"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "À venir",
+    "registration_started": "Inscription ouverte",
+    "registration_finished": "Inscriptions fermées",
+    "running": "En cours",
+    "finished": "Finishing",
+    "complete": "Accomplie"
+  },
+  "onslaught-tiers": {
+    "legend": "Légende",
+    "champion": "Champion",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Lourd",
+    "mediumTank": "Moyen",
+    "lightTank": "Léger",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Assaillant",
+    "break": "Percée",
+    "support": "Soutien",
+    "universal": "Polyvalent",
+    "sniper": "Tireur de précision",
+    "wheeled": "À roues"
+  },
+  "mastery-badges": {
+    "class3": "3ème Classe",
+    "class2": "2ème Classe",
+    "class1": "1ère Classe",
+    "ace": "As du char"
+  },
+  "clan-modes": {
+    "random": "Battles aléatoires",
+    "stronghold": "Bastion",
+    "skirmish": "Escarmouche",
+    "clan-wars": "Guerres de clan"
+  },
+  "features": {
+    "stronghold": "Bastion",
+    "skirmish": "Escarmouche",
+    "marks-of-excellence": "Marques d’excellence",
+    "marks-of-mastery": "Marques de maîtrise",
+    "personal-rating": "Cote personnelle",
+    "world-of-tanks-rating": "Classement World of Tanks",
+    "common-test": "Test commun",
+    "tournaments": "Tournois"
+  },
+  "marks": {
+    "1": "1 Marque",
+    "2": "2 Marques",
+    "3": "3 Marques",
+    "name": "Marques d’excellence"
+  }
+}

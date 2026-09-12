@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Baguhin ang anumang mali, pati ang sasakyan. Kapag nag-save, ibabalik ito sa pila ng moderation, kaya mawawala muna sa site ang isang live na video hanggang maaprubahan itong muli.",
+  "correct-a-suggestion": "Itama ang isang mungkahi",
+  "could-not-load-that-suggestion": "Hindi ma-load ang mungkahing iyon. Subukan muli pagkalipas ng ilang sandali.",
+  "link-expired": "Nag-expire na ang link na iyon. Pindutin muli ang Edit sa card sa Discord para sa bagong link.",
+  "loading": "Naglo-load…",
+  "log-in": "Mag-log in",
+  "log-in-with-the-account": "Mag-log in gamit ang account na nagmungkahi ng video na ito para maitama ito.",
+  "no-suggestion-with-that-id": "Walang mungkahing may ganoong id.",
+  "not-yours-to-correct": "Hindi iyo ang mungkahing ito para itama."
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Meilleurs joueurs de World of Tanks en mode battle royale {mode} ({region})",
+  "description": "Classement {name} pour la région {region} en mode {mode}, le mode battle royale de World of Tanks, établi selon notre cote HR (XP moyenne + taux de victoires).",
+  "og-title": "Meilleurs joueurs de {mode}",
+  "og-subtitle": "Classement du mode battle royale pour la région {region}"
+}

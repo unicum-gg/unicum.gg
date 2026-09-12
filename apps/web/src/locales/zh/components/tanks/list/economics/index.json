@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "每页行数",
+  "free-xp-from": "免费经验来源",
+  "xp-1-gold": "经验值 = 1金币",
+  "previous-page": "上一页",
+  "page": "第 {current} / {totalPages} 页面",
+  "next-page": "下一页",
+  "all": "全部"
+}

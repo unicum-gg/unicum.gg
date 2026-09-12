@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Några ord till: {count} kvar.",
+  "at-winrate": "vid {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Det gick inte att dra tillbaka den. Försök igen om en stund.",
+  "hide-the-detailed-axes": "Dölj de detaljerade axlarna",
+  "not-enough-battles": "Du har inte spelat tillräckligt många strider med den här stridsvagnen för att din röst ska räknas.",
+  "published-once-read": "Publiceras när en moderator har läst den. Dina stjärnor räknas direkt.",
+  "rate-it-in-detail": "Betygsätt den i detalj (valfritt)",
+  "review": {
+    "none": "Betyg sparat.",
+    "queued": "Rankning sparad. Ditt omdöme har skickats till en moderator.",
+    "published": "Rankning sparad. Ditt omdöme är redan publicerat.",
+    "pending": "Rankning sparad. Ditt omdöme väntar fortfarande på en moderator.",
+    "rejected": "Rankning sparad. Ditt tidigare omdöme publicerades inte, så bara dina stjärnor räknas.",
+    "closed": "Rankning sparad. Det går inte att lämna skriftliga omdömen just nu, så texten sparades inte."
+  },
+  "save-failed": "Det gick inte att spara det. Försök igen om en stund.",
+  "say-why-optional": "Berätta varför (valfritt)",
+  "signed-with": "Signerat med dina {battles} strider i stridsvagnen",
+  "submit-my-rating": "Skicka mitt betyg",
+  "too-many-edits": "Det var många ändringar på en gång. Vänta en minut.",
+  "update-my-rating": "Uppdatera mitt betyg",
+  "what-it-is-good-at": "Vad den är bra på, vad den inte är bra på och vem som bör spela den.",
+  "withdraw": "Dra tillbaka",
+  "your-rating-has-been-withdrawn": "Rankning tillbakadragen.",
+  "your-review-is-waiting-on": "Ditt omdöme väntar på en moderator. Bara du kan se det här.",
+  "your-review-was-not-published": "Ditt omdöme publicerades inte. Dina stjärnor räknas fortfarande in i genomsnittet."
+}

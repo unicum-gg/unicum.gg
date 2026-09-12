@@ -1,0 +1,7 @@
+{
+  "loading": "{count} voertuigen van niveau {tier}, namen worden geladen…",
+  "loading-one": "{count} voertuig van niveau {tier}, naam wordt geladen…",
+  "and-more": "en nog {count}",
+  "hint": "Klik om ze in het tabblad Tanks te openen",
+  "tier": "niveau"
+}

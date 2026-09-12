@@ -1,0 +1,16 @@
+{
+  "title": "We use cookies",
+  "description": "We use cookies to improve your browsing experience and analyze site traffic.",
+  "functional": {
+    "title": "Functional",
+    "description": "Required for the site to work properly (preferences, region selection)."
+  },
+  "analytics": {
+    "title": "Audience measurement",
+    "description": "Google Analytics, which sets cookies to help us understand how the site is used. Anonymous, cookieless analytics (Umami) stay on either way."
+  },
+  "save": "Save my choices",
+  "decline": "Decline all",
+  "customize": "Customize",
+  "accept": "Accept all"
+}

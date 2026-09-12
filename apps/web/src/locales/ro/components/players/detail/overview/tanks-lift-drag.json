@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Creșterea ratingului",
+    "blurb": "Tancuri care susțin valoarea generală: renunțarea la ele ar scădea ratingul.",
+    "empty": "Niciun tanc nu susține valoarea generală."
+  },
+  "drag": {
+    "heading": "Scăderea ratingului",
+    "blurb": "Tancuri care trag valoarea generală în jos: renunțarea la ele ar crește ratingul.",
+    "empty": "Niciun tanc care să scadă ratingul general."
+  },
+  "if-removed": "{delta} dacă este eliminat"
+}

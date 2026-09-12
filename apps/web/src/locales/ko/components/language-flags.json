@@ -1,0 +1,8 @@
+{
+  "cta-clans": "클릭하여 최고의 {language} 클랜을 확인하세요.",
+  "cta-players": "클릭하여 최고의 {language} 플레이어를 확인하세요.",
+  "declared": "{language}. 클랜이 선택함.",
+  "inferred": "{language}. 이 플레이어의 클랜 기록을 바탕으로 추정했습니다. 클랜에 오래 머무를수록 해당 클랜의 언어가 더 많이 반영됩니다.",
+  "top-language-clans": "최고의 {language} 클랜",
+  "top-language-players": "최고의 {language} 플레이어"
+}

@@ -1,8 +1,15 @@
 "use client";
 
+import type { TranslateFunction } from "@onruntime/translations";
+import { useLocale } from "@onruntime/translations/react";
+import { dateLocale } from "@/lib/date-locale";
+import { Interpolate } from "@/components/interpolate";
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { format, isSameDay } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { useMemo, useState } from "react";
 import { ArrowSquareOutIcon, StarIcon } from "@phosphor-icons/react";
 import {
@@ -19,7 +26,7 @@ import { tierLabel } from "@/components/tournaments/tier-label";
 import ROUTES from "@/constants/routes";
 import { useNow } from "@/hooks/use-now";
 import { usePassed } from "@/hooks/use-passed";
-import { TOURNAMENT_GAME_MODE_LABEL, teamFormat } from "@unicum.gg/shared";
+import { teamFormat } from "@unicum.gg/shared";
 import {
   REGION_WOT_HOST,
   TournamentStatus,
@@ -31,12 +38,17 @@ import type { TournamentListRow } from "./board";
  * three days answers "what is on soon" without becoming a second catalogue. */
 const DAYS = 3;
 
-function dayLabel(day: Date, today: Date): string {
-  if (isSameDay(day, today)) return "Today";
+function dayLabel(
+  day: Date,
+  today: Date,
+  locale: string,
+  t: TranslateFunction,
+): string {
+  if (isSameDay(day, today)) return t("today");
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  if (isSameDay(day, tomorrow)) return "Tomorrow";
-  return format(day, "EEEE d MMM");
+  if (isSameDay(day, tomorrow)) return t("tomorrow");
+  return format(day, "EEEE d MMM", { locale: dateLocale(locale) });
 }
 
 /**
@@ -49,8 +61,12 @@ function dayLabel(day: Date, today: Date): string {
  * and how long you have left to enter.
  */
 function Slot({ region, row }: { region: Region; row: TournamentListRow }) {
+  const { locale } = useLocale();
+  const { t: tCopy } = useTranslation("components/tournaments/list/schedule");
+  const { t } = useTranslation("components/tournaments/list/schedule");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const tier = tierLabel(row.tierFrom, row.tierTo);
-  const mode = row.gameModes.map((m) => TOURNAMENT_GAME_MODE_LABEL[m]).join(", ");
+  const mode = row.gameModes.map((m) => tGame(`tournament-modes.${m}`)).join(", ");
   // The date beats the status: Wargaming leaves a tournament reading
   // "registration open" for a while after its own deadline passed.
   const closed = usePassed(row.registrationTill);
@@ -81,13 +97,13 @@ function Slot({ region, row }: { region: Region; row: TournamentListRow }) {
             dateTime={row.startAt.toISOString()}
             className="font-heading text-xl font-bold tabular-nums"
           >
-            {format(row.startAt, "HH:mm")}
+            {format(row.startAt, "HH:mm", { locale: dateLocale(locale) })}
           </time>
           {row.isFeatured && (
             <StarIcon
               weight="fill"
               className="size-3.5 text-amber-500"
-              aria-label="Featured"
+              aria-label={t("featured")}
             />
           )}
         </span>
@@ -101,11 +117,14 @@ function Slot({ region, row }: { region: Region; row: TournamentListRow }) {
         {row.registrationTill && (
           <span className="text-xs text-fd-muted-foreground">
             {closed ? (
-              "Registration closed"
+              t("registration-closed")
             ) : (
-              <>
-                Closes <RelativeTime date={row.registrationTill} />
-              </>
+              <Interpolate
+                template={t("closes")}
+                values={{
+                  when: <RelativeTime date={row.registrationTill} />,
+                }}
+              />
             )}
           </span>
         )}
@@ -123,8 +142,7 @@ function Slot({ region, row }: { region: Region; row: TournamentListRow }) {
             target="_blank"
             rel="nofollow noopener noreferrer"
           >
-            Register
-            <ArrowSquareOutIcon weight="bold" className="size-3.5" />
+            {tCopy("register")}<ArrowSquareOutIcon weight="bold" className="size-3.5" />
           </a>
         </Button>
       )}
@@ -150,6 +168,10 @@ export function TournamentSchedule({
   region: Region;
   rows: TournamentListRow[];
 }) {
+  const { locale } = useLocale();
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tCopy } = useTranslation("components/tournaments/list/schedule");
+  const { t } = useTranslation("components/tournaments/list/schedule");
   // Zero until the client has a clock, which is what keeps "Today" honest on a
   // statically rendered page.
   const nowMs = useNow();
@@ -170,16 +192,16 @@ export function TournamentSchedule({
     const shown = featuredOnly ? upcoming.filter((r) => r.isFeatured) : upcoming;
     const byDay = new Map<string, TournamentListRow[]>();
     for (const row of shown) {
-      const key = format(row.startAt, "yyyy-MM-dd");
+      const key = format(row.startAt, "yyyy-MM-dd", { locale: dateLocale(locale) });
       byDay.set(key, [...(byDay.get(key) ?? []), row]);
     }
     const today = new Date(nowMs);
     return [...byDay.entries()].map(([key, list]) => ({
       key,
-      label: dayLabel(list[0]!.startAt, today),
+      label: dayLabel(list[0]!.startAt, today, locale, t),
       list,
     }));
-  }, [upcoming, featuredOnly, nowMs]);
+  }, [upcoming, featuredOnly, nowMs, locale, t]);
 
   // Nothing scheduled ahead is a real answer, and an empty panel would read as a
   // section that failed to load.
@@ -195,7 +217,7 @@ export function TournamentSchedule({
           screenLines={false}
           className="flex flex-wrap items-center justify-between gap-2 border-b border-fd-border"
         >
-          <PanelTitle>Coming up</PanelTitle>
+          <PanelTitle>{t("coming-up")}</PanelTitle>
           <span className="flex items-center gap-3">
             {/* The same cut the catalogue below offers, kept here because a
                 reader watching the schedule wants it more, not less. */}
@@ -209,20 +231,18 @@ export function TournamentSchedule({
                     weight={featuredOnly ? "fill" : "regular"}
                     className="size-3.5"
                   />
-                  Featured
-                </Chip>
+                  {tCopy("featured")}</Chip>
               </ChipRow>
             )}
             <span className="text-xs text-fd-muted-foreground">
-              Times in your own time zone
-            </span>
+              {t("times-in-your-own-time")}</span>
           </span>
         </PanelHeader>
         <PanelContent className="flex flex-col gap-4 p-4">
           {days.map((day) => (
             <div key={day.key} className="flex flex-col gap-2">
               <span className="text-xs tracking-wide text-fd-muted-foreground uppercase">
-                {day.label}
+                {statLabel(day.label, tStats)}
               </span>
               {/* Capped at four across: `auto-fill` filled a wide screen with
                   six narrow cards, which made a four-tournament evening read as

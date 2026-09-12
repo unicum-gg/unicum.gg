@@ -1,0 +1,7 @@
+{
+  "group": "Nhóm {order}",
+  "n-teams": "{count} đội",
+  "pts": "Điểm",
+  "team": "Đội",
+  "top-n-advance": ", {count} đội đứng đầu sẽ đi tiếp"
+}

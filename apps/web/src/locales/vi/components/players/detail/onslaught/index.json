@@ -1,0 +1,12 @@
+{
+  "final": " · chung cuộc",
+  "has-not-held-a-place": "{nickname} chưa từng có vị trí trên bảng xếp hạng Cường kích.",
+  "live-season": "· mùa đang diễn ra",
+  "loading-s-onslaught-record": "Đang tải thành tích Cường kích của {nickname}...",
+  "onslaught": "Cường kích",
+  "onslaught-record": "Thành tích Cường kích của {nickname}",
+  "see-this-season-s-leaderboard": "Xem bảng xếp hạng mùa này",
+  "standing-line": "{rating} điểm chỉ số đánh giá · {battles} trận đấu",
+  "the-board-only-lists-players": "Bảng chỉ liệt kê những người chơi đạt Champion, vài nghìn người mỗi khu vực, vì vậy gần như mọi hồ sơ đều nằm ở đây. Bảng sẽ tự điền vào mùa mà họ đạt được cấp đó.",
+  "updated": "Đã cập nhật {when}"
+}

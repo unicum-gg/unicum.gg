@@ -1,7 +1,8 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { DiscordLogoIcon, LockIcon } from "@phosphor-icons/react/dist/ssr";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,7 @@ async function postJson(
  * so this stays a small client island inside the server-rendered page.
  */
 export function SupportBox() {
+  const { t } = useTranslation("components/support/support-box");
   const { data: session, isPending } = useSession();
   const router = useRouter();
   const [status, setStatus] = useState<MeStatus | null>(null);
@@ -78,14 +80,18 @@ export function SupportBox() {
     const s = params.get("status");
     if (s === "success")
       toast.success(`Thank you for supporting ${APP.NAME}!`);
-    if (s === "canceled") toast("Checkout canceled.");
+    if (s === "canceled") toast(t("checkout-canceled"));
     const claim = params.get("claim");
-    if (claim === "ok") toast.success("Supporter role added on Discord!");
+    if (claim === "ok") toast.success(t("supporter-role-added-on-discord"));
     if (claim === "not_supporter")
-      toast.error("Only active supporters can claim the Discord role.");
+      toast.error(t("only-active-supporters-can-claim-the-discord"));
     if (claim === "error")
-      toast.error("Could not add the Discord role. Please try again.");
+      toast.error(t("could-not-add-the-discord-role-please-try-ag"));
     if (s || claim) window.history.replaceState({}, "", ROUTES.SUPPORT);
+    // Once, on arrival: the effect reads the query string the checkout came
+    // back with and then strips it, so re-running it on a new `t` would be a
+    // second toast about a redirect that already happened.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function subscribe() {
@@ -101,7 +107,7 @@ export function SupportBox() {
       });
       if (typeof url === "string") window.location.href = url;
     } catch {
-      toast.error("Could not start checkout. Please try again.");
+      toast.error(t("could-not-start-checkout-please-try-again"));
     } finally {
       setBusy(false);
     }
@@ -113,7 +119,7 @@ export function SupportBox() {
       const { url } = await postJson("/api/stripe/portal");
       if (typeof url === "string") window.location.href = url;
     } catch {
-      toast.error("Could not open the billing portal.");
+      toast.error(t("could-not-open-the-billing-portal"));
     } finally {
       setBusy(false);
     }
@@ -128,7 +134,7 @@ export function SupportBox() {
       router.refresh();
     } catch {
       setStatus((s) => (s ? { ...s, anonymous: !next } : s));
-      toast.error("Could not update your preference.");
+      toast.error(t("could-not-update-your-preference"));
     }
   }
 
@@ -143,8 +149,7 @@ export function SupportBox() {
   if (status && !status.enabled) {
     return (
       <p className="text-center text-sm text-muted-foreground">
-        Support subscriptions are coming soon.
-      </p>
+        {t("support-subscriptions-are-coming-soon")}</p>
     );
   }
 
@@ -152,10 +157,9 @@ export function SupportBox() {
     return (
       <div className="flex flex-col items-center gap-3">
         <p className="text-center text-sm text-muted-foreground">
-          Log in with Wargaming to support {APP.NAME}.
-        </p>
+          {t("log-in-with-wargaming-to", { NAME: APP.NAME })}</p>
         <LoginButton callbackURL={ROUTES.SUPPORT}>
-          <Button>Log in with Wargaming</Button>
+          <Button>{t("log-in-with-wargaming")}</Button>
         </LoginButton>
       </div>
     );
@@ -165,10 +169,9 @@ export function SupportBox() {
     return (
       <div className="flex flex-col gap-4">
         <p className="text-center text-sm">
-          You are a supporter. Thank you for keeping {APP.NAME} alive.
-        </p>
+          {t("you-are-a-supporter-thank", { NAME: APP.NAME })}</p>
         <div className="flex items-center justify-between gap-3">
-          <span className="text-sm">Show me anonymously on the podium</span>
+          <span className="text-sm">{t("show-me-anonymously-on-the")}</span>
           <Switch
             checked={status.anonymous}
             onCheckedChange={toggleAnonymous}
@@ -183,12 +186,12 @@ export function SupportBox() {
           >
             <DiscordLogoIcon className="size-4" />
             {status.discordLinked
-              ? "Re-sync Discord role"
-              : "Claim your supporter role on Discord"}
+              ? t("re-sync-discord-role")
+              : t("claim-your-supporter-role-on-discord")}
           </Button>
         )}
         <Button variant="secondary" onClick={manage} disabled={busy}>
-          {busy ? <Spinner /> : "Manage subscription"}
+          {busy ? <Spinner /> : t("manage-subscription")}
         </Button>
       </div>
     );
@@ -200,9 +203,8 @@ export function SupportBox() {
     <div className="flex flex-col gap-4">
       <p className="text-center text-sm text-fd-muted-foreground">
         <span className="font-semibold text-fd-foreground">
-          Pay what you want.
-        </span>{" "}
-        Pick an amount or type your own, from €{MIN_EUR}/month.
+          {t("pay-what-you-want")}</span>{" "}
+        {t("pick-an-amount", { min: MIN_EUR })}
       </p>
 
       <div className="grid grid-cols-3 gap-2">
@@ -228,8 +230,7 @@ export function SupportBox() {
           htmlFor="support-amount"
           className="text-xs uppercase tracking-wide text-fd-muted-foreground"
         >
-          Or choose your own amount
-        </label>
+          {t("or-choose-your-own-amount")}</label>
         <div className="relative">
           <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-fd-muted-foreground">
             €
@@ -258,7 +259,7 @@ export function SupportBox() {
 
       <div className="flex items-center justify-center gap-1.5 text-xs text-fd-muted-foreground">
         <LockIcon className="size-3.5" />
-        Secured by Stripe. Cancel anytime.
+        {t("secured-by-stripe")}
       </div>
     </div>
   );

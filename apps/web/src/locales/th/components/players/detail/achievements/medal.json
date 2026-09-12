@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name} ได้รับ {count} ครั้ง",
+  "aria-not-earned": "{name} ยังไม่ได้รับ",
+  "no-longer-obtainable": "ไม่สามารถรับได้อีกต่อไป",
+  "not-earned": "ยังไม่ได้รับ"
+}

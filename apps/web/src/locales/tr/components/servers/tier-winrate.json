@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Bir hücre, bir oyuncunun en az {minBattles} savaş yaptığı her araç genelinde, o seviyedeki savaşlarında ilgili aralığın galibiyetlerini gösterir. Böylece seviyeleri, onları oynayan kişilerin nasıl oynadığını açıklar. {TIERWINRATETHINCELL} savaştan azına dayanan hücreler soluk gösterilir. Beceriden başka nedenlerle değişebilirler. Renkler, sitenin başka yerlerde kullandığı aynı galibiyet oranı aralıklarıdır.",
+  "cell-no-sample": "{where}, örnek yok",
+  "cell-winrate": "{where}, {battles} savaşta {winrate} galibiyet oranı",
+  "metric-band": "{metric} aralığı",
+  "nothing-recorded": "Henüz {metric} için hiçbir şey kaydedilmedi. Izgara her gece yeniden oluşturulur.",
+  "over-battles-from-accounts": "{players} hesaptan {battles} savaşta {winrate}",
+  "over-n-battles": "{battles} savaşta",
+  "what-players-win-by-tier": "{label} oyuncuları seviyelere göre ne kazanıyor"
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   ArrowSquareOutIcon,
   DotsThreeVerticalIcon,
@@ -43,6 +44,8 @@ export function ClanActionsMenu({
     emblem: string | null;
   };
 }) {
+  const { t } = useTranslation("components/clans/detail/actions-menu");
+  const { t: tMenu } = useTranslation("components/actions-menu");
   const { isFavorite, toggleFavorite } = useSearchHistory();
   const [shareOpen, setShareOpen] = useState(false);
 
@@ -65,7 +68,7 @@ export function ClanActionsMenu({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
-          aria-label="More actions"
+          aria-label={t("more-actions")}
           className="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground focus-visible:outline-none aria-expanded:bg-fd-secondary aria-expanded:text-fd-foreground"
         >
           <DotsThreeVerticalIcon className="size-3.5" weight="bold" />
@@ -78,11 +81,11 @@ export function ClanActionsMenu({
             }}
           >
             <StarIcon weight={fav ? "fill" : "bold"} />
-            {fav ? "Remove from favorites" : "Add to favorites"}
+            {fav ? tMenu("remove-from-favorites") : tMenu("add-to-favorites")}
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => setShareOpen(true)}>
             <ShareNetworkIcon weight="bold" />
-            Share
+            {tMenu("share")}
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a
@@ -91,7 +94,7 @@ export function ClanActionsMenu({
               rel="noopener noreferrer"
             >
               <GlobeIcon weight="bold" />
-              Open on WoT portal
+              {tMenu("open-in", { target: "WoT portal" })}
               <ArrowSquareOutIcon className="ml-auto size-3 text-fd-muted-foreground" />
             </a>
           </DropdownMenuItem>
@@ -103,7 +106,7 @@ export function ClanActionsMenu({
       <ShareModal
         open={shareOpen}
         onOpenChange={setShareOpen}
-        title={`Share [${clan.tag}]`}
+        title={tMenu("share-title", { name: `[${clan.tag}]` })}
         url={url}
         shareText={`Check [${clan.tag}] ${clan.name} on ${APP.NAME}`}
         ogImage={unicumPublic.og.region(region).clans(clan.tag).url()}

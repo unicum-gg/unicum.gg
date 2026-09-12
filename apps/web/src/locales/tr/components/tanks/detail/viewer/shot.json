@@ -1,0 +1,7 @@
+{
+  "firing": "{shell} ateşleniyor, {pen} mm. Atışı değiştir",
+  "no-such-round": "{mark}: bu topun böyle bir mermisi yok, açıları kendin ayarla",
+  "own-round": "{mark}: bu topun kendi mermisi, tüm değerleriyle",
+  "treat-it-as": "Şöyle değerlendir",
+  "treat-it-as-mark": "{mark} olarak değerlendir"
+}

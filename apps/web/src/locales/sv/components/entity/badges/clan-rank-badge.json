@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Grad {rank} på {board}",
+  "board": {
+    "advances": "Betyg för Offensiver i Befästning",
+    "skirmish-t10": "Betyg för Skärmytsling på Klass X",
+    "skirmish-t6": "Betyg för Skärmytsling på Klass VI",
+    "skirmish-t8": "Betyg för Skärmytsling på Klass VIII"
+  }
+}

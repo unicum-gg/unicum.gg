@@ -1,0 +1,13 @@
+{
+  "battles-overall": "总计{battles}战斗场次",
+  "checking-your-record-on-this": "正在检查您使用这辆坦克的记录...",
+  "fetching-your-garage": "正在获取您的车库",
+  "have-you-played": "您使用过{tank}吗？",
+  "more-to-go": "还需进行{count}场战斗",
+  "more-to-go-one": "还需进行{count}场战斗",
+  "sign-in-to-rate-it": "登录后进行评分",
+  "sign-in-with-your-wargaming-account-to-rate-": "使用您的默认账号登录后进行评分。我们会读取您使用这辆特定坦克的记录，从而避免此页面变成从未驾驶过它的玩家参与的投票。",
+  "signed-in-on": "已登录{region}",
+  "too-few-battles": "您使用{tank}进行过{played}场战斗。我们要求达到{required}场后投票才会计入，这样平均值才真正来自实际使用过它的玩家。",
+  "you-have-not-played": "您没有使用过{tank}"
+}

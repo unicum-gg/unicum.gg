@@ -1,30 +1,31 @@
+import { numberFormat } from "@/lib/format";
 import type { RatingColor } from "@unicum.gg/shared";
 import { winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import type { CompareVehicle } from "@unicum.gg/core/wargaming/wot/tanks/compare-assemble";
-import { dec2Fmt, intFmt } from "@/components/compare/cells";
+import { DEC2_FORMAT, INT_FORMAT } from "@/components/compare/cells";
 
 export type PerfRow = {
   label: string;
   /** Direction of "better"; omitted rows are informational (no winner). */
   kind?: "higher" | "lower";
   value: (v: CompareVehicle) => number | null;
-  format: (n: number) => string;
+  format: (n: number, locale: string) => string;
   color?: (n: number) => RatingColor;
 };
 
 export type PerfGroup = { title: string; rows: PerfRow[] };
 
-const pct1Fmt = new Intl.NumberFormat("en-US", {
+const PCT1_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
+} as const;
 
 // The server-side stats store percentages as 0-100, not as a 0-1 ratio (the
 // rating colour helpers take the ratio, hence the /100 where one is used).
-const pct = (n: number) => `${dec2Fmt.format(n)}%`;
-const pct1 = (n: number) => `${pct1Fmt.format(n)}%`;
-const int = (n: number) => intFmt.format(n);
-const dec = (n: number) => dec2Fmt.format(n);
+const pct = (n: number, locale: string) => `${numberFormat(locale, DEC2_FORMAT).format(n)}%`;
+const pct1 = (n: number, locale: string) => `${numberFormat(locale, PCT1_FORMAT).format(n)}%`;
+const int = (n: number, locale: string) => numberFormat(locale, INT_FORMAT).format(n);
+const dec = (n: number, locale: string) => numberFormat(locale, DEC2_FORMAT).format(n);
 const ratio = (n: number) => n / 100;
 
 /**

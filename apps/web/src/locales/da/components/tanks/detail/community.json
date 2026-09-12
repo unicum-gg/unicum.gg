@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Hvad spillere synes om denne kampvogn",
+  "not-rated": "Ikke bedømt endnu, bliv den første",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stemme",
+  "stars": "{value} ud af {max}",
+  "not-rated-short": "Ikke bedømt"
+}

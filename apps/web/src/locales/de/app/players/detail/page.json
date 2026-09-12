@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Panzer von {name} ({region}), jedes gespielte Fahrzeug",
+    "description": "Alle Panzer, die {name} in der Region {region} gespielt hat, mit Gefechten, Siegrate, Durchschnittsschaden und WN8 je Fahrzeug."
+  },
+  "achievements": {
+    "title": "Erfolge von {name} ({region}), {medals} Medaillen verdient",
+    "description": "Alle {medals} World of Tanks-Medaillen, die {name} in der Region {region} verdient hat, von der Kolobanov- und der Pool-Medaille bis hin zu Ehrenrängen und epischen Medaillen sowie allen, die noch verdient werden können."
+  },
+  "tournaments": {
+    "title": "Turniere von {name} ({region})",
+    "description": "Alle Wargaming-Turniere, an denen {name} in der Region {region} teilgenommen hat: das jeweilige Team, für das gespielt wurde, das Format und wie weit es kam. Diese Daten veröffentlicht Wargaming nur auf Turnierseite, nie auf Spielerseite."
+  },
+  "value": {
+    "title": "Wert des Kontos von {name} ({region})",
+    "description": "Wie viel das World of Tanks-Konto von {name} in der Region {region} wert ist: Kreditpunkte, Gold und Erfahrung, die in der Garage gebunden sind."
+  },
+  "mode": {
+    "title": "Statistiken von {name} in {mode} ({region})",
+    "description": "Die Werte von {name} in der Region {region} im Modus {mode}: Gefechte, Siegrate und Wertungen für diesen Modus im Vergleich zu den Werten aus Zufallsgefechten."
+  },
+  "overview": {
+    "title": "World of Tanks-Statistiken für {name} ({region}), {battles} Gefechte, {winrate} % WR",
+    "description": "Statistiken für {name} in der Region {region}: {battles} Gefechte, {winrate} % Siegrate, Wertung: {rating}. Aufschlüsselung nach Panzern, WN8, WNX und vollständige Clanhistorie."
+  },
+  "locked": {
+    "title": "World of Tanks-Konto von {name} gesperrt ({region})",
+    "description": "Das Konto von {name} ({region}) existiert, aber Wargaming hat es gesperrt, weshalb die zugehörigen World of Tanks-Statistiken nicht verfügbar sind."
+  },
+  "empty": {
+    "title": "World of Tanks-Spielerstatistiken von {name} ({region})",
+    "description": "World of Tanks-Spielerstatistiken für {name} ({region}): WN8- und WNX-Wertungen, Siegrate, Aufschlüsselung nach Panzern und vollständige Clanhistorie."
+  }
+}

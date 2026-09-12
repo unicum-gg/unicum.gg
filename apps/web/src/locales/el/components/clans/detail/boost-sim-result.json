@@ -1,0 +1,11 @@
+{
+  "already-running": "τρέχει ήδη",
+  "in-window": "σε παράθυρο",
+  "n-online": "/ {count} σε σύνδεση",
+  "no-reserves-selected": "Δεν επιλέχθηκαν αποθέματα.",
+  "no-stock-ready": "δεν υπάρχουν έτοιμα αποθέματα",
+  "not-available": "δεν είναι διαθέσιμο",
+  "threshold": "κατώφλι ({online}/{min})",
+  "would-activate": "θα ενεργοποιήσει",
+  "would-not-fire": "Αυτήν τη στιγμή δεν θα ενεργοποιούνταν."
+}

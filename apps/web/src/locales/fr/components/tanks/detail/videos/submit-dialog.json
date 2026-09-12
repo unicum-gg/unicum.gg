@@ -1,0 +1,13 @@
+{
+  "assists": "Assists",
+  "close": "Fermer",
+  "damage": "Dégâts",
+  "in-the-queue": "Elle est dans la file d’attente et apparaîtra dans cet onglet après analyse par un modérateur.",
+  "optional": "(optionnel)",
+  "paste-a-youtube-link": "Collez un lien YouTube, puis indiquez le moment exact où la bataille commence. Toute personne qui l’ouvre arrive à cette seconde précise, une suggestion dont l’horodatage est incorrect est donc refusée lors de l’analyse.",
+  "sending": "Envoi…",
+  "suggest": "Suggérer",
+  "suggest-a-video": "Suggérer une vidéo",
+  "suggest-another": "Suggérer un autre",
+  "suggestion-sent": "Suggestion envoyée"
+}

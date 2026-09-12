@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} tuloslista",
+  "carried-beside-a-clan-tag": "Kannetaan klaanitunnuksen vieressä. Sijoituksen vaakuna kertoo sijoituksen kilpailussa: sen numero on sijoitus ja väri kertoo, millä taululla sijoitus on. Arvosanat eivät saa vaakunaa, koska korkea WN8 ei ole asia, jonka klaani voi voittaa.",
+  "clan-badges": "Klaanin merkit",
+  "clan-board": {
+    "name": "{board}, parhaiden joukossa sijalla {rank}",
+    "how": "Sijoitus {board}-taulun parhaiden {rank} joukossa. Pysyy käytössä niin kauan kuin klaani pitää sijoituksen ja menetetään, kun se ei enää pidä sitä."
+  },
+  "clan-overflow": "Yli kolme sijoitusta pitävä klaani kokoaa loput {plus}-vaakunaan, paras ensin, jotta tunnus pysyy luettavana. Sen päällä leijuttaessa näet niiden nimet.",
+  "featured-tournament-winner": {
+    "name": "Esittelyssä olevan turnauksen voittaja",
+    "how": "Sama kuin edellä, mutta voitettu tapahtumassa, jonka Wargaming on merkinnyt esittelyyn. Teräksen sijaan kultaa, täsmälleen kuten pelaajan puolella."
+  },
+  "heading": "Kaikki {badge}t ja niiden ansaitseminen",
+  "heading-accent": "merkki",
+  "marks-carried-beside-a-nickname": "Nimimerkin vieressä näkyvät merkit kaikkialla, missä se esiintyy palvelussa {NAME}: sijoitustauluilla, klaanien kokoonpanoissa, haussa ja turnauskaavioissa.",
+  "n-badges": "{count} merkkiä",
+  "onslaught-champion": {
+    "name": "rynnistyksen mestari",
+    "how": "Saavutti Rynnistyksen Mestari-arvon, jota tarvitaan, jotta {standings} näkyvät ylipäätään. Saavutus säilyy sen jälkeenkin: jos arvosana putoaa takaisin rajan alapuolelle, sijoitus menetetään, mutta aiemmin saavutettua arvoa ei."
+  },
+  "onslaught-legend": {
+    "name": "rynnistyksen legenda",
+    "how": "Piti sijoituksen kauden Legend-rajan sisällä. Kyseessä on sijoitus, ei tulos: niitä voi olla kerrallaan vain tietty määrä, ja raja arvioidaan sen kauden perusteella, jolla sijoitus saavutettiin. Teräksensinisestä poiketen violetti, eli väri jolla sijoitukset itse maalaavat Legend-sijoituksen."
+  },
+  "player-badges": "Pelaajan merkit",
+  "player-overflow": "Yli kolme merkkiä kantava pelaaja kokoaa loput {plus}-vaakunaan yllä olevassa järjestyksessä, jotta nimimerkki pysyy taulukossa luettavana. Sen päällä leijuttaessa näet merkkien nimet, ja jokainen niistä linkittää edelleen omaan kohteeseensa.",
+  "ranked-standings": "rankattuja sijoja",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Tiliin yhdistetty Twitch-kanava. Vahvista se yhdistämällä Twitch omaan profiiliisi, jolloin vaakuna linkittää kanavallesi. Se näyttää, oletko parhaillasi lähetyksessä vai et."
+  },
+  "streamer-who-is-on-air": "Lähetyksessä oleva striimaaja kantaa lisäksi punaista LIVE-merkintää. Sitä ei ansaita eikä säilytetä: se ilmestyy lähetyksen alkaessa ja poistuu sen päättyessä, joten sitä ei koskaan koota muiden joukkoon.",
+  "support-subscription": "tukija-tilaus",
+  "supporter": {
+    "name": "Tukija"
+  },
+  "supporter-note": "Aktiivinen {link}, joka pidetään julkisena. Anonyymiyden valitsevat tukijat eivät kanna merkkiä, omasta päätöksestään.",
+  "the-marks-a-player-or": "Merkit, joita pelaaja tai klaani voi kantaa palvelussa {NAME}, mitä kukin niistä sanoo ja mitä niiden ansaitseminen täsmälleen vaatii.",
+  "tournament-winner": {
+    "name": "voittaja turnaus",
+    "how": "Klaanille kuuluva joukkue voitti turnauksen. Wargaming tallentaa joukkueet ja tilit, ei klaaneja, joten yhteys palautetaan vertaamalla jokaista kokoonpanoa klaanin jäsenyyteen pelipäivän tilanteen mukaan."
+  },
+  "verified": {
+    "name": "Vahvistettu",
+    "how": "Omistaja on kirjautunut Wargaming.net-tunnuksellaan ja yhdistänyt tämän tilin. Kirjautuminen on ainoa vaatimus, eikä se maksa mitään."
+  }
+}

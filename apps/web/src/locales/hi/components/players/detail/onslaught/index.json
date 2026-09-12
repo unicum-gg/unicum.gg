@@ -1,0 +1,12 @@
+{
+  "final": " · अंतिम",
+  "has-not-held-a-place": "{nickname} ने ऑन्स्लॉट लीडरबोर्ड पर कोई स्थान हासिल नहीं किया है।",
+  "live-season": "· लाइव सीज़न",
+  "loading-s-onslaught-record": "{nickname} का ऑन्स्लॉट रिकॉर्ड लोड हो रहा है...",
+  "onslaught": "ऑन्स्लॉट",
+  "onslaught-record": "{nickname} का ऑन्स्लॉट रिकॉर्ड",
+  "see-this-season-s-leaderboard": "इस सीज़न का लीडरबोर्ड देखें",
+  "standing-line": "{rating} रेटिंग अंक · {battles} युद्ध",
+  "the-board-only-lists-players": "बोर्ड केवल उन खिलाड़ियों को सूचीबद्ध करता है जो Champion तक पहुँचते हैं, यानी हर क्षेत्र में कुछ हज़ार खिलाड़ी। इसलिए लगभग हर प्रोफ़ाइल यहीं पहुँचती है। जिस सीज़न में वे वहाँ पहुँचते हैं, यह अपने-आप भर जाता है।",
+  "updated": "अपडेटेड {when}"
+}

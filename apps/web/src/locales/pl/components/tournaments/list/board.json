@@ -1,0 +1,14 @@
+{
+  "date": "Data",
+  "featured-tournament": "Wyróżniony turniej",
+  "format": "Format",
+  "mode": "Tryb",
+  "no-tournament-matches-the-current": "Żaden turniej nie pasuje do bieżących filtrów.",
+  "nothing-here-right-now-wargaming": "Na razie nic tu nie ma. Wargaming codziennie otwiera nowe turnieje, więc lista uzupełni się sama.",
+  "prize": "Nagroda",
+  "region-tournaments": "Turnieje: {region} ({count})",
+  "status": "Status",
+  "teams": "Drużyny",
+  "tier": "Poziom",
+  "tournament": "Turniej"
+}

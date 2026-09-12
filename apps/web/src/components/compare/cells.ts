@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/format";
 import type { ReactNode } from "react";
 import { type RatingColor, winrateColor } from "@unicum.gg/shared";
 
@@ -16,18 +17,18 @@ export type MetricRow = {
   cells: MetricCell[];
 };
 
-export const intFmt = new Intl.NumberFormat("en-US", {
+export const INT_FORMAT = {
   maximumFractionDigits: 0,
-});
-export const dec2Fmt = new Intl.NumberFormat("en-US", {
+} as const;
+export const DEC2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-export const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+export const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 export function dashCell(): MetricCell {
   return { display: "—", numeric: null };
@@ -35,26 +36,30 @@ export function dashCell(): MetricCell {
 
 export function numCell(
   value: number | null,
-  fmt: Intl.NumberFormat,
+  locale: string,
+  options: Intl.NumberFormatOptions = INT_FORMAT,
 ): MetricCell {
   if (value === null || !Number.isFinite(value)) return dashCell();
-  return { display: fmt.format(value), numeric: value };
+  return {
+    display: numberFormat(locale, options).format(value),
+    numeric: value,
+  };
 }
 
-export function pctCell(num: number, denom: number): MetricCell {
+export function pctCell(num: number, denom: number, locale: string): MetricCell {
   if (denom <= 0) return dashCell();
   const ratio = num / denom;
   return {
-    display: pctFmt.format(ratio),
+    display: numberFormat(locale, PCT_FORMAT).format(ratio),
     numeric: ratio,
   };
 }
 
-export function winratePctCell(wins: number, battles: number): MetricCell {
+export function winratePctCell(wins: number, battles: number, locale: string): MetricCell {
   if (battles <= 0) return dashCell();
   const ratio = wins / battles;
   return {
-    display: pctFmt.format(ratio),
+    display: numberFormat(locale, PCT_FORMAT).format(ratio),
     numeric: ratio,
     color: winrateColor(ratio),
   };
@@ -63,20 +68,22 @@ export function winratePctCell(wins: number, battles: number): MetricCell {
 export function avgCell(
   num: number,
   denom: number,
-  fmt: Intl.NumberFormat = intFmt,
+  locale: string,
+  options: Intl.NumberFormatOptions = INT_FORMAT,
 ): MetricCell {
   if (denom <= 0) return dashCell();
   const value = num / denom;
-  return { display: fmt.format(value), numeric: value };
+  return { display: numberFormat(locale, options).format(value), numeric: value };
 }
 
 export function ratingCell(
   value: number | null,
   color: (v: number) => RatingColor,
+  locale: string,
 ): MetricCell {
   if (value === null) return dashCell();
   return {
-    display: dec2Fmt.format(value),
+    display: numberFormat(locale, DEC2_FORMAT).format(value),
     numeric: value,
     color: color(value),
   };

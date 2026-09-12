@@ -1,0 +1,21 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Celkem",
+    "day": "Posledních 24h",
+    "week": "Posledních 7d",
+    "month": "Posledních 30d"
+  },
+  "sections": {
+    "territory": "Území",
+    "t10": "X. úroveň",
+    "t8": "VIII. úroveň",
+    "t6": "VI. úroveň"
+  },
+  "rows": {
+    "provinces": "Provincie",
+    "elo": "ELO",
+    "battles": "Bitev",
+    "winrate": "Míra výher"
+  }
+}

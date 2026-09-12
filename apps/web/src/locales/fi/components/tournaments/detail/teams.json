@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Keskimääräinen arvo {rated}/{size} pelaajasta",
+  "average-over-recent": "Keskimääräinen arvo {rated}/{size} pelaajasta, jotka pelasivat viimeisten 30 päivän aikana",
+  "metric-over-last-30-days": "{metric} viimeisten 30 päivän aikana",
+  "n-confirmed": "{count} vahvistettua",
+  "no-team-matches-the-current": "Mikään joukkue ei vastaa nykyisiä suodattimia.",
+  "no-teams-recorded-yet-registrations": "Joukkueita ei ole vielä tallennettu. Rekisteröinnit näkyvät täällä, kun tämä turnaus on luettu kokonaan, mikä tapahtuu muutaman minuutin kuluessa sen avaamisesta.",
+  "none-played-in-30-days": "Kukaan tästä kokoonpanosta ei ole pelannut viimeisten 30 päivän aikana",
+  "players": "Pelaajat",
+  "qualified": "Kelpoiset",
+  "reward": "Palkkio",
+  "team": "Joukkue",
+  "teams": "Joukkueet ({length})",
+  "wr": "WR"
+}

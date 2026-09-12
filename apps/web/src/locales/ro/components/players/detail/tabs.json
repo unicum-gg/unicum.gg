@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Prezentare generală",
+    "tanks": "Tancuri",
+    "sessions": "Sesiuni",
+    "achievements": "Realizări",
+    "tournaments": "Turneele",
+    "value": "Valoare"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

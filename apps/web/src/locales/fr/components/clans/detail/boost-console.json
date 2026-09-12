@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Ajouter un flux de travail",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Chaque automatisation active ses réserves pendant un créneau horaire, dès qu’un nombre suffisant de membres est en partie. Elle s’exécute sur votre compte, sans que vous ayez besoin d’être en ligne. Ajoutez-en autant que nécessaire.",
+  "n-online": "/ {count} en ligne",
+  "officer": "Officier",
+  "online": "En ligne",
+  "recent-activations": "activations récentes",
+  "reserve": "Réserve",
+  "stronghold-boosts": "Boosts de forteresse",
+  "when": "Quand",
+  "workflow": "Workflow"
+}

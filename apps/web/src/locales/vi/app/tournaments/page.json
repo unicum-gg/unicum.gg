@@ -1,0 +1,8 @@
+{
+  "description": "Mọi giải đấu Wargaming trên {region}: các bảng xếp hạng vàng hằng ngày, các giải vô địch Clan, ai đã tham gia và ai đã chiến thắng. Bảng đấu, điểm số và danh sách đội đầy đủ.",
+  "live-many": "{count} giải đấu đang mở hoặc đang được chơi trên {region} ngay lúc này,",
+  "live-one": "{count} giải đấu đang mở hoặc đang được chơi trên {region} ngay lúc này,",
+  "no-live": "Các giải đấu diễn ra trên {region} mỗi ngày,",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "từ các bảng xếp hạng 1v1 thi đấu để giành vàng đến các giải vô địch Clan thi đấu để giành tiền mặt. Đầy đủ nhánh đấu và điểm số, mọi đội cùng danh sách của mình, và bên mà mỗi đội bắt đầu, theo từng bản đồ."
+}

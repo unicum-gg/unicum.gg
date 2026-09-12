@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "كل تصويت صادر عن حساب لعب بهذه الدبابة.",
+  "every-vote-played-average": "كل تصويت صادر عن حساب لعب بهذه الدبابة، بمتوسط {battles} معارك بها.",
+  "fun": "المتعة",
+  "how-good-the-tank-is": "مدى جودة الدبابة",
+  "how-much-people-enjoy-it": "مدى استمتاع الأشخاص بها",
+  "if-you-have-played-it": "إذا لعبت بها، فأنت بالضبط الشخص الذي تنتظره هذه الصفحة.",
+  "nobody-has-rated-this-tank": "لم يقيّم أحد هذه الدبابة بعد.",
+  "overall": "بشكل عام",
+  "votes": "{count} تصويتات",
+  "votes-one": "{count} تصويت"
+}

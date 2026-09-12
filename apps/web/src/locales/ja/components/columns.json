@@ -1,0 +1,14 @@
+{
+  "clan": "クラン",
+  "player": "プレイヤー",
+  "members": "メンバー",
+  "battles": "戦闘数",
+  "avg-damage": "平均ダメージ",
+  "avg-xp": "平均XP",
+  "winrate": "勝率 %",
+  "result": "結果",
+  "tournament": "トーナメント",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

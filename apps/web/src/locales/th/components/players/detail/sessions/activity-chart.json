@@ -1,0 +1,5 @@
+{
+  "battles": "{count} การรบ",
+  "chart-label": "การรบที่เล่นต่อ {granularity} แบ่งสีตาม {metric}",
+  "no-battles": "ไม่เคยมีการรบ"
+}

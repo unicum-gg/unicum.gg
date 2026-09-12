@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Las {count} arenas de batalla de World of Tanks. Filtra por camuflaje y modo de juego, y abre un mapa para ver su minimapa, tamaño y las banderas de las bases y los puntos de aparición de cada modo.",
+    "title": "Todos los mapas de World of Tanks ({region}), todas las arenas de batalla",
+    "description": "Explora todos los mapas de World of Tanks en {region}: minimapas, tamaño, camuflaje y modos de juego compatibles, con las banderas de las bases y los puntos de aparición de cada modo.",
+    "heading": "Todos <accent>los mapas</accent>"
+  },
+  "battle-type": {
+    "intro": "Los {count} mapas de World of Tanks que se juegan en el modo {type}, {blurb}. Abre un mapa para ver su minimapa, tamaño y las banderas de las bases y los puntos de aparición de cada modo.",
+    "title": "Mapas de World of Tanks, modo {type} ({region}), todas las arenas de la rotación",
+    "description": "Todos los mapas de World of Tanks incluidos en la rotación del modo {type} en {region}: minimapas, tamaño, camuflaje y modos de juego compatibles, con banderas de las bases y puntos de aparición.",
+    "heading": "<accent>Mapas de</accent> {type}"
+  },
+  "blurbs": {
+    "random": "la rotación Estándar de 15 contra 15",
+    "battle_royale": "el Modo de último Tanque en pie",
+    "frontline": "el Modo a gran escala de 30 contra 30",
+    "onslaught": "el Modo clasificatorio de 7 contra 7",
+    "onslaught_night": "el modo clasificatorio 7 contra 7 nocturno, con menor alcance de visión, disponible actualmente en la Prueba común",
+    "grand_battle": "el Modo de Nivel X de 30 contra 30",
+    "clan_wars": "Guerras de Clanes y Avances",
+    "waffentrager": "el evento Waffenträger",
+    "last_stand": "el evento Last Stand",
+    "arcade": "eventos arcade y especiales",
+    "story_mode": "las operaciones centradas en la historia",
+    "training": "Salas de entrenamiento y tutoriales"
+  }
+}

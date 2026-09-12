@@ -1,0 +1,14 @@
+{
+  "ammunition": "Ammunition",
+  "characteristics": "Egenskaper för {tank}",
+  "consumables": "Förnödenheter",
+  "crew-level": "Besättningens nivå",
+  "crew-skills": "Besättningsfärdigheter",
+  "equipment": "Utrustning",
+  "field-mods": "Fältmodifieringar",
+  "historical-reference": "Historisk referens för {tank}",
+  "modules": "Moduler för {tank}",
+  "research-path": "Gren i Teknologiträdet för {tank}",
+  "similar": "Vagnar nära {tank}",
+  "videos": "Videor om {tank}"
+}

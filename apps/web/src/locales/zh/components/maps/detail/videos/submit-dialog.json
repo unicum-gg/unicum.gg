@@ -1,0 +1,17 @@
+{
+  "close": "关闭",
+  "format": "格式",
+  "here": "这里",
+  "in-the-queue": "它已进入队列，审核员查看后会显示在{where}。在此期间，你提交的内容会在该页面上灰显。",
+  "log-in-to-suggest-a": "登录以建议战术",
+  "on-map": "在 {map} 上",
+  "players-per-team": "每队玩家数",
+  "sending": "发送中…",
+  "suggest": "建议",
+  "suggest-a-tactic": "建议战术",
+  "suggest-another": "再建议一个",
+  "suggestion-sent": "建议已发送",
+  "tier": "等级",
+  "what-to-submit": "一场竞技战斗，从开始的那一秒开始。地图从{map}开始，并随视频推进：一次军团活动贯穿整个轮换。进行战斗的方向是指挥官查找它时使用的部分，因此需要填写，而不是猜测。",
+  "what-was-played": "所玩内容"
+}

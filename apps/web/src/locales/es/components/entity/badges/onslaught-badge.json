@@ -1,0 +1,5 @@
+{
+  "reached": "Alcanzado {crest}",
+  "best-rank": "mejor puesto: #{rank}",
+  "seasons": "{count} temporadas"
+}

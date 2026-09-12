@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: vaš klizni prosjek kombinovane štete (posljednjih ~100 bitaka) mora nadmašiti 65% igrača na ovom tenku u posljednjih 14 dana"
+    },
+    "mark2": {
+      "label": "2 Marka",
+      "tip": "2 Marka: vaš klizni prosjek kombinovane štete (posljednjih ~100 bitaka) mora nadmašiti 85% igrača na ovom tenku u posljednjih 14 dana"
+    },
+    "mark3": {
+      "label": "3 Marke",
+      "tip": "3 Marke: vaš klizni prosjek kombinovane štete (posljednjih ~100 bitaka) mora nadmašiti 95% igrača na ovom tenku u posljednjih 14 dana"
+    }
+  },
+  "rows-per-page": "Redova po stranici",
+  "previous-page": "Prethodna stranica",
+  "page": "Stranica {current} / {totalPages}",
+  "next-page": "Sljedeća stranica",
+  "all": "Sve"
+}

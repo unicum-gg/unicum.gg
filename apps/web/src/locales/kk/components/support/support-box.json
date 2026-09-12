@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Төлем тоқтатылды.",
+  "claim-your-supporter-role-on-discord": "Discord-та қолдаушы рөлін алу",
+  "could-not-add-the-discord-role-please-try-ag": "Discord рөлін қосу мүмкін болмады. Қайталап көріңіз.",
+  "could-not-open-the-billing-portal": "Төлем порталын ашу мүмкін болмады.",
+  "could-not-start-checkout-please-try-again": "Төлемді бастау мүмкін болмады. Қайталап көріңіз.",
+  "could-not-update-your-preference": "Параметріңізді жаңарту мүмкін болмады.",
+  "log-in-with-wargaming": "Wargaming арқылы кіру",
+  "log-in-with-wargaming-to": "{NAME} жобасын қолдау үшін Wargaming арқылы кіріңіз.",
+  "manage-subscription": "Жазылымды басқару",
+  "only-active-supporters-can-claim-the-discord": "Discord рөлін тек белсенді қолдаушылар ала алады.",
+  "or-choose-your-own-amount": "Немесе өз соманы таңдаңыз",
+  "pay-what-you-want": "Қалаған соманы төлеңіз.",
+  "pick-an-amount": "Соманы таңдаңыз немесе өзіңіз енгізіңіз, айына €{min} бастап.",
+  "re-sync-discord-role": "Discord рөлін қайта синхрондау",
+  "secured-by-stripe": "Stripe қорғанысымен қорғалған. Кез келген уақытта тоқтатуға болады.",
+  "show-me-anonymously-on-the": "Мені тұғырда жасырын түрде көрсету",
+  "support-subscriptions-are-coming-soon": "Қолдау жазылымдары жақында іске қосылады.",
+  "supporter-role-added-on-discord": "Discord-та қолдаушы рөлі қосылды!",
+  "you-are-a-supporter-thank": "Сіз қолдаушысыз. {NAME} жобасын жұмыс істетіп тұрғаныңыз үшін рақмет."
+}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/link";
 import { notFound } from "next/navigation";
 import { Card, Cards } from "fumadocs-ui/components/card";
 import {
@@ -13,6 +13,7 @@ import { JsonLd } from "@/components/json-ld";
 import { openapi } from "@/lib/openapi";
 import { getDocsSections, source } from "@/lib/docs-source";
 import { constructMetadata } from "@/lib/metadata";
+import { DEFAULT_LOCALE } from "@/lib/translations";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -44,6 +45,7 @@ export async function generateMetadata({
   if (page) {
     const data = page.data as { title?: string; description?: string };
     return constructMetadata({
+    locale: DEFAULT_LOCALE,
       title: `${data.title ?? page.url} | API`,
       description: data.description ?? APP.DESCRIPTION,
       ogTitle: data.title,
@@ -56,6 +58,7 @@ export async function generateMetadata({
   const section = slug?.length === 1 && sections.find((s) => s.slug === slug[0]);
   if (section) {
     return constructMetadata({
+    locale: DEFAULT_LOCALE,
       title: `${section.name} API`,
       description:
         section.description ??
@@ -67,6 +70,7 @@ export async function generateMetadata({
   }
 
   return constructMetadata({
+    locale: DEFAULT_LOCALE,
     title: "API reference",
     description: `Interactive reference for the ${APP.NAME} public API: player, clan and tank search, leaderboards and live updates across EU, NA and Asia.`,
     ogTitle: "API reference",

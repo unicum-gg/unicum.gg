@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Omkostninger (credits)",
+    "buyGold": "Omkostninger (guld)",
+    "researchXp": "Forsknings XP",
+    "shellCost": "Granatkoster",
+    "ammoCost": "Omkostninger ved fuld ammunition",
+    "class3": "3. Klasse",
+    "class2": "2nd Klasse",
+    "class1": "1st Klasse",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Marks (85%)",
+    "mark3": "3 Marks (95%)"
+  }
+}

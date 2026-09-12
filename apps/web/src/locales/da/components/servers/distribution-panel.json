@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Sådan sammenlignes {region}-spillere",
+  "median-n": "median {value}",
+  "metric-rating": "{metric}-vurdering",
+  "tracked-accounts-with-at-least": "{players} registrerede konti med mindst {minBattles} kampe. Farverne er de samme intervaller, som webstedet bruger alle andre steder.",
+  "win-rate": "Vindrate",
+  "win-rate-distribution-across-the-region-s-tr": "Fordeling af sejrsrate blandt regionens registrerede spillere"
+}

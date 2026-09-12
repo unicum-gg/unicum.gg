@@ -1,0 +1,11 @@
+{
+  "closes": "Закрыць {when}",
+  "map-pool": "Пул карт",
+  "place": "Месца",
+  "prize": "Приз",
+  "prizes": "Призы",
+  "qualified": "Кваліфікаваліся ({count})",
+  "register": "Зарэгістравацца",
+  "tournaments": "Турніры",
+  "winner": "{count, plural, one {Пераможца} few {Пераможцы} many {Пераможцаў} other {Пераможцы}}"
+}

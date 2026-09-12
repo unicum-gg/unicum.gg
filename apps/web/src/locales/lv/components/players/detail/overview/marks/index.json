@@ -1,0 +1,21 @@
+{
+  "title": "{nickname} atzīmes un meistarība",
+  "excellence": {
+    "title": "Izcilības zīmes",
+    "description": "Transportlīdzekļi pēc atzīmēm uz to lielgabala. Atzīme ir ilgstošs vidējais rādītājs: spēle to aprēķina slīdošā neseno kauju logā, salīdzinot ar reģiona rezultātiem ar šo transportlīdzekli.",
+    "partial": "Atzīmes nolasītas {known} no {garage} transportlīdzekļiem. Pārējās tiks aizpildītas, kontam atjaunojoties.",
+    "note": "{marked} no {garage} transportlīdzekļiem ir atzīme.",
+    "note-share": "{marked} no {garage} transportlīdzekļiem ir atzīme ({percent}% garāžas)."
+  },
+  "mastery": {
+    "title": "Meistarības atzīmes",
+    "description": "Transportlīdzekļi pēc to labākās nozīmītes. Nozīmīte ir viena kauja, nevis vidējais rādītājs: spēle to piešķir par vienas kaujas pieredzi, salīdzinot ar reģiona rezultātiem ar šo transportlīdzekli.",
+    "note": "{aces} no {garage} transportlīdzekļiem ir Tanka dūža nozīmīte.",
+    "note-share": "{aces} no {garage} transportlīdzekļiem ir Tanka dūža nozīmīte ({percent}% garāžas)."
+  },
+  "reach": {
+    "heading": "Spēlē virs lielgabala",
+    "description": "Transportlīdzekļi, kuru kopējie bojājumi jau pārsniedz atzīmi, ko tie nenes. Nozīmīte ir šie kopējie bojājumi, iekrāsoti atbilstoši atzīmei, kuru tie pārsniedz."
+  },
+  "none": "Nav"
+}

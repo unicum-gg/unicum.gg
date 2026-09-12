@@ -1,0 +1,11 @@
+{
+  "date": "Datum",
+  "featured-tournament": "Ausgewähltes Turnier",
+  "format": "Format",
+  "n-of-the-roster-were-in-the-clan": "{count} aus dem Kader waren im Clan",
+  "no-tournament-matches-the-current": "Kein Turnier entspricht den aktuellen Filtern.",
+  "played-as": "Gespielt als",
+  "result": "Ergebnis",
+  "status": "Status",
+  "tier": "Stufe"
+}

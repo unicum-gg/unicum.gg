@@ -1,0 +1,8 @@
+{
+  "description": "Every Wargaming tournament on {region}: the daily gold ladders, the clan championships, who entered and who won. Full brackets, scores and rosters.",
+  "live-many": "{count} tournaments open or being played on {region} right now,",
+  "live-one": "{count} tournament open or being played on {region} right now,",
+  "no-live": "Tournaments run on {region} every day,",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "from 1v1 ladders playing for gold to clan championships playing for cash. Full brackets and scores, every team with its roster, and the side each one started on, map by map."
+}

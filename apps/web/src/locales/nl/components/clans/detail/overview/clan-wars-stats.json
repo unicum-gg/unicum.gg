@@ -1,0 +1,21 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Totaal",
+    "day": "Laatst 24u",
+    "week": "Laatst 7d",
+    "month": "Laatst 30d"
+  },
+  "sections": {
+    "territory": "Gebied",
+    "t10": "Niveau X",
+    "t8": "Niveau VIII",
+    "t6": "Niveau VI"
+  },
+  "rows": {
+    "provinces": "Provincies",
+    "elo": "ELO",
+    "battles": "Gevechten",
+    "winrate": "Winstpercentage"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "詳細は {min} で表示されます。そのため、この形状は 1 人のプレイヤーではなく、戦車について何かを示します",
+  "community-rating-by-axis": "軸ごとのコミュニティ評価",
+  "from-votes": "詳細投票 {count} 件に基づく",
+  "from-votes-one": "詳細投票 {count} 件に基づく",
+  "nobody-yet": "まだ誰も詳細軸を入力していません",
+  "only-votes": "現時点で詳細投票は {count} 件 בלבד",
+  "only-votes-one": "現時点で詳細投票は {count} 件 בלבד"
+}

@@ -1,0 +1,21 @@
+{
+  "trigger": "Feedback",
+  "title": "Trimite feedback",
+  "topic-placeholder": "Selectează un subiect...",
+  "message-placeholder": "Feedbackul tău...",
+  "send": "Trimite",
+  "sent": "Îți mulțumim pentru feedback!",
+  "failed": "Feedbackul nu a putut fi trimis. Încearcă din nou.",
+  "topics": {
+    "bug": "Raportare eroare",
+    "idea": "Idee de funcționalitate",
+    "data": "Precizia datelor",
+    "other": "Altele"
+  },
+  "sentiments": {
+    "awful": "Groaznic",
+    "bad": "Rău",
+    "good": "Bine",
+    "great": "Excelent"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Nasumični",
+    "battle_royale": "Čelični lovac",
+    "frontline": "Linija fronta",
+    "onslaught": "Juriš",
+    "onslaught_night": "{onslaught} Ноћ",
+    "grand_battle": "Velika Borba",
+    "clan_wars": "Klanske ratove",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Последњи отпор",
+    "arcade": "Аркада",
+    "story_mode": "Режим приче",
+    "training": "Trening"
+  },
+  "player-modes": {
+    "overall": "Nasumične bitke",
+    "skirmish": "Čarke",
+    "advances": "Napadi",
+    "grand": "Велике битке",
+    "ranked": "Rangirane borbe",
+    "cw-x": "Ратови кланова X",
+    "cw-viii": "Ратови кланова VIII",
+    "cw-vi": "Ратови кланова VI",
+    "steel-hunter": "Čelični lovac",
+    "onslaught": "Juriš"
+  },
+  "stronghold-tiers": {
+    "advances": "Napadi",
+    "t10": "Окршај T10",
+    "t8": "Окршај T8",
+    "t6": "Окршај T6"
+  },
+  "stronghold-periods": {
+    "24h": "Poslednjih 24 časa",
+    "7d": "Poslednjih 7 dana",
+    "30d": "Poslednjih 30 dana",
+    "overall": "Ukupno"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Borbi",
+    "winrate": "Procenat pobeda"
+  },
+  "clan-boards": {
+    "advances": "Napadi",
+    "t10": "Окршај X",
+    "t8": "Окршај VIII",
+    "t6": "Окршај VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Bitka u Susretanju",
+    "assault": "Juriš",
+    "attack-defense": "Napad/Odbrana"
+  },
+  "map-camouflage": {
+    "summer": "Летња",
+    "winter": "Зимска",
+    "desert": "Пустињска"
+  },
+  "map-poi": {
+    "1": "Artiljerijski štab",
+    "2": "Центар везе",
+    "3": "Осматрачница"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Сусрет",
+    "assault2": "Напад/одбрана",
+    "comp7": "Juriš"
+  },
+  "battle-formats": {
+    "random": "Nasumični",
+    "clan_wars": "Klanske ratove",
+    "advances": "Napadi",
+    "skirmish": "Čarke",
+    "maneuvers": "Маневри",
+    "onslaught": "Juriš",
+    "tournament": "Turnir"
+  },
+  "battle-results": {
+    "victory": "Pobeda",
+    "defeat": "Poraz",
+    "draw": "Nerešeno"
+  },
+  "spawn-directions": {
+    "north": "Север",
+    "south": "Југ",
+    "east": "Исток",
+    "west": "Запад"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Ускоро",
+    "registration_started": "Пријава отворена",
+    "registration_finished": "Registracija zatvorena",
+    "running": "У току",
+    "finished": "Завршено",
+    "complete": "Završeno"
+  },
+  "onslaught-tiers": {
+    "legend": "Legenda",
+    "champion": "Шампион",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Тешки",
+    "mediumTank": "Srednja",
+    "lightTank": "Laki",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Juriš",
+    "break": "Proboj",
+    "support": "Podrška",
+    "universal": "Svestrani",
+    "sniper": "Снајперски",
+    "wheeled": "Точкаш"
+  },
+  "mastery-badges": {
+    "class3": "3. razred",
+    "class2": "2. razred",
+    "class1": "1. razred",
+    "ace": "As Tenkista"
+  },
+  "clan-modes": {
+    "random": "Nasumične bitke",
+    "stronghold": "Утврђење",
+    "skirmish": "Čarke",
+    "clan-wars": "Klanske ratove"
+  },
+  "features": {
+    "stronghold": "Утврђење",
+    "skirmish": "Čarke",
+    "marks-of-excellence": "Ocene Izvrsnosti",
+    "marks-of-mastery": "Marke majstorstva",
+    "personal-rating": "Lični rejting",
+    "world-of-tanks-rating": "World of Tanks рејтинг",
+    "common-test": "Zajednički test",
+    "tournaments": "Turniri"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marka",
+    "3": "3 Marke",
+    "name": "Ocene Izvrsnosti"
+  }
+}

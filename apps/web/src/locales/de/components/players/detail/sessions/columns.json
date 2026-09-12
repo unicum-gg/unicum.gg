@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Bewertung (WN)",
+    "tip": "Wertung nur für diese Gefechte, nicht für das gesamte Konto"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Gewinnrate in diesen Gefechten"
+  },
+  "avgDamage": {
+    "label": "Durchschnittsschaden"
+  },
+  "avgFrags": {
+    "label": "Durchschnittliche Zerstörungen",
+    "tip": "Zerstörte Gegner pro Gefecht"
+  },
+  "damageRatio": {
+    "label": "Schadensverhältnis",
+    "tip": "Verursachter Schaden im Verhältnis zum erhaltenen Schaden"
+  },
+  "kd": {
+    "label": "Zerstörungs-Verhältnis",
+    "tip": "Zerstörte Gegner im Verhältnis zu verlorenen Fahrzeugen"
+  },
+  "survivalRate": {
+    "label": "Überlebte Gefechte"
+  },
+  "avgSpotted": {
+    "label": "Durchschnittlich gesichtet",
+    "tip": "Aufgeklärte Gegner pro Gefecht"
+  },
+  "avgDefense": {
+    "label": "Basisverteidigung",
+    "tip": "Verteidigungspunkte pro Gefecht"
+  },
+  "avgXp": {
+    "label": "Durchschnittliche XP"
+  }
+}

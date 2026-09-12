@@ -1,5 +1,10 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import { statLabel } from "@/components/stat-label";
+
 import { StarIcon } from "@phosphor-icons/react";
 import { type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
@@ -25,35 +30,26 @@ import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
 import { MoMIcon } from "@/components/tanks/mom-icon";
 import { cn } from "@/lib/utils";
 import {
-  VEHICLE_CLASS_LABEL_FULL,
   VEHICLE_CLASSES,
-  VEHICLE_ROLE_LABEL,
 } from "@unicum.gg/shared";
 import type { TankFilters } from "@/hooks/use-tank-filters";
+import { useTranslation } from "@/hooks/use-translation";
+import type { FilterSubject } from "@/components/filter-subject";
 
 const CATEGORY_OPTIONS = [
-  { value: "standard", label: "Standard", weight: "regular", color: "text-fd-muted-foreground" },
-  { value: "premium", label: "Premium", weight: "fill", color: "text-[#FAB81B]" },
-  { value: "reward", label: "Reward", weight: "fill", color: "text-[#4FC4D9]" },
+  { value: "standard", weight: "regular", color: "text-fd-muted-foreground" },
+  { value: "premium", weight: "fill", color: "text-[#FAB81B]" },
+  { value: "reward", weight: "fill", color: "text-[#4FC4D9]" },
 ] as const;
 
 // The presentational filter bar: search + tier/nation/type/role/category chips +
 // a min/max range on a chosen column. `searchNoun` labels the search placeholder
 // and `extra` hosts page-specific controls (e.g. a column selector).
-const MOE_OPTIONS = [
-  { value: 0, label: "No mark yet" },
-  { value: 1, label: "1 mark" },
-  { value: 2, label: "2 marks" },
-  { value: 3, label: "3 marks" },
-];
-
-const MOM_OPTIONS = [
-  { value: 0, label: "No badge yet" },
-  { value: 1, label: "3rd Class" },
-  { value: 2, label: "2nd Class" },
-  { value: 3, label: "1st Class" },
-  { value: 4, label: "Ace Tanker" },
-];
+// Values only: each one names itself through `components/filter-bar`, where a
+// mark count reads as the sentence its language wants rather than a number and
+// an English noun glued together.
+const MOE_OPTIONS = [0, 1, 2, 3] as const;
+const MOM_OPTIONS = [0, 1, 2, 3, 4] as const;
 
 export function TankFilterBar<T>({
   filters,
@@ -61,17 +57,28 @@ export function TankFilterBar<T>({
   extra,
 }: {
   filters: TankFilters<T>;
-  searchNoun: string;
+  /** What the list holds, as a key into `components/filter-bar`: the
+   * placeholder is a whole sentence per subject rather than a count and a noun
+   * concatenated, which only reads in English. */
+  searchNoun: FilterSubject;
   extra?: ReactNode;
 }) {
+  const { locale } = useLocale();
+  const { t: tStats } = useTranslation("components/stat-labels");
   const { region } = useRegion();
+  const { t } = useTranslation("components/filter-bar");
+  const { t: tOwn } = useTranslation("components/tanks/tank-filter-bar");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tClasses } = useTranslation("game/vehicle-classes");
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-xs">
       <input
         type="text"
         value={filters.query}
         onChange={(e) => filters.setQuery(e.target.value)}
-        placeholder={`Search among ${filters.resultCount.toLocaleString("en-US")} ${searchNoun}`}
+        placeholder={t(`search.${searchNoun}`, {
+          count: numberFormat(locale).format(filters.resultCount),
+        })}
         className="h-7 w-52 rounded-md border border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:border-fd-ring focus:outline-none"
       />
       <ChipRow>
@@ -114,7 +121,7 @@ export function TankFilterBar<T>({
                   <VehicleTypeIcon type={c} size={14} />
                 </Chip>
               </TooltipTrigger>
-              <TooltipContent>{VEHICLE_CLASS_LABEL_FULL[c]}</TooltipContent>
+              <TooltipContent>{tClasses(c)}</TooltipContent>
             </Tooltip>
           ))}
         </TooltipProvider>
@@ -132,7 +139,7 @@ export function TankFilterBar<T>({
                     <VehicleRoleIcon role={r} size={14} />
                   </Chip>
                 </TooltipTrigger>
-                <TooltipContent>{VEHICLE_ROLE_LABEL[r]}</TooltipContent>
+                <TooltipContent>{tGame(`vehicle-roles.${r}`)}</TooltipContent>
               </Tooltip>
             ))}
           </TooltipProvider>
@@ -150,7 +157,7 @@ export function TankFilterBar<T>({
                   <StarIcon weight={o.weight} className={cn("size-3.5", o.color)} />
                 </Chip>
               </TooltipTrigger>
-              <TooltipContent>{o.label}</TooltipContent>
+              <TooltipContent>{t(`category.${o.value}`)}</TooltipContent>
             </Tooltip>
           ))}
           {/* Only while a test is running: it filters on a state that does not
@@ -163,12 +170,11 @@ export function TankFilterBar<T>({
                   onClick={() => filters.setTestOnly(!filters.testOnly)}
                 >
                   <span className="text-[11px] font-bold tracking-wide text-brand">
-                    CT
-                  </span>
+                    {tOwn("ct")}</span>
                 </Chip>
               </TooltipTrigger>
               <TooltipContent>
-                Changed by the Common Test: new vehicles and rebalanced ones
+                {t("common-test")}
               </TooltipContent>
             </Tooltip>
           )}
@@ -182,24 +188,26 @@ export function TankFilterBar<T>({
       {filters.hasMoe && (
         <ChipRow>
           <TooltipProvider delayDuration={100}>
-            {MOE_OPTIONS.map((o) => (
-              <Tooltip key={o.value}>
+            {MOE_OPTIONS.map((value) => (
+              <Tooltip key={value}>
                 <TooltipTrigger asChild>
                   <Chip
-                    active={filters.moeSel.has(o.value)}
-                    onClick={() => filters.toggleMoe(o.value)}
+                    active={filters.moeSel.has(value)}
+                    onClick={() => filters.toggleMoe(value)}
                   >
-                    {o.value === 0 ? (
-                      <span className="text-[11px] font-medium">None</span>
+                    {value === 0 ? (
+                      <span className="text-[11px] font-medium">
+                        {t("none")}
+                      </span>
                     ) : (
                       <MoEIcon
-                        bars={o.value as 1 | 2 | 3}
-                        color={MOE_COLORS[o.value as 1 | 2 | 3]}
+                        bars={value as 1 | 2 | 3}
+                        color={MOE_COLORS[value as 1 | 2 | 3]}
                       />
                     )}
                   </Chip>
                 </TooltipTrigger>
-                <TooltipContent>{o.label}</TooltipContent>
+                <TooltipContent>{t(`moe.${value}`)}</TooltipContent>
               </Tooltip>
             ))}
           </TooltipProvider>
@@ -208,24 +216,26 @@ export function TankFilterBar<T>({
       {filters.hasMom && (
         <ChipRow>
           <TooltipProvider delayDuration={100}>
-            {MOM_OPTIONS.map((o) => (
-              <Tooltip key={o.value}>
+            {MOM_OPTIONS.map((value) => (
+              <Tooltip key={value}>
                 <TooltipTrigger asChild>
                   <Chip
-                    active={filters.momSel.has(o.value)}
-                    onClick={() => filters.toggleMom(o.value)}
+                    active={filters.momSel.has(value)}
+                    onClick={() => filters.toggleMom(value)}
                   >
-                    {o.value === 0 ? (
-                      <span className="text-[11px] font-medium">None</span>
+                    {value === 0 ? (
+                      <span className="text-[11px] font-medium">
+                        {t("none")}
+                      </span>
                     ) : (
                       <MoMIcon
-                        mastery={o.value as 1 | 2 | 3 | 4}
+                        mastery={value as 1 | 2 | 3 | 4}
                         className="h-3.5"
                       />
                     )}
                   </Chip>
                 </TooltipTrigger>
-                <TooltipContent>{o.label}</TooltipContent>
+                <TooltipContent>{t(`mom.${value}`)}</TooltipContent>
               </Tooltip>
             ))}
           </TooltipProvider>
@@ -242,7 +252,7 @@ export function TankFilterBar<T>({
           <SelectContent>
             {filters.rangeCols.map((c) => (
               <SelectItem key={c.key} value={c.key}>
-                {c.label}
+                {statLabel(c.label, tStats)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -251,14 +261,14 @@ export function TankFilterBar<T>({
           type="number"
           value={filters.minVal}
           onChange={(e) => filters.setMinVal(e.target.value)}
-          placeholder="Min"
+          placeholder={t("min")}
           className="h-full w-20 border-l border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:outline-none"
         />
         <input
           type="number"
           value={filters.maxVal}
           onChange={(e) => filters.setMaxVal(e.target.value)}
-          placeholder="Max"
+          placeholder={t("max")}
           className="h-full w-20 border-l border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:outline-none"
         />
       </div>

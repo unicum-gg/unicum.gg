@@ -1,0 +1,7 @@
+{
+  "loading": "{count} mga sasakyang tier {tier}, nilo-load ang kanilang mga pangalan…",
+  "loading-one": "{count} sasakyang tier {tier}, nilo-load ang pangalan nito…",
+  "and-more": "at {count} pa",
+  "hint": "I-click para buksan ang mga ito sa tab na Tangke",
+  "tier": "Antas"
+}

@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "في انتظار اللحظة الأولى",
+    "hidden": "مخفي بواسطة Wargaming",
+    "active_24h": "نشط < 24 ساعة",
+    "active_7d": "نشط < 7 أيام",
+    "recent_30d": "حديث < 30 يومًا",
+    "recent_90d": "حديث < 90 يومًا",
+    "dormant_1y": "خامل < سنة",
+    "inactive": "غير نشط > سنة"
+  },
+  "rating-hype": {
+    "overrated": "مبالغ فيه",
+    "fair": "معدل بشكل عادل",
+    "underrated": "مقلل من قيمته"
+  },
+  "rating-consensus": {
+    "agreed": "توافق واسع سائد",
+    "mixed": "آراء مختلطة",
+    "divisive": "مثير للجدل"
+  },
+  "rating-axes": {
+    "overall": "بشكل عام",
+    "fun": "المتعة",
+    "firepower": "قوة النيران",
+    "armour": "درع",
+    "mobility": "تنقل",
+    "gunHandling": "التعامل مع المدفع",
+    "concealment": "اختباء",
+    "beginnerFriendliness": "مناسب للمبتدئين",
+    "versatility": "تعدد الاستخدامات"
+  },
+  "rating-axis-hints": {
+    "overall": "ما مدى جودة هذه الدبابة مع أخذ كل شيء في الاعتبار؟",
+    "fun": "إلى أي مدى تستمتع بلعبها؟",
+    "firepower": "الضرر الأساسي، الضرر في الدقيقة والاختراق.",
+    "armour": "مقدار صدّها للطلقات، عند استخدام وضعية إخفاء الهيكل وفي العراء.",
+    "mobility": "السرعة والتسارع وكيفية دورانها.",
+    "gunHandling": "زمن التصويب، التشتت والدقة أثناء الحركة.",
+    "concealment": "التمويه ومدى الرؤية.",
+    "beginnerFriendliness": "مدى تسامحها مع الأخطاء إذا كنت لا تزال تتعلم.",
+    "versatility": "هل تصلح على أي خريطة ومع أي فريق؟"
+  },
+  "voter-brackets": {
+    "unknown": "غير معدل",
+    "learning": "في مرحلة التعلم",
+    "average": "المتوسط",
+    "strong": "قوي",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "المركبات",
+    "gunnery": "الرماية",
+    "armor": "درع",
+    "mobility": "تنقل",
+    "vision": "الرؤية",
+    "crew": "الطاقم",
+    "progression": "التقدم",
+    "economy": "الاقتصاد",
+    "ratings": "التقييمات",
+    "statistics": "الإحصائيات",
+    "modes": "أوضاع المعركة",
+    "tactics": "التكتيكات",
+    "slang": "العامية"
+  }
+}

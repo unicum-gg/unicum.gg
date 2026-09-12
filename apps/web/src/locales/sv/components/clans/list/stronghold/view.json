@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Inga data ännu. Kom tillbaka när klanerna har uppdaterats.",
+  "heading": "Toppklaner i <accent>{tier}</accent>",
+  "blurb": "Topplista för {region}, rangordnad efter {sort} bland alla spårade klaner i {format} (minst {battles} strider).",
+  "blurb-period": "Topplista för {region}, rangordnad efter {sort} bland alla spårade klaner i {format} under {period} (minst {battles} strider).",
+  "format-advances": "Offensiver (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Toppklaner i {tier}, topp {count} ·"
+}

@@ -1,0 +1,5 @@
+{
+  "battles": "{count} боїв",
+  "chart-label": "Зіграні бої за {granularity}, забарвлені за {metric}",
+  "no-battles": "Жодних боїв"
+}

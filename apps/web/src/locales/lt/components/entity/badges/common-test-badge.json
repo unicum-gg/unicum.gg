@@ -1,0 +1,12 @@
+{
+  "aria-build": "Skaitykite Bendro testo kliente, versija {version}",
+  "aria-changes": "Bendras testas pakeitė {changes} charakteristikas",
+  "aria-described": "Bendras testas: {description}",
+  "aria-vehicle": "Bendro testo transporto priemonė",
+  "common-test": "Bendras testas",
+  "common-test-build": "Bendras testas {version}",
+  "tip-build": "{label} · tai bandomosios versijos reikšmės, kurias Wargaming dar gali pakeisti prieš išleidžiant atnaujinimą",
+  "tip-changes": "Bendras testas šioje transporto priemonėje pakeitė {changes, plural, one {# charakteristika} few {# charakteristikos} other {# charakteristikos}}",
+  "tip-described": "Bendras testas · {description}",
+  "tip-vehicle": "Bendras testas · dar neišleista, todėl neturi mūšių statistikos, o jos charakteristikos dar gali keistis"
+}

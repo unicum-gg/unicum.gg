@@ -1,0 +1,11 @@
+{
+  "already-running": "이미 실행 중입니다",
+  "in-window": "윈도우 내",
+  "n-online": "/ 온라인 {count}명",
+  "no-reserves-selected": "선택한 예비 물자가 없습니다.",
+  "no-stock-ready": "준비된 재고 없음",
+  "not-available": "사용할 수 없습니다",
+  "threshold": "임계값 ({online}/{min})",
+  "would-activate": "활성화할 수 있습니다",
+  "would-not-fire": "현재는 활성화되지 않습니다."
+}

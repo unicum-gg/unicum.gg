@@ -1,0 +1,7 @@
+{
+  "joined": "Придружио се {date}",
+  "last-battle": "Последња bitka {when}",
+  "never-played": "Никада није играо",
+  "updated": "Ažurirano {when}",
+  "clan-role-joined": "{role} · придружио се {date}"
+}

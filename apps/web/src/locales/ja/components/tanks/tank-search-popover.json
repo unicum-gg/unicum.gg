@@ -1,0 +1,5 @@
+{
+  "no-matching-tanks": "一致する戦車はありません。",
+  "searching": "検索中…",
+  "type-at-least-characters": "{MINQUERYLENGTH}文字以上入力してください。"
+}

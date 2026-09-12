@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} ranglista",
+  "carried-beside-a-clan-tag": "A klánjelzés mellett látható. A helyezési címer egy versenyben elért helyet jelöl: a rajta lévő szám a helyezést, a színe pedig a ranglistát mutatja. Értékelések alapján nem jár ilyen, mert a magas WN8 nem olyasmi, amit egy klán megnyer.",
+  "clan-badges": "Klán jelek",
+  "clan-board": {
+    "name": "Ranglista: {board}, legjobb {rank}",
+    "how": "Helyezés az első {rank} között ezen a ranglistán: {board}. Addig marad meg, amíg a klán tartja a helyezést, és elveszik, amikor már nem."
+  },
+  "clan-overflow": "Ha egy klán háromnál több helyezést ér el, a többit egy {plus} címerbe vonja össze, a legjobbtól kezdve, hogy a klánjelzés olvasható maradjon. Rámutatva megjelenik a nevük.",
+  "featured-tournament-winner": {
+    "name": "Kiemelt verseny: Győztes",
+    "how": "Ugyanez, egy olyan eseményen megszerezve, amelyet a Wargaming Kiemelt verseny megjelöléssel lát el. Acél helyett aranyszínű, pontosan úgy, mint a játékosoknál."
+  },
+  "heading": "Minden {badge} és megszerzésének módja",
+  "heading-accent": "jelvény",
+  "marks-carried-beside-a-nickname": "Jelzések a becenév mellett mindenhol ezen az oldalon: {NAME}. A ranglistákon, a klánnévsorokban, a keresésben és a versenyágakon.",
+  "n-badges": "{count} jelvény",
+  "onslaught-champion": {
+    "name": "Roham Bajnok",
+    "how": "Elérte a Bajnok rangot a Roham módban, ami már elegendő ahhoz, hogy egyáltalán megjelenjen itt: {standings}. Ezután is megmarad. Ha az Értékelés később visszaesik a határ alá, a helyezés vész el, az elérés ténye nem."
+  },
+  "onslaught-legend": {
+    "name": "Roham Legenda",
+    "how": "A szezon Legenda-határán belüli helyezést ért el. Ez helyezés, nem pontszám, így egyszerre csak meghatározott számú ilyen hely létezik, a határt pedig ahhoz a szezonhoz mérik, amelyben a helyezést elérte. Acélkék helyett lila, ugyanaz a szín, amellyel maga a tabella jelöli a Legenda rangot."
+  },
+  "player-badges": "Játékos jelek",
+  "player-overflow": "Ha egy játékos háromnál több jelzést visel, a többit egy {plus} címerbe vonja össze a fenti sorrendben, hogy a becenév olvasható maradjon a táblázatban. Rámutatva megjelenik a nevük, és mindegyik továbbra is ugyanoda hivatkozik, ahová a saját címere hivatkozna.",
+  "ranked-standings": "rangsorolt állások",
+  "streamer": {
+    "name": "Streamer",
+    "how": "A fiókhoz kapcsolt Twitch-csatorna. A megerősítéshez csatlakoztasd a Twitch szolgáltatást a saját profilodon, ezután a címer a csatornádra hivatkozik. Attól függetlenül látható, hogy éppen élőben közvetítesz-e."
+  },
+  "streamer-who-is-on-air": "Az éppen élőben közvetítő streamer egy piros LIVE címkét is visel. Ezt nem kell megszerezni, és nem is marad meg: a közvetítés kezdetekor megjelenik, a végén pedig eltűnik, ezért soha nem kerül az összevont elemek közé.",
+  "support-subscription": "támogató előfizetés",
+  "supporter": {
+    "name": "Támogató"
+  },
+  "supporter-note": "Aktív és nyilvános {link}. A névtelenséget választó Támogató saját döntése alapján nem visel jelvényt.",
+  "the-marks-a-player-or": "A játékosok és klánok által viselhető Jelzések ezen az oldalon: {NAME}. Mit jelent mindegyik, és pontosan mi kell a megszerzésükhöz.",
+  "tournament-winner": {
+    "name": "Torna győztes",
+    "how": "Egy, a klánhoz rendelt csapat megnyert egy Torna eseményt. A Wargaming csapatokat és fiókokat tart nyilván, klánokat soha, ezért a hozzárendelést úgy állapítjuk meg, hogy minden névsort összevetünk a mérkőzés napján érvényes klántagsággal."
+  },
+  "verified": {
+    "name": "Igazolt",
+    "how": "A tulajdonos bejelentkezett a Wargaming.net ID használatával, és összekapcsolta ezt a fiókot. Mindössze be kell jelentkezni, és ez semmibe sem kerül."
+  }
+}

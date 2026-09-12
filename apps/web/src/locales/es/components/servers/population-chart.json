@@ -1,0 +1,4 @@
+{
+  "chart-label": "Jugadores en línea por servidor durante el último {range}",
+  "not-enough-recorded-yet-for": "Todavía no hay suficientes datos registrados para este intervalo. Se irá completando a medida que continúe el muestreo."
+}

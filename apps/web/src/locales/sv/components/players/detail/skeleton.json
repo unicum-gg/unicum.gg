@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistik för {nickname} i Slumptävlingar",
+  "progression": "Progression för {nickname}: {metricLabel}",
+  "solid-line-is-overall-matches": "Den heldragna linjen visar {metricLabel} totalt sett (motsvarar kolumnen Totalt ovan). Värdet förändras långsamt när nya strider tillkommer. Den streckade linjen visar {metricLabel2} per session. Det värdet beräknas utifrån striderna som spelats sedan föregående mätning. Den visar formtoppar och formsvackor. Linjefärgen följer rankningsnivån.",
+  "tanks-shaping-s-rating": "Tanken som formar {nickname}s rankning",
+  "tanks": "Tanken för {nickname}",
+  "stats": "Statistik för {nickname} i {strongholdLabel}"
+}

@@ -1,0 +1,11 @@
+{
+  "already-running": "jau darbojas",
+  "in-window": "logā",
+  "n-online": "/ {count} tiešsaistē",
+  "no-reserves-selected": "Nav izvēlēta neviena rezerve.",
+  "no-stock-ready": "nav gatavu krājumu",
+  "not-available": "nav pieejams",
+  "threshold": "slieksnis ({online}/{min})",
+  "would-activate": "aktivizētu",
+  "would-not-fire": "Šobrīd tā netiktu aktivizēta."
+}

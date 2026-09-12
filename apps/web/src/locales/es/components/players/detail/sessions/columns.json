@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Clasificación (WN)",
+    "tip": "Clasificación solo de estas batallas, no de la cuenta"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Tasa de victorias en estas Batallas"
+  },
+  "avgDamage": {
+    "label": "Daño medio"
+  },
+  "avgFrags": {
+    "label": "Prom. frags",
+    "tip": "Enemigos destruidos por batalla"
+  },
+  "damageRatio": {
+    "label": "Tasa de daño",
+    "tip": "Daño causado en relación con el Daño recibido"
+  },
+  "kd": {
+    "label": "Tasa de destrucción",
+    "tip": "Enemigos destruidos en relación con los Vehículos perdidos"
+  },
+  "survivalRate": {
+    "label": "Batallas como superviviente"
+  },
+  "avgSpotted": {
+    "label": "Prom. detectados",
+    "tip": "Enemigos detectados por batalla"
+  },
+  "avgDefense": {
+    "label": "Defensa de base",
+    "tip": "Puntos de defensa por batalla"
+  },
+  "avgXp": {
+    "label": "XP media"
+  }
+}

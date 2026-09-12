@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Una celda muestra las victorias del grupo en ese nivel divididas entre sus batallas en él, teniendo en cuenta todos los vehículos con los que un jugador haya disputado al menos {minBattles} batallas. Así, refleja los niveles tal como los juegan quienes participan en ellos. Las celdas basadas en menos de {TIERWINRATETHINCELL} batallas se muestran atenuadas, ya que sus valores varían por motivos ajenos a la habilidad. Los colores corresponden a los mismos intervalos de porcentaje de victorias que se utilizan en el resto del sitio.",
+  "cell-no-sample": "{where}, sin muestra",
+  "cell-winrate": "{where}, tasa de victorias del {winrate} en {battles} batallas",
+  "metric-band": "Banda de {metric}",
+  "nothing-recorded": "Aún no hay datos registrados para {metric}. La cuadrícula se vuelve a generar cada noche.",
+  "over-battles-from-accounts": "{winrate} en {battles} Batallas de {players} cuentas",
+  "over-n-battles": "en {battles} batallas",
+  "what-players-win-by-tier": "Porcentaje de victorias de los jugadores {label} Por nivel"
+}

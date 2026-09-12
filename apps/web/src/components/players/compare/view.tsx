@@ -1,6 +1,11 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
+import { useSearchParams } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
+import { useRouter } from "@/hooks/use-router";
 import {
   Panel,
   PanelContent,
@@ -56,6 +61,8 @@ export function PlayerCompareView({
   wn8Fallback: Map<string, WN8Expected>;
   maxPlayers: number;
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/players/compare/view");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -94,9 +101,9 @@ export function PlayerCompareView({
     <>
       <Panel>
         <PanelHeader className="flex items-center justify-between gap-2">
-          <PanelTitle>Compare</PanelTitle>
+          <PanelTitle>{t("compare")}</PanelTitle>
           <ShareButton
-            title="Share comparison"
+            title={t("share-comparison")}
             url={`${APP.URL}${ROUTES.COMPARE_PLAYERS(
               region,
               slots.map((s) => s.requested),
@@ -137,7 +144,7 @@ export function PlayerCompareView({
                     : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
                 )}
               >
-                {t.label}
+                {statLabel(t.label, tStats)}
               </button>
             ))}
           </nav>

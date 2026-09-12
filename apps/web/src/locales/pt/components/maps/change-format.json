@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Largura da área de jogo",
+    "height": "Altura da área de jogo",
+    "round-length": "Cronômetro da batalha",
+    "team-size": "Tamanho da equipe",
+    "camouflage": "Temporada",
+    "presence": "No jogo",
+    "variant-version": "Versão {type}",
+    "play-area": "Área de jogo",
+    "bases-team1": "Bases aliadas",
+    "bases-team2": "Bases do Inimigo",
+    "spawns-team1": "Pontos de surgimento aliados",
+    "spawns-team2": "Pontos de surgimento do Inimigo",
+    "control-point": "Ponto de controle",
+    "artillery-headquarters": "Quartel-General da Artilharia",
+    "comms-centers": "Centros de comunicação",
+    "observation-posts": "Postos de observação",
+    "points-of-interest": "Pontos de interesse"
+  },
+  "summary": {
+    "added": "{name} adicionado",
+    "removed": "{name} removido",
+    "added-to-game": "Adicionado ao jogo",
+    "removed-from-game": "Removido do jogo",
+    "added-on-test": "Adicionado no cliente de teste",
+    "removed-on-test": "Removido do cliente de teste",
+    "mode-added": "Modo de {name} adicionado",
+    "mode-removed": "Modo de {name} removido",
+    "now-played-in": "Agora jogado em {name}",
+    "no-longer-played-in": "Não é mais jogado em {name}",
+    "event-added": "{name} agora pode acontecer durante a batalha",
+    "event-removed": "{name} não acontece mais",
+    "moved": "{name} movido",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

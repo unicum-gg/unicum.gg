@@ -1,0 +1,17 @@
+{
+  "average": "Priemer",
+  "bad": "Zlé",
+  "below-avg": "Pod priemerom",
+  "color-thresholds-for-the-stronghold": "Farebné hranice pre rebríčky opevnení. Jedna absolútna stupnica pre všetky úrovne, takže SR (alebo SRB) všade označuje rovnakú kvalitu klanu.",
+  "excellent": "Vynikajúce",
+  "good": "Dobrý",
+  "rating-colors": "Farby hodnotenia",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Stopnja",
+  "top": "Najlepšie",
+  "very-bad": "Veľmi zlé",
+  "very-good": "Veľmi dobré",
+  "wr": "WR"
+}

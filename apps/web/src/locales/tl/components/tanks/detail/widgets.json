@@ -1,0 +1,12 @@
+{
+  "slot": "Puwang {n}",
+  "slot-filled": "Slot {n}: {name}",
+  "consumable-slot": "Slot ng consumable {n}",
+  "consumable-slot-filled": "Slot ng consumable {n}: {name}",
+  "level": "Antas {n}",
+  "stock": "Stock",
+  "specialize": "I-click para i-specialize ang slot na ito.",
+  "clear-specialization": "I-click para alisin ang specialization ng slot na ito.",
+  "crew-skills": "Mga Kasanayan ng Sampahan",
+  "shell-aria": "{name}: {damage} pinsala, {penetration} mm pagtagos"
+}

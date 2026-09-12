@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { STRONGHOLD_PERIOD_LABEL } from "@unicum.gg/shared";
 import { PeriodInlineSelect } from "@/components/period-inline-select";
 import { STATS_PERIODS, useStatsPeriod } from "@/hooks/use-period";
@@ -21,6 +22,11 @@ import { STATS_PERIODS, useStatsPeriod } from "@/hooks/use-period";
  * is `!important` and would win over a plain `sm:hidden`.)
  */
 export function StatsPeriodSelect() {
+  const { t } = useTranslation("components/stats-period-select");
+  // Wargaming's own words for the windows, from `game/vocabulary`: the
+  // constant is the English source and the key side, like every other
+  // catalogue lookup on the site.
+  const { t: tGame } = useTranslation("game/vocabulary");
   const [period, setPeriod] = useStatsPeriod();
   return (
     <span className="sm:hidden">
@@ -28,9 +34,12 @@ export function StatsPeriodSelect() {
       <PeriodInlineSelect
         period={period}
         periods={STATS_PERIODS}
-        label={(p) => STRONGHOLD_PERIOD_LABEL[p]}
+        label={(p) => {
+          const name = tGame(`stronghold-periods.${p}`);
+          return name === `stronghold-periods.${p}` ? STRONGHOLD_PERIOD_LABEL[p] : name;
+        }}
         onChange={setPeriod}
-        ariaLabel="Stats period"
+        ariaLabel={t("stats-period")}
       />
     </span>
   );

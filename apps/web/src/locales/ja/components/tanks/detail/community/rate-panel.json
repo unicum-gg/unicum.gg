@@ -1,0 +1,13 @@
+{
+  "battles-overall": "総計 {battles} 戦",
+  "checking-your-record-on-this": "この戦車の戦績を確認中…",
+  "fetching-your-garage": "ガレージを取得中",
+  "have-you-played": "{tank} をプレイしましたか？",
+  "more-to-go": "あと {count} 戦必要",
+  "more-to-go-one": "あと {count} 戦必要",
+  "sign-in-to-rate-it": "ログインして評価",
+  "sign-in-with-your-wargaming-account-to-rate-": "Wargaming アカウントでログインして評価してください。このページが、実際には運転したことのない人による投票にならないよう、この戦車そのものの戦績を確認します",
+  "signed-in-on": "{region} でログイン中",
+  "too-few-battles": "{tank} で {played} 戦しています。投票を集計するには {required} 戦が必要です。実際にプレイしている人の平均にするためです",
+  "you-have-not-played": "{tank} をプレイしていません"
+}

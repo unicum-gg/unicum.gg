@@ -1,0 +1,6 @@
+{
+  "fun": "Ako veľmi hráčov baví, čo často nie je to isté.",
+  "hype": "Poradie, na ktoré ho komunita zaraďuje v rámci jeho úrovne, mínus jeho poradie podľa miery víťazstiev. Zoraďte zostupne pre najviac preceňované tanky v hre, vzostupne pre najviac podceňované.",
+  "overall": "Ako dobre ho hráči hodnotia. Poradie vychádza z priemeru upraveného smerom k priemeru stránky, takže tank so štyrmi hlasmi nemôže predbehnúť tank so štyristo hlasmi.",
+  "votes": "Počet odovzdaných hlasov, pričom každý pochádza z účtu, na ktorom sa s daným tankom skutočne hralo."
+}

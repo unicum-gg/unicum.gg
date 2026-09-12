@@ -1,0 +1,7 @@
+{
+  "group": "Pangkat {order}",
+  "n-teams": "{count} koponan",
+  "pts": "Pts",
+  "team": "Koponan",
+  "top-n-advance": ", uusad ang nangungunang {count}"
+}

@@ -1,0 +1,8 @@
+{
+  "last-days": "Ultimele {chartDays} zile",
+  "n-players": "{count, plural, one {# jucător} few {# jucători} other {# de jucători}}",
+  "rolling-average-combined-damage-to": "Daune combinate medii mobile pentru a depăși 65 / 85 / 95% dintre jucători.",
+  "single-battle-xp-to-beat": "XP într-o singură bătălie pentru a depăși 50 / 80 / 95 / 99% dintre jucători.",
+  "tank-marks-of-excellence": "Marcajele de excelență ale tancului {tank}",
+  "tank-marks-of-mastery": "Marcajele de măiestrie ale tancului {tank}"
+}

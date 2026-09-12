@@ -1,0 +1,8 @@
+{
+  "cta-clans": "Klikk for å se de beste {language}-klanene.",
+  "cta-players": "Klikk for å se de beste {language}-spillerne.",
+  "declared": "{language}. Valgt av klanen.",
+  "inferred": "{language}. Vårt anslag basert på spillerens klanhistorikk. Jo lenger de blir i en klan, desto mer teller språkene i den.",
+  "top-language-clans": "Beste {language}-klaner",
+  "top-language-players": "Beste {language}-spillere"
+}

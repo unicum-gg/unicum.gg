@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, other {# マップ}}",
+  "no-map-changes-have-been": "マップの変更はまだ記録されていません。Wargamingがマップを改修すると、各更新で何が変更されたかがここに表示されます。",
+  "update": "更新 {version}"
+}

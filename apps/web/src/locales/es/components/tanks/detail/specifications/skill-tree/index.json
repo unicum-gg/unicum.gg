@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Haz clic en un nodo accesible para desbloquearlo. Cada nodo aplica su efecto a las características anteriores. Los colores agrupan los nodos según potencia de fuego, movilidad, supervivencia y mecánicas del vehículo.",
+  "loadout-switch-no-effect": "Cambio de configuración en batalla. Sin efecto en las características.",
+  "title": "Mejoras del {tank}",
+  "vehicle-mechanic-no-effect": "Mecánica del vehículo. Sin efecto en las características."
+}

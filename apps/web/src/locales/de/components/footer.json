@@ -1,0 +1,25 @@
+{
+  "tagline": "Für die World of Tanks-Community entwickelt. Kostenlose Statistiken für alle Spieler, Clans, Panzer und Karten in EU, NA und Asien.",
+  "columns": {
+    "leaderboards": "Ranglisten",
+    "tanks": "Panzer",
+    "maps": "Karten",
+    "integrations": "Integrationen",
+    "project": "Projekt"
+  },
+  "links": {
+    "top-tanks": "Top Panzer",
+    "bot": "Discord Bot",
+    "mcp": "MCP-Server",
+    "docs": "API-Dokumentation",
+    "badges": "Abzeichen",
+    "glossary": "Glossar",
+    "coverage": "Abdeckung",
+    "support": "Unterstütze uns",
+    "source": "Quellcode",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Nicht mit Wargaming verbunden",
+  "cookies": "Cookies verwalten"
+}

@@ -1,5 +1,8 @@
 "use client";
 
+import { Interpolate } from "@/components/interpolate";
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import {
   busiestRhythmCell,
@@ -16,7 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useHydrated } from "@/hooks/use-hydrated";
-import { formatPlayers, WEEKDAY_LABEL } from "./format";
+import { formatPlayers, weekdayLabels } from "./format";
 
 /**
  * When the region is actually busy: the average population of every hour of the
@@ -33,6 +36,11 @@ import { formatPlayers, WEEKDAY_LABEL } from "./format";
  * first weeks of recording most of the grid is the former.
  */
 export function RhythmHeatmap({ rhythm }: { rhythm: ServerRhythmCell[] }) {
+  const { t } = useTranslation("components/servers/rhythm-heatmap");
+  const { locale } = useLocale();
+  // Named by `Intl` in the reader's language, not by a table of English
+  // three-letter forms.
+  const weekdays = weekdayLabels(locale);
   const hydrated = useHydrated();
 
   const cells = useMemo(() => {
@@ -72,9 +80,7 @@ export function RhythmHeatmap({ rhythm }: { rhythm: ServerRhythmCell[] }) {
   if (!busiest) {
     return (
       <p className="text-sm text-fd-muted-foreground">
-        Not enough recorded yet to show a weekly rhythm. It fills in as the
-        sampling covers each hour of the week.
-      </p>
+        {t("not-enough-recorded-yet-to")}</p>
     );
   }
 
@@ -102,15 +108,15 @@ export function RhythmHeatmap({ rhythm }: { rhythm: ServerRhythmCell[] }) {
             </thead>
             <tbody>
               {grid.map((row, i) => (
-                <tr key={WEEKDAY_LABEL[i]}>
+                <tr key={weekdays[i]}>
                   <th className="pe-2 text-right text-[11px] font-normal text-fd-muted-foreground">
-                    {WEEKDAY_LABEL[i]}
+                    {weekdays[i]}
                   </th>
                   {row.map((cell) => (
                     <td key={cell.hour} className="p-0">
                       <HourCell
                         cell={cell}
-                        weekday={WEEKDAY_LABEL[i]}
+                        weekday={weekdays[i]}
                         max={max}
                       />
                     </td>
@@ -124,26 +130,38 @@ export function RhythmHeatmap({ rhythm }: { rhythm: ServerRhythmCell[] }) {
 
       <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
         <p className="text-fd-muted-foreground">
-          Busiest{" "}
-          <span className="font-medium text-fd-foreground">
-            {WEEKDAY_LABEL[busiest.weekday - 1]}{" "}
-            {String(busiest.hour).padStart(2, "0")}:00
-          </span>{" "}
-          ({formatPlayers(busiest.average)})
+          {/* Two clauses, each a sentence of its own with the moment as a hole:
+              the order of "busiest X, quietest Y" is the language's. */}
+          <Interpolate
+            template={t("busiest")}
+            values={{
+              when: (
+                <span className="font-medium text-fd-foreground">
+                  {weekdays[busiest.weekday - 1]}{" "}
+                  {String(busiest.hour).padStart(2, "0")}:00
+                </span>
+              ),
+              players: formatPlayers(busiest.average, locale),
+            }}
+          />
           {quietest ? (
-            <>
-              , quietest{" "}
-              <span className="font-medium text-fd-foreground">
-                {WEEKDAY_LABEL[quietest.weekday - 1]}{" "}
-                {String(quietest.hour).padStart(2, "0")}:00
-              </span>{" "}
-              ({formatPlayers(quietest.average)})
-            </>
+            <Interpolate
+              template={t("quietest")}
+              values={{
+                when: (
+                  <span className="font-medium text-fd-foreground">
+                    {weekdays[quietest.weekday - 1]}{" "}
+                    {String(quietest.hour).padStart(2, "0")}:00
+                  </span>
+                ),
+                players: formatPlayers(quietest.average, locale),
+              }}
+            />
           ) : null}
           .
         </p>
         <p className="text-xs text-fd-muted-foreground">
-          {hydrated ? "Your local time" : "UTC"}
+          {hydrated ? t("your-local-time") : "UTC"}
         </p>
       </div>
     </div>
@@ -168,6 +186,8 @@ function HourCell({
   weekday: string;
   max: number;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/rhythm-heatmap");
   const when = `${weekday} ${String(cell.hour).padStart(2, "0")}:00`;
   // `max` is the busiest average, which is zero when every sampled hour held
   // nobody (Wargaming does report a cluster at zero, and the sampler writes
@@ -190,8 +210,8 @@ function HourCell({
           }
           aria-label={
             sampled
-              ? `${when}, ${formatPlayers(cell.average)} players on average`
-              : `${when}, not sampled yet`
+              ? `${when}, ${t("players-on-average", { players: formatPlayers(cell.average, locale) })}`
+              : `${when}, ${t("not-sampled-yet").toLowerCase()}`
           }
         />
       </TooltipTrigger>
@@ -200,8 +220,10 @@ function HourCell({
           <span className="font-medium">{when}</span>
           <span className="text-background/70">
             {sampled
-              ? `${formatPlayers(cell.average)} players on average`
-              : "Not sampled yet"}
+              ? t("players-on-average", {
+                  players: formatPlayers(cell.average, locale),
+                })
+              : t("not-sampled-yet")}
           </span>
         </div>
       </TooltipContent>

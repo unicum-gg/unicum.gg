@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   Table,
@@ -10,9 +12,11 @@ import {
 import { GlossaryLabel } from "@/components/glossary/label";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
+import { battleTypeName } from "@/components/game-name";
+import { BattleType } from "@unicum.gg/shared";
 import {
   ONSLAUGHT_TIER_COLOR,
-  ONSLAUGHT_TIER_LABEL,
   onslaughtRankIcon,
   OnslaughtTier,
   RATING_COLOR_CLASS,
@@ -22,16 +26,8 @@ import {
 // the client: only Champion and Legend enter the leaderboard, and Legend is its
 // elite top slice.
 const TIERS: { tier: OnslaughtTier; blurb: string }[] = [
-  {
-    tier: OnslaughtTier.Legend,
-    blurb:
-      "The highest-rated Champions. The game caps it at a set leaderboard position each season (so its size varies by season and region), not a fixed points target. Slip below the last Legend and you drop back to Champion.",
-  },
-  {
-    tier: OnslaughtTier.Champion,
-    blurb:
-      "The highest rank you can climb to on Rating Points, and the entry to the leaderboard. Every ranked player is at least Champion.",
-  },
+  { tier: OnslaughtTier.Legend, blurb: "ranks.legend-blurb" },
+  { tier: OnslaughtTier.Champion, blurb: "ranks.champion-blurb" },
 ];
 
 export function OnslaughtRankScale({
@@ -41,16 +37,16 @@ export function OnslaughtRankScale({
   seasonOrdinal: string | null;
   assetsRef: string | null;
 }) {
+  const { t } = useTranslation("components/players/list/onslaught/view");
+  const { t: tOwn } = useTranslation("components/players/list/onslaught/rank-scale");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const mode = battleTypeName(BattleType.Onslaught, tGame);
+  const legend = tGame("onslaught-tiers.legend");
+  const champion = tGame("onslaught-tiers.champion");
   return (
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
-        You climb Onslaught&apos;s ranks by winning battles: every victory
-        awards Rating Points based on how well you played. Champion is the
-        highest rank you can reach on points alone, and reaching it puts you on
-        the leaderboard. Legend isn&apos;t a fixed threshold: it&apos;s the
-        top-rated slice of Champions, so its cutoff shifts with the field (ties
-        broken by battles played). The exact Legend and Champion cutoffs come
-        from the current season and are marked on the board.
+        {t("ranks.intro", { mode, legend, champion })}
       </div>
       <div className="mt-auto">
         <Table className="mb-px! [&_td]:min-w-0! [&_th]:min-w-0! [&_tr]:h-11">
@@ -58,9 +54,9 @@ export function OnslaughtRankScale({
             <TableRow>
               {/* The rows are Onslaught's own ranks, not vehicle tiers. */}
               <TableHead className="pl-4!">
-                <GlossaryLabel label="Onslaught">Tier</GlossaryLabel>
+                <GlossaryLabel label={tOwn("onslaught")}>{t("ranks.tier")}</GlossaryLabel>
               </TableHead>
-              <TableHead className="pr-4">Meaning</TableHead>
+              <TableHead className="pr-4">{t("ranks.meaning")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -81,12 +77,12 @@ export function OnslaughtRankScale({
                         RATING_COLOR_CLASS[ONSLAUGHT_TIER_COLOR[tier]],
                       )}
                     >
-                      {ONSLAUGHT_TIER_LABEL[tier]}
+                      {tGame(`onslaught-tiers.${tier}`)}
                     </span>
                   </span>
                 </TableCell>
                 <TableCell className="pr-4 text-muted-foreground">
-                  {blurb}
+                  {t(blurb, { legend, champion })}
                 </TableCell>
               </TableRow>
             ))}

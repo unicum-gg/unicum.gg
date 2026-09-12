@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rango {rank} en {board}",
+  "board": {
+    "advances": "Valoración de Avances de Fortaleza",
+    "skirmish-t10": "Valoración de Escaramuza de Nivel X",
+    "skirmish-t6": "Valoración de Escaramuza de Nivel VI",
+    "skirmish-t8": "Valoración de Escaramuza de Nivel VIII"
+  }
+}

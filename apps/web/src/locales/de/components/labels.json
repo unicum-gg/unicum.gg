@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Warten auf den ersten Snapshot",
+    "hidden": "Von Wargaming ausgeblendet",
+    "active_24h": "Aktiv < 24 Std.",
+    "active_7d": "Aktiv < 7 T.",
+    "recent_30d": "Kürzlich aktiv < 30 T.",
+    "recent_90d": "Kürzlich aktiv < 90 T.",
+    "dormant_1y": "Ruhend < 1 J.",
+    "inactive": "Inaktiv > 1 J."
+  },
+  "rating-hype": {
+    "overrated": "Überschätzt",
+    "fair": "Fair bewertet",
+    "underrated": "Unterbewertet"
+  },
+  "rating-consensus": {
+    "agreed": "Breite Zustimmung",
+    "mixed": "Gemischte Meinungen",
+    "divisive": "Umstritten"
+  },
+  "rating-axes": {
+    "overall": "Insgesamt",
+    "fun": "Spaß",
+    "firepower": "Feuerkraft",
+    "armour": "Panzerung",
+    "mobility": "Beweglichkeit",
+    "gunHandling": "Waffenhandhabung",
+    "concealment": "Tarnung",
+    "beginnerFriendliness": "Anfängerfreundlich",
+    "versatility": "Vielseitigkeit"
+  },
+  "rating-axis-hints": {
+    "overall": "Wie gut ist dieser Panzer insgesamt?",
+    "fun": "Wie viel Spaß macht das Spielen?",
+    "firepower": "Alphaschaden, Schaden pro Minute und Durchschlagskraft.",
+    "armour": "Wie viele Treffer er abprallen lässt, mit gedeckter Wanne und im offenen Gelände.",
+    "mobility": "Geschwindigkeit, Beschleunigung und Wendigkeit.",
+    "gunHandling": "Zielzeit, Streuung und Genauigkeit während der Fahrt.",
+    "concealment": "Tarnung und Sichtweite.",
+    "beginnerFriendliness": "Wie viele Fehler er verzeiht, wenn du noch lernst.",
+    "versatility": "Ist er auf jeder Karte und in jedem Team einsetzbar?"
+  },
+  "voter-brackets": {
+    "unknown": "Ungestuft",
+    "learning": "Lernend",
+    "average": "Durchschnitt",
+    "strong": "Stark",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Fahrzeuge",
+    "gunnery": "Geschützfeuer",
+    "armor": "Panzerung",
+    "mobility": "Beweglichkeit",
+    "vision": "Sicht",
+    "crew": "Besatzung",
+    "progression": "Fortschritt",
+    "economy": "Wirtschaft",
+    "ratings": "Bewertungen",
+    "statistics": "Statistik",
+    "modes": "Schlachtmodi",
+    "tactics": "Taktiken",
+    "slang": "Slang"
+  }
+}

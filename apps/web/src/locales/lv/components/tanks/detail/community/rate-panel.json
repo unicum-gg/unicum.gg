@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Kopā {battles} kaujas",
+  "checking-your-record-on-this": "Pārbauda tavu ierakstu par šo tanku...",
+  "fetching-your-garage": "Ielādējam tavu garāžu",
+  "have-you-played": "Vai esi spēlējis {tank}?",
+  "more-to-go": "Vēl atlikušas {count} kaujas",
+  "more-to-go-one": "Vēl atlikusi {count} kauja",
+  "sign-in-to-rate-it": "Piesakies, lai to novērtētu",
+  "sign-in-with-your-wargaming-account-to-rate-": "Piesakies ar savu Wargaming kontu, lai to novērtētu. Mēs nolasām tavu ierakstu tieši par šo tanku, tādējādi nepieļaujot, ka šī lapa kļūst par aptauju, kurā piedalās cilvēki, kas to nekad nav vadījuši.",
+  "signed-in-on": "Pieteicies reģionā {region}",
+  "too-few-battles": "Tev ir {played} kaujas ar {tank}. Mēs prasām {required}, pirms balss tiek ieskaitīta, lai šis vidējais būtu to cilvēku vidējais, kuri to patiešām spēlē.",
+  "you-have-not-played": "Tu neesi spēlējis {tank}"
+}

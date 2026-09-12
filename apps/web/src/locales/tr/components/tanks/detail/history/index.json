@@ -1,0 +1,12 @@
+{
+  "before-update": "{version} güncellemesinden önce",
+  "common-test": "Ortak Test",
+  "in-common-test-not-released": "Ortak Test’te, henüz yayımlanmadı",
+  "introduced": "Tanıtıldı",
+  "lifecycle": "Yaşam Döngüsü",
+  "n-buffed": "{count} güçlendirildi",
+  "n-nerfed": "{count} zayıflatıldı",
+  "not-released-wargaming-can-still": "Yayımlanmadı. Wargaming, güncelleme çıkmadan önce bunların herhangi birini hâlâ değiştirebilir veya kaldırabilir.",
+  "status": "Durum",
+  "update": "Güncelle {version}"
+}

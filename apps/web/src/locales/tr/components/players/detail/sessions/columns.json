@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Derece (WN)",
+    "tip": "Hesabın değil, yalnızca bu savaşların puanı"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Bu savaşlardaki galibiyet oranı"
+  },
+  "avgDamage": {
+    "label": "Ortalama hasar"
+  },
+  "avgFrags": {
+    "label": "Ortalama avlar",
+    "tip": "Savaş başına yok edilen düşmanlar"
+  },
+  "damageRatio": {
+    "label": "Hasar Oranı",
+    "tip": "Verilen hasarın alınan hasara oranı"
+  },
+  "kd": {
+    "label": "Yok Etme oranı",
+    "tip": "Yok edilen düşmanların kaybedilen araçlara oranı"
+  },
+  "survivalRate": {
+    "label": "Sağ kalınan savaşlar"
+  },
+  "avgSpotted": {
+    "label": "Ortalama görüldü",
+    "tip": "Savaş başına tespit edilen düşmanlar"
+  },
+  "avgDefense": {
+    "label": "Üs savunması",
+    "tip": "Savaş başına savunma puanı"
+  },
+  "avgXp": {
+    "label": "Ortalama XP"
+  }
+}

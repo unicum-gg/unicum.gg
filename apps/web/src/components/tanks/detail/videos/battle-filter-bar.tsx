@@ -1,11 +1,9 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
-  BATTLE_FORMAT_LABEL,
-  BATTLE_RESULT_LABEL,
   BattleFormat,
   BattleResult,
-  SPAWN_DIRECTION_LABEL,
   SpawnDirection,
 } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
@@ -76,16 +74,18 @@ export function BattleFilterBar({
   active,
   reset,
 }: ReturnType<typeof useBattleFilters>) {
+  const { t } = useTranslation("components/tanks/detail/videos/battle-filter-bar");
+  const { t: tGame } = useTranslation("game/vocabulary");
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
       {counts.formats.size > 1 && (
-        <Group label="Format">
+        <Group label={t("format")}>
           {Object.values(BattleFormat)
             .filter((f) => counts.formats.has(f))
             .map((f) => (
               <Chip
                 key={f}
-                label={BATTLE_FORMAT_LABEL[f]}
+                label={tGame(`battle-formats.${f}`)}
                 count={counts.formats.get(f) ?? 0}
                 active={filters.format === f}
                 onClick={() => toggle("format", f)}
@@ -97,13 +97,13 @@ export function BattleFilterBar({
       {counts.directions.size > 1 && (
         // The side, which on a tactic is the whole point: a plan for the west
         // spawn is not a plan for the east one.
-        <Group label="Spawn">
+        <Group label={t("spawn")}>
           {Object.values(SpawnDirection)
             .filter((d) => counts.directions.has(d))
             .map((d) => (
               <Chip
                 key={d}
-                label={SPAWN_DIRECTION_LABEL[d]}
+                label={tGame(`spawn-directions.${d}`)}
                 count={counts.directions.get(d) ?? 0}
                 active={filters.direction === d}
                 onClick={() => toggle("direction", d)}
@@ -113,13 +113,13 @@ export function BattleFilterBar({
       )}
 
       {counts.results.size > 1 && (
-        <Group label="Result">
+        <Group label={t("result")}>
           {Object.values(BattleResult)
             .filter((r) => counts.results.has(r))
             .map((r) => (
               <Chip
                 key={r}
-                label={BATTLE_RESULT_LABEL[r]}
+                label={tGame(`battle-results.${r}`)}
                 count={counts.results.get(r) ?? 0}
                 active={filters.result === r}
                 onClick={() => toggle("result", r)}
@@ -134,8 +134,7 @@ export function BattleFilterBar({
           onClick={reset}
           className="cursor-pointer text-xs text-fd-muted-foreground underline-offset-2 hover:text-fd-foreground hover:underline"
         >
-          Clear
-        </button>
+          {t("clear")}</button>
       )}
     </div>
   );

@@ -1,0 +1,7 @@
+{
+  "stats-title": "Zufällige Schlachten: Statistiken von {nickname}",
+  "progression-title": "Fortschritt von {nickname} bei {metric}",
+  "lift-drag-title": "Panzer, die die Wertung von {nickname} prägen",
+  "progression-blurb": "Die durchgezogene Linie zeigt den Gesamtwert für {metric} und entspricht der Spalte „Gesamt“ oben. Sie verändert sich langsam, während neue Gefechte hinzukommen. Die gestrichelte Linie zeigt {metric} pro Sitzung, berechnet anhand der seit dem vorherigen Datenstand gespielten Gefechte. Sie macht starke und schwache Phasen sichtbar. Die Linienfarbe entspricht der Bewertungsstufe.",
+  "progression-empty": "Noch nicht genügend Verlaufsdaten. Wir benötigen mindestens einen Datenstand, um die Kurve darzustellen. Schauen Sie bald wieder vorbei."
+}

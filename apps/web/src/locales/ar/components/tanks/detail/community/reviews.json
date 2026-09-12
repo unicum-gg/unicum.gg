@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} معارك بها",
+  "damage": "{damage} ضرر",
+  "n-marks": "{count, plural, zero {# علامة} one {# علامة} two {# علامتان} few {# علامات التميز} many {# علامات التميز} other {# علامة}}",
+  "no-written-opinions-yet-if": "لا توجد آراء مكتوبة بعد. إذا كانت لديك المعارك، فسيكون رأيك الأول.",
+  "win-rate": "معدل فوز بنسبة {toFixed}%",
+  "written-on": "كُتبت في {gameVersion}"
+}

@@ -1,0 +1,8 @@
+{
+  "what-players-think": "플레이어들이 이 전차에 대해 생각하는 점",
+  "not-rated": "아직 평가되지 않았습니다. 첫 번째로 평가해 주세요",
+  "votes": "{count} 투표",
+  "votes-one": "{count} 투표",
+  "stars": "{max}점 중 {value}점",
+  "not-rated-short": "미평가"
+}

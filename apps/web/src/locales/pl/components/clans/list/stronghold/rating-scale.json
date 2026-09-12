@@ -1,0 +1,17 @@
+{
+  "average": "Średnia",
+  "bad": "Zły",
+  "below-avg": "Poniżej średniej",
+  "color-thresholds-for-the-stronghold": "Progi kolorów dla rankingów Twierdzy. Jedna bezwzględna skala dla każdego poziomu, dzięki czemu SR (lub SRB) oznacza wszędzie ten sam poziom jakości klanu.",
+  "excellent": "Doskonały",
+  "good": "Dobry",
+  "rating-colors": "Kolory ocen",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Poziom",
+  "top": "Najlepsi",
+  "very-bad": "Bardzo zły",
+  "very-good": "Bardzo dobry",
+  "wr": "WR"
+}

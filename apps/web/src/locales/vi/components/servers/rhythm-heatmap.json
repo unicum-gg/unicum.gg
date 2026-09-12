@@ -1,0 +1,8 @@
+{
+  "busiest": "{when} bận rộn nhất ({players})",
+  "not-enough-recorded-yet-to": "Chưa ghi nhận đủ dữ liệu để hiển thị nhịp điệu hằng tuần. Dữ liệu sẽ lấp đầy khi việc lấy mẫu bao phủ từng giờ trong tuần.",
+  "not-sampled-yet": "Chưa được lấy mẫu",
+  "players-on-average": "Trung bình {players} người chơi",
+  "quietest": ", {when} vắng nhất ({players})",
+  "your-local-time": "Giờ địa phương của bạn"
+}

@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Költség (credit)",
+    "buyGold": "Költség (arany)",
+    "researchXp": "Kutatási XP",
+    "shellCost": "Lőszer költség",
+    "ammoCost": "Teljes lőszer költség",
+    "class3": "3. Osztály",
+    "class2": "2. Osztály",
+    "class1": "1. Osztály",
+    "ace": "Asztali Tankér",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Mark (85%)",
+    "mark3": "3 Mark (95%)"
+  }
+}

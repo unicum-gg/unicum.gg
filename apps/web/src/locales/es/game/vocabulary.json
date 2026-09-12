@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Aleatoria",
+    "battle_royale": "Cazador de acero",
+    "frontline": "Línea del frente",
+    "onslaught": "Asedio",
+    "onslaught_night": "{onslaught} Nocturna",
+    "grand_battle": "Batalla épica",
+    "clan_wars": "Guerras de Clanes",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Última resistencia",
+    "arcade": "Arcade",
+    "story_mode": "Modo historia",
+    "training": "Entrenamiento"
+  },
+  "player-modes": {
+    "overall": "Batallas Aleatorias",
+    "skirmish": "Escaramuza",
+    "advances": "Avances",
+    "grand": "Grandes batallas",
+    "ranked": "Batallas de clasificación",
+    "cw-x": "Guerras de clanes X",
+    "cw-viii": "Guerras de clanes VIII",
+    "cw-vi": "Guerras de clanes VI",
+    "steel-hunter": "Cazador de acero",
+    "onslaught": "Asedio"
+  },
+  "stronghold-tiers": {
+    "advances": "Avances",
+    "t10": "Escaramuza T10",
+    "t8": "Escaramuza T8",
+    "t6": "Escaramuza T6"
+  },
+  "stronghold-periods": {
+    "24h": "Últimas 24 horas",
+    "7d": "Últimos 7 días",
+    "30d": "Últimos 30 días",
+    "overall": "General"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Batallas",
+    "winrate": "Tasa de victorias"
+  },
+  "clan-boards": {
+    "advances": "Avances",
+    "t10": "Escaramuza X",
+    "t8": "Escaramuza VIII",
+    "t6": "Escaramuza VI"
+  },
+  "map-modes": {
+    "standard": "Estándar",
+    "encounter": "Encuentro",
+    "assault": "Asaltante",
+    "attack-defense": "Ataque/Defensa"
+  },
+  "map-camouflage": {
+    "summer": "Verano",
+    "winter": "Invierno",
+    "desert": "Desierto"
+  },
+  "map-poi": {
+    "1": "Cuartel general de artillería",
+    "2": "Centro de comunicaciones",
+    "3": "Puesto de observación"
+  },
+  "tournament-modes": {
+    "ctf": "Estándar",
+    "domination": "Encuentro",
+    "assault2": "Ataque/Defensa",
+    "comp7": "Asedio"
+  },
+  "battle-formats": {
+    "random": "Aleatoria",
+    "clan_wars": "Guerras de Clanes",
+    "advances": "Avances",
+    "skirmish": "Escaramuza",
+    "maneuvers": "Maniobras",
+    "onslaught": "Asedio",
+    "tournament": "Torneo"
+  },
+  "battle-results": {
+    "victory": "Victoria",
+    "defeat": "Derrota",
+    "draw": "Empate"
+  },
+  "spawn-directions": {
+    "north": "Norte",
+    "south": "Sur",
+    "east": "Este",
+    "west": "Oeste"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Próximo",
+    "registration_started": "Registro abierto",
+    "registration_finished": "Registro cerrado",
+    "running": "En curso",
+    "finished": "Finalizando",
+    "complete": "Completada"
+  },
+  "onslaught-tiers": {
+    "legend": "Leyenda",
+    "champion": "Campeón",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Pesado",
+    "mediumTank": "Medio",
+    "lightTank": "Ligero",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Asaltante",
+    "break": "Avance",
+    "support": "Apoyo",
+    "universal": "Versátil",
+    "sniper": "Francotirador",
+    "wheeled": "Con ruedas"
+  },
+  "mastery-badges": {
+    "class3": "3ª Clase",
+    "class2": "2ª Clase",
+    "class1": "1ª Clase",
+    "ace": "As del Tanque"
+  },
+  "clan-modes": {
+    "random": "Batallas Aleatorias",
+    "stronghold": "Fortaleza",
+    "skirmish": "Escaramuza",
+    "clan-wars": "Guerras de Clanes"
+  },
+  "features": {
+    "stronghold": "Fortaleza",
+    "skirmish": "Escaramuza",
+    "marks-of-excellence": "Marcas de excelencia",
+    "marks-of-mastery": "Marcas de Maestría",
+    "personal-rating": "Clasificación personal",
+    "world-of-tanks-rating": "Clasificación de World of Tanks",
+    "common-test": "Prueba común",
+    "tournaments": "Torneos"
+  },
+  "marks": {
+    "1": "1 Marca",
+    "2": "2 Marcas",
+    "3": "3 Marcas",
+    "name": "Marcas de excelencia"
+  }
+}

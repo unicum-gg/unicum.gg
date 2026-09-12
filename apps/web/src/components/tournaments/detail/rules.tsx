@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ export function TournamentRules({
   sections: TournamentRulesSection[];
   otherRules?: string | null;
 }) {
+  const { t } = useTranslation("components/tournaments/detail/rules");
   const [open, setOpen] = useState(false);
   if (sections.length === 0 && !otherRules) return null;
 
@@ -32,9 +34,9 @@ export function TournamentRules({
         screenLines={false}
         className="flex flex-wrap items-center justify-between gap-2 border-b border-fd-border"
       >
-        <PanelTitle>Rules</PanelTitle>
+        <PanelTitle>{t("rules")}</PanelTitle>
         <Button variant="outline" size="sm" onClick={() => setOpen(!open)}>
-          {open ? "Hide" : "Show rules"}
+          {open ? t("hide") : t("show-rules")}
         </Button>
       </PanelHeader>
       {open && (

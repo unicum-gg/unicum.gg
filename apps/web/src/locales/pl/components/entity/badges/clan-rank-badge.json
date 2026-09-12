@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Stopień {rank} w klasyfikacji {board}",
+  "board": {
+    "advances": "ocena: Natarcia, Twierdza",
+    "skirmish-t10": "ocena: Potyczka, Poziom X",
+    "skirmish-t6": "ocena: Potyczka, Poziom VI",
+    "skirmish-t8": "ocena: Potyczka, Poziom VIII"
+  }
+}

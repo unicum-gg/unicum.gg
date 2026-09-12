@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, đã kiếm được {count} lần",
+  "aria-not-earned": "{name}, chưa kiếm được",
+  "no-longer-obtainable": "Không còn có thể kiếm được.",
+  "not-earned": "Chưa kiếm được"
+}

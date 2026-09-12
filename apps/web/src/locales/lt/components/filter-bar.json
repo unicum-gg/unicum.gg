@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Ieškoti tarp {count} tankų",
+    "rated-tanks": "Ieškoti tarp {count} reitinguojamų tankų",
+    "videos": "Ieškoti tarp {count} vaizdo įrašų",
+    "players": "Ieškoti žaidėjų: {count}",
+    "clans": "Ieškoti klanų: {count}",
+    "tournaments": "Ieškoti turnyrų: {count}",
+    "teams": "Ieškoti komandų: {count}"
+  },
+  "min": "Min.",
+  "max": "Maks.",
+  "none": "Nėra",
+  "common-test": "Pakeista Bendro testo: naujos ir subalansuotos transporto priemonės",
+  "category": {
+    "standard": "Standartinis",
+    "premium": "Premium",
+    "reward": "Atlygis"
+  },
+  "moe": {
+    "0": "Ženklo dar nėra",
+    "1": "1 žvaigždė",
+    "2": "2 žvaigždės",
+    "3": "3 žvaigždės"
+  },
+  "mom": {
+    "0": "Ženklelio dar nėra",
+    "1": "3 klasė",
+    "2": "2 klasė",
+    "3": "1 klasė",
+    "4": "Auksinis tankistas"
+  }
+}

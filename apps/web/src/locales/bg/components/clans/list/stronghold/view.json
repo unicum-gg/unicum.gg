@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Все още няма данни. Провери отново, след като клановете бъдат обновени.",
+  "heading": "Най-добри кланове <accent>{tier}</accent>",
+  "blurb": "Класация за {region}, подредена по {sort} сред всички проследени кланове в {format} (минимум {battles} битки).",
+  "blurb-period": "Класация за {region}, подредена по {sort} сред всички проследени кланове в {format} за {period} (минимум {battles} битки).",
+  "format-advances": "Настъпления (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Най-добрите {count} клана от {tier} ·"
+}

@@ -1,0 +1,8 @@
+{
+  "last-days": "Viimeiset {chartDays} päivää",
+  "n-players": "{count, plural, one {# pelaaja} other {# pelaajat}}",
+  "rolling-average-combined-damage-to": "Liukuva yhdistetyn vahingon keskiarvo, jolla päihittää 65 / 85 / 95 % pelaajista.",
+  "single-battle-xp-to-beat": "Yhden taistelun XP, jolla päihittää 50 / 80 / 95 / 99 % pelaajista.",
+  "tank-marks-of-excellence": "Panssarivaunun {tank} huippusuorituksen merkit",
+  "tank-marks-of-mastery": "Panssarivaunun {tank} mestaruusmerkit"
+}

@@ -1,0 +1,11 @@
+{
+  "date": "Dátum",
+  "featured-tournament": "Kiemelt verseny",
+  "format": "Formátum",
+  "n-of-the-roster-were-in-the-clan": "A keret {count} tagja volt a klánban",
+  "no-tournament-matches-the-current": "Egyetlen bajnoki mérkőzés sem felel meg a jelenlegi szűrőknek.",
+  "played-as": "Játszva mint",
+  "result": "Eredmény",
+  "status": "Állapot",
+  "tier": "szint"
+}

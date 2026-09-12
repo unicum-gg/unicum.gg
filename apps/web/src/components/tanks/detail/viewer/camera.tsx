@@ -19,12 +19,11 @@ import {
 import type { ComponentType } from "react";
 
 import {
-  CINEMATIC_LABEL,
   CINEMATIC_NEXT,
-  CINEMATIC_TOOLTIP,
   Cinematic,
 } from "@/components/tanks/detail/viewer/cinematic";
 import { Group, Mark } from "@/components/tanks/detail/viewer/control-group";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   engagedLabel,
   engagedMeaning,
@@ -32,7 +31,6 @@ import {
   ModeIcon,
 } from "@/components/tanks/detail/mode-marks";
 import {
-  PRESENTATION_LABEL,
   Presentation,
 } from "@/components/tanks/detail/viewer/presentation";
 
@@ -110,6 +108,7 @@ export function CameraControls({
   rolling: boolean;
   onRolling: () => void;
 }) {
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
   const CinematicMark = CINEMATIC_ICON[cinematic];
   return (
     <Group>
@@ -123,7 +122,7 @@ export function CameraControls({
       <Mark
         on={centred}
         onClick={onRecentre}
-        says={centred ? "Put it back off centre" : "Center the vehicle"}
+        says={tView(centred ? "centre.off" : "centre.on")}
       >
         {centred ? (
           <AlignHorizontalDistributeStart className="size-4" aria-hidden />
@@ -137,7 +136,7 @@ export function CameraControls({
         undo, since a reset for a view nobody has touched is furniture.
       */}
       {resettable ? (
-        <Mark onClick={onReset} says="Reset view">
+        <Mark onClick={onReset} says={tView("reset")}>
           <RotateCcw className="size-4" aria-hidden />
         </Mark>
       ) : null}
@@ -153,7 +152,7 @@ export function CameraControls({
       <Mark
         on={hullDown}
         onClick={onHullDown}
-        says={hullDown ? "Level the vehicle" : "Hull down"}
+        says={tView(hullDown ? "hull-down.off" : "hull-down.on")}
       >
         {/* The ridge itself. A box with its bottom edge left undrawn says what
             is hidden more literally, and read worse: at sixteen pixels it is a
@@ -190,8 +189,8 @@ export function CameraControls({
       <Mark
         on={cinematic !== Cinematic.Off}
         onClick={() => onCinematic(CINEMATIC_NEXT[cinematic])}
-        says={CINEMATIC_LABEL[cinematic]}
-        tooltip={CINEMATIC_TOOLTIP[cinematic]}
+        says={tView(`cinematic.${cinematic}`)}
+        tooltip={tView(`cinematic-tooltips.${cinematic}`)}
       >
         <CinematicMark className="size-4" aria-hidden />
       </Mark>
@@ -210,7 +209,7 @@ export function CameraControls({
         <Mark
           on={rolling}
           onClick={onRolling}
-          says={rolling ? "Stop the tracks" : "Run the tracks"}
+          says={tView(rolling ? "tracks.off" : "tracks.on")}
         >
           {rolling ? (
             <Pause className="size-4" aria-hidden />
@@ -238,11 +237,12 @@ export function SizeControls({
   presentation: Presentation;
   onPresentation: (next: Presentation) => void;
 }) {
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
   return (
     <Group>
       {SIZES.map((size) => {
         const on = presentation === size;
-        const words = PRESENTATION_LABEL[size][on ? "leave" : "enter"];
+        const words = tView(`presentation.${size}.${on ? "leave" : "enter"}`);
         const Icon = on
           ? size === Presentation.Windowed
             ? Minimize2

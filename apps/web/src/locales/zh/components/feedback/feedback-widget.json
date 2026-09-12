@@ -1,0 +1,21 @@
+{
+  "trigger": "反馈",
+  "title": "分享你的反馈",
+  "topic-placeholder": "选择主题...",
+  "message-placeholder": "填写你的反馈...",
+  "send": "发送",
+  "sent": "感谢你的反馈！",
+  "failed": "无法发送反馈。请重试。",
+  "topics": {
+    "bug": "问题报告",
+    "idea": "功能建议",
+    "data": "数据准确性",
+    "other": "其他"
+  },
+  "sentiments": {
+    "awful": "非常差",
+    "bad": "差",
+    "good": "好",
+    "great": "非常好"
+  }
+}

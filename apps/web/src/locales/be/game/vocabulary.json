@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Выпадковы",
+    "battle_royale": "Сталевы паляўнічы",
+    "frontline": "Лінія фронту",
+    "onslaught": "Наступ",
+    "onslaught_night": "Начны {onslaught}",
+    "grand_battle": "Генеральная бітва",
+    "clan_wars": "Кланавыя войны",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Апошні рубеж",
+    "arcade": "Аркада",
+    "story_mode": "Сюжэтны рэжым",
+    "training": "Трэніроўка"
+  },
+  "player-modes": {
+    "overall": "Слухмяшаныя баі",
+    "skirmish": "Вылазка",
+    "advances": "Наступы",
+    "grand": "Генеральныя бітвы",
+    "ranked": "Рангавыя баі",
+    "cw-x": "Кланавыя войны X",
+    "cw-viii": "Кланавыя войны VIII",
+    "cw-vi": "Кланавыя войны VI",
+    "steel-hunter": "Сталевы паляўнічы",
+    "onslaught": "Наступ"
+  },
+  "stronghold-tiers": {
+    "advances": "Наступы",
+    "t10": "Вылазка T10",
+    "t8": "Вылазка T8",
+    "t6": "Вылазка T6"
+  },
+  "stronghold-periods": {
+    "24h": "Папярэднія 24 гадзіны",
+    "7d": "Папярэднія 7 дзён",
+    "30d": "Анул або 30 дзён",
+    "overall": "У цэлым"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Бої",
+    "winrate": "Коэфіцыент перамог"
+  },
+  "clan-boards": {
+    "advances": "Наступы",
+    "t10": "Вылазка X",
+    "t8": "Вылазка VIII",
+    "t6": "Вылазка VI"
+  },
+  "map-modes": {
+    "standard": "Стандарт",
+    "encounter": "Сустрэчны бой",
+    "assault": "Штурм",
+    "attack-defense": "Атака/Абарона"
+  },
+  "map-camouflage": {
+    "summer": "Летні",
+    "winter": "Зімовы",
+    "desert": "Пустынны"
+  },
+  "map-poi": {
+    "1": "Штаб артылерыі",
+    "2": "Цэнтр сувязі",
+    "3": "Назіральны пост"
+  },
+  "tournament-modes": {
+    "ctf": "Стандарт",
+    "domination": "Сустрэчны бой",
+    "assault2": "Атака/Абарона",
+    "comp7": "Наступ"
+  },
+  "battle-formats": {
+    "random": "Выпадковы",
+    "clan_wars": "Кланавыя войны",
+    "advances": "Наступы",
+    "skirmish": "Вылазка",
+    "maneuvers": "Манеўры",
+    "onslaught": "Наступ",
+    "tournament": "Турнір"
+  },
+  "battle-results": {
+    "victory": "Перамога",
+    "defeat": "Паражэнне",
+    "draw": "Нічыя"
+  },
+  "spawn-directions": {
+    "north": "Поўнач",
+    "south": "Поўдзень",
+    "east": "Усход",
+    "west": "Захад"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Набліжальны",
+    "registration_started": "Рэгістрацыя адкрыта",
+    "registration_finished": "Рэгістрацыя зачыненая",
+    "running": "У працэсе",
+    "finished": "Завяршаецца",
+    "complete": "Завершаны"
+  },
+  "onslaught-tiers": {
+    "legend": "Легенда",
+    "champion": "Чэмпіён",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Цяжкі",
+    "mediumTank": "Сярэдні",
+    "lightTank": "Святло",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Штурм",
+    "break": "Прарыў",
+    "support": "Падтрымка",
+    "universal": "Універсальны",
+    "sniper": "Снайпер",
+    "wheeled": "Колавы"
+  },
+  "mastery-badges": {
+    "class3": "3-і Клас",
+    "class2": "2-і Клас",
+    "class1": "1-ы Клас",
+    "ace": "Ас Бронетанка"
+  },
+  "clan-modes": {
+    "random": "Слухмяшаныя баі",
+    "stronghold": "Умацаваны раён",
+    "skirmish": "Сутычка",
+    "clan-wars": "Кланавыя войны"
+  },
+  "features": {
+    "stronghold": "Умацаваны раён",
+    "skirmish": "Сутычка",
+    "marks-of-excellence": "Знакі выдатнасці",
+    "marks-of-mastery": "Знакі майстэрства",
+    "personal-rating": "Асабісты рэйтынг",
+    "world-of-tanks-rating": "Рэйтынг World of Tanks",
+    "common-test": "Агульны тест",
+    "tournaments": "Турніры"
+  },
+  "marks": {
+    "1": "1 Марка",
+    "2": "2 Маркі",
+    "3": "3 Маркі",
+    "name": "Знакі выдатнасці"
+  }
+}

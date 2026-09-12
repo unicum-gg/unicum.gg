@@ -1,0 +1,27 @@
+{
+  "placeholder": "搜索玩家、军团、坦克、地图或术语",
+  "type": "搜索类型",
+  "types": {
+    "all": "全部",
+    "players": "玩家",
+    "clans": "军团",
+    "tanks": "坦克",
+    "maps": "地图",
+    "glossary": "词汇表"
+  },
+  "sections": {
+    "players": "玩家",
+    "clans": "军团",
+    "tanks": "坦克",
+    "maps": "地图",
+    "glossary": "词汇表",
+    "recent": "最近搜索",
+    "favorites": "收藏"
+  },
+  "searching": "搜索中…",
+  "errored": "出现问题，请重试。",
+  "empty": "没有找到结果",
+  "remove-recent": "从最近记录中移除",
+  "add-favorite": "添加到收藏夹",
+  "remove-favorite": "从收藏夹中移除"
+}

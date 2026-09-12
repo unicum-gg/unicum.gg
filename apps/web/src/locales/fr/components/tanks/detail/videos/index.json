@@ -1,0 +1,10 @@
+{
+  "empty": "Aucune vidéo pour le moment",
+  "see-all": "Voir tout →",
+  "see-all-count": "Tout voir ({count}) →",
+  "watch-on-youtube": "Regarder sur YouTube",
+  "play": "Lire {title}",
+  "log-in": "Connectez-vous pour suggérer une vidéo",
+  "dmg": "dégâts",
+  "no-community-video-for-the": "Aucune vidéo de la communauté pour ce véhicule à ce jour : {tankName}. Proposez-en une. Elle apparaîtra ici après examen par un modérateur."
+}

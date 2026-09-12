@@ -1,0 +1,12 @@
+{
+  "slot": "Slot {n}",
+  "slot-filled": "Slot {n}: {name}",
+  "consumable-slot": "Slot per consumabile {n}",
+  "consumable-slot-filled": "Slot per consumabile {n}: {name}",
+  "level": "Livello {n}",
+  "stock": "Stock",
+  "specialize": "Clicca per specializzare questo slot.",
+  "clear-specialization": "Clicca per rimuovere la specializzazione da questo slot.",
+  "crew-skills": "Abilità dell’equipaggio",
+  "shell-aria": "{name}: {damage} danni, {penetration} mm di perforazione"
+}

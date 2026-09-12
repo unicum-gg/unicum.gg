@@ -1,0 +1,12 @@
+{
+  "before-update": "Před aktualizací {version}",
+  "common-test": "Společný test",
+  "in-common-test-not-released": "Společný test, zatím nevydáno",
+  "introduced": "Představeno",
+  "lifecycle": "Životní cyklus",
+  "n-buffed": "{count} posílených",
+  "n-nerfed": "{count} oslabených",
+  "not-released-wargaming-can-still": "Nevydáno. Wargaming může před vydáním aktualizace cokoli z toho ještě změnit nebo vypustit.",
+  "status": "Stav",
+  "update": "Aktualizovat {version}"
+}

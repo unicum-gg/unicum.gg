@@ -1,0 +1,6 @@
+{
+  "title": "Tikai {language} World of Tanks spēlētāji ({region})",
+  "description": "{name} {region} spēlētāju līderu saraksts spēlētājiem, kuru secinātā klanu vēstures valoda ir tikai {language}, sakārtots pēc WNX.",
+  "og-title": "Tikai {language} spēlētāji",
+  "og-subtitle": "{region} līderu saraksts"
+}

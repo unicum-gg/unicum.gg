@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "peste {value}% dintre tancurile evaluate de la nivelul său",
+  "measured-hint": "Poziția ratei sale de victorii printre aceleași tancuri",
+  "not-enough-votes-yet-to": "Nu există încă suficiente voturi pentru a compara verdictul comunității cu performanța reală a tancului.",
+  "perceived-hint": "Poziția sa în comunitate printre tancurile evaluate de nivel {tier}",
+  "verdict": {
+    "overrated": "Comunitatea îl evaluează mult peste ceea ce obține de fapt.",
+    "fair": "Reputația și rezultatele sunt de acord în acest caz.",
+    "underrated": "Are rezultate mai bune decât îi recunoaște oricine."
+  },
+  "what-players-think": "Ce cred jucătorii",
+  "what-the-data-says": "Ce spun datele"
+}

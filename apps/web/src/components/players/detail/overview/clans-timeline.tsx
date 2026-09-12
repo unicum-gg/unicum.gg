@@ -1,8 +1,12 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { clanRoleName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
+import { dateLocale } from "@/lib/date-locale";
 import { format } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { useMemo } from "react";
 import ROUTES from "@/constants/routes";
@@ -15,10 +19,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanStint } from "@unicum.gg/shared";
 
-function prettyRole(role: string): string {
-  if (!role) return "—";
-  return role.charAt(0).toUpperCase() + role.slice(1).replace(/_/g, " ");
-}
+const DATE_PATTERN = "d MMM yyyy";
 
 function pickTextColor(bg: string): string {
   const hex = bg.replace("#", "");
@@ -54,6 +55,9 @@ export function PlayerClansTimeline({
   stints: ClanStint[];
   nowMs: number;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/detail/overview/clans-timeline");
+  const { t: tRoles } = useTranslation("game/clan-roles");
   const start = useMemo(() => {
     const oldest = stints.reduce<number>(
       (min, s) => Math.min(min, s.joinedAt.getTime()),
@@ -126,10 +130,14 @@ export function PlayerClansTimeline({
                         <ClanTag tag={tag} color={s.clan.color} />{" "}
                         {s.clan.name}
                       </div>
-                      <div>{prettyRole(s.role)}</div>
+                      <div>{clanRoleName(s.role, tRoles)}</div>
                       <div className="tabular-nums text-muted-foreground">
-                        {format(s.joinedAt, "MMM d, yyyy")} —{" "}
-                        {s.leftAt ? format(s.leftAt, "MMM d, yyyy") : "current"}
+                        {format(s.joinedAt, "d MMM yyyy", { locale: dateLocale(locale) })} —{" "}
+                        {s.leftAt
+                          ? format(s.leftAt, DATE_PATTERN, {
+                              locale: dateLocale(locale),
+                            })
+                          : t("current")}
                       </div>
                     </div>
                   </div>
@@ -147,7 +155,7 @@ export function PlayerClansTimeline({
         </div>
 
         <div className="relative mt-1 h-4 w-full text-[10px] text-muted-foreground">
-          <span className="absolute left-0">{format(start, "MMM yyyy")}</span>
+          <span className="absolute left-0">{format(start, "MMM yyyy", { locale: dateLocale(locale) })}</span>
           {ticks.map((t) => {
             const p = pct(t.getTime());
             if (p < 6 || p > 94) return null;
@@ -161,7 +169,7 @@ export function PlayerClansTimeline({
               </span>
             );
           })}
-          <span className="absolute right-0">today</span>
+          <span className="absolute right-0">{t("today")}</span>
         </div>
       </div>
     </TooltipProvider>

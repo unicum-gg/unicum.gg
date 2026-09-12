@@ -1,0 +1,6 @@
+{
+  "title": "Pokrivenost podataka igre World of Tanks ({region})",
+  "description": "Koliko igrača i klanova igre World of Tanks {name} prati na regiji {region}, učestalost osvježavanja snimke, dubina podataka, trošak infrastrukture i dostupnost.",
+  "og-title": "Pokrivenost podataka",
+  "og-subtitle": "Igrači i klanovi na regiji {region}"
+}

@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "ページあたりの行数",
+  "free-xp-from": "フリー経験値の獲得元",
+  "xp-1-gold": "経験値 = ゴールド1",
+  "previous-page": "前のページ",
+  "page": "ページ {current} / {totalPages}",
+  "next-page": "次のページ",
+  "all": "全て"
+}

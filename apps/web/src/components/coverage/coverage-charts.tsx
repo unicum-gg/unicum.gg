@@ -1,5 +1,8 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
+import { useFormat } from "@/hooks/use-format";
+import { dateFormat, numberFormat } from "@/lib/format";
 import { useMemo, useState } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
@@ -12,15 +15,8 @@ import { ChartMode } from "@/components/coverage/chart-mode";
 import { cn } from "@/lib/utils";
 import type { DailyPoint } from "@/services/coverage";
 
-const dayFmt = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-});
-
-function tickFormatter(value: string) {
-  const d = new Date(value);
-  return dayFmt.format(d);
-}
+const DAY_TICK = "d MMM";
+const TOOLTIP_DAY = "EEE d MMM";
 
 // Abbreviated axis labels (2.06M), because the counts run into the millions and
 // would not fit the axis gutter. The tooltip keeps showing the exact count.
@@ -30,7 +26,10 @@ function tickFormatter(value: string) {
 // "2.1M" on every tick. This sizes the precision to the gap between ticks (the
 // span over the ~4 intervals recharts draws) so consecutive labels always
 // differ, and Intl still drops trailing zeros where they are not needed.
-function countFormatterFor(values: number[]): (value: number) => string {
+function countFormatterFor(
+  values: number[],
+  locale: string,
+): (value: number) => string {
   const min = Math.min(...values);
   const max = Math.max(...values);
   const step = (max - min) / 5;
@@ -38,7 +37,7 @@ function countFormatterFor(values: number[]): (value: number) => string {
   const unit = 1000 ** Math.min(3, Math.floor(Math.log10(magnitude) / 3));
   const digits =
     step > 0 ? Math.min(3, Math.max(0, Math.ceil(-Math.log10(step / unit)))) : 1;
-  const fmt = new Intl.NumberFormat("en-US", {
+  const fmt = numberFormat(locale, {
     notation: "compact",
     maximumFractionDigits: digits,
   });
@@ -81,22 +80,24 @@ export function CoverageAreaChart({
   data,
   ariaLabel,
   defaultMode = ChartMode.Daily,
-  valueLabel = "Count",
+  valueLabel,
   allowCumulative = true,
-  suffixDaily = "per day",
   total,
 }: {
   title: string;
   data: DailyPoint[];
   ariaLabel: string;
   defaultMode?: ChartMode;
+  /** Defaults to the dictionary's own word, so a caller that has none does not
+   * fall back to English. */
   valueLabel?: string;
   allowCumulative?: boolean;
-  suffixDaily?: string;
   /** All-time total this series accumulates to, so the cumulative curve ends on
    * the real figure instead of on the 30-day window's own sum. */
   total?: number;
 }) {
+  const { t } = useTranslation("components/coverage/coverage-charts");
+  const { locale } = useFormat();
   const [mode, setMode] = useState<ChartMode>(defaultMode);
   const effectiveMode = allowCumulative ? mode : ChartMode.Daily;
   const displayData = useMemo(
@@ -105,7 +106,10 @@ export function CoverageAreaChart({
     [data, effectiveMode, total],
   );
   const counts = useMemo(() => displayData.map((p) => p.count), [displayData]);
-  const countTickFormatter = useMemo(() => countFormatterFor(counts), [counts]);
+  const countTickFormatter = useMemo(
+    () => countFormatterFor(counts, locale),
+    [counts, locale],
+  );
   const axisWidth = useMemo(
     () => axisWidthFor(counts, countTickFormatter),
     [counts, countTickFormatter],
@@ -114,20 +118,22 @@ export function CoverageAreaChart({
     () =>
       ({
         count: {
-          label: valueLabel,
+          label: valueLabel ?? t("count"),
           color: "var(--brand)",
         },
       }) satisfies ChartConfig,
-    [valueLabel],
+    [valueLabel, t],
   );
-  const suffix =
-    effectiveMode === ChartMode.Cumulative ? "(cumulative)" : suffixDaily;
-
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between gap-3">
         <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-          {title} {suffix}
+          {t(
+            effectiveMode === ChartMode.Cumulative
+              ? "heading-cumulative"
+              : "heading-daily",
+            { title },
+          )}
         </div>
         {allowCumulative && (
           <div className="flex items-center gap-0.5 text-[10px] font-medium uppercase tracking-wider">
@@ -135,14 +141,12 @@ export function CoverageAreaChart({
               active={mode === ChartMode.Daily}
               onClick={() => setMode(ChartMode.Daily)}
             >
-              Daily
-            </ModeButton>
+              {t("daily")}</ModeButton>
             <ModeButton
               active={mode === ChartMode.Cumulative}
               onClick={() => setMode(ChartMode.Cumulative)}
             >
-              Cumulative
-            </ModeButton>
+              {t("cumulative")}</ModeButton>
           </div>
         )}
       </div>
@@ -167,7 +171,9 @@ export function CoverageAreaChart({
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            tickFormatter={tickFormatter}
+            tickFormatter={(value: string) =>
+              dateFormat(locale, DAY_TICK).format(new Date(value))
+            }
             minTickGap={32}
           />
           <YAxis
@@ -193,11 +199,9 @@ export function CoverageAreaChart({
             content={
               <ChartTooltipContent
                 labelFormatter={(value) =>
-                  new Date(value as string).toLocaleDateString("en-US", {
-                    weekday: "short",
-                    month: "short",
-                    day: "numeric",
-                  })
+                  dateFormat(locale, TOOLTIP_DAY).format(
+                    new Date(value as string),
+                  )
                 }
               />
             }

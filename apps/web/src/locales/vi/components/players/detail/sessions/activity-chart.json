@@ -1,0 +1,5 @@
+{
+  "battles": "{count} Số trận",
+  "chart-label": "Số trận đã chơi mỗi {granularity}, được tô màu theo {metric}",
+  "no-battles": "Không có trận nào"
+}

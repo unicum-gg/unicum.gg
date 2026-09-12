@@ -27,6 +27,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming";
 import { unicumPublic } from "@/services/sdk";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * Overflow menu for the tank header, folding the per-tank actions (favorite,
@@ -48,6 +49,8 @@ export function TankActionsMenu({
   slug: string;
   favoriteItem: SearchHistoryItem;
 }) {
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
+  const { t: tMenu } = useTranslation("components/actions-menu");
   const { isFavorite, toggleFavorite } = useSearchHistory();
   const [shareOpen, setShareOpen] = useState(false);
   // The configurator setup lives in the current URL's query string; capture it
@@ -67,7 +70,7 @@ export function TankActionsMenu({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
-          aria-label="More actions"
+          aria-label={tView("more-actions")}
           className="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground focus-visible:outline-none aria-expanded:bg-fd-secondary aria-expanded:text-fd-foreground"
         >
           <DotsThreeVerticalIcon className="size-3.5" weight="bold" />
@@ -80,11 +83,11 @@ export function TankActionsMenu({
             }}
           >
             <StarIcon weight={fav ? "fill" : "bold"} />
-            {fav ? "Remove from favorites" : "Add to favorites"}
+            {fav ? tMenu("remove-from-favorites") : tMenu("add-to-favorites")}
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => openShare()}>
             <ShareNetworkIcon weight="bold" />
-            Share
+            {tMenu("share")}
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a
@@ -93,7 +96,7 @@ export function TankActionsMenu({
               rel="noopener noreferrer"
             >
               <BookOpenIcon weight="bold" />
-              Open in Tankopedia
+              {tMenu("open-in", { target: "Tankopedia" })}
               <ArrowSquareOutIcon className="ml-auto size-3 text-fd-muted-foreground" />
             </a>
           </DropdownMenuItem>
@@ -104,7 +107,7 @@ export function TankActionsMenu({
               rel="noopener noreferrer"
             >
               <RankingIcon weight="bold" />
-              Open in vehicle ratings
+              {tMenu("open-in", { target: tMenu("vehicle-ratings") })}
               <ArrowSquareOutIcon className="ml-auto size-3 text-fd-muted-foreground" />
             </a>
           </DropdownMenuItem>
@@ -116,7 +119,7 @@ export function TankActionsMenu({
       <ShareModal
         open={shareOpen}
         onOpenChange={setShareOpen}
-        title={`Share ${name}`}
+        title={tMenu("share-title", { name })}
         url={url}
         shareText={`Check ${name}'s WoT stats on ${APP.NAME}`}
         ogImage={unicumPublic.og.region(region).tanks(slug).url()}

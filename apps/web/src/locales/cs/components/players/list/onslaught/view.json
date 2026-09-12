@@ -1,0 +1,35 @@
+{
+  "heading": "Nejlepší hráči v režimu <accent>{mode}</accent>",
+  "intro": "Režim {mode} je kompetitivní hodnocený režim World of Tanks ve formátu 7 proti 7 pro vozidla X. úrovně. Region {region}: žebříček přímo z pořadí ve hře.",
+  "season": {
+    "range": "{start} do {end}",
+    "final": "konečné pořadí",
+    "live": "probíhající sezóna",
+    "updated": "aktualizováno {when}"
+  },
+  "board": "Nejlepších {count} hráčů v režimu {mode}",
+  "columns": {
+    "player": "Hráč",
+    "rank": "Hodnost",
+    "battles": "Bitev",
+    "rating": "Body hodnocení"
+  },
+  "alias": "(jako {nickname})",
+  "ranks": {
+    "title": "Hodnosti",
+    "meaning": "Význam",
+    "tier": "Úroveň",
+    "intro": "V režimu {mode} postupujete hodnostmi díky vyhraným bitvám. Každé vítězství vám přidá Body hodnocení podle toho, jak dobře jste hráli. Hodnost {champion} je nejvyšší dosažitelná hodnost, pokud rozhodují pouze Body hodnocení. Jejím dosažením se dostanete do žebříčku. Hodnost {legend} nemá pevně stanovenou hranici. Tvoří ji nejlépe hodnocená část hráčů s hodností {champion}, takže se její hranice mění podle výsledků ostatních hráčů. Při shodě rozhoduje počet odehraných bitev. Přesné hranice hodností {legend} a {champion} vycházejí z aktuální sezóny a jsou vyznačeny v žebříčku.",
+    "legend-blurb": "Nejlépe hodnocení hráči s hodností {champion}. Hra tuto hodnost v každé sezóně omezuje pevně stanovenou pozicí v žebříčku, takže se její velikost liší podle sezóny a regionu. Nejde o pevně stanovený počet bodů. Pokud klesnete pod posledního hráče s hodností {legend}, vrátíte se na hodnost {champion}.",
+    "champion-blurb": "Nejvyšší hodnost, které můžete dosáhnout. Rozhodují o ní pouze Body hodnocení a jejím dosažením se dostanete do žebříčku. Každý hráč v žebříčku má alespoň hodnost {champion}."
+  },
+  "race": {
+    "title-live": "Co je potřeba právě teď",
+    "title-ended": "Jak sezóna probíhala",
+    "legend-cutoff": "Cutoff {legend}",
+    "champion-cutoff": "Cutoff {champion}",
+    "ranked-players": "Hráči s hodnocením",
+    "rating-points": "body hodnocení",
+    "rank-cutoffs": "Hranice hodností"
+  }
+}

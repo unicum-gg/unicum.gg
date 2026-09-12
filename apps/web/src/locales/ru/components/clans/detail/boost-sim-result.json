@@ -1,0 +1,11 @@
+{
+  "already-running": "уже запущено",
+  "in-window": "в окне",
+  "n-online": "/ {count} в онлайне",
+  "no-reserves-selected": "Резервы не выбраны.",
+  "no-stock-ready": "нет готовых резервов",
+  "not-available": "не доступно",
+  "threshold": "порог ({online}/{min})",
+  "would-activate": "будет Активировать",
+  "would-not-fire": "Сейчас он не активируется."
+}

@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "En cell visar gruppens vinstprocent i den klassen, beräknad utifrån dess segrar och strider där för alla fordon som en spelare har kört minst {minBattles} strider med. Den beskriver alltså klasserna så som de spelas av spelarna som kör dem. Celler som bygger på färre än {TIERWINRATETHINCELL} strider visas svagare: de förändras av andra skäl än skicklighet. Färgerna motsvarar samma intervall för vinstprocent som på resten av webbplatsen.",
+  "cell-no-sample": "{where}, inget urval",
+  "cell-winrate": "{where}, {winrate} vinstgrad över {battles} strider",
+  "metric-band": "{metric}-intervall",
+  "nothing-recorded": "Inget har registrerats för {metric} än. Rutnätet byggs om varje natt.",
+  "over-battles-from-accounts": "{winrate}, baserat på {battles} strider från {players} konton",
+  "over-n-battles": "över {battles} strider",
+  "what-players-win-by-tier": "Vinstprocent efter klass för spelargruppen {label}"
+}

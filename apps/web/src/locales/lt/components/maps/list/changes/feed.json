@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# žemėlapis} few {# žemėlapiai} other {# žemėlapiai}}",
+  "no-map-changes-have-been": "Žemėlapio pakeitimai dar neužregistruoti. Wargaming pertvarkant žemėlapius, čia bus rodoma, ką pakeitė kiekvienas atnaujinimas.",
+  "update": "Atnaujinti {version}"
+}

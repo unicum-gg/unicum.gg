@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Vis chat",
+    "hide": "Skjul chat",
+    "show-streamers": "Vis streamere"
+  },
+  "heading": "{name}: World of Tanks-statistik for spillere, klaner og kampvogne",
+  "hide": "Skjul streamere",
+  "player": "Spiller",
+  "stream-language": "Stream-sprog · {name}",
+  "stream-language-alt": "Stream-sprog: {name}",
+  "theater": {
+    "enter": "Indgang til teater tilstand",
+    "exit": "Afslut teatertilstand"
+  },
+  "title": "Bedste spillere, der streamer nu ·",
+  "viewer-count": "{count} seere",
+  "viewers": "Seere",
+  "watch": "Se {nickname} på Twitch"
+}

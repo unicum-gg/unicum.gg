@@ -1,0 +1,16 @@
+{
+  "title": "Koristimo kolačiće",
+  "description": "Koristimo kolačiće da poboljšamo tvoje iskustvo pregledanja i analiziramo saobraćaj stranice.",
+  "functional": {
+    "title": "Funkcionalni",
+    "description": "Potrebni za pravilan rad stranice (postavke, odabir regije)."
+  },
+  "analytics": {
+    "title": "Mjerenje posjećenosti",
+    "description": "Google Analytics, koji postavlja kolačiće kako bi nam pomogao da razumijemo kako se stranica koristi. Anonimna analitika bez kolačića (Umami) ostaje uključena u svakom slučaju."
+  },
+  "save": "Sačuvaj moje izbore",
+  "decline": "Odbij sve",
+  "customize": "Prilagodi",
+  "accept": "Prihvati sve"
+}

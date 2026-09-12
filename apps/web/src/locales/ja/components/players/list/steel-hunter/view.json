@@ -1,0 +1,13 @@
+{
+  "heading": "<accent>{mode}</accent>のトッププレイヤー",
+  "intro": "{mode}はWorld of Tanksのバトルロイヤルモードです。HRでランク付けした{region}ランキングです（{mode}で最低100戦）。",
+  "board": "{mode}のトップ{count}プレイヤー",
+  "columns": {
+    "player": "プレイヤー",
+    "battles": "戦闘数",
+    "survival": "生存",
+    "survival-percent": "生存率",
+    "damage": "平均ダメージ"
+  },
+  "scale-description": "{mode}ランキングの色の境界値です。{mode}で100戦以上したプレイヤーの集団を基準に調整されています。"
+}

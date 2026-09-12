@@ -1,0 +1,25 @@
+{
+  "tagline": "Skapad för World of Tanks-communityn. Gratis statistik för varje spelare, klan, Tank och karta i EU, NA och Asien.",
+  "columns": {
+    "leaderboards": "Leaderboard",
+    "tanks": "Tanken",
+    "maps": "Kartor",
+    "integrations": "Integrationer",
+    "project": "Projekt"
+  },
+  "links": {
+    "top-tanks": "Topp Tanken",
+    "bot": "Discord-bot",
+    "mcp": "MCP-server",
+    "docs": "API-dokumentation",
+    "badges": "Märken",
+    "glossary": "Ordlista",
+    "coverage": "Täckning",
+    "support": "Stöd oss",
+    "source": "Källkod",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Ingen koppling till Wargaming",
+  "cookies": "Hantera cookies"
+}

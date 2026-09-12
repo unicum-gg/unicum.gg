@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Šim klanam vēl nav tanku datu.",
+  "no-tanks-match-these-filters": "Šiem filtriem neatbilst neviens tanks.",
+  "nation": "Nācija",
+  "type": "Tips",
+  "tier": "Līmenis",
+  "name": "Nosaukums",
+  "members": "Dalībnieki",
+  "battles": "Kaujas",
+  "avg-damage": "Vid. bojājumi",
+  "avg-xp": "Vid. XP",
+  "wr": "WR"
+}

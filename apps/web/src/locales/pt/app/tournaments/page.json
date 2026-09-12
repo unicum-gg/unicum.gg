@@ -1,0 +1,8 @@
+{
+  "description": "Todos os torneios da Wargaming em {region}: as competições diárias por ouro, os campeonatos de clãs, quem participou e quem venceu. Chaves, pontuações e escalações completas.",
+  "live-many": "{count} torneios abertos ou em curso neste momento em {region},",
+  "live-one": "{count} torneio aberto ou em curso neste momento em {region},",
+  "no-live": "Há torneios em {region} todos os dias,",
+  "title": "World of Tanks: {tournaments}",
+  "what-you-find": "desde competições 1v1 com ouro em disputa até campeonatos de clãs com prémios em dinheiro. Chaves e pontuações completas, todas as equipas com a respetiva escalação e o lado em que cada uma começou, mapa a mapa."
+}

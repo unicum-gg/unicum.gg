@@ -1,5 +1,7 @@
 "use client";
 
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import dynamic from "next/dynamic";
 import { useRef, useState, type RefObject } from "react";
 import {
@@ -34,6 +36,7 @@ export function VideoScrubber({
   seconds: number;
   onChange: (seconds: number) => void;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/scrubber");
   const playerRef = useRef<MediaPlayerInstance>(null);
   const [attached, setAttached] = useState(false);
 
@@ -42,7 +45,7 @@ export function VideoScrubber({
       <div className="relative aspect-video w-full overflow-hidden rounded-md bg-black">
         <PlyrPlayer
           videoId={videoId}
-          title="Video being suggested"
+          title={t("video-being-suggested")}
           playerRef={playerRef}
           // Opens where the field already points.
           startSeconds={seconds}
@@ -78,6 +81,7 @@ function ScrubberControls({
   seconds: number;
   onChange: (seconds: number) => void;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/scrubber");
   // Subscribed rather than polled: the player publishes its own state, so the
   // slider follows the playhead with no interval of ours to keep alive.
   const { currentTime, duration } = useMediaStore(playerRef);
@@ -122,7 +126,7 @@ function ScrubberControls({
           value={position}
           disabled={!ready}
           onChange={(e) => seek(Number(e.target.value))}
-          aria-label="Moment the battle starts"
+          aria-label={t("moment-the-battle-starts")}
           className="h-1 flex-1 cursor-pointer accent-brand"
         />
         <span className="w-20 shrink-0 text-right font-mono text-xs tabular-nums">
@@ -140,8 +144,7 @@ function ScrubberControls({
           disabled={!ready}
           onClick={() => seek(Math.floor(currentTime))}
         >
-          Use the current moment
-        </Button>
+          {t("use-the-current-moment")}</Button>
         {/* The way back. Playing on with the player's own controls moves the
             playhead without touching the field, which is what you want when
             checking the rest of the battle, and this returns to the second
@@ -154,8 +157,7 @@ function ScrubberControls({
             disabled={!ready}
             onClick={() => seek(seconds)}
           >
-            Back to {formatTimestamp(seconds)}
-          </Button>
+            {t("back-to", { seconds: formatTimestamp(seconds) })}</Button>
         )}
         {/* Dragging cannot be precise on a long video, a pixel being a dozen
             seconds on a three-hour VOD, and the slider keeps focus after a
@@ -166,9 +168,16 @@ function ScrubberControls({
             broke around them instead of flowing. `Kbd` is already
             `inline-flex align-middle` for exactly this. */}
         <span className="flex-1 text-xs text-fd-muted-foreground">
-          Drag to the battle, then adjust with <Kbd>←</Kbd> <Kbd>→</Kbd>, one
-          second per press. The video pauses on the moment you pick, and stays
-          there while you fill in the rest.
+          <Interpolate
+            template={t("drag-to-the-battle")}
+            values={{
+              keys: (
+                <>
+                  <Kbd>←</Kbd> <Kbd>→</Kbd>
+                </>
+              ),
+            }}
+          />
         </span>
       </div>
     </>

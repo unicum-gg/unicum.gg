@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Ždrijeb još nije obavljen. Okršaji ovog tima pojavljuju se ovdje nakon početka turnira.",
+  "each-map-is-played-twice": "Svaka se mapa igra dvaput, jednom sa svake strane. Posljednja mapa je odlučujuća i igra se jednom.",
+  "first-battle-at": "Prva bitka, {when}",
+  "lost": "Izgubljeno",
+  "matches": "Utakmice ({length})",
+  "never-played": "Ovaj tim nikad nije igrao okršaj. Registrirao se, ali ždrijeb nije došao do njega, što se događa s nepotvrđenom postavom.",
+  "no-maps-recorded": "Za ovaj okršaj nema zabilježenih mapa.",
+  "no-roster-recorded-for-this": "Za ovaj tim nema zabilježene postave.",
+  "of-players-on-the-day": "{members} od {length} igrača tog dana",
+  "played-on-uncatalogued": "Igralo se na mapi {maps}, koja nije u katalogu mapa.",
+  "roster": "Roster ({length})",
+  "stage-group": "{stage} · Grupa {order}",
+  "team-1": "Tim 1",
+  "team-2": "Tim 2",
+  "tournaments": "Turniri",
+  "when-the-first-battle-started": "Vrijeme početka prve bitke",
+  "won": "Pobjeda"
+}

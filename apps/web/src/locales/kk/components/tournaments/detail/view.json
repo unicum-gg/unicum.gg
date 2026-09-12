@@ -1,0 +1,11 @@
+{
+  "closes": "Жабу {when}",
+  "map-pool": "Карта мұрасы",
+  "place": "Орын",
+  "prize": "Жүлде",
+  "prizes": "Жүлделер",
+  "qualified": "Іріктелгендер ({count})",
+  "register": "тіркелу",
+  "tournaments": "Турнирлер",
+  "winner": "{count, plural, one {Жеңімпаз} other {Жеңімпаздар}}"
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Çevrimiçi World of Tanks oyuncuları ({region})",
+  "description": "Her {region} World of Tanks sunucusunda şu anda kaç oyuncu olduğu, son 24 saat, hafta ve yıldaki oyuncu sayısı, tüm zamanların rekoru ve haftanın en yoğun saatleri.",
+  "og-title": "Sunucu nüfusu",
+  "og-subtitle": "{region} çevrimiçi oyuncuları"
+}

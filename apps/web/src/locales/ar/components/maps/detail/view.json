@@ -1,0 +1,9 @@
+{
+  "battle-time": "وقت المعركة",
+  "camouflage": "تمويه {camouflage}",
+  "mode": "وضع",
+  "n-random-events": "{count, plural, zero {# حدث عشوائي} one {# حدث عشوائي} two {# حدثان عشوائيان} few {# أحداث عشوائية} many {# حدثًا عشوائيًا} other {# حدث عشوائي}}",
+  "random-events": "أحداث عشوائية",
+  "size": "حجم",
+  "team-size": "حجم الفريق"
+}

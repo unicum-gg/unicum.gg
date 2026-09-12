@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Pārskats",
+    "tanks": "Tvertne",
+    "sessions": "Sesijas",
+    "achievements": "Sasniegumi",
+    "tournaments": "Turnīri",
+    "value": "Vērtība"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

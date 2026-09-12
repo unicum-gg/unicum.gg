@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import ROUTES from "@/constants/routes";
 import { PlayerName } from "@/components/entity/player-name";
@@ -21,6 +22,7 @@ export function SlotHeader({
   onRemove: (idx: number) => void;
   onAdd: (nickname: string) => void;
 }) {
+  const { t } = useTranslation("components/players/compare/slot-header");
   const canRemove = slots.length > 2;
   const excludeKeys = new Set(slots.map((s) => s.requested.toLowerCase()));
 
@@ -43,13 +45,13 @@ export function SlotHeader({
             href={ROUTES.PLAYER(region, slot.requested)}
           />
           {!slot.player && (
-            <span className="text-xs text-destructive">not found</span>
+            <span className="text-xs text-destructive">{t("not-found")}</span>
           )}
           {canRemove && (
             <button
               type="button"
               onClick={() => onRemove(idx)}
-              aria-label={`Remove ${slot.requested}`}
+              aria-label={t("remove", { name: slot.requested })}
               className="inline-flex size-5 cursor-pointer items-center justify-center rounded-full text-fd-muted-foreground hover:bg-fd-border/50 hover:text-fd-foreground"
             >
               <XIcon className="size-3" weight="bold" />
@@ -62,7 +64,7 @@ export function SlotHeader({
           region={region}
           excludeKeys={excludeKeys}
           onPick={onAdd}
-          triggerAriaLabel="Add player"
+          triggerAriaLabel={t("add-player")}
           triggerClassName="inline-flex size-7 cursor-pointer items-center justify-center rounded-full border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground hover:bg-fd-secondary hover:text-fd-foreground"
           triggerContent={<PlusIcon className="size-3.5" weight="bold" />}
         />

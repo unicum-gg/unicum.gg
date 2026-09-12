@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "レーティング (WN)",
+    "tip": "これらの戦闘だけのレーティングで、アカウント全体のものではありません"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "これらの戦闘での勝率"
+  },
+  "avgDamage": {
+    "label": "平均ダメージ"
+  },
+  "avgFrags": {
+    "label": "平均撃破数",
+    "tip": "1戦あたりの撃破数"
+  },
+  "damageRatio": {
+    "label": "ダメージ効率",
+    "tip": "与えたダメージと受けたダメージの比率"
+  },
+  "kd": {
+    "label": "撃破効率",
+    "tip": "撃破数と車両喪失数の比率"
+  },
+  "survivalRate": {
+    "label": "生還率"
+  },
+  "avgSpotted": {
+    "label": "平均発見数",
+    "tip": "1戦あたりの発見数"
+  },
+  "avgDefense": {
+    "label": "基地防御",
+    "tip": "1戦あたりの防衛ポイント"
+  },
+  "avgXp": {
+    "label": "平均XP"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "all": "Všechna",
+  "camouflage-map": "Mapa s kamufláží {camouflage}",
+  "modes": "{count, plural, one {# režim} few {# režimy} many {# režimů} other {# režimů}}",
+  "no-maps-match-your-filters": "Žádné mapy neodpovídají vašim filtrům.",
+  "search": "Hledat mezi {count} mapami",
+  "search-label": "Hledat mapy",
+  "special-map": "Speciální mapa"
+}

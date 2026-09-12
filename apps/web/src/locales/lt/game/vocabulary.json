@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Atsitiktinė",
+    "battle_royale": "Plieninis medžiotojas",
+    "frontline": "Fronto linija",
+    "onslaught": "Prasiveržimas",
+    "onslaught_night": "{onslaught} Naktis",
+    "grand_battle": "Didysis mūšis",
+    "clan_wars": "Klano karai",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "Arkadinis",
+    "story_mode": "Istorijos režimas",
+    "training": "Treniruotės"
+  },
+  "player-modes": {
+    "overall": "Atsitiktinės kovos",
+    "skirmish": "Išpuolis",
+    "advances": "Puolimai",
+    "grand": "Didieji mūšiai",
+    "ranked": "Reitinguojami mūšiai",
+    "cw-x": "Klanų karai X",
+    "cw-viii": "Klanų karai VIII",
+    "cw-vi": "Klanų karai VI",
+    "steel-hunter": "Plieninis medžiotojas",
+    "onslaught": "Prasiveržimas"
+  },
+  "stronghold-tiers": {
+    "advances": "Puolimai",
+    "t10": "Susirėmimas T10",
+    "t8": "Susirėmimas T8",
+    "t6": "Susirėmimas T6"
+  },
+  "stronghold-periods": {
+    "24h": "Praėjusios 24 valandos",
+    "7d": "Praėjusios 7 dienos",
+    "30d": "Paskutinės 30 dienų",
+    "overall": "Bendrai"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Mūšiai",
+    "winrate": "Pergalės rodiklis"
+  },
+  "clan-boards": {
+    "advances": "Puolimai",
+    "t10": "Susirėmimas X",
+    "t8": "Susirėmimas VIII",
+    "t6": "Susirėmimas VI"
+  },
+  "map-modes": {
+    "standard": "Standartinis",
+    "encounter": "Kontraatakos mūšis",
+    "assault": "Šturmas",
+    "attack-defense": "Puolimas/Gynyba"
+  },
+  "map-camouflage": {
+    "summer": "Vasaros",
+    "winter": "Žiemos",
+    "desert": "Dykumų"
+  },
+  "map-poi": {
+    "1": "Artilerijos būstinė",
+    "2": "Ryšių centras",
+    "3": "Stebėjimo postas"
+  },
+  "tournament-modes": {
+    "ctf": "Standartinis",
+    "domination": "Susidūrimas",
+    "assault2": "Puolimas / gynyba",
+    "comp7": "Prasiveržimas"
+  },
+  "battle-formats": {
+    "random": "Atsitiktinė",
+    "clan_wars": "Klano karai",
+    "advances": "Puolimai",
+    "skirmish": "Išpuolis",
+    "maneuvers": "Manevrai",
+    "onslaught": "Prasiveržimas",
+    "tournament": "Turnyras"
+  },
+  "battle-results": {
+    "victory": "Pergalė",
+    "defeat": "Pralaimėjimas",
+    "draw": "Lygiosios"
+  },
+  "spawn-directions": {
+    "north": "Šiaurė",
+    "south": "Pietūs",
+    "east": "Rytai",
+    "west": "Vakarai"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Artimiausi",
+    "registration_started": "Registracija atidaryta",
+    "registration_finished": "Registracija uždaryta",
+    "running": "Vyksta",
+    "finished": "Baigtas",
+    "complete": "Įvykdyta"
+  },
+  "onslaught-tiers": {
+    "legend": "Legenda",
+    "champion": "Čempionas",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Sunkusis",
+    "mediumTank": "Vidutiniokai",
+    "lightTank": "Lengvas",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Šturmas",
+    "break": "Prasiveržimas",
+    "support": "Pagalbininkas",
+    "universal": "Universalas",
+    "sniper": "Snaiperis",
+    "wheeled": "Ratinis"
+  },
+  "mastery-badges": {
+    "class3": "3 klasė",
+    "class2": "2 klasė",
+    "class1": "1 klasė",
+    "ace": "Auksinis tankistas"
+  },
+  "clan-modes": {
+    "random": "Atsitiktinės kovos",
+    "stronghold": "Tvirtovė",
+    "skirmish": "Išpuolis",
+    "clan-wars": "Klano karai"
+  },
+  "features": {
+    "stronghold": "Tvirtovė",
+    "skirmish": "Išpuolis",
+    "marks-of-excellence": "Meistriškumo žymos",
+    "marks-of-mastery": "Meistriškumo ženklai",
+    "personal-rating": "Asmeninis reitingas",
+    "world-of-tanks-rating": "World of Tanks reitingas",
+    "common-test": "Bendras testas",
+    "tournaments": "Turnyrai"
+  },
+  "marks": {
+    "1": "1 Markas",
+    "2": "2 Markai",
+    "3": "3 Markai",
+    "name": "Meistriškumo žymos"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "all": "全部",
+  "camouflage-map": "{camouflage}地图",
+  "modes": "{count, plural, other {# 模式}}",
+  "no-maps-match-your-filters": "没有地图符合你的筛选条件。",
+  "search": "在{count}张地图中搜索",
+  "search-label": "搜 索 地图",
+  "special-map": "特殊勋章 地图"
+}

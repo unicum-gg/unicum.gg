@@ -1,0 +1,8 @@
+{
+  "previous": "Предыдущая страница",
+  "next": "Следующая страница",
+  "rows-per-page": "Строк на странице",
+  "all": "Все",
+  "range": "{first}–{last} из {total}",
+  "page": "Страница {page} / {total}"
+}

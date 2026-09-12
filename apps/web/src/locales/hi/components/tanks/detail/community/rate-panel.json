@@ -1,0 +1,13 @@
+{
+  "battles-overall": "कुल {battles} युद्ध",
+  "checking-your-record-on-this": "इस टैंक पर आपका रिकॉर्ड जाँचा जा रहा है...",
+  "fetching-your-garage": "हम आपका गैराज ला रहे हैं",
+  "have-you-played": "क्या आपने {tank} खेला है?",
+  "more-to-go": "{count} युद्ध और बाकी",
+  "more-to-go-one": "{count} युद्ध और बाकी",
+  "sign-in-to-rate-it": "रेट करने के लिए साइन इन करें",
+  "sign-in-with-your-wargaming-account-to-rate-": "इसे रेट करने के लिए अपने Wargaming खाते से साइन इन करें। हम इसी टैंक पर आपका रिकॉर्ड पढ़ते हैं, जिससे यह पेज उन लोगों का सर्वेक्षण बनने से बचता है जिन्होंने इसे कभी चलाया ही नहीं।",
+  "signed-in-on": "{region} पर साइन इन किया गया",
+  "too-few-battles": "आपने {tank} में {played} युद्ध खेले हैं। वोट गिने जाने से पहले हम {required} माँगते हैं, ताकि यह औसत वास्तव में इसे खेलने वाले लोगों का औसत रहे।",
+  "you-have-not-played": "आपने {tank} नहीं खेला है"
+}

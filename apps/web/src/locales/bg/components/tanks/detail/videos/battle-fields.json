@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Как завърши",
+  "loading-maps": "Зареждане на карти…",
+  "map": "Карта",
+  "mode": "Режим",
+  "pick-a-map": "Избери карта",
+  "pick-a-mode": "Избери режим",
+  "result": "Резултат",
+  "spawn": "Раждане",
+  "team": "Отбор {team}",
+  "team-spawn": "Отбор {team} · {direction}",
+  "which-side-you-started": "От коя страна започна"
+}

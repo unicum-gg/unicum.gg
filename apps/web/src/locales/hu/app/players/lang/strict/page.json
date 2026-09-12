@@ -1,0 +1,6 @@
+{
+  "title": "Kizárólag {language} nyelvű World of Tanks játékosok ({region})",
+  "description": "{name} játékosranglista {region} régióbeli játékosok számára, akiknek a klántörténete alapján kizárólag {language} nyelv használata feltételezhető, WNX alapján rangsorolva.",
+  "og-title": "Kizárólag {language} nyelvű játékosok",
+  "og-subtitle": "{region} ranglista"
+}

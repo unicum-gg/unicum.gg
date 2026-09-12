@@ -1,0 +1,14 @@
+{
+  "close": "Sulje",
+  "combined-damage": "Yhteensä vahinkoa aiheutettu",
+  "damage-dealt-plus-assisted-as": "Aiheutettu vahinko plus avustettu vahinko, koska taistelun jälkeinen näyttö laskee ne yhteen.",
+  "format": "Muoto",
+  "no-reason-recorded": "Syytä ei ole tallennettu, joten tästä kannattaa kysyä Discordissa ennen uudelleenlähetystä.",
+  "players-per-team": "Pelaajia per tiimi",
+  "save": "Tallenna",
+  "saved-it-is-in-the": "Tallennettu. Se on moderointijonossa ja näkyy sivustolla, kun moderaattori on tarkistanut sen.",
+  "saving": "Tallennetaan…",
+  "tier": "Taso",
+  "turned-down": "Hylätty",
+  "what-was-played": "Mikä oli pelattu"
+}

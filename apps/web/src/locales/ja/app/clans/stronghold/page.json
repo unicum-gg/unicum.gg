@@ -1,0 +1,4 @@
+{
+  "title": "{tier}クラン上位（{region}地域）",
+  "description": "{region}地域の{tier}クランランキング。SR（小競り合いレーティング）、ELO、戦闘数、勝率の順に表示します。最低{battles}戦。"
+}

@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Moyenne sur {rated} des {size} joueurs",
+  "average-over-recent": "Moyenne sur les {rated} des {size} joueurs ayant joué au cours des 30 derniers jours",
+  "avg-winrate": "Moy. taux de victoire",
+  "finished": "Terminé",
+  "record": "Dossier",
+  "won": "Gagné"
+}

@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks 在线玩家（{region}）",
+  "description": "当前每个 World of Tanks {region}服务器上有多少玩家，以及过去 24 小时、一周和一年的玩家数量、历史最高记录和每周最繁忙时段。",
+  "og-title": "服务器人数",
+  "og-subtitle": "{region}在线玩家"
+}

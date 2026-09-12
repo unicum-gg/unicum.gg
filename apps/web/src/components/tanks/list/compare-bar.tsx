@@ -1,11 +1,12 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/link";
 import { ScalesIcon, XIcon } from "@phosphor-icons/react";
 import type { Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 import type { TankSelection } from "@/hooks/use-compare-selection";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * What you picked, and the way out of the list.
@@ -24,6 +25,7 @@ export function TankCompareBar({
   /** Display name per selected slug, for the chips. */
   names: Map<string, string>;
 }) {
+  const { t } = useTranslation("components/tanks/list/compare-bar");
   if (selection.slugs.length === 0) return null;
   const ready = selection.slugs.length >= 2;
 
@@ -39,7 +41,7 @@ export function TankCompareBar({
             <button
               type="button"
               onClick={() => selection.toggle(slug)}
-              aria-label={`Remove ${names.get(slug) ?? slug}`}
+              aria-label={t("remove", { name: names.get(slug) ?? slug })}
               className="inline-flex size-4 cursor-pointer items-center justify-center rounded-full text-fd-muted-foreground hover:bg-fd-border/50 hover:text-fd-foreground"
             >
               <XIcon className="size-2.5" weight="bold" />
@@ -51,7 +53,7 @@ export function TankCompareBar({
           onClick={selection.clear}
           className="cursor-pointer px-1 text-xs text-fd-muted-foreground hover:text-fd-foreground hover:underline"
         >
-          Clear
+          {t("clear")}
         </button>
         {ready ? (
           <Link
@@ -59,7 +61,7 @@ export function TankCompareBar({
             className="inline-flex items-center gap-1.5 rounded-full bg-brand px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-brand/90"
           >
             <ScalesIcon className="size-3.5" weight="bold" />
-            Compare {selection.slugs.length}
+            {t("compare", { count: selection.slugs.length })}
           </Link>
         ) : (
           <span
@@ -68,7 +70,7 @@ export function TankCompareBar({
             )}
           >
             <ScalesIcon className="size-3.5" weight="bold" />
-            Pick one more
+            {t("pick-more")}
           </span>
         )}
       </div>

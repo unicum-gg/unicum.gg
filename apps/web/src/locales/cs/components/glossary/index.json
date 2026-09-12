@@ -1,0 +1,22 @@
+{
+  "search": "Hledat v pojmech ({count})",
+  "search-label": "Hledat v části Slovník",
+  "all": "Všechna",
+  "jump": "Přejít na písmeno",
+  "empty": "Žádný pojem neodpovídá dotazu „{query}“.",
+  "categories": {
+    "vehicles": "Vozidla",
+    "gunnery": "Opalování",
+    "armor": "Pancíř",
+    "mobility": "Pohyblivost",
+    "vision": "Vidění",
+    "crew": "Posádka",
+    "progression": "Postup",
+    "economy": "Ekonomika",
+    "ratings": "Hodnocení",
+    "statistics": "Statistiky",
+    "modes": "Herní módy",
+    "tactics": "Taktika",
+    "slang": "Slang"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "live": "Na żywo",
+  "the-vehicle-as-it-is": "Pojazd w postaci, w jakiej obecnie występuje w grze.",
+  "common-test": "Test ogólny",
+  "common-test-2": "Test ogólny {testVersion}",
+  "the-vehicle-as-the-test": "Pojazd w postaci, w jakiej występuje w wersji testowej. Ta wersja nie została jeszcze wydana: Wargaming może przed wydaniem aktualizacji zmienić lub wycofać dowolny jej element."
+}

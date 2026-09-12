@@ -1,0 +1,7 @@
+{
+  "label": "Klassement periode",
+  "periods": {
+    "overall": "Totaal",
+    "30d": "Afgelopen 30 dagen"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Conta bloqueada",
+  "body": "Há uma conta de {nickname} na região {region}, mas a Wargaming bloqueou-a, pelo que as respetivas estatísticas não estão disponíveis.",
+  "back-to-home": "Voltar para a página inicial"
+}

@@ -1,0 +1,11 @@
+{
+  "closes": "Fechar {when}",
+  "map-pool": "Conjunto de Mapas",
+  "place": "Classificação",
+  "prize": "Prêmio",
+  "prizes": "Prêmios",
+  "qualified": "Qualificados ({count})",
+  "register": "Registrar",
+  "tournaments": "Torneios",
+  "winner": "{count, plural, one {Vencedor} other {Vencedores}}"
+}

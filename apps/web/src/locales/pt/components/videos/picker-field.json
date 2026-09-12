@@ -1,0 +1,14 @@
+{
+  "clan": "Clã",
+  "clear-the-field": "Limpar o {label}",
+  "credited-on-the-clan-s": "Creditado na página do próprio clã.",
+  "none": "Nenhum",
+  "optional": "(opcional)",
+  "pick-the-vehicle": "Escolher o veículo",
+  "search-for-a-clan": "Procurar um clã",
+  "search-for-a-vehicle": "Procurar um veículo",
+  "search-tank": "Pesquisar tanque...",
+  "tank": "Tanque",
+  "tank-hint-optional": "A tática pertence ao seu mapa, então só tem valor nomeá-la quando o vídeo também for sobre o veículo.",
+  "tank-hint-required": "Uma batalha aleatória é localizada pelo veículo em que foi jogada."
+}

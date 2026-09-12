@@ -1,0 +1,8 @@
+{
+  "last-days": "Posljednjih {chartDays} dana",
+  "n-players": "{count, plural, one {# igrač} few {# igrača} other {# igrača}}",
+  "rolling-average-combined-damage-to": "Klizni prosjek kombinovane štete potreban za nadmašivanje 65 / 85 / 95% igrača.",
+  "single-battle-xp-to-beat": "XP iz jedne bitke potreban za nadmašivanje 50 / 80 / 95 / 99% igrača.",
+  "tank-marks-of-excellence": "Oznake izvrsnosti tenka {tank}",
+  "tank-marks-of-mastery": "Oznake majstorstva tenka {tank}"
+}

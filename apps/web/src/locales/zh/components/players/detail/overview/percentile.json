@@ -1,0 +1,7 @@
+{
+  "win-rate": "胜率",
+  "versus": "{metric} 对比 {region}",
+  "top": "顶级 {percent}%",
+  "ahead-of": "领先{percent}%",
+  "against": "在已追踪的{region}地区账号中，与至少进行过{battles}战斗场次的{players}玩家对抗。"
+}

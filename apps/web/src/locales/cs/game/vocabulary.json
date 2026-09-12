@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Náhodná",
+    "battle_royale": "Ocelový lovec",
+    "frontline": "Frontová linie",
+    "onslaught": "Nápor",
+    "onslaught_night": "{onslaught} Noc",
+    "grand_battle": "Velká bitva",
+    "clan_wars": "Klanoé války",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Poslední vzdor",
+    "arcade": "Arkáda",
+    "story_mode": "Příběhový režim",
+    "training": "Výcvik"
+  },
+  "player-modes": {
+    "overall": "Náhodné bitvy",
+    "skirmish": "Šarvátka",
+    "advances": "Ofenzívy",
+    "grand": "Velké bitvy",
+    "ranked": "Hodnocené bitvy",
+    "cw-x": "Klanové války X",
+    "cw-viii": "Klanové války VIII",
+    "cw-vi": "Klanové války VI",
+    "steel-hunter": "Ocelový lovec",
+    "onslaught": "Nápor"
+  },
+  "stronghold-tiers": {
+    "advances": "Ofenzívy",
+    "t10": "Šarvátka T10",
+    "t8": "Šarvátka T8",
+    "t6": "Šarvátka T6"
+  },
+  "stronghold-periods": {
+    "24h": "Posledních 24 hodin",
+    "7d": "Posledních 7 dní",
+    "30d": "Posledních 30 dní",
+    "overall": "Celkově"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Bitev",
+    "winrate": "Míra výher"
+  },
+  "clan-boards": {
+    "advances": "Ofenzívy",
+    "t10": "Šarvátka X",
+    "t8": "Šarvátka VIII",
+    "t6": "Šarvátka VI"
+  },
+  "map-modes": {
+    "standard": "Standardní",
+    "encounter": "Střetnutí",
+    "assault": "Útočný",
+    "attack-defense": "Útok/Obrana"
+  },
+  "map-camouflage": {
+    "summer": "Letní",
+    "winter": "Zimní",
+    "desert": "Pouštní"
+  },
+  "map-poi": {
+    "1": "Dělostřelecké velitelství",
+    "2": "Komunikační centrum",
+    "3": "Pozorovací stanoviště"
+  },
+  "tournament-modes": {
+    "ctf": "Standardní",
+    "domination": "Střetnutí",
+    "assault2": "Útok/Obrana",
+    "comp7": "Nápor"
+  },
+  "battle-formats": {
+    "random": "Náhodná",
+    "clan_wars": "Klanoé války",
+    "advances": "Ofenzívy",
+    "skirmish": "Šarvátka",
+    "maneuvers": "Manévry",
+    "onslaught": "Nápor",
+    "tournament": "Turnaj"
+  },
+  "battle-results": {
+    "victory": "Vítězství",
+    "defeat": "Porážka",
+    "draw": "Remíza"
+  },
+  "spawn-directions": {
+    "north": "Sever",
+    "south": "Jih",
+    "east": "Východ",
+    "west": "Západ"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Nadcházející",
+    "registration_started": "Registrace otevřena",
+    "registration_finished": "Registrace uzavřena",
+    "running": "Probíhá",
+    "finished": "Dokončeno",
+    "complete": "Dokončena"
+  },
+  "onslaught-tiers": {
+    "legend": "Legenda",
+    "champion": "Šampion",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Těžké",
+    "mediumTank": "Standardní panel",
+    "lightTank": "Lehký",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Útočný",
+    "break": "Průlomový",
+    "support": "Podpůrný",
+    "universal": "Všestranný",
+    "sniper": "Odstřelovací",
+    "wheeled": "Kolový"
+  },
+  "mastery-badges": {
+    "class3": "3. Třída",
+    "class2": "2. Třída",
+    "class1": "1. Třída",
+    "ace": "Esence Tankista"
+  },
+  "clan-modes": {
+    "random": "Náhodné bitvy",
+    "stronghold": "Pevnost",
+    "skirmish": "Šarvátka",
+    "clan-wars": "Klanoé války"
+  },
+  "features": {
+    "stronghold": "Pevnost",
+    "skirmish": "Šarvátka",
+    "marks-of-excellence": "Vítězné znaky",
+    "marks-of-mastery": "Záplaty mistrovství",
+    "personal-rating": "Osobní hodnocení",
+    "world-of-tanks-rating": "Hodnocení World of Tanks",
+    "common-test": "Společný test",
+    "tournaments": "Turnaje"
+  },
+  "marks": {
+    "1": "1 Záplata",
+    "2": "2 Záplaty",
+    "3": "3 Záplaty",
+    "name": "Vítězné znaky"
+  }
+}

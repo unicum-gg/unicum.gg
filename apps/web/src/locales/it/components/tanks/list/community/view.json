@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Ogni carro è valutato su cinque da chi lo gioca. Un voto viene conteggiato solo se proviene da un account che ha effettivamente portato il veicolo in battaglia, ed è questo che distingue la valutazione da un sondaggio aperto a chiunque passi di lì.",
+  "no-tank-has-been-rated": "Nessun carro è stato ancora valutato. I primi voti si possono esprimere nelle pagine dei carri, nella sezione Comunità.",
+  "think": "pensi",
+  "title": "Cosa {think} i giocatori",
+  "votes-across-vehicles": "{totalVotes} voti su {ratedTanks} veicoli."
+}

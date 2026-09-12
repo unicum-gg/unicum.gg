@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank} World of Tanks 数据（{region}），{tier}级{nation}",
+    "description": "{tank}（{region}）World of Tanks 规格：这辆{tier}级{nation}坦克的装甲、火力、机动性、模块、乘员和战地改装。"
+  },
+  "performances": {
+    "title": "{tank}表现（{region}），服务器数据和最佳玩家",
+    "description": "{tank}（{region}）World of Tanks 表现：服务器平均胜率、伤害和协助伤害，这辆{tier}级{nation}坦克的最佳玩家，以及 WN8 和 WNX 预期值。"
+  },
+  "marks": {
+    "title": "{tank}的精通徽章和战绩徽章（{region}）",
+    "description": "{tank}（{region}）World of Tanks 精通徽章和战绩徽章要求，以及这辆{tier}级{nation}坦克的历史记录。"
+  },
+  "history": {
+    "title": "{tank}变更历史（{region}），增强和削弱",
+    "description": "World of Tanks 各次更新对{tank}的所有特性变更：默认逐版本发布给这辆{tier}级{nation}坦克的火力、机动性、生存能力和隐蔽性增强与削弱。"
+  },
+  "videos": {
+    "title": "{tank}游戏视频（{region}）",
+    "description": "观看{tank}的实战表现：社区推荐的这辆{tier}级{nation}坦克战斗视频，每个视频从实际进行该战斗的时刻开始，并显示发生战斗的地图和结果。"
+  },
+  "community": {
+    "title": "{tank}玩家评价和社区评分（{region}）",
+    "description": "玩家如何看待{tank}：社区五分制评分，按投票者的游戏水平分类，并与这辆{tier}级{nation}坦克的实际表现对照，还包括拥有该坦克战斗场次的账号所写的评价。"
+  }
+}

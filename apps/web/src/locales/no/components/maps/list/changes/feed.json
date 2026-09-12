@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# kart} other {# kart}}",
+  "no-map-changes-have-been": "Ingen kartendringer er registrert ennå. Når Wargaming bygger om kart, vises det her hva hver oppdatering endret.",
+  "update": "Oppdatér {version}"
+}

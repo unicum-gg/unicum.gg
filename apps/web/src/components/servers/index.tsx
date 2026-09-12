@@ -1,3 +1,5 @@
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import {
   type PlayerDistribution,
   type ServerComparison,
@@ -53,7 +55,8 @@ function emptyStats(region: Region): ServerStats {
   };
 }
 
-export async function ServersView({ region }: { region: Region }) {
+export async function ServersView({ region, locale }: { region: Region; locale: string }) {
+  const { t } = await getTranslation("components/servers/index", locale);
   const [stats, comparison, distribution, tierWinrate] = await Promise.all([
     buildSafe(
       () => unicum.region(region).server.stats(DEFAULT_RANGE),
@@ -91,14 +94,19 @@ export async function ServersView({ region }: { region: Region }) {
             {REGION_EMOJI[region]} {label}
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            World of Tanks{" "}
-            <span className="text-brand">{label} server population</span>
+            <Interpolate
+              template={t("title")}
+              values={{
+                population: (
+                  <span className="text-brand">
+                    {t("server-population", { label })}
+                  </span>
+                ),
+              }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            How many players are on each {label} server right now, how that
-            number moves through the day and the week, and how the region
-            compares with the others.
-          </p>
+            {t("how-many-players-are-on", { label })}</p>
           <div className="mt-8">
             <ServersLiveHeader
               region={region}
@@ -129,12 +137,12 @@ export async function ServersView({ region }: { region: Region }) {
 
           <Panel>
             <PanelHeader>
-              <PanelTitle>Where {label} battles are fought</PanelTitle>
+              <PanelTitle>{t("where-battles-are-fought", { label })}</PanelTitle>
             </PanelHeader>
             {/* Like the distribution panel: the sections carry their own
                 padding so their dividing rules reach the panel's borders. */}
             <PanelContent className="p-0">
-              <BattleShares
+              <BattleShares locale={locale}
                 byTier={distribution.byTier}
                 byType={distribution.byType}
               />
@@ -156,26 +164,16 @@ export async function ServersView({ region }: { region: Region }) {
       <Panel>
         <PanelContent className="text-sm text-fd-muted-foreground">
           <p>
-            Wargaming publishes each server&apos;s population as an instant and
-            keeps no history of it, so every figure past the current minute is
-            one we recorded ourselves, every{" "}
-            {/* Kept in prose rather than a constant: the sentence is about what
-                the reader is looking at, not about the sampler's configuration. */}
-            five minutes.{" "}
+            {/* The interval is in the sentence rather than a constant: it is
+                about what the reader is looking at, not about the sampler's
+                configuration. */}
+            {t("we-record-it")}{" "}
             {stats.since
-              ? `The series starts on ${formatMoment(stats.since)}, when the recording started, and nothing before it can be recovered.`
-              : "Recording has just started, so the charts fill in from here."}
+              ? t("series-starts", { at: formatMoment(stats.since, "UTC", locale) })
+              : t("recording-just-started")}
           </p>
           <p className="mt-2">
-            Wargaming names a region&apos;s first clusters and leaves the rest
-            as bare identifiers, so 203 is shown as EU3, continuing the
-            region&apos;s own numbering. The identifier is what we record and
-            what each name reveals on hover, and it is what the label follows:
-            numbering the clusters by how busy they are would move a name from
-            one server to another whenever two of them traded places. A server
-            missing from a sample was not reported at all, which is not the same
-            as empty.
-          </p>
+            {t("wargaming-names-a-region-s")}</p>
         </PanelContent>
       </Panel>
     </div>

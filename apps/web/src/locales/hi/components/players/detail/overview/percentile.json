@@ -1,0 +1,7 @@
+{
+  "win-rate": "जीत दर",
+  "versus": "{metric} बनाम {region}",
+  "top": "शीर्ष {percent}%",
+  "ahead-of": "{percent}% से आगे",
+  "against": "कम से कम {battles} युद्ध वाले ट्रैक किए गए {region} खातों में {players} के विरुद्ध।"
+}

@@ -1,0 +1,9 @@
+{
+  "all": "Sve",
+  "camouflage-map": "{camouflage} мапа",
+  "modes": "{count, plural, one {# режим} few {# режими} other {# режими}}",
+  "no-maps-match-your-filters": "Ниједна мапа не одговара твојим филтерима.",
+  "search": "Претражи међу {count} мапа",
+  "search-label": "Pretraži mape",
+  "special-map": "Specijalna mapa"
+}

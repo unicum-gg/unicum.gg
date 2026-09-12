@@ -1,0 +1,11 @@
+{
+  "already-running": "ya está en funcionamiento",
+  "in-window": "en ventana",
+  "n-online": "/ {count} en línea",
+  "no-reserves-selected": "No hay reservas seleccionadas.",
+  "no-stock-ready": "no hay Stock Listo",
+  "not-available": "no disponible",
+  "threshold": "umbral ({online}/{min})",
+  "would-activate": "activaría",
+  "would-not-fire": "Ahora mismo, no se activaría."
+}

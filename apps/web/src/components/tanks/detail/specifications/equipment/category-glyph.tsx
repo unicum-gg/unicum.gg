@@ -1,6 +1,10 @@
+"use client";
+
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { CATEGORY, categoryIcon } from "./category";
+import { useTranslation } from "@/hooks/use-translation";
+import { tankParamName } from "@/components/game-name";
 
 /** The category as the game's own specialization glyph (wot.assets), recoloured
  * to the category tint (or an override, e.g. white on a coloured chip) via a CSS
@@ -17,6 +21,7 @@ export function CategoryGlyph({
   color?: string;
   withTooltip?: boolean;
 }) {
+  const { t: tParams } = useTranslation("game/tank-params");
   const c = CATEGORY[category];
   if (!c) return null;
   // The game PNG frames a small glyph in a wide margin plus a soft glow. Masking
@@ -38,7 +43,7 @@ export function CategoryGlyph({
   return (
     <Tooltip>
       <TooltipTrigger asChild>{glyph}</TooltipTrigger>
-      <TooltipContent>{c.label}</TooltipContent>
+      <TooltipContent>{tankParamName(c.label, c.label, tParams)}</TooltipContent>
     </Tooltip>
   );
 }

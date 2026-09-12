@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Labākie <accent>spēlētāji</accent>",
+    "language": "Labākie <accent>{language}</accent> spēlētāji"
+  },
+  "intro": {
+    "all": "{region} līderu saraksts, sakārtots pēc visu laiku {metric}, ņemot vērā vismaz 20 000 kauju.",
+    "language": "{region} spēlētāji, kuru noteiktā klanu vēstures valodu kopa ietver {language}, sakārtoti pēc {metric}, ņemot vērā vismaz 10 000 kauju.",
+    "strict": "{region} spēlētāji, kuru noteiktā klanu vēstures valoda ir tikai {language}, sakārtoti pēc {metric}, ņemot vērā vismaz 10 000 kauju."
+  },
+  "board": {
+    "all": "Labākie {count} spēlētāji pēc {metric}",
+    "language": "Labākie {count} {language} spēlētāji pēc {metric}",
+    "strict": "Labākie {count} tikai {language} spēlētāji pēc {metric}"
+  },
+  "modes": {
+    "overall": "Kopējā"
+  },
+  "columns": {
+    "player": "Spēlētājs"
+  },
+  "strict-toggle": "Ierobežots",
+  "any-toggle": "Jebkura",
+  "all-languages": "Visas valodas",
+  "battles": "Kaujas",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

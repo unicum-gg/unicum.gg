@@ -1,0 +1,8 @@
+{
+  "previous": "Vorige pagina",
+  "next": "Volgende pagina",
+  "rows-per-page": "Rijen per pagina",
+  "all": "Allen",
+  "range": "{first}–{last} van {total}",
+  "page": "Pagina {page} / {total}"
+}

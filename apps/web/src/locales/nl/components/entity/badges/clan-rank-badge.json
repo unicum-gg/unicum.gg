@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rang {rank} in klassement {board}",
+  "board": {
+    "advances": "Beoordeling voor Bolwerk-offensieven",
+    "skirmish-t10": "Beoordeling voor Schermutseling op niveau X",
+    "skirmish-t6": "Beoordeling voor Schermutseling op niveau VI",
+    "skirmish-t8": "Beoordeling voor Schermutseling op niveau VIII"
+  }
+}

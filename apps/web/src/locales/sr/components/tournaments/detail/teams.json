@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Prosek за {rated} од {size} igrači",
+  "average-over-recent": "Prosek за {rated} од {size} igrači који су играли током последњих 30 dana",
+  "metric-over-last-30-days": "{metric} током последњих 30 dana",
+  "n-confirmed": "{count} потврђено",
+  "no-team-matches-the-current": "Ниједан тим не одговара тренутним филтерима.",
+  "no-teams-recorded-yet-registrations": "Још нема забележених тимова. Регистрације се појављују овде када овај турнир буде у потпуности прочитан, што се дешава неколико минута након отварања.",
+  "none-played-in-30-days": "Нико из овог састава није играо током последњих 30 dana",
+  "players": "Igrači",
+  "qualified": "Kvalifikovani",
+  "reward": "Nagrada",
+  "team": "Tim",
+  "teams": "Timovi ({length})",
+  "wr": "WR"
+}

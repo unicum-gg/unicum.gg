@@ -1,0 +1,12 @@
+{
+  "added": "Lisätty",
+  "before-update": "Ennen päivitystä {version}",
+  "common-test": "Yhteinen testi",
+  "every-update-that-changed-this": "Jokainen tätä karttaa muuttanut päivitys, uusin ensin, luettuna suoraan peli-asiakasohjelmasta.",
+  "in-the-game": "Pelissä",
+  "n-changes": "{count, plural, one {# muutos} other {# muutokset}}",
+  "not-released-wargaming-can-still": "Ei julkaistu. Wargaming voi vielä muuttaa tai poistaa mitä tahansa tästä ennen päivityksen toimitusta.",
+  "removed": "Poistettu",
+  "title": "Muutokset {map}-karttaan",
+  "update": "Päivitä {version}"
+}

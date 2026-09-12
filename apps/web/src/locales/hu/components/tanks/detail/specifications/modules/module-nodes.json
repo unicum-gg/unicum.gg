@@ -1,0 +1,17 @@
+{
+  "aim-time": "Célozási idő",
+  "ammo": "Lőszer",
+  "armor": "Páncélzat",
+  "dispersion": "Szórás",
+  "fire-chance": "Tűz esélye",
+  "gun-arc": "Lőszög",
+  "hit-points": "Életerő",
+  "load-limit": "Teherbírás",
+  "mounted-on": "Felszerelve ezeken: {tanks}",
+  "power": "Teljesítmény",
+  "reload": "Újratöltés",
+  "signal-range": "Jelátviteli távolság",
+  "tier": "Szint {tier}",
+  "traverse": "Forgás",
+  "view-range": "Látótávolság"
+}

@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Régió: {region}. A legalább 51 csatastatisztikával rendelkező tagot számláló legjobb klánok, az átlagos {metric} alapján rangsorolva.",
+    "month": "Régió: {region}. A legalább 51 csatastatisztikával rendelkező tagot számláló legjobb klánok, az elmúlt 30 napban elért {metric} alapján rangsorolva, legalább 15 aktív taggal."
+  },
+  "updated": "Frissítve {when}.",
+  "empty": "Ehhez a régióhoz még nem állnak rendelkezésre klánadatok.",
+  "rank": "#",
+  "clan": "Klán",
+  "average": "Átl. {metric}"
+}

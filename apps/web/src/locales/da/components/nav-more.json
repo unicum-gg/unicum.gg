@@ -1,0 +1,37 @@
+{
+  "label": "Mere",
+  "items": {
+    "tournaments": {
+      "label": "Turneringer",
+      "description": "Turneringstræer, deltagerlister og resultater, region for region"
+    },
+    "servers": {
+      "label": "Servere",
+      "description": "Spillere online, nu og over tid"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Spiller-, klan- og kampvognsstatistik som slash-kommandoer"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Forbind Claude, ChatGPT eller en MCP-klient"
+    },
+    "api": {
+      "label": "API",
+      "description": "Gratis offentlig REST API, ingen nøgle kræves"
+    },
+    "badges": {
+      "label": "Mærker",
+      "description": "Alle mærker, en spiller eller klan kan optjene, og hvordan"
+    },
+    "glossary": {
+      "label": "Ordbog",
+      "description": "Alle World of Tanks-begreber forklaret"
+    },
+    "support": {
+      "label": "Støt os",
+      "description": "Hold {name} gratis, åben og reklamefri"
+    }
+  }
+}

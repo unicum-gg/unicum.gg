@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Löschen: {label}",
+  "credited-on-the-clan-s": "Auf der eigenen Clan-Seite genannt.",
+  "none": "Keine",
+  "optional": "(optional)",
+  "pick-the-vehicle": "Fahrzeug Auswählen",
+  "search-for-a-clan": "Clan suchen",
+  "search-for-a-vehicle": "Fahrzeug suchen",
+  "search-tank": "Panzer suchen...",
+  "tank": "Panzer",
+  "tank-hint-optional": "Eine Taktik gehört zu ihrer Karte, daher lohnt sich dieser Name nur, wenn es in dem Video auch um das Fahrzeug geht.",
+  "tank-hint-required": "Ein Zufallsgefecht wird anhand des Fahrzeugs, in dem es Gespielt wurde, angesehen."
+}

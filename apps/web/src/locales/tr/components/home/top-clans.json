@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "50’den fazla savaş oynayan üyeye sahip en iyi {region} klanları gösteriliyor, ortalama {metric} değerine göre sıralanıyor.",
+    "month": "En iyi {region} klanları gösteriliyor, son 30 gündeki {metric} değerine göre sıralanıyor (en az 15 aktif)."
+  },
+  "updated": "Güncelleme: {when}.",
+  "empty": "Bu bölge için henüz klan verisi mevcut değil.",
+  "rank": "#",
+  "clan": "Klan",
+  "average": "Ort. {metric}"
+}

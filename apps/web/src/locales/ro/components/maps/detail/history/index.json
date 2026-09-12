@@ -1,0 +1,12 @@
+{
+  "added": "Adăugat",
+  "before-update": "Înainte de actualizarea {version}",
+  "common-test": "Test Comun",
+  "every-update-that-changed-this": "Fiecare actualizare care a schimbat această hartă, de la cea mai nouă la cea mai veche, citită direct din clientul jocului.",
+  "in-the-game": "În joc",
+  "n-changes": "{count, plural, one {# schimbare} few {# schimbări} other {# de schimbări}}",
+  "not-released-wargaming-can-still": "Nerelansat. Wargaming poate încă modifica sau elimina oricare dintre acestea înainte ca actualizarea să fie lansată.",
+  "removed": "Eliminat",
+  "title": "Schimbări pentru {map}",
+  "update": "Actualizează {version}"
+}

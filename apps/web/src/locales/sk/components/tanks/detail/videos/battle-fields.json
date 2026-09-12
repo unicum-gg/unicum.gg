@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Ako sa bitka skončila",
+  "loading-maps": "Načítavajú sa mapy…",
+  "map": "Mapa",
+  "mode": "Mód",
+  "pick-a-map": "Vybrať mapu",
+  "pick-a-mode": "Vyberte režim",
+  "result": "Výsledok",
+  "spawn": "Spawn",
+  "team": "Tím {team}",
+  "team-spawn": "Tím {team} · {direction}",
+  "which-side-you-started": "Na ktorej strane ste začali"
+}

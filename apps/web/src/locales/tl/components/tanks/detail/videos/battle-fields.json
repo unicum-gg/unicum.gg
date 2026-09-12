@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Paano nagtapos",
+  "loading-maps": "Nilo-load ang mga mapa…",
+  "map": "Mapa",
+  "mode": "Mode",
+  "pick-a-map": "Pumili ng mapa",
+  "pick-a-mode": "Pumili ng mode",
+  "result": "Resulta",
+  "spawn": "Spawn",
+  "team": "Koponan {team}",
+  "team-spawn": "Koponan {team} · {direction}",
+  "which-side-you-started": "Saang panig ka nagsimula"
+}

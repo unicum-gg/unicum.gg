@@ -1,0 +1,21 @@
+{
+  "title": "Marques et maîtrise de {nickname}",
+  "excellence": {
+    "title": "Marques d’excellence",
+    "description": "Véhicules classés selon les marques sur leur canon. Une marque repose sur une moyenne durable : le jeu la calcule sur une fenêtre glissante de batailles récentes, en la comparant aux performances de la région avec ce véhicule.",
+    "partial": "Marques relevées pour {known} véhicules sur {garage}. Les données manquantes seront complétées à mesure que le compte sera actualisé.",
+    "note": "{marked} véhicules sur {garage} portent une marque.",
+    "note-share": "{marked} véhicules sur {garage} arborent une marque d’excellence ({percent} % du garage)."
+  },
+  "mastery": {
+    "title": "Marques de maîtrise",
+    "description": "Véhicules classés selon leur meilleur insigne. Un insigne récompense une bataille et non une moyenne : le jeu l’attribue selon l’expérience gagnée lors d’une seule bataille, comparée aux scores de la région avec ce véhicule.",
+    "note": "{aces} véhicules sur {garage} arborent l’insigne As du char.",
+    "note-share": "{aces} véhicules sur {garage} arborent l’insigne As du char ({percent} % du garage)."
+  },
+  "reach": {
+    "heading": "Jouer au-dessus du lot",
+    "description": "Véhicules dont les dégâts combinés dépassent déjà le seuil d’une marque qu’ils n’arborent pas encore. Le badge affiche ces dégâts combinés et prend la couleur de la marque dont le seuil est franchi."
+  },
+  "none": "Aucun"
+}

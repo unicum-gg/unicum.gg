@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1-е место",
+    "2": "2-е место",
+    "3": "3-е место"
+  },
+  "streamer": "Стример · смотреть {name} на Twitch",
+  "tournament": {
+    "one": "Победивший состав турнира {title}",
+    "many": "В {count} победивших составах, лучший результат: {title}",
+    "featured": "{text} · избранное событие",
+    "unnamed": "турнир Общий"
+  },
+  "tournament-wins": "{count, plural, one {# победа в турнире} few {# победы в турнире} many {# побед в турнире} other {# победы в турнире}}",
+  "watch-on-twitch": "Смотреть {name} на Twitch",
+  "watch-on-twitch-viewers": "Смотреть {name} на Twitch · зрителей: {viewers}"
+}

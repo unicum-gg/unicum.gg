@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Thay đổi mọi thông tin không đúng, bao gồm cả xe tăng. Việc lưu sẽ đưa video trở lại hàng chờ kiểm duyệt, vì vậy video đang hiển thị sẽ bị gỡ xuống cho đến khi được phê duyệt lại.",
+  "correct-a-suggestion": "Sửa một đề xuất",
+  "could-not-load-that-suggestion": "Không thể tải đề xuất đó. Hãy thử lại sau giây lát.",
+  "link-expired": "Liên kết đó đã hết hạn. Nhấn lại Edit trên thẻ trong Discord để lấy liên kết mới.",
+  "loading": "Đang tải…",
+  "log-in": "Đăng nhập",
+  "log-in-with-the-account": "Đăng nhập bằng tài khoản đã đề xuất video này để sửa video.",
+  "no-suggestion-with-that-id": "Không có đề xuất nào với id đó.",
+  "not-yours-to-correct": "Bạn không thể sửa đề xuất này vì đề xuất không thuộc về bạn."
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Fragment } from "react";
 import {
@@ -13,6 +15,7 @@ import { TankTopPlayers } from "@/components/tanks/detail/performances/top-playe
 import { TANK_DETAIL_TABS, TankDetailTab } from "@/components/tanks/detail/tabs";
 import { cn } from "@/lib/utils";
 import { Region, hangarBgUrl } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * Full-fidelity placeholder for the tank detail page, shown while the composite
@@ -107,6 +110,7 @@ function HeroSkeleton({ region }: { region: Region }) {
 /** Inert twin of TankDetailTabs: the three real labels, active one highlighted,
  * so the tab bar looks identical while the content loads. */
 function StaticTabBar({ active }: { active: TankDetailTab }) {
+  const { t: tLabel } = useTranslation("components/tanks/detail/tab-bar");
   return (
     <Panel screenLines={false} className="screen-line-before">
       <PanelHeader className="px-0! py-0!" screenLines={false}>
@@ -121,7 +125,7 @@ function StaticTabBar({ active }: { active: TankDetailTab }) {
                   : "text-fd-muted-foreground",
               )}
             >
-              {t.label}
+              {tLabel(`tabs.${t.id}`)}
             </span>
           ))}
         </nav>

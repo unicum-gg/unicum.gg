@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Visa chatt",
+    "hide": "Dölj chatt",
+    "show-streamers": "Visa streamare"
+  },
+  "heading": "World of Tanks-statistik för spelare, klaner och tankar: {name}",
+  "hide": "Dölj streamare",
+  "player": "Spelare",
+  "stream-language": "Streamspråk · {name}",
+  "stream-language-alt": "Strömmens språk: {name}",
+  "theater": {
+    "enter": "Teaterläget",
+    "exit": "Lämna bioläge"
+  },
+  "title": "Topp spelare som streamar nu ·",
+  "viewer-count": "{count} tittare",
+  "viewers": "Tittare",
+  "watch": "Titta på {nickname} på Twitch"
+}

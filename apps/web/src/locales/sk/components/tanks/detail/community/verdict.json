@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Každý hlas pochádza z účtu, na ktorom boli odohrané bitky s týmto tankom.",
+  "every-vote-played-average": "Každý hlas pochádza z účtu, na ktorom bolo s týmto tankom odohraných v priemere {battles} bitiek.",
+  "fun": "Zábava",
+  "how-good-the-tank-is": "Ako dobrý je tento tank",
+  "how-much-people-enjoy-it": "Ako veľmi tento tank baví hráčov",
+  "if-you-have-played-it": "Ak ste s ním hrali, ste presne tým, na koho táto stránka čaká.",
+  "nobody-has-rated-this-tank": "Tento tank zatiaľ nikto neohodnotil.",
+  "overall": "Celkovo",
+  "votes": "{count} hlasov",
+  "votes-one": "{count} hlas"
+}

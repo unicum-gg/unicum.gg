@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank}: World of Tanks -tilastot ({region}), taso {tier} {nation}",
+    "description": "{tank} ({region}) World of Tanks -ominaisuudet: panssarointi, tulivoima, liikkuvuus, moduulit, miehistö ja kenttämuokkaukset tason {tier} {nation} panssarivaunulle."
+  },
+  "performances": {
+    "title": "{tank}: suorituskyky ({region}), palvelintilastot ja parhaat pelaajat",
+    "description": "{tank} ({region}) World of Tanks -suorituskyky: palvelimen keskimääräinen voittoprosentti, vahinko ja avustettu vahinko, tason {tier} {nation} panssarivaunun parhaat pelaajat sekä WN8:n ja WNX:n odotusarvot."
+  },
+  "marks": {
+    "title": "{tank}: erinomaisuuden ja mestaruuden merkit ({region})",
+    "description": "{tank} ({region}) World of Tanksin erinomaisuuden ja mestaruuden merkkien vaatimukset sekä niiden historia tämän tason {tier} {nation} panssarivaunulla."
+  },
+  "history": {
+    "title": "{tank}: muutosten historia ({region}), vahvistukset ja heikennykset",
+    "description": "Kaikki World of Tanksin päivityksissä tehdyt muutokset {tank}-panssarivaunun ominaisuuksiin: Wargamingin tason {tier} {nation} panssarivaunuun versio versiolta toimittamat tulivoiman, liikkuvuuden, selviytymiskyvyn ja naamioinnin vahvistukset ja heikennykset."
+  },
+  "videos": {
+    "title": "{tank}: pelivideot ({region})",
+    "description": "Katso {tank} toiminnassa: yhteisön ehdottamia taisteluita tason {tier} {nation} panssarivaunulla. Kukin video alkaa pelatusta hetkestä, ja mukana ovat taistelun kartta ja tulos."
+  },
+  "community": {
+    "title": "{tank}: pelaajien arvostelut ja yhteisön arvosana ({region})",
+    "description": "Mitä pelaajat ajattelevat kohteesta {tank}: yhteisön arvosana yhdestä viiteen, jaoteltuna äänestäjien pelitaidon mukaan ja verrattuna siihen, miten tason {tier} {nation} panssarivaunu itse asiassa suoriutuu, sekä kirjalliset arvostelut tileiltä, joilla on sillä käytyjä taisteluita."
+  }
+}

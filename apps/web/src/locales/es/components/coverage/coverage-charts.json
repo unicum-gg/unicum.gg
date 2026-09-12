@@ -1,0 +1,7 @@
+{
+  "count": "Conteo",
+  "cumulative": "Acumulativo",
+  "daily": "Diario",
+  "heading-cumulative": "{title} (acumulado)",
+  "heading-daily": "{title} por día"
+}

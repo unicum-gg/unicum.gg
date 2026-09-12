@@ -1,0 +1,21 @@
+{
+  "stat": "Statistik",
+  "periods": {
+    "total": "I alt",
+    "day": "Sidste 24 timer",
+    "week": "Sidste 7 dage",
+    "month": "Sidste 30 dage"
+  },
+  "sections": {
+    "territory": "Territorium",
+    "t10": "Niveau X",
+    "t8": "Niveau VIII",
+    "t6": "Niveau VI"
+  },
+  "rows": {
+    "provinces": "Provinser",
+    "elo": "ELO",
+    "battles": "Kampe",
+    "winrate": "Vindrate"
+  }
+}

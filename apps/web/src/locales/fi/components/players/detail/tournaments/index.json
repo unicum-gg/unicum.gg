@@ -1,0 +1,8 @@
+{
+  "entered": "Osallistunut",
+  "podiums": "Palkintopallit",
+  "this-account-has-never-entered": "Tämä tili ei ole koskaan osallistunut Wargaming-turnaukseen. Niitä järjestetään päivittäin kullasta kaikilla tasoilla, kaksintaisteluista täysiin klaanimestaruuskilpailuihin asti, ja joukkueessa voi olla vain yksi pelaaja.",
+  "title": "{nickname} turnaukset",
+  "title-count": "Nimimerkin {nickname} turnaukset ({count})",
+  "won": "Voitettu"
+}

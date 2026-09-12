@@ -1,0 +1,7 @@
+{
+  "firing": "Disparando {shell}, {pen} mm. Cambiar el disparo",
+  "no-such-round": "{mark}: este cañón no tiene ninguno, así que establece los ángulos manualmente",
+  "own-round": "{mark}: proyectil propio de este cañón, con todos sus valores",
+  "treat-it-as": "Trátalo como",
+  "treat-it-as-mark": "Tratarlo como {mark}"
+}

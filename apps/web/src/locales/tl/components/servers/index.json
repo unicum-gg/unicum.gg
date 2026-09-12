@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Ilang manlalaro ang nasa bawat {label} server ngayon, paano nagbabago ang bilang sa buong araw at linggo, at paano inihahambing ang rehiyon sa iba.",
+  "recording-just-started": "Kakasimula pa lamang ng pagre-record, kaya napupunan mula rito ang mga chart.",
+  "series-starts": "Nagsisimula ang serye sa {at}, nang magsimula ang pagre-record, at walang maaaring mabawi bago nito.",
+  "server-population": "Populasyon ng {label} server",
+  "title": "{population} ng World of Tanks",
+  "wargaming-names-a-region-s": "Pinapangalanan ng Wargaming ang mga unang cluster ng isang rehiyon at iniiwan ang iba bilang mga identifier lamang, kaya ipinapakita ang 203 bilang EU3, na nagpapatuloy sa sariling pagnumero ng rehiyon. Ang identifier ang nire-record namin at ang ipinapakita ng bawat pangalan kapag nag-hover, at ito ang sinusundan ng label. Kung papangalanan ang mga cluster ayon sa dami ng gumagamit sa mga ito, lilipat ang pangalan mula sa isang server patungo sa isa pa tuwing magpapalitan sila ng puwesto. Ang server na nawawala sa isang sample ay hindi talaga naiulat, hindi ibig sabihin na walang laman.",
+  "we-record-it": "Inilalathala ng Wargaming ang populasyon ng bawat server bilang kasalukuyang bilang at walang itinatabing kasaysayan nito, kaya ang bawat bilang na lampas sa kasalukuyang minuto ay kami mismo ang nag-record, bawat limang minuto.",
+  "where-battles-are-fought": "Kung saan nilalaro ang mga laban sa {label}"
+}

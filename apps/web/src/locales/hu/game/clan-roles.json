@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Toborzótiszt",
+  "personnel_officer": "Személyzeti tiszt",
+  "quartermaster": "Szállásmester",
+  "executive_officer": "Másodtiszt",
+  "recruit": "Újonc",
+  "private": "Közlegény",
+  "commander": "Parancsnok",
+  "reservist": "Tartalékos",
+  "combat_officer": "Harctéri parancsnok",
+  "junior_officer": "Altiszt",
+  "intelligence_officer": "Hírszerzőtiszt"
+}

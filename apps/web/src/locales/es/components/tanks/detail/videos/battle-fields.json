@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Cómo terminó",
+  "loading-maps": "Cargando mapas…",
+  "map": "Mapa",
+  "mode": "Modo",
+  "pick-a-map": "Elegir un mapa",
+  "pick-a-mode": "Elige un modo",
+  "result": "Resultado",
+  "spawn": "Aparición",
+  "team": "Equipo {team}",
+  "team-spawn": "Equipo {team} · {direction}",
+  "which-side-you-started": "En qué lado empezaste"
+}

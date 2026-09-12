@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Širina prostora za igru",
+    "height": "Visina prostora za igru",
+    "round-length": "Tajmer bitke",
+    "team-size": "Veličina tima",
+    "camouflage": "сезона",
+    "presence": "U igri",
+    "variant-version": "Verzija za {type}",
+    "play-area": "Prostor za igru",
+    "bases-team1": "Savezničke baze",
+    "bases-team2": "Neprijateljske baze",
+    "spawns-team1": "Saveznička mesta pojavljivanja",
+    "spawns-team2": "Neprijateljska mesta pojavljivanja",
+    "control-point": "Kontrolna tačka",
+    "artillery-headquarters": "Artiljerijski štab",
+    "comms-centers": "Komunikacioni centri",
+    "observation-posts": "Osmatračnice",
+    "points-of-interest": "Tačke interesa"
+  },
+  "summary": {
+    "added": "{name} je dodato",
+    "removed": "{name} je uklonjeno",
+    "added-to-game": "Dodato u igru",
+    "removed-from-game": "Uklonjeno iz igre",
+    "added-on-test": "Dodato na testnom klijentu",
+    "removed-on-test": "Uklonjeno sa testnog klijenta",
+    "mode-added": "Dodat je režim {name}",
+    "mode-removed": "Uklonjen je režim {name}",
+    "now-played-in": "Sada se igra u {name}",
+    "no-longer-played-in": "Više se ne igra u {name}",
+    "event-added": "{name} se sada može dogoditi usred bitke",
+    "event-removed": "{name} se više ne događa",
+    "moved": "{name} je pomereno",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

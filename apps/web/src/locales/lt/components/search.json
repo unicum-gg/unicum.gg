@@ -1,0 +1,27 @@
+{
+  "placeholder": "Ieškoti žaidėjų, klanų, tankų, žemėlapių ar terminų",
+  "type": "Paieškos tipas",
+  "types": {
+    "all": "Visi",
+    "players": "Žaidėjai",
+    "clans": "Klanai",
+    "tanks": "Tankai",
+    "maps": "Žemėlapiai",
+    "glossary": "Terminų žodynas"
+  },
+  "sections": {
+    "players": "Žaidėjai",
+    "clans": "Klanai",
+    "tanks": "Tankai",
+    "maps": "Žemėlapiai",
+    "glossary": "Terminų žodynas",
+    "recent": "Naujausi",
+    "favorites": "Mėgstamiausi"
+  },
+  "searching": "Ieškoma…",
+  "errored": "Kažkas nepavyko. Bandykite dar kartą.",
+  "empty": "Nerasta rezultatų",
+  "remove-recent": "Pašalinti iš paskutiniųjų",
+  "add-favorite": "Pridėti prie mėgstamiausių",
+  "remove-favorite": "Pašalinti iš mėgstamiausių"
+}

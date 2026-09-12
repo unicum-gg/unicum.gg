@@ -1,3 +1,5 @@
+"use client";
+
 import type { Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
 import {
@@ -19,6 +21,9 @@ import {
 } from "@/components/entity/badges/crest";
 import type { PlayerIdentity } from "@/components/entity/player-identity";
 import ROUTES from "@/constants/routes";
+import type { TranslateFunction } from "@onruntime/translations";
+import { onslaughtCrestName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * Build a player's crests in the order the fold reads them, best first.
@@ -51,10 +56,16 @@ export function buildPlayerBadges({
   onslaughtBestRank,
   onslaughtSeasons,
   size,
+  t,
+  tGame,
 }: {
   region: Region;
   nickname: string;
   isVerified: boolean;
+  /** This namespace, for what a crest says it is. */
+  t: TranslateFunction;
+  /** `game/vocabulary`, for the crests whose name is Wargaming's own. */
+  tGame: TranslateFunction;
   /** Null when there is no supporter crest to draw at all. */
   supporterState: SupporterBadgeState | null;
   twitchLogin: string | null;
@@ -76,7 +87,7 @@ export function buildPlayerBadges({
     badges.push({
       key: "onslaught",
       href: ROUTES.PLAYER_ONSLAUGHT(region, nickname),
-      label: `Onslaught ${onslaughtBestTier === "legend" ? "Legend" : "Champion"}`,
+      label: onslaughtCrestName(onslaughtBestTier, tGame),
       // The bare crest for the fold's tooltip, picking the same tincture the
       // badge itself would. Kept beside it so the two cannot drift.
       crest: <Crest kind={onslaughtKind} />,
@@ -102,10 +113,9 @@ export function buildPlayerBadges({
     badges.push({
       key: "tournament",
       href: ROUTES.PLAYER_TOURNAMENTS(region, nickname),
-      label:
-        tournamentWins === 1
-          ? "1 tournament win"
-          : `${tournamentWins} tournament wins`,
+      label: t("tournament-wins",
+        { count: tournamentWins },
+      ),
       crest: <Crest kind={tournamentKind} />,
       tint: crestTincture(tournamentKind),
       node: (
@@ -139,7 +149,7 @@ export function buildPlayerBadges({
     badges.push({
       key: "streamer",
       href: `https://www.twitch.tv/${twitchLogin}`,
-      label: `Watch ${twitchLogin} on Twitch`,
+      label: t("watch-on-twitch", { name: twitchLogin }),
       crest: <Crest kind={CrestKind.Streamer} />,
       tint: crestTincture(CrestKind.Streamer),
       node: <StreamerBadge login={twitchLogin} size={size} />,
@@ -181,7 +191,11 @@ export function PlayerBadges({
   region: Region;
   player: PlayerIdentity;
 }) {
+  const { t } = useTranslation("components/entity/badges/player-badges");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const badges = buildPlayerBadges({
+    t,
+    tGame,
     region,
     nickname: player.nickname,
     isVerified: Boolean(player.isVerified),

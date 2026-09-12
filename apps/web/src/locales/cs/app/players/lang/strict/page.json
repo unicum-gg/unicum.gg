@@ -1,0 +1,6 @@
+{
+  "title": "Hráči World of Tanks používající výhradně jazyk {language} ({region})",
+  "description": "Žebříček hráčů pro jazyk {name} a region {region}. Zahrnuje hráče, jejichž jazyk je na základě historie klanů odhadnut výhradně jako {language}, a řadí je podle WNX.",
+  "og-title": "Hráči používající výhradně jazyk {language}",
+  "og-subtitle": "Žebříček pro region {region}"
+}

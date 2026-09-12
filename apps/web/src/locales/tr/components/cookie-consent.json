@@ -1,0 +1,16 @@
+{
+  "title": "Çerez kullanıyoruz",
+  "description": "Tarama deneyiminizi iyileştirmek ve site trafiğini analiz etmek için çerez kullanıyoruz.",
+  "functional": {
+    "title": "İşlevsel",
+    "description": "Sitenin düzgün çalışması için gereklidir (tercihler, bölge seçimi)."
+  },
+  "analytics": {
+    "title": "Kitle ölçümü",
+    "description": "Google Analytics, sitenin nasıl kullanıldığını anlamamıza yardımcı olmak için çerezler ayarlar. Anonim, çerezsiz analizler (Umami) her durumda çalışmaya devam eder."
+  },
+  "save": "Seçimlerimi kaydet",
+  "decline": "Tümünü reddet",
+  "customize": "Özelleştir",
+  "accept": "Tümünü kabul et"
+}

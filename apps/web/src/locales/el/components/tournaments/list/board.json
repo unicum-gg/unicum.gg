@@ -1,0 +1,14 @@
+{
+  "date": "Ημερομηνία",
+  "featured-tournament": "Δημοφιλές τουρνουά",
+  "format": "Μορφή",
+  "mode": "Μόδα",
+  "no-tournament-matches-the-current": "Κανένα τουρνουά δεν ταιριάζει με τα τρέχοντα φίλτρα.",
+  "nothing-here-right-now-wargaming": "Δεν υπάρχει κάτι εδώ αυτή τη στιγμή. Η Wargaming ανοίγει νέα τουρνουά καθημερινά, οπότε η λίστα συμπληρώνεται ξανά αυτόματα.",
+  "prize": "Βραβείο",
+  "region-tournaments": "Τουρνουά {region} ({count})",
+  "status": "Κατάσταση",
+  "teams": "Ομάδες",
+  "tier": "επίπεδο",
+  "tournament": "Τουρνουά"
+}

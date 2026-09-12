@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "पहला स्थान",
+    "2": "दूसरा स्थान",
+    "3": "तीसरा स्थान"
+  },
+  "streamer": "स्ट्रीमर · Twitch पर {name} देखें",
+  "tournament": {
+    "one": "{title} का विजेता रोस्टर",
+    "many": "{count} विजेता रोस्टर में, सर्वश्रेष्ठ {title}",
+    "featured": "{text} · एक विशेष कार्यक्रम",
+    "unnamed": "एक Wargaming टूर्नामेंट"
+  },
+  "tournament-wins": "{count, plural, one {# टूर्नामेंट जीत} other {# टूर्नामेंट जीतें}}",
+  "watch-on-twitch": "Twitch पर {name} देखें",
+  "watch-on-twitch-viewers": "Twitch पर {name} देखें · {viewers} दर्शक"
+}

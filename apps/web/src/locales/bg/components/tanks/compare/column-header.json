@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Боеприпаси, оборудване, консумативи, директиви, екипаж и развитие за тази колона. Всяка промяна променя характеристиките ѝ в сравнението по-долу.",
+  "ammunition-equipment-crew-and-progression": "Боеприпаси, оборудване, екипаж и развитие",
+  "apply-to-every-column": "Приложи към всяка колона",
+  "compare-against": "Сравни с {tank}",
+  "compare-the-others-against-this-one": "Сравни останалите с този",
+  "configure-tank": "Конфигурирай {tank}",
+  "highest-overall-score": "Най-висок общ резултат",
+  "highest-overall-score-of-this": "Най-висок общ резултат в това сравнение",
+  "is-the-reference": "{tank} е еталонът",
+  "overall": "Общо",
+  "reference-column": "Еталонна колона",
+  "remove-tank": "Премахни {tank}",
+  "reset-all": "Нулирай всичко",
+  "setup": "Настройка",
+  "stock": "Стоков",
+  "tank-setup": "Конфигурация на {tank}",
+  "top": "Най-добри",
+  "where-this-vehicle-sits-across": "Мястото на тази бойна машина в целия каталог, от {MAXSCORE}: средната стойност на четирите ѝ категорийни резултата според тази конфигурация. Обобщение, а не присъда, разузнавач и тежък танк могат да достигнат същото число, като са добри в различни неща."
+}

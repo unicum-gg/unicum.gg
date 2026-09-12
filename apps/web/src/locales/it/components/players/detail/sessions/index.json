@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Nessuna sessione per ora. Le sessioni compaiono quando questo account viene rilevato due volte con delle battaglie disputate tra un rilevamento e l’altro, cosa che avviene automaticamente man mano che si gioca.",
+  "bar-height-is-battles-played": "L’altezza della barra indica il numero di battaglie giocate, mentre il colore indica il valore di {metric} per {granularity}, usando le stesse fasce adottate nel resto del sito.",
+  "title": "Sessioni di {nickname}",
+  "title-count": "Sessioni di {nickname} ({count})",
+  "granularity": {
+    "day": "giorno",
+    "week": "settimana",
+    "month": "mese",
+    "daily": "Giornaliero",
+    "weekly": "Settimanale",
+    "monthly": "Mensile"
+  },
+  "week-of": "Settimana del {date}"
+}

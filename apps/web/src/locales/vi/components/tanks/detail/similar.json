@@ -1,0 +1,11 @@
+{
+  "compare": "So sánh với {count} xe gần nhất",
+  "match": "trận đấu",
+  "subtitle": "Cùng vị trí trong cấp riêng của chúng",
+  "verdict": {
+    "overall": "Tương tự tổng thể",
+    "closest": "Gần nhất theo {axes}",
+    "closest-furthest": "Gần nhất theo {axes}, xa nhất theo {apart}",
+    "and": " và "
+  }
+}

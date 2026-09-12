@@ -94,6 +94,10 @@ export const onslaughtSeasonRef = z
       description:
         "Display label ('Season of the Jade Dragon' or 'Year of the Griffin').",
     }),
+    ordinal: z.string().nullable().meta({
+      description:
+        "Season ordinal word ('third'), which is how the client keys its own season names. Null for a year archive.",
+    }),
     available: z.boolean().meta({
       description: "True when we hold standings for this season (selectable).",
     }),

@@ -1,0 +1,18 @@
+{
+  "caught-up": "Wszystkie koszty są pokryte, dziękujemy. Każda nadwyżka zostanie przeznaczona na zwiększenie wydajności i nowe funkcje.",
+  "covered-label": "Pokryte",
+  "covered-sentence": "Osoby ze statusem Supporter pokryły {received} z kwoty {spent} wydanej do tej pory.",
+  "days-out-of-pocket": "{days} dni finansowania z własnej kieszeni",
+  "from-supporter-one": "Od {count} osoby ze statusem Supporter",
+  "from-supporters": "Od {count} osób ze statusem Supporter",
+  "gap-growing": "Dodatkowe {amount}/mies. powstrzyma powiększanie się niedoboru.",
+  "goal": "cel {amount}",
+  "of-that-total": "z tej sumy",
+  "pledges-cover": "Deklarowane wpłaty pokrywają teraz miesięczne koszty.",
+  "raised-amount": "Zebrano {amount}",
+  "raised-label": "Zebrano",
+  "run-at-a-loss": "{name} działa ze stratą od {since}.",
+  "run-rate": "Miesięczny bilans: zadeklarowano {pledged}/mies. wobec kosztów działania wynoszących {cost}/mies.",
+  "spent-since-launch": "Wydano od uruchomienia",
+  "to-catch-up": "Brakuje {amount}, aby w pełni pokryć niedobór."
+}

@@ -1,0 +1,22 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Total",
+    "day": "Ultimele 24h",
+    "week": "Ultimele 7d",
+    "month": "Ultimele 30d"
+  },
+  "sections": {
+    "elo": "ELO nivel X ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} nivel X (7v7)",
+    "t8": "{skirmish} nivel VIII (7v7)",
+    "t6": "{skirmish} nivel VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Lupte",
+    "winrate": "Rată de câștig"
+  }
+}

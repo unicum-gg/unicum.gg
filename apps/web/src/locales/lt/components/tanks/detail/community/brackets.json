@@ -1,0 +1,8 @@
+{
+  "battles": "{count} Mūšiai",
+  "no-votes": "ne balsų",
+  "rated-higher": "Geresni žaidėjai jį įvertina {stars} žvaigždutėmis aukščiau nei likęs serveris. Šis tankas apdovanoja už žinojimą, ką darote.",
+  "rated-lower": "Geresni žaidėjai jį įvertina {stars} žvaigždutėmis žemiau nei likęs serveris. Jis atrodo geras, kol iš jo nepaprašoma ko nors daugiau.",
+  "votes": "{count} balsai",
+  "votes-one": "{count} balsas"
+}

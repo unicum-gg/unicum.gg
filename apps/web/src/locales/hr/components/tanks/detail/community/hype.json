@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "iznad {value}% ocijenjenih tenkova na svojoj razini",
+  "measured-hint": "Mjesto koje mu stopa pobjeda zauzima među istim tenkovima",
+  "not-enough-votes-yet-to": "Još nema dovoljno glasova za usporedbu presude zajednice s time kako tenk zapravo nastupa.",
+  "perceived-hint": "Mjesto koje mu zajednica daje među ocijenjenim tenkovima razine {tier}",
+  "verdict": {
+    "overrated": "Zajednica ga ocjenjuje znatno bolje od onoga što zapravo postiže.",
+    "fair": "Ugled i rezultati slažu se u ovom slučaju.",
+    "underrated": "Nastupa bolje nego što mu itko priznaje."
+  },
+  "what-players-think": "Što igrači misle",
+  "what-the-data-says": "Što podaci govore"
+}

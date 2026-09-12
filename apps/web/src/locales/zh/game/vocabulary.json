@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "随机",
+    "battle_royale": "钢铁猎手",
+    "frontline": "前线模式",
+    "onslaught": "天梯战",
+    "onslaught_night": "{onslaught}之夜",
+    "grand_battle": "战役模式",
+    "clan_wars": "clan 战争",
+    "waffentrager": "Waffenträger",
+    "last_stand": "背水一战",
+    "arcade": "街机模式",
+    "story_mode": "剧情模式",
+    "training": "训练中"
+  },
+  "player-modes": {
+    "overall": "随机战斗",
+    "skirmish": "冲突战",
+    "advances": "攻城战",
+    "grand": "决战",
+    "ranked": "排位赛",
+    "cw-x": "X级军团战",
+    "cw-viii": "VIII级军团战",
+    "cw-vi": "VI级军团战",
+    "steel-hunter": "钢铁猎手",
+    "onslaught": "天梯战"
+  },
+  "stronghold-tiers": {
+    "advances": "攻城战",
+    "t10": "前哨战 T10",
+    "t8": "前哨战 T8",
+    "t6": "前哨战 T6"
+  },
+  "stronghold-periods": {
+    "24h": "过去24小时",
+    "7d": "过去7天",
+    "30d": "过去30天",
+    "overall": "总体"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "战斗场次",
+    "winrate": "胜率"
+  },
+  "clan-boards": {
+    "advances": "攻城战",
+    "t10": "前哨战 X",
+    "t8": "前哨战 VIII",
+    "t6": "前哨战 VI"
+  },
+  "map-modes": {
+    "standard": "标准",
+    "encounter": "夺旗战",
+    "assault": "突击型",
+    "attack-defense": "攻防战"
+  },
+  "map-camouflage": {
+    "summer": "夏季",
+    "winter": "冬季",
+    "desert": "沙漠"
+  },
+  "map-poi": {
+    "1": "火炮总部",
+    "2": "通信中心",
+    "3": "观察哨"
+  },
+  "tournament-modes": {
+    "ctf": "标准",
+    "domination": "遭遇战",
+    "assault2": "进攻/防守",
+    "comp7": "天梯战"
+  },
+  "battle-formats": {
+    "random": "随机",
+    "clan_wars": "clan 战争",
+    "advances": "攻城战",
+    "skirmish": "冲突战",
+    "maneuvers": "Maneuvers",
+    "onslaught": "天梯战",
+    "tournament": "赛事"
+  },
+  "battle-results": {
+    "victory": "胜利",
+    "defeat": "被击败",
+    "draw": "平局"
+  },
+  "spawn-directions": {
+    "north": "北",
+    "south": "南",
+    "east": "东",
+    "west": "西"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "即将开始",
+    "registration_started": "注册开放",
+    "registration_finished": "注册已关闭",
+    "running": "进行中",
+    "finished": "结束中",
+    "complete": "已完成"
+  },
+  "onslaught-tiers": {
+    "legend": "传说",
+    "champion": "冠军",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "重型坦克",
+    "mediumTank": "中级联队",
+    "lightTank": "轻型",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "突击型",
+    "break": "突破型",
+    "support": "支援型",
+    "universal": "全能型",
+    "sniper": "狙击型",
+    "wheeled": "轮式"
+  },
+  "mastery-badges": {
+    "class3": "三等",
+    "class2": "二等",
+    "class1": "一等",
+    "ace": "顶尖坦克手"
+  },
+  "clan-modes": {
+    "random": "随机战斗",
+    "stronghold": "要塞",
+    "skirmish": "冲突战",
+    "clan-wars": "clan 战争"
+  },
+  "features": {
+    "stronghold": "要塞",
+    "skirmish": "冲突战",
+    "marks-of-excellence": "特级标识",
+    "marks-of-mastery": "掌握标记",
+    "personal-rating": "个人评级",
+    "world-of-tanks-rating": "《坦克世界》评级",
+    "common-test": "公共测试",
+    "tournaments": "赛事"
+  },
+  "marks": {
+    "1": "1星",
+    "2": "2星",
+    "3": "3星",
+    "name": "特级标识"
+  }
+}

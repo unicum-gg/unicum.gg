@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "Batallas con este vehículo: {battles}",
+  "damage": "{damage} daño",
+  "n-marks": "{count, plural, one {# marca} other {# marcas}}",
+  "no-written-opinions-yet-if": "Aún no hay opiniones escritas. Si tienes las batallas necesarias, la tuya sería la primera.",
+  "win-rate": "Tasa de victorias: {toFixed}%",
+  "written-on": "escrita en {gameVersion}"
+}

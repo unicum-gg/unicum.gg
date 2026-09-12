@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Custo (créditos)",
+      "tip": "Preço de compra em créditos (tanques da árvore tecnológica)"
+    },
+    "buyGold": {
+      "label": "Custo (ouro)",
+      "tip": "Preço de compra em ouro (tanques premium)"
+    },
+    "researchXp": {
+      "label": "XP de pesquisa",
+      "tip": "XP necessária para desbloquear (percurso mais barato)"
+    },
+    "totalFreeXp": {
+      "label": "XP livre (T{tier})",
+      "tip": "XP acumulada necessária para pesquisar a partir do nível {tier}, incluindo os módulos obrigatórios"
+    },
+    "shellCost": {
+      "label": "Custo do projétil",
+      "tip": "Preço do projétil padrão (créditos)"
+    },
+    "ammoCost": {
+      "label": "Custo total de munição",
+      "tip": "Preço do projétil padrão × capacidade de munições"
+    },
+    "acquireMoney": {
+      "label": "Custo de aquisição ({currency})",
+      "tip": "Custo estimado em dinheiro real para adquirir o tanque (pesquisa + compra), em {currency}"
+    },
+    "freeXpMoney": {
+      "label": "XP livre ({currency})",
+      "tip": "Custo estimado em dinheiro real para pesquisar o tanque com XP livre a partir do nível {tier}, em {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Custo (créditos)",
+    "buyGold": "Custo (ouro)",
+    "researchXp": "XP de pesquisa",
+    "totalFreeXp": "XP livre",
+    "shellCost": "Custo do projétil",
+    "ammoCost": "Custo total de munição",
+    "acquireMoney": "Custo de aquisição (dinheiro real)",
+    "freeXpMoney": "XP livre (dinheiro real)"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "fun": "Wie viel Freude die spieler daran haben, was oft nicht dieselbe Frage ist.",
+  "hype": "Community-Rang innerhalb seiner Stufe minus Rang nach Siegrate. Absteigend sortieren für die am stärksten überschätzten Panzer im Spiel, aufsteigend für die am stärksten unterschätzten.",
+  "overall": "Wie gut die spieler ihn finden. Der Rang basiert auf einem zum Website-Durchschnitt hin gewichteten Mittelwert, sodass ein Panzer mit vier Stimmen nicht vor einem mit vierhundert liegen kann.",
+  "votes": "Abgegebene Stimmen, jede einzelne von einem Konto, über das der Panzer tatsächlich gespielt wurde."
+}

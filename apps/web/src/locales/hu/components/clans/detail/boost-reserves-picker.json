@@ -1,0 +1,6 @@
+{
+  "active-until": "Aktív {tz}-ig",
+  "n-left": "{count} maradt",
+  "no-reserves-in-stock-right": "Jelenleg nem áll rendelkezésre tartalék.",
+  "reserves-to-activate": "Aktiválás előtt álló tartalékok"
+}

@@ -1,0 +1,12 @@
+{
+  "before-update": "Antes de la actualización {version}",
+  "common-test": "Prueba común",
+  "in-common-test-not-released": "En la Prueba común, aún no disponible",
+  "introduced": "Introducido",
+  "lifecycle": "Ciclo de vida",
+  "n-buffed": "{count} mejorados",
+  "n-nerfed": "{count} debilitados",
+  "not-released-wargaming-can-still": "Aún no se ha publicado. Wargaming todavía puede cambiar o descartar cualquiera de estas novedades antes de que se lance la actualización.",
+  "status": "Estado",
+  "update": "Actualizar {version}"
+}

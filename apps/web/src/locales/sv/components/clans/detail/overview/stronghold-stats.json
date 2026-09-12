@@ -1,0 +1,22 @@
+{
+  "stat": "Statistik",
+  "periods": {
+    "total": "Totalt",
+    "day": "Senaste 24h",
+    "week": "Senaste 7d",
+    "month": "Senaste 30d"
+  },
+  "sections": {
+    "elo": "ELO för Klass X ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "Klass X: {skirmish} (7 mot 7)",
+    "t8": "Klass VIII: {skirmish} (7 mot 7)",
+    "t6": "Klass VI: {skirmish} (7 mot 7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Strider",
+    "winrate": "Vinnande hastighet"
+  }
+}

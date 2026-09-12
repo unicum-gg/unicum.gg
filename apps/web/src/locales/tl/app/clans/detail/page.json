@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} klano ng World of Tanks ({region}), {members} mga miyembro",
+    "description": "{name} [{tag}] sa {region}: {members} mga miyembro, kumpletong talahanayan ng mga miyembro na may mga rating na WN8 at WNX, kamakailang aktibidad ng pagsali at pag-alis, at kasaysayan ng klano."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} mga istatistika ng stronghold ({region})",
+    "description": "Pagganap ng stronghold ng {name} [{tag}] sa {region}: mga rating ng skirmish at advances, mga laban at rate ng panalo para sa bawat miyembro."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} mga istatistika ng clan wars ({region})",
+    "description": "Pagganap sa Digmaan ng Clans ng {name} [{tag}] sa {region}: mga rating, mga laban at rate ng panalo ng bawat miyembro sa lahat ng campaign sa global map."
+  },
+  "tanks": {
+    "title": "[{tag}] {name} MMga tangke ({region}), mga sasakyan ng klano",
+    "description": "Bawat sasakyang nilaro ng {name} [{tag}] sa {region}, kasama ang mga laban, rate ng panalo at karaniwang pinsala na pinagsama sa mga miyembro ng klano."
+  },
+  "manage": {
+    "title": "[{tag}] {name} mga reserba ng stronghold ({region})",
+    "description": "I-activate at mag-iskedyul ng mga reserba ng stronghold ng {name} [{tag}]. Para lamang sa mga opisyal."
+  },
+  "missing": {
+    "description": "[{tag}] klano ng World of Tanks sa {region}: talahanayan ng mga miyembro na may mga rating na WN8/WNX, aktibidad ng pagsali at pag-alis, mga kamakailang laban at kumpletong kasaysayan ng klano."
+  }
+}

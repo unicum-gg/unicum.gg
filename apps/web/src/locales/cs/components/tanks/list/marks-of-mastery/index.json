@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. Třída",
+      "tip": "3. Třída: ZK potřebné k lepšímu výsledku, než mají hráči v dolních 50 %"
+    },
+    "class2": {
+      "label": "2. Třída",
+      "tip": "2. Třída: ZK potřebné k lepšímu výsledku, než mají hráči v dolních 80 %"
+    },
+    "class1": {
+      "label": "1. Třída",
+      "tip": "1. Třída: ZK potřebné k lepšímu výsledku, než mají hráči v dolních 95 %"
+    },
+    "ace": {
+      "label": "Esence Tankista",
+      "tip": "Esence Tankista: ZK potřebné k lepšímu výsledku, než mají hráči v dolních 99 %"
+    }
+  },
+  "rows-per-page": "Řádky na stránku",
+  "previous-page": "Předchozí stránka",
+  "page": "Stránka {current} / {totalPages}",
+  "next-page": "Další stránka",
+  "all": "Všechna"
+}

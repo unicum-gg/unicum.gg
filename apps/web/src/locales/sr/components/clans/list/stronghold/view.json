@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Још нема података. Провери поново када се кланови освежe.",
+  "heading": "Најбољи <accent>{tier}</accent> кланови",
+  "blurb": "Ранг-листа за регион {region}, рангирана по {sort} међу свим праћеним клановима у формату {format} (минимум {battles} битака).",
+  "blurb-period": "Ранг-листа за регион {region}, рангирана по {sort} међу свим праћеним клановима у формату {format} током периода {period} (минимум {battles} битака).",
+  "format-advances": "Napadi (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Најбољих {count} кланова нивоа {tier} ·"
+}

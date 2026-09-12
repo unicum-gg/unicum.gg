@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Ancora qualche parola: ne mancano {count}.",
+  "at-winrate": "con {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Impossibile ritirarla. Riprova tra poco.",
+  "hide-the-detailed-axes": "Nascondi gli assi dettagliati",
+  "not-enough-battles": "Non hai giocato abbastanza battaglie con questo carro perché il tuo voto venga conteggiato.",
+  "published-once-read": "Pubblicata dopo la lettura da parte di un moderatore. Il conteggio delle stelle è aggiornato subito.",
+  "rate-it-in-detail": "Valutala nei dettagli (facoltativo)",
+  "review": {
+    "none": "Valutazione salvata.",
+    "queued": "Valutazione salvata. La tua recensione è stata inviata a un moderatore.",
+    "published": "Valutazione salvata. La tua recensione è già pubblicata.",
+    "pending": "Valutazione salvata. La tua recensione è ancora in attesa di un moderatore.",
+    "rejected": "Valutazione salvata. La tua recensione precedente non è stata pubblicata, quindi contano solo le stelle che hai assegnato.",
+    "closed": "Valutazione salvata. Al momento le recensioni scritte sono disattivate, quindi il testo non è stato salvato."
+  },
+  "save-failed": "Impossibile salvare. Riprova tra poco.",
+  "say-why-optional": "Spiega perché (facoltativo)",
+  "signed-with": "Firmata con le tue {battles} battaglie giocate con questo carro",
+  "submit-my-rating": "Invia la mia valutazione",
+  "too-many-edits": "Sono troppe modifiche tutte insieme. Aspetta un minuto.",
+  "update-my-rating": "Aggiorna la mia valutazione",
+  "what-it-is-good-at": "In cosa eccelle, quali sono i suoi punti deboli e a chi è adatto.",
+  "withdraw": " Ritirati",
+  "your-rating-has-been-withdrawn": "La tua valutazione è stata ritirata.",
+  "your-review-is-waiting-on": "La tua recensione è in attesa di un moderatore. Qui puoi vederla solo tu.",
+  "your-review-was-not-published": "La tua recensione non è stata pubblicata. Le stelle che hai assegnato contribuiscono comunque alla media."
+}

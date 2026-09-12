@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "World of Tanks-statistieken: {tank} ({region}), niveau {tier}, {nation}",
+    "description": "Specificaties in World of Tanks voor {tank} ({region}): bepantsering, vuurkracht, mobiliteit, modules, bemanning en veldaanpassingen voor deze tank van niveau {tier} uit {nation}."
+  },
+  "performances": {
+    "title": "Prestaties van {tank} ({region}), serverstatistieken en beste spelers",
+    "description": "Prestaties in World of Tanks voor {tank} ({region}): servergemiddelden voor winstpercentage, schade en geassisteerde schade, de beste spelers met deze tank van niveau {tier} uit {nation}, plus verwachte waarden voor WN8 en WNX."
+  },
+  "marks": {
+    "title": "Prestatiemarkeringen en meesterschapsbadges van {tank} ({region})",
+    "description": "Vereisten voor prestatiemarkeringen en meesterschapsbadges in World of Tanks voor {tank} ({region}), inclusief het historische verloop voor deze tank van niveau {tier} uit {nation}."
+  },
+  "history": {
+    "title": "Wijzigingsgeschiedenis van {tank} ({region}), buffs en nerfs",
+    "description": "Elke wijziging van een eigenschap van {tank} in alle World of Tanks-updates: buffs en nerfs voor vuurkracht, mobiliteit, overlevingsvermogen en camouflage die Wargaming versie voor versie heeft doorgevoerd voor deze tank van niveau {tier} uit {nation}."
+  },
+  "videos": {
+    "title": "Video’s met gameplay van {tank} ({region})",
+    "description": "Bekijk {tank} in actie: door de community voorgestelde gevechten met deze tank van niveau {tier} uit {nation}. Elke video begint op het moment waarop ermee wordt gespeeld en vermeldt de kaart en het resultaat."
+  },
+  "community": {
+    "title": "Reviews van spelers en beoordeling door de community voor {tank} ({region})",
+    "description": "Wat spelers van {tank} vinden: de score van de community op een schaal van vijf, uitgesplitst naar het speelniveau van de stemmers en afgezet tegen de daadwerkelijke prestaties van deze tank van niveau {tier} uit {nation}, plus geschreven reviews van accounts die er gevechten mee hebben gespeeld."
+  }
+}

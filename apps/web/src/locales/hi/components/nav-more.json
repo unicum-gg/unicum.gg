@@ -1,0 +1,37 @@
+{
+  "label": "और",
+  "items": {
+    "tournaments": {
+      "label": "टूर्नामेंट्स",
+      "description": "क्षेत्र के अनुसार ब्रैकेट, रोस्टर और परिणाम"
+    },
+    "servers": {
+      "label": "सर्वर",
+      "description": "अभी और समय के साथ ऑनलाइन खिलाड़ी"
+    },
+    "bot": {
+      "label": "Discord बॉट",
+      "description": "स्लैश कमांड के रूप में खिलाड़ी, क्लान और टैंक आँकड़े"
+    },
+    "mcp": {
+      "label": "MCP सर्वर",
+      "description": "Claude, ChatGPT या किसी MCP क्लाइंट से कनेक्ट करें"
+    },
+    "api": {
+      "label": "API",
+      "description": "मुफ़्त सार्वजनिक REST API, किसी कुंजी की आवश्यकता नहीं"
+    },
+    "badges": {
+      "label": "बैजेस",
+      "description": "खिलाड़ी या क्लान द्वारा अर्जित किया जा सकने वाला हर क्रेस्ट और उसका तरीका"
+    },
+    "glossary": {
+      "label": "ग्लॉसरी",
+      "description": "हर World of Tanks शब्द की व्याख्या"
+    },
+    "support": {
+      "label": "हमें समर्थन करें",
+      "description": "{name} को निःशुल्क, खुले और विज्ञापन-मुक्त रखने में मदद करें"
+    }
+  }
+}

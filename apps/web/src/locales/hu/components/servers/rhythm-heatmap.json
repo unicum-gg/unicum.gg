@@ -1,0 +1,8 @@
+{
+  "busiest": "Legforgalmasabb {when} ({players})",
+  "not-enough-recorded-yet-to": "Még nincs elegendő rögzített adat a heti ritmus megjelenítéséhez. A mintavételezés az egész hét minden órájára kiterjedve kitölti.",
+  "not-sampled-yet": "Még nincs mintavételezve",
+  "players-on-average": "Átlagosan {players} játékos",
+  "quietest": ", legcsendesebb {when} ({players})",
+  "your-local-time": "Helyi időd"
+}

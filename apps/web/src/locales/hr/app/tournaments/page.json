@@ -1,0 +1,8 @@
+{
+  "description": "Svaki Wargamingov turnir na regiji {region}: dnevne zlatne ljestvice, prvenstva klanova, tko je sudjelovao i tko je pobijedio. Potpune tablice, rezultati i sastavi.",
+  "live-many": "{count} turnira trenutačno je otvoreno ili se igra na regiji {region},",
+  "live-one": "{count} turnir trenutačno je otvoren ili se igra na regiji {region},",
+  "no-live": "Turniri se na regiji {region} održavaju svaki dan,",
+  "title": "{tournaments} igre World of Tanks",
+  "what-you-find": "od ljestvica 1 na 1 za zlato do prvenstava klanova za novčane nagrade. Potpune tablice i rezultati, svaki tim sa svojim sastavom i stranom na kojoj je započeo, kartu po kartu."
+}

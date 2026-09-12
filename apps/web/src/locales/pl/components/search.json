@@ -1,0 +1,27 @@
+{
+  "placeholder": "Szukaj graczy, klanów, czołgów, map lub haseł",
+  "type": "Typ",
+  "types": {
+    "all": "Wszystkie",
+    "players": "Gracze",
+    "clans": "Klany",
+    "tanks": "Czołgi",
+    "maps": "Mapy",
+    "glossary": "Słownik"
+  },
+  "sections": {
+    "players": "Gracze",
+    "clans": "Klany",
+    "tanks": "Czołgi",
+    "maps": "Mapy",
+    "glossary": "Słownik",
+    "recent": "Ostatnie",
+    "favorites": "Ulubione"
+  },
+  "searching": "Wyszukiwanie…",
+  "errored": "Coś poszło nie tak. Spróbuj ponownie.",
+  "empty": "Nie znaleziono wyników",
+  "remove-recent": "Usuń z ostatnich",
+  "add-favorite": "Dodaj do ulubionych",
+  "remove-favorite": "Usuń z ulubionych"
+}

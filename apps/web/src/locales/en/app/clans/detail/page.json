@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks clan ({region}), {members} members",
+    "description": "{name} [{tag}] on {region}: {members} members, full members table with WN8 and WNX ratings, recent join/leave activity and clan history."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} stronghold stats ({region})",
+    "description": "{name} [{tag}] stronghold performance on {region}: skirmish and advances ratings, battles and win rate for each member."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} clan wars stats ({region})",
+    "description": "{name} [{tag}] clan wars performance on {region}: per-member ratings, battles and win rate across the global map campaigns."
+  },
+  "tanks": {
+    "title": "[{tag}] {name} tanks ({region}), the clan’s vehicles",
+    "description": "Every vehicle played by {name} [{tag}] on {region}, with battles, win rate and average damage aggregated across the clan’s members."
+  },
+  "manage": {
+    "title": "[{tag}] {name} stronghold reserves ({region})",
+    "description": "Activate and schedule {name} [{tag}] stronghold reserves. Officers only."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks clan on {region}: members table with WN8/WNX ratings, join/leave activity, recent battles and full clan history."
+  }
+}

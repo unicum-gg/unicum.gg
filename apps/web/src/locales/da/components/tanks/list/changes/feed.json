@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# kampvogn} other {# kampvogne}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Ingen kampvognsændringer er registreret endnu. Når Wargaming ombalancerer kampvogne, vises hver opdaterings forbedringer og forringelser her.",
+  "update": "Opdater {version}"
+}

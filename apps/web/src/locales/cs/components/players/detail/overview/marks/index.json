@@ -1,0 +1,21 @@
+{
+  "title": "Značky a mistrovství: {nickname}",
+  "excellence": {
+    "title": "Vítězné znaky",
+    "description": "Vozidla podle znaků na děle. Znak vyjadřuje dlouhodobě udržovaný průměr: hra ho počítá v průběžně aktualizovaném okně nedávných bitev a porovnává ho s výsledky regionu s daným vozidlem.",
+    "partial": "Značky byly načteny u {known} z {garage} vozidel. Zbývající údaje se doplní při aktualizaci účtu.",
+    "note": "Vítězný znak je na {marked} z {garage} vozidel.",
+    "note-share": "Vítězný znak je na {marked} z {garage} vozidel ({percent} % vozidel v garáži)."
+  },
+  "mastery": {
+    "title": "Záplaty mistrovství",
+    "description": "Vozidla podle nejlepšího získaného odznaku. Odznak se uděluje za jednu bitvu, nikoli za průměr: hra ho uděluje podle zkušeností z jediné bitvy v porovnání s výsledky regionu s daným vozidlem.",
+    "note": "Odznak Esence Tankista je na {aces} z {garage} vozidel.",
+    "note-share": "Odznak Esence Tankista je na {aces} z {garage} vozidel ({percent} % vozidel v garáži)."
+  },
+  "reach": {
+    "heading": "Hra nad úrovní děla",
+    "description": "Vozidla, jejichž kombinované poškození už překračuje hranici znaku, který dosud nemají. Odznak představuje toto kombinované poškození a jeho barvu určuje překročený znak."
+  },
+  "none": "Žádný"
+}

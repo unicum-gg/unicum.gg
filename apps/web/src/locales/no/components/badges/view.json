@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Resultatliste for {board}",
+  "carried-beside-a-clan-tag": "Bæres ved siden av en klan-tag. Et rangeringsemblem viser en plass i en konkurranse: tallet er plassen, og fargen viser hvilken rangering. Vurderinger gir ingen merker, fordi det å ligge høyt på WN8 ikke er noe en klan vinner.",
+  "clan-badges": "Klanmerker",
+  "clan-board": {
+    "name": "{board}, topp {rank}",
+    "how": "En plass blant de {rank} beste på {board}. Beholdes så lenge klanen beholder plassen, og mistes når den ikke gjør det."
+  },
+  "clan-overflow": "En klan med mer enn tre plasser samler resten i et {plus}-emblem, beste først, slik at taggen forblir lesbar. Hold markøren over det for å se navnene.",
+  "featured-tournament-winner": {
+    "name": "Fremhevet turneringsvinner",
+    "how": "Det samme merket, vunnet i et arrangement Wargaming har fremhevet. Gull i stedet for stål, akkurat som på spillersiden."
+  },
+  "heading": "Alle {badge} og hvordan du tjener det",
+  "heading-accent": "merke",
+  "marks-carried-beside-a-nickname": "Merker som bæres ved siden av et kallenavn overalt på {NAME}: rangeringer, klanlister, søk og turneringsoppsett.",
+  "n-badges": "{count} merker",
+  "onslaught-champion": {
+    "name": "Onslaught-mester",
+    "how": "Nådde Champion-rangeringen i Onslaught, som kreves for i det hele tatt å vises på {standings}. Beholdes etterpå: en vurdering som faller under grensen tar plassen, ikke det faktum at den tidligere ble holdt."
+  },
+  "onslaught-legend": {
+    "name": "Onslaught-legende",
+    "how": "Hadde en plass innenfor sesongens Legend-grense, som er en plassering og ikke en poengsum: bare et bestemt antall finnes samtidig, og grensen vurderes mot sesongen plassen ble holdt i. Fiolett i stedet for stålblått, fargen rangeringen selv gir Legend."
+  },
+  "player-badges": "Spillermerker",
+  "player-overflow": "En spiller med mer enn tre merker samler resten i et {plus}-emblem, i rekkefølgen over, slik at kallenavnet forblir lesbart i en tabell. Hold markøren over det for å se navnene, og hvert merke lenker fortsatt dit det opprinnelige emblemet gjorde.",
+  "ranked-standings": "rangert stilling",
+  "streamer": {
+    "name": "Streamer",
+    "how": "En Twitch-kanal koblet til kontoen. Koble Twitch til din egen profil for å bekrefte den, så lenker emblemet til kanalen din. Det viser om du er direkte eller ikke."
+  },
+  "streamer-who-is-on-air": "En streamer som er direkte, bærer også en rød LIVE-pill. Den opptjenes ikke og beholdes ikke: den vises når strømmen starter og forsvinner når den slutter, så den samles aldri bort.",
+  "support-subscription": "støtteabonnement",
+  "supporter": {
+    "name": "Supporter"
+  },
+  "supporter-note": "En aktiv {link}, holdt offentlig. Støttespillere som velger å være anonyme, bærer ingen merker, etter eget ønske.",
+  "the-marks-a-player-or": "Merkene en spiller eller klan kan bære på {NAME}, hva hvert av dem betyr, og nøyaktig hva som kreves for å få det.",
+  "tournament-winner": {
+    "name": "Turneringsvinner",
+    "how": "Et lag knyttet til klanen vant en turnering. Wargaming registrerer lag og kontoer, aldri klaner, så tilknytningen gjenopprettes ved å sammenligne hver lagoppstilling med klanmedlemskapet slik det var på kampdagen."
+  },
+  "verified": {
+    "name": "Verifisert",
+    "how": "Eieren har logget inn med Wargaming.net-ID-en sin og koblet til denne kontoen. Innlogging er hele kravet, og det koster ingenting."
+  }
+}

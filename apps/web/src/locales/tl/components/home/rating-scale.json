@@ -1,0 +1,21 @@
+{
+  "title": "Sukatan ng rating",
+  "description": "Mga threshold ng kulay na ginagamit sa buong site para sa win rate at sa metric ng rating na pinili sa navbar.",
+  "tier": "Antas",
+  "tiers": {
+    "top": "Nakataas na",
+    "excellent": "Napakahusay",
+    "super": "Napaka-supra",
+    "very-good": "Napakaganda",
+    "good": "Mabuti",
+    "average": "Pangkaraniwan",
+    "below-avg": "Mas mababa sa karaniwan",
+    "bad": "Masama",
+    "very-bad": "Napakababa"
+  },
+  "rating-colors": "Mga kulay ng rating",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

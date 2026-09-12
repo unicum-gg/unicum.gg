@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Mag-log in gamit ang Wargaming.net ID",
+  "open-source": "Bukas ang source ng {name}. {link} bago ito pagkatiwalaan.",
+  "pick-the-region-your-world": "Piliin ang rehiyon kung nasaan ang iyong World of Tanks account. Hindi ito kailangang maging rehiyong bina-browse mo.",
+  "read-the-login-code": "Basahin ang login code",
+  "what-wargaming-hands-back-is": "Ang ibinabalik ng Wargaming ay token na nagbabasa ng datos ng sarili mong account. Naka-encrypt ito at nire-renew habang naka-link ang iyong account, at kumikilos lamang ito para sa iyo sa mga lugar na ikaw mismo ang nag-set up, gaya ng iskedyul ng reserba ng iyong klano.",
+  "you-sign-in-on-wargaming": "Nagla-sign in ka sa sariling pahina ng Wargaming, hindi rito. Hindi kailanman tina-type ang password mo sa {NAME} at hindi ito nakararating sa amin."
+}

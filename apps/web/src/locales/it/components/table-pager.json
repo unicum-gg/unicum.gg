@@ -1,0 +1,8 @@
+{
+  "previous": "Pagina precedente",
+  "next": "Pagina successiva",
+  "rows-per-page": "Righe per pagina",
+  "all": "Tutti",
+  "range": "{first}–{last} di {total}",
+  "page": "Pagina {page} / {total}"
+}

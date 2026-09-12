@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktiiviset päivät",
+  "add-workflow": "Lisää työnkulku",
+  "connect-discord": "Yhdistä Discord",
+  "discord-notifications": "Discord-ilmoitukset",
+  "each-workflow-activates-its-reserves": "Jokainen työnkulku aktivoi reservinsä aikaikkunan aikana, kun riittävästi jäseniä on live-peli-istunnossa. Toimii tililläsi, eikä sinun tarvitse olla paikalla. Lisää niin monta kuin tarvitset.",
+  "enabled": "Aktivoitu",
+  "from": "Alkaen",
+  "get-a-discord-message-in": "Saat Discord-viestin valitsemallesi kanavalle aina, kun boost aktivoituu, joten koko klaani tietää sen olevan käynnissä.",
+  "log-in-with-wargaming-to": "Kirjaudu Wargamingiin määrittääksesi tämän",
+  "min-online": "Väh. verkossa",
+  "officers": "Upseerit",
+  "only-an-officer-of-this": "Vain tämän klaanin upseeri voi määrittää tämän.",
+  "schedule-preview": "Aikataulun esikatselu",
+  "set-your-hours-and-reserves": "Määritä aikasi ja reservisi kerran. Boostit aktivoituvat ajallaan itsestään, vaikka kukaan ei olisi painamassa painiketta.",
+  "stronghold-boosts": "Vahvistuksen lisäykset",
+  "times-are-in-your-timezone": "Aika on aikavyöhykkeellä {tz}, eli omalla aikavyöhykkeelläsi.",
+  "to": "Voittoon"
+}

@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Zatím nebyl zaznamenán žádný cluster.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Sdílet",
+  "peak": "Maximum ({label})",
+  "average": "Průměr ({label})",
+  "not-reported": "Neohlášeno",
+  "total": "Celkem"
+}

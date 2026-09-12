@@ -1,0 +1,21 @@
+{
+  "stat": "Statystyka",
+  "periods": {
+    "total": "Suma",
+    "day": "Ostatnie 24h",
+    "week": "Ostatnie 7d",
+    "month": "Ostatnie 30d"
+  },
+  "sections": {
+    "territory": "Terytorium",
+    "t10": "Poziom X",
+    "t8": "Poziom VIII",
+    "t6": "Poziom VI"
+  },
+  "rows": {
+    "provinces": "Prowincje",
+    "elo": "ELO",
+    "battles": "Bitwy",
+    "winrate": "Wskaźnik zwycięstw"
+  }
+}

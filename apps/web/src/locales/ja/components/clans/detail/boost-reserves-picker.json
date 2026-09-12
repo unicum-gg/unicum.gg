@@ -1,0 +1,6 @@
+{
+  "active-until": "{tz}まで有効",
+  "n-left": "残り{count}件",
+  "no-reserves-in-stock-right": "現在、在庫にリザーブはありません。",
+  "reserves-to-activate": "有効化するリザーブ"
+}

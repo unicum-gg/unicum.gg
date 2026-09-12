@@ -1,0 +1,21 @@
+{
+  "title": "Hodnotící škála",
+  "description": "Barevné prahové hodnoty používané na celém webu pro míru vítězství a metriku hodnocení vybranou v navigační liště.",
+  "tier": "Úroveň",
+  "tiers": {
+    "top": "Nejlepší",
+    "excellent": "Výborný",
+    "super": "Super",
+    "very-good": "Velmi dobrý",
+    "good": "Dobrý",
+    "average": "Průměr",
+    "below-avg": "Podprůměrný",
+    "bad": "Špatný",
+    "very-bad": "Velmi špatný"
+  },
+  "rating-colors": "Barvy hodnocení",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

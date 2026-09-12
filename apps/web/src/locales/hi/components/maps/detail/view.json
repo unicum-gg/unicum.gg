@@ -1,0 +1,9 @@
+{
+  "battle-time": "बैटल समय",
+  "camouflage": "{camouflage} कैमोफ्लाज",
+  "mode": "मोड",
+  "n-random-events": "{count, plural, one {# यादृच्छिक इवेंट} other {# यादृच्छिक इवेंट्स}}",
+  "random-events": "यादृच्छिक घटनाएँ",
+  "size": "आकार",
+  "team-size": "टीम का आकार"
+}

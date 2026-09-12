@@ -1,0 +1,9 @@
+{
+  "all": "全て",
+  "camouflage-map": "{camouflage}マップ",
+  "modes": "{count, plural, other {#種類のモード}}",
+  "no-maps-match-your-filters": "条件に一致するマップはありません。",
+  "search": "{count}マップから検索",
+  "search-label": "マップを検索",
+  "special-map": "特殊マップ"
+}

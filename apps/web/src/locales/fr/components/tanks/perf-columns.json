@@ -1,0 +1,60 @@
+{
+  "columns-label": "Colonnes",
+  "groups": {
+    "general": "Général",
+    "combat": "Combat"
+  },
+  "columns": {
+    "battles": {
+      "label": "Batailles",
+      "tip": "Nombre total de batailles disputées avec ce char"
+    },
+    "count": {
+      "label": "Nombre",
+      "tip": "Nombre de joueurs suivis dans l’échantillon"
+    },
+    "rating": {
+      "label": "Classement (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Taux de victoires avec ce char"
+    },
+    "playerWr": {
+      "label": "WR du joueur",
+      "tip": "Taux de victoires global moyen des joueurs qui jouent ce char"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Dégâts moyens par bataille"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Ratio destructions / morts"
+    },
+    "assists": {
+      "label": "Assists",
+      "tip": "Dégâts moyens avec assistance"
+    },
+    "hitPct": {
+      "label": "Taux de touché %",
+      "tip": "Coups au but / tirs"
+    },
+    "penPct": {
+      "label": "Taux de pénétration %",
+      "tip": "Pénétrations / coups au but"
+    },
+    "spots": {
+      "label": "Repérages",
+      "tip": "Véhicules détectés en moyenne par bataille"
+    },
+    "blocked": {
+      "label": "Bloqués",
+      "tip": "Dégâts moyens bloqués par le blindage"
+    },
+    "survival": {
+      "label": "Survie",
+      "tip": "Pourcentage de batailles survécues"
+    }
+  }
+}

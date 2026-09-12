@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "{tank} World of Tanks statistika ({region}), {tier}. līmenis, {nation}",
+    "description": "{tank} ({region}) World of Tanks specifikācijas: bruņas, ugunsjauda, mobilitāte, moduļi, apkalpe un lauka modifikācijas šim {tier}. līmeņa {nation} tankam."
+  },
+  "performances": {
+    "title": "{tank} sniegums ({region}), servera statistika un labākie spēlētāji",
+    "description": "{tank} ({region}) World of Tanks sniegums: servera vidējais uzvaru procents, bojājumi un atbalsts, labākie spēlētāji ar šo {tier}. līmeņa {nation} tanku, kā arī WN8 un WNX sagaidāmās vērtības."
+  },
+  "marks": {
+    "title": "{tank} izcilības un meistarības zīmes ({region})",
+    "description": "{tank} ({region}) World of Tanks izcilības un meistarības zīmju prasības, kā arī to vēsture šim {tier}. līmeņa {nation} tankam."
+  },
+  "history": {
+    "title": "{tank} izmaiņu vēsture ({region}), uzlabojumi un vājinājumi",
+    "description": "Katras {tank} raksturlielumu izmaiņas World of Tanks atjauninājumos: Wargaming ieviestie ugunsjaudas, mobilitātes, izturības un maskēšanās uzlabojumi un vājinājumi šim {tier}. līmeņa {nation} tankam, pa versijām."
+  },
+  "videos": {
+    "title": "{tank} spēles video ({region})",
+    "description": "Skatieties {tank} darbībā: kopienas ieteiktas kaujas ar šo {tier}. līmeņa {nation} tanku, katra atvērta brīdī, kad tā tiek spēlēta, ar karti un tajā sasniegto rezultātu."
+  },
+  "community": {
+    "title": "{tank} spēlētāju atsauksmes un kopienas vērtējums ({region})",
+    "description": "Ko spēlētāji domā par {tank}: kopienas vērtējums piecu punktu skalā, sadalīts pēc vērtētāju spēles prasmēm, salīdzināts ar šī {tier}. līmeņa {nation} tanka faktisko sniegumu, kā arī rakstiskas atsauksmes no kontiem, kuriem ar to ir kaujas."
+  }
+}

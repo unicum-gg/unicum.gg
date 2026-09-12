@@ -1,0 +1,9 @@
+{
+  "all": "Alle",
+  "camouflage-map": "{camouflage}-kort",
+  "modes": "{count, plural, one {# spiltilstand} other {# spiltilstande}}",
+  "no-maps-match-your-filters": "Ingen kort matcher dine filtre.",
+  "search": "Søg blandt {count} kort",
+  "search-label": "Søg kort",
+  "special-map": "Særligt kort"
+}

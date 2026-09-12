@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Wis de {label}",
+  "credited-on-the-clan-s": "Vermeld op de eigen pagina van de Clan.",
+  "none": "Geen",
+  "optional": "(optioneel)",
+  "pick-the-vehicle": "Kiezen: het voertuig",
+  "search-for-a-clan": "Zoeken naar een Clan",
+  "search-for-a-vehicle": "Zoeken naar een voertuig",
+  "search-tank": "Zoek tank...",
+  "tank": "Tank",
+  "tank-hint-optional": "Een tactiek hoort bij de kaart, dus het is alleen waard om het voertuig te noemen wanneer de video ook over het voertuig gaat.",
+  "tank-hint-required": "Een willekeurig gevecht wordt bekeken aan de hand van het voertuig waarin het is gespeeld."
+}

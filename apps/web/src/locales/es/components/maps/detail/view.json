@@ -1,0 +1,9 @@
+{
+  "battle-time": "Tiempo de batalla",
+  "camouflage": "Camuflaje de {camouflage}",
+  "mode": "Modo",
+  "n-random-events": "{count, plural, one {# evento aleatorio} other {# eventos aleatorios}}",
+  "random-events": "Eventos aleatorios",
+  "size": "Tamaño",
+  "team-size": "Tamaño de equipo"
+}

@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Chaque char est noté sur cinq par les joueurs qui le jouent. Un vote ne compte que s’il provient d’un compte ayant réellement engagé ce véhicule au combat, ce qui distingue ce système d’un sondage ouvert à tous.",
+  "no-tank-has-been-rated": "Aucun char n’a encore été noté. Les premiers votes se font sur les pages des chars, dans la section Communauté.",
+  "think": "penser",
+  "title": "Ce qu’en {think} les joueurs",
+  "votes-across-vehicles": "{totalVotes} votes pour {ratedTanks} véhicules."
+}

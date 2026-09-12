@@ -1,0 +1,27 @@
+{
+  "placeholder": "Játékosok, klánok, tankok, pályák vagy kifejezések keresése",
+  "type": "Keresési típus",
+  "types": {
+    "all": "Mind",
+    "players": "Játékosok",
+    "clans": "Klánok",
+    "tanks": "Tankok",
+    "maps": "Pályák",
+    "glossary": "Szótár"
+  },
+  "sections": {
+    "players": "Játékosok",
+    "clans": "Klánok",
+    "tanks": "Tankok",
+    "maps": "Pályák",
+    "glossary": "Szótár",
+    "recent": "Legutóbbiak",
+    "favorites": "Kedvencek"
+  },
+  "searching": "Keresés…",
+  "errored": "Hiba történt. Próbáld újra.",
+  "empty": "Nincs találat",
+  "remove-recent": "Eltávolítás a legutóbbiak közül",
+  "add-favorite": "Hozzáadás a kedvencekhez",
+  "remove-favorite": "Eltávolítás a kedvencekből"
+}

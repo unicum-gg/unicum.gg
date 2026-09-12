@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistike nasumičnih bitaka nadimka {nickname}",
+  "progression": "Napredak {metricLabel} nadimka {nickname}",
+  "solid-line-is-overall-matches": "Puna linija predstavlja ukupni {metricLabel}, što odgovara koloni Ukupno iznad, i polako se mijenja kako se bilježe nove bitke. Isprekidana linija predstavlja {metricLabel2} po sesiji, izračunat na osnovu bitaka odigranih od prethodnog snimka. Prikazuje nizove dobre i loše forme. Boja linije prati nivo rejtinga.",
+  "tanks-shaping-s-rating": "Tenkovi koji oblikuju rejting nadimka {nickname}",
+  "tanks": "Oklopna vozila {nickname}",
+  "stats": "Statistike {strongholdLabel} nadimka {nickname}"
+}

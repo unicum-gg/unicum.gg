@@ -1,0 +1,18 @@
+{
+  "caught-up": "Kaikki on täysin ajan tasalla, kiitos. Kaikki ylimääräinen menee suorituskyvyn parantamiseen ja uusiin ominaisuuksiin.",
+  "covered-label": "Peitetty",
+  "covered-sentence": "Tukijat ovat kattaneet tähän mennessä käytetystä {spent} summasta {received}.",
+  "days-out-of-pocket": "{days} päivää omasta pussista",
+  "from-supporter-one": "{count} tukijalta",
+  "from-supporters": "{count} tukijalta",
+  "gap-growing": "{amount}/kuukausi lisää estää vajeen kasvamisen.",
+  "goal": "tavoite {amount}",
+  "of-that-total": "tuosta kokonaismäärästä",
+  "pledges-cover": "Sitoumukset kattavat nyt kuukausilaskun.",
+  "raised-amount": "{amount} kerätty",
+  "raised-label": "Kerätty",
+  "run-at-a-loss": "{name} on ollut tappiollinen {since} lähtien.",
+  "run-rate": "Kuukausittainen arvio: luvattu {pledged}/kuukausi, toiminnan hinta {cost}/kuukausi.",
+  "spent-since-launch": "Käytetty julkaisusta lähtien",
+  "to-catch-up": "{amount} puuttuu täyteen tavoitteeseen."
+}

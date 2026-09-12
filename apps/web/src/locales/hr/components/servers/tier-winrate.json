@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Ćelija prikazuje pobjede raspona na toj razini u odnosu na njegove bitke, kroz svaki tenk na kojem igrač ima najmanje {minBattles} bitaka, pa opisuje razine onako kako ih igraju igrači koji ih igraju. Ćelije temeljene na manje od {TIERWINRATETHINCELL} bitaka prikazane su blijedo jer se mijenjaju iz razloga koji nisu vještina. Boje predstavljaju iste raspone postotka pobjeda koje web-mjesto koristi svugdje drugdje.",
+  "cell-no-sample": "{where}, nema uzorka",
+  "cell-winrate": "{where}, {winrate} postotak pobjeda u {battles} bitaka",
+  "metric-band": "Raspon {metric}",
+  "nothing-recorded": "Još ništa nije zabilježeno za {metric}. Mreža se obnavlja svake noći.",
+  "over-battles-from-accounts": "{winrate} u {battles} bitaka iz {players} računa",
+  "over-n-battles": "u {battles} bitaka",
+  "what-players-win-by-tier": "Što igrači {label} osvajaju prema razini"
+}

@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Przegląd",
+    "tanks": "Czołgi",
+    "videos": "Filmy",
+    "tournaments": "Turnieje",
+    "manage": "Zarządzaj"
+  },
+  "section-count": "{section} ({count})"
+}

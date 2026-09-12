@@ -1,0 +1,13 @@
+{
+  "heading": "Parhaat pelaajat pelimuodossa <accent>{mode}</accent>",
+  "intro": "{mode} on World of Tanksin battle royale -pelimuoto. {region}-alueen tulostaulukko, rankattuna HR-arvon mukaan, vähintään 100 {mode}-taistelua.",
+  "board": "{count} parasta pelimuodon {mode} pelaajaa",
+  "columns": {
+    "player": "Pelaaja",
+    "battles": "Taisteluita",
+    "survival": "Selviytyminen",
+    "survival-percent": "Selviytyminen %",
+    "damage": "Keskiv. vaurio"
+  },
+  "scale-description": "Pelimuodon {mode} tulostaulukon värirajat, kalibroitu vähintään 100 {mode}-taistelua pelanneiden pelaajien perusteella."
+}

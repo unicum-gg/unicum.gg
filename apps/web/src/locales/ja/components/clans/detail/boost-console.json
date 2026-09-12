@@ -1,0 +1,13 @@
+{
+  "add-workflow": "ワークフローを追加",
+  "boost": "ブースト",
+  "each-workflow-activates-its-reserves": "各ワークフローは、十分なメンバーがライブゲームセッションに入ると、設定した時間帯にリザーブを有効化します。アカウント上で実行されるため、オンラインである必要はありません。必要な数だけ追加できます。",
+  "n-online": "/ {count}人がオンライン",
+  "officer": "オフィサー",
+  "online": "オンライン",
+  "recent-activations": "最近のアクティベーション",
+  "reserve": "リザーブ",
+  "stronghold-boosts": "ストロングホールドブースト",
+  "when": "いつ",
+  "workflow": "ワークフロー"
+}

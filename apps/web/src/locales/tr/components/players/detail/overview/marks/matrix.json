@@ -1,0 +1,7 @@
+{
+  "loading": "{count} seviye {tier} araç, adları yükleniyor…",
+  "loading-one": "{count} seviye {tier} araç, adı yükleniyor…",
+  "and-more": "ve {count} tane daha",
+  "hint": "Tanklar sekmesinde açmak için tıkla",
+  "tier": "Seviye"
+}

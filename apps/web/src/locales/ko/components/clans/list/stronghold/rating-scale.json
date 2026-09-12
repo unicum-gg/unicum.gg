@@ -1,0 +1,17 @@
+{
+  "average": "평균",
+  "bad": "나쁜",
+  "below-avg": "평균 이하",
+  "color-thresholds-for-the-stronghold": "요새 순위표의 색상 기준입니다. 모든 단계에 하나의 절대 척도를 적용하므로 SR 또는 SRB는 어디서나 같은 클랜 수준을 의미합니다.",
+  "excellent": "우수",
+  "good": "좋은",
+  "rating-colors": "등급 색상",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "슈퍼",
+  "tier": "단계",
+  "top": "상위",
+  "very-bad": "매우 나쁨",
+  "very-good": "매우 좋음",
+  "wr": "WR"
+}

@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Oczekiwanie na pierwszy zrzut",
+    "hidden": "Ukryty przez Wargaming",
+    "active_24h": "Aktywny < 24 godz.",
+    "active_7d": "Aktywny < 7 dn.",
+    "recent_30d": "Ostatnio aktywny < 30 dn.",
+    "recent_90d": "Ostatnio aktywny < 90 dn.",
+    "dormant_1y": "Uśpiony < 1 r.",
+    "inactive": "Nieaktywny > 1 r."
+  },
+  "rating-hype": {
+    "overrated": "Przereklamowane",
+    "fair": "W miarę ocenione",
+    "underrated": "Niedoceniane"
+  },
+  "rating-consensus": {
+    "agreed": "Szerokie poparcie",
+    "mixed": "Mieszane opinie",
+    "divisive": "Kontrowersyjne"
+  },
+  "rating-axes": {
+    "overall": "Ogółem",
+    "fun": "Zabawa",
+    "firepower": "Siła ognia",
+    "armour": "Pancerz",
+    "mobility": "Mobilność",
+    "gunHandling": "Obsługa działa",
+    "concealment": "Maskowanie",
+    "beginnerFriendliness": "Przyjazne dla początkujących",
+    "versatility": "Wszechstronność"
+  },
+  "rating-axis-hints": {
+    "overall": "Jak świetna jest ta maszyna, biorąc pod uwagę wszystko?",
+    "fun": "Jak bardzo lubisz nią grać?",
+    "firepower": "Uszkodzenia alfa, uszkodzenia na minutę i penetracja.",
+    "armour": "Jak dobrze odbija pociski przy ukrytym kadłubie i na otwartym terenie.",
+    "mobility": "Prędkość, przyspieszenie i zwrotność.",
+    "gunHandling": "Czas celowania, rozrzut i celność w ruchu.",
+    "concealment": "Kamuflaż i zasięg widzenia.",
+    "beginnerFriendliness": "Jak wiele wybacza, jeśli wciąż się uczysz.",
+    "versatility": "Czy sprawdza się na każdej mapie i w każdej drużynie?"
+  },
+  "voter-brackets": {
+    "unknown": "Bez oceny",
+    "learning": "Uczący się",
+    "average": "Średnia",
+    "strong": "Silny",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Pojazdy",
+    "gunnery": "Strzelanie",
+    "armor": "Pancerz",
+    "mobility": "Mobilność",
+    "vision": "Widzenie",
+    "crew": "Załoga",
+    "progression": "Progresja",
+    "economy": "Ekonomia",
+    "ratings": "Oceny",
+    "statistics": "Statystyki",
+    "modes": "Tryby bitew",
+    "tactics": "Taktyka",
+    "slang": "Słownictwo"
+  }
+}

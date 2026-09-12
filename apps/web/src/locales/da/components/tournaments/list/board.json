@@ -1,0 +1,14 @@
+{
+  "date": "Dato",
+  "featured-tournament": "Fremhævet turnering",
+  "format": "Format",
+  "mode": "Tilstand",
+  "no-tournament-matches-the-current": "Ingen turnering matcher de nuværende filtre.",
+  "nothing-here-right-now-wargaming": "Der er ikke noget her lige nu. Wargaming åbner nye turneringer hver dag, så indholdet kommer tilbage af sig selv.",
+  "prize": "Præmie",
+  "region-tournaments": "Turneringer i {region} ({count})",
+  "status": "Status",
+  "teams": "Hold",
+  "tier": "Niveau",
+  "tournament": "Turnering"
+}

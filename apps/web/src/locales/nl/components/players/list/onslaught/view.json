@@ -1,0 +1,35 @@
+{
+  "heading": "Top spelers in <accent>{mode}</accent>",
+  "intro": "{mode} is de competitieve 7-tegen-7-rangmodus van World of Tanks voor niveau X. Het klassement voor {region}, rechtstreeks uit de ranglijst van het spel zelf.",
+  "season": {
+    "range": "{start} tot {end}",
+    "final": "eindstand",
+    "live": "lopend seizoen",
+    "updated": "bijgewerkt {when}"
+  },
+  "board": "Top {count} spelers in {mode}",
+  "columns": {
+    "player": "Speler",
+    "rank": "Rang",
+    "battles": "Gevechten",
+    "rating": "Rangpunten"
+  },
+  "alias": "(als {nickname})",
+  "ranks": {
+    "title": "Rangen",
+    "meaning": "Betekenis",
+    "tier": "niveau",
+    "intro": "Je stijgt in de rangen van {mode} door gevechten te winnen: elke overwinning levert Rangpunten op op basis van hoe goed je hebt gespeeld. De rang {champion} is de hoogste die je uitsluitend met Rangpunten kunt bereiken. Als je die bereikt, kom je in het klassement. De rang {legend} heeft geen vaste drempel: deze bestaat uit het hoogst beoordeelde deel van de spelers met de rang {champion}, waardoor de grens met het deelnemersveld verschuift. Bij een gelijke stand geeft het aantal gespeelde gevechten de doorslag. De precieze grenswaarden voor de rangen {legend} en {champion} zijn die van het huidige seizoen en staan aangegeven in het klassement.",
+    "legend-blurb": "De spelers met de rang {champion} en de hoogste Beoordeling. Het spel gebruikt hiervoor elk seizoen een vaste positie in het klassement als grens (waardoor het aantal per seizoen en regio verschilt), en geen vast doel in Rangpunten. Zak je onder de laagst geklasseerde speler met de rang {legend}, dan val je terug naar {champion}.",
+    "champion-blurb": "De hoogste rang die je met Rangpunten kunt bereiken en die toegang geeft tot het klassement. Elke speler in het klassement heeft minstens de rang {champion}."
+  },
+  "race": {
+    "title-live": "Wat er nu voor nodig is",
+    "title-ended": "Hoe het seizoen is verlopen",
+    "legend-cutoff": "Grens voor {legend}",
+    "champion-cutoff": "Grens voor {champion}",
+    "ranked-players": "Gerangschikte spelers",
+    "rating-points": "rangpunten",
+    "rank-cutoffs": "Ranggrenzen"
+  }
+}

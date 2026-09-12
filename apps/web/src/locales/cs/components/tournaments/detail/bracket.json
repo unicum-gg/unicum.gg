@@ -1,0 +1,7 @@
+{
+  "group": "Skupina {order}",
+  "n-teams": "{count} týmů",
+  "pts": "b.{",
+  "team": "Tým",
+  "top-n-advance": ", postupuje nejlepších {count}"
+}

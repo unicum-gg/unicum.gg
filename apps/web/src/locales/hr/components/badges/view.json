@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Ljestvica {board}",
+  "carried-beside-a-clan-tag": "Nosi se uz oznaku klana. Grb ranga označava mjesto u natjecanju: broj na njemu označava to mjesto, a boja govori kojoj ljestvici pripada. Ocjene ne donose nijedan grb jer visoka ocjena WN8 nije nešto što klan osvaja.",
+  "clan-badges": "Bedževi klana",
+  "clan-board": {
+    "name": "{board}, među prvih {rank}",
+    "how": "Mjesto među prvih {rank} na ljestvici {board}. Zadržava se dok klan drži to mjesto, a gubi kada ga više ne drži."
+  },
+  "clan-overflow": "Klan koji drži više od tri mjesta ostatak prikazuje u grbu {plus}, počevši od najboljeg, kako bi oznaka ostala čitljiva. Zadržite pokazivač iznad njega da biste vidjeli njihove nazive.",
+  "featured-tournament-winner": {
+    "name": "Istaknuti pobjednik turnira",
+    "how": "Isto kao prethodno, osvojeno na događaju koji je Wargaming označio kao istaknuti. Zlato umjesto čelika, točno kao na strani igrača."
+  },
+  "heading": "Svaka {badge} i kako je zaraditi",
+  "heading-accent": "značka",
+  "marks-carried-beside-a-nickname": "Značke koje se nose uz nadimak gdje god se pojavljuje na platformi {NAME}: ljestvice, sastavi klanova, pretraživanje i turnirske tablice.",
+  "n-badges": "{count} znački",
+  "onslaught-champion": {
+    "name": "ŠAMPION Navale",
+    "how": "Dosegnut je čin prvaka u Navali, što je potrebno da bi se uopće pojavio na {standings}. Nakon toga se zadržava: ocjena koja ponovno padne ispod praga zauzima mjesto, a ne činjenica da je čin bio ostvaren."
+  },
+  "onslaught-legend": {
+    "name": "Navala legenda",
+    "how": "Držano je mjesto unutar sezonskog praga Legende, što je položaj, a ne rezultat: istodobno postoji samo ograničen broj takvih mjesta, a prag se procjenjuje prema sezoni u kojoj je mjesto držano. Ljubičasto umjesto čelično plave, u boji kojom sama ljestvica prikazuje Legendu."
+  },
+  "player-badges": "Bedževi igrača",
+  "player-overflow": "Igrač koji nosi više od tri značke ostatak prikazuje u grbu {plus}, navedenim redoslijedom, kako bi nadimak ostao čitljiv u tablici. Zadržite pokazivač iznad njega da biste vidjeli nazive, a svaka značka i dalje vodi na isto mjesto kao i njezin zasebni grb.",
+  "ranked-standings": "rangirane ljestvice",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Twitch kanal povezan s računom. Povežite Twitch na vlastitom profilu kako biste ga potvrdili, a grb će voditi na vaš kanal. Prikazuje jeste li uživo ili ne."
+  },
+  "streamer-who-is-on-air": "Streamer koji emitira uživo nosi i crvenu oznaku LIVE. Ona se ne zarađuje i ne zadržava: pojavljuje se kada prijenos započne i nestaje kada završi, pa se nikad ne spaja s ostatkom.",
+  "support-subscription": "potpora pretplata",
+  "supporter": {
+    "name": "Podržavatelj"
+  },
+  "supporter-note": "Aktivna {link}, javno vidljiva. Podržavatelji koji odluče ostati anonimni ne nose značku, vlastitim izborom.",
+  "the-marks-a-player-or": "Značke koje igrač ili klan mogu nositi na platformi {NAME}, što svaka znači i točno što je potrebno za njezino dobivanje.",
+  "tournament-winner": {
+    "name": "Pobjednik turnira",
+    "how": "Tim pripisan klanu osvojio je turnir. Wargaming bilježi timove i račune, nikad klanove, pa se pripadnost utvrđuje usporedbom svakog sastava s članstvom u klanu kakvo je bilo na dan igranja."
+  },
+  "verified": {
+    "name": "Potvrđeno",
+    "how": "Vlasnik se prijavio svojim Wargaming.net ID-om i povezao ovaj račun. Prijava je jedini zahtjev i ništa ne košta."
+  }
+}

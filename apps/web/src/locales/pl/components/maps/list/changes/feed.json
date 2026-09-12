@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# mapa} few {# mapy} many {# map} other {# map}}",
+  "no-map-changes-have-been": "Nie odnotowano jeszcze żadnych zmian na mapach. W miarę jak Wargaming przerabia mapy, tutaj będą pojawiać się informacje o zmianach wprowadzonych w każdej aktualizacji.",
+  "update": "Odśwież {version}"
+}

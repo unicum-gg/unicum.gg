@@ -1,0 +1,11 @@
+{
+  "compare": "Porovnat s {count} nejpodobnějšími tanky",
+  "match": "bitva",
+  "subtitle": "Stejné postavení v rámci vlastní úrovně",
+  "verdict": {
+    "overall": "Celkově podobné",
+    "closest": "Největší podobnost: {axes}",
+    "closest-furthest": "Největší podobnost: {axes}, největší rozdíl: {apart}",
+    "and": " a "
+  }
+}

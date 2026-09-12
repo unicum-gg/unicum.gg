@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# char} other {# chars}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Aucune modification de char n’a encore été enregistrée. À mesure que Wargaming rééquilibrera les chars, les améliorations et les réductions de puissance de chaque mise à jour apparaîtront ici.",
+  "update": "Mise à jour {version}"
+}

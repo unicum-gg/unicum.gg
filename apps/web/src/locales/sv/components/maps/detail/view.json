@@ -1,0 +1,9 @@
+{
+  "battle-time": "Stridstid",
+  "camouflage": "{camouflage} kamouflage",
+  "mode": "Läge",
+  "n-random-events": "{count, plural, one {# slumpmässigt evenemang} other {# slumpmässiga evenemang}}",
+  "random-events": "Slumpevenemang",
+  "size": "Storlek",
+  "team-size": "Lagstorlek"
+}

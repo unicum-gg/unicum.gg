@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} mga laban dito",
+  "damage": "{damage} pinsala",
+  "n-marks": "{count, plural, one {# marka} other {# mga marka}}",
+  "no-written-opinions-yet-if": "Wala pang nakasulat na opinyon. Kung mayroon kang mga laban, magiging una ang sa iyo.",
+  "win-rate": "{toFixed}% rate ng panalo",
+  "written-on": "isinulat noong {gameVersion}"
+}

@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Every one of the {count} World of Tanks vehicles on {region}. Filter by tier, nation, class and role, then open a tank for its stats, best players and expected values.",
+    "title": "All World of Tanks tanks ({region}), browse every vehicle",
+    "description": "Browse every World of Tanks tank on {region}: filter by tier, nation, class and role, then dive into per-tank stats, top players and expected values.",
+    "heading": "All <accent>tanks</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, penetration, armour, view range and mobility for all {count} World of Tanks vehicles on {region}. Sort on any column, then filter by tier, nation, class and role.",
+    "title": "World of Tanks tank specifications ({region}), compare every vehicle",
+    "description": "Compare the specifications of every World of Tanks tank on {region}: DPM, penetration, armour, view range and mobility, sortable and filterable by tier, nation, class and role.",
+    "heading": "Tank <accent>specifications</accent>"
+  },
+  "economics": {
+    "intro": "Purchase and repair costs, shell prices and credit earnings for all {count} World of Tanks vehicles on {region}. Sort on any column, then filter by tier, nation, class and role.",
+    "title": "World of Tanks tank economics ({region}), credits and XP costs",
+    "description": "Credit and XP costs, repair and shell prices for every World of Tanks tank on {region}, sortable and filterable by tier, nation, class and role.",
+    "heading": "Tank <accent>economics</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Moving-average damage needed for one, two and three marks on all {count} World of Tanks vehicles on {region}. Sort on any column, then filter by tier, nation, class and role.",
+    "title": "World of Tanks marks of excellence requirements ({region})",
+    "description": "Damage needed for one, two and three marks of excellence on every World of Tanks tank on {region}, sortable and filterable by tier, nation, class and role.",
+    "heading": "<accent>Marks of Excellence</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Ace Tanker and mastery badge XP thresholds for all {count} World of Tanks vehicles on {region}. Sort on any column, then filter by tier, nation, class and role.",
+    "title": "World of Tanks marks of mastery requirements ({region})",
+    "description": "Ace Tanker and mastery badge XP thresholds for every World of Tanks tank on {region}, sortable and filterable by tier, nation, class and role.",
+    "heading": "<accent>Marks of Mastery</accent>"
+  },
+  "videos": {
+    "intro": "{count} battles the community has linked on {region}, each opening at the second it starts. Suggested from the tank pages, and checked before they show up here.",
+    "title": "World of Tanks gameplay videos ({region})",
+    "description": "Community-suggested World of Tanks battles on {region}, each opening at the second it starts: the tank played, the map, the side of it and how the battle ended.",
+    "heading": "Gameplay <accent>videos</accent>"
+  }
+}

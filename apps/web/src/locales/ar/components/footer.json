@@ -1,0 +1,25 @@
+{
+  "tagline": "صُنع لمجتمع World of Tanks. إحصائيات مجانية لكل لاعب وعشيرة ودبابة وخريطة عبر EU وNA وAsia.",
+  "columns": {
+    "leaderboards": "لوحات الترتيب",
+    "tanks": "دبابات",
+    "maps": "خرائط",
+    "integrations": "عمليات التكامل",
+    "project": "المشروع"
+  },
+  "links": {
+    "top-tanks": "أفضل الدبابات",
+    "bot": "بوت ديسكورد",
+    "mcp": "خادم MCP",
+    "docs": "وثائق API",
+    "badges": "شارات",
+    "glossary": "مسرد المصطلحات",
+    "coverage": "التغطية",
+    "support": "ادعمنا",
+    "source": "الشفرة المصدرية",
+    "status": "حالة",
+    "discord": "Discord"
+  },
+  "disclaimer": "غير تابع لـ Wargaming",
+  "cookies": "إدارة ملفات تعريف الارتباط"
+}

@@ -1,0 +1,11 @@
+{
+  "closes": "{when}에 닫기",
+  "map-pool": "맵 풀",
+  "place": "순위",
+  "prize": "상",
+  "prizes": "상들",
+  "qualified": "진출 ({count})",
+  "register": "등록",
+  "tournaments": "토너먼트",
+  "winner": "{count, plural, other {승자}}"
+}

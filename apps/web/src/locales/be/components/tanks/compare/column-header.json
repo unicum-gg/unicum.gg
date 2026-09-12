@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Боепрыпасы, абсталяванне, расходнікі, дырэктывы, экіпаж і прагрэс для гэтага слупка. Кожная змена змяняе яго характарыстыкі ў параўнанні справа.",
+  "ammunition-equipment-crew-and-progression": "Боепрыпасы, абсталяванне, экіпаж і прагрэс",
+  "apply-to-every-column": "Ужыць да кожнага слупка",
+  "compare-against": "Параўнаць з {tank}",
+  "compare-the-others-against-this-one": "Параўнаць астатнія з гэтым",
+  "configure-tank": "Наладзіць {tank}",
+  "highest-overall-score": "Найвышэйшы агульны вынік",
+  "highest-overall-score-of-this": "Найвышэйшы агульны вынік гэтага параўнання",
+  "is-the-reference": "Эталон: {tank}",
+  "overall": "У цэлым",
+  "reference-column": "Эталонны слупок",
+  "remove-tank": "Выдаліць {tank}",
+  "reset-all": "Скінуць усё",
+  "setup": "Наладка",
+  "stock": "Стандартны",
+  "tank-setup": "Зборка {tank}",
+  "top": "Лепшыя",
+  "where-this-vehicle-sits-across": "Месца гэтай машыны ва ўсім каталогу з {MAXSCORE}: сярэдняе значэнне яе чатырох катэгорый, наладжаных тут. Гэта зводка, а не прысуд. Разведчык і цяжкі танк могуць атрымаць аднолькавы вынік, добра спраўляючыся з рознымі задачамі."
+}

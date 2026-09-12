@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Ammunisyon, equipment, consumable, directive, crew at progression para sa kolum na ito. Ang bawat pagbabago ay gumagalaw sa mga katangian nito sa paghahambing sa likod.",
+  "ammunition-equipment-crew-and-progression": "Ammunisyon, equipment, crew at progression",
+  "apply-to-every-column": "Ilapat sa bawat kolum",
+  "compare-against": "Ihambing laban sa {tank}",
+  "compare-the-others-against-this-one": "Ihambing ang iba laban dito",
+  "configure-tank": "I-configure ang {tank}",
+  "highest-overall-score": "Pinakamataas na pangkalahatang score",
+  "highest-overall-score-of-this": "Pinakamataas na pangkalahatang score ng paghahambing na ito",
+  "is-the-reference": "Reference ang {tank}",
+  "overall": "Pangkalahatan",
+  "reference-column": "Reference na kolum",
+  "remove-tank": "Alisin ang {tank}",
+  "reset-all": "I-reset lahat",
+  "setup": "I-set up",
+  "stock": "Stock",
+  "tank-setup": "Setup ng {tank}",
+  "top": "Nangungunang",
+  "where-this-vehicle-sits-across": "Kung saan nakapuwesto ang sasakyang ito sa buong katalogo, mula sa {MAXSCORE}: ang average ng apat nitong category score, ayon sa pagkaka-configure rito. Buod ito, hindi hatol. Maaaring makakuha ng parehong numero ang scout at heavy dahil mahusay sila sa magkakaibang bagay."
+}

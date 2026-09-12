@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "等待第一次快照",
+    "hidden": "已被 Wargaming 隐藏",
+    "active_24h": "活跃 < 24小时",
+    "active_7d": "活跃 < 7天",
+    "recent_30d": "近期 < 30天",
+    "recent_90d": "近期 < 90天",
+    "dormant_1y": "休眠 < 1年",
+    "inactive": "不活跃 > 1年"
+  },
+  "rating-hype": {
+    "overrated": "被高估",
+    "fair": "公正评价",
+    "underrated": "被低估"
+  },
+  "rating-consensus": {
+    "agreed": "广泛一致",
+    "mixed": "意见不一",
+    "divisive": "有争议"
+  },
+  "rating-axes": {
+    "overall": "总体",
+    "fun": "乐趣",
+    "firepower": "火力",
+    "armour": "装甲",
+    "mobility": "机动",
+    "gunHandling": "炮械操作",
+    "concealment": "隐蔽",
+    "beginnerFriendliness": "适合初学者",
+    "versatility": "多样性"
+  },
+  "rating-axis-hints": {
+    "overall": "综合来看，这辆坦克有多强？",
+    "fun": "你有多喜欢驾驶它？",
+    "firepower": "单发伤害、每分钟伤害和穿透力。",
+    "armour": "跳弹能力、卖头能力以及开阔地形中的表现。",
+    "mobility": "速度、加速度和转向能力。",
+    "gunHandling": "瞄准时间、散布和移动中的精度。",
+    "concealment": "伪装和视野范围。",
+    "beginnerFriendliness": "即使你仍在学习，它有多容易容错。",
+    "versatility": "它能适应任何地图和任何队伍吗？"
+  },
+  "voter-brackets": {
+    "unknown": "未评分",
+    "learning": "学习中",
+    "average": "平均值",
+    "strong": "强大的",
+    "unicum": "无可替代的"
+  },
+  "glossary-categories": {
+    "vehicles": "坦克",
+    "gunnery": "炮击",
+    "armor": "装甲",
+    "mobility": "机动",
+    "vision": "视野",
+    "crew": "乘员",
+    "progression": "进展",
+    "economy": "经济",
+    "ratings": "评分",
+    "statistics": "统计",
+    "modes": "战斗模式",
+    "tactics": "战术",
+    "slang": "俚语"
+  }
+}

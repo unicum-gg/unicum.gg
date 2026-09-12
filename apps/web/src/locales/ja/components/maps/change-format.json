@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "プレイエリアの幅",
+    "height": "プレイエリアの高さ",
+    "round-length": "戦闘タイマー",
+    "team-size": "チームサイズ",
+    "camouflage": "シーズン",
+    "presence": "ゲーム内",
+    "variant-version": "{type}バージョン",
+    "play-area": "プレイエリア",
+    "bases-team1": "味方拠点",
+    "bases-team2": "敵チーム拠点",
+    "spawns-team1": "味方出撃地点",
+    "spawns-team2": "敵チーム出撃地点",
+    "control-point": "制圧ポイント",
+    "artillery-headquarters": "自走砲本部",
+    "comms-centers": "通信センター",
+    "observation-posts": "観測所",
+    "points-of-interest": "戦術サークル"
+  },
+  "summary": {
+    "added": "{name}を追加",
+    "removed": "{name}を削除済み",
+    "added-to-game": "ゲーム内に追加",
+    "removed-from-game": "ゲームから削除済み",
+    "added-on-test": "テストクライアントに追加",
+    "removed-on-test": "テストクライアントから削除済み",
+    "mode-added": "{name}モードを追加",
+    "mode-removed": "{name}モードを削除済み",
+    "now-played-in": "{name}でプレイされるようになりました",
+    "no-longer-played-in": "{name}ではプレイされなくなりました",
+    "event-added": "{name}が戦闘中に発生するようになりました",
+    "event-removed": "{name}は発生しなくなりました",
+    "moved": "{name}を移動",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name}（{mode}）"
+}

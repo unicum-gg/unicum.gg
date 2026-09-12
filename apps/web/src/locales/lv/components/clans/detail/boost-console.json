@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Pievienot darba plūsmu",
+  "boost": "Palielināt",
+  "each-workflow-activates-its-reserves": "Katra darbplūsma aktivizē savas rezerves noteiktā laika logā, kad pietiekami daudz biedru atrodas aktīvā spēles sesijā. Tā darbojas jūsu kontā, jums nav jābūt tiešsaistē. Pievienojiet tik daudz, cik nepieciešams.",
+  "n-online": "/ {count} tiešsaistē",
+  "officer": "Virsnieks",
+  "online": "Tiešsaistē",
+  "recent-activations": "nesenie aktivizējumi",
+  "reserve": "Rezerve",
+  "stronghold-boosts": "Cietokšņa uzlabojumi",
+  "when": "Kad",
+  "workflow": "Darba plūsma"
+}

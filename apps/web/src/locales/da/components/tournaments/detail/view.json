@@ -1,0 +1,11 @@
+{
+  "closes": "Lukker {when}",
+  "map-pool": "Kortpulje",
+  "place": "Plads",
+  "prize": "Præmie",
+  "prizes": "Præmier",
+  "qualified": "Kvalificerede ({count})",
+  "register": "Registrer",
+  "tournaments": "Turneringer",
+  "winner": "{count, plural, one {Vinder} other {Vindere}}"
+}

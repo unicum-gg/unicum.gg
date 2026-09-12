@@ -1,0 +1,37 @@
+{
+  "label": "เพิ่มเติม",
+  "items": {
+    "tournaments": {
+      "label": "ทัวร์นาเมนต์",
+      "description": "สายการแข่งขัน รายชื่อผู้เล่น และผลการแข่งขัน แยกตามภูมิภาค"
+    },
+    "servers": {
+      "label": "เซิร์ฟเวอร์",
+      "description": "ผู้เล่นออนไลน์ ทั้งในขณะนี้และตามช่วงเวลา"
+    },
+    "bot": {
+      "label": "บอท Discord",
+      "description": "สถิติผู้เล่น แคลน และรถถังในรูปแบบคำสั่ง slash"
+    },
+    "mcp": {
+      "label": "MCP เซิร์ฟเวอร์",
+      "description": "เชื่อมต่อ Claude, ChatGPT หรือไคลเอนต์ MCP ใด ๆ"
+    },
+    "api": {
+      "label": "API",
+      "description": "REST API สาธารณะฟรี ไม่ต้องใช้คีย์"
+    },
+    "badges": {
+      "label": "เหรียญตรา",
+      "description": "ตราสัญลักษณ์ทุกแบบที่ผู้เล่นหรือแคลนรับได้ และวิธีรับ"
+    },
+    "glossary": {
+      "label": "พจนานุกรม",
+      "description": "คำศัพท์ World of Tanks ทุกคำพร้อมคำอธิบาย"
+    },
+    "support": {
+      "label": "สนับสนุนเรา",
+      "description": "ช่วยให้ {name} ฟรี เปิด และไม่มีโฆษณา"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Επισκόπηση",
+    "tanks": "Τανκς",
+    "sessions": "Συνεδρίες",
+    "achievements": "Επιτεύγματα",
+    "tournaments": "Τουρνουά",
+    "value": "Αξία"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

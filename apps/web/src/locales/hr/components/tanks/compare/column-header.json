@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Streljivo, oprema, potrošni materijali, direktive, posada i napredovanje za ovaj stupac. Svaka promjena pomiče njegove karakteristike u usporedbi u pozadini.",
+  "ammunition-equipment-crew-and-progression": "Streljivo, oprema, posada i napredovanje",
+  "apply-to-every-column": "Primijeni na svaki stupac",
+  "compare-against": "Usporedi protiv {tank}",
+  "compare-the-others-against-this-one": "Usporedi ostale s ovim",
+  "configure-tank": "Konfiguriraj {tank}",
+  "highest-overall-score": "Najviši ukupni rezultat",
+  "highest-overall-score-of-this": "Najviši ukupni rezultat ove usporedbe",
+  "is-the-reference": "Referenca: {tank}",
+  "overall": "Sveukupno",
+  "reference-column": "Referentni stupac",
+  "remove-tank": "Ukloni {tank}",
+  "reset-all": "Ponovno postavi sve",
+  "setup": "Postavljanje",
+  "stock": "Zalihe",
+  "tank-setup": "Konfiguracija: {tank}",
+  "top": "Najbolji",
+  "where-this-vehicle-sits-across": "Mjesto ovog vozila u cijelom katalogu, od ukupno {MAXSCORE}: prosjek njegova četiri rezultata kategorija, prema ovdje postavljenoj konfiguraciji. Sažetak, a ne presuda. Izviđač i teški tenk mogu doći do istog broja tako što su dobri u različitim stvarima."
+}

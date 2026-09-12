@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "모든 투표는 이 전차를 플레이한 계정에서 나왔습니다.",
+  "every-vote-played-average": "모든 투표는 이 전차를 플레이한 계정에서 나왔으며, 평균 {battles}회 전투를 기록했습니다.",
+  "fun": "재미",
+  "how-good-the-tank-is": "전차의 성능",
+  "how-much-people-enjoy-it": "사람들이 얼마나 즐기는지",
+  "if-you-have-played-it": "플레이해 본 적이 있다면 이 페이지가 바로 기다리던 사람입니다.",
+  "nobody-has-rated-this-tank": "아직 이 전차를 평가한 사람이 없습니다.",
+  "overall": "전체",
+  "votes": "{count} 투표",
+  "votes-one": "{count} 투표"
+}

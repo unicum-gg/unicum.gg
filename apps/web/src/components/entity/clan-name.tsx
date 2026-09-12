@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import type { ClanBoard } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";

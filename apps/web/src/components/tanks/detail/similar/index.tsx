@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import Link from "@/components/link";
 import { ArrowRight } from "lucide-react";
 import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
@@ -16,6 +18,8 @@ import { MAX_COMPARE_TANKS } from "@/constants/compare";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { SimilarTankRow } from "@/app/api/[region]/tanks/[slug]/similar/schema.api";
+import { useTranslation } from "@/hooks/use-translation";
+import { tankParamName } from "@/components/game-name";
 
 /**
  * The vehicles that play like this one.
@@ -42,13 +46,15 @@ export function SimilarTanks({
   tankName: string;
   results: SimilarTankRow[];
 }) {
+  const { t: tSim } = useTranslation("components/tanks/detail/similar");
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
   if (results.length === 0) return null;
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <PanelTitle>Tanks like the {tankName}</PanelTitle>
+        <PanelTitle>{tSection("similar", { tank: tankName })}</PanelTitle>
         <span className="text-xs text-fd-muted-foreground">
-          Same standing among their own tier
+          {tSim("subtitle")}
         </span>
       </PanelHeader>
       <PanelContent className="px-4 py-4">
@@ -172,21 +178,27 @@ function Verdict({
   closest: TankAxis[];
   furthest: TankAxis | null;
 }) {
+  const { t: tSim } = useTranslation("components/tanks/detail/similar");
+  const { t: tParams } = useTranslation("game/tank-params");
   // Looked up defensively, though the type says it cannot miss. These rows
   // crossed HTTP as plain strings and are served from a day-long cache, so a
   // renamed axis would arrive here as a value the label map has never heard of,
   // and an unguarded `.toLowerCase()` on the miss would take down the whole
   // Specifications tab rather than one line of copy.
-  const alike = closest.map((axis) => TANK_AXIS_LABEL[axis]?.toLowerCase()).filter(Boolean);
-  if (alike.length === 0) return <>Similar overall</>;
+  const axisName = (axis: TankAxis) =>
+    tankParamName(axis, TANK_AXIS_LABEL[axis] ?? axis, tParams).toLowerCase();
+  const alike = closest.map(axisName).filter(Boolean);
+  if (alike.length === 0) return <>{tSim("verdict.overall")}</>;
   const apart =
     furthest && !closest.includes(furthest)
-      ? (TANK_AXIS_LABEL[furthest]?.toLowerCase() ?? null)
+      ? axisName(furthest)
       : null;
+  const axes = alike.join(` ${tSim("verdict.and")} `);
   return (
     <>
-      Closest on {alike.join(" and ")}
-      {apart ? `, furthest on ${apart}` : null}
+      {apart
+        ? tSim("verdict.closest-furthest", { axes, apart })
+        : tSim("verdict.closest", { axes })}
     </>
   );
 }
@@ -194,13 +206,14 @@ function Verdict({
 /** How close the match is. Kept as a plain number with its unit spelled out:
  * a bar or a ring would suggest a precision this measurement does not have. */
 function MatchScore({ score }: { score: number }) {
+  const { t: tSim } = useTranslation("components/tanks/detail/similar");
   return (
     <div className="absolute right-2 top-2 z-10 rounded-md bg-black/55 px-2 py-1 text-right leading-none backdrop-blur-sm">
       <div className="text-sm font-semibold tabular-nums text-white">
         {score}%
       </div>
       <div className="mt-0.5 text-[9px] uppercase tracking-wide text-white/60">
-        match
+        {tSim("match")}
       </div>
     </div>
   );
@@ -222,6 +235,7 @@ function CompareLink({
   slug: string;
   results: SimilarTankRow[];
 }) {
+  const { t: tSim } = useTranslation("components/tanks/detail/similar");
   // The vehicle itself takes the first column, so the comparison holds one
   // fewer match than it does vehicles.
   const against = results.slice(0, MAX_COMPARE_TANKS - 1);
@@ -236,7 +250,7 @@ function CompareLink({
         href={href}
         className="inline-flex items-center gap-1.5 text-xs text-fd-muted-foreground transition-colors hover:text-fd-foreground"
       >
-        Compare with the {against.length} closest
+        {tSim("compare", { count: against.length })}
         <ArrowRight className="size-3.5" />
       </Link>
     </div>

@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Огляд",
+    "tanks": "Танки",
+    "videos": "Відео",
+    "tournaments": "Турніри",
+    "manage": "Керувати"
+  },
+  "section-count": "{section} ({count})"
+}

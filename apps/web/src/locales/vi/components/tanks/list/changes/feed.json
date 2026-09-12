@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, other {# xe tăng}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Chưa ghi nhận thay đổi nào về xe tăng. Khi Wargaming cân bằng lại xe tăng, các tăng giảm của mỗi bản cập nhật sẽ xuất hiện ở đây.",
+  "update": "Cập nhật {version}"
+}

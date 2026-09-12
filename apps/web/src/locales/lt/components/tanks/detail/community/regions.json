@@ -1,0 +1,3 @@
+{
+  "n-votes": "{count, plural, one {# balsuoti} few {# balsai} other {# balsai}}"
+}

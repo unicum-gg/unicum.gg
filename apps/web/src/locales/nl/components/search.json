@@ -1,0 +1,27 @@
+{
+  "placeholder": "Zoek spelers, clans, tanks, maps of termen",
+  "type": "Zoeken type",
+  "types": {
+    "all": "Allen",
+    "players": "Spelers",
+    "clans": "Clans",
+    "tanks": "Tanks",
+    "maps": "Kaarten",
+    "glossary": "Glossarium"
+  },
+  "sections": {
+    "players": "Spelers",
+    "clans": "Clans",
+    "tanks": "Tanks",
+    "maps": "Kaarten",
+    "glossary": "Glossarium",
+    "recent": "Recent",
+    "favorites": "Favorieten"
+  },
+  "searching": "Zoeken…",
+  "errored": "Er is iets misgegaan. Probeer het opnieuw.",
+  "empty": "Geen resultaten gevonden",
+  "remove-recent": "Uit recente zoekopdrachten verwijderen",
+  "add-favorite": "Aan favorieten toevoegen",
+  "remove-favorite": "Van favorieten verwijderen"
+}

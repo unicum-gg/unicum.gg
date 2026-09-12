@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
 import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import {
   CaretDownIcon,
@@ -10,7 +13,7 @@ import { toRoman } from "roman-numerals";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { TableCell, TableHead } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { intFmt, type MetricCell, ratingCell } from "./cells";
+import { INT_FORMAT, type MetricCell, ratingCell } from "./cells";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -147,6 +150,7 @@ export function VehicleLabelCell({
 }
 
 export function IntegerCell({ value }: { value: number | null }) {
+  const { locale } = useLocale();
   return (
     <TableCell
       className={cn(
@@ -154,7 +158,7 @@ export function IntegerCell({ value }: { value: number | null }) {
         (value === null || value === 0) && "text-muted-foreground",
       )}
     >
-      {value !== null && value > 0 ? intFmt.format(value) : "—"}
+      {value !== null && value > 0 ? numberFormat(locale, INT_FORMAT).format(value) : "—"}
     </TableCell>
   );
 }

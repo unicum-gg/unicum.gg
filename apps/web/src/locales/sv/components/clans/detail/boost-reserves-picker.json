@@ -1,0 +1,6 @@
+{
+  "active-until": "Aktiv fram till {tz}",
+  "n-left": "{count} kvar",
+  "no-reserves-in-stock-right": "Inga reserver i lager just nu.",
+  "reserves-to-activate": "Reserver att aktivera"
+}

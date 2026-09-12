@@ -1,0 +1,11 @@
+{
+  "closes": "Bezárás {when}",
+  "map-pool": "Térképkészlet",
+  "place": "Helyezés",
+  "prize": "Díj",
+  "prizes": "Díjak",
+  "qualified": "Továbbjutott ({count})",
+  "register": "Regisztráció",
+  "tournaments": "Tornák",
+  "winner": "{count, plural, one {Győztes} other {Győztesek}}"
+}

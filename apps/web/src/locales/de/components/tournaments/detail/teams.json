@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Durchschnitt über {rated} von {size} Spielern",
+  "average-over-recent": "Durchschnitt über die {rated} von {size} Spielern, die in den letzten 30 Tagen gespielt haben",
+  "metric-over-last-30-days": "{metric} in den letzten 30 Tage",
+  "n-confirmed": "{count} bestätigt",
+  "no-team-matches-the-current": "Kein Team entspricht den aktuellen Filtern.",
+  "no-teams-recorded-yet-registrations": "Noch keine Teams erfasst. Anmeldungen erscheinen hier, sobald dieses Turnier vollständig eingelesen wurde. Dies geschieht innerhalb weniger Minuten nach der Freischaltung.",
+  "none-played-in-30-days": "Gespielt hat niemand aus dieser Aufstellung in den letzten 30 Tage",
+  "players": "Spieler",
+  "qualified": "Qualifiziert",
+  "reward": "Belohnung",
+  "team": "Team",
+  "teams": "Teams ({length})",
+  "wr": "WR"
+}

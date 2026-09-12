@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Munizioni, equipaggiamento, consumabili, direttive, equipaggio e progressione per questa colonna. Ogni modifica aggiorna le relative caratteristiche nel confronto sottostante.",
+  "ammunition-equipment-crew-and-progression": "Munizioni, equipaggiamento, equipaggio e progressione",
+  "apply-to-every-column": "Applica a tutte le colonne",
+  "compare-against": "Confronta contro {tank}",
+  "compare-the-others-against-this-one": "Confronta gli altri contro questo",
+  "configure-tank": "Configura {tank}",
+  "highest-overall-score": "Punteggio complessivo più alto",
+  "highest-overall-score-of-this": "Punteggio complessivo più alto di questo confronto",
+  "is-the-reference": "{tank} è il riferimento",
+  "overall": "Globale",
+  "reference-column": "Colonna di riferimento",
+  "remove-tank": "Rimuovi {tank}",
+  "reset-all": "Ripristina tutto",
+  "setup": "Setup",
+  "stock": "Stock",
+  "tank-setup": "Configurazione di {tank}",
+  "top": "Migliori",
+  "where-this-vehicle-sits-across": "Posizione di questo veicolo nell’intero catalogo, su {MAXSCORE}: la media dei punteggi delle sue quattro categorie, in base alla configurazione impostata qui. È un riepilogo, non un verdetto: un veicolo da ricognizione e un carro pesante possono ottenere lo stesso punteggio eccellendo in ambiti diversi."
+}

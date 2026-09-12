@@ -17,6 +17,7 @@ import {
 } from "@/components/panel";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 // The full standings are pulled once and paginated client-side (matches the
 // server default). The API caps at its own max.
@@ -47,6 +48,7 @@ export function OnslaughtBoardLive({
   initial: OnslaughtData;
   initialHistory: HistoryData | null;
 }) {
+  const { t } = useTranslation("components/players/list/onslaught/view");
   const params = useSearchParams();
   const seasonParam = params.get("season");
   const currentId = initial.season?.eventId ?? null;
@@ -157,7 +159,7 @@ export function OnslaughtBoardLive({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Ranks</PanelTitle>
+          <PanelTitle>{t("ranks.title")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <OnslaughtRankScale

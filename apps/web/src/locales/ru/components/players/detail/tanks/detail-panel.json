@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Средний результат за бой",
+  "general-parameters": "Общие параметры",
+  "metric-progression": "Прогресс {metric}",
+  "not-enough-history-on-this": "По этому танку пока недостаточно истории. Для построения строки нужны минимум два снимка за последние 90 дней.",
+  "record-score": "Рекордные показатели",
+  "updated": "Обновлено"
+}

@@ -1,0 +1,12 @@
+{
+  "slot": "Platz {n}",
+  "slot-filled": "Platz {n}: {name}",
+  "consumable-slot": "Verbrauchsmaterialplatz {n}",
+  "consumable-slot-filled": "Verbrauchsmaterialplatz {n}: {name}",
+  "level": "Stufe {n}",
+  "stock": "Standard",
+  "specialize": "Klicken, um diesen Platz zu spezialisieren.",
+  "clear-specialization": "Klicken, um die Spezialisierung dieses Platzes aufzuheben.",
+  "crew-skills": "Besatzungsfertigkeiten",
+  "shell-aria": "{name}: {damage} Schaden, {penetration} mm Durchschlag"
+}

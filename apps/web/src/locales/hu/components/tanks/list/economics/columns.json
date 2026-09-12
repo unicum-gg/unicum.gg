@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Költség (credit)",
+      "tip": "Vételár kreditben (technológiai fa tankjai)"
+    },
+    "buyGold": {
+      "label": "Költség (arany)",
+      "tip": "Vételár aranyban (prémium tankok)"
+    },
+    "researchXp": {
+      "label": "Kutatási XP",
+      "tip": "Feloldáshoz szükséges XP (legolcsóbb útvonal)"
+    },
+    "totalFreeXp": {
+      "label": "Szabad XP (T{tier})",
+      "tip": "A {tier}. szinttől a kutatáshoz szükséges összesített XP, az előfeltétel-modulokkal együtt"
+    },
+    "shellCost": {
+      "label": "Lőszer költség",
+      "tip": "Alap lövedékár (kredit)"
+    },
+    "ammoCost": {
+      "label": "Teljes lőszer költség",
+      "tip": "Alap lövedékár × lőszerkapacitás"
+    },
+    "acquireMoney": {
+      "label": "Vásárlási költség ({currency})",
+      "tip": "A tank megszerzéséhez szükséges becsült valódi pénz (kutatás + vásárlás), {currency} pénznemben"
+    },
+    "freeXpMoney": {
+      "label": "Szabad XP ({currency})",
+      "tip": "A tank szabad XP-vel történő fejlesztésének becsült valódi pénzköltsége a(z) {tier}. szintről, {currency} pénznemben"
+    }
+  },
+  "selector": {
+    "buyCredits": "Költség (credit)",
+    "buyGold": "Költség (arany)",
+    "researchXp": "Kutatási XP",
+    "totalFreeXp": "Ingyen XP",
+    "shellCost": "Lőszer költség",
+    "ammoCost": "Teljes lőszer költség",
+    "acquireMoney": "Vásárlási költség (pénz)",
+    "freeXpMoney": "Ingyen XP (pénz)"
+  }
+}

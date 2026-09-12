@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -29,6 +30,7 @@ export function StrongholdTab({
   color: string;
   stronghold: ClanStrongholdView;
 }) {
+  const { t } = useTranslation("components/clans/detail/overview/stronghold");
   return (
     <>
       <PanelSeparator />
@@ -36,8 +38,7 @@ export function StrongholdTab({
         <PanelHeader>
           <PanelTitle>
             <TaggedTitle tag={tag} color={color}>
-              stronghold stats
-            </TaggedTitle>
+              {t("stronghold-stats")}</TaggedTitle>
             {stronghold.latest && <StatsPeriodSelect />}
           </PanelTitle>
         </PanelHeader>
@@ -51,8 +52,7 @@ export function StrongholdTab({
             />
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>
-              No stronghold data yet. Check back after the next clan refresh.
-            </div>
+              {t("no-stronghold-data-yet-check")}</div>
           )}
         </PanelContent>
       </Panel>

@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Așteptând primul instantaneu",
+    "hidden": "Ascuns de Wargaming",
+    "active_24h": "Activ < 24 h",
+    "active_7d": "Activ < 7 zile",
+    "recent_30d": "Recent < 30 de zile",
+    "recent_90d": "Recent < 90 de zile",
+    "dormant_1y": "Inactiv < 1 an",
+    "inactive": "Inactiv > 1 an"
+  },
+  "rating-hype": {
+    "overrated": "Supărătoare",
+    "fair": "Evaluare rezonabilă",
+    "underrated": "Subapreciată"
+  },
+  "rating-consensus": {
+    "agreed": "Acord general",
+    "mixed": "Opinie mixtă",
+    "divisive": "Divizivă"
+  },
+  "rating-axes": {
+    "overall": "General",
+    "fun": "Distracție",
+    "firepower": "Putere de foc",
+    "armour": "Blindaj",
+    "mobility": "Mobilitate",
+    "gunHandling": "Manevrarea armelor",
+    "concealment": "Camuflaj",
+    "beginnerFriendliness": "Prietenos cu începătorii",
+    "versatility": "Versatilitate"
+  },
+  "rating-axis-hints": {
+    "overall": "Cât de bun este acest tanc, luând totul în considerare?",
+    "fun": "Cât de mult îți place să joci cu el?",
+    "firepower": "Daune inițiale, daune pe minut și penetrare.",
+    "armour": "Cât de mult ricoșează, în poziție hull down și în câmp deschis.",
+    "mobility": "Viteză, accelerație și modul în care virează.",
+    "gunHandling": "Timp de ochire, dispersie și precizie în mișcare.",
+    "concealment": "Camuflaj și rază de vizare.",
+    "beginnerFriendliness": "Cât de iertător este dacă încă înveți.",
+    "versatility": "Funcționează pe orice hartă, în orice echipă?"
+  },
+  "voter-brackets": {
+    "unknown": "Neretat",
+    "learning": "Învățare",
+    "average": "Medie",
+    "strong": "Puternic",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vehicule",
+    "gunnery": "Artilerie",
+    "armor": "Blindaj",
+    "mobility": "Mobilitate",
+    "vision": "Viziune",
+    "crew": "Echipaj",
+    "progression": "Progresie",
+    "economy": "Economia",
+    "ratings": "Clasamente",
+    "statistics": "Statistici",
+    "modes": "Moduri de bătălie",
+    "tactics": "Tactici",
+    "slang": "Argou"
+  }
+}

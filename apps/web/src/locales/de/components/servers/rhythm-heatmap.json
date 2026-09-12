@@ -1,0 +1,8 @@
+{
+  "busiest": "Am meisten los: {when} ({players})",
+  "not-enough-recorded-yet-to": "Es wurden noch nicht genügend Daten erfasst, um einen Wochenrhythmus anzuzeigen. Die Heatmap füllt sich nach und nach, während für jede Stunde der Woche Stichproben erfasst werden.",
+  "not-sampled-yet": "Noch nicht erfasst",
+  "players-on-average": "Im Durchschnitt {players} spieler",
+  "quietest": ", am wenigsten los: {when} ({players})",
+  "your-local-time": "Deine Ortszeit"
+}

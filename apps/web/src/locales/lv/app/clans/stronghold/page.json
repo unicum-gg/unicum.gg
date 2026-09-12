@@ -1,0 +1,4 @@
+{
+  "title": "Labākie {tier} klani ({region})",
+  "description": "{region} {tier} klanu līderu saraksts. Sakārtots pēc SR (sadursmju vērtējuma), ELO, kaujām un uzvaru procenta. Vismaz {battles} kaujas."
+}

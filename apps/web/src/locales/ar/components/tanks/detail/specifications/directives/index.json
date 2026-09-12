@@ -1,0 +1,9 @@
+{
+  "boosts": "تعزيزات {name}",
+  "directives": "توجيهات",
+  "directive-name": "توجيه {name}",
+  "grants-and-boosts": "يمنح مهارة الطاقم ويعززها حتى عندما تكون غير مدرّبة.",
+  "grants-only": "يمنح مهارة الطاقم للمعركة، من دون خاصية مدرجة.",
+  "enhances-mounted": "يعزز {name} المركّب.",
+  "mount-to-use": "ركّب {name} لاستخدام هذا التوجيه."
+}

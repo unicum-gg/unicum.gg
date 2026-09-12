@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Bang hội hàng đầu <accent>clans</accent>",
+    "language": "Các Clan <accent>{language}</accent> hàng đầu"
+  },
+  "intro": {
+    "all": "Bảng xếp hạng {region}, xếp hạng theo {metric} trung bình trên các thành viên được theo dõi của mỗi Clan (tối thiểu 50 thành viên có trận đấu).",
+    "language": "Các Clan {region} đã khai báo {language} là một trong những ngôn ngữ của họ, xếp hạng theo {metric} trung bình trên các thành viên được theo dõi (tối thiểu 25 thành viên có trận đấu).",
+    "strict": "Các Clan {region} chỉ khai báo {language} là ngôn ngữ duy nhất, xếp hạng theo {metric} trung bình trên các thành viên được theo dõi (tối thiểu 25 thành viên có trận đấu)."
+  },
+  "board": {
+    "all": "{count} Clan hàng đầu theo {metric}",
+    "language": "{count} Clan {language} hàng đầu theo {metric}",
+    "strict": "{count} Clan chỉ dùng {language} hàng đầu theo {metric}"
+  },
+  "members": "Thành viên",
+  "strict-toggle": "Nghiêm ngặt",
+  "any-toggle": "Bất kỳ",
+  "all-languages": "Tất cả ngôn ngữ",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

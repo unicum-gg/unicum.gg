@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "clear-the-field": "Wyczyść {label}",
+  "credited-on-the-clan-s": "Wzmianka na własnej stronie klanu.",
+  "none": "Brak",
+  "optional": "(opcjonalnie)",
+  "pick-the-vehicle": "Wybierz pojazd",
+  "search-for-a-clan": "Szukaj klanu",
+  "search-for-a-vehicle": "Szukaj pojazdu",
+  "search-tank": "Wyszukaj czołg...",
+  "tank": "Czołg",
+  "tank-hint-optional": "A taktyka należy do swojej mapy, więc nadawanie jej nazwy ma wartość tylko wtedy, gdy film dotyczy również pojazdu.",
+  "tank-hint-required": "Losowa bitwa jest wyszukiwana według pojazdu, w którym została rozegrana."
+}

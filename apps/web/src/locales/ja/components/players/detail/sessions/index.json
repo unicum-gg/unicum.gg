@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "セッションはまだありません。このアカウントが、戦闘を挟んで2回サンプリングされると表示されます。プレイを続ければ自動的に行われます。",
+  "bar-height-is-battles-played": "棒の高さはプレイ済み戦闘数、色は同じ{granularity}の{metric}を示します。色分けはサイト全体で使われているものと同じです。",
+  "title": "{nickname}のセッション",
+  "title-count": "{nickname}のセッション（{count}）",
+  "granularity": {
+    "day": "日",
+    "week": "週",
+    "month": "月",
+    "daily": "デイリー",
+    "weekly": "ウィークリー",
+    "monthly": "マンスリー"
+  },
+  "week-of": "{date}の週"
+}

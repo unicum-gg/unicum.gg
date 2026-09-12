@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Cost (credite)",
+      "tip": "Preț de achiziție în credite (tancuri din arborele tehnologic)"
+    },
+    "buyGold": {
+      "label": "Cost (aur)",
+      "tip": "Preț de achiziție în aur (tancuri premium)"
+    },
+    "researchXp": {
+      "label": "XP de cercetare",
+      "tip": "XP pentru deblocare (cea mai ieftină cale)"
+    },
+    "totalFreeXp": {
+      "label": "XP liber ({tier})",
+      "tip": "XP cumulativ necesar pentru cercetare începând de la nivelul {tier}, inclusiv modulele premergătoare"
+    },
+    "shellCost": {
+      "label": "Cost proiectil",
+      "tip": "Prețul obuzului implicit (credite)"
+    },
+    "ammoCost": {
+      "label": "Cost total muniție",
+      "tip": "Prețul obuzului implicit × capacitatea de muniție"
+    },
+    "acquireMoney": {
+      "label": "Cost de achiziție ({currency})",
+      "tip": "Bani reali estimați pentru achiziționarea tancului (cercetare + cumpărare), în {currency}"
+    },
+    "freeXpMoney": {
+      "label": "XP liber ({currency})",
+      "tip": "Banii reali estimați pentru a transforma în XP gratuit XP-ul tancului de la nivelul {tier}, în {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Cost (credite)",
+    "buyGold": "Cost (aur)",
+    "researchXp": "XP de cercetare",
+    "totalFreeXp": "XP gratuit",
+    "shellCost": "Cost proiectil",
+    "ammoCost": "Cost total muniție",
+    "acquireMoney": "Cost de cumpărare (bani)",
+    "freeXpMoney": "XP gratuit (bani)"
+  }
+}

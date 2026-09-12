@@ -1,0 +1,17 @@
+{
+  "aim-time": "조준 시간",
+  "ammo": "탄약",
+  "armor": "장갑",
+  "dispersion": "산포",
+  "fire-chance": "화재 확률",
+  "gun-arc": "포 각도",
+  "hit-points": "생명력",
+  "load-limit": "적재 한도",
+  "mounted-on": "장착 전차: {tanks}",
+  "power": "파워",
+  "reload": "재장전 시간",
+  "signal-range": "신호 범위",
+  "tier": "단계 {tier}",
+  "traverse": "회전",
+  "view-range": "시야 범위"
+}

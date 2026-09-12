@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. Osztály",
+      "tip": "3. Osztály: az 50%-nyi játékos felülmúlásához szükséges XP"
+    },
+    "class2": {
+      "label": "2. Osztály",
+      "tip": "2. Osztály: a 80%-nyi játékos felülmúlásához szükséges XP"
+    },
+    "class1": {
+      "label": "1. Osztály",
+      "tip": "1. Osztály: a 95%-nyi játékos felülmúlásához szükséges XP"
+    },
+    "ace": {
+      "label": "Asztali Tankér",
+      "tip": "Ász Tanker: a 99%-nyi játékos felülmúlásához szükséges XP"
+    }
+  },
+  "rows-per-page": "Sorok száma oldalanként",
+  "previous-page": "Előző oldal",
+  "page": "Oldal {current} / {totalPages}",
+  "next-page": "Következő oldal",
+  "all": "Mind"
+}

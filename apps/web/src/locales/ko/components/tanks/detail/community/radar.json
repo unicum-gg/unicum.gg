@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "세부 분석은 {min}표부터 표시되므로 이 형태는 한 사람보다 전차 자체에 대해 의미 있는 정보를 보여 줍니다.",
+  "community-rating-by-axis": "축별 커뮤니티 평점",
+  "from-votes": "세부 투표 {count}개 기준",
+  "from-votes-one": "세부 투표 {count}개 기준",
+  "nobody-yet": "아직 세부 축을 작성한 사람이 없습니다.",
+  "only-votes": "현재 세부 투표는 {count}개뿐입니다.",
+  "only-votes-one": "현재 세부 투표는 {count}개뿐입니다."
+}

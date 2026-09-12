@@ -1,0 +1,22 @@
+{
+  "stat": "İstatistik",
+  "periods": {
+    "total": "Toplam",
+    "day": "Son 24saat",
+    "week": "Son 7gün",
+    "month": "Son 30gün"
+  },
+  "sections": {
+    "elo": "Seviye X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} Seviye X (7’ye 7)",
+    "t8": "{skirmish} Seviye VIII (7’ye 7)",
+    "t6": "{skirmish} Seviye VI (7’ye 7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Savaşlar",
+    "winrate": "Kazanma oranı"
+  }
+}

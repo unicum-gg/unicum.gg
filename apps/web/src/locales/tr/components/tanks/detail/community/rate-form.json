@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Birkaç kelime daha: {count} kaldı.",
+  "at-winrate": "%{winrate} ile",
+  "could-not-withdraw-that-try-again-in-a-momen": "Bu geri çekilemedi. Biraz sonra tekrar deneyin.",
+  "hide-the-detailed-axes": "Ayrıntılı eksenleri gizle",
+  "not-enough-battles": "Bir oyun sayılabilmesi için bu tankı yeterince oynamadınız.",
+  "published-once-read": "Bir moderatör okuduktan sonra yayımlanır. Yıldızlarınız hemen sayılır.",
+  "rate-it-in-detail": "Ayrıntılı puan ver (isteğe bağlı)",
+  "review": {
+    "none": "Değerlendirme kaydedildi.",
+    "queued": "Puan kaydedildi. İncelemeniz bir moderatör tarafından inceleniyor.",
+    "published": "Puan kaydedildi. İncelemeniz zaten yayımlandı.",
+    "pending": "Puan kaydedildi. İncelemeniz hâlâ bir moderatör bekliyor.",
+    "rejected": "Puan kaydedildi. Önceki incelemeniz yayımlanmadı, bu nedenle yalnızca yıldızlarınız sayılır.",
+    "closed": "Puan kaydedildi. Yazılı görüşler şu anda kapalı, bu nedenle metin saklanmadı."
+  },
+  "save-failed": "Bu kaydedilemedi. Biraz sonra tekrar deneyin.",
+  "say-why-optional": "Nedenini söyle (isteğe bağlı)",
+  "signed-with": "{battles} savaşlarınızla imzalandı",
+  "submit-my-rating": "Puanımı gönder",
+  "too-many-edits": "Aynı anda çok fazla değişiklik yapıldı. Bir dakika bekleyin.",
+  "update-my-rating": "Puanımı güncelle",
+  "what-it-is-good-at": "Neyi iyi yaptığı, neyi yapamadığı ve kimin oynaması gerektiği.",
+  "withdraw": "Geri çek",
+  "your-rating-has-been-withdrawn": "Puanınız geri çekildi.",
+  "your-review-is-waiting-on": "İncelemeniz bir moderatör bekliyor. Burada onu yalnızca siz görebilirsiniz.",
+  "your-review-was-not-published": "İncelemeniz yayımlanmadı. Yıldızlarınız ortalamaya katkıda bulunmaya devam eder."
+}

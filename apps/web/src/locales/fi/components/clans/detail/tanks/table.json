@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Tästä klaanista ei ole vielä panssarivaunujen tietoja.",
+  "no-tanks-match-these-filters": "Mikään panssarivaunu ei vastaa näitä suodattimia.",
+  "nation": "Kansakunta",
+  "type": "Tyyppi",
+  "tier": "Taso",
+  "name": "Nimi",
+  "members": "Jäsenet",
+  "battles": "Taisteluita",
+  "avg-damage": "Keskiv. vaurio",
+  "avg-xp": "Kesk. XP",
+  "wr": "WR"
+}

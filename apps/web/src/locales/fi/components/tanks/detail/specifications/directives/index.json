@@ -1,0 +1,9 @@
+{
+  "boosts": "Boostit {name}",
+  "directives": "Direktiivit",
+  "directive-name": "{name} ohje",
+  "grants-and-boosts": "Myöntää ja tehostaa miehistön taitoa myös kouluttamattomana.",
+  "grants-only": "Myöntää miehistön taidon taistelua varten, ei ilmoitettua ominaisuutta.",
+  "enhances-mounted": "Parantaa asennettua {name}.",
+  "mount-to-use": "Asenna {name} käyttääksesi tätä direktiiviä."
+}

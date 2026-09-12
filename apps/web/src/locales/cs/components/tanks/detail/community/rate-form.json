@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Ještě několik slov: zbývá {count}.",
+  "at-winrate": "s {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Toto hodnocení se nepodařilo stáhnout. Zkuste to za chvíli znovu.",
+  "hide-the-detailed-axes": "Skrýt podrobné osy",
+  "not-enough-battles": "S tímto tankem jste neodehráli dost bitev, aby se váš hlas započítal.",
+  "published-once-read": "Publikováno, jakmile si recenzi přečte moderátor. Počet hvězdiček se započítá okamžitě.",
+  "rate-it-in-detail": "Ohodnotit podrobně (volitelné)",
+  "review": {
+    "none": "Hodnocení uloženo.",
+    "queued": "Hodnocení uloženo. Vaše recenze byla předána moderátorovi.",
+    "published": "Hodnocení uloženo. Vaše recenze je již zveřejněna.",
+    "pending": "Hodnocení uloženo. Vaše recenze stále čeká na moderátora.",
+    "rejected": "Hodnocení uloženo. Vaše předchozí recenze nebyla zveřejněna, takže se započítávají pouze vaše hvězdičky.",
+    "closed": "Hodnocení uloženo. Písemné recenze jsou momentálně uzavřeny, takže text nebyl uložen."
+  },
+  "save-failed": "Toto hodnocení se nepodařilo uložit. Zkuste to za chvíli znovu.",
+  "say-why-optional": "Napište proč (volitelné)",
+  "signed-with": "Podepsáno s údajem o vašich {battles} bitvách s tímto tankem",
+  "submit-my-rating": "Odeslat moje hodnocení",
+  "too-many-edits": "To je příliš mnoho úprav najednou. Počkejte minutu.",
+  "update-my-rating": "Aktualizovat moje hodnocení",
+  "what-it-is-good-at": "V čem je dobrý, v čem ne a kdo by s ním měl hrát.",
+  "withdraw": "Odvolat",
+  "your-rating-has-been-withdrawn": "Vaše hodnocení bylo staženo.",
+  "your-review-is-waiting-on": "Vaše recenze čeká na moderátora. Zde ji vidíte pouze vy.",
+  "your-review-was-not-published": "Vaše recenze nebyla zveřejněna. Vaše hvězdičky se stále započítávají do průměru."
+}

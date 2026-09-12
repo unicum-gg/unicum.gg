@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Rating (WN)",
+    "tip": "Vurdering for disse kampe alene, ikke for kontoen"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Sejrsrate for disse kampe"
+  },
+  "avgDamage": {
+    "label": "Gns. skade"
+  },
+  "avgFrags": {
+    "label": "Gennemsnitlige frags",
+    "tip": "Ødelagte fjender pr. kamp"
+  },
+  "damageRatio": {
+    "label": "Skadesratio",
+    "tip": "Forårsaget skade i forhold til modtaget skade"
+  },
+  "kd": {
+    "label": "Destruktionsratio",
+    "tip": "Ødelagte fjender i forhold til mistede kampvogne"
+  },
+  "survivalRate": {
+    "label": "Kampe overlevet"
+  },
+  "avgSpotted": {
+    "label": "Gns. spottet",
+    "tip": "Spottede fjender pr. kamp"
+  },
+  "avgDefense": {
+    "label": "Baseforsvar",
+    "tip": "Forsvarspoint pr. kamp"
+  },
+  "avgXp": {
+    "label": "Gns. XP"
+  }
+}

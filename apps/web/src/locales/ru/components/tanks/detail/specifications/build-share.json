@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Ссылка на сборку скопирована",
+  "copy-build-link": "Копировать ссылку на сборку",
+  "could-not-copy-link": "Не удалось скопировать ссылку",
+  "include-setup": "Включить настройки",
+  "share-build": "Поделиться сборкой",
+  "share-tank": "Поделиться {tank}",
+  "share-text": "Посмотрите сборку {tank} в {app}"
+}

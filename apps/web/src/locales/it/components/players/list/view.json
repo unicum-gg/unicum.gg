@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>giocatori</accent>",
+    "language": "Migliori giocatori che parlano <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Classifica della regione {region}, ordinata per {metric} di tutti i tempi (minimo 20.000 battaglie).",
+    "language": "Giocatori della regione {region} il cui insieme di lingue, dedotto dalla cronologia dei clan, include {language}, classificati per {metric} (minimo 10.000 battaglie).",
+    "strict": "Giocatori della regione {region} la cui unica lingua, dedotta dalla cronologia dei clan, è {language}, classificati per {metric} (minimo 10.000 battaglie)."
+  },
+  "board": {
+    "all": "Migliori {count} giocatori in base a {metric}",
+    "language": "Migliori {count} giocatori che parlano {language} in base a {metric}",
+    "strict": "Migliori {count} giocatori che parlano esclusivamente {language} in base a {metric}"
+  },
+  "modes": {
+    "overall": "Globale"
+  },
+  "columns": {
+    "player": "Giocatore"
+  },
+  "strict-toggle": "Severo",
+  "any-toggle": "Qualsiasi",
+  "all-languages": "Tutte le lingue",
+  "battles": "Battaglie",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

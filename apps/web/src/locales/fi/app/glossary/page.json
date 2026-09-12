@@ -1,0 +1,10 @@
+{
+  "title": "World of Tanks -sanasto",
+  "description": "Jokainen World of Tanks -termi selitettynä: pelimekaniikat, ajoneuvojen tilastot, taistelumuodot, WN8:n kaltaiset arvosanajärjestelmät ja pelaajien käyttämä slangi. Hae termiä tai lue yksi osio kerrallaan.",
+  "og-title": "Sanasto",
+  "og-subtitle": "Jokainen World of Tanks -termi selitettynä",
+  "count": "{count} termiä",
+  "intro": "Mitä jokainen panssarivaunun numero tarkoittaa, miten havaitseminen ja panssari itse asiassa toimivat, mitä arvosanat mittaavat ja mitkä sanat peli jättää koskaan selittämättä.",
+  "breadcrumb": "Sanasto",
+  "heading": "World of Tanks -<accent>sanasto</accent>"
+}

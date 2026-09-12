@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, заработано: {count}×",
+  "aria-not-earned": "{name}, не заработано",
+  "no-longer-obtainable": "Больше нельзя получить.",
+  "not-earned": "Не заработано"
+}

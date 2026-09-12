@@ -1,0 +1,12 @@
+{
+  "final": "Finał",
+  "grand-final": "Wielki finał",
+  "loser-bracket-final": "Finał drabinki przegranych",
+  "loser-round": "Runda przegranych {round}",
+  "quarter-finals": "Ćwierćfinały",
+  "round-of": "Runda {teams} drużyn",
+  "semi-finals": "Półfinały",
+  "third-place": "Trzecie miejsce",
+  "winner-bracket-final": "Finał drabinki Zwycięzca",
+  "winner-round": "Runda Zwycięzca {round}"
+}

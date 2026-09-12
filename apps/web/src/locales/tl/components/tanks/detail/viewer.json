@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Bilang visual",
+    "collision": "Pagsalpok",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Igitna ang sasakyan",
+    "off": "Ibalik ito sa labas ng gitna"
+  },
+  "hull-down": {
+    "on": "Hull down",
+    "off": "Pantayin ang sasakyan"
+  },
+  "tracks": {
+    "on": "Patakbuhin ang mga Subaybayan",
+    "off": "Itigil ang mga Subaybayan"
+  },
+  "textures": {
+    "on": "Mga texture na high definition",
+    "off": "Pamantayang mga tekstura"
+  },
+  "reset": "I-reset ang view",
+  "style": "Pumili ng style",
+  "style-worn": "Istilo: {name}",
+  "search-styles": "Maghanap ng mga istilo",
+  "colours": "Ano ang ibig sabihin ng mga kulay",
+  "cinematic": {
+    "off": "Cinematic camera: naka-off",
+    "auto": "Cinematic camera: kapag pinabayaan",
+    "on": "Cinematic camera: palagi"
+  },
+  "open-tank": "Buksan ang isa pang tangke",
+  "open-tank-placeholder": "Buksan ang tangke...",
+  "more-actions": "Karagdagang aksyon",
+  "marks-meaning": {
+    "0": "Walang mga marka ng kahusayan",
+    "1": "Isang marka: mas mahusay kaysa sa 65% ng mga manlalaro sa tangkeng ito",
+    "2": "Dalawang marka: mas mahusay kaysa sa 85%",
+    "3": "Tatlong marka: mas mahusay kaysa sa 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Punuin ang window",
+      "leave": "Bumalik sa pahina"
+    },
+    "screen": {
+      "enter": "Punuin ang screen",
+      "leave": "Umalis sa full screen"
+    }
+  },
+  "marks-count": {
+    "0": "Walang mga marka ng kahusayan",
+    "one": "1 marka ng kahusayan",
+    "other": "{count} mga marka ng kahusayan"
+  },
+  "compare-tank": "Ihambing sa isa pang tangke",
+  "compare-tank-placeholder": "Ihambing sa...",
+  "view-tooltips": {
+    "visual": "Ang tangke ayon sa pagguhit ng laro",
+    "collision": "Gaano kakapal ang bawat plate",
+    "live": "Ano ang gagawin ng napiling bala"
+  },
+  "cinematic-tooltips": {
+    "off": "Cinematic camera: naka-off, hindi gumagalaw ang view",
+    "auto": "Cinematic camera: magsisimula pagkatapos ng 30 segundong walang galaw",
+    "on": "Cinematic camera: palagi, mula sa sandaling bitawan mo"
+  }
+}

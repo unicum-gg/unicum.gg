@@ -1,0 +1,6 @@
+{
+  "title": "Top-Spieler in World of Tanks: {mode} ({region})",
+  "description": "{name}: {region}-Bestenliste für {mode}, den kompetitiven gewerteten 7-gegen-7-Modus von World of Tanks, sortiert nach der spielinternen Rangfolge.",
+  "og-title": "Top-Spieler in {mode}",
+  "og-subtitle": "Ranglisten-Bestenliste für {region}"
+}

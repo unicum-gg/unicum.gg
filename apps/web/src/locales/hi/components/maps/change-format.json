@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "खेल क्षेत्र की चौड़ाई",
+    "height": "खेल क्षेत्र की ऊंचाई",
+    "round-length": "बैटल टाइमर",
+    "team-size": "टीम का आकार",
+    "camouflage": "सीज़न",
+    "presence": "गेम में",
+    "variant-version": "{type} संस्करण",
+    "play-area": "खेल क्षेत्र",
+    "bases-team1": "मित्रवत बेस",
+    "bases-team2": "दुश्मन बेस",
+    "spawns-team1": "मित्रवत स्पॉन पॉइंट",
+    "spawns-team2": "दुश्मन स्पॉन पॉइंट",
+    "control-point": "नियंत्रण बिंदु",
+    "artillery-headquarters": "तोपखाना मुख्यालय",
+    "comms-centers": "संचार केंद्र",
+    "observation-posts": "निगरानी चौकियां",
+    "points-of-interest": "रुचि के बिंदु"
+  },
+  "summary": {
+    "added": "{name} जोड़ा गया",
+    "removed": "{name} हटाया गया",
+    "added-to-game": "गेम में जोड़ा गया",
+    "removed-from-game": "गेम से हटाया गया",
+    "added-on-test": "परीक्षण क्लाइंट पर जोड़ा गया",
+    "removed-on-test": "परीक्षण क्लाइंट से हटाया गया",
+    "mode-added": "{name} मोड जोड़ा गया",
+    "mode-removed": "{name} मोड हटाया गया",
+    "now-played-in": "अब {name} में खेले जाते हैं",
+    "no-longer-played-in": "अब {name} में नहीं खेले जाते",
+    "event-added": "{name} अब युद्ध के बीच हो सकता है",
+    "event-removed": "{name} अब नहीं होता",
+    "moved": "{name} का स्थान बदला गया",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

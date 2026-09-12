@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Rēķins eiro, konvertēts uz {currency} pēc šodienas kursa.",
+  "cost-breakdown": "Cena sadalījums",
+  "estimated-annual-cost": "Aprēķinātās gada izmaksas",
+  "fixed-month-bill-no-surprises": "Fiksēts rēķins {totalAnnualEur}/mēnesī bez pārsteigumiem: viens nomāts serveris, bez trešo pušu SaaS datu ceļā. Tas pieaug tikai tad, kad pārsniedzam servera iespējas (lielāka Wargaming caurlaidspēja nozīmē vairāk izejošo IP adrešu).",
+  "free": "bezmaksas",
+  "one-off-spend": "Vienreizēja izdevumu",
+  "paid-once-so-it-is": "Samaksāts vienreiz, tāpēc nav iekļauts iepriekš minētajā ikmēneša rēķinā. Tas joprojām tiek ieskaitīts projekta līdzšinējās izmaksās.",
+  "previously": "Iepriekš"
+}

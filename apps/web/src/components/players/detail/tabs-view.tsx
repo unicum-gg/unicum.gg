@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useLocale } from "@onruntime/translations/react";
+import { useRouter } from "@/hooks/use-router";
 import { useState } from "react";
 
 import useSWR from "swr";
@@ -127,6 +128,7 @@ export function PlayerTabsView({
   const section = activeSection;
   const mode = activeMode;
   const router = useRouter();
+  const { locale } = useLocale();
 
   // The per-tank list lives on its own endpoint and is fetched on demand
   // through the SDK. SWR keys on the URL and only runs when the Tanks section is
@@ -149,7 +151,9 @@ export function PlayerTabsView({
   // visitor who landed straight on `/achievements` gets it server-rendered
   // (`initialAchievements` seeds the cache, so no on-mount revalidation).
   const achievementsReq = () =>
-    unicum.region(region).players(nickname).achievements();
+    // Wargaming names its own medals, and the SWR key carries the language, so
+    // switching it refetches rather than showing the previous one's cabinet.
+    unicum.region(region).players(nickname).achievements(locale);
   const seededAchievements = initialAchievements != null;
   const { data: achievements } = useSWR(
     section === PlayerSection.Achievements ? achievementsReq().url() : null,

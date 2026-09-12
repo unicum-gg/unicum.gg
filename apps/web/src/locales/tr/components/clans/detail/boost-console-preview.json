@@ -1,0 +1,19 @@
+{
+  "active-days": "Aktif günler",
+  "add-workflow": "İş akışı ekle",
+  "connect-discord": "Discord’a Bağlan",
+  "discord-notifications": "Discord bildirimleri",
+  "each-workflow-activates-its-reserves": "Her iş akışı, yeterli sayıda üye canlı bir oyun oturumundayken rezervlerini belirli bir zaman aralığında etkinleştirir. Hesabınızda çalışır, çevrimiçi olmanız gerekmez. İhtiyacınız kadar ekleyin.",
+  "enabled": "Etkinleştirildi",
+  "from": "Den",
+  "get-a-discord-message-in": "Her güçlendirme ateşlendiğinde seçtiğiniz kanalda bir Discord mesajı alın, böylece tüm klan etkin olduğunu bilir.",
+  "log-in-with-wargaming-to": "Kurmak için Wargaming ile giriş yapın",
+  "min-online": "Min çevrimiçi",
+  "officers": "Subaylar",
+  "only-an-officer-of-this": "Bunu yalnızca bu klanın bir subayı kurabilir.",
+  "schedule-preview": "Program önizleme",
+  "set-your-hours-and-reserves": "Saatlerinizi ve rezervlerinizi bir kez ayarlayın. Güçlendirmeler, kimse düğmeye basmasa bile kendi kendine zamanında etkinleşir.",
+  "stronghold-boosts": "Sığınak destekleri",
+  "times-are-in-your-timezone": "Saatler sizin saat diliminiz olan {tz} dilindedir.",
+  "to": "Kime"
+}

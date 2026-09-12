@@ -1,0 +1,37 @@
+{
+  "label": "Daugiau",
+  "items": {
+    "tournaments": {
+      "label": "Turnyrai",
+      "description": "Lentelės, sudėtys ir rezultatai pagal regionus"
+    },
+    "servers": {
+      "label": "Serveriai",
+      "description": "Prisijungę žaidėjai dabar ir laikui bėgant"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Žaidėjų, klanų ir tankų statistika kaip pasvirojo brūkšnio komandos"
+    },
+    "mcp": {
+      "label": "MCP serveris",
+      "description": "Prisijunkite prie Claude, ChatGPT arba bet kurio MCP kliento"
+    },
+    "api": {
+      "label": "API",
+      "description": "Nemokama vieša REST API, rakto nereikia"
+    },
+    "badges": {
+      "label": "Ženkleliai",
+      "description": "Kiekvienas žaidėjo ar klano gaunamas herbas ir kaip jį gauti"
+    },
+    "glossary": {
+      "label": "Terminų žodynas",
+      "description": "Kiekvienas World of Tanks terminas su paaiškinimu"
+    },
+    "support": {
+      "label": "Palaikykite mus",
+      "description": "Padėkite išlaikyti {name} nemokamą, atvirą ir be reklamų"
+    }
+  }
+}

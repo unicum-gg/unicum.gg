@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Region } from "@unicum.gg/wargaming";
 import { Spinner } from "@/components/ui/spinner";
 import { unicum } from "@/services/sdk";
+import { useTranslation } from "@/hooks/use-translation";
 
 // Whether the beacon drives a player or a clan refresh. Both go through their
 // own SDK enqueue endpoint (which returns an ETA) and their own live channel.
@@ -133,11 +134,13 @@ export function useRefreshBeacon(
  * gap spacing as the row's other separators.
  */
 export function RefreshIndicator({ phase, remaining }: BeaconState) {
+  const { t } = useTranslation("components/refresh-beacon");
+
   if (phase === Phase.Done)
     return (
       <>
         <span className="hidden sm:inline">·</span>
-        <span>Updated</span>
+        <span>{t("updated")}</span>
       </>
     );
   if (phase === Phase.Refreshing)
@@ -146,9 +149,11 @@ export function RefreshIndicator({ phase, remaining }: BeaconState) {
         <span className="hidden sm:inline">·</span>
         <span className="inline-flex items-center gap-1">
           <Spinner className="size-3" aria-hidden />
-          Refreshing
+          {t("refreshing")}
           {remaining !== null && (
-            <span className="opacity-70">~{remaining}s</span>
+            <span className="opacity-70">
+              {t("remaining", { seconds: remaining })}
+            </span>
           )}
         </span>
       </>

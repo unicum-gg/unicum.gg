@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "รถถังของ {name} ({region}) ยานพาหนะทุกคันที่เล่นแล้ว",
+    "description": "รถถังทุกคันที่ {name} เล่นแล้วบน {region} พร้อมจำนวนการรบ อัตราชนะ ความเสียหายเฉลี่ย และ WN8 ของรถถังแต่ละคัน"
+  },
+  "achievements": {
+    "title": "ความสำเร็จของ {name} ({region}) ได้รับ {medals} เหรียญ",
+    "description": "เหรียญ World of Tanks จำนวน {medals} เหรียญที่ {name} ได้รับบน {region} ตั้งแต่เหรียญ Kolobanov และ Pool ไปจนถึงยศเกียรติยศและเหรียญผลงานยอดเยี่ยม รวมถึงเหรียญทุกเหรียญที่ยังเหลือให้รับ"
+  },
+  "tournaments": {
+    "title": "การแข่งขันของ {name} ({region})",
+    "description": "การแข่งขัน Wargaming ทุกครั้งที่ {name} เข้าร่วมบน {region} ทั้งทีมที่เล่นให้ รูปแบบการแข่งขัน และไปได้ไกลแค่ไหน เป็นบันทึกที่ Wargaming เผยแพร่จากมุมของการแข่งขันเท่านั้น ไม่เคยใช่จากมุมของผู้เล่น"
+  },
+  "value": {
+    "title": "มูลค่าบัญชีของ {name} ({region})",
+    "description": "บัญชี World of Tanks ของ {name} บน {region} มีมูลค่าเท่าใด ทั้งเงิน ทอง และประสบการณ์ที่เก็บอยู่ในโรงรถ"
+  },
+  "mode": {
+    "title": "สถิติ {mode} ของ {name} ({region})",
+    "description": "{name} ใน {region} และโหมด {mode}: การรบ อัตราชนะ และคะแนนประเมินสำหรับโหมดนี้ เทียบกับค่าพื้นฐานจากการรบสุ่ม"
+  },
+  "overview": {
+    "title": "สถิติ World of Tanks ของ {name} ({region}), {battles} การรบ, อัตราชนะ {winrate}% WR",
+    "description": "{name} ใน {region}: {battles} การรบ, อัตราชนะ {winrate}%, คะแนนประเมิน {rating} รายละเอียดแยกย่อยทีละรถถัง, WN8, WNX และประวัติแคลนฉบับเต็ม"
+  },
+  "locked": {
+    "title": "บัญชี World of Tanks ของ {name} ถูกล็อก ({region})",
+    "description": "มี {name} ({region}) อยู่ แต่ Wargaming ล็อกบัญชีนี้ไว้ จึงไม่มีสถิติ World of Tanks ของบัญชีนี้"
+  },
+  "empty": {
+    "title": "สถิติผู้เล่น World of Tanks ของ {name} ({region})",
+    "description": "สถิติผู้เล่น World of Tanks ของ {name} ({region}): คะแนนประเมิน WN8 และ WNX, อัตราชนะ, รายละเอียดแยกย่อยทีละรถถัง และประวัติแคลนฉบับเต็ม"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "battle-time": "Соғыс уақыты",
+  "camouflage": "{camouflage} Жасырыну",
+  "mode": "Режим",
+  "n-random-events": "{count, plural, one {# кездейсоқ оқиға} other {# кездейсоқ оқиғалар}}",
+  "random-events": "жарасымсыз оқиғалар",
+  "size": "Өлшем",
+  "team-size": "команда көлемі"
+}

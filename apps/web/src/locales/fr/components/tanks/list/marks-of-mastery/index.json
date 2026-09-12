@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3ème Classe",
+      "tip": "3e classe : XP nécessaires pour dépasser 50 % des joueurs"
+    },
+    "class2": {
+      "label": "2ème Classe",
+      "tip": "2e classe : XP nécessaires pour dépasser 80 % des joueurs"
+    },
+    "class1": {
+      "label": "1ère Classe",
+      "tip": "1re classe : XP nécessaires pour dépasser 95 % des joueurs"
+    },
+    "ace": {
+      "label": "As du char",
+      "tip": "As du char : XP nécessaires pour dépasser 99 % des joueurs"
+    }
+  },
+  "rows-per-page": "Lignes par page",
+  "previous-page": "Page précédente",
+  "page": "Page {current} / {totalPages}",
+  "next-page": "Page suivante",
+  "all": "Tous"
+}

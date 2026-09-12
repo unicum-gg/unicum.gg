@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Obračunato u eurima, pretvoreno u {currency} prema današnjem tečaju.",
+  "cost-breakdown": "Razgradnja troška",
+  "estimated-annual-cost": "Procijenjeni godišnji trošak",
+  "fixed-month-bill-no-surprises": "Fiksni račun od {totalAnnualEur}/mjesečno, bez iznenađenja: jedan unajmljeni poslužitelj, bez SaaS usluga trećih strana u podatkovnom toku. Raste samo kada prerastemo poslužitelj (veća propusnost Wargaminga znači više izlaznih IP adresa).",
+  "free": "besplatno",
+  "one-off-spend": "Jednokratna potrošnja",
+  "paid-once-so-it-is": "Plaćeno jednokratno, pa nije dio prethodnog mjesečnog računa. I dalje se uračunava u dosadašnji trošak projekta.",
+  "previously": "Prethodno"
+}

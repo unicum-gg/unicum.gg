@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} bitew ogółem",
+  "checking-your-record-on-this": "Sprawdzamy twoje wyniki dla tego czołgu...",
+  "fetching-your-garage": "Pobieramy Twój garaż",
+  "have-you-played": "Czy grałeś(-aś) czołgiem {tank}?",
+  "more-to-go": "Do wymaganej liczby brakuje jeszcze {count} bitew",
+  "more-to-go-one": "Do wymaganej liczby brakuje jeszcze {count} bitwy",
+  "sign-in-to-rate-it": "Zaloguj się, aby go ocenić",
+  "sign-in-with-your-wargaming-account-to-rate-": "Zaloguj się za pomocą konta Wargaming, aby go ocenić. Sprawdzamy twoje wyniki właśnie dla tego czołgu. Dzięki temu strona nie staje się ankietą dla osób, które nigdy nim nie grały.",
+  "signed-in-on": "Zalogowano w regionie {region}",
+  "too-few-battles": "Twoja liczba bitew czołgiem {tank}: {played}. Aby głos został uwzględniony, wymagana liczba to {required}. Dzięki temu średnia opiera się na ocenach osób, które rzeczywiście grają tym czołgiem.",
+  "you-have-not-played": "Nie grałeś(-aś) czołgiem {tank}"
+}

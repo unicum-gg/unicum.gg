@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# karte} other {# kartes}}",
+  "no-map-changes-have-been": "Kartes izmaiņas vēl nav reģistrētas. Wargaming pārveidojot kartes, šeit parādīsies, ko mainīja katrs atjauninājums.",
+  "update": "Atjaunināt {version}"
+}

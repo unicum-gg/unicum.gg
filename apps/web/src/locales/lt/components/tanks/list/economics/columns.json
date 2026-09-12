@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Kaina (kreditas)",
+      "tip": "Pirkimo kaina kreditais (technologijų medžio tankai)"
+    },
+    "buyGold": {
+      "label": "Kaina (aukso)",
+      "tip": "Pirkimo kaina auksu (premium tankai)"
+    },
+    "researchXp": {
+      "label": "Tyrimų XP",
+      "tip": "XP atrakinimui (pigiausias kelias)"
+    },
+    "totalFreeXp": {
+      "label": "Laisva XP (T{tier})",
+      "tip": "Bendra XP suma, reikalinga ištirti nuo {tier} lygio, įskaitant būtinuosius modulius"
+    },
+    "shellCost": {
+      "label": "Šaudmenų kaina",
+      "tip": "Numatytojo sviedinio kaina (kreditai)"
+    },
+    "ammoCost": {
+      "label": "Viso šaudmenų kaina",
+      "tip": "Numatytojo sviedinio kaina × šaudmenų talpa"
+    },
+    "acquireMoney": {
+      "label": "Pirkimo kaina ({currency})",
+      "tip": "Apskaičiuota tikrų pinigų suma tankui įsigyti (tyrimui ir pirkimui), {currency} valiuta"
+    },
+    "freeXpMoney": {
+      "label": "Laisva XP ({currency})",
+      "tip": "Apskaičiuota tikrų pinigų suma tankui ištirti naudojant Laisvą XP nuo {tier} lygio, {currency} valiuta"
+    }
+  },
+  "selector": {
+    "buyCredits": "Kaina (kreditas)",
+    "buyGold": "Kaina (aukso)",
+    "researchXp": "Tyrimų XP",
+    "totalFreeXp": "Laisva XP",
+    "shellCost": "Šaudmenų kaina",
+    "ammoCost": "Viso šaudmenų kaina",
+    "acquireMoney": "Pirkimo kaina (pinigai)",
+    "freeXpMoney": "Laisva XP (pinigai)"
+  }
+}

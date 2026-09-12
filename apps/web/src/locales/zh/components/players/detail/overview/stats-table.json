@@ -1,0 +1,34 @@
+{
+  "stat": "统计",
+  "rows": {
+    "battles": "战斗场次",
+    "tier": "等级",
+    "wins": "胜利",
+    "losses": "失败",
+    "draws": "平局",
+    "survived": "幸存",
+    "destroyed": "摧毁的坦克",
+    "destruction-ratio": "战损比",
+    "spotted": "发现的坦克",
+    "damages": "伤害",
+    "track-damages": "履带伤害",
+    "spotting-damages": "侦查伤害",
+    "assisting-damages": "协助伤害",
+    "combined-damages": "综合伤害",
+    "base-capture": "占领基地",
+    "base-defense": "基地防御",
+    "experience": "经验",
+    "hit-rate": "命中率",
+    "personal-rating": "个人评级",
+    "wtr": "World of Tanks 等级",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "总计",
+    "day": "过去24小时",
+    "week": "过去7天",
+    "month": "过去30天"
+  }
+}

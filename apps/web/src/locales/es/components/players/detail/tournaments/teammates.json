@@ -1,0 +1,4 @@
+{
+  "teammates": "Los compañeros de equipo de {nickname}",
+  "everyone-who-has-shared-a": "Todos los jugadores que han compartido una alineación de torneo con {nickname}, ordenados de mayor a menor frecuencia. Cada fila muestra la última vez que participaron juntos."
+}

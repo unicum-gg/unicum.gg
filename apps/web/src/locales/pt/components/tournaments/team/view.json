@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "O sorteio ainda não foi realizado. Os confrontos desta equipa aparecerão aqui quando o torneio começar.",
+  "each-map-is-played-twice": "Cada mapa é jogado duas vezes, uma de cada lado. O último mapa é o desempate e é jogado uma única vez.",
+  "first-battle-at": "Primeira batalha, {when}",
+  "lost": "Perdeu",
+  "matches": "Partidas ({length})",
+  "never-played": "Esta equipa nunca disputou um confronto. Inscreveu-se, mas não foi incluída no sorteio, o que acontece quando o plantel fica por confirmar.",
+  "no-maps-recorded": "Não há mapas registados para este confronto.",
+  "no-roster-recorded-for-this": "Nenhum plantel registado para esta equipa.",
+  "of-players-on-the-day": "{members} de {length} jogadores no dia",
+  "played-on-uncatalogued": "Jogado em {maps}, que não constam do catálogo de mapas.",
+  "roster": "Elenco ({length})",
+  "stage-group": "{stage} · Grupo {order}",
+  "team-1": "Equipa 1",
+  "team-2": "Equipa 2",
+  "tournaments": "Torneios",
+  "when-the-first-battle-started": "Quando começou a primeira batalha",
+  "won": "Ganhou"
+}

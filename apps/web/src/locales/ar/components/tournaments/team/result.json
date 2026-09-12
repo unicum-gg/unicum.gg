@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "المتوسط لأفضل {rated} من أصل {size} لاعبين",
+  "average-over-recent": "المتوسط لأفضل {rated} من أصل {size} لاعبين لعبوا خلال آخر 30 يومًا",
+  "avg-winrate": "متوسط نسبة الفوز",
+  "finished": "اكتمل",
+  "record": "سجل",
+  "won": "فاز"
+}

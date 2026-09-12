@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Kura henüz çekilmedi. Bu takımın maçları turnuva başladığında burada görünür.",
+  "each-map-is-played-twice": "Her harita, her iki taraftan bir kez olmak üzere iki kez oynanır. Son harita bir kez oynanan belirleyici haritadır.",
+  "first-battle-at": "İlk savaş, {when}",
+  "lost": "Kaybetti",
+  "matches": "Maçlar ({length})",
+  "never-played": "Bu takım hiçbir maçı oynamadı. Kayıt oldu ancak kura takıma ulaşmadı. Onaylanmadan kalan bir kadronun başına gelen budur.",
+  "no-maps-recorded": "Bu maç için harita kaydedilmedi.",
+  "no-roster-recorded-for-this": "Bu takım için kadro kaydedilmedi.",
+  "of-players-on-the-day": "O günkü {length} oyuncunun {members} kadroda",
+  "played-on-uncatalogued": "Harita kataloğunda bulunmayan {maps} üzerinde oynandı.",
+  "roster": "Kadrolar ({length})",
+  "stage-group": "{stage} · Grup {order}",
+  "team-1": "Takım 1",
+  "team-2": "Takım 2",
+  "tournaments": "Turnuvalar",
+  "when-the-first-battle-started": "İlk savaşın başladığı zaman",
+  "won": "Kazandı"
+}

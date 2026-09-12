@@ -1,0 +1,11 @@
+{
+  "closes": "Zatvori {when}",
+  "map-pool": "Izbor karata",
+  "place": "Mjesto",
+  "prize": "Nagrada",
+  "prizes": "Nagrade",
+  "qualified": "Kvalificirani ({count})",
+  "register": "Registracija",
+  "tournaments": "Turniri",
+  "winner": "{count, plural, one {Pobjednik} few {Pobjednici} other {Pobjednika}}"
+}

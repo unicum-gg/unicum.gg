@@ -1,0 +1,37 @@
+{
+  "label": "その他",
+  "items": {
+    "tournaments": {
+      "label": "トーナメント",
+      "description": "地域ごとのトーナメント表、登録名簿、結果"
+    },
+    "servers": {
+      "label": "サーバー",
+      "description": "現在および時間推移のオンラインプレイヤー数"
+    },
+    "bot": {
+      "label": "Discordボット",
+      "description": "スラッシュコマンドでプレイヤー、クラン、戦車の戦績を確認"
+    },
+    "mcp": {
+      "label": "MCPサーバー",
+      "description": "Claude、ChatGPT、その他のMCPクライアントに接続"
+    },
+    "api": {
+      "label": "API",
+      "description": "キー不要の無料公開REST API"
+    },
+    "badges": {
+      "label": "バッジ",
+      "description": "プレイヤーまたはクランが獲得できるすべてのクレストと獲得方法"
+    },
+    "glossary": {
+      "label": "用語集",
+      "description": "World of Tanksの用語をすべて解説"
+    },
+    "support": {
+      "label": "サポートしてください",
+      "description": "{name}を無料でオープンかつ広告なしに維持"
+    }
+  }
+}

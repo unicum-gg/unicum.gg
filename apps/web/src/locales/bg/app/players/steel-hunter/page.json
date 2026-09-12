@@ -1,0 +1,6 @@
+{
+  "title": "Най-добрите играчи на World of Tanks в режим {mode} battle royale ({region})",
+  "description": "Класация в {region} на {name} за {mode}, battle royale режима на World of Tanks, подредена по нашия HR рейтинг, среден опит плюс процент победи.",
+  "og-title": "Най-добрите играчи в режим {mode}",
+  "og-subtitle": "Класация на battle royale играчите в {region}"
+}

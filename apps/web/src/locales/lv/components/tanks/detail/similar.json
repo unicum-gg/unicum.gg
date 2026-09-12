@@ -1,0 +1,11 @@
+{
+  "compare": "Salīdzināt ar {count} tuvākajiem",
+  "match": "mačs",
+  "subtitle": "Tāda pati vieta sava līmeņa tanku vidū",
+  "verdict": {
+    "overall": "Līdzīgas kopējā",
+    "closest": "Tuvākais pēc {axes}",
+    "closest-furthest": "Tuvākais pēc {axes}, vistālākais pēc {apart}",
+    "and": " un "
+  }
+}

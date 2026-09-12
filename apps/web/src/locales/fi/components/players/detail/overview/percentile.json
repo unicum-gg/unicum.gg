@@ -1,0 +1,7 @@
+{
+  "win-rate": "Voittoaste",
+  "versus": "{metric} vastaan {region}",
+  "top": "Ykkönen {percent}%",
+  "ahead-of": "Edellä: {percent} %",
+  "against": "Verrattuna vähintään {battles} taistelua pelanneisiin seurattuihin alueen {region} tileihin, joita on {players}."
+}

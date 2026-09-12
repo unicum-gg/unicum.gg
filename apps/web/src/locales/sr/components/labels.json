@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Čekanje prve snimke",
+    "hidden": "Сакрио Wargaming",
+    "active_24h": "Активан < 24 h",
+    "active_7d": "Активан < 7 дана",
+    "recent_30d": "Недаван < 30 dana",
+    "recent_90d": "Недаван < 90 дана",
+    "dormant_1y": "Неактиван < 1 године",
+    "inactive": "Неактиван > 1 године"
+  },
+  "rating-hype": {
+    "overrated": "Precenjeno",
+    "fair": "Prikladno ocenjen",
+    "underrated": "Podcenjeno"
+  },
+  "rating-consensus": {
+    "agreed": "Širok konsenzus",
+    "mixed": "Pomešana mišljenja",
+    "divisive": "Deljenje mišljenja"
+  },
+  "rating-axes": {
+    "overall": "Ukupno",
+    "fun": "Zabava",
+    "firepower": "Vatrena moć",
+    "armour": "Oklop",
+    "mobility": "Pokretljivost",
+    "gunHandling": "Rukovanje oružjem",
+    "concealment": "Sakrivenost",
+    "beginnerFriendliness": "Prijateljski prema početnicima",
+    "versatility": "Svestranost"
+  },
+  "rating-axis-hints": {
+    "overall": "Колико је овај тенк добар, узимајући све у обзир?",
+    "fun": "Колико уживаш док га играш?",
+    "firepower": "Алфа, штета у минути и пробојност.",
+    "armour": "Колико често одбија поготке, у заклону и на отвореном.",
+    "mobility": "Брзина, убрзање и начин скретања.",
+    "gunHandling": "Време нишањења, дисперзија и прецизност у покрету.",
+    "concealment": "Камуфлажа и домет осматрања.",
+    "beginnerFriendliness": "Колико опрашта грешке ако још учиш.",
+    "versatility": "Да ли функционише на свакој мапи и у сваком тиму?"
+  },
+  "voter-brackets": {
+    "unknown": "Nema ocenu",
+    "learning": "Uči",
+    "average": "Prosek",
+    "strong": "Jak",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vozila",
+    "gunnery": "Artiljerija",
+    "armor": "Oklop",
+    "mobility": "Pokretljivost",
+    "vision": "Vizija",
+    "crew": "Posada",
+    "progression": "Napredovanje",
+    "economy": "Ekonomija",
+    "ratings": "Ocene",
+    "statistics": "Statistika",
+    "modes": "Bitkovni režimi",
+    "tactics": "Taktika",
+    "slang": "Žargon"
+  }
+}

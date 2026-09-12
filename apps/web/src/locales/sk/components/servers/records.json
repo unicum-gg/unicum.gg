@@ -1,0 +1,6 @@
+{
+  "all-time-record": "Najboljši dosežek vseh časov",
+  "average-last": "Priemer za posledný {label}",
+  "low-last": "Minimum za posledný {label}",
+  "peak-last": "Maximum za posledný {label}"
+}

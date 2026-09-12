@@ -1,0 +1,9 @@
+{
+  "aria-rank": "रैंक {rank}, {board} पर",
+  "board": {
+    "advances": "गढ़ रेटिंग में प्रगति",
+    "skirmish-t10": "स्तर X झड़प रेटिंग",
+    "skirmish-t6": "स्तर VI झड़प रेटिंग",
+    "skirmish-t8": "स्तर VIII झड़प रेटिंग"
+  }
+}

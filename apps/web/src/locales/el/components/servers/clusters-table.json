@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Δεν έχει καταγραφεί ακόμη σύμπλεγμα.",
+  "server": "Server",
+  "online": "Διαδικτυακά",
+  "share": "Κοινή χρήση",
+  "peak": "Μέγιστο ({label})",
+  "average": "Μέσος όρος ({label})",
+  "not-reported": "Δεν αναφέρθηκε",
+  "total": "Σύνολο"
+}

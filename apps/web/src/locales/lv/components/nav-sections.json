@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Spēlētāji",
+    "clans": "Klani",
+    "tanks": "Tvertne",
+    "maps": "Kartes",
+    "tournaments": "Turnīri",
+    "servers": "Serveri"
+  },
+  "links": {
+    "top-players": {
+      "label": "Top spēlētāji",
+      "description": "Spēlētāju līderu saraksts visā vēsturē"
+    },
+    "players-onslaught": {
+      "description": "Ranga Uzbrukuma līderu saraksts"
+    },
+    "players-steel-hunter": {
+      "description": "Kaujas karalistes līderu saraksts"
+    },
+    "top-clans": {
+      "label": "Top klani",
+      "description": "Klanu līderu saraksts visā vēsturē"
+    },
+    "stronghold": {
+      "description": "Sadursmju rangs"
+    },
+    "advances": {
+      "description": "X līmeņa 15 pret 15 rangs"
+    },
+    "tank-performances": {
+      "label": "Sniedzamība",
+      "description": "Uzvaru attiecība un bojājumi katram tankam"
+    },
+    "tank-specs": {
+      "label": "Specifikācijas",
+      "description": "Statistika par katru tanku"
+    },
+    "tank-economics": {
+      "label": "Ekonomika",
+      "description": "Kredītu un pieredzes pelnītāji"
+    },
+    "tank-moe": {
+      "description": "Bojājumi katrai atzīmei"
+    },
+    "tank-mom": {
+      "description": "Meistarības nozīmīšu sliekšņi"
+    },
+    "tank-changes": {
+      "label": "Izmaiņas",
+      "description": "Uzlabošanas un vājināšanas pēc atjauninājuma"
+    },
+    "tank-community": {
+      "label": "Kopienas vērtējumi",
+      "description": "Novērtējuši spēlētāji, kuriem tie pieder"
+    },
+    "tank-videos": {
+      "label": "Video",
+      "description": "Kopienas spēļu ieraksti"
+    },
+    "all-tournaments": {
+      "label": "Turnīri",
+      "description": "Katrs turnīrs, atvērts un noslēgts"
+    },
+    "all-maps": {
+      "label": "Visas kartes",
+      "description": "Katra spēles karte"
+    },
+    "map-changes": {
+      "label": "Izmaiņas",
+      "description": "Karšu pārveidojumi pēc atjauninājuma"
+    },
+    "battle-type": {
+      "description": "{type} kartes"
+    },
+    "servers-population": {
+      "label": "Servera apdzīvotība",
+      "description": "Tiešsaistes spēlētāji tagad un laika gaitā"
+    }
+  }
+}

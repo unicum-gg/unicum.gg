@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Đợi ảnh chụp đầu tiên",
+    "hidden": "Đã bị Wargaming ẩn",
+    "active_24h": "Hoạt động < 24 giờ",
+    "active_7d": "Hoạt động < 7 ngày",
+    "recent_30d": "Gần đây < 30 ngày",
+    "recent_90d": "Gần đây < 90 ngày",
+    "dormant_1y": "Không hoạt động > 1 năm",
+    "inactive": "Không hoạt động > 1 năm"
+  },
+  "rating-hype": {
+    "overrated": "Đánh giá quá cao",
+    "fair": "Đánh giá công bằng",
+    "underrated": "Đánh giá thấp"
+  },
+  "rating-consensus": {
+    "agreed": "Thống nhất rộng rãi",
+    "mixed": "Ý kiến trái chiều",
+    "divisive": "Gây chia rẽ"
+  },
+  "rating-axes": {
+    "overall": "Tổng thể",
+    "fun": "Vui vẻ",
+    "firepower": "Hỏa lực",
+    "armour": "Giáp",
+    "mobility": "Độ Cơ động",
+    "gunHandling": "Xử lý súng",
+    "concealment": "Khả năng Ẩn giấu",
+    "beginnerFriendliness": "Thân thiện với người mới",
+    "versatility": "Đa dụng"
+  },
+  "rating-axis-hints": {
+    "overall": "Chiếc xe tăng này tốt đến mức nào xét trên mọi phương diện?",
+    "fun": "Bạn thích chơi chiếc xe tăng này đến mức nào?",
+    "firepower": "Sát thương cơ bản, sát thương mỗi phút và khả năng xuyên giáp.",
+    "armour": "Khả năng bật nảy đạn, chiến đấu núp thân xe và chiến đấu ngoài địa hình che chắn.",
+    "mobility": "Tốc độ, khả năng tăng tốc và cách xe tăng chuyển hướng.",
+    "gunHandling": "Thời gian ngắm, độ phân tán và độ chính xác khi đang di chuyển.",
+    "concealment": "Khả năng ngụy trang và tầm nhìn.",
+    "beginnerFriendliness": "Mức độ dễ tha thứ nếu bạn vẫn đang học chơi.",
+    "versatility": "Nó có hiệu quả trên mọi bản đồ, trong mọi đội hình không?"
+  },
+  "voter-brackets": {
+    "unknown": "Chưa xếp hạng",
+    "learning": "Đang học",
+    "average": "Trung bình",
+    "strong": "Mạnh",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Xe",
+    "gunnery": "Pháo binh",
+    "armor": "Giáp",
+    "mobility": "Độ Cơ động",
+    "vision": "Tầm nhìn",
+    "crew": "Kíp lái",
+    "progression": "Tiến trình",
+    "economy": "Kinh tế",
+    "ratings": "Xếp hạng",
+    "statistics": "Thống kê",
+    "modes": "Chế độ chiến đấu",
+    "tactics": "Chiến thuật",
+    "slang": "Tiếng lóng"
+  }
+}

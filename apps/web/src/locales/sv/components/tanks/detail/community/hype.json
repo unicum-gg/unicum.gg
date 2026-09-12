@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "bättre än {value} % av de betygsatta stridsvagnarna på samma nivå",
+  "measured-hint": "Var dess vinstgrad placerar den bland samma vagnar",
+  "not-enough-votes-yet-to": "Det finns ännu inte tillräckligt med röster för att jämföra communityns omdöme med hur stridsvagnen faktiskt presterar.",
+  "perceived-hint": "Var gemenskapen placerar den bland betygsatta vagnar på nivå {tier}",
+  "verdict": {
+    "overrated": "Communityn betygsätter den betydligt högre än vad den faktiskt presterar.",
+    "fair": "Här stämmer rykte och resultat överens.",
+    "underrated": "Den presterar bättre än sitt rykte."
+  },
+  "what-players-think": "Vad spelare tycker",
+  "what-the-data-says": "Vad datan visar"
+}

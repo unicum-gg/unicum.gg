@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Classement (WN)",
+    "tip": "Évaluation de ces batailles uniquement, pas du compte"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Taux de victoires sur ces batailles"
+  },
+  "avgDamage": {
+    "label": "Dommage moyen"
+  },
+  "avgFrags": {
+    "label": "Moy. frags",
+    "tip": "Ennemis détruits par bataille"
+  },
+  "damageRatio": {
+    "label": "Taux de dégâts",
+    "tip": "Dégâts infligés par rapport aux dégâts reçus"
+  },
+  "kd": {
+    "label": "Taux de destruction",
+    "tip": "Ennemis détruits par véhicule perdu"
+  },
+  "survivalRate": {
+    "label": "Batailles survécues"
+  },
+  "avgSpotted": {
+    "label": "Moy. détecté",
+    "tip": "Ennemis repérés par bataille"
+  },
+  "avgDefense": {
+    "label": "Défense de base",
+    "tip": "Points de défense par bataille"
+  },
+  "avgXp": {
+    "label": "XP moyen"
+  }
+}

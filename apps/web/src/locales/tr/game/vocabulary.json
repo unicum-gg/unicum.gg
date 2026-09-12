@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Rastgele",
+    "battle_royale": "Çelik Avcısı",
+    "frontline": "Ön Cephe",
+    "onslaught": "Hücum",
+    "onslaught_night": "{onslaught} Gecesi",
+    "grand_battle": "Büyük Savaş",
+    "clan_wars": "Klan Savaşları",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Son Direniş",
+    "arcade": "Atari Salonu",
+    "story_mode": "Hikâye Kipi",
+    "training": "Eğitim"
+  },
+  "player-modes": {
+    "overall": "Rastgele Savaşlar",
+    "skirmish": "Çatışma",
+    "advances": "İlerlemeler",
+    "grand": "Büyük Savaşlar",
+    "ranked": "Dereceli Savaşlar",
+    "cw-x": "Klan Savaşları X",
+    "cw-viii": "Klan Savaşları VIII",
+    "cw-vi": "Klan Savaşları VI",
+    "steel-hunter": "Çelik Avcısı",
+    "onslaught": "Hücum"
+  },
+  "stronghold-tiers": {
+    "advances": "İlerlemeler",
+    "t10": "Çatışma T10",
+    "t8": "Çatışma T8",
+    "t6": "Çatışma T6"
+  },
+  "stronghold-periods": {
+    "24h": "Son 24 saat",
+    "7d": "Son 7 gün",
+    "30d": "Son 30 gün",
+    "overall": "Genel"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Savaşlar",
+    "winrate": "Kazanma oranı"
+  },
+  "clan-boards": {
+    "advances": "İlerlemeler",
+    "t10": "Çatışma X",
+    "t8": "Çatışma VIII",
+    "t6": "Çatışma VI"
+  },
+  "map-modes": {
+    "standard": "Standart",
+    "encounter": "Karşılaşma Savaşı",
+    "assault": "Taarruzcu",
+    "attack-defense": "Saldırı/Savunma"
+  },
+  "map-camouflage": {
+    "summer": "Yaz",
+    "winter": "Kış",
+    "desert": "Çöl"
+  },
+  "map-poi": {
+    "1": "Topçu Karargâhı",
+    "2": "İletişim Merkezi",
+    "3": "Gözetleme Noktası"
+  },
+  "tournament-modes": {
+    "ctf": "Standart",
+    "domination": "Karşılaşma",
+    "assault2": "Saldırı/Savunma",
+    "comp7": "Hücum"
+  },
+  "battle-formats": {
+    "random": "Rastgele",
+    "clan_wars": "Klan Savaşları",
+    "advances": "İlerlemeler",
+    "skirmish": "Çatışma",
+    "maneuvers": "Manevralar",
+    "onslaught": "Hücum",
+    "tournament": "Turnuva"
+  },
+  "battle-results": {
+    "victory": "Zafer",
+    "defeat": "Yenilgi",
+    "draw": "Berabere"
+  },
+  "spawn-directions": {
+    "north": "Kuzey",
+    "south": "Güney",
+    "east": "Doğu",
+    "west": "Batı"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Gelecek",
+    "registration_started": "Kayıt açık",
+    "registration_finished": "Kayıt kapandı",
+    "running": "Devam ediyor",
+    "finished": "Tamamlanıyor",
+    "complete": "Tamamlandı"
+  },
+  "onslaught-tiers": {
+    "legend": "Efsane",
+    "champion": "Şampiyon",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Ağır",
+    "mediumTank": "Orta",
+    "lightTank": "Hafif",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Taarruzcu",
+    "break": "Yarma Amaçlı",
+    "support": "Destekçi",
+    "universal": "Çok Yönlü",
+    "sniper": "Keskin Nişancı",
+    "wheeled": "Tekerlekli"
+  },
+  "mastery-badges": {
+    "class3": "3. Sınıf",
+    "class2": "2. Sınıf",
+    "class1": "1. Sınıf",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Rastgele Savaşlar",
+    "stronghold": "Tahkimat",
+    "skirmish": "Çatışma",
+    "clan-wars": "Klan Savaşları"
+  },
+  "features": {
+    "stronghold": "Tahkimat",
+    "skirmish": "Çatışma",
+    "marks-of-excellence": "Mükemmellik İşaretleri",
+    "marks-of-mastery": "Ustalık İşaretleri",
+    "personal-rating": "Kişisel Reyting",
+    "world-of-tanks-rating": "World of Tanks Reytingi",
+    "common-test": "Ortak Test",
+    "tournaments": "Turnuvalar"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Mark",
+    "3": "3 Mark",
+    "name": "Mükemmellik İşaretleri"
+  }
+}

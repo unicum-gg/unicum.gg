@@ -1,0 +1,17 @@
+{
+  "aim-time": "Ajanviejä",
+  "ammo": "Ammukset",
+  "armor": "Selviytymiskyk",
+  "dispersion": "Hajonta",
+  "fire-chance": "Palomahdollisuus",
+  "gun-arc": "Aseen kaari",
+  "hit-points": "Elinvoima",
+  "load-limit": "Kuormaraja",
+  "mounted-on": "Asennettuna ajoneuvoihin {tanks}",
+  "power": "Teho",
+  "reload": "Lataus",
+  "signal-range": "Signaalin kantama",
+  "tier": "Taso {tier}",
+  "traverse": "Käännös",
+  "view-range": "Näkyvyysalue"
+}

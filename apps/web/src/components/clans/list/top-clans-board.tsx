@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
 import { useCallback, useMemo } from "react";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { TopClansList } from "@/components/clans/list/top-clans-list";
@@ -15,6 +16,8 @@ import {
 } from "@unicum.gg/shared";
 import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
 import type { Region } from "@unicum.gg/wargaming";
+import { FilterSubject } from "@/components/filter-subject";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * One metric's clan leaderboard, paginated client-side over the full ranking
@@ -34,6 +37,8 @@ export function TopClansBoard({
   results: TopClanByLanguageResult[];
   omitBoard?: ClanBoard;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/clans/list/view");
   const searchFields = useCallback(
     (r: TopClanByLanguageResult) => [r.tag, r.name],
     [],
@@ -45,14 +50,14 @@ export function TopClansBoard({
         label: RATING_METRIC_LABEL[metric],
         value: (r) => r.avg_value,
       },
-      { key: "members", label: "Members", value: (r) => r.members_count },
+      { key: "members", label: t("members"), value: (r) => r.members_count },
       {
         key: "winrate",
         label: "WR %",
         value: (r) => (r.winrate != null ? r.winrate * 100 : null),
       },
     ],
-    [metric],
+    [metric, t],
   );
   const { filtered, filters } = useLeaderboardFilter(results, {
     searchFields,
@@ -66,9 +71,10 @@ export function TopClansBoard({
   return (
     <>
       <div className="border-b border-fd-border px-4 py-2.5">
-        <LeaderboardFilterBar filters={filters} searchNoun="clans" />
+        <LeaderboardFilterBar filters={filters} searchNoun={FilterSubject.Clans} />
       </div>
       <TopClansList
+        locale={locale}
         region={region}
         results={paged}
         metric={metric}

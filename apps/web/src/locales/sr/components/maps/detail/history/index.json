@@ -1,0 +1,12 @@
+{
+  "added": "Dodato",
+  "before-update": "Пре ажурирања {version}",
+  "common-test": "Zajednički test",
+  "every-update-that-changed-this": "Свако ажурирање које је променило ову мапу, од најновијег ка најстаријем, прочитано директно из клијента игре.",
+  "in-the-game": "U igri",
+  "n-changes": "{count, plural, one {# promena} few {# promene} other {# promene}}",
+  "not-released-wargaming-can-still": "Није објављено. Wargaming и даље може да промени или испусти било шта од овога пре него што ажурирање буде испоручено.",
+  "removed": "Uklonjeno",
+  "title": "Promene na mapi {map}",
+  "update": "Osveži {version}"
+}

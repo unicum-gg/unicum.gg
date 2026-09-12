@@ -1,0 +1,5 @@
+{
+  "battles": "{count} битки",
+  "chart-label": "Изиграни битки за {granularity}, оцветени според {metric}",
+  "no-battles": "Няма битки"
+}

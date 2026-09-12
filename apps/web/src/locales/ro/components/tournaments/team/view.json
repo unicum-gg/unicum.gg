@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Tragerea la sorți nu a fost făcută încă. Meciurile acestei echipe apar aici după începerea turneului.",
+  "each-map-is-played-twice": "Fiecare hartă se joacă de două ori, o dată de fiecare parte. Ultima hartă este decisivă și se joacă o singură dată.",
+  "first-battle-at": "Prima bătălie, {when}",
+  "lost": "Pierdut",
+  "matches": "Meciuri ({length})",
+  "never-played": "Această echipă nu a jucat niciodată un meci. S-a înscris, dar tragerea la sorți nu a ajuns la ea, ceea ce se întâmplă unei liste rămase neconfirmate.",
+  "no-maps-recorded": "Nicio hartă înregistrată pentru acest meci.",
+  "no-roster-recorded-for-this": "Nicio listă înregistrată pentru această echipă.",
+  "of-players-on-the-day": "{members} din {length} jucători în ziua respectivă",
+  "played-on-uncatalogued": "Jucat pe {maps}, hartă pe care catalogul de hărți nu o include.",
+  "roster": "Echipa ({length})",
+  "stage-group": "{stage} · Grupa {order}",
+  "team-1": "Echipa 1",
+  "team-2": "Echipa 2",
+  "tournaments": "Turneele",
+  "when-the-first-battle-started": "Când a început prima bătălie",
+  "won": "Câștigat"
+}

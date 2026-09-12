@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3° Classe",
+      "tip": "3ª classe: XP necessari per superare il 50% dei giocatori"
+    },
+    "class2": {
+      "label": "2° Classe",
+      "tip": "2ª classe: XP necessari per superare l’80% dei giocatori"
+    },
+    "class1": {
+      "label": "1° Classe",
+      "tip": "1ª classe: XP necessari per superare il 95% dei giocatori"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "Asso carrista: XP necessari per superare il 99% dei giocatori"
+    }
+  },
+  "rows-per-page": "Righe per pagina",
+  "previous-page": "Pagina precedente",
+  "page": "Pagina {current} di {totalPages}",
+  "next-page": "Pagina successiva",
+  "all": "Tutti"
+}

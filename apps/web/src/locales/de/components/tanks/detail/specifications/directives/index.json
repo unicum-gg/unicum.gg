@@ -1,0 +1,9 @@
+{
+  "boosts": "Boosts {name}",
+  "directives": "Direktiven",
+  "directive-name": "{name} Anweisung",
+  "grants-and-boosts": "Gewährt und verbessert die Besatzungsfertigkeit, auch wenn sie nicht erlernt wurde.",
+  "grants-only": "Gewährt die Besatzungsfertigkeit für das Gefecht (keine aufgeführte Eigenschaft).",
+  "enhances-mounted": "Verbessert die Wirkung von {name} im montierten Zustand.",
+  "mount-to-use": "Montiere {name}, um diese Direktive zu verwenden."
+}

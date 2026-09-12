@@ -1,0 +1,9 @@
+{
+  "battle-time": "Mūšio laikas",
+  "camouflage": "{camouflage} kamuolys",
+  "mode": "Režimas",
+  "n-random-events": "{count, plural, one {# atsitiktinis įvykis} few {# atsitiktiniai įvykiai} other {# atsitiktiniai įvykiai}}",
+  "random-events": "Atsitiktiniai įvykiai",
+  "size": "Dydis",
+  "team-size": "Komandos dydis"
+}

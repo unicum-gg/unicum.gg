@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Oversikt",
+    "tanks": "Kjøretøy",
+    "videos": "Videoer",
+    "tournaments": "Turneringer",
+    "manage": "Administrer"
+  },
+  "section-count": "{section} ({count})"
+}

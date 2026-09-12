@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Zatiaľ nie sú k dispozícii žiadne údaje. Skontrolujte to znova po aktualizácii klanov.",
+  "heading": "Najlepšie klany úrovne <accent>{tier}</accent>",
+  "blurb": "Rebríček pre región {region}, zoradený podľa hodnoty {sort} spomedzi všetkých sledovaných klanov vo formáte {format} (minimálne {battles} bitiek).",
+  "blurb-period": "Rebríček pre región {region}, zoradený podľa hodnoty {sort} spomedzi všetkých sledovaných klanov vo formáte {format} za obdobie {period} (minimálne {battles} bitiek).",
+  "format-advances": "Napredovanja (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Najlepších {count} klanov úrovne {tier} ·"
+}

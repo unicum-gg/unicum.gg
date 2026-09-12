@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Cena (kredity)",
+    "buyGold": "Cena (zlato)",
+    "researchXp": "Výzkumná XP",
+    "shellCost": "Cena granátu",
+    "ammoCost": "Celková cena munice",
+    "class3": "3. Třída",
+    "class2": "2. Třída",
+    "class1": "1. Třída",
+    "ace": "Esence Tankista",
+    "mark1": "1 Záplata (65 %)",
+    "mark2": "2 Záplaty (85 %)",
+    "mark3": "3 Záplaty (95 %)"
+  }
+}

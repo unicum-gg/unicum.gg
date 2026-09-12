@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Средно от {rated} от {size} играчи",
+  "average-over-recent": "Средно от {rated} от {size} играчи, играли през последните 30 дни",
+  "avg-winrate": "Средна печалба",
+  "finished": "Завършен",
+  "record": "Запис",
+  "won": "Спечелени"
+}

@@ -1,0 +1,8 @@
+{
+  "previous": "पिछला पृष्ठ",
+  "next": "अगला पृष्ठ",
+  "rows-per-page": "प्रति पृष्ठ पंक्तियाँ",
+  "all": "सभी",
+  "range": "{first}–{last} में से {total}",
+  "page": "पेज {page} / {total}"
+}

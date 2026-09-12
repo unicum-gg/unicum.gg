@@ -1,0 +1,12 @@
+{
+  "before-update": "Pirms atjauninājuma {version}",
+  "common-test": "Kopējais tests",
+  "in-common-test-not-released": "Kopējā testā, vēl nav izlaists",
+  "introduced": "Iepazīstināts",
+  "lifecycle": "Dzīves cikls",
+  "n-buffed": "{count} uzlabots",
+  "n-nerfed": "{count} vājināts",
+  "not-released-wargaming-can-still": "Nav izlaists. Wargaming joprojām var to mainīt vai noņemt, pirms atjauninājums tiek publicēts.",
+  "status": "Status",
+  "update": "Atjaunināt {version}"
+}

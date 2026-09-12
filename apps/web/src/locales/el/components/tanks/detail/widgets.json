@@ -1,0 +1,12 @@
+{
+  "slot": "Θέση {n}",
+  "slot-filled": "Θέση {n}: {name}",
+  "consumable-slot": "Θέση αναλώσιμου {n}",
+  "consumable-slot-filled": "Θέση αναλώσιμου {n}: {name}",
+  "level": "Επίπεδο {n}",
+  "stock": "Απόθεμα",
+  "specialize": "Κλικ για εξειδίκευση αυτής της θέσης.",
+  "clear-specialization": "Κλικ για εκκαθάριση της εξειδίκευσης αυτής της θέσης.",
+  "crew-skills": "Δεξιότητες Πληρώματος",
+  "shell-aria": "{name}: {damage} ζημιά, {penetration} mm διείσδυση"
+}

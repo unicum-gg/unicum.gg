@@ -1,0 +1,18 @@
+{
+  "player-leaderboard": "กระดานผู้นำผู้เล่น",
+  "clan-leaderboard": "กระดานผู้นำกองทัพ",
+  "every-tank": "รถถังทุกคัน",
+  "tank-economics": "เศรษฐศาสตร์รถถัง",
+  "marks-of-excellence-by-tank": "เครื่องหมายเชี่ยวชาญตามรถถัง",
+  "mastery-thresholds-by-tank": "เกณฑ์ความเชี่ยวชาญตามรถถัง",
+  "buffs-and-nerfs-by-update": "การเพิ่มและลดความสามารถตามอัปเดต",
+  "every-map": "แผนที่ทุกแผนที่",
+  "stronghold-ladder": "อันดับที่มั่น",
+  "advances-ranking": "อันดับการรบรุกคืบ",
+  "onslaught-ladder": "อันดับการบุกรุก",
+  "steel-hunter-leaderboard": "ตารางอันดับพรานเหล็ก",
+  "tracking-coverage": "การติดตามการครอบคลุม",
+  "api-reference": "เอกสาร API",
+  "this-tank": "รถถังนี้",
+  "this-map": "แผนที่นี้"
+}

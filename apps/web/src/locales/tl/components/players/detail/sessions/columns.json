@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Rating (WN)",
+    "tip": "Rating ng mga laban na ito lamang, hindi ng account"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Rate ng panalo sa mga laban na ito"
+  },
+  "avgDamage": {
+    "label": "Avg na pinsala"
+  },
+  "avgFrags": {
+    "label": "Kadalasang pumatay",
+    "tip": "Mga kaaway na winasak bawat labanan"
+  },
+  "damageRatio": {
+    "label": "Rasyong Pinsala",
+    "tip": "Pinsalang naidulot kumpara sa pinsalang natanggap"
+  },
+  "kd": {
+    "label": "Dami ng pagkawasak",
+    "tip": "Mga kaaway na winasak kumpara sa mga sasakyang nawala"
+  },
+  "survivalRate": {
+    "label": "Mga labanan na nalampasan"
+  },
+  "avgSpotted": {
+    "label": "Avg na nakita",
+    "tip": "Mga kaaway na nakita bawat labanan"
+  },
+  "avgDefense": {
+    "label": "Depensa ng base",
+    "tip": "Mga puntos sa depensa bawat labanan"
+  },
+  "avgXp": {
+    "label": "Karaniwang XP"
+  }
+}

@@ -19,6 +19,7 @@ import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules
 import type { TankConfigModules } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
+import { useTranslation } from "@/hooks/use-translation";
 
 // Row order of the in-game Modules screen.
 const TYPE_ORDER: ModuleType[] = [
@@ -111,6 +112,7 @@ export function TankModules({
    * elements. Off inside a dialog, where they would overflow it sideways. */
   screenLines?: boolean;
 }) {
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
   if (nodes.length === 0) return null;
   return (
     <Panel screenLines={screenLines}>
@@ -118,7 +120,7 @@ export function TankModules({
         screenLines={screenLines}
         className="flex items-center justify-between gap-4"
       >
-        <PanelTitle>{meta.name} modules</PanelTitle>
+        <PanelTitle>{tSection("modules", { tank: meta.name })}</PanelTitle>
         {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
       </PanelHeader>
       <PanelContent className="py-6">

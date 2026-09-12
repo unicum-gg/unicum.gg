@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Бағасы (кредиттер)",
+    "buyGold": "Бағасы (алтын)",
+    "researchXp": "Зерттеу XP",
+    "shellCost": "Оқ-дәрі бағасы",
+    "ammoCost": "Толық оқ-дәрі бағасы",
+    "class3": "3-дәрежелі",
+    "class2": "2-дәрежелі",
+    "class1": "1-дәрежелі",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Mark (85%)",
+    "mark3": "3 Mark (95%)"
+  }
+}

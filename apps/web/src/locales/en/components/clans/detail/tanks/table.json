@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "No tank data for this clan yet.",
+  "no-tanks-match-these-filters": "No tanks match these filters.",
+  "nation": "Nation",
+  "type": "Type",
+  "tier": "Tier",
+  "name": "Name",
+  "members": "Members",
+  "battles": "Battles",
+  "avg-damage": "Avg damage",
+  "avg-xp": "Avg XP",
+  "wr": "WR"
+}

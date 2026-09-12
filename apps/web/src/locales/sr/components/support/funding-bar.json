@@ -1,0 +1,18 @@
+{
+  "caught-up": "Све је у потпуности покривено, хвала вам. Све преко тога иде на већи капацитет и нове функције.",
+  "covered-label": "Pokryto",
+  "covered-sentence": "Подржаваоци су до сада покрили {received} од укупно потрошених {spent}.",
+  "days-out-of-pocket": "{days} дана из сопственог џепа",
+  "from-supporter-one": "од {count} подржаваоца",
+  "from-supporters": "од {count} подржавалаца",
+  "gap-growing": "Додатних {amount}/месечно спречава раст разлике.",
+  "goal": "cilj {amount}",
+  "of-that-total": "од тог укупног износа",
+  "pledges-cover": "Обећања сада покривају месечни рачун.",
+  "raised-amount": "{amount} prikupljeno",
+  "raised-label": "Prikupljeno",
+  "run-at-a-loss": "{name} послује са губитком од {since}.",
+  "run-rate": "Месечни темпо: обећано {pledged}/месечно у односу на {cost}/месечно за рад.",
+  "spent-since-launch": "Потрошено од покретања",
+  "to-catch-up": "{amount} до потпуног покрића."
+}

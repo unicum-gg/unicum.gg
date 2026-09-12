@@ -1,0 +1,11 @@
+{
+  "already-running": "už běží",
+  "in-window": "ve okně",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Vybrané rezervy: ne.",
+  "no-stock-ready": "Základní ve stavu Připraven: ne",
+  "not-available": "není k dispozici",
+  "threshold": "práh ({online}/{min})",
+  "would-activate": "by aktivoval",
+  "would-not-fire": "Právě teď by se nespustil."
+}

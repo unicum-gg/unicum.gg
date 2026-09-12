@@ -1,0 +1,9 @@
+{
+  "all": "Όλα",
+  "camouflage-map": "Χάρτης {camouflage}",
+  "modes": "{count, plural, one {# λειτουργία} other {# λειτουργίες}}",
+  "no-maps-match-your-filters": "Κανένας χάρτης δεν ταιριάζει στα φίλτρα σας.",
+  "search": "Αναζήτηση ανάμεσα σε {count} χάρτες",
+  "search-label": "Έρευνα Χάρτες",
+  "special-map": "Ειδικός Χάρτης"
+}

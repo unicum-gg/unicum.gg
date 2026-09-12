@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   type ChartConfig,
@@ -9,18 +11,11 @@ import {
 } from "@/components/ui/chart";
 import { RatingMetric, type RatingHistoryPoint, RATING_COLOR_HEX, type RatingColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 
-const dayFmt = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-});
+const DAY_PATTERN = "d MMM";
 
-const tooltipDayFmt = new Intl.DateTimeFormat("en-US", {
-  weekday: "short",
-  month: "short",
-  day: "numeric",
-});
+const TOOLTIP_DAY_PATTERN = "EEE d MMM";
 
-const valueFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const VALUE_FORMAT = { maximumFractionDigits: 0 } as const;
 
 // Tier thresholds per metric, mirroring the buckets in
 // src/services/wargaming/wot/ratings.ts. Used to place gradient stops where
@@ -36,10 +31,6 @@ const COLOR_FN: Record<RatingMetric, (v: number) => RatingColor> = {
   [RatingMetric.Wn8]: wn8Color,
   [RatingMetric.Wnx]: wnxColor,
 };
-
-function tickFormatter(value: string) {
-  return dayFmt.format(new Date(value));
-}
 
 function buildGradientStops(
   minVal: number,
@@ -93,6 +84,8 @@ export function PlayerRatingChart({
   metricLabel: string;
   metric: RatingMetric;
 }) {
+  const { num } = useFormat();
+  const { date } = useFormat();
   // Round at the source so the tooltip, axis, and dots all show the same
   // integer values. The chart doesn't need sub-unit precision and the
   // default tooltip formatter prints every decimal otherwise.
@@ -105,6 +98,7 @@ export function PlayerRatingChart({
       session: session === null ? null : Math.round(session),
     };
   });
+  const { t } = useTranslation("components/players/detail/overview/rating-chart");
   const colorFn = COLOR_FN[metric];
   const sessionValues = chartData
     .map((d) => d.session)
@@ -136,7 +130,7 @@ export function PlayerRatingChart({
     <ChartContainer
       config={config}
       className="aspect-auto h-56 w-full"
-      aria-label={`${metricLabel} over time: overall and per-session lines`}
+      aria-label={t("chart-label", { metric: metricLabel })}
     >
       <AreaChart data={chartData} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
         <defs>
@@ -160,7 +154,9 @@ export function PlayerRatingChart({
           tickLine={false}
           axisLine={false}
           tickMargin={8}
-          tickFormatter={tickFormatter}
+          tickFormatter={(value: string) =>
+            date(DAY_PATTERN).format(new Date(value))
+          }
           minTickGap={32}
         />
         <YAxis
@@ -169,14 +165,14 @@ export function PlayerRatingChart({
           tickMargin={8}
           width={48}
           allowDecimals={false}
-          tickFormatter={(v) => valueFmt.format(Number(v))}
+          tickFormatter={(v) => num(VALUE_FORMAT).format(Number(v))}
         />
         <ChartTooltip
           cursor={false}
           content={
             <ChartTooltipContent
               labelFormatter={(label) =>
-                tooltipDayFmt.format(new Date(label as string))
+                date(TOOLTIP_DAY_PATTERN).format(new Date(label as string))
               }
             />
           }

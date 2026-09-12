@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} izboljšan",
+  "n-tanks": "{count, plural, one {# tanko} few {# tanky} other {# tankov}}",
+  "nerfed": "{count} oslabavljen",
+  "no-tank-changes-have-been": "Zatiaľ neboli zaznamenané žiadne zmeny tankov. Keď Wargaming vyvažuje tanky, vylepšenia a oslabenia každej aktualizácie sa objavia tu.",
+  "update": "Posodobi {version}"
+}

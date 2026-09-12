@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "{size}名玩家中{rated}名已评级玩家的平均值",
+  "average-over-recent": "过去30天进行过对战的{size}名玩家中{rated}名玩家的平均值",
+  "metric-over-last-30-days": "过去30天的{metric}",
+  "n-confirmed": "{count}人已确认",
+  "no-team-matches-the-current": "没有队伍符合当前筛选条件。",
+  "no-teams-recorded-yet-registrations": "暂无已记录的队伍。锦标赛打开后几分钟内会完成读取，届时报名队伍会显示在这里。",
+  "none-played-in-30-days": "该名单中的玩家过去30天没有人进行过对战",
+  "players": "玩家",
+  "qualified": "符合资格",
+  "reward": "奖励",
+  "team": "队伍",
+  "teams": "队伍 ({length})",
+  "wr": "WR"
+}

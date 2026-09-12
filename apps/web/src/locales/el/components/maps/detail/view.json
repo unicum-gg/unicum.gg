@@ -1,0 +1,9 @@
+{
+  "battle-time": "Χρόνος μάχης",
+  "camouflage": "Καμουφλάζ {camouflage}",
+  "mode": "Μόδα",
+  "n-random-events": "{count, plural, one {# τυχαία εκδήλωση} other {# τυχαίες εκδηλώσεις}}",
+  "random-events": "Τυχαία γεγονότα",
+  "size": "Μέγεθος",
+  "team-size": "Μέγεθος ομάδας"
+}

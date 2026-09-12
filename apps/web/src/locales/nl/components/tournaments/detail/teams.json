@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Gemiddeld over {rated} van {size} spelers",
+  "average-over-recent": "Gemiddeld over de {rated} van {size} spelers die in de afgelopen 30 dagen hebben gespeeld",
+  "metric-over-last-30-days": "{metric} over de afgelopen 30 dagen",
+  "n-confirmed": "{count} bevestigd",
+  "no-team-matches-the-current": "Geen enkel team voldoet aan de huidige filters.",
+  "no-teams-recorded-yet-registrations": "Nog geen teams geregistreerd. Inschrijvingen verschijnen hier zodra dit toernooi volledig is ingelezen, wat binnen enkele minuten na de opening gebeurt.",
+  "none-played-in-30-days": "Geen enkele speler uit deze selectie heeft in de afgelopen 30 dagen gespeeld",
+  "players": "Spelers",
+  "qualified": "Gekwalificeerd",
+  "reward": "Beloning",
+  "team": "Team",
+  "teams": "Teams ({length})",
+  "wr": "WR"
+}

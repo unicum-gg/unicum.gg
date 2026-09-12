@@ -5,6 +5,7 @@ import {
 } from "@onruntime/next-sitemap";
 import { sql } from "drizzle-orm";
 import APP from "@/constants/app";
+import { DEFAULT_LOCALE, LOCALES } from "@/lib/translations";
 import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
@@ -75,9 +76,18 @@ export async function getSitemapCounts(): Promise<RegionCounts> {
 
 export const sitemapConfig: Pick<
   SitemapConfig,
-  "baseUrl" | "exclude" | "debug"
+  "baseUrl" | "exclude" | "debug" | "locales" | "defaultLocale"
 > = {
   baseUrl: APP.URL,
+  // The auto-discovered half only: the sections, a bounded list, where one entry
+  // per language with `hreflang` alternates is exactly what tells a crawler the
+  // translations exist. The entity streams below (players, clans, tanks,
+  // tournaments, millions of URLs each) stay in the default language on purpose:
+  // 27 copies of every player page would multiply the crawl budget of a site
+  // whose traffic is already dominated by crawlers, and `hreflang` in the page
+  // head says the same thing for the ones actually visited.
+  locales: [...LOCALES],
+  defaultLocale: DEFAULT_LOCALE,
   exclude: [
     // Internal/API routes
     "/api/*",

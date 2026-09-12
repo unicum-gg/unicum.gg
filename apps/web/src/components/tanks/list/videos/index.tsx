@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 import { Panel, PanelContent } from "@/components/panel";
 import { TankVideoCard } from "@/components/tanks/detail/videos/card";
 import { groupBattlesByVideo } from "@/components/tanks/detail/videos/group";
@@ -18,6 +19,7 @@ import {
 } from "@/components/tanks/detail/videos/view-toggle";
 import type { CommunityBattle } from "@/components/tanks/list/videos/row";
 import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
+import { FilterSubject } from "@/components/filter-subject";
 
 // The one number a battle carries. Everything else about a row is the vehicle,
 // which the tier/nation/class filters already cover.
@@ -55,6 +57,7 @@ export function TanksVideosTab({
   // was played: a tactic has no vehicle at all, so without the second it could
   // only ever be found by scrolling.
   const { filtered, filters } = useTankFilters(battles, RANGE_COLS, "damage");
+  const { t } = useTranslation("components/tanks/list/videos/index");
   const battleState = useBattleFilters(filtered);
   const groups = useMemo(
     () => groupBattlesByVideo(battleState.filtered),
@@ -67,7 +70,7 @@ export function TanksVideosTab({
       <PanelContent className="space-y-4 p-4">
         <TankFilterBar
           filters={filters}
-          searchNoun="videos"
+          searchNoun={FilterSubject.Videos}
           extra={<VideosViewToggle view={view} onChange={setView} />}
         />
         <BattleFilterBar {...battleState} />
@@ -77,8 +80,8 @@ export function TanksVideosTab({
         <div className="border-t border-fd-border">
           <p className="py-12 text-center text-sm text-fd-muted-foreground">
             {battles.length === 0
-              ? "No video yet. They arrive from the pages they belong to: a battle from its tank's page, a tactic from the map it was fought on."
-              : "No battle matches these filters."}
+              ? t("no-video-yet")
+              : t("no-battle-matches")}
           </p>
         </div>
       ) : view === VideosView.Table ? (

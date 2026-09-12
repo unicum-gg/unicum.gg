@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Zmeňte všetko, čo je nesprávne, vrátane vozidla. Po uložení sa video znova zaradí do frontu na moderovanie. Ak je už zverejnené, zostane stiahnuté, kým nebude znova schválené.",
+  "correct-a-suggestion": "Opraviť návrh",
+  "could-not-load-that-suggestion": "Lahko sa nepodarilo načítať tento návrh. Skús to znova o chvíľu.",
+  "link-expired": "Tento odkaz vypršal. Stlač Upraviť znova na karte v Discorde a získaj nový.",
+  "loading": "Načítava sa…",
+  "log-in": "Prihlásiť sa",
+  "log-in-with-the-account": "Ak chcete video opraviť, prihláste sa pomocou účtu, z ktorého bolo navrhnuté.",
+  "no-suggestion-with-that-id": "Neexistuje žiadny návrh s týmto ID.",
+  "not-yours-to-correct": "Tento návrh nie je tvoj na opravu."
+}

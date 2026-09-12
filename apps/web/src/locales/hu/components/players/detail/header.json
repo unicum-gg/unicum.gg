@@ -1,0 +1,7 @@
+{
+  "joined": "Csatlakozott: {date}",
+  "last-battle": "Utolsó csata: {when}",
+  "never-played": "Még nem játszott",
+  "updated": "Frissítve: {when}",
+  "clan-role-joined": "{role} · csatlakozott: {date}"
+}

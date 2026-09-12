@@ -1,0 +1,25 @@
+{
+  "tagline": "Creato per la community di World of Tanks. Statistiche gratuite per ogni giocatore, clan, carro armato e mappa in Europa, Nord America e Asia.",
+  "columns": {
+    "leaderboards": "Classifiche",
+    "tanks": "Carri",
+    "maps": "Mappe",
+    "integrations": "Integrazioni",
+    "project": "Progetto"
+  },
+  "links": {
+    "top-tanks": "Carri migliori",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "Documentazione API",
+    "badges": "Distintivi",
+    "glossary": "Glossario",
+    "coverage": "Copertura",
+    "support": "Sosteneteci",
+    "source": "Codice sorgente",
+    "status": "Stato",
+    "discord": "Discord"
+  },
+  "disclaimer": "Non affiliato a Wargaming",
+  "cookies": "Gestisci i cookie"
+}

@@ -1,0 +1,162 @@
+{
+  "columns-label": "Oszlopok",
+  "groups": {
+    "firepower": "Tűzerő",
+    "gun-handling": "Fegyver kezelés",
+    "mobility": "Mobilitás",
+    "survivability": "Túlélőképesség",
+    "other": "Egyéb"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Percenkénti sebzés"
+    },
+    "damage": {
+      "label": "Sebzés",
+      "tip": "Alfa sebzés"
+    },
+    "moduleDamage": {
+      "label": "Modulsebzés"
+    },
+    "splashRadius": {
+      "label": "Robbanási sugár"
+    },
+    "reload": {
+      "label": "Újratöltés",
+      "tip": "Újratöltés (teljes tár az automata töltőknél)"
+    },
+    "rof": {
+      "label": "Tűzgyorsaság",
+      "tip": "Lövések percenként"
+    },
+    "intraClipReload": {
+      "label": "Táron belüli újratöltés",
+      "tip": "A tárban lévő lövések közötti idő (automata töltőknél)"
+    },
+    "penetration": {
+      "label": "Páncélátütés",
+      "tip": "Páncélátütés (mm), alapértelmezett lövedék"
+    },
+    "caliber": {
+      "label": "Kaliber",
+      "tip": "Lövedék kalibere (mm)"
+    },
+    "shellVelocity": {
+      "label": "Lövedék sebessége",
+      "tip": "Lövedék sebessége (m/s)"
+    },
+    "accuracy": {
+      "label": "Pontosság",
+      "tip": "Szórás 100 méteren, az alacsonyabb érték jobb"
+    },
+    "aimTime": {
+      "label": "Célozási idő"
+    },
+    "dispMoving": {
+      "label": "Szórás mozgás közben",
+      "tip": "Szórási tényező mozgás közben"
+    },
+    "dispTankTraverse": {
+      "label": "Szórás a tank fordulásakor"
+    },
+    "dispTurretTraverse": {
+      "label": "Szórás a torony fordulásakor"
+    },
+    "dispAfterShot": {
+      "label": "Szórás tüzelés után"
+    },
+    "dispWhileDamaged": {
+      "label": "Szórás sérülten"
+    },
+    "gunArc": {
+      "label": "Löveg vízszintes kitérítése",
+      "tip": "A löveg vízszintes mozgatási íve"
+    },
+    "depression": {
+      "label": "Lövegsüllyedés / lövegemelkedés",
+      "tip": "Lövegsüllyedés / lövegemelkedés"
+    },
+    "speed": {
+      "label": "Sebesség (előre / hátra)",
+      "tip": "Maximális sebesség előre / hátra (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Hajótest forgatás"
+    },
+    "turretTraverse": {
+      "label": "Tornyozás"
+    },
+    "enginePower": {
+      "label": "Teljesítmény",
+      "tip": "Motor teljesítménye (LE)"
+    },
+    "powerWeight": {
+      "label": "Teljesítmény/tömeg",
+      "tip": "LE tonnánként"
+    },
+    "terrainHard": {
+      "label": "Kemény talaj",
+      "tip": "Terepellenállás kemény talajon, az alacsonyabb érték jobb"
+    },
+    "terrainMedium": {
+      "label": "Közepes talaj"
+    },
+    "terrainSoft": {
+      "label": "Puha talaj"
+    },
+    "health": {
+      "label": "Életerő",
+      "tip": "Életerő"
+    },
+    "engineHealth": {
+      "label": "Motor életereje"
+    },
+    "engineFireChance": {
+      "label": "A motortűz esélye"
+    },
+    "hullArmorFront": {
+      "label": "Hajópáncélzat (front)",
+      "tip": "Frontpáncélzat (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Toronypáncélzat (front)",
+      "tip": "Frontális toronypáncélzat (mm)"
+    },
+    "trackArmor": {
+      "label": "Lánctalp páncélzata"
+    },
+    "trackHealth": {
+      "label": "Lánctalp életereje"
+    },
+    "trackRepairTime": {
+      "label": "Lánctalp javítási ideje"
+    },
+    "ammoRackHealth": {
+      "label": "Lőszerrekesz épsége"
+    },
+    "weight": {
+      "label": "Tömeg"
+    },
+    "viewRange": {
+      "label": "Látótávolság",
+      "tip": "Látótávolság (m)"
+    },
+    "radioRange": {
+      "label": "Rádió hatótávolsága",
+      "tip": "Jelátviteli távolság (m)"
+    },
+    "camoStill": {
+      "label": "Álcázás álló helyzetben"
+    },
+    "camoMoving": {
+      "label": "Álcázás mozgás közben"
+    },
+    "camoStillFiring": {
+      "label": "Állóhelyzeti álcázás tüzelés után"
+    },
+    "camoMovingFiring": {
+      "label": "Mozgás közbeni álcázás tüzelés után"
+    }
+  }
+}

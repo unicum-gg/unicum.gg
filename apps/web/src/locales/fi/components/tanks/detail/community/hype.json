@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "parempi kuin {value} % tason arvioiduista panssarivaunuista",
+  "measured-hint": "Sen voittoprosentin sijoitus samojen panssarivaunujen joukossa",
+  "not-enough-votes-yet-to": "Ääniä ei ole vielä tarpeeksi yhteisön tuomion vertaamiseen panssarivaunun todelliseen suorituskykyyn.",
+  "perceived-hint": "Yhteisön sijoitus arvioitujen tason {tier} panssarivaunujen joukossa",
+  "verdict": {
+    "overrated": "Yhteisö arvioi sen paljon paremmaksi kuin mitä se itse asiassa saavuttaa.",
+    "fair": "Maine ja tulokset ovat tästä samaa mieltä.",
+    "underrated": "Se suoriutuu paremmin kuin kukaan sille antaa tunnustusta."
+  },
+  "what-players-think": "Mitä pelaajat ajattelevat",
+  "what-the-data-says": "Mitä tiedot kertovat"
+}

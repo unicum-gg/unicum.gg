@@ -1,0 +1,4 @@
+{
+  "title": "Mejores clanes de nivel {tier} ({region})",
+  "description": "Clasificación de clanes de nivel {tier} en {region}. Ordenada por SR (valoración de escaramuzas), ELO, batallas y porcentaje de victorias. Mínimo de {battles} batallas."
+}

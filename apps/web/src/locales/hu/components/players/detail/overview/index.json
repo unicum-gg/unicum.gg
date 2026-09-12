@@ -1,0 +1,7 @@
+{
+  "stats-title": "{nickname} normál csatáinak statisztikái",
+  "progression-title": "{nickname} {metric} fejlődése",
+  "lift-drag-title": "A {nickname} értékelését formáló tankok",
+  "progression-blurb": "A folytonos sor az összesített {metric}, amely megfelel a fenti Total oszlopnak, és lassan változik az új csaták hozzáadásával. A szaggatott sor munkamenetenkénti {metric}, amelyet az előző pillanatfelvétel óta lejátszott csatákból számítunk. Megmutatja a jó és rossz sorozatokat. A sor színe az értékelési szintet követi.",
+  "progression-empty": "Még nincs elegendő előzmény. Legalább egy pillanatfelvételre van szükségünk a görbe megrajzolásához. Nézz vissza hamarosan."
+}

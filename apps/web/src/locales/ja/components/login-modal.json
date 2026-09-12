@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Wargaming.net IDでログイン",
+  "open-source": "{name}はオープンソースです。信頼する前に{link}してください。",
+  "pick-the-region-your-world": "World of Tanksアカウントが所属する地域を選択してください。閲覧中の地域と同じである必要はありません。",
+  "read-the-login-code": "ログインコードを読む",
+  "what-wargaming-hands-back-is": "Wargamingから返されるのは、自分のアカウントデータを読み取るトークンです。アカウントのリンク中は暗号化して保存され、自動的に更新されます。また、クランの備蓄スケジュールのように、自分で設定した場所であなたのためにのみ動作します。",
+  "you-sign-in-on-wargaming": "Wargaming独自のページでログインします。ここではありません。パスワードを{NAME}に入力することはなく、私たちに届くこともありません。"
+}

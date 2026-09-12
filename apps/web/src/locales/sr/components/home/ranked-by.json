@@ -1,0 +1,6 @@
+{
+  "day": "Rangirano по параметру {metric} током протекла 24 сата (минимум 20 bitke).",
+  "week": "Rangirano по параметру {metric} током протеклих 7 дана (минимум 140 bitke).",
+  "month": "Rangirano по параметру {metric} током протеклих 30 dana (минимум 600 bitke).",
+  "overall": "Rangirano по параметру {metric} за све време (минимум 20.000 bitke)."
+}

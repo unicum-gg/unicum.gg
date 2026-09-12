@@ -1,0 +1,8 @@
+{
+  "last-days": "最近{chartDays}天",
+  "n-players": "{count, plural, other {# 玩家}}",
+  "rolling-average-combined-damage-to": "滚动平均综合伤害，用于击败65 / 85 / 95%的玩家。",
+  "single-battle-xp-to-beat": "单场战斗经验，用于击败50 / 80 / 95 / 99%的玩家。",
+  "tank-marks-of-excellence": "{tank}卓越标记",
+  "tank-marks-of-mastery": "{tank}精通标记"
+}

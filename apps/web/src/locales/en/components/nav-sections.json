@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Players",
+    "clans": "Clans",
+    "tanks": "Tanks",
+    "maps": "Maps",
+    "tournaments": "Tournaments",
+    "servers": "Servers"
+  },
+  "links": {
+    "top-players": {
+      "label": "Top players",
+      "description": "All-time player leaderboard"
+    },
+    "players-onslaught": {
+      "description": "Ranked Onslaught ladder"
+    },
+    "players-steel-hunter": {
+      "description": "Battle royale leaderboard"
+    },
+    "top-clans": {
+      "label": "Top clans",
+      "description": "All-time clan leaderboard"
+    },
+    "stronghold": {
+      "description": "Skirmishes ladder"
+    },
+    "advances": {
+      "description": "Tier X 15v15 ranking"
+    },
+    "tank-performances": {
+      "label": "Performances",
+      "description": "Winrate and damage per tank"
+    },
+    "tank-specs": {
+      "label": "Specifications",
+      "description": "Stats for every tank"
+    },
+    "tank-economics": {
+      "label": "Economics",
+      "description": "Credit and XP earners"
+    },
+    "tank-moe": {
+      "description": "Damage for each mark"
+    },
+    "tank-mom": {
+      "description": "Mastery badge thresholds"
+    },
+    "tank-changes": {
+      "label": "Changes",
+      "description": "Buffs and nerfs by update"
+    },
+    "tank-community": {
+      "label": "Community ratings",
+      "description": "Rated by players who own them"
+    },
+    "tank-videos": {
+      "label": "Videos",
+      "description": "Community gameplay"
+    },
+    "all-tournaments": {
+      "label": "Tournaments",
+      "description": "Every tournament, open and settled"
+    },
+    "all-maps": {
+      "label": "All maps",
+      "description": "Every map in the game"
+    },
+    "map-changes": {
+      "label": "Changes",
+      "description": "Map reworks by update"
+    },
+    "battle-type": {
+      "description": "{type} maps"
+    },
+    "servers-population": {
+      "label": "Server population",
+      "description": "Players online, now and over time"
+    }
+  }
+}

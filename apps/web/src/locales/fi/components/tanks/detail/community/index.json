@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Akseli kerrallaan",
+  "by-server": "Palvelin",
+  "community-verdict": "Yhteisön tuomio",
+  "every-server-one-average": "Jokainen palvelin, yksi keskiarvo",
+  "n-shown": ", näytetään {count}",
+  "opinion": "{count, plural, one {# mielipide} other {# mielipiteet}}",
+  "opinion-next-to-win-rate": "Mielipide voittoprosentin vieressä, tasolla {tier}",
+  "rate-the": "Arvioi panssarivaunu {tankName}",
+  "reputation-against-results": "Maine vastaan tulokset",
+  "same-tank-different-metas": "Sama panssarivaunu, eri metat",
+  "the-same-tank-by-how": "Sama panssarivaunu sen mukaan, kuinka hyvin äänestäjä pelaa",
+  "what-players-wrote": "Mitä pelaajat kirjoittivat",
+  "who-is-saying-it": "Kuka näin sanoo"
+}

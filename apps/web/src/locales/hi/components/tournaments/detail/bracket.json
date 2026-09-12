@@ -1,0 +1,7 @@
+{
+  "group": "समूह {order}",
+  "n-teams": "{count} टीम",
+  "pts": "अंक",
+  "team": "टीम",
+  "top-n-advance": ", शीर्ष {count} आगे बढ़ती हैं"
+}

@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Ammunition, utrustning, förbrukningsvaror, direktiv, besättning och utveckling för den här kolumnen. Varje ändring flyttar fordonets egenskaper i jämförelsen i bakgrunden.",
+  "ammunition-equipment-crew-and-progression": "Ammunition, utrustning, besättning och utveckling",
+  "apply-to-every-column": "Tillämpa på alla kolumner",
+  "compare-against": "Jämför med {tank}",
+  "compare-the-others-against-this-one": "Jämför de andra med detta fordon",
+  "configure-tank": "Konfigurera {tank}",
+  "highest-overall-score": "Högsta Övergripande poäng",
+  "highest-overall-score-of-this": "Högsta Övergripande poäng i den här jämförelsen",
+  "is-the-reference": "Referens: {tank}",
+  "overall": "Övergripande",
+  "reference-column": "Referenskolumn",
+  "remove-tank": "Ta bort {tank}",
+  "reset-all": "Återställ allt",
+  "setup": "Inställningar",
+  "stock": "Standard",
+  "tank-setup": "Uppsättning: {tank}",
+  "top": "Bästa",
+  "where-this-vehicle-sits-across": "Var det här fordonet hamnar i hela katalogen, av {MAXSCORE}: genomsnittet av dess fyra kategoripoäng utifrån inställningarna här. Det är en sammanfattning, inte ett omdöme. En spaningsvagn och en tung stridsvagn kan nå samma poäng genom att vara bra på olika saker."
+}

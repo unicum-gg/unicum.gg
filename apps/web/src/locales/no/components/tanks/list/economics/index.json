@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "Rader per side",
+  "free-xp-from": "Gratis XP fra",
+  "xp-1-gold": "XP = 1 gull",
+  "previous-page": "Forrige side",
+  "page": "Side {current} / {totalPages}",
+  "next-page": "Neste side",
+  "all": "Alle"
+}

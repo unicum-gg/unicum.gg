@@ -1,0 +1,5 @@
+{
+  "battles": "{count} bitke",
+  "chart-label": "Odigrane bitke po {granularity}, obojeno prema {metric}",
+  "no-battles": "Ne bitki"
+}

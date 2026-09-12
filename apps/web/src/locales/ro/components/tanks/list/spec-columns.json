@@ -1,0 +1,162 @@
+{
+  "columns-label": "Coloane",
+  "groups": {
+    "firepower": "Putere de foc",
+    "gun-handling": "Manevrarea armelor",
+    "mobility": "Mobilitate",
+    "survivability": "Rata de supraviețuire",
+    "other": "Altele"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Daune pe minut"
+    },
+    "damage": {
+      "label": "Daune produse",
+      "tip": "Daune produse"
+    },
+    "moduleDamage": {
+      "label": "Daune produse modulelor"
+    },
+    "splashRadius": {
+      "label": "Rază de explozie"
+    },
+    "reload": {
+      "label": "Reîncarcare",
+      "tip": "Reîncărcare (magazie completă pentru încărcătoarele automate)"
+    },
+    "rof": {
+      "label": "Cadență de tragere",
+      "tip": "Proiectile pe minut"
+    },
+    "intraClipReload": {
+      "label": "Reîncarcare intra-clip",
+      "tip": "Timpul dintre focurile dintr-o magazie (încărcătoare automate)"
+    },
+    "penetration": {
+      "label": "Penetrare",
+      "tip": "Penetrare (mm), proiectil implicit"
+    },
+    "caliber": {
+      "label": "Calibru",
+      "tip": "Calibrul proiectilului (mm)"
+    },
+    "shellVelocity": {
+      "label": "Viteză a obuzului",
+      "tip": "Viteza proiectilului (m/s)"
+    },
+    "accuracy": {
+      "label": "Precizie",
+      "tip": "Dispersie la 100 m (mai mică este mai bună)"
+    },
+    "aimTime": {
+      "label": "Timp de miră"
+    },
+    "dispMoving": {
+      "label": "Dispersie în mișcare",
+      "tip": "Factorul de dispersie în timpul deplasării"
+    },
+    "dispTankTraverse": {
+      "label": "Dispersie la rotirea tancului"
+    },
+    "dispTurretTraverse": {
+      "label": "Dispersie la rotirea turelei"
+    },
+    "dispAfterShot": {
+      "label": "Dispersie după tragere"
+    },
+    "dispWhileDamaged": {
+      "label": "Dispersie cât timp este avariat"
+    },
+    "gunArc": {
+      "label": "Arc de tragere",
+      "tip": "Arcul orizontal de rotire al tunului"
+    },
+    "depression": {
+      "label": "Coborârea / ridicarea tunului",
+      "tip": "Coborârea / ridicarea tunului"
+    },
+    "speed": {
+      "label": "Viteză (înainte / înapoi)",
+      "tip": "Viteza maximă înainte / înapoi (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Rotire șasiu"
+    },
+    "turretTraverse": {
+      "label": "Rotire turn"
+    },
+    "enginePower": {
+      "label": "Putere",
+      "tip": "Puterea motorului (CP)"
+    },
+    "powerWeight": {
+      "label": "Putere/greutate",
+      "tip": "CP pe tonă"
+    },
+    "terrainHard": {
+      "label": "Teren dur",
+      "tip": "Rezistența terenului pe suprafață dură (mai mică este mai bună)"
+    },
+    "terrainMedium": {
+      "label": "Teren mediu"
+    },
+    "terrainSoft": {
+      "label": "Teren moale"
+    },
+    "health": {
+      "label": "Puncte de structură",
+      "tip": "Puncte de viață"
+    },
+    "engineHealth": {
+      "label": "Durabilitatea motorului"
+    },
+    "engineFireChance": {
+      "label": "Șansa de incendiu a motorului"
+    },
+    "hullArmorFront": {
+      "label": "Blindajul corpului (față)",
+      "tip": "Blindajul frontal al corpului (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Blindajul turelei (față)",
+      "tip": "Blindajul frontal al turelei (mm)"
+    },
+    "trackArmor": {
+      "label": "Blindajul șenilelor"
+    },
+    "trackHealth": {
+      "label": "Durabilitatea șenilelor"
+    },
+    "trackRepairTime": {
+      "label": "Timp de reparare a șenilei"
+    },
+    "ammoRackHealth": {
+      "label": "Rezistența magaziei de muniție"
+    },
+    "weight": {
+      "label": "Greutate"
+    },
+    "viewRange": {
+      "label": "Rază vizuală",
+      "tip": "Rază vizuală (m)"
+    },
+    "radioRange": {
+      "label": "Rază radio",
+      "tip": "Rază a semnalului (m)"
+    },
+    "camoStill": {
+      "label": "Camuflaj staționar"
+    },
+    "camoMoving": {
+      "label": "Camuflaj în mișcare"
+    },
+    "camoStillFiring": {
+      "label": "Camuflaj staționar după tragere"
+    },
+    "camoMovingFiring": {
+      "label": "Camuflaj în mișcare după tragere"
+    }
+  }
+}

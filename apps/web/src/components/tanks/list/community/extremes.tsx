@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { numberFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
+import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
 import { HYPE_THRESHOLD } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -14,7 +16,7 @@ import {
 import ROUTES from "@/constants/routes";
 import type { CommunityBoardRow } from "./row";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * The two lists nobody else can build.
@@ -36,13 +38,15 @@ const intFmt = new Intl.NumberFormat("en-US");
 const MIN_VOTES = 25;
 const SHOWN = 5;
 
-export function Extremes({
+export async function Extremes({
   region,
-  rows,
+  rows, locale,
 }: {
   region: Region;
   rows: CommunityBoardRow[];
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/tanks/list/community/extremes", locale);
   const eligible = rows.filter(
     (r) => r.hype != null && r.votes >= MIN_VOTES,
   );
@@ -65,22 +69,21 @@ export function Extremes({
       <PanelSeparator />
       <Panel>
         <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <PanelTitle>Reputation against results</PanelTitle>
+          <PanelTitle>{t("reputation-against-results")}</PanelTitle>
           <span className="text-xs text-fd-muted-foreground">
-            Where the community and the win rate disagree most
-          </span>
+            {t("where-the-community-and-the")}</span>
         </PanelHeader>
         <PanelContent className="grid gap-8 sm:grid-cols-2">
-          <ExtremeList
-            title="Overrated"
-            subtitle="Loved far more than they win"
+          <ExtremeList locale={locale}
+            title={t("overrated")}
+            subtitle={t("loved-far-more-than-they")}
             region={region}
             rows={overrated}
             tone="#D77900"
           />
-          <ExtremeList
-            title="Underrated"
-            subtitle="Win far more than anyone admits"
+          <ExtremeList locale={locale}
+            title={t("underrated")}
+            subtitle={t("win-far-more-than-anyone")}
             region={region}
             rows={underrated}
             tone="#6D9521"
@@ -91,19 +94,21 @@ export function Extremes({
   );
 }
 
-function ExtremeList({
+async function ExtremeList({
   title,
   subtitle,
   region,
   rows,
-  tone,
+  tone, locale,
 }: {
   title: string;
   subtitle: string;
   region: Region;
   rows: CommunityBoardRow[];
   tone: string;
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/tanks/list/community/extremes", locale);
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col">
@@ -114,8 +119,7 @@ function ExtremeList({
       </div>
       {rows.length === 0 ? (
         <p className="text-sm text-fd-muted-foreground">
-          Nothing far enough out of line yet.
-        </p>
+          {t("nothing-far-enough-out-of")}</p>
       ) : (
         <ol className="flex flex-col divide-y divide-fd-border">
           {rows.map((row) => (
@@ -148,7 +152,9 @@ function ExtremeList({
                 </span>
               </span>
               <span className="w-full text-right text-[11px] text-fd-muted-foreground tabular-nums sm:w-auto">
-                {intFmt.format(row.votes)} votes
+                {t("n-votes", {
+                  count: numberFormat(locale, INT_FORMAT).format(row.votes),
+                })}
               </span>
             </li>
           ))}

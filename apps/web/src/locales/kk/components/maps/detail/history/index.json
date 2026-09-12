@@ -1,0 +1,12 @@
+{
+  "added": "Қосылды",
+  "before-update": "{version} жаңартуына дейін",
+  "common-test": "Жалпы Тест",
+  "every-update-that-changed-this": "Бұл картаны өзгерткен барлық жаңарту, жаңасынан бастап, ойын клиентінің өзінен оқылған.",
+  "in-the-game": "Ойында",
+  "n-changes": "{count, plural, one {# өзгеріс} other {# өзгерістер}}",
+  "not-released-wargaming-can-still": "Шығарылмаған. Wargaming жаңарту шыққанға дейін мұның кез келгенін өзгерте немесе алып тастай алады.",
+  "removed": "Жойылды",
+  "title": "Өзгерістер {map} картасында",
+  "update": "Жаңарту {version}"
+}

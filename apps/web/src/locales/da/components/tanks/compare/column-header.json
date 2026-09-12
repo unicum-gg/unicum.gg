@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Ammunition, udstyr, forbrugsstoffer, direktiver, besætning og progression for denne kolonne. Hver ændring flytter dens egenskaber i sammenligningen bagved.",
+  "ammunition-equipment-crew-and-progression": "Ammunition, udstyr, besætning og progression",
+  "apply-to-every-column": "Anvend på hver kolonne",
+  "compare-against": "Sammenlign med {tank}",
+  "compare-the-others-against-this-one": "Sammenlign de andre med denne",
+  "configure-tank": "Konfigurér {tank}",
+  "highest-overall-score": "Højeste samlede score",
+  "highest-overall-score-of-this": "Højeste samlede score i denne sammenligning",
+  "is-the-reference": "Reference: {tank}",
+  "overall": "Samlet",
+  "reference-column": "Referencekolonne",
+  "remove-tank": "Fjern {tank}",
+  "reset-all": "Nulstil alle",
+  "setup": "Opsætning",
+  "stock": "Standard",
+  "tank-setup": "Opsætning: {tank}",
+  "top": "Bedste",
+  "where-this-vehicle-sits-across": "Hvor dette køretøj ligger i hele kataloget, ud af {MAXSCORE}: gennemsnittet af dets fire kategoriscores, som konfigureret her. En oversigt, ikke en dom, en spejder og en tung kampvogn når samme tal ved at være gode til forskellige ting."
+}

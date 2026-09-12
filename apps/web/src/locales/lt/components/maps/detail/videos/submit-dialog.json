@@ -1,0 +1,17 @@
+{
+  "close": "Uždaryti",
+  "format": "Formatas",
+  "here": "čia",
+  "in-the-queue": "Ji yra eilėje ir pasirodys {where}, kai moderatorius ją peržiūrės. Tuo metu jūsų pasiūlymas tame puslapyje bus pilkas.",
+  "log-in-to-suggest-a": "Prisijunkite, kad pasiūlytumėte taktiką",
+  "on-map": "vietoje {map}",
+  "players-per-team": "Žaidėjai komandoje",
+  "sending": "Siunčiama…",
+  "suggest": "Siūlyti",
+  "suggest-a-tactic": "Siūlyti taktiką",
+  "suggest-another": "Pasiūlyti kitą",
+  "suggestion-sent": "Pasiūlymas išsiųstas",
+  "tier": "lygis",
+  "what-to-submit": "Varžybinis mūšis, pradedant nuo tos sekundės, kai jis prasideda. Žemėlapis prasideda {map} ir juda kartu su vaizdo įrašu, klano vakaras pereina per rotaciją. Pusė, iš kurios žaista, yra tai, pagal ką jos ieško mūšio vadas, todėl jos prašoma, o ne spėjama.",
+  "what-was-played": "Ką žaidė"
+}

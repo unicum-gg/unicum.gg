@@ -1,0 +1,8 @@
+{
+  "previous": "Папярэдняя старонка",
+  "next": "Наступная старонка",
+  "rows-per-page": "Радкоў на старонку",
+  "all": "Усё",
+  "range": "{first}–{last} з {total}",
+  "page": "Старонка {page} / {total}"
+}

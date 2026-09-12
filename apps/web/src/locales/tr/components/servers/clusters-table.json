@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Henüz küme kaydedilmedi.",
+  "server": "Sunucu",
+  "online": "Çevrimiçi",
+  "share": "Paylaş",
+  "peak": "Pik ({label})",
+  "average": "Ortalama ({label})",
+  "not-reported": "Bildirilmedi",
+  "total": "Toplam"
+}

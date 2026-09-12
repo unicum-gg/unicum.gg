@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Prosek за {rated} од {size} igrači",
+  "average-over-recent": "Prosek за {rated} од {size} igrači који су играли током последњих 30 dana",
+  "avg-winrate": "Prosečna stopa pobede",
+  "finished": "Završeno",
+  "record": "Rekord",
+  "won": "Pobede"
+}

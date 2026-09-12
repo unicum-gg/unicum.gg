@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Игроки",
+    "clans": "Кланы",
+    "tanks": "Танки",
+    "maps": "Карты",
+    "tournaments": "Турниры",
+    "servers": "Серверы"
+  },
+  "links": {
+    "top-players": {
+      "label": "Топ игроков",
+      "description": "Таблица лидеров игроков за всё время"
+    },
+    "players-onslaught": {
+      "description": "Рейтинговая таблица Натиска"
+    },
+    "players-steel-hunter": {
+      "description": "Таблица лидеров королевской битвы"
+    },
+    "top-clans": {
+      "label": "Топ кланов",
+      "description": "Таблица лидеров кланов за всё время"
+    },
+    "stronghold": {
+      "description": "Вылазки лестница"
+    },
+    "advances": {
+      "description": "Рейтинг боёв 15x15 техники X уровня"
+    },
+    "tank-performances": {
+      "label": "Результаты",
+      "description": "Процент побед и урон для каждого танка"
+    },
+    "tank-specs": {
+      "label": "Спецификации",
+      "description": "Статистика для каждого танка"
+    },
+    "tank-economics": {
+      "label": "Экономика",
+      "description": "Техника, приносящая кредиты и опыт"
+    },
+    "tank-moe": {
+      "description": "Урон для каждой отметки"
+    },
+    "tank-mom": {
+      "description": "Пороги знаков классности"
+    },
+    "tank-changes": {
+      "label": "Изменения",
+      "description": "Усиления и ослабления по обновлениям"
+    },
+    "tank-community": {
+      "label": "Рейтинги сообщества",
+      "description": "Оценки игроков, владеющих этой техникой"
+    },
+    "tank-videos": {
+      "label": "Видео",
+      "description": "Игровые видео сообщества"
+    },
+    "all-tournaments": {
+      "label": "Турниры",
+      "description": "Все открытые и завершённые турниры"
+    },
+    "all-maps": {
+      "label": "Все карты",
+      "description": "Все карты в игре"
+    },
+    "map-changes": {
+      "label": "Изменения",
+      "description": "Переработки карт по обновлениям"
+    },
+    "battle-type": {
+      "description": "Карты {type}"
+    },
+    "servers-population": {
+      "label": "Население сервера",
+      "description": "Игроки онлайн сейчас и в динамике"
+    }
+  }
+}

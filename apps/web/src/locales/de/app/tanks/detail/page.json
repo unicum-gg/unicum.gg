@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "World of Tanks-Statistiken: {tank} ({region}), {nation}-Panzer der Stufe {tier}",
+    "description": "Technische Daten in World of Tanks: {tank} ({region}), mit Panzerung, Feuerkraft, Mobilität, Modulen, Besatzung und Feldmodifikationen für diesen {nation}-Panzer der Stufe {tier}."
+  },
+  "performances": {
+    "title": "Leistungsdaten: {tank} ({region}), Serverstatistiken und beste spieler",
+    "description": "Leistungsdaten in World of Tanks: {tank} ({region}), mit durchschnittlicher Siegquote, durchschnittlichem Schaden und durchschnittlicher Unterstützung auf dem Server, den besten spielern mit diesem {nation}-Panzer der Stufe {tier} sowie den Erwartungswerten für WN8 und WNX."
+  },
+  "marks": {
+    "title": "Gefechtsmarkierungen und Meisterschaftsabzeichen für {tank} ({region})",
+    "description": "Erfolgsmarkierungen und Anforderungen für Meisterschaftsabzeichen in World of Tanks: {tank} ({region}), samt historischem Verlauf für diesen {nation}-Panzer der Stufe {tier}."
+  },
+  "history": {
+    "title": "Änderungsverlauf für {tank} ({region}), Buffs und Nerfs",
+    "description": "Änderungsverlauf in World of Tanks: {tank}, mit allen von Wargaming veröffentlichten Verbesserungen und Abschwächungen an Feuerkraft, Mobilität, Überlebensfähigkeit und Tarnung dieses {nation}-Panzers der Stufe {tier}, Version für Version."
+  },
+  "videos": {
+    "title": "Gameplay-Videos zu {tank} ({region})",
+    "description": "Erlebe {tank} in Aktion: von der Community vorgeschlagene Gefechte mit diesem {nation}-Panzer der Stufe {tier}, jeweils ab dem Moment, in dem er gespielt wird, mit Karte und Gefechtsergebnis."
+  },
+  "community": {
+    "title": "Spielerbewertungen und Community-Wertung für {tank} ({region})",
+    "description": "Das denken spieler über {tank}: die Bewertung der Community auf einer Skala von fünf, aufgeschlüsselt nach dem Können der Abstimmenden und verglichen mit den tatsächlichen Leistungen dieses {nation}-Panzers der Stufe {tier}, dazu schriftliche Rezensionen von Konten, die mit ihm Gefechte bestritten haben."
+  }
+}

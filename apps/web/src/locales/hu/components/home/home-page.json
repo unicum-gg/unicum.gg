@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Legjobb játékosok · Elmúlt 24 óra"
+    },
+    "week": {
+      "title": "Legjobb játékosok · Elmúlt 7 nap"
+    }
+  },
+  "rating-scale": {
+    "title": "Értékelési skála"
+  },
+  "community": {
+    "title": "Csatlakozz a közösséghez",
+    "heading": "Lépj kapcsolatba WoT-játékosokkal",
+    "description": "Csatlakozz Discord-szerverünkhöz, beszélgess a WoT statisztikáiról, kérj új funkciókat és jelents hibákat. Vagy látogass el a GitHubra, nézd át a kódot és járulj hozzá a fejlesztéshez.",
+    "discord": "Csatlakozz a Discordhoz",
+    "github": "Megtekintés a GitHubon"
+  },
+  "features": {
+    "title": "Mit találsz itt",
+    "profiles": {
+      "title": "Játékosprofilok",
+      "description": "Részletes statisztikák összesített, valamint 24 órás / 7 napos / 30 napos változásokkal, továbbá WN7, WN8, WNX és Személyes értékelés."
+    },
+    "clans": {
+      "title": "Klánoldalak",
+      "description": "Tagok táblázata értékelésekkel, friss tevékenység, leírás és klánmetaadatok."
+    },
+    "history": {
+      "title": "Klántörténet",
+      "description": "A játékos összes korábbi klántagságának teljes idővonala szerepkörökkel és dátumokkal."
+    },
+    "live": {
+      "title": "Élő frissítések",
+      "description": "A követett játékosok adatai pillanatkép-rendszerünkön keresztül 24 óránként frissülnek a háttérben."
+    },
+    "leaderboards": {
+      "title": "Feliratkozási listák",
+      "description": "Legjobb játékosok 24 órás, 7 napos és teljes időszakra vonatkozó rangsora, valamint a legjobb klánok WNX szerinti rangsora, pillanatképeinkből számítva."
+    },
+    "open-source": {
+      "title": "Nyílt forráskód · AGPL",
+      "description": "A kód a GitHubon található. Nézd át, forgasd le saját változatként vagy járulj hozzá. Nincsenek hirdetések, az analitika csak beleegyezéssel működik."
+    }
+  },
+  "quick-start": {
+    "title": "Gyors kezdés",
+    "search": {
+      "title": "🔍 Játékosok vagy klánok keresése",
+      "description": "A keresés megnyitásához nyomd meg ezt: {shortcut}, majd írj be egy becenevet vagy kláncímkét."
+    },
+    "region": {
+      "title": "🌍 Régióváltás",
+      "description": "A navigációs sávon válassz régiót itt: {selector}. A Feliratkozási listák ennek megfelelően frissülnek."
+    },
+    "leaderboards": {
+      "title": "🏆 Feliratkozási listák böngészése",
+      "description": "Legjobb játékosok 24 órás, 7 napos és teljes időszakra vonatkozó rangsora, valamint a legjobb klánok átlagos WNX szerinti rangsora, pillanatképeinkből számítva."
+    },
+    "colors": {
+      "title": "📊 A színek értelmezése",
+      "description": "A WR, WN7, WN8 és WNX ugyanazokat a szintszíneket használja (narancssárga → zöld → cián → lila). Lásd a fenti skálát."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ÁZSIA"
+}

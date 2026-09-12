@@ -3,18 +3,22 @@ import {
   GithubLogoIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
-import Link from "next/link";
+import Link from "@/components/link";
 import {
   Card as HomeCard,
   CardDescription,
   CardTitle,
 } from "@/components/home/card";
 import { FeatureBlock } from "@/components/home/feature-block";
-import { RatingScale } from "@/components/home/rating-scale";
+import {
+  RatingScale,
+  RatingScaleTitle,
+} from "@/components/home/rating-scale";
 import { TopClansOverallPanel } from "@/components/home/top-clans-overall-panel";
 import { LiveSection } from "@/components/home/live-section";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
+import { Interpolate } from "@/components/interpolate";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { Kbd } from "@/components/ui/kbd";
 import {
@@ -27,6 +31,7 @@ import {
 import APP from "@/constants/app";
 import { RATING_METRICS, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
 import { styles } from "@/lib/styles";
+import { getTranslation } from "@/lib/translations.server";
 import type {
   TopClansPeriod,
   TopClansSnapshot,
@@ -100,9 +105,20 @@ async function clansTopByRegions(
 
 export async function HomePage({
   regionOverride,
+  locale,
 }: {
   regionOverride?: Region;
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/home/home-page", locale);
+  // The four "Ranked by ..." lines live in ONE namespace, read here and by the
+  // overall panel: siblings that must read alike have to be decided in the same
+  // request, or the model writes each on its own and French gets an article in
+  // one and not the next.
+  const { t: tRanked } = await getTranslation(
+    "components/home/ranked-by",
+    locale,
+  );
   const [
     topClansOverallByMetric,
     topClansMonthByMetric,
@@ -135,17 +151,17 @@ export async function HomePage({
       <div className="grid lg:grid-cols-3 *:min-w-0">
         <Panel className="flex flex-col lg:border-r-0">
           <PanelHeader>
-            <PanelTitle>Top players · Past 24 hours</PanelTitle>
+            <PanelTitle>{t("top-players.day.title")}</PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             {RATING_METRICS.map((m, i) => (
               <div key={m} data-rating-col={RATING_COL[m]}>
                 <TopPlayers
                   description={
-                    <>
-                      Ranked by <RatingMetricInlineSelect /> over the past 24
-                      hours (min. 20 battles).
-                    </>
+                    <Interpolate
+                      template={tRanked("day")}
+                      values={{ metric: <RatingMetricInlineSelect /> }}
+                    />
                   }
                   initial={topPlayersDayByMetric[i]}
                   metric={m}
@@ -161,17 +177,17 @@ export async function HomePage({
           screenLines={false}
         >
           <PanelHeader screenLines={false}>
-            <PanelTitle>Top players · Past 7 days</PanelTitle>
+            <PanelTitle>{t("top-players.week.title")}</PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             {RATING_METRICS.map((m, i) => (
               <div key={m} data-rating-col={RATING_COL[m]}>
                 <TopPlayers
                   description={
-                    <>
-                      Ranked by <RatingMetricInlineSelect /> over the past 7
-                      days (min. 140 battles).
-                    </>
+                    <Interpolate
+                      template={tRanked("week")}
+                      values={{ metric: <RatingMetricInlineSelect /> }}
+                    />
                   }
                   initial={topPlayersWeekByMetric[i]}
                   metric={m}
@@ -200,7 +216,9 @@ export async function HomePage({
 
         <Panel className="flex flex-col lg:border-l-0" screenLines={false}>
           <PanelHeader screenLines={false}>
-            <PanelTitle>Rating scale</PanelTitle>
+            <PanelTitle>
+            <RatingScaleTitle />
+          </PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <RatingScale />
@@ -212,7 +230,7 @@ export async function HomePage({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Join the community</PanelTitle>
+          <PanelTitle>{t("community.title")}</PanelTitle>
         </PanelHeader>
 
         <PanelContent>
@@ -222,11 +240,10 @@ export async function HomePage({
             <div className="absolute inset-0 bg-linear-to-br from-transparent via-fd-primary/5 to-transparent" />
             <div className="relative space-y-4 text-center">
               <h3 className="mb-2 text-xl font-semibold">
-                Connect with WoT players
+                {t("community.heading")}
               </h3>
               <p className={`${styles.mutedText} mx-auto mb-6 max-w-md`}>
-                Join our Discord to chat WoT stats, request features and
-                report bugs. Or hop on GitHub to inspect the code and contribute.
+                {t("community.description")}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Link
@@ -236,7 +253,7 @@ export async function HomePage({
                   className={buttonVariants({ variant: "primary" })}
                 >
                   <DiscordLogoIcon weight="fill" className="mr-2 size-4" />
-                  Join Discord
+                  {t("community.discord")}
                 </Link>
                 <Link
                   href={APP.EXTERNAL.GITHUB}
@@ -245,7 +262,7 @@ export async function HomePage({
                   className={buttonVariants({ variant: "outline" })}
                 >
                   <GithubLogoIcon weight="fill" className="mr-2 size-4" />
-                  View on GitHub
+                  {t("community.github")}
                 </Link>
               </div>
             </div>
@@ -257,40 +274,40 @@ export async function HomePage({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>What you&apos;ll find here</PanelTitle>
+          <PanelTitle>{t("features.title")}</PanelTitle>
         </PanelHeader>
 
         <PanelContent>
           <div className="grid gap-4 sm:grid-cols-2">
             <FeatureBlock
               icon="📊"
-              title="Player profiles"
-              description="Detailed stats with overall + 24h / 7d / 30d deltas, WN7, WN8, WNX, and Personal Rating."
+              title={t("features.profiles.title")}
+              description={t("features.profiles.description")}
             />
             <FeatureBlock
               icon="🛡️"
-              title="Clan pages"
-              description="Members table with ratings, recent activity feed, description and clan metadata."
+              title={t("features.clans.title")}
+              description={t("features.clans.description")}
             />
             <FeatureBlock
               icon="📜"
-              title="Clan history"
-              description="Full timeline of every clan a player has been in, with roles and dates."
+              title={t("features.history.title")}
+              description={t("features.history.description")}
             />
             <FeatureBlock
               icon="⚡"
-              title="Live updates"
-              description="Tracked players refresh in the background every 24h via our snapshot system."
+              title={t("features.live.title")}
+              description={t("features.live.description")}
             />
             <FeatureBlock
               icon="🏆"
-              title="Leaderboards"
-              description="Top players (24h, 7d, all-time) and top clans ranked by WNX, computed from our snapshots."
+              title={t("features.leaderboards.title")}
+              description={t("features.leaderboards.description")}
             />
             <FeatureBlock
               icon="🛠️"
-              title="Open source · AGPL"
-              description="Code's on GitHub. Inspect, fork, contribute. No ads, opt-in analytics only."
+              title={t("features.open-source.title")}
+              description={t("features.open-source.description")}
             />
           </div>
         </PanelContent>
@@ -300,38 +317,49 @@ export async function HomePage({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Quick start</PanelTitle>
+          <PanelTitle>{t("quick-start.title")}</PanelTitle>
         </PanelHeader>
 
         <PanelContent>
           <div className="grid gap-3 sm:grid-cols-2">
             <HomeCard>
-              <CardTitle>🔍 Search players or clans</CardTitle>
+              <CardTitle>{t("quick-start.search.title")}</CardTitle>
               <CardDescription>
-                Press <Kbd>⌘</Kbd> <Kbd>K</Kbd> / <Kbd>Ctrl</Kbd> <Kbd>K</Kbd>{" "}
-                to open the search, then type a nickname or clan tag.
+                <Interpolate
+                  template={t("quick-start.search.description")}
+                  values={{
+                    shortcut: (
+                      <>
+                        <Kbd>⌘</Kbd> <Kbd>K</Kbd> / <Kbd>{t("ctrl")}</Kbd> <Kbd>K</Kbd>
+                      </>
+                    ),
+                  }}
+                />
               </CardDescription>
             </HomeCard>
             <HomeCard>
-              <CardTitle>🌍 Switch region</CardTitle>
+              <CardTitle>{t("quick-start.region.title")}</CardTitle>
               <CardDescription>
-                Use the{" "}
-                <span className="text-fd-foreground">EU / NA / ASIA</span>{" "}
-                selector in the navbar. Leaderboards update accordingly.
+                <Interpolate
+                  template={t("quick-start.region.description")}
+                  values={{
+                    selector: (
+                      <span className="text-fd-foreground">{t("eu-na-asia")}</span>
+                    ),
+                  }}
+                />
               </CardDescription>
             </HomeCard>
             <HomeCard>
-              <CardTitle>🏆 Browse leaderboards</CardTitle>
+              <CardTitle>{t("quick-start.leaderboards.title")}</CardTitle>
               <CardDescription>
-                Top players (24h, 7d, all-time) and top clans ranked by average
-                WNX, computed from our snapshots.
+                {t("quick-start.leaderboards.description")}
               </CardDescription>
             </HomeCard>
             <HomeCard>
-              <CardTitle>📊 Read the colors</CardTitle>
+              <CardTitle>{t("quick-start.colors.title")}</CardTitle>
               <CardDescription>
-                WR, WN7, WN8 and WNX share the same tier colors (orange → green
-                → cyan → purple). See the scale above.
+                {t("quick-start.colors.description")}
               </CardDescription>
             </HomeCard>
           </div>

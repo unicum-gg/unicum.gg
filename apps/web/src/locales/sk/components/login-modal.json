@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Prihlásiť sa pomocou Wargaming.net ID",
+  "open-source": "Projekt {name} má otvorený zdrojový kód. {link}, skôr než mu začnete dôverovať.",
+  "pick-the-region-your-world": "Vyberte región, v ktorom máte účet World of Tanks. Nemusí to byť región, ktorého stránku si práve prezeráte.",
+  "read-the-login-code": "Prezrite si kód prihlasovania",
+  "what-wargaming-hands-back-is": "Od spoločnosti Wargaming dostanete token, ktorý umožňuje čítať údaje vášho vlastného účtu. Ukladá sa v šifrovanej podobe a obnovuje sa, kým je váš účet prepojený. Vo vašom mene sa používa iba tam, kde ste si to sami nastavili, napríklad v harmonograme rezerv vášho klanu.",
+  "you-sign-in-on-wargaming": "Prihlasujete sa na vlastnej stránke spoločnosti Wargaming, nie tu. Svoje heslo nikdy nezadávate na {NAME} a nikdy sa k nám nedostane."
+}

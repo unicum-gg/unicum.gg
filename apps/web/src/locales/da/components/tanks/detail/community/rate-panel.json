@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} kampe i alt",
+  "checking-your-record-on-this": "Kontrollerer din statistik for denne kampvogn...",
+  "fetching-your-garage": "Vi henter din garage",
+  "have-you-played": "Har du spillet {tank}?",
+  "more-to-go": "{count} kampe mere tilbage",
+  "more-to-go-one": "{count} kamp mere tilbage",
+  "sign-in-to-rate-it": "Log ind for at bedømme den",
+  "sign-in-with-your-wargaming-account-to-rate-": "Log ind med din Wargaming-konto for at bedømme den. Vi læser din statistik for netop denne kampvogn, hvilket forhindrer denne side i at blive en afstemning blandt personer, der aldrig har kørt den.",
+  "signed-in-on": "Logget ind på {region}",
+  "too-few-battles": "Du har {played} kampe i {tank}. Vi kræver {required}, før en stemme tæller, så dette gennemsnit forbliver et gennemsnit af personer, der faktisk spiller den.",
+  "you-have-not-played": "Du har ikke spillet {tank}"
+}

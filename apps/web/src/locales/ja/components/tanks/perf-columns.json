@@ -1,0 +1,60 @@
+{
+  "columns-label": "列",
+  "groups": {
+    "general": "一般",
+    "combat": "戦闘"
+  },
+  "columns": {
+    "battles": {
+      "label": "戦闘数",
+      "tip": "その戦車でプレイされたゲームの総数"
+    },
+    "count": {
+      "label": "数",
+      "tip": "サンプルに含まれる記録済みプレイヤーの数"
+    },
+    "rating": {
+      "label": "レーティング (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "その戦車での勝率"
+    },
+    "playerWr": {
+      "label": "プレイヤー勝率",
+      "tip": "その戦車を操縦するプレイヤーの全体平均勝率"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "1ゲームあたりの平均ダメージ"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "撃破数 / 死亡数比率"
+    },
+    "assists": {
+      "label": "アシスト",
+      "tip": "平均アシストダメージ"
+    },
+    "hitPct": {
+      "label": "命中率 %",
+      "tip": "命中数 / 発射数"
+    },
+    "penPct": {
+      "label": "貫通率 %",
+      "tip": "貫通数 / 命中数"
+    },
+    "spots": {
+      "label": "スポット",
+      "tip": "1ゲームあたりの平均発見数"
+    },
+    "blocked": {
+      "label": "ブロック",
+      "tip": "装甲で阻んだ平均ダメージ"
+    },
+    "survival": {
+      "label": "生存",
+      "tip": "生存した戦闘の割合"
+    }
+  }
+}

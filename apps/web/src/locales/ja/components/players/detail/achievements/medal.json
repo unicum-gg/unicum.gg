@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}、{count}回獲得",
+  "aria-not-earned": "{name}、未獲得",
+  "no-longer-obtainable": "現在は獲得できません。",
+  "not-earned": "未獲得"
+}

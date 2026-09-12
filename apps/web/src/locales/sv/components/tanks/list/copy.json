@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Alla {count} fordon i World of Tanks på {region}. Filtrera efter nivå, nation, klass och roll och öppna sedan ett fordon för att se statistik, bästa spelare och förväntade värden.",
+    "title": "Alla fordon i World of Tanks ({region}), bläddra bland samtliga fordon",
+    "description": "Bläddra bland alla fordon i World of Tanks på {region}: filtrera efter nivå, nation, klass och roll och fördjupa dig sedan i statistik för varje fordon, topprankade spelare och förväntade värden.",
+    "heading": "Alla <accent>tanken</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, genomslag, pansar, synhåll och rörlighet för alla {count} fordon i World of Tanks på {region}. Sortera efter valfri kolumn och filtrera sedan efter nivå, nation, klass och roll.",
+    "title": "Jämför specifikationer för alla fordon i World of Tanks ({region})",
+    "description": "Jämför specifikationerna för alla fordon i World of Tanks på {region}: DPM, genomslag, pansar, synhåll och rörlighet, med sortering och filtrering efter nivå, nation, klass och roll.",
+    "heading": "Tank <accent>specifikationer</accent>"
+  },
+  "economics": {
+    "intro": "Inköps- och reparationskostnader, granatpriser och intäkter i krediter för alla {count} fordon i World of Tanks på {region}. Sortera efter valfri kolumn och filtrera sedan efter nivå, nation, klass och roll.",
+    "title": "Ekonomi för World of Tanks-fordon ({region}), kostnader i krediter och XP",
+    "description": "Kostnader i krediter och XP samt reparationskostnader och granatpriser för alla fordon i World of Tanks på {region}, med sortering och filtrering efter nivå, nation, klass och roll.",
+    "heading": "Tank <accent>ekonomi</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Skada enligt glidande medelvärde som krävs för ett, två och tre Skyttemärken på alla {count} fordon i World of Tanks på {region}. Sortera efter valfri kolumn och filtrera sedan efter nivå, nation, klass och roll.",
+    "title": "Krav för Skyttemärken i World of Tanks ({region})",
+    "description": "Skada som krävs för ett, två och tre Skyttemärken på alla fordon i World of Tanks på {region}, med sortering och filtrering efter nivå, nation, klass och roll.",
+    "heading": "<accent>Skyttemärken</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "XP-gränser för Ace Tanker och Mästermärken för alla {count} fordon i World of Tanks på {region}. Sortera efter valfri kolumn och filtrera sedan efter nivå, nation, klass och roll.",
+    "title": "Krav för Mästermärken i World of Tanks ({region})",
+    "description": "XP-gränser för Ace Tanker och Mästermärken för alla fordon i World of Tanks på {region}, med sortering och filtrering efter nivå, nation, klass och roll.",
+    "heading": "<accent>Mästermärken</accent>"
+  },
+  "videos": {
+    "intro": "{count} strider som communityn har länkat till på {region}, där varje video öppnas exakt vid den sekund då striden börjar. De föreslås från fordonssidorna och granskas innan de visas här.",
+    "title": "World of Tanks-spelvideor ({region})",
+    "description": "Strider i World of Tanks som communityn har föreslagit på {region}, där varje video öppnas exakt vid den sekund då striden börjar: fordonet som spelades, kartan, sidan och hur striden slutade.",
+    "heading": "Gameplay <accent>videor</accent>"
+  }
+}

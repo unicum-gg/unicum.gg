@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "高于同等级已评级坦克的{value}%",
+  "measured-hint": "它的胜率在相同坦克中的排名",
+  "not-enough-votes-yet-to": "投票数量还不足，无法将社区评价与坦克的实际表现进行比较。",
+  "perceived-hint": "社区对它在{tier}等级已评级坦克中的排名",
+  "verdict": {
+    "overrated": "社区对它的评价远高于它的实际表现。",
+    "fair": "这辆坦克的声誉与结果一致。",
+    "underrated": "它的表现比任何人给予的评价都要好。"
+  },
+  "what-players-think": "玩家看法",
+  "what-the-data-says": "数据说明"
+}

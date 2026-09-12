@@ -1,0 +1,9 @@
+{
+  "battle-time": "战斗时间",
+  "camouflage": "{camouflage} 伪装",
+  "mode": "模式",
+  "n-random-events": "{count, plural, other {# 随机活动}}",
+  "random-events": "随机事件",
+  "size": "大小",
+  "team-size": "队伍规模"
+}

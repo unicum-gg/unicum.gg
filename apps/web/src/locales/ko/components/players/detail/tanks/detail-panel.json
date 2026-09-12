@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "전투당 평균 점수",
+  "general-parameters": "항목",
+  "metric-progression": "{metric} 진행도",
+  "not-enough-history-on-this": "아직 이 전차의 기록이 충분하지 않습니다. 행을 표시하려면 최근 90일 동안 최소 두 번의 스냅샷이 필요합니다.",
+  "record-score": "최고 기록",
+  "updated": "업데이트됨"
+}

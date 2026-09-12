@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Topp <accent>klaanit</accent>",
+    "language": "Parhaat <accent>{language}</accent> klaanit"
+  },
+  "intro": {
+    "all": "Alueen {region} tulostaulukko, rankattu mittarin {metric} mukaan, keskiarvona kunkin klaanin seuratuista jäsenistä (vähintään 50 jäsentä, joilla on taisteluita).",
+    "language": "Alueen {region} klaanit, jotka ilmoittivat {language}:n yhdeksi kielistään, rankattuna mittarin {metric} mukaan seuratuista jäsenistä lasketun keskiarvon perusteella (vähintään 25 jäsentä, joilla on taisteluita).",
+    "strict": "Alueen {region} klaanit, jotka ilmoittivat {language}:n ainoaksi kielekseen, rankattuna mittarin {metric} mukaan seuratuista jäsenistä lasketun keskiarvon perusteella (vähintään 25 jäsentä, joilla on taisteluita)."
+  },
+  "board": {
+    "all": "Parhaat {count} klaanit mittarilla {metric}",
+    "language": "Parhaat {count} kielen {language} klaanit mittarilla {metric}",
+    "strict": "Parhaat {count} vain {language}-kieliset klaanit mittarin {metric} perusteella"
+  },
+  "members": "Jäsenet",
+  "strict-toggle": "Tiukka",
+  "any-toggle": "Mikä tahansa",
+  "all-languages": "Kaikki kielet",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

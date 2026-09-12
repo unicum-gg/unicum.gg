@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Genomsnitt för {rated} av {size} spelare",
+  "average-over-recent": "Genomsnitt för {rated} av de {size} spelare som spelade under de senaste 30 dagar",
+  "avg-winrate": "Genomsnittlig vinstfrekvens",
+  "finished": "Slutförd",
+  "record": "Rekord",
+  "won": "Vunnit"
+}

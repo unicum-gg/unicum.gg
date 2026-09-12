@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "データはまだありません。クランの更新後にもう一度確認してください。",
+  "heading": "トップ <accent>{tier}</accent> クラン",
+  "blurb": "{region}のランキング。{format}における追跡済みクラン全体を対象に、{sort}で順位付けしています（最小{battles}戦闘）。",
+  "blurb-period": "{region}のランキング。{format}における追跡済みクラン全体を対象に、{period}の期間で{sort}により順位付けしています（最小{battles}戦闘）。",
+  "format-advances": "進撃戦 (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "トップ{count} {tier}クラン ·"
+}

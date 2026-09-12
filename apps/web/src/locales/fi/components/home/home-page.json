@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Parhaat pelaajat · viimeiset 24 tuntia"
+    },
+    "week": {
+      "title": "Parhaat pelaajat · viimeiset 7 päivää"
+    }
+  },
+  "rating-scale": {
+    "title": "Arvosteluasteikko"
+  },
+  "community": {
+    "title": "Liity yhteisöön",
+    "heading": "Yhdistä WoT-pelaajien kanssa",
+    "description": "Liity Discordiimme keskustelemaan WoT-tilastoista, pyytämään ominaisuuksia ja ilmoittamaan virheistä. Tai tutustu koodiin ja osallistu GitHubissa.",
+    "discord": "Liity Discordiin",
+    "github": "Katso GitHubissa"
+  },
+  "features": {
+    "title": "Mitä löydät täältä",
+    "profiles": {
+      "title": "Pelaajaprofiilit",
+      "description": "Yksityiskohtaiset tilastot kokonaisarvoilla ja 24 tunnin / 7 päivän / 30 päivän muutoksilla, WN7, WN8, WNX ja henkilökohtainen arvio."
+    },
+    "clans": {
+      "title": "Klaanien sivut",
+      "description": "Jäsentaulukko arvioineen, viimeaikaisine tapahtumineen, kuvauksineen ja klaanin metatietoineen."
+    },
+    "history": {
+      "title": "Klaanihistoria",
+      "description": "Täydellinen aikajana jokaisesta klaanista, jossa pelaaja on ollut, rooleineen ja päivämäärineen."
+    },
+    "live": {
+      "title": "Automaattiset päivitykset",
+      "description": "Seuratut pelaajat päivitetään taustalla 24 tunnin välein tilannekuvajärjestelmämme avulla."
+    },
+    "leaderboards": {
+      "title": "Tulostaulut",
+      "description": "Parhaat pelaajat (24 tuntia, 7 päivää, kaikkien aikojen) ja parhaat klaanit WNX:n mukaan rankattuina, laskettuna tilannekuvistamme."
+    },
+    "open-source": {
+      "title": "Avoin lähdekoodi · AGPL",
+      "description": "Koodi on GitHubissa. Tutki, haarauta, osallistu. Ei mainoksia, vain valinnainen analytiikka."
+    }
+  },
+  "quick-start": {
+    "title": "Pika-aloitus",
+    "search": {
+      "title": "🔍 Etsi pelaajia tai klaaneja",
+      "description": "Avaa haku painamalla {shortcut} ja kirjoita sitten lempinimi tai klaanitunnus."
+    },
+    "region": {
+      "title": "🌍 Vaihda aluetta",
+      "description": "Käytä navigointipalkin {selector}-valitsinta. Tulostaulukot päivittyvät vastaavasti."
+    },
+    "leaderboards": {
+      "title": "🏆 Selaa tulostaulukoita",
+      "description": "Parhaat pelaajat (24 tuntia, 7 päivää, kaikkien aikojen) ja parhaat klaanit keskimääräisen WNX:n mukaan rankattuina, laskettuna tilannekuvistamme."
+    },
+    "colors": {
+      "title": "📊 Lue värit",
+      "description": "WR, WN7, WN8 ja WNX käyttävät samoja tasovärejä (oranssi → vihreä → syaani → violetti). Katso asteikko yllä."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

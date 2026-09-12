@@ -1,0 +1,18 @@
+{
+  "caught-up": "Entièrement à jour, merci. Tout le surplus va dans plus de capacité et de nouvelles fonctionnalités.",
+  "covered-label": "Couvert",
+  "covered-sentence": "Les supporters ont couvert {received} des {spent} dépensés à ce jour.",
+  "days-out-of-pocket": "{days} jours, sur les fonds propres",
+  "from-supporter-one": "de {count} supporter",
+  "from-supporters": "de {count} supporters",
+  "gap-growing": "{amount}/mois de plus empêche l’écart de se creuser.",
+  "goal": "objectif {amount}",
+  "of-that-total": "de ce total",
+  "pledges-cover": "Les promesses de don couvrent désormais la facture mensuelle.",
+  "raised-amount": "{amount} collectés",
+  "raised-label": "Collecté",
+  "run-at-a-loss": "{name} tourne à perte depuis {since}.",
+  "run-rate": "Rythme mensuel : {pledged}/mois promis contre {cost}/mois pour fonctionner.",
+  "spent-since-launch": "Dépensé depuis le lancement",
+  "to-catch-up": "{amount} pour être entièrement à jour."
+}

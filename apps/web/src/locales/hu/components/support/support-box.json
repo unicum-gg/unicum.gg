@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "A vásárlás megszakítva.",
+  "claim-your-supporter-role-on-discord": "Igényeld a támogatói szerepkörödet a Discordon",
+  "could-not-add-the-discord-role-please-try-ag": "Nem sikerült hozzáadni a Discord-szerepkört. Próbáld újra.",
+  "could-not-open-the-billing-portal": "Nem sikerült megnyitni a számlázási portált.",
+  "could-not-start-checkout-please-try-again": "Nem sikerült elindítani a fizetést. Próbáld újra.",
+  "could-not-update-your-preference": "Nem sikerült frissíteni a beállításodat.",
+  "log-in-with-wargaming": "Bejelentkezés Wargaming-fiókkal",
+  "log-in-with-wargaming-to": "Jelentkezz be Wargaming-fiókkal a(z) {NAME} támogatásához.",
+  "manage-subscription": "Előfizetés kezelése",
+  "only-active-supporters-can-claim-the-discord": "Csak az aktív támogatók igényelhetik a Discord-szerepkört.",
+  "or-choose-your-own-amount": "Vagy válassz saját összeget",
+  "pay-what-you-want": "Fizess, amennyit szeretnél.",
+  "pick-an-amount": "Válassz összeget vagy írj be sajátot, legalább €{min}/hó értékben.",
+  "re-sync-discord-role": "Discord-szerepkör újraszinkronizálása",
+  "secured-by-stripe": "A Stripe biztosítja. Bármikor lemondható.",
+  "show-me-anonymously-on-the": "Névtelenül jeleníts meg a dobogón",
+  "support-subscriptions-are-coming-soon": "A támogatói előfizetések hamarosan elérhetők lesznek.",
+  "supporter-role-added-on-discord": "A támogatói szerepkör hozzáadva a Discordon!",
+  "you-are-a-supporter-thank": "Támogató vagy. Köszönjük, hogy életben tartod a(z) {NAME} oldalt."
+}

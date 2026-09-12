@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Šta igrači misle o ovom tenku",
+  "not-rated": "Još nije ocijenjeno, budi prvi",
+  "votes": "{count} glasova",
+  "votes-one": "{count} glas",
+  "stars": "{value} od {max}",
+  "not-rated-short": "Nije ocijenjeno"
+}

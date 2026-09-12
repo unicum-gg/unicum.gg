@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# tanc} few {# tancuri} other {# de tancuri}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Nu au fost înregistrate încă schimbări pentru tancuri. Pe măsură ce Wargaming reechilibrează tancurile, îmbunătățirile și nerfurile fiecărui update vor apărea aici.",
+  "update": "Actualizează {version}"
+}

@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "개요",
+    "tanks": "탱크",
+    "videos": "비디오",
+    "tournaments": "토너먼트",
+    "manage": "관리"
+  },
+  "section-count": "{section} ({count})"
+}

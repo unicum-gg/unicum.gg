@@ -1,0 +1,21 @@
+{
+  "title": "Arvosteluasteikko",
+  "description": "Sivustolla käytettävät värirajat voittoprosentille ja navigointipalkissa valitulle arvosanamittarille.",
+  "tier": "Taso",
+  "tiers": {
+    "top": "Paras",
+    "excellent": "Erinomainen",
+    "super": "Super",
+    "very-good": "Erittäin hyvä",
+    "good": "Hyvä",
+    "average": "Keskimääräinen",
+    "below-avg": "Alle keskiarvon",
+    "bad": "Huono",
+    "very-bad": "Erittäin huono"
+  },
+  "rating-colors": "Arvioinnin värit",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

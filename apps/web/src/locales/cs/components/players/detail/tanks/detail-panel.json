@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Průměr skóre za bitvu",
+  "general-parameters": "Obecné parametry",
+  "metric-progression": "Vývoj {metric}",
+  "not-enough-history-on-this": "Pro tento tank zatím není dostatek historických dat. K vykreslení křivky jsou potřeba alespoň dva snímky za posledních 90 dní.",
+  "record-score": "Rekordní skóre",
+  "updated": "Aktualizováno"
+}

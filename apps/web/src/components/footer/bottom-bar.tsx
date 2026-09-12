@@ -2,8 +2,10 @@
 
 import { ThemeSwitch } from "fumadocs-ui/layouts/shared/slots/theme-switch";
 import { RatingSelector } from "@/components/rating-selector";
+import { LocaleSelector } from "@/components/locale-selector";
 import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
+import { useTranslation } from "@/hooks/use-translation";
 import { openCookiePreferences } from "@/lib/cookie-preferences";
 import { styles } from "@/lib/styles";
 
@@ -18,6 +20,8 @@ import { styles } from "@/lib/styles";
  * the same cookie, and the theme switch the same `next-themes` state.
  */
 export function FooterBottomBar() {
+  const { t } = useTranslation("components/footer");
+
   return (
     <div className="flex flex-col items-center justify-between gap-4 border-t border-fd-border px-4 py-4 text-sm sm:flex-row">
       <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center sm:justify-start sm:text-left">
@@ -27,7 +31,7 @@ export function FooterBottomBar() {
         <span className={styles.mutedText} aria-hidden>
           ·
         </span>
-        <span className={styles.mutedText}>Not affiliated with Wargaming</span>
+        <span className={styles.mutedText}>{t("disclaimer")}</span>
         <span className={styles.mutedText} aria-hidden>
           ·
         </span>
@@ -38,7 +42,7 @@ export function FooterBottomBar() {
           onClick={openCookiePreferences}
           className={`cursor-pointer ${styles.linkHover}`}
         >
-          Manage cookies
+          {t("cookies")}
         </button>
       </div>
 
@@ -46,6 +50,7 @@ export function FooterBottomBar() {
         <ThemeSwitch />
         <RatingSelector />
         <RegionSelector />
+        <LocaleSelector />
       </div>
     </div>
   );

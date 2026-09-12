@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "यह कैसे समाप्त हुआ",
+  "loading-maps": "मैप लोड हो रहे हैं…",
+  "map": "नक्शा",
+  "mode": "मोड",
+  "pick-a-map": "मैप चुनें",
+  "pick-a-mode": "मोड चुनें",
+  "result": "परिणाम",
+  "spawn": "स्पॉन",
+  "team": "टीम {team}",
+  "team-spawn": "टीम {team} · {direction}",
+  "which-side-you-started": "आपने किस ओर से शुरुआत की"
+}

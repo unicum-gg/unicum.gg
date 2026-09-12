@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Munkafolyamat hozzáadása",
+  "boost": "Boost",
+  "each-workflow-activates-its-reserves": "Minden munkafolyamat egy adott időablakban aktiválja a tartalékait, amint elegendő tag vesz részt aktív játékmenetben. A fiókodban fut, így nem kell online lenned. Annyit adhatsz hozzá, amennyire szükséged van.",
+  "n-online": "/ {count} online",
+  "officer": "Tiszt",
+  "online": "Online",
+  "recent-activations": "legutóbbi aktiválások",
+  "reserve": "Tartalék",
+  "stronghold-boosts": "Erődítő bónuszok",
+  "when": "Mikor",
+  "workflow": "Workflow"
+}

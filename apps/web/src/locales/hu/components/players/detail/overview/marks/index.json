@@ -1,0 +1,21 @@
+{
+  "title": "{nickname} jelei és osztályai",
+  "excellence": {
+    "title": "Kiválóság jele",
+    "description": "Járművek az ágyújukon lévő jelek szerint. A jel tartós átlagot jelent: a játék a legutóbbi csaták gördülő időablakában értékeli a járművet ahhoz képest, amit a régió teljesít rajta.",
+    "partial": "Jelek {garage} járműből {known} esetében olvashatók. A többi az új fiókadatok betöltésekor jelenik meg.",
+    "note": "{garage} járműből {marked} visel jelet.",
+    "note-share": "{garage} járműből {marked} visel jelet, a garázs {percent}%-a."
+  },
+  "mastery": {
+    "title": "Mestermarkok",
+    "description": "Járművek a legjobb jelvényük szerint. A jelvény egyetlen csatához kötődik, nem átlaghoz: a játék egyetlen csata tapasztalata alapján ítéli oda, összevetve azt azzal, amit a régió elér az adott járművel.",
+    "note": "{garage} járműből {aces} cipel Asztali Tankért.",
+    "note-share": "{garage} járműből {aces} cipel Asztali Tankért ({percent}% a garázsból)."
+  },
+  "reach": {
+    "heading": "Az ágyú szintje felett játszva",
+    "description": "Olyan járművek, amelyek összesített sebzése már meghalad egy olyan jelet, amellyel nem rendelkeznek. A jelvény ezt az összesített sebzést mutatja, annak a jelnek a színével, amelyet elér."
+  },
+  "none": "Nincs"
+}

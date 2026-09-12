@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
 import useSWR from "swr";
 import {
   DEFAULT_RATING_METRIC,
@@ -16,6 +19,7 @@ import {
 import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
 
 /**
@@ -39,6 +43,10 @@ export function PlayerPercentile({
    * follow the one the reader picked rather than naming one for them. */
   ratings: Record<RatingMetric, PeriodValues>;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation(
+    "components/players/detail/overview/percentile",
+  );
   // The same cookie the navbar selector writes.
   const [stored] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
   const metric: RatingMetric = isRatingMetric(stored)
@@ -67,7 +75,7 @@ export function PlayerPercentile({
     winrate == null
       ? null
       : {
-          label: "Win rate",
+          label: t("win-rate"),
           percentile: percentileOf(data.winrate, winrate),
           color: RATING_COLOR_HEX[winrateColor(winrate)],
         },
@@ -96,10 +104,10 @@ export function PlayerPercentile({
         {entries.map((entry) => (
           <div key={entry.label} className="flex flex-col gap-1">
             <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-              {entry.label} vs {REGION_LABEL[region]}
+              {t("versus", { metric: entry.label, region: REGION_LABEL[region] })}
             </div>
             <div className="text-xl font-semibold" style={{ color: entry.color }}>
-              {formatStanding(entry.percentile)}
+              {formatStanding(entry.percentile, t)}
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-fd-border/40">
               <div
@@ -114,8 +122,11 @@ export function PlayerPercentile({
         ))}
       </div>
       <p className="text-xs text-fd-muted-foreground">
-        Against {new Intl.NumberFormat("en-US").format(data.players)} tracked{" "}
-        {REGION_LABEL[region]} accounts with at least {data.minBattles} battles.
+        {t("against", {
+          players: numberFormat(locale).format(data.players),
+          region: REGION_LABEL[region],
+          battles: data.minBattles,
+        })}
       </p>
     </div>
   );
@@ -129,10 +140,13 @@ export function PlayerPercentile({
  * inverting into "bottom N%", which no one wants to read about themselves and
  * which says the same thing twice.
  */
-function formatStanding(percentile: number): string {
+function formatStanding(
+  percentile: number,
+  t: (key: string, values?: Record<string, string | number>) => string,
+): string {
   const top = (1 - percentile) * 100;
   if (percentile >= 0.5) {
-    return `Top ${top < 1 ? top.toFixed(1) : Math.round(top)}%`;
+    return t("top", { percent: top < 1 ? top.toFixed(1) : Math.round(top) });
   }
-  return `Ahead of ${Math.round(percentile * 100)}%`;
+  return t("ahead-of", { percent: Math.round(percentile * 100) });
 }

@@ -1,0 +1,11 @@
+{
+  "closes": "{when} に閉じる",
+  "map-pool": "マッププール",
+  "place": "順位",
+  "prize": "賞",
+  "prizes": "賞",
+  "qualified": "通過（{count}）",
+  "register": "登録",
+  "tournaments": "トーナメント",
+  "winner": "{count, plural, other {勝者}}"
+}

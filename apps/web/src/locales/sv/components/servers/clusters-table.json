@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Inget kluster har registrerats ännu.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Dela",
+  "peak": "Topp ({label})",
+  "average": "Genomsnitt ({label})",
+  "not-reported": "Inte rapporterat",
+  "total": "Totalt"
+}

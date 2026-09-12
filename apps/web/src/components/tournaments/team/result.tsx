@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   isTournamentLive,
   isTournamentOpen,
@@ -23,11 +25,11 @@ import type {
 import type { TeamMatch } from "@/components/tournaments/detail/team-run";
 import { cn } from "@/lib/utils";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
+} as const;
 
 /** A plain figure: what happened, with the line that puts it in context. */
 function Cell({
@@ -118,6 +120,8 @@ export function TeamMetrics({
   tournament: TournamentRecord;
   team: TournamentTeam;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tournaments/team/result");
   const metric = useRatingMetric();
   const rating = ratingOf(team, metric);
   const recent = recentRatingOf(team, metric);
@@ -156,8 +160,11 @@ export function TeamMetrics({
       {scouting && recent !== null && (
         <MetricColumn
           label={`Avg ${RATING_METRIC_LABEL[metric]} · 30d`}
-          value={intFmt.format(recent)}
-          title={`Average over the ${team.rated30dPlayers} of ${team.players.length} players who played in the last 30 days`}
+          value={num(INT_FORMAT).format(recent)}
+          title={t("average-over-recent", {
+            rated: team.rated30dPlayers,
+            size: team.players.length,
+          })}
           colorClass={ratingColor(recent, metric)}
         />
       )}
@@ -171,15 +178,18 @@ export function TeamMetrics({
               ? `Avg ${RATING_METRIC_LABEL[metric]}`
               : `Avg ${RATING_METRIC_LABEL[metric]} · ${ordinal(rank)} of ${rated.length}`
           }
-          value={intFmt.format(rating)}
-          title={`Average over ${team.ratedPlayers} of ${team.players.length} players`}
+          value={num(INT_FORMAT).format(rating)}
+          title={t("average-over-rated", {
+            rated: team.ratedPlayers,
+            size: team.players.length,
+          })}
           colorClass={ratingColor(rating, metric)}
         />
       )}
       {winrate !== null && Number.isFinite(winrate) && (
         <MetricColumn
-          label="Avg winrate"
-          value={`${pctFmt.format(winrate * 100)}%`}
+          label={t("avg-winrate")}
+          value={`${num(PCT_FORMAT).format(winrate * 100)}%`}
           colorClass={RATING_COLOR_CLASS[winrateColor(winrate)]}
         />
       )}
@@ -208,6 +218,7 @@ export function TeamResult({
   place: number | undefined;
   placedTeams: number;
 }) {
+  const { t } = useTranslation("components/tournaments/team/result");
   // Wargaming's own count of the entered field, which is the denominator a
   // placing is read against. It can lag what we mirrored, so a tournament that
   // placed more teams than it says it confirmed reports the larger of the two
@@ -226,7 +237,7 @@ export function TeamResult({
     <div className="flex flex-col border-t border-fd-border sm:flex-row">
       {place !== undefined && (
         <Cell
-          label="Finished"
+          label={t("finished")}
           value={ordinal(place)}
           note={fieldSize > 0 ? `of ${fieldSize} teams` : undefined}
         />
@@ -234,10 +245,10 @@ export function TeamResult({
       {/* A band's reward is the organiser's own sentence ("5600 gold (team
           reward)"), not a figure, so it is set at reading size rather than at
           the display size the placing and the record use. */}
-      {prize && <Cell label="Won" value={prize} valueClassName="text-base" />}
+      {prize && <Cell label={t("won")} value={prize} valueClassName="text-base" />}
       {decided.length > 0 && (
         <Cell
-          label="Record"
+          label={t("record")}
           value={`${wins}-${losses}`}
           note={`${decided.length} ${decided.length === 1 ? "tie" : "ties"} played`}
         />

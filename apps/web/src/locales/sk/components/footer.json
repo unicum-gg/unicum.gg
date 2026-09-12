@@ -1,0 +1,25 @@
+{
+  "tagline": "Vytvorené pre komunitu World of Tanks. Bezplatné štatistiky pre každého hráča a každý klan, tank či mapu v regiónoch EÚ, NA a Ázie.",
+  "columns": {
+    "leaderboards": "Rebríčky",
+    "tanks": "Tanky",
+    "maps": "Mapy",
+    "integrations": "Integrácie",
+    "project": "Projekt"
+  },
+  "links": {
+    "top-tanks": "Najboljši tanki",
+    "bot": "Discord bot",
+    "mcp": "MCP server",
+    "docs": "Dokumentácia API",
+    "badges": "Odznaky",
+    "glossary": "Prehľad pojmov",
+    "coverage": "Pokritost",
+    "support": "Podporte nás",
+    "source": "Zdrojový kód",
+    "status": "Stav",
+    "discord": "Discord"
+  },
+  "disclaimer": "Bez prepojenia so spoločnosťou Wargaming",
+  "cookies": "Spravovať súbory cookie"
+}

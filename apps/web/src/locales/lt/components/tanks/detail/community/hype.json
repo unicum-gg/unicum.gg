@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "aukščiau nei {value}% įvertintų savo lygio tankų",
+  "measured-hint": "Kaip jo pergalių rodiklis išsirikiuoja tarp tokių pačių tankų",
+  "not-enough-votes-yet-to": "Dar nepakanka balsų palyginti bendruomenės nuomonę su tuo, kaip tankas iš tikrųjų veikia.",
+  "perceived-hint": "Kaip bendruomenė jį vertina tarp įvertintų {tier} lygio tankų",
+  "verdict": {
+    "overrated": "Bendruomenė jį vertina gerokai aukščiau, nei jis iš tikrųjų pasiekia.",
+    "fair": "Šio tanko reputacija ir rezultatai sutampa.",
+    "underrated": "Jis veikia geriau, nei kas nors jam pripažįsta."
+  },
+  "what-players-think": "Ką mano žaidėjai",
+  "what-the-data-says": "Ką sako duomenys"
+}

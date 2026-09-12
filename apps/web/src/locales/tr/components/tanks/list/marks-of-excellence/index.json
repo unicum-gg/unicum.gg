@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: birleştirilmiş hasarınızın hareketli ortalaması (son yaklaşık 100 savaş), son 14 gün içinde bu tankı kullanan oyuncuların %65’ini aşmalıdır"
+    },
+    "mark2": {
+      "label": "2 Mark",
+      "tip": "2 Mark: bu tankta son yaklaşık 100 savaş için hareketli ortalama birleştirilmiş hasarın, son 14 gün içinde bu tanktaki oyuncuların %85’ini aşmalı"
+    },
+    "mark3": {
+      "label": "3 Mark",
+      "tip": "3 Mark: bu tankta son yaklaşık 100 savaş için hareketli ortalama birleştirilmiş hasarın, son 14 gün içinde bu tanktaki oyuncuların %95’ini aşmalı"
+    }
+  },
+  "rows-per-page": "Sayfada satır",
+  "previous-page": "Önceki sayfa",
+  "page": "Sayfa {current} / {totalPages}",
+  "next-page": "Sonraki sayfa",
+  "all": "Tümü"
+}

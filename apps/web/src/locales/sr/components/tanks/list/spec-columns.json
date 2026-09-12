@@ -1,0 +1,162 @@
+{
+  "columns-label": "Kolone",
+  "groups": {
+    "firepower": "Vatrena moć",
+    "gun-handling": "Rukovanje oružjem",
+    "mobility": "Pokretljivost",
+    "survivability": "Izdržljivost",
+    "other": "Drugo"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Naneta šteta по минуту"
+    },
+    "damage": {
+      "label": "Naneta šteta",
+      "tip": "Alpha naneta šteta"
+    },
+    "moduleDamage": {
+      "label": "Naneta šteta"
+    },
+    "splashRadius": {
+      "label": "Радијус експлозије"
+    },
+    "reload": {
+      "label": "Punjenje",
+      "tip": "Поновно пуњење (пун магацин за аутоматске пуњаче)"
+    },
+    "rof": {
+      "label": "Brzina paljbe",
+      "tip": "Граната по минуту"
+    },
+    "intraClipReload": {
+      "label": "Punjenje unutar klipa",
+      "tip": "Време између хитаца у магацину (аутоматски пуњачи)"
+    },
+    "penetration": {
+      "label": "Penetracija",
+      "tip": "Penetracija (mm), подразумевана граната"
+    },
+    "caliber": {
+      "label": "Kalibar",
+      "tip": "Калибар гранате (mm)"
+    },
+    "shellVelocity": {
+      "label": "Brzina granate",
+      "tip": "Брзина гранате (m/s)"
+    },
+    "accuracy": {
+      "label": "Preciznost",
+      "tip": "Rasipanje на 100 m (мање је боље)"
+    },
+    "aimTime": {
+      "label": "Vreme ciljanja"
+    },
+    "dispMoving": {
+      "label": "Rasipanje prilikom kretanja",
+      "tip": "Фактор распршења током кретања"
+    },
+    "dispTankTraverse": {
+      "label": "Rasipanje при окретању тенка"
+    },
+    "dispTurretTraverse": {
+      "label": "Rasipanje при окретању куполе"
+    },
+    "dispAfterShot": {
+      "label": "Rasipanje после пуцања"
+    },
+    "dispWhileDamaged": {
+      "label": "Rasipanje док је оштећен"
+    },
+    "gunArc": {
+      "label": "Угао померања топа",
+      "tip": "Хоризонтални угао окретања топа"
+    },
+    "depression": {
+      "label": "Спуштање / подизање топа",
+      "tip": "Спуштање / подизање топа"
+    },
+    "speed": {
+      "label": "Брзина (напред / назад)",
+      "tip": "Максимална брзина напред / назад (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Okretanje šasije"
+    },
+    "turretTraverse": {
+      "label": "Okretanje kupole"
+    },
+    "enginePower": {
+      "label": "Snaga",
+      "tip": "Снага мотора (hp)"
+    },
+    "powerWeight": {
+      "label": "Snaga/Težina",
+      "tip": "hp по тони"
+    },
+    "terrainHard": {
+      "label": "Тврда подлога",
+      "tip": "Отпор терена на чврстом тлу (мање је боље)"
+    },
+    "terrainMedium": {
+      "label": "Srednja terenzija"
+    },
+    "terrainSoft": {
+      "label": "Мека подлога"
+    },
+    "health": {
+      "label": "Издржљивост",
+      "tip": "Pogođeni hitovi"
+    },
+    "engineHealth": {
+      "label": "Zdravlje motora"
+    },
+    "engineFireChance": {
+      "label": "Šansa za požar motora"
+    },
+    "hullArmorFront": {
+      "label": "Oklop трупа (предњи)",
+      "tip": "Предњи оклоп трупа (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Oklop куполе (предњи)",
+      "tip": "Предњи оклоп куполе (mm)"
+    },
+    "trackArmor": {
+      "label": "Oklop trake"
+    },
+    "trackHealth": {
+      "label": "Издржљивост гусеница"
+    },
+    "trackRepairTime": {
+      "label": "Време поправке гусенице"
+    },
+    "ammoRackHealth": {
+      "label": "Издржљивост сталка за муницију"
+    },
+    "weight": {
+      "label": "Težina"
+    },
+    "viewRange": {
+      "label": "Vidokrug",
+      "tip": "Домет гледања (m)"
+    },
+    "radioRange": {
+      "label": "Домет радио-везе",
+      "tip": "Домет сигнала (m)"
+    },
+    "camoStill": {
+      "label": "Прикривеност у месту"
+    },
+    "camoMoving": {
+      "label": "Прикривеност у покрету"
+    },
+    "camoStillFiring": {
+      "label": "Камuflaža у месту после пуцања"
+    },
+    "camoMovingFiring": {
+      "label": "Камuflaža у кретању после пуцања"
+    }
+  }
+}

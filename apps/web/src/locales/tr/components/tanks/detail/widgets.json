@@ -1,0 +1,12 @@
+{
+  "slot": "Yuva {n}",
+  "slot-filled": "Yuva {n}: {name}",
+  "consumable-slot": "Sarf malzemesi yuvası {n}",
+  "consumable-slot-filled": "Sarf malzemesi yuvası {n}: {name}",
+  "level": "Seviye {n}",
+  "stock": "Stok",
+  "specialize": "Bu yuvayı özelleştirmek için tıkla.",
+  "clear-specialization": "Bu yuvanın özelleştirmesini temizlemek için tıkla.",
+  "crew-skills": "Mürettebat Yetenekleri",
+  "shell-aria": "{name}: {damage} hasar, {penetration} mm delme"
+}

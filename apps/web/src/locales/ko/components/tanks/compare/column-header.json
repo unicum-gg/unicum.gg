@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "이 열의 탄약, 장비, 소모품, 지시, 승무원 및 진행도입니다. 변경할 때마다 뒤의 비교에서 특성이 이동합니다.",
+  "ammunition-equipment-crew-and-progression": "탄약, 장비, 승무원 및 진행도",
+  "apply-to-every-column": "모든 열에 적용",
+  "compare-against": "{tank}과(와) 비교",
+  "compare-the-others-against-this-one": "다른 항목을 이것과 비교",
+  "configure-tank": "{tank} 설정",
+  "highest-overall-score": "가장 높은 종합 점수",
+  "highest-overall-score-of-this": "이 비교에서 가장 높은 종합 점수",
+  "is-the-reference": "기준 차량: {tank}",
+  "overall": "전체",
+  "reference-column": "기준 열",
+  "remove-tank": "{tank} 제거",
+  "reset-all": "모두 초기화",
+  "setup": "설정",
+  "stock": "재고",
+  "tank-setup": "{tank} 설정",
+  "top": "최상",
+  "where-this-vehicle-sits-across": "이 차량이 전체 카탈로그에서 차지하는 위치를 {MAXSCORE}점 만점으로 보여줍니다. 여기에서 설정한 네 가지 범주 점수의 평균입니다. 판정이 아닌 요약이므로, 정찰병과 중전차도 서로 다른 강점으로 같은 점수에 도달할 수 있습니다."
+}

@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "每次投票都来自使用过这辆坦克的账号。",
+  "every-vote-played-average": "每次投票都来自使用过这辆坦克的账号，平均使用它进行过{battles}场战斗。",
+  "fun": "乐趣",
+  "how-good-the-tank-is": "这辆坦克有多好",
+  "how-much-people-enjoy-it": "玩家有多喜欢它",
+  "if-you-have-played-it": "如果您使用过它，您正是此页面等待的玩家。",
+  "nobody-has-rated-this-tank": "还没有人评价这辆坦克。",
+  "overall": "总体",
+  "votes": "{count} 投票",
+  "votes-one": "{count} 投票"
+}

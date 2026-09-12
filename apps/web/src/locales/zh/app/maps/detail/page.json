@@ -1,0 +1,5 @@
+{
+  "title": "{map}，World of Tanks 地图（{region}）",
+  "description": "{map}：一张{width} × {height}米的 World of Tanks 地图。",
+  "description-modes": "{map}：一张{width} × {height}米的 World of Tanks 地图，可进行{modes}。"
+}

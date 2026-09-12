@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { dateLocale } from "@/lib/date-locale";
+import { useFormat } from "@/hooks/use-format";
 import {
   CaretDownIcon,
   CaretUpDownIcon,
@@ -21,21 +24,18 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { clanRoleName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 
-function prettyRole(role: string): string {
-  if (!role) return "—";
-  return role.charAt(0).toUpperCase() + role.slice(1).replace(/_/g, " ");
-}
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const decFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const DEC_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 enum SortColumn {
   Name = "name",
@@ -121,6 +121,10 @@ function SortableHead({
   state,
   onToggle,
   align = "start",
+  /** The glossary term this column is about, when the heading no longer spells
+   * it: the heading is translated, the term is the English name the anchors are
+   * keyed by. */
+  term,
   ratingCol,
   hideOnMobile,
   headClassName,
@@ -130,6 +134,7 @@ function SortableHead({
   state: SortState;
   onToggle: (col: SortColumn) => void;
   align?: "start" | "end";
+  term?: string;
   ratingCol?: string;
   hideOnMobile?: boolean;
   headClassName?: string;
@@ -151,10 +156,14 @@ function SortableHead({
         active ? "text-foreground" : "",
       )}
     >
-      {children}
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
       <Icon
         weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
       />
     </button>
   );
@@ -168,7 +177,7 @@ function SortableHead({
       )}
     >
       <GlossaryHeadTooltip
-        label={typeof children === "string" ? children : undefined}
+        label={term ?? (typeof children === "string" ? children : undefined)}
       >
         {button}
       </GlossaryHeadTooltip>
@@ -185,6 +194,7 @@ function RatingCell({
   color: RatingColor | null;
   ratingCol?: string;
 }) {
+  const { num } = useFormat();
   if (value === null) {
     return (
       <TableCell
@@ -203,7 +213,7 @@ function RatingCell({
         color && RATING_COLOR_CLASS[color],
       )}
     >
-      {decFmt.format(value)}
+      {num(DEC_FORMAT).format(value)}
     </TableCell>
   );
 }
@@ -246,6 +256,12 @@ function MemberRowSkeleton() {
 export function ClanMembersTable(
   props: { loading: true } | { region: Region; members: ClanMemberStats[] },
 ) {
+  const { locale } = useLocale();
+  const { num } = useFormat();
+  const { t } = useTranslation(
+    "components/clans/detail/overview/members-table",
+  );
+  const { t: tRoles } = useTranslation("game/clan-roles");
   const [sort, setSort] = useState<SortState>({
     column: SortColumn.Role,
     direction: SortDirection.Desc,
@@ -273,16 +289,22 @@ export function ClanMembersTable(
       <TableHeader>
         <TableRow>
           <TableHead className="px-3! py-2! text-right!">#</TableHead>
-          <SortableHead column={SortColumn.Name} state={sort} onToggle={toggleSort}>
-            Player
+          <SortableHead
+            column={SortColumn.Name}
+            term="Player"
+            state={sort}
+            onToggle={toggleSort}
+          >
+            {t("player")}
           </SortableHead>
           <SortableHead
             column={SortColumn.Role}
+            term="Role"
             state={sort}
             onToggle={toggleSort}
             hideOnMobile
           >
-            Role
+            {t("role")}
           </SortableHead>
           <SortableHead
             column={SortColumn.WN7}
@@ -291,8 +313,7 @@ export function ClanMembersTable(
             align="end"
             ratingCol="wn7"
           >
-            WN7
-          </SortableHead>
+            {t("wn7")}</SortableHead>
           <SortableHead
             column={SortColumn.WN730d}
             state={sort}
@@ -300,7 +321,7 @@ export function ClanMembersTable(
             align="end"
             ratingCol="wn7-30d"
           >
-            30d WN7
+            {t("period", { metric: "WN7" })}
           </SortableHead>
           <SortableHead
             column={SortColumn.WN8}
@@ -309,8 +330,7 @@ export function ClanMembersTable(
             align="end"
             ratingCol="wn8"
           >
-            WN8
-          </SortableHead>
+            {t("wn8")}</SortableHead>
           <SortableHead
             column={SortColumn.WN830d}
             state={sort}
@@ -318,7 +338,7 @@ export function ClanMembersTable(
             align="end"
             ratingCol="wn8-30d"
           >
-            30d WN8
+            {t("period", { metric: "WN8" })}
           </SortableHead>
           <SortableHead
             column={SortColumn.WR}
@@ -327,8 +347,7 @@ export function ClanMembersTable(
             align="end"
             headClassName="max-[480px]:hidden"
           >
-            WR
-          </SortableHead>
+            {t("wr")}</SortableHead>
           <SortableHead
             column={SortColumn.WNX}
             state={sort}
@@ -336,8 +355,7 @@ export function ClanMembersTable(
             align="end"
             ratingCol="wnx"
           >
-            WNX
-          </SortableHead>
+            {t("wnx")}</SortableHead>
           <SortableHead
             column={SortColumn.WNX30d}
             state={sort}
@@ -345,25 +363,27 @@ export function ClanMembersTable(
             align="end"
             ratingCol="wnx-30d"
           >
-            30d WNX
+            {t("period", { metric: "WNX" })}
           </SortableHead>
           <SortableHead
             column={SortColumn.Battles}
+            term="Battles"
             state={sort}
             onToggle={toggleSort}
             align="end"
             hideOnMobile
           >
-            Battles
+            {t("battles")}
           </SortableHead>
           <SortableHead
             column={SortColumn.Joined}
+            term="Joined"
             state={sort}
             onToggle={toggleSort}
             align="end"
             hideOnMobile
           >
-            Joined
+            {t("joined")}
           </SortableHead>
         </TableRow>
       </TableHeader>
@@ -398,7 +418,7 @@ export function ClanMembersTable(
                 />
               </TableCell>
               <TableCell className="hidden text-muted-foreground sm:table-cell">
-                {prettyRole(m.role)}
+                {clanRoleName(m.role, tRoles)}
               </TableCell>
               <RatingCell
                 value={
@@ -434,7 +454,7 @@ export function ClanMembersTable(
                     ],
                 )}
               >
-                {m.overall ? `${pctFmt.format(m.overall.winsPercentage)}%` : "—"}
+                {m.overall ? `${num(PCT_FORMAT).format(m.overall.winsPercentage)}%` : "—"}
               </TableCell>
               <RatingCell
                 value={
@@ -449,13 +469,14 @@ export function ClanMembersTable(
                 ratingCol="wnx-30d"
               />
               <TableCell className="hidden text-right tabular-nums sm:table-cell">
-                {m.overall ? intFmt.format(m.overall.battles) : "—"}
+                {m.overall ? num(INT_FORMAT).format(m.overall.battles) : "—"}
               </TableCell>
               <TableCell className="hidden text-right text-xs text-muted-foreground tabular-nums sm:table-cell">
                 {format(
                   // eslint-disable-next-line react-hooks/purity -- portal API only gives us days_in_clan, not the join timestamp, so we derive it from "now" at render time
                   new Date(Date.now() - m.daysInClan * 86_400_000),
-                  "MMM d, yyyy",
+                  "d MMM yyyy",
+                  { locale: dateLocale(locale) },
                 )}
               </TableCell>
             </TableRow>

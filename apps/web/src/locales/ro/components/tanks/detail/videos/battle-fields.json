@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Cum s-a încheiat",
+  "loading-maps": "Se încarcă hărțile…",
+  "map": "Harta",
+  "mode": "Mod",
+  "pick-a-map": "Alege o hartă",
+  "pick-a-mode": "Alege un mod",
+  "result": "Rezultat",
+  "spawn": "Reaparitie",
+  "team": "Echipă {team}",
+  "team-spawn": "Echipa {team} · {direction}",
+  "which-side-you-started": "Partea de pe care ai început"
+}

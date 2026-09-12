@@ -26,6 +26,7 @@ import {
   type BattleContext,
 } from "./battle-fields";
 import { ownVideosKey, type TankVideoSuggestion } from "./player";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   useVideoSource,
   VideoSourceFields,
@@ -58,6 +59,9 @@ export function SubmitVideoDialog({
    */
   initial?: TankVideoSuggestion;
 }) {
+  const { t: tCopy } = useTranslation("components/tanks/detail/videos/submit-dialog");
+  const { t } = useTranslation("components/tanks/detail/videos/submit-dialog");
+  const { t: tVideos } = useTranslation("components/tanks/detail/videos/index");
   const { data: session } = useSession();
   const [open, setOpen] = useState(Boolean(initial));
   const source = useVideoSource(initial);
@@ -78,7 +82,7 @@ export function SubmitVideoDialog({
     return (
       <LoginButton callbackURL={ROUTES.TANK(region, slug)}>
         <Button variant="outline" size="sm">
-          Log in to suggest a video
+          {tVideos("log-in")}
         </Button>
       </LoginButton>
     );
@@ -156,8 +160,7 @@ export function SubmitVideoDialog({
     >
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
-          Suggest a video
-        </Button>
+          {t("suggest-a-video")}</Button>
       </DialogTrigger>
       {/* Wider and scrollable: the preview is a 16:9 player above five fields,
           which the primitive's default size cannot hold.
@@ -172,12 +175,12 @@ export function SubmitVideoDialog({
             `aria-describedby` points at. */}
         <DialogHeader>
           <DialogTitle>
-            {done ? "Suggestion sent" : "Suggest a video"}
+            {done ? t("suggestion-sent") : t("suggest-a-video")}
           </DialogTitle>
           <DialogDescription>
             {done
-              ? "It is in the queue, and shows up on this tab once a moderator has looked at it."
-              : "Paste a YouTube link, then set the exact moment the battle starts. Everyone who opens it lands on that second, so a suggestion whose timestamp is off is turned down in review."}
+              ? t("in-the-queue")
+              : t("paste-a-youtube-link")}
           </DialogDescription>
         </DialogHeader>
 
@@ -191,7 +194,7 @@ export function SubmitVideoDialog({
                   combined value at submit. */}
               <div className="grid grid-cols-2 gap-2">
                 <label className="flex flex-col gap-1 text-sm">
-                  <span className="font-medium">Damage</span>
+                  <span className="font-medium">{t("damage")}</span>
                   <input
                     type="text"
                     value={damage}
@@ -205,9 +208,9 @@ export function SubmitVideoDialog({
                 </label>
                 <label className="flex flex-col gap-1 text-sm">
                   <span className="font-medium">
-                    Assists{" "}
+                    {tCopy("assists")}{" "}
                     <span className="font-normal text-fd-muted-foreground">
-                      (optional)
+                      {tCopy("optional")}
                     </span>
                   </span>
                   <input
@@ -241,13 +244,12 @@ export function SubmitVideoDialog({
                   form is right here, so offer it rather than making them close
                   and reopen. */}
               <Button variant="outline" onClick={reset}>
-                Suggest another
-              </Button>
-              <Button onClick={() => setOpen(false)}>Close</Button>
+                {t("suggest-another")}</Button>
+              <Button onClick={() => setOpen(false)}>{t("close")}</Button>
             </>
           ) : (
             <Button onClick={submit} disabled={!complete || sending}>
-              {sending ? "Sending…" : "Suggest"}
+              {sending ? t("sending") : t("suggest")}
             </Button>
           )}
         </DialogFooter>

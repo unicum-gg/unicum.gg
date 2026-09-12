@@ -1,0 +1,12 @@
+{
+  "slot": "Ұяшық {n}",
+  "slot-filled": "{n} ұяшығы: {name}",
+  "consumable-slot": "{n} шығындалатын зат ұяшығы",
+  "consumable-slot-filled": "{n} шығындалатын зат ұяшығы: {name}",
+  "level": "Деңгей {n}",
+  "stock": "Қор",
+  "specialize": "Бұл ұяшықты мамандандыру үшін басыңыз.",
+  "clear-specialization": "Бұл ұяшықтың мамандануын тазалау үшін басыңыз.",
+  "crew-skills": "Экипаж дағдылары",
+  "shell-aria": "{name}: {damage} зақым, {penetration} мм сауытты тесу"
+}

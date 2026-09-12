@@ -1,0 +1,11 @@
+{
+  "already-running": "既に実行中",
+  "in-window": "ウィンドウ内",
+  "n-online": "/ オンライン{count}人",
+  "no-reserves-selected": "リザーブが選択されていません。",
+  "no-stock-ready": "使用可能な在庫なし",
+  "not-available": "利用できません",
+  "threshold": "閾値 ({online}/{min})",
+  "would-activate": "使用するでしょう",
+  "would-not-fire": "現在は発動しません。"
+}

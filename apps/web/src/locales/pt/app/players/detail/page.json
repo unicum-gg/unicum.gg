@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tanques: {name} ({region}), todos os veículos utilizados",
+    "description": "Todos os tanques que {name} utilizou no servidor {region}, com batalhas, taxa de vitórias, dano médio e WN8 por veículo."
+  },
+  "achievements": {
+    "title": "Conquistas: {name} ({region}), {medals} medalhas obtidas",
+    "description": "As {medals} medalhas de World of Tanks que {name} obteve no servidor {region}, desde as medalhas de Kolobanov e Pool até aos títulos honoríficos e medalhas épicas, além de todas as que ainda faltam obter."
+  },
+  "tournaments": {
+    "title": "Torneios: {name} ({region})",
+    "description": "Todos os torneios da Wargaming em que {name} participou no servidor {region}: a equipa pela qual jogou, o formato e até onde chegou. Estes dados são publicados pela Wargaming apenas por torneio, nunca por jogador."
+  },
+  "value": {
+    "title": "Valor da conta: {name} ({region})",
+    "description": "Quanto vale a conta World of Tanks que {name} possui no servidor {region}: créditos, ouro e experiência investidos na garagem."
+  },
+  "mode": {
+    "title": "Estatísticas do modo {mode}: {name} ({region})",
+    "description": "{name} no servidor {region}, no modo {mode}: batalhas, taxa de vitórias e classificações deste modo, em comparação com o desempenho habitual em batalhas aleatórias."
+  },
+  "overview": {
+    "title": "Estatísticas de World of Tanks: {name} ({region}), {battles} batalhas, {winrate}% de vitórias",
+    "description": "{name} no servidor {region}: {battles} batalhas, {winrate}% de vitórias, classificação de {rating}. Análise por tanque, WN8, WNX e histórico completo de clãs."
+  },
+  "locked": {
+    "title": "Conta World of Tanks bloqueada: {name} ({region})",
+    "description": "{name} ({region}) corresponde a uma conta existente, mas a Wargaming bloqueou-a, pelo que as estatísticas de World of Tanks não estão disponíveis."
+  },
+  "empty": {
+    "title": "Estatísticas do jogador de World of Tanks: {name} ({region})",
+    "description": "Estatísticas de World of Tanks: {name} ({region}), classificações WN8 e WNX, taxa de vitórias, análise por tanque e histórico completo de clãs."
+  }
+}

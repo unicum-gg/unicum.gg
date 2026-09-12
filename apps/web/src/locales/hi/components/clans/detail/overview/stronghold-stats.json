@@ -1,0 +1,22 @@
+{
+  "stat": "स्टेट्स",
+  "periods": {
+    "total": "कुल",
+    "day": "अंतिम 24 घंटे",
+    "week": "अंतिम 7 दिन",
+    "month": "अंतिम 30 दिन"
+  },
+  "sections": {
+    "elo": "टियर X ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} टियर X (7v7)",
+    "t8": "{skirmish} टियर VIII (7v7)",
+    "t6": "{skirmish} टियर VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "युद्ध",
+    "winrate": "जीत दर"
+  }
+}

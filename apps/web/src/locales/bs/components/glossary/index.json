@@ -1,0 +1,22 @@
+{
+  "search": "Pretraži {count} pojmova",
+  "search-label": "Pretraži glosar",
+  "all": "Sve",
+  "jump": "Pređi na slovo",
+  "empty": "Nijedan pojam ne odgovara upitu „{query}“.",
+  "categories": {
+    "vehicles": "Vozila",
+    "gunnery": "Pucanje",
+    "armor": "Oklop",
+    "mobility": "Mobilnost",
+    "vision": "Vid",
+    "crew": "Posada",
+    "progression": "Napredovanje",
+    "economy": "Ekonomija",
+    "ratings": "Ocjene",
+    "statistics": "Statistika",
+    "modes": "Modovi bitke",
+    "tactics": "Taktika",
+    "slang": "Žargon"
+  }
+}

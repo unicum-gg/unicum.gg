@@ -1,0 +1,14 @@
+{
+  "clan": "Klaani",
+  "player": "Pelaaja",
+  "members": "Jäsenet",
+  "battles": "Taisteluita",
+  "avg-damage": "Keskiv. vaurio",
+  "avg-xp": "Kesk. XP",
+  "winrate": "Voitto-%",
+  "result": "Tulokset",
+  "tournament": "Turnaus",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

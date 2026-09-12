@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   CaretLeftIcon,
   CaretRightIcon,
@@ -14,6 +15,7 @@ import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   PERF_COLUMN_BY_KEY,
   PERF_COLUMNS,
+  perfColumnLabel,
   type PerfColumn,
   usePerfColumns,
 } from "@/components/tanks/perf-columns";
@@ -49,6 +51,7 @@ import {
   RatingMetric,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
 
 function sortValue(
@@ -82,6 +85,10 @@ export function TanksTable({
   /** When set, each row offers a comparison checkbox. */
   selection?: TankSelection;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tanks/perf-columns");
+  const { t: tOwn } = useTranslation("components/tanks/list/performances/index");
+  const { t: tTable } = useTranslation("components/tanks/table");
   const [storedRating] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
   const metric: RatingMetric = isRatingMetric(storedRating)
     ? storedRating
@@ -162,19 +169,19 @@ export function TanksTable({
           <TableHeader>
             <TableRow>
               <TankCompareHead selection={selection} />
-              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip={tTable("nation")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="nation" />
               </SortHead>
-              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip="Type" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip={tTable("type")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="type" />
               </SortHead>
-              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip="Tier" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip={tTable("tier")} headClassName="w-[72px] min-w-[72px]">
                 <span className="text-xs font-medium tracking-tight text-fd-muted-foreground">
                   I-XI
                 </span>
               </SortHead>
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
-                Name
+                {tTable("name")}
               </SortHead>
               {visible.map((c) => (
                 <SortHead
@@ -183,9 +190,9 @@ export function TanksTable({
                   col={c.key}
                   onToggle={toggleSort}
                   align="end"
-                  tip={c.tip}
+                  tip={c.tipped ? t(`columns.${c.key}.tip`) : undefined}
                 >
-                  {c.header ? c.header(metric) : c.label}
+                  {perfColumnLabel(c, metric, t)}
                 </SortHead>
               ))}
             </TableRow>
@@ -218,7 +225,7 @@ export function TanksTable({
                   <TankRowName region={region} tank={t} />
                 </TableCell>
                 {visible.map((c) => {
-                  const { node, className } = c.cell(t.stats, metric);
+                  const { node, className } = c.cell(t.stats, metric, num);
                   return (
                     <TableCell
                       key={c.key}
@@ -236,7 +243,7 @@ export function TanksTable({
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
         <div className="flex items-center gap-2">
-          <span>Rows per page</span>
+          <span>{tOwn("rows-per-page")}</span>
           <Select
             value={String(pageSize)}
             onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
@@ -250,7 +257,7 @@ export function TanksTable({
                   {n}
                 </SelectItem>
               ))}
-              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="all">{tOwn("all")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -263,19 +270,18 @@ export function TanksTable({
               type="button"
               onClick={() => setPage(current - 1)}
               disabled={current <= 1}
-              aria-label="Previous page"
+              aria-label={tOwn("previous-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretLeftIcon weight="bold" className="size-3.5" />
             </button>
             <span className="min-w-16 text-center tabular-nums">
-              Page {current} / {totalPages}
-            </span>
+              {tOwn("page", { current, totalPages })}</span>
             <button
               type="button"
               onClick={() => setPage(current + 1)}
               disabled={current >= totalPages}
-              aria-label="Next page"
+              aria-label={tOwn("next-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretRightIcon weight="bold" className="size-3.5" />

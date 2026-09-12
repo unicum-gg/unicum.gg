@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Spelområdets bredd",
+    "height": "Spelområdets höjd",
+    "round-length": "Stridstimer",
+    "team-size": "Lagstorlek",
+    "camouflage": "Säsong",
+    "presence": "I spelet",
+    "variant-version": "{type}-version",
+    "play-area": "Spelområde",
+    "bases-team1": "Allierade baser",
+    "bases-team2": "Fiendebaser",
+    "spawns-team1": "Allierade spawnpunkter",
+    "spawns-team2": "Fiendespawnpunkter",
+    "control-point": "Kontrollpunkt",
+    "artillery-headquarters": "Artillerihögkvarter",
+    "comms-centers": "Kommunikationscentraler",
+    "observation-posts": "Observationsposter",
+    "points-of-interest": "Nyckelpunkter"
+  },
+  "summary": {
+    "added": "{name} tillagd",
+    "removed": "{name} borttagen",
+    "added-to-game": "Tillagd i spelet",
+    "removed-from-game": "Borttagen från spelet",
+    "added-on-test": "Tillagd i testklienten",
+    "removed-on-test": "Borttagen från testklienten",
+    "mode-added": "{name}-läge tillagd",
+    "mode-removed": "{name}-läge borttagen",
+    "now-played-in": "Spelas nu i {name}",
+    "no-longer-played-in": "Spelas inte längre i {name}",
+    "event-added": "{name} kan nu inträffa mitt i striden",
+    "event-removed": "{name} händer inte längre",
+    "moved": "{name} förflyttad",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

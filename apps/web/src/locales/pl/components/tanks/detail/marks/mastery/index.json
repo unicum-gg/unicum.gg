@@ -1,0 +1,8 @@
+{
+  "last-days": "Ostatnie {chartDays} dni",
+  "n-players": "{count, plural, one {# gracz} few {# graczy} many {# graczy} other {# graczy}}",
+  "rolling-average-combined-damage-to": "Krocząca średnia łącznych uszkodzeń wymagana, by wyprzedzić 65 / 85 / 95% graczy.",
+  "single-battle-xp-to-beat": "Liczba PD w pojedynczej bitwie wymagana, by wyprzedzić 50 / 80 / 95 / 99% graczy.",
+  "tank-marks-of-excellence": "Znaki biegłości: {tank}",
+  "tank-marks-of-mastery": "Znaki mistrzostwa: {tank}"
+}

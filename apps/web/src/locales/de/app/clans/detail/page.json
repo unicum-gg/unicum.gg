@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "World of Tanks-Clan [{tag}] {name} ({region}), {members} Mitglieder",
+    "description": "Der World of Tanks-Clan {name} [{tag}] auf {region}: {members} Mitglieder, vollständige Mitgliedertabelle mit WN8- und WNX-Wertungen, aktuelle Beitritte und Austritte sowie Clangeschichte."
+  },
+  "stronghold": {
+    "title": "Clan [{tag}] {name}: stronghold stats ({region})",
+    "description": "Bollwerk-Statistiken des Clans {name} [{tag}] auf {region}: Wertungen, Gefechte und Siegrate jedes Mitglieds in Scharmützeln und Vorstößen."
+  },
+  "clan-wars": {
+    "title": "Clan [{tag}] {name}: clan wars stats ({region})",
+    "description": "Clankriegsstatistiken des Clans {name} [{tag}] auf {region}: Wertungen, Gefechte und Siegrate jedes Mitglieds in allen Kampagnen auf der Weltkarte."
+  },
+  "tanks": {
+    "title": "Clan [{tag}] {name}: Panzer ({region}), die Fahrzeuge des Clans",
+    "description": "Jeder Panzer, den der Clan {name} [{tag}] auf {region} gespielt hat, mit Gefechtszahl, Siegrate und durchschnittlichem Schaden, jeweils über alle Clanmitglieder aggregiert."
+  },
+  "manage": {
+    "title": "Clan [{tag}] {name}: Bollwerkreserven ({region})",
+    "description": "Aktivieren und planen Sie die Bollwerkreserven von {name} [{tag}]. Nur für Offiziere."
+  },
+  "missing": {
+    "description": "World of Tanks-Clan [{tag}] auf {region}: Mitgliedertabelle mit WN8- und WNX-Wertungen, aktuellen Beitritten und Austritten, letzten Gefechten und vollständiger Clangeschichte."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "close": "Close",
+  "format": "Format",
+  "here": "here",
+  "in-the-queue": "It is in the queue, and shows up {where} once a moderator has looked at it. Yours is greyed out on that page in the meantime.",
+  "log-in-to-suggest-a": "Log in to suggest a tactic",
+  "on-map": "on {map}",
+  "players-per-team": "Players per team",
+  "sending": "Sending…",
+  "suggest": "Suggest",
+  "suggest-a-tactic": "Suggest a tactic",
+  "suggest-another": "Suggest another",
+  "suggestion-sent": "Suggestion sent",
+  "tier": "Tier",
+  "what-to-submit": "A competitive battle, opening at the second it starts. The map starts on {map} and moves with the video: a clan evening runs through a rotation. The side it was played from is the part a shot-caller looks it up by, so it is asked for rather than guessed.",
+  "what-was-played": "What was played"
+}

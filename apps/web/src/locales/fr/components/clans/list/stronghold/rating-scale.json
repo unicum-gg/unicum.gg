@@ -1,0 +1,17 @@
+{
+  "average": "Moyenne",
+  "bad": "Mauvais",
+  "below-avg": "En dessous de la moyenne",
+  "color-thresholds-for-the-stronghold": "Seuils de couleur pour les classements de Bastion. Une échelle absolue unique pour tous les rangs, afin qu’un SR (ou SRB) corresponde partout au même niveau de clan.",
+  "excellent": "Excellent",
+  "good": "Bon",
+  "rating-colors": "Couleurs de classement",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Niveau",
+  "top": "Meilleurs",
+  "very-bad": "Très mauvais",
+  "very-good": "Très bon",
+  "wr": "WR"
+}

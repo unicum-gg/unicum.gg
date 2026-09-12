@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tenki igrača {name} ({region}), svako odigrano vozilo",
+    "description": "Svaki tenk koji je {name} igrao na regiji {region}, s bitkama, postotkom pobjeda, prosječnom štetom i WN8-om po vozilu."
+  },
+  "achievements": {
+    "title": "Postignuća igrača {name} ({region}), zarađeno medalja: {medals}",
+    "description": "{medals} medalja igre World of Tanks koje je {name} zaradio na regiji {region}, od Kolobanovljeve i Poolove do počasnih činova i epskih medalja, uz sve one koje još treba zaraditi."
+  },
+  "tournaments": {
+    "title": "Turniri igrača {name} ({region})",
+    "description": "Svaki Wargamingov turnir na regiji {region} u kojem je {name} sudjelovao: tim za koji je igrao, format i koliko je daleko stigao. To je zapis koji Wargaming objavljuje samo iz perspektive turnira, nikad igrača."
+  },
+  "value": {
+    "title": "Vrijednost računa igrača {name} ({region})",
+    "description": "Koliko vrijedi račun igre World of Tanks igrača {name} na regiji {region}: krediti, zlato i iskustvo pohranjeni u garaži."
+  },
+  "mode": {
+    "title": "Statistika igrača {name} za način {mode} ({region})",
+    "description": "{name} na regiji {region} u načinu {mode}: bitke, postotak pobjeda i ocjene za ovaj način, uz osnovicu nasumičnih bitaka."
+  },
+  "overview": {
+    "title": "Statistika igre World of Tanks igrača {name} ({region}), {battles} bitaka, {winrate}% postotak pobjeda",
+    "description": "{name} na regiji {region}: {battles} bitaka, {winrate}% postotak pobjeda, ocjena {rating}. Pregled po tenku, WN8, WNX i potpuna povijest klanova."
+  },
+  "locked": {
+    "title": "Račun igre World of Tanks igrača {name} zaključan ({region})",
+    "description": "{name} ({region}) postoji, ali Wargaming je zaključao ovaj račun, pa njegova statistika igre World of Tanks nije dostupna."
+  },
+  "empty": {
+    "title": "Statistika igrača {name} igre World of Tanks ({region})",
+    "description": "Statistika igrača {name} igre World of Tanks na regiji {region}: ocjene WN8 i WNX, postotak pobjeda, pregled po tenku i potpuna povijest klana."
+  }
+}

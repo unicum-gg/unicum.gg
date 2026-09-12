@@ -1,0 +1,6 @@
+{
+  "active-until": "Aktivní do {tz}",
+  "n-left": "Zbývá {count}",
+  "no-reserves-in-stock-right": "Momentálně nejsou na skladě žádné zálohy.",
+  "reserves-to-activate": "Zálohy k aktivaci"
+}

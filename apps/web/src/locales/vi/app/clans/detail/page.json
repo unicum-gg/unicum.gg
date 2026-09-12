@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name}, Clan World of Tanks ({region}), {members} thành viên",
+    "description": "{name} [{tag}] tại {region}: {members} thành viên, bảng thành viên đầy đủ với các chỉ số đánh giá WN8 và WNX, hoạt động tham gia và rời khỏi gần đây cùng lịch sử Clan đầy đủ."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name}, thống kê Pháo đài ({region})",
+    "description": "Thành tích Pháo đài của {name} [{tag}] tại {region}: các chỉ số đánh giá giao tranh nhỏ và tiến công, trận đấu và tỷ lệ thắng của từng thành viên."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name}, thống kê Clan Wars ({region})",
+    "description": "Thành tích Clan Wars của {name} [{tag}] tại {region}: các chỉ số đánh giá, trận đấu và tỷ lệ thắng của từng thành viên trên các chiến dịch bản đồ toàn cầu."
+  },
+  "tanks": {
+    "title": "[{tag}] {name}, xe tăng ({region}), các xe tăng của Clan",
+    "description": "Mọi xe tăng đã được chơi bởi {name} [{tag}] tại {region}, với trận đấu, tỷ lệ thắng và sát thương trung bình được tổng hợp trên các thành viên của Clan."
+  },
+  "manage": {
+    "title": "[{tag}] {name}, dự trữ Pháo đài ({region})",
+    "description": "Kích hoạt và lên lịch dự trữ Pháo đài của {name} [{tag}]. Chỉ dành cho sĩ quan."
+  },
+  "missing": {
+    "description": "Clan World of Tanks [{tag}] tại {region}: bảng thành viên với các chỉ số đánh giá WN8/WNX, hoạt động tham gia và rời khỏi, các trận đấu gần đây và lịch sử Clan đầy đủ."
+  }
+}

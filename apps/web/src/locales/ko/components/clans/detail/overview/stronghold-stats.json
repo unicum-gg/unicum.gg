@@ -1,0 +1,22 @@
+{
+  "stat": "통계",
+  "periods": {
+    "total": "전체",
+    "day": "지난 24시간",
+    "week": "지난 7일",
+    "month": "지난 30일"
+  },
+  "sections": {
+    "elo": "단계 10 ELO ({advances} + {skirmish})",
+    "advances": "{advances} (15대15)",
+    "t10": "{skirmish} 단계 10 (7대7)",
+    "t8": "{skirmish} 단계 8 (7대7)",
+    "t6": "{skirmish} 단계 6 (7대7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "전투",
+    "winrate": "승률"
+  }
+}

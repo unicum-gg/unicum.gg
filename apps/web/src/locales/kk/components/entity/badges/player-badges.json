@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1-орын",
+    "2": "2-орын",
+    "3": "3-орын"
+  },
+  "streamer": "Стример · {name} ойыншысын Twitch-те көру",
+  "tournament": {
+    "one": "{title} турнирінің жеңімпаз құрамы",
+    "many": "{count} жеңімпаз құрамда, үздік нәтиже: {title}",
+    "featured": "{text} · таңдаулы оқиға",
+    "unnamed": "Wargaming турнирі"
+  },
+  "tournament-wins": "{count, plural, one {# турнир жеңісі} other {# турнир жеңістері}}",
+  "watch-on-twitch": "{name} ойыншысын Twitch-те көру",
+  "watch-on-twitch-viewers": "{name} ойыншысын Twitch-те көру · {viewers} көрермен"
+}

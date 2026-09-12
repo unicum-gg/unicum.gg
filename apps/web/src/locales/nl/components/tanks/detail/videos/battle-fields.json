@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Hoe het afliep",
+  "loading-maps": "Kaarten laden…",
+  "map": "Kaart",
+  "mode": "Modus",
+  "pick-a-map": "Kies een kaart",
+  "pick-a-mode": "Kies een modus",
+  "result": "Resultaat",
+  "spawn": "Spawnen",
+  "team": "Team {team}",
+  "team-spawn": "Team {team} · {direction}",
+  "which-side-you-started": "Aan welke kant je begon"
+}

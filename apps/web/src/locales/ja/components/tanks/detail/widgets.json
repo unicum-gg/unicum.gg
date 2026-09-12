@@ -1,0 +1,12 @@
+{
+  "slot": "スロット {n}",
+  "slot-filled": "スロット{n}：{name}",
+  "consumable-slot": "消耗品スロット{n}",
+  "consumable-slot-filled": "消耗品スロット{n}：{name}",
+  "level": "レベル {n}",
+  "stock": "ストック",
+  "specialize": "クリックしてこのスロットを特化します。",
+  "clear-specialization": "クリックしてこのスロットの特化を解除します。",
+  "crew-skills": "搭乗員スキル",
+  "shell-aria": "{name}：{damage}ダメージ、貫通力{penetration} mm"
+}

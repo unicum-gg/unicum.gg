@@ -1,0 +1,7 @@
+{
+  "stats-title": "{nickname}的随机战斗数据",
+  "progression-title": "{nickname}的{metric}进展",
+  "lift-drag-title": "影响{nickname}评分的坦克",
+  "progression-blurb": "实线是总体{metric}（与上方总计列一致），会随着新战斗累积而缓慢变化。虚线是每个对战阶段的{metric}，根据上次快照以来进行的战斗计算。它显示状态火热或低迷的连胜期。线条颜色遵循评分等级。",
+  "progression-empty": "历史记录还不足。至少需要一个快照才能绘制曲线。请稍后再来查看。"
+}

@@ -1,0 +1,18 @@
+{
+  "caught-up": "Teljesen utolértük, köszönjük. Minden további támogatás nagyobb teljesítményre és új funkciókra fordítódik.",
+  "covered-label": "Támogatva",
+  "covered-sentence": "A támogatók eddig {spent} összegből {received} összeget fedeztek.",
+  "days-out-of-pocket": "{days} nap saját zsebből",
+  "from-supporter-one": "{count} támogatótól",
+  "from-supporters": "{count} támogatótól",
+  "gap-growing": "További havi {amount} megakadályozza a rés növekedését.",
+  "goal": "cél {amount}",
+  "of-that-total": "ebből összesen",
+  "pledges-cover": "A felajánlások jelenleg fedezik a havi költségeket.",
+  "raised-amount": "{amount} összeggyűjtve",
+  "raised-label": "Összegyűjtve",
+  "run-at-a-loss": "{name} {since} óta veszteségesen működik.",
+  "run-rate": "Havi működési ütem: {pledged}/hó felajánlva, a működéshez {cost}/hó szükséges.",
+  "spent-since-launch": "Indulás óta elköltve",
+  "to-catch-up": "{amount} a teljes felzárkózáshoz."
+}

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Übersicht",
+    "tanks": "Panzer",
+    "sessions": "Sitzungen",
+    "achievements": "Erfolge",
+    "tournaments": "Turniere",
+    "value": "Wert"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

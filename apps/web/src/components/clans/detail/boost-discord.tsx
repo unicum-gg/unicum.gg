@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
+import { Interpolate } from "@/components/interpolate";
 import { useState } from "react";
 import useSWR from "swr";
 import { toast } from "sonner";
@@ -55,6 +57,8 @@ export function ClanBoostDiscord({
   tag: string;
   className?: string;
 }) {
+  const { t: tCopy } = useTranslation("components/clans/detail/boost-discord");
+  const { t } = useTranslation("components/clans/detail/boost-discord");
   const key = `/api/${region}/clans/${encodeURIComponent(tag)}/boosts/discord`;
   const { data, mutate } = useSWR<DiscordData>(key, fetchJson, {
     revalidateOnFocus: false,
@@ -105,9 +109,9 @@ export function ClanBoostDiscord({
       if (!res.ok) throw new Error();
       await mutate();
       setEditing(false);
-      toast.success("Discord channel connected");
+      toast.success(t("discord-channel-connected"));
     } catch {
-      toast.error("Could not save the channel");
+      toast.error(t("could-not-save-the-channel"));
     } finally {
       setBusy(false);
     }
@@ -119,9 +123,9 @@ export function ClanBoostDiscord({
       const res = await fetch(key, { method: "DELETE" });
       if (!res.ok) throw new Error(String(res.status));
       await mutate();
-      toast.success("Discord notifications removed");
+      toast.success(t("discord-notifications-removed"));
     } catch {
-      toast.error("Could not remove the destination");
+      toast.error(t("could-not-remove-the-destination"));
     } finally {
       setBusy(false);
     }
@@ -132,9 +136,9 @@ export function ClanBoostDiscord({
     try {
       const res = await fetch(`${key}/test`, { method: "POST" });
       if (!res.ok) throw new Error();
-      toast.success("Test message sent");
+      toast.success(t("test-message-sent"));
     } catch {
-      toast.error("Could not send the test (is the bot allowed to post there?)");
+      toast.error(t("could-not-send-the-test-is-the-bot-allowed-t"));
     } finally {
       setBusy(false);
     }
@@ -148,34 +152,36 @@ export function ClanBoostDiscord({
     <Panel screenLines={false} className={className}>
         <PanelHeader className="flex min-h-14 items-center">
           <PanelTitle className="flex items-center gap-2">
-            Discord notifications
-            <DiscordLogoIcon className="size-5 text-fd-muted-foreground" />
+            {tCopy("discord-notifications")}<DiscordLogoIcon className="size-5 text-fd-muted-foreground" />
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="flex flex-col items-start gap-4">
           {dest && !editing && (
             <>
               <p className="text-sm text-fd-muted-foreground">
-                Boost activations are posted to{" "}
-                <span className="font-medium text-fd-foreground">
-                  #{dest.channelName || dest.channelId}
-                </span>{" "}
-                in{" "}
-                <span className="font-medium text-fd-foreground">
-                  {dest.guildName || "your server"}
-                </span>
-                .
+                <Interpolate
+                  template={tCopy("posted-to")}
+                  values={{
+                    channel: (
+                      <span className="font-medium text-fd-foreground">
+                        #{dest.channelName || dest.channelId}
+                      </span>
+                    ),
+                    server: (
+                      <span className="font-medium text-fd-foreground">
+                        {dest.guildName || tCopy("your-server")}
+                      </span>
+                    ),
+                  }}
+                />
               </p>
               <div className="flex flex-wrap gap-2">
                 <Button onClick={test} disabled={busy}>
-                  Send test
-                </Button>
+                  {t("send-test")}</Button>
                 <Button variant="secondary" onClick={() => setEditing(true)}>
-                  Change channel
-                </Button>
+                  {t("change-channel")}</Button>
                 <Button variant="ghost" onClick={remove} disabled={busy}>
-                  Remove
-                </Button>
+                  {t("remove")}</Button>
               </div>
             </>
           )}
@@ -183,14 +189,10 @@ export function ClanBoostDiscord({
           {showPicker && !data.connected && (
             <>
               <p className="max-w-2xl text-sm text-fd-muted-foreground">
-                Connect Discord to post boost activations to a channel you choose.
-                You&apos;ll also be added to our community server. Pick which
-                server to add the bot to on the Discord screen.
-              </p>
+                {t("connect-discord-to-post-boost")}</p>
               <Button asChild>
                 <a href={connectHref}>
-                  <DiscordLogoIcon className="size-4" /> Connect Discord
-                </a>
+                  <DiscordLogoIcon className="size-4" /> {tCopy("connect-discord")}</a>
               </Button>
             </>
           )}
@@ -199,7 +201,7 @@ export function ClanBoostDiscord({
             <>
               <div className="flex flex-wrap items-end gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <Label className="text-xs text-fd-muted-foreground">Server</Label>
+                  <Label className="text-xs text-fd-muted-foreground">{t("server")}</Label>
                   <Select
                     value={guildId}
                     onValueChange={(v) => {
@@ -208,13 +210,13 @@ export function ClanBoostDiscord({
                     }}
                   >
                     <SelectTrigger className="w-56">
-                      <SelectValue placeholder="Pick a server" />
+                      <SelectValue placeholder={t("pick-a-server")} />
                     </SelectTrigger>
                     <SelectContent>
                       {guilds.map((g) => (
                         <SelectItem key={g.id} value={g.id}>
                           {g.name}
-                          {!g.botPresent ? " (bot not added)" : ""}
+                          {!g.botPresent ? ` ${t("bot-not-added")}` : ""}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -224,11 +226,10 @@ export function ClanBoostDiscord({
                 {selectedGuild && selectedGuild.botPresent && (
                   <div className="flex flex-col gap-1.5">
                     <Label className="text-xs text-fd-muted-foreground">
-                      Channel
-                    </Label>
+                      {t("channel")}</Label>
                     <Select value={channelId} onValueChange={setChannelId}>
                       <SelectTrigger className="w-56">
-                        <SelectValue placeholder="Pick a channel" />
+                        <SelectValue placeholder={t("pick-a-channel")} />
                       </SelectTrigger>
                       <SelectContent>
                         {channels.map((c) => (
@@ -244,25 +245,33 @@ export function ClanBoostDiscord({
 
               {selectedGuild && !selectedGuild.botPresent && (
                 <p className="text-sm text-fd-muted-foreground">
-                  Our bot isn&apos;t in <b>{selectedGuild.name}</b> yet.{" "}
-                  <a href={connectHref} className="text-brand hover:underline">
-                    Add the bot
-                  </a>{" "}
-                  (pick this server on the Discord screen), then come back.
+                  <Interpolate
+                    template={tCopy("bot-not-in-server")}
+                    values={{
+                      server: <b>{selectedGuild.name}</b>,
+                      link: (
+                        <a
+                          href={connectHref}
+                          className="text-brand hover:underline"
+                        >
+                          {t("add-the-bot")}
+                        </a>
+                      ),
+                    }}
+                  />
                 </p>
               )}
 
               <div className="flex gap-2">
                 <Button onClick={save} disabled={busy || !guildId || !channelId}>
-                  {busy ? "Saving…" : "Save"}
+                  {busy ? t("saving") : t("save")}
                 </Button>
                 {editing && (
                   <Button variant="ghost" onClick={() => setEditing(false)}>
-                    Cancel
-                  </Button>
+                    {t("cancel")}</Button>
                 )}
                 <Button variant="ghost" asChild>
-                  <a href={connectHref}>Reconnect / add another server</a>
+                  <a href={connectHref}>{t("reconnect-add-another-server")}</a>
                 </Button>
               </div>
             </>

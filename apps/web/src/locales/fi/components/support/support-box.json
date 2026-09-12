@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Checkout peruutettu.",
+  "claim-your-supporter-role-on-discord": "Ota tukijan roolisi Discordissa",
+  "could-not-add-the-discord-role-please-try-ag": "Discord-roolin lisääminen ei onnistunut. Yritä uudelleen.",
+  "could-not-open-the-billing-portal": "Laskutusportaalin avaaminen ei onnistunut.",
+  "could-not-start-checkout-please-try-again": "Maksamisen aloittaminen ei onnistunut. Yritä uudelleen.",
+  "could-not-update-your-preference": "Asetuksesi päivittäminen ei onnistunut.",
+  "log-in-with-wargaming": "Kirjaudu Wargamingilla",
+  "log-in-with-wargaming-to": "Kirjaudu Wargamingilla tukeaksesi käyttäjää {NAME}.",
+  "manage-subscription": "Hallitse tilauksia",
+  "only-active-supporters-can-claim-the-discord": "Vain aktiiviset tukijat voivat ottaa Discord-roolin.",
+  "or-choose-your-own-amount": "Tai valitse oma summa",
+  "pay-what-you-want": "Maksa haluamasi summa.",
+  "pick-an-amount": "Valitse summa tai kirjoita oma, alkaen €{min}/kuukausi.",
+  "re-sync-discord-role": "Synkronoi Discord-rooli uudelleen",
+  "secured-by-stripe": "Stripen suojaama. Peru milloin tahansa.",
+  "show-me-anonymously-on-the": "Näytä minut nimettömänä palkintokorokkeella",
+  "support-subscriptions-are-coming-soon": "Tukitilaukset tulevat pian.",
+  "supporter-role-added-on-discord": "Tukijan rooli lisätty Discordissa!",
+  "you-are-a-supporter-thank": "Olet tukija. Kiitos, että pidät käyttäjän {NAME} toiminnassa."
+}

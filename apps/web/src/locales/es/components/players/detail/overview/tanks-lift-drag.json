@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Mejorando la Clasificación",
+    "blurb": "Tanques que elevan la valoración general: eliminarlos la reduciría.",
+    "empty": "Ningún tanque mejora la Clasificación general."
+  },
+  "drag": {
+    "heading": "Empeorando la Clasificación",
+    "blurb": "Tanques que lastran la valoración general: eliminarlos la aumentaría.",
+    "empty": "Ningún tanque empeora la Clasificación general."
+  },
+  "if-removed": "{delta} si se elimina"
+}

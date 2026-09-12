@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "نظرة عامة",
+    "tanks": "دبابات",
+    "videos": "مقاطع الفيديو",
+    "tournaments": "بطولات",
+    "manage": "إدارة"
+  },
+  "section-count": "{section} ({count})"
+}

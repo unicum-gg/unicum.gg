@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Ce que les joueurs pensent de ce char",
+  "not-rated": "Pas encore évalué, soyez le premier",
+  "votes": "{count} votes",
+  "votes-one": "{count} vote",
+  "stars": "{value} sur {max}",
+  "not-rated-short": "Pas noté"
+}

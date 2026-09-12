@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Rādīt tērzēšanu",
+    "hide": "Paslēpt tērzēšanu",
+    "show-streamers": "Rādīt straumētājus"
+  },
+  "heading": "{name}: World of Tanks spēlētāju, klanu un tanku statistika",
+  "hide": "Paslēpt straumētājus",
+  "player": "Spēlētājs",
+  "stream-language": "Straumes valoda · {name}",
+  "stream-language-alt": "Straumes valoda: {name}",
+  "theater": {
+    "enter": "Teātra režīms",
+    "exit": "Iziet no teātra režīma"
+  },
+  "title": "Labākie spēlētāji, kas pašlaik straumē ·",
+  "viewer-count": "{count} skatītāji",
+  "viewers": "Skatītāji",
+  "watch": "Skatīties {nickname} Twitch platformā"
+}

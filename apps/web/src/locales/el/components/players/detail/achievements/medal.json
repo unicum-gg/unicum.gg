@@ -1,0 +1,6 @@
+{
+  "aria-earned": "{name}, κερδισμένο {count}×",
+  "aria-not-earned": "{name}, δεν έχει κερδηθεί",
+  "no-longer-obtainable": "Δεν είναι πλέον διαθέσιμο.",
+  "not-earned": "Δεν έχει κερδηθεί"
+}

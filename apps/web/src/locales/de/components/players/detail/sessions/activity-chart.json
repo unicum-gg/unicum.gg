@@ -1,0 +1,5 @@
+{
+  "battles": "{count} Gefechte",
+  "chart-label": "Gespielte Gefechte pro {granularity}, eingefärbt nach {metric}",
+  "no-battles": "Keine Gefechte"
+}

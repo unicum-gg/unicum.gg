@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Жинақ сілтемесі көшірілді",
+  "copy-build-link": "Жинақ сілтемесін көшіру",
+  "could-not-copy-link": "Сілтемені көшіру мүмкін болмады",
+  "include-setup": "Орнатуды қосу",
+  "share-build": "Бөлісу құрастыру",
+  "share-tank": "{tank} танкін бөлісу",
+  "share-text": "{app} ішінде осы {tank} жинағын қараңыз"
+}

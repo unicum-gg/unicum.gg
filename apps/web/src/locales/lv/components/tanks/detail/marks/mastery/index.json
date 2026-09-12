@@ -1,0 +1,8 @@
+{
+  "last-days": "Pēdējās {chartDays} dienas",
+  "n-players": "{count, plural, zero {# spēlētāju} one {# spēlētājs} other {# spēlētāji}}",
+  "rolling-average-combined-damage-to": "Kustīgais vidējais kopējais bojājumu apjoms, lai pārspētu 65 / 85 / 95% spēlētāju.",
+  "single-battle-xp-to-beat": "Vienas kaujas XP, lai pārspētu 50 / 80 / 95 / 99% spēlētāju.",
+  "tank-marks-of-excellence": "{tank} izcilības zīmes",
+  "tank-marks-of-mastery": "{tank} meistarības zīmes"
+}

@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Pulisci {label}",
+  "credited-on-the-clan-s": "Accreditato sulla pagina del clan stesso.",
+  "none": "Nessuno",
+  "optional": "(opzionale)",
+  "pick-the-vehicle": "Scegli il veicolo",
+  "search-for-a-clan": "Cerca un clan",
+  "search-for-a-vehicle": "Cerca un veicolo",
+  "search-tank": "Cerca carro armato...",
+  "tank": "Carro",
+  "tank-hint-optional": "Una tattica appartiene alla sua mappa, quindi ha valore indicarne il nome solo quando il video riguarda anche il veicolo.",
+  "tank-hint-required": "Una battaglia casuale viene visualizzata in base al veicolo con cui è stata giocata."
+}

@@ -1,0 +1,12 @@
+{
+  "added": "Lagt till",
+  "before-update": "Före Uppdatera {version}",
+  "common-test": "Vanlig Test",
+  "every-update-that-changed-this": "Varje Uppdatera som ändrade den här kartan, med den senaste först, hämtad direkt från själva spelklienten.",
+  "in-the-game": "I spelet",
+  "n-changes": "{count, plural, one {# förändring} other {# förändringar}}",
+  "not-released-wargaming-can-still": "Inte släppt. Wargaming kan fortfarande ändra eller stryka allt detta före lanseringen.",
+  "removed": "Ta bort",
+  "title": "Förändringar för {map}",
+  "update": "Uppdatera {version}"
+}

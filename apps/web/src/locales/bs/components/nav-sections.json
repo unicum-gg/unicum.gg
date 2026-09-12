@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Igrači",
+    "clans": "Klana",
+    "tanks": "Oklopna vozila",
+    "maps": "Mape",
+    "tournaments": "Turniri",
+    "servers": "Serveri"
+  },
+  "links": {
+    "top-players": {
+      "label": "Najbolji igrači",
+      "description": "Ljestvica igrača svih vremena"
+    },
+    "players-onslaught": {
+      "description": "Ljestvica rangirane Ofenzive"
+    },
+    "players-steel-hunter": {
+      "description": "Ljestvica battle royale režima"
+    },
+    "top-clans": {
+      "label": "Najbolji klanovi",
+      "description": "Ljestvica klanova svih vremena"
+    },
+    "stronghold": {
+      "description": "Rang-lista okršaja"
+    },
+    "advances": {
+      "description": "Rangiranje 15 na 15, nivo X"
+    },
+    "tank-performances": {
+      "label": "Performanse",
+      "description": "Omjer pobjeda i šteta po tenku"
+    },
+    "tank-specs": {
+      "label": "Specifikacije",
+      "description": "Statistike za svaki tenk"
+    },
+    "tank-economics": {
+      "label": "Ekonomija",
+      "description": "Tenkovi koji donose kredite i XP"
+    },
+    "tank-moe": {
+      "description": "Šteta za svaku oznaku"
+    },
+    "tank-mom": {
+      "description": "Pragovi za značku majstorstva"
+    },
+    "tank-changes": {
+      "label": "Promjene",
+      "description": "Poboljšanja i slabljenja po ažuriranju"
+    },
+    "tank-community": {
+      "label": "Ocjene zajednice",
+      "description": "Ocjene igrača koji ih posjeduju"
+    },
+    "tank-videos": {
+      "label": "Videos",
+      "description": "Igranje članova zajednice"
+    },
+    "all-tournaments": {
+      "label": "Turniri",
+      "description": "Svaki turnir, otvoren i završen"
+    },
+    "all-maps": {
+      "label": "Sve mape",
+      "description": "Svaka mapa u igri"
+    },
+    "map-changes": {
+      "label": "Promjene",
+      "description": "Prerade mapa po ažuriranjima"
+    },
+    "battle-type": {
+      "description": "{type} mape"
+    },
+    "servers-population": {
+      "label": "Stanovništvo servera",
+      "description": "Igrači online, sada i kroz vrijeme"
+    }
+  }
+}

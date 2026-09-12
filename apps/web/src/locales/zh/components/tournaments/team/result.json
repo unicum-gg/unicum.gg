@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "{size}名玩家中{rated}名已评级玩家的平均值",
+  "average-over-recent": "过去30天进行过对战的{size}名玩家中{rated}名玩家的平均值",
+  "avg-winrate": "平均胜率",
+  "finished": "已结束",
+  "record": "记录",
+  "won": "获胜"
+}

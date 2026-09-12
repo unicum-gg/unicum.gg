@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Programı önizlemek için bir rezerv seçin.",
+  "schedule": "Aktif günlerinizde {times} saatinde etkinleşir. Her biri {hours} saat sürer ve çevrim içi eşiğe ulaşıldığında {window} penceresini bir kez kapsar."
+}

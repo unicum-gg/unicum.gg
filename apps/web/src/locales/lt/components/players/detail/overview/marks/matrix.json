@@ -1,0 +1,7 @@
+{
+  "loading": "{count} {tier} lygio transporto priemonės, įkeliami jų pavadinimai…",
+  "loading-one": "{count} {tier} lygio transporto priemonė, įkeliamas jos pavadinimas…",
+  "and-more": "ir dar {count}",
+  "hint": "Spustelėkite, kad atidarytumėte juos Tankų kortelėje",
+  "tier": "lygis"
+}

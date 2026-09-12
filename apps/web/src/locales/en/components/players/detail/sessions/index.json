@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "No session yet. They appear once this account has been sampled twice with battles in between, which happens on its own as it is played.",
+  "bar-height-is-battles-played": "Bar height is battles played, colour is that {granularity}’s {metric}, in the same bands the site uses everywhere else.",
+  "title": "{nickname}’s sessions",
+  "title-count": "{nickname}’s sessions ({count})",
+  "granularity": {
+    "day": "day",
+    "week": "week",
+    "month": "month",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
+  },
+  "week-of": "Week of {date}"
+}

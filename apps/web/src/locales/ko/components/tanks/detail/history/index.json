@@ -1,0 +1,12 @@
+{
+  "before-update": "업데이트 {version} 이전",
+  "common-test": "공통 테스트",
+  "in-common-test-not-released": "공통 테스트 중, 아직 출시되지 않음",
+  "introduced": "도입됨",
+  "lifecycle": "생애 주기",
+  "n-buffed": "{count}개 상향",
+  "n-nerfed": "{count}개 하향",
+  "not-released-wargaming-can-still": "출시되지 않았습니다. 업데이트가 적용되기 전에 워게이밍이 이 내용을 변경하거나 삭제할 수 있습니다.",
+  "status": "상태",
+  "update": "업데이트 {version}"
+}

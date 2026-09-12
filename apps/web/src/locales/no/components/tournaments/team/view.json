@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Trekningen er ikke foretatt ennå. Dette lagets kamper vises her når turneringen starter.",
+  "each-map-is-played-twice": "Hvert kart spilles to ganger, én gang fra hver side. Det siste kartet er avgjørende og spilles én gang.",
+  "first-battle-at": "Første kamp, {when}",
+  "lost": "Tapte",
+  "matches": "Kamper ({length})",
+  "never-played": "Dette laget spilte aldri en kamp. Det meldte seg på, men trekningen nådde ikke laget, slik det skjer med en ubekreftet lagoppstilling.",
+  "no-maps-recorded": "Ingen kart er registrert for denne kampen.",
+  "no-roster-recorded-for-this": "Ingen lagoppstilling er registrert for dette laget.",
+  "of-players-on-the-day": "{members} av {length} spillere den dagen",
+  "played-on-uncatalogued": "Spilt på {maps}, som ikke finnes i kartkatalogen.",
+  "roster": "Rolleliste ({length})",
+  "stage-group": "{stage} · Gruppe {order}",
+  "team-1": "Lag 1",
+  "team-2": "Lag 2",
+  "tournaments": "Turneringer",
+  "when-the-first-battle-started": "Da den første kampen startet",
+  "won": "Vunnet"
+}

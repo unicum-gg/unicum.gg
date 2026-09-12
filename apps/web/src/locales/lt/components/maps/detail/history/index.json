@@ -1,0 +1,12 @@
+{
+  "added": "Pridėta",
+  "before-update": "Prieš atnaujinimą {version}",
+  "common-test": "Bendras testas",
+  "every-update-that-changed-this": "Kiekvienas atnaujinimas, pakeitęs šį žemėlapį, pradedant naujausiu, nuskaitytas iš paties žaidimo kliento.",
+  "in-the-game": "Žaidime",
+  "n-changes": "{count, plural, one {# pakeitimas} few {# pakeitimai} other {# pakeitimai}}",
+  "not-released-wargaming-can-still": "Neišleista. Wargaming dar gali visa tai pakeisti arba atsisakyti prieš išleidžiant atnaujinimą.",
+  "removed": "Pašalinta",
+  "title": "Pakeitimai žemėlapyje {map}",
+  "update": "Atnaujinti {version}"
+}

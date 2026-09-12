@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Nimimerkin {nickname} satunnaistaisteluiden tilastot",
+  "progression": "Nimimerkin {nickname} {metricLabel}-kehitys",
+  "solid-line-is-overall-matches": "Yhtenäinen rivi näyttää {metricLabel} kokonaisuutena ja vastaa yllä olevaa Kaikkiaan-saraketta. Se muuttuu hitaasti uusien taistelujen kertyessä. Katkoviiva näyttää istuntokohtaisen arvon {metricLabel2}, joka on laskettu edellisen tilannekuvan jälkeen pelatuista taisteluista. Se näyttää kuumat ja kylmät putket. Rivin väri noudattaa arvosanan tasoa.",
+  "tanks-shaping-s-rating": "Nimimerkin {nickname} arvosanaan vaikuttavat panssarivaunut",
+  "tanks": "{nickname}n panssarivaunut",
+  "stats": "Nimimerkin {nickname} {strongholdLabel}-tilastot"
+}

@@ -1,0 +1,17 @@
+{
+  "close": "Chiudi",
+  "format": "Formato",
+  "here": "qui",
+  "in-the-queue": "È in coda e apparirà {where} dopo che un moderatore l’avrà esaminato. Nel frattempo, in quella pagina il tuo video sarà visualizzato in grigio.",
+  "log-in-to-suggest-a": "Accedi per suggerire una tattica",
+  "on-map": "su {map}",
+  "players-per-team": "Giocatori per squadra",
+  "sending": "Invio…",
+  "suggest": "Suggerisci",
+  "suggest-a-tactic": "Suggerisci una tattica",
+  "suggest-another": "Suggerisci un altro",
+  "suggestion-sent": "Suggerimento inviato",
+  "tier": "Livello",
+  "what-to-submit": "Una battaglia competitiva, con il video impostato sul momento esatto in cui inizia la battaglia. La mappa iniziale è {map} e cambia insieme al video: una serata di clan segue una rotazione di mappe. Il lato da cui è stata giocata è il criterio con cui uno shot-caller la cerca, quindi viene richiesto anziché essere dedotto.",
+  "what-was-played": "Cosa è stato giocato"
+}

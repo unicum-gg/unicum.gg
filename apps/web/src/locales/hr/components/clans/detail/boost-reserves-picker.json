@@ -1,0 +1,6 @@
+{
+  "active-until": "Aktivno do {tz}",
+  "n-left": "Preostalo: {count}",
+  "no-reserves-in-stock-right": "Trenutačno nema pričuva na zalihi.",
+  "reserves-to-activate": "Pričuve za aktivaciju"
+}

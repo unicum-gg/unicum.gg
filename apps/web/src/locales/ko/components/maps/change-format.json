@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "플레이 공간 너비",
+    "height": "플레이 공간 높이",
+    "round-length": "전투 타이머",
+    "team-size": "팀 크기",
+    "camouflage": "시즌",
+    "presence": "게임 내",
+    "variant-version": "{type} 버전",
+    "play-area": "플레이 공간",
+    "bases-team1": "아군 기지",
+    "bases-team2": "적군 기지",
+    "spawns-team1": "아군 스폰 지점",
+    "spawns-team2": "적군 스폰 지점",
+    "control-point": "점령 지점",
+    "artillery-headquarters": "자주포 사령부",
+    "comms-centers": "통신 센터",
+    "observation-posts": "관측소",
+    "points-of-interest": "거점"
+  },
+  "summary": {
+    "added": "{name} 추가됨",
+    "removed": "{name} 삭제됨",
+    "added-to-game": "게임에 추가됨",
+    "removed-from-game": "게임에서 삭제됨",
+    "added-on-test": "테스트 클라이언트에 추가됨",
+    "removed-on-test": "테스트 클라이언트에서 삭제됨",
+    "mode-added": "{name} 모드 추가됨",
+    "mode-removed": "{name} 모드 삭제됨",
+    "now-played-in": "이제 {name}에서 플레이함",
+    "no-longer-played-in": "더 이상 {name}에서 플레이하지 않음",
+    "event-added": "이제 전투 중에 {name} 발생 가능",
+    "event-removed": "{name} 더 이상 발생하지 않음",
+    "moved": "{name} 이동됨",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

@@ -1,0 +1,6 @@
+{
+  "label": "Door de community gefinancierd",
+  "funded": "{pct}% gefinancierd",
+  "tooltip": "Sinds de lancering is {received} van {goal} gefinancierd door supporters",
+  "tooltip-loading": "Door de community gefinancierd, advertentievrij"
+}

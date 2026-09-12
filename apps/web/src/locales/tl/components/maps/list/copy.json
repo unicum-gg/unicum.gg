@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Lahat ng {count} arena ng labanan sa World of Tanks. Mag-filter ayon sa camouflage at mode ng laro, pagkatapos ay magbukas ng mapa para sa minimap, laki at mga flag ng base at spawn point nito bawat mode.",
+    "title": "Lahat ng mapa ng World of Tanks ({region}), bawat arena ng labanan",
+    "description": "I-browse ang bawat mapa ng World of Tanks sa {region}: minimap, laki, camouflage at mga sinusuportahang mode ng laro, kasama ang mga flag ng base at spawn point bawat mode.",
+    "heading": "Lahat ng <accent>mga mapa</accent>"
+  },
+  "battle-type": {
+    "intro": "Ang {count} mapa ng World of Tanks na nilalaro sa {type}, {blurb}. Magbukas ng mapa para sa minimap, laki at mga flag ng base at spawn point nito bawat mode.",
+    "title": "Mga mapa ng World of Tanks na {type} ({region}), bawat arena sa rotation",
+    "description": "Bawat mapa ng World of Tanks sa rotation na {type} sa {region}: minimap, laki, camouflage at mga sinusuportahang mode ng laro, kasama ang mga flag ng base at spawn point.",
+    "heading": "{type} <accent>mga mapa</accent>"
+  },
+  "blurbs": {
+    "random": "ang karaniwang 15v15 rotation",
+    "battle_royale": "ang mode na huling tangke ang natitira",
+    "frontline": "ang malawakang mode na 30v30",
+    "onslaught": "ang ranked na 7v7 mode",
+    "onslaught_night": "ang ranked na 7v7 mode pagsapit ng gabi, na may mas maikling layo ng pagtingin, at kasalukuyang maaaring laruin sa Karaniwang Pagsubok",
+    "grand_battle": "ang tier X mode na 30v30",
+    "clan_wars": "mga digmaan at advance ng klano",
+    "waffentrager": "ang kaganapang Waffenträger",
+    "last_stand": "ang kaganapang Last Stand",
+    "arcade": "arcade at mga espesyal na kaganapan",
+    "story_mode": "ang mga operasyon na batay sa kuwento",
+    "training": "mga training room at tutorial"
+  }
+}

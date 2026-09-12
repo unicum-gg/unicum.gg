@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Marque",
+      "tip": "1 marque : votre moyenne glissante de dégâts combinés (sur les ~100 dernières batailles) doit être supérieure à celle de 65 % des joueurs ayant utilisé ce char au cours des 14 derniers jours"
+    },
+    "mark2": {
+      "label": "2 Marques",
+      "tip": "2 marques : votre moyenne glissante de dégâts combinés (sur les ~100 dernières batailles) doit être supérieure à celle de 85 % des joueurs ayant utilisé ce char au cours des 14 derniers jours"
+    },
+    "mark3": {
+      "label": "3 Marques",
+      "tip": "3 marques : votre moyenne glissante de dégâts combinés (sur les ~100 dernières batailles) doit être supérieure à celle de 95 % des joueurs ayant utilisé ce char au cours des 14 derniers jours"
+    }
+  },
+  "rows-per-page": "Lignes par page",
+  "previous-page": "Page précédente",
+  "page": "Page {current} sur {totalPages}",
+  "next-page": "Page suivante",
+  "all": "Tous"
+}

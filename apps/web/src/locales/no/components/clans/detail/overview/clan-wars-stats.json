@@ -1,0 +1,21 @@
+{
+  "stat": "Stat",
+  "periods": {
+    "total": "Totalt",
+    "day": "Siste 24t",
+    "week": "Siste 7d",
+    "month": "Siste 30d"
+  },
+  "sections": {
+    "territory": "Territorium",
+    "t10": "Nivå 10",
+    "t8": "Nivå 8",
+    "t6": "Nivå 6"
+  },
+  "rows": {
+    "provinces": "Provinser",
+    "elo": "ELO",
+    "battles": "Kamper",
+    "winrate": "Seiersrate"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "label": "더 보기",
+  "items": {
+    "tournaments": {
+      "label": "토너먼트",
+      "description": "지역별 대진표, 로스터 및 결과"
+    },
+    "servers": {
+      "label": "서버들",
+      "description": "현재 및 시간별 온라인 플레이어"
+    },
+    "bot": {
+      "label": "Discord 봇",
+      "description": "슬래시 명령으로 확인하는 플레이어, 클랜 및 전차 통계"
+    },
+    "mcp": {
+      "label": "MCP 서버",
+      "description": "Claude, ChatGPT 또는 MCP 클라이언트 연결"
+    },
+    "api": {
+      "label": "API",
+      "description": "키가 필요 없는 무료 공개 REST API"
+    },
+    "badges": {
+      "label": "배지",
+      "description": "플레이어나 클랜이 획득할 수 있는 모든 문장과 획득 방법"
+    },
+    "glossary": {
+      "label": "용어집",
+      "description": "설명과 함께 제공하는 모든 World of Tanks 용어"
+    },
+    "support": {
+      "label": "후원해 주세요",
+      "description": "{name}을 무료, 오픈 및 광고 없이 유지하기"
+    }
+  }
+}

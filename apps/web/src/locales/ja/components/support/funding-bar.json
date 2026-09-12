@@ -1,0 +1,18 @@
+{
+  "caught-up": "完全に追いつきました。ありがとうございます。余剰分は処理能力の向上と新機能に充てられます。",
+  "covered-label": "カバー済み",
+  "covered-sentence": "これまでに支援者が支出額{spent}のうち{received}をカバーしました。",
+  "days-out-of-pocket": "{days}日間、持ち出しで運営",
+  "from-supporter-one": "支援者{count}人から",
+  "from-supporters": "支援者{count}人から",
+  "gap-growing": "月額{amount}の追加支援で赤字の拡大を止められます。",
+  "goal": "目標 {amount}",
+  "of-that-total": "その合計のうち",
+  "pledges-cover": "現在、支援の約束で月額費用をカバーしています。",
+  "raised-amount": "{amount}が集まりました",
+  "raised-label": "集まりました",
+  "run-at-a-loss": "{name}は{since}から赤字で運営されています。",
+  "run-rate": "月額運営費: 支援予定{pledged}/月 対 運営費{cost}/月",
+  "spent-since-launch": "開始以来の支出",
+  "to-catch-up": "完全に追いつくには{amount}必要です。"
+}

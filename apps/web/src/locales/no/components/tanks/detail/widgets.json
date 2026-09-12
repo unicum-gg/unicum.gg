@@ -1,0 +1,12 @@
+{
+  "slot": "Spor {n}",
+  "slot-filled": "Plass {n}: {name}",
+  "consumable-slot": "Forbruksplass {n}",
+  "consumable-slot-filled": "Forbruksplass {n}: {name}",
+  "level": "Nivå {n}",
+  "stock": "Standard",
+  "specialize": "Klikk for å spesialisere denne plassen.",
+  "clear-specialization": "Klikk for å fjerne spesialiseringen av denne plassen.",
+  "crew-skills": "Mannskapsferdigheter",
+  "shell-aria": "{name}: {damage} skade, {penetration} mm gjennomslag"
+}

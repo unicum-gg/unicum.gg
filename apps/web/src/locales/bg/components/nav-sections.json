@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Играчи",
+    "clans": "Кланове",
+    "tanks": "Танкове",
+    "maps": "Карти",
+    "tournaments": "Турнири",
+    "servers": "Сървъри"
+  },
+  "links": {
+    "top-players": {
+      "label": "Най-добри играчи",
+      "description": "Класация на играчите за всички времена"
+    },
+    "players-onslaught": {
+      "description": "Стълбица на ранговата Атака"
+    },
+    "players-steel-hunter": {
+      "description": "Класация на Battle Royale"
+    },
+    "top-clans": {
+      "label": "Най-добри кланове",
+      "description": "Класация на клановете за всички времена"
+    },
+    "stronghold": {
+      "description": "Лестница на схватките"
+    },
+    "advances": {
+      "description": "Класация за ниво X 15v15"
+    },
+    "tank-performances": {
+      "label": "Представления",
+      "description": "Процент победи и щети за всеки танк"
+    },
+    "tank-specs": {
+      "label": "Спецификации",
+      "description": "Статистики за всеки танк"
+    },
+    "tank-economics": {
+      "label": "Икономика",
+      "description": "Печелещи кредити и опит"
+    },
+    "tank-moe": {
+      "description": "Щети за всеки знак"
+    },
+    "tank-mom": {
+      "description": "Прагове за значката за майсторство"
+    },
+    "tank-changes": {
+      "label": "Промени",
+      "description": "Подобрения и отслабвания по актуализация"
+    },
+    "tank-community": {
+      "label": "Рейтинг на общността",
+      "description": "Оценени от играчи, които ги притежават"
+    },
+    "tank-videos": {
+      "label": "Видеа",
+      "description": "Геймплей от общността"
+    },
+    "all-tournaments": {
+      "label": "Турнири",
+      "description": "Всеки турнир, отворен и приключил"
+    },
+    "all-maps": {
+      "label": "Всички карти",
+      "description": "Всяка карта в играта"
+    },
+    "map-changes": {
+      "label": "Промени",
+      "description": "Преработки на картите по актуализация"
+    },
+    "battle-type": {
+      "description": "{type} карти"
+    },
+    "servers-population": {
+      "label": "Население на сървъра",
+      "description": "Игачи онлайн, сега и във времето"
+    }
+  }
+}

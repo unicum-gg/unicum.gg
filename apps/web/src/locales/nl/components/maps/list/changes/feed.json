@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# kaart} other {# kaarten}}",
+  "no-map-changes-have-been": "Er zijn nog geen wijzigingen aan maps geregistreerd. Wanneer Wargaming maps aanpast, verschijnt hier wat er met elke update is gewijzigd.",
+  "update": "Updaten {version}"
+}

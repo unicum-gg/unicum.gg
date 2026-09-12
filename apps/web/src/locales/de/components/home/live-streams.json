@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Chat anzeigen",
+    "hide": "Chat ausblenden",
+    "show-streamers": "Streamer anzeigen"
+  },
+  "heading": "World of Tanks Spieler-, Clan- und Panzerstatistiken: {name}",
+  "hide": "Streamer ausblenden",
+  "player": "Spieler",
+  "stream-language": "Streamsprache · {name}",
+  "stream-language-alt": "Stream-Sprache: {name}",
+  "theater": {
+    "enter": "Theatermodus",
+    "exit": "Theatermodus verlassen"
+  },
+  "title": "Top-Spieler, die jetzt streamen ·",
+  "viewer-count": "{count} Zuschauer",
+  "viewers": "Zuschauer",
+  "watch": "Auf Twitch ansehen: {nickname}"
+}

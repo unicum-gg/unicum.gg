@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "{name} tanki ({region}), katrs spēlētais transportlīdzeklis",
+    "description": "Katrs tanks, ko {name} ir spēlējis reģionā {region}, ar kaujām, uzvaru procentu, vidējiem bojājumiem un WN8 katram transportlīdzeklim."
+  },
+  "achievements": {
+    "title": "{name} sasniegumi ({region}), nopelnītas {medals} medaļas",
+    "description": "{medals} World of Tanks medaļas, ko {name} nopelnījis reģionā {region}, no Kolobanova un Pūla medaļām līdz goda pakāpēm un episkajām medaļām, kā arī visas vēl nenopelnītās."
+  },
+  "tournaments": {
+    "title": "{name} turnīri ({region})",
+    "description": "Katrs Wargaming turnīrs, kurā {name} piedalījies reģionā {region}: komanda, kurā spēlēja, formāts un sasniegtais rezultāts. Ieraksts, ko Wargaming publicē tikai no turnīra puses, nevis spēlētāja."
+  },
+  "value": {
+    "title": "{name} konta vērtība ({region})",
+    "description": "Cik vērts ir {name} World of Tanks konts reģionā {region}: garāžā uzkrātie kredīti, zelts un pieredze."
+  },
+  "mode": {
+    "title": "{name} {mode} statistika ({region})",
+    "description": "{name} reģionā {region}, režīmā {mode}: šī režīma kaujas, uzvaru procents un vērtējumi līdzās nejaušo kauju pamatdatiem."
+  },
+  "overview": {
+    "title": "{name} World of Tanks statistika ({region}), {battles} kaujas, {winrate}% uzvaru procents",
+    "description": "{name} reģionā {region}: {battles} kaujas, {winrate}% uzvaru procents, {rating} vērtējums. Sadalījums pa tankiem, WN8, WNX un pilna klanu vēsture."
+  },
+  "locked": {
+    "title": "{name} World of Tanks konts bloķēts ({region})",
+    "description": "{name} ({region}) eksistē, bet Wargaming ir bloķējis šo kontu, tāpēc tā World of Tanks statistika nav pieejama."
+  },
+  "empty": {
+    "title": "{name} World of Tanks spēlētāja statistika ({region})",
+    "description": "{name} ({region}) World of Tanks spēlētāja statistika: WN8, WNX vērtējumi, uzvaru procents, sadalījums pa tankiem un pilna klana vēsture."
+  }
+}

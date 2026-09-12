@@ -1,0 +1,8 @@
+{
+  "last-days": "Last {chartDays} days",
+  "n-players": "{count, plural, one {# player} other {# players}}",
+  "rolling-average-combined-damage-to": "Rolling-average combined damage to beat 65 / 85 / 95% of players.",
+  "single-battle-xp-to-beat": "Single-battle XP to beat 50 / 80 / 95 / 99% of players.",
+  "tank-marks-of-excellence": "{tank} Marks of Excellence",
+  "tank-marks-of-mastery": "{tank} Marks of Mastery"
+}

@@ -1,0 +1,8 @@
+{
+  "cta-clans": "Klikni za prikaz najboljih klanova na jeziku {language}.",
+  "cta-players": "Klikni za prikaz najboljih igrača na jeziku {language}.",
+  "declared": "{language}. Odabrao klan.",
+  "inferred": "{language}. Naša pretpostavka na temelju povijesti klana ovog igrača. Što dulje ostanu u klanu, to se jezici tog klana više uzimaju u obzir.",
+  "top-language-clans": "Najbolji klanovi na jeziku {language}",
+  "top-language-players": "Najbolji igrači na jeziku {language}"
+}

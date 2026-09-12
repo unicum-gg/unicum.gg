@@ -1,0 +1,8 @@
+{
+  "busiest": "最も混雑する{when}（{players}）",
+  "not-enough-recorded-yet-to": "週ごとのリズムを表示するには記録がまだ十分ではありません。週の各時間帯をサンプリングするにつれて埋まっていきます。",
+  "not-sampled-yet": "まだサンプリングされていません",
+  "players-on-average": "平均{players}プレイヤー",
+  "quietest": "、最も空いている{when}（{players}）",
+  "your-local-time": "現地時間"
+}

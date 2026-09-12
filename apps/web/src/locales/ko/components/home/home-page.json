@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "상위 플레이어들 · 지난 24시간"
+    },
+    "week": {
+      "title": "상위 플레이어들 · 지난 7일"
+    }
+  },
+  "rating-scale": {
+    "title": "평가 척도"
+  },
+  "community": {
+    "title": "커뮤니티 참여",
+    "heading": "WoT 플레이어들과 소통",
+    "description": "Discord에 참여해 WoT 통계를 이야기하고 기능을 요청하며 버그를 신고하세요. 또는 GitHub에서 코드를 살펴보고 기여하세요.",
+    "discord": "Discord 참여",
+    "github": "GitHub에서 보기"
+  },
+  "features": {
+    "title": "이곳에서 확인할 수 있는 것",
+    "profiles": {
+      "title": "플레이어 프로필",
+      "description": "종합 통계와 24시간, 7일, 30일 변동, WN7, WN8, WNX 및 개인 성적을 제공하는 상세 통계입니다."
+    },
+    "clans": {
+      "title": "클랜 페이지",
+      "description": "평점, 최근 활동 피드, 설명 및 클랜 메타데이터가 포함된 구성원 표입니다."
+    },
+    "history": {
+      "title": "클랜 기록",
+      "description": "플레이어가 소속되었던 모든 클랜의 역할과 날짜를 포함한 전체 타임라인입니다."
+    },
+    "live": {
+      "title": "실시간 업데이트",
+      "description": "추적된 플레이어는 스냅샷 시스템을 통해 24시간마다 백그라운드에서 새로 고침됩니다."
+    },
+    "leaderboards": {
+      "title": "리더보드",
+      "description": "24시간, 7일, 전체 기간의 상위 플레이어들과 WNX 기준 상위 클랜을 스냅샷에서 계산해 제공합니다."
+    },
+    "open-source": {
+      "title": "오픈 소스 · AGPL",
+      "description": "코드는 GitHub에 있습니다. 살펴보고, 포크하고, 기여하세요. 광고는 없으며 분석은 선택 사항입니다."
+    }
+  },
+  "quick-start": {
+    "title": "빠른 시작",
+    "search": {
+      "title": "🔍 플레이어 또는 클랜 검색",
+      "description": "{shortcut}을(를) 눌러 검색을 열고 닉네임 또는 클랜 태그를 입력하세요."
+    },
+    "region": {
+      "title": "🌍 지역 전환",
+      "description": "내비게이션 바의 {selector} 선택기를 사용하세요. 순위표가 그에 맞게 업데이트됩니다."
+    },
+    "leaderboards": {
+      "title": "🏆 순위표 둘러보기",
+      "description": "24시간, 7일, 전체 기간의 상위 플레이어들과 평균 WNX 기준 상위 클랜을 스냅샷에서 계산해 제공합니다."
+    },
+    "colors": {
+      "title": "📊 색상 읽기",
+      "description": "WR, WN7, WN8 및 WNX는 같은 단계 색상인 주황색 → 초록색 → 청록색 → 보라색을 사용합니다. 위의 척도에서 확인하세요."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

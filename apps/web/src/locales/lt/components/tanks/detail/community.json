@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Ką žaidėjai mano apie šį tanką",
+  "not-rated": "Dar neįvertinta, būkite pirmasis",
+  "votes": "{count} balsai",
+  "votes-one": "{count} balsuoti",
+  "stars": "{value} iš {max}",
+  "not-rated-short": "Neįvertintas"
+}

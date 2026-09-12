@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "まだ組み合わせは決まっていません。このチームの戦闘組み合わせは、トーナメント開始後にここに表示されます。",
+  "each-map-is-played-twice": "各マップは、それぞれの側から1回ずつ、合計2回プレイされます。最後のマップは決勝戦として1回プレイされます。",
+  "first-battle-at": "最初の戦闘、{when}",
+  "lost": "敗北",
+  "matches": "マッチ ({length})",
+  "never-played": "このチームは戦闘組み合わせを一度もプレイしませんでした。登録はされましたが、組み合わせがこのチームに到達しませんでした。確認されなかったロスターにはこのようなことが起こります。",
+  "no-maps-recorded": "この戦闘組み合わせのマップは記録されていません。",
+  "no-roster-recorded-for-this": "このチームのロスターは記録されていません。",
+  "of-players-on-the-day": "当日の{length}人のプレイヤーのうち{members}人",
+  "played-on-uncatalogued": "マップカタログにない{maps}でプレイされました。",
+  "roster": "ロスター ({length})",
+  "stage-group": "{stage} · グループ {order}",
+  "team-1": "チーム1",
+  "team-2": "チーム2",
+  "tournaments": "トーナメント",
+  "when-the-first-battle-started": "最初の戦闘が開始された時刻",
+  "won": "勝利"
+}

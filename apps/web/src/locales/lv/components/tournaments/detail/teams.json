@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Vidējais rādītājs {rated} no {size} spēlētājiem",
+  "average-over-recent": "Vidējais rādītājs {rated} no {size} spēlētājiem, kuri spēlēja pēdējo 30 dienu laikā",
+  "metric-over-last-30-days": "{metric} pēdējo 30 dienu laikā",
+  "n-confirmed": "Apstiprināti: {count}",
+  "no-team-matches-the-current": "Neviena komanda neatbilst pašreizējiem filtriem.",
+  "no-teams-recorded-yet-registrations": "Pagaidām nav reģistrētu komandu. Reģistrācijas parādās šeit, kad šis turnīrs ir pilnībā nolasīts, kas notiek dažu minūšu laikā pēc tā atvēršanas.",
+  "none-played-in-30-days": "Neviens no šī sastāva nav spēlējis pēdējo 30 dienu laikā",
+  "players": "Spēlētāji",
+  "qualified": "Kvalificējušies",
+  "reward": "Apmaksāšana",
+  "team": "Komanda",
+  "teams": "Komandas ({length})",
+  "wr": "WR"
+}

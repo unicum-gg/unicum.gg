@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Tổng quan",
+    "tanks": "Xe tăng",
+    "sessions": "Phiên chơi",
+    "achievements": "Thành tích",
+    "tournaments": "Tour đấu",
+    "value": "Giá trị"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

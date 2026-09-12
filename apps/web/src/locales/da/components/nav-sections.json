@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Spillere",
+    "clans": "Klaner",
+    "tanks": "Tanks",
+    "maps": "Kort",
+    "tournaments": "Turneringer",
+    "servers": "Servere"
+  },
+  "links": {
+    "top-players": {
+      "label": "Top spillere",
+      "description": "Spillerrangliste gennem hele historikken"
+    },
+    "players-onslaught": {
+      "description": "Rangeret Onslaught-rangliste"
+    },
+    "players-steel-hunter": {
+      "description": "Battle royale-rangliste"
+    },
+    "top-clans": {
+      "label": "Top klaner",
+      "description": "Klanrangliste gennem hele historikken"
+    },
+    "stronghold": {
+      "description": "Træfninger rangliste"
+    },
+    "advances": {
+      "description": "Niveau X 15-mod-15-rangliste"
+    },
+    "tank-performances": {
+      "label": "Præstationer",
+      "description": "Sejrsrate og skade pr. kampvogn"
+    },
+    "tank-specs": {
+      "label": "Specifikationer",
+      "description": "Statistik for alle kampvogne"
+    },
+    "tank-economics": {
+      "label": "Økonomi",
+      "description": "Kredit- og XP-optjenere"
+    },
+    "tank-moe": {
+      "description": "Skade for hvert mærke"
+    },
+    "tank-mom": {
+      "description": "Tærskler for mesterskabsmærker"
+    },
+    "tank-changes": {
+      "label": "Ændringer",
+      "description": "Forbedringer og svækkelser pr. opdatering"
+    },
+    "tank-community": {
+      "label": "Bedømmelser for fællesskabet",
+      "description": "Vurderet af spillere, der ejer dem"
+    },
+    "tank-videos": {
+      "label": "Videoer",
+      "description": "Gameplay fra fællesskabet"
+    },
+    "all-tournaments": {
+      "label": "Turneringer",
+      "description": "Alle turneringer, åbne og afsluttede"
+    },
+    "all-maps": {
+      "label": "Alle kort",
+      "description": "Alle kort i spillet"
+    },
+    "map-changes": {
+      "label": "Ændringer",
+      "description": "Kortomarbejdninger pr. opdatering"
+    },
+    "battle-type": {
+      "description": "{type} kort"
+    },
+    "servers-population": {
+      "label": "Serverbefolkning",
+      "description": "Spillere online, nu og over tid"
+    }
+  }
+}

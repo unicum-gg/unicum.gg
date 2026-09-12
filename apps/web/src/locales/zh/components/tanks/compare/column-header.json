@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "此列的弹药、装备、消耗品、指令、乘员和研发进度。每次变更都会影响后方对比中的特性。",
+  "ammunition-equipment-crew-and-progression": "弹药、装备、乘员和研发进度",
+  "apply-to-every-column": "应用到每一列",
+  "compare-against": "与{tank}对比",
+  "compare-the-others-against-this-one": "将其他坦克与此坦克对比",
+  "configure-tank": "配置{tank}",
+  "highest-overall-score": "最高总体分数",
+  "highest-overall-score-of-this": "本次对比中的最高总体分数",
+  "is-the-reference": "参考坦克：{tank}",
+  "overall": "总体",
+  "reference-column": "参考列",
+  "remove-tank": "移除{tank}",
+  "reset-all": "重置所有",
+  "setup": "设置",
+  "stock": "库存",
+  "tank-setup": "{tank}配置",
+  "top": "最佳",
+  "where-this-vehicle-sits-across": "这辆战车在整个目录中的位置，满分为 {MAXSCORE}：这是其四项类别分数的平均值，计算方式如这里所配置。这只是总结，不是结论。侦察型战车和重型战车可能因为擅长不同方面而达到相同分数。"
+}

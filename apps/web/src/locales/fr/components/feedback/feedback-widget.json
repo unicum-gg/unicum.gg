@@ -1,0 +1,21 @@
+{
+  "trigger": "Avis",
+  "title": "Donnez-nous votre avis",
+  "topic-placeholder": "Sélectionnez un sujet...",
+  "message-placeholder": "Votre avis...",
+  "send": "Envoyer",
+  "sent": "Merci pour votre avis !",
+  "failed": "Impossible d’envoyer votre avis. Veuillez réessayer.",
+  "topics": {
+    "bug": "Signaler un bug",
+    "idea": "Suggestion de fonctionnalité",
+    "data": "Précision des données",
+    "other": "Autre"
+  },
+  "sentiments": {
+    "awful": "Très mauvais",
+    "bad": "Mauvais",
+    "good": "Bon",
+    "great": "Excellent"
+  }
+}

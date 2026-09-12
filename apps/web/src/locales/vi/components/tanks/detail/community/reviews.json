@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} trận đấu với xe này",
+  "damage": "{damage} sát thương",
+  "n-marks": "{count, plural, other {# các dấu}}",
+  "no-written-opinions-yet-if": "Chưa có ý kiến bằng văn bản. Nếu bạn đã chơi đủ số trận, ý kiến của bạn sẽ là ý kiến đầu tiên.",
+  "win-rate": "Tỷ lệ thắng {toFixed}%",
+  "written-on": "viết vào {gameVersion}"
+}

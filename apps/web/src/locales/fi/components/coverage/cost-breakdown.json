@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Laskutetaan euroina ja muunnetaan valuutaksi {currency} tämän päivän kurssilla.",
+  "cost-breakdown": "Hintaerittely",
+  "estimated-annual-cost": "Arvioitu vuosikustannus",
+  "fixed-month-bill-no-surprises": "Kiinteä {totalAnnualEur} €/kuukausi ilman yllätyksiä: yksi vuokrattu palvelin, ei kolmannen osapuolen SaaS-palvelua datan käsittelyreitillä. Kustannus kasvaa vain, kun kasvamme palvelinta suuremmiksi (suurempi Wargaming-läpimeno tarkoittaa useampia ulospäin näkyviä IP-osoitteita).",
+  "free": "ilmainen",
+  "one-off-spend": "Kertainvestointi",
+  "paid-once-so-it-is": "Maksettu kerran, joten se ei sisälly yllä olevaan kuukausilaskuun. Se lasketaan silti mukaan projektin tähänastisiin kustannuksiin.",
+  "previously": "Aikaisemmin"
+}

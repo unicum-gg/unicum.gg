@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Autentificare cu ID Wargaming.net",
+  "open-source": "{name} este open source. {link} înainte de a avea încredere în el.",
+  "pick-the-region-your-world": "Alege regiunea în care se află contul tău de World of Tanks. Nu trebuie să fie regiunea pe care o navighezi.",
+  "read-the-login-code": "Citește codul de autentificare",
+  "what-wargaming-hands-back-is": "Wargaming îți furnizează un token care citește datele propriului cont. Este stocat criptat și reînnoit cât timp contul rămâne conectat și acționează numai în numele tău acolo unde configurezi personal acest lucru, cum ar fi programul rezervelor clanului.",
+  "you-sign-in-on-wargaming": "Te autentifici pe pagina proprie Wargaming, nu aici. Parola ta nu este introdusă niciodată pe {NAME} și nu ajunge niciodată la noi."
+}

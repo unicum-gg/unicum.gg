@@ -1,0 +1,8 @@
+{
+  "busiest": "Największy ruch: {when} ({players})",
+  "not-enough-recorded-yet-to": "Nie zebrano jeszcze wystarczającej ilości danych, aby pokazać tygodniowy rytm. Wykres zapełnia się w miarę zbierania próbek z każdej godziny tygodnia.",
+  "not-sampled-yet": "Jeszcze nie zebrano danych",
+  "players-on-average": "Średnio {players} graczy",
+  "quietest": ", najmniejszy ruch: {when} ({players})",
+  "your-local-time": "Twój czas lokalny"
+}

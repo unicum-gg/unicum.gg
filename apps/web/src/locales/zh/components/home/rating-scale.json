@@ -1,0 +1,21 @@
+{
+  "title": "评分标准",
+  "description": "全站用于胜率和导航栏中所选评分指标的颜色阈值。",
+  "tier": "等级",
+  "tiers": {
+    "top": "领先",
+    "excellent": "优秀",
+    "super": "超级",
+    "very-good": "非常好",
+    "good": "好",
+    "average": "平均值",
+    "below-avg": "低于平均",
+    "bad": "差",
+    "very-bad": "非常差"
+  },
+  "rating-colors": "评级颜色",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

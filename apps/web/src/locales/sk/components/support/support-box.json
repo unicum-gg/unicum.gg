@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Nákup bol zrušený.",
+  "claim-your-supporter-role-on-discord": "Získajte rolu podporovateľa na Discorde",
+  "could-not-add-the-discord-role-please-try-ag": "Rolu na Discorde sa nepodarilo pridať. Skúste to znova.",
+  "could-not-open-the-billing-portal": "Fakturačný portál sa nepodarilo otvoriť.",
+  "could-not-start-checkout-please-try-again": "Platbu sa nepodarilo spustiť. Skúste to znova.",
+  "could-not-update-your-preference": "Vaše nastavenie sa nepodarilo aktualizovať.",
+  "log-in-with-wargaming": "Prihlásiť sa cez Wargaming",
+  "log-in-with-wargaming-to": "Prihláste sa cez Wargaming a podporte projekt {NAME}.",
+  "manage-subscription": "Spravovať predplatné",
+  "only-active-supporters-can-claim-the-discord": "Rolu na Discorde môžu získať iba aktívni podporovatelia.",
+  "or-choose-your-own-amount": "Alebo si zvoľte vlastnú sumu",
+  "pay-what-you-want": "Zaplaťte, koľko chcete.",
+  "pick-an-amount": "Vyberte sumu alebo zadajte vlastnú, minimálne €{min} mesačne.",
+  "re-sync-discord-role": "Znova synchronizovať rolu na Discorde",
+  "secured-by-stripe": "Zabezpečuje Stripe. Predplatné môžete kedykoľvek zrušiť.",
+  "show-me-anonymously-on-the": "Zobrazovať ma na pódiu anonymne",
+  "support-subscriptions-are-coming-soon": "Možnosť podpory formou predplatného bude čoskoro k dispozícii.",
+  "supporter-role-added-on-discord": "Rola podporovateľa bola pridaná na Discorde!",
+  "you-are-a-supporter-thank": "Ste podporovateľ. Ďakujeme, že pomáhate udržať projekt {NAME} v chode."
+}

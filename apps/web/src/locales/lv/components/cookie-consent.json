@@ -1,0 +1,16 @@
+{
+  "title": "Mēs izmantojam sīkfailus",
+  "description": "Mēs izmantojam sīkfailus, lai uzlabotu pārlūkošanu un analizētu vietnes datplūsmu.",
+  "functional": {
+    "title": "Funkcionālie",
+    "description": "Nepieciešams vietnes pareizai darbībai (preferences, reģiona izvēle)."
+  },
+  "analytics": {
+    "title": "Auditorijas mērīšana",
+    "description": "Google Analytics, kas iestata sīkfailus, lai palīdzētu mums saprast, kā vietne tiek izmantota. Anonīmā analītika bez sīkfailiem (Umami) tiek izmantota jebkurā gadījumā."
+  },
+  "save": "Saglabāt manas izvēles",
+  "decline": "Noraidīt visus",
+  "customize": "Pielāgot",
+  "accept": "Apstiprināt visus"
+}

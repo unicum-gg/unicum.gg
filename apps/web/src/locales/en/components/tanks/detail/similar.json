@@ -1,0 +1,11 @@
+{
+  "compare": "Compare with the {count} closest",
+  "match": "match",
+  "subtitle": "Same standing among their own tier",
+  "verdict": {
+    "overall": "Similar overall",
+    "closest": "Closest on {axes}",
+    "closest-furthest": "Closest on {axes}, furthest on {apart}",
+    "and": "and"
+  }
+}

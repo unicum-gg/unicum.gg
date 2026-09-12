@@ -1,0 +1,17 @@
+{
+  "close": "닫기",
+  "format": "형식",
+  "here": "여기",
+  "in-the-queue": "대기열에 추가되었습니다. 운영자가 검토한 후 {where}에 표시됩니다. 그동안 해당 페이지에서는 제출한 항목이 회색으로 표시됩니다.",
+  "log-in-to-suggest-a": "로그인하여 전술 제안",
+  "on-map": "{map}에서",
+  "players-per-team": "팀당 플레이어 수",
+  "sending": "전송 중…",
+  "suggest": "제안",
+  "suggest-a-tactic": "전술 제안",
+  "suggest-another": "다른 제안하기",
+  "suggestion-sent": "제안이 전송됨",
+  "tier": "단계",
+  "what-to-submit": "시작하는 순간부터 녹화된 경쟁 전투입니다. 전투는 {map}에서 시작하며 영상에 따라 이동합니다. 클랜 저녁 플레이가 여러 지도를 순환하는 방식입니다. 전투가 진행된 진영은 샷콜러가 검색할 때 사용하는 기준이므로 추측하지 않고 입력하도록 요청합니다.",
+  "what-was-played": "플레이한 것"
+}

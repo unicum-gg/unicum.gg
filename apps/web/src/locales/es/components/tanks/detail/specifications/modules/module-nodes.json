@@ -1,0 +1,17 @@
+{
+  "aim-time": "Tiempo de apuntamiento",
+  "ammo": "Munición",
+  "armor": "Blindaje",
+  "dispersion": "Dispersión",
+  "fire-chance": "Probabilidad de incendio",
+  "gun-arc": "Ángulo del cañón",
+  "hit-points": "Puntos de vida",
+  "load-limit": "Límite de carga",
+  "mounted-on": "Montado en {tanks}",
+  "power": "Poder",
+  "reload": "Recarga",
+  "signal-range": "Rango de señal",
+  "tier": "Nivel {tier}",
+  "traverse": "Rotación",
+  "view-range": "Rango de visión"
+}

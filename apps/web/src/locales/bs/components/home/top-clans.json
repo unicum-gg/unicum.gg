@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Prikaz najboljih klanova iz regije {region} s više od 50 članova koji imaju bitke, rangiranih po prosjeku {metric}.",
+    "month": "Prikaz najboljih klanova iz regije {region} s više od 50 članova koji imaju bitke, rangiranih po {metric} u proteklih 30 dana, najmanje 15 aktivnih."
+  },
+  "updated": "Ažurirano {when}.",
+  "empty": "Podaci o klanovima za ovu regiju još nisu dostupni.",
+  "rank": "#",
+  "clan": "Klana",
+  "average": "Prosj. {metric}"
+}

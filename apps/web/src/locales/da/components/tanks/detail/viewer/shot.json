@@ -1,0 +1,7 @@
+{
+  "firing": "Affyrer {shell}, {pen} mm. Skift skud",
+  "no-such-round": "{mark}: Denne kanon har ingen, så indstil selv vinklerne",
+  "own-round": "{mark}: Denne kanons egen granat med alle tal",
+  "treat-it-as": "Behandl den som",
+  "treat-it-as-mark": "Behandl den som {mark}"
+}

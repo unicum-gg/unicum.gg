@@ -1,0 +1,12 @@
+{
+  "final": " · final",
+  "has-not-held-a-place": "{nickname} não ocupou nenhum lugar na classificação da Investida.",
+  "live-season": "· temporada em curso",
+  "loading-s-onslaught-record": "A carregar o registo de Investida de {nickname}...",
+  "onslaught": "Massacre",
+  "onslaught-record": "Registo de Investida de {nickname}",
+  "see-this-season-s-leaderboard": "Ver a classificação desta temporada",
+  "standing-line": "{rating} pontos de classificação · {battles} batalhas",
+  "the-board-only-lists-players": "A classificação só inclui os jogadores que chegam a Campeão, alguns milhares por região, por isso é aqui que ficam quase todos os perfis. O registo é preenchido automaticamente na temporada em que isso acontece.",
+  "updated": "Atualizado {when}"
+}

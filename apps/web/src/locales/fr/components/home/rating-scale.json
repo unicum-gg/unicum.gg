@@ -1,0 +1,21 @@
+{
+  "title": "Échelle de notation",
+  "description": "Seuils de couleur utilisés sur l’ensemble du site pour le taux de victoires et l’indicateur d’évaluation sélectionné dans la barre de navigation.",
+  "tier": "Niveau",
+  "tiers": {
+    "top": "Meilleurs",
+    "excellent": "Excellent",
+    "super": "Super",
+    "very-good": "Très bon",
+    "good": "Bon",
+    "average": "Moyenne",
+    "below-avg": "En dessous de la moyenne",
+    "bad": "Mauvais",
+    "very-bad": "Très mauvais"
+  },
+  "rating-colors": "Couleurs de classement",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

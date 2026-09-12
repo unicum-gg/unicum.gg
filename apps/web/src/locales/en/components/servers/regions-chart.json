@@ -1,0 +1,4 @@
+{
+  "chart-label": "Players online per region over the last {range}",
+  "not-enough-recorded-yet-for": "Not enough recorded yet for this range. It fills in as the sampling continues."
+}

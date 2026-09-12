@@ -1,5 +1,9 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -46,6 +50,8 @@ export function TournamentsTab({
   data: PlayerTournamentRecord | null;
   loading: boolean;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/detail/tournaments/index");
   const entries = data?.entries ?? [];
   // A podium is a top-three finish in any of the tournament's brackets, so a
   // qualifier group counts. Placement is per bracket, not per tournament, which
@@ -63,14 +69,18 @@ export function TournamentsTab({
           className="flex flex-wrap items-center justify-between gap-4 border-b border-fd-border"
         >
           <PanelTitle>
-            {nickname}&apos;s tournaments
-            {loading ? "" : ` (${entries.length.toLocaleString("en-US")})`}
+            {loading
+              ? t("title", { nickname })
+              : t("title-count", {
+                  nickname,
+                  count: numberFormat(locale).format(entries.length),
+                })}
           </PanelTitle>
           {!loading && entries.length > 0 && (
             <div className="flex items-center gap-6">
-              <Stat label="Entered" value={entries.length.toLocaleString("en-US")} />
-              <Stat label="Won" value={String(data?.wins ?? 0)} />
-              <Stat label="Podiums" value={String(podiums)} />
+              <Stat label={t("entered")} value={numberFormat(locale).format(entries.length)} />
+              <Stat label={t("won")} value={String(data?.wins ?? 0)} />
+              <Stat label={t("podiums")} value={String(podiums)} />
             </div>
           )}
         </PanelHeader>
@@ -79,10 +89,7 @@ export function TournamentsTab({
             <TableSkeleton rail columns={TOURNAMENTS_SKELETON_COLUMNS} rows={10} />
           ) : entries.length === 0 ? (
             <p className={cn(styles.mutedDescription, "p-4")}>
-              This account has never entered a Wargaming tournament. They run
-              daily for gold at every tier, from 1v1 up to full clan
-              championships, and take a team of as few as one.
-            </p>
+              {t("this-account-has-never-entered")}</p>
           ) : (
             <PlayerTournamentsTable region={region} entries={entries} />
           )}

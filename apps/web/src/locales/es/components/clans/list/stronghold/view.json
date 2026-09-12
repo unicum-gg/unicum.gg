@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Aún no hay datos. Vuelve a consultar cuando se hayan actualizado los clanes.",
+  "heading": "Mejores clanes de <accent>{tier}</accent>",
+  "blurb": "Clasificación de {region}, ordenada según {sort} entre todos los clanes monitorizados en {format} (mínimo: {battles} batallas).",
+  "blurb-period": "Clasificación de {region}, ordenada según {sort} entre todos los clanes monitorizados en {format}. Periodo: {period} (mínimo: {battles} batallas).",
+  "format-advances": "Avances (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Mejores {count} clanes de {tier} ·"
+}

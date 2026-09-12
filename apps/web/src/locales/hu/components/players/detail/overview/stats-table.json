@@ -1,0 +1,34 @@
+{
+  "stat": "Statisztika",
+  "rows": {
+    "battles": "Csaták",
+    "tier": "szint",
+    "wins": "Győzelmek",
+    "losses": "Veszteségek",
+    "draws": "Döntetlenek",
+    "survived": "Túlélt csaták",
+    "destroyed": "Megsemmisített tankok",
+    "destruction-ratio": "Megsemmisítési arány",
+    "spotted": "Feltűnt tankok",
+    "damages": "Sebzések",
+    "track-damages": "Gumiabroncs sebzések",
+    "spotting-damages": "Felderítési sebzések",
+    "assisting-damages": "Segítő sebzések",
+    "combined-damages": "Összesített sebzések",
+    "base-capture": "Bázis elfoglalás",
+    "base-defense": "Bázis védelem",
+    "experience": "Tapasztalat",
+    "hit-rate": "Találati arány",
+    "personal-rating": "Személyes értékelés",
+    "wtr": "World of Tanks értékelés",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Összesen",
+    "day": "Utolsó 24 óra",
+    "week": "Utolsó 7 nap",
+    "month": "Utolsó 30 nap"
+  }
+}

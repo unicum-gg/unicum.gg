@@ -1,0 +1,12 @@
+{
+  "clans-history": "{nickname} adlı oyuncunun klan geçmişi",
+  "clans-in-clans": "{totalClans} klan · klanlarda {timeInClansSeconds}",
+  "current": "mevcut",
+  "duration": "Süre",
+  "from": "Den",
+  "name": "İsim",
+  "no-clan-history": "Klan geçmişi yok.",
+  "role": "Rol",
+  "tag": "Etiket",
+  "to": "Kime"
+}

@@ -1,0 +1,18 @@
+{
+  "caught-up": "Helemaal bijgewerkt, bedankt. Alles wat extra binnenkomt, gaat naar meer capaciteit en nieuwe functies.",
+  "covered-label": "Gedekt",
+  "covered-sentence": "Supporters hebben {received} van de tot nu toe uitgegeven {spent} gedekt.",
+  "days-out-of-pocket": "{days} dagen uit eigen zak betaald",
+  "from-supporter-one": "van {count} Supporter",
+  "from-supporters": "van {count} Supporters",
+  "gap-growing": "Met {amount}/mnd meer loopt het tekort niet verder op.",
+  "goal": "doel {amount}",
+  "of-that-total": "van dat totaal",
+  "pledges-cover": "De toezeggingen dekken nu de maandelijkse kosten.",
+  "raised-amount": "{amount} opgehaald",
+  "raised-label": "Opgehaald",
+  "run-at-a-loss": "{name} draait sinds {since} met verlies.",
+  "run-rate": "Maandelijks overzicht: {pledged}/mnd toegezegd tegenover {cost}/mnd aan bedrijfskosten.",
+  "spent-since-launch": "Uitgegeven sinds de lancering",
+  "to-catch-up": "{amount} om de achterstand volledig in te halen."
+}

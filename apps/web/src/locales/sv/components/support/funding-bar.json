@@ -1,0 +1,18 @@
+{
+  "caught-up": "Helt i kapp, tack. Allt extra går till högre kapacitet och nya funktioner.",
+  "covered-label": "Täckta",
+  "covered-sentence": "Användare med rollen Supporter har täckt {received} av de {spent} som hittills spenderats.",
+  "days-out-of-pocket": "{days} dagar, betalda ur egen ficka",
+  "from-supporter-one": "Från {count} användare med rollen Supporter",
+  "from-supporters": "Från {count} användare med rollen Supporter",
+  "gap-growing": "Ytterligare {amount}/mån hindrar underskottet från att växa.",
+  "goal": "mål {amount}",
+  "of-that-total": "av det belopp som anges som Totalt",
+  "pledges-cover": "Utlovade bidrag täcker nu månadskostnaden.",
+  "raised-amount": "{amount} insamlat",
+  "raised-label": "Insamlat",
+  "run-at-a-loss": "{name} har drivits med förlust sedan {since}.",
+  "run-rate": "Månadstakt: {pledged}/mån utlovat mot {cost}/mån i driftkostnad.",
+  "spent-since-launch": "Spenderat sedan lanseringen",
+  "to-catch-up": "{amount} för att komma helt i kapp."
+}

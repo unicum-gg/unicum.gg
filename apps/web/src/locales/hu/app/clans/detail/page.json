@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "[{tag}] {name} World of Tanks klán ({region}), {members} tag",
+    "description": "{name} [{tag}] a(z) {region} régióban: {members} tag, teljes tagtáblázat WN8- és WNX-értékelésekkel, legutóbbi csatlakozási és kilépési tevékenység, valamint klán-előzmények."
+  },
+  "stronghold": {
+    "title": "[{tag}] {name} erődítmény-statisztikái ({region})",
+    "description": "{name} [{tag}] erődítményben nyújtott teljesítménye a(z) {region} régióban: összecsapási és előrenyomulási értékelések, csaták és győzelmi arány minden tagnál."
+  },
+  "clan-wars": {
+    "title": "[{tag}] {name} klánháborús statisztikái ({region})",
+    "description": "{name} [{tag}] klánháborús teljesítménye a(z) {region} régióban: tagonkénti értékelések, csaták és győzelmi arány a globális térkép kampányaiban."
+  },
+  "tanks": {
+    "title": "[{tag}] {name} tankjai ({region}), a klán járművei",
+    "description": "Minden jármű, amellyel {name} [{tag}] játszott a(z) {region} régióban, a csaták, a győzelmi arány és az átlagos sebzés összesítésével a klán tagjai között."
+  },
+  "manage": {
+    "title": "[{tag}] {name} erődítmény-rekeszei ({region})",
+    "description": "Aktiváld és ütemezd {name} [{tag}] erődítmény-rekeszeit. Csak tiszteknek."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks klán a(z) {region} régióban: tagtáblázat WN8/WNX-értékelésekkel, csatlakozási és kilépési tevékenység, legutóbbi csaták és teljes klán-előzmények."
+  }
+}

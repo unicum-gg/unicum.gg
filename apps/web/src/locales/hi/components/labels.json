@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "पहले स्नैपशॉट की प्रतीक्षा",
+    "hidden": "Wargaming द्वारा छिपाया गया",
+    "active_24h": "< 24 घंटे से सक्रिय",
+    "active_7d": "< 7 दिनों से सक्रिय",
+    "recent_30d": "पिछले < 30 दिनों में",
+    "recent_90d": "पिछले < 90 दिनों में",
+    "dormant_1y": "< 1 वर्ष से निष्क्रिय",
+    "inactive": "> 1 वर्ष से निष्क्रिय"
+  },
+  "rating-hype": {
+    "overrated": "अधिक महिमामंडित",
+    "fair": "उचित रूप से रेट किया गया",
+    "underrated": "कम महिमामंडित"
+  },
+  "rating-consensus": {
+    "agreed": "व्यापक सहमति",
+    "mixed": "मिश्रित राय",
+    "divisive": "विभाजनकारी"
+  },
+  "rating-axes": {
+    "overall": "कुल मिलाकर",
+    "fun": "मज़ा",
+    "firepower": "आग शक्ति",
+    "armour": "गति",
+    "mobility": "गतिशीलता",
+    "gunHandling": "गन हैंडलिंग",
+    "concealment": "गुप्तता",
+    "beginnerFriendliness": "शुरुआती मित्रवत",
+    "versatility": "विविधता"
+  },
+  "rating-axis-hints": {
+    "overall": "हर पहलू को ध्यान में रखते हुए यह टैंक कितना अच्छा है?",
+    "fun": "इसे खेलना आपको कितना पसंद है?",
+    "firepower": "अल्फा, प्रति मिनट क्षति और पैठ।",
+    "armour": "यह कितना उछालता है, हुल डाउन और खुले में।",
+    "mobility": "गति, त्वरण और यह कैसे मुड़ता है।",
+    "gunHandling": "निशाना साधने का समय, फैलाव और चलते समय सटीकता।",
+    "concealment": "छलावरण और दृश्य सीमा।",
+    "beginnerFriendliness": "अगर आप अभी सीख रहे हैं तो यह कितनी गलतियाँ माफ करता है।",
+    "versatility": "क्या यह किसी भी मानचित्र और किसी भी टीम में काम करता है?"
+  },
+  "voter-brackets": {
+    "unknown": "रेट नहीं किया गया",
+    "learning": "सीखना",
+    "average": "औसत",
+    "strong": "मजबूत",
+    "unicum": "यूनिकम"
+  },
+  "glossary-categories": {
+    "vehicles": "वाहन",
+    "gunnery": "गनरी",
+    "armor": "गति",
+    "mobility": "गतिशीलता",
+    "vision": "दृष्टि",
+    "crew": "क्रू",
+    "progression": "प्रगति",
+    "economy": "अर्थव्यवस्था",
+    "ratings": "रेटिंग्स",
+    "statistics": "आँकड़े",
+    "modes": "युद्ध मोड",
+    "tactics": "ताकतें",
+    "slang": "स्लैंग"
+  }
+}

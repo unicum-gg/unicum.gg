@@ -36,6 +36,17 @@ export interface SkillNodeDef {
   /** firepower | mobility | survivability | mechanics. */
   category: string;
   modifiers: SkillNodeModifier[];
+  /**
+   * The figure the node's own description is written around, from its `<kpi>`
+   * block's entry named `value`.
+   *
+   * The client's sentence carries a `{value}` hole ("Increases ramming damage
+   * caused to enemy vehicles by {value}%") and fills it from here, which is the
+   * only place the number exists for a node whose modifier moves a mechanic no
+   * characteristic shows. All 22 mechanic nodes across the tier-XI vehicles
+   * carry one; `null` where a node has none.
+   */
+  kpi: SkillNodeModifier | null;
 }
 
 /** One node (step) of the vehicle skill tree. A graph, not a ladder: `unlocks`
@@ -200,6 +211,10 @@ export class SourceSkillTreeResource {
         locName: String(entry.locName ?? key),
         category: tokens(entry.categories)[0] ?? "",
         modifiers: this.#modifiers(entry),
+        kpi:
+          this.#modifiers(isObject(entry.kpi) ? { modifiers: entry.kpi } : {}).find(
+            (m) => m.attribute === "value",
+          ) ?? null,
       };
     }
 

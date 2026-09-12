@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Ano ang iniisip ng mga manlalaro tungkol sa tank na ito",
+  "not-rated": "Hindi pa namarkahan, mauna ka",
+  "votes": "{count} boto",
+  "votes-one": "{count} boto",
+  "stars": "{value} sa {max}",
+  "not-rated-short": "Walang rating"
+}

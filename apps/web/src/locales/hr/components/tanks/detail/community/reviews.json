@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} bitki s njim",
+  "damage": "{damage} šteta",
+  "n-marks": "{count, plural, one {# oznaka} few {# oznake} other {# oznaka}}",
+  "no-written-opinions-yet-if": "Još nema pisanih mišljenja. Ako imate dovoljno bitki, vaše bi bilo prvo.",
+  "win-rate": "Stopa pobjeda {toFixed}%",
+  "written-on": "napisano u verziji {gameVersion}"
+}

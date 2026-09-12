@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Marka",
+      "tip": "1 Marka: tavi slīdošie vidējie apvienotie bojājumi (pēdējās ~100 kaujās) ir jāpārsniedz 65% spēlētāju ar šo tanku pēdējo 14 dienu laikā"
+    },
+    "mark2": {
+      "label": "2 Markas",
+      "tip": "2 Markas: tavi slīdošie vidējie apvienotie bojājumi (pēdējās ~100 kaujās) ir jāpārsniedz 85% spēlētāju ar šo tanku pēdējo 14 dienu laikā"
+    },
+    "mark3": {
+      "label": "3 Markas",
+      "tip": "3 Markas: tavi slīdošie vidējie apvienotie bojājumi (pēdējās ~100 kaujās) ir jāpārsniedz 95% spēlētāju ar šo tanku pēdējo 14 dienu laikā"
+    }
+  },
+  "rows-per-page": "Rindas uz lapu",
+  "previous-page": "Iepriekšējā lapa",
+  "page": "Lapa {current} / {totalPages}",
+  "next-page": "Nākamā lapa",
+  "all": "Visus"
+}

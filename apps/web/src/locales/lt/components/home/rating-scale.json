@@ -1,0 +1,21 @@
+{
+  "title": "Reitingo skalė",
+  "description": "Spalvų ribos, visoje svetainėje naudojamos pergalės koeficientui ir naršymo juostoje pasirinktam reitingo rodikliui.",
+  "tier": "lygis",
+  "tiers": {
+    "top": "Geriausi",
+    "excellent": "Puikus",
+    "super": "Super",
+    "very-good": "Labai geras",
+    "good": "Gerai",
+    "average": "Vidurkis",
+    "below-avg": "Žemiau vidurkio",
+    "bad": "Blogas",
+    "very-bad": "Labai blogas"
+  },
+  "rating-colors": "Reitingo spalvos",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

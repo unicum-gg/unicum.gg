@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Coste (créditos)",
+    "buyGold": "Coste (oro)",
+    "researchXp": "XP de investigación",
+    "shellCost": "Coste del proyectil",
+    "ammoCost": "Coste de munición completa",
+    "class3": "3ª Clase",
+    "class2": "2ª Clase",
+    "class1": "1ª Clase",
+    "ace": "As del Tanque",
+    "mark1": "1 Marca (65%)",
+    "mark2": "2 Marcas (85%)",
+    "mark3": "3 Marcas (95%)"
+  }
+}

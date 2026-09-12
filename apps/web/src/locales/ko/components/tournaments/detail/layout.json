@@ -1,0 +1,12 @@
+{
+  "final": "결승전",
+  "grand-final": "최종 결승전",
+  "loser-bracket-final": "패자조 결승전",
+  "loser-round": "패자조 {round}라운드",
+  "quarter-finals": "준준결승",
+  "round-of": "{teams}강",
+  "semi-finals": "준결승",
+  "third-place": "3위",
+  "winner-bracket-final": "승자조 결승전",
+  "winner-round": "승자조 {round}라운드"
+}

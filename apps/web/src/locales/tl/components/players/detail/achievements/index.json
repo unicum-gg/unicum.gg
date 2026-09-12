@@ -1,0 +1,12 @@
+{
+  "achievements": "Mga tagumpay ni {nickname}",
+  "filter-all": "Lahat",
+  "filter-both": "Pareho",
+  "filter-earned": "Kinita",
+  "filter-missing": "Wala",
+  "filter-obtainable": "Maaaring makuha",
+  "filter-retired": "Retirado",
+  "no-achievement-matches-these-filters": "Walang achievement na tumutugma sa mga filter na ito.",
+  "search-achievements": "Maghanap ng mga tagumpay",
+  "search-among-n-achievements": "Maghanap sa {count} achievement"
+}

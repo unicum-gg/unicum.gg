@@ -1,0 +1,18 @@
+{
+  "caught-up": "Visiškai pasivijome, ačiū. Visa papildoma suma skiriama didesniam našumui ir naujoms funkcijoms.",
+  "covered-label": "Dengta",
+  "covered-sentence": "Rėmėjai padengė {received} iš iki šiol išleistų {spent}.",
+  "days-out-of-pocket": "{days} dienos iš savo kišenės",
+  "from-supporter-one": "nuo {count} rėmėjo",
+  "from-supporters": "nuo {count} rėmėjų",
+  "gap-growing": "Papildomi {amount}/mėn. neleidžia atotrūkiui didėti.",
+  "goal": "tikslas {amount}",
+  "of-that-total": "iš visos sumos",
+  "pledges-cover": "Pažadai dabar padengia mėnesio sąskaitą.",
+  "raised-amount": "{amount} surinkta",
+  "raised-label": "Surinkta",
+  "run-at-a-loss": "{name} dirba nuostolingai nuo {since}.",
+  "run-rate": "Mėnesio tempas: pažadėta {pledged}/mėn., veiklai reikia {cost}/mėn.",
+  "spent-since-launch": "Išleista nuo paleidimo",
+  "to-catch-up": "Iki visiško pasivijimo trūksta {amount}."
+}

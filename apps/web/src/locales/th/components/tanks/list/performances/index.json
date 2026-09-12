@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "แถวต่อหน้า",
+  "previous-page": "หน้าก่อนหน้า",
+  "page": "หน้า {current} / {totalPages}",
+  "next-page": "หน้าถัดไป",
+  "all": "ทั้งหมด"
+}

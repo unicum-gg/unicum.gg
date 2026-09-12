@@ -1,0 +1,15 @@
+{
+  "axis-by-axis": "Jedna osa po druhé",
+  "by-server": "Podle serveru",
+  "community-verdict": "Verdikt komunity",
+  "every-server-one-average": "Všechny servery, jeden průměr",
+  "n-shown": ", zobrazeno {count}",
+  "opinion": "{count, plural, one {# názor} few {# názory} many {# názorů} other {# názorů}}",
+  "opinion-next-to-win-rate": "Názor v porovnání s mírou vítězství v rámci úrovně {tier}",
+  "rate-the": "Ohodnoťte tank {tankName}",
+  "reputation-against-results": "Pověst ve srovnání s výsledky",
+  "same-tank-different-metas": "Stejný tank, různé mety",
+  "the-same-tank-by-how": "Stejný tank podle toho, jak dobře hraje hlasující",
+  "what-players-wrote": "Co hráči napsali",
+  "who-is-saying-it": "Kdo to říká"
+}

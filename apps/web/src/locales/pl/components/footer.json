@@ -1,0 +1,25 @@
+{
+  "tagline": "Stworzone dla społeczności World of Tanks. Darmowe statystyki każdego gracza, klanu, czołgu i mapy w regionach EU, NA i Azji.",
+  "columns": {
+    "leaderboards": "Tablice wyników",
+    "tanks": "Czołgi",
+    "maps": "Mapy",
+    "integrations": "Integracje",
+    "project": "Projekt"
+  },
+  "links": {
+    "top-tanks": "Najlepsze czołgi",
+    "bot": "Bot Discord",
+    "mcp": "Serwer MCP",
+    "docs": "Dokumentacja API",
+    "badges": "Odznaki",
+    "glossary": "Słownik",
+    "coverage": "Pokrycie",
+    "support": "Wspieraj nas",
+    "source": "Kod źródłowy",
+    "status": "Status",
+    "discord": "Discord"
+  },
+  "disclaimer": "Brak powiązań z Wargaming",
+  "cookies": "Zarządzaj plikami cookie"
+}

@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "Ocena (WN)",
+    "tip": "Klasyfikacja wyłącznie za bitwy w tej sesji, nie za całe konto"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "Wskaźnik zwycięstw w bitwach w tej sesji"
+  },
+  "avgDamage": {
+    "label": "Średnie obrażenia"
+  },
+  "avgFrags": {
+    "label": "Średnie fragi",
+    "tip": "Liczba zniszczonych przeciwników na bitwę"
+  },
+  "damageRatio": {
+    "label": "Współczynnik uszkodzeń",
+    "tip": "Stosunek wartości „Zadane uszkodzenia” do wartości „Otrzymane uszkodzenia”"
+  },
+  "kd": {
+    "label": "Współczynnik zniszczeń",
+    "tip": "Stosunek liczby zniszczonych przeciwników do liczby utraconych pojazdów"
+  },
+  "survivalRate": {
+    "label": "Przetrwał bitew"
+  },
+  "avgSpotted": {
+    "label": "Średnia wykrytych",
+    "tip": "Liczba wykrytych przeciwników na bitwę"
+  },
+  "avgDefense": {
+    "label": "Obrona bazy",
+    "tip": "Punkty obrony na bitwę"
+  },
+  "avgXp": {
+    "label": "Średnie XP"
+  }
+}

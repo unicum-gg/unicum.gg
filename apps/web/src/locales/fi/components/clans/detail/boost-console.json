@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Lisää työnkulku",
+  "boost": "Kohota",
+  "each-workflow-activates-its-reserves": "Jokainen työnkulku aktivoi reservinsä aikaikkunan aikana, kun riittävästi jäseniä on live-peli-istunnossa. Toimii tililläsi, eikä sinun tarvitse olla paikalla. Lisää niin monta kuin tarvitset.",
+  "n-online": "/ {count} paikalla",
+  "officer": "Upseeri",
+  "online": "Verkossa",
+  "recent-activations": "aikaiset aktivoinnit",
+  "reserve": "Varaus",
+  "stronghold-boosts": "Vahvistuksen lisäykset",
+  "when": "Kun",
+  "workflow": "Työprosessi"
+}

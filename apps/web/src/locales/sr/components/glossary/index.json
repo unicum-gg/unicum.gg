@@ -1,0 +1,22 @@
+{
+  "search": "Претражи {count} појмова",
+  "search-label": "Претражи речник",
+  "all": "Sve",
+  "jump": "Пређи на слово",
+  "empty": "Ниједан појам не одговара упиту „{query}“.",
+  "categories": {
+    "vehicles": "Vozila",
+    "gunnery": "Artiljerija",
+    "armor": "Oklop",
+    "mobility": "Pokretljivost",
+    "vision": "Vizija",
+    "crew": "Posada",
+    "progression": "Napredovanje",
+    "economy": "Ekonomija",
+    "ratings": "Ocene",
+    "statistics": "Statistika",
+    "modes": "Bitkovni režimi",
+    "tactics": "Taktika",
+    "slang": "Žargon"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "search": "Søg blandt {count} termer",
+  "search-label": "Søg i ordlisten",
+  "all": "Alle",
+  "jump": "Gå til bogstav",
+  "empty": "Ingen term matcher “{query}”.",
+  "categories": {
+    "vehicles": "Køretøjer",
+    "gunnery": "Artilleri",
+    "armor": "Panser",
+    "mobility": "Mobilitet",
+    "vision": "Syn",
+    "crew": "Mandskab",
+    "progression": "Progression",
+    "economy": "Økonomi",
+    "ratings": "Bedømmelser",
+    "statistics": "Statistik",
+    "modes": "Slagsmodus",
+    "tactics": "Taktik",
+    "slang": "Slang"
+  }
+}

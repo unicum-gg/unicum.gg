@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Průměr z {rated} hodnocených hráčů z {size}",
+  "average-over-recent": "Průměr hodnocení {rated} u {size} hráčů, kteří odehráli bitvy během posledních 30 dní",
+  "avg-winrate": "Průměrná úspěšnost",
+  "finished": "Skončila",
+  "record": "Záznam",
+  "won": "Vyhráno"
+}

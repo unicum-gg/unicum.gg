@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Statisticile World of Tanks pentru {tank} ({region}), nivel {tier} {nation}",
+    "description": "Specificațiile World of Tanks pentru {tank} ({region}): blindaj, putere de foc, mobilitate, module, echipaj și modificări de teren pentru acest tanc de nivel {tier} {nation}."
+  },
+  "performances": {
+    "title": "Performanța lui {tank} ({region}), statistici de server și cei mai buni jucători",
+    "description": "Performanța în World of Tanks a lui {tank} ({region}): rată de victorii, daune și asistență medii pe server, cei mai buni jucători cu acest tanc de nivel {tier} {nation}, plus valorile așteptate WN8 și WNX."
+  },
+  "marks": {
+    "title": "Marcajele de excelență și măiestrie pentru {tank} ({region})",
+    "description": "Cerințele pentru marcajele de excelență și marcajele de măiestrie ale lui {tank} ({region}), cu istoricul lor pentru acest tanc de nivel {tier} {nation}."
+  },
+  "history": {
+    "title": "Istoricul schimbărilor lui {tank} ({region}), bonusuri și penalizări",
+    "description": "Fiecare schimbare de caracteristică a lui {tank} în actualizările World of Tanks: bonusurile și penalizările pentru putere de foc, mobilitate, supraviețuire și camuflaj livrate de Wargaming acestui tanc de nivel {tier} {nation}, versiune după versiune."
+  },
+  "videos": {
+    "title": "Videoclipuri de gameplay cu {tank} ({region})",
+    "description": "Privește-l pe {tank} în acțiune: bătălii sugerate de comunitate cu acest tanc de nivel {tier} {nation}, fiecare deschizându-se în momentul în care este jucat, cu harta și rezultatul bătăliei."
+  },
+  "community": {
+    "title": "Recenzii ale jucătorilor și ratingul comunității pentru {tank} ({region})",
+    "description": "Ce cred jucătorii despre {tank}: ratingul comunității de la unu la cinci, împărțit după cât de bine joacă evaluatorii, comparat cu performanța reală a acestui tanc de nivel {tier} {nation}, plus recenzii scrise de conturi care au bătălii cu el."
+  }
+}

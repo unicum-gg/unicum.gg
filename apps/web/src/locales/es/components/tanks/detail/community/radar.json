@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "El desglose aparece a partir de {min}, por lo que la forma refleja las características del tanque y no las de una sola persona.",
+  "community-rating-by-axis": "Clasificación de la comunidad por eje",
+  "from-votes": "Desde {count} votos detallados.",
+  "from-votes-one": "Desde {count} voto detallado.",
+  "nobody-yet": "Todavía nadie ha completado los ejes detallados.",
+  "only-votes": "Solo {count} votos detallados hasta ahora.",
+  "only-votes-one": "Solo {count} voto detallado hasta ahora."
+}

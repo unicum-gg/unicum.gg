@@ -1,0 +1,21 @@
+{
+  "title": "評価スケール",
+  "description": "サイト全体で使用される勝率と、ナビバーで選択したレーティング指標の色分け基準。",
+  "tier": "Tier",
+  "tiers": {
+    "top": "トップ",
+    "excellent": "優秀",
+    "super": "スーパー",
+    "very-good": "非常に良い",
+    "good": "良い",
+    "average": "平均",
+    "below-avg": "平均未満",
+    "bad": "悪い",
+    "very-bad": "非常に悪い"
+  },
+  "rating-colors": "レーティングカラー",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

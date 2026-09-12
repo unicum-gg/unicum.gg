@@ -1,0 +1,12 @@
+{
+  "aria-build": "Leer en el cliente de la Prueba común, compilación {version}",
+  "aria-changes": "Cambios de la Prueba común: {changes} características",
+  "aria-described": "Prueba común: {description}",
+  "aria-vehicle": "Vehículo de la Prueba común",
+  "common-test": "Prueba común",
+  "common-test-build": "Prueba común {version}",
+  "tip-build": "{label} · estos son los valores de la compilación de prueba, y Wargaming todavía puede cambiarlos antes de que se publique la actualización",
+  "tip-changes": "Cambios de la Prueba común en este vehículo: {changes, plural, one {# característica} other {# características}}",
+  "tip-described": "Prueba común · {description}",
+  "tip-vehicle": "Prueba común · todavía no se ha publicado, por lo que no tiene estadísticas de batalla y sus características aún pueden cambiar"
+}

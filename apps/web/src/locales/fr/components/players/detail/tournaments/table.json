@@ -1,0 +1,12 @@
+{
+  "roster-of": "Effectif : {roster}",
+  "date": "Date",
+  "tournament": "Tournoi",
+  "mode": "Mode",
+  "tier": "Niveau",
+  "format": "Format",
+  "team": "Équipe",
+  "result": "Résultat",
+  "team-captain": "Capitaine d’équipe",
+  "registered-and-captained-this-team": "A inscrit cette équipe et en a été capitaine"
+}

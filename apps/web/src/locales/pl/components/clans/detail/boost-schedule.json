@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Wybierz rezerwę, aby wyświetlić podgląd harmonogramu.",
+  "schedule": "W aktywne dni uruchamia się o {times} (każde uruchomienie trwa {hours} godz.) i obejmuje przedział {window}, gdy tylko zostanie osiągnięty minimalny próg liczby graczy online."
+}

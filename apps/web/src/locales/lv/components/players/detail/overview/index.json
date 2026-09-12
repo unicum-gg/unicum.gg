@@ -1,0 +1,7 @@
+{
+  "stats-title": "{nickname} nejaušo kauju statistika",
+  "progression-title": "{nickname} {metric} attīstība",
+  "lift-drag-title": "Tanki, kas veido {nickname} vērtējumu",
+  "progression-blurb": "Nepārtrauktā līnija ir kopējais {metric} (atbilst iepriekš redzamajai kopējai kolonnai), kas lēnām mainās, uzkrājoties jaunām kaujām. Pārtrauktā līnija ir vienas sesijas {metric}, aprēķināts no kaujām, kas spēlētas kopš iepriekšējā momentuzņēmuma. Tā parāda veiksmju un neveiksmju sērijas. Līnijas krāsa atbilst vērtējuma līmenim.",
+  "progression-empty": "Vēl nav pietiekami daudz vēstures. Lai uzzīmētu līkni, nepieciešams vismaz viens momentuzņēmums. Drīzumā pārbaudi vēlreiz."
+}

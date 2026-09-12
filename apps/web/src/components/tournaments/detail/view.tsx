@@ -1,12 +1,15 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import { ArrowSquareOutIcon, RankingIcon } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { RelativeTime } from "@/components/relative-time";
 import { usePassed } from "@/hooks/use-passed";
 import { RankMedal } from "@/components/rank-medal";
 import { ScrollRail } from "@/components/scroll-rail";
-import Link from "next/link";
+import Link from "@/components/link";
 import Image from "next/image";
 import { Fragment, useMemo } from "react";
 import { tierBand } from "@/components/tournaments/tier-label";
@@ -34,7 +37,6 @@ import {
   isTournamentOpen,
   rosterLimits,
   teamFormat,
-  TOURNAMENT_GAME_MODE_LABEL,
 } from "@unicum.gg/shared";
 import {
   REGION_LABEL,
@@ -46,7 +48,7 @@ import { TournamentActionsMenu } from "./actions-menu";
 import { TournamentBracket } from "./bracket";
 import { tournamentOutcome } from "./outcome";
 import { finalPlacements } from "./placements";
-import { TournamentMapPool, mapHrefIndex } from "./map-pool";
+import { TournamentMapPool, mapPoolIndex } from "./map-pool";
 import { bandLabel, bandPlace, splitTiers } from "./prize-tiers";
 import { TournamentTeams } from "./teams";
 import { TournamentRules } from "./rules";
@@ -58,16 +60,7 @@ const tierBandOrDash = (from: number | null, to: number | null) =>
 
 const DASH = "—";
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  weekday: "short",
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  timeZone: "UTC",
-  timeZoneName: "short",
-});
+const DATE_PATTERN = "EEE d MMM yyyy, HH:mm zzz" /* UTC */;
 
 /**
  * One tournament: what it was, who entered, and how it played out.
@@ -83,6 +76,11 @@ export function TournamentView({
   region: Region;
   tournament: TournamentRecord;
 }) {
+  const { date } = useFormat();
+  const { t: tCopy } = useTranslation("components/tournaments/detail/view");
+  const { t: tr } = useTranslation("components/tournaments/detail/view");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
   const t = tournament;
   // Memoized because it is passed into a component that keys memoized work on
   // its identity, so rebuilding it each render would defeat that (and did,
@@ -94,8 +92,8 @@ export function TournamentView({
   // Built here, where the pool and the battle type both live, so a map named in
   // a bracket card opens exactly the view the tile in the pool above does.
   const mapLinks = useMemo(
-    () => mapHrefIndex(region, t.mapPool, t.gameModes),
-    [region, t.mapPool, t.gameModes],
+    () => mapPoolIndex(region, t.mapPool, t.gameModes, tMaps),
+    [region, t.mapPool, t.gameModes, tMaps],
   );
   // Answers "who won" without making the reader open every bracket, which a
   // qualifier drawn as parallel groups otherwise requires.
@@ -127,8 +125,8 @@ export function TournamentView({
   // with no tier band, no prize) drops out instead of leaving a dangling dot.
   const metaParts = [
     REGION_LABEL[region],
-    dateFmt.format(t.startAt),
-    t.gameModes.map((m) => TOURNAMENT_GAME_MODE_LABEL[m]).join(", "),
+    date(DATE_PATTERN).format(t.startAt),
+    t.gameModes.map((m) => tGame(`tournament-modes.${m}`)).join(", "),
     tierBandOrDash(t.tierFrom, t.tierTo) === DASH
       ? null
       : `Tier ${tierBandOrDash(t.tierFrom, t.tierTo)}`,
@@ -217,8 +215,7 @@ export function TournamentView({
                   href={ROUTES.TOURNAMENTS(region)}
                   className="shrink-0 hover:text-fd-foreground hover:underline"
                 >
-                  Tournaments
-                </Link>
+                  {tr("tournaments")}</Link>
                 {metaParts.map((part) => (
                   <Fragment key={part}>
                     <span className="shrink-0 text-fd-border">·</span>
@@ -236,10 +233,10 @@ export function TournamentView({
                   {outcome.kind === "winner" ? (
                     <>
                       <RankMedal rank={1} className="h-4" />
-                      {outcome.teamIds.length > 1 ? "Winners" : "Winner"}
+                      {tCopy("winner", { count: outcome.teamIds.length })}
                     </>
                   ) : (
-                    `Qualified (${outcome.teamIds.length})`
+                    tCopy("qualified", { count: outcome.teamIds.length })
                   )}
                 </span>
                 {outcome.teamIds.map((teamId, i) => (
@@ -299,7 +296,7 @@ export function TournamentView({
                   screenLines={false}
                   className="border-b border-fd-border"
                 >
-                  <PanelTitle>Prizes</PanelTitle>
+                  <PanelTitle>{tr("prizes")}</PanelTitle>
                 </PanelHeader>
                 <PanelContent className="flex flex-1 flex-col p-0">
                   {prizes.bands.length > 0 && (
@@ -314,8 +311,8 @@ export function TournamentView({
                           <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
                             #
                           </TableHead>
-                          <TableHead>Place</TableHead>
-                          <TableHead className="pr-4 text-right!">Prize</TableHead>
+                          <TableHead>{tr("place")}</TableHead>
+                          <TableHead className="pr-4 text-right!">{tr("prize")}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -383,16 +380,21 @@ export function TournamentView({
                           target="_blank"
                           rel="nofollow noopener noreferrer"
                         >
-                          Register
-                          <ArrowSquareOutIcon weight="bold" className="size-4" />
+                          {tCopy("register")}<ArrowSquareOutIcon weight="bold" className="size-4" />
                         </a>
                       </Button>
                       {t.registrationTill && (
                         <span className="text-xs text-fd-muted-foreground">
-                          Closes{" "}
-                          <RelativeTime
-                            date={t.registrationTill}
-                            title={dateFmt.format(t.registrationTill)}
+                          <Interpolate
+                            template={tCopy("closes")}
+                            values={{
+                              when: (
+                                <RelativeTime
+                                  date={t.registrationTill}
+                                  title={date(DATE_PATTERN).format(t.registrationTill)}
+                                />
+                              ),
+                            }}
                           />
                         </span>
                       )}
@@ -409,7 +411,7 @@ export function TournamentView({
                   screenLines={false}
                   className="flex items-center justify-between gap-4 border-b border-fd-border"
                 >
-                  <PanelTitle>Map pool</PanelTitle>
+                  <PanelTitle>{tr("map-pool")}</PanelTitle>
                   <span className="text-xs text-fd-muted-foreground">
                     {t.mapPool.length} map{t.mapPool.length === 1 ? "" : "s"}
                   </span>

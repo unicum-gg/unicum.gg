@@ -1,0 +1,14 @@
+{
+  "close": "Zamknij",
+  "combined-damage": "Zadane uszkodzenia",
+  "damage-dealt-plus-assisted-as": "Zadane uszkodzenia plus uszkodzenia z asysty, tak jak są sumowane na ekranie wyników bitwy.",
+  "format": "Format",
+  "no-reason-recorded": "Nie zarejestrowano powodu, więc pytanie o to na Discordzie przed ponownym wysłaniem ma wartość.",
+  "players-per-team": "Graczy na drużynę",
+  "save": "Zapisz",
+  "saved-it-is-in-the": "Zapisano. Zgłoszenie znajduje się w kolejce do moderacji i pojawi się w serwisie po sprawdzeniu przez moderatora.",
+  "saving": "Zapisywanie…",
+  "tier": "Poziom",
+  "turned-down": "Odrzucono",
+  "what-was-played": "Co zostało zagrane"
+}

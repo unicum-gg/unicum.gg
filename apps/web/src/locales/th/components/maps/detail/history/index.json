@@ -1,0 +1,12 @@
+{
+  "added": "เพิ่ม",
+  "before-update": "ก่อนอัปเดต {version}",
+  "common-test": "การทดสอบทั่วไป",
+  "every-update-that-changed-this": "ทุกอัปเดตที่เปลี่ยนแปลงแผนที่นี้ เรียงจากใหม่ไปเก่า อ่านจากไคลเอนต์เกมเอง",
+  "in-the-game": "ในเกม",
+  "n-changes": "{count, plural, other {# การเปลี่ยนแปลง}}",
+  "not-released-wargaming-can-still": "ยังไม่เปิดตัว Wargaming ยังสามารถเปลี่ยนแปลงหรือตัดสิ่งเหล่านี้ออกได้ก่อนอัปเดตเปิดให้เล่น",
+  "removed": "ลบ",
+  "title": "การเปลี่ยนแปลงของ {map}",
+  "update": "ปรับ {version}"
+}

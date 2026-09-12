@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Még nincs rögzített fürt.",
+  "server": "Szerver",
+  "online": "Online",
+  "share": "Megosztás",
+  "peak": "Csúcs ({label})",
+  "average": "Átlag ({label})",
+  "not-reported": "Nem jelentették",
+  "total": "Összesen"
+}

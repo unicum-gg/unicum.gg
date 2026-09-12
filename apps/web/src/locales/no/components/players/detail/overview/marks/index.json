@@ -1,0 +1,21 @@
+{
+  "title": "Merkene og ekspertmerkene til {nickname}",
+  "excellence": {
+    "title": "Marks of Excellence",
+    "description": "Kjøretøy etter merkene på kanonen. Et merke er et vedvarende gjennomsnitt: spillet beregner det over et rullerende vindu med nylige kamper mot det regionen oppnår med dette kjøretøyet.",
+    "partial": "Merker lest for {known} av {garage} kjøretøy. Resten fylles inn når kontoen oppdateres.",
+    "note": "{marked} av {garage} kjøretøy har et merke.",
+    "note-share": "{marked} av {garage} kjøretøy har et merke ({percent} % av garasjen)."
+  },
+  "mastery": {
+    "title": "Mestringsmerker",
+    "description": "Kjøretøy etter sitt beste merke. Et merke gjelder én kamp, ikke et gjennomsnitt: spillet tildeler det basert på erfaringen fra én enkelt kamp sammenlignet med det regionen oppnår med dette kjøretøyet.",
+    "note": "{aces} av {garage} kjøretøy har et Ace Tanker-merke.",
+    "note-share": "{aces} av {garage} kjøretøy har et Ace Tanker-merke ({percent} % av garasjen)."
+  },
+  "reach": {
+    "heading": "Spiller over kanonens nivå",
+    "description": "Kjøretøy der den samlede skaden allerede passerer et merke de ikke har. Merket er denne samlede skaden, farget etter merket den passerer."
+  },
+  "none": "Ingen"
+}

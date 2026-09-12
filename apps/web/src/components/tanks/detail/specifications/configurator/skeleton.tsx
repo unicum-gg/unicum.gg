@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -57,8 +58,9 @@ function LabeledTile() {
 }
 
 function AmmoSkeleton() {
+  const { t } = useTranslation("components/tanks/detail/specifications/configurator/skeleton");
   return (
-    <EditorPanel title="Ammunition" contentClassName="px-4 py-6">
+    <EditorPanel title={t("ammunition")} contentClassName="px-4 py-6">
       <div className="flex flex-wrap gap-3">
         {Array.from({ length: 4 }, (_, i) => (
           <LabeledTile key={i} />
@@ -83,8 +85,9 @@ function Divider() {
 }
 
 function EquipmentSkeleton() {
+  const { t } = useTranslation("components/tanks/detail/specifications/configurator/skeleton");
   return (
-    <EditorPanel title="Equipment" contentClassName="space-y-5 px-4 py-6">
+    <EditorPanel title={t("equipment")} contentClassName="space-y-5 px-4 py-6">
       {/* Slot row: a box over its category glyphs. */}
       <div className="flex flex-wrap gap-3">
         {Array.from({ length: 5 }, (_, i) => (
@@ -106,8 +109,9 @@ function EquipmentSkeleton() {
 }
 
 function ConsumablesSkeleton() {
+  const { t } = useTranslation("components/tanks/detail/specifications/configurator/skeleton");
   return (
-    <EditorPanel title="Consumables" contentClassName="space-y-5 px-4 py-6">
+    <EditorPanel title={t("consumables")} contentClassName="space-y-5 px-4 py-6">
       <BoxRow count={3} />
       <Divider />
       <BoxRow count={7} />
@@ -116,17 +120,19 @@ function ConsumablesSkeleton() {
 }
 
 function DirectivesSkeleton() {
+  const { t } = useTranslation("components/tanks/detail/specifications/configurator/skeleton");
   return (
-    <EditorPanel title="Directives" contentClassName="px-4 py-6">
+    <EditorPanel title={t("directives")} contentClassName="px-4 py-6">
       <BoxRow count={13} />
     </EditorPanel>
   );
 }
 
 function FieldModsSkeleton() {
+  const { t } = useTranslation("components/tanks/detail/specifications/configurator/skeleton");
   return (
     <EditorPanel
-      title="Field Modifications"
+      title={t("field-modifications")}
       contentClassName="overflow-x-auto px-4 py-6"
     >
       <div className="relative flex items-start gap-6">
@@ -149,12 +155,13 @@ function FieldModsSkeleton() {
 }
 
 function CrewSkeleton() {
+  const { t } = useTranslation("components/tanks/detail/specifications/configurator/skeleton");
   // Skill counts per member — the commander carries the most, matching the
   // real crew grid's tallest column.
   const members = [12, 10, 9, 9, 8];
   return (
     <EditorPanel
-      title="Crew Skills"
+      title={t("crew-skills")}
       contentClassName="space-y-5 px-4 py-6"
       headerRight={
         <div className="flex items-center gap-2">

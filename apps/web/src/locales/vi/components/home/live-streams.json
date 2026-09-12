@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Hiện trò chuyện",
+    "hide": "Ẩn trò chuyện",
+    "show-streamers": "Hiện người phát trực tiếp"
+  },
+  "heading": "{name}: thống kê người chơi, Clan và xe tăng World of Tanks",
+  "hide": "Ẩn người phát trực tiếp",
+  "player": "Người chơi",
+  "stream-language": "Ngôn ngữ phát trực tiếp · {name}",
+  "stream-language-alt": "Ngôn ngữ phát trực tiếp: {name}",
+  "theater": {
+    "enter": "Chế độ rạp hát",
+    "exit": "Thoát chế độ rạp hát"
+  },
+  "title": "Người chơi hàng đầu đang phát trực tiếp ·",
+  "viewer-count": "{count} người xem",
+  "viewers": "Người xem",
+  "watch": "Xem {nickname} trên Twitch"
+}

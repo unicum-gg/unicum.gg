@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Média de {rated} dos {size} jogadores",
+  "average-over-recent": "Média dos {rated} jogadores entre os {size} que jogaram nos últimos 30 dias",
+  "avg-winrate": "Média de taxa de vitória",
+  "finished": "Terminado",
+  "record": "Registro",
+  "won": "Ganhou"
+}

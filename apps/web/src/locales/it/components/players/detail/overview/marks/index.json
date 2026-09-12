@@ -1,0 +1,21 @@
+{
+  "title": "Marchi e maestria di {nickname}",
+  "excellence": {
+    "title": "Marchi d’Eccellenza",
+    "description": "Veicoli in base ai marchi d’eccellenza sulla canna. Un marchio rappresenta una media mantenuta nel tempo: il gioco la calcola su una finestra mobile di battaglie recenti, confrontandola con i risultati ottenuti nella regione con quel veicolo.",
+    "partial": "Marchi rilevati per {known} veicoli su {garage}. I dati degli altri compariranno man mano che l’account viene aggiornato.",
+    "note": "{marked} veicoli su {garage} hanno un marchio.",
+    "note-share": "Su {garage} veicoli, {marked} hanno un marchio ({percent}% del garage)."
+  },
+  "mastery": {
+    "title": "Segni di Maestria",
+    "description": "Veicoli in base al loro miglior distintivo. Un distintivo riguarda una singola battaglia, non una media: il gioco lo assegna in base all’esperienza ottenuta in quella battaglia, confrontata con quella totalizzata nella regione con quel veicolo.",
+    "note": "Su {garage} veicoli, {aces} hanno il distintivo Asso carrista.",
+    "note-share": "Su {garage} veicoli, {aces} hanno il distintivo Asso carrista ({percent}% del garage)."
+  },
+  "reach": {
+    "heading": "Giocare oltre i limiti del cannone",
+    "description": "Veicoli il cui danno combinato supera già la soglia di un marchio che non hanno. L’indicatore riporta quel danno combinato, nel colore del marchio di cui supera la soglia."
+  },
+  "none": "Nessuno"
+}

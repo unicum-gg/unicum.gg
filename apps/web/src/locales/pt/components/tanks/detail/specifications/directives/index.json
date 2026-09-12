@@ -1,0 +1,9 @@
+{
+  "boosts": "Aumentos {name}",
+  "directives": "Directivas",
+  "directive-name": "Diretiva {name}",
+  "grants-and-boosts": "Concede e potencia a perícia da tripulação, mesmo que não tenha sido treinada.",
+  "grants-only": "Concede a perícia da tripulação durante a batalha (sem característica indicada).",
+  "enhances-mounted": "Melhora o equipamento montado: {name}.",
+  "mount-to-use": "Monte o equipamento {name} para usar esta diretiva."
+}

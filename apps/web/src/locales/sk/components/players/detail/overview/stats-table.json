@@ -1,0 +1,34 @@
+{
+  "stat": "Štatistika",
+  "rows": {
+    "battles": "Bitky",
+    "tier": "Stopnja",
+    "wins": "Víťazstvá",
+    "losses": "Prehry",
+    "draws": "Remízy",
+    "survived": "Prežité bitky",
+    "destroyed": "Zničené tanky",
+    "destruction-ratio": "Pomer zničenia",
+    "spotted": "Odhalené tanky",
+    "damages": "Škody",
+    "track-damages": "Škody na podvozku",
+    "spotting-damages": "Škody za odhalenie",
+    "assisting-damages": "Škody za pomoc",
+    "combined-damages": "Kombinované škody",
+    "base-capture": "Zaberanie základne",
+    "base-defense": "Obrana základne",
+    "experience": "Skúsenosti",
+    "hit-rate": "Úspešnosť",
+    "personal-rating": "Osobné hodnotenie",
+    "wtr": "Hodnotenie World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Celkom",
+    "day": "Posledných 24 hodín",
+    "week": "Posledných 7 dní",
+    "month": "Posledných 30 dní"
+  }
+}

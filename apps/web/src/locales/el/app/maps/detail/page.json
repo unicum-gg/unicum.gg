@@ -1,0 +1,5 @@
+{
+  "title": "Χάρτης {map} του World of Tanks ({region})",
+  "description": "Χάρτης {map}: {width} × {height} m στο World of Tanks.",
+  "description-modes": "Χάρτης {map}: {width} × {height} m στο World of Tanks, με τις λειτουργίες {modes}."
+}

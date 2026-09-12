@@ -1,0 +1,12 @@
+{
+  "every-vote-played": "Minden szavazat olyan fióktól érkezik, amely játszott ezzel a tankkal.",
+  "every-vote-played-average": "Minden szavazat olyan fióktól érkezik, amely játszott ezzel a tankkal, átlagosan {battles} csatát.",
+  "fun": "Szórakozás",
+  "how-good-the-tank-is": "Mennyire jó a tank",
+  "how-much-people-enjoy-it": "Mennyire élvezik a játékosok",
+  "if-you-have-played-it": "Ha játszottál vele, pontosan te vagy az, akire ez az oldal vár.",
+  "nobody-has-rated-this-tank": "Még senki sem értékelte ezt a tankot.",
+  "overall": "Összesen",
+  "votes": "{count} szavazat",
+  "votes-one": "{count} szavazat"
+}

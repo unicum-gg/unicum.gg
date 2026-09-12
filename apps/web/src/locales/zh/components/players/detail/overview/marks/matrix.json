@@ -1,0 +1,7 @@
+{
+  "loading": "{count}辆{tier}级车辆，正在加载名称…",
+  "loading-one": "{count}辆{tier}级车辆，正在加载名称…",
+  "and-more": "以及另外{count}辆",
+  "hint": "点击在坦克标签页中打开",
+  "tier": "等级"
+}

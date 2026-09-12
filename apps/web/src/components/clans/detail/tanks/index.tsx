@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Panel,
   PanelContent,
@@ -13,7 +15,7 @@ import { TableSkeleton } from "@/components/table-skeleton";
 import { VEHICLES_SKELETON_COLUMNS } from "@/components/clans/detail/tanks/columns";
 import type { ClanVehicleRow } from "@unicum.gg/shared";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /** The Tanks section: the clan's per-vehicle aggregate table, or a skeleton
  * while it loads on demand. */
@@ -26,6 +28,8 @@ export function ClanTanksTab({
   color: string;
   vehicles: ClanVehicleRow[] | undefined;
 }) {
+  const { num } = useFormat();
+  const { t: tTabs } = useTranslation("components/clans/detail/tabs");
   return (
     <>
       <PanelSeparator />
@@ -33,8 +37,8 @@ export function ClanTanksTab({
         <PanelHeader>
           <PanelTitle>
             <TaggedTitle tag={tag} color={color}>
-              tanks
-              {vehicles ? ` (${intFmt.format(vehicles.length)})` : ""}
+              {tTabs("sections.tanks")}
+              {vehicles ? ` (${num(INT_FORMAT).format(vehicles.length)})` : ""}
             </TaggedTitle>
           </PanelTitle>
         </PanelHeader>

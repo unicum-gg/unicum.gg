@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "플레이어",
+    "clans": "클랜",
+    "tanks": "탱크",
+    "maps": "지도",
+    "tournaments": "토너먼트",
+    "servers": "서버들"
+  },
+  "links": {
+    "top-players": {
+      "label": "상위 플레이어들",
+      "description": "전체 기간 플레이어 순위표"
+    },
+    "players-onslaught": {
+      "description": "랭크 격전 순위"
+    },
+    "players-steel-hunter": {
+      "description": "배틀 로얄 순위표"
+    },
+    "top-clans": {
+      "label": "상위 클랜스",
+      "description": "전체 기간 클랜 순위표"
+    },
+    "stronghold": {
+      "description": "쟁탈전 순위"
+    },
+    "advances": {
+      "description": "10단계 15대15 순위"
+    },
+    "tank-performances": {
+      "label": "성능",
+      "description": "전차별 승률 및 피해"
+    },
+    "tank-specs": {
+      "label": "사양",
+      "description": "모든 전차의 통계"
+    },
+    "tank-economics": {
+      "label": "경제",
+      "description": "크레딧 및 경험치 획득 전차"
+    },
+    "tank-moe": {
+      "description": "각 표식별 피해"
+    },
+    "tank-mom": {
+      "description": "숙련의 증표 기준"
+    },
+    "tank-changes": {
+      "label": "변경 사항",
+      "description": "업데이트별 상향 및 하향"
+    },
+    "tank-community": {
+      "label": "커뮤니티 평점",
+      "description": "보유 플레이어 평가"
+    },
+    "tank-videos": {
+      "label": "비디오",
+      "description": "커뮤니티 게임플레이"
+    },
+    "all-tournaments": {
+      "label": "토너먼트",
+      "description": "모든 토너먼트, 진행 중 및 종료"
+    },
+    "all-maps": {
+      "label": "모든 지도",
+      "description": "게임의 모든 지도"
+    },
+    "map-changes": {
+      "label": "변경 사항",
+      "description": "업데이트별 지도 개편"
+    },
+    "battle-type": {
+      "description": "{type} 지도"
+    },
+    "servers-population": {
+      "label": "서버 인구",
+      "description": "현재 및 시간별 온라인 플레이어"
+    }
+  }
+}

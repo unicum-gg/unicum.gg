@@ -1,0 +1,37 @@
+{
+  "label": "Více",
+  "items": {
+    "tournaments": {
+      "label": "Turnaje",
+      "description": "Pavouk, soupisky a výsledky podle regionů"
+    },
+    "servers": {
+      "label": "Servery",
+      "description": "Hráči online nyní i v průběhu času"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Hráč, klan a Tank: statistiky dostupné jako lomítkové příkazy"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Připojte Claude, ChatGPT nebo libovolného klienta MCP"
+    },
+    "api": {
+      "label": "API",
+      "description": "Zdarma dostupné veřejné REST API bez nutnosti klíče"
+    },
+    "badges": {
+      "label": "Odznaky",
+      "description": "Hráč nebo klan: všechny znaky, které lze získat, a jak na to"
+    },
+    "glossary": {
+      "label": "Slovník",
+      "description": "Vysvětlení všech pojmů z World of Tanks"
+    },
+    "support": {
+      "label": "Podpořte nás",
+      "description": "Pomozte udržet web {name} zdarma, otevřený a bez reklam"
+    }
+  }
+}

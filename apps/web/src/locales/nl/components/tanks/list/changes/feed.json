@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} buffed",
+  "n-tanks": "{count, plural, one {# tank} other {# tanks}}",
+  "nerfed": "{count} nerfed",
+  "no-tank-changes-have-been": "Er zijn nog geen tankwijzigingen geregistreerd. Wanneer Wargaming tanks opnieuw balanceert, verschijnen de buffs en nerfs van elke update hier.",
+  "update": "Updaten {version}"
+}

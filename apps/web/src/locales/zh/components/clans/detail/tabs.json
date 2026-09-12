@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "概览",
+    "tanks": "坦克",
+    "videos": "视频",
+    "tournaments": "赛事",
+    "manage": "管理"
+  },
+  "section-count": "{section}（{count}）"
+}

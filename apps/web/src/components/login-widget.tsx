@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { LoginButton } from "@/components/login-button";
 import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
+import { useTranslation } from "@/hooks/use-translation";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
 
 type UserClanTag = { tag: string; name: string; color: string };
@@ -19,6 +20,7 @@ type UserClanTag = { tag: string; name: string; color: string };
  * Twitch live), their current clan tag, plus a log out.
  */
 export function LoginWidget() {
+  const { t } = useTranslation("components/login-widget");
   const { data: session, isPending } = useSession();
   // Keyed by user id so a stale tag from a previous session is never shown
   // (and so we never need a synchronous clear on logout).
@@ -101,7 +103,7 @@ export function LoginWidget() {
           }
           className="cursor-pointer text-fd-muted-foreground transition-colors hover:text-fd-foreground"
         >
-          Log out
+          {t("logout")}
         </button>
       </span>
     );
@@ -113,7 +115,7 @@ export function LoginWidget() {
         type="button"
         className="shrink-0 cursor-pointer font-medium text-fd-foreground transition-colors hover:text-brand"
       >
-        Log in
+        {t("login")}
       </button>
     </LoginButton>
   );

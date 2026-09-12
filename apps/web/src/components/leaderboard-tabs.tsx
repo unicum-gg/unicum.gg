@@ -1,7 +1,8 @@
-import Link from "next/link";
+import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { getTranslation } from "@/lib/translations.server";
 
 /**
  * Cross-link between `/clans` and `/players`. Same language and strict
@@ -10,17 +11,22 @@ import type { Region } from "@unicum.gg/wargaming";
  * Any/Strict toggle so the page has a consistent two-segmented switch
  * pattern instead of two different switcher designs.
  */
-export function LeaderboardTabs({
+export async function LeaderboardTabs({
   current,
   region,
   language,
   strict,
+  locale,
 }: {
   current: "clans" | "players";
   region: Region;
   language: string | null;
   strict: boolean;
+  /** The route's own segment: this renders on the server, so it has no request
+   * to read the language from. */
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/leaderboard-tabs", locale);
   const clansHref = language
     ? ROUTES.CLANS_BY_LANGUAGE(region, language, strict)
     : ROUTES.CLANS(region);
@@ -32,9 +38,9 @@ export function LeaderboardTabs({
       <Segment
         href={playersHref}
         active={current === "players"}
-        label="Players"
+        label={t("players")}
       />
-      <Segment href={clansHref} active={current === "clans"} label="Clans" />
+      <Segment href={clansHref} active={current === "clans"} label={t("clans")} />
     </div>
   );
 }

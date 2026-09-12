@@ -1,0 +1,4 @@
+{
+  "title": "Meilleurs clans de rang {tier} ({region})",
+  "description": "Classement des clans de rang {tier}, région {region}. Classement selon le SR (cote d’escarmouche), l’ELO, le nombre de batailles et le taux de victoires. Minimum : {battles} batailles."
+}

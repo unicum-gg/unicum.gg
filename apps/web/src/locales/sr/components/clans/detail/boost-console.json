@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Dodaj radni tok",
+  "boost": "Povećanje",
+  "each-workflow-activates-its-reserves": "Сваки ток рада активира своје резерве током одређеног временског прозора, када довољно чланова буде у активној сесији игре. Ради на вашем налогу, без потребе да будете онлајн. Додајте их колико вам је потребно.",
+  "n-online": "/ {count} онлајн",
+  "officer": "Oficir",
+  "online": "Online",
+  "recent-activations": "nedavne aktivacije",
+  "reserve": "Rezerva",
+  "stronghold-boosts": "Povećanja utvrđenja",
+  "when": "Kada",
+  "workflow": "Radni tok"
+}

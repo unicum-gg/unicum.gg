@@ -1,0 +1,11 @@
+{
+  "date": "Päivämäärä",
+  "featured-tournament": "Ominaisuuskilpailu",
+  "format": "Muoto",
+  "n-of-the-roster-were-in-the-clan": "{count} kokoonpanon jäsentä kuului klaaniin",
+  "no-tournament-matches-the-current": "Mikään turnaus ei vastaa nykyisiä suodattimia.",
+  "played-as": "Pelattiin",
+  "result": "Tulokset",
+  "status": "Tila",
+  "tier": "Taso"
+}

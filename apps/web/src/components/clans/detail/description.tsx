@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
 const PROSE_CLASS =
@@ -13,6 +14,7 @@ export function ExpandableDescription({
   html: string;
   maxLines?: number;
 }) {
+  const { t } = useTranslation("components/clans/detail/description");
   const ref = useRef<HTMLDivElement>(null);
   const [overflows, setOverflows] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -48,7 +50,7 @@ export function ExpandableDescription({
           onClick={() => setExpanded((v) => !v)}
           className="mt-2 text-xs font-medium text-fd-foreground hover:underline"
         >
-          {expanded ? "See less" : "See more"}
+          {expanded ? t("see-less") : t("see-more")}
         </button>
       )}
     </div>

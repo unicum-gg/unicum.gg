@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   CaretLeftIcon,
   CaretRightIcon,
@@ -41,16 +42,15 @@ import {
 } from "@/components/tanks/list/compare-cell";
 import type { TankSelection } from "@/hooks/use-compare-selection";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
 type MasteryColumn = {
   key: string;
-  label: string;
   iconFile: string;
-  tip: string;
   value: (t: TankListItem) => number | null;
 };
 
@@ -64,30 +64,22 @@ type MasteryColumn = {
 const MASTERY_COLUMNS: MasteryColumn[] = [
   {
     key: "class3",
-    label: "3rd Class",
     iconFile: "rank_03.png",
-    tip: "3rd Class: XP needed to beat 50% of players",
     value: (t) => t.mastery?.class3 ?? null,
   },
   {
     key: "class2",
-    label: "2nd Class",
     iconFile: "rank_02.png",
-    tip: "2nd Class: XP needed to beat 80% of players",
     value: (t) => t.mastery?.class2 ?? null,
   },
   {
     key: "class1",
-    label: "1st Class",
     iconFile: "rank_01.png",
-    tip: "1st Class: XP needed to beat 95% of players",
     value: (t) => t.mastery?.class1 ?? null,
   },
   {
     key: "ace",
-    label: "Ace Tanker",
     iconFile: "rank_m.png",
-    tip: "Ace Tanker: XP needed to beat 99% of players",
     value: (t) => t.mastery?.ace ?? null,
   },
 ];
@@ -100,12 +92,14 @@ function useMasteryColumns() {
 }
 
 export function MasteryColumnSelector() {
+  const { t: tGame } = useTranslation("game/vocabulary");
   const [selected, onToggle] = useMasteryColumns();
   return (
     <ColumnSelector
       items={MASTERY_COLUMNS}
       selected={selected}
       onToggle={onToggle}
+      label={(key) => tGame(`mastery-badges.${key}`)}
     />
   );
 }
@@ -141,6 +135,10 @@ export function TanksMasteryTable({
   /** When set, each row offers a comparison checkbox. */
   selection?: TankSelection;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/tanks/list/marks-of-mastery/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tTable } = useTranslation("components/tanks/table");
   const [sort, setSort] = useState<SortState>({
     key: "ace",
     direction: SortDirection.Desc,
@@ -216,25 +214,25 @@ export function TanksMasteryTable({
           <TableHeader>
             <TableRow>
               <TankCompareHead selection={selection} />
-              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip={tTable("nation")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="nation" />
               </SortHead>
-              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip="Type" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="type" onToggle={toggleSort} align="center" tip={tTable("type")} headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="type" />
               </SortHead>
-              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip="Tier" headClassName="w-[72px] min-w-[72px]">
+              <SortHead sort={sort} col="tier" onToggle={toggleSort} align="center" tip={tTable("tier")} headClassName="w-[72px] min-w-[72px]">
                 <span className="text-xs font-medium tracking-tight text-fd-muted-foreground">
                   I-XI
                 </span>
               </SortHead>
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
-                Name
+                {tTable("name")}
               </SortHead>
               {columns.map((c) => (
-                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
+                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={t(`columns.${c.key}.tip`)}>
                   <Image
                     src={portalIconUrl(region, c.iconFile)}
-                    alt={c.label}
+                    alt={tGame(`mastery-badges.${c.key}`)}
                     width={20}
                     height={20}
                     className="h-5 w-auto object-contain"
@@ -275,7 +273,7 @@ export function TanksMasteryTable({
                   const v = c.value(t);
                   return (
                     <TableCell key={c.key} className="text-right tabular-nums">
-                      {v != null ? intFmt.format(v) : DASH}
+                      {v != null ? num(INT_FORMAT).format(v) : DASH}
                     </TableCell>
                   );
                 })}
@@ -287,7 +285,7 @@ export function TanksMasteryTable({
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
         <div className="flex items-center gap-2">
-          <span>Rows per page</span>
+          <span>{t("rows-per-page")}</span>
           <Select
             value={String(pageSize)}
             onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
@@ -301,7 +299,7 @@ export function TanksMasteryTable({
                   {n}
                 </SelectItem>
               ))}
-              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="all">{t("all")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -314,19 +312,18 @@ export function TanksMasteryTable({
               type="button"
               onClick={() => setPage(current - 1)}
               disabled={current <= 1}
-              aria-label="Previous page"
+              aria-label={t("previous-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretLeftIcon weight="bold" className="size-3.5" />
             </button>
             <span className="min-w-16 text-center tabular-nums">
-              Page {current} / {totalPages}
-            </span>
+              {t("page", { current, totalPages })}</span>
             <button
               type="button"
               onClick={() => setPage(current + 1)}
               disabled={current >= totalPages}
-              aria-label="Next page"
+              aria-label={t("next-page")}
               className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
             >
               <CaretRightIcon weight="bold" className="size-3.5" />

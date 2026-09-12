@@ -1,0 +1,60 @@
+{
+  "columns-label": "Colunas",
+  "groups": {
+    "general": "Geral",
+    "combat": "Combate"
+  },
+  "columns": {
+    "battles": {
+      "label": "Batalhas",
+      "tip": "Total de batalhas disputadas com o veículo"
+    },
+    "count": {
+      "label": "Contagem",
+      "tip": "Número de jogadores monitorizados na amostra"
+    },
+    "rating": {
+      "label": "Classificação (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Taxa de vitórias com o veículo"
+    },
+    "playerWr": {
+      "label": "WR do Jogador",
+      "tip": "Taxa média geral de vitórias dos jogadores que o utilizam"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Dano médio por batalha"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Rácio de abates / mortes"
+    },
+    "assists": {
+      "label": "Assistências",
+      "tip": "Dano médio com assistência"
+    },
+    "hitPct": {
+      "label": "Porcentagem de Acertos",
+      "tip": "Impactos / disparos"
+    },
+    "penPct": {
+      "label": "Porcentagem de Penetração",
+      "tip": "Penetrações / impactos"
+    },
+    "spots": {
+      "label": "Observações",
+      "tip": "Média de deteções por batalha"
+    },
+    "blocked": {
+      "label": "Bloqueado",
+      "tip": "Dano médio bloqueado pela blindagem"
+    },
+    "survival": {
+      "label": "Sobrevivência",
+      "tip": "Percentagem de batalhas em que sobreviveu"
+    }
+  }
+}

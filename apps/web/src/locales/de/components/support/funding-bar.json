@@ -1,0 +1,18 @@
+{
+  "caught-up": "Alles ist vollständig gedeckt, vielen Dank. Jeder zusätzliche Betrag fließt in mehr Kapazität und neue Funktionen.",
+  "covered-label": "Bedeckt",
+  "covered-sentence": "Unterstützer haben von den bisher angefallenen Kosten in Höhe von {spent} bereits {received} gedeckt.",
+  "days-out-of-pocket": "{days} Tage, selbst bezahlt",
+  "from-supporter-one": "Von: {count} Unterstützer",
+  "from-supporters": "Von: {count} Unterstützer",
+  "gap-growing": "Weitere {amount}/Monat verhindern, dass die Lücke wächst.",
+  "goal": "Ziel {amount}",
+  "of-that-total": "vom Gesamt",
+  "pledges-cover": "Die Zusagen decken jetzt die monatlichen Kosten.",
+  "raised-amount": "{amount} gesammelt",
+  "raised-label": "Gesammelt",
+  "run-at-a-loss": "{name} wird seit {since} mit Verlust betrieben.",
+  "run-rate": "Monatlicher Stand: {pledged}/Monat zugesagt gegenüber {cost}/Monat für den Betrieb.",
+  "spent-since-launch": "Seit dem Start ausgegeben",
+  "to-catch-up": "{amount}, um vollständig aufzuholen."
+}

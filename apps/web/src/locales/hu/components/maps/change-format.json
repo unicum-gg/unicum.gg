@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Játéktér szélessége",
+    "height": "Játéktér magassága",
+    "round-length": "Csataidőzítő",
+    "team-size": "Csapatméret",
+    "camouflage": "Szezon",
+    "presence": "A játékban",
+    "variant-version": "{type} verziója",
+    "play-area": "Játéktér",
+    "bases-team1": "Szövetséges bázisok",
+    "bases-team2": "Ellenséges bázisok",
+    "spawns-team1": "Szövetséges kezdőhelyek",
+    "spawns-team2": "Ellenséges kezdőhelyek",
+    "control-point": "Ellenőrzőpont",
+    "artillery-headquarters": "Tüzérségi főhadiszállás",
+    "comms-centers": "Kommunikációs központok",
+    "observation-posts": "Megfigyelőállások",
+    "points-of-interest": "Fontos pontok"
+  },
+  "summary": {
+    "added": "{name} hozzáadva",
+    "removed": "{name} eltávolítva",
+    "added-to-game": "Hozzáadva a játékhoz",
+    "removed-from-game": "Eltávolítva a játékból",
+    "added-on-test": "Hozzáadva a tesztklienshez",
+    "removed-on-test": "Eltávolítva a tesztkliensből",
+    "mode-added": "{name} játékmód hozzáadva",
+    "mode-removed": "{name} játékmód eltávolítva",
+    "now-played-in": "Mostantól {name} játékmódban játszható",
+    "no-longer-played-in": "Többé nem játszható {name} játékmódban",
+    "event-added": "{name} mostantól a csata közben is megtörténhet",
+    "event-removed": "{name} többé nem történik meg",
+    "moved": "{name} mozgás",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

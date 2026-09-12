@@ -1,0 +1,11 @@
+{
+  "closes": "关闭 {when}",
+  "map-pool": "地图池",
+  "place": "排名",
+  "prize": "奖品",
+  "prizes": "奖品",
+  "qualified": "已晋级（{count}）",
+  "register": "注册",
+  "tournaments": "赛事",
+  "winner": "{count, plural, other {胜者}}"
+}

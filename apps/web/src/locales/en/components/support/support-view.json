@@ -1,0 +1,15 @@
+{
+  "become-a-supporter": "Become a supporter",
+  "community-funded-ad-free": "Community-funded · Ad-free",
+  "coverage-page": "coverage page",
+  "every-euro-keeps-running-supporters": "Every euro keeps {NAME} running. Supporters get a badge on their player page and a place on the podium below, but nothing is ever locked behind it and there will never be ads. It is a monthly subscription you fully control.",
+  "how-is-funded": "How {NAME} is funded",
+  "is-free-open-source-and": "{NAME} is free, open-source and ad-free, and it runs at a loss. No ads, ever. If it is useful to you, chip in what you want from €3 per month and keep the World of Tanks tracker alive and growing.",
+  "it-runs-on-a-single": "It runs on a single rented server, and every euro goes back into the project: the server, the database, the Wargaming-whitelisted egress IPs that let us refresh more players, and the occasional push to get it in front of more people. Supporters cover the monthly bill; anything extra goes into more throughput and new features.",
+  "no-ads-no-investors-no": "No ads, no investors, no data selling. {NAME} is funded entirely by the people who use it.",
+  "no-supporters-yet-be-the": "No supporters yet. Be the first on the podium.",
+  "same-numbers-as": "The exact same numbers as the {link}.",
+  "title": "Support {name}",
+  "top-supporters": "Top supporters",
+  "where-your-money-goes": "Where your money goes"
+}

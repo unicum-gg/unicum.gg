@@ -1,0 +1,14 @@
+{
+  "date": "Dato",
+  "featured-tournament": "Fremhevet turnering",
+  "format": "Format",
+  "mode": "Modus",
+  "no-tournament-matches-the-current": "Ingen turneringer samsvarer med de nåværende filtrene.",
+  "nothing-here-right-now-wargaming": "Ingenting her akkurat nå. Wargaming åpner nye turneringer hver dag, så dette fylles ut igjen automatisk.",
+  "prize": "Premie",
+  "region-tournaments": "Turneringer i {region} ({count})",
+  "status": "Status",
+  "teams": "Lag",
+  "tier": "Nivå",
+  "tournament": "Turnering"
+}

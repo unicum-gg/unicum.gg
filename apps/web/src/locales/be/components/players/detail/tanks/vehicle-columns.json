@@ -1,0 +1,4 @@
+{
+  "columns": "Слупкі",
+  "n-marks-of-excellence": "{count, plural, one {# знак выдатнасці} few {# знакі выдатнасці} many {# знакаў выдатнасці} other {# знакі выдатнасці}}"
+}

@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Přehled",
+    "tanks": "Tanky",
+    "videos": "Videa",
+    "tournaments": "Turnaje",
+    "manage": "Spravovat"
+  },
+  "section-count": "{section} ({count})"
+}

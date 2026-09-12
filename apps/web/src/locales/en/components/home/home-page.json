@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "Top players · Past 24 hours"
+    },
+    "week": {
+      "title": "Top players · Past 7 days"
+    }
+  },
+  "rating-scale": {
+    "title": "Rating scale"
+  },
+  "community": {
+    "title": "Join the community",
+    "heading": "Connect with WoT players",
+    "description": "Join our Discord to chat WoT stats, request features and report bugs. Or hop on GitHub to inspect the code and contribute.",
+    "discord": "Join Discord",
+    "github": "View on GitHub"
+  },
+  "features": {
+    "title": "What you’ll find here",
+    "profiles": {
+      "title": "Player profiles",
+      "description": "Detailed stats with overall + 24h / 7d / 30d deltas, WN7, WN8, WNX, and Personal Rating."
+    },
+    "clans": {
+      "title": "Clan pages",
+      "description": "Members table with ratings, recent activity feed, description and clan metadata."
+    },
+    "history": {
+      "title": "Clan history",
+      "description": "Full timeline of every clan a player has been in, with roles and dates."
+    },
+    "live": {
+      "title": "Live updates",
+      "description": "Tracked players refresh in the background every 24h via our snapshot system."
+    },
+    "leaderboards": {
+      "title": "Leaderboards",
+      "description": "Top players (24h, 7d, all-time) and top clans ranked by WNX, computed from our snapshots."
+    },
+    "open-source": {
+      "title": "Open source · AGPL",
+      "description": "Code’s on GitHub. Inspect, fork, contribute. No ads, opt-in analytics only."
+    }
+  },
+  "quick-start": {
+    "title": "Quick start",
+    "search": {
+      "title": "🔍 Search players or clans",
+      "description": "Press {shortcut} to open the search, then type a nickname or clan tag."
+    },
+    "region": {
+      "title": "🌍 Switch region",
+      "description": "Use the {selector} selector in the navbar. Leaderboards update accordingly."
+    },
+    "leaderboards": {
+      "title": "🏆 Browse leaderboards",
+      "description": "Top players (24h, 7d, all-time) and top clans ranked by average WNX, computed from our snapshots."
+    },
+    "colors": {
+      "title": "📊 Read the colors",
+      "description": "WR, WN7, WN8 and WNX share the same tier colors (orange → green → cyan → purple). See the scale above."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASIA"
+}

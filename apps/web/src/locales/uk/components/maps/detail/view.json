@@ -1,0 +1,9 @@
+{
+  "battle-time": "Час бою",
+  "camouflage": "Камуфляж {camouflage}",
+  "mode": "Режим",
+  "n-random-events": "{count, plural, one {# випадкова подія} few {# випадкові події} many {# випадкових подій} other {# випадкових подій}}",
+  "random-events": "Випадкові події",
+  "size": "Розмір",
+  "team-size": "Розмір команди"
+}

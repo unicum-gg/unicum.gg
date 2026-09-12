@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Jeder Panzer wird von den Spielern, die ihn spielen, mit bis zu fünf Punkten bewertet. Eine Stimme zählt nur, wenn das Konto das Fahrzeug tatsächlich im Gefecht eingesetzt hat. Das unterscheidet diese Wertung von einer Umfrage unter beliebigen Besuchern.",
+  "no-tank-has-been-rated": "Noch wurde kein Panzer bewertet. Die ersten Stimmen können auf den Panzerseiten unter „Community“ abgegeben werden.",
+  "think": "denken",
+  "title": "Was spieler {think}",
+  "votes-across-vehicles": "{totalVotes} Stimmen, verteilt auf {ratedTanks} Panzer."
+}

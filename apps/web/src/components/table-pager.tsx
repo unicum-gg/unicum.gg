@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslation } from "@/hooks/use-translation";
 
 export type PageSize = number | "all";
 export const PAGE_SIZES = [25, 50, 100, 200] as const;
@@ -101,12 +102,13 @@ export function usePagination<T>(
 }
 
 export function TablePager({ pager }: { pager: PagerState }) {
+  const { t } = useTranslation("components/table-pager");
   const { pageSize, setPageSize, page, setPage, total, totalPages, firstShown, lastShown } =
     pager;
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
       <div className="flex items-center gap-2">
-        <span>Rows per page</span>
+        <span>{t("rows-per-page")}</span>
         <Select
           value={String(pageSize)}
           onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
@@ -120,32 +122,32 @@ export function TablePager({ pager }: { pager: PagerState }) {
                 {n}
               </SelectItem>
             ))}
-            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="all">{t("all")}</SelectItem>
           </SelectContent>
         </Select>
       </div>
       <div className="flex items-center gap-3">
         <span className="tabular-nums">
-          {firstShown}–{lastShown} of {total}
+          {t("range", { first: firstShown, last: lastShown, total })}
         </span>
         <div className="flex items-center gap-1">
           <button
             type="button"
             onClick={() => setPage(page - 1)}
             disabled={page <= 1}
-            aria-label="Previous page"
+            aria-label={t("previous")}
             className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
           >
             <CaretLeftIcon weight="bold" className="size-3.5" />
           </button>
           <span className="min-w-16 text-center tabular-nums">
-            Page {page} / {totalPages}
+            {t("page", { page, total: totalPages })}
           </span>
           <button
             type="button"
             onClick={() => setPage(page + 1)}
             disabled={page >= totalPages}
-            aria-label="Next page"
+            aria-label={t("next")}
             className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
           >
             <CaretRightIcon weight="bold" className="size-3.5" />

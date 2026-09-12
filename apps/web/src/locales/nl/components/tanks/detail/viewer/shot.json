@@ -1,0 +1,7 @@
+{
+  "firing": "{shell} afvuren, {pen} mm. Schot wijzigen",
+  "no-such-round": "{mark}: dit kanon heeft die niet, stel de hoeken dus zelf in",
+  "own-round": "{mark}: de eigen granaat van dit kanon, met alle waarden erbij",
+  "treat-it-as": "Beschouw het als",
+  "treat-it-as-mark": "Behandel het als {mark}"
+}

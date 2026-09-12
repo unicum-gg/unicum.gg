@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Obrázkový",
+    "collision": "Kolize",
+    "live": "Živě"
+  },
+  "centre": {
+    "on": "Vycentrovat vozidlo",
+    "off": "Vrátit vozidlo mimo střed"
+  },
+  "hull-down": {
+    "on": "Kryt",
+    "off": "Srovnat vozidlo"
+  },
+  "tracks": {
+    "on": "Rozpohybovat pásy",
+    "off": "Zastavit pásy"
+  },
+  "textures": {
+    "on": "Textury ve vysokém rozlišení",
+    "off": "Standardní textury"
+  },
+  "reset": "Obnovit pohled",
+  "style": "Vybrat styl",
+  "style-worn": "Styl: {name}",
+  "search-styles": "Hledat styly",
+  "colours": "Co znamenají barvy",
+  "cinematic": {
+    "off": "Filmová kamera: vypnuta",
+    "auto": "Filmová kamera: při nečinnosti",
+    "on": "Filmová kamera: vždy"
+  },
+  "open-tank": "Otevřít jiný tank",
+  "open-tank-placeholder": "Otevřít tank...",
+  "more-actions": "Další akce",
+  "marks-meaning": {
+    "0": "Žádné Vítězné znaky",
+    "1": "1 známka: hráči s horším výsledkem na tomto tanku tvoří 65 %",
+    "2": "Dvě známky: lepší než 85 %",
+    "3": "Tři známky: lepší než 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Vyplnit okno",
+      "leave": "Zpět na stránku"
+    },
+    "screen": {
+      "enter": "Vyplnit obrazovku",
+      "leave": "Opustit režim celé obrazovky"
+    }
+  },
+  "marks-count": {
+    "0": "Žádné Vítězné znaky",
+    "one": "Vítězné znaky: 1 známka",
+    "other": "Vítězné znaky: {count}"
+  },
+  "compare-tank": "Porovnat s jiným tankem",
+  "compare-tank-placeholder": "Porovnat s...",
+  "view-tooltips": {
+    "visual": "Tank tak, jak ho vykresluje hra",
+    "collision": "Tloušťka jednotlivých plátů",
+    "live": "Co by způsobil zvolený granát"
+  },
+  "cinematic-tooltips": {
+    "off": "Filmová kamera: vypnuta, pohled zůstává na místě",
+    "auto": "Filmová kamera: spustí se po 30 sekundách nečinnosti",
+    "on": "Filmová kamera: vždy, jakmile pustíte ovládání"
+  }
+}

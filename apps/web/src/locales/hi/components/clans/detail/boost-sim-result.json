@@ -1,0 +1,11 @@
+{
+  "already-running": "पहले से चल रहा है",
+  "in-window": "खिड़की में",
+  "n-online": "/ {count} ऑनलाइन",
+  "no-reserves-selected": "कोई रिज़र्व चयनित नहीं है।",
+  "no-stock-ready": "कोई स्टॉक तैयार नहीं",
+  "not-available": "उपलब्ध नहीं है",
+  "threshold": "थ्रेशोल्ड ({online}/{min})",
+  "would-activate": "सक्रिय करेगा",
+  "would-not-fire": "अभी यह सक्रिय नहीं होगा।"
+}

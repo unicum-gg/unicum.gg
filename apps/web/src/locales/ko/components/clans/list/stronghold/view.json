@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "아직 데이터가 없습니다. 클랜이 새로 고침된 후 다시 확인하세요.",
+  "heading": "상위 <accent>{tier}</accent> 클랜",
+  "blurb": "{region} 순위표, {format}의 추적된 모든 클랜을 대상으로 {sort} 기준 랭크, 최소 {battles} 전투.",
+  "blurb-period": "{region} 순위표, {format}의 추적된 모든 클랜을 대상으로 {period} 동안 {sort} 기준 랭크, 최소 {battles} 전투.",
+  "format-advances": "원정 (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "상위 {count}개 {tier} 클랜 ·"
+}

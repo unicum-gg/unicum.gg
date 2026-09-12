@@ -1,0 +1,5 @@
+{
+  "battles": "{count} lupte",
+  "chart-label": "Bătălii jucate pe {granularity}, colorate după {metric}",
+  "no-battles": "nu lupte"
+}

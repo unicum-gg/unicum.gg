@@ -1,0 +1,11 @@
+{
+  "already-running": "已经在运行",
+  "in-window": "窗口内",
+  "n-online": "/ {count} 人在线",
+  "no-reserves-selected": "未选择储备。",
+  "no-stock-ready": "没有可用库存",
+  "not-available": "不可用",
+  "threshold": "阈值 ({online}/{min})",
+  "would-activate": "将启用",
+  "would-not-fire": "当前不会触发。"
+}

@@ -1,0 +1,5 @@
+{
+  "title": "{map}, World of Tanks-térkép ({region})",
+  "description": "{map}: egy {width} × {height} m méretű World of Tanks-térkép.",
+  "description-modes": "{map}: egy {width} × {height} m méretű World of Tanks-térkép, ahol ezek a játékmódok játszhatók: {modes}."
+}

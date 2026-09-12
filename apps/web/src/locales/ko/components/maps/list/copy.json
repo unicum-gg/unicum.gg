@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "World of Tanks 전투 경기장 {count}개를 모두 확인하세요. 위장과 게임 모드로 필터링한 다음 지도를 열어 미니맵, 크기, 모드별 기지 깃발과 출현 지점을 확인할 수 있습니다.",
+    "title": "모든 World of Tanks 지도 ({region}), 모든 전투 경기장",
+    "description": "{region}의 모든 World of Tanks 지도를 둘러보세요. 미니맵, 크기, 위장 및 지원되는 게임 모드와 모드별 기지 깃발 및 출현 지점을 제공합니다.",
+    "heading": "모든 <accent>지도</accent>"
+  },
+  "battle-type": {
+    "intro": "{type}에서 플레이하는 World of Tanks 지도 {count}개입니다. {blurb} 지도를 열어 미니맵, 크기, 모드별 기지 깃발과 출현 지점을 확인할 수 있습니다.",
+    "title": "World of Tanks {type} 지도 ({region}), 로테이션의 모든 전투 경기장",
+    "description": "{region}의 {type} 로테이션에 포함된 모든 World of Tanks 지도입니다. 미니맵, 크기, 위장 및 지원되는 게임 모드와 기지 깃발 및 출현 지점을 제공합니다.",
+    "heading": "{type} <accent>지도</accent>"
+  },
+  "blurbs": {
+    "random": "표준 15대15 로테이션",
+    "battle_royale": "최후의 전차가 남는 모드",
+    "frontline": "30대30 대규모 모드",
+    "onslaught": "랭크 7대7 모드",
+    "onslaught_night": "야간 랭크 7대7 모드, 짧은 시야 범위, 현재 공개 테스트에서 플레이 가능",
+    "grand_battle": "30대30 10단계 모드",
+    "clan_wars": "클랜 전쟁 및 출정",
+    "waffentrager": "Waffenträger 이벤트",
+    "last_stand": "Last Stand 이벤트",
+    "arcade": "아케이드 및 특별 이벤트",
+    "story_mode": "스토리 중심 작전",
+    "training": "훈련방 및 튜토리얼"
+  }
+}

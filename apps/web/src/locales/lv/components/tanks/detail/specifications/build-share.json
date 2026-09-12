@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Konfigurācijas saite nokopēta",
+  "copy-build-link": "Kopēt konfigurācijas saiti",
+  "could-not-copy-link": "Neizdevās nokopēt saiti",
+  "include-setup": "Iekļaut iestatījumus",
+  "share-build": "Kopīgot būvējumu",
+  "share-tank": "Kopīgot {tank}",
+  "share-text": "Apskati šo {tank} konfigurāciju lietotnē {app}"
+}

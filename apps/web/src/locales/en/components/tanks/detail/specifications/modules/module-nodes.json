@@ -1,0 +1,17 @@
+{
+  "aim-time": "Aim time",
+  "ammo": "Ammo",
+  "armor": "Armor",
+  "dispersion": "Dispersion",
+  "fire-chance": "Fire chance",
+  "gun-arc": "Gun arc",
+  "hit-points": "Hit points",
+  "load-limit": "Load limit",
+  "mounted-on": "Mounted on {tanks}",
+  "power": "Power",
+  "reload": "Reload",
+  "signal-range": "Signal range",
+  "tier": "Tier {tier}",
+  "traverse": "Traverse",
+  "view-range": "View range"
+}

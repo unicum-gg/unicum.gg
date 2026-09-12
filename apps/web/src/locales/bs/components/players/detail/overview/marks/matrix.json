@@ -1,0 +1,7 @@
+{
+  "loading": "{count} vozila nivoa {tier}, učitavanje njihovih imena…",
+  "loading-one": "{count} vozilo nivoa {tier}, učitavanje njegovog imena…",
+  "and-more": "i još {count}",
+  "hint": "Kliknite da ih otvorite u kartici Tenkovi",
+  "tier": "Nivo"
+}

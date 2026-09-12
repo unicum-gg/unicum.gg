@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Ширина ігрової зони",
+    "height": "Висота ігрової зони",
+    "round-length": "Таймер бою",
+    "team-size": "Розмір команди",
+    "camouflage": "Сезон",
+    "presence": "У грі",
+    "variant-version": "Версія {type}",
+    "play-area": "Ігрова зона",
+    "bases-team1": "Союзні бази",
+    "bases-team2": "Бази супротивника",
+    "spawns-team1": "Точки появи союзників",
+    "spawns-team2": "Точки появи супротивника",
+    "control-point": "Точка контролю",
+    "artillery-headquarters": "Артилерійський штаб",
+    "comms-centers": "Центри зв’язку",
+    "observation-posts": "Спостережні пости",
+    "points-of-interest": "Ключові позиції"
+  },
+  "summary": {
+    "added": "{name} додано",
+    "removed": "{name} видалено",
+    "added-to-game": "Додано до гри",
+    "removed-from-game": "Видалено з гри",
+    "added-on-test": "Додано на тестовому клієнті",
+    "removed-on-test": "Видалено з тестового клієнта",
+    "mode-added": "Режим {name} додано",
+    "mode-removed": "Режим {name} видалено",
+    "now-played-in": "Тепер зіграно на {name}",
+    "no-longer-played-in": "Більше не зіграно на {name}",
+    "event-added": "{name} тепер може відбуватися посеред бою",
+    "event-removed": "{name} більше не відбувається",
+    "moved": "{name} переміщено",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

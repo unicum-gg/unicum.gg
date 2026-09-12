@@ -1,0 +1,9 @@
+{
+  "boosts": "부스트 {name}",
+  "directives": "지휘명령",
+  "directive-name": "{name} 지침",
+  "grants-and-boosts": "훈련되지 않은 경우에도 승무원 기술을 부여하고 강화합니다.",
+  "grants-only": "해당 전투에서 승무원 기술을 부여합니다. 표시된 특성은 없습니다.",
+  "enhances-mounted": "장착한 {name}을(를) 강화합니다.",
+  "mount-to-use": "이 지시를 사용하려면 {name}을(를) 장착하세요."
+}

@@ -1,6 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
+import Link from "@/components/link";
 import useSWR from "swr";
 import { MIN_BATTLES_TO_RATE } from "@unicum.gg/shared";
 import type { PlayerTankRow } from "@unicum.gg/shared";
@@ -10,7 +12,7 @@ import ROUTES from "@/constants/routes";
 import { useSession } from "@/lib/auth-client";
 import { unicum } from "@/services/sdk";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * "You have four thousand battles in this one. What do you make of it?"
@@ -34,6 +36,8 @@ export function RateYourTanksPrompt({
   nickname: string;
   vehicles: PlayerTankRow[];
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/detail/tanks/rate-prompt");
   const { data: session } = useSession();
   // The nickname is the check the page can make; the endpoint below only ever
   // returns the caller's own rows, so a wrong guess here shows a prompt rather
@@ -66,13 +70,12 @@ export function RateYourTanksPrompt({
   return (
     <div className="flex flex-col gap-3 border-b border-fd-border px-4 py-3">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <p className="text-sm font-medium">Rate the tanks you play</p>
+        <p className="text-sm font-medium">{t("rate-the-tanks-you-play")}</p>
         <Link
           href={ROUTES.TANKS_COMMUNITY(region)}
           className="text-xs text-fd-muted-foreground underline-offset-4 hover:underline"
         >
-          See what everyone thinks
-        </Link>
+          {t("see-what-everyone-thinks")}</Link>
       </div>
       <div className="flex flex-wrap gap-2">
         {candidates.map((tank) => (
@@ -90,7 +93,7 @@ export function RateYourTanksPrompt({
             ) : null}
             <span>{tank.shortName ?? tank.name}</span>
             <span className="text-fd-muted-foreground tabular-nums">
-              {intFmt.format(tank.battles)}
+              {num(INT_FORMAT).format(tank.battles)}
             </span>
           </Link>
         ))}

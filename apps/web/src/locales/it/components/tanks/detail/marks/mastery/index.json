@@ -1,0 +1,8 @@
+{
+  "last-days": "Ultimi {chartDays} giorni",
+  "n-players": "{count, plural, one {# giocatore} other {# giocatori}}",
+  "rolling-average-combined-damage-to": "Media mobile del danno combinato necessaria per superare il 65 / 85 / 95% dei giocatori.",
+  "single-battle-xp-to-beat": "Punti XP in una singola battaglia necessari per superare il 50 / 80 / 95 / 99% dei giocatori.",
+  "tank-marks-of-excellence": "Marchi d’Eccellenza di {tank}",
+  "tank-marks-of-mastery": "Segni di Maestria di {tank}"
+}

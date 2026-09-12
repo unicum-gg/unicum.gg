@@ -1,0 +1,8 @@
+{
+  "battles": "{count} bitke",
+  "no-votes": "ne glasova",
+  "rated-higher": "Bolji igrači ocjenjuju ga s {stars} zvjezdica više od ostatka poslužitelja. Ovaj tenk nagrađuje poznavanje igre.",
+  "rated-lower": "Bolji igrači ocjenjuju ga s {stars} zvjezdica manje od ostatka poslužitelja. Laska vam sve dok se od njega ne zatraži da nešto napravi.",
+  "votes": "{count} glasova",
+  "votes-one": "{count} glas"
+}

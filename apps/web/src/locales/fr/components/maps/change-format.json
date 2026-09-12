@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Largeur de la zone de jeu",
+    "height": "Hauteur de la zone de jeu",
+    "round-length": "Chronomètre de bataille",
+    "team-size": "Taille de l’équipe",
+    "camouflage": "Saison",
+    "presence": "En jeu",
+    "variant-version": "Version {type}",
+    "play-area": "Zone de jeu",
+    "bases-team1": "Bases alliées",
+    "bases-team2": "Bases ennemies",
+    "spawns-team1": "Points d’apparition alliés",
+    "spawns-team2": "Points d’apparition ennemis",
+    "control-point": "Point de contrôle",
+    "artillery-headquarters": "Quartier général de l’artillerie",
+    "comms-centers": "Centres de communication",
+    "observation-posts": "Postes d’observation",
+    "points-of-interest": "Points d’intérêt"
+  },
+  "summary": {
+    "added": "Ajouté : {name}",
+    "removed": "Supprimé : {name}",
+    "added-to-game": "Ajouté au jeu",
+    "removed-from-game": "Supprimé du jeu",
+    "added-on-test": "Ajouté sur le client de test",
+    "removed-on-test": "Supprimé du client de test",
+    "mode-added": "Mode ajouté : {name}",
+    "mode-removed": "Mode supprimé : {name}",
+    "now-played-in": "Désormais joué sur {name}",
+    "no-longer-played-in": "Plus joué sur {name}",
+    "event-added": "L’événement nommé {name} peut désormais se produire au milieu d’une bataille",
+    "event-removed": "L’événement nommé {name} ne se produit plus",
+    "moved": "Déplacement de {name}",
+    "count-changed": "{name} : {before} → {after}",
+    "value-changed": "{name} : {before} → {after}",
+    "value-set": "{name} : {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

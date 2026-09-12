@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "Alle {count} Schlachtfelder in World of Tanks. Filtere nach Tarnung und Spielmodus und öffne dann eine Karte, um ihre Minikarte, Größe sowie die Basisflaggen und Startpunkte für jeden Modus anzuzeigen.",
+    "title": "Alle Karten in World of Tanks ({region}), jedes Schlachtfeld",
+    "description": "Durchsuche alle Karten in World of Tanks in der Region {region}: Minikarten, Größe, Tarnung und unterstützte Spielmodi sowie Basisflaggen und Startpunkte für jeden Modus.",
+    "heading": "Alle <accent>Karten</accent>"
+  },
+  "battle-type": {
+    "intro": "Die {count} Karten in World of Tanks für {type}, {blurb}. Öffne eine Karte, um ihre Minikarte, Größe sowie die Basisflaggen und Startpunkte für jeden Modus anzuzeigen.",
+    "title": "World of Tanks-Karten für {type} ({region}), jedes Schlachtfeld in der Rotation",
+    "description": "Alle Karten in World of Tanks aus der Rotation für {type} in der Region {region}: Minikarten, Größe, Tarnung und unterstützte Spielmodi sowie Basisflaggen und Startpunkte.",
+    "heading": "{type} <accent>Karten</accent>"
+  },
+  "blurbs": {
+    "random": "die Standard-15-gegen-15-Rotation",
+    "battle_royale": "der Modus, in dem der letzte Panzer übrig bleibt",
+    "frontline": "der groß angelegte 30-gegen-30-Modus",
+    "onslaught": "der gewertete 7-gegen-7-Modus",
+    "onslaught_night": "der gewertete 7-gegen-7-Modus bei Nacht mit verringerter Sichtweite, derzeit auf dem Server Gemeinsamer Test spielbar",
+    "grand_battle": "der 30-gegen-30-Modus der Stufe X",
+    "clan_wars": "Clan Wars und Vorstöße",
+    "waffentrager": "das Waffenträger-Event",
+    "last_stand": "das Last Stand-Event",
+    "arcade": "Arcade- und Spezial-Events",
+    "story_mode": "die handlungsbasierten Operationen",
+    "training": "Übungsräume und Tutorials"
+  }
+}

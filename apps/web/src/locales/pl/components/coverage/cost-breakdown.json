@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Rozliczono w euro, przeliczając na {currency} według dzisiejszego kursu.",
+  "cost-breakdown": "Szczegółowy podział kosztów",
+  "estimated-annual-cost": "Szacowany koszt roczny",
+  "fixed-month-bill-no-surprises": "Stały rachunek w wysokości {totalAnnualEur} miesięcznie, bez niespodzianek: jeden wynajęty serwer, bez usług SaaS innych firm na ścieżce danych. Kwota wzrasta dopiero wtedy, gdy serwer przestaje nam wystarczać (większa przepustowość Wargaming oznacza więcej adresów IP dla ruchu wychodzącego).",
+  "free": "bezpłatny",
+  "one-off-spend": "Jednorazowy wydatek",
+  "paid-once-so-it-is": "Opłacono jednorazowo, więc nie jest to część powyższego miesięcznego rachunku. Nadal jednak wlicza się do dotychczasowych kosztów projektu.",
+  "previously": "Wcześniej"
+}

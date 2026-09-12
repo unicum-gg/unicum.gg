@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Lottningen har inte genomförts än. Lagets matcher visas här när turneringen börjar.",
+  "each-map-is-played-twice": "Varje karta spelas två gånger, en gång från vardera sidan. Den sista kartan är avgörande och spelas en gång.",
+  "first-battle-at": "Första striden, {when}",
+  "lost": "Förlorad",
+  "matches": "Matcher ({length})",
+  "never-played": "Det här laget spelade aldrig någon match. Det anmälde sig, men kom inte med i lottningen, vilket är vad som händer med en laguppställning som inte bekräftas.",
+  "no-maps-recorded": "Inga kartor registrerade för den här matchen.",
+  "no-roster-recorded-for-this": "Ingen laguppställning registrerad för det här laget.",
+  "of-players-on-the-day": "{members} av {length} spelare den dagen",
+  "played-on-uncatalogued": "Spelade på {maps}, som inte finns i kartkatalogen.",
+  "roster": "Laglista ({length})",
+  "stage-group": "{stage} · Grupp {order}",
+  "team-1": "Lag 1",
+  "team-2": "Lag 2",
+  "tournaments": "Turneringar",
+  "when-the-first-battle-started": "När den första striden började",
+  "won": "Vunnit"
+}

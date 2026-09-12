@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistiche di {nickname} nelle battaglie casuali",
+  "progression": "Progressione di {nickname}: {metricLabel}",
+  "solid-line-is-overall-matches": "La linea continua indica il valore complessivo della metrica {metricLabel} (corrisponde alla colonna Totale qui sopra) e varia lentamente man mano che si accumulano nuove battaglie. La linea tratteggiata indica il valore per sessione della metrica {metricLabel2}, calcolato in base alle battaglie giocate dall’istantanea precedente. Mostra le serie positive e negative. Il colore della linea corrisponde alla fascia di valutazione.",
+  "tanks-shaping-s-rating": "Carri che influenzano la valutazione di {nickname}",
+  "tanks": "Carri di {nickname}",
+  "stats": "Statistiche di {nickname}: {strongholdLabel}"
+}

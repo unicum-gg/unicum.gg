@@ -1,0 +1,12 @@
+{
+  "aria-build": "A Közös Teszt kliensen olvasható, build: {version}",
+  "aria-changes": "A Közös Teszt által módosított {changes} jellemző",
+  "aria-described": "Közös Teszt: {description}",
+  "aria-vehicle": "Közös Teszt járműve",
+  "common-test": "Közönséges Teszt",
+  "common-test-build": "Közönséges Teszt {version}",
+  "tip-build": "{label} · ezek a tesztbuild értékei, és a Wargaming még módosíthatja őket a frissítés megjelenése előtt",
+  "tip-changes": "Közönséges Teszt: változások ezen a járművön, {changes, plural, one {# jellemző} other {# jellemzők}}",
+  "tip-described": "Közös Teszt · {description}",
+  "tip-vehicle": "Közös Teszt · még nincs kiadva, ezért nincs csatastatisztikája, és a jellemzői még változhatnak"
+}

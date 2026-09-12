@@ -1,0 +1,17 @@
+{
+  "close": "Închide",
+  "format": "Format",
+  "here": "aici",
+  "in-the-queue": "Este în coadă și apare {where} după ce un moderator o verifică. Între timp, sugestia ta este afișată cu gri pe pagina respectivă.",
+  "log-in-to-suggest-a": "Autentifică-te pentru a sugera o tactică",
+  "on-map": "pe {map}",
+  "players-per-team": "Jucători per echipă",
+  "sending": "Se trimite…",
+  "suggest": "Sugerează",
+  "suggest-a-tactic": "Sugerează o tactică",
+  "suggest-another": "Sugerează altul",
+  "suggestion-sent": "Sugestia a fost trimisă",
+  "tier": "nivel",
+  "what-to-submit": "O bătălie competitivă, începând din secunda în care începe. Harta începe pe {map} și continuă odată cu videoclipul: o seară de clan parcurge o rotație. Partea din care s-a jucat este criteriul după care o caută un coordonator de foc, așa că este solicitată în loc să fie presupusă.",
+  "what-was-played": "Ce a fost jucat"
+}

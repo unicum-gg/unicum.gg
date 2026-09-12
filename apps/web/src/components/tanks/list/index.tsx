@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import {
-  PERF_COLUMNS,
+  PERF_COLUMNS, perfColumnLabel,
   PerfColumnSelector,
 } from "@/components/tanks/perf-columns";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
@@ -20,6 +20,7 @@ import {
   TanksMoeTable,
 } from "@/components/tanks/list/marks-of-excellence";
 import { SPEC_COLUMNS } from "@/components/tanks/list/spec-columns";
+import { useTranslation } from "@/hooks/use-translation";
 import { TankTab } from "@/components/tanks/list/tabs";
 import { TanksTabNav } from "@/components/tanks/list/tab-nav";
 import {
@@ -55,24 +56,30 @@ export type {
   MasteryRow,
   MoeRow,
 } from "@/components/tanks/list/build";
+import { FilterSubject } from "@/components/filter-subject";
 
-const ECON_RANGE_COLS: RangeColumn<TankListItem>[] = [
-  { key: "buyCredits", label: "Cost (credits)", value: (t) => t.specs?.buyCredits ?? null },
-  { key: "buyGold", label: "Cost (gold)", value: (t) => t.specs?.buyGold ?? null },
-  { key: "researchXp", label: "Research XP", value: (t) => t.specs?.researchXp ?? null },
-  { key: "shellCost", label: "Shell cost", value: (t) => t.specs?.shellCost ?? null },
-  { key: "ammoCost", label: "Full ammo cost", value: (t) => t.specs?.ammoCost ?? null },
+// The min/max filter's targets per tab. Keys only: each label is looked up in
+// `components/tanks/list/index` under `range`, where the mark columns carry the
+// percentile the table itself leaves to a tooltip.
+type RangeSpec = { key: string; value: (row: TankListItem) => number | null };
+
+const ECON_RANGE_SPECS: RangeSpec[] = [
+  { key: "buyCredits", value: (row) => row.specs?.buyCredits ?? null },
+  { key: "buyGold", value: (row) => row.specs?.buyGold ?? null },
+  { key: "researchXp", value: (row) => row.specs?.researchXp ?? null },
+  { key: "shellCost", value: (row) => row.specs?.shellCost ?? null },
+  { key: "ammoCost", value: (row) => row.specs?.ammoCost ?? null },
 ];
-const MASTERY_RANGE_COLS: RangeColumn<TankListItem>[] = [
-  { key: "class3", label: "3rd Class", value: (t) => t.mastery?.class3 ?? null },
-  { key: "class2", label: "2nd Class", value: (t) => t.mastery?.class2 ?? null },
-  { key: "class1", label: "1st Class", value: (t) => t.mastery?.class1 ?? null },
-  { key: "ace", label: "Ace Tanker", value: (t) => t.mastery?.ace ?? null },
+const MASTERY_RANGE_SPECS: RangeSpec[] = [
+  { key: "class3", value: (row) => row.mastery?.class3 ?? null },
+  { key: "class2", value: (row) => row.mastery?.class2 ?? null },
+  { key: "class1", value: (row) => row.mastery?.class1 ?? null },
+  { key: "ace", value: (row) => row.mastery?.ace ?? null },
 ];
-const MOE_RANGE_COLS: RangeColumn<TankListItem>[] = [
-  { key: "mark1", label: "1 Mark (65%)", value: (t) => t.moe?.mark1 ?? null },
-  { key: "mark2", label: "2 Marks (85%)", value: (t) => t.moe?.mark2 ?? null },
-  { key: "mark3", label: "3 Marks (95%)", value: (t) => t.moe?.mark3 ?? null },
+const MOE_RANGE_SPECS: RangeSpec[] = [
+  { key: "mark1", value: (row) => row.moe?.mark1 ?? null },
+  { key: "mark2", value: (row) => row.moe?.mark2 ?? null },
+  { key: "mark3", value: (row) => row.moe?.mark3 ?? null },
 ];
 const RANGE_DEFAULT: Record<TankTab, string> = {
   [TankTab.Performances]: "battles",
@@ -143,25 +150,32 @@ export function TanksIndex({
   );
   const rows = items ?? EMPTY_ROWS;
 
+  const { t: tRange } = useTranslation("components/tanks/list/index");
+  const { t: tSpecs } = useTranslation("components/tanks/list/spec-columns");
+  const { t: tPerf } = useTranslation("components/tanks/perf-columns");
+
   // Columns the min/max range filter can target, per active tab.
   const rangeCols: RangeColumn<TankListItem>[] = useMemo(() => {
+    const named = (specs: RangeSpec[]) =>
+      specs.map((spec) => ({ ...spec, label: tRange(`range.${spec.key}`) }));
     if (tab === TankTab.Specifications) {
       return SPEC_COLUMNS.map((c) => ({
         key: c.key,
-        label: c.label,
-        value: (t: TankListItem) => (t.specs ? c.sortValue(t.specs) : null),
+        label: tSpecs(`columns.${c.key}.label`),
+        value: (row: TankListItem) =>
+          row.specs ? c.sortValue(row.specs) : null,
       }));
     }
-    if (tab === TankTab.Economics) return ECON_RANGE_COLS;
-    if (tab === TankTab.MarksOfMastery) return MASTERY_RANGE_COLS;
-    if (tab === TankTab.MarksOfExcellence) return MOE_RANGE_COLS;
+    if (tab === TankTab.Economics) return named(ECON_RANGE_SPECS);
+    if (tab === TankTab.MarksOfMastery) return named(MASTERY_RANGE_SPECS);
+    if (tab === TankTab.MarksOfExcellence) return named(MOE_RANGE_SPECS);
     return PERF_COLUMNS.map((c) => ({
       key: c.key,
-      label: c.header ? c.header(rangeMetric) : c.label,
-      value: (t: TankListItem) =>
-        t.stats ? c.sortValue(t.stats, rangeMetric) : null,
+      label: perfColumnLabel(c, rangeMetric, tPerf),
+      value: (row: TankListItem) =>
+        row.stats ? c.sortValue(row.stats, rangeMetric) : null,
     }));
-  }, [tab, rangeMetric]);
+  }, [tab, rangeMetric, tRange, tSpecs, tPerf]);
 
   const { filtered, filters } = useTankFilters(
     rows,
@@ -194,7 +208,7 @@ export function TanksIndex({
       <PanelContent className="space-y-4 p-4">
         <TankFilterBar
           filters={filters}
-          searchNoun="tanks"
+          searchNoun={FilterSubject.Tanks}
           extra={
             <>
               {tab === TankTab.Performances && <PerfColumnSelector />}

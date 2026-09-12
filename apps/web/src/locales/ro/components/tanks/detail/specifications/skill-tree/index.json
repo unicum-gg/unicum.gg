@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Clic pe un nod accesibil pentru a-l debloca. Fiecare îi aplică efectul caracteristicilor de mai sus. Culorile grupează nodurile după putere de foc, mobilitate, supraviețuire și mecanica vehiculului.",
+  "loadout-switch-no-effect": "Schimbare a configurației în timpul bătăliei. Niciun efect asupra caracteristicilor.",
+  "title": "Îmbunătățiri ale tancului {tank}",
+  "vehicle-mechanic-no-effect": "Mecanica vehiculului. Niciun efect asupra caracteristicilor."
+}

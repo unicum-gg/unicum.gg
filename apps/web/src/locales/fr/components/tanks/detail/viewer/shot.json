@@ -1,0 +1,7 @@
+{
+  "firing": "Tir de {shell}, {pen} mm. Modifier le tir",
+  "no-such-round": "{mark} : ce canon n’en possède pas, définissez donc vous-même les angles",
+  "own-round": "{mark} : l’obus propre à ce canon, avec toutes ses caractéristiques",
+  "treat-it-as": "Considérer comme",
+  "treat-it-as-mark": "Le considérer comme {mark}"
+}

@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Länken till konfigurationen har kopierats",
+  "copy-build-link": "Kopiera länk till konfigurationen",
+  "could-not-copy-link": "Det gick inte att kopiera länken",
+  "include-setup": "Inkludera setup",
+  "share-build": "Dela build",
+  "share-tank": "Dela {tank}",
+  "share-text": "Se detta bygge för {tank} på {app}"
+}

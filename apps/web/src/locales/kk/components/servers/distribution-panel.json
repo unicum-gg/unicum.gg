@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "{region} ойыншылары қалай салыстырылады",
+  "median-n": "медиана {value}",
+  "metric-rating": "{metric} рейтингі",
+  "tracked-accounts-with-at-least": "Кемінде {minBattles} ұрысы бар {players} бақыланатын аккаунт. Түстер сайттың басқа жерлеріндегімен бірдей диапазондарды көрсетеді.",
+  "win-rate": "Жеңіс коэффициенті",
+  "win-rate-distribution-across-the-region-s-tr": "Аймақта бақыланатын ойыншылардың жеңіс пайызының үлестірімі"
+}

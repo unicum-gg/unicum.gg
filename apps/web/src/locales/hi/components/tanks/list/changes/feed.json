@@ -1,0 +1,7 @@
+{
+  "buffed": "{count} सुधारे गए",
+  "n-tanks": "{count, plural, one {# टैंक} other {# टैंक}}",
+  "nerfed": "{count} कमजोर किए गए",
+  "no-tank-changes-have-been": "अभी तक टैंक में कोई बदलाव दर्ज नहीं किया गया है। जैसे-जैसे Wargaming टैंकों का संतुलन बदलता है, हर अपडेट के बफ़ और nerf यहाँ दिखाई देंगे।",
+  "update": "अद्यतन {version}"
+}

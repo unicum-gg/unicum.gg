@@ -1,0 +1,39 @@
+{
+  "rating": {
+    "label": "评级 (WN)",
+    "tip": "仅这些战斗的评分，不是账号评分"
+  },
+  "winrate": {
+    "label": "WR",
+    "tip": "这些战斗的胜率"
+  },
+  "avgDamage": {
+    "label": "平均伤害"
+  },
+  "avgFrags": {
+    "label": "平均击杀",
+    "tip": "每场摧毁的敌人数量"
+  },
+  "damageRatio": {
+    "label": "损伤率",
+    "tip": "造成伤害与受到伤害的比值"
+  },
+  "kd": {
+    "label": "战损比",
+    "tip": "摧毁的敌人与损失车辆的比值"
+  },
+  "survivalRate": {
+    "label": "幸存"
+  },
+  "avgSpotted": {
+    "label": "平均被发现",
+    "tip": "每场发现的敌人数量"
+  },
+  "avgDefense": {
+    "label": "基地防御",
+    "tip": "每场防御点数"
+  },
+  "avgXp": {
+    "label": "平均经验"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Oyuncular bu tank hakkında ne düşünüyor",
+  "not-rated": "Henüz puanlanmadı, ilk siz olun",
+  "votes": "{count} oy",
+  "votes-one": "{count} oy ver",
+  "stars": "{max} üzerinden {value}",
+  "not-rated-short": "Değerlendirilmedi"
+}

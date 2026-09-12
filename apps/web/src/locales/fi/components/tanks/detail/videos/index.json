@@ -1,0 +1,10 @@
+{
+  "empty": "Ei videoita vielä",
+  "see-all": "Näytä kaikki →",
+  "see-all-count": "Näytä kaikki ({count}) →",
+  "watch-on-youtube": "Katso YouTubessa",
+  "play": "Toista {title}",
+  "log-in": "Kirjaudu sisään ehdottaaksesi videota",
+  "dmg": "vahinkoa",
+  "no-community-video-for-the": "Panssarivaunulle {tankName} ei ole vielä yhteisön videota. Ehdota videota, niin se näkyy täällä, kun moderaattori on tarkistanut sen."
+}

@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Issue de la bataille",
+  "loading-maps": "Chargement des cartes…",
+  "map": "Carte",
+  "mode": "Mode",
+  "pick-a-map": "Choisir une carte",
+  "pick-a-mode": "Choisissez un mode",
+  "result": "Résultat",
+  "spawn": "Apparition",
+  "team": "Équipe {team}",
+  "team-spawn": "Équipe {team} · {direction}",
+  "which-side-you-started": "Votre côté de départ"
+}

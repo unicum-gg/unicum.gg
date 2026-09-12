@@ -1,0 +1,7 @@
+{
+  "win-rate": "Postotak pobjeda",
+  "versus": "{metric} naspram regije {region}",
+  "top": "Najbolje {percent}%",
+  "ahead-of": "Ispred {percent}%",
+  "against": "Protiv {players} praćenih računa iz regije {region} s najmanje {battles} bitki."
+}

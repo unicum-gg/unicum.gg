@@ -1,0 +1,12 @@
+{
+  "final": " · finale",
+  "has-not-held-a-place": "{nickname} heeft nog niet in het Bestorming-klassement gestaan.",
+  "live-season": "· lopend seizoen",
+  "loading-s-onslaught-record": "Bestorming-record van {nickname} laden...",
+  "onslaught": "Bestorming",
+  "onslaught-record": "Bestorming-record van {nickname}",
+  "see-this-season-s-leaderboard": "Bekijk het klassement van dit seizoen",
+  "standing-line": "{rating} rangpunten · {battles} gevechten",
+  "the-board-only-lists-players": "Het klassement vermeldt alleen spelers die Kampioen bereiken, een paar duizend per regio, dus bijna elk profiel komt hier terecht. Zodra ze zover zijn, wordt dit voor dat seizoen automatisch ingevuld.",
+  "updated": "Bijgewerkt {when}"
+}

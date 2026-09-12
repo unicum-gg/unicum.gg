@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Mga istatistika ng random na mga laban ni {nickname}",
+  "progression": "Pag-unlad ng {metricLabel} ni {nickname}",
+  "solid-line-is-overall-matches": "Ang solidong linya ay pangkalahatang {metricLabel} (tumutugma sa kolum na Kabuuan sa itaas), at dahan-dahang nagbabago habang nadaragdagan ang mga bagong laban. Ang putol-putol na linya ay {metricLabel2} bawat session, nakalkula mula sa mga laban na nilaro mula noong nakaraang snapshot. Nagpapakita ito ng maiinit at malamig na sunod-sunod na laro. Sinusunod ng kulay ng linya ang tier ng rating.",
+  "tanks-shaping-s-rating": "Mga tangke na humuhubog sa rating ni {nickname}",
+  "tanks": "Mga tangke ni {nickname}",
+  "stats": "Mga istatistika ni {nickname} para sa {strongholdLabel}"
+}

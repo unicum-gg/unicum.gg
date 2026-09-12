@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "clear-the-field": "I-clear ang {label}",
+  "credited-on-the-clan-s": "May kredito sa sariling pahina ng klano.",
+  "none": "Wala",
+  "optional": "(optional)",
+  "pick-the-vehicle": "Piliin ang sasakyan",
+  "search-for-a-clan": "Maghanap ng klano",
+  "search-for-a-vehicle": "Maghanap ng sasakyan",
+  "search-tank": "Maghanap ng tangke...",
+  "tank": "Tangke",
+  "tank-hint-optional": "Ang isang taktika ay kabilang sa mapa nito, kaya sulit lamang pangalanan ito kapag tungkol din sa sasakyan ang video.",
+  "tank-hint-required": "Hinahanap ang isang random na labanan batay sa sasakyang pinaglaruan dito."
+}

@@ -1,0 +1,8 @@
+{
+  "busiest": "Drukst: {when} ({players})",
+  "not-enough-recorded-yet-to": "Er zijn nog niet genoeg gegevens verzameld om een weekritme te tonen. De heatmap wordt aangevuld naarmate de metingen elk uur van de week bestrijken.",
+  "not-sampled-yet": "Nog niet gemeten",
+  "players-on-average": "Gemiddeld {players} spelers",
+  "quietest": ", rustigst: {when} ({players})",
+  "your-local-time": "Je lokale tijd"
+}

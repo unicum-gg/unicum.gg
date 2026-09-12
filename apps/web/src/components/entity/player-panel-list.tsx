@@ -1,5 +1,8 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
+
+import { Interpolate } from "@/components/interpolate";
 import type { ReactNode } from "react";
 import {
   PANEL_ROW_CLASS,
@@ -58,6 +61,7 @@ export function PlayerPanelList({
   region: Region;
   entries: PlayerPanelEntry[];
 }) {
+  const { t } = useTranslation("components/entity/player-panel-list");
   return (
     <div className="grid gap-px border-t border-fd-border bg-fd-border lg:grid-cols-3">
       {columnsOf(entries, COLUMNS).map((column, i) => (
@@ -73,7 +77,10 @@ export function PlayerPanelList({
                   />
                   {entry.lastAt && (
                     <div className="text-xs text-fd-muted-foreground">
-                      Last <RelativeTime date={entry.lastAt} />
+                      <Interpolate
+                        template={t("last")}
+                        values={{ when: <RelativeTime date={entry.lastAt} /> }}
+                      />
                     </div>
                   )}
                 </div>

@@ -1,0 +1,12 @@
+{
+  "before-update": "{version} жаңартуына дейін",
+  "common-test": "Жалпы Тест",
+  "in-common-test-not-released": "Жалпы Тестте, әлі шығарылған жоқ",
+  "introduced": "Кірістірілген",
+  "lifecycle": "Өмір циклі",
+  "n-buffed": "{count} күшейтілді",
+  "n-nerfed": "{count} әлсіретілді",
+  "not-released-wargaming-can-still": "Шығарылған жоқ. Жаңарту шыққанға дейін Wargaming мұның кез келгенін өзгерте немесе алып тастай алады.",
+  "status": "Статус",
+  "update": "Жаңарту {version}"
+}

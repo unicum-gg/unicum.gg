@@ -1,0 +1,162 @@
+{
+  "columns-label": "Spalten",
+  "groups": {
+    "firepower": "Feuerkraft",
+    "gun-handling": "Waffenhandhabung",
+    "mobility": "Beweglichkeit",
+    "survivability": "Überlebensfähigkeit",
+    "other": "Sonstiges"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Schaden pro Minute"
+    },
+    "damage": {
+      "label": "Schaden",
+      "tip": "Alpha-Schaden"
+    },
+    "moduleDamage": {
+      "label": "Modulschaden"
+    },
+    "splashRadius": {
+      "label": "Explosionsradius"
+    },
+    "reload": {
+      "label": "Nachladen",
+      "tip": "Nachladen (vollständiges Magazin bei Autoladern)"
+    },
+    "rof": {
+      "label": "Feuerrate",
+      "tip": "Schuss pro Minute"
+    },
+    "intraClipReload": {
+      "label": "Intra-Clip Nachladen",
+      "tip": "Zeit zwischen Schüssen in einem Magazin (Autolader)"
+    },
+    "penetration": {
+      "label": "Durchschlagskraft",
+      "tip": "Durchschlagskraft (mm), Standardgranate"
+    },
+    "caliber": {
+      "label": "Kaliber",
+      "tip": "Kaliber der Granate (mm)"
+    },
+    "shellVelocity": {
+      "label": "Granatengeschwindigkeit",
+      "tip": "Geschwindigkeit der Geschosse (m/s)"
+    },
+    "accuracy": {
+      "label": "Genauigkeit",
+      "tip": "Streuung auf 100 m (niedriger ist besser)"
+    },
+    "aimTime": {
+      "label": "Zielzeit"
+    },
+    "dispMoving": {
+      "label": "Streuung in Bewegung",
+      "tip": "Streuungsfaktor während der Fahrt"
+    },
+    "dispTankTraverse": {
+      "label": "Streuung bei Wannendrehung"
+    },
+    "dispTurretTraverse": {
+      "label": "Streuung bei Turmdrehung"
+    },
+    "dispAfterShot": {
+      "label": "Streuung nach dem Schießen"
+    },
+    "dispWhileDamaged": {
+      "label": "Streuung bei Beschädigung"
+    },
+    "gunArc": {
+      "label": "Geschützrichtbereich",
+      "tip": "Horizontaler Richtbereich des Geschützes"
+    },
+    "depression": {
+      "label": "Geschützneigung / Geschützanhebung",
+      "tip": "Waffenabsenkung / Waffenanhebung"
+    },
+    "speed": {
+      "label": "Geschwindigkeit (vorwärts / rückwärts)",
+      "tip": "Höchstgeschwindigkeit vorwärts / rückwärts (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Wannenwendung"
+    },
+    "turretTraverse": {
+      "label": "Turmdrehung"
+    },
+    "enginePower": {
+      "label": "Leistung",
+      "tip": "Motorleistung (PS)"
+    },
+    "powerWeight": {
+      "label": "Leistungsgewicht",
+      "tip": "PS pro Tonne"
+    },
+    "terrainHard": {
+      "label": "Harter Untergrund",
+      "tip": "Terrainresistenz auf hartem Untergrund (niedriger ist besser)"
+    },
+    "terrainMedium": {
+      "label": "Senior Terrain"
+    },
+    "terrainSoft": {
+      "label": "Weicher Untergrund"
+    },
+    "health": {
+      "label": "Strukturpunkte",
+      "tip": "Hitpoints"
+    },
+    "engineHealth": {
+      "label": "Motorstrukturpunkte"
+    },
+    "engineFireChance": {
+      "label": "Motorbrandchance"
+    },
+    "hullArmorFront": {
+      "label": "Wannenpanzerung (Front)",
+      "tip": "Wannenpanzerung vorn (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Turmpanzerung (Front)",
+      "tip": "Turmpanzerung vorn (mm)"
+    },
+    "trackArmor": {
+      "label": "Kettenpanzerung"
+    },
+    "trackHealth": {
+      "label": "Kettenstrukturpunkte"
+    },
+    "trackRepairTime": {
+      "label": "Republikationszeit der Ketten"
+    },
+    "ammoRackHealth": {
+      "label": "Strukturpunkte des Munitionslagers"
+    },
+    "weight": {
+      "label": "Gewicht"
+    },
+    "viewRange": {
+      "label": "Sichtweite",
+      "tip": "Sichtbereich (m)"
+    },
+    "radioRange": {
+      "label": "Funkgerät Reichweite",
+      "tip": "Signalreichweite (m)"
+    },
+    "camoStill": {
+      "label": "Tarnwert im Stand"
+    },
+    "camoMoving": {
+      "label": "Tarnwert in Bewegung"
+    },
+    "camoStillFiring": {
+      "label": "Tarnwert im Stand nach dem Schießen"
+    },
+    "camoMovingFiring": {
+      "label": "Tarnwert in Bewegung nach dem Schießen"
+    }
+  }
+}

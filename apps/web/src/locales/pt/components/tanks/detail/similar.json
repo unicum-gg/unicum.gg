@@ -1,0 +1,11 @@
+{
+  "compare": "Comparar com os {count} mais próximos",
+  "match": "batalha",
+  "subtitle": "Mesma posição entre os veículos do respetivo nível",
+  "verdict": {
+    "overall": "Semelhante no geral",
+    "closest": "Mais próximo em {axes}",
+    "closest-furthest": "Mais próximo em {axes}, mais distante em {apart}",
+    "and": " e "
+  }
+}

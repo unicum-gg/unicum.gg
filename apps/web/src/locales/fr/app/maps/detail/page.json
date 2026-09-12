@@ -1,0 +1,5 @@
+{
+  "title": "Carte World of Tanks : {map} ({region})",
+  "description": "Carte de World of Tanks : {map} ({width} × {height} m).",
+  "description-modes": "Carte de World of Tanks : {map} ({width} × {height} m), disponible dans les modes {modes}."
+}

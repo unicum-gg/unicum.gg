@@ -1,0 +1,6 @@
+{
+  "day": "Rangsor az elmúlt 24 órában elért {metric} alapján (min. 20 csata).",
+  "week": "Rangsor az elmúlt 7 napban elért {metric} alapján (min. 140 csata).",
+  "month": "Rangsor az elmúlt 30 napban elért {metric} alapján (min. 600 csata).",
+  "overall": "Rangsor az összesített {metric} alapján (min. 20 000 csata)."
+}

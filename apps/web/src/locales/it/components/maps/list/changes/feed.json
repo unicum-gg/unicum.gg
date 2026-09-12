@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, one {# mappa} other {# mappe}}",
+  "no-map-changes-have-been": "Non è stata ancora registrata alcuna modifica alle mappe. Man mano che Wargaming le rielabora, qui verranno mostrate le modifiche apportate da ogni aggiornamento.",
+  "update": "Aggiorna {version}"
+}

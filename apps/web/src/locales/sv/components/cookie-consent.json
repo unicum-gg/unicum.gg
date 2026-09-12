@@ -1,0 +1,16 @@
+{
+  "title": "Vi använder kakor",
+  "description": "Vi använder kakor för att förbättra din surfupplevelse och analysera trafiken på webbplatsen.",
+  "functional": {
+    "title": "Funktionella",
+    "description": "Krävs för att webbplatsen ska fungera korrekt (inställningar, val av region)."
+  },
+  "analytics": {
+    "title": "Besöksmätning",
+    "description": "Google Analytics placerar kakor som hjälper oss att förstå hur webbplatsen används. Anonym analys utan kakor (Umami) är alltid aktiverad."
+  },
+  "save": "Spara mina val",
+  "decline": "Avvisa alla",
+  "customize": "Anpassa",
+  "accept": "Acceptera alla"
+}

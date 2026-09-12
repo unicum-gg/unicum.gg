@@ -1,0 +1,68 @@
+{
+  "top-players": {
+    "day": {
+      "title": "En iyi oyuncular · Son 24 saat"
+    },
+    "week": {
+      "title": "En iyi oyuncular · Son 7 gün"
+    }
+  },
+  "rating-scale": {
+    "title": "Derecelendirme ölçeği"
+  },
+  "community": {
+    "title": "Topluluğa katılın",
+    "heading": "WoT oyuncularıyla bağlantı kurun",
+    "description": "WoT istatistiklerini konuşmak, özellik istemek ve hataları bildirmek için Discord’umuza katılın. Ya da kodu incelemek ve katkıda bulunmak için GitHub’a göz atın.",
+    "discord": "Discord’a katılın",
+    "github": "GitHub’da görüntüle"
+  },
+  "features": {
+    "title": "Burada neler bulacaksınız",
+    "profiles": {
+      "title": "Oyuncu profilleri",
+      "description": "Genel ve 24 saatlik / 7 günlük / 30 günlük değişimlerle, WN7, WN8, WNX ve Kişisel Derecelendirme ile ayrıntılı istatistikler."
+    },
+    "clans": {
+      "title": "Klan sayfaları",
+      "description": "Derecelendirmeleri, son etkinlik akışı, açıklaması ve klan meta verileri bulunan üye tablosu."
+    },
+    "history": {
+      "title": "Klan geçmişi",
+      "description": "Bir oyuncunun bulunduğu her klanın roller ve tarihlerle birlikte tam zaman çizelgesi."
+    },
+    "live": {
+      "title": "Canlı güncellemeler",
+      "description": "Takip edilen oyuncular, anlık görüntü sistemimiz aracılığıyla her 24 saatte bir arka planda yenilenir."
+    },
+    "leaderboards": {
+      "title": "Liderlik tabloları",
+      "description": "WNX’e göre hesaplanan en iyi oyuncular (24 saat, 7 gün, tüm zamanlar) ve en iyi klanlar."
+    },
+    "open-source": {
+      "title": "Açık kaynak · AGPL",
+      "description": "Kod GitHub’da. İnceleyin, çatallayın, katkıda bulunun. Reklam yok, yalnızca isteğe bağlı analizler."
+    }
+  },
+  "quick-start": {
+    "title": "Hızlı başlangıç",
+    "search": {
+      "title": "🔍 Oyuncu veya klan ara",
+      "description": "Aramayı açmak için {shortcut} tuşuna basın, ardından bir kullanıcı adı veya klan etiketi yazın."
+    },
+    "region": {
+      "title": "🌍 Bölgeyi değiştir",
+      "description": "Navbar’daki {selector} seçiciyi kullanın. Liderlik tabloları buna göre güncellenir."
+    },
+    "leaderboards": {
+      "title": "🏆 Liderlik tablolarına göz at",
+      "description": "Anlık görüntülerimizden hesaplanan ortalama WNX’e göre sıralanmış en iyi oyuncular (24 saat, 7 gün, tüm zamanlar) ve en iyi klanlar."
+    },
+    "colors": {
+      "title": "📊 Renkleri okuyun",
+      "description": "WR, WN7, WN8 ve WNX aynı seviye renklerini paylaşır (turuncu → yeşil → camgöbeği → mor). Yukarıdaki ölçeğe bakın."
+    }
+  },
+  "ctrl": "Ctrl",
+  "eu-na-asia": "EU / NA / ASYA"
+}

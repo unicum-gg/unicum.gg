@@ -1,0 +1,9 @@
+{
+  "all": "Mind",
+  "camouflage-map": "{camouflage} térkép",
+  "modes": "{count, plural, one {# játékmód} other {# játékmódok}}",
+  "no-maps-match-your-filters": "Egyetlen térkép sem felel meg a szűrőknek.",
+  "search": "Keresés {count} térkép között",
+  "search-label": "Keresés Pályák",
+  "special-map": "Speciális térkép"
+}

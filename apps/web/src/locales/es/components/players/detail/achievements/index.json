@@ -1,0 +1,12 @@
+{
+  "achievements": "Logros de {nickname}",
+  "filter-all": "Todos",
+  "filter-both": "Ambos",
+  "filter-earned": "Obtenidos",
+  "filter-missing": "Faltantes",
+  "filter-obtainable": "Obtenibles",
+  "filter-retired": "Retirados",
+  "no-achievement-matches-these-filters": "Ningún logro coincide con estos filtros.",
+  "search-achievements": "Buscar logros",
+  "search-among-n-achievements": "Buscar entre {count} logros"
+}

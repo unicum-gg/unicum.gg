@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "Clan World of Tanks [{tag}] {name} ({region}), {members} membres",
+    "description": "Clan {name} [{tag}] sur {region} : {members} membres, tableau complet des membres avec les cotes WN8 et WNX, activité récente des arrivées et départs et historique du clan."
+  },
+  "stronghold": {
+    "title": "Statistiques du bastion : [{tag}] {name} ({region})",
+    "description": "Performances du clan {name} [{tag}] en bastion sur {region} : cotes en escarmouches et incursions, batailles et taux de victoires de chaque membre."
+  },
+  "clan-wars": {
+    "title": "Statistiques des guerres de clans : [{tag}] {name} ({region})",
+    "description": "Performances du clan {name} [{tag}] dans les guerres de clans sur {region} : cotes, batailles et taux de victoires de chaque membre pour toutes les campagnes de la carte globale."
+  },
+  "tanks": {
+    "title": "Chars du clan : [{tag}] {name} ({region}), les véhicules du clan",
+    "description": "Tous les véhicules joués sur {region} par les membres du clan {name} [{tag}], avec les batailles, le taux de victoires et les dégâts moyens agrégés pour l’ensemble du clan."
+  },
+  "manage": {
+    "title": "Réserves du bastion : [{tag}] {name} ({region})",
+    "description": "Activez et planifiez les réserves de bastion du clan {name} [{tag}]. Réservé aux officiers."
+  },
+  "missing": {
+    "description": "Clan World of Tanks [{tag}] sur {region} : tableau des membres avec les cotes WN8/WNX, activité des arrivées et départs, batailles récentes et historique complet du clan."
+  }
+}

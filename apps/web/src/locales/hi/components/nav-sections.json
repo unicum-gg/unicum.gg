@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "खिलाड़ी",
+    "clans": "क्लान्स",
+    "tanks": "टैंक",
+    "maps": "मैप्स",
+    "tournaments": "टूर्नामेंट्स",
+    "servers": "सर्वर"
+  },
+  "links": {
+    "top-players": {
+      "label": "शीर्ष खिलाड़ी",
+      "description": "अब तक का खिलाड़ी लीडरबोर्ड"
+    },
+    "players-onslaught": {
+      "description": "रैंक्ड ऑन्स्लॉट सीढ़ी"
+    },
+    "players-steel-hunter": {
+      "description": "बैटल रॉयल लीडरबोर्ड"
+    },
+    "top-clans": {
+      "label": "शीर्ष क्लान्स",
+      "description": "अब तक का क्लान लीडरबोर्ड"
+    },
+    "stronghold": {
+      "description": "झड़पों की रैंकिंग"
+    },
+    "advances": {
+      "description": "टियर X 15v15 रैंकिंग"
+    },
+    "tank-performances": {
+      "label": "प्रदर्शन",
+      "description": "हर टैंक की जीत दर और क्षति"
+    },
+    "tank-specs": {
+      "label": "विशेषताएँ",
+      "description": "हर टैंक के आँकड़े"
+    },
+    "tank-economics": {
+      "label": "अर्थशास्त्र",
+      "description": "क्रेडिट और XP कमाने वाले टैंक"
+    },
+    "tank-moe": {
+      "description": "हर निशान के लिए क्षति"
+    },
+    "tank-mom": {
+      "description": "मास्टरी बैज सीमाएँ"
+    },
+    "tank-changes": {
+      "label": "बदलाव",
+      "description": "अपडेट के अनुसार बफ़ और nerf"
+    },
+    "tank-community": {
+      "label": "समुदाय रेटिंग्स",
+      "description": "उन्हें रखने वाले खिलाड़ियों द्वारा रेटिंग"
+    },
+    "tank-videos": {
+      "label": "वीडियो",
+      "description": "कम्युनिटी गेमप्ले"
+    },
+    "all-tournaments": {
+      "label": "टूर्नामेंट्स",
+      "description": "हर टूर्नामेंट, खुले और समाप्त"
+    },
+    "all-maps": {
+      "label": "सभी मैप्स",
+      "description": "गेम का हर मानचित्र"
+    },
+    "map-changes": {
+      "label": "बदलाव",
+      "description": "अपडेट के अनुसार मानचित्र बदलाव"
+    },
+    "battle-type": {
+      "description": "{type} मैप्स"
+    },
+    "servers-population": {
+      "label": "सर्वर जनसंख्या",
+      "description": "अभी और समय के साथ ऑनलाइन खिलाड़ी"
+    }
+  }
+}

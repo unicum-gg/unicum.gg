@@ -1,0 +1,18 @@
+{
+  "caught-up": "Vše je plně pokryto, děkujeme. Vše navíc jde na zvýšení kapacity a nové funkce.",
+  "covered-label": "Pokryto",
+  "covered-sentence": "Podporovatelé zatím pokryli {received} z vynaložených {spent}.",
+  "days-out-of-pocket": "{days} dní hrazených z vlastní kapsy",
+  "from-supporter-one": "Od {count} podporovatele",
+  "from-supporters": "Od {count} podporovatelů",
+  "gap-growing": "Dalších {amount}/měs. zabrání prohlubování schodku.",
+  "goal": "cíl {amount}",
+  "of-that-total": "z této celkové částky",
+  "pledges-cover": "Přislíbené příspěvky nyní pokrývají měsíční náklady.",
+  "raised-amount": "{amount} vybráno",
+  "raised-label": "Vybráno",
+  "run-at-a-loss": "Od {since} funguje {name} se ztrátou.",
+  "run-rate": "Měsíční bilance: přislíbeno {pledged}/měs. oproti provozním nákladům {cost}/měs.",
+  "spent-since-launch": "Vynaloženo od spuštění",
+  "to-catch-up": "K úplnému dorovnání chybí {amount}."
+}

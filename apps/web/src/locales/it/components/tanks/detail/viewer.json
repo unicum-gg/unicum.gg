@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visiva",
+    "collision": "Collisione",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Centra il veicolo",
+    "off": "Sposta di nuovo il veicolo dal centro"
+  },
+  "hull-down": {
+    "on": "Torretta rialzata",
+    "off": "Metti il veicolo in piano"
+  },
+  "tracks": {
+    "on": "Metti in movimento i cingoli",
+    "off": "Ferma i cingoli"
+  },
+  "textures": {
+    "on": "Texture ad alta definizione",
+    "off": "Texture standard"
+  },
+  "reset": "Ripristina la visuale",
+  "style": "Scegli uno stile",
+  "style-worn": "Stile: {name}",
+  "search-styles": "Trova stili",
+  "colours": "Cosa significano i colori",
+  "cinematic": {
+    "off": "Telecamera cinematografica: disattivata",
+    "auto": "Telecamera cinematografica: in caso di inattività",
+    "on": "Telecamera cinematografica: sempre attiva"
+  },
+  "open-tank": "Apri un altro carro armato",
+  "open-tank-placeholder": "Apri carro...",
+  "more-actions": "Altre azioni",
+  "marks-meaning": {
+    "0": "Nessun marchio d’eccellenza",
+    "1": "Un marchio: migliore del 65% dei giocatori con questo carro",
+    "2": "Due marchi: meglio dell’85%",
+    "3": "Tre marchi: meglio del 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Espandi nella finestra",
+      "leave": "Torna alla pagina"
+    },
+    "screen": {
+      "enter": "Passa a schermo intero",
+      "leave": "Esci dallo schermo intero"
+    }
+  },
+  "marks-count": {
+    "0": "Nessun marchio d’eccellenza",
+    "one": "1 marchio d’eccellenza",
+    "other": "{count} marchi d’eccellenza"
+  },
+  "compare-tank": "Confronta con un altro carro armato",
+  "compare-tank-placeholder": "Confronta con...",
+  "view-tooltips": {
+    "visual": "Il carro armato come viene visualizzato nel gioco",
+    "collision": "Quanto è spessa ogni piastra",
+    "live": "Cosa farebbe il proiettile selezionato"
+  },
+  "cinematic-tooltips": {
+    "off": "Telecamera cinematografica: disattivata, la visuale resta ferma",
+    "auto": "Telecamera cinematografica: si attiva dopo 30 secondi di inattività",
+    "on": "Telecamera cinematografica: sempre, non appena lasci la presa"
+  }
+}

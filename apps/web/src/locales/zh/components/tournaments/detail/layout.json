@@ -1,0 +1,12 @@
+{
+  "final": "决赛",
+  "grand-final": "总决赛",
+  "loser-bracket-final": "败者组决赛",
+  "loser-round": "败者组第 {round} 轮",
+  "quarter-finals": "四分之一决赛",
+  "round-of": "{teams} 强赛",
+  "semi-finals": "半决赛",
+  "third-place": "第三名争夺赛",
+  "winner-bracket-final": "胜者组决赛",
+  "winner-round": "胜者组第 {round} 轮"
+}

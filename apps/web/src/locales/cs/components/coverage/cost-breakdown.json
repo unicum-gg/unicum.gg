@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "Účtováno v eurech, převedeno na {currency} dnešním kurzem.",
+  "cost-breakdown": "Rozpis nákladů",
+  "estimated-annual-cost": "Odhadovaná roční cena",
+  "fixed-month-bill-no-surprises": "Pevná částka {totalAnnualEur}/měsíc bez překvapení: jeden pronajatý server a žádné služby SaaS třetích stran v datové cestě. Zvýší se jen tehdy, když server přestane stačit (větší propustnost připojení k Wargaming znamená více výstupních IP adres).",
+  "free": "zdarma",
+  "one-off-spend": "Jednorázový výdaj",
+  "paid-once-so-it-is": "Zaplaceno jednorázově, takže tato částka není součástí výše uvedeného měsíčního účtu. Stále se však započítává do dosavadních nákladů projektu.",
+  "previously": "Dříve"
+}

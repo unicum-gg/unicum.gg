@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Breedte van het speelgebied",
+    "height": "Hoogte van het speelgebied",
+    "round-length": "Gevechtstimer",
+    "team-size": "Teamgrootte",
+    "camouflage": "Seizoen",
+    "presence": "In het spel",
+    "variant-version": "Versie {type}",
+    "play-area": "Speelgebied",
+    "bases-team1": "Bondgenootbases",
+    "bases-team2": "Vijandbases",
+    "spawns-team1": "Bondgenootspawns",
+    "spawns-team2": "Vijandspawns",
+    "control-point": "Controlepunt",
+    "artillery-headquarters": "Artilleriehoofdkwartier",
+    "comms-centers": "Communicatiecentra",
+    "observation-posts": "Observatieposten",
+    "points-of-interest": "Belangrijke locaties"
+  },
+  "summary": {
+    "added": "{name} toegevoegd",
+    "removed": "{name} verwijderd",
+    "added-to-game": "Toegevoegd aan het spel",
+    "removed-from-game": "Verwijderd uit het spel",
+    "added-on-test": "Toegevoegd op de testclient",
+    "removed-on-test": "Verwijderd van de testclient",
+    "mode-added": "Speltype {name} toegevoegd",
+    "mode-removed": "Speltype {name} verwijderd",
+    "now-played-in": "Nu gespeeld in {name}",
+    "no-longer-played-in": "Niet langer gespeeld in {name}",
+    "event-added": "{name} kan nu tijdens een gevecht plaatsvinden",
+    "event-removed": "{name} vindt niet langer plaats",
+    "moved": "Verplaatsing van {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

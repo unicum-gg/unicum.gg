@@ -1,0 +1,10 @@
+{
+  "empty": "Још нема видеа",
+  "see-all": "Vidi sve →",
+  "see-all-count": "Погледај све ({count}) →",
+  "watch-on-youtube": "Гледај на YouTube-у",
+  "play": "Пусти {title}",
+  "log-in": "Пријави се да предложиш видео",
+  "dmg": "dmg",
+  "no-community-video-for-the": "Још нема видеа заједнице за тенк {tankName}. Предложи видео и појавиће се овде када га модератор прегледа."
+}

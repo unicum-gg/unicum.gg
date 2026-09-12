@@ -1,0 +1,13 @@
+{
+  "assists": "Asistencije",
+  "close": "Zatvori",
+  "damage": "Šteta",
+  "in-the-queue": "U redu je i pojaviće se na ovoj kartici kada ga moderator pregleda.",
+  "optional": "(opcionalno)",
+  "paste-a-youtube-link": "Zalijepite YouTube vezu, zatim postavite tačan trenutak početka bitke. Svako ko je otvori stiže do te sekunde, pa se prijedlog s netačnom vremenskom oznakom odbija tokom recenzije.",
+  "sending": "Slanje…",
+  "suggest": "Predloži",
+  "suggest-a-video": "Predloži video",
+  "suggest-another": "Predloži drugo",
+  "suggestion-sent": "Prijedlog poslan"
+}

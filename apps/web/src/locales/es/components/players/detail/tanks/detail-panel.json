@@ -1,0 +1,8 @@
+{
+  "average-score-per-battle": "Promedio de puntuación por batalla",
+  "general-parameters": "Parámetros generales",
+  "metric-progression": "Progresión de {metric}",
+  "not-enough-history-on-this": "Aún no hay suficiente historial de este tanque. Se necesitan al menos dos instantáneas de los últimos 90 días para trazar una línea.",
+  "record-score": "Récord de puntuación",
+  "updated": "Actualizado"
+}

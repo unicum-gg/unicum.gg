@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Az összeállítás hivatkozása másolva",
+  "copy-build-link": "Összeállítás hivatkozásának másolása",
+  "could-not-copy-link": "Nem sikerült másolni a hivatkozást",
+  "include-setup": "Beállítások belefoglalása",
+  "share-build": "Megosztás build",
+  "share-tank": "{tank} megosztása",
+  "share-text": "Nézd meg ezt a(z) {tank} összeállítást a(z) {app} oldalon"
+}

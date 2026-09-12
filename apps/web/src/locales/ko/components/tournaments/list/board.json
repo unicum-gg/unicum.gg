@@ -1,0 +1,14 @@
+{
+  "date": "날짜",
+  "featured-tournament": "특집 토너먼트",
+  "format": "형식",
+  "mode": "모드",
+  "no-tournament-matches-the-current": "현재 필터와 일치하는 토너먼트가 없습니다.",
+  "nothing-here-right-now-wargaming": "현재 표시할 내용이 없습니다. Wargaming은 매일 새로운 토너먼트를 열기 때문에 곧 자동으로 다시 표시됩니다.",
+  "prize": "상",
+  "region-tournaments": "{region} 토너먼트 ({count})",
+  "status": "상태",
+  "teams": "팀들",
+  "tier": "단계",
+  "tournament": "토너먼트"
+}

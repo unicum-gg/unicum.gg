@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import {
   Panel,
   PanelContent,
@@ -7,6 +8,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import { useTranslation } from "@/hooks/use-translation";
 import { PlayerTankDetailPanel } from "@/components/players/detail/tanks/detail-panel";
 import { PlayerTanksTable } from "@/components/players/detail/tanks/table";
 import { RateYourTanksPrompt } from "@/components/players/detail/tanks/rate-prompt";
@@ -18,7 +20,7 @@ import type {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 // Its own section (not part of Overall) so the ~700-row table isn't
 // server-rendered on the default page load, which was the dominant SSR cost.
@@ -39,6 +41,8 @@ export function TanksTab({
    * rendered, so it is in the HTML a crawler and the `.md` twin read. */
   tankDetail?: PlayerTankRecord | null;
 }) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/detail/tanks/index");
   return (
     <>
       <PanelSeparator />
@@ -52,8 +56,12 @@ export function TanksTab({
               200vw wide, so beside the record it ran across the panel too. */}
           <PanelHeader screenLines={false} className="border-b border-fd-border">
             <PanelTitle>
-              {nickname}&apos;s tanks
-              {loading ? "" : ` (${intFmt.format(vehicles.length)})`}
+              {loading
+                ? t("title", { nickname })
+                : t("title-count", {
+                    nickname,
+                    count: num(INT_FORMAT).format(vehicles.length),
+                  })}
             </PanelTitle>
           </PanelHeader>
           <PanelContent className="p-0">

@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Za ovaj klan još nema podataka o tenkovima.",
+  "no-tanks-match-these-filters": "Nijedan tenk ne odgovara ovim filtrima.",
+  "nation": "Nacija",
+  "type": "Tip",
+  "tier": "Razina",
+  "name": "Ime",
+  "members": "Članovi",
+  "battles": "Bitke",
+  "avg-damage": "Prosječna šteta",
+  "avg-xp": "Prosječni XP",
+  "wr": "WR"
+}

@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Egy cella az adott sáv győzelmi aránya az adott szinten lejátszott csatái alapján, minden olyan járművet figyelembe véve, amellyel a játékos legalább {minBattles} csatát játszott. Így azt mutatja, ahogy azokat a szinteket játsszák, akik játszanak rajtuk. A(z) {TIERWINRATETHINCELL} csatánál kevesebbre épülő cellák halványan jelennek meg, mert nem csak a képesség miatt változnak. A színek ugyanazokat a győzelmiarány-sávokat használják, mint a webhely minden más része.",
+  "cell-no-sample": "{where}, nincs minta",
+  "cell-winrate": "{where}, {winrate} győzelmi arány {battles} csata alapján",
+  "metric-band": "{metric} sáv",
+  "nothing-recorded": "Még nincs rögzített adat a(z) {metric} ellenében. A rácsot éjszakánként újraépítjük.",
+  "over-battles-from-accounts": "{winrate} {battles} csata alapján, {players} fiókból",
+  "over-n-battles": "{battles} csata alapján",
+  "what-players-win-by-tier": "Mit nyernek a(z) {label} játékosai szintenként"
+}

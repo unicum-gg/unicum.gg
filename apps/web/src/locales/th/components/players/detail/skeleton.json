@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "สถิติการรบสุ่มของ {nickname}",
+  "progression": "พัฒนาการ {metricLabel} ของ {nickname}",
+  "solid-line-is-overall-matches": "บรรทัดทึบคือ {metricLabel} โดยรวม (ตรงกับคอลัมน์ทั้งหมดด้านบน) และค่อย ๆ เปลี่ยนเมื่อมีการรบใหม่เพิ่มขึ้น บรรทัดประคือ {metricLabel2} ต่อเซสชัน ซึ่งคำนวณจากการรบที่เล่นตั้งแต่ภาพบันทึกครั้งก่อน แสดงช่วงฟอร์มร้อนแรงและตกต่ำ สีของบรรทัดสอดคล้องกับระดับคะแนนประเมิน",
+  "tanks-shaping-s-rating": "รถถังที่กำหนดคะแนนประเมินของ {nickname}",
+  "tanks": "รถถังของ {nickname}",
+  "stats": "สถิติ {strongholdLabel} ของ {nickname}"
+}

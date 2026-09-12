@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Aleatório",
+    "battle_royale": "Caçador de Aço",
+    "frontline": "Linha da Frente",
+    "onslaught": "Massacre",
+    "onslaught_night": "{onslaught} Noturno",
+    "grand_battle": "Grande Batalha",
+    "clan_wars": "Guerras de Clãs",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Última Resistência",
+    "arcade": "Arcade",
+    "story_mode": "Modo História",
+    "training": "Treinando"
+  },
+  "player-modes": {
+    "overall": "Batalhas aleatórias",
+    "skirmish": "Escaramuça",
+    "advances": "Avanços",
+    "grand": "Grandes Batalhas",
+    "ranked": "Batalhas Classificadas",
+    "cw-x": "Guerras de Clãs X",
+    "cw-viii": "Guerras de Clãs VIII",
+    "cw-vi": "Guerras de Clãs VI",
+    "steel-hunter": "Caçador de Aço",
+    "onslaught": "Massacre"
+  },
+  "stronghold-tiers": {
+    "advances": "Avanços",
+    "t10": "Escaramuça T10",
+    "t8": "Escaramuça T8",
+    "t6": "Escaramuça T6"
+  },
+  "stronghold-periods": {
+    "24h": "Últimas 24 horas",
+    "7d": "Últimos 7 dias",
+    "30d": "Últimos 30 dias",
+    "overall": "Geral"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Batalhas",
+    "winrate": "Taxa de vitórias"
+  },
+  "clan-boards": {
+    "advances": "Avanços",
+    "t10": "Escaramuça X",
+    "t8": "Escaramuça VIII",
+    "t6": "Escaramuça VI"
+  },
+  "map-modes": {
+    "standard": "Padrão",
+    "encounter": "Encontro",
+    "assault": "Assalto",
+    "attack-defense": "Ataque/Defesa"
+  },
+  "map-camouflage": {
+    "summer": "Verão",
+    "winter": "Inverno",
+    "desert": "Deserto"
+  },
+  "map-poi": {
+    "1": "Quartel-General da Artilharia",
+    "2": "Centro de Comunicações",
+    "3": "Posto de Observação"
+  },
+  "tournament-modes": {
+    "ctf": "Padrão",
+    "domination": "Encontro",
+    "assault2": "Ataque/Defesa",
+    "comp7": "Massacre"
+  },
+  "battle-formats": {
+    "random": "Aleatório",
+    "clan_wars": "Guerras de Clãs",
+    "advances": "Avanços",
+    "skirmish": "Escaramuça",
+    "maneuvers": "Manobras",
+    "onslaught": "Massacre",
+    "tournament": "Torneio"
+  },
+  "battle-results": {
+    "victory": "Vitória",
+    "defeat": "Derrota",
+    "draw": "Empate"
+  },
+  "spawn-directions": {
+    "north": "Norte",
+    "south": "Sul",
+    "east": "Este",
+    "west": "Oeste"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Por vir",
+    "registration_started": "Inscrições abertas",
+    "registration_finished": "Registo fechado",
+    "running": "Em progresso",
+    "finished": "Finalizando",
+    "complete": "Concluída"
+  },
+  "onslaught-tiers": {
+    "legend": "Lenda",
+    "champion": "Campeão",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Pesado",
+    "mediumTank": "Médio",
+    "lightTank": "Leve",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Assalto",
+    "break": "Rutura",
+    "support": "Suporte",
+    "universal": "Versátil",
+    "sniper": "Atirador de Elite",
+    "wheeled": "Com Rodas"
+  },
+  "mastery-badges": {
+    "class3": "3ª Classe",
+    "class2": "2ª Classe",
+    "class1": "1ª Classe",
+    "ace": "Distribuidor Ace"
+  },
+  "clan-modes": {
+    "random": "Batalhas aleatórias",
+    "stronghold": "Fortaleza",
+    "skirmish": "Escaramuça",
+    "clan-wars": "Guerras de Clãs"
+  },
+  "features": {
+    "stronghold": "Fortaleza",
+    "skirmish": "Escaramuça",
+    "marks-of-excellence": "Marcas de Excelência",
+    "marks-of-mastery": "Marcas de Maestria",
+    "personal-rating": "Classificação Pessoal",
+    "world-of-tanks-rating": "Classificação do World of Tanks",
+    "common-test": "Teste Comum",
+    "tournaments": "Torneios"
+  },
+  "marks": {
+    "1": "1 Marcação",
+    "2": "2 Marcas",
+    "3": "3 Marcas",
+    "name": "Marcas de Excelência"
+  }
+}

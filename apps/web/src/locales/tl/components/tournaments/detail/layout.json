@@ -1,0 +1,12 @@
+{
+  "final": "Final",
+  "grand-final": "Grand Final",
+  "loser-bracket-final": "Final ng bracket ng mga natalo",
+  "loser-round": "Round {round} ng mga natalo",
+  "quarter-finals": "Quarter-finals",
+  "round-of": "Round ng {teams}",
+  "semi-finals": "Semi-finals",
+  "third-place": "Ikatlong lugar",
+  "winner-bracket-final": "Final ng bracket ng mga nanalo",
+  "winner-round": "Round {round} ng mga nanalo"
+}

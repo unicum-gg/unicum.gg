@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
 import { Suspense, useEffect, useRef, useState } from "react";
 
 // A thin global progress bar pinned to the top of the viewport, animating while

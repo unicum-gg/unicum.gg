@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Vyberte zálohu na zobrazenie náhľadu harmonogramu.",
+  "schedule": "V aktívne dni sa aktivuje v časoch {times} (každá aktivácia trvá {hours} h) a pokrýva obdobie {window}, keď je dosiahnutý minimálny počet hráčov online."
+}

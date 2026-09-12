@@ -1,5 +1,10 @@
 "use client";
 
+import type { NumberFormatter } from "@/lib/format";
+
+import { useFormat } from "@/hooks/use-format";
+import { statLabel } from "@/components/stat-label";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Table,
   TableBody,
@@ -20,32 +25,34 @@ import { StrongholdPeriod, computeHR, computeHRB, hrbColor, hrColor, winrateColo
 // (top-5 placement, ~41% median) via the table's `winrateColorFn` prop.
 export type WinrateColorFn = (wr: number) => RatingColor;
 
-const integerFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const decimalFmt = new Intl.NumberFormat("en-US", {
+const INTEGER_FORMAT = { maximumFractionDigits: 0 } as const;
+const DECIMAL_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const percentFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PERCENT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 type Cell = { primary: string; secondary?: string; color?: RatingColor };
 
 const EMPTY_CELL: Cell = { primary: "—" };
 
-function pctOrDash(n: number, d: number): string {
-  return d <= 0 ? "—" : percentFmt.format(n / d);
+function pctOrDash(num: NumberFormatter, n: number, d: number): string {
+  return d <= 0 ? "—" : num(PERCENT_FORMAT).format(n / d);
 }
 
-function avgOrDash(n: number, d: number): string {
-  return d <= 0 ? "—" : decimalFmt.format(n / d);
+function avgOrDash(num: NumberFormatter, n: number, d: number): string {
+  return d <= 0 ? "—" : num(DECIMAL_FORMAT).format(n / d);
 }
 
 export type RowDef = {
   label: string;
-  render: (s: StrongholdStats) => Cell;
+  /** Takes the reader's number formatting: a row definition is data at module
+   * scope and cannot read a hook. */
+  render: (s: StrongholdStats, num: NumberFormatter) => Cell;
 };
 
 // Steel Hunter only: the two Hunter ratings, colored like the leaderboard's
@@ -60,7 +67,7 @@ function hunterRow(
 ): RowDef {
   return {
     label,
-    render: (s) => {
+    render: (s, num) => {
       const value = compute({
         battles: s.battles,
         wins: s.wins,
@@ -68,7 +75,7 @@ function hunterRow(
       });
       return value === null
         ? EMPTY_CELL
-        : { primary: integerFmt.format(value), color: color(value) };
+        : { primary: num(INTEGER_FORMAT).format(value), color: color(value) };
     },
   };
 }
@@ -85,81 +92,81 @@ function buildRowDefs(wrColor: WinrateColorFn): RowDef[] {
   return [
   {
     label: "Battles",
-    render: (s) => ({ primary: integerFmt.format(s.battles) }),
+    render: (s, num) => ({ primary: num(INTEGER_FORMAT).format(s.battles) }),
   },
   {
     label: "Wins",
-    render: (s) => ({
-      primary: integerFmt.format(s.wins),
-      secondary: pctOrDash(s.wins, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.wins),
+      secondary: pctOrDash(num, s.wins, s.battles),
       color: s.battles > 0 ? wrColor(s.wins / s.battles) : undefined,
     }),
   },
   {
     label: "Losses",
-    render: (s) => ({
-      primary: integerFmt.format(s.losses),
-      secondary: pctOrDash(s.losses, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.losses),
+      secondary: pctOrDash(num, s.losses, s.battles),
     }),
   },
   {
     label: "Draws",
-    render: (s) => ({
-      primary: integerFmt.format(s.draws),
-      secondary: pctOrDash(s.draws, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.draws),
+      secondary: pctOrDash(num, s.draws, s.battles),
     }),
   },
   {
     label: "Battles survived",
-    render: (s) => ({
-      primary: integerFmt.format(s.survivedBattles),
-      secondary: pctOrDash(s.survivedBattles, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.survivedBattles),
+      secondary: pctOrDash(num, s.survivedBattles, s.battles),
     }),
   },
   {
     label: "Tanks destroyed",
-    render: (s) => ({
-      primary: integerFmt.format(s.frags),
-      secondary: avgOrDash(s.frags, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.frags),
+      secondary: avgOrDash(num, s.frags, s.battles),
     }),
   },
   {
     label: "Destruction ratio",
-    render: (s) => ({
-      primary: avgOrDash(s.frags, s.battles - s.survivedBattles),
+    render: (s, num) => ({
+      primary: avgOrDash(num, s.frags, s.battles - s.survivedBattles),
     }),
   },
   {
     label: "Tanks spotted",
-    render: (s) => ({
-      primary: integerFmt.format(s.spotted),
-      secondary: avgOrDash(s.spotted, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.spotted),
+      secondary: avgOrDash(num, s.spotted, s.battles),
     }),
   },
   {
     label: "Damages",
-    render: (s) => ({
-      primary: avgOrDash(s.damageDealt, s.battles),
+    render: (s, num) => ({
+      primary: avgOrDash(num, s.damageDealt, s.battles),
     }),
   },
   {
     label: "Base capture",
-    render: (s) => ({
-      primary: integerFmt.format(s.capturePoints),
-      secondary: avgOrDash(s.capturePoints, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.capturePoints),
+      secondary: avgOrDash(num, s.capturePoints, s.battles),
     }),
   },
   {
     label: "Base defense",
-    render: (s) => ({
-      primary: integerFmt.format(s.droppedCapturePoints),
-      secondary: avgOrDash(s.droppedCapturePoints, s.battles),
+    render: (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.droppedCapturePoints),
+      secondary: avgOrDash(num, s.droppedCapturePoints, s.battles),
     }),
   },
   {
     label: "Experience",
-    render: (s) => ({
-      primary: s.battles > 0 ? decimalFmt.format(s.battleAvgXp) : "—",
+    render: (s, num) => ({
+      primary: s.battles > 0 ? num(DECIMAL_FORMAT).format(s.battleAvgXp) : "—",
     }),
   },
   ];
@@ -240,6 +247,9 @@ export function StrongholdStatsTable(
         winrateColorFn?: WinrateColorFn;
       },
 ) {
+  const { num } = useFormat();
+  const { t } = useTranslation("components/players/detail/overview/stronghold-stats-table");
+  const { t: tStats } = useTranslation("components/stat-labels");
   const loading = "loading" in props;
   // Mode-specific rows (e.g. the Steel Hunter HR) appended to the shared set,
   // so the skeleton and the real table always render the same labels. The win
@@ -273,19 +283,15 @@ export function StrongholdStatsTable(
       </colgroup>
       <TableHeader>
         <TableRow>
-          <TableHead>Stat</TableHead>
+          <TableHead>{t("stat")}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Overall)} colSpan={2}>
-            Total
-          </TableHead>
+            {t("total")}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Day)} colSpan={2}>
-            Last 24h
-          </TableHead>
+            {t("last-24h")}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Week)} colSpan={2}>
-            Last 7d
-          </TableHead>
+            {t("last-7d")}</TableHead>
           <TableHead className={headClass(StrongholdPeriod.Month)} colSpan={2}>
-            Last 30d
-          </TableHead>
+            {t("last-30d")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -293,15 +299,17 @@ export function StrongholdStatsTable(
           const cells = loading
             ? null
             : {
-                total: row.render(props.current),
-                h24: props.periods.h24 ? row.render(props.periods.h24) : EMPTY_CELL,
-                d7: props.periods.d7 ? row.render(props.periods.d7) : EMPTY_CELL,
-                d30: props.periods.d30 ? row.render(props.periods.d30) : EMPTY_CELL,
+                total: row.render(props.current, num),
+                h24: props.periods.h24 ? row.render(props.periods.h24, num) : EMPTY_CELL,
+                d7: props.periods.d7 ? row.render(props.periods.d7, num) : EMPTY_CELL,
+                d30: props.periods.d30 ? row.render(props.periods.d30, num) : EMPTY_CELL,
               };
           return (
             <TableRow key={row.label}>
               <TableCell className="py-1.5! font-medium">
-                <GlossaryLabel>{row.label}</GlossaryLabel>
+                <GlossaryLabel label={statLabel(row.label, tStats)}>
+                  {statLabel(row.label, tStats)}
+                </GlossaryLabel>
               </TableCell>
               {cells ? (
                 <>

@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Hráči",
+    "clans": "Clany",
+    "tanks": "Tanky",
+    "maps": "Mapy",
+    "tournaments": "Turnaje",
+    "servers": "Servery"
+  },
+  "links": {
+    "top-players": {
+      "label": "Najlepší hráči",
+      "description": "Rebríček hráčov za celé obdobie"
+    },
+    "players-onslaught": {
+      "description": "Hodnotené poradie režimu Ofenzíva"
+    },
+    "players-steel-hunter": {
+      "description": "Rebríček režimu battle royale"
+    },
+    "top-clans": {
+      "label": "Najlepšie clany",
+      "description": "Rebríček klanov za celé obdobie"
+    },
+    "stronghold": {
+      "description": "Rebríček šarvátok"
+    },
+    "advances": {
+      "description": "Rebríček X. úrovne 15 proti 15"
+    },
+    "tank-performances": {
+      "label": "Výkony",
+      "description": "Miera víťazstiev a poškodenie podľa tanku"
+    },
+    "tank-specs": {
+      "label": "Špecifikácie",
+      "description": "Štatistiky každého tanku"
+    },
+    "tank-economics": {
+      "label": "Ekonomika",
+      "description": "Zisky kreditov a XP"
+    },
+    "tank-moe": {
+      "description": "Poškodenie potrebné na každú značku"
+    },
+    "tank-mom": {
+      "description": "Hranice pre odznaky majstrovstva"
+    },
+    "tank-changes": {
+      "label": "Zmeny",
+      "description": "Posilnenia a oslabenia podľa aktualizácie"
+    },
+    "tank-community": {
+      "label": "Hodnotenia komunity",
+      "description": "Hodnotenia od hráčov, ktorí ich vlastnia"
+    },
+    "tank-videos": {
+      "label": "Videá",
+      "description": "Záznamy hrania od komunity"
+    },
+    "all-tournaments": {
+      "label": "Turnaje",
+      "description": "Všetky turnaje, otvorené aj ukončené"
+    },
+    "all-maps": {
+      "label": "Všetky mapy",
+      "description": "Všetky mapy v hre"
+    },
+    "map-changes": {
+      "label": "Zmeny",
+      "description": "Prepracovania máp podľa aktualizácie"
+    },
+    "battle-type": {
+      "description": "{type} mapy"
+    },
+    "servers-population": {
+      "label": "Počet hráčov na serveri",
+      "description": "Hráči online teraz aj v priebehu času"
+    }
+  }
+}

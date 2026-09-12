@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "لم يُسجّل أي عنقود بعد.",
+  "server": "خادم",
+  "online": "أونلاين",
+  "share": "مشاركة",
+  "peak": "الذروة ({label})",
+  "average": "المتوسط ({label})",
+  "not-reported": "لم يتم الإبلاغ عنه",
+  "total": "الإجمالي"
+}

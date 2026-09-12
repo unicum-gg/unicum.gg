@@ -1,0 +1,60 @@
+{
+  "columns-label": "Sarakkeet",
+  "groups": {
+    "general": "Yleinen",
+    "combat": "Taistelu"
+  },
+  "columns": {
+    "battles": {
+      "label": "Taisteluita",
+      "tip": "Panssarivaunulla pelattujen pelien kokonaismäärä"
+    },
+    "count": {
+      "label": "Lkm",
+      "tip": "Otokseen kirjattujen pelaajien määrä"
+    },
+    "rating": {
+      "label": "Arvio (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Voittoprosentti panssarivaunulla"
+    },
+    "playerWr": {
+      "label": "Pelaajan WR",
+      "tip": "Sitä ajavien pelaajien keskimääräinen yleinen voittoprosentti"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Keskimääräinen vahinko peliä kohden"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Tappojen / kuolemien suhde"
+    },
+    "assists": {
+      "label": "Avustukset",
+      "tip": "Keskimääräinen avustettu vahinko"
+    },
+    "hitPct": {
+      "label": "Osuma %",
+      "tip": "Osumat / laukaukset"
+    },
+    "penPct": {
+      "label": "Pen %",
+      "tip": "Läpäisyt / osumat"
+    },
+    "spots": {
+      "label": "Spotit",
+      "tip": "Keskimääräinen havaintojen määrä peliä kohden"
+    },
+    "blocked": {
+      "label": "Estetty",
+      "tip": "Panssarin estämä keskimääräinen vahinko"
+    },
+    "survival": {
+      "label": "Selviytyminen",
+      "tip": "Selviydyttyjen taistelujen osuus"
+    }
+  }
+}

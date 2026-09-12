@@ -1,0 +1,18 @@
+{
+  "search": "Keresés",
+  "search-open": "Keresés megnyitása",
+  "search-close": "Keresés bezárása",
+  "search-empty": "Nincs találat",
+  "theme-toggle": "Téma váltása",
+  "theme-light": "Könnyű",
+  "theme-dark": "Sötét",
+  "theme-system": "Rendszer szerinti",
+  "toc": "Ezen az oldalon",
+  "toc-empty": "Nincsenek fejlécek",
+  "sidebar-open": "Oldalsáv megnyitása",
+  "sidebar-close": "Oldalsáv bezárása",
+  "sidebar-collapse": "Oldalsáv összecsukása",
+  "page-previous": "Előző oldal",
+  "page-next": "Következő oldal",
+  "language": "Válasszon nyelvet"
+}

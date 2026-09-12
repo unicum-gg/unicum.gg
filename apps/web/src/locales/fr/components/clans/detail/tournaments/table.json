@@ -1,0 +1,11 @@
+{
+  "date": "Date",
+  "featured-tournament": "Tournoi à la une",
+  "format": "Format",
+  "n-of-the-roster-were-in-the-clan": "{count} de l’effectif étaient dans le clan",
+  "no-tournament-matches-the-current": "Aucun tournoi ne correspond aux filtres actuels.",
+  "played-as": "Joué en tant que",
+  "result": "Résultat",
+  "status": "Statut",
+  "tier": "Niveau"
+}

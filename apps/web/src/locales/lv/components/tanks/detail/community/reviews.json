@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} kaujas ar to",
+  "damage": "{damage} Bojājumi",
+  "n-marks": "{count, plural, zero {# atzīmes} one {# atzīme} other {# atzīmes}}",
+  "no-written-opinions-yet-if": "Vēl nav rakstisku viedokļu. Ja tev ir vajadzīgās kaujas, tavs būtu pirmais.",
+  "win-rate": "{toFixed}% uzvaru biežums",
+  "written-on": "uzrakstīts {gameVersion}"
+}

@@ -1,0 +1,4 @@
+{
+  "teammates": "{nickname}n joukkuetoverit",
+  "everyone-who-has-shared-a": "Kaikki, jotka ovat jakaneet turnauskokoonpanon nimimerkin {nickname} kanssa, useimmiten ensimmäisenä. Jokaisella rivillä näkyy viimeisin kerta, jolloin he osallistuivat yhdessä."
+}

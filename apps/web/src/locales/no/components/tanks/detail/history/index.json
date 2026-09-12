@@ -1,0 +1,12 @@
+{
+  "before-update": "Før oppdatering {version}",
+  "common-test": "Vanlig test",
+  "in-common-test-not-released": "I Vanlig test, ikke utgitt ennå",
+  "introduced": "Introduksjon",
+  "lifecycle": "Livssyklus",
+  "n-buffed": "{count} forbedret",
+  "n-nerfed": "{count} svekket",
+  "not-released-wargaming-can-still": "Ikke utgitt. Wargaming kan fortsatt endre eller fjerne hva som helst av dette før oppdateringen lanseres.",
+  "status": "Status",
+  "update": "Oppdatér {version}"
+}

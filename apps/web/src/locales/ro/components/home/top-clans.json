@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Sunt afișate cele mai bune clanuri din {region} cu peste 50 de membri care au bătălii, clasate după {metric} mediu.",
+    "month": "Sunt afișate cele mai bune clanuri din {region} cu peste 50 de membri care au bătălii, clasate după {metric} din ultimele 30 de zile, minimum 15 activi."
+  },
+  "updated": "Actualizat {when}.",
+  "empty": "Nu există încă date despre clanuri pentru această regiune.",
+  "rank": "#",
+  "clan": "Clan",
+  "average": "Med. {metric}"
+}

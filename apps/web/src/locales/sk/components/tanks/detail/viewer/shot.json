@@ -1,0 +1,7 @@
+{
+  "firing": "Strieľa sa {shell}, {pen} mm. Zmeň výstrel",
+  "no-such-round": "{mark}: toto delo ho nemá, takže uhly nastav sami",
+  "own-round": "{mark}: vlastný náboj tohto dela, vrátane všetkých údajov",
+  "treat-it-as": "Považovať za",
+  "treat-it-as-mark": "Považuj to za {mark}"
+}

@@ -1,0 +1,12 @@
+{
+  "clans-history": "Histórico de clãs: {nickname}",
+  "clans-in-clans": "{totalClans} clãs · {timeInClansSeconds} em clãs",
+  "current": "atual",
+  "duration": "Duração",
+  "from": "De",
+  "name": "Nome",
+  "no-clan-history": "Sem histórico de clãs.",
+  "role": "Função",
+  "tag": "Tag",
+  "to": "Para"
+}

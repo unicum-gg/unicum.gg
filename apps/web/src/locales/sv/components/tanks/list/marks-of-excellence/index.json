@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Mark",
+      "tip": "1 Mark: ditt rullande genomsnitt för sammanlagd skada (de senaste ~100 striderna) måste vara högre än för 65 % av alla spelare med denna stridsvagn under de senaste 14 dagarna"
+    },
+    "mark2": {
+      "label": "2 Mark",
+      "tip": "2 Mark: ditt rullande genomsnitt för sammanlagd skada (de senaste ~100 striderna) måste vara högre än för 85 % av alla spelare med denna stridsvagn under de senaste 14 dagarna"
+    },
+    "mark3": {
+      "label": "3 Mark",
+      "tip": "3 Mark: ditt rullande genomsnitt för sammanlagd skada (de senaste ~100 striderna) måste vara högre än för 95 % av alla spelare med denna stridsvagn under de senaste 14 dagarna"
+    }
+  },
+  "rows-per-page": "Rader per sida",
+  "previous-page": "Föregående sida",
+  "page": "Sida {current} / {totalPages}",
+  "next-page": "Nästa sida",
+  "all": "Alla"
+}

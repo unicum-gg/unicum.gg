@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
+import Link from "@/components/link";
 import {
-  BATTLE_RESULT_LABEL,
   formatTimestamp,
-  MAP_GAME_MODE_LABEL,
 } from "@unicum.gg/shared";
 import { MapPinIcon, PencilSimpleIcon } from "@phosphor-icons/react";
 import {
@@ -15,6 +16,8 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { TankVideoCardData } from "./card";
+import { mapModeName, mapName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 
 const RESULT_CLASS: Record<string, string> = {
   victory: "text-emerald-500",
@@ -40,13 +43,15 @@ export function Thumbnail({
   href: string | null;
   children: React.ReactNode;
 }) {
+  const { t: tVideos } = useTranslation("components/tanks/detail/videos/index");
+  const { t } = useTranslation("components/tanks/detail/videos/card-parts");
   const className = "group relative block size-full";
   if (onPlay)
     return (
       <button
         type="button"
         onClick={onPlay}
-        aria-label={`Play ${title}`}
+        aria-label={tVideos("play", { title })}
         className={cn(className, "cursor-pointer")}
       >
         {children}
@@ -54,7 +59,7 @@ export function Thumbnail({
     );
   if (href)
     return (
-      <Link href={href} aria-label={`Watch ${title}`} className={className}>
+      <Link href={href} aria-label={t("watch", { title })} className={className}>
         {children}
       </Link>
     );
@@ -82,13 +87,24 @@ export function BattleRow({
    * module is also used on cards mounted outside one. */
   onEdit?: () => void;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/tanks/detail/videos/card-parts");
+  const { t: tVideos } = useTranslation("components/tanks/detail/videos/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
   // The map first, since it is what anyone scans for, then how the battle was
   // played, then which side of it they started from.
   const facts = [
     showTank ? battle.tankName : null,
-    battle.mapName,
-    battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : null,
-    battle.directionLabel,
+    battle.arenaId
+      ? mapName(battle.arenaId, battle.mapName ?? battle.arenaId, tMaps)
+      : battle.mapName,
+    battle.mode ? mapModeName(battle.mode, tGame) : null,
+    // The raw direction, not the label core derived: that one was resolved
+    // server-side in English, and this one is the reader's own word.
+    battle.direction
+      ? tGame(`spawn-directions.${battle.direction}`)
+      : battle.directionLabel,
   ].filter(Boolean);
 
   const className = cn(
@@ -112,13 +128,13 @@ export function BattleRow({
         ))}
         {battle.result && (
           <span className={RESULT_CLASS[battle.result]}>
-            {BATTLE_RESULT_LABEL[battle.result]}
+            {tGame(`battle-results.${battle.result}`)}
           </span>
         )}
         {battle.combinedDamage !== null && (
           <span className="tabular-nums">
-            {battle.combinedDamage.toLocaleString("en-US")}
-            <span className="text-fd-border"> dmg</span>
+            {numberFormat(locale).format(battle.combinedDamage)}
+            <span className="text-fd-border"> {tVideos("dmg")}</span>
           </span>
         )}
       </span>
@@ -158,8 +174,7 @@ export function BattleRow({
           <Tooltip>
             <TooltipTrigger asChild>{row}</TooltipTrigger>
             <TooltipContent>
-              Waiting on a moderator. Only you can see it.
-            </TooltipContent>
+              {t("waiting-on-a-moderator-only")}</TooltipContent>
           </Tooltip>
         ) : (
           row
@@ -170,7 +185,7 @@ export function BattleRow({
               <button
                 type="button"
                 onClick={onEdit}
-                aria-label="Correct this suggestion"
+                aria-label={t("correct-this-suggestion")}
                 className={cn(
                   "shrink-0 cursor-pointer rounded-md p-1 transition-colors hover:bg-fd-muted hover:text-fd-foreground",
                   battle.pending
@@ -183,8 +198,8 @@ export function BattleRow({
             </TooltipTrigger>
             <TooltipContent>
               {battle.pending
-                ? "Correct it"
-                : "Correct it. It goes back for review, so it comes off the site until then."}
+                ? t("correct-it")
+                : t("correct-it-goes-back")}
             </TooltipContent>
           </Tooltip>
         )}

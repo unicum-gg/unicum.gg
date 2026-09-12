@@ -1,0 +1,21 @@
+{
+  "trigger": "Atsauksmes",
+  "title": "Dalieties ar atsauksmēm",
+  "topic-placeholder": "Izvēlieties tēmu...",
+  "message-placeholder": "Tava atsauksme...",
+  "send": "Nosūtīt",
+  "sent": "Paldies par jūsu atsauksmēm!",
+  "failed": "Neizdevās nosūtīt atsauksmes. Lūdzu, mēģiniet vēlreiz.",
+  "topics": {
+    "bug": "Ziņot par kļūdu",
+    "idea": "Jaunas iespējas ideja",
+    "data": "Datu precizitāte",
+    "other": "Cits"
+  },
+  "sentiments": {
+    "awful": "Briesmīgi",
+    "bad": "Slikts",
+    "good": "Labi",
+    "great": "Lieliski"
+  }
+}

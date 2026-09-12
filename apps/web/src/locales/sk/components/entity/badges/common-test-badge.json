@@ -1,0 +1,12 @@
+{
+  "aria-build": "Prečítané vo Všeobecnom teste, zostava {version}",
+  "aria-changes": "Zmenené vo Všeobecnom teste: {changes} vlastností",
+  "aria-described": "Všeobecný test: {description}",
+  "aria-vehicle": "Vozidlo vo Všeobecnom teste",
+  "common-test": "Všeobecný test",
+  "common-test-build": "Všeobecný test {version}",
+  "tip-build": "{label} · toto sú hodnoty testovacej zostavy a Wargaming ich môže pred vydaním aktualizácie ešte zmeniť",
+  "tip-changes": "Všeobecný test: {changes, plural, one {# zmena vlastnosti} few {# zmeny vlastností} other {# zmien vlastností}} tohto vozidla",
+  "tip-described": "Všeobecný test · {description}",
+  "tip-vehicle": "Všeobecný test · vozidlo ešte nebolo vydané, preto nemá štatistiky bitiek a jeho vlastnosti sa môžu ešte zmeniť"
+}

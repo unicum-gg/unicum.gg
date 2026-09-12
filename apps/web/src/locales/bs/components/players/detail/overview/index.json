@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistike nasumičnih bitki igrača {nickname}",
+  "progression-title": "Napredak igrača {nickname} po parametru {metric}",
+  "lift-drag-title": "Tenkovi koji oblikuju rejting igrača {nickname}",
+  "progression-blurb": "Puna linija prikazuje ukupni {metric}, što odgovara koloni Ukupno iznad, i polako se mijenja kako se dodaju nove bitke. Isprekidana linija prikazuje {metric} po sesiji, izračunat iz bitki odigranih od prethodnog snimka. Prikazuje nizove dobre i loše forme. Boja linije prati nivo rejtinga.",
+  "progression-empty": "Još nema dovoljno historije. Potreban nam je najmanje jedan snimak za crtanje krive. Provjerite ponovo uskoro."
+}

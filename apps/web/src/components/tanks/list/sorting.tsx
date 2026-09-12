@@ -57,13 +57,17 @@ export function SortHead({
       type="button"
       onClick={() => onToggle(col)}
       className={cn(
-        "flex w-full cursor-pointer items-center gap-1 px-3 py-2 font-medium select-none hover:text-foreground",
+        "flex w-full min-w-0 cursor-pointer items-center gap-1 px-3 py-2 font-medium select-none hover:text-foreground",
         align === "center" && "justify-center",
         align === "end" && "justify-end",
         active && "text-foreground",
       )}
     >
-      {children}
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
       <Icon
         weight="bold"
         className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}

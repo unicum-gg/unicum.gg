@@ -1,0 +1,9 @@
+{
+  "boosts": "Didinimai {name}",
+  "directives": "Instrukcijos",
+  "directive-name": "{name} direktyva",
+  "grants-and-boosts": "Suteikia ir sustiprina įgulos įgūdį, net jei jis neišmoktas.",
+  "grants-only": "Suteikia įgulos įgūdį vienam mūšiui, nenurodant charakteristikos.",
+  "enhances-mounted": "Pagerina įmontuotą {name}.",
+  "mount-to-use": "Įmontuokite {name}, kad galėtumėte naudoti šią direktyvą."
+}

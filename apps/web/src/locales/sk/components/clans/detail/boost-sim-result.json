@@ -1,0 +1,11 @@
+{
+  "already-running": "že deluje",
+  "in-window": "v oknu",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Nie sú vybrané žiadne rezervy.",
+  "no-stock-ready": "žiadne zásoby nie sú pripravené",
+  "not-available": "ni na voljo",
+  "threshold": "mejna ({online}/{min})",
+  "would-activate": "bi aktiviral",
+  "would-not-fire": "Momentálne by sa nespustil."
+}

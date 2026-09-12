@@ -1,0 +1,11 @@
+{
+  "already-running": "már fut",
+  "in-window": "ablakban",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Nem lett tartalék kiválasztva.",
+  "no-stock-ready": "nem Kész az Alapállapot",
+  "not-available": "nem elérhető",
+  "threshold": "küszöb ({online}/{min})",
+  "would-activate": "aktiválásra kerülne",
+  "would-not-fire": "Jelenleg nem aktiválódna."
+}

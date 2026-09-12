@@ -1,0 +1,4 @@
+{
+  "title": "Nejlepší klany {tier}. úrovně ({region})",
+  "description": "Žebříček klanů {tier}. úrovně pro region {region}. Klany jsou seřazeny podle SR (hodnocení šarvátek), ELO, počtu bitev a míry vítězství. Minimálně {battles} bitev."
+}

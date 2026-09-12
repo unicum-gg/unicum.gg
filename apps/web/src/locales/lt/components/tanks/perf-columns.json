@@ -1,0 +1,60 @@
+{
+  "columns-label": "Stulpeliai",
+  "groups": {
+    "general": "bendri",
+    "combat": "Koviniai"
+  },
+  "columns": {
+    "battles": {
+      "label": "Mūšiai",
+      "tip": "Iš viso su tanku sužaistų mūšių"
+    },
+    "count": {
+      "label": "Skaičius",
+      "tip": "Stebimų žaidėjų skaičius imtyje"
+    },
+    "rating": {
+      "label": "Reitingas (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Pergalių rodiklis su tanku"
+    },
+    "playerWr": {
+      "label": "Žaidėjo WR",
+      "tip": "Vidutinis bendras žaidėjų, vairuojančių šį tanką, pergalių rodiklis"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Vidutinė žala per žaidimą"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Nužudymų / mirčių santykis"
+    },
+    "assists": {
+      "label": "Pagalba",
+      "tip": "Vidutinė padaryta žala padedant"
+    },
+    "hitPct": {
+      "label": "Pataikymo %",
+      "tip": "Pataikymai / šūviai"
+    },
+    "penPct": {
+      "label": "Prasiskverbimo %",
+      "tip": "Pramušimai / pataikymai"
+    },
+    "spots": {
+      "label": "Apsilankymai",
+      "tip": "Vidutinis aptikimų skaičius per žaidimą"
+    },
+    "blocked": {
+      "label": "Blokuota",
+      "tip": "Vidutinė šarvų sugerta žala"
+    },
+    "survival": {
+      "label": "Išgyvenimas",
+      "tip": "Išgyventų mūšių dalis"
+    }
+  }
+}

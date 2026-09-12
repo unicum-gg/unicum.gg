@@ -1,0 +1,6 @@
+{
+  "title": "{language}語のWorld of Tanksプレイヤー上位（{region}地域）",
+  "description": "推定クラン履歴の言語に{language}語を含むプレイヤーの、{name} {region}プレイヤーランキング。WNX順です。",
+  "og-title": "{language}語プレイヤー上位",
+  "og-subtitle": "{region}ランキング"
+}

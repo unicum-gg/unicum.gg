@@ -1,0 +1,13 @@
+{
+  "assists": "Assists",
+  "close": "Luk",
+  "damage": "Skade",
+  "in-the-queue": "Den er i køen og vises på denne fane, når en moderator har set på den.",
+  "optional": "(valgfrit)",
+  "paste-a-youtube-link": "Indsæt et YouTube-link, og angiv derefter det præcise øjeblik, hvor kampen starter. Alle, der åbner det, lander på det sekund, så et forslag med et forkert tidsstempel afvises under anmeldelsen.",
+  "sending": "Sender…",
+  "suggest": "Foreslå",
+  "suggest-a-video": "Foreslå en video",
+  "suggest-another": "Forslå en anden",
+  "suggestion-sent": "Forslag sendt"
+}

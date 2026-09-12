@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1. sija",
+    "2": "2. sija",
+    "3": "3. sija"
+  },
+  "streamer": "Striimaaja · katso pelaajan {name} lähetystä Twitchissä",
+  "tournament": {
+    "one": "Turnauksen {title} voittajakokoonpano",
+    "many": "{count} voittajakokoonpanossa, turnauksen {title} paras",
+    "featured": "{text} · esillä oleva tapahtuma",
+    "unnamed": "Wargaming-turnaus"
+  },
+  "tournament-wins": "{count, plural, one {# turnausvoitto} other {# turnausvoittoa}}",
+  "watch-on-twitch": "Katso pelaajan {name} lähetys Twitchissä",
+  "watch-on-twitch-viewers": "Katso pelaajan {name} lähetystä Twitchissä · {viewers} katsojaa"
+}

@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useFormat } from "@/hooks/use-format";
 import { useMemo } from "react";
 import { LanguageFlags } from "@/components/language-flags";
 import type { Region } from "@unicum.gg/wargaming";
@@ -7,7 +9,7 @@ import { weightedAverage, type WeightedDataPoint, type ClanMemberStats, wn7Color
 import {
   bestIndex,
   dashCell,
-  intFmt,
+  INT_FORMAT,
   type MetricCell,
   type MetricRow,
   numCell,
@@ -16,11 +18,7 @@ import {
 } from "@/components/compare/cells";
 import { type ClanCompareSlot, ComparisonTable } from "./comparison-table";
 
-const DAY_FORMAT = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const DAY_FORMAT_PATTERN = "d MMM yyyy";
 
 function overallPoints(
   members: ClanMemberStats[],
@@ -61,6 +59,8 @@ export function OverallTab({
   region: Region;
   slots: ClanCompareSlot[];
 }) {
+  const { locale } = useLocale();
+  const { date } = useFormat();
   const { rows, headerWinners } = useMemo(() => {
     function buildRow(
       label: string,
@@ -79,19 +79,20 @@ export function OverallTab({
         ? ratingCell(
             weightedAverage(overallPoints(s.members, (m) => m.wn8)),
             wn8Color,
-          )
+          locale,
+        )
         : dashCell(),
     );
 
     const allRows: MetricRow[] = [
       buildRow("Members", "higher", (s) =>
-        numCell(s.clan!.membersCount, intFmt),
+        numCell(s.clan!.membersCount, locale, INT_FORMAT),
       ),
       buildRow("Active members (30d)", "higher", (s) => {
         const active = s.members.filter(
           (m) => (m.battles30d ?? 0) > 0,
         ).length;
-        return numCell(active, intFmt);
+        return numCell(active, locale, INT_FORMAT);
       }),
       buildRow("Avg WR", "higher", (s) => {
         const totalBattles = s.members.reduce(
@@ -104,7 +105,7 @@ export function OverallTab({
             (m.overall ? (m.overall.battles * m.overall.winsPercentage) / 100 : 0),
           0,
         );
-        return winratePctCell(totalWins, totalBattles);
+        return winratePctCell(totalWins, totalBattles, locale);
       }),
       {
         label: "Avg WN7",
@@ -114,7 +115,8 @@ export function OverallTab({
             ? ratingCell(
                 weightedAverage(overallPoints(s.members, (m) => m.wn7)),
                 wn7Color,
-              )
+              locale,
+            )
             : dashCell(),
         ),
       },
@@ -131,7 +133,8 @@ export function OverallTab({
             ? ratingCell(
                 weightedAverage(overallPoints(s.members, (m) => m.wnx)),
                 wnxColor,
-              )
+              locale,
+            )
             : dashCell(),
         ),
       },
@@ -143,7 +146,8 @@ export function OverallTab({
             ? ratingCell(
                 weightedAverage(d30Points(s.members, (m) => m.wn730d)),
                 wn7Color,
-              )
+              locale,
+            )
             : dashCell(),
         ),
       },
@@ -155,7 +159,8 @@ export function OverallTab({
             ? ratingCell(
                 weightedAverage(d30Points(s.members, (m) => m.wn830d)),
                 wn8Color,
-              )
+              locale,
+            )
             : dashCell(),
         ),
       },
@@ -167,15 +172,16 @@ export function OverallTab({
             ? ratingCell(
                 weightedAverage(d30Points(s.members, (m) => m.wnx30d)),
                 wnxColor,
-              )
+              locale,
+            )
             : dashCell(),
         ),
       },
       buildRow("Age (days)", "higher", (s) =>
-        numCell(ageInDays(s.clan!.createdAt), intFmt),
+        numCell(ageInDays(s.clan!.createdAt), locale, INT_FORMAT),
       ),
       buildRow("Created", "lower", (s) => ({
-        display: DAY_FORMAT.format(s.clan!.createdAt),
+        display: date(DAY_FORMAT_PATTERN).format(s.clan!.createdAt),
         numeric: s.clan!.createdAt.getTime(),
       })),
       buildRow("Languages", "higher", (s) => {
@@ -204,7 +210,7 @@ export function OverallTab({
       rows: allRows,
       headerWinners: bestIndex(wn8Cells, "higher"),
     };
-  }, [slots, region]);
+  }, [slots, region, date, locale]);
 
   return (
     <ComparisonTable slots={slots} rows={rows} headerWinners={headerWinners} />

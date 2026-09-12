@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>mga manlalaro</accent>",
+    "language": "Mga nangungunang manlalaro sa <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Talaan ng ranggo para sa {region}, ranked ayon sa {metric} sa lahat ng panahon (may pinakamababang 20,000 mga laban).",
+    "language": "Mga manlalaro sa {region} na kabilang ang {language} sa natukoy na hanay ng wika mula sa kasaysayan ng klano, niraranggo ayon sa {metric}, na may pinakamababang 10,000 laban.",
+    "strict": "Mga manlalaro sa {region} na eksklusibong {language} ang natukoy na wika mula sa kasaysayan ng klano, niraranggo ayon sa {metric}, na may pinakamababang 10,000 laban."
+  },
+  "board": {
+    "all": "Nangungunang {count} manlalaro ayon sa {metric}",
+    "language": "Nangungunang {count} manlalaro sa {language} ayon sa {metric}",
+    "strict": "Nangungunang {count} eksklusibong {language} na manlalaro ayon sa {metric}"
+  },
+  "modes": {
+    "overall": "Pangkalahatan"
+  },
+  "columns": {
+    "player": "Manlalaro"
+  },
+  "strict-toggle": "Mahigpit",
+  "any-toggle": "Anuman",
+  "all-languages": "Lahat ng wika",
+  "battles": "Mga labanan",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

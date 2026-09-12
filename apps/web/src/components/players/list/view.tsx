@@ -1,7 +1,13 @@
+import { numberFormat } from "@/lib/format";
 import Image from "next/image";
-import { RatingScale } from "@/components/home/rating-scale";
+import {
+  RatingScale,
+  RatingScaleTitle,
+} from "@/components/home/rating-scale";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { PlayerLanguageSelect } from "@/components/players/list/language-select";
 import { PlayerStrictModeToggle } from "@/components/players/list/strict-mode-toggle";
@@ -17,6 +23,7 @@ import { RatingMetric } from "@unicum.gg/shared";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
+import { languageDisplayName } from "@/lib/language-name";
 import {
   Region,
   REGION_EMOJI,
@@ -25,23 +32,18 @@ import {
 
 // The full ranking is fetched once and paginated client-side (TablePager).
 const LIMIT = 1000;
-const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
-
-function languageDisplayName(code: string): string {
-  return LANGUAGE_NAMES.of(code) ?? code.toUpperCase();
-}
-
 /**
  * Inline metric label gated by `html[data-rating-metric]` CSS. All three
  * variants ship in the HTML, only the matching one shows. Keeps the page
  * output identical regardless of the user's rating cookie.
  */
-function MetricInline() {
+async function MetricInline({ locale }: { locale: string }) {
+  const { t } = await getTranslation("components/players/list/view", locale);
   return (
     <>
-      <span data-rating-col="wn7">WN7</span>
-      <span data-rating-col="wn8">WN8</span>
-      <span data-rating-col="wnx">WNX</span>
+      <span data-rating-col="wn7">{t("wn7")}</span>
+      <span data-rating-col="wn8">{t("wn8")}</span>
+      <span data-rating-col="wnx">{t("wnx")}</span>
     </>
   );
 }
@@ -60,19 +62,23 @@ export async function PlayersLandingView({
   region,
   language,
   strict = false,
+  locale,
 }: {
   region: Region;
   language: string | null;
   strict?: boolean;
+  /** The route's own segment, for the server-rendered tabs below. */
+  locale: string;
 }) {
   // The landing consumes its own public API through the SDK: the lifetime
   // by-language boards (rows carry their inferred languages) + the language
   // populations for the chips.
+  const { t } = await getTranslation("components/players/list/view", locale);
   const api = unicum.region(region).players;
   const topQuery = (metric: "wn7" | "wn8" | "wnx") => ({
     metric,
     limit: LIMIT,
-    ...(language ? { language } : { languages: "true" as const }),
+    ...(language ? { lang: language } : { languages: "true" as const }),
     ...(strict ? { strict: "true" as const } : {}),
   });
   const EMPTY_TOP = { results: [], computed_at: null };
@@ -87,7 +93,7 @@ export async function PlayersLandingView({
   const wnxResults = wnxTop.results as TopPlayerByLanguageResult[];
   const stats = languageStats.results;
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
-  const langName = language ? languageDisplayName(language) : null;
+  const langName = language ? languageDisplayName(language, locale) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
 
   return (
@@ -114,39 +120,36 @@ export async function PlayersLandingView({
           )}
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
             {language ? (
-              <>
-                Top <span className="text-brand">{langName}</span> players
-              </>
+              <Interpolate
+                template={t("heading.language", { language: langName ?? "" })}
+                wrap={{
+                  accent: (text) => (
+                    <span className="text-brand">{text}</span>
+                  ),
+                }}
+              />
             ) : (
-              <>
-                Top <span className="text-brand">players</span>
-              </>
+              <Interpolate template={t("heading.plain")} wrap={{
+                  accent: (text) => (
+                    <span className="text-brand">{text}</span>
+                  ),
+                }} />
             )}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            {language ? (
-              strict ? (
-                <>
-                  {REGION_LABEL[region]} players whose inferred clan-history
-                  language is exclusively {langName}, ranked by <MetricInline />
-                  {" "}(minimum 10,000 battles).
-                </>
-              ) : (
-                <>
-                  {REGION_LABEL[region]} players whose inferred clan-history
-                  language set includes {langName}, ranked by <MetricInline />
-                  {" "}(minimum 10,000 battles).
-                </>
-              )
-            ) : (
-              <>
-                {REGION_LABEL[region]} leaderboard, ranked by all-time
-                {" "}<MetricInline /> (minimum 20,000 battles).
-              </>
-            )}
+            {/* The metric is a picker, not a word, so it rides the sentence as a
+                node: half the languages we publish put it somewhere else. */}
+            <Interpolate
+              template={t(
+                language ? (strict ? "intro.strict" : "intro.language") : "intro.all",
+                { region: REGION_LABEL[region], language: langName ?? "" },
+              )}
+              values={{ metric: <MetricInline locale={locale} /> }}
+            />
           </p>
           <div className="mt-6 flex justify-center">
             <LeaderboardTabs
+              locale={locale}
               current="players"
               region={region}
               language={language}
@@ -160,21 +163,27 @@ export async function PlayersLandingView({
           landing including the per-language pages, mirroring the clan landing's
           stronghold tabs. */}
       <PanelSeparator />
-      <PlayersModeTabs region={region} active="overall" />
+      <PlayersModeTabs region={region} active="overall" locale={locale} />
 
       <PanelSeparator />
 
       <Panel>
         <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
           <PanelTitle>
-            Top {wnxResults.length.toLocaleString("en-US")}{" "}
-            {language
-              ? strict
-                ? `strictly ${langName} players`
-                : `${langName} players`
-              : "players"}{" "}
-            by{" "}
-            <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
+            <Interpolate
+              template={t(
+                language ? (strict ? "board.strict" : "board.language") : "board.all",
+                {
+                  count: numberFormat(locale).format(wnxResults.length),
+                  language: langName ?? "",
+                },
+              )}
+              values={{
+                metric: (
+                  <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
+                ),
+              }}
+            />
           </PanelTitle>
           <div className="flex flex-wrap items-center gap-2">
             <PlayerLanguageSelect
@@ -188,6 +197,7 @@ export async function PlayersLandingView({
             />
             {language && filterCounts && (
               <PlayerStrictModeToggle
+                locale={locale}
                 region={region}
                 language={language}
                 strict={strict}
@@ -226,7 +236,9 @@ export async function PlayersLandingView({
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Rating scale</PanelTitle>
+          <PanelTitle>
+            <RatingScaleTitle />
+          </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <RatingScale />

@@ -1,0 +1,6 @@
+{
+  "day": "Reitinguojama pagal {metric} per praėjusias 24 valandas, mažiausiai 20 mūšių.",
+  "week": "Reitinguojama pagal {metric} per praėjusias 7 dienas, mažiausiai 140 mūšių.",
+  "month": "Reitinguojama pagal {metric} per praėjusias 30 dienų, mažiausiai 600 mūšių.",
+  "overall": "Reitinguojama pagal viso laiko {metric}, mažiausiai 20 000 mūšių."
+}

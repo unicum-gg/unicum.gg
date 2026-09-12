@@ -1,0 +1,12 @@
+{
+  "final": " · végső",
+  "has-not-held-a-place": "{nickname} még nem szerepelt a Roham ranglistáján.",
+  "live-season": "· élő szezon",
+  "loading-s-onslaught-record": "{nickname} Roham-rekordjának betöltése...",
+  "onslaught": "Roham",
+  "onslaught-record": "{nickname} Roham-rekordja",
+  "see-this-season-s-leaderboard": "Az idei szezon ranglistájának megtekintése",
+  "standing-line": "{rating} értékelési pont · {battles} csata",
+  "the-board-only-lists-players": "A ranglista csak azokat a játékosokat sorolja fel, akik elérik a Bajnok szintet, régiónként néhány ezret, ezért szinte minden profil ide kerül. Automatikusan feltöltődik abban a szezonban, amikor elérik ezt a szintet.",
+  "updated": "Frissítve {when}"
+}

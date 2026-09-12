@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "ビルドリンクをコピーしました",
+  "copy-build-link": "ビルドリンクをコピー",
+  "could-not-copy-link": "リンクをコピーできませんでした",
+  "include-setup": "セットアップを含める",
+  "share-build": "ビルドを共有",
+  "share-tank": "{tank}を共有",
+  "share-text": "{app}でこの{tank}のビルドをチェック"
+}

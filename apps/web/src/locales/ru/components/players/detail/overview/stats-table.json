@@ -1,0 +1,34 @@
+{
+  "stat": "Статистика",
+  "rows": {
+    "battles": "Бои",
+    "tier": "Уровень",
+    "wins": "Победы",
+    "losses": "Поражения",
+    "draws": "Ничьи",
+    "survived": "Выживаемость",
+    "destroyed": "Уничтоженные танки",
+    "destruction-ratio": "Коэффициент уничтожения",
+    "spotted": "Обнаруженные танки",
+    "damages": "Урон",
+    "track-damages": "Урон по гусеницам",
+    "spotting-damages": "Урон от наблюдения",
+    "assisting-damages": "Урон от помощи",
+    "combined-damages": "Суммарный урон",
+    "base-capture": "Захват базы",
+    "base-defense": "Защита базы",
+    "experience": "Опыт",
+    "hit-rate": "Процент попаданий",
+    "personal-rating": "Личный рейтинг",
+    "wtr": "Рейтинг World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Всего",
+    "day": "Последние 24ч",
+    "week": "Последние 7д",
+    "month": "Последние 30д"
+  }
+}

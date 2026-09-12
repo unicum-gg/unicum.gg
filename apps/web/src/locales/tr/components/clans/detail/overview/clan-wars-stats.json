@@ -1,0 +1,21 @@
+{
+  "stat": "İstatistik",
+  "periods": {
+    "total": "Toplam",
+    "day": "Son 24saat",
+    "week": "Son 7gün",
+    "month": "Son 30gün"
+  },
+  "sections": {
+    "territory": "Bölge",
+    "t10": "Seviye X",
+    "t8": "Seviye VIII",
+    "t6": "Seviye VI"
+  },
+  "rows": {
+    "provinces": "Eyaletler",
+    "elo": "ELO",
+    "battles": "Savaşlar",
+    "winrate": "Kazanma oranı"
+  }
+}

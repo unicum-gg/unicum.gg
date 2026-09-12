@@ -1,0 +1,17 @@
+{
+  "close": "Stäng",
+  "format": "Format",
+  "here": "här",
+  "in-the-queue": "Den ligger i kön och visas på {where} när en moderator har granskat den. Under tiden är ditt förslag gråtonat på den sidan.",
+  "log-in-to-suggest-a": "Logga in för att föreslå en taktik",
+  "on-map": "på {map}",
+  "players-per-team": "Spelare per lag",
+  "sending": "Skickar…",
+  "suggest": "Föreslå",
+  "suggest-a-tactic": "Föreslå en taktik",
+  "suggest-another": "Föreslå en annan",
+  "suggestion-sent": "Förslag skickat",
+  "tier": "Nivå",
+  "what-to-submit": "En tävlingsmatch, med videon inställd på exakt den sekund då matchen börjar. Kartan börjar på {map} och följer videon när en klankväll går igenom en kartrotation. En stridsledare söker efter matchen utifrån vilken sida den spelades från, därför frågar vi efter den uppgiften i stället för att gissa.",
+  "what-was-played": "Vad som spelades"
+}

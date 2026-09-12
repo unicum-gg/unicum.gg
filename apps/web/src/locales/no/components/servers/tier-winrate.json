@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "En celle viser seirene til intervallet på det nivået, over kampene der, på tvers av alle kjøretøy en spiller har minst {minBattles} kamper med. Den beskriver derfor nivåene slik de spilles av spillerne som bruker dem. Celler basert på færre enn {TIERWINRATETHINCELL} kamper vises svakt, fordi de endres av andre grunner enn ferdighet. Fargene er de samme seiersprosentintervallene nettstedet bruker ellers.",
+  "cell-no-sample": "{where}, ingen måling",
+  "cell-winrate": "{where}, {winrate} seiersprosent over {battles} kamper",
+  "metric-band": "{metric}-intervall",
+  "nothing-recorded": "Ingenting registrert mot {metric} ennå. Rutenettet bygges på nytt hver natt.",
+  "over-battles-from-accounts": "{winrate} over {battles} kamper fra {players} kontoer",
+  "over-n-battles": "over {battles} kamper",
+  "what-players-win-by-tier": "Hva {label}-spillere vinner med hvert nivå"
+}

@@ -1,0 +1,34 @@
+{
+  "stat": "स्टेट्स",
+  "rows": {
+    "battles": "युद्ध",
+    "tier": "स्तर",
+    "wins": "जीतें",
+    "losses": "हारें",
+    "draws": "ड्रॉस",
+    "survived": "बटालियन जीवित रहे",
+    "destroyed": "नष्ट किए गए टैंक",
+    "destruction-ratio": "विनाश अनुपात",
+    "spotted": "देखे गए टैंक",
+    "damages": "हानियाँ",
+    "track-damages": "ट्रैक हानियाँ",
+    "spotting-damages": "स्पॉटिंग हानियाँ",
+    "assisting-damages": "सहायता हानियाँ",
+    "combined-damages": "संयुक्त हानियाँ",
+    "base-capture": "बेस कैप्चर",
+    "base-defense": "बेस रक्षा",
+    "experience": "अनुभव",
+    "hit-rate": "हिट दर",
+    "personal-rating": "व्यक्तिगत रेटिंग",
+    "wtr": "World of Tanks रेटिंग",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "कुल",
+    "day": "अंतिम 24 घंटे",
+    "week": "अंतिम 7 दिन",
+    "month": "अंतिम 30 दिन"
+  }
+}

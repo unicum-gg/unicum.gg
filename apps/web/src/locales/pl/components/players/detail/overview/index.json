@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statystyki gracza {nickname}: Bitwy losowe",
+  "progression-title": "Progresja {metric} gracza {nickname}",
+  "lift-drag-title": "Klasyfikacja gracza {nickname}: Czołgi mające na nią wpływ",
+  "progression-blurb": "Linia ciągła przedstawia ogólną wartość {metric} (odpowiada kolumnie Suma powyżej), która zmienia się powoli wraz z kolejnymi bitwami. Linia przerywana przedstawia wartość {metric} dla sesji, obliczaną na podstawie wyników uzyskanych od poprzedniego zapisu. Pokazuje okresy dobrej i słabej formy. Kolor linii odpowiada przedziałowi w skali Klasyfikacja.",
+  "progression-empty": "Nie ma jeszcze wystarczającej historii. Potrzebny jest co najmniej jeden zapis, aby narysować krzywą. Sprawdź ponownie wkrótce."
+}

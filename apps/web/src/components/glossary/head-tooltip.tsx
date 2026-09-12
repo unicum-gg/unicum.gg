@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/link";
 import type { ReactElement, ReactNode } from "react";
 import { useGlossaryAnchor } from "@/components/glossary/anchor-context";
 import {
@@ -25,6 +25,19 @@ import { cn } from "@/lib/utils";
  * the thing is. A header nothing defines and nothing tips renders exactly as it
  * did, which is what makes this safe to wrap around every heading of every
  * table.
+ *
+ * It also carries the heading itself. Column widths are set for the English and
+ * a translation is routinely longer ("Rating points" is "Points de classement"),
+ * so the heading is cut rather than allowed to spill over the numbers beside it,
+ * and the full wording has to stay reachable.
+ *
+ * Shown whether or not it is actually cut, which is deliberate. Whether a
+ * heading fits depends on the language, the viewport and the font, and reading
+ * that back was measurable but not reliable: the box is already the width of
+ * its column, so what changes when the real typeface arrives is `scrollWidth`,
+ * which no observer reports. A tooltip that sometimes fails to appear on a
+ * heading a reader cannot read is worse than one that sometimes repeats a
+ * heading they can.
  */
 export function GlossaryHeadTooltip({
   specKey,
@@ -48,13 +61,18 @@ export function GlossaryHeadTooltip({
   const term =
     lookup({ specKey, label }) ??
     (fallbackLabel ? lookup({ label: fallbackLabel }) : null);
-  if (!tip && !term) return children;
+  if (!label && !tip && !term) return children;
 
   return (
     <Tooltip>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent className="max-w-xs">
         <span className="block">
+          {label ? (
+            <span className={cn("block font-medium", (tip || term) && "mb-1")}>
+              {label}
+            </span>
+          ) : null}
           {tip ? <span className="block">{tip}</span> : null}
           {term ? (
             <Link

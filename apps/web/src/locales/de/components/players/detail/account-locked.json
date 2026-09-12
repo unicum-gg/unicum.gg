@@ -1,0 +1,5 @@
+{
+  "title": "Konto gesperrt",
+  "body": "{nickname} ist auf {region} registriert, aber Wargaming hat dieses Konto gesperrt, weshalb die Statistiken nicht verfügbar sind.",
+  "back-to-home": "Zurück zur Startseite"
+}

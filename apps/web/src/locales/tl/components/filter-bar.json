@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Maghanap sa {count} mga tangke",
+    "rated-tanks": "Maghanap sa {count} mga rated na tangke",
+    "videos": "Maghanap sa {count} mga video",
+    "players": "Maghanap ng {count} mga manlalaro",
+    "clans": "Maghanap ng {count} mga clan",
+    "tournaments": "Maghanap ng {count} mga torneo",
+    "teams": "Maghanap ng {count} mga team"
+  },
+  "min": "Pinakamababa",
+  "max": "Pinakamataas",
+  "none": "Wala",
+  "common-test": "Binago ng Karaniwang Pagsubok: mga bagong sasakyan at mga na-rebalance",
+  "category": {
+    "standard": "Pamantayan",
+    "premium": "Premium",
+    "reward": "Gantimpala"
+  },
+  "moe": {
+    "0": "Wala pang mark",
+    "1": "1 marka",
+    "2": "2 marka",
+    "3": "3 marka"
+  },
+  "mom": {
+    "0": "Wala pang badge",
+    "1": "3rd Class",
+    "2": "2nd Class",
+    "3": "1st Class",
+    "4": "Ace Tanker"
+  }
+}

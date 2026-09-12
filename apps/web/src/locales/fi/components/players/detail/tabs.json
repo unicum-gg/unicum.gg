@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Yhteenveto",
+    "tanks": "Panssarivaunut",
+    "sessions": "Istunnot",
+    "achievements": "Saavutukset",
+    "tournaments": "Turnaukset",
+    "value": "Arvo"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

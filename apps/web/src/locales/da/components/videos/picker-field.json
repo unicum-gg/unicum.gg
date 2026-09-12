@@ -1,0 +1,14 @@
+{
+  "clan": "Klan",
+  "clear-the-field": "Ryd {label}",
+  "credited-on-the-clan-s": "Krediteret på klanens egen side.",
+  "none": "Ingen",
+  "optional": "(valgfrit)",
+  "pick-the-vehicle": "Vælg køretøjet",
+  "search-for-a-clan": "Søg efter en klan",
+  "search-for-a-vehicle": "Søg efter et køretøj",
+  "search-tank": "Søg tank...",
+  "tank": "Tank",
+  "tank-hint-optional": "En taktik hører til på dens kort, så det er kun værd at angive kampvognen, når videoen også handler om køretøjet.",
+  "tank-hint-required": "En tilfældig kamp slås op via det køretøj, den blev spillet i."
+}

@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Mga hilera bawat pahina",
+  "previous-page": "Nakaraang pahina",
+  "page": "Pahina {current} / {totalPages}",
+  "next-page": "Susunod na pahina",
+  "all": "Lahat"
+}

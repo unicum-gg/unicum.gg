@@ -1,5 +1,9 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { statLabel } from "@/components/stat-label";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { useEffect, useMemo, useState, type RefObject } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type { TankSpec } from "@unicum.gg/shared";
@@ -32,6 +36,9 @@ export function CharacteristicsChanges({
   /** The main characteristics block; the recap shows only while it is off-screen. */
   watch: RefObject<HTMLDivElement | null>;
 }) {
+  const { locale } = useLocale();
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/tanks/detail/specifications/characteristics/changes-overlay");
   const [tableInView, setTableInView] = useState(true);
   useEffect(() => {
     const el = watch.current;
@@ -77,12 +84,11 @@ export function CharacteristicsChanges({
   return (
     <div className="fixed right-4 bottom-4 z-40 hidden max-h-[60vh] w-72 overflow-y-auto rounded-lg border border-fd-border bg-fd-background/95 p-3 shadow-lg backdrop-blur lg:block">
       <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-fd-muted-foreground">
-        Modified characteristics
-      </div>
+        {t("modified-characteristics")}</div>
       <dl className="space-y-1">
         {changes.map((c) => (
           <div key={c.label} className="flex items-baseline gap-2 text-xs">
-            <dt className="truncate text-fd-muted-foreground">{c.label}</dt>
+            <dt className="truncate text-fd-muted-foreground">{statLabel(c.label, tStats)}</dt>
             <span
               aria-hidden
               className="mb-0.5 min-w-3 flex-1 self-end border-b border-dotted border-fd-border"
@@ -90,7 +96,7 @@ export function CharacteristicsChanges({
             <dd className="flex items-baseline gap-1 whitespace-nowrap font-medium tabular-nums">
               <span className={cn("inline-flex items-center text-[11px]", c.color)}>
                 {c.delta > 0 ? "+" : ""}
-                {formatSpecValue(c.delta, c.row.digits)}
+                {formatSpecValue(locale, c.delta, c.row.digits)}
                 {c.delta > 0 ? (
                   <ChevronUpIcon className="size-3" />
                 ) : (
@@ -98,7 +104,7 @@ export function CharacteristicsChanges({
                 )}
               </span>
               <span>
-                {formatSpecValue(c.value, c.row.digits)}
+                {formatSpecValue(locale, c.value, c.row.digits)}
                 {c.row.unit ? (
                   <span className="ml-0.5 text-[10px] text-fd-muted-foreground">
                     {c.row.unit}

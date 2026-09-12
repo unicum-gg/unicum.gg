@@ -1,0 +1,13 @@
+{
+  "battles-overall": "{battles} mga laban sa kabuuan",
+  "checking-your-record-on-this": "Sinusuri ang rekord mo sa tank na ito...",
+  "fetching-your-garage": "Kinukuha namin ang iyong garage",
+  "have-you-played": "Nilaro mo na ba ang {tank}?",
+  "more-to-go": "{count} pang mga laban ang natitira",
+  "more-to-go-one": "{count} pang labanan ang natitira",
+  "sign-in-to-rate-it": "Mag-sign in para i-rate ito",
+  "sign-in-with-your-wargaming-account-to-rate-": "Mag-sign in gamit ang iyong Wargaming account para i-rate ito. Binabasa namin ang rekord mo sa eksaktong tank na ito, kaya hindi nagiging botohan ng mga taong hindi pa nakapagmaneho nito ang pahinang ito.",
+  "signed-in-on": "Naka-sign in sa {region}",
+  "too-few-battles": "Mayroon kang {played} mga laban sa {tank}. Humihingi kami ng {required} bago mabilang ang isang boto, upang manatiling average ito ng mga taong aktuwal na naglalaro nito.",
+  "you-have-not-played": "Hindi mo pa nilaro ang {tank}"
+}

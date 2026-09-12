@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "สุ่ม",
+    "battle_royale": "พรานเหล็ก",
+    "frontline": "แนวรบ",
+    "onslaught": "การบุกรุก",
+    "onslaught_night": "{onslaught} กลางคืน",
+    "grand_battle": "การรบใหญ่",
+    "clan_wars": "สงครามแคลน",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Last Stand",
+    "arcade": "อาร์เคด",
+    "story_mode": "โหมดเนื้อเรื่อง",
+    "training": "การฝึก"
+  },
+  "player-modes": {
+    "overall": "การต่อสู้แบบสุ่ม",
+    "skirmish": "การปะทะ",
+    "advances": "การรบรุกคืบ",
+    "grand": "การรบใหญ่",
+    "ranked": "การรบจัดอันดับ",
+    "cw-x": "สงครามกองทัพ X",
+    "cw-viii": "สงครามกองทัพ VIII",
+    "cw-vi": "สงครามกองทัพ VI",
+    "steel-hunter": "พรานเหล็ก",
+    "onslaught": "การบุกรุก"
+  },
+  "stronghold-tiers": {
+    "advances": "การรบรุกคืบ",
+    "t10": "การรบประจัญบาน T10",
+    "t8": "การรบประจัญบาน T8",
+    "t6": "การรบประจัญบาน T6"
+  },
+  "stronghold-periods": {
+    "24h": "24 ชั่วโมงที่ผ่านมา",
+    "7d": "7 วันที่ผ่านมา",
+    "30d": "30 วันที่ผ่านมา",
+    "overall": "โดยรวม"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "การรบ",
+    "winrate": "อัตราชนะ"
+  },
+  "clan-boards": {
+    "advances": "การรบรุกคืบ",
+    "t10": "การรบประจัญบาน X",
+    "t8": "การรบประจัญบาน VIII",
+    "t6": "การรบประจัญบาน VI"
+  },
+  "map-modes": {
+    "standard": "มาตรฐาน",
+    "encounter": "การรบเผชิญหน้า",
+    "assault": "ยานจู่โจม",
+    "attack-defense": "โจมตี/ป้องกัน"
+  },
+  "map-camouflage": {
+    "summer": "ฤดูร้อน",
+    "winter": "ฤดูหนาว",
+    "desert": "ทะเลทราย"
+  },
+  "map-poi": {
+    "1": "กองบัญชาการปืนใหญ่",
+    "2": "ศูนย์สื่อสาร",
+    "3": "จุดสังเกตการณ์"
+  },
+  "tournament-modes": {
+    "ctf": "มาตรฐาน",
+    "domination": "เผชิญหน้า",
+    "assault2": "โจมตี/ป้องกัน",
+    "comp7": "การบุกรุก"
+  },
+  "battle-formats": {
+    "random": "สุ่ม",
+    "clan_wars": "สงครามแคลน",
+    "advances": "การรบรุกคืบ",
+    "skirmish": "การปะทะ",
+    "maneuvers": "การซ้อมรบ",
+    "onslaught": "การบุกรุก",
+    "tournament": "ทัวร์นาเมนต์"
+  },
+  "battle-results": {
+    "victory": "ชนะ",
+    "defeat": "พ่ายแพ้",
+    "draw": "เสมอ"
+  },
+  "spawn-directions": {
+    "north": "เหนือ",
+    "south": "ใต้",
+    "east": "ตะวันออก",
+    "west": "ตะวันตก"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "กำลังจะมาถึง",
+    "registration_started": "เปิดให้ลงทะเบียน",
+    "registration_finished": "ปิดการลงทะเบียน",
+    "running": "กำลังดำเนินการ",
+    "finished": "กำลังจะเสร็จสิ้น",
+    "complete": "สำเร็จแล้ว"
+  },
+  "onslaught-tiers": {
+    "legend": "ตำนาน",
+    "champion": "แชมป์",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "รถถังหนัก",
+    "mediumTank": "กลาง",
+    "lightTank": "เบา",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "ยานจู่โจม",
+    "break": "ยานบุกทะลวง",
+    "support": "ยานสนับสนุน",
+    "universal": "ยานอเนกประสงค์",
+    "sniper": "ซุ่มยิง",
+    "wheeled": "ล้อยาง"
+  },
+  "mastery-badges": {
+    "class3": "3rd Class",
+    "class2": "2nd Class",
+    "class1": "1st Class",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "การต่อสู้แบบสุ่ม",
+    "stronghold": "ฐานที่มั่น",
+    "skirmish": "การปะทะ",
+    "clan-wars": "สงครามแคลน"
+  },
+  "features": {
+    "stronghold": "ฐานที่มั่น",
+    "skirmish": "การปะทะ",
+    "marks-of-excellence": "เครื่องหมายเชิดชูเกียรติ",
+    "marks-of-mastery": "เครื่องหมายความเชี่ยวชาญ",
+    "personal-rating": "ลำดับส่วนตัว",
+    "world-of-tanks-rating": "การจัดอันดับ World of Tanks",
+    "common-test": "การทดสอบทั่วไป",
+    "tournaments": "ทัวร์นาเมนต์"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "เครื่องหมายเชิดชูเกียรติ"
+  }
+}

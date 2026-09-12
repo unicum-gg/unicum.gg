@@ -57,6 +57,14 @@ export interface EquipmentDef {
   userString: string;
   /** The device's localized description (resolved from `#artefacts:.../descr`). */
   description: string;
+  /**
+   * The artefacts entry the description came from, which is NOT always this
+   * device's own `key`: a grade variant carries the base device's ref, and the
+   * icon fallback below borrows another device's outright. The app translates
+   * the description by looking this up in the client's own catalogue, so it has
+   * to be told which entry it actually reads.
+   */
+  descriptionKey: string;
   groupName: string;
   /** The wot-src icon name (e.g. `rammer`), the stable link a directive uses to
    * point at the device it enhances (directive and device share this `<icon>`),
@@ -516,6 +524,7 @@ export class SourceEquipmentResource {
         description: String(
           device.description ?? device.shortDescriptionSpecial ?? "",
         ),
+        descriptionKey: "",
         groupName: String(device.groupName ?? key),
         icon,
         grade,
@@ -553,22 +562,31 @@ export class SourceEquipmentResource {
     // `long_special`) loc keys just repeat the device name. Blank that redundant
     // text so the UI shows nothing rather than the name twice, and falls back to
     // the numeric effects, which are the only real information for these devices.
+    const artefactKey = (ref: string): string =>
+      ref.startsWith("#artefacts:")
+        ? ref.slice("#artefacts:".length).split("/")[0]
+        : "";
     for (const e of equipment) {
       const resolved = descr(e.description);
+      const from = artefactKey(e.description);
       e.description = resolved === descr(e.userString) ? "" : resolved;
+      e.descriptionKey = e.description ? from : "";
     }
     for (const c of consumables) c.description = descr(c.description);
     for (const dir of directives) dir.description = descr(dir.description);
     // A bond/special variant (its own name, e.g. "Venting System") often has an
     // empty description key; fall back to the standard device of the same family
     // (shared `<icon>`), whose description it mirrors in game.
-    const descByIcon = new Map<string, string>();
+    const descByIcon = new Map<string, { text: string; key: string }>();
     for (const e of equipment)
       if (e.description && e.icon && !descByIcon.has(e.icon))
-        descByIcon.set(e.icon, e.description);
+        descByIcon.set(e.icon, { text: e.description, key: e.descriptionKey });
     for (const e of equipment)
-      if (!e.description && e.icon)
-        e.description = descByIcon.get(e.icon) ?? "";
+      if (!e.description && e.icon) {
+        const borrowed = descByIcon.get(e.icon);
+        e.description = borrowed?.text ?? "";
+        e.descriptionKey = borrowed?.key ?? "";
+      }
 
     return { tankId, tag: match.tag, slots, equipment, directives, consumables };
   }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -40,6 +41,7 @@ export function PlayerSearchPopover({
   triggerAriaLabel: string;
   tooltip?: string;
 }) {
+  const { t } = useTranslation("components/players/compare/player-search-popover");
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   // Results are tagged with the query they belong to, so a stale set from a
@@ -142,7 +144,7 @@ export function PlayerSearchPopover({
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search player..."
+            placeholder={t("search-player")}
             spellCheck={false}
             autoComplete="off"
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-fd-muted-foreground"
@@ -151,17 +153,14 @@ export function PlayerSearchPopover({
         <div className="max-h-72 overflow-y-auto">
           {query.trim().length < MIN_QUERY_LENGTH ? (
             <div className="px-3 py-3 text-xs text-fd-muted-foreground">
-              Type at least {MIN_QUERY_LENGTH} characters.
-            </div>
+              {t("type-at-least-characters", { MINQUERYLENGTH: MIN_QUERY_LENGTH })}</div>
           ) : filtered.length === 0 ? (
             loading ? (
               <div className="px-3 py-3 text-xs text-fd-muted-foreground">
-                Searching...
-              </div>
+                {t("searching")}</div>
             ) : (
               <div className="px-3 py-3 text-xs text-fd-muted-foreground">
-                No matching players.
-              </div>
+                {t("no-matching-players")}</div>
             )
           ) : (
             filtered.map((r) => (

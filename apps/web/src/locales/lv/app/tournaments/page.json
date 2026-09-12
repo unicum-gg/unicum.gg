@@ -1,0 +1,8 @@
+{
+  "description": "Katrs Wargaming turnīrs reģionā {region}: ikdienas zelta līderu saraksti, klanu čempionāti, dalībnieki un uzvarētāji. Pilnas tabulas, rezultāti un sastāvi.",
+  "live-many": "{count} turnīri pašlaik ir atvērti vai tiek spēlēti reģionā {region},",
+  "live-one": "{count} turnīrs pašlaik ir atvērts vai tiek spēlēts reģionā {region},",
+  "no-live": "Turnīri reģionā {region} notiek katru dienu,",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "no 1 pret 1 līderu sarakstiem par zeltu līdz klanu čempionātiem par naudu. Pilnas tabulas un rezultāti, katra komanda ar savu sastāvu un pusi, no kuras tā sāka, katrai kartei."
+}

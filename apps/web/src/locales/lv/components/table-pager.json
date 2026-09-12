@@ -1,0 +1,8 @@
+{
+  "previous": "Iepriekšējā lapa",
+  "next": "Nākamā lapa",
+  "rows-per-page": "Rindas uz lapu",
+  "all": "Visus",
+  "range": "{first}–{last} no {total}",
+  "page": "Lapa {page} / {total}"
+}

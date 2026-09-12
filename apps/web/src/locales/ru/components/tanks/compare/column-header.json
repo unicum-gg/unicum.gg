@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Боекомплект, оборудование, расходники, инструкции, экипаж и развитие для этого столбца. Каждое изменение меняет характеристики в сравнении ниже.",
+  "ammunition-equipment-crew-and-progression": "Боекомплект, оборудование, экипаж и развитие",
+  "apply-to-every-column": "Применить ко всем столбцам",
+  "compare-against": "Сравнить с {tank}",
+  "compare-the-others-against-this-one": "Сравнить остальные с этой техникой",
+  "configure-tank": "Настроить {tank}",
+  "highest-overall-score": "Наивысшая общая оценка",
+  "highest-overall-score-of-this": "Наивысшая общая оценка этого сравнения",
+  "is-the-reference": "{tank} служит эталоном",
+  "overall": "Общее",
+  "reference-column": "Эталонный столбец",
+  "remove-tank": "Удалить {tank}",
+  "reset-all": "Сбросить все",
+  "setup": "Настройка",
+  "stock": "Сток",
+  "tank-setup": "Сборка: {tank}",
+  "top": "Лучшие",
+  "where-this-vehicle-sits-across": "Положение этой техники во всём каталоге из {MAXSCORE}: среднее четырёх категориальных оценок, настроенных здесь. Это сводка, а не вердикт: разведчик и тяжёлый танк могут получить одинаковое число благодаря разным сильным сторонам."
+}

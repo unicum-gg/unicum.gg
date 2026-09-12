@@ -1,0 +1,4 @@
+{
+  "compare-the-live-and-common": "ライブ版と共通テスト版を比較",
+  "compare-live-against-common-test": "ライブ版と共通テスト{testVersion}を比較"
+}

@@ -1,0 +1,12 @@
+{
+  "achievements": "Conquistas de {nickname}",
+  "filter-all": "Todos",
+  "filter-both": "Ambos",
+  "filter-earned": "Conquistados",
+  "filter-missing": "Ausentes",
+  "filter-obtainable": "Conquistáveis",
+  "filter-retired": "Retirados",
+  "no-achievement-matches-these-filters": "Nenhuma conquista corresponde a estes filtros.",
+  "search-achievements": "Pesquisar conquistas",
+  "search-among-n-achievements": "Pesquisar entre {count} conquistas"
+}

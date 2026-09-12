@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Ойын алаңының ені",
+    "height": "Ойын алаңының биіктігі",
+    "round-length": "Шайқас уақыты",
+    "team-size": "команда көлемі",
+    "camouflage": "Маусым",
+    "presence": "Ойында",
+    "variant-version": "{type} нұсқасы",
+    "play-area": "Ойын алаңы",
+    "bases-team1": "Одақтас базалар",
+    "bases-team2": "Жау базалары",
+    "spawns-team1": "Одақтастардың пайда болу нүктелері",
+    "spawns-team2": "Жаудың пайда болу нүктелері",
+    "control-point": "Бақылау нүктесі",
+    "artillery-headquarters": "Артиллерия штабы",
+    "comms-centers": "Байланыс орталықтары",
+    "observation-posts": "Бақылау бекеттері",
+    "points-of-interest": "Қызығушылық нүктелері"
+  },
+  "summary": {
+    "added": "{name} қосылды",
+    "removed": "{name} жойылған",
+    "added-to-game": "Ойынға қосылды",
+    "removed-from-game": "Ойыннан жойылған",
+    "added-on-test": "Сынақ клиентіне қосылды",
+    "removed-on-test": "Сынақ клиентінен жойылған",
+    "mode-added": "{name} режимі қосылды",
+    "mode-removed": "{name} режимі жойылған",
+    "now-played-in": "Енді {name} ішінде ойналады",
+    "no-longer-played-in": "Енді {name} ішінде ойналмайды",
+    "event-added": "{name} енді шайқас кезінде болуы мүмкін",
+    "event-removed": "{name} енді болмайды",
+    "moved": "{name} ауысты",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

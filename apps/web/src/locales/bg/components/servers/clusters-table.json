@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Все още няма записан клъстер.",
+  "server": "Сървър",
+  "online": "Онлайн",
+  "share": "Сподели",
+  "peak": "Пик ({label})",
+  "average": "Средно ({label})",
+  "not-reported": "Не е докладвано",
+  "total": "Общо"
+}

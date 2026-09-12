@@ -1,12 +1,14 @@
+import { numberFormat } from "@/lib/format";
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import {
-  RATING_CONSENSUS_LABEL,
   type RatingConsensus,
   type TankRatingSummary,
 } from "@unicum.gg/shared";
 import { Stars, StarValue } from "./stars";
 import { StarHistogram } from "./histogram";
 
-const intFmt = new Intl.NumberFormat("en-US");
+const INT_FORMAT = {} as const;
 
 /**
  * The headline: what the community makes of this tank, and how much weight that
@@ -20,55 +22,62 @@ const intFmt = new Intl.NumberFormat("en-US");
  * number of battles the voters have on the tank. That is the difference between
  * a verdict and a poll.
  */
-export function CommunityVerdict({
-  summary,
+export async function CommunityVerdict({
+  summary, locale,
 }: {
   summary: TankRatingSummary;
+  locale: string;
 }) {
-  if (summary.votes === 0) return <NoVotesYet />;
+  const { t } = await getTranslation("components/tanks/detail/community/verdict", locale);
+  if (summary.votes === 0) return <NoVotesYet locale={locale} />;
 
   return (
     <div className="grid gap-6 sm:grid-cols-2">
       <ScoreBlock
-        label="Overall"
-        hint="How good the tank is"
+        locale={locale}
+        label={t("overall")}
+        hint={t("how-good-the-tank-is")}
         value={summary.overall}
         votes={summary.votes}
         distribution={summary.overallDistribution}
         consensus={summary.consensus}
       />
       <ScoreBlock
-        label="Fun"
-        hint="How much people enjoy it"
+        locale={locale}
+        label={t("fun")}
+        hint={t("how-much-people-enjoy-it")}
         value={summary.fun}
         votes={summary.votes}
         distribution={summary.funDistribution}
       />
       <p className="text-xs text-fd-muted-foreground sm:col-span-2">
         {summary.avgVoterBattles == null ? (
-          "Every vote comes from an account that has played this tank."
+          t("every-vote-played")
         ) : (
-          <>
-            Every vote comes from an account that has played this tank, on
-            average{" "}
-            <span className="font-medium text-fd-foreground tabular-nums">
-              {intFmt.format(Math.round(summary.avgVoterBattles))}
-            </span>{" "}
-            battles in it.
-          </>
+          <Interpolate
+            template={t("every-vote-played-average")}
+            values={{
+              battles: (
+                <span className="font-medium text-fd-foreground tabular-nums">
+                  {numberFormat(locale, INT_FORMAT).format(Math.round(summary.avgVoterBattles))}
+                </span>
+              ),
+            }}
+          />
         )}
       </p>
     </div>
   );
 }
 
-function ScoreBlock({
+async function ScoreBlock({
   label,
   hint,
   value,
   votes,
   distribution,
   consensus,
+  locale,
 }: {
   label: string;
   hint: string;
@@ -76,7 +85,13 @@ function ScoreBlock({
   votes: number;
   distribution: TankRatingSummary["overallDistribution"];
   consensus?: RatingConsensus | null;
+  locale: string;
 }) {
+  const { t: tLabel } = await getTranslation("components/labels", locale);
+  const { t } = await getTranslation(
+    "components/tanks/detail/community/verdict",
+    locale,
+  );
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-baseline gap-2">
@@ -88,28 +103,30 @@ function ScoreBlock({
         <div className="flex flex-col gap-1">
           <Stars value={value} size={18} />
           <span className="text-xs text-fd-muted-foreground tabular-nums">
-            {intFmt.format(votes)} {votes === 1 ? "vote" : "votes"}
+            {t(votes === 1 ? "votes-one" : "votes", {
+              count: numberFormat(locale, INT_FORMAT).format(votes),
+            })}
             {/* Said out loud rather than left in the standard deviation: a 3.0
               everyone agrees on and a 3.0 half the server fought over are
               different facts about the tank. */}
             {consensus ? (
-              <> &middot; {RATING_CONSENSUS_LABEL[consensus].toLowerCase()}</>
+              <> &middot; {tLabel(`rating-consensus.${consensus}`).toLowerCase()}</>
             ) : null}
           </span>
         </div>
       </div>
-      <StarHistogram bars={distribution} />
+      <StarHistogram bars={distribution}  locale={locale} />
     </div>
   );
 }
 
-function NoVotesYet() {
+async function NoVotesYet({ locale }: { locale: string }) {
+  const { t } = await getTranslation("components/tanks/detail/community/verdict", locale);
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-sm font-medium">Nobody has rated this tank yet.</p>
+      <p className="text-sm font-medium">{t("nobody-has-rated-this-tank")}</p>
       <p className="text-sm text-fd-muted-foreground">
-        If you have played it, you are exactly who this page is waiting for.
-      </p>
+        {t("if-you-have-played-it")}</p>
     </div>
   );
 }

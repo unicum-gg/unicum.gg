@@ -1,0 +1,17 @@
+{
+  "close": "Zatvori",
+  "format": "Format",
+  "here": "ovde",
+  "in-the-queue": "Налази се у реду и појавиће се {where} када је модератор прегледа. Твоја ће дотад на тој страници бити засивљена.",
+  "log-in-to-suggest-a": "Пријави се да предложиш тактику",
+  "on-map": "na {map}",
+  "players-per-team": "Igrači po timu",
+  "sending": "Slanje…",
+  "suggest": "Predloži",
+  "suggest-a-tactic": "Предложи тактику",
+  "suggest-another": "Predloži još jedan",
+  "suggestion-sent": "Predlog je poslat",
+  "tier": "Nivo",
+  "what-to-submit": "Такмичарска bitka, отворена у секунди када је почела. Мапа почиње на {map} и креће се заједно са снимком: кланско вече пролази кроз ротацију. Страна са које се играло је оно по чему је вођа паљбе тражи, па се зато наводи уместо да се погађа.",
+  "what-was-played": "Šta je igrano"
+}

@@ -1,0 +1,11 @@
+{
+  "compare": "Comparar con los {count} más cercanos",
+  "match": "batalla",
+  "subtitle": "Misma posición dentro de su propio nivel",
+  "verdict": {
+    "overall": "Similar en general",
+    "closest": "Más cercano en {axes}",
+    "closest-furthest": "Más cercano en {axes}, más alejado en {apart}",
+    "and": " y "
+  }
+}

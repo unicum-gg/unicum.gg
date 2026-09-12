@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslation } from "@/hooks/use-translation";
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import {
   Tooltip,
@@ -27,7 +30,8 @@ export function CommonTestBadge({
    * same thing everywhere, but "no battle statistics" only makes sense on one. */
   description?: string;
 }) {
-  const label = version ? `Common Test ${version}` : "Common Test";
+  const { t } = useTranslation("components/entity/badges/common-test-badge");
+  const label = version ? t("common-test-build", { version }) : t("common-test");
   return (
     <TooltipProvider>
       <Tooltip>
@@ -36,12 +40,12 @@ export function CommonTestBadge({
             className="inline-flex"
             aria-label={
               description
-                ? `Common Test: ${description}`
+                ? t("aria-described", { description })
                 : changes
-                  ? `Changed by the Common Test: ${changes} characteristics`
+                  ? t("aria-changes", { changes })
                   : version
-                    ? `Read on the Common Test client, build ${version}`
-                    : "Common Test vehicle"
+                    ? t("aria-build", { version })
+                    : t("aria-vehicle")
             }
           >
             <Crest kind={CrestKind.CommonTest} size={size} />
@@ -49,12 +53,12 @@ export function CommonTestBadge({
         </TooltipTrigger>
         <TooltipContent>
           {description
-            ? `Common Test · ${description}`
+            ? t("tip-described", { description })
             : changes
-            ? `Common Test changes ${changes} characteristic${changes > 1 ? "s" : ""} on this vehicle`
-            : version
-              ? `${label} · these are the test build's values, and Wargaming can still change them before the update ships`
-              : "Common Test · not released yet, so it has no battle statistics and its characteristics can still change"}
+              ? t("tip-changes", { changes })
+              : version
+                ? t("tip-build", { label })
+                : t("tip-vehicle")}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

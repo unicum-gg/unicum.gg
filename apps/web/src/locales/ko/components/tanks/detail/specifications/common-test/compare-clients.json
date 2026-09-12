@@ -1,0 +1,4 @@
+{
+  "compare-the-live-and-common": "실시간 버전과 공통 테스트 버전 비교",
+  "compare-live-against-common-test": "실시간 버전과 공통 테스트 {testVersion} 비교"
+}

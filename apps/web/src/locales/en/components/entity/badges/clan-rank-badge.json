@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rank {rank} on the {board}",
+  "board": {
+    "advances": "Advances Stronghold rating",
+    "skirmish-t10": "Tier X Skirmish rating",
+    "skirmish-t6": "Tier VI Skirmish rating",
+    "skirmish-t8": "Tier VIII Skirmish rating"
+  }
+}

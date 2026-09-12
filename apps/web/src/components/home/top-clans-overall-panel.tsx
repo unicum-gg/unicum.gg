@@ -1,6 +1,7 @@
 "use client";
 
 import { Period, usePeriod } from "@/hooks/use-period";
+import { useTranslation } from "@/hooks/use-translation";
 import { PeriodSelect } from "@/components/home/period-select";
 import { TopClans, type TopClansInitial } from "@/components/home/top-clans";
 import { TopClansLeaderboardLink } from "@/components/home/top-clans-leaderboard-link";
@@ -31,6 +32,7 @@ export function TopClansOverallPanel({
   regionOverride?: Region;
 }) {
   const [period, setPeriod] = usePeriod();
+  const { t } = useTranslation("components/home/top-clans-overall-panel");
   const isOverall = period === Period.Overall;
   const data = isOverall ? overallByMetric : monthByMetric;
 
@@ -38,7 +40,7 @@ export function TopClansOverallPanel({
     <Panel className="flex flex-col">
       <PanelHeader className="flex items-center justify-between gap-3">
         <PanelTitle>
-          Top clans ·{" "}
+          {t("title")}{" "}
           <PeriodSelect period={period} onChange={setPeriod} />
         </PanelTitle>
         {isOverall && (

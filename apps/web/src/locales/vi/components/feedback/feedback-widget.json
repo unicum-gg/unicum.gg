@@ -1,0 +1,21 @@
+{
+  "trigger": "Phản hồi",
+  "title": "Chia sẻ phản hồi của bạn",
+  "topic-placeholder": "Chọn một chủ đề...",
+  "message-placeholder": "Phản hồi của bạn...",
+  "send": "Gửi",
+  "sent": "Cảm ơn phản hồi của bạn!",
+  "failed": "Không thể gửi phản hồi. Vui lòng thử lại.",
+  "topics": {
+    "bug": "Báo cáo lỗi",
+    "idea": "Ý tưởng tính năng",
+    "data": "Độ chính xác của dữ liệu",
+    "other": "Khác"
+  },
+  "sentiments": {
+    "awful": "Rất tệ",
+    "bad": "Kém",
+    "good": "Tốt",
+    "great": "Rất tốt"
+  }
+}

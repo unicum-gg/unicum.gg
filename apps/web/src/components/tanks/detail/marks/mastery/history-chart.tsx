@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import {
   type ChartConfig,
@@ -10,16 +11,9 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const dayFmt = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-});
-const tooltipDayFmt = new Intl.DateTimeFormat("en-US", {
-  weekday: "short",
-  month: "short",
-  day: "numeric",
-});
-const valueFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const DAY_PATTERN = "d MMM";
+const TOOLTIP_DAY_PATTERN = "EEE d MMM";
+const VALUE_FORMAT = { maximumFractionDigits: 0 } as const;
 
 export type MarksSeries = {
   key: string;
@@ -39,6 +33,8 @@ export function MarksHistoryChart({
   series: MarksSeries[];
   ariaLabel: string;
 }) {
+  const { num } = useFormat();
+  const { date } = useFormat();
   const config = Object.fromEntries(
     series.map((s) => [s.key, { label: s.label, color: s.color }]),
   ) satisfies ChartConfig;
@@ -57,7 +53,7 @@ export function MarksHistoryChart({
           axisLine={false}
           tickMargin={8}
           minTickGap={32}
-          tickFormatter={(v) => dayFmt.format(new Date(v))}
+          tickFormatter={(v) => date(DAY_PATTERN).format(new Date(v))}
         />
         <YAxis
           tickLine={false}
@@ -66,14 +62,14 @@ export function MarksHistoryChart({
           width={48}
           allowDecimals={false}
           domain={["auto", "auto"]}
-          tickFormatter={(v) => valueFmt.format(Number(v))}
+          tickFormatter={(v) => num(VALUE_FORMAT).format(Number(v))}
         />
         <ChartTooltip
           cursor={false}
           content={
             <ChartTooltipContent
               labelFormatter={(label) =>
-                tooltipDayFmt.format(new Date(label as string))
+                date(TOOLTIP_DAY_PATTERN).format(new Date(label as string))
               }
             />
           }

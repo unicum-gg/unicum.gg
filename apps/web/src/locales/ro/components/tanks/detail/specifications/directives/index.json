@@ -1,0 +1,9 @@
+{
+  "boosts": "Boosts {name}",
+  "directives": "Directive",
+  "directive-name": "Directiva {name}",
+  "grants-and-boosts": "Oferă și îmbunătățește abilitatea echipajului, chiar și când acesta nu este antrenat.",
+  "grants-only": "Oferă abilitatea echipajului pentru bătălie, fără o caracteristică listată.",
+  "enhances-mounted": "Îmbunătățește {name} montat.",
+  "mount-to-use": "Montează {name} pentru a folosi această directivă."
+}

@@ -1,0 +1,34 @@
+{
+  "stat": "Statistik",
+  "rows": {
+    "battles": "Kampe",
+    "tier": "Niveau",
+    "wins": "Sejre",
+    "losses": "Tabt",
+    "draws": "Uafgjorte",
+    "survived": "Kampe overlevet",
+    "destroyed": "Ødelagte tanks",
+    "destruction-ratio": "Destruktionsratio",
+    "spotted": "Spottede tanks",
+    "damages": "Skader",
+    "track-damages": "Træk skader",
+    "spotting-damages": "Observerer skader",
+    "assisting-damages": "Assisterende skader",
+    "combined-damages": "Kombinerede skader",
+    "base-capture": "Basis erobring",
+    "base-defense": "Baseforsvar",
+    "experience": "Xp",
+    "hit-rate": "Rammeprocent",
+    "personal-rating": "Personlig rating",
+    "wtr": "World of Tanks-vurdering",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "I alt",
+    "day": "Sidste 24 timer",
+    "week": "Sidste 7 dage",
+    "month": "Sidste 30 dage"
+  }
+}

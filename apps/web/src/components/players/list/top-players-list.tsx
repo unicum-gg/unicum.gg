@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/format";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
@@ -15,13 +16,14 @@ import {
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
@@ -34,6 +36,7 @@ export function TopPlayersList({
   results,
   metric,
   rankOffset = 0,
+  locale,
 }: {
   region: Region;
   results: TopPlayerByLanguageResult[];
@@ -41,12 +44,14 @@ export function TopPlayersList({
   // Global rank of the first row (the page offset), so paginated pages keep the
   // true leaderboard rank instead of restarting at 1.
   rankOffset?: number;
+  locale: string;
 }) {
+  const { t } = useTranslation("components/players/list/view");
+  const { t: tOwn } = useTranslation("components/players/list/top-players-list");
   if (results.length === 0) {
     return (
       <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-        No players match this filter yet.
-      </div>
+        {tOwn("no-players-match-this-filter")}</div>
     );
   }
   const colorFor = COLOR_FOR_METRIC[metric];
@@ -64,12 +69,12 @@ export function TopPlayersList({
       <TableHeader>
         <TableRow>
           <TableHead className="w-12 text-center!">#</TableHead>
-          <TableHead>Player</TableHead>
+          <TableHead>{t("columns.player")}</TableHead>
           <TableHead className="w-24 text-right! tabular-nums">
-            <GlossaryLabel>Battles</GlossaryLabel>
+            <GlossaryLabel label={t("battles")}>{t("battles")}</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
-            <GlossaryLabel>WR</GlossaryLabel>
+            <GlossaryLabel>{tOwn("wr")}</GlossaryLabel>
           </TableHead>
           <TableHead className="w-24 text-right!">
             <GlossaryLabel label={RATING_METRIC_LABEL[metric]}>
@@ -112,7 +117,7 @@ export function TopPlayersList({
                 />
               </TableCell>
               <TableCell className="text-right text-muted-foreground tabular-nums">
-                {intFmt.format(r.battles)}
+                {numberFormat(locale, INT_FORMAT).format(r.battles)}
               </TableCell>
               <TableCell
                 className={cn(
@@ -120,7 +125,7 @@ export function TopPlayersList({
                   r.winrate != null && RATING_COLOR_CLASS[winrateColor(r.winrate)],
                 )}
               >
-                {r.winrate != null ? pctFmt.format(r.winrate) : "—"}
+                {r.winrate != null ? numberFormat(locale, PCT_FORMAT).format(r.winrate) : "—"}
               </TableCell>
               <TableCell
                 className={cn(
@@ -128,7 +133,7 @@ export function TopPlayersList({
                   colorFor(r.wnx),
                 )}
               >
-                {intFmt.format(r.wnx)}
+                {numberFormat(locale, INT_FORMAT).format(r.wnx)}
               </TableCell>
             </TableRow>
           );

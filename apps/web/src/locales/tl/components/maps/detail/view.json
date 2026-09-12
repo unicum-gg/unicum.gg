@@ -1,0 +1,9 @@
+{
+  "battle-time": "Oras ng laban",
+  "camouflage": "{camouflage} kamalayan",
+  "mode": "Mode",
+  "n-random-events": "{count, plural, one {# random na kaganapan} other {# mga random na kaganapan}}",
+  "random-events": "Random na kaganapan",
+  "size": "Sukat",
+  "team-size": "Sukat ng koponan"
+}

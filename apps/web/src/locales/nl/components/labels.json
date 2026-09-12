@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Wacht op eerste snapshot",
+    "hidden": "Verborgen door Wargaming",
+    "active_24h": "Actief < 24 u",
+    "active_7d": "Actief < 7 d",
+    "recent_30d": "Recent actief < 30 d",
+    "recent_90d": "Recent actief < 90 d",
+    "dormant_1y": "Slapend < 1 jaar",
+    "inactive": "Inactief > 1 jaar"
+  },
+  "rating-hype": {
+    "overrated": "Overschat",
+    "fair": "Redelijk beoordeeld",
+    "underrated": "Ondergeschat"
+  },
+  "rating-consensus": {
+    "agreed": "Brede overeenstemming",
+    "mixed": "Gemengde meningen",
+    "divisive": "Controversieel"
+  },
+  "rating-axes": {
+    "overall": "Totaal",
+    "fun": "Plezier",
+    "firepower": "Vuurkracht",
+    "armour": "Pantser",
+    "mobility": "Mobiliteit",
+    "gunHandling": "Wapen hantering",
+    "concealment": "Verborgenheid",
+    "beginnerFriendliness": "Beginners vriendelijk",
+    "versatility": "Veelzijdigheid"
+  },
+  "rating-axis-hints": {
+    "overall": "Hoe goed is deze tank als je alles meeweegt?",
+    "fun": "Hoe leuk vind je het om ermee te spelen?",
+    "firepower": "Alfaschade, schade per minuut en penetratie.",
+    "armour": "Hoeveel schoten hij afketst, hull-down en in het open veld.",
+    "mobility": "Snelheid, acceleratie en draaivermogen.",
+    "gunHandling": "Aim tijd, spreiding en nauwkeurigheid tijdens het rijden.",
+    "concealment": "Camouflage en zichtbereik.",
+    "beginnerFriendliness": "Hoe vergevingsgezind hij is als je het nog aan het leren bent.",
+    "versatility": "Werkt hij op elke kaart en in elk team?"
+  },
+  "voter-brackets": {
+    "unknown": "Onbeoordeeld",
+    "learning": "Leren",
+    "average": "Gemiddeld",
+    "strong": "Sterk",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Voertuigen",
+    "gunnery": "Schieten",
+    "armor": "Bepantsering",
+    "mobility": "Mobiliteit",
+    "vision": "Zicht",
+    "crew": "Bemanning",
+    "progression": "Progressie",
+    "economy": "Economie",
+    "ratings": "Beoordelingen",
+    "statistics": "Statistieken",
+    "modes": "Gevechtsmodi",
+    "tactics": "Tactieken",
+    "slang": "Jargon"
+  }
+}

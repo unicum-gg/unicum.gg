@@ -1,0 +1,37 @@
+{
+  "label": "Meer",
+  "items": {
+    "tournaments": {
+      "label": "Toernooien",
+      "description": "Toernooischema’s, deelnemerslijsten en resultaten, per regio"
+    },
+    "servers": {
+      "label": "Servers",
+      "description": "Spelers online, nu en in de loop van de tijd"
+    },
+    "bot": {
+      "label": "Discord bot",
+      "description": "Statistieken van spelers, clans en tanks als slashcommando’s"
+    },
+    "mcp": {
+      "label": "MCP server",
+      "description": "Koppel Claude, ChatGPT of een andere MCP-client"
+    },
+    "api": {
+      "label": "API",
+      "description": "Gratis openbare REST API, geen sleutel vereist"
+    },
+    "badges": {
+      "label": "Badges",
+      "description": "Alle emblemen die een speler of clan kan verdienen, plus hoe je ze verdient"
+    },
+    "glossary": {
+      "label": "Glossarium",
+      "description": "Elke World of Tanks-term uitgelegd"
+    },
+    "support": {
+      "label": "Steun ons",
+      "description": "Houd {name} gratis, open en reclamevrij"
+    }
+  }
+}

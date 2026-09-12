@@ -1,0 +1,27 @@
+{
+  "placeholder": "Caută jucători, clanuri, tancuri, hărți sau termeni",
+  "type": "Tip",
+  "types": {
+    "all": "Toate",
+    "players": "Jucători",
+    "clans": "Clanuri",
+    "tanks": "Tancuri",
+    "maps": "Hărţile",
+    "glossary": "Glossar"
+  },
+  "sections": {
+    "players": "Jucători",
+    "clans": "Clanuri",
+    "tanks": "Tancuri",
+    "maps": "Hărţile",
+    "glossary": "Glossar",
+    "recent": "Recente",
+    "favorites": "Favorite"
+  },
+  "searching": "Se caută…",
+  "errored": "Ceva nu a funcționat. Încearcă din nou.",
+  "empty": "Niciun rezultat găsit",
+  "remove-recent": "Elimină din recente",
+  "add-favorite": "Adăugare la favorite",
+  "remove-favorite": "Îndepărtare din favorite"
+}

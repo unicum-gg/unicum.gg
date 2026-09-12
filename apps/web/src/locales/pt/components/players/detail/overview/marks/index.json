@@ -1,0 +1,21 @@
+{
+  "title": "Marcas e mestria de {nickname}",
+  "excellence": {
+    "title": "Marcas de Excelência",
+    "description": "Veículos de acordo com as marcas nos seus canhões. Uma marca representa uma média sustentada: o jogo calcula-a com base numa janela móvel de batalhas recentes, comparando-a com o desempenho da região nesse veículo.",
+    "partial": "Há dados de marcas para {known} de {garage} veículos. Os restantes surgirão à medida que a conta for atualizada.",
+    "note": "Dos {garage} veículos, {marked} têm uma marca.",
+    "note-share": "Dos {garage} veículos, {marked} têm uma marca ({percent}% da garagem)."
+  },
+  "mastery": {
+    "title": "Marcas de Maestria",
+    "description": "Veículos de acordo com o seu melhor distintivo. Um distintivo representa uma batalha, não uma média: o jogo atribui-o com base na experiência obtida numa única batalha, comparada com os resultados da região nesse veículo.",
+    "note": "Dos {garage} veículos, {aces} têm o distintivo Ás dos Tanques.",
+    "note-share": "Dos {garage} veículos, {aces} têm o distintivo Ás dos Tanques ({percent}% da garagem)."
+  },
+  "reach": {
+    "heading": "Desempenho acima da marca",
+    "description": "Veículos cujo dano combinado já ultrapassa o limiar de uma marca que ainda não têm. O distintivo apresenta esse dano combinado na cor da marca cujo limiar ultrapassa."
+  },
+  "none": "Nenhum"
+}

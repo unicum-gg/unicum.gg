@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "No cluster recorded yet.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Share",
+  "peak": "Peak ({label})",
+  "average": "Average ({label})",
+  "not-reported": "Not reported",
+  "total": "Total"
+}

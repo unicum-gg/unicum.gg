@@ -1,0 +1,6 @@
+{
+  "active-until": "Активні до {tz}",
+  "n-left": "Залишилося: {count}",
+  "no-reserves-in-stock-right": "Наразі резервів немає в запасі.",
+  "reserves-to-activate": "Резерви для активації"
+}

@@ -1,14 +1,15 @@
+import { numberFormat } from "@/lib/format";
 import type { TankSpec } from "@unicum.gg/shared";
 import type { Group, Row } from "./rows";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
-export function formatSpecValue(value: number, digits?: number): string {
-  if (digits === undefined) return intFmt.format(value);
-  return value.toLocaleString("en-US", {
+export function formatSpecValue(locale: string, value: number, digits?: number): string {
+  if (digits === undefined) return numberFormat(locale, INT_FORMAT).format(value);
+  return numberFormat(locale, {
     minimumFractionDigits: digits,
     maximumFractionDigits: digits,
-  });
+  }).format(value);
 }
 
 export function specValue(

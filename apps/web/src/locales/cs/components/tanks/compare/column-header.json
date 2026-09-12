@@ -1,0 +1,20 @@
+{
+  "ammunition-equipment-consumables-directives-crew": "Munice, vybavení, spotřební doplňky, směrnice, posádka a postup pro tento sloupec. Každá změna posune jeho parametry v porovnání na pozadí.",
+  "ammunition-equipment-crew-and-progression": "Munice, vybavení, posádka a postup",
+  "apply-to-every-column": "Použít na všechny sloupce",
+  "compare-against": "Porovnat s tankem {tank}",
+  "compare-the-others-against-this-one": "Porovnat ostatní s tímto tankem",
+  "configure-tank": "Konfigurovat tank {tank}",
+  "highest-overall-score": "Celkově nejvyšší skóre",
+  "highest-overall-score-of-this": "Celkově nejvyšší skóre v tomto porovnání",
+  "is-the-reference": "Referenční tank: {tank}",
+  "overall": "Celkově",
+  "reference-column": "Referenční sloupec",
+  "remove-tank": "Odstranit tank {tank}",
+  "reset-all": "Resetovat vše",
+  "setup": "Nastavení",
+  "stock": "Základní",
+  "tank-setup": "Sestavení tanku {tank}",
+  "top": "Nejlepší",
+  "where-this-vehicle-sits-across": "Jak si toto vozidlo stojí v celém katalogu na škále do {MAXSCORE}: průměr jeho skóre ve čtyřech kategoriích podle zde zvoleného nastavení. Shrnutí, nikoli verdikt. Lehký a těžký tank mohou dosáhnout stejného výsledku tím, že každý vyniká v něčem jiném."
+}

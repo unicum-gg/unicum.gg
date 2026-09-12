@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Kosten (credits)",
+      "tip": "Aankoopprijs in credits (tanks in de tech tree)"
+    },
+    "buyGold": {
+      "label": "Kosten (goud)",
+      "tip": "Aankoopprijs in Goud (premiumtanks)"
+    },
+    "researchXp": {
+      "label": "Onderzoek XP",
+      "tip": "XP om vrij te spelen (goedkoopste route)"
+    },
+    "totalFreeXp": {
+      "label": "Gratis XP (T{tier})",
+      "tip": "Cumulatieve XP voor onderzoek vanaf tier {tier}, inclusief vereiste modules"
+    },
+    "shellCost": {
+      "label": "Kogelkosten",
+      "tip": "Prijs van standaardgranaat (credits)"
+    },
+    "ammoCost": {
+      "label": "Volledige munitiekosten",
+      "tip": "Prijs van standaardgranaat × munitiecapaciteit"
+    },
+    "acquireMoney": {
+      "label": "Aankoopprijs ({currency})",
+      "tip": "Geschatte prijs in echt geld om de tank te verkrijgen (onderzoek + aankoop), uitgedrukt in {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Gratis XP ({currency})",
+      "tip": "Geschatte prijs in echt geld om de tank vanaf tier {tier} met Gratis XP vrij te spelen, uitgedrukt in {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Kosten (credits)",
+    "buyGold": "Kosten (goud)",
+    "researchXp": "Onderzoek XP",
+    "totalFreeXp": "Gratis XP",
+    "shellCost": "Kogelkosten",
+    "ammoCost": "Volledige munitiekosten",
+    "acquireMoney": "Aankoopprijs (geld)",
+    "freeXpMoney": "Gratis XP (geld)"
+  }
+}

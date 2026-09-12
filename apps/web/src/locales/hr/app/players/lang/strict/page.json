@@ -1,0 +1,6 @@
+{
+  "title": "Isključivo igrači igre World of Tanks na jeziku {language} ({region})",
+  "description": "Ljestvica igrača za {name} {region}, za igrače čiji je zaključeni jezik na temelju povijesti klana isključivo {language}, rangirano prema WNX.",
+  "og-title": "Isključivo igrači na jeziku {language}",
+  "og-subtitle": "Ljestvica za regiju {region}"
+}

@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "clear-the-field": "Clear the {label}",
+  "credited-on-the-clan-s": "Credited on the clan’s own page.",
+  "none": "None",
+  "optional": "(optional)",
+  "pick-the-vehicle": "Pick the vehicle",
+  "search-for-a-clan": "Search for a clan",
+  "search-for-a-vehicle": "Search for a vehicle",
+  "search-tank": "Search tank...",
+  "tank": "Tank",
+  "tank-hint-optional": "A tactic belongs to its map, so this is only worth naming when the video is about the vehicle too.",
+  "tank-hint-required": "A random battle is looked up by the vehicle it was played in."
+}

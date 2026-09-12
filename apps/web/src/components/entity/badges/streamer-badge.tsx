@@ -1,6 +1,7 @@
 "use client";
 
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   Tooltip,
   TooltipContent,
@@ -22,6 +23,7 @@ export function StreamerBadge({
   login: string;
   size?: number;
 }) {
+  const { t } = useTranslation("components/entity/badges/player-badges");
   return (
     <TooltipProvider>
       <Tooltip>
@@ -32,12 +34,12 @@ export function StreamerBadge({
             rel="nofollow noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
             className="inline-flex"
-            aria-label={`Watch ${login} on Twitch`}
+            aria-label={t("watch-on-twitch", { name: login })}
           >
             <Crest kind={CrestKind.Streamer} size={size} />
           </a>
         </TooltipTrigger>
-        <TooltipContent>Streamer · watch {login} on Twitch</TooltipContent>
+        <TooltipContent>{t("streamer", { name: login })}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

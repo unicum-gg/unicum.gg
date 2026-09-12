@@ -1,0 +1,11 @@
+{
+  "already-running": "già in esecuzione",
+  "in-window": "nella finestra",
+  "n-online": "/ {count} online",
+  "no-reserves-selected": "Nessuna riserva selezionata.",
+  "no-stock-ready": "nessuna riserva disponibile",
+  "not-available": "non disponibile",
+  "threshold": "soglia ({online}/{min})",
+  "would-activate": "attiverebbe",
+  "would-not-fire": "Al momento non si attiverebbe."
+}

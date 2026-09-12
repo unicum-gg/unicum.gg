@@ -1,7 +1,8 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
+import Link from "@/components/link";
 import type { GlossaryLink } from "@unicum.gg/shared";
 import { glossaryLinkHref, glossaryLinkLabel } from "@/components/glossary/links";
 import { useRegion } from "@/hooks/use-region";
@@ -12,6 +13,7 @@ import { useRegion } from "@/hooks/use-region";
  * time: the same entry links to `/na/tanks` for a reader on NA.
  */
 export function GlossarySiteLinks({ links }: { links: GlossaryLink[] }) {
+  const { t } = useTranslation("components/glossary/links");
   const { region } = useRegion();
   if (!links.length) return null;
   return (
@@ -22,7 +24,7 @@ export function GlossarySiteLinks({ links }: { links: GlossaryLink[] }) {
           href={glossaryLinkHref(link, region)}
           className="inline-flex items-center gap-1.5 rounded-md border border-fd-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-fd-secondary/50"
         >
-          {glossaryLinkLabel(link)}
+          {glossaryLinkLabel(link, t)}
           <ArrowUpRightIcon className="size-3.5 text-fd-muted-foreground" />
         </Link>
       ))}

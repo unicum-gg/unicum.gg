@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Τυχαία",
+    "battle_royale": "Steel Hunter",
+    "frontline": "Πρώτη Γραμμή",
+    "onslaught": "Επέλαση",
+    "onslaught_night": "{onslaught} Νύχτα",
+    "grand_battle": "Μεγάλη Μάχη",
+    "clan_wars": "Πολέμου Κλασμάτων",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Τελευταία Αντίσταση",
+    "arcade": "Arcade",
+    "story_mode": "Λειτουργία Ιστορίας",
+    "training": "Εκπαίδευση"
+  },
+  "player-modes": {
+    "overall": "Τυχαίες Μάχες",
+    "skirmish": "Αψιμαχία",
+    "advances": "Προωθήσεις",
+    "grand": "Μεγάλες Μάχες",
+    "ranked": "Μάχες Κατάταξης",
+    "cw-x": "Πόλεμοι Φυλών X",
+    "cw-viii": "Πόλεμοι Φυλών VIII",
+    "cw-vi": "Πόλεμοι Φυλών VI",
+    "steel-hunter": "Steel Hunter",
+    "onslaught": "Επέλαση"
+  },
+  "stronghold-tiers": {
+    "advances": "Προωθήσεις",
+    "t10": "Αψιμαχία T10",
+    "t8": "Αψιμαχία T8",
+    "t6": "Αψιμαχία T6"
+  },
+  "stronghold-periods": {
+    "24h": "Τελευταίες 24 ώρες",
+    "7d": "Τελευταίοι 7 ημέρες",
+    "30d": "Τελευταίοι 30 ημέρες",
+    "overall": "Γενικά"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Μάχες",
+    "winrate": "Ποσοστό νικών"
+  },
+  "clan-boards": {
+    "advances": "Προωθήσεις",
+    "t10": "Αψιμαχία X",
+    "t8": "Αψιμαχία VIII",
+    "t6": "Αψιμαχία VI"
+  },
+  "map-modes": {
+    "standard": "Τυπικό",
+    "encounter": "Μάχη Διεκδίκησης",
+    "assault": "Επίθεσης",
+    "attack-defense": "Επίθεση/Άμυνα"
+  },
+  "map-camouflage": {
+    "summer": "Καλοκαιρινό",
+    "winter": "Χειμερινό",
+    "desert": "Ερήμου"
+  },
+  "map-poi": {
+    "1": "Αρχηγείο Πυροβολικού",
+    "2": "Κέντρο Επικοινωνιών",
+    "3": "Παρατηρητήριο"
+  },
+  "tournament-modes": {
+    "ctf": "Τυπικό",
+    "domination": "Μάχη Συνάντησης",
+    "assault2": "Επίθεση/Άμυνα",
+    "comp7": "Επέλαση"
+  },
+  "battle-formats": {
+    "random": "Τυχαία",
+    "clan_wars": "Πολέμου Κλασμάτων",
+    "advances": "Προωθήσεις",
+    "skirmish": "Αψιμαχία",
+    "maneuvers": "Ελιγμοί",
+    "onslaught": "Επέλαση",
+    "tournament": "Τουρνουά"
+  },
+  "battle-results": {
+    "victory": "Νίκη",
+    "defeat": "Ήττα",
+    "draw": "Ισοπαλία"
+  },
+  "spawn-directions": {
+    "north": "Βορράς",
+    "south": "Νότος",
+    "east": "Ανατολή",
+    "west": "Δύση"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Ερχόμενο",
+    "registration_started": "Άνοιξε η εγγραφή",
+    "registration_finished": "Η εγγραφή έχει κλείσει",
+    "running": "Σε εξέλιξη",
+    "finished": "Ολοκλήρωση",
+    "complete": "Ολοκληρώθηκε"
+  },
+  "onslaught-tiers": {
+    "legend": "Θρύλος",
+    "champion": "Πρωταθλητής",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Βαρύ",
+    "mediumTank": "Μεσαία",
+    "lightTank": "Ελαφρύ",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Επίθεσης",
+    "break": "Κρούσης",
+    "support": "Υποστήριξης",
+    "universal": "Πολλαπλών Ρόλων",
+    "sniper": "Ελεύθερος Σκοπευτής",
+    "wheeled": "Τροχοφόρο"
+  },
+  "mastery-badges": {
+    "class3": "3η Κατηγορία",
+    "class2": "2η Κατηγορία",
+    "class1": "1η Κατηγορία",
+    "ace": "Ασσός Τανκ"
+  },
+  "clan-modes": {
+    "random": "Τυχαίες Μάχες",
+    "stronghold": "Οχυρώσεις",
+    "skirmish": "Αψιμαχία",
+    "clan-wars": "Πολέμου Κλασμάτων"
+  },
+  "features": {
+    "stronghold": "Οχυρώσεις",
+    "skirmish": "Αψιμαχία",
+    "marks-of-excellence": "Διακριτικά Υπεροχής",
+    "marks-of-mastery": "Σημάδια Δεξιοτεχνίας",
+    "personal-rating": "Προσωπική Βαθμολογία",
+    "world-of-tanks-rating": "Αξιολόγηση World of Tanks",
+    "common-test": "Κοινό Τεστ",
+    "tournaments": "Τουρνουά"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Διακριτικά Υπεροχής"
+  }
+}

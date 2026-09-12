@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Csevegés megjelenítése",
+    "hide": "Csevegés elrejtése",
+    "show-streamers": "Streamelők megjelenítése"
+  },
+  "heading": "World of Tanks játékos-, klán- és tankstatisztikák: {name}",
+  "hide": "Streamelők elrejtése",
+  "player": "Játékos",
+  "stream-language": "Közvetítés nyelve · {name}",
+  "stream-language-alt": "Közvetítés nyelve: {name}",
+  "theater": {
+    "enter": "Színház mód",
+    "exit": "Kilépés a mozivászon módból"
+  },
+  "title": "Legjobb játékosok, akik most streamelnek ·",
+  "viewer-count": "{count} néző",
+  "viewers": "Nézők",
+  "watch": "{nickname} közvetítése · Nézd a Twitchen!"
+}

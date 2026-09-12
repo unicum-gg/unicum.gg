@@ -1,0 +1,21 @@
+{
+  "trigger": "Magbigay ng feedback",
+  "title": "Ibahagi ang iyong feedback",
+  "topic-placeholder": "Pumili ng paksa...",
+  "message-placeholder": "Ang iyong feedback...",
+  "send": "Ipadala",
+  "sent": "Salamat sa iyong feedback!",
+  "failed": "Hindi maipadala ang feedback. Pakisubukang muli.",
+  "topics": {
+    "bug": "Ulat ng bug",
+    "idea": "Ideya para sa feature",
+    "data": "Katumpakan ng data",
+    "other": "Iba pa"
+  },
+  "sentiments": {
+    "awful": "Napakasama",
+    "bad": "Masama",
+    "good": "Mabuti",
+    "great": "Napakaganda"
+  }
+}

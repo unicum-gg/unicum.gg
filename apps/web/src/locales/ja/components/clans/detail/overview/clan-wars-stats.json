@@ -1,0 +1,21 @@
+{
+  "stat": "統計",
+  "periods": {
+    "total": "計",
+    "day": "過去24時間",
+    "week": "過去7日",
+    "month": "過去30日"
+  },
+  "sections": {
+    "territory": "領土",
+    "t10": "Tier X",
+    "t8": "Tier VIII",
+    "t6": "Tier VI"
+  },
+  "rows": {
+    "provinces": "領地",
+    "elo": "ELO",
+    "battles": "戦闘数",
+    "winrate": "勝率"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "date": "Tarih",
+  "featured-tournament": "Öne çıkan turnuva",
+  "format": "Format",
+  "n-of-the-roster-were-in-the-clan": "Kadronun {count} kadarı klandaydı",
+  "no-tournament-matches-the-current": "Hiçbir turnuva mevcut filtrelerle eşleşmiyor.",
+  "played-as": "Oynanma şekli",
+  "result": "Sonuç",
+  "status": "Durum",
+  "tier": "Seviye"
+}

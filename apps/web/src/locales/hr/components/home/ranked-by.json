@@ -1,0 +1,6 @@
+{
+  "day": "Rangirano prema parametru {metric} tijekom prošla 24 sata (min. 20 bitaka).",
+  "week": "Rangirano prema parametru {metric} tijekom prošlih 7 dana (min. 140 bitaka).",
+  "month": "Rangirano prema parametru {metric} tijekom prošlih 30 dana (min. 600 bitaka).",
+  "overall": "Rangirano prema parametru {metric} za cijelo vrijeme (min. 20 000 bitaka)."
+}

@@ -1,0 +1,7 @@
+{
+  "label": "Bestenliste Zeitraum",
+  "periods": {
+    "overall": "Insgesamt",
+    "30d": "Letzte 30 Tage"
+  }
+}

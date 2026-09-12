@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Costo (crediti)",
+      "tip": "Prezzo d’acquisto in crediti (carri dell’albero tecnologico)"
+    },
+    "buyGold": {
+      "label": "Costo (oro)",
+      "tip": "Prezzo d’acquisto in oro (carri premium)"
+    },
+    "researchXp": {
+      "label": "Exp ricerca",
+      "tip": "Exp necessaria per lo sblocco (percorso meno costoso)"
+    },
+    "totalFreeXp": {
+      "label": "Exp tecnica (T{tier})",
+      "tip": "XP cumulativa necessaria per la ricerca a partire dal livello {tier}, moduli prerequisiti inclusi"
+    },
+    "shellCost": {
+      "label": "Costo proiettile",
+      "tip": "Prezzo del proiettile predefinito (crediti)"
+    },
+    "ammoCost": {
+      "label": "Costo munizioni completo",
+      "tip": "Prezzo del proiettile predefinito × capacità munizioni"
+    },
+    "acquireMoney": {
+      "label": "Costo d’acquisto ({currency})",
+      "tip": "Costo stimato in denaro reale per ottenere il carro (ricerca + acquisto), in {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Exp tecnica ({currency})",
+      "tip": "Costo stimato in denaro reale per ricercare il carro usando XP libera a partire dal livello {tier}, in {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Costo (crediti)",
+    "buyGold": "Costo (oro)",
+    "researchXp": "Exp ricerca",
+    "totalFreeXp": "Exp gratuita",
+    "shellCost": "Costo proiettile",
+    "ammoCost": "Costo munizioni completo",
+    "acquireMoney": "Costo d’acquisto (denaro reale)",
+    "freeXpMoney": "Exp tecnica (denaro reale)"
+  }
+}

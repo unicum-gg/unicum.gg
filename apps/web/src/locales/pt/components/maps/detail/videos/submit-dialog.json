@@ -1,0 +1,17 @@
+{
+  "close": "Fechar",
+  "format": "Formato",
+  "here": "aqui",
+  "in-the-queue": "Fica na fila e aparece {where} assim que passar pela análise de um moderador. Entretanto, a sua sugestão fica a cinzento nessa página.",
+  "log-in-to-suggest-a": "Inicie sessão para sugerir uma tática",
+  "on-map": "em {map}",
+  "players-per-team": "Jogadores por equipe",
+  "sending": "A enviar…",
+  "suggest": "Sugerir",
+  "suggest-a-tactic": "Sugerir uma tática",
+  "suggest-another": "Sugerir outro",
+  "suggestion-sent": "Sugestão enviada",
+  "tier": "Nível",
+  "what-to-submit": "Uma batalha competitiva, com o vídeo a abrir no segundo exato em que começa. O mapa começa em {map} e muda ao longo do vídeo: numa noite de clã, os mapas vão rodando. O lado em que foi jogada é um dos critérios usados pelo comandante de batalha para a procurar, por isso é pedido em vez de ser deduzido.",
+  "what-was-played": "O que foi jogado"
+}

@@ -1,0 +1,4 @@
+{
+  "has-not-entered-a-tournament": "O clã [{tag}] não participou em nenhum torneio que tenhamos replicado. Uma equipa é considerada deste clã se, no dia em que jogou, pelo menos um quarto do seu plantel pertencia ao clã.",
+  "won": "{count} ganhou"
+}

@@ -1,0 +1,25 @@
+{
+  "columns": {
+    "class3": {
+      "label": "3. Sınıf",
+      "tip": "3. Sınıf: oyuncuların %50’sini aşmak için gereken XP"
+    },
+    "class2": {
+      "label": "2. Sınıf",
+      "tip": "2. Sınıf: oyuncuların %80’ini aşmak için gereken XP"
+    },
+    "class1": {
+      "label": "1. Sınıf",
+      "tip": "1. Sınıf: oyuncuların %95’ini aşmak için gereken XP"
+    },
+    "ace": {
+      "label": "Ace Tanker",
+      "tip": "As Tanker: oyuncuların %99’unu aşmak için gereken XP"
+    }
+  },
+  "rows-per-page": "Sayfada satır",
+  "previous-page": "Önceki sayfa",
+  "page": "Sayfa {current} / {totalPages}",
+  "next-page": "Sonraki sayfa",
+  "all": "Tümü"
+}

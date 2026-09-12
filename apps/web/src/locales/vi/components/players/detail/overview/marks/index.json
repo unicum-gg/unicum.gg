@@ -1,0 +1,21 @@
+{
+  "title": "Các dấu và thành tích Mastery của {nickname}",
+  "excellence": {
+    "title": "Dấu hiệu Thiện chiến",
+    "description": "Các xe tăng theo những dấu trên nòng pháo. Một dấu là giá trị trung bình ổn định: trò chơi tính dấu này trên cửa sổ trượt của các trận đấu gần đây, so với thành tích của khu vực trên xe tăng đó.",
+    "partial": "Đã đọc các dấu cho {known} trong số {garage} xe tăng. Phần còn lại sẽ được điền khi tài khoản được làm mới.",
+    "note": "{marked} trong số {garage} xe tăng có một dấu.",
+    "note-share": "{marked} trong số {garage} xe tăng có một dấu, chiếm {percent}% nhà chứa xe."
+  },
+  "mastery": {
+    "title": "Dấu ấn thành thạo",
+    "description": "Các xe tăng theo huy hiệu tốt nhất của chúng. Một huy hiệu được tính theo một trận đấu thay vì giá trị trung bình: trò chơi trao huy hiệu dựa trên kinh nghiệm trong một trận đấu duy nhất, so với thành tích của khu vực trên xe tăng đó.",
+    "note": "{aces} trong số {garage} xe tăng có huy hiệu Ace Tanker.",
+    "note-share": "{aces} trong số {garage} xe tăng có huy hiệu Ace Tanker, chiếm {percent}% nhà chứa xe."
+  },
+  "reach": {
+    "heading": "Chơi vượt qua dấu trên nòng pháo",
+    "description": "Các xe tăng có tổng sát thương hiện đã vượt qua một dấu mà chúng chưa có. Huy hiệu chính là tổng sát thương đó, được tô màu theo dấu đã vượt qua."
+  },
+  "none": "Không có"
+}

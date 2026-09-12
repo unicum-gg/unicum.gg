@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Sohbeti göster",
+    "hide": "Sohbeti gizle",
+    "show-streamers": "Yayıncıları göster"
+  },
+  "heading": "{name}: World of Tanks oyuncu, klan ve tank istatistikleri",
+  "hide": "Yayıncıları gizle",
+  "player": "Oyuncu",
+  "stream-language": "Yayın dili · {name}",
+  "stream-language-alt": "Yayın dili: {name}",
+  "theater": {
+    "enter": "KİP modu",
+    "exit": "Tiyatro modundan çık"
+  },
+  "title": "Şu anda yayın yapan en iyi oyuncular ·",
+  "viewer-count": "{count} izleyici",
+  "viewers": "İzleyiciler",
+  "watch": "{nickname} adlı oyuncuyu Twitch’te izle"
+}

@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Ninakaw ang checkout.",
+  "claim-your-supporter-role-on-discord": "Kunin ang iyong tungkulin bilang tagasuporta sa Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Maaaring hindi maidagdag ang tungkulin sa Discord. Subukan muli.",
+  "could-not-open-the-billing-portal": "Maaaring hindi mabuksan ang billing portal.",
+  "could-not-start-checkout-please-try-again": "Maaaring hindi masimulan ang checkout. Subukan muli.",
+  "could-not-update-your-preference": "Maaaring hindi na-update ang iyong kagustuhan.",
+  "log-in-with-wargaming": "Mag-log in gamit ang Wargaming",
+  "log-in-with-wargaming-to": "Mag-log in gamit ang Wargaming para suportahan si {NAME}.",
+  "manage-subscription": "Pamahalaan ang subscription",
+  "only-active-supporters-can-claim-the-discord": "Mga aktibong tagasuporta lamang ang maaaring kumuha ng role sa Discord.",
+  "or-choose-your-own-amount": "O pumili ng sarili mong halaga",
+  "pay-what-you-want": "Magbayad ng kahit anong gusto mo.",
+  "pick-an-amount": "Pumili ng halaga o i-type ang sarili mong halaga, mula sa €{min}/buwan.",
+  "re-sync-discord-role": "Muling i-sync ang role sa Discord",
+  "secured-by-stripe": "Pinoprotektahan ng Stripe. Maaaring kanselahin anumang oras.",
+  "show-me-anonymously-on-the": "Ipakita ako nang hindi nagpapakilala sa podium",
+  "support-subscriptions-are-coming-soon": "Malapit nang maging available ang mga subscription para sa Suporta.",
+  "supporter-role-added-on-discord": "Naidagdag ang role na tagasuporta sa Discord!",
+  "you-are-a-supporter-thank": "Isa kang tagasuporta. Salamat sa pagpapanatiling buhay kay {NAME}."
+}

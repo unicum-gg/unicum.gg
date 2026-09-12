@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visual",
+    "collision": "Kollisio",
+    "live": "Lähetä"
+  },
+  "centre": {
+    "on": "Keskitä ajoneuvo",
+    "off": "Palauta ajoneuvo keskikohdan ulkopuolelle"
+  },
+  "hull-down": {
+    "on": "Kori alas",
+    "off": "Suorista ajoneuvo"
+  },
+  "tracks": {
+    "on": "Käynnistä telaketjut",
+    "off": "Pysäytä telaketjut"
+  },
+  "textures": {
+    "on": "Teräväpiirtotekstuurit",
+    "off": "Standardi tekstuurit"
+  },
+  "reset": "Nollaa näkymä",
+  "style": "Valitse tyyli",
+  "style-worn": "Tyyli: {name}",
+  "search-styles": "Etsi tyylejä",
+  "colours": "Mitä värit tarkoittavat",
+  "cinematic": {
+    "off": "Elokuvakamera: pois päältä",
+    "auto": "Elokuvakamera: käyttämättömänä",
+    "on": "Elokuvakamera: aina"
+  },
+  "open-tank": "Avaa toinen panssarivaunu",
+  "open-tank-placeholder": "Avaa tankki...",
+  "more-actions": "Lisää toimintoja",
+  "marks-meaning": {
+    "0": "Ei erinomaisuuden merkkejä",
+    "1": "Yksi merkki: edellä 65:tä prosenttia tämän panssarivaunun pelaajista",
+    "2": "Kaksi merkkiä: edellä 85:tä prosenttia",
+    "3": "Kolme merkkiä: edellä 95:tä prosenttia"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Täytä ikkuna",
+      "leave": "Takaisin sivulle"
+    },
+    "screen": {
+      "enter": "Täytä näyttö",
+      "leave": "Poistu koko näytön tilasta"
+    }
+  },
+  "marks-count": {
+    "0": "Ei erinomaisuuden merkkejä",
+    "one": "1 erinomaisuuden merkki",
+    "other": "{count} erinomaisuuden merkkiä"
+  },
+  "compare-tank": "Vertaile toiseen panssarivaunuun",
+  "compare-tank-placeholder": "Vertaile...",
+  "view-tooltips": {
+    "visual": "Panssarivaunu sellaisena kuin peli sen piirtää",
+    "collision": "Kuinka paksu kukin levy on",
+    "live": "Mitä valittu ammus tekisi"
+  },
+  "cinematic-tooltips": {
+    "off": "Elokuvakamera: pois päältä, näkymä pysyy paikallaan",
+    "auto": "Elokuvakamera: käynnistyy, kun olet ollut yksin 30 sekuntia",
+    "on": "Elokuvakamera: aina, heti kun päästät irti"
+  }
+}

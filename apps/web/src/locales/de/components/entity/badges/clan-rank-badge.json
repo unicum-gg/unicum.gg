@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rang {rank} auf der Rangliste für {board}",
+  "board": {
+    "advances": "Wertung der Festungs-Vorstöße",
+    "skirmish-t10": "Wertung für Scharmützel der Stufe X",
+    "skirmish-t6": "Wertung für Scharmützel der Stufe VI",
+    "skirmish-t8": "Wertung für Scharmützel der Stufe VIII"
+  }
+}

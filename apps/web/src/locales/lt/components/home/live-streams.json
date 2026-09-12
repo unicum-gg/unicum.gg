@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Rodyti pokalbį",
+    "hide": "Slėpti pokalbį",
+    "show-streamers": "Rodyti transliuotojus"
+  },
+  "heading": "{name}: World of Tanks žaidėjo, klano ir tankų statistika",
+  "hide": "Slėpti transliuotojus",
+  "player": "Žaidėjas",
+  "stream-language": "Transliacijos kalba · {name}",
+  "stream-language-alt": "Srauto kalba: {name}",
+  "theater": {
+    "enter": "Teatro režimas",
+    "exit": "Išeiti iš kino teatro režimo"
+  },
+  "title": "Geriausi žaidėjai, dabar transliuojantys ·",
+  "viewer-count": "{count} žiūrovų",
+  "viewers": "Žiūrovai",
+  "watch": "Žiūrėti {nickname} per Twitch"
+}

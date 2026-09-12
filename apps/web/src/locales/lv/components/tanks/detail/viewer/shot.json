@@ -1,0 +1,7 @@
+{
+  "firing": "Šauj {shell}, {pen} mm. Mainīt šāvienu",
+  "no-such-round": "{mark}: šim lielgabalam tāda nav, tāpēc iestatiet leņķus paši",
+  "own-round": "{mark}: šī lielgabala lādiņš ar visiem parametriem",
+  "treat-it-as": "Uztvert kā",
+  "treat-it-as-mark": "Uztvert kā {mark}"
+}

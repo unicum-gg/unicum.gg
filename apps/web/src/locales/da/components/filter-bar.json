@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Søg blandt {count} kampvogne",
+    "rated-tanks": "Søg blandt {count} vurderede kampvogne",
+    "videos": "Søg blandt {count} videoer",
+    "players": "Søg efter {count} spillere",
+    "clans": "Søg efter {count} klaner",
+    "tournaments": "Søg efter {count} turneringer",
+    "teams": "Søg efter {count} hold"
+  },
+  "min": "Min.",
+  "max": "Maks.",
+  "none": "Ingen",
+  "common-test": "Ændret af Offentlig Test: nye køretøjer og ombalancerede køretøjer",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belønning"
+  },
+  "moe": {
+    "0": "Ingen mærker endnu",
+    "1": "1 mark",
+    "2": "2 mark",
+    "3": "3 mark"
+  },
+  "mom": {
+    "0": "Ingen badges endnu",
+    "1": "3. Klasse",
+    "2": "2nd Klasse",
+    "3": "1st Klasse",
+    "4": "Ace Tanker"
+  }
+}

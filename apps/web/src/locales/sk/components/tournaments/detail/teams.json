@@ -1,0 +1,15 @@
+{
+  "average-over-rated": "Priemer {rated} hodnotených z {size} hráčov",
+  "average-over-recent": "Priemer z {rated} z {size} hráčov, ktorí hrali za posledných 30 dní",
+  "metric-over-last-30-days": "{metric} za posledných 30 dní",
+  "n-confirmed": "{count} potvrdených",
+  "no-team-matches-the-current": "Žiadny tím nezodpovedá aktuálnym filtrom.",
+  "no-teams-recorded-yet-registrations": "Zatiaľ nie sú zaznamenané žiadne tímy. Registrácie sa tu zobrazia po úplnom načítaní tohto turnaja, čo sa stane do niekoľkých minút od jeho otvorenia.",
+  "none-played-in-30-days": "Nikto z tejto zostavy nehral za posledných 30 dní",
+  "players": "Hráči",
+  "qualified": "Kvalifikovaní",
+  "reward": "Odmena",
+  "team": "Tím",
+  "teams": "Tímy ({length})",
+  "wr": "WR"
+}

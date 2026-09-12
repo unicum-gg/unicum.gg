@@ -1,0 +1,8 @@
+{
+  "description": "Kiekvienas Wargaming turnyras regione {region}: kasdienės aukso lyderių lentelės, klanų čempionatai, dalyviai ir nugalėtojai. Visos schemos, rezultatai ir sudėtys.",
+  "live-many": "{count} turnyrai šiuo metu atidaryti arba vykstantys regione {region},",
+  "live-one": "{count} turnyras šiuo metu atidarytas arba vykstantis regione {region},",
+  "no-live": "Turnyrai {region} vyksta kasdien,",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "nuo 1 prieš 1 laiptelių, kuriuose žaidžiama dėl aukso, iki klanų čempionatų, kuriuose žaidžiama dėl pinigų. Pilnos lentelės ir rezultatai, kiekvienos komandos sudėtis ir pusė, kurioje ji pradėjo, kiekviename žemėlapyje."
+}

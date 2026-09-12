@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Izmaksas (kredīti)",
+    "buyGold": "Izmaksas (zelts)",
+    "researchXp": "Pētniecības XP",
+    "shellCost": "Šāviņu izmaksas",
+    "ammoCost": "Pilna munīcijas izmaksas",
+    "class3": "3. klase",
+    "class2": "2. klase",
+    "class1": "1. klase",
+    "ace": "Ace Tankers",
+    "mark1": "1 Marka (65%)",
+    "mark2": "2 Markas (85%)",
+    "mark3": "3 Markas (95%)"
+  }
+}

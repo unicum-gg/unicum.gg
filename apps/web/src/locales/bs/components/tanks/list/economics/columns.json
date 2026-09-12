@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Cijena (krediti)",
+      "tip": "Kupovna cijena u kreditima (tenkovi iz stabla razvoja)"
+    },
+    "buyGold": {
+      "label": "Cijena (zlato)",
+      "tip": "Kupovna cijena u zlatu (premium tenkovi)"
+    },
+    "researchXp": {
+      "label": "Istraživački XP",
+      "tip": "XP za otključavanje (najjeftiniji put)"
+    },
+    "totalFreeXp": {
+      "label": "Slobodni XP (T{tier})",
+      "tip": "Ukupni XP potreban za istraživanje od nivoa {tier}, uključujući obavezne module"
+    },
+    "shellCost": {
+      "label": "Cijena projektila",
+      "tip": "Podrazumijevana cijena granate (krediti)"
+    },
+    "ammoCost": {
+      "label": "Cijena punog municije",
+      "tip": "Podrazumijevana cijena granate × kapacitet municije"
+    },
+    "acquireMoney": {
+      "label": "Cijena kupovine ({currency})",
+      "tip": "Procijenjeni iznos stvarnog novca za nabavku tenka (istraživanje + kupovina), u {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Slobodni XP ({currency})",
+      "tip": "Procijenjeni iznos stvarnog novca za istraživanje tenka pomoću Slobodnog XP-a od nivoa {tier}, u {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Cijena (krediti)",
+    "buyGold": "Cijena (zlato)",
+    "researchXp": "Istraživački XP",
+    "totalFreeXp": "Slobodni XP",
+    "shellCost": "Cijena projektila",
+    "ammoCost": "Cijena punog municije",
+    "acquireMoney": "Cijena kupovine (novac)",
+    "freeXpMoney": "Slobodni XP (novac)"
+  }
+}

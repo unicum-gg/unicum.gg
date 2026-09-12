@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Klikšķināt uz pieejama mezgla, lai to atbloķētu. Katrs mezgls ietekmē iepriekš norādītos raksturlielumus. Krāsas grupē mezglus pēc uguns jaudas, mobilitātes, izturības un transportlīdzekļa mehānikas.",
+  "loadout-switch-no-effect": "Kaujas aprīkojuma komplekta pārslēgšana. Nav raksturlieluma efekta.",
+  "title": "Tanka {tank} uzlabojumi",
+  "vehicle-mechanic-no-effect": "Transportlīdzekļa mehānika. Nav raksturlieluma efekta."
+}

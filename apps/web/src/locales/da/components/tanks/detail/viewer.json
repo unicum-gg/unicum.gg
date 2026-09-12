@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visuel",
+    "collision": "Kollision",
+    "live": "Live"
+  },
+  "centre": {
+    "on": "Centrér køretøjet",
+    "off": "Flyt det tilbage fra midten"
+  },
+  "hull-down": {
+    "on": "Skrog ned",
+    "off": "Nivellér køretøjet"
+  },
+  "tracks": {
+    "on": "Kør bælterne",
+    "off": "Stop bælterne"
+  },
+  "textures": {
+    "on": "Teksturer i høj opløsning",
+    "off": "Standard teksturer"
+  },
+  "reset": "Reset visning",
+  "style": "Vælg en stil",
+  "style-worn": "Stil: {name}",
+  "search-styles": "Søg stilarter",
+  "colours": "Hvad farverne betyder",
+  "cinematic": {
+    "off": "Filmisk kamera: fra",
+    "auto": "Filmisk kamera: når det ikke bruges",
+    "on": "Filmisk kamera: altid"
+  },
+  "open-tank": "Åbn en anden kampvogn",
+  "open-tank-placeholder": "Åbn tank...",
+  "more-actions": "Flere handlinger",
+  "marks-meaning": {
+    "0": "Ingen mærker for fremragende præstation",
+    "1": "Ét mærke: foran 65 % af spillerne på denne kampvogn",
+    "2": "To mærker: foran 85 %",
+    "3": "Tre mærker: foran 95 %"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Fyld vinduet",
+      "leave": "Tilbage til siden"
+    },
+    "screen": {
+      "enter": "Fyld skærmen",
+      "leave": "Forlad fuldskærm"
+    }
+  },
+  "marks-count": {
+    "0": "Ingen mærker for fremragende præstation",
+    "one": "1 mærke for fremragende præstation",
+    "other": "{count} mærker for fremragende præstation"
+  },
+  "compare-tank": "Sammenlign med en anden kampvogn",
+  "compare-tank-placeholder": "Sammenlign med...",
+  "view-tooltips": {
+    "visual": "Kampvognen, som spillet tegner den",
+    "collision": "Hvor tyk hver plade er",
+    "live": "Hvad den valgte granat ville gøre"
+  },
+  "cinematic-tooltips": {
+    "off": "Filmisk kamera: fra, visningen bliver stående",
+    "auto": "Filmisk kamera: starter efter 30 sekunder uden aktivitet",
+    "on": "Filmisk kamera: altid, fra det øjeblik du slipper"
+  }
+}

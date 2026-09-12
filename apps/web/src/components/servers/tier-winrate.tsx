@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import { toRoman } from "roman-numerals";
 import {
@@ -70,6 +73,8 @@ export function TierWinratePanel({
   grid: TierWinrate;
   region: Region;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/tier-winrate");
   // The same cookie the navbar selector writes, like the histograms above: the
   // grid follows the metric chosen anywhere on the site.
   const [stored] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
@@ -109,7 +114,7 @@ export function TierWinratePanel({
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>What {label} players win by tier</PanelTitle>
+        <PanelTitle>{t("what-players-win-by-tier", { label })}</PanelTitle>
       </PanelHeader>
       {/* No padding on the panel: the section carries its own, so its heading
           rule runs edge to edge like the panel's own does. */}
@@ -119,15 +124,23 @@ export function TierWinratePanel({
               both panels read alike on screen and in the outline. */}
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-fd-border px-4 py-2.5">
             <PanelTitle as="h3" className="text-base">
-              <RatingMetricInlineSelect /> band
+              <Interpolate
+                template={t("metric-band")}
+                values={{ metric: <RatingMetricInlineSelect /> }}
+              />
             </PanelTitle>
             {battles > 0 ? (
               <span className="text-sm text-fd-muted-foreground">
-                over{" "}
-                <span className="font-medium tabular-nums text-fd-foreground">
-                  {formatPlayersCompact(battles)}
-                </span>{" "}
-                battles
+                <Interpolate
+                  template={t("over-n-battles")}
+                  values={{
+                    battles: (
+                      <span className="font-medium tabular-nums text-fd-foreground">
+                        {formatPlayersCompact(battles, locale)}
+                      </span>
+                    ),
+                  }}
+                />
               </span>
             ) : null}
           </div>
@@ -138,8 +151,9 @@ export function TierWinratePanel({
               // would read as "nobody plays these tiers" rather than "not
               // computed".
               <p className="text-sm text-fd-muted-foreground">
-                Nothing recorded against {RATING_METRIC_LABEL[metric]} yet. The
-                grid is rebuilt nightly.
+                {t("nothing-recorded", {
+                  metric: RATING_METRIC_LABEL[metric],
+                })}
               </p>
             ) : (
               <Grid metric={metric} bands={bands} tiers={tiers} byKey={byKey} />
@@ -148,14 +162,7 @@ export function TierWinratePanel({
         </section>
 
         <p className="p-4 text-sm text-fd-muted-foreground">
-          A cell is the band&apos;s wins at that tier over its battles there,
-          across every vehicle a player has at least{" "}
-          {formatPlayers(grid.minBattles)} battles on, so it describes the tiers
-          as played by the people who play them. Cells resting on fewer than{" "}
-          {formatPlayersCompact(TIER_WINRATE_THIN_CELL)} battles are drawn
-          faintly: they move for reasons other than skill. The colours are the
-          same win-rate bands the site uses everywhere else.
-        </p>
+          {t("cell-is-the-band-s", { minBattles: formatPlayers(grid.minBattles, locale), TIERWINRATETHINCELL: formatPlayersCompact(TIER_WINRATE_THIN_CELL, locale) })}</p>
       </PanelContent>
     </Panel>
   );
@@ -240,13 +247,15 @@ function Cell({
   band: RatingBand;
   tier: number;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/servers/tier-winrate");
   const where = `${ratingBandLabel(band)} at tier ${tierLabel(tier)}`;
   if (!cell) {
     return (
       <div
         role="img"
         className="h-7 rounded-[2px] border border-fd-border/40"
-        aria-label={`${where}, no sample`}
+        aria-label={t("cell-no-sample", { where })}
       />
     );
   }
@@ -270,18 +279,20 @@ function Cell({
               ? `color-mix(in oklab, ${hex} 35%, transparent)`
               : hex,
           }}
-          aria-label={`${where}, ${formatWinrate(cell.winrate)} win rate over ${formatPlayers(cell.battles)} battles`}
+          aria-label={t("cell-winrate", {
+            where,
+            winrate: formatWinrate(cell.winrate, locale),
+            battles: formatPlayers(cell.battles, locale),
+          })}
         >
-          {formatWinrate(cell.winrate)}
+          {formatWinrate(cell.winrate, locale)}
         </div>
       </TooltipTrigger>
       <TooltipContent side="top">
         <div className="flex flex-col gap-0.5">
           <span className="font-medium">{where}</span>
           <span className="text-background/70">
-            {formatWinrate(cell.winrate)} over {formatPlayers(cell.battles)}{" "}
-            battles from {formatPlayers(cell.players)} accounts
-          </span>
+            {t("over-battles-from-accounts", { winrate: formatWinrate(cell.winrate, locale), battles: formatPlayers(cell.battles, locale), players: formatPlayers(cell.players, locale) })}</span>
         </div>
       </TooltipContent>
     </Tooltip>

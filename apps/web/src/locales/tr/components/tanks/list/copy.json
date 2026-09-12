@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "{region} bölgesindeki {count} World of Tanks aracının tamamı. Seviye, ülke, sınıf ve role göre filtrele, ardından istatistikleri, en iyi oyuncuları ve beklenen değerleri görmek için bir tank aç.",
+    "title": "Tüm World of Tanks tankları ({region}), her araca göz at",
+    "description": "{region} bölgesindeki her World of Tanks tankına göz at. Seviye, ülke, sınıf ve role göre filtrele, ardından tank başına istatistiklere, en iyi oyunculara ve beklenen değerlere geç.",
+    "heading": "Tüm <accent>tanklar</accent>"
+  },
+  "specifications": {
+    "intro": "{region} bölgesindeki {count} World of Tanks aracının tamamı için DPM, delme, zırh, görüş mesafesi ve hareket kabiliyeti. Her sütuna göre sırala, ardından seviye, ülke, sınıf ve role göre filtrele.",
+    "title": "World of Tanks tank özellikleri ({region}), her aracı karşılaştır",
+    "description": "{region} bölgesindeki her World of Tanks tankının özelliklerini karşılaştır: DPM, delme, zırh, görüş mesafesi ve hareket kabiliyeti. Seviye, ülke, sınıf ve role göre sıralanabilir ve filtrelenebilir.",
+    "heading": "Tank <accent>özellikleri</accent>"
+  },
+  "economics": {
+    "intro": "{region} bölgesindeki {count} World of Tanks aracının tamamı için satın alma ve onarım maliyetleri, mermi fiyatları ve kredi kazançları. Her sütuna göre sırala, ardından seviye, ülke, sınıf ve role göre filtrele.",
+    "title": "World of Tanks tank ekonomisi ({region}), kredi ve XP maliyetleri",
+    "description": "{region} bölgesindeki her World of Tanks tankı için kredi ve XP maliyetleri, onarım ve mermi fiyatları. Seviye, ülke, sınıf ve role göre sıralanabilir ve filtrelenebilir.",
+    "heading": "Tank <accent>ekonomisi</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "{region} bölgesindeki {count} World of Tanks aracının tamamında bir, iki ve üç işaret için gereken hareketli ortalama hasar. Her sütuna göre sırala, ardından seviye, ülke, sınıf ve role göre filtrele.",
+    "title": "World of Tanks üstünlük işareti gereksinimleri ({region})",
+    "description": "{region} bölgesindeki her World of Tanks tankında bir, iki ve üç üstünlük işareti için gereken hasar. Seviye, ülke, sınıf ve role göre sıralanabilir ve filtrelenebilir.",
+    "heading": "<accent>Üstünlük İşaretleri</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "{region} bölgesindeki {count} World of Tanks aracının tamamı için As Tanker ve ustalık rozeti XP eşikleri. Her sütuna göre sırala, ardından seviye, ülke, sınıf ve role göre filtrele.",
+    "title": "World of Tanks ustalık işareti gereksinimleri ({region})",
+    "description": "{region} bölgesindeki her World of Tanks tankı için As Tanker ve ustalık rozeti XP eşikleri. Seviye, ülke, sınıf ve role göre sıralanabilir ve filtrelenebilir.",
+    "heading": "<accent>Ustalık İşaretleri</accent>"
+  },
+  "videos": {
+    "intro": "Topluluğun {region} bölgesinde bağlantısını paylaştığı {count} savaş. Her biri başladığı saniyede açılır. Tank sayfalarından önerilir ve burada gösterilmeden önce kontrol edilir.",
+    "title": "World of Tanks oynanış videoları ({region})",
+    "description": "{region} bölgesinde topluluk tarafından önerilen World of Tanks savaşları. Her biri başladığı saniyede açılır: oynanan tank, harita, başlangıç tarafı ve savaşın nasıl sona erdiği.",
+    "heading": "Oynanış <accent>videoları</accent>"
+  }
+}

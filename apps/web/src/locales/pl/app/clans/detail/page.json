@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "Klan World of Tanks: [{tag}] {name} ({region}), liczba członków: {members}",
+    "description": "Klan {name} [{tag}], region {region}: liczba członków: {members}, pełna tabela członków z rankingami WN8 i WNX, ostatnie dołączenia i odejścia oraz historia klanu."
+  },
+  "stronghold": {
+    "title": "Statystyki twierdzy: [{tag}] {name} ({region})",
+    "description": "Klan {name} [{tag}], region {region}, wyniki twierdzy: rankingi potyczek i natarć, liczba bitew oraz współczynnik zwycięstw każdego członka."
+  },
+  "clan-wars": {
+    "title": "Statystyki wojen klanowych: [{tag}] {name} ({region})",
+    "description": "Klan {name} [{tag}], region {region}, wyniki wojen klanowych: rankingi poszczególnych członków, liczba bitew i współczynnik zwycięstw w kampaniach na mapie globalnej."
+  },
+  "tanks": {
+    "title": "Czołgi: [{tag}] {name} ({region}), pojazdy klanu",
+    "description": "Klan {name} [{tag}], region {region}: wszystkie używane pojazdy wraz z liczbą bitew, współczynnikiem zwycięstw i średnimi uszkodzeniami obliczonymi łącznie dla członków klanu."
+  },
+  "manage": {
+    "title": "Rezerwy klanowe: [{tag}] {name} ({region})",
+    "description": "Aktywuj i zaplanuj rezerwy klanowe: {name} [{tag}]. Tylko dla oficerów."
+  },
+  "missing": {
+    "description": "Klan World of Tanks [{tag}], region {region}: tabela członków z rankingami WN8/WNX, dołączenia i odejścia, ostatnie bitwy oraz pełna historia klanu."
+  }
+}

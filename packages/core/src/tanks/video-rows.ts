@@ -127,6 +127,7 @@ export async function decorateVideos(
       channelName: row.channelName,
       mapName,
       mapSlug,
+      arenaId: row.arenaId ?? null,
       mode: (row.mode as MapGameMode | null) ?? null,
       direction,
       directionLabel: direction ? SPAWN_DIRECTION_LABEL[direction] : null,
@@ -155,6 +156,10 @@ export type TankVideo = {
   mapName: string | null;
   /** The map's own page, where a tactic is looked up. */
   mapSlug: string | null;
+  /** The arena itself, carried alongside the name because `mapName` is English:
+   * the catalogue that names a map in the reader's language is keyed by arena,
+   * so a client cannot translate the name without it. */
+  arenaId: string | null;
   mode: MapGameMode | null;
   /** What was being played. `random` on everything submitted before tactics
    * existed, which is what those were. */

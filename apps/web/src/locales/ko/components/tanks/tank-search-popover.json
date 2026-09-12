@@ -1,0 +1,5 @@
+{
+  "no-matching-tanks": "일치하는 전차가 없습니다.",
+  "searching": "검색 중…",
+  "type-at-least-characters": "유형을 {MINQUERYLENGTH}자 이상 입력하세요."
+}

@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Visi {count} World of Tanks transportlīdzekļi reģionā {region}. Filtrējiet pēc līmeņa, nācijas, klases un lomas, pēc tam atveriet tanku, lai skatītu tā statistiku, labākos spēlētājus un sagaidāmās vērtības.",
+    "title": "Visi World of Tanks tanki ({region}), pārlūkojiet katru transportlīdzekli",
+    "description": "Pārlūkojiet katru World of Tanks tanku reģionā {region}: filtrējiet pēc līmeņa, nācijas, klases un lomas, pēc tam skatiet katra tanka statistiku, labākos spēlētājus un sagaidāmās vērtības.",
+    "heading": "Visas <accent>tvertnes</accent>"
+  },
+  "specifications": {
+    "intro": "Bojājumi minūtē, caursišana, bruņas, skata diapazons un mobilitāte visiem {count} World of Tanks transportlīdzekļiem reģionā {region}. Kārtojiet pēc jebkuras kolonnas, pēc tam filtrējiet pēc līmeņa, nācijas, klases un lomas.",
+    "title": "World of Tanks tanku specifikācijas ({region}), salīdziniet katru transportlīdzekli",
+    "description": "Salīdzināt visu World of Tanks tanku specifikācijas {region}: DPM, caursišanu, bruņas, skata diapazonu un mobilitāti, ar kārtošanu un filtrēšanu pēc līmeņa, nācijas, klases un lomas.",
+    "heading": "Tanka <accent>specifikācijas</accent>"
+  },
+  "economics": {
+    "intro": "Iegādes un remonta izmaksas, lādiņu cenas un kredītu ienākumi visiem {count} World of Tanks transportlīdzekļiem {region}. Kārtot pēc jebkuras kolonnas, pēc tam filtrēt pēc līmeņa, nācijas, klases un lomas.",
+    "title": "World of Tanks tanku ekonomika ({region}), kredītu un XP izmaksas",
+    "description": "Kredītu un XP izmaksas, remonta un lādiņu cenas katram World of Tanks tanks {region}, ar kārtošanu un filtrēšanu pēc līmeņa, nācijas, klases un lomas.",
+    "heading": "Tanka <accent>ekonomika</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Kustībā aprēķinātie vidējie bojājumi, kas vajadzīgi vienai, divām un trim atzīmēm, visiem {count} World of Tanks transportlīdzekļiem {region}. Kārtot pēc jebkuras kolonnas, pēc tam filtrēt pēc līmeņa, nācijas, klases un lomas.",
+    "title": "World of Tanks izcilības zīmju prasības ({region})",
+    "description": "Bojājumi, kas vajadzīgi vienai, divām un trim izcilības zīmēm uz katra World of Tanks tanks {region}, ar kārtošanu un filtrēšanu pēc līmeņa, nācijas, klases un lomas.",
+    "heading": "<accent>Izcilības zīmes</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Ace Tankers un meistarības nozīmītes XP sliekšņi visiem {count} World of Tanks transportlīdzekļiem {region}. Kārtot pēc jebkuras kolonnas, pēc tam filtrēt pēc līmeņa, nācijas, klases un lomas.",
+    "title": "World of Tanks meistarības atzīmju prasības ({region})",
+    "description": "Ace Tankers un meistarības nozīmītes XP sliekšņi katram World of Tanks tanks {region}, ar kārtošanu un filtrēšanu pēc līmeņa, nācijas, klases un lomas.",
+    "heading": "<accent>Meistarības atzīmes</accent>"
+  },
+  "videos": {
+    "intro": "{count} kaujas, ko kopiena ir sasaistījusi {region}, katra atveras sekundē, kurā tā sākas. Ieteiktas no tanku lapām un pārbaudītas, pirms tās parādās šeit.",
+    "title": "World of Tanks spēles video ({region})",
+    "description": "Kopienas ieteiktas World of Tanks kaujas {region}, katra atveras sekundē, kurā tā sākas: spēlētais tanks, karte, tajā iesaistītā puse un kaujas beigas.",
+    "heading": "Spēles <accent>video</accent>"
+  }
+}

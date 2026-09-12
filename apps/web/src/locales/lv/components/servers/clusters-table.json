@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Pagaidām nav reģistrēts neviens klasteris.",
+  "server": "Serveris",
+  "online": "Tiešsaistē",
+  "share": "Kopīgot",
+  "peak": "Maksimālais ({label})",
+  "average": "Vidējais ({label})",
+  "not-reported": "Nav ziņots",
+  "total": "Kopā"
+}

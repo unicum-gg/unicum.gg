@@ -1,0 +1,5 @@
+{
+  "battles": "{count} Соғыстар",
+  "chart-label": "Әр {granularity} сайын ойнаған ұрыстар, {metric} бойынша боялған",
+  "no-battles": "Соғыстар жоқ"
+}

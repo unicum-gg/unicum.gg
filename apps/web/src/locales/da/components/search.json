@@ -1,0 +1,27 @@
+{
+  "placeholder": "Søg efter spillere, klaner, kampvogne, kort eller begreber",
+  "type": "Søgetype",
+  "types": {
+    "all": "Alle",
+    "players": "Spillere",
+    "clans": "Klaner",
+    "tanks": "Tanks",
+    "maps": "Kort",
+    "glossary": "Ordbog"
+  },
+  "sections": {
+    "players": "Spillere",
+    "clans": "Klaner",
+    "tanks": "Tanks",
+    "maps": "Kort",
+    "glossary": "Ordbog",
+    "recent": "Seneste",
+    "favorites": "Favoritter"
+  },
+  "searching": "Søger…",
+  "errored": "Noget gik galt. Prøv igen.",
+  "empty": "Ingen resultater fundet",
+  "remove-recent": "Fjern fra seneste",
+  "add-favorite": "Tilføj til favoritter",
+  "remove-favorite": "Fjern fra favoritter"
+}

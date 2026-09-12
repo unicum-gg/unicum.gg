@@ -1,0 +1,4 @@
+{
+  "title": "Cele mai bune clanuri de nivel {tier} ({region})",
+  "description": "Clasamentul clanurilor de nivel {tier} din {region}. Clasat după SR (rating de încăierări), ELO, bătălii și rată de victorii. Minimum {battles} bătălii."
+}

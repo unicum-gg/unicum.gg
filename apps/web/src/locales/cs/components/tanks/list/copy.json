@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Všech {count} vozidel World of Tanks na serveru {region}. Filtrujte podle úrovně, národa, třídy a role, poté otevřete detail vozidla se statistikami, nejlepšími hráči a očekávanými hodnotami.",
+    "title": "Tanky ve World of Tanks ({region}): přehled všech vozidel",
+    "description": "Procházejte všechna vozidla World of Tanks na serveru {region}. Filtrujte podle úrovně, národa, třídy a role, poté si zobrazte statistiky jednotlivých vozidel, nejlepší hráči a očekávané hodnoty.",
+    "heading": "Všechny <accent>tanky</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, penetrace, pancíř, dohled a pohyblivost všech {count} vozidel World of Tanks na serveru {region}. Seřaďte je podle libovolného sloupce a poté filtrujte podle úrovně, národa, třídy a role.",
+    "title": "Tanky ve World of Tanks ({region}): parametry a porovnání všech vozidel",
+    "description": "Porovnat parametry všech vozidel World of Tanks na serveru {region}: DPM, penetraci, pancíř, dohled a pohyblivost. Výsledky lze řadit a filtrovat podle úrovně, národa, třídy a role.",
+    "heading": "Specifikace <accent>tanků</accent>"
+  },
+  "economics": {
+    "intro": "Náklady na nákup a opravy, ceny granátů a zisk kreditů pro všech {count} vozidel World of Tanks na serveru {region}. Seřaďte je podle libovolného sloupce a poté filtrujte podle úrovně, národa, třídy a role.",
+    "title": "Tanky ve World of Tanks ({region}): ekonomika a spotřeba kreditů a XP",
+    "description": "Náklady v podobě kreditů a XP, ceny oprav a granátů pro každé vozidlo World of Tanks na serveru {region}. Výsledky lze řadit a filtrovat podle úrovně, národa, třídy a role.",
+    "heading": "Ekonomika <accent>tanků</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Vítězné znaky pro všech {count} vozidel World of Tanks na serveru {region}: Poškození podle klouzavého průměru potřebné k získání prvního, druhého a třetího znaku. Výsledky lze řadit podle libovolného sloupce a filtrovat podle úrovně, národa, třídy a role.",
+    "title": "Požadavky na Vítězné znaky ve World of Tanks ({region})",
+    "description": "Vítězné znaky pro každé vozidlo World of Tanks na serveru {region}: Poškození potřebné k získání prvního, druhého a třetího znaku. Výsledky lze řadit a filtrovat podle úrovně, národa, třídy a role.",
+    "heading": "<accent>Vítězné znaky</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Hranice XP pro ocenění Esence Tankista a Záplaty mistrovství u všech {count} vozidel World of Tanks na serveru {region}. Výsledky lze řadit podle libovolného sloupce a filtrovat podle úrovně, národa, třídy a role.",
+    "title": "Požadavky na Záplaty mistrovství ve World of Tanks ({region})",
+    "description": "Hranice XP pro ocenění Esence Tankista a Záplaty mistrovství u každého vozidla World of Tanks na serveru {region}. Výsledky lze řadit a filtrovat podle úrovně, národa, třídy a role.",
+    "heading": "<accent>Záplaty mistrovství</accent>"
+  },
+  "videos": {
+    "intro": "Komunita přidala odkazy k {count} bitvám ze serveru {region}. Každý odkaz se otevře přesně v sekundě, kdy bitva začíná. Návrhy se posílají ze stránek vozidel a před zveřejněním je kontrolujeme.",
+    "title": "Herní videa World of Tanks ({region})",
+    "description": "Bitvy World of Tanks ze serveru {region} navržené komunitou. Každá se otevře přesně v okamžiku začátku a uvádí použité vozidlo, mapu, její stranu a výsledek bitvy.",
+    "heading": "Herní <accent>videaje</accent>"
+  }
+}

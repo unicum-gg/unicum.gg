@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Panel, PanelHeader } from "@/components/panel";
 import {
@@ -11,6 +11,7 @@ import {
 import { BATTLE_PARAM } from "@/components/tanks/detail/videos/battle-param";
 import { useTankVideoPlayer } from "@/components/tanks/detail/videos/player";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 /**
  * The tab bar of a tank page. Each tab is a route of its own, so this renders
@@ -28,6 +29,7 @@ export function TankDetailTabs({
   basePath: string;
   available: TankDetailTab[];
 }) {
+  const { t: tLabel } = useTranslation("components/tanks/detail/tab-bar");
   // Null on the index route, which is Specifications.
   const segment = useSelectedLayoutSegment();
   const active =
@@ -57,7 +59,7 @@ export function TankDetailTabs({
                   : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
               )}
             >
-              {t.label}
+              {tLabel(`tabs.${t.id}`)}
             </Link>
           ))}
         </nav>

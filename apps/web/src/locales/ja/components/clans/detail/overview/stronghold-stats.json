@@ -1,0 +1,22 @@
+{
+  "stat": "統計",
+  "periods": {
+    "total": "計",
+    "day": "過去24時間",
+    "week": "過去7日",
+    "month": "過去30日"
+  },
+  "sections": {
+    "elo": "Tier X ELO（{advances} + {skirmish}）",
+    "advances": "{advances}（15v15）",
+    "t10": "{skirmish} Tier X（7対7）",
+    "t8": "{skirmish} Tier VIII（7対7）",
+    "t6": "{skirmish} Tier VI（7対7）"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "戦闘数",
+    "winrate": "勝率"
+  }
+}

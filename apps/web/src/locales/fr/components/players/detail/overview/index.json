@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistiques de {nickname} en batailles aléatoires",
+  "progression-title": "Progression de {nickname} pour {metric}",
+  "lift-drag-title": "Chars influençant la cote de {nickname}",
+  "progression-blurb": "La ligne pleine est le {metric} général (correspond à la colonne Total ci-dessus), dérivant lentement à mesure que de nouvelles batailles s’accumulent. La ligne pointillée est le {metric} par session, calculé à partir des batailles jouées depuis la capture précédente. Elle montre les séries chaudes et froides. La couleur de la ligne suit le niveau de notation.",
+  "progression-empty": "Pas assez d’historique pour l’instant. Nous avons besoin d’au moins une capture pour tracer la courbe. Vérifier bientôt."
+}

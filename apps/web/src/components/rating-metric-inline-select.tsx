@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -28,6 +29,7 @@ export function RatingMetricInlineSelect({
 }: {
   className?: string;
 }) {
+  const { t } = useTranslation("components/rating-metric-inline-select");
   const [stored, setStored] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -47,7 +49,7 @@ export function RatingMetricInlineSelect({
     >
       <SelectTrigger
         size="sm"
-        aria-label="Rating metric"
+        aria-label={t("rating-metric")}
         className={className ?? DEFAULT_TRIGGER_CLASS}
       >
         <SelectValue>{RATING_METRIC_LABEL[metric]}</SelectValue>

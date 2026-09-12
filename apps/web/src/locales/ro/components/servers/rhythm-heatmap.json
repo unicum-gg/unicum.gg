@@ -1,0 +1,8 @@
+{
+  "busiest": "Cel mai aglomerat {when} ({players})",
+  "not-enough-recorded-yet-to": "Nu există încă suficiente date înregistrate pentru a afișa ritmul săptămânal. Se completează pe măsură ce eșantionarea acoperă fiecare oră a săptămânii.",
+  "not-sampled-yet": "Nu a fost eșantionat încă",
+  "players-on-average": "{players} jucători în medie",
+  "quietest": ", cel mai liniștit {when} ({players})",
+  "your-local-time": "Ora locală"
+}

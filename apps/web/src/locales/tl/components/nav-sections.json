@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Mga manlalaro",
+    "clans": "Mga klan",
+    "tanks": "MMga tangke",
+    "maps": "Mga mapa",
+    "tournaments": "Mga torneo",
+    "servers": "Mga server"
+  },
+  "links": {
+    "top-players": {
+      "label": "Mga nangungunang manlalaro",
+      "description": "Talaan ng ranggo ng mga manlalaro sa lahat ng oras"
+    },
+    "players-onslaught": {
+      "description": "Talaan ng ranggo ng Sugod"
+    },
+    "players-steel-hunter": {
+      "description": "Talaan ng ranggo ng battle royale"
+    },
+    "top-clans": {
+      "label": "Mga nangungunang klan",
+      "description": "Talaan ng ranggo ng mga klano sa lahat ng oras"
+    },
+    "stronghold": {
+      "description": "Ranggo sa Skirmishes"
+    },
+    "advances": {
+      "description": "Ranggo ng Antas X para sa 15 laban sa 15"
+    },
+    "tank-performances": {
+      "label": "Pagganap",
+      "description": "Win rate at pinsala bawat tank"
+    },
+    "tank-specs": {
+      "label": "Mga espesipikasyon",
+      "description": "Istatistika para sa bawat tank"
+    },
+    "tank-economics": {
+      "label": "Ekonomiya",
+      "description": "Mga tank na kumikita ng credit at XP"
+    },
+    "tank-moe": {
+      "description": "Pinsala para sa bawat marka"
+    },
+    "tank-mom": {
+      "description": "Mga threshold ng insignia ng mastery"
+    },
+    "tank-changes": {
+      "label": "Mga pagbabago",
+      "description": "Mga buff at nerf bawat update"
+    },
+    "tank-community": {
+      "label": "Mga rating ng komunidad",
+      "description": "Ni-rate ng mga manlalarong nagmamay-ari ng mga ito"
+    },
+    "tank-videos": {
+      "label": "Mga video",
+      "description": "Gameplay ng komunidad"
+    },
+    "all-tournaments": {
+      "label": "Mga torneo",
+      "description": "Bawat tournament, bukas at tapos na"
+    },
+    "all-maps": {
+      "label": "Lahat ng mga mapa",
+      "description": "Bawat mapa sa laro"
+    },
+    "map-changes": {
+      "label": "Mga pagbabago",
+      "description": "Mga rework ng mapa bawat update"
+    },
+    "battle-type": {
+      "description": "{type} na mga mapa"
+    },
+    "servers-population": {
+      "label": "Populasyon ng server",
+      "description": "Mga manlalarong online, ngayon at sa paglipas ng oras"
+    }
+  }
+}

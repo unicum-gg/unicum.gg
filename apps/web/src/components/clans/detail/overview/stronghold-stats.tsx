@@ -1,5 +1,8 @@
 "use client";
 
+import type { NumberFormatter } from "@/lib/format";
+
+import { useFormat } from "@/hooks/use-format";
 import { Fragment } from "react";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import {
@@ -12,43 +15,44 @@ import {
 } from "@/components/ui/table";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
+import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
 import { STATS_PERIODS, useStatsPeriod } from "@/hooks/use-period";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, strongholdRatingColor, strongholdWinrateColor, StrongholdPeriod, StrongholdTier, type ClanStrongholdSr, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const signedIntFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const SIGNED_INT_FORMAT = {
   maximumFractionDigits: 0,
   signDisplay: "exceptZero",
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
+} as const;
+const PCT_FORMAT = {
   style: "percent",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 
 type Cell = { primary: string; className?: string };
 const DASH: Cell = { primary: "—", className: "text-muted-foreground" };
 
-function wrCell(wins: number | null, battles: number | null): Cell {
+function wrCell(num: NumberFormatter, wins: number | null, battles: number | null): Cell {
   if (wins === null || battles === null || battles === 0)
     return { primary: "—", className: "text-muted-foreground" };
   const ratio = wins / battles;
   return {
-    primary: pctFmt.format(ratio),
+    primary: num(PCT_FORMAT).format(ratio),
     className: RATING_COLOR_CLASS[strongholdWinrateColor(ratio)],
   };
 }
 
-function eloCell(val: number | null, delta?: number | null): Cell {
+function eloCell(num: NumberFormatter, val: number | null, delta?: number | null): Cell {
   if (val === null) return DASH;
   if (delta !== undefined) {
     return {
-      primary: delta !== null ? signedIntFmt.format(delta) : "—",
+      primary: delta !== null ? num(SIGNED_INT_FORMAT).format(delta) : "—",
       className:
         delta === null
           ? "text-muted-foreground"
@@ -59,15 +63,15 @@ function eloCell(val: number | null, delta?: number | null): Cell {
               : "text-muted-foreground",
     };
   }
-  return { primary: intFmt.format(val) };
+  return { primary: num(INT_FORMAT).format(val) };
 }
 
-function battlesCell(val: number | null, delta?: number | null): Cell {
+function battlesCell(num: NumberFormatter, val: number | null, delta?: number | null): Cell {
   if (val === null) return DASH;
   if (delta !== undefined) {
-    return { primary: delta !== null ? intFmt.format(delta) : "—" };
+    return { primary: delta !== null ? num(INT_FORMAT).format(delta) : "—" };
   }
-  return { primary: intFmt.format(val) };
+  return { primary: num(INT_FORMAT).format(val) };
 }
 
 function PeriodCell({ cell, hideOnMobile }: { cell: Cell; hideOnMobile?: boolean }) {
@@ -96,14 +100,17 @@ function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
 }
 
 type ProjectionRow = {
-  label: string;
-  current: (s: ClanStrongholdStats) => Cell;
-  delta: (s: ClanStrongholdStats) => Cell;
+  /** Key of the row's name in `components/clans/detail/overview/stronghold-stats`. */
+  id: string;
+  /** Passed in rather than read from a hook: a row definition is data at module
+   * scope, so the reader's number formatting arrives from its renderer. */
+  current: (s: ClanStrongholdStats, num: NumberFormatter) => Cell;
+  delta: (s: ClanStrongholdStats, num: NumberFormatter) => Cell;
 };
 // SR is an absolute rating per window, not a diff, so an SR row reads its value
 // straight out of the materialized table for each column's period instead of
 // subtracting two snapshots. Keyed by tier.
-type SrRow = { label: string; sr: keyof ClanStrongholdSr };
+type SrRow = { id: string; sr: keyof ClanStrongholdSr };
 type SectionRow = ProjectionRow | SrRow;
 
 // One section per stronghold mode, mirroring the leaderboards, so each mode keeps
@@ -119,106 +126,108 @@ type SectionRow = ProjectionRow | SrRow;
 // instead of sitting inside one of them. Tiers VI and VIII keep their ELO inline:
 // `fort_battles` is null there, so the tier and the mode are the same thing.
 const SECTIONS: {
-  title: string;
+  /** Key of the section's heading in
+   * `components/clans/detail/overview/stronghold-stats`. */
+  id: string;
   /** The leaderboard this section heads, and the anchor the boards deep-link to.
    * Absent on the ELO band: it is a rating shared by two modes, not a board. */
   tier?: StrongholdTier;
   rows: SectionRow[];
 }[] = [
   {
-    title: "Tier X ELO (Advances + Skirmish)",
+    id: "elo",
     rows: [
       {
-        label: "ELO",
-        current: (s) => eloCell(s.eloT10),
-        delta: (s) => eloCell(s.eloT10, s.eloT10),
+        id: "elo",
+        current: (s, num) => eloCell(num, s.eloT10),
+        delta: (s, num) => eloCell(num, s.eloT10, s.eloT10),
       },
     ],
   },
   {
-    title: "Advances (15v15)",
+    id: "advances",
     tier: StrongholdTier.Advances,
     rows: [
-      { label: "SR", sr: "advances" },
+      { id: "sr", sr: "advances" },
       {
-        label: "Battles",
-        current: (s) => battlesCell(s.advancesBattlesT10),
-        delta: (s) => battlesCell(s.advancesBattlesT10, s.advancesBattlesT10),
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.advancesBattlesT10),
+        delta: (s, num) => battlesCell(num, s.advancesBattlesT10, s.advancesBattlesT10),
       },
       {
-        label: "Win rate",
-        current: (s) => wrCell(s.advancesWinsT10, s.advancesBattlesT10),
-        delta: (s) => wrCell(s.advancesWinsT10, s.advancesBattlesT10),
+        id: "winrate",
+        current: (s, num) => wrCell(num, s.advancesWinsT10, s.advancesBattlesT10),
+        delta: (s, num) => wrCell(num, s.advancesWinsT10, s.advancesBattlesT10),
       },
     ],
   },
   {
-    title: "Skirmish Tier X (7v7)",
+    id: "t10",
     tier: StrongholdTier.T10,
     rows: [
-      { label: "SR", sr: "t10" },
+      { id: "sr", sr: "t10" },
       {
-        label: "Battles",
-        current: (s) => battlesCell(s.skirmishBattlesT10),
-        delta: (s) => battlesCell(s.skirmishBattlesT10, s.skirmishBattlesT10),
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.skirmishBattlesT10),
+        delta: (s, num) => battlesCell(num, s.skirmishBattlesT10, s.skirmishBattlesT10),
       },
       {
-        label: "Win rate",
-        current: (s) => wrCell(s.skirmishWinsT10, s.skirmishBattlesT10),
-        delta: (s) => wrCell(s.skirmishWinsT10, s.skirmishBattlesT10),
+        id: "winrate",
+        current: (s, num) => wrCell(num, s.skirmishWinsT10, s.skirmishBattlesT10),
+        delta: (s, num) => wrCell(num, s.skirmishWinsT10, s.skirmishBattlesT10),
       },
     ],
   },
   {
-    title: "Skirmish Tier VIII (7v7)",
+    id: "t8",
     tier: StrongholdTier.T8,
     rows: [
-      { label: "SR", sr: "t8" },
+      { id: "sr", sr: "t8" },
       {
-        label: "ELO",
-        current: (s) => eloCell(s.eloT8),
-        delta: (s) => eloCell(s.eloT8, s.eloT8),
+        id: "elo",
+        current: (s, num) => eloCell(num, s.eloT8),
+        delta: (s, num) => eloCell(num, s.eloT8, s.eloT8),
       },
       {
-        label: "Battles",
-        current: (s) => battlesCell(s.skirmishBattlesT8),
-        delta: (s) => battlesCell(s.skirmishBattlesT8, s.skirmishBattlesT8),
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.skirmishBattlesT8),
+        delta: (s, num) => battlesCell(num, s.skirmishBattlesT8, s.skirmishBattlesT8),
       },
       {
-        label: "Win rate",
-        current: (s) => wrCell(s.skirmishWinsT8, s.skirmishBattlesT8),
-        delta: (s) => wrCell(s.skirmishWinsT8, s.skirmishBattlesT8),
+        id: "winrate",
+        current: (s, num) => wrCell(num, s.skirmishWinsT8, s.skirmishBattlesT8),
+        delta: (s, num) => wrCell(num, s.skirmishWinsT8, s.skirmishBattlesT8),
       },
     ],
   },
   {
-    title: "Skirmish Tier VI (7v7)",
+    id: "t6",
     tier: StrongholdTier.T6,
     rows: [
-      { label: "SR", sr: "t6" },
+      { id: "sr", sr: "t6" },
       {
-        label: "ELO",
-        current: (s) => eloCell(s.eloT6),
-        delta: (s) => eloCell(s.eloT6, s.eloT6),
+        id: "elo",
+        current: (s, num) => eloCell(num, s.eloT6),
+        delta: (s, num) => eloCell(num, s.eloT6, s.eloT6),
       },
       {
-        label: "Battles",
-        current: (s) => battlesCell(s.skirmishBattlesT6),
-        delta: (s) => battlesCell(s.skirmishBattlesT6, s.skirmishBattlesT6),
+        id: "battles",
+        current: (s, num) => battlesCell(num, s.skirmishBattlesT6),
+        delta: (s, num) => battlesCell(num, s.skirmishBattlesT6, s.skirmishBattlesT6),
       },
       {
-        label: "Win rate",
-        current: (s) => wrCell(s.skirmishWinsT6, s.skirmishBattlesT6),
-        delta: (s) => wrCell(s.skirmishWinsT6, s.skirmishBattlesT6),
+        id: "winrate",
+        current: (s, num) => wrCell(num, s.skirmishWinsT6, s.skirmishBattlesT6),
+        delta: (s, num) => wrCell(num, s.skirmishWinsT6, s.skirmishBattlesT6),
       },
     ],
   },
 ];
 
-function srCell(v: number | null): Cell {
+function srCell(num: NumberFormatter, v: number | null): Cell {
   if (v === null) return DASH;
   return {
-    primary: intFmt.format(v),
+    primary: num(INT_FORMAT).format(v),
     className: cn("font-bold", RATING_COLOR_CLASS[strongholdRatingColor(v)]),
   };
 }
@@ -233,6 +242,17 @@ export function ClanStrongholdStatsTable(
         sr: ClanStrongholdView["sr"];
       },
 ) {
+  const { num } = useFormat();
+  const { t } = useTranslation(
+    "components/clans/detail/overview/stronghold-stats",
+  );
+  const { t: tGame } = useTranslation("game/vocabulary");
+  // Two of the five headings name a game mode, and the game names those itself.
+  const sectionTitle = (id: string) =>
+    t(`sections.${id}`, {
+      advances: tGame("stronghold-tiers.advances"),
+      skirmish: tGame("features.skirmish"),
+    });
   const loading = "loading" in props;
 
   // Which of the four windows a phone shows, read once and passed down.
@@ -256,16 +276,16 @@ export function ClanStrongholdStatsTable(
       </colgroup>
       <TableHeader>
         <TableRow>
-          <TableHead>Stat</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Overall)}>Total</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Day)}>Last 24h</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Week)}>Last 7d</TableHead>
-          <TableHead className={headClass(StrongholdPeriod.Month)}>Last 30d</TableHead>
+          <TableHead>{t("stat")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Overall)}>{t("periods.total")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Day)}>{t("periods.day")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Week)}>{t("periods.week")}</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Month)}>{t("periods.month")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {SECTIONS.map((section) => (
-          <Fragment key={section.title}>
+          <Fragment key={section.id}>
             {/* Anchor per tier so the stronghold boards can deep-link straight to
                 a clan's row on that tier (`.../stronghold#advances`). The scroll
                 margin keeps the section clear of the sticky nav. */}
@@ -282,7 +302,7 @@ export function ClanStrongholdStatsTable(
                 className="bg-muted/40 text-xs font-semibold text-muted-foreground uppercase"
               >
                 {loading || !section.tier ? (
-                  section.title
+                  sectionTitle(section.id)
                 ) : (
                   // The header links to this mode's leaderboard, a contextual
                   // funnel from every indexed clan page to the stronghold boards.
@@ -293,7 +313,7 @@ export function ClanStrongholdStatsTable(
                     href={ROUTES.STRONGHOLD(props.region, section.tier)}
                     className="group inline-flex items-center gap-1 transition-colors hover:text-foreground"
                   >
-                    {section.title}
+                    {sectionTitle(section.id)}
                     <CaretRightIcon
                       weight="bold"
                       className="size-3 opacity-0 transition-opacity group-hover:opacity-100"
@@ -303,9 +323,9 @@ export function ClanStrongholdStatsTable(
               </TableCell>
             </TableRow>
             {section.rows.map((row) => (
-              <TableRow key={section.title + row.label}>
+              <TableRow key={section.id + row.id}>
                 <TableCell className="py-1.5! font-medium">
-                  <GlossaryLabel>{row.label}</GlossaryLabel>
+                  <GlossaryLabel>{t(`rows.${row.id}`)}</GlossaryLabel>
                 </TableCell>
                 {loading ? (
                   <>
@@ -322,7 +342,7 @@ export function ClanStrongholdStatsTable(
                     {STATS_PERIODS.map((p) => (
                       <PeriodCell
                         key={p}
-                        cell={srCell(props.sr[p]?.[row.sr] ?? null)}
+                        cell={srCell(num, props.sr[p]?.[row.sr] ?? null)}
                         hideOnMobile={off(p)}
                       />
                     ))}
@@ -330,22 +350,22 @@ export function ClanStrongholdStatsTable(
                 ) : (
                   <>
                     <PeriodCell
-                      cell={row.current(props.latest)}
+                      cell={row.current(props.latest, num)}
                       hideOnMobile={off(StrongholdPeriod.Overall)}
                     />
                     <PeriodCell
                       cell={
-                        props.periods.h24 ? row.delta(props.periods.h24) : DASH
+                        props.periods.h24 ? row.delta(props.periods.h24, num) : DASH
                       }
                       hideOnMobile={off(StrongholdPeriod.Day)}
                     />
                     <PeriodCell
-                      cell={props.periods.d7 ? row.delta(props.periods.d7) : DASH}
+                      cell={props.periods.d7 ? row.delta(props.periods.d7, num) : DASH}
                       hideOnMobile={off(StrongholdPeriod.Week)}
                     />
                     <PeriodCell
                       cell={
-                        props.periods.d30 ? row.delta(props.periods.d30) : DASH
+                        props.periods.d30 ? row.delta(props.periods.d30, num) : DASH
                       }
                       hideOnMobile={off(StrongholdPeriod.Month)}
                     />

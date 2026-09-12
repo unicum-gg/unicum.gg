@@ -1,5 +1,10 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { dateLocale } from "@/lib/date-locale";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
+import { clanRoleName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   CaretDownIcon,
   CaretUpDownIcon,
@@ -7,7 +12,7 @@ import {
 } from "@phosphor-icons/react";
 import { format, formatDistanceStrict } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";
@@ -32,12 +37,7 @@ import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanStint, PlayerClanHistoryFull } from "@unicum.gg/shared";
 
-function prettyRole(role: string): string {
-  if (!role) return "—";
-  return role.charAt(0).toUpperCase() + role.slice(1).replace(/_/g, " ");
-}
-
-const DAY_FORMAT = "MMM d, yyyy";
+const DAY_FORMAT = "d MMM yyyy";
 
 function formatDuration(from: Date, to: Date | null): string {
   return formatDistanceStrict(from, to ?? new Date());
@@ -134,23 +134,34 @@ function SortableHead({
       ? CaretUpIcon
       : CaretDownIcon
     : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() => onToggle(column)}
+      className={cn(
+        "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
+        align === "end" && "justify-end",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+          heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
+      <Icon
+        weight="bold"
+        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead className={cn("p-0", hideOnMobile && styles.hiddenColumn)}>
-      <button
-        type="button"
-        onClick={() => onToggle(column)}
-        className={cn(
-          "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
-          align === "end" && "justify-end",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }
@@ -166,6 +177,9 @@ export function PlayerClansHistory(
         nowMs: number;
       },
 ) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/detail/overview/clans-history");
+  const { t: tRoles } = useTranslation("game/clan-roles");
   // Hook runs unconditionally (rules of hooks); the loading branch returns after.
   const [sort, setSort] = useState<SortState>(null);
 
@@ -197,18 +211,16 @@ export function PlayerClansHistory(
     <Panel>
       <PanelHeader>
         <div className="flex items-baseline justify-between gap-4">
-          <PanelTitle>{nickname}&apos;s clans history</PanelTitle>
+          <PanelTitle>{t("clans-history", { nickname })}</PanelTitle>
           {stints.length > 0 && (
             <p className="text-xs text-muted-foreground tabular-nums">
-              {clanHistory.totalClans} clans ·{" "}
-              {formatTotalDuration(clanHistory.timeInClansSeconds)} in clans
-            </p>
+              {t("clans-in-clans", { totalClans: clanHistory.totalClans, timeInClansSeconds: formatTotalDuration(clanHistory.timeInClansSeconds) })}</p>
           )}
         </div>
       </PanelHeader>
       <PanelContent className="p-0">
         {stints.length === 0 ? (
-          <p className="p-4 text-sm text-muted-foreground">No clan history.</p>
+          <p className="p-4 text-sm text-muted-foreground">{t("no-clan-history")}</p>
         ) : (
           <>
             <div className="p-4">
@@ -230,29 +242,26 @@ export function PlayerClansHistory(
               <TableHeader>
               <TableRow>
                 <SortableHead column={SortColumn.Tag} state={sort} onToggle={toggleSort}>
-                  Tag
+                  {t("tag")}
                 </SortableHead>
                 <SortableHead column={SortColumn.Name} state={sort} onToggle={toggleSort}>
-                  Name
-                </SortableHead>
+                  {t("name")}</SortableHead>
                 <SortableHead
                   column={SortColumn.Role}
                   state={sort}
                   onToggle={toggleSort}
                   hideOnMobile
                 >
-                  Role
-                </SortableHead>
+                  {t("role")}</SortableHead>
                 <SortableHead
                   column={SortColumn.From}
                   state={sort}
                   onToggle={toggleSort}
                   hideOnMobile
                 >
-                  From
-                </SortableHead>
+                  {t("from")}</SortableHead>
                 <SortableHead column={SortColumn.To} state={sort} onToggle={toggleSort}>
-                  To
+                  {t("to")}
                 </SortableHead>
                 <SortableHead
                   column={SortColumn.Duration}
@@ -260,8 +269,7 @@ export function PlayerClansHistory(
                   onToggle={toggleSort}
                   align="end"
                 >
-                  Duration
-                </SortableHead>
+                  {t("duration")}</SortableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -290,16 +298,16 @@ export function PlayerClansHistory(
                       </Link>
                     </TableCell>
                     <TableCell className={styles.hiddenColumn}>
-                      {prettyRole(s.role)}
+                      {clanRoleName(s.role, tRoles)}
                     </TableCell>
                     <TableCell className={cn("whitespace-nowrap tabular-nums", styles.hiddenColumn)}>
-                      {format(s.joinedAt, DAY_FORMAT)}
+                      {format(s.joinedAt, DAY_FORMAT, { locale: dateLocale(locale) })}
                     </TableCell>
                     <TableCell className="whitespace-nowrap tabular-nums">
                       {s.leftAt ? (
-                        format(s.leftAt, DAY_FORMAT)
+                        format(s.leftAt, DAY_FORMAT, { locale: dateLocale(locale) })
                       ) : (
-                        <span className="text-muted-foreground">current</span>
+                        <span className="text-muted-foreground">{t("current")}</span>
                       )}
                     </TableCell>
                     <TableCell className="text-right whitespace-nowrap tabular-nums">
@@ -320,12 +328,20 @@ export function PlayerClansHistory(
 /** The loading twin: same panel + real title + the same table headers, with a
  * placeholder timeline and rows. */
 function ClansHistoryLoading({ nickname }: { nickname: string }) {
-  const HEADS = ["Tag", "Name", "Role", "From", "To", "Duration"];
+  const { t } = useTranslation("components/players/detail/overview/clans-history");
+  const HEADS = [
+    t("tag"),
+    t("name"),
+    t("role"),
+    t("from"),
+    t("to"),
+    t("duration"),
+  ];
   return (
     <Panel>
       <PanelHeader>
         <div className="flex items-baseline justify-between gap-4">
-          <PanelTitle>{nickname}&apos;s clans history</PanelTitle>
+          <PanelTitle>{t("clans-history", { nickname })}</PanelTitle>
           <Skeleton className="h-3 w-36" />
         </div>
       </PanelHeader>

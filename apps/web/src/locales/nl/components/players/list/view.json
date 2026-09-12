@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>spelers</accent>",
+    "language": "Top spelers met <accent>{language}</accent> als taal"
+  },
+  "intro": {
+    "all": "{region}-klassement, gerangschikt volgens {metric} over alle gespeelde gevechten (minimaal 20.000 gevechten).",
+    "language": "{region}-spelers van wie de uit de clanhistorie afgeleide talenset {language} bevat, gerangschikt volgens {metric} (minimaal 10.000 gevechten).",
+    "strict": "{region}-spelers van wie de uit de clanhistorie afgeleide taal uitsluitend {language} is, gerangschikt volgens {metric} (minimaal 10.000 gevechten)."
+  },
+  "board": {
+    "all": "Top {count} spelers op basis van {metric}",
+    "language": "Top {count} spelers met {language} als taal op basis van {metric}",
+    "strict": "Top {count} spelers met uitsluitend {language} als taal op basis van {metric}"
+  },
+  "modes": {
+    "overall": "Totaal"
+  },
+  "columns": {
+    "player": "Speler"
+  },
+  "strict-toggle": "Streng",
+  "any-toggle": "Iedereen",
+  "all-languages": "Alle talen",
+  "battles": "Gevechten",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

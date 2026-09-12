@@ -1,0 +1,12 @@
+{
+  "slot": "Слот {n}",
+  "slot-filled": "Слот {n}: {name}",
+  "consumable-slot": "Слот за консуматив {n}",
+  "consumable-slot-filled": "Слот за консуматив {n}: {name}",
+  "level": "Ниво {n}",
+  "stock": "Стоков",
+  "specialize": "Кликни, за да специализираш този слот.",
+  "clear-specialization": "Кликни, за да изчистиш специализацията на този слот.",
+  "crew-skills": "Умения на екипажа",
+  "shell-aria": "{name}: {damage} щети, {penetration} мм пробивност"
+}

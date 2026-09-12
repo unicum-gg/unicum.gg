@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Nakopya ang build link",
+  "copy-build-link": "Kopyahin ang build link",
+  "could-not-copy-link": "Maaaring hindi nakopya ang link",
+  "include-setup": "Isama ang setup",
+  "share-build": "Ibahagi ang build",
+  "share-tank": "Ibahagi ang {tank}",
+  "share-text": "Tingnan ang build ng {tank} na ito sa {app}"
+}

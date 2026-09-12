@@ -1,0 +1,19 @@
+{
+  "active-days": "Active days",
+  "add-workflow": "Add workflow",
+  "connect-discord": "Connect Discord",
+  "discord-notifications": "Discord notifications",
+  "each-workflow-activates-its-reserves": "Each workflow activates its reserves during a time window, once enough members are in a live game session. Runs on your account, no need to be online. Add as many as you need.",
+  "enabled": "Enabled",
+  "from": "From",
+  "get-a-discord-message-in": "Get a Discord message in a channel you choose every time a boost fires, so the whole clan knows it is live.",
+  "log-in-with-wargaming-to": "Log in with Wargaming to set it up",
+  "min-online": "Min online",
+  "officers": "Officers",
+  "only-an-officer-of-this": "Only an officer of this clan can set this up.",
+  "schedule-preview": "Schedule preview",
+  "set-your-hours-and-reserves": "Set your hours and reserves once; the boosts fire on time on their own, even when nobody is around to press the button.",
+  "stronghold-boosts": "Stronghold boosts",
+  "times-are-in-your-timezone": "Times are in {tz}, your timezone.",
+  "to": "To"
+}

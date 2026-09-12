@@ -1,0 +1,22 @@
+{
+  "search": "Tìm {count} thuật ngữ",
+  "search-label": "Tìm trong bảng thuật ngữ",
+  "all": "Tất cả",
+  "jump": "Chuyển đến chữ cái",
+  "empty": "Không có thuật ngữ nào phù hợp với “{query}”.",
+  "categories": {
+    "vehicles": "Xe",
+    "gunnery": "Pháo binh",
+    "armor": "Giáp",
+    "mobility": "Độ Cơ động",
+    "vision": "Tầm nhìn",
+    "crew": "Kíp lái",
+    "progression": "Tiến trình",
+    "economy": "Kinh tế",
+    "ratings": "Xếp hạng",
+    "statistics": "Thống kê",
+    "modes": "Chế độ chiến đấu",
+    "tactics": "Chiến thuật",
+    "slang": "Tiếng lóng"
+  }
+}

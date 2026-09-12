@@ -1,0 +1,4 @@
+{
+  "title": "Các Clan cấp {tier} hàng đầu ({region})",
+  "description": "Bảng xếp hạng Clan cấp {tier} tại {region}. Xếp hạng theo SR (chỉ số đánh giá giao tranh nhỏ), ELO, trận đấu và tỷ lệ thắng. Tối thiểu {battles} trận đấu."
+}

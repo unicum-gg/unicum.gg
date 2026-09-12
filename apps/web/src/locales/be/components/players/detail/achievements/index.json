@@ -1,0 +1,12 @@
+{
+  "achievements": "Дасягненьні {nickname}",
+  "filter-all": "Усе",
+  "filter-both": "Абодва",
+  "filter-earned": "Заробленыя",
+  "filter-missing": "Адсутныя",
+  "filter-obtainable": "Даступныя",
+  "filter-retired": "Выведзеныя",
+  "no-achievement-matches-these-filters": "Няма дасягненняў, якія адпавядаюць гэтым фільтрам.",
+  "search-achievements": "Пошук дасягненьняў",
+  "search-among-n-achievements": "Шукаць сярод {count} дасягненняў"
+}

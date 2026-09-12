@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "au-dessus de {value} % des chars évalués de son rang",
+  "measured-hint": "Position de son taux de victoire parmi les mêmes chars",
+  "not-enough-votes-yet-to": "Pas encore assez de votes pour comparer l’avis de la communauté aux performances réelles du char.",
+  "perceived-hint": "Position donnée par la communauté parmi les chars de rang {tier} évalués",
+  "verdict": {
+    "overrated": "La communauté lui attribue une note bien supérieure à ses performances réelles.",
+    "fair": "La réputation et les résultats concordent.",
+    "underrated": "Il est plus performant que sa réputation ne le laisse penser."
+  },
+  "what-players-think": "Ce qu’en pensent les joueurs",
+  "what-the-data-says": "Ce que disent les données"
+}

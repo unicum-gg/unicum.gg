@@ -1,0 +1,162 @@
+{
+  "columns-label": "Sarakkeet",
+  "groups": {
+    "firepower": "Tulivoima",
+    "gun-handling": "Aseenkäsittely",
+    "mobility": "Liikkuvuus",
+    "survivability": "Eloonjääminen",
+    "other": "Muut"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "Vahinkoa aiheutettu minuutissa"
+    },
+    "damage": {
+      "label": "Vahinkoa aiheutettu",
+      "tip": "Alpha vahinkoa aiheutettu"
+    },
+    "moduleDamage": {
+      "label": "Moduuli Vahinkoa aiheutettu"
+    },
+    "splashRadius": {
+      "label": "Räjähdyssäde"
+    },
+    "reload": {
+      "label": "Lataus",
+      "tip": "Latausaika (automaattisyöttäjien täysi lipas)"
+    },
+    "rof": {
+      "label": "Tulinopeus",
+      "tip": "Laukauksia minuutissa"
+    },
+    "intraClipReload": {
+      "label": "Lippaan sisäinen latausaika",
+      "tip": "Lippaassa olevien laukausten välinen aika (automaattisyöttäjät)"
+    },
+    "penetration": {
+      "label": "Läpäisy",
+      "tip": "Läpäisy (mm), oletusammus"
+    },
+    "caliber": {
+      "label": "Kaliiperi",
+      "tip": "Ammuksen kaliiperi (mm)"
+    },
+    "shellVelocity": {
+      "label": "Ammuksen nopeus",
+      "tip": "Ammuksen nopeus (m/s)"
+    },
+    "accuracy": {
+      "label": "Tarkkuus",
+      "tip": "Hajonta 100 metrissä (pienempi on parempi)"
+    },
+    "aimTime": {
+      "label": "Ajanviejä"
+    },
+    "dispMoving": {
+      "label": "Hajonta liikkeessä",
+      "tip": "Hajontakerroin liikkeessä"
+    },
+    "dispTankTraverse": {
+      "label": "Hajonta panssarivaunua käännettäessä"
+    },
+    "dispTurretTraverse": {
+      "label": "Hajonta tykkitornia käännettäessä"
+    },
+    "dispAfterShot": {
+      "label": "Hajonta ampumisen jälkeen"
+    },
+    "dispWhileDamaged": {
+      "label": "Hajonta vaurioituneena"
+    },
+    "gunArc": {
+      "label": "Tykin kääntösektori",
+      "tip": "Tykin vaakasuuntainen kääntökulma"
+    },
+    "depression": {
+      "label": "Tykin painuma / nousu",
+      "tip": "Tykin painuma / nousu"
+    },
+    "speed": {
+      "label": "Nopeus (eteen / taakse)",
+      "tip": "Suurin nopeus eteen / taakse (km/h)"
+    },
+    "hullTraverse": {
+      "label": "Rungon kääntö"
+    },
+    "turretTraverse": {
+      "label": "Tykkitornin kääntö"
+    },
+    "enginePower": {
+      "label": "Teho",
+      "tip": "Moottorin teho (hv)"
+    },
+    "powerWeight": {
+      "label": "Teho/paino",
+      "tip": "hv:tä tonnia kohti"
+    },
+    "terrainHard": {
+      "label": "Kova maasto",
+      "tip": "Maaston vastus kovalla maalla (pienempi on parempi)"
+    },
+    "terrainMedium": {
+      "label": "Keskitaso maasto"
+    },
+    "terrainSoft": {
+      "label": "Pehmeä maasto"
+    },
+    "health": {
+      "label": "Kestopisteet",
+      "tip": "Elinvoima"
+    },
+    "engineHealth": {
+      "label": "Moottorin kestopisteet"
+    },
+    "engineFireChance": {
+      "label": "Moottorin tulipalon mahdollisuus"
+    },
+    "hullArmorFront": {
+      "label": "Rungon panssari (etuosa)",
+      "tip": "Rungon etupanssari (mm)"
+    },
+    "turretArmorFront": {
+      "label": "Tykkitornin panssari (etuosa)",
+      "tip": "Tykkitornin etupanssari (mm)"
+    },
+    "trackArmor": {
+      "label": "Ajojärjestelmän panssari"
+    },
+    "trackHealth": {
+      "label": "Telaketjun kestopisteet"
+    },
+    "trackRepairTime": {
+      "label": "Telaketjun korjausaika"
+    },
+    "ammoRackHealth": {
+      "label": "Ammustelineen kestävyys"
+    },
+    "weight": {
+      "label": "Paino"
+    },
+    "viewRange": {
+      "label": "Näköetäisyys",
+      "tip": "Näköetäisyys (m)"
+    },
+    "radioRange": {
+      "label": "Radion kantama",
+      "tip": "Signaalin kantama (m)"
+    },
+    "camoStill": {
+      "label": "Naamioarvo paikallaan"
+    },
+    "camoMoving": {
+      "label": "Naamioarvo liikkeessä"
+    },
+    "camoStillFiring": {
+      "label": "Paikallaanolon naamiointi ampumisen jälkeen"
+    },
+    "camoMovingFiring": {
+      "label": "Liikkeessäolon naamiointi ampumisen jälkeen"
+    }
+  }
+}

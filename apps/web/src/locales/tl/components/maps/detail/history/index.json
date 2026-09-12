@@ -1,0 +1,12 @@
+{
+  "added": "Idinagdag",
+  "before-update": "Bago ang update {version}",
+  "common-test": "Karaniwang Pagsubok",
+  "every-update-that-changed-this": "Bawat update na nagbago sa mapang ito, pinakabago muna, na binasa mula mismo sa game client.",
+  "in-the-game": "Sa laro",
+  "n-changes": "{count, plural, one {# pagbabago} other {# mga pagbabago}}",
+  "not-released-wargaming-can-still": "Hindi pa inilalabas. Maaari pa ring baguhin o alisin ng Wargaming ang alinman dito bago ipadala ang update.",
+  "removed": "Alisin",
+  "title": "Mga pagbabago sa {map}",
+  "update": "Pag-update {version}"
+}

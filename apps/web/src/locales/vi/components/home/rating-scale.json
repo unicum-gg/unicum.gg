@@ -1,0 +1,21 @@
+{
+  "title": "Thang đánh giá",
+  "description": "Các ngưỡng màu được sử dụng trên toàn trang cho tỷ lệ thắng và chỉ số đánh giá được chọn trong thanh điều hướng.",
+  "tier": "Cấp",
+  "tiers": {
+    "top": "Hạng nhất",
+    "excellent": "Xuất sắc",
+    "super": "Siêu",
+    "very-good": "Rất tốt",
+    "good": "Tốt",
+    "average": "Trung bình",
+    "below-avg": "Dưới trung bình",
+    "bad": "Kém",
+    "very-bad": "Rất tệ"
+  },
+  "rating-colors": "Màu xếp hạng",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

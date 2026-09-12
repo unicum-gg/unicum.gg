@@ -1,0 +1,12 @@
+{
+  "final": " · finał",
+  "has-not-held-a-place": "Gracz {nickname} nie znalazł się w Klasyfikacji Natarcia.",
+  "live-season": "· sezon w toku",
+  "loading-s-onslaught-record": "Wczytywanie wyników gracza {nickname} w trybie Natarcie...",
+  "onslaught": "Natarcie",
+  "onslaught-record": "Wyniki gracza {nickname} w trybie Natarcie",
+  "see-this-season-s-leaderboard": "Zobacz Klasyfikację w tym sezonie",
+  "standing-line": "Punkty rankingowe: {rating} · Bitwy: {battles}",
+  "the-board-only-lists-players": "Klasyfikacja uwzględnia tylko graczy, którzy osiągnęli rangę Czempion, czyli kilka tysięcy osób w każdym regionie. Dlatego ten komunikat wyświetla się na niemal każdym profilu. Sekcja uzupełni się automatycznie w sezonie, w którym gracz osiągnie tę rangę.",
+  "updated": "Zaktualizowane {when}"
+}

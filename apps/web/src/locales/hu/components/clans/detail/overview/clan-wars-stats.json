@@ -1,0 +1,21 @@
+{
+  "stat": "Statisztika",
+  "periods": {
+    "total": "Összesen",
+    "day": "Utolsó 24 óra",
+    "week": "Utolsó 7 nap",
+    "month": "Utolsó 30 nap"
+  },
+  "sections": {
+    "territory": "Terület",
+    "t10": "X-es szint",
+    "t8": "VIII-as szint",
+    "t6": "VI-os szint"
+  },
+  "rows": {
+    "provinces": "Tartományok",
+    "elo": "ELO",
+    "battles": "Csaták",
+    "winrate": "Győzelmi arány"
+  }
+}

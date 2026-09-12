@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Πώς συγκρίνονται οι παίκτες της {region}",
+  "median-n": "διάμεσος {value}",
+  "metric-rating": "Βαθμολογία {metric}",
+  "tracked-accounts-with-at-least": "{players} καταγεγραμμένοι λογαριασμοί με τουλάχιστον {minBattles} μάχες. Τα χρώματα είναι οι ίδιες ζώνες που χρησιμοποιεί ο ιστότοπος παντού αλλού.",
+  "win-rate": "Ποσοστό νικών",
+  "win-rate-distribution-across-the-region-s-tr": "Κατανομή ποσοστού νικών μεταξύ των καταγεγραμμένων παικτών της περιοχής"
+}

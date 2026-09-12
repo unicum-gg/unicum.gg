@@ -1,0 +1,8 @@
+{
+  "last-days": "De senaste {chartDays} dagarna",
+  "n-players": "{count, plural, one {# spelare} other {# spelare}}",
+  "rolling-average-combined-damage-to": "Glidande medelvärde för kombinerad skada som krävs för att slå 65 / 85 / 95 % av alla spelare.",
+  "single-battle-xp-to-beat": "XP i en enskild strid som krävs för att slå 50 / 80 / 95 / 99 % av alla spelare.",
+  "tank-marks-of-excellence": "Stridsutmärkelser för {tank}",
+  "tank-marks-of-mastery": "Mästerskapsmärken för {tank}"
+}

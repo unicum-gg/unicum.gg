@@ -1,0 +1,34 @@
+{
+  "stat": "Statistika",
+  "rows": {
+    "battles": "Bitke",
+    "tier": "Nivo",
+    "wins": "Pobjede",
+    "losses": "Gubici",
+    "draws": "Neriješeno",
+    "survived": "Preživjele bitke",
+    "destroyed": "Uništeni tenkovi",
+    "destruction-ratio": "Odnosi uništenja",
+    "spotted": "Uočeni tenkovi",
+    "damages": "Šteta",
+    "track-damages": "Šteta na trakama",
+    "spotting-damages": "Šteta od otkrivanja",
+    "assisting-damages": "Šteta od pomoći",
+    "combined-damages": "Ukupna šteta",
+    "base-capture": "Osvojeni bazen",
+    "base-defense": "Odbrana baze",
+    "experience": "Iskustvo",
+    "hit-rate": "Postotak pogodaka",
+    "personal-rating": "Lični rejting",
+    "wtr": "World of Tanks rejting",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Ukupno",
+    "day": "Posljednjih 24h",
+    "week": "Posljednjih 7d",
+    "month": "Posljednjih 30d"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "trigger": "Zpětná vazba",
+  "title": "Sdílet zpětnou vazbu",
+  "topic-placeholder": "Vyberte téma...",
+  "message-placeholder": "Vaše zpětná vazba...",
+  "send": "Odeslat",
+  "sent": "Děkujeme za zpětnou vazbu!",
+  "failed": "Zpětnou vazbu se nepodařilo odeslat. Zkuste to prosím znovu.",
+  "topics": {
+    "bug": "Hlášení chyby",
+    "idea": "Návrh funkce",
+    "data": "Přesnost dat",
+    "other": "Jiný"
+  },
+  "sentiments": {
+    "awful": "Hrozné",
+    "bad": "Špatný",
+    "good": "Dobrý",
+    "great": "Skvělé"
+  }
+}

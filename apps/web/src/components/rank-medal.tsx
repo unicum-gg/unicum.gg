@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 // SVG paths transcribed from WG's worldoftanks.eu rating page (laurel wreath
 // + roman numeral). Path geometry differs slightly between ranks because the
@@ -16,12 +19,6 @@ const RANK_COLOR: Record<1 | 2 | 3, string> = {
   3: "#DA773B",
 };
 
-const RANK_LABEL: Record<1 | 2 | 3, string> = {
-  1: "1st place",
-  2: "2nd place",
-  3: "3rd place",
-};
-
 export function RankMedal({
   rank,
   className,
@@ -29,13 +26,14 @@ export function RankMedal({
   rank: 1 | 2 | 3;
   className?: string;
 }) {
+  const { t } = useTranslation("components/entity/badges/player-badges");
   return (
     <svg
       viewBox="0 0 30 26"
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid"
       role="img"
-      aria-label={RANK_LABEL[rank]}
+      aria-label={t(`place.${rank}`)}
       className={cn("mx-auto block h-5 w-auto", className)}
       style={{ color: RANK_COLOR[rank] }}
     >

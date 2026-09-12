@@ -1,0 +1,6 @@
+{
+  "day": "Xếp hạng theo {metric} trong 24 giờ trước đây, tối thiểu 20 trận đấu.",
+  "week": "Xếp hạng theo {metric} trong 7 ngày trước đây, tối thiểu 140 trận đấu.",
+  "month": "Xếp hạng theo {metric} trong 30 ngày trước đây, tối thiểu 600 trận đấu.",
+  "overall": "Xếp hạng theo {metric} mọi thời điểm, tối thiểu 20.000 trận đấu."
+}

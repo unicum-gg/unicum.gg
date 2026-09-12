@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Pokladna byla zrušena.",
+  "claim-your-supporter-role-on-discord": "Získat oprávnění Role Podporovatel na Discordu",
+  "could-not-add-the-discord-role-please-try-ag": "Nepodařilo se přidat oprávnění Role na Discordu. Zkuste to znovu.",
+  "could-not-open-the-billing-portal": "Nepodařilo se otevřít portál pro správu plateb.",
+  "could-not-start-checkout-please-try-again": "Nepodařilo se zahájit platbu. Zkuste to znovu.",
+  "could-not-update-your-preference": "Nepodařilo se aktualizovat vaše nastavení.",
+  "log-in-with-wargaming": "Přihlásit se přes Wargaming",
+  "log-in-with-wargaming-to": "Přihlásit se přes Wargaming a podpořit projekt {NAME}.",
+  "manage-subscription": "Spravovat předplatné",
+  "only-active-supporters-can-claim-the-discord": "Oprávnění Role na Discordu mohou získat pouze aktivní uživatelé programu Podporovatel.",
+  "or-choose-your-own-amount": "Můžete si také zvolit vlastní částku",
+  "pay-what-you-want": "Zaplaťte, kolik chcete.",
+  "pick-an-amount": "Vyberte částku nebo zadejte vlastní, minimálně €{min} měsíčně.",
+  "re-sync-discord-role": "Znovu synchronizovat oprávnění Role na Discordu",
+  "secured-by-stripe": "Platby zabezpečuje Stripe. Storno je možné kdykoli.",
+  "show-me-anonymously-on-the": "Zobrazovat mě na stupních vítězů anonymně",
+  "support-subscriptions-are-coming-soon": "Předplatné programu Podporovatel bude brzy dostupné.",
+  "supporter-role-added-on-discord": "Oprávnění Role Podporovatel bylo na Discordu přidáno!",
+  "you-are-a-supporter-thank": "Jste Podporovatel. Děkujeme, že pomáháte, aby projekt {NAME} mohl dál fungovat."
+}

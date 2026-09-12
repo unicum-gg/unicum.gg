@@ -1,0 +1,25 @@
+{
+  "tagline": "Rakennettu World of Tanks -yhteisölle. Ilmaiset tilastot jokaiselle pelaajalle, klaanille, panssarivaunulle ja kartalle EU:ssa, NA:ssa ja Aasiassa.",
+  "columns": {
+    "leaderboards": "Tulostaulut",
+    "tanks": "Panssarivaunut",
+    "maps": "Kartat",
+    "integrations": "Integraatiot",
+    "project": "Projekti"
+  },
+  "links": {
+    "top-tanks": "Parhaat panssarivaunut",
+    "bot": "Discord-botti",
+    "mcp": "MCP-palvelin",
+    "docs": "API-dokumentaatio",
+    "badges": "Merkit",
+    "glossary": "Sanasto",
+    "coverage": "Kattavuus",
+    "support": "Tukee meitä",
+    "source": "Lähdekoodi",
+    "status": "Tila",
+    "discord": "Discord"
+  },
+  "disclaimer": "Ei sidoksissa Wargamingiin",
+  "cookies": "Hallitse evästeitä"
+}

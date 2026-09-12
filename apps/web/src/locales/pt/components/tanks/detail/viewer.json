@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Visual",
+    "collision": "Colisão",
+    "live": "Ao vivo"
+  },
+  "centre": {
+    "on": "Centrar o veículo",
+    "off": "Voltar a colocar o veículo fora do centro"
+  },
+  "hull-down": {
+    "on": "Baixa do casco",
+    "off": "Nivelar o veículo"
+  },
+  "tracks": {
+    "on": "Pôr as lagartas em movimento",
+    "off": "Parar as lagartas"
+  },
+  "textures": {
+    "on": "Texturas de alta definição",
+    "off": "Texturas padrão"
+  },
+  "reset": "Redefinir visualização",
+  "style": "Escolher um estilo",
+  "style-worn": "Estilo: {name}",
+  "search-styles": "Pesquisar estilos",
+  "colours": "O que significam as cores",
+  "cinematic": {
+    "off": "Câmara cinematográfica: desligada",
+    "auto": "Câmara cinematográfica: quando não há interação",
+    "on": "Câmara cinematográfica: sempre"
+  },
+  "open-tank": "Abrir outro tanque",
+  "open-tank-placeholder": "Abrir tanque...",
+  "more-actions": "Mais ações",
+  "marks-meaning": {
+    "0": "Sem marcas de excelência",
+    "1": "Uma marca: à frente de 65% dos jogadores com este tanque",
+    "2": "Duas marcas: à frente de 85%",
+    "3": "Três marcas: à frente de 95%"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Preencher a janela",
+      "leave": "Voltar à página"
+    },
+    "screen": {
+      "enter": "Preencher o ecrã",
+      "leave": "Sair do ecrã inteiro"
+    }
+  },
+  "marks-count": {
+    "0": "Sem marcas de excelência",
+    "one": "1 marca de excelência",
+    "other": "{count} marcas de excelência"
+  },
+  "compare-tank": "Comparar com outro tanque",
+  "compare-tank-placeholder": "Comparar com...",
+  "view-tooltips": {
+    "visual": "O tanque tal como é representado no jogo",
+    "collision": "A espessura de cada placa",
+    "live": "O efeito que o projétil selecionado teria"
+  },
+  "cinematic-tooltips": {
+    "off": "Câmara cinematográfica: desligada, a vista não se move",
+    "auto": "Câmara cinematográfica: inicia-se após 30 segundos sem interação",
+    "on": "Câmara cinematográfica: sempre, assim que larga os controlos"
+  }
+}

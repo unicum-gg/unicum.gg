@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Spillområdets bredde",
+    "height": "Spillområdets høyde",
+    "round-length": "Kampens tid",
+    "team-size": "Teamstørrelse",
+    "camouflage": "sesong",
+    "presence": "I spillet",
+    "variant-version": "{type}-versjon",
+    "play-area": "Spillområde",
+    "bases-team1": "Allierte baser",
+    "bases-team2": "Fiendens lagbaser",
+    "spawns-team1": "Allierte startpunkter",
+    "spawns-team2": "Fiendens lagstartpunkter",
+    "control-point": "Kontrollpunkt",
+    "artillery-headquarters": "Artillerihovedkvarter",
+    "comms-centers": "Sambandssentraler",
+    "observation-posts": "Observasjonsposter",
+    "points-of-interest": "Interessepunkter"
+  },
+  "summary": {
+    "added": "{name} lagt til",
+    "removed": "{name} fjernet",
+    "added-to-game": "Lagt til i spillet",
+    "removed-from-game": "Fjernet fra spillet",
+    "added-on-test": "Lagt til i testklienten",
+    "removed-on-test": "Fjernet fra testklienten",
+    "mode-added": "{name}-modus lagt til",
+    "mode-removed": "{name}-modus fjernet",
+    "now-played-in": "Spilles nå i {name}",
+    "no-longer-played-in": "Spilles ikke lenger i {name}",
+    "event-added": "{name} kan nå skje midt i kampen",
+    "event-removed": "{name} skjer ikke lenger",
+    "moved": "{name} flyttet",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

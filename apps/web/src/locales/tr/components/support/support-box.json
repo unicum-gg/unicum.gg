@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Ödeme iptal edildi.",
+  "claim-your-supporter-role-on-discord": "Discord destekçi rolünü al",
+  "could-not-add-the-discord-role-please-try-ag": "Discord rolü eklenemedi. Lütfen tekrar deneyin.",
+  "could-not-open-the-billing-portal": "Faturalandırma portalı açılamadı.",
+  "could-not-start-checkout-please-try-again": "Ödeme başlatılamadı. Lütfen tekrar deneyin.",
+  "could-not-update-your-preference": "Tercihiniz güncellenemedi.",
+  "log-in-with-wargaming": "Wargaming ile giriş yap",
+  "log-in-with-wargaming-to": "{NAME} projesini desteklemek için Wargaming ile giriş yapın.",
+  "manage-subscription": "Aboneliği yönet",
+  "only-active-supporters-can-claim-the-discord": "Discord rolünü yalnızca aktif destekçiler alabilir.",
+  "or-choose-your-own-amount": "Veya kendi miktarınızı seçin",
+  "pay-what-you-want": "İstediğiniz kadar ödeyin.",
+  "pick-an-amount": "Bir miktar seçin veya kendiniz yazın, aylık €{min} tutarından başlayarak.",
+  "re-sync-discord-role": "Discord rolünü yeniden eşleştir",
+  "secured-by-stripe": "Stripe tarafından güvence altındadır. İstediğiniz zaman iptal edin.",
+  "show-me-anonymously-on-the": "Beni podyumda anonim olarak göster",
+  "support-subscriptions-are-coming-soon": "Destek abonelikleri yakında geliyor.",
+  "supporter-role-added-on-discord": "Destekçi rolü Discord’a eklendi!",
+  "you-are-a-supporter-thank": "Destekçisiniz. {NAME} projesini yaşattığınız için teşekkürler."
+}

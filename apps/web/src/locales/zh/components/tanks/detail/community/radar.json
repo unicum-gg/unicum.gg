@@ -1,0 +1,9 @@
+{
+  "breakdown-appears-at": "详细分析会在{min}票后显示，因此图形反映的是坦克本身，而不是某一个人的看法。",
+  "community-rating-by-axis": "社区按项目评分",
+  "from-votes": "来自{count}次详细投票。",
+  "from-votes-one": "来自{count}次详细投票。",
+  "nobody-yet": "还没有人填写详细项目。",
+  "only-votes": "目前只有{count}次详细投票。",
+  "only-votes-one": "目前只有{count}次详细投票。"
+}

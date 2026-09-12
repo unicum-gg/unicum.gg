@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistiken von {nickname}: Zufällige Schlachten",
+  "progression": "Fortschritt von {nickname} bei {metricLabel}",
+  "solid-line-is-overall-matches": "Die durchgezogene Linie zeigt den gesamten {metricLabel}-Wert (entspricht der Spalte „Gesamt“ oben) und verändert sich langsam, während neue Gefechte hinzukommen. Die gestrichelte Linie zeigt {metricLabel2} je Sitzung, berechnet anhand der seit der vorherigen Momentaufnahme gespielten Gefechte. Sie macht Hoch- und Tiefphasen sichtbar. Die Linienfarbe richtet sich nach der Wertungsstufe.",
+  "tanks-shaping-s-rating": "Panzer, die die Wertung von {nickname} prägen",
+  "tanks": "Panzer von {nickname}",
+  "stats": "Statistiken von {nickname} für {strongholdLabel}"
+}

@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Poradie {rank} v tabuľke {board}",
+  "board": {
+    "advances": "Hodnotenje napredovanj v Trdnjavi",
+    "skirmish-t10": "Hodnotenje spopadov stopnje X",
+    "skirmish-t6": "Hodnotenje spopadov stopnje VI",
+    "skirmish-t8": "Hodnotenje spopadov stopnje VIII"
+  }
+}

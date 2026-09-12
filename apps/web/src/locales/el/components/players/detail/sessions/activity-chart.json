@@ -1,0 +1,5 @@
+{
+  "battles": "{count} μάχες",
+  "chart-label": "Μάχες ανά {granularity}, με χρώμα βάσει {metric}",
+  "no-battles": "Όχι Μάχες"
+}

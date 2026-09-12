@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "{board} 排行榜",
+  "carried-beside-a-clan-tag": "显示在军团标签旁。排名徽章代表比赛中的名次，数字表示名次，颜色表示所属排行榜。评分不会获得徽章，因为 WN8 排名靠前并不是军团赢得的东西。",
+  "clan-badges": "军团徽章",
+  "clan-board": {
+    "name": "{board}，前{rank}名",
+    "how": "位于{board}前{rank}名之内。军团保持该名次时保留，失去名次时移除。"
+  },
+  "clan-overflow": "军团拥有超过三个名次时，会将其余名次按最佳优先合并到{plus}徽章中，让标签保持易读。悬停即可查看它们的名称。",
+  "featured-tournament-winner": {
+    "name": "精选锦标赛冠军",
+    "how": "同样是冠军，但获胜于默认标记为精选的赛事。使用金色而非钢色，与玩家一侧完全一致。"
+  },
+  "heading": "每个{badge}以及如何获得",
+  "heading-accent": "徽章",
+  "marks-carried-beside-a-nickname": "标记会显示在 {NAME} 上昵称旁边的所有位置，包括排行榜、军团名单、搜索结果和赛事对阵表。",
+  "n-badges": "{count}枚徽章",
+  "onslaught-champion": {
+    "name": "天梯战勇士",
+    "how": "在天梯战中达到冠军段位，这是出现在{standings}上的最低要求。之后保留的是评分：评分跌破门槛后，占据该位置的是其他人，而不是曾经达到过该段位的事实。"
+  },
+  "onslaught-legend": {
+    "name": "天梯战传说",
+    "how": "在赛季传奇门槛内保持名次。这是名次而不是分数：同时存在的名额有限，门槛根据保持名次的赛季判定。颜色为紫罗兰色而非钢蓝色，与排行榜为传奇显示的颜色相同。"
+  },
+  "player-badges": "玩家徽章",
+  "player-overflow": "玩家拥有超过三个徽章时，会按上述顺序将其余徽章合并到{plus}徽章中，让昵称在表格中保持易读。悬停即可查看名称，每个徽章仍链接到原本徽章的目标。",
+  "ranked-standings": "排名 standings",
+  "streamer": {
+    "name": "主播",
+    "how": "与账号关联的 Twitch 频道。在你自己的档案中连接 Twitch 以确认，徽章会链接到你的频道。无论是否正在直播都会显示。"
+  },
+  "streamer-who-is-on-air": "正在直播的主播还会带有红色的“直播”标记。这个标记不是通过获得的，也不会保留：直播开始时出现，结束时消失，因此从不被折叠隐藏。",
+  "support-subscription": "支援型 订阅",
+  "supporter": {
+    "name": "支持者"
+  },
+  "supporter-note": "公开保留的有效{link}。选择保持匿名的支持者不会携带徽章，这是他们自己的选择。",
+  "the-marks-a-player-or": "玩家或军团可在 {NAME} 上获得的标记、每个标记的含义，以及获得它所需的正好条件。",
+  "tournament-winner": {
+    "name": "赛事胜者",
+    "how": "归属于该军团的队伍赢得了一场锦标赛。默认记录队伍和账号，从不记录军团，因此通过将比赛当天的阵容与军团成员资格逐一匹配来恢复归属关系。"
+  },
+  "verified": {
+    "name": "已验证",
+    "how": "所有者已使用其 Wargaming.net ID 登录并连接此账号。登录就是全部要求，而且完全免费。"
+  }
+}

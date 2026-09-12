@@ -1,0 +1,8 @@
+{
+  "average-over-rated": "Keskimääräinen arvo {rated}/{size} pelaajasta",
+  "average-over-recent": "Keskimääräinen arvo {rated}/{size} pelaajasta, jotka pelasivat viimeisten 30 päivän aikana",
+  "avg-winrate": "Kesk. voittoaste",
+  "finished": "Valmis",
+  "record": "Tulos",
+  "won": "Voitettu"
+}

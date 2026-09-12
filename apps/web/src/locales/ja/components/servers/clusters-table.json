@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "クラスターはまだ記録されていません。",
+  "server": "サーバー",
+  "online": "オンライン",
+  "share": "共有",
+  "peak": "ピーク（{label}）",
+  "average": "平均（{label}）",
+  "not-reported": "報告されていません",
+  "total": "計"
+}

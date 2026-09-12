@@ -1,0 +1,13 @@
+{
+  "no-tank-data-for-this": "Ingen stridsvogn-data for denne klanen ennå.",
+  "no-tanks-match-these-filters": "Ingen stridsvogner samsvarer med disse filtrene.",
+  "nation": "Nasjon",
+  "type": "Type",
+  "tier": "Nivå",
+  "name": "Navn",
+  "members": "Medlemmer",
+  "battles": "Kamper",
+  "avg-damage": "Gjennomsnittlig skade",
+  "avg-xp": "Gjennomsnitt XP",
+  "wr": "WR"
+}

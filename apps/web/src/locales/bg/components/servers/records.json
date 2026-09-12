@@ -1,0 +1,6 @@
+{
+  "all-time-record": "Всички времена рекорд",
+  "average-last": "Средно, последните {label}",
+  "low-last": "Минимум, последните {label}",
+  "peak-last": "Пик, последните {label}"
+}

@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Langelis rodo juostos pergales tuo lygiu per ten sužaistus mūšius, apimant kiekvieną tanką, kuriuo žaidėjas yra sužaidęs bent {minBattles} mūšių. Taip apibūdinami lygiai taip, kaip juos žaidžia žmonės. Langeliai, paremti mažiau nei {TIERWINRATETHINCELL} mūšių, rodomi blankiai, nes juos keičia ne tik įgūdis. Spalvos yra tos pačios pergalių procento juostos, kurias svetainė naudoja visur kitur.",
+  "cell-no-sample": "{where}, nėra imties",
+  "cell-winrate": "{where}, {winrate} pergalių procentas per {battles} mūšių",
+  "metric-band": "{metric} juosta",
+  "nothing-recorded": "Apie {metric} dar nieko neužfiksuota. Tinklelis atkuriamas kasnakt.",
+  "over-battles-from-accounts": "{winrate} per {battles} mūšių iš {players} paskyrų",
+  "over-n-battles": "per {battles} mūšių",
+  "what-players-win-by-tier": "Ką {label} žaidėjai laimi pagal lygį"
+}

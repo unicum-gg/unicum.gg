@@ -1,0 +1,13 @@
+{
+  "add-workflow": "Aggiungi flusso di lavoro",
+  "boost": "Potenzia",
+  "each-workflow-activates-its-reserves": "Ogni flusso di lavoro attiva le proprie riserve durante una fascia oraria, non appena un numero sufficiente di membri è impegnato in una sessione di gioco attiva. Viene eseguito sul tuo account, senza bisogno di essere online. Aggiungine quanti te ne servono.",
+  "n-online": "/ {count} online",
+  "officer": "Ufficiale",
+  "online": "Online",
+  "recent-activations": "attivazioni recenti",
+  "reserve": "Riserva",
+  "stronghold-boosts": "Bonus della Fortezza",
+  "when": "Quando",
+  "workflow": "Workflow"
+}

@@ -1,9 +1,11 @@
+import { numberFormat } from "@/lib/format";
+import { useTranslation } from "@/hooks/use-translation";
 import type { PlayerAchievement } from "@unicum.gg/shared";
 import { Medal } from "@/components/players/detail/achievements/medal";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { styles } from "@/lib/styles";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /**
  * The medals this player earned on this vehicle: the game's "Awards" tab.
@@ -17,12 +19,14 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
  * out. "What is still missing" is a question about a player, not about one of
  * their tanks, and 505 tiles would bury the record above.
  */
-export function TankAwards({ awards }: { awards: PlayerAchievement[] }) {
+export function TankAwards({ awards, locale }: { awards: PlayerAchievement[] ; locale: string }) {
+  const { t } = useTranslation("components/players/detail/tanks/awards");
   return (
     <div>
       <h4 className="mb-1.5 text-sm font-semibold">
-        Awards
-        {awards.length > 0 ? ` (${intFmt.format(awards.length)})` : ""}
+        {awards.length > 0
+          ? t("title-count", { count: numberFormat(locale, INT_FORMAT).format(awards.length) })
+          : t("title")}
       </h4>
       {awards.length > 0 ? (
         // Each tile carries a Radix tooltip with the medal's name and how it is
@@ -31,14 +35,13 @@ export function TankAwards({ awards }: { awards: PlayerAchievement[] }) {
         <TooltipProvider delayDuration={150}>
           <div className="flex flex-wrap gap-1">
             {awards.map((a) => (
-              <Medal key={a.id} achievement={a} />
+              <Medal key={a.id} achievement={a}  locale={locale} />
             ))}
           </div>
         </TooltipProvider>
       ) : (
         <p className={styles.mutedDescription}>
-          No medal earned on this tank yet.
-        </p>
+          {t("no-medal-earned-on-this")}</p>
       )}
     </div>
   );

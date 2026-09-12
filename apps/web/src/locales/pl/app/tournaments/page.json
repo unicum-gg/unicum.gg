@@ -1,0 +1,8 @@
+{
+  "description": "Każdy turniej Wargaming w regionie {region}: codzienne drabinki z nagrodami w postaci złota, mistrzostwa klanów, informacje o uczestnikach i zwycięzcach. Pełne drabinki, wyniki i składy.",
+  "live-many": "W regionie {region} trwa teraz rywalizacja w {count} otwartych lub rozgrywanych turniejach,",
+  "live-one": "W regionie {region} trwa teraz rywalizacja w {count} otwartym lub rozgrywanym turnieju,",
+  "no-live": "W regionie {region} turnieje odbywają się codziennie,",
+  "title": "World of Tanks: {tournaments}",
+  "what-you-find": "od drabinek 1v1 z nagrodami w postaci złota po mistrzostwa klanów z nagrodami pieniężnymi. Pełne drabinki i wyniki, każda drużyna wraz ze swoim składem, a także strona, po której zaczynała na poszczególnych mapach."
+}

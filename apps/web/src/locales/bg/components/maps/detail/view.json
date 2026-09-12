@@ -1,0 +1,9 @@
+{
+  "battle-time": "Време за битка",
+  "camouflage": "Камуфлаж на {camouflage}",
+  "mode": "Режим",
+  "n-random-events": "{count, plural, one {# случайно събитие} other {# случайни събития}}",
+  "random-events": "Случайни събития",
+  "size": "Размер",
+  "team-size": "Размер на отбора"
+}

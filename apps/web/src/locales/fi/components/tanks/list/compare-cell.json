@@ -1,0 +1,5 @@
+{
+  "compare-tank": "Vertaile panssarivaunua {tank}",
+  "pick-up-to-vehicles-to": "Valitse enintään {max} ajoneuvoa vertailuun",
+  "remove-from-comparison": "Poista panssarivaunu {tank} vertailusta"
+}

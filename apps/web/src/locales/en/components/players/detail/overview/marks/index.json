@@ -1,0 +1,21 @@
+{
+  "title": "{nickname}’s marks and mastery",
+  "excellence": {
+    "title": "Marks of Excellence",
+    "description": "Vehicles by the marks on their gun. A mark is a sustained average: the game scores it on a rolling window of recent battles against what the region does on that vehicle.",
+    "partial": "Marks read for {known} of {garage} vehicles. The rest fill in as the account is refreshed.",
+    "note": "{marked} of {garage} vehicles carry a mark.",
+    "note-share": "{marked} of {garage} vehicles carry a mark ({percent}% of the garage)."
+  },
+  "mastery": {
+    "title": "Marks of Mastery",
+    "description": "Vehicles by their best badge. A badge is one battle rather than an average: the game awards it on a single game’s experience against what the region scores on that vehicle.",
+    "note": "{aces} of {garage} vehicles carry an Ace Tanker.",
+    "note-share": "{aces} of {garage} vehicles carry an Ace Tanker ({percent}% of the garage)."
+  },
+  "reach": {
+    "heading": "Playing above the gun",
+    "description": "Vehicles whose combined damage already clears a mark they do not carry. The badge is that combined damage, coloured by the mark it clears."
+  },
+  "none": "None"
+}

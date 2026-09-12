@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "トップ <accent>クラン</accent>",
+    "language": "トップ <accent>{language}</accent> クラン"
+  },
+  "intro": {
+    "all": "{region}のランキング。各クランの追跡済みメンバー全体の平均{metric}で順位付けしています（戦闘を行ったメンバーが最小50人）。",
+    "language": "{language}を言語の1つとして設定した{region}のクラン。追跡済みメンバーの平均{metric}で順位付けしています（戦闘を行ったメンバーが最小25人）。",
+    "strict": "{language}のみを言語として設定した{region}のクラン。追跡済みメンバーの平均{metric}で順位付けしています（戦闘を行ったメンバーが最小25人）。"
+  },
+  "board": {
+    "all": "{metric}によるトップ{count}クラン",
+    "language": "{metric}によるトップ{count} {language}クラン",
+    "strict": "{metric}による{language}のみのトップ{count}クラン"
+  },
+  "members": "メンバー",
+  "strict-toggle": "厳密",
+  "any-toggle": "任意",
+  "all-languages": "全言語",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

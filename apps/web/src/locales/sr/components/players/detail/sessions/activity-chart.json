@@ -1,0 +1,5 @@
+{
+  "battles": "{count} borbi",
+  "chart-label": "Одигране битке по {granularity}, обојено према {metric}",
+  "no-battles": "Ne borbi"
+}

@@ -1,0 +1,11 @@
+{
+  "compare": "가장 가까운 {count}개와 비교",
+  "match": "전투",
+  "subtitle": "각자의 단계에서 동일한 위치",
+  "verdict": {
+    "overall": "유사한 전체 성과",
+    "closest": "{axes}에서 가장 가까움",
+    "closest-furthest": "{axes}에서 가장 가깝고 {apart}에서 가장 멂",
+    "and": " 및 "
+  }
+}

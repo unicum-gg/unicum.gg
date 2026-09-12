@@ -1,0 +1,10 @@
+{
+  "billed-in-euros": "In Euro berechnet und zum heutigen Kurs in {currency} umgerechnet.",
+  "cost-breakdown": "Kostenaufstellung",
+  "estimated-annual-cost": "Geschätzter jährlicher Preis",
+  "fixed-month-bill-no-surprises": "Eine feste Rechnung über {totalAnnualEur}/Monat, ohne Überraschungen: ein gemieteter Server, kein SaaS von Drittanbietern im Datenpfad. Sie steigt nur, wenn der Server nicht mehr ausreicht (mehr Datendurchsatz von Wargaming bedeutet mehr Egress-IPs).",
+  "free": "kostenlos",
+  "one-off-spend": "Einmalige Ausgaben",
+  "paid-once-so-it-is": "Die Zahlung erfolgte einmalig und ist daher nicht Teil der obigen monatlichen Rechnung. Sie zählt dennoch zu den bisherigen Projektkosten.",
+  "previously": "Zuvor"
+}

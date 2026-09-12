@@ -1,0 +1,8 @@
+{
+  "previous": "Föregående sida",
+  "next": "Nästa sida",
+  "rows-per-page": "Rader per sida",
+  "all": "Alla",
+  "range": "{first}–{last} av {total}",
+  "page": "Sida {page} / {total}"
+}

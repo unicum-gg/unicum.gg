@@ -4,6 +4,7 @@ import { Paintbrush } from "lucide-react";
 import { useMemo, useState } from "react";
 import { assetUrl, type MirrorStyle } from "@unicum.gg/wargaming";
 import type { SkinFace } from "@/services/tank-viewer/styles";
+import { useTranslation } from "@/hooks/use-translation";
 
 import {
   Popover,
@@ -62,6 +63,8 @@ export function WardrobePicker({
   season: string;
   onSeason: (next: string) => void;
 }) {
+  const { t } = useTranslation("components/tanks/detail/viewer/wardrobe");
+  const { t: tView } = useTranslation("components/tanks/detail/viewer");
   const [filter, setFilter] = useState("");
   const shown = useMemo(() => {
     const needle = filter.trim().toLowerCase();
@@ -77,7 +80,9 @@ export function WardrobePicker({
       <PopoverTrigger asChild>
         <button
           type="button"
-          aria-label={worn ? `Style: ${worn.name}` : "Choose a style"}
+          aria-label={
+            worn ? tView("style-worn", { name: worn.name }) : tView("style")
+          }
           aria-pressed={worn !== null}
           className={`${className ?? ""} ${worn || cut ? "text-brand" : ""}`}
         >
@@ -90,8 +95,8 @@ export function WardrobePicker({
             type="text"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            placeholder={`Search ${styles.length} styles`}
-            aria-label="Search styles"
+            placeholder={t("search-n-styles", { count: styles.length })}
+            aria-label={tView("search-styles")}
             className="w-full bg-transparent px-1 py-0.5 text-sm outline-none placeholder:text-fd-muted-foreground"
           />
         </div>
@@ -125,10 +130,9 @@ export function WardrobePicker({
           */}
           {cuts.length > 0 ? (
             <>
-              <Heading>Cut</Heading>
+              <Heading>{t("cut")}</Heading>
               <Entry active={cut === null} onClick={() => onCut(null)}>
-                As it was built
-              </Entry>
+                {t("as-it-was-built")}</Entry>
               {/* The folder is what the viewer loads and the name is what the
                   game calls it: `A120_M48A5_3DSt_TLXXL` is "Tiger Claw". A
                   style the catalogue has no name for keeps its folder, which
@@ -151,12 +155,11 @@ export function WardrobePicker({
                   {cutNames[folder]?.name ?? folder}
                 </Entry>
               ))}
-              <Heading>Paint</Heading>
+              <Heading>{t("paint")}</Heading>
             </>
           ) : null}
           <Entry active={worn === null} onClick={() => onWear(null)}>
-            No style
-          </Entry>
+            {t("no-style")}</Entry>
           {shown.map((style) => (
             <Entry
               key={style.id}
@@ -169,8 +172,7 @@ export function WardrobePicker({
           ))}
           {shown.length === 0 ? (
             <p className="px-3 py-2 text-sm text-fd-muted-foreground">
-              Nothing by that name.
-            </p>
+              {t("nothing-by-that-name")}</p>
           ) : null}
         </div>
       </PopoverContent>

@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statisticile poreclei {nickname} în bătălii aleatorii",
+  "progression": "Progresul poreclei {nickname} pentru {metricLabel}",
+  "solid-line-is-overall-matches": "Linia continuă reprezintă {metricLabel} general, corespunzător coloanei Total de mai sus, și se modifică lent pe măsură ce se adună bătălii noi. Linia întreruptă reprezintă {metricLabel2} pe sesiune, calculat din bătăliile jucate de la eșantionarea anterioară. Aceasta evidențiază seriile bune și slabe. Culoarea liniei urmează nivelul ratingului.",
+  "tanks-shaping-s-rating": "Tancurile care formează ratingul poreclei {nickname}",
+  "tanks": "Tancurile lui {nickname}",
+  "stats": "Statisticile poreclei {nickname} pentru {strongholdLabel}"
+}

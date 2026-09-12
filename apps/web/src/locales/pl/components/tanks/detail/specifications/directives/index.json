@@ -1,0 +1,9 @@
+{
+  "boosts": "Wzmocnienia {name}",
+  "directives": "Dyrektywy",
+  "directive-name": "Dyrektywa {name}",
+  "grants-and-boosts": "Udostępnia umiejętność załogi i zwiększa jej skuteczność, nawet jeśli nie została wyszkolona.",
+  "grants-only": "Udostępnia umiejętność załogi na czas bitwy (brak wymienionej charakterystyki).",
+  "enhances-mounted": "Zwiększa skuteczność zamontowanego wyposażenia: {name}.",
+  "mount-to-use": "Aby użyć tej dyrektywy, zamontuj wyposażenie: {name}."
+}

@@ -1,0 +1,7 @@
+{
+  "win-rate": "승률",
+  "versus": "{metric} 대 {region}",
+  "top": "상위 {percent}%",
+  "ahead-of": "상위 {percent}%",
+  "against": "최소 {battles}전투를 치른 추적 대상 {region} 계정 {players}개와 비교합니다."
+}

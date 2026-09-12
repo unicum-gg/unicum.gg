@@ -1,0 +1,14 @@
+{
+  "date": "日付",
+  "featured-tournament": "注目のトーナメント",
+  "format": "フォーマット",
+  "mode": "モード",
+  "no-tournament-matches-the-current": "現在のフィルターに一致するトーナメントはありません。",
+  "nothing-here-right-now-wargaming": "現在ここには何もありません。Wargamingは毎日新しいトーナメントを開催するため、ここには自動的に再び表示されます。",
+  "prize": "賞",
+  "region-tournaments": "{region}のトーナメント（{count}）",
+  "status": "ステータス",
+  "teams": "チーム",
+  "tier": "Tier",
+  "tournament": "トーナメント"
+}

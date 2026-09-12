@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Klusteria ei ole vielä tallennettu.",
+  "server": "Palvelin",
+  "online": "Verkossa",
+  "share": "Jaa",
+  "peak": "Huippu ({label})",
+  "average": "Keskimääräinen ({label})",
+  "not-reported": "Ei raportoitu",
+  "total": "Kaikkiaan"
+}

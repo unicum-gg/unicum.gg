@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} battles in it",
+  "damage": "{damage} damage",
+  "n-marks": "{count, plural, one {# mark} other {# marks}}",
+  "no-written-opinions-yet-if": "No written opinions yet. If you have the battles, yours would be the first.",
+  "win-rate": "{toFixed}% win rate",
+  "written-on": "written on {gameVersion}"
+}

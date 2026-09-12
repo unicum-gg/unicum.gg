@@ -1,3 +1,4 @@
+import type { TranslateFunction } from "@onruntime/translations";
 import { BracketType } from "@unicum.gg/wargaming";
 import type { TournamentMatch } from "./record";
 
@@ -46,21 +47,28 @@ export type BracketLayout = {
  *    match), and `0` is the grand final between them. Half of a double
  *    elimination's matches live at a negative round.
  *
- * The names are Wargaming's own, from the `bracket_types[].rounds` catalogue the
- * tournament endpoint publishes.
+ * The naming follows the `bracket_types[].rounds` catalogue the tournament
+ * endpoint publishes, but the words are ours and are translated: every language
+ * has its own for a semi-final.
  */
-export function roundLabel(round: number, bracket: BracketType): string {
+export function roundLabel(
+  round: number,
+  bracket: BracketType,
+  t: TranslateFunction,
+): string {
   if (bracket === BracketType.DoubleElimination) {
-    if (round === 0) return "Grand Final";
-    if (round === 1) return "Winner Bracket Final";
-    if (round === -1) return "Loser Bracket Final";
-    return round > 0 ? `Winner Round ${round}` : `Loser Round ${-round}`;
+    if (round === 0) return t("grand-final");
+    if (round === 1) return t("winner-bracket-final");
+    if (round === -1) return t("loser-bracket-final");
+    return round > 0
+      ? t("winner-round", { round })
+      : t("loser-round", { round: -round });
   }
-  if (round === -1) return "Third place";
-  if (round === 1) return "Final";
-  if (round === 2) return "Semi-finals";
-  if (round === 3) return "Quarter-finals";
-  return `Round of ${2 ** round}`;
+  if (round === -1) return t("third-place");
+  if (round === 1) return t("final");
+  if (round === 2) return t("semi-finals");
+  if (round === 3) return t("quarter-finals");
+  return t("round-of", { teams: 2 ** round });
 }
 
 /**

@@ -1,0 +1,12 @@
+{
+  "final": "รอบชิงชนะเลิศ",
+  "grand-final": "รอบชิงชนะเลิศใหญ่",
+  "loser-bracket-final": "รอบชิงชนะเลิศสายผู้แพ้",
+  "loser-round": "รอบที่ {round} ของสายผู้แพ้",
+  "quarter-finals": "รอบก่อนรองชนะเลิศ",
+  "round-of": "รอบ {teams} ทีม",
+  "semi-finals": "รอบรองชนะเลิศ",
+  "third-place": "ชิงตำแหน่งที่สาม",
+  "winner-bracket-final": "รอบชิงชนะเลิศสายผู้ชนะ",
+  "winner-round": "รอบที่ {round} ของสายผู้ชนะ"
+}

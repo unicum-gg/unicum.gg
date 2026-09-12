@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "al di sopra del {value}% dei carri valutati del suo livello",
+  "measured-hint": "Posizione nella classifica dei carri armati uguali in base al tasso di vittorie",
+  "not-enough-votes-yet-to": "Non ci sono ancora abbastanza voti per confrontare il verdetto della comunità con le prestazioni effettive del carro.",
+  "perceived-hint": "Posizione assegnata dalla community tra i carri armati di livello {tier} valutati",
+  "verdict": {
+    "overrated": "La comunità lo valuta molto più di quanto giustifichino le sue prestazioni effettive.",
+    "fair": "Reputazione e risultati concordano in questo caso.",
+    "underrated": "Le sue prestazioni sono migliori di quanto gli venga riconosciuto."
+  },
+  "what-players-think": "Cosa ne pensano i giocatori",
+  "what-the-data-says": "Cosa dicono i dati"
+}

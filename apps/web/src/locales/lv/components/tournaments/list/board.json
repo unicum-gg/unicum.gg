@@ -1,0 +1,14 @@
+{
+  "date": "Datums",
+  "featured-tournament": "Izceltais turnīrs",
+  "format": "Formāts",
+  "mode": "Režīms",
+  "no-tournament-matches-the-current": "Neviens turnīrs neatbilst pašreizējiem filtriem.",
+  "nothing-here-right-now-wargaming": "Šobrīd nekā nav. Wargaming katru dienu atver jaunus turnīrus, tāpēc šis saraksts pats aizpildīsies.",
+  "prize": "Balva",
+  "region-tournaments": "{region} turnīri ({count})",
+  "status": "Status",
+  "teams": "Komandas",
+  "tier": "Līmenis",
+  "tournament": "Turnīrs"
+}

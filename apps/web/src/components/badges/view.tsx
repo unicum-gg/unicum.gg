@@ -1,10 +1,11 @@
 "use client";
 
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/link";
 import {
   CLAN_BADGE_MAX_RANK,
-  CLAN_BOARD_LABEL,
   ClanBoard,
   StrongholdTier,
 } from "@unicum.gg/shared";
@@ -88,6 +89,8 @@ const CLAN_BOARDS = [
 const CLAN_BADGE_COUNT = CLAN_BOARDS.length + 2;
 
 export function BadgesView() {
+  const { t } = useTranslation("components/badges/view");
+  const { t: tGame } = useTranslation("game/vocabulary");
   return (
     // The page container every other standalone page uses, so the panels sit in
     // the same column as the glossary and the support page rather than running
@@ -99,15 +102,20 @@ export function BadgesView() {
       <Panel>
         <PanelContent className="px-4 py-12 text-center sm:py-16">
           <div className="mb-2 text-sm tracking-wide text-fd-muted-foreground uppercase">
-            {PLAYER_BADGE_COUNT + CLAN_BADGE_COUNT} badges
+            {t("n-badges", { count: PLAYER_BADGE_COUNT + CLAN_BADGE_COUNT })}
           </div>
           <h1 className="mx-auto max-w-3xl font-heading text-4xl font-bold tracking-tight text-balance md:text-5xl">
-            Every <span className="text-brand">badge</span> and how to earn it
+            <Interpolate
+              template={t("heading")}
+              values={{
+                badge: (
+                  <span className="text-brand">{t("heading-accent")}</span>
+                ),
+              }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            The marks a player or a clan can carry on {APP.NAME}, what each one
-            says, and exactly what it takes to get it.
-          </p>
+            {t("the-marks-a-player-or", { NAME: APP.NAME })}</p>
         </PanelContent>
       </Panel>
 
@@ -115,88 +123,86 @@ export function BadgesView() {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Player badges</PanelTitle>
+          <PanelTitle>{t("player-badges")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <div className="px-4 py-2">
             <p className="text-sm text-fd-muted-foreground">
-              Marks carried beside a nickname wherever it appears on {APP.NAME}:
-              leaderboards, clan rosters, search, tournament brackets.
-            </p>
+              {t("marks-carried-beside-a-nickname", { NAME: APP.NAME })}</p>
           </div>
           <ul className="border-t border-fd-border">
             <BadgeRow
               crest={<Crest kind={CrestKind.Verified} size={20} />}
-              name="Verified"
-              how="The owner has signed in with their Wargaming.net ID and connected this account. Signing in is the whole requirement, and it costs nothing."
+              name={t("verified.name")}
+              how={t("verified.how")}
             />
             <BadgeRow
               crest={<Crest kind={CrestKind.Supporter} size={20} />}
-              name="Supporter"
+              name={t("supporter.name")}
               how={
-                <>
-                  An active{" "}
-                  <Link
-                    href={ROUTES.SUPPORT}
-                    className="underline underline-offset-2"
-                  >
-                    support subscription
-                  </Link>
-                  , kept public. Supporters who choose to stay anonymous carry no
-                  badge, by their own choice.
-                </>
+                <Interpolate
+                  template={t("supporter-note")}
+                  values={{
+                    link: (
+                      <Link
+                        href={ROUTES.SUPPORT}
+                        className="underline underline-offset-2"
+                      >
+                        {t("support-subscription")}
+                      </Link>
+                    ),
+                  }}
+                />
               }
             />
             <BadgeRow
               crest={<Crest kind={CrestKind.Streamer} size={20} />}
-              name="Streamer"
-              how="A Twitch channel linked to the account. Connect Twitch on your own profile to confirm it, and the crest links to your channel. It shows whether or not you are live."
+              name={t("streamer.name")}
+              how={t("streamer.how")}
             />
             <BadgeRow
               crest={<Crest kind={CrestKind.Tournament} size={20} />}
-              name="Tournament winner"
-              how="Was on the roster of a team that finished first in a settled Wargaming tournament. Read from the mirrored brackets, so a win from 2018 counts like one from last night."
+              name={t("tournament-winner.name")}
+              how={t("tournament-winner.how")}
             />
             <BadgeRow
               crest={<Crest kind={CrestKind.TournamentFeatured} size={20} />}
-              name="Featured tournament winner"
-              how="The same, won at an event Wargaming itself flags as featured: the branded championships and their qualifiers rather than the nightly ladders. Gold instead of steel."
+              name={t("featured-tournament-winner.name")}
+              how={t("featured-tournament-winner.how")}
             />
             <BadgeRow
               crest={<Crest kind={CrestKind.OnslaughtChampion} size={20} />}
-              name="Onslaught Champion"
+              name={t("onslaught-champion.name")}
               how={
-                <>
-                  Reached the Champion rank in Onslaught, which is what it takes
-                  to appear on the{" "}
-                  <Link
-                    href={ROUTES.PLAYERS_ONSLAUGHT(Region.EU)}
-                    className="underline underline-offset-2"
-                  >
-                    ranked standings
-                  </Link>{" "}
-                  at all. Kept afterwards: a rating that falls back below the
-                  bar takes the place, not the fact that it was held.
-                </>
+                <Interpolate
+                  template={t("onslaught-champion.how")}
+                  values={{
+                    standings: (
+                      <Link
+                        href={ROUTES.PLAYERS_ONSLAUGHT(Region.EU)}
+                        className="underline underline-offset-2"
+                      >
+                        {t("ranked-standings")}
+                      </Link>
+                    ),
+                  }}
+                />
               }
             />
             <BadgeRow
               crest={<Crest kind={CrestKind.OnslaughtLegend} size={20} />}
-              name="Onslaught Legend"
-              how="Held a place inside the season's Legend cutoff, which is a position rather than a score: only so many exist at once, and the bar is judged against the season it was held in. Violet instead of steel blue, the colour the standings themselves paint Legend."
+              name={t("onslaught-legend.name")}
+              how={t("onslaught-legend.how")}
             />
           </ul>
           <p className="border-t border-fd-border px-4 py-2 text-sm text-fd-muted-foreground">
-            A player carrying more than three folds the rest into a{" "}
-            <span className="font-medium">+N</span> crest, in the order above, so
-            a nickname stays readable in a table. Hovering it names them, and
-            each one still links where its own crest did.
+            <Interpolate
+              template={t("player-overflow")}
+              values={{ plus: <span className="font-medium">+N</span> }}
+            />
           </p>
           <p className="border-t border-fd-border px-4 py-2 text-sm text-fd-muted-foreground">
-            A streamer who is on air also carries a red LIVE pill. That one is
-            not earned and not kept: it appears when the stream starts and goes
-            when it ends, so it is never folded away.
-          </p>
+            {t("streamer-who-is-on-air")}</p>
         </PanelContent>
       </Panel>
 
@@ -204,16 +210,12 @@ export function BadgesView() {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Clan badges</PanelTitle>
+          <PanelTitle>{t("clan-badges")}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <div className="px-4 py-2">
             <p className="text-sm text-fd-muted-foreground">
-              Carried beside a clan tag. A rank crest is a place in a
-              competition: the number on it is that place, its colour says which
-              board. Ratings earn none, because being high on WN8 is not
-              something a clan wins.
-            </p>
+              {t("carried-beside-a-clan-tag")}</p>
           </div>
           <ul className="border-t border-fd-border">
             {CLAN_BOARDS.map(({ board, tier }) => (
@@ -226,37 +228,46 @@ export function BadgesView() {
                     size={20}
                   />
                 }
-                name={`${CLAN_BOARD_LABEL[board]}, top ${CLAN_BADGE_MAX_RANK}`}
+                name={t("clan-board.name", {
+                  board: tGame(`clan-boards.${board}`),
+                  rank: CLAN_BADGE_MAX_RANK,
+                })}
                 how={
-                  <>
-                    A place in the top {CLAN_BADGE_MAX_RANK} of the{" "}
-                    <Link
-                      href={ROUTES.STRONGHOLD(Region.EU, tier)}
-                      className="underline underline-offset-2"
-                    >
-                      {CLAN_BOARD_LABEL[board]} leaderboard
-                    </Link>
-                    . Held while the clan holds the place, and lost when it does
-                    not.
-                  </>
+                  <Interpolate
+                    template={t("clan-board.how")}
+                    values={{
+                      rank: CLAN_BADGE_MAX_RANK,
+                      board: (
+                        <Link
+                          href={ROUTES.STRONGHOLD(Region.EU, tier)}
+                          className="underline underline-offset-2"
+                        >
+                          {t("board-leaderboard", {
+                            board: tGame(`clan-boards.${board}`),
+                          })}
+                        </Link>
+                      ),
+                    }}
+                  />
                 }
               />
             ))}
             <BadgeRow
               crest={<Crest kind={CrestKind.Tournament} size={20} />}
-              name="Tournament winner"
-              how="A team attributed to the clan won a tournament. Wargaming records teams and accounts, never clans, so the attribution is recovered by matching each roster against clan membership as it stood on the day it was played."
+              name={t("tournament-winner.name")}
+              how={t("tournament-winner.how")}
             />
             <BadgeRow
               crest={<Crest kind={CrestKind.TournamentFeatured} size={20} />}
-              name="Featured tournament winner"
-              how="The same, won at an event Wargaming flags as featured. Gold instead of steel, exactly as on the player side."
+              name={t("featured-tournament-winner.name")}
+              how={t("featured-tournament-winner.how")}
             />
           </ul>
           <p className="border-t border-fd-border px-4 py-2 text-sm text-fd-muted-foreground">
-            A clan holding more than three places folds the rest into a{" "}
-            <span className="font-medium">+N</span> crest, best first, so the tag
-            stays readable. Hovering it names them.
+            <Interpolate
+              template={t("clan-overflow")}
+              values={{ plus: <span className="font-medium">+N</span> }}
+            />
           </p>
         </PanelContent>
       </Panel>

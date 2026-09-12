@@ -1,0 +1,4 @@
+{
+  "title": "Mga nangungunang klano na {tier} ({region})",
+  "description": "Talaan ng ranggo ng mga klano na {tier} sa {region}. Ranked ayon sa SR (skirmish rating), ELO, mga laban at rate ng panalo. Minimum na {battles} mga laban."
+}

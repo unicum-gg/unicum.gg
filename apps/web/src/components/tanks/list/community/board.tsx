@@ -6,6 +6,7 @@ import { useTankFilters, type RangeColumn } from "@/hooks/use-tank-filters";
 import type { Region } from "@unicum.gg/wargaming";
 import { CommunityTable } from "./table";
 import type { CommunityBoardRow } from "./row";
+import { FilterSubject } from "@/components/filter-subject";
 
 /**
  * The board's shell: the catalogue's own filter bar over the ratings table.
@@ -49,7 +50,7 @@ export function CommunityBoard({
   return (
     <Panel>
       <PanelContent className="space-y-4 p-4">
-        <TankFilterBar filters={filters} searchNoun="rated tanks" />
+        <TankFilterBar filters={filters} searchNoun={FilterSubject.RatedTanks} />
       </PanelContent>
       <div className="border-t border-fd-border">
         <CommunityTable region={region} rows={filtered} />

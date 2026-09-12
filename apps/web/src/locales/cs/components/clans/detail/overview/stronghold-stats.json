@@ -1,0 +1,22 @@
+{
+  "stat": "Statistika",
+  "periods": {
+    "total": "Celkem",
+    "day": "Posledních 24h",
+    "week": "Posledních 7d",
+    "month": "Posledních 30d"
+  },
+  "sections": {
+    "elo": "ELO pro X. úroveň ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "X. úroveň: {skirmish} (7v7)",
+    "t8": "VIII. úroveň: {skirmish} (7v7)",
+    "t6": "VI. úroveň: {skirmish} (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "Bitev",
+    "winrate": "Míra výher"
+  }
+}

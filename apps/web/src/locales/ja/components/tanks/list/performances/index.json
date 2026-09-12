@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "ページあたりの行数",
+  "previous-page": "前のページ",
+  "page": "ページ {current} / {totalPages}",
+  "next-page": "次のページ",
+  "all": "全て"
+}

@@ -1,3 +1,6 @@
+"use client";
+
+import { useLocale } from "@onruntime/translations/react";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type { TankSpec } from "@unicum.gg/shared";
 import { GlossaryLabel } from "@/components/glossary/label";
@@ -14,6 +17,9 @@ import {
   specValue,
 } from "./format";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
+import { tankParamName } from "@/components/game-name";
+import { tankHeadingKey } from "@/lib/tank-params";
+import { useTranslation } from "@/hooks/use-translation";
 
 /** The label of the row a sub-row is indented under, walking back up the list
  * the way the display nests them. */
@@ -33,14 +39,19 @@ function SpecGroup({
   specs: TankSpec;
   baseline: TankSpec | null;
 }) {
+  const { locale } = useLocale();
   // Hide a sub-heading and its indented rows when every one of them is empty
   // (e.g. "Turret armor" on a turretless casemate would otherwise be all "—").
   // Shared with the comparison grid, which does the same over several columns.
   const hidden = hiddenRowIndexes(group, [{ specs, baseline }]);
+  // Wargaming's own name for the statistic where it has one, ours where it does
+  // not. Display only: the glossary anchors and the comparison grid still read
+  // `row.label`, which is English by construction.
+  const { t: tParams } = useTranslation("game/tank-params");
   return (
     <div>
       <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-fd-muted-foreground">
-        {group.title}
+        {tankParamName(tankHeadingKey(group.title), group.title, tParams)}
       </h3>
       <dl className="space-y-1.5">
         {group.rows.map((row, index) => {
@@ -57,7 +68,13 @@ function SpecGroup({
                 key={index}
                 className="pt-1 text-sm font-medium text-fd-foreground"
               >
-                <GlossaryLabel label={ownLabel}>{row.label}</GlossaryLabel>
+                <GlossaryLabel label={ownLabel}>
+                  {tankParamName(
+                    tankHeadingKey(row.label),
+                    row.label,
+                    tParams,
+                  )}
+                </GlossaryLabel>
               </div>
             );
           }
@@ -90,7 +107,11 @@ function SpecGroup({
                   label={ownLabel}
                   fallbackLabel={parentLabel}
                 >
-                  {row.label}
+                  {tankParamName(
+                    row.key ?? tankHeadingKey(row.label),
+                    row.label,
+                    tParams,
+                  )}
                 </GlossaryLabel>
               </dt>
               <span
@@ -105,7 +126,7 @@ function SpecGroup({
                         className={cn("inline-flex items-center text-xs", color)}
                       >
                         {delta > 0 ? "+" : ""}
-                        {format(delta, row.digits)}
+                        {format(locale, delta, row.digits)}
                         {delta > 0 ? (
                           <ChevronUpIcon className="size-3" />
                         ) : (
@@ -114,13 +135,13 @@ function SpecGroup({
                       </span>
                     )}
                     <span>
-                      {format(value, row.digits)}
+                      {format(locale, value, row.digits)}
                       {(() => {
                         const raw = row.secondary ? specs[row.secondary] : null;
                         return typeof raw === "number" ? (
                           <span className="text-fd-muted-foreground/70">
                             {" / "}
-                            {format(raw, row.digits)}
+                            {format(locale, raw, row.digits)}
                           </span>
                         ) : null;
                       })()}
@@ -167,6 +188,10 @@ export function TankCharacteristics(
         titleControl?: React.ReactNode;
       },
 ) {
+  const { t: tSection } = useTranslation("components/tanks/detail/sections");
+  const { t } = useTranslation(
+    "components/tanks/detail/specifications/characteristics/index",
+  );
   if ("loading" in props) return <CharacteristicsSkeleton />;
   const {
     specs,
@@ -183,14 +208,14 @@ export function TankCharacteristics(
     <Panel>
       <PanelHeader className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <PanelTitle>{tankName} characteristics</PanelTitle>
+          <PanelTitle>{tSection("characteristics", { tank: tankName })}</PanelTitle>
           {titleControl}
         </div>
         {hasActions ? (
           <div className="flex items-center gap-3">
             {actions}
             {canResetAll && onResetAll ? (
-              <ResetButton onReset={onResetAll} label="Reset all" />
+              <ResetButton onReset={onResetAll} label={t("reset-all")} />
             ) : null}
           </div>
         ) : null}
@@ -213,10 +238,13 @@ export function TankCharacteristics(
  * titles and row counts can't drift), each row a `label ···· value` placeholder
  * on a text-sm line-box so the block lands at the loaded height. */
 function CharacteristicsSkeleton() {
+  const { t } = useTranslation(
+    "components/tanks/detail/specifications/characteristics/index",
+  );
   return (
     <Panel>
       <PanelHeader className="flex items-center justify-between gap-4">
-        <PanelTitle>Characteristics</PanelTitle>
+        <PanelTitle>{t("characteristics")}</PanelTitle>
       </PanelHeader>
       <PanelContent className="grid grid-cols-1 gap-x-8 gap-y-6 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4">
         {GROUPS.map((group) => (

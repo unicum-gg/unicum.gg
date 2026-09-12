@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "Bejelentkezés Wargaming.net ID-val",
+  "open-source": "{name} nyílt forráskódú. Nézd át a forráskódját itt: {link}, mielőtt megbízol benne.",
+  "pick-the-region-your-world": "Válaszd ki azt a régiót, amelyikhez a World of Tanks-fiókod tartozik. Ennek nem kell megegyeznie azzal a régióval, amelyet éppen böngészel.",
+  "read-the-login-code": "Olvasd el a bejelentkezési kódot",
+  "what-wargaming-hands-back-is": "A Wargaming egy olyan tokent ad vissza, amely a saját fiókod adatainak lekérésére szolgál. Titkosítva tároljuk és megújítjuk, amíg a fiókod össze van kapcsolva. Csak ott jár el a nevedben, ahol ezt te magad beállítottad, például a klánod tartalékainak ütemezésénél.",
+  "you-sign-in-on-wargaming": "A Wargaming saját oldalán jelentkezel be, nem itt. A jelszavadat soha nem írod be {NAME} oldalán, és hozzánk sem jut el."
+}

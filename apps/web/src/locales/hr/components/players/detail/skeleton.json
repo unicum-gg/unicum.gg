@@ -1,0 +1,8 @@
+{
+  "random-battles-stats": "Statistika nasumičnih bitaka nadimka {nickname}",
+  "progression": "Napredak {metricLabel} za nadimak {nickname}",
+  "solid-line-is-overall-matches": "Puni redak predstavlja ukupni {metricLabel}, što odgovara stupcu Ukupno iznad, i polako se mijenja kako se gomilaju nove bitke. Isprekidani redak predstavlja {metricLabel2} po sesiji, izračunat iz bitaka odigranih od prethodne snimke. Prikazuje dobre i loše nizove. Boja retka prati razinu ocjene.",
+  "tanks-shaping-s-rating": "Tenkovi koji oblikuju ocjenu nadimka {nickname}",
+  "tanks": "Tenki {nickname}",
+  "stats": "Statistika {strongholdLabel} nadimka {nickname}"
+}

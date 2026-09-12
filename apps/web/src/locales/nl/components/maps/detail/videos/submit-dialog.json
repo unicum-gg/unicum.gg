@@ -1,0 +1,17 @@
+{
+  "close": "Sluiten",
+  "format": "Formaat",
+  "here": "hier",
+  "in-the-queue": "Je inzending staat in de wachtrij en verschijnt op {where} zodra een moderator deze heeft bekeken. Tot die tijd wordt je inzending op die pagina grijs weergegeven.",
+  "log-in-to-suggest-a": "Inloggen om een tactiek voor te stellen",
+  "on-map": "op {map}",
+  "players-per-team": "Spelers per team",
+  "sending": "Verzenden…",
+  "suggest": "Voorstellen",
+  "suggest-a-tactic": "Een tactiek voorstellen",
+  "suggest-another": "Stel een andere voor",
+  "suggestion-sent": "Suggestie verzonden",
+  "tier": "niveau",
+  "what-to-submit": "Een competitief gevecht, waarbij de video begint op de seconde dat het gevecht start. De kaart begint met {map} en loopt mee met de video: tijdens een clanavond wordt een hele rotatie doorlopen. Er wordt gevraagd vanaf welke kant er is gespeeld, omdat een shotcaller daarop zoekt. Dit wordt dus niet geraden.",
+  "what-was-played": "Wat was gespeeld"
+}

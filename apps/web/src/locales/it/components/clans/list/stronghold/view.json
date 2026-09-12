@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Non ci sono ancora dati. Ricontrolla dopo l’aggiornamento dei clan.",
+  "heading": "Migliori clan di livello <accent>{tier}</accent>",
+  "blurb": "Classifica {region}, ordinata per {sort} tra tutti i clan monitorati nel formato {format} (minimo {battles} battaglie).",
+  "blurb-period": "Classifica {region}, ordinata per {sort} tra tutti i clan monitorati nel formato {format} durante il periodo {period} (minimo {battles} battaglie).",
+  "format-advances": "Offensive (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Migliori {count} clan di livello {tier} ·"
+}

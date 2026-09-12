@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "コスト（クレジット）",
+      "tip": "クレジットでの購入価格（技術ツリーの戦車）"
+    },
+    "buyGold": {
+      "label": "コスト（金）",
+      "tip": "ゴールドでの購入価格（プレミアム戦車）"
+    },
+    "researchXp": {
+      "label": "リサーチ経験値",
+      "tip": "アンロックに必要なXP（最短ルート）"
+    },
+    "totalFreeXp": {
+      "label": "フリー経験値（T{tier}）",
+      "tip": "Tier {tier}から研究するための累計XP（前提モジュールを含む）"
+    },
+    "shellCost": {
+      "label": "弾薬コスト",
+      "tip": "標準砲弾価格（クレジット）"
+    },
+    "ammoCost": {
+      "label": "弾薬フルコスト",
+      "tip": "標準砲弾価格 × 弾薬容量"
+    },
+    "acquireMoney": {
+      "label": "購入コスト（{currency}）",
+      "tip": "戦車の入手に必要な実際の金額の推定値（研究＋購入、{currency}）"
+    },
+    "freeXpMoney": {
+      "label": "フリー経験値（{currency}）",
+      "tip": "Tier {tier}から戦車をフリー経験値で研究するために必要な実際の金額の推定値（{currency}）"
+    }
+  },
+  "selector": {
+    "buyCredits": "コスト（クレジット）",
+    "buyGold": "コスト（金）",
+    "researchXp": "リサーチ経験値",
+    "totalFreeXp": "フリー経験値",
+    "shellCost": "弾薬コスト",
+    "ammoCost": "弾薬フルコスト",
+    "acquireMoney": "購入コスト（お金）",
+    "freeXpMoney": "フリー経験値（お金）"
+  }
+}

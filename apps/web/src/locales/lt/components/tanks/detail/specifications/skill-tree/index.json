@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Spustelėkite pasiekiamą mazgą, kad jį atrakintumėte. Kiekvienas mazgas keičia aukščiau pateiktas charakteristikas. Spalvos grupuoja mazgus pagal ugnies galią, mobilumą, išgyvenamumą ir transporto priemonės mechaniką.",
+  "loadout-switch-no-effect": "Mūšio komplektacijos perjungimas. Charakteristikos efekto nėra.",
+  "title": "Patobulinimai tanko {tank}",
+  "vehicle-mechanic-no-effect": "Transporto priemonės mechanika. Charakteristikos efekto nėra."
+}

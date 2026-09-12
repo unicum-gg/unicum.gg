@@ -1,0 +1,34 @@
+{
+  "stat": "Thống kê",
+  "rows": {
+    "battles": "Số trận",
+    "tier": "Cấp",
+    "wins": "Chiến thắng",
+    "losses": "Thua",
+    "draws": "Trận hòa",
+    "survived": "Số trận sống sót",
+    "destroyed": "Xe tăng bị tiêu diệt",
+    "destruction-ratio": "Tỷ lệ Phá hủy",
+    "spotted": "Xe tăng bị phát hiện",
+    "damages": "Thiệt hại",
+    "track-damages": "Thiệt hại từ gọng kìm",
+    "spotting-damages": "Thiệt hại từ Khả năng Phát hiện",
+    "assisting-damages": "Thiệt hại từ hỗ trợ",
+    "combined-damages": "Thiệt hại tổng hợp",
+    "base-capture": "Chiếm căn cứ",
+    "base-defense": "Phòng thủ căn cứ",
+    "experience": "Kinh nghiệm",
+    "hit-rate": "Tỉ lệ trúng đích",
+    "personal-rating": "Chỉ số Cá nhân",
+    "wtr": "Chỉ số đánh giá World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Tổng",
+    "day": "24 giờ qua",
+    "week": "7 ngày qua",
+    "month": "30 ngày qua"
+  }
+}

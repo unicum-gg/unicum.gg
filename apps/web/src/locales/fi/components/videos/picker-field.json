@@ -1,0 +1,14 @@
+{
+  "clan": "Klaani",
+  "clear-the-field": "Tyhjennä {label}",
+  "credited-on-the-clan-s": "Mainittu klaanin omalla sivulla.",
+  "none": "Ei mitään",
+  "optional": "(valinnainen)",
+  "pick-the-vehicle": "Valitse ajoneuvo",
+  "search-for-a-clan": "Etsi klaania",
+  "search-for-a-vehicle": "Etsi ajoneuvoa",
+  "search-tank": "Haku tankeista...",
+  "tank": "Panssarihyökkäys",
+  "tank-hint-optional": "Taktiikka kuuluu kartalleen, joten ajoneuvo kannattaa nimetä vain, jos video käsittelee myös sitä.",
+  "tank-hint-required": "Satunnaistaistelua etsitään sen ajoneuvon perusteella, jolla se pelattiin."
+}

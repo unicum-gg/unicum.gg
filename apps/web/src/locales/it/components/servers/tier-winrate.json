@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "Una cella rappresenta il rapporto tra le vittorie della fascia a quel livello e le battaglie disputate allo stesso livello, considerando tutti i veicoli con cui un giocatore ha disputato almeno {minBattles} battaglie. Descrive quindi i livelli così come vengono giocati da chi li affronta. Le celle basate su meno di {TIERWINRATETHINCELL} battaglie sono visualizzate in modo attenuato: il loro valore varia per ragioni diverse dall’abilità. I colori corrispondono alle stesse fasce di percentuale di vittorie usate nel resto del sito.",
+  "cell-no-sample": "{where}, nessun campione",
+  "cell-winrate": "{where}, tasso di vittorie del {winrate} su {battles} battaglie",
+  "metric-band": "Fascia di {metric}",
+  "nothing-recorded": "Nessun dato ancora registrato per {metric}. La griglia viene aggiornata ogni notte.",
+  "over-battles-from-accounts": "{winrate} su {battles} battaglie di {players} account",
+  "over-n-battles": "su {battles} battaglie",
+  "what-players-win-by-tier": "Quanto vincono i giocatori {label} per livello"
+}

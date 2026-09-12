@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statisticile lui {nickname} în bătălii aleatorii",
+  "progression-title": "Progresul lui {nickname} la {metric}",
+  "lift-drag-title": "Tancurile care modelează ratingul lui {nickname}",
+  "progression-blurb": "Linia continuă reprezintă {metric} general, corespunzător coloanei Total de mai sus, și se modifică lent pe măsură ce se adună bătălii noi. Linia întreruptă reprezintă {metric} per sesiune, calculat din bătăliile jucate de la instantaneul anterior. Aceasta arată perioadele bune și slabe. Culoarea liniei urmează nivelul de rating.",
+  "progression-empty": "Nu există încă suficient istoric. Avem nevoie de cel puțin un instantaneu pentru a desena curba. Verifică din nou în curând."
+}

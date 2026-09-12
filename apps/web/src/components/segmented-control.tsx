@@ -1,4 +1,8 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslation } from "@/hooks/use-translation";
+import { statLabel } from "@/components/stat-label";
+import Link from "@/components/link";
 import { cn } from "@/lib/utils";
 
 /**
@@ -36,6 +40,7 @@ export function SegmentedControl<T extends string>({
   onSelect?: (id: T) => void;
   className?: string;
 }) {
+  const { t: tStats } = useTranslation("components/stat-labels");
   return (
     <div
       className={cn(
@@ -46,7 +51,7 @@ export function SegmentedControl<T extends string>({
       {segments.map((segment) => {
         const content = (
           <>
-            <span>{segment.label}</span>
+            <span>{statLabel(segment.label, tStats)}</span>
             {segment.count === undefined ? null : (
               <span className="text-fd-muted-foreground/70">
                 {segment.count}

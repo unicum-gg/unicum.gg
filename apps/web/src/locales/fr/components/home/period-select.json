@@ -1,0 +1,7 @@
+{
+  "label": "Période du classement",
+  "periods": {
+    "overall": "Global",
+    "30d": "30 derniers jours"
+  }
+}

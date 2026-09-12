@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Gaidīšana uz pirmo momentuzņēmumu",
+    "hidden": "Paslēpis Wargaming",
+    "active_24h": "Aktīvs < 24 h",
+    "active_7d": "Aktīvs < 7 d",
+    "recent_30d": "Nesen aktīvs < 30 d",
+    "recent_90d": "Nesen aktīvs < 90 d",
+    "dormant_1y": "Neaktīvs 1 gadu",
+    "inactive": "Neaktīvs > 1 g."
+  },
+  "rating-hype": {
+    "overrated": "Pārvērtēts",
+    "fair": "Piemēroti novērtēts",
+    "underrated": "Zemvērtēts"
+  },
+  "rating-consensus": {
+    "agreed": "Plašs saskaņojums",
+    "mixed": "Sajaukta viedokļi",
+    "divisive": "Sadalīts"
+  },
+  "rating-axes": {
+    "overall": "Kopējā",
+    "fun": "Izklaide",
+    "firepower": "Ugunsjauda",
+    "armour": "Bruņojums",
+    "mobility": "Mobilitāte",
+    "gunHandling": "Ieroču apstrāde",
+    "concealment": "Maskēšanās",
+    "beginnerFriendliness": "Draudzīgs iesācējiem",
+    "versatility": "Daudzpusība"
+  },
+  "rating-axis-hints": {
+    "overall": "Cik labs ir šis tanks, ņemot vērā visu?",
+    "fun": "Cik ļoti tev patīk ar to spēlēt?",
+    "firepower": "Alfa bojājumi, bojājumi minūtē un caursišana.",
+    "armour": "Cik daudz tas atvaira šāviņus, spēle ar slēptu korpusu un atklātā vietā.",
+    "mobility": "Ātrums, paātrinājums un pagriezieni.",
+    "gunHandling": "Mērķēšanas laiks, izkliede un precizitāte kustībā.",
+    "concealment": "Maskēšanās un redzamības diapazons.",
+    "beginnerFriendliness": "Cik piedodošs tas ir, ja vēl tikai mācies.",
+    "versatility": "Vai tas darbojas jebkurā kartē un jebkurā komandā?"
+  },
+  "voter-brackets": {
+    "unknown": "Nepārtraukts",
+    "learning": "Mācās",
+    "average": "Vidējais",
+    "strong": "Spēcīgs",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Bruņutehnika",
+    "gunnery": "Šaušana",
+    "armor": "Bruņas",
+    "mobility": "Mobilitāte",
+    "vision": "Redze",
+    "crew": "Apkalpe",
+    "progression": "Progresija",
+    "economy": "Ekonomika",
+    "ratings": "Vērtējumi",
+    "statistics": "Statistika",
+    "modes": "Cīņas režīmi",
+    "tactics": "Taktika",
+    "slang": "Žargons"
+  }
+}

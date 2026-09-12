@@ -1,0 +1,7 @@
+{
+  "count": "Antall",
+  "cumulative": "Kumulative",
+  "daily": "Daglig",
+  "heading-cumulative": "{title} (kumulativ)",
+  "heading-daily": "{title} per dag"
+}

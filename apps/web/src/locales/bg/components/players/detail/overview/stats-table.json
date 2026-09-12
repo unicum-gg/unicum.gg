@@ -1,0 +1,34 @@
+{
+  "stat": "Статистика",
+  "rows": {
+    "battles": "Битки",
+    "tier": "Ниво",
+    "wins": "Победи",
+    "losses": "Загуби",
+    "draws": "Равни мачове",
+    "survived": "Оцелявания в битки",
+    "destroyed": "Унищожени танкове",
+    "destruction-ratio": "Коефициент на унищожение",
+    "spotted": "Забелязани танкове",
+    "damages": "Щета",
+    "track-damages": "Щета от тракове",
+    "spotting-damages": "Щета от наблюдение",
+    "assisting-damages": "Щета от помощ",
+    "combined-damages": "Сумарна щета",
+    "base-capture": "Завладяна база",
+    "base-defense": "Защита на база",
+    "experience": "Опит",
+    "hit-rate": "Процент на уцелване",
+    "personal-rating": "Личен рейтинг",
+    "wtr": "Рейтинг на World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Общо",
+    "day": "Последни 24ч",
+    "week": "Последни 7д",
+    "month": "Последни 30д"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "active-days": "Actieve dagen",
+  "add-workflow": "Voeg workflow toe",
+  "connect-discord": "Verbind Discord",
+  "discord-notifications": "Discord meldingen",
+  "each-workflow-activates-its-reserves": "Elke workflow activeert de bijbehorende reserves binnen een tijdvenster zodra voldoende leden een actieve spelsessie hebben. Draait via je account, je hoeft niet online te zijn. Voeg er zoveel toe als je nodig hebt.",
+  "enabled": "Aangezet",
+  "from": "Van",
+  "get-a-discord-message-in": "Ontvang telkens wanneer een boost wordt geactiveerd een Discord-bericht in een kanaal naar keuze, zodat de hele clan weet dat deze actief is.",
+  "log-in-with-wargaming-to": "Inloggen met Wargaming om dit in te stellen",
+  "min-online": "Min online",
+  "officers": "Officieren",
+  "only-an-officer-of-this": "Alleen een officier van deze clan kan dit instellen.",
+  "schedule-preview": "Schema vooraf",
+  "set-your-hours-and-reserves": "Stel je tijden en reserves één keer in. De boosts worden vanzelf op tijd geactiveerd, zelfs als er niemand is om op de knop te drukken.",
+  "stronghold-boosts": "Stronghold boosts",
+  "times-are-in-your-timezone": "De tijden worden weergegeven in {tz}, je tijdzone.",
+  "to": "Naar"
+}

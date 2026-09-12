@@ -1,0 +1,7 @@
+{
+  "loading": "단계 {tier} 차량 {count}대, 이름 불러오는 중…",
+  "loading-one": "단계 {tier} 차량 {count}대, 이름 불러오는 중…",
+  "and-more": "외 {count}개",
+  "hint": "클릭하여 탱크 탭에서 열기",
+  "tier": "단계"
+}

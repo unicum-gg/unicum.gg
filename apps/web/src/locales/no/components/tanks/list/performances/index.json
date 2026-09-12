@@ -1,0 +1,7 @@
+{
+  "rows-per-page": "Rader per side",
+  "previous-page": "Forrige side",
+  "page": "Side {current} / {totalPages}",
+  "next-page": "Neste side",
+  "all": "Alle"
+}

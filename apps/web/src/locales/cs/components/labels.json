@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Čeká na první snímek",
+    "hidden": "Skryto společností Wargaming",
+    "active_24h": "Aktivní < 24 h",
+    "active_7d": "Aktivní < 7 d",
+    "recent_30d": "Nedávno aktivní < 30 d",
+    "recent_90d": "Nedávno aktivní < 90 d",
+    "dormant_1y": "Dlouhodobě neaktivní < 1 rok",
+    "inactive": "Neaktivní > 1 rok"
+  },
+  "rating-hype": {
+    "overrated": "Přeceňováno",
+    "fair": "Správně hodnoceno",
+    "underrated": "Podceňováno"
+  },
+  "rating-consensus": {
+    "agreed": "Široká shoda",
+    "mixed": "Smíšené názory",
+    "divisive": "Rozdělující"
+  },
+  "rating-axes": {
+    "overall": "Celkově",
+    "fun": "Zábava",
+    "firepower": "Palebná síla",
+    "armour": "Pancéřování",
+    "mobility": "Pohyblivost",
+    "gunHandling": "Obsluha zbraně",
+    "concealment": "Maskování",
+    "beginnerFriendliness": "Přátelské k začátečníkům",
+    "versatility": "Univerzálnost"
+  },
+  "rating-axis-hints": {
+    "overall": "Jak dobrý je tento tank po všech stránkách?",
+    "fun": "Jak moc vás baví s ním hrát?",
+    "firepower": "Alfa poškození, poškození za minutu a průbojnost.",
+    "armour": "Jak dobře odráží střely se skrytou korbou i na otevřeném prostranství.",
+    "mobility": "Rychlost, zrychlení a obratnost.",
+    "gunHandling": "Doba zaměření, rozptyl a přesnost za pohybu.",
+    "concealment": "Kamufláž a dohled.",
+    "beginnerFriendliness": "Jak moc odpouští chyby, když se ještě učíte.",
+    "versatility": "Funguje na každé mapě a v každém týmu?"
+  },
+  "voter-brackets": {
+    "unknown": "Neohodnoceno",
+    "learning": "Učí se",
+    "average": "Průměr",
+    "strong": "Silné",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Vozidla",
+    "gunnery": "Opalování",
+    "armor": "Pancíř",
+    "mobility": "Pohyblivost",
+    "vision": "Vidění",
+    "crew": "Posádka",
+    "progression": "Postup",
+    "economy": "Ekonomika",
+    "ratings": "Hodnocení",
+    "statistics": "Statistiky",
+    "modes": "Herní módy",
+    "tactics": "Taktika",
+    "slang": "Slang"
+  }
+}

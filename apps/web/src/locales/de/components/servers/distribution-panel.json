@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Wie Spieler aus {region} im Vergleich abschneiden",
+  "median-n": "Median: {value}",
+  "metric-rating": "{metric}-Wertung",
+  "tracked-accounts-with-at-least": "{players} erfasste Konten mit mindestens {minBattles} Gefechten. Die Farben entsprechen denselben Stufen, die überall sonst auf der Website verwendet werden.",
+  "win-rate": "Gewinnrate",
+  "win-rate-distribution-across-the-region-s-tr": "Verteilung der Gewinnrate für die in der Region erfassten spieler"
+}

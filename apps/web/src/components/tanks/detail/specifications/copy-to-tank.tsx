@@ -1,7 +1,8 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { CopySimpleIcon } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import { toast } from "sonner";
 import type { Region } from "@unicum.gg/wargaming";
 import { TankSearchPopover } from "@/components/tanks/tank-search-popover";
@@ -27,6 +28,7 @@ export function CopyToTank({
   /** The current setup token (from `encodeSetup`). */
   setupToken: string;
 }) {
+  const { t } = useTranslation("components/tanks/detail/specifications/copy-to-tank");
   const router = useRouter();
 
   return (
@@ -39,9 +41,9 @@ export function CopyToTank({
         );
         toast.success(`Build copied to ${tank.name}`);
       }}
-      triggerAriaLabel="Copy build to another tank"
-      tooltip="Copy build to another tank"
-      placeholder="Copy to tank..."
+      triggerAriaLabel={t("copy-build-to-another-tank")}
+      tooltip={t("copy-build-to-another-tank")}
+      placeholder={t("copy-to-tank")}
       triggerClassName="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
       triggerContent={<CopySimpleIcon className="size-3.5" weight="bold" />}
     />

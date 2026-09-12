@@ -1,0 +1,7 @@
+{
+  "win-rate": "Жеңіс коэффициенті",
+  "versus": "{metric} және {region}",
+  "top": "Жоғары {percent}%",
+  "ahead-of": "{percent}% ойыншыдан алда",
+  "against": "Кемінде {battles} шайқасы бар, {region} аймағынан бақылаудағы {players} аккаунтқа қарсы."
+}

@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "再写几句话：还需{count}字。",
+  "at-winrate": "在 {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "无法撤回。请稍后再试。",
+  "hide-the-detailed-axes": "隐藏详细项目",
+  "not-enough-battles": "您进行过的这辆坦克的战斗场次不足，投票不会计入。",
+  "published-once-read": "版主阅读后才会发布。您的星级评分会立即计入。",
+  "rate-it-in-detail": "详细评分（可选）",
+  "review": {
+    "none": "评分已保存.",
+    "queued": "评分已保存。您的评价正在等待版主审核。",
+    "published": "评分已保存。您的评价已经发布。",
+    "pending": "评分已保存。您的评价仍在等待版主审核。",
+    "rejected": "评分已保存。您之前的评价未发布，因此只有星级评分会计入。",
+    "closed": "评分已保存。文字评价目前已关闭，因此文本未被保留。"
+  },
+  "save-failed": "无法保存。请稍后再试。",
+  "say-why-optional": "说明原因（可选）",
+  "signed-with": "已附带您进行过的{battles}战斗场次",
+  "submit-my-rating": "提交我的评分",
+  "too-many-edits": "一次变更太多了。请稍等片刻。",
+  "update-my-rating": "更新我的评分",
+  "what-it-is-good-at": "它擅长什么、不擅长什么，以及谁适合使用它。",
+  "withdraw": "撤回",
+  "your-rating-has-been-withdrawn": "您的评分已撤回。",
+  "your-review-is-waiting-on": "您的评价正在等待版主审核。这里只有您能看到它。",
+  "your-review-was-not-published": "您的评价未发布，但您的星级评分仍会计入平均值。"
+}

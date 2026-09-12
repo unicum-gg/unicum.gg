@@ -1,0 +1,12 @@
+{
+  "achievements": "Realizările lui {nickname}",
+  "filter-all": "Toate",
+  "filter-both": "Ambele",
+  "filter-earned": "Câștigate",
+  "filter-missing": "Lipsă",
+  "filter-obtainable": "Obținute",
+  "filter-retired": "Retrase",
+  "no-achievement-matches-these-filters": "Nicio realizare nu corespunde acestor filtre.",
+  "search-achievements": "Caută realizări",
+  "search-among-n-achievements": "Caută printre {count} realizări"
+}

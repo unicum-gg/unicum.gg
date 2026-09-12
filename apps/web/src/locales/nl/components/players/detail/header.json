@@ -1,0 +1,7 @@
+{
+  "joined": "Lid sinds {date}",
+  "last-battle": "Laatste Gevecht {when}",
+  "never-played": "Nooit gespeeld",
+  "updated": "Bijgewerkt {when}",
+  "clan-role-joined": "{role} · Toegevoegd {date}"
+}

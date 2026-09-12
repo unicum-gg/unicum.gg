@@ -1,0 +1,8 @@
+{
+  "log-in-with-wargaming-net": "使用 Wargaming.net ID 登录",
+  "open-source": "{name}是开源的。在信任它之前请先{link}。",
+  "pick-the-region-your-world": "选择你的 World of Tanks 账号所在的地区。不必与当前浏览的地区相同。",
+  "read-the-login-code": "读取登录代码",
+  "what-wargaming-hands-back-is": "Wargaming 返回的是一个用于读取你自己账号数据的令牌。它会加密存储，并在账号保持关联期间续期。它只会在你亲自设置的地方代表你操作，例如军团储备时间表。",
+  "you-sign-in-on-wargaming": "你是在 Wargaming 自己的页面上登录，而不是这里。密码从不会输入到{NAME}，也永远不会传到我们这里。"
+}

@@ -1,0 +1,12 @@
+{
+  "final": "Финал",
+  "grand-final": "Гранд-финал",
+  "loser-bracket-final": "Финал нижней сетки",
+  "loser-round": "Раунд проигравших {round}",
+  "quarter-finals": "Четвертьфиналы",
+  "round-of": "Раунд {teams} команд",
+  "semi-finals": "Полуфиналы",
+  "third-place": "Третье место",
+  "winner-bracket-final": "Финал верхней сетки",
+  "winner-round": "Раунд победителей {round}"
+}

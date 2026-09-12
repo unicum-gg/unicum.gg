@@ -1,0 +1,13 @@
+{
+  "lift": {
+    "heading": "Arvosanaa nostavat panssarivaunut",
+    "blurb": "Panssarivaunut, jotka nostavat kokonaisarvosanaa. Niiden poistaminen laskisi arvosanaa.",
+    "empty": "Yksikään panssarivaunu ei nosta kokonaisarvosanaa."
+  },
+  "drag": {
+    "heading": "Arvosanaa laskevat panssarivaunut",
+    "blurb": "Panssarivaunut, jotka laskevat kokonaisarvosanaa. Niiden poistaminen nostaisi arvosanaa.",
+    "empty": "Yksikään panssarivaunu ei laske kokonaisarvosanaa."
+  },
+  "if-removed": "{delta} poistettuna"
+}

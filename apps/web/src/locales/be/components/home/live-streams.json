@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Паказаць чат",
+    "hide": "Схаваць чат",
+    "show-streamers": "Паказаць стрымераў"
+  },
+  "heading": "Статыстыка гульца, клана і танка ў World of Tanks: {name}",
+  "hide": "Схаваць стрымераў",
+  "player": "Игрок",
+  "stream-language": "Мова стрыму · {name}",
+  "stream-language-alt": "Мова стрыму: {name}",
+  "theater": {
+    "enter": "Тэатральны рэжым",
+    "exit": "Выйсці з рэжыму тэатра"
+  },
+  "title": "Лепшыя гульцы, якія цяпер вядуць стрым ·",
+  "viewer-count": "{count} гледачоў",
+  "viewers": "Гледачы",
+  "watch": "Глядзець {nickname} на Twitch"
+}

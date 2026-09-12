@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Kaikki {count} World of Tanks -ajoneuvoa alueella {region}. Suodata tason, kansakunnan, luokan ja roolin mukaan ja avaa sitten panssarivaunu nähdäksesi sen tilastot, parhaat pelaajat ja odotusarvot.",
+    "title": "Kaikki World of Tanks -panssarivaunut ({region}), selaa jokaista ajoneuvoa",
+    "description": "Selaa jokaista alueen {region} World of Tanks -panssarivaunua. Suodata tason, kansakunnan, luokan ja roolin mukaan ja tutustu sitten panssarivaunukohtaisiin tilastoihin, parhaisiin pelaajiin ja odotusarvoihin.",
+    "heading": "Kaikki <accent>panssarivaunut</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, läpäisy, panssari, näkyvyysalue ja liikkuvuus kaikille {count} World of Tanks -ajoneuvolle alueella {region}. Lajittele minkä tahansa sarakkeen mukaan ja suodata sitten tason, kansakunnan, luokan ja roolin perusteella.",
+    "title": "World of Tanks -panssarivaunujen ominaisuudet ({region}), vertaile jokaista ajoneuvoa",
+    "description": "Vertaile kaikkien alueen {region} World of Tanks -panssarivaunujen ominaisuuksia: DPM, läpäisy, panssari, näkyvyysalue ja liikkuvuus. Lajittele ja suodata tason, kansakunnan, luokan ja roolin mukaan.",
+    "heading": "Panssarihyökkäys <accent>Tiedot</accent>"
+  },
+  "economics": {
+    "intro": "Osto- ja korjaushinnat, ammusten hinnat sekä krediittitulot kaikille {count} World of Tanks -ajoneuvolle alueella {region}. Lajittele minkä tahansa sarakkeen mukaan ja suodata sitten tason, kansakunnan, luokan ja roolin perusteella.",
+    "title": "World of Tanks -panssarivaunujen talous ({region}), krediitti- ja XP-hinnat",
+    "description": "Krediitti- ja XP-hinnat sekä korjaus- ja ammus hinnat jokaiselle alueen {region} World of Tanks -panssarivaunulle. Lajittele ja suodata tason, kansakunnan, luokan ja roolin mukaan.",
+    "heading": "Panssarihyökkäys <accent>Taloustiede</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Liukuva keskiarvovahinko, joka tarvitaan yhteen, kahteen ja kolmeen merkkiin kaikilla {count} World of Tanks -ajoneuvolla alueella {region}. Lajittele minkä tahansa sarakkeen mukaan ja suodata sitten tason, kansakunnan, luokan ja roolin perusteella.",
+    "title": "World of Tanks -erinomaisuuden merkkien vaatimukset ({region})",
+    "description": "Yhteen, kahteen ja kolmeen erinomaisuuden merkkiin tarvittava vahinko jokaisella alueen {region} World of Tanks -panssarivaunulla. Lajittele ja suodata tason, kansakunnan, luokan ja roolin mukaan.",
+    "heading": "<accent>Erinomaisuuden merkit</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Ace Tanker- ja mestaruusmerkkien XP-rajat kaikille {count} World of Tanks -ajoneuvolle alueella {region}. Lajittele minkä tahansa sarakkeen mukaan ja suodata sitten tason, kansakunnan, luokan ja roolin perusteella.",
+    "title": "World of Tanks -mestaruusmerkkien vaatimukset ({region})",
+    "description": "Ace Tanker- ja mestaruusmerkkien XP-rajat jokaiselle alueen {region} World of Tanks -panssarivaunulle. Lajittele ja suodata tason, kansakunnan, luokan ja roolin mukaan.",
+    "heading": "<accent>Mestaruusmerkit</accent>"
+  },
+  "videos": {
+    "intro": "{count} taistelua, jotka yhteisö on linkittänyt alueella {region}. Jokainen avautuu aloitussekunnistaan. Ehdotukset lähetetään panssarivaunujen sivuilta ja tarkistetaan ennen niiden näkymistä täällä.",
+    "title": "World of Tanks -pelivideot ({region})",
+    "description": "Yhteisön ehdottamat World of Tanks -taistelut alueella {region}. Jokainen avautuu aloitussekunnistaan ja näyttää pelatun panssarivaunun, kartan, puolen sekä taistelun lopputuloksen.",
+    "heading": "Peli <accent>videot</accent>"
+  }
+}

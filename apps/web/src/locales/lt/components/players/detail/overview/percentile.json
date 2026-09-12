@@ -1,0 +1,7 @@
+{
+  "win-rate": "Pergalės rodiklis",
+  "versus": "{metric} prieš {region}",
+  "top": "Viršuje {percent}%",
+  "ahead-of": "Lenkia {percent}%",
+  "against": "Prieš {players} stebimas {region} paskyras, turinčias bent {battles} mūšių."
+}

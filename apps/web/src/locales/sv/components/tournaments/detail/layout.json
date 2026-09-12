@@ -1,0 +1,12 @@
+{
+  "final": "Final",
+  "grand-final": "Final",
+  "loser-bracket-final": "Final i förlorarbracketen",
+  "loser-round": "Förlorarrunda {round}",
+  "quarter-finals": "Kvartsfinaler",
+  "round-of": "Omgång med {teams} lag",
+  "semi-finals": "Semifinaler",
+  "third-place": "Tredje plats",
+  "winner-bracket-final": "Final i Vinnare-bracketen",
+  "winner-round": "Vinnare, omgång {round}"
+}

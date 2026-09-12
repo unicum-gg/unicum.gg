@@ -1,0 +1,46 @@
+{
+  "columns": {
+    "buyCredits": {
+      "label": "Omkostninger (credits)",
+      "tip": "Købspris i credits (kampvogne fra teknologitræet)"
+    },
+    "buyGold": {
+      "label": "Omkostninger (guld)",
+      "tip": "Købspris i guld (premiumkampvogne)"
+    },
+    "researchXp": {
+      "label": "Forsknings XP",
+      "tip": "XP for at låse op (billigste vej)"
+    },
+    "totalFreeXp": {
+      "label": "Gratis XP (T{tier})",
+      "tip": "Samlet XP til forskning fra niveau {tier}, inklusive forudgående moduler"
+    },
+    "shellCost": {
+      "label": "Granatkoster",
+      "tip": "Standardpris på granat (credits)"
+    },
+    "ammoCost": {
+      "label": "Omkostninger ved fuld ammunition",
+      "tip": "Standardpris på granat × ammunitionskapacitet"
+    },
+    "acquireMoney": {
+      "label": "Købsomkostning ({currency})",
+      "tip": "Anslåede faktiske penge for at anskaffe kampvognen (forskning + køb), i {currency}"
+    },
+    "freeXpMoney": {
+      "label": "Gratis XP ({currency})",
+      "tip": "Anslåede faktiske penge for at forske i kampvognen med Gratis XP fra niveau {tier}, i {currency}"
+    }
+  },
+  "selector": {
+    "buyCredits": "Omkostninger (credits)",
+    "buyGold": "Omkostninger (guld)",
+    "researchXp": "Forsknings XP",
+    "totalFreeXp": "Gratis XP",
+    "shellCost": "Granatkoster",
+    "ammoCost": "Omkostninger ved fuld ammunition",
+    "acquireMoney": "Købsomkostning (penge)",
+    "freeXpMoney": "Gratis XP (penge)"
+  }
+}

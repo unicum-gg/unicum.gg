@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Brak danych. Sprawdź ponownie po odświeżeniu klanów.",
+  "heading": "Najlepsze klany <accent>{tier}</accent>",
+  "blurb": "Ranking regionu {region} według {sort}, obejmujący wszystkie monitorowane klany w formacie {format} (minimum {battles} bitew).",
+  "blurb-period": "Ranking regionu {region} według {sort}, obejmujący wszystkie monitorowane klany w formacie {format} (okres: {period}, minimum {battles} bitew).",
+  "format-advances": "Natarcia (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Najlepsze klany {tier}, pierwsze {count} ·"
+}

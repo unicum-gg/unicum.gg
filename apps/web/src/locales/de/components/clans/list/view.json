@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Top <accent>Clans</accent>",
+    "language": "Top-Clans mit <accent>{language}</accent> als Sprache"
+  },
+  "intro": {
+    "all": "Rangliste für {region}, sortiert nach dem durchschnittlichen {metric}-Wert der erfassten Mitglieder jedes Clans (mindestens 50 Mitglieder mit Gefechten).",
+    "language": "Clans aus {region}, die {language} als eine ihrer Sprachen angegeben haben, sortiert nach dem durchschnittlichen {metric}-Wert ihrer erfassten Mitglieder (mindestens 25 Mitglieder mit Gefechten).",
+    "strict": "Clans aus {region}, die {language} als ihre einzige Sprache angegeben haben, sortiert nach dem durchschnittlichen {metric}-Wert ihrer erfassten Mitglieder (mindestens 25 Mitglieder mit Gefechten)."
+  },
+  "board": {
+    "all": "Die {count} Top-Clans, sortiert nach {metric}",
+    "language": "Die {count} Top-Clans mit {language} als Sprache, sortiert nach {metric}",
+    "strict": "Die {count} Top-Clans ausschließlich mit {language} als Sprache, sortiert nach {metric}"
+  },
+  "members": "Mitglieder",
+  "strict-toggle": "Streng",
+  "any-toggle": "Alle",
+  "all-languages": "Alle Sprachen",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

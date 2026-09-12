@@ -1,0 +1,7 @@
+{
+  "win-rate": "Rată de câștig",
+  "versus": "{metric} comparativ cu regiunea {region}",
+  "top": "Top {percent}%",
+  "ahead-of": "Cu {percent}% peste",
+  "against": "În comparație cu {players} conturi urmărite din regiunea {region}, cu cel puțin {battles} bătălii."
+}

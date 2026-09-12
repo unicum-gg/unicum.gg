@@ -1,0 +1,4 @@
+{
+  "columns": "Sloupce",
+  "n-marks-of-excellence": "{count, plural, one {# známka výbornosti} few {# známky výbornosti} many {# známek výbornosti} other {# známek výbornosti}}"
+}

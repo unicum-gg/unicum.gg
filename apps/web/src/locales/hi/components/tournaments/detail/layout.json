@@ -1,0 +1,12 @@
+{
+  "final": "फ़ाइनल",
+  "grand-final": "ग्रैंड फ़ाइनल",
+  "loser-bracket-final": "लूज़र ब्रैकेट फ़ाइनल",
+  "loser-round": "लूज़र राउंड {round}",
+  "quarter-finals": "क्वार्टर फ़ाइनल",
+  "round-of": "राउंड ऑफ़ {teams}",
+  "semi-finals": "सेमी फ़ाइनल",
+  "third-place": "तीसरा स्थान",
+  "winner-bracket-final": "विनर ब्रैकेट फ़ाइनल",
+  "winner-round": "विनर राउंड {round}"
+}

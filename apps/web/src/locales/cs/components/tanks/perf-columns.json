@@ -1,0 +1,60 @@
+{
+  "columns-label": "Sloupce",
+  "groups": {
+    "general": "Globální",
+    "combat": "Bojové"
+  },
+  "columns": {
+    "battles": {
+      "label": "Bitev",
+      "tip": "Celkem bitev odehraných s tankem"
+    },
+    "count": {
+      "label": "Počet",
+      "tip": "Počet sledovaných hráčů ve vzorku"
+    },
+    "rating": {
+      "label": "Hodnocení (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Míra výher s tankem"
+    },
+    "playerWr": {
+      "label": "WR hráče",
+      "tip": "Průměr celkové míry výher hráčů, kteří s ním hrají"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Průměrné poškození za bitvu"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Poměr zničení / úmrtí"
+    },
+    "assists": {
+      "label": "Asistence",
+      "tip": "Průměrné poškození s asistencí"
+    },
+    "hitPct": {
+      "label": "Úspěšnost zásahu %",
+      "tip": "Zásahů / výstřelů"
+    },
+    "penPct": {
+      "label": "Průbojnost %",
+      "tip": "Průbojnost / zásahů"
+    },
+    "spots": {
+      "label": "Sledování",
+      "tip": "Průměr sledování za bitvu"
+    },
+    "blocked": {
+      "label": "Blokováno",
+      "tip": "Průměrné poškození blokované pancířem"
+    },
+    "survival": {
+      "label": "Životnost",
+      "tip": "Podíl přežitých bitev"
+    }
+  }
+}

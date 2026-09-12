@@ -1,8 +1,7 @@
-import Link from "next/link";
+import { useTranslation } from "@/hooks/use-translation";
+import Link from "@/components/link";
 import { Crest } from "@/components/entity/badges/crest";
 import {
-  CLAN_BOARD_DESCRIPTION,
-  CLAN_BOARD_LABEL,
   CLAN_BOARD_TINCTURE,
   CLAN_BOARD_BY_STRONGHOLD_TIER,
   ClanBoard,
@@ -101,10 +100,15 @@ export function ClanRankBadge({
   /** Height in px, matching the player crests' `size`. */
   size?: number;
 }) {
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t } = useTranslation("components/entity/badges/clan-rank-badge");
   const tincture = CLAN_BOARD_TINCTURE[badge.board];
   if (!tincture) return null;
 
-  const label = `Rank ${badge.rank} on the ${CLAN_BOARD_DESCRIPTION[badge.board]}`;
+  const label = t("aria-rank", {
+    rank: badge.rank,
+    board: t(`board.${badge.board}`),
+  });
 
   return (
     <TooltipProvider>
@@ -124,9 +128,9 @@ export function ClanRankBadge({
         </TooltipTrigger>
         <TooltipContent>
           <span className="font-semibold">
-            #{badge.rank} {CLAN_BOARD_LABEL[badge.board]}
+            #{badge.rank} {tGame(`clan-boards.${badge.board}`)}
           </span>{" "}
-          · {CLAN_BOARD_DESCRIPTION[badge.board]}
+          · {t(`board.${badge.board}`)}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -170,6 +174,10 @@ export function ClanBadges({
   /** How many crests to show before folding the rest into "+N". */
   max?: number;
 }) {
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tBadge } = useTranslation(
+    "components/entity/badges/clan-rank-badge",
+  );
   // The tournament crest is not a placing, so it sits outside the fold: the
   // "+N" counts board ranks, which are a set that can grow to seven, while this
   // is one mark a clan either has or does not.
@@ -191,9 +199,9 @@ export function ClanBadges({
     label: (
       <>
         <span className="font-semibold">
-          #{b.rank} {CLAN_BOARD_LABEL[b.board]}
+          #{b.rank} {tGame(`clan-boards.${b.board}`)}
         </span>{" "}
-        · {CLAN_BOARD_DESCRIPTION[b.board]}
+        · {tBadge(`board.${b.board}`)}
       </>
     ),
     // The bare crest for the fold's tooltip: same tincture and same rank

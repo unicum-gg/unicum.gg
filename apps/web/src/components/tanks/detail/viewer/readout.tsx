@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import type { Impact } from "@/services/tank-viewer/armour";
 
 /** The colours the armour views paint with, as CSS. */
@@ -84,6 +85,7 @@ export type Reading = {
  * player can see which of the two stopped them.
  */
 export function ArmourReadout({ reading }: { reading: Reading | null }) {
+  const { t } = useTranslation("components/tanks/detail/viewer/readout");
   if (!reading) return null;
   const { impact, at, size } = reading;
   const { odds, effective, layers, colour, label } = impact;
@@ -111,8 +113,7 @@ export function ArmourReadout({ reading }: { reading: Reading | null }) {
       }}
     >
       <div className="mb-2 font-medium tracking-wide text-fd-muted-foreground uppercase">
-        Impact
-      </div>
+        {t("impact")}</div>
       <ul className="space-y-1">
         {layers.map((layer, i) => (
           <li
@@ -122,7 +123,7 @@ export function ArmourReadout({ reading }: { reading: Reading | null }) {
             <span className="truncate text-fd-foreground">
               {layer.name}
               {layer.spaced ? (
-                <span className="text-fd-muted-foreground"> screen</span>
+                <span className="text-fd-muted-foreground"> {t("screen")}</span>
               ) : null}
             </span>
             <span className="shrink-0 text-fd-muted-foreground">
@@ -133,7 +134,7 @@ export function ArmourReadout({ reading }: { reading: Reading | null }) {
       </ul>
       {effective !== null ? (
         <div className="mt-2 flex justify-between border-t border-fd-border/60 pt-2 text-fd-muted-foreground">
-          <span>effective</span>
+          <span>{t("effective")}</span>
           <span className="text-fd-foreground">{Math.round(effective)} mm</span>
         </div>
       ) : null}

@@ -1,0 +1,15 @@
+{
+  "no-session-yet-they-appear": "Noch keine Sitzung. Sitzungen werden angezeigt, sobald dieses Konto zweimal erfasst wurde und dazwischen Gefechte stattgefunden haben. Dies geschieht automatisch, sobald auf dem Konto gespielt wird.",
+  "bar-height-is-battles-played": "Die Balkenhöhe zeigt die Anzahl gespielter Gefechte, die Farbe zeigt {metric} für die Gruppierung {granularity}, und zwar in denselben Wertebereichen wie überall sonst auf der Website.",
+  "title": "Sitzungen von {nickname}",
+  "title-count": "Sitzungen von {nickname} ({count})",
+  "granularity": {
+    "day": "Tag",
+    "week": "Woche",
+    "month": "Monat",
+    "daily": "Täglich",
+    "weekly": "Wöchentlich",
+    "monthly": "Monatlich"
+  },
+  "week-of": "Woche vom {date}"
+}

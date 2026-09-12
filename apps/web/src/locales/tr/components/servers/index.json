@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Her {label} sunucusunda şu anda kaç oyuncu olduğunu, bu sayının gün ve hafta boyunca nasıl değiştiğini ve bölgenin diğerleriyle nasıl karşılaştırıldığını gösterir.",
+  "recording-just-started": "Kayıt henüz başladı, bu nedenle grafikler bundan sonra dolacak.",
+  "series-starts": "Seri, kaydın başladığı {at} tarihinde başlar ve öncesindeki hiçbir şey kurtarılamaz.",
+  "server-population": "{label} sunucusundaki oyuncu sayısı",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "Wargaming bir bölgenin ilk kümelerini adlandırır ve geri kalanları yalnızca tanımlayıcı olarak bırakır. Bu nedenle 203, bölgenin kendi numaralandırmasına devam edilerek EU3 olarak gösterilir. Kaydettiğimiz ve üzerine gelindiğinde her adın açıkladığı şey tanımlayıcıdır, etiket de bunu izler. Kümeleri ne kadar yoğun olduklarına göre numaralandırmak, ikisi yer değiştirdiğinde bir adı bir sunucudan diğerine taşırdı. Bir örnekte eksik olan sunucu hiç bildirilmemiştir, boş olmasıyla aynı şey değildir.",
+  "we-record-it": "Wargaming her sunucunun oyuncu sayısını anlık olarak yayımlar ve geçmişini tutmaz. Bu nedenle mevcut dakikadan sonraki her rakamı kendimiz, beş dakikada bir kaydederiz.",
+  "where-battles-are-fought": "{label} savaşlarının yapıldığı yer"
+}

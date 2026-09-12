@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Rang {rank} på ranglisten for {board}",
+  "board": {
+    "advances": "Fremrykninger i Højborg-vurdering",
+    "skirmish-t10": "Vurdering for Træfning på Niveau X",
+    "skirmish-t6": "Vurdering for Træfning på Niveau VI",
+    "skirmish-t8": "Vurdering for Træfning på Niveau VIII"
+  }
+}

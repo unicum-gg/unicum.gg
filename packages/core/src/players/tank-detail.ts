@@ -7,7 +7,7 @@ import {
   type PlayerTankRecord,
   type TankStats,
 } from "@unicum.gg/shared";
-import type { Region } from "@unicum.gg/wargaming";
+import type { Region, WgLanguage } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getRatingHistory } from "@unicum.gg/core/players/rating-history";
 import { getTankAwards } from "@unicum.gg/core/players/tank-achievements";
@@ -64,6 +64,8 @@ export async function getPlayerTankDetail(
   region: Region,
   nickname: string,
   slug: string,
+  /** Names the medals in the reader's language; see `getCatalog`. */
+  language?: WgLanguage,
 ): Promise<PlayerTankRecord | null> {
   const identity = await getTankBySlug(region, slug);
   if (!identity) return null;
@@ -135,6 +137,7 @@ export async function getPlayerTankDetail(
         Number(row.pid),
         Number(row.acct),
         identity.tankId,
+        language,
       ).catch((err) => {
         // The record is worth serving without its medals; the reverse is not
         // true, so a Wargaming or catalogue failure must not 502 the panel.

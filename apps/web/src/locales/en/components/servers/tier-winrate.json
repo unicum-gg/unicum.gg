@@ -1,0 +1,10 @@
+{
+  "cell-is-the-band-s": "A cell is the band’s wins at that tier over its battles there, across every vehicle a player has at least {minBattles} battles on, so it describes the tiers as played by the people who play them. Cells resting on fewer than {TIERWINRATETHINCELL} battles are drawn faintly: they move for reasons other than skill. The colours are the same win-rate bands the site uses everywhere else.",
+  "cell-no-sample": "{where}, no sample",
+  "cell-winrate": "{where}, {winrate} win rate over {battles} battles",
+  "metric-band": "{metric} band",
+  "nothing-recorded": "Nothing recorded against {metric} yet. The grid is rebuilt nightly.",
+  "over-battles-from-accounts": "{winrate} over {battles} battles from {players} accounts",
+  "over-n-battles": "over {battles} battles",
+  "what-players-win-by-tier": "What {label} players win by tier"
+}

@@ -1,0 +1,14 @@
+{
+  "clan": "क्लान",
+  "clear-the-field": "{label} साफ़ करें",
+  "credited-on-the-clan-s": "क्लान के अपने पेज पर श्रेय दिया गया।",
+  "none": "कोई नहीं",
+  "optional": "(optional)",
+  "pick-the-vehicle": "वाहन चुनें",
+  "search-for-a-clan": "क्लान खोजें",
+  "search-for-a-vehicle": "वाहन खोजें",
+  "search-tank": "टैंक खोजें...",
+  "tank": "टैंक",
+  "tank-hint-optional": "रणनीति अपने मानचित्र से संबंधित होती है, इसलिए इसका नाम तभी देना उपयोगी है जब वीडियो वाहन के बारे में भी हो।",
+  "tank-hint-required": "रैंडम युद्ध को उस वाहन से खोजा जाता है जिसमें वह खेला गया था।"
+}

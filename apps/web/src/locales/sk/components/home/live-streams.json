@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "Zobraziť chat",
+    "hide": "Skryť chat",
+    "show-streamers": "Zobraziť streamerov"
+  },
+  "heading": "Štatistiky hráčov, klanov a tankov v hre World of Tanks: {name}",
+  "hide": "Skryť streamerov",
+  "player": "Hráč",
+  "stream-language": "Jazyk streamu · {name}",
+  "stream-language-alt": "Jazyk streamu: {name}",
+  "theater": {
+    "enter": "Mód gledališča",
+    "exit": "Ukončiť režim kina"
+  },
+  "title": "Najlepší hráči, ktorí práve streamujú ·",
+  "viewer-count": "{count} divákov",
+  "viewers": "Diváci",
+  "watch": "Sledovať na Twitchi: {nickname}"
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { ScalesIcon } from "@phosphor-icons/react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { TableCell, TableHead } from "@/components/ui/table";
@@ -23,6 +24,7 @@ export function TankCompareHead({
 }: {
   selection?: TankSelection;
 }) {
+  const { t } = useTranslation("components/tanks/list/compare-cell");
   if (!selection) return null;
   return (
     // Both halves force the same inline start padding the list tables give
@@ -40,8 +42,7 @@ export function TankCompareHead({
           </span>
         </TooltipTrigger>
         <TooltipContent>
-          Pick up to {selection.max} vehicles to compare
-        </TooltipContent>
+          {t("pick-up-to-vehicles-to", { max: selection.max })}</TooltipContent>
       </Tooltip>
     </TableHead>
   );
@@ -56,6 +57,7 @@ export function TankCompareCell({
   slug: string;
   name: string;
 }) {
+  const { t } = useTranslation("components/tanks/list/compare-cell");
   if (!selection) return null;
   const checked = selection.has(slug);
   return (
@@ -66,7 +68,11 @@ export function TankCompareCell({
         // click do nothing.
         disabled={!checked && !selection.canAdd}
         onCheckedChange={() => selection.toggle(slug)}
-        aria-label={checked ? `Remove ${name} from comparison` : `Compare ${name}`}
+        aria-label={
+          checked
+            ? t("remove-from-comparison", { tank: name })
+            : t("compare-tank", { tank: name })
+        }
       />
     </TableCell>
   );

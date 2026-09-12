@@ -1,0 +1,17 @@
+{
+  "place": {
+    "1": "1위",
+    "2": "2위",
+    "3": "3위"
+  },
+  "streamer": "스트리머 · Twitch에서 {name} 시청",
+  "tournament": {
+    "one": "{title} 우승 명단",
+    "many": "우승 명단 {count}개에 포함, 최고의 {title}",
+    "featured": "{text} · 주요 이벤트",
+    "unnamed": "워게이밍 토너먼트"
+  },
+  "tournament-wins": "{count, plural, other {#회 토너먼트 승리}}",
+  "watch-on-twitch": "Twitch에서 {name} 시청",
+  "watch-on-twitch-viewers": "Twitch에서 {name} 시청 · 시청자 {viewers}명"
+}

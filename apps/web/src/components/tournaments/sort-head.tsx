@@ -127,14 +127,18 @@ export function SortHead<C extends string>({
           type="button"
           onClick={() => onToggle(column)}
           className={cn(
-            "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+            "inline-flex cursor-pointer items-center gap-1.5 max-w-full min-w-0 font-medium select-none hover:text-foreground",
             active && "text-foreground",
           )}
         >
-          {children}
+          {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
           <Icon
             weight="bold"
-            className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+            className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
           />
         </button>
       </GlossaryHeadTooltip>

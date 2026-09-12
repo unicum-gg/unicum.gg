@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Hva spillere synes om denne stridsvognen",
+  "not-rated": "Ikke vurdert ennå, bli den første",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stemme",
+  "stars": "{value} av {max}",
+  "not-rated-short": "Ikke vurdert"
+}

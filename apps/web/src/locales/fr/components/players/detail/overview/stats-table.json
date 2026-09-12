@@ -1,0 +1,34 @@
+{
+  "stat": "Stat",
+  "rows": {
+    "battles": "Batailles",
+    "tier": "Niveau",
+    "wins": "Victoires",
+    "losses": "Pertes",
+    "draws": "Nuls",
+    "survived": "Batailles survécues",
+    "destroyed": "Chars détruits",
+    "destruction-ratio": "Taux de destruction",
+    "spotted": "Chars repérés",
+    "damages": "Dégâts",
+    "track-damages": "Dégâts de chenille",
+    "spotting-damages": "Dégâts de détection",
+    "assisting-damages": "Dégâts d’assistance",
+    "combined-damages": "Dégâts combinés",
+    "base-capture": "Capture de base",
+    "base-defense": "Défense de base",
+    "experience": "Expérience",
+    "hit-rate": "Taux de réussite",
+    "personal-rating": "Cote personnelle",
+    "wtr": "Classement World of Tanks",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "Total",
+    "day": "Dernières 24h",
+    "week": "Derniers 7j",
+    "month": "Derniers 30j"
+  }
+}

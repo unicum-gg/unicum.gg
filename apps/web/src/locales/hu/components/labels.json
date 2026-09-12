@@ -1,0 +1,66 @@
+{
+  "activity-buckets": {
+    "unfetched": "Első pillanatkép várakozás",
+    "hidden": "Wargaming által elrejtve",
+    "active_24h": "Aktív < 24 ó",
+    "active_7d": "Aktív < 7 n",
+    "recent_30d": "Nemrég aktív < 30 n",
+    "recent_90d": "Nemrég aktív < 90 n",
+    "dormant_1y": "Tétlen < 1 év",
+    "inactive": "Inaktív > 1 év"
+  },
+  "rating-hype": {
+    "overrated": "Túldicsért",
+    "fair": "Megfelelően értékelt",
+    "underrated": "Alulértékelt"
+  },
+  "rating-consensus": {
+    "agreed": "Széleskörű egyetértés",
+    "mixed": "Vegyes vélemények",
+    "divisive": "Megosztó"
+  },
+  "rating-axes": {
+    "overall": "Összesen",
+    "fun": "Szórakozás",
+    "firepower": "Tűzerő",
+    "armour": "Páncél",
+    "mobility": "Mobilitás",
+    "gunHandling": "Fegyver kezelés",
+    "concealment": "Észlelhetőség",
+    "beginnerFriendliness": "Kezdőknek barátságos",
+    "versatility": "Sokoldalúság"
+  },
+  "rating-axis-hints": {
+    "overall": "Mennyire jó ez a tank összességében?",
+    "fun": "Mennyire élvezed, hogy ezzel játszol?",
+    "firepower": "Alfa sebzés, percenkénti sebzés és átütés.",
+    "armour": "Mennyire jól pattintja a lövéseket testet takaró fedezékben és nyílt terepen.",
+    "mobility": "Sebesség, gyorsulás és fordulékonyság.",
+    "gunHandling": "Célozási idő, szórás és menet közbeni pontosság.",
+    "concealment": "Álcázás és látótávolság.",
+    "beginnerFriendliness": "Mennyire elnéző, ha még tanulod a játékot.",
+    "versatility": "Bármelyik pályán, bármilyen csapatban megállja a helyét?"
+  },
+  "voter-brackets": {
+    "unknown": "Értékelés nélküli",
+    "learning": "Tanulóban",
+    "average": "Átlag",
+    "strong": "Erős",
+    "unicum": "Unicum"
+  },
+  "glossary-categories": {
+    "vehicles": "Járművek",
+    "gunnery": "Tüzérség",
+    "armor": "Páncélzat",
+    "mobility": "Mobilitás",
+    "vision": "Látás",
+    "crew": "Legénység",
+    "progression": "Fejlődés",
+    "economy": "Gazdaság",
+    "ratings": "Értékelések",
+    "statistics": "Statisztika",
+    "modes": "Csata módok",
+    "tactics": "Taktikák",
+    "slang": "Szleng"
+  }
+}

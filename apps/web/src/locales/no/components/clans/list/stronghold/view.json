@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Ingen data ennå. Sjekk igjen når klanene er oppdatert.",
+  "heading": "Topp <accent>{tier}</accent>-klaner",
+  "blurb": "{region}-rangering, rangert etter {sort} på tvers av alle sporede klaner i {format} (minimum {battles} kamper).",
+  "blurb-period": "{region}-rangering, rangert etter {sort} på tvers av alle sporede klaner i {format} i løpet av {period} (minimum {battles} kamper).",
+  "format-advances": "Fremrykkinger (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Topp {count} klaner på {tier}-nivå ·"
+}

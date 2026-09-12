@@ -1,0 +1,21 @@
+{
+  "trigger": "Feedback",
+  "title": "Delen van je feedback",
+  "topic-placeholder": "Selecteer een onderwerp...",
+  "message-placeholder": "Je feedback...",
+  "send": "Versturen",
+  "sent": "Bedankt voor je feedback!",
+  "failed": "Je feedback kon niet worden verzonden. Probeer het opnieuw.",
+  "topics": {
+    "bug": "Bug melden",
+    "idea": "Idee voor een functie",
+    "data": "Nauwkeurigheid van gegevens",
+    "other": "Overig"
+  },
+  "sentiments": {
+    "awful": "Vreselijk",
+    "bad": "Slecht",
+    "good": "Goed",
+    "great": "Geweldig"
+  }
+}

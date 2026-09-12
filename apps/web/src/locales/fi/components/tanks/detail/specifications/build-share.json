@@ -1,0 +1,9 @@
+{
+  "build-link-copied": "Kokoonpanon linkki kopioitu",
+  "copy-build-link": "Kopioi kokoonpanon linkki",
+  "could-not-copy-link": "Linkin kopiointi ei onnistunut",
+  "include-setup": "Sisällytä asetus",
+  "share-build": "Jaa build",
+  "share-tank": "Jaa panssarivaunu {tank}",
+  "share-text": "Katso panssarivaunun {tank} kokoonpano sovelluksessa {app}"
+}

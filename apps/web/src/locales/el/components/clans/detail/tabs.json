@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Επισκόπηση",
+    "tanks": "Τανκς",
+    "videos": "Βίντεο",
+    "tournaments": "Τουρνουά",
+    "manage": "Διαχείριση"
+  },
+  "section-count": "{section} ({count})"
+}

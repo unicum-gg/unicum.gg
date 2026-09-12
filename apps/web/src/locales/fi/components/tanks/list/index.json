@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Hinta (kreditit)",
+    "buyGold": "Hinta (kulta)",
+    "researchXp": "Tutkimus XP",
+    "shellCost": "Kuoren hinta",
+    "ammoCost": "Täyden ammuksen hinta",
+    "class3": "3. Luokka",
+    "class2": "2. Luokka",
+    "class1": "1. Luokka",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65 %)",
+    "mark2": "2 Markkia (85 %)",
+    "mark3": "3 Markkia (95 %)"
+  }
+}

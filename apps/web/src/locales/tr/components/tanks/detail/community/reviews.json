@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "Onunla {battles} savaş",
+  "damage": "{damage} hasar",
+  "n-marks": "{count, plural, one {# işaret} other {# işaretler}}",
+  "no-written-opinions-yet-if": "Henüz yazılı görüş yok. Yeterli savaşınız varsa ilki sizin olabilir.",
+  "win-rate": "%{toFixed} kazanma oranı",
+  "written-on": "{gameVersion} sürümünde yazıldı"
+}

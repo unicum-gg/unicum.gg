@@ -1,0 +1,21 @@
+{
+  "checkout-canceled": "Поръчката е отменена.",
+  "claim-your-supporter-role-on-discord": "Заявете ролята си на поддръжник в Discord",
+  "could-not-add-the-discord-role-please-try-ag": "Може да не успяхме да добавим ролята в Discord. Опитайте отново.",
+  "could-not-open-the-billing-portal": "Може да не успяхме да отворим портала за плащане.",
+  "could-not-start-checkout-please-try-again": "Може да не успяхме да започнем плащането. Опитайте отново.",
+  "could-not-update-your-preference": "Може да не успяхме да актуализираме предпочитанието ви.",
+  "log-in-with-wargaming": "Влез с Общ",
+  "log-in-with-wargaming-to": "Влез с Общ, за да подкрепиш {NAME}.",
+  "manage-subscription": "Управлявайте абонамента",
+  "only-active-supporters-can-claim-the-discord": "Само активни поддръжници могат да получат ролята в Discord.",
+  "or-choose-your-own-amount": "Или избери собствена сума",
+  "pay-what-you-want": "Плати колкото искаш.",
+  "pick-an-amount": "Избери сума или въведи своя, от €{min}/месец.",
+  "re-sync-discord-role": "Синхронизирай отново ролята в Discord",
+  "secured-by-stripe": "Защитено от Stripe. Откажи по всяко време.",
+  "show-me-anonymously-on-the": "Покажи ме анонимно на подиума",
+  "support-subscriptions-are-coming-soon": "Абонаментите за поддръжка скоро ще са налични.",
+  "supporter-role-added-on-discord": "Ролята на поддръжник е добавена в Discord!",
+  "you-are-a-supporter-thank": "Ти си поддръжник. Благодарим ти, че поддържаш {NAME} жив."
+}

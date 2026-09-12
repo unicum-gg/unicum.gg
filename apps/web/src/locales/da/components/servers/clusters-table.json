@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Ingen klynge registreret endnu.",
+  "server": "Server",
+  "online": "Online",
+  "share": "Del",
+  "peak": "Top ({label})",
+  "average": "Gennemsnit ({label})",
+  "not-reported": "Ikke rapporteret",
+  "total": "I alt"
+}

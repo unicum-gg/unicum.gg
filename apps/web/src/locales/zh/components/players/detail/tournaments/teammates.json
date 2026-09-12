@@ -1,0 +1,4 @@
+{
+  "teammates": "{nickname}的队友",
+  "everyone-who-has-shared-a": "所有曾与{nickname}共同出现在锦标赛队伍名单中的玩家，按最常共同参赛排序。每一行显示他们最后一次共同参赛的时间。"
+}

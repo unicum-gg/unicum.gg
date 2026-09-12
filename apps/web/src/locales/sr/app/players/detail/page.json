@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Тенкови играча {name} ({region}), свако одиграно возило",
+    "description": "Сваки тенк који је играч {name} играо на региону {region}, са бројем битака, стопом победа, просечном штетом и WN8 за свако возило."
+  },
+  "achievements": {
+    "title": "Достигнућа играча {name} ({region}), зарађено медаља: {medals}",
+    "description": "{medals} медаља World of Tanks које је играч {name} зарадио на региону {region}, од медаља Kolobanov и Pool до почасних чинова и епских медаља, плус свака која му је још преостала за зарађивање."
+  },
+  "tournaments": {
+    "title": "Турнири играча {name} ({region})",
+    "description": "Сваки Wargaming турнир на који се играч {name} пријавио на региону {region}: тим за који је играо, формат и докле је стигао. Запис који Wargaming објављује само из перспективе турнира, никада играча."
+  },
+  "value": {
+    "title": "Вредност налога играча {name} ({region})",
+    "description": "Колико вреди World of Tanks налог играча {name} на региону {region}: кредити, злато и искуство уложени у гаражу."
+  },
+  "mode": {
+    "title": "{name}: статистика за режим {mode} ({region})",
+    "description": "{name} на {region} у режиму {mode}: bitke, проценат победа и рејтинзи за овај режим, уз поређење са основом за насумичне битке."
+  },
+  "overview": {
+    "title": "{name}: World of Tanks статистика ({region}), {battles} bitke, {winrate}% проценат победа",
+    "description": "{name} на {region}: {battles} bitke, {winrate}% проценат победа, {rating} рејтинг. Raščlanjivanje за сваки тенк, WN8, WNX и потпуна историја клана."
+  },
+  "locked": {
+    "title": "{name}: закључан World of Tanks nalog ({region})",
+    "description": "{name} ({region}) постоји, али је Wargaming закључао овај nalog, па његова World of Tanks статистика није доступна."
+  },
+  "empty": {
+    "title": "{name}: World of Tanks статистика играча ({region})",
+    "description": "World of Tanks статистика играча {name} ({region}): WN8, WNX рејтинзи, проценат победа, raščlanjivanje за сваки тенк и потпуна историја клана."
+  }
+}

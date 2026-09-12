@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Još nekoliko riječi: preostaje ih {count}.",
+  "at-winrate": "na {winrate}%",
+  "could-not-withdraw-that-try-again-in-a-momen": "Nije moguće povući to. Pokušajte ponovno za trenutak.",
+  "hide-the-detailed-axes": "Sakrij detaljne osi",
+  "not-enough-battles": "Niste dovoljno igrali ovaj tenk da bi se glas računao.",
+  "published-once-read": "Objavit će se nakon što ga moderator pročita. Vaše zvjezdice računaju se odmah.",
+  "rate-it-in-detail": "Detaljno ga ocijenite (opcionalno)",
+  "review": {
+    "none": "Ocjena spremljena.",
+    "queued": "Ocjena je spremljena. Vaša recenzija čeka moderatora.",
+    "published": "Ocjena je spremljena. Vaša recenzija već je objavljena.",
+    "pending": "Ocjena je spremljena. Vaša recenzija još čeka moderatora.",
+    "rejected": "Ocjena je spremljena. Vaša ranija recenzija nije objavljena, pa se računaju samo vaše zvjezdice.",
+    "closed": "Ocjena je spremljena. Pisano izražavanje mišljenja trenutačno je zatvoreno, pa tekst nije zadržan."
+  },
+  "save-failed": "Nije moguće spremiti to. Pokušajte ponovno za trenutak.",
+  "say-why-optional": "Recite zašto (opcionalno)",
+  "signed-with": "Potpisano s vaših {battles} bitki",
+  "submit-my-rating": "Pošalji moju ocjenu",
+  "too-many-edits": "To je mnogo promjena odjednom. Pričekajte minutu.",
+  "update-my-rating": "Ažuriraj moju ocjenu",
+  "what-it-is-good-at": "U čemu je dobar, u čemu nije i tko bi ga trebao igrati.",
+  "withdraw": "Odzovi",
+  "your-rating-has-been-withdrawn": "Vaša ocjena je povučena.",
+  "your-review-is-waiting-on": "Vaša recenzija čeka moderatora. Ovdje je možete vidjeti samo vi.",
+  "your-review-was-not-published": "Vaša recenzija nije objavljena. Vaše zvjezdice i dalje ulaze u prosjek."
+}

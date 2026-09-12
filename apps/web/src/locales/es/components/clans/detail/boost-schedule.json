@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Selecciona una reserva para previsualizar el horario.",
+  "schedule": "En tus días activos, se activa a las {times} (cada activación dura {hours} h) y cubre {window} en cuanto se alcanza el mínimo de jugadores conectados."
+}

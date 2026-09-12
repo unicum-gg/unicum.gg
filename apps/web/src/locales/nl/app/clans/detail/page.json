@@ -1,0 +1,25 @@
+{
+  "overview": {
+    "title": "World of Tanks-clan [{tag}] {name} ({region}), {members} leden",
+    "description": "World of Tanks-clan {name} [{tag}] op {region}: {members} leden, een volledige ledentabel met WN8- en WNX-scores, recente toe- en uittredingen en de volledige clangeschiedenis."
+  },
+  "stronghold": {
+    "title": "Clan [{tag}] {name}: stronghold statistieken ({region})",
+    "description": "Strongholdprestaties van {name} [{tag}] op {region}: scores voor schermutselingen en offensieven, gevechten en winstpercentage per lid."
+  },
+  "clan-wars": {
+    "title": "Clan [{tag}] {name}: clan wars statistieken ({region})",
+    "description": "Prestaties van {name} [{tag}] in clan wars op {region}: scores, gevechten en winstpercentage per lid in alle campagnes op de wereldkaart."
+  },
+  "tanks": {
+    "title": "Tanks van [{tag}] {name} ({region}), de voertuigen van de clan",
+    "description": "Alle voertuigen waarmee {name} [{tag}] op {region} heeft gespeeld, met het aantal gevechten, winstpercentage en gemiddelde schade, samengevoegd over alle clanleden."
+  },
+  "manage": {
+    "title": "Clan [{tag}] {name}: strongholdreserves ({region})",
+    "description": "Activeren en inplannen van de strongholdreserves van {name} [{tag}]. Alleen voor officieren."
+  },
+  "missing": {
+    "description": "[{tag}] World of Tanks-clan op {region}: ledentabel met WN8/WNX-scores, toe- en uittredingen, recente gevechten en de volledige clangeschiedenis."
+  }
+}

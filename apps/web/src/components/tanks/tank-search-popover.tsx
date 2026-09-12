@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
@@ -59,6 +60,8 @@ export function TankSearchPopover({
    */
   matchTriggerWidth?: boolean;
 }) {
+  const { t } = useTranslation("components/tanks/tank-search-popover");
+  const tCopy = t;
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   // Results are tagged with the query they belong to, so a stale set from a
@@ -168,11 +171,10 @@ export function TankSearchPopover({
         <div className="max-h-72 overflow-y-auto">
           {trimmed.length < MIN_QUERY_LENGTH ? (
             <div className="px-3 py-3 text-xs text-fd-muted-foreground">
-              Type at least {MIN_QUERY_LENGTH} characters.
-            </div>
+              {t("type-at-least-characters", { MINQUERYLENGTH: MIN_QUERY_LENGTH })}</div>
           ) : filtered.length === 0 ? (
             <div className="px-3 py-3 text-xs text-fd-muted-foreground">
-              {loading ? "Searching..." : "No matching tanks."}
+              {loading ? tCopy("searching") : tCopy("no-matching-tanks")}
             </div>
           ) : (
             filtered.map((t) => (

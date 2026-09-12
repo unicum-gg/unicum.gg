@@ -1,0 +1,28 @@
+{
+  "all": {
+    "intro": "{count} World of Tanks savaş arenasının tamamı. Kamuflaja ve oyun moduna göre filtrele, ardından mini haritası, boyutu, moda göre üs bayrakları ve doğma noktaları için bir harita aç.",
+    "title": "Tüm World of Tanks haritaları ({region}), her savaş arenası",
+    "description": "{region} üzerindeki her World of Tanks haritasına göz at: mini haritalar, boyut, kamuflaj ve desteklenen oyun modları, moda göre üs bayrakları ve doğma noktaları.",
+    "heading": "Tüm <accent>haritalar</accent>"
+  },
+  "battle-type": {
+    "intro": "{type} modunda oynanan {count} World of Tanks haritası, {blurb}. Mini haritası, boyutu, moda göre üs bayrakları ve doğma noktaları için bir harita aç.",
+    "title": "World of Tanks {type} haritaları ({region}), rotasyondaki her arena",
+    "description": "{region} üzerindeki {type} rotasyonunda bulunan her World of Tanks haritası: mini haritalar, boyut, kamuflaj ve desteklenen oyun modları, üs bayrakları ve doğma noktaları.",
+    "heading": "{type} <accent>haritalar</accent>"
+  },
+  "blurbs": {
+    "random": "standart 15’e 15 rotasyonu",
+    "battle_royale": "son tankın ayakta kaldığı mod",
+    "frontline": "30’a 30 büyük ölçekli mod",
+    "onslaught": "dereceli 7’ye 7 mod",
+    "onslaught_night": "karanlıkta, daha kısa görüş menziliyle oynanan dereceli 7v7 modudur, şu anda Ortak Test’te oynanabilir",
+    "grand_battle": "30’a 30 seviye X modu",
+    "clan_wars": "klan savaşları ve ilerlemeler",
+    "waffentrager": "Waffenträger etkinliği",
+    "last_stand": "Last Stand etkinliği",
+    "arcade": "arcade ve özel etkinlikler",
+    "story_mode": "hikâye odaklı operasyonlar",
+    "training": "eğitim odaları ve öğreticiler"
+  }
+}

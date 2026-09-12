@@ -1,0 +1,34 @@
+{
+  "stat": "통계",
+  "rows": {
+    "battles": "전투",
+    "tier": "단계",
+    "wins": "승리",
+    "losses": "패배",
+    "draws": "무승부",
+    "survived": "생존율",
+    "destroyed": "파괴된 전차",
+    "destruction-ratio": "격파 비율",
+    "spotted": "목격한 전차",
+    "damages": "피해량",
+    "track-damages": "추적 피해량",
+    "spotting-damages": "정찰 피해량",
+    "assisting-damages": "지원 피해량",
+    "combined-damages": "결합 피해량",
+    "base-capture": "기지 점령",
+    "base-defense": "기지 방어",
+    "experience": "일반 경험치",
+    "hit-rate": "명중률",
+    "personal-rating": "개인 성적",
+    "wtr": "World of Tanks 평점",
+    "wn7": "WN7",
+    "wn8": "WN8",
+    "wnx": "WNX"
+  },
+  "periods": {
+    "total": "전체",
+    "day": "지난 24시간",
+    "week": "지난 7일",
+    "month": "지난 30일"
+  }
+}

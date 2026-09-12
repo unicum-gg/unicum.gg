@@ -1,0 +1,12 @@
+{
+  "achievements": "{nickname}的成就",
+  "filter-all": "全部",
+  "filter-both": "两者",
+  "filter-earned": "已获得",
+  "filter-missing": "未获得",
+  "filter-obtainable": "可获得",
+  "filter-retired": "已退役",
+  "no-achievement-matches-these-filters": "没有成就符合这些筛选条件。",
+  "search-achievements": "搜 索 成就",
+  "search-among-n-achievements": "在{count}项成就中搜索"
+}

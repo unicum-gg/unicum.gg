@@ -1,0 +1,60 @@
+{
+  "columns-label": "열",
+  "groups": {
+    "general": "일반",
+    "combat": "전투"
+  },
+  "columns": {
+    "battles": {
+      "label": "전투",
+      "tip": "해당 전차에서 플레이한 총 전투 수"
+    },
+    "count": {
+      "label": "수",
+      "tip": "표본에 포함된 추적 플레이어 수"
+    },
+    "rating": {
+      "label": "랭킹 (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "해당 전차의 승률"
+    },
+    "playerWr": {
+      "label": "플레이어 WR",
+      "tip": "해당 전차를 운용한 플레이어들의 전체 평균 승률"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "전투당 평균 피해량"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "처치 / 사망 비율"
+    },
+    "assists": {
+      "label": "도움",
+      "tip": "평균 지원 피해량"
+    },
+    "hitPct": {
+      "label": "명중률",
+      "tip": "명중탄 / 발사 수"
+    },
+    "penPct": {
+      "label": "관통률",
+      "tip": "관통탄 / 명중탄"
+    },
+    "spots": {
+      "label": "조준",
+      "tip": "전투당 평균 발견 수"
+    },
+    "blocked": {
+      "label": "차단",
+      "tip": "장갑으로 막은 평균 피해량"
+    },
+    "survival": {
+      "label": "생존",
+      "tip": "생존한 전투 비율"
+    }
+  }
+}

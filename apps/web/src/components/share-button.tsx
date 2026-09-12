@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { ShareNetworkIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import {
@@ -25,6 +26,7 @@ export function ShareButton({
   nativeShareTitle?: string;
   ogImage?: string;
 }) {
+  const { t } = useTranslation("components/share-button");
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,13 +37,13 @@ export function ShareButton({
             <button
               type="button"
               onClick={() => setOpen(true)}
-              aria-label="Share"
+              aria-label={t("share")}
               className="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground hover:bg-fd-secondary hover:text-fd-foreground"
             >
               <ShareNetworkIcon className="size-3.5" weight="bold" />
             </button>
           </TooltipTrigger>
-          <TooltipContent>Share</TooltipContent>
+          <TooltipContent>{t("share")}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
       <ShareModal

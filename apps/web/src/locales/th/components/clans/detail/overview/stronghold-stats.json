@@ -1,0 +1,22 @@
+{
+  "stat": "สถิติ",
+  "periods": {
+    "total": "ทั้งหมด",
+    "day": "24 ชั่วโมงที่ผ่านมา",
+    "week": "7 วันที่ผ่านมา",
+    "month": "30 วันที่ผ่านมา"
+  },
+  "sections": {
+    "elo": "ELO ระดับ X ({advances} + {skirmish})",
+    "advances": "{advances} (15v15)",
+    "t10": "{skirmish} ระดับ X (7v7)",
+    "t8": "{skirmish} ระดับ VIII (7v7)",
+    "t6": "{skirmish} ระดับ VI (7v7)"
+  },
+  "rows": {
+    "elo": "ELO",
+    "sr": "SR",
+    "battles": "การรบ",
+    "winrate": "อัตราชนะ"
+  }
+}

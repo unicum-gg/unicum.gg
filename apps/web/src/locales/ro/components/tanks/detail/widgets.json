@@ -1,0 +1,12 @@
+{
+  "slot": "Slotul {n}",
+  "slot-filled": "Slotul {n}: {name}",
+  "consumable-slot": "Slot de consumabile {n}",
+  "consumable-slot-filled": "Slot de consumabile {n}: {name}",
+  "level": "Nivelul {n}",
+  "stock": "Stoc",
+  "specialize": "Clic pentru a specializa acest slot.",
+  "clear-specialization": "Clic pentru a elimina specializarea acestui slot.",
+  "crew-skills": "Abilități echipaj",
+  "shell-aria": "{name}: {damage} daune, {penetration} mm penetrare"
+}

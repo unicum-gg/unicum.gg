@@ -1,0 +1,13 @@
+{
+  "recruitment_officer": "Вербовчик",
+  "personnel_officer": "Щабен офицер",
+  "quartermaster": "Квартир-майстор",
+  "executive_officer": "Заместник-командир",
+  "recruit": "Новобранец",
+  "private": "Редник",
+  "commander": "Командир",
+  "reservist": "Резервист",
+  "combat_officer": "Полеви командир",
+  "junior_officer": "Младши офицер",
+  "intelligence_officer": "Разузнавач"
+}

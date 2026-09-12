@@ -1,0 +1,14 @@
+{
+  "clan": "Clan",
+  "player": "Παίχτης",
+  "members": "Μέλη",
+  "battles": "Μάχες",
+  "avg-damage": "Μέση ζημιά",
+  "avg-xp": "Μέσο XP",
+  "winrate": "Ποσοστό νικών %",
+  "result": "Αποτέλεσμα",
+  "tournament": "Τουρνουά",
+  "sr": "SR",
+  "srb": "SRB",
+  "elo": "ELO"
+}

@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "A sorsolás még nem történt meg. Ennek a csapatnak a csatái akkor jelennek meg itt, amikor a verseny elkezdődik.",
+  "each-map-is-played-twice": "Minden pályán kétszer játszanak, egyszer mindkét oldalról. Az utolsó pálya a döntő, amelyen egyszer játszanak.",
+  "first-battle-at": "Első csata: {when}",
+  "lost": "Vereség",
+  "matches": "Mérkőzések ({length})",
+  "never-played": "Ez a csapat soha nem játszott csatát. Regisztrált, de a sorsolás nem érte el, ami egy meg nem erősített névsorral történik.",
+  "no-maps-recorded": "Ehhez a csatához nincsenek rögzített pályák.",
+  "no-roster-recorded-for-this": "Ehhez a csapathoz nincs rögzített névsor.",
+  "of-players-on-the-day": "A napi {length} játékosból {members}",
+  "played-on-uncatalogued": "A(z) {maps} pályán játszották, amely nem szerepel a pályakatalógusban.",
+  "roster": "Kezdőcsapat ({length})",
+  "stage-group": "{stage} · {order}. csoport",
+  "team-1": "Csapat 1",
+  "team-2": "Csapat 2",
+  "tournaments": "Tornák",
+  "when-the-first-battle-started": "Az első csata kezdetének időpontja",
+  "won": "Nyert"
+}

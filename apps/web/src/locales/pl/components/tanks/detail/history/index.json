@@ -1,0 +1,12 @@
+{
+  "before-update": "Przed aktualizacją {version}",
+  "common-test": "Test ogólny",
+  "in-common-test-not-released": "Test ogólny, jeszcze przed premierą",
+  "introduced": "Wprowadzono",
+  "lifecycle": "Cykl życia",
+  "n-buffed": "Wzmocniono: {count}",
+  "n-nerfed": "Osłabiono: {count}",
+  "not-released-wargaming-can-still": "Jeszcze niewydany. Wargaming może zmienić lub wycofać dowolny z tych elementów przed wydaniem aktualizacji.",
+  "status": "Status",
+  "update": "Odśwież {version}"
+}

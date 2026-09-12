@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} Gevechten ermee",
+  "damage": "{damage} beschadig",
+  "n-marks": "{count, plural, one {# markering} other {# markeringen}}",
+  "no-written-opinions-yet-if": "Nog geen geschreven meningen. Als je genoeg Gevechten hebt, kan die van jou de eerste zijn.",
+  "win-rate": "{toFixed}% Winstpercentage",
+  "written-on": "geschreven in {gameVersion}"
+}

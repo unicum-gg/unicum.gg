@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "显示聊天",
+    "hide": "隐藏聊天",
+    "show-streamers": "显示主播"
+  },
+  "heading": "{name}：World of Tanks 玩家、军团和坦克数据",
+  "hide": "隐藏主播",
+  "player": "玩家",
+  "stream-language": "直播语言 · {name}",
+  "stream-language-alt": "直播语言：{name}",
+  "theater": {
+    "enter": "剧院模式",
+    "exit": "退出影院模式"
+  },
+  "title": "正在直播的顶尖玩家 ·",
+  "viewer-count": "{count} 位观众",
+  "viewers": "观众",
+  "watch": "在 Twitch 观看{nickname}"
+}

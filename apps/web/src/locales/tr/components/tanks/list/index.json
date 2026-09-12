@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Maliyet (kredi)",
+    "buyGold": "Maliyet (altın)",
+    "researchXp": "Araştırma XP",
+    "shellCost": "Mühimmat maliyeti",
+    "ammoCost": "Tam mühimmat maliyeti",
+    "class3": "3. Sınıf",
+    "class2": "2. Sınıf",
+    "class1": "1. Sınıf",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Mark (85%)",
+    "mark3": "3 Mark (95%)"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Wizualizacja",
+    "collision": "Kolizja",
+    "live": "Na żywo"
+  },
+  "centre": {
+    "on": "Wyśrodkuj pojazd",
+    "off": "Przywróć pojazd do położenia poza środkiem"
+  },
+  "hull-down": {
+    "on": "Pojazd w pozycji hull-down",
+    "off": "Wypoziomuj pojazd"
+  },
+  "tracks": {
+    "on": "Wpraw gąsienice w ruch",
+    "off": "Zatrzymaj gąsienice"
+  },
+  "textures": {
+    "on": "Tekstury wysokiej rozdzielczości",
+    "off": "Standardowy tekstury"
+  },
+  "reset": "Resetuj widok",
+  "style": "Wybierz styl",
+  "style-worn": "Styl: {name}",
+  "search-styles": "Szukaj stylów",
+  "colours": "Znaczenie kolorów",
+  "cinematic": {
+    "off": "Kamera filmowa: wyłączona",
+    "auto": "Kamera filmowa: podczas bezczynności",
+    "on": "Kamera filmowa: zawsze włączona"
+  },
+  "open-tank": "Otwórz inny czołg",
+  "open-tank-placeholder": "Otwórz czołg...",
+  "more-actions": "Więcej działań",
+  "marks-meaning": {
+    "0": "Brak odznak biegłości",
+    "1": "1 znaczek: wynik lepszy niż 65% graczy na tym czołgu",
+    "2": "Dwa znaczki: wynik lepszy niż 85% graczy",
+    "3": "Trzy znaczki: wynik lepszy niż 95% graczy"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Wypełnij okno",
+      "leave": "Wróć do strony"
+    },
+    "screen": {
+      "enter": "Wypełnij ekran",
+      "leave": "Opuść tryb pełnoekranowy"
+    }
+  },
+  "marks-count": {
+    "0": "Brak odznak biegłości",
+    "one": "1 odznaka biegłości",
+    "other": "Odznaki biegłości: {count}"
+  },
+  "compare-tank": "Porównaj z innym czołgiem",
+  "compare-tank-placeholder": "Porównaj z...",
+  "view-tooltips": {
+    "visual": "Czołg w postaci wyświetlanej przez grę",
+    "collision": "Grubość poszczególnych płyt pancerza",
+    "live": "Co zrobiłby wybrany pocisk"
+  },
+  "cinematic-tooltips": {
+    "off": "Kamera filmowa: wyłączona, widok pozostaje nieruchomy",
+    "auto": "Kamera filmowa: uruchamia się po 30 sekundach bezczynności",
+    "on": "Kamera filmowa: uruchamia się zawsze, gdy tylko przestaniesz sterować widokiem"
+  }
+}

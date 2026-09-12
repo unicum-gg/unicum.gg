@@ -1,0 +1,8 @@
+{
+  "what-players-think": "What players think of this tank",
+  "not-rated": "Not rated yet, be the first",
+  "votes": "{count} votes",
+  "votes-one": "{count} vote",
+  "stars": "{value} out of {max}",
+  "not-rated-short": "Not rated"
+}

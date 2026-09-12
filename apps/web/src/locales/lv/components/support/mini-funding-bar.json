@@ -1,0 +1,6 @@
+{
+  "label": "Kopienas finansēts",
+  "funded": "Finansēts par {pct}%",
+  "tooltip": "Atbalstītāji kopš palaišanas ir nodrošinājuši {received} no {goal}",
+  "tooltip-loading": "Kopienas finansēts, bez reklāmām"
+}

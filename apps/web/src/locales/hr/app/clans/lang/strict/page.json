@@ -1,0 +1,6 @@
+{
+  "title": "Isključivo klanovi igre World of Tanks na jeziku {language} ({region})",
+  "description": "Ljestvica klanova za {name} {region}, za klanove kojima je {language} deklarirano kao jedini jezik, rangirano prema WNX.",
+  "og-title": "Isključivo klanovi na jeziku {language}",
+  "og-subtitle": "Ljestvica za regiju {region}"
+}

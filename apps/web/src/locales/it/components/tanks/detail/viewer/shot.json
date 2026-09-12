@@ -1,0 +1,7 @@
+{
+  "firing": "Sparo {shell}, {pen} mm. Modifica il colpo",
+  "no-such-round": "{mark}: questo cannone non ne ha, quindi imposta tu gli angoli",
+  "own-round": "{mark}: il proiettile proprio di questo cannone, statistiche incluse",
+  "treat-it-as": "Consideralo come",
+  "treat-it-as-mark": "Consideralo {mark}"
+}

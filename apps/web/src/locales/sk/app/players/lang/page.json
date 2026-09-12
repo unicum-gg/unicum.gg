@@ -1,0 +1,6 @@
+{
+  "title": "Najlepší hráči World of Tanks podľa jazyka: {language} ({region})",
+  "description": "Rebríček hráčov pre jazyk {name} a región {region}, ktorých odhadovaný súbor jazykov podľa histórie klanu zahŕňa {language}, zoradený podľa WNX.",
+  "og-title": "Najlepší hráči podľa jazyka: {language}",
+  "og-subtitle": "{region} razpredelitev"
+}

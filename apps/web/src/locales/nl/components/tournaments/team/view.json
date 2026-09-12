@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "De loting heeft nog niet plaatsgevonden. De wedstrijden van dit team verschijnen hier zodra het toernooi begint.",
+  "each-map-is-played-twice": "Elke map wordt twee keer gespeeld, één keer vanaf elke kant. De laatste map is de beslissende en wordt één keer gespeeld.",
+  "first-battle-at": "Eerste gevecht, {when}",
+  "lost": "Verloren",
+  "matches": "Wedstrijden ({length})",
+  "never-played": "Dit team heeft nooit een wedstrijd gespeeld. Het schreef zich in, maar werd niet in de loting opgenomen. Dat gebeurt wanneer een spelerslijst onbevestigd blijft.",
+  "no-maps-recorded": "Geen maps geregistreerd voor deze wedstrijd.",
+  "no-roster-recorded-for-this": "Geen spelerslijst geregistreerd voor dit team.",
+  "of-players-on-the-day": "{members} van de {length} spelers op de dag zelf",
+  "played-on-uncatalogued": "Gespeeld op {maps}, die de kaartencatalogus niet carryt.",
+  "roster": "Lijst ({length})",
+  "stage-group": "{stage} · Groep {order}",
+  "team-1": "Team 1",
+  "team-2": "Team 2",
+  "tournaments": "Toernooien",
+  "when-the-first-battle-started": "Toen het eerste gevecht begon",
+  "won": "Gewonnen"
+}

@@ -1,0 +1,9 @@
+{
+  "battle-starts-at": "Battle starts at",
+  "https-www-youtube-com-watch": "https://www.youtube.com/watch?v=…&t=1h05m30s",
+  "optional": "(optional)",
+  "that-is-not-a-youtube": "That is not a YouTube video link.",
+  "use-a-time-like-1": "Use a time like 1:05:30, or leave it empty.",
+  "your-link-has-no-timestamp": "Your link has no timestamp. Scrub the preview above to the battle, or leave it if the video starts on it.",
+  "youtube-link": "YouTube link"
+}

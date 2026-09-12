@@ -1,0 +1,21 @@
+{
+  "title": "Escala de calificación",
+  "description": "Umbrales de color utilizados en todo el sitio para el porcentaje de victorias y la métrica de valoración seleccionada en la barra de navegación.",
+  "tier": "nivel",
+  "tiers": {
+    "top": "Mejores",
+    "excellent": "Excelente",
+    "super": "Súper",
+    "very-good": "Muy bueno",
+    "good": "Bueno",
+    "average": "Promedio",
+    "below-avg": "Por debajo del promedio",
+    "bad": "Malo",
+    "very-bad": "Muy malo"
+  },
+  "rating-colors": "Colores de calificación",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

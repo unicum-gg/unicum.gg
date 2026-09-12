@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "players": "Žaidėjai",
+    "clans": "Klanai",
+    "tanks": "Tankai",
+    "maps": "Žemėlapiai",
+    "tournaments": "Turnyrai",
+    "servers": "Serveriai"
+  },
+  "links": {
+    "top-players": {
+      "label": "Geriausi žaidėjai",
+      "description": "Viso laiko žaidėjų lyderių lentelė"
+    },
+    "players-onslaught": {
+      "description": "Reitinginio Prasiveržimo lyderių lentelė"
+    },
+    "players-steel-hunter": {
+      "description": "Mūšio karališkumo lyderių lentelė"
+    },
+    "top-clans": {
+      "label": "Geriausi klanai",
+      "description": "Viso laiko klanų lyderių lentelė"
+    },
+    "stronghold": {
+      "description": "Išpuolių reitingas"
+    },
+    "advances": {
+      "description": "X lygio 15 prieš 15 reitingas"
+    },
+    "tank-performances": {
+      "label": "Veiklos rezultatų",
+      "description": "Pergalių koeficientas ir žala pagal tanką"
+    },
+    "tank-specs": {
+      "label": "Specifikacijos",
+      "description": "Kiekvieno tanko statistika"
+    },
+    "tank-economics": {
+      "label": "Ekonomika",
+      "description": "Kreditų ir XP uždirbėjai"
+    },
+    "tank-moe": {
+      "description": "Žala kiekvienam ženklui"
+    },
+    "tank-mom": {
+      "description": "Meistriškumo ženklelio ribos"
+    },
+    "tank-changes": {
+      "label": "Pakeitimai",
+      "description": "Stiprinimai ir susilpninimai pagal atnaujinimą"
+    },
+    "tank-community": {
+      "label": "Bendruomenės reitingai",
+      "description": "Įvertinti juos turinčių žaidėjų"
+    },
+    "tank-videos": {
+      "label": "Vaizdo įrašai",
+      "description": "Bendruomenės žaidimo įrašai"
+    },
+    "all-tournaments": {
+      "label": "Turnyrai",
+      "description": "Kiekvienas vykstantis ir pasibaigęs turnyras"
+    },
+    "all-maps": {
+      "label": "Visos žemėlapiai",
+      "description": "Kiekvienas žaidimo žemėlapis"
+    },
+    "map-changes": {
+      "label": "Pakeitimai",
+      "description": "Žemėlapių pakeitimai pagal atnaujinimą"
+    },
+    "battle-type": {
+      "description": "{type} žemėlapiai"
+    },
+    "servers-population": {
+      "label": "Serverio populiacija",
+      "description": "Prisijungę žaidėjai dabar ir laikui bėgant"
+    }
+  }
+}

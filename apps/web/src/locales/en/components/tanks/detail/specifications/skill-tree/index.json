@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "Click a reachable node to unlock it; each applies its effect to the characteristics above. Colours group nodes by firepower, mobility, survivability and vehicle mechanics.",
+  "loadout-switch-no-effect": "In-battle loadout switch. No characteristic effect.",
+  "title": "Upgrades of the {tank}",
+  "vehicle-mechanic-no-effect": "Vehicle mechanic. No characteristic effect."
+}

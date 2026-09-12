@@ -1,0 +1,5 @@
+{
+  "battles": "{count} batailles",
+  "chart-label": "Batailles jouées par {granularity}, colorées selon {metric}",
+  "no-battles": "Aucune bataille"
+}

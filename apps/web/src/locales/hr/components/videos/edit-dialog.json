@@ -1,0 +1,11 @@
+{
+  "change-anything-that-is-wrong": "Promijeni sve što nije točno, uključujući vozilo. Spremanje vraća video u red čekanja za moderiranje, pa se video koji je vidljiv uklanja dok ponovno ne bude odobren.",
+  "correct-a-suggestion": "Ispravi prijedlog",
+  "could-not-load-that-suggestion": "Nije moguće učitati taj prijedlog. Pokušaj ponovno za trenutak.",
+  "link-expired": "Ta je poveznica istekla. Za novu pritisni Uredi na kartici u Discordu.",
+  "loading": "Učitavanje…",
+  "log-in": "Prijavi se",
+  "log-in-with-the-account": "Prijavi se računom kojim je predložen ovaj video kako bi ga ispravio.",
+  "no-suggestion-with-that-id": "Ne postoji prijedlog s tim ID-jem.",
+  "not-yours-to-correct": "Ovaj prijedlog nije tvoj za ispravljanje."
+}

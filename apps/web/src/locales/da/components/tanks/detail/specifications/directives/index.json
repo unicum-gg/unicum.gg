@@ -1,0 +1,9 @@
+{
+  "boosts": "Boosts {name}",
+  "directives": "Direktiver",
+  "directive-name": "{name} direktiv",
+  "grants-and-boosts": "Giver og forbedrer besætningsevnen, selv når den ikke er trænet.",
+  "grants-only": "Giver besætningsevnen i kampen (ingen angivet egenskab).",
+  "enhances-mounted": "Forbedrer den monterede {name}.",
+  "mount-to-use": "Montér {name} for at bruge dette direktiv."
+}

@@ -1,0 +1,158 @@
+{
+  "battle-types": {
+    "random": "Zufall",
+    "battle_royale": "Stählerner Jäger",
+    "frontline": "Frontlinie",
+    "onslaught": "Ansturm",
+    "onslaught_night": "{onslaught} Nacht",
+    "grand_battle": "Großgefecht",
+    "clan_wars": "Clan Wars",
+    "waffentrager": "Waffenträger",
+    "last_stand": "Letztes Gefecht",
+    "arcade": "Arcade-Automat",
+    "story_mode": "Storymodus",
+    "training": "Ausbildung"
+  },
+  "player-modes": {
+    "overall": "Zufällige Schlachten",
+    "skirmish": "Scharmützel",
+    "advances": "Vorstöße",
+    "grand": "Großgefechte",
+    "ranked": "Gewertete Gefechte",
+    "cw-x": "Clankriege X",
+    "cw-viii": "Clankriege VIII",
+    "cw-vi": "Clankriege VI",
+    "steel-hunter": "Stählerner Jäger",
+    "onslaught": "Ansturm"
+  },
+  "stronghold-tiers": {
+    "advances": "Vorstöße",
+    "t10": "Scharmützel T10",
+    "t8": "Scharmützel T8",
+    "t6": "Scharmützel T6"
+  },
+  "stronghold-periods": {
+    "24h": "Letzte 24 Stunden",
+    "7d": "Letzte 7 Tage",
+    "30d": "Letzte 30 Tage",
+    "overall": "Insgesamt"
+  },
+  "stronghold-sorts": {
+    "sr": "SR",
+    "srb": "SRB",
+    "elo": "ELO",
+    "battles": "Gefechte",
+    "winrate": "Gewinnrate"
+  },
+  "clan-boards": {
+    "advances": "Vorstöße",
+    "t10": "Scharmützel X",
+    "t8": "Scharmützel VIII",
+    "t6": "Scharmützel VI"
+  },
+  "map-modes": {
+    "standard": "Standard",
+    "encounter": "Begegnungsgefecht",
+    "assault": "Sturm",
+    "attack-defense": "Angriff/Verteidigung"
+  },
+  "map-camouflage": {
+    "summer": "Sommer",
+    "winter": "Winter",
+    "desert": "Wüste"
+  },
+  "map-poi": {
+    "1": "Artillerie-Hauptquartier",
+    "2": "Kommunikationszentrum",
+    "3": "Beobachtungsposten"
+  },
+  "tournament-modes": {
+    "ctf": "Standard",
+    "domination": "Begegnungsgefecht",
+    "assault2": "Angriff/Verteidigung",
+    "comp7": "Ansturm"
+  },
+  "battle-formats": {
+    "random": "Zufall",
+    "clan_wars": "Clan Wars",
+    "advances": "Vorstöße",
+    "skirmish": "Scharmützel",
+    "maneuvers": "Manöver",
+    "onslaught": "Ansturm",
+    "tournament": "Turnier"
+  },
+  "battle-results": {
+    "victory": "Sieg",
+    "defeat": "Niederlage",
+    "draw": "Unentschieden"
+  },
+  "spawn-directions": {
+    "north": "Norden",
+    "south": "Süden",
+    "east": "Osten",
+    "west": "Westen"
+  },
+  "shells": {
+    "ARMOR_PIERCING": "AP",
+    "ARMOR_PIERCING_CR": "APCR",
+    "ARMOR_PIERCING_HE": "AP-HE",
+    "HOLLOW_CHARGE": "HEAT",
+    "HIGH_EXPLOSIVE": "HE"
+  },
+  "tournament-statuses": {
+    "upcoming": "Bevorstehend",
+    "registration_started": "Registrierung geöffnet",
+    "registration_finished": "Registrierung geschlossen",
+    "running": "Läuft",
+    "finished": "Abschluss",
+    "complete": "Abgeschlossen"
+  },
+  "onslaught-tiers": {
+    "legend": "Legende",
+    "champion": "Meister",
+    "crest": "{mode} {tier}"
+  },
+  "vehicle-classes-short": {
+    "heavyTank": "Schwer",
+    "mediumTank": "Senior",
+    "lightTank": "Licht",
+    "AT-SPG": "TD",
+    "SPG": "SPG"
+  },
+  "vehicle-roles": {
+    "assault": "Sturm",
+    "break": "Durchbruch",
+    "support": "Unterstützung",
+    "universal": "Mehrzweck",
+    "sniper": "Scharfschütze",
+    "wheeled": "Radpanzer"
+  },
+  "mastery-badges": {
+    "class3": "3. Klasse",
+    "class2": "2. Klasse",
+    "class1": "1. Klasse",
+    "ace": "Ace Tanker"
+  },
+  "clan-modes": {
+    "random": "Zufällige Schlachten",
+    "stronghold": "Festung",
+    "skirmish": "Scharmützel",
+    "clan-wars": "Clan Wars"
+  },
+  "features": {
+    "stronghold": "Festung",
+    "skirmish": "Scharmützel",
+    "marks-of-excellence": "Erfolgsmarkierungen",
+    "marks-of-mastery": "Meisterschaftsmarken",
+    "personal-rating": "Persönliche Wertung",
+    "world-of-tanks-rating": "World of Tanks-Wertung",
+    "common-test": "Gemeinsamer Test",
+    "tournaments": "Turniere"
+  },
+  "marks": {
+    "1": "1 Mark",
+    "2": "2 Marks",
+    "3": "3 Marks",
+    "name": "Erfolgsmarkierungen"
+  }
+}

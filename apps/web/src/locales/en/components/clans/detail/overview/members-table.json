@@ -1,0 +1,11 @@
+{
+  "player": "Player",
+  "role": "Role",
+  "battles": "Battles",
+  "joined": "Joined",
+  "period": "30d {metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

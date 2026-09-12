@@ -1,0 +1,6 @@
+{
+  "title": "Najlepší hráči World of Tanks v režime {mode} ({region})",
+  "description": "Rebríček {name} pre región {region} v režime {mode}, kompetitívnom hodnotenom režime 7 proti 7 vo World of Tanks, zoradený podľa poradia priamo v hre.",
+  "og-title": "Najlepší hráči v režime {mode}",
+  "og-subtitle": "Rebríček hodnoteného režimu pre región {region}"
+}

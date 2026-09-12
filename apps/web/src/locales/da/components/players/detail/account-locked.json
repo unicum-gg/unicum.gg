@@ -1,0 +1,5 @@
+{
+  "title": "Konto låst",
+  "body": "{nickname} findes på {region}, men Wargaming har låst denne konto, så dens statistik ikke er tilgængelig.",
+  "back-to-home": "Tilbage til hjem"
+}

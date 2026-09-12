@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/format";
 // Column catalogue for the /tanks Specifications table. Drives both the table
 // (headers + cells + sorting) and the grouped column selector. Mirrors the
 // groups a player reads them in. Each column reads from a `TankSpecRow` (the flattened
@@ -60,12 +61,14 @@ export type TankSpecRow = {
   ammoCost: number | null;
 };
 
+/** Ids, not headings: the wording lives in `components/tanks/list/spec-columns`
+ * under `groups`, so the selector reads the same group in 27 languages. */
 export enum SpecGroup {
-  Firepower = "Firepower",
-  GunHandling = "Gun Handling",
-  Mobility = "Mobility",
-  Survivability = "Survivability",
-  Other = "Other",
+  Firepower = "firepower",
+  GunHandling = "gun-handling",
+  Mobility = "mobility",
+  Survivability = "survivability",
+  Other = "other",
 }
 
 export const SPEC_GROUP_ORDER: SpecGroup[] = [
@@ -77,105 +80,108 @@ export const SPEC_GROUP_ORDER: SpecGroup[] = [
 ];
 
 export type SpecColumn = {
+  /** Also the key of its wording in `components/tanks/list/spec-columns`. */
   key: string;
-  label: string;
   group: SpecGroup;
   // Cell text; "—" for null.
-  render: (s: TankSpecRow) => string;
+  /** Takes the reader's locale: a column definition is data at module scope,
+   * so the number formatting has to arrive from whoever renders it. */
+  render: (s: TankSpecRow, locale: string) => string;
   // Numeric value used for sorting (null sinks to the bottom).
   sortValue: (s: TankSpecRow) => number | null;
-  tip?: string;
+  /** Whether this column explains itself on hover. The sentence is in the
+   * locale file under `columns.<key>.tip`; this only says there is one, so a
+   * caller does not render a tooltip holding a raw key. */
+  tipped?: boolean;
   defaultVisible?: boolean;
 };
 
-const int = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const d1 = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const D1_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
-const d2 = new Intl.NumberFormat("en-US", {
+} as const;
+const D2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
+} as const;
 const DASH = "—";
-const fInt = (v: number | null) => (v != null ? int.format(v) : DASH);
-const fD2 = (v: number | null) => (v != null ? d2.format(v) : DASH);
-const fSec = (v: number | null) => (v != null ? `${d1.format(v)}s` : DASH);
-const fPct = (v: number | null) => (v != null ? `${d1.format(v * 100)}%` : DASH);
-const fDeg = (v: number | null) => (v != null ? `${int.format(v)}°` : DASH);
+const fInt = (v: number | null, locale: string) => (v != null ? numberFormat(locale, INT_FORMAT).format(v) : DASH);
+const fD2 = (v: number | null, locale: string) => (v != null ? numberFormat(locale, D2_FORMAT).format(v) : DASH);
+const fSec = (v: number | null, locale: string) => (v != null ? `${numberFormat(locale, D1_FORMAT).format(v)}s` : DASH);
+const fPct = (v: number | null, locale: string) => (v != null ? `${numberFormat(locale, D1_FORMAT).format(v * 100)}%` : DASH);
+const fDeg = (v: number | null, locale: string) => (v != null ? `${numberFormat(locale, INT_FORMAT).format(v)}°` : DASH);
 
 export const SPEC_COLUMNS: SpecColumn[] = [
   // Firepower
-  { key: "dpm", label: "DPM", group: SpecGroup.Firepower, render: (s) => fInt(s.dpm), sortValue: (s) => s.dpm, tip: "Damage per minute", defaultVisible: true },
-  { key: "damage", label: "Damage", group: SpecGroup.Firepower, render: (s) => fInt(s.damage), sortValue: (s) => s.damage, tip: "Alpha damage", defaultVisible: true },
-  { key: "moduleDamage", label: "Module Damage", group: SpecGroup.Firepower, render: (s) => fInt(s.moduleDamage), sortValue: (s) => s.moduleDamage },
-  { key: "splashRadius", label: "Splash Radius", group: SpecGroup.Firepower, render: (s) => (s.splashRadius != null ? `${d1.format(s.splashRadius)}m` : DASH), sortValue: (s) => s.splashRadius },
-  { key: "reload", label: "Reload", group: SpecGroup.Firepower, render: (s) => fSec(s.reload), sortValue: (s) => s.reload, tip: "Reload (full magazine for autoloaders)", defaultVisible: true },
-  { key: "rof", label: "Rate of Fire", group: SpecGroup.Firepower, render: (s) => fD2(s.rof), sortValue: (s) => s.rof, tip: "Rounds per minute" },
-  { key: "intraClipReload", label: "Intra-Clip Reload", group: SpecGroup.Firepower, render: (s) => fSec(s.intraClipReload), sortValue: (s) => s.intraClipReload, tip: "Time between shots in a magazine (autoloaders)" },
-  { key: "penetration", label: "Penetration", group: SpecGroup.Firepower, render: (s) => fInt(s.penetration), sortValue: (s) => s.penetration, tip: "Penetration (mm), default shell", defaultVisible: true },
-  { key: "caliber", label: "Caliber", group: SpecGroup.Firepower, render: (s) => fInt(s.caliber), sortValue: (s) => s.caliber, tip: "Shell caliber (mm)" },
-  { key: "shellVelocity", label: "Shell Velocity", group: SpecGroup.Firepower, render: (s) => fInt(s.shellVelocity), sortValue: (s) => s.shellVelocity, tip: "Shell velocity (m/s)", defaultVisible: true },
+  { key: "dpm", group: SpecGroup.Firepower, render: (s, locale) => fInt(s.dpm, locale), sortValue: (s) => s.dpm, tipped: true, defaultVisible: true },
+  { key: "damage", group: SpecGroup.Firepower, render: (s, locale) => fInt(s.damage, locale), sortValue: (s) => s.damage, tipped: true, defaultVisible: true },
+  { key: "moduleDamage", group: SpecGroup.Firepower, render: (s, locale) => fInt(s.moduleDamage, locale), sortValue: (s) => s.moduleDamage },
+  { key: "splashRadius", group: SpecGroup.Firepower, render: (s, locale) => (s.splashRadius != null ? `${numberFormat(locale, D1_FORMAT).format(s.splashRadius)}m` : DASH), sortValue: (s) => s.splashRadius },
+  { key: "reload", group: SpecGroup.Firepower, render: (s, locale) => fSec(s.reload, locale), sortValue: (s) => s.reload, tipped: true, defaultVisible: true },
+  { key: "rof", group: SpecGroup.Firepower, render: (s, locale) => fD2(s.rof, locale), sortValue: (s) => s.rof, tipped: true },
+  { key: "intraClipReload", group: SpecGroup.Firepower, render: (s, locale) => fSec(s.intraClipReload, locale), sortValue: (s) => s.intraClipReload, tipped: true },
+  { key: "penetration", group: SpecGroup.Firepower, render: (s, locale) => fInt(s.penetration, locale), sortValue: (s) => s.penetration, tipped: true, defaultVisible: true },
+  { key: "caliber", group: SpecGroup.Firepower, render: (s, locale) => fInt(s.caliber, locale), sortValue: (s) => s.caliber, tipped: true },
+  { key: "shellVelocity", group: SpecGroup.Firepower, render: (s, locale) => fInt(s.shellVelocity, locale), sortValue: (s) => s.shellVelocity, tipped: true, defaultVisible: true },
 
   // Gun handling
-  { key: "accuracy", label: "Accuracy", group: SpecGroup.GunHandling, render: (s) => fD2(s.accuracy), sortValue: (s) => s.accuracy, tip: "Dispersion at 100 m (lower is better)", defaultVisible: true },
-  { key: "aimTime", label: "Aim Time", group: SpecGroup.GunHandling, render: (s) => fSec(s.aimTime), sortValue: (s) => s.aimTime, defaultVisible: true },
-  { key: "dispMoving", label: "Dispersion Moving", group: SpecGroup.GunHandling, render: (s) => fD2(s.dispMoving), sortValue: (s) => s.dispMoving, tip: "Dispersion factor while moving" },
-  { key: "dispTankTraverse", label: "Dispersion Tank Traverse", group: SpecGroup.GunHandling, render: (s) => fD2(s.dispTankTraverse), sortValue: (s) => s.dispTankTraverse },
-  { key: "dispTurretTraverse", label: "Dispersion Turret Traverse", group: SpecGroup.GunHandling, render: (s) => fD2(s.dispTurretTraverse), sortValue: (s) => s.dispTurretTraverse },
-  { key: "dispAfterShot", label: "Dispersion After Firing", group: SpecGroup.GunHandling, render: (s) => fD2(s.dispAfterShot), sortValue: (s) => s.dispAfterShot },
-  { key: "dispWhileDamaged", label: "Dispersion While Damaged", group: SpecGroup.GunHandling, render: (s) => fD2(s.dispWhileDamaged), sortValue: (s) => s.dispWhileDamaged },
-  { key: "gunArc", label: "Gun Arc", group: SpecGroup.GunHandling, render: (s) => fDeg(s.gunArc), sortValue: (s) => s.gunArc, tip: "Horizontal gun traverse arc" },
+  { key: "accuracy", group: SpecGroup.GunHandling, render: (s, locale) => fD2(s.accuracy, locale), sortValue: (s) => s.accuracy, tipped: true, defaultVisible: true },
+  { key: "aimTime", group: SpecGroup.GunHandling, render: (s, locale) => fSec(s.aimTime, locale), sortValue: (s) => s.aimTime, defaultVisible: true },
+  { key: "dispMoving", group: SpecGroup.GunHandling, render: (s, locale) => fD2(s.dispMoving, locale), sortValue: (s) => s.dispMoving, tipped: true },
+  { key: "dispTankTraverse", group: SpecGroup.GunHandling, render: (s, locale) => fD2(s.dispTankTraverse, locale), sortValue: (s) => s.dispTankTraverse },
+  { key: "dispTurretTraverse", group: SpecGroup.GunHandling, render: (s, locale) => fD2(s.dispTurretTraverse, locale), sortValue: (s) => s.dispTurretTraverse },
+  { key: "dispAfterShot", group: SpecGroup.GunHandling, render: (s, locale) => fD2(s.dispAfterShot, locale), sortValue: (s) => s.dispAfterShot },
+  { key: "dispWhileDamaged", group: SpecGroup.GunHandling, render: (s, locale) => fD2(s.dispWhileDamaged, locale), sortValue: (s) => s.dispWhileDamaged },
+  { key: "gunArc", group: SpecGroup.GunHandling, render: (s, locale) => fDeg(s.gunArc, locale), sortValue: (s) => s.gunArc, tipped: true },
   {
     key: "depression",
-    label: "Gun Depression / Elevation",
     group: SpecGroup.GunHandling,
-    render: (s) =>
+    render: (s, locale) =>
       s.depression != null || s.elevation != null
-        ? `${s.depression != null ? `-${int.format(s.depression)}` : "—"}° / ${s.elevation != null ? `+${int.format(s.elevation)}` : "—"}°`
+        ? `${s.depression != null ? `-${numberFormat(locale, INT_FORMAT).format(s.depression)}` : "—"}° / ${s.elevation != null ? `+${numberFormat(locale, INT_FORMAT).format(s.elevation)}` : "—"}°`
         : DASH,
     sortValue: (s) => s.depression,
-    tip: "Gun depression / elevation",
+    tipped: true,
     defaultVisible: true,
   },
 
   // Mobility
   {
     key: "speed",
-    label: "Speed (Fwd / Bwd)",
     group: SpecGroup.Mobility,
-    render: (s) => (s.speedForward != null ? `${int.format(s.speedForward)} / ${s.speedBackward != null ? int.format(s.speedBackward) : "—"}` : DASH),
+    render: (s, locale) => (s.speedForward != null ? `${numberFormat(locale, INT_FORMAT).format(s.speedForward)} / ${s.speedBackward != null ? numberFormat(locale, INT_FORMAT).format(s.speedBackward) : "—"}` : DASH),
     sortValue: (s) => s.speedForward,
-    tip: "Top speed forward / backward (km/h)",
+    tipped: true,
     defaultVisible: true,
   },
-  { key: "hullTraverse", label: "Hull Traverse", group: SpecGroup.Mobility, render: (s) => (s.hullTraverse != null ? `${int.format(s.hullTraverse)}°/s` : DASH), sortValue: (s) => s.hullTraverse, defaultVisible: true },
-  { key: "turretTraverse", label: "Turret Traverse", group: SpecGroup.Mobility, render: (s) => (s.turretTraverse != null ? `${int.format(s.turretTraverse)}°/s` : DASH), sortValue: (s) => s.turretTraverse },
-  { key: "enginePower", label: "Power", group: SpecGroup.Mobility, render: (s) => fInt(s.enginePower), sortValue: (s) => s.enginePower, tip: "Engine power (hp)", defaultVisible: true },
-  { key: "powerWeight", label: "Power/Weight", group: SpecGroup.Mobility, render: (s) => fD2(s.powerWeight), sortValue: (s) => s.powerWeight, tip: "hp per ton", defaultVisible: true },
-  { key: "terrainHard", label: "Hard Terrain", group: SpecGroup.Mobility, render: (s) => fD2(s.terrainHard), sortValue: (s) => (s.terrainHard != null ? -s.terrainHard : null), tip: "Terrain resistance on hard ground (lower is better)" },
-  { key: "terrainMedium", label: "Medium Terrain", group: SpecGroup.Mobility, render: (s) => fD2(s.terrainMedium), sortValue: (s) => (s.terrainMedium != null ? -s.terrainMedium : null) },
-  { key: "terrainSoft", label: "Soft Terrain", group: SpecGroup.Mobility, render: (s) => fD2(s.terrainSoft), sortValue: (s) => (s.terrainSoft != null ? -s.terrainSoft : null) },
+  { key: "hullTraverse", group: SpecGroup.Mobility, render: (s, locale) => (s.hullTraverse != null ? `${numberFormat(locale, INT_FORMAT).format(s.hullTraverse)}°/s` : DASH), sortValue: (s) => s.hullTraverse, defaultVisible: true },
+  { key: "turretTraverse", group: SpecGroup.Mobility, render: (s, locale) => (s.turretTraverse != null ? `${numberFormat(locale, INT_FORMAT).format(s.turretTraverse)}°/s` : DASH), sortValue: (s) => s.turretTraverse },
+  { key: "enginePower", group: SpecGroup.Mobility, render: (s, locale) => fInt(s.enginePower, locale), sortValue: (s) => s.enginePower, tipped: true, defaultVisible: true },
+  { key: "powerWeight", group: SpecGroup.Mobility, render: (s, locale) => fD2(s.powerWeight, locale), sortValue: (s) => s.powerWeight, tipped: true, defaultVisible: true },
+  { key: "terrainHard", group: SpecGroup.Mobility, render: (s, locale) => fD2(s.terrainHard, locale), sortValue: (s) => (s.terrainHard != null ? -s.terrainHard : null), tipped: true },
+  { key: "terrainMedium", group: SpecGroup.Mobility, render: (s, locale) => fD2(s.terrainMedium, locale), sortValue: (s) => (s.terrainMedium != null ? -s.terrainMedium : null) },
+  { key: "terrainSoft", group: SpecGroup.Mobility, render: (s, locale) => fD2(s.terrainSoft, locale), sortValue: (s) => (s.terrainSoft != null ? -s.terrainSoft : null) },
 
   // Survivability
-  { key: "health", label: "Health", group: SpecGroup.Survivability, render: (s) => fInt(s.health), sortValue: (s) => s.health, tip: "Hit points", defaultVisible: true },
-  { key: "engineHealth", label: "Engine Health", group: SpecGroup.Survivability, render: (s) => fInt(s.engineHealth), sortValue: (s) => s.engineHealth },
-  { key: "engineFireChance", label: "Engine Fire Chance", group: SpecGroup.Survivability, render: (s) => fPct(s.engineFireChance), sortValue: (s) => (s.engineFireChance != null ? -s.engineFireChance : null) },
-  { key: "hullArmorFront", label: "Hull Armor (front)", group: SpecGroup.Survivability, render: (s) => fInt(s.hullArmorFront), sortValue: (s) => s.hullArmorFront, tip: "Front hull armor (mm)", defaultVisible: true },
-  { key: "turretArmorFront", label: "Turret Armor (front)", group: SpecGroup.Survivability, render: (s) => fInt(s.turretArmorFront), sortValue: (s) => s.turretArmorFront, tip: "Front turret armor (mm)", defaultVisible: true },
-  { key: "trackArmor", label: "Track Armor", group: SpecGroup.Survivability, render: (s) => fInt(s.trackArmor), sortValue: (s) => s.trackArmor },
-  { key: "trackHealth", label: "Track Health", group: SpecGroup.Survivability, render: (s) => fInt(s.trackHealth), sortValue: (s) => s.trackHealth },
-  { key: "trackRepairTime", label: "Track Repair Time", group: SpecGroup.Survivability, render: (s) => fSec(s.trackRepairTime), sortValue: (s) => s.trackRepairTime },
-  { key: "ammoRackHealth", label: "Ammo Rack Health", group: SpecGroup.Survivability, render: (s) => fInt(s.ammoRackHealth), sortValue: (s) => s.ammoRackHealth },
+  { key: "health", group: SpecGroup.Survivability, render: (s, locale) => fInt(s.health, locale), sortValue: (s) => s.health, tipped: true, defaultVisible: true },
+  { key: "engineHealth", group: SpecGroup.Survivability, render: (s, locale) => fInt(s.engineHealth, locale), sortValue: (s) => s.engineHealth },
+  { key: "engineFireChance", group: SpecGroup.Survivability, render: (s, locale) => fPct(s.engineFireChance, locale), sortValue: (s) => (s.engineFireChance != null ? -s.engineFireChance : null) },
+  { key: "hullArmorFront", group: SpecGroup.Survivability, render: (s, locale) => fInt(s.hullArmorFront, locale), sortValue: (s) => s.hullArmorFront, tipped: true, defaultVisible: true },
+  { key: "turretArmorFront", group: SpecGroup.Survivability, render: (s, locale) => fInt(s.turretArmorFront, locale), sortValue: (s) => s.turretArmorFront, tipped: true, defaultVisible: true },
+  { key: "trackArmor", group: SpecGroup.Survivability, render: (s, locale) => fInt(s.trackArmor, locale), sortValue: (s) => s.trackArmor },
+  { key: "trackHealth", group: SpecGroup.Survivability, render: (s, locale) => fInt(s.trackHealth, locale), sortValue: (s) => s.trackHealth },
+  { key: "trackRepairTime", group: SpecGroup.Survivability, render: (s, locale) => fSec(s.trackRepairTime, locale), sortValue: (s) => s.trackRepairTime },
+  { key: "ammoRackHealth", group: SpecGroup.Survivability, render: (s, locale) => fInt(s.ammoRackHealth, locale), sortValue: (s) => s.ammoRackHealth },
 
   // Other
-  { key: "weight", label: "Weight", group: SpecGroup.Other, render: (s) => (s.weight != null ? `${d1.format(s.weight / 1000)}t` : DASH), sortValue: (s) => s.weight, defaultVisible: true },
-  { key: "viewRange", label: "View Range", group: SpecGroup.Other, render: (s) => fInt(s.viewRange), sortValue: (s) => s.viewRange, tip: "View range (m)", defaultVisible: true },
-  { key: "radioRange", label: "Radio Range", group: SpecGroup.Other, render: (s) => fInt(s.radioRange), sortValue: (s) => s.radioRange, tip: "Signal range (m)" },
-  { key: "camoStill", label: "Stationary Camo", group: SpecGroup.Other, render: (s) => fPct(s.camoStill), sortValue: (s) => s.camoStill },
-  { key: "camoMoving", label: "Moving Camo", group: SpecGroup.Other, render: (s) => fPct(s.camoMoving), sortValue: (s) => s.camoMoving },
-  { key: "camoStillFiring", label: "Stationary Camo After Firing", group: SpecGroup.Other, render: (s) => fPct(s.camoStillFiring), sortValue: (s) => s.camoStillFiring },
-  { key: "camoMovingFiring", label: "Moving Camo After Firing", group: SpecGroup.Other, render: (s) => fPct(s.camoMovingFiring), sortValue: (s) => s.camoMovingFiring },
+  { key: "weight", group: SpecGroup.Other, render: (s, locale) => (s.weight != null ? `${numberFormat(locale, D1_FORMAT).format(s.weight / 1000)}t` : DASH), sortValue: (s) => s.weight, defaultVisible: true },
+  { key: "viewRange", group: SpecGroup.Other, render: (s, locale) => fInt(s.viewRange, locale), sortValue: (s) => s.viewRange, tipped: true, defaultVisible: true },
+  { key: "radioRange", group: SpecGroup.Other, render: (s, locale) => fInt(s.radioRange, locale), sortValue: (s) => s.radioRange, tipped: true },
+  { key: "camoStill", group: SpecGroup.Other, render: (s, locale) => fPct(s.camoStill, locale), sortValue: (s) => s.camoStill },
+  { key: "camoMoving", group: SpecGroup.Other, render: (s, locale) => fPct(s.camoMoving, locale), sortValue: (s) => s.camoMoving },
+  { key: "camoStillFiring", group: SpecGroup.Other, render: (s, locale) => fPct(s.camoStillFiring, locale), sortValue: (s) => s.camoStillFiring },
+  { key: "camoMovingFiring", group: SpecGroup.Other, render: (s, locale) => fPct(s.camoMovingFiring, locale), sortValue: (s) => s.camoMovingFiring },
 ];
 
 export const SPEC_COLUMN_BY_KEY: Record<string, SpecColumn> = Object.fromEntries(

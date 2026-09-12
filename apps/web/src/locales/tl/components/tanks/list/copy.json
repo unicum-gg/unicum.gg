@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Lahat ng {count} sasakyan ng World of Tanks sa {region}. Salain ayon sa tier, bansa, klase at papel, pagkatapos ay buksan ang isang tank para sa istatistika nito, pinakamahusay na mga manlalaro at mga inaasahang halaga.",
+    "title": "Lahat ng mga tangke ng World of Tanks ({region}), tingnan ang bawat sasakyan",
+    "description": "Tingnan ang bawat tank ng World of Tanks sa {region}: salain ayon sa tier, bansa, klase at papel, pagkatapos ay tingnan nang mas detalyado ang istatistika ng bawat tank, pinakamahusay na mga manlalaro at mga inaasahang halaga.",
+    "heading": "Lahat ng <accent>tanks</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, pagtagos, baluti, layo ng tanaw at mobility para sa lahat ng {count} sasakyan ng World of Tanks sa {region}. Mag-ayos ayon sa anumang kolum, pagkatapos ay salain ayon sa tier, bansa, klase at papel.",
+    "title": "Mga espesipikasyon ng tangke ng World of Tanks ({region}), ihambing ang bawat sasakyan",
+    "description": "Ihambing ang mga espesipikasyon ng bawat tank ng World of Tanks sa {region}: DPM, pagtagos, baluti, layo ng tanaw at mobility, na maaaring ayusin at salain ayon sa tier, bansa, klase at papel.",
+    "heading": "Mga espesipikasyon ng Tangke <accent>specifications</accent>"
+  },
+  "economics": {
+    "intro": "Mga gastos sa pagbili at pagkukumpuni, presyo ng bala at kinikitang credits para sa lahat ng {count} sasakyan ng World of Tanks sa {region}. Mag-ayos ayon sa anumang kolum, pagkatapos ay salain ayon sa tier, bansa, klase at papel.",
+    "title": "Ekonomiya ng mga tangke ng World of Tanks ({region}), mga gastos sa credits at XP",
+    "description": "Mga gastos sa credits at XP, pati presyo ng pagkukumpuni at bala para sa bawat tank ng World of Tanks sa {region}, na maaaring ayusin at salain ayon sa tier, bansa, klase at papel.",
+    "heading": "Ekonomiya ng <accent>tangke</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Moving average na pinsalang kailangan para sa isa, dalawa at tatlong marka sa lahat ng {count} sasakyan ng World of Tanks sa {region}. Mag-ayos ayon sa anumang kolum, pagkatapos ay salain ayon sa tier, bansa, klase at papel.",
+    "title": "Mga kinakailangan para sa mga marka ng kahusayan ng World of Tanks ({region})",
+    "description": "Pinsalang kailangan para sa isa, dalawa at tatlong marka ng kahusayan sa bawat tank ng World of Tanks sa {region}, na maaaring ayusin at salain ayon sa tier, bansa, klase at papel.",
+    "heading": "<accent>Mga marka ng kahusayan</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Mga XP threshold para sa Ace Tanker at insignia ng mastery para sa lahat ng {count} sasakyan ng World of Tanks sa {region}. Mag-ayos ayon sa anumang kolum, pagkatapos ay salain ayon sa tier, bansa, klase at papel.",
+    "title": "Mga kinakailangan para sa mga marka ng kasanayan ng World of Tanks ({region})",
+    "description": "Mga XP threshold para sa Ace Tanker at insignia ng mastery sa bawat tank ng World of Tanks sa {region}, na maaaring ayusin at salain ayon sa tier, bansa, klase at papel.",
+    "heading": "<accent>Mga marka ng kasanayan</accent>"
+  },
+  "videos": {
+    "intro": "{count} mga laban na iniugnay ng komunidad sa {region}, bawat isa ay bubukas sa segundo kung kailan ito magsisimula. Iminungkahi mula sa mga pahina ng tank at sinuri bago lumabas dito.",
+    "title": "Mga video ng gameplay ng World of Tanks ({region})",
+    "description": "Mga laban ng World of Tanks sa {region} na iminungkahi ng komunidad, bawat isa ay bubukas sa segundo kung kailan ito magsisimula: ang tank na nilaro, ang mapa, ang panig nito at kung paano nagtapos ang labanan.",
+    "heading": "Mga video ng <accent>Gameplay</accent>"
+  }
+}

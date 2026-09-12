@@ -1,0 +1,12 @@
+{
+  "slot": "Espacio {n}",
+  "slot-filled": "Ranura {n}: {name}",
+  "consumable-slot": "Ranura de consumible {n}",
+  "consumable-slot-filled": "Ranura de consumible {n}: {name}",
+  "level": "Nivel {n}",
+  "stock": "Stock",
+  "specialize": "Haz clic para especializar esta ranura.",
+  "clear-specialization": "Haz clic para eliminar la especialización de esta ranura.",
+  "crew-skills": "Habilidades de la Tripulación",
+  "shell-aria": "{name}: {damage} de daño, {penetration} mm de penetración"
+}

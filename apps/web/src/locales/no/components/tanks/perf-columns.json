@@ -1,0 +1,60 @@
+{
+  "columns-label": "Kolonner",
+  "groups": {
+    "general": "Generell",
+    "combat": "Kamp"
+  },
+  "columns": {
+    "battles": {
+      "label": "Kamper",
+      "tip": "Totalt antall spillte kamper med stridsvognen"
+    },
+    "count": {
+      "label": "Antall",
+      "tip": "Antall registrerte spillere i utvalget"
+    },
+    "rating": {
+      "label": "Vurdering (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Seiersrate med stridsvognen"
+    },
+    "playerWr": {
+      "label": "Spiller WR",
+      "tip": "Gjennomsnittlig samlet seiersrate for spillere som kjører den"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Gjennomsnittlig skade per spill"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Drap / dødsfall-forhold"
+    },
+    "assists": {
+      "label": "Assister",
+      "tip": "Gjennomsnittlig assistert skade"
+    },
+    "hitPct": {
+      "label": "Treff %",
+      "tip": "Treff / skudd"
+    },
+    "penPct": {
+      "label": "Gjennomtrengning %",
+      "tip": "Penetrasjoner / treff"
+    },
+    "spots": {
+      "label": "Funn",
+      "tip": "Gjennomsnittlig antall oppdagede fiender per spill"
+    },
+    "blocked": {
+      "label": "Blokkerte",
+      "tip": "Gjennomsnittlig skade blokkert av panser"
+    },
+    "survival": {
+      "label": "Overlevelse",
+      "tip": "Andel kamper overlevd"
+    }
+  }
+}

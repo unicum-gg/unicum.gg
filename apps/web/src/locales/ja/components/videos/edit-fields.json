@@ -1,0 +1,14 @@
+{
+  "close": "閉じる",
+  "combined-damage": "総合ダメージ",
+  "damage-dealt-plus-assisted-as": "戦闘後画面では合算されるため、与えたダメージとアシストダメージの合計です。",
+  "format": "フォーマット",
+  "no-reason-recorded": "理由が記録されていないため、再送信する前にDiscordで確認する価値があります。",
+  "players-per-team": "チームごとのプレイヤー数",
+  "save": "保存",
+  "saved-it-is-in-the": "保存しました。モデレーションキューに入り、モデレーターが確認するとサイトに表示されます。",
+  "saving": "保存中…",
+  "tier": "Tier",
+  "turned-down": "却下されました",
+  "what-was-played": "プレイされた内容"
+}

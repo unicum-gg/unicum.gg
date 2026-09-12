@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Co si hráči myslí o tomto tanku",
+  "not-rated": "Zatím bez hodnocení, buďte první",
+  "votes": "{count} hlasů",
+  "votes-one": "{count} hlasovat",
+  "stars": "{value} z {max}",
+  "not-rated-short": "Neohodnoceno"
+}

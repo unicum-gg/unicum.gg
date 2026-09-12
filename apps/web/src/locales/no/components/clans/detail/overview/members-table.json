@@ -1,0 +1,11 @@
+{
+  "player": "Spiller",
+  "role": "Rolle",
+  "battles": "Kamper",
+  "joined": "Blandet inn",
+  "period": "30d {metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

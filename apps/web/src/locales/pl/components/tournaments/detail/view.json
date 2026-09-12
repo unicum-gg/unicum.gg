@@ -1,0 +1,11 @@
+{
+  "closes": "Zamknij {when}",
+  "map-pool": "Pula map",
+  "place": "Miejsce",
+  "prize": "Nagroda",
+  "prizes": "Nagrody",
+  "qualified": "Zakwalifikowani ({count})",
+  "register": "Zarejestruj się",
+  "tournaments": "Turnieje",
+  "winner": "{count, plural, one {Zwycięzca} few {Zwycięzcy} many {Zwycięzcy} other {Zwycięzcy}}"
+}

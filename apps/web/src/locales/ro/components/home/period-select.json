@@ -1,0 +1,7 @@
+{
+  "label": "Perioada clasamentului",
+  "periods": {
+    "overall": "General",
+    "30d": "Ultimele 30 de zile"
+  }
+}

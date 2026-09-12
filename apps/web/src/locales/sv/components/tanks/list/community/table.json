@@ -1,0 +1,6 @@
+{
+  "fun": "Hur mycket spelare gillar den, vilket ofta inte är samma sak.",
+  "hype": "Var communityn placerar den inom sin nivå, minus dess placering enligt vinstfrekvensen. Sortera fallande för spelets mest överskattade stridsvagnar och stigande för de mest underskattade.",
+  "overall": "Hur bra spelare tycker att den är. Placeringen baseras på ett medelvärde som dragits mot webbplatsens genomsnitt, så att en stridsvagn med fyra röster inte kan placeras högre än en med fyrahundra.",
+  "votes": "Avgivna röster, var och en från ett konto som faktiskt har spelat stridsvagnen."
+}

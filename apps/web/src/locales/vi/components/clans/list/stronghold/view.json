@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Chưa có dữ liệu. Hãy quay lại sau khi các Clan được làm mới.",
+  "heading": "Các Clan <accent>{tier}</accent> hàng đầu",
+  "blurb": "Bảng xếp hạng {region}, xếp hạng theo {sort} trên tất cả Các Clan được theo dõi trong {format} (tối thiểu {battles} trận đấu).",
+  "blurb-period": "Bảng xếp hạng {region}, xếp hạng theo {sort} trên tất cả Các Clan được theo dõi trong {format} trong {period} (tối thiểu {battles} trận đấu).",
+  "format-advances": "Tiến công (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "{count} Clan {tier} hàng đầu ·"
+}

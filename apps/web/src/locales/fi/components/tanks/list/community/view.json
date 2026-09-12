@@ -1,0 +1,7 @@
+{
+  "every-tank-rated-out-of": "Jokainen panssarivaunu on arvioitu asteikolla yhdestä viiteen sitä pelaavien ihmisten toimesta. Ääni lasketaan vain tililtä, jolla ajoneuvoa on todella käytetty taistelussa, mikä erottaa tämän kyselystä, johon voi vastata kuka tahansa.",
+  "no-tank-has-been-rated": "Yhtäkään panssarivaunua ei ole vielä arvioitu. Ensimmäiset äänet annetaan panssarivaunujen sivuilla Yhteisö-kohdassa.",
+  "think": "ajatella",
+  "title": "Mitä pelaajat {think}",
+  "votes-across-vehicles": "{totalVotes} ääntä {ratedTanks} ajoneuvosta."
+}

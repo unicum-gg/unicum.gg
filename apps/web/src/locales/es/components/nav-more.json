@@ -1,0 +1,37 @@
+{
+  "label": "Más",
+  "items": {
+    "tournaments": {
+      "label": "Torneos",
+      "description": "Cuadros, plantillas y resultados, región por región"
+    },
+    "servers": {
+      "label": "Servidores",
+      "description": "Jugadores conectados, ahora y a lo largo del tiempo"
+    },
+    "bot": {
+      "label": "bot de Discord",
+      "description": "Estadísticas de jugadores, clanes y tanques mediante comandos de barra diagonal"
+    },
+    "mcp": {
+      "label": "servidor MCP",
+      "description": "Conecta Claude, ChatGPT o cualquier cliente MCP"
+    },
+    "api": {
+      "label": "API",
+      "description": "Gratis: API REST pública, sin necesidad de clave"
+    },
+    "badges": {
+      "label": "Insignias",
+      "description": "Todos los emblemas que puede conseguir un jugador o un clan y cómo conseguirlos"
+    },
+    "glossary": {
+      "label": "Glosario",
+      "description": "Todos los términos de World of Tanks, explicados"
+    },
+    "support": {
+      "label": "Apóyanos",
+      "description": "Mantén {name} Gratis, con código abierto y sin anuncios"
+    }
+  }
+}

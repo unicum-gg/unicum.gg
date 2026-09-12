@@ -1,0 +1,60 @@
+{
+  "columns-label": "Kolone",
+  "groups": {
+    "general": "Opšte",
+    "combat": "Борба"
+  },
+  "columns": {
+    "battles": {
+      "label": "Borbi",
+      "tip": "Укупан број одиграних игара на тенку"
+    },
+    "count": {
+      "label": "Broj",
+      "tip": "Број праћених igrači у узорку"
+    },
+    "rating": {
+      "label": "Rejting (WN)"
+    },
+    "wr": {
+      "label": "WR",
+      "tip": "Стопа победа на тенку"
+    },
+    "playerWr": {
+      "label": "WR igrača",
+      "tip": "Prosek укупне стопе победа igrači који га возе"
+    },
+    "dpg": {
+      "label": "DPG",
+      "tip": "Prosečna штета по игри"
+    },
+    "kdr": {
+      "label": "KDR",
+      "tip": "Однос убистава / смрти"
+    },
+    "assists": {
+      "label": "Pomoći",
+      "tip": "Prosečna асистирана штета"
+    },
+    "hitPct": {
+      "label": "Pogodak %",
+      "tip": "Погоци / хици"
+    },
+    "penPct": {
+      "label": "Probijanje %",
+      "tip": "Пробоји / погоци"
+    },
+    "spots": {
+      "label": "Pronađeno",
+      "tip": "Prosečno откривања по игри"
+    },
+    "blocked": {
+      "label": "Blokirano",
+      "tip": "Prosečna штета блокирана оклопом"
+    },
+    "survival": {
+      "label": "Opstanak",
+      "tip": "Удео преживљених битака"
+    }
+  }
+}

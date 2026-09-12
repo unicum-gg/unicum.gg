@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "{battles} strider med den",
+  "damage": "{damage} Skada",
+  "n-marks": "{count, plural, one {# märke} other {# märken}}",
+  "no-written-opinions-yet-if": "Inga skriftliga omdömen ännu. Om du har tillräckligt många strider kan ditt bli det första.",
+  "win-rate": "{toFixed}% vinnande hastighet",
+  "written-on": "skrivet under {gameVersion}"
+}

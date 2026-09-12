@@ -1,0 +1,13 @@
+{
+  "assists": "Assistenze",
+  "close": "Chiudi",
+  "damage": "Danno",
+  "in-the-queue": "È in coda e comparirà in questa scheda dopo che un moderatore l’avrà esaminato.",
+  "optional": "(opzionale)",
+  "paste-a-youtube-link": "Incolla un link YouTube, poi imposta il momento esatto in cui inizia la battaglia. Chiunque lo apra arriverà a quel secondo, quindi un suggerimento con un’indicazione temporale errata viene rifiutato durante la revisione.",
+  "sending": "Invio…",
+  "suggest": "Suggerisci",
+  "suggest-a-video": "Suggerisci un video",
+  "suggest-another": "Suggerisci un altro",
+  "suggestion-sent": "Suggerimento inviato"
+}

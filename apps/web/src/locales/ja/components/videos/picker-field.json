@@ -1,0 +1,14 @@
+{
+  "clan": "クラン",
+  "clear-the-field": "{label}をクリア",
+  "credited-on-the-clan-s": "クラン専用ページに掲載されます。",
+  "none": "なし",
+  "optional": "(オプショナル)",
+  "pick-the-vehicle": "車両を選択",
+  "search-for-a-clan": "クランを検索",
+  "search-for-a-vehicle": "車両を検索",
+  "search-tank": "戦車を検索...",
+  "tank": "戦車",
+  "tank-hint-optional": "戦術はそのマップに紐づくため、動画がその車両についても扱っている場合にのみ名前を指定する価値があります。",
+  "tank-hint-required": "ランダム戦は、プレイした車両から検索されます。"
+}

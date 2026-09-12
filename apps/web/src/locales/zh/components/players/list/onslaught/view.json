@@ -1,0 +1,35 @@
+{
+  "heading": "<accent>{mode}</accent>中的顶尖玩家",
+  "intro": "{mode}是World of Tanks中的X级竞技7v7排位模式。{region}排行榜数据直接来自游戏自己的排名。",
+  "season": {
+    "range": "{start}至{end}",
+    "final": "最终排名",
+    "live": "进行中的赛季",
+    "updated": "更新于 {when}"
+  },
+  "board": "{mode}中排名前{count}的玩家",
+  "columns": {
+    "player": "玩家",
+    "rank": "段位",
+    "battles": "战斗场次",
+    "rating": "评级点数"
+  },
+  "alias": "（显示为 {nickname}）",
+  "ranks": {
+    "title": "段位",
+    "meaning": "说明",
+    "tier": "等级",
+    "intro": "通过赢得战斗提升{mode}的等级：每场胜利都会根据你的表现奖励等级点数。{champion}是仅凭点数可以达到的最高等级，达到该等级即可进入排行榜。{legend}不是固定门槛，而是{champion}中评分最高的一部分玩家，因此门槛会随整体水平变化（同分时按战斗场次决定排名）。准确的{legend}和{champion}门槛取自当前赛季，并标注在排行榜上。",
+    "legend-blurb": "评分最高的{champion}玩家。游戏每个赛季将其限制在排行榜上的固定名次，因此人数会随赛季和地区变化，而不是固定点数目标。跌出最后一名{legend}后，就会降回{champion}。",
+    "champion-blurb": "仅凭等级点数可以提升到的最高等级，也是进入排行榜的门槛。每名排位玩家至少达到{champion}。"
+  },
+  "race": {
+    "title-live": "当前需要达到什么水平",
+    "title-ended": "本赛季表现如何",
+    "legend-cutoff": "{legend} 分数线",
+    "champion-cutoff": "{champion} 分数线",
+    "ranked-players": "排名玩家",
+    "rating-points": "评级点数",
+    "rank-cutoffs": "段位截止分数"
+  }
+}

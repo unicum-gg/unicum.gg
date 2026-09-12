@@ -1,0 +1,6 @@
+{
+  "title": "Najlepsi gracze trybu battle royale {mode} w World of Tanks ({region})",
+  "description": "Klasyfikacja {name} dla regionu {region} w trybie {mode}, trybie battle royale w World of Tanks, z pozycjami ustalonymi według naszego wskaźnika HR (średnia liczba PD + współczynnik zwycięstw).",
+  "og-title": "Najlepsi gracze trybu {mode}",
+  "og-subtitle": "Klasyfikacja battle royale dla regionu {region}"
+}

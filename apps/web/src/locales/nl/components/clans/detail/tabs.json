@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Overzicht",
+    "tanks": "Tanks",
+    "videos": "Video’s",
+    "tournaments": "Toernooien",
+    "manage": "Beheer"
+  },
+  "section-count": "{section} ({count})"
+}

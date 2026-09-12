@@ -1,0 +1,8 @@
+{
+  "how-players-compare": "Kaip palyginti {region} žaidėjus",
+  "median-n": "mediana {value}",
+  "metric-rating": "{metric} reitingas",
+  "tracked-accounts-with-at-least": "{players} stebimos paskyros, turinčios bent {minBattles} mūšių. Spalvos yra tos pačios juostos, kurias svetainė naudoja visur kitur.",
+  "win-rate": "Pergalės rodiklis",
+  "win-rate-distribution-across-the-region-s-tr": "Pergalių procento pasiskirstymas tarp regione stebimų žaidėjų"
+}

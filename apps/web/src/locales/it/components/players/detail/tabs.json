@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "Panoramica",
+    "tanks": "Carri",
+    "sessions": "Sessioni",
+    "achievements": "Traguardi",
+    "tournaments": "Tornei",
+    "value": "Valore"
+  },
+  "section-count": "{section} ({count})",
+  "beta": "beta"
+}

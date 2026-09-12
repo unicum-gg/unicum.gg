@@ -1,0 +1,9 @@
+{
+  "all": "Allen",
+  "camouflage-map": "{camouflage}-map",
+  "modes": "{count, plural, one {# speltype} other {# speltypen}}",
+  "no-maps-match-your-filters": "Geen Kaarten komen overeen met je filters.",
+  "search": "Zoeken tussen {count} Kaarten",
+  "search-label": "Kaarten zoeken",
+  "special-map": "Actie kaart"
+}

@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "por encima del {value}% de los tanques valorados de su nivel",
+  "measured-hint": "Posición de su tasa de victorias entre los mismos tanques",
+  "not-enough-votes-yet-to": "Aún no hay suficientes votos para comparar el veredicto de la comunidad con el rendimiento real del tanque.",
+  "perceived-hint": "Posición que le da la comunidad entre los tanques de nivel {tier} valorados",
+  "verdict": {
+    "overrated": "La comunidad lo valora muy por encima de su rendimiento real.",
+    "fair": "La reputación y los resultados coinciden en este caso.",
+    "underrated": "Rinde mejor de lo que se le reconoce."
+  },
+  "what-players-think": "Lo que piensan los jugadores",
+  "what-the-data-says": "Lo que dicen los datos"
+}

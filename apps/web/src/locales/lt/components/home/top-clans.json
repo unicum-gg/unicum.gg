@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Rodomi geriausi {region} klanai, turintys daugiau nei 50 narių su mūšiais, reitinguojami pagal vidutinį {metric}.",
+    "month": "Rodomi geriausi {region} klanai, turintys daugiau nei 50 narių su mūšiais, reitinguojami pagal {metric} per praėjusias 30 dienų, mažiausiai 15 aktyvių narių."
+  },
+  "updated": "Atnaujinta {when}.",
+  "empty": "Šiame regione klanų duomenų dar nėra.",
+  "rank": "#",
+  "clan": "Klanas",
+  "average": "Vid. {metric}"
+}

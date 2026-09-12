@@ -1,0 +1,11 @@
+{
+  "player": "Gracz",
+  "role": "Rola",
+  "battles": "Bitwy",
+  "joined": "Dołączył",
+  "period": "30 dni {metric}",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wr": "WR",
+  "wnx": "WNX"
+}

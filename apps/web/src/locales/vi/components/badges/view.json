@@ -1,0 +1,48 @@
+{
+  "board-leaderboard": "Bảng Xếp Hạng {board}",
+  "carried-beside-a-clan-tag": "Được gánh đội bên cạnh thẻ Clan. Một biểu trưng cấp bậc là một vị trí trong một cuộc thi, con số trên đó là vị trí đó, màu sắc cho biết bảng nào. Xếp hạng không kiếm được biểu trưng nào, vì có vị trí cao trên WN8 không phải là điều một Clan giành được.",
+  "clan-badges": "Huy hiệu của Clan",
+  "clan-board": {
+    "name": "{board}, top {rank}",
+    "how": "Một vị trí trong top {rank} của {board}. Được giữ khi Clan vẫn giữ vị trí đó và bị mất khi không còn giữ được."
+  },
+  "clan-overflow": "A Clan giữ hơn ba vị trí sẽ gộp phần còn lại vào một biểu trưng {plus}, theo thứ tự tốt nhất trước, để thẻ vẫn dễ đọc. Di chuột lên đó sẽ hiển thị tên của chúng.",
+  "featured-tournament-winner": {
+    "name": "Người chiến thắng Giải đấu nổi bật",
+    "how": "Tương tự, nhưng chiến thắng tại một sự kiện được Wargaming đánh dấu là Nổi bật. Màu vàng thay vì thép, chính xác như ở phía người chơi."
+  },
+  "heading": "Mọi {badge} và cách kiếm được huy hiệu đó",
+  "heading-accent": "huy hiệu",
+  "marks-carried-beside-a-nickname": "Các dấu hiệu được gánh đội bên cạnh một biệt danh ở mọi nơi biệt danh đó xuất hiện trên {NAME}: bảng xếp hạng, danh sách Clan, tìm kiếm và nhánh đấu giải đấu.",
+  "n-badges": "{count} huy hiệu",
+  "onslaught-champion": {
+    "name": "Quán quân Cường kích",
+    "how": "Đã đạt hạng Champion trong Cường kích, điều kiện cần để xuất hiện trên {standings}. Sau đó vẫn được giữ lại: chỉ số đánh giá giảm xuống dưới ngưỡng sẽ thay thế vị trí, không phải việc từng nắm giữ."
+  },
+  "onslaught-legend": {
+    "name": "Huyền thoại Cường kích",
+    "how": "Giữ một vị trí trong ngưỡng Legend của mùa giải, đây là một vị trí chứ không phải điểm số: tại một thời điểm chỉ có một số lượng giới hạn, và ngưỡng được đánh giá dựa trên mùa giải mà vị trí đó được giữ. Màu tím thay vì xanh thép, chính là màu mà bảng xếp hạng tô cho Legend."
+  },
+  "player-badges": "Huy hiệu của Người chơi",
+  "player-overflow": "A người chơi gánh đội hơn ba biểu trưng sẽ gộp phần còn lại vào một biểu trưng {plus}, theo thứ tự ở trên, để biệt danh vẫn dễ đọc trong bảng. Di chuột lên đó sẽ hiển thị tên của chúng, và mỗi biểu trưng vẫn liên kết đến nơi biểu trưng riêng của nó từng liên kết.",
+  "ranked-standings": "bảng xếp hạng có thứ hạng",
+  "streamer": {
+    "name": "Streamer",
+    "how": "Một kênh Twitch được liên kết với tài khoản. Kết nối Twitch trên hồ sơ của bạn để xác nhận, và biểu trưng sẽ liên kết đến kênh của bạn. Biểu trưng cho biết bạn có đang trực tiếp hay không."
+  },
+  "streamer-who-is-on-air": "Một streamer đang phát trực tiếp cũng có một nhãn LIVE màu đỏ. Nhãn đó không được kiếm được và không được giữ lại: nó xuất hiện khi buổi phát bắt đầu và biến mất khi kết thúc, vì vậy không bao giờ bị gộp.",
+  "support-subscription": "đăng ký hỗ trợ",
+  "supporter": {
+    "name": "Người hỗ trợ"
+  },
+  "supporter-note": "Một {link} đang hoạt động, được công khai. Những người ủng hộ chọn ẩn danh sẽ không có huy hiệu, theo lựa chọn của chính họ.",
+  "the-marks-a-player-or": "Các dấu hiệu mà một người chơi hoặc một Clan có thể gánh đội trên {NAME}, điều mỗi dấu hiệu nói lên và chính xác điều kiện để kiếm được nó.",
+  "tournament-winner": {
+    "name": "Người thắng Giải đấu",
+    "how": "Một đội được ghi nhận thuộc Clan đã chiến thắng một giải đấu. Wargaming ghi nhận các đội và tài khoản, không ghi nhận Clan, vì vậy mối liên hệ được khôi phục bằng cách đối chiếu từng danh sách với thành viên Clan tại ngày trận đấu diễn ra."
+  },
+  "verified": {
+    "name": "Đã xác minh",
+    "how": "Chủ sở hữu đã đăng nhập bằng Wargaming.net ID của họ và kết nối tài khoản này. Đăng nhập là yêu cầu duy nhất và không mất chi phí."
+  }
+}

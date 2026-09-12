@@ -1,0 +1,7 @@
+{
+  "group": "Grupė {order}",
+  "n-teams": "{count} komandų",
+  "pts": "Taškai",
+  "team": "Komanda",
+  "top-n-advance": ", toliau patenka {count} geriausiųjų"
+}

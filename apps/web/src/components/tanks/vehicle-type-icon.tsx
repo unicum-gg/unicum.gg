@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 export type IconSpec = {
   width: number;
@@ -55,13 +58,15 @@ export function VehicleTypeIcon({
   className?: string;
   size?: number;
 }) {
+  // Wargaming's own name for the class, from `game/vehicle-classes`.
+  const { t: tClasses } = useTranslation("game/vehicle-classes");
   const spec = VEHICLE_TYPE_PATHS[type];
   if (!spec) return null;
   const paths = Array.isArray(spec.d) ? spec.d : [spec.d];
   const scale = size / BOX_PX;
   return (
     <span
-      aria-label={type}
+      aria-label={tClasses(type)}
       role="img"
       className={cn(
         "inline-flex items-center justify-center align-middle",

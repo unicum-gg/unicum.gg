@@ -1,0 +1,8 @@
+{
+  "previous": "이전 페이지",
+  "next": "다음 페이지",
+  "rows-per-page": "페이지당 행 수",
+  "all": "전체",
+  "range": "{first}–{last} / {total}",
+  "page": "페이지 {page} / {total}"
+}

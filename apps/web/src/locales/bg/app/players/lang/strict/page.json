@@ -1,0 +1,6 @@
+{
+  "title": "Играчи на World of Tanks само на {language} ({region})",
+  "description": "Класация на играчите в {region} на {name}, чийто предполагаем език в историята на клановете е единствено {language}, подредени по WNX.",
+  "og-title": "Играчи само на {language}",
+  "og-subtitle": "Класация за {region}"
+}

@@ -1,0 +1,12 @@
+{
+  "added": "Đã thêm",
+  "before-update": "Trước bản cập nhật {version}",
+  "common-test": "Kiểm tra chung",
+  "every-update-that-changed-this": "Mọi bản cập nhật đã thay đổi bản đồ này, mới nhất trước, được đọc từ chính máy khách trò chơi.",
+  "in-the-game": "Trong game",
+  "n-changes": "{count, plural, other {# thay đổi}}",
+  "not-released-wargaming-can-still": "Chưa phát hành. Wargaming vẫn có thể thay đổi hoặc loại bỏ bất kỳ nội dung nào trước khi bản cập nhật được phát hành.",
+  "removed": "Gỡ bỏ",
+  "title": "Thay đổi đối với {map}",
+  "update": "Cập nhật {version}"
+}

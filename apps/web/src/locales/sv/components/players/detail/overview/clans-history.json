@@ -1,0 +1,12 @@
+{
+  "clans-history": "Klanhistorik för {nickname}",
+  "clans-in-clans": "{totalClans} klaner · {timeInClansSeconds} i klaner",
+  "current": "aktuell",
+  "duration": "Varaktighet",
+  "from": "Från",
+  "name": "Namn",
+  "no-clan-history": "Ingen klanhistorik.",
+  "role": "Roll",
+  "tag": "Tag",
+  "to": "Till"
+}

@@ -1,0 +1,21 @@
+{
+  "columns": {
+    "mark1": {
+      "label": "1 Markas",
+      "tip": "1 Markas: jūsų slenkamasis bendros žalos vidurkis (paskutiniai ~100 mūšių) turi įveikti 65% žaidėjų, žaidusių šiuo tanku per pastarąsias 14 dienų"
+    },
+    "mark2": {
+      "label": "2 Markai",
+      "tip": "2 Markai: jūsų slenkamasis bendros žalos vidurkis (paskutiniai ~100 mūšių) turi įveikti 85% žaidėjų, žaidusių šiuo tanku per pastarąsias 14 dienų"
+    },
+    "mark3": {
+      "label": "3 Markai",
+      "tip": "3 Markai: jūsų slenkamasis bendros žalos vidurkis (paskutiniai ~100 mūšių) turi įveikti 95% žaidėjų, žaidusių šiuo tanku per pastarąsias 14 dienų"
+    }
+  },
+  "rows-per-page": "Eilutės per puslapį",
+  "previous-page": "Ankstesnis puslapis",
+  "page": "Puslapis {current} / {totalPages}",
+  "next-page": "Kita puslapis",
+  "all": "Visi"
+}

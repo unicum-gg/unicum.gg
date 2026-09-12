@@ -1,0 +1,3 @@
+{
+  "n-battles": "{count, plural, one {# bitva} few {# bitvy} many {# bitev} other {# bitev}}"
+}

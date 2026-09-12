@@ -1,0 +1,26 @@
+{
+  "specifications": {
+    "title": "Statystyki World of Tanks: {tank} ({region}), poziom {tier}, nacja: {nation}",
+    "description": "World of Tanks, {tank} ({region}): dane techniczne obejmujące pancerz, siłę ognia, mobilność, moduły, załogę i modyfikacje polowe dla pojazdu poziomu {tier} (nacja: {nation})."
+  },
+  "performances": {
+    "title": "Osiągi: {tank} ({region}), statystyki serwera i ranking najlepszych graczy",
+    "description": "World of Tanks, {tank} ({region}): średnie serwerowe, w tym współczynnik zwycięstw, zadane uszkodzenia i uszkodzenia z asysty, ranking najlepszych graczy tym pojazdem poziomu {tier} (nacja: {nation}) oraz oczekiwane wartości WN8 i WNX."
+  },
+  "marks": {
+    "title": "Odznaki biegłości i odznaki mistrzowskie: {tank} ({region})",
+    "description": "World of Tanks, {tank} ({region}): wymagania dotyczące odznak biegłości i odznak mistrzowskich oraz historia ich progów dla pojazdu poziomu {tier} (nacja: {nation})."
+  },
+  "history": {
+    "title": "Historia zmian: {tank} ({region}), wzmocnienia i osłabienia",
+    "description": "Pojazd {tank} w kolejnych aktualizacjach World of Tanks: wszystkie zmiany parametrów, w tym wzmocnienia i osłabienia siły ognia, mobilności, przeżywalności i kamuflażu, wprowadzone przez Wargaming dla pojazdu poziomu {tier} (nacja: {nation}), wersja po wersji."
+  },
+  "videos": {
+    "title": "Filmy z rozgrywki: {tank} ({region})",
+    "description": "Czołg w akcji, {tank}: sugerowane przez społeczność nagrania bitew tym pojazdem poziomu {tier} (nacja: {nation}). Każdy film otwiera się w momencie rozpoczęcia danej bitwy i zawiera informację o mapie oraz wyniku."
+  },
+  "community": {
+    "title": "Recenzje graczy i ocena społeczności: {tank} ({region})",
+    "description": "Pojazd {tank} w opiniach graczy: ocena społeczności w skali do pięciu, z podziałem według poziomu umiejętności głosujących i porównaniem z rzeczywistymi osiągami tego pojazdu poziomu {tier} (nacja: {nation}), a także pisemne recenzje z kont, na których rozegrano nim bitwy."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Melhores jogadores de World of Tanks por idioma: {language} ({region})",
+  "description": "Veja em {name} a classificação por WNX dos jogadores da região {region} cujo conjunto de idiomas, inferido com base no histórico de clãs, inclui {language}.",
+  "og-title": "Melhores jogadores por idioma: {language}",
+  "og-subtitle": "Tabela de Classificação {region}"
+}

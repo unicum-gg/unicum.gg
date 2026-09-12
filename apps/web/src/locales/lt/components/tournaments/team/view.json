@@ -1,0 +1,19 @@
+{
+  "draw-not-made": "Burtai dar nesurengti. Šios komandos mūšiai čia pasirodys prasidėjus turnyrui.",
+  "each-map-is-played-twice": "Kiekviename žemėlapyje žaidžiama du kartus, po vieną kartą iš kiekvienos pusės. Paskutinis žemėlapis yra lemiamas ir jame žaidžiama vieną kartą.",
+  "first-battle-at": "Pirmasis mūšis, {when}",
+  "lost": "Pralaimėta",
+  "matches": "Rungtynės ({length})",
+  "never-played": "Ši komanda niekada nežaidė mūšio. Ji užsiregistravo, bet burtai jos nepasiekė, kaip nutinka nepatvirtintai sudėčiai.",
+  "no-maps-recorded": "Šiam mūšiui žemėlapių neužfiksuota.",
+  "no-roster-recorded-for-this": "Šiai komandai sudėtis neužfiksuota.",
+  "of-players-on-the-day": "Tą dieną žaidė {members} iš {length} žaidėjų",
+  "played-on-uncatalogued": "Žaista žemėlapyje {maps}, kurio žemėlapių kataloge nėra.",
+  "roster": "Sąrašas ({length})",
+  "stage-group": "{stage} · Grupė {order}",
+  "team-1": "1 komanda",
+  "team-2": "2 komanda",
+  "tournaments": "Turnyrai",
+  "when-the-first-battle-started": "Pirmojo mūšio pradžios laikas",
+  "won": "Laimėta"
+}

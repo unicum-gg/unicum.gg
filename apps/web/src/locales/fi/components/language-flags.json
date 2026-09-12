@@ -1,0 +1,8 @@
+{
+  "cta-clans": "Napsauta nähdäksesi kielen {language} parhaat klaanit.",
+  "cta-players": "Napsauta nähdäksesi kielen {language} parhaat pelaajat.",
+  "declared": "{language}. Klaanin ilmoittama.",
+  "inferred": "{language}. Arvauksemme tämän pelaajan klaanihistorian perusteella. Mitä pidempään hän pysyy klaanissa, sitä enemmän sen kielet painavat.",
+  "top-language-clans": "Kielen {language} parhaat klaanit",
+  "top-language-players": "Kielen {language} parhaat pelaajat"
+}

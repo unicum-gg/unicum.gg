@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   ArrowSquareOutIcon,
   DotsThreeVerticalIcon,
@@ -41,6 +42,8 @@ export function PlayerActionsMenu({
   accountId: number;
   nickname: string;
 }) {
+  const { t } = useTranslation("components/players/detail/actions-menu");
+  const { t: tMenu } = useTranslation("components/actions-menu");
   const { isFavorite, toggleFavorite } = useSearchHistory();
   const { data: session } = useSession();
   const [shareOpen, setShareOpen] = useState(false);
@@ -81,7 +84,7 @@ export function PlayerActionsMenu({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
-          aria-label="More actions"
+          aria-label={t("more-actions")}
           className="relative inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground focus-visible:outline-none aria-expanded:bg-fd-secondary aria-expanded:text-fd-foreground"
         >
           <DotsThreeVerticalIcon className="size-3.5" weight="bold" />
@@ -99,11 +102,11 @@ export function PlayerActionsMenu({
             }}
           >
             <StarIcon weight={fav ? "fill" : "bold"} />
-            {fav ? "Remove from favorites" : "Add to favorites"}
+            {fav ? t("remove-from-favorites") : t("add-to-favorites")}
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => setShareOpen(true)}>
             <ShareNetworkIcon weight="bold" />
-            Share
+            {tMenu("share")}
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a
@@ -112,7 +115,7 @@ export function PlayerActionsMenu({
               rel="noopener noreferrer"
             >
               <GlobeIcon weight="bold" />
-              Open on WoT portal
+              {tMenu("open-in", { target: "WoT portal" })}
               <ArrowSquareOutIcon className="ml-auto size-3 text-fd-muted-foreground" />
             </a>
           </DropdownMenuItem>
@@ -130,7 +133,7 @@ export function PlayerActionsMenu({
                 }
               >
                 <TwitchLogoIcon weight="bold" />
-                Connect Twitch
+                {t("connect-twitch")}
                 <span className="ml-auto size-2 rounded-full bg-brand" />
               </DropdownMenuItem>
             </>
@@ -141,7 +144,7 @@ export function PlayerActionsMenu({
       <ShareModal
         open={shareOpen}
         onOpenChange={setShareOpen}
-        title={`Share ${nickname}`}
+        title={tMenu("share-title", { name: nickname })}
         url={url}
         shareText={`Check ${nickname}'s WoT stats on ${APP.NAME}`}
         ogImage={unicumPublic.og.region(region).players(nickname).url()}

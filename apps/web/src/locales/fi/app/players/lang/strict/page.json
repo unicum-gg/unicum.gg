@@ -1,0 +1,6 @@
+{
+  "title": "Tiukat {language}-kieliset World of Tanks -pelaajat ({region})",
+  "description": "{name}: alueen {region} pelaajien tulostaulukko pelaajille, joiden päätelty klaanihistorian kieli on yksinomaan {language}, järjestettynä WNX:n mukaan.",
+  "og-title": "Tiukat {language}-kieliset pelaajat",
+  "og-subtitle": "{region} Tuloslista"
+}

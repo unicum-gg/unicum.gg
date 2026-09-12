@@ -1,0 +1,13 @@
+{
+  "heading": "<accent>{mode}</accent>中的顶尖玩家",
+  "intro": "{mode}是World of Tanks中的大逃杀模式。{region}排行榜按HR排名（最低100场{mode}战斗）。",
+  "board": "{mode}中排名前{count}的玩家",
+  "columns": {
+    "player": "玩家",
+    "battles": "战斗场次",
+    "survival": "生存",
+    "survival-percent": "生存 %",
+    "damage": "平均伤害"
+  },
+  "scale-description": "{mode}排行榜的颜色阈值，根据至少进行过100场{mode}战斗的玩家群体校准。"
+}

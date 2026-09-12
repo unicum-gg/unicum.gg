@@ -1,0 +1,22 @@
+{
+  "search": "{count} शब्दों में खोजें",
+  "search-label": "शब्दावली में खोजें",
+  "all": "सभी",
+  "jump": "अक्षर पर जाएँ",
+  "empty": "“{query}” से मेल खाता कोई शब्द नहीं है।",
+  "categories": {
+    "vehicles": "वाहन",
+    "gunnery": "गनरी",
+    "armor": "गति",
+    "mobility": "गतिशीलता",
+    "vision": "दृष्टि",
+    "crew": "क्रू",
+    "progression": "प्रगति",
+    "economy": "अर्थव्यवस्था",
+    "ratings": "रेटिंग्स",
+    "statistics": "आँकड़े",
+    "modes": "युद्ध मोड",
+    "tactics": "ताकतें",
+    "slang": "स्लैंग"
+  }
+}

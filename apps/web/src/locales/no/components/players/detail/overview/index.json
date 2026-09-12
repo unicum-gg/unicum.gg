@@ -1,0 +1,7 @@
+{
+  "stats-title": "Statistikk for tilfeldige kamper for {nickname}",
+  "progression-title": "{metric}-utviklingen til {nickname}",
+  "lift-drag-title": "Stridsvogner som former vurderingen til {nickname}",
+  "progression-blurb": "Heltrukken linje er {metric} totalt (samsvarer med Totalt-kolonnen ovenfor), og endres sakte etter hvert som nye kamper samles inn. Stiplet linje er {metric} per økt, beregnet fra kampene som er spilt siden forrige øyeblikksbilde. Den viser varme og kalde perioder. Linjefargen følger vurderingsnivået.",
+  "progression-empty": "Ikke nok historikk ennå. Vi trenger minst ett øyeblikksbilde for å tegne kurven. Kom tilbake snart."
+}

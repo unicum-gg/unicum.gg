@@ -1,0 +1,16 @@
+{
+  "range": {
+    "buyCredits": "Cost (credits)",
+    "buyGold": "Cost (gold)",
+    "researchXp": "Research XP",
+    "shellCost": "Shell cost",
+    "ammoCost": "Full ammo cost",
+    "class3": "3rd Class",
+    "class2": "2nd Class",
+    "class1": "1st Class",
+    "ace": "Ace Tanker",
+    "mark1": "1 Mark (65%)",
+    "mark2": "2 Marks (85%)",
+    "mark3": "3 Marks (95%)"
+  }
+}

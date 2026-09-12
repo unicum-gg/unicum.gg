@@ -1,0 +1,34 @@
+{
+  "tanks": {
+    "title": "Tankai: {name} ({region}), visos žaistos transporto priemonės",
+    "description": "Visi tankai, su kuriais žaista naudojant {name} regione {region}, ir kiekvienos transporto priemonės mūšiai, pergalių rodiklis, vidutinė žala bei WN8."
+  },
+  "achievements": {
+    "title": "{name} pasiekimai ({region}), uždirbta {medals} medalių",
+    "description": "{medals} World of Tanks medalių, kuriuos {name} uždirbo regione {region}, nuo Kolobanovo ir Poolo medalių iki garbės laipsnių ir epinių medalių, taip pat kiekvienas dar neuždirbtas medalis."
+  },
+  "tournaments": {
+    "title": "{name} turnyrai ({region})",
+    "description": "Visi Wargaming turnyrai, kuriuose {name} dalyvavo regione {region}: komanda, už kurią žaista, formatas ir kiek toli ji nuėjo. Tai Wargaming skelbiama turnyro istorija tik iš turnyro pusės, o ne žaidėjo."
+  },
+  "value": {
+    "title": "{name} paskyros vertė ({region})",
+    "description": "Kiek verta {name} World of Tanks paskyra regione {region}: garaže laikomi kreditai, auksas ir patirtis."
+  },
+  "mode": {
+    "title": "{name} {mode} statistika ({region})",
+    "description": "{name} regione {region}, {mode} režime: mūšiai, pergalių procentas ir reitingai šiame režime, šalia atsitiktinių mūšių bazinių rodiklių."
+  },
+  "overview": {
+    "title": "{name} World of Tanks statistika ({region}), {battles} mūšiai, {winrate}% pergalių procentas",
+    "description": "{name} regione {region}: {battles} mūšiai, {winrate}% pergalių procentas, {rating} reitingas. Išskaidymas pagal tanką, WN8, WNX ir pilna klanų istorija."
+  },
+  "locked": {
+    "title": "{name} World of Tanks paskyra užrakinta ({region})",
+    "description": "{name} ({region}) egzistuoja, tačiau Wargaming užrakino šią paskyrą, todėl jos World of Tanks statistika nepasiekiama."
+  },
+  "empty": {
+    "title": "{name} World of Tanks žaidėjo statistika ({region})",
+    "description": "{name} ({region}) World of Tanks žaidėjo statistika: WN8, WNX reitingai, pergalių procentas, išskaidymas pagal tanką ir pilna klano istorija."
+  }
+}

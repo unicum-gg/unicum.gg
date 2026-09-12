@@ -1,0 +1,8 @@
+{
+  "battles-in-it": "Онымен {battles} ұрыс",
+  "damage": "{damage} Зардап",
+  "n-marks": "{count, plural, one {# белгі} other {# белгілер}}",
+  "no-written-opinions-yet-if": "Әзірге жазбаша пікірлер жоқ. Егер сізде жеткілікті шайқас болса, сіздің пікіріңіз бірінші болады.",
+  "win-rate": "Жеңіс көрсеткіші {toFixed}%",
+  "written-on": "{gameVersion} нұсқасында жазылған"
+}

@@ -1,0 +1,8 @@
+{
+  "description": "{region} bölgesindeki her Wargaming turnuvası: günlük altın liderlik tabloları, klan şampiyonaları, kimlerin katıldığı ve kimin kazandığı. Tam fikstürler, skorlar ve kadrolar.",
+  "live-many": "Şu anda {region} bölgesinde {count} turnuva açık veya oynanıyor,",
+  "live-one": "Şu anda {region} bölgesinde {count} turnuva açık veya oynanıyor,",
+  "no-live": "Turnuvalar {region} bölgesinde her gün düzenlenir,",
+  "title": "World of Tanks {tournaments}",
+  "what-you-find": "altın için oynanan 1’e 1 liderlik tablolarından para ödüllü klan şampiyonalarına kadar. Tam fikstürler ve skorlar, kadrosuyla birlikte her takım ve harita harita başladığı taraf."
+}

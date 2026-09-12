@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "Najbolji <accent>klanovi</accent>",
+    "language": "Најбољи <accent>{language}</accent> кланови"
+  },
+  "intro": {
+    "all": "Ранг-листа за регион {region}, рангирана по просечној вредности {metric} за праћене чланове сваког клана (минимум 50 чланова са биткама).",
+    "language": "Кланови из региона {region} који су навели {language} као један од својих језика, рангирани по просечној вредности {metric} за своје праћене чланове (минимум 25 чланова са биткама).",
+    "strict": "Кланови из региона {region} који су навели {language} као свој једини језик, рангирани по просечној вредности {metric} за своје праћене чланове (минимум 25 чланова са биткама)."
+  },
+  "board": {
+    "all": "Најбољих {count} кланова по параметру {metric}",
+    "language": "Најбољих {count} кланова на језику {language} по параметру {metric}",
+    "strict": "Најбољих {count} искључиво {language} кланова по параметру {metric}"
+  },
+  "members": "Članovi",
+  "strict-toggle": "Strog",
+  "any-toggle": "Bilo koji",
+  "all-languages": "Sve jezike",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

@@ -1,0 +1,12 @@
+{
+  "added": "Added",
+  "before-update": "Before update {version}",
+  "common-test": "Common Test",
+  "every-update-that-changed-this": "Every update that changed this map, newest first, read from the game client itself.",
+  "in-the-game": "In the game",
+  "n-changes": "{count, plural, one {# change} other {# changes}}",
+  "not-released-wargaming-can-still": "Not released. Wargaming can still change or drop any of this before the update ships.",
+  "removed": "Removed",
+  "title": "Changes to {map}",
+  "update": "Update {version}"
+}

@@ -1,0 +1,13 @@
+{
+  "assists": "Avustukset",
+  "close": "Sulje",
+  "damage": "Vahinkoa aiheutettu",
+  "in-the-queue": "Se on jonossa ja näkyy tällä välilehdellä, kun moderaattori on tarkistanut sen.",
+  "optional": "(valinnainen)",
+  "paste-a-youtube-link": "Liitä YouTube-linkki ja aseta tarkka hetki, jolloin taistelu alkaa. Kaikki sen avaavat päätyvät tuohon sekuntiin, joten väärällä aikaleimalla varustettu ehdotus hylätään arvostelussa.",
+  "sending": "Lähetetään…",
+  "suggest": "Ehdota",
+  "suggest-a-video": "Ehdota videota",
+  "suggest-another": "Ehdota toista",
+  "suggestion-sent": "Ehdotus lähetetty"
+}

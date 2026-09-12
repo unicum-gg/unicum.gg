@@ -1,0 +1,13 @@
+{
+  "battles-overall": "Iš viso {battles} mūšių",
+  "checking-your-record-on-this": "Tikrinami jūsų šio tanko duomenys...",
+  "fetching-your-garage": "Gaunamas jūsų garažas",
+  "have-you-played": "Ar žaidėte su {tank}?",
+  "more-to-go": "Liko {count} mūšių",
+  "more-to-go-one": "Liko {count} mūšis",
+  "sign-in-to-rate-it": "Prisijunkite, kad įvertintumėte",
+  "sign-in-with-your-wargaming-account-to-rate-": "Prisijunkite naudodami savo Wargaming paskyrą, kad įvertintumėte. Perskaitome jūsų duomenis apie būtent šį tanką, todėl šiame puslapyje nebalsuoja žmonės, kurie niekada jo nevairavo.",
+  "signed-in-on": "Prisijungta regione {region}",
+  "too-few-battles": "Su {tank} sužaidėte {played} mūšių. Prieš įskaičiuojant balsą reikia {required}, kad šis vidurkis liktų žmonių, kurie iš tikrųjų juo žaidžia, vidurkiu.",
+  "you-have-not-played": "Nežaidėte su {tank}"
+}

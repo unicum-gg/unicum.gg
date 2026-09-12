@@ -1,0 +1,35 @@
+{
+  "heading": "Labākie spēlētāji režīmā <accent>{mode}</accent>",
+  "intro": "{mode} ir World of Tanks sacensību 7 pret 7 ranžētais režīms X līmenī. {region} līderu saraksts ir tieši no spēles ranga.",
+  "season": {
+    "range": "{start} līdz {end}",
+    "final": "galīgais kopvērtējums",
+    "live": "aktīvā sezona",
+    "updated": "atjaunots {when}"
+  },
+  "board": "Labākie {count} spēlētāji režīmā {mode}",
+  "columns": {
+    "player": "Spēlētājs",
+    "rank": "Rangs",
+    "battles": "Kaujas",
+    "rating": "Reitinga Punkti"
+  },
+  "alias": "(kā {nickname})",
+  "ranks": {
+    "title": "Rangi",
+    "meaning": "Nozīme",
+    "tier": "Līmenis",
+    "intro": "Jūs kāpjat {mode} rangos, uzvarot kaujās. Katra uzvara piešķir reitinga punktus atbilstoši tam, cik labi spēlējāt. {champion} ir augstākais rangs, ko varat sasniegt tikai ar punktiem, un tā sasniegšana iekļauj jūs līderu sarakstā. {legend} nav fiksēts slieksnis. Tas ir labāko {champion} spēlētāju augšējais slānis, tāpēc tā robeža mainās atkarībā no konkurentiem, bet vienādi rezultāti tiek nošķirti pēc spēlēto kauju skaita. Precīzās {legend} un {champion} robežas nosaka pašreizējā sezona, un tās ir atzīmētas tabulā.",
+    "legend-blurb": "Spēlētāji ar augstāko vērtējumu rangā {champion}. Spēle katrā sezonā to ierobežo līdz noteiktai līderu saraksta vietai, tāpēc lielums atšķiras pēc sezonas un reģiona, nevis pēc fiksēta punktu mērķa. Nokļūstot zem pēdējā {legend} spēlētāja, jūs atgriežaties rangā {champion}.",
+    "champion-blurb": "Augstākais rangs, ko varat sasniegt ar reitinga punktiem, un ieeja līderu sarakstā. Katrs ranžētais spēlētājs ir vismaz {champion} rangā."
+  },
+  "race": {
+    "title-live": "Kas nepieciešams pašlaik",
+    "title-ended": "Kāda bija sezona",
+    "legend-cutoff": "{legend} robeža",
+    "champion-cutoff": "{champion} robeža",
+    "ranked-players": "Reitinga spēlētāji",
+    "rating-points": "reitinga punkti",
+    "rank-cutoffs": "Ranga griezumi"
+  }
+}

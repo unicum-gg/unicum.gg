@@ -1,12 +1,15 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { statLabel } from "@/components/stat-label";
+
 import {
   CaretDownIcon,
   CaretUpDownIcon,
   CaretUpIcon,
 } from "@phosphor-icons/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Link from "@/components/link";
+import { useRouter } from "@/hooks/use-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import ROUTES from "@/constants/routes";
@@ -42,6 +45,8 @@ import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
+import { FilterSubject } from "@/components/filter-subject";
 
 enum SortDirection {
   Asc = "asc",
@@ -130,10 +135,14 @@ function SortableHead({
         active ? "text-foreground" : "",
       )}
     >
-      {children}
+      {/* `data-head-label` is what the tooltip measures: it shows the full
+            heading only when the column really cut it. */}
+      <span data-head-label className="truncate">
+        {children}
+      </span>
       <Icon
         weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
       />
     </button>
   );
@@ -172,6 +181,15 @@ export function PlayerTanksTable({
    * two halves agree on what is being read. */
   selectedSlug?: string | null;
 }) {
+  const { num } = useFormat();
+  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t } = useTranslation("components/players/detail/tanks/table");
+  const { t: tTable } = useTranslation("components/tanks/table");
+  // The columns are module constants, so the strings their cells render come
+  // from here rather than from a hook of their own.
+  const { t: tCols } = useTranslation(
+    "components/players/detail/tanks/vehicle-columns",
+  );
   const router = useRouter();
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
@@ -270,7 +288,7 @@ export function PlayerTanksTable({
 
   if (vehicles.length === 0) {
     return (
-      <p className="p-4 text-sm text-muted-foreground">No tanks played yet.</p>
+      <p className="p-4 text-sm text-muted-foreground">{t("no-tanks-played-yet")}</p>
     );
   }
 
@@ -279,7 +297,7 @@ export function PlayerTanksTable({
       <div className="p-4">
         <TankFilterBar
           filters={filters}
-          searchNoun="tanks"
+          searchNoun={FilterSubject.Tanks}
           // Hidden while a record is open: the columns are imposed then, and a
           // picker that answers "7 of 7" over a four-column table is a lie.
           extra={selectedSlug ? undefined : <PlayerColumnSelector />}
@@ -288,8 +306,7 @@ export function PlayerTanksTable({
       <div className="border-t border-fd-border">
         {sorted.length === 0 ? (
           <p className="p-4 text-sm text-muted-foreground">
-            No tanks match these filters.
-          </p>
+            {t("no-tanks-match-these-filters")}</p>
         ) : (
           <>
           {/* `rail`: the five columns a phone keeps still come to more than its
@@ -308,7 +325,7 @@ export function PlayerTanksTable({
                   align="center"
                   hideOnMobile
                   headClassName="w-px"
-                  tooltip="Nation"
+                  tooltip={tTable("nation")}
                 >
                   <TankopediaHeaderIcon name="nation" />
                 </SortableHead>
@@ -319,7 +336,7 @@ export function PlayerTanksTable({
                   align="center"
                   hideOnMobile
                   headClassName="w-px"
-                  tooltip="Type"
+                  tooltip={tTable("type")}
                 >
                   <TankopediaHeaderIcon name="type" />
                 </SortableHead>
@@ -330,15 +347,14 @@ export function PlayerTanksTable({
                   align="center"
                   hideOnMobile
                   headClassName="w-px"
-                  tooltip="Tier"
+                  tooltip={tTable("tier")}
                 >
                   <span className="whitespace-nowrap text-xs font-medium tracking-tight text-fd-muted-foreground">
                     I-XI
                   </span>
                 </SortableHead>
                 <SortableHead col="name" state={sort} onToggle={toggleSort}>
-                  Name
-                </SortableHead>
+                  {t("name")}</SortableHead>
                 {visibleColumns.map((c) => (
                   <SortableHead
                     key={c.key}
@@ -347,9 +363,9 @@ export function PlayerTanksTable({
                     onToggle={toggleSort}
                     align={c.align}
                     hideOnMobile={c.hideOnMobile}
-                    tooltip={c.tip}
+                    tooltip={statLabel(c.tip, tStats)}
                   >
-                    {c.header ? c.header(metric) : c.label}
+                    {statLabel(c.header ? c.header(metric) : c.label, tStats)}
                   </SortableHead>
                 ))}
               </TableRow>
@@ -451,7 +467,7 @@ export function PlayerTanksTable({
                       </span>
                     </TableCell>
                     {visibleColumns.map((c) => {
-                      const { node, className } = c.cell(r, { region, metric });
+                      const { node, className } = c.cell(r, { region, metric, num, t: tCols });
                       return (
                         <TableCell
                           key={c.key}

@@ -1,0 +1,23 @@
+{
+  "heading": {
+    "plain": "En iyi <accent>klanlar</accent>",
+    "language": "En iyi <accent>{language}</accent> klanlar"
+  },
+  "intro": {
+    "all": "{region} liderlik tablosu, her klanın takip edilen üyeleri genelinde hesaplanan {metric} ortalamasına göre sıralanmıştır (savaş yapan minimum 50 üye).",
+    "language": "{language} dillerinden birini beyan eden {region} klanları, takip edilen üyelerinin ortalama {metric} değerine göre sıralanmıştır (savaş yapan minimum 25 üye).",
+    "strict": "Tek dili {language} olarak beyan eden {region} klanları, takip edilen üyelerinin ortalama {metric} değerine göre sıralanmıştır (savaş yapan minimum 25 üye)."
+  },
+  "board": {
+    "all": "{metric} değerine göre en iyi {count} klan",
+    "language": "{metric} değerine göre en iyi {count} {language} klanı",
+    "strict": "{metric} değerine göre en iyi {count} yalnızca {language} klanı"
+  },
+  "members": "Üyeler",
+  "strict-toggle": "Sıkı",
+  "any-toggle": "Herhangi bir",
+  "all-languages": "Tüm diller",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

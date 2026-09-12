@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "ภาพรวม",
+    "tanks": "รถถัง",
+    "videos": "วิดีโอ",
+    "tournaments": "ทัวร์นาเมนต์",
+    "manage": "จัดการ"
+  },
+  "section-count": "{section} ({count})"
+}

@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "A {region} régió mind a {count} World of Tanks járműve. Szűrj szint, nemzet, osztály és szerep szerint, majd nyiss meg egy tankot a statisztikáiért, legjobb játékosaiért és várható értékeiért.",
+    "title": "A World of Tanks összes tankja ({region}), böngészd az összes járművet",
+    "description": "Böngészd a {region} régió összes World of Tanks tankját: szűrj szint, nemzet, osztály és szerep szerint, majd tekintsd meg az egyes tankok statisztikáit, legjobb játékosait és várható értékeit.",
+    "heading": "Minden <accent>tank</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, átütés, páncélzat, látótáv és mozgékonyság a {region} régió mind a {count} World of Tanks járművéhez. Rendezz bármely oszlop szerint, majd szűrj szint, nemzet, osztály és szerep szerint.",
+    "title": "World of Tanks tankjellemzők ({region}), hasonlítsd össze az összes járművet",
+    "description": "Hasonlítsd össze a {region} régió minden World of Tanks tankjának jellemzőit: DPM, átütés, páncélzat, látótáv és mozgékonyság, szint, nemzet, osztály és szerep szerint rendezve és szűrhetően.",
+    "heading": "Tank <accent>műszaki adatok</accent>"
+  },
+  "economics": {
+    "intro": "Vásárlási és javítási költségek, lövedékárak és kreditbevétel a {region} régió mind a {count} World of Tanks járművéhez. Rendezz bármely oszlop szerint, majd szűrj szint, nemzet, osztály és szerep szerint.",
+    "title": "World of Tanks tankgazdaság ({region}), kredit- és XP-költségek",
+    "description": "Kredit- és XP-költségek, javítási és lövedékárak a {region} régió minden World of Tanks tankjához, szint, nemzet, osztály és szerep szerint rendezve és szűrhetően.",
+    "heading": "Tank <accent>gazdaság</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Az egy, két és három kiválósági jelhez szükséges mozgóátlagos sebzés a {region} régió mind a {count} World of Tanks járművéhez. Rendezz bármely oszlop szerint, majd szűrj szint, nemzet, osztály és szerep szerint.",
+    "title": "A World of Tanks kiválósági jeleinek követelményei ({region})",
+    "description": "Az egy, két és három kiválósági jelhez szükséges sebzés a {region} régió minden World of Tanks tankjához, szint, nemzet, osztály és szerep szerint rendezve és szűrhetően.",
+    "heading": "<accent>Kiválósági jelek</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "Az Ász harckocsizó és a mesterjelvény XP-küszöbei a {region} régió mind a {count} World of Tanks járművéhez. Rendezz bármely oszlop szerint, majd szűrj szint, nemzet, osztály és szerep szerint.",
+    "title": "A World of Tanks mesterjelvényeinek követelményei ({region})",
+    "description": "Az Ász harckocsizó és a mesterjelvény XP-küszöbei a {region} régió minden World of Tanks tankjához, szint, nemzet, osztály és szerep szerint rendezve és szűrhetően.",
+    "heading": "<accent>Mesterjelvények</accent>"
+  },
+  "videos": {
+    "intro": "A közösség által a {region} régióhoz kapcsolt {count} csata, mindegyik a kezdő másodpercnél nyílik meg. A tankoldalakról javasolva, majd ellenőrizve, mielőtt itt megjelennek.",
+    "title": "World of Tanks játékmenet-videók ({region})",
+    "description": "Közösség által javasolt World of Tanks-csaták a {region} régióban, mindegyik a kezdő másodpercnél nyílik meg: a használt tank, a térkép, a kezdő oldal és a csata végeredménye.",
+    "heading": "Játékmenet <accent>videók</accent>"
+  }
+}

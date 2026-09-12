@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Pesquisar entre {count} tanques",
+    "rated-tanks": "Pesquisar entre {count} tanques classificados",
+    "videos": "Pesquisar entre {count} vídeos",
+    "players": "Pesquisar entre {count} jogadores",
+    "clans": "Pesquisar entre {count} clãs",
+    "tournaments": "Pesquisar entre {count} torneios",
+    "teams": "Pesquisar entre {count} equipas"
+  },
+  "min": "Mín.",
+  "max": "Máx.",
+  "none": "Nenhum",
+  "common-test": "Alterados no Teste Comum: veículos novos e reequilibrados",
+  "category": {
+    "standard": "Padrão",
+    "premium": "Premium",
+    "reward": "Recompensa"
+  },
+  "moe": {
+    "0": "Ainda sem marca",
+    "1": "1 marca",
+    "2": "2 marcas",
+    "3": "3 marcas"
+  },
+  "mom": {
+    "0": "Ainda sem distintivo",
+    "1": "3ª Classe",
+    "2": "2ª Classe",
+    "3": "1ª Classe",
+    "4": "Distribuidor Ace"
+  }
+}

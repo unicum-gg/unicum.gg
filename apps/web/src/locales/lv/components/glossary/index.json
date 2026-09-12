@@ -1,0 +1,22 @@
+{
+  "search": "Meklēt {count} terminus",
+  "search-label": "Meklēt glosārijā",
+  "all": "Visus",
+  "jump": "Pāriet uz burtu",
+  "empty": "Neviens termins neatbilst “{query}”.",
+  "categories": {
+    "vehicles": "Bruņutehnika",
+    "gunnery": "Šaušana",
+    "armor": "Bruņas",
+    "mobility": "Mobilitāte",
+    "vision": "Redze",
+    "crew": "Apkalpe",
+    "progression": "Progresija",
+    "economy": "Ekonomika",
+    "ratings": "Vērtējumi",
+    "statistics": "Statistika",
+    "modes": "Cīņas režīmi",
+    "tactics": "Taktika",
+    "slang": "Žargons"
+  }
+}

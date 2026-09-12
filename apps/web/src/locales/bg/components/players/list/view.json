@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Най-добри <accent>играчи</accent>",
+    "language": "Най-добрите играчи на <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Класация за {region}, подредена по общия {metric} за всички времена, с минимум 20 000 битки.",
+    "language": "Играчи от {region}, чийто предполагаем набор от езици в историята на клана включва {language}, подредени по {metric}, с минимум 10 000 битки.",
+    "strict": "Играчи от {region}, чийто предполагаем език в историята на клана е изключително {language}, подредени по {metric}, с минимум 10 000 битки."
+  },
+  "board": {
+    "all": "Най-добрите {count} играчи по {metric}",
+    "language": "Най-добрите {count} играчи на {language} по {metric}",
+    "strict": "Най-добрите {count} играчи само на {language} по {metric}"
+  },
+  "modes": {
+    "overall": "Общо"
+  },
+  "columns": {
+    "player": "Играч"
+  },
+  "strict-toggle": "Стриктен",
+  "any-toggle": "Всеки",
+  "all-languages": "Всички езици",
+  "battles": "Битки",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

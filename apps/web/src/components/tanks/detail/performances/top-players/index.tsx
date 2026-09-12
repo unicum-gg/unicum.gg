@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
@@ -24,11 +26,11 @@ const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
 };
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
+const PCT_FORMAT = {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
-});
+} as const;
 
 export function TankTopPlayers(
   props:
@@ -40,13 +42,13 @@ export function TankTopPlayers(
         region: Region;
       },
 ) {
+  const { t } = useTranslation("components/tanks/detail/performances/top-players/index");
   if ("loading" in props) return <TopPlayersSkeleton />;
   const { players, metric, metricLabel, region } = props;
   if (players.length === 0) {
     return (
       <div className="border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
-        No ranked players on this tank yet.
-      </div>
+        {t("no-ranked-players-on-this")}</div>
     );
   }
   return (
@@ -56,15 +58,15 @@ export function TankTopPlayers(
           <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
             #
           </TableHead>
-          <TableHead>Player</TableHead>
+          <TableHead>{t("player")}</TableHead>
           <TableHead className="hidden w-24 text-right! sm:table-cell">
-            <GlossaryLabel>Battles</GlossaryLabel>
+            <GlossaryLabel>{t("battles")}</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-24 text-right! md:table-cell">
-            <GlossaryLabel>Avg dmg</GlossaryLabel>
+            <GlossaryLabel>{t("avg-dmg")}</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-20 text-right! md:table-cell">
-            <GlossaryLabel>WR</GlossaryLabel>
+            <GlossaryLabel>{t("wr")}</GlossaryLabel>
           </TableHead>
           <TableHead className="w-24 pr-4 text-right!">
             <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
@@ -97,6 +99,7 @@ function PlayerRow({
   region: Region;
   metric: RatingMetric;
 }) {
+  const { num } = useFormat();
   const colorClass = COLOR_FOR_METRIC[metric](player.value);
   return (
     <TableRow>
@@ -111,18 +114,18 @@ function PlayerRow({
         <PlayerName region={region} player={identityFromRow(player)} />
       </TableCell>
       <TableCell className="hidden text-right tabular-nums text-muted-foreground sm:table-cell">
-        {intFmt.format(player.battles)}
+        {num(INT_FORMAT).format(player.battles)}
       </TableCell>
       <TableCell className="hidden text-right tabular-nums text-muted-foreground md:table-cell">
-        {intFmt.format(player.avg_damage)}
+        {num(INT_FORMAT).format(player.avg_damage)}
       </TableCell>
       <TableCell className="hidden text-right tabular-nums text-muted-foreground md:table-cell">
-        {pctFmt.format(player.winrate)}%
+        {num(PCT_FORMAT).format(player.winrate)}%
       </TableCell>
       <TableCell
         className={cn("pr-4 text-right font-semibold tabular-nums", colorClass)}
       >
-        {intFmt.format(player.value)}
+        {num(INT_FORMAT).format(player.value)}
       </TableCell>
     </TableRow>
   );
@@ -131,6 +134,7 @@ function PlayerRow({
 /** The loading twin: the same h-11 table with the real headers and 10
  * placeholder rows, mirroring the responsive column visibility. */
 function TopPlayersSkeleton() {
+  const { t } = useTranslation("components/tanks/detail/performances/top-players/index");
   return (
     <Table className="mb-px! [&_tr]:h-11">
       <TableHeader>
@@ -138,17 +142,14 @@ function TopPlayersSkeleton() {
           <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
             #
           </TableHead>
-          <TableHead>Player</TableHead>
+          <TableHead>{t("player")}</TableHead>
           <TableHead className="hidden w-24 text-right! sm:table-cell">
-            Battles
-          </TableHead>
+            {t("battles")}</TableHead>
           <TableHead className="hidden w-24 text-right! md:table-cell">
-            Avg dmg
-          </TableHead>
+            {t("avg-dmg")}</TableHead>
           <TableHead className="hidden w-20 text-right! md:table-cell">
-            WR
-          </TableHead>
-          <TableHead className="w-24 pr-4 text-right!">Rating</TableHead>
+            {t("wr")}</TableHead>
+          <TableHead className="w-24 pr-4 text-right!">{t("rating")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

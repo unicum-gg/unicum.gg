@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Klasteris dar neužfiksuotas.",
+  "server": "Serveris",
+  "online": "Internete",
+  "share": "Dalintis",
+  "peak": "Pikas ({label})",
+  "average": "Vidurkis ({label})",
+  "not-reported": "Nepaskelbta",
+  "total": "Viso"
+}

@@ -1,0 +1,8 @@
+{
+  "busiest": "Noslogotākais laiks: {when} ({players})",
+  "not-enough-recorded-yet-to": "Vēl nav pietiekami daudz reģistrētu datu, lai parādītu nedēļas ritmu. Tas aizpildīsies, paraugojot katru nedēļas stundu.",
+  "not-sampled-yet": "Vēl nav paraugots",
+  "players-on-average": "Vidēji {players} spēlētāji",
+  "quietest": ", klusākais laiks: {when} ({players})",
+  "your-local-time": "Jūsu vietējais laiks"
+}

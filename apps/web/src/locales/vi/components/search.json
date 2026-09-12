@@ -1,0 +1,27 @@
+{
+  "placeholder": "Tìm kiếm người chơi, Clan, xe tăng, bản đồ hoặc thuật ngữ",
+  "type": "Loại tìm kiếm",
+  "types": {
+    "all": "Tất cả",
+    "players": "Người chơi",
+    "clans": "Clan",
+    "tanks": "Xe tăng",
+    "maps": "Bản đồ",
+    "glossary": "Thuật ngữ"
+  },
+  "sections": {
+    "players": "Người chơi",
+    "clans": "Clan",
+    "tanks": "Xe tăng",
+    "maps": "Bản đồ",
+    "glossary": "Thuật ngữ",
+    "recent": "Gần đây",
+    "favorites": "Yêu thích"
+  },
+  "searching": "Đang tìm kiếm…",
+  "errored": "Đã xảy ra lỗi. Hãy thử lại.",
+  "empty": "Không tìm thấy kết quả",
+  "remove-recent": "Xóa khỏi mục gần đây",
+  "add-favorite": "Thêm vào yêu thích",
+  "remove-favorite": "Xóa khỏi yêu thích"
+}

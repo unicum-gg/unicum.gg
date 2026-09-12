@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "overview": "概要",
+    "tanks": "戦車",
+    "sessions": "セッション",
+    "achievements": "実績パッチ",
+    "tournaments": "トーナメント",
+    "value": "値"
+  },
+  "section-count": "{section}（{count}）",
+  "beta": "β"
+}

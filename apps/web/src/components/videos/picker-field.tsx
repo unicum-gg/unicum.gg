@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { MagnifyingGlassIcon, XIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import type { Region } from "@unicum.gg/wargaming";
@@ -52,6 +53,7 @@ function PickerField({
   /** The popover, handed the trigger it should wear. */
   search: (trigger: { className: string; content: ReactNode }) => ReactNode;
 }) {
+  const { t: tCopy } = useTranslation("components/videos/picker-field");
   return (
     // A `div`, not a `label`: the control is a button, and a label wrapping one
     // forwards its clicks to it, so clearing the field reopened the search.
@@ -60,8 +62,7 @@ function PickerField({
         {label}{" "}
         {optional && (
           <span className="font-normal text-fd-muted-foreground">
-            (optional)
-          </span>
+            {tCopy("optional")}</span>
         )}
       </span>
       <div className="relative">
@@ -97,7 +98,7 @@ function PickerField({
           <button
             type="button"
             onClick={onClear}
-            aria-label={`Clear the ${label.toLowerCase()}`}
+            aria-label={tCopy("clear-the-field", { label: label.toLowerCase() })}
             className="absolute top-1/2 right-7 -translate-y-1/2 cursor-pointer rounded-md p-1 text-muted-foreground transition-colors hover:text-fd-foreground"
           >
             <XIcon className="size-3.5" weight="bold" />
@@ -128,24 +129,25 @@ export function TankField({
   onClear: () => void;
   required: boolean;
 }) {
+  const { t } = useTranslation("components/videos/picker-field");
   return (
     <PickerField
-      label="Tank"
+      label={t("tank")}
       optional={!required}
       value={tank?.name ?? null}
-      placeholder={required ? "Pick the vehicle" : "None"}
+      placeholder={required ? t("pick-the-vehicle") : t("none")}
       hint={
         required
-          ? "A random battle is looked up by the vehicle it was played in."
-          : "A tactic belongs to its map, so this is only worth naming when the video is about the vehicle too."
+          ? t("tank-hint-required")
+          : t("tank-hint-optional")
       }
       onClear={onClear}
       search={(trigger) => (
         <TankSearchPopover
           region={region}
           onPick={(picked) => onPick({ slug: picked.slug, name: picked.name })}
-          triggerAriaLabel="Search for a vehicle"
-          placeholder="Search tank..."
+          triggerAriaLabel={t("search-for-a-vehicle")}
+          placeholder={t("search-tank")}
           triggerClassName={trigger.className}
           triggerContent={trigger.content}
           matchTriggerWidth
@@ -192,10 +194,11 @@ export function ClanField({
   onPick: (clan: ClanPick) => void;
   onClear: () => void;
 }) {
+  const { t } = useTranslation("components/videos/picker-field");
   const painted = useClanColours(region, clan);
   return (
     <PickerField
-      label="Clan"
+      label={t("clan")}
       optional
       value={
         painted && (
@@ -213,8 +216,8 @@ export function ClanField({
           </span>
         )
       }
-      placeholder="None"
-      hint="Credited on the clan's own page."
+      placeholder={t("none")}
+      hint={t("credited-on-the-clan-s")}
       onClear={onClear}
       search={(trigger) => (
         <ClanSearchPopover
@@ -226,7 +229,7 @@ export function ClanField({
               emblem: picked.emblem,
             })
           }
-          triggerAriaLabel="Search for a clan"
+          triggerAriaLabel={t("search-for-a-clan")}
           triggerClassName={trigger.className}
           triggerContent={trigger.content}
           matchTriggerWidth

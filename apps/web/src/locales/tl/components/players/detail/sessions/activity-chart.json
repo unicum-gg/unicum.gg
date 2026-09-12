@@ -1,0 +1,5 @@
+{
+  "battles": "{count} mga labanan",
+  "chart-label": "Mga laban na nilaro bawat {granularity}, may kulay ayon sa {metric}",
+  "no-battles": "Walang labanan"
+}

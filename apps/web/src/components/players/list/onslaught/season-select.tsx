@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import {
   Select,
   SelectContent,
@@ -10,10 +10,14 @@ import {
 } from "@/components/ui/select";
 import ROUTES from "@/constants/routes";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
+import { seasonName } from "@/components/game-name";
 
 export type OnslaughtSeasonRef = {
   key: string;
   label: string;
+  /** The ordinal the client keys its season names by; null for a year archive. */
+  ordinal: string | null;
   available: boolean;
   eventId: string | null;
 };
@@ -34,6 +38,7 @@ export function OnslaughtSeasonSelect({
   current: string | null;
   region: Region;
 }) {
+  const { t: tSeasons } = useTranslation("game/onslaught-seasons");
   const router = useRouter();
   if (seasons.length === 0) return null;
 
@@ -62,7 +67,7 @@ export function OnslaughtSeasonSelect({
             value={s.eventId ?? s.key}
             disabled={!s.available}
           >
-            {s.label}
+            {seasonName(s.ordinal, s.label, tSeasons) ?? s.label}
           </SelectItem>
         ))}
       </SelectContent>

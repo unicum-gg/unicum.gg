@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { Fragment, useMemo } from "react";
 
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
@@ -14,8 +16,9 @@ import {
 import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
 import { MapPinIcon } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
+import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
+import type { PoolMapRef } from "@/components/tournaments/detail/map-pool";
 import { BracketType, type Region } from "@unicum.gg/wargaming";
 import type { RatingMetric } from "@unicum.gg/shared";
 import type {
@@ -42,7 +45,7 @@ import { splitMapLabels } from "./team-run";
 
 const DASH = "—";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 /** A team's name, or null for a bracket slot that has not been filled yet. */
 function name(teamNames: Map<number, string>, id: number | null): string | null {
@@ -99,6 +102,7 @@ function Side({
   won: boolean;
   decided: boolean;
 }) {
+  const { num } = useFormat();
   const label = (
     <span
       className={cn(
@@ -160,7 +164,7 @@ function Side({
             ratingColor(rating, metric),
           )}
         >
-          {intFmt.format(rating)}
+          {num(INT_FORMAT).format(rating)}
         </span>
       )}
       <span
@@ -185,7 +189,7 @@ function MatchMaps({
   mapLinks,
 }: {
   maps: string | null;
-  mapLinks: Map<string, string>;
+  mapLinks: Map<string, PoolMapRef>;
 }) {
   const labels = splitMapLabels(maps);
   if (labels.length === 0) return "\u00a0";
@@ -194,16 +198,20 @@ function MatchMaps({
       <MapPinIcon className="size-2.5 shrink-0" aria-hidden="true" />
       <span className="truncate">
         {labels.map((label, i) => {
-          const href = mapLinks.get(label.toLowerCase());
+          // The organiser writes the map's English name, the pool knows what
+          // the game calls it in the reader's language. Matching still happens
+          // on what was recorded, only the text shown changes.
+          const known = mapLinks.get(label.toLowerCase());
+          const shown = known?.name ?? label;
           return (
             <Fragment key={`${label}:${i}`}>
               {i > 0 && ", "}
-              {href ? (
-                <Link href={href} className="hover:text-brand hover:underline">
-                  {label}
+              {known?.href ? (
+                <Link href={known.href} className="hover:text-brand hover:underline">
+                  {shown}
                 </Link>
               ) : (
-                label
+                shown
               )}
             </Fragment>
           );
@@ -230,7 +238,7 @@ function MatchCard({
   teamRatings: Map<number, number>;
   teamClans: Map<number, { tag: string; color: string | null }>;
   metric: RatingMetric;
-  mapLinks: Map<string, string>;
+  mapLinks: Map<string, PoolMapRef>;
 }) {
   const decided = match.winnerTeamId !== null;
   // Exactly the height the layout placed it at (`h-full` of a CARD_H box), and
@@ -303,8 +311,9 @@ function KnockoutBracket({
   teamRatings: Map<number, number>;
   teamClans: Map<number, { tag: string; color: string | null }>;
   metric: RatingMetric;
-  mapLinks: Map<string, string>;
+  mapLinks: Map<string, PoolMapRef>;
 }) {
+  const { t: tLayout } = useTranslation("components/tournaments/detail/layout");
   const layout = useMemo(
     () => layoutBracket(group.matches, bracket),
     [group.matches, bracket],
@@ -329,7 +338,7 @@ function KnockoutBracket({
             className="absolute text-xs font-semibold tracking-wide text-fd-muted-foreground uppercase"
             style={{ left: col.x, top: 0, width: CARD_W }}
           >
-            {roundLabel(col.round, bracket)}
+            {roundLabel(col.round, bracket, tLayout)}
           </h4>
         ))}
         {/* Behind the cards, and inert: the lines are structure, not content, so
@@ -399,6 +408,7 @@ function GroupTable({
   group: TournamentGroup;
   teamNames: Map<number, string>;
 }) {
+  const { t } = useTranslation("components/tournaments/detail/bracket");
   const rows = group.standings
     .slice()
     .sort((a, b) => (a.position ?? 999) - (b.position ?? 999));
@@ -412,11 +422,11 @@ function GroupTable({
       <TableHeader>
         <TableRow>
           <TableHead className="w-[1%] text-end">#</TableHead>
-          <TableHead className="w-full">Team</TableHead>
+          <TableHead className="w-full">{t("team")}</TableHead>
           <TableHead className="w-[1%] text-end">W</TableHead>
           <TableHead className="w-[1%] text-end">L</TableHead>
           <TableHead className="w-[1%] text-end">D</TableHead>
-          <TableHead className="w-[1%] text-end">Pts</TableHead>
+          <TableHead className="w-[1%] text-end">{t("pts")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -488,8 +498,9 @@ export function TournamentBracket({
   teams: TournamentTeam[];
   /** Map name (lowercased) to the page it opens, from the tournament's own
    * pool. A tie names its maps in prose, so this is what makes them links. */
-  mapLinks: Map<string, string>;
+  mapLinks: Map<string, PoolMapRef>;
 }) {
+  const { t } = useTranslation("components/tournaments/detail/bracket");
   const metric = useRatingMetric();
   const teamNames = useMemo(
     () => new Map(teams.map((team) => [team.id, team.title])),
@@ -523,12 +534,13 @@ export function TournamentBracket({
             >
               <PanelTitle>
                 {stage.title}
-                {stage.groups.length > 1 && ` — Group ${group.order}`}
+                {stage.groups.length > 1 &&
+                  ` — ${t("group", { order: group.order })}`}
               </PanelTitle>
               <span className="text-xs text-fd-muted-foreground">
-                {group.teamsCount} teams
+                {t("n-teams", { count: group.teamsCount })}
                 {stage.winnersPerGroup > 0 &&
-                  `, top ${stage.winnersPerGroup} advance`}
+                  t("top-n-advance", { count: stage.winnersPerGroup })}
               </span>
             </PanelHeader>
             <PanelContent className="p-0">

@@ -1,0 +1,17 @@
+{
+  "average": "Keskimääräinen",
+  "bad": "Huono",
+  "below-avg": "Alle keskiarvon",
+  "color-thresholds-for-the-stronghold": "Linnoitustaulukoiden värirajat. Yksi absoluuttinen asteikko jokaiselle tasolle, joten SR (tai SRB) tarkoittaa samaa klaanin laatua kaikkialla.",
+  "excellent": "Erinomainen",
+  "good": "Hyvä",
+  "rating-colors": "Arvioinnin värit",
+  "sr": "SR",
+  "srb": "SRB",
+  "super": "Super",
+  "tier": "Taso",
+  "top": "Parhaat",
+  "very-bad": "Erittäin huono",
+  "very-good": "Erittäin hyvä",
+  "wr": "WR"
+}

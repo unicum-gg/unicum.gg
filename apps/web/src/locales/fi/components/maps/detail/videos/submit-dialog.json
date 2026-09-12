@@ -1,0 +1,17 @@
+{
+  "close": "Sulje",
+  "format": "Muoto",
+  "here": "tässä",
+  "in-the-queue": "Se on jonossa ja näkyy kohdassa {where}, kun moderaattori on tarkistanut sen. Sinun ehdotuksesi näkyy sillä sivulla sillä välin harmaana.",
+  "log-in-to-suggest-a": "Kirjaudu sisään ehdottaaksesi taktiikkaa",
+  "on-map": "kartalla {map}",
+  "players-per-team": "Pelaajia per tiimi",
+  "sending": "Lähetetään…",
+  "suggest": "Ehdota",
+  "suggest-a-tactic": "Ehdota taktiikkaa",
+  "suggest-another": "Ehdota toista",
+  "suggestion-sent": "Ehdotus lähetetty",
+  "tier": "Taso",
+  "what-to-submit": "Kilpailullinen taistelu alkaen siitä sekunnista, kun se alkaa. Kartta alkaa kartalla {map} ja etenee videon mukana. Klaani-ilta kulkee karttakierron läpi. Pelattu puoli on se tieto, jonka perusteella pelinjohtaja etsii videon, joten sitä kysytään eikä arvata.",
+  "what-was-played": "Mikä oli pelattu"
+}

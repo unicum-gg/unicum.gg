@@ -1,0 +1,11 @@
+{
+  "compare": "Vergelijken met de {count} meest vergelijkbare tanks",
+  "match": "wedstrijd",
+  "subtitle": "Dezelfde positie binnen hun eigen tier",
+  "verdict": {
+    "overall": "Vergelijkbare totaalresultaten",
+    "closest": "Meest vergelijkbaar qua {axes}",
+    "closest-furthest": "Meest vergelijkbaar qua {axes}, minst vergelijkbaar qua {apart}",
+    "and": " en "
+  }
+}

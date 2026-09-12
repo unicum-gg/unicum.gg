@@ -1,0 +1,38 @@
+{
+  "performances": {
+    "intro": "Alle {count} World of Tanks-køretøjer på {region}. Filtrér efter niveau, nation, klasse og rolle, og åbn derefter en kampvogn for dens statistik, bedste spillere og forventede værdier.",
+    "title": "Alle World of Tanks-kampvogne ({region}), gennemse hvert køretøj",
+    "description": "Gennemse alle World of Tanks-kampvogne på {region}: filtrér efter niveau, nation, klasse og rolle, og se derefter statistik pr. kampvogn, bedste spillere og forventede værdier.",
+    "heading": "Alle <accent>tanks</accent>"
+  },
+  "specifications": {
+    "intro": "DPM, gennemtrængning, panser, synsrækkevidde og mobilitet for alle {count} World of Tanks-køretøjer på {region}. Sortér efter enhver kolonne, og filtrér derefter efter niveau, nation, klasse og rolle.",
+    "title": "World of Tanks-kampvognsspecifikationer ({region}), sammenlign hvert køretøj",
+    "description": "Sammenlign specifikationerne for alle World of Tanks-kampvogne på {region}: DPM, gennemtrængning, panser, synsrækkevidde og mobilitet, som kan sorteres og filtreres efter niveau, nation, klasse og rolle.",
+    "heading": "Tank <accent>specifikationer</accent>"
+  },
+  "economics": {
+    "intro": "Købs- og reparationsomkostninger, granatpriser og indtjening i credits for alle {count} World of Tanks-køretøjer på {region}. Sortér efter enhver kolonne, og filtrér derefter efter niveau, nation, klasse og rolle.",
+    "title": "World of Tanks-kampvognes økonomi ({region}), omkostninger i credits og XP",
+    "description": "Omkostninger i credits og XP, reparations- og granatpriser for hver World of Tanks-kampvogn på {region}, sorterbar og filtrerbar efter niveau, nation, klasse og rolle.",
+    "heading": "Tank <accent>økonomi</accent>"
+  },
+  "marks-of-excellence": {
+    "intro": "Skade beregnet som glidende gennemsnit, der kræves for ét, to og tre mærker på alle {count} World of Tanks-køretøjer på {region}. Sortér efter enhver kolonne, og filtrér derefter efter niveau, nation, klasse og rolle.",
+    "title": "Krav til World of Tanks-fortræffelighedsmærker ({region})",
+    "description": "Skade, der kræves for ét, to og tre Fortræffelighedsmærker på hver World of Tanks-kampvogn på {region}, sorterbar og filtrerbar efter niveau, nation, klasse og rolle.",
+    "heading": "<accent>Fortræffelighedsmærker</accent>"
+  },
+  "marks-of-mastery": {
+    "intro": "XP-tærskler for Ace Tanker og mesterskabsmærker for alle {count} World of Tanks-køretøjer på {region}. Sortér efter enhver kolonne, og filtrér derefter efter niveau, nation, klasse og rolle.",
+    "title": "Krav til World of Tanks-mærker for Mesterlighed ({region})",
+    "description": "XP-tærskler for Ace Tanker og mesterskabsmærker for hver World of Tanks-kampvogn på {region}, sorterbar og filtrerbar efter niveau, nation, klasse og rolle.",
+    "heading": "<accent>Mærker for Mesterlighed</accent>"
+  },
+  "videos": {
+    "intro": "{count} kampe, som fællesskabet har linket til på {region}, hver med åbning ved det sekund, hvor den starter. Foreslået fra kampvognssiderne og kontrolleret, før de vises her.",
+    "title": "World of Tanks-spilvideoer ({region})",
+    "description": "Fællesskabsforeslåede World of Tanks-kampe på {region}, som hver åbner ved det sekund, hvor den starter: den spillede kampvogn, kortet, dens side og hvordan kampen endte.",
+    "heading": "Gameplay <accent>videoer</accent>"
+  }
+}

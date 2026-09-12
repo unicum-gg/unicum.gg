@@ -1,0 +1,13 @@
+{
+  "battles-overall": "총 {battles}회 전투",
+  "checking-your-record-on-this": "이 전차의 기록을 확인하는 중...",
+  "fetching-your-garage": "차고를 가져오는 중",
+  "have-you-played": "{tank}을(를) 플레이했나요?",
+  "more-to-go": "전투 {count}회 더 필요",
+  "more-to-go-one": "전투 {count}회 더 필요",
+  "sign-in-to-rate-it": "로그인하여 평가",
+  "sign-in-with-your-wargaming-account-to-rate-": "워게이밍 계정으로 로그인하여 평가하세요. 이 정확한 전차의 기록을 확인하므로, 한 번도 운전해 보지 않은 사람들의 투표로 페이지가 채워지는 것을 막을 수 있습니다.",
+  "signed-in-on": "{region}에 로그인됨",
+  "too-few-battles": "{tank}에서 {played}회 전투를 플레이했습니다. 투표가 반영되려면 {required}회가 필요합니다. 실제로 플레이한 사람들의 평균만 유지하기 위한 기준입니다.",
+  "you-have-not-played": "{tank}을(를) 플레이하지 않았습니다"
+}

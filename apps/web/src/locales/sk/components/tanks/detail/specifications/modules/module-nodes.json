@@ -1,0 +1,17 @@
+{
+  "aim-time": "Čas mierenia",
+  "ammo": "Strelivo",
+  "armor": "Pancierovanie",
+  "dispersion": "Rozptyl",
+  "fire-chance": "Šanca na požiar",
+  "gun-arc": "Gun arc",
+  "hit-points": "Životy",
+  "load-limit": "Load limit",
+  "mounted-on": "Montuje sa na vozidlá: {tanks}",
+  "power": "Sila",
+  "reload": "Prebitie",
+  "signal-range": "Signálový dosah",
+  "tier": "Trieda {tier}",
+  "traverse": "Traverse",
+  "view-range": "Dosah videnia"
+}

@@ -1,0 +1,162 @@
+{
+  "columns-label": "열",
+  "groups": {
+    "firepower": "화력",
+    "gun-handling": "사격 조작",
+    "mobility": "기동",
+    "survivability": "생존",
+    "other": "기타"
+  },
+  "columns": {
+    "dpm": {
+      "label": "DPM",
+      "tip": "분당 피해량"
+    },
+    "damage": {
+      "label": "피해량",
+      "tip": "Alpha 피해량"
+    },
+    "moduleDamage": {
+      "label": "모듈 피해량"
+    },
+    "splashRadius": {
+      "label": "폭발 반경"
+    },
+    "reload": {
+      "label": "재장전 시간",
+      "tip": "재장전 (자동 장전기의 전체 탄창)"
+    },
+    "rof": {
+      "label": "연사력",
+      "tip": "분당 발사 수"
+    },
+    "intraClipReload": {
+      "label": "클립 내 재장전 시간",
+      "tip": "탄창 내 포탄 간 발사 간격 (자동 장전기)"
+    },
+    "penetration": {
+      "label": "관통력",
+      "tip": "관통력 (mm), 기본 포탄"
+    },
+    "caliber": {
+      "label": "구경",
+      "tip": "포탄 구경 (mm)"
+    },
+    "shellVelocity": {
+      "label": "포탄 속도",
+      "tip": "포탄 속도 (m/s)"
+    },
+    "accuracy": {
+      "label": "정확도",
+      "tip": "100m에서의 분산도 (낮을수록 좋음)"
+    },
+    "aimTime": {
+      "label": "조준 시간"
+    },
+    "dispMoving": {
+      "label": "이동 중 산포",
+      "tip": "이동 중 산포 계수"
+    },
+    "dispTankTraverse": {
+      "label": "차체 선회 시 산포"
+    },
+    "dispTurretTraverse": {
+      "label": "포탑 선회 시 산포"
+    },
+    "dispAfterShot": {
+      "label": "발사 후 산포"
+    },
+    "dispWhileDamaged": {
+      "label": "피해를 입었을 때의 산포"
+    },
+    "gunArc": {
+      "label": "주포 좌우각",
+      "tip": "주포 수평 선회 범위"
+    },
+    "depression": {
+      "label": "주포 내림각 / 올림각",
+      "tip": "주포 내림각 / 올림각"
+    },
+    "speed": {
+      "label": "속도 (전진 / 후진)",
+      "tip": "최고 전진 / 후진 속도 (km/h)"
+    },
+    "hullTraverse": {
+      "label": "차체 회전"
+    },
+    "turretTraverse": {
+      "label": "포탑 회전"
+    },
+    "enginePower": {
+      "label": "파워",
+      "tip": "엔진 출력 (마력)"
+    },
+    "powerWeight": {
+      "label": "파워/중량",
+      "tip": "톤당 마력"
+    },
+    "terrainHard": {
+      "label": "단단한 지면",
+      "tip": "단단한 지형에서의 지형 저항 (낮을수록 좋음)"
+    },
+    "terrainMedium": {
+      "label": "미디움 지형"
+    },
+    "terrainSoft": {
+      "label": "무른 지면"
+    },
+    "health": {
+      "label": "내구도",
+      "tip": "생명력"
+    },
+    "engineHealth": {
+      "label": "엔진 내구도"
+    },
+    "engineFireChance": {
+      "label": "엔진 화재 발생 확률"
+    },
+    "hullArmorFront": {
+      "label": "차체 장갑 (전면)",
+      "tip": "차체 전면 장갑 (mm)"
+    },
+    "turretArmorFront": {
+      "label": "포탑 장갑 (전면)",
+      "tip": "포탑 전면 장갑 (mm)"
+    },
+    "trackArmor": {
+      "label": "궤도 장갑"
+    },
+    "trackHealth": {
+      "label": "궤도 내구도"
+    },
+    "trackRepairTime": {
+      "label": "궤도 수리 시간"
+    },
+    "ammoRackHealth": {
+      "label": "탄약고 내구도"
+    },
+    "weight": {
+      "label": "중량"
+    },
+    "viewRange": {
+      "label": "관측 범위",
+      "tip": "관측 범위 (m)"
+    },
+    "radioRange": {
+      "label": "무전기 범위",
+      "tip": "통신 범위 (m)"
+    },
+    "camoStill": {
+      "label": "정지 시 위장률"
+    },
+    "camoMoving": {
+      "label": "기동 시 위장률"
+    },
+    "camoStillFiring": {
+      "label": "정지 상태에서 발사 후 위장"
+    },
+    "camoMovingFiring": {
+      "label": "이동 중 발사 후 위장"
+    }
+  }
+}

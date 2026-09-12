@@ -1,0 +1,21 @@
+{
+  "trigger": "Atsiliepimai",
+  "title": "Pasidalykite atsiliepimu",
+  "topic-placeholder": "Pasirinkite temą...",
+  "message-placeholder": "Jūsų atsiliepimas...",
+  "send": "Siųsti",
+  "sent": "Ačiū už jūsų atsiliepimą!",
+  "failed": "Nepavyko išsiųsti atsiliepimo. Bandykite dar kartą.",
+  "topics": {
+    "bug": "Pranešimas apie klaidą",
+    "idea": "Naujos funkcijos idėja",
+    "data": "Duomenų tikslumas",
+    "other": "Kitas"
+  },
+  "sentiments": {
+    "awful": "Siaubingai",
+    "bad": "Blogas",
+    "good": "Gerai",
+    "great": "Puikiai"
+  }
+}

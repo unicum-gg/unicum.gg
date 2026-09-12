@@ -1,0 +1,10 @@
+{
+  "how-many-players-are-on": "Koliko je igrača trenutno na svakom serveru {label}, kako se taj broj mijenja tokom dana i sedmice te kako se regija upoređuje s ostalima.",
+  "recording-just-started": "Zabilježavanje je upravo počelo, pa se grafikoni odavde popunjavaju.",
+  "series-starts": "Serija počinje {at}, kada je počelo zabilježavanje, a ništa prije toga nije moguće vratiti.",
+  "server-population": "Populacija servera {label}",
+  "title": "World of Tanks {population}",
+  "wargaming-names-a-region-s": "Wargaming imenuje prve klastere regije, a ostale ostavlja kao gole identifikatore, pa se 203 prikazuje kao EU3, nastavljajući vlastito numerisanje regije. Identifikator je ono što bilježimo i ono što svako ime otkriva pri prelasku pokazivačem, a on određuje i oznaku. Numerisanje klastera prema njihovoj zauzetosti premjestilo bi ime s jednog servera na drugi kad god bi zamijenili mjesta. Server koji nedostaje u uzorku uopšte nije prijavljen, što nije isto što i prazan server.",
+  "we-record-it": "Wargaming objavljuje populaciju svakog servera kao trenutnu vrijednost i ne čuva njenu historiju, pa je svaka vrijednost nakon tekuće minute ona koju smo sami zabilježili, svakih pet minuta.",
+  "where-battles-are-fought": "Gdje se vode bitke igrača {label}"
+}

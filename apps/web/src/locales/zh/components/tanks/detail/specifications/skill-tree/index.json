@@ -1,0 +1,6 @@
+{
+  "click-a-reachable-node-to": "点击可到达的节点将其解锁，每个节点都会对上方特性产生效果。颜色按火力、机动性、生存能力和车辆机制对节点分组。",
+  "loadout-switch-no-effect": "战斗内配置切换。无特性效果。",
+  "title": "坦克{tank}的升级",
+  "vehicle-mechanic-no-effect": "车辆机制。无特性效果。"
+}

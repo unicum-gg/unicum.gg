@@ -1,0 +1,40 @@
+{
+  "field": {
+    "width": "Ширина игровой зоны",
+    "height": "Высота игровой зоны",
+    "round-length": "Таймер боя",
+    "team-size": "Размер команды",
+    "camouflage": "Сезон",
+    "presence": "В игре",
+    "variant-version": "Версия {type}",
+    "play-area": "Игровая зона",
+    "bases-team1": "Союзные базы",
+    "bases-team2": "Базы противника",
+    "spawns-team1": "Точки появления союзников",
+    "spawns-team2": "Точки появления противника",
+    "control-point": "Контрольная точка",
+    "artillery-headquarters": "Артиллерийский штаб",
+    "comms-centers": "Центры связи",
+    "observation-posts": "Наблюдательные пункты",
+    "points-of-interest": "Ключевые позиции"
+  },
+  "summary": {
+    "added": "Добавлено: {name}",
+    "removed": "Удалено: {name}",
+    "added-to-game": "Добавлено в игру",
+    "removed-from-game": "Удалено из игры",
+    "added-on-test": "Добавлено на тестовом клиенте",
+    "removed-on-test": "Удалено с тестового клиента",
+    "mode-added": "Добавлен режим {name}",
+    "mode-removed": "Удалён режим {name}",
+    "now-played-in": "Теперь играют в режиме {name}",
+    "no-longer-played-in": "Больше не играют в режиме {name}",
+    "event-added": "Теперь во время боя может происходить {name}",
+    "event-removed": "Больше не происходит {name}",
+    "moved": "Перемещение: {name}",
+    "count-changed": "{name}: {before} → {after}",
+    "value-changed": "{name}: {before} → {after}",
+    "value-set": "{name}: {after}"
+  },
+  "name-with-mode": "{name} ({mode})"
+}

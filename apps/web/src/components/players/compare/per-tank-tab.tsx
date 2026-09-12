@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { useTranslation } from "@/hooks/use-translation";
 import { Fragment, useMemo, useState } from "react";
 import {
   IntegerCell,
@@ -74,6 +76,8 @@ export function PerTankTab({
   wnxExpected: Map<number, WNXExpected>;
   wn8Fallback: Map<string, WN8Expected>;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/players/compare/per-tank-tab");
   const [sort, setSort] = useState<SortState<SortMetric>>(null);
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
@@ -166,17 +170,16 @@ export function PerTankTab({
   const headerWinners = useMemo(
     () =>
       bestIndex(
-        slotAggRatings.map((v) => ratingCell(v, ratingColor)),
+        slotAggRatings.map((v) => ratingCell(v, ratingColor, locale)),
         "higher",
       ),
-    [slotAggRatings, ratingColor],
+    [slotAggRatings, ratingColor, locale],
   );
 
   if (rows.length === 0) {
     return (
       <p className="p-4 text-sm text-muted-foreground">
-        Not enough tank data to compare.
-      </p>
+        {t("not-enough-tank-data-to")}</p>
     );
   }
 
@@ -192,8 +195,7 @@ export function PerTankTab({
                 onClick={() => toggleSort({ kind: "tier" })}
                 align="start"
               >
-                Tank
-              </SortToggle>
+                {t("tank")}</SortToggle>
             </TableHead>
             {slots.map((s, idx) => (
               <TableHead
@@ -214,14 +216,14 @@ export function PerTankTab({
             ))}
           </TableRow>
           <TableRow>
-            <TableHead className="text-xs text-muted-foreground">Tier</TableHead>
+            <TableHead className="text-xs text-muted-foreground">{t("tier")}</TableHead>
             {slots.map((_, idx) => (
               <Fragment key={idx}>
                 <SubHeadSort
                   sort={sort}
                   column={{ kind: "slot", slot: idx, metric: "battles" }}
                   onClick={toggleSort}
-                  label="Battles"
+                  label={t("battles")}
                 />
                 <SubHeadSort
                   sort={sort}
@@ -233,7 +235,7 @@ export function PerTankTab({
                   sort={sort}
                   column={{ kind: "slot", slot: idx, metric: "avgDmg" }}
                   onClick={toggleSort}
-                  label="Dmg"
+                  label={t("dmg")}
                 />
               </Fragment>
             ))}
@@ -242,7 +244,7 @@ export function PerTankTab({
         <TableBody>
           {sortedRows.map((r) => {
             const ratingCells = r.cells.map((c) =>
-              ratingCell(c.rating, ratingColor),
+              ratingCell(c.rating, ratingColor, locale),
             );
             const bestRating = bestIndex(ratingCells, "higher");
             return (

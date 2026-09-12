@@ -66,13 +66,15 @@ function csv(ids: (number | string)[]): string | undefined {
  */
 export async function resolveHistoryItems(
   items: SearchHistoryItem[],
+  /** The reader's language, so a remembered glossary term comes back in it. */
+  locale: string,
 ): Promise<Map<string, SearchHistoryItem>> {
   const fresh = new Map<string, SearchHistoryItem>();
   if (items.length === 0) return fresh;
 
   const byRegion = collectIds(items);
   await Promise.all([
-    resolveGlossary(items, fresh),
+    resolveGlossary(items, fresh, locale),
     ...[...byRegion].map(async ([region, ids]) => {
       try {
         const resolved = await unicum.region(region).searchResolve({
@@ -134,13 +136,14 @@ export async function resolveHistoryItems(
 async function resolveGlossary(
   items: SearchHistoryItem[],
   fresh: Map<string, SearchHistoryItem>,
+  locale: string,
 ): Promise<void> {
   const slugs = new Set(
     items.filter((i) => i.kind === "glossary").map((i) => i.term.slug),
   );
   if (slugs.size === 0) return;
   try {
-    const { results } = await unicum.glossary.list();
+    const { results } = await unicum.glossary.list({ language: locale });
     for (const term of results) {
       if (!slugs.has(term.slug)) continue;
       const item: SearchHistoryItem = {

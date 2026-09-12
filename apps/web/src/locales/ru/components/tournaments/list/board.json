@@ -1,0 +1,14 @@
+{
+  "date": "Дата",
+  "featured-tournament": "Рекомендуемый турнир",
+  "format": "Формат",
+  "mode": "Режим",
+  "no-tournament-matches-the-current": "Ни один турнир не соответствует текущим фильтрам.",
+  "nothing-here-right-now-wargaming": "Сейчас здесь ничего нет. Wargaming открывает новые турниры каждый день, поэтому список заполнится сам.",
+  "prize": "Приз",
+  "region-tournaments": "Турниры региона {region} ({count})",
+  "status": "Статус",
+  "teams": "Команды",
+  "tier": "Уровень",
+  "tournament": "Турнир"
+}

@@ -1,0 +1,4 @@
+{
+  "pick-a-reserve": "Velg en reserve for å forhåndsvise tidsplanen.",
+  "schedule": "På de aktive dagene dine aktiveres den kl. {times} (hver varer i {hours}t), og dekker {window} når minimumsgrensen for påloggede er nådd."
+}

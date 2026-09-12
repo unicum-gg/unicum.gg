@@ -1,0 +1,14 @@
+{
+  "ammunition": "砲弾",
+  "characteristics": "{tank}の特性",
+  "consumables": "消耗品",
+  "crew-level": "搭乗員レベル",
+  "crew-skills": "乗組員スキル",
+  "equipment": "拡張パーツ",
+  "field-mods": "フィールド改造",
+  "historical-reference": "{tank}の歴史的背景",
+  "modules": "{tank}のモジュール",
+  "research-path": "{tank}の技術ツリー分岐",
+  "similar": "{tank}に近い戦車",
+  "videos": "{tank}の動画"
+}

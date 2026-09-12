@@ -1,0 +1,37 @@
+{
+  "label": "Още",
+  "items": {
+    "tournaments": {
+      "label": "Турнири",
+      "description": "Схеми, състави и резултати по региони"
+    },
+    "servers": {
+      "label": "Сървъри",
+      "description": "Игачи онлайн, сега и във времето"
+    },
+    "bot": {
+      "label": "Discord бот",
+      "description": "Статистики за играчи, кланове и танкове като slash команди"
+    },
+    "mcp": {
+      "label": "MCP сървър",
+      "description": "Свържи Claude, ChatGPT или всеки MCP клиент"
+    },
+    "api": {
+      "label": "API",
+      "description": "Безплатен публичен REST API, без необходим ключ"
+    },
+    "badges": {
+      "label": "Ленти",
+      "description": "Всяка емблема, която играч или клан може да спечели, и как"
+    },
+    "glossary": {
+      "label": "Глосар",
+      "description": "Всеки термин от World of Tanks, обяснен"
+    },
+    "support": {
+      "label": "Подкрепете ни",
+      "description": "Поддържай {name} безплатен, отворен и без реклами"
+    }
+  }
+}

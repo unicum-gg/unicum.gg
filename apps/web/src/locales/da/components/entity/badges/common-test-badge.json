@@ -1,0 +1,12 @@
+{
+  "aria-build": "Læst på Offentlig Test-klienten, build {version}",
+  "aria-changes": "Ændret af Offentlig Test: {changes} egenskaber",
+  "aria-described": "Offentlig Test: {description}",
+  "aria-vehicle": "Køretøj på Offentlig Test",
+  "common-test": "Offentlig Test",
+  "common-test-build": "Offentlig Test {version}",
+  "tip-build": "{label} · dette er testbuildets værdier, og Wargaming kan stadig ændre dem, før opdateringen udgives",
+  "tip-changes": "Ændringer i Offentlig Test på dette køretøj: {changes, plural, one {# ændring af egenskab} other {# ændringer af egenskaber}}",
+  "tip-described": "Offentlig Test · {description}",
+  "tip-vehicle": "Offentlig Test · endnu ikke udgivet, så det har ingen kampstatistik, og dets egenskaber kan stadig ændres"
+}

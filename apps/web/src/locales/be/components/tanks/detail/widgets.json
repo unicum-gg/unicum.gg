@@ -1,0 +1,12 @@
+{
+  "slot": "Слот {n}",
+  "slot-filled": "Слот {n}: {name}",
+  "consumable-slot": "Слот расходніка {n}",
+  "consumable-slot-filled": "Слот расходніка {n}: {name}",
+  "level": "Узровень {n}",
+  "stock": "Стандартны",
+  "specialize": "Націсніце, каб спецыялізаваць гэты слот.",
+  "clear-specialization": "Націсніце, каб ачысціць спецыялізацыю гэтага слота.",
+  "crew-skills": "Навыкі Экіпажа",
+  "shell-aria": "{name}: {damage} страт, {penetration} мм прабіцця"
+}

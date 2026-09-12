@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "Aún no se ha registrado ningún clúster.",
+  "server": "Servidor",
+  "online": "En línea",
+  "share": "Compartir",
+  "peak": "Pico ({label})",
+  "average": "Promedio ({label})",
+  "not-reported": "No reportado",
+  "total": "Total"
+}

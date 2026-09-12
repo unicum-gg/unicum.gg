@@ -1,0 +1,5 @@
+{
+  "title": "{map}、World of Tanksマップ（{region}地域）",
+  "description": "{map}：幅{width} × 高さ{height} mのWorld of Tanksマップ。",
+  "description-modes": "{map}：幅{width} × 高さ{height} mで、{modes}をプレイするWorld of Tanksマップ。"
+}

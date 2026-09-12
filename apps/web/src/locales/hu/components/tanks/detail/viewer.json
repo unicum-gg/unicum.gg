@@ -1,0 +1,69 @@
+{
+  "views": {
+    "visual": "Vizuális",
+    "collision": "Ütközés",
+    "live": "Élő"
+  },
+  "centre": {
+    "on": "Jármű középre igazítása",
+    "off": "Jármű visszahelyezése középen kívülre"
+  },
+  "hull-down": {
+    "on": "Páncél lefelé",
+    "off": "Jármű vízszintbe állítása"
+  },
+  "tracks": {
+    "on": "Lánctalpak mozgatása",
+    "off": "Lánctalpmozgatás leállítása"
+  },
+  "textures": {
+    "on": "Nagy felbontású textúrák",
+    "off": "Alap textúrák"
+  },
+  "reset": "Visszaállít",
+  "style": "Válassz stílust",
+  "style-worn": "Stílus: {name}",
+  "search-styles": "Stílus keresés",
+  "colours": "Mit jelentenek a színek",
+  "cinematic": {
+    "off": "Filmszerű kamera: ki",
+    "auto": "Filmszerű kamera: tétlenség esetén",
+    "on": "Filmszerű kamera: mindig"
+  },
+  "open-tank": "Másik tank megnyitása",
+  "open-tank-placeholder": "Tank megnyitása...",
+  "more-actions": "További műveletek",
+  "marks-meaning": {
+    "0": "Nincsenek kiválósági jelek",
+    "1": "Egy jel: a játékosok 65%-ánál jobb ezzel a tankkal",
+    "2": "Két jel: a játékosok 85%-ánál jobb",
+    "3": "Három jel: a játékosok 95%-ánál jobb"
+  },
+  "presentation": {
+    "windowed": {
+      "enter": "Ablak kitöltése",
+      "leave": "Vissza az oldalra"
+    },
+    "screen": {
+      "enter": "Képernyő kitöltése",
+      "leave": "Kilépés a teljes képernyőből"
+    }
+  },
+  "marks-count": {
+    "0": "Nincsenek kiválósági jelek",
+    "one": "1 kiválósági jel",
+    "other": "{count} kiválósági jel"
+  },
+  "compare-tank": "Összehasonlítás másik tankkal",
+  "compare-tank-placeholder": "Összehasonlítás...",
+  "view-tooltips": {
+    "visual": "A tank úgy, ahogy a játék megjeleníti",
+    "collision": "Milyen vastag az egyes páncéllemezek",
+    "live": "Mit tenne a választott lövedék"
+  },
+  "cinematic-tooltips": {
+    "off": "Filmszerű kamera: ki, a nézet nem mozdul",
+    "auto": "Filmszerű kamera: 30 másodperc tétlenség után indul",
+    "on": "Filmszerű kamera: mindig, attól a pillanattól, hogy elengeded"
+  }
+}

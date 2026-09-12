@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "overview": "Áttekintés",
+    "tanks": "Tankok",
+    "videos": "Videók",
+    "tournaments": "Tornák",
+    "manage": "Kezelés"
+  },
+  "section-count": "{section} ({count})"
+}

@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>hráči</accent>",
+    "language": "Najlepší hráči podľa jazyka <accent>{language}</accent>"
+  },
+  "intro": {
+    "all": "Rebríček regiónu {region} zoradený podľa celkového hodnotenia {metric} (minimálne 20 000 bitiek).",
+    "language": "Hráči z regiónu {region}, ktorých jazykový profil odvodený z histórie klanov zahŕňa jazyk {language}, zoradení podľa hodnotenia {metric} (minimálne 10 000 bitiek).",
+    "strict": "Hráči z regiónu {region}, ktorých jazykový profil odvodený z histórie klanov obsahuje výhradne jazyk {language}, zoradení podľa hodnotenia {metric} (minimálne 10 000 bitiek)."
+  },
+  "board": {
+    "all": "Najlepších {count} hráčov podľa hodnotenia {metric}",
+    "language": "Najlepších {count} hráčov s jazykovým profilom zahŕňajúcim jazyk {language} podľa hodnotenia {metric}",
+    "strict": "Najlepších {count} hráčov s jazykovým profilom obsahujúcim výhradne jazyk {language} podľa hodnotenia {metric}"
+  },
+  "modes": {
+    "overall": "Celkovo"
+  },
+  "columns": {
+    "player": "Hráč"
+  },
+  "strict-toggle": "Prísny",
+  "any-toggle": "Akýkoľvek",
+  "all-languages": "Všetky jazyky",
+  "battles": "Bitky",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

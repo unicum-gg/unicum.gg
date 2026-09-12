@@ -1,0 +1,22 @@
+{
+  "search": "Hľadať medzi pojmami ({count})",
+  "search-label": "Prehľadať slovník pojmov",
+  "all": "Všetky",
+  "jump": "Prejsť na písmeno",
+  "empty": "Výrazu „{query}“ nezodpovedá žiadny pojem.",
+  "categories": {
+    "vehicles": "Vozidlá",
+    "gunnery": "Dostrel",
+    "armor": "Pancierovanie",
+    "mobility": "Pohybovosť",
+    "vision": "Vízia",
+    "crew": "Posadka",
+    "progression": "Pokrok",
+    "economy": "Ekonomika",
+    "ratings": "Hodnotenia",
+    "statistics": "Štatistiky",
+    "modes": "Bitkové módy",
+    "tactics": "Taktiky",
+    "slang": "Slang"
+  }
+}

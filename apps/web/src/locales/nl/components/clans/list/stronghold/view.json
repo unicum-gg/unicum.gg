@@ -1,0 +1,9 @@
+{
+  "no-data-yet-check-back": "Nog geen gegevens. Kom terug zodra de clans zijn bijgewerkt.",
+  "heading": "Top clans van <accent>{tier}</accent>",
+  "blurb": "Ranglijst voor {region}, met alle bijgehouden clans in {format} gerangschikt op {sort} (minimaal {battles} gevechten).",
+  "blurb-period": "Ranglijst voor {region} over de {period}, met alle bijgehouden clans in {format} gerangschikt op {sort} (minimaal {battles} gevechten).",
+  "format-advances": "Offensieven (15v15)",
+  "format-skirmish": "{tier} (7v7)",
+  "panel-title": "Top {count} clans van {tier} ·"
+}

@@ -1,0 +1,11 @@
+{
+  "closes": "Zavřít {when}",
+  "map-pool": "Mapový balíček",
+  "place": "Místo",
+  "prize": "Cena",
+  "prizes": "Ceny",
+  "qualified": "Kvalifikováno ({count})",
+  "register": "Registrovat",
+  "tournaments": "Turnaje",
+  "winner": "{count, plural, one {Vítěz} few {Vítězové} many {Vítězů} other {Vítězů}}"
+}

@@ -1,0 +1,9 @@
+{
+  "aria-rank": "Posto {rank} na classificação de {board}",
+  "board": {
+    "advances": "Avanços da classificação da Fortaleza",
+    "skirmish-t10": "Classificação da Escaramuça de Nível X",
+    "skirmish-t6": "Classificação da Escaramuça de Nível VI",
+    "skirmish-t8": "Classificação da Escaramuça de Nível VIII"
+  }
+}

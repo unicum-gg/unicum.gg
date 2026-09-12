@@ -1,0 +1,12 @@
+{
+  "final": " · finále",
+  "has-not-held-a-place": "{nickname} zatiaľ nemá umiestnenie v rebríčku režimu Nápor.",
+  "live-season": "· aktuálna sezóna",
+  "loading-s-onslaught-record": "Načítava sa záznam v režime Nápor pre profil {nickname}...",
+  "onslaught": "Ofenzíva",
+  "onslaught-record": "Záznam v režime Nápor pre profil {nickname}",
+  "see-this-season-s-leaderboard": "Zobraziť rebríček tejto sezóny",
+  "standing-line": "{rating} bodov hodnotenia · {battles} bitiek",
+  "the-board-only-lists-players": "Rebríček zobrazuje iba hráčov, ktorí dosiahnu hodnosť Šampión. V každom regióne ich je len niekoľko tisíc, preto sa táto obrazovka zobrazí pri takmer každom profile. Údaje sa automaticky doplnia v sezóne, v ktorej hráč túto hodnosť dosiahne.",
+  "updated": "Aktualizované {when}"
+}

@@ -1,0 +1,18 @@
+{
+  "caught-up": "已完全追上，谢谢。所有额外资金都会用于提升吞吐量和开发新功能。",
+  "covered-label": "已覆盖",
+  "covered-sentence": "支持者目前已承担{spent}支出中的{received}。",
+  "days-out-of-pocket": "{days}天，自掏腰包",
+  "from-supporter-one": "来自{count}名支持者",
+  "from-supporters": "来自{count}名支持者",
+  "gap-growing": "每月增加{amount}即可阻止差距扩大。",
+  "goal": "目标 {amount}",
+  "of-that-total": "占总额",
+  "pledges-cover": "目前的承诺捐款已覆盖月度账单。",
+  "raised-amount": "筹集了{amount}",
+  "raised-label": "筹集",
+  "run-at-a-loss": "{name}自{since}以来一直在亏损运营。",
+  "run-rate": "月度运营速度：已承诺{pledged}/月，运营成本为{cost}/月。",
+  "spent-since-launch": "上线以来支出",
+  "to-catch-up": "还需{amount}才能完全追上。"
+}

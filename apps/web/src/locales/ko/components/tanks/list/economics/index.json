@@ -1,0 +1,9 @@
+{
+  "rows-per-page": "페이지당 행 수",
+  "free-xp-from": "무료 XP 출처",
+  "xp-1-gold": "XP = 골드 1개",
+  "previous-page": "이전 페이지",
+  "page": "페이지 {current} / {totalPages}",
+  "next-page": "다음 페이지",
+  "all": "전체"
+}

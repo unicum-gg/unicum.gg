@@ -1,0 +1,20 @@
+{
+  "chat": {
+    "show": "แสดงแชต",
+    "hide": "ซ่อนแชต",
+    "show-streamers": "แสดงสตรีมเมอร์"
+  },
+  "heading": "สถิติผู้เล่น แคลน และรถถัง World of Tanks ของ {name}",
+  "hide": "ซ่อนสตรีมเมอร์",
+  "player": "ผู้เล่น",
+  "stream-language": "ภาษาสตรีม · {name}",
+  "stream-language-alt": "ภาษาสตรีม: {name}",
+  "theater": {
+    "enter": "โหมดเธียเตอร์",
+    "exit": "ออกจากโหมดโรงภาพยนตร์"
+  },
+  "title": "ผู้เล่นอันดับต้น ๆ ที่กำลังสตรีม ·",
+  "viewer-count": "ผู้ชม {count} คน",
+  "viewers": "ผู้ชม",
+  "watch": "ดู {nickname} บน Twitch"
+}

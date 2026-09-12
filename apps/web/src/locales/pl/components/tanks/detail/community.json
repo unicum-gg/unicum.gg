@@ -1,0 +1,8 @@
+{
+  "what-players-think": "Opinie graczy o tym czołgu",
+  "not-rated": "Jeszcze brak ocen, dodaj pierwszą",
+  "votes": "{count} głosów",
+  "votes-one": "{count} Głosuj",
+  "stars": "{value} z {max}",
+  "not-rated-short": "Nie ocenione"
+}

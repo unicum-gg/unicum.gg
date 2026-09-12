@@ -1,0 +1,13 @@
+{
+  "above-of-the-rated-tanks": "cao hơn {value}% số xe tăng được đánh giá trong cùng cấp",
+  "measured-hint": "Vị trí xếp hạng của tỷ lệ thắng khi so với các xe tăng cùng loại",
+  "not-enough-votes-yet-to": "Chưa có đủ lượt bình chọn để so sánh phán quyết của cộng đồng với hiệu suất thực sự của xe tăng.",
+  "perceived-hint": "Vị trí xếp hạng của cộng đồng dành cho xe này trong số các xe tăng cấp {tier} được đánh giá",
+  "verdict": {
+    "overrated": "Cộng đồng đánh giá xe này cao hơn nhiều so với thành tích thực sự của nó.",
+    "fair": "Danh tiếng và kết quả thống nhất với nhau ở xe này.",
+    "underrated": "Xe này hoạt động tốt hơn nhiều so với những gì mọi người công nhận."
+  },
+  "what-players-think": "Người chơi nghĩ gì",
+  "what-the-data-says": "Dữ liệu cho thấy gì"
+}

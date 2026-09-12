@@ -1,0 +1,14 @@
+{
+  "ammunition": "Amunicja",
+  "characteristics": "Charakterystyki czołgu {tank}",
+  "consumables": "Mat. eksploatacyjne",
+  "crew-level": "Poziom załogi",
+  "crew-skills": "Umiejętności załogi",
+  "equipment": "Wyposażenie",
+  "field-mods": "Modyfikacje polowe",
+  "historical-reference": "Informacje historyczne o czołgu {tank}",
+  "modules": "Moduły czołgu {tank}",
+  "research-path": "Ścieżka badań czołgu {tank}",
+  "similar": "Czołgi podobne do czołgu {tank}",
+  "videos": "Filmy o czołgu {tank}"
+}

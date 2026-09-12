@@ -1,0 +1,21 @@
+{
+  "title": "Bedømmelsesskala",
+  "description": "Farvetærskler, der bruges på hele siden for sejrsrate og den vurderingsmetrik, der er valgt i navigationslinjen.",
+  "tier": "Niveau",
+  "tiers": {
+    "top": "Bedste",
+    "excellent": "Fremragende",
+    "super": "Super",
+    "very-good": "Meget god",
+    "good": "God",
+    "average": "Gennemsnit",
+    "below-avg": "Under middel",
+    "bad": "Dårlig",
+    "very-bad": "Meget dårlig"
+  },
+  "rating-colors": "Vurderingsfarver",
+  "wr": "WR",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

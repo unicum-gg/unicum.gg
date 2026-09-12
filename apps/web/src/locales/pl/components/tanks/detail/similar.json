@@ -1,0 +1,11 @@
+{
+  "compare": "Porównaj z {count} najbardziej podobnymi",
+  "match": "bitwa",
+  "subtitle": "Ta sama pozycja wśród pojazdów swojego poziomu",
+  "verdict": {
+    "overall": "Ogółem podobnie",
+    "closest": "Najbardziej podobny pod względem: {axes}",
+    "closest-furthest": "Najbardziej podobny pod względem: {axes}, najmniej podobny pod względem: {apart}",
+    "and": " i "
+  }
+}

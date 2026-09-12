@@ -1,0 +1,29 @@
+{
+  "heading": {
+    "plain": "Top <accent>खिलाड़ी</accent>",
+    "language": "<accent>{language}</accent> के शीर्ष खिलाड़ी"
+  },
+  "intro": {
+    "all": "{region} का लीडरबोर्ड, सर्वकालिक {metric} के अनुसार रैंक्ड, न्यूनतम 20,000 युद्ध।",
+    "language": "{region} के वे खिलाड़ी जिनके अनुमानित क्लान-इतिहास भाषा सेट में {language} शामिल है, {metric} के अनुसार रैंक्ड, न्यूनतम 10,000 युद्ध।",
+    "strict": "{region} के वे खिलाड़ी जिनकी अनुमानित क्लान-इतिहास भाषा केवल {language} है, {metric} के अनुसार रैंक्ड, न्यूनतम 10,000 युद्ध।"
+  },
+  "board": {
+    "all": "{metric} के अनुसार शीर्ष {count} खिलाड़ी",
+    "language": "{metric} के अनुसार शीर्ष {count} {language} खिलाड़ी",
+    "strict": "{metric} के अनुसार केवल {language} वाले शीर्ष {count} खिलाड़ी"
+  },
+  "modes": {
+    "overall": "कुल मिलाकर"
+  },
+  "columns": {
+    "player": "खिलाड़ी"
+  },
+  "strict-toggle": "कठोर",
+  "any-toggle": "कोई भी",
+  "all-languages": "सभी भाषाएँ",
+  "battles": "युद्ध",
+  "wn7": "WN7",
+  "wn8": "WN8",
+  "wnx": "WNX"
+}

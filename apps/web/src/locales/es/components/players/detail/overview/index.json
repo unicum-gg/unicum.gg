@@ -1,0 +1,7 @@
+{
+  "stats-title": "Estadísticas de {nickname} en Batallas Aleatorias",
+  "progression-title": "Progresión de {nickname} en {metric}",
+  "lift-drag-title": "Tanques que influyen en la Clasificación de {nickname}",
+  "progression-blurb": "La línea continua muestra {metric} global (coincide con la columna Total de arriba) y cambia lentamente a medida que se acumulan nuevas batallas. La línea discontinua muestra {metric} por sesión. El valor se calcula a partir de las batallas jugadas desde la instantánea anterior y muestra las rachas buenas y malas. El color de la línea corresponde al nivel de clasificación.",
+  "progression-empty": "Aún no hay suficiente historial. Necesitamos al menos una instantánea para trazar la curva. Vuelve pronto."
+}

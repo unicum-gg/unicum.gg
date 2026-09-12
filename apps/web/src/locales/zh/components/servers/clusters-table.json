@@ -1,0 +1,10 @@
+{
+  "no-cluster-recorded-yet": "暂无服务器集群纪录。",
+  "server": "服务器",
+  "online": "在线",
+  "share": "分享",
+  "peak": "峰值 ({label})",
+  "average": "平均值 ({label})",
+  "not-reported": "未报告",
+  "total": "总计"
+}

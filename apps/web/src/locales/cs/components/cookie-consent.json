@@ -1,0 +1,16 @@
+{
+  "title": "Používáme soubory cookie",
+  "description": "Používáme soubory cookie ke zlepšení vašeho zážitku z prohlížení a analýze návštěvnosti webu.",
+  "functional": {
+    "title": "Funkční",
+    "description": "Nezbytné pro správné fungování webu (předvolby, výběr regionu)."
+  },
+  "analytics": {
+    "title": "Měření návštěvnosti",
+    "description": "Google Analytics ukládá soubory cookie, které nám pomáhají pochopit, jak je web používán. Anonymní analýza bez souborů cookie (Umami) zůstane aktivní v každém případě."
+  },
+  "save": "Uložit moje volby",
+  "decline": "Odmítnout vše",
+  "customize": "Přizpůsobit",
+  "accept": "Přijmout vše"
+}

@@ -1,0 +1,25 @@
+{
+  "tagline": "Conçu pour la communauté World of Tanks. Des statistiques gratuites pour chaque joueur, clan, char et carte en Europe, en Amérique du Nord et en Asie.",
+  "columns": {
+    "leaderboards": "Classements",
+    "tanks": "Chars",
+    "maps": "Cartes",
+    "integrations": "Intégrations",
+    "project": "Projet"
+  },
+  "links": {
+    "top-tanks": "Meilleurs chars",
+    "bot": "Bot Discord",
+    "mcp": "Serveur MCP",
+    "docs": "Documentation de l’API",
+    "badges": "Badges",
+    "glossary": "Glossaire",
+    "coverage": "Couverture",
+    "support": "Soutenez-nous",
+    "source": "Code source",
+    "status": "Statut",
+    "discord": "Discord"
+  },
+  "disclaimer": "Non affilié à Wargaming",
+  "cookies": "Gérer les cookies"
+}

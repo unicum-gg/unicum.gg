@@ -1,3 +1,5 @@
+// The OpenGraph cards are English on purpose, like the API reference: they are
+// pictures rendered per share, not pages a reader browses in their language.
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { hangarBgUrl, type Region } from "@unicum.gg/wargaming";

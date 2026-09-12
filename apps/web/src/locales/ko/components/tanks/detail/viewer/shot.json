@@ -1,0 +1,7 @@
+{
+  "firing": "{shell} 발사, {pen} mm. 포탄 변경",
+  "no-such-round": "{mark}: 이 주포에는 없으므로 각도를 직접 설정하세요",
+  "own-round": "{mark}: 이 주포의 기본 포탄, 수치 포함",
+  "treat-it-as": "다음으로 간주",
+  "treat-it-as-mark": "{mark}(으)로 간주"
+}

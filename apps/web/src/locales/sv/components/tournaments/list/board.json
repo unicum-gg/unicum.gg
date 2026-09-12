@@ -1,0 +1,14 @@
+{
+  "date": "Datum",
+  "featured-tournament": "Utvald turnering",
+  "format": "Format",
+  "mode": "Läge",
+  "no-tournament-matches-the-current": "Ingen turnering matchar de aktuella filtren.",
+  "nothing-here-right-now-wargaming": "Inget här just nu. Wargaming öppnar nya turneringar varje dag, så listan fylls på igen av sig själv.",
+  "prize": "Pris",
+  "region-tournaments": "Turneringar i {region} ({count})",
+  "status": "Status",
+  "teams": "Lag",
+  "tier": "Nivå",
+  "tournament": "Turnering"
+}

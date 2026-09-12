@@ -1,0 +1,5 @@
+{
+  "n-maps": "{count, plural, other {# 地图}}",
+  "no-map-changes-have-been": "暂时没有记录地图变更。随着 Wargaming 重制地图，每次更新改变的内容都会显示在这里。",
+  "update": "更新 {version}"
+}

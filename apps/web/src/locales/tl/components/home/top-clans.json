@@ -1,0 +1,11 @@
+{
+  "description": {
+    "overall": "Ipinapakita ang mga nangungunang klano sa {region} na may mahigit 50 miyembrong may mga laban, niranggo ayon sa karaniwang {metric}.",
+    "month": "Ipinapakita ang mga nangungunang klano sa {region} na may mahigit 50 miyembrong may mga laban, niranggo ayon sa {metric} sa nakaraang 30 mga araw, hindi bababa sa 15 aktibo."
+  },
+  "updated": "Na-update {when}.",
+  "empty": "Wala pang magagamit na datos ng klano para sa rehiyong ito.",
+  "rank": "#",
+  "clan": "Klan",
+  "average": "Average na {metric}"
+}

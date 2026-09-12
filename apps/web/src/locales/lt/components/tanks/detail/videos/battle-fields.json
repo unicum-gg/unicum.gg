@@ -1,0 +1,13 @@
+{
+  "how-it-ended": "Kaip baigėsi",
+  "loading-maps": "Įkeliami žemėlapiai…",
+  "map": "Žemėlapis",
+  "mode": "Režimas",
+  "pick-a-map": "Pasirinkite žemėlapį",
+  "pick-a-mode": "Pasirinkite režimą",
+  "result": "Rezultatas",
+  "spawn": "Gimimas",
+  "team": "Komanda {team}",
+  "team-spawn": "{team} komanda · {direction}",
+  "which-side-you-started": "Kurioje pusėje pradėjote"
+}

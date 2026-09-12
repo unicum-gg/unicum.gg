@@ -1,0 +1,33 @@
+{
+  "search": {
+    "tanks": "Rechercher parmi {count} chars",
+    "rated-tanks": "Rechercher parmi {count} chars évalués",
+    "videos": "Rechercher parmi {count} vidéos",
+    "players": "Rechercher parmi {count} joueurs",
+    "clans": "Rechercher parmi {count} clans",
+    "tournaments": "Rechercher parmi {count} tournois",
+    "teams": "Rechercher parmi {count} équipes"
+  },
+  "min": "Min",
+  "max": "Max",
+  "none": "Aucun",
+  "common-test": "Modifiés par le Test commun : nouveaux véhicules et véhicules rééquilibrés",
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Récompense"
+  },
+  "moe": {
+    "0": "Pas encore de marque",
+    "1": "1 point",
+    "2": "2 points",
+    "3": "3 points"
+  },
+  "mom": {
+    "0": "Pas encore d’insigne",
+    "1": "3ème Classe",
+    "2": "2ème Classe",
+    "3": "1ère Classe",
+    "4": "As du char"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "date": "Dată",
+  "featured-tournament": "Turneu prezentat",
+  "format": "Format",
+  "mode": "Mod",
+  "no-tournament-matches-the-current": "Niciun turneu nu corespunde filtrelor curente.",
+  "nothing-here-right-now-wargaming": "Nimic aici momentan. Wargaming deschide turnee noi zilnic, așa că această listă se completează automat.",
+  "prize": "Premiu",
+  "region-tournaments": "Turnee {region} ({count})",
+  "status": "Stare",
+  "teams": "Echipe",
+  "tier": "nivel",
+  "tournament": "Turneu"
+}
