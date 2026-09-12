@@ -68,13 +68,19 @@ jobs:
       - name: Fill in the missing translations
         env:
           OPENAI_API_KEY_TRANSLATIONS: ${{ secrets.OPENAI_API_KEY_TRANSLATIONS }}
+          # The endpoint the model is bought from. Without it the SDK goes to
+          # OpenAI directly, where the configured model does not exist, so the
+          # run fails on every request rather than on the first.
+          TRANSLATE_BASE_URL: ${{ secrets.TRANSLATE_BASE_URL }}
         run: pnpm --filter @unicum.gg/web translate
 
-      # Runs after the generator so a failure names the key that is still
-      # missing rather than the ones the run was about to write.
-      - name: Check the locale tree
-        run: pnpm --filter @unicum.gg/web test
-
+      # BEFORE the check, not after, and the order is the whole point. The
+      # generator writes after every request precisely so a run that stops early
+      # is salvageable, and a failing check between the writing and the commit
+      # threw all of it away with the runner's filesystem: the strings were
+      # bought, written, and discarded, and the next run bought them again.
+      # Committing first keeps what was paid for; the check below still fails
+      # the job, so nothing ships unnoticed.
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
@@ -85,3 +91,8 @@ jobs:
             git commit -m "🌐 add ${COUNT} generated translation files"
             git push
           fi
+
+      # Fails the job on a tree the generator could not make whole, which is
+      # worth knowing even though the work is already committed above.
+      - name: Check the locale tree
+        run: pnpm --filter @unicum.gg/web test
