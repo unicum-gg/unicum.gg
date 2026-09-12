@@ -94,7 +94,19 @@ jobs:
           if ! git diff --staged --quiet; then
             COUNT=$(git diff --staged --name-only | wc -l | tr -d ' ')
             git commit -m "🌐 add ${COUNT} generated translation files"
-            git push
+            # Rebase before pushing, and retry: this job commits to main while
+            # people push to it, and a rejected push threw away a whole run's
+            # work once (11 files, already bought and committed in the runner,
+            # lost with its filesystem). Rebase rather than merge because the
+            # commit only ever touches generated locale files, so it replays
+            # onto anything cleanly.
+            for attempt in 1 2 3; do
+              if git push; then exit 0; fi
+              echo "push rejected, rebasing (attempt ${attempt})"
+              git pull --rebase origin main || exit 1
+            done
+            echo "still rejected after three tries"
+            exit 1
           fi
 
       # Fails the job on a tree the generator could not make whole, which is
