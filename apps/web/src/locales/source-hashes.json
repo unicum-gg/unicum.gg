@@ -2291,6 +2291,7 @@
   "components/tanks/detail/viewer/shot:own-round": "2a21163fa34f",
   "components/tanks/detail/viewer/shot:treat-it-as": "51fcc0d93b76",
   "components/tanks/detail/viewer/shot:treat-it-as-mark": "80dabe15829e",
+  "components/tanks/detail/viewer/waiting:loading-the-vehicle": "b5bb33b76b98",
   "components/tanks/detail/viewer/wardrobe:as-it-was-built": "a1d8dc5ac39c",
   "components/tanks/detail/viewer/wardrobe:cut": "38d13bda5c40",
   "components/tanks/detail/viewer/wardrobe:no-style": "fa18e189797c",

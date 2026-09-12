@@ -1,4 +1,7 @@
+"use client";
+
 import { HERO_COLUMN } from "@/components/tanks/detail/viewer/column";
+import { useTranslation } from "@/hooks/use-translation";
 
 // What the band says while the vehicle is on its way.
 //
@@ -34,6 +37,7 @@ const PATIENCE = 600;
  * happening and moves while it happens.
  */
 export function VehicleWaiting({ show }: { show: boolean }) {
+  const { t } = useTranslation("components/tanks/detail/viewer/waiting");
   return (
     <div
       aria-hidden={!show}
@@ -49,7 +53,7 @@ export function VehicleWaiting({ show }: { show: boolean }) {
           <span className="absolute inset-y-0 -left-1/3 w-1/3 animate-[viewer-wait_1.4s_ease-in-out_infinite] rounded-full bg-fd-foreground/50" />
         </span>
         <span className="text-[0.6875rem] text-fd-muted-foreground">
-          Loading the vehicle
+          {t("loading-the-vehicle")}
         </span>
       </div>
       <style>{`@keyframes viewer-wait {

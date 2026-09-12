@@ -807,7 +807,8 @@
     "GRAND FINAL": "GRANDE FINALE",
     "Dispersion moving": "Dispersion en mouvement",
     "Intra-clip reload": "Rechargement entre les obus",
-    "front": "avant"
+    "front": "avant",
+    "Loading": "Chargement"
   },
   "es": {
     "Battles": "Batallas",
@@ -1614,7 +1615,8 @@
     "GRAND FINAL": "GRAN FINAL",
     "Dispersion moving": "Dispersión en movimiento",
     "Intra-clip reload": "Recarga entre disparos",
-    "front": "frontal"
+    "front": "frontal",
+    "Loading": "Cargando"
   },
   "ru": {
     "Battles": "Бои",
@@ -2415,7 +2417,8 @@
     "GRAND FINAL": "ГРАНД-ФИНАЛ",
     "Dispersion moving": "Разброс при движении",
     "Intra-clip reload": "Перезарядка между выстрелами",
-    "front": "лоб"
+    "front": "лоб",
+    "Loading": "Загрузка"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3235,7 +3238,8 @@
     "GRAND FINAL": "WIELKI FINAŁ",
     "Dispersion moving": "Rozrzut podczas ruchu",
     "Intra-clip reload": "Przeładowanie między pociskami",
-    "front": "przód"
+    "front": "przód",
+    "Loading": "Ładowanie"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4065,7 +4069,8 @@
     "GRAND FINAL": "グランド・ファイナル",
     "Dispersion moving": "移動中の散布界",
     "Intra-clip reload": "弾倉内装填時間",
-    "front": "前面"
+    "front": "前面",
+    "Loading": "読み込み中"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4683,7 +4688,8 @@
     "removed": "تمت الإزالة",
     "Dispersion moving": "تشتت أثناء الحركة",
     "Intra-clip reload": "إعادة التلقيم بين القذائف",
-    "front": "أمامي"
+    "front": "أمامي",
+    "Loading": "جارٍ التحميل"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5510,7 +5516,8 @@
     "GRAND FINAL": "VELIKO FINALE",
     "Dispersion moving": "Rasipanje pri kretanju",
     "Intra-clip reload": "Vrijeme punjenja između granata",
-    "front": "prednji dio"
+    "front": "prednji dio",
+    "Loading": "Učitavanje"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6338,7 +6345,8 @@
     "GRAND FINAL": "NAGYDÖNTŐ",
     "Dispersion moving": "Szórás mozgás közben",
     "Intra-clip reload": "Lövedékek közötti töltési idő",
-    "front": "front"
+    "front": "front",
+    "Loading": "Betöltés"
   },
   "ko": {
     "Battles": "전투",
@@ -7173,7 +7181,8 @@
     "GRAND FINAL": "최종 결승전",
     "Dispersion moving": "이동 중 분산",
     "Intra-clip reload": "클립 내 재장전",
-    "front": "전면"
+    "front": "전면",
+    "Loading": "불러오는 중"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8005,7 +8014,8 @@
     "GRAND FINAL": "GRAND FINAL",
     "Dispersion moving": "Spreiding tijdens beweging",
     "Intra-clip reload": "Herlaadtijd tussen granaten",
-    "front": "voorzijde"
+    "front": "voorzijde",
+    "Loading": "Laden"
   },
   "cs": {
     "Battles": "Bitev",
@@ -8828,7 +8838,8 @@
     "GRAND FINAL": "VELKÉ FINÁLE",
     "Dispersion moving": "Rozptyl při pohybu",
     "Intra-clip reload": "Doba mezi výstřely",
-    "front": "čelo"
+    "front": "čelo",
+    "Loading": "Načítání"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9653,7 +9664,8 @@
     "GRAND FINAL": "BÜYÜK FİNAL",
     "Dispersion moving": "Hareket hâlinde dağılım",
     "Intra-clip reload": "Şarjör içi doldurma süresi",
-    "front": "ön"
+    "front": "ön",
+    "Loading": "Yükleniyor"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10270,7 +10282,8 @@
     "removed": "выдалены",
     "Dispersion moving": "Разброс пры руху",
     "Intra-clip reload": "Міжснарадная перазарадка",
-    "front": "лоб"
+    "front": "лоб",
+    "Loading": "Загрузка"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -10894,7 +10907,8 @@
     "removed": "odstranjeno",
     "Dispersion moving": "Razpršitev med premikanjem",
     "Intra-clip reload": "Čas polnjenja med streli",
-    "front": "sprednji del"
+    "front": "sprednji del",
+    "Loading": "Nalaganje"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -11519,7 +11533,8 @@
     "removed": "uklonjeno",
     "Dispersion moving": "Rasipanje pri kretanju",
     "Intra-clip reload": "Punjenje između granata",
-    "front": "prednji dio"
+    "front": "prednji dio",
+    "Loading": "Učitavanje"
   },
   "th": {
     "Battles": "การรบ",
@@ -12347,7 +12362,8 @@
     "GRAND FINAL": "รอบชิงชนะเลิศใหญ่",
     "Dispersion moving": "การกระจายขณะเคลื่อนที่",
     "Intra-clip reload": "เวลาบรรจุกระสุนระหว่างนัด",
-    "front": "ด้านหน้า"
+    "front": "ด้านหน้า",
+    "Loading": "กำลังโหลด"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13175,7 +13191,8 @@
     "GRAND FINAL": "总决赛",
     "Dispersion moving": "移动时扩散",
     "Intra-clip reload": "弹夹内装填时间",
-    "front": "正面"
+    "front": "正面",
+    "Loading": "加载中"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -13988,7 +14005,8 @@
     "GRAND FINAL": "GRANDE FINAL",
     "Dispersion moving": "Dispersão em movimento",
     "Intra-clip reload": "Recarga entre disparos",
-    "front": "frente"
+    "front": "frente",
+    "Loading": "Carregando"
   },
   "vi": {
     "Battles": "Số trận",
@@ -14796,7 +14814,8 @@
     "GRAND FINAL": "GRAND FINAL",
     "Dispersion moving": "Độ phân tán khi di chuyển",
     "Intra-clip reload": "Thời gian nạp giữa các phát",
-    "front": "trước"
+    "front": "trước",
+    "Loading": "Đang tải"
   },
   "de": {
     "Battles": "Gefechte",
@@ -15617,7 +15636,8 @@
     "GRAND FINAL": "GROSSES FINALE",
     "Dispersion moving": "Streuung während der Bewegung",
     "Intra-clip reload": "Nachladezeit zwischen den Schüssen",
-    "front": "front"
+    "front": "front",
+    "Loading": "Wird geladen"
   },
   "uk": {
     "Battles": "Бої",
@@ -16435,7 +16455,8 @@
     "GRAND FINAL": "ГРАНД-ФІНАЛ",
     "Dispersion moving": "Розкид під час руху",
     "Intra-clip reload": "Перезаряджання між пострілами",
-    "front": "лоб"
+    "front": "лоб",
+    "Loading": "Завантаження"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17258,7 +17279,8 @@
     "GRAND FINAL": "GRAN FINALE",
     "Dispersion moving": "Dispersione durante il movimento",
     "Intra-clip reload": "Ricarica tra i colpi",
-    "front": "frontale"
+    "front": "frontale",
+    "Loading": "Caricamento"
   },
   "sv": {
     "Battles": "Strider",
@@ -18090,7 +18112,8 @@
     "GRAND FINAL": "FINAL",
     "Dispersion moving": "Spridning i rörelse",
     "Intra-clip reload": "Omladdning mellan skott",
-    "front": "front"
+    "front": "front",
+    "Loading": "Laddar"
   },
   "sr": {
     "Battles": "Borbi",
@@ -18918,7 +18941,8 @@
     "GRAND FINAL": "VELIKO FINALE",
     "Dispersion moving": "Расејање при кретању",
     "Intra-clip reload": "Време пуњења између граната",
-    "front": "предњи део"
+    "front": "предњи део",
+    "Loading": "Učitavanje"
   },
   "el": {
     "Battles": "Μάχες",
@@ -19745,7 +19769,8 @@
     "GRAND FINAL": "ΜΕΓΑΛΟΣ ΤΕΛΙΚΟΣ",
     "Dispersion moving": "Διασπορά εν κινήσει",
     "Intra-clip reload": "Επαναγέμιση μεταξύ βολών",
-    "front": "μπροστινό"
+    "front": "μπροστινό",
+    "Loading": "Φόρτωση"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -20561,7 +20586,8 @@
     "GRAND FINAL": "LIELAIS FINĀLS",
     "Dispersion moving": "Izkliede kustībā",
     "Intra-clip reload": "Pārlāde starp šāvieniem",
-    "front": "priekšpuse"
+    "front": "priekšpuse",
+    "Loading": "Ielādē"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -21179,7 +21205,8 @@
     "removed": "हटाया गया",
     "Dispersion moving": "चलते समय फैलाव",
     "Intra-clip reload": "इंट्रा-क्लिप रीलोड",
-    "front": "फ्रंट"
+    "front": "फ्रंट",
+    "Loading": "लोड हो रहा है"
   },
   "bg": {
     "Battles": "Битки",
@@ -21991,7 +22018,8 @@
     "GRAND FINAL": "ГРАНД ФИНАЛ",
     "Dispersion moving": "Разсейване при движение",
     "Intra-clip reload": "Презареждане между изстрелите",
-    "front": "предна част"
+    "front": "предна част",
+    "Loading": "Зареждане"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -22823,7 +22851,8 @@
     "GRAND FINAL": "DIDYSIS FINALAS",
     "Dispersion moving": "Sklaida judant",
     "Intra-clip reload": "Perkrovimas tarp šūvių",
-    "front": "priekis"
+    "front": "priekis",
+    "Loading": "Kraunama"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -23445,7 +23474,8 @@
     "removed": "жойылған",
     "Dispersion moving": "Қозғалыстағы шашырау",
     "Intra-clip reload": "Атулар арасындағы қайта оқтау",
-    "front": "алдыңғы"
+    "front": "алдыңғы",
+    "Loading": "Жүктелуде"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -24277,7 +24307,8 @@
     "GRAND FINAL": "SUURFINAALI",
     "Dispersion moving": "Hajonta liikkeessä",
     "Intra-clip reload": "Laukausten välinen latausaika",
-    "front": "etu"
+    "front": "etu",
+    "Loading": "Ladataan"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -24900,7 +24931,8 @@
     "removed": "inalis",
     "Dispersion moving": "Pagkalat habang gumagalaw",
     "Intra-clip reload": "Pag-reload sa pagitan ng mga bala",
-    "front": "harap"
+    "front": "harap",
+    "Loading": "Naglo-load"
   },
   "no": {
     "Battles": "Kamper",
@@ -25724,7 +25756,8 @@
     "GRAND FINAL": "STORFINALE",
     "Dispersion moving": "Spredning under bevegelse",
     "Intra-clip reload": "Omlading mellom skudd",
-    "front": "front"
+    "front": "front",
+    "Loading": "Laster inn"
   },
   "ro": {
     "Battles": "Lupte",
@@ -26537,7 +26570,8 @@
     "GRAND FINAL": "MAREA FINALĂ",
     "Dispersion moving": "Dispersie în mișcare",
     "Intra-clip reload": "Reîncărcare între proiectile",
-    "front": "față"
+    "front": "față",
+    "Loading": "Se încarcă"
   },
   "da": {
     "Battles": "Kampe",
@@ -27365,6 +27399,7 @@
     "GRAND FINAL": "GRAND FINAL",
     "Dispersion moving": "Spredning under bevægelse",
     "Intra-clip reload": "Genladning mellem skud",
-    "front": "front"
+    "front": "front",
+    "Loading": "Indlæser"
   }
 }

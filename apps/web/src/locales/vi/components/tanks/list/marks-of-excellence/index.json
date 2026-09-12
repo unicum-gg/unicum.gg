@@ -6,11 +6,11 @@
     },
     "mark2": {
       "label": "2 Marks",
-      "tip": "2 Marks: sát thương tổng hợp trung bình tính trượt của bạn (khoảng 100 trận đấu gần nhất) phải vượt qua 85% người chơi trên xe tăng này trong 14 ngày gần nhất"
+      "tip": "2 Marks: sát thương tổng hợp trung bình của bạn (trong ~100 trận đấu gần nhất) phải vượt qua 85% người chơi trên xe tăng này trong 14 ngày qua"
     },
     "mark3": {
       "label": "3 Marks",
-      "tip": "3 Marks: sát thương tổng hợp trung bình tính trượt của bạn (khoảng 100 trận đấu gần nhất) phải vượt qua 95% người chơi trên xe tăng này trong 14 ngày gần nhất"
+      "tip": "3 Marks: sát thương tổng hợp trung bình của bạn (trong ~100 trận đấu gần nhất) phải vượt qua 95% người chơi trên xe tăng này trong 14 ngày qua"
     }
   },
   "rows-per-page": "Số hàng mỗi trang",
