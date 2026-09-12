@@ -10,7 +10,7 @@
 // Both scripts pin `NEXT_PUBLIC_APP_URL` to the live site (a shell variable wins
 // over `--env-file`), because the message's closing link comes from it: run from
 // a dev machine it would otherwise send a community channel to localhost.
-import { publishChangelog } from "@unicum.gg/core/changelog";
+import { ChangelogOutcome, publishChangelog } from "@unicum.gg/core/changelog";
 
 async function main(): Promise<void> {
   const dryRun = process.argv.includes("--dry");
@@ -27,7 +27,10 @@ async function main(): Promise<void> {
     if (all.length > 1) console.log(`--- part ${i + 1}/${all.length} ---`);
     console.log(message);
   });
-  process.exit(0);
+  // A run that did not publish must not read as one that did: this is called
+  // from a shell, and `&&` after it should not carry on as if the update went
+  // out.
+  process.exit(result.outcome === ChangelogOutcome.Failed ? 1 : 0);
 }
 
 main().catch((err) => {

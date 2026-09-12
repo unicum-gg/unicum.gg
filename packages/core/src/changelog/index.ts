@@ -2,7 +2,7 @@ import { env } from "@unicum.gg/shared";
 import { discordBotEnabled, postChannelMessage } from "@unicum.gg/core/discord";
 import { listNewCommits } from "./commits";
 import { renderChangelogMessage } from "./message";
-import { readLastPublished, writeLastPublished } from "./state";
+import { readChangelogState, touchLastRun, writeLastPublished } from "./state";
 import { changelogWriterEnabled, isEmptyDraft, writeChangelog } from "./write";
 
 /**
@@ -24,13 +24,15 @@ const FALLBACK_HOURS = 8 * 24;
 export enum ChangelogOutcome {
   /** Posted to the channel. */
   Posted = "posted",
-  /** Nothing landed since the last one. */
+  /** Nothing landed since the last one. A completed run: it is stamped like
+   * any other, so the catch-up in `./cron` leaves the slot alone. */
   NoCommits = "no-commits",
   /** Commits landed, but none of them were user-visible. */
   NothingToSay = "nothing-to-say",
   /** Rendered but not sent (dry run). */
   DryRun = "dry-run",
-  /** The writer or Discord did not answer; the batch stays unpublished. */
+  /** GitHub, the writer or Discord did not answer, and the batch stays
+   * unpublished so the next tick covers it. */
   Failed = "failed",
 }
 
@@ -53,14 +55,32 @@ export function changelogEnabled(): boolean {
 export async function publishChangelog(
   options: { dryRun?: boolean; model?: string } = {},
 ): Promise<ChangelogResult> {
-  const lastSha = await readLastPublished();
-  let commits = await listNewCommits(lastSha, FALLBACK_HOURS);
+  const state = await readChangelogState();
+  let commits = await listNewCommits(state?.sha ?? null, FALLBACK_HOURS);
+  // Null is "GitHub did not answer", which is not "nothing shipped": the empty
+  // case below consumes the slot, and consuming it on a failed read is a digest
+  // the channel never gets.
+  if (commits === null) {
+    return { outcome: ChangelogOutcome.Failed, commits: 0 };
+  }
   if (commits.length === 0) {
+    if (!options.dryRun) {
+      // Nothing landed. Stamp the run anyway: it is as done as a published one,
+      // and left unstamped the catch-up would re-read this window every hour
+      // and then post a one-line digest on whatever day the next commit landed.
+      await touchLastRun();
+      return { outcome: ChangelogOutcome.NoCommits, commits: 0 };
+    }
     // A dry run whose only answer is "nothing new" is useless for tuning the
     // writer, and by definition nothing is new right after a publish. Show the
     // last window instead, so the preview always has something to render.
-    if (!options.dryRun) return { outcome: ChangelogOutcome.NoCommits, commits: 0 };
-    commits = await listNewCommits(null, FALLBACK_HOURS);
+    const window = await listNewCommits(null, FALLBACK_HOURS);
+    // The same distinction on the one path a human reads directly: a window
+    // GitHub never answered must not print as "nothing new".
+    if (window === null) {
+      return { outcome: ChangelogOutcome.Failed, commits: 0 };
+    }
+    commits = window;
     if (commits.length === 0) {
       return { outcome: ChangelogOutcome.NoCommits, commits: 0 };
     }
