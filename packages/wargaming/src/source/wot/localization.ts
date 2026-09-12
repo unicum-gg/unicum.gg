@@ -12,10 +12,28 @@ const unquote = (line: string): string =>
     .replace(/\\n/g, "\n")
     .replace(/\\t/g, "\t");
 
-// WoT descriptions embed inline formatting placeholders the client substitutes
-// at render time (`{colorTagOpen}+27.5%{colorTagClose}`, ...). We render plain
-// text, so drop the markers and keep their content.
-const stripTags = (s: string): string => s.replace(/\{[a-zA-Z_]+\}/g, "");
+// WoT descriptions embed brace tokens the client substitutes at render time,
+// and they are not all the same thing.
+//
+// A FORMATTING MARKER wraps content and carries none: `{colorTagOpen}+27.5%`
+// `{colorTagClose}`, `{greenBright_Start}`, `{whiteSpanish_Open}`. We render
+// plain text, so those are dropped and their content kept. They are recognised
+// by the name ending in Open/Close/Start/End rather than by a list, which is
+// what every one of the 330 in the catalogues does.
+//
+// A VALUE is the number the sentence is about: `Increases ramming damage by
+// {value}%`. Dropping it left the sentence reading "by %" with nothing in it,
+// on 93 upgrade-tree descriptions, and that is what this distinction exists
+// for. It survives, and the caller fills it from the node's own definition.
+//
+// A GLYPH stands for a character the client draws. One exists (`{arrow}`, in
+// Bounty Optics' description), and leaving it visible would be worse than
+// substituting it.
+const MARKER = /\{[a-zA-Z_]*(?:Open|Close|Start|End)\}/g;
+const GLYPH: Record<string, string> = { "{arrow}": "\u2192" };
+
+const stripTags = (s: string): string =>
+  s.replace(MARKER, "").replace(/\{arrow\}/g, (token) => GLYPH[token] ?? token);
 
 /**
  * Parse a gettext `.po` file into a `msgid -> msgstr` map. Handles the multi-line

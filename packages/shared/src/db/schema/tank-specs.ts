@@ -116,6 +116,17 @@ export const tankSpecs = pgTable("tank_specs", {
   // The tank's Tankopedia historical description (WG encyclopedia, English).
   description: text("description"),
 
+  // The same description in every language the encyclopedia answers in, keyed by
+  // its `language` code. Its own column rather than a row per language: it is
+  // read once, whole, beside the rest of a tank's specs, and a join for one
+  // paragraph would cost more than the paragraph.
+  //
+  // Only the API has these. The client ships a `_descr` for barely two hundred
+  // vehicles a nation, all of them premium, and none for a tech-tree tank like
+  // the IS-7, so `<nation>_vehicles` cannot answer this however many languages
+  // it is mirrored in.
+  descriptionI18n: jsonb("description_i18n").$type<Record<string, string>>(),
+
   updatedAt: timestamp("updated_at", { withTimezone: true })
     .notNull()
     .defaultNow(),

@@ -5,6 +5,7 @@ import {
   BRANCH_BY_REGION,
   compareBuildVersions,
   Region,
+  WgLanguage,
   WotSrcBranch,
 } from "@unicum.gg/wargaming";
 import { clearTestChanges, recordTestChanges } from "./test-changes";
@@ -69,6 +70,8 @@ type ResearchNode = {
   // child tank id → cheapest prerequisite module chain (0 = no module gate).
   moduleUnlockXp: Map<number, number>;
   description: string | null;
+  /** The same description in every language the encyclopedia answers in. */
+  descriptionI18n: Record<string, string> | null;
 };
 
 type ModuleTreeNode = {
@@ -135,6 +138,63 @@ function moduleUnlockCosts(
  * through the EU catalogue once. Only the ~1000 tanks WG's public API lists are
  * covered; the rest stay absent.
  */
+/**
+ * The languages the encyclopedia answers a description in.
+ *
+ * Not every language the site publishes: the API rejects the rest with
+ * `INVALID_LANGUAGE`, and the client cannot fill the gap either (it carries a
+ * `_descr` for barely two hundred vehicles a nation, all premium, and none for a
+ * tech-tree tank). A locale absent here reads the English, which is what it did
+ * before this column existed.
+ */
+const DESCRIPTION_LANGUAGES = [
+  WgLanguage.French,
+  WgLanguage.German,
+  WgLanguage.Spanish,
+  WgLanguage.Polish,
+  WgLanguage.Czech,
+  WgLanguage.Turkish,
+  WgLanguage.Russian,
+  WgLanguage.Vietnamese,
+  WgLanguage.Thai,
+  WgLanguage.Korean,
+  WgLanguage.ChineseSimplified,
+] as const;
+
+/**
+ * Every description in one language, keyed by tank id.
+ *
+ * One pass of the catalogue per language, asking for the one field that
+ * changes: the rest of the graph is language-agnostic and is read once by
+ * `fetchResearchGraph`. A language that fails is skipped rather than fatal, so
+ * one bad answer costs that language rather than the nightly run.
+ */
+async function fetchDescriptions(
+  language: WgLanguage,
+): Promise<Map<number, string>> {
+  const out = new Map<number, string>();
+  for (let pageNo = 1; ; pageNo++) {
+    let page: Record<string, { description: string | null }>;
+    try {
+      page = await wg.region(Region.EU).api.wot.encyclopedia.vehicles({
+        fields: ["description"],
+        language,
+        limit: 100,
+        pageNo,
+      });
+    } catch (err) {
+      if ((err as { code?: string }).code === "PAGE_NO_NOT_FOUND") break;
+      throw err;
+    }
+    const entries = Object.entries(page ?? {});
+    for (const [id, v] of entries) {
+      if (v?.description) out.set(Number(id), v.description);
+    }
+    if (entries.length < 100) break;
+  }
+  return out;
+}
+
 async function fetchResearchGraph(): Promise<Map<number, ResearchNode>> {
   const out = new Map<number, ResearchNode>();
   for (let pageNo = 1; ; pageNo++) {
@@ -192,6 +252,7 @@ async function fetchResearchGraph(): Promise<Map<number, ResearchNode>> {
         nextTanks,
         moduleUnlockXp: moduleUnlockCosts(v.modules_tree),
         description: v.description || null,
+        descriptionI18n: null,
       });
     }
     if (entries.length < 100) break;
@@ -295,6 +356,24 @@ export async function refreshTankSpecs(): Promise<number> {
     fetchResearchGraph(),
   ]);
 
+  // The descriptions in the other languages, after the graph rather than beside
+  // it: eleven more passes of the catalogue is the largest thing this job asks
+  // of the API, and it has no business racing the reads the page actually needs.
+  // Sequential for the same reason the vocabulary generator is: the WG API
+  // refuses a burst outright (`REQUEST_LIMIT_EXCEEDED`).
+  for (const language of DESCRIPTION_LANGUAGES) {
+    try {
+      const byId = await fetchDescriptions(language);
+      for (const [id, text] of byId) {
+        const node = graph.get(id);
+        if (!node) continue;
+        node.descriptionI18n = { ...(node.descriptionI18n ?? {}), [language]: text };
+      }
+    } catch (error) {
+      console.error(`[tank-specs] descriptions (${language}):`, error);
+    }
+  }
+
   // A test branch is only a test build while it is ahead of the live one. It is
   // not always: the mirror's CT branch has been left sitting on a finished test,
   // matching live exactly, and read blindly that inverts everything downstream.
@@ -349,6 +428,7 @@ export async function refreshTankSpecs(): Promise<number> {
           ? fx.byTier
           : null,
       description: node?.description ?? null,
+      descriptionI18n: node?.descriptionI18n ?? null,
       updatedAt: new Date(),
     };
   });
