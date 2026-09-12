@@ -1,8 +1,9 @@
 import { headers } from "next/headers";
+import { after } from "next/server";
 import { revalidatePath } from "next/cache";
 import { auth } from "@unicum.gg/core/auth";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
+import { resolveBattleMap } from "@unicum.gg/core/wargaming/wot/maps";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import {
   submitTankVideo,
@@ -61,22 +62,23 @@ export async function POST(
     return Response.json({ error: "tank_required" }, { status: 400 });
   }
 
-  const map = await getMapDetailBySlug(region, body.arenaId);
+  // Three independent lookups, resolved together: none of them reads the
+  // others, and each can reach for a catalogue that has to be rebuilt, so in
+  // series they were three cold reads a person waits through one after another.
+  const [map, tank, clan] = await Promise.all([
+    resolveBattleMap(region, body.arenaId),
+    body.tankSlug
+      ? getTankBySlug(region, decodeURIComponent(body.tankSlug))
+      : null,
+    // Refused rather than dropped: a typo in a tag would otherwise cost someone
+    // the credit they asked for, silently. Read from our own table only: a clan
+    // we have never tracked has no page to credit it on.
+    body.clanTag ? getClanByTagCached(region, body.clanTag) : null,
+  ]);
   if (!map) return Response.json({ error: "not_found" }, { status: 404 });
-
-  const tank = body.tankSlug
-    ? await getTankBySlug(region, decodeURIComponent(body.tankSlug))
-    : null;
   if (body.tankSlug && !tank) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
-
-  // Refused rather than dropped: a typo in a tag would otherwise cost someone
-  // the credit they asked for, silently. Read from our own table only: a clan
-  // we have never tracked has no page to credit it on.
-  const clan = body.clanTag
-    ? await getClanByTagCached(region, body.clanTag)
-    : null;
   if (body.clanTag && !clan) {
     return Response.json({ error: "clan_not_found" }, { status: 404 });
   }
@@ -112,8 +114,16 @@ export async function POST(
       // The pages are served from cache, so a video approved later would
       // otherwise wait out the revalidation window. Nothing is published yet,
       // but priming here keeps the approval path to a single revalidation.
-      revalidatePath(ROUTES.MAP(region, map.slug));
-      if (tank) revalidatePath(ROUTES.TANK(region, tank.slug));
+      // After the response, since it primes a page for a moderator who has not
+      // even been told yet, and the submitter is watching a button.
+      after(() => {
+        revalidatePath(ROUTES.MAP(region, map.slug));
+        if (tank) revalidatePath(ROUTES.TANK(region, tank.slug));
+      });
+      // The card and the version stamp, in their own task rather than with the
+      // revalidation above: the stamp is a WG read that can take minutes on a
+      // throttled host, and dropping two cached pages must not queue behind it.
+      if (result.finish) after(result.finish);
       return jsonResponse(
         VideoSuggestResponse,
         { ok: true },

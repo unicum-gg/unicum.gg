@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { APP_IDENTITY } from "@unicum.gg/shared";
 import { getClanTagById } from "@unicum.gg/core/clans/repository";
-import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
+import { resolveBattleMap } from "@unicum.gg/core/wargaming/wot/maps";
 import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { isRegion, REGIONS } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
@@ -96,9 +96,10 @@ async function resolvePlacement(placement: VideoPlacement): Promise<{
       ? null
       : getTankSlug(REGIONS[0], placement.tankId).catch(() => null),
     // A tactic has no tank page to drop, which is the whole reason the map page
-    // exists for it.
+    // exists for it. Only the slug is read, so this asks for the battle's map
+    // rather than the page's detail and stays off the Global Map pool.
     placement.arenaId
-      ? getMapDetailBySlug(REGIONS[0], placement.arenaId).catch(() => null)
+      ? resolveBattleMap(REGIONS[0], placement.arenaId).catch(() => null)
       : null,
   ]);
   return { tankSlug, mapSlug: map?.slug ?? null };

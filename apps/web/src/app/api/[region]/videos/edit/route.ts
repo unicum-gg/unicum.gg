@@ -1,7 +1,8 @@
 import { headers } from "next/headers";
+import { after } from "next/server";
 import { auth } from "@unicum.gg/core/auth";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
+import { resolveBattleMap } from "@unicum.gg/core/wargaming/wot/maps";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import {
   editTankVideo,
@@ -75,21 +76,21 @@ export async function POST(
     return Response.json({ error: "tank_required" }, { status: 400 });
   }
 
-  const map = await getMapDetailBySlug(region, body.arenaId);
+  // Together, like on the way in: none of the three reads the others, and each
+  // can reach for a catalogue that has to be rebuilt.
+  const [map, tank, clan] = await Promise.all([
+    resolveBattleMap(region, body.arenaId),
+    body.tankSlug
+      ? getTankBySlug(region, decodeURIComponent(body.tankSlug))
+      : null,
+    // Refused rather than dropped, like on the way in: a typo in a tag would
+    // otherwise cost someone the credit they asked for, silently.
+    body.clanTag ? getClanByTagCached(region, body.clanTag) : null,
+  ]);
   if (!map) return Response.json({ error: "not_found" }, { status: 404 });
-
-  const tank = body.tankSlug
-    ? await getTankBySlug(region, decodeURIComponent(body.tankSlug))
-    : null;
   if (body.tankSlug && !tank) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
-
-  // Refused rather than dropped, like on the way in: a typo in a tag would
-  // otherwise cost someone the credit they asked for, silently.
-  const clan = body.clanTag
-    ? await getClanByTagCached(region, body.clanTag)
-    : null;
   if (body.clanTag && !clan) {
     return Response.json({ error: "clan_not_found" }, { status: 404 });
   }
@@ -124,9 +125,18 @@ export async function POST(
     case EditVideoOutcome.Saved:
       // Both sides, since an edit can move a video: the pages it left have to
       // stop showing it, and the ones it landed on have to be ready for it.
+      // After the response: it resolves a tank, a map and a clan from ids and
+      // then drops up to a dozen paths, none of which the author is waiting to
+      // hear about, and the correction is stored whatever it does.
       if (result.before && result.after) {
-        await revalidateVideoMove(result.before, result.after);
+        // Renamed on the way out: the placement it landed on and the hook that
+        // runs after the response are both spelled "after".
+        const { before, after: landed } = result;
+        after(() => revalidateVideoMove(before, landed));
       }
+      // Its own task, so a Discord round trip cannot delay dropping a page
+      // that is currently showing a video the correction took down.
+      if (result.finish) after(result.finish);
       return jsonResponse(
         VideoEditResponse,
         { ok: true, requeued: Boolean(result.requeued) },

@@ -11,7 +11,7 @@ import {
   type MapPoi,
   type MapSummary,
 } from "@unicum.gg/shared";
-import { getMapCatalog } from "./catalog";
+import { getMapCatalog, type MapCatalog } from "./catalog";
 import { getClanWarsArenaIds } from "./clan-wars";
 
 export { searchMaps, type MapSearchResult } from "./search";
@@ -62,6 +62,15 @@ export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
   return out.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/** A URL slug or a bare arena id, resolved against the catalogue to the arena
+ * it addresses. Undefined for an id the catalogue does not carry. */
+function arenaIdOf(catalog: MapCatalog, slug: string): string | undefined {
+  return (
+    catalog.index.slugToId.get(slug.toLowerCase()) ??
+    (catalog.arenas.has(slug) ? slug : undefined)
+  );
+}
+
 /** Resolve a URL slug (or a bare arena id) to its full map detail, or null. The
  * returned `slug` is always the canonical one, so the page can redirect a legacy
  * id form onto it. */
@@ -69,11 +78,9 @@ export async function getMapDetailBySlug(
   region: Region,
   slug: string,
 ): Promise<MapDetail | null> {
-  const { arenas, index, variantArenas, testOnlyArenas } =
-    await getMapCatalog(region);
-  const arenaId =
-    index.slugToId.get(slug.toLowerCase()) ??
-    (arenas.has(slug) ? slug : undefined);
+  const catalog = await getMapCatalog(region);
+  const { arenas, index, variantArenas, testOnlyArenas } = catalog;
+  const arenaId = arenaIdOf(catalog, slug);
   if (arenaId === undefined) return null;
   const arena = arenas.get(arenaId);
   if (!arena) return null;
@@ -86,6 +93,61 @@ export async function getMapDetailBySlug(
     variants,
     testOnlyArenas,
   );
+}
+
+/** The map a declared battle names: enough to check the battle against the
+ * catalogue, to say which map it was, and to link the page it belongs on. */
+export type BattleMap = {
+  arenaId: string;
+  /** Canonical, so a submission filed under a legacy id form still lands on the
+   * page that exists today. */
+  slug: string;
+  name: string;
+  /** The random-battle modes the arena declares, which is what decides whether
+   * a battle can be filed under the mode it claims. */
+  modes: MapGameMode[];
+};
+
+/**
+ * Resolve the map a submitted battle names, and only what validates it.
+ *
+ * `getMapDetailBySlug` answers this too, and is what the submission path used
+ * to ask, but a detail also carries the battle types the arena's own definition
+ * cannot give, which means the live Global Map pool, which means a `fronts`
+ * call followed by up to twenty pages of provinces. That walk is fail-open for
+ * a gallery, where a throttled WG costs a map its Clan Wars tab. On the way in
+ * it costs somebody watching a "Sending..." button every retry the transport
+ * has in it, for a pool that decides which tabs a map page draws and says
+ * nothing whatsoever about whether a battle may be filed.
+ *
+ * Narrow on purpose rather than a `MapDetail` with a hole in it: the battle
+ * types this leaves out would otherwise be quietly wrong for the next caller.
+ */
+export async function resolveBattleMap(
+  region: Region,
+  slug: string,
+): Promise<BattleMap | null> {
+  const catalog = await getMapCatalog(region);
+  const arenaId = arenaIdOf(catalog, slug);
+  if (arenaId === undefined) return null;
+  const arena = catalog.arenas.get(arenaId);
+  if (!arena) return null;
+  // Built through the same builder the pages use, so the modes are folded the
+  // way they are folded everywhere else (`assault` and `assault2` are one
+  // Assault), with the extra battle types left at their default.
+  const detail = buildMapDetail(
+    arena,
+    catalog.index.idToSlug.get(arenaId) ?? slug,
+    [],
+    catalog.variantArenas.get(arenaId) ?? [],
+    catalog.testOnlyArenas,
+  );
+  return {
+    arenaId,
+    slug: detail.slug,
+    name: detail.name,
+    modes: detail.modes,
+  };
 }
 
 /** Every map's arena id and canonical slug. Backs generateStaticParams and the

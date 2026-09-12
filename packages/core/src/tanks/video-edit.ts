@@ -118,6 +118,16 @@ export type EditVideoResult = {
   /** True when the edit took a published video back off the site, so the caller
    * can say so rather than letting the author think it is still up. */
   requeued?: boolean;
+  /**
+   * Putting the corrected battle back in front of a moderator, for the caller
+   * to run once it has answered.
+   *
+   * Same reasoning as a submission's: working out what moved resolves a tank, a
+   * map and a clan from ids, and rewriting the card is a Discord round trip, so
+   * between them they held the author of a correction that was already stored.
+   * Present on `Saved` alone.
+   */
+  finish?: () => Promise<void>;
 };
 
 function placement(row: {
@@ -151,11 +161,12 @@ function isUniqueViolation(err: unknown): boolean {
 }
 
 /**
- * Apply a correction, then put the card back in front of a moderator.
+ * Apply a correction, and answer as soon as it is applied.
  *
- * The card is rewritten in place when we know which message it is, and posted
- * fresh when we do not: rows queued before the message id was recorded, and
- * rows whose card failed to post, still have to be reviewable.
+ * Only what decides the answer is awaited: who is asking, the link, the map,
+ * and the write itself, which is where a duplicate surfaces. Putting the card
+ * back in front of a moderator rides `finish`, since it says nothing the author
+ * is waiting to be told.
  */
 export async function editTankVideo(
   edit: VideoEdit,
@@ -255,27 +266,6 @@ export async function editTankVideo(
   // as saved would revalidate pages and re-card a row that no longer exists.
   if (updated.length === 0) return { outcome: EditVideoOutcome.NotFound };
 
-  // Worked out before the card is rewritten, since the row it compares against
-  // is the one we just replaced. Its own failure costs the card its "what
-  // moved" lines, never the correction.
-  const changes = await describeVideoChanges(edit.region, row, edit, ref).catch(
-    (err) => {
-      console.error("[tank-videos] change summary failed:", err);
-      return [];
-    },
-  );
-
-  await refreshModerationCard(
-    row,
-    edit,
-    ref,
-    oembed,
-    changes,
-    previousStatus,
-  ).catch(
-    (err) => console.error("[tank-videos] moderation card update failed:", err),
-  );
-
   return {
     outcome: EditVideoOutcome.Saved,
     before: placement(row),
@@ -286,6 +276,32 @@ export async function editTankVideo(
       clanId: edit.clanId ?? null,
     }),
     requeued,
+    // The row the diff compares against is the one just replaced, so `row` is
+    // read from the closure rather than from the table: re-reading it here
+    // would diff the correction against itself.
+    finish: async () => {
+      // Its own failure costs the card its "what moved" lines, never the
+      // correction, which is stored by the time this runs at all.
+      const changes = await describeVideoChanges(
+        edit.region,
+        row,
+        edit,
+        ref,
+      ).catch((err) => {
+        console.error("[tank-videos] change summary failed:", err);
+        return [];
+      });
+      await refreshModerationCard(
+        row,
+        edit,
+        ref,
+        oembed,
+        changes,
+        previousStatus,
+      ).catch((err) =>
+        console.error("[tank-videos] moderation card update failed:", err),
+      );
+    },
   };
 }
 

@@ -2,7 +2,7 @@ import { env } from "@unicum.gg/shared";
 import type { MapGameMode } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { discordBotEnabled } from "@unicum.gg/core/discord";
-import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
+import { resolveBattleMap } from "@unicum.gg/core/wargaming/wot/maps";
 import { wg } from "@unicum.gg/core/wargaming/client";
 
 /**
@@ -59,9 +59,9 @@ export async function mapIsConsistent(
   arenaId: string,
   mode: MapGameMode,
 ): Promise<boolean> {
-  const detail = await getMapDetailBySlug(region, arenaId).catch(() => null);
-  if (!detail) return false;
-  return detail.modes.includes(mode);
+  const map = await resolveBattleMap(region, arenaId).catch(() => null);
+  if (!map) return false;
+  return map.modes.includes(mode);
 }
 
 /** Submissions are only open when a moderator could actually see them, and the

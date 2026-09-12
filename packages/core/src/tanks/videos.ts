@@ -20,6 +20,7 @@ import {
   fetchOembed,
   mapIsConsistent,
   videoSubmissionsEnabled,
+  type Oembed,
 } from "@unicum.gg/core/tanks/video-checks";
 
 /**
@@ -106,15 +107,67 @@ export enum SubmitVideoOutcome {
 export type SubmitVideoResult = {
   outcome: SubmitVideoOutcome;
   videoId?: string;
+  /**
+   * What the queued row still owes, for the caller to run once it has answered.
+   *
+   * Handed back as a closure rather than as the arguments to call something
+   * with, so the caller cannot get the pairing wrong: everything this needs was
+   * worked out on the way in, and the only decision left is when to run it.
+   * Present on `Queued` alone, since nothing else queued a row.
+   */
+  finish?: () => Promise<void>;
 };
 
 /**
- * Queue a suggestion and put its card in the moderation channel.
+ * The card and the version stamp, neither of which the submitter waits for.
+ *
+ * Both were awaited before the response and neither belongs there. The stamp is
+ * a WG read whose host regularly answers nothing: the transport retries six
+ * times at a 30s deadline with a rising backoff, so one call can hold its
+ * caller for minutes, and it was holding a person watching a "Sending..."
+ * button for a nullable column nobody reads until the video is approved. The
+ * card was already best-effort, so it never decided the outcome either.
+ *
+ * Run through the caller's own after-the-response hook rather than fired off
+ * here: a promise nobody holds is one the runtime may drop the moment it
+ * answers.
+ *
+ * One write for both, since they are two nullable columns on the row this just
+ * created, and skipped entirely when neither answered.
+ */
+async function finishSubmission(
+  id: number,
+  ref: { videoId: string; startSeconds: number },
+  oembed: Oembed,
+  submission: VideoSubmission,
+): Promise<void> {
+  const [gameVersion, messageId] = await Promise.all([
+    currentGameVersion(submission.region),
+    postModerationCard(id, ref, oembed, submission).catch((err) => {
+      console.error("[tank-videos] moderation card failed:", err);
+      return null;
+    }),
+  ]);
+  if (gameVersion === null && messageId === null) return;
+  await db
+    .update(tankVideos)
+    // The message id is kept so a correction rewrites this card rather than
+    // posting a second one, and it can only be written after the insert: the
+    // card carries the row's id.
+    .set({ gameVersion, discordMessageId: messageId })
+    .where(eq(tankVideos.id, id));
+}
+
+/**
+ * Queue a suggestion, and answer as soon as it is queued.
  *
  * Nothing is published here: the row lands as `pending` and only a moderator's
  * press moves it. The insert is `onConflictDoNothing` against the one-row-per-
  * battle index, so a second submission of the same battle is answered as a
  * duplicate instead of queueing a card nobody needs to look at twice.
+ *
+ * Only what decides the answer is awaited, which is the link, the map, what
+ * YouTube says the video is, and the insert. Everything else rides `finish`.
  */
 export async function submitTankVideo(
   submission: VideoSubmission,
@@ -170,7 +223,6 @@ export async function submitTankVideo(
       tier: storedTier(submission.format, submission.tier),
       clanRegion: submission.clanRegion ?? null,
       clanId: submission.clanId ?? null,
-      gameVersion: await currentGameVersion(submission.region),
       status: TankVideoStatus.Pending,
       submittedBy: submission.userId,
     })
@@ -181,29 +233,11 @@ export async function submitTankVideo(
 
   if (!row) return { outcome: SubmitVideoOutcome.Duplicate };
 
-  // Best-effort: the row is queued either way, and a moderator can still find
-  // it. Failing the submission because Discord hiccuped would ask the person to
-  // send it again, which the unique index would then refuse as a duplicate.
-  const messageId = await postModerationCard(
-    row.id,
-    ref,
-    oembed,
-    submission,
-  ).catch((err) => {
-    console.error("[tank-videos] moderation card failed:", err);
-    return null;
-  });
-  // Kept so a correction rewrites this card rather than posting a second one.
-  // Written after the insert rather than in it, because the card cannot be
-  // posted before the row it carries the id of exists.
-  if (messageId) {
-    await db
-      .update(tankVideos)
-      .set({ discordMessageId: messageId })
-      .where(eq(tankVideos.id, row.id));
-  }
-
-  return { outcome: SubmitVideoOutcome.Queued, videoId: ref.videoId };
+  return {
+    outcome: SubmitVideoOutcome.Queued,
+    videoId: ref.videoId,
+    finish: () => finishSubmission(row.id, ref, oembed, submission),
+  };
 }
 
 export type ReviewedVideo = {
