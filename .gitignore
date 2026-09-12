@@ -52,7 +52,13 @@ next-env.d.ts
 apps/web/src/services/openapi/openapi.generated.json
 apps/web/src/services/sdk/local-routes.generated.ts
 apps/web/src/proxy-routes.generated.ts
+# Per-locale dictionary modules (static imports of src/locales/<locale>/**.json)
+apps/web/src/locales/generated/
 # glossary markdown compiled for core (source of truth is entries/<category>/*.md)
+# One module per language, written from content/glossary/<locale>/**.md on
+# postinstall/predev/prebuild. The single-file predecessor was already ignored;
+# the folder that replaced it was not, so 9.3 MB of machine output was staged.
+apps/web/src/services/glossary/generated/
 apps/web/src/services/glossary/entries.generated.ts
 apps/web/.openapi-gen/
 
