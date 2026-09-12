@@ -14,7 +14,7 @@
     "training": "Entraînement"
   },
   "player-modes": {
-    "overall": "Battles aléatoires",
+    "overall": "Batailles aléatoires",
     "skirmish": "Escarmouche",
     "advances": "Incursions",
     "grand": "Grandes batailles",
@@ -134,7 +134,7 @@
     "ace": "As du char"
   },
   "clan-modes": {
-    "random": "Battles aléatoires",
+    "random": "Batailles aléatoires",
     "stronghold": "Bastion",
     "skirmish": "Escarmouche",
     "clan-wars": "Guerres de clan"
