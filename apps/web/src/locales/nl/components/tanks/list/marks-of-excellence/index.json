@@ -6,11 +6,11 @@
     },
     "mark2": {
       "label": "2 Marks",
-      "tip": "2 Marks: je schade, gemiddeld gecombineerd over de laatste ~100 gevechten, moet in de afgelopen 14 dagen 85% van de spelers met deze tank verslaan"
+      "tip": "2 Marks: je gemiddeld gecombineerde schade over de laatste circa 100 gevechten moet 85% van de spelers op deze tank in de afgelopen 14 dagen verslaan"
     },
     "mark3": {
       "label": "3 Marks",
-      "tip": "3 Marks: je schade, gemiddeld gecombineerd over de laatste ~100 gevechten, moet in de afgelopen 14 dagen 95% van de spelers met deze tank verslaan"
+      "tip": "3 Marks: je gemiddeld gecombineerde schade over de laatste circa 100 gevechten moet 95% van de spelers op deze tank in de afgelopen 14 dagen verslaan"
     }
   },
   "rows-per-page": "Rijen per pagina",

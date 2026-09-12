@@ -6,11 +6,11 @@
     },
     "mark2": {
       "label": "2 Marks",
-      "tip": "2 Marks: Dit rullende gennemsnit for samlet skade over de seneste ca. 100 kampe skal slå 85 % af spillerne på denne kampvogn i løbet af de seneste 14 dage"
+      "tip": "2 Marks: Dit rullende gennemsnitlige samlede skade i de seneste ca. 100 kampe skal slå 85 % af spillerne på denne kampvogn i løbet af de seneste 14 dage"
     },
     "mark3": {
       "label": "3 Marks",
-      "tip": "3 Marks: Dit rullende gennemsnit for samlet skade over de seneste ca. 100 kampe skal slå 95 % af spillerne på denne kampvogn i løbet af de seneste 14 dage"
+      "tip": "3 Marks: Dit rullende gennemsnitlige samlede skade i de seneste ca. 100 kampe skal slå 95 % af spillerne på denne kampvogn i løbet af de seneste 14 dage"
     }
   },
   "rows-per-page": "Rækker pr. side",

@@ -6,11 +6,11 @@
     },
     "mark2": {
       "label": "2 Marks",
-      "tip": "2 Marks: ditt løpende gjennomsnitt for samlet skade (de siste ~100 kampene) må slå 85 % av spillerne på denne stridsvognen i løpet av de siste 14 dagene"
+      "tip": "2 Marks: ditt rullende gjennomsnitt for samlet skade, fra de siste ~100 kampene, må slå 85 % av spillerne på denne stridsvognen i løpet av de siste 14 dagene"
     },
     "mark3": {
       "label": "3 Marks",
-      "tip": "3 Marks: ditt løpende gjennomsnitt for samlet skade (de siste ~100 kampene) må slå 95 % av spillerne på denne stridsvognen i løpet av de siste 14 dagene"
+      "tip": "3 Marks: ditt rullende gjennomsnitt for samlet skade, fra de siste ~100 kampene, må slå 95 % av spillerne på denne stridsvognen i løpet av de siste 14 dagene"
     }
   },
   "rows-per-page": "Rader per side",
