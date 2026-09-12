@@ -80,6 +80,16 @@ const sleep = (ms: number): Promise<void> =>
 // Cached leader flag, refreshed on an interval so the N workers don't each hit
 // the lease row every iteration. Only the leader instance processes; others idle.
 let isLeader = SKIP_LEASE;
+// Whether that gate applies at all. Mutual exclusion between pipeline processes
+// is enforced by Postgres, not by this flag: `claimDuePlayers` takes its rows
+// FOR UPDATE SKIP LOCKED and bumps `due_at` in the same statement, so a row
+// leaves the due set the instant it is claimed, whichever process claimed it.
+// The lease gate exists because this pipeline has always shared a process with
+// the singleton crons, and a second copy of THOSE must never run. A process that
+// runs no cron therefore opts out of the gate, which is what lets the pipeline
+// scale past one saturated Node thread (it is single-threaded, so more workers
+// inside one process cannot go past one core).
+let leaseRequired = true;
 async function refreshLease(): Promise<void> {
   if (SKIP_LEASE) return;
   try {
@@ -88,6 +98,18 @@ async function refreshLease(): Promise<void> {
     // Keep the last known state on a transient DB blip rather than flipping.
   }
 }
+
+export type SnapshotPipelineOptions = {
+  /**
+   * Gate the workers on the cron-leader lease. Leave it on for a process that
+   * also runs the singleton crons. Turn it OFF only for a process dedicated to
+   * the pipeline: the claim is already exclusive at the row level, so N such
+   * processes share the queue safely and multiply the throughput one Node thread
+   * can reach. Their DB pools must be sized as shares of the background budget
+   * (`DB_BACKGROUND_POOL_MAX`), not one full budget each.
+   */
+  requireLease?: boolean;
+};
 
 /**
  * Continuous per-region snapshot pipeline. Instead of a cron tick that runs one
@@ -98,13 +120,18 @@ async function refreshLease(): Promise<void> {
  * LOCKED so two workers never grab the same rows), fetches + writes it, and
  * immediately claims the next. Fetches and writes overlap continuously.
  */
-export function startSnapshotPipeline(): void {
+export function startSnapshotPipeline({
+  requireLease = true,
+}: SnapshotPipelineOptions = {}): void {
   if (SKIP_CRONS) {
     console.log(`[snapshot-pipeline] SKIP_CRONS=true, not starting`);
     return;
   }
-  void refreshLease();
-  setInterval(() => void refreshLease(), LEASE_REFRESH_MS);
+  leaseRequired = requireLease;
+  if (leaseRequired) {
+    void refreshLease();
+    setInterval(() => void refreshLease(), LEASE_REFRESH_MS);
+  }
   // Throughput accounting, logged once a minute instead of per chunk (chunks now
   // complete several times a second across the pool).
   setInterval(() => {
@@ -133,7 +160,7 @@ export function startSnapshotPipeline(): void {
     }
   }
   console.log(
-    `[snapshot-pipeline] started: ${PIPELINE_CONCURRENCY} workers x ${REGIONS.length} regions (${backlogWorkers} backlog + ${PIPELINE_CONCURRENCY - backlogWorkers} active), ${FETCH_CHUNK}/chunk`,
+    `[snapshot-pipeline] started: ${PIPELINE_CONCURRENCY} workers x ${REGIONS.length} regions (${backlogWorkers} backlog + ${PIPELINE_CONCURRENCY - backlogWorkers} active), ${FETCH_CHUNK}/chunk, ${leaseRequired ? "leader-gated" : "unleased (dedicated process)"}`,
   );
 }
 
@@ -185,7 +212,7 @@ async function regionWorker(
   let emptyStreak = 0;
   for (;;) {
     try {
-      if (!isLeader) {
+      if (leaseRequired && !isLeader) {
         await sleep(LEASE_REFRESH_MS);
         continue;
       }

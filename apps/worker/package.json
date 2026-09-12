@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production tsx src/index.ts",
+    "start": "NODE_ENV=production pm2-runtime start ecosystem.config.cjs",
     "dev": "tsx watch --env-file-if-exists=../web/.env.local src/index.ts",
     "changelog": "NEXT_PUBLIC_APP_URL=https://unicum.gg tsx --env-file-if-exists=../web/.env.local src/scripts/changelog.ts",
     "changelog:dry": "pnpm changelog --dry",
@@ -18,12 +18,14 @@
     "enumerate-tournaments": "tsx --env-file-if-exists=../web/.env.local src/scripts/enumerate-tournaments.ts",
     "backfill-team-clans": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-team-clans.ts",
     "backfill-tournament-wins": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-tournament-wins.ts",
-    "backfill-roster-names": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-roster-names.ts"
+    "backfill-roster-names": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-roster-names.ts",
+    "start:single": "NODE_ENV=production tsx src/index.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",
     "@unicum.gg/shared": "workspace:*",
-    "@unicum.gg/wargaming": "workspace:*"
+    "@unicum.gg/wargaming": "workspace:*",
+    "pm2": "^5.4.3"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
