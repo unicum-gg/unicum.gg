@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import {
   DotsThreeVerticalIcon,
   ShareNetworkIcon,
@@ -33,6 +34,8 @@ export function MapActionsMenu({
   slug: string;
   name: string;
 }) {
+  const { t } = useTranslation("components/maps/detail/actions-menu");
+  const { t: tMenu } = useTranslation("components/actions-menu");
   const [shareOpen, setShareOpen] = useState(false);
   const url = `${APP.URL}${ROUTES.MAP(region, slug)}`;
 
@@ -40,7 +43,7 @@ export function MapActionsMenu({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
-          aria-label="More actions"
+          aria-label={t("more-actions")}
           className="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground focus-visible:outline-none aria-expanded:bg-fd-secondary aria-expanded:text-fd-foreground"
         >
           <DotsThreeVerticalIcon className="size-3.5" weight="bold" />
@@ -48,7 +51,7 @@ export function MapActionsMenu({
         <DropdownMenuContent align="end">
           <DropdownMenuItem onSelect={() => setShareOpen(true)}>
             <ShareNetworkIcon weight="bold" />
-            Share
+            {tMenu("share")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <PageAiActions />
@@ -58,7 +61,7 @@ export function MapActionsMenu({
       <ShareModal
         open={shareOpen}
         onOpenChange={setShareOpen}
-        title={`Share ${name}`}
+        title={tMenu("share-title", { name })}
         url={url}
         shareText={`Check the ${name} map on ${APP.NAME}`}
         ogImage={unicumPublic.og.region(region).maps(slug).url()}

@@ -6,8 +6,8 @@
 // name a view the same way, and neither has any business pulling the whole
 // viewer in to do it.
 
+import type { TranslateFunction } from "@onruntime/translations";
 import {
-  BATTLE_TYPE_LABEL,
   BattleType,
   SPAWN_DIRECTION_LABEL,
   spawnDirection,
@@ -15,6 +15,7 @@ import {
   type MapVariantLayout,
 } from "@unicum.gg/shared";
 import type { ViewGeometry } from "@/components/maps/detail/minimap-overlay";
+import { battleTypeName, mapModeName } from "@/components/game-name";
 
 /** The side a team starts from on this view, e.g. "South". Null when the mode
  * declares neither spawns nor bases, where the legend just names the team. */
@@ -80,10 +81,13 @@ export type MapView = ViewGeometry & {
   heightMeters: number;
 };
 
-export function buildViews(detail: MapDetail): MapView[] {
+export function buildViews(
+  detail: MapDetail,
+  tGame: TranslateFunction,
+): MapView[] {
   const views: MapView[] = detail.geometry.map((g) => ({
     key: g.mode,
-    label: g.label,
+    label: mapModeName(g.mode, tGame),
     onslaught: false,
     commonTest: detail.commonTest,
     variant: false,
@@ -99,7 +103,7 @@ export function buildViews(detail: MapDetail): MapView[] {
   if (detail.onslaught) {
     views.push({
       key: ONSLAUGHT_VIEW,
-      label: BATTLE_TYPE_LABEL[BattleType.Onslaught],
+      label: battleTypeName(BattleType.Onslaught, tGame),
       onslaught: true,
       commonTest: detail.commonTest,
       variant: false,
@@ -120,7 +124,7 @@ export function buildViews(detail: MapDetail): MapView[] {
     const geo = variant.onslaught ? null : (variant.geometry[0] ?? null);
     views.push({
       key: variantViewKey(variant.battleType),
-      label: BATTLE_TYPE_LABEL[variant.battleType],
+      label: battleTypeName(variant.battleType, tGame),
       onslaught: variant.onslaught !== null,
       commonTest: variant.commonTest,
       variant: true,

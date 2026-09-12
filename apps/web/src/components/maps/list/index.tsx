@@ -1,17 +1,17 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
 import { type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
-  BATTLE_TYPE_LABEL,
   BattleType,
   MapCamouflage,
-  MAP_CAMOUFLAGE_LABEL,
-  MAP_GAME_MODE_LABEL,
   MapGameMode,
   type MapSummary,
 } from "@unicum.gg/shared";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Link from "@/components/link";
+import { useRouter } from "@/hooks/use-router";
 import {
   BATTLE_ALL,
   type BattleTab,
@@ -29,6 +29,8 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
+import { battleTypeName, mapModeName, mapName } from "@/components/game-name";
 
 const CAMO_FILTERS: MapCamouflage[] = [
   MapCamouflage.Summer,
@@ -63,7 +65,7 @@ function parseEnumSet<T extends string>(raw: string | null, valid: Set<string>):
 const setStr = (s: Set<string>): string => [...s].join(",");
 
 export function MapsGallery({
-  maps,
+  maps: rawMaps,
   region,
   activeTab,
   basePath,
@@ -73,6 +75,10 @@ export function MapsGallery({
   activeTab: BattleTab;
   basePath: string;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/maps/list/index");
+  const { t: tMaps } = useTranslation("game/maps");
+  const { t: tGame } = useTranslation("game/vocabulary");
   // The battle type is a route segment (`activeTab`); the rest of the filters
   // live in the query (?q=&camo=&mode=) so a filtered gallery stays shareable
   // and survives a reload. They start at their defaults and seed from the query
@@ -125,6 +131,15 @@ export function MapsGallery({
       qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
     );
   }, [query, camoSel, modeSel]);
+
+  // Named once, here: Wargaming's own name for each arena, so the cards, the
+  // alt text and above all the search box below all speak the reader's
+  // language. A French reader types "Abbaye", not "Abbey".
+  const maps = useMemo(
+    () =>
+      rawMaps.map((m) => ({ ...m, name: mapName(m.arenaId, m.name, tMaps) })),
+    [rawMaps, tMaps],
+  );
 
   // Only offer battle-type pills that actually have maps in this region's
   // catalogue, so a mode WG has retired (Grand Battle currently ships no map)
@@ -189,7 +204,7 @@ export function MapsGallery({
                     : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
                 )}
               >
-                {bt === BATTLE_ALL ? "All" : BATTLE_TYPE_LABEL[bt]}
+                {bt === BATTLE_ALL ? t("all") : battleTypeName(bt, tGame)}
               </Link>
             ))}
           </nav>
@@ -199,8 +214,10 @@ export function MapsGallery({
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={`Search among ${battleTypeCount.toLocaleString("en-US")} maps`}
-          aria-label="Search maps"
+          placeholder={t("search", {
+            count: numberFormat(locale).format(battleTypeCount),
+          })}
+          aria-label={t("search-label")}
           className="h-7 w-52 rounded-md border border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:border-fd-ring focus:outline-none"
         />
         <ChipRow>
@@ -222,7 +239,7 @@ export function MapsGallery({
                       />
                     </Chip>
                   </TooltipTrigger>
-                  <TooltipContent>{MAP_CAMOUFLAGE_LABEL[camo]}</TooltipContent>
+                  <TooltipContent>{tGame(`map-camouflage.${camo}`)}</TooltipContent>
                 </Tooltip>
               );
             })}
@@ -235,7 +252,7 @@ export function MapsGallery({
               active={modeSel.has(mode)}
               onClick={() => setModeSel((s) => toggle(s, mode))}
             >
-              {MAP_GAME_MODE_LABEL[mode]}
+              {mapModeName(mode, tGame)}
             </Chip>
           ))}
         </ChipRow>
@@ -244,8 +261,7 @@ export function MapsGallery({
       <div className="border-t border-fd-border p-4">
         {filtered.length === 0 ? (
           <p className="py-16 text-center text-fd-muted-foreground">
-            No maps match your filters.
-          </p>
+            {t("no-maps-match-your-filters")}</p>
         ) : (
           <TooltipProvider delayDuration={100}>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

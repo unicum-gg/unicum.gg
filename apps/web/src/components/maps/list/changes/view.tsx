@@ -1,3 +1,5 @@
+import { Interpolate } from "@/components/interpolate";
+import { getTranslation } from "@/lib/translations.server";
 import {
   MapChangesFeed,
   type MapFeedVersion,
@@ -12,7 +14,8 @@ import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 // every update changed about the game's maps, reconstructed from the client's
 // own arena definitions, plus what the running Common Test is about to change.
 // ISR-cached like the other map pages.
-export async function MapChangesView({ region }: { region: Region }) {
+export async function MapChangesView({ region, locale }: { region: Region; locale: string }) {
+  const { t } = await getTranslation("components/maps/list/changes/view", locale);
   const { versions, testVersion, testMaps } = await buildSafe(
     () => unicum.region(region).maps.changes(),
     {
@@ -30,14 +33,17 @@ export async function MapChangesView({ region }: { region: Region }) {
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            World of Tanks <span className="text-brand">map changes</span>
+            <Interpolate
+              template={t("title")}
+              values={{
+                changes: (
+                  <span className="text-brand">{t("map-changes")}</span>
+                ),
+              }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            Every map Wargaming has reworked, update by update: play areas
-            resized, bases and spawns moved, modes gained and lost, maps added
-            and pulled. Read from the game client itself, so it covers what the
-            patch notes leave out.
-          </p>
+            {t("every-map-wargaming-has-reworked")}</p>
         </PanelContent>
       </Panel>
 
@@ -45,7 +51,7 @@ export async function MapChangesView({ region }: { region: Region }) {
 
       {testMaps.length > 0 ? (
         <>
-          <PendingMapChanges
+          <PendingMapChanges locale={locale}
             region={region}
             version={testVersion}
             maps={testMaps}

@@ -1,7 +1,10 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
 import type { Icon } from "@phosphor-icons/react";
-import { Fragment, type ReactNode, useState } from "react";
+import { Fragment, type ReactNode, useMemo, useState } from "react";
 import {
   ArrowsOutCardinalIcon,
   ClockIcon,
@@ -26,12 +29,13 @@ import {
 } from "@/components/maps/detail/history";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import {
-  BATTLE_TYPE_LABEL,
   BattleType,
   TEAM_SIZE_BATTLE_TYPES,
   type MapDetail,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { useTranslation } from "@/hooks/use-translation";
+import { battleTypeName, mapName } from "@/components/game-name";
 
 function roundClock(seconds: number): string {
   const m = Math.floor(seconds / 60);
@@ -76,7 +80,7 @@ export type MapHistoryData = {
 } | null;
 
 export function MapView({
-  detail,
+  detail: rawDetail,
   region,
   videos,
   history,
@@ -88,6 +92,22 @@ export function MapView({
   videos: TankVideoCardData[];
   history: MapHistoryData;
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/maps/detail/view");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
+  // Named once, here, and handed down: the minimap, the history panel and the
+  // videos panel all read `detail.name`, so localizing the object rather than
+  // the heading translates the whole page in one place. The name is Wargaming's
+  // own, in the language the reader plays in. The description arrives already
+  // resolved, from the server (see the page).
+  const detail = useMemo(
+    () => ({
+      ...rawDetail,
+      name: mapName(rawDetail.arenaId, rawDetail.name, tMaps),
+    }),
+    [rawDetail, tMaps],
+  );
   const camo = CAMO_META[detail.camouflage];
   const CamoIcon = camo.icon;
   const modeNames = detail.geometry.map((g) => g.label).join(", ");
@@ -120,9 +140,9 @@ export function MapView({
   // the minimap already show).
   const activeGeo = detail.geometry.find((g) => g.mode === activeKey);
   const modesValue = onslaught
-    ? BATTLE_TYPE_LABEL[BattleType.Onslaught]
+    ? battleTypeName(BattleType.Onslaught, tGame)
     : variant
-      ? BATTLE_TYPE_LABEL[variant.battleType]
+      ? battleTypeName(variant.battleType, tGame)
       : (activeGeo?.label ?? "-");
 
   // Event/arcade maps have no arena_def geometry, so their play area, timer,
@@ -147,10 +167,12 @@ export function MapView({
   const showEvents = events.length > 0 && !onslaught;
   const hasAnyStat = hasSize || hasTime || hasTeam || hasModes || showEvents;
   const metaParts = [
-    `${camo.label} camouflage`,
+    t("camouflage", {
+      camouflage: tGame(`map-camouflage.${detail.camouflage}`),
+    }),
     hasSize ? `${detail.widthMeters} × ${detail.heightMeters} m` : null,
     events.length > 0
-      ? `${events.length} random event${events.length > 1 ? "s" : ""}`
+      ? t("n-random-events", { count: events.length })
       : null,
   ].filter((v): v is string => Boolean(v));
 
@@ -200,12 +222,12 @@ export function MapView({
                   {hasSize && (
                     <Stat
                       icon={ArrowsOutCardinalIcon}
-                      label="Size"
+                      label={t("size")}
                       value={
                         <>
                           {width} × {height} m{" "}
                           <span className="text-sm font-normal text-fd-muted-foreground">
-                            ({(width * height).toLocaleString("en-US")} m²)
+                            ({numberFormat(locale).format(width * height)} m²)
                           </span>
                         </>
                       }
@@ -214,24 +236,24 @@ export function MapView({
                   {hasTime && (
                     <Stat
                       icon={ClockIcon}
-                      label="Battle time"
+                      label={t("battle-time")}
                       value={roundClock(detail.roundLength)}
                     />
                   )}
                   {hasTeam && (
                     <Stat
                       icon={UsersIcon}
-                      label="Team size"
+                      label={t("team-size")}
                       value={`${teamSize} v ${teamSize}`}
                     />
                   )}
                   {hasModes && (
-                    <Stat icon={CompassIcon} label="Mode" value={modesValue} />
+                    <Stat icon={CompassIcon} label={t("mode")} value={modesValue} />
                   )}
                   {showEvents && (
                     <Stat
                       icon={WarningIcon}
-                      label="Random events"
+                      label={t("random-events")}
                       value={events.map((e) => e.name).join(", ")}
                     />
                   )}

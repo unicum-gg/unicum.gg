@@ -1,3 +1,4 @@
+import { useTranslation } from "@/hooks/use-translation";
 import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
 
 /**
@@ -14,10 +15,11 @@ import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
  * and the global feed's rows), so they cannot drift apart.
  */
 export function MapCommonTestBadge({ size = 14 }: { size?: number }) {
+  const { t } = useTranslation("components/maps/common-test-badge");
   return (
     <CommonTestBadge
       size={size}
-      description="only the test client ships this version, so it cannot be played on the live server yet"
+      description={t("only-the-test-client-ships")}
     />
   );
 }

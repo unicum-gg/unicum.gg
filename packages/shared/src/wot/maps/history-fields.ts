@@ -30,12 +30,48 @@ export enum MapChangeKind {
  */
 export const MAP_PRESENCE_FIELD = "presence";
 
-/** How to display one tracked map value. */
+/** How to display one tracked map value.
+ *
+ * `label` is the English wording and stays the fallback. `name` and `qualifier`
+ * are what let a reader say the same thing in its own language: the label is
+ * built here by gluing a noun to a mode in parentheses, and glued English is
+ * the one thing a translation cannot take apart. So the pieces travel too,
+ * and the app composes them with its own catalogues. Optional throughout: a
+ * field with nothing to look up (a random event carries the event's own name)
+ * simply has none.
+ */
 export type MapFieldDescriptor = {
   label: string;
   unit?: string;
   kind: MapChangeKind;
+  /** What the change is about, as a key into the reader's field catalogue. */
+  name?: MapFieldName;
+  /** The mode or battle type the name is qualified by, as the client tokens the
+   * game's own vocabulary is keyed on. */
+  qualifier?: { mode?: string; battleType?: BattleType };
 };
+
+/** The things a map change can be about, as keys a reader translates. Modes,
+ * battle types and random events are absent on purpose: those name themselves,
+ * from the game's own vocabulary or from the event's own text. */
+export type MapFieldName =
+  | "width"
+  | "height"
+  | "round-length"
+  | "team-size"
+  | "camouflage"
+  | "presence"
+  | "variant-version"
+  | "play-area"
+  | "bases-team1"
+  | "bases-team2"
+  | "spawns-team1"
+  | "spawns-team2"
+  | "control-point"
+  | "artillery-headquarters"
+  | "comms-centers"
+  | "observation-posts"
+  | "points-of-interest";
 
 /** A tracked scalar, keyed by its `MapSnapshotData` field. */
 export type TrackedMapField = MapFieldDescriptor & {
@@ -145,28 +181,28 @@ export function mapChangeArea(key: string): MapChangeArea {
  * without being an improvement, so map changes are never coloured.
  */
 export const TRACKED_MAP_FIELDS: TrackedMapField[] = [
-  { key: "widthMeters", label: "Play area width", unit: "m", kind: MapChangeKind.Value },
-  { key: "heightMeters", label: "Play area height", unit: "m", kind: MapChangeKind.Value },
-  { key: "roundLength", label: "Battle timer", unit: "s", kind: MapChangeKind.Value },
-  { key: "maxPlayersInTeam", label: "Team size", kind: MapChangeKind.Value },
-  { key: "camouflage", label: "Season", kind: MapChangeKind.Value },
+  { key: "widthMeters", label: "Play area width", unit: "m", kind: MapChangeKind.Value, name: "width" },
+  { key: "heightMeters", label: "Play area height", unit: "m", kind: MapChangeKind.Value, name: "height" },
+  { key: "roundLength", label: "Battle timer", unit: "s", kind: MapChangeKind.Value, name: "round-length" },
+  { key: "maxPlayersInTeam", label: "Team size", kind: MapChangeKind.Value, name: "team-size" },
+  { key: "camouflage", label: "Season", kind: MapChangeKind.Value, name: "camouflage" },
 ];
 
 const BY_KEY = new Map(TRACKED_MAP_FIELDS.map((f) => [f.key as string, f]));
 
 /** The marker family a geometry key describes, in the order a reader expects
  * them on the map. */
-const GEOMETRY_LABELS: Record<string, string> = {
-  "bases:team1": "Allied bases",
-  "bases:team2": "Enemy bases",
-  "spawns:team1": "Allied spawns",
-  "spawns:team2": "Enemy spawns",
-  controlPoint: "Control point",
-  "pointsOfInterest:strike": "Artillery Headquarters",
-  "pointsOfInterest:recon": "Comms Centers",
-  "pointsOfInterest:flare": "Observation Posts",
+const GEOMETRY_LABELS: Record<string, { label: string; name: MapFieldName }> = {
+  "bases:team1": { label: "Allied bases", name: "bases-team1" },
+  "bases:team2": { label: "Enemy bases", name: "bases-team2" },
+  "spawns:team1": { label: "Allied spawns", name: "spawns-team1" },
+  "spawns:team2": { label: "Enemy spawns", name: "spawns-team2" },
+  controlPoint: { label: "Control point", name: "control-point" },
+  "pointsOfInterest:strike": { label: "Artillery Headquarters", name: "artillery-headquarters" },
+  "pointsOfInterest:recon": { label: "Comms Centers", name: "comms-centers" },
+  "pointsOfInterest:flare": { label: "Observation Posts", name: "observation-posts" },
   // Kept for the rows recorded before the two kinds were tracked apart.
-  pointsOfInterest: "Points of interest",
+  pointsOfInterest: { label: "Points of interest", name: "points-of-interest" },
 };
 
 /**
@@ -178,27 +214,53 @@ const GEOMETRY_LABELS: Record<string, string> = {
  * reporting.
  */
 export function mapModeLabel(token: string): string {
-  if (token in MAP_GAME_MODE_LABEL) return MAP_GAME_MODE_LABEL[token as MapGameMode];
+  const ref = resolveMapMode(token);
+  if ("mode" in ref) return MAP_GAME_MODE_LABEL[ref.mode];
+  if ("battleType" in ref) return BATTLE_TYPE_LABEL[ref.battleType];
+  return ref.raw;
+}
+
+/**
+ * What a mode token actually names, before anything renders it.
+ *
+ * A reader's language lives in the front's catalogues, not here, so the label
+ * above is only the English end of this: the front resolves the same reference
+ * against `game/vocabulary` and the battle types, which is what stops a
+ * geometry change on `comp7` reading as "Onslaught" to a French reader. Both
+ * ends therefore agree on what `ctf` means by construction rather than by
+ * keeping two tables in step.
+ *
+ * `fallout` resolves to Steel Hunter for the reason `BATTLE_TYPE_LABEL` already
+ * gives: it is the client's own id for that mode, and naming it after the token
+ * left English as the one language calling it something the game never does.
+ */
+export function resolveMapMode(token: string): MapModeRef {
+  if (token in MAP_GAME_MODE_LABEL) return { mode: token as MapGameMode };
   const mode = gameModeFromRaw(token);
-  if (mode) return MAP_GAME_MODE_LABEL[mode];
+  if (mode) return { mode };
   switch (token) {
     case ONSLAUGHT_MODE:
-      return "Onslaught";
+      return { battleType: BattleType.Onslaught };
     case "epic":
-      return "Frontline";
+      return { battleType: BattleType.Frontline };
     case "ctf30x30":
     case "domination30x30":
-      return "Grand Battle";
-    case "nations":
-      return "Nations";
-    case "escort":
-      return "Escort";
+      return { battleType: BattleType.GrandBattle };
     case "fallout":
-      return "Fallout";
+      return { battleType: BattleType.BattleRoyale };
     default:
-      return token.replace(/[_-]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+      return {
+        raw: token.replace(/[_-]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+      };
   }
 }
+
+/** A mode token resolved to what it names: a mode the catalogue surfaces, a
+ * battle type, or a token neither knows, kept legible rather than dropped. */
+export type MapModeRef =
+  | { mode: MapGameMode }
+  | { battleType: BattleType }
+  | { raw: string };
 
 function battleTypeLabel(value: string): string {
   return value in BATTLE_TYPE_LABEL
@@ -219,7 +281,12 @@ export function resolveMapChangeField(key: string): MapFieldDescriptor {
     // The arena arriving is the map gaining a version of itself, not the map
     // arriving: said the other way it would be plainly false.
     if (variant.field === MAP_PRESENCE_FIELD) {
-      return { label: `${name} version`, kind: MapChangeKind.Presence };
+      return {
+        label: `${name} version`,
+        kind: MapChangeKind.Presence,
+        name: "variant-version",
+        qualifier: { battleType: variant.battleType },
+      };
     }
     const base = resolveMapChangeField(variant.field);
     // A geometry or play-area label already names the mode it belongs to, so
@@ -230,24 +297,34 @@ export function resolveMapChangeField(key: string): MapFieldDescriptor {
       label: mode
         ? base.label.replace(`(${mode[1]})`, `(${name})`)
         : `${base.label} (${name})`,
+      // The variant replaces whatever mode the base named, so the qualifier is
+      // the variant's battle type rather than the mode underneath it.
+      qualifier: { battleType: variant.battleType },
     };
   }
   const scalar = BY_KEY.get(key);
   if (scalar) return scalar;
   if (key === MAP_PRESENCE_FIELD) {
-    return { label: "In the game", kind: MapChangeKind.Presence };
+    return { label: "In the game", kind: MapChangeKind.Presence, name: "presence" };
   }
 
   if (key.startsWith(MAP_MODE_PREFIX)) {
+    const token = key.slice(MAP_MODE_PREFIX.length);
     return {
-      label: mapModeLabel(key.slice(MAP_MODE_PREFIX.length)),
+      label: mapModeLabel(token),
       kind: MapChangeKind.Mode,
+      qualifier: { mode: token },
     };
   }
   if (key.startsWith(MAP_BATTLE_TYPE_PREFIX)) {
+    const value = key.slice(MAP_BATTLE_TYPE_PREFIX.length);
     return {
-      label: battleTypeLabel(key.slice(MAP_BATTLE_TYPE_PREFIX.length)),
+      label: battleTypeLabel(value),
       kind: MapChangeKind.BattleType,
+      qualifier:
+        value in BATTLE_TYPE_LABEL
+          ? { battleType: value as BattleType }
+          : undefined,
     };
   }
   if (key.startsWith(MAP_RANDOM_EVENT_PREFIX)) {
@@ -257,10 +334,13 @@ export function resolveMapChangeField(key: string): MapFieldDescriptor {
     };
   }
   if (key.startsWith(MAP_PLAY_AREA_PREFIX)) {
+    const token = key.slice(MAP_PLAY_AREA_PREFIX.length);
     return {
-      label: `Play area (${mapModeLabel(key.slice(MAP_PLAY_AREA_PREFIX.length))})`,
+      label: `Play area (${mapModeLabel(token)})`,
       unit: "m",
       kind: MapChangeKind.Value,
+      name: "play-area",
+      qualifier: { mode: token },
     };
   }
   if (key.startsWith(MAP_GEOMETRY_PREFIX)) {
@@ -268,10 +348,12 @@ export function resolveMapChangeField(key: string): MapFieldDescriptor {
     const sep = rest.indexOf(":");
     const token = sep === -1 ? rest : rest.slice(0, sep);
     const family = sep === -1 ? "" : rest.slice(sep + 1);
-    const what = GEOMETRY_LABELS[family] ?? family;
+    const what = GEOMETRY_LABELS[family];
     return {
-      label: `${what} (${mapModeLabel(token)})`,
+      label: `${what?.label ?? family} (${mapModeLabel(token)})`,
       kind: MapChangeKind.Geometry,
+      name: what?.name,
+      qualifier: { mode: token },
     };
   }
   return { label: key, kind: MapChangeKind.Value };

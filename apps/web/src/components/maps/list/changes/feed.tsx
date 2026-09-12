@@ -1,5 +1,7 @@
 "use client";
 
+import { useFormat } from "@/hooks/use-format";
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import {
   type FeedMap,
@@ -15,11 +17,7 @@ export type MapFeedVersion = {
   maps: FeedMap[];
 };
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const DATE_PATTERN = "d MMM yyyy";
 
 /**
  * The global map-changes feed: every map an update touched, grouped by game
@@ -35,6 +33,7 @@ export function MapChangesFeed({
   region: Region;
   versions: MapFeedVersion[];
 }) {
+  const { t } = useTranslation("components/maps/list/changes/feed");
   const entries = useMemo(
     () => versions.flatMap((version) => version.maps.map((map) => ({ version, map }))),
     [versions],
@@ -45,9 +44,7 @@ export function MapChangesFeed({
     return (
       <Panel>
         <PanelContent className="px-4 py-12 text-center text-sm text-fd-muted-foreground">
-          No map changes have been recorded yet. As Wargaming reworks maps, what
-          each update changed will appear here.
-        </PanelContent>
+          {t("no-map-changes-have-been")}</PanelContent>
       </Panel>
     );
   }
@@ -75,16 +72,18 @@ export function MapChangesFeed({
 }
 
 function VersionHeader({ version }: { version: MapFeedVersion }) {
+  const { date } = useFormat();
+  const { t } = useTranslation("components/maps/list/changes/feed");
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-fd-border bg-fd-secondary/20 px-4 py-2.5">
       <h2 className="font-heading text-sm font-semibold">
-        Update {version.gameVersion}
+        {t("update", { version: version.gameVersion })}
         <span className="ml-2 text-xs font-normal text-fd-muted-foreground">
-          {dateFmt.format(new Date(version.capturedAt))}
+          {date(DATE_PATTERN).format(new Date(version.capturedAt))}
         </span>
       </h2>
       <span className="text-xs text-fd-muted-foreground tabular-nums">
-        {version.maps.length} map{version.maps.length === 1 ? "" : "s"}
+        {t("n-maps", { count: version.maps.length })}
       </span>
     </div>
   );

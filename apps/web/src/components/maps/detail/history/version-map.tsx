@@ -1,6 +1,7 @@
 "use client";
 
 import { useId } from "react";
+import { useTranslation } from "@/hooks/use-translation";
 import {
   MAP_AREA_MAP,
   MAP_AREA_ONSLAUGHT,
@@ -176,6 +177,7 @@ export function VersionMinimap({
   /** Which of the map's two play areas to draw. */
   area: MapChangeArea;
 }) {
+  const { t } = useTranslation("components/maps/detail/history/version-map");
   const arrowId = useId();
   const drawn = plan(detail, changes, area);
   if (!drawn) return null;
@@ -293,11 +295,11 @@ export function VersionMinimap({
       <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 bg-black/55 py-1 text-[11px] text-white">
         <span className="flex items-center gap-1.5">
           <span className="size-2.5 rounded-full bg-white/45" />
-          Before
+          {t("before")}
         </span>
         <span className="flex items-center gap-1.5">
           <span className="size-2.5 rounded-full bg-white" />
-          After
+          {t("after")}
         </span>
       </div>
     </div>

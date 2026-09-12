@@ -1,11 +1,14 @@
 "use client";
 
+import { useLocale } from "@onruntime/translations/react";
+import { numberFormat } from "@/lib/format";
+
 import {
   ArrowsOutCardinalIcon,
   WarningIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/link";
 import {
   BattleType,
   markerUrl,
@@ -23,6 +26,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { type BattleTab } from "@/components/maps/list/tabs";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
 // The game's base flag markers, ally green / enemy red, dropped onto the
 // thumbnail so the gallery shows each map's base positions at a glance.
@@ -80,6 +84,10 @@ export function MapCard({
   /** Draw one of the map's variant arenas instead of the map itself. */
   variant?: MapSummary["variants"][number];
 }) {
+  const { locale } = useLocale();
+  const { t } = useTranslation("components/maps/list/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tCard } = useTranslation("components/maps/list/card");
   const camo = CAMO_META[map.camouflage];
   const CamoIcon = camo.icon;
   const href = viewParam
@@ -95,7 +103,7 @@ export function MapCard({
           src={variant?.minimapUrl ?? map.minimapUrl}
           arenaId={variant?.arenaId ?? map.arenaId}
           commonTest={variant ? variant.commonTest : map.commonTest}
-          alt={`${map.name} minimap`}
+          alt={tCard("minimap-alt", { map: map.name })}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="transition-transform duration-300 group-hover:scale-105"
         />
@@ -103,13 +111,15 @@ export function MapCard({
         {(variant ? variant.commonTest : map.commonTest) && (
           <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[11px] font-medium text-fd-foreground backdrop-blur-sm">
             <MapCommonTestBadge size={12} />
-            Common Test
+            {tGame("features.common-test")}
           </span>
         )}
         <Tooltip>
           <TooltipTrigger asChild>
             <span
-              aria-label={`${camo.label} map`}
+              aria-label={t("camouflage-map", {
+                camouflage: tGame(`map-camouflage.${map.camouflage}`),
+              })}
               className={cn(
                 "absolute right-2 top-2 rounded-full bg-black/55 p-1.5 backdrop-blur-sm",
                 camo.className,
@@ -118,20 +128,24 @@ export function MapCard({
               <CamoIcon weight="fill" className="size-3.5" />
             </span>
           </TooltipTrigger>
-          <TooltipContent>{camo.label} map</TooltipContent>
+          <TooltipContent>
+            {t("camouflage-map", {
+              camouflage: tGame(`map-camouflage.${map.camouflage}`),
+            })}
+          </TooltipContent>
         </Tooltip>
         {map.hasRandomEvents && (
           <Tooltip>
             <TooltipTrigger asChild>
               <span
-                aria-label="Random events might change this map mid-battle"
+                aria-label={tCard("random-events")}
                 className="absolute left-2 top-2 rounded-full bg-black/55 p-1.5 text-[#e8955a] backdrop-blur-sm"
               >
                 <WarningIcon weight="fill" className="size-3.5" />
               </span>
             </TooltipTrigger>
             <TooltipContent>
-              Random events might change this map mid-battle
+              {tCard("random-events")}
             </TooltipContent>
           </Tooltip>
         )}
@@ -147,16 +161,16 @@ export function MapCard({
                 <ArrowsOutCardinalIcon className="size-3.5 shrink-0" />
                 {map.sizeMeters} × {map.sizeMeters} m
                 <span className="text-fd-muted-foreground/70">
-                  ({(map.sizeMeters ** 2).toLocaleString("en-US")} m²)
+                  ({numberFormat(locale).format(map.sizeMeters ** 2)} m²)
                 </span>
               </span>
               {map.modes.length > 0 && <span className="text-fd-border">·</span>}
             </>
           ) : null}
           {map.modes.length > 0
-            ? `${map.modes.length} mode${map.modes.length === 1 ? "" : "s"}`
+            ? t("modes", { count: map.modes.length })
             : map.sizeMeters === 0
-              ? "Special map"
+              ? t("special-map")
               : null}
         </div>
       </div>

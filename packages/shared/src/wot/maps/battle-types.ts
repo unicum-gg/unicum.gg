@@ -20,7 +20,12 @@ export enum BattleType {
 
 export const BATTLE_TYPE_LABEL: Record<BattleType, string> = {
   [BattleType.Random]: "Random",
-  [BattleType.BattleRoyale]: "Battle Royale",
+  // Wargaming's own name for the mode, in English as in every other language:
+  // the client's `type/fallout/name` is "Steel Hunter", French "Traque d'acier",
+  // German "Stählerne Jagd". "Battle Royale" was our generic word for the
+  // rotation, and it left English as the one language calling it something the
+  // game never does, including on our own /players/steel-hunter page.
+  [BattleType.BattleRoyale]: "Steel Hunter",
   [BattleType.Frontline]: "Frontline",
   [BattleType.Onslaught]: "Onslaught",
   [BattleType.OnslaughtNight]: "Onslaught Night",

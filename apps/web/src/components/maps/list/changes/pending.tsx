@@ -1,3 +1,4 @@
+import { getTranslation } from "@/lib/translations.server";
 import {
   type FeedMap,
   MapBlock,
@@ -21,23 +22,26 @@ import type { Region } from "@unicum.gg/wargaming";
  * Not paginated, and shown whole: a test touches a handful of maps, and it is
  * the part of the page a reader comes back for while a test is running.
  */
-export function PendingMapChanges({
+export async function PendingMapChanges({
   region,
   version,
-  maps,
+  maps, locale,
 }: {
   region: Region;
   /** The test build the changes were read from, null when none runs. */
   version: string | null;
   maps: FeedMap[];
+  locale: string;
 }) {
+  const { t } = await getTranslation("components/maps/list/changes/pending", locale);
+  const { t: tGame } = await getTranslation("game/vocabulary", locale);
   if (maps.length === 0) return null;
 
   return (
     <Panel className="border border-brand/40" screenLines={false}>
       <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <PanelTitle as="h2" className="text-base">
-          <span className="text-brand">Common Test</span>
+          <span className="text-brand">{tGame("features.common-test")}</span>
           {version ? (
             <span className="ml-2 text-xs font-normal text-fd-muted-foreground">
               {version}
@@ -50,9 +54,7 @@ export function PendingMapChanges({
       </PanelHeader>
       <PanelContent className="p-0">
         <p className="px-4 py-3 text-xs text-fd-muted-foreground">
-          Not released. Wargaming can still change or drop any of this before the
-          update ships.
-        </p>
+          {t("not-released-wargaming-can-still")}</p>
         <div className="divide-y divide-fd-border border-t border-fd-border">
           {maps.map((map) => (
             <MapBlock key={map.arenaId} region={region} map={map} pending />

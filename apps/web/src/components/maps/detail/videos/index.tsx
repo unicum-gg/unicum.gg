@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import useSWR from "swr";
 import { BattleFormat, isCompetitiveFormat } from "@unicum.gg/shared";
@@ -79,6 +80,7 @@ function MapVideos({
   region: Region;
   map: MapDetail;
 }) {
+  const { t } = useTranslation("components/maps/detail/videos/index");
   // The provider merges in the reader's own queued battles, so the lists and
   // the player's seek bar show the same set.
   const player = useTankVideoPlayer();
@@ -119,11 +121,11 @@ function MapVideos({
       <Panel>
         <VideoSection
           region={region}
-          title={`${map.name} tactics`}
+          title={t("tactics", { map: map.name })}
           battles={tactics}
           view={view}
           onViewChange={setView}
-          emptyText={`No tactic linked on ${map.name} yet. Suggest one and it shows up here once a moderator has looked at it.`}
+          emptyText={t("no-tactic-yet")}
           action={<SubmitTacticDialogSlot region={region} map={map} />}
         />
       </Panel>
@@ -136,7 +138,7 @@ function MapVideos({
           <Panel>
             <VideoSection
               region={region}
-              title="Random battles"
+              title={t("random-battles")}
               battles={randoms}
               view={view}
               emptyText=""

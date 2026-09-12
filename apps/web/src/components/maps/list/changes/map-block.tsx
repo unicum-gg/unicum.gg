@@ -1,11 +1,14 @@
 "use client";
 
-import Link from "next/link";
+
+import Link from "@/components/link";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { formatMapChange } from "@/components/maps/change-format";
 import ROUTES from "@/constants/routes";
+import { mapName } from "@/components/game-name";
+import { useTranslation } from "@/hooks/use-translation";
 import type { Region } from "@unicum.gg/wargaming";
 
 export type MapChangeRow = {
@@ -46,8 +49,15 @@ export function MapBlock({
    * not claim the map reached the game. */
   pending?: boolean;
 }) {
+  const { t: tMaps } = useTranslation("game/maps");
+  const { t } = useTranslation("components/maps/list/changes/map-block");
+  const { t: tChange } = useTranslation("components/maps/change-format");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const changes = map.changes.map((c) =>
-    formatMapChange(c.field, c.previous, c.next, pending),
+    formatMapChange(c.field, c.previous, c.next, pending, {
+      t: tChange,
+      tGame,
+    }),
   );
   if (changes.length === 0) return null;
 
@@ -71,7 +81,7 @@ export function MapBlock({
         </span>
         <div className="min-w-0">
           <div className="truncate text-sm font-medium group-hover:text-brand">
-            {map.name}
+            {mapName(map.arenaId, map.name, tMaps)}
             {map.commonTest || map.variantCommonTest ? (
               <>
                 {" "}
@@ -80,7 +90,9 @@ export function MapBlock({
             ) : null}
           </div>
           <div className="mt-0.5 text-xs text-fd-muted-foreground tabular-nums">
-            {changes.length} change{changes.length === 1 ? "" : "s"}
+            {t("n-changes", {
+              count: changes.length,
+            })}
           </div>
         </div>
       </Link>

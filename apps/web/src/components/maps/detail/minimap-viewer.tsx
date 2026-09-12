@@ -1,10 +1,10 @@
 "use client";
 
+
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   BASE_CAPTURE_RADIUS_M,
-  MAP_POI_LABEL,
   type MapDetail,
 } from "@unicum.gg/shared";
 import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
@@ -22,6 +22,7 @@ import {
   spawnUrl,
 } from "@/components/maps/detail/minimap-overlay";
 import { buildViews, teamSide } from "@/components/maps/detail/views";
+import { useTranslation } from "@/hooks/use-translation";
 
 export function MinimapViewer({
   detail,
@@ -32,7 +33,10 @@ export function MinimapViewer({
    * its stats sidebar to the active battle context. */
   onActiveViewChange?: (key: string) => void;
 }) {
-  const views = buildViews(detail);
+  const { t: tCopy } = useTranslation("components/maps/detail/minimap-viewer");
+  const { t } = useTranslation("components/maps/detail/minimap-viewer");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const views = buildViews(detail, tGame);
   const [viewIndex, setViewIndex] = useState(0);
   const [showGrid, setShowGrid] = useState(true);
   // Random events are not a mode: they may fire during a random battle,
@@ -170,8 +174,7 @@ export function MinimapViewer({
               data-active={eventsOn}
               className={pill}
             >
-              Random events
-            </button>
+              {t("random-events")}</button>
           )}
           {eventsOn && hasZones && (
             <button
@@ -180,8 +183,7 @@ export function MinimapViewer({
               data-active={showAfter}
               className={pill}
             >
-              After the event
-            </button>
+              {t("after-the-event")}</button>
           )}
           {hasGrid && (
             <button
@@ -190,8 +192,7 @@ export function MinimapViewer({
               data-active={showGrid}
               className={pill}
             >
-              Grid
-            </button>
+              {t("grid")}</button>
           )}
         </div>
       </div>
@@ -227,8 +228,7 @@ export function MinimapViewer({
             <span className="flex items-center gap-2">
               <Image src={BASE.team1} alt="" width={28} height={28} />
               <Image src={BASE.team2} alt="" width={28} height={28} />
-              Base
-            </span>
+              {tCopy("base")}</span>
           )}
           {/* Named per team, with the side each starts from. "Team 1" is the
               game's own numbering and means nothing on its own: a player knows
@@ -237,22 +237,23 @@ export function MinimapViewer({
               the legend cannot disagree with the markers. */}
           <span className="flex items-center gap-2">
             <Image src={spawnUrl("team1", 0)} alt="" width={26} height={26} />
-            Team 1{teamSide(view, 1) ? ` · ${teamSide(view, 1)}` : ""}
+            {tCopy("team", { n: 1 })}
+            {teamSide(view, 1) ? ` · ${teamSide(view, 1)}` : ""}
           </span>
           <span className="flex items-center gap-2">
             <Image src={spawnUrl("team2", 0)} alt="" width={26} height={26} />
-            Team 2{teamSide(view, 2) ? ` · ${teamSide(view, 2)}` : ""}
+            {tCopy("team", { n: 2 })}
+            {teamSide(view, 2) ? ` · ${teamSide(view, 2)}` : ""}
           </span>
           {view.controlPoint && (
             <span className="flex items-center gap-2">
               <Image src={CONTROL_POINT} alt="" width={28} height={28} />
-              Control point
-            </span>
+              {tCopy("control-point")}</span>
           )}
           {poiKinds.map((kind) => (
             <span key={kind} className="flex items-center gap-2">
               <Image src={poiUrl(kind)} alt="" width={28} height={28} />
-              <GlossaryLabel>{MAP_POI_LABEL[kind]}</GlossaryLabel>
+              <GlossaryLabel>{tGame(`map-poi.${kind}`)}</GlossaryLabel>
             </span>
           ))}
           {eventsOn && (
@@ -263,7 +264,7 @@ export function MinimapViewer({
                   className="size-3.5 rounded-xs bg-[#e8955a]"
                 />
               )}
-              {afterOnly ? "After: " : "Danger zone: "}
+              {afterOnly ? t("after") : t("danger-zone")}{" "}
               {drawnEvents.map((e) => e.name).join(", ")}
             </span>
           )}

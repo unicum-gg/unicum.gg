@@ -1,11 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { Interpolate } from "@/components/interpolate";
+import { useTranslation } from "@/hooks/use-translation";
+import Link from "@/components/link";
+import { useSearchParams } from "next/navigation";
+import { usePathname } from "@/hooks/use-pathname";
 import { useState } from "react";
 import useSWR, { mutate } from "swr";
 import {
-  BATTLE_FORMAT_LABEL,
   BattleFormat,
   BattleResult,
   FORMAT_TEAM_SIZE,
@@ -104,6 +106,8 @@ export function SubmitTacticDialog({
    */
   initial?: TankVideoSuggestion;
 }) {
+  const { t } = useTranslation("components/maps/detail/videos/submit-dialog");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const { data: session } = useSession();
   // Back to where the form was opened, which is not always this map's page: the
   // clan tab mounts it too, and bouncing someone to a map they never asked for
@@ -207,8 +211,7 @@ export function SubmitTacticDialog({
     return (
       <LoginButton callbackURL={backTo}>
         <Button variant="outline" size="sm">
-          Log in to suggest a tactic
-        </Button>
+          {t("log-in-to-suggest-a")}</Button>
       </LoginButton>
     );
   }
@@ -223,38 +226,42 @@ export function SubmitTacticDialog({
     >
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
-          Suggest a tactic
-        </Button>
+          {t("suggest-a-tactic")}</Button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
         <DialogHeader>
-          <DialogTitle>{done ? "Suggestion sent" : "Suggest a tactic"}</DialogTitle>
+          <DialogTitle>{done ? t("suggestion-sent") : t("suggest-a-tactic")}</DialogTitle>
           <DialogDescription>
             {done ? (
               // Named, because the map is a field: a clan evening runs through
               // a rotation, so a suggestion sent from one map page regularly
               // belongs to another, and leaving someone to guess where their
               // own row went is the thing this line exists to prevent.
-              <>
-                It is in the queue, and shows up{" "}
-                {filedOn && filedOn.slug !== map.slug ? (
-                  <>
-                    on{" "}
-                    <Link
-                      href={ROUTES.MAP(region, filedOn.slug)}
-                      className="text-brand hover:underline"
-                    >
-                      {filedOn.name}
-                    </Link>
-                  </>
-                ) : (
-                  "here"
-                )}{" "}
-                once a moderator has looked at it. Yours is greyed out on that
-                page in the meantime.
-              </>
+              <Interpolate
+                template={t("in-the-queue")}
+                values={{
+                  where:
+                    filedOn && filedOn.slug !== map.slug ? (
+                      <Interpolate
+                        template={t("on-map")}
+                        values={{
+                          map: (
+                            <Link
+                              href={ROUTES.MAP(region, filedOn.slug)}
+                              className="text-brand hover:underline"
+                            >
+                              {filedOn.name}
+                            </Link>
+                          ),
+                        }}
+                      />
+                    ) : (
+                      t("here")
+                    ),
+                }}
+              />
             ) : (
-              `A competitive battle, opening at the second it starts. The map starts on ${map.name} and moves with the video: a clan evening runs through a rotation. The side it was played from is the part a shot-caller looks it up by, so it is asked for rather than guessed.`
+              t("what-to-submit", { map: map.name })
             )}
           </DialogDescription>
         </DialogHeader>
@@ -275,15 +282,15 @@ export function SubmitTacticDialog({
 
             <div className="grid grid-cols-2 gap-3">
               <label className="flex flex-col gap-1 text-sm">
-                <span className="font-medium">Format</span>
+                <span className="font-medium">{t("format")}</span>
                 <Select value={format} onValueChange={setFormat}>
                   <SelectTrigger className="h-9 w-full">
-                    <SelectValue placeholder="What was played" />
+                    <SelectValue placeholder={t("what-was-played")} />
                   </SelectTrigger>
                   <SelectContent>
                     {TACTIC_FORMATS.map((f) => (
                       <SelectItem key={f} value={f}>
-                        {BATTLE_FORMAT_LABEL[f]}
+                        {tGame(`battle-formats.${f}`)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -295,7 +302,7 @@ export function SubmitTacticDialog({
                   would be asking someone to retype a rule. */}
               {picked && fixedSize === undefined && (
                 <label className="flex flex-col gap-1 text-sm">
-                  <span className="font-medium">Players per team</span>
+                  <span className="font-medium">{t("players-per-team")}</span>
                   <input
                     type="text"
                     value={teamSize}
@@ -310,7 +317,7 @@ export function SubmitTacticDialog({
               )}
               {picked && fixedTier === undefined && (
                 <label className="flex flex-col gap-1 text-sm">
-                  <span className="font-medium">Tier</span>
+                  <span className="font-medium">{t("tier")}</span>
                   <input
                     type="text"
                     value={tier}
@@ -340,13 +347,12 @@ export function SubmitTacticDialog({
           {done ? (
             <>
               <Button variant="outline" onClick={reset}>
-                Suggest another
-              </Button>
-              <Button onClick={() => setOpen(false)}>Close</Button>
+                {t("suggest-another")}</Button>
+              <Button onClick={() => setOpen(false)}>{t("close")}</Button>
             </>
           ) : (
             <Button onClick={submit} disabled={!complete || sending}>
-              {sending ? "Sending…" : "Suggest"}
+              {sending ? t("sending") : t("suggest")}
             </Button>
           )}
         </DialogFooter>
