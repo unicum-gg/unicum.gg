@@ -10,6 +10,7 @@
     "bug": "Bug report",
     "idea": "Feature idea",
     "data": "Data accuracy",
+    "translation": "Translation",
     "other": "Other"
   },
   "sentiments": {

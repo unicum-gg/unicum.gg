@@ -10,6 +10,16 @@ export enum FeedbackTopic {
   Bug = "bug",
   Idea = "idea",
   Data = "data",
+  /**
+   * A word that reads wrong in the reader's language.
+   *
+   * Its own topic rather than a bug, because the reader who can see it is
+   * almost never the one who can see the rest: the site is published in 36
+   * languages, 35 of them written by a model from the English, and nobody on
+   * this side reads Kazakh. A French reader spotting "Battles aléatoires" is
+   * the only detector that exists for it, and that one lived for a while.
+   */
+  Translation = "translation",
   Other = "other",
 }
 
@@ -26,6 +36,7 @@ export const TOPIC_LABELS: Record<FeedbackTopic, string> = {
   [FeedbackTopic.Bug]: "Bug report",
   [FeedbackTopic.Idea]: "Feature idea",
   [FeedbackTopic.Data]: "Data accuracy",
+  [FeedbackTopic.Translation]: "Translation",
   [FeedbackTopic.Other]: "Other",
 };
 

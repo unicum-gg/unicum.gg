@@ -625,6 +625,7 @@
   "components/feedback/feedback-widget:topics.bug": "5a7ee5acc806",
   "components/feedback/feedback-widget:topics.idea": "ad1cf72f429f",
   "components/feedback/feedback-widget:topics.data": "135aa14fda67",
+  "components/feedback/feedback-widget:topics.translation": "ac26a7a94ea2",
   "components/feedback/feedback-widget:topics.other": "6e6a6f2086bb",
   "components/feedback/feedback-widget:sentiments.awful": "b0dd15185eb6",
   "components/feedback/feedback-widget:sentiments.bad": "be7e10d1c5dd",
