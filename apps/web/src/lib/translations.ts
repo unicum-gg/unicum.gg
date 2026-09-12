@@ -23,44 +23,61 @@ export const LOCALE_COOKIE = "unicum.locale";
  *
  * Adding one is a member here plus a CI run: the English files are the only
  * ones written by hand, everything else is generated from them.
+ *
+ * **The order is the size of each language's playerbase, most spoken first**,
+ * because it is the order the language menu renders in and a reader looks for
+ * their own language rather than reading the list. The counts beside each entry
+ * are rated players declaring it across the three servers, measured
+ * 2026-09-12 with the same query the list itself is built from:
+ *
+ * ```sql
+ * select unnest(languages) as lang, sum(rated_members_count)
+ * from eu_clan_ratings  -- union all na_, asia_
+ * group by lang order by 2 desc
+ * ```
+ *
+ * `ar` and `hi` close the list with no figure because **no clan declares
+ * either**: they are inherited from the studio's own locale list rather than
+ * from World of Tanks, which is also why they are the two whose every string is
+ * written with no game wording to anchor it.
  */
 export enum Locale {
-  EN = "en",
-  FR = "fr",
-  DE = "de",
-  ES = "es",
-  IT = "it",
-  PT = "pt",
-  NL = "nl",
-  PL = "pl",
-  SV = "sv",
-  CS = "cs",
-  SK = "sk",
-  HU = "hu",
-  RO = "ro",
-  UK = "uk",
-  RU = "ru",
-  BE = "be",
-  SR = "sr",
-  HR = "hr",
-  BS = "bs",
-  TR = "tr",
-  JA = "ja",
-  KO = "ko",
-  ZH = "zh",
-  VI = "vi",
-  TH = "th",
+  EN = "en",  // 1 181 429
+  UK = "uk",  // 720 326
+  RU = "ru",  // 539 596
+  PL = "pl",  // 481 317
+  DE = "de",  // 321 093
+  CS = "cs",  // 198 423
+  SK = "sk",  // 129 222
+  ZH = "zh",  // 118 006
+  ES = "es",  // 108 755
+  FR = "fr",  // 87 367
+  HU = "hu",  // 85 428
+  RO = "ro",  // 74 748
+  SR = "sr",  // 69 252
+  HR = "hr",  // 68 892
+  JA = "ja",  // 65 895
+  BE = "be",  // 64 418
+  TR = "tr",  // 62 139
+  BS = "bs",  // 45 582
+  PT = "pt",  // 44 289
+  KO = "ko",  // 42 114
+  VI = "vi",  // 39 984
+  TH = "th",  // 34 605
+  NL = "nl",  // 33 111
+  IT = "it",  // 29 262
+  KK = "kk",  // 27 348
+  BG = "bg",  // 25 839
+  FI = "fi",  // 22 767
+  LT = "lt",  // 22 536
+  EL = "el",  // 19 827
+  TL = "tl",  // 16 686
+  SV = "sv",  // 16 293
+  LV = "lv",  // 12 363
+  DA = "da",  // 9 684
+  NO = "no",  // 9 312
   AR = "ar",
   HI = "hi",
-  BG = "bg",
-  EL = "el",
-  FI = "fi",
-  LT = "lt",
-  LV = "lv",
-  DA = "da",
-  NO = "no",
-  KK = "kk",
-  TL = "tl",
 }
 
 /** Every locale, in the order the language menu lists them. */
