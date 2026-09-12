@@ -30,6 +30,12 @@ async function botFetch<T>(
   if (!env.DISCORD_BOT_TOKEN) return null;
   const res = await fetch(`${API}${path}`, {
     ...init,
+    // Every call here is a small JSON round trip and nothing above bounds one,
+    // so a half-open connection would hold its caller for undici's five-minute
+    // default. The changelog's publish lock is held for exactly as long as a
+    // post takes, which makes that default long enough to disable the catch-up
+    // meant to cover for it. Callers with their own deadline keep it.
+    signal: init?.signal ?? AbortSignal.timeout(15_000),
     headers: {
       authorization: `Bot ${env.DISCORD_BOT_TOKEN}`,
       "content-type": "application/json",

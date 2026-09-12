@@ -21,6 +21,12 @@ import type { Commit } from "./commits";
 // true.
 const MODEL = "gpt-5.6";
 
+/** A run holds the publish lock in `./cron` for as long as this call lasts, and
+ * the catch-up that covers a missed slot is skipped while it does, so this must
+ * not be able to hang on a half-open connection. Two minutes is far past what a
+ * week of commit subjects takes. */
+const TIMEOUT_MS = 120_000;
+
 const draftSchema = z.object({
   added: z
     .array(z.string())
@@ -73,6 +79,7 @@ export async function writeChangelog(
       instructions: INSTRUCTIONS,
       prompt: promptFrom(commits),
       output: Output.object({ schema: draftSchema }),
+      abortSignal: AbortSignal.timeout(TIMEOUT_MS),
     });
     return output;
   } catch (err) {
