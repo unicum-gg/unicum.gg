@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automatické doplňování mezi sledovanými hráči a při prvním vyhledání načtení účtu přímo z Wargaming.",
   "battle-maps": "Bitevní mapy",
   "bot-installed-and-you-ve-joined-our-discord-": "Bot je nainstalován a připojili jste se k našemu Discordu. Vyzkoušejte ho zadáním /player na svém serveru.",
-  "bot-installed-type-player-in-your-server-to-": "Bot je nainstalován. Vyzkoušejte ho zadáním /player na svém serveru.",
+  "bot-installed-type-player-in-your-server-to-": "Bot je nainstalován. Typ /player na svém serveru a vyzkoušejte ho, nebo se připojte na {discord} pro novinky a podporu.",
   "clan-stats": "Statistiky klanu",
   "commands": "Příkazy",
   "description": "Přidejte si na svůj Discord server Discord bot {name} a získejte okamžité statistiky World of Tanks. Příkazy /player, /clan, /tank a /maps vracejí WN8, WNX, míru vítězství a podrobnosti o mapách pro libovolného hráče, klan, tank nebo bitevní mapu v regionech EU, NA a Asie, a to přímo z dat webu.",

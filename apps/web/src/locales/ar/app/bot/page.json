@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "إكمال تلقائي للاعبين المتتبّعين، ويجلب البحث الأول الحساب مباشرة من Wargaming.",
   "battle-maps": "خرائط المعركة",
   "bot-installed-and-you-ve-joined-our-discord-": "تم تثبيت الروبوت وانضممت إلى Discord الخاص بنا. اكتب /player في خادمك لتجربته.",
-  "bot-installed-type-player-in-your-server-to-": "تم تثبيت الروبوت. اكتب /player في خادمك لتجربته.",
+  "bot-installed-type-player-in-your-server-to-": "تم تثبيت الروبوت. نوع /player في خادمك لتجربته، وانضم إلى {discord} للحصول على الأخبار والدعم.",
   "clan-stats": "إحصائيات العشيرة",
   "commands": "الأوامر",
   "description": "أضف روبوت {name} إلى خادم Discord الخاص بك لتحصل فورًا على إحصائيات World of Tanks. تعرض أوامر /player و/clan و/tank و/maps الإحصائيات WN8 وWNX ونسبة الفوز وتفاصيل الخرائط لأي لاعب أو قبيلة أو دبابة أو خريطة معركة عبر مناطق EU وNA وآسيا، مباشرة من بيانات الموقع.",

@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automaattinen täydennys seuratuista pelaajista, ja ensimmäinen haku hakee tilin livestä Wargamingista.",
   "battle-maps": "Taistelukartat",
   "bot-installed-and-you-ve-joined-our-discord-": "Botti on asennettu ja olet liittynyt Discordiimme. Kokeile sitä kirjoittamalla palvelimellasi /player.",
-  "bot-installed-type-player-in-your-server-to-": "Botti on asennettu. Kokeile sitä kirjoittamalla palvelimellasi /player.",
+  "bot-installed-type-player-in-your-server-to-": "Botti asennettu. Kirjoita palvelimellasi /player kokeillaksesi sitä ja liity {discord}-palvelimellemme saadaksesi uutisia ja tukea.",
   "clan-stats": "Klaanitilastot",
   "commands": "Komentot",
   "description": "Lisää {name}-botti Discord-palvelimellesi saadaksesi World of Tanks -tilastot heti. /player-, /clan-, /tank- ja /maps-komennot palauttavat WN8:n, WNX:n, voittoprosentin ja karttatiedot mistä tahansa pelaajasta, klaanista, panssarivaunusta tai taistelukartasta EU:ssa, NA:ssa ja Aasiassa suoraan sivuston tiedoista.",

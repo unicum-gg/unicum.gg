@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "追跡対象プレイヤーの候補を自動表示します。初回検索時はWargamingからアカウント情報をリアルタイムで取得します。",
   "battle-maps": "戦闘マップ",
   "bot-installed-and-you-ve-joined-our-discord-": "ボットをインストールし、Discordに参加しました。サーバーで/playerと入力して試してみましょう。",
-  "bot-installed-type-player-in-your-server-to-": "ボットをインストールしました。サーバーで/playerと入力して試してみましょう。",
+  "bot-installed-type-player-in-your-server-to-": "ボットを導入しました。サーバーで /player と入力して試してみてください。最新情報やサポートについては、{discord} に参加してください。",
   "clan-stats": "クラン統計",
   "commands": "コマンド",
   "description": "{name}ボットをDiscordサーバーに追加すると、World of Tanksの戦績をすぐに確認できます。/player、/clan、/tank、/mapsのスラッシュコマンドで、EU、NA、アジア地域の任意のプレイヤー、クラン、戦車、戦闘マップについて、WN8、WNX、勝率、マップ詳細をサイトのデータから取得できます。",

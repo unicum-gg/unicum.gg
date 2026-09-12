@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automatikus kiegészítés a nyomon követett játékosok között, az első lekérdezés pedig élőben keresi ki a fiókot a Wargaming rendszeréből.",
   "battle-maps": "Csata Pályák",
   "bot-installed-and-you-ve-joined-our-discord-": "A bot telepítve, és csatlakoztál a Discord szerverünkhöz. A kipróbálásához írd be a /player parancsot a szervereden.",
-  "bot-installed-type-player-in-your-server-to-": "A bot telepítve. A kipróbálásához írd be a /player parancsot a szervereden.",
+  "bot-installed-type-player-in-your-server-to-": "A bot telepítve van. Írd be a /player parancsot a szervereden, próbáld ki, és lépj be {discord} közösségünkbe hírekért és támogatásért.",
   "clan-stats": "Klán statisztikák",
   "commands": "Parancsok",
   "description": "Add hozzá a {name} botot a Discord szerveredhez, és azonnal elérheted a World of Tanks statisztikáit. Bármilyen játékos, Klán, tank vagy csatatérkép esetén a /player, /clan, /tank és /maps perjeles parancsok WN8, WNX, győzelmi arány és térképadatok lekérésére használhatók az EU, NA és Ázsia régióiban, közvetlenül a webhely adataiból.",

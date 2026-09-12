@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automatische Vervollständigung für erfasste spieler. Beim ersten Abruf wird das Konto live über Wargaming ermittelt.",
   "battle-maps": "Kampfkarten",
   "bot-installed-and-you-ve-joined-our-discord-": "Bot installiert und unserem Discord beigetreten. Gib /player auf deinem Server ein, um ihn auszuprobieren.",
-  "bot-installed-type-player-in-your-server-to-": "Bot installiert. Gib /player auf deinem Server ein, um ihn auszuprobieren.",
+  "bot-installed-type-player-in-your-server-to-": "Bot installiert. Typ /player in deinem Server, um ihn auszuprobieren, und tritt {discord} bei, um Neuigkeiten und Support zu erhalten.",
   "clan-stats": "Clanstatistiken",
   "commands": "Befehle",
   "description": "Füge den {name}-Bot deinem Discord-Server hinzu und erhalte sofort World of Tanks-Statistiken. Die Slash-Befehle /player, /clan, /tank und /maps liefern WN8, WNX, Siegrate und Kartendetails für jeden Spieler, Clan, Panzer oder jede Gefechtskarte in EU, NA und Asien, direkt aus den Daten der Website.",

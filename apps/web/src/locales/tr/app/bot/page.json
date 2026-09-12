@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Takip edilen oyuncularda otomatik tamamlama vardır ve ilk arama hesabı Wargaming üzerinden canlı olarak çözümler.",
   "battle-maps": "Savaş haritaları",
   "bot-installed-and-you-ve-joined-our-discord-": "Bot yüklendi ve Discord’umuza katıldınız. Denemek için sunucunuzda /player yazın.",
-  "bot-installed-type-player-in-your-server-to-": "Bot yüklendi. Denemek için sunucunuzda /player yazın.",
+  "bot-installed-type-player-in-your-server-to-": "Bot yüklendi. Denemek için sunucunuzda /player yazın ve haberler ve destek için {discord} topluluğumuza katılın.",
   "clan-stats": "Klan istatistikleri",
   "commands": "Komutlar",
   "description": "Anlık World of Tanks istatistikleri için {name} botunu Discord sunucunuza ekleyin. /player, /clan, /tank ve /maps komutları, sitenin verilerinden doğrudan alınan WN8, WNX, galibiyet oranı ve harita ayrıntılarını EU, NA ve Asya’daki tüm oyuncu, klan, tank veya savaş haritaları için döndürür.",

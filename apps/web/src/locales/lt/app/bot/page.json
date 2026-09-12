@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automatinis stebimų žaidėjų užbaigimas, o pirmosios paieškos metu paskyra tiesiogiai gaunama iš Wargaming.",
   "battle-maps": "Mūšio žemėlapiai",
   "bot-installed-and-you-ve-joined-our-discord-": "Botas įdiegtas, o jūs prisijungėte prie mūsų Discord. Savo serveryje įveskite /player ir išbandykite.",
-  "bot-installed-type-player-in-your-server-to-": "Botas įdiegtas. Savo serveryje įveskite /player ir išbandykite.",
+  "bot-installed-type-player-in-your-server-to-": "Botas įdiegtas. Tipas /player savo serveryje, kad išbandytumėte, ir prisijunkite prie mūsų {discord}, kad gautumėte naujienų ir pagalbos.",
   "clan-stats": "Klanas statistika",
   "commands": "Komandos",
   "description": "Pridėkite {name} botą prie savo Discord serverio ir iškart gaukite World of Tanks statistiką. Pasvirieji brūkšniai /player, /clan, /tank ir /maps pateikia WN8, WNX, pergalių procentą ir žemėlapio informaciją apie bet kurį žaidėją, klaną, tanką ar mūšio žemėlapį EU, NA ir Azijoje, tiesiai iš svetainės duomenų.",

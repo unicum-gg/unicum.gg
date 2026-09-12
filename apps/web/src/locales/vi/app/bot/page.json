@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Tự động hoàn thành với những người chơi được theo dõi, và lần tra cứu đầu tiên sẽ lấy tài khoản trực tiếp từ Wargaming.",
   "battle-maps": "Bản đồ trận đánh",
   "bot-installed-and-you-ve-joined-our-discord-": "Đã cài đặt bot và bạn đã tham gia Discord của chúng tôi. Nhập /player trên máy chủ của bạn để dùng thử.",
-  "bot-installed-type-player-in-your-server-to-": "Đã cài đặt bot. Nhập /player trên máy chủ của bạn để dùng thử.",
+  "bot-installed-type-player-in-your-server-to-": "Bot đã được cài đặt. Nhập /player trên máy chủ của bạn để dùng thử và tham gia {discord} của chúng tôi để nhận tin tức và hỗ trợ.",
   "clan-stats": "Thống kê clan",
   "commands": "Lệnh",
   "description": "Thêm bot {name} vào máy chủ Discord của bạn để xem ngay thống kê World of Tanks. Các lệnh slash /player, /clan, /tank và /maps trả về WN8, WNX, tỷ lệ thắng và thông tin bản đồ cho bất kỳ người chơi, Clan, xe tăng hoặc bản đồ trận đấu nào trên EU, NA và Châu Á, trực tiếp từ dữ liệu của trang web.",

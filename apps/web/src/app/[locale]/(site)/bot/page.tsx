@@ -149,6 +149,12 @@ WN8                    5,004.95
 WNX                    5,599.32`;
 
 // Post-install redirect (`?discord=`).
+//
+// `Installed` is the state where the bot was added but the reader was NOT
+// brought into our server, which is the whole difference between it and
+// `Joined`, so its sentence carries the invitation a failed `guilds.join` owes
+// them. The link rides a `{discord}` placeholder rather than a second key, so a
+// translator can move it: it sits mid-sentence in half the languages we publish.
 const STATUS: Record<
   DiscordInstallStatus,
   { tone: "ok" | "error"; text: string }
@@ -221,7 +227,21 @@ export default async function BotPage({
                   : "border-red-500/40 bg-red-500/10 text-red-500",
               )}
             >
-              {t(status.text)}
+              <Interpolate
+                template={t(status.text)}
+                values={{
+                  discord: (
+                    <a
+                      href={APP.EXTERNAL.DISCORD}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2"
+                    >
+                      {t("discord")}
+                    </a>
+                  ),
+                }}
+              />
             </p>
           ) : null}
 

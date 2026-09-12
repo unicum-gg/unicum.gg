@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Autofullføring blant sporede spillere, og første gangs oppslag henter kontoen direkte fra Wargaming.",
   "battle-maps": "Kampkart",
   "bot-installed-and-you-ve-joined-our-discord-": "Boten er installert, og du har blitt med i Discord-serveren vår. Skriv /player på serveren din for å prøve den.",
-  "bot-installed-type-player-in-your-server-to-": "Boten er installert. Skriv /player på serveren din for å prøve den.",
+  "bot-installed-type-player-in-your-server-to-": "Bot installert. Type /player på din server for å prøve den, og bli med på vår {discord} for nyheter og støtte.",
   "clan-stats": "Klanstatistikk",
   "commands": "Kommandoer",
   "description": "Legg {name}-boten til Discord-serveren din for øyeblikkelig World of Tanks-statistikk. Skråstrekkommandoene /player, /clan, /tank og /maps gir WN8, WNX, seiersprosent og kartdetaljer for enhver spiller, klan, stridsvogn eller kampkart på EU, NA og Asia, direkte fra nettstedets data.",

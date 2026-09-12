@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automātiskā pabeigšana izsekotajiem spēlētājiem, bet pirmā meklēšana kontu tiešraidē iegūst no Wargaming.",
   "battle-maps": "Kaujas kartes",
   "bot-installed-and-you-ve-joined-our-discord-": "Robots ir instalēts, un jūs esat pievienojies mūsu Discord. Ierakstiet /player savā serverī, lai to izmēģinātu.",
-  "bot-installed-type-player-in-your-server-to-": "Robots ir instalēts. Ierakstiet /player savā serverī, lai to izmēģinātu.",
+  "bot-installed-type-player-in-your-server-to-": "Bots instalēts. Tips /spēlētājs savā serverī, lai to izmēģinātu, un pievienojies mūsu {discord}, lai saņemtu jaunumus un atbalstu.",
   "clan-stats": "Klana statistika",
   "commands": "Komandas",
   "description": "Pievienojiet {name} robotu savam Discord serverim, lai uzreiz iegūtu World of Tanks statistiku. Slīpsvītras komandas /player, /clan, /tank un /maps atgriež WN8, WNX, uzvaru procentu un karšu informāciju par jebkuru spēlētāju, klanu, tanku vai kaujas karti EU, NA un Āzijā, tieši no vietnes datiem.",

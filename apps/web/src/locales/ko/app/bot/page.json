@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "추적됨 플레이어들에 대한 자동 완성을 제공하며, 처음 조회하는 계정은 워게이밍에서 실시간으로 확인합니다.",
   "battle-maps": "전투 지도",
   "bot-installed-and-you-ve-joined-our-discord-": "봇이 설치되었고 Discord에 참여했습니다. 서버에서 /player를 입력해 사용해 보세요.",
-  "bot-installed-type-player-in-your-server-to-": "봇이 설치되었습니다. 서버에서 /player를 입력해 사용해 보세요.",
+  "bot-installed-type-player-in-your-server-to-": "봇이 설치되었습니다. 서버에서 /player를 유형해 사용해 보고, 소식과 지원을 위해 {discord}에 참여하세요.",
   "clan-stats": "클랜 통계",
   "commands": "명령",
   "description": "{name} 봇을 Discord 서버에 추가하면 World of Tanks 통계를 즉시 확인할 수 있습니다. /player, /clan, /tank, /maps 슬래시 명령어로 EU, NA, 아시아의 모든 플레이어, 클랜, 전차 또는 전투 지도에 대한 WN8, WNX, 승률과 지도 세부 정보를 사이트의 데이터에서 바로 가져옵니다.",

@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automatsko dovršavanje među praćenim igračima, a prvo pretraživanje uživo pronalazi nalog na Wargamingu.",
   "battle-maps": "Bitkenske mape",
   "bot-installed-and-you-ve-joined-our-discord-": "Bot je instaliran i pridružio si se našem Discordu. Ukucaj /player na svom серверu da ga isprobaš.",
-  "bot-installed-type-player-in-your-server-to-": "Bot je instaliran. Ukucaj /player na svom серверу da ga isprobaš.",
+  "bot-installed-type-player-in-your-server-to-": "Bot je instaliran. Tip /player na svom серверу da ga isprobaš i pridruži se našem {discord} za novosti i podršku.",
   "clan-stats": "Statistika klana",
   "commands": "Komande",
   "description": "Dodaj {name} bota na svoj Discord сервер za trenutnu статистику World of Tanks. Komande /player, /clan, /tank i /maps vraćaju WN8, WNX, проценат победа i detalje o mapama za bilo kog igrača, клана, tenka ili mape bitke u regionima EU, NA i Azije, direktno iz podataka sajta.",

@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Automatisch aanvullen voor gevolgde spelers, waarbij het account bij de eerste zoekopdracht live wordt opgehaald bij Wargaming.",
   "battle-maps": "Gevechtskaarten",
   "bot-installed-and-you-ve-joined-our-discord-": "De bot is geïnstalleerd en je bent lid geworden van onze Discord. Typ /player op je server om hem uit te proberen.",
-  "bot-installed-type-player-in-your-server-to-": "De bot is geïnstalleerd. Typ /player op je server om hem uit te proberen.",
+  "bot-installed-type-player-in-your-server-to-": "Bot geïnstalleerd. Type /player op je server om het uit te proberen en word lid van onze {discord} voor nieuws en ondersteuning.",
   "clan-stats": "Clan statistieken",
   "commands": "Opdrachten",
   "description": "Voeg de bot {name} toe aan je Discord-server voor directe World of Tanks-statistieken. De slashopdrachten /player, /clan, /tank en /maps geven WN8, WNX, winstpercentage en kaartdetails voor elke speler, Clan, Tank of gevechtskaart in EU, NA en Azië, rechtstreeks uit de gegevens van de site.",

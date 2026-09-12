@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "เติมข้อความอัตโนมัติจากผู้เล่นที่ติดตามแล้ว และการค้นหาครั้งแรกจะดึงบัญชีแบบสดจาก Wargaming",
   "battle-maps": "แผนที่การต่อสู้",
   "bot-installed-and-you-ve-joined-our-discord-": "ติดตั้งบอตแล้วและคุณเข้าร่วม Discord ของเราแล้ว พิมพ์ /player ในเซิร์ฟเวอร์ของคุณเพื่อลองใช้งาน",
-  "bot-installed-type-player-in-your-server-to-": "ติดตั้งบอตแล้ว พิมพ์ /player ในเซิร์ฟเวอร์ของคุณเพื่อลองใช้งาน",
+  "bot-installed-type-player-in-your-server-to-": "ติดตั้งบอตแล้ว พิมพ์ /player ในเซิร์ฟเวอร์ของคุณเพื่อทดลองใช้ และเข้าร่วม {discord} ของเราเพื่อรับข่าวสารและความช่วยเหลือ",
   "clan-stats": "สถิติกองทัพ",
   "commands": "คำสั่ง",
   "description": "เพิ่มบอต {name} ลงในเซิร์ฟเวอร์ Discord ของคุณเพื่อดูสถิติ World of Tanks ได้ทันที คำสั่งแบบสแลช /player, /clan, /tank และ /maps จะแสดง WN8, WNX, อัตราชนะ และรายละเอียดแผนที่สำหรับผู้เล่น แคลน รถถัง หรือแผนที่การรบใดๆ ใน EU, NA และเอเชีย โดยใช้ข้อมูลโดยตรงจากเว็บไซต์",

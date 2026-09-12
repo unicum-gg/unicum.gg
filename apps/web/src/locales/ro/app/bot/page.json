@@ -10,7 +10,7 @@
   "autocomplete-over-tracked-players-and-a-firs": "Completare automată pentru jucătorii urmăriți, iar la prima căutare contul este identificat live de la Wargaming.",
   "battle-maps": "Hărțile de bătălie",
   "bot-installed-and-you-ve-joined-our-discord-": "Bot instalat și te-ai alăturat serverului nostru Discord. Tastează /player pe serverul tău pentru a-l încerca.",
-  "bot-installed-type-player-in-your-server-to-": "Bot instalat. Tastează /player pe serverul tău pentru a-l încerca.",
+  "bot-installed-type-player-in-your-server-to-": "Botul a fost instalat. Tastează /player pe serverul tău pentru a-l încerca și alătură-te nouă pe {discord} pentru noutăți și asistență.",
   "clan-stats": "Statistici Clan",
   "commands": "Comenzi",
   "description": "Adaugă botul {name} pe serverul tău Discord pentru statistici instant din World of Tanks. Comenzile slash /player, /clan, /tank și /maps returnează WN8, WNX, rata de victorii și detalii despre hărți pentru orice jucător, clan, tanc sau hartă de bătălie din Europa, America de Nord și Asia, direct din datele site-ului.",
