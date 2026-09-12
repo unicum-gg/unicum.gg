@@ -1,5 +1,5 @@
 import "server-only";
-import { REST } from "@discordjs/rest";
+import { DiscordAPIError, REST } from "@discordjs/rest";
 import { OAuth2Scopes, PermissionFlagsBits } from "discord-api-types/v10";
 import { APP_IDENTITY, BRAND_COLOR_INT, env } from "@unicum.gg/shared";
 
@@ -200,6 +200,18 @@ function botRest(config: DiscordConfig): REST {
  * `PUT /guilds/{guild}/members/{user}` resolves on 201 (added) or 204 (already
  * a member); a missing-permission / bad-token error rejects, which the caller
  * treats as "not joined".
+ *
+ * The reason is logged, because it exists nowhere else. The bot half of the
+ * authorization has already succeeded by the time we get here, so this is the
+ * only part that can fail, and it fails silently all the way out: the caller
+ * gets a boolean and the reader gets "installed". An install that did not bring
+ * its user in was diagnosed once by reconstructing it from Discord and from the
+ * accounts our own resolver had happened to write, days later, because nothing
+ * had recorded a status code.
+ *
+ * Only the status, the Discord code and the message are logged, never the error
+ * itself: `DiscordAPIError` carries `requestBody`, which here is the user's
+ * OAuth access token, and `console.error` prints an error's own properties.
  */
 export async function addUserToGuild(
   config: DiscordConfig,
@@ -211,7 +223,13 @@ export async function addUserToGuild(
       body: { access_token: accessToken },
     });
     return true;
-  } catch {
+  } catch (err) {
+    console.error(
+      `[discord install] joining ${userId} to our server failed:`,
+      err instanceof DiscordAPIError
+        ? { status: err.status, code: err.code, message: err.message }
+        : { message: String(err) },
+    );
     return false;
   }
 }
