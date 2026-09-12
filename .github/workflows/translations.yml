@@ -67,6 +67,11 @@ jobs:
       # hundred requests and the two should be billed and rate-limited apart.
       - name: Fill in the missing translations
         env:
+          # The marketplace's own key (`ci_live…`), first in the script's chain.
+          # `OPENAI_API_KEY_TRANSLATIONS` below is an OpenAI key and is only the
+          # fallback: sent to this endpoint it answers `invalid_api_key`, which
+          # is exactly how this job failed twice.
+          TRANSLATE_API_KEY: ${{ secrets.TRANSLATE_API_KEY }}
           OPENAI_API_KEY_TRANSLATIONS: ${{ secrets.OPENAI_API_KEY_TRANSLATIONS }}
           # The endpoint the model is bought from. Without it the SDK goes to
           # OpenAI directly, where the configured model does not exist, so the
