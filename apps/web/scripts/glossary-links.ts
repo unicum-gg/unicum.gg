@@ -17,8 +17,8 @@ import { listGlossary, renderGlossaryTerm } from "../src/services/glossary";
 const MAX_LENGTH = Number(process.argv[2]) || 4;
 
 const hits: { surface: string; slug: string; where: string; context: string }[] = [];
-for (const { slug } of listGlossary()) {
-  const term = renderGlossaryTerm(slug);
+for (const { slug } of await listGlossary()) {
+  const term = await renderGlossaryTerm(slug);
   if (!term) continue;
   for (const block of term.body) {
     const runs =

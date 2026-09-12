@@ -1,0 +1,19 @@
+---
+term: Kohdistettu tuli
+aliases:
+  - kohdistaminen
+  - kohdistettu
+related:
+  - crossfire
+  - trading
+  - carry
+  - hit-points
+---
+
+use the "" notation. 
+
+ use the "" notation.
+
+ use the "" notation. Three vehicles spreading their shots across three targets leave three opponents shooting back; the same three shots into one target leave two.
+
+"Being focused is the other side of it: a vehicle that shows itself to four guns at once is gone whatever its armor, which is what a crossfire is designed to produce."

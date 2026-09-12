@@ -134,8 +134,8 @@ function labels(): Found[] {
   return out;
 }
 
-function main() {
-  const anchors = getGlossaryAnchors();
+async function main() {
+  const anchors = await getGlossaryAnchors();
   const covered = (label: string): boolean => {
     const key = label.toLowerCase();
     if (anchors.byLabel.has(key)) return true;

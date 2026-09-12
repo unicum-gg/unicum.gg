@@ -14,9 +14,14 @@ import {
   getGlossaryAnchors,
   listGlossary,
 } from "../src/services/glossary";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { parsePo, rawUrl, WotSrcBranch } from "@unicum.gg/wargaming";
 import { GROUPS } from "../src/components/tanks/detail/specifications/characteristics/rows";
 import { SPEC_COLUMNS } from "../src/components/tanks/list/spec-columns";
+
+const webRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 type Named = {
   key: string | null;
@@ -48,10 +53,19 @@ function named(): Named[] {
       });
     }
   }
+  // The wording moved into the locale files when the site went multilingual, so
+  // the English source is where a coverage report reads it: the column itself
+  // now only carries its key.
+  const columnCopy = JSON.parse(
+    readFileSync(
+      join(webRoot, "src/locales/en/components/tanks/list/spec-columns.json"),
+      "utf-8",
+    ),
+  ) as { columns: Record<string, { label: string }> };
   for (const column of SPEC_COLUMNS) {
     out.push({
       key: column.key,
-      label: column.label,
+      label: columnCopy.columns[column.key]?.label ?? column.key,
       parent: null,
       where: "tanks/columns",
     });
@@ -59,7 +73,7 @@ function named(): Named[] {
   return out;
 }
 
-function covered(entry: Named, anchors: ReturnType<typeof getGlossaryAnchors>) {
+function covered(entry: Named, anchors: Awaited<ReturnType<typeof getGlossaryAnchors>>) {
   if (entry.key && anchors.bySpecKey.has(entry.key)) return true;
   if (anchors.byLabel.has(entry.label.toLowerCase())) return true;
   return entry.parent !== null && anchors.byLabel.has(entry.parent.toLowerCase());
@@ -79,7 +93,7 @@ async function facts(): Promise<Map<string, string>> {
 }
 
 async function main() {
-  const anchors = getGlossaryAnchors();
+  const anchors = await getGlossaryAnchors();
   const entries = named();
   const seen = new Set<string>();
   const missing = entries.filter((entry) => {
@@ -93,7 +107,7 @@ async function main() {
   // every reader pays. Printed here to keep it in view.
   const payload = Buffer.byteLength(JSON.stringify(getGlossaryAnchorPayload()));
   console.log(
-    `glossary: ${listGlossary().length} terms defined, anchors payload ${(payload / 1024).toFixed(1)} KB`,
+    `glossary: ${(await listGlossary()).length} terms defined, anchors payload ${(payload / 1024).toFixed(1)} KB`,
   );
   console.log(
     `site stats: ${seen.size} distinct, ${seen.size - missing.length} covered, ${missing.length} missing\n`,
