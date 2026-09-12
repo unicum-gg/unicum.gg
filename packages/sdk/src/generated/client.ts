@@ -47,11 +47,11 @@ class PlayerClient {
   }
 
   /** Player achievements */
-  achievements() {
+  achievements(language?: NonNullable<QueryOf<"/{region}/players/{nickname}/achievements">>["language"]) {
     const path = { region: this.region, nickname: this.nickname };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/players/{nickname}/achievements", path),
-      () => this.api.GET("/{region}/players/{nickname}/achievements", { params: { path } }),
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/achievements", path, { language }),
+      () => this.api.GET("/{region}/players/{nickname}/achievements", { params: { path, query: { language } } }),
     );
   }
 
@@ -101,11 +101,11 @@ class PlayerClient {
   }
 
   /** Player vehicle record */
-  tank(slug: string) {
+  tank(slug: string, language?: NonNullable<QueryOf<"/{region}/players/{nickname}/tanks/{slug}">>["language"]) {
     const path = { region: this.region, nickname: this.nickname, slug };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks/{slug}", path),
-      () => this.api.GET("/{region}/players/{nickname}/tanks/{slug}", { params: { path } }),
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks/{slug}", path, { language }),
+      () => this.api.GET("/{region}/players/{nickname}/tanks/{slug}", { params: { path, query: { language } } }),
     );
   }
 
@@ -430,11 +430,11 @@ class GlossaryTermClient {
   ) {}
 
   /** Glossary term */
-  detail() {
+  detail(language?: NonNullable<QueryOf<"/glossary/{slug}">>["language"]) {
     const path = { slug: this.slug };
     return handle(
-      buildUrl(this.baseUrl, "/glossary/{slug}", path),
-      () => this.api.GET("/glossary/{slug}", { params: { path } }),
+      buildUrl(this.baseUrl, "/glossary/{slug}", path, { language }),
+      () => this.api.GET("/glossary/{slug}", { params: { path, query: { language } } }),
     );
   }
 }
@@ -1067,11 +1067,11 @@ type SupportNamespace = {
 
 type GlossaryNamespace = ((slug: string) => GlossaryTermClient) & {
   /** Glossary */
-  list(category?: NonNullable<QueryOf<"/glossary">>["category"]): RequestHandle<Data<"/glossary">>;
+  list(query?: QueryOf<"/glossary">): RequestHandle<Data<"/glossary">>;
   /** Glossary anchors */
-  anchors(): RequestHandle<Data<"/glossary/anchors">>;
+  anchors(language?: NonNullable<QueryOf<"/glossary/anchors">>["language"]): RequestHandle<Data<"/glossary/anchors">>;
   /** Search the glossary */
-  search(q: NonNullable<QueryOf<"/glossary/search">>["q"]): RequestHandle<Data<"/glossary/search">>;
+  search(query: QueryOf<"/glossary/search">): RequestHandle<Data<"/glossary/search">>;
 };
 
 /**
@@ -1187,17 +1187,17 @@ export class Unicum {
   get glossary(): GlossaryNamespace {
     const ns = ((slug: string) =>
       new GlossaryTermClient(this.api, this.baseUrl, slug)) as GlossaryNamespace;
-    ns.list = (category) =>
-      handle(buildUrl(this.baseUrl, "/glossary", undefined, { category }), () =>
-        this.api.GET("/glossary", { params: { query: { category } } }),
+    ns.list = (query) =>
+      handle(buildUrl(this.baseUrl, "/glossary", undefined, query), () =>
+        this.api.GET("/glossary", { params: { query } }),
       );
-    ns.anchors = () =>
-      handle(buildUrl(this.baseUrl, "/glossary/anchors"), () =>
-        this.api.GET("/glossary/anchors", {}),
+    ns.anchors = (language) =>
+      handle(buildUrl(this.baseUrl, "/glossary/anchors", undefined, { language }), () =>
+        this.api.GET("/glossary/anchors", { params: { query: { language } } }),
       );
-    ns.search = (q) =>
-      handle(buildUrl(this.baseUrl, "/glossary/search", undefined, { q }), () =>
-        this.api.GET("/glossary/search", { params: { query: { q } } }),
+    ns.search = (query) =>
+      handle(buildUrl(this.baseUrl, "/glossary/search", undefined, query), () =>
+        this.api.GET("/glossary/search", { params: { query } }),
       );
     return ns;
   }

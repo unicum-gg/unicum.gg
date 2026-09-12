@@ -47,18 +47,24 @@ async function GET__perf(
   );
   const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 
-  const language = url.searchParams.get("language");
+  // `lang` on the wire, because `language` elsewhere in the API asks for the
+  // language the ANSWER is written in. This one selects rows, not prose. The
+  // old name is still read, and deprecated in the document: dropping it outright
+  // would answer an existing caller with a complete board rather than tell them
+  // their filter was ignored.
+  const lang =
+    url.searchParams.get("lang") ?? url.searchParams.get("language");
   const withLanguages = url.searchParams.get("languages") === "true";
   const strict = url.searchParams.get("strict") === "true";
 
   try {
-    if (language || withLanguages) {
+    if (lang || withLanguages) {
       // Language boards are lifetime WNX rankings scoped to clans declaring
       // the language (`strict` = the clan declares only that one).
       const results = await getTopPlayersByLanguage(
         region,
         metric,
-        language,
+        lang,
         limit,
         strict,
       );

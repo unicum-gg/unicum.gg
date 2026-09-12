@@ -870,7 +870,7 @@ export interface paths {
         put?: never;
         /**
          * Correct a suggestion
-         * @description Rewrite a battle that was already suggested. The author may correct their own for as long as it has not been turned down, and a moderator may correct anyone's while holding the signed link the moderation channel hands out. The body is the submission's, so the same checks apply: the map and mode are validated against the catalogue, a random battle names its vehicle, and the one-row-per-battle rule still holds. The vehicle is the field this exists for, since the form never asks for it on the way in. A correction always goes back to the queue, so a video that was live comes down until it is approved again. 401 when signed out and no token is given, 403 on someone else's, 404 when submissions are unconfigured or the row is unknown, 409 when the correction lands on a battle we already hold.
+         * @description Rewrite a battle that was already suggested. The author may correct their own whatever became of it, a turned-down one included: a rejection carries the moderator's reason, and the answer to it is usually a correction rather than a second submission. A moderator may correct anyone's while holding the signed link the moderation channel hands out. The body is the submission's, so the same checks apply: the map and mode are validated against the catalogue, a random battle names its vehicle, and the one-row-per-battle rule still holds. The vehicle is the field this exists for, since the form never asks for it on the way in. A correction always goes back to the queue, so a video that was live comes down until it is approved again. A correction always goes back to the queue, so a video that was live comes down until it is approved again. 401 when signed out and no token is given, 403 on someone else's, 404 when submissions are unconfigured or the row is unknown, 409 when the correction lands on a battle we already hold.
          */
         post: operations["post-{region}-videos-edit"];
         delete?: never;
@@ -2078,6 +2078,11 @@ export interface components {
             tiers: components["schemas"]["tier"][];
             count: number;
         };
+        /**
+         * @description Language to write the answer in (an interface locale, e.g. `fr`). Falls back to English for a language this catalogue has not been translated into; the response's `Content-Language` names the one actually served.
+         * @example fr
+         */
+        answerLanguageField: string;
         axisAnswer: {
             axis: components["schemas"]["tankRatingAxisField"];
             value: number;
@@ -2629,6 +2634,11 @@ export interface components {
             day: string;
             count: number;
         };
+        /**
+         * @deprecated
+         * @description Deprecated alias of `lang`, accepted while callers move. `lang` wins when both are given. Renamed because `language` elsewhere in this API asks for the language the ANSWER is written in, and this one selects which rows are in it.
+         */
+        deprecatedLangField: string;
         /** @description One column of a histogram, half-open: `from` included, `to` excluded. The first and last of a series collect everything outside the plotted range, so they are wider than the rest. */
         DistributionBucket: {
             from: number;
@@ -2805,12 +2815,24 @@ export interface components {
         GlossaryListResponse: {
             results: components["schemas"]["GlossaryTermSummary"][];
         };
+        glossaryQueryOutput: {
+            category?: components["schemas"]["glossaryCategoryField"];
+            language?: Record<string, never>;
+        };
+        glossarySearchQueryOutput: {
+            /** @description Search prefix. */
+            q: string;
+            language?: Record<string, never>;
+        };
         GlossarySearchResponse: {
             results: components["schemas"]["GlossaryTermSummary"][];
         };
         glossarySegment: {
             text: string;
             slug?: string;
+        };
+        glossaryTermQueryOutput: {
+            language?: Record<string, never>;
         };
         GlossaryTermResponse: {
             slug: string;
@@ -2837,7 +2859,7 @@ export interface components {
             status: string;
         };
         /** @description Two-letter language code. When set, the leaderboard is filtered to players/clans whose clan declares this language (period is ignored: language boards are lifetime WNX). */
-        languageField: string;
+        langField: string;
         /** @description One language's population. */
         LanguageStat: {
             /** @description Two-letter language code. */
@@ -2939,6 +2961,8 @@ export interface components {
             name: string;
             /** @description The device's in-game description, from the client localization. */
             description: string;
+            /** @description The client catalogue entry that description came from, which is not always the device's own key: a grade variant carries the base device's. A reader's language resolves the blurb through this. */
+            descriptionKey: string;
             image: string | null;
             /**
              * @description Acquisition grade: standard (credits), bond (improved), bounty, bountyUpgraded or experimental.
@@ -3299,6 +3323,8 @@ export interface components {
             key: string;
             /** @description Display label ('Season of the Jade Dragon' or 'Year of the Griffin'). */
             label: string;
+            /** @description Season ordinal word ('third'), which is how the client keys its own season names. Null for a year archive. */
+            ordinal: string | null;
             /** @description True when we hold standings for this season (selectable). */
             available: boolean;
             /** @description Season id to navigate to (available seasons only). */
@@ -4218,6 +4244,10 @@ export interface components {
             category: string;
             isFeature: boolean;
             name: string;
+            /** @description The client key the name and description were resolved from, so a reader's language can resolve the same key. */
+            nameKey: string;
+            /** @description The figure filling the {value} hole in the description, as a magnitude the sentence's own wording gives a direction and a unit to. */
+            descriptionValue: number | null;
             description: string | null;
             image: string | null;
             effects: {
@@ -4281,7 +4311,7 @@ export interface components {
             twitch_login?: string | null;
         };
         /**
-         * @description With `language`: only count clans that declare exactly this one language.
+         * @description With `lang`: only count clans that declare exactly this one language.
          * @enum {string}
          */
         strictField: "true" | "false";
@@ -5111,6 +5141,8 @@ export interface components {
             channelName: string;
             mapName: string | null;
             mapSlug: string | null;
+            /** @description The arena the battle was played on. Carried so a client can name the map in the reader's language, since `mapName` is the English the row was stored with. */
+            arenaId: string | null;
             mode: components["schemas"]["mapModeField"] | null;
             /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
             direction: components["schemas"]["spawnDirectionField"] | null;
@@ -5559,6 +5591,8 @@ export interface components {
             channelName: string;
             mapName: string | null;
             mapSlug: string | null;
+            /** @description The arena the battle was played on. Carried so a client can name the map in the reader's language, since `mapName` is the English the row was stored with. */
+            arenaId: string | null;
             mode: components["schemas"]["mapModeField"] | null;
             /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
             direction: components["schemas"]["spawnDirectionField"] | null;
@@ -5584,6 +5618,8 @@ export interface components {
             channelName: string;
             mapName: string | null;
             mapSlug: string | null;
+            /** @description The arena the battle was played on. Carried so a client can name the map in the reader's language, since `mapName` is the English the row was stored with. */
+            arenaId: string | null;
             mode: components["schemas"]["mapModeField"] | null;
             /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
             direction: components["schemas"]["spawnDirectionField"] | null;
@@ -5794,7 +5830,9 @@ export interface operations {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 metric?: "wn7" | "wn8" | "wnx";
-                language?: components["schemas"]["languageField"];
+                lang?: components["schemas"]["langField"];
+                /** @deprecated */
+                language?: components["schemas"]["deprecatedLangField"];
                 strict?: components["schemas"]["strictField"];
                 languages?: components["schemas"]["withLanguagesField"];
             };
@@ -6025,7 +6063,9 @@ export interface operations {
     };
     "get-{region}-players-{nickname}-achievements": {
         parameters: {
-            query?: never;
+            query?: {
+                language?: components["schemas"]["answerLanguageField"];
+            };
             header?: never;
             path: {
                 /** @example eu */
@@ -6168,7 +6208,9 @@ export interface operations {
     };
     "get-{region}-players-{nickname}-tanks-{slug}": {
         parameters: {
-            query?: never;
+            query?: {
+                language?: components["schemas"]["answerLanguageField"];
+            };
             header?: never;
             path: {
                 /** @example eu */
@@ -6342,7 +6384,9 @@ export interface operations {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 metric?: "wn7" | "wn8" | "wnx";
-                language?: components["schemas"]["languageField"];
+                lang?: components["schemas"]["langField"];
+                /** @deprecated */
+                language?: components["schemas"]["deprecatedLangField"];
                 strict?: components["schemas"]["strictField"];
                 languages?: components["schemas"]["withLanguagesField"];
             };
@@ -7768,6 +7812,7 @@ export interface operations {
                  * @example uni
                  */
                 q: string;
+                language?: components["schemas"]["answerLanguageField"];
             };
             header?: never;
             path?: never;
@@ -7895,6 +7940,7 @@ export interface operations {
         parameters: {
             query?: {
                 category?: components["schemas"]["glossaryCategoryField"];
+                language?: components["schemas"]["answerLanguageField"];
             };
             header?: never;
             path?: never;
@@ -7915,7 +7961,9 @@ export interface operations {
     };
     "get-glossary-anchors": {
         parameters: {
-            query?: never;
+            query?: {
+                language?: components["schemas"]["answerLanguageField"];
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -8239,7 +8287,9 @@ export interface operations {
     };
     "get-glossary-{slug}": {
         parameters: {
-            query?: never;
+            query?: {
+                language?: components["schemas"]["answerLanguageField"];
+            };
             header?: never;
             path: {
                 /**

@@ -1,5 +1,6 @@
 import { isGlossaryCategory } from "@unicum.gg/shared";
-import { listGlossary, listGlossaryByCategory } from "@/services/glossary";
+import { glossaryLocale, listGlossary, listGlossaryByCategory } from "@/services/glossary";
+import { contentLanguage, requestedLanguage } from "@/services/openapi/locale";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
 import { GlossaryListResponse } from "./schema.api";
@@ -23,11 +24,16 @@ async function GET__perf(req: Request) {
     return Response.json({ error: "invalid_category" }, { status: 400 });
   }
 
-  const results = category ? listGlossaryByCategory(category) : listGlossary();
+  const served = glossaryLocale(requestedLanguage(req));
+  const results = category
+    ? await listGlossaryByCategory(category, served)
+    : await listGlossary(served);
   return jsonResponse(
     GlossaryListResponse,
     { results },
     // The catalogue ships with the build, so it only ever changes on a deploy.
-    { headers: { "cache-control": "public, max-age=3600" } },
+    contentLanguage(served, {
+      headers: { "cache-control": "public, max-age=3600" },
+    }),
   );
 }

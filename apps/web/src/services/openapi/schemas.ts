@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { answerLanguageField } from "./locale";
 import {
   BattleFormat,
   BattleResult,
@@ -282,6 +283,10 @@ export const videoBattle = z.object({
   channelName: z.string(),
   mapName: z.string().nullable(),
   mapSlug: z.string().nullable(),
+  arenaId: z.string().nullable().meta({
+    description:
+      "The arena the battle was played on. Carried so a client can name the map in the reader's language, since `mapName` is the English the row was stored with.",
+  }),
   mode: mapModeField.nullable(),
   direction: spawnDirectionField.nullable().meta({
     description:
@@ -433,13 +438,39 @@ export function limitField(max: number) {
   });
 }
 
-const languageField = z.string().meta({
+/**
+ * The leaderboards' filter: not how the answer is written but which rows are in
+ * it.
+ *
+ * `lang` rather than `language`, because `language` across the rest of the API
+ * asks for the language the ANSWER is written in, and the two are not the same
+ * question: one selects prose, this one selects rows. Naming both `language`
+ * meant a caller reading the reference could not tell which they were setting,
+ * and neither mistake shows: a leaderboard that ignored the parameter is simply
+ * unfiltered, and a glossary that ignored it answers English.
+ */
+const langField = z.string().meta({
   description:
     "Two-letter language code. When set, the leaderboard is filtered to players/clans whose clan declares this language (period is ignored: language boards are lifetime WNX).",
 });
+
+/**
+ * The name the filter used to have, still accepted and marked for removal.
+ *
+ * Not for compatibility's sake alone: a caller still sending `language` here
+ * would otherwise get a leaderboard that silently ignored it, which reads as a
+ * complete board rather than as a rejected parameter. Keeping it answers their
+ * question correctly while the reference says, in the one place they would
+ * look, that the name is going away.
+ */
+const deprecatedLangField = z.string().meta({
+  description:
+    "Deprecated alias of `lang`, accepted while callers move. `lang` wins when both are given. Renamed because `language` elsewhere in this API asks for the language the ANSWER is written in, and this one selects which rows are in it.",
+  deprecated: true,
+});
 const strictField = z.enum(["true", "false"]).meta({
   description:
-    "With `language`: only count clans that declare exactly this one language.",
+    "With `lang`: only count clans that declare exactly this one language.",
 });
 const withLanguagesField = z.enum(["true", "false"]).meta({
   description:
@@ -450,7 +481,8 @@ export const playersTopQuery = z.object({
   period: periodField.optional(),
   limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
-  language: languageField.optional(),
+  lang: langField.optional(),
+  language: deprecatedLangField.optional(),
   strict: strictField.optional(),
   languages: withLanguagesField.optional(),
 });
@@ -459,7 +491,8 @@ export const clansTopQuery = z.object({
   period: clanPeriodField.optional(),
   limit: limitField(CLANS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
-  language: languageField.optional(),
+  lang: langField.optional(),
+  language: deprecatedLangField.optional(),
   strict: strictField.optional(),
   languages: withLanguagesField.optional(),
 });
@@ -595,3 +628,18 @@ export const clanSummary = z
     description: "Clan row (additional fields may be present).",
   });
 
+
+/**
+ * The language Wargaming's own words are answered in.
+ *
+ * The same `language` the rest of the API uses for this. What it selects is the
+ * words Wargaming owns, so an unpublished language falls back to English and
+ * `Content-Language` says so.
+ */
+export const playerAchievementsQuery = z.object({
+  language: answerLanguageField.optional(),
+});
+
+export const playerTankQuery = z.object({
+  language: answerLanguageField.optional(),
+});

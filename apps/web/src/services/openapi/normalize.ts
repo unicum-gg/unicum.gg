@@ -5,6 +5,8 @@ import {
 } from "@/services/openapi/schemas";
 
 type Schema = {
+  $ref?: string;
+  deprecated?: boolean;
   allOf?: Schema[];
   enum?: unknown[];
   default?: unknown;
@@ -12,6 +14,7 @@ type Schema = {
 type Parameter = {
   name?: string;
   description?: string;
+  deprecated?: boolean;
   example?: unknown;
   schema?: Schema;
 };
@@ -21,6 +24,7 @@ export type OpenApiDoc = {
   tags?: { name?: string; "x-displayName"?: string }[];
   info?: Record<string, unknown>;
   servers?: unknown;
+  components?: { schemas?: Record<string, Schema> };
 } & Record<string, unknown>;
 
 // Docs sidebar order: main entities first, infrastructure last. Tags absent from
@@ -129,10 +133,35 @@ function exampleFromDescription(description: unknown) {
 }
 
 /**
+ * `deprecated` belongs on the PARAMETER in OpenAPI, and Zod can only put it on
+ * the schema, so a `.meta({ deprecated: true })` reaches the document in a
+ * place no docs UI reads: Scalar strikes through a deprecated parameter and
+ * shows nothing at all for a deprecated schema.
+ *
+ * The flag may sit on the parameter's own schema or, when the field is a shared
+ * const, behind the `$ref` that survives into it. Both are followed, because
+ * which one it lands in is decided by whether the field was reused rather than
+ * by anything meaningful.
+ */
+function liftDeprecated(parameter: Parameter, doc: OpenApiDoc): void {
+  const schema = parameter.schema;
+  if (!schema) return;
+  const ref = typeof schema.$ref === "string" ? schema.$ref : undefined;
+  const target = ref?.startsWith("#/components/schemas/")
+    ? doc.components?.schemas?.[ref.slice("#/components/schemas/".length)]
+    : undefined;
+  if (schema.deprecated === true || target?.deprecated === true) {
+    parameter.deprecated = true;
+    delete schema.deprecated;
+  }
+}
+
+/**
  * Normalizes generated parameters for docs UIs:
  * - flattens single-element `allOf` so enums render as selects;
  * - applies the query defaults from `QUERY_PARAM_DEFAULTS` (next-openapi-gen
  *   doesn't serialize `.default()` on enum params), e.g. `metric` -> `wnx`;
+ * - lifts `deprecated` from a parameter's schema onto the parameter itself;
  * - replaces next-openapi-gen's literal `example: "example"` placeholder with
  *   the value its description advertises (so `/maps/{slug}` prefills
  *   `prokhorovka`), the first enum value (so `region` prefills `eu`), an entry
@@ -143,6 +172,7 @@ function normalizeParameters(doc: OpenApiDoc): void {
     for (const operation of Object.values(pathItem)) {
       for (const parameter of operation.parameters ?? []) {
         flattenSingleAllOf(parameter.schema);
+        liftDeprecated(parameter, doc);
 
         const fallback = parameter.name
           ? QUERY_PARAM_DEFAULTS[parameter.name]
