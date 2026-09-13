@@ -102,9 +102,20 @@ export async function markGun(
     upright.normalize();
     const across = new THREE.Vector3().crossVectors(upright, facing);
     const turn = new THREE.Euler().setFromRotationMatrix(new THREE.Matrix4().makeBasis(across, upright, facing));
-    // Sideways is along the barrel now, so the mark's own width is the
-    // slot's size and its height is what its picture asks for.
-    const size = new THREE.Vector3(slot.size, tall, reach * 2.2);
+    // **The picture decides the other side, or the mark comes out squashed.**
+    //
+    // The height wraps the barrel and is four radii, and the width used to be
+    // the slot's own size: two independent numbers, so the shape they framed
+    // was whatever their ratio happened to be. The insignia is a 128 by 128
+    // star and it was drawn 1.26 times as wide as tall on the 121B and 1.48 on
+    // the Erlang Shen, which reads exactly as a star someone sat on. Height
+    // times the picture's own ratio keeps the arc where it belongs and the star
+    // round.
+    const size = new THREE.Vector3(
+      (tall * map.image.width) / map.image.height,
+      tall,
+      reach * 2.2,
+    );
     for (const mesh of surfaces.get(gun) ?? []) {
       const decal = project(mesh, on, turn, size, painted[side], facing);
       if (decal) marked.push(decal);
