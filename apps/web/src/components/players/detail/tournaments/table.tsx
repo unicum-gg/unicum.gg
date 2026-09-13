@@ -2,7 +2,8 @@
 
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
-import { CrownSimpleIcon } from "@phosphor-icons/react";
+import { CrownSimpleIcon, StarIcon } from "@phosphor-icons/react";
+import Image from "next/image";
 import Link from "@/components/link";
 import { tierBand } from "@/components/tournaments/tier-label";
 import { RankMedal } from "@/components/rank-medal";
@@ -134,6 +135,26 @@ export function PlayerTournamentsTable({
                 {date(DATE_PATTERN).format(e.startAt)}
               </TableCell>
               <TableCell>
+                {/* The organiser's logo and Wargaming's featured flag, drawn as
+                    the catalogue and the clan's own table draw them: they are
+                    what tells two identically-named dailies apart and what marks
+                    a branded championship. */}
+                {e.logoUrl?.startsWith("http") && (
+                  <Image
+                    src={e.logoUrl}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="mr-1.5 inline size-5 align-[-4px] object-contain"
+                  />
+                )}
+                {e.isFeatured && (
+                  <StarIcon
+                    weight="fill"
+                    className="mr-1.5 inline size-3.5 align-[-2px] text-amber-500"
+                    aria-label={t("featured-tournament")}
+                  />
+                )}
                 {/* The team rather than the tournament: this row is a record
                     of what THIS player did, so the useful destination is their
                     own team's page (its result, its roster), and the tournament

@@ -21,6 +21,12 @@ export type PlayerTournamentEntry = {
   maxPlayersInTeam: number;
   startAt: Date;
   prize: string | null;
+  /** The organiser's logo. Asia holds a handful of values that are not URLs, so
+   * callers test for `http` rather than for null. */
+  logoUrl: string | null;
+  /** Wargaming's own editorial flag: the championships and series, as against
+   * the automated dailies. */
+  isFeatured: boolean;
   teamId: number;
   teamTitle: string;
   teamStatus: TournamentTeamStatus;
