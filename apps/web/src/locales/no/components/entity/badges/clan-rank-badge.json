@@ -2,8 +2,8 @@
   "aria-rank": "Rang {rank} på {board}",
   "board": {
     "advances": "Vurdering for Fremrykkinger i Festning",
-    "skirmish-t10": "Vurdering for Trefning på Nivå 10",
-    "skirmish-t6": "Vurdering for Trefning på Nivå 6",
-    "skirmish-t8": "Vurdering for Trefning på Nivå 8"
+    "t10": "Vurdering for Trefning på Nivå 10",
+    "t6": "Vurdering for Trefning på Nivå 6",
+    "t8": "Vurdering for Trefning på Nivå 8"
   }
 }

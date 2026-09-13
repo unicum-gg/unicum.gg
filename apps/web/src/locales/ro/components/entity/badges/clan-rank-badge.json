@@ -2,8 +2,8 @@
   "aria-rank": "Grad {rank} în clasamentul {board}",
   "board": {
     "advances": "Clasament pentru Ofensive în Fortăreață",
-    "skirmish-t10": "Clasament pentru Raid de nivel X",
-    "skirmish-t6": "Clasament pentru Raid de nivel VI",
-    "skirmish-t8": "Clasament pentru Raid de nivel VIII"
+    "t10": "Clasament pentru Raid de nivel X",
+    "t6": "Clasament pentru Raid de nivel VI",
+    "t8": "Clasament pentru Raid de nivel VIII"
   }
 }

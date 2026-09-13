@@ -2,8 +2,8 @@
   "aria-rank": "Rang {rank} na ljestvici {board}",
   "board": {
     "advances": "Ocjena Napredaka Utvrde",
-    "skirmish-t10": "Ocjena Okršaja Razine X",
-    "skirmish-t6": "Ocjena Okršaja Razine VI",
-    "skirmish-t8": "Ocjena Okršaja Razine VIII"
+    "t10": "Ocjena Okršaja Razine X",
+    "t6": "Ocjena Okršaja Razine VI",
+    "t8": "Ocjena Okršaja Razine VIII"
   }
 }

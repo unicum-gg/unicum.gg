@@ -2,8 +2,8 @@
   "aria-rank": "Rang: {rank}, {board} ranglistáján",
   "board": {
     "advances": "Előrenyomulások értékelése az Erődítményben",
-    "skirmish-t10": "Csatározás értékelése X-es szinten",
-    "skirmish-t6": "Csatározás értékelése VI-os szinten",
-    "skirmish-t8": "Csatározás értékelése VIII-as szinten"
+    "t10": "Csatározás értékelése X-es szinten",
+    "t6": "Csatározás értékelése VI-os szinten",
+    "t8": "Csatározás értékelése VIII-as szinten"
   }
 }

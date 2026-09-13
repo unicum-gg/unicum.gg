@@ -2,8 +2,8 @@
   "aria-rank": "Hodnost {rank} v žebříčku {board}",
   "board": {
     "advances": "Hodnocení ofenzív v Pevnosti",
-    "skirmish-t10": "Hodnocení šarvátky X. úrovně",
-    "skirmish-t6": "Hodnocení šarvátky VI. úrovně",
-    "skirmish-t8": "Hodnocení šarvátky VIII. úrovně"
+    "t10": "Hodnocení šarvátky X. úrovně",
+    "t6": "Hodnocení šarvátky VI. úrovně",
+    "t8": "Hodnocení šarvátky VIII. úrovně"
   }
 }

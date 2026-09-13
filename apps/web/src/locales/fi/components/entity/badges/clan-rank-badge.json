@@ -2,8 +2,8 @@
   "aria-rank": "Sijoitusluokka {rank} taululla {board}",
   "board": {
     "advances": "Hyökkäysoperaatioiden Linnoituksen arvosana",
-    "skirmish-t10": "Taso X:n kahakan arvosana",
-    "skirmish-t6": "Taso VI:n kahakan arvosana",
-    "skirmish-t8": "Taso VIII:n kahakan arvosana"
+    "t10": "Taso X:n kahakan arvosana",
+    "t6": "Taso VI:n kahakan arvosana",
+    "t8": "Taso VIII:n kahakan arvosana"
   }
 }

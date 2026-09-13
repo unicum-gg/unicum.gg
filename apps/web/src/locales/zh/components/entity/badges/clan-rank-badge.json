@@ -2,8 +2,8 @@
   "aria-rank": "{board}上的段位：{rank}",
   "board": {
     "advances": "攻城战要塞评分",
-    "skirmish-t10": "X级冲突战评分",
-    "skirmish-t6": "VI级冲突战评分",
-    "skirmish-t8": "VIII级冲突战评分"
+    "t10": "X级冲突战评分",
+    "t6": "VI级冲突战评分",
+    "t8": "VIII级冲突战评分"
   }
 }
