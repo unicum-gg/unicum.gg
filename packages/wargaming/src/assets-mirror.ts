@@ -53,6 +53,17 @@ export function assetsRefFor(branch?: WotSrcBranch): string | undefined {
  * writes over its branch without clearing, so a file that exists never changes
  * and a week of caching cannot go stale. What a new client adds is simply not
  * cached yet.
+ *
+ * **That holds while the extraction rules hold, and not a moment longer.** The
+ * argument above is about the CLIENT never rewriting a file, and it says nothing
+ * about us starting to read one we were not reading. Widen what the mirror
+ * extracts and a path that already answered begins returning different bytes at
+ * the same address, which is the one thing the branch pin cannot express: the
+ * Onslaught rank crests sat behind twelve hours of `s-maxage` and seven days of
+ * browser cache after the run that finally fetched them from the mode packages.
+ * There is no invalidation to reach for, so a change like that is finished by
+ * purging each affected path by hand:
+ * `curl https://purge.jsdelivr.net/gh/<repo>@<branch>/<path>`.
  */
 export function assetUrl(path: string, ref: string = ASSETS_BRANCH): string {
   return `https://cdn.jsdelivr.net/gh/${ASSETS_REPO}@${ref}/${path}`;
