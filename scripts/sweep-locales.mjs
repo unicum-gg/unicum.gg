@@ -77,6 +77,28 @@ for (const url of urls) {
       .filter(Boolean),
   );
   const hits = [];
+// A raw translation key that reached the reader. Cheaper and far more
+  // reliable than resolving dynamic keys statically: `t(`board.${badge.board}`)`
+  // cannot be checked from the source, because the namespace arrives as a
+  // parameter and the suffix comes from data. But the KEY ITSELF is unmistakable
+  // once rendered, and nothing legitimate on this site looks like it.
+  //
+  // Found `board.t10` in a clan badge tooltip, where the catalogue was keyed
+  // `skirmish-t10` and the enum said `t10`: three of the four keys had never
+  // resolved, and only the one that did was noticed.
+  const KEY_SHAPED = /^[a-z][a-z0-9-]*(\.[a-z0-9-]+)+$/;
+  // The site's own name is the one thing on the page shaped like a key.
+  const NOT_A_KEY = new Set(["unicum.gg", "www.unicum.gg"]);
+  const raw = [...visible].filter(
+    (line) =>
+      KEY_SHAPED.test(line) &&
+      !NOT_A_KEY.has(line) &&
+      !line.includes(" ") &&
+      line.length < 60,
+  );
+  for (const key of raw) hits.push(`RAW KEY ON PAGE  ${key}`);
+
+
   for (const [id, value] of Object.entries(en)) {
     // A one-word English string is usually also the right word in the target
     // (a proper noun, a metric, a unit), so only compare where they differ.
