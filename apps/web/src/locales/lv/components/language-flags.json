@@ -2,6 +2,7 @@
   "cta-clans": "Klikšķināt, lai skatītu labākos {language} klanus.",
   "cta-players": "Klikšķināt, lai skatītu labākos {language} spēlētājus.",
   "declared": "{language}. Izvēlējies klans.",
+  "from-clan": "{language}. To deklarējis šī spēlētāja pašreizējais klans. Mums nav pieejama klans vēsture par viņu, tāpēc tas ir klans vārds, drīzāk nekā minējums par spēlētāju.",
   "inferred": "{language}. Mūsu minējums, balstīts uz šī spēlētāja klanu vēsturi. Jo ilgāk viņš paliek klanā, jo vairāk tiek ņemtas vērā tā valodas.",
   "top-language-clans": "Labākie {language} klani",
   "top-language-players": "Labākie {language} spēlētāji"

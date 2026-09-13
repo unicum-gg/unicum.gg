@@ -2,6 +2,7 @@
   "cta-clans": "Clique para ver os melhores clãs de {language}.",
   "cta-players": "Clique para ver os melhores jogadores de {language}.",
   "declared": "{language}. Selecionado pelo clã.",
+  "from-clan": "{language}. Informação declarada pelo clã atual deste jogador. Não temos histórico de clã dele, portanto, em vez disso, esta é a palavra do clã, não um palpite sobre o jogador.",
   "inferred": "{language}. A nossa estimativa com base no histórico de clãs deste jogador. Quanto mais tempo permanecer num clã, maior será o peso dos idiomas desse clã.",
   "top-language-clans": "Melhores clãs de idioma {language}",
   "top-language-players": "Melhores jogadores de idioma {language}"

@@ -2,6 +2,7 @@
   "cta-clans": "Spustelėkite, kad pamatytumėte geriausius {language} klanus.",
   "cta-players": "Spustelėkite, kad pamatytumėte geriausius {language} žaidėjus.",
   "declared": "{language}. Pasirinko klanas.",
+  "from-clan": "{language}. Nurodė šio žaidėjo dabartinis klanas. Neturime šio žaidėjo klano istorijos, todėl tai yra klano žodis, veikiau nei spėjimas apie žaidėją.",
   "inferred": "{language}. Mūsų spėjimas pagal šio žaidėjo klanų istoriją. Kuo ilgiau jis lieka klane, tuo labiau skaičiuojamos jo kalbos.",
   "top-language-clans": "Geriausi {language} klanai",
   "top-language-players": "Geriausi {language} žaidėjai"

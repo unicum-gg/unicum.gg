@@ -873,6 +873,7 @@
   "components/language-flags:cta-clans": "37f649a44eb5",
   "components/language-flags:cta-players": "e8d0cf6a1c7f",
   "components/language-flags:declared": "353ec4e53046",
+  "components/language-flags:from-clan": "ddb3a5220162",
   "components/language-flags:inferred": "6ce108514a7d",
   "components/language-flags:top-language-clans": "eaef5b5d35dc",
   "components/language-flags:top-language-players": "d965405bc1b6",

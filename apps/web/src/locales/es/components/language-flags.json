@@ -2,6 +2,7 @@
   "cta-clans": "Haz clic para ver los mejores clanes con {language} como idioma.",
   "cta-players": "Haz clic para ver los mejores jugadores con {language} como idioma.",
   "declared": "{language}. Elegido por el clan.",
+  "from-clan": "{language}. Declarado por el clan actual de este jugador. No tenemos historial de clanes de este jugador, así que esto es la declaración del clan, más bien que una suposición sobre el jugador.",
   "inferred": "{language}. Nuestra estimación a partir del historial de clanes de este jugador. Cuanto más tiempo permanece en un clan, más peso tienen los idiomas de ese clan.",
   "top-language-clans": "Mejores clanes de {language}",
   "top-language-players": "Mejores jugadores de {language}"

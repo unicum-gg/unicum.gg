@@ -2,6 +2,7 @@
   "cta-clans": "Kattints a legjobb {language} klánok megtekintéséhez.",
   "cta-players": "Kattints a legjobb {language} játékosok megtekintéséhez.",
   "declared": "{language}. A klán választotta.",
+  "from-clan": "{language}. A játékos jelenlegi klánja által megadott nyelv. Nincsenek róla klánelőzményeink, ezért ez a klán szava, nem pedig a játékosra vonatkozó találgatás.",
   "inferred": "{language}. A játékos klán-előzményei alapján tippeljük. Minél tovább marad egy klánban, annál nagyobb súllyal számítanak annak nyelvei.",
   "top-language-clans": "A legjobb {language} klánok",
   "top-language-players": "A legjobb {language} játékosok"

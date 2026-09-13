@@ -2,6 +2,7 @@
   "cta-clans": "点击查看顶尖{language}军团。",
   "cta-players": "点击查看顶尖{language}玩家。",
   "declared": "{language}。由军团选择。",
+  "from-clan": "{language}。由该玩家的当前军团声明。我们掌握的他们的军团历史记录为否，因此这是军团的说法，我们宁愿不把它视为对该玩家的猜测。",
   "inferred": "{language}。根据该玩家的军团历史推测。玩家在军团中停留越久，该军团的语言权重越高。",
   "top-language-clans": "顶尖{language}军团",
   "top-language-players": "顶尖{language}玩家"

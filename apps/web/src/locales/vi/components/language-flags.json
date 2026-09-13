@@ -2,6 +2,7 @@
   "cta-clans": "Nhấp để xem các Clan {language} hàng đầu.",
   "cta-players": "Nhấp để xem những người chơi {language} hàng đầu.",
   "declared": "{language}. Do Clan chọn.",
+  "from-clan": "{language}. Được Clan hiện tại của người chơi này khai báo. Chúng tôi không có lịch sử Clan của người chơi này, vì vậy đây là lời của Clan thay vì phỏng đoán về người chơi.",
   "inferred": "{language}. Chúng tôi phỏng đoán dựa trên lịch sử Clan của người chơi này. Họ ở trong Clan càng lâu thì ngôn ngữ của Clan đó càng được tính nhiều.",
   "top-language-clans": "Clan {language} hàng đầu",
   "top-language-players": "Người chơi {language} hàng đầu"

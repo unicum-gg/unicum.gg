@@ -2,6 +2,7 @@
   "cta-clans": "Klicka för att se topprankade klaner med {language} som språk.",
   "cta-players": "Klicka för att se topprankade spelare med {language} som språk.",
   "declared": "{language}. Valt av klanen.",
+  "from-clan": "{language}. Angivet av den här spelarens aktuella klan. Vi har ingen klanhistorik för spelaren, så detta är klanens uppgift hellre än en gissning om spelaren.",
   "inferred": "{language}. Vår gissning utifrån den här spelarens klanhistorik. Ju längre spelaren stannar i en klan, desto större vikt får klanens språk.",
   "top-language-clans": "Bästa klaner på {language}",
   "top-language-players": "Bästa spelare på {language}"

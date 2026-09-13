@@ -815,7 +815,8 @@
     "playing": "en jeu",
     "rank": "rang",
     "takes": "prend",
-    "Random Battle": "Bataille aléatoire"
+    "Random Battle": "Bataille aléatoire",
+    "rather": "plutôt"
   },
   "es": {
     "Battles": "Batallas",
@@ -1630,7 +1631,8 @@
     "playing": "jugando",
     "rank": "puesto",
     "takes": "ocupa",
-    "Random Battle": "Batalla aleatoria"
+    "Random Battle": "Batalla aleatoria",
+    "rather": "más bien"
   },
   "ru": {
     "Battles": "Бои",
@@ -2439,7 +2441,8 @@
     "playing": "играет",
     "rank": "место",
     "takes": "занимает",
-    "Random Battle": "Случайный бой"
+    "Random Battle": "Случайный бой",
+    "rather": "скорее"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3267,7 +3270,8 @@
     "playing": "grający",
     "rank": "miejsce",
     "takes": "zajmuje",
-    "Random Battle": "Bitwa losowa"
+    "Random Battle": "Bitwa losowa",
+    "rather": "raczej"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4105,7 +4109,8 @@
     "playing": "プレイ中",
     "rank": "順位",
     "takes": "取得数",
-    "Random Battle": "ランダム戦"
+    "Random Battle": "ランダム戦",
+    "rather": "むしろ"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4731,7 +4736,8 @@
     "cutoff": "الحد الفاصل",
     "playing": "اللعب",
     "rank": "الترتيب",
-    "takes": "يأخذ"
+    "takes": "يأخذ",
+    "rather": "بالأحرى"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5566,7 +5572,8 @@
     "playing": "igranje",
     "rank": "rang",
     "takes": "zauzima",
-    "Random Battle": "Slučajna bitka"
+    "Random Battle": "Slučajna bitka",
+    "rather": "radije"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6402,7 +6409,8 @@
     "playing": "játékban",
     "rank": "helyezés",
     "takes": "elér",
-    "Random Battle": "Normál csata"
+    "Random Battle": "Normál csata",
+    "rather": "inkább"
   },
   "ko": {
     "Battles": "전투",
@@ -7245,7 +7253,8 @@
     "playing": "플레이 중",
     "rank": "순위",
     "takes": "차지",
-    "Random Battle": "무작위 전투"
+    "Random Battle": "무작위 전투",
+    "rather": "오히려"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8085,7 +8094,8 @@
     "playing": "spelen",
     "rank": "rang",
     "takes": "neemt",
-    "Random Battle": "Willekeurig gevecht"
+    "Random Battle": "Willekeurig gevecht",
+    "rather": "eerder"
   },
   "cs": {
     "Battles": "Bitev",
@@ -8916,7 +8926,8 @@
     "playing": "hraní",
     "rank": "pořadí",
     "takes": "zabere",
-    "Random Battle": "Náhodná bitva"
+    "Random Battle": "Náhodná bitva",
+    "rather": "spíše"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9749,7 +9760,8 @@
     "playing": "oynuyor",
     "rank": "sıra",
     "takes": "alır",
-    "Random Battle": "Rastgele Savaş"
+    "Random Battle": "Rastgele Savaş",
+    "rather": "daha ziyade"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10374,7 +10386,8 @@
     "cutoff": "парог",
     "playing": "гульня",
     "rank": "месца",
-    "takes": "займае"
+    "takes": "займае",
+    "rather": "хутчэй"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11006,7 +11019,8 @@
     "cutoff": "prag",
     "playing": "igranje",
     "rank": "uvrstitev",
-    "takes": "poskusov"
+    "takes": "poskusov",
+    "rather": "skôr"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -11639,7 +11653,8 @@
     "cutoff": "prag",
     "playing": "igranje",
     "rank": "pozicija",
-    "takes": "uzima"
+    "takes": "uzima",
+    "rather": "radije"
   },
   "th": {
     "Battles": "การรบ",
@@ -12475,7 +12490,8 @@
     "playing": "กำลังเล่น",
     "rank": "อันดับ",
     "takes": "จำนวนครั้ง",
-    "Random Battle": "การรบแบบสุ่ม"
+    "Random Battle": "การรบแบบสุ่ม",
+    "rather": "ค่อนข้าง"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13311,7 +13327,8 @@
     "playing": "对战中",
     "rank": "排名",
     "takes": "场次",
-    "Random Battle": "标准模式"
+    "Random Battle": "标准模式",
+    "rather": "宁愿"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14132,7 +14149,8 @@
     "playing": "a jogar",
     "rank": "posição",
     "takes": "leva",
-    "Random Battle": "Batalha Aleatória"
+    "Random Battle": "Batalha Aleatória",
+    "rather": "em vez disso"
   },
   "vi": {
     "Battles": "Số trận",
@@ -14948,7 +14966,8 @@
     "playing": "đang chơi",
     "rank": "hạng",
     "takes": "lượt",
-    "Random Battle": "Trận đấu Ngẫu nhiên"
+    "Random Battle": "Trận đấu Ngẫu nhiên",
+    "rather": "thay vì"
   },
   "de": {
     "Battles": "Gefechte",
@@ -15777,7 +15796,8 @@
     "playing": "spielend",
     "rank": "Rang",
     "takes": "benötigt",
-    "Random Battle": "Zufallsgefecht"
+    "Random Battle": "Zufallsgefecht",
+    "rather": "eher"
   },
   "uk": {
     "Battles": "Бої",
@@ -16603,7 +16623,8 @@
     "playing": "грає",
     "rank": "місце",
     "takes": "займає",
-    "Random Battle": "Випадковий бій"
+    "Random Battle": "Випадковий бій",
+    "rather": "скоріше"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17434,7 +17455,8 @@
     "playing": "in gioco",
     "rank": "posizione",
     "takes": "richiede",
-    "Random Battle": "Battaglia Casuale"
+    "Random Battle": "Battaglia Casuale",
+    "rather": "piuttosto"
   },
   "sv": {
     "Battles": "Strider",
@@ -18274,7 +18296,8 @@
     "playing": "spelar",
     "rank": "placering",
     "takes": "försök",
-    "Random Battle": "Slumpvis matchad strid"
+    "Random Battle": "Slumpvis matchad strid",
+    "rather": "hellre"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19110,7 +19133,8 @@
     "playing": "играње",
     "rank": "ранг",
     "takes": "заузима",
-    "Random Battle": "Slučajne borba"
+    "Random Battle": "Slučajne borba",
+    "rather": "radije"
   },
   "el": {
     "Battles": "Μάχες",
@@ -19945,7 +19969,8 @@
     "playing": "σε μάχη",
     "rank": "θέση",
     "takes": "καταλαμβάνει",
-    "Random Battle": "Τυχαία Μάχη"
+    "Random Battle": "Τυχαία Μάχη",
+    "rather": "μάλλον"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -20769,7 +20794,8 @@
     "playing": "spēlēšana",
     "rank": "vieta",
     "takes": "aizņem",
-    "Random Battle": "Gadījuma kauja"
+    "Random Battle": "Gadījuma kauja",
+    "rather": "drīzāk"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -21395,7 +21421,8 @@
     "cutoff": "कटऑफ",
     "playing": "खेलना",
     "rank": "रैंक",
-    "takes": "लेता है"
+    "takes": "लेता है",
+    "rather": "बल्कि"
   },
   "bg": {
     "Battles": "Битки",
@@ -22215,7 +22242,8 @@
     "playing": "играещи",
     "rank": "място",
     "takes": "заема",
-    "Random Battle": "Случайна битка"
+    "Random Battle": "Случайна битка",
+    "rather": "по-скоро"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23055,7 +23083,8 @@
     "playing": "žaidžiama",
     "rank": "vieta",
     "takes": "užima",
-    "Random Battle": "Atsitiktinis mūšis"
+    "Random Battle": "Atsitiktinis mūšis",
+    "rather": "veikiau"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -23685,7 +23714,8 @@
     "cutoff": "шек",
     "playing": "ойнауда",
     "rank": "орын",
-    "takes": "алады"
+    "takes": "алады",
+    "rather": "дәлірек айтқанда"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -24525,7 +24555,8 @@
     "playing": "pelaaminen",
     "rank": "sijoitus",
     "takes": "vaatii",
-    "Random Battle": "Satunnaistaistelu"
+    "Random Battle": "Satunnaistaistelu",
+    "rather": "pikemminkin"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -25156,7 +25187,8 @@
     "cutoff": "hangganan",
     "playing": "naglalaro",
     "rank": "ranggo",
-    "takes": "mga pagtatangka"
+    "takes": "mga pagtatangka",
+    "rather": "sa halip"
   },
   "no": {
     "Battles": "Kamper",
@@ -25988,7 +26020,8 @@
     "playing": "spiller",
     "rank": "plassering",
     "takes": "tar",
-    "Random Battle": "Tilfeldig kamp"
+    "Random Battle": "Tilfeldig kamp",
+    "rather": "heller"
   },
   "ro": {
     "Battles": "Lupte",
@@ -26809,7 +26842,8 @@
     "playing": "joc",
     "rank": "poziție",
     "takes": "partide",
-    "Random Battle": "Luptă standard"
+    "Random Battle": "Luptă standard",
+    "rather": "mai degrabă"
   },
   "da": {
     "Battles": "Kampe",
@@ -27645,6 +27679,7 @@
     "playing": "spiller",
     "rank": "placering",
     "takes": "kræver",
-    "Random Battle": "Standard kamp"
+    "Random Battle": "Standard kamp",
+    "rather": "snarere"
   }
 }

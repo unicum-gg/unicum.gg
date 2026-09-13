@@ -2,6 +2,7 @@
   "cta-clans": "En iyi {language} klanlarını görmek için tıkla.",
   "cta-players": "En iyi {language} oyuncularını görmek için tıkla.",
   "declared": "{language}. Klan tarafından seçildi.",
+  "from-clan": "{language}. Bu oyuncunun mevcut klanı tarafından bildirildi. Oyuncunun klan geçmişi bizde yok, bu nedenle bu, oyuncu hakkında bir tahminden daha ziyade klanın beyanıdır.",
   "inferred": "{language}. Bu oyuncunun klan geçmişinden yaptığımız tahmin. Bir klanda ne kadar uzun kalırsa klanın dilleri o kadar fazla hesaba katılır.",
   "top-language-clans": "En iyi {language} klanları",
   "top-language-players": "En iyi {language} oyuncuları"
