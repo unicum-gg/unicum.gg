@@ -7,6 +7,7 @@
 
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
+import { MOM_COLORS } from "@/components/tanks/mom-colors";
 
 // The laurel wreath from RankMedal with its roman numeral stripped out (the
 // numeral lived fused inside the same path; the relative moveto after it was
@@ -22,14 +23,6 @@ const MOM_SYMBOL: Record<1 | 2 | 3 | 4, string> = {
   3: "1", // 1st Class
   2: "2", // 2nd Class
   1: "3", // 3rd Class
-};
-
-// Prestige ramp: Ace gold, 1st silver, 2nd light bronze, 3rd dark bronze.
-export const MOM_COLORS: Record<1 | 2 | 3 | 4, string> = {
-  4: "#FFBA00",
-  3: "#C4C9D1",
-  2: "#D68C4E",
-  1: "#9E5A24",
 };
 
 /** The badge a mastery level is, keyed the way `game/vocabulary` names it: the
