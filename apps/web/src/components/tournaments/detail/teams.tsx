@@ -198,7 +198,7 @@ export function TournamentTeams({
   );
   // `syncUrl` off: the pager's own page param is not what this table shares, and
   // the sort/filter params above already carry the view.
-  const { paged, pager } = usePagination(ordered, 25, false);
+  const { paged, pager } = usePagination(ordered, 25);
 
   // Adopt a `?sort=` deep link once on mount. Client-only, since the page is
   // static and `window.location` is not readable while rendering it.

@@ -22,6 +22,7 @@ import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Stars, StarTone } from "@/components/tanks/detail/community/stars";
 import { SortDirection, SortHead, type SortState } from "../sorting";
 import { TablePager, usePagination } from "@/components/table-pager";
+import PAGINATION from "@/constants/pagination";
 import {
   Table,
   TableBody,
@@ -149,9 +150,12 @@ function sortValue(
 export function CommunityTable({
   region,
   rows,
+  page,
 }: {
   region: Region;
   rows: CommunityBoardRow[];
+  /** The page this render is of, from the route's own `/page/[n]` segment. */
+  page?: number;
 }) {
   const { num } = useFormat();
   const { t: tStats } = useTranslation("components/stat-labels");
@@ -182,7 +186,14 @@ export function CommunityTable({
     });
   }, [rows, sort]);
 
-  const { paged, pager } = usePagination(sorted, 50);
+  const { paged, pager } = usePagination(sorted, PAGINATION.SIZE.CATALOGUE, {
+    initialPage: page,
+    // Links rather than buttons, since a route serves every page they name. A
+    // caller that hands no page has no `/page/[n]` of its own (the per-language
+    // landings share this board), and a link there would be a crawl onto the
+    // first page under a second address.
+    crawlable: page !== undefined,
+  });
 
   function toggleSort(key: string) {
     setSort((prev) =>

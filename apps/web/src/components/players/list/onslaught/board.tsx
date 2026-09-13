@@ -29,6 +29,7 @@ import { SegmentedControl } from "@/components/segmented-control";
 import { useOnslaughtBoardControls } from "@/components/players/list/onslaught/use-board-controls";
 import { Chip, ChipRow } from "@/components/ui/chip";
 import { TablePager, usePagination } from "@/components/table-pager";
+import PAGINATION from "@/constants/pagination";
 import {
   type RangeColumn,
   useLeaderboardFilter,
@@ -60,7 +61,6 @@ import { battleTypeName } from "@/components/game-name";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
-const INITIAL_PAGE_SIZE = 100;
 
 const TIERS = [OnslaughtTier.Legend, OnslaughtTier.Champion] as const;
 
@@ -76,6 +76,7 @@ export function OnslaughtBoard({
   assetsRef,
   seasons,
   currentSeasonId,
+  page,
 }: {
   region: Region;
   results: OnslaughtRow[];
@@ -86,6 +87,8 @@ export function OnslaughtBoard({
   assetsRef: string | null;
   seasons: OnslaughtSeasonRef[];
   currentSeasonId: string | null;
+  /** The page this render is of, from the route's own `/page/[n]` segment. */
+  page?: number;
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/players/list/onslaught/view");
@@ -165,7 +168,13 @@ export function OnslaughtBoard({
     masterPosition,
   ]);
 
-  const { paged, pager } = usePagination(processed, INITIAL_PAGE_SIZE);
+  const { paged, pager } = usePagination(processed, PAGINATION.SIZE.LEADERBOARD, {
+    initialPage: page,
+    // Links rather than buttons, since a route serves every page they name. A
+    // caller that hands no page has no `/page/[n]` of its own, and a link there
+    // would be a crawl onto the first page under a second address.
+    crawlable: page !== undefined,
+  });
 
   // How many ranked players fall in each rank, for the chip labels.
   const tierCounts = useMemo(() => {

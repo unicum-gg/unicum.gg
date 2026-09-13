@@ -23,13 +23,16 @@ export function generateStaticParams() {
   return [{ region: Region.NA }, { region: Region.ASIA }];
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string; region: string }>;
-}): Promise<Metadata> {
-  const { locale, region } = await params;
-  if (!isRegion(region)) return {};
+/**
+ * This section's own metadata, shared by three routes: the regional page, the
+ * EU shortcut at its region-less address, and the `/page/[n]` the proxy sends
+ * `?page=` to. The last one rewrites every address this declares, so a
+ * paginated page cannot drift from the section it is a page of.
+ */
+export async function playersLandingMetadata(
+  region: Region,
+  locale: string,
+): Promise<Metadata> {
   const label = REGION_LABEL[region];
   const { t } = await getTranslation("app/players/page", locale);
   return constructMetadata({
@@ -44,6 +47,16 @@ export async function generateMetadata({
   });
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; region: string }>;
+}): Promise<Metadata> {
+  const { locale, region } = await params;
+  if (!isRegion(region)) return {};
+  return playersLandingMetadata(region, locale);
+}
+
 
 export default async function Page({
   params,
@@ -53,6 +66,6 @@ export default async function Page({
   const { locale, region } = await params;
   if (!isRegion(region)) notFound();
   if (region === Region.EU) redirect(localizePath(ROUTES.PLAYERS(Region.EU), locale));
-  return <PlayersLandingView locale={locale} region={region} language={null} />;
+  return <PlayersLandingView locale={locale} region={region} language={null} page={1} />;
 }
 

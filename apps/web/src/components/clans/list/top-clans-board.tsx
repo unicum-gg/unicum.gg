@@ -20,6 +20,13 @@ import { FilterSubject } from "@/components/filter-subject";
 import { useTranslation } from "@/hooks/use-translation";
 
 /**
+ * Rows per page. The ranking is fetched exactly this deep (`LIMIT` in the view),
+ * so the board has one page and no route names a second: the controls below
+ * only appear at all once a reader asks for fewer rows.
+ */
+const PAGE_SIZE = 100;
+
+/**
  * One metric's clan leaderboard, paginated client-side over the full ranking
  * fetched server-side, with its own filter section (search + a min/max range
  * over the loaded ranking). Mirror of the players board so /clans and /players
@@ -65,9 +72,9 @@ export function TopClansBoard({
     initialRangeCol: "rating",
   });
 
-  // No URL sync: the three metric boards (wn7/wn8/wnx) are all mounted at once
-  // and would otherwise fight over the shared `?page=`/`?ps=` params.
-  const { paged, pager } = usePagination(filtered, 100, false);
+  // The three metric boards (wn7/wn8/wnx) are mounted at once and share the one
+  // `?page=`: they are three views of one ranking, so they mean the same page.
+  const { paged, pager } = usePagination(filtered, PAGE_SIZE);
   return (
     <>
       <div className="border-b border-fd-border px-4 py-2.5">

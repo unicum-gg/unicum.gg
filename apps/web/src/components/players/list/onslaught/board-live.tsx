@@ -45,10 +45,13 @@ export function OnslaughtBoardLive({
   region,
   initial,
   initialHistory,
+  page,
 }: {
   region: Region;
   initial: OnslaughtData;
   initialHistory: HistoryData | null;
+  /** The page this render is of, from the route's own `/page/[n]` segment. */
+  page?: number;
 }) {
   const { t } = useTranslation("components/players/list/onslaught/view");
   const params = useSearchParams();
@@ -146,6 +149,7 @@ export function OnslaughtBoardLive({
         assetsRef={season?.assetsRef ?? null}
         seasons={data.seasons}
         currentSeasonId={season?.eventId ?? null}
+        page={page}
       />
 
       {/* Guarded like the curve below: the profile renders nothing when no row

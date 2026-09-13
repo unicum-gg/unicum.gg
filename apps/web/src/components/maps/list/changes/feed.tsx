@@ -9,6 +9,7 @@ import {
 } from "@/components/maps/list/changes/map-block";
 import { Panel, PanelContent } from "@/components/panel";
 import { TablePager, usePagination } from "@/components/table-pager";
+import PAGINATION from "@/constants/pagination";
 import type { Region } from "@unicum.gg/wargaming";
 
 export type MapFeedVersion = {
@@ -16,6 +17,7 @@ export type MapFeedVersion = {
   capturedAt: string | Date;
   maps: FeedMap[];
 };
+
 
 const DATE_PATTERN = "d MMM yyyy";
 
@@ -29,16 +31,26 @@ const DATE_PATTERN = "d MMM yyyy";
 export function MapChangesFeed({
   region,
   versions,
+  page,
 }: {
   region: Region;
   versions: MapFeedVersion[];
+  /** The page this render is of, from the route's own `/page/[n]` segment. */
+  page?: number;
 }) {
   const { t } = useTranslation("components/maps/list/changes/feed");
   const entries = useMemo(
     () => versions.flatMap((version) => version.maps.map((map) => ({ version, map }))),
     [versions],
   );
-  const { paged, pager } = usePagination(entries, 25);
+  const { paged, pager } = usePagination(entries, PAGINATION.SIZE.FEED, {
+    initialPage: page,
+    // Links rather than buttons, since a route serves every page they name. A
+    // caller that hands no page has no `/page/[n]` of its own (the per-language
+    // landings share this board), and a link there would be a crawl onto the
+    // first page under a second address.
+    crawlable: page !== undefined,
+  });
 
   if (entries.length === 0) {
     return (

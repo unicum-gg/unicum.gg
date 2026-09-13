@@ -16,6 +16,7 @@ import { identityFromRow } from "@/components/entity/player-identity";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
+import PAGINATION from "@/constants/pagination";
 import {
   type RangeColumn,
   useLeaderboardFilter,
@@ -59,7 +60,6 @@ const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
 // to 1000) and paginate client-side. Kept local so this client component does
 // not pull the server-side schemas module into the browser bundle.
 const MAX_ROWS = 1000;
-const INITIAL_PAGE_SIZE = 100;
 
 // One Steel Hunter board row. Shape matches the `/players/steel-hunter`
 // response (SteelHunterSummary): the raw SH totals, from which the display
@@ -136,9 +136,12 @@ function SortableHead({
 export function SteelHunterBoard({
   region,
   initialResults,
+  page,
 }: {
   region: Region;
   initialResults: SteelHunterRow[];
+  /** The page this render is of, from the route's own `/page/[n]` segment. */
+  page?: number;
 }) {
 
   const { num } = useFormat();
@@ -191,7 +194,13 @@ export function SteelHunterBoard({
     syncUrl: true,
   });
 
-  const { paged, pager } = usePagination(filtered, INITIAL_PAGE_SIZE);
+  const { paged, pager } = usePagination(filtered, PAGINATION.SIZE.LEADERBOARD, {
+    initialPage: page,
+    // Links rather than buttons, since a route serves every page they name. A
+    // caller that hands no page has no `/page/[n]` of its own, and a link there
+    // would be a crawl onto the first page under a second address.
+    crawlable: page !== undefined,
+  });
 
   const fetchAll = (s: SteelHunterSort) =>
     unicum

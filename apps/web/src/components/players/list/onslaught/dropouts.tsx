@@ -148,7 +148,12 @@ export function OnslaughtDropoutsTable({
       (a, b) => (sortValue(a, sort.col) - sortValue(b, sort.col)) * sign,
     );
   }, [filtered, sort]);
-  const { paged, pager } = usePagination(sorted, PAGE_SIZE);
+  const { paged, pager } = usePagination(sorted, PAGE_SIZE, {
+    // Its own param: this table stays mounted behind the standings, so on the
+    // shared `?page=` one view's page would move the other's. Buttons, not
+    // links: no route names a page of the places that were lost.
+    param: "dropouts",
+  });
 
   return (
     <>

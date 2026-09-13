@@ -8,6 +8,9 @@ import ROUTES from "@/constants/routes";
 import { itemListSchema } from "@/lib/schema-org";
 import { buildSafe, unicum } from "@/services/sdk";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+import PAGINATION from "@/constants/pagination";
+import { assertPageInRange } from "@/lib/pagination";
+import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import { CommunityBoard } from "./board";
 import { Extremes } from "./extremes";
 import type { CommunityBoardRow } from "./row";
@@ -26,7 +29,20 @@ const RANKED_IN_SCHEMA = 50;
  * ISR-cached like the other tank landings; the rollup behind it moves once an
  * hour, so the page being a few minutes behind costs nothing.
  */
-export async function TankCommunityView({ region, locale }: { region: Region; locale: string }) {
+export async function TankCommunityView({
+  region,
+  locale,
+  page,
+}: {
+  region: Region;
+  locale: string;
+  /**
+   * The page to render, from the `/page/[n]` route the proxy sends `?page=` to.
+   * Server-rendered rather than swapped in after hydration: a crawler reads the
+   * HTML and leaves.
+   */
+  page?: number;
+}) {
   const { t } = await getTranslation("components/tanks/list/community/view", locale);
   const board = await buildSafe(() => unicum.region(region).tanks.ratings(), {
     results: [],
@@ -40,17 +56,34 @@ export async function TankCommunityView({ region, locale }: { region: Region; lo
   const rows: CommunityBoardRow[] = board.results.map(
     ({ identity, ...rating }) => ({ ...identity, ...rating }),
   );
+  const pagedRows = rows.length;
+  assertPageInRange(page, pagedRows, PAGINATION.SIZE.CATALOGUE);
 
   // The page is a ranking, so it says so. Ordered by the same shrunk mean the
   // table opens on, capped at what a list result would ever use: an ItemList of
   // eleven hundred entries is not a list, it is the table again in JSON.
-  const ranked = [...rows]
-    .filter((r) => r.overallBayes != null)
-    .sort((a, b) => (b.overallBayes ?? 0) - (a.overallBayes ?? 0))
-    .slice(0, RANKED_IN_SCHEMA);
+  // The first page only. The list is the RANKING, numbered from one, so
+  // repeating it on page two would describe the rows above the ones actually
+  // rendered there and publish the same list at twenty addresses.
+  const ranked =
+    (page ?? 1) > 1
+      ? []
+      : [...rows]
+          .filter((r) => r.overallBayes != null)
+          .sort((a, b) => (b.overallBayes ?? 0) - (a.overallBayes ?? 0))
+          .slice(0, RANKED_IN_SCHEMA);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
+      {/* Read by Bing rather than by Google, which dropped them in 2019: the
+          crawlable links in the pager are what carries the chain. */}
+      <PaginationRelLinks
+        path={ROUTES.TANKS_COMMUNITY(region)}
+        page={page}
+        total={pagedRows}
+        size={PAGINATION.SIZE.CATALOGUE}
+        locale={locale}
+      />
       {ranked.length > 0 ? (
         <JsonLd
           data={itemListSchema({
@@ -96,7 +129,7 @@ export async function TankCommunityView({ region, locale }: { region: Region; lo
           </PanelContent>
         </Panel>
       ) : (
-        <CommunityBoard region={region} rows={rows} />
+        <CommunityBoard region={region} rows={rows} page={page} />
       )}
     </div>
   );

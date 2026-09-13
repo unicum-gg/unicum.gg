@@ -107,7 +107,7 @@ export function PlayerTournamentsTable({
   const { t } = useTranslation("components/players/detail/tournaments/table");
   // `syncUrl` off: the profile can show a second pager (the tank list) and they
   // would clobber each other's shared `?page=` param.
-  const { paged, pager } = usePagination(entries, 25, false);
+  const { paged, pager } = usePagination(entries, 25);
 
   return (
     <TooltipProvider delayDuration={150}>

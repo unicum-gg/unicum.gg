@@ -1,4 +1,8 @@
 import { dateFormat } from "@/lib/format";
+import PAGINATION from "@/constants/pagination";
+import ROUTES from "@/constants/routes";
+import { assertPageInRange } from "@/lib/pagination";
+import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import { OnslaughtBoardLive } from "@/components/players/list/onslaught/board-live";
 import { RelativeTime } from "@/components/relative-time";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
@@ -32,10 +36,17 @@ type OnslaughtHistory = Awaited<
 export async function OnslaughtView({
   region,
   locale,
+  page,
 }: {
   region: Region;
   /** The route's own segment, for the mode tabs below. */
   locale: string;
+  /**
+   * The page of the standings to render, from the `/page/[n]` route the proxy
+   * sends `?page=` to. Server-rendered rather than swapped in after hydration:
+   * a crawler reads the HTML and leaves.
+   */
+  page?: number;
 }) {
   // Both in one pass: the standings, and the curve of what a rank has cost while
   // the season ran.
@@ -58,6 +69,9 @@ export async function OnslaughtView({
       null as OnslaughtHistory,
     ).catch(() => null as OnslaughtHistory),
   ]);
+
+  const pagedRows = initial.results.length;
+  assertPageInRange(page, pagedRows, PAGINATION.SIZE.LEADERBOARD);
 
   const [{ t }, { t: tGame }, { t: tSeasons }] = await Promise.all([
     getTranslation("components/players/list/onslaught/view", locale),
@@ -95,6 +109,15 @@ export async function OnslaughtView({
 
   return (
     <div className="mx-auto w-full max-w-7xl">
+      {/* Read by Bing rather than by Google, which dropped them in 2019: the
+          crawlable links in the pager are what carries the chain. */}
+      <PaginationRelLinks
+        path={ROUTES.PLAYERS_ONSLAUGHT(region)}
+        page={page}
+        total={pagedRows}
+        size={PAGINATION.SIZE.LEADERBOARD}
+        locale={locale}
+      />
       <Panel>
         <PanelContent className="px-4 py-12 text-center">
           <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
@@ -152,6 +175,7 @@ export async function OnslaughtView({
         region={region}
         initial={initial}
         initialHistory={history}
+        page={page}
       />
     </div>
   );

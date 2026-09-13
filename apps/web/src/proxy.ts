@@ -1,5 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
+import PAGINATION from "@/constants/pagination";
 import STORAGE from "@/constants/storage";
+import { parsePageNumber } from "@/lib/page-number";
 import { matchesAnyRoute } from "@/lib/route-match";
 import {
   DEFAULT_LOCALE,
@@ -8,6 +10,7 @@ import {
   splitLocale,
 } from "@/lib/translations";
 import {
+  PAGINATED_PAGES,
   REGIONAL_PAGES,
   REGIONLESS_HANDLERS,
   REGIONLESS_PAGES,
@@ -68,6 +71,51 @@ function sitemapRoute(pathname: string): string | null {
   return matchesAnyRoute(route, ROOT_HANDLERS)
     ? route
     : `/${DEFAULT_LOCALE}${route}`;
+}
+
+/**
+ * Where page N of a list is served from, or null when nothing serves one.
+ *
+ * A page of a table is `?page=N` to everyone outside: it is what Google
+ * documents, it is what a reader can paste, and it keeps a section at one path
+ * whatever page of it they are on. A statically rendered page cannot read a
+ * query param though (`force-static` hands back an empty one, deliberately), so
+ * the page would only appear after hydration, which is precisely what a crawler
+ * does not wait for. So the query form is resolved here onto a route that names
+ * the page as a segment, exactly as `sitemap-3.xml` is resolved onto
+ * `sitemap.xml/[id]`, and for the same reason: App Router can only name a
+ * dynamic value as a folder.
+ *
+ * The alternative was to let the section read `searchParams`, which turns the
+ * whole route dynamic for every reader, first page included. These are the most
+ * visited pages on the site and most of what reaches them is a crawler, so the
+ * cost of that would have been real and permanent, where this one is one
+ * cache entry per page anybody actually asks for.
+ */
+function paginatedRoute(rest: string, search: URLSearchParams): string | null {
+  const page = parsePageNumber(search.get(PAGINATION.PARAM));
+  if (page === null) return null;
+  const route = `${rest === "/" ? "" : rest}/${PAGINATION.SEGMENT}/${page}`;
+  return matchesAnyRoute(route, PAGINATED_PAGES) ? route : null;
+}
+
+/**
+ * A section's own address, given one of its `/page/<n>` routes.
+ *
+ * Those are internal: the reader's URL is the query form, and this is the half
+ * that keeps it that way. Without it the same page of the same list would be
+ * served at two addresses, which is the duplicate a canonical is supposed to be
+ * resolving rather than creating.
+ */
+function pageSegmentRedirect(
+  rest: string,
+): { pathname: string; page: number | null } | null {
+  if (!matchesAnyRoute(rest, PAGINATED_PAGES)) return null;
+  const segments = rest.split("/");
+  const page = parsePageNumber(segments.at(-1));
+  // Drop `/page/<n>`; a first page (or an unparseable one) goes to the bare
+  // section, since that is the address it already has.
+  return { pathname: `/${segments.slice(1, -2).join("/")}`, page };
 }
 
 /**
@@ -135,6 +183,26 @@ export function proxy(req: NextRequest) {
   if (prefixed && pathLocale === DEFAULT_LOCALE) {
     const url = req.nextUrl.clone();
     url.pathname = rest;
+    return NextResponse.redirect(url, 308);
+  }
+
+  // A page of a list has one public address, `?page=N`, so the route that serves
+  // it is sent back there and `?page=1` is sent to the bare section. Permanent,
+  // like the `/en/` redirect above and unlike the region one: this is a property
+  // of the URL rather than of who asked for it. Before everything below, so no
+  // other rule ever sees an address that is about to stop existing.
+  const fromSegment = pageSegmentRedirect(rest);
+  if (fromSegment) {
+    const url = req.nextUrl.clone();
+    url.pathname = fromSegment.pathname;
+    if (fromSegment.page === null) url.searchParams.delete(PAGINATION.PARAM);
+    else url.searchParams.set(PAGINATION.PARAM, String(fromSegment.page));
+    return NextResponse.redirect(url, 308);
+  }
+  const pageParam = req.nextUrl.searchParams.get(PAGINATION.PARAM);
+  if (pageParam !== null && parsePageNumber(pageParam) === null) {
+    const url = req.nextUrl.clone();
+    url.searchParams.delete(PAGINATION.PARAM);
     return NextResponse.redirect(url, 308);
   }
 
@@ -243,8 +311,11 @@ export function proxy(req: NextRequest) {
   // Always prefixed, including in the default language. This is the internal
   // address of the route (`app/[locale]/...`), not the public one: the reader's
   // URL is untouched, which is exactly what serves English at `/tanks` while the
-  // page still lives under a locale segment.
-  url.pathname = rest === "/" ? `/${locale}` : `/${locale}${rest}`;
+  // page still lives under a locale segment. A `?page=` the section has a route
+  // for rides into that address as a segment, for the reason above.
+  const page = paginatedRoute(rest, req.nextUrl.searchParams);
+  const target = page ?? rest;
+  url.pathname = target === "/" ? `/${locale}` : `/${locale}${target}`;
   const response = NextResponse.rewrite(url, {
     request: { headers: requestHeaders },
   });

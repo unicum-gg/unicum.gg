@@ -18,6 +18,8 @@ const outFile = join(webRoot, "src", "proxy-routes.generated.ts");
 
 const REGION_SEGMENT = "[region]";
 const LOCALE_SEGMENT = "[locale]";
+const PAGE_SEGMENT = "page";
+const PAGE_NUMBER_SEGMENT = "[n]";
 
 function filesNamed(dir: string, name: string): string[] {
   const out: string[] = [];
@@ -58,6 +60,12 @@ const rootHandlers = new Set<string>();
 // Pages that live OUTSIDE `app/[locale]` and are therefore served at one address
 // in one language (`/docs`, generated from the OpenAPI document).
 const unlocalized = new Set<string>();
+// Sections with a `page/[n]` route under them, keyed by the section itself and
+// keeping their `[region]` segment, so `proxy.ts` can ask "does a route serve
+// page N of this path?" of one list whether or not the URL names a region.
+// Derived like everything else here: a section becomes paginated by growing the
+// folder, and the proxy starts rewriting its `?page=` the same day.
+const paginated = new Set<string>();
 
 for (const file of filesNamed(appRoot, "route.ts").sort()) {
   const raw = urlSegments(file);
@@ -79,6 +87,12 @@ for (const file of filesNamed(appRoot, "page.tsx").sort()) {
     continue;
   }
   const segments = withoutLocale(raw);
+  if (
+    segments.at(-1) === PAGE_NUMBER_SEGMENT &&
+    segments.at(-2) === PAGE_SEGMENT
+  ) {
+    paginated.add(`/${segments.join("/")}`);
+  }
   if (segments.includes(REGION_SEGMENT)) {
     // Compared against a region-less path, so drop the region segment itself.
     regional.add(`/${segments.filter((s) => s !== REGION_SEGMENT).join("/")}`);
@@ -129,9 +143,17 @@ ${list(rootHandlers)}
 export const UNLOCALIZED_PAGES: readonly string[] = [
 ${list(unlocalized)}
 ];
+
+/** The \`page/[n]\` routes, region segment kept, so a path carrying a region and
+ * one that does not are both answered by the same list. \`proxy.ts\` rewrites a
+ * section's \`?page=\` onto the matching one and sends the path itself back to
+ * the query form, so a page of a list has exactly one public address. */
+export const PAGINATED_PAGES: readonly string[] = [
+${list(paginated)}
+];
 `;
 
 writeFileSync(outFile, body);
 console.log(
-  `[page-routes] ${regionless.size} region-less + ${regional.size} regional + ${unlocalized.size} unlocalized page(s), ${rootHandlers.size} root handler(s) → ${relative(webRoot, outFile)}`,
+  `[page-routes] ${regionless.size} region-less + ${regional.size} regional + ${unlocalized.size} unlocalized page(s), ${paginated.size} paginated, ${rootHandlers.size} root handler(s) → ${relative(webRoot, outFile)}`,
 );

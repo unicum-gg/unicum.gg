@@ -1,4 +1,8 @@
 import { numberFormat } from "@/lib/format";
+import PAGINATION from "@/constants/pagination";
+import ROUTES from "@/constants/routes";
+import { assertPageInRange } from "@/lib/pagination";
+import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import Image from "next/image";
 import {
   RatingScale,
@@ -63,12 +67,23 @@ export async function PlayersLandingView({
   language,
   strict = false,
   locale,
+  page,
 }: {
   region: Region;
   language: string | null;
   strict?: boolean;
   /** The route's own segment, for the server-rendered tabs below. */
   locale: string;
+  /**
+   * The page of the ranking to render, from the `/page/[n]` route the proxy
+   * sends `?page=` to. Server-rendered rather than swapped in after hydration,
+   * which is the whole point: a crawler reads the HTML and leaves.
+   *
+   * Absent where no such route exists. The per-language landings render this
+   * same view and have none, so their board keeps its buttons and nothing links
+   * a crawler at a page the server would answer with the first one.
+   */
+  page?: number;
 }) {
   // The landing consumes its own public API through the SDK: the lifetime
   // by-language boards (rows carry their inferred languages) + the language
@@ -91,6 +106,10 @@ export async function PlayersLandingView({
   const wn7Results = wn7Top.results as TopPlayerByLanguageResult[];
   const wn8Results = wn8Top.results as TopPlayerByLanguageResult[];
   const wnxResults = wnxTop.results as TopPlayerByLanguageResult[];
+  // All three metrics rank the same eligible set, so their lengths agree; the
+  // longest is what bounds the pages either way.
+  const pagedRows = Math.max(wn7Results.length, wn8Results.length, wnxResults.length);
+  assertPageInRange(page, pagedRows, PAGINATION.SIZE.LEADERBOARD);
   const stats = languageStats.results;
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language, locale) : null;
@@ -98,6 +117,15 @@ export async function PlayersLandingView({
 
   return (
     <div className="mx-auto w-full max-w-7xl">
+      {/* Read by Bing rather than by Google, which dropped them in 2019: the
+          crawlable links in the pager are what carries the chain. */}
+      <PaginationRelLinks
+        path={ROUTES.PLAYERS(region)}
+        page={page}
+        total={pagedRows}
+        size={PAGINATION.SIZE.LEADERBOARD}
+        locale={locale}
+      />
       <Panel>
         <PanelContent className="px-4 py-12 text-center">
           {language ? (
@@ -213,6 +241,7 @@ export async function PlayersLandingView({
               region={region}
               metric={RatingMetric.Wn7}
               results={wn7Results}
+              page={page}
             />
           </div>
           <div data-rating-col="wn8">
@@ -220,6 +249,7 @@ export async function PlayersLandingView({
               region={region}
               metric={RatingMetric.Wn8}
               results={wn8Results}
+              page={page}
             />
           </div>
           <div data-rating-col="wnx">
@@ -227,6 +257,7 @@ export async function PlayersLandingView({
               region={region}
               metric={RatingMetric.Wnx}
               results={wnxResults}
+              page={page}
             />
           </div>
         </PanelContent>

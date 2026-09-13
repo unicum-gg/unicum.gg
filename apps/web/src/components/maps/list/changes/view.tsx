@@ -4,6 +4,10 @@ import {
   MapChangesFeed,
   type MapFeedVersion,
 } from "@/components/maps/list/changes/feed";
+import PAGINATION from "@/constants/pagination";
+import ROUTES from "@/constants/routes";
+import { assertPageInRange } from "@/lib/pagination";
+import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import type { FeedMap } from "@/components/maps/list/changes/map-block";
 import { PendingMapChanges } from "@/components/maps/list/changes/pending";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
@@ -14,7 +18,20 @@ import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 // every update changed about the game's maps, reconstructed from the client's
 // own arena definitions, plus what the running Common Test is about to change.
 // ISR-cached like the other map pages.
-export async function MapChangesView({ region, locale }: { region: Region; locale: string }) {
+export async function MapChangesView({
+  region,
+  locale,
+  page,
+}: {
+  region: Region;
+  locale: string;
+  /**
+   * The page to render, from the `/page/[n]` route the proxy sends `?page=` to.
+   * Server-rendered rather than swapped in after hydration: a crawler reads the
+   * HTML and leaves.
+   */
+  page?: number;
+}) {
   const { t } = await getTranslation("components/maps/list/changes/view", locale);
   const { versions, testVersion, testMaps } = await buildSafe(
     () => unicum.region(region).maps.changes(),
@@ -24,9 +41,21 @@ export async function MapChangesView({ region, locale }: { region: Region; local
       testMaps: [] as FeedMap[],
     },
   );
+  // Paginated over the flat (version, map) list, like the tank feed beside it.
+  const pagedRows = versions.reduce((n, version) => n + version.maps.length, 0);
+  assertPageInRange(page, pagedRows, PAGINATION.SIZE.FEED);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
+      {/* Read by Bing rather than by Google, which dropped them in 2019: the
+          crawlable links in the pager are what carries the chain. */}
+      <PaginationRelLinks
+        path={ROUTES.MAPS_CHANGES(region)}
+        page={page}
+        total={pagedRows}
+        size={PAGINATION.SIZE.FEED}
+        locale={locale}
+      />
       <Panel>
         <PanelContent className="px-4 py-12 text-center">
           <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
@@ -60,7 +89,7 @@ export async function MapChangesView({ region, locale }: { region: Region; local
         </>
       ) : null}
 
-      <MapChangesFeed region={region} versions={versions} />
+      <MapChangesFeed region={region} versions={versions} page={page} />
     </div>
   );
 }

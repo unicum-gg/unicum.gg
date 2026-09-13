@@ -1,6 +1,8 @@
 import "server-only";
 import type { Metadata } from "next";
 import APP from "@/constants/app";
+import PAGINATION from "@/constants/pagination";
+import { getTranslation } from "@/lib/translations.server";
 import { markdownPath } from "@/lib/markdown-url";
 import {
   DEFAULT_LOCALE,
@@ -162,6 +164,106 @@ function buildOgImageUrl(title?: string, subtitle?: string): string {
   if (subtitle) params.set("subtitle", subtitle);
   const qs = params.toString();
   return qs ? `/api/og?${qs}` : "/api/og";
+}
+
+/**
+ * The same section, one page further down its own list.
+ *
+ * Takes the section's own metadata and moves every address it declares onto
+ * `?page=N`: the canonical, the 36 `hreflang` alternates, the OpenGraph URL and
+ * the Markdown twin. Nothing here is optional. A paginated page that keeps the
+ * first page's canonical is asking Google to drop it, which is the single most
+ * common way a pagination pattern is got wrong, and one that leaves nothing
+ * visible behind: the page is served, crawled, and quietly never indexed.
+ *
+ * The title moves too, since the whole set would otherwise be one title
+ * repeated, and a duplicate title is what a crawler compares before it compares
+ * anything else.
+ *
+ * A wrapper rather than a `page` option on `constructMetadata` because every
+ * section already has a metadata function of its own, and the `/page/[n]` route
+ * is a caller of it like any other: the pagination knows about the section, the
+ * section knows nothing about the pagination.
+ */
+export async function paginatedMetadata(
+  base: Metadata,
+  { page, locale }: { page: number; locale: string },
+): Promise<Metadata> {
+  if (page <= 1 || typeof base.title !== "string") return base;
+  const resolved = isLocale(locale) ? locale : DEFAULT_LOCALE;
+  const { t } = await getTranslation("app/layout", resolved);
+  const withPage = (url: string): string => withPageParam(url, page);
+  const languages = base.alternates?.languages;
+  const title = formatTitle(
+    t("paginated-title", { title: stripSiteName(base.title), page }),
+    resolved,
+  );
+  // The description moves too. A title that says which page it is and a
+  // description repeated word for word across ten of them is the same duplicate
+  // the title was fixed for, one slot over, and it is the line a search result
+  // actually shows under the link.
+  // `string | undefined` rather than the `string | null` Metadata allows at the
+  // top level: OpenGraph does not take a null, and a page with no description
+  // has nothing to move onto this one anyway.
+  const description =
+    typeof base.description === "string"
+      ? t("paginated-description", { description: base.description, page })
+      : undefined;
+
+  return {
+    ...base,
+    title,
+    description,
+    alternates: {
+      ...base.alternates,
+      canonical: withPage(String(base.alternates?.canonical)),
+      ...(languages && {
+        languages: Object.fromEntries(
+          Object.entries(languages).map(([tag, url]) => [
+            tag,
+            withPage(String(url)),
+          ]),
+        ),
+      }),
+      ...(base.alternates?.types?.["text/markdown"] && {
+        types: {
+          ...base.alternates.types,
+          "text/markdown": withPage(
+            String(base.alternates.types["text/markdown"]),
+          ),
+        },
+      }),
+    },
+    // The card a shared link renders says it too, or a reader who posts page
+    // three of a leaderboard in a Discord channel posts something that reads as
+    // the first one.
+    ...(base.openGraph && {
+      openGraph: {
+        ...base.openGraph,
+        title,
+        description,
+        url: withPage(String(base.openGraph.url)),
+      },
+    }),
+    ...(base.twitter && { twitter: { ...base.twitter, title, description } }),
+  };
+}
+
+/**
+ * One page of a section, spelled the one way the site spells it.
+ *
+ * Exported because the `rel="prev"`/`rel="next"` links have to name the exact
+ * address the page they point at declares as its canonical. Two builders would
+ * agree right up until one of them learned about a trailing slash.
+ */
+export function pageUrl(path: string, page: number, locale: string): string {
+  const resolved = isLocale(locale) ? locale : DEFAULT_LOCALE;
+  const url = buildCanonical(localizePath(cleanPathname(path), resolved));
+  return page > 1 ? withPageParam(url, page) : url;
+}
+
+function withPageParam(url: string, page: number): string {
+  return `${url}${url.includes("?") ? "&" : "?"}${PAGINATION.PARAM}=${page}`;
 }
 
 /** The page's own path: no query string, no trailing slash. */

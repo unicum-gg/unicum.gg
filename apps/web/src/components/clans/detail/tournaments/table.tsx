@@ -104,7 +104,7 @@ export function ClanTournamentsTable({
   });
   // Memoized: `usePagination` resets its page when the array identity changes,
   // and it does that DURING render, so an inline `.filter()` would loop.
-  const { paged, pager } = usePagination(searched, 25, false);
+  const { paged, pager } = usePagination(searched, 25);
 
   return (
     <>

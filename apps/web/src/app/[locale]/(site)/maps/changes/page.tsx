@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
+import { mapChangesMetadata } from "@/app/[locale]/(site)/[region]/maps/changes/page";
 import { MapChangesView } from "@/components/maps/list/changes/view";
-import APP from "@/constants/app";
-import ROUTES from "@/constants/routes";
-import { constructMetadata } from "@/lib/metadata";
-import { getTranslation } from "@/lib/translations.server";
-import { Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import { Region } from "@unicum.gg/wargaming";
 
 // EU shortcut: /maps/changes renders the same feed as /eu/maps/changes.
 export const dynamic = "force-static";
@@ -16,15 +13,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const { t } = await getTranslation("app/maps/changes/page", locale);
-
-  const label = REGION_LABEL[Region.EU];
-  return constructMetadata({
-    locale,
-    title: t("title", { region: label }),
-    description: t("description", { name: APP.NAME, region: label }),
-    canonical: ROUTES.MAPS_CHANGES(Region.EU),
-  });
+  // The EU shortcut is the regional page at its region-less address, which the
+  // route helpers already answer with, so it says exactly what the page it is a
+  // shortcut for says. It used to say it in a copy of that call, which is how
+  // two of them ended up interpolating one value fewer than the string they
+  // were reading asked for, and printing the placeholder at a reader.
+  return mapChangesMetadata(Region.EU, locale);
 }
 
 export default async function MapChangesPageEU({
@@ -33,5 +27,5 @@ export default async function MapChangesPageEU({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  return <MapChangesView locale={locale} region={Region.EU} />;
+  return <MapChangesView locale={locale} region={Region.EU} page={1} />;
 }

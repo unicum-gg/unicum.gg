@@ -19,6 +19,7 @@ import {
 } from "@/components/tanks/detail/tabs";
 import { Panel, PanelContent } from "@/components/panel";
 import { TablePager, usePagination } from "@/components/table-pager";
+import PAGINATION from "@/constants/pagination";
 import ROUTES from "@/constants/routes";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -42,6 +43,7 @@ export type FeedVersion = {
   tanks: FeedTank[];
 };
 
+
 const DATE_PATTERN = "d MMM yyyy";
 
 /**
@@ -55,9 +57,12 @@ const DATE_PATTERN = "d MMM yyyy";
 export function TankChangesFeed({
   region,
   versions,
+  page,
 }: {
   region: Region;
   versions: FeedVersion[];
+  /** The page this render is of, from the route's own `/page/[n]` segment. */
+  page?: number;
 }) {
   const { t } = useTranslation("components/tanks/list/changes/feed");
   // One entry per (version, tank); paginate the flat list so a huge patch does
@@ -69,7 +74,14 @@ export function TankChangesFeed({
       ),
     [versions],
   );
-  const { paged, pager } = usePagination(entries, 25);
+  const { paged, pager } = usePagination(entries, PAGINATION.SIZE.FEED, {
+    initialPage: page,
+    // Links rather than buttons, since a route serves every page they name. A
+    // caller that hands no page has no `/page/[n]` of its own (the per-language
+    // landings share this board), and a link there would be a crawl onto the
+    // first page under a second address.
+    crawlable: page !== undefined,
+  });
 
   if (entries.length === 0) {
     return (

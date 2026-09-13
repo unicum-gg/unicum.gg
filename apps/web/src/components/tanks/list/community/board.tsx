@@ -41,9 +41,12 @@ const RANGE_COLUMNS: RangeColumn<CommunityBoardRow>[] = [
 export function CommunityBoard({
   region,
   rows,
+  page,
 }: {
   region: Region;
   rows: CommunityBoardRow[];
+  /** The page this render is of, from the route's own `/page/[n]` segment. */
+  page?: number;
 }) {
   const { filtered, filters } = useTankFilters(rows, RANGE_COLUMNS, "overall");
 
@@ -53,7 +56,7 @@ export function CommunityBoard({
         <TankFilterBar filters={filters} searchNoun={FilterSubject.RatedTanks} />
       </PanelContent>
       <div className="border-t border-fd-border">
-        <CommunityTable region={region} rows={filtered} />
+        <CommunityTable region={region} rows={filtered} page={page} />
       </div>
     </Panel>
   );
