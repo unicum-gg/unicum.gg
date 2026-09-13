@@ -5,6 +5,7 @@ import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { getClanNameHistory } from "@unicum.gg/core/clans/name-history";
 import { resolveClanBadges } from "@unicum.gg/core/clans/badges";
+import { countClanTournaments } from "@unicum.gg/core/tournaments/read";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
 import { isRegion } from "@unicum.gg/wargaming";
@@ -37,28 +38,33 @@ export async function GET(
     }
 
     const clans = clansByRegion[region];
-    const [cached, nameHistory, countRow, badges] = await Promise.all([
-      getClanMembersCached(region, clanCached.info.id).catch(() => null),
-      getClanNameHistory(region, clanCached.info.id),
-      db
-        .select({
-          vehiclesCount: clans.vehiclesCount,
-          // The winner's crest, off the same row the vehicle count is on, so it
-          // costs nothing extra.
-          tournamentWins: clans.tournamentWins,
-          tournamentFeaturedWins: clans.tournamentFeaturedWins,
-          tournamentBestTitle: clans.tournamentBestTitle,
-        })
-        .from(clans)
-        .where(eq(clans.id, clanCached.info.id))
-        .limit(1)
-        .then((rows) => rows[0] ?? null)
-        .catch(() => null),
-      // Podium positions, read from the ranks the hourly cron materialised. Two
-      // indexed lookups, so this rides in the batch rather than costing a round
-      // trip of its own.
-      resolveClanBadges(region, [clanCached.info.id]).catch(() => new Map()),
-    ]);
+    const [cached, nameHistory, countRow, badges, tournamentCount] =
+      await Promise.all([
+        getClanMembersCached(region, clanCached.info.id).catch(() => null),
+        getClanNameHistory(region, clanCached.info.id),
+        db
+          .select({
+            vehiclesCount: clans.vehiclesCount,
+            // The winner's crest, off the same row the vehicle count is on, so it
+            // costs nothing extra.
+            tournamentWins: clans.tournamentWins,
+            tournamentFeaturedWins: clans.tournamentFeaturedWins,
+            tournamentBestTitle: clans.tournamentBestTitle,
+          })
+          .from(clans)
+          .where(eq(clans.id, clanCached.info.id))
+          .limit(1)
+          .then((rows) => rows[0] ?? null)
+          .catch(() => null),
+        // Podium positions, read from the ranks the hourly cron materialised. Two
+        // indexed lookups, so this rides in the batch rather than costing a round
+        // trip of its own.
+        resolveClanBadges(region, [clanCached.info.id]).catch(() => new Map()),
+        // Tournaments entered, for the "Tournaments (N)" tab label. An index scan
+        // on the attribution denormalised onto the team row, so it rides this
+        // batch rather than making the tab's own read happen on every section.
+        countClanTournaments(region, clanCached.info.id).catch(() => 0),
+      ]);
     const ratings = computeClanRatings(cached?.members ?? []);
     return jsonResponse(ClanOverviewResponse, {
       clan: clanCached.info,
@@ -69,6 +75,7 @@ export async function GET(
       tournamentWins: countRow?.tournamentWins ?? 0,
       tournamentFeaturedWins: countRow?.tournamentFeaturedWins ?? 0,
       tournamentBestTitle: countRow?.tournamentBestTitle ?? null,
+      tournamentCount,
     });
   });
 }

@@ -69,6 +69,7 @@ export function PlayerSectionNav({
   section,
   tankCount,
   achievementCount,
+  tournamentCount,
   onSelect,
 }: {
   basePath: string;
@@ -80,6 +81,11 @@ export function PlayerSectionNav({
   // the detail payload so the label is right on every section, not only once
   // the (heavy) achievements list has been fetched.
   achievementCount: number;
+  // Tournaments entered, shown as "Tournaments (N)". Omitted from the label at
+  // zero rather than printed as "(0)", unlike the two above: almost no account
+  // has ever entered one, so a count there would be a column of zeroes across
+  // the site saying nothing.
+  tournamentCount: number;
   onSelect: (section: PlayerSection) => void;
 }) {
   const { locale } = useLocale();
@@ -90,6 +96,9 @@ export function PlayerSectionNav({
   const counts: Partial<Record<PlayerSection, number>> = {
     [PlayerSection.Tanks]: tankCount,
     [PlayerSection.Achievements]: achievementCount,
+    ...(tournamentCount > 0
+      ? { [PlayerSection.Tournaments]: tournamentCount }
+      : {}),
   };
   // Sections still being shaped. Same idea as `counts`: adding or removing a
   // beta flag is one entry, and deleting the entry is the whole rollout step.

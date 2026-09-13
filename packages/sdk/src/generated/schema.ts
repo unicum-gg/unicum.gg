@@ -2254,6 +2254,8 @@ export interface components {
             tournamentFeaturedWins: number;
             /** @description The win worth naming: a featured event when there is one, else the most recent. Null when the clan has never won. */
             tournamentBestTitle: string | null;
+            /** @description Tournaments the clan has fielded a team in, on the same attribution as the wins above. Counted here so a caller knows how much the /tournaments endpoint holds without reading it. */
+            tournamentCount: number;
         };
         /**
          * @description Clan leaderboard time window.
@@ -3517,6 +3519,7 @@ export interface components {
             derived: components["schemas"]["PlayerDerivedStats"];
             tankCount: number;
             achievementCount: number;
+            tournamentCount: number;
             /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost. */
             valuation: {
                 market: {

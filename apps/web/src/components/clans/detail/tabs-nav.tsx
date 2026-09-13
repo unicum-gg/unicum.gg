@@ -69,6 +69,7 @@ export function ClanSectionNav({
   onSelect,
   tankCount,
   videoCount,
+  tournamentCount,
 }: {
   basePath: string;
   section: ClanSection;
@@ -81,6 +82,9 @@ export function ClanSectionNav({
   // until the fetch lands, and the label is the only thing that waits on it:
   // the tab is offered either way, so nothing appears and then vanishes.
   videoCount?: number;
+  // Tournaments the clan has fielded a team in. Rides the overview payload, so
+  // unlike the two above it is known on every section from the first render.
+  tournamentCount?: number;
 }) {
   const { locale } = useLocale();
   // Videos is shown even at zero, unlike the count-gated Tanks tab: an empty
@@ -89,7 +93,9 @@ export function ClanSectionNav({
   const { t } = useTranslation("components/clans/detail/tabs");
 
   // A count rides the label only where one is known: Tanks always carries it,
-  // Videos only once there is something to count.
+  // Videos and Tournaments only once there is something to count. Most clans
+  // have never entered a tournament, so a "(0)" there would be a zero repeated
+  // across the site saying nothing.
   function label(id: ClanSection, locale: string): string {
     const name = t(`sections.${id}`);
     const count =
@@ -97,7 +103,9 @@ export function ClanSectionNav({
         ? tankCount
         : id === ClanSection.Videos && videoCount
           ? videoCount
-          : null;
+          : id === ClanSection.Tournaments && tournamentCount
+            ? tournamentCount
+            : null;
     return count === null
       ? name
       : t("section-count", {

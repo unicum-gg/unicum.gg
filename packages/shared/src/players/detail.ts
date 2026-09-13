@@ -99,6 +99,15 @@ export type PlayerDetailData = {
   tankCount: number;
   /** Distinct medals earned, for the "Achievements (N)" tab label. */
   achievementCount: number;
+  /**
+   * Tournaments entered, for the "Tournaments (N)" tab label.
+   *
+   * A count rather than the record itself, for the reason `tankCount` is one:
+   * the tab's payload joins across the whole archive and loads on demand, and
+   * the label has to be right on every section, not only once the reader is
+   * already inside the tab.
+   */
+  tournamentCount: number;
   // Estimated account worth (market resale + store rebuild cost), computed from
   // the garage. See `./valuation`.
   valuation: PlayerValuation;

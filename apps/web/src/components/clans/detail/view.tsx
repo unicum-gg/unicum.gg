@@ -49,6 +49,7 @@ export function ClanProfile({
   initialTournamentWins,
   initialTournamentFeaturedWins,
   initialTournamentBestTitle,
+  initialTournamentCount,
   initialVehicles,
   initialTournaments,
   initialVehiclesCount,
@@ -78,6 +79,7 @@ export function ClanProfile({
   initialTournamentWins: number;
   initialTournamentFeaturedWins: number;
   initialTournamentBestTitle: string | null;
+  initialTournamentCount: number;
 }) {
   const overviewReq = () => unicum.region(region).clans(tag).overview();
   const { data: overview, mutate: mutateOverview } = useSWR(
@@ -92,6 +94,7 @@ export function ClanProfile({
           tournamentWins: r.tournamentWins ?? 0,
           tournamentFeaturedWins: r.tournamentFeaturedWins ?? 0,
           tournamentBestTitle: r.tournamentBestTitle ?? null,
+          tournamentCount: r.tournamentCount ?? 0,
         })),
     {
       fallbackData: {
@@ -103,6 +106,7 @@ export function ClanProfile({
         tournamentWins: initialTournamentWins,
         tournamentFeaturedWins: initialTournamentFeaturedWins,
         tournamentBestTitle: initialTournamentBestTitle,
+        tournamentCount: initialTournamentCount,
       },
       revalidateOnMount: false,
     },
@@ -117,6 +121,7 @@ export function ClanProfile({
     overview?.tournamentFeaturedWins ?? initialTournamentFeaturedWins;
   const tournamentBestTitle =
     overview?.tournamentBestTitle ?? initialTournamentBestTitle;
+  const tournamentCount = overview?.tournamentCount ?? initialTournamentCount;
 
   // Incremented on each live tick; the tabs view refetches its sections when it
   // changes (see ClanTabsView's effect on `liveVersion`).
@@ -161,6 +166,7 @@ export function ClanProfile({
         tag={tag}
         clanId={clan.id}
         vehiclesCount={vehiclesCount}
+        tournamentCount={tournamentCount}
         color={color}
         basePath={basePath}
         activeSection={activeSection}

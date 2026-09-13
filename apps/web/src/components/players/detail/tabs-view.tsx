@@ -266,6 +266,7 @@ export function PlayerTabsView({
             section={section}
             tankCount={detail.tankCount}
             achievementCount={detail.achievementCount}
+            tournamentCount={detail.tournamentCount}
             onSelect={selectSection}
           />
         </PanelHeader>

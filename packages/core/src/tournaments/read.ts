@@ -618,6 +618,33 @@ export type PlayerTournamentRecord = {
 const TEAMMATE_LIMIT = 24;
 
 /**
+ * How many tournaments an account has entered, without reading any of them.
+ *
+ * The tab label needs the number on every section of a profile, while the
+ * record itself is fetched only once the reader opens the tab: that read joins
+ * across the whole archive and most accounts have never entered a tournament,
+ * so paying for it to print a number would be the wrong way round. This is an
+ * index scan on `account_id` (4-6ms on the heaviest account on EU, 477 entries)
+ * and it rides the parallel batch the profile already makes.
+ *
+ * Counted DISTINCT on the tournament rather than on the roster line: a player
+ * who re-registered with a second team in one tournament has entered it once.
+ */
+export async function countPlayerTournaments(
+  region: Region,
+  accountId: number,
+): Promise<number> {
+  const rosters = tournamentTeamPlayersByRegion[region];
+  const [row] = await db
+    .select({
+      count: sql<number>`count(DISTINCT ${rosters.tournamentId})::int`,
+    })
+    .from(rosters)
+    .where(eq(rosters.accountId, accountId));
+  return row?.count ?? 0;
+}
+
+/**
  * A player's tournament record: everything they have entered, newest first,
  * with how far their team got.
  *
@@ -1001,6 +1028,25 @@ export type ClanTournamentRecord = {
 
 /** How many members the line-up panel shows. */
 const CLAN_PLAYER_LIMIT = 24;
+
+/**
+ * How many tournaments a clan has entered, without reading any of them. The
+ * counterpart of {@link countPlayerTournaments}, and cheap for the same reason
+ * the clan record is: the attribution is denormalised onto the team row, so
+ * this is an index scan on `clan_id` (1-2ms for the 909 entries of the busiest
+ * clan on EU) rather than a walk over every roster in the archive.
+ */
+export async function countClanTournaments(
+  region: Region,
+  clanId: number,
+): Promise<number> {
+  const teams = tournamentTeamsByRegion[region];
+  const [row] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(teams)
+    .where(eq(teams.clanId, clanId));
+  return row?.count ?? 0;
+}
 
 /**
  * Every tournament a clan has entered, newest first.

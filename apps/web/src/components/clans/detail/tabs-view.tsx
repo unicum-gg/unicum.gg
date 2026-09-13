@@ -54,6 +54,10 @@ export type ClanTabsViewProps = {
   // Materialized distinct-vehicle count from the overview, so "Tanks (N)" shows
   // before the (heavy) vehicles aggregation loads. Null until first computed.
   vehiclesCount: number | null;
+  // Tournaments the clan has entered, from the overview payload. The record
+  // itself only loads when the reader opens the tab, so the label reads this
+  // instead: a count that is right on every section.
+  tournamentCount: number;
   // The clan's custom color, used to tint the `[TAG]` brackets in panel titles.
   color: string;
   basePath: string;
@@ -82,6 +86,7 @@ export function ClanTabsView({
   tag,
   clanId,
   vehiclesCount,
+  tournamentCount,
   color,
   basePath,
   activeSection,
@@ -250,6 +255,7 @@ export function ClanTabsView({
             onSelect={selectSection}
             tankCount={tankCount}
             videoCount={videos && new Set(videos.map((v) => v.videoId)).size}
+            tournamentCount={tournamentCount}
           />
         </PanelHeader>
       </Panel>

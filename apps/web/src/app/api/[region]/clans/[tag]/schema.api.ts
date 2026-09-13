@@ -181,4 +181,8 @@ export const ClanOverviewResponse = z.object({
     description:
       "The win worth naming: a featured event when there is one, else the most recent. Null when the clan has never won.",
   }),
+  tournamentCount: z.number().meta({
+    description:
+      "Tournaments the clan has fielded a team in, on the same attribution as the wins above. Counted here so a caller knows how much the /tournaments endpoint holds without reading it.",
+  }),
 });

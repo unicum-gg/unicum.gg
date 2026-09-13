@@ -43,6 +43,7 @@ import {
 import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import type { Region } from "@unicum.gg/wargaming";
 import { countEarnedAchievements } from "@unicum.gg/core/players/achievements";
+import { countPlayerTournaments } from "@unicum.gg/core/tournaments/read";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import {
@@ -88,6 +89,7 @@ export async function buildPlayerDetail(args: {
     isVerified,
     twitchLogin,
     achievementCount,
+    tournamentCount,
     moeThresholds,
   ] = await Promise.all([
     getVehicleEncyclopedia(region),
@@ -104,6 +106,10 @@ export async function buildPlayerDetail(args: {
     // primary-key lookup on a table with one row per player, and it rides in
     // the parallel batch the detail already makes.
     countEarnedAchievements(region, player.id),
+    // Tournaments entered, for the "Tournaments (N)" tab label. An index scan
+    // on the roster's `account_id`, so it rides this batch like the medal count
+    // above rather than making the tab's own read happen on every section.
+    countPlayerTournaments(region, accountId),
     // The region's Marks of Excellence bars, for the profile's marks panel.
     // A cached catalogue read (see `@unicum.gg/core/moe`), so it rides here
     // without adding a scan per profile view.
@@ -255,6 +261,7 @@ export async function buildPlayerDetail(args: {
     derived,
     tankCount: vehicles.length,
     achievementCount,
+    tournamentCount,
     valuation: computePlayerValuation(
       vehicles,
       current.globalRating,

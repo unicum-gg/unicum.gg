@@ -49,6 +49,7 @@ async function loadOverview(region: Region, tag: string) {
       tournamentWins,
       tournamentFeaturedWins,
       tournamentBestTitle,
+      tournamentCount,
     } = await unicum
       .region(region)
       .clans(tag)
@@ -62,6 +63,7 @@ async function loadOverview(region: Region, tag: string) {
       tournamentWins: tournamentWins ?? 0,
       tournamentFeaturedWins: tournamentFeaturedWins ?? 0,
       tournamentBestTitle: tournamentBestTitle ?? null,
+      tournamentCount: tournamentCount ?? 0,
     };
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
@@ -342,6 +344,7 @@ async function ClanProfileServer({
         initialTournamentWins={overview.tournamentWins}
         initialTournamentFeaturedWins={overview.tournamentFeaturedWins}
         initialTournamentBestTitle={overview.tournamentBestTitle}
+        initialTournamentCount={overview.tournamentCount}
         initialNameHistory={
           overview.nameHistory as unknown as ClanNameHistoryEntry[]
         }
