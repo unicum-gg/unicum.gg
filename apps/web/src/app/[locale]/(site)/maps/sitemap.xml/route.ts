@@ -2,7 +2,7 @@ import { generateSitemapXml } from "@onruntime/next-sitemap";
 import { listMapSlugs } from "@unicum.gg/core/wargaming/wot/maps";
 import { REGIONS } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
-import { createSitemapEntry } from "@/services/sitemap";
+import { createLocalizedSitemapEntry } from "@/services/sitemap";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -22,9 +22,9 @@ export async function GET() {
   );
 
   const entries = perRegion.flatMap(({ region, maps }) => [
-    createSitemapEntry(ROUTES.MAPS(region)),
-    createSitemapEntry(ROUTES.MAPS_CHANGES(region)),
-    ...maps.map(({ slug }) => createSitemapEntry(ROUTES.MAP(region, slug))),
+    createLocalizedSitemapEntry(ROUTES.MAPS(region)),
+    createLocalizedSitemapEntry(ROUTES.MAPS_CHANGES(region)),
+    ...maps.map(({ slug }) => createLocalizedSitemapEntry(ROUTES.MAP(region, slug))),
   ]);
 
   return new Response(generateSitemapXml(entries), {

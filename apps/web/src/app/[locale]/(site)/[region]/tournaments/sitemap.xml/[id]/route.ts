@@ -1,14 +1,18 @@
 import { generateSitemapXml } from "@onruntime/next-sitemap";
 import { asc, sql } from "drizzle-orm";
 import ROUTES from "@/constants/routes";
-import { buildSafe } from "@/services/sdk";
 import { db } from "@unicum.gg/core/db";
 import { tournamentsByRegion } from "@unicum.gg/shared";
-import { createSitemapEntry, URLS_PER_SITEMAP } from "@/services/sitemap";
+import { createLocalizedSitemapEntry, URLS_PER_SITEMAP } from "@/services/sitemap";
 import { isRegion } from "@unicum.gg/wargaming";
 
-export const dynamic = "force-static";
-export const revalidate = 3600;
+// Dynamic, not `force-static`, and the one reason is its size: with the
+// `hreflang` alternates every URL carries 36 more lines, so a file runs to
+// ~18 MB. A static route is held in the ISR cache, which here is a 2 GiB Redis
+// running `allkeys-lru`, and the entity streams together would be several GB of
+// it, evicting the pages and the Wargaming payloads that share the store. The
+// CDN caches the bytes instead, on the header below.
+export const dynamic = "force-dynamic";
 
 /**
  * The tournament pages, paginated like the clan and player sitemaps.
@@ -35,34 +39,27 @@ export async function GET(
   }
 
   const tournaments = tournamentsByRegion[region];
-  // `buildSafe` like every other prerendered sitemap: these are `force-static`,
-  // so a database hiccup during `next build` would fail the whole build rather
-  // than this one file.
-  const rows = await buildSafe(
-    () =>
-      db
-        .select({
-          id: tournaments.id,
-          detailSyncedAt: tournaments.detailSyncedAt,
-        })
-        .from(tournaments)
-        .where(sql`${tournaments.detailSyncedAt} IS NOT NULL`)
-        // By id, like the clan and player sitemaps, and NOT by date: paging
-        // with OFFSET over a newest-first order reshuffles every file each time
-        // a tournament is mirrored, since the new row sorts to position 0 and
-        // shifts everything after it. Ascending ids only ever append.
-        .orderBy(asc(tournaments.id))
-        .offset(sitemapId * URLS_PER_SITEMAP)
-        .limit(URLS_PER_SITEMAP),
-    [],
-  );
+  const rows = await db
+    .select({
+      id: tournaments.id,
+      detailSyncedAt: tournaments.detailSyncedAt,
+    })
+    .from(tournaments)
+    .where(sql`${tournaments.detailSyncedAt} IS NOT NULL`)
+    // By id, like the clan and player sitemaps, and NOT by date: paging with
+    // OFFSET over a newest-first order reshuffles every file each time a
+    // tournament is mirrored, since the new row sorts to position 0 and shifts
+    // everything after it. Ascending ids only ever append.
+    .orderBy(asc(tournaments.id))
+    .offset(sitemapId * URLS_PER_SITEMAP)
+    .limit(URLS_PER_SITEMAP);
 
   if (rows.length === 0) {
     return new Response("Sitemap not found", { status: 404 });
   }
 
   const entries = rows.map((row) =>
-    createSitemapEntry(ROUTES.TOURNAMENT(region, Number(row.id)), {
+    createLocalizedSitemapEntry(ROUTES.TOURNAMENT(region, Number(row.id)), {
       lastModified: row.detailSyncedAt ?? undefined,
     }),
   );
@@ -70,7 +67,11 @@ export async function GET(
   return new Response(generateSitemapXml(entries), {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "s-maxage=3600, stale-while-revalidate",
+      // A day, not an hour, and it is the CDN's copy that decides how often
+      // this runs now: paging with OFFSET into the mirrored archive and
+      // rendering ~20 MB is not something a crawler hit should pay for, and a
+      // tournament that appears in the sitemap a day late loses nothing.
+      "Cache-Control": "s-maxage=86400, stale-while-revalidate=604800",
     },
   });
 }

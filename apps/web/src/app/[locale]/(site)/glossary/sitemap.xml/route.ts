@@ -2,7 +2,7 @@ import { generateSitemapXml } from "@onruntime/next-sitemap";
 import { GLOSSARY_CATEGORIES } from "@unicum.gg/shared";
 import { listGlossarySlugs } from "@/services/glossary";
 import ROUTES from "@/constants/routes";
-import { createSitemapEntry } from "@/services/sitemap";
+import { createLocalizedSitemapEntry } from "@/services/sitemap";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -17,12 +17,12 @@ export const revalidate = 3600;
  */
 export async function GET() {
   const entries = [
-    createSitemapEntry(ROUTES.GLOSSARY),
+    createLocalizedSitemapEntry(ROUTES.GLOSSARY),
     ...GLOSSARY_CATEGORIES.map((category) =>
-      createSitemapEntry(ROUTES.GLOSSARY_CATEGORY(category)),
+      createLocalizedSitemapEntry(ROUTES.GLOSSARY_CATEGORY(category)),
     ),
     ...(await listGlossarySlugs()).map((slug: string) =>
-      createSitemapEntry(ROUTES.GLOSSARY_TERM(slug)),
+      createLocalizedSitemapEntry(ROUTES.GLOSSARY_TERM(slug)),
     ),
   ];
 

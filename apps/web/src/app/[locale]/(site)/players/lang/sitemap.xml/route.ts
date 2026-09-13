@@ -2,7 +2,7 @@ import { generateSitemapXml } from "@onruntime/next-sitemap";
 import ROUTES from "@/constants/routes";
 import { getPlayerLanguageStats } from "@/services/players/available-languages";
 import { buildSafe } from "@/services/sdk";
-import { createSitemapEntry } from "@/services/sitemap";
+import { createLocalizedSitemapEntry } from "@/services/sitemap";
 import { REGIONS } from "@unicum.gg/wargaming";
 
 export const dynamic = "force-static";
@@ -34,7 +34,7 @@ export async function GET() {
 
   const entries = perRegion.flatMap(({ region, languages }) =>
     languages.map((l) =>
-      createSitemapEntry(ROUTES.PLAYERS_BY_LANGUAGE(region, l.code)),
+      createLocalizedSitemapEntry(ROUTES.PLAYERS_BY_LANGUAGE(region, l.code)),
     ),
   );
 
