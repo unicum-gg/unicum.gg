@@ -1,6 +1,7 @@
 {
   "previous": "Iepriekšējā lapa",
   "next": "Nākamā lapa",
+  "pagination": "Lappušu numerācija",
   "rows-per-page": "Rindas uz lapu",
   "all": "Visus",
   "range": "{first}–{last} no {total}",

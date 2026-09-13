@@ -1,6 +1,7 @@
 {
   "previous": "Попередня сторінка",
   "next": "Наступна сторінка",
+  "pagination": "Пагінація",
   "rows-per-page": "Рядків на сторінці",
   "all": "Всі",
   "range": "{first}–{last} із {total}",

@@ -1,6 +1,7 @@
 {
   "previous": "Edellinen sivu",
   "next": "Seuraava sivu",
+  "pagination": "Sivutus",
   "rows-per-page": "Rivit per sivu",
   "all": "Kaikki",
   "range": "{first}–{last} / {total}",

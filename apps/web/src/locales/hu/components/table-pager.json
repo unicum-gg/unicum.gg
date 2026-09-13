@@ -1,6 +1,7 @@
 {
   "previous": "Előző oldal",
   "next": "Következő oldal",
+  "pagination": "Lapozás",
   "rows-per-page": "Sorok száma oldalanként",
   "all": "Mind",
   "range": "{first}–{last} / {total}",

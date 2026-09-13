@@ -1,4 +1,6 @@
 {
   "title": "World of Tanks-spiller-, klan- og stridsvognstatistikk",
-  "description": "Gratis World of Tanks-statistikk for alle spillere, klaner og stridsvogner på EU, NA og Asia. WN8, WNX, seiersprosent, stridsvognutvikling, klanmedlemsrangeringer og historikk."
+  "description": "Gratis World of Tanks-statistikk for alle spillere, klaner og stridsvogner på EU, NA og Asia. WN8, WNX, seiersprosent, stridsvognutvikling, klanmedlemsrangeringer og historikk.",
+  "paginated-title": "{title} - Side {page}",
+  "paginated-description": "{description} Side {page}."
 }

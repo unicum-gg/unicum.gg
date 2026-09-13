@@ -1,6 +1,7 @@
 {
   "previous": "Forrige side",
   "next": "Neste side",
+  "pagination": "Paginering",
   "rows-per-page": "Rader per side",
   "all": "Alle",
   "range": "{first}–{last} av {total}",

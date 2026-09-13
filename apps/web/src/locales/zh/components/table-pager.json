@@ -1,6 +1,7 @@
 {
   "previous": "上一页",
   "next": "下一页",
+  "pagination": "分页",
   "rows-per-page": "每页行数",
   "all": "全部",
   "range": "{first}–{last}，共{total}条",

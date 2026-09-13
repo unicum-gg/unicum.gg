@@ -1,6 +1,7 @@
 {
   "previous": "Prethodna stranica",
   "next": "Sljedeća stranica",
+  "pagination": "Paginacija",
   "rows-per-page": "Redovi po stranici",
   "all": "Svi",
   "range": "{first}–{last} od {total}",

@@ -1,4 +1,6 @@
 {
   "title": "World of Tanks: statistiky pro hráče, klany a Tanky",
-  "description": "Zdarma získáte statistiky World of Tanks pro každého hráče, každý klan a každý Tank v regionech EU, NA a Asie. WN8, WNX, míra vítězství, postup s Tanky, žebříčky členů klanů a historie."
+  "description": "Zdarma získáte statistiky World of Tanks pro každého hráče, každý klan a každý Tank v regionech EU, NA a Asie. WN8, WNX, míra vítězství, postup s Tanky, žebříčky členů klanů a historie.",
+  "paginated-title": "{title}, Stránka {page}",
+  "paginated-description": "{description} Stránka {page}."
 }

@@ -1,4 +1,6 @@
 {
   "title": "Στατιστικά παικτών, κλαν και αρμάτων στο World of Tanks",
-  "description": "Δωρεάν στατιστικά World of Tanks για κάθε παίκτη, κλαν και άρμα σε EU, NA και Asia. WN8, WNX, ποσοστό νικών, εξέλιξη αρμάτων, κατατάξεις μελών κλαν και ιστορικό."
+  "description": "Δωρεάν στατιστικά World of Tanks για κάθε παίκτη, κλαν και άρμα σε EU, NA και Asia. WN8, WNX, ποσοστό νικών, εξέλιξη αρμάτων, κατατάξεις μελών κλαν και ιστορικό.",
+  "paginated-title": "{title} - Σελίδα {page}",
+  "paginated-description": "{description} Σελίδα {page}."
 }

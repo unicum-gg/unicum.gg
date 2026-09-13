@@ -1,6 +1,7 @@
 {
   "previous": "Nakaraang pahina",
   "next": "Susunod na pahina",
+  "pagination": "Pagpapa-pahina",
   "rows-per-page": "Mga hilera bawat pahina",
   "all": "Lahat",
   "range": "{first}–{last} sa {total}",

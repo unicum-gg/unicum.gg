@@ -1,6 +1,7 @@
 {
   "previous": "Предыдущая страница",
   "next": "Следующая страница",
+  "pagination": "Пагинация",
   "rows-per-page": "Строк на странице",
   "all": "Все",
   "range": "{first}–{last} из {total}",

@@ -1,6 +1,7 @@
 {
   "previous": "Ankstesnis puslapis",
   "next": "Kita puslapis",
+  "pagination": "Puslapiavimas",
   "rows-per-page": "Eilutės per puslapį",
   "all": "Visi",
   "range": "{first}–{last} iš {total}",

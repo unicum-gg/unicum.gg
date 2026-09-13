@@ -1,6 +1,7 @@
 {
   "previous": "Pagina anterioară",
   "next": "Pagina următoare",
+  "pagination": "Paginare",
   "rows-per-page": "Rânduri pe pagină",
   "all": "Toate",
   "range": "{first}–{last} din {total}",

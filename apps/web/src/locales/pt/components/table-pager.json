@@ -1,6 +1,7 @@
 {
   "previous": "Página anterior",
   "next": "Próxima página",
+  "pagination": "Paginação",
   "rows-per-page": "Linhas por página",
   "all": "Tudo",
   "range": "{first}–{last} de {total}",

@@ -1,6 +1,7 @@
 {
   "previous": "หน้าก่อนหน้า",
   "next": "หน้าถัดไป",
+  "pagination": "การแบ่งหน้า",
   "rows-per-page": "แถวต่อหน้า",
   "all": "ทั้งหมด",
   "range": "{first}–{last} จาก {total}",

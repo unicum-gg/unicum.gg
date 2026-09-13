@@ -1,6 +1,7 @@
 {
   "previous": "Forrige side",
   "next": "Næste side",
+  "pagination": "Sideinddeling",
   "rows-per-page": "Rækker pr. side",
   "all": "Alle",
   "range": "{first}–{last} af {total}",

@@ -1,6 +1,7 @@
 {
   "previous": "Předchozí stránka",
   "next": "Další stránka",
+  "pagination": "Stránkování",
   "rows-per-page": "Řádky na stránku",
   "all": "Všechna",
   "range": "{first}–{last} z {total}",

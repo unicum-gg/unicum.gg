@@ -1,6 +1,7 @@
 {
   "previous": "Önceki sayfa",
   "next": "Sonraki sayfa",
+  "pagination": "Sayfalandırma",
   "rows-per-page": "Sayfada satır",
   "all": "Tümü",
   "range": "{first}–{last} / {total}",

@@ -1,6 +1,7 @@
 {
   "previous": "الصفحة السابقة",
   "next": "الصفحة التالية",
+  "pagination": "ترقيم الصفحات",
   "rows-per-page": "الصفوف لكل صفحة",
   "all": "الكل",
   "range": "{first}–{last} من أصل {total}",

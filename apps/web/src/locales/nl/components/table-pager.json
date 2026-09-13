@@ -1,6 +1,7 @@
 {
   "previous": "Vorige pagina",
   "next": "Volgende pagina",
+  "pagination": "Paginering",
   "rows-per-page": "Rijen per pagina",
   "all": "Allen",
   "range": "{first}–{last} van {total}",
