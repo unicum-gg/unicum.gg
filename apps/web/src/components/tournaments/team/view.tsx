@@ -357,10 +357,23 @@ export function TournamentTeamView({
                 >
                   {t("tournaments")}</Link>
                 <span className="shrink-0 text-fd-border">·</span>
+                {/* The organiser's logo, beside the event it belongs to. The
+                    square this page gives the placement is the TEAM's identity,
+                    so the tournament's own mark rides its name here, the way it
+                    does in every table that lists one. */}
                 <Link
                   href={ROUTES.TOURNAMENT(region, tournament.id)}
-                  className="shrink-0 hover:text-fd-foreground hover:underline"
+                  className="flex shrink-0 items-center gap-1.5 hover:text-fd-foreground hover:underline"
                 >
+                  {tournament.logoUrl?.startsWith("http") && (
+                    <Image
+                      src={tournament.logoUrl}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="size-4 shrink-0 object-contain"
+                    />
+                  )}
                   {tournament.title}
                 </Link>
                 {metaParts.map((part) => (
