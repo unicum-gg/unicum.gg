@@ -14,7 +14,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { languageDisplayName } from "@/lib/language-name";
 import Image from "next/image";
 import { useMemo, useState, useSyncExternalStore } from "react";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer, languageToCountryCode } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
 import { FeaturedPlayer } from "@/components/home/featured-player";
 import { usePeriod } from "@/hooks/use-period";
@@ -46,7 +46,6 @@ import {
 import APP from "@/constants/app";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import { languageToCountryCode } from "@/lib/language-flags";
 import { useLiveStreamers } from "@/hooks/use-live-streamers";
 import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";

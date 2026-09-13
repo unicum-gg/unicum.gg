@@ -13,7 +13,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
-import { languageToCountryCode } from "@/lib/language-flags";
+import { languageToCountryCode, LanguageSource } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -23,13 +23,16 @@ const FLAG_DIMENSIONS = {
   l: { width: 32, height: 24 },
 } as const;
 
-/**
- * Why the language flags are shown. The clan case is plain public data the
- * clan owner declared; the player case is an inference we run on the
- * player's clan history, so RGPD/transparency asks us to spell out the
- * method right where the flag is rendered.
- */
-type LanguageSource = "declared" | "inferred";
+/** One string per source, because the notice has to describe the method that
+ * was actually used: `Clan` is a declared set standing in for a player we hold
+ * no history on, so telling that reader we weighed their clan history would be
+ * plainly false. The link target is a different question and stays binary, on
+ * whether the flags belong to a clan or to a player. */
+const ORIGIN_KEY: Record<LanguageSource, string> = {
+  [LanguageSource.Declared]: "declared",
+  [LanguageSource.Inferred]: "inferred",
+  [LanguageSource.Clan]: "from-clan",
+};
 
 function tooltipFor(
   code: string,
@@ -39,11 +42,9 @@ function tooltipFor(
   t: TranslateFunction,
 ): string {
   const language = languageDisplayName(code, locale);
-  const origin = t(source === "declared" ? "declared" : "inferred", {
-    language,
-  });
+  const origin = t(ORIGIN_KEY[source], { language });
   if (!clickable) return origin;
-  const cta = t(source === "declared" ? "cta-clans" : "cta-players", {
+  const cta = t(source === LanguageSource.Declared ? "cta-clans" : "cta-players", {
     language,
   });
   return `${origin} ${cta}`;
@@ -56,6 +57,15 @@ function tooltipFor(
  * point to the players leaderboard. Set `link={false}` when this is
  * rendered inside an outer `<a>` (the top-clans list, for instance) to
  * keep the region-aware flags but skip the nested anchor.
+ *
+ * `source` says why the flags are shown at all, and RGPD/transparency asks us
+ * to spell that method out right where the flag is rendered, so each of the
+ * three gets its own notice. Only the LINK is binary: a declared set belongs to
+ * a clan and points at the clans board, the other two belong to a player. The
+ * enum is shared with the public API so the same three cases are named the same
+ * way there, though a value read back off `/{region}/languages/resolve` crosses
+ * HTTP as a literal and needs mapping onto the enum before it reaches this
+ * prop, as every enum in this codebase does.
  */
 export function LanguageFlags({
   languages,
@@ -100,7 +110,7 @@ export function LanguageFlags({
           );
           const href =
             clickable && region
-              ? source === "declared"
+              ? source === LanguageSource.Declared
                 ? ROUTES.CLANS_BY_LANGUAGE(region, lang)
                 : ROUTES.PLAYERS_BY_LANGUAGE(region, lang)
               : null;
@@ -109,7 +119,7 @@ export function LanguageFlags({
               href={href}
               className="inline-flex h-full items-center transition-opacity hover:opacity-80"
               aria-label={
-                source === "declared"
+                source === LanguageSource.Declared
                   ? t("top-language-clans", {
                       language: languageDisplayName(lang, locale),
                     })

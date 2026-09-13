@@ -13,8 +13,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { RatingMetric } from "@unicum.gg/shared";
-import { languageToCountryCode } from "@/lib/language-flags";
+import { RatingMetric, languageToCountryCode } from "@unicum.gg/shared";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
 import {

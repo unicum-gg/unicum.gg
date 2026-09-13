@@ -1,4 +1,5 @@
 import { clanRoleName } from "@/components/game-name";
+import { LanguageSource } from "@unicum.gg/shared";
 import Image from "next/image";
 import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -171,7 +172,7 @@ export function PlayerHeader(
               <LanguageFlags
                 languages={inferredLanguages}
                 size="l"
-                source="inferred"
+                source={LanguageSource.Inferred}
                 region={region}
               />
             </div>

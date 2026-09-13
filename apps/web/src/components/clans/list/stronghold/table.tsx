@@ -28,6 +28,7 @@ import {
   strongholdRatingBattlesColor,
   strongholdRatingColor,
   strongholdWinrateColor,
+  LanguageSource,
 } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import type { Region } from "@unicum.gg/wargaming";
@@ -213,7 +214,7 @@ export function StrongholdTable({
                           <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
                             <LanguageFlags
                               languages={entry.languages}
-                              source="declared"
+                              source={LanguageSource.Declared}
                               size="s"
                               region={region}
                               link={false}

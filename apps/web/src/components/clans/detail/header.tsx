@@ -34,6 +34,7 @@ import { ClanRole } from "@unicum.gg/wargaming";
 import {
   type ClanMemberStats,
   type ClanRatings,
+  LanguageSource,
 } from "@unicum.gg/shared";
 import {
   RATING_COLOR_CLASS,
@@ -335,7 +336,7 @@ function InfoRow({
           <LanguageFlags
             languages={clan.languages}
             size="l"
-            source="declared"
+            source={LanguageSource.Declared}
             region={region}
           />
         </div>

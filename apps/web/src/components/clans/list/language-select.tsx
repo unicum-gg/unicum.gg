@@ -1,6 +1,7 @@
 "use client";
 
 import { numberFormat } from "@/lib/format";
+import { languageToCountryCode } from "@unicum.gg/shared";
 
 import { useLocale } from "@onruntime/translations/react";
 import { languageDisplayName } from "@/lib/language-name";
@@ -14,7 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import ROUTES from "@/constants/routes";
-import { languageToCountryCode } from "@/lib/language-flags";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
 

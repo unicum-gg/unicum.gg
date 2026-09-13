@@ -1,4 +1,5 @@
 import { useLocale } from "@onruntime/translations/react";
+import { LanguageSource } from "@unicum.gg/shared";
 import { numberFormat } from "@/lib/format";
 import { ClanName } from "@/components/entity/clan-name";
 import { LanguageFlags } from "@/components/language-flags";
@@ -96,7 +97,7 @@ export function PreviousClansTable(
                       <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
                         <LanguageFlags
                           languages={r.languages}
-                          source="declared"
+                          source={LanguageSource.Declared}
                           size="s"
                           region={props.region}
                           link={false}

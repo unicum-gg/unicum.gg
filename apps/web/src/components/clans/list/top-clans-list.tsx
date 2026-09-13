@@ -4,7 +4,7 @@ import { ClanName } from "@/components/entity/clan-name";
 import { clanIdentityFromRow } from "@/components/entity/clan-identity";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
-import { ClanBoard, RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { ClanBoard, RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, LanguageSource } from "@unicum.gg/shared";
 import {
   Table,
   TableBody,
@@ -116,7 +116,7 @@ export function TopClansList({
                       <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
                         <LanguageFlags
                           languages={r.languages}
-                          source="declared"
+                          source={LanguageSource.Declared}
                           size="s"
                           region={region}
                           link={false}

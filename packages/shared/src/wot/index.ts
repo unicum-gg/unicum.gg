@@ -18,3 +18,4 @@ export * from "./tanks";
 export * from "./maps";
 export * from "./tournaments";
 export * from "./tournament-placements";
+export * from "./language-flags";

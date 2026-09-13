@@ -4,7 +4,7 @@ import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
-import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, LanguageSource } from "@unicum.gg/shared";
 import {
   Table,
   TableBody,
@@ -106,7 +106,7 @@ export function TopPlayersList({
                       <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
                         <LanguageFlags
                           languages={r.languages}
-                          source="inferred"
+                          source={LanguageSource.Inferred}
                           size="s"
                           region={region}
                           link={false}
