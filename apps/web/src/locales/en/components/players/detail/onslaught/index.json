@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "See this season’s leaderboard",
   "standing-line": "{rating} rating points · {battles} battles",
   "the-board-only-lists-players": "The board only lists players who reach Champion, a few thousand per region, so this is where almost every profile lands. It fills in by itself the season they get there.",
-  "updated": "Updated {when}"
+  "updated": "Updated {when}",
+  "best": "best",
+  "lost-place": "Lost their place {when}",
+  "lost-short": "(lost the place)"
 }

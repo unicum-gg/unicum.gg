@@ -141,8 +141,12 @@ export function OnslaughtTab({
           <Current
             standing={latest}
             region={region}
+            // A place they still hold is dated by when the board was last
+            // recomputed. One they have lost is dated by when they lost it,
+            // which the row already says, so the stamp would only repeat a
+            // weaker version of it.
             updatedAt={
-              data?.lastRecalculationTs != null
+              data?.lastRecalculationTs != null && !latest.lost
                 ? new Date(data.lastRecalculationTs * 1000)
                 : null
             }
@@ -180,8 +184,20 @@ function Current({
   const { num } = useFormat();
   const { t } = useTranslation("components/players/detail/onslaught/index");
   const { t: tGame } = useTranslation("game/vocabulary");
-  const tier = onslaughtTier(standing.rank, standing);
+  // On a place they have lost, the number that means something is the best one
+  // they reached, not the last one we happened to see: the last is only where
+  // they were standing when they slipped under the cut. The rank they wear is
+  // read off the same number, or a player whose fall we caught mid-slide would
+  // be badged below the rank they actually earned.
+  const shown = standing.lost
+    ? (standing.bestRank ?? standing.rank)
+    : standing.rank;
+  const tier = onslaughtTier(shown, standing);
   const href = boardHref(region, standing, true);
+  const lostAt =
+    standing.lost && standing.lastSeenAt != null
+      ? new Date(standing.lastSeenAt * 1000)
+      : null;
   return (
     <div className="flex flex-wrap items-center gap-4 p-4">
       {tier ? (
@@ -202,8 +218,13 @@ function Current({
             className="text-2xl font-semibold tabular-nums hover:underline"
             title={t("see-this-season-s-leaderboard")}
           >
-            #{num(INT_FORMAT).format(standing.rank)}
+            #{num(INT_FORMAT).format(shown)}
           </Link>
+          {standing.lost ? (
+            <span className="rounded bg-fd-secondary/60 px-1.5 py-0.5 text-xs font-medium text-fd-muted-foreground">
+              {t("best")}
+            </span>
+          ) : null}
         </div>
         <div className="text-sm text-fd-muted-foreground">
           <Link href={href} className="hover:underline">
@@ -215,8 +236,23 @@ function Current({
             battles: num(INT_FORMAT).format(standing.battles),
           })}
           {" "}
-          {standing.ended ? t("final") : t("live-season")}
+          {standing.lost ? null : standing.ended ? t("final") : t("live-season")}
         </div>
+        {lostAt ? (
+          // The capture prunes anyone who has left the board from the
+          // standings, so a place they held and lost is read back from the
+          // daily fold rather than from a standing they no longer have.
+          <div className="text-sm text-fd-foreground">
+            <Interpolate
+              template={t("lost-place")}
+              values={{
+                when: (
+                  <RelativeTime date={lostAt} title={lostAt.toISOString()} />
+                ),
+              }}
+            />
+          </div>
+        ) : null}
         {updatedAt ? (
           // The same reading the board carries: when these standings were last
           // true, from the source's own stamp. On a live season it is the
@@ -250,7 +286,11 @@ function PastSeason({
 }) {
   const { num } = useFormat();
   const { date } = useFormat();
-  const tier = onslaughtTier(standing.rank, standing);
+  const { t } = useTranslation("components/players/detail/onslaught/index");
+  const shown = standing.lost
+    ? (standing.bestRank ?? standing.rank)
+    : standing.rank;
+  const tier = onslaughtTier(shown, standing);
   const href = boardHref(region, standing, false);
   return (
     <li className="flex flex-wrap items-center gap-3 px-4 py-2.5 text-sm">
@@ -271,9 +311,14 @@ function PastSeason({
         href={href}
         className="tabular-nums text-fd-muted-foreground hover:underline"
       >
-        #{num(INT_FORMAT).format(standing.rank)}
+        #{num(INT_FORMAT).format(shown)}
       </Link>
       {tier ? <TierBadge tier={tier} /> : null}
+      {standing.lost ? (
+        <span className="text-xs text-fd-muted-foreground">
+          {t("lost-short")}
+        </span>
+      ) : null}
       <span className="ml-auto text-fd-muted-foreground">
         {standing.endDate ? date(DATE_PATTERN).format(new Date(standing.endDate)) : null}
       </span>
