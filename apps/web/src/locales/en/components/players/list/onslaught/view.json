@@ -12,7 +12,10 @@
     "player": "Player",
     "rank": "Rank",
     "battles": "Battles",
-    "rating": "Rating Points"
+    "rating": "Rating Points",
+    "battles-per-day": "Battles/Day",
+    "points-per-day": "Points/Day",
+    "points-per-battle": "Pts/Battle"
   },
   "alias": "(as {nickname})",
   "ranks": {

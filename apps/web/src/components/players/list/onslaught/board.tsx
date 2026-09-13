@@ -1,31 +1,33 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
-import {
-  CaretDownIcon,
-  CaretUpDownIcon,
-  CaretUpIcon,
-} from "@phosphor-icons/react";
-import {
-  type ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useMemo } from "react";
 import Image from "next/image";
-import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { GlossaryLabel } from "@/components/glossary/label";
-import { PlayerName } from "@/components/entity/player-name";
-import { identityFromRow } from "@/components/entity/player-identity";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
+import { OnslaughtBoardRow } from "@/components/players/list/onslaught/board-row";
+import {
+  type OnslaughtDropoutRow,
+  OnslaughtDropoutsTable,
+} from "@/components/players/list/onslaught/dropouts";
+import {
+  ACTIVITY_BUCKETS,
+  ActivityBucket,
+  activityBucket,
+  activityReference,
+  BoardView,
+  compareBy,
+  type OnslaughtRow,
+  OnslaughtSortCol,
+} from "@/components/players/list/onslaught/row";
 import {
   OnslaughtSeasonSelect,
   type OnslaughtSeasonRef,
 } from "@/components/players/list/onslaught/season-select";
+import { OnslaughtSortHead } from "@/components/players/list/onslaught/sort-head";
+import { SegmentedControl } from "@/components/segmented-control";
+import { useOnslaughtBoardControls } from "@/components/players/list/onslaught/use-board-controls";
 import { Chip, ChipRow } from "@/components/ui/chip";
-import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
 import {
   type RangeColumn,
@@ -40,19 +42,15 @@ import {
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
-  ONSLAUGHT_TIER_COLOR,
   onslaughtRankIcon,
   onslaughtTier,
   OnslaughtTier,
-  RATING_COLOR_CLASS,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { FilterSubject } from "@/components/filter-subject";
@@ -64,94 +62,14 @@ const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 const INITIAL_PAGE_SIZE = 100;
 
-// The board is the game's own rank order by default; the columns re-sort the
-// fully-loaded set client-side (no re-fetch, since we hold every row).
-type SortCol = "battles" | "rating";
-type SortState = { col: SortCol; dir: "asc" | "desc" };
 const TIERS = [OnslaughtTier.Legend, OnslaughtTier.Champion] as const;
 
-// A client-side sortable column header: a first click sorts that metric
-// descending (biggest first), a second click flips the direction.
-function SortHead({
-  col,
-  sort,
-  setSort,
-  className,
-  children,
-}: {
-  col: SortCol;
-  sort: SortState;
-  setSort: (s: SortState) => void;
-  className?: string;
-  children: ReactNode;
-}) {
-  const active = sort.col === col;
-  const Icon = active
-    ? sort.dir === "asc"
-      ? CaretUpIcon
-      : CaretDownIcon
-    : CaretUpDownIcon;
-  const button = (
-    <button
-      type="button"
-      onClick={() =>
-        setSort(
-          active
-            ? { col, dir: sort.dir === "asc" ? "desc" : "asc" }
-            : { col, dir: "desc" },
-        )
-      }
-      className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 max-w-full min-w-0 font-medium select-none hover:text-foreground",
-        active ? "text-foreground" : "",
-      )}
-    >
-      {/* `data-head-label` is what the tooltip measures: it shows the full
-            heading only when the column really cut it. */}
-      <span data-head-label className="truncate">
-        {children}
-      </span>
-      <Icon
-        weight="bold"
-        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
-  return (
-    <TableHead className={cn("text-right!", className)}>
-      <GlossaryHeadTooltip
-        label={typeof children === "string" ? children : undefined}
-      >
-        {button}
-      </GlossaryHeadTooltip>
-    </TableHead>
-  );
-}
-
-// One Onslaught board row. Shape matches the `/players/onslaught` response
-// (OnslaughtSummary): the standings straight from the game source.
-export type OnslaughtRow = {
-  rank: number;
-  account_id: number;
-  nickname: string;
-  clan_tag: string | null;
-  clan_color: string | null;
-  recordedNickname: string;
-  recordedClanTag: string | null;
-  recordedClanColor: string | null;
-  rating: number;
-  battles: number;
-  is_verified: boolean;
-  is_supporter: boolean;
-  twitch_login: string | null;
-  tournament_wins: number;
-  tournament_featured_wins: number;
-  tournament_best_title: string | null;
-};
+export type { OnslaughtRow };
 
 export function OnslaughtBoard({
   region,
   results,
+  dropouts,
   elitePosition,
   masterPosition,
   seasonOrdinal,
@@ -161,6 +79,7 @@ export function OnslaughtBoard({
 }: {
   region: Region;
   results: OnslaughtRow[];
+  dropouts: OnslaughtDropoutRow[];
   elitePosition: number | null;
   masterPosition: number | null;
   seasonOrdinal: string | null;
@@ -199,60 +118,32 @@ export function OnslaughtBoard({
     syncUrl: true,
   });
 
-  // Rating Points descending is the game's own order (its ranks derive from it).
-  const [sort, setSort] = useState<SortState>({ col: "rating", dir: "desc" });
-  const [tierSel, setTierSel] = useState<Set<OnslaughtTier>>(() => new Set());
-  const toggleTier = (t: OnslaughtTier) =>
-    setTierSel((prev) => {
-      const next = new Set(prev);
-      if (next.has(t)) next.delete(t);
-      else next.add(t);
-      return next;
-    });
+  const {
+    view,
+    setView,
+    sort,
+    setSort,
+    lostSort,
+    setLostSort,
+    tiers: tierSel,
+    toggleTier,
+    activity: activitySel,
+    toggleActivity,
+  } = useOnslaughtBoardControls();
+  // A season we hold no captures of has nobody to have lost a place, so the
+  // second tab is absent rather than empty, and a `?view=lost` link to such a
+  // season falls back to the standings instead of an empty table.
+  const hasLost = dropouts.length > 0;
+  const showLost = hasLost && view === BoardView.Lost;
 
-  // Mirror the sort + rank filter to `?sort=&dir=&rank=` (shareable, survives
-  // reload), seeding from the URL once on mount then writing back on change.
-  /* eslint-disable react-hooks/set-state-in-effect */
-  useEffect(() => {
-    const p = new URLSearchParams(window.location.search);
-    const s = p.get("sort");
-    if (s === "battles" || s === "rating") {
-      setSort({ col: s, dir: p.get("dir") === "asc" ? "asc" : "desc" });
-    }
-    const ranks = (p.get("rank") ?? "")
-      .split(",")
-      .filter(
-        (r): r is OnslaughtTier =>
-          r === OnslaughtTier.Legend || r === OnslaughtTier.Champion,
-      );
-    if (ranks.length) setTierSel(new Set(ranks));
-  }, []);
-  /* eslint-enable react-hooks/set-state-in-effect */
+  // The board's own newest capture, which is the clock the activity buckets
+  // read rather than the reader's (see `activityReference`).
+  const reference = useMemo(() => activityReference(results), [results]);
+  // A season only carries rates if we recorded it. Nothing about activity is
+  // shown for one we did not, since every player there would read as idle.
+  const hasRates = reference > 0;
 
-  const skipSortWrite = useRef(true);
-  useEffect(() => {
-    if (skipSortWrite.current) {
-      skipSortWrite.current = false;
-      return;
-    }
-    const p = new URLSearchParams(window.location.search);
-    const setOrDel = (k: string, v: string) => {
-      if (v) p.set(k, v);
-      else p.delete(k);
-    };
-    const defaultSort = sort.col === "rating" && sort.dir === "desc";
-    setOrDel("sort", defaultSort ? "" : sort.col);
-    setOrDel("dir", defaultSort ? "" : sort.dir);
-    setOrDel("rank", [...tierSel].join(","));
-    const qs = p.toString();
-    window.history.replaceState(
-      null,
-      "",
-      qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
-    );
-  }, [sort, tierSel]);
-
-  // Rank-tier filter + client-side sort over the searched/ranged set.
+  // Rank + activity filters, then the client-side sort, over the searched set.
   const processed = useMemo(() => {
     let rows = filtered;
     if (tierSel.size > 0)
@@ -260,11 +151,19 @@ export function OnslaughtBoard({
         const t = onslaughtTier(r.rank, { elitePosition, masterPosition });
         return t != null && tierSel.has(t);
       });
-    const dir = sort.dir === "asc" ? 1 : -1;
-    const val = (r: OnslaughtRow) =>
-      sort.col === "battles" ? r.battles : r.rating;
-    return [...rows].sort((a, b) => (val(a) - val(b)) * dir);
-  }, [filtered, tierSel, sort, elitePosition, masterPosition]);
+    if (hasRates && activitySel.size > 0)
+      rows = rows.filter((r) => activitySel.has(activityBucket(r, reference)));
+    return [...rows].sort(compareBy(sort.col, sort.dir));
+  }, [
+    filtered,
+    tierSel,
+    activitySel,
+    hasRates,
+    reference,
+    sort,
+    elitePosition,
+    masterPosition,
+  ]);
 
   const { paged, pager } = usePagination(processed, INITIAL_PAGE_SIZE);
 
@@ -280,6 +179,17 @@ export function OnslaughtBoard({
     }
     return counts;
   }, [results, elitePosition, masterPosition]);
+
+  const activityCounts = useMemo(() => {
+    const counts: Record<ActivityBucket, number> = {
+      [ActivityBucket.Today]: 0,
+      [ActivityBucket.Week]: 0,
+      [ActivityBucket.Idle]: 0,
+    };
+    if (!hasRates) return counts;
+    for (const r of results) counts[activityBucket(r, reference)] += 1;
+    return counts;
+  }, [results, hasRates, reference]);
 
   const rankChips = (
     <ChipRow className="h-7">
@@ -308,151 +218,181 @@ export function OnslaughtBoard({
     </ChipRow>
   );
 
+  // Absent rather than inert on a season with no captures behind it, like the
+  // Common Test chip on the tanks catalogue.
+  const activityChips = hasRates ? (
+    <ChipRow className="h-7">
+      {ACTIVITY_BUCKETS.map((bucket) => (
+        <Chip
+          key={bucket}
+          active={activitySel.has(bucket)}
+          onClick={() => toggleActivity(bucket)}
+          className="flex h-full items-center py-0"
+        >
+          <span className="inline-flex items-center gap-1.5">
+            {tOwn(`activity.${bucket}`)}
+            <span className="text-fd-muted-foreground/70 tabular-nums">
+              ({num(INT_FORMAT).format(activityCounts[bucket])})
+            </span>
+          </span>
+        </Chip>
+      ))}
+    </ChipRow>
+  ) : null;
+
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-        <PanelTitle>
-          {t("board", { count: results.length, mode })}
-        </PanelTitle>
-        <OnslaughtSeasonSelect
-          seasons={seasons}
-          current={currentSeasonId}
-          region={region}
-        />
+        <PanelTitle>{t("board", { count: results.length, mode })}</PanelTitle>
+        <div className="flex flex-wrap items-center gap-2">
+          <OnslaughtSeasonSelect
+            seasons={seasons}
+            current={currentSeasonId}
+            region={region}
+          />
+          {/* One table on screen at a time. The standings and the places that
+              were lost are the same question in two tenses, and stacking two
+              tables down the page asks the reader to scan twice. The site's own
+              segmented switch, beside the season the way the language boards
+              put Any/Strict beside the language. */}
+          {hasLost && (
+            <SegmentedControl
+              active={view}
+              onSelect={setView}
+              segments={[
+                {
+                  id: BoardView.Ranked,
+                  label: tOwn("views.ranked"),
+                  count: results.length,
+                },
+                {
+                  id: BoardView.Lost,
+                  label: tOwn("views.lost"),
+                  count: dropouts.length,
+                },
+              ]}
+            />
+          )}
+        </div>
       </PanelHeader>
       <PanelContent className="p-0">
-        {results.length > 0 && (
-          <div className="border-b border-fd-border px-4 py-2.5">
-            <LeaderboardFilterBar
-              filters={filters}
-              searchNoun={FilterSubject.Players}
-              extra={rankChips}
-            />
-          </div>
-        )}
-        {results.length === 0 ? (
-          <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-            {tOwn("no-onslaught-standings-yet")}</div>
-        ) : processed.length === 0 ? (
-          <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-            {tOwn("no-player-matches-the-current")}</div>
+        {showLost ? (
+          <OnslaughtDropoutsTable
+            region={region}
+            dropouts={dropouts}
+            sort={lostSort}
+            setSort={setLostSort}
+          />
         ) : (
-          <Table
-            className={cn(
-              "my-0! table-fixed",
-              "[&_td]:min-w-0 [&_td]:py-2!",
-              "[&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4!",
-              "[&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!",
+          <>
+            {results.length > 0 && (
+              <div className="border-b border-fd-border px-4 py-2.5">
+                <LeaderboardFilterBar
+                  filters={filters}
+                  searchNoun={FilterSubject.Players}
+                  extra={
+                    <>
+                      {rankChips}
+                      {activityChips}
+                    </>
+                  }
+                />
+              </div>
             )}
-          >
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-16 text-center!">#</TableHead>
-                <TableHead>{t("columns.player")}</TableHead>
-                <TableHead className="hidden w-28 text-right! sm:table-cell">
-                  {/* The mode's own ladder, not a leaderboard position: the
+            {results.length === 0 ? (
+              <div className="px-4 py-12 text-center text-sm text-muted-foreground">
+                {tOwn("no-onslaught-standings-yet")}
+              </div>
+            ) : processed.length === 0 ? (
+              <div className="px-4 py-12 text-center text-sm text-muted-foreground">
+                {tOwn("no-player-matches-the-current")}
+              </div>
+            ) : (
+              <Table
+                className={cn(
+                  "my-0! table-fixed",
+                  "[&_td]:min-w-0 [&_td]:py-2!",
+                  "[&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4!",
+                  "[&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!",
+                )}
+              >
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-16 text-center!">#</TableHead>
+                    <TableHead>{t("columns.player")}</TableHead>
+                    <TableHead className="hidden w-28 text-right! sm:table-cell">
+                      {/* The mode's own ladder, not a leaderboard position: the
                       row's number is in the first column. */}
-                  <GlossaryLabel label={tOwn("onslaught")}>{t("columns.rank")}</GlossaryLabel>
-                </TableHead>
-                <SortHead
-                  col="battles"
-                  sort={sort}
-                  setSort={setSort}
-                  className="w-24"
-                >
-                  {t("columns.battles")}
-                </SortHead>
-                <SortHead
-                  col="rating"
-                  sort={sort}
-                  setSort={setSort}
-                  className="w-32"
-                >
-                  {t("columns.rating")}
-                </SortHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {paged.map((r) => {
-                const tier = onslaughtTier(r.rank, {
-                  elitePosition,
-                  masterPosition,
-                });
-                const colorClass = tier
-                  ? RATING_COLOR_CLASS[ONSLAUGHT_TIER_COLOR[tier]]
-                  : "";
-                return (
-                  <TableRow key={r.account_id}>
-                    <TableCell className="text-center text-muted-foreground tabular-nums">
-                      {r.rank <= 3 ? (
-                        <RankMedal
-                          rank={r.rank as 1 | 2 | 3}
-                          className="mx-auto"
-                        />
-                      ) : (
-                        r.rank
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex min-w-0 items-center gap-2">
-                        <PlayerName
-                          region={region}
-                          player={identityFromRow(r)}
-                          href={ROUTES.PLAYER_ONSLAUGHT(region, r.nickname)}
-                        />
-                        {r.recordedNickname !== r.nickname ||
-                        r.recordedClanTag !== r.clan_tag ? (
-                          <span className="shrink-0 text-xs text-muted-foreground">
-                            {t("alias", {
-                              nickname: r.recordedClanTag
-                                ? `${r.recordedNickname} [${r.recordedClanTag}]`
-                                : r.recordedNickname,
-                            })}
-                          </span>
-                        ) : null}
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden text-right sm:table-cell">
-                      {tier ? (
-                        <span className="inline-flex items-center justify-end gap-1.5">
-                          <Image
-                            src={onslaughtRankIcon(tier, seasonOrdinal, assetsRef)}
-                            alt=""
-                            width={22}
-                            height={22}
-                            className="h-5 w-5 shrink-0"
-                          />
-                          <span
-                            className={cn(
-                              "rounded px-2 py-0.5 text-xs font-semibold",
-                              colorClass,
-                            )}
-                          >
-                            {tGame(`onslaught-tiers.${tier}`)}
-                          </span>
-                        </span>
-                      ) : (
-                        <span className="text-muted-foreground">-</span>
-                      )}
-                    </TableCell>
-                    <TableCell className="text-right text-muted-foreground tabular-nums">
-                      {num(INT_FORMAT).format(r.battles)}
-                    </TableCell>
-                    <TableCell
-                      className={cn(
-                        "text-right font-semibold tabular-nums",
-                        colorClass,
-                      )}
+                      <GlossaryLabel label={tOwn("onslaught")}>
+                        {t("columns.rank")}
+                      </GlossaryLabel>
+                    </TableHead>
+                    {/* The rates, folded from our own captures. Ahead of the two
+                    figures the source itself publishes, which keep the last
+                    columns they have always held, and hidden on a narrow screen:
+                    they are what this board adds, not what it is. */}
+                    <OnslaughtSortHead
+                      col={OnslaughtSortCol.BattlesPerDay}
+                      sort={sort}
+                      setSort={setSort}
+                      className="hidden w-32 xl:table-cell"
                     >
-                      {num(INT_FORMAT).format(r.rating)}
-                    </TableCell>
+                      {t("columns.battles-per-day")}
+                    </OnslaughtSortHead>
+                    <OnslaughtSortHead
+                      col={OnslaughtSortCol.PointsPerDay}
+                      sort={sort}
+                      setSort={setSort}
+                      className="hidden w-32 xl:table-cell"
+                    >
+                      {t("columns.points-per-day")}
+                    </OnslaughtSortHead>
+                    <OnslaughtSortHead
+                      col={OnslaughtSortCol.PointsPerBattle}
+                      sort={sort}
+                      setSort={setSort}
+                      className="hidden w-32 xl:table-cell"
+                    >
+                      {t("columns.points-per-battle")}
+                    </OnslaughtSortHead>
+                    <OnslaughtSortHead
+                      col={OnslaughtSortCol.Battles}
+                      sort={sort}
+                      setSort={setSort}
+                      className="w-24"
+                    >
+                      {t("columns.battles")}
+                    </OnslaughtSortHead>
+                    <OnslaughtSortHead
+                      col={OnslaughtSortCol.Rating}
+                      sort={sort}
+                      setSort={setSort}
+                      className="w-32"
+                    >
+                      {t("columns.rating")}
+                    </OnslaughtSortHead>
                   </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+                </TableHeader>
+                <TableBody>
+                  {paged.map((r) => (
+                    <OnslaughtBoardRow
+                      key={r.account_id}
+                      region={region}
+                      row={r}
+                      tier={onslaughtTier(r.rank, {
+                        elitePosition,
+                        masterPosition,
+                      })}
+                      seasonOrdinal={seasonOrdinal}
+                      assetsRef={assetsRef}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
+            )}
+            {pager.total > 0 && <TablePager pager={pager} />}
+          </>
         )}
-        {pager.total > 0 && <TablePager pager={pager} />}
       </PanelContent>
     </Panel>
   );

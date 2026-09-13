@@ -6,7 +6,9 @@ import {
   OnslaughtBoard,
   type OnslaughtRow,
 } from "@/components/players/list/onslaught/board";
+import type { OnslaughtDropoutRow } from "@/components/players/list/onslaught/dropouts";
 import { OnslaughtRankScale } from "@/components/players/list/onslaught/rank-scale";
+import { OnslaughtTierProfile } from "@/components/players/list/onslaught/tier-profile";
 import { OnslaughtSeasonRace } from "@/components/players/list/onslaught/season-race";
 import {
   Panel,
@@ -137,6 +139,7 @@ export function OnslaughtBoardLive({
       <OnslaughtBoard
         region={region}
         results={data.results as OnslaughtRow[]}
+        dropouts={data.dropouts as OnslaughtDropoutRow[]}
         elitePosition={season?.elitePosition ?? null}
         masterPosition={season?.masterPosition ?? null}
         seasonOrdinal={season?.seasonOrdinal ?? null}
@@ -144,6 +147,26 @@ export function OnslaughtBoardLive({
         seasons={data.seasons}
         currentSeasonId={season?.eventId ?? null}
       />
+
+      {/* Guarded like the curve below: the profile renders nothing when no row
+          falls in a rank (a season whose thresholds the reconcile has not
+          stamped yet), and an unconditional separator would then draw twice
+          over empty space. */}
+      {season?.elitePosition != null || season?.masterPosition != null ? (
+        <>
+          <PanelSeparator />
+          <OnslaughtTierProfile
+            results={data.results as OnslaughtRow[]}
+            elitePosition={season?.elitePosition ?? null}
+            masterPosition={season?.masterPosition ?? null}
+            seasonOrdinal={season?.seasonOrdinal ?? null}
+            assetsRef={season?.assetsRef ?? null}
+            seasonStart={season?.startDate ?? null}
+            seasonEnd={season?.endDate ?? null}
+            ended={season?.ended ?? false}
+          />
+        </>
+      ) : null}
 
       {curve && curve.points.length > 0 ? (
         <>

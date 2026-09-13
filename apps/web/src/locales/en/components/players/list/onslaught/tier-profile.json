@@ -1,0 +1,10 @@
+{
+  "title": "What ranking takes",
+  "players": "{count} players",
+  "median-rating": "Median {metric}",
+  "battles-to-qualify": "Battles to qualify",
+  "battles-played": "Battles this season",
+  "daily-pace": "Daily pace",
+  "days-played": "played on {days} of {total} days",
+  "note": "Medians across the players holding each rank. Battles to qualify is what each of them had played in the mode the first time they appeared on the leaderboard, which we can only count for the seasons we recorded live. Daily pace spreads their season over every day it has run, so it is what you have to average to keep up, and it is not the board’s Battles/Day column, which divides by the days a player actually played. Most of them do not play every day: the line under the pace says how many of those days they were seen playing, and the fewer they use, the bigger each has to be."
+}

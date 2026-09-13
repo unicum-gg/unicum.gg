@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Player",
+    "best-rank": "Best rank",
+    "last-rank": "Last rank",
+    "rating": "Rating Points",
+    "battles": "Battles",
+    "left": "Left the board"
+  },
+  "no-match": "No player matches the current filters."
+}
