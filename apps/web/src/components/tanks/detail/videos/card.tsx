@@ -44,9 +44,6 @@ export type TankVideoCardData = {
   directionLabel: string | null;
   result: BattleResult | null;
   combinedDamage: number | null;
-  /** When the video went up on YouTube. Null when the page did not answer at
-   * submission time. */
-  gameVersion: string | null;
   /** The map's own page, where a tactic is looked up. */
   mapSlug?: string | null;
   /** What was being played. Everything but `random` makes this a tactic: the
@@ -229,12 +226,6 @@ export function TankVideoCard({
           {/* The channel first: a suggestion exists because someone made the
               video, and the tab is meant to be worth being listed in. */}
           <span className="font-medium">{group.channelName}</span>
-          {group.gameVersion && (
-            <>
-              <span className="text-fd-border">·</span>
-              <span>{group.gameVersion}</span>
-            </>
-          )}
           <span className="text-fd-border">·</span>
           <a
             href={youtubeWatchUrl(group.videoId, 0)}

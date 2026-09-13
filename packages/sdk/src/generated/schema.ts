@@ -5205,8 +5205,6 @@ export interface components {
             clan: components["schemas"]["videoClanCredit"];
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
-            /** @description Client version at the time the video was approved. */
-            gameVersion: string | null;
         };
         TankVideosResponse: {
             videos: components["schemas"]["tankVideo"][];
@@ -5655,8 +5653,6 @@ export interface components {
             clan: components["schemas"]["videoClanCredit"];
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
-            /** @description Client version at the time the video was approved. */
-            gameVersion: string | null;
         };
         videoBattleWithTank: {
             id: number;
@@ -5682,8 +5678,6 @@ export interface components {
             clan: components["schemas"]["videoClanCredit"];
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
-            /** @description Client version at the time the video was approved. */
-            gameVersion: string | null;
             tankId: number | null;
             tankName: string | null;
             tankSlug: string | null;

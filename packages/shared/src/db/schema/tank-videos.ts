@@ -198,10 +198,6 @@ export const tankVideos = pgTable(
      * seconds. Null when the submitter left it out: a good battle is worth
      * linking whether or not anyone remembers the number. */
     combinedDamage: integer("combined_damage"),
-    /** Game version at approval time, stamped from the client scripts mirror.
-     * Balance moves between patches, so a reader can see a video is two patches
-     * old without us asking the submitter for something they would guess. */
-    gameVersion: text("game_version"),
 
     /** `TankVideoStatus` value. */
     status: text("status").notNull().default(TankVideoStatus.Pending),

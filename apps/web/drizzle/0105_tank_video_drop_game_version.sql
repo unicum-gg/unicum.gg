@@ -1,0 +1,15 @@
+-- The version worn by a suggested video said when it was sent, never what was
+-- being played: it was read off Wargaming's encyclopedia at submission time, so
+-- a VOD published in January and suggested in August wore 2.3.1 while the
+-- battle in it was fought on 2.1.0, three updates earlier.
+--
+-- Deducing it from the video's own publication date is what the column would
+-- have needed, and nothing outside a Google API key or a scrape of the watch
+-- page hands that date over: oEmbed carries neither the date nor the channel
+-- id, the channel's Atom feed is addressed by channel id alone and holds only
+-- the last fifteen videos, and the thumbnail serves no Last-Modified. So the
+-- stamp is dropped rather than left saying something false.
+--
+-- Apply AFTER the deploy that stops reading it: the running build selects every
+-- declared column, so dropping it first is an error on every video read.
+ALTER TABLE "tank_videos" DROP COLUMN IF EXISTS "game_version";

@@ -140,7 +140,6 @@ export async function decorateVideos(
       tier: FORMAT_TIER[format] ?? row.tier,
       clan: clans.get(clanKey(row.clanRegion, row.clanId)) ?? null,
       combinedDamage: row.combinedDamage,
-      gameVersion: row.gameVersion,
     });
   }
   return out;
@@ -179,7 +178,6 @@ export type TankVideo = {
   result: BattleResult | null;
   /** Damage dealt plus assisted, as declared. */
   combinedDamage: number | null;
-  gameVersion: string | null;
 };
 
 /** How many published videos a tank has, for the "Videos (N)" tab label. Reads

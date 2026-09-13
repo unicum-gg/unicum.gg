@@ -3,7 +3,6 @@ import type { MapGameMode } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { discordBotEnabled } from "@unicum.gg/core/discord";
 import { resolveBattleMap } from "@unicum.gg/core/wargaming/wot/maps";
-import { wg } from "@unicum.gg/core/wargaming/client";
 
 /**
  * What a suggested video is checked against, whether it is being sent for the
@@ -32,23 +31,6 @@ export async function fetchOembed(videoId: string): Promise<Oembed | null> {
   if (!res?.ok) return null;
   const data = (await res.json().catch(() => null)) as Oembed | null;
   return data?.title ? data : null;
-}
-
-/**
- * The client version in play, stamped rather than asked for.
- *
- * Balance moves between patches, so a reader wants to know a video is two
- * patches old, but a submitter would be guessing. Null when WG does not answer:
- * an unknown version is better than a wrong one.
- */
-export async function currentGameVersion(
-  region: Region,
-): Promise<string | null> {
-  return wg
-    .region(region)
-    .api.wot.encyclopedia.info({ fields: ["game_version"] })
-    .then((info) => info.game_version ?? null)
-    .catch(() => null);
 }
 
 /** Whether the declared map and mode exist and go together. A map that does not

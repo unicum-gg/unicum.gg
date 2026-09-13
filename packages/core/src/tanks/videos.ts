@@ -16,7 +16,6 @@ import {
   VIDEO_REVIEW_PREFIX,
 } from "@unicum.gg/core/tanks/video-moderation-card";
 import {
-  currentGameVersion,
   fetchOembed,
   mapIsConsistent,
   videoSubmissionsEnabled,
@@ -119,21 +118,15 @@ export type SubmitVideoResult = {
 };
 
 /**
- * The card and the version stamp, neither of which the submitter waits for.
+ * The moderation card, which the submitter does not wait for.
  *
- * Both were awaited before the response and neither belongs there. The stamp is
- * a WG read whose host regularly answers nothing: the transport retries six
- * times at a 30s deadline with a rising backoff, so one call can hold its
- * caller for minutes, and it was holding a person watching a "Sending..."
- * button for a nullable column nobody reads until the video is approved. The
- * card was already best-effort, so it never decided the outcome either.
+ * It was awaited before the response and never belonged there: the post is
+ * best-effort, so it never decided the outcome, and Discord answering slowly
+ * held a person watching a "Sending..." button for it.
  *
  * Run through the caller's own after-the-response hook rather than fired off
  * here: a promise nobody holds is one the runtime may drop the moment it
  * answers.
- *
- * One write for both, since they are two nullable columns on the row this just
- * created, and skipped entirely when neither answered.
  */
 async function finishSubmission(
   id: number,
@@ -141,20 +134,19 @@ async function finishSubmission(
   oembed: Oembed,
   submission: VideoSubmission,
 ): Promise<void> {
-  const [gameVersion, messageId] = await Promise.all([
-    currentGameVersion(submission.region),
-    postModerationCard(id, ref, oembed, submission).catch((err) => {
+  const messageId = await postModerationCard(id, ref, oembed, submission).catch(
+    (err) => {
       console.error("[tank-videos] moderation card failed:", err);
       return null;
-    }),
-  ]);
-  if (gameVersion === null && messageId === null) return;
+    },
+  );
+  if (messageId === null) return;
   await db
     .update(tankVideos)
     // The message id is kept so a correction rewrites this card rather than
     // posting a second one, and it can only be written after the insert: the
     // card carries the row's id.
-    .set({ gameVersion, discordMessageId: messageId })
+    .set({ discordMessageId: messageId })
     .where(eq(tankVideos.id, id));
 }
 
