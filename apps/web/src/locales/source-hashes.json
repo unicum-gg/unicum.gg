@@ -1301,6 +1301,7 @@
   "components/players/detail/tournaments/table:format": "041a5dec481d",
   "components/players/detail/tournaments/table:team": "218887269ad5",
   "components/players/detail/tournaments/table:result": "5faa59d4bc37",
+  "components/players/detail/tournaments/table:featured-tournament": "78c614448eef",
   "components/players/detail/tournaments/table:team-captain": "4c54b226eb54",
   "components/players/detail/tournaments/table:registered-and-captained-this-team": "fcaa7de6b4d1",
   "components/players/detail/tournaments/teammates:teammates": "1af79a109f58",

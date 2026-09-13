@@ -6,11 +6,11 @@
     },
     "mark2": {
       "label": "2 Marks",
-      "tip": "2 Marks: Dein gleitender Durchschnitt des kombinierten Schadens aus den letzten ~100 Gefechten muss in den letzten 14 Tagen den Wert von 85 % der Spieler auf diesem Panzer übertreffen"
+      "tip": "2 Marks: Dein rollierender Durchschnitt des kombinierten Schadens (letzte ca. 100 Gefechte) muss den Wert von 85 % der Spieler auf diesem Panzer in den letzten 14 Tagen übertreffen"
     },
     "mark3": {
       "label": "3 Marks",
-      "tip": "3 Marks: Dein gleitender Durchschnitt des kombinierten Schadens aus den letzten ~100 Gefechten muss in den letzten 14 Tagen den Wert von 95 % der Spieler auf diesem Panzer übertreffen"
+      "tip": "3 Marks: Dein rollierender Durchschnitt des kombinierten Schadens (letzte ca. 100 Gefechte) muss den Wert von 95 % der Spieler auf diesem Panzer in den letzten 14 Tagen übertreffen"
     }
   },
   "rows-per-page": "Reihen pro Seite",
