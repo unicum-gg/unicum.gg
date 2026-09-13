@@ -41,9 +41,27 @@ export function useLeaderboardFilter<T>(
     // by default; leave off where several boards mount at once and would fight
     // over the shared params (the Overall wn7/wn8/wnx boards).
     syncUrl?: boolean;
+    /**
+     * Prefix for those four parameter names, for a second filtered table on the
+     * same page whose columns are not the first one's.
+     *
+     * The Onslaught board has two: the standings and the places that were lost.
+     * They are never on screen together, but the standings' hook stays mounted
+     * behind the other view, so on the shared names one table's search would
+     * write over the other's and a range typed on "best rank" would be read
+     * back on "rating points". A prefix gives the second table its own four.
+     */
+    paramPrefix?: string;
   },
 ): { filtered: T[]; filters: LeaderboardFilters<T> } {
-  const { searchFields, rangeCols, initialRangeCol, syncUrl = false } = opts;
+  const {
+    searchFields,
+    rangeCols,
+    initialRangeCol,
+    syncUrl = false,
+    paramPrefix = "",
+  } = opts;
+  const param = (name: string) => `${paramPrefix}${name}`;
   const [query, setQuery] = useState("");
   const [rangeCol, setRangeCol] = useState(initialRangeCol);
   const [minVal, setMinVal] = useState("");
@@ -55,13 +73,13 @@ export function useLeaderboardFilter<T>(
   useEffect(() => {
     if (!syncUrl) return;
     const p = new URLSearchParams(window.location.search);
-    const q = p.get("q");
+    const q = p.get(param("q"));
     if (q) setQuery(q);
-    const rc = p.get("rc");
+    const rc = p.get(param("rc"));
     if (rc && rangeCols.some((c) => c.key === rc)) setRangeCol(rc);
-    const mn = p.get("min");
+    const mn = p.get(param("min"));
     if (mn) setMinVal(mn);
-    const mx = p.get("max");
+    const mx = p.get(param("max"));
     if (mx) setMaxVal(mx);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -81,17 +99,18 @@ export function useLeaderboardFilter<T>(
       if (v) p.set(k, v);
       else p.delete(k);
     };
-    setOrDel("q", query.trim());
+    setOrDel(param("q"), query.trim());
     const hasRange = minVal.trim() !== "" || maxVal.trim() !== "";
-    setOrDel("rc", hasRange ? rangeCol : "");
-    setOrDel("min", minVal.trim());
-    setOrDel("max", maxVal.trim());
+    setOrDel(param("rc"), hasRange ? rangeCol : "");
+    setOrDel(param("min"), minVal.trim());
+    setOrDel(param("max"), maxVal.trim());
     const qs = p.toString();
     window.history.replaceState(
       null,
       "",
       qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [syncUrl, query, rangeCol, minVal, maxVal]);
 
   const activeRangeCol = rangeCols.find((c) => c.key === rangeCol);
