@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Er is nog geen tactiek aan deze kaart gekoppeld. Stel er een voor, dan verschijnt die hier zodra een moderator ernaar heeft gekeken.",
+  "random-battle-videos-many": "{count} video’s van willekeurige gevechten",
+  "random-battle-videos-one": "{count} video van een willekeurig gevecht",
   "random-battles": "Willekeurige gevechten",
+  "tactic-videos-many": "{count} tactiekvideo’s",
+  "tactic-videos-one": "{count} tactiekvideo",
   "tactics": "Tactieken op {map}"
 }

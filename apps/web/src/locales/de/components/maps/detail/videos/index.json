@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Auf dieser Karte ist noch keine Taktik verlinkt. Schlage eine vor. Sie erscheint hier, sobald ein Moderator sie geprüft hat.",
+  "random-battle-videos-many": "{count} Videos zu Zufallsgefechten",
+  "random-battle-videos-one": "{count} Video zu Zufallsgefechten",
   "random-battles": "Zufallsgefechte",
+  "tactic-videos-many": "{count} Taktik-Videos",
+  "tactic-videos-one": "{count} Taktik-Video",
   "tactics": "Taktiken auf {map}"
 }

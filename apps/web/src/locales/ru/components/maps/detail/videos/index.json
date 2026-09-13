@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "На этой карте пока нет привязанной тактики. Предложите тактику, и она появится здесь после проверки модератором.",
+  "random-battle-videos-many": "{count} видео случайных боёв",
+  "random-battle-videos-one": "{count} видео случайного боя",
   "random-battles": "Случайные бои",
+  "tactic-videos-many": "{count} видео по тактике",
+  "tactic-videos-one": "{count} видео по тактике",
   "tactics": "Тактика на карте {map}"
 }

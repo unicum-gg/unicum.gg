@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Šai kartei vēl nav piesaistīta taktika. Ieteikt vienu, un tā šeit parādīsies, kad moderators to būs pārskatījis.",
+  "random-battle-videos-many": "{count} nejaušu kauju video",
+  "random-battle-videos-one": "{count} nejaušas kaujas video",
   "random-battles": "Nejaušas kaujas",
+  "tactic-videos-many": "{count} taktiku video",
+  "tactic-videos-one": "{count} taktikas video",
   "tactics": "Taktika kartē {map}"
 }

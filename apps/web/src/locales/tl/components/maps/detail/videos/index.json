@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Wala pang naka-link na taktika sa mapang ito. Magmungkahi ng isa at lilitaw ito rito kapag nasuri na ng moderator.",
+  "random-battle-videos-many": "{count} random na mga video ng labanan",
+  "random-battle-videos-one": "{count} random na video ng labanan",
   "random-battles": "Mga random na labanan",
+  "tactic-videos-many": "{count} mga video ng taktika",
+  "tactic-videos-one": "{count} video ng taktika",
   "tactics": "Taktika sa {map}"
 }

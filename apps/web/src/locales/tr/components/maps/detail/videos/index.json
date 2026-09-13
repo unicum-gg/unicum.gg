@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Bu haritaya henüz taktik bağlanmadı. Bir tane öner, moderatör inceledikten sonra burada görünsün.",
+  "random-battle-videos-many": "{count} rastgele savaş videosu",
+  "random-battle-videos-one": "{count} rastgele savaş videosu",
   "random-battles": "Rastgele savaşlar",
+  "tactic-videos-many": "{count} taktik videosu",
+  "tactic-videos-one": "{count} taktik videosu",
   "tactics": "Taktikler {map} haritasında"
 }

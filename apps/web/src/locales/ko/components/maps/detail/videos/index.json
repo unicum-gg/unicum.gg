@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "아직 이 지도에 연결된 전술이 없습니다. 하나를 제안하면 운영자가 검토한 후 여기에 표시됩니다.",
+  "random-battle-videos-many": "무작위 전투 영상 {count}개",
+  "random-battle-videos-one": "무작위 전투 영상 {count}개",
   "random-battles": "무작위 전투",
+  "tactic-videos-many": "전술 영상 {count}개",
+  "tactic-videos-one": "전술 영상 {count}개",
   "tactics": "{map} 전술"
 }

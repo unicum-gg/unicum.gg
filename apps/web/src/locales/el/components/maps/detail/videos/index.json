@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Δεν έχει συνδεθεί ακόμη τακτική σε αυτόν τον χάρτη. Προτείνετε μία και θα εμφανιστεί εδώ μόλις την εξετάσει ένας συντονιστής.",
+  "random-battle-videos-many": "{count} βίντεο τυχαίων μαχών",
+  "random-battle-videos-one": "{count} βίντεο τυχαίας μάχης",
   "random-battles": "Τυχαίες Μάχες",
+  "tactic-videos-many": "{count} βίντεο τακτικής",
+  "tactic-videos-one": "{count} βίντεο τακτικής",
   "tactics": "Τακτικές στον {map}"
 }

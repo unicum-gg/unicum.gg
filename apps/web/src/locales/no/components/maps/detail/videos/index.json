@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Ingen taktikk er koblet til dette kartet ennå. Foreslå en, så vises den her når en moderator har sett på den.",
+  "random-battle-videos-many": "{count} videoer fra tilfeldige kamper",
+  "random-battle-videos-one": "{count} video fra tilfeldig kamp",
   "random-battles": "Tilfeldige kamper",
+  "tactic-videos-many": "{count} taktikkvideoer",
+  "tactic-videos-one": "{count} taktikkvideo",
   "tactics": "Taktikk på {map}"
 }

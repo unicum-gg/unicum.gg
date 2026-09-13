@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Ingen taktik är länkad till den här kartan ännu. Föreslå en, så visas den här när en moderator har granskat den.",
+  "random-battle-videos-many": "{count} slumpmässiga stridsvideor",
+  "random-battle-videos-one": "{count} slumpmässig stridsvideo",
   "random-battles": "Slumpvisa strider",
+  "tactic-videos-many": "{count} taktikvideor",
+  "tactic-videos-one": "{count} taktikvideo",
   "tactics": "Taktik på {map}"
 }

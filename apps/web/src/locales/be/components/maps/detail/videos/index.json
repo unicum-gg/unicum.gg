@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "На гэтай карце пакуль няма звязанай тактыкі. Прапануйце тактыку, і яна з’явіцца тут пасля праверкі мадэратарам.",
+  "random-battle-videos-many": "{count} відэа «Выпадковы бой»",
+  "random-battle-videos-one": "{count} відэа «Выпадковы бой»",
   "random-battles": "Выпадковыя боі",
+  "tactic-videos-many": "{count} відэа «тактыка»",
+  "tactic-videos-one": "{count} відэа «тактыка»",
   "tactics": "Тактыка на {map}"
 }

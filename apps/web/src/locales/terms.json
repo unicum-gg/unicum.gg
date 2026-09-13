@@ -814,7 +814,8 @@
     "cutoff": "seuil",
     "playing": "en jeu",
     "rank": "rang",
-    "takes": "prend"
+    "takes": "prend",
+    "Random Battle": "Bataille aléatoire"
   },
   "es": {
     "Battles": "Batallas",
@@ -1628,7 +1629,8 @@
     "cutoff": "corte",
     "playing": "jugando",
     "rank": "puesto",
-    "takes": "ocupa"
+    "takes": "ocupa",
+    "Random Battle": "Batalla aleatoria"
   },
   "ru": {
     "Battles": "Бои",
@@ -2436,7 +2438,8 @@
     "cutoff": "порог",
     "playing": "играет",
     "rank": "место",
-    "takes": "занимает"
+    "takes": "занимает",
+    "Random Battle": "Случайный бой"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3263,7 +3266,8 @@
     "cutoff": "próg",
     "playing": "grający",
     "rank": "miejsce",
-    "takes": "zajmuje"
+    "takes": "zajmuje",
+    "Random Battle": "Bitwa losowa"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4100,7 +4104,8 @@
     "cutoff": "ボーダー",
     "playing": "プレイ中",
     "rank": "順位",
-    "takes": "取得数"
+    "takes": "取得数",
+    "Random Battle": "ランダム戦"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -5560,7 +5565,8 @@
     "cutoff": "prag",
     "playing": "igranje",
     "rank": "rang",
-    "takes": "zauzima"
+    "takes": "zauzima",
+    "Random Battle": "Slučajna bitka"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6395,7 +6401,8 @@
     "cutoff": "küszöbérték",
     "playing": "játékban",
     "rank": "helyezés",
-    "takes": "elér"
+    "takes": "elér",
+    "Random Battle": "Normál csata"
   },
   "ko": {
     "Battles": "전투",
@@ -7237,7 +7244,8 @@
     "cutoff": "컷오프",
     "playing": "플레이 중",
     "rank": "순위",
-    "takes": "차지"
+    "takes": "차지",
+    "Random Battle": "무작위 전투"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8076,7 +8084,8 @@
     "cutoff": "grens",
     "playing": "spelen",
     "rank": "rang",
-    "takes": "neemt"
+    "takes": "neemt",
+    "Random Battle": "Willekeurig gevecht"
   },
   "cs": {
     "Battles": "Bitev",
@@ -8906,7 +8915,8 @@
     "cutoff": "hranice",
     "playing": "hraní",
     "rank": "pořadí",
-    "takes": "zabere"
+    "takes": "zabere",
+    "Random Battle": "Náhodná bitva"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9738,7 +9748,8 @@
     "cutoff": "eşik",
     "playing": "oynuyor",
     "rank": "sıra",
-    "takes": "alır"
+    "takes": "alır",
+    "Random Battle": "Rastgele Savaş"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -12463,7 +12474,8 @@
     "cutoff": "เกณฑ์ตัด",
     "playing": "กำลังเล่น",
     "rank": "อันดับ",
-    "takes": "จำนวนครั้ง"
+    "takes": "จำนวนครั้ง",
+    "Random Battle": "การรบแบบสุ่ม"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13298,7 +13310,8 @@
     "cutoff": "门槛",
     "playing": "对战中",
     "rank": "排名",
-    "takes": "场次"
+    "takes": "场次",
+    "Random Battle": "标准模式"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14118,7 +14131,8 @@
     "cutoff": "limite",
     "playing": "a jogar",
     "rank": "posição",
-    "takes": "leva"
+    "takes": "leva",
+    "Random Battle": "Batalha Aleatória"
   },
   "vi": {
     "Battles": "Số trận",
@@ -14933,7 +14947,8 @@
     "cutoff": "ngưỡng",
     "playing": "đang chơi",
     "rank": "hạng",
-    "takes": "lượt"
+    "takes": "lượt",
+    "Random Battle": "Trận đấu Ngẫu nhiên"
   },
   "de": {
     "Battles": "Gefechte",
@@ -15761,7 +15776,8 @@
     "cutoff": "Schwellenwert",
     "playing": "spielend",
     "rank": "Rang",
-    "takes": "benötigt"
+    "takes": "benötigt",
+    "Random Battle": "Zufallsgefecht"
   },
   "uk": {
     "Battles": "Бої",
@@ -16586,7 +16602,8 @@
     "cutoff": "поріг",
     "playing": "грає",
     "rank": "місце",
-    "takes": "займає"
+    "takes": "займає",
+    "Random Battle": "Випадковий бій"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17416,7 +17433,8 @@
     "cutoff": "soglia",
     "playing": "in gioco",
     "rank": "posizione",
-    "takes": "richiede"
+    "takes": "richiede",
+    "Random Battle": "Battaglia Casuale"
   },
   "sv": {
     "Battles": "Strider",
@@ -18255,7 +18273,8 @@
     "cutoff": "gräns",
     "playing": "spelar",
     "rank": "placering",
-    "takes": "försök"
+    "takes": "försök",
+    "Random Battle": "Slumpvis matchad strid"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19090,7 +19109,8 @@
     "cutoff": "праг",
     "playing": "играње",
     "rank": "ранг",
-    "takes": "заузима"
+    "takes": "заузима",
+    "Random Battle": "Slučajne borba"
   },
   "el": {
     "Battles": "Μάχες",
@@ -19924,7 +19944,8 @@
     "cutoff": "όριο",
     "playing": "σε μάχη",
     "rank": "θέση",
-    "takes": "καταλαμβάνει"
+    "takes": "καταλαμβάνει",
+    "Random Battle": "Τυχαία Μάχη"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -20747,7 +20768,8 @@
     "cutoff": "slieksnis",
     "playing": "spēlēšana",
     "rank": "vieta",
-    "takes": "aizņem"
+    "takes": "aizņem",
+    "Random Battle": "Gadījuma kauja"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -22192,7 +22214,8 @@
     "cutoff": "праг",
     "playing": "играещи",
     "rank": "място",
-    "takes": "заема"
+    "takes": "заема",
+    "Random Battle": "Случайна битка"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23031,7 +23054,8 @@
     "cutoff": "riba",
     "playing": "žaidžiama",
     "rank": "vieta",
-    "takes": "užima"
+    "takes": "užima",
+    "Random Battle": "Atsitiktinis mūšis"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -24500,7 +24524,8 @@
     "cutoff": "raja",
     "playing": "pelaaminen",
     "rank": "sijoitus",
-    "takes": "vaatii"
+    "takes": "vaatii",
+    "Random Battle": "Satunnaistaistelu"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -25962,7 +25987,8 @@
     "cutoff": "grense",
     "playing": "spiller",
     "rank": "plassering",
-    "takes": "tar"
+    "takes": "tar",
+    "Random Battle": "Tilfeldig kamp"
   },
   "ro": {
     "Battles": "Lupte",
@@ -26782,7 +26808,8 @@
     "cutoff": "prag",
     "playing": "joc",
     "rank": "poziție",
-    "takes": "partide"
+    "takes": "partide",
+    "Random Battle": "Luptă standard"
   },
   "da": {
     "Battles": "Kampe",
@@ -27617,6 +27644,7 @@
     "cutoff": "grænse",
     "playing": "spiller",
     "rank": "placering",
-    "takes": "kræver"
+    "takes": "kræver",
+    "Random Battle": "Standard kamp"
   }
 }

@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Šiame žemėlapyje dar nėra susietos taktikos. Pasiūlykite ją, ir ji čia pasirodys, kai moderatorius ją peržiūrės.",
+  "random-battle-videos-many": "{count} atsitiktinių mūšių vaizdo įrašai",
+  "random-battle-videos-one": "{count} atsitiktinio mūšio vaizdo įrašas",
   "random-battles": "Atsitiktiniai mūšiai",
+  "tactic-videos-many": "{count} taktikos vaizdo įrašai",
+  "tactic-videos-one": "{count} taktikos vaizdo įrašas",
   "tactics": "Taktika žemėlapyje {map}"
 }

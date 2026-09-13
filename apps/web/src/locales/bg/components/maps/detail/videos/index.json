@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Все още няма свързана тактика за тази карта. Предложи тактика и тя ще се появи тук, след като модератор я прегледа.",
+  "random-battle-videos-many": "{count} видеа от случайни битки",
+  "random-battle-videos-one": "{count} видео от случайна битка",
   "random-battles": "Случайни битки",
+  "tactic-videos-many": "{count} видеа за тактика",
+  "tactic-videos-one": "{count} видео за тактика",
   "tactics": "Тактики на {map}"
 }

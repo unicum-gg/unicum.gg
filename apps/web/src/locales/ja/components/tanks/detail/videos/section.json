@@ -1,3 +1,4 @@
 {
+  "count-filtered": "{label}のうち{shown}件",
   "no-battle-matches": "このフィルターに一致する戦闘はありません。"
 }

@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "このマップにはまだ戦術がリンクされていません。提案すると、モデレーターの確認後にここへ表示されます。",
+  "random-battle-videos-many": "{count}本のランダム戦闘動画",
+  "random-battle-videos-one": "{count}本のランダム戦闘動画",
   "random-battles": "ランダム戦闘数",
+  "tactic-videos-many": "{count}本の戦術動画",
+  "tactic-videos-one": "{count}本の戦術動画",
   "tactics": "{map}での戦術"
 }

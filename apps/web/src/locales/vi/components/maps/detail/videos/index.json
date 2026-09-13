@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Chưa có chiến thuật nào được liên kết trên bản đồ này. Hãy đề xuất một chiến thuật, chiến thuật đó sẽ xuất hiện tại đây sau khi người kiểm duyệt xem xét.",
+  "random-battle-videos-many": "{count} video trận đấu ngẫu nhiên",
+  "random-battle-videos-one": "{count} video trận đấu ngẫu nhiên",
   "random-battles": "Các trận ngẫu nhiên",
+  "tactic-videos-many": "{count} video chiến thuật",
+  "tactic-videos-one": "{count} video chiến thuật",
   "tactics": "Chiến thuật trên {map}"
 }

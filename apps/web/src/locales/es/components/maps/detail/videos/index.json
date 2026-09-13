@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Todavía no hay ninguna táctica vinculada a este mapa. Sugiere una y aparecerá aquí cuando un moderador la haya revisado.",
+  "random-battle-videos-many": "{count} vídeos de batalla aleatoria",
+  "random-battle-videos-one": "{count} vídeo de batalla aleatoria",
   "random-battles": "Batallas aleatorias",
+  "tactic-videos-many": "{count} vídeos de táctica",
+  "tactic-videos-one": "{count} vídeo de táctica",
   "tactics": "Tácticas en {map}"
 }

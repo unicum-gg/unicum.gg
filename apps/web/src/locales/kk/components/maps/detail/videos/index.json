@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Бұл картаға әлі тактика байланыстырылмаған. Біреуін ұсыныңыз, модератор қарап шыққаннан кейін ол осында пайда болады.",
+  "random-battle-videos-many": "{count} кездейсоқ шайқас бейнелері",
+  "random-battle-videos-one": "{count} кездейсоқ шайқас бейне",
   "random-battles": "Случайлы соғыстар",
+  "tactic-videos-many": "{count} тактика бейнелері",
+  "tactic-videos-one": "{count} тактика бейне",
   "tactics": "Тактика {map} картасында"
 }

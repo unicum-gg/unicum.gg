@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Încă nu există nicio tactică asociată acestei hărți. Sugerează una și va apărea aici după ce un moderator o verifică.",
+  "random-battle-videos-many": "{count} videoclipuri cu bătălii aleatorii",
+  "random-battle-videos-one": "{count} videoclip cu o bătălie aleatorie",
   "random-battles": "Lupte standard",
+  "tactic-videos-many": "{count} videoclipuri cu tactici",
+  "tactic-videos-one": "{count} videoclip cu o tactică",
   "tactics": "Tactici pe {map}"
 }

@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Ehhez a térképhez még nincs taktika csatolva. Javasolj egyet, és itt fog megjelenni, miután egy moderátor átnézte.",
+  "random-battle-videos-many": "{count} véletlenszerű csatáról készült videó",
+  "random-battle-videos-one": "{count} véletlenszerű csatáról készült videó",
   "random-battles": "Véletlenszerű csaták",
+  "tactic-videos-many": "{count} taktikai videó",
+  "tactic-videos-one": "{count} taktikai videó",
   "tactics": "Taktikák a(z) {map} térképen"
 }

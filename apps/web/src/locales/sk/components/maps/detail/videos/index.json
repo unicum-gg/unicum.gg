@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "K tejto mape zatiaľ nie je priradená žiadna taktika. Navrhnite nejakú a keď ju skontroluje moderátor, zobrazí sa tu.",
+  "random-battle-videos-many": "{count} videá z náhodných bitiek",
+  "random-battle-videos-one": "{count} video z náhodnej bitky",
   "random-battles": "Náhodné bitky",
+  "tactic-videos-many": "{count} videá o taktike",
+  "tactic-videos-one": "{count} video o taktike",
   "tactics": "Taktiky na mape {map}"
 }

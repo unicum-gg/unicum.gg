@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Tälle kartalle ei ole vielä linkitetty taktiikkaa. Ehdota sellaista, niin se näkyy täällä, kun moderaattori on tarkistanut sen.",
+  "random-battle-videos-many": "{count} satunnaistaisteluvideot",
+  "random-battle-videos-one": "{count} satunnaistaisteluvideo",
   "random-battles": "Satunnaiset taistelut",
+  "tactic-videos-many": "{count} taktiikkavideot",
+  "tactic-videos-one": "{count} taktiikkavideo",
   "tactics": "Taktiikka {map}-kartalla"
 }

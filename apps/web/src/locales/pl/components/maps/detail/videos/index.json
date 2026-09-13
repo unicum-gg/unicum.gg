@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Do tej mapy nie przypisano jeszcze żadnej taktyki. Zaproponuj ją, a pojawi się tutaj po sprawdzeniu przez moderatora.",
+  "random-battle-videos-many": "{count} filmów z bitew losowych",
+  "random-battle-videos-one": "{count} film z bitwy losowej",
   "random-battles": "Losowe bitwy",
+  "tactic-videos-many": "{count} filmów taktycznych",
+  "tactic-videos-one": "{count} film taktyczny",
   "tactics": "Taktyka na mapie {map}"
 }

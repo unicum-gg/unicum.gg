@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "Na ovoj mapi još nema povezane taktike. Predloži je i pojavit će se ovdje nakon što je moderator pregleda.",
+  "random-battle-videos-many": "{count} videozapisa nasumične bitke",
+  "random-battle-videos-one": "{count} videozapis nasumične bitke",
   "random-battles": "Slučajne bitke",
+  "tactic-videos-many": "{count} videozapisa o taktici",
+  "tactic-videos-one": "{count} videozapis o taktici",
   "tactics": "Taktika na karti {map}"
 }
