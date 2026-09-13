@@ -1,5 +1,9 @@
 {
   "no-tactic-yet": "No tactic linked on this map yet. Suggest one and it shows up here once a moderator has looked at it.",
+  "random-battle-videos-many": "{count} random battle videos",
+  "random-battle-videos-one": "{count} random battle video",
   "random-battles": "Random battles",
+  "tactic-videos-many": "{count} tactic videos",
+  "tactic-videos-one": "{count} tactic video",
   "tactics": "Tactics on {map}"
 }

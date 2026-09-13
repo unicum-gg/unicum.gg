@@ -28,6 +28,7 @@ import { VideosView, VideosViewToggle } from "./view-toggle";
 export function VideoSection({
   region,
   title,
+  countLabel,
   battles,
   view,
   onViewChange,
@@ -37,7 +38,22 @@ export function VideoSection({
   showMap = false,
 }: {
   region: Region;
-  title: string;
+  /** Rendered inside the panel's title. A node rather than a string, since a
+   * clan's own section titles itself with its colored `[TAG]`. */
+  title: React.ReactNode;
+  /**
+   * How this section names what it holds, given the count: "3 tactic videos".
+   *
+   * Written by the caller rather than assembled here, because the number sits
+   * inside the sentence and not every language puts it where English does. It
+   * is also what tells two lists of the same rows apart: a map draws its
+   * tactics above its random battles, and "3" over each said nothing about
+   * which was which.
+   *
+   * Left out by a section whose title already names them, where the noun would
+   * only be read twice.
+   */
+  countLabel?: (count: number) => string;
   battles: TankVideoCardData[];
   view: VideosView;
   /** Given on the section that carries the toggle. Both lists follow the same
@@ -64,6 +80,11 @@ export function VideoSection({
   const player = useTankVideoPlayer();
   const state = useBattleFilters(battles);
   const groups = groupBattlesByVideo(state.filtered);
+  // Videos, not rows, since that is what the label says: one recording holding
+  // three battles on this map is one video, and it is drawn as one card. The
+  // table below still lists battles, which is what a table is for.
+  const totalVideos = new Set(battles.map((b) => b.videoId)).size;
+  const countText = countLabel ? countLabel(totalVideos) : String(totalVideos);
   // A single battle has nothing to filter, so the bar would be an empty row.
   // What follows it owes the panel one gap, not two, hence the `pt-0` below,
   // which only applies when the bar is there to have paid it.
@@ -76,9 +97,9 @@ export function VideoSection({
         <PanelTitle>{title}</PanelTitle>
         {battles.length > 0 && (
           <span className="text-sm text-fd-muted-foreground">
-            {state.filtered.length === battles.length
-              ? battles.length
-              : `${state.filtered.length} of ${battles.length}`}
+            {groups.length === totalVideos
+              ? countText
+              : t("count-filtered", { shown: groups.length, label: countText })}
           </span>
         )}
         <span className="ml-auto flex items-center gap-3">

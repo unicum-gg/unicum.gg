@@ -122,6 +122,11 @@ function MapVideos({
         <VideoSection
           region={region}
           title={t("tactics", { map: map.name })}
+          countLabel={(count) =>
+            t(count === 1 ? "tactic-videos-one" : "tactic-videos-many", {
+              count,
+            })
+          }
           battles={tactics}
           view={view}
           onViewChange={setView}
@@ -139,6 +144,14 @@ function MapVideos({
             <VideoSection
               region={region}
               title={t("random-battles")}
+              countLabel={(count) =>
+                t(
+                  count === 1
+                    ? "random-battle-videos-one"
+                    : "random-battle-videos-many",
+                  { count },
+                )
+              }
               battles={randoms}
               view={view}
               emptyText=""
