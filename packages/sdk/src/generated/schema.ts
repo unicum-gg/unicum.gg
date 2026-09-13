@@ -2707,7 +2707,7 @@ export interface components {
              * @description What the feedback is about.
              * @enum {string}
              */
-            topic: "bug" | "idea" | "data" | "other";
+            topic: "bug" | "idea" | "data" | "translation" | "other";
             /**
              * @description Optional one-tap sentiment.
              * @enum {string}
