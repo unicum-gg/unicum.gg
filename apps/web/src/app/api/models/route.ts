@@ -19,7 +19,7 @@ export async function GET(...args: Parameters<typeof GET__perf>) {
 }
 
 async function GET__perf() {
-  const { sha, vehicles } = await getModelsMirror();
+  const { sha, vehicles, worn } = await getModelsMirror();
   return Response.json(
     {
       // Pinned where the commit is known, and the branch where it is not. The
@@ -31,6 +31,10 @@ async function GET__perf() {
       origin: modelsRoot(),
       sha,
       vehicles,
+      // What each vehicle is issued wearing, which a viewer has to know before
+      // it builds anything: for most of these the style is the only geometry
+      // that is theirs.
+      worn,
     },
     {
       headers: {

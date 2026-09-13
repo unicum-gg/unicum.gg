@@ -34,6 +34,16 @@ export type MirrorBuild = {
   sha: string | null;
   /** Where each vehicle's folder sits, by the code the client gives it. */
   vehicles: Record<string, string>;
+  /**
+   * The style a vehicle is issued already wearing, by code.
+   *
+   * **Not the same question as the index above, and not answerable from it.**
+   * A reward vehicle usually ships no geometry of its own, so the index points
+   * it at the tank it was made from and the style bolted on top is everything
+   * that makes it itself: drawn without this, the Monkey King is a plain 121B.
+   * Empty for every vehicle that simply wears what it was built with.
+   */
+  worn: Record<string, string>;
 };
 
 /** The commit a branch points at, or null if GitHub will not say right now. */
@@ -70,13 +80,26 @@ export function getModelsMirror(branch?: WotSrcBranch): Promise<MirrorBuild> {
     (build: MirrorBuild) =>
       build.sha && Object.keys(build.vehicles).length > 0 ? TTL_SECONDS : 60,
     async () => {
-      const [sha, vehicles] = await Promise.all([
+      // The worn styles are read beside the index rather than by the viewer,
+      // which would otherwise pay a second round trip before it could start
+      // building: it needs both to know what to build, and one of them is 32
+      // lines. A mirror published before this file existed answers 404, which
+      // reads as "nothing wears anything" and leaves every vehicle drawn the
+      // way it was.
+      const [sha, vehicles, worn] = await Promise.all([
         headOf(ref),
         fetch(modelUrl("vehicles.json", ref))
           .then((r) => (r.ok ? r.json() : {}))
           .catch(() => ({})),
+        fetch(modelUrl("worn.json", ref))
+          .then((r) => (r.ok ? r.json() : {}))
+          .catch(() => ({})),
       ]);
-      return { sha, vehicles: vehicles as Record<string, string> };
+      return {
+        sha,
+        vehicles: vehicles as Record<string, string>,
+        worn: worn as Record<string, string>,
+      };
     },
   );
 }

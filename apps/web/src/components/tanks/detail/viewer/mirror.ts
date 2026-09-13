@@ -41,6 +41,19 @@ export type Mirror = {
    * is told apart from a request that failed.
    */
   vehicles: Record<string, string>;
+  /**
+   * The style each vehicle is issued wearing, by code, where it is issued one.
+   *
+   * **A vehicle can be a style bolted onto another tank**, which is how most
+   * reward vehicles are built: they ship no geometry of their own, so the index
+   * above points them at the tank underneath and this is the rest of the
+   * answer. Built without it, the Monkey King is a plain 121B and the Churchill
+   * BPXIV a plain Churchill VII.
+   *
+   * Empty where the mirror predates the file, which draws every vehicle the way
+   * it always was rather than failing.
+   */
+  worn: Record<string, string>;
 };
 
 let resolved: Promise<Mirror> | null = null;
@@ -58,7 +71,7 @@ export function mirror(): Promise<Mirror> {
     resolved = null;
     // The address without the index: a vehicle cannot be found without it, so
     // this is the flat render, but it is the same shape rather than a throw.
-    return { root: LOCAL ?? modelsCdn(), vehicles: {} };
+    return { root: LOCAL ?? modelsCdn(), vehicles: {}, worn: {} };
   });
   return resolved;
 }
@@ -69,10 +82,15 @@ async function read(): Promise<Mirror> {
   if (LOCAL) {
     const r = await fetch(`${LOCAL}/vehicles.json`);
     if (!r.ok) throw new Error("no index");
-    return { root: LOCAL, vehicles: await r.json() };
+    // The worn styles are the tree's own answer here too, and a tree written
+    // before they existed simply dresses nothing.
+    const worn = await fetch(`${LOCAL}/worn.json`)
+      .then((w) => (w.ok ? w.json() : {}))
+      .catch(() => ({}));
+    return { root: LOCAL, vehicles: await r.json(), worn };
   }
   const r = await fetch("/api/models");
   if (!r.ok) throw new Error("no mirror");
-  const { root, vehicles } = (await r.json()) as Mirror;
-  return { root, vehicles };
+  const { root, vehicles, worn } = (await r.json()) as Mirror;
+  return { root, vehicles, worn: worn ?? {} };
 }

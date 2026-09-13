@@ -2,6 +2,8 @@
 
 import type { RefObject } from "react";
 
+import type { PaintLock } from "@unicum.gg/shared";
+
 import { buildStage } from "@/components/tanks/detail/viewer/build";
 import { loadArmour } from "@/services/tank-viewer/armour";
 import type { Cinematic } from "@/components/tanks/detail/viewer/cinematic";
@@ -65,6 +67,8 @@ export async function openStage(
       paint?: number;
       cut?: string;
     };
+    /** Why the game refuses to dress it, where it does. Null where it can be. */
+    paintLock: PaintLock | null;
     applyStance: () => void;
     takeAim: (bearing: number, pitch: number) => void;
     onAbsent?: () => void;
@@ -89,7 +93,7 @@ export async function openStage(
   // The address and the index together: the address is pinned to the commit
   // the index was read at, so a patch landing mid-session cannot pair one
   // vehicle's manifest with another build's meshes.
-  const { root, vehicles } = await mirror();
+  const { root, vehicles, worn } = await mirror();
   const at = vehicles[from.code];
   if (!live()) return;
   // **Read after the first await, not before it.** Moving between vehicles
@@ -135,6 +139,17 @@ export async function openStage(
       sheet.style.opacity = "0";
     });
 
+  // **What the vehicle is standing in, which is not always its own geometry.**
+  // A reward vehicle is usually another tank plus a style the game will not let
+  // its owner take off, and it ships no models of its own, so the index put us
+  // on the tank underneath. Dressed here rather than left to the wardrobe: the
+  // wardrobe is where a reader chooses, and there is no choice to make.
+  //
+  // A style the reader picked still wins, which costs nothing: the vehicles
+  // that are issued wearing one are exactly the vehicles no wardrobe is offered
+  // on, so the two can never both be set.
+  const dressed = from.skin ?? worn[from.code] ?? null;
+
   const made = await buildStage({
     surface,
     THREE,
@@ -144,7 +159,7 @@ export async function openStage(
     at,
     root,
     fitted: from.fitted,
-    skin: from.skin,
+    skin: dressed,
     live,
     nudge: handles.nudge,
   });
@@ -188,8 +203,9 @@ export async function openStage(
       applyStance: from.applyStance,
       takeAim: from.takeAim,
       opening: from.opening,
+      paintLock: from.paintLock,
     },
-    { ...handles, skin: from.skin },
+    { ...handles, skin: dressed },
   );
 
   handles.show.current = (next: View) => {
