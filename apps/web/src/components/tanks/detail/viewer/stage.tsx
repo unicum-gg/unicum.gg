@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+
+import type { PaintLock } from "@unicum.gg/shared";
 import { HERO_COLUMN } from "@/components/tanks/detail/viewer/column";
 import { TankViewer } from "@/components/tanks/detail/viewer";
 import type { HeroShell } from "@/components/tanks/detail/viewer/shell-rules";
@@ -18,6 +20,7 @@ export function TankStage({
   shells,
   builds,
   mechanic,
+  paintLock,
   backdrop,
   children,
 }: {
@@ -31,6 +34,12 @@ export function TankStage({
    * offers a Panhard EBR a siege button for what is its road mode.
    */
   mechanic?: string | null;
+  /**
+   * Why the game refuses to dress this vehicle, where it does. Passed straight
+   * through: what it costs the picture is the viewer's business, not the
+   * stage's.
+   */
+  paintLock?: PaintLock | null;
   /** Passed straight through too: the viewer reads the configurator's URL. */
   builds?: {
     modules: Record<string, number | null>;
@@ -92,6 +101,7 @@ export function TankStage({
         shells={shells}
         builds={builds}
         mechanic={mechanic}
+        paintLock={paintLock}
         onAbsent={missing}
         column={column}
       />

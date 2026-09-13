@@ -57,8 +57,10 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *     in. Reading it is guarded (an entry without it falls back to the English
  *     already on the payload), so this bump is about the 26 hours a French
  *     reader would otherwise keep being served the English one, not a crash.
+ * v20: why the game refuses to dress this vehicle, which the hero reads to stop
+ *     offering a wardrobe on the hundred and eleven that cannot be painted.
  */
-const SHAPE_VERSION = 19;
+const SHAPE_VERSION = 20;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

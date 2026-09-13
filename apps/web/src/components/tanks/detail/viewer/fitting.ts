@@ -2,6 +2,7 @@ import type { Dispatch, RefObject, SetStateAction } from "react";
 import type * as Three from "three";
 import type { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
+import type { PaintLock } from "@unicum.gg/shared";
 import type { MirrorStyle } from "@unicum.gg/wargaming";
 import type { SkinFace } from "@/services/tank-viewer/styles";
 import type { loadArmour, Shot } from "@/services/tank-viewer/armour";
@@ -94,6 +95,7 @@ export function fitVehicle(
     applyStance,
     takeAim,
     opening,
+    paintLock,
   }: {
     built: NonNullable<Awaited<ReturnType<typeof loadVisual>>>;
     armour: Awaited<ReturnType<typeof loadArmour>> | null;
@@ -119,6 +121,16 @@ export function fitVehicle(
     takeAim: (bearing: number, pitch: number) => void;
     /** What the link the page was opened on asked for. */
     opening: { paint?: number; cut?: string };
+    /**
+     * Why the game refuses to dress this vehicle, where it does.
+     *
+     * **Nothing in the mirror says it**, which is why it is handed in from the
+     * page: a locked vehicle is still offered styles by the client's own
+     * customization filters, so its wardrobe comes back full. The Tiger 131
+     * passes 685 of them and the Skorpion G 14, and the game lets a player put
+     * on none of either.
+     */
+    paintLock: PaintLock | null;
   },
   page: Fitting,
 ): View[] {
@@ -259,43 +271,49 @@ export function fitVehicle(
     wake(3000);
     void built.wear(style, when);
   };
-  // What else it could be cut as. Read off the vehicle rather than off the
-  // style, so the list does not empty itself the moment one is worn.
-  //
-  // **And read from the vehicle where the page opened on a style.** A style
-  // lists no styles: it is one set of models, and the vehicle is what knows
-  // there are others. Built straight into one, from a shared link or a
-  // reload, the list was never filled at all, so the wardrobe was not
-  // offered and the reader had no way back out of the style they arrived
-  // in. The manifest is small and already fetched for the vehicle itself.
-  if (!page.skin) {
-    page.setCuts(built.skins);
-  } else {
-    void fetch(`${root}/vehicles/${at}/model.json`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((bare: { skins?: string[] } | null) => {
-        if (live() && bare?.skins?.length) page.setCuts(bare.skins);
-      })
-      .catch(() => {});
-  }
-  void skinNames(root).then((known) => {
-    if (live()) page.setCutNames(known);
-  });
-  if (built.styles) {
-    void wardrobeFor(root, at, built.styles).then((offered) => {
-      if (!live()) return;
-      page.setWardrobe(offered);
-      // **The paint the link named, put on as the wardrobe arrives.** It
-      // cannot be done any earlier: this list is the last thing the mirror
-      // answers, well after the vehicle is standing there. Once, so a
-      // rebuild for a gun or a style does not dress it again over whatever
-      // the reader has since chosen.
-      if (!page.painted.current && opening.paint != null) {
-        page.painted.current = true;
-        const one = offered.find((style) => style.id === opening.paint);
-        if (one) page.setWorn(one);
-      }
+  // **A vehicle the game will not dress is not asked what it could wear.**
+  // Everything below is skipped outright rather than filtered afterwards: the
+  // shared catalogue is two megabytes, and fetching it to show a reader nothing
+  // is the one cost here worth avoiding.
+  if (!paintLock) {
+    // What else it could be cut as. Read off the vehicle rather than off the
+    // style, so the list does not empty itself the moment one is worn.
+    //
+    // **And read from the vehicle where the page opened on a style.** A style
+    // lists no styles: it is one set of models, and the vehicle is what knows
+    // there are others. Built straight into one, from a shared link or a
+    // reload, the list was never filled at all, so the wardrobe was not
+    // offered and the reader had no way back out of the style they arrived
+    // in. The manifest is small and already fetched for the vehicle itself.
+    if (!page.skin) {
+      page.setCuts(built.skins);
+    } else {
+      void fetch(`${root}/vehicles/${at}/model.json`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((bare: { skins?: string[] } | null) => {
+          if (live() && bare?.skins?.length) page.setCuts(bare.skins);
+        })
+        .catch(() => {});
+    }
+    void skinNames(root).then((known) => {
+      if (live()) page.setCutNames(known);
     });
+    if (built.styles) {
+      void wardrobeFor(root, at, built.styles).then((offered) => {
+        if (!live()) return;
+        page.setWardrobe(offered);
+        // **The paint the link named, put on as the wardrobe arrives.** It
+        // cannot be done any earlier: this list is the last thing the mirror
+        // answers, well after the vehicle is standing there. Once, so a
+        // rebuild for a gun or a style does not dress it again over whatever
+        // the reader has since chosen.
+        if (!page.painted.current && opening.paint != null) {
+          page.painted.current = true;
+          const one = offered.find((style) => style.id === opening.paint);
+          if (one) page.setWorn(one);
+        }
+      });
+    }
   }
   /**
    * Hold the frame that is on screen, so the next view can arrive under it.

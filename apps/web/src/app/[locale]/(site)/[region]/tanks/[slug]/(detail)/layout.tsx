@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { toRoman } from "roman-numerals";
 import { isRegion } from "@unicum.gg/wargaming";
-import type { TankSpec } from "@unicum.gg/shared";
+import type { PaintLock, TankSpec } from "@unicum.gg/shared";
 import { JsonLd } from "@/components/json-ld";
 import { TankShell } from "@/components/tanks/detail/shell";
 import APP from "@/constants/app";
@@ -101,6 +101,13 @@ export default async function TankLayout({
         basedOn={detail.basedOn}
         builds={detail.configs?.map((c) => ({ modules: c.modules, keys: c.keys }))}
         mechanic={detail.mechanic}
+        // Defaulted rather than assumed: the detail payload is cached for a day
+        // and served by an API that can be one deploy behind this render, so a
+        // field this young has to be allowed to be missing.
+        // Cast like every other enum crossing the API: the payload carries the
+        // value as a string and a TS string enum is nominal, so the two are the
+        // same characters and not the same type.
+        paintLock={(detail.paintLock ?? null) as PaintLock | null}
         shells={heroShells(detail)}
       >
         {children}

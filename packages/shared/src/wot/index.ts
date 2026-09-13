@@ -13,6 +13,7 @@ export * from "./tank-ratings";
 export * from "./tank-stats";
 export * from "./mirror-tracking";
 export * from "./tank-spec-fields";
+export * from "./paint-lock";
 export * from "./tanks";
 export * from "./maps";
 export * from "./tournaments";

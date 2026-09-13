@@ -65,5 +65,9 @@
     "off": "Cinematic camera: off, the view stays put",
     "auto": "Cinematic camera: starts after 30 seconds alone",
     "on": "Cinematic camera: always, from the moment you let go"
+  },
+  "paint-locked": {
+    "factory": "Wears its own factory livery: the game paints nothing over it",
+    "locked": "The game allows no customization on this vehicle"
   }
 }

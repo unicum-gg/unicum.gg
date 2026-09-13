@@ -38,6 +38,7 @@ export function Group({ children }: { children: React.ReactNode }) {
 /** One mark in a group: the button, its state, and the words behind it. */
 export function Mark({
   on,
+  off,
   onClick,
   says,
   tooltip,
@@ -45,7 +46,16 @@ export function Mark({
   children,
 }: {
   on?: boolean;
-  onClick: () => void;
+  /**
+   * Whether the control is there to say something rather than to be pressed.
+   *
+   * **`aria-disabled`, not `disabled`.** A disabled button takes no pointer
+   * events, so the tooltip never opens, and the tooltip is the entire reason a
+   * mark like this is drawn at all: a reader who cannot paint a tank is owed
+   * the sentence saying the game is what stops them.
+   */
+  off?: boolean;
+  onClick?: () => void;
   /** What it is, read out and shown when there is nothing longer to say. */
   says: string;
   /** The longer form, where the state deserves a sentence. */
@@ -59,10 +69,13 @@ export function Mark({
       <TooltipTrigger asChild>
         <button
           type="button"
-          onClick={onClick}
+          onClick={off ? undefined : onClick}
           aria-label={says}
+          {...(off ? { "aria-disabled": true } : {})}
           {...(on === undefined ? {} : { "aria-pressed": on })}
-          className={`${CONTROL} ${wide ? "flex items-center gap-1" : ""}`}
+          className={`${CONTROL} ${wide ? "flex items-center gap-1" : ""} ${
+            off ? "cursor-default opacity-40 hover:bg-transparent" : ""
+          }`}
         >
           {children}
         </button>

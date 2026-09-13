@@ -5,6 +5,7 @@ import { getTankMomByRegion } from "@unicum.gg/core/mom";
 import { getTankMoeByRegion } from "@unicum.gg/core/moe";
 import { getResearchPath } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import { getTankBasedOn } from "./based-on";
+import { getTankPaintLock } from "./paint-lock";
 import { getTankModules } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import {
   getTankStats,
@@ -24,7 +25,7 @@ import { getTankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods
 import { getTankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
 import { getTankHasHistory } from "@unicum.gg/core/wargaming/wot/tanks/spec-history";
 import { getTankVehicleModes } from "@unicum.gg/core/wargaming/wot/tanks/vehicle-modes";
-import { TankClient, type VehicleMode } from "@unicum.gg/shared";
+import { TankClient, type PaintLock, type VehicleMode } from "@unicum.gg/shared";
 import {
   fetchMomHistoryFromPoliroid,
   type MomHistoryPoint,
@@ -101,6 +102,7 @@ export async function assembleTankDetail(
     testVersion,
     rating,
     basedOn,
+    paintLock,
   ] = await Promise.all([
     getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
     getTankStats(region, tankId),
@@ -134,6 +136,10 @@ export async function assembleTankDetail(
     }),
     // The vehicle this one was made from, where the client says it is one.
     safe(() => getTankBasedOn(region, meta.tag, branch), null),
+    // Whether the game refuses to let this one be dressed, and why. Read here
+    // rather than left to the viewer, which has only the geometry mirror to go
+    // on and that mirror answers with a wardrobe either way.
+    safe(() => getTankPaintLock(region, tankId, branch), null as PaintLock | null),
   ]);
 
   // The crests, folded into the payload rather than attached per request: this
@@ -171,6 +177,11 @@ export async function assembleTankDetail(
     // siege on a vehicle that has none. It is a property of the vehicle, so it
     // is read off whichever module combination answered: they all carry it.
     mechanic: configs[0]?.specs.mechanic ?? null,
+    // Why this vehicle cannot be painted, or null where it can. A property of
+    // the vehicle like the mechanic above it, and read from the same client
+    // files, but off the spec rather than on it: a spec is written into the
+    // `tank_specs` row field by field, and this is not a characteristic.
+    paintLock,
     moeHistory,
     momHistory,
     hasHistory,

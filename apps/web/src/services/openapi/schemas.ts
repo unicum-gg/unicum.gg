@@ -8,6 +8,7 @@ import {
   DEFAULT_RATING_METRIC,
   MapCamouflage,
   MapGameMode,
+  PaintLock,
   RatingBlock,
   RatingConsensus,
   RatingMetric,
@@ -200,6 +201,12 @@ export const battleFormatField = z.enum(BattleFormat).meta({
 export const tankVideoStatusField = z.enum(TankVideoStatus).meta({
   description: "Where a suggested video stands in moderation.",
   "x-enum-source": "TANK_VIDEO_STATUS",
+} as EnumMeta);
+
+export const paintLockField = z.enum(PaintLock).meta({
+  description:
+    "Why the game refuses to let a vehicle be dressed: `locked` for one whose customization is off entirely (a mode-locked machine, or a reward vehicle that is itself a style), `factory` for one wearing a livery of its own that cannot come off (the Skorpion G, the Tiger 131). The customization filters carry none of this, so a wardrobe built from them alone offers paint on every one of them.",
+  "x-enum-source": "PAINT_LOCK",
 } as EnumMeta);
 
 export const spawnDirectionField = z.enum(SpawnDirection).meta({

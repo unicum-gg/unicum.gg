@@ -2,6 +2,8 @@
 
 import { type RefObject, useEffect, useRef, useState } from "react";
 
+import type { PaintLock } from "@unicum.gg/shared";
+
 import { AimDial } from "@/components/tanks/detail/viewer/aim-dial";
 import { ArmourReadout } from "@/components/tanks/detail/viewer/readout";
 import type { HeroShell } from "@/components/tanks/detail/viewer/shell-rules";
@@ -34,6 +36,7 @@ export function TankViewer({
   shells,
   builds,
   mechanic,
+  paintLock,
   onAbsent,
   column,
 }: {
@@ -67,6 +70,15 @@ export function TankViewer({
    * the road, an IS-3-II fires two guns, and this one recalibrates its shells.
    */
   mechanic?: string | null;
+  /**
+   * Why the game refuses to dress this vehicle, where it does.
+   *
+   * **The mirror cannot answer this.** It publishes a wardrobe for every
+   * vehicle the client's customization filters offer anything to, and those
+   * filters carry none of the two locks the game actually reads, so the
+   * Skorpion G came back with fourteen styles and the Tiger 131 with 685.
+   */
+  paintLock?: PaintLock | null;
   /**
    * Said where this vehicle has no model to draw, rather than when one is
    * ready. The caller shows its picture on that alone: waiting is not a state
@@ -177,6 +189,7 @@ export function TankViewer({
         fitted,
         liked,
         opening,
+        paintLock: paintLock ?? null,
         applyStance: aiming.applyStance,
         takeAim,
         onAbsent: () => {
@@ -211,6 +224,7 @@ export function TankViewer({
     onAbsent,
     fitted,
     liked,
+    paintLock,
     fire,
     shellRef,
     opening,
@@ -355,6 +369,7 @@ export function TankViewer({
               cutNames={dressing.cutNames}
               cut={dressing.skin}
               onCut={dressing.cutInto}
+              paintLock={paintLock ?? null}
               wardrobe={dressing.wardrobe}
               worn={dressing.worn}
               onWear={dressing.wear}

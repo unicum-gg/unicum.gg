@@ -36,6 +36,7 @@ import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Panel, PanelSeparator } from "@/components/panel";
 import ROUTES from "@/constants/routes";
 import {
+  type PaintLock,
   type TankSpec,
   type VehicleMeta,
   roleSuffix,
@@ -67,6 +68,7 @@ export function TankShell({
   builds,
   shells,
   mechanic,
+  paintLock,
   children,
 }: {
   region: Region;
@@ -90,6 +92,14 @@ export function TankShell({
    * offers a Panhard EBR a siege button for what is its road mode.
    */
   mechanic?: string | null;
+  /**
+   * Why the game refuses to dress this vehicle, where it does.
+   *
+   * Handed down from the payload rather than worked out in the hero: the
+   * geometry mirror publishes a wardrobe for a locked vehicle like any other,
+   * so the picture has no way of knowing on its own.
+   */
+  paintLock?: PaintLock | null;
   /** The community's verdict, for the badge under the title. Only the two
    * figures the badge draws, not the whole summary: the hero renders on every
    * tab and has no use for thirty reviews. */
@@ -197,6 +207,7 @@ export function TankShell({
                     shells={shells}
                     builds={builds}
                     mechanic={mechanic}
+                    paintLock={paintLock}
                     backdrop={
                       <>
                         {/* The exact hangar-floor backdrop WG's own tankopedia detail

@@ -3428,6 +3428,11 @@ export interface components {
         OwnRatingsResponse: {
             ratings: components["schemas"]["ownRatingRow"][];
         };
+        /**
+         * @description Why the game refuses to let a vehicle be dressed: `locked` for one whose customization is off entirely (a mode-locked machine, or a reward vehicle that is itself a style), `factory` for one wearing a livery of its own that cannot come off (the Skorpion G, the Tiger 131). The customization filters carry none of this, so a wardrobe built from them alone offers paint on every one of them.
+         * @enum {string}
+         */
+        paintLockField: "locked" | "factory";
         paragraphBlock: {
             kind: string;
             segments: components["schemas"]["glossarySegment"][];
@@ -4631,6 +4636,8 @@ export interface components {
             modes: components["schemas"]["vehicleMode"][];
             /** @description Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. The client tags all of them the same way, so this is what tells them apart. Null for the vast majority of vehicles, which have no second state. */
             mechanic: string | null;
+            /** @description Why the game refuses to let this vehicle be dressed, null for the vast majority, which take any paint they are offered. */
+            paintLock: components["schemas"]["paintLockField"] | null;
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -4725,6 +4732,8 @@ export interface components {
             modes: components["schemas"]["vehicleMode"][];
             /** @description Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. The client tags all of them the same way, so this is what tells them apart. Null for the vast majority of vehicles, which have no second state. */
             mechanic: string | null;
+            /** @description Why the game refuses to let this vehicle be dressed, null for the vast majority, which take any paint they are offered. */
+            paintLock: components["schemas"]["paintLockField"] | null;
             moeHistory: {
                 day: string;
                 mark1: number;

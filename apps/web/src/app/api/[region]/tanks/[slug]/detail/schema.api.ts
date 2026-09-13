@@ -3,7 +3,7 @@
 // "api", so a plain `schema.ts` would be found by name but built empty.
 import { z } from "zod";
 import { TankClient } from "@unicum.gg/shared";
-import type { EnumMeta } from "@/services/openapi/schemas";
+import { paintLockField, type EnumMeta } from "@/services/openapi/schemas";
 import {
   tankConfig,
   tankCrew,
@@ -159,6 +159,14 @@ export const TankDetailResponse = z
     mechanic: z.string().nullable().meta({
       description:
         "Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. The client tags all of them the same way, so this is what tells them apart. Null for the vast majority of vehicles, which have no second state.",
+    }),
+    // Nullable at the use site rather than on the shared field: the generator
+    // reads these objects off the AST, so an optionality folded into the
+    // exported const comes out as part of the component every other endpoint
+    // shares.
+    paintLock: paintLockField.nullable().meta({
+      description:
+        "Why the game refuses to let this vehicle be dressed, null for the vast majority, which take any paint they are offered.",
     }),
     moeHistory: z.array(
       z.object({

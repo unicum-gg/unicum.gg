@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronsUp } from "lucide-react";
+import { ChevronsUp, Paintbrush } from "lucide-react";
+import { PaintLock } from "@unicum.gg/shared";
 import type { MirrorStyle } from "@unicum.gg/wargaming";
 
 import {
@@ -30,6 +31,7 @@ import { useTranslation } from "@/hooks/use-translation";
  * as an empty box.
  */
 export function DressingControls({
+  paintLock,
   sharpenable,
   sharp,
   onSharpen,
@@ -46,6 +48,14 @@ export function DressingControls({
   season,
   onSeason,
 }: {
+  /**
+   * Why the game refuses to dress this vehicle, where it does.
+   *
+   * Drawn rather than left out, because the wardrobe is on every other tank on
+   * the site and an absence here would read as a gap in our data. It is the
+   * game that will not have it, and the mark says so.
+   */
+  paintLock: PaintLock | null;
   /** Whether the mirror holds the larger texture set for this vehicle. */
   sharpenable: boolean;
   sharp: boolean;
@@ -67,14 +77,27 @@ export function DressingControls({
 }) {
   const { t: tView } = useTranslation("components/tanks/detail/viewer");
   const dressable = wardrobe.length > 0 || cuts.length > 0;
-  if (!dressable && markable === 0 && !sharpenable) return null;
+  if (!dressable && !paintLock && markable === 0 && !sharpenable) return null;
   return (
     <Group>
+      {/*
+        Why this one carries no wardrobe, where the game is the reason.
+
+        The same brush every other vehicle offers, standing as a sentence
+        instead of a control: a hundred and eleven of them are locked, and on a
+        site where every other tank can be painted, nothing at all in this
+        corner reads as data we are missing rather than as a rule of the game.
+      */}
+      {paintLock ? (
+        <Mark off says={tView(`paint-locked.${paintLock}`)}>
+          <Paintbrush className="size-4" aria-hidden />
+        </Mark>
+      ) : null}
       {/*
         What it is wearing. Offered only once the wardrobe has arrived, which
         is after the vehicle.
       */}
-      {dressable ? (
+      {dressable && !paintLock ? (
         <WardrobePicker
           className={CONTROL}
           cuts={cuts}

@@ -1,5 +1,6 @@
 "use client";
 
+import type { PaintLock } from "@unicum.gg/shared";
 import type { MirrorStyle } from "@unicum.gg/wargaming";
 
 import {
@@ -82,6 +83,7 @@ export function ViewerControls({
   cutNames,
   cut,
   onCut,
+  paintLock,
   wardrobe,
   worn,
   onWear,
@@ -142,6 +144,8 @@ export function ViewerControls({
   cutNames: Record<string, SkinFace>;
   cut: string | null;
   onCut: (name: string | null) => void;
+  /** Why the game refuses to dress this vehicle, where it does. */
+  paintLock: PaintLock | null;
   wardrobe: MirrorStyle[];
   worn: MirrorStyle | null;
   onWear: (style: MirrorStyle | null) => void;
@@ -240,6 +244,7 @@ export function ViewerControls({
           </Group>
         ) : (
           <DressingControls
+            paintLock={paintLock}
             sharpenable={sharpenable}
             sharp={sharp}
             onSharpen={onSharpen}

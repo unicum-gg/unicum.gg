@@ -31,6 +31,17 @@ export * from "./mechanic";
 export * from "./xml";
 
 
+/** What a vehicle's own files say about whether it can be dressed. */
+export type WotSrcCustomization = {
+  /** The tags its nation's index files it under, verbatim and in order. */
+  tags: string[];
+  /**
+   * The vehicle's `customDefaultCamouflage`: it ships wearing a livery of its
+   * own, drawn into its textures rather than chosen by the player.
+   */
+  customDefaultCamouflage: boolean;
+};
+
 /**
  * Vehicle specs from the IzeBerg/wot-src client-scripts mirror. Loops all
  * nations with the shared component files fetched once per nation, and derives
@@ -275,6 +286,76 @@ export class SourceSpecsResource {
     tankId: number,
     branchOverride?: WotSrcBranch,
   ): Promise<{ nation: string; members: string[][] } | null> {
+    const found = await this.#vehicleFile(tankId, branchOverride);
+    if (!found) return null;
+    const crewNode = isObject(found.root.crew) ? found.root.crew : null;
+    if (!crewNode) return null;
+
+    const members: string[][] = [];
+    for (const [role, value] of Object.entries(crewNode)) {
+      // Same-role members (two loaders) parse as an array; a single one is the
+      // bare value. Self-closing (`<commander/>`) carries no text, so no extra
+      // role; text (`gunner`) names the further roles that member also fills.
+      const items = Array.isArray(value) ? value : [value];
+      for (const item of items) {
+        const extra =
+          typeof item === "string" ? item.split(/\s+/).filter(Boolean) : [];
+        members.push([role, ...extra]);
+      }
+    }
+    return members.length > 0 ? { nation: found.nation, members } : null;
+  }
+
+  /**
+   * What the client's own files say about dressing this vehicle: the tags its
+   * nation files it under, and whether it left the factory already painted.
+   *
+   * Both are reported verbatim rather than decided here, since a filter's worth
+   * of meaning hangs off them and none of it is Wargaming's: `lockOutfit` turns
+   * the garage's customization entry off, `customDefaultCamouflage` puts a
+   * camouflage of the client's own over the whole hull, and what a site does
+   * about either is the site's opinion.
+   *
+   * Null where the vehicle resolves to no file, the same answer `crew` gives.
+   */
+  async customization(
+    tankId: number,
+    branchOverride?: WotSrcBranch,
+  ): Promise<WotSrcCustomization | null> {
+    const found = await this.#vehicleFile(tankId, branchOverride);
+    if (!found) return null;
+    return {
+      tags: tokens(found.entry.tags),
+      // Written as the text `true` in the handful of files that carry it, and
+      // absent everywhere else, so it is read as a word rather than coerced: the
+      // parser is set to leave values as strings, where every non-empty one is
+      // truthy.
+      customDefaultCamouflage:
+        String(found.root.customDefaultCamouflage ?? "")
+          .trim()
+          .toLowerCase() === "true",
+    };
+  }
+
+  /**
+   * One vehicle's own definition, with its nation index entry beside it.
+   *
+   * Three things the client keeps apart have to be put back together before any
+   * fact about a vehicle can be read: which nation files it (from the id), what
+   * that nation calls it (from the nation's index), and what it declares (its
+   * own file). Null where any of them is missing, which is an answer rather
+   * than a failure: an id the lists no longer carry is a vehicle the game has
+   * retired.
+   */
+  async #vehicleFile(
+    tankId: number,
+    branchOverride?: WotSrcBranch,
+  ): Promise<{
+    nation: string;
+    tag: string;
+    entry: XmlNode;
+    root: XmlNode;
+  } | null> {
     const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const nationIdx = (tankId >> 4) & 0xf;
@@ -293,35 +374,16 @@ export class SourceSpecsResource {
       parser,
       await this.#text(rawUrl(branch, `${base}/list.xml`)),
     );
-    let tag: string | null = null;
-    for (const [t, entry] of Object.entries(list)) {
-      if (t === "ids" || !isObject(entry)) continue;
-      if (Number.parseInt(String(entry.id ?? "").trim(), 10) === localId) {
-        tag = t;
-        break;
-      }
+    for (const [tag, entry] of Object.entries(list)) {
+      if (tag === "ids" || !isObject(entry)) continue;
+      if (Number.parseInt(String(entry.id ?? "").trim(), 10) !== localId)
+        continue;
+      const root = this.#root(
+        parser,
+        await this.#text(rawUrl(branch, `${base}/${tag}.xml`)),
+      );
+      return { nation, tag, entry, root };
     }
-    if (!tag) return null;
-
-    const root = this.#root(
-      parser,
-      await this.#text(rawUrl(branch, `${base}/${tag}.xml`)),
-    );
-    const crewNode = isObject(root.crew) ? root.crew : null;
-    if (!crewNode) return null;
-
-    const members: string[][] = [];
-    for (const [role, value] of Object.entries(crewNode)) {
-      // Same-role members (two loaders) parse as an array; a single one is the
-      // bare value. Self-closing (`<commander/>`) carries no text, so no extra
-      // role; text (`gunner`) names the further roles that member also fills.
-      const items = Array.isArray(value) ? value : [value];
-      for (const item of items) {
-        const extra =
-          typeof item === "string" ? item.split(/\s+/).filter(Boolean) : [];
-        members.push([role, ...extra]);
-      }
-    }
-    return members.length > 0 ? { nation, members } : null;
+    return null;
   }
 }
