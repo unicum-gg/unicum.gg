@@ -1,6 +1,7 @@
 import { REGIONS } from "@unicum.gg/wargaming";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { refreshOnslaughtCrests } from "./onslaught-crest";
+import { refreshOnslaughtDaily } from "./onslaught-daily";
 import { reconcileOnslaught } from "./onslaught";
 
 /**
@@ -80,5 +81,42 @@ export function startOnslaughtCrestCron(): void {
       }
     });
     if (armed) console.log(`[${name}] scheduled (${CREST_SCHEDULE})`);
+  }
+}
+
+/**
+ * When the captures are folded into days.
+ *
+ * On the capture's own cadence, five minutes after each quarter so it reads a
+ * pass that has landed. Only the last few days are recomputed, and a day that
+ * has ended never moves again, so the cost of a tick is the day in progress
+ * whatever the season's length.
+ */
+const DAILY_SCHEDULE = "5,20,35,50 * * * *";
+
+/**
+ * Turn the Onslaught captures into a rate.
+ *
+ * The board publishes totals, so how many battles a day someone is playing and
+ * what those battles are worth in rating exist only as differences between the
+ * instants we recorded. Differencing them per read costs the whole season on
+ * every page, and the season only grows, so the fold happens here and the board
+ * reads a few tens of thousands of rows instead of a few hundred thousand.
+ */
+export function startOnslaughtDailyCron(): void {
+  for (const region of REGIONS) {
+    const name = `onslaught-daily-cron-${region}`;
+    const armed = scheduleCron(name, DAILY_SCHEDULE, async () => {
+      const result = await refreshOnslaughtDaily(region);
+      // A full pass is the season's first fold (or this table's arrival on an
+      // archive that predates it), which is worth a line. The routine tick is
+      // not: at this cadence it would say the same thing ninety-six times a day.
+      if (result?.full) {
+        console.log(
+          `[onslaught-daily] ${region}: ${result.eventId} rebuilt in full, ${result.rows} day(s) written`,
+        );
+      }
+    });
+    if (armed) console.log(`[${name}] scheduled (${DAILY_SCHEDULE})`);
   }
 }

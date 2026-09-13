@@ -20,7 +20,8 @@
     "backfill-tournament-wins": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-tournament-wins.ts",
     "backfill-roster-names": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-roster-names.ts",
     "start:single": "NODE_ENV=production tsx src/index.ts",
-    "refresh-tank-specs": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-tank-specs.ts"
+    "refresh-tank-specs": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-tank-specs.ts",
+    "rebuild-onslaught-daily": "tsx --env-file-if-exists=../web/.env.local src/scripts/rebuild-onslaught-daily.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",

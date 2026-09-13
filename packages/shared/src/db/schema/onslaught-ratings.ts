@@ -1,5 +1,6 @@
 import {
   bigint,
+  date,
   index,
   integer,
   pgTable,
@@ -203,4 +204,79 @@ export const onslaughtSeasonSnapshotsByRegion: Record<
   [Region.EU]: makeOnslaughtSeasonSnapshotsTable(Region.EU),
   [Region.NA]: makeOnslaughtSeasonSnapshotsTable(Region.NA),
   [Region.ASIA]: makeOnslaughtSeasonSnapshotsTable(Region.ASIA),
+};
+
+// A ranked player's activity, one row per day they played, per season. The
+// history table beside it holds every instant we captured, which is what draws
+// a climb but is the wrong shape for a rate: answering "how many battles a day"
+// off it means differencing 170,000 rows per season and re-differencing them on
+// every read, and the source keeps recomputing, so that cost grows with the
+// season rather than being paid once.
+//
+// So the deltas are folded to a day here, once, by the pass that walks them.
+// The numbers are GAINS, not totals: a player enters the board carrying
+// everything they played to qualify, and that entry value belongs to no day, so
+// it is deliberately absent. Points can be negative (a losing day costs rating),
+// which is why the day is kept rather than only a running sum.
+export function makeOnslaughtDailyTable(region: string) {
+  return pgTable(
+    `${region}_onslaught_daily`,
+    {
+      eventId: text("event_id").notNull(),
+      accountId: bigint("account_id", { mode: "number" }).notNull(),
+      // The UTC calendar day. Pinned to UTC rather than to any region's local
+      // time, like the servers section's own buckets, so nothing silently
+      // depends on the process's timezone.
+      day: date("day").notNull(),
+      // Battles played that day, summed from the captures' own differences.
+      battles: integer("battles").notNull(),
+      // Rating points won or lost that day. Signed on purpose.
+      points: integer("points").notNull(),
+      // How many captures of that day carried a gain. Cadence-dependent (the
+      // feeder's interval has changed and will again), so it is raw material
+      // for a later read rather than a figure to publish as it stands.
+      samples: integer("samples").notNull(),
+      // The last capture of that day that moved, which is what "last seen
+      // playing" reads. The day alone would answer to within 24 hours.
+      lastAt: timestamp("last_at", { withTimezone: true }).notNull(),
+      // The player's cumulative season totals at the day's LAST capture, which
+      // is not always `lastAt`: that one is the last capture that moved, and a
+      // day whose final capture only changed a rank ends on a later instant than
+      // the one it last played at. The gains above are what this table is read
+      // for, but the absolute value is what makes the entry cost recoverable:
+      // on a player's first day here, `battlesTotal` minus `battles` is exactly
+      // what they had played when they first appeared on the board. It is also
+      // the baseline a partial rebuild differences against, so a rebuild of the
+      // last few days agrees with a rebuild of the whole season instead of
+      // quietly losing whatever its window cut off.
+      battlesTotal: integer("battles_total").notNull(),
+      ratingTotal: integer("rating_total").notNull(),
+      // Where they stood that day: the best position held during it, and the
+      // one held at its last capture. The fold walks the captures anyway, and
+      // these are what let the board name the players who LOST their place,
+      // since the feeder prunes anyone who has left the board from the
+      // standings and the fold is where they are recovered from.
+      bestRank: integer("best_rank").notNull(),
+      rankEnd: integer("rank_end").notNull(),
+    },
+    (t) => [
+      primaryKey({ columns: [t.eventId, t.accountId, t.day] }),
+      // The rebuild replaces one day of a season at a time; the key's own
+      // prefix cannot serve that.
+      index(`${region}_onslaught_daily_event_day_idx`).on(t.eventId, t.day),
+      // One player across every season, which a profile asks and the key's own
+      // prefix cannot serve. It is what tells a player page they held a place
+      // in a season they are no longer ranked in, since the standings row that
+      // would have said so is what the prune removed.
+      index(`${region}_onslaught_daily_account_idx`).on(t.accountId, t.day),
+    ],
+  );
+}
+
+export type OnslaughtDailyTable = ReturnType<typeof makeOnslaughtDailyTable>;
+
+export const onslaughtDailyByRegion: Record<Region, OnslaughtDailyTable> = {
+  [Region.EU]: makeOnslaughtDailyTable(Region.EU),
+  [Region.NA]: makeOnslaughtDailyTable(Region.NA),
+  [Region.ASIA]: makeOnslaughtDailyTable(Region.ASIA),
 };
