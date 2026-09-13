@@ -81,7 +81,11 @@ export function RatePanel({
         body={t("sign-in-with-your-wargaming-account-to-rate-")}
       >
         <LoginButton callbackURL={`${ROUTES.TANK(region, slug)}/community`}>
-          <Button size="sm">{t("sign-in-to-rate-it")}</Button>
+          {/* The prompt around this is a flex column, which stretches its
+              children to full width unless one opts out. */}
+          <Button size="sm" className="self-start">
+            {t("sign-in-to-rate-it")}
+          </Button>
         </LoginButton>
       </Prompt>
     );
