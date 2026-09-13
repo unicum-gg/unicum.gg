@@ -1399,6 +1399,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/languages/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Resolve languages by id
+         * @description Languages and flags for a set of account ids and clan ids, in one call. Each list is optional and comma separated, capped at 100 ids, and a longer list is refused rather than truncated. A clan answers with the set its owner declared; a player answers from the same duration-weighted inference over their clan history the player page shows, falling back to their current clan's declared set only when we hold no history at all, and `source` says which. `countries` carries the flag code per language, aligned index for index. An id we hold no language for is absent from the response. Reads cached data only, with no live Wargaming call.
+         */
+        get: operations["get-{region}-languages-resolve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/search/resolve": {
         parameters: {
             query?: never;
@@ -2862,6 +2882,14 @@ export interface components {
         };
         /** @description Two-letter language code. When set, the leaderboard is filtered to players/clans whose clan declares this language (period is ignored: language boards are lifetime WNX). */
         langField: string;
+        LanguagesResolveResponse: {
+            players: {
+                [key: string]: components["schemas"]["ResolvedLanguages"];
+            };
+            clans: {
+                [key: string]: components["schemas"]["ResolvedLanguages"];
+            };
+        };
         /** @description One language's population. */
         LanguageStat: {
             /** @description Two-letter language code. */
@@ -4117,6 +4145,18 @@ export interface components {
             meta: components["schemas"]["VehicleMeta"];
             researchXp: number | null;
             buyCredits: number | null;
+        };
+        /** @description Languages held for one entity, and why we believe them. */
+        ResolvedLanguages: {
+            /** @description Two-letter language codes, never empty. */
+            languages: string[];
+            /** @description Flag code per language, aligned index for index with `languages`, null where no flag is published for that language. Not an ISO country code: `en` is `GB-UKM` on EU and `US` on NA/ASIA. */
+            countries: (string | null)[];
+            /**
+             * @description Where the languages came from: `declared` (the clan owner set them), `inferred` (weighted over the account's clan history, the same answer the player page shows) or `clan` (no clan history for this account, so their current clan's declared set stood in, which is a snapshot rather than an inference).
+             * @enum {string}
+             */
+            source: "declared" | "inferred" | "clan";
         };
         /**
          * @description What became of a written opinion attached to a rating.
@@ -7670,6 +7710,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Coverage"];
+                };
+            };
+        };
+    };
+    "get-{region}-languages-resolve": {
+        parameters: {
+            query?: {
+                /** @description Account ids. Up to 100. */
+                players?: number[];
+                /** @description Clan ids. Up to 100. */
+                clans?: number[];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LanguagesResolveResponse"];
                 };
             };
         };

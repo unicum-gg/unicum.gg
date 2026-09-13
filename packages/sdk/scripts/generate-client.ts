@@ -112,6 +112,10 @@ const REGION_NAMESPACES: RegionNamespace[] = [
     doc: "This region's game servers: live population and its recorded history.",
     online: true,
   },
+  {
+    name: "languages",
+    doc: "Languages spoken in this region, resolved for a set of ids in one call.",
+  },
 ];
 
 /** Name the players-online SSE subscription takes on a namespace declaring one. */

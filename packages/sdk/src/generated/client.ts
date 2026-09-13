@@ -538,6 +538,11 @@ type ServerNamespace = {
   ): Unsubscribe;
 };
 
+type LanguagesNamespace = {
+  /** Resolve languages by id */
+  resolve(query?: QueryOf<"/{region}/languages/resolve">): RequestHandle<Data<"/{region}/languages/resolve">>;
+};
+
 /** Every resource scoped to one region: unicum.eu, unicum.region("na"). */
 class RegionClient {
   constructor(
@@ -911,6 +916,20 @@ class RegionClient {
       );
     ns.online = (onData, onError) =>
       subscribeServerOnline(this.baseUrl, this.region, onData, onError);
+    return ns;
+  }
+
+  /** Languages spoken in this region, resolved for a set of ids in one call. */
+  get languages(): LanguagesNamespace {
+    const ns = {} as LanguagesNamespace;
+    ns.resolve = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/languages/resolve", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/languages/resolve", {
+            params: { path: { region: this.region }, query },
+          }),
+      );
     return ns;
   }
 }

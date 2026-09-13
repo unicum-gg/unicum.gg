@@ -1,27 +1,11 @@
 import { resolveSearchEntries } from "@unicum.gg/core/search";
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
+import { idList, numericIds } from "@/services/openapi/id-list";
 import { SearchResolveResponse } from "./schema.api";
 import { measured } from "@/services/perf";
 
 export const dynamic = "force-dynamic";
-
-/** Comma-separated ids, dropping anything that is not one. A stored list is
- * whatever a browser held, so a malformed entry is skipped rather than failing
- * the whole call and leaving the reader with no list at all. */
-function idList(raw: string | null): string[] {
-  if (!raw) return [];
-  return raw
-    .split(",")
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0);
-}
-
-function numericIds(raw: string | null): number[] {
-  return idList(raw)
-    .map(Number)
-    .filter((n) => Number.isSafeInteger(n) && n > 0);
-}
 
 /**
  * Resolve saved search entries
@@ -46,10 +30,10 @@ async function GET__perf(
 
   const query = new URL(req.url).searchParams;
   const resolved = await resolveSearchEntries(region, {
-    players: numericIds(query.get("players")),
-    clans: numericIds(query.get("clans")),
-    tanks: numericIds(query.get("tanks")),
-    maps: idList(query.get("maps")),
+    players: numericIds(query, "players"),
+    clans: numericIds(query, "clans"),
+    tanks: numericIds(query, "tanks"),
+    maps: idList(query, "maps"),
   });
 
   return jsonResponse(SearchResolveResponse, resolved, {
