@@ -45,9 +45,11 @@ export function startOnslaughtReconcileCron(): void {
 /**
  * How often the crest is recomputed from the standings.
  *
- * The capture writes every 15 minutes, so the crest follows at the same
- * cadence, offset by two so it reads a pass that has landed rather than one
- * in flight. It rode the daily reconcile first, and a day of lag is invisible
+ * A quarter of an hour, which is no longer the capture's own cadence (it writes
+ * every five) and does not need to be: the crest changes when a player crosses
+ * a rank threshold, which is a matter of hours, and the recompute reads the
+ * standings rather than the passes. Offset by two so it reads a pass that has
+ * landed rather than one in flight. It rode the daily reconcile first, and a day of lag is invisible
  * everywhere the crest is worn EXCEPT the one page that also shows the current
  * rank beside it: a player who crossed into Legend this morning sat under a
  * violet pill wearing a steel-blue crest, which reads as a bug rather than as

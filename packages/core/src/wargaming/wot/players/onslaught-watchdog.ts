@@ -24,17 +24,20 @@ import { REGIONS, type Region } from "@unicum.gg/wargaming";
  * been noticed by looking at the curve, days later.
  */
 
-// Every 20 minutes. The capture writes every 15, so a single missed pass is
-// invisible here and a real stall is caught within the hour.
+// Every 20 minutes, which is slower than the capture writes (five minutes) on
+// purpose: this watches for a stall, not for a pass, and a real one is caught
+// within the hour either way.
 const SCHEDULE = "*/20 * * * *";
 
 /**
  * How far behind the newest sample may fall before it counts as stalled.
  *
- * Four capture intervals, which is generous on purpose: the pass itself can be
- * slow, a redeploy costs one, and a region the source is briefly failing writes
- * nothing rather than a zero (by design). The alert has to mean something is
- * actually wrong, or it stops being read.
+ * An hour, which is many capture intervals and generous on purpose: the pass
+ * itself can be slow, a redeploy costs one, and a region the source is briefly
+ * failing writes nothing rather than a zero (by design). The alert has to mean
+ * something is actually wrong, or it stops being read. Deliberately expressed
+ * as a duration rather than as a count of intervals, so it stays true when the
+ * capture's cadence changes, as it has once already.
  */
 const STALL_AFTER_MS = 60 * 60 * 1000;
 
