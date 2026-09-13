@@ -87,10 +87,31 @@ const ONSLAUGHT_RANK_ORDINAL: Record<OnslaughtTier, string> = {
   [OnslaughtTier.Champion]: "fifth",
 };
 
-// The available icon sizes (px) under the client's comp7 rank-icon folder.
+// The sizes (px) a SEASON's rank art is published at. The client also ships a
+// 22px set, but only for the season-less art at the tree's root, so listing it
+// here would type-check a URL that 404s on every themed crest.
 export const ONSLAUGHT_RANK_ICON_SIZES = [
-  22, 40, 48, 64, 84, 110, 150, 200, 260, 320, 420, 600,
+  40, 48, 64, 84, 110, 150, 200, 260, 320, 420, 600,
 ] as const;
+
+// **The season's themed art is at `ranks/`, and `comp7/ranks/` is where it used
+// to be.** Reading the wrong one shows a crest rather than a broken image, which
+// is why the board wore the wrong beast for two years without anyone noticing:
+// the mode's whole GUI moved into `comp7.pkg`, whose res root mounts as `gui/`,
+// so the live crests are at `gui/maps/icons/ranks/...` and no package ships the
+// old path any more. What answers there is what the mirror was left holding when
+// the move happened, in September 2024, and since the mirror accumulates it will
+// answer for ever. Wargaming re-draws the animal every year (a manticore, then a
+// dragon, now a phoenix), so a stale crest looks exactly as deliberate as a live
+// one.
+const ONSLAUGHT_RANK_ICONS = "ranks";
+
+// The rankless badge, worn when we cannot name the season. It stays on the
+// abandoned tree deliberately: the current client ships its season-less art at
+// 22 and 48 px only, and this is the last place a neutral crest exists at the
+// sizes the site asks for. It is not a past season's, so it does not go stale
+// the way the themed ones did.
+const ONSLAUGHT_RANK_ICONS_PLAIN = "comp7/ranks";
 
 /** URL of a rank's icon from the wot.assets mirror. `seasonOrdinal` selects that
  * season's themed art (the plain default is used when it is null); `assetsRef`
@@ -103,8 +124,8 @@ export function onslaughtRankIcon(
   size: (typeof ONSLAUGHT_RANK_ICON_SIZES)[number] = 84,
 ): string {
   const base = seasonOrdinal
-    ? `comp7/ranks/${seasonOrdinal}`
-    : "comp7/ranks";
+    ? `${ONSLAUGHT_RANK_ICONS}/${seasonOrdinal}`
+    : ONSLAUGHT_RANK_ICONS_PLAIN;
   return iconUrl(
     `${base}/${size}/${ONSLAUGHT_RANK_ORDINAL[tier]}.png`,
     assetsRef ?? undefined,

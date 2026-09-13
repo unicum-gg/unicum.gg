@@ -11,7 +11,7 @@ import { BRANCH_BY_REGION, rawUrl, WOTSRC_CACHE_TTL_MS } from "./mirror";
 //   1. the localization keys: the display name "Season of the Jade Dragon"
 //      exists only under `seasonName/third` (the numeric `yearlyStatistics/
 //      seasonName/2` gives a different, unusable format "Season III. ...");
-//   2. the rank-art folders on the assets mirror: `comp7/ranks/{first,second,
+//   2. the rank-art folders on the assets mirror: `ranks/{first,second,
 //      third}/...`, keyed by the same word, not a number.
 // The .po decides how many seasons exist (we break at the first absent one), so
 // only the ORDER of the words needs to be known here. `fourth`..`sixth` are a
