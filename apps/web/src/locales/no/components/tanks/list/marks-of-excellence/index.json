@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 merkede: Ditt rullerende gjennomsnitt for samlet skade (de siste ~100 kampene) må slå 95 % av spillerne med denne stridsvognen i løpet av de siste 14 dagene"
     }
-  },
-  "rows-per-page": "Rader per side",
-  "previous-page": "Forrige side",
-  "page": "Side {current} / {totalPages}",
-  "next-page": "Neste side",
-  "all": "Alle"
+  }
 }

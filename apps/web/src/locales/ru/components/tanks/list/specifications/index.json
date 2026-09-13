@@ -1,7 +1,0 @@
-{
-  "rows-per-page": "Строк на странице",
-  "previous-page": "Предыдущая страница",
-  "page": "Страница {current} / {totalPages}",
-  "next-page": "Следующая страница",
-  "all": "Все"
-}

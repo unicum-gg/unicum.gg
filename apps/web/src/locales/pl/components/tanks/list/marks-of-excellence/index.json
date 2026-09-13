@@ -12,10 +12,5 @@
       "label": "3 Marki",
       "tip": "3 Marki: Twoja krocząca średnia łącznych uszkodzeń (z ostatnich około 100 bitew) musi być wyższa niż u 95% graczy grających tym czołgiem w ciągu ostatnich 14 dni"
     }
-  },
-  "rows-per-page": "Wierszy na stronę",
-  "previous-page": "Poprzednia strona",
-  "page": "Strona {current} / {totalPages}",
-  "next-page": "Następna strona",
-  "all": "Wszystkie"
+  }
 }

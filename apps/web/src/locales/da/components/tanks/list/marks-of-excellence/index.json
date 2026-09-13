@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 Marks: Din rullende gennemsnitlige samlede skade, baseret på de seneste ~100 kampe, skal slå 95 % af spillerne på denne kampvogn inden for de seneste 14 dage"
     }
-  },
-  "rows-per-page": "Rækker pr. side",
-  "previous-page": "Forrige side",
-  "page": "Side {current} / {totalPages}",
-  "next-page": "Næste side",
-  "all": "Alle"
+  }
 }

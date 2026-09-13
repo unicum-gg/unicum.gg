@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 Marchi: la tua media mobile del danno combinato (ultime ~100 battaglie) deve superare quella del 95% dei giocatori con questo carro negli ultimi 14 giorni"
     }
-  },
-  "rows-per-page": "Righe per pagina",
-  "previous-page": "Pagina precedente",
-  "page": "Pagina {current} / {totalPages}",
-  "next-page": "Pagina successiva",
-  "all": "Tutti"
+  }
 }

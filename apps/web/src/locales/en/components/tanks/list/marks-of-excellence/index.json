@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 Marks: your rolling average combined damage (last ~100 battles) must beat 95% of players on this tank over the last 14 days"
     }
-  },
-  "rows-per-page": "Rows per page",
-  "previous-page": "Previous page",
-  "page": "Page {current} / {totalPages}",
-  "next-page": "Next page",
-  "all": "All"
+  }
 }

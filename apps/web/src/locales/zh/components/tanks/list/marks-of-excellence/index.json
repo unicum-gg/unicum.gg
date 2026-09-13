@@ -12,10 +12,5 @@
       "label": "3星",
       "tip": "3星：您的综合伤害滚动平均值（最近约100场战斗）必须超过过去14天内使用该坦克的95%玩家"
     }
-  },
-  "rows-per-page": "每页行数",
-  "previous-page": "上一页",
-  "page": "第 {current} / {totalPages} 页面",
-  "next-page": "下一页",
-  "all": "全部"
+  }
 }

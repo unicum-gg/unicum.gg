@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Asso carrista: XP necessari per superare il 99% dei giocatori"
     }
-  },
-  "rows-per-page": "Righe per pagina",
-  "previous-page": "Pagina precedente",
-  "page": "Pagina {current} di {totalPages}",
-  "next-page": "Pagina successiva",
-  "all": "Tutti"
+  }
 }

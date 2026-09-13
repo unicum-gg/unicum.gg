@@ -16,10 +16,5 @@
       "label": "As du char",
       "tip": "As du char : XP nécessaires pour dépasser 99 % des joueurs"
     }
-  },
-  "rows-per-page": "Lignes par page",
-  "previous-page": "Page précédente",
-  "page": "Page {current} / {totalPages}",
-  "next-page": "Page suivante",
-  "all": "Tous"
+  }
 }

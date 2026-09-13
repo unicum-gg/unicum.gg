@@ -16,10 +16,5 @@
       "label": "에이스 탱커",
       "tip": "에이스 탱커: 플레이어들 중 99%를 격파하는 데 필요한 XP"
     }
-  },
-  "rows-per-page": "페이지당 행 수",
-  "previous-page": "이전 페이지",
-  "page": "페이지 {current} / {totalPages}",
-  "next-page": "다음 페이지",
-  "all": "전체"
+  }
 }

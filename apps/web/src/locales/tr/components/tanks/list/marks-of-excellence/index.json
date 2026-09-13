@@ -12,10 +12,5 @@
       "label": "3 Mark",
       "tip": "3 Mark: bu tankta son yaklaşık 100 savaş için hareketli ortalama birleştirilmiş hasarın, son 14 gün içinde bu tanktaki oyuncuların %95’ini aşmalı"
     }
-  },
-  "rows-per-page": "Sayfada satır",
-  "previous-page": "Önceki sayfa",
-  "page": "Sayfa {current} / {totalPages}",
-  "next-page": "Sonraki sayfa",
-  "all": "Tümü"
+  }
 }

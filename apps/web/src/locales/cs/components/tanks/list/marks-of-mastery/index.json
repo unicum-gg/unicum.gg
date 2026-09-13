@@ -16,10 +16,5 @@
       "label": "Esence Tankista",
       "tip": "Esence Tankista: ZK potřebné k lepšímu výsledku, než mají hráči v dolních 99 %"
     }
-  },
-  "rows-per-page": "Řádky na stránku",
-  "previous-page": "Předchozí stránka",
-  "page": "Stránka {current} / {totalPages}",
-  "next-page": "Další stránka",
-  "all": "Všechna"
+  }
 }

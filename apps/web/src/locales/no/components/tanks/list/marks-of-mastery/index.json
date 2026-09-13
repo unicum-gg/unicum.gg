@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Ace Tanker: XP som trengs for å slå 99 % av spillerne"
     }
-  },
-  "rows-per-page": "Rader per side",
-  "previous-page": "Forrige side",
-  "page": "Side {current} / {totalPages}",
-  "next-page": "Neste side",
-  "all": "Alle"
+  }
 }

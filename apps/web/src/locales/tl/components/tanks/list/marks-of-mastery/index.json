@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Ace Tanker: XP na kailangan para talunin ang 99% ng mga manlalaro"
     }
-  },
-  "rows-per-page": "Mga hilera bawat pahina",
-  "previous-page": "Nakaraang pahina",
-  "page": "Pahina {current} / {totalPages}",
-  "next-page": "Susunod na pahina",
-  "all": "Lahat"
+  }
 }

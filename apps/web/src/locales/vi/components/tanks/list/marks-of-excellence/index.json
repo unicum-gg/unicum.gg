@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 Marks: sát thương tổng hợp trung bình lũy tiến của bạn (khoảng 100 trận đấu gần nhất) phải vượt qua 95% người chơi trên xe tăng này trong 14 ngày gần nhất"
     }
-  },
-  "rows-per-page": "Số hàng mỗi trang",
-  "previous-page": "Trang trước",
-  "page": "Trang {current} / {totalPages}",
-  "next-page": "Trang tiếp theo",
-  "all": "Tất cả"
+  }
 }

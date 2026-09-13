@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Ace Tanker: XP, необходим за победа над 99% от играчите"
     }
-  },
-  "rows-per-page": "Редове на страница",
-  "previous-page": "Предишна страница",
-  "page": "Страница {current} / {totalPages}",
-  "next-page": "Следваща страница",
-  "all": "Всички"
+  }
 }

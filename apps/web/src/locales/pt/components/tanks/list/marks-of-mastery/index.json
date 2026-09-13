@@ -16,10 +16,5 @@
       "label": "Distribuidor Ace",
       "tip": "Ás dos Tanques: XP necessária para superar 99% dos jogadores"
     }
-  },
-  "rows-per-page": "Linhas por página",
-  "previous-page": "Página anterior",
-  "page": "Página {current} / {totalPages}",
-  "next-page": "Próxima página",
-  "all": "Tudo"
+  }
 }

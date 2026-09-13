@@ -16,10 +16,5 @@
       "label": "As Tenkista",
       "tip": "As Tenkista: XP potreban za nadmašiti 99% igrača"
     }
-  },
-  "rows-per-page": "Redova po stranici",
-  "previous-page": "Prethodna stranica",
-  "page": "страница {current} / {totalPages}",
-  "next-page": "Sledeća stranica",
-  "all": "Sve"
+  }
 }

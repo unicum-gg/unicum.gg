@@ -16,10 +16,5 @@
       "label": "As del Tanque",
       "tip": "As del Tanque: XP necesarios para superar al 99 % de los jugadores"
     }
-  },
-  "rows-per-page": "Filas por página",
-  "previous-page": "Página anterior",
-  "page": "Página {current} / {totalPages}",
-  "next-page": "Siguiente página",
-  "all": "Todo"
+  }
 }

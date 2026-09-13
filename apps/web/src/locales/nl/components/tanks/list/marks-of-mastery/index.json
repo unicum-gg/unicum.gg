@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Ace Tanker: benodigde XP om 99% van de spelers te verslaan"
     }
-  },
-  "rows-per-page": "Rijen per pagina",
-  "previous-page": "Vorige pagina",
-  "page": "Pagina {current} / {totalPages}",
-  "next-page": "Volgende pagina",
-  "all": "Allen"
+  }
 }

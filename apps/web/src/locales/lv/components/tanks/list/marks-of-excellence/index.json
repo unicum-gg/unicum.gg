@@ -12,10 +12,5 @@
       "label": "3 Markas",
       "tip": "3 Markas: tavi slīdošie vidējie apvienotie bojājumi (pēdējās ~100 kaujās) ir jāpārsniedz 95% spēlētāju ar šo tanku pēdējo 14 dienu laikā"
     }
-  },
-  "rows-per-page": "Rindas uz lapu",
-  "previous-page": "Iepriekšējā lapa",
-  "page": "Lapa {current} / {totalPages}",
-  "next-page": "Nākamā lapa",
-  "all": "Visus"
+  }
 }

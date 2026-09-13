@@ -16,10 +16,5 @@
       "label": "Jazdec elitných tankov",
       "tip": "Tankové eso: Množstvo XP potrebné na prekonanie 99 % hráčov"
     }
-  },
-  "rows-per-page": "Riadky na stránku",
-  "previous-page": "Predchádzajúca stránka",
-  "page": "Strana {current} / {totalPages}",
-  "next-page": "Ďalšia stránka",
-  "all": "Všetky"
+  }
 }

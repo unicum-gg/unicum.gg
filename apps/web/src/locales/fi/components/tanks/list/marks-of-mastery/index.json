@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Ace Tanker: XP:tä, joka tarvitaan 99 % pelaajista päihittämiseen"
     }
-  },
-  "rows-per-page": "Rivit per sivu",
-  "previous-page": "Edellinen sivu",
-  "page": "Sivu {current} / {totalPages}",
-  "next-page": "Seuraava sivu",
-  "all": "Kaikki"
+  }
 }

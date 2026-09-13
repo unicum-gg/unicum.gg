@@ -12,10 +12,5 @@
       "label": "3 Markkia",
       "tip": "3 Markkia: yhdistetyn vahingon liukuvan keskiarvon (viimeiset noin 100 taistelua) on päihitettävä 95 % tällä panssarivaunulla viimeisten 14 päivän aikana pelanneista pelaajista"
     }
-  },
-  "rows-per-page": "Rivit per sivu",
-  "previous-page": "Edellinen sivu",
-  "page": "Sivu {current} / {totalPages}",
-  "next-page": "Seuraava sivu",
-  "all": "Kaikki"
+  }
 }

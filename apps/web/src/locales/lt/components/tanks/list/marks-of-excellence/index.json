@@ -12,10 +12,5 @@
       "label": "3 Markai",
       "tip": "3 Markai: jūsų slenkamasis bendros žalos vidurkis (paskutiniai ~100 mūšių) turi įveikti 95% žaidėjų, žaidusių šiuo tanku per pastarąsias 14 dienų"
     }
-  },
-  "rows-per-page": "Eilutės per puslapį",
-  "previous-page": "Ankstesnis puslapis",
-  "page": "Puslapis {current} / {totalPages}",
-  "next-page": "Kita puslapis",
-  "all": "Visi"
+  }
 }

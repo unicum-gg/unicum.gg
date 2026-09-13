@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 Marks: ang karaniwang pinagsamang pinsala mo sa humigit-kumulang na huling 100 laban ay kailangang talunin ang 95% ng mga manlalaro sa tank na ito sa nakalipas na 14 na mga araw"
     }
-  },
-  "rows-per-page": "Mga hilera bawat pahina",
-  "previous-page": "Nakaraang pahina",
-  "page": "Pahina {current} / {totalPages}",
-  "next-page": "Susunod na pahina",
-  "all": "Lahat"
+  }
 }

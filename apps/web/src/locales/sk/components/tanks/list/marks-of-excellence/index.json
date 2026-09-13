@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 znaky: váš kĺzavý priemer kombinovaného poškodenia (za posledných ~100 bitiek) musí byť vyšší ako u 95 % hráčov s týmto tankom za posledných 14 dní"
     }
-  },
-  "rows-per-page": "Riadky na stránku",
-  "previous-page": "Predchádzajúca stránka",
-  "page": "Strana {current} / {totalPages}",
-  "next-page": "Ďalšia stránka",
-  "all": "Všetky"
+  }
 }

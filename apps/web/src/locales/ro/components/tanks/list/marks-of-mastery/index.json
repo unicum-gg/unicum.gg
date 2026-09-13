@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Asul tancurilor: XP necesar pentru a depăși 99% dintre jucători"
     }
-  },
-  "rows-per-page": "Rânduri pe pagină",
-  "previous-page": "Pagina anterioară",
-  "page": "Pagină {current} / {totalPages}",
-  "next-page": "Pagina următoare",
-  "all": "Toate"
+  }
 }

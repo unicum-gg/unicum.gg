@@ -2,11 +2,11 @@
 
 import { useLocale } from "@onruntime/translations/react";
 import {
-  CaretLeftIcon,
-  CaretRightIcon,
   SlidersHorizontalIcon,
 } from "@phosphor-icons/react";
-import { SortDirection, type SortState, PAGE_SIZES, type PageSize, SortHead } from "../sorting";
+import { SortDirection, type SortState, SortHead } from "../sorting";
+import { TablePager, usePagination } from "@/components/table-pager";
+import PAGINATION from "@/constants/pagination";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";
@@ -21,13 +21,6 @@ import {
   type SpecColumn,
 } from "@/components/tanks/list/spec-columns";
 import type { TankListItem } from "@/components/tanks/list";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -108,7 +101,6 @@ export function TanksSpecsTable({
 }) {
   const { locale } = useLocale();
   const { t: tTable } = useTranslation("components/tanks/table");
-  const { t: tOwn } = useTranslation("components/tanks/list/specifications/index");
   const { t } = useTranslation("components/tanks/list/spec-columns");
   const [selected] = useSpecColumns();
   // Keep the canonical (grouped) order regardless of toggle order.
@@ -151,31 +143,11 @@ export function TanksSpecsTable({
     );
   }
 
-  const [pageSize, setPageSize] = useState<PageSize>(50);
-  const [page, setPage] = useState(1);
-  const [viewSig, setViewSig] = useState<{
-    rows: TankListItem[];
-    sort: SortState;
-    pageSize: PageSize;
-  }>({ rows, sort, pageSize });
-  if (
-    viewSig.rows !== rows ||
-    viewSig.sort !== sort ||
-    viewSig.pageSize !== pageSize
-  ) {
-    setViewSig({ rows, sort, pageSize });
-    setPage(1);
-  }
-
-  const total = sorted.length;
-  const size = pageSize === "all" ? Math.max(total, 1) : pageSize;
-  const totalPages = Math.max(1, Math.ceil(total / size));
-  const current = Math.min(page, totalPages);
-  const startIdx = (current - 1) * size;
-  const paged =
-    pageSize === "all" ? sorted : sorted.slice(startIdx, startIdx + size);
-  const firstShown = total === 0 ? 0 : startIdx + 1;
-  const lastShown = pageSize === "all" ? total : Math.min(startIdx + size, total);
+  // The site's own pager, like every other table: it owns the page and the
+  // row count, keeps them in `?page=`/`?ps=` and resets when the rows under
+  // the reader change. Five copies of this block were kept by hand here, down
+  // to a row count written in English in the markup.
+  const { paged, pager } = usePagination(sorted, PAGINATION.SIZE.CATALOGUE);
 
   return (
     <TooltipProvider delayDuration={150}>
@@ -254,54 +226,7 @@ export function TanksSpecsTable({
         </Table>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
-        <div className="flex items-center gap-2">
-          <span>{tOwn("rows-per-page")}</span>
-          <Select
-            value={String(pageSize)}
-            onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
-          >
-            <SelectTrigger className="h-7 w-18.5" size="sm">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {PAGE_SIZES.map((n) => (
-                <SelectItem key={n} value={String(n)}>
-                  {n}
-                </SelectItem>
-              ))}
-              <SelectItem value="all">{tOwn("all")}</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="tabular-nums">
-            {firstShown}–{lastShown} of {total}
-          </span>
-          <div className="flex items-center gap-1">
-            <button
-              type="button"
-              onClick={() => setPage(current - 1)}
-              disabled={current <= 1}
-              aria-label={tOwn("previous-page")}
-              className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
-            >
-              <CaretLeftIcon weight="bold" className="size-3.5" />
-            </button>
-            <span className="min-w-16 text-center tabular-nums">
-              {tOwn("page", { current, totalPages })}</span>
-            <button
-              type="button"
-              onClick={() => setPage(current + 1)}
-              disabled={current >= totalPages}
-              aria-label={tOwn("next-page")}
-              className="cursor-pointer rounded-md border border-fd-border p-1 transition-colors hover:bg-fd-secondary/40 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
-            >
-              <CaretRightIcon weight="bold" className="size-3.5" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <TablePager pager={pager} />
     </TooltipProvider>
   );
 }

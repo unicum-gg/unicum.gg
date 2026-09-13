@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Ace Tanker: ойыншылардың 99%-ынан асып түсуге қажет XP"
     }
-  },
-  "rows-per-page": "беттегі жолдар",
-  "previous-page": "алдыңғы бет",
-  "page": "{current} / {totalPages} бет",
-  "next-page": "келесі бет",
-  "all": "Барлығы"
+  }
 }

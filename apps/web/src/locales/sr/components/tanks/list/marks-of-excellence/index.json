@@ -12,10 +12,5 @@
       "label": "3 Marke",
       "tip": "3 Marke: ваше комбиновано просечно наношење штете (последњих ~100 битака) мора да надмаши 95% igrači на овом тенку током последњих 14 дана"
     }
-  },
-  "rows-per-page": "Redova po stranici",
-  "previous-page": "Prethodna stranica",
-  "page": "страница {current} / {totalPages}",
-  "next-page": "Sledeća stranica",
-  "all": "Sve"
+  }
 }

@@ -16,10 +16,5 @@
       "label": "Ace Tanker",
       "tip": "Ace Tanker: Benötigte EP, um 99 % der spieler zu übertreffen"
     }
-  },
-  "rows-per-page": "Reihen pro Seite",
-  "previous-page": "Vorherige Seite",
-  "page": "Seite {current} / {totalPages}",
-  "next-page": "Nächste Seite",
-  "all": "Alle"
+  }
 }

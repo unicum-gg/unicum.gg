@@ -12,10 +12,5 @@
       "label": "3 Marks",
       "tip": "3 Marks: je voortschrijdend gemiddelde van gecombineerde schade over de laatste ongeveer 100 gevechten moet 95% van de spelers op deze tank in de afgelopen 14 dagen verslaan"
     }
-  },
-  "rows-per-page": "Rijen per pagina",
-  "previous-page": "Vorige pagina",
-  "page": "Pagina {current} / {totalPages}",
-  "next-page": "Volgende pagina",
-  "all": "Allen"
+  }
 }

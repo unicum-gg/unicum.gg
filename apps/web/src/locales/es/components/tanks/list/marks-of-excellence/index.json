@@ -12,10 +12,5 @@
       "label": "3 Marcas",
       "tip": "3 Marcas: tu media móvil de daño combinado (últimas ~100 batallas) debe superar la del 95 % de los jugadores con este tanque durante los últimos 14 días"
     }
-  },
-  "rows-per-page": "Filas por página",
-  "previous-page": "Página anterior",
-  "page": "Página {current} / {totalPages}",
-  "next-page": "Siguiente página",
-  "all": "Todo"
+  }
 }
