@@ -40,7 +40,11 @@ export function LocaleSelector() {
     const secure = window.location.protocol === "https:" ? ";Secure" : "";
     document.cookie = `${STORAGE.COOKIES.LOCALE}=${next};path=/;max-age=31536000;SameSite=Lax${secure}`;
     const search = typeof window !== "undefined" ? window.location.search : "";
-    router.push(`${localizePath(pathname, next)}${search}`);
+    // `scroll: false`: it is the same page in another language, so the reader
+    // stays where they were reading. The picker sits in the footer as well as
+    // the top bar, where the default jump to the top is the whole page moving
+    // away from under the click that asked for it.
+    router.push(`${localizePath(pathname, next)}${search}`, { scroll: false });
   }
 
   return (
