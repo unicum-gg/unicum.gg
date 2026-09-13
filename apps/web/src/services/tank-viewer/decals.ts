@@ -69,6 +69,19 @@ export function clipToFacing(
   limit = 0.02,
 ) {
   if (!facing) return geometry;
+  // **A decal cut from a mesh with no normals gets none either, so they are
+  // worked out here rather than given up on.**
+  //
+  // Some pieces arrive without them: a 3D style's gun is two meshes and one of
+  // them is such a piece. Reading `count` off nothing threw inside the
+  // projection, which is awaited, so it surfaced as a bare "Uncaught (in
+  // promise)" and took the rest of the marks with it, the first flank laid and
+  // the other three never attempted. Returning the geometry whole instead is no
+  // better than the throw for the picture: the box passes through the barrel
+  // and takes the far wall with it, which is the very thing this function
+  // exists to stop, and the mark comes out flattened over both sides. The
+  // positions are enough to say which way a triangle faces.
+  if (!geometry.getAttribute("normal")) geometry.computeVertexNormals();
   const normal = geometry.getAttribute("normal");
   const kept = [];
   for (let i = 0; i < normal.count; i += 3) {
