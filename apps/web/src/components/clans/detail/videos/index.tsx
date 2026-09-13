@@ -19,6 +19,7 @@ import {
 import { VideoSection } from "@/components/tanks/detail/videos/section";
 import { VideoPlayerSurface } from "@/components/tanks/detail/videos/surface";
 import { useVideosView } from "@/components/tanks/detail/videos/view-toggle";
+import { TaggedTitle } from "@/components/clans/detail/tagged-title";
 import { ClanTacticDialogSlot } from "./submit-dialog-slot";
 
 /** The element the player takes over, scrolled back into view when a card
@@ -43,11 +44,14 @@ const CLAN_PLAYER_ID = "clan-video-player";
 export function ClanVideosTab({
   region,
   tag,
+  color,
   clanId,
   videos,
 }: {
   region: Region;
   tag: string;
+  /** The clan's own color, for the `[TAG]` in the section title. */
+  color: string;
   /** Which queued rows are this clan's, out of the reader's whole queue. */
   clanId: number;
   /** Fetched by the page, which needs the count for the nav anyway. Undefined
@@ -67,7 +71,7 @@ export function ClanVideosTab({
       ownClanId={clanId}
       anchorId={CLAN_PLAYER_ID}
     >
-      <ClanVideos videos={videos} region={region} tag={tag} />
+      <ClanVideos videos={videos} region={region} tag={tag} color={color} />
     </TankVideoPlayerProvider>
   );
 }
@@ -76,12 +80,14 @@ function ClanVideos({
   videos: published,
   region,
   tag,
+  color,
 }: {
   videos: TankVideoCardData[];
   region: Region;
   tag: string;
+  color: string;
 }) {
-  const { t } = useTranslation("components/clans/detail/videos/index");
+  const { t: tTabs } = useTranslation("components/clans/detail/tabs");
   const player = useTankVideoPlayer();
   const [view, setView] = useVideosView();
   // The provider merges in the reader's own queued rows for this clan, so the
@@ -108,7 +114,14 @@ function ClanVideos({
       <Panel>
         <VideoSection
           region={region}
-          title={t("clan-videos", { tag })}
+          // The tag wears the clan's color, like every other panel title on
+          // this page. The count beside it stays a bare number here: the
+          // heading already says what it counts.
+          title={
+            <TaggedTitle tag={tag} color={color}>
+              {tTabs("sections.videos")}
+            </TaggedTitle>
+          }
           battles={all}
           view={view}
           onViewChange={setView}

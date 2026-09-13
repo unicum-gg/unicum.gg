@@ -76,9 +76,10 @@ export function ClanSectionNav({
   // Distinct battle-having vehicle count, shown as "Tanks (N)" once loaded
   // (mirrors the player page). Undefined until the vehicles aggregation lands.
   tankCount?: number;
-  // Published battles this clan is credited on. Undefined until the fetch
-  // lands, and the label is the only thing that waits on it: the tab is offered
-  // either way, so nothing appears and then vanishes.
+  // Published videos this clan is credited on, counted like the section inside
+  // the tab: a recording holding six of its battles is one video. Undefined
+  // until the fetch lands, and the label is the only thing that waits on it:
+  // the tab is offered either way, so nothing appears and then vanishes.
   videoCount?: number;
 }) {
   const { locale } = useLocale();

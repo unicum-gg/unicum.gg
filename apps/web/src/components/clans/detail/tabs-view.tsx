@@ -249,7 +249,7 @@ export function ClanTabsView({
             section={section}
             onSelect={selectSection}
             tankCount={tankCount}
-            videoCount={videos?.length}
+            videoCount={videos && new Set(videos.map((v) => v.videoId)).size}
           />
         </PanelHeader>
       </Panel>
@@ -290,6 +290,7 @@ export function ClanTabsView({
         <ClanVideosTab
           region={region}
           tag={tag}
+          color={color}
           clanId={clanId}
           videos={videos}
         />
