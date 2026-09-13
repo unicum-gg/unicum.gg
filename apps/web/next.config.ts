@@ -7,7 +7,6 @@ import { experimental } from "./config/experimental";
 import { headers } from "./config/headers";
 import { images } from "./config/images";
 import { redirects } from "./config/redirects";
-import { rewrites } from "./config/rewrites";
 
 const nextConfig: NextConfig = {
   // ISR / server cache handler. The default handler writes every generated page
@@ -60,7 +59,6 @@ const nextConfig: NextConfig = {
   staticPageGenerationTimeout: 300,
   experimental,
   images,
-  rewrites,
   redirects,
   headers,
 };

@@ -36,11 +36,40 @@ function regionlessKind(pathname: string): "served" | "needs-region" | "other" {
 }
 
 /**
- * Send a page to the Markdown converter, keeping the address it was asked at.
+ * A sitemap's public address is file-like, so its pages read `sitemap-3.xml`
+ * while App Router can only name a dynamic segment as a whole folder
+ * (`…/sitemap.xml/[id]`). The mapping used to be a `next.config` rewrite, which
+ * runs AFTER this proxy: once the locale port started prefixing every path, the
+ * pattern no longer matched anything and every paginated sitemap 404ed, the
+ * section one carrying the `hreflang` alternates included.
  *
- * The slug keeps the locale prefix, so the page the route fetches back is the
- * one in the language that was asked for.
+ * It is answered here rather than restored there because the two cannot be kept
+ * apart: whatever rewrites a sitemap has to agree with whatever adds the locale
+ * prefix, and only one of them can run first.
  */
+const PAGINATED_SITEMAP = /^(.*)\/sitemap-(\d+)\.xml$/;
+
+/**
+ * The route behind a sitemap URL, or null when the path is not one.
+ *
+ * A sitemap is read by a crawler and lists absolute URLs it builds itself, so
+ * it has ONE address and one language: serving it per visitor would publish the
+ * same file at 36 of them and let a CDN cache a redirect onto a file whose
+ * whole job is to be fetched by machines that never negotiate.
+ */
+function sitemapRoute(pathname: string): string | null {
+  const paginated = PAGINATED_SITEMAP.exec(pathname);
+  if (!paginated && !pathname.endsWith("/sitemap.xml")) return null;
+  const route = paginated
+    ? `${paginated[1]}/sitemap.xml/${paginated[2]}`
+    : pathname;
+  // The index and its pages live beside `app/[locale]`; a section's lives
+  // inside it, and is served in the language the entries are written in.
+  return matchesAnyRoute(route, ROOT_HANDLERS)
+    ? route
+    : `/${DEFAULT_LOCALE}${route}`;
+}
+
 /**
  * A redirect decided from who is asking, not from the URL.
  *
@@ -60,6 +89,12 @@ function perVisitorRedirect(url: URL): NextResponse {
   return response;
 }
 
+/**
+ * Send a page to the Markdown converter, keeping the address it was asked at.
+ *
+ * The slug keeps the locale prefix, so the page the route fetches back is the
+ * one in the language that was asked for.
+ */
 function markdownRewrite(
   req: NextRequest,
   pathname: string,
@@ -101,6 +136,21 @@ export function proxy(req: NextRequest) {
     const url = req.nextUrl.clone();
     url.pathname = rest;
     return NextResponse.redirect(url, 308);
+  }
+
+  // A sitemap, at its one address: the `sitemap-N.xml` pages resolved onto the
+  // route that serves them, a prefixed variant sent back to the bare path, and
+  // neither the region nor the language redirect below ever reached.
+  const sitemap = sitemapRoute(rest);
+  if (sitemap) {
+    if (prefixed) {
+      const url = req.nextUrl.clone();
+      url.pathname = rest;
+      return NextResponse.redirect(url, 308);
+    }
+    const url = req.nextUrl.clone();
+    url.pathname = sitemap;
+    return NextResponse.rewrite(url);
   }
 
   // Serve a Markdown rendering of any page through two triggers: a `.md` suffix
