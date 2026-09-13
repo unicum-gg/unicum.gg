@@ -12,7 +12,10 @@
     "player": "Speler",
     "rank": "Rang",
     "battles": "Gevechten",
-    "rating": "Rangpunten"
+    "rating": "Rangpunten",
+    "battles-per-day": "Gevechten/dag",
+    "points-per-day": "Punten/dag",
+    "points-per-battle": "Ptn/gevecht"
   },
   "alias": "(als {nickname})",
   "ranks": {

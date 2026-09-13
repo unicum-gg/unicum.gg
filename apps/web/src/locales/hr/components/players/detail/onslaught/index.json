@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Pogledaj ljestvicu ove sezone",
   "standing-line": "{rating} bodova ocjene · {battles} bitaka",
   "the-board-only-lists-players": "Ljestvica prikazuje samo igrače koji dosegnu razinu Champion, njih nekoliko tisuća po regiji, pa ovdje završava gotovo svaki profil. Popunjava se sama u sezoni u kojoj je dosegnu.",
-  "updated": "Ažurirano {when}"
+  "updated": "Ažurirano {when}",
+  "best": "najbolji",
+  "lost-place": "Izgubili su mjesto {when}",
+  "lost-short": "(izgubljeno mjesto)"
 }

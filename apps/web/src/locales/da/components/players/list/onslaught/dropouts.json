@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Spiller",
+    "best-rank": "Bedste placering",
+    "last-rank": "Sidste placering",
+    "rating": "Rangeringspoint",
+    "battles": "Kampe",
+    "left": "Forlod ranglisten"
+  },
+  "no-match": "Ingen spiller matcher de nuværende filtre."
+}

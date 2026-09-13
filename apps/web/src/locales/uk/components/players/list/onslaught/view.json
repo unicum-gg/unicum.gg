@@ -12,7 +12,10 @@
     "player": "Гравець",
     "rank": "Ранг",
     "battles": "Бої",
-    "rating": "Очки рейтингу"
+    "rating": "Очки рейтингу",
+    "battles-per-day": "Бої/день",
+    "points-per-day": "Очки/день",
+    "points-per-battle": "Очки/бій"
   },
   "alias": "(під ніком {nickname})",
   "ranks": {

@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Zobacz Klasyfikację w tym sezonie",
   "standing-line": "Punkty rankingowe: {rating} · Bitwy: {battles}",
   "the-board-only-lists-players": "Klasyfikacja uwzględnia tylko graczy, którzy osiągnęli rangę Czempion, czyli kilka tysięcy osób w każdym regionie. Dlatego ten komunikat wyświetla się na niemal każdym profilu. Sekcja uzupełni się automatycznie w sezonie, w którym gracz osiągnie tę rangę.",
-  "updated": "Zaktualizowane {when}"
+  "updated": "Zaktualizowane {when}",
+  "best": "najlepszy",
+  "lost-place": "Utracili miejsce {when}",
+  "lost-short": "(utracili miejsce)"
 }

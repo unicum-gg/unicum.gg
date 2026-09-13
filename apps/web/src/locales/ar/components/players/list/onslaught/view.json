@@ -12,7 +12,10 @@
     "player": "لاعب",
     "rank": "الرتبة",
     "battles": "معارك",
-    "rating": "نقاط التصنيف"
+    "rating": "نقاط التقييم",
+    "battles-per-day": "المعارك/اليوم",
+    "points-per-day": "النقاط/اليوم",
+    "points-per-battle": "النقاط/معركة"
   },
   "alias": "(باسم {nickname})",
   "ranks": {

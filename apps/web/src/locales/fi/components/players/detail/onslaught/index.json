@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Katso tämän kauden tulostaulukko",
   "standing-line": "{rating} arvosanapistettä · {battles} taistelua",
   "the-board-only-lists-players": "Taulukossa ovat vain Championin saavuttaneet pelaajat, muutama tuhat aluetta kohden, joten lähes jokainen profiili päätyy tänne. Se täyttyy automaattisesti sillä kaudella, jolloin pelaaja saavuttaa sen.",
-  "updated": "Päivitetty {when}"
+  "updated": "Päivitetty {when}",
+  "best": "paras",
+  "lost-place": "Menetti sijoituksensa {when}",
+  "lost-short": "(menetti sijoituksen)"
 }

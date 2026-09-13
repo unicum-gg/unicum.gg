@@ -12,7 +12,10 @@
     "player": "Manlalaro",
     "rank": "Ranggo",
     "battles": "Mga labanan",
-    "rating": "Mga puntos sa rating"
+    "rating": "Mga Puntos ng Rating",
+    "battles-per-day": "Mga laban/Araw",
+    "points-per-day": "Mga puntos/Araw",
+    "points-per-battle": "Mga puntos/Labanan"
   },
   "alias": "(bilang {nickname})",
   "ranks": {
@@ -21,7 +24,7 @@
     "tier": "Antas",
     "intro": "Umaakyat ka sa mga ranggo ng {mode} sa pamamagitan ng pagkapanalo sa mga laban. Bawat panalo ay nagbibigay ng Rating Points batay sa ganda ng iyong paglalaro. Ang {champion} ang pinakamataas na ranggong maaabot mo gamit lamang ang mga puntos, at kapag naabot mo ito, mapupunta ka sa talaan ng ranggo. Ang {legend} ay hindi nakapirming threshold. Ito ang pinakamataas na bahagdan ng mga {champion}, kaya nagbabago ang cutoff nito depende sa mga kalaban, at ang tabla ay pinagpapasyahan ayon sa mga laban na nilaro. Ang eksaktong cutoff ng {legend} at {champion} ay mula sa kasalukuyang season at minamarkahan sa board.",
     "legend-blurb": "Ang mga {champion} na may pinakamataas na rating. Nililimitahan ito ng laro sa isang nakatakdang posisyon sa leaderboard bawat season, kaya nag-iiba ang laki nito ayon sa season at rehiyon, hindi ayon sa nakapirming target na puntos. Kapag bumaba ka sa huling {legend}, babalik ka sa {champion}.",
-    "champion-blurb": "Ang pinakamataas na ranggo na maaakyatan gamit ang Rating Points, at ang pasukan sa leaderboard. Ang bawat ranked na manlalaro ay hindi bababa sa {champion}."
+    "champion-blurb": "Ang pinakamataas na ranggo na maaari mong maabot gamit ang Mga Puntos ng Rating, at ang pasukan sa talaan ng ranggo. Hindi bababa sa {champion} ang bawat ranked na manlalaro."
   },
   "race": {
     "title-live": "Ano ang kailangan sa ngayon",

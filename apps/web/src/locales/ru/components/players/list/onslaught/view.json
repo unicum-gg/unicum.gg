@@ -12,7 +12,10 @@
     "player": "Игрок",
     "rank": "Ранг",
     "battles": "Бои",
-    "rating": "Очки рейтинга"
+    "rating": "Очки рейтинга",
+    "battles-per-day": "Бои/день",
+    "points-per-day": "Очки/день",
+    "points-per-battle": "Очки/бой"
   },
   "alias": "(под именем {nickname})",
   "ranks": {

@@ -1,0 +1,10 @@
+{
+  "title": "Hva som skal til for en plassering",
+  "players": "{count} spillere",
+  "median-rating": "Median for {metric}",
+  "battles-to-qualify": "Kamper for å kvalifisere seg",
+  "battles-played": "Kamper denne sesongen",
+  "daily-pace": "Daglig tempo",
+  "days-played": "spilt på {days} av {total} dager",
+  "note": "Medianer på tvers av spillerne som har hver plassering. Kamper for å kvalifisere seg er antallet kamper hver av dem hadde spilt i modusen første gang de dukket opp på rangeringen. Dette kan vi bare telle for sesongene vi registrerte direkte. Daglig tempo fordeler sesongen deres over hver dag den har vart, så det er gjennomsnittet du må holde for å henge med. Det er ikke tavlens kolonne for Kamper/dag, som deler på dagene en spiller faktisk spilte. De fleste spiller ikke hver dag: Linjen under tempoet sier hvor mange av disse dagene de ble sett spille, og jo færre dager de bruker, desto høyere må tempoet være."
+}

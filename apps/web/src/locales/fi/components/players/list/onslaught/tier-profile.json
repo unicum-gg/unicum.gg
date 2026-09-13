@@ -1,0 +1,10 @@
+{
+  "title": "Mitä sijoitusluokka vaatii",
+  "players": "{count} pelaajaa",
+  "median-rating": "Mediaani, {metric}",
+  "battles-to-qualify": "Karsintaan vaadittavat taistelut",
+  "battles-played": "Tämän kauden taistelut",
+  "daily-pace": "Päivittäinen tahti",
+  "days-played": "pelattu {days} päivänä {total} päivästä",
+  "note": "Mediaanit yli kaikkien pelaajien, jotka pitävät kutakin sijoitusta. Karsintaan vaadittavat taistelut kertoo, kuinka monta taistelua kukin heistä oli pelannut pelimuodossa ensimmäisen kerran tulostaulukossa näkyessään. Voimme laskea tämän vain niiltä kausilta, jotka tallensimme livenä. Päivittäinen tahti jakaa heidän kautensa jokaiselle sen käynnissäolopäivälle, joten se kertoo, mikä keskiarvo sinun on saavutettava pysyäksesi mukana. Se ei ole tulostaulukon Taisteluita/päivä-sarake, joka jakaa taistelut niiden päivien määrällä, joina pelaaja itse asiassa pelasi. Useimmat heistä eivät pelaa joka päivä. Tahdin alla oleva rivi sanoo, kuinka monena näistä päivistä heidän nähtiin pelaavan. Mitä harvempina päivinä he pelaavat, sitä suurempi jokaisen päivän tahdin on oltava."
+}

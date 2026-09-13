@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Pas encore de classement de l’Offensive.",
   "no-player-matches-the-current": "Aucun joueur ne correspond aux filtres actuels.",
-  "onslaught": "Offensive"
+  "onslaught": "Offensive",
+  "activity": {
+    "today": "Joués aujourd’hui",
+    "week": "Joués cette semaine",
+    "idle": "Inactif"
+  },
+  "views": {
+    "ranked": "Classement",
+    "lost": "Ont perdu leur place"
+  }
 }

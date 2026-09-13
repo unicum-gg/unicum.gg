@@ -1,0 +1,10 @@
+{
+  "title": "Cosa richiede ogni posizione",
+  "players": "{count} giocatori",
+  "median-rating": "Valutazione mediana {metric}",
+  "battles-to-qualify": "Battaglie necessarie per qualificarsi",
+  "battles-played": "Battaglie giocate in questa stagione",
+  "daily-pace": "Ritmo giornaliero",
+  "days-played": "giocato in {days} giorni su {total}",
+  "note": "Medie dei giocatori che occupano ogni posizione. Battaglie necessarie per qualificarsi indica quante battaglie aveva giocato ciascuno di loro nella modalità la prima volta in cui è comparso in classifica. Possiamo calcolarle solo per le stagioni che abbiamo registrato in diretta. Il ritmo giornaliero distribuisce la loro stagione su ogni giorno in cui si è svolta, quindi indica la media necessaria per tenere il passo. Non corrisponde alla colonna Battaglie/Giorno della classifica, che divide per i giorni in cui un giocatore ha effettivamente giocato. La maggior parte di loro non gioca ogni giorno. La linea sotto il ritmo dice in quanti di quei giorni sono stati visti in gioco. Meno giorni utilizzano, maggiore deve essere il numero di battaglie per ciascun giorno."
+}

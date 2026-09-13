@@ -12,7 +12,10 @@
     "player": "玩家",
     "rank": "段位",
     "battles": "战斗场次",
-    "rating": "评级点数"
+    "rating": "评级点数",
+    "battles-per-day": "战斗场次/天",
+    "points-per-day": "积分/天",
+    "points-per-battle": "积分/战斗场次"
   },
   "alias": "（显示为 {nickname}）",
   "ranks": {

@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Visualizza la classifica di questa stagione",
   "standing-line": "{rating} punti di valutazione · {battles} battaglie",
   "the-board-only-lists-players": "La classifica include solo i giocatori che raggiungono il grado Campione, poche migliaia per regione, ed è per questo che quasi tutti i profili mostrano questa schermata. I dati vengono aggiunti automaticamente nella stagione in cui il giocatore raggiunge quel grado.",
-  "updated": "Aggiornato {when}"
+  "updated": "Aggiornato {when}",
+  "best": "migliore",
+  "lost-place": "Ha perso il posto {when}",
+  "lost-short": "(posto perso)"
 }

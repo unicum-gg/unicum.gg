@@ -12,7 +12,10 @@
     "player": "Oyuncu",
     "rank": "Kademe",
     "battles": "Savaşlar",
-    "rating": "Reyting Puanı"
+    "rating": "Reyting Puanı",
+    "battles-per-day": "Savaşlar/Gün",
+    "points-per-day": "Puanlar/Gün",
+    "points-per-battle": "Puan/Savaş"
   },
   "alias": "({nickname} olarak)",
   "ranks": {

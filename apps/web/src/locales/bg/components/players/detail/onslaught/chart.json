@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "Изкачването през този сезон"
+  "this-season-s-climb": "Изкачването през този сезон",
+  "battles-played": "Изиграни битки",
+  "rating-points": "Рейтингови точки",
+  "legend-cutoff": "Праг за {tier}"
 }

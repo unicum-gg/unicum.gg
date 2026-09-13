@@ -1,0 +1,10 @@
+{
+  "title": "Qué puesto ocupa",
+  "players": "{count} jugadores",
+  "median-rating": "Mediana de {metric}",
+  "battles-to-qualify": "Batallas para clasificarse",
+  "battles-played": "Batallas de esta temporada",
+  "daily-pace": "Ritmo diario",
+  "days-played": "Jugó {days} de {total} días",
+  "note": "Medianas en todo el conjunto de jugadores que ocupan cada puesto. Batallas para clasificarse es el número de batallas que cada uno había jugado en el modo la primera vez que apareció en la clasificación, y solo podemos contarlo para las temporadas que registramos en directo. El ritmo diario distribuye su temporada entre todos los días que ha durado, así que es el promedio que debes mantener para seguir el ritmo. No es la columna Batallas/Día de la clasificación, que divide entre los días que un jugador jugó realmente. La mayoría no juega todos los días: la línea debajo del ritmo dice en cuántos de esos días se les vio jugando, y cuantos menos días usan, mayor debe ser su ritmo."
+}

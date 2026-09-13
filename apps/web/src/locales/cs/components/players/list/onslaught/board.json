@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Pro Nápor zatím není k dispozici žebříček.",
   "no-player-matches-the-current": "Aktuálním filtrům neodpovídá žádný hráč.",
-  "onslaught": "Nápor"
+  "onslaught": "Nápor",
+  "activity": {
+    "today": "Odehráno dnes",
+    "week": "Odehráno tento týden",
+    "idle": "Neaktivní"
+  },
+  "views": {
+    "ranked": "Pořadí",
+    "lost": "Ztraceno umístění"
+  }
 }

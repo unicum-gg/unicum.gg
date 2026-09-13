@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Pelaaja",
+    "best-rank": "Paras sijoitus",
+    "last-rank": "Viimeisin sijoitus",
+    "rating": "Luokituspisteet",
+    "battles": "Taisteluita",
+    "left": "Poistui tulostaulukosta"
+  },
+  "no-match": "Mikään pelaaja ei vastaa nykyisiä suodattimia."
+}

@@ -2,15 +2,15 @@
   "columns": {
     "class3": {
       "label": "3rd Class",
-      "tip": "3rd Class: XP na kailangan upang talunin ang 50% ng mga manlalaro"
+      "tip": "3rd Class: XP na kailangan para talunin ang 50% ng mga manlalaro"
     },
     "class2": {
       "label": "2nd Class",
-      "tip": "2nd Class: XP na kailangan upang talunin ang 80% ng mga manlalaro"
+      "tip": "2nd Class: XP na kailangan para talunin ang 80% ng mga manlalaro"
     },
     "class1": {
       "label": "1st Class",
-      "tip": "1st Class: XP na kailangan upang talunin ang 95% ng mga manlalaro"
+      "tip": "1st Class: XP na kailangan para talunin ang 95% ng mga manlalaro"
     },
     "ace": {
       "label": "Ace Tanker",

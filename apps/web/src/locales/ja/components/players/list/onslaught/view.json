@@ -12,7 +12,10 @@
     "player": "プレイヤー",
     "rank": "ランク",
     "battles": "戦闘数",
-    "rating": "レーティング・ポイント"
+    "rating": "レーティング・ポイント",
+    "battles-per-day": "戦闘数/日",
+    "points-per-day": "ポイント/日",
+    "points-per-battle": "ポイント/戦闘"
   },
   "alias": "（{nickname}名義）",
   "ranks": {

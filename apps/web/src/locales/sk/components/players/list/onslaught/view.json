@@ -12,7 +12,10 @@
     "player": "Hráč",
     "rank": "Hodnosť",
     "battles": "Bitky",
-    "rating": "Body hodnotenia"
+    "rating": "točke ocene",
+    "battles-per-day": "Bitky/Deň",
+    "points-per-day": "Body/Deň",
+    "points-per-battle": "Body/Bitka"
   },
   "alias": "(ako {nickname})",
   "ranks": {

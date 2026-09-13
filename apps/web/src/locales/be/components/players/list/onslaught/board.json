@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Рэйтынгаў Наступу яшчэ няма.",
   "no-player-matches-the-current": "Няма гульца, які адпавядае бягучым фільтрам.",
-  "onslaught": "Наступ"
+  "onslaught": "Наступ",
+  "activity": {
+    "today": "Згулялі сёння",
+    "week": "Згулялі на гэтым тыдні",
+    "idle": "Неактыўныя"
+  },
+  "views": {
+    "ranked": "Рэйтынгі",
+    "lost": "Страцілі месца"
+  }
 }

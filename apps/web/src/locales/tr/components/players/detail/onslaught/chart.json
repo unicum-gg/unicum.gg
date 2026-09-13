@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "Bu sezonun yükselişi"
+  "this-season-s-climb": "Bu sezonun yükselişi",
+  "battles-played": "Oynanan Savaşlar",
+  "rating-points": "Reyting Puanı",
+  "legend-cutoff": "Seviye eşiği: {tier}"
 }

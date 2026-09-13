@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Spelare",
+    "best-rank": "Bästa placering",
+    "last-rank": "Senaste placering",
+    "rating": "Betyg",
+    "battles": "Strider",
+    "left": "Lämnade topplistan"
+  },
+  "no-match": "Ingen spelare matchar aktuella filter."
+}

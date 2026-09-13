@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Speler",
+    "best-rank": "Beste rang",
+    "last-rank": "Laatste rang",
+    "rating": "Rangpunten",
+    "battles": "Gevechten",
+    "left": "Is weg van het klassement"
+  },
+  "no-match": "Geen speler voldoet aan de huidige filters."
+}

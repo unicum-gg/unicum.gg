@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Погледај ранг-листу ове сезоне",
   "standing-line": "{rating} рејтинг бодова · {battles} bitke",
   "the-board-only-lists-players": "Ранг-листа приказује само играче који достигну шампиона, њих неколико хиљада по региону, па се ту налази скоро сваки профил. Попуњава се сама током сезоне у којој то достигну.",
-  "updated": "Ažurirano {when}"
+  "updated": "Ažurirano {when}",
+  "best": "najbolje",
+  "lost-place": "Изгубили су место {when}",
+  "lost-short": "(изгубљено место)"
 }

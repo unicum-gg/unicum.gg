@@ -1,0 +1,10 @@
+{
+  "title": "Hvad en placering kræver",
+  "players": "{count} spillere",
+  "median-rating": "Median for {metric}",
+  "battles-to-qualify": "Kampe for at kvalificere sig",
+  "battles-played": "Kampe i denne sæson",
+  "daily-pace": "Daglig takt",
+  "days-played": "spillet på {days} af {total} dage",
+  "note": "Medianer på tværs af spillerne, der har hver placering. Kampe for at kvalificere sig er det antal kampe, de hver især havde spillet i spiltilstanden, første gang de vises på ranglisten. Det kan vi kun tælle for de sæsoner, vi har registreret live. Den daglige takt fordeler deres sæson over hver dag, den har kørt, så det er det gennemsnit, du skal holde for at følge med. Den er ikke ranglistens Kampe/dag-kolonne, som dividerer med de dage, en spiller faktisk spillede. De fleste spiller ikke hver dag. Linjen under takten siger, hvor mange af disse dage de blev set spille, og jo færre dage de bruger, desto større skal hver enkelt være."
+}

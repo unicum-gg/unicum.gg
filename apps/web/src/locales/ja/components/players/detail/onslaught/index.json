@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "今シーズンのランキングを見る",
   "standing-line": "{rating}レーティングポイント · {battles}戦闘",
   "the-board-only-lists-players": "このランキングにはチャンピオンに到達したプレイヤーのみが掲載されます。地域ごとに数千人しかいないため、ほとんどのプロフィールはここに表示されません。到達したシーズンに自動で反映されます。",
-  "updated": "更新日期 {when}"
+  "updated": "更新日期 {when}",
+  "best": "最高",
+  "lost-place": "{when}に順位を失った",
+  "lost-short": "（順位を失った）"
 }

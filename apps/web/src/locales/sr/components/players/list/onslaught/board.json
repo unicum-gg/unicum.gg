@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Juriš: пласман još nije dostupan.",
   "no-player-matches-the-current": "Ниједан играч не одговара тренутним филтерима.",
-  "onslaught": "Juriš"
+  "onslaught": "Juriš",
+  "activity": {
+    "today": "Одиграно Danas",
+    "week": "Одиграно ове недеље",
+    "idle": "Неактивни"
+  },
+  "views": {
+    "ranked": "Пласман",
+    "lost": "Изгубили су место"
+  }
 }

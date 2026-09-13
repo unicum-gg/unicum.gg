@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Nog geen Bestorming-klassement.",
   "no-player-matches-the-current": "Geen enkele speler komt overeen met de huidige filters.",
-  "onslaught": "Bestorming"
+  "onslaught": "Bestorming",
+  "activity": {
+    "today": "Vandaag gespeeld",
+    "week": "Deze week gespeeld",
+    "idle": "Inactief"
+  },
+  "views": {
+    "ranked": "Klassementen",
+    "lost": "Plaats verloren"
+  }
 }

@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Játékos",
+    "best-rank": "Legjobb helyezés",
+    "last-rank": "Utolsó helyezés",
+    "rating": "Értékelési pontok",
+    "battles": "Csaták",
+    "left": "Távozott a ranglistáról"
+  },
+  "no-match": "Egyetlen játékos sem felel meg a jelenlegi szűrőknek."
+}

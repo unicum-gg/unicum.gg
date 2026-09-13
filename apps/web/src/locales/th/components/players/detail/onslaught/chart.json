@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "เส้นทางไต่อันดับของฤดูกาลนี้"
+  "this-season-s-climb": "เส้นทางไต่อันดับของฤดูกาลนี้",
+  "battles-played": "การรบที่เล่นแล้ว",
+  "rating-points": "คะแนนจัดอันดับ",
+  "legend-cutoff": "เกณฑ์ตัดของระดับ {tier}"
 }

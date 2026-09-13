@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Manlalaro",
+    "best-rank": "Pinakamahusay na ranggo",
+    "last-rank": "Huling ranggo",
+    "rating": "Mga Puntos ng Rating",
+    "battles": "Mga labanan",
+    "left": "Umalis sa talahanayan ng ranggo"
+  },
+  "no-match": "Walang manlalarong tumutugma sa kasalukuyang mga filter."
+}

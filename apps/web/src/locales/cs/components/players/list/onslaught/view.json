@@ -12,7 +12,10 @@
     "player": "Hráč",
     "rank": "Hodnost",
     "battles": "Bitev",
-    "rating": "Body hodnocení"
+    "rating": "Body hodnocení",
+    "battles-per-day": "Bitvy/den",
+    "points-per-day": "Body/den",
+    "points-per-battle": "Body/bitva"
   },
   "alias": "(jako {nickname})",
   "ranks": {

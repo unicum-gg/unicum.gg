@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Người chơi",
+    "best-rank": "Hạng tốt nhất",
+    "last-rank": "Hạng cuối cùng",
+    "rating": "Điểm Xếp hạng",
+    "battles": "Số trận",
+    "left": "Đã thoát khỏi bảng xếp hạng"
+  },
+  "no-match": "Không có người chơi nào phù hợp với các bộ lọc hiện tại."
+}

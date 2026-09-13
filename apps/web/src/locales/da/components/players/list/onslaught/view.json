@@ -12,7 +12,10 @@
     "player": "Spiller",
     "rank": "Rang",
     "battles": "Kampe",
-    "rating": "Rangeringspoint"
+    "rating": "Rangeringspoint",
+    "battles-per-day": "Kampe/dag",
+    "points-per-day": "Point/dag",
+    "points-per-battle": "Point/kamp"
   },
   "alias": "(som {nickname})",
   "ranks": {

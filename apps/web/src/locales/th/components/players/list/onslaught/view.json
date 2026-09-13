@@ -12,7 +12,10 @@
     "player": "ผู้เล่น",
     "rank": "อันดับ",
     "battles": "การรบ",
-    "rating": "คะแนนจัดอันดับ"
+    "rating": "คะแนนจัดอันดับ",
+    "battles-per-day": "การรบ/วัน",
+    "points-per-day": "คะแนน/วัน",
+    "points-per-battle": "คะแนน/การรบ"
   },
   "alias": "(ในชื่อ {nickname})",
   "ranks": {

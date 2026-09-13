@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Pagaidām nav Trieciena režīma ranga.",
   "no-player-matches-the-current": "Neviens spēlētājs neatbilst pašreizējiem filtriem.",
-  "onslaught": "Uzbrukums"
+  "onslaught": "Uzbrukums",
+  "activity": {
+    "today": "Spēlēts šodien",
+    "week": "Spēlēts šonedēļ",
+    "idle": "Neaktīvs"
+  },
+  "views": {
+    "ranked": "Klasifikācija",
+    "lost": "Vieta zaudēta"
+  }
 }

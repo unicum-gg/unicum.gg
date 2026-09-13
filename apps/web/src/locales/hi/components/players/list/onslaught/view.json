@@ -12,7 +12,10 @@
     "player": "खिलाड़ी",
     "rank": "रैंक",
     "battles": "युद्ध",
-    "rating": "रेटिंग अंक"
+    "rating": "रेटिंग अंक",
+    "battles-per-day": "युद्ध/दिन",
+    "points-per-day": "अंक/दिन",
+    "points-per-battle": "अंक/युद्ध"
   },
   "alias": "({nickname} के नाम से)",
   "ranks": {

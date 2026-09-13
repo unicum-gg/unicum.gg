@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Ingen Onslaught-stillinger endnu.",
   "no-player-matches-the-current": "Ingen spiller matcher de nuværende filtre.",
-  "onslaught": "Onslaught"
+  "onslaught": "Onslaught",
+  "activity": {
+    "today": "Spillet i dag",
+    "week": "Spillet i denne uge",
+    "idle": "Inaktiv"
+  },
+  "views": {
+    "ranked": "Placeringer",
+    "lost": "Mistet deres placering"
+  }
 }

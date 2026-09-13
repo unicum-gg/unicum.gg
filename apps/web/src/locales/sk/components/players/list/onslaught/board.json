@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Zatiaľ žiadne poradie v režime Ofenzíva.",
   "no-player-matches-the-current": "Aktuálnym filtrom nezodpovedá žiadny hráč.",
-  "onslaught": "Ofenzíva"
+  "onslaught": "Ofenzíva",
+  "activity": {
+    "today": "Odohrané dnes",
+    "week": "Odohrané tento týždeň",
+    "idle": "Neaktívni"
+  },
+  "views": {
+    "ranked": "Poradie",
+    "lost": "Prišli o miesto"
+  }
 }

@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "لا توجد ترتيبات للاندفاع بعد.",
   "no-player-matches-the-current": "لا يوجد لاعب يطابق المرشحات الحالية.",
-  "onslaught": "الهجوم"
+  "onslaught": "الهجوم",
+  "activity": {
+    "today": "تم لعبها اليوم",
+    "week": "تم لعبها هذا الأسبوع",
+    "idle": "غير نشط"
+  },
+  "views": {
+    "ranked": "الترتيب",
+    "lost": "فقدوا المركز"
+  }
 }

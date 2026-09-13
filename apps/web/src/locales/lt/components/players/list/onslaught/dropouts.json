@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Žaidėjas",
+    "best-rank": "Geriausia vieta",
+    "last-rank": "Paskutinė vieta",
+    "rating": "Reitingo taškai",
+    "battles": "Mūšiai",
+    "left": "Išėjo iš lentelės"
+  },
+  "no-match": "Nė vienas žaidėjas neatitinka dabartinių filtrų."
+}

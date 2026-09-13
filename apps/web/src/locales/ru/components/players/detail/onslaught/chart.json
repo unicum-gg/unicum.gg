@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "Подъём в этом сезоне"
+  "this-season-s-climb": "Подъём в этом сезоне",
+  "battles-played": "Сыграно боёв",
+  "rating-points": "Очки рейтинга",
+  "legend-cutoff": "Порог уровня {tier}"
 }

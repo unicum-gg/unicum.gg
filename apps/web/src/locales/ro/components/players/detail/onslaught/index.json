@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Vezi clasamentul acestui sezon",
   "standing-line": "{rating} puncte de rating · {battles} bătălii",
   "the-board-only-lists-players": "Clasamentul afișează doar jucătorii care ating Campion, câteva mii pentru fiecare regiune, așa că aproape toate profilurile ajung aici. Se completează automat în sezonul în care ajung acolo.",
-  "updated": "Actualizat {when}"
+  "updated": "Actualizat {when}",
+  "best": "cel mai bun",
+  "lost-place": "Și-au pierdut locul {when}",
+  "lost-short": "(loc pierdut)"
 }

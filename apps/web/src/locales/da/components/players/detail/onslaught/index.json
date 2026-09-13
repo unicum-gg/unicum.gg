@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Se denne sæsons rangliste",
   "standing-line": "{rating} vurderingspoint · {battles} kampe",
   "the-board-only-lists-players": "Ranglisten viser kun spillere, der når Champion, nogle få tusinde pr. region, så det er her, næsten alle profiler ender. Den udfyldes automatisk i den sæson, hvor de når dertil.",
-  "updated": "Opdateret {when}"
+  "updated": "Opdateret {when}",
+  "best": "bedste",
+  "lost-place": "Mistet deres placering {when}",
+  "lost-short": "(mistet placering)"
 }

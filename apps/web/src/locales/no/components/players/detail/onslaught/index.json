@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Se denne sesongens rangering",
   "standing-line": "{rating} vurderingspoeng · {battles} kamper",
   "the-board-only-lists-players": "Rangeringen viser bare spillere som når Champion, noen få tusen per region, så dette er stedet nesten alle profiler havner. Den fylles ut automatisk den sesongen de når dit.",
-  "updated": "Oppdatert {when}"
+  "updated": "Oppdatert {when}",
+  "best": "beste",
+  "lost-place": "Mistet plassen {when}",
+  "lost-short": "(mistet plassen)"
 }

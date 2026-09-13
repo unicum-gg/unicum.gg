@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "オンスロートのランキングはまだありません。",
   "no-player-matches-the-current": "現在のフィルターに一致するプレイヤーはいません。",
-  "onslaught": "オンスロート"
+  "onslaught": "オンスロート",
+  "activity": {
+    "today": "今日プレイ済み",
+    "week": "今週プレイ済み",
+    "idle": "プレイなし"
+  },
+  "views": {
+    "ranked": "順位",
+    "lost": "順位を失ったプレイヤー"
+  }
 }

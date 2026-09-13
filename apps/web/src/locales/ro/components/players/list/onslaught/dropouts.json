@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Jucător",
+    "best-rank": "Cea mai bună poziție",
+    "last-rank": "Ultima poziție",
+    "rating": "Punctele de clasament",
+    "battles": "Lupte",
+    "left": "Ieșit din clasament"
+  },
+  "no-match": "Niciun jucător nu corespunde filtrelor curente."
+}

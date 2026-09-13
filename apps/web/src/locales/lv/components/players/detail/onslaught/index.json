@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Skatīt šīs sezonas līderu sarakstu",
   "standing-line": "{rating} vērtējuma punkti · {battles} kaujas",
   "the-board-only-lists-players": "Sarakstā tiek rādīti tikai spēlētāji, kuri sasniedz čempiona līmeni, daži tūkstoši katrā reģionā, tāpēc gandrīz katrs profils nonāk šeit. Tas aizpildās pats sezonā, kurā viņi to sasniedz.",
-  "updated": "Atjaunots {when}"
+  "updated": "Atjaunots {when}",
+  "best": "labākais",
+  "lost-place": "Vieta zaudēta {when}",
+  "lost-short": "(vieta zaudēta)"
 }

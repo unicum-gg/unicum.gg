@@ -1,0 +1,10 @@
+{
+  "title": "Wymagania dotyczące miejsca w rankingu",
+  "players": "{count, plural, one {# gracz} few {# graczy} many {# graczy} other {# graczy}}",
+  "median-rating": "Mediana {metric}",
+  "battles-to-qualify": "Bitwy wymagane do kwalifikacji",
+  "battles-played": "Bitwy w tym sezonie",
+  "daily-pace": "Codzienne tempo",
+  "days-played": "Grał przez {days} z {total} dni",
+  "note": "Mediany w całym gronie graczy zajmujących każde miejsce. Bitwy wymagane do kwalifikacji oznaczają liczbę bitew rozegranych przez każdego z nich w tym trybie, gdy po raz pierwszy pojawił się w rankingu. Możemy je policzyć tylko dla sezonów, które rejestrowaliśmy na żywo. Codzienne tempo rozkłada ich sezon na każdy dzień jego trwania, więc pokazuje średnią, którą trzeba utrzymywać, aby dotrzymać kroku. Nie jest ono kolumną Bitwy/dzień w tabeli, która dzieli wynik przez dni, w których gracz rzeczywiście grał. Większość z nich nie gra codziennie. Linia pod tempem mówi, w ilu z tych dni widziano ich podczas gry, a im mniej dni wykorzystują, tym większe musi być tempo każdego z nich."
+}

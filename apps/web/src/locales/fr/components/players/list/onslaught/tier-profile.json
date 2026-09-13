@@ -1,0 +1,10 @@
+{
+  "title": "Ce que prend le classement",
+  "players": "{count, plural, one {# joueur} other {# joueurs}}",
+  "median-rating": "Médiane {metric}",
+  "battles-to-qualify": "Batailles pour se qualifier",
+  "battles-played": "Batailles cette saison",
+  "daily-pace": "Rythme quotidien",
+  "days-played": "Joués pendant {days} jours sur {total} jours",
+  "note": "Médianes sur les joueurs détenant chaque rang. Batailles pour se qualifier correspond au nombre de batailles que chacun avait jouées dans le mode la première fois où il est apparu dans le classement, ce que nous ne pouvons compter que pour les saisons que nous avons enregistrées en direct. Le rythme quotidien répartit leur saison sur chaque jour où elle s’est déroulée, c’est donc la moyenne à atteindre pour suivre, et ce n’est pas la colonne Batailles/jour du classement, qui divise par le nombre de jours où un joueur a réellement joué. La plupart ne jouent pas tous les jours : la ligne sous le rythme indique combien de ces jours ils ont été vus en train de jouer, et moins ils en utilisent, plus chacun doit être élevé."
+}

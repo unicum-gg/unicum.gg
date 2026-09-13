@@ -1,0 +1,10 @@
+{
+  "title": "A helyezéshez szükséges értékek",
+  "players": "{count} játékosok",
+  "median-rating": "{metric} mediánja",
+  "battles-to-qualify": "Kvalifikációhoz szükséges csaták",
+  "battles-played": "Ebben a szezonban játszott csaták",
+  "daily-pace": "Napi ütem",
+  "days-played": "A(z) {total} napból {days} napon játszott",
+  "note": "Az egyes helyezéseket birtokló játékosok szerte számított mediánjai. A kvalifikációhoz szükséges csaták azt mutatják, hogy mindegyikük hány csatát játszott a játékmódban, amikor először megjelent a ranglistán. Ezt csak azoknál a szezonoknál tudjuk megszámolni, amelyeket élőben rögzítettünk. A napi ütem a szezonjukat minden futási napra elosztja, ezért ennyit kell átlagosan teljesítened, hogy lépést tarts. Ez nem a ranglista Csaták/nap oszlopa, amely a játékos által valójában játszott napokkal oszt. Többségük nem játszik minden nap. A napi ütem alatti sor azt írja, hogy hány ilyen napon láttuk őket játékban, és minél kevesebb napot használnak, annál nagyobbnak kell lennie az egyes napi értékeknek."
+}

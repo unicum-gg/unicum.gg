@@ -12,7 +12,10 @@
     "player": "Jogador",
     "rank": "Posto",
     "battles": "Batalhas",
-    "rating": "Pontos de Posto"
+    "rating": "Pontos de Posto",
+    "battles-per-day": "Batalhas/Dia",
+    "points-per-day": "Pontos/Dia",
+    "points-per-battle": "Pontos/Batalha"
   },
   "alias": "(como {nickname})",
   "ranks": {

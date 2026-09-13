@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Bestenliste dieser Saison ansehen",
   "standing-line": "{rating} Wertungspunkte · {battles} Gefechte",
   "the-board-only-lists-players": "Die Rangliste führt nur spieler auf, die Meister erreichen, also einige Tausend pro Region. Deshalb landen hier fast alle Profile. Sobald sie Meister erreichen, wird die jeweilige Saison automatisch eingetragen.",
-  "updated": "Aktualisiert {when}"
+  "updated": "Aktualisiert {when}",
+  "best": "beste",
+  "lost-place": "Platz verloren {when}",
+  "lost-short": "(Platz verloren)"
 }

@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Chưa có bảng xếp hạng Cường kích.",
   "no-player-matches-the-current": "Không có người chơi nào khớp với các bộ lọc hiện tại.",
-  "onslaught": "Cường kích"
+  "onslaught": "Cường kích",
+  "activity": {
+    "today": "Đã chơi hôm nay",
+    "week": "Đã chơi tuần này",
+    "idle": "Không hoạt động"
+  },
+  "views": {
+    "ranked": "Bảng xếp hạng",
+    "lost": "Đã mất vị trí"
+  }
 }

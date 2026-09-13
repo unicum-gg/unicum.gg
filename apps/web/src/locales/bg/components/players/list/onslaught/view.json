@@ -12,7 +12,10 @@
     "player": "Играч",
     "rank": "Ранг",
     "battles": "Битки",
-    "rating": "Рейтингови точки"
+    "rating": "Рейтингови точки",
+    "battles-per-day": "Битки/д.",
+    "points-per-day": "Точки/д.",
+    "points-per-battle": "Точки/Битка"
   },
   "alias": "(като {nickname})",
   "ranks": {

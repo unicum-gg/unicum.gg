@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Wala pang ranggo sa Sugod.",
   "no-player-matches-the-current": "Walang manlalarong tumutugma sa kasalukuyang mga filter.",
-  "onslaught": "Sugod"
+  "onslaught": "Sugod",
+  "activity": {
+    "today": "Nilaro ngayon",
+    "week": "Nilaro ngayong linggo",
+    "idle": "Hindi aktibo"
+  },
+  "views": {
+    "ranked": "Mga ranggo",
+    "lost": "Nawala ang kanilang lugar"
+  }
 }

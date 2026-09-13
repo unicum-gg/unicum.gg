@@ -12,7 +12,10 @@
     "player": "Játékos",
     "rank": "Rang",
     "battles": "Csaták",
-    "rating": "Értékelési pontok"
+    "rating": "Értékelési pontok",
+    "battles-per-day": "Csaták/nap",
+    "points-per-day": "Pontok/nap",
+    "points-per-battle": "Pont/csata"
   },
   "alias": "({nickname} néven)",
   "ranks": {

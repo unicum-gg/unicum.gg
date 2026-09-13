@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Tingnan ang talaan ng ranggo ngayong season",
   "standing-line": "{rating} mga puntos ng rating · {battles} mga laban",
   "the-board-only-lists-players": "Inililista lamang ng talaan ang mga manlalarong umabot sa Champion, ilang libo bawat rehiyon, kaya dito napupunta ang halos bawat profile. Awtomatiko itong napupunan sa season kung kailan sila makarating doon.",
-  "updated": "Na-update {when}"
+  "updated": "Na-update {when}",
+  "best": "pinakamahusay",
+  "lost-place": "Nawala ang kanilang lugar {when}",
+  "lost-short": "(nawala ang lugar)"
 }

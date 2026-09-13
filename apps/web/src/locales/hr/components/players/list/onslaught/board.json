@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Još nema plasmana u Jurišu.",
   "no-player-matches-the-current": "Nijedan igrač ne odgovara trenutačnim filtrima.",
-  "onslaught": "Navala"
+  "onslaught": "Navala",
+  "activity": {
+    "today": "Igrano danas",
+    "week": "Igrano ovaj tjedan",
+    "idle": "Neaktivni"
+  },
+  "views": {
+    "ranked": "Poredak",
+    "lost": "Izgubili su mjesto"
+  }
 }

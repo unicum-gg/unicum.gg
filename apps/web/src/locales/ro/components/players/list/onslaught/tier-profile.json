@@ -1,0 +1,10 @@
+{
+  "title": "Ce este necesar pentru clasament",
+  "players": "{count} jucători",
+  "median-rating": "Mediana {metric}",
+  "battles-to-qualify": "Lupte pentru calificare",
+  "battles-played": "Lupte în acest sezon",
+  "daily-pace": "Ritm zilnic",
+  "days-played": "jucat în {days} din {total} zile",
+  "note": "Medianele pentru jucătorii de pe fiecare poziție. Luptele pentru calificare reprezintă câte bătălii jucase fiecare în modul respectiv la prima apariție în clasament. Putem număra acest lucru doar pentru sezoanele pe care le-am înregistrat live. Ritmul zilnic împarte sezonul lor la fiecare zi în care acesta s-a desfășurat, așadar reprezintă media pe care trebuie să o menții pentru a ține pasul. Nu este coloana Lupte/zi a clasamentului, care împarte la numărul de zile în care un jucător a jucat de fapt. Cei mai mulți nu joacă în fiecare zi, iar linia de sub ritm spune în câte dintre aceste zile au fost văzuți jucând. Cu cât folosesc mai puține zile, cu atât fiecare zi trebuie să fie mai intensă."
+}

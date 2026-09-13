@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Inga placeringar i Pansarstorm än.",
   "no-player-matches-the-current": "Ingen spelare matchar de aktuella filtren.",
-  "onslaught": "Pansarstorm"
+  "onslaught": "Pansarstorm",
+  "activity": {
+    "today": "Spelade idag",
+    "week": "Spelade den här veckan",
+    "idle": "Inaktiv"
+  },
+  "views": {
+    "ranked": "Ställningar",
+    "lost": "Förlorade sin plats"
+  }
 }

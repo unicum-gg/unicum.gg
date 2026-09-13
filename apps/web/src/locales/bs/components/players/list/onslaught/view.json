@@ -12,7 +12,10 @@
     "player": "Igrač",
     "rank": "Rang",
     "battles": "Bitke",
-    "rating": "Bodovi rejtinga"
+    "rating": "Bodovi rejtinga",
+    "battles-per-day": "Bitke/dan",
+    "points-per-day": "Bodovi/dan",
+    "points-per-battle": "Bodovi/bitka"
   },
   "alias": "(kao {nickname})",
   "ranks": {

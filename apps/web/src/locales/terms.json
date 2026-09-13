@@ -808,7 +808,13 @@
     "Dispersion moving": "Dispersion en mouvement",
     "Intra-clip reload": "Rechargement entre les obus",
     "front": "avant",
-    "Loading": "Chargement"
+    "Loading": "Chargement",
+    "Points": "Points",
+    "board": "classement",
+    "cutoff": "seuil",
+    "playing": "en jeu",
+    "rank": "rang",
+    "takes": "prend"
   },
   "es": {
     "Battles": "Batallas",
@@ -1616,7 +1622,13 @@
     "Dispersion moving": "Dispersión en movimiento",
     "Intra-clip reload": "Recarga entre disparos",
     "front": "frontal",
-    "Loading": "Cargando"
+    "Loading": "Cargando",
+    "Points": "Puntos",
+    "board": "clasificación",
+    "cutoff": "corte",
+    "playing": "jugando",
+    "rank": "puesto",
+    "takes": "ocupa"
   },
   "ru": {
     "Battles": "Бои",
@@ -2418,7 +2430,13 @@
     "Dispersion moving": "Разброс при движении",
     "Intra-clip reload": "Перезарядка между выстрелами",
     "front": "лоб",
-    "Loading": "Загрузка"
+    "Loading": "Загрузка",
+    "Points": "Очки",
+    "board": "таблица",
+    "cutoff": "порог",
+    "playing": "играет",
+    "rank": "место",
+    "takes": "занимает"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3239,7 +3257,13 @@
     "Dispersion moving": "Rozrzut podczas ruchu",
     "Intra-clip reload": "Przeładowanie między pociskami",
     "front": "przód",
-    "Loading": "Ładowanie"
+    "Loading": "Ładowanie",
+    "Points": "Punkty",
+    "board": "tabela",
+    "cutoff": "próg",
+    "playing": "grający",
+    "rank": "miejsce",
+    "takes": "zajmuje"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4070,7 +4094,13 @@
     "Dispersion moving": "移動中の散布界",
     "Intra-clip reload": "弾倉内装填時間",
     "front": "前面",
-    "Loading": "読み込み中"
+    "Loading": "読み込み中",
+    "Points": "ポイント",
+    "board": "ランキング",
+    "cutoff": "ボーダー",
+    "playing": "プレイ中",
+    "rank": "順位",
+    "takes": "取得数"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4689,7 +4719,14 @@
     "Dispersion moving": "تشتت أثناء الحركة",
     "Intra-clip reload": "إعادة التلقيم بين القذائف",
     "front": "أمامي",
-    "Loading": "جارٍ التحميل"
+    "Loading": "جارٍ التحميل",
+    "Points": "النقاط",
+    "Rating Points": "نقاط التقييم",
+    "board": "لوحة المتصدرين",
+    "cutoff": "الحد الفاصل",
+    "playing": "اللعب",
+    "rank": "الترتيب",
+    "takes": "يأخذ"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5517,7 +5554,13 @@
     "Dispersion moving": "Rasipanje pri kretanju",
     "Intra-clip reload": "Vrijeme punjenja između granata",
     "front": "prednji dio",
-    "Loading": "Učitavanje"
+    "Loading": "Učitavanje",
+    "Points": "Bodovi",
+    "board": "ljestvica",
+    "cutoff": "prag",
+    "playing": "igranje",
+    "rank": "rang",
+    "takes": "zauzima"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6346,7 +6389,13 @@
     "Dispersion moving": "Szórás mozgás közben",
     "Intra-clip reload": "Lövedékek közötti töltési idő",
     "front": "front",
-    "Loading": "Betöltés"
+    "Loading": "Betöltés",
+    "Points": "Pontok",
+    "board": "ranglista",
+    "cutoff": "küszöbérték",
+    "playing": "játékban",
+    "rank": "helyezés",
+    "takes": "elér"
   },
   "ko": {
     "Battles": "전투",
@@ -7182,7 +7231,13 @@
     "Dispersion moving": "이동 중 분산",
     "Intra-clip reload": "클립 내 재장전",
     "front": "전면",
-    "Loading": "불러오는 중"
+    "Loading": "불러오는 중",
+    "Points": "포인트",
+    "board": "리더보드",
+    "cutoff": "컷오프",
+    "playing": "플레이 중",
+    "rank": "순위",
+    "takes": "차지"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8015,7 +8070,13 @@
     "Dispersion moving": "Spreiding tijdens beweging",
     "Intra-clip reload": "Herlaadtijd tussen granaten",
     "front": "voorzijde",
-    "Loading": "Laden"
+    "Loading": "Laden",
+    "Points": "Punten",
+    "board": "klassement",
+    "cutoff": "grens",
+    "playing": "spelen",
+    "rank": "rang",
+    "takes": "neemt"
   },
   "cs": {
     "Battles": "Bitev",
@@ -8839,7 +8900,13 @@
     "Dispersion moving": "Rozptyl při pohybu",
     "Intra-clip reload": "Doba mezi výstřely",
     "front": "čelo",
-    "Loading": "Načítání"
+    "Loading": "Načítání",
+    "Points": "Body",
+    "board": "žebříček",
+    "cutoff": "hranice",
+    "playing": "hraní",
+    "rank": "pořadí",
+    "takes": "zabere"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9665,7 +9732,13 @@
     "Dispersion moving": "Hareket hâlinde dağılım",
     "Intra-clip reload": "Şarjör içi doldurma süresi",
     "front": "ön",
-    "Loading": "Yükleniyor"
+    "Loading": "Yükleniyor",
+    "Points": "Puanlar",
+    "board": "tablo",
+    "cutoff": "eşik",
+    "playing": "oynuyor",
+    "rank": "sıra",
+    "takes": "alır"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10283,7 +10356,14 @@
     "Dispersion moving": "Разброс пры руху",
     "Intra-clip reload": "Міжснарадная перазарадка",
     "front": "лоб",
-    "Loading": "Загрузка"
+    "Loading": "Загрузка",
+    "Points": "Ачкі",
+    "Rating Points": "Рэйтынгавыя ачкі",
+    "board": "табліца",
+    "cutoff": "парог",
+    "playing": "гульня",
+    "rank": "месца",
+    "takes": "займае"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -10908,7 +10988,14 @@
     "Dispersion moving": "Razpršitev med premikanjem",
     "Intra-clip reload": "Čas polnjenja med streli",
     "front": "sprednji del",
-    "Loading": "Nalaganje"
+    "Loading": "Nalaganje",
+    "Points": "točke",
+    "Rating Points": "točke ocene",
+    "board": "lestvica",
+    "cutoff": "prag",
+    "playing": "igranje",
+    "rank": "uvrstitev",
+    "takes": "poskusov"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -11534,7 +11621,14 @@
     "Dispersion moving": "Rasipanje pri kretanju",
     "Intra-clip reload": "Punjenje između granata",
     "front": "prednji dio",
-    "Loading": "Učitavanje"
+    "Loading": "Učitavanje",
+    "Points": "Bodovi",
+    "Rating Points": "Bodovi rejtinga",
+    "board": "rang-lista",
+    "cutoff": "prag",
+    "playing": "igranje",
+    "rank": "pozicija",
+    "takes": "uzima"
   },
   "th": {
     "Battles": "การรบ",
@@ -12363,7 +12457,13 @@
     "Dispersion moving": "การกระจายขณะเคลื่อนที่",
     "Intra-clip reload": "เวลาบรรจุกระสุนระหว่างนัด",
     "front": "ด้านหน้า",
-    "Loading": "กำลังโหลด"
+    "Loading": "กำลังโหลด",
+    "Points": "คะแนน",
+    "board": "กระดานอันดับ",
+    "cutoff": "เกณฑ์ตัด",
+    "playing": "กำลังเล่น",
+    "rank": "อันดับ",
+    "takes": "จำนวนครั้ง"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13192,7 +13292,13 @@
     "Dispersion moving": "移动时扩散",
     "Intra-clip reload": "弹夹内装填时间",
     "front": "正面",
-    "Loading": "加载中"
+    "Loading": "加载中",
+    "Points": "积分",
+    "board": "榜单",
+    "cutoff": "门槛",
+    "playing": "对战中",
+    "rank": "排名",
+    "takes": "场次"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14006,7 +14112,13 @@
     "Dispersion moving": "Dispersão em movimento",
     "Intra-clip reload": "Recarga entre disparos",
     "front": "frente",
-    "Loading": "Carregando"
+    "Loading": "Carregando",
+    "Points": "Pontos",
+    "board": "classificação",
+    "cutoff": "limite",
+    "playing": "a jogar",
+    "rank": "posição",
+    "takes": "leva"
   },
   "vi": {
     "Battles": "Số trận",
@@ -14815,7 +14927,13 @@
     "Dispersion moving": "Độ phân tán khi di chuyển",
     "Intra-clip reload": "Thời gian nạp giữa các phát",
     "front": "trước",
-    "Loading": "Đang tải"
+    "Loading": "Đang tải",
+    "Points": "Điểm",
+    "board": "bảng xếp hạng",
+    "cutoff": "ngưỡng",
+    "playing": "đang chơi",
+    "rank": "hạng",
+    "takes": "lượt"
   },
   "de": {
     "Battles": "Gefechte",
@@ -15637,7 +15755,13 @@
     "Dispersion moving": "Streuung während der Bewegung",
     "Intra-clip reload": "Nachladezeit zwischen den Schüssen",
     "front": "front",
-    "Loading": "Wird geladen"
+    "Loading": "Wird geladen",
+    "Points": "Punkte",
+    "board": "Rangliste",
+    "cutoff": "Schwellenwert",
+    "playing": "spielend",
+    "rank": "Rang",
+    "takes": "benötigt"
   },
   "uk": {
     "Battles": "Бої",
@@ -16456,7 +16580,13 @@
     "Dispersion moving": "Розкид під час руху",
     "Intra-clip reload": "Перезаряджання між пострілами",
     "front": "лоб",
-    "Loading": "Завантаження"
+    "Loading": "Завантаження",
+    "Points": "Очки",
+    "board": "таблиця",
+    "cutoff": "поріг",
+    "playing": "грає",
+    "rank": "місце",
+    "takes": "займає"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17280,7 +17410,13 @@
     "Dispersion moving": "Dispersione durante il movimento",
     "Intra-clip reload": "Ricarica tra i colpi",
     "front": "frontale",
-    "Loading": "Caricamento"
+    "Loading": "Caricamento",
+    "Points": "Punti",
+    "board": "classifica",
+    "cutoff": "soglia",
+    "playing": "in gioco",
+    "rank": "posizione",
+    "takes": "richiede"
   },
   "sv": {
     "Battles": "Strider",
@@ -18113,7 +18249,13 @@
     "Dispersion moving": "Spridning i rörelse",
     "Intra-clip reload": "Omladdning mellan skott",
     "front": "front",
-    "Loading": "Laddar"
+    "Loading": "Laddar",
+    "Points": "Poäng",
+    "board": "topplista",
+    "cutoff": "gräns",
+    "playing": "spelar",
+    "rank": "placering",
+    "takes": "försök"
   },
   "sr": {
     "Battles": "Borbi",
@@ -18942,7 +19084,13 @@
     "Dispersion moving": "Расејање при кретању",
     "Intra-clip reload": "Време пуњења између граната",
     "front": "предњи део",
-    "Loading": "Učitavanje"
+    "Loading": "Učitavanje",
+    "Points": "Поени",
+    "board": "табела",
+    "cutoff": "праг",
+    "playing": "играње",
+    "rank": "ранг",
+    "takes": "заузима"
   },
   "el": {
     "Battles": "Μάχες",
@@ -19770,7 +19918,13 @@
     "Dispersion moving": "Διασπορά εν κινήσει",
     "Intra-clip reload": "Επαναγέμιση μεταξύ βολών",
     "front": "μπροστινό",
-    "Loading": "Φόρτωση"
+    "Loading": "Φόρτωση",
+    "Points": "Πόντοι",
+    "board": "κατάταξη",
+    "cutoff": "όριο",
+    "playing": "σε μάχη",
+    "rank": "θέση",
+    "takes": "καταλαμβάνει"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -20587,7 +20741,13 @@
     "Dispersion moving": "Izkliede kustībā",
     "Intra-clip reload": "Pārlāde starp šāvieniem",
     "front": "priekšpuse",
-    "Loading": "Ielādē"
+    "Loading": "Ielādē",
+    "Points": "Punkti",
+    "board": "tabula",
+    "cutoff": "slieksnis",
+    "playing": "spēlēšana",
+    "rank": "vieta",
+    "takes": "aizņem"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -21206,7 +21366,14 @@
     "Dispersion moving": "चलते समय फैलाव",
     "Intra-clip reload": "इंट्रा-क्लिप रीलोड",
     "front": "फ्रंट",
-    "Loading": "लोड हो रहा है"
+    "Loading": "लोड हो रहा है",
+    "Points": "अंक",
+    "Rating Points": "रेटिंग अंक",
+    "board": "लीडरबोर्ड",
+    "cutoff": "कटऑफ",
+    "playing": "खेलना",
+    "rank": "रैंक",
+    "takes": "लेता है"
   },
   "bg": {
     "Battles": "Битки",
@@ -22019,7 +22186,13 @@
     "Dispersion moving": "Разсейване при движение",
     "Intra-clip reload": "Презареждане между изстрелите",
     "front": "предна част",
-    "Loading": "Зареждане"
+    "Loading": "Зареждане",
+    "Points": "Точки",
+    "board": "класация",
+    "cutoff": "праг",
+    "playing": "играещи",
+    "rank": "място",
+    "takes": "заема"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -22852,7 +23025,13 @@
     "Dispersion moving": "Sklaida judant",
     "Intra-clip reload": "Perkrovimas tarp šūvių",
     "front": "priekis",
-    "Loading": "Kraunama"
+    "Loading": "Kraunama",
+    "Points": "Taškai",
+    "board": "lentelė",
+    "cutoff": "riba",
+    "playing": "žaidžiama",
+    "rank": "vieta",
+    "takes": "užima"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -23475,7 +23654,14 @@
     "Dispersion moving": "Қозғалыстағы шашырау",
     "Intra-clip reload": "Атулар арасындағы қайта оқтау",
     "front": "алдыңғы",
-    "Loading": "Жүктелуде"
+    "Loading": "Жүктелуде",
+    "Points": "Ұпайлар",
+    "Rating Points": "Рейтинг ұпайлары",
+    "board": "көшбасшылар тақтасы",
+    "cutoff": "шек",
+    "playing": "ойнауда",
+    "rank": "орын",
+    "takes": "алады"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -24308,7 +24494,13 @@
     "Dispersion moving": "Hajonta liikkeessä",
     "Intra-clip reload": "Laukausten välinen latausaika",
     "front": "etu",
-    "Loading": "Ladataan"
+    "Loading": "Ladataan",
+    "Points": "Pisteet",
+    "board": "tulostaulukko",
+    "cutoff": "raja",
+    "playing": "pelaaminen",
+    "rank": "sijoitus",
+    "takes": "vaatii"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -24932,7 +25124,14 @@
     "Dispersion moving": "Pagkalat habang gumagalaw",
     "Intra-clip reload": "Pag-reload sa pagitan ng mga bala",
     "front": "harap",
-    "Loading": "Naglo-load"
+    "Loading": "Naglo-load",
+    "Points": "Puntos",
+    "Rating Points": "Mga Puntos ng Rating",
+    "board": "talahanayan ng ranggo",
+    "cutoff": "hangganan",
+    "playing": "naglalaro",
+    "rank": "ranggo",
+    "takes": "mga pagtatangka"
   },
   "no": {
     "Battles": "Kamper",
@@ -25757,7 +25956,13 @@
     "Dispersion moving": "Spredning under bevegelse",
     "Intra-clip reload": "Omlading mellom skudd",
     "front": "front",
-    "Loading": "Laster inn"
+    "Loading": "Laster inn",
+    "Points": "Poeng",
+    "board": "tavle",
+    "cutoff": "grense",
+    "playing": "spiller",
+    "rank": "plassering",
+    "takes": "tar"
   },
   "ro": {
     "Battles": "Lupte",
@@ -26571,7 +26776,13 @@
     "Dispersion moving": "Dispersie în mișcare",
     "Intra-clip reload": "Reîncărcare între proiectile",
     "front": "față",
-    "Loading": "Se încarcă"
+    "Loading": "Se încarcă",
+    "Points": "Puncte",
+    "board": "clasament",
+    "cutoff": "prag",
+    "playing": "joc",
+    "rank": "poziție",
+    "takes": "partide"
   },
   "da": {
     "Battles": "Kampe",
@@ -27400,6 +27611,12 @@
     "Dispersion moving": "Spredning under bevægelse",
     "Intra-clip reload": "Genladning mellem skud",
     "front": "front",
-    "Loading": "Indlæser"
+    "Loading": "Indlæser",
+    "Points": "Point",
+    "board": "rangliste",
+    "cutoff": "grænse",
+    "playing": "spiller",
+    "rank": "placering",
+    "takes": "kræver"
   }
 }

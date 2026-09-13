@@ -12,7 +12,10 @@
     "player": "Ойыншы",
     "rank": "Дәреже",
     "battles": "Соғыстар",
-    "rating": "Рейтинг ұпайлары"
+    "rating": "Рейтинг ұпайлары",
+    "battles-per-day": "Соғыстар/Күн",
+    "points-per-day": "Ұпайлар/Күн",
+    "points-per-battle": "Ұпайлар/Шайқас"
   },
   "alias": "(ойында {nickname})",
   "ranks": {

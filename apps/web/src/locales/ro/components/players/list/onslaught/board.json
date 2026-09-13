@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Încă nu există clasamente pentru Violență.",
   "no-player-matches-the-current": "Niciun jucător nu corespunde filtrelor curente.",
-  "onslaught": "Violență"
+  "onslaught": "Violență",
+  "activity": {
+    "today": "Jucat azi",
+    "week": "Jucat în această săptămână",
+    "idle": "Inactiv"
+  },
+  "views": {
+    "ranked": "Clasamente",
+    "lost": "Și-au pierdut locul"
+  }
 }

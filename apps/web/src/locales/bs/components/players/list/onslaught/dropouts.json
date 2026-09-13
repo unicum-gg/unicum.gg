@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Igrač",
+    "best-rank": "Najbolja pozicija",
+    "last-rank": "Posljednja pozicija",
+    "rating": "Bodovi rejtinga",
+    "battles": "Bitke",
+    "left": "Napustili rang-listu"
+  },
+  "no-match": "Nijedan igrač ne odgovara trenutnim filterima."
+}

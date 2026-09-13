@@ -12,7 +12,10 @@
     "player": "Žaidėjas",
     "rank": "Rangas",
     "battles": "Mūšiai",
-    "rating": "Reitingo taškai"
+    "rating": "Reitingo taškai",
+    "battles-per-day": "Mūšiai per dieną",
+    "points-per-day": "Taškai per dieną",
+    "points-per-battle": "Taškai per mūšį"
   },
   "alias": "(kaip {nickname})",
   "ranks": {

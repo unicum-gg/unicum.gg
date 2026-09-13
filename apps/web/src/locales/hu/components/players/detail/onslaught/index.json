@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Az idei szezon ranglistájának megtekintése",
   "standing-line": "{rating} értékelési pont · {battles} csata",
   "the-board-only-lists-players": "A ranglista csak azokat a játékosokat sorolja fel, akik elérik a Bajnok szintet, régiónként néhány ezret, ezért szinte minden profil ide kerül. Automatikusan feltöltődik abban a szezonban, amikor elérik ezt a szintet.",
-  "updated": "Frissítve {when}"
+  "updated": "Frissítve {when}",
+  "best": "legjobb",
+  "lost-place": "Elvesztette a helyét: {when}",
+  "lost-short": "(elvesztette a helyét)"
 }

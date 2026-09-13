@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Non ci sono ancora classifiche di Aggressione.",
   "no-player-matches-the-current": "Nessun giocatore corrisponde ai filtri attuali.",
-  "onslaught": "Aggressione"
+  "onslaught": "Aggressione",
+  "activity": {
+    "today": "Giocato oggi",
+    "week": "Giocato questa settimana",
+    "idle": "Inattivo"
+  },
+  "views": {
+    "ranked": "Classifiche",
+    "lost": "Posto perso"
+  }
 }

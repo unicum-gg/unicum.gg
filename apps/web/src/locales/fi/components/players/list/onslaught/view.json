@@ -12,7 +12,10 @@
     "player": "Pelaaja",
     "rank": "Sijoitusluokka",
     "battles": "Taisteluita",
-    "rating": "Luokituspisteet"
+    "rating": "Luokituspisteet",
+    "battles-per-day": "Taisteluita/päivä",
+    "points-per-day": "Pisteet/päivä",
+    "points-per-battle": "Pisteet/taistelu"
   },
   "alias": "(nimellä {nickname})",
   "ranks": {

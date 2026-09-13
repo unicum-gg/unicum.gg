@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Xem bảng xếp hạng mùa này",
   "standing-line": "{rating} điểm chỉ số đánh giá · {battles} trận đấu",
   "the-board-only-lists-players": "Bảng chỉ liệt kê những người chơi đạt Champion, vài nghìn người mỗi khu vực, vì vậy gần như mọi hồ sơ đều nằm ở đây. Bảng sẽ tự điền vào mùa mà họ đạt được cấp đó.",
-  "updated": "Đã cập nhật {when}"
+  "updated": "Đã cập nhật {when}",
+  "best": "tốt nhất",
+  "lost-place": "Đã mất vị trí vào {when}",
+  "lost-short": "(đã mất vị trí)"
 }

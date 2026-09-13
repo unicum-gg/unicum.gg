@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Spēlētājs",
+    "best-rank": "Labākā vieta",
+    "last-rank": "Pēdējā vieta",
+    "rating": "Reitinga Punkti",
+    "battles": "Kaujas",
+    "left": "Izgāja no tabulas"
+  },
+  "no-match": "Neviens spēlētājs neatbilst pašreizējiem filtriem."
+}

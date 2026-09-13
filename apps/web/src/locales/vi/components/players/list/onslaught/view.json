@@ -12,7 +12,10 @@
     "player": "Người chơi",
     "rank": "Bậc",
     "battles": "Số trận",
-    "rating": "Điểm Xếp hạng"
+    "rating": "Điểm Xếp hạng",
+    "battles-per-day": "Số trận/Ngày",
+    "points-per-day": "Điểm/Ngày",
+    "points-per-battle": "Điểm/Trận đấu"
   },
   "alias": "(với tên {nickname})",
   "ranks": {

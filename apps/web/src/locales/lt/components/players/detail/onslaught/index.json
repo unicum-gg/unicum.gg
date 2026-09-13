@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Peržiūrėti šio sezono lyderių lentelę",
   "standing-line": "{rating} reitingo taškai · {battles} mūšiai",
   "the-board-only-lists-players": "Lentelėje rodomi tik žaidėjai, pasiekę Čempioną, po kelis tūkstančius kiekviename regione, todėl čia patenka beveik kiekvienas profilis. Ji pati užpildoma tą sezoną, kai žaidėjas jį pasiekia.",
-  "updated": "Atnaujinta {when}"
+  "updated": "Atnaujinta {when}",
+  "best": "geriausias",
+  "lost-place": "Prarado savo vietą {when}",
+  "lost-short": "(prarasta vieta)"
 }

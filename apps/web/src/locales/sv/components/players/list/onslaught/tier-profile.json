@@ -1,0 +1,10 @@
+{
+  "title": "Vad som krävs för en placering",
+  "players": "{count} spelare",
+  "median-rating": "Median för {metric}",
+  "battles-to-qualify": "Strider för att kvalificera sig",
+  "battles-played": "Strider den här säsongen",
+  "daily-pace": "Daglig takt",
+  "days-played": "spelade {days} av {total} dagar",
+  "note": "Medianer över spelarna som innehar varje placering. Strider för att kvalificera sig är det antal strider som var och en av dem hade spelat i läget första gången de visades på topplistan. Det kan vi bara räkna för de säsonger som vi registrerade live. Daglig takt fördelar deras säsong över varje dag den har pågått, så det är det genomsnitt du måste hålla för att hänga med. Det är inte topplistans Strider/dag-kolumn, som dividerar med de dagar en spelare faktiskt spelade. De flesta spelar inte varje dag. Raden under takten säger hur många av dessa dagar de sågs spela, och ju färre dagar de använder, desto större måste varje dag vara."
+}

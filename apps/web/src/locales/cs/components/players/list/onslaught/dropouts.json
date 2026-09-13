@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Hráč",
+    "best-rank": "Nejlepší pořadí",
+    "last-rank": "Poslední pořadí",
+    "rating": "Body hodnocení",
+    "battles": "Bitvy",
+    "left": "Odešel ze žebříčku"
+  },
+  "no-match": "Žádný hráč neodpovídá aktuálním filtrům."
+}

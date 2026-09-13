@@ -12,7 +12,10 @@
     "player": "Παίχτης",
     "rank": "Βαθμός",
     "battles": "Μάχες",
-    "rating": "Πόντοι Κατάταξης"
+    "rating": "Πόντοι Κατάταξης",
+    "battles-per-day": "Μάχες/Ημέρα",
+    "points-per-day": "Πόντοι/Ημέρα",
+    "points-per-battle": "Πόντοι/Μάχη"
   },
   "alias": "(ως {nickname})",
   "ranks": {

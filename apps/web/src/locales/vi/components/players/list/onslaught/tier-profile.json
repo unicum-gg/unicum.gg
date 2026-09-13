@@ -1,0 +1,10 @@
+{
+  "title": "Cần bao nhiêu để đạt hạng",
+  "players": "{count} người chơi",
+  "median-rating": "Trung vị của {metric}",
+  "battles-to-qualify": "Số trận để đủ điều kiện",
+  "battles-played": "Số trận trong mùa này",
+  "daily-pace": "Nhịp độ Hằng ngày",
+  "days-played": "đã chơi vào {days} trên tổng số {total} ngày",
+  "note": "Các giá trị trung vị trên những người chơi giữ từng hạng. Số trận để đủ điều kiện là số trận mà mỗi người trong số họ đã chơi ở chế độ này vào lần đầu tiên họ xuất hiện trên bảng xếp hạng, và chúng tôi chỉ có thể đếm số này cho những mùa được ghi nhận trực tiếp. Nhịp độ Hằng ngày phân bổ mùa của họ trên mọi ngày mùa đã diễn ra, vì vậy đây là mức trung bình bạn phải duy trì để theo kịp, không phải cột Số trận/Ngày của bảng xếp hạng, cột này chia cho số ngày người chơi thực sự đã chơi. Hầu hết họ không chơi mỗi ngày: dòng bên dưới nhịp độ cho biết họ được nhìn thấy đang chơi vào bao nhiêu ngày trong số đó, và họ sử dụng càng ít ngày thì mức cần đạt mỗi ngày càng lớn."
+}

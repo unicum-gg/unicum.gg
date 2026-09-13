@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "Η άνοδος αυτής της σεζόν"
+  "this-season-s-climb": "Η άνοδος αυτής της σεζόν",
+  "battles-played": "Παιγμένες μάχες",
+  "rating-points": "Πόντοι Κατάταξης",
+  "legend-cutoff": "Όριο επιπέδου {tier}"
 }

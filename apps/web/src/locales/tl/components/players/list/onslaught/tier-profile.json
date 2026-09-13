@@ -1,0 +1,10 @@
+{
+  "title": "Kailangan para sa ranggo",
+  "players": "{count} mga manlalaro",
+  "median-rating": "Median ng {metric}",
+  "battles-to-qualify": "Mga labanan para maging kwalipikado",
+  "battles-played": "Mga labanan ngayong season",
+  "daily-pace": "Araw-araw na bilis",
+  "days-played": "nilaro sa {days} sa kabuuang {total} mga araw",
+  "note": "Mga median sa lahat ng mga manlalarong may hawak ng bawat ranggo. Ang mga labanan para maging kwalipikado ay ang bilang ng mga labanan na nilaro ng bawat isa sa mode noong unang pagkakataong lumitaw sila sa talaan ng ranggo. Mabibilang lang namin ito para sa mga season na naitala namin nang live. Ipinapamahagi ng Araw-araw na bilis ang kanilang season sa bawat araw na tumakbo ito, kaya ito ang karaniwang kailangan mong maabot para makasabay. Hindi ito ang kolum na Mga laban/Araw sa talahanayan ng ranggo, na naghahati ayon sa mga araw na talaga nilang nilaro. Karamihan sa kanila ay hindi naglalaro araw-araw. Sinasabi ng linya sa ilalim ng bilis kung ilang araw sa mga iyon ang nakita silang naglalaro, at habang mas kaunti ang ginagamit nila, mas malaki ang kailangang maging bilang sa bawat araw."
+}

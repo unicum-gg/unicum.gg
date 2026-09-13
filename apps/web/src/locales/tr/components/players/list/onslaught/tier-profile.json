@@ -1,0 +1,10 @@
+{
+  "title": "Sıralama için gerekenler",
+  "players": "{count} oyuncu",
+  "median-rating": "Medyan {metric}",
+  "battles-to-qualify": "Yeterlilik için gereken savaşlar",
+  "battles-played": "Bu sezondaki Savaşlar",
+  "daily-pace": "Günlük tempo",
+  "days-played": "{total} günün {days} gününde oynanan",
+  "note": "Her bir sırayı elinde tutan oyuncular genelindeki medyan değerler. Yeterlilik için gereken savaşlar, her birinin liderlik tablosunda ilk kez göründüğünde modda oynadığı ve yalnızca canlı olarak kaydettiğimiz sezonlar için sayabildiğimiz savaş sayısıdır. Günlük tempo, sezonlarını sürdüğü her güne yayar, dolayısıyla ayak uydurmak için ortalama olarak tutturmanız gereken değerdir. Bu, oyuncunun aslında oynadığı günlere bölünen tablonun Savaşlar/Gün sütunu değildir. Çoğu her gün oynamaz. Temponun altındaki satır, oynuyor olarak görüldükleri günlerin kaçında oynadıklarını söyler ve kullandıkları gün sayısı azaldıkça her gün gereken sayı artar."
+}

@@ -12,7 +12,10 @@
     "player": "Jucător",
     "rank": "Grad",
     "battles": "Lupte",
-    "rating": "Punctele de clasament"
+    "rating": "Punctele de clasament",
+    "battles-per-day": "Lupte/zi",
+    "points-per-day": "Puncte/zi",
+    "points-per-battle": "Puncte/bătălie"
   },
   "alias": "(ca {nickname})",
   "ranks": {

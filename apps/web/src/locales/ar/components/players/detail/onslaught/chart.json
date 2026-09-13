@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "صعود هذا الموسم"
+  "this-season-s-climb": "صعود هذا الموسم",
+  "battles-played": "المعارك التي تم لعبها",
+  "rating-points": "نقاط التقييم",
+  "legend-cutoff": "الحد الفاصل للمستوى {tier}"
 }

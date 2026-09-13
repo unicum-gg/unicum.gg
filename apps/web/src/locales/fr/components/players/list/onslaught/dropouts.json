@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Joueur",
+    "best-rank": "Meilleur rang",
+    "last-rank": "Dernier rang",
+    "rating": "Points de rang",
+    "battles": "Batailles",
+    "left": "A quitté le classement"
+  },
+  "no-match": "Aucun joueur ne correspond aux filtres actuels."
+}

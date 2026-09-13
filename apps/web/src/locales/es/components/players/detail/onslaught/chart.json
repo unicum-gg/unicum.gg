@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "Progresión de esta temporada"
+  "this-season-s-climb": "Progresión de esta temporada",
+  "battles-played": "Batallas jugadas",
+  "rating-points": "Puntos de clasificación",
+  "legend-cutoff": "Corte del nivel {tier}"
 }

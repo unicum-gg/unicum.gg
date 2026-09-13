@@ -1,0 +1,10 @@
+{
+  "title": "Kokią vietą reikia užimti",
+  "players": "{count} žaidėjai",
+  "median-rating": "{metric} mediana",
+  "battles-to-qualify": "Mūšiai kvalifikacijai",
+  "battles-played": "Šio sezono mūšiai",
+  "daily-pace": "Tempas kasdien",
+  "days-played": "Žaista {days} dienos iš {total}",
+  "note": "Medianos visoje kiekvieną vietą užimančių žaidėjų grupėje. Kvalifikacijai reikalingų mūšių skaičius rodo, kiek mūšių režime buvo žaista, kai kiekvienas iš jų pirmą kartą pasirodė lyderių lentelėje. Tai galime skaičiuoti tik sezonuose, kuriuos užfiksavome tiesiogiai. Kasdienis tempas paskirsto jų sezoną per kiekvieną jo dieną, todėl tai yra vidurkis, kurio reikia norint neatsilikti. Tai nėra lentelės Mūšiai per dieną stulpelis, kuris dalija iš dienų, kuriomis žaidėjas iš tikrųjų žaidė. Dauguma jų nežaidžia kiekvieną dieną. Eilutė po tempu sako, kiek iš tų dienų jie buvo pastebėti žaidžiant. Kuo mažiau dienų jie išnaudoja, tuo didesnis turi būti kiekvienos dienos tempas."
+}

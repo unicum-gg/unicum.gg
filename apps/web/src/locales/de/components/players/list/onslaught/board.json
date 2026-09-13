@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Noch keine Ansturm-Rangliste verfügbar.",
   "no-player-matches-the-current": "Kein Spieler entspricht den aktuellen Filtern.",
-  "onslaught": "Ansturm"
+  "onslaught": "Ansturm",
+  "activity": {
+    "today": "Heute gespielt",
+    "week": "Diese Woche gespielt",
+    "idle": "Inaktiv"
+  },
+  "views": {
+    "ranked": "Rangliste",
+    "lost": "Platz verloren"
+  }
 }

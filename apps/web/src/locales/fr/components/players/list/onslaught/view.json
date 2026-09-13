@@ -12,7 +12,10 @@
     "player": "Joueur",
     "rank": "Rang",
     "battles": "Batailles",
-    "rating": "Points de rang"
+    "rating": "Points de rang",
+    "battles-per-day": "Batailles/jour",
+    "points-per-day": "Points/jour",
+    "points-per-battle": "Pts/bataille"
   },
   "alias": "(sous le nom {nickname})",
   "ranks": {

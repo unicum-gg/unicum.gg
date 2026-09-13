@@ -12,7 +12,10 @@
     "player": "Igrač",
     "rank": "Rang",
     "battles": "Borbi",
-    "rating": "Poeni rejtinga"
+    "rating": "Poeni rejtinga",
+    "battles-per-day": "Borbi/дан",
+    "points-per-day": "Бодови/дан",
+    "points-per-battle": "Бодови/битка"
   },
   "alias": "(као {nickname})",
   "ranks": {

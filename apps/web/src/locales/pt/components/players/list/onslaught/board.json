@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Ainda não há classificação no Massacre.",
   "no-player-matches-the-current": "Nenhum jogador corresponde aos filtros atuais.",
-  "onslaught": "Massacre"
+  "onslaught": "Massacre",
+  "activity": {
+    "today": "Jogou hoje",
+    "week": "Jogou esta semana",
+    "idle": "Inativo"
+  },
+  "views": {
+    "ranked": "Classificação",
+    "lost": "Perdeu o lugar"
+  }
 }

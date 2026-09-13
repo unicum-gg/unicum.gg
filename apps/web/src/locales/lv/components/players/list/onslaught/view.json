@@ -12,7 +12,10 @@
     "player": "Spēlētājs",
     "rank": "Rangs",
     "battles": "Kaujas",
-    "rating": "Reitinga Punkti"
+    "rating": "Reitinga Punkti",
+    "battles-per-day": "Kaujas/d",
+    "points-per-day": "Punkti/d",
+    "points-per-battle": "Punkti/Kauja"
   },
   "alias": "(kā {nickname})",
   "ranks": {

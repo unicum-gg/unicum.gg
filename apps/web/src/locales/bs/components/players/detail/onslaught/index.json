@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Pogledajte ljestvicu ove sezone",
   "standing-line": "{rating} rejting bodova · {battles} bitki",
   "the-board-only-lists-players": "Ljestvica prikazuje samo igrače koji dosegnu rang Šampiona, njih nekoliko hiljada po regiji, pa se gotovo svaki profil nalazi ovdje. Popunjava se sama u sezoni u kojoj ga dosegnu.",
-  "updated": "Ažurirano {when}"
+  "updated": "Ažurirano {when}",
+  "best": "najbolji",
+  "lost-place": "Izgubili su mjesto {when}",
+  "lost-short": "(izgubljeno mjesto)"
 }

@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Ver a classificação desta temporada",
   "standing-line": "{rating} pontos de classificação · {battles} batalhas",
   "the-board-only-lists-players": "A classificação só inclui os jogadores que chegam a Campeão, alguns milhares por região, por isso é aqui que ficam quase todos os perfis. O registo é preenchido automaticamente na temporada em que isso acontece.",
-  "updated": "Atualizado {when}"
+  "updated": "Atualizado {when}",
+  "best": "melhor",
+  "lost-place": "Perdeu o lugar {when}",
+  "lost-short": "(perdeu o lugar)"
 }

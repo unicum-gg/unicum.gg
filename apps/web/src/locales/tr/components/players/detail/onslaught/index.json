@@ -8,5 +8,8 @@
   "see-this-season-s-leaderboard": "Bu sezonun liderlik tablosunu gör",
   "standing-line": "{rating} puan · {battles} savaş",
   "the-board-only-lists-players": "Tablo yalnızca Şampiyon’a ulaşan, bölge başına birkaç bin oyuncuyu listeler, bu yüzden profillerin neredeyse tamamı burada yer alır. Oyuncu oraya ulaştığı sezonda tablo kendiliğinden dolar.",
-  "updated": "Güncellendi {when}"
+  "updated": "Güncellendi {when}",
+  "best": "en iyi",
+  "lost-place": "Yerini {when} kaybetti",
+  "lost-short": "(yerini kaybetti)"
 }

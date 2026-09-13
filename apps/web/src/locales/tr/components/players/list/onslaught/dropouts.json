@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Oyuncu",
+    "best-rank": "En iyi sıra",
+    "last-rank": "Son sıra",
+    "rating": "Reyting Puanı",
+    "battles": "Savaşlar",
+    "left": "Tablodan ayrıldı"
+  },
+  "no-match": "Mevcut filtrelerle eşleşen oyuncu yok."
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Ko aizņem vieta",
+  "players": "{count} spēlētāji",
+  "median-rating": "Vidējais {metric}",
+  "battles-to-qualify": "Kaujas kvalifikācijai",
+  "battles-played": "Kaujas šajā sezonā",
+  "daily-pace": "Ikdienas temps",
+  "days-played": "spēlēts {days} no {total} dienām",
+  "note": "Mediānas visā spēlētāju grupā, kas ieņem katru vietu. «Kaujas kvalifikācijai» ir tas, cik kauju katrs no viņiem bija spēlējis šajā režīmā, kad pirmo reizi parādījās līderu sarakstā. To varam saskaitīt tikai par sezonām, kuras reģistrējām tiešraidē. Ikdienas temps sadala viņu sezonu pa visām tās norises dienām, tāpēc tas ir vidējais, kas jānodrošina, lai neatpaliktu. Tā nav tabulas kolonna «Kaujas dienā», kurā dalīts ar dienām, kurās spēlētājs patiesībā spēlēja. Lielākā daļa no viņiem nespēlē katru dienu. Rinda zem tempa saka, cik no šīm dienām viņi tika pamanīti spēlējam, un jo mazāk dienu viņi izmanto, jo lielākam jābūt tempam katrā no atlikušajām dienām."
+}

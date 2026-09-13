@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Kol kas nėra Prasiveržimo įskaitos.",
   "no-player-matches-the-current": "Nė vienas žaidėjas neatitinka dabartinių filtrų.",
-  "onslaught": "Prasiveržimas"
+  "onslaught": "Prasiveržimas",
+  "activity": {
+    "today": "Šiandien žaista",
+    "week": "Šią savaitę žaista",
+    "idle": "Neaktyvus"
+  },
+  "views": {
+    "ranked": "Įskaita",
+    "lost": "Prarado savo vietą"
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "title": "Welche Wertung der Rang benötigt",
+  "players": "{count} Spieler",
+  "median-rating": "Median der {metric}",
+  "battles-to-qualify": "Gefechte zur Qualifikation",
+  "battles-played": "Gefechte in dieser Saison",
+  "daily-pace": "Tägliches Tempo",
+  "days-played": "an {days} von {total} Tagen gespielt",
+  "note": "Medianwerte über die Spieler, die jeden Rang innehatten. „Gefechte zur Qualifikation“ gibt an, wie viele Gefechte jeder von ihnen in diesem Modus gespielt hatte, als er zum ersten Mal in der Rangliste erschien. Das können wir nur für Saisons zählen, die wir live aufgezeichnet haben. Das tägliche Tempo verteilt ihre Saison auf jeden Tag, an dem sie lief. Es zeigt daher, welchen Durchschnitt Sie erreichen müssen, um mitzuhalten. Es ist nicht die Spalte „Gefechte/Tag“ der Rangliste, die durch die Tage geteilt wird, an denen ein Spieler tatsächlich gespielt hat. Die meisten von ihnen spielen nicht jeden Tag. Die Zeile unter dem Tempo sagt, an wie vielen dieser Tage sie beim Spielen gesehen wurden. Je weniger Tage sie nutzen, desto größer muss jeder einzelne Wert sein."
+}

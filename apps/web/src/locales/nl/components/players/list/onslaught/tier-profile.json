@@ -1,0 +1,10 @@
+{
+  "title": "Wat nodig is voor elke rang",
+  "players": "{count} spelers",
+  "median-rating": "Mediaan {metric}",
+  "battles-to-qualify": "Gevechten om je te kwalificeren",
+  "battles-played": "Gevechten dit seizoen",
+  "daily-pace": "Dagelijks tempo",
+  "days-played": "gespeeld op {days} dagen, van in totaal {total}",
+  "note": "Medianen over de spelers die elke rang bezetten. Gevechten om je te kwalificeren is het aantal gevechten dat elk van hen in het speltype had gespeeld toen ze voor het eerst op het klassement verschenen. Dit kunnen we alleen tellen voor de seizoenen die we live hebben geregistreerd. Het dagelijkse tempo verdeelt hun seizoen over elke dag dat het heeft geduurd. Het is dus het gemiddelde dat je moet halen om bij te blijven. Het is niet de kolom Gevechten/dag van het klassement, die deelt door het aantal dagen waarop een speler daadwerkelijk heeft gespeeld. De meesten spelen niet elke dag. De regel onder het tempo zegt op hoeveel van die dagen we hen hebben zien spelen. Hoe minder dagen ze gebruiken, hoe groter elk daggemiddelde moet zijn."
+}

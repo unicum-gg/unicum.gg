@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Spiller",
+    "best-rank": "Beste plassering",
+    "last-rank": "Siste plassering",
+    "rating": "Rangeringspoeng",
+    "battles": "Kamper",
+    "left": "Forlot tavlen"
+  },
+  "no-match": "Ingen spiller passer med de nåværende filtrene."
+}

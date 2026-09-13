@@ -1,3 +1,6 @@
 {
-  "this-season-s-climb": "Aufstieg in dieser Saison"
+  "this-season-s-climb": "Aufstieg in dieser Saison",
+  "battles-played": "Gespielte Gefechte",
+  "rating-points": "Wertungspunkte",
+  "legend-cutoff": "Schwellenwert für {tier}"
 }

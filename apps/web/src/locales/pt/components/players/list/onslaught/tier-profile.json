@@ -1,0 +1,10 @@
+{
+  "title": "O que cada posição exige",
+  "players": "{count} jogadores",
+  "median-rating": "Mediana de {metric}",
+  "battles-to-qualify": "Batalhas para se qualificar",
+  "battles-played": "Batalhas nesta temporada",
+  "daily-pace": "Ritmo Diário",
+  "days-played": "jogado em {days} de {total} dias",
+  "note": "Medianas em toda a parte entre os jogadores que ocupam cada posição. Batalhas para se qualificar corresponde ao que cada um tinha jogado no modo na primeira vez que apareceu na classificação, algo que só podemos contabilizar nas temporadas que foram registradas ao vivo. O Ritmo Diário distribui a temporada por todos os dias em que decorreu, por isso é o valor médio que tem de manter para acompanhar o ritmo, e não é a coluna Batalhas/Dia da classificação, que divide pelos dias em que um jogador jogou na verdade. A maioria não joga todos os dias: a linha sob o ritmo diz em quantos desses dias foram vistos a jogar, e quanto menos dias usam, maior tem de ser o ritmo de cada dia."
+}

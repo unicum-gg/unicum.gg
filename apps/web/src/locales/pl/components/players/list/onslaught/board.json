@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Nie ma jeszcze klasyfikacji Natarcia.",
   "no-player-matches-the-current": "Żaden gracz nie spełnia bieżących kryteriów filtrowania.",
-  "onslaught": "Natarcie"
+  "onslaught": "Natarcie",
+  "activity": {
+    "today": "Rozegrane dzisiaj",
+    "week": "Rozegrane w tym tygodniu",
+    "idle": "Nieaktywni"
+  },
+  "views": {
+    "ranked": "Klasyfikacja",
+    "lost": "Utracili miejsce"
+  }
 }

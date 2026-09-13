@@ -12,7 +12,10 @@
     "player": "Gracz",
     "rank": "Stopień",
     "battles": "Bitwy",
-    "rating": "Punkty rankingowe"
+    "rating": "Punkty rankingowe",
+    "battles-per-day": "Bitwy/dzień",
+    "points-per-day": "Punkty/dzień",
+    "points-per-battle": "Punkty/bitwę"
   },
   "alias": "(jako {nickname})",
   "ranks": {

@@ -12,7 +12,10 @@
     "player": "Spelare",
     "rank": "Grad",
     "battles": "Strider",
-    "rating": "Gradpoäng"
+    "rating": "Gradpoäng",
+    "battles-per-day": "Strider/dag",
+    "points-per-day": "Poäng/dag",
+    "points-per-battle": "Poäng/strid"
   },
   "alias": "(som {nickname})",
   "ranks": {

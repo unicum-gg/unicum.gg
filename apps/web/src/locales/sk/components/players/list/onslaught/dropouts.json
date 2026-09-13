@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Hráč",
+    "best-rank": "Najlepšia uvrstitev",
+    "last-rank": "Posledná uvrstitev",
+    "rating": "točke ocene",
+    "battles": "Bitky",
+    "left": "Opustili lestvico"
+  },
+  "no-match": "Žiadny hráč nezodpovedá aktuálnym filtrom."
+}

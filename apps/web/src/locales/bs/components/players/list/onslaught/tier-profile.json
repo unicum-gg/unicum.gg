@@ -1,0 +1,10 @@
+{
+  "title": "Šta je potrebno za poziciju",
+  "players": "Broj igrača: {count}",
+  "median-rating": "Medijan {metric}",
+  "battles-to-qualify": "Bitke za kvalifikaciju",
+  "battles-played": "Bitke ove sezone",
+  "daily-pace": "Dnevni tempo",
+  "days-played": "odigrano {days} od ukupno {total} dana",
+  "note": "Medijane širom igrača koji drže svaku poziciju. Bitke za kvalifikaciju predstavljaju broj bitaka koje je svaki od njih odigrao u režimu kada se prvi put pojavio na ljestvici, a to možemo izbrojati samo za sezone koje smo zabilježili uživo. Dnevni tempo raspoređuje njihovu sezonu na svaki dan njenog trajanja, pa predstavlja prosjek koji morate održavati da biste držali korak. To nije kolona Bitke/dan na rang-listi, koja dijeli s brojem dana kada je igrač zapravo igrao. Većina njih ne igra svaki dan. Linija ispod tempa kaže koliko je tih dana zabilježeno njihovo igranje, a što ih manje koriste, svaki dan mora biti veći."
+}

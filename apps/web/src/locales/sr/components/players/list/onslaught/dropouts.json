@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "player": "Igrač",
+    "best-rank": "Најбољи ранг",
+    "last-rank": "Последњи ранг",
+    "rating": "Poeni rejtinga",
+    "battles": "Borbi",
+    "left": "Отишли са табеле"
+  },
+  "no-match": "Ниједан играч не одговара тренутним филтерима."
+}

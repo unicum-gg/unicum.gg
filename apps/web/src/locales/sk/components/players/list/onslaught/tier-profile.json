@@ -1,0 +1,10 @@
+{
+  "title": "Čo si vyžaduje uvrstitev",
+  "players": "{count} hráči",
+  "median-rating": "Medián {metric}",
+  "battles-to-qualify": "Bitky potrebné na kvalifikáciu",
+  "battles-played": "Bitky v tejto sezóne",
+  "daily-pace": "Denné tempo",
+  "days-played": "odohrané počas {days} z {total} dní",
+  "note": "Mediány po hráčoch, ktorí držia jednotlivé uvrstitev. Bitky potrebné na kvalifikáciu predstavujú počet bitiek, ktoré každý z nich odohral v režime pri svojom prvom výskyte v rebríčku. Započítať ich môžeme iba za sezóny, ktoré sme zaznamenali naživo. Denné tempo rozdeľuje ich sezónu na každý deň, počas ktorého prebiehala, takže vyjadruje, čo musíte v priemere dosiahnuť, aby ste udržali krok. Nie je to stĺpec Bitky/Deň na lestvica, ktorý delí počet bitiek počtom dní, počas ktorých hráč pravzaprav hral. Väčšina z nich nehrá každý deň. Riadok pod tempom uvádza, počas koľkých z týchto dní boli zaznamenaní pri hraní. Čím menej dní využívajú, tým viac bitiek musia odohrať v každý z nich."
+}

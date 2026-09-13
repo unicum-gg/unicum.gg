@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "Rynnistyksen sijoituksia ei vielä ole.",
   "no-player-matches-the-current": "Yksikään pelaaja ei vastaa nykyisiä suodattimia.",
-  "onslaught": "Rynnistys"
+  "onslaught": "Rynnistys",
+  "activity": {
+    "today": "Pelattu tänään",
+    "week": "Pelattu tällä viikolla",
+    "idle": "Ei aktiivisuutta"
+  },
+  "views": {
+    "ranked": "Sijoitukset",
+    "lost": "Sijoituksensa menettäneet"
+  }
 }

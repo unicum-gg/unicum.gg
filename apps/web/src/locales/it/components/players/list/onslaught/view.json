@@ -12,7 +12,10 @@
     "player": "Giocatore",
     "rank": "Rango",
     "battles": "Battaglie",
-    "rating": "Punti Classifica"
+    "rating": "Punti Classifica",
+    "battles-per-day": "Battaglie/Giorno",
+    "points-per-day": "Punti/Giorno",
+    "points-per-battle": "Punti/Battaglia"
   },
   "alias": "(come {nickname})",
   "ranks": {

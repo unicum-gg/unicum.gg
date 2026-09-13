@@ -1,5 +1,14 @@
 {
   "no-onslaught-standings-yet": "暂无猛攻排行榜。",
   "no-player-matches-the-current": "没有玩家符合当前筛选条件。",
-  "onslaught": "天梯战"
+  "onslaught": "天梯战",
+  "activity": {
+    "today": "今天进行过对战",
+    "week": "本周进行过对战",
+    "idle": "闲置"
+  },
+  "views": {
+    "ranked": "排名",
+    "lost": "丢失名次"
+  }
 }

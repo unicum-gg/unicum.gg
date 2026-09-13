@@ -1,0 +1,10 @@
+{
+  "title": "Co zabere získání pořadí",
+  "players": "{count} hráči",
+  "median-rating": "Medián {metric}",
+  "battles-to-qualify": "Bitvy potřebné ke kvalifikaci",
+  "battles-played": "Bitvy v této sezóně",
+  "daily-pace": "Denní tempo",
+  "days-played": "Odehráno ve {days} z {total} dnů",
+  "note": "Mediány napříč hráči, kteří drží každé pořadí. Počet bitev potřebných ke kvalifikaci udává, kolik bitev každý z nich odehrál v režimu, když se poprvé zobrazil v žebříčku. To můžeme spočítat pouze u sezón, které jsme zaznamenali živě. Denní tempo rozpočítává jejich sezónu na každý den, po který probíhala, takže udává průměr, který musíte držet, abyste stíhali. Nejde o sloupec Bitev/den na žebříčku, který dělí počet bitev počtem dnů, kdy hráč ve skutečnosti hrál. Většina z nich nehraje každý den. Řádek pod tempem říká, kolik z těchto dnů jsme je viděli hrát. Čím méně dnů využijí, tím více bitev musí v každém z nich odehrát."
+}
