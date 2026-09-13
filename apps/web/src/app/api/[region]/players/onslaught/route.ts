@@ -41,12 +41,22 @@ async function GET__perf(
   const season = url.searchParams.get("season") ?? undefined;
 
   try {
-    const { season: current, seasons, results } =
-      await getOnslaughtLeaderboard(region, limit, season);
+    const {
+      season: current,
+      seasons,
+      results,
+      dropouts,
+    } = await getOnslaughtLeaderboard(region, limit, season);
+    // Both lists wear the same crests, and both resolve them in one batch each.
+    const [decorated, fallen] = await Promise.all([
+      attachPlayerBadges(region, results),
+      attachPlayerBadges(region, dropouts),
+    ]);
     return jsonResponse(OnslaughtResponse, {
       season: current,
       seasons,
-      results: await attachPlayerBadges(region, results),
+      results: decorated,
+      dropouts: fallen,
     });
   } catch (err) {
     console.error(`[api/${region}/players/onslaught] failed:`, err);

@@ -3269,6 +3269,31 @@ export interface components {
         };
         /** @description A 1200×630 PNG stats card. */
         ogImageResponse: string;
+        /** @description A player who lost their place on the board this season. */
+        OnslaughtDropout: {
+            account_id: number;
+            nickname: string;
+            clan_tag: string | null;
+            clan_color: string | null;
+            /** @description The best position they reached before losing the place. */
+            bestRank: number;
+            /** @description Where they stood the last time we saw them on the board. */
+            lastRank: number;
+            lastRating: number;
+            /** @description Battles played in the mode when they were last seen. */
+            battles: number;
+            /** @description Unix seconds of the last capture that still had them on the board. */
+            lastSeenAt: number;
+            is_verified?: boolean;
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
+        };
         OnslaughtHistoryResponse: {
             /** @description The season these samples belong to. */
             eventId: string;
@@ -3279,6 +3304,8 @@ export interface components {
             season: components["schemas"]["OnslaughtSeason"] | null;
             seasons: components["schemas"]["OnslaughtSeasonRef"][];
             results: components["schemas"]["OnslaughtSummary"][];
+            /** @description Players who held a place this season and lost it, newest first. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of. */
+            dropouts: components["schemas"]["OnslaughtDropout"][];
         };
         /** @description Onslaught season metadata. */
         OnslaughtSeason: {
@@ -3347,6 +3374,22 @@ export interface components {
             rating: number;
             /** @description Battles played in the mode over the season. */
             battles: number;
+            /** @description Days this account was seen playing, from our own capture archive. Absent for a season we hold no captures of. */
+            activeDays?: number;
+            /** @description Battles per day PLAYED (not per day of the season): observed battles divided by activeDays. */
+            battlesPerDay?: number;
+            /** @description Rating points won or lost per day played. Negative for a player who is losing ground. */
+            pointsPerDay?: number;
+            /** @description Rating points per observed battle. Excludes the account's entry state, which belongs to no day. */
+            pointsPerBattle?: number;
+            /** @description Unix seconds of the last capture where this account's battle count moved. */
+            lastActiveAt?: number;
+            /** @description Battles played in the mode by the time the account first appeared on the board: what qualifying cost. Absent for a season we hold no captures of, and for the few already ranked when the capture began. */
+            entryBattles?: number;
+            /** @description The account's overall WN7, for the board's tier summary. */
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
             is_verified?: boolean;
             /** @description Tournaments this account was on the winning roster of, for the winner's crest. */
             tournament_wins?: number;
@@ -3638,6 +3681,12 @@ export interface components {
             elitePosition: number | null;
             /** @description Top N ranks that are at least Champion. */
             masterPosition: number | null;
+            /** @description True when the player held a place in this season and no longer does. The rank, rating and battles above are then the last state we saw, not a standing they still hold. */
+            lost?: boolean;
+            /** @description The best position they reached in the season, from our own capture archive. */
+            bestRank?: number;
+            /** @description Unix seconds of the last capture that still had them on the board. Only on a place they have lost. */
+            lastSeenAt?: number;
         };
         /** @description Inputs for a side-by-side player comparison: each player's row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and WN8/WNX expected-value tables. */
         PlayersCompare: {

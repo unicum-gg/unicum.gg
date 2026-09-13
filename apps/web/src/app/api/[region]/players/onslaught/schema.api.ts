@@ -27,6 +27,35 @@ export const onslaughtSummary = z
     battles: z.number().meta({
       description: "Battles played in the mode over the season.",
     }),
+    activeDays: z.number().optional().meta({
+      description:
+        "Days this account was seen playing, from our own capture archive. Absent for a season we hold no captures of.",
+    }),
+    battlesPerDay: z.number().optional().meta({
+      description:
+        "Battles per day PLAYED (not per day of the season): observed battles divided by activeDays.",
+    }),
+    pointsPerDay: z.number().optional().meta({
+      description:
+        "Rating points won or lost per day played. Negative for a player who is losing ground.",
+    }),
+    pointsPerBattle: z.number().optional().meta({
+      description:
+        "Rating points per observed battle. Excludes the account's entry state, which belongs to no day.",
+    }),
+    lastActiveAt: z.number().optional().meta({
+      description:
+        "Unix seconds of the last capture where this account's battle count moved.",
+    }),
+    entryBattles: z.number().optional().meta({
+      description:
+        "Battles played in the mode by the time the account first appeared on the board: what qualifying cost. Absent for a season we hold no captures of, and for the few already ranked when the capture began.",
+    }),
+    wn7: z.number().nullable().meta({
+      description: "The account's overall WN7, for the board's tier summary.",
+    }),
+    wn8: z.number().nullable(),
+    wnx: z.number().nullable(),
     is_verified: z.boolean().optional(),
     tournament_wins: z.number().optional().meta({
       description:
@@ -43,6 +72,44 @@ export const onslaughtSummary = z
   .meta({
     id: "OnslaughtSummary",
     description: "Onslaught leaderboard row (ranked by score).",
+  });
+
+/** A player who held a place this season and lost it. The feeder prunes anyone
+ * who has left the board from the standings, so they are recovered from the
+ * daily fold instead. */
+export const onslaughtDropout = z
+  .object({
+    account_id: z.number(),
+    nickname: z.string(),
+    clan_tag: z.string().nullable(),
+    clan_color: z.string().nullable(),
+    bestRank: z.number().meta({
+      description: "The best position they reached before losing the place.",
+    }),
+    lastRank: z.number().meta({
+      description: "Where they stood the last time we saw them on the board.",
+    }),
+    lastRating: z.number(),
+    battles: z.number().meta({
+      description: "Battles played in the mode when they were last seen.",
+    }),
+    lastSeenAt: z.number().meta({
+      description:
+        "Unix seconds of the last capture that still had them on the board.",
+    }),
+    is_verified: z.boolean().optional(),
+    tournament_wins: z.number().optional(),
+    tournament_featured_wins: z.number().optional(),
+    tournament_best_title: z.string().nullable().optional(),
+    onslaught_best_tier: z.string().nullable().optional(),
+    onslaught_best_rank: z.number().nullable().optional(),
+    onslaught_seasons: z.number().optional(),
+    is_supporter: z.boolean().optional(),
+    twitch_login: z.string().nullable().optional(),
+  })
+  .meta({
+    id: "OnslaughtDropout",
+    description: "A player who lost their place on the board this season.",
   });
 
 /** The current Onslaught season: window plus the rank thresholds the board
@@ -112,4 +179,8 @@ export const OnslaughtResponse = z.object({
   season: onslaughtSeason.nullable(),
   seasons: z.array(onslaughtSeasonRef),
   results: z.array(onslaughtSummary),
+  dropouts: z.array(onslaughtDropout).meta({
+    description:
+      "Players who held a place this season and lost it, newest first. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of.",
+  }),
 });

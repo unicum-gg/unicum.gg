@@ -31,6 +31,18 @@ export const playerOnslaughtStanding = z
     masterPosition: z.number().nullable().meta({
       description: "Top N ranks that are at least Champion.",
     }),
+    lost: z.boolean().optional().meta({
+      description:
+        "True when the player held a place in this season and no longer does. The rank, rating and battles above are then the last state we saw, not a standing they still hold.",
+    }),
+    bestRank: z.number().optional().meta({
+      description:
+        "The best position they reached in the season, from our own capture archive.",
+    }),
+    lastSeenAt: z.number().optional().meta({
+      description:
+        "Unix seconds of the last capture that still had them on the board. Only on a place they have lost.",
+    }),
   })
   .meta({
     id: "PlayerOnslaughtStanding",

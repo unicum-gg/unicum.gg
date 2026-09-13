@@ -9,6 +9,7 @@ import {
 import { db } from "@unicum.gg/core/db";
 import { type Region } from "@unicum.gg/wargaming";
 import { mirrorCommitAt } from "./onslaught";
+import { getPlayerOnslaughtPlaces } from "./onslaught-fold-read";
 
 // Instants cross the wire as epoch seconds, like the server-population series:
 // a number carries no timezone to be misread, and the client is the only place
@@ -110,6 +111,19 @@ export type PlayerOnslaughtStanding = {
   battles: number;
   elitePosition: number | null;
   masterPosition: number | null;
+  /**
+   * True when they held a place in this season and no longer do.
+   *
+   * The board is the present tense and the capture prunes anyone who leaves it,
+   * so without this a profile is silent about the season a player reached the
+   * leaderboard in and then fell out of. `rank`, `rating` and `battles` are
+   * then the last state we saw rather than a standing they still hold.
+   */
+  lost?: boolean;
+  /** The best position they reached in the season, on a place they have lost. */
+  bestRank?: number;
+  /** Unix seconds of the last capture that still had them on the board. */
+  lastSeenAt?: number;
 };
 
 /** One instant of a player's own climb. */
@@ -185,6 +199,16 @@ export async function getPlayerOnslaught(
   const playerNickname = rows[0].playerNickname;
 
   const now = Date.now();
+  // Every season the fold saw them on the board, which is a superset of the
+  // seasons they are ranked in now, plus the metadata for the ones the join
+  // above could not reach: a season they no longer hold a place in has no
+  // standings row to have joined through. A region holds a handful of seasons,
+  // so reading them all costs less than a second query per lost place.
+  const [places, allSeasons] = await Promise.all([
+    getPlayerOnslaughtPlaces(region, accountId),
+    db.select().from(seasons),
+  ]);
+  const seasonById = new Map(allSeasons.map((s) => [s.eventId, s]));
   const standings = await Promise.all(
     rows
       .filter((r) => r.eventId != null)
@@ -208,8 +232,54 @@ export async function getPlayerOnslaught(
           battles: r.battles!,
           elitePosition: r.elitePosition,
           masterPosition: r.masterPosition,
+          // A season they still hold a place in, so the best rank is worth
+          // saying beside the current one: it is the peak of the same climb.
+          bestRank: places.get(r.eventId!)?.bestRank,
         };
       }),
+  );
+
+  // The seasons the fold saw them ranked in and the standings do not: a place
+  // they held and lost. Built here rather than left out, or a profile would go
+  // quiet about the season a player reached the board in and then fell out of.
+  const held = new Set(standings.map((s) => s.eventId));
+  const lost = await Promise.all(
+    [...places.entries()]
+      .filter(([eventId]) => !held.has(eventId))
+      .map(async ([eventId, place]) => {
+        const season = seasonById.get(eventId);
+        const endDate = season?.endDate ?? null;
+        const ended = endDate != null && endDate.getTime() < now;
+        return {
+          eventId,
+          codename: season?.codename ?? null,
+          seasonOrdinal: season?.seasonOrdinal ?? null,
+          assetsRef:
+            ended && endDate != null
+              ? await mirrorCommitAt(endDate.toISOString())
+              : null,
+          ended,
+          startDate: season?.startDate?.toISOString() ?? null,
+          endDate: endDate?.toISOString() ?? null,
+          rank: place.lastRank,
+          rating: place.lastRating,
+          battles: place.battles,
+          elitePosition: season?.elitePosition ?? null,
+          masterPosition: season?.masterPosition ?? null,
+          lost: true,
+          bestRank: place.bestRank,
+          lastSeenAt: place.lastSeenAt,
+        };
+      }),
+  );
+
+  // Merged into one list in the order the rest of the page reads it, newest
+  // season first, so a lost place sits where its season does rather than in a
+  // section of its own.
+  const allStandings = [...standings, ...lost].sort(
+    (a, b) =>
+      (b.startDate == null ? 0 : Date.parse(b.startDate)) -
+      (a.startDate == null ? 0 : Date.parse(a.startDate)),
   );
 
   // The climb through the most recent season they ranked in, most recent samples
@@ -217,7 +287,7 @@ export async function getPlayerOnslaught(
   // capture writes a row per player per instant they moved, so an active player
   // over a six week season runs to thousands: worth reading the tail of, never
   // worth shipping whole on a page view.
-  const latest = standings[0];
+  const latest = allStandings[0];
   const points = latest
     ? await db
         .select({
@@ -241,8 +311,14 @@ export async function getPlayerOnslaught(
   return {
     accountId,
     nickname: playerNickname,
-    lastRecalculationTs: rows[0]?.lastRecalculationTs ?? null,
-    standings,
+    // The stamp of the season actually being shown, not of the first standings
+    // row: a player whose latest place is one they LOST has no standings row
+    // for that season, so the join above answers with an older season's stamp
+    // and the profile would date this season's line three months ago.
+    lastRecalculationTs:
+      (latest ? seasonById.get(latest.eventId)?.lastRecalculationTs : null) ??
+      null,
+    standings: allStandings,
     history: points.map((p) => ({
       t: epoch(p.capturedAt),
       rank: p.rank,

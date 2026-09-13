@@ -5,11 +5,18 @@ import {
   onslaughtRatingsByRegion,
   onslaughtSeasonsByRegion,
   playerNameHistoryByRegion,
+  playersByRegion,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { type Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
+import {
+  getOnslaughtDropouts,
+  getOnslaughtEntryCohort,
+  getOnslaughtRates,
+  type OnslaughtDropout,
+} from "./onslaught-fold-read";
 import { resolveLiveSeason } from "./onslaught-season";
 
 // Season metadata for the Onslaught board: the window it covers plus the rank
@@ -58,6 +65,27 @@ export type OnslaughtRow = {
   recordedClanColor: string | null;
   rating: number;
   battles: number;
+  // How hard they have been going at the season, folded from the captures
+  // (`onslaught-daily`). Absent for a season we hold no captures of, which is
+  // every season that ended before the feeder existed, and for a player who has
+  // not moved since they entered the board.
+  activeDays?: number;
+  battlesPerDay?: number;
+  pointsPerDay?: number;
+  pointsPerBattle?: number;
+  /** Unix seconds of the last capture that moved. */
+  lastActiveAt?: number;
+  // Battles played in the mode by the time they first appeared on the board:
+  // what qualifying cost them. Absent for a season we hold no captures of, and
+  // for the handful already ranked when the capture began (see
+  // `getAccountsRankedAtFirstCapture`), whose first row is a state, not an entry.
+  entryBattles?: number;
+  // The account's own rating, all three metrics, so the reader's chosen one is
+  // served rather than one being picked for them. Null for an account we do not
+  // track yet, or that has none.
+  wn7: number | null;
+  wn8: number | null;
+  wnx: number | null;
 };
 
 // One entry of the season selector. The list mirrors the game's own history (the
@@ -150,9 +178,14 @@ export async function getOnslaughtLeaderboard(
   season: OnslaughtSeason | null;
   seasons: OnslaughtSeasonRef[];
   results: OnslaughtRow[];
+  /** Players who held a place this season and lost it, newest first. The feeder
+   * prunes them from the standings, so they are recovered from the daily fold.
+   * Empty for a season we hold no captures of. */
+  dropouts: OnslaughtDropout[];
 }> {
   const ratings = onslaughtRatingsByRegion[region];
   const seasons = onslaughtSeasonsByRegion[region];
+  const players = playersByRegion[region];
 
   // All seasons, newest first: the head is the current season (the default), the
   // whole list feeds the selector.
@@ -165,7 +198,7 @@ export async function getOnslaughtLeaderboard(
     .from(seasons)
     .orderBy(sql`${seasons.startDate} DESC NULLS LAST`);
   if (allSeasons.length === 0)
-    return { season: null, seasons: [], results: [] };
+    return { season: null, seasons: [], results: [], dropouts: [] };
 
   const season =
     (eventId ? allSeasons.find((s) => s.eventId === eventId) : undefined) ??
@@ -184,20 +217,42 @@ export async function getOnslaughtLeaderboard(
       currentClanColor: ratings.currentClanColor,
       rating: ratings.rating,
       battles: ratings.battles,
+      // The account's own rating, carried so the board can say what a Legend or
+      // a Champion typically is. All three metrics, like every other payload
+      // that shows one, since the choice is the reader's and is made in the
+      // navbar. A nested loop of a few hundred index lookups, ~33ms on EU.
+      wn7: players.wn7,
+      wn8: players.wn8,
+      wnx: players.wnx,
     })
     .from(ratings)
+    .leftJoin(players, eq(players.accountId, ratings.accountId))
     .where(eq(ratings.eventId, season.eventId))
     .orderBy(asc(ratings.rank))
     .limit(limit);
 
+
+
   // Client history (generated from wot-src): the current year's seasons + the
   // finished years kept as aggregate archives. Powers both the codename fallback
   // and the full selector list.
+  //
+  // The two local reads ride along rather than being awaited before it: the
+  // rates the board's own columns show (a grouped scan of the daily fold, a few
+  // tens of thousands of rows and about 40ms for a whole season, which is why
+  // nothing caches it) and the cohort whose arrival we never saw. Awaited
+  // first, their time is added to these network round trips instead of hiding
+  // inside them. Both come back empty for a season we hold no captures of, and
+  // the columns then have nothing to show rather than showing a zero.
   const comp7 = wg.region(region).source.comp7;
-  const [taxonomy, archiveYears] = await Promise.all([
-    comp7.seasonTaxonomy().catch(() => null),
-    comp7.archiveYears().catch(() => [] as string[]),
-  ]);
+  const [taxonomy, archiveYears, rates, entryCohort, dropouts] =
+    await Promise.all([
+      comp7.seasonTaxonomy().catch(() => null),
+      comp7.archiveYears().catch(() => [] as string[]),
+      getOnslaughtRates(region, season.eventId),
+      getOnslaughtEntryCohort(region, season.eventId),
+      getOnslaughtDropouts(region, season.eventId),
+    ]);
 
   // The live season, resolved from the client taxonomy against our own archive
   // (the client names a whole year at once, so its last entry is the year's last
@@ -290,6 +345,7 @@ export async function getOnslaughtLeaderboard(
       : await mirrorCommitAt(season.endDate.toISOString());
 
   return {
+    dropouts,
     season: {
       eventId: season.eventId,
       name: season.name,
@@ -309,6 +365,17 @@ export async function getOnslaughtLeaderboard(
       // clan means the player genuinely left their clan). An unreconciled row
       // falls back to the recorded snapshot.
       const reconciled = r.currentName != null;
+      const accountId = Number(r.accountId);
+      const rate = rates.get(accountId);
+      // What they had played when they first appeared, which the fold read off
+      // their first day. Withheld for the few who were already ranked when the
+      // capture began, whose first day is a state rather than an arrival, and
+      // for every player of a season whose first capture did not see the whole
+      // board, where that distinction cannot be made at all.
+      const entryBattles =
+        entryCohort.complete && !entryCohort.rankedAtFirstCapture.has(accountId)
+          ? rate?.entryBattles
+          : undefined;
       return {
         rank: r.rank,
         account_id: Number(r.accountId),
@@ -320,6 +387,15 @@ export async function getOnslaughtLeaderboard(
         recordedClanColor: r.recordedClanColor,
         rating: r.rating,
         battles: r.battles,
+        activeDays: rate?.activeDays,
+        battlesPerDay: rate?.battlesPerDay,
+        pointsPerDay: rate?.pointsPerDay,
+        pointsPerBattle: rate?.pointsPerBattle,
+        lastActiveAt: rate?.lastActiveAt,
+        entryBattles,
+        wn7: r.wn7,
+        wn8: r.wn8,
+        wnx: r.wnx,
       };
     }),
   };
