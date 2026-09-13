@@ -65,5 +65,9 @@
     "off": "Caméra cinématique : désactivée, la vue reste fixe",
     "auto": "Caméra cinématique : s’active après 30 secondes d’inactivité",
     "on": "Caméra cinématique : toujours, dès que vous relâchez la commande"
+  },
+  "paint-locked": {
+    "factory": "Porte sa propre livrée d’usine : le jeu ne peint rien par-dessus",
+    "locked": "Le jeu n’autorise aucune personnalisation sur ce véhicule"
   }
 }

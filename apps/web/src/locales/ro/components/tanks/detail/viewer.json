@@ -65,5 +65,9 @@
     "off": "Cameră cinematografică: dezactivată, vizualizarea rămâne fixă",
     "auto": "Cameră cinematografică: începe după 30 de secunde de inactivitate",
     "on": "Cameră cinematografică: permanent, din momentul în care eliberezi controlul"
+  },
+  "paint-locked": {
+    "factory": "Poartă schema de vopsire din fabrică: jocul nu pictează nimic peste ea",
+    "locked": "Jocul nu permite nicio personalizare pentru acest vehicul"
   }
 }

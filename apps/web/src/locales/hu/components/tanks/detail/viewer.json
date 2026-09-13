@@ -65,5 +65,9 @@
     "off": "Filmszerű kamera: ki, a nézet nem mozdul",
     "auto": "Filmszerű kamera: 30 másodperc tétlenség után indul",
     "on": "Filmszerű kamera: mindig, attól a pillanattól, hogy elengeded"
+  },
+  "paint-locked": {
+    "factory": "Saját gyári festését viseli: a játék semmi mást nem fest rá",
+    "locked": "A játék nem engedélyez semmilyen testreszabást a jármű esetében"
   }
 }

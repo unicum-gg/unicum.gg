@@ -65,5 +65,9 @@
     "off": "Filmisk kamera: fra, visningen bliver stående",
     "auto": "Filmisk kamera: starter efter 30 sekunder uden aktivitet",
     "on": "Filmisk kamera: altid, fra det øjeblik du slipper"
+  },
+  "paint-locked": {
+    "factory": "Har sin egen fabriksmaling på: spillet maler ingenting oven på det",
+    "locked": "Spillet tillader ingen tilpasning på dette køretøj"
   }
 }

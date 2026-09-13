@@ -65,5 +65,9 @@
     "off": "Filmska kamera: isključena, prikaz miruje",
     "auto": "Filmska kamera: počinje nakon 30 sekundi bez aktivnosti",
     "on": "Filmska kamera: uvijek, od trenutka kada je pustite"
+  },
+  "paint-locked": {
+    "factory": "Ima vlastitu fabričku kamuflažu: igra preko nje ne nanosi ništa",
+    "locked": "Igra ne dozvoljava nikakvo prilagođavanje na ovom vozilu"
   }
 }

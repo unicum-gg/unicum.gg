@@ -65,5 +65,9 @@
     "off": "Sinematik kamera: kapalı, görünüm sabit kalır",
     "auto": "Sinematik kamera: 30 saniye boyunca boşta kaldıktan sonra başlar",
     "on": "Sinematik kamera: her zaman, bıraktığın andan itibaren"
+  },
+  "paint-locked": {
+    "factory": "Kendi fabrika kaplamasını kullanır: oyun üzerine hiçbir şey boyamaz",
+    "locked": "Oyun bu araçta özelleştirmeye izin vermiyor"
   }
 }

@@ -65,5 +65,9 @@
     "off": "Câmara cinematográfica: desligada, a vista não se move",
     "auto": "Câmara cinematográfica: inicia-se após 30 segundos sem interação",
     "on": "Câmara cinematográfica: sempre, assim que larga os controlos"
+  },
+  "paint-locked": {
+    "factory": "Usa sua própria pintura de fábrica: o jogo não pinta nada sobre ela",
+    "locked": "O jogo não permite personalização neste veículo"
   }
 }

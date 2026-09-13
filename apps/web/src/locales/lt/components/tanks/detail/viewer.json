@@ -65,5 +65,9 @@
     "off": "Kinematografinė kamera: išjungta, vaizdas nejuda",
     "auto": "Kinematografinė kamera: įsijungia po 30 sekundžių neveikimo",
     "on": "Kinematografinė kamera: visada, nuo akimirkos, kai paleidžiate"
+  },
+  "paint-locked": {
+    "factory": "Turi gamyklinį dažymą: žaidimas ant transporto priemonės nieko nenudažo",
+    "locked": "Žaidimas neleidžia keisti šios transporto priemonės išvaizdos"
   }
 }

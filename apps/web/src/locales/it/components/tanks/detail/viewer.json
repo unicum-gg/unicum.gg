@@ -65,5 +65,9 @@
     "off": "Telecamera cinematografica: disattivata, la visuale resta ferma",
     "auto": "Telecamera cinematografica: si attiva dopo 30 secondi di inattività",
     "on": "Telecamera cinematografica: sempre, non appena lasci la presa"
+  },
+  "paint-locked": {
+    "factory": "Ha la propria livrea di fabbrica: il gioco non dipinge nulla sopra di essa",
+    "locked": "Il gioco non consente personalizzazioni su questo veicolo"
   }
 }

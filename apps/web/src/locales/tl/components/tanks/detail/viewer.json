@@ -65,5 +65,9 @@
     "off": "Cinematic camera: naka-off, hindi gumagalaw ang view",
     "auto": "Cinematic camera: magsisimula pagkatapos ng 30 segundong walang galaw",
     "on": "Cinematic camera: palagi, mula sa sandaling bitawan mo"
+  },
+  "paint-locked": {
+    "factory": "Suot nito ang sarili nitong factory livery: walang ipinipinta ang laro sa ibabaw nito",
+    "locked": "Hindi pinapayagan ng laro ang anumang customization sa sasakyang ito"
   }
 }

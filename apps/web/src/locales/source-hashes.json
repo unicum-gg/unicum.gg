@@ -2311,6 +2311,8 @@
   "components/tanks/detail/viewer:cinematic-tooltips.off": "8d55ab7baa63",
   "components/tanks/detail/viewer:cinematic-tooltips.auto": "52b43587aecd",
   "components/tanks/detail/viewer:cinematic-tooltips.on": "ddd209586aad",
+  "components/tanks/detail/viewer:paint-locked.factory": "2e51208127d6",
+  "components/tanks/detail/viewer:paint-locked.locked": "189eed7b31dd",
   "components/tanks/detail/viewer/legend:what-the-colours-mean": "03c2128b78b5",
   "components/tanks/detail/viewer/legend:reading": "cffa2af0a3a6",
   "components/tanks/detail/viewer/legend:never-gets-through": "a5971cf9533e",

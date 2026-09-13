@@ -65,5 +65,9 @@
     "off": "Cinematische camera: uit, het beeld blijft stilstaan",
     "auto": "Cinematische camera: start na 30 seconden inactiviteit",
     "on": "Cinematische camera: altijd, vanaf het moment dat je loslaat"
+  },
+  "paint-locked": {
+    "factory": "Dit voertuig heeft zijn eigen fabrieksbeschildering: het spel schildert er niets overheen",
+    "locked": "Het spel staat geen aanpassingen aan dit voertuig toe"
   }
 }

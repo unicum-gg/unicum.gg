@@ -65,5 +65,9 @@
     "off": "Elokuvakamera: pois päältä, näkymä pysyy paikallaan",
     "auto": "Elokuvakamera: käynnistyy, kun olet ollut yksin 30 sekuntia",
     "on": "Elokuvakamera: aina, heti kun päästät irti"
+  },
+  "paint-locked": {
+    "factory": "Käyttää omaa tehdasväritystään: peli ei maalaa sen päälle mitään",
+    "locked": "Peli ei salli tämän ajoneuvon muokkaamista"
   }
 }

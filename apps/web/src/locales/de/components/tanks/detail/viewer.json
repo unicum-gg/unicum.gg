@@ -65,5 +65,9 @@
     "off": "Filmische Kamera: aus, die Ansicht bleibt unverändert",
     "auto": "Filmische Kamera: startet nach 30 Sekunden Inaktivität",
     "on": "Filmische Kamera: immer, sobald du loslässt"
+  },
+  "paint-locked": {
+    "factory": "Trägt die werkseigene Lackierung, das Spiel malt Nichts darüber",
+    "locked": "Das Spiel sagt nein zu jeder Anpassung an diesem Fahrzeug"
   }
 }

@@ -65,5 +65,9 @@
     "off": "Cámara cinemática: desactivada, la vista no se mueve",
     "auto": "Cámara cinemática: se activa tras 30 segundos sin interacción",
     "on": "Cámara cinematográfica: siempre, desde el momento en que sueltas los controles"
+  },
+  "paint-locked": {
+    "factory": "Lleva su propia decoración de fábrica: el juego no pinta nada encima",
+    "locked": "El juego no permite personalizar este vehículo"
   }
 }

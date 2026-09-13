@@ -65,5 +65,9 @@
     "off": "Cinematisk kamera: av, vyn står stilla",
     "auto": "Cinematisk kamera: startar efter 30 sekunders inaktivitet",
     "on": "Cinematisk kamera: alltid, så fort du släpper reglagen"
+  },
+  "paint-locked": {
+    "factory": "Har sin egen fabriksmålning: spelet målar inget ovanpå den",
+    "locked": "Spelet tillåter ingen anpassning av detta fordon"
   }
 }

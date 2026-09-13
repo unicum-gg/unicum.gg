@@ -65,5 +65,9 @@
     "off": "Kinematogrāfiskā kamera: izslēgta, skats paliek nekustīgs",
     "auto": "Kinematogrāfiskā kamera: sāk darboties pēc 30 sekundēm neaktivitātes",
     "on": "Kinematogrāfiskā kamera: vienmēr, no brīža, kad atlaižat vadību"
+  },
+  "paint-locked": {
+    "factory": "Šis transportlīdzeklis saglabā savu rūpnīcas krāsojumu: spēle virs tā neko neuzkrāso",
+    "locked": "Spēlē šis transportlīdzeklis nav pielāgojams"
   }
 }

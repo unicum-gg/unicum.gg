@@ -65,5 +65,9 @@
     "off": "Camera điện ảnh: tắt, góc nhìn giữ nguyên",
     "auto": "Camera điện ảnh: bắt đầu sau 30 giây không thao tác",
     "on": "Camera điện ảnh: luôn bật, bắt đầu từ lúc bạn buông tay"
+  },
+  "paint-locked": {
+    "factory": "Xe tăng giữ nguyên lớp sơn xuất xưởng: trò chơi không sơn gì đè lên nó",
+    "locked": "Trò chơi không cho phép tùy chỉnh xe tăng này"
   }
 }

@@ -65,5 +65,9 @@
     "off": "Filmová kamera: vypnutá, pohľad zostane nehybný",
     "auto": "Filmová kamera: spustí sa po 30 sekundách nečinnosti",
     "on": "Filmová kamera: vždy, hneď ako prestanete ovládať pohľad"
+  },
+  "paint-locked": {
+    "factory": "Ima lastno tovarniško poslikavo: hra čeznjo ne nariše nič",
+    "locked": "Hra za vozilo ne dovoljuje nobenega prilagajanja"
   }
 }

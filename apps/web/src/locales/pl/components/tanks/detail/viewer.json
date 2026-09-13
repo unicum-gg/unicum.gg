@@ -65,5 +65,9 @@
     "off": "Kamera filmowa: wyłączona, widok pozostaje nieruchomy",
     "auto": "Kamera filmowa: uruchamia się po 30 sekundach bezczynności",
     "on": "Kamera filmowa: uruchamia się zawsze, gdy tylko przestaniesz sterować widokiem"
+  },
+  "paint-locked": {
+    "factory": "Ma własne fabryczne malowanie: gra nie maluje na nim nic",
+    "locked": "Gra nie pozwala na żadną personalizację tego pojazdu"
   }
 }
