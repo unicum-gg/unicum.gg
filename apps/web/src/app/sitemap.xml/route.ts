@@ -1,7 +1,8 @@
-import { createSitemapIndexHandler } from "@onruntime/next-sitemap/app";
+import { generateSitemapIndexXml } from "@onruntime/next-sitemap";
 import {
   getSitemapCount,
   getSitemapCounts,
+  sectionPaths,
   sitemapConfig,
   URLS_PER_SITEMAP,
 } from "@/services/sitemap";
@@ -62,9 +63,12 @@ export async function GET() {
     console.warn("[sitemap] counts failed, falling back to empty:", err);
   }
 
-  const { GET: handler } = createSitemapIndexHandler({
-    ...sitemapConfig,
-    additionalSitemaps,
-  });
-  return handler();
+  return new Response(
+    generateSitemapIndexXml(
+      sitemapConfig.baseUrl,
+      getSitemapCount(sectionPaths().length),
+      { additionalSitemaps },
+    ),
+    { headers: { "Content-Type": "application/xml" } },
+  );
 }
