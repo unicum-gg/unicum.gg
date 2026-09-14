@@ -76,6 +76,16 @@ export function makePlayersTable(region: string) {
       battles30d: integer("battles_30d"),
       battles24h: integer("battles_24h"),
       battles7d: integer("battles_7d"),
+      // Wins over the same three windows, written by the same pass that counts
+      // the battles beside them. A window's win rate is `wins / battles` over
+      // ONE diff: recovering the wins separately means a second walk of the
+      // snapshots, at a later instant, over a window that has since slid, so
+      // the recent win rate would disagree with the recent rating printed next
+      // to it. `winrate` above is lifetime and stays a ratio; these are counts,
+      // like the battles, so a caller can re-sum them.
+      wins30d: integer("wins_30d"),
+      wins24h: integer("wins_24h"),
+      wins7d: integer("wins_7d"),
       // Lifetime account win rate (0-1), copied from the latest snapshot's
       // wins/battles at every snapshot-cron tick. Powers the "Player WR" column
       // of the per-tank server-average table (average driver account WR).

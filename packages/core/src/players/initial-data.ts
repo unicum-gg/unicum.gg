@@ -35,6 +35,9 @@ type RawPlayer = {
   battles_30d: number | null;
   battles_24h: number | null;
   battles_7d: number | null;
+  wins_30d: number | null;
+  wins_24h: number | null;
+  wins_7d: number | null;
   winrate: number | null;
   hr: number | null;
   sh_battles: number | null;
@@ -234,6 +237,9 @@ function playerFromRaw(r: RawPlayer): Player {
     battles30d: r.battles_30d,
     battles24h: r.battles_24h,
     battles7d: r.battles_7d,
+    wins30d: r.wins_30d,
+    wins24h: r.wins_24h,
+    wins7d: r.wins_7d,
     winrate: r.winrate,
     hr: r.hr,
     shBattles: r.sh_battles,

@@ -757,6 +757,7 @@ async function updatePlayerRatings(
     let pWn8: number | null = null;
     let pWnx: number | null = null;
     let pBattles: number | null = null;
+    let pWins: number | null = null;
     if (rows.length > 0) {
       const baseline = new Map(
         rows.map((r) => [
@@ -797,7 +798,6 @@ async function updatePlayerRatings(
       if (recent.length > 0) {
         pWnx = computeWNX(recent, wnxExpected);
         pWn8 = computeWN8(recent, wn8Expected, encyclopedia, wn8Fallback);
-        pBattles = recent.reduce((sum, t) => sum + t.all.battles, 0);
         // WN7 needs aggregate stats and the average tier over the same window.
         const agg = recent.reduce(
           (acc, t) => {
@@ -811,12 +811,19 @@ async function updatePlayerRatings(
           },
           { battles: 0, wins: 0, frags: 0, damageDealt: 0, spotted: 0, droppedCapturePoints: 0 },
         );
+        pBattles = agg.battles;
+        // Kept alongside the battles it was counted with, rather than consumed
+        // by WN7 and dropped. A window's win rate is `wins / battles` over the
+        // SAME diff, and recovering it later means either a second pass over
+        // the snapshots or a different window, which is how a recent win rate
+        // ends up disagreeing with the recent rating printed beside it.
+        pWins = agg.wins;
         if (agg.battles > 0) {
           pWn7 = computeWN7(agg, computeAvgTier(recent, encyclopedia));
         }
       }
     }
-    return { wn7: pWn7, wn8: pWn8, wnx: pWnx, battles: pBattles };
+    return { wn7: pWn7, wn8: pWn8, wnx: pWnx, battles: pBattles, wins: pWins };
   };
 
   const DAY_MS = 24 * 60 * 60 * 1000;
@@ -836,14 +843,17 @@ async function updatePlayerRatings(
       wn830d: p30d.wn8,
       wnx30d: p30d.wnx,
       battles30d: p30d.battles,
+      wins30d: p30d.wins,
       wn724h: p24h.wn7,
       wn824h: p24h.wn8,
       wnx24h: p24h.wnx,
       battles24h: p24h.battles,
+      wins24h: p24h.wins,
       wn77d: p7d.wn7,
       wn87d: p7d.wn8,
       wnx7d: p7d.wnx,
       battles7d: p7d.battles,
+      wins7d: p7d.wins,
       battles: overall.battles,
       winrate: overall.battles > 0 ? overall.wins / overall.battles : null,
       hr,
