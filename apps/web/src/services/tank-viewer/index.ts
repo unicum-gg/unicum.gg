@@ -23,6 +23,7 @@ import { runningGear } from "./running-gear";
 import { materialShop, type Brush } from "./materials";
 import { layBelts } from "./belts";
 import { mechanism, type Animated } from "./mechanism";
+import { mendPositions } from "./mending";
 
 /** The groups the pieces hang off, shared with whatever else draws this vehicle
  * so a turret keeps pointing where it was when the view changes. */
@@ -184,6 +185,9 @@ export async function loadVisual({
 
   const parts: THREE.Object3D[] = [];
   let triangles = 0;
+  // Vertices the client shipped with no position, folded onto one that has
+  // one. Counted for the log rather than acted on: see `mendPositions`.
+  let mended = 0;
   const parentFor = (name: string) => {
     if (name.startsWith("Chassis") || name.startsWith("Wheel"))
       return mounts.scene;
@@ -224,6 +228,7 @@ export async function loadVisual({
     let index = 0;
     gltf.scene.traverse((o) => {
       if (!isMesh(o)) return;
+      mended += mendPositions(o.geometry);
       o.material = material(model.materials[order[index++] ?? -1]);
       o.castShadow = true;
       o.receiveShadow = true;
@@ -277,6 +282,12 @@ export async function loadVisual({
     triangles,
     links,
     pieces,
+    /**
+     * Vertices the client shipped with no position, folded onto one that has
+     * one. Zero on all but a handful of pieces, and worth reading when a
+     * vehicle looks wrong: see `mendPositions`.
+     */
+    mended,
 
     /**
      * The mechanism this vehicle works, for the handful that have one.
