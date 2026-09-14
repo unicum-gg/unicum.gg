@@ -63,7 +63,7 @@ function tooltipFor(
  * three gets its own notice. Only the LINK is binary: a declared set belongs to
  * a clan and points at the clans board, the other two belong to a player. The
  * enum is shared with the public API so the same three cases are named the same
- * way there, though a value read back off `/{region}/languages/resolve` crosses
+ * way there, though a value read back off `/{region}/resolve` crosses
  * HTTP as a literal and needs mapping onto the enum before it reaches this
  * prop, as every enum in this codebase does.
  */

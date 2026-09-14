@@ -101,7 +101,7 @@ const REGION_OVERRIDES: Partial<Record<Region, Record<string, string>>> = {
  * it and the caller shows the raw code instead.
  *
  * Lives here rather than beside the flag component because the public API
- * serves the resolved code (`/{region}/languages/resolve`): the mapping is not
+ * serves the resolved code (`/{region}/resolve`): the mapping is not
  * mechanical (`en` is `GB-UKM` on EU and `US` elsewhere, `mo` is deliberately
  * kept apart from `ro`, and `GB-UKM` is not an ISO country code at all), so a
  * non-web caller re-deriving it would vendor a copy and need a release of its

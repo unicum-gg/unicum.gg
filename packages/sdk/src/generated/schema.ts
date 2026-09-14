@@ -1399,7 +1399,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/languages/resolve": {
+    "/{region}/resolve": {
         parameters: {
             query?: never;
             header?: never;
@@ -1407,10 +1407,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Resolve languages by id
-         * @description Languages and flags for a set of account ids and clan ids, in one call. Each list is optional and comma separated, capped at 100 ids, and a longer list is refused rather than truncated. A clan answers with the set its owner declared; a player answers from the same duration-weighted inference over their clan history the player page shows, falling back to their current clan's declared set only when we hold no history at all, and `source` says which. `countries` carries the flag code per language, aligned index for index. An id we hold no language for is absent from the response. Reads cached data only, with no live Wargaming call.
+         * Resolve a roster
+         * @description Everything about a set of players and clans in one call: language flags, lifetime and 30-day ratings, win rates, and the clan a player wears. Addressed by the ids a game client hands over, plus clan tags for the one roster that carries no id. Each list is optional, comma separated and capped at 100; a longer list is refused rather than truncated. An id we hold nothing for is absent from the response, while an entity we hold but have no language for is present with an empty `languages`. Reads cached data only, with no live Wargaming call.
          */
-        get: operations["get-{region}-languages-resolve"];
+        get: operations["get-{region}-resolve"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1491,6 +1491,26 @@ export interface paths {
          * @description Live EUR-based exchange rates for the currencies the site displays. Our own money figures (funding progress, infrastructure cost) are held in euros and converted at read time, so this is what a client needs to render them in a regional currency. Refreshed once a day; `updatedAt` is null when no live rate is available, in which case amounts should be shown in euros.
          */
         get: operations["get-rates"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ratings/scales": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Rating colour scales
+         * @description Every colour scale the site paints a number with: the three rating metrics, random and Steel Hunter and Stronghold win rates, the Steel Hunter ratings, the two Stronghold ratings and the community star rating. Each is a list of half-open bands with the colour's name and its hex. Region-less, because a threshold is the same on every server, and static, because it only moves when the site's own scale does. Fetch it once and paint from it rather than re-implementing the ladder, which is what makes a client drift the day a threshold changes.
+         */
+        get: operations["get-ratings-scales"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2882,14 +2902,6 @@ export interface components {
         };
         /** @description Two-letter language code. When set, the leaderboard is filtered to players/clans whose clan declares this language (period is ignored: language boards are lifetime WNX). */
         langField: string;
-        LanguagesResolveResponse: {
-            players: {
-                [key: string]: components["schemas"]["ResolvedLanguages"];
-            };
-            clans: {
-                [key: string]: components["schemas"]["ResolvedLanguages"];
-            };
-        };
         /** @description One language's population. */
         LanguageStat: {
             /** @description Two-letter language code. */
@@ -4093,10 +4105,50 @@ export interface components {
             wn8: number | null;
             wnx: number | null;
         };
+        /** @description One half-open band of a scale: `from` included, `to` excluded. */
+        RatingScaleBand: {
+            /**
+             * @description The band's name on the site's nine-step scale.
+             * @enum {string}
+             */
+            color: "veryBad" | "bad" | "belowAvg" | "average" | "good" | "veryGood" | "super" | "excellent" | "top";
+            /** @description The colour the site paints it with. */
+            hex: string;
+            /** @description Lower edge, included. Null on the first band, which really is unbounded. */
+            from: number | null;
+            /** @description Upper edge, excluded. Null on the last band. */
+            to: number | null;
+        };
+        /** @description One scale, its unit, and its bands in ascending order. */
+        RatingScaleInfo: {
+            /**
+             * @description Which quantity this scale paints.
+             * @enum {string}
+             */
+            scale: "wn7" | "wn8" | "wnx" | "winrate" | "hr" | "hrb" | "steelHunterWinrate" | "strongholdRating" | "strongholdRatingBattles" | "strongholdWinrate" | "starRating";
+            /**
+             * @description How its numbers are written: `ratio` runs 0 to 1, `points` and `stars` are the value as shown. A caller holding a win rate as a percentage has to divide before comparing it to a `ratio` scale.
+             * @enum {string}
+             */
+            unit: "points" | "percent" | "stars";
+            bands: components["schemas"]["RatingScaleBand"][];
+        };
+        RatingScalesResponse: {
+            scales: components["schemas"]["RatingScaleInfo"][];
+        };
         ratingTriplet: {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+        };
+        /** @description One window's ratings. Both halves come from the same pass over the same battles, so the win rate describes exactly the games that produced the rating beside it. */
+        RatingWindow: {
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+            battles: number | null;
+            /** @description Percentage, 0 to 100, on the same scale `/ratings/scales` publishes. Null when the window holds no battles, which is not a win rate of zero, and null on `recent` for an account whose wins over the window have not been computed yet: that figure is written on an account's next refresh and was introduced after the ratings beside it, so a recent `battles` with a null `winrate` means not yet rather than none. */
+            winrate: number | null;
         };
         refreshPolicyBucket: {
             /** @enum {string} */
@@ -4146,17 +4198,74 @@ export interface components {
             researchXp: number | null;
             buyCredits: number | null;
         };
-        /** @description Languages held for one entity, and why we believe them. */
-        ResolvedLanguages: {
-            /** @description Two-letter language codes, never empty. */
+        /** @description One clan, by clan id. */
+        ResolvedClan: {
+            tag: string;
+            name: string;
+            color: string;
+            membersCount: number;
+            /** @description Two-letter language codes. Empty when we hold none. */
             languages: string[];
-            /** @description Flag code per language, aligned index for index with `languages`, null where no flag is published for that language. Not an ISO country code: `en` is `GB-UKM` on EU and `US` on NA/ASIA. */
+            /** @description Flag code per language, aligned index for index with `languages`, null where no flag is published. Not an ISO country code: `en` is `GB-UKM` on EU and `US` on NA/ASIA. */
             countries: (string | null)[];
             /**
-             * @description Where the languages came from: `declared` (the clan owner set them), `inferred` (weighted over the account's clan history, the same answer the player page shows) or `clan` (no clan history for this account, so their current clan's declared set stood in, which is a snapshot rather than an inference).
-             * @enum {string}
+             * @description Where the languages came from: `declared` (the clan owner set them), `inferred` (weighted over the account's clan history, the same answer the player page shows) or `clan` (no clan history for this account, so their current clan's declared set stood in). Null when we hold no language.
+             * @enum {string|null}
              */
-            source: "declared" | "inferred" | "clan";
+            languageSource: "declared" | "inferred" | "clan" | null;
+            /** @description Aggregated over the clan's own roster, battle-weighted. */
+            ratings: {
+                total: components["schemas"]["RatingWindow"];
+                recent: components["schemas"]["RatingWindow"];
+                /** @description The roster's battle-weighted lifetime win rate, the same number as `total.winrate`, under the name the clan page gives it. */
+                avgWinrate: number | null;
+            };
+            /**
+             * Format: date-time
+             * @description When this clan was last fully refreshed.
+             */
+            updatedAt: Date | null;
+        };
+        /** @description One player, by account id. */
+        ResolvedPlayer: {
+            nickname: string;
+            /** @description Current clan, with the colour the site paints the tag. */
+            clan: {
+                id: number;
+                tag: string;
+                color: string;
+            } | null;
+            /** @description Two-letter language codes. Empty when we hold none. */
+            languages: string[];
+            /** @description Flag code per language, aligned index for index with `languages`, null where no flag is published. Not an ISO country code: `en` is `GB-UKM` on EU and `US` on NA/ASIA. */
+            countries: (string | null)[];
+            /**
+             * @description Where the languages came from: `declared` (the clan owner set them), `inferred` (weighted over the account's clan history, the same answer the player page shows) or `clan` (no clan history for this account, so their current clan's declared set stood in). Null when we hold no language.
+             * @enum {string|null}
+             */
+            languageSource: "declared" | "inferred" | "clan" | null;
+            /** @description Lifetime, and the last 30 days. */
+            ratings: {
+                total: components["schemas"]["RatingWindow"];
+                recent: components["schemas"]["RatingWindow"];
+            };
+            /**
+             * Format: date-time
+             * @description When this account was last refreshed from Wargaming.
+             */
+            updatedAt: Date;
+        };
+        ResolveResponse: {
+            players: {
+                [key: string]: components["schemas"]["ResolvedPlayer"];
+            };
+            clans: {
+                [key: string]: components["schemas"]["ResolvedClan"];
+            };
+            /** @description Tag to clan id, echoing back the tag as it was written. The clan itself is in `clans`, so a detachment list costs one request rather than one lookup per row and then a second request. */
+            tags: {
+                [key: string]: number;
+            };
         };
         /**
          * @description What became of a written opinion attached to a rating.
@@ -7719,13 +7828,15 @@ export interface operations {
             };
         };
     };
-    "get-{region}-languages-resolve": {
+    "get-{region}-resolve": {
         parameters: {
             query?: {
                 /** @description Account ids. Up to 100. */
                 players?: number[];
                 /** @description Clan ids. Up to 100. */
                 clans?: number[];
+                /** @description Clan tags, case-insensitive. Up to 100. */
+                tags?: string[];
             };
             header?: never;
             path: {
@@ -7742,7 +7853,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["LanguagesResolveResponse"];
+                    "application/json": components["schemas"]["ResolveResponse"];
                 };
             };
         };
@@ -7839,6 +7950,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ExchangeRates"];
+                };
+            };
+        };
+    };
+    "get-ratings-scales": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RatingScalesResponse"];
                 };
             };
         };

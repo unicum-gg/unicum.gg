@@ -538,11 +538,6 @@ type ServerNamespace = {
   ): Unsubscribe;
 };
 
-type LanguagesNamespace = {
-  /** Resolve languages by id */
-  resolve(query?: QueryOf<"/{region}/languages/resolve">): RequestHandle<Data<"/{region}/languages/resolve">>;
-};
-
 /** Every resource scoped to one region: unicum.eu, unicum.region("na"). */
 class RegionClient {
   constructor(
@@ -847,6 +842,14 @@ class RegionClient {
     );
   }
 
+  /** Resolve a roster */
+  resolve(query?: QueryOf<"/{region}/resolve">) {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/resolve", { region: this.region }, query),
+      () => this.api.GET("/{region}/resolve", { params: { path: { region: this.region }, query } }),
+    );
+  }
+
   /** Resolve saved search entries */
   searchResolve(query?: QueryOf<"/{region}/search/resolve">) {
     return handle(
@@ -916,20 +919,6 @@ class RegionClient {
       );
     ns.online = (onData, onError) =>
       subscribeServerOnline(this.baseUrl, this.region, onData, onError);
-    return ns;
-  }
-
-  /** Languages spoken in this region, resolved for a set of ids in one call. */
-  get languages(): LanguagesNamespace {
-    const ns = {} as LanguagesNamespace;
-    ns.resolve = (query) =>
-      handle(
-        buildUrl(this.baseUrl, "/{region}/languages/resolve", { region: this.region }, query),
-        () =>
-          this.api.GET("/{region}/languages/resolve", {
-            params: { path: { region: this.region }, query },
-          }),
-      );
     return ns;
   }
 }
@@ -1084,6 +1073,11 @@ type SupportNamespace = {
   podium(): RequestHandle<Data<"/support/podium">>;
 };
 
+type RatingsNamespace = {
+  /** Rating colour scales */
+  scales(): RequestHandle<Data<"/ratings/scales">>;
+};
+
 type GlossaryNamespace = ((slug: string) => GlossaryTermClient) & {
   /** Glossary */
   list(query?: QueryOf<"/glossary">): RequestHandle<Data<"/glossary">>;
@@ -1198,6 +1192,16 @@ export class Unicum {
     ns.podium = () =>
       handle(buildUrl(this.baseUrl, "/support/podium"), () =>
         this.api.GET("/support/podium", {}),
+      );
+    return ns;
+  }
+
+  /** Global (not region-scoped) ratings. */
+  get ratings(): RatingsNamespace {
+    const ns = {} as RatingsNamespace;
+    ns.scales = () =>
+      handle(buildUrl(this.baseUrl, "/ratings/scales"), () =>
+        this.api.GET("/ratings/scales", {}),
       );
     return ns;
   }

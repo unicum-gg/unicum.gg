@@ -1,6 +1,6 @@
 /**
- * The comma-separated id list two public endpoints take (`search/resolve` and
- * `languages/resolve`), read once so a fix to one reaches both.
+ * The comma-separated id list the public resolve endpoints take (`search/resolve`
+ * and `{region}/resolve`), read once so a fix reaches both.
  *
  * Every occurrence of the parameter is read, not just the first: a caller that
  * builds its query string incrementally sends `?players=1,2&players=3,4`, and

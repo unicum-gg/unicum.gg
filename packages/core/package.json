@@ -21,6 +21,7 @@
     "./players": "./src/players/index.ts",
     "./search": "./src/search/index.ts",
     "./languages": "./src/languages/index.ts",
+    "./resolve": "./src/resolve/index.ts",
     "./discovery": "./src/discovery/index.ts",
     "./discord": "./src/discord/index.ts",
     "./changelog": "./src/changelog/index.ts",
