@@ -19,3 +19,4 @@ export * from "./maps";
 export * from "./tournaments";
 export * from "./tournament-placements";
 export * from "./language-flags";
+export * from "./rating-scales";

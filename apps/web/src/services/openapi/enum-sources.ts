@@ -8,6 +8,10 @@
 // takes the deep-path exception.)
 import { RatingMetric } from "@unicum.gg/shared/constants/rating";
 import { RatingColor } from "@unicum.gg/shared/wot/ratings";
+import {
+  RatingScale,
+  RatingScaleUnit,
+} from "@unicum.gg/shared/wot/rating-scales";
 import { GlossaryCategory } from "@unicum.gg/shared/glossary/category";
 import { GlossaryLinkTarget } from "@unicum.gg/shared/glossary/links";
 import { MapGameMode } from "@unicum.gg/shared/wot/maps/game-modes";
@@ -74,6 +78,8 @@ export const OPENAPI_ENUM_SOURCES = {
   REGION: Object.values(Region),
   METRIC: Object.values(RatingMetric),
   RATING_COLOR: Object.values(RatingColor),
+  RATING_SCALE: Object.values(RatingScale),
+  RATING_SCALE_UNIT: Object.values(RatingScaleUnit),
   PLAYER_PERIOD: Object.values(TopPlayersPeriod),
   CLAN_PERIOD: Object.values(TopClansPeriod),
   MAP_MODE: Object.values(MapGameMode),
