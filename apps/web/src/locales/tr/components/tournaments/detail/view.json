@@ -7,5 +7,6 @@
   "qualified": "Kalifiye olanlar ({count})",
   "register": "Kaydol",
   "tournaments": "Turnuvalar",
+  "updated": "Güncellendi: {when}",
   "winner": "{count, plural, one {Kazanan} other {Kazananlar}}"
 }

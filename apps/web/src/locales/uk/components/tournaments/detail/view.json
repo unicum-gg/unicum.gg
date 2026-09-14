@@ -7,5 +7,6 @@
   "qualified": "Кваліфікувалися ({count})",
   "register": "Реєстрація",
   "tournaments": "Турніри",
+  "updated": "Оновлено {when}",
   "winner": "{count, plural, one {Переможець} few {Переможці} many {Переможців} other {Переможців}}"
 }

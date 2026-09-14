@@ -7,5 +7,6 @@
   "qualified": "진출 ({count})",
   "register": "등록",
   "tournaments": "토너먼트",
+  "updated": "{when} 업데이트됨",
   "winner": "{count, plural, other {승자}}"
 }

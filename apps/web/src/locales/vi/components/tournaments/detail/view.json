@@ -7,5 +7,6 @@
   "qualified": "Đã đủ điều kiện ({count})",
   "register": "Đăng ký",
   "tournaments": "Tour đấu",
+  "updated": "Đã cập nhật {when}",
   "winner": "{count, plural, other {Winner}}"
 }

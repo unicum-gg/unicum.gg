@@ -7,5 +7,6 @@
   "qualified": "Kvalifikavosi ({count})",
   "register": "Užsiregistruoti",
   "tournaments": "Turnyrai",
+  "updated": "Atnaujinta {when}",
   "winner": "{count, plural, one {Nugalėtojai} few {Nugalėtojai} other {Nugalėtojai}}"
 }

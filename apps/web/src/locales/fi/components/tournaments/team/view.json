@@ -14,6 +14,7 @@
   "team-1": "Joukkue 1",
   "team-2": "Joukkue 2",
   "tournaments": "Turnaukset",
+  "updated": "Päivitetty {when}",
   "when-the-first-battle-started": "Ensimmäisen taistelun alkamisaika",
   "won": "Voitettu"
 }

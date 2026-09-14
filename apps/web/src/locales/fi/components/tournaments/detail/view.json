@@ -7,5 +7,6 @@
   "qualified": "Karsinnasta selvinneet ({count})",
   "register": "Rekisteröidy",
   "tournaments": "Turnaukset",
+  "updated": "Päivitetty {when}",
   "winner": "{count, plural, one {Voittaja} other {Voittajat}}"
 }

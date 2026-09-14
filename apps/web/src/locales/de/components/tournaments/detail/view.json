@@ -7,5 +7,6 @@
   "qualified": "Qualifiziert ({count})",
   "register": "Registrieren",
   "tournaments": "Turniere",
+  "updated": "Aktualisiert {when}",
   "winner": "{count, plural, one {Gewinner} other {Gewinner}}"
 }

@@ -7,5 +7,6 @@
   "qualified": "已晋级（{count}）",
   "register": "注册",
   "tournaments": "赛事",
+  "updated": "更新 {when}",
   "winner": "{count, plural, other {胜者}}"
 }

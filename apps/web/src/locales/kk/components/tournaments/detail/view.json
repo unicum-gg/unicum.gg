@@ -7,5 +7,6 @@
   "qualified": "Іріктелгендер ({count})",
   "register": "тіркелу",
   "tournaments": "Турнирлер",
+  "updated": "Жаңартылған {when}",
   "winner": "{count, plural, one {Жеңімпаз} other {Жеңімпаздар}}"
 }

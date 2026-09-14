@@ -7,5 +7,6 @@
   "qualified": "Kvalificējušies ({count})",
   "register": "Reģistrēties",
   "tournaments": "Turnīri",
+  "updated": "Atjaunots {when}",
   "winner": "{count, plural, zero {Uzvarētāji} one {Uzvarētājs} other {Uzvarētāji}}"
 }

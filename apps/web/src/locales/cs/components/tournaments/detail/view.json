@@ -7,5 +7,6 @@
   "qualified": "Kvalifikováno ({count})",
   "register": "Registrovat",
   "tournaments": "Turnaje",
+  "updated": "Aktualizováno {when}",
   "winner": "{count, plural, one {Vítěz} few {Vítězové} many {Vítězů} other {Vítězů}}"
 }

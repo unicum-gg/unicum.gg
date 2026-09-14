@@ -7,5 +7,6 @@
   "qualified": "Kvalificerade ({count})",
   "register": "Registrera",
   "tournaments": "Turneringar",
+  "updated": "Uppdaterad {when}",
   "winner": "{count, plural, one {Vinnare} other {Vinnare}}"
 }

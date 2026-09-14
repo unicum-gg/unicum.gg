@@ -7,5 +7,6 @@
   "qualified": "المتأهلون ({count})",
   "register": "تسجيل",
   "tournaments": "بطولات",
+  "updated": "محدث {when}",
   "winner": "{count, plural, zero {فائزون} one {فائز} two {فائزان} few {فائزون} many {فائزون} other {فائز}}"
 }

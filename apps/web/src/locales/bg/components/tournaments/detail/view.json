@@ -7,5 +7,6 @@
   "qualified": "Класирани ({count})",
   "register": "Регистриране",
   "tournaments": "Турнири",
+  "updated": "Актуализирано {when}",
   "winner": "{count, plural, one {Победител} other {Победители}}"
 }

@@ -7,5 +7,6 @@
   "qualified": "ผ่านเข้ารอบ ({count})",
   "register": "ลงทะเบียน",
   "tournaments": "ทัวร์นาเมนต์",
+  "updated": "อัปเดต {when}",
   "winner": "{count, plural, other {ผู้ชนะ}}"
 }

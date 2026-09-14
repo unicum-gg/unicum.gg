@@ -7,5 +7,6 @@
   "qualified": "Kvalifisert ({count})",
   "register": "Registrer",
   "tournaments": "Turneringer",
+  "updated": "Oppdatert {when}",
   "winner": "{count, plural, one {Vinner} other {Vinnere}}"
 }

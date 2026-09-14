@@ -7,5 +7,6 @@
   "qualified": "Προκρίθηκαν ({count})",
   "register": "Εγγραφή",
   "tournaments": "Τουρνουά",
+  "updated": "Ενημερωμένο {when}",
   "winner": "{count, plural, one {Νικητής} other {Νικητές}}"
 }

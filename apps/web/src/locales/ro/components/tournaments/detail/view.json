@@ -7,5 +7,6 @@
   "qualified": "Calificați ({count})",
   "register": "Înregistrare",
   "tournaments": "Turneele",
+  "updated": "Actualizat {when}",
   "winner": "{count, plural, one {Câștigător} few {Câștigători} other {Câștigători}}"
 }

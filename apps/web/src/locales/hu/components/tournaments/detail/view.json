@@ -7,5 +7,6 @@
   "qualified": "Továbbjutott ({count})",
   "register": "Regisztráció",
   "tournaments": "Tornák",
+  "updated": "Frissítve {when}",
   "winner": "{count, plural, one {Győztes} other {Győztesek}}"
 }
