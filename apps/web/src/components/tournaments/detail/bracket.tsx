@@ -103,6 +103,7 @@ function Side({
   decided: boolean;
 }) {
   const { num } = useFormat();
+  const { t } = useTranslation("components/tournaments/detail/bracket");
   const label = (
     <span
       className={cn(
@@ -114,7 +115,7 @@ function Side({
         decided && (won ? "font-semibold text-fd-foreground" : "text-fd-muted-foreground"),
       )}
     >
-      {name ?? "TBD"}
+      {name ?? t("tbd")}
       {/* Inside the truncating label, so a long name gives way to it rather
           than pushing it out of the card. */}
       {clan && (

@@ -4,6 +4,7 @@ import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { CrownSimpleIcon } from "@phosphor-icons/react";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { Interpolate } from "@/components/interpolate";
 import { PlayerName } from "@/components/entity/player-name";
 import { GlossaryLabel } from "@/components/glossary/label";
 import {
@@ -182,18 +183,24 @@ export function TeamRosterTable({
                           className="shrink-0 truncate text-xs text-fd-muted-foreground"
                           title={t("registered-as", { nickname: p.nickname })}
                         >
-                          (as {p.nickname}
-                          {p.recordedClanTag && (
-                            <>
-                              {" "}
-                              <ClanTag
-                                tag={p.recordedClanTag}
-                                color={p.recordedClanColor}
-                                className="font-mono"
-                              />
-                            </>
+                          {p.recordedClanTag ? (
+                            <Interpolate
+                              template={t("alias-with-clan", {
+                                nickname: p.nickname,
+                              })}
+                              values={{
+                                clan: (
+                                  <ClanTag
+                                    tag={p.recordedClanTag}
+                                    color={p.recordedClanColor}
+                                    className="font-mono"
+                                  />
+                                ),
+                              }}
+                            />
+                          ) : (
+                            t("alias", { nickname: p.nickname })
                           )}
-                          )
                         </span>
                       )}
                     </>
