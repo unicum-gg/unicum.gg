@@ -44,8 +44,18 @@ function walk(node: unknown): void {
         `[inject-openapi-enums] unknown ${MARKER} "${String(key)}" — add it to OPENAPI_ENUM_SOURCES`,
       );
     }
-    obj.type = "string";
-    obj.enum = [...values];
+    // The nullability the generator already worked out is preserved rather than
+    // flattened. OpenAPI 3.1 writes a nullable field as `type: ["string",
+    // "null"]`, and overwriting that with the bare "string" published every
+    // nullable enum as required-to-be-a-string: a client generated from the
+    // document then types the field non-null and breaks on the first null the
+    // API legitimately sends.
+    const nullable =
+      Array.isArray(obj.type) && (obj.type as unknown[]).includes("null");
+    obj.type = nullable ? ["string", "null"] : "string";
+    // A null is not one of the enum's values, but a document declaring
+    // `enum: [...]` without it rejects the null it just said was allowed.
+    obj.enum = nullable ? [...values, null] : [...values];
     delete obj[MARKER];
     injected += 1;
   }
