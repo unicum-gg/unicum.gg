@@ -1,4 +1,6 @@
 {
+  "alias": "(닉네임: {nickname})",
+  "alias-with-clan": "(닉네임: {nickname}, 클랜: {clan})",
   "battles": "전투",
   "player": "플레이어",
   "registered-as": "{nickname}(으)로 등록됨",

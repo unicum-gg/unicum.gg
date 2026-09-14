@@ -1,4 +1,6 @@
 {
+  "alias": "(bilang {nickname})",
+  "alias-with-clan": "(bilang {nickname} ng {clan})",
   "battles": "Mga labanan",
   "player": "Manlalaro",
   "registered-as": "Nakarehistro bilang {nickname}",

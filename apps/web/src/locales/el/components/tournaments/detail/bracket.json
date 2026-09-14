@@ -2,6 +2,7 @@
   "group": "Όμιλος {order}",
   "n-teams": "{count} ομάδες",
   "pts": "Πόντοι",
+  "tbd": "TBD",
   "team": "Ομάδα",
   "top-n-advance": ", προκρίνονται οι {count} καλύτερες"
 }

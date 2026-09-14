@@ -2,6 +2,7 @@
   "group": "Grupė {order}",
   "n-teams": "{count} komandų",
   "pts": "Taškai",
+  "tbd": "TBD",
   "team": "Komanda",
   "top-n-advance": ", toliau patenka {count} geriausiųjų"
 }

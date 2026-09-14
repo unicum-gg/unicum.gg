@@ -1,4 +1,6 @@
 {
+  "alias": "(cu porecla {nickname})",
+  "alias-with-clan": "(cu porecla {nickname}, din {clan})",
   "battles": "Lupte",
   "player": "Jucător",
   "registered-as": "Înregistrat ca {nickname}",

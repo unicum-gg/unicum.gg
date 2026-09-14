@@ -2,6 +2,7 @@
   "group": "Pangkat {order}",
   "n-teams": "{count} koponan",
   "pts": "Pts",
+  "tbd": "TBD",
   "team": "Koponan",
   "top-n-advance": ", uusad ang nangungunang {count}"
 }

@@ -2,6 +2,7 @@
   "group": "Gruppe {order}",
   "n-teams": "{count} Teams",
   "pts": "Pkt",
+  "tbd": "TBD",
   "team": "Team",
   "top-n-advance": ", die besten {count} kommen weiter"
 }

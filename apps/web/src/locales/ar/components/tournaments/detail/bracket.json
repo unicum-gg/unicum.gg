@@ -2,6 +2,7 @@
   "group": "المجموعة {order}",
   "n-teams": "{count} فرق",
   "pts": "نقاط",
+  "tbd": "TBD",
   "team": "فريق",
   "top-n-advance": "، يتأهل أفضل {count}"
 }

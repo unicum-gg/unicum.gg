@@ -1,4 +1,6 @@
 {
+  "alias": "(με το ψευδώνυμο {nickname})",
+  "alias-with-clan": "(με το ψευδώνυμο {nickname} στην κλαν {clan})",
   "battles": "Μάχες",
   "player": "Παίχτης",
   "registered-as": "Εγγεγραμμένος ως {nickname}",

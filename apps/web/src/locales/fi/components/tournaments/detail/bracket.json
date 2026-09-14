@@ -2,6 +2,7 @@
   "group": "Ryhmä {order}",
   "n-teams": "{count} joukkuetta",
   "pts": "Pts",
+  "tbd": "TBD",
   "team": "Joukkue",
   "top-n-advance": ", parhaat {count} jatkavat"
 }

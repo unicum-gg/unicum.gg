@@ -2,6 +2,7 @@
   "group": "Gruppe {order}",
   "n-teams": "{count} lag",
   "pts": "Pts",
+  "tbd": "TBD",
   "team": "Lag",
   "top-n-advance": ", de beste {count} går videre"
 }

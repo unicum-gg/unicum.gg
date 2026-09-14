@@ -2,6 +2,7 @@
   "group": "กลุ่ม {order}",
   "n-teams": "{count} ทีม",
   "pts": "คะแนน",
+  "tbd": "TBD",
   "team": "ทีม",
   "top-n-advance": ", ผู้เล่นอันดับต้น ๆ จำนวน {count} จะผ่านเข้ารอบ"
 }

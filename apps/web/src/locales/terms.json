@@ -816,7 +816,8 @@
     "rank": "rang",
     "takes": "prend",
     "Random Battle": "Bataille aléatoire",
-    "rather": "plutôt"
+    "rather": "plutôt",
+    "TBD": "À déterminer"
   },
   "es": {
     "Battles": "Batallas",
@@ -1632,7 +1633,8 @@
     "rank": "puesto",
     "takes": "ocupa",
     "Random Battle": "Batalla aleatoria",
-    "rather": "más bien"
+    "rather": "más bien",
+    "TBD": "TBD"
   },
   "ru": {
     "Battles": "Бои",
@@ -2442,7 +2444,8 @@
     "rank": "место",
     "takes": "занимает",
     "Random Battle": "Случайный бой",
-    "rather": "скорее"
+    "rather": "скорее",
+    "TBD": "TBD"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3271,7 +3274,8 @@
     "rank": "miejsce",
     "takes": "zajmuje",
     "Random Battle": "Bitwa losowa",
-    "rather": "raczej"
+    "rather": "raczej",
+    "TBD": "DO USTALENIA"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4110,7 +4114,8 @@
     "rank": "順位",
     "takes": "取得数",
     "Random Battle": "ランダム戦",
-    "rather": "むしろ"
+    "rather": "むしろ",
+    "TBD": "未定"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -5573,7 +5578,8 @@
     "rank": "rang",
     "takes": "zauzima",
     "Random Battle": "Slučajna bitka",
-    "rather": "radije"
+    "rather": "radije",
+    "TBD": "TBD"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6410,7 +6416,8 @@
     "rank": "helyezés",
     "takes": "elér",
     "Random Battle": "Normál csata",
-    "rather": "inkább"
+    "rather": "inkább",
+    "TBD": "KÉSŐBB"
   },
   "ko": {
     "Battles": "전투",
@@ -7254,7 +7261,8 @@
     "rank": "순위",
     "takes": "차지",
     "Random Battle": "무작위 전투",
-    "rather": "오히려"
+    "rather": "오히려",
+    "TBD": "공개 예정"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8095,7 +8103,8 @@
     "rank": "rang",
     "takes": "neemt",
     "Random Battle": "Willekeurig gevecht",
-    "rather": "eerder"
+    "rather": "eerder",
+    "TBD": "NTB"
   },
   "cs": {
     "Battles": "Bitev",
@@ -8927,7 +8936,8 @@
     "rank": "pořadí",
     "takes": "zabere",
     "Random Battle": "Náhodná bitva",
-    "rather": "spíše"
+    "rather": "spíše",
+    "TBD": "TBD"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9761,7 +9771,8 @@
     "rank": "sıra",
     "takes": "alır",
     "Random Battle": "Rastgele Savaş",
-    "rather": "daha ziyade"
+    "rather": "daha ziyade",
+    "TBD": "SONRA AÇIKLANACAK"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -12491,7 +12502,8 @@
     "rank": "อันดับ",
     "takes": "จำนวนครั้ง",
     "Random Battle": "การรบแบบสุ่ม",
-    "rather": "ค่อนข้าง"
+    "rather": "ค่อนข้าง",
+    "TBD": "รอการประกาศ"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13328,7 +13340,8 @@
     "rank": "排名",
     "takes": "场次",
     "Random Battle": "标准模式",
-    "rather": "宁愿"
+    "rather": "宁愿",
+    "TBD": "TBD"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14150,7 +14163,8 @@
     "rank": "posição",
     "takes": "leva",
     "Random Battle": "Batalha Aleatória",
-    "rather": "em vez disso"
+    "rather": "em vez disso",
+    "TBD": "TBD"
   },
   "vi": {
     "Battles": "Số trận",
@@ -14967,7 +14981,8 @@
     "rank": "hạng",
     "takes": "lượt",
     "Random Battle": "Trận đấu Ngẫu nhiên",
-    "rather": "thay vì"
+    "rather": "thay vì",
+    "TBD": "TBD"
   },
   "de": {
     "Battles": "Gefechte",
@@ -15797,7 +15812,8 @@
     "rank": "Rang",
     "takes": "benötigt",
     "Random Battle": "Zufallsgefecht",
-    "rather": "eher"
+    "rather": "eher",
+    "TBD": "TBD"
   },
   "uk": {
     "Battles": "Бої",
@@ -16624,7 +16640,8 @@
     "rank": "місце",
     "takes": "займає",
     "Random Battle": "Випадковий бій",
-    "rather": "скоріше"
+    "rather": "скоріше",
+    "TBD": "Уточнюється"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17456,7 +17473,8 @@
     "rank": "posizione",
     "takes": "richiede",
     "Random Battle": "Battaglia Casuale",
-    "rather": "piuttosto"
+    "rather": "piuttosto",
+    "TBD": "Da definire"
   },
   "sv": {
     "Battles": "Strider",
@@ -18297,7 +18315,8 @@
     "rank": "placering",
     "takes": "försök",
     "Random Battle": "Slumpvis matchad strid",
-    "rather": "hellre"
+    "rather": "hellre",
+    "TBD": "TBD"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19134,7 +19153,8 @@
     "rank": "ранг",
     "takes": "заузима",
     "Random Battle": "Slučajne borba",
-    "rather": "radije"
+    "rather": "radije",
+    "TBD": "USKORO"
   },
   "el": {
     "Battles": "Μάχες",
@@ -19970,7 +19990,8 @@
     "rank": "θέση",
     "takes": "καταλαμβάνει",
     "Random Battle": "Τυχαία Μάχη",
-    "rather": "μάλλον"
+    "rather": "μάλλον",
+    "TBD": "TBD"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -20795,7 +20816,8 @@
     "rank": "vieta",
     "takes": "aizņem",
     "Random Battle": "Gadījuma kauja",
-    "rather": "drīzāk"
+    "rather": "drīzāk",
+    "TBD": "TBD"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -22243,7 +22265,8 @@
     "rank": "място",
     "takes": "заема",
     "Random Battle": "Случайна битка",
-    "rather": "по-скоро"
+    "rather": "по-скоро",
+    "TBD": "ОЧАКВА СЕ"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23084,7 +23107,8 @@
     "rank": "vieta",
     "takes": "užima",
     "Random Battle": "Atsitiktinis mūšis",
-    "rather": "veikiau"
+    "rather": "veikiau",
+    "TBD": "TBD"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -24556,7 +24580,8 @@
     "rank": "sijoitus",
     "takes": "vaatii",
     "Random Battle": "Satunnaistaistelu",
-    "rather": "pikemminkin"
+    "rather": "pikemminkin",
+    "TBD": "TULOSSA"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -26021,7 +26046,8 @@
     "rank": "plassering",
     "takes": "tar",
     "Random Battle": "Tilfeldig kamp",
-    "rather": "heller"
+    "rather": "heller",
+    "TBD": "TBD"
   },
   "ro": {
     "Battles": "Lupte",
@@ -26843,7 +26869,8 @@
     "rank": "poziție",
     "takes": "partide",
     "Random Battle": "Luptă standard",
-    "rather": "mai degrabă"
+    "rather": "mai degrabă",
+    "TBD": "TBD"
   },
   "da": {
     "Battles": "Kampe",
@@ -27680,6 +27707,7 @@
     "rank": "placering",
     "takes": "kræver",
     "Random Battle": "Standard kamp",
-    "rather": "snarere"
+    "rather": "snarere",
+    "TBD": "TBD"
   }
 }

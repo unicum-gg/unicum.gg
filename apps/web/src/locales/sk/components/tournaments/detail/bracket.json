@@ -2,6 +2,7 @@
   "group": "Skupina {order}",
   "n-teams": "{count} tímov",
   "pts": "Bodov",
+  "tbd": "TBD",
   "team": "Tím",
   "top-n-advance": ", postupuje najlepších {count}"
 }

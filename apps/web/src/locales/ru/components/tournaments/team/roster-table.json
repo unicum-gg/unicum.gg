@@ -1,4 +1,6 @@
 {
+  "alias": "(под никнеймом {nickname})",
+  "alias-with-clan": "(под никнеймом {nickname}, клан {clan})",
   "battles": "Бои",
   "player": "Игрок",
   "registered-as": "Зарегистрирован как {nickname}",

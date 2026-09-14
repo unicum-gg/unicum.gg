@@ -2,6 +2,7 @@
   "group": "Nhóm {order}",
   "n-teams": "{count} đội",
   "pts": "Điểm",
+  "tbd": "TBD",
   "team": "Đội",
   "top-n-advance": ", {count} đội đứng đầu sẽ đi tiếp"
 }

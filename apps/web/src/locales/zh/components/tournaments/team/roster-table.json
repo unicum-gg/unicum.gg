@@ -1,4 +1,6 @@
 {
+  "alias": "（以{nickname}身份）",
+  "alias-with-clan": "（以{nickname}身份，所属军团为{clan}）",
   "battles": "战斗场次",
   "player": "玩家",
   "registered-as": "登记名称：{nickname}",

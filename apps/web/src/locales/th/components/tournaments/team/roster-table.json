@@ -1,4 +1,6 @@
 {
+  "alias": "(ในชื่อเล่น {nickname})",
+  "alias-with-clan": "(ในชื่อเล่น {nickname} ของแคลน {clan})",
   "battles": "การรบ",
   "player": "ผู้เล่น",
   "registered-as": "ลงทะเบียนในชื่อ {nickname}",

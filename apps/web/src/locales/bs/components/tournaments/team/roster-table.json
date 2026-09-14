@@ -1,4 +1,6 @@
 {
+  "alias": "(kao {nickname})",
+  "alias-with-clan": "(kao {nickname} {clan})",
   "battles": "Bitke",
   "player": "Igrač",
   "registered-as": "Registrovan kao {nickname}",

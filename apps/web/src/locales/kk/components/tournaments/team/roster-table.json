@@ -1,4 +1,6 @@
 {
+  "alias": "({nickname} ретінде)",
+  "alias-with-clan": "({nickname}, {clan} ретінде)",
   "battles": "Соғыстар",
   "player": "Ойыншы",
   "registered-as": "{nickname} ретінде тіркелген",

@@ -1,4 +1,6 @@
 {
+  "alias": "(kā {nickname})",
+  "alias-with-clan": "(kā {nickname}, klans {clan})",
   "battles": "Kaujas",
   "player": "Spēlētājs",
   "registered-as": "Reģistrēts kā {nickname}",

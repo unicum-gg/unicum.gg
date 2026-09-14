@@ -1,4 +1,6 @@
 {
+  "alias": "（{nickname}として）",
+  "alias-with-clan": "（{nickname} {clan}として）",
   "battles": "戦闘数",
   "player": "プレイヤー",
   "registered-as": "{nickname}として登録済み",

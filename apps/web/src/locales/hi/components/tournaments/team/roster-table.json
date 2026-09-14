@@ -1,4 +1,6 @@
 {
+  "alias": "(उपनाम: {nickname})",
+  "alias-with-clan": "(उपनाम: {nickname}, क्लान: {clan})",
   "battles": "युद्ध",
   "player": "खिलाड़ी",
   "registered-as": "{nickname} के रूप में पंजीकृत",

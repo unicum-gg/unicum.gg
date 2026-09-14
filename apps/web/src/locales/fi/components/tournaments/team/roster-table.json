@@ -1,4 +1,6 @@
 {
+  "alias": "(nimimerkkinä {nickname})",
+  "alias-with-clan": "(nimimerkkinä {nickname}, klaanissa {clan})",
   "battles": "Taisteluita",
   "player": "Pelaaja",
   "registered-as": "Rekisteröity nimellä {nickname}",

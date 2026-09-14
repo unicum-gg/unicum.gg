@@ -2,6 +2,7 @@
   "group": "Grup {order}",
   "n-teams": "{count} takım",
   "pts": "Pts",
+  "tbd": "TBD",
   "team": "Ekip",
   "top-n-advance": ", en iyi {count} takım ilerler"
 }

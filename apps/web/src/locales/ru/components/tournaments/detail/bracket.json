@@ -2,6 +2,7 @@
   "group": "Группа {order}",
   "n-teams": "{count} команд",
   "pts": "Очки",
+  "tbd": "TBD",
   "team": "Команда",
   "top-n-advance": ", проходят дальше лучшие {count}"
 }

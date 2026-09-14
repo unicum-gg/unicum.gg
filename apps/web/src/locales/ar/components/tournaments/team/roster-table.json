@@ -1,4 +1,6 @@
 {
+  "alias": "(باسم {nickname})",
+  "alias-with-clan": "(باسم {nickname} {clan})",
   "battles": "معارك",
   "player": "لاعب",
   "registered-as": "مسجل باسم {nickname}",

@@ -2,6 +2,7 @@
   "group": "Grupa {order}",
   "n-teams": "{count} echipe",
   "pts": "Pts",
+  "tbd": "TBD",
   "team": "Echipă",
   "top-n-advance": ", se califică cele mai bune {count}"
 }

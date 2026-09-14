@@ -2,6 +2,7 @@
   "group": "{order}. csoport",
   "n-teams": "{count} csapat",
   "pts": "Pontok",
+  "tbd": "TBD",
   "team": "Csapat",
   "top-n-advance": ", a legjobb {count} továbbjut"
 }

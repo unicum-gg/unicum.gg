@@ -1,4 +1,6 @@
 {
+  "alias": "({nickname} néven)",
+  "alias-with-clan": "({nickname} {clan} néven)",
   "battles": "Csaták",
   "player": "Játékos",
   "registered-as": "{nickname} néven regisztrálva",

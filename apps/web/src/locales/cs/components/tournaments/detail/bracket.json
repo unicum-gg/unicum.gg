@@ -2,6 +2,7 @@
   "group": "Skupina {order}",
   "n-teams": "{count} týmů",
   "pts": "b.{",
+  "tbd": "TBD",
   "team": "Tým",
   "top-n-advance": ", postupuje nejlepších {count}"
 }
