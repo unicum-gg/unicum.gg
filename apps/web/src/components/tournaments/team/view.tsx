@@ -16,6 +16,9 @@ import { TournamentActionsMenu } from "@/components/tournaments/detail/actions-m
 import { ClanTag } from "@/components/entity/clan-tag";
 import { RankMedal } from "@/components/rank-medal";
 import { ScrollRail } from "@/components/scroll-rail";
+import { RelativeTime } from "@/components/relative-time";
+import { Interpolate } from "@/components/interpolate";
+import { DateShape, useDateFormat } from "@/components/local-date";
 import { UNICUM_API_URL } from "@unicum.gg/sdk";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
@@ -248,6 +251,7 @@ export function TournamentTeamView({
   roster: RosterEntry[] | null;
 }) {
   const { date } = useFormat();
+  const formatDate = useDateFormat();
   const { t: tGame } = useTranslation("game/vocabulary");
   const { t: tMaps } = useTranslation("game/maps");
   const { t } = useTranslation("components/tournaments/team/view");
@@ -434,6 +438,39 @@ export function TournamentTeamView({
             place={shown}
             placedTeams={placements.size}
           />
+          {/* When our copy was read, which is the one fact on this page that is
+              about US rather than about the team: Wargaming publishes no such
+              date, and a reader watching their own run come in needs to know
+              whether they are looking at minutes or hours.
+
+              Its own line rather than the meta strip above, which is where the
+              tournament page carries it: this header gives the strip a third of
+              its width (the clan and the averages take the rest), so it is
+              already scrolled past its fourth item and anything appended lands
+              where nobody will look. The result row above it cannot host it
+              either, since that row renders nothing at all for a team that has
+              not played yet.
+
+              Not a flex row either: `Interpolate` splits the template into
+              siblings, and a flex parent drops the whitespace between them,
+              which is where the space in "Updated {when}" lives. It read
+              "Updatedil y a 3 minutes". */}
+          <div className="border-t border-fd-border px-4 py-1.5 text-right text-xs text-fd-muted-foreground">
+            <Interpolate
+              template={t("updated")}
+              values={{
+                when: (
+                  <RelativeTime
+                    date={tournament.mirroredAt}
+                    title={formatDate(
+                      tournament.mirroredAt,
+                      DateShape.DateTimeSeconds,
+                    )}
+                  />
+                ),
+              }}
+            />
+          </div>
         </PanelContent>
       </Panel>
 

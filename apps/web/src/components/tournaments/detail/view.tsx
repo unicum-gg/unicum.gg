@@ -6,6 +6,7 @@ import { useTranslation } from "@/hooks/use-translation";
 import { ArrowSquareOutIcon, RankingIcon } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { RelativeTime } from "@/components/relative-time";
+import { DateShape, useDateFormat } from "@/components/local-date";
 import { usePassed } from "@/hooks/use-passed";
 import { RankMedal } from "@/components/rank-medal";
 import { ScrollRail } from "@/components/scroll-rail";
@@ -77,6 +78,7 @@ export function TournamentView({
   tournament: TournamentRecord;
 }) {
   const { date } = useFormat();
+  const formatDate = useDateFormat();
   const { t: tCopy } = useTranslation("components/tournaments/detail/view");
   const { t: tr } = useTranslation("components/tournaments/detail/view");
   const { t: tGame } = useTranslation("game/vocabulary");
@@ -222,6 +224,29 @@ export function TournamentView({
                     <span className="shrink-0">{part}</span>
                   </Fragment>
                 ))}
+                {/* Last, and apart from the strip above it, because it is the
+                    one fact here that is about US rather than about the
+                    tournament: Wargaming publishes no such date. A reader
+                    watching a bracket fill in needs to know whether what they
+                    are looking at is minutes or hours old, and the mirror runs
+                    on a cadence they cannot see. */}
+                <span className="shrink-0 text-fd-border">·</span>
+                <span className="shrink-0">
+                  <Interpolate
+                    template={tr("updated")}
+                    values={{
+                      when: (
+                        <RelativeTime
+                          date={t.mirroredAt}
+                          title={formatDate(
+                            t.mirroredAt,
+                            DateShape.DateTimeSeconds,
+                          )}
+                        />
+                      ),
+                    }}
+                  />
+                </span>
               </ScrollRail>
             </div>
             </div>

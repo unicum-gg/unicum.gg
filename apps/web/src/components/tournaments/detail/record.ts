@@ -143,4 +143,8 @@ export type TournamentRecord = {
   logoUrl: string | null;
   teams: TournamentTeam[];
   stages: TournamentStage[];
+  /** When this copy was last read from Wargaming, which is what the header
+   * dates. Their own system publishes no such stamp, so it describes our
+   * mirror. */
+  mirroredAt: Date;
 };

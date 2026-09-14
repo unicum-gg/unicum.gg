@@ -5431,6 +5431,11 @@ export interface components {
             logoUrl: string | null;
             teams: components["schemas"]["TournamentTeam"][];
             stages: components["schemas"]["TournamentStage"][];
+            /**
+             * Format: date-time
+             * @description When this copy was last read from Wargaming. It is the bracket's own stamp, from the pass that rewrites the tree, the rosters and the standings, and falls back to the catalogue sweep in the window where a status change has cleared it pending a re-read. Wargaming publishes no such date, so it describes our mirror rather than the tournament.
+             */
+            mirroredAt: Date;
         };
         /**
          * @description Battle type a tournament is played in.

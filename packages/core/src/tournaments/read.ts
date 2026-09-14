@@ -267,6 +267,18 @@ export type TournamentDetailRecord = {
   logoUrl: string | null;
   teams: TournamentTeamEntry[];
   stages: TournamentBracketStage[];
+  /**
+   * When this copy was last read from Wargaming.
+   *
+   * `detailSyncedAt` is the one that describes what the page draws, since it is
+   * stamped by the pass that rewrites the bracket, the rosters and the
+   * standings. It falls back to the catalogue sweep for the window where the
+   * two disagree: a status change CLEARS the detail stamp on purpose, to put the
+   * tournament back in front of the mirror, so between that sweep and the
+   * re-read there is no detail stamp to report and the sweep is the only thing
+   * we can honestly date.
+   */
+  mirroredAt: Date;
 };
 
 /**
@@ -535,6 +547,7 @@ export async function getTournament(
       startAt: stage.startAt,
       groups: groupsByStage.get(Number(stage.id)) ?? [],
     })),
+    mirroredAt: row.detailSyncedAt ?? row.syncedAt,
   };
 }
 
