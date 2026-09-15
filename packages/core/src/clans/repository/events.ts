@@ -14,7 +14,8 @@ import type {
   ClanEventType,
   ClanRecentEvent,
 } from "@unicum.gg/core/wargaming/wot/clans/event-types";
-import { dedup, isStale } from "./internal";
+import { isStale } from "./internal";
+import { enqueueClanRefreshBackground } from "@unicum.gg/core/clans/refresh-queue";
 
 function eventFromRow(row: ClanRecentEventRow): ClanRecentEvent {
   return {
@@ -84,7 +85,7 @@ export async function getClanEventsCached(
 
   if (rows.length > 0 || clanRow) {
     const stale = !clanRow || isStale(clanRow.eventsRefreshedAt);
-    if (stale) refreshClanEventsInBackground(region, clanId, limit);
+    if (stale) refreshClanEventsInBackground(region, clanId);
     return {
       events: await withCurrentNicknames(region, rows.map(eventFromRow)),
       fromDb: true,
@@ -145,17 +146,22 @@ export async function refreshClanEvents(
   return events;
 }
 
-function refreshClanEventsInBackground(
-  region: Region,
-  clanId: number,
-  limit: number,
-): void {
-  void dedup(`events:${region}:${clanId}`, () =>
-    refreshClanEvents(region, clanId, limit),
-  ).catch((err) =>
-    console.error(
-      `[clans-repo] refreshClanEvents ${region}/${clanId} failed:`,
-      err,
-    ),
-  );
+/**
+ * Ask for a refresh; do not perform one.
+ *
+ * This used to call the portal directly behind a `dedup`, which stops the SAME
+ * clan being fetched twice at once but does nothing about different ones. The
+ * clan portal accepts 1 request per second per region, and crawlers walk clans
+ * far faster than that, so on 2026-09-15 there were ~260 of these queued at
+ * once, each waiting ~53s for its slot and holding a request's worth of memory
+ * the whole time. That is what filled the web workers until PM2 recycled them
+ * and the site went dark in bursts.
+ *
+ * The queue and its paced drain already existed: `clan-refresh-cron` claims
+ * from it every 10s and calls `refreshClanEvents` itself, throttling between
+ * per-clan portal calls. This path simply never used it. Priority 10 is the
+ * page-hit lane, same as `enqueuePlayerRefreshBackground` uses.
+ */
+function refreshClanEventsInBackground(region: Region, clanId: number): void {
+  enqueueClanRefreshBackground(region, [clanId], { priority: 10 });
 }

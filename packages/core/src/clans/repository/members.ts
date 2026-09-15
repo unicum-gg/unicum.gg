@@ -16,7 +16,8 @@ import {
   type PortalClanMember,
   getClanMembersStats,
 } from "@unicum.gg/core/clans/members";
-import { dedup, STALE_AFTER_MS } from "./internal";
+import { STALE_AFTER_MS } from "./internal";
+import { enqueueClanRefreshBackground } from "@unicum.gg/core/clans/refresh-queue";
 
 type PlayerRatings = {
   wn7: number | null;
@@ -148,8 +149,7 @@ async function periodStatsFromSnapshotsForAccounts(
   for (const p of playerRows) {
     const s = latestByPlayer.get(p.id);
     if (!s || s.battles <= 0) continue;
-    const created =
-      p.createdAt instanceof Date ? p.createdAt.getTime() : null;
+    const created = p.createdAt instanceof Date ? p.createdAt.getTime() : null;
     const days = created
       ? Math.max(1, Math.floor((now - created) / 86_400_000))
       : null;
@@ -259,7 +259,8 @@ export async function refreshClanMembers(
   // player snapshots so we never touch the 1 RPS clan portal for members. The
   // cron passes `prefetchedRoster` from a single batched `clans/info` call; the
   // on-demand path fetches this one clan's roster on its own.
-  const roster = prefetchedRoster ?? (await getClanMembersStats(region, clanId));
+  const roster =
+    prefetchedRoster ?? (await getClanMembersStats(region, clanId));
   const snapshotData = await periodStatsFromSnapshotsForAccounts(
     region,
     roster.map((m) => m.accountId),
@@ -326,13 +327,10 @@ export async function refreshClanMembers(
   }));
 }
 
+/** Ask for a refresh; do not perform one. Same reasoning, and the same
+ * 2026-09-15 outage, as `refreshClanEventsInBackground`: a per-clan `dedup`
+ * does not bound DIFFERENT clans, and the portal serves 1 request per second
+ * per region. `clan-refresh-cron` calls `refreshClanMembers` when it drains. */
 function refreshClanMembersInBackground(region: Region, clanId: number): void {
-  void dedup(`members:${region}:${clanId}`, () =>
-    refreshClanMembers(region, clanId),
-  ).catch((err) =>
-    console.error(
-      `[clans-repo] refreshClanMembers ${region}/${clanId} failed:`,
-      err,
-    ),
-  );
+  enqueueClanRefreshBackground(region, [clanId], { priority: 10 });
 }
