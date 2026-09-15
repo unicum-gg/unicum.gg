@@ -54,12 +54,20 @@ const dbPoolMax = process.env.DB_POOL_MAX
 // entirely: native buffers, sockets, stacks, compiled code. The rest of the
 // slice is the allowance for that.
 //
-// 550 rather than the ~400 actually observed. Production ran three hours at a
-// 900 MiB ceiling holding 1139 to 1296 MiB RSS, so the real overhead is about
-// 396. But sizing to the measurement leaves no room for V8 to overshoot its
-// ceiling before a major GC catches up, and being wrong here is not a slow
-// worker, it is the kill loop this arithmetic exists to prevent. The slack is
-// the point.
+// 1150, measured again on 2026-09-15 after this number caused an outage. The
+// earlier 550 came from a run at a 900 MiB ceiling holding ~1200 MiB RSS. It
+// does not hold at this workload's size: a worker running an 815 MiB ceiling
+// held 1890 MiB RSS and died at 750 MiB of heap with `Ineffective mark-compacts
+// near heap limit`, while the container still had 3 GiB free and the kernel had
+// killed nothing. Under-estimating here is not conservative, it is the failure:
+// it drives the derived heap ceiling DOWN, so V8 hits its own cap and aborts
+// the process long before PM2's threshold or the cgroup limit is in play, and
+// nothing that watches RSS can see it coming.
+//
+// Six workers then died in turn, each restarting cold, and a cold worker has to
+// refetch everything it serves, which queues on the WG rate limiter: requests
+// held memory for 233 SECONDS, which fed the next death. Sizing this number to
+// the measurement is what breaks that loop.
 //
 // Keep any Coolify `NODE_OPTIONS` off the runtime (buildtime only, or unset).
 // It reaches `start` too, and a heap ceiling set there is invisible from this
@@ -72,7 +80,7 @@ const dbPoolMax = process.env.DB_POOL_MAX
 // above, that is the signal to revisit the budget for a host that size rather
 // than to trust these numbers.
 const memoryBudgetMb = Number(process.env.WEB_MEMORY_BUDGET_MB || 8192);
-const NON_HEAP_MB = 550;
+const NON_HEAP_MB = 1150;
 const heapCapMb = Math.max(
   512,
   Math.floor((memoryBudgetMb * 0.85) / instances) - NON_HEAP_MB,
