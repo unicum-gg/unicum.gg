@@ -72,6 +72,12 @@ export async function openStage(
     applyStance: () => void;
     takeAim: (bearing: number, pitch: number) => void;
     onAbsent?: () => void;
+    /**
+     * The style asked for was not in the mirror and the plain vehicle was
+     * raised instead. A link outlives the style it was made with, so the page
+     * takes it off rather than going on saying the reader is wearing one.
+     */
+    onUndressed?: () => void;
     column?: RefObject<HTMLElement | null>;
   },
   /**
@@ -160,6 +166,7 @@ export async function openStage(
     root,
     fitted: from.fitted,
     skin: dressed,
+    undressed: from.onUndressed,
     live,
     nudge: handles.nudge,
   });

@@ -157,6 +157,9 @@ export function TankViewer({
   const desk = useHeroDesk({ held, sharp: dressing.sharp });
   const { liked, centred, presentation } = desk;
   usePublishedHero({ view, dressing, firing, hullDown, aimed });
+  /** Take the 3D style off, for the one case the reader did not ask for. */
+  const undress = dressing.cutInto;
+
   useEffect(() => {
     const surface = canvas.current;
     if (!surface) return;
@@ -196,6 +199,10 @@ export function TankViewer({
           setAbsent(true);
           onAbsent?.();
         },
+        // The style the link asked for is not in the mirror. The tank was
+        // raised without it, so the wardrobe stops showing it as worn and the
+        // link this page publishes stops carrying it on to the next reader.
+        onUndressed: () => undress(null),
         column,
       },
       closing,
@@ -221,6 +228,7 @@ export function TankViewer({
     code,
     column,
     dressing.skin,
+    undress,
     onAbsent,
     fitted,
     liked,

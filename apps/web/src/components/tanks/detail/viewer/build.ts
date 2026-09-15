@@ -50,6 +50,7 @@ export async function buildStage({
   root,
   fitted,
   skin,
+  undressed,
   live,
   nudge,
 }: {
@@ -66,6 +67,11 @@ export async function buildStage({
   fitted?: Mounted;
   /** The 3D style being worn, by the folder the client publishes it under. */
   skin?: string | null;
+  /**
+   * Called when the style asked for was not in the mirror and the plain vehicle
+   * was raised instead, so the page can stop claiming the reader is wearing it.
+   */
+  undressed?: () => void;
   /** Whether the page still wants this build, which a navigation ends. */
   live: () => boolean;
   nudge: RefObject<((ms?: number) => void) | null>;
@@ -215,9 +221,15 @@ export async function buildStage({
   vehicle.add(pivot);
   scene.add(vehicle);
 
-  let built;
-  try {
-    built = await loadVisual({
+  /**
+   * Raise the vehicle from one folder of the mirror.
+   *
+   * Taken as a function because it is called twice: a 3D style is the same
+   * vehicle from another folder, and a folder that is not there is a thing that
+   * happens to a link long after it was shared.
+   */
+  const raise = (from: string) =>
+    loadVisual({
       renderer,
       scene,
       root,
@@ -238,17 +250,49 @@ export async function buildStage({
       // **A 3D style is the same vehicle from another folder.** It is a
       // complete set of pieces with textures of its own, published beside
       // the vehicle, so wearing one is a different path and nothing else.
-      vehicle: skin ? `${at}/${SKIN_FOLDER}/${skin}` : at,
+      vehicle: from,
       mounts: { scene: vehicle, hull, turret, gun },
       definition: "sd",
       mounted: fitted,
     });
+
+  let built;
+  const dressed = skin ? `${at}/${SKIN_FOLDER}/${skin}` : at;
+  try {
+    built = await raise(dressed);
   } catch {
-    // A build that failed: the caller shows what was underneath, which is
-    // already the right thing to be looking at. The context goes with it, as
-    // it does on every other way out of here.
-    renderer.dispose();
-    return null;
+    // **A style that is not there costs the style, never the tank.**
+    //
+    // A shared link carries the style it was made with, and a style outlives
+    // nothing: Wargaming retires one, a mirror rebuild has not reached that
+    // tier yet, a run is rolled back. The folder then 404s, the build throws,
+    // and what the reader gets is the flat catalogue picture, because from
+    // here a vehicle that cannot be raised and a style that cannot be found
+    // look the same. The build token already says this about a module it does
+    // not recognise, in as many words: a stale link draws the stock loadout.
+    // The wardrobe was the one place it was never said.
+    if (!skin) {
+      renderer.dispose();
+      return null;
+    }
+    // Everything the failed attempt put in the groups, since the second one
+    // fills the same ones and a half-built style would be drawn inside the tank.
+    for (const group of [vehicle, hull, turret, gun]) group.clear();
+    hull.add(ring);
+    turret.add(gun);
+    ring.add(turret);
+    pivot.add(hull);
+    vehicle.add(pivot);
+    try {
+      built = await raise(at);
+    } catch {
+      // A build that failed: the caller shows what was underneath, which is
+      // already the right thing to be looking at. The context goes with it, as
+      // it does on every other way out of here.
+      renderer.dispose();
+      return null;
+    }
+    undressed?.();
   }
   if (!live()) {
     renderer.dispose();
