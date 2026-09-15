@@ -9,10 +9,23 @@ import {
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
 import { traced, tracedSync } from "@unicum.gg/core/lib/perf-trace";
+import { withDeadline } from "@unicum.gg/core/lib/deadline";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerDetailResponse } from "./schema.api";
 
 const JSON_HEADERS = { "content-type": "application/json" } as const;
+
+// How long this handler will WAIT for a cold assembly. The work is not
+// cancelled: it keeps running and records what it fetched, so the retry this
+// answer invites lands on a warm cache.
+//
+// It exists because the wait is what costs us. On 2026-09-15 a single request
+// here ran 1373 seconds holding its payload, which exhausted a worker's V8 heap
+// and, worker by worker, took the whole cluster down. Cloudflare cuts the
+// connection at 100s regardless, so past that point we were spending memory on
+// an answer nobody could receive. 30s is well inside that and well past a
+// healthy cold fetch (~1s warm, seconds cold).
+const COLD_DEADLINE_MS = 30_000;
 
 /**
  * Player detail
@@ -47,8 +60,17 @@ export async function GET(
       // Traced so the Server-Timing header separates the assembly (a cache miss)
       // from a bare cache hit.
       const result = await traced("loadPlayerDetailLive", () =>
-        loadPlayerDetailLive(region, decoded),
+        withDeadline(loadPlayerDetailLive(region, decoded), COLD_DEADLINE_MS),
       );
+      // Not an error state: the assembly is still running and will store what it
+      // fetches. 503 + Retry-After says "ask again", where 504 would read as a
+      // dead upstream and 404 would be a lie that the client could cache.
+      if (result === null) {
+        return Response.json(
+          { error: "still_loading" },
+          { status: 503, headers: { "retry-after": "5" } },
+        );
+      }
       if (result.status === PlayerDetailLiveStatus.Unknown) {
         return Response.json({ error: "not_found" }, { status: 404 });
       }
