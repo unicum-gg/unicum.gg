@@ -6,12 +6,21 @@ import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { getClanNameHistory } from "@unicum.gg/core/clans/name-history";
 import { resolveClanBadges } from "@unicum.gg/core/clans/badges";
 import { countClanTournaments } from "@unicum.gg/core/tournaments/read";
+import { withDeadline } from "@unicum.gg/core/lib/deadline";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
 import { isRegion } from "@unicum.gg/wargaming";
 import { ClanOverviewResponse } from "./schema.api";
 
 export const dynamic = "force-dynamic";
+
+// How long this handler will WAIT for a cold resolve, which goes to Wargaming.
+// Same bound, and the same reason, as the player detail route: on 2026-09-15
+// this endpoint held 90 requests for up to 896 SECONDS each, which grew every
+// web worker to its memory ceiling in about two minutes and had PM2 recycling
+// them continuously, so the site went dark whenever several were cold at once.
+// Cloudflare cuts at 100s, so nothing past that was ever delivered.
+const COLD_DEADLINE_MS = 30_000;
 
 /**
  * Clan overview
@@ -32,7 +41,20 @@ export async function GET(
     }
     const decoded = decodeURIComponent(tag);
 
-    const clanCached = await getClanByTagCached(region, decoded);
+    // Boxed so the deadline's null is distinguishable from the resolver's own
+    // null, which means "no such clan" — racing them bare would answer 404 to a
+    // clan that merely took too long, and the client could cache that.
+    const resolved = await withDeadline(
+      getClanByTagCached(region, decoded).then((clan) => ({ clan })),
+      COLD_DEADLINE_MS,
+    );
+    if (resolved === null) {
+      return Response.json(
+        { error: "still_loading" },
+        { status: 503, headers: { "retry-after": "5" } },
+      );
+    }
+    const clanCached = resolved.clan;
     if (!clanCached) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
