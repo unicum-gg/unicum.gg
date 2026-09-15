@@ -1,5 +1,9 @@
 import { sql } from "drizzle-orm";
-import { coverageTrendsByRegion, playerSnapshotsByRegion } from "@unicum.gg/shared";
+import {
+  coverageTrendsByRegion,
+  playerSnapshotsByRegion,
+  playersByRegion,
+} from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
@@ -86,6 +90,7 @@ export function recomputeCoverageTrends(region: Region): Promise<void> {
 
   const p = (async () => {
     const t = playerSnapshotsByRegion[region];
+    const players = playersByRegion[region];
     const target = coverageTrendsByRegion[region];
     const [last24h, dailyRows, firstsRows] = await Promise.all([
       db
@@ -100,15 +105,16 @@ export function recomputeCoverageTrends(region: Region): Promise<void> {
             GROUP BY day
             ORDER BY day`,
       ),
+      // Reads the stamp the snapshot write lays down (players.first_snapshot_at)
+      // instead of re-deriving it. The old form was a full aggregate of
+      // *_player_snapshots — `MIN(taken_at) GROUP BY player_id` over 17M rows —
+      // to recompute dates that can never change once written. It cost 143s and,
+      // far worse, evicted the page cache every other query lives on. Same
+      // series, a range scan of a narrow column.
       db.execute<{ day: string; count: string }>(
-        sql`WITH firsts AS (
-              SELECT player_id, MIN(taken_at) AS first_at
-              FROM ${t}
-              GROUP BY player_id
-            )
-            SELECT date_trunc('day', first_at)::text AS day, COUNT(*)::text AS count
-            FROM firsts
-            WHERE first_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+        sql`SELECT date_trunc('day', first_snapshot_at)::text AS day, COUNT(*)::text AS count
+            FROM ${players}
+            WHERE first_snapshot_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
             GROUP BY day
             ORDER BY day`,
       ),

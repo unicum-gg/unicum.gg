@@ -863,6 +863,12 @@ async function updatePlayerRatings(
       shDamage: fa?.damage_dealt ?? null,
       shFrags: fa?.frags ?? null,
       shAvgXp,
+      // Stamped on the first snapshot only: COALESCE keeps the original value
+      // for every later one, so this is immutable history rather than a
+      // last-write. NOW() rather than the snapshot's own taken_at because this
+      // update runs in the same breath as the insert, and the difference is
+      // milliseconds against a column read by the day.
+      firstSnapshotAt: sql`COALESCE(${players.firstSnapshotAt}, NOW())`,
     })
     .where(eq(players.id, playerId));
 }

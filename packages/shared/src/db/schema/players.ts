@@ -35,6 +35,21 @@ export function makePlayersTable(region: string) {
       lastSeenAt: timestamp("last_seen_at", { withTimezone: true })
         .notNull()
         .defaultNow(),
+      // When this player's FIRST snapshot was recorded, written once and never
+      // again (the write COALESCEs on itself). Distinct from `first_seen_at`,
+      // which is when the ROW appeared: discovery creates rows that then wait
+      // their turn, so the two differ by however long the queue was, and the
+      // /coverage chart this feeds is titled "first-ever snapshots per day".
+      //
+      // It exists to kill a full aggregate. The figure was derived on every
+      // read as `SELECT player_id, MIN(taken_at) FROM *_player_snapshots GROUP
+      // BY player_id`, which walks the whole table (17M rows / 11 GB on EU) to
+      // recompute history that cannot change. Worse than its own cost: the scan
+      // evicted the page cache every other query depends on, so an hourly tick
+      // took player pages from 0.2s to 24s for two minutes at a time (2026-09-15).
+      // Null for a player who has never been snapshotted, which is exactly the
+      // "awaiting first snapshot" population the coverage page counts.
+      firstSnapshotAt: timestamp("first_snapshot_at", { withTimezone: true }),
       // The wall-clock time this row next becomes due for a snapshot refresh:
       // `last_seen_at + cadence(last_battle_at)` at write time (see dueAtSql in
       // refresh-policy). A row is due when `due_at <= NOW()` — the sargable,

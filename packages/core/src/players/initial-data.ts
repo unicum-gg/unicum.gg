@@ -17,6 +17,7 @@ type RawPlayer = {
   last_battle_at: string | null;
   clan_id: number | null;
   first_seen_at: string;
+  first_snapshot_at: string | null;
   last_seen_at: string;
   due_at: string;
   wn7: number | null;
@@ -219,6 +220,7 @@ function playerFromRaw(r: RawPlayer): Player {
     lastBattleAt: r.last_battle_at ? new Date(r.last_battle_at) : null,
     clanId: r.clan_id === null ? null : Number(r.clan_id),
     firstSeenAt: new Date(r.first_seen_at),
+    firstSnapshotAt: r.first_snapshot_at ? new Date(r.first_snapshot_at) : null,
     lastSeenAt: new Date(r.last_seen_at),
     dueAt: new Date(r.due_at),
     wn7: r.wn7,
