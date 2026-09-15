@@ -21,6 +21,9 @@ import { isRegion, Region } from "@unicum.gg/wargaming";
 
 const PATHNAME_HEADER = "x-pathname";
 const LOCALE_HEADER = "x-locale";
+/** `/{region}/tanks/{id}` with digits for an id, optionally followed by a tab.
+ * The locale prefix is already off `rest` by the time this is tested. */
+const NUMERIC_TANK = /^\/(?:eu|na|asia)\/tanks\/\d+(?:\/[a-z-]+)?$/;
 
 /**
  * Where a region-less URL stands, given the pages that actually exist. Both
@@ -306,6 +309,28 @@ export function proxy(req: NextRequest) {
   // This is for the ones that have no params to read: the OG images and the
   // Markdown converter.
   requestHeaders.set(LOCALE_HEADER, locale);
+
+  // A tank addressed by its id goes to its readable slug, and the redirect is
+  // made by a route handler rather than by the page: the six tank tabs are
+  // `force-static`, and a static page is handed an empty `searchParams`, so the
+  // page could not carry the query string over. It matters because these URLs
+  // are what the World of Tanks mod links to, campaign tags and all, and a
+  // redirect that drops them files every visit it sends as direct traffic.
+  //
+  // Same move as `?page=N` and `sitemap-3.xml` above: the address a reader uses
+  // resolved onto the route that can actually serve it. The rewrite carries the
+  // query untouched, and the handler reads the original path off the header
+  // below rather than from parameters of its own, so nothing it needs can
+  // collide with something the caller sent.
+  // Only when there is a query to save. Without one the page's own redirect is
+  // already right, and leaving it in charge keeps the rest of its behaviour,
+  // notably the 404 it draws for an id no vehicle answers to: a route handler
+  // cannot render that page.
+  if (req.nextUrl.search && NUMERIC_TANK.test(rest)) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/api/internal/tank-id";
+    return NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+  }
 
   const url = req.nextUrl.clone();
   // Always prefixed, including in the default language. This is the internal
