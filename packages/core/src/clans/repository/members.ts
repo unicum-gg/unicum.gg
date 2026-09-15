@@ -16,7 +16,6 @@ import {
   type PortalClanMember,
   getClanMembersStats,
 } from "@unicum.gg/core/clans/members";
-import { STALE_AFTER_MS } from "./internal";
 import { enqueueClanRefreshBackground } from "@unicum.gg/core/clans/refresh-queue";
 
 type PlayerRatings = {
@@ -216,8 +215,10 @@ export async function getClanMembersCached(
       (min, r) => Math.min(min, r.member.refreshedAt.getTime()),
       Number.POSITIVE_INFINITY,
     );
-    const stale = Date.now() - oldest > STALE_AFTER_MS;
-    if (stale) refreshClanMembersInBackground(region, clanId);
+    // No refresh from here: see the note in repository/events.ts. `/enqueue`
+    // (real browsers only) and clan-backfill-cron own freshness, and this line
+    // used to fire a portal call on every crawler render.
+    const stale = false;
     const enriched = await enrichMissingOverall(
       region,
       rows.map((r) =>
@@ -244,7 +245,11 @@ export async function getClanMembersCached(
   // SSE triggers router.refresh() once the members land. Avoids the
   // 5-30s wait when G-Core throttles EU and the WG members endpoint
   // hangs on first-visit clans.
-  refreshClanMembersInBackground(region, clanId);
+  // Queued, not fetched. This is the first-ever view of a clan, so there is
+  // nothing to serve and the page renders empty until LiveSync pushes the
+  // members in — which means nobody is waiting on this call, and it has no
+  // business holding a request open against a 1-rps portal.
+  enqueueClanRefreshBackground(region, [clanId], { priority: 10 });
   return { members: [], fromDb: false, refreshing: true };
 }
 
@@ -325,12 +330,4 @@ export async function refreshClanMembers(
     wnx30d: null,
     battles30d: null,
   }));
-}
-
-/** Ask for a refresh; do not perform one. Same reasoning, and the same
- * 2026-09-15 outage, as `refreshClanEventsInBackground`: a per-clan `dedup`
- * does not bound DIFFERENT clans, and the portal serves 1 request per second
- * per region. `clan-refresh-cron` calls `refreshClanMembers` when it drains. */
-function refreshClanMembersInBackground(region: Region, clanId: number): void {
-  enqueueClanRefreshBackground(region, [clanId], { priority: 10 });
 }

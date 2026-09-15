@@ -10,12 +10,11 @@ import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
 import { clanChannel, publish } from "@unicum.gg/core/live/pubsub";
 import type { Region } from "@unicum.gg/wargaming";
 import { getClanRecentEvents } from "@unicum.gg/core/wargaming/wot/clans/events";
+import { enqueueClanRefreshBackground } from "@unicum.gg/core/clans/refresh-queue";
 import type {
   ClanEventType,
   ClanRecentEvent,
 } from "@unicum.gg/core/wargaming/wot/clans/event-types";
-import { isStale } from "./internal";
-import { enqueueClanRefreshBackground } from "@unicum.gg/core/clans/refresh-queue";
 
 function eventFromRow(row: ClanRecentEventRow): ClanRecentEvent {
   return {
@@ -84,20 +83,31 @@ export async function getClanEventsCached(
     .limit(limit);
 
   if (rows.length > 0 || clanRow) {
-    const stale = !clanRow || isStale(clanRow.eventsRefreshedAt);
-    if (stale) refreshClanEventsInBackground(region, clanId);
+    // Deliberately no refresh from here. The player page is the model: a render
+    // serves what is stored and asks for nothing. Freshness already has two
+    // owners — the `/enqueue` endpoint, which only a real browser reaches (a
+    // crawler runs no JS, so it can no longer make us call anything), and
+    // `clan-backfill-cron`, which walks every clan regardless.
+    //
+    // Firing from here fired on EVERY render, crawlers included, and the clan
+    // portal serves 1 request per second per region: on 2026-09-15 that left
+    // ~260 of them queued at once, each holding a request's memory for ~53s,
+    // until the web workers filled and the site went dark in bursts.
     return {
       events: await withCurrentNicknames(region, rows.map(eventFromRow)),
       fromDb: true,
-      refreshing: stale,
+      refreshing: false,
     };
   }
 
-  const events = await refreshClanEvents(region, clanId, limit);
+  // First-ever view of this clan: nothing stored, so queue the fetch and render
+  // empty rather than hold the request against a 1-rps portal. LiveSync pushes
+  // the events in when the cron gets to it, exactly as the members path does.
+  enqueueClanRefreshBackground(region, [clanId], { priority: 10 });
   return {
-    events: await withCurrentNicknames(region, events),
+    events: [],
     fromDb: false,
-    refreshing: false,
+    refreshing: true,
   };
 }
 
@@ -144,24 +154,4 @@ export async function refreshClanEvents(
   );
   publish(clanChannel(region, clanId), { kind: "events" });
   return events;
-}
-
-/**
- * Ask for a refresh; do not perform one.
- *
- * This used to call the portal directly behind a `dedup`, which stops the SAME
- * clan being fetched twice at once but does nothing about different ones. The
- * clan portal accepts 1 request per second per region, and crawlers walk clans
- * far faster than that, so on 2026-09-15 there were ~260 of these queued at
- * once, each waiting ~53s for its slot and holding a request's worth of memory
- * the whole time. That is what filled the web workers until PM2 recycled them
- * and the site went dark in bursts.
- *
- * The queue and its paced drain already existed: `clan-refresh-cron` claims
- * from it every 10s and calls `refreshClanEvents` itself, throttling between
- * per-clan portal calls. This path simply never used it. Priority 10 is the
- * page-hit lane, same as `enqueuePlayerRefreshBackground` uses.
- */
-function refreshClanEventsInBackground(region: Region, clanId: number): void {
-  enqueueClanRefreshBackground(region, [clanId], { priority: 10 });
 }
