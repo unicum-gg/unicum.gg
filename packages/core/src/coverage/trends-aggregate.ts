@@ -45,7 +45,22 @@ import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 //
 // If this ever moves to a smaller machine, measure the tick before trusting
 // this line: the 503s above are what a too-fast cadence costs.
-const COVERAGE_TRENDS_SCHEDULE = "15 * * * *";
+//
+// Back to daily on 2026-09-15, because the paragraph above happened again and
+// the machine was never the variable. Measured live at 12:15 UTC: the tick held
+// two of these scans at 143s apiece, Postgres went to 73 active backends with
+// every one of them waiting on LWLock, and `db loadPlayerInitialData` inside a
+// player request measured **205 seconds**. The homepage, which touches no
+// snapshot table, still answered in 106ms while a player page took 24s — that
+// split is the signature of this cron, not of a slow site. Cancelling the two
+// scans took the player page back to 161ms within seconds.
+//
+// What actually changed is the table, not the host: these are full seq-scans,
+// so the tick's cost grows with every row ever written, and *_player_snapshots
+// is now 17M rows / 10 GB for EU alone. A cadence justified by "the hardware
+// now affords it" was therefore always going to expire on its own. Daily is
+// ample for a 30-day trend, and the read path never runs the scan.
+const COVERAGE_TRENDS_SCHEDULE = "15 4 * * *";
 
 // Must match the read path's `buildDaySeries` window in the coverage service:
 // the cron fetches this many days of raw buckets, the reader renders the same
