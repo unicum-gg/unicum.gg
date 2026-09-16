@@ -39,6 +39,7 @@ export * from "./vehicles";
 export * from "./auth";
 export * from "./subscription";
 export * from "./streamers";
+export * from "./game-links";
 export * from "./server-online";
 export * from "./player-distribution";
 export * from "./tier-winrate";

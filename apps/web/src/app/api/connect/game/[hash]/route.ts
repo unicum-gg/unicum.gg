@@ -1,0 +1,95 @@
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import { auth } from "@unicum.gg/core/auth";
+import {
+  GAME_TOKEN_HASH,
+  GameLinkResult,
+  linkGameClient,
+} from "@unicum.gg/core/game-link";
+import {
+  TWITCH_CHAT_SCOPE,
+  TwitchChatAccess,
+  twitchChatAccess,
+} from "@unicum.gg/core/twitch/chat";
+import { env } from "@unicum.gg/shared";
+import { isRegion, Region } from "@unicum.gg/wargaming";
+import ROUTES from "@/constants/routes";
+
+// Reads the session + may start the Twitch OAuth link, both per-request.
+export const dynamic = "force-dynamic";
+
+// A link only completes on a login made moments ago. The game mod reaches this
+// route through a sign-in chain it opens itself (Wargaming's game token, then
+// our Wargaming sign-in), so its session is always fresh. A link someone else
+// crafted and got a logged-in reader to open finds an older session, and has
+// to go back through Wargaming's own confirmation screen first.
+const FRESH_LOGIN_MS = 10 * 60_000;
+
+/**
+ * Resume point that links the World of Tanks mod to the signed-in account, then
+ * chains into linking Twitch with the chat scope when that is still missing.
+ * The path carries the SHA-256 of a secret only the mod holds (see
+ * `@unicum.gg/core/game-link`); the mod polls `/api/game/me` with the secret to
+ * learn when this has happened, and closes its browser.
+ *
+ * `?region=` names the Wargaming portal to sign in on when the session is
+ * missing or stale: the mod knows which server the player is on.
+ */
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ hash: string }> },
+): Promise<Response> {
+  const home = new URL("/", env.NEXT_PUBLIC_APP_URL);
+  const { hash } = await params;
+  if (!GAME_TOKEN_HASH.test(hash)) return NextResponse.redirect(home);
+
+  const requestHeaders = await headers();
+  const session = await auth.api.getSession({ headers: requestHeaders });
+  const fresh =
+    session &&
+    Date.now() - new Date(session.session.createdAt).getTime() <
+      FRESH_LOGIN_MS;
+  if (!session?.user || !fresh) {
+    const asked = new URL(req.url).searchParams.get("region") ?? "";
+    const region = isRegion(asked) ? asked : Region.EU;
+    return NextResponse.redirect(
+      new URL(
+        ROUTES.AUTH_SIGN_IN(region, `/api/connect/game/${hash}`),
+        env.NEXT_PUBLIC_APP_URL,
+      ),
+    );
+  }
+
+  const linked = await linkGameClient(hash, session.user.id);
+  if (linked !== GameLinkResult.Linked) return NextResponse.redirect(home);
+
+  if ((await twitchChatAccess(session.user.id)) === TwitchChatAccess.Ready) {
+    return NextResponse.redirect(home);
+  }
+
+  // Link Twitch, or link it again to grant the chat scope: Better Auth updates
+  // the existing account row with the new token and scopes. Same cookie
+  // forwarding as `/api/connect/twitch`.
+  let linkResponse: Response;
+  try {
+    linkResponse = await auth.api.linkSocialAccount({
+      body: { provider: "twitch", callbackURL: "/", scopes: [TWITCH_CHAT_SCOPE] },
+      headers: requestHeaders,
+      asResponse: true,
+    });
+  } catch {
+    return NextResponse.redirect(home);
+  }
+  const { url } = (await linkResponse.json().catch(() => ({}))) as {
+    url?: string;
+  };
+  if (!url) return NextResponse.redirect(home);
+  const res = NextResponse.redirect(url);
+  const setCookies = (
+    linkResponse.headers as Headers & { getSetCookie?: () => string[] }
+  ).getSetCookie?.();
+  for (const cookie of setCookies ?? []) {
+    res.headers.append("set-cookie", cookie);
+  }
+  return res;
+}
