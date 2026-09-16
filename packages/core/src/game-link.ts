@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { and, eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { account, gameLinks, user } from "@unicum.gg/shared";
+import { account, gameLinks, streamers, user } from "@unicum.gg/shared";
 
 /**
  * The link between a World of Tanks client (the unicum.gg mod) and a unicum.gg
@@ -97,4 +97,19 @@ export async function wargamingAccountOf(
     .where(and(eq(account.userId, userId), eq(account.providerId, "wargaming")))
     .limit(1);
   return row?.accountId ?? null;
+}
+
+/**
+ * The Twitch channel of this user's WoT account, as the player page shows it,
+ * or null. A streamers row shares the Wargaming account's `region-id` key.
+ */
+export async function twitchLoginOf(userId: string): Promise<string | null> {
+  const wargaming = await wargamingAccountOf(userId);
+  if (!wargaming) return null;
+  const [row] = await db
+    .select({ twitchLogin: streamers.twitchLogin })
+    .from(streamers)
+    .where(eq(streamers.id, wargaming))
+    .limit(1);
+  return row?.twitchLogin ?? null;
 }
