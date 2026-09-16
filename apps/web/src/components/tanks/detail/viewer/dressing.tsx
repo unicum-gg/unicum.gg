@@ -42,6 +42,7 @@ export function DressingControls({
   cutNames,
   cut,
   onCut,
+  onCutHover,
   wardrobe,
   worn,
   onWear,
@@ -69,6 +70,8 @@ export function DressingControls({
   cutNames: Record<string, SkinFace>;
   cut: string | null;
   onCut: (name: string | null) => void;
+  /** Warm a 3D style the reader is looking at but has not picked. */
+  onCutHover: (name: string) => void;
   wardrobe: MirrorStyle[];
   worn: MirrorStyle | null;
   onWear: (style: MirrorStyle | null) => void;
@@ -104,6 +107,7 @@ export function DressingControls({
           cutNames={cutNames}
           cut={cut}
           onCut={onCut}
+          onCutHover={onCutHover}
           styles={wardrobe}
           worn={worn}
           onWear={onWear}

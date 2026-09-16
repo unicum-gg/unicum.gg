@@ -83,6 +83,7 @@ export function ViewerControls({
   cutNames,
   cut,
   onCut,
+  onCutHover,
   paintLock,
   wardrobe,
   worn,
@@ -144,6 +145,8 @@ export function ViewerControls({
   cutNames: Record<string, SkinFace>;
   cut: string | null;
   onCut: (name: string | null) => void;
+  /** Warm a 3D style the reader is looking at but has not picked. */
+  onCutHover: (name: string) => void;
   /** Why the game refuses to dress this vehicle, where it does. */
   paintLock: PaintLock | null;
   wardrobe: MirrorStyle[];
@@ -255,6 +258,7 @@ export function ViewerControls({
             cutNames={cutNames}
             cut={cut}
             onCut={onCut}
+            onCutHover={onCutHover}
             wardrobe={wardrobe}
             worn={worn}
             onWear={onWear}

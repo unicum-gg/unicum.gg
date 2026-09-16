@@ -1,7 +1,7 @@
 "use client";
 
 import { Paintbrush } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { assetUrl, type MirrorStyle } from "@unicum.gg/wargaming";
 import type { SkinFace } from "@/services/tank-viewer/styles";
 import { useTranslation } from "@/hooks/use-translation";
@@ -36,12 +36,21 @@ const SEASONS = ["summer", "winter", "desert"] as const;
  * a well-offered vehicle, and fetching that at once to show a dozen would be a
  * megabyte a reader never sees.
  */
+/**
+ * How long a reader has to stay on an entry before it is worth fetching.
+ *
+ * Short enough that the fetch is under way before the click lands on a list
+ * read at a normal pace, long enough that running down the list costs nothing.
+ */
+const DWELL = 160;
+
 export function WardrobePicker({
   className,
   cuts,
   cutNames,
   cut,
   onCut,
+  onCutHover,
   styles,
   worn,
   onWear,
@@ -56,6 +65,8 @@ export function WardrobePicker({
   cutNames: Record<string, SkinFace>;
   cut: string | null;
   onCut: (name: string | null) => void;
+  /** Fetch a 3D style the reader has settled on but not yet picked. */
+  onCutHover: (name: string) => void;
   styles: MirrorStyle[];
   /** The style on the vehicle, or null for the paint it left the factory in. */
   worn: MirrorStyle | null;
@@ -150,6 +161,7 @@ export function WardrobePicker({
                   key={folder}
                   active={cut === folder}
                   onClick={() => onCut(folder)}
+                  onWarm={() => onCutHover(folder)}
                   swatch={cutNames[folder]?.icon ?? `${STYLE_ICONS}/${folder}.png`}
                 >
                   {cutNames[folder]?.name ?? folder}
@@ -191,11 +203,17 @@ function Heading({ children }: { children: React.ReactNode }) {
 function Entry({
   active,
   onClick,
+  onWarm,
   swatch,
   children,
 }: {
   active: boolean;
   onClick: () => void;
+  /**
+   * Fetch what this entry would put on the tank, called once the reader has
+   * stayed on it. Absent on the entries that cost nothing to pick.
+   */
+  onWarm?: () => void;
   /** The client's own picture of this pattern, where it has one. */
   swatch?: string;
   children: React.ReactNode;
@@ -205,10 +223,34 @@ function Entry({
   // never misses.
   const [missing, setMissing] = useState(false);
   const shown = swatch && !missing;
+  // **Passing over is not choosing.** A reader running down a list of four
+  // styles crosses three of them on the way, and fetching six megabytes for
+  // each would spend more than picking them all. A pause is what separates
+  // looking from passing, and it is the pause that is paid for.
+  const dwell = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const stay = () => {
+    if (!onWarm || dwell.current) return;
+    dwell.current = setTimeout(() => {
+      dwell.current = null;
+      onWarm();
+    }, DWELL);
+  };
+  const leave = () => {
+    if (!dwell.current) return;
+    clearTimeout(dwell.current);
+    dwell.current = null;
+  };
+  useEffect(() => leave, []);
   return (
     <button
       type="button"
       onClick={onClick}
+      onPointerEnter={stay}
+      onPointerLeave={leave}
+      // A reader on the keyboard never hovers, and arriving on an entry is the
+      // same intent: it is the one they are about to choose.
+      onFocus={stay}
+      onBlur={leave}
       aria-pressed={active}
       className={`relative flex w-full items-center overflow-hidden px-3 text-left text-sm transition-colors ${
         shown ? "py-2.5" : "py-1.5"

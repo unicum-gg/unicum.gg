@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { warmSkin } from "@/components/tanks/detail/viewer/warming";
 
 import { preferences } from "@/components/tanks/detail/viewer/preferences";
 import type { Definition } from "@/services/tank-viewer";
@@ -101,6 +102,18 @@ export function useHeroDress({
     },
     [code],
   );
+  /**
+   * Pull a 3D style into the browser cache before it is picked.
+   *
+   * Stamped with this vehicle like `cutInto` is, and for the same reason: the
+   * folder means nothing without the tank it hangs under.
+   */
+  const warmCut = useCallback(
+    (name: string) => {
+      void warmSkin(code, name);
+    },
+    [code],
+  );
   const wear = useCallback((style: MirrorStyle | null) => {
     setWorn(style);
     if (style) setCut(null);
@@ -150,6 +163,7 @@ export function useHeroDress({
     cutNames,
     setCutNames,
     cutInto,
+    warmCut,
     wardrobe,
     setWardrobe,
     worn,

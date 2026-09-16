@@ -377,6 +377,7 @@ export function TankViewer({
               cutNames={dressing.cutNames}
               cut={dressing.skin}
               onCut={dressing.cutInto}
+              onCutHover={dressing.warmCut}
               paintLock={paintLock ?? null}
               wardrobe={dressing.wardrobe}
               worn={dressing.worn}
