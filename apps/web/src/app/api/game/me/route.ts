@@ -1,5 +1,6 @@
+import { unlinkGameClient } from "@unicum.gg/core/game-link";
 import { twitchChatAccess } from "@unicum.gg/core/twitch/chat";
-import { gameClientUser } from "@/services/game";
+import { gameClientSecret, gameClientUser } from "@/services/game";
 
 export const dynamic = "force-dynamic";
 
@@ -18,4 +19,13 @@ export async function GET(req: Request): Promise<Response> {
     { name: client.name, twitch: await twitchChatAccess(client.userId) },
     { headers: { "cache-control": "no-store" } },
   );
+}
+
+/** Unlink the game mod making the request: its secret acts for no account any more. */
+export async function DELETE(req: Request): Promise<Response> {
+  const secret = gameClientSecret(req);
+  if (!secret || !(await unlinkGameClient(secret))) {
+    return Response.json({ error: "not_linked" }, { status: 401 });
+  }
+  return new Response(null, { status: 204 });
 }

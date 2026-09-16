@@ -73,3 +73,13 @@ export async function findGameClientUser(
     .limit(1);
   return owner ? { userId: row.userId, name: owner.name } : null;
 }
+
+/** Forget the link of the client holding this secret; false when there was none. */
+export async function unlinkGameClient(token: string): Promise<boolean> {
+  if (!GAME_TOKEN.test(token)) return false;
+  const rows = await db
+    .delete(gameLinks)
+    .where(eq(gameLinks.tokenHash, hashGameToken(token)))
+    .returning({ userId: gameLinks.userId });
+  return rows.length > 0;
+}

@@ -36,7 +36,8 @@ const FRESH_LOGIN_MS = 10 * 60_000;
  * Without a fresh session it signs in first (`services/game/sign-in`), with the
  * game's Wargaming web token from the URL fragment when there is one, so the
  * player types nothing. `?region=` names the Wargaming portal: the mod knows
- * which server the player is on.
+ * which server the player is on. `?twitch=0` links the account alone, for the
+ * mod's Account section, and never goes on to Twitch.
  */
 export async function GET(
   req: Request,
@@ -45,6 +46,8 @@ export async function GET(
   const home = new URL("/", env.NEXT_PUBLIC_APP_URL);
   const { hash } = await params;
   if (!GAME_TOKEN_HASH.test(hash)) return NextResponse.redirect(home);
+  const query = new URL(req.url).searchParams;
+  const withTwitch = query.get("twitch") !== "0";
 
   const requestHeaders = await headers();
   const session = await auth.api.getSession({ headers: requestHeaders });
@@ -53,9 +56,9 @@ export async function GET(
     Date.now() - new Date(session.session.createdAt).getTime() <
       FRESH_LOGIN_MS;
   if (!session?.user || !fresh) {
-    const asked = new URL(req.url).searchParams.get("region") ?? "";
+    const asked = query.get("region") ?? "";
     const region = isRegion(asked) ? asked : Region.EU;
-    const callbackURL = `/api/connect/game/${hash}`;
+    const callbackURL = `/api/connect/game/${hash}${withTwitch ? "" : "?twitch=0"}`;
     return (
       (await gameSignInResponse(requestHeaders, region, callbackURL)) ??
       NextResponse.redirect(
@@ -67,7 +70,10 @@ export async function GET(
   const linked = await linkGameClient(hash, session.user.id);
   if (linked !== GameLinkResult.Linked) return NextResponse.redirect(home);
 
-  if ((await twitchChatAccess(session.user.id)) === TwitchChatAccess.Ready) {
+  if (
+    !withTwitch ||
+    (await twitchChatAccess(session.user.id)) === TwitchChatAccess.Ready
+  ) {
     return NextResponse.redirect(home);
   }
 
