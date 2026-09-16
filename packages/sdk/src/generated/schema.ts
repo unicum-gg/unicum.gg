@@ -1319,6 +1319,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/twitch/{login}/badges": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Twitch chat badges
+         * @description Every badge a chat message in this Twitch channel can carry, with its images: Twitch's global badges, with the channel's own subscriber and bits images in place of the global ones they replace. A chat client receives only `set/version` pairs with each message (the IRC `badges` tag), which this resolves. 404 when the login is not a Twitch channel. Cached one hour.
+         */
+        get: operations["get-twitch-{login}-badges"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/server/stats": {
         parameters: {
             query?: never;
@@ -5748,6 +5768,26 @@ export interface components {
          * @enum {string}
          */
         tournamentTeamStatusField: "forming" | "confirmed" | "disqualified";
+        /** @description A chat badge, keyed the way a chat message's `badges` tag names it: `set/version`. */
+        TwitchChatBadge: {
+            /** @description Badge set, e.g. `subscriber`. */
+            set: string;
+            /** @description Version within the set, e.g. `12`. */
+            version: string;
+            title: string;
+            /** @description 18x18 PNG. */
+            image1x: string;
+            /** @description 36x36 PNG. */
+            image2x: string;
+            /** @description 72x72 PNG. */
+            image4x: string;
+            /** @description Whether the image is the channel's own rather than Twitch's global one. */
+            channel: boolean;
+        };
+        TwitchChatBadgesResponse: {
+            login: string;
+            badges: components["schemas"]["TwitchChatBadge"][];
+        };
         /** @description What one vehicle class accounts for across the region. */
         TypeShare: {
             /**
@@ -7742,6 +7782,29 @@ export interface operations {
         };
         requestBody?: never;
         responses: never;
+    };
+    "get-twitch-{login}-badges": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Twitch channel login, e.g. `license__`. */
+                login: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TwitchChatBadgesResponse"];
+                };
+            };
+        };
     };
     "get-{region}-server-stats": {
         parameters: {

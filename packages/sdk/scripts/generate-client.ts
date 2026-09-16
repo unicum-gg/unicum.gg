@@ -150,6 +150,8 @@ const GLOBALS: Global[] = [
     client: "GlossaryTermClient",
     root: "detail",
   },
+  // A Twitch channel, by login: `unicum.twitch("license__").badges()`.
+  { name: "twitch", key: "login", client: "TwitchChannelClient" },
 ];
 /** Region-scoped view prefixes (before `{region}`): `/og/{region}/…`. */
 const PREFIXES = ["og"] as const;

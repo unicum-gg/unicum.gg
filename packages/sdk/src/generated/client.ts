@@ -439,6 +439,24 @@ class GlossaryTermClient {
   }
 }
 
+/** A single twitch entry: unicum.twitch("..."). */
+class TwitchChannelClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly login: string,
+  ) {}
+
+  /** Twitch chat badges */
+  badges() {
+    const path = { login: this.login };
+    return handle(
+      buildUrl(this.baseUrl, "/twitch/{login}/badges", path),
+      () => this.api.GET("/twitch/{login}/badges", { params: { path } }),
+    );
+  }
+}
+
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   /** Compare players */
   compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
@@ -1087,6 +1105,10 @@ type GlossaryNamespace = ((slug: string) => GlossaryTermClient) & {
   search(query: QueryOf<"/glossary/search">): RequestHandle<Data<"/glossary/search">>;
 };
 
+type TwitchNamespace = ((login: string) => TwitchChannelClient) & {
+
+};
+
 /**
  * A fluent, typed client for the unicum.gg public API.
  *
@@ -1222,6 +1244,14 @@ export class Unicum {
       handle(buildUrl(this.baseUrl, "/glossary/search", undefined, query), () =>
         this.api.GET("/glossary/search", { params: { query } }),
       );
+    return ns;
+  }
+
+  /** Global (not region-scoped) twitch. */
+  get twitch(): TwitchNamespace {
+    const ns = ((login: string) =>
+      new TwitchChannelClient(this.api, this.baseUrl, login)) as TwitchNamespace;
+
     return ns;
   }
 }
