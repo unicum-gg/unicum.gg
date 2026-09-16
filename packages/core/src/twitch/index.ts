@@ -293,3 +293,73 @@ export async function getWotStreamsByLogin(
   if (!wotId) return [];
   return streams.filter((s) => s.gameId === wotId);
 }
+
+/** One chat badge image, as a chat message's `badges` tag names it (`set/version`). */
+export type TwitchChatBadge = {
+  set: string;
+  version: string;
+  title: string;
+  /** 18x18. */
+  image1x: string;
+  /** 36x36. */
+  image2x: string;
+  /** 72x72. */
+  image4x: string;
+  /** True for the channel's own image (a subscriber tier, a bits badge). */
+  channel: boolean;
+};
+
+type RawBadgeSet = {
+  set_id: string;
+  versions: {
+    id: string;
+    title: string;
+    image_url_1x: string;
+    image_url_2x: string;
+    image_url_4x: string;
+  }[];
+};
+
+function mapBadgeSets(sets: RawBadgeSet[], channel: boolean): TwitchChatBadge[] {
+  return sets.flatMap((set) =>
+    set.versions.map((v) => ({
+      set: set.set_id,
+      version: v.id,
+      title: v.title,
+      image1x: v.image_url_1x,
+      image2x: v.image_url_2x,
+      image4x: v.image_url_4x,
+      channel,
+    })),
+  );
+}
+
+/**
+ * Every chat badge a message in this channel can carry: Twitch's global ones,
+ * with the channel's own images in place of the global ones they replace (a
+ * channel's subscriber tiers are `subscriber/0`, `subscriber/3`... like the
+ * global default). A chat client only receives `set/version` pairs with each
+ * message, so this is what turns them into images.
+ *
+ * Null when the login is not a Twitch channel, or the Twitch feature is off.
+ */
+export async function getChatBadges(
+  login: string,
+): Promise<TwitchChatBadge[] | null> {
+  if (!isTwitchEnabled()) return null;
+  const [user] = await getTwitchUsersByLogin([login]);
+  if (!user) return null;
+  const params = new URLSearchParams({ broadcaster_id: user.id });
+  const [global, own] = await Promise.all([
+    helix<{ data: RawBadgeSet[] }>("/chat/badges/global", new URLSearchParams()),
+    helix<{ data: RawBadgeSet[] }>("/chat/badges", params),
+  ]);
+  const byKey = new Map<string, TwitchChatBadge>();
+  for (const badge of [
+    ...mapBadgeSets(global.data, false),
+    ...mapBadgeSets(own.data, true),
+  ]) {
+    byKey.set(`${badge.set}/${badge.version}`, badge);
+  }
+  return [...byKey.values()];
+}
