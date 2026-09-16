@@ -14,15 +14,16 @@ import {
 import { env } from "@unicum.gg/shared";
 import { isRegion, Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
+import { gameSignInResponse } from "@/services/game/sign-in";
 
 // Reads the session + may start the Twitch OAuth link, both per-request.
 export const dynamic = "force-dynamic";
 
-// A link only completes on a login made moments ago. The game mod reaches this
-// route through a sign-in chain it opens itself (Wargaming's game token, then
-// our Wargaming sign-in), so its session is always fresh. A link someone else
-// crafted and got a logged-in reader to open finds an older session, and has
-// to go back through Wargaming's own confirmation screen first.
+// A link only completes on a login made moments ago. The game mod opens this
+// route in the player's browser and the sign-in below runs first, so its
+// session is always fresh. A link someone else crafted and got a logged-in
+// reader to open finds an older session, and has to go back through
+// Wargaming's own confirmation screen first.
 const FRESH_LOGIN_MS = 10 * 60_000;
 
 /**
@@ -30,10 +31,12 @@ const FRESH_LOGIN_MS = 10 * 60_000;
  * chains into linking Twitch with the chat scope when that is still missing.
  * The path carries the SHA-256 of a secret only the mod holds (see
  * `@unicum.gg/core/game-link`); the mod polls `/api/game/me` with the secret to
- * learn when this has happened, and closes its browser.
+ * learn when this has happened.
  *
- * `?region=` names the Wargaming portal to sign in on when the session is
- * missing or stale: the mod knows which server the player is on.
+ * Without a fresh session it signs in first (`services/game/sign-in`), with the
+ * game's Wargaming web token from the URL fragment when there is one, so the
+ * player types nothing. `?region=` names the Wargaming portal: the mod knows
+ * which server the player is on.
  */
 export async function GET(
   req: Request,
@@ -52,11 +55,12 @@ export async function GET(
   if (!session?.user || !fresh) {
     const asked = new URL(req.url).searchParams.get("region") ?? "";
     const region = isRegion(asked) ? asked : Region.EU;
-    return NextResponse.redirect(
-      new URL(
-        ROUTES.AUTH_SIGN_IN(region, `/api/connect/game/${hash}`),
-        env.NEXT_PUBLIC_APP_URL,
-      ),
+    const callbackURL = `/api/connect/game/${hash}`;
+    return (
+      (await gameSignInResponse(requestHeaders, region, callbackURL)) ??
+      NextResponse.redirect(
+        new URL(ROUTES.AUTH_SIGN_IN(region, callbackURL), env.NEXT_PUBLIC_APP_URL),
+      )
     );
   }
 
