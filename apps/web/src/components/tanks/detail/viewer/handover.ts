@@ -57,7 +57,15 @@ let held: Held | null = null;
  * not race. It is already the new one by the time a page is torn down, since
  * that teardown is the transition committing.
  */
-const TANK_PAGE = /^\/(?:[a-z]{2,4}\/)?tanks\/[^/]+/;
+// **Both prefixes, because a tank page can carry two.** The region has always
+// been in the path and the language joined it: `/tanks/is-7` is also
+// `/eu/tanks/is-7` and `/fr/eu/tanks/is-7`, and the same page in Spanish on NA
+// is three segments deep. Written for one optional prefix, this matched an
+// English reader's URL and no other, so every reader browsing in a language
+// lost the held frame: the hangar went black between two vehicles, and between
+// two 3D styles on the same vehicle, which is where it shows most since
+// nothing about the page changed.
+const TANK_PAGE = /^\/(?:[a-z]{2,4}(?:-[a-z]{2,4})?\/){0,2}tanks\/[^/]+/;
 let fading: ReturnType<typeof setTimeout> | null = null;
 /** Drops the sheet if no vehicle arrives to draw over it. */
 let abandoned: ReturnType<typeof setTimeout> | null = null;
