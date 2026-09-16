@@ -1,8 +1,8 @@
 {
   "as-it-was-built": "В исходном виде",
-  "cut": "Вырезать",
+  "cut": "3D-стиль",
   "no-style": "Без стиля",
   "nothing-by-that-name": "Ничего с таким именем.",
-  "paint": "Окраска",
+  "paint": "2D-стиль",
   "search-n-styles": "Поиск стилей: {count}"
 }

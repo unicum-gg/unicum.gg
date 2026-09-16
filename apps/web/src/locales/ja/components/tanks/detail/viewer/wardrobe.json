@@ -1,8 +1,8 @@
 {
   "as-it-was-built": "製造時の状態",
-  "cut": "カット",
+  "cut": "3Dスタイル",
   "no-style": "スタイルなし",
   "nothing-by-that-name": "その名前のものはありません。",
-  "paint": "ペイント",
+  "paint": "2Dスタイル",
   "search-n-styles": "{count}個のスタイルを検索"
 }

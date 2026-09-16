@@ -1,8 +1,8 @@
 {
   "as-it-was-built": "제작 당시 모습",
-  "cut": "잘라내기",
+  "cut": "3D 스타일",
   "no-style": "스타일 없음",
   "nothing-by-that-name": "해당 이름의 항목이 없습니다.",
-  "paint": "페인트",
+  "paint": "2D 스타일",
   "search-n-styles": "스타일 {count}개 검색"
 }

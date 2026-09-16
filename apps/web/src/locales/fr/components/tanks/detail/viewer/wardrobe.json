@@ -1,8 +1,8 @@
 {
   "as-it-was-built": "Dans sa configuration d’origine",
-  "cut": "Couper",
+  "cut": "Style 3D",
   "no-style": "Pas de style",
   "nothing-by-that-name": "Aucun élément ne porte ce nom.",
-  "paint": "Peindre",
+  "paint": "Style 2D",
   "search-n-styles": "Chercher parmi {count} styles"
 }
