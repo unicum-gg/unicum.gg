@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { gameLinks, user } from "@unicum.gg/shared";
+import { account, gameLinks, user } from "@unicum.gg/shared";
 
 /**
  * The link between a World of Tanks client (the unicum.gg mod) and a unicum.gg
@@ -82,4 +82,19 @@ export async function unlinkGameClient(token: string): Promise<boolean> {
     .where(eq(gameLinks.tokenHash, hashGameToken(token)))
     .returning({ userId: gameLinks.userId });
   return rows.length > 0;
+}
+
+/**
+ * The Wargaming account (`<region>-<account id>`, the key the Wargaming sign-in
+ * stores) a unicum.gg user signed in with, or null.
+ */
+export async function wargamingAccountOf(
+  userId: string,
+): Promise<string | null> {
+  const [row] = await db
+    .select({ accountId: account.accountId })
+    .from(account)
+    .where(and(eq(account.userId, userId), eq(account.providerId, "wargaming")))
+    .limit(1);
+  return row?.accountId ?? null;
 }

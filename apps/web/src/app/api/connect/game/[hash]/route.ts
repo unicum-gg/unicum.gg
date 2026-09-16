@@ -5,6 +5,7 @@ import {
   GAME_TOKEN_HASH,
   GameLinkResult,
   linkGameClient,
+  wargamingAccountOf,
 } from "@unicum.gg/core/game-link";
 import {
   TWITCH_CHAT_SCOPE,
@@ -37,7 +38,14 @@ const FRESH_LOGIN_MS = 10 * 60_000;
  * game's Wargaming web token from the URL fragment when there is one, so the
  * player types nothing. `?region=` names the Wargaming portal: the mod knows
  * which server the player is on. `?twitch=0` links the account alone, for the
- * mod's Account section, and never goes on to Twitch.
+ * mod's account card, and never goes on to Twitch.
+ *
+ * `?account=` is the Wargaming account id the game is logged in with: the
+ * session must be that account's, or the browser still holds another one
+ * (someone else's, or the player's other account) and the game would be
+ * linked to it. A mismatch signs in again, with the game's token when the
+ * fragment carries it, which can only sign in the game's own account; a second
+ * mismatch (`&again=1`) gives up rather than loop.
  */
 export async function GET(
   req: Request,
@@ -48,6 +56,20 @@ export async function GET(
   if (!GAME_TOKEN_HASH.test(hash)) return NextResponse.redirect(home);
   const query = new URL(req.url).searchParams;
   const withTwitch = query.get("twitch") !== "0";
+  const asked = query.get("region") ?? "";
+  const region = isRegion(asked) ? asked : Region.EU;
+  const gameAccount = /^\d+$/.test(query.get("account") ?? "")
+    ? `${region}-${query.get("account")}`
+    : null;
+  const again = query.get("again") === "1";
+
+  function resume(retry: boolean): string {
+    const next = new URLSearchParams({ region });
+    if (!withTwitch) next.set("twitch", "0");
+    if (gameAccount) next.set("account", gameAccount.slice(region.length + 1));
+    if (retry) next.set("again", "1");
+    return `/api/connect/game/${hash}?${next.toString()}`;
+  }
 
   const requestHeaders = await headers();
   const session = await auth.api.getSession({ headers: requestHeaders });
@@ -55,10 +77,13 @@ export async function GET(
     session &&
     Date.now() - new Date(session.session.createdAt).getTime() <
       FRESH_LOGIN_MS;
-  if (!session?.user || !fresh) {
-    const asked = query.get("region") ?? "";
-    const region = isRegion(asked) ? asked : Region.EU;
-    const callbackURL = `/api/connect/game/${hash}${withTwitch ? "" : "?twitch=0"}`;
+  const wrongAccount =
+    session?.user && gameAccount
+      ? (await wargamingAccountOf(session.user.id)) !== gameAccount
+      : false;
+  if (wrongAccount && again) return NextResponse.redirect(home);
+  if (!session?.user || !fresh || wrongAccount) {
+    const callbackURL = resume(wrongAccount || again);
     return (
       (await gameSignInResponse(requestHeaders, region, callbackURL)) ??
       NextResponse.redirect(
