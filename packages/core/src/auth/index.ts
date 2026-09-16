@@ -5,6 +5,7 @@ import { db } from "@unicum.gg/core/db";
 import { account as accountTable, env } from "@unicum.gg/shared";
 import { getTwitchUsersById, isTwitchEnabled } from "@unicum.gg/core/twitch";
 import { upsertStreamer } from "@unicum.gg/core/twitch/streamers";
+import { refreshTwitchToken } from "@unicum.gg/core/twitch/refresh";
 import { isRegion } from "@unicum.gg/wargaming";
 import { wargaming } from "./wargaming";
 
@@ -44,7 +45,8 @@ export const auth = betterAuth({
   },
   // Social providers are offered only for LINKING (a logged-in WG player
   // connecting an account), never as a primary login. Absent creds → omitted.
-  //  - twitch: connect a channel (live rail/badges).
+  //  - twitch: connect a channel (live rail/badges), and with `user:write:chat`
+  //    granted, let the game mod write to that channel's chat.
   //  - discord: the single canonical Discord identity link, used by the supporter
   //    role. `guilds.join` lets us add the user to our server before the bot grants
   //    the role; `identify` reads their id. Their token is stored (encrypted) so
@@ -55,6 +57,8 @@ export const auth = betterAuth({
           twitch: {
             clientId: env.TWITCH_CLIENT_ID as string,
             clientSecret: env.TWITCH_CLIENT_SECRET as string,
+            // Better Auth's built-in refresh cannot read Twitch's answer.
+            refreshAccessToken: refreshTwitchToken,
           },
         }
       : {}),
