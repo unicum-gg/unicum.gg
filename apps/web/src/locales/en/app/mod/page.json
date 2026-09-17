@@ -30,5 +30,6 @@
   "subtitle": "The {name} mod shows each player’s WN8 or WNX and the languages their clan speaks, in battle, in the battle results and in the garage, and brings your Twitch chat into the game.",
   "title": "World of Tanks ratings mod",
   "twitch": "Twitch, for streamers",
-  "twitch-text": "Your Twitch chat, badges included, in the battle chat and in a garage panel. Write back from the battle chat’s TO TWITCH channel or the panel, without leaving the game."
+  "twitch-text": "Your Twitch chat, badges included, in the battle chat and in a garage panel. Write back from the battle chat’s TO TWITCH channel or the panel, without leaving the game.",
+  "what-it-sends": "What the mod sends, and to whom"
 }
