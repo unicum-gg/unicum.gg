@@ -3,6 +3,7 @@ import type {
   BreadcrumbList,
   DefinedTerm,
   DefinedTermSet,
+  FAQPage,
   ItemList,
   Organization,
   Person,
@@ -229,6 +230,24 @@ export function itemListSchema(args: {
       position: index + 1,
       name: item.name,
       url: item.url,
+    })),
+  };
+}
+
+/**
+ * A page's questions and answers as a `FAQPage`, for the FAQ rich result. The
+ * pairs must be the ones the page renders, word for word.
+ */
+export function faqSchema(
+  items: { question: string; answer: string }[],
+): WithContext<FAQPage> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
 }

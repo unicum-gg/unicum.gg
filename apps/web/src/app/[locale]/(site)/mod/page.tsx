@@ -23,7 +23,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
-import { breadcrumbSchema } from "@/lib/schema-org";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
@@ -71,15 +71,18 @@ const FEATURES = [
 ];
 
 // The listing's own visuals (tools/visuals in the mod repository). The garage
-// is a capture of the client; the battle screens are drawn from the mod's
-// badges, flags and styles, with invented players.
+// is a capture of the client, so it leads; the battle screens are drawn from
+// the mod's badges, flags and styles, with invented players. Each caption is
+// also the image's alt text.
 const SCREENSHOTS = [
-  { src: "/mod/3-battle-players.jpg", alt: "screenshot-battle-players" },
-  { src: "/mod/4-battle-markers.jpg", alt: "screenshot-battle-markers" },
-  { src: "/mod/5-battle-twitch-chat.jpg", alt: "screenshot-twitch-chat" },
-  { src: "/mod/1-garage.jpg", alt: "screenshot-garage" },
-  { src: "/mod/2-garage-cards.jpg", alt: "screenshot-garage-cards" },
+  { src: "/mod/1-garage.jpg", caption: "screenshot-garage" },
+  { src: "/mod/3-battle-players.jpg", caption: "screenshot-battle-players" },
+  { src: "/mod/4-battle-markers.jpg", caption: "screenshot-battle-markers" },
+  { src: "/mod/5-battle-twitch-chat.jpg", caption: "screenshot-twitch-chat" },
+  { src: "/mod/2-garage-cards.jpg", caption: "screenshot-garage-cards" },
 ];
+
+const FAQ = ["allowed", "ratings", "servers", "free", "hide"];
 
 const INSTALL_STEPS = ["install-step-1", "install-step-2", "install-step-3"];
 
@@ -92,10 +95,16 @@ export default async function ModPage({
 }) {
   const { locale } = await params;
   const { t } = await getTranslation("app/mod/page", locale);
+  const faq = FAQ.map((key) => ({
+    key,
+    question: t(`faq-${key}-question`, { name: APP.NAME }),
+    answer: t(`faq-${key}-answer`, { name: APP.NAME, version: GAME_VERSION }),
+  }));
 
   return (
     <div className="mx-auto w-full max-w-7xl">
       <JsonLd data={softwareSchema(t("description", { name: APP.NAME }))} />
+      <JsonLd data={faqSchema(faq)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: APP.NAME, url: APP.URL },
@@ -158,20 +167,20 @@ export default async function ModPage({
         <PanelHeader>
           <PanelTitle>{t("see-it-in-action")}</PanelTitle>
         </PanelHeader>
-        <PanelContent className="grid gap-4 md:grid-cols-2">
-          {SCREENSHOTS.map(({ src, alt }, index) => (
-            <Image
-              key={src}
-              src={src}
-              alt={t(alt)}
-              width={1920}
-              height={1080}
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className={cn(
-                "aspect-video w-full rounded-md border border-fd-border object-cover",
-                index === 0 && "md:col-span-2",
-              )}
-            />
+        <PanelContent className="grid gap-6 md:grid-cols-2">
+          {SCREENSHOTS.map(({ src, caption }, index) => (
+            <figure key={src} className={cn("space-y-2", index === 0 && "md:col-span-2")}>
+              <Image
+                src={src}
+                alt={t(caption)}
+                width={1920}
+                height={1080}
+                sizes={index === 0 ? "100vw" : "(min-width: 768px) 50vw, 100vw"}
+                priority={index === 0}
+                className="aspect-video w-full rounded-md border border-fd-border object-cover"
+              />
+              <figcaption className={styles.mutedDescription}>{t(caption)}</figcaption>
+            </figure>
           ))}
         </PanelContent>
       </Panel>
@@ -209,6 +218,22 @@ export default async function ModPage({
               {t("source-code")}
             </a>
           </section>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>{t("faq")}</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="grid gap-6 md:grid-cols-2">
+          {faq.map(({ key, question, answer }) => (
+            <section key={key} className="space-y-2">
+              <h3 className="font-semibold">{question}</h3>
+              <p className={styles.mutedDescription}>{answer}</p>
+            </section>
+          ))}
         </PanelContent>
       </Panel>
     </div>
