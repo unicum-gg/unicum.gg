@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Játékos-, klán- és tankstatisztikák perjeles parancsokként"
     },
-    "mod": {
-      "label": "Játékmód",
-      "description": "Értékelések és nyelvek közvetlenül a World of Tanksben"
-    },
     "mcp": {
       "label": "MCP szerver",
       "description": "Kapcsold össze a Claude-ot, a ChatGPT-t vagy bármely MCP-klienst"

@@ -15,9 +15,6 @@ const ROUTES = {
   // - MCP server landing page
   MCP: "/mcp",
 
-  // - World of Tanks client mod landing page
-  MOD: "/mod",
-
   // - Auth: Wargaming.net ID sign-in. The region rides as a query param (WG
   //   rejects a query string on the callback path, not on this start URL).
   //   `callbackURL` is the same-origin path to land on once logged in (e.g.

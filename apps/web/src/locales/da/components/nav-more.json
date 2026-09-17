@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Spiller-, klan- og kampvognsstatistik som slash-kommandoer"
     },
-    "mod": {
-      "label": "Spiltilstand",
-      "description": "Vurderinger og sprog direkte i World of Tanks"
-    },
     "mcp": {
       "label": "MCP server",
       "description": "Forbind Claude, ChatGPT eller en MCP-klient"

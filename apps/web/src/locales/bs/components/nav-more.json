@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Statistike igrača, klanova i tenkova kao slash naredbe"
     },
-    "mod": {
-      "label": "mod igre",
-      "description": "Rejtingzi i jezici direktno u World of Tanks"
-    },
     "mcp": {
       "label": "MCP server",
       "description": "Povežite Claude, ChatGPT ili bilo koji MCP klijent"

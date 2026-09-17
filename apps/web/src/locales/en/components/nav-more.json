@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Player, clan and tank stats as slash commands"
     },
-    "mod": {
-      "label": "Game mod",
-      "description": "Ratings and languages right in World of Tanks"
-    },
     "mcp": {
       "label": "MCP server",
       "description": "Connect Claude, ChatGPT or any MCP client"

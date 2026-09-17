@@ -13,10 +13,6 @@
       "label": "Bot Discord",
       "description": "Statistiques des joueurs, des clans et des chars sous forme de commandes slash"
     },
-    "mod": {
-      "label": "mode de jeu",
-      "description": "Classements et langues directement dans World of Tanks"
-    },
     "mcp": {
       "label": "Serveur MCP",
       "description": "Connectez Claude, ChatGPT ou tout autre client MCP"

@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Istatistika ng manlalaro, klano at tank bilang slash command"
     },
-    "mod": {
-      "label": "Mode ng laro",
-      "description": "Mga rating at wika direkta sa World of Tanks"
-    },
     "mcp": {
       "label": "MCP server",
       "description": "Ikonekta ang Claude, ChatGPT o anumang MCP client"

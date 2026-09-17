@@ -16,9 +16,6 @@ const APP = {
     DISCORD: "https://discord.gg/Hqbfb8YPbU",
     GITHUB: `https://github.com/${APP_IDENTITY.REPO}`,
     STATUS: "https://status.unicum.gg/",
-    // The mod's page on Wargaming's mod hub, where the player downloads it.
-    MOD_DOWNLOAD: "https://wgmods.net/7928",
-    MOD_SOURCE: "https://github.com/unicum-gg/unicum.gg-mod",
   },
 };
 

@@ -67,11 +67,10 @@ export function footerColumns(
     { title: t("columns.tanks"), links: tanks.links },
     { title: t("columns.maps"), links: maps.links },
     {
-      // The ways to read our data without opening the site.
+      // The three ways to read our data without opening the site.
       title: t("columns.integrations"),
       links: [
         { label: t("links.bot"), href: ROUTES.BOT },
-        { label: t("links.mod"), href: ROUTES.MOD },
         { label: t("links.mcp"), href: ROUTES.MCP },
         { label: t("links.docs"), href: ROUTES.DOCS },
       ],

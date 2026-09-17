@@ -13,10 +13,6 @@
       "label": "Bot Discord",
       "description": "Statystyki graczy, klanów i czołgów jako polecenia slash"
     },
-    "mod": {
-      "label": "Tryb gry",
-      "description": "Oceny i języki prosto w World of Tanks"
-    },
     "mcp": {
       "label": "Serwer MCP",
       "description": "Połącz Claude, ChatGPT lub dowolnego klienta MCP"

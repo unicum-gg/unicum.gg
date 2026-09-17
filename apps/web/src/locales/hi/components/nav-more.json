@@ -13,10 +13,6 @@
       "label": "Discord बॉट",
       "description": "स्लैश कमांड के रूप में खिलाड़ी, क्लान और टैंक आँकड़े"
     },
-    "mod": {
-      "label": "गेम मोड",
-      "description": "World of Tanks में सीधे रेटिंग्स और भाषाएँ"
-    },
     "mcp": {
       "label": "MCP सर्वर",
       "description": "Claude, ChatGPT या किसी MCP क्लाइंट से कनेक्ट करें"

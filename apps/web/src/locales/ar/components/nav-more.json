@@ -13,10 +13,6 @@
       "label": "بوت ديسكورد",
       "description": "إحصائيات اللاعبين والقبائل والدبابات كأوامر slash"
     },
-    "mod": {
-      "label": "طور اللعبة",
-      "description": "التقييمات واللغات مباشرةً داخل World of Tanks"
-    },
     "mcp": {
       "label": "خادم MCP",
       "description": "وصّل Claude أو ChatGPT أو أي عميل MCP"

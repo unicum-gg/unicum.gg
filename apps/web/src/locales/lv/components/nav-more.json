@@ -13,10 +13,6 @@
       "label": "Discord bots",
       "description": "Spēlētāju, klanu un tanku statistika kā slīpsvītras komandas"
     },
-    "mod": {
-      "label": "Spēles režīms",
-      "description": "Vērtējumi un valodas tieši World of Tanks"
-    },
     "mcp": {
       "label": "MCP servers",
       "description": "Savienot Claude, ChatGPT vai jebkuru MCP klientu"

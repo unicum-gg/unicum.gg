@@ -6,7 +6,6 @@ import {
   HeartIcon,
   PlugsConnectedIcon,
   PulseIcon,
-  PuzzlePieceIcon,
   RankingIcon,
   RobotIcon,
   SealCheckIcon,
@@ -56,12 +55,6 @@ export function NavMore() {
           description: t("items.bot.description"),
           url: ROUTES.BOT,
           icon: <RobotIcon />,
-        },
-        {
-          text: t("items.mod.label"),
-          description: t("items.mod.description"),
-          url: ROUTES.MOD,
-          icon: <PuzzlePieceIcon />,
         },
         {
           text: t("items.mcp.label"),

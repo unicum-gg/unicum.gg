@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Statistieken van spelers, clans en tanks als slashcommando’s"
     },
-    "mod": {
-      "label": "Spelmodus",
-      "description": "Beoordelingen en talen direct in World of Tanks"
-    },
     "mcp": {
       "label": "MCP server",
       "description": "Koppel Claude, ChatGPT of een andere MCP-client"

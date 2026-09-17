@@ -13,10 +13,6 @@
       "label": "Discord 机器人",
       "description": "通过斜杠命令查询玩家、军团和坦克数据"
     },
-    "mod": {
-      "label": "游戏模式",
-      "description": "在 World of Tanks 中直接显示评分和语言"
-    },
     "mcp": {
       "label": "MCP 服务器",
       "description": "连接 Claude、ChatGPT 或任何 MCP 客户端"

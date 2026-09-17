@@ -13,10 +13,6 @@
       "label": "Bot do Discord",
       "description": "Estatísticas de jogadores, clãs e tanques através de comandos de barra"
     },
-    "mod": {
-      "label": "Modo de jogo",
-      "description": "Classificações e idiomas diretamente no World of Tanks"
-    },
     "mcp": {
       "label": "Servidor MCP",
       "description": "Ligue o Claude, o ChatGPT ou qualquer cliente MCP"

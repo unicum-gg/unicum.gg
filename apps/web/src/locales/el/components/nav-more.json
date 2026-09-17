@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Στατιστικά παίκτη, κλαν και άρματος ως εντολές slash"
     },
-    "mod": {
-      "label": "Λειτουργία παιχνιδιού",
-      "description": "Βαθμολογίες και γλώσσες απευθείας στο World of Tanks"
-    },
     "mcp": {
       "label": "MCP server",
       "description": "Σύνδεση Claude, ChatGPT ή οποιουδήποτε πελάτη MCP"

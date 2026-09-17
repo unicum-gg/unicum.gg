@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Statistici despre jucători, clanuri și tancuri sub formă de comenzi slash"
     },
-    "mod": {
-      "label": "Mod de joc",
-      "description": "Ratinguri și limbi chiar în World of Tanks"
-    },
     "mcp": {
       "label": "Server MCP",
       "description": "Conectează Claude, ChatGPT sau orice client MCP"

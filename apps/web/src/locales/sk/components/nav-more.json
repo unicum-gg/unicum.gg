@@ -13,10 +13,6 @@
       "label": "Discord bot",
       "description": "Štatistiky hráčov, klanov a tankov vo forme príkazov s lomkou"
     },
-    "mod": {
-      "label": "Herný režim",
-      "description": "Hodnotenia a jazyky priamo vo World of Tanks"
-    },
     "mcp": {
       "label": "MCP server",
       "description": "Pripojte Claude, ChatGPT alebo ľubovoľného klienta MCP"

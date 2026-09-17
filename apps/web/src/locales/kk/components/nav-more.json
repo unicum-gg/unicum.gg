@@ -13,10 +13,6 @@
       "label": "Discord боты",
       "description": "Ойыншы, клан және танк статистикасы slash командалары ретінде"
     },
-    "mod": {
-      "label": "Ойын режимі",
-      "description": "Рейтингтер мен тілдер World of Tanks ішінде бірден"
-    },
     "mcp": {
       "label": "MCP сервері",
       "description": "Claude, ChatGPT немесе кез келген MCP клиентін қосу"
