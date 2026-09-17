@@ -30,5 +30,6 @@
   "subtitle": "{name}-moddet viser hver spillers WN8 eller WNX og de sprog, deres klan taler, i kamp, i kampresultaterne og i garagen, og bringer din Twitch-chat ind i spillet.",
   "title": "World of Tanks-vurderingsmod",
   "twitch": "Twitch for streamere",
-  "twitch-text": "Din Twitch-chat, inklusive mærker, i kampchatten og i et garagepanel. Svar fra kampchattens TO TWITCH-kanal eller panelet uden at forlade spillet."
+  "twitch-text": "Din Twitch-chat, inklusive mærker, i kampchatten og i et garagepanel. Svar fra kampchattens TO TWITCH-kanal eller panelet uden at forlade spillet.",
+  "what-it-sends": "Hvad moddet sender, og til hvem"
 }

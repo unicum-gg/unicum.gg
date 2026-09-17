@@ -30,5 +30,6 @@
   "subtitle": "Tryb {name} pokazuje WN8 lub WNX każdego gracza oraz języki, którymi posługuje się jego klan, w bitwie, w wynikach bitwy i w garażu, a także przenosi Twój czat Twitch do gry.",
   "title": "Tryb ocen World of Tanks",
   "twitch": "Twitch dla streamerów",
-  "twitch-text": "Twój czat Twitch, wraz z odznakami, w czacie bitwy i panelu garażu. Odpowiadaj na kanale TO TWITCH czatu bitwy lub w panelu, bez opuszczania gry."
+  "twitch-text": "Twój czat Twitch, wraz z odznakami, w czacie bitwy i panelu garażu. Odpowiadaj na kanale TO TWITCH czatu bitwy lub w panelu, bez opuszczania gry.",
+  "what-it-sends": "Co wysyła mod i do kogo"
 }

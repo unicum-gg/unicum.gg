@@ -30,5 +30,6 @@
   "subtitle": "{name} 模组会在战斗、战斗结果和车库中显示每位玩家的 WN8 或 WNX 以及其军团使用的语言，并将你的 Twitch 聊天带入游戏。",
   "title": "World of Tanks 评分模组",
   "twitch": "Twitch，面向主播",
-  "twitch-text": "在战斗聊天和车库面板中显示你的 Twitch 聊天，包括徽章。无需离开游戏，即可通过战斗聊天的“发送到 Twitch”频道或面板进行回复。"
+  "twitch-text": "在战斗聊天和车库面板中显示你的 Twitch 聊天，包括徽章。无需离开游戏，即可通过战斗聊天的“发送到 Twitch”频道或面板进行回复。",
+  "what-it-sends": "模组发送什么，以及发送给谁"
 }

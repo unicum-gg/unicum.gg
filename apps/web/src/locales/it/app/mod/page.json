@@ -30,5 +30,6 @@
   "subtitle": "La modalità di gioco {name} mostra la valutazione WN8 o WNX di ogni giocatore e le lingue parlate dal suo clan, in battaglia, nei risultati della battaglia e in officina, e porta il tuo chat Twitch nel gioco.",
   "title": "Modalità di gioco di World of Tanks per le valutazioni",
   "twitch": "Twitch, per gli streamer",
-  "twitch-text": "Il tuo chat Twitch, distintivi inclusi, nel chat della battaglia e in un pannello dell’officina. Scrivi nel canale TO TWITCH del chat della battaglia o nel pannello, senza uscire dal gioco."
+  "twitch-text": "Il tuo chat Twitch, distintivi inclusi, nel chat della battaglia e in un pannello dell’officina. Scrivi nel canale TO TWITCH del chat della battaglia o nel pannello, senza uscire dal gioco.",
+  "what-it-sends": "Cosa invia la mod e a chi"
 }

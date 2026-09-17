@@ -30,5 +30,6 @@
   "subtitle": "A {name} mod csatában, a csata eredményeiben és a garázsban megjeleníti minden játékos WN8- vagy WNX-értékelését és a klánjuk által beszélt nyelveket, valamint a Twitch chatet is behozza a játékba.",
   "title": "World of Tanks értékelési mod",
   "twitch": "Twitch streamelőknek",
-  "twitch-text": "A Twitch chat, a jelvényeket is beleértve, a csata chatjében és egy garázspanelen. Írj vissza a csata chatjének TO TWITCH csatornájáról vagy a panelről anélkül, hogy elhagynád a játékot."
+  "twitch-text": "A Twitch chat, a jelvényeket is beleértve, a csata chatjében és egy garázspanelen. Írj vissza a csata chatjének TO TWITCH csatornájáról vagy a panelről anélkül, hogy elhagynád a játékot.",
+  "what-it-sends": "Mit küld a mod, és kinek"
 }

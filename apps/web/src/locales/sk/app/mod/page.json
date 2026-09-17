@@ -30,5 +30,6 @@
   "subtitle": "Mod {name} zobrazuje hodnotenie WN8 alebo WNX každého hráča a jazyky, ktorými hovorí jeho klan, v bitke, vo výsledkoch bitky a v garáži a prináša váš Twitch chat do hry.",
   "title": "Herný režim hodnotení pre World of Tanks",
   "twitch": "Twitch pre streamerov",
-  "twitch-text": "Váš Twitch chat vrátane odznakov v chate bitky a v paneli garáže. Píšte nazad z kanála TO TWITCH v chate bitky alebo z panela bez opustenia hry."
+  "twitch-text": "Váš Twitch chat vrátane odznakov v chate bitky a v paneli garáže. Píšte nazad z kanála TO TWITCH v chate bitky alebo z panela bez opustenia hry.",
+  "what-it-sends": "Kaj mod pošilja in komu"
 }

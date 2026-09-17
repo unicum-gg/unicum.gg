@@ -30,5 +30,6 @@
   "subtitle": "Der Mod {name} zeigt die WN8- oder WNX-Wertung jedes Spielers und die Sprachen seines Clans im Gefecht, in den Gefechtsergebnissen und in der Garage und bringt deinen Twitch-Chat ins Spiel.",
   "title": "World-of-Tanks-Wertungsmod",
   "twitch": "Twitch für Streamer",
-  "twitch-text": "Dein Twitch-Chat, einschließlich der Abzeichen, im Gefechtschat und in einem Garagen-Panel. Schreibe über den Kanal TO TWITCH des Gefechtschats oder das Panel zurück, ohne das Spiel zu verlassen."
+  "twitch-text": "Dein Twitch-Chat, einschließlich der Abzeichen, im Gefechtschat und in einem Garagen-Panel. Schreibe über den Kanal TO TWITCH des Gefechtschats oder das Panel zurück, ohne das Spiel zu verlassen.",
+  "what-it-sends": "Was das Mod sendet und an wen"
 }

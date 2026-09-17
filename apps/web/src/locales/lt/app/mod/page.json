@@ -30,5 +30,6 @@
   "subtitle": "{name} modifikacija rodo kiekvieno žaidėjo WN8 arba WNX ir kalbas, kuriomis kalba jų klanas, mūšyje, mūšio rezultatuose ir garaže, taip pat perkelia jūsų Twitch pokalbį į žaidimą.",
   "title": "World of Tanks reitingų modifikacija",
   "twitch": "Twitch, transliuotojams",
-  "twitch-text": "Jūsų Twitch pokalbis, įskaitant ženklelius, mūšio pokalbyje ir garažo skydelyje. Rašykite atgal iš mūšio pokalbio TO TWITCH kanalo arba skydelio, neišeidami iš žaidimo."
+  "twitch-text": "Jūsų Twitch pokalbis, įskaitant ženklelius, mūšio pokalbyje ir garažo skydelyje. Rašykite atgal iš mūšio pokalbio TO TWITCH kanalo arba skydelio, neišeidami iš žaidimo.",
+  "what-it-sends": "Ką siunčia modifikacija ir kam"
 }

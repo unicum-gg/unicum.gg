@@ -30,5 +30,6 @@
   "subtitle": "{name}-modi näyttää jokaisen pelaajan WN8-arvosanan tai WNX:n sekä hänen klaaninsa puhumat kielet taistelussa, taistelutuloksissa ja tallissa, ja tuo Twitch-chatin peliin.",
   "title": "World of Tanks -arvosanamodi",
   "twitch": "Twitch striimaajille",
-  "twitch-text": "Twitch-chat ansiomerkit mukaan lukien taisteluchatissa ja tallin paneelissa. Kirjoita takaisin taisteluchatin TO TWITCH -kanavalta tai paneelista poistumatta pelistä."
+  "twitch-text": "Twitch-chat ansiomerkit mukaan lukien taisteluchatissa ja tallin paneelissa. Kirjoita takaisin taisteluchatin TO TWITCH -kanavalta tai paneelista poistumatta pelistä.",
+  "what-it-sends": "Mitä modi lähettää ja kenelle"
 }

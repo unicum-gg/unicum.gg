@@ -13,7 +13,7 @@
   "in-battle": "În luptă",
   "in-battle-text": "WN7, WN8 sau WNX și limbile clanurilor în panoul jucătorilor, pe ecranele Tab și de încărcare și deasupra vehiculelor, cu mediile echipelor. Alege ale cui ratinguri le vezi pentru fiecare mod sau afișează-le doar cât timp ții apăsată tasta Alt.",
   "in-the-garage": "În garaj",
-  "in-the-garage-text": "Ratinguri și steaguri în contacte, profiluri, camere de încăierare și în Stronghold, plus un buton în meniul tancului care deschide pagina tancului, semnele și configurația acestuia pe site.",
+  "in-the-garage-text": "Clasamente și steaguri în contactele, profilurile, camerele de escaramușare și Fortăreața tale, precum și un buton de meniu al tancului care deschide pagina tancului, semnele de excelență și configurația de pe site.",
   "install-step-1": "Instalează openwg_gameface, de care au nevoie funcțiile din garaj. modsSettingsApi (fereastra de setări) și modsListApi (intrarea din meniu) sunt opționale.",
   "install-step-2": "Pune fișierul .wotmod în World_of_Tanks/mods/{version}.0.0/.",
   "install-step-3": "Pornește jocul. La prima pornire, acesta se poate reporni o dată pentru a înregistra butonul din garaj.",
@@ -30,5 +30,6 @@
   "subtitle": "Modulul {name} afișează WN8 sau WNX pentru fiecare jucător și limbile vorbite de clanul său, în bătălie, în rezultatele bătăliei și în garaj, și aduce chatul tău Twitch în joc.",
   "title": "Mod World of Tanks pentru ratinguri",
   "twitch": "Twitch, pentru streameri",
-  "twitch-text": "Chatul tău Twitch, cu insigne incluse, în chatul bătăliei și într-un panou din garaj. Scrie înapoi din canalul TO TWITCH al chatului bătăliei sau din panou, fără să părăsești jocul."
+  "twitch-text": "Chatul tău Twitch, cu insigne incluse, în chatul bătăliei și într-un panou din garaj. Scrie înapoi din canalul TO TWITCH al chatului bătăliei sau din panou, fără să părăsești jocul.",
+  "what-it-sends": "Ce trimite modulul și cui"
 }

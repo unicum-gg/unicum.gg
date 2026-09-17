@@ -30,5 +30,6 @@
   "subtitle": "{name} modu, her oyuncunun WN8 veya WNX puanını ve klanının konuştuğu dilleri savaşta, savaş sonuçlarında ve garajda gösterir, ayrıca Twitch sohbetinizi oyuna getirir.",
   "title": "World of Tanks puan modu",
   "twitch": "Yayıncılar için Twitch",
-  "twitch-text": "Rozetler dahil Twitch sohbetiniz, savaş sohbetinde ve garaj panelinde gösterilir. Oyundan çıkmadan savaş sohbetindeki TO TWITCH kanalından veya panelden yanıt yazın."
+  "twitch-text": "Rozetler dahil Twitch sohbetiniz, savaş sohbetinde ve garaj panelinde gösterilir. Oyundan çıkmadan savaş sohbetindeki TO TWITCH kanalından veya panelden yanıt yazın.",
+  "what-it-sends": "Modun ne gönderdiği ve kime gönderdiği"
 }

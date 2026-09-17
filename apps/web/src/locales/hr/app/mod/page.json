@@ -30,5 +30,6 @@
   "subtitle": "Način igre {name} prikazuje WN8 ili WNX svakog igrača i jezike kojima govori njihov klan, u bitci, u rezultatima bitke i u garaži te donosi vaš Twitch chat u igru.",
   "title": "Način igre za ocjene u World of Tanks",
   "twitch": "Twitch za streamere",
-  "twitch-text": "Vaš Twitch chat, sa značkama, u chatu bitke i na panelu u garaži. Odgovarajte iz kanala TO TWITCH u chatu bitke ili s panela, bez napuštanja igre."
+  "twitch-text": "Vaš Twitch chat, sa značkama, u chatu bitke i na panelu u garaži. Odgovarajte iz kanala TO TWITCH u chatu bitke ili s panela, bez napuštanja igre.",
+  "what-it-sends": "Što mod šalje i kome"
 }

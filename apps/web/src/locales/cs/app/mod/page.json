@@ -30,5 +30,6 @@
   "subtitle": "Modifikace {name} zobrazuje hodnocení WN8 nebo WNX každého hráče a jazyky, kterými jeho klan mluví, v bitvě, ve výsledcích bitvy a v garáži a přináší váš Twitch chat do hry.",
   "title": "Modifikace hodnocení pro World of Tanks",
   "twitch": "Twitch pro streamery",
-  "twitch-text": "Váš Twitch chat, včetně odznaků, v chatu bitvy a v panelu garáže. Odpovídejte z kanálu DO TWITCH v chatu bitvy nebo z panelu, aniž byste opustili hru."
+  "twitch-text": "Váš Twitch chat, včetně odznaků, v chatu bitvy a v panelu garáže. Odpovídejte z kanálu DO TWITCH v chatu bitvy nebo z panelu, aniž byste opustili hru.",
+  "what-it-sends": "Co mod odesílá a komu"
 }

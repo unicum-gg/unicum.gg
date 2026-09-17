@@ -30,5 +30,6 @@
   "subtitle": "{name} modifikācija rāda katra spēlētāja WN8 vai WNX un valodas, kurās runā viņa klans, kaujā, kaujas rezultātos un garāžā, kā arī iekļauj jūsu Twitch tērzēšanu spēlē.",
   "title": "World of Tanks vērtējumu modifikācija",
   "twitch": "Twitch straumētājiem",
-  "twitch-text": "Jūsu Twitch tērzēšana, ieskaitot žetonus, kaujas tērzēšanā un garāžas panelī. Rakstiet atbildes no kaujas tērzēšanas kanāla TO TWITCH vai paneļa, neizejot no spēles."
+  "twitch-text": "Jūsu Twitch tērzēšana, ieskaitot žetonus, kaujas tērzēšanā un garāžas panelī. Rakstiet atbildes no kaujas tērzēšanas kanāla TO TWITCH vai paneļa, neizejot no spēles.",
+  "what-it-sends": "Ko modifikācija nosūta un kam"
 }

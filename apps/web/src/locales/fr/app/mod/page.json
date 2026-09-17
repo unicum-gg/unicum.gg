@@ -30,5 +30,6 @@
   "subtitle": "Le mode {name} affiche la notation WN8 ou WNX de chaque joueur et les langues parlées par son clan, en bataille, dans les résultats de bataille et dans le garage, et intègre votre chat Twitch au jeu.",
   "title": "Mode de jeu des classements de World of Tanks",
   "twitch": "Twitch, pour les streamers",
-  "twitch-text": "Votre chat Twitch, insignes inclus, dans le salon de bataille et dans un panneau du garage. Répondez depuis le salon TO TWITCH du chat de bataille ou depuis le panneau, sans quitter le jeu."
+  "twitch-text": "Votre chat Twitch, insignes inclus, dans le salon de bataille et dans un panneau du garage. Répondez depuis le salon TO TWITCH du chat de bataille ou depuis le panneau, sans quitter le jeu.",
+  "what-it-sends": "Ce que le mode de jeu envoie et à qui"
 }

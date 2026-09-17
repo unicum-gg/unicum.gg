@@ -30,5 +30,6 @@
   "subtitle": "El mod de {name} muestra la valoración WN8 o WNX de cada jugador y los idiomas que habla su clan, en batalla, en los resultados de batalla y en el garaje, y lleva tu chat de Twitch al juego.",
   "title": "Mod de valoraciones de World of Tanks",
   "twitch": "Twitch, para streamers",
-  "twitch-text": "Tu chat de Twitch, con las insignias incluidas, en el chat de batalla y en un panel del garaje. Escribe desde el canal TO TWITCH del chat de batalla o desde el panel, sin salir del juego."
+  "twitch-text": "Tu chat de Twitch, con las insignias incluidas, en el chat de batalla y en un panel del garaje. Escribe desde el canal TO TWITCH del chat de batalla o desde el panel, sin salir del juego.",
+  "what-it-sends": "Qué envía el mod y a quién"
 }

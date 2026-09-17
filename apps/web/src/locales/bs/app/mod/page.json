@@ -30,5 +30,6 @@
   "subtitle": "Mod {name} prikazuje WN8 ili WNX svakog igrača i jezike kojima govori njegov klan, u bitci, u rezultatima bitke i u garaži, a vaš Twitch chat dovodi u igru.",
   "title": "Mod za rejtinge u World of Tanks",
   "twitch": "Twitch za streamere",
-  "twitch-text": "Vaš Twitch chat, uključujući značke, u chatu bitke i na panelu u garaži. Pišite nazad iz kanala TO TWITCH u chatu bitke ili s panela, bez napuštanja igre."
+  "twitch-text": "Vaš Twitch chat, uključujući značke, u chatu bitke i na panelu u garaži. Pišite nazad iz kanala TO TWITCH u chatu bitke ili s panela, bez napuštanja igre.",
+  "what-it-sends": "Šta mod šalje i kome"
 }

@@ -30,5 +30,6 @@
   "subtitle": "O modo de jogo {name} mostra a classificação WN8 ou WNX de cada jogador e os idiomas falados pelo seu clã, em batalha, nos resultados da batalha e na garagem, e traz o seu chat do Twitch para o jogo.",
   "title": "Modo de jogo de classificações de World of Tanks",
   "twitch": "Twitch, para streamers",
-  "twitch-text": "O seu chat do Twitch, com as insígnias incluídas, no chat da batalha e num painel da garagem. Escreva de volta a partir do canal PARA O TWITCH do chat da batalha ou do painel, sem sair do jogo."
+  "twitch-text": "O seu chat do Twitch, com as insígnias incluídas, no chat da batalha e num painel da garagem. Escreva de volta a partir do canal PARA O TWITCH do chat da batalha ou do painel, sem sair do jogo.",
+  "what-it-sends": "O que o mod envia e para quem"
 }

@@ -30,5 +30,6 @@
   "subtitle": "Bản mod {name} hiển thị chỉ số WN8 hoặc WNX của mỗi người chơi và các ngôn ngữ mà Clan của họ sử dụng trong trận đấu, trong kết quả trận đấu và trong nhà chứa xe, đồng thời đưa trò chuyện Twitch của bạn vào trò chơi.",
   "title": "Bản mod chỉ số đánh giá World of Tanks",
   "twitch": "Twitch dành cho streamer",
-  "twitch-text": "Trò chuyện Twitch của bạn, bao gồm cả huy hiệu, trong trò chuyện trận đấu và một bảng trong nhà chứa xe. Gửi tin nhắn lại từ kênh TO TWITCH của trò chuyện trận đấu hoặc từ bảng mà không cần rời trò chơi."
+  "twitch-text": "Trò chuyện Twitch của bạn, bao gồm cả huy hiệu, trong trò chuyện trận đấu và một bảng trong nhà chứa xe. Gửi tin nhắn lại từ kênh TO TWITCH của trò chuyện trận đấu hoặc từ bảng mà không cần rời trò chơi.",
+  "what-it-sends": "Bản mod gửi gì và gửi cho ai"
 }
