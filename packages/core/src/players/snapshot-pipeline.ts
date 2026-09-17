@@ -39,7 +39,22 @@ const FETCH_CHUNK = 100;
 // (host load 15). 4 keeps a healthy margin above the ~3-worker throughput while
 // staying well under the host's 8 cores. Going higher needs that write path
 // optimized first, not more workers.
-const PIPELINE_CONCURRENCY = 4;
+// Overridable at runtime, because the ceiling this number runs into is the
+// DISK's, and that one is not ours to read: the host meters IOPS, so the safe
+// value changes with the plan and with whatever else the volume is doing.
+//
+// It was a flat 4 until 2026-09-17, sized when Postgres was the constraint. On
+// 2026-09-12 the worker role split took EU from ~200 to ~800 players/minute,
+// and four days later the volume started refusing sustained writes: synchronous
+// 4 KiB writes fell from ~810/s to ~7/s about 50-60 MINUTES after every boot,
+// Postgres piled up on LWLock/WALWrite, and the site 524'd. Proven by removing
+// the load rather than by reading a counter: with the worker stopped the disk
+// held 11h23 instead of collapsing within the hour.
+//
+// So this is a write-rate budget, not a parallelism knob. Lower it when the
+// disk starts stalling; raising it past what the volume sustains buys backlog
+// speed for a few days and then takes the whole site down.
+const PIPELINE_CONCURRENCY = Number(process.env.PIPELINE_CONCURRENCY) || 2;
 // Per-player write fan-out inside a chunk. Total concurrent writers is roughly
 // REGIONS x PIPELINE_CONCURRENCY x WRITE_CONCURRENCY; with NA/Asia usually drained
 // (only EU busy) that's ~8 x 2 = 16, within the background DB pool (writes release
