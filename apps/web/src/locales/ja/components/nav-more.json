@@ -13,6 +13,10 @@
       "label": "Discordボット",
       "description": "スラッシュコマンドでプレイヤー、クラン、戦車の戦績を確認"
     },
+    "mod": {
+      "label": "ゲームモード",
+      "description": "World of Tanks内ですぐに確認できるレーティングと言語"
+    },
     "mcp": {
       "label": "MCPサーバー",
       "description": "Claude、ChatGPT、その他のMCPクライアントに接続"

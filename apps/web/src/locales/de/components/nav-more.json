@@ -13,6 +13,10 @@
       "label": "Discord Bot",
       "description": "Spieler-, Clan- und Panzerstatistiken als Slash-Befehle"
     },
+    "mod": {
+      "label": "Spielmodus",
+      "description": "Wertungen und Sprachen direkt in World of Tanks"
+    },
     "mcp": {
       "label": "MCP-Server",
       "description": "Claude, ChatGPT oder einen beliebigen MCP-Client anbinden"

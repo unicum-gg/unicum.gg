@@ -13,6 +13,10 @@
       "label": "Bot Discord",
       "description": "Thống kê người chơi, Clan và xe tăng dưới dạng lệnh slash"
     },
+    "mod": {
+      "label": "Chế độ chơi",
+      "description": "Các chỉ số đánh giá và ngôn ngữ ngay trong World of Tanks"
+    },
     "mcp": {
       "label": "Máy chủ MCP",
       "description": "Kết nối Claude, ChatGPT hoặc bất kỳ máy khách MCP nào"

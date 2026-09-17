@@ -13,6 +13,10 @@
       "label": "Discord-bot",
       "description": "Statistik för Spelare, klan och Tank via snedstreckskommandon"
     },
+    "mod": {
+      "label": "Spelläge",
+      "description": "Betyg och språk direkt i World of Tanks"
+    },
     "mcp": {
       "label": "MCP-server",
       "description": "Anslut Claude, ChatGPT eller valfri MCP-klient"

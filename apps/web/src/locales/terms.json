@@ -817,7 +817,16 @@
     "takes": "prend",
     "Random Battle": "Bataille aléatoire",
     "rather": "plutôt",
-    "TBD": "À déterminer"
+    "TBD": "À déterminer",
+    "In battle": "En bataille",
+    "Battle Results": "Résultats de la bataille",
+    "Game mod": "mode de jeu",
+    "badges": "insignes",
+    "button": "bouton",
+    "else": "autre",
+    "flags": "drapeaux",
+    "teams": "équipes",
+    "unicum": "unicum"
   },
   "es": {
     "Battles": "Batallas",
@@ -1634,7 +1643,16 @@
     "takes": "ocupa",
     "Random Battle": "Batalla aleatoria",
     "rather": "más bien",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "En batalla",
+    "Battle Results": "Resultados de la batalla",
+    "Game mod": "Modo de juego",
+    "badges": "insignias",
+    "button": "botón",
+    "else": "otros",
+    "flags": "banderas",
+    "teams": "equipos",
+    "unicum": "unicum"
   },
   "ru": {
     "Battles": "Бои",
@@ -2445,7 +2463,16 @@
     "takes": "занимает",
     "Random Battle": "Случайный бой",
     "rather": "скорее",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "В бою",
+    "Battle Results": "Результаты боя",
+    "Game mod": "Игровой режим",
+    "badges": "значки",
+    "button": "кнопка",
+    "else": "прочее",
+    "flags": "флаги",
+    "teams": "команды",
+    "unicum": "уникум"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3275,7 +3302,16 @@
     "takes": "zajmuje",
     "Random Battle": "Bitwa losowa",
     "rather": "raczej",
-    "TBD": "DO USTALENIA"
+    "TBD": "DO USTALENIA",
+    "In battle": "W bitwie",
+    "Battle Results": "Wyniki bitwy",
+    "Game mod": "Tryb gry",
+    "badges": "odznaki",
+    "button": "przycisk",
+    "else": "inne",
+    "flags": "flagi",
+    "teams": "drużyny",
+    "unicum": "unikum"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4115,7 +4151,16 @@
     "takes": "取得数",
     "Random Battle": "ランダム戦",
     "rather": "むしろ",
-    "TBD": "未定"
+    "TBD": "未定",
+    "In battle": "戦闘中",
+    "Battle Results": "戦闘結果",
+    "Game mod": "ゲームモード",
+    "badges": "バッジ",
+    "button": "ボタン",
+    "else": "その他",
+    "flags": "国旗",
+    "teams": "チーム",
+    "unicum": "ユニカム"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4742,7 +4787,14 @@
     "playing": "اللعب",
     "rank": "الترتيب",
     "takes": "يأخذ",
-    "rather": "بالأحرى"
+    "rather": "بالأحرى",
+    "Game mod": "طور اللعبة",
+    "badges": "الشارات",
+    "button": "زر",
+    "else": "أخرى",
+    "flags": "الأعلام",
+    "teams": "الفرق",
+    "unicum": "يونيكوم"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5579,7 +5631,16 @@
     "takes": "zauzima",
     "Random Battle": "Slučajna bitka",
     "rather": "radije",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "U bitci",
+    "Battle Results": "Rezultati bitke",
+    "Game mod": "način igre",
+    "badges": "značke",
+    "button": "gumb",
+    "else": "ostalo",
+    "flags": "zastave",
+    "teams": "timovi",
+    "unicum": "unicum"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6417,7 +6478,16 @@
     "takes": "elér",
     "Random Battle": "Normál csata",
     "rather": "inkább",
-    "TBD": "KÉSŐBB"
+    "TBD": "KÉSŐBB",
+    "In battle": "Csatában",
+    "Battle Results": "Csata eredmények",
+    "Game mod": "Játékmód",
+    "badges": "jelvények",
+    "button": "gomb",
+    "else": "egyéb",
+    "flags": "zászlók",
+    "teams": "csapatok",
+    "unicum": "unikum"
   },
   "ko": {
     "Battles": "전투",
@@ -7262,7 +7332,16 @@
     "takes": "차지",
     "Random Battle": "무작위 전투",
     "rather": "오히려",
-    "TBD": "공개 예정"
+    "TBD": "공개 예정",
+    "In battle": "전투 중",
+    "Battle Results": "전투 결과",
+    "Game mod": "게임 모드",
+    "badges": "배지",
+    "button": "버튼",
+    "else": "기타",
+    "flags": "국기",
+    "teams": "팀",
+    "unicum": "유니컴"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8104,7 +8183,16 @@
     "takes": "neemt",
     "Random Battle": "Willekeurig gevecht",
     "rather": "eerder",
-    "TBD": "NTB"
+    "TBD": "NTB",
+    "In battle": "In gevecht",
+    "Battle Results": "Gevechtsresultaten",
+    "Game mod": "Spelmodus",
+    "badges": "badges",
+    "button": "knop",
+    "else": "overige",
+    "flags": "vlaggen",
+    "teams": "teams",
+    "unicum": "unicum"
   },
   "cs": {
     "Battles": "Bitev",
@@ -8937,7 +9025,16 @@
     "takes": "zabere",
     "Random Battle": "Náhodná bitva",
     "rather": "spíše",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "V bitvě",
+    "Battle Results": "Výsledky bitvy",
+    "Game mod": "Herní režim",
+    "badges": "odznaky",
+    "button": "tlačítko",
+    "else": "ostatní",
+    "flags": "vlajky",
+    "teams": "týmy",
+    "unicum": "unicum"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9772,7 +9869,16 @@
     "takes": "alır",
     "Random Battle": "Rastgele Savaş",
     "rather": "daha ziyade",
-    "TBD": "SONRA AÇIKLANACAK"
+    "TBD": "SONRA AÇIKLANACAK",
+    "In battle": "Savaşta",
+    "Battle Results": "Savaş Sonuçları",
+    "Game mod": "Oyun modu",
+    "badges": "rozetler",
+    "button": "buton",
+    "else": "diğer",
+    "flags": "bayraklar",
+    "teams": "takımlar",
+    "unicum": "unicum"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10398,7 +10504,14 @@
     "playing": "гульня",
     "rank": "месца",
     "takes": "займае",
-    "rather": "хутчэй"
+    "rather": "хутчэй",
+    "Game mod": "Гульнявы рэжым",
+    "badges": "значкі",
+    "button": "кнопка",
+    "else": "іншае",
+    "flags": "сцягі",
+    "teams": "каманды",
+    "unicum": "унікум"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11031,7 +11144,14 @@
     "playing": "igranje",
     "rank": "uvrstitev",
     "takes": "poskusov",
-    "rather": "skôr"
+    "rather": "skôr",
+    "Game mod": "Herný režim",
+    "badges": "odznaky",
+    "button": "tlačidlo",
+    "else": "iné",
+    "flags": "vlajky",
+    "teams": "tímy",
+    "unicum": "unicum"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -11665,7 +11785,14 @@
     "playing": "igranje",
     "rank": "pozicija",
     "takes": "uzima",
-    "rather": "radije"
+    "rather": "radije",
+    "Game mod": "mod igre",
+    "badges": "značke",
+    "button": "dugme",
+    "else": "ostalo",
+    "flags": "zastave",
+    "teams": "timovi",
+    "unicum": "unicum"
   },
   "th": {
     "Battles": "การรบ",
@@ -12503,7 +12630,16 @@
     "takes": "จำนวนครั้ง",
     "Random Battle": "การรบแบบสุ่ม",
     "rather": "ค่อนข้าง",
-    "TBD": "รอการประกาศ"
+    "TBD": "รอการประกาศ",
+    "In battle": "ในการรบ",
+    "Battle Results": "ผลการรบ",
+    "Game mod": "โหมดเกม",
+    "badges": "เหรียญตรา",
+    "button": "ปุ่ม",
+    "else": "อื่นๆ",
+    "flags": "ธง",
+    "teams": "ทีม",
+    "unicum": "ยูนิคัม"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13341,7 +13477,16 @@
     "takes": "场次",
     "Random Battle": "标准模式",
     "rather": "宁愿",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "战斗中",
+    "Battle Results": "战斗结果",
+    "Game mod": "游戏模式",
+    "badges": "徽章",
+    "button": "按钮",
+    "else": "其他",
+    "flags": "国旗",
+    "teams": "队伍",
+    "unicum": "紫名"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14164,7 +14309,16 @@
     "takes": "leva",
     "Random Battle": "Batalha Aleatória",
     "rather": "em vez disso",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "Em batalha",
+    "Battle Results": "Resultados da Batalha",
+    "Game mod": "Modo de jogo",
+    "badges": "insígnias",
+    "button": "botão",
+    "else": "outros",
+    "flags": "bandeiras",
+    "teams": "equipas",
+    "unicum": "unicum"
   },
   "vi": {
     "Battles": "Số trận",
@@ -14982,7 +15136,16 @@
     "takes": "lượt",
     "Random Battle": "Trận đấu Ngẫu nhiên",
     "rather": "thay vì",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "Trong trận",
+    "Battle Results": "Kết quả Trận đấu",
+    "Game mod": "Chế độ chơi",
+    "badges": "huy hiệu",
+    "button": "nút",
+    "else": "khác",
+    "flags": "cờ",
+    "teams": "đội",
+    "unicum": "unicum"
   },
   "de": {
     "Battles": "Gefechte",
@@ -15813,7 +15976,16 @@
     "takes": "benötigt",
     "Random Battle": "Zufallsgefecht",
     "rather": "eher",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "Im Gefecht",
+    "Battle Results": "Gefechtsergebnisse",
+    "Game mod": "Spielmodus",
+    "badges": "Abzeichen",
+    "button": "Button",
+    "else": "Sonstiges",
+    "flags": "Flaggen",
+    "teams": "Teams",
+    "unicum": "Unicum"
   },
   "uk": {
     "Battles": "Бої",
@@ -16641,7 +16813,16 @@
     "takes": "займає",
     "Random Battle": "Випадковий бій",
     "rather": "скоріше",
-    "TBD": "Уточнюється"
+    "TBD": "Уточнюється",
+    "In battle": "У бою",
+    "Battle Results": "Результати бою",
+    "Game mod": "Режим гри",
+    "badges": "значки",
+    "button": "кнопка",
+    "else": "інше",
+    "flags": "прапори",
+    "teams": "команди",
+    "unicum": "унікум"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17474,7 +17655,16 @@
     "takes": "richiede",
     "Random Battle": "Battaglia Casuale",
     "rather": "piuttosto",
-    "TBD": "Da definire"
+    "TBD": "Da definire",
+    "In battle": "In Battaglia",
+    "Battle Results": "Risultati Battaglia",
+    "Game mod": "Modalità di gioco",
+    "badges": "distintivi",
+    "button": "pulsante",
+    "else": "altro",
+    "flags": "bandiere",
+    "teams": "squadre",
+    "unicum": "unicum"
   },
   "sv": {
     "Battles": "Strider",
@@ -18316,7 +18506,16 @@
     "takes": "försök",
     "Random Battle": "Slumpvis matchad strid",
     "rather": "hellre",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "I strid",
+    "Battle Results": "Stridsresultat",
+    "Game mod": "Spelläge",
+    "badges": "märken",
+    "button": "knapp",
+    "else": "övrigt",
+    "flags": "flaggor",
+    "teams": "lag",
+    "unicum": "unicum"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19154,7 +19353,16 @@
     "takes": "заузима",
     "Random Battle": "Slučajne borba",
     "rather": "radije",
-    "TBD": "USKORO"
+    "TBD": "USKORO",
+    "In battle": "U borbi",
+    "Battle Results": "Borbeni rezultati",
+    "Game mod": "Режим игре",
+    "badges": "значке",
+    "button": "дугме",
+    "else": "остало",
+    "flags": "заставе",
+    "teams": "тимови",
+    "unicum": "уникум"
   },
   "el": {
     "Battles": "Μάχες",
@@ -19991,7 +20199,16 @@
     "takes": "καταλαμβάνει",
     "Random Battle": "Τυχαία Μάχη",
     "rather": "μάλλον",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "Σε μάχη",
+    "Battle Results": "Αποτελέσματα Μάχης",
+    "Game mod": "Λειτουργία παιχνιδιού",
+    "badges": "διακριτικά",
+    "button": "κουμπί",
+    "else": "άλλα",
+    "flags": "σημαίες",
+    "teams": "ομάδες",
+    "unicum": "ουνίκουμ"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -20817,7 +21034,16 @@
     "takes": "aizņem",
     "Random Battle": "Gadījuma kauja",
     "rather": "drīzāk",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "Kaujā",
+    "Battle Results": "Kaujas rezultāti",
+    "Game mod": "Spēles režīms",
+    "badges": "žetoni",
+    "button": "poga",
+    "else": "cits",
+    "flags": "karogi",
+    "teams": "komandas",
+    "unicum": "unikums"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -21444,7 +21670,14 @@
     "playing": "खेलना",
     "rank": "रैंक",
     "takes": "लेता है",
-    "rather": "बल्कि"
+    "rather": "बल्कि",
+    "Game mod": "गेम मोड",
+    "badges": "बैज",
+    "button": "बटन",
+    "else": "अन्य",
+    "flags": "झंडे",
+    "teams": "टीमें",
+    "unicum": "यूनिकम"
   },
   "bg": {
     "Battles": "Битки",
@@ -22266,7 +22499,16 @@
     "takes": "заема",
     "Random Battle": "Случайна битка",
     "rather": "по-скоро",
-    "TBD": "ОЧАКВА СЕ"
+    "TBD": "ОЧАКВА СЕ",
+    "In battle": "В битка",
+    "Battle Results": "Резултати от битката",
+    "Game mod": "Режим на играта",
+    "badges": "значки",
+    "button": "бутон",
+    "else": "друго",
+    "flags": "флагове",
+    "teams": "отбори",
+    "unicum": "уникум"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23108,7 +23350,16 @@
     "takes": "užima",
     "Random Battle": "Atsitiktinis mūšis",
     "rather": "veikiau",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "Mūšyje",
+    "Battle Results": "Mūšio rezultatai",
+    "Game mod": "Žaidimo režimas",
+    "badges": "ženkleliai",
+    "button": "mygtukas",
+    "else": "kita",
+    "flags": "vėliavos",
+    "teams": "komandos",
+    "unicum": "unikumas"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -23739,7 +23990,14 @@
     "playing": "ойнауда",
     "rank": "орын",
     "takes": "алады",
-    "rather": "дәлірек айтқанда"
+    "rather": "дәлірек айтқанда",
+    "Game mod": "Ойын режимі",
+    "badges": "белгілер",
+    "button": "батырма",
+    "else": "басқа",
+    "flags": "жалаулар",
+    "teams": "командалар",
+    "unicum": "уникум"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -24581,7 +24839,16 @@
     "takes": "vaatii",
     "Random Battle": "Satunnaistaistelu",
     "rather": "pikemminkin",
-    "TBD": "TULOSSA"
+    "TBD": "TULOSSA",
+    "In battle": "Taistelussa",
+    "Battle Results": "Taistelun tulokset",
+    "Game mod": "Pelitila",
+    "badges": "ansiomerkit",
+    "button": "painike",
+    "else": "muu",
+    "flags": "liput",
+    "teams": "joukkueet",
+    "unicum": "unicum"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -25213,7 +25480,14 @@
     "playing": "naglalaro",
     "rank": "ranggo",
     "takes": "mga pagtatangka",
-    "rather": "sa halip"
+    "rather": "sa halip",
+    "Game mod": "Mode ng laro",
+    "badges": "mga badge",
+    "button": "pindutan",
+    "else": "iba pa",
+    "flags": "mga bandila",
+    "teams": "mga koponan",
+    "unicum": "unicum"
   },
   "no": {
     "Battles": "Kamper",
@@ -26047,7 +26321,16 @@
     "takes": "tar",
     "Random Battle": "Tilfeldig kamp",
     "rather": "heller",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "I kamp",
+    "Battle Results": "Kampresultater",
+    "Game mod": "Spillmodus",
+    "badges": "merker",
+    "button": "knapp",
+    "else": "annet",
+    "flags": "flagg",
+    "teams": "lag",
+    "unicum": "unicum"
   },
   "ro": {
     "Battles": "Lupte",
@@ -26870,7 +27153,16 @@
     "takes": "partide",
     "Random Battle": "Luptă standard",
     "rather": "mai degrabă",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "În luptă",
+    "Battle Results": "Rezultate luptă",
+    "Game mod": "Mod de joc",
+    "badges": "insigne",
+    "button": "buton",
+    "else": "altele",
+    "flags": "steaguri",
+    "teams": "echipe",
+    "unicum": "unicum"
   },
   "da": {
     "Battles": "Kampe",
@@ -27708,6 +28000,15 @@
     "takes": "kræver",
     "Random Battle": "Standard kamp",
     "rather": "snarere",
-    "TBD": "TBD"
+    "TBD": "TBD",
+    "In battle": "I kamp",
+    "Battle Results": "Kampresultater",
+    "Game mod": "Spiltilstand",
+    "badges": "mærker",
+    "button": "knap",
+    "else": "andet",
+    "flags": "flag",
+    "teams": "hold",
+    "unicum": "unicum"
   }
 }
