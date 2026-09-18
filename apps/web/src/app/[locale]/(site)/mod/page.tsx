@@ -23,12 +23,12 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema-org";
-import { styles } from "@/lib/styles";
-import { cn } from "@/lib/utils";
 
 // The client the released package is built and checked against.
 const GAME_VERSION = "2.4";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema-org";
+import { styles } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -84,7 +84,7 @@ const SCREENSHOTS = [
 
 const FAQ = ["allowed", "ratings", "servers", "free", "hide"];
 
-const INSTALL_STEPS = ["install-step-1", "install-step-2", "install-step-3"];
+const INSTALL_STEPS = ["install-step-1", "install-step-2"];
 
 const DATA = ["data-ratings", "data-linking", "data-twitch"];
 
@@ -194,10 +194,23 @@ export default async function ModPage({
             <ol className="list-decimal space-y-2 ps-5">
               {INSTALL_STEPS.map((step) => (
                 <li key={step} className={styles.mutedDescription}>
-                  {t(step, { version: GAME_VERSION })}
+                  {t(step)}
                 </li>
               ))}
             </ol>
+            <p className={styles.mutedDescription}>{t("install-included")}</p>
+            <p className={styles.mutedDescription}>
+              {t("install-optional")}:{" "}
+              <a
+                href={APP.EXTERNAL.MODS_SETTINGS_API}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-fd-foreground"
+              >
+                modsSettingsApi
+              </a>{" "}
+              {t("install-optional-settings")}
+            </p>
           </section>
           <section className="space-y-3">
             <h2 className="text-lg font-semibold">{t("what-it-sends")}</h2>

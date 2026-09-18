@@ -25,9 +25,8 @@
   "in-battle-text": "WN7, WN8 or WNX and clan languages in the players panel, the Tab and loading screens and above vehicles, with team averages. Choose whose ratings you see per mode, or show them only while Alt is held.",
   "in-the-garage": "In the garage",
   "in-the-garage-text": "Ratings and flags in your contacts, profiles, skirmish rooms and Stronghold, and a tank menu button that opens the tank’s page, marks and build on the site.",
-  "install-step-1": "Install openwg_gameface, which the garage features need. modsSettingsApi (settings window) and modsListApi (menu entry) are optional.",
-  "install-step-2": "Put the .wotmod file into World_of_Tanks/mods/{version}.0.0/.",
-  "install-step-3": "Start the game. The first start may restart it once, to register the garage button.",
+  "install-step-1": "Download the archive and unzip it into your World of Tanks folder.",
+  "install-step-2": "Start the game. The first start restarts it once, to register the garage button.",
   "installation": "Installation",
   "og-subtitle": "Ratings · Languages · Twitch chat",
   "og-title": "World of Tanks WN8 & WNX mod",
@@ -42,5 +41,8 @@
   "title": "World of Tanks WN8 & WNX mod",
   "twitch": "Twitch, for streamers",
   "twitch-text": "Your Twitch chat, badges included, in the battle chat and in a garage panel. Write back from the battle chat’s TO TWITCH channel or the panel, without leaving the game.",
-  "what-it-sends": "What the mod sends, and to whom"
+  "what-it-sends": "What the mod sends, and to whom",
+  "install-included": "Nothing else to install: openwg_gameface, which the garage features need, is in the archive and goes to the right place on its own.",
+  "install-optional": "Optional",
+  "install-optional-settings": "adds the in-game settings window. Without it, the settings are in mods/configs/unicum/settings.json."
 }

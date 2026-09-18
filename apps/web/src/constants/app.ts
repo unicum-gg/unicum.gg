@@ -19,6 +19,9 @@ const APP = {
     // The mod's page on Wargaming's mod hub, where the player downloads it.
     MOD_DOWNLOAD: "https://wgmods.net/7928",
     MOD_SOURCE: "https://github.com/unicum-gg/unicum.gg-mod",
+    // Optional, and the only other mod the install steps name: it is what
+    // draws the in-game settings window several mods share.
+    MODS_SETTINGS_API: "https://github.com/izeberg/modssettingsapi",
   },
 };
 
