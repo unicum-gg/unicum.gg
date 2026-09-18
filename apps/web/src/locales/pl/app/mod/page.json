@@ -6,7 +6,7 @@
   "data-twitch": "Twój czat Twitch jest odczytywany anonimowo z Twitch. Pisane przez Ciebie wiadomości trafiają przez {name}, z użyciem przyznanego uprawnienia Twitch, które możesz cofnąć w ustawieniach Twitch.",
   "description": "Tryb gry {name} dla World of Tanks: ocena WN8 lub WNX każdego gracza i języki jego klanu podczas bitwy, na ekranach Tab i ładowania, w wynikach bitwy i w całym garażu, a także Twój czat Twitch w grze. Darmowe i o otwartym źródle.",
   "download": "Pobierz z wgmods.net",
-  "download-note": "Darmowe i o otwartym źródle. Hostowane w oficjalnym centrum modów Wargaming, które zawsze podaje wersję klienta, dla której zostało zbudowane.",
+  "download-note": "Darmowe i otwórz źródło. Hostowane w oficjalnym centrum modów Wargaming, które zawsze podaje wersję klienta, dla której zostało stworzone.",
   "eyebrow": "Tryb gry World of Tanks",
   "faq": "Najczęściej zadawane pytania",
   "faq-allowed-answer": "Pokazuje wyłącznie publiczne statystyki: oceny, które każdy może sprawdzić, oraz języki deklarowane przez klany. Nie ujawnia niczego, co gra ukrywa, na przykład pozycji wrogów ani liczników przeładowania, niczego nie automatyzuje podczas bitwy i jest dystrybuowane przez wgmods.net, oficjalne centrum modów Wargaming.",

@@ -6,7 +6,7 @@
   "data-twitch": "Twitch sohbetiniz Twitch’ten anonim olarak okunur. Yazdığınız mesajlar, verdiğiniz Twitch izniyle {name} üzerinden gönderilir. Bu izni Twitch ayarlarınızdan iptal edebilirsiniz.",
   "description": "World of Tanks için {name} modu: savaşta, Tab ve yükleme ekranlarında, savaş sonuçlarında ve garaj genelinde her oyuncunun WN8 veya WNX puanlarını ve klanının dillerini gösterir, ayrıca Twitch sohbetinizi oyuna getirir. Ücretsiz ve açık kaynaklıdır.",
   "download": "wgmods.net’ten indir",
-  "download-note": "Ücretsiz ve açık kaynaklıdır. Wargaming’in resmi mod merkezinde barındırılır ve oluşturulduğu istemci sürümünü her zaman belirtir.",
+  "download-note": "Ücretsiz ve açık kaynaklıdır. Wargaming’in resmî mod merkezinde barındırılır ve oluşturulduğu istemci sürümünü her zaman belirtir.",
   "eyebrow": "World of Tanks oyun modu",
   "faq": "Sık sorulan sorular",
   "faq-allowed-answer": "Yalnızca herkese açık istatistikleri gösterir: herkesin arayabileceği puanlar ve klanların beyan ettiği diller. Düşman konumları veya yeniden doldurma süreleri gibi oyunun gizlediği hiçbir şeyi açığa çıkarmaz, savaşta hiçbir şeyi otomatikleştirmez ve Wargaming’in resmi mod merkezi olan wgmods.net üzerinden dağıtılır.",

@@ -6,7 +6,7 @@
   "data-twitch": "Jūsų Twitch pokalbis anonimiškai skaitomas iš Twitch. Jūsų parašytos žinutės siunčiamos per {name}, naudojant jūsų suteiktą Twitch leidimą, kurį galite atšaukti Twitch nustatymuose.",
   "description": "{name} žaidimo režimas, skirtas World of Tanks: kiekvieno žaidėjo WN8 arba WNX ir jo klano kalbos mūšyje, skirtuke ir įkėlimo ekranuose, mūšio rezultatuose ir visame garaže, taip pat jūsų Twitch pokalbis žaidime. Nemokamai ir atvirojo kodo.",
   "download": "Atsisiųsti iš wgmods.net",
-  "download-note": "Nemokamai ir atvirojo kodo. Priglobta oficialiame Wargaming žaidimo režimų centre, kuriame visada nurodoma kliento versija, kuriai ji sukurta.",
+  "download-note": "Nemokamai ir atidaryti šaltinis. Patalpinta oficialiame Wargaming modifikacijų centre, kuriame kliento versijos vardai visada yra nurodyti.",
   "eyebrow": "World of Tanks žaidimo režimas",
   "faq": "Dažniausiai užduodami klausimai",
   "faq-allowed-answer": "Jis rodo tik viešą statistiką: reitingus, kurių gali ieškoti bet kas, ir kalbas, kurias deklaruoja klanai. Jis neatskleidžia nieko, ką žaidimas slepia, pavyzdžiui, priešų pozicijų ar perkrovimo laikmačių, nieko neautomatizuoja mūšyje ir platinamas per wgmods.net, oficialų Wargaming žaidimo režimų centrą.",

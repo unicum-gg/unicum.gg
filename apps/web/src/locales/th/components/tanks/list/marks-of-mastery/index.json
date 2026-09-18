@@ -2,15 +2,15 @@
   "columns": {
     "class3": {
       "label": "3rd Class",
-      "tip": "3rd Class: XP ที่จำเป็นในการเอาชนะผู้เล่น 50%"
+      "tip": "3rd Class: XP ที่จำเป็นสำหรับการเอาชนะผู้เล่น 50%"
     },
     "class2": {
       "label": "2nd Class",
-      "tip": "2nd Class: XP ที่จำเป็นในการเอาชนะผู้เล่น 80%"
+      "tip": "2nd Class: XP ที่จำเป็นสำหรับการเอาชนะผู้เล่น 80%"
     },
     "class1": {
       "label": "1st Class",
-      "tip": "1st Class: XP ที่จำเป็นในการเอาชนะผู้เล่น 95%"
+      "tip": "1st Class: XP ที่จำเป็นสำหรับการเอาชนะผู้เล่น 95%"
     },
     "ace": {
       "label": "Ace Tanker",

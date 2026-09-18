@@ -6,7 +6,7 @@
   "data-twitch": "你的 Twitch 聊天会从 Twitch 匿名读取。你发送的消息会通过 {name}，并使用你授予的 Twitch 权限。你可以在 Twitch 设置中撤销该权限。",
   "description": "适用于 World of Tanks 的 {name} 模组：在战斗中、Tab 屏幕和加载屏幕上、战斗结果中以及整个车库内显示每位玩家的 WN8 或 WNX 和其军团的语言，并将你的 Twitch 聊天带入游戏。免费且开源。",
   "download": "从 wgmods.net 下载",
-  "download-note": "免费且开源。托管于 Wargaming 的官方模组中心，该中心始终注明其适用的客户端版本。",
+  "download-note": "免费且打开来源。托管在默认的官方模组中心，该中心始终标明其构建所针对的客户端版本名称。",
   "eyebrow": "World of Tanks 游戏模式",
   "faq": "常见问题",
   "faq-allowed-answer": "它只显示公开统计数据：任何人都可以查询的评分，以及军团声明使用的语言。它不会透露游戏隐藏的任何信息，例如敌方位置或装填计时器，不会在战斗中自动执行任何操作，并且通过 Wargaming 的官方模组中心 wgmods.net 分发。",

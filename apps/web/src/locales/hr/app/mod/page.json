@@ -6,7 +6,7 @@
   "data-twitch": "Vaš Twitch chat anonimno se čita s Twitcha. Poruke koje napišete šalju se putem {name} uz dopuštenje za Twitch koje ste dali, a možete ga opozvati u svojim postavkama Twitcha.",
   "description": "Mod {name} za World of Tanks: WN8 ili WNX svakog igrača i jezici njegova klana u bitci, na zaslonima Tab i učitavanja, u rezultatima bitke i diljem garaže, uz vaš Twitch chat u igri. Besplatno i otvorenog izvornog koda.",
   "download": "Preuzmi na wgmods.net",
-  "download-note": "Besplatno i otvorenog izvornog koda. Smješteno na službenom Wargamingovu čvorištu modova, koje uvijek navodi verziju klijenta za koju je izrađeno.",
+  "download-note": "Besplatno i otvorenog koda. Ugošteno na službenom Wargamingovu središtu modova, koje uvijek navodi verziju klijenta za koju je izrađeno.",
   "eyebrow": "Način igre za World of Tanks",
   "faq": "Često postavljana pitanja",
   "faq-allowed-answer": "Prikazuje samo javne statistike: ocjene koje svatko može pogledati i jezike koje klanovi navedu. Ne otkriva ništa što igra skriva, poput položaja neprijatelja ili vremena punjenja, ne automatizira ništa u bitci i distribuira se putem wgmods.net, službenog Wargamingova čvorišta modova.",

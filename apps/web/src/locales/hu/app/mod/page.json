@@ -6,7 +6,7 @@
   "data-twitch": "A Twitch-chatedet névtelenül olvassa a Twitchből. Az általad írt üzenetek a(z) {name} rendszeren keresztül mennek tovább a megadott Twitch-engedéllyel, amelyet a Twitch-beállításaidban visszavonhatsz.",
   "description": "A(z) {name} mod a World of Tankshez: minden játékos WN8- vagy WNX-értékelése és klánjának nyelvei csatában, a Tab- és betöltési képernyőkön, az eredményekben és a garázsban, valamint a Twitch-chated a játékban. Ingyenes és nyitott forráskódú.",
   "download": "Letöltés a wgmods.net oldalról",
-  "download-note": "Ingyenes és nyitott forráskódú. A Wargaming hivatalos modközpontja tárolja, amely mindig megnevezi, melyik kliensverzióhoz készült.",
+  "download-note": "Ingyen és nyitott forráskódú. A Wargaming hivatalos modközpontján érhető el, ahol a nevek mindig feltüntetik, melyik kliensverzióhoz készült a mod.",
   "eyebrow": "World of Tanks-mod",
   "faq": "Gyakran ismételt kérdések",
   "faq-allowed-answer": "Csak nyilvános statisztikákat jelenít meg: bárki által lekérhető értékeléseket és a klánok által megadott nyelveket. Semmit nem fed fel abból, amit a játék elrejt, például az ellenséges járművek helyzetét vagy az újratöltési időket, és semmit nem automatizál csatában. A terjesztés a Wargaming hivatalos modközpontján, a wgmods.net oldalon keresztül történik.",

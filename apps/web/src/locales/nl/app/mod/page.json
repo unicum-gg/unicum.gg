@@ -6,7 +6,7 @@
   "data-twitch": "Je Twitch-chat wordt anoniem gelezen via Twitch. Berichten die je schrijft, gaan via {name} met de Twitch-machtiging die je hebt gegeven. Je kunt die intrekken in je Twitch-instellingen.",
   "description": "De {name}-mod voor World of Tanks: de WN8- of WNX-beoordeling van elke speler en de talen van hun clan in het gevecht, op de Tab- en laadschermen, in de gevechtsresultaten en in de hele garage, plus je Twitch-chat in het spel. Beschikbaar en open source.",
   "download": "Downloaden op wgmods.net",
-  "download-note": "Beschikbaar en open source. Gehost op de officiële modhub van Wargaming, die altijd de clientversie vermeldt waarvoor de mod is gebouwd.",
+  "download-note": "Beschikbaar en open bron. Gehost op Wargaming’s officiële modhub, die altijd de clientversie vermeldt waarvoor het is gebouwd.",
   "eyebrow": "World of Tanks-mod",
   "faq": "Veelgestelde vragen",
   "faq-allowed-answer": "De mod toont alleen openbare statistieken: beoordelingen die iedereen kan opzoeken en de talen die clans opgeven. Er wordt niets onthuld wat het spel verbergt, zoals vijandelijke posities of herlaadtimers, en er wordt niets geautomatiseerd in het gevecht. De mod wordt verspreid via wgmods.net, de officiële modhub van Wargaming.",

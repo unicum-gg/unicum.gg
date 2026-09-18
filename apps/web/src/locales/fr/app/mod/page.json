@@ -6,7 +6,7 @@
   "data-twitch": "Votre chat Twitch est lu anonymement depuis Twitch. Les messages que vous écrivez passent par {name} avec l’autorisation Twitch que vous avez accordée, que vous pouvez révoquer dans vos paramètres Twitch.",
   "description": "Le mod {name} pour World of Tanks affiche la notation WN8 ou WNX de chaque joueur et les langues de son clan en bataille, sur les écrans Tab et de chargement, dans les résultats de bataille et partout dans le garage, ainsi que votre chat Twitch dans le jeu. Gratuit et à source ouverte.",
   "download": "Télécharger sur wgmods.net",
-  "download-note": "Gratuit et à source ouverte. Hébergé sur le hub officiel des mods de Wargaming, qui indique toujours la version du client pour laquelle il est conçu.",
+  "download-note": "Libre et à code source ouvert. Hébergé sur le hub officiel des mods de Wargaming, qui indique toujours la version du client pour laquelle il est conçu.",
   "eyebrow": "Mode de jeu World of Tanks",
   "faq": "Questions fréquemment posées",
   "faq-allowed-answer": "Il affiche uniquement des statistiques publiques, les notations que tout le monde peut consulter et les langues déclarées par les clans. Il ne révèle rien de ce que le jeu dissimule, comme la position des ennemis ou les temps de rechargement, n’automatise rien en bataille et est distribué via wgmods.net, le hub officiel des mods de Wargaming.",

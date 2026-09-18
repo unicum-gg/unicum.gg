@@ -6,7 +6,7 @@
   "data-twitch": "Twitch-chatiasi luetaan Twitchistä anonyymisti. Kirjoittamasi viestit kulkevat palvelun {name} kautta myöntämilläsi Twitch-oikeuksilla, jotka voit peruuttaa Twitch-asetuksistasi.",
   "description": "World of Tanks -peliin tarkoitettu modi nimeltä {name}: jokaisen pelaajan WN8 tai WNX ja klaanin kielet taistelussa, sarkain- ja latausnäytöillä, taistelun tuloksissa ja tallissa, sekä Twitch-chat pelissä. Ilmainen ja avoin lähdekoodi.",
   "download": "Lataa sivustolta wgmods.net",
-  "download-note": "Ilmainen ja avoin lähdekoodi. Wargamingin virallisessa modikeskuksessa isännöity paketti ilmoittaa aina asiakasohjelman version, jota varten se on rakennettu.",
+  "download-note": "Ilmainen ja avoimen lähdekoodin. Wargamingin virallisessa modikeskuksessa, jossa nimet ilmoittavat aina, mille asiakasohjelman versiolle se on rakennettu.",
   "eyebrow": "World of Tanks -modi",
   "faq": "Usein kysytyt kysymykset",
   "faq-allowed-answer": "Se näyttää vain julkisia tilastoja, arvosanoja, joita kuka tahansa voi tarkastella, ja kieliä, jotka klaanit ilmoittavat. Se ei paljasta mitään pelin piilottamaa, kuten vihollisten sijainteja tai latausaikoja, eikä automatisoi mitään taistelussa. Modi jaetaan wgmods.netissä, Wargamingin virallisessa modikeskuksessa.",

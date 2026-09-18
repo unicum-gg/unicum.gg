@@ -6,7 +6,7 @@
   "data-twitch": "Twitch-chatten din leses anonymt fra Twitch. Meldinger du skriver går via {name} med Twitch-tillatelsen du har gitt, som du kan trekke tilbake i Twitch-innstillingene dine.",
   "description": "{name}-modden for World of Tanks viser hver spillers WN8 eller WNX og språkene til klanen deres i kamp, på Tab- og lasteskjermene, i kampresultatene og over hele garasjen, i tillegg til Twitch-chatten din i spillet. Gratis og åpen kildekode.",
   "download": "Last ned fra wgmods.net",
-  "download-note": "Gratis og åpen kildekode. Ligger på Wargamings offisielle mod-hub, som alltid oppgir klientversjonen den er bygget for.",
+  "download-note": "Gratis og åpen kildekode. Ligger på den offisielle mod-huben til Wargaming, som alltid viser navn på klientversjonen den er bygget for.",
   "eyebrow": "World of Tanks-mod",
   "faq": "Vanlige spørsmål",
   "faq-allowed-answer": "Den viser bare offentlig statistikk: vurderinger alle kan slå opp, og språk klaner oppgir. Den avslører ingenting spillet skjuler, som fiendens posisjoner eller ladetider, automatiserer ingenting i kamp og distribueres gjennom wgmods.net, Wargamings offisielle mod-hub.",
