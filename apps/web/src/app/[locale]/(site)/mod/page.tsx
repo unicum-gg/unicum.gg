@@ -23,9 +23,6 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
-
-// The client the released package is built and checked against.
-const GAME_VERSION = "2.4";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
@@ -98,7 +95,7 @@ export default async function ModPage({
   const faq = FAQ.map((key) => ({
     key,
     question: t(`faq-${key}-question`, { name: APP.NAME }),
-    answer: t(`faq-${key}-answer`, { name: APP.NAME, version: GAME_VERSION }),
+    answer: t(`faq-${key}-answer`, { name: APP.NAME }),
   }));
 
   return (
@@ -138,7 +135,12 @@ export default async function ModPage({
               {t("download")}
             </a>
             <p className="text-xs text-fd-muted-foreground">
-              {t("download-note", { version: GAME_VERSION })}
+              {/* No version here: the page cannot keep one true. Wargaming
+                  ships micropatches (2.4.0.1 a day after 2.4.0.0), and our own
+                  API disagrees with itself on what the current one is -- tanks
+                  say 2.4, maps say 2.4.0, the client says 2.4.0.1. The mod's
+                  wgmods page names the exact build and is always current. */}
+              {t("download-note")}
             </p>
           </div>
         </PanelContent>
