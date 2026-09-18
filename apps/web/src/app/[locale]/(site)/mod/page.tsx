@@ -83,6 +83,11 @@ const FAQ = ["allowed", "ratings", "servers", "free", "hide"];
 
 const INSTALL_STEPS = ["install-step-1", "install-step-2"];
 
+// The one other mod the steps name. Its name is a proper noun that no
+// language translates, so it is data beside its link, like APP.NAME, rather
+// than a key every locale would have to copy unchanged.
+const SETTINGS_MOD = { name: "modsSettingsApi", url: APP.EXTERNAL.MODS_SETTINGS_API };
+
 const DATA = ["data-ratings", "data-linking", "data-twitch"];
 
 export default async function ModPage({
@@ -204,12 +209,12 @@ export default async function ModPage({
             <p className={styles.mutedDescription}>
               {t("install-optional")}:{" "}
               <a
-                href={APP.EXTERNAL.MODS_SETTINGS_API}
+                href={SETTINGS_MOD.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline underline-offset-2 hover:text-fd-foreground"
               >
-                modsSettingsApi
+                {SETTINGS_MOD.name}
               </a>{" "}
               {t("install-optional-settings")}
             </p>
