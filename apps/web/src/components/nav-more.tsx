@@ -37,7 +37,15 @@ export function NavMore() {
       text={t("label")}
       items={[
         {
-          // First, with Servers: these two are the pages about the GAME, the
+          // The navbar shows it on its own too (NavMod); it stays here, first,
+          // for readers who look for everything in one menu.
+          text: t("items.mod.label"),
+          description: t("items.mod.description"),
+          url: ROUTES.MOD,
+          icon: <PuzzlePieceIcon />,
+        },
+        {
+          // First of the rest, with Servers: these two are the pages about the GAME, the
           // rest being integrations and pages about the project. Regional, like
           // Servers, which is the reason this menu became a Client Component.
           text: t("items.tournaments.label"),
@@ -56,12 +64,6 @@ export function NavMore() {
           description: t("items.bot.description"),
           url: ROUTES.BOT,
           icon: <RobotIcon />,
-        },
-        {
-          text: t("items.mod.label"),
-          description: t("items.mod.description"),
-          url: ROUTES.MOD,
-          icon: <PuzzlePieceIcon />,
         },
         {
           text: t("items.mcp.label"),
