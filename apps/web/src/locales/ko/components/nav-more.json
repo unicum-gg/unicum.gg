@@ -13,6 +13,10 @@
       "label": "Discord 봇",
       "description": "슬래시 명령으로 확인하는 플레이어, 클랜 및 전차 통계"
     },
+    "mod": {
+      "label": "게임 모드",
+      "description": "World of Tanks에서 바로 확인하는 평점과 언어"
+    },
     "mcp": {
       "label": "MCP 서버",
       "description": "Claude, ChatGPT 또는 MCP 클라이언트 연결"

@@ -13,6 +13,10 @@
       "label": "Discord-botti",
       "description": "Pelaaja-, klaani- ja panssarivaunutilastot slash-komentoina"
     },
+    "mod": {
+      "label": "Pelitila",
+      "description": "Arvosanat ja kielet suoraan World of Tanksissa"
+    },
     "mcp": {
       "label": "MCP-palvelin",
       "description": "Yhdistä Claude, ChatGPT tai mikä tahansa MCP-asiakas"

@@ -826,7 +826,15 @@
     "else": "autre",
     "flags": "drapeaux",
     "teams": "équipes",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asie",
+    "always": "toujours",
+    "choose": "choisir",
+    "held": "obtenus",
+    "needed": "nécessaires",
+    "servers": "serveurs",
+    "show": "afficher",
+    "version": "version"
   },
   "es": {
     "Battles": "Batallas",
@@ -1652,7 +1660,15 @@
     "else": "otros",
     "flags": "banderas",
     "teams": "equipos",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asia",
+    "always": "siempre",
+    "choose": "elegir",
+    "held": "celebrado",
+    "needed": "necesario",
+    "servers": "servidores",
+    "show": "mostrar",
+    "version": "versión"
   },
   "ru": {
     "Battles": "Бои",
@@ -2472,7 +2488,15 @@
     "else": "прочее",
     "flags": "флаги",
     "teams": "команды",
-    "unicum": "уникум"
+    "unicum": "уникум",
+    "Asia": "Азия",
+    "always": "всегда",
+    "choose": "выбрать",
+    "held": "полученные",
+    "needed": "необходимые",
+    "servers": "серверы",
+    "show": "показать",
+    "version": "версия"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3311,7 +3335,15 @@
     "else": "inne",
     "flags": "flagi",
     "teams": "drużyny",
-    "unicum": "unikum"
+    "unicum": "unikum",
+    "Asia": "Azja",
+    "always": "zawsze",
+    "choose": "wybierz",
+    "held": "posiadane",
+    "needed": "potrzebne",
+    "servers": "serwery",
+    "show": "pokaż",
+    "version": "wersja"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4160,7 +4192,15 @@
     "else": "その他",
     "flags": "国旗",
     "teams": "チーム",
-    "unicum": "ユニカム"
+    "unicum": "ユニカム",
+    "Asia": "アジア",
+    "always": "常に",
+    "choose": "選択",
+    "held": "所持",
+    "needed": "必要",
+    "servers": "サーバー",
+    "show": "表示",
+    "version": "バージョン"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4794,7 +4834,15 @@
     "else": "أخرى",
     "flags": "الأعلام",
     "teams": "الفرق",
-    "unicum": "يونيكوم"
+    "unicum": "يونيكوم",
+    "Asia": "آسيا",
+    "always": "دائمًا",
+    "choose": "اختر",
+    "held": "مُحتفَظ بها",
+    "needed": "مطلوب",
+    "servers": "خوادم",
+    "show": "عرض",
+    "version": "إصدار"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5640,7 +5688,15 @@
     "else": "ostalo",
     "flags": "zastave",
     "teams": "timovi",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Azija",
+    "always": "uvijek",
+    "choose": "odaberi",
+    "held": "održano",
+    "needed": "potrebno",
+    "servers": "serveri",
+    "show": "prikaži",
+    "version": "verzija"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6487,7 +6543,15 @@
     "else": "egyéb",
     "flags": "zászlók",
     "teams": "csapatok",
-    "unicum": "unikum"
+    "unicum": "unikum",
+    "Asia": "Ázsia",
+    "always": "mindig",
+    "choose": "válassz",
+    "held": "megszerzett",
+    "needed": "szükséges",
+    "servers": "szerverek",
+    "show": "mutat",
+    "version": "verzió"
   },
   "ko": {
     "Battles": "전투",
@@ -7341,7 +7405,15 @@
     "else": "기타",
     "flags": "국기",
     "teams": "팀",
-    "unicum": "유니컴"
+    "unicum": "유니컴",
+    "Asia": "아시아",
+    "always": "항상",
+    "choose": "선택",
+    "held": "보유",
+    "needed": "필요",
+    "servers": "서버",
+    "show": "표시",
+    "version": "버전"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8192,7 +8264,15 @@
     "else": "overige",
     "flags": "vlaggen",
     "teams": "teams",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Azië",
+    "always": "altijd",
+    "choose": "kiezen",
+    "held": "behaald",
+    "needed": "nodig",
+    "servers": "servers",
+    "show": "tonen",
+    "version": "versie"
   },
   "cs": {
     "Battles": "Bitev",
@@ -9034,7 +9114,15 @@
     "else": "ostatní",
     "flags": "vlajky",
     "teams": "týmy",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asie",
+    "always": "vždy",
+    "choose": "vybrat",
+    "held": "vlastněné",
+    "needed": "potřebné",
+    "servers": "servery",
+    "show": "zobrazit",
+    "version": "verze"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9878,7 +9966,15 @@
     "else": "diğer",
     "flags": "bayraklar",
     "teams": "takımlar",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asya",
+    "always": "her zaman",
+    "choose": "seç",
+    "held": "sahip olunan",
+    "needed": "gerekli",
+    "servers": "sunucular",
+    "show": "göster",
+    "version": "sürüm"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10511,7 +10607,15 @@
     "else": "іншае",
     "flags": "сцягі",
     "teams": "каманды",
-    "unicum": "унікум"
+    "unicum": "унікум",
+    "Asia": "Азія",
+    "always": "заўсёды",
+    "choose": "выбраць",
+    "held": "атрыманыя",
+    "needed": "патрэбныя",
+    "servers": "серверы",
+    "show": "паказаць",
+    "version": "версія"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11151,7 +11255,15 @@
     "else": "iné",
     "flags": "vlajky",
     "teams": "tímy",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Azija",
+    "always": "vedno",
+    "choose": "izberi",
+    "held": "v lasti",
+    "needed": "potrebno",
+    "servers": "strežniki",
+    "show": "prikaži",
+    "version": "različica"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -11792,7 +11904,15 @@
     "else": "ostalo",
     "flags": "zastave",
     "teams": "timovi",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Azija",
+    "always": "uvijek",
+    "choose": "odaberi",
+    "held": "održano",
+    "needed": "potrebno",
+    "servers": "serveri",
+    "show": "prikaži",
+    "version": "verzija"
   },
   "th": {
     "Battles": "การรบ",
@@ -12639,7 +12759,15 @@
     "else": "อื่นๆ",
     "flags": "ธง",
     "teams": "ทีม",
-    "unicum": "ยูนิคัม"
+    "unicum": "ยูนิคัม",
+    "Asia": "เอเชีย",
+    "always": "เสมอ",
+    "choose": "เลือก",
+    "held": "มีอยู่",
+    "needed": "จำเป็น",
+    "servers": "เซิร์ฟเวอร์",
+    "show": "แสดง",
+    "version": "เวอร์ชัน"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13486,7 +13614,15 @@
     "else": "其他",
     "flags": "国旗",
     "teams": "队伍",
-    "unicum": "紫名"
+    "unicum": "紫名",
+    "Asia": "亚洲",
+    "always": "始终",
+    "choose": "选择",
+    "held": "持有",
+    "needed": "需要",
+    "servers": "服务器",
+    "show": "显示",
+    "version": "版本"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14318,7 +14454,15 @@
     "else": "outros",
     "flags": "bandeiras",
     "teams": "equipas",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Ásia",
+    "always": "sempre",
+    "choose": "escolher",
+    "held": "conquistadas",
+    "needed": "necessário",
+    "servers": "servidores",
+    "show": "mostrar",
+    "version": "versão"
   },
   "vi": {
     "Battles": "Số trận",
@@ -15145,7 +15289,15 @@
     "else": "khác",
     "flags": "cờ",
     "teams": "đội",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Châu Á",
+    "always": "luôn luôn",
+    "choose": "chọn",
+    "held": "sở hữu",
+    "needed": "cần thiết",
+    "servers": "máy chủ",
+    "show": "hiển thị",
+    "version": "phiên bản"
   },
   "de": {
     "Battles": "Gefechte",
@@ -15985,7 +16137,15 @@
     "else": "Sonstiges",
     "flags": "Flaggen",
     "teams": "Teams",
-    "unicum": "Unicum"
+    "unicum": "Unicum",
+    "Asia": "Asien",
+    "always": "immer",
+    "choose": "auswählen",
+    "held": "ausgetragen",
+    "needed": "benötigt",
+    "servers": "Server",
+    "show": "anzeigen",
+    "version": "Version"
   },
   "uk": {
     "Battles": "Бої",
@@ -16822,7 +16982,15 @@
     "else": "інше",
     "flags": "прапори",
     "teams": "команди",
-    "unicum": "унікум"
+    "unicum": "унікум",
+    "Asia": "Азія",
+    "always": "завжди",
+    "choose": "вибрати",
+    "held": "наявні",
+    "needed": "потрібні",
+    "servers": "сервери",
+    "show": "показати",
+    "version": "версія"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17664,7 +17832,15 @@
     "else": "altro",
     "flags": "bandiere",
     "teams": "squadre",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asia",
+    "always": "sempre",
+    "choose": "scegli",
+    "held": "posseduti",
+    "needed": "necessario",
+    "servers": "server",
+    "show": "mostra",
+    "version": "versione"
   },
   "sv": {
     "Battles": "Strider",
@@ -18515,7 +18691,15 @@
     "else": "övrigt",
     "flags": "flaggor",
     "teams": "lag",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asien",
+    "always": "alltid",
+    "choose": "välj",
+    "held": "hållna",
+    "needed": "behövs",
+    "servers": "servrar",
+    "show": "visa",
+    "version": "version"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19362,7 +19546,15 @@
     "else": "остало",
     "flags": "заставе",
     "teams": "тимови",
-    "unicum": "уникум"
+    "unicum": "уникум",
+    "Asia": "Азија",
+    "always": "увек",
+    "choose": "изабери",
+    "held": "одржано",
+    "needed": "потребно",
+    "servers": "сервери",
+    "show": "прикажи",
+    "version": "верзија"
   },
   "el": {
     "Battles": "Μάχες",
@@ -20208,7 +20400,15 @@
     "else": "άλλα",
     "flags": "σημαίες",
     "teams": "ομάδες",
-    "unicum": "ουνίκουμ"
+    "unicum": "ουνίκουμ",
+    "Asia": "Ασία",
+    "always": "πάντα",
+    "choose": "επιλογή",
+    "held": "κατεχόμενα",
+    "needed": "απαιτούμενα",
+    "servers": "διακομιστές",
+    "show": "εμφάνιση",
+    "version": "έκδοση"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -21043,7 +21243,15 @@
     "else": "cits",
     "flags": "karogi",
     "teams": "komandas",
-    "unicum": "unikums"
+    "unicum": "unikums",
+    "Asia": "Āzija",
+    "always": "vienmēr",
+    "choose": "izvēlēties",
+    "held": "iegūtās",
+    "needed": "nepieciešams",
+    "servers": "serveri",
+    "show": "rādīt",
+    "version": "versija"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -21677,7 +21885,15 @@
     "else": "अन्य",
     "flags": "झंडे",
     "teams": "टीमें",
-    "unicum": "यूनिकम"
+    "unicum": "यूनिकम",
+    "Asia": "एशिया",
+    "always": "हमेशा",
+    "choose": "चुनें",
+    "held": "प्राप्त",
+    "needed": "आवश्यक",
+    "servers": "सर्वर",
+    "show": "दिखाएँ",
+    "version": "संस्करण"
   },
   "bg": {
     "Battles": "Битки",
@@ -22508,7 +22724,15 @@
     "else": "друго",
     "flags": "флагове",
     "teams": "отбори",
-    "unicum": "уникум"
+    "unicum": "уникум",
+    "Asia": "Азия",
+    "always": "винаги",
+    "choose": "изберете",
+    "held": "притежавани",
+    "needed": "необходими",
+    "servers": "сървъри",
+    "show": "покажи",
+    "version": "версия"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23359,7 +23583,15 @@
     "else": "kita",
     "flags": "vėliavos",
     "teams": "komandos",
-    "unicum": "unikumas"
+    "unicum": "unikumas",
+    "Asia": "Azija",
+    "always": "visada",
+    "choose": "pasirinkti",
+    "held": "turimi",
+    "needed": "reikalingi",
+    "servers": "serveriai",
+    "show": "rodyti",
+    "version": "versija"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -23997,7 +24229,15 @@
     "else": "басқа",
     "flags": "жалаулар",
     "teams": "командалар",
-    "unicum": "уникум"
+    "unicum": "уникум",
+    "Asia": "Азия",
+    "always": "әрқашан",
+    "choose": "таңдау",
+    "held": "иеленген",
+    "needed": "қажет",
+    "servers": "серверлер",
+    "show": "көрсету",
+    "version": "нұсқа"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -24848,7 +25088,15 @@
     "else": "muu",
     "flags": "liput",
     "teams": "joukkueet",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Aasia",
+    "always": "aina",
+    "choose": "valitse",
+    "held": "hallussa",
+    "needed": "tarvitaan",
+    "servers": "palvelimet",
+    "show": "näytä",
+    "version": "versio"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -25487,7 +25735,15 @@
     "else": "iba pa",
     "flags": "mga bandila",
     "teams": "mga koponan",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asya",
+    "always": "palagi",
+    "choose": "pumili",
+    "held": "taglay",
+    "needed": "kailangan",
+    "servers": "mga server",
+    "show": "ipakita",
+    "version": "bersyon"
   },
   "no": {
     "Battles": "Kamper",
@@ -26330,7 +26586,15 @@
     "else": "annet",
     "flags": "flagg",
     "teams": "lag",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asia",
+    "always": "alltid",
+    "choose": "velg",
+    "held": "holdt",
+    "needed": "nødvendig",
+    "servers": "servere",
+    "show": "vis",
+    "version": "versjon"
   },
   "ro": {
     "Battles": "Lupte",
@@ -27162,7 +27426,15 @@
     "else": "altele",
     "flags": "steaguri",
     "teams": "echipe",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asia",
+    "always": "întotdeauna",
+    "choose": "alege",
+    "held": "deținute",
+    "needed": "necesar",
+    "servers": "servere",
+    "show": "afișează",
+    "version": "versiune"
   },
   "da": {
     "Battles": "Kampe",
@@ -28009,6 +28281,14 @@
     "else": "andet",
     "flags": "flag",
     "teams": "hold",
-    "unicum": "unicum"
+    "unicum": "unicum",
+    "Asia": "Asien",
+    "always": "altid",
+    "choose": "vælg",
+    "held": "afholdt",
+    "needed": "nødvendige",
+    "servers": "servere",
+    "show": "vis",
+    "version": "version"
   }
 }

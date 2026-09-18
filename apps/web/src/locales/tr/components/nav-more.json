@@ -13,6 +13,10 @@
       "label": "Discord botu",
       "description": "Eğik çizgi komutlarıyla oyuncu, klan ve tank istatistikleri"
     },
+    "mod": {
+      "label": "Oyun modu",
+      "description": "World of Tanks’te değerlendirmeler ve diller sağda"
+    },
     "mcp": {
       "label": "MCP sunucusu",
       "description": "Claude, ChatGPT veya herhangi bir MCP istemcisine bağlan"

@@ -13,6 +13,10 @@
       "label": "Discord bot",
       "description": "Hráč, klan a Tank: statistiky dostupné jako lomítkové příkazy"
     },
+    "mod": {
+      "label": "Herní režim",
+      "description": "Hodnocení a jazyky přímo ve World of Tanks"
+    },
     "mcp": {
       "label": "MCP server",
       "description": "Připojte Claude, ChatGPT nebo libovolného klienta MCP"

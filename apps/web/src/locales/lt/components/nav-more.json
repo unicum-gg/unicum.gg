@@ -13,6 +13,10 @@
       "label": "Discord bot",
       "description": "Žaidėjų, klanų ir tankų statistika kaip pasvirojo brūkšnio komandos"
     },
+    "mod": {
+      "label": "Žaidimo režimas",
+      "description": "Reitingai ir kalbos tiesiai World of Tanks"
+    },
     "mcp": {
       "label": "MCP serveris",
       "description": "Prisijunkite prie Claude, ChatGPT arba bet kurio MCP kliento"
