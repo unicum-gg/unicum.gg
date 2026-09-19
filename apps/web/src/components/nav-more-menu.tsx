@@ -44,7 +44,10 @@ export function NavMoreMenu({
       >
         {text}
       </NavbarMenuTrigger>
-      <NavbarMenuContent>
+      {/* Full rows in every menu: eight cards are two rows of four (Tanks,
+          Maps, More), three are one row of three (Players, Clans). The
+          fumadocs default of three columns left eight as 3 + 3 + 2. */}
+      <NavbarMenuContent className={items.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}>
         {items.map((item) => (
           <NavbarMenuLink key={item.url} href={item.url} aria-label={item.text}>
             <div className="w-fit rounded-md border bg-fd-muted p-1 [&_svg]:size-4">
