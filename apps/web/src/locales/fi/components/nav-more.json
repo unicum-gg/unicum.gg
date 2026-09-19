@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Sanasto",
       "description": "Jokainen World of Tanks -termi selitettynä"
-    },
-    "support": {
-      "label": "Tukee meitä",
-      "description": "Pidä {name} ilmaisena, avoimena ja mainoksettomana"
     }
   }
 }

@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Glossarium",
       "description": "Elke World of Tanks-term uitgelegd"
-    },
-    "support": {
-      "label": "Steun ons",
-      "description": "Houd {name} gratis, open en reclamevrij"
     }
   }
 }

@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Szótár",
       "description": "Minden World of Tanks-kifejezés magyarázattal"
-    },
-    "support": {
-      "label": "Támogass minket",
-      "description": "Tartsd a {name} oldalt ingyenesen, nyitottan és reklámmentesen"
     }
   }
 }

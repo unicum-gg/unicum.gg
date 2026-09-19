@@ -32,10 +32,6 @@
     "glossary": {
       "label": "مسرد المصطلحات",
       "description": "كل مصطلح في World of Tanks مع شرحه"
-    },
-    "support": {
-      "label": "ادعمنا",
-      "description": "حافظ على {name} مجانيًا ومفتوحًا وخاليًا من الإعلانات"
     }
   }
 }

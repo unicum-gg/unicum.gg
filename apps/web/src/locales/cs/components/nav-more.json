@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Slovník",
       "description": "Vysvětlení všech pojmů z World of Tanks"
-    },
-    "support": {
-      "label": "Podpořte nás",
-      "description": "Pomozte udržet web {name} zdarma, otevřený a bez reklam"
     }
   }
 }

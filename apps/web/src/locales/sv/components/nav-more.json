@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Ordlista",
       "description": "Alla termer i World of Tanks, förklarade"
-    },
-    "support": {
-      "label": "Stöd oss",
-      "description": "Hjälp {name} att förbli Gratis, med öppen källkod och utan reklam"
     }
   }
 }

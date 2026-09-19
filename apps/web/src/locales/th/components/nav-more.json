@@ -32,10 +32,6 @@
     "glossary": {
       "label": "พจนานุกรม",
       "description": "คำศัพท์ World of Tanks ทุกคำพร้อมคำอธิบาย"
-    },
-    "support": {
-      "label": "สนับสนุนเรา",
-      "description": "ช่วยให้ {name} ฟรี เปิด และไม่มีโฆษณา"
     }
   }
 }

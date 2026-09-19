@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Terminų žodynas",
       "description": "Kiekvienas World of Tanks terminas su paaiškinimu"
-    },
-    "support": {
-      "label": "Palaikykite mus",
-      "description": "Padėkite išlaikyti {name} nemokamą, atvirą ir be reklamų"
     }
   }
 }

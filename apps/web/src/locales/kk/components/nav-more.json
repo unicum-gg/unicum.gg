@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Глоссарий",
       "description": "Әрбір World of Tanks термині түсіндірілген"
-    },
-    "support": {
-      "label": "Бізді қолдаңыз",
-      "description": "{name} сайтын тегін, ашық және жарнамасыз ұстаңыз"
     }
   }
 }

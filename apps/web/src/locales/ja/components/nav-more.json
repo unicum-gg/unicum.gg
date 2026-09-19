@@ -32,10 +32,6 @@
     "glossary": {
       "label": "用語集",
       "description": "World of Tanksの用語をすべて解説"
-    },
-    "support": {
-      "label": "サポートしてください",
-      "description": "{name}を無料でオープンかつ広告なしに維持"
     }
   }
 }

@@ -27,8 +27,9 @@ export function TopBar({ feedbackEnabled }: { feedbackEnabled: boolean }) {
         <div className="relative flex h-9 items-center justify-between gap-3 border-x border-fd-border px-4 text-xs">
           <PlayersOnline />
           <div className="flex items-center gap-3">
-            {/* /support is also linked from the footer and the nav "More" menu;
-                the persistent top-bar CTA doesn't need to prefetch it too. */}
+            {/* /support is also linked from the footer; the persistent
+                top-bar CTA doesn't need to prefetch it too. It is the only
+                place the navigation offers it, the "More" menu included. */}
             <Link
               href={ROUTES.SUPPORT}
               className="shrink-0 font-medium text-brand transition-opacity hover:opacity-80"

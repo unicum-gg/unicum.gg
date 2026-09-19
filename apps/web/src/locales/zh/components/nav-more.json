@@ -32,10 +32,6 @@
     "glossary": {
       "label": "词汇表",
       "description": "解释每个 World of Tanks 术语"
-    },
-    "support": {
-      "label": "支持我们",
-      "description": "支持{name}保持免费、开放且无广告"
     }
   }
 }

@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Glossar",
       "description": "Alle Begriffe aus World of Tanks erklärt"
-    },
-    "support": {
-      "label": "Unterstütze uns",
-      "description": "Kostenlos, offen und werbefrei: Hilf, {name} so zu erhalten"
     }
   }
 }

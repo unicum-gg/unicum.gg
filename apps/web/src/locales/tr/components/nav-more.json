@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Sözlük",
       "description": "Açıklanan tüm World of Tanks terimleri"
-    },
-    "support": {
-      "label": "Bizi destekle",
-      "description": "{name} hizmetini ücretsiz, açık ve reklamsız tut"
     }
   }
 }

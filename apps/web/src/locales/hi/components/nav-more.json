@@ -32,10 +32,6 @@
     "glossary": {
       "label": "ग्लॉसरी",
       "description": "हर World of Tanks शब्द की व्याख्या"
-    },
-    "support": {
-      "label": "हमें समर्थन करें",
-      "description": "{name} को निःशुल्क, खुले और विज्ञापन-मुक्त रखने में मदद करें"
     }
   }
 }

@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Vārdu krājums",
       "description": "Katrs World of Tanks termins ar skaidrojumu"
-    },
-    "support": {
-      "label": "Atbalstiet mūs",
-      "description": "Palīdzi uzturēt {name} bezmaksas, atvērtu un bez reklāmām"
     }
   }
 }

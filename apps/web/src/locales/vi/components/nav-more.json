@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Thuật ngữ",
       "description": "Mọi thuật ngữ World of Tanks được giải thích"
-    },
-    "support": {
-      "label": "Hỗ trợ chúng tôi",
-      "description": "Giữ cho {name} miễn phí, mở và không có quảng cáo"
     }
   }
 }

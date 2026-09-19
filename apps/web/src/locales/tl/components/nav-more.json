@@ -32,10 +32,6 @@
     "glossary": {
       "label": "Glosaryo",
       "description": "Bawat termino sa World of Tanks, ipinaliwanag"
-    },
-    "support": {
-      "label": "Suportahan kami",
-      "description": "Panatilihing libre, bukas at walang ad ang {name}"
     }
   }
 }
