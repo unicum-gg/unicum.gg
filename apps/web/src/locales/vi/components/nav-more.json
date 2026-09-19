@@ -14,8 +14,8 @@
       "description": "Thống kê người chơi, Clan và xe tăng dưới dạng lệnh slash"
     },
     "mod": {
-      "label": "Chế độ chơi",
-      "description": "Chỉ số đánh giá và ngôn ngữ ngay trong World of Tanks"
+      "description": "Chỉ số đánh giá và ngôn ngữ ngay trong World of Tanks",
+      "label": "Mod"
     },
     "mcp": {
       "label": "Máy chủ MCP",

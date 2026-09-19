@@ -820,7 +820,6 @@
     "TBD": "À déterminer",
     "In battle": "En bataille",
     "Battle Results": "Résultats de la bataille",
-    "Game mod": "mode de jeu",
     "badges": "insignes",
     "button": "bouton",
     "else": "autre",
@@ -834,7 +833,8 @@
     "needed": "nécessaires",
     "servers": "serveurs",
     "show": "afficher",
-    "version": "version"
+    "version": "version",
+    "Game mod": "Mod"
   },
   "es": {
     "Battles": "Batallas",
@@ -1654,7 +1654,6 @@
     "TBD": "TBD",
     "In battle": "En batalla",
     "Battle Results": "Resultados de la batalla",
-    "Game mod": "Modo de juego",
     "badges": "insignias",
     "button": "botón",
     "else": "otros",
@@ -1668,7 +1667,8 @@
     "needed": "necesario",
     "servers": "servidores",
     "show": "mostrar",
-    "version": "versión"
+    "version": "versión",
+    "Game mod": "Mod"
   },
   "ru": {
     "Battles": "Бои",
@@ -2482,7 +2482,6 @@
     "TBD": "TBD",
     "In battle": "В бою",
     "Battle Results": "Результаты боя",
-    "Game mod": "Игровой режим",
     "badges": "значки",
     "button": "кнопка",
     "else": "прочее",
@@ -2496,7 +2495,8 @@
     "needed": "необходимые",
     "servers": "серверы",
     "show": "показать",
-    "version": "версия"
+    "version": "версия",
+    "Game mod": "Мод"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3329,7 +3329,6 @@
     "TBD": "DO USTALENIA",
     "In battle": "W bitwie",
     "Battle Results": "Wyniki bitwy",
-    "Game mod": "Tryb gry",
     "badges": "odznaki",
     "button": "przycisk",
     "else": "inne",
@@ -3343,7 +3342,8 @@
     "needed": "potrzebne",
     "servers": "serwery",
     "show": "pokaż",
-    "version": "wersja"
+    "version": "wersja",
+    "Game mod": "Mod"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4186,7 +4186,6 @@
     "TBD": "未定",
     "In battle": "戦闘中",
     "Battle Results": "戦闘結果",
-    "Game mod": "ゲームモード",
     "badges": "バッジ",
     "button": "ボタン",
     "else": "その他",
@@ -4200,7 +4199,8 @@
     "needed": "必要",
     "servers": "サーバー",
     "show": "表示",
-    "version": "バージョン"
+    "version": "バージョン",
+    "Game mod": "MOD"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4828,7 +4828,6 @@
     "rank": "الترتيب",
     "takes": "يأخذ",
     "rather": "بالأحرى",
-    "Game mod": "طور اللعبة",
     "badges": "الشارات",
     "button": "زر",
     "else": "أخرى",
@@ -4842,7 +4841,8 @@
     "needed": "مطلوب",
     "servers": "خوادم",
     "show": "عرض",
-    "version": "إصدار"
+    "version": "إصدار",
+    "Game mod": "مود"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5682,7 +5682,6 @@
     "TBD": "TBD",
     "In battle": "U bitci",
     "Battle Results": "Rezultati bitke",
-    "Game mod": "način igre",
     "badges": "značke",
     "button": "gumb",
     "else": "ostalo",
@@ -5696,7 +5695,8 @@
     "needed": "potrebno",
     "servers": "serveri",
     "show": "prikaži",
-    "version": "verzija"
+    "version": "verzija",
+    "Game mod": "Mod"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6537,7 +6537,6 @@
     "TBD": "KÉSŐBB",
     "In battle": "Csatában",
     "Battle Results": "Csata eredmények",
-    "Game mod": "Játékmód",
     "badges": "jelvények",
     "button": "gomb",
     "else": "egyéb",
@@ -6551,7 +6550,8 @@
     "needed": "szükséges",
     "servers": "szerverek",
     "show": "mutat",
-    "version": "verzió"
+    "version": "verzió",
+    "Game mod": "Mod"
   },
   "ko": {
     "Battles": "전투",
@@ -7399,7 +7399,6 @@
     "TBD": "공개 예정",
     "In battle": "전투 중",
     "Battle Results": "전투 결과",
-    "Game mod": "게임 모드",
     "badges": "배지",
     "button": "버튼",
     "else": "기타",
@@ -7413,7 +7412,8 @@
     "needed": "필요",
     "servers": "서버",
     "show": "표시",
-    "version": "버전"
+    "version": "버전",
+    "Game mod": "MOD"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8258,7 +8258,6 @@
     "TBD": "NTB",
     "In battle": "In gevecht",
     "Battle Results": "Gevechtsresultaten",
-    "Game mod": "Spelmodus",
     "badges": "badges",
     "button": "knop",
     "else": "overige",
@@ -8272,7 +8271,8 @@
     "needed": "nodig",
     "servers": "servers",
     "show": "tonen",
-    "version": "versie"
+    "version": "versie",
+    "Game mod": "Mod"
   },
   "cs": {
     "Battles": "Bitev",
@@ -9108,7 +9108,6 @@
     "TBD": "TBD",
     "In battle": "V bitvě",
     "Battle Results": "Výsledky bitvy",
-    "Game mod": "Herní režim",
     "badges": "odznaky",
     "button": "tlačítko",
     "else": "ostatní",
@@ -9122,7 +9121,8 @@
     "needed": "potřebné",
     "servers": "servery",
     "show": "zobrazit",
-    "version": "verze"
+    "version": "verze",
+    "Game mod": "Mód"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9960,7 +9960,6 @@
     "TBD": "SONRA AÇIKLANACAK",
     "In battle": "Savaşta",
     "Battle Results": "Savaş Sonuçları",
-    "Game mod": "Oyun modu",
     "badges": "rozetler",
     "button": "buton",
     "else": "diğer",
@@ -9974,7 +9973,8 @@
     "needed": "gerekli",
     "servers": "sunucular",
     "show": "göster",
-    "version": "sürüm"
+    "version": "sürüm",
+    "Game mod": "Mod"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10601,7 +10601,6 @@
     "rank": "месца",
     "takes": "займае",
     "rather": "хутчэй",
-    "Game mod": "Гульнявы рэжым",
     "badges": "значкі",
     "button": "кнопка",
     "else": "іншае",
@@ -10615,7 +10614,8 @@
     "needed": "патрэбныя",
     "servers": "серверы",
     "show": "паказаць",
-    "version": "версія"
+    "version": "версія",
+    "Game mod": "Мод"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11249,7 +11249,6 @@
     "rank": "uvrstitev",
     "takes": "poskusov",
     "rather": "skôr",
-    "Game mod": "Herný režim",
     "badges": "odznaky",
     "button": "tlačidlo",
     "else": "iné",
@@ -11263,7 +11262,8 @@
     "needed": "potrebno",
     "servers": "strežniki",
     "show": "prikaži",
-    "version": "različica"
+    "version": "različica",
+    "Game mod": "Mód"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -11898,7 +11898,6 @@
     "rank": "pozicija",
     "takes": "uzima",
     "rather": "radije",
-    "Game mod": "mod igre",
     "badges": "značke",
     "button": "dugme",
     "else": "ostalo",
@@ -11912,7 +11911,8 @@
     "needed": "potrebno",
     "servers": "serveri",
     "show": "prikaži",
-    "version": "verzija"
+    "version": "verzija",
+    "Game mod": "Mod"
   },
   "th": {
     "Battles": "การรบ",
@@ -12753,7 +12753,6 @@
     "TBD": "รอการประกาศ",
     "In battle": "ในการรบ",
     "Battle Results": "ผลการรบ",
-    "Game mod": "โหมดเกม",
     "badges": "เหรียญตรา",
     "button": "ปุ่ม",
     "else": "อื่นๆ",
@@ -12767,7 +12766,8 @@
     "needed": "จำเป็น",
     "servers": "เซิร์ฟเวอร์",
     "show": "แสดง",
-    "version": "เวอร์ชัน"
+    "version": "เวอร์ชัน",
+    "Game mod": "ม็อด"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13608,7 +13608,6 @@
     "TBD": "TBD",
     "In battle": "战斗中",
     "Battle Results": "战斗结果",
-    "Game mod": "游戏模式",
     "badges": "徽章",
     "button": "按钮",
     "else": "其他",
@@ -13622,7 +13621,8 @@
     "needed": "需要",
     "servers": "服务器",
     "show": "显示",
-    "version": "版本"
+    "version": "版本",
+    "Game mod": "模组"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14448,7 +14448,6 @@
     "TBD": "TBD",
     "In battle": "Em batalha",
     "Battle Results": "Resultados da Batalha",
-    "Game mod": "Modo de jogo",
     "badges": "insígnias",
     "button": "botão",
     "else": "outros",
@@ -14462,7 +14461,8 @@
     "needed": "necessário",
     "servers": "servidores",
     "show": "mostrar",
-    "version": "versão"
+    "version": "versão",
+    "Game mod": "Mod"
   },
   "vi": {
     "Battles": "Số trận",
@@ -15283,7 +15283,6 @@
     "TBD": "TBD",
     "In battle": "Trong trận",
     "Battle Results": "Kết quả Trận đấu",
-    "Game mod": "Chế độ chơi",
     "badges": "huy hiệu",
     "button": "nút",
     "else": "khác",
@@ -15297,7 +15296,8 @@
     "needed": "cần thiết",
     "servers": "máy chủ",
     "show": "hiển thị",
-    "version": "phiên bản"
+    "version": "phiên bản",
+    "Game mod": "Mod"
   },
   "de": {
     "Battles": "Gefechte",
@@ -16131,7 +16131,6 @@
     "TBD": "TBD",
     "In battle": "Im Gefecht",
     "Battle Results": "Gefechtsergebnisse",
-    "Game mod": "Spielmodus",
     "badges": "Abzeichen",
     "button": "Button",
     "else": "Sonstiges",
@@ -16145,7 +16144,8 @@
     "needed": "benötigt",
     "servers": "Server",
     "show": "anzeigen",
-    "version": "Version"
+    "version": "Version",
+    "Game mod": "Mod"
   },
   "uk": {
     "Battles": "Бої",
@@ -16976,7 +16976,6 @@
     "TBD": "Уточнюється",
     "In battle": "У бою",
     "Battle Results": "Результати бою",
-    "Game mod": "Режим гри",
     "badges": "значки",
     "button": "кнопка",
     "else": "інше",
@@ -16990,7 +16989,8 @@
     "needed": "потрібні",
     "servers": "сервери",
     "show": "показати",
-    "version": "версія"
+    "version": "версія",
+    "Game mod": "Мод"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17826,7 +17826,6 @@
     "TBD": "Da definire",
     "In battle": "In Battaglia",
     "Battle Results": "Risultati Battaglia",
-    "Game mod": "Modalità di gioco",
     "badges": "distintivi",
     "button": "pulsante",
     "else": "altro",
@@ -17840,7 +17839,8 @@
     "needed": "necessario",
     "servers": "server",
     "show": "mostra",
-    "version": "versione"
+    "version": "versione",
+    "Game mod": "Mod"
   },
   "sv": {
     "Battles": "Strider",
@@ -18685,7 +18685,6 @@
     "TBD": "TBD",
     "In battle": "I strid",
     "Battle Results": "Stridsresultat",
-    "Game mod": "Spelläge",
     "badges": "märken",
     "button": "knapp",
     "else": "övrigt",
@@ -18699,7 +18698,8 @@
     "needed": "behövs",
     "servers": "servrar",
     "show": "visa",
-    "version": "version"
+    "version": "version",
+    "Game mod": "Mod"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19540,7 +19540,6 @@
     "TBD": "USKORO",
     "In battle": "U borbi",
     "Battle Results": "Borbeni rezultati",
-    "Game mod": "Режим игре",
     "badges": "значке",
     "button": "дугме",
     "else": "остало",
@@ -19554,7 +19553,8 @@
     "needed": "потребно",
     "servers": "сервери",
     "show": "прикажи",
-    "version": "верзија"
+    "version": "верзија",
+    "Game mod": "Мод"
   },
   "el": {
     "Battles": "Μάχες",
@@ -20394,7 +20394,6 @@
     "TBD": "TBD",
     "In battle": "Σε μάχη",
     "Battle Results": "Αποτελέσματα Μάχης",
-    "Game mod": "Λειτουργία παιχνιδιού",
     "badges": "διακριτικά",
     "button": "κουμπί",
     "else": "άλλα",
@@ -20408,7 +20407,8 @@
     "needed": "απαιτούμενα",
     "servers": "διακομιστές",
     "show": "εμφάνιση",
-    "version": "έκδοση"
+    "version": "έκδοση",
+    "Game mod": "Mod"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -21237,7 +21237,6 @@
     "TBD": "TBD",
     "In battle": "Kaujā",
     "Battle Results": "Kaujas rezultāti",
-    "Game mod": "Spēles režīms",
     "badges": "žetoni",
     "button": "poga",
     "else": "cits",
@@ -21251,7 +21250,8 @@
     "needed": "nepieciešams",
     "servers": "serveri",
     "show": "rādīt",
-    "version": "versija"
+    "version": "versija",
+    "Game mod": "Mods"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -21879,7 +21879,6 @@
     "rank": "रैंक",
     "takes": "लेता है",
     "rather": "बल्कि",
-    "Game mod": "गेम मोड",
     "badges": "बैज",
     "button": "बटन",
     "else": "अन्य",
@@ -21893,7 +21892,8 @@
     "needed": "आवश्यक",
     "servers": "सर्वर",
     "show": "दिखाएँ",
-    "version": "संस्करण"
+    "version": "संस्करण",
+    "Game mod": "मॉड"
   },
   "bg": {
     "Battles": "Битки",
@@ -22718,7 +22718,6 @@
     "TBD": "ОЧАКВА СЕ",
     "In battle": "В битка",
     "Battle Results": "Резултати от битката",
-    "Game mod": "Режим на играта",
     "badges": "значки",
     "button": "бутон",
     "else": "друго",
@@ -22732,7 +22731,8 @@
     "needed": "необходими",
     "servers": "сървъри",
     "show": "покажи",
-    "version": "версия"
+    "version": "версия",
+    "Game mod": "Мод"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23577,7 +23577,6 @@
     "TBD": "TBD",
     "In battle": "Mūšyje",
     "Battle Results": "Mūšio rezultatai",
-    "Game mod": "Žaidimo režimas",
     "badges": "ženkleliai",
     "button": "mygtukas",
     "else": "kita",
@@ -23591,7 +23590,8 @@
     "needed": "reikalingi",
     "servers": "serveriai",
     "show": "rodyti",
-    "version": "versija"
+    "version": "versija",
+    "Game mod": "Modas"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -24223,7 +24223,6 @@
     "rank": "орын",
     "takes": "алады",
     "rather": "дәлірек айтқанда",
-    "Game mod": "Ойын режимі",
     "badges": "белгілер",
     "button": "батырма",
     "else": "басқа",
@@ -24237,7 +24236,8 @@
     "needed": "қажет",
     "servers": "серверлер",
     "show": "көрсету",
-    "version": "нұсқа"
+    "version": "нұсқа",
+    "Game mod": "Мод"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -25082,7 +25082,6 @@
     "TBD": "TULOSSA",
     "In battle": "Taistelussa",
     "Battle Results": "Taistelun tulokset",
-    "Game mod": "Pelitila",
     "badges": "ansiomerkit",
     "button": "painike",
     "else": "muu",
@@ -25096,7 +25095,8 @@
     "needed": "tarvitaan",
     "servers": "palvelimet",
     "show": "näytä",
-    "version": "versio"
+    "version": "versio",
+    "Game mod": "Modi"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -25729,7 +25729,6 @@
     "rank": "ranggo",
     "takes": "mga pagtatangka",
     "rather": "sa halip",
-    "Game mod": "Mode ng laro",
     "badges": "mga badge",
     "button": "pindutan",
     "else": "iba pa",
@@ -25743,7 +25742,8 @@
     "needed": "kailangan",
     "servers": "mga server",
     "show": "ipakita",
-    "version": "bersyon"
+    "version": "bersyon",
+    "Game mod": "Mod"
   },
   "no": {
     "Battles": "Kamper",
@@ -26580,7 +26580,6 @@
     "TBD": "TBD",
     "In battle": "I kamp",
     "Battle Results": "Kampresultater",
-    "Game mod": "Spillmodus",
     "badges": "merker",
     "button": "knapp",
     "else": "annet",
@@ -26594,7 +26593,8 @@
     "needed": "nødvendig",
     "servers": "servere",
     "show": "vis",
-    "version": "versjon"
+    "version": "versjon",
+    "Game mod": "Mod"
   },
   "ro": {
     "Battles": "Lupte",
@@ -27420,7 +27420,6 @@
     "TBD": "TBD",
     "In battle": "În luptă",
     "Battle Results": "Rezultate luptă",
-    "Game mod": "Mod de joc",
     "badges": "insigne",
     "button": "buton",
     "else": "altele",
@@ -27434,7 +27433,8 @@
     "needed": "necesar",
     "servers": "servere",
     "show": "afișează",
-    "version": "versiune"
+    "version": "versiune",
+    "Game mod": "Mod"
   },
   "da": {
     "Battles": "Kampe",
@@ -28275,7 +28275,6 @@
     "TBD": "TBD",
     "In battle": "I kamp",
     "Battle Results": "Kampresultater",
-    "Game mod": "Spiltilstand",
     "badges": "mærker",
     "button": "knap",
     "else": "andet",
@@ -28289,6 +28288,7 @@
     "needed": "nødvendige",
     "servers": "servere",
     "show": "vis",
-    "version": "version"
+    "version": "version",
+    "Game mod": "Mod"
   }
 }

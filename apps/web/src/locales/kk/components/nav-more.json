@@ -14,8 +14,8 @@
       "description": "Ойыншы, клан және танк статистикасы slash командалары ретінде"
     },
     "mod": {
-      "label": "Ойын режимі",
-      "description": "Рейтингтер мен тілдер World of Tanks ішінде"
+      "description": "Рейтингтер мен тілдер World of Tanks ішінде",
+      "label": "Мод"
     },
     "mcp": {
       "label": "MCP сервері",

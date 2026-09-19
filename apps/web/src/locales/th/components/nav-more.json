@@ -14,8 +14,8 @@
       "description": "สถิติผู้เล่น แคลน และรถถังในรูปแบบคำสั่ง slash"
     },
     "mod": {
-      "label": "โหมดเกม",
-      "description": "การจัดอันดับและภาษาใน World of Tanks โดยตรง"
+      "description": "การจัดอันดับและภาษาใน World of Tanks โดยตรง",
+      "label": "ม็อด"
     },
     "mcp": {
       "label": "MCP เซิร์ฟเวอร์",

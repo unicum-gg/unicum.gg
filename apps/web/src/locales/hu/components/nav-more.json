@@ -14,8 +14,8 @@
       "description": "Játékos-, klán- és tankstatisztikák perjeles parancsokként"
     },
     "mod": {
-      "label": "Játékmód",
-      "description": "Értékelések és nyelvek közvetlenül a World of Tanksben"
+      "description": "Értékelések és nyelvek közvetlenül a World of Tanksben",
+      "label": "Mod"
     },
     "mcp": {
       "label": "MCP szerver",

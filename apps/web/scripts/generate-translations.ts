@@ -292,6 +292,11 @@ const TERM_MEANINGS: [string, string][] = [
   ["Coverage", "how much of the playerbase this site has data for, not map control"],
   ["Spotting", "seeing an enemy so allies can fire on it, the view-range mechanic"],
   ["Match", "how closely two vehicles resemble each other, a percentage. Not a battle"],
+  // Decided as a bare word, "Game mod" came back as "game mode" in all 35
+  // languages ("mode de jeu", "Spielmodus", "Игровой режим"), which names
+  // Random Battles or Onslaught: the nav then sent readers to the mod under the
+  // name of something else entirely.
+  ["Game mod", "a modification the player installs into the World of Tanks game client, an add-on file of the kind published on wgmods.net. NOT a game mode such as Random Battles or Onslaught, and NOT a moderator. Most languages keep the loanword: 'mod' in French, 'Mod' in German, 'мод' in Russian"],
 ];
 
 function instructionsFor(namespace: string, locale: Locale): string {
@@ -336,6 +341,7 @@ Rules:
 - "Top" before a plural is a ranking, not a position: "Top players" is "Meilleurs joueurs" in French and never "Haut joueurs". The same holds for "Best" and "Leading".
 - After "become", "be" or "sign up as", a role noun takes no article in most languages even though English gives it one: "Become a supporter" is "Devenez soutien" in French and "Werden Sie Unterstützer" in German, not "Devenez un soutien".
 - No em-dashes and no semicolons.
+- "Mod" here always means a modification a player installs into the World of Tanks game client, the kind published on wgmods.net: the site publishes one. It is never a game mode, which is the English word "mode" and names Random Battles or Onslaught. Keep the two apart: "mod" is "mod" in French, "Mod" in German, "мод" in Russian, "mod" in Polish, "模组" in Chinese, while "mode" stays whatever your language calls a mode. The whole page about the mod once came back calling it a game mode in a dozen languages.
 - Translate the meaning, not the words: these are buttons, headings and one-line descriptions a player reads in a hurry.`;
   }
 

@@ -14,8 +14,8 @@
       "description": "通过斜杠命令查询玩家、军团和坦克数据"
     },
     "mod": {
-      "label": "游戏模式",
-      "description": "在 World of Tanks 游戏右侧查看评分和语言"
+      "description": "在 World of Tanks 游戏右侧查看评分和语言",
+      "label": "模组"
     },
     "mcp": {
       "label": "MCP 服务器",

@@ -14,8 +14,8 @@
       "description": "Statistike igrača, klanova i tenkova kao slash naredbe"
     },
     "mod": {
-      "label": "mod igre",
-      "description": "Rejtingzi i jezici direktno u World of Tanksu"
+      "description": "Rejtingzi i jezici direktno u World of Tanksu",
+      "label": "Mod"
     },
     "mcp": {
       "label": "MCP server",

@@ -14,8 +14,8 @@
       "description": "スラッシュコマンドでプレイヤー、クラン、戦車の戦績を確認"
     },
     "mod": {
-      "label": "ゲームモード",
-      "description": "World of Tanksでレーティングと言語を表示"
+      "description": "World of Tanksでレーティングと言語を表示",
+      "label": "MOD"
     },
     "mcp": {
       "label": "MCPサーバー",

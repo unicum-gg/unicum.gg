@@ -14,8 +14,8 @@
       "description": "Статыстыка гульцоў, кланаў і танкаў у выглядзе slash-каманд"
     },
     "mod": {
-      "label": "Гульнявы рэжым",
-      "description": "Рэйтынгі і мовы проста ў World of Tanks"
+      "description": "Рэйтынгі і мовы проста ў World of Tanks",
+      "label": "Мод"
     },
     "mcp": {
       "label": "MCP сервер",

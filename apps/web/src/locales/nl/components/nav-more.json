@@ -14,8 +14,8 @@
       "description": "Statistieken van spelers, clans en tanks als slashcommando’s"
     },
     "mod": {
-      "label": "Spelmodus",
-      "description": "Beoordelingen en talen rechts in World of Tanks"
+      "description": "Beoordelingen en talen rechts in World of Tanks",
+      "label": "Mod"
     },
     "mcp": {
       "label": "MCP server",

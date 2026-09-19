@@ -14,8 +14,8 @@
       "description": "Статистики за играчи, кланове и танкове като slash команди"
     },
     "mod": {
-      "label": "Режим на играта",
-      "description": "Рейтинги и езици направо в World of Tanks"
+      "description": "Рейтинги и езици направо в World of Tanks",
+      "label": "Мод"
     },
     "mcp": {
       "label": "MCP сървър",
