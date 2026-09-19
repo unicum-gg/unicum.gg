@@ -4,7 +4,6 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { NavLogo } from "@/components/nav-logo";
-import { NavMod } from "@/components/nav-mod";
 import { NavMore } from "@/components/nav-more";
 import { NavSectionMenu } from "@/components/nav-section-menu";
 import { LocaleSelector } from "@/components/locale-selector";
@@ -46,14 +45,8 @@ export async function baseOptions({
               type: "custom",
               children: <NavSectionMenu section="maps" />,
             },
-            // The mod, on its own rather than inside "More": it is the only
-            // thing on the site a reader installs, and a dropdown hid it.
-            {
-              type: "custom",
-              children: <NavMod />,
-            },
-            // Everything that is not one of the catalogue sections nor the
-            // mod, under one dropdown. `custom` rather than
+            // Everything that is not one of the catalogue sections, under one
+            // dropdown so the main nav stays four. `custom` rather than
             // fumadocs' `menu` because the panel is ours (see `NavMoreMenu`),
             // and a component rather than a list because one of its
             // destinations is regional (see `NavMore`).

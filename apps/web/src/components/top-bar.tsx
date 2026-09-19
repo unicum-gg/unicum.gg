@@ -27,15 +27,6 @@ export function TopBar({ feedbackEnabled }: { feedbackEnabled: boolean }) {
         <div className="relative flex h-9 items-center justify-between gap-3 border-x border-fd-border px-4 text-xs">
           <PlayersOnline />
           <div className="flex items-center gap-3">
-            {/* The mod as an action rather than a destination, which is what
-                the navbar's own link is. Hidden on small screens, where the
-                sides already crowd out the funding bar. */}
-            <Link
-              href={ROUTES.MOD}
-              className="hidden shrink-0 font-medium transition-opacity hover:opacity-80 sm:inline"
-            >
-              {t("mod")}
-            </Link>
             {/* /support is also linked from the footer and the nav "More" menu;
                 the persistent top-bar CTA doesn't need to prefetch it too. */}
             <Link
