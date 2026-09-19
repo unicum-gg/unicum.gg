@@ -14,8 +14,8 @@
       "description": "Spieler-, Clan- und Panzerstatistiken als Slash-Befehle"
     },
     "mod": {
-      "description": "Wertungen und Sprachen direkt in World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Wertungen und Sprachen direkt in World of Tanks"
     },
     "mcp": {
       "label": "MCP-Server",

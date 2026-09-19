@@ -14,8 +14,8 @@
       "description": "Štatistiky hráčov, klanov a tankov vo forme príkazov s lomkou"
     },
     "mod": {
-      "description": "Hodnotenia a jazyky priamo vo World of Tanks",
-      "label": "Mód"
+      "label": "Mód",
+      "description": "Hodnotenia a jazyky priamo vo World of Tanks"
     },
     "mcp": {
       "label": "MCP server",

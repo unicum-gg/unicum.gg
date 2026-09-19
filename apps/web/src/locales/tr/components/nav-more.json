@@ -14,8 +14,8 @@
       "description": "Eğik çizgi komutlarıyla oyuncu, klan ve tank istatistikleri"
     },
     "mod": {
-      "description": "World of Tanks’te değerlendirmeler ve diller sağda",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "World of Tanks’te değerlendirmeler ve diller sağda"
     },
     "mcp": {
       "label": "MCP sunucusu",

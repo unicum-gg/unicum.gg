@@ -14,8 +14,8 @@
       "description": "Statistikk for spiller, klan og stridsvogn som slash-kommandoer"
     },
     "mod": {
-      "description": "Vurderinger og språk direkte i World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Vurderinger og språk direkte i World of Tanks"
     },
     "mcp": {
       "label": "MCP-server",

@@ -14,8 +14,8 @@
       "description": "Hráč, klan a Tank: statistiky dostupné jako lomítkové příkazy"
     },
     "mod": {
-      "description": "Hodnocení a jazyky přímo ve World of Tanks",
-      "label": "Mód"
+      "label": "Mód",
+      "description": "Hodnocení a jazyky přímo ve World of Tanks"
     },
     "mcp": {
       "label": "MCP server",

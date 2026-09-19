@@ -14,8 +14,8 @@
       "description": "إحصائيات اللاعبين والقبائل والدبابات كأوامر slash"
     },
     "mod": {
-      "description": "التقييمات واللغات مباشرةً في World of Tanks",
-      "label": "مود"
+      "label": "مود",
+      "description": "التقييمات واللغات مباشرةً في World of Tanks"
     },
     "mcp": {
       "label": "خادم MCP",

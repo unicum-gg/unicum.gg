@@ -14,8 +14,8 @@
       "description": "Žaidėjų, klanų ir tankų statistika kaip pasvirojo brūkšnio komandos"
     },
     "mod": {
-      "description": "Reitingai ir kalbos tiesiai World of Tanks",
-      "label": "Modas"
+      "label": "Modas",
+      "description": "Reitingai ir kalbos tiesiai World of Tanks"
     },
     "mcp": {
       "label": "MCP serveris",

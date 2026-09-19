@@ -14,8 +14,8 @@
       "description": "Spēlētāju, klanu un tanku statistika kā slīpsvītras komandas"
     },
     "mod": {
-      "description": "Vērtējumi un valodas tieši World of Tanks",
-      "label": "Mods"
+      "label": "Mods",
+      "description": "Vērtējumi un valodas tieši World of Tanks"
     },
     "mcp": {
       "label": "MCP servers",

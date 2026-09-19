@@ -14,8 +14,8 @@
       "description": "Estadísticas de jugadores, clanes y tanques mediante comandos de barra diagonal"
     },
     "mod": {
-      "description": "Valoraciones e idiomas directamente en World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Valoraciones e idiomas directamente en World of Tanks"
     },
     "mcp": {
       "label": "servidor MCP",

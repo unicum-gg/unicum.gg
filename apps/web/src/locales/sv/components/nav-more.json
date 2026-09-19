@@ -14,8 +14,8 @@
       "description": "Statistik för Spelare, klan och Tank via snedstreckskommandon"
     },
     "mod": {
-      "description": "Betyg och språk direkt i World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Betyg och språk direkt i World of Tanks"
     },
     "mcp": {
       "label": "MCP-server",

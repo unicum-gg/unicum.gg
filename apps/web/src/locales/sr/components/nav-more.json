@@ -14,8 +14,8 @@
       "description": "Статистика играча, клана и тенка као slash команде"
     },
     "mod": {
-      "description": "Рејтинзи и језици директно у World of Tanks-у",
-      "label": "Мод"
+      "label": "Мод",
+      "description": "Рејтинзи и језици директно у World of Tanks-у"
     },
     "mcp": {
       "label": "MCP server",

@@ -14,8 +14,8 @@
       "description": "슬래시 명령으로 확인하는 플레이어, 클랜 및 전차 통계"
     },
     "mod": {
-      "description": "World of Tanks에서 바로 확인하는 평점과 언어",
-      "label": "MOD"
+      "label": "MOD",
+      "description": "World of Tanks에서 바로 확인하는 평점과 언어"
     },
     "mcp": {
       "label": "MCP 서버",

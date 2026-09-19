@@ -14,8 +14,8 @@
       "description": "Pelaaja-, klaani- ja panssarivaunutilastot slash-komentoina"
     },
     "mod": {
-      "description": "Arvosanat ja kielet suoraan World of Tanksissa",
-      "label": "Modi"
+      "label": "Modi",
+      "description": "Arvosanat ja kielet suoraan World of Tanksissa"
     },
     "mcp": {
       "label": "MCP-palvelin",

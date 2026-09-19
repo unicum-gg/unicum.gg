@@ -14,8 +14,8 @@
       "description": "Στατιστικά παίκτη, κλαν και άρματος ως εντολές slash"
     },
     "mod": {
-      "description": "Βαθμολογίες και γλώσσες απευθείας στο World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Βαθμολογίες και γλώσσες απευθείας στο World of Tanks"
     },
     "mcp": {
       "label": "MCP server",

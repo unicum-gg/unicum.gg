@@ -14,8 +14,8 @@
       "description": "स्लैश कमांड के रूप में खिलाड़ी, क्लान और टैंक आँकड़े"
     },
     "mod": {
-      "description": "World of Tanks में सीधे रेटिंग और भाषाएँ",
-      "label": "मॉड"
+      "label": "मॉड",
+      "description": "World of Tanks में सीधे रेटिंग और भाषाएँ"
     },
     "mcp": {
       "label": "MCP सर्वर",

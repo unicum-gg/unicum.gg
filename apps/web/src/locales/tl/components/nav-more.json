@@ -14,8 +14,8 @@
       "description": "Istatistika ng manlalaro, klano at tank bilang slash command"
     },
     "mod": {
-      "description": "Mga rating at mga wika sa mismong World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Mga rating at mga wika sa mismong World of Tanks"
     },
     "mcp": {
       "label": "MCP server",

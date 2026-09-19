@@ -14,8 +14,8 @@
       "description": "Statistiques des joueurs, des clans et des chars sous forme de commandes slash"
     },
     "mod": {
-      "description": "Classements et langues directement dans World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Classements et langues directement dans World of Tanks"
     },
     "mcp": {
       "label": "Serveur MCP",

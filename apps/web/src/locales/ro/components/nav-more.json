@@ -14,8 +14,8 @@
       "description": "Statistici despre jucători, clanuri și tancuri sub formă de comenzi slash"
     },
     "mod": {
-      "description": "Ratinguri și limbi chiar în World of Tanks",
-      "label": "Mod"
+      "label": "Mod",
+      "description": "Ratinguri și limbi chiar în World of Tanks"
     },
     "mcp": {
       "label": "Server MCP",
