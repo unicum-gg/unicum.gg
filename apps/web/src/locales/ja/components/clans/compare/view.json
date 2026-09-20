@@ -1,4 +1,5 @@
 {
   "compare": "比較",
-  "share-comparison": "比較を共有"
+  "share-comparison": "比較を共有",
+  "share-text": "{app}で{names}を比較"
 }

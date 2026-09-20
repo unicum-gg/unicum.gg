@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Média de {rated} dos {size} jogadores",
   "average-over-recent": "Média dos {rated} jogadores entre os {size} que jogaram nos últimos 30 dias",
+  "avg-metric": "Média de {metric}",
+  "avg-metric-rank": "Média de {metric} · {rank} de {size}",
+  "avg-metric-recent": "Média de {metric} · 30 d",
   "avg-winrate": "Média de taxa de vitória",
   "finished": "Terminado",
+  "of-teams": "{size, plural, one {de # equipe} other {de # equipas}}",
   "record": "Registro",
+  "ties-played": "{count, plural, one {# empate jogado} other {# empates jogados}}",
   "won": "Ganhou"
 }

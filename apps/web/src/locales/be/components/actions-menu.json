@@ -3,6 +3,11 @@
   "open-in": "Адкрыць у {target}",
   "remove-from-favorites": "Выдаліць з абрання",
   "share": "Падзяліцца",
+  "share-text-clan": "Праверыць [{tag}] {name} у {app}",
+  "share-text-map": "Праверыць карту {name} у {app}",
+  "share-text-player": "Праверыць статыстыку WoT для {name} у {app}",
+  "share-text-tank": "Праверыць статыстыку WoT для {name} у {app}",
+  "share-text-tournament": "Праверыць {name} у {app}",
   "share-title": "Падзяліцца {name}",
   "vehicle-ratings": "Рэйтынгі транспартных сродкаў"
 }

@@ -1,8 +1,13 @@
 {
   "average-over-rated": "{size} oyuncunun {rated} puanlanan oyuncusu üzerinden ortalama",
   "average-over-recent": "Son 30 gün içinde oynayan {size} oyuncunun {rated} oyuncusu üzerinden ortalama",
+  "avg-metric": "Ort. {metric}",
+  "avg-metric-rank": "Ort. {metric} · {size} takım içinde {rank}. sırada",
+  "avg-metric-recent": "Son 30 gün için Ort. {metric}",
   "avg-winrate": "Ortalama kazanma oranı",
   "finished": "Bitti",
+  "of-teams": "{size, plural, other {# takımdan}}",
   "record": "Kayıt",
+  "ties-played": "{count, plural, other {# beraberlik oynandı}}",
   "won": "Kazandı"
 }

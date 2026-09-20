@@ -1,6 +1,10 @@
 {
   "battles-overall": "कुल {battles} युद्ध",
+  "block-never-played": "यह टैंक आपके द्वारा खेले गए टैंकों में नहीं है।",
+  "block-no-record": "हमने अभी तक आपका गैराज पढ़ें नहीं है। हमने अभी इसके लिए Wargaming से अनुरोध किया है, इसलिए कुछ क्षण बाद फिर कोशिश करें।",
+  "block-too-few-battles": "यह आपके द्वारा खेले गए टैंकों में है, लेकिन अभी पर्याप्त नहीं।",
   "checking-your-record-on-this": "इस टैंक पर आपका रिकॉर्ड जाँचा जा रहा है...",
+  "could-not-read-your-record": "हम इस टैंक पर आपका रिकॉर्ड पढ़ें नहीं पाए।",
   "fetching-your-garage": "हम आपका गैराज ला रहे हैं",
   "have-you-played": "क्या आपने {tank} खेला है?",
   "more-to-go": "{count} युद्ध और बाकी",

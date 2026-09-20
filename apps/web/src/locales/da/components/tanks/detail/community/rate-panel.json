@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} kampe i alt",
+  "block-never-played": "Du har ikke spillet denne kampvogn.",
+  "block-no-record": "Vi har endnu ikke læst din garage. Vi har netop bedt Wargaming om den, så prøv igen om et øjeblik.",
+  "block-too-few-battles": "Du har spillet med den, men ikke nok endnu.",
   "checking-your-record-on-this": "Kontrollerer din statistik for denne kampvogn...",
+  "could-not-read-your-record": "Vi kunne ikke få læst din rekord for denne kampvogn.",
   "fetching-your-garage": "Vi henter din garage",
   "have-you-played": "Har du spillet {tank}?",
   "more-to-go": "{count} kampe mere tilbage",

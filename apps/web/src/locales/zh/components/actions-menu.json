@@ -3,6 +3,11 @@
   "open-in": "在{target}中打开",
   "remove-from-favorites": "从收藏夹中移除",
   "share": "分享",
+  "share-text-clan": "在 {app} 上检查 [{tag}] {name}",
+  "share-text-map": "在 {app} 上检查 {name}地图",
+  "share-text-player": "在 {app} 上检查 {name} 的 WOT 数据",
+  "share-text-tank": "在 {app} 上检查 {name} 的 WOT 数据",
+  "share-text-tournament": "在 {app} 上检查 {name}",
   "share-title": "分享 {name}",
   "vehicle-ratings": "车辆评分"
 }

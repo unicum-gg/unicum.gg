@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} معركة إجمالًا",
+  "block-never-played": "لم يتم لعب الدبابة.",
+  "block-no-record": "لم نتمكن من قراءة المرآب الخاص بك بعد. لقد طلبناه للتو من Wargaming، لذا حاول مرة أخرى بعد لحظة.",
+  "block-too-few-battles": "لقد تم لعبها، لكن ليس بما يكفي بعد.",
   "checking-your-record-on-this": "جارٍ التحقق من سجلك على هذه الدبابة...",
+  "could-not-read-your-record": "تعذر علينا قراءة سجلك على هذه الدبابة.",
   "fetching-your-garage": "جارٍ جلب مرآبك",
   "have-you-played": "هل لعبت بالدبابة {tank}؟",
   "more-to-go": "متبقٍ {count} معارك",

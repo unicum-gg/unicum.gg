@@ -1,6 +1,10 @@
 {
   "battles-overall": "Celkovo {battles} bitiek",
+  "block-never-played": "Tento tank nemáte odohraný.",
+  "block-no-record": "Váš záznam sme ešte nedokázali čítať z garáže. Práve sme oň požiadali Wargaming, skúste to teda o okamih znova.",
+  "block-too-few-battles": "Tento tank máte odohraný, ale zatiaľ nie dosť.",
   "checking-your-record-on-this": "Kontrolujeme vaše výsledky s týmto tankom...",
+  "could-not-read-your-record": "Nepodarilo sa nám čítať váš záznam o tomto tanku.",
   "fetching-your-garage": "Načítava sa vaša garáž",
   "have-you-played": "Hrávali ste tank {tank}?",
   "more-to-go": "Zostáva odohrať ešte {count} bitiek",

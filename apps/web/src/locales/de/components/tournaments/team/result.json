@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Durchschnitt der {rated} von {size} spieler",
   "average-over-recent": "Durchschnitt der {rated} von {size} spieler, die in den letzten 30 Tage Gespielt haben",
+  "avg-metric": "Durchschnitt {metric}",
+  "avg-metric-rank": "Durchschnitt {metric} · {rank} von {size}",
+  "avg-metric-recent": "Durchschnitt {metric} · 30 T",
   "avg-winrate": "Durchschnittliche Siegesrate",
   "finished": "Beendet",
+  "of-teams": "{size, plural, one {von # Team} other {von # Teams}}",
   "record": "Aufzeichnung",
+  "ties-played": "{count, plural, one {# Gespielt: Unentschieden} other {# Gespielt: Unentschieden}}",
   "won": "Gewonnen"
 }

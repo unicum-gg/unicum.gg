@@ -2,6 +2,7 @@
   "how-players-compare": "Kā {region} spēlētāji atšķiras",
   "median-n": "mediāna {value}",
   "metric-rating": "{metric} vērtējums",
+  "rating-distribution-chart": "{metric} sadalījums visā reģionā izsekoto spēlētāju vidū",
   "tracked-accounts-with-at-least": "{players} reģistrēti konti ar vismaz {minBattles} kaujām. Krāsas izmanto tās pašas joslas, ko vietne lieto visur citur.",
   "win-rate": "Uzvaru procents",
   "win-rate-distribution-across-the-region-s-tr": "Uzvaru procenta sadalījums starp reģiona reģistrētajiem spēlētājiem"

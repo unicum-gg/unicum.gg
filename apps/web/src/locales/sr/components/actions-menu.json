@@ -3,6 +3,11 @@
   "open-in": "Отвори у {target}",
   "remove-from-favorites": "Ukloni iz omiljenih",
   "share": "Podeli",
+  "share-text-clan": "Proveri [{tag}] {name} na {app}",
+  "share-text-map": "Proveri mapu {name} na {app}",
+  "share-text-player": "Proveri WoT статистика igrača {name} na {app}",
+  "share-text-tank": "Proveri WoT статистика igrača {name} na {app}",
+  "share-text-tournament": "Proveri {name} na {app}",
   "share-title": "Podeli {name}",
   "vehicle-ratings": "Ocene vozila"
 }

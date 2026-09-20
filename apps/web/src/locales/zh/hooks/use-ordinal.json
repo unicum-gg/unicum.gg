@@ -1,0 +1,7 @@
+{
+  "ordinal-few": "第{n}个",
+  "ordinal-many": "第{n}个",
+  "ordinal-one": "第{n}个",
+  "ordinal-other": "第{n}个",
+  "ordinal-two": "第{n}个"
+}

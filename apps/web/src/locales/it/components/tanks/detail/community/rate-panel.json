@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} battaglie complessive",
+  "block-never-played": "Non hai giocato con questo carro armato.",
+  "block-no-record": "Non abbiamo ancora letto la tua officina. L’abbiamo appena richiesta a Wargaming, quindi riprova tra un momento.",
+  "block-too-few-battles": "Ci hai giocato, ma non abbastanza.",
   "checking-your-record-on-this": "Verifica dei tuoi risultati con questo carro...",
+  "could-not-read-your-record": "Non abbiamo potuto leggere il tuo record con questo carro armato.",
   "fetching-your-garage": "Stiamo recuperando la tua Officina",
   "have-you-played": "Hai giocato con {tank}?",
   "more-to-go": "Ancora {count} battaglie da giocare",

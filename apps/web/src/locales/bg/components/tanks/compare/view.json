@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Добави танк...",
+  "add-a-vehicle": "Добави бойна машина",
   "share-comparison": "Сподели сравнение",
-  "add-a-vehicle": "Добави бойна машина"
+  "share-text": "Сравнение на {names} в {app}"
 }

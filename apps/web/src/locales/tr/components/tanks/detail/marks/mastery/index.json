@@ -1,5 +1,7 @@
 {
   "last-days": "Son {chartDays} gün",
+  "moe-chart": "{tank} için Mükemmellik İşaretleri gereksinimlerinin zaman içindeki değişimi",
+  "mom-chart": "{tank} için Ustalık İşaretleri eşiklerinin zaman içindeki değişimi",
   "n-players": "{count, plural, one {# oyuncu} other {# oyuncular}}",
   "rolling-average-combined-damage-to": "Oyuncuların %65 / %85 / %95’ini aşmak için hareketli ortalama birleşik hasar.",
   "single-battle-xp-to-beat": "Oyuncuların %50 / %80 / %95 / %99’unu aşmak için tek savaş XP’si.",

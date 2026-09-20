@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Tank hozzáadása...",
+  "add-a-vehicle": "Jármű hozzáadása",
   "share-comparison": "Megosztás összehasonlítás",
-  "add-a-vehicle": "Jármű hozzáadása"
+  "share-text": "{names} összehasonlítása itt: {app}"
 }

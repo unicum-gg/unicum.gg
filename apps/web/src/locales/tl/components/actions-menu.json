@@ -3,6 +3,11 @@
   "open-in": "Buksan sa {target}",
   "remove-from-favorites": "Alisin sa paborito",
   "share": "Ibahagi",
+  "share-text-clan": "Suriin ang [{tag}] {name} sa {app}",
+  "share-text-map": "Suriin ang Mapa na {name} sa {app}",
+  "share-text-player": "Suriin ang istatistika sa WoT ni {name} sa {app}",
+  "share-text-tank": "Suriin ang istatistika sa WoT ng {name} sa {app}",
+  "share-text-tournament": "Suriin si {name} sa {app}",
   "share-title": "Ibahagi ang {name}",
   "vehicle-ratings": "Mga rating ng sasakyan"
 }

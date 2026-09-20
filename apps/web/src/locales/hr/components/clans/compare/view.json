@@ -1,4 +1,5 @@
 {
   "compare": "Usporedi",
-  "share-comparison": "Dijeli usporedbu"
+  "share-comparison": "Dijeli usporedbu",
+  "share-text": "Usporedba za {names} na {app}"
 }

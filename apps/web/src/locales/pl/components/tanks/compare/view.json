@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Dodaj czołg...",
+  "add-a-vehicle": "Dodaj pojazd",
   "share-comparison": "Udostępnij porównanie",
-  "add-a-vehicle": "Dodaj pojazd"
+  "share-text": "Porównano {names} w {app}"
 }

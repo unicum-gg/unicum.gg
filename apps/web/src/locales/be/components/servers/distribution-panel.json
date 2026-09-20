@@ -2,6 +2,7 @@
   "how-players-compare": "Як параўнаць гульцоў рэгіёна {region}",
   "median-n": "медыяна {value}",
   "metric-rating": "Рэйтынг {metric}",
+  "rating-distribution-chart": "Размеркаванне {metric} па ўсім рэгіёне сярод адсочаных гульцоў",
   "tracked-accounts-with-at-least": "{players} адсочаных уліковых запісаў, мінімум па {minBattles} баях. Колеры адпавядаюць тым самым дыяпазонам, якія сайт выкарыстоўвае паўсюль.",
   "win-rate": "Коэфіцыент перамог",
   "win-rate-distribution-across-the-region-s-tr": "Размеркаванне працэнта перамог сярод адсочаных гульцоў рэгіёна"

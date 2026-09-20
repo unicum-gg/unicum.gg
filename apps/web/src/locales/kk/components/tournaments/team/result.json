@@ -1,8 +1,13 @@
 {
   "average-over-rated": "{size} ойыншының бағаланған {rated} көрсеткіші бойынша орташа мәні",
   "average-over-recent": "Соңғы 30 күнде ойнаған {size} ойыншының {rated} көрсеткіші бойынша орташа мәні",
+  "avg-metric": "Орташа {metric}",
+  "avg-metric-rank": "Орташа {metric} · {size} ішінен {rank}-орын",
+  "avg-metric-recent": "Орташа {metric} · соңғы 30 күн",
   "avg-winrate": "орташа жеңіс пайызы",
   "finished": "Аяқталды",
+  "of-teams": "{size, plural, other {# командадан}}",
   "record": "Жазба",
+  "ties-played": "{count, plural, other {# тең ойын ойналды}}",
   "won": "Жеңген"
 }

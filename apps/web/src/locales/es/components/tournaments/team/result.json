@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Promedio de {rated} de {size} jugadores",
   "average-over-recent": "Promedio de los {rated} de {size} jugadores que jugaron en los últimos 30 días",
+  "avg-metric": "Promedio de {metric}",
+  "avg-metric-rank": "Promedio de {metric} · puesto {rank} de {size}",
+  "avg-metric-recent": "Promedio de {metric} · 30 d",
   "avg-winrate": "Prom. tasa de victoria",
   "finished": "Finalizado",
+  "of-teams": "{size, plural, one {de # equipo} other {de # equipos}}",
   "record": "Récord",
+  "ties-played": "{count, plural, one {# empate jugado} other {# empates jugados}}",
   "won": "Ganado"
 }

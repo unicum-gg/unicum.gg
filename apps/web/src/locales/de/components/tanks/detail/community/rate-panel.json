@@ -1,6 +1,10 @@
 {
   "battles-overall": "Insgesamt {battles} Gefechte",
+  "block-never-played": "Sie haben diesen Panzer nicht Gespielt.",
+  "block-no-record": "Wir konnten Ihre Garage noch nicht Lesen. Wir haben Wargaming gerade danach gefragt, versuchen Sie es in einem Moment erneut.",
+  "block-too-few-battles": "Sie haben den Panzer Gespielt, aber noch nicht genug.",
   "checking-your-record-on-this": "Deine Bilanz mit diesem Panzer wird geprüft...",
+  "could-not-read-your-record": "Wir konnten Ihren Rekord für diesen Panzer nicht Lesen.",
   "fetching-your-garage": "Deine Garage wird abgerufen",
   "have-you-played": "Hast du den {tank} gespielt?",
   "more-to-go": "Noch {count} Gefechte erforderlich",

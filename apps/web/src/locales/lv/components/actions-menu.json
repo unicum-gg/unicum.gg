@@ -3,6 +3,11 @@
   "open-in": "Atvērt {target}",
   "remove-from-favorites": "Noņemt no izlases",
   "share": "Kopīgot",
+  "share-text-clan": "Pārbaudīt [{tag}] {name} lietotnē {app}",
+  "share-text-map": "Pārbaudīt karti ar nosaukumu {name} lietotnē {app}",
+  "share-text-player": "Pārbaudīt spēlētāja {name} WoT statistiku lietotnē {app}",
+  "share-text-tank": "Pārbaudīt tanka {name} WoT statistiku lietotnē {app}",
+  "share-text-tournament": "Pārbaudīt turnīru ar nosaukumu {name} lietotnē {app}",
   "share-title": "Kopīgot {name}",
   "vehicle-ratings": "Transportlīdzekļu Vērtējumi"
 }

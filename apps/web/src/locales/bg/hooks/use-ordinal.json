@@ -1,0 +1,7 @@
+{
+  "ordinal-few": "{n}-ти",
+  "ordinal-many": "{n}-ти",
+  "ordinal-one": "{n}-ви",
+  "ordinal-other": "{n}-ти",
+  "ordinal-two": "{n}-ри"
+}

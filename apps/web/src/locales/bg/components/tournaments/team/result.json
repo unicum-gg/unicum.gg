@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Средно от {rated} от {size} играчи",
   "average-over-recent": "Средно от {rated} от {size} играчи, играли през последните 30 дни",
+  "avg-metric": "Средно {metric}",
+  "avg-metric-rank": "Средно {metric} · {rank} място от {size}",
+  "avg-metric-recent": "Средно {metric} · 30 д.",
   "avg-winrate": "Средна печалба",
   "finished": "Завършен",
+  "of-teams": "{size, plural, one {от # отбор} other {от # отбори}}",
   "record": "Запис",
+  "ties-played": "{count, plural, one {# изиграни равенства} other {# изиграни равенства}}",
   "won": "Спечелени"
 }

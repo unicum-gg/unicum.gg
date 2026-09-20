@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} batailles au total",
+  "block-never-played": "Vous n’avez pas encore joué avec ce char.",
+  "block-no-record": "Nous n’avons pas encore effectué la lecture de votre garage. Nous venons de la demander à Wargaming, alors réessayez dans un moment.",
+  "block-too-few-battles": "Vous avez joué avec, mais pas assez.",
   "checking-your-record-on-this": "Vérification de vos résultats avec ce char...",
+  "could-not-read-your-record": "Nous n’avons pas pu lire votre record sur ce char.",
   "fetching-your-garage": "Récupération de votre garage",
   "have-you-played": "Avez-vous joué avec {tank} ?",
   "more-to-go": "Encore {count} batailles à disputer",

@@ -1,5 +1,7 @@
 {
   "last-days": "{chartDays} giờ gần nhất",
+  "moe-chart": "Các yêu cầu về Dấu hiệu Thiện chiến của xe tăng {tank} theo thời gian",
+  "mom-chart": "Các ngưỡng Dấu ấn thành thạo của xe tăng {tank} theo thời gian",
   "n-players": "{count, plural, other {# người chơi}}",
   "rolling-average-combined-damage-to": "Sát thương kết hợp trung bình trượt để vượt qua 65 / 85 / 95% người chơi.",
   "single-battle-xp-to-beat": "XP trong một trận đấu để vượt qua 50 / 80 / 95 / 99% người chơi.",

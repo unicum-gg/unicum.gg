@@ -1,6 +1,10 @@
 {
   "battles-overall": "총 {battles}회 전투",
+  "block-never-played": "이 전차의 플레이함 기록이 없습니다.",
+  "block-no-record": "아직 차고를 읽지 못했습니다. 워게이밍에 방금 요청했으니 잠시 후 다시 시도해 주세요.",
+  "block-too-few-battles": "플레이했지만 아직 충분히 플레이하지 않았습니다.",
   "checking-your-record-on-this": "이 전차의 기록을 확인하는 중...",
+  "could-not-read-your-record": "이 전차의 기록을 읽을 수 없습니다.",
   "fetching-your-garage": "차고를 가져오는 중",
   "have-you-played": "{tank}을(를) 플레이했나요?",
   "more-to-go": "전투 {count}회 더 필요",

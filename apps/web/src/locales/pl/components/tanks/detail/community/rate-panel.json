@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} bitew ogółem",
+  "block-never-played": "Nie masz rozegranych bitew tym czołgiem.",
+  "block-no-record": "Nie udało nam się jeszcze odczytać twojego garażu. Właśnie poprosiliśmy o niego Wargaming, więc spróbuj ponownie za moment.",
+  "block-too-few-battles": "Masz rozegrane bitwy tym czołgiem, ale jeszcze nie wystarczająco dużo.",
   "checking-your-record-on-this": "Sprawdzamy twoje wyniki dla tego czołgu...",
+  "could-not-read-your-record": "Nie udało nam się odczytać twojego rekordu na tym czołgu.",
   "fetching-your-garage": "Pobieramy Twój garaż",
   "have-you-played": "Czy grałeś(-aś) czołgiem {tank}?",
   "more-to-go": "Do wymaganej liczby brakuje jeszcze {count} bitew",

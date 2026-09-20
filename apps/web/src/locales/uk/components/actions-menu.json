@@ -3,6 +3,11 @@
   "open-in": "Відкрити в {target}",
   "remove-from-favorites": "Видалити з обраного",
   "share": "Поділитися",
+  "share-text-clan": "Перевірка [{tag}] {name} у {app}",
+  "share-text-map": "Перевірка мапи {name} у {app}",
+  "share-text-player": "Перевірка статистики Танковий {name} у {app}",
+  "share-text-tank": "Перевірка статистики Танковий {name} у {app}",
+  "share-text-tournament": "Перевірка {name} у {app}",
   "share-title": "Поділитися {name}",
   "vehicle-ratings": "Рейтинги транспортних засобів"
 }

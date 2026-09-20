@@ -1,5 +1,6 @@
 {
   "add-a-tank": "添加坦克...",
+  "add-a-vehicle": "添加车辆",
   "share-comparison": "分享比较",
-  "add-a-vehicle": "添加车辆"
+  "share-text": "在 {app} 上对比 {names}"
 }

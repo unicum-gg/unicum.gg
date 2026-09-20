@@ -1,8 +1,13 @@
 {
   "average-over-rated": "{size}名玩家中{rated}名已评级玩家的平均值",
   "average-over-recent": "过去30天进行过对战的{size}名玩家中{rated}名玩家的平均值",
+  "avg-metric": "平均 {metric}",
+  "avg-metric-rank": "平均 {metric} · 排名 {rank}，共 {size} 支队伍",
+  "avg-metric-recent": "平均 {metric} · 近 30d",
   "avg-winrate": "平均胜率",
   "finished": "已结束",
+  "of-teams": "{size, plural, other {共 # 支队伍}}",
   "record": "记录",
+  "ties-played": "{count, plural, other {进行过 # 场平局}}",
   "won": "获胜"
 }

@@ -3,6 +3,11 @@
   "open-in": "Openen in {target}",
   "remove-from-favorites": "Van favorieten verwijderen",
   "share": "Delen",
+  "share-text-clan": "Controleren: [{tag}] {name} op {app}",
+  "share-text-map": "Controleren: de kaart met de naam {name} op {app}",
+  "share-text-player": "Controleren: de WoT-statistieken van {name} op {app}",
+  "share-text-tank": "Controleren: de WoT-statistieken van {name} op {app}",
+  "share-text-tournament": "Controleren: {name} op {app}",
   "share-title": "Delen {name}",
   "vehicle-ratings": "Beoordelingen van voertuigen"
 }

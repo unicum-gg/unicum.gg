@@ -3,6 +3,11 @@
   "open-in": "Megnyitás itt: {target}",
   "remove-from-favorites": "Eltávolítás a kedvencekből",
   "share": "Megosztás",
+  "share-text-clan": "Ellenőrzés: [{tag}] {name} itt: {app}",
+  "share-text-map": "Ellenőrzés: {name} pálya itt: {app}",
+  "share-text-player": "{name} WoT-statisztikái itt: {app}",
+  "share-text-tank": "{name} WoT-statisztikái itt: {app}",
+  "share-text-tournament": "Ellenőrzés: {name} itt: {app}",
   "share-title": "Megosztás {name}-ról",
   "vehicle-ratings": "Jármű Értékelések"
 }

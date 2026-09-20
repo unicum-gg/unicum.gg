@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Μέσος όρος των {rated} από τους {size} παίκτες",
   "average-over-recent": "Μέσος όρος των {rated} από τους {size} παίκτες που έπαιξαν τις τελευταίες 30 ημέρες",
+  "avg-metric": "Μέσος όρος {metric}",
+  "avg-metric-rank": "Μέσος όρος {metric} · {rank} από {size}",
+  "avg-metric-recent": "Μέσος όρος {metric} · 30 ημέρες",
   "avg-winrate": "Μέσο ποσοστό νικών",
   "finished": "Τελικά",
+  "of-teams": "{size, plural, one {από # ομάδα} other {από # ομάδες}}",
   "record": "Ρεκόρ",
+  "ties-played": "{count, plural, one {# ισοπαλία που παίχτηκε} other {# ισοπαλίες που παίχτηκαν}}",
   "won": "Νίκησε"
 }

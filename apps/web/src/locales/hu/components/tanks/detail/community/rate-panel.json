@@ -1,6 +1,10 @@
 {
   "battles-overall": "Összesen {battles} csata",
+  "block-never-played": "Ezzel a tankkal nem játszottál.",
+  "block-no-record": "Még nem olvastuk be a garázsodat. Most kértük le a Wargamingtől, ezért próbáld újra egy pillanat múlva.",
+  "block-too-few-battles": "Játszottál vele, de még nem játszottál vele eleget.",
   "checking-your-record-on-this": "A tankon elért eredményeid ellenőrzése...",
+  "could-not-read-your-record": "Nem tudtuk beolvasni a tankod rekordját.",
   "fetching-your-garage": "Garázsod lekérése",
   "have-you-played": "Játszottál már a(z) {tank} tankkal?",
   "more-to-go": "Még {count} csata szükséges",

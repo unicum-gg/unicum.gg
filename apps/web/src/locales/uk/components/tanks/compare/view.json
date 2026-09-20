@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Додати танк...",
+  "add-a-vehicle": "Додати техніку",
   "share-comparison": "Поділитися порівнянням",
-  "add-a-vehicle": "Додати техніку"
+  "share-text": "Порівняння {names} у {app}"
 }

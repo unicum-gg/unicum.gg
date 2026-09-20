@@ -3,6 +3,11 @@
   "open-in": "Otvori u {target}",
   "remove-from-favorites": "Ukloni iz omiljenih",
   "share": "Podijeli",
+  "share-text-clan": "Provjeri [{tag}] {name} na {app}",
+  "share-text-map": "Provjeri mapu {name} na {app}",
+  "share-text-player": "Provjeri statistike igrača {name} na {app}",
+  "share-text-tank": "Provjeri statistike tenka {name} na {app}",
+  "share-text-tournament": "Provjeri {name} na {app}",
   "share-title": "Podijeli {name}",
   "vehicle-ratings": "Ocjene vozila"
 }

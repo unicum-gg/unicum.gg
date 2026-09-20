@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Aggiungi un carro...",
+  "add-a-vehicle": "Aggiungi un veicolo",
   "share-comparison": "Condividi confronto",
-  "add-a-vehicle": "Aggiungi un veicolo"
+  "share-text": "{names} a confronto su {app}"
 }

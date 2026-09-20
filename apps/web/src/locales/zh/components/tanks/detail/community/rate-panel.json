@@ -1,6 +1,10 @@
 {
   "battles-overall": "总计{battles}战斗场次",
+  "block-never-played": "您尚未对这辆坦克进行过对战。",
+  "block-no-record": "我们还没有阅读您的车库。我们刚刚向默认请求了相关信息，请稍等片刻后重试。",
+  "block-too-few-battles": "您进行过对战，但对战次数还不够。",
   "checking-your-record-on-this": "正在检查您使用这辆坦克的记录...",
+  "could-not-read-your-record": "我们无法阅读您在这辆坦克上的纪录。",
   "fetching-your-garage": "正在获取您的车库",
   "have-you-played": "您使用过{tank}吗？",
   "more-to-go": "还需进行{count}场战斗",

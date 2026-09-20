@@ -1,6 +1,10 @@
 {
   "battles-overall": "Toplam {battles} savaş",
+  "block-never-played": "Bu tankı oynamadın.",
+  "block-no-record": "Garajını henüz okumadık. Garaj bilgilerini Wargaming’den az önce istedik, bu yüzden bir an sonra tekrar dene.",
+  "block-too-few-battles": "Bu tankla oynadın, ancak henüz yeterli sayıda savaş oynamadın.",
   "checking-your-record-on-this": "Bu tanktaki kaydınız kontrol ediliyor...",
+  "could-not-read-your-record": "Bu tanktaki rekorunu okuyamadık.",
   "fetching-your-garage": "Garajınız getiriliyor",
   "have-you-played": "{tank} ile oynadınız mı?",
   "more-to-go": "{count} savaş daha kaldı",

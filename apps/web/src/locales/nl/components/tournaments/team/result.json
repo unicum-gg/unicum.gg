@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Gemiddeld over {rated} van {size} spelers",
   "average-over-recent": "Gemiddeld over de {rated} van {size} spelers die in de afgelopen 30 dagen hebben gespeeld",
+  "avg-metric": "Gemiddeld {metric}",
+  "avg-metric-rank": "Gemiddeld {metric} · {rank} van {size}",
+  "avg-metric-recent": "Gemiddeld {metric} · 30d",
   "avg-winrate": "Gemiddeld winstpercentage",
   "finished": "Afgelopen",
+  "of-teams": "{size, plural, one {van # team} other {van # teams}}",
   "record": "Record",
+  "ties-played": "{count, plural, one {# gelijkspel gespeeld} other {# gelijkspelen gespeeld}}",
   "won": "Gewonnen"
 }

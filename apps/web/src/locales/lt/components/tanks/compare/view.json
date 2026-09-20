@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Pridėti tanką...",
+  "add-a-vehicle": "Pridėti transporto priemonę",
   "share-comparison": "Dalintis palyginimu",
-  "add-a-vehicle": "Pridėti transporto priemonę"
+  "share-text": "Palyginti {names} per {app}"
 }

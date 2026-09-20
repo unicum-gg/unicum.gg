@@ -1,8 +1,13 @@
 {
   "average-over-rated": "ค่าเฉลี่ยจากผู้เล่น {rated} คน จากทั้งหมด {size} คน",
   "average-over-recent": "ค่าเฉลี่ยจากผู้เล่น {rated} คน จากทั้งหมด {size} คนที่เล่นในช่วง 30 วันที่ผ่านมา",
+  "avg-metric": "เฉลี่ย {metric}",
+  "avg-metric-rank": "เฉลี่ย {metric} · อันดับ {rank} จากทั้งหมด {size}",
+  "avg-metric-recent": "เฉลี่ย {metric} · 30 วัน",
   "avg-winrate": "ค่าเฉลี่ยอัตราชนะ",
   "finished": "สิ้นสุดแล้ว",
+  "of-teams": "{size, plural, other {จากทั้งหมด # ทีม}}",
   "record": "บันทึก",
+  "ties-played": "{count, plural, other {เล่นเกมที่เสมอ # ครั้ง}}",
   "won": "ชนะ"
 }

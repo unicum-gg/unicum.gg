@@ -1,0 +1,7 @@
+{
+  "ordinal-few": "{n}:e",
+  "ordinal-many": "{n}:e",
+  "ordinal-one": "{n}:a",
+  "ordinal-other": "{n}:e",
+  "ordinal-two": "{n}:a"
+}

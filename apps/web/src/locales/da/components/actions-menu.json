@@ -3,6 +3,11 @@
   "open-in": "Åbn i {target}",
   "remove-from-favorites": "Fjern fra favoritter",
   "share": "Del",
+  "share-text-clan": "Tjek [{tag}] {name} på {app}",
+  "share-text-map": "Tjek kortet med navnet {name} på {app}",
+  "share-text-player": "Tjek WoT-statistik for {name} på {app}",
+  "share-text-tank": "Tjek WoT-statistik for {name} på {app}",
+  "share-text-tournament": "Tjek {name} på {app}",
   "share-title": "Del {name}",
   "vehicle-ratings": "Køretøjsbedømmelser"
 }

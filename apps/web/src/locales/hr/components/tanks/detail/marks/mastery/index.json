@@ -1,5 +1,7 @@
 {
   "last-days": "Posljednjih {chartDays} dana",
+  "moe-chart": "Zahtjevi za Oznake izvrsnosti tenka {tank} tijekom vremena",
+  "mom-chart": "Pragovi za Oznake majstorstva tenka {tank} tijekom vremena",
   "n-players": "{count, plural, one {# igrač} few {# igrača} other {# igrača}}",
   "rolling-average-combined-damage-to": "Pomični prosjek kombinirane štete potreban za prestizanje 65 / 85 / 95% igrača.",
   "single-battle-xp-to-beat": "XP iz jedne bitke potreban za prestizanje 50 / 80 / 95 / 99% igrača.",

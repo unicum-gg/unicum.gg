@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Середнє за {rated} із {size} оцінених гравців",
   "average-over-recent": "Середнє за {rated} із {size} гравців, які грали протягом останніх 30 діб",
+  "avg-metric": "Середнє {metric}",
+  "avg-metric-rank": "Середнє {metric} · {rank} місце з {size}",
+  "avg-metric-recent": "Середнє {metric} · 30 д",
   "avg-winrate": "Середня ймовірність виграшу",
   "finished": "Завершено",
+  "of-teams": "{size, plural, one {з # команди} few {з # команд} many {з # команд} other {з # команд}}",
   "record": "Рекорд",
+  "ties-played": "{count, plural, one {зіграно # нічию} few {зіграно # нічиї} many {зіграно # нічиїх} other {зіграно # нічиї}}",
   "won": "Перемога"
 }

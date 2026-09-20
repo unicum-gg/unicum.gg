@@ -1,5 +1,7 @@
 {
   "last-days": "최근 {chartDays}일",
+  "moe-chart": "시간에 따른 {tank}의 화력의 증표 요구 조건",
+  "mom-chart": "시간에 따른 {tank}의 숙련도 마크 기준값",
   "n-players": "{count, plural, other {#명 플레이어들}}",
   "rolling-average-combined-damage-to": "플레이어의 65 / 85 / 95%를 격파하기 위한 이동 평균 합산 피해입니다.",
   "single-battle-xp-to-beat": "플레이어의 50 / 80 / 95 / 99%를 격파하기 위한 단일 전투 XP입니다.",

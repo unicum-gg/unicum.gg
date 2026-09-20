@@ -1,5 +1,7 @@
 {
   "last-days": "Ostatnie {chartDays} dni",
+  "moe-chart": "Wymagania dotyczące Odznak biegłości dla {tank} w czasie",
+  "mom-chart": "Progi Marek Mistrzostwa dla {tank} w czasie",
   "n-players": "{count, plural, one {# gracz} few {# graczy} many {# graczy} other {# graczy}}",
   "rolling-average-combined-damage-to": "Krocząca średnia łącznych uszkodzeń wymagana, by wyprzedzić 65 / 85 / 95% graczy.",
   "single-battle-xp-to-beat": "Liczba PD w pojedynczej bitwie wymagana, by wyprzedzić 50 / 80 / 95 / 99% graczy.",

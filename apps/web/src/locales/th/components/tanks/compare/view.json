@@ -1,5 +1,6 @@
 {
   "add-a-tank": "เพิ่มรถถัง...",
+  "add-a-vehicle": "เพิ่มยานพาหนะ",
   "share-comparison": "แชร์การเปรียบเทียบ",
-  "add-a-vehicle": "เพิ่มยานพาหนะ"
+  "share-text": "เปรียบเทียบ {names} บน {app}"
 }

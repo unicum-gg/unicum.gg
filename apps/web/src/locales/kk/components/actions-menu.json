@@ -3,6 +3,11 @@
   "open-in": "{target} ішінде ашу",
   "remove-from-favorites": "Сүйіктіктен алып тастау",
   "share": "Бөлісу",
+  "share-text-clan": "{app} қолданбасында [{tag}] {name} атауын тексеру",
+  "share-text-map": "{app} қолданбасында {name} картасын тексеру",
+  "share-text-player": "{app} қолданбасында {name} туралы World of Tanks статистикасын тексеру",
+  "share-text-tank": "{app} қолданбасында {name} туралы World of Tanks статистикасын тексеру",
+  "share-text-tournament": "{app} қолданбасында {name} атауын тексеру",
   "share-title": "{name} бөлісу",
   "vehicle-ratings": "Көлік Рейтингтері"
 }

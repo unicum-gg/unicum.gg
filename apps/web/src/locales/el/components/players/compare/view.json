@@ -1,4 +1,5 @@
 {
   "compare": "Σύγκριση",
-  "share-comparison": "Κοινή χρήση σύγκρισης"
+  "share-comparison": "Κοινή χρήση σύγκρισης",
+  "share-text": "Σύγκριση μεταξύ {names} στο {app}"
 }

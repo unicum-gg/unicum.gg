@@ -1,8 +1,13 @@
 {
   "average-over-rated": "المتوسط لأفضل {rated} من أصل {size} لاعبين",
   "average-over-recent": "المتوسط لأفضل {rated} من أصل {size} لاعبين لعبوا خلال آخر 30 يومًا",
+  "avg-metric": "متوسط {metric}",
+  "avg-metric-rank": "متوسط {metric} · {rank} من {size}",
+  "avg-metric-recent": "متوسط {metric} · آخر 30 يومًا",
   "avg-winrate": "متوسط نسبة الفوز",
   "finished": "اكتمل",
+  "of-teams": "{size, plural, zero {من # فريق} one {من # فريق} two {من # فريقين} few {من # فرق} many {من # فريقًا} other {من # فريق}}",
   "record": "سجل",
+  "ties-played": "{count, plural, zero {تم لعب # تعادل} one {تم لعب # تعادل} two {تم لعب # تعادلين} few {تم لعب # تعادلات} many {تم لعب # تعادلًا} other {تم لعب # تعادل}}",
   "won": "فاز"
 }

@@ -3,6 +3,11 @@
   "open-in": "Abrir em {target}",
   "remove-from-favorites": "Remover dos favoritos",
   "share": "Compartilhar",
+  "share-text-clan": "Verificar [{tag}] {name} em {app}",
+  "share-text-map": "Verificar o mapa chamado {name} em {app}",
+  "share-text-player": "Verificar as estatísticas de WoT de {name} em {app}",
+  "share-text-tank": "Verificar as estatísticas de WoT de {name} em {app}",
+  "share-text-tournament": "Verificar {name} em {app}",
   "share-title": "Compartilhar {name}",
   "vehicle-ratings": "Classificações de Veículos"
 }

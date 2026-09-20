@@ -3,6 +3,11 @@
   "open-in": "Otevřít v {target}",
   "remove-from-favorites": "Odstranit z oblíbených",
   "share": "Sdílet",
+  "share-text-clan": "Zkontrolovat [{tag}] {name} na {app}",
+  "share-text-map": "Zkontrolovat mapu {name} na {app}",
+  "share-text-player": "Zkontrolovat WoT statistiky hráče {name} na {app}",
+  "share-text-tank": "Zkontrolovat WoT statistiky tanku {name} na {app}",
+  "share-text-tournament": "Zkontrolovat {name} na {app}",
   "share-title": "Sdílet {name}",
   "vehicle-ratings": "Hodnocení vozidel"
 }

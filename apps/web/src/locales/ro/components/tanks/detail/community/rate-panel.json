@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} bătălii în total",
+  "block-never-played": "Nu ai jucat acest tanc.",
+  "block-no-record": "Nu ți-am citit încă garajul. Tocmai i-am cerut datele lui Wargaming, așa că încearcă din nou peste un moment.",
+  "block-too-few-battles": "L-ai jucat, dar încă nu suficient.",
   "checking-your-record-on-this": "Se verifică istoricul tău pentru acest tanc...",
+  "could-not-read-your-record": "Nu am putut citi recordul tău pentru acest tanc.",
   "fetching-your-garage": "Îți preluăm garajul",
   "have-you-played": "Ai jucat cu {tank}?",
   "more-to-go": "Mai sunt necesare {count} bătălii",

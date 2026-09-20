@@ -1,6 +1,10 @@
 {
   "battles-overall": "総計 {battles} 戦",
+  "block-never-played": "この戦車はプレイ済みではありません。",
+  "block-no-record": "ガレージをまだ既読にできていません。Wargamingにリクエストしたばかりなので、少し時間を置いた時点でもう一度お試しください。",
+  "block-too-few-battles": "プレイ済みですが、まだ十分ではありません。",
   "checking-your-record-on-this": "この戦車の戦績を確認中…",
+  "could-not-read-your-record": "この戦車の記録を既読にできませんでした。",
   "fetching-your-garage": "ガレージを取得中",
   "have-you-played": "{tank} をプレイしましたか？",
   "more-to-go": "あと {count} 戦必要",

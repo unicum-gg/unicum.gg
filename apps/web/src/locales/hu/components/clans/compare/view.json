@@ -1,4 +1,5 @@
 {
   "compare": "Összehasonlít",
-  "share-comparison": "Megosztás összehasonlítás"
+  "share-comparison": "Megosztás összehasonlítás",
+  "share-text": "{names} összehasonlítása itt: {app}"
 }

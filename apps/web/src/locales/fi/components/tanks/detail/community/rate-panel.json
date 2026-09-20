@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} taistelua yhteensä",
+  "block-never-played": "Et ole pelannut tällä panssarivaunulla.",
+  "block-no-record": "Emme ole vielä lukeneet talliasi. Pyysimme juuri tallisi tiedot Wargamingilta, joten yritä uudelleen hetken kuluttua.",
+  "block-too-few-battles": "Olet pelannut sillä, mutta et vielä riittävästi.",
   "checking-your-record-on-this": "Tarkistetaan ennätystäsi tällä panssarivaunulla...",
+  "could-not-read-your-record": "Emme voineet lukea ennätystäsi tällä panssarivaunulla.",
   "fetching-your-garage": "Haemme autotalliasi",
   "have-you-played": "Oletko pelannut panssarivaunulla {tank}?",
   "more-to-go": "Vielä {count} taistelua",

@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Pangkaraniwan sa {rated} sa {size} mga manlalaro",
   "average-over-recent": "Pangkaraniwan sa {rated} sa {size} mga manlalarong naglaro sa nakalipas na 30 mga araw",
+  "avg-metric": "Karaniwang {metric}",
+  "avg-metric-rank": "Karaniwang {metric} · {rank} sa {size}",
+  "avg-metric-recent": "Karaniwang {metric} · 30 araw",
   "avg-winrate": "Avg na porsyento ng panalo",
   "finished": "Natapos",
+  "of-teams": "{size, plural, other {ng # koponan}}",
   "record": "Rekord",
+  "ties-played": "{count, plural, other {# tabla na nilaro}}",
   "won": "Nanalo"
 }

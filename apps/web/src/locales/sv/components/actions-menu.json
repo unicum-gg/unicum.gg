@@ -3,6 +3,11 @@
   "open-in": "Öppna i {target}",
   "remove-from-favorites": "Ta bort från favoriter",
   "share": "Dela",
+  "share-text-clan": "Kontrollera [{tag}] {name} på {app}",
+  "share-text-map": "Kontrollera kartan som heter {name} på {app}",
+  "share-text-player": "Kontrollera WoT-statistiken för {name} på {app}",
+  "share-text-tank": "Kontrollera WoT-statistiken för {name} på {app}",
+  "share-text-tournament": "Kontrollera {name} på {app}",
   "share-title": "Dela {name}",
   "vehicle-ratings": "Klassificering av fordon"
 }

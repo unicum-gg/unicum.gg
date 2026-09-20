@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} kamper totalt",
+  "block-never-played": "Du har ikke spilt denne stridsvognen.",
+  "block-no-record": "Vi har ikke lest garasjen din ennå. Vi ba nettopp Wargaming om den, så prøv igjen om et øyeblikk.",
+  "block-too-few-battles": "Du har spilt den, men ikke nok ennå.",
   "checking-your-record-on-this": "Sjekker statistikken din for denne stridsvognen...",
+  "could-not-read-your-record": "Vi fikk ikke lest rekorden din for denne stridsvognen.",
   "fetching-your-garage": "Henter garasjen din",
   "have-you-played": "Har du spilt {tank}?",
   "more-to-go": "{count} kamper igjen",

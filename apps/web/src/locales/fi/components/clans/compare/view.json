@@ -1,4 +1,5 @@
 {
   "compare": "Vertaile",
-  "share-comparison": "Jaa vertailu"
+  "share-comparison": "Jaa vertailu",
+  "share-text": "Kohteiden {names} vertailu sovelluksessa {app}"
 }

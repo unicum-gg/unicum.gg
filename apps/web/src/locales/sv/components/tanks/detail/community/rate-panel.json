@@ -1,6 +1,10 @@
 {
   "battles-overall": "Övergripande antal Strider: {battles}",
+  "block-never-played": "Du har inte spelat den här vagnen.",
+  "block-no-record": "Vi har ännu inte läst ditt garage. Vi bad precis Wargaming om det, så försök igen om ett ögonblick.",
+  "block-too-few-battles": "Du har spelat den, men inte tillräckligt ännu.",
   "checking-your-record-on-this": "Kontrollerar din statistik för den här stridsvagnen...",
+  "could-not-read-your-record": "Vi kunde inte läsa ditt rekord för den här vagnen.",
   "fetching-your-garage": "Vi hämtar ditt garage",
   "have-you-played": "Har du spelat {tank}?",
   "more-to-go": "Strider kvar: {count}",

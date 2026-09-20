@@ -1,6 +1,10 @@
 {
   "battles-overall": "Iš viso {battles} mūšių",
+  "block-never-played": "Šiuo tanku dar nežaista.",
+  "block-no-record": "Dar neperskaitėme jūsų garažo. Ką tik paprašėme Wargaming jį pateikti, todėl po akimirkos bandykite dar kartą.",
+  "block-too-few-battles": "Jūs žaidėte su juo, bet dar nepakankamai.",
   "checking-your-record-on-this": "Tikrinami jūsų šio tanko duomenys...",
+  "could-not-read-your-record": "Nepavyko perskaityti jūsų rekordo su šiuo tanku.",
   "fetching-your-garage": "Gaunamas jūsų garažas",
   "have-you-played": "Ar žaidėte su {tank}?",
   "more-to-go": "Liko {count} mūšių",

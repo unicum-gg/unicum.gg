@@ -3,6 +3,11 @@
   "open-in": "Deschide în {target}",
   "remove-from-favorites": "Îndepărtare din favorite",
   "share": "Împărtășește",
+  "share-text-clan": "Verifică [{tag}] {name} pe {app}",
+  "share-text-map": "Verifică harta {name} pe {app}",
+  "share-text-player": "Verifică statisticile WoT pentru {name} pe {app}",
+  "share-text-tank": "Verifică statisticile WoT pentru {name} pe {app}",
+  "share-text-tournament": "Verifică {name} pe {app}",
   "share-title": "Împărtășește {name}",
   "vehicle-ratings": "Clasamente vehicule"
 }

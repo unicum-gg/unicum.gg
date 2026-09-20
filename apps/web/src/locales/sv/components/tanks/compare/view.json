@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Lägg till en stridsvagn...",
+  "add-a-vehicle": "Lägg till ett fordon",
   "share-comparison": "Dela jämförelse",
-  "add-a-vehicle": "Lägg till ett fordon"
+  "share-text": "{names} jämförda på {app}"
 }

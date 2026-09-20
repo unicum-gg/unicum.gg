@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Vidurkis pagal {rated} iš {size} žaidėjų",
   "average-over-recent": "Vidurkis pagal {rated} iš {size} žaidėjų, žaidusių per pastarąsias 30 dienų",
+  "avg-metric": "Vid. {metric}",
+  "avg-metric-rank": "Vid. {metric} · {rank} vieta iš {size}",
+  "avg-metric-recent": "Vid. {metric} · 30 d.",
   "avg-winrate": "Vid. laimėjimų procentas",
   "finished": "Baigėsi",
+  "of-teams": "{size, plural, one {iš # komandos} few {iš # komandų} many {iš # komandų} other {iš # komandų}}",
   "record": "Įrašas",
+  "ties-played": "{count, plural, one {sužaista # lygioji} few {sužaistos # lygiosios} many {sužaista # lygiųjų} other {sužaista # lygiųjų}}",
   "won": "Laimėta"
 }

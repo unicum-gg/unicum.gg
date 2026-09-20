@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} mga laban sa kabuuan",
+  "block-never-played": "Hindi mo pa nilaro ang tank na ito.",
+  "block-no-record": "Hindi pa namin kayang basahin ang iyong garahe. Kakahingi lang namin nito sa Wargaming, kaya subukan mong muli pagkalipas ng ilang sandali.",
+  "block-too-few-battles": "Nilaro mo ito, pero hindi mo pa ito nilaro nang sapat.",
   "checking-your-record-on-this": "Sinusuri ang rekord mo sa tank na ito...",
+  "could-not-read-your-record": "Hindi namin magawang basahin ang iyong rekord sa tank na ito.",
   "fetching-your-garage": "Kinukuha namin ang iyong garage",
   "have-you-played": "Nilaro mo na ba ang {tank}?",
   "more-to-go": "{count} pang mga laban ang natitira",

@@ -3,6 +3,11 @@
   "open-in": "เปิดใน {target}",
   "remove-from-favorites": "ลบออกจากรายการโปรด",
   "share": "แชร์",
+  "share-text-clan": "ตรวจสอบ [{tag}] {name} บน {app}",
+  "share-text-map": "ตรวจสอบแผนที่ {name} บน {app}",
+  "share-text-player": "ตรวจสอบสถิติ WoT ของ {name} บน {app}",
+  "share-text-tank": "ตรวจสอบสถิติ WoT ของ {name} บน {app}",
+  "share-text-tournament": "ตรวจสอบ {name} บน {app}",
   "share-title": "แชร์ {name}",
   "vehicle-ratings": "การจัดอันดับของยานพาหนะ"
 }

@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Trung bình trên {rated} trong số {size} người chơi",
   "average-over-recent": "Trung bình trên {rated} trong số {size} người chơi đã chơi trong 30 ngày gần nhất",
+  "avg-metric": "Trung bình {metric}",
+  "avg-metric-rank": "Trung bình {metric} · hạng {rank} trên {size}",
+  "avg-metric-recent": "Trung bình {metric} · 30 ng",
   "avg-winrate": "Trung bình tỷ lệ thắng",
   "finished": "Đã kết thúc",
+  "of-teams": "{size, plural, other {trên # đội}}",
   "record": "Kỷ lục",
+  "ties-played": "{count, plural, other {# trận hòa đã chơi}}",
   "won": "Chiến thắng"
 }

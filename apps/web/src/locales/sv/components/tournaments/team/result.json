@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Genomsnitt för {rated} av {size} spelare",
   "average-over-recent": "Genomsnitt för {rated} av de {size} spelare som spelade under de senaste 30 dagar",
+  "avg-metric": "Genomsnitt för {metric}",
+  "avg-metric-rank": "Genomsnitt för {metric} · {rank} av {size}",
+  "avg-metric-recent": "Genomsnitt för {metric} · 30 d",
   "avg-winrate": "Genomsnittlig vinstfrekvens",
   "finished": "Slutförd",
+  "of-teams": "{size, plural, one {av # lag} other {av # lag}}",
   "record": "Rekord",
+  "ties-played": "{count, plural, one {# oavgjord match som spelades} other {# oavgjorda matcher som spelades}}",
   "won": "Vunnit"
 }

@@ -1,8 +1,13 @@
 {
   "average-over-rated": "{size}人のプレイヤーのうち評価済み{rated}人の平均",
   "average-over-recent": "過去30日間にプレイした{size}人のプレイヤーのうち{rated}人の平均",
+  "avg-metric": "平均{metric}",
+  "avg-metric-rank": "平均{metric} · 順位 {rank}/{size}",
+  "avg-metric-recent": "平均{metric} · 30日",
   "avg-winrate": "平均勝率",
   "finished": "終了済み",
+  "of-teams": "{size, plural, other {#チーム中}}",
   "record": "記録",
+  "ties-played": "{count, plural, other {#回の引き分けをプレイ済み}}",
   "won": "勝利"
 }

@@ -2,6 +2,7 @@
   "how-players-compare": "Miten alueen {region} pelaajat vertautuvat",
   "median-n": "mediaani {value}",
   "metric-rating": "{metric}-arvosana",
+  "rating-distribution-chart": "{metric}-jakauma alueen seurattujen pelaajien keskuudessa",
   "tracked-accounts-with-at-least": "{players} seurattua tiliä, joilla on vähintään {minBattles} taistelua. Värit ovat samoja tasoja, joita sivusto käyttää kaikkialla muualla.",
   "win-rate": "Voittoaste",
   "win-rate-distribution-across-the-region-s-tr": "Voittoprosentin jakauma alueen seurattujen pelaajien keskuudessa"

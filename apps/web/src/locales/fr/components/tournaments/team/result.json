@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Moyenne sur {rated} des {size} joueurs",
   "average-over-recent": "Moyenne sur les {rated} des {size} joueurs ayant joué au cours des 30 derniers jours",
+  "avg-metric": "Moyenne de {metric}",
+  "avg-metric-rank": "Moyenne {metric} · rang {rank} sur {size}",
+  "avg-metric-recent": "Moyenne {metric} · 30 j",
   "avg-winrate": "Moy. taux de victoire",
   "finished": "Terminé",
+  "of-teams": "{size, plural, one {sur # équipe} other {sur # équipes}}",
   "record": "Bilan",
+  "ties-played": "{count, plural, one {# égalité jouée} other {# égalités jouées}}",
   "won": "Gagné"
 }

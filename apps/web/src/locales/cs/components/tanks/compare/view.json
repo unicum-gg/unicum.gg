@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Přidat tank...",
+  "add-a-vehicle": "Přidat vozidlo",
   "share-comparison": "Sdílet porovnání",
-  "add-a-vehicle": "Přidat vozidlo"
+  "share-text": "Porovnání: {names} na {app}"
 }

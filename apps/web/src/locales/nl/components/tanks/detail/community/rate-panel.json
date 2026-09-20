@@ -1,6 +1,10 @@
 {
   "battles-overall": "In totaal {battles} gevechten",
+  "block-never-played": "Je hebt deze tank niet gespeeld.",
+  "block-no-record": "We hebben je garage nog niet gelezen. We hebben Wargaming er zojuist om gevraagd, dus probeer het over een moment opnieuw.",
+  "block-too-few-battles": "Je hebt deze tank gespeeld, maar er nog niet genoeg mee gespeeld.",
   "checking-your-record-on-this": "Je resultaten met deze tank controleren...",
+  "could-not-read-your-record": "We konden je record met deze tank niet lezen.",
   "fetching-your-garage": "Je garage wordt opgehaald",
   "have-you-played": "Heb je met {tank} gespeeld?",
   "more-to-go": "Nog {count} gevechten te gaan",

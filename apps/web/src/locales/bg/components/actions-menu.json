@@ -3,6 +3,11 @@
   "open-in": "Отваряне в {target}",
   "remove-from-favorites": "Премахни от любими",
   "share": "Сподели",
+  "share-text-clan": "Провери [{tag}] {name} в {app}",
+  "share-text-map": "Провери картата на {name} в {app}",
+  "share-text-player": "Провери статистиките на {name} за Танков в {app}",
+  "share-text-tank": "Провери статистиките на {name} за Танков в {app}",
+  "share-text-tournament": "Провери {name} в {app}",
   "share-title": "Сподели {name}",
   "vehicle-ratings": "Рейтинг на превозните средства"
 }

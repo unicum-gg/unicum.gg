@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Prosek за {rated} од {size} igrači",
   "average-over-recent": "Prosek за {rated} од {size} igrači који су играли током последњих 30 dana",
+  "avg-metric": "Prosek {metric}",
+  "avg-metric-rank": "Prosek {metric} · {rank} od {size}",
+  "avg-metric-recent": "Prosek {metric} · 30d",
   "avg-winrate": "Prosečna stopa pobede",
   "finished": "Završeno",
+  "of-teams": "{size, plural, one {од # тима} few {од # тима} many {од # тимова} other {од # тимова}}",
   "record": "Rekord",
+  "ties-played": "{count, plural, one {# одигран нерешен меч} few {# одиграна нерешена меча} many {# одиграних нерешених мечева} other {# одиграних нерешених мечева}}",
   "won": "Pobede"
 }

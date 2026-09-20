@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Сярэдняе па {rated} з {size} ацэненых гульцоў",
   "average-over-recent": "Сярэдняе па {rated} з {size} гульцоў, якія гулялі за апошнія 30 дні",
+  "avg-metric": "Сярэдняе значэнне {metric}",
+  "avg-metric-rank": "Сярэдняе значэнне {metric} · месца {rank} з агульным памерам {size}",
+  "avg-metric-recent": "Сярэдняе значэнне {metric} · за 30 дзён",
   "avg-winrate": "Сярэдні выйгрыш",
   "finished": "Завершана",
+  "of-teams": "{size, plural, one {з # каманды} few {з # каманд} many {з # каманд} other {з # каманд}}",
   "record": "Рэкард",
+  "ties-played": "{count, plural, one {# згуляная нічыя} few {# згуляныя нічыі} many {# згуляных нічыіх} other {# згуляных нічыіх}}",
   "won": "Перамога"
 }

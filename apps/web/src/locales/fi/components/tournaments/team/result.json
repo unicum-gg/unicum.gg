@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Keskimääräinen arvo {rated}/{size} pelaajasta",
   "average-over-recent": "Keskimääräinen arvo {rated}/{size} pelaajasta, jotka pelasivat viimeisten 30 päivän aikana",
+  "avg-metric": "Keskimääräinen {metric}",
+  "avg-metric-rank": "Keskimääräinen {metric} · sijoitus {rank}/{size}",
+  "avg-metric-recent": "Keskimääräinen {metric} · viimeiset 30 vrk",
   "avg-winrate": "Kesk. voittoaste",
   "finished": "Valmis",
+  "of-teams": "{size, plural, one {# joukkueesta} other {# joukkueesta}}",
   "record": "Tulos",
+  "ties-played": "{count, plural, one {# pelattu tasapeli} other {# pelattua tasapeliä}}",
   "won": "Voitettu"
 }

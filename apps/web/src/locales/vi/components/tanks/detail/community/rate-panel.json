@@ -1,6 +1,10 @@
 {
   "battles-overall": "Tổng cộng {battles} trận đấu",
+  "block-never-played": "Bạn chưa chơi xe tăng này.",
+  "block-no-record": "Chúng tôi chưa đọc nhà chứa xe của bạn. Chúng tôi vừa yêu cầu Wargaming, hãy thử lại sau một lát.",
+  "block-too-few-battles": "Bạn đã chơi xe tăng này, nhưng vẫn chưa chơi đủ.",
   "checking-your-record-on-this": "Đang kiểm tra thành tích của bạn với xe tăng này...",
+  "could-not-read-your-record": "Chúng tôi không thể đọc kỷ lục của bạn trên xe tăng này.",
   "fetching-your-garage": "Đang lấy dữ liệu nhà xe của bạn",
   "have-you-played": "Bạn đã chơi {tank} chưa?",
   "more-to-go": "Còn {count} trận đấu nữa",

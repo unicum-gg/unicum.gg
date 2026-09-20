@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Průměr z {rated} hodnocených hráčů z {size}",
   "average-over-recent": "Průměr hodnocení {rated} u {size} hráčů, kteří odehráli bitvy během posledních 30 dní",
+  "avg-metric": "Průměr {metric}",
+  "avg-metric-rank": "Průměr {metric} · {rank} z {size}",
+  "avg-metric-recent": "Průměr {metric} · 30 d",
   "avg-winrate": "Průměrná úspěšnost",
   "finished": "Skončila",
+  "of-teams": "{size, plural, one {z # týmu} few {ze # týmů} other {z # týmů}}",
   "record": "Záznam",
+  "ties-played": "{count, plural, one {# odehraná remíza} few {# odehrané remízy} other {# odehraných remíz}}",
   "won": "Vyhráno"
 }

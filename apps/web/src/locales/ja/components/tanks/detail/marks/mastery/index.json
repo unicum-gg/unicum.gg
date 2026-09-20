@@ -1,5 +1,7 @@
 {
   "last-days": "過去 {chartDays} 日間",
+  "moe-chart": "{tank}の優等マーク要件の時間推移",
+  "mom-chart": "{tank}のマスターマーク閾値の時間推移",
   "n-players": "{count, plural, other {#人のプレイヤー}}",
   "rolling-average-combined-damage-to": "プレイヤーの 65 / 85 / 95% を上回るために必要な移動平均合計ダメージ",
   "single-battle-xp-to-beat": "プレイヤーの 50 / 80 / 95 / 99% を上回るために必要な 1 戦あたりの XP",

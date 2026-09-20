@@ -3,6 +3,11 @@
   "open-in": "Avaa kohteessa {target}",
   "remove-from-favorites": "Poista suosikeista",
   "share": "Jaa",
+  "share-text-clan": "Tarkista [{tag}] {name} sovelluksessa {app}",
+  "share-text-map": "Tarkista kartta {name} sovelluksessa {app}",
+  "share-text-player": "Tarkista pelaajan {name} WoT-tilastot sovelluksessa {app}",
+  "share-text-tank": "Tarkista panssarivaunun {name} WoT-tilastot sovelluksessa {app}",
+  "share-text-tournament": "Tarkista {name} sovelluksessa {app}",
   "share-title": "Jaa {name}",
   "vehicle-ratings": "Ajoneuvoarvioinnit"
 }

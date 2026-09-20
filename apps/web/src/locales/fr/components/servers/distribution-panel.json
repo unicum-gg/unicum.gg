@@ -2,6 +2,7 @@
   "how-players-compare": "Comparaison des joueurs du serveur {region}",
   "median-n": "médiane {value}",
   "metric-rating": "Notation de {metric}",
+  "rating-distribution-chart": "Distribution de {metric} sur les joueurs suivis de la région",
   "tracked-accounts-with-at-least": "{players} comptes suivis ayant disputé au moins {minBattles} batailles. Les couleurs correspondent aux mêmes tranches que celles utilisées partout ailleurs sur le site.",
   "win-rate": "Taux de victoire",
   "win-rate-distribution-across-the-region-s-tr": "Répartition du taux de victoires parmi les joueurs suivis de la région"

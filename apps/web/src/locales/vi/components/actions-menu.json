@@ -3,6 +3,11 @@
   "open-in": "Mở trong {target}",
   "remove-from-favorites": "Xóa khỏi yêu thích",
   "share": "Chia sẻ",
+  "share-text-clan": "Kiểm tra [{tag}] {name} trên {app}",
+  "share-text-map": "Kiểm tra Bản đồ {name} trên {app}",
+  "share-text-player": "Kiểm tra thống kê WoT của {name} trên {app}",
+  "share-text-tank": "Kiểm tra thống kê WoT của {name} trên {app}",
+  "share-text-tournament": "Kiểm tra {name} trên {app}",
   "share-title": "Chia sẻ {name}",
   "vehicle-ratings": "Xếp hạng xe"
 }

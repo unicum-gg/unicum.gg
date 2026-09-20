@@ -3,6 +3,11 @@
   "open-in": "Otvoriť v {target}",
   "remove-from-favorites": "Odstrániť z obľúbených",
   "share": "Zdieľať",
+  "share-text-clan": "Preveri [{tag}] {name} v aplikácii {app}",
+  "share-text-map": "Preveri mapu {name} v aplikácii {app}",
+  "share-text-player": "Preveri WoT štatistiky hráča {name} v aplikácii {app}",
+  "share-text-tank": "Preveri WoT štatistiky tanku {name} v aplikácii {app}",
+  "share-text-tournament": "Preveri {name} v aplikácii {app}",
   "share-title": "Zdieľať {name}",
   "vehicle-ratings": "Hodnotenia vozidiel"
 }

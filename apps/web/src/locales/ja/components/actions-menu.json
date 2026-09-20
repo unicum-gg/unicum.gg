@@ -3,6 +3,11 @@
   "open-in": "{target}で開く",
   "remove-from-favorites": "お気に入りから削除",
   "share": "共有",
+  "share-text-clan": "{app}で[{tag}] {name}を確認",
+  "share-text-map": "{app}で{name}マップを確認",
+  "share-text-player": "{app}で{name}のWoT戦績を確認",
+  "share-text-tank": "{app}で{name}のWoT戦績を確認",
+  "share-text-tournament": "{app}で{name}を確認",
   "share-title": "{name}を共有",
   "vehicle-ratings": "車両評価"
 }

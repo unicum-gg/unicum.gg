@@ -3,6 +3,11 @@
   "open-in": "{target}에서 열기",
   "remove-from-favorites": "즐겨찾기 삭제",
   "share": "공유",
+  "share-text-clan": "{app}에서 [{tag}] {name} 확인",
+  "share-text-map": "{app}에서 {name} 지도 확인",
+  "share-text-player": "{app}에서 {name}의 월드 오브 탱크 통계 확인",
+  "share-text-tank": "{app}에서 {name}의 월드 오브 탱크 통계 확인",
+  "share-text-tournament": "{app}에서 {name} 확인",
   "share-title": "{name} 공유",
   "vehicle-ratings": "차량 순위"
 }

@@ -2,6 +2,7 @@
   "how-players-compare": "Ako si vedú hráči v regióne {region}",
   "median-n": "medián {value}",
   "metric-rating": "Hodnotenie {metric}",
+  "rating-distribution-chart": "Rozdelenie {metric} po sledovaných hráčoch v regióne",
   "tracked-accounts-with-at-least": "{players} sledovaných účtov s minimálne {minBattles} bitkami. Farby zodpovedajú pásmam, ktoré stránka používa aj všade inde.",
   "win-rate": "Miera výhier",
   "win-rate-distribution-across-the-region-s-tr": "Rozdelenie miery víťazstiev medzi sledovanými hráčmi v regióne"

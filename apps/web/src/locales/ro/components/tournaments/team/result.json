@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Medie peste {rated} din {size} jucători",
   "average-over-recent": "Medie peste {rated} din {size} jucători care au jucat în ultimele 30 de zile",
+  "avg-metric": "Medie {metric}",
+  "avg-metric-rank": "Medie {metric} · poziția {rank} din {size}",
+  "avg-metric-recent": "Medie {metric} · 30z",
   "avg-winrate": "Medie rată de câștig",
   "finished": "Încheiat",
+  "of-teams": "{size, plural, one {din # echipă} few {din # echipe} other {din # de echipe}}",
   "record": "Record",
+  "ties-played": "{count, plural, one {# egalitate jucată} few {# egalități jucate} other {# de egalități jucate}}",
   "won": "Câștigat"
 }

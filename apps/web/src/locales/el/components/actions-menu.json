@@ -3,6 +3,11 @@
   "open-in": "Άνοιγμα στο {target}",
   "remove-from-favorites": "Αφαίρεση από τα αγαπημένα",
   "share": "Κοινή χρήση",
+  "share-text-clan": "Έλεγχος για [{tag}] {name} στο {app}",
+  "share-text-map": "Έλεγχος για τον χάρτη με όνομα {name} στο {app}",
+  "share-text-player": "Έλεγχος στατιστικών WoT για {name} στο {app}",
+  "share-text-tank": "Έλεγχος στατιστικών WoT για {name} στο {app}",
+  "share-text-tournament": "Έλεγχος για {name} στο {app}",
   "share-title": "Κοινή χρήση {name}",
   "vehicle-ratings": "Αξιολογήσεις Οχημάτων"
 }

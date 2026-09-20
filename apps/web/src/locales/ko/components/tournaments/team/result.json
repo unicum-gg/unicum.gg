@@ -1,8 +1,13 @@
 {
   "average-over-rated": "플레이어 {size}명 중 평가됨 {rated}명의 평균",
   "average-over-recent": "최근 30일 동안 플레이한 플레이어 {size}명 중 {rated}명의 평균",
+  "avg-metric": "평균 {metric}",
+  "avg-metric-rank": "평균 {metric} · {size}개 팀 중 {rank}위",
+  "avg-metric-recent": "평균 {metric} · 최근 30일",
   "avg-winrate": "평균 승률",
   "finished": "종료",
+  "of-teams": "{size, plural, other {팀 #개 중}}",
   "record": "기록",
+  "ties-played": "{count, plural, other {동점 경기 #회 플레이함}}",
   "won": "승리"
 }

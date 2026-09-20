@@ -1,6 +1,10 @@
 {
   "battles-overall": "Kopā {battles} kaujas",
+  "block-never-played": "Šis tanks nav spēlēts.",
+  "block-no-record": "Mēs vēl neesam nolasījuši jūsu garāžu. Mēs tikko to pieprasījām no Wargaming, tāpēc pēc brīža mēģiniet vēlreiz.",
+  "block-too-few-battles": "Ar šo tanku ir spēlēts, bet vēl ne pietiekami.",
   "checking-your-record-on-this": "Pārbauda tavu ierakstu par šo tanku...",
+  "could-not-read-your-record": "Mēs nevarējām nolasīt jūsu rekordu ar šo tanku.",
   "fetching-your-garage": "Ielādējam tavu garāžu",
   "have-you-played": "Vai esi spēlējis {tank}?",
   "more-to-go": "Vēl atlikušas {count} kaujas",

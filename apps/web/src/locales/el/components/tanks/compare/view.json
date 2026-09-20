@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Προσθήκη άρματος...",
+  "add-a-vehicle": "Προσθήκη οχήματος",
   "share-comparison": "Κοινή χρήση σύγκρισης",
-  "add-a-vehicle": "Προσθήκη οχήματος"
+  "share-text": "Σύγκριση μεταξύ {names} στο {app}"
 }

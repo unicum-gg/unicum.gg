@@ -1,4 +1,5 @@
 {
   "compare": "对比",
-  "share-comparison": "分享比较"
+  "share-comparison": "分享比较",
+  "share-text": "在 {app} 上对比 {names}"
 }

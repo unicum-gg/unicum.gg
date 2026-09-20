@@ -1,5 +1,7 @@
 {
   "last-days": "Últimos {chartDays} días",
+  "moe-chart": "Requisitos de las Marcas de excelencia de {tank} a lo largo del tiempo",
+  "mom-chart": "Umbrales de las Marcas de Maestría de {tank} a lo largo del tiempo",
   "n-players": "{count, plural, one {# jugador} other {# jugadores}}",
   "rolling-average-combined-damage-to": "Media móvil del daño combinado necesaria para superar al 65 / 85 / 95% de los jugadores.",
   "single-battle-xp-to-beat": "XP de una sola batalla necesaria para superar al 50 / 80 / 95 / 99% de los jugadores.",

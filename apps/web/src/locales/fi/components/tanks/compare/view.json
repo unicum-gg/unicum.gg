@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Lisää panssarivaunu...",
+  "add-a-vehicle": "Lisää ajoneuvo",
   "share-comparison": "Jaa vertailu",
-  "add-a-vehicle": "Lisää ajoneuvo"
+  "share-text": "Kohteiden {names} vertailu sovelluksessa {app}"
 }

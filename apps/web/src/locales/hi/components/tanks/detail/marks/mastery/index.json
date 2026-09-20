@@ -1,5 +1,7 @@
 {
   "last-days": "पिछले {chartDays} दिन",
+  "moe-chart": "समय के साथ {tank} के उच्चता के मार्क्स पाने की आवश्यकताएँ",
+  "mom-chart": "समय के साथ {tank} के कौशल के मार्क्स की सीमाएँ",
   "n-players": "{count, plural, one {# खिलाड़ी} other {# खिलाड़ी}}",
   "rolling-average-combined-damage-to": "65 / 85 / 95% खिलाड़ियों को हराने के लिए चलायमान औसत संयुक्त क्षति।",
   "single-battle-xp-to-beat": "50 / 80 / 95 / 99% खिलाड़ियों को हराने के लिए एकल-युद्ध XP।",

@@ -3,6 +3,11 @@
   "open-in": "Atidaryti naudojant {target}",
   "remove-from-favorites": "Pašalinti iš mėgstamiausių",
   "share": "Dalintis",
+  "share-text-clan": "Patikrinti [{tag}] {name} per {app}",
+  "share-text-map": "Patikrinti {name} žemėlapį per {app}",
+  "share-text-player": "Patikrinti žaidėjo {name} WoT statistiką per {app}",
+  "share-text-tank": "Patikrinti tanko {name} WoT statistiką per {app}",
+  "share-text-tournament": "Patikrinti {name} per {app}",
   "share-title": "Dalintis {name}",
   "vehicle-ratings": "Transporto priemonių reitingai"
 }

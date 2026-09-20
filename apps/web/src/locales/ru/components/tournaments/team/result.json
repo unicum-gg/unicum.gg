@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Среднее по {rated} из {size} игроков",
   "average-over-recent": "Среднее по {rated} из {size} игроков, игравших за последние 30 дней",
+  "avg-metric": "Среднее значение {metric}",
+  "avg-metric-rank": "Среднее значение {metric} · {rank} место из {size}",
+  "avg-metric-recent": "Среднее значение {metric} · 30 дн.",
   "avg-winrate": "Средняя побед率",
   "finished": "Завершён",
+  "of-teams": "{size, plural, one {из # команды} few {из # команд} many {из # команд} other {из # команд}}",
   "record": "Рекорд",
+  "ties-played": "{count, plural, one {# сыгранная ничья} few {# сыгранные ничьи} many {# сыгранных ничьих} other {# сыгранной ничьей}}",
   "won": "Победил"
 }

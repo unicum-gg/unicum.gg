@@ -1,5 +1,7 @@
 {
   "last-days": "Az elmúlt {chartDays} nap",
+  "moe-chart": "A {tank} tankhoz szükséges Kiválóság jele követelményei idővel",
+  "mom-chart": "A {tank} tankhoz tartozó Mestermarkok küszöbértékei idővel",
   "n-players": "{count, plural, one {# játékos} other {# játékosok}}",
   "rolling-average-combined-damage-to": "Gördülő átlagos kombinált sebzés a játékosok 65 / 85 / 95%-ának felülmúlásához.",
   "single-battle-xp-to-beat": "Egy csatában szerzett XP a játékosok 50 / 80 / 95 / 99%-ának felülmúlásához.",

@@ -3,6 +3,11 @@
   "open-in": "{target} içinde aç",
   "remove-from-favorites": "Favorilerden çıkar",
   "share": "Paylaş",
+  "share-text-clan": "[{tag}] {name} adlı klanı {app} üzerinde kontrol et",
+  "share-text-map": "{name} haritasını {app} üzerinde kontrol et",
+  "share-text-player": "{name} adlı oyuncunun WoT istatistiklerini {app} üzerinde kontrol et",
+  "share-text-tank": "{name} tankının WoT istatistiklerini {app} üzerinde kontrol et",
+  "share-text-tournament": "{name} turnuvasını {app} üzerinde kontrol et",
   "share-title": "{name} Paylaş",
   "vehicle-ratings": "Araç Değerlendirmeleri"
 }

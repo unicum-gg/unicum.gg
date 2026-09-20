@@ -1,5 +1,6 @@
 {
   "add-a-tank": "Pievienot tanku...",
+  "add-a-vehicle": "Pievienot transportlīdzekli",
   "share-comparison": "Kopīgot salīdzinājumu",
-  "add-a-vehicle": "Pievienot transportlīdzekli"
+  "share-text": "Salīdzināti {names} lietotnē {app}"
 }

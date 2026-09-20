@@ -3,6 +3,11 @@
   "open-in": "Открыть в {target}",
   "remove-from-favorites": "Удалить из избранного",
   "share": "Поделиться",
+  "share-text-clan": "Проверить [{tag}] {name} в {app}",
+  "share-text-map": "Проверить карту {name} в {app}",
+  "share-text-player": "Проверить статистику {name} в Танковый через {app}",
+  "share-text-tank": "Проверить статистику {name} в Танковый через {app}",
+  "share-text-tournament": "Проверить {name} в {app}",
   "share-title": "Поделиться {name}",
   "vehicle-ratings": "Рейтинги транспортных средств"
 }

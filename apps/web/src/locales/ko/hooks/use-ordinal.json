@@ -1,0 +1,7 @@
+{
+  "ordinal-few": "{n}번째",
+  "ordinal-many": "{n}번째",
+  "ordinal-one": "{n}번째",
+  "ordinal-other": "{n}번째",
+  "ordinal-two": "{n}번째"
+}

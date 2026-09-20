@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Vidējais rādītājs {rated} no {size} spēlētājiem",
   "average-over-recent": "Vidējais rādītājs {rated} no {size} spēlētājiem, kuri spēlēja pēdējo 30 dienu laikā",
+  "avg-metric": "Vidēji {metric}",
+  "avg-metric-rank": "Vidēji {metric} · {rank}. vieta no {size}",
+  "avg-metric-recent": "Vidēji {metric} · 30 d.",
   "avg-winrate": "Vidējais uzvaru procents",
   "finished": "Pabeigts",
+  "of-teams": "{size, plural, zero {no # komandu} one {no # komandas} other {no # komandām}}",
   "record": "Rekords",
+  "ties-played": "{count, plural, zero {# neizšķirtu izspēlēts} one {# izspēlēts neizšķirts} other {# izspēlēti neizšķirti}}",
   "won": "uzvarēts"
 }

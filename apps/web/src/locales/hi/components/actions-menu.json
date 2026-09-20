@@ -3,6 +3,11 @@
   "open-in": "{target} में खोलें",
   "remove-from-favorites": "पसंदीदा से हटाएँ",
   "share": "साझा करें",
+  "share-text-clan": "{app} पर [{tag}] {name} जाँचें",
+  "share-text-map": "{app} पर {name} नक्शा जाँचें",
+  "share-text-player": "{app} पर {name} के WoT आँकड़े जाँचें",
+  "share-text-tank": "{app} पर {name} के WoT आँकड़े जाँचें",
+  "share-text-tournament": "{app} पर {name} जाँचें",
   "share-title": "{name} साझा करें",
   "vehicle-ratings": "वाहन रेटिंग्स"
 }

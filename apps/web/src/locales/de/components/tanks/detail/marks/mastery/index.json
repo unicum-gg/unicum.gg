@@ -1,5 +1,7 @@
 {
   "last-days": "Letzte {chartDays} Tage",
+  "moe-chart": "Anforderungen für die Erfolgsmarkierungen von {tank} im Zeitverlauf",
+  "mom-chart": "Schwellenwerte der Meisterschaftsmarken für {tank} im Zeitverlauf",
   "n-players": "{count, plural, one {# Spieler} other {# spieler}}",
   "rolling-average-combined-damage-to": "Gleitender Durchschnitt des kombinierten Schadens, um 65 / 85 / 95 % der spieler zu übertreffen.",
   "single-battle-xp-to-beat": "EP in einem einzelnen Gefecht, um 50 / 80 / 95 / 99 % der spieler zu übertreffen.",

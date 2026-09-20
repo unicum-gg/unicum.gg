@@ -1,8 +1,13 @@
 {
   "average-over-rated": "{size} खिलाड़ियों में से {rated} का औसत",
   "average-over-recent": "पिछले 30 दिनों में खेले गए {size} खिलाड़ियों में से {rated} का औसत",
+  "avg-metric": "औसत {metric}",
+  "avg-metric-rank": "औसत {metric} · {size} में से {rank}",
+  "avg-metric-recent": "औसत {metric} · 30d",
   "avg-winrate": "औसत जीत दर",
   "finished": "समाप्त",
+  "of-teams": "{size, plural, other {# टीमों में से}}",
   "record": "रिकॉर्ड",
+  "ties-played": "{count, plural, other {# टाई खेले गए}}",
   "won": "जीते"
 }

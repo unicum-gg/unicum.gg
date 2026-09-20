@@ -1,6 +1,10 @@
 {
   "battles-overall": "Ukupno {battles} bitki",
+  "block-never-played": "Niste igrali ovaj tenk.",
+  "block-no-record": "Još nismo pročitali vašu garažu. Upravo smo je zatražili od Wargaminga, pa pokušajte ponovo za trenutak.",
+  "block-too-few-battles": "Igrali ste ga, ali još nemate dovoljno odigranih bitaka.",
   "checking-your-record-on-this": "Provjeravamo tvoju evidenciju za ovaj tenk...",
+  "could-not-read-your-record": "Nismo mogli pročitati vaš rekord na ovom tenku.",
   "fetching-your-garage": "Dohvatamo tvoju garažu",
   "have-you-played": "Jesi li igrao {tank}?",
   "more-to-go": "Preostaje još {count} bitki",

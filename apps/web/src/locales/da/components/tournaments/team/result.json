@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Gennemsnit for {rated} af {size} spillere",
   "average-over-recent": "Gennemsnit for {rated} af de {size} spillere, der spillede i de seneste 30 dage",
+  "avg-metric": "Gennemsnitlig {metric}",
+  "avg-metric-rank": "Gennemsnitlig {metric} · placering {rank} ud af {size}",
+  "avg-metric-recent": "Gennemsnitlig {metric} · 30 dage",
   "avg-winrate": "Gns. vindrate",
   "finished": "Færdiggjort",
+  "of-teams": "{size, plural, one {af # hold} other {af # hold}}",
   "record": "Record",
+  "ties-played": "{count, plural, one {# uafgjorte kampe spillet} other {# uafgjorte kampe spillet}}",
   "won": "Vundet"
 }
