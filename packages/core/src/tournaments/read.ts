@@ -762,7 +762,10 @@ export async function getPlayerTournaments(
           // it is not, which would have travelled as far as the endpoint's own
           // schema validation before anything noticed.
           lastAt: sql<string>`max(${t.startAt})`,
-          nickname: players.nickname,
+          // NULLIF for the same reason as the roster read: an account
+          // discovered but not yet fetched carries no name, and the roster's
+          // own record of it is what the row falls back to.
+          nickname: sql<string | null>`nullif(${players.nickname}, '')`,
           clanTag: clans.tag,
           clanColor: clans.color,
           // Denormalised on the player row, so the winner's crest costs this
@@ -929,7 +932,11 @@ export async function getTeamRoster(
       accountId: rosters.accountId,
       nickname: rosters.nickname,
       role: rosters.role,
-      currentNickname: players.nickname,
+      // NULLIF, because a discovered account is a row with no name yet: the
+      // snapshot pipeline writes it on its first fetch, and until then an
+      // empty string here would render as a blank player linking to nothing.
+      // The recorded name is the right answer in that window.
+      currentNickname: sql<string | null>`nullif(${players.nickname}, '')`,
       battles: players.battles,
       winrate: players.winrate,
       wn8: players.wn8,

@@ -18,10 +18,8 @@ import {
 import { tracedSync } from "@unicum.gg/core/lib/perf-trace";
 import { getAccountSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
 import { getAccountTwitchLogin, isAccountVerified } from "@unicum.gg/core/players/badges";
-import {
-  findAccountIdByFormerNickname,
-  getPlayerNameHistory,
-} from "@unicum.gg/core/players/name-history";
+import { getPlayerNameHistory } from "@unicum.gg/core/players/name-history";
+import { resolveAccountByNickname } from "@unicum.gg/core/players/resolve-account";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
@@ -36,7 +34,6 @@ import {
   storePlayerClanHistory,
 } from "@unicum.gg/core/players/clan-history";
 import {
-  findPlayerByNickname,
   getAccountWTR,
   getPlayerInfo,
 } from "@unicum.gg/core/wargaming/wot/accounts";
@@ -376,60 +373,30 @@ export type PlayerDetailLiveResult =
  * the background and LiveSync refetches when it lands). On a cold DB, resolve the
  * account on WG, fetch live, and record a snapshot, which also starts tracking
  * the player. `Locked` when WG resolves the nickname but returns no account
- * data (an account locked by Wargaming), `Unknown` when WG doesn't know the
- * nickname either.
+ * data (an account locked by Wargaming), `Unknown` when nothing resolves the
+ * nickname at all.
+ *
+ * Which account a nickname names is `resolveAccountByNickname`'s answer, past
+ * names included. A cold assembly runs only for a name somebody carries TODAY:
+ * a past one is served from what we already hold, or not at all.
  */
 export async function loadPlayerDetailLive(
   region: Region,
   nickname: string,
 ): Promise<PlayerDetailLiveResult> {
-  let initial = await loadPlayerInitialData(region, { nickname });
-
-  // Resolve accountId for true first-ever visits.
-  let accountId = initial.player?.accountId ?? null;
-  let resolvedNickname = initial.player?.nickname ?? null;
-
-  if (accountId === null) {
-    const found = await findPlayerByNickname(region, nickname).catch(() => null);
-    if (found) {
-      accountId = found.account_id;
-      resolvedNickname = found.nickname;
-      initial = await loadPlayerInitialData(region, { accountId });
-    }
-  }
-
-  // Nobody carries this nickname today, so look for who used to: WG only knows
-  // current names, and a link to a since-renamed player would 404 here.
-  //
-  // Deliberately last. Asking WG first is what keeps a *reclaimed* nickname
-  // pointing at its new owner even when that player is not in our database yet
-  // — resolving the history before WG would have sent visitors to the previous
-  // owner instead. It costs no extra WG call, since an unresolved nickname
-  // already went through `account/list` above.
-  //
-  // The caller compares the returned `nickname` with the one it was given to
-  // decide whether to redirect.
-  if (accountId === null) {
-    const formerOwner = await findAccountIdByFormerNickname(
-      region,
-      nickname,
-    ).catch(() => null);
-    if (formerOwner === null) return { status: PlayerDetailLiveStatus.Unknown };
-    const byAccount = await loadPlayerInitialData(region, {
-      accountId: formerOwner,
-    });
-    if (!byAccount.player) return { status: PlayerDetailLiveStatus.Unknown };
-    initial = byAccount;
-    accountId = byAccount.player.accountId;
-    resolvedNickname = byAccount.player.nickname;
-  }
+  // Who this nickname belongs to, and what we already hold about them. The
+  // four sources and the order they are asked in live in `resolve-account`.
+  const resolved = await resolveAccountByNickname(region, nickname);
+  if (resolved === null) return { status: PlayerDetailLiveStatus.Unknown };
+  const { accountId, initial } = resolved;
+  const resolvedNickname = resolved.nickname;
 
   if (initial.player && initial.latestSnapshot) {
     // Cache hit. A stub clan history backfills in the background; LiveSync's
     // SSE triggers a refetch once it is stored.
     if (!initial.clanHistory) {
       void loadPlayerClanHistoryFromWG(region, accountId)
-        .then((history) => storePlayerClanHistory(region, accountId!, history))
+        .then((history) => storePlayerClanHistory(region, accountId, history))
         .catch((err) =>
           console.error("[bg] backfill clan history failed:", err),
         );

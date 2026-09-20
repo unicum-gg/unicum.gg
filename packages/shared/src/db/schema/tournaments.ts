@@ -9,6 +9,7 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import {
   Region,
   type TournamentPrizeTier,
@@ -188,6 +189,14 @@ export function makeTournamentTeamPlayersTable(region: string) {
       index(`${region}_tournament_team_players_account_idx`).on(t.accountId),
       // Rewriting one tournament's rosters, and reading a team's lineup.
       index(`${region}_tournament_team_players_tournament_idx`).on(t.tournamentId),
+      // Reverse lookup: which account entered under this name. The rosters are
+      // the only archive of past nicknames we hold, so this backs the redirect
+      // from a name dropped before we were watching the account, and every miss
+      // on it (any unknown nickname reaches that path) would otherwise scan the
+      // table, 4.5M rows on EU.
+      index(`${region}_tournament_team_players_nickname_lower_idx`).on(
+        sql`LOWER(${t.nickname})`,
+      ),
     ],
   );
 }
