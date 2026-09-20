@@ -19,13 +19,29 @@ import ts from "typescript";
  */
 export const EXCLUDED = ["/app/api/og/", "/app/docs/"];
 
-/** Props whose value a reader sees. */
+/**
+ * Props whose value a reader sees.
+ *
+ * Measured rather than guessed: every JSX attribute in `src` carrying a literal
+ * that reads as copy was grouped by prop name, and these are the ones that came
+ * back prose. `note` was the miss that prompted it, on a team page that read
+ * "7 ties played" under French prose because the list had no entry for it, and
+ * it was carrying seven more beside it (the share sentence every actions menu
+ * hands to X and Discord, two chart descriptions a screen reader announces).
+ *
+ * Two names are deliberately NOT here. `term` is the glossary anchor, which is
+ * English by construction since it matches a row's own label. `tooltip` and
+ * `says` in the tank viewer read the game's vocabulary out of a constant map,
+ * so keying the sentence around them leaves half of it English: those belong
+ * with the `game/` catalogues rather than with this list.
+ */
 const COPY_PROPS = new Set([
   "title",
   "label",
   "placeholder",
   "alt",
   "aria-label",
+  "ariaLabel",
   "emptyText",
   "description",
   "heading",
@@ -34,6 +50,9 @@ const COPY_PROPS = new Set([
   "caption",
   "text",
   "message",
+  "note",
+  "body",
+  "shareText",
 ]);
 
 /**

@@ -7,6 +7,9 @@ import { LOCALES_DIR, SRC_DIR } from ".";
 const CLIENT_DIRECTIVE = /^\s*["']use client["']/m;
 const HOOK = /\buseTranslation\(/;
 const IMPORT = /from\s+"([^"]+)"/g;
+/** `export function useX(` / `export const useX =`, which is every shape a hook
+ * is declared in here. */
+const EXPORTED_HOOK = /export\s+(?:async\s+)?(?:function|const)\s+(use[A-Z]\w*)/g;
 
 function sourceFiles(dir: string): string[] {
   const out: string[] = [];
@@ -60,6 +63,13 @@ function resolve(
  * The fix is `getTranslation(namespace, locale)` and a `locale` prop, not a
  * `"use client"` directive: these components are content, and shipping them to
  * the browser to read two strings is the wrong half of the trade.
+ *
+ * **What counts as "the client hook" is derived, not the one name.** A wrapper
+ * around it (`useOrdinal`, `useFormat`) carries the same boundary while
+ * carrying neither the directive nor the word, so a server component calling
+ * one type-checks, lints, passes every locale test, and throws on the single
+ * page that renders it. So a file that reads `useTranslation` is a carrier, and
+ * so is any file whose own exported hook calls a carrier's, to a fixed point.
  */
 export function boundaryTests() {
   describe("Locales boundary", () => {
@@ -95,10 +105,48 @@ export function boundaryTests() {
         return [...from].some((parent) => reachable(parent, seen));
       };
 
+      // Which files hand the hook on: the ones that read it, plus anything
+      // whose exported hook calls one of theirs, followed until nothing new
+      // appears. A hook is only counted where it was imported from, so two
+      // modules may export the same name without tainting each other.
+      const hooksExported = new Map<string, string[]>(
+        paths.map((p) => [
+          p,
+          [...(source.get(p) ?? "").matchAll(EXPORTED_HOOK)].map((m) => m[1]),
+        ]),
+      );
+      const imports = new Map<string, string[]>(
+        paths.map((p) => [
+          p,
+          [...(source.get(p) ?? "").matchAll(IMPORT)]
+            .map((m) => resolve(m[1], p, files))
+            .filter((t): t is string => t !== null),
+        ]),
+      );
+      const carriers = new Set(
+        paths.filter((p) => HOOK.test(source.get(p) ?? "")),
+      );
+      for (let moved = true; moved; ) {
+        moved = false;
+        for (const p of paths) {
+          if (carriers.has(p)) continue;
+          const text = source.get(p) ?? "";
+          const carried = (imports.get(p) ?? []).some(
+            (target) =>
+              carriers.has(target) &&
+              (hooksExported.get(target) ?? []).some((name) =>
+                new RegExp(`\\b${name}\\(`).test(text),
+              ),
+          );
+          if (carried) {
+            carriers.add(p);
+            moved = true;
+          }
+        }
+      }
+
       const broken = paths
-        .filter(
-          (p) => !isClient(p) && HOOK.test(source.get(p) ?? "") && reachable(p),
-        )
+        .filter((p) => !isClient(p) && carriers.has(p) && reachable(p))
         .map((p) => path.relative(SRC_DIR, p))
         .sort();
 
