@@ -1,13 +1,13 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
+import { useOrdinal } from "@/hooks/use-ordinal";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   isTournamentLive,
   isTournamentOpen,
   RATING_COLOR_CLASS,
   RATING_METRIC_LABEL,
-  ordinal,
   winrateColor,
 } from "@unicum.gg/shared";
 import { TournamentTeamStatus } from "@unicum.gg/wargaming";
@@ -122,6 +122,7 @@ export function TeamMetrics({
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/tournaments/team/result");
+  const ord = useOrdinal();
   const metric = useRatingMetric();
   const rating = ratingOf(team, metric);
   const recent = recentRatingOf(team, metric);
@@ -159,7 +160,7 @@ export function TeamMetrics({
           on the night. */}
       {scouting && recent !== null && (
         <MetricColumn
-          label={`Avg ${RATING_METRIC_LABEL[metric]} · 30d`}
+          label={t("avg-metric-recent", { metric: RATING_METRIC_LABEL[metric] })}
           value={num(INT_FORMAT).format(recent)}
           title={t("average-over-recent", {
             rated: team.rated30dPlayers,
@@ -175,8 +176,12 @@ export function TeamMetrics({
           // nothing else fits in it.
           label={
             rank === null
-              ? `Avg ${RATING_METRIC_LABEL[metric]}`
-              : `Avg ${RATING_METRIC_LABEL[metric]} · ${ordinal(rank)} of ${rated.length}`
+              ? t("avg-metric", { metric: RATING_METRIC_LABEL[metric] })
+              : t("avg-metric-rank", {
+                  metric: RATING_METRIC_LABEL[metric],
+                  rank: ord(rank),
+                  size: rated.length,
+                })
           }
           value={num(INT_FORMAT).format(rating)}
           title={t("average-over-rated", {
@@ -219,6 +224,7 @@ export function TeamResult({
   placedTeams: number;
 }) {
   const { t } = useTranslation("components/tournaments/team/result");
+  const ord = useOrdinal();
   // Wargaming's own count of the entered field, which is the denominator a
   // placing is read against. It can lag what we mirrored, so a tournament that
   // placed more teams than it says it confirmed reports the larger of the two
@@ -238,8 +244,8 @@ export function TeamResult({
       {place !== undefined && (
         <Cell
           label={t("finished")}
-          value={ordinal(place)}
-          note={fieldSize > 0 ? `of ${fieldSize} teams` : undefined}
+          value={ord(place)}
+          note={fieldSize > 0 ? t("of-teams", { size: fieldSize }) : undefined}
         />
       )}
       {/* A band's reward is the organiser's own sentence ("5600 gold (team
@@ -250,7 +256,7 @@ export function TeamResult({
         <Cell
           label={t("record")}
           value={`${wins}-${losses}`}
-          note={`${decided.length} ${decided.length === 1 ? "tie" : "ties"} played`}
+          note={t("ties-played", { count: decided.length })}
         />
       )}
     </div>

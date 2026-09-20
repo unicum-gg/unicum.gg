@@ -108,7 +108,11 @@ export function ClanActionsMenu({
         onOpenChange={setShareOpen}
         title={tMenu("share-title", { name: `[${clan.tag}]` })}
         url={url}
-        shareText={`Check [${clan.tag}] ${clan.name} on ${APP.NAME}`}
+        shareText={tMenu("share-text-clan", {
+          tag: clan.tag,
+          name: clan.name,
+          app: APP.NAME,
+        })}
         ogImage={unicumPublic.og.region(region).clans(clan.tag).url()}
       />
     </>

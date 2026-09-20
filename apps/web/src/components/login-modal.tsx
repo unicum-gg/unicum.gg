@@ -104,8 +104,8 @@ export function LoginModal({
             note={
               region === suggested
                 ? remembered
-                  ? "Last used"
-                  : "Browsing"
+                  ? t("last-used")
+                  : t("browsing")
                 : null
             }
             callbackURL={destination}

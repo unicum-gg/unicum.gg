@@ -121,7 +121,7 @@ export function TankActionsMenu({
         onOpenChange={setShareOpen}
         title={tMenu("share-title", { name })}
         url={url}
-        shareText={`Check ${name}'s WoT stats on ${APP.NAME}`}
+        shareText={tMenu("share-text-tank", { name, app: APP.NAME })}
         ogImage={unicumPublic.og.region(region).tanks(slug).url()}
         setupParams={setupParams}
       />

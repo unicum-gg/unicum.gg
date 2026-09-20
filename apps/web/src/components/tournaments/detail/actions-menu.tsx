@@ -87,7 +87,7 @@ export function TournamentActionsMenu({
         onOpenChange={setShareOpen}
         title={tMenu("share-title", { name: title })}
         url={url}
-        shareText={`Check ${title} on ${APP.NAME}`}
+        shareText={tMenu("share-text-tournament", { name: title, app: APP.NAME })}
         ogImage={ogImage}
       />
     </>

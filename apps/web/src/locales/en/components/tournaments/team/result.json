@@ -1,8 +1,13 @@
 {
   "average-over-rated": "Average over {rated} of {size} players",
   "average-over-recent": "Average over the {rated} of {size} players who played in the last 30 days",
+  "avg-metric": "Avg {metric}",
+  "avg-metric-rank": "Avg {metric} · {rank} of {size}",
+  "avg-metric-recent": "Avg {metric} · 30d",
   "avg-winrate": "Avg winrate",
   "finished": "Finished",
+  "of-teams": "{size, plural, one {of # team} other {of # teams}}",
   "record": "Record",
+  "ties-played": "{count, plural, one {# tie played} other {# ties played}}",
   "won": "Won"
 }

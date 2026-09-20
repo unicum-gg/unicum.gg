@@ -111,9 +111,12 @@ export function ClanCompareView({
               region,
               slots.map((s) => s.requested),
             )}`}
-            shareText={`${slots
-              .map((s) => `[${s.clan?.tag ?? s.requested}]`)
-              .join(" vs ")} compared on ${APP.NAME}`}
+            shareText={t("share-text", {
+              names: slots
+                .map((s) => `[${s.clan?.tag ?? s.requested}]`)
+                .join(" vs "),
+              app: APP.NAME,
+            })}
             ogImage={`${APP.URL}/api/og/${region}/clans/compare?tags=${slots
               .map((s) => encodeURIComponent(s.requested))
               .join(",")}`}

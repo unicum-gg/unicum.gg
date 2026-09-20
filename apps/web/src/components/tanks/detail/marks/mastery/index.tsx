@@ -177,7 +177,7 @@ export async function TankMarksMastery({
               <MarksHistoryChart
                 data={moeHistory}
                 series={MOE_SERIES}
-                ariaLabel={`${tankName} Marks of Excellence requirements over time`}
+                ariaLabel={t("moe-chart", { tank: tankName })}
               />
             ) : null
           }
@@ -214,7 +214,7 @@ export async function TankMarksMastery({
               <MarksHistoryChart
                 data={momHistory}
                 series={MOM_SERIES}
-                ariaLabel={`${tankName} Marks of Mastery thresholds over time`}
+                ariaLabel={t("mom-chart", { tank: tankName })}
               />
             ) : null
           }

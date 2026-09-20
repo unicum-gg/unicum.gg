@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
+import { useOrdinal } from "@/hooks/use-ordinal";
 import { useTranslation } from "@/hooks/use-translation";
 import { CrownSimpleIcon, StarIcon } from "@phosphor-icons/react";
 import Image from "next/image";
@@ -27,7 +28,6 @@ import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { TournamentStatusBadge } from "@/components/tournaments/status-badge";
 import {
-  ordinal,
   rosterLimits,
   teamFormat,
 } from "@unicum.gg/shared";
@@ -57,16 +57,17 @@ const DATE_PATTERN = "d MMM yyyy" /* UTC */;
  * placed either. Both read as a dash rather than as a result.
  */
 function Result({ position }: { position: number | null }) {
+  const ord = useOrdinal();
   if (position === null) return <span className="text-fd-muted-foreground">{DASH}</span>;
   if (position <= 3) {
     return (
       <span className="flex items-center justify-end gap-1.5">
         <RankMedal rank={position as 1 | 2 | 3} className="h-4" />
-        <span className="tabular-nums">{ordinal(position)}</span>
+        <span className="tabular-nums">{ord(position)}</span>
       </span>
     );
   }
-  return <span className="tabular-nums">{ordinal(position)}</span>;
+  return <span className="tabular-nums">{ord(position)}</span>;
 }
 
 /** The battle size, with the registrable roster behind it when a team may bring

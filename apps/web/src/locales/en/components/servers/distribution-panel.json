@@ -2,6 +2,7 @@
   "how-players-compare": "How {region} players compare",
   "median-n": "median {value}",
   "metric-rating": "{metric} rating",
+  "rating-distribution-chart": "{metric} distribution across the region’s tracked players",
   "tracked-accounts-with-at-least": "{players} tracked accounts with at least {minBattles} battles. The colours are the same bands the site uses everywhere else.",
   "win-rate": "Win rate",
   "win-rate-distribution-across-the-region-s-tr": "Win rate distribution across the region’s tracked players"

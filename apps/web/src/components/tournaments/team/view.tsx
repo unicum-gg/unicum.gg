@@ -7,6 +7,7 @@ import { useTranslation } from "@/hooks/use-translation";
 import { format } from "date-fns";
 import Link from "@/components/link";
 import { useHydrated } from "@/hooks/use-hydrated";
+import { useOrdinal } from "@/hooks/use-ordinal";
 import { Panel, PanelContent, PanelHeader, PanelSeparator, PanelTitle } from "@/components/panel";
 import { Fragment } from "react";
 import { tierLabel } from "@/components/tournaments/tier-label";
@@ -24,7 +25,6 @@ import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
   isTournamentOpen,
-  ordinal,
   teamFormat,
 } from "@unicum.gg/shared";
 import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
@@ -255,6 +255,7 @@ export function TournamentTeamView({
   const { t: tGame } = useTranslation("game/vocabulary");
   const { t: tMaps } = useTranslation("game/maps");
   const { t } = useTranslation("components/tournaments/team/view");
+  const ord = useOrdinal();
   const placements = new Map(
     finalPlacements(tournament.stages).map((p) => [p.teamId, p.position]),
   );
@@ -321,7 +322,7 @@ export function TournamentTeamView({
                         shown <= 3 ? "text-sm" : "text-2xl",
                       )}
                     >
-                      {ordinal(shown)}
+                      {ord(shown)}
                     </span>
                   </>
                 )}

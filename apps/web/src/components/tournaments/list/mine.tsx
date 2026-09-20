@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
+import { useOrdinal } from "@/hooks/use-ordinal";
 import { useTranslation } from "@/hooks/use-translation";
 import useSWR from "swr";
 import Link from "@/components/link";
@@ -14,7 +15,6 @@ import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
-import { ordinal } from "@unicum.gg/shared";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 
 /** Enough to recognise a record without turning the panel into the player's own
@@ -38,6 +38,7 @@ const DATE_PATTERN = "d MMM yyyy" /* UTC */;
 export function MyTournaments() {
   const { date } = useFormat();
   const { t } = useTranslation("components/tournaments/list/mine");
+  const ord = useOrdinal();
   const { data: session } = useSession();
   const identity = wgIdentityFromEmail(session?.user.email);
   const nickname = session?.user.name ?? null;
@@ -111,7 +112,7 @@ export function MyTournaments() {
                         className="h-4"
                       />
                     )}
-                    {ordinal(e.bestPosition)}
+                    {ord(e.bestPosition)}
                   </span>
                 )}
               </span>

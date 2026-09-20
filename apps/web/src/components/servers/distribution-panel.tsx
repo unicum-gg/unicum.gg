@@ -92,7 +92,9 @@ export function DistributionPanel({
             buckets={ratingBuckets}
             colorOf={RATING_COLOR_OF[metric]}
             formatEdge={formatRating}
-            ariaLabel={`${RATING_METRIC_LABEL[metric]} distribution across the region's tracked players`}
+            ariaLabel={t("rating-distribution-chart", {
+              metric: RATING_METRIC_LABEL[metric],
+            })}
           />
         </Series>
 

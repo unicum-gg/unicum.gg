@@ -146,7 +146,7 @@ export function PlayerActionsMenu({
         onOpenChange={setShareOpen}
         title={tMenu("share-title", { name: nickname })}
         url={url}
-        shareText={`Check ${nickname}'s WoT stats on ${APP.NAME}`}
+        shareText={tMenu("share-text-player", { name: nickname, app: APP.NAME })}
         ogImage={unicumPublic.og.region(region).players(nickname).url()}
       />
     </>

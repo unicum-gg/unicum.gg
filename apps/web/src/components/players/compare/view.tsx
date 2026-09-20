@@ -108,9 +108,10 @@ export function PlayerCompareView({
               region,
               slots.map((s) => s.requested),
             )}`}
-            shareText={`${slots
-              .map((s) => s.requested)
-              .join(" vs ")} compared on ${APP.NAME}`}
+            shareText={t("share-text", {
+              names: slots.map((s) => s.requested).join(" vs "),
+              app: APP.NAME,
+            })}
             ogImage={`${APP.URL}/api/og/${region}/players/compare?names=${slots
               .map((s) => encodeURIComponent(s.requested))
               .join(",")}`}

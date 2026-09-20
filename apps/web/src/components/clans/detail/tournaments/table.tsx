@@ -22,10 +22,11 @@ import {
 } from "@/components/ui/table";
 import ROUTES from "@/constants/routes";
 import { TournamentStatusBadge } from "@/components/tournaments/status-badge";
-import { ordinal, teamFormat } from "@unicum.gg/shared";
+import { teamFormat } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanTournamentEntry } from "./row";
 import { FilterSubject } from "@/components/filter-subject";
+import { useOrdinal } from "@/hooks/use-ordinal";
 import { useTranslation } from "@/hooks/use-translation";
 
 /** The band as this table shows it: the numeral, or its own placeholder. */
@@ -45,16 +46,17 @@ const DATE_PATTERN = "d MMM yyyy" /* UTC */;
  * placed either. Both read as a dash rather than as a result.
  */
 function Result({ position }: { position: number | null }) {
+  const ord = useOrdinal();
   if (position === null) return <span className="text-fd-muted-foreground">{DASH}</span>;
   if (position <= 3) {
     return (
       <span className="flex items-center justify-end gap-1.5">
         <RankMedal rank={position as 1 | 2 | 3} className="h-4" />
-        {ordinal(position)}
+        {ord(position)}
       </span>
     );
   }
-  return <span className="tabular-nums">{ordinal(position)}</span>;
+  return <span className="tabular-nums">{ord(position)}</span>;
 }
 
 /**

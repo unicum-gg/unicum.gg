@@ -4,7 +4,7 @@ import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import useSWR, { mutate } from "swr";
 import { useRouter } from "@/hooks/use-router";
-import { RATING_BLOCK_MESSAGE, RatingBlock } from "@unicum.gg/shared";
+import { RatingBlock } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/login-button";
@@ -170,9 +170,12 @@ function Blocked({
           : t("you-have-not-played", { tank: tankName })
       }
       body={
+        // The enum value IS the key, hyphenated: three sentences and three
+        // reasons, and a map from one to the other is a fourth place for a
+        // case to go missing.
         me.block
-          ? RATING_BLOCK_MESSAGE[me.block]
-          : "We could not read your record on this tank."
+          ? t(`block-${me.block.replaceAll("_", "-")}`)
+          : t("could-not-read-your-record")
       }
     >
       {me.player && me.votingRegion ? (

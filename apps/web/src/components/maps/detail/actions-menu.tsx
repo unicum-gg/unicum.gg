@@ -63,7 +63,7 @@ export function MapActionsMenu({
         onOpenChange={setShareOpen}
         title={tMenu("share-title", { name })}
         url={url}
-        shareText={`Check the ${name} map on ${APP.NAME}`}
+        shareText={tMenu("share-text-map", { name, app: APP.NAME })}
         ogImage={unicumPublic.og.region(region).maps(slug).url()}
       />
     </>

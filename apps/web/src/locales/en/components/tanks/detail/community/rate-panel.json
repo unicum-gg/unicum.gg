@@ -1,6 +1,10 @@
 {
   "battles-overall": "{battles} battles overall",
+  "block-never-played": "You have not played this tank.",
+  "block-no-record": "We have not read your garage yet. We just asked Wargaming for it, so try again in a moment.",
+  "block-too-few-battles": "You have played it, but not enough of it yet.",
   "checking-your-record-on-this": "Checking your record on this tank...",
+  "could-not-read-your-record": "We could not read your record on this tank.",
   "fetching-your-garage": "We are fetching your garage",
   "have-you-played": "Have you played the {tank}?",
   "more-to-go": "{count} more battles to go",

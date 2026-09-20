@@ -226,7 +226,10 @@ export function TankCompareView({
           <ShareButton
             title={t("share-comparison")}
             url={shareUrl}
-            shareText={`${names.join(" vs ")} compared on ${APP.NAME}`}
+            shareText={t("share-text", {
+              names: names.join(" vs "),
+              app: APP.NAME,
+            })}
             ogImage={unicumPublic.og
               .region(region)
               .tanks.compare(vehicles.map((v) => v.slug))

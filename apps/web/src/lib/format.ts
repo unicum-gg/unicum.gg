@@ -96,3 +96,32 @@ export function dateFormat(locale: string, pattern: string): DateFormatter {
       `${format(at(from), shape, opts)} – ${format(at(to), shape, opts)}`,
   };
 }
+
+/**
+ * Which ordinal form a number takes in a language, as CLDR names them.
+ *
+ * `Intl` formats no ordinal anywhere, so the suffix itself has to be written
+ * per language, but WHICH of them a number takes is a rule the platform does
+ * carry, and it is not "1, 2, 3 then the rest": English brackets 1/21/31 apart
+ * from 2/22 and from 3/23, Italian marks 8, 11, 80 and 100, Ukrainian 3 and 4,
+ * and most languages have a single form. Selected here rather than written into
+ * a table per locale, which is the half that would go stale.
+ *
+ * Cardinal rules are the wrong ones and are what `{n, plural, …}` would select:
+ * English reads 2 as "other" there, which is how a plural block renders "2th".
+ */
+const ORDINAL_RULES = new Map<string, Intl.PluralRules>();
+
+export function ordinalForm(locale: string, n: number): Intl.LDMLPluralRule {
+  const tag = tagFor(locale);
+  let rules = ORDINAL_RULES.get(tag);
+  if (!rules) {
+    try {
+      rules = new Intl.PluralRules(tag, { type: "ordinal" });
+    } catch {
+      rules = new Intl.PluralRules("en-US", { type: "ordinal" });
+    }
+    ORDINAL_RULES.set(tag, rules);
+  }
+  return rules.select(n);
+}

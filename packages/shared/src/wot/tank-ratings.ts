@@ -186,14 +186,6 @@ export enum RatingBlock {
   TooFewBattles = "too_few_battles",
 }
 
-export const RATING_BLOCK_MESSAGE: Record<RatingBlock, string> = {
-  [RatingBlock.NoRecord]:
-    "We have not read your garage yet. We just asked Wargaming for it, so try again in a moment.",
-  [RatingBlock.NeverPlayed]: "You have not played this tank.",
-  [RatingBlock.TooFewBattles]:
-    "You have played it, but not enough of it yet.",
-};
-
 /** One bar of the five-star histogram. */
 export type StarDistribution = {
   /** 1 to 5. */

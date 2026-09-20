@@ -3,6 +3,11 @@
   "open-in": "Open in {target}",
   "remove-from-favorites": "Remove from favorites",
   "share": "Share",
+  "share-text-clan": "Check [{tag}] {name} on {app}",
+  "share-text-map": "Check the {name} map on {app}",
+  "share-text-player": "Check {name}’s WoT stats on {app}",
+  "share-text-tank": "Check {name}’s WoT stats on {app}",
+  "share-text-tournament": "Check {name} on {app}",
   "share-title": "Share {name}",
   "vehicle-ratings": "Vehicle Ratings"
 }
