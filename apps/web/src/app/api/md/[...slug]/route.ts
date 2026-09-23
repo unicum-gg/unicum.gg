@@ -3,6 +3,8 @@ import { encodingForModel } from "js-tiktoken";
 import { parse, type HTMLElement as ParsedNode } from "node-html-parser";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
+import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import { isRegion } from "@unicum.gg/wargaming";
 import { AGENT_DISCOVERY_LINK } from "@/constants/agent-discovery";
 import APP from "@/constants/app";
 import { markdownPath } from "@/lib/markdown-url";
@@ -136,6 +138,35 @@ function markdownHeaders(
   return headers;
 }
 
+/** `{locale?}/{region}/tanks/{id}{/tab?}`, the address the World of Tanks mod
+ * links to. The id is digits only, as in the numeric redirect's own pattern. */
+const NUMERIC_TANK = /^(?:([a-z]{2}(?:-[a-z]{2})?)\/)?(eu|na|asia)\/tanks\/(\d+)(\/[a-z-]+)?$/;
+
+/**
+ * A numeric tank path rewritten onto the vehicle's slug, or the path unchanged.
+ *
+ * The page behind a numeric id answers with a 308 to the slug, never with the
+ * page itself, and the self-fetch below wants the page. So the id is resolved
+ * here instead, the same way the numeric redirect resolves it
+ * (`api/internal/tank-id`), and the fetch asks for the address the vehicle
+ * really lives at.
+ *
+ * Numeric is what the mod links to and deliberately so: the client knows a
+ * vehicle's id and nothing that yields our slug. Without this, every Markdown
+ * link it hands an assistant answered 404.
+ */
+async function resolveNumericTank(path: string): Promise<string> {
+  const match = NUMERIC_TANK.exec(path);
+  if (!match) return path;
+  const [, pathLocale, region, id, tab] = match;
+  if (!isRegion(region)) return path;
+  const slug = await getTankSlug(region, Number(id));
+  // No vehicle answers to that id: left as it is, so the page's own 404 is
+  // what the reader gets rather than a different one from here.
+  if (!slug) return path;
+  return `${pathLocale ? `${pathLocale}/` : ""}${region}/tanks/${slug}${tab ?? ""}`;
+}
+
 /**
  * Markdown rendering of any page. Reached via `proxy.ts`, which rewrites a
  * `.md` suffix or an `Accept: text/markdown` request to `/api/md/<path>`.
@@ -152,7 +183,9 @@ export async function GET(
   { params }: { params: Promise<{ slug: string[] }> },
 ) {
   const { slug } = await params;
-  const path = slug[0] === "index" ? "" : slug.join("/");
+  const path = await resolveNumericTank(
+    slug[0] === "index" ? "" : slug.join("/"),
+  );
   // Forward the query string (e.g. `?tab=tanks`) so the rendered page matches
   // what a `.md` link with query params asked for. The proxy rewrite preserves
   // it on the request URL; the self-fetch would otherwise always get defaults.
