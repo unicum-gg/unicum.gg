@@ -322,11 +322,31 @@ export function proxy(req: NextRequest) {
   // query untouched, and the handler reads the original path off the header
   // below rather than from parameters of its own, so nothing it needs can
   // collide with something the caller sent.
-  // Only when there is a query to save. Without one the page's own redirect is
-  // already right, and leaving it in charge keeps the rest of its behaviour,
-  // notably the 404 it draws for an id no vehicle answers to: a route handler
-  // cannot render that page.
-  if (req.nextUrl.search && NUMERIC_TANK.test(rest)) {
+  // Every numeric URL, not only the ones carrying a query. This was scoped to
+  // a query at first, on the grounds that the page's own redirect was already
+  // right without one, and that leaving it in charge kept the 404 it draws for
+  // an id no vehicle answers to, which a route handler cannot render.
+  //
+  // It was not right. The page's redirect is made while rendering a page that
+  // is `force-static` with a half-hour `revalidate`, so whatever it answers is
+  // written into the ISR cache and served to everyone who asks next: one
+  // render that resolves nothing bakes a 404 in for thirty minutes, and the
+  // CDN then holds THAT for four hours (`max-age=14400`). The handler below is
+  // `force-dynamic` and resolves the id on every request, so it cannot be
+  // poisoned that way. Measured on the live site: every tank addressed by id
+  // answered 404 as `.md`, while the same address with any query at all, which
+  // is what came through here, answered 200 on thirty tries out of thirty.
+  //
+  // It is the `.md` twin that made this reachable, because the Markdown route
+  // re-fetches the page with the query it was asked at, so a bare `.md` fetches
+  // a bare page. Those are the links the World of Tanks mod hands to ChatGPT
+  // and Claude, and both were being handed a 404.
+  //
+  // The cost is the one named above and it is now paid everywhere rather than
+  // only on a URL with a query: an id no vehicle answers to gets a bare 404
+  // instead of the site's own page. That is the lesser half of the trade, and
+  // it was already the behaviour for every address carrying one.
+  if (NUMERIC_TANK.test(rest)) {
     const url = req.nextUrl.clone();
     url.pathname = "/api/internal/tank-id";
     return NextResponse.rewrite(url, { request: { headers: requestHeaders } });
