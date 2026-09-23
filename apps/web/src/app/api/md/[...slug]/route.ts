@@ -3,8 +3,6 @@ import { encodingForModel } from "js-tiktoken";
 import { parse, type HTMLElement as ParsedNode } from "node-html-parser";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
-import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { isRegion } from "@unicum.gg/wargaming";
 import { AGENT_DISCOVERY_LINK } from "@/constants/agent-discovery";
 import APP from "@/constants/app";
 import { markdownPath } from "@/lib/markdown-url";
@@ -138,33 +136,41 @@ function markdownHeaders(
   return headers;
 }
 
-/** `{locale?}/{region}/tanks/{id}{/tab?}`, the address the World of Tanks mod
- * links to. The id is digits only, as in the numeric redirect's own pattern. */
-const NUMERIC_TANK = /^(?:([a-z]{2}(?:-[a-z]{2})?)\/)?(eu|na|asia)\/tanks\/(\d+)(\/[a-z-]+)?$/;
+// A page can send the reader somewhere else before it answers: a tank asked
+// for by numeric id or in the wrong case goes to its canonical slug, a tab a
+// tank has nothing for falls back to the first one it has. Three redirects is
+// more than any of those chains.
+const MAX_HOPS = 3;
 
 /**
- * A numeric tank path rewritten onto the vehicle's slug, or the path unchanged.
+ * The page behind a URL, following the redirects it answers with.
  *
- * The page behind a numeric id answers with a 308 to the slug, never with the
- * page itself, and the self-fetch below wants the page. So the id is resolved
- * here instead, the same way the numeric redirect resolves it
- * (`api/internal/tank-id`), and the fetch asks for the address the vehicle
- * really lives at.
+ * `fetch` is asked NOT to follow them and they are followed here instead,
+ * because what a redirect leaves behind matters: the query string. A page
+ * redirects to a path alone (`/eu/tanks/is-7`), so a `?setup=...` or a `?tab=`
+ * asked for would be dropped by an automatic follow, and the Markdown would be
+ * of a different page than the one requested. It is carried over here.
  *
- * Numeric is what the mod links to and deliberately so: the client knows a
- * vehicle's id and nothing that yields our slug. Without this, every Markdown
- * link it hands an assistant answered 404.
+ * A relative `Location` is what the site's own redirects send, which is why
+ * each hop is resolved against the URL it came from.
  */
-async function resolveNumericTank(path: string): Promise<string> {
-  const match = NUMERIC_TANK.exec(path);
-  if (!match) return path;
-  const [, pathLocale, region, id, tab] = match;
-  if (!isRegion(region)) return path;
-  const slug = await getTankSlug(region, Number(id));
-  // No vehicle answers to that id: left as it is, so the page's own 404 is
-  // what the reader gets rather than a different one from here.
-  if (!slug) return path;
-  return `${pathLocale ? `${pathLocale}/` : ""}${region}/tanks/${slug}${tab ?? ""}`;
+async function fetchFollowing(url: string, accept: string): Promise<Response> {
+  let at = url;
+  for (let hop = 0; hop <= MAX_HOPS; hop++) {
+    const response = await fetch(at, {
+      headers: { Accept: accept },
+      cache: "no-store",
+      redirect: "manual",
+    });
+    const location = response.headers.get("location");
+    if (!location || response.status < 300 || response.status >= 400) {
+      return response;
+    }
+    const next = new URL(location, at);
+    if (!next.search) next.search = new URL(at).search;
+    at = next.toString();
+  }
+  return new Response(null, { status: 508 });
 }
 
 /**
@@ -183,9 +189,7 @@ export async function GET(
   { params }: { params: Promise<{ slug: string[] }> },
 ) {
   const { slug } = await params;
-  const path = await resolveNumericTank(
-    slug[0] === "index" ? "" : slug.join("/"),
-  );
+  const path = slug[0] === "index" ? "" : slug.join("/");
   // Forward the query string (e.g. `?tab=tanks`) so the rendered page matches
   // what a `.md` link with query params asked for. The proxy rewrite preserves
   // it on the request URL; the self-fetch would otherwise always get defaults.
@@ -198,10 +202,10 @@ export async function GET(
 
   let response: Response;
   try {
-    response = await fetch(`${origin}/${path}${sitemap ? ".xml" : ""}${search}`, {
-      headers: { Accept: sitemap ? "application/xml" : "text/html" },
-      cache: "no-store",
-    });
+    response = await fetchFollowing(
+      `${origin}/${path}${sitemap ? ".xml" : ""}${search}`,
+      sitemap ? "application/xml" : "text/html",
+    );
   } catch {
     return new Response("Upstream fetch failed", { status: 502 });
   }
