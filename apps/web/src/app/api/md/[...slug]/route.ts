@@ -117,10 +117,19 @@ function navigationSection(document: ParsedNode): string {
 function markdownHeaders(
   markdown: string,
   canonicalPath: string | null,
+  asked: boolean,
 ): Record<string, string> {
   const headers: Record<string, string> = {
-    "Content-Type": "text/markdown; charset=utf-8",
+    // Markdown to a reader that asked for Markdown, plain text to one that
+    // only asked for the `.md` address. Both get the same bytes.
+    "Content-Type": asked
+      ? "text/markdown; charset=utf-8"
+      : "text/plain; charset=utf-8",
     "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
+    // The type depends on what was asked for, and these are cached for an
+    // hour at the edge: without this a reader would be served the variant
+    // built for the other one.
+    Vary: "Accept",
     // Setting `Link` here replaces the one `next.config.ts` puts on every route,
     // so the discovery targets are appended rather than inherited (the config's
     // rule excludes these paths for that reason).
@@ -174,6 +183,23 @@ async function fetchFollowing(url: string, accept: string): Promise<Response> {
 }
 
 /**
+ * Whether the reader asked for Markdown itself, rather than for the address.
+ *
+ * `Accept: text/markdown` is a reader saying it reads Markdown, so it is
+ * answered with `text/markdown`, which is what the convention asks of a page
+ * serving agents and what a conformance check looks for.
+ *
+ * The `.md` suffix says nothing of the sort: it is a path, and the reader
+ * behind it may have no idea what to do with that type. ChatGPT's does not --
+ * it refuses the response as non-renderable and reports a bare "failed to
+ * fetch" -- and it is one of the readers this mod's links are handed to. A
+ * path alone is therefore answered as plain text, which every reader takes.
+ */
+function wantsMarkdownType(request: Request): boolean {
+  return (request.headers.get("accept") || "").includes("text/markdown");
+}
+
+/**
  * Markdown rendering of any page. Reached via `proxy.ts`, which rewrites a
  * `.md` suffix or an `Accept: text/markdown` request to `/api/md/<path>`.
  *
@@ -222,7 +248,9 @@ export async function GET(
     );
     // No canonical: a sitemap's Markdown rendering duplicates an XML file, not
     // a page, and nothing else says what it says.
-    return new Response(markdown, { headers: markdownHeaders(markdown, null) });
+    return new Response(markdown, {
+      headers: markdownHeaders(markdown, null, wantsMarkdownType(request)),
+    });
   }
 
   const html = await response.text();
@@ -256,6 +284,6 @@ export async function GET(
   // The page this is a rendering of, without the query string, so it matches the
   // `canonical` its own metadata declares.
   return new Response(markdown, {
-    headers: markdownHeaders(markdown, `/${path}`),
+    headers: markdownHeaders(markdown, `/${path}`, wantsMarkdownType(request)),
   });
 }
