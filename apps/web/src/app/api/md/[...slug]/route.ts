@@ -40,9 +40,19 @@ function countTokens(text: string): number | null {
 /**
  * Point an internal page link at its Markdown rendering so the document stays
  * navigable in Markdown. Leaves external links, protocol-relative URLs,
- * anchors, other schemes (`mailto:`, …) and paths that already carry a file
- * extension (`/sitemap.xml`, an existing `.md`) untouched. Query strings and
- * hashes are preserved.
+ * anchors and other schemes (`mailto:`, …) untouched. A path that already
+ * carries a file extension (`/sitemap.xml`, an existing `.md`) keeps its own
+ * address rather than gaining a second `.md`. Query strings and hashes are
+ * preserved.
+ *
+ * Every internal link comes out ABSOLUTE. This document is read away from the
+ * site that serves it: a model is handed the text and nothing says what host
+ * the paths in it hang off, so a reader that wants to follow one has to
+ * rebuild the address itself. Claude's will not open an address it worked out
+ * rather than read (its fetch tool takes only URLs present in the context),
+ * so `/llms.txt` at the foot of every page — a link WE put there — failed for
+ * it while the file answered 200 to everything else. Relative links cost a
+ * browser nothing and cost these readers the link.
  */
 function toMarkdownHref(href: string): string {
   if (!href.startsWith("/") || href.startsWith("//")) return href;
@@ -53,9 +63,9 @@ function toMarkdownHref(href: string): string {
 
   const clean = pathPart.endsWith("/") ? pathPart.slice(0, -1) : pathPart;
   const lastSegment = clean.slice(clean.lastIndexOf("/") + 1);
-  if (lastSegment.includes(".")) return href;
+  if (lastSegment.includes(".")) return `${APP.URL}${href}`;
 
-  return `${markdownPath(pathPart)}${suffix}`;
+  return `${APP.URL}${markdownPath(pathPart)}${suffix}`;
 }
 
 /**
@@ -67,9 +77,9 @@ function indexesSection(): string {
   return [
     "## Indexes",
     "",
-    "- [llms.txt](/llms.txt): the API, the MCP server and the other machine-readable surfaces.",
-    "- [llms-full.txt](/llms-full.txt): the same, with every endpoint's parameters inline.",
-    "- [sitemap.md](/sitemap.md): every section of the site, down to the individual pages.",
+    `- [llms.txt](${APP.URL}/llms.txt): the API, the MCP server and the other machine-readable surfaces.`,
+    `- [llms-full.txt](${APP.URL}/llms-full.txt): the same, with every endpoint's parameters inline.`,
+    `- [sitemap.md](${APP.URL}/sitemap.md): every section of the site, down to the individual pages.`,
   ].join("\n");
 }
 

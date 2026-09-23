@@ -111,11 +111,14 @@ export async function sitemapToMarkdown(
   // Markdown rather than to a page.
   const isIndex = xml.includes("<sitemapindex");
 
+  // Absolute, like every other link this converter writes: a sitemap is the
+  // one document read purely to find out what else to open, so a reader that
+  // cannot resolve its entries gets nothing from it at all.
   let lines: string[];
   if (isIndex) {
     lines = paths.map((path) => {
       const twin = path.replace(/\.xml$/, ".md");
-      return `- [${path}](${twin})`;
+      return `- [${path}](${APP.URL}${twin})`;
     });
   } else {
     const titles =
@@ -123,7 +126,7 @@ export async function sitemapToMarkdown(
         ? await titlesOf(origin, paths)
         : paths.map(() => null);
     lines = paths.map(
-      (path, i) => `- [${titles[i] ?? path}](${markdownPath(path)})`,
+      (path, i) => `- [${titles[i] ?? path}](${APP.URL}${markdownPath(path)})`,
     );
   }
 
