@@ -127,18 +127,36 @@ export default async function ModPage({
             {t("subtitle", { name: APP.NAME })}
           </p>
           <div className="mt-6 flex flex-col items-center gap-2">
-            <a
-              href={APP.EXTERNAL.MOD_DOWNLOAD}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                buttonVariants({ variant: "primary" }),
-                "h-10 gap-2 px-5 text-base",
-              )}
-            >
-              <DownloadSimpleIcon weight="bold" className="size-5" />
-              {t("download")}
-            </a>
+            {/* Two places, because they carry the build at different moments:
+                the hub is where a player expects a mod and what their launcher
+                installs from, and the repository is where a release lands the
+                moment it is cut, while Wargaming is still reviewing it. */}
+            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+              <a
+                href={APP.EXTERNAL.MOD_DOWNLOAD}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "primary" }),
+                  "h-10 gap-2 px-5 text-base",
+                )}
+              >
+                <DownloadSimpleIcon weight="bold" className="size-5" />
+                {t("download")}
+              </a>
+              <a
+                href={APP.EXTERNAL.MOD_RELEASES}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "h-10 gap-2 px-5 text-base",
+                )}
+              >
+                <GithubLogoIcon weight="fill" className="size-5" />
+                {t("download-github")}
+              </a>
+            </div>
             <p className="text-xs text-fd-muted-foreground">
               {/* No version here: the page cannot keep one true. Wargaming
                   ships micropatches (2.4.0.1 a day after 2.4.0.0), and our own
