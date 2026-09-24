@@ -14,7 +14,7 @@ import {
   type OnslaughtSortState,
   SortDirection,
 } from "@/components/players/list/onslaught/row";
-import { OnslaughtTier } from "@unicum.gg/shared";
+import { OnslaughtRank } from "@unicum.gg/shared";
 
 /**
  * The board's sort and its two chip filters, mirrored to the URL.
@@ -30,7 +30,7 @@ export function useOnslaughtBoardControls() {
     col: OnslaughtSortCol.Rating,
     dir: SortDirection.Desc,
   });
-  const [tiers, setTiers] = useState<Set<OnslaughtTier>>(() => new Set());
+  const [tiers, setTiers] = useState<Set<OnslaughtRank>>(() => new Set());
   const [activity, setActivity] = useState<Set<ActivityBucket>>(
     () => new Set(),
   );
@@ -55,8 +55,8 @@ export function useOnslaughtBoardControls() {
     const ranks = (p.get("rank") ?? "")
       .split(",")
       .filter(
-        (r): r is OnslaughtTier =>
-          r === OnslaughtTier.Legend || r === OnslaughtTier.Champion,
+        (r): r is OnslaughtRank =>
+          r === OnslaughtRank.Legend || r === OnslaughtRank.Champion,
       );
     if (ranks.length) setTiers(new Set(ranks));
     const buckets = (p.get("activity") ?? "")
@@ -119,7 +119,7 @@ export function useOnslaughtBoardControls() {
     lostSort,
     setLostSort,
     tiers,
-    toggleTier: (tier: OnslaughtTier) =>
+    toggleTier: (tier: OnslaughtRank) =>
       setTiers((prev) => toggled(prev, tier)),
     activity,
     toggleActivity: (bucket: ActivityBucket) =>

@@ -21,10 +21,12 @@ import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import {
   DEFAULT_RATING_METRIC,
+  median,
   isRatingMetric,
   onslaughtRankIcon,
-  onslaughtTier,
-  OnslaughtTier,
+  onslaughtBoardRank,
+  OnslaughtRank,
+  type OnslaughtBoardRank,
   RATING_COLOR_CLASS,
   RATING_COLOR_OF,
   RatingMetric,
@@ -34,24 +36,7 @@ const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const TIERS = [OnslaughtTier.Legend, OnslaughtTier.Champion] as const;
-
-/**
- * The middle of a set of values.
- *
- * The median rather than the mean everywhere on this panel, because each of
- * these distributions has one long tail and no other: a handful of accounts sit
- * far above the field on rating, and a handful grind several hundred battles
- * where most need a hundred. A mean reports those few and calls it typical.
- */
-function median(values: number[]): number | null {
-  if (values.length === 0) return null;
-  const sorted = [...values].sort((a, b) => a - b);
-  const mid = Math.floor(sorted.length / 2);
-  return sorted.length % 2 === 0
-    ? (sorted[mid - 1] + sorted[mid]) / 2
-    : sorted[mid];
-}
+const TIERS = [OnslaughtRank.Legend, OnslaughtRank.Champion] as const;
 
 function ratingOf(row: OnslaughtRow, metric: RatingMetric): number | null {
   switch (metric) {
@@ -65,7 +50,7 @@ function ratingOf(row: OnslaughtRow, metric: RatingMetric): number | null {
 }
 
 type TierProfile = {
-  tier: OnslaughtTier;
+  tier: OnslaughtBoardRank;
   players: number;
   rating: number | null;
   /** What they had played when they first appeared on the board. */
@@ -151,12 +136,12 @@ export function OnslaughtTierProfile({
   }, [reference, seasonStart, seasonEnd, ended]);
 
   const profiles = useMemo<TierProfile[]>(() => {
-    const rows: Record<OnslaughtTier, OnslaughtRow[]> = {
-      [OnslaughtTier.Legend]: [],
-      [OnslaughtTier.Champion]: [],
+    const rows: Record<OnslaughtBoardRank, OnslaughtRow[]> = {
+      [OnslaughtRank.Legend]: [],
+      [OnslaughtRank.Champion]: [],
     };
     for (const row of results) {
-      const tier = onslaughtTier(row.rank, { elitePosition, masterPosition });
+      const tier = onslaughtBoardRank(row.rank, { elitePosition, masterPosition });
       if (tier) rows[tier].push(row);
     }
     return TIERS.map((tier) => {

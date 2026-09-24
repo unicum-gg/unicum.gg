@@ -60,7 +60,7 @@ import {
   BattleType,
 } from "@unicum.gg/shared/wot/maps/battle-types";
 import { MAP_POI_LABEL } from "@unicum.gg/shared/wot/maps/points-of-interest";
-import { ONSLAUGHT_TIER_LABEL } from "@unicum.gg/shared/wot/ratings";
+import { ONSLAUGHT_RANK_LABEL } from "@unicum.gg/shared/wot/onslaught-ranks";
 import { SPAWN_DIRECTION_LABEL } from "@unicum.gg/shared/wot/tanks/videos";
 import { TOURNAMENT_GAME_MODE_LABEL } from "@unicum.gg/shared/wot/tournaments";
 import { PLAYER_MODE_LABEL } from "../src/components/players/detail/modes";
@@ -187,7 +187,13 @@ function englishVocabulary(): Json {
     // and the order between them is the language's: "Offensive Légende" reads
     // wrong in French where "Légende Offensive" does. So it is a template rather
     // than a concatenation, like `{onslaught} Night` above.
-    "onslaught-tiers": { ...ONSLAUGHT_TIER_LABEL, crest: "{mode} {tier}" },
+    "onslaught-tiers": {
+      ...ONSLAUGHT_RANK_LABEL,
+      crest: "{mode} {tier}",
+      // A rank and the division inside it, whose order is the language's to
+      // decide rather than a concatenation at the call site.
+      division: "{rank} {division}",
+    },
     "vehicle-classes-short": { ...VEHICLE_CLASS_LABEL },
     "vehicle-roles": { ...VEHICLE_ROLE_LABEL },
     // The short forms a table column can carry. Wargaming's own full names for

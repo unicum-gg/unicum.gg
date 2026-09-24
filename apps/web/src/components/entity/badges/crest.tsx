@@ -1,8 +1,8 @@
 import { useId, type ReactNode } from "react";
 import {
   BRAND_COLOR,
-  ONSLAUGHT_TIER_COLOR,
-  OnslaughtTier,
+  ONSLAUGHT_RANK_COLOR,
+  OnslaughtRank,
   RATING_COLOR_HEX,
 } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
@@ -131,8 +131,8 @@ const CREST_TOP_LIGHTNESS = 1.3;
 const CREST_BOTTOM_LIGHTNESS = 1.02;
 const CREST_SATURATION = 1.6;
 
-function rankTincture(tier: OnslaughtTier): { fill: string; edge: string } {
-  const [h, s, l] = hexToHsl(RATING_COLOR_HEX[ONSLAUGHT_TIER_COLOR[tier]]);
+function rankTincture(tier: OnslaughtRank): { fill: string; edge: string } {
+  const [h, s, l] = hexToHsl(RATING_COLOR_HEX[ONSLAUGHT_RANK_COLOR[tier]]);
   const sat = s * CREST_SATURATION;
   return {
     fill: hslToHex([h, sat, l * CREST_TOP_LIGHTNESS]),
@@ -157,8 +157,8 @@ const TINCTURE: Record<CrestKind, { fill: string; edge: string }> = {
   // recognises the violet crest, and matching the entity everywhere beats being
   // maximally distinct from unrelated crests. The charge tells them apart at
   // 16px.
-  [CrestKind.OnslaughtChampion]: rankTincture(OnslaughtTier.Champion),
-  [CrestKind.OnslaughtLegend]: rankTincture(OnslaughtTier.Legend),
+  [CrestKind.OnslaughtChampion]: rankTincture(OnslaughtRank.Champion),
+  [CrestKind.OnslaughtLegend]: rankTincture(OnslaughtRank.Legend),
 };
 
 // Muted tincture for the owner-only supporter states (hidden / invite): a slate

@@ -16,18 +16,18 @@ import { useTranslation } from "@/hooks/use-translation";
 import { battleTypeName } from "@/components/game-name";
 import { BattleType } from "@unicum.gg/shared";
 import {
-  ONSLAUGHT_TIER_COLOR,
+  ONSLAUGHT_RANK_COLOR,
   onslaughtRankIcon,
-  OnslaughtTier,
+  OnslaughtRank,
   RATING_COLOR_CLASS,
 } from "@unicum.gg/shared";
 
 // The two ranks the game admits to the leaderboard, top first. Wording follows
 // the client: only Champion and Legend enter the leaderboard, and Legend is its
 // elite top slice.
-const TIERS: { tier: OnslaughtTier; blurb: string }[] = [
-  { tier: OnslaughtTier.Legend, blurb: "ranks.legend-blurb" },
-  { tier: OnslaughtTier.Champion, blurb: "ranks.champion-blurb" },
+const TIERS: { tier: OnslaughtRank; blurb: string }[] = [
+  { tier: OnslaughtRank.Legend, blurb: "ranks.legend-blurb" },
+  { tier: OnslaughtRank.Champion, blurb: "ranks.champion-blurb" },
 ];
 
 export function OnslaughtRankScale({
@@ -74,7 +74,7 @@ export function OnslaughtRankScale({
                     <span
                       className={cn(
                         "rounded px-2 py-0.5 text-xs font-semibold",
-                        RATING_COLOR_CLASS[ONSLAUGHT_TIER_COLOR[tier]],
+                        RATING_COLOR_CLASS[ONSLAUGHT_RANK_COLOR[tier]],
                       )}
                     >
                       {tGame(`onslaught-tiers.${tier}`)}

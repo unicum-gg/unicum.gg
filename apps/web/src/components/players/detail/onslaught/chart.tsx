@@ -12,7 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { OnslaughtTier } from "@unicum.gg/shared";
+import { OnslaughtRank } from "@unicum.gg/shared";
 import {
   type ChartConfig,
   ChartContainer,
@@ -46,7 +46,7 @@ function chartConfig(t: TranslateFunction, tGame: TranslateFunction) {
     rating: { label: t("rating-points"), color: "var(--chart-1)" },
     legend: {
       label: t("legend-cutoff", {
-        tier: tGame(`onslaught-tiers.${OnslaughtTier.Legend}`),
+        tier: tGame(`onslaught-tiers.${OnslaughtRank.Legend}`),
       }),
       theme: { light: LEGEND_LIGHT, dark: LEGEND_DARK },
     },

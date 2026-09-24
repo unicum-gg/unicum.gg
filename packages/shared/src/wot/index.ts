@@ -5,6 +5,7 @@ export * from "./field-mods";
 export * from "./vehicle-modes";
 export * from "./crew";
 export * from "./ratings";
+export * from "./onslaught-ranks";
 export * from "./server-online";
 export * from "./server-stats";
 export * from "./player-distribution";

@@ -10,10 +10,10 @@ import Link from "@/components/link";
 import useSWR from "swr";
 import {
   onslaughtRankIcon,
-  onslaughtTier,
-  OnslaughtTier,
+  onslaughtBoardRank,
+  OnslaughtRank,
   RATING_COLOR_CLASS,
-  ONSLAUGHT_TIER_COLOR,
+  ONSLAUGHT_RANK_COLOR,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import {
@@ -192,7 +192,7 @@ function Current({
   const shown = standing.lost
     ? (standing.bestRank ?? standing.rank)
     : standing.rank;
-  const tier = onslaughtTier(shown, standing);
+  const tier = onslaughtBoardRank(shown, standing);
   const href = boardHref(region, standing, true);
   const lostAt =
     standing.lost && standing.lastSeenAt != null
@@ -290,7 +290,7 @@ function PastSeason({
   const shown = standing.lost
     ? (standing.bestRank ?? standing.rank)
     : standing.rank;
-  const tier = onslaughtTier(shown, standing);
+  const tier = onslaughtBoardRank(shown, standing);
   const href = boardHref(region, standing, false);
   return (
     <li className="flex flex-wrap items-center gap-3 px-4 py-2.5 text-sm">
@@ -327,11 +327,11 @@ function PastSeason({
 }
 
 /** The rank's name in the rank's own colour, as the board draws it. */
-function TierBadge({ tier }: { tier: OnslaughtTier }) {
+function TierBadge({ tier }: { tier: OnslaughtRank }) {
   const { t: tGame } = useTranslation("game/vocabulary");
   return (
     <span
-      className={`rounded px-1.5 py-0.5 text-xs font-semibold ${RATING_COLOR_CLASS[ONSLAUGHT_TIER_COLOR[tier]]}`}
+      className={`rounded px-1.5 py-0.5 text-xs font-semibold ${RATING_COLOR_CLASS[ONSLAUGHT_RANK_COLOR[tier]]}`}
     >
       {tGame(`onslaught-tiers.${tier}`)}
     </span>

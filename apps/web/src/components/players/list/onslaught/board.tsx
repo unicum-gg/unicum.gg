@@ -50,8 +50,9 @@ import {
 import { cn } from "@/lib/utils";
 import {
   onslaughtRankIcon,
-  onslaughtTier,
-  OnslaughtTier,
+  onslaughtBoardRank,
+  OnslaughtRank,
+  type OnslaughtBoardRank,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { FilterSubject } from "@/components/filter-subject";
@@ -62,7 +63,7 @@ import { battleTypeName } from "@/components/game-name";
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
 
-const TIERS = [OnslaughtTier.Legend, OnslaughtTier.Champion] as const;
+const TIERS = [OnslaughtRank.Legend, OnslaughtRank.Champion] as const;
 
 export type { OnslaughtRow };
 
@@ -151,7 +152,7 @@ export function OnslaughtBoard({
     let rows = filtered;
     if (tierSel.size > 0)
       rows = rows.filter((r) => {
-        const t = onslaughtTier(r.rank, { elitePosition, masterPosition });
+        const t = onslaughtBoardRank(r.rank, { elitePosition, masterPosition });
         return t != null && tierSel.has(t);
       });
     if (hasRates && activitySel.size > 0)
@@ -178,12 +179,12 @@ export function OnslaughtBoard({
 
   // How many ranked players fall in each rank, for the chip labels.
   const tierCounts = useMemo(() => {
-    const counts: Record<OnslaughtTier, number> = {
-      [OnslaughtTier.Legend]: 0,
-      [OnslaughtTier.Champion]: 0,
+    const counts: Record<OnslaughtBoardRank, number> = {
+      [OnslaughtRank.Legend]: 0,
+      [OnslaughtRank.Champion]: 0,
     };
     for (const r of results) {
-      const t = onslaughtTier(r.rank, { elitePosition, masterPosition });
+      const t = onslaughtBoardRank(r.rank, { elitePosition, masterPosition });
       if (t) counts[t] += 1;
     }
     return counts;
@@ -388,7 +389,7 @@ export function OnslaughtBoard({
                       key={r.account_id}
                       region={region}
                       row={r}
-                      tier={onslaughtTier(r.rank, {
+                      tier={onslaughtBoardRank(r.rank, {
                         elitePosition,
                         masterPosition,
                       })}

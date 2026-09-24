@@ -11,9 +11,9 @@ import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import {
-  ONSLAUGHT_TIER_COLOR,
+  ONSLAUGHT_RANK_COLOR,
   onslaughtRankIcon,
-  type OnslaughtTier,
+  type OnslaughtRank,
   RATING_COLOR_CLASS,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -53,14 +53,14 @@ export function OnslaughtBoardRow({
 }: {
   region: Region;
   row: OnslaughtRow;
-  tier: OnslaughtTier | null;
+  tier: OnslaughtRank | null;
   seasonOrdinal: string | null;
   assetsRef: string | null;
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/players/list/onslaught/view");
   const { t: tGame } = useTranslation("game/vocabulary");
-  const colorClass = tier ? RATING_COLOR_CLASS[ONSLAUGHT_TIER_COLOR[tier]] : "";
+  const colorClass = tier ? RATING_COLOR_CLASS[ONSLAUGHT_RANK_COLOR[tier]] : "";
 
   return (
     <TableRow>
