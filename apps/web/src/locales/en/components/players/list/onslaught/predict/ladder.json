@@ -1,0 +1,8 @@
+{
+  "title": "The ladder from here",
+  "from": "from {points}",
+  "previous": "· last season ended at {points}",
+  "cost": "{battles} battles, {perDay} a day",
+  "cost-out-of-reach": "{battles} battles, {perDay} a day, more than anyone ranked plays",
+  "on-your-pace": "· on your pace"
+}

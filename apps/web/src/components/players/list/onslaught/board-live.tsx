@@ -9,6 +9,7 @@ import {
 import { boardStandings } from "@/components/players/list/onslaught/row";
 import type { OnslaughtDropoutRow } from "@/components/players/list/onslaught/dropouts";
 import { OnslaughtRankScale } from "@/components/players/list/onslaught/rank-scale";
+import { OnslaughtRankPredictor } from "@/components/players/list/onslaught/predict";
 import { OnslaughtTierProfile } from "@/components/players/list/onslaught/tier-profile";
 import { OnslaughtSeasonRace } from "@/components/players/list/onslaught/season-race";
 import {
@@ -169,6 +170,25 @@ export function OnslaughtBoardLive({
             seasonStart={season?.startDate ?? null}
             seasonEnd={season?.endDate ?? null}
             ended={season?.ended ?? false}
+          />
+        </>
+      ) : null}
+
+      {/* The personal half of the profile above, and the one a reader arrives
+          with. It needs the season's own curve to project the bar Legend is,
+          and it needs a season still running: a settled one has no rank left to
+          climb to, only the standing it ended on. */}
+      {!season?.ended && curve && curve.points.length > 1 && season?.endDate ? (
+        <>
+          <PanelSeparator />
+          <OnslaughtRankPredictor
+            results={data.results as OnslaughtRow[]}
+            curve={curve.points}
+            previous={data.previous}
+            seasonStart={season.startDate ?? null}
+            seasonEnd={season.endDate}
+            seasonOrdinal={season.seasonOrdinal ?? null}
+            assetsRef={season.assetsRef ?? null}
           />
         </>
       ) : null}

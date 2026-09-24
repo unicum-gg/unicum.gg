@@ -1,0 +1,28 @@
+{
+  "title": "Where will you finish?",
+  "fields": {
+    "battles": "Battles played this season",
+    "battles-hint": "What the mode has counted for you since it opened.",
+    "points": "Rating points",
+    "points-hint": "{champion} starts at {entry}, which is also the bottom of this leaderboard.",
+    "pace": "Battles a day from here",
+    "pace-hint": "How much you intend to play until the season settles.",
+    "pace-hint-own": "The pace you have kept so far. Change it if you are about to play more."
+  },
+  "empty": "Fill in what you have played and where you stand, and this works out which rank the season ends on.",
+  "not-enough-season": "Too little of this season has been recorded to answer that yet. It fills in on its own as the board is captured.",
+  "figures": {
+    "now": "Right now",
+    "on-the-board": "#{rank} of {total} on the leaderboard",
+    "off-the-board": "{points} points under the leaderboard",
+    "finish": "On {date}",
+    "finish-undated": "At the finish",
+    "finish-hint": "About {points} points, after {battles} more battles over {days} days.",
+    "rate": "Points a battle",
+    "rate-own": "Yours, over the battles you have played on the leaderboard.",
+    "rate-below": "What a battle pays on the leaderboard. Climbing to it you are gaining {own} a battle, which is the faster game.",
+    "rate-board": "The board’s median around your rating, until your own record can answer it.",
+    "rate-yours": "Yours, as you typed it."
+  },
+  "note": "The ranks are the game’s own ladder: four ranks of five divisions a hundred rating points apart, then {champion} at 2 000 and {legend} for the top slice of the leaderboard. Only that last one is not a fixed number, so it is read as the bar projected to the last day, fitted on the season’s own curve. Battles are counted at what one has been worth to you on the leaderboard rather than over your whole season, since the climb to {champion} pays several times more a battle and would flatter the total. Read it as a condition and not a forecast: play this much at this rate, and this is where you land. Points also drain on their own from Silver upwards if you stop playing, which nothing here counts."
+}
