@@ -16,13 +16,17 @@
 //   pnpm --filter @unicum.gg/web exec tsx scripts/glossary-tables.ts
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { getGlossaryAnchors } from "../src/services/glossary";
 // Deep, env-free subpath rather than the barrel, like
 // `generate-glossary.ts`: this runs outside the app, where the barrel's
 // `env.ts` validation would throw for want of WG app ids.
 import { unqualifyGlossaryLabel } from "@unicum.gg/shared/glossary/anchors";
 
-const COMPONENTS = new URL("../src/components/", import.meta.url).pathname;
+// `fileURLToPath` rather than `.pathname`, for the reason spelled out in
+// `generate-glossary.ts`: the pathname of a Windows `file://` URL keeps a
+// leading slash before the drive letter and resolves nowhere.
+const COMPONENTS = fileURLToPath(new URL("../src/components/", import.meta.url));
 
 /** Headings that name a thing on the row (a player, a clan, a date) rather than
  * a measurement. They are the same words in every table and no glossary would

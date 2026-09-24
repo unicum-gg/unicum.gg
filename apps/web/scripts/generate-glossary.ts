@@ -15,6 +15,7 @@
 //   pnpm --filter @unicum.gg/web exec tsx scripts/generate-glossary.ts
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { frontmatter } from "fumadocs-core/content/md/frontmatter";
 import type { Nodes, RootContent } from "mdast";
 // Deep, env-free subpaths rather than the barrel: this runs on postinstall,
@@ -35,12 +36,17 @@ import { GlossaryLinkTarget } from "@unicum.gg/shared/glossary/links";
  * included: it is the source the rest are written from, not a different kind of
  * thing, and giving it a tree of its own beside the others meant two paths and
  * two readers for one shape. */
-const CONTENT_DIR = new URL("../content/glossary/", import.meta.url).pathname;
+// `fileURLToPath`, not `.pathname`, which every other generator here already
+// knew: on Windows a `file:///D:/...` URL has the pathname `/D:/...`, and the
+// leading slash makes it relative, so Node resolves it against the drive and
+// looks under `D:\D:\...`. It throws ENOENT there, which fails `predev` and
+// `postinstall` before the rest of the chain runs -- the locale modules among
+// them, whose absence is a type error in any file naming a new namespace.
+const CONTENT_DIR = fileURLToPath(new URL("../content/glossary/", import.meta.url));
 const SOURCE_LOCALE = "en";
-const OUT_DIR = new URL(
-  "../src/services/glossary/generated/",
-  import.meta.url,
-).pathname;
+const OUT_DIR = fileURLToPath(
+  new URL("../src/services/glossary/generated/", import.meta.url),
+);
 
 type Frontmatter = Partial<
   Pick<GlossaryEntry, "term" | "aliases" | "related" | "links" | "anchors" | "autoLink">
