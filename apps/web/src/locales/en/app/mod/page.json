@@ -6,7 +6,7 @@
   "data-twitch": "Your Twitch chat is read anonymously from Twitch. Messages you write go through {name} with the Twitch permission you granted, which you can revoke in your Twitch settings.",
   "description": "The {name} mod for World of Tanks: every player’s WN8 or WNX and the languages of their clan in battle, on the Tab and loading screens, in the battle results and across the garage, plus your Twitch chat in game. Free and open source.",
   "download": "Download on wgmods.net",
-  "download-github": "Get it on GitHub",
+  "download-github": "Download the latest",
   "download-note": "Free and open source. The hub build is the one Wargaming reviews; GitHub has the newest one from the moment it is released.",
   "eyebrow": "World of Tanks mod",
   "faq": "Frequently asked questions",
