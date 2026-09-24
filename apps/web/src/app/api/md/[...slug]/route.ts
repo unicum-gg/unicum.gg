@@ -69,6 +69,23 @@ function toMarkdownHref(href: string): string {
 }
 
 /**
+ * An asset's address, made absolute for the reason the links above are: the
+ * document is read away from the host that serves it, so a path alone names
+ * nothing a reader can fetch.
+ *
+ * Unlike a link, an image is not pointed at a Markdown twin, having none, so
+ * this only adds the origin. `/_next/image?url=...` is left as the address it
+ * is: that is the optimizer the page itself points at, it answers any caller,
+ * and rewriting it to the source it wraps would publish an address the page
+ * does not use. Anything already absolute, protocol-relative or a `data:` URI
+ * is left alone.
+ */
+function toAbsoluteSrc(src: string): string {
+  if (!src.startsWith("/") || src.startsWith("//")) return src;
+  return `${APP.URL}${src}`;
+}
+
+/**
  * The entry points a Markdown reader has and a visitor does not, so they are in
  * no navbar and get a section of their own. Named after `llms.txt`'s own
  * `## Indexes`, which lists the same kind of thing.
@@ -282,6 +299,13 @@ export async function GET(
   for (const anchor of content.querySelectorAll("a[href]")) {
     const href = anchor.getAttribute("href");
     if (href) anchor.setAttribute("href", toMarkdownHref(href));
+  }
+
+  // And the pictures with them, or a reader is handed a vehicle's render, its
+  // nation and its class as paths off a host the document never names.
+  for (const image of content.querySelectorAll("img[src]")) {
+    const src = image.getAttribute("src");
+    if (src) image.setAttribute("src", toAbsoluteSrc(src));
   }
 
   const markdown = [
