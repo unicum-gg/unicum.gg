@@ -35,6 +35,20 @@ const figtree = Figtree({
 // in sync after cookie changes during the session.
 const INITIAL_METRIC_SCRIPT = `(function(){try{var m=document.cookie.match(/(?:^|;\\s*)${STORAGE.COOKIES.RATING.replace(/\./g, "\\.")}=([^;]+)/);var v=m?decodeURIComponent(m[1]):${JSON.stringify(DEFAULT_RATING_METRIC)};if(v==='wn7'||v==='wn8'||v==='wnx'){document.documentElement.dataset.ratingMetric=v;}else{document.documentElement.dataset.ratingMetric=${JSON.stringify(DEFAULT_RATING_METRIC)};}}catch(e){document.documentElement.dataset.ratingMetric=${JSON.stringify(DEFAULT_RATING_METRIC)};}})();`;
 
+// Ran before paint for the same reason as the one above, on the home page's
+// live-streamers rail. The rail is what the server renders, so a visitor who
+// had dismissed it used to watch it paint and then vanish once React hydrated
+// and read `HIDE_STREAMS` out of localStorage. Mirroring that key onto
+// `html[data-hide-streams]` here lets the CSS in `globals.css` make the choice
+// before the first frame, so the rail is never painted for them.
+//
+// The preference stays in localStorage rather than moving to a cookie the
+// server could read: the home page is `force-static`, and calling `cookies()`
+// in it would opt the most-visited page of the site out of static generation
+// to serve a handful of people. `LiveSection` keeps the attribute in sync for
+// the rest of the session, since this only runs once.
+const HIDE_STREAMS_SCRIPT = `(function(){try{if(localStorage.getItem(${JSON.stringify(STORAGE.LOCAL_STORAGE.HIDE_STREAMS)})==='1'){document.documentElement.dataset.hideStreams='1';}}catch(e){}})();`;
+
 // Ran before the app boots, which is the whole point of it being here.
 //
 // The video player's YouTube provider keeps a promise per command it has sent
@@ -90,9 +104,10 @@ export async function Document({
     >
       {/* eslint-disable-next-line @next/next/no-head-element -- the rule is
           about the Pages Router's `next/head`; an App Router root layout renders
-          `<head>` itself, and these two scripts have to run before paint. */}
+          `<head>` itself, and these scripts have to run before paint. */}
       <head>
         <script dangerouslySetInnerHTML={{ __html: INITIAL_METRIC_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: HIDE_STREAMS_SCRIPT }} />
         <script
           dangerouslySetInnerHTML={{ __html: SILENCE_PLAYER_TEARDOWN_SCRIPT }}
         />

@@ -332,3 +332,24 @@ html[data-rating-metric="wnx"] [data-rating-col="wn8-30d"] {
     transition: none;
   }
 }
+
+/* Live-streamers rail: decide the home page's top slot before the first paint.
+   The rail is the server-rendered default (it is what all but a handful of
+   visitors want, and it is what a crawler must see), so a visitor who had
+   dismissed it watched it paint and then get replaced once React hydrated and
+   read the preference. The preference lives in localStorage, which no server
+   render can reach, and moving it to a cookie would mean calling `cookies()`
+   on the most-visited page of the site and opting it out of static generation.
+   So the document's pre-paint script mirrors that same key onto
+   html[data-hide-streams] before the first frame and the swap happens here,
+   with no frame in which the rail is visible. The slot holds the hero's box in
+   the meantime so nothing shifts when React catches up and renders it. */
+html[data-hide-streams="1"] [data-streams-rail] {
+  display: none;
+}
+[data-streams-slot] {
+  display: none;
+}
+html[data-hide-streams="1"] [data-streams-slot] {
+  display: block;
+}

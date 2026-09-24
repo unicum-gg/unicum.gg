@@ -5,6 +5,7 @@ import type { LiveStreamer } from "@unicum.gg/shared";
 import { HomeHero } from "@/components/home/home-hero";
 import { LiveStreams } from "@/components/home/live-streams";
 import { useLiveStreamers } from "@/hooks/use-live-streamers";
+import { styles } from "@/lib/styles";
 import STORAGE from "@/constants/storage";
 
 // localStorage-backed "hide the streamers rail" preference, so a visitor who
@@ -13,15 +14,28 @@ import STORAGE from "@/constants/storage";
 // `useSyncExternalStore` so there's no hydration mismatch: the server and first
 // client render both assume "not hidden", then swap to the hero if the stored
 // preference says so.
+//
+// That swap is a render behind the first paint, so on its own it showed the
+// rail for as long as hydration took to the very people who had asked not to
+// see it. The document's pre-paint script reads the same key and mirrors it
+// onto `html[data-hide-streams]`, which the CSS in `globals.css` acts on before
+// the first frame: the markup below is unchanged for everyone else, and the
+// rail is simply never painted for them. `data-streams-slot` holds the hero's
+// box for the few hundred milliseconds until React catches up, so the hero
+// lands in a space already the right size instead of shifting the page.
 const KEY = STORAGE.LOCAL_STORAGE.HIDE_STREAMS;
 const listeners = new Set<() => void>();
 
 function subscribe(onChange: () => void): () => void {
+  const onStorage = () => {
+    syncAttribute();
+    onChange();
+  };
   listeners.add(onChange);
-  window.addEventListener("storage", onChange);
+  window.addEventListener("storage", onStorage);
   return () => {
     listeners.delete(onChange);
-    window.removeEventListener("storage", onChange);
+    window.removeEventListener("storage", onStorage);
   };
 }
 
@@ -29,8 +43,18 @@ function isHidden(): boolean {
   return typeof window !== "undefined" && localStorage.getItem(KEY) === "1";
 }
 
+// The pre-paint script only runs on a document load, so every later change to
+// the preference has to carry the attribute with it. Without this, a visitor
+// who brought the rail back would leave `data-hide-streams` set and the CSS
+// would go on hiding the rail React had just re-rendered.
+function syncAttribute(): void {
+  if (isHidden()) document.documentElement.dataset.hideStreams = "1";
+  else delete document.documentElement.dataset.hideStreams;
+}
+
 function setHidden(hidden: boolean): void {
   localStorage.setItem(KEY, hidden ? "1" : "0");
+  syncAttribute();
   listeners.forEach((notify) => notify());
 }
 
@@ -59,5 +83,20 @@ export function LiveSection({ streamers }: { streamers: LiveStreamer[] }) {
       />
     );
   }
-  return <LiveStreams initial={live} onHide={() => setHidden(true)} />;
+  return (
+    <>
+      <div data-streams-rail>
+        <LiveStreams initial={live} onHide={() => setHidden(true)} />
+      </div>
+      {/* Same box as the hero's outer frame, so the slot it stands in for is
+          already the right size. Deliberately empty: the hero's own background
+          is a <video>, and rendering one here would make every visitor fetch it
+          to cover a placeholder almost none of them ever see. */}
+      <div
+        data-streams-slot
+        aria-hidden="true"
+        className={`relative aspect-16/10 ${styles.borderX} w-full overflow-hidden bg-black sm:aspect-5/2 md:aspect-auto md:h-64 ${styles.screenLines}`}
+      />
+    </>
+  );
 }
