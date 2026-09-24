@@ -193,6 +193,14 @@ export function wargaming(): BetterAuthPlugin {
               name: name ?? `Player ${accountId}`,
               emailVerified: true,
             },
+            // Better Auth writes `name` only at signup unless told otherwise,
+            // so without this a player who renames in the game keeps the name
+            // they signed up under for good, which the top bar then links to:
+            // a nickname they no longer hold, and one a stranger may since
+            // have reclaimed. Gated on a resolved name so a WG blip refreshes
+            // nothing rather than overwriting a good stored name with the
+            // `Player <id>` placeholder below.
+            overrideUserInfo: name !== null,
             account: {
               providerId: PROVIDER_ID,
               accountId: uid,
