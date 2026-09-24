@@ -1,7 +1,7 @@
 {
   "last-days": "Laatste {chartDays} dagen",
   "moe-chart": "Markeringen van uitmuntendheid voor {tank}, vereisten in de loop van de tijd",
-  "mom-chart": "Drempelwaarden voor Marks of Mastery van {tank} in de loop van de tijd",
+  "mom-chart": "Drempelwaarden voor Marks of Mastery van {tank} door de tijd heen",
   "n-players": "{count, plural, one {# speler} other {# spelers}}",
   "rolling-average-combined-damage-to": "Voortschrijdend gemiddelde van gecombineerde schade om 65 / 85 / 95% van de spelers te overtreffen.",
   "single-battle-xp-to-beat": "XP in één gevecht om 50 / 80 / 95 / 99% van de spelers te overtreffen.",
