@@ -5,6 +5,7 @@ import { setSessionCookie } from "better-auth/cookies";
 import { handleOAuthUserInfo } from "better-auth/oauth2";
 import { isRegion } from "@unicum.gg/wargaming";
 import { wg } from "@unicum.gg/core/wargaming/client";
+import { resolveVerifiedNickname } from "@unicum.gg/core/auth/wargaming-nickname";
 import {
   AUTH_REGION_COOKIE,
   AUTH_REGION_COOKIE_MAX_AGE,
@@ -111,13 +112,17 @@ export function wargaming(): BetterAuthPlugin {
         "/callback/wargaming/:nonce",
         {
           method: "GET",
-          // `account_id`/`expires_at` are also appended by WG but are NOT read
-          // from here — they are unsigned and forgeable, so identity is taken
-          // from the verified token below, never from the incoming URL.
+          // `account_id`, `nickname` and `expires_at` are also appended by WG
+          // but are deliberately NOT declared here: they are unsigned and
+          // therefore the caller's to choose, so both halves of the identity
+          // are taken from the verified token below rather than from the URL
+          // it arrived on. The nickname matters as much as the id: it is the
+          // display name the community tank ratings, the supporter wall and
+          // the video submissions print, so reading it here let anyone holding
+          // a token of their own sign up under someone else's name.
           query: z.object({
             status: z.string().optional(),
             access_token: z.string().optional(),
-            nickname: z.string().optional(),
           }),
         },
         async (ctx) => {
@@ -153,7 +158,7 @@ export function wargaming(): BetterAuthPlugin {
           if (!nonce || ctx.params.nonce !== nonce) {
             throw ctx.redirect(appUrl("/?auth=error"));
           }
-          const { status, access_token, nickname } = ctx.query;
+          const { status, access_token } = ctx.query;
           if (!isRegion(region) || status !== "ok" || !access_token) {
             throw ctx.redirect(appUrl("/?auth=error"));
           }
@@ -177,11 +182,15 @@ export function wargaming(): BetterAuthPlugin {
           if (!verified) throw ctx.redirect(appUrl("/?auth=error"));
           const accountId = String(verified.account_id);
           const uid = `${region}-${accountId}`;
+          // The display name, from the account id WG just confirmed the token
+          // is bound to. Null when neither WG nor our own table could name it,
+          // and the URL's own `nickname` is never the fallback for that.
+          const name = await resolveVerifiedNickname(region, verified.account_id);
           const result = await handleOAuthUserInfo(ctx, {
             userInfo: {
               id: uid,
               email: synthEmail(region, accountId),
-              name: nickname ?? `Player ${accountId}`,
+              name: name ?? `Player ${accountId}`,
               emailVerified: true,
             },
             account: {

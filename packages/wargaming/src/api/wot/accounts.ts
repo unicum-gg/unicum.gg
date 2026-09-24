@@ -197,20 +197,30 @@ export class AccountsResource {
   }
 
   /** Personal data for one account (`/wot/account/info/`). */
-  async info<const F extends readonly FieldPath<PlayerInfo>[] = readonly never[]>(params: {
-    accountId: number;
-    /** Response fields to keep — narrows the return type accordingly. */
-    fields?: F;
-    /** Extra stat blocks to add to the response. */
-    extra?: readonly AccountInfoExtra[];
-    language?: WgLanguage;
-  }): Promise<Selected<PlayerInfo, F> | null> {
+  async info<const F extends readonly FieldPath<PlayerInfo>[] = readonly never[]>(
+    params: {
+      accountId: number;
+      /** Response fields to keep — narrows the return type accordingly. */
+      fields?: F;
+      /** Extra stat blocks to add to the response. */
+      extra?: readonly AccountInfoExtra[];
+      language?: WgLanguage;
+    },
+    /**
+     * `skipRateLimit` exempts this call from the per-region rate limiter, for
+     * the interactive login path where the player is held on the callback while
+     * their account is resolved. Never for bulk or background work, which is
+     * what `infoBatch` below is for.
+     */
+    opts?: { skipRateLimit?: boolean },
+  ): Promise<Selected<PlayerInfo, F> | null> {
     const query = buildQuery(params);
     query.account_id = String(params.accountId);
     const data = await this.t.wgFetch<Record<string, Selected<PlayerInfo, F> | null>>(
       this.region,
       "/wot/account/info/",
       query,
+      { skipRateLimit: opts?.skipRateLimit },
     );
     return data[String(params.accountId)] ?? null;
   }
