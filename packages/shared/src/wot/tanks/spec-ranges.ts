@@ -1,3 +1,5 @@
+import { quantile } from "../../lib/stats";
+
 /**
  * Where a characteristic's values sit across a set of vehicles, so a bare
  * number can be read as a position ("2 400 DPM" means little until you know the
@@ -22,16 +24,6 @@ export type SpecRanges = Record<string, SpecRange>;
  * characteristic added to the catalogue is covered without touching this file.
  */
 const NOT_A_CHARACTERISTIC = new Set(["tankId", "totalFreeXp"]);
-
-/** Linear-interpolated quantile of an ascending array. */
-export function quantile(sorted: number[], q: number): number {
-  if (sorted.length === 1) return sorted[0];
-  const pos = (sorted.length - 1) * q;
-  const lo = Math.floor(pos);
-  const hi = Math.ceil(pos);
-  if (lo === hi) return sorted[lo];
-  return sorted[lo] + (sorted[hi] - sorted[lo]) * (pos - lo);
-}
 
 /**
  * The spread of every characteristic across a set of vehicles.
