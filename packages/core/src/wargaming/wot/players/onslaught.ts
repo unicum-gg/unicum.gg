@@ -17,6 +17,10 @@ import {
   getOnslaughtRates,
   type OnslaughtDropout,
 } from "./onslaught-fold-read";
+import {
+  getPreviousOnslaughtSeason,
+  type OnslaughtPreviousSeason,
+} from "./onslaught-previous";
 import { resolveLiveSeason } from "./onslaught-season";
 
 // Season metadata for the Onslaught board: the window it covers plus the rank
@@ -182,6 +186,9 @@ export async function getOnslaughtLeaderboard(
    * prunes them from the standings, so they are recovered from the daily fold.
    * Empty for a season we hold no captures of. */
   dropouts: OnslaughtDropout[];
+  /** How the season before this one ended, or null when it is the first we
+   * hold. The only end state on the page: everything else is mid-flight. */
+  previous: OnslaughtPreviousSeason | null;
 }> {
   const ratings = onslaughtRatingsByRegion[region];
   const seasons = onslaughtSeasonsByRegion[region];
@@ -198,7 +205,7 @@ export async function getOnslaughtLeaderboard(
     .from(seasons)
     .orderBy(sql`${seasons.startDate} DESC NULLS LAST`);
   if (allSeasons.length === 0)
-    return { season: null, seasons: [], results: [], dropouts: [] };
+    return { season: null, seasons: [], results: [], dropouts: [], previous: null };
 
   const season =
     (eventId ? allSeasons.find((s) => s.eventId === eventId) : undefined) ??
@@ -245,13 +252,22 @@ export async function getOnslaughtLeaderboard(
   // inside them. Both come back empty for a season we hold no captures of, and
   // the columns then have nothing to show rather than showing a zero.
   const comp7 = wg.region(region).source.comp7;
-  const [taxonomy, archiveYears, rates, entryCohort, dropouts] =
+  const [taxonomy, archiveYears, rates, entryCohort, dropouts, previous] =
     await Promise.all([
       comp7.seasonTaxonomy().catch(() => null),
       comp7.archiveYears().catch(() => [] as string[]),
       getOnslaughtRates(region, season.eventId),
       getOnslaughtEntryCohort(region, season.eventId),
       getOnslaughtDropouts(region, season.eventId),
+      // How the season before this one ended, which is the only end state we
+      // hold and the only thing that can tell a reader whether a running figure
+      // is near its final value. Rides along here rather than being awaited
+      // after: it is one 19ms scan and would otherwise add its time to the two
+      // network round trips above instead of hiding inside them.
+      getPreviousOnslaughtSeason(region, {
+        startDate: season.startDate,
+        yearId: season.yearId,
+      }).catch(() => null),
     ]);
 
   // The live season, resolved from the client taxonomy against our own archive
@@ -346,6 +362,7 @@ export async function getOnslaughtLeaderboard(
 
   return {
     dropouts,
+    previous,
     season: {
       eventId: season.eventId,
       name: season.name,

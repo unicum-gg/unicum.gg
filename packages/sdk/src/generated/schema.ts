@@ -3362,10 +3362,31 @@ export interface components {
             /** @description Samples in chronological order, oldest first. */
             points: components["schemas"]["OnslaughtSeasonPoint"][];
         };
+        /** @description How the previous Onslaught season ended. */
+        OnslaughtPreviousSeason: {
+            eventId: string;
+            /** @description That season's codename, for the reader's own language. */
+            codename: string | null;
+            seasonOrdinal: string | null;
+            startDate: string | null;
+            endDate: string | null;
+            /** @description Players holding a place when it settled, which is what the running season's count is heading towards. */
+            ranked: number;
+            /** @description What Legend cost at the end: the rating at the last Legend position. */
+            legendPoints: number | null;
+            /** @description The board's floor at the end, which is Champion's threshold. */
+            championPoints: number | null;
+            /** @description Median battles its Legends had played over the WHOLE season. Comparable to a finished season, not to a running one, since the field nearly triples before it settles. */
+            legendBattles: number | null;
+            /** @description The same for the players who ended Champion. */
+            championBattles: number | null;
+        };
         OnslaughtResponse: {
             season: components["schemas"]["OnslaughtSeason"] | null;
             seasons: components["schemas"]["OnslaughtSeasonRef"][];
             results: components["schemas"]["OnslaughtSummary"][];
+            /** @description How the season before the one being served ended. Null when it is the first season we hold standings for. */
+            previous: components["schemas"]["OnslaughtPreviousSeason"] | null;
             /** @description Players who held a place this season and lost it, newest first. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of. */
             dropouts: components["schemas"]["OnslaughtDropout"][];
         };

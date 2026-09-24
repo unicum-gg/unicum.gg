@@ -8,10 +8,11 @@ import {
   CartesianGrid,
   Line,
   LineChart,
+  ReferenceLine,
   XAxis,
   YAxis,
 } from "recharts";
-import { OnslaughtTier } from "@unicum.gg/shared";
+import { OnslaughtRank } from "@unicum.gg/shared";
 import {
   type ChartConfig,
   ChartContainer,
@@ -22,7 +23,10 @@ import {
 } from "@/components/ui/chart";
 import { type DisplayZone, formatMoment, formatPlayers } from "@/components/servers/format";
 import { CHAMPION, LEGEND_DARK } from "./season-race-colors";
-import type { OnslaughtSeasonPoint } from "./season-race";
+import type {
+  OnslaughtPreviousSeason,
+  OnslaughtSeasonPoint,
+} from "./season-race";
 import { useTranslation } from "@/hooks/use-translation";
 import { useLocale } from "@onruntime/translations/react";
 
@@ -53,9 +57,14 @@ function tickFormatters(zone: DisplayZone, locale: string) {
 export function OnslaughtSeasonCharts({
   samples,
   zone,
+  previous,
 }: {
   samples: OnslaughtSeasonPoint[];
   zone: DisplayZone;
+  /** Where the season before this one finished. Drawn as a dashed line across
+   * both charts, because a rising curve says nothing about how much of the
+   * climb is left and this is the only answer we hold. */
+  previous: OnslaughtPreviousSeason | null;
 }) {
   const { t } = useTranslation("components/players/list/onslaught/view");
   const { t: tGame } = useTranslation("game/vocabulary");
@@ -64,11 +73,11 @@ export function OnslaughtSeasonCharts({
   // language, so they are built here rather than at module scope.
   const cutoffConfig = {
     legendPoints: {
-      label: tGame(`onslaught-tiers.${OnslaughtTier.Legend}`),
+      label: tGame(`onslaught-tiers.${OnslaughtRank.Legend}`),
       color: LEGEND_DARK,
     },
     championPoints: {
-      label: tGame(`onslaught-tiers.${OnslaughtTier.Champion}`),
+      label: tGame(`onslaught-tiers.${OnslaughtRank.Champion}`),
       color: CHAMPION,
     },
   } satisfies ChartConfig;
@@ -116,8 +125,15 @@ export function OnslaughtSeasonCharts({
               axisLine={false}
               width={48}
               // Rating points sit in a narrow band well above zero, so the axis
-              // frames the band it is drawing rather than the origin.
-              domain={["dataMin - 40", "dataMax + 40"]}
+              // frames the band it is drawing rather than the origin. Last
+              // season's finish is usually ABOVE everything this season has
+              // reached, so the top of the band follows it or the line it is
+              // drawn at would sit outside the chart and never render.
+              domain={[
+                (min: number) => min - 40,
+                (max: number) =>
+                  Math.max(max, previous?.legendPoints ?? max) + 40,
+              ]}
               tickFormatter={(v: number) => points.format(v)}
             />
             <ChartTooltip
@@ -138,6 +154,20 @@ export function OnslaughtSeasonCharts({
               dot={false}
               connectNulls
             />
+            {previous?.legendPoints != null ? (
+              <ReferenceLine
+                y={previous.legendPoints}
+                stroke="var(--color-legendPoints)"
+                strokeDasharray="5 4"
+                strokeOpacity={0.7}
+                label={{
+                  value: t("race.previous-line"),
+                  position: "insideTopLeft",
+                  fill: "var(--color-legendPoints)",
+                  fontSize: 11,
+                }}
+              />
+            ) : null}
           </LineChart>
         </ChartContainer>
       </Figure>
@@ -151,6 +181,13 @@ export function OnslaughtSeasonCharts({
               tickLine={false}
               axisLine={false}
               width={48}
+              // Same reason as the cutoff chart above: the field ends nearly
+              // three times the size it is at this point, and an axis framed on
+              // today would hide the line saying so.
+              domain={[
+                0,
+                (max: number) => Math.max(max, previous?.ranked ?? max) * 1.05,
+              ]}
               tickFormatter={(v: number) => formatPlayers(v, locale)}
             />
             <ChartTooltip
@@ -163,6 +200,20 @@ export function OnslaughtSeasonCharts({
               fillOpacity={0.15}
               strokeWidth={2}
             />
+            {previous ? (
+              <ReferenceLine
+                y={previous.ranked}
+                stroke="var(--color-ranked)"
+                strokeDasharray="5 4"
+                strokeOpacity={0.7}
+                label={{
+                  value: t("race.previous-line"),
+                  position: "insideTopLeft",
+                  fill: "var(--color-ranked)",
+                  fontSize: 11,
+                }}
+              />
+            ) : null}
           </AreaChart>
         </ChartContainer>
       </Figure>

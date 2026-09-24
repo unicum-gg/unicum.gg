@@ -174,11 +174,49 @@ export const onslaughtSeasonRef = z
   })
   .meta({ id: "OnslaughtSeasonRef", description: "A season selector entry." });
 
+/** How the season before this one ended: the only end state the page holds,
+ * since everything about the running season is still moving. */
+export const onslaughtPreviousSeason = z
+  .object({
+    eventId: z.string(),
+    codename: z.string().nullable().meta({
+      description: "That season's codename, for the reader's own language.",
+    }),
+    seasonOrdinal: z.string().nullable(),
+    startDate: z.string().nullable(),
+    endDate: z.string().nullable(),
+    ranked: z.number().meta({
+      description:
+        "Players holding a place when it settled, which is what the running season's count is heading towards.",
+    }),
+    legendPoints: z.number().nullable().meta({
+      description: "What Legend cost at the end: the rating at the last Legend position.",
+    }),
+    championPoints: z.number().nullable().meta({
+      description: "The board's floor at the end, which is Champion's threshold.",
+    }),
+    legendBattles: z.number().nullable().meta({
+      description:
+        "Median battles its Legends had played over the WHOLE season. Comparable to a finished season, not to a running one, since the field nearly triples before it settles.",
+    }),
+    championBattles: z.number().nullable().meta({
+      description: "The same for the players who ended Champion.",
+    }),
+  })
+  .meta({
+    id: "OnslaughtPreviousSeason",
+    description: "How the previous Onslaught season ended.",
+  });
+
 /** Response of `GET /{region}/players/onslaught` (the Onslaught board). */
 export const OnslaughtResponse = z.object({
   season: onslaughtSeason.nullable(),
   seasons: z.array(onslaughtSeasonRef),
   results: z.array(onslaughtSummary),
+  previous: onslaughtPreviousSeason.nullable().meta({
+    description:
+      "How the season before the one being served ended. Null when it is the first season we hold standings for.",
+  }),
   dropouts: z.array(onslaughtDropout).meta({
     description:
       "Players who held a place this season and lost it, newest first. Recovered from our own daily fold, since the standings only carry who is ranked now. Empty for a season we hold no captures of.",

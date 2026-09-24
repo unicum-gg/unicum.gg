@@ -63,6 +63,7 @@ export async function OnslaughtView({
       seasons: [],
       results: [],
       dropouts: [],
+      previous: null,
     }),
     buildSafe(
       () => unicum.region(region).players.onslaughtHistory(),

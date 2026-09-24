@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "The curve starts once the season has been sampled more than once. It fills in on its own from here."
+  "the-curve-starts-once-the": "The curve starts once the season has been sampled more than once. It fills in on its own from here.",
+  "previous": {
+    "title": "Last season",
+    "footer": "{season} settled here, with {ranked} ranked"
+  },
+  "no-captures": "We hold this season’s final standings, which is where these figures come from, but not the climb: it ended before the board was being recorded every few minutes."
 }

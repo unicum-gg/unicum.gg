@@ -6,6 +6,7 @@ import {
   OnslaughtBoard,
   type OnslaughtRow,
 } from "@/components/players/list/onslaught/board";
+import { boardStandings } from "@/components/players/list/onslaught/row";
 import type { OnslaughtDropoutRow } from "@/components/players/list/onslaught/dropouts";
 import { OnslaughtRankScale } from "@/components/players/list/onslaught/rank-scale";
 import { OnslaughtTierProfile } from "@/components/players/list/onslaught/tier-profile";
@@ -172,12 +173,21 @@ export function OnslaughtBoardLive({
         </>
       ) : null}
 
-      {curve && curve.points.length > 0 ? (
+      {/* Gated on there being a board at all rather than on there being a
+          curve. What a rank cost is readable off the standings, so a season
+          that ended before we were capturing still has its thresholds to show,
+          and it used to show nothing at all. */}
+      {data.results.length > 0 ? (
         <>
           <PanelSeparator />
           <OnslaughtSeasonRace
-            points={curve.points}
+            points={curve?.points ?? []}
+            standings={boardStandings(
+              data.results as OnslaughtRow[],
+              season?.elitePosition ?? null,
+            )}
             ended={season?.ended ?? false}
+            previous={data.previous}
           />
         </>
       ) : null}

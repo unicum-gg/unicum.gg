@@ -46,6 +46,7 @@ async function GET__perf(
       seasons,
       results,
       dropouts,
+      previous,
     } = await getOnslaughtLeaderboard(region, limit, season);
     // Both lists wear the same crests, and both resolve them in one batch each.
     const [decorated, fallen] = await Promise.all([
@@ -55,6 +56,7 @@ async function GET__perf(
     return jsonResponse(OnslaughtResponse, {
       season: current,
       seasons,
+      previous,
       results: decorated,
       dropouts: fallen,
     });

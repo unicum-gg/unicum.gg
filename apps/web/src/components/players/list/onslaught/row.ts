@@ -198,3 +198,34 @@ export function activityReference(rows: OnslaughtRow[]): number {
   }
   return newest;
 }
+
+/**
+ * What a rank costs, read straight off the standings.
+ *
+ * The board IS the answer to that question and always has been: the player
+ * holding the last Legend position shows what Legend costs, and the bottom of
+ * the board is Champion's threshold, since the board reaches exactly that far.
+ * Reading it here rather than from a capture is what lets a season we never
+ * sampled still say what it took, which is every season that ended before the
+ * feeder existed.
+ *
+ * The floor is reduced rather than spread into `Math.min`: the board is fetched
+ * whole and a spread of sixty thousand arguments is how that call starts
+ * throwing.
+ */
+export function boardStandings(
+  results: OnslaughtRow[],
+  elitePosition: number | null,
+): { ranked: number; legendPoints: number | null; championPoints: number | null } {
+  return {
+    ranked: results.length,
+    legendPoints:
+      elitePosition == null
+        ? null
+        : (results.find((r) => r.rank === elitePosition)?.rating ?? null),
+    championPoints: results.reduce<number | null>(
+      (low, r) => (low == null || r.rating < low ? r.rating : low),
+      null,
+    ),
+  };
+}
