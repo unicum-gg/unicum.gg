@@ -1,0 +1,8 @@
+{
+  "title": "La classifica da qui in avanti",
+  "from": "da {points}",
+  "previous": "· la stagione precedente è terminata a {points}",
+  "cost": "{battles} battaglie, {perDay} al giorno",
+  "cost-out-of-reach": "{battles} battaglie, {perDay} al giorno, più di quanto giochi chiunque abbia una posizione",
+  "on-your-pace": "· al tuo ritmo"
+}

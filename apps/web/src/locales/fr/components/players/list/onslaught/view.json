@@ -22,7 +22,7 @@
     "title": "Rangs",
     "meaning": "Signification",
     "tier": "Niveau",
-    "intro": "Vous gravissez les rangs du mode {mode} en remportant des batailles : chaque victoire rapporte des points de classement selon vos performances. {champion} est le rang le plus élevé que vous pouvez atteindre uniquement avec des points, et l’atteindre vous fait entrer dans le classement. Le rang {legend} n’a pas de seuil fixe : il regroupe les joueurs les mieux classés ayant atteint le rang {champion}, son seuil évolue donc selon le niveau des participants (en cas d’égalité, le nombre de batailles jouées départage les joueurs). Les seuils exacts pour les rangs {legend} et {champion} sont ceux de la saison en cours et sont indiqués dans le classement.",
+    "intro": "Vous progressez dans les rangs du {mode} en remportant des batailles. Chaque victoire attribue des Points de rang selon la qualité de votre performance. Le rang {champion} est le rang le plus élevé que vous pouvez atteindre avec les points seuls, et l’atteindre vous place dans le classement. Le rang {legend} n’a pas de seuil fixe. Il correspond à la meilleure partie des joueurs du rang {champion}, son seuil varie donc selon la concurrence, les égalités étant départagées par le nombre de batailles jouées. Les seuils exacts des rangs {legend} et {champion} sont ceux de la saison affichée et sont indiqués dans le classement.",
     "legend-blurb": "Les joueurs les mieux classés parmi ceux ayant atteint le rang {champion}. À chaque saison, le jeu limite ce rang à une position définie dans le classement, sa taille varie donc selon la saison et la région, plutôt que de fixer un nombre de points à atteindre. Si vous passez sous le dernier joueur au rang {legend}, vous redescendez au rang {champion}.",
     "champion-blurb": "Le rang le plus élevé que vous pouvez atteindre grâce aux points de classement, et celui qui donne accès au classement. Tout joueur figurant au classement a au moins atteint le rang {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Seuil de {champion}",
     "ranked-players": "Joueurs classés",
     "rating-points": "points de rang",
-    "rank-cutoffs": "Seuils de rang"
+    "rank-cutoffs": "Seuils de rang",
+    "previous-line": "saison dernière"
   }
 }

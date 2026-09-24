@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Eğri, sezon birden fazla kez örneklendiğinde başlar. Bundan sonra kendiliğinden doldurulur."
+  "the-curve-starts-once-the": "Eğri, sezon birden fazla kez örneklendiğinde başlar. Bundan sonra kendiliğinden doldurulur.",
+  "previous": {
+    "title": "Geçen sezon",
+    "footer": "{season} burada sona erdi, {ranked} dereceli oyuncuyla"
+  },
+  "no-captures": "Bu sezonun final sıralamalarını, yani bu sayıların kaynağını tutuyoruz, ancak tırmanışı tutmuyoruz. Tablo birkaç dakikada bir kaydedilmeye başlamadan önce sona erdi."
 }

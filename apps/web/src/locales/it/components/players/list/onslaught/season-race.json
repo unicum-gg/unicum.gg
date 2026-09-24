@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "La curva inizia a essere tracciata quando i dati della stagione sono stati rilevati più di una volta. Da quel momento si completa automaticamente."
+  "the-curve-starts-once-the": "La curva inizia a essere tracciata quando i dati della stagione sono stati rilevati più di una volta. Da quel momento si completa automaticamente.",
+  "previous": {
+    "title": "Stagione precedente",
+    "footer": "La stagione {season} si è stabilizzata qui, con {ranked} giocatori classificati"
+  },
+  "no-captures": "Conserviamo le classifiche finali di questa stagione, da cui provengono questi dati, ma non la scalata: è terminata prima che la classifica venisse registrata ogni pochi minuti."
 }

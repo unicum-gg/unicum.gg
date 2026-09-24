@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Līkne sākas, kad sezona ir paraugota vairāk nekā vienu reizi. Pēc tam tā aizpildās automātiski."
+  "the-curve-starts-once-the": "Līkne sākas, kad sezona ir paraugota vairāk nekā vienu reizi. Pēc tam tā aizpildās automātiski.",
+  "previous": {
+    "title": "Pagājušā sezona",
+    "footer": "{season} noslēdzās šeit, ar {ranked} ranžētajiem spēlētājiem"
+  },
+  "no-captures": "Mums ir šīs sezonas galīgā klasifikācija, no kuras iegūti šie skaitļi, bet ne kāpums. Tā noslēdzās, pirms tabula tika reģistrēta ik pēc dažām minūtēm."
 }

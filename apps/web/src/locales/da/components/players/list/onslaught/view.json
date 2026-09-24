@@ -22,7 +22,7 @@
     "title": "Rangtrin",
     "meaning": "Betydning",
     "tier": "Niveau",
-    "intro": "Du klatrer i {mode}s rang ved at vinde kampe. Hver sejr giver rangeringspoint baseret på, hvor godt du spillede. {champion} er den højeste rang, du kan nå med point alene, og når du når den, kommer du på ranglisten. {legend} er ikke en fast grænse. Det er den bedst bedømte del af {champion}-spillerne, så grænsen ændrer sig efter feltet. Ved pointlighed afgør antal spillede kampe. De præcise grænser for {legend} og {champion} kommer fra den nuværende sæson og er markeret på tavlen.",
+    "intro": "I {mode} klatrer du i rangeringerne ved at vinde kampe. Hver sejr giver Rangering baseret på, hvor godt du spillede. {champion} er den højeste placering, du kan nå med point alene, og når du når den, kommer du på ranglisten. {legend} er ikke en fast grænse. Det er den bedst vurderede del af {champion}-spillerne, så grænsen ændrer sig med feltet, hvor lige placeringer afgøres af antal spillet kampe. De nøjagtige grænser for {legend} og {champion} er sæsonens viste grænser og er markeret på ranglisten.",
     "legend-blurb": "De højest vurderede {champion}-spillere. Spillet begrænser antallet til en bestemt placering på ranglisten hver sæson, så størrelsen varierer efter sæson og region, ikke efter et fast pointmål. Falder du under den sidste {legend}, ryger du tilbage til {champion}.",
     "champion-blurb": "Den højeste rang, du kan klatre til med rangeringspoint, og adgangen til ranglisten. Alle rangerede spillere er mindst {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Grænse for {champion}",
     "ranked-players": "Rangerede spillere",
     "rating-points": "rangeringspoint",
-    "rank-cutoffs": "Ranggrænser"
+    "rank-cutoffs": "Ranggrænser",
+    "previous-line": "sidste sæson"
   }
 }

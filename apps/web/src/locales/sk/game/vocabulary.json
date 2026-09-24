@@ -108,9 +108,14 @@
     "complete": "Dokončené"
   },
   "onslaught-tiers": {
-    "legend": "Legenda",
+    "iron": "Železo",
+    "bronze": "Bron",
+    "silver": "Srebro",
+    "gold": "zlato",
     "champion": "Šampión",
-    "crest": "{mode} {tier}"
+    "legend": "Legenda",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Ťažký",

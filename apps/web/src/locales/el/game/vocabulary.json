@@ -108,9 +108,14 @@
     "complete": "Ολοκληρώθηκε"
   },
   "onslaught-tiers": {
-    "legend": "Θρύλος",
+    "iron": "Σιδερένιος",
+    "bronze": "Χάλκινος",
+    "silver": "Αργυρός",
+    "gold": "Χρυσός",
     "champion": "Πρωταθλητής",
-    "crest": "{mode} {tier}"
+    "legend": "Θρύλος",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Βαρύ",

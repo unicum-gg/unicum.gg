@@ -1,0 +1,28 @@
+{
+  "title": "Wo wirst du landen?",
+  "fields": {
+    "battles": "Diese Saison gespielte Gefechte",
+    "battles-hint": "Was der Modus seit seiner Öffnung für dich gezählt hat.",
+    "points": "Wertungspunkte",
+    "points-hint": "{champion} beginnt bei {entry}, was zugleich das untere Ende dieser Rangliste ist.",
+    "pace": "Gefechte pro Tag ab jetzt",
+    "pace-hint": "Wie viel du spielen willst, bis sich die Saison eingependelt hat.",
+    "pace-hint-own": "Das Tempo, das du bisher gehalten hast. Ändere es, wenn du bald mehr spielen wirst."
+  },
+  "empty": "Gib ein, was du gespielt hast und wo du stehst. Daraus wird berechnet, bei welchem Rang die Saison endet.",
+  "not-enough-season": "Von dieser Saison wurde noch zu wenig aufgezeichnet, um das bereits zu beantworten. Die Anzeige füllt sich automatisch, während die Rangliste erfasst wird.",
+  "figures": {
+    "now": "Im Moment",
+    "on-the-board": "#{rank} von {total} in der Rangliste",
+    "off-the-board": "{points} Punkte unter der Rangliste",
+    "finish": "Am {date}",
+    "finish-undated": "Am Ende",
+    "finish-hint": "Etwa {points} Punkte nach {battles} weiteren Gefechten über {days} Tage.",
+    "rate": "Punkte pro Gefecht",
+    "rate-own": "Deine Rate, basierend auf den Gefechten, die du in der Rangliste gespielt hast.",
+    "rate-below": "Was ein Gefecht in der Rangliste einbringt. Beim Aufstieg dorthin erhältst du {own} pro Gefecht, wodurch du schneller vorankommst.",
+    "rate-board": "Der Median der Rangliste in der Nähe deiner Wertung, bis dein eigener Rekord dafür ausreicht.",
+    "rate-yours": "Deine Rate, wie du sie eingegeben hast."
+  },
+  "note": "Die Ränge entsprechen der spielinternen Rangliste: vier Ränge mit jeweils fünf Divisionen im Abstand von hundert Wertungspunkten, anschließend {champion} bei 2 000 und {legend} für den obersten Bereich der Rangliste. Nur der letzte Rang hat keine feste Anzahl. Daher wird er als der bis zum letzten Tag projizierte Schwellenwert gelesen, angepasst an die saisonale Kurve. Gefechte werden mit dem Wert gezählt, den sie dir in der Rangliste eingebracht haben, nicht über deine gesamte Saison hinweg. Der Aufstieg zu {champion} bringt pro Gefecht ein Mehrfaches ein und würde die Gesamtzahl zu positiv darstellen. Lies dies als Bedingung und nicht als Vorhersage: Spiele so viel mit dieser Rate, und hier landest du. Punkte verfallen ab Silber außerdem automatisch, wenn du aufhörst zu spielen. Das wird hier nicht berücksichtigt."
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Ang leaderboard mula rito",
+  "from": "mula sa {points}",
+  "previous": "· nagtapos ang nakaraang season sa {points}",
+  "cost": "{battles} mga laban, {perDay} bawat araw",
+  "cost-out-of-reach": "{battles} mga laban, {perDay} bawat araw, higit sa nilalaro ng sinumang ranked",
+  "on-your-pace": "· sa bilis mo"
+}

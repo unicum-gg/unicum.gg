@@ -108,9 +108,14 @@
     "complete": "Kumpleto"
   },
   "onslaught-tiers": {
-    "legend": "Alamat",
+    "iron": "Bakal",
+    "bronze": "Tanso",
+    "silver": "Pilak",
+    "gold": "gold",
     "champion": "Kampeon",
-    "crest": "{mode} {tier}"
+    "legend": "Alamat",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Mabigat",

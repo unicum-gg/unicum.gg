@@ -108,9 +108,14 @@
     "complete": "Suoritettu"
   },
   "onslaught-tiers": {
-    "legend": "Legenda",
+    "iron": "Rauta",
+    "bronze": "Pronssi",
+    "silver": "Hopea",
+    "gold": "Kulta",
     "champion": "Mestari",
-    "crest": "{mode} {tier}"
+    "legend": "Legenda",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Raskas",

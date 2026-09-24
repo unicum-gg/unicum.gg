@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Kurvan börjar visas när data för säsongen har samlats in mer än en gång. Därefter fylls den på automatiskt."
+  "the-curve-starts-once-the": "Kurvan börjar visas när data för säsongen har samlats in mer än en gång. Därefter fylls den på automatiskt.",
+  "previous": {
+    "title": "Förra säsongen",
+    "footer": "{season} slutade här, med {ranked} rankade"
+  },
+  "no-captures": "Vi har säsongens slutställningar, vilket är varifrån de här siffrorna kommer, men inte klättringen. Den tog slut innan topplistan registrerades varannan minut."
 }

@@ -108,9 +108,14 @@
     "complete": "Ukończona"
   },
   "onslaught-tiers": {
-    "legend": "Legenda",
+    "iron": "Żelazo",
+    "bronze": "Brąz",
+    "silver": "Srebro",
+    "gold": "Złoto",
     "champion": "Mistrz",
-    "crest": "{mode} {tier}"
+    "legend": "Legenda",
+    "crest": "{mode} {tier}",
+    "division": "{rank}, dywizja {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Ciężki",

@@ -22,7 +22,7 @@
     "title": "Rangos",
     "meaning": "Significado",
     "tier": "nivel",
-    "intro": "Asciendes en los rangos del modo {mode} ganando batallas: cada victoria otorga Puntos de clasificación en función de tu rendimiento. {champion} es el rango más alto que puedes alcanzar solo con puntos, y al conseguirlo entras en la tabla de clasificación. El rango {legend} no tiene un umbral fijo: agrupa a los jugadores del rango {champion} con mayor Clasificación, por lo que el límite cambia según los participantes, y los empates se resuelven por el número de batallas disputadas. Los umbrales exactos de los rangos {legend} y {champion} proceden de la temporada actual y están marcados en la tabla.",
+    "intro": "Subes por los rangos de {mode} al ganar batallas: cada victoria otorga Puntos de clasificación según lo bien que hayas jugado. {champion} es el rango más alto que puedes alcanzar solo con puntos, y alcanzarlo te coloca en la clasificación. {legend} no tiene un corte fijo: es la franja con mayor valoración de quienes están en {champion}, por lo que su corte cambia según los participantes, con los empates resueltos por el número de batallas jugadas. Los cortes exactos de {legend} y {champion} son los de la temporada mostrada y están marcados en la clasificación.",
     "legend-blurb": "Los jugadores del rango {champion} con mayor Clasificación. Cada temporada, el juego establece el límite en una posición concreta de la tabla de clasificación, por lo que su tamaño varía según la temporada y la región, en lugar de depender de una cantidad fija de puntos. Si caes por debajo del último jugador del rango {legend}, vuelves al rango {champion}.",
     "champion-blurb": "El rango más alto que puedes alcanzar con Puntos de clasificación y la puerta de entrada a la tabla de clasificación. Todos los jugadores clasificados tienen como mínimo el rango {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Umbral de {champion}",
     "ranked-players": "Jugadores clasificados",
     "rating-points": "puntos de clasificación",
-    "rank-cutoffs": "Umbrales de rango"
+    "rank-cutoffs": "Umbrales de rango",
+    "previous-line": "temporada pasada"
   }
 }

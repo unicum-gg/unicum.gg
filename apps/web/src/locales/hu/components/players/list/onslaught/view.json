@@ -22,7 +22,7 @@
     "title": "Rangok",
     "meaning": "Jelentés",
     "tier": "szint",
-    "intro": "A(z) {mode} ranglétráján csaták megnyerésével jutsz feljebb. Minden győzelem Értékelési pontokat ad a teljesítményed alapján. A(z) {champion} a pontokkal elérhető legmagasabb rang, amelynek elérése feljuttat a ranglistára. A(z) {legend} nem rögzített küszöbérték: a(z) {champion} játékosok legmagasabbra értékelt része, ezért a határa a mezőnnyel együtt változik, pontegyenlőség esetén a lejátszott csaták döntenek. A pontos {legend} és {champion} határokat az aktuális szezon adatai alapján jelöljük a ranglistán.",
+    "intro": "A {mode} rangjai között csaták megnyerésével jutsz fel, minden győzelem Értékelési pontokat ad a játékod alapján. A pontokkal önmagában elérhető legmagasabb rangot {champion} jelöli, ennek elérésével felkerülsz a ranglistára. {legend} küszöbértéke nem rögzített, a ranglista felső szeletét jelöli a {champion} rangját elérő játékosok között, ezért a mezőny változásával együtt mozog, a holtversenyeket pedig a játszott csaták száma dönti el. A megjelenített szezon pontos {legend} és {champion} küszöbértékei vannak feltüntetve a ranglistán.",
     "legend-blurb": "A legmagasabb értékelésű {champion} játékosok. A játék minden szezonban a ranglista egy meghatározott helyénél húzza meg a határt, ezért a mérete szezontól és régiótól függ, nem egy rögzített ponthatártól. Ha a(z) utolsó {legend} alá csúszol, visszaesel {champion} rangra.",
     "champion-blurb": "A legmagasabb rang, amelyre Értékelési pontokkal feljuthatsz, és a ranglista belépője. Minden rangsorolt játékos legalább {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "{champion} ponthatára",
     "ranked-players": "Rangsorolt játékosok",
     "rating-points": "értékelési pontok",
-    "rank-cutoffs": "Ranghatárok"
+    "rank-cutoffs": "Ranghatárok",
+    "previous-line": "előző szezon"
   }
 }

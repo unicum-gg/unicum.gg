@@ -1,0 +1,28 @@
+{
+  "title": "Gdje ćete završiti?",
+  "fields": {
+    "battles": "Bitke odigrane ove sezone",
+    "battles-hint": "Što je način izbrojao za vas otkad je otvoren.",
+    "points": "Bodovi rejtinga",
+    "points-hint": "{champion} počinje s {entry}, što je ujedno dno ove ljestvice.",
+    "pace": "Bitke dnevno od sada",
+    "pace-hint": "Koliko namjeravate igrati dok se sezona ne ustali.",
+    "pace-hint-own": "Tempo koji ste dosad održavali. Promijenite ga ako ćete uskoro igrati više."
+  },
+  "empty": "Unesite koliko ste igrali i gdje se nalazite, pa će se izračunati na kojem ćete rangu završiti sezonu.",
+  "not-enough-season": "Zabilježeno je premalo podataka o ovoj sezoni da bi se na to još odgovorilo. Podaci se sami popunjavaju kako se ljestvica bilježi.",
+  "figures": {
+    "now": "Trenutačno",
+    "on-the-board": "#{rank} od {total} na ljestvici",
+    "off-the-board": "{points} bodova ispod ljestvice",
+    "finish": "{date}",
+    "finish-undated": "Na kraju",
+    "finish-hint": "Oko {points} bodova nakon još {battles} bitaka tijekom {days} dana.",
+    "rate": "Bodova po bitki",
+    "rate-own": "Vaša stopa tijekom bitaka koje ste odigrali na ljestvici.",
+    "rate-below": "Ono što bitka donosi na ljestvici. Dok se penjete do toga, dobivate {own} po bitki, što je brža igra.",
+    "rate-board": "Medijan ljestvice oko vaše ocjene, dok vaš vlastiti rekord ne bude dovoljan za odgovor.",
+    "rate-yours": "Vaša stopa, kako ste je unijeli."
+  },
+  "note": "Rangovi su vlastita ljestvica igre: četiri ranga s po pet divizija udaljenih stotinu bodova rejtinga, zatim {champion} na 2 000 i {legend} za najviši dio ljestvice. Samo posljednji nije fiksan broj, pa se prikazuje kao prag projiciran za posljednji dan, prilagođen vlastitoj krivulji sezone. Bitke se broje prema tome koliko su vam vrijedile na ljestvici, a ne tijekom cijele sezone, jer uspon do {champion} donosi nekoliko puta više poena po bitki i uljepšao bi ukupan rezultat. Shvatite ovo kao uvjet, a ne prognozu: igrajte ovoliko tim tempom i ovdje ćete završiti. Bodovi se također sami smanjuju od Srebra naviše ako prestanete igrati, a to se ovdje ne broji."
+}

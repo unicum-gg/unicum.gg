@@ -22,7 +22,7 @@
     "title": "Ranger",
     "meaning": "Betydning",
     "tier": "Nivå",
-    "intro": "Du klatrer i gradene i {mode} ved å vinne kamper. Hver seier gir vurderingspoeng basert på hvor godt du spilte. {champion} er den høyeste graden du kan nå med poeng alene, og når du når den, kommer du på rangeringen. {legend} er ikke en fast grense. Det er den best vurderte delen av {champion}-spillerne, så grensen endres med spillerfeltet, med kamper spilt som tie-breaker. De nøyaktige grensene for {legend} og {champion} kommer fra den nåværende sesongen og er markert på brettet.",
+    "intro": "Du klatrer i {mode}s rangeringer ved å vinne kamper: hver seier gir Rangeringspoeng basert på hvor godt du spilte. {champion} er den høyeste plasseringen du kan rekke med poeng alene, og når du når den, kommer du på rangeringen. {legend} er ikke en fast grense: det er den best vurderte delen av {champion}-spillerne, så grensen flytter seg med feltet. Ved lik plassering avgjør antall spilte kamper. De nøyaktige grensene for {legend} og {champion} er de som gjelder for den viste sesongen, og er markert på tavlen.",
     "legend-blurb": "De best vurderte {champion}-spillerne. Spillet begrenser graden til en bestemt plassering på rangeringen hver sesong, så størrelsen varierer etter sesong og region, ikke etter et fast poengmål. Faller du under den siste {legend}, går du tilbake til {champion}.",
     "champion-blurb": "Den høyeste graden du kan klatre til med vurderingspoeng, og inngangen til rangeringen. Alle rangerte spillere er minst {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Grense for {champion}",
     "ranked-players": "Rangerte spillere",
     "rating-points": "rangeringspoeng",
-    "rank-cutoffs": "Ranggrenser"
+    "rank-cutoffs": "Ranggrenser",
+    "previous-line": "forrige sesong"
   }
 }

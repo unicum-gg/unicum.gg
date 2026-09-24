@@ -1,0 +1,28 @@
+{
+  "title": "Var slutar du?",
+  "fields": {
+    "battles": "Spelade strider den här säsongen",
+    "battles-hint": "Vad läget har räknat för dig sedan det öppnade.",
+    "points": "Gradpoäng",
+    "points-hint": "{champion} starter på {entry}, vilket också är botten av den här topplistan.",
+    "pace": "Strider om dagen härifrån",
+    "pace-hint": "Hur mycket du tänker spela tills säsongen stabiliseras.",
+    "pace-hint-own": "Tempot du har hållit hittills. Ändra det om du snart tänker spela mer."
+  },
+  "empty": "Fyll i vad du har spelat och var du står, så räknar den ut vilken placering säsongen slutar på.",
+  "not-enough-season": "För lite av den här säsongen har registrerats för att svara på det ännu. Det fylls i automatiskt när topplistan registreras.",
+  "figures": {
+    "now": "Just nu",
+    "on-the-board": "Placering #{rank} av {total} på topplistan",
+    "off-the-board": "{points} poäng under topplistan",
+    "finish": "Den {date}",
+    "finish-undated": "Vid slutet",
+    "finish-hint": "Cirka {points} poäng efter {battles} fler strider under {days} dagar.",
+    "rate": "Poäng per strid",
+    "rate-own": "Ditt, över de strider du har spelat på topplistan.",
+    "rate-below": "Vad en strid ger på topplistan. När du klättrar till den får du {own} per strid, vilket är det snabbare spelet.",
+    "rate-board": "Topplistans median kring ditt betyg, tills ditt eget rekord kan svara på det.",
+    "rate-yours": "Ditt, som du skrev in det."
+  },
+  "note": "Rankerna är spelets egen stege: fyra ranker med fem divisioner, hundra betygspoäng från varandra, sedan {champion} vid 2 000 och {legend} för topplagret av topplistan. Bara den sista är inte ett fast antal, så den läses som den gräns som projiceras till den sista dagen, anpassad efter säsongens egen kurva. Strider räknas utifrån vad en strid har varit värd för dig på topplistan, inte över hela säsongen, eftersom klättringen till {champion} ger flera gånger mer per strid och skulle få totalen att se bättre ut. Läs det som ett villkor och inte som en prognos: spela så här mycket i den här graden, så är det här du landar. Poäng minskar också automatiskt från Silver och uppåt om du slutar spela, vilket inget här räknar med."
+}

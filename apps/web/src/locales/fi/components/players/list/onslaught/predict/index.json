@@ -1,0 +1,28 @@
+{
+  "title": "Mihin sijoitut?",
+  "fields": {
+    "battles": "Tällä kaudella pelatut taistelut",
+    "battles-hint": "Mitä pelimuoto on laskenut sinulle sen avautumisesta lähtien.",
+    "points": "Luokituspisteet",
+    "points-hint": "{champion} alkaa arvosta {entry}, joka on myös tämän tulostaulukon alin kohta.",
+    "pace": "Taisteluita päivässä tästä eteenpäin",
+    "pace-hint": "Kuinka paljon aiot pelata, kunnes kausi vakiintuu.",
+    "pace-hint-own": "Tahti, jota olet pitänyt tähän asti. Muuta sitä, jos aiot pelata enemmän."
+  },
+  "empty": "Täytä, mitä olet pelannut ja missä olet nyt, niin laskemme, mille sijoitukselle kausi päättyy.",
+  "not-enough-season": "Tästä kaudesta on tallennettu vielä liian vähän tietoa, jotta voisimme vastata. Tiedot täyttyvät automaattisesti, kun tulostaulukkoa tallennetaan.",
+  "figures": {
+    "now": "Juuri nyt",
+    "on-the-board": "#{rank} / {total} tulostaulukossa",
+    "off-the-board": "{points} pisteen päässä tulostaulukosta",
+    "finish": "Päivänä {date}",
+    "finish-undated": "Lopussa",
+    "finish-hint": "Noin {points} pistettä, {battles} taistelun jälkeen {days} päivän aikana.",
+    "rate": "Pisteet taistelua kohden",
+    "rate-own": "Sinun arviosi, tulostaulukossa pelaamiesi taisteluiden perusteella.",
+    "rate-below": "Mitä yksi taistelu antaa tulostaulukossa. Sinne noustessasi saat {own} pistettä taistelua kohden, mikä on nopeampi tapa pelata.",
+    "rate-board": "Tulostaulukon mediaani arvosanasi ympärillä, kunnes oma ennätyksesi voi vastata siihen.",
+    "rate-yours": "Sinun arviosi, sellaisena kuin kirjoitit sen."
+  },
+  "note": "Sijoitukset ovat pelin oma tulostaulukko: neljä viiden divisioonan sijoitusta sadan luokituspisteen välein, sitten {champion} arvosta 2 000 alkaen ja {legend} tulostaulukon parhaalle osalle. Vain viimeksi mainittu ei ole kiinteä numero, joten se luetaan viimeiselle päivälle ennustettuna rajana, joka sovitetaan kauden omaan kehityskäyrään. Taistelut lasketaan sen mukaan, minkä arvoisia ne ovat olleet sinulle tulostaulukossa, ei koko kauden perusteella, sillä nousu {champion}-sijoitukseen antaa taistelusta useita kertoja enemmän pisteitä ja vääristäisi kokonaismäärää. Lue tämä ehtona, älä ennusteena: pelaa näin paljon tällä arviolla, niin päädyt tähän. Hopeasta ylöspäin pisteitä vähennetään myös automaattisesti, jos lopetat pelaamisen, eikä tätä ole laskettu mukaan."
+}

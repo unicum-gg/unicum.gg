@@ -22,7 +22,7 @@
     "title": "Rütbeler",
     "meaning": "Anlamı",
     "tier": "Seviye",
-    "intro": "Savaşları kazanarak {mode} rütbelerinde yükselirsin: her zafer, ne kadar iyi oynadığına bağlı olarak Reyting Puanı verir. {champion}, yalnızca puanlarla ulaşabileceğin en yüksek rütbedir ve ona ulaşmak seni liderlik tablosuna sokar. {legend} sabit bir eşik değildir: {champion} rütbesindekilerin en yüksek puanlı bölümüdür, bu nedenle eşiği oyuncu grubuna göre değişir. Eşitlikler oynanan savaş sayısıyla bozulur. Kesin {legend} ve {champion} eşikleri mevcut sezondan alınır ve tabloda işaretlenir.",
+    "intro": "Savaşlar kazanarak {mode} modunun rütbelerinde yükselirsin. Her zafer, ne kadar iyi oynadığına bağlı olarak Reyting Puanı kazandırır. {champion}, yalnızca puanlarla erişebileceğin en yüksek rütbedir ve ona ulaşmak seni liderlik tablosuna taşır. {legend} sabit bir eşik değildir. {champion} rütbesindeki en yüksek puanlı oyuncuların üst dilimidir, bu nedenle eşiği oyuncu grubuna göre değişir. Eşitlikler oynanan savaş sayısına göre bozulur. Gösterilen sezonun kesin {legend} ve {champion} eşikleri kullanılır ve tabloda işaretlenir.",
     "legend-blurb": "En yüksek puanlı {champion} rütbesindeki oyuncular. Oyun, her sezonda bunu belirli bir liderlik tablosu konumuyla sınırlar, bu nedenle büyüklüğü sezon ve bölgeye göre değişir. Son {legend} oyuncusunun altına düşersen {champion} rütbesine geri dönersin.",
     "champion-blurb": "Reyting Puanı ile ulaşabileceğin en yüksek rütbe ve liderlik tablosuna giriş noktasıdır. Her dereceli oyuncu en az {champion} rütbesindedir."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "{champion} sınırı",
     "ranked-players": "Sıralı oyuncular",
     "rating-points": "reyting puanı",
-    "rank-cutoffs": "Kademe kesim noktaları"
+    "rank-cutoffs": "Kademe kesim noktaları",
+    "previous-line": "geçen sezon"
   }
 }

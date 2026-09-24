@@ -1,0 +1,8 @@
+{
+  "title": "Лествица од сада",
+  "from": "од {points}",
+  "previous": "· прошла сезона се завршила на {points}",
+  "cost": "{battles} битака, {perDay} дневно",
+  "cost-out-of-reach": "{battles} битака, {perDay} дневно, више него што игра било ко рангиран изнад",
+  "on-your-pace": "· твојим темпом"
+}

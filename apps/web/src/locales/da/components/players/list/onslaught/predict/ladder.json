@@ -1,0 +1,8 @@
+{
+  "title": "Ranglisten herfra",
+  "from": "fra {points}",
+  "previous": "· sidste sæson sluttede ved {points}",
+  "cost": "{battles} kampe, {perDay} om dagen",
+  "cost-out-of-reach": "{battles} kampe, {perDay} om dagen, mere end nogen rangeret spiller har",
+  "on-your-pace": "· med dit tempo"
+}

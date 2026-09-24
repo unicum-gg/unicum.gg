@@ -1,0 +1,28 @@
+{
+  "title": "Kde skončíš?",
+  "fields": {
+    "battles": "Bitvy odehrané v této sezóně",
+    "battles-hint": "Co ti režim započítal od svého otevření.",
+    "points": "Body hodnocení",
+    "points-hint": "Hodnost {champion} začíná na hodnotě {entry}, která je zároveň spodní hranicí tohoto žebříčku.",
+    "pace": "Bitev denně odteď",
+    "pace-hint": "Kolik hodláš hrát, než se sezóna ustálí.",
+    "pace-hint-own": "Tempo, které jsi dosud udržoval. Změň ho, pokud se chystáš hrát víc."
+  },
+  "empty": "Doplň, kolik bitev jsi odehrál a kde se nacházíš, a výpočet určí, na jakém pořadí sezónu zakončíš.",
+  "not-enough-season": "Z této sezóny je zatím zaznamenáno příliš málo údajů, aby na to šlo odpovědět. Údaje se budou samy doplňovat podle toho, jak se bude zachycovat žebříček.",
+  "figures": {
+    "now": "Právě teď",
+    "on-the-board": "{rank}. místo z {total} na žebříčku",
+    "off-the-board": "{points} bodů pod žebříčkem",
+    "finish": "Dne {date}",
+    "finish-undated": "Na konci",
+    "finish-hint": "Přibližně {points} bodů po dalších {battles} bitvách během {days} dnů.",
+    "rate": "Bodů za bitvu",
+    "rate-own": "Tvé tempo za bitvy, které jsi odehrál na žebříčku.",
+    "rate-below": "Kolik bodů přináší bitva na žebříčku. Při stoupání k němu získáváš {own} za bitvu, takže je hra rychlejší.",
+    "rate-board": "Medián žebříčku v okolí tvého hodnocení, dokud ho nebude možné určit z tvého vlastního záznamu.",
+    "rate-yours": "Tvé tempo podle toho, jak jsi ho zadal."
+  },
+  "note": "Hodnosti jsou vlastním žebříčkem hry: čtyři hodnosti po pěti divizích vzdálených o sto bodů hodnocení, poté {champion} na hodnotě 2 000 a {legend} pro nejvyšší část žebříčku. Pouze poslední z nich nemá pevně stanovené číslo, takže se chápe jako hranice odhadnutá pro poslední den a vypočítaná podle vlastní křivky sezóny. Bitvy se započítávají podle toho, jakou měly pro tebe hodnotu na žebříčku, ne za celou sezónu, protože stoupání k hodnosti {champion} přináší za bitvu několikanásobně více bodů a celkový výsledek by nadhodnotilo. Ber to jako podmínku, ne jako předpověď: když budeš hrát tolik a tímto tempem, skončíš zde. Body se také samy snižují od hodnosti Stříbrný výše, pokud přestaneš hrát, což tento výpočet nezohledňuje."
+}

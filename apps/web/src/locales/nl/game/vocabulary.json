@@ -108,9 +108,14 @@
     "complete": "Voltooid"
   },
   "onslaught-tiers": {
-    "legend": "Legende",
+    "iron": "IJzer",
+    "bronze": "Brons",
+    "silver": "Zilver",
+    "gold": "Goud",
     "champion": "Kampioen",
-    "crest": "{mode} {tier}"
+    "legend": "Legende",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Zwaar",

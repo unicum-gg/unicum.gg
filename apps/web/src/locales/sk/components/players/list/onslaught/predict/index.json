@@ -1,0 +1,28 @@
+{
+  "title": "Kam sa umiestnite?",
+  "fields": {
+    "battles": "Bitky odohrané v tejto sezóne",
+    "battles-hint": "Čo vám režim započítal od jeho otvorenia.",
+    "points": "Body",
+    "points-hint": "{champion} začína na hodnote {entry}, ktorá je zároveň spodkom tohto rebríčka.",
+    "pace": "Bitky za deň odteraz",
+    "pace-hint": "Koľko plánujete hrať, kým sa sezóna ustáli.",
+    "pace-hint-own": "Tempo, ktoré ste doteraz udržiavali. Zmeňte ho, ak sa chystáte hrať viac."
+  },
+  "empty": "Doplňte, čo ste odohrali a akú máte uvrstitev, a výpočet určí, na akej uvrstitev sezónu dokončíte.",
+  "not-enough-season": "Z tejto sezóny je zatiaľ zaznamenaných príliš málo údajov, aby sa na to dalo odpovedať. Údaj sa doplní automaticky, keď sa bude lestvica zaznamenávať.",
+  "figures": {
+    "now": "Práve teraz",
+    "on-the-board": "#{rank} z {total} v rebríčku",
+    "off-the-board": "{points} bodov pod rebríčkom",
+    "finish": "Dňa {date}",
+    "finish-undated": "Na konci",
+    "finish-hint": "Približne {points} bodov po ďalších {battles} bitkách počas {days} dní.",
+    "rate": "Body za bitku",
+    "rate-own": "Vaša hodnota podľa bitiek, ktoré ste odohrali v rebríčku.",
+    "rate-below": "Koľko na rebríčku vynáša jedna bitka. Pri stúpaní k nej získavate {own} za bitku, čo je rýchlejšia hra.",
+    "rate-board": "Medián rebríčka v okolí vášho hodnotenia, kým to nebude možné určiť z vášho vlastného záznamu.",
+    "rate-yours": "Vaša, tak ako ste ju zadali."
+  },
+  "note": "Hodnosti sú vlastný rebríček hry: štyri hodnosti po päť divízií vzdialených od seba sto bodov hodnotenia, potom hodnosť {champion} pri 2 000 bodoch a {legend} pre najvyššiu časť rebríčka. Iba posledná z nich nemá pevné číslo, preto sa chápe ako prag odhadnutý na posledný deň a prispôsobený vlastnej krivke sezóny. Bitky sa započítavajú podľa toho, akú mali hodnotu pre vás na rebríčku, nie počas celej sezóny, pretože stúpanie k {champion} prináša za bitku niekoľkonásobne viac a celkový výsledok by skreslilo. Prečítajte si to ako podmienku, nie predpoveď: hrajte toľko bitiek týmto tempom a skončíte na tomto mieste. Body sa od hodnosti Silver vyššie samy znižujú, ak prestanete hrať, čo sa tu nezapočítava."
+}

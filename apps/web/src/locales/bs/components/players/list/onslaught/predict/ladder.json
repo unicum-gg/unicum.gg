@@ -1,0 +1,8 @@
+{
+  "title": "Ljestvica odavde",
+  "from": "od {points}",
+  "previous": "· prošla sezona završila je na {points}",
+  "cost": "{battles} bitki, {perDay} dnevno",
+  "cost-out-of-reach": "{battles} bitki, {perDay} dnevno, više nego što igra bilo ko rangiran iznad",
+  "on-your-pace": "· vašim tempom"
+}

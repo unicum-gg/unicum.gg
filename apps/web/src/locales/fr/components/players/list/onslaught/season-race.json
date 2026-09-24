@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "La courbe apparaît dès que la saison a fait l’objet de plusieurs relevés. Elle se complète ensuite automatiquement."
+  "the-curve-starts-once-the": "La courbe apparaît dès que la saison a fait l’objet de plusieurs relevés. Elle se complète ensuite automatiquement.",
+  "previous": {
+    "title": "Saison précédente",
+    "footer": "La saison {season} s’est stabilisée ici, avec {ranked} joueurs classés"
+  },
+  "no-captures": "Nous détenons le classement final de cette saison, qui sert de base à ces chiffres, mais pas l’ascension. Elle s’est terminée avant que le classement ne soit enregistré toutes les quelques minutes."
 }

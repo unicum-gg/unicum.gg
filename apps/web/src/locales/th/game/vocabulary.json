@@ -108,9 +108,14 @@
     "complete": "สำเร็จแล้ว"
   },
   "onslaught-tiers": {
-    "legend": "ตำนาน",
+    "iron": "เหล็ก",
+    "bronze": "ทองแดง",
+    "silver": "เงิน",
+    "gold": "ทอง",
     "champion": "แชมป์",
-    "crest": "{mode} {tier}"
+    "legend": "ตำนาน",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "รถถังหนัก",

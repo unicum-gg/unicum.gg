@@ -1,0 +1,28 @@
+{
+  "title": "Sezonu hangi sırada bitireceksin?",
+  "fields": {
+    "battles": "Bu sezonda oynanan savaşlar",
+    "battles-hint": "Mod açıldığından beri senin için sayılan savaşlar.",
+    "points": "Reyting puanı",
+    "points-hint": "{champion}, bu liderlik tablosunun en altı olan {entry} puanından başlıyor.",
+    "pace": "Buradan sonra günde savaşlar",
+    "pace-hint": "Sezon sona erene kadar ne kadar oynamayı planladığın.",
+    "pace-hint-own": "Şimdiye kadar koruduğun tempo. Daha fazla savaş oynayacaksan bunu değiştir."
+  },
+  "empty": "Oynadıklarını ve bulunduğun yeri gir, sistem sezon sonunda hangi sıraya ulaşacağını hesaplasın.",
+  "not-enough-season": "Henüz cevap vermek için bu sezondan çok az veri kaydedildi. Tablo kaydedildikçe kendiliğinden dolar.",
+  "figures": {
+    "now": "Şu anda",
+    "on-the-board": "Liderlik tablosunda {total} içinde #{rank}",
+    "off-the-board": "Liderlik tablosunun {points} puan altında",
+    "finish": "{date} tarihinde",
+    "finish-undated": "Sezon sonunda",
+    "finish-hint": "{days} gün içinde {battles} savaş daha oynadıktan sonra yaklaşık {points} puan.",
+    "rate": "Savaş başına puan",
+    "rate-own": "Liderlik tablosunda oynadığın savaşlara göre senin ortalaman.",
+    "rate-below": "Liderlik tablosunda bir savaşın kazandırdığı puan. Buraya tırmanırken savaş başına {own} puan kazanıyorsun, bu da daha hızlı bir oyun demek.",
+    "rate-board": "Kendi rekorun cevap verebilir duruma gelene kadar, puanına yakın tablonun ortanca değeri.",
+    "rate-yours": "Senin yazdığın değer."
+  },
+  "note": "Rütbeler oyunun kendi sıralamasıdır: aralarında yüz Reyting Puanı bulunan beşer bölümlü dört rütbe, ardından 2.000 puanda {champion} ve liderlik tablosunun en üst dilimindeki oyuncular için {legend} gelir. Yalnızca sonuncusu sabit bir sayı değildir, bu nedenle sezonun kendi eğrisine uydurularak son güne yansıtılan eşik olarak okunur. Savaşlar tüm sezon boyunca değil, liderlik tablosunda senin için ne kadar değerli olduklarına göre sayılır. Bunun nedeni, {champion} rütbesine tırmanışın savaş başına birkaç kat daha fazla puan kazandırması ve toplamı olduğundan yüksek göstermesidir. Bunu bir tahmin değil, bir koşul olarak oku: bu tempoda ve bu değerlendirmeyle oynarsan, ulaşacağın yer burasıdır. Oynamayı bırakırsan Gümüş ve üzerindeki rütbelerde puanlar kendiliğinden azalır, ancak burada bu hesaba katılmaz."
+}

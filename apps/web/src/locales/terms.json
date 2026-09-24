@@ -834,7 +834,18 @@
     "servers": "serveurs",
     "show": "afficher",
     "version": "version",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronze",
+    "Gold": "Or",
+    "Iron": "Fer",
+    "Silver": "Argent",
+    "Season ended": "La saison est terminée",
+    "Read": "Lire",
+    "climb": "ascension",
+    "five": "cinq",
+    "ladder": "classement",
+    "number": "nombre",
+    "pace": "rythme"
   },
   "es": {
     "Battles": "Batallas",
@@ -1668,7 +1679,18 @@
     "servers": "servidores",
     "show": "mostrar",
     "version": "versión",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronce",
+    "Gold": "Oro",
+    "Iron": "Hierro",
+    "Silver": "Plata",
+    "Season ended": "Temporada terminada",
+    "Read": "Leer",
+    "climb": "ascenso",
+    "five": "cinco",
+    "ladder": "clasificación",
+    "number": "número",
+    "pace": "ritmo"
   },
   "ru": {
     "Battles": "Бои",
@@ -2496,7 +2518,18 @@
     "servers": "серверы",
     "show": "показать",
     "version": "версия",
-    "Game mod": "Мод"
+    "Game mod": "Мод",
+    "Bronze": "Бронза",
+    "Gold": "Золото",
+    "Iron": "Железо",
+    "Silver": "Серебро",
+    "Season ended": "Сезон завершён",
+    "Read": "Читать",
+    "climb": "подъём",
+    "five": "пять",
+    "ladder": "таблица лидеров",
+    "number": "номер",
+    "pace": "темп"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3343,7 +3376,18 @@
     "servers": "serwery",
     "show": "pokaż",
     "version": "wersja",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Brąz",
+    "Gold": "Złoto",
+    "Iron": "Żelazo",
+    "Silver": "Srebro",
+    "Season ended": "Sezon skończył się",
+    "Read": "Czytaj",
+    "climb": "awans",
+    "five": "pięć",
+    "ladder": "ranking",
+    "number": "liczba",
+    "pace": "tempo"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4200,7 +4244,18 @@
     "servers": "サーバー",
     "show": "表示",
     "version": "バージョン",
-    "Game mod": "MOD"
+    "Game mod": "MOD",
+    "Bronze": "ブロンズ",
+    "Gold": "ゴールド",
+    "Iron": "アイアン",
+    "Silver": "シルバー",
+    "Season ended": "シーズン終了",
+    "Read": "読む",
+    "climb": "上昇",
+    "five": "5",
+    "ladder": "ランキング",
+    "number": "番号",
+    "pace": "ペース"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4842,7 +4897,13 @@
     "servers": "خوادم",
     "show": "عرض",
     "version": "إصدار",
-    "Game mod": "مود"
+    "Game mod": "مود",
+    "Read": "اقرأ",
+    "climb": "الصعود",
+    "five": "خمسة",
+    "ladder": "سُلّم الترتيب",
+    "number": "رقم",
+    "pace": "الوتيرة"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5696,7 +5757,18 @@
     "servers": "serveri",
     "show": "prikaži",
     "version": "verzija",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronca",
+    "Gold": "Zlato",
+    "Iron": "Željezo",
+    "Silver": "Srebro",
+    "Season ended": "Sezona je završila",
+    "Read": "Pročitaj",
+    "climb": "uspon",
+    "five": "pet",
+    "ladder": "ljestvica",
+    "number": "broj",
+    "pace": "tempo"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6551,7 +6623,18 @@
     "servers": "szerverek",
     "show": "mutat",
     "version": "verzió",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronz",
+    "Gold": "Arany",
+    "Iron": "Vas",
+    "Silver": "Ezüst",
+    "Season ended": "A szezon véget ért",
+    "Read": "Olvasd el",
+    "climb": "feljutás",
+    "five": "öt",
+    "ladder": "ranglista",
+    "number": "szám",
+    "pace": "tempó"
   },
   "ko": {
     "Battles": "전투",
@@ -7413,7 +7496,18 @@
     "servers": "서버",
     "show": "표시",
     "version": "버전",
-    "Game mod": "MOD"
+    "Game mod": "MOD",
+    "Bronze": "브론즈",
+    "Gold": "골드",
+    "Iron": "아이언",
+    "Silver": "실버",
+    "Season ended": "시즌 종료",
+    "Read": "읽기",
+    "climb": "상승",
+    "five": "5",
+    "ladder": "순위표",
+    "number": "번호",
+    "pace": "페이스"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8272,7 +8366,18 @@
     "servers": "servers",
     "show": "tonen",
     "version": "versie",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Brons",
+    "Gold": "Goud",
+    "Iron": "IJzer",
+    "Silver": "Zilver",
+    "Season ended": "Seizoen geëindigd",
+    "Read": "Lezen",
+    "climb": "stijging",
+    "five": "vijf",
+    "ladder": "ranglijst",
+    "number": "nummer",
+    "pace": "tempo"
   },
   "cs": {
     "Battles": "Bitev",
@@ -9122,7 +9227,18 @@
     "servers": "servery",
     "show": "zobrazit",
     "version": "verze",
-    "Game mod": "Mód"
+    "Game mod": "Mód",
+    "Bronze": "Bronzový",
+    "Gold": "Zlatý",
+    "Iron": "Železný",
+    "Silver": "Stříbrný",
+    "Season ended": "Sezóna skončila",
+    "Read": "Přečíst",
+    "climb": "stoupání",
+    "five": "pět",
+    "ladder": "žebříček",
+    "number": "číslo",
+    "pace": "tempo"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -9974,7 +10090,18 @@
     "servers": "sunucular",
     "show": "göster",
     "version": "sürüm",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronz",
+    "Gold": "Altın",
+    "Iron": "Demir",
+    "Silver": "Gümüş",
+    "Season ended": "Sezon sona erdi",
+    "Read": "Oku",
+    "climb": "tırmanış",
+    "five": "beş",
+    "ladder": "sıralama",
+    "number": "sayı",
+    "pace": "tempo"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10615,7 +10742,13 @@
     "servers": "серверы",
     "show": "паказаць",
     "version": "версія",
-    "Game mod": "Мод"
+    "Game mod": "Мод",
+    "Read": "Чытаць",
+    "climb": "пад’ём",
+    "five": "пяць",
+    "ladder": "табліца лідараў",
+    "number": "колькасць",
+    "pace": "тэмп"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11263,7 +11396,13 @@
     "servers": "strežniki",
     "show": "prikaži",
     "version": "različica",
-    "Game mod": "Mód"
+    "Game mod": "Mód",
+    "Read": "Prečítať",
+    "climb": "stúpanie",
+    "five": "päť",
+    "ladder": "rebríček",
+    "number": "číslo",
+    "pace": "tempo"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -11912,7 +12051,13 @@
     "servers": "serveri",
     "show": "prikaži",
     "version": "verzija",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Read": "Pročitaj",
+    "climb": "uspon",
+    "five": "pet",
+    "ladder": "ljestvica",
+    "number": "broj",
+    "pace": "tempo"
   },
   "th": {
     "Battles": "การรบ",
@@ -12767,7 +12912,18 @@
     "servers": "เซิร์ฟเวอร์",
     "show": "แสดง",
     "version": "เวอร์ชัน",
-    "Game mod": "ม็อด"
+    "Game mod": "ม็อด",
+    "Bronze": "ทองแดง",
+    "Gold": "ทอง",
+    "Iron": "เหล็ก",
+    "Silver": "เงิน",
+    "Season ended": "ฤดูกาลจบแล้ว",
+    "Read": "อ่าน",
+    "climb": "ไต่ระดับ",
+    "five": "ห้า",
+    "ladder": "ตารางจัดอันดับ",
+    "number": "หมายเลข",
+    "pace": "อัตราความคืบหน้า"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13622,7 +13778,18 @@
     "servers": "服务器",
     "show": "显示",
     "version": "版本",
-    "Game mod": "模组"
+    "Game mod": "模组",
+    "Bronze": "青铜",
+    "Gold": "黄金",
+    "Iron": "黑铁",
+    "Silver": "白银",
+    "Season ended": "赛季已结束",
+    "Read": "阅读",
+    "climb": "攀升",
+    "five": "五",
+    "ladder": "天梯",
+    "number": "数量",
+    "pace": "节奏"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14462,7 +14629,18 @@
     "servers": "servidores",
     "show": "mostrar",
     "version": "versão",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronze",
+    "Gold": "Ouro",
+    "Iron": "Ferro",
+    "Silver": "Prata",
+    "Season ended": "A Temporada terminou",
+    "Read": "Ler",
+    "climb": "subida",
+    "five": "cinco",
+    "ladder": "classificação",
+    "number": "número",
+    "pace": "ritmo"
   },
   "vi": {
     "Battles": "Số trận",
@@ -15297,7 +15475,17 @@
     "servers": "máy chủ",
     "show": "hiển thị",
     "version": "phiên bản",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronze",
+    "Gold": "Gold",
+    "Iron": "Iron",
+    "Silver": "Silver",
+    "Read": "Đọc",
+    "climb": "leo hạng",
+    "five": "năm",
+    "ladder": "bảng xếp hạng",
+    "number": "số",
+    "pace": "tốc độ"
   },
   "de": {
     "Battles": "Gefechte",
@@ -16145,7 +16333,18 @@
     "servers": "Server",
     "show": "anzeigen",
     "version": "Version",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronze",
+    "Gold": "Gold",
+    "Iron": "Eisen",
+    "Silver": "Silber",
+    "Season ended": "Saison beendet",
+    "Read": "Lesen",
+    "climb": "Aufstieg",
+    "five": "fünf",
+    "ladder": "Rangliste",
+    "number": "Anzahl",
+    "pace": "Tempo"
   },
   "uk": {
     "Battles": "Бої",
@@ -16990,7 +17189,18 @@
     "servers": "сервери",
     "show": "показати",
     "version": "версія",
-    "Game mod": "Мод"
+    "Game mod": "Мод",
+    "Bronze": "Бронза",
+    "Gold": "Золото",
+    "Iron": "Залізо",
+    "Silver": "Срібло",
+    "Season ended": "Сезон завершено",
+    "Read": "Читати",
+    "climb": "підйом",
+    "five": "п’ять",
+    "ladder": "таблиця лідерів",
+    "number": "номер",
+    "pace": "темп"
   },
   "it": {
     "Battles": "Battaglie",
@@ -17840,7 +18050,18 @@
     "servers": "server",
     "show": "mostra",
     "version": "versione",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronzo",
+    "Gold": "Oro",
+    "Iron": "Ferro",
+    "Silver": "Argento",
+    "Season ended": "Stagione terminata",
+    "Read": "Leggi",
+    "climb": "scalata",
+    "five": "cinque",
+    "ladder": "classifica",
+    "number": "numero",
+    "pace": "ritmo"
   },
   "sv": {
     "Battles": "Strider",
@@ -18699,7 +18920,18 @@
     "servers": "servrar",
     "show": "visa",
     "version": "version",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Brons",
+    "Gold": "Guld",
+    "Iron": "Järn",
+    "Silver": "Silver",
+    "Season ended": "Säsongen slut",
+    "Read": "Läs",
+    "climb": "klättring",
+    "five": "fem",
+    "ladder": "stege",
+    "number": "nummer",
+    "pace": "tempo"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19554,7 +19786,18 @@
     "servers": "сервери",
     "show": "прикажи",
     "version": "верзија",
-    "Game mod": "Мод"
+    "Game mod": "Мод",
+    "Bronze": "Bronza",
+    "Gold": "Zlato",
+    "Iron": "Gvožđe",
+    "Silver": "Srebro",
+    "Season ended": "Sezona je završena",
+    "Read": "Pročitaj",
+    "climb": "uspon",
+    "five": "pet",
+    "ladder": "lestvica",
+    "number": "broj",
+    "pace": "tempo"
   },
   "el": {
     "Battles": "Μάχες",
@@ -20408,7 +20651,18 @@
     "servers": "διακομιστές",
     "show": "εμφάνιση",
     "version": "έκδοση",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Χάλκινος",
+    "Gold": "Χρυσός",
+    "Iron": "Σιδερένιος",
+    "Silver": "Αργυρός",
+    "Season ended": "Η περίοδος έληξε",
+    "Read": "Διαβάστε",
+    "climb": "άνοδος",
+    "five": "πέντε",
+    "ladder": "κατάταξη",
+    "number": "αριθμός",
+    "pace": "ρυθμός"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -21251,7 +21505,18 @@
     "servers": "serveri",
     "show": "rādīt",
     "version": "versija",
-    "Game mod": "Mods"
+    "Game mod": "Mods",
+    "Bronze": "Bronza",
+    "Gold": "Zelts",
+    "Iron": "Dzelzs",
+    "Silver": "Sudrabs",
+    "Season ended": "Sezona noslēgusies",
+    "Read": "Lasīt",
+    "climb": "kāpums",
+    "five": "pieci",
+    "ladder": "reitingu tabula",
+    "number": "numurs",
+    "pace": "temps"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -21893,7 +22158,13 @@
     "servers": "सर्वर",
     "show": "दिखाएँ",
     "version": "संस्करण",
-    "Game mod": "मॉड"
+    "Game mod": "मॉड",
+    "Read": "पढ़ें",
+    "climb": "चढ़ाई",
+    "five": "पाँच",
+    "ladder": "लीडरबोर्ड",
+    "number": "संख्या",
+    "pace": "गति"
   },
   "bg": {
     "Battles": "Битки",
@@ -22732,7 +23003,18 @@
     "servers": "сървъри",
     "show": "покажи",
     "version": "версия",
-    "Game mod": "Мод"
+    "Game mod": "Мод",
+    "Bronze": "Бронз",
+    "Gold": "Злато",
+    "Iron": "Желязо",
+    "Silver": "Сребро",
+    "Season ended": "Сезонът завърши",
+    "Read": "Прочети",
+    "climb": "изкачване",
+    "five": "пет",
+    "ladder": "класация",
+    "number": "номер",
+    "pace": "темпо"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23591,7 +23873,18 @@
     "servers": "serveriai",
     "show": "rodyti",
     "version": "versija",
-    "Game mod": "Modas"
+    "Game mod": "Modas",
+    "Bronze": "Bronza",
+    "Gold": "Auksas",
+    "Iron": "Geležis",
+    "Silver": "Sidabras",
+    "Season ended": "Sezonas baigėsi",
+    "Read": "Skaityti",
+    "climb": "kopimas",
+    "five": "penki",
+    "ladder": "reitingų lentelė",
+    "number": "numeris",
+    "pace": "tempas"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -24237,7 +24530,13 @@
     "servers": "серверлер",
     "show": "көрсету",
     "version": "нұсқа",
-    "Game mod": "Мод"
+    "Game mod": "Мод",
+    "Read": "Оқу",
+    "climb": "өрлеу",
+    "five": "бес",
+    "ladder": "көшбасшылар тақтасы",
+    "number": "нөмір",
+    "pace": "қарқын"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -25096,7 +25395,18 @@
     "servers": "palvelimet",
     "show": "näytä",
     "version": "versio",
-    "Game mod": "Modi"
+    "Game mod": "Modi",
+    "Bronze": "Pronssi",
+    "Gold": "Kulta",
+    "Iron": "Rauta",
+    "Silver": "Hopea",
+    "Season ended": "Kausi loppui",
+    "Read": "Lue",
+    "climb": "nousu",
+    "five": "viisi",
+    "ladder": "tulostaulukko",
+    "number": "numero",
+    "pace": "tahti"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -25743,7 +26053,13 @@
     "servers": "mga server",
     "show": "ipakita",
     "version": "bersyon",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Read": "Basahin",
+    "climb": "pag-akyat",
+    "five": "lima",
+    "ladder": "leaderboard",
+    "number": "numero",
+    "pace": "bilis"
   },
   "no": {
     "Battles": "Kamper",
@@ -26594,7 +26910,18 @@
     "servers": "servere",
     "show": "vis",
     "version": "versjon",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronze",
+    "Gold": "Gold",
+    "Iron": "Iron",
+    "Silver": "Silver",
+    "Season ended": "Sesong avsluttet",
+    "Read": "Les",
+    "climb": "klatring",
+    "five": "fem",
+    "ladder": "rangering",
+    "number": "nummer",
+    "pace": "tempo"
   },
   "ro": {
     "Battles": "Lupte",
@@ -27434,7 +27761,18 @@
     "servers": "servere",
     "show": "afișează",
     "version": "versiune",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronz",
+    "Gold": "Aur",
+    "Iron": "Fier",
+    "Silver": "Argint",
+    "Season ended": "Sezonul s-a încheiat",
+    "Read": "Citește",
+    "climb": "urcare",
+    "five": "cinci",
+    "ladder": "clasament",
+    "number": "număr",
+    "pace": "ritm"
   },
   "da": {
     "Battles": "Kampe",
@@ -28289,6 +28627,17 @@
     "servers": "servere",
     "show": "vis",
     "version": "version",
-    "Game mod": "Mod"
+    "Game mod": "Mod",
+    "Bronze": "Bronze",
+    "Gold": "Guld",
+    "Iron": "Jern",
+    "Silver": "Sølv",
+    "Season ended": "Sæsonen sluttede",
+    "Read": "Læs",
+    "climb": "stigning",
+    "five": "fem",
+    "ladder": "rangliste",
+    "number": "nummer",
+    "pace": "tempo"
   }
 }

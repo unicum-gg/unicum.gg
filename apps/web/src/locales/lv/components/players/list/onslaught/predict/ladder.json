@@ -1,0 +1,8 @@
+{
+  "title": "Reitingu tabula no šī brīža",
+  "from": "no {points}",
+  "previous": "· pagājušajā sezonā beidzās pie {points}",
+  "cost": "{battles} kaujas, {perDay} dienā",
+  "cost-out-of-reach": "{battles} kaujas, {perDay} dienā, vairāk nekā spēlē jebkurš ranžētais spēlētājs",
+  "on-your-pace": "· tavā tempā"
+}

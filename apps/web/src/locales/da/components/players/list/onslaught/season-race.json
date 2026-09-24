@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Kurven starter, når sæsonen er blevet udtaget mere end én gang. Herefter udfyldes den automatisk."
+  "the-curve-starts-once-the": "Kurven starter, når sæsonen er blevet udtaget mere end én gang. Herefter udfyldes den automatisk.",
+  "previous": {
+    "title": "Sidste sæson",
+    "footer": "{season} lagde sig her, med {ranked} rangerede spillere"
+  },
+  "no-captures": "Vi har denne sæsons endelige placeringer, som disse tal kommer fra, men ikke stigningen. Den sluttede, før ranglisten blev registreret hvert par minutter."
 }

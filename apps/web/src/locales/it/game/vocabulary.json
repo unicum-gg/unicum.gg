@@ -108,9 +108,14 @@
     "complete": "Completata"
   },
   "onslaught-tiers": {
-    "legend": "Leggenda",
+    "iron": "Ferro",
+    "bronze": "Bronzo",
+    "silver": "Argento",
+    "gold": "Oro",
     "champion": "Campione",
-    "crest": "{mode} {tier}"
+    "legend": "Leggenda",
+    "crest": "{mode} {tier}",
+    "division": "Posizione: {rank}, divisione: {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Pesante",
@@ -153,6 +158,6 @@
     "1": "1 Mark",
     "2": "2 Marks",
     "3": "3 Marks",
-    "name": "Marchi d’Eccellenza"
+    "name": "Marchi d’eccellenza"
   }
 }

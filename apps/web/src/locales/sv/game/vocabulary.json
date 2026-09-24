@@ -108,9 +108,14 @@
     "complete": "Slutfört"
   },
   "onslaught-tiers": {
-    "legend": "Legend",
+    "iron": "Järn",
+    "bronze": "Brons",
+    "silver": "Silver",
+    "gold": "Guld",
     "champion": "Mästare",
-    "crest": "{mode} {tier}"
+    "legend": "Legend",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Tung",

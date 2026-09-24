@@ -108,9 +108,14 @@
     "complete": "Завершаны"
   },
   "onslaught-tiers": {
-    "legend": "Легенда",
+    "iron": "жалеза",
+    "bronze": "бронза",
+    "silver": "срэбра",
+    "gold": "золата",
     "champion": "Чэмпіён",
-    "crest": "{mode} {tier}"
+    "legend": "Легенда",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Цяжкі",

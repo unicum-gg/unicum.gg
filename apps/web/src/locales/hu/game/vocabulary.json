@@ -108,9 +108,14 @@
     "complete": "Teljesítve"
   },
   "onslaught-tiers": {
-    "legend": "Legenda",
+    "iron": "Vas",
+    "bronze": "Bronz",
+    "silver": "Ezüst",
+    "gold": "Arany",
     "champion": "Bajnok",
-    "crest": "{mode} {tier}"
+    "legend": "Legenda",
+    "crest": "{mode} {tier}",
+    "division": "{rank}. {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Nehéz",

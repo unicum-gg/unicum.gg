@@ -1,0 +1,8 @@
+{
+  "title": "Žebříček od této hodnoty",
+  "from": "od {points}",
+  "previous": "· minulá sezóna skončila na hodnotě {points}",
+  "cost": "{battles} bitev, {perDay} denně",
+  "cost-out-of-reach": "{battles} bitev, {perDay} denně, více, než hraje kdokoli z hodnocených hráčů",
+  "on-your-pace": "· tvým tempem"
+}

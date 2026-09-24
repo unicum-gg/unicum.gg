@@ -22,7 +22,7 @@
     "title": "Ranghi",
     "meaning": "Significato",
     "tier": "Livello",
-    "intro": "Si scalano i ranghi di {mode} vincendo battaglie: ogni vittoria assegna Punti di valutazione in base alla prestazione. Il rango {champion} è il più alto che puoi raggiungere con i soli punti e raggiungerlo ti fa entrare in classifica. Il rango {legend} non ha una soglia fissa: comprende la fascia con la valutazione più alta tra i giocatori di rango {champion}, quindi il limite varia in base ai partecipanti (in caso di parità, conta il numero di battaglie giocate). Le soglie esatte dei ranghi {legend} e {champion} sono quelle della stagione in corso e sono indicate nella classifica.",
+    "intro": "Sali nei gradi della {mode} vincendo battaglie: ogni vittoria assegna Punti Classifica in base a come hai giocato. {champion} è il grado più alto che puoi raggiungere solo con i punti, e raggiungerlo ti porta in classifica. {legend} non è una soglia fissa: è la fascia con la valutazione più alta tra chi ha raggiunto {champion}, quindi la sua soglia varia in base ai partecipanti, con i pareggi risolti in base alle battaglie giocate. Le soglie esatte di {legend} e {champion} sono quelle della stagione mostrata e sono indicate sulla classifica.",
     "legend-blurb": "I giocatori di rango {champion} con la valutazione più alta. Ogni stagione, il limite viene fissato in base a una specifica posizione in classifica (quindi il numero di giocatori inclusi varia in base alla stagione e alla regione), non a un punteggio prestabilito. Se scendi al di sotto dell’ultima posizione valida per il rango {legend}, torni al rango {champion}.",
     "champion-blurb": "Il rango più alto raggiungibile con i Punti di valutazione e quello che dà accesso alla classifica. Ogni giocatore in classifica è almeno di rango {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Soglia di {champion}",
     "ranked-players": "Giocatori classificati",
     "rating-points": "Punti Classifica",
-    "rank-cutoffs": "Soglie di Rango"
+    "rank-cutoffs": "Soglie di Rango",
+    "previous-line": "stagione precedente"
   }
 }

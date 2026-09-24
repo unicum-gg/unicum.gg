@@ -1,0 +1,28 @@
+{
+  "title": "Gdje ćete završiti?",
+  "fields": {
+    "battles": "Bitke odigrane ove sezone",
+    "battles-hint": "Ono što vam je režim zabilježio od njegovog otvaranja.",
+    "points": "Bodovi rejtinga",
+    "points-hint": "Za {champion} početak je na {entry}, što je ujedno i dno ove ljestvice.",
+    "pace": "Bitke dnevno odavde",
+    "pace-hint": "Koliko planirate igrati dok se sezona ne ustali.",
+    "pace-hint-own": "Tempo koji ste dosad održavali. Promijenite ga ako ćete uskoro igrati više."
+  },
+  "empty": "Unesite koliko ste igrali i gdje se nalazite, pa će se izračunati na kojoj poziciji sezona završava.",
+  "not-enough-season": "Premalo je ove sezone zabilježeno da bi se na to zasad moglo odgovoriti. Podaci se popunjavaju sami kako se rang-lista bilježi.",
+  "figures": {
+    "now": "Upravo sada",
+    "on-the-board": "Pozicija #{rank} od {total} na ljestvici",
+    "off-the-board": "{points} bodova ispod ljestvice",
+    "finish": "Dana {date}",
+    "finish-undated": "Na kraju",
+    "finish-hint": "Oko {points} bodova, nakon još {battles} bitki tokom {days} dana.",
+    "rate": "Bodovi po bitki",
+    "rate-own": "Vaša stopa, na osnovu bitki koje ste odigrali na ljestvici.",
+    "rate-below": "Ono što jedna bitka donosi na ljestvici. Dok se uspinjete do nje, osvajate {own} po bitki, što je brži način igranja.",
+    "rate-board": "Medijan rang-liste oko vašeg rejtinga, dok vaš vlastiti rekord ne bude dovoljan za odgovor.",
+    "rate-yours": "Vaša stopa, kako ste je unijeli."
+  },
+  "note": "Rangovi su vlastita ljestvica igre: četiri ranga sa po pet divizija, razdvojenih sa po stotinu rejting bodova, zatim {champion} na 2 000 i {legend} za sam vrh ljestvice. Samo posljednji nije fiksan broj, pa je pročitano kao prag projektovan do posljednjeg dana i uklopljen u vlastitu krivu sezone. Bitke se broje prema tome koliko su ti vrijedile na ljestvici, radije nego kroz cijelu sezonu, jer uspon do {champion} donosi nekoliko puta veću vrijednost po bitki i bi uljepšao ukupan broj. Pročitaj to kao uslov, a ne prognozu: igraj ovoliko ovom stopom i tu ćeš završiti. Bodovi se također sami smanjuju od Srebra naviše ako prestaneš s igranjem, a to ovdje ne broji ništa."
+}

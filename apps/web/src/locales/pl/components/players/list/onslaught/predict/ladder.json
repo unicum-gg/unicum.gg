@@ -1,0 +1,8 @@
+{
+  "title": "Ranking od tego miejsca",
+  "from": "od {points}",
+  "previous": "· poprzedni sezon zakończył się na {points}",
+  "cost": "{battles} bitew, {perDay} dziennie",
+  "cost-out-of-reach": "{battles} bitew, {perDay} dziennie, więcej niż grają osoby z dowolnego miejsca w rankingu",
+  "on-your-pace": "· w Twoim tempie"
+}

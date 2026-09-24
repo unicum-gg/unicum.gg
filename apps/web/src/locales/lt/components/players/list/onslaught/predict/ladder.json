@@ -1,0 +1,8 @@
+{
+  "title": "Reitingų lentelė nuo čia",
+  "from": "nuo {points}",
+  "previous": "· praėjusį sezoną baigta ties {points}",
+  "cost": "{battles} mūšiai, po {perDay} per dieną",
+  "cost-out-of-reach": "{battles} mūšiai, po {perDay} per dieną, daugiau nei žaidžia bet kuris reitinguojamas žaidėjas",
+  "on-your-pace": "· tavo tempu"
+}

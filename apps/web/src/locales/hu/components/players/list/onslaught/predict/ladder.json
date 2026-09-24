@@ -1,0 +1,8 @@
+{
+  "title": "Innen a ranglista",
+  "from": "Kezdőérték: {points}",
+  "previous": "· az előző szezon vége {points} volt",
+  "cost": "{battles} csata, napi {perDay}",
+  "cost-out-of-reach": "{battles} csata, napi {perDay}, több, mint amennyit bármely rangsorolt játékos játszik",
+  "on-your-pace": "· a tempóddal"
+}

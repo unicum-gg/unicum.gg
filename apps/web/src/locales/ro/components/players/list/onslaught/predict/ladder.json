@@ -1,0 +1,8 @@
+{
+  "title": "Clasamentul de aici înainte",
+  "from": "de la {points}",
+  "previous": "· sezonul trecut s-a încheiat la {points}",
+  "cost": "{battles} bătălii, {perDay} pe zi",
+  "cost-out-of-reach": "{battles} bătălii, {perDay} pe zi, mai mult decât joacă orice jucător clasat",
+  "on-your-pace": "· în ritmul tău"
+}

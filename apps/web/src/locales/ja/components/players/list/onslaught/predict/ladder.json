@@ -1,0 +1,8 @@
+{
+  "title": "ここからのランキング",
+  "from": "{points}から",
+  "previous": "· 前シーズン終了時は{points}ポイント",
+  "cost": "{battles}戦闘、1日あたり{perDay}戦闘",
+  "cost-out-of-reach": "{battles}戦闘、1日あたり{perDay}戦闘。ランクインしているプレイヤーの戦闘数を超えています",
+  "on-your-pace": "· あなたのペースの場合"
+}

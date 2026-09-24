@@ -108,9 +108,14 @@
     "complete": "已完成"
   },
   "onslaught-tiers": {
-    "legend": "传说",
+    "iron": "黑铁",
+    "bronze": "青铜",
+    "silver": "白银",
+    "gold": "黄金",
     "champion": "冠军",
-    "crest": "{mode} {tier}"
+    "legend": "传说",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "重型坦克",

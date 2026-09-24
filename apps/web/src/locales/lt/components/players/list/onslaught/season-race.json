@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Kreivė prasideda, kai sezonas užfiksuojamas daugiau nei vieną kartą. Nuo tada ji pildoma automatiškai."
+  "the-curve-starts-once-the": "Kreivė prasideda, kai sezonas užfiksuojamas daugiau nei vieną kartą. Nuo tada ji pildoma automatiškai.",
+  "previous": {
+    "title": "Praėjęs sezonas",
+    "footer": "{season} nusistovėjo čia, reitinguojamų žaidėjų buvo {ranked}"
+  },
+  "no-captures": "Turime šio sezono galutinę įskaitą, iš kurios gauti šie skaičiai, bet ne kopimą. Sezonas baigėsi anksčiau, nei lentelė buvo pradėta fiksuoti kas kelias minutes."
 }

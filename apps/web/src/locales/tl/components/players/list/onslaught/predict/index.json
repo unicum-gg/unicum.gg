@@ -1,0 +1,28 @@
+{
+  "title": "Saan ka magtatapos?",
+  "fields": {
+    "battles": "Mga labang nilaro ngayong season",
+    "battles-hint": "Ang bilang ng mga laban na binilang para sa iyo mula nang maging bukas ang mode.",
+    "points": "Mga puntos ng rating",
+    "points-hint": "Magsisimula ang {champion} sa {entry}, na siya ring pinakamababang bahagi ng talaan ng ranggo na ito.",
+    "pace": "Mga laban bawat araw mula rito",
+    "pace-hint": "Kung gaano karami ang balak mong laruin hanggang maging matatag ang season.",
+    "pace-hint-own": "Ang bilis na napanatili mo hanggang ngayon. Baguhin ito kung mas marami ka nang lalaruin."
+  },
+  "empty": "Ilagay kung ilang laban ang nilaro mo at kung nasaan ka sa ranggo, at kakalkulahin nito kung saang ranggo matatapos ang season.",
+  "not-enough-season": "Napakakaunti pa ng naitalang bahagi ng season na ito para masagot iyan. Kusang napupunan ito habang kinukuha ang talahanayan ng ranggo.",
+  "figures": {
+    "now": "Sa ngayon",
+    "on-the-board": "#{rank} sa {total} sa talaan ng ranggo",
+    "off-the-board": "{points} mga puntos sa ibaba ng talaan ng ranggo",
+    "finish": "Sa {date}",
+    "finish-undated": "Sa pagtatapos",
+    "finish-hint": "Humigit-kumulang {points} mga puntos, pagkatapos ng {battles} pang mga laban sa loob ng {days} mga araw.",
+    "rate": "Mga puntos bawat labanan",
+    "rate-own": "Iyo, batay sa mga laban na nilaro mo sa talaan ng ranggo.",
+    "rate-below": "Ang halaga ng isang labanan sa talaan ng ranggo. Habang umaakyat dito, nakakakuha ka ng {own} bawat labanan, na siyang mas mabilis na laro.",
+    "rate-board": "Ang panggitnang halaga ng talahanayan ng ranggo sa paligid ng rating mo, hanggang masagot ito ng sarili mong rekord.",
+    "rate-yours": "Iyo, ayon sa inilagay mo."
+  },
+  "note": "Ang mga ranggo ay sariling leaderboard ng laro: apat na ranggo na may tig-lilimang dibisyon na magkakahiwalay ng isang daang puntos ng rating, pagkatapos ay {champion} sa 2 000 at {legend} para sa pinakamataas na bahagi ng talaan ng ranggo. Ang huli lamang ang hindi nakapirming numero, kaya binabasa ito bilang hangganang inaasahang maaabot sa huling araw, na ibinatay sa sariling kurba ng season. Binibilang ang mga laban ayon sa halaga ng mga ito para sa iyo sa talaan ng ranggo, sa halip na sa buong season mo, dahil ang pag-akyat sa {champion} ay nagbabayad nang ilang ulit na mas marami bawat labanan at magpapalaki sa kabuuang bilang. Basahin ito bilang kondisyon at hindi pagtataya: maglaro nang ganito karami sa ganitong antas, at dito ka mapupunta. Kusang nababawasan ang mga puntos mula Silver pataas kung hihinto ka sa paglalaro, na hindi binibilang ng anumang bahagi rito."
+}

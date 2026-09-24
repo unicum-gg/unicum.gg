@@ -108,9 +108,14 @@
     "complete": "Fuldført"
   },
   "onslaught-tiers": {
-    "legend": "Legende",
+    "iron": "Jern",
+    "bronze": "Bronze",
+    "silver": "Sølv",
+    "gold": "Guld",
     "champion": "Mester",
-    "crest": "{mode} {tier}"
+    "legend": "Legende",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Tung",

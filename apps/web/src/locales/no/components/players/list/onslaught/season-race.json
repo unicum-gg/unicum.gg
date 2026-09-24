@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Kurven starter når sesongen er registrert mer enn én gang. Den fylles automatisk ut herfra."
+  "the-curve-starts-once-the": "Kurven starter når sesongen er registrert mer enn én gang. Den fylles automatisk ut herfra.",
+  "previous": {
+    "title": "Forrige sesong",
+    "footer": "{season} satte seg her, med {ranked} rangerte"
+  },
+  "no-captures": "Vi har sesongens endelige rangering, som er grunnlaget for disse tallene, men ikke klatringen: den ble avsluttet før tavlen ble registrert med noen minutters mellomrom."
 }

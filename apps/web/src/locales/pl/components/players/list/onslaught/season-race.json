@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Krzywa pojawi się po zebraniu co najmniej dwóch próbek danych z sezonu. Od tego momentu będzie uzupełniać się automatycznie."
+  "the-curve-starts-once-the": "Krzywa pojawi się po zebraniu co najmniej dwóch próbek danych z sezonu. Od tego momentu będzie uzupełniać się automatycznie.",
+  "previous": {
+    "title": "Poprzedni sezon",
+    "footer": "{season} zakończył się tutaj, a w rankingu było {ranked} graczy"
+  },
+  "no-captures": "Mamy końcową klasyfikację tego sezonu, z której pochodzą te dane, ale nie mamy informacji o awansie, ponieważ sezon zakończył się, zanim tabela zaczęła być rejestrowana co kilka minut."
 }

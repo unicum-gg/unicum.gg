@@ -1,0 +1,8 @@
+{
+  "title": "Stegen härifrån",
+  "from": "från {points}",
+  "previous": "· förra säsongen slutade på {points}",
+  "cost": "{battles} strider, {perDay} om dagen",
+  "cost-out-of-reach": "{battles} strider, {perDay} om dagen, mer än någon rankad spelar",
+  "on-your-pace": "· i ditt tempo"
+}

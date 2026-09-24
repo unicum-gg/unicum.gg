@@ -22,7 +22,7 @@
     "title": "Rangi",
     "meaning": "Znaczenie",
     "tier": "Poziom",
-    "intro": "Kolejne rangi w trybie {mode} zdobywasz, wygrywając bitwy. Każde zwycięstwo zapewnia Punkty rankingowe zależnie od tego, jak dobrze zagrasz. Ranga {champion} jest najwyższą rangą, jaką można osiągnąć wyłącznie za punkty, a jej zdobycie zapewnia miejsce w tabeli rankingowej. Ranga {legend} nie ma stałego progu. Obejmuje część graczy z rangą {champion} o najwyższej klasyfikacji, dlatego jej próg zmienia się zależnie od wyników pozostałych graczy, a remisy rozstrzyga liczba rozegranych bitew. Dokładne progi rang {legend} i {champion} pochodzą z bieżącego sezonu i są zaznaczone w tabeli.",
+    "intro": "W trybie {mode} awansujesz w rangach, wygrywając bitwy. Każde zwycięstwo zapewnia Punkty rankingowe zależne od jakości Twojej gry. {champion} to najwyższa ranga, którą możesz osiągnąć wyłącznie dzięki punktom, a jej zdobycie umieszcza Cię w rankingu. {legend} nie ma stałego progu, ponieważ jest to najlepiej oceniana część graczy z rangą {champion}, więc jej próg zmienia się zależnie od stawki, a remisy rozstrzyga liczba rozegranych bitew. Dokładne progi {legend} i {champion} pochodzą z pokazanego sezonu i są zaznaczone na tabeli.",
     "legend-blurb": "Gracze z rangą {champion} o najwyższej klasyfikacji. W każdym sezonie gra wyznacza limit tej grupy na określonej pozycji w tabeli rankingowej, więc jej wielkość zależy od sezonu i regionu, a nie od stałego progu punktowego. Jeśli spadniesz poniżej ostatniej pozycji należącej do rangi {legend}, wrócisz do rangi {champion}.",
     "champion-blurb": "Najwyższa ranga, jaką można osiągnąć, zdobywając Punkty rankingowe, oraz przepustka do tabeli rankingowej. Każdy gracz uwzględniony w rankingu ma co najmniej rangę {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Cięcie {champion}",
     "ranked-players": "Gracze rankowani",
     "rating-points": "punkty rankingowe",
-    "rank-cutoffs": "Odcięcia stopnia"
+    "rank-cutoffs": "Odcięcia stopnia",
+    "previous-line": "poprzedni sezon"
   }
 }

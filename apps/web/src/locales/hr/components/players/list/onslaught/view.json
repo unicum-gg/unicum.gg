@@ -22,7 +22,7 @@
     "title": "Rangovi",
     "meaning": "Značenje",
     "tier": "Razina",
-    "intro": "Penješ se kroz činove načina {mode} pobjedama u bitkama. Svaka pobjeda dodjeljuje bodove rejtinga na temelju toga koliko si dobro igrao. {champion} je najviši čin koji možeš dosegnuti samo bodovima, a njegovo dosezanje stavlja te na ljestvicu. {legend} nije fiksni prag, već najbolje ocijenjeni dio igrača s činom {champion}, pa se prag mijenja ovisno o konkurenciji, a kod izjednačenja odlučuju odigrane bitke. Točni pragovi za {legend} i {champion} ovise o trenutačnoj sezoni i označeni su na ljestvici.",
+    "intro": "Po rangovima načina {mode} penjete se pobjedama u bitkama. Svaka pobjeda dodjeljuje Bodove rejtinga na temelju toga koliko ste dobro igrali. {champion} je najviši rang koji možete dosegnuti samo bodovima, a njegovim dosezanjem dolazite na ljestvicu. {legend} nije fiksni prag, već najviše rangirani dio igrača {champion}, pa se njegov prag mijenja ovisno o konkurenciji, a izjednačenja se rješavaju prema broju odigranih bitaka. Točni pragovi za {legend} i {champion} oni su prikazani za sezonu, a označeni su na ljestvici.",
     "legend-blurb": "Igrači s činom {champion} i najvišim ocjenama. Igra ograničava broj na određen položaj na ljestvici svake sezone, pa se veličina mijenja prema sezoni i regiji, a ne prema fiksnom broju bodova. Ako padneš ispod posljednjeg igrača s činom {legend}, vraćaš se na {champion}.",
     "champion-blurb": "Najviši čin koji možeš dosegnuti bodovima rejtinga i ulaz na ljestvicu. Svaki rangirani igrač ima barem čin {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Prag za {champion}",
     "ranked-players": "Rangirani igrači",
     "rating-points": "bodovi rejtinga",
-    "rank-cutoffs": "Granice rangova"
+    "rank-cutoffs": "Granice rangova",
+    "previous-line": "prošla sezona"
   }
 }

@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Curba începe după ce sezonul a fost eșantionat de mai multe ori. De aici se completează automat."
+  "the-curve-starts-once-the": "Curba începe după ce sezonul a fost eșantionat de mai multe ori. De aici se completează automat.",
+  "previous": {
+    "title": "Sezonul trecut",
+    "footer": "{season} s-a stabilizat aici, cu {ranked} jucători clasați"
+  },
+  "no-captures": "Avem clasamentele finale ale acestui sezon, de unde provin aceste cifre, dar nu și urcarea. S-a încheiat înainte ca clasamentul să fie înregistrat la fiecare câteva minute."
 }

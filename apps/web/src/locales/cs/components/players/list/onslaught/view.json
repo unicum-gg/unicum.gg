@@ -22,7 +22,7 @@
     "title": "Hodnosti",
     "meaning": "Význam",
     "tier": "Úroveň",
-    "intro": "V režimu {mode} postupujete hodnostmi díky vyhraným bitvám. Každé vítězství vám přidá Body hodnocení podle toho, jak dobře jste hráli. Hodnost {champion} je nejvyšší dosažitelná hodnost, pokud rozhodují pouze Body hodnocení. Jejím dosažením se dostanete do žebříčku. Hodnost {legend} nemá pevně stanovenou hranici. Tvoří ji nejlépe hodnocená část hráčů s hodností {champion}, takže se její hranice mění podle výsledků ostatních hráčů. Při shodě rozhoduje počet odehraných bitev. Přesné hranice hodností {legend} a {champion} vycházejí z aktuální sezóny a jsou vyznačeny v žebříčku.",
+    "intro": "Hodnostmi v režimu {mode} stoupáš vyhráváním bitev. Každé vítězství uděluje Body hodnocení podle toho, jak dobře jsi hrál. {champion} je nejvyšší hodnost, které můžeš dosáhnout pouze na základě bodů, a její dosažení tě zařadí do žebříčku. {legend} nemá pevně stanovenou hranici. Jde o nejvýše hodnocenou část hráčů v hodnosti {champion}, takže se její hranice mění podle konkurence, přičemž při shodě rozhoduje počet odehraných bitev. Přesné hranice pro {legend} a {champion} jsou hranice zobrazené sezóny a jsou vyznačené na žebříčku.",
     "legend-blurb": "Nejlépe hodnocení hráči s hodností {champion}. Hra tuto hodnost v každé sezóně omezuje pevně stanovenou pozicí v žebříčku, takže se její velikost liší podle sezóny a regionu. Nejde o pevně stanovený počet bodů. Pokud klesnete pod posledního hráče s hodností {legend}, vrátíte se na hodnost {champion}.",
     "champion-blurb": "Nejvyšší hodnost, které můžete dosáhnout. Rozhodují o ní pouze Body hodnocení a jejím dosažením se dostanete do žebříčku. Každý hráč v žebříčku má alespoň hodnost {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Cutoff {champion}",
     "ranked-players": "Hráči s hodnocením",
     "rating-points": "body hodnocení",
-    "rank-cutoffs": "Hranice hodností"
+    "rank-cutoffs": "Hranice hodností",
+    "previous-line": "minulá sezóna"
   }
 }

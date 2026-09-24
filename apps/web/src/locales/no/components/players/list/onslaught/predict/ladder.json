@@ -1,0 +1,8 @@
+{
+  "title": "Rangeringen herfra",
+  "from": "fra {points}",
+  "previous": "· forrige sesong avsluttet på {points}",
+  "cost": "{battles} kamper, {perDay} per dag",
+  "cost-out-of-reach": "{battles} kamper, {perDay} per dag, mer enn alle rangerte spiller",
+  "on-your-pace": "· i ditt tempo"
+}

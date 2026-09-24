@@ -1,0 +1,8 @@
+{
+  "title": "从这里开始的天梯",
+  "from": "来自{points}",
+  "previous": "· 上个赛季结束于{points}",
+  "cost": "{battles}场战斗，每天{perDay}场",
+  "cost-out-of-reach": "{battles}场战斗，每天{perDay}场，超过所有已排名玩家的对战数量",
+  "on-your-pace": "· 按你的节奏"
+}

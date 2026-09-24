@@ -22,7 +22,7 @@
     "title": "Ranker",
     "meaning": "Betydelse",
     "tier": "Nivå",
-    "intro": "Du klättrar i rankerna i {mode} genom att vinna strider. Varje seger ger Gradpoäng utifrån hur bra du spelade. {champion} är den högsta graden du kan nå enbart med poäng, och när du når den kommer du med på topplistan. {legend} har ingen fast gräns. Det är gruppen med högst Rankning bland spelare med graden {champion}, så kvalgränsen ändras beroende på startfältet, och vid lika poäng avgör antalet spelade strider. De exakta kvalgränserna för {legend} och {champion} hämtas från den aktuella säsongen och är markerade på topplistan.",
+    "intro": "Du klättrar bland rankerna i läget {mode} genom att vinna strider. Varje seger ger Gradpoäng baserat på hur bra du spelade. {champion} är den högsta placering du kan nå enbart med poäng, och när du når den hamnar du på topplistan. {legend} är inte en fast gräns. Det är det högst rankade skiktet bland spelare på {champion}, så gränsen ändras beroende på fältet, med strider spelade som skiljekriterium. De exakta gränserna för {legend} och {champion} är de som gäller för den visade säsongen och är markerade på topplistan.",
     "legend-blurb": "Spelarna med högst Rankning bland dem som har graden {champion}. Spelet begränsar gruppen till en bestämd placering på topplistan varje säsong, så antalet varierar mellan säsonger och regioner, i stället för ett fast poängkrav. Om du hamnar under den sista spelaren med graden {legend} faller du tillbaka till {champion}.",
     "champion-blurb": "Den högsta graden du kan nå med Gradpoäng och inträdet till topplistan. Varje rankad spelare har minst graden {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Gräns för {champion}",
     "ranked-players": "Rankade spelare",
     "rating-points": "gradpoäng",
-    "rank-cutoffs": "Gradsgränser"
+    "rank-cutoffs": "Gradsgränser",
+    "previous-line": "förra säsongen"
   }
 }

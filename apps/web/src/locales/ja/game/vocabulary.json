@@ -108,9 +108,14 @@
     "complete": "達成済み"
   },
   "onslaught-tiers": {
-    "legend": "レジェンド",
+    "iron": "アイアン",
+    "bronze": "ブロンズ",
+    "silver": "シルバー",
+    "gold": "ゴールド",
     "champion": "チャンプ",
-    "crest": "{mode} {tier}"
+    "legend": "レジェンド",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "重戦車",

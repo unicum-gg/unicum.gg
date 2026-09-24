@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Kriva počinje kada se sezona uzorkuje više od jednom. Od tog trenutka se popunjava automatski."
+  "the-curve-starts-once-the": "Kriva počinje kada se sezona uzorkuje više od jednom. Od tog trenutka se popunjava automatski.",
+  "previous": {
+    "title": "Prošla sezona",
+    "footer": "Sezona {season} završila je ovdje, sa {ranked} rangiranih igrača"
+  },
+  "no-captures": "Imamo konačni poredak ove sezone, iz kojeg potiču ovi podaci, ali ne i uspon: završio je prije nego što se rang-lista počela bilježiti svakih nekoliko minuta."
 }

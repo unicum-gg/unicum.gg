@@ -108,9 +108,14 @@
     "complete": "पूर्ण"
   },
   "onslaught-tiers": {
-    "legend": "दिग्गज",
+    "iron": "आयरन",
+    "bronze": "ब्रॉन्ज",
+    "silver": "सिल्वर",
+    "gold": "गोल्ड",
     "champion": "चैंपियन",
-    "crest": "{mode} {tier}"
+    "legend": "दिग्गज",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "भारी",

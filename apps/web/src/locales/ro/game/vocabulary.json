@@ -108,9 +108,14 @@
     "complete": "Finalizată"
   },
   "onslaught-tiers": {
-    "legend": "Legendă",
+    "iron": "Fier",
+    "bronze": "Bronz",
+    "silver": "Argint",
+    "gold": "Aur",
     "champion": "Campion",
-    "crest": "{mode} {tier}"
+    "legend": "Legendă",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Greu",

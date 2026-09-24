@@ -108,9 +108,14 @@
     "complete": "Įvykdyta"
   },
   "onslaught-tiers": {
-    "legend": "Legenda",
+    "iron": "Geležis",
+    "bronze": "Bronza",
+    "silver": "Sidabras",
+    "gold": "Auksas",
     "champion": "Čempionas",
-    "crest": "{mode} {tier}"
+    "legend": "Legenda",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Sunkusis",

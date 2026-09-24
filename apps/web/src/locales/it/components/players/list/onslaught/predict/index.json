@@ -1,0 +1,28 @@
+{
+  "title": "Dove finirai?",
+  "fields": {
+    "battles": "Battaglie giocate in questa stagione",
+    "battles-hint": "Ciò che la modalità ha conteggiato per te da quando è stata aperta.",
+    "points": "Punti Valutazione",
+    "points-hint": "{champion} inizia da {entry}, che è anche il fondo di questa classifica.",
+    "pace": "Battaglie al giorno da qui in avanti",
+    "pace-hint": "Quanto intendi giocare finché la stagione non si stabilizza.",
+    "pace-hint-own": "Il ritmo che hai mantenuto finora. Modificalo se stai per giocare di più."
+  },
+  "empty": "Inserisci ciò che hai giocato e la tua posizione per calcolare a quale posizione finirà la stagione.",
+  "not-enough-season": "È stata registrata una parte troppo ridotta di questa stagione per poterlo stabilire. Il dato si riempie automaticamente man mano che viene registrata la classifica.",
+  "figures": {
+    "now": "In questo momento",
+    "on-the-board": "#{rank} di {total} in classifica",
+    "off-the-board": "{points} punti sotto la classifica",
+    "finish": "Il {date}",
+    "finish-undated": "Al termine",
+    "finish-hint": "Circa {points} punti, dopo altre {battles} battaglie in {days} giorni.",
+    "rate": "Punti per battaglia",
+    "rate-own": "Il tuo, calcolato sulle battaglie che hai giocato in classifica.",
+    "rate-below": "Quanto frutta una battaglia in classifica. Per raggiungerla, stai guadagnando {own} punti a battaglia, un ritmo di gioco più rapido.",
+    "rate-board": "La mediana della classifica intorno alla tua valutazione, finché il tuo record non potrà fornire il dato.",
+    "rate-yours": "Il tuo, come lo hai inserito."
+  },
+  "note": "Le posizioni seguono la classifica del gioco: quattro gradi composti da cinque divisioni, distanziati di cento punti di valutazione, poi {champion} a 2 000 e {legend} per la fascia superiore della classifica. Solo quest’ultimo non è un numero fisso, quindi viene calcolato come la soglia prevista per l’ultimo giorno, adattata alla curva della stagione. Le battaglie vengono conteggiate in base al loro valore per te in classifica, non sull’intera stagione, perché la scalata fino a {champion} assegna molte volte più punti per battaglia e gonfierebbe il totale. Consideralo una condizione, non una previsione: gioca così tanto a questo tasso e finirai qui. I punti diminuiscono automaticamente da Argento in su se smetti di giocare, ma qui questo non viene conteggiato."
+}

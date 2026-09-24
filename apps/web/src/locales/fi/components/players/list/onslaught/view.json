@@ -22,7 +22,7 @@
     "title": "Arvot",
     "meaning": "Merkitys",
     "tier": "Taso",
-    "intro": "Nouset pelimuodon {mode} sijoituksissa voittamalla taisteluita. Jokainen voitto antaa Luokitus-pisteitä sen perusteella, miten hyvin pelasit. {champion} on korkein rankki, jonka voit saavuttaa pelkillä pisteillä, ja sen saavuttaminen nostaa sinut tulostaulukkoon. {legend} ei ole kiinteä raja, vaan {champion}-pelaajien parhaiten arvioitu joukko, joten raja muuttuu osallistujien mukaan. Tasatilanteet ratkaistaan pelattujen taisteluiden määrällä. Nykyisen kauden tarkat {legend}- ja {champion}-rajat näkyvät tulostaulukossa.",
+    "intro": "Pelimuodossa {mode} nouset sijoituksissa voittamalla taisteluita: jokainen voitto antaa Luokituspisteitä sen perusteella, miten hyvin pelasit. {champion} on korkein sijoitus, jonka voit saavuttaa pelkillä pisteillä, ja sen saavuttaminen vie sinut tulostaulukkoon. {legend} ei ole kiinteä raja, vaan {champion}-sijoituksen parhaimmistoa, joten sen raja muuttuu pelaajajoukon mukaan, tasatilanteet ratkaistaan pelattujen taisteluiden perusteella. Näytetyn kauden tarkat {legend}- ja {champion}-rajat on merkitty tulostaulukkoon.",
     "legend-blurb": "Korkeimman arvosanan saaneet {champion}-pelaajat. Peli rajaa määrän kullakin kaudella tiettyyn tulostaulukon sijoitukseen, joten koko vaihtelee kauden ja alueen mukaan, eikä kyse ole kiinteästä pistemäärästä. Jos putoat viimeisen {legend}-pelaajan alapuolelle, palaat tasolle {champion}.",
     "champion-blurb": "Korkein rankki, jonka voit saavuttaa Luokitus-pisteillä, ja pääsy tulostaulukkoon. Jokainen rankattu pelaaja on vähintään tasolla {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Arvon {champion} raja",
     "ranked-players": "Rankatut pelaajat",
     "rating-points": "luokituspisteet",
-    "rank-cutoffs": "sijoitusluokat"
+    "rank-cutoffs": "sijoitusluokat",
+    "previous-line": "viime kausi"
   }
 }

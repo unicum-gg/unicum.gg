@@ -108,9 +108,14 @@
     "complete": "Izpildīta"
   },
   "onslaught-tiers": {
-    "legend": "Leģenda",
+    "iron": "Dzelzs",
+    "bronze": "Bronza",
+    "silver": "Sudrabs",
+    "gold": "Zelts",
     "champion": "Čempions",
-    "crest": "{mode} {tier}"
+    "legend": "Leģenda",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Smagais",

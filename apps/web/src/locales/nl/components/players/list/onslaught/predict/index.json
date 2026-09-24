@@ -1,0 +1,28 @@
+{
+  "title": "Waar eindig je?",
+  "fields": {
+    "battles": "Gevechten dit seizoen",
+    "battles-hint": "Wat het speltype voor je heeft geteld sinds het openging.",
+    "points": "Beoordelingspunten",
+    "points-hint": "{champion} begint bij {entry}, wat ook de onderkant van dit klassement is.",
+    "pace": "Gevechten per dag vanaf hier",
+    "pace-hint": "Hoeveel je van plan bent te spelen totdat het seizoen tot rust komt.",
+    "pace-hint-own": "Het tempo dat je tot nu toe hebt aangehouden. Verander het als je binnenkort meer gaat spelen."
+  },
+  "empty": "Vul in wat je hebt gespeeld en waar je staat, dan wordt berekend op welke rang het seizoen eindigt.",
+  "not-enough-season": "Er is nog te weinig van dit seizoen geregistreerd om dat nu al te beantwoorden. Dit wordt automatisch ingevuld naarmate het klassement wordt vastgelegd.",
+  "figures": {
+    "now": "Op dit moment",
+    "on-the-board": "#{rank} van {total} in het klassement",
+    "off-the-board": "{points} punten onder het klassement",
+    "finish": "Op {date}",
+    "finish-undated": "Bij de finish",
+    "finish-hint": "Ongeveer {points} punten, na nog {battles} gevechten verspreid over {days} dagen.",
+    "rate": "Punten per gevecht",
+    "rate-own": "Die van jou, over de gevechten die je in het klassement hebt gespeeld.",
+    "rate-below": "Wat een gevecht oplevert in het klassement. Als je ernaartoe stijgt, verdien je {own} per gevecht, wat sneller speelt.",
+    "rate-board": "De mediaan van het klassement rond je beoordeling, totdat je eigen record hierop antwoord kan geven.",
+    "rate-yours": "Die van jou, zoals je hem hebt ingevuld."
+  },
+  "note": "De rangen zijn de eigen ranglijst van het spel: vier rangen met elk vijf divisies, honderd beoordelingspunten uit elkaar, daarna {champion} bij 2.000 en {legend} voor het hoogste deel van het klassement. Alleen die laatste heeft geen vast aantal, dus die wordt gelezen als de grens die voor de laatste dag wordt geprojecteerd, berekend op basis van de eigen curve van het seizoen. Gevechten worden geteld op basis van wat ze je in het klassement waard zijn geweest, niet over je hele seizoen, omdat de stijging naar {champion} meerdere keren meer per gevecht oplevert en het totaal daardoor gunstiger lijkt. Lees het als een voorwaarde en niet als een voorspelling: speel zoveel met dit tempo, en hier kom je uit. Punten lopen vanaf Zilver ook vanzelf terug als je stopt met spelen, en dat wordt hier nergens meegeteld."
+}

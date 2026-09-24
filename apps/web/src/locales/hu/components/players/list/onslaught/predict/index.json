@@ -1,0 +1,28 @@
+{
+  "title": "Hol végzel?",
+  "fields": {
+    "battles": "Ebben a szezonban játszott csaták",
+    "battles-hint": "Amit a játékmód a megnyitása óta számolt neked.",
+    "points": "Értékelési pontok",
+    "points-hint": "{champion} {entry} értékről kezdődik, ami egyben a ranglista legalja is.",
+    "pace": "Innen napi csaták",
+    "pace-hint": "Ennyit tervezel játszani addig, amíg a szezon beáll.",
+    "pace-hint-own": "Az eddig tartott tempód. Változtass rajta, ha mostantól többet készülsz játszani."
+  },
+  "empty": "Add meg, mennyit játszottál és hol állsz, ez pedig kiszámolja, melyik helyezésen zárul számodra a szezon.",
+  "not-enough-season": "A szezonból még túl kevés adatot rögzítettünk ahhoz, hogy erre választ adjunk. Magától kitöltődik, ahogy a ranglista adatai beérkeznek.",
+  "figures": {
+    "now": "Jelenleg",
+    "on-the-board": "#{rank} / {total} a ranglistán",
+    "off-the-board": "{points} ponttal a ranglista alatt",
+    "finish": "Ekkor: {date}",
+    "finish-undated": "A szezon végén",
+    "finish-hint": "Körülbelül {points} pont, még {battles} csata alatt, {days} nap alatt.",
+    "rate": "Pont csatánként",
+    "rate-own": "A sajátod, a ranglistán játszott csatáid alapján.",
+    "rate-below": "Ennyit ér egy csata a ranglistán. Ahogy feljutsz hozzá, csatánként {own} pontot szerzel, ami gyorsabb játékot jelent.",
+    "rate-board": "A ranglista mediánja az értékelésed körül, amíg a saját rekordod alapján nem lehet válaszolni.",
+    "rate-yours": "A sajátod, az általad megadott érték szerint."
+  },
+  "note": "A rangok a játék saját ranglétráját jelentik: négy, egyenként öt divízióból álló rang, amelyek között 100 értékelési pont a különbség, majd {champion} 2 000 pontnál és {legend} a ranglista felső szeletében. Csak az utóbbi nem rögzített szám, ezért a szezon saját görbéjére illesztett, az utolsó napra kivetített küszöbértékként olvasható. A csaták darabszáma azt veszi alapul, hogy mennyit értek neked a ranglistán, nem az egész szezonod során elért eredményt, mivel a {champion} rangig tartó feljutás csatánként többször annyit fizetne, és hízelgőbbé tenné az összesítést. Feltételként, nem előrejelzésként olvasd: ennyit játszol ilyen értékeléssel, és ide jutsz. A pontok Ezüsttől felfelé maguktól is csökkennek, ha abbahagyod a játékot, ezt itt semmi sem számolja."
+}

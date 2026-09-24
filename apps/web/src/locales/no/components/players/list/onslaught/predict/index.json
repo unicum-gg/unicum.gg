@@ -1,0 +1,28 @@
+{
+  "title": "Hvor ender du?",
+  "fields": {
+    "battles": "Kamper spilt denne sesongen",
+    "battles-hint": "Det modusen har telt for deg siden den åpnet.",
+    "points": "Rangeringspoeng",
+    "points-hint": "{champion} starter på {entry}, som også er bunnen av denne rangeringen.",
+    "pace": "Kamper per dag herfra",
+    "pace-hint": "Hvor mye du har tenkt å spille til sesongen har satt seg.",
+    "pace-hint-own": "Tempoet du har holdt så langt. Endre det hvis du snart skal spille mer."
+  },
+  "empty": "Fyll inn hva du har spilt og hvor du står, så regner denne ut hvilken plassering sesongen ender på.",
+  "not-enough-season": "For lite av denne sesongen er registrert til å svare på det ennå. Den fyller seg ut av seg selv etter hvert som tavlen blir registrert.",
+  "figures": {
+    "now": "Akkurat nå",
+    "on-the-board": "#{rank} av {total} på rangeringen",
+    "off-the-board": "{points} poeng under rangeringen",
+    "finish": "Den {date}",
+    "finish-undated": "Ved avslutningen",
+    "finish-hint": "Omtrent {points} poeng etter {battles} flere kamper fordelt på {days} dager.",
+    "rate": "Poeng per kamp",
+    "rate-own": "Din, basert på kampene du har spilt på rangeringen.",
+    "rate-below": "Det en kamp gir på rangeringen. Når du klatrer dit, får du {own} per kamp, som er den raskere veien.",
+    "rate-board": "Medianen på tavlen rundt vurderingen din, til din egen rekord kan svare på det.",
+    "rate-yours": "Din, slik du skrev den inn."
+  },
+  "note": "Plasseringene er spillets egen rangering: fire rangeringer med fem divisjoner, hundre rangeringspoeng fra hverandre, deretter {champion} på 2 000 og {legend} for den øverste delen av rangeringen. Bare den siste har ikke et fast nummer, så den leses som grensen som er beregnet for den siste dagen, tilpasset sesongens egen kurve. Kamper telles ut fra hva de har vært verdt for deg på rangeringen, heller enn over hele sesongen din, siden klatringen til {champion} gir flere ganger mer per kamp og ville gjort totalen bedre enn den er. Les dette som en betingelse, ikke en prognose: Spill så mye i dette tempoet, og det er her du ender. Poeng tappes også av seg selv fra Silver og oppover hvis du slutter å spille, noe ingenting her teller med."
+}

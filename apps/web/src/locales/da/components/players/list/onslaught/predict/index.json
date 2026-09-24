@@ -1,0 +1,28 @@
+{
+  "title": "Hvor ender du?",
+  "fields": {
+    "battles": "Kampe spillet i denne sæson",
+    "battles-hint": "Det, spiltilstanden har talt med for dig, siden den åbnede.",
+    "points": "Rangeringspoint",
+    "points-hint": "{champion} starter ved {entry}, som også er bunden af denne rangliste.",
+    "pace": "Kampe om dagen herfra",
+    "pace-hint": "Hvor meget du har til hensigt at spille, indtil sæsonen har lagt sig.",
+    "pace-hint-own": "Det tempo, du hidtil har holdt. Ændr det, hvis du skal til at spille mere."
+  },
+  "empty": "Udfyld, hvad du har spillet, og hvor du ligger, så beregner dette, hvilken placering sæsonen ender på.",
+  "not-enough-season": "Der er endnu registreret for lidt af denne sæson til at svare på det. Det udfyldes automatisk, efterhånden som ranglisten bliver registreret.",
+  "figures": {
+    "now": "Lige nu",
+    "on-the-board": "{rank} af {total} på ranglisten",
+    "off-the-board": "{points} point under ranglisten",
+    "finish": "Den {date}",
+    "finish-undated": "Ved afslutningen",
+    "finish-hint": "Omkring {points} point efter {battles} flere kampe over {days} dage.",
+    "rate": "Point pr. kamp",
+    "rate-own": "Din egen bedømmelse baseret på de kampe, du har spillet på ranglisten.",
+    "rate-below": "Det, en kamp giver på ranglisten. Når du klatrer derop, får du {own} pr. kamp, hvilket er den hurtigere vej.",
+    "rate-board": "Ranglistens median omkring din vurdering, indtil din egen rekord kan svare på det.",
+    "rate-yours": "Din egen, som du indtastede den."
+  },
+  "note": "Rangeringerne er spillets egen rangliste: fire rangeringer med fem divisioner, der ligger 100 vurderingspoint fra hinanden, derefter {champion} ved 2.000 og {legend} for den øverste del af ranglisten. Kun den sidste er ikke et fast nummer, så den læses som den grænse, der forventes på den sidste dag, tilpasset sæsonens egen kurve. Kampe tælles efter, hvad én kamp har været værd for dig på ranglisten, snarere end over hele din sæson, eftersom stigningen til {champion} giver flere gange så mange point pr. kamp og ville få totalen til at se bedre ud. Læs det som en betingelse og ikke en prognose: spil så meget med dette tempo, og her ender du. Point drænes også automatisk fra Sølv og opefter, hvis du holder op med at spille, hvilket ingenting her tæller med."
+}

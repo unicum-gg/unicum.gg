@@ -22,7 +22,7 @@
     "title": "Rangai",
     "meaning": "Reikšmė",
     "tier": "lygis",
-    "intro": "Laimėdami mūšius kylate režimo {mode} reitingais: už kiekvieną pergalę skiriami reitingo taškai pagal tai, kaip gerai žaidėte. {champion} yra aukščiausias reitingas, kurį galima pasiekti vien taškais, o jį pasiekus patenkama į lyderių lentelę. {legend} nėra fiksuota riba: tai aukščiausiai įvertinta {champion} dalis, todėl riba kinta priklausomai nuo dalyvių (lygiosios sprendžiamos pagal sužaistus mūšius). Tikslios {legend} ir {champion} ribos nustatomos dabartiniame sezone ir pažymimos lentelėje.",
+    "intro": "Laimėdamas mūšius kopsi per {mode} rangus. Už kiekvieną pergalę skiriami Reitingo taškai pagal tai, kaip gerai žaidei. {champion} yra aukščiausias rangas, kurį gali pasiekti vien taškais, o jį pasiekęs patenki į lyderių lentelę. {legend} nėra nekintama riba. Tai aukščiausiai įvertinta {champion} dalis, todėl jos riba keičiasi priklausomai nuo dalyvių, o lygiąsias lemia žaistų mūšių skaičius. Tikslios šio sezono {legend} ir {champion} ribos nurodytos lentelėje.",
     "legend-blurb": "Aukščiausiai įvertinti {champion}. Žaidimas kiekvieną sezoną apriboja jų skaičių nustatyta vieta lyderių lentelėje, todėl jis skiriasi pagal sezoną ir regioną, o ne pagal fiksuotą taškų ribą. Nukritę žemiau paskutinio {legend}, grįžtate į {champion}.",
     "champion-blurb": "Aukščiausias reitingas, kurį galima pasiekti reitingo taškais, ir patekimas į lyderių lentelę. Kiekvienas reitinguojamas žaidėjas yra bent {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "{champion} riba",
     "ranked-players": "Reitinguoti žaidėjai",
     "rating-points": "reitingo taškai",
-    "rank-cutoffs": "Rango nurodymai"
+    "rank-cutoffs": "Rango nurodymai",
+    "previous-line": "praėjęs sezonas"
   }
 }

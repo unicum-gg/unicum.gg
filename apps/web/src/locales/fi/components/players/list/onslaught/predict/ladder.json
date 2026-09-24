@@ -1,0 +1,8 @@
+{
+  "title": "Tulostaulukko tästä eteenpäin",
+  "from": "Alkaen {points}",
+  "previous": "· viime kausi päättyi arvoon {points}",
+  "cost": "{battles} taistelua, {perDay} päivässä",
+  "cost-out-of-reach": "{battles} taistelua, {perDay} päivässä, enemmän kuin kukaan rankattu pelaa",
+  "on-your-pace": "· omalla tahdillasi"
+}

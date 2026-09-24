@@ -1,0 +1,8 @@
+{
+  "title": "Die Rangliste ab hier",
+  "from": "ab {points}",
+  "previous": "· letzte Saison beendet bei {points}",
+  "cost": "{battles} Gefechte, {perDay} pro Tag",
+  "cost-out-of-reach": "{battles} Gefechte, {perDay} pro Tag, mehr als jeder Gewertete spielt",
+  "on-your-pace": "· bei deinem Tempo"
+}

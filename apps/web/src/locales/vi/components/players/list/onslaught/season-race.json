@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Đường cong bắt đầu sau khi mùa được lấy mẫu hơn một lần. Từ đó, dữ liệu sẽ tự lấp đầy."
+  "the-curve-starts-once-the": "Đường cong bắt đầu sau khi mùa được lấy mẫu hơn một lần. Từ đó, dữ liệu sẽ tự lấp đầy.",
+  "previous": {
+    "title": "Mùa trước",
+    "footer": "{season} ổn định ở đây, với {ranked} người chơi xếp hạng"
+  },
+  "no-captures": "Chúng tôi có bảng xếp hạng cuối cùng của mùa này, là cơ sở cho những số liệu trên, nhưng không có quá trình leo hạng. Mùa đã kết thúc trước khi bảng xếp hạng được ghi nhận vài phút một lần."
 }

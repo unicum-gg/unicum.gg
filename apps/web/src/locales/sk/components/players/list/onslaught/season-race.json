@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Krivka sa začne zobrazovať, keď sa údaje sezóny zaznamenajú viac než raz. Od tejto chvíle sa bude dopĺňať automaticky."
+  "the-curve-starts-once-the": "Krivka sa začne zobrazovať, keď sa údaje sezóny zaznamenajú viac než raz. Od tejto chvíle sa bude dopĺňať automaticky.",
+  "previous": {
+    "title": "Minulá sezóna",
+    "footer": "{season} sa skončila tu, pričom {ranked} bolo hodnotených"
+  },
+  "no-captures": "Máme konečné poradie tejto sezóny, z ktorého tieto údaje vychádzajú, ale nie jej stúpanie: skončila sa skôr, než sa lestvica začala zaznamenávať každých pár minút."
 }

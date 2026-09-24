@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "A curva começa a ser traçada após a segunda recolha de dados da temporada. A partir daí, é preenchida automaticamente."
+  "the-curve-starts-once-the": "A curva começa a ser traçada após a segunda recolha de dados da temporada. A partir daí, é preenchida automaticamente.",
+  "previous": {
+    "title": "Temporada passada",
+    "footer": "A temporada {season} terminou aqui, com {ranked} jogadores classificatórios"
+  },
+  "no-captures": "Temos a classificação final desta temporada, de onde vêm estes números, mas não a subida. Ela terminou antes que a classificação passasse a ser registrada a cada poucos minutos."
 }

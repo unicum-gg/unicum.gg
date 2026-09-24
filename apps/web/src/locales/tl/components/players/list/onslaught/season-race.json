@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Nagsisimula ang curve kapag mahigit isang beses nang nasample ang season. Awtomatiko itong napupunan mula rito."
+  "the-curve-starts-once-the": "Nagsisimula ang curve kapag mahigit isang beses nang nasample ang season. Awtomatiko itong napupunan mula rito.",
+  "previous": {
+    "title": "Nakaraang season",
+    "footer": "Dito nagtapos ang {season}, na may {ranked} ranked"
+  },
+  "no-captures": "Taglay namin ang huling ranggo ng season na ito, na pinagmulan ng mga bilang na ito, pero wala kaming tala ng pag-akyat. Nagtapos ito bago regular na naitatala ang talahanayan ng ranggo bawat ilang minuto."
 }

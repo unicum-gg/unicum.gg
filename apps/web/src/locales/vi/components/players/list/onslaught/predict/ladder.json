@@ -1,0 +1,8 @@
+{
+  "title": "Bảng xếp hạng từ đây",
+  "from": "từ {points}",
+  "previous": "· mùa trước kết thúc ở {points}",
+  "cost": "{battles} trận đấu, {perDay} trận mỗi ngày",
+  "cost-out-of-reach": "{battles} trận đấu, {perDay} trận mỗi ngày, nhiều hơn số trận mà bất kỳ người chơi xếp hạng nào đã chơi",
+  "on-your-pace": "· theo tốc độ của bạn"
+}

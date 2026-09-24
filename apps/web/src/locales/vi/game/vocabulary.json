@@ -108,9 +108,14 @@
     "complete": "Đã hoàn tất"
   },
   "onslaught-tiers": {
-    "legend": "Legend",
+    "iron": "Iron",
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold",
     "champion": "Vô địch",
-    "crest": "{mode} {tier}"
+    "legend": "Legend",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Hạng nặng",

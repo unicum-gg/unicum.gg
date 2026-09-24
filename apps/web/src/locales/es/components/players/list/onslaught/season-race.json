@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "La curva comienza cuando la temporada se ha muestreado más de una vez. A partir de ahí, se completa automáticamente."
+  "the-curve-starts-once-the": "La curva comienza cuando la temporada se ha muestreado más de una vez. A partir de ahí, se completa automáticamente.",
+  "previous": {
+    "title": "Temporada pasada",
+    "footer": "{season} terminó aquí, con {ranked} jugadores clasificados"
+  },
+  "no-captures": "Conservamos la clasificación final de esta temporada, de la que proceden estas cifras, pero no el ascenso: terminó antes de que la clasificación se registrara cada pocos minutos."
 }

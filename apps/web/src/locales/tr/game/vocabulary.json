@@ -108,9 +108,14 @@
     "complete": "Tamamlandı"
   },
   "onslaught-tiers": {
-    "legend": "Efsane",
+    "iron": "Demir",
+    "bronze": "Bronz",
+    "silver": "Gümüş",
+    "gold": "Altın",
     "champion": "Şampiyon",
-    "crest": "{mode} {tier}"
+    "legend": "Efsane",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Ağır",

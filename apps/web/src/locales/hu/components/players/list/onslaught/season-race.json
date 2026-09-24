@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "A görbe akkor indul, amikor a szezont egynél többször mintavételeztük. Innentől automatikusan kitöltődik."
+  "the-curve-starts-once-the": "A görbe akkor indul, amikor a szezont egynél többször mintavételeztük. Innentől automatikusan kitöltődik.",
+  "previous": {
+    "title": "Előző szezon",
+    "footer": "A {season} itt zárult, {ranked} rangsorolt játékossal"
+  },
+  "no-captures": "Őrizzük a szezon végső ranglistáját, amelyből ezek az adatok származnak, de a feljutást nem, mert a szezon még azelőtt véget ért, hogy a ranglista rögzítése néhány percenként megkezdődött volna."
 }

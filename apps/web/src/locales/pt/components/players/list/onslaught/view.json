@@ -22,7 +22,7 @@
     "title": "Patentes",
     "meaning": "Significado",
     "tier": "Nível",
-    "intro": "Avanças nos escalões do modo {mode} ao vencer batalhas: cada vitória concede Pontos de Classificação consoante o teu desempenho. O escalão {champion} é o mais alto que podes alcançar apenas com pontos, e alcançá-lo coloca-te na tabela de classificação. O escalão {legend} não tem um limite fixo: reúne os jogadores de {champion} com a classificação mais alta, pelo que o limite varia consoante os participantes (em caso de empate, conta o número de batalhas disputadas). Os limites exatos de {legend} e {champion} são determinados pela temporada atual e estão assinalados na tabela.",
+    "intro": "Você sobe pelas patentes do {mode} ao vencer batalhas. Cada vitória concede Pontos de Posto com base no seu desempenho. {champion} é a patente mais alta que você pode alcançar apenas com pontos, e alcançá-la coloca você na classificação. {legend} não tem um limite fixo. É a faixa superior de {champion}, então seu limite muda conforme os jogadores, com os empates decididos pelo número de batalhas jogadas. Os limites exatos de {legend} e {champion} são os da temporada exibida e estão marcados na classificação.",
     "legend-blurb": "Os jogadores de {champion} com a classificação mais alta. Em cada temporada, o jogo fixa o limite numa determinada posição da tabela de classificação (por isso, o número de jogadores varia consoante a temporada e a região), e não num valor fixo de pontos. Se caíres abaixo da última posição de {legend}, regressas ao escalão {champion}.",
     "champion-blurb": "O escalão mais alto que podes alcançar com Pontos de Classificação e a porta de entrada para a tabela de classificação. Todos os jogadores classificados estão, pelo menos, no escalão {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Limite de {champion}",
     "ranked-players": "jogadores ranqueados",
     "rating-points": "pontos de classificação",
-    "rank-cutoffs": "Cortes de Posto"
+    "rank-cutoffs": "Cortes de Posto",
+    "previous-line": "temporada passada"
   }
 }

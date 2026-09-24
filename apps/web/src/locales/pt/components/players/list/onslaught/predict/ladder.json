@@ -1,0 +1,8 @@
+{
+  "title": "A classificação a partir de agora",
+  "from": "a partir de {points}",
+  "previous": "· a temporada passada terminou em {points}",
+  "cost": "{battles} batalhas, {perDay} por dia",
+  "cost-out-of-reach": "{battles} batalhas, {perDay} por dia, mais do que qualquer jogador classificatório joga",
+  "on-your-pace": "· no seu ritmo"
+}

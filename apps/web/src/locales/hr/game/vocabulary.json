@@ -108,9 +108,14 @@
     "complete": "Izvršeno"
   },
   "onslaught-tiers": {
-    "legend": "Legenda",
+    "iron": "Željezo",
+    "bronze": "Bronca",
+    "silver": "Srebro",
+    "gold": "Zlato",
     "champion": "Prvak",
-    "crest": "{mode} {tier}"
+    "legend": "Legenda",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Teški",

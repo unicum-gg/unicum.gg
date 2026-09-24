@@ -108,9 +108,14 @@
     "complete": "완료"
   },
   "onslaught-tiers": {
-    "legend": "레전드",
+    "iron": "아이언",
+    "bronze": "브론즈",
+    "silver": "실버",
+    "gold": "골드",
     "champion": "챔피언",
-    "crest": "{mode} {tier}"
+    "legend": "레전드",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "중전차",

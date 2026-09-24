@@ -1,0 +1,28 @@
+{
+  "title": "Où allez-vous finir ?",
+  "fields": {
+    "battles": "Batailles jouées cette saison",
+    "battles-hint": "Ce que le mode a compté pour vous depuis son ouverture.",
+    "points": "Points de notation",
+    "points-hint": "Le rang {champion} commence à {entry}, qui est également le bas de ce classement.",
+    "pace": "Batailles par jour à partir de maintenant",
+    "pace-hint": "Le nombre de parties que vous comptez jouer jusqu’à la stabilisation de la saison.",
+    "pace-hint-own": "Le rythme que vous avez maintenu jusqu’à présent. Modifiez-le si vous êtes sur le point de jouer davantage."
+  },
+  "empty": "Indiquez ce que vous avez joué et votre situation actuelle pour calculer le rang auquel la saison se terminera.",
+  "not-enough-season": "Trop peu de données de cette saison ont été enregistrées pour répondre pour l’instant. Les informations se complètent automatiquement au fur et à mesure que le classement est enregistré.",
+  "figures": {
+    "now": "À l’heure actuelle",
+    "on-the-board": "#{rank} sur {total} dans le classement",
+    "off-the-board": "{points} points sous le classement",
+    "finish": "Le {date}",
+    "finish-undated": "À la fin",
+    "finish-hint": "Environ {points} points après {battles} batailles supplémentaires sur {days} jours.",
+    "rate": "Points par bataille",
+    "rate-own": "Le vôtre, sur les batailles que vous avez jouées dans le classement.",
+    "rate-below": "Ce que rapporte une bataille dans le classement. Pour l’atteindre, vous gagnez {own} par bataille, ce qui permet une ascension plus rapide.",
+    "rate-board": "La médiane du classement autour de votre notation, jusqu’à ce que votre propre record permette de répondre.",
+    "rate-yours": "Le vôtre, tel que vous l’avez saisi."
+  },
+  "note": "Les rangs correspondent au classement du jeu, avec quatre rangs de cinq divisions séparées par cent points de notation, puis le rang {champion} à 2 000 points et le rang {legend} pour la partie supérieure du classement. Seul ce dernier n’a pas de valeur fixe. Il est donc calculé comme le seuil projeté pour le dernier jour, ajusté sur la courbe propre à la saison. Les batailles sont comptées selon leur valeur pour vous dans le classement plutôt que sur l’ensemble de la saison, car l’ascension jusqu’au rang {champion} rapporte plusieurs fois plus par bataille et gonflerait le total. Considérez cela comme une condition et non comme une prévision. Jouez autant de parties à ce rythme et vous atteindrez ce rang. Les points diminuent également automatiquement à partir d’Argent si vous cessez de jouer, ce qui n’est pas pris en compte ici."
+}

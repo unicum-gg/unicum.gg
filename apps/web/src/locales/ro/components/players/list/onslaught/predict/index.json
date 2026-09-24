@@ -1,0 +1,28 @@
+{
+  "title": "Unde vei termina?",
+  "fields": {
+    "battles": "Bătălii jucate în acest sezon",
+    "battles-hint": "Ce a numărat modul pentru tine de când a fost deschis.",
+    "points": "Puncte de rating",
+    "points-hint": "{champion} începe de la {entry}, care este și partea de jos a acestui clasament.",
+    "pace": "Bătălii pe zi de acum înainte",
+    "pace-hint": "Cât intenționezi să joci până la stabilizarea sezonului.",
+    "pace-hint-own": "Ritmul pe care l-ai menținut până acum. Schimbă-l dacă urmează să joci mai mult."
+  },
+  "empty": "Completează cât ai jucat și unde te afli, iar acest instrument va calcula poziția la care se va încheia sezonul.",
+  "not-enough-season": "A fost înregistrat prea puțin din acest sezon pentru a răspunde încă. Se completează automat pe măsură ce clasamentul este capturat.",
+  "figures": {
+    "now": "În acest moment",
+    "on-the-board": "#{rank} din {total} în clasament",
+    "off-the-board": "Cu {points} puncte sub clasament",
+    "finish": "La {date}",
+    "finish-undated": "La final",
+    "finish-hint": "Aproximativ {points} puncte, după încă {battles} bătălii în {days} zile.",
+    "rate": "Puncte pe bătălie",
+    "rate-own": "Al tău, calculat pe baza bătăliilor jucate de tine în clasament.",
+    "rate-below": "Cât valorează o bătălie în clasament. În timp ce urci până acolo, câștigi {own} pe bătălie, ceea ce înseamnă un joc mai rapid.",
+    "rate-board": "Mediana clasamentului în jurul ratingului tău, până când propriul tău record poate oferi un răspuns.",
+    "rate-yours": "Al tău, așa cum l-ai introdus."
+  },
+  "note": "Pozițiile sunt cele ale clasamentului propriu al jocului: patru ranguri cu câte cinci divizii, la o distanță de o sută de puncte de rating, apoi {champion} la 2 000 și {legend} pentru partea superioară a clasamentului. Doar ultimul nu este un număr fix, așa că este interpretat ca pragul proiectat pentru ultima zi, calculat pe curba proprie a sezonului. Bătăliile sunt numărate în funcție de cât au valorat pentru tine în clasament, nu pe întregul sezon, deoarece urcarea până la {champion} oferă de câteva ori mai multe puncte pe bătălie și ar umfla totalul. Interpretează acest rezultat ca pe o condiție, nu ca pe o prognoză: joacă atât la acest ritm, iar aici vei ajunge. Punctele scad automat de la Argint în sus dacă nu mai joci, iar acest lucru nu este luat în calcul aici."
+}

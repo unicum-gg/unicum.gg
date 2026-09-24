@@ -22,7 +22,7 @@
     "title": "Ranguri",
     "meaning": "Semnificație",
     "tier": "nivel",
-    "intro": "Urcați în rangurile {mode} câștigând bătălii. Fiecare victorie oferă puncte de rating în funcție de cât de bine ați jucat. {champion} este cel mai înalt rang pe care îl puteți atinge doar prin puncte, iar atingerea lui vă introduce în clasament. {legend} nu are un prag fix, ci reprezintă grupul de {champion} cu cel mai mare rating, astfel încât limita se schimbă în funcție de concurență, cu egalitățile departajate prin numărul de bătălii jucate. Limitele exacte pentru {legend} și {champion} provin din sezonul curent și sunt marcate pe clasament.",
+    "intro": "Urcă în rangurile pentru {mode} câștigând bătălii. Fiecare victorie acordă Puncte de clasament în funcție de cât de bine ai jucat. {champion} este cel mai înalt rang pe care îl poți atinge doar pe baza punctelor, iar atingerea lui te plasează în clasament. {legend} nu este un prag fix, ci grupul de vârf al jucătorilor din rangul {champion}, astfel că pragul se schimbă în funcție de concurență, cu egalitățile departajate după numărul de bătălii jucate. Pragurile exacte pentru {legend} și {champion} sunt cele ale sezonului afișat și sunt marcate în clasament.",
     "legend-blurb": "Cei mai bine evaluați jucători {champion}. Jocul limitează acest rang la o poziție stabilită în clasament pentru fiecare sezon, astfel încât dimensiunea lui variază după sezon și regiune, nu după un prag fix de puncte. Dacă coborâți sub ultimul {legend}, reveniți la {champion}.",
     "champion-blurb": "Cel mai înalt rang la care puteți urca prin puncte de rating și intrarea în clasament. Fiecare jucător clasat este cel puțin {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Prag pentru {champion}",
     "ranked-players": "jucători clasati",
     "rating-points": "punctele de clasament",
-    "rank-cutoffs": "Limitele de grad"
+    "rank-cutoffs": "Limitele de grad",
+    "previous-line": "sezonul trecut"
   }
 }

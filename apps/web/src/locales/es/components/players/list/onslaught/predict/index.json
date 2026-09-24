@@ -1,0 +1,28 @@
+{
+  "title": "¿Dónde terminarás?",
+  "fields": {
+    "battles": "Batallas jugadas esta temporada",
+    "battles-hint": "Lo que el modo ha contado para ti desde que se abrió.",
+    "points": "Puntos de valoración",
+    "points-hint": "{champion} comienza en {entry}, que también es el último puesto de esta clasificación.",
+    "pace": "Batallas al día a partir de ahora",
+    "pace-hint": "Cuánto piensas jugar hasta que la temporada se estabilice.",
+    "pace-hint-own": "El ritmo que has mantenido hasta ahora. Cámbialo si estás a punto de jugar más."
+  },
+  "empty": "Indica cuánto has jugado y cuál es tu situación, y calcularemos en qué puesto terminará la temporada.",
+  "not-enough-season": "Todavía se ha registrado muy poco de esta temporada para responder. Se completará automáticamente a medida que se capture la clasificación.",
+  "figures": {
+    "now": "Ahora mismo",
+    "on-the-board": "Puesto #{rank} de {total} en la clasificación",
+    "off-the-board": "{points} puntos por debajo de la clasificación",
+    "finish": "Para {date}",
+    "finish-undated": "Al terminar",
+    "finish-hint": "Aproximadamente {points} puntos, después de {battles} batallas más durante {days} días.",
+    "rate": "Puntos por batalla",
+    "rate-own": "Tu tasa, según las batallas que has jugado en la clasificación.",
+    "rate-below": "Lo que da una batalla en la clasificación. Al ascender hasta allí, ganas {own} por batalla, lo que permite avanzar más rápido.",
+    "rate-board": "La mediana de la clasificación alrededor de tu valoración, hasta que tu propio récord pueda responder.",
+    "rate-yours": "Tu tasa, tal como la has escrito."
+  },
+  "note": "Los rangos son la propia clasificación del juego: cuatro rangos de cinco divisiones separados por cien puntos de valoración, después {champion} en 2 000 y {legend} para la franja superior de la clasificación. Solo este último no es un número fijo, por lo que se interpreta como la marca proyectada para el último día, ajustada a la curva de la propia temporada. Las batallas se cuentan según lo que cada una te ha proporcionado en la clasificación, y no durante toda la temporada, ya que el ascenso hasta {champion} da varias veces más por batalla y elevaría artificialmente el total. Léelo como una condición y no como un pronóstico: juega tanto a este ritmo y acabarás aquí. Los puntos también disminuyen automáticamente desde Plata si dejas de jugar, algo que aquí no se cuenta."
+}

@@ -1,0 +1,8 @@
+{
+  "title": "De ranglijst vanaf hier",
+  "from": "vanaf {points}",
+  "previous": "· vorig seizoen eindigde bij {points}",
+  "cost": "{battles} gevechten, {perDay} per dag",
+  "cost-out-of-reach": "{battles} gevechten, {perDay} per dag, meer dan iedereen die gerangschikt speelt",
+  "on-your-pace": "· in jouw tempo"
+}

@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "De curve begint zodra het seizoen meer dan eens is gemeten. Vanaf dat moment wordt deze vanzelf aangevuld."
+  "the-curve-starts-once-the": "De curve begint zodra het seizoen meer dan eens is gemeten. Vanaf dat moment wordt deze vanzelf aangevuld.",
+  "previous": {
+    "title": "Vorig seizoen",
+    "footer": "{season} eindigde hier, met {ranked} gerangschikte spelers"
+  },
+  "no-captures": "We bewaren het uiteindelijke klassement van dit seizoen, waar deze cijfers vandaan komen, maar niet de stijging. Het eindigde voordat het klassement elke paar minuten werd geregistreerd."
 }

@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Křivka se začne vykreslovat, jakmile budou údaje o sezóně zaznamenány více než jednou. Od té chvíle se doplňuje automaticky."
+  "the-curve-starts-once-the": "Křivka se začne vykreslovat, jakmile budou údaje o sezóně zaznamenány více než jednou. Od té chvíle se doplňuje automaticky.",
+  "previous": {
+    "title": "Minulá sezóna",
+    "footer": "Sezóna {season} skončila zde, s {ranked} hodnocenými hráči"
+  },
+  "no-captures": "Máme konečné pořadí této sezóny, ze kterého tyto údaje vycházejí, ale ne její průběh. Sezóna skončila dříve, než probíhalo zaznamenávání žebříčku každých několik minut."
 }

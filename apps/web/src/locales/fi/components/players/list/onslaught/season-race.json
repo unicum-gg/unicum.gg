@@ -1,3 +1,8 @@
 {
-  "the-curve-starts-once-the": "Käyrä alkaa, kun kaudesta on otettu tilannekuva useammin kuin kerran. Tästä eteenpäin se täyttyy automaattisesti."
+  "the-curve-starts-once-the": "Käyrä alkaa, kun kaudesta on otettu tilannekuva useammin kuin kerran. Tästä eteenpäin se täyttyy automaattisesti.",
+  "previous": {
+    "title": "Viime kausi",
+    "footer": "Kausi {season} loppui tähän, rankattuja {ranked}"
+  },
+  "no-captures": "Meillä on tämän kauden lopulliset sijoitukset, joista nämä määrät ovat peräisin, mutta ei nousua: kausi loppui ennen kuin tulostaulukkoa tallennettiin muutaman minuutin välein."
 }

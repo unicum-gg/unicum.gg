@@ -22,7 +22,7 @@
     "title": "Rangen",
     "meaning": "Betekenis",
     "tier": "niveau",
-    "intro": "Je stijgt in de rangen van {mode} door gevechten te winnen: elke overwinning levert Rangpunten op op basis van hoe goed je hebt gespeeld. De rang {champion} is de hoogste die je uitsluitend met Rangpunten kunt bereiken. Als je die bereikt, kom je in het klassement. De rang {legend} heeft geen vaste drempel: deze bestaat uit het hoogst beoordeelde deel van de spelers met de rang {champion}, waardoor de grens met het deelnemersveld verschuift. Bij een gelijke stand geeft het aantal gespeelde gevechten de doorslag. De precieze grenswaarden voor de rangen {legend} en {champion} zijn die van het huidige seizoen en staan aangegeven in het klassement.",
+    "intro": "Je stijgt in de rangen van {mode} door gevechten te winnen. Elke overwinning levert Rangpunten op, gebaseerd op hoe goed je hebt gespeeld. {champion} is de hoogste rang die je alleen met punten kunt bereiken, en als je die bereikt, kom je in het klassement. {legend} heeft geen vaste grens. Het is het best beoordeelde deel van de spelers met {champion}, dus de grens verschuift afhankelijk van het deelnemersveld, waarbij gelijke standen worden beslist op basis van het aantal gespeelde gevechten. De exacte grenzen voor {legend} en {champion} zijn die van het getoonde seizoen en staan aangegeven op het klassement.",
     "legend-blurb": "De spelers met de rang {champion} en de hoogste Beoordeling. Het spel gebruikt hiervoor elk seizoen een vaste positie in het klassement als grens (waardoor het aantal per seizoen en regio verschilt), en geen vast doel in Rangpunten. Zak je onder de laagst geklasseerde speler met de rang {legend}, dan val je terug naar {champion}.",
     "champion-blurb": "De hoogste rang die je met Rangpunten kunt bereiken en die toegang geeft tot het klassement. Elke speler in het klassement heeft minstens de rang {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Grens voor {champion}",
     "ranked-players": "Gerangschikte spelers",
     "rating-points": "rangpunten",
-    "rank-cutoffs": "Ranggrenzen"
+    "rank-cutoffs": "Ranggrenzen",
+    "previous-line": "vorig seizoen"
   }
 }

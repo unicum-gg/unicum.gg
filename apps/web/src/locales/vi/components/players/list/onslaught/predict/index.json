@@ -1,0 +1,28 @@
+{
+  "title": "Bạn sẽ kết thúc ở đâu?",
+  "fields": {
+    "battles": "Số trận đã chơi trong mùa này",
+    "battles-hint": "Những gì chế độ đã tính cho bạn kể từ khi mở cửa.",
+    "points": "Điểm xếp hạng",
+    "points-hint": "{champion} bắt đầu ở {entry}, cũng là mức thấp nhất của bảng xếp hạng này.",
+    "pace": "Số trận mỗi ngày từ bây giờ",
+    "pace-hint": "Bạn dự định chơi bao nhiêu cho đến khi mùa này ổn định.",
+    "pace-hint-own": "Tốc độ bạn đã duy trì cho đến nay. Hãy thay đổi nếu bạn sắp chơi nhiều hơn."
+  },
+  "empty": "Điền số trận bạn đã chơi và vị trí hiện tại, hệ thống sẽ tính ra thứ hạng bạn kết thúc mùa này.",
+  "not-enough-season": "Mùa này mới được ghi nhận quá ít nên chưa thể trả lời. Dữ liệu sẽ tự lấp đầy khi bảng xếp hạng được ghi nhận.",
+  "figures": {
+    "now": "Hiện tại",
+    "on-the-board": "Hạng #{rank} trong số {total} trên bảng xếp hạng",
+    "off-the-board": "Thấp hơn bảng xếp hạng {points} điểm",
+    "finish": "Vào {date}",
+    "finish-undated": "Khi kết thúc",
+    "finish-hint": "Khoảng {points} điểm, sau {battles} trận đấu nữa trong {days} ngày.",
+    "rate": "Điểm mỗi trận đấu",
+    "rate-own": "Của bạn, dựa trên những trận đấu bạn đã chơi trên bảng xếp hạng.",
+    "rate-below": "Một trận đấu mang lại bao nhiêu điểm trên bảng xếp hạng. Khi leo hạng đến đó, bạn đang nhận được {own} điểm mỗi trận đấu, tức là tiến nhanh hơn.",
+    "rate-board": "Trung vị của bảng xếp hạng quanh chỉ số đánh giá của bạn, cho đến khi kỷ lục của bạn có thể cung cấp câu trả lời.",
+    "rate-yours": "Của bạn, theo giá trị bạn đã nhập."
+  },
+  "note": "Các thứ hạng là hệ thống bảng xếp hạng của trò chơi: bốn thứ hạng, mỗi thứ hạng có năm bậc cách nhau 100 điểm đánh giá, tiếp đến là {champion} ở mức 2 000 điểm và {legend} dành cho nhóm đứng đầu bảng xếp hạng. Chỉ {legend} không có một con số cố định, nên được hiểu là ngưỡng được dự đoán cho ngày cuối cùng, dựa trên đường cong riêng của mùa này. Số trận được tính theo giá trị của mỗi trận đấu đối với bạn trên bảng xếp hạng, thay vì toàn bộ mùa, vì quá trình leo hạng đến {champion} mang lại nhiều điểm hơn cho mỗi trận đấu và sẽ khiến tổng số bị thổi phồng. Hãy xem đây là một điều kiện chứ không phải dự báo: chơi với tốc độ này ở tỷ lệ này, bạn sẽ đạt vị trí này. Điểm cũng tự giảm từ Silver trở lên nếu bạn ngừng chơi, nhưng công cụ này không tính điều đó."
+}

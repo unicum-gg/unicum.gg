@@ -1,0 +1,8 @@
+{
+  "title": "여기서부터의 순위표",
+  "from": "{points}점에서",
+  "previous": "· 지난 시즌은 {points}점에서 종료",
+  "cost": "전투 {battles}번, 하루 {perDay}번",
+  "cost-out-of-reach": "전투 {battles}번, 하루 {perDay}번으로, 랭크된 누구보다도 많은 플레이가 필요함",
+  "on-your-pace": "· 나의 페이스 기준"
+}

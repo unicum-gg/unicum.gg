@@ -1,0 +1,8 @@
+{
+  "title": "سُلّم الترتيب من هنا",
+  "from": "من {points}",
+  "previous": "· انتهى موسم الماضي عند {points}",
+  "cost": "{battles} معارك، بمعدل {perDay} يوميًا",
+  "cost-out-of-reach": "{battles} معارك، بمعدل {perDay} يوميًا، أكثر مما يلعبه أي لاعب مصنّف",
+  "on-your-pace": "· وفق وتيرتك"
+}

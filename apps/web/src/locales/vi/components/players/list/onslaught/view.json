@@ -22,7 +22,7 @@
     "title": "Các bậc",
     "meaning": "Ý nghĩa",
     "tier": "Cấp",
-    "intro": "Bạn thăng hạng trong {mode} bằng cách thắng trận đấu. Mỗi chiến thắng trao Điểm Đánh giá dựa trên màn thể hiện của bạn. {champion} là cấp cao nhất có thể đạt được chỉ bằng điểm, và đạt đến đó sẽ đưa bạn lên bảng xếp hạng. {legend} không có ngưỡng cố định mà là nhóm {champion} có chỉ số đánh giá cao nhất, nên mốc này thay đổi theo nhóm người chơi, với trường hợp bằng điểm được phân định bằng số trận đấu đã chơi. Các mốc chính xác của {legend} và {champion} lấy từ mùa hiện tại và được đánh dấu trên bảng.",
+    "intro": "Bạn leo hạng trong {mode} bằng cách thắng các trận đấu. Mỗi chiến thắng trao Điểm Xếp hạng dựa trên thành tích của bạn. {champion} là thứ hạng cao nhất bạn có thể đạt được chỉ bằng điểm, và đạt đến đó sẽ đưa bạn lên bảng xếp hạng. {legend} không có ngưỡng cố định. Đây là nhóm người chơi có chỉ số đánh giá cao nhất trong số những người đạt {champion}, nên ngưỡng này thay đổi theo mặt bằng người chơi, với số trận đã chơi được dùng để phá hòa. Ngưỡng {legend} và {champion} chính xác là ngưỡng của mùa được hiển thị và được đánh dấu trên bảng xếp hạng.",
     "legend-blurb": "Các {champion} có chỉ số đánh giá cao nhất. Trò chơi giới hạn cấp này ở một vị trí cố định trên bảng xếp hạng mỗi mùa, nên quy mô thay đổi theo mùa và khu vực, chứ không theo một mục tiêu điểm cố định. Rơi xuống dưới {legend} cuối cùng sẽ đưa bạn trở lại {champion}.",
     "champion-blurb": "Cấp cao nhất có thể đạt được bằng Điểm Đánh giá và là điều kiện để vào bảng xếp hạng. Mọi người chơi xếp hạng đều ít nhất đạt {champion}."
   },
@@ -33,6 +33,7 @@
     "champion-cutoff": "Ngưỡng {champion}",
     "ranked-players": "Người chơi xếp hạng",
     "rating-points": "Điểm xếp hạng",
-    "rank-cutoffs": "Bậc cắt giới hạn"
+    "rank-cutoffs": "Bậc cắt giới hạn",
+    "previous-line": "mùa trước"
   }
 }

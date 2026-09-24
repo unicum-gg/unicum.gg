@@ -108,9 +108,14 @@
     "complete": "аяқталған"
   },
   "onslaught-tiers": {
-    "legend": "Аңыз",
+    "iron": "Темір",
+    "bronze": "Қола",
+    "silver": "Күміс",
+    "gold": "алтын",
     "champion": "Чемпион",
-    "crest": "{mode} {tier}"
+    "legend": "Аңыз",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "Ауыр",

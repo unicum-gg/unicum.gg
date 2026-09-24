@@ -1,0 +1,28 @@
+{
+  "title": "Onde terminará?",
+  "fields": {
+    "battles": "Batalhas jogadas nesta temporada",
+    "battles-hint": "O que o modo contou para você desde que foi aberto.",
+    "points": "Pontos de classificação",
+    "points-hint": "{champion} começa em {entry}, que também é o limite inferior desta classificação.",
+    "pace": "Batalhas por dia a partir de agora",
+    "pace-hint": "Quanto você pretende jogar até a temporada se estabilizar.",
+    "pace-hint-own": "O ritmo que você manteve até agora. Altere-o se estiver prestes a jogar mais."
+  },
+  "empty": "Preencha o que você jogou e onde está, e isto calculará em qual posição a temporada terminará.",
+  "not-enough-season": "Pouco desta temporada foi registrado até agora para responder. Isto será preenchido automaticamente à medida que a classificação for capturada.",
+  "figures": {
+    "now": "Agora",
+    "on-the-board": "#{rank} de {total} na classificação",
+    "off-the-board": "{points} pontos abaixo da classificação",
+    "finish": "Em {date}",
+    "finish-undated": "Ao terminar",
+    "finish-hint": "Cerca de {points} pontos, após mais {battles} batalhas ao longo de {days} dias.",
+    "rate": "Pontos por batalha",
+    "rate-own": "Os seus, considerando as batalhas que você jogou na classificação.",
+    "rate-below": "O que uma batalha rende na classificação. Ao subir até ela, você ganha {own} por batalha, o que torna o jogo mais rápido.",
+    "rate-board": "A mediana da classificação em torno da sua classificação, até que o seu próprio recorde possa responder.",
+    "rate-yours": "Os seus, conforme você os digitou."
+  },
+  "note": "As patentes são a própria classificação do jogo: quatro patentes de cinco divisões separadas por cem pontos de classificação, depois {champion} em 2 000 e {legend} para a faixa superior da classificação. Apenas a última não é um número fixo, então ela é lida como o limite projetado para o último dia, ajustado à própria curva da temporada. As batalhas são contadas pelo valor que tiveram para você na classificação, em vez de considerar a temporada inteira, pois a subida até {champion} rende várias vezes mais por batalha e inflaria o total. Leia isto como uma condição, não como uma previsão: jogue essa quantidade nesse ritmo e você chegará aqui. Os pontos também diminuem automaticamente a partir de Prata se você parar de jogar, algo que nada aqui conta."
+}

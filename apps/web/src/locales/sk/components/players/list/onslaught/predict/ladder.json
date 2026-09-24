@@ -1,0 +1,8 @@
+{
+  "title": "Rebríček od tohto bodu",
+  "from": "Od {points}",
+  "previous": "· minulá sezóna sa skončila na {points}",
+  "cost": "{battles} bitiek, {perDay} za deň",
+  "cost-out-of-reach": "{battles} bitiek, {perDay} za deň, viac, než odohrá ktokoľvek z hodnotených hráčov",
+  "on-your-pace": "· vo vašom tempe"
+}

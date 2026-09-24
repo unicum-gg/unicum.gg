@@ -1,0 +1,28 @@
+{
+  "title": "Gdzie zakończysz?",
+  "fields": {
+    "battles": "Bitwy rozegrane w tym sezonie",
+    "battles-hint": "To, co tryb zliczył dla Ciebie od chwili jego otwarcia.",
+    "points": "Punkty rankingowe",
+    "points-hint": "{champion} rozpoczyna się od {entry}, co jest również dolną granicą tego rankingu.",
+    "pace": "Bitwy dziennie od teraz",
+    "pace-hint": "Ile zamierzasz grać do zakończenia sezonu.",
+    "pace-hint-own": "Tempo, które utrzymujesz do tej pory. Zmień je, jeśli zamierzasz grać więcej."
+  },
+  "empty": "Wpisz, ile masz rozegrane i jakie zajmujesz miejsce, a obliczymy, na którym miejscu zakończysz sezon.",
+  "not-enough-season": "Zarejestrowano zbyt małą część tego sezonu, aby już teraz udzielić odpowiedzi. Dane zapełnią się automatycznie w miarę rejestrowania tabeli.",
+  "figures": {
+    "now": "Teraz",
+    "on-the-board": "#{rank} z {total} w rankingu",
+    "off-the-board": "{points} punktów poniżej rankingu",
+    "finish": "Dnia {date}",
+    "finish-undated": "Na zakończenie",
+    "finish-hint": "Około {points} punktów po kolejnych {battles} bitwach w ciągu {days} dni.",
+    "rate": "Punkty za bitwę",
+    "rate-own": "Twoja wartość na podstawie rozegranych przez Ciebie bitew w rankingu.",
+    "rate-below": "Tyle punktów daje bitwa w rankingu. Awansując do niego, zdobywasz {own} punktów za bitwę, co oznacza szybszą grę.",
+    "rate-board": "Mediana tabeli w okolicach Twojej oceny, dopóki Twój własny rekord nie pozwoli jej ustalić.",
+    "rate-yours": "Twoja wartość, zgodnie z wpisanymi danymi."
+  },
+  "note": "Rangi są własnym rankingiem gry: cztery rangi po pięć dywizji oddalonych od siebie o sto punktów rankingowych, następnie {champion} od 2 000 punktów oraz {legend} jako czołowa część rankingu. Tylko ta ostatnia nie ma stałej liczby, dlatego jest odczytywana jako próg przewidywany na ostatni dzień i dopasowany do krzywej tego sezonu. Bitwy są liczone według tego, ile były dla Ciebie warte w rankingu, a nie w całym sezonie, ponieważ awans do {champion} zapewnia kilka razy więcej punktów za bitwę i zawyżyłby wynik. Traktuj to jako warunek, a nie prognozę: graj tyle bitew w takim tempie, a trafisz na to miejsce. Punkty również samoczynnie spadają od poziomu Srebro wzwyż, jeśli przestaniesz grać, czego nic tutaj nie uwzględnia."
+}

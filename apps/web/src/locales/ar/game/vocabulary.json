@@ -108,9 +108,14 @@
     "complete": "مكتمل"
   },
   "onslaught-tiers": {
-    "legend": "أسطورة",
+    "iron": "حديد",
+    "bronze": "برونز",
+    "silver": "فضة",
+    "gold": "ذهب",
     "champion": "بطل",
-    "crest": "{mode} {tier}"
+    "legend": "أسطورة",
+    "crest": "{mode} {tier}",
+    "division": "{rank} {division}"
   },
   "vehicle-classes-short": {
     "heavyTank": "ثقيلة",

@@ -1,0 +1,28 @@
+{
+  "title": "Kur finišuosi?",
+  "fields": {
+    "battles": "Šį sezoną žaista mūšių",
+    "battles-hint": "Kiek režimas tau suskaičiavo nuo jo atidarymo.",
+    "points": "Reitingo taškai",
+    "points-hint": "{champion} pradžia yra ties {entry}, tai taip pat yra šios lyderių lentelės apačia.",
+    "pace": "Mūšiai per dieną nuo dabar",
+    "pace-hint": "Kiek ketini žaisti, kol sezonas nusistovės.",
+    "pace-hint-own": "Tempas, kurio iki šiol laikeisi. Pakeisk jį, jei ketini žaisti daugiau."
+  },
+  "empty": "Įrašyk, kiek žaidei ir kur esi, o mes apskaičiuosime, kurioje vietoje baigsi sezoną.",
+  "not-enough-season": "Užfiksuota per mažai šio sezono duomenų, kad būtų galima atsakyti. Duomenys užsipildys savaime, kai bus fiksuojama lentelė.",
+  "figures": {
+    "now": "Dabar",
+    "on-the-board": "{rank} vieta iš {total} lyderių lentelėje",
+    "off-the-board": "{points} taškais žemiau lyderių lentelės",
+    "finish": "{date} dieną",
+    "finish-undated": "Sezono pabaigoje",
+    "finish-hint": "Apie {points} taškų po dar {battles} mūšių per {days} dienas.",
+    "rate": "Taškai už mūšį",
+    "rate-own": "Tavo rodiklis pagal tavo žaistus mūšius lyderių lentelėje.",
+    "rate-below": "Kiek taškų lyderių lentelėje duoda vienas mūšis. Kopdamas iki jo gauni {own} taškų už mūšį, tad žaidi greičiau.",
+    "rate-board": "Lentelės mediana aplink tavo reitingą, kol tavo rekordas galės pateikti atsakymą.",
+    "rate-yours": "Tavo rodiklis, toks, kokį įrašei."
+  },
+  "note": "Rangai sudaryti pagal paties žaidimo reitingų lentelę: keturi rangai po penkis skyrius, kuriuos skiria šimtas reitingo taškų, tada {champion} ties 2 000 taškų ir {legend} aukščiausioje lyderių lentelės dalyje. Tik pastarasis nėra nekintamas numeris, todėl jis suprantamas kaip riba, numatyta paskutinei dienai pagal paties sezono kreivę. Mūšiai skaičiuojami pagal tai, kiek jie buvo verti tau lyderių lentelėje, o ne per visą sezoną, nes kopimas iki {champion} už vieną mūšį duoda kelis kartus daugiau taškų ir išpūstų bendrą rezultatą. Vertink tai kaip sąlygą, o ne prognozę: žaisk tiek mūšių tokiu rodikliu ir atsidursi šioje vietoje. Nuo Sidabro taškai savaime mažėja, jei nustoji žaisti, o į tai čia neatsižvelgiama."
+}

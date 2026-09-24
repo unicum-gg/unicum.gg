@@ -1,0 +1,28 @@
+{
+  "title": "Kur tu finišēsi?",
+  "fields": {
+    "battles": "Šajā sezonā izspēlētās kaujas",
+    "battles-hint": "Ko režīms tev ir ieskaitījis kopš tā atvēršanas.",
+    "points": "Reitinga punkti",
+    "points-hint": "{champion} sākas ar {entry}, kas ir arī šī līderu saraksta apakšdaļa.",
+    "pace": "Kaujas dienā no šī brīža",
+    "pace-hint": "Cik daudz tu plāno spēlēt, līdz sezona nostabilizēsies.",
+    "pace-hint-own": "Temps, ko līdz šim esi ievērojis. Maini to, ja gatavojies spēlēt vairāk."
+  },
+  "empty": "Ievadi, cik esi spēlējis un kur atrodies, un tiks aprēķināts, kurā vietā sezona beigsies.",
+  "not-enough-season": "Par šo sezonu pagaidām ir reģistrēts pārāk maz datu, lai uz to atbildētu. Tas tiks aizpildīts automātiski, kad tiks fiksēta tabula.",
+  "figures": {
+    "now": "Šobrīd",
+    "on-the-board": "#{rank}. vieta no {total} līderu sarakstā",
+    "off-the-board": "Par {points} punktiem zem līderu saraksta",
+    "finish": "Finišs: {date}",
+    "finish-undated": "Finišā",
+    "finish-hint": "Apmēram {points} punkti pēc vēl {battles} kaujām {days} dienu laikā.",
+    "rate": "Punkti par kauju",
+    "rate-own": "Tavs rādītājs par līderu sarakstā izspēlētajām kaujām.",
+    "rate-below": "Cik punktu dod viena kauja līderu sarakstā. Kāpjot līdz tam, tu iegūsti {own} punktus par kauju, kas ir ātrāks ceļš.",
+    "rate-board": "Tabulas mediāna ap tavu vērtējumu, līdz to var noteikt tavs rekords.",
+    "rate-yours": "Tavs rādītājs, kādu ievadīji."
+  },
+  "note": "Pakāpes ir spēles pašas reitingu tabula: četras pakāpes, katrā pa pieci, ar simts reitinga punktu atstarpi, pēc tam {champion} ar 2 000 punktiem un {legend} līderu saraksta augšējai daļai. Tikai pēdējam nav fiksēta skaita, tāpēc tas tiek nolasīts kā slieksnis, kas prognozēts pēdējai dienai un pielāgots sezonas pašas līknei. Kaujas tiek skaitītas pēc tā, cik tās tev bijušas vērtas līderu sarakstā, nevis visas sezonas laikā, jo kāpums līdz {champion} dod vairākas reizes vairāk punktu par kauju un padarītu kopējo skaitu pārāk labvēlīgu. Lasi to kā nosacījumu, nevis prognozi: spēlē tik daudz ar šādu tempu, un tu nonāksi šeit. Punkti arī paši samazinās no Sudraba pakāpes uz augšu, ja pārstāj spēlēt, bet tas šeit netiek skaitīts."
+}

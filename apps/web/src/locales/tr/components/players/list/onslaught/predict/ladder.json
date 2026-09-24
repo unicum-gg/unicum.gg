@@ -1,0 +1,8 @@
+{
+  "title": "Buradan sonraki sıralama",
+  "from": "{points} puandan itibaren",
+  "previous": "· geçen sezon {points} puanda sona erdi",
+  "cost": "{battles} savaş, günde {perDay}",
+  "cost-out-of-reach": "{battles} savaş, günde {perDay}, dereceli oyuncuların oynadığından fazla",
+  "on-your-pace": "· senin tempona göre"
+}
