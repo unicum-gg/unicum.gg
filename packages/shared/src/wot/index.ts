@@ -21,3 +21,4 @@ export * from "./tournaments";
 export * from "./tournament-placements";
 export * from "./language-flags";
 export * from "./rating-scales";
+export * from "./onslaught-forecast";
