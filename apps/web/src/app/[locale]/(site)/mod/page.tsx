@@ -23,6 +23,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
+import { getModVersions, modArchiveUrl } from "@/services/mod/versions";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
@@ -97,6 +98,9 @@ export default async function ModPage({
 }) {
   const { locale } = await params;
   const { t } = await getTranslation("app/mod/page", locale);
+  // Cached for an hour and failing to nulls, so the hero renders whatever
+  // these answer; the page never waits on GitHub or on the hub to be useful.
+  const versions = await getModVersions();
   const faq = FAQ.map((key) => ({
     key,
     question: t(`faq-${key}-question`, { name: APP.NAME }),
@@ -127,43 +131,45 @@ export default async function ModPage({
             {t("subtitle", { name: APP.NAME })}
           </p>
           <div className="mt-6 flex flex-col items-center gap-2">
-            {/* Two places, because they carry the build at different moments:
-                the hub is where a player expects a mod and what their launcher
-                installs from, and the repository is where a release lands the
-                moment it is cut, while Wargaming is still reviewing it. */}
-            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+            {/* One button, and it downloads. Two of them asked a player to
+                choose a host before they could have the mod, which is not a
+                question they came with: the archive is the same either way,
+                and the only difference is how recent it is. So the button
+                hands over the newest build and the line below names the hub
+                for whoever wants the reviewed one. */}
+            <a
+              href={modArchiveUrl(versions.latest)}
+              className={cn(
+                buttonVariants({ variant: "primary" }),
+                "h-10 gap-2 px-5 text-base",
+              )}
+            >
+              <DownloadSimpleIcon weight="bold" className="size-5" />
+              {versions.latest
+                ? t("download-version", { version: versions.latest })
+                : t("download")}
+            </a>
+            <p className="text-xs text-fd-muted-foreground">
+              {/* The game version is deliberately absent: Wargaming ships
+                  micropatches (2.4.0.1 a day after 2.4.0.0) and our own API
+                  disagrees with itself on which is current. The MOD's version
+                  is ours and is read from the release, so it can be named. */}
+              {t("download-note")}
+            </p>
+            <p className="text-xs text-fd-muted-foreground">
               <a
                 href={APP.EXTERNAL.MOD_DOWNLOAD}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: "primary" }),
-                  "h-10 gap-2 px-5 text-base",
-                )}
+                className="underline underline-offset-2 hover:text-fd-foreground"
               >
-                <DownloadSimpleIcon weight="bold" className="size-5" />
-                {t("download")}
+                {t("download-hub")}
               </a>
-              <a
-                href={APP.EXTERNAL.MOD_RELEASES}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "h-10 gap-2 px-5 text-base",
-                )}
-              >
-                <GithubLogoIcon weight="fill" className="size-5" />
-                {t("download-github")}
-              </a>
-            </div>
-            <p className="text-xs text-fd-muted-foreground">
-              {/* No version here: the page cannot keep one true. Wargaming
-                  ships micropatches (2.4.0.1 a day after 2.4.0.0), and our own
-                  API disagrees with itself on what the current one is -- tanks
-                  say 2.4, maps say 2.4.0, the client says 2.4.0.1. The mod's
-                  wgmods page names the exact build and is always current. */}
-              {t("download-note")}
+              {/* Only when the hub is behind, which is most of the time just
+                  after a release and never worth saying otherwise. */}
+              {versions.hub && versions.hub !== versions.latest
+                ? `, ${t("download-hub-behind", { version: versions.hub })}`
+                : null}
             </p>
           </div>
         </PanelContent>
