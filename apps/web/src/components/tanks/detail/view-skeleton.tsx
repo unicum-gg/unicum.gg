@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { TankConfigurator } from "@/components/tanks/detail/specifications/configurator";
 import { TankTopPlayers } from "@/components/tanks/detail/performances/top-players";
 import { TANK_DETAIL_TABS, TankDetailTab } from "@/components/tanks/detail/tabs";
+import { TabNav, tabClass } from "@/components/tab-nav";
 import { cn } from "@/lib/utils";
 import { Region, hangarBgUrl } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
@@ -114,21 +115,16 @@ function StaticTabBar({ active }: { active: TankDetailTab }) {
   return (
     <Panel screenLines={false} className="screen-line-before">
       <PanelHeader className="px-0! py-0!" screenLines={false}>
-        <nav className="flex items-center overflow-x-auto text-sm">
+        <TabNav>
           {TANK_DETAIL_TABS.map((t) => (
             <span
               key={t.id}
-              className={cn(
-                "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap",
-                active === t.id
-                  ? "bg-fd-secondary/40 text-fd-foreground"
-                  : "text-fd-muted-foreground",
-              )}
+              className={tabClass(active === t.id, { inert: true })}
             >
               {tLabel(`tabs.${t.id}`)}
             </span>
           ))}
-        </nav>
+        </TabNav>
       </PanelHeader>
     </Panel>
   );

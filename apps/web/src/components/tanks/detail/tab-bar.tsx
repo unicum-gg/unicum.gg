@@ -10,7 +10,7 @@ import {
 } from "@/components/tanks/detail/tabs";
 import { BATTLE_PARAM } from "@/components/tanks/detail/videos/battle-param";
 import { useTankVideoPlayer } from "@/components/tanks/detail/videos/player";
-import { cn } from "@/lib/utils";
+import { TabNav, tabClass } from "@/components/tab-nav";
 import { useTranslation } from "@/hooks/use-translation";
 
 /**
@@ -47,22 +47,17 @@ export function TankDetailTabs({
   return (
     <Panel screenLines={false} className="screen-line-before">
       <PanelHeader className="px-0! py-0!" screenLines={false}>
-        <nav className="flex items-center overflow-x-auto text-sm">
+        <TabNav>
           {tabs.map((t) => (
             <Link
               key={t.id}
               href={`${tankDetailTabHref(basePath, t.id)}${battle}`}
-              className={cn(
-                "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-                active === t.id
-                  ? "bg-fd-secondary/40 text-fd-foreground"
-                  : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-              )}
+              className={tabClass(active === t.id)}
             >
               {tLabel(`tabs.${t.id}`)}
             </Link>
           ))}
-        </nav>
+        </TabNav>
       </PanelHeader>
     </Panel>
   );
