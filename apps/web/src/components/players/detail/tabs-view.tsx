@@ -89,6 +89,11 @@ export type PlayerTabsViewProps = {
   initialTanks: PlayerTankRow[] | null;
   /** The vehicle record the URL names, server-rendered beside the table. */
   tankDetail: PlayerTankRecord | null;
+  /** The loadout panel for the open vehicle, rendered on the SERVER and
+   * passed down: it names equipment and crew perks out of catalogues that
+   * never cross the wire (`SERVER_ONLY_NAMESPACES`), so it cannot be built
+   * inside this client tree. Null when we hold no loadout for the pair. */
+  tankLoadout?: React.ReactNode;
   /** Daily sessions, server-rendered when the visitor landed on `/sessions`;
    * null otherwise, and null again as soon as another bucket size is picked. */
   initialSessions: PlayerSession[] | null;
@@ -115,6 +120,7 @@ export function PlayerTabsView({
   detail,
   initialTanks,
   tankDetail,
+  tankLoadout,
   initialSessions,
   initialAchievements,
   initialTournaments,
@@ -324,6 +330,7 @@ export function PlayerTabsView({
           vehicles={tanks ?? []}
           loading={onTanks && !tanks}
           tankDetail={tankDetail}
+          tankLoadout={tankLoadout}
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />

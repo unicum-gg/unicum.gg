@@ -45,6 +45,7 @@ export function PlayerProfile({
   initialData,
   initialTanks,
   tankDetail,
+  tankLoadout,
   initialSessions,
   initialAchievements,
   initialTournaments,
@@ -64,6 +65,11 @@ export function PlayerProfile({
   initialTanks: PlayerTankRow[] | null;
   /** The vehicle record the URL names, rendered beside the tank table. */
   tankDetail: PlayerTankRecord | null;
+  /** The loadout panel for the open vehicle, rendered on the SERVER and
+   * passed down: it names equipment and crew perks out of catalogues that
+   * never cross the wire (`SERVER_ONLY_NAMESPACES`), so it cannot be built
+   * inside this client tree. Null when we hold no loadout for the pair. */
+  tankLoadout?: React.ReactNode;
   /** Daily sessions, present only when Sessions is the section the server
    * rendered; null otherwise, so the tab fetches on demand. */
   initialSessions: PlayerSession[] | null;
@@ -190,6 +196,7 @@ export function PlayerProfile({
         detail={detail}
         initialTanks={initialTanks}
         tankDetail={tankDetail}
+        tankLoadout={tankLoadout}
         initialSessions={initialSessions}
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}

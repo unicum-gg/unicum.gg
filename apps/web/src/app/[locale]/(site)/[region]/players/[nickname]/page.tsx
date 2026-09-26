@@ -21,6 +21,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { breadcrumbSchema, personSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
+import { PlayerTankLoadoutPanel } from "@/components/players/detail/tanks/loadout-panel";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
@@ -30,6 +31,7 @@ import {
   type PlayerSession,
   type PlayerTankRecord,
   type PlayerTankRow,
+  type StoredPlayerLoadout,
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 
@@ -385,6 +387,26 @@ async function PlayerProfileServer({
           throw err;
         })
     : null;
+  // How this player set the open vehicle up, drawn under its record. Its own
+  // endpoint rather than a field of the record above, because it comes from a
+  // different source entirely: Wargaming publishes none of this, so what is
+  // here was sent by that player's own client running the unicum.gg mod. Most
+  // players have no loadout and never will, which is why a failure is caught
+  // and answered with nothing rather than taken to mean the page is broken.
+  //
+  // The panel is built HERE, on the server, and handed down through the client
+  // tree as a node: it names equipment and crew perks out of `game/equipment`
+  // and `game/crew-perks`, the two catalogues that are stripped before the
+  // dictionaries cross the wire (`SERVER_ONLY_NAMESPACES`).
+  const loadout: StoredPlayerLoadout | null = tankSlug
+    ? await unicum
+        .region(region)
+        .players(decoded)
+        .tankLoadout(tankSlug)
+        .then((r) => (r.loadout as unknown as StoredPlayerLoadout) ?? null)
+        .catch(() => null)
+    : null;
+
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
 
@@ -426,6 +448,11 @@ async function PlayerProfileServer({
         initialData={detail}
         initialTanks={initialTanks}
         tankDetail={tankDetail}
+        tankLoadout={
+          loadout ? (
+            <PlayerTankLoadoutPanel loadout={loadout} locale={locale} />
+          ) : null
+        }
         initialSessions={initialSessions}
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}

@@ -32,6 +32,7 @@ export function TanksTab({
   vehicles,
   loading,
   tankDetail,
+  tankLoadout,
 }: {
   region: Region;
   nickname: string;
@@ -40,6 +41,11 @@ export function TanksTab({
   /** The vehicle record open beside the table, when the URL names one. Server
    * rendered, so it is in the HTML a crawler and the `.md` twin read. */
   tankDetail?: PlayerTankRecord | null;
+  /** The loadout panel for the open vehicle, rendered on the SERVER and
+   * passed down: it names equipment and crew perks out of catalogues that
+   * never cross the wire (`SERVER_ONLY_NAMESPACES`), so it cannot be built
+   * inside this client tree. Null when we hold no loadout for the pair. */
+  tankLoadout?: React.ReactNode;
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/players/detail/tanks/index");
@@ -112,6 +118,7 @@ export function TanksTab({
                   detail={tankDetail}
                   ratingHistory={tankDetail.ratingHistory}
                   awards={tankDetail.awards}
+                  loadout={tankLoadout}
                 />
               </Panel>
             </div>

@@ -109,6 +109,15 @@ class PlayerClient {
     );
   }
 
+  /** Player vehicle loadout */
+  tankLoadout(slug: string) {
+    const path = { region: this.region, nickname: this.nickname, slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks/{slug}/loadout", path),
+      () => this.api.GET("/{region}/players/{nickname}/tanks/{slug}/loadout", { params: { path } }),
+    );
+  }
+
   /** Player tournaments */
   tournaments() {
     const path = { region: this.region, nickname: this.nickname };

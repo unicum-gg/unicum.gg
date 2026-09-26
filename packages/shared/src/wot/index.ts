@@ -2,6 +2,7 @@ export * from "./assets";
 export * from "./reserves";
 export * from "./equipment";
 export * from "./field-mods";
+export * from "./loadouts";
 export * from "./vehicle-modes";
 export * from "./crew";
 export * from "./ratings";

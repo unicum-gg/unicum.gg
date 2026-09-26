@@ -16,7 +16,7 @@ import {
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { TabNav, tabClass } from "@/components/tab-nav";
+import { cn } from "@/lib/utils";
 import { type VehicleMeta, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { BucketTab } from "./bucket-tab";
@@ -132,18 +132,23 @@ export function PlayerCompareView({
 
       <Panel>
         <PanelHeader className="px-0! py-0!">
-          <TabNav>
+          <nav className="flex items-center overflow-x-auto text-sm">
             {TABS.map((t) => (
               <button
                 key={t.id}
                 type="button"
                 onClick={() => setTab(t.id)}
-                className={tabClass(tab === t.id)}
+                className={cn(
+                  "cursor-pointer border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
+                  tab === t.id
+                    ? "bg-fd-secondary/40 text-fd-foreground"
+                    : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
+                )}
               >
                 {statLabel(t.label, tStats)}
               </button>
             ))}
-          </TabNav>
+          </nav>
         </PanelHeader>
         <PanelContent className="p-0">
           {tab === CompareTab.Overall && (

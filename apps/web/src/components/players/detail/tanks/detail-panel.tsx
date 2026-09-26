@@ -62,6 +62,7 @@ export function PlayerTankDetailPanel({
   detail,
   ratingHistory,
   awards,
+  loadout,
 }: {
   region: Region;
   detail: PlayerTankDetail;
@@ -70,6 +71,12 @@ export function PlayerTankDetailPanel({
   /** The medals earned on it, already trimmed to what was earned. Null when we
    * do not know them yet, which shows no section rather than an empty one. */
   awards: PlayerAchievement[] | null;
+  /** How this player set the vehicle up. Rendered on the SERVER and handed
+   * down, because it names equipment and crew perks out of the two catalogues
+   * that never cross the wire (`SERVER_ONLY_NAMESPACES`). Absent for the
+   * players we hold no loadout for, which is most of them: only the mod can
+   * read one, and Wargaming publishes none. */
+  loadout?: React.ReactNode;
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/players/detail/tanks/detail-panel");
@@ -182,6 +189,11 @@ export function PlayerTankDetailPanel({
             straight from the payload: the medals come stored, so there is
             nothing to wait for and nothing to defer. */}
         {awards ? <TankAwards awards={awards} locale={locale} /> : null}
+
+        {/* After the game's own sections, because it is the one thing here the
+            client has no screen for: the record above is Wargaming's, this is
+            what the player built. */}
+        {loadout}
 
         <p className={`text-xs ${styles.mutedText}`}>
           {t("updated")} <RelativeTime date={new Date(detail.updatedAt)} />

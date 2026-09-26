@@ -27,7 +27,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { TabNav, tabClass } from "@/components/tab-nav";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
@@ -192,18 +191,23 @@ export function MapsGallery({
   return (
     <Panel>
       <PanelHeader className="px-0! py-0!">
-          <TabNav>
+          <nav className="flex items-center overflow-x-auto text-sm">
             {presentTypes.map((bt) => (
               <Link
                 key={bt}
                 href={mapsTabHref(basePath, bt)}
                 onClick={(e) => selectBattleType(e, bt)}
-                className={tabClass(battleType === bt)}
+                className={cn(
+                  "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
+                  battleType === bt
+                    ? "bg-fd-secondary/40 text-fd-foreground"
+                    : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
+                )}
               >
                 {bt === BATTLE_ALL ? t("all") : battleTypeName(bt, tGame)}
               </Link>
             ))}
-          </TabNav>
+          </nav>
         </PanelHeader>
       <div className="flex flex-wrap items-center gap-x-2 gap-y-2 p-4 text-xs">
         <input

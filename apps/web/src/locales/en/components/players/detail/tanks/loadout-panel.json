@@ -1,0 +1,11 @@
+{
+  "title": "Loadout",
+  "equipment": "Equipment",
+  "directives": "Directives",
+  "consumables": "Consumables",
+  "ammo": "Ammunition",
+  "crew": "Crew skills",
+  "field-mods": "Field modifications",
+  "slot-empty": "Empty",
+  "second-setup": "This player keeps a second setup on this vehicle."
+}

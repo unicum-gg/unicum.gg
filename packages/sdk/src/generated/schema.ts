@@ -339,6 +339,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/tanks/{slug}/loadout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player vehicle loadout
+         * @description How one player has set one vehicle up: its modules, its crew's skills, its field modifications, and what it carries into battle, ammunition counts and secondary setups included. Wargaming publishes none of this about anyone, so a loadout exists only because that player runs the unicum.gg mod, which reads it from their own client and sends it up. `loadout` is null when we hold nothing for the pair, which is also the answer for a player who asked for their loadouts not to be shown.
+         */
+        get: operations["get-{region}-players-{nickname}-tanks-{slug}-loadout"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/enqueue": {
         parameters: {
             query?: never;
@@ -2978,6 +2998,16 @@ export interface components {
         LiveStreamersResponse: {
             results: components["schemas"]["LiveStreamer"][];
         };
+        /** @description One shells-and-consumables setup. `consumables` is indexed by slot, so an empty slot is null rather than a shorter list. */
+        LoadoutAmmoLayout: {
+            shells: components["schemas"]["LoadoutShell"][];
+            consumables: (string | null)[];
+        };
+        /** @description The shells-and-consumables group. `active` indexes `layouts`. A vehicle only has a second layout once its owner unlocked the switch through post progression. */
+        LoadoutAmmoSetups: {
+            active: number;
+            layouts: components["schemas"]["LoadoutAmmoLayout"][];
+        };
         loadoutConsumable: {
             key: string;
             name: string;
@@ -2989,6 +3019,21 @@ export interface components {
                 attribute: string;
                 value: number;
             }[];
+        };
+        /** @description One crew member: their role (commander, gunner, driver, radioman, loader) and the skills they have been taught, in the order they were learned. */
+        LoadoutCrewMember: {
+            role: string;
+            skills: string[];
+        };
+        /** @description One equipment-and-directives setup. Both lists are indexed by slot, so an empty slot is null. */
+        LoadoutDevicesLayout: {
+            optDevices: (string | null)[];
+            boosters: (string | null)[];
+        };
+        /** @description The equipment-and-directives group, with its own active index. It moves independently of the ammunition group, so a vehicle can be on its second ammunition setup and its first equipment setup at once. */
+        LoadoutDevicesSetups: {
+            active: number;
+            layouts: components["schemas"]["LoadoutDevicesLayout"][];
         };
         loadoutDirective: {
             key: string;
@@ -3036,6 +3081,28 @@ export interface components {
             /** @description Equipment 2.0 categories (firepower, mobility, survivability, stealth). */
             categories: string[];
             effects: components["schemas"]["equipmentEffect"][];
+        };
+        /** @description A fitted module. `id` is the game's compact descriptor, which is its identity; `name` is the client's own name for it and is scoped to a nation. */
+        LoadoutModule: {
+            id: number;
+            name: string;
+        };
+        /** @description Field modifications: the level reached and the side taken of each pair. A tier XI vehicle has a skill tree instead, and carries its received steps in `tree` with `level` null and `pairs` empty. */
+        LoadoutProgression: {
+            level: number | null;
+            pairs: {
+                name: string;
+                side: string;
+            }[];
+            tree: number[];
+        };
+        /** @description One kind of round and how many of them are loaded. `type` is the game's own kind (ARMOR_PIERCING, ARMOR_PIERCING_CR, HOLLOW_CHARGE, HIGH_EXPLOSIVE) and `premium` means it is bought with gold. */
+        LoadoutShell: {
+            id: number;
+            name: string;
+            type: string;
+            premium: boolean;
+            count: number;
         };
         /**
          * @description Top-level battle type a map belongs to.
@@ -4023,6 +4090,27 @@ export interface components {
             ratingHistory: components["schemas"]["TankRatingHistoryPoint"][];
             /** @description Medals earned on this vehicle, in the game's own cabinet order. Earned only, and null when they are not known for this player yet. */
             awards: components["schemas"]["TankAward"][] | null;
+        };
+        /** @description How this player has set this vehicle up. Null when we hold nothing: Wargaming publishes none of this, so a loadout exists only because that player runs the unicum.gg mod, which reads it from their own client. Null is also the answer for a player who asked for their loadouts not to be shown. */
+        PlayerTankLoadoutResponse: {
+            loadout: {
+                tankId: number;
+                modules: {
+                    gun: components["schemas"]["LoadoutModule"] | null;
+                    turret: components["schemas"]["LoadoutModule"] | null;
+                    engine: components["schemas"]["LoadoutModule"] | null;
+                    chassis: components["schemas"]["LoadoutModule"] | null;
+                    radio: components["schemas"]["LoadoutModule"] | null;
+                } | null;
+                crew: components["schemas"]["LoadoutCrewMember"][];
+                progression: components["schemas"]["LoadoutProgression"] | null;
+                setups: {
+                    ammo: components["schemas"]["LoadoutAmmoSetups"] | null;
+                    devices: components["schemas"]["LoadoutDevicesSetups"] | null;
+                } | null;
+                /** Format: date-time */
+                updatedAt: Date;
+            } | null;
         };
         PlayerTanksResponse: {
             tanks: components["schemas"]["PlayerVehicle"][];
@@ -6507,6 +6595,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerTankDetail"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-tanks-{slug}-loadout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerTankLoadoutResponse"];
                 };
             };
         };

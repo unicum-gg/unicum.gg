@@ -1,11 +1,20 @@
 import Link from "@/components/link";
 import { Panel, PanelHeader } from "@/components/panel";
 import ROUTES from "@/constants/routes";
-import { TabNav, tabClass } from "@/components/tab-nav";
+import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { getTranslation } from "@/lib/translations.server";
 import { battleTypeName } from "@/components/game-name";
 import { BattleType } from "@unicum.gg/shared";
+
+function tabClass(active: boolean): string {
+  return cn(
+    "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
+    active
+      ? "bg-fd-secondary/40 text-fd-foreground"
+      : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
+  );
+}
 
 // The game-mode tabs on the player landing: "Overall" (the WNX rating board at
 // /players) and "Steel Hunter" (the HR battle-royale board at
@@ -31,7 +40,7 @@ export async function PlayersModeTabs({
   return (
     <Panel>
       <PanelHeader className="px-0! py-0!" screenLines={false}>
-        <TabNav>
+        <nav className="flex items-center overflow-x-auto text-sm">
           <Link
             href={ROUTES.PLAYERS(region)}
             className={tabClass(active === "overall")}
@@ -50,7 +59,7 @@ export async function PlayersModeTabs({
           >
             {battleTypeName(BattleType.Onslaught, tGame)}
           </Link>
-        </TabNav>
+        </nav>
       </PanelHeader>
     </Panel>
   );

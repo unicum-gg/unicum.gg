@@ -42,7 +42,7 @@ import {
   vehicleRef,
 } from "@/components/tanks/compare/column-ref";
 import { useCompareBuilds } from "@/hooks/use-compare-builds";
-import { TabNav, tabClass } from "@/components/tab-nav";
+import { cn } from "@/lib/utils";
 
 enum CompareTab {
   Characteristics = "characteristics",
@@ -237,18 +237,23 @@ export function TankCompareView({
           />
         </PanelHeader>
 
-        <TabNav className="border-b border-fd-border">
+        <nav className="flex items-center border-b border-fd-border text-sm">
           {TABS.map((t) => (
             <button
               key={t.id}
               type="button"
               onClick={() => setTab(t.id)}
-              className={tabClass(tab === t.id)}
+              className={cn(
+                "cursor-pointer border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
+                tab === t.id
+                  ? "bg-fd-secondary/40 text-fd-foreground"
+                  : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
+              )}
             >
               {statLabel(t.label, tStats)}
             </button>
           ))}
-        </TabNav>
+        </nav>
 
         <PanelContent className="p-0">
           {tab === CompareTab.Characteristics ? (
