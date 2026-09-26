@@ -1,0 +1,11 @@
+{
+  "title": "Postavka",
+  "equipment": "Oprema",
+  "directives": "Direktive",
+  "consumables": "Sredstva",
+  "ammo": "Municija",
+  "crew": "Vještine posade",
+  "field-mods": "Terenske modifikacije",
+  "slot-empty": "Prazno",
+  "second-setup": "Ovaj igrač ima drugu postavku na ovom vozilu."
+}

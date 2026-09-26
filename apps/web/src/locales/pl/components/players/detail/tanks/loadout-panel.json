@@ -1,0 +1,11 @@
+{
+  "title": "Konfiguracja",
+  "equipment": "Wyposażenie",
+  "directives": "Dyrektywy",
+  "consumables": "Mat. eksploatacyjne",
+  "ammo": "Amunicja",
+  "crew": "Umiejętności załogi",
+  "field-mods": "Modyfikacje polowe",
+  "slot-empty": "Puste",
+  "second-setup": "Ten gracz ma drugi zestaw na tym pojeździe."
+}

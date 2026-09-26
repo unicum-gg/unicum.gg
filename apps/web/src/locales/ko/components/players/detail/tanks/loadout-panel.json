@@ -1,0 +1,11 @@
+{
+  "title": "장비 구성",
+  "equipment": "장비",
+  "directives": "지휘명령",
+  "consumables": "소모품",
+  "ammo": "탄약",
+  "crew": "승무원 스킬",
+  "field-mods": "전장 수정",
+  "slot-empty": "비어 있음",
+  "second-setup": "이 플레이어는 이 차량에 두 번째 설정을 사용합니다."
+}

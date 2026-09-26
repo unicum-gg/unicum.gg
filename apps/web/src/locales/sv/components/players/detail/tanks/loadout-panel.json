@@ -1,0 +1,11 @@
+{
+  "title": "Uppsättning",
+  "equipment": "Utrustning",
+  "directives": "Anvisningar",
+  "consumables": "Förnödenheter",
+  "ammo": "Ammunition",
+  "crew": "Besättningsfärdigheter",
+  "field-mods": "Fältmodifieringar",
+  "slot-empty": "Tom",
+  "second-setup": "Den här spelaren har en andra uppsättning på detta fordon."
+}

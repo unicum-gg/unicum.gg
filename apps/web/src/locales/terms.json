@@ -845,7 +845,8 @@
     "five": "cinq",
     "ladder": "classement",
     "number": "nombre",
-    "pace": "rythme"
+    "pace": "rythme",
+    "Crew skills": "Compétences de l'équipage"
   },
   "es": {
     "Battles": "Batallas",
@@ -1690,7 +1691,8 @@
     "five": "cinco",
     "ladder": "clasificación",
     "number": "número",
-    "pace": "ritmo"
+    "pace": "ritmo",
+    "Crew skills": "Habilidades de la tripulación"
   },
   "ru": {
     "Battles": "Бои",
@@ -2529,7 +2531,8 @@
     "five": "пять",
     "ladder": "таблица лидеров",
     "number": "номер",
-    "pace": "темп"
+    "pace": "темп",
+    "Crew skills": "Навыки экипажа"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3387,7 +3390,8 @@
     "five": "pięć",
     "ladder": "ranking",
     "number": "liczba",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Umiejętności załogi"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4255,7 +4259,8 @@
     "five": "5",
     "ladder": "ランキング",
     "number": "番号",
-    "pace": "ペース"
+    "pace": "ペース",
+    "Crew skills": "搭乗員スキル"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4903,7 +4908,8 @@
     "five": "خمسة",
     "ladder": "سُلّم الترتيب",
     "number": "رقم",
-    "pace": "الوتيرة"
+    "pace": "الوتيرة",
+    "Crew skills": "مهارات الطاقم"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5768,7 +5774,8 @@
     "five": "pet",
     "ladder": "ljestvica",
     "number": "broj",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Vještine posade"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6634,7 +6641,8 @@
     "five": "öt",
     "ladder": "ranglista",
     "number": "szám",
-    "pace": "tempó"
+    "pace": "tempó",
+    "Crew skills": "Legénységi készségek"
   },
   "ko": {
     "Battles": "전투",
@@ -7507,7 +7515,8 @@
     "five": "5",
     "ladder": "순위표",
     "number": "번호",
-    "pace": "페이스"
+    "pace": "페이스",
+    "Crew skills": "승무원 스킬"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8377,7 +8386,8 @@
     "five": "vijf",
     "ladder": "ranglijst",
     "number": "nummer",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Bemanningsvaardigheden"
   },
   "cs": {
     "Battles": "Bitev",
@@ -9238,7 +9248,8 @@
     "five": "pět",
     "ladder": "žebříček",
     "number": "číslo",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Dovednosti posádky"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -10101,7 +10112,8 @@
     "five": "beş",
     "ladder": "sıralama",
     "number": "sayı",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Mürettebat becerileri"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10748,7 +10760,8 @@
     "five": "пяць",
     "ladder": "табліца лідараў",
     "number": "колькасць",
-    "pace": "тэмп"
+    "pace": "тэмп",
+    "Crew skills": "Навыкі экіпажа"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11402,7 +11415,8 @@
     "five": "päť",
     "ladder": "rebríček",
     "number": "číslo",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Spretnosti posadke"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -12057,7 +12071,8 @@
     "five": "pet",
     "ladder": "ljestvica",
     "number": "broj",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Vještine posade"
   },
   "th": {
     "Battles": "การรบ",
@@ -12923,7 +12938,8 @@
     "five": "ห้า",
     "ladder": "ตารางจัดอันดับ",
     "number": "หมายเลข",
-    "pace": "อัตราความคืบหน้า"
+    "pace": "อัตราความคืบหน้า",
+    "Crew skills": "ทักษะพลรถ"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13789,7 +13805,8 @@
     "five": "五",
     "ladder": "天梯",
     "number": "数量",
-    "pace": "节奏"
+    "pace": "节奏",
+    "Crew skills": "乘员技能"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14640,7 +14657,8 @@
     "five": "cinco",
     "ladder": "classificação",
     "number": "número",
-    "pace": "ritmo"
+    "pace": "ritmo",
+    "Crew skills": "Habilidades da tripulação"
   },
   "vi": {
     "Battles": "Số trận",
@@ -15485,7 +15503,8 @@
     "five": "năm",
     "ladder": "bảng xếp hạng",
     "number": "số",
-    "pace": "tốc độ"
+    "pace": "tốc độ",
+    "Crew skills": "Kỹ năng kíp lái"
   },
   "de": {
     "Battles": "Gefechte",
@@ -16344,7 +16363,8 @@
     "five": "fünf",
     "ladder": "Rangliste",
     "number": "Anzahl",
-    "pace": "Tempo"
+    "pace": "Tempo",
+    "Crew skills": "Besatzungsfertigkeiten"
   },
   "uk": {
     "Battles": "Бої",
@@ -17200,7 +17220,8 @@
     "five": "п’ять",
     "ladder": "таблиця лідерів",
     "number": "номер",
-    "pace": "темп"
+    "pace": "темп",
+    "Crew skills": "Навички екіпажу"
   },
   "it": {
     "Battles": "Battaglie",
@@ -18061,7 +18082,8 @@
     "five": "cinque",
     "ladder": "classifica",
     "number": "numero",
-    "pace": "ritmo"
+    "pace": "ritmo",
+    "Crew skills": "Abilità dell'equipaggio"
   },
   "sv": {
     "Battles": "Strider",
@@ -18931,7 +18953,8 @@
     "five": "fem",
     "ladder": "stege",
     "number": "nummer",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Besättningsfärdigheter"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19797,7 +19820,8 @@
     "five": "pet",
     "ladder": "lestvica",
     "number": "broj",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Veštine posade"
   },
   "el": {
     "Battles": "Μάχες",
@@ -20662,7 +20686,8 @@
     "five": "πέντε",
     "ladder": "κατάταξη",
     "number": "αριθμός",
-    "pace": "ρυθμός"
+    "pace": "ρυθμός",
+    "Crew skills": "Ικανότητες πληρώματος"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -21516,7 +21541,8 @@
     "five": "pieci",
     "ladder": "reitingu tabula",
     "number": "numurs",
-    "pace": "temps"
+    "pace": "temps",
+    "Crew skills": "Apkalpes prasmes"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -22164,7 +22190,8 @@
     "five": "पाँच",
     "ladder": "लीडरबोर्ड",
     "number": "संख्या",
-    "pace": "गति"
+    "pace": "गति",
+    "Crew skills": "क्रू कौशल"
   },
   "bg": {
     "Battles": "Битки",
@@ -23014,7 +23041,8 @@
     "five": "пет",
     "ladder": "класация",
     "number": "номер",
-    "pace": "темпо"
+    "pace": "темпо",
+    "Crew skills": "Умения на екипажа"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23884,7 +23912,8 @@
     "five": "penki",
     "ladder": "reitingų lentelė",
     "number": "numeris",
-    "pace": "tempas"
+    "pace": "tempas",
+    "Crew skills": "Įgulos įgūdžiai"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -24536,7 +24565,8 @@
     "five": "бес",
     "ladder": "көшбасшылар тақтасы",
     "number": "нөмір",
-    "pace": "қарқын"
+    "pace": "қарқын",
+    "Crew skills": "Экипаж дағдылары"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -25406,7 +25436,8 @@
     "five": "viisi",
     "ladder": "tulostaulukko",
     "number": "numero",
-    "pace": "tahti"
+    "pace": "tahti",
+    "Crew skills": "Miehistön taidot"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -26059,7 +26090,8 @@
     "five": "lima",
     "ladder": "leaderboard",
     "number": "numero",
-    "pace": "bilis"
+    "pace": "bilis",
+    "Crew skills": "Mga kasanayan ng crew"
   },
   "no": {
     "Battles": "Kamper",
@@ -26921,7 +26953,8 @@
     "five": "fem",
     "ladder": "rangering",
     "number": "nummer",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Mannskapsferdigheter"
   },
   "ro": {
     "Battles": "Lupte",
@@ -27772,7 +27805,8 @@
     "five": "cinci",
     "ladder": "clasament",
     "number": "număr",
-    "pace": "ritm"
+    "pace": "ritm",
+    "Crew skills": "Abilitățile echipajului"
   },
   "da": {
     "Battles": "Kampe",
@@ -28638,6 +28672,7 @@
     "five": "fem",
     "ladder": "rangliste",
     "number": "nummer",
-    "pace": "tempo"
+    "pace": "tempo",
+    "Crew skills": "Besætningsfærdigheder"
   }
 }

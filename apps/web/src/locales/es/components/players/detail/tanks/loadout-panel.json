@@ -1,0 +1,11 @@
+{
+  "title": "Configuración",
+  "equipment": "Equipamiento",
+  "directives": "Directivas",
+  "consumables": "Consumibles",
+  "ammo": "Munición",
+  "crew": "Habilidades de la tripulación",
+  "field-mods": "Modificaciones de campo",
+  "slot-empty": "Vacío",
+  "second-setup": "Este jugador mantiene una segunda configuración en este vehículo."
+}

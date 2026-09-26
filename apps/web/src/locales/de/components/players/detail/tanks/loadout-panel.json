@@ -1,0 +1,11 @@
+{
+  "title": "Ausstattung",
+  "equipment": "Zubehör",
+  "directives": "Direktiven",
+  "consumables": "Verbrauchsmaterial",
+  "ammo": "Munition",
+  "crew": "Besatzungsfertigkeiten",
+  "field-mods": "Feldmodifikationen",
+  "slot-empty": "Leer",
+  "second-setup": "Dieser Spieler verwendet eine zweite Ausstattung für dieses Fahrzeug."
+}

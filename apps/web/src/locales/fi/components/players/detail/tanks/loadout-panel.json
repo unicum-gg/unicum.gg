@@ -1,0 +1,11 @@
+{
+  "title": "Varustus",
+  "equipment": "Varusteet",
+  "directives": "Direktiivit",
+  "consumables": "Kulutustarvikkeet",
+  "ammo": "Ammukset",
+  "crew": "Miehistön taidot",
+  "field-mods": "Kenttämuutokset",
+  "slot-empty": "Tyhjä",
+  "second-setup": "Tällä pelaajalla on tässä ajoneuvossa toinen varustus."
+}

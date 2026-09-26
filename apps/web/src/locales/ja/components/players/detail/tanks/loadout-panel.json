@@ -1,0 +1,11 @@
+{
+  "title": "搭載構成",
+  "equipment": "拡張パーツ",
+  "directives": "ディレクティブ",
+  "consumables": "消耗品",
+  "ammo": "砲弾",
+  "crew": "搭乗員スキル",
+  "field-mods": "フィールド改造",
+  "slot-empty": "空",
+  "second-setup": "このプレイヤーはこの車両に2つ目の搭載構成を保存しています。"
+}
