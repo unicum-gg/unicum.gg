@@ -47,28 +47,41 @@ function setupGroup<T extends z.ZodTypeAny>(layout: T) {
 
 const module_ = z.object({ id: z.number().int(), name: name });
 
+/**
+ * A field the client may leave out OR send as null, read as left out.
+ *
+ * `optional()` alone accepts only absence, and a client that has nothing to
+ * say about a vehicle says `null`: the mod builds one object per vehicle with
+ * the same keys every time, so most of a carousel arrives with
+ * `progression: null` rather than without the key. Refusing that rejected
+ * whole batches over the vehicles that have no post progression, which is
+ * most of them.
+ */
+function absent<T extends z.ZodTypeAny>(schema: T) {
+  return schema.nullish().transform((value) => value ?? undefined);
+}
+
 export const loadoutBody = z.object({
   tankId: z.number().int(),
-  modules: z
-    .object({
+  modules: absent(
+    z.object({
       gun: module_.optional(),
       turret: module_.optional(),
       engine: module_.optional(),
       chassis: module_.optional(),
       radio: module_.optional(),
-    })
-    .optional(),
-  crew: z
-    .array(
+    }),
+  ),
+  crew: absent(
+    z.array(
       z.object({
         role: z.string().min(1).max(32),
         skills: z.array(name).max(40),
       }),
-    )
-    .max(12)
-    .optional(),
-  progression: z
-    .union([
+    ).max(12),
+  ),
+  progression: absent(
+    z.union([
       z.object({
         level: z.number().int().min(0).max(20),
         pairs: z
@@ -81,14 +94,14 @@ export const loadoutBody = z.object({
           .max(20),
       }),
       z.object({ tree: z.array(z.number().int()).max(60) }),
-    ])
-    .optional(),
-  setups: z
-    .object({
+    ]),
+  ),
+  setups: absent(
+    z.object({
       ammo: setupGroup(ammoLayout).optional(),
       devices: setupGroup(devicesLayout).optional(),
-    })
-    .optional(),
+    }),
+  ),
 });
 
 export const loadoutsUploadBody = z.object({
