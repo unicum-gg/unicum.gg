@@ -23,7 +23,13 @@ const shell = z.object({
   name: name,
   type: z.string().min(1).max(32),
   premium: z.boolean(),
-  count: z.number().int().min(0).max(1000),
+  // A thousand was a guess, and the game disproved it: a vehicle whose main
+  // armament is a 12.7mm machine gun carries 2700 rounds, so whole batches
+  // were refused over one scout. The cap is here to reject nonsense, not to
+  // second-guess the client, so it now sits far above anything the game has
+  // been seen to load. `shells_loaded` is an integer column for the same
+  // reason: eight kinds at this ceiling would overflow a smallint.
+  count: z.number().int().min(0).max(10000),
 });
 
 const ammoLayout = z.object({

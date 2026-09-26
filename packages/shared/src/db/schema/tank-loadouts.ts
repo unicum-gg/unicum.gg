@@ -2,6 +2,7 @@ import {
   bigint,
   boolean,
   index,
+  integer,
   jsonb,
   pgTable,
   primaryKey,
@@ -81,8 +82,16 @@ export function makeTankLoadoutsTable(region: string) {
       // table will want, and recomputing it per row per query would mean
       // unpacking the shell layout on every read.
       premiumShellShare: real("premium_shell_share"),
-      /** Rounds loaded across the active setup, so a share can be re-weighted. */
-      shellsLoaded: smallint("shells_loaded"),
+      /**
+       * Rounds loaded across the active setup, so a share can be re-weighted.
+       *
+       * An integer rather than a smallint, which is what this was until a
+       * 12.7mm machine gun turned up carrying 2700 rounds: eight kinds of
+       * round at the ceiling the endpoint now allows would overflow a
+       * smallint, and an overflow here is a failed write rather than a wrong
+       * number.
+       */
+      shellsLoaded: integer("shells_loaded"),
 
       /** `{gun,turret,engine,chassis,radio}`, each `{id,name}`. */
       modules: jsonb("modules"),
