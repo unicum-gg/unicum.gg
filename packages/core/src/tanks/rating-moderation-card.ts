@@ -35,6 +35,10 @@ export type RatingModerationCard = {
   tankSlug: string;
   region: Region;
   nickname: string;
+  /** Whether the author asked for their name to be left off the page. The card
+   * still carries it: what is being judged is whether a real player wrote
+   * this, and a blind card cannot be judged at all. */
+  anonymous: boolean;
   overall: number;
   fun: number;
   /** The author's record on this exact tank. The card leads with it: a verdict
@@ -86,6 +90,17 @@ export async function postRatingModerationCard(
       name: "Account WN8",
       value: Math.round(card.playerWn8).toLocaleString("en-US"),
       inline: true,
+    });
+  }
+
+  if (card.anonymous) {
+    // Said in a field rather than next to the name, which has to stay
+    // readable: the moderator is told what the page will show, so an approval
+    // is not made under the impression that this verdict will be signed.
+    fields.push({
+      name: "Published as",
+      value: "Anonymous, at their request. Their record still shows.",
+      inline: false,
     });
   }
 

@@ -44,6 +44,10 @@ export const ownRating = z.object({
   axes: z.array(axisAnswer),
   review: z.string().nullable(),
   reviewStatus: tankReviewStatusField,
+  anonymous: z.boolean().meta({
+    description:
+      "Whether they asked for their name to be left off the published review.",
+  }),
   battles: z.number().int().meta({
     description: "Their battles on the tank when the vote was last saved.",
   }),

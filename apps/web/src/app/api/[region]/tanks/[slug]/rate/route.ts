@@ -118,6 +118,10 @@ export async function POST(
     // difference is the whole contract of an edit: collapsing them here would
     // let a caller sending only new stars destroy a published review.
     review: body.review,
+    // Same three-state contract as the text above, for the same reason: absent
+    // leaves the choice alone, so a caller sending only new stars cannot put a
+    // name back on a review that was published without one.
+    anonymous: body.anonymous,
   });
 
   switch (result.outcome) {

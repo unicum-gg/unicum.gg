@@ -1,0 +1,22 @@
+-- An opinion published without its author's name.
+--
+-- Written opinions are signed twice over: by the nickname and by the record the
+-- vote was cast on. The record is what makes a review worth reading and stays
+-- exactly as it is; the name is the part somebody may not want attached to a
+-- verdict on a tank they play badly, which is the one tank their verdict is
+-- often most worth having.
+--
+-- Per review rather than per account, because it is a decision about one
+-- opinion: the same player may well sign the tank they are good at and not the
+-- one they are not.
+--
+-- The nickname is still stored on the row. It is what the moderation card is
+-- signed with, and what is being judged there is whether a real player wrote
+-- this, so an anonymous card would ask a moderator to judge blind. The flag
+-- only decides what the public read publishes.
+--
+-- Hand-written rather than generated: `drizzle-kit generate` cannot see the
+-- per-region tables inside their factory functions and asks to rename or drop
+-- them, so it never reaches this column.
+
+ALTER TABLE "tank_ratings" ADD COLUMN IF NOT EXISTS "anonymous" boolean DEFAULT false NOT NULL;

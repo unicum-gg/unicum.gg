@@ -1,5 +1,6 @@
 import {
   bigint,
+  boolean,
   index,
   integer,
   pgTable,
@@ -239,6 +240,24 @@ export const tankRatings = pgTable(
     /** Denormalised so a review can be signed without joining three regional
      * tables. Refreshed whenever the vote is edited, since nicknames change. */
     nickname: text("nickname").notNull(),
+    /**
+     * Whether the author asked for their name to be left off the published
+     * review.
+     *
+     * Stored rather than resolved at read time because it is a decision the
+     * author made about one opinion, not a setting on their account: somebody
+     * who signs a verdict on a tank they are good at may well want the one
+     * about a tank they are bad at published without their name. The record
+     * beside it is unaffected, which is the whole of what this hides and the
+     * reason a review stays worth reading: an opinion is weighed on the
+     * battles behind it, and those are still there.
+     *
+     * The nickname is kept on the row either way. It is what the moderation
+     * card is signed with, which is the one place the name has to be visible:
+     * what is being judged is whether a real player wrote this, and an
+     * anonymous card would ask a moderator to judge it blind.
+     */
+    anonymous: boolean("anonymous").notNull().default(false),
 
     // The quick vote. Both required: a vote is a pair, and letting one side be
     // skipped would silently change what each average is over.

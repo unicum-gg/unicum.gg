@@ -17,6 +17,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { UnicumError } from "@unicum.gg/sdk";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { unicum } from "@/services/sdk";
 import { StarInput } from "./star-input";
@@ -82,6 +83,10 @@ export function RateForm({
     (existing?.axes.length ?? 0) > 0,
   );
   const [review, setReview] = useState(existing?.review ?? "");
+  // Their earlier choice, not a default: somebody who published anonymously
+  // once and comes back to fix a typo must not have their name put back on by
+  // a box that reset itself.
+  const [anonymous, setAnonymous] = useState(existing?.anonymous ?? false);
   const [saving, setSaving] = useState(false);
 
   // Measured on the normalised string, the same one the server will store and
@@ -113,6 +118,7 @@ export function RateForm({
           // at is an instruction to withdraw the text. Absent would mean "leave
           // it alone", which is not what an emptied field says.
           review: reviewLength > 0 ? review : null,
+          anonymous,
         });
       toast.success(
         t(REVIEW_KEY[result.review as ReviewOutcome] ?? "review.none"),
@@ -235,6 +241,18 @@ export function RateForm({
               {reviewLength}/{MAX_REVIEW_LENGTH}
             </span>
           </p>
+          {/* Under the box rather than beside the button: it is a decision
+              about the text, and it only exists while there is text to
+              publish. The record is named out loud, because hiding a name is
+              worth little if the reader thinks it hid the rest. */}
+          <label className="flex cursor-pointer items-start gap-2 pt-0.5 text-xs text-fd-muted-foreground">
+            <Checkbox
+              checked={anonymous}
+              onCheckedChange={(v) => setAnonymous(v === true)}
+              disabled={saving}
+            />
+            {t("publish-without-my-name")}
+          </label>
           {existing?.reviewStatus === TankReviewStatus.Pending ? (
             <p className="text-xs text-amber-500">
               {t("your-review-is-waiting-on")}</p>

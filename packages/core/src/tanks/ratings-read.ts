@@ -340,6 +340,7 @@ export async function listTankReviews(tankId: number): Promise<TankReview[]> {
     .select({
       id: tankRatings.id,
       nickname: tankRatings.nickname,
+      anonymous: tankRatings.anonymous,
       region: tankRatings.region,
       overall: tankRatings.overall,
       fun: tankRatings.fun,
@@ -368,7 +369,11 @@ export async function listTankReviews(tankId: number): Promise<TankReview[]> {
       ? [
           {
             id: r.id,
-            nickname: r.nickname,
+            // Dropped here rather than hidden downstream: this is the only
+            // query that publishes a review, so a name left in the payload
+            // would be in the HTML, in the JSON the SDK hands out and in the
+            // structured data, whatever the card chose to draw.
+            nickname: r.anonymous ? null : r.nickname,
             region: r.region as Region,
             overall: r.overall,
             fun: r.fun,

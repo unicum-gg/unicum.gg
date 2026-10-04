@@ -57,11 +57,20 @@ async function ReviewCard({ review, locale }: { review: TankReview; locale: stri
   return (
     <article className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0">
       <header className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <PlayerName
-          region={review.region}
-          player={{ nickname: review.nickname }}
-          className="text-sm"
-        />
+        {/* No name, and nothing standing in for a link either: an author who
+            asked to be left off is not a profile a reader can open. Everything
+            that follows is unchanged, which is the whole bargain, the verdict
+            is still weighed on the battles behind it. */}
+        {review.nickname === null ? (
+          <span className="text-sm text-fd-muted-foreground">
+            {t("anonymous")}</span>
+        ) : (
+          <PlayerName
+            region={review.region}
+            player={{ nickname: review.nickname }}
+            className="text-sm"
+          />
+        )}
         {review.bracket === VoterBracket.Unknown ? null : (
           <span
             className="text-xs font-medium"

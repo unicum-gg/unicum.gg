@@ -51,8 +51,14 @@ export default async function TankCommunityPage({
     tankName: detail.meta.name,
     tankUrl,
     reviews: summary.reviews.map((r) => ({
-      author: r.nickname,
-      authorUrl: `${APP.URL}${ROUTES.PLAYER(r.region, r.nickname)}`,
+      // Structured data may only state what the page shows, so an author who
+      // asked to be left off is left off here too. `author` is required on a
+      // Review and Google documents exactly this placeholder for one whose
+      // name is not published, and there is no profile to point at.
+      author: r.nickname ?? "Anonymous",
+      authorUrl: r.nickname
+        ? `${APP.URL}${ROUTES.PLAYER(r.region, r.nickname)}`
+        : null,
       rating: r.overall,
       body: r.body,
       datePublished: r.createdAt,

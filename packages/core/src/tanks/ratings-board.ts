@@ -26,6 +26,9 @@ export type OwnTankRating = {
   detail: Partial<Record<TankRatingAxis, number>>;
   review: string | null;
   reviewStatus: TankReviewStatus;
+  /** Whether they asked for their name to be left off it, so the form opens on
+   * the choice they made rather than on the default. */
+  anonymous: boolean;
   battles: number;
   gameVersion: string | null;
   updatedAt: Date;
@@ -60,6 +63,7 @@ export async function getOwnTankRating(
     detail,
     review: row.review,
     reviewStatus: row.reviewStatus as TankReviewStatus,
+    anonymous: row.anonymous,
     battles: row.battles,
     gameVersion: row.gameVersion,
     updatedAt: row.updatedAt,

@@ -3612,6 +3612,8 @@ export interface components {
             axes: components["schemas"]["axisAnswer"][];
             review: string | null;
             reviewStatus: components["schemas"]["tankReviewStatusField"];
+            /** @description Whether they asked for their name to be left off the published review. */
+            anonymous: boolean;
             /** @description Their battles on the tank when the vote was last saved. */
             battles: number;
             gameVersion: string | null;
@@ -5327,6 +5329,8 @@ export interface components {
             versatility?: components["schemas"]["stars"] | null;
             /** @description A written opinion, queued for moderation rather than published. Send null to withdraw one previously written; leaving the field out entirely keeps whatever is already there. Measured after whitespace is collapsed. */
             review?: string | null;
+            /** @description Publish the written opinion without the author's name. The record it rests on (battles, win rate, damage, the account's rating) is published either way, since that is what makes a review worth reading. Leaving the field out keeps whatever was chosen before, so a caller sending only new stars cannot put a name back on a review published without one. */
+            anonymous?: boolean;
         };
         TankRateRefusedResponse: {
             /** @enum {string} */
@@ -5450,7 +5454,8 @@ export interface components {
         };
         tankReview: {
             id: number;
-            nickname: string;
+            /** @description The author, or null when they asked for their name to be left off this one. The record below is unaffected: what makes a review worth reading is the battles behind it, and those are published either way. */
+            nickname: string | null;
             /**
              * @description Game server region.
              * @enum {string}

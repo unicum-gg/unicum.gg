@@ -168,7 +168,9 @@ export function tankReviewsSchema(args: {
   tankUrl: string;
   reviews: {
     author: string;
-    authorUrl: string;
+    /** Null for a review published without its author's name: there is no
+     * profile behind it to point at. */
+    authorUrl: string | null;
     rating: number;
     body: string;
     datePublished: Date;
@@ -191,7 +193,7 @@ export function tankReviewsSchema(args: {
           // Google caps the reviewer name at 100 characters; a WG nickname is
           // far shorter, but the markup should not depend on that staying true.
           name: r.author.slice(0, 100),
-          url: r.authorUrl,
+          ...(r.authorUrl ? { url: r.authorUrl } : {}),
         },
         datePublished: r.datePublished.toISOString(),
         reviewBody: r.body,

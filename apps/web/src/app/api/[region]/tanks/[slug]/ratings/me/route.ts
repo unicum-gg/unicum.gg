@@ -87,6 +87,7 @@ export async function GET(
         })),
         review: own.review,
         reviewStatus: own.reviewStatus,
+        anonymous: own.anonymous,
         battles: own.battles,
         gameVersion: own.gameVersion,
         updatedAt: own.updatedAt,

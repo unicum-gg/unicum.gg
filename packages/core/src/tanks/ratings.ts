@@ -62,6 +62,14 @@ export type RatingSubmission = {
    * sends only new stars silently destroys a published review.
    */
   review: string | null | undefined;
+  /**
+   * Whether to leave their name off the published review.
+   *
+   * Absent means "leave the choice alone", on the same reasoning as the text
+   * above: a caller sending only new stars must not quietly put a name back on
+   * a review that was published without one.
+   */
+  anonymous: boolean | undefined;
 };
 
 export enum SubmitRatingOutcome {
@@ -150,6 +158,7 @@ export async function submitTankRating(
     .select({
       review: tankRatings.review,
       reviewStatus: tankRatings.reviewStatus,
+      anonymous: tankRatings.anonymous,
     })
     .from(tankRatings)
     .where(
@@ -197,6 +206,11 @@ export async function submitTankRating(
   const now = new Date();
   const columns = {
     nickname: submission.nickname,
+    // Spread rather than defaulted, so an absent flag writes nothing at all on
+    // an edit and lets the column's own default stand on an insert.
+    ...(submission.anonymous === undefined
+      ? {}
+      : { anonymous: submission.anonymous }),
     region: submission.region,
     accountId: submission.accountId,
     overall: submission.overall,
@@ -258,6 +272,12 @@ export async function submitTankRating(
       tankSlug: submission.tankSlug,
       region: submission.region,
       nickname: submission.nickname,
+      // The card is signed either way: what a moderator judges is whether a
+      // real player wrote this, and the record beside the name is their main
+      // signal. The flag rides along so they know the name will not be
+      // published, which is the one thing the card could otherwise mislead
+      // them about.
+      anonymous: submission.anonymous ?? existing?.anonymous ?? false,
       overall: submission.overall,
       fun: submission.fun,
       battles: record.battles,

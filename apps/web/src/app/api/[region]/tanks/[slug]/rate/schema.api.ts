@@ -41,6 +41,10 @@ export const TankRateBody = z.object({
       description:
         "A written opinion, queued for moderation rather than published. Send null to withdraw one previously written; leaving the field out entirely keeps whatever is already there. Measured after whitespace is collapsed.",
     }),
+  anonymous: z.boolean().optional().meta({
+    description:
+      "Publish the written opinion without the author's name. The record it rests on (battles, win rate, damage, the account's rating) is published either way, since that is what makes a review worth reading. Leaving the field out keeps whatever was chosen before, so a caller sending only new stars cannot put a name back on a review published without one.",
+  }),
 });
 
 /** Response of `POST /{region}/tanks/{slug}/rate`. */

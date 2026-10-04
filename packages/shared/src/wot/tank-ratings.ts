@@ -233,7 +233,15 @@ export type RegionVerdict = {
  * alone: what makes it worth reading is that the person has the battles. */
 export type TankReview = {
   id: number;
-  nickname: string;
+  /**
+   * The author, or null when they asked for their name to be left off.
+   *
+   * Null rather than a sibling `anonymous` flag carrying the nickname beside
+   * it: every consumer of this type publishes what it is given, so a reader
+   * that forgot to check the flag would print the name. There is nothing to
+   * forget if the name is not there.
+   */
+  nickname: string | null;
   region: Region;
   /** The author's own stars, so the text is read next to the verdict it
    * explains. */

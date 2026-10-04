@@ -61,7 +61,10 @@ export const axisVerdict = z.object({
  */
 export const tankReview = z.object({
   id: z.number().int(),
-  nickname: z.string(),
+  nickname: z.string().nullable().meta({
+    description:
+      "The author, or null when they asked for their name to be left off this one. The record below is unaffected: what makes a review worth reading is the battles behind it, and those are published either way.",
+  }),
   region: regionPath,
   overall: z.number().int(),
   fun: z.number().int(),
