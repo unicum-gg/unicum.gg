@@ -100,6 +100,13 @@ function MapVideos({
     return { tactics, randoms };
   }, [all]);
 
+  // Which list draws the cards/table toggle. Both follow the same preference,
+  // so only one of them may draw it, but it cannot always be the first: a map
+  // with no tactic and five random battles rendered it on the empty section,
+  // where the section itself (rightly) hides a control over nothing. A reader
+  // whose stored preference was the table then had no way back to the cards.
+  const toggleOnTactics = tactics.length > 0;
+
   return (
     <>
       {/* The player sits above both lists rather than over the minimap: the
@@ -129,7 +136,7 @@ function MapVideos({
           }
           battles={tactics}
           view={view}
-          onViewChange={setView}
+          onViewChange={toggleOnTactics ? setView : undefined}
           emptyText={t("no-tactic-yet")}
           action={<SubmitTacticDialogSlot region={region} map={map} />}
         />
@@ -154,6 +161,7 @@ function MapVideos({
               }
               battles={randoms}
               view={view}
+              onViewChange={toggleOnTactics ? undefined : setView}
               emptyText=""
             />
           </Panel>
