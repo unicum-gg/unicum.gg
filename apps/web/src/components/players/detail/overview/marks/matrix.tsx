@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/tooltip";
 import { unicum } from "@/services/sdk";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { cn } from "@/lib/utils";
 
 /**
@@ -89,7 +90,7 @@ export function MarksMatrix<K extends string>({
   param: "moe" | "mom";
   levelOf: (tank: PlayerTankRow) => number | null;
 }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/players/detail/overview/marks/matrix");
   // Armed by the first hover, never on mount: the panel is above the fold on
   // every profile and this list is a few hundred rows.

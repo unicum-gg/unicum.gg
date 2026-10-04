@@ -3,6 +3,7 @@
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "@/hooks/use-pathname";
 import { useRouter } from "@/hooks/use-router";
@@ -64,7 +65,7 @@ export function ClanCompareView({
   wn8Fallback: Map<string, WN8Expected>;
   maxClans: number;
 }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/clans/compare/view");
   const router = useRouter();
   const pathname = usePathname();

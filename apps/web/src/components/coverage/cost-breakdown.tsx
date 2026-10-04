@@ -3,6 +3,7 @@
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { useFormat } from "@/hooks/use-format";
 import type { ExpenseLedger } from "@unicum.gg/shared";
 import { useMoney } from "@/hooks/use-money";
@@ -29,7 +30,7 @@ export type InfraCosts = ExpenseLedger;
  * therefore the currency) is only known in the browser.
  */
 export function CostBreakdown({ costs }: { costs: InfraCosts }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { date } = useFormat();
   const { t } = useTranslation("components/coverage/cost-breakdown");
   const money = useMoney();

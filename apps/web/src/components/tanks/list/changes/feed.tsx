@@ -3,6 +3,7 @@
 import { useLocale } from "@onruntime/translations/react";
 import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { useMemo } from "react";
 import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
@@ -137,7 +138,7 @@ function VersionHeader({ version }: { version: FeedVersion }) {
 function TankBlock({ region, tank }: { region: Region; tank: FeedTank }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/tanks/list/changes/feed");
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { identity } = tank;
   const changes = tank.changes
     .map((c) => formatSpecChange(c.field, c.previous, c.next, locale))

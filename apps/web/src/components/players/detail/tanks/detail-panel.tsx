@@ -4,6 +4,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { statLabel } from "@/components/stat-label";
 import { Interpolate } from "@/components/interpolate";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import dynamic from "next/dynamic";
 import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
@@ -205,7 +206,7 @@ export function PlayerTankDetailPanel({
 }
 
 function Block({ title, rows }: { title: string; rows: DetailRow[] }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   if (rows.length === 0) return null;
   return (
     <div>

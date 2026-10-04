@@ -18,16 +18,9 @@
     "reward": "Ödül"
   },
   "moe": {
-    "0": "Henüz nişan yok",
-    "1": "1 puan",
-    "2": "2 puan",
-    "3": "3 puan"
+    "0": "Henüz nişan yok"
   },
   "mom": {
-    "0": "Henüz rozet yok",
-    "1": "3. Sınıf",
-    "2": "2. Sınıf",
-    "3": "1. Sınıf",
-    "4": "Ace Tanker"
+    "0": "Henüz rozet yok"
   }
 }

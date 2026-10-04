@@ -39,6 +39,7 @@ import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { FilterSubject } from "@/components/filter-subject";
 import {
   SortDirection,
@@ -104,7 +105,7 @@ export function PlayerTanksTable({
   selectedSlug?: string | null;
 }) {
   const { num } = useFormat();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/players/detail/tanks/table");
   const { t: tTable } = useTranslation("components/tanks/table");
   // The columns are module constants, so the strings their cells render come

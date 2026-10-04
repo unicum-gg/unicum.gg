@@ -1,5 +1,5 @@
 import { dateFormat } from "@/lib/format";
-import { getTranslation } from "@/lib/translations.server";
+import { getStatLabels, getTranslation } from "@/lib/translations.server";
 import { Fragment } from "react";
 import {
   Panel,
@@ -53,7 +53,7 @@ export async function TankChangesHistory({
   locale: string;
 }) {
   const { t } = await getTranslation("components/tanks/detail/history/index", locale);
-  const { t: tStats } = await getTranslation("components/stat-labels", locale);
+  const { t: tStats } = await getStatLabels(locale);
   const { t: tGame } = await getTranslation("game/vocabulary", locale);
   // Each version is a section; sections are joined by the site's diagonal
   // spacer (PanelSeparator), not a margin gap. Versions whose changes are all

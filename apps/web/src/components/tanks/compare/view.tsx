@@ -3,6 +3,7 @@
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/hooks/use-router";
@@ -89,7 +90,7 @@ export function TankCompareView({
   catalog: CompareCatalog;
   ranges: SpecRanges;
 }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/tanks/compare/view");
   const router = useRouter();
   const searchParams = useSearchParams();

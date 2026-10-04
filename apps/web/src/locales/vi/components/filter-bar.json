@@ -18,16 +18,9 @@
     "reward": "Phần thưởng"
   },
   "moe": {
-    "0": "Chưa có dấu hiệu",
-    "1": "1 điểm",
-    "2": "2 điểm",
-    "3": "3 điểm"
+    "0": "Chưa có dấu hiệu"
   },
   "mom": {
-    "0": "Chưa có huy hiệu",
-    "1": "Hạng 3",
-    "2": "Hạng 2",
-    "3": "Hạng 1",
-    "4": "Ace Tanker"
+    "0": "Chưa có huy hiệu"
   }
 }

@@ -18,16 +18,9 @@
     "reward": "Odmena"
   },
   "moe": {
-    "0": "Zatiaľ žiadny znak",
-    "1": "1 značka",
-    "2": "2 značky",
-    "3": "3 značky"
+    "0": "Zatiaľ žiadny znak"
   },
   "mom": {
-    "0": "Zatiaľ žiadny odznak",
-    "1": "3. trieda",
-    "2": "2. trieda",
-    "3": "1. trieda",
-    "4": "Jazdec elitných tankov"
+    "0": "Zatiaľ žiadny odznak"
   }
 }

@@ -155,9 +155,9 @@
     "tournaments": "Turnaje"
   },
   "marks": {
-    "1": "1 Záplata",
-    "2": "2 Záplaty",
-    "3": "3 Záplaty",
+    "1": "1 Znak",
+    "2": "2 Znaky",
+    "3": "3 Znaky",
     "name": "Vítězné znaky"
   }
 }

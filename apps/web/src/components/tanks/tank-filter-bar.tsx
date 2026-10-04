@@ -34,6 +34,8 @@ import {
 } from "@unicum.gg/shared";
 import type { TankFilters } from "@/hooks/use-tank-filters";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
+import { markCountName, masteryBadgeName } from "@/components/game-name";
 import type { FilterSubject } from "@/components/filter-subject";
 
 const CATEGORY_OPTIONS = [
@@ -64,7 +66,7 @@ export function TankFilterBar<T>({
   extra?: ReactNode;
 }) {
   const { locale } = useLocale();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { region } = useRegion();
   const { t } = useTranslation("components/filter-bar");
   const { t: tOwn } = useTranslation("components/tanks/tank-filter-bar");
@@ -207,7 +209,11 @@ export function TankFilterBar<T>({
                     )}
                   </Chip>
                 </TooltipTrigger>
-                <TooltipContent>{t(`moe.${value}`)}</TooltipContent>
+                <TooltipContent>
+                  {value === 0
+                    ? t("moe.0")
+                    : markCountName(value as 1 | 2 | 3, tGame)}
+                </TooltipContent>
               </Tooltip>
             ))}
           </TooltipProvider>
@@ -235,7 +241,11 @@ export function TankFilterBar<T>({
                     )}
                   </Chip>
                 </TooltipTrigger>
-                <TooltipContent>{t(`mom.${value}`)}</TooltipContent>
+                <TooltipContent>
+                  {value === 0
+                    ? t("mom.0")
+                    : masteryBadgeName(value as 1 | 2 | 3 | 4, tGame)}
+                </TooltipContent>
               </Tooltip>
             ))}
           </TooltipProvider>

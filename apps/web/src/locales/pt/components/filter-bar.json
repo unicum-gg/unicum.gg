@@ -18,16 +18,9 @@
     "reward": "Recompensa"
   },
   "moe": {
-    "0": "Ainda sem marca",
-    "1": "1 marca",
-    "2": "2 marcas",
-    "3": "3 marcas"
+    "0": "Ainda sem marca"
   },
   "mom": {
-    "0": "Ainda sem distintivo",
-    "1": "3ª Classe",
-    "2": "2ª Classe",
-    "3": "1ª Classe",
-    "4": "Distribuidor Ace"
+    "0": "Ainda sem distintivo"
   }
 }

@@ -151,6 +151,7 @@ export function TanksIndex({
   const rows = items ?? EMPTY_ROWS;
 
   const { t: tRange } = useTranslation("components/tanks/list/index");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const { t: tSpecs } = useTranslation("components/tanks/list/spec-columns");
   const { t: tPerf } = useTranslation("components/tanks/perf-columns");
 
@@ -167,7 +168,14 @@ export function TanksIndex({
       }));
     }
     if (tab === TankTab.Economics) return named(ECON_RANGE_SPECS);
-    if (tab === TankTab.MarksOfMastery) return named(MASTERY_RANGE_SPECS);
+    // The four mastery badges are Wargaming's own names, so the range filter
+    // reads them from `game/vocabulary` rather than keeping a second copy of
+    // them in its own file. `composeStatLabels` says what a second copy costs.
+    if (tab === TankTab.MarksOfMastery)
+      return MASTERY_RANGE_SPECS.map((spec) => ({
+        ...spec,
+        label: tGame(`mastery-badges.${spec.key}`),
+      }));
     if (tab === TankTab.MarksOfExcellence) return named(MOE_RANGE_SPECS);
     return PERF_COLUMNS.map((c) => ({
       key: c.key,
@@ -175,7 +183,7 @@ export function TanksIndex({
       value: (row: TankListItem) =>
         row.stats ? c.sortValue(row.stats, rangeMetric) : null,
     }));
-  }, [tab, rangeMetric, tRange, tSpecs, tPerf]);
+  }, [tab, rangeMetric, tRange, tSpecs, tPerf, tGame]);
 
   const { filtered, filters } = useTankFilters(
     rows,

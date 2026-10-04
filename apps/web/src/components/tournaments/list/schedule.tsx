@@ -7,6 +7,7 @@ import { Interpolate } from "@/components/interpolate";
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { format, isSameDay } from "date-fns";
 import Image from "next/image";
 import Link from "@/components/link";
@@ -169,7 +170,7 @@ export function TournamentSchedule({
   rows: TournamentListRow[];
 }) {
   const { locale } = useLocale();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t: tCopy } = useTranslation("components/tournaments/list/schedule");
   const { t } = useTranslation("components/tournaments/list/schedule");
   // Zero until the client has a clock, which is what keeps "Today" honest on a

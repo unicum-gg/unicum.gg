@@ -28,6 +28,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { tankParamName } from "@/components/game-name";
 
 // The crew roles are Wargaming's own words, read from its API into
@@ -85,7 +86,7 @@ function SkillTooltip({
   level: number;
   crewSize: number;
 }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/tanks/detail/specifications/crew/index");
   const { t: tParams } = useTranslation("game/tank-params");
   const lines = effects

@@ -18,16 +18,9 @@
     "reward": "Ricompensa"
   },
   "moe": {
-    "0": "Nessun marchio per ora",
-    "1": "1 punto",
-    "2": "2 punti",
-    "3": "3 punti"
+    "0": "Nessun marchio per ora"
   },
   "mom": {
-    "0": "Nessun distintivo per ora",
-    "1": "3° Classe",
-    "2": "2° Classe",
-    "3": "1° Classe",
-    "4": "Ace Tanker"
+    "0": "Nessun distintivo per ora"
   }
 }

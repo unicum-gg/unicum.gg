@@ -157,3 +157,35 @@ export function clanRoleName(role: string, tRoles: TranslateFunction): string {
   if (name !== role) return name;
   return role.charAt(0).toUpperCase() + role.slice(1).replace(/_/g, " ");
 }
+
+/**
+ * How many Marks of Excellence a gun carries, in the reader's language.
+ *
+ * The count and the word are catalogued together (`marks.1`, `marks.2`,
+ * `marks.3`) rather than composed from a number and a noun, because the noun
+ * has to agree with the number and the order is the language's: Japanese writes
+ * "2マーク" with no space and Chinese "2星".
+ *
+ * Read through here rather than straight off the catalogue for the same reason
+ * every other name on this page is: a bare "2 marks" written into a prose file
+ * reads as a score rather than as the marks on a gun, and came back translated
+ * as one in a third of the tree. `composeStatLabels` has the measurement.
+ */
+export function markCountName(bars: 1 | 2 | 3, tGame: TranslateFunction): string {
+  return tGame(`marks.${bars}`);
+}
+
+/**
+ * The Mark of Mastery a vehicle's record carries, in the reader's language.
+ *
+ * Keyed by the `mark_of_mastery` value Wargaming answers with (4 Ace, 3 1st, 2
+ * 2nd, 1 3rd), which is what every caller already holds, against a catalogue
+ * keyed by the badge's own name.
+ */
+export function masteryBadgeName(
+  mastery: 1 | 2 | 3 | 4,
+  tGame: TranslateFunction,
+): string {
+  const key = (["class3", "class2", "class1", "ace"] as const)[mastery - 1];
+  return tGame(`mastery-badges.${key}`);
+}

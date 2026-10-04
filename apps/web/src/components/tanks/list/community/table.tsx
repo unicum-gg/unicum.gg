@@ -35,6 +35,7 @@ import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { CommunityBoardRow } from "./row";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 
 const INT_FORMAT = {} as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
@@ -158,7 +159,7 @@ export function CommunityTable({
   page?: number;
 }) {
   const { num } = useFormat();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t: tTable } = useTranslation("components/tanks/table");
   const { t: tTips } = useTranslation("components/tanks/list/community/table");
   const [sort, setSort] = useState<SortState>({

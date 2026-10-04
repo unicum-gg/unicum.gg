@@ -2,6 +2,7 @@
 
 import { statLabel } from "@/components/stat-label";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { bestIndex, type MetricRow } from "@/components/compare/cells";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -112,7 +113,7 @@ export function ComparisonTable({
   headerWinners?: Set<number>;
 }) {
   const { t } = useTranslation("components/clans/compare/comparison-table");
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   return (
     <Table className="my-0! table-fixed [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td]:whitespace-nowrap [&_thead_th:first-child]:pl-4! [&_tbody_tr]:border-b [&_tbody_tr]:border-fd-border [&_thead_tr]:border-b [&_thead_tr]:border-fd-border [&_td]:border-r [&_th]:border-r [&_td]:border-fd-border [&_th]:border-fd-border [&_td:last-child]:border-r-0 [&_th:last-child]:border-r-0">
       <TableHeader>

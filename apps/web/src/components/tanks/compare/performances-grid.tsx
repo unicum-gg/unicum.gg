@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "@onruntime/translations/react";
-import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { statLabel } from "@/components/stat-label";
 import type { ReactNode } from "react";
 import { RATING_COLOR_CLASS } from "@unicum.gg/shared";
@@ -28,7 +28,7 @@ export function TankComparePerformancesGrid({
   labelWidth?: string;
 }) {
   const { locale } = useLocale();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   // The horizontal scroll is only offered where it is needed (narrow screens):
   // a scroll container becomes the sticky header's containing block, so from
   // `lg`, where the table fits, the page itself scrolls and the vehicles stay in

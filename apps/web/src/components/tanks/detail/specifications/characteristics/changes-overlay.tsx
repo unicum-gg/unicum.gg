@@ -4,6 +4,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { useEffect, useMemo, useState, type RefObject } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type { TankSpec } from "@unicum.gg/shared";
@@ -37,7 +38,7 @@ export function CharacteristicsChanges({
   watch: RefObject<HTMLDivElement | null>;
 }) {
   const { locale } = useLocale();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/tanks/detail/specifications/characteristics/changes-overlay");
   const [tableInView, setTableInView] = useState(true);
   useEffect(() => {

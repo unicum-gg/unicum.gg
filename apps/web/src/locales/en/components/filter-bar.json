@@ -18,16 +18,9 @@
     "reward": "Reward"
   },
   "moe": {
-    "0": "No mark yet",
-    "1": "1 mark",
-    "2": "2 marks",
-    "3": "3 marks"
+    "0": "No mark yet"
   },
   "mom": {
-    "0": "No badge yet",
-    "1": "3rd Class",
-    "2": "2nd Class",
-    "3": "1st Class",
-    "4": "Ace Tanker"
+    "0": "No badge yet"
   }
 }

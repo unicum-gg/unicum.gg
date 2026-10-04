@@ -18,16 +18,9 @@
     "reward": "Gantimpala"
   },
   "moe": {
-    "0": "Wala pang mark",
-    "1": "1 marka",
-    "2": "2 marka",
-    "3": "3 marka"
+    "0": "Wala pang mark"
   },
   "mom": {
-    "0": "Wala pang badge",
-    "1": "3rd Class",
-    "2": "2nd Class",
-    "3": "1st Class",
-    "4": "Ace Tanker"
+    "0": "Wala pang badge"
   }
 }

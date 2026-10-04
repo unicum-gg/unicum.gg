@@ -9,6 +9,7 @@ import {
   type Dictionaries,
   type Namespace,
 } from "@/locales/generated";
+import { composeStatLabels } from "@/lib/stat-labels";
 import { DEFAULT_LOCALE, isLocale, Locale } from "./translations";
 
 /**
@@ -101,4 +102,19 @@ export async function getTranslation(
     { namespace, debug: process.env.NODE_ENV === "development" },
   );
   return { t, locale: resolved };
+}
+
+/**
+ * The server half of the stat-label translator, paired with `useStatLabels`.
+ *
+ * Same composition, same reason: a heading that is one of the game's own names
+ * comes off `game/vocabulary` rather than being translated a second time under
+ * a prose prompt. See `composeStatLabels`.
+ */
+export async function getStatLabels(locale: string): Promise<Translation> {
+  const [stats, game] = await Promise.all([
+    getTranslation("components/stat-labels", locale),
+    getTranslation("game/vocabulary", locale),
+  ]);
+  return { t: composeStatLabels(stats.t, game.t), locale: stats.locale };
 }

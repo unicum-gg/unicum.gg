@@ -3,6 +3,7 @@
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { SHELL_LABEL, iconUrl } from "@unicum.gg/shared";
@@ -73,7 +74,7 @@ export function ShotPicker({
   /** The kinds this gun actually carries, which is not every kind offered. */
   carried: string[];
 }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t: tGame } = useTranslation("game/vocabulary");
   const { t } = useTranslation("components/tanks/detail/viewer/shot");
   const on = shells[round];

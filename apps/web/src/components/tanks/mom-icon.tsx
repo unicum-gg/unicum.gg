@@ -6,6 +6,7 @@
 // cost more than the icon weighs.
 
 import { useTranslation } from "@/hooks/use-translation";
+import { masteryBadgeName } from "@/components/game-name";
 import { cn } from "@/lib/utils";
 import { MOM_COLORS } from "@/components/tanks/mom-colors";
 
@@ -25,15 +26,6 @@ const MOM_SYMBOL: Record<1 | 2 | 3 | 4, string> = {
   1: "3", // 3rd Class
 };
 
-/** The badge a mastery level is, keyed the way `game/vocabulary` names it: the
- * payload counts 1 to 4, the vocabulary is keyed by the badge. */
-const MOM_KEY: Record<1 | 2 | 3 | 4, string> = {
-  4: "ace",
-  3: "class1",
-  2: "class2",
-  1: "class3",
-};
-
 export function MoMIcon({
   mastery,
   className,
@@ -48,11 +40,11 @@ export function MoMIcon({
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid"
       role="img"
-      aria-label={tGame(`mastery-badges.${MOM_KEY[mastery]}`)}
+      aria-label={masteryBadgeName(mastery, tGame)}
       className={cn("mx-auto block h-5 w-auto", className)}
       style={{ color: MOM_COLORS[mastery] }}
     >
-      <title>{tGame(`mastery-badges.${MOM_KEY[mastery]}`)}</title>
+      <title>{masteryBadgeName(mastery, tGame)}</title>
       <path d={WREATH} fill="currentColor" fillRule="evenodd" />
       <text
         x="15"

@@ -8,6 +8,7 @@ import { useFormat } from "@/hooks/use-format";
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { format } from "date-fns";
 import Image from "next/image";
 import { ClanTag } from "@/components/entity/clan-tag";
@@ -261,7 +262,7 @@ function MetricColumn({
   metric: MetricCell;
   ratingCol?: string;
 }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   return (
     <div
       data-rating-col={ratingCol}

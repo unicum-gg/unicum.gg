@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { statLabel } from "@/components/stat-label";
 import Link from "@/components/link";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,7 @@ export function SegmentedControl<T extends string>({
   onSelect?: (id: T) => void;
   className?: string;
 }) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   return (
     <div
       className={cn(

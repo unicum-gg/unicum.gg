@@ -43,6 +43,7 @@ import {
   type EconColumn,
 } from "./columns";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 
 export function EconColumnSelector() {
   const { t } = useTranslation("components/tanks/list/economics/columns");
@@ -89,7 +90,7 @@ export function TanksEconTable({
   selection?: TankSelection;
 }) {
   const { locale } = useLocale();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t: tTable } = useTranslation("components/tanks/table");
   const [sort, setSort] = useState<SortState>({
     key: "buyCredits",

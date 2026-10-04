@@ -5,6 +5,7 @@ import type { NumberFormatter } from "@/lib/format";
 import { statLabel } from "@/components/stat-label";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { SlidersHorizontalIcon } from "@phosphor-icons/react";
 import {
   type ReactNode,
@@ -220,7 +221,7 @@ export function usePlayerColumns(): [Set<string>, (key: string) => void] {
 }
 
 export function PlayerColumnSelector() {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation(
     "components/players/detail/tanks/vehicle-columns",
   );

@@ -18,16 +18,9 @@
     "reward": "Récompense"
   },
   "moe": {
-    "0": "Pas encore de marque",
-    "1": "1 point",
-    "2": "2 points",
-    "3": "3 points"
+    "0": "Pas encore de marque"
   },
   "mom": {
-    "0": "Pas encore d’insigne",
-    "1": "3ème Classe",
-    "2": "2ème Classe",
-    "3": "1ère Classe",
-    "4": "As du char"
+    "0": "Pas encore d’insigne"
   }
 }

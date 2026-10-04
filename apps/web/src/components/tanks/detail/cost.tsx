@@ -12,6 +12,7 @@ import {
 } from "@/components/tanks/free-xp-controls";
 import { useFreeXpSettings } from "@/hooks/use-free-xp";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import {
   Tooltip,
   TooltipContent,
@@ -54,7 +55,7 @@ export function TankCost({
   isReward: boolean;
 }) {
   const { num } = useFormat();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/tanks/detail/cost");
   const { tier, setTier, rate, rateInput, setRate } = useFreeXpSettings();
   const fmt = moneyFmt(region);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import Image from "next/image";
 import { CheckIcon } from "lucide-react";
 import type { LoadoutDirective } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
@@ -48,7 +49,7 @@ function DirectiveTooltip({
   mounted: boolean;
 }) {
   const { t } = useTranslation("components/tanks/detail/specifications/directives/index");
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   if (directive.crew) {
     const boost =
       directive.boostKind === "level"

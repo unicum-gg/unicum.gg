@@ -18,16 +18,9 @@
     "reward": "Recompensa"
   },
   "moe": {
-    "0": "Aún sin marca",
-    "1": "1 marca",
-    "2": "2 marcas",
-    "3": "3 marcas"
+    "0": "Aún sin marca"
   },
   "mom": {
-    "0": "Aún sin insignia",
-    "1": "3ª Clase",
-    "2": "2ª Clase",
-    "3": "1ª Clase",
-    "4": "As del Tanque"
+    "0": "Aún sin insignia"
   }
 }

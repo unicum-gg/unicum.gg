@@ -18,16 +18,9 @@
     "reward": "Jutalom"
   },
   "moe": {
-    "0": "Még nincs kiválósági jel",
-    "1": "1 jel",
-    "2": "2 jel",
-    "3": "3 jel"
+    "0": "Még nincs kiválósági jel"
   },
   "mom": {
-    "0": "Még nincs jelvény",
-    "1": "3. Osztály",
-    "2": "2. Osztály",
-    "3": "1. Osztály",
-    "4": "Asztali Tankér"
+    "0": "Még nincs jelvény"
   }
 }

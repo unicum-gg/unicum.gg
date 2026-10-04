@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { statLabel } from "@/components/stat-label";
 
 import * as React from "react"
@@ -295,7 +295,7 @@ function ChartLegendContent({
   hideIcon?: boolean
   nameKey?: string
 } & RechartsPrimitive.DefaultLegendContentProps) {
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { config } = useChart()
 
   if (!payload?.length) {

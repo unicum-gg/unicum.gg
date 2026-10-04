@@ -5,6 +5,7 @@ import type { NumberFormatter } from "@/lib/format";
 import { useFormat } from "@/hooks/use-format";
 import { statLabel } from "@/components/stat-label";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import {
   Table,
   TableBody,
@@ -249,7 +250,7 @@ export function StrongholdStatsTable(
 ) {
   const { num } = useFormat();
   const { t } = useTranslation("components/players/detail/overview/stronghold-stats-table");
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const loading = "loading" in props;
   // Mode-specific rows (e.g. the Steel Hunter HR) appended to the shared set,
   // so the skeleton and the real table always render the same labels. The win

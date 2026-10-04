@@ -133,9 +133,9 @@
     "wheeled": "ล้อยาง"
   },
   "mastery-badges": {
-    "class3": "3rd Class",
-    "class2": "2nd Class",
-    "class1": "1st Class",
+    "class3": "ชั้น 3",
+    "class2": "ชั้น 2",
+    "class1": "ชั้น 1",
     "ace": "Ace Tanker"
   },
   "clan-modes": {

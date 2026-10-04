@@ -18,16 +18,9 @@
     "reward": "Nagrada"
   },
   "moe": {
-    "0": "Još nema oznake",
-    "1": "1 oznaka",
-    "2": "2 oznake",
-    "3": "3 oznake"
+    "0": "Još nema oznake"
   },
   "mom": {
-    "0": "Još nema bedža",
-    "1": "3. razred",
-    "2": "2. razred",
-    "3": "1. razred",
-    "4": "Ace Tanker"
+    "0": "Još nema bedža"
   }
 }

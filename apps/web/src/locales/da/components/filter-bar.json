@@ -18,16 +18,9 @@
     "reward": "Belønning"
   },
   "moe": {
-    "0": "Ingen mærker endnu",
-    "1": "1 mark",
-    "2": "2 mark",
-    "3": "3 mark"
+    "0": "Ingen mærker endnu"
   },
   "mom": {
-    "0": "Ingen badges endnu",
-    "1": "3. Klasse",
-    "2": "2nd Klasse",
-    "3": "1st Klasse",
-    "4": "Ace Tanker"
+    "0": "Ingen badges endnu"
   }
 }

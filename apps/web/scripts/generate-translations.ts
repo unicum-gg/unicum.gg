@@ -21,6 +21,8 @@ import {
   catalogueFilledPlaceholders,
   duplicatedGameName,
   echoedFill,
+  cataloguedCopy,
+  cataloguedNames,
   gameNames,
   isGameNamespace,
   missingGameName,
@@ -475,15 +477,62 @@ function officialSheet(locale: Locale): Record<string, string> {
  */
 const gameNameSheets = new Map<Locale, GameName[]>();
 
+/** One locale's `game/vocabulary`, read once. The English side is a run
+ * constant and was being parsed twice per locale before this. */
+const vocabularies = new Map<string, Record<string, unknown>>();
+
+function vocabularyFor(locale: Locale): Record<string, unknown> {
+  const held = vocabularies.get(locale);
+  if (held) return held;
+  const read = (readJson(join(localesRoot, locale, "game", "vocabulary.json")) ??
+    {}) as Record<string, unknown>;
+  vocabularies.set(locale, read);
+  return read;
+}
+
 function gameNamesFor(locale: Locale): GameName[] {
   const held = gameNameSheets.get(locale);
   if (held) return held;
-  const read = (target: Locale) =>
-    (readJson(join(localesRoot, target, "game", "vocabulary.json")) ??
-      {}) as Record<string, unknown>;
-  const names = gameNames(read(DEFAULT_LOCALE), read(locale));
+  const names = gameNames(vocabularyFor(DEFAULT_LOCALE), vocabularyFor(locale));
   gameNameSheets.set(locale, names);
   return names;
+}
+
+const cataloguedSheets = new Map<Locale, Map<string, string>>();
+
+/**
+ * The catalogue a locale answers a bare name with, read once per locale.
+ *
+ * Separate from `gameNamesFor` because the two want opposite things from the
+ * same file: that one holds a sentence to a name it contains and has nothing to
+ * check when the locale keeps the English word, this one copies the catalogue's
+ * answer and "the same as English" is one of its answers.
+ */
+function cataloguedNamesFor(locale: Locale): Map<string, string> {
+  const held = cataloguedSheets.get(locale);
+  if (held) return held;
+  const names = cataloguedNames(
+    vocabularyFor(DEFAULT_LOCALE),
+    vocabularyFor(locale),
+  );
+  cataloguedSheets.set(locale, names);
+  return names;
+}
+
+/**
+ * The game's own word for a prose key that is nothing but one of its names, or
+ * nothing when the key is not one.
+ *
+ * `game/` and the term request are exempt for the same reason they are exempt
+ * from the two rules below: those values ARE the catalogue this reads.
+ */
+function cataloguedCopyIn(
+  source: string,
+  namespace: string,
+  locale: Locale,
+): string | undefined {
+  if (isGameNamespace(namespace) || namespace === "terms") return undefined;
+  return cataloguedCopy(source, cataloguedNamesFor(locale));
 }
 
 /**
@@ -880,6 +929,18 @@ function isStale(
   if (isGameClientNamespace(namespace)) return false;
   // An identifier that came back changed has to be written again, as itself.
   if (isIdentifier(source) && current !== source) return true;
+  // The same rule for a key filled from `game/vocabulary` rather than from
+  // English, and it is the only way a corrected catalogue ever reaches one.
+  //
+  // Everything else here keys on the ENGLISH hash, which does not move when the
+  // catalogue is corrected: Czech called the marks "Záplata" (a patch) and Thai
+  // and Tagalog kept the mastery classes in English, all three fixed by hand in
+  // `game/vocabulary`. Without this, a prose key already holding the old word
+  // would keep it forever, since `plan` would never put it back in `missing`
+  // and the locale suite would report it on every run with nothing able to
+  // repair it.
+  const catalogued = cataloguedCopyIn(source, namespace, locale);
+  if (catalogued !== undefined && current !== catalogued) return true;
   // Both directions. A LOST placeholder renders a sentence with a hole in it,
   // and an INVENTED one renders a brace at a reader: Belarusian came back with
   // "{сервер}" for a sentence that had no placeholder at all, and Japanese added
@@ -1638,11 +1699,23 @@ function plan(job: Job, hashes: Record<string, string>, seeding: boolean) {
   );
   // An identifier is copied, never asked about: it is the same string in every
   // language, so sending it to a model can only make it worse.
-  const identifiers = Object.fromEntries(
-    Object.entries(missing).filter(([, value]) => isIdentifier(value)),
+  //
+  // A string that is nothing but one of the game's own names is copied too, from
+  // `game/vocabulary` rather than from English. Same reasoning one step on:
+  // there is exactly one right answer, Wargaming has already given it in every
+  // language it ships the game in, and a bare "3 marks" sent to a model under a
+  // prose prompt comes back as "3 points". `cataloguedCopy` has the measurement.
+  const copied = Object.fromEntries(
+    Object.entries(missing).flatMap(([key, value]) => {
+      if (isIdentifier(value)) return [[key, value] as const];
+      const own = cataloguedCopyIn(value, job.namespace, job.locale);
+      return own === undefined ? [] : [[key, own] as const];
+    }),
   );
-  const words = Object.entries(missing).filter(([, value]) => !isIdentifier(value));
-  return { source, target, missing, identifiers, words };
+  const words = Object.entries(missing).filter(
+    ([key]) => !Object.hasOwn(copied, key),
+  );
+  return { source, target, missing, identifiers: copied, words };
 }
 
 /** Cut a locale's outstanding strings into requests. */
@@ -1985,8 +2058,9 @@ async function main(): Promise<void> {
     return true;
   });
 
-  // The identifiers and the namespaces no request touched: those are copied
-  // rather than asked about, so nothing above ever reaches them.
+  // The identifiers, the names copied out of `game/vocabulary`, and the
+  // namespaces no request touched: all three are copied rather than asked
+  // about, so nothing above ever reaches them.
   written += flush([...held.keys()].filter((id) => !touched.has(id)));
 
   // Stamp what English says NOW, so the next run can see an edit. Written from

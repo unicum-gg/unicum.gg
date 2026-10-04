@@ -1,6 +1,6 @@
 import { numberFormat } from "@/lib/format";
 import { statLabel } from "@/components/stat-label";
-import { getTranslation } from "@/lib/translations.server";
+import { getStatLabels, getTranslation } from "@/lib/translations.server";
 import type { ReactNode } from "react";
 import type { MomValues } from "@unicum.gg/core/mom";
 import type { MomHistoryPoint } from "@unicum.gg/core/mom/poliroid";
@@ -162,7 +162,7 @@ export async function TankMarksMastery({
   tankName: string;
   locale: string;
 }) {
-  const { t: tStats } = await getTranslation("components/stat-labels", locale);
+  const { t: tStats } = await getStatLabels(locale);
   const { t } = await getTranslation("components/tanks/detail/marks/mastery/index", locale);
   if (!moe && !mom) return null;
   return (

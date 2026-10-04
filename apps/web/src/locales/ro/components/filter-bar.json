@@ -18,16 +18,9 @@
     "reward": "Recompensă"
   },
   "moe": {
-    "0": "Nicio marcă încă",
-    "1": "1 marcă",
-    "2": "2 mărci",
-    "3": "3 mărci"
+    "0": "Nicio marcă încă"
   },
   "mom": {
-    "0": "Nicio insignă încă",
-    "1": "3rd Class",
-    "2": "2nd Class",
-    "3": "1st Class",
-    "4": "Ace Tanker"
+    "0": "Nicio insignă încă"
   }
 }

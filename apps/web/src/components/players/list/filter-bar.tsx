@@ -16,6 +16,7 @@ import {
 import type { LeaderboardFilters } from "@/hooks/use-leaderboard-filter";
 import { FilterSubject } from "@/components/filter-subject";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 
 // The players-leaderboard filter section: a free-text search plus a min/max
 // range on a chosen column. Mirrors the tank filter bar's search + range
@@ -33,7 +34,7 @@ export function LeaderboardFilterBar<T>({
   extra?: ReactNode;
 }) {
   const { locale } = useLocale();
-  const { t: tStats } = useTranslation("components/stat-labels");
+  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/filter-bar");
 
   return (

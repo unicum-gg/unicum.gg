@@ -18,16 +18,9 @@
     "reward": "Apmaksāšana"
   },
   "moe": {
-    "0": "Vēl nav izcilības zīmes",
-    "1": "1 atzīme",
-    "2": "2 atzīmes",
-    "3": "3 atzīmes"
+    "0": "Vēl nav izcilības zīmes"
   },
   "mom": {
-    "0": "Vēl nav nozīmītes",
-    "1": "3. klase",
-    "2": "2. klase",
-    "3": "1. klase",
-    "4": "Ace Tankers"
+    "0": "Vēl nav nozīmītes"
   }
 }

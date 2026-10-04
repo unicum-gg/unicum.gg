@@ -2,6 +2,21 @@ import type { TranslateFunction } from "@onruntime/translations";
 import type { ReactNode } from "react";
 
 /**
+ * The key a statistic's heading is looked up under: its own English, slugged.
+ *
+ * Exported because two other things have to agree with it exactly. The
+ * generator that builds `GAME_NAME_KEYS` slugs the catalogue the same way, and
+ * the locale suite slugs it again to check that no prose file has taken a
+ * catalogued name back.
+ */
+export function statLabelKey(label: string): string {
+  return label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/**
  * A statistic's heading, in the reader's language.
  *
  * Every table on the site names its rows the same way, and several of them use
@@ -26,10 +41,7 @@ export function statLabel<T extends ReactNode>(
   t: TranslateFunction,
 ): T | string {
   if (typeof label !== "string" || label === "") return label;
-  const key = label
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  const key = statLabelKey(label);
   const name = t(key);
   return name === key ? label : name;
 }

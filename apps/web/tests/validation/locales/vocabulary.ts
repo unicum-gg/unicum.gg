@@ -5,6 +5,8 @@ import test, { describe } from "node:test";
 import {
   GAME_NAME_FAMILIES,
   catalogueFilledPlaceholders,
+  cataloguedCopy,
+  cataloguedNames,
   duplicatedGameName,
   gameNames,
   isGameNamespace,
@@ -146,6 +148,63 @@ export function vocabularyTests() {
               offenders.push(
                 `${locale}/${file} :: ${key}: "${value}" writes "${doubled.own}" beside the {${doubled.token}} that already holds it`,
               );
+          }
+        }
+      }
+      assert.deepStrictEqual(offenders, []);
+    });
+
+    /**
+     * The same rule where the string is nothing but the name, which is where it
+     * shipped.
+     *
+     * The check above holds a SENTENCE to the name it contains and allows for
+     * inflection, because a name has to agree with the words around it. A row
+     * label has no words around it, and that is exactly what made it fail: "3
+     * marks" alone reads as a score rather than as the marks on a gun, so the
+     * model answered with one. French read "3 points" in the tank page's marks
+     * panel, directly under a heading its own catalogue renders "Marques
+     * d'excellence", and German, Italian, Turkish, Greek, Thai, Vietnamese,
+     * Korean and Chinese all did the same. Seventeen stat labels were
+     * catalogued names translated a second time, and the two files disagreed on
+     * 127 strings across the thirty-five translated languages.
+     *
+     * So a prose string that IS a catalogued name has to be the catalogue's own
+     * word, exactly. The writer no longer asks for these at all (`plan` copies
+     * them like an identifier), which is what makes this check green rather than
+     * a standing report, and the seventeen that caused it are gone from
+     * `components/stat-labels` entirely: `composeStatLabels` reads them from the
+     * catalogue at render time.
+     *
+     * Matched case-sensitively on the English, like the rule above and for the
+     * same reason: "Random Battles" is the mode, and "Random battles" is a
+     * phrase of ours that happens to contain it.
+     */
+    test("a prose string that is one of the game's names is the catalogue's own word", () => {
+      const source = vocabularyOf(SOURCE_LOCALE);
+      const offenders: string[] = [];
+      for (const locale of targetLocales) {
+        const names = cataloguedNames(source, vocabularyOf(locale));
+        if (names.size === 0) continue;
+        for (const file of jsonFiles(path.join(LOCALES_DIR, locale))) {
+          if (isGameNamespace(file.split(path.sep).join("/"))) continue;
+          let english: Record<string, unknown>;
+          let current: Record<string, unknown>;
+          try {
+            english = readLocale(SOURCE_LOCALE, file);
+            current = readLocale(locale, file);
+          } catch {
+            continue;
+          }
+          for (const key of keysOf(current)) {
+            const from = valueAt(english, key);
+            const value = valueAt(current, key);
+            if (from === undefined || value === undefined) continue;
+            const own = cataloguedCopy(from, names);
+            if (own === undefined || own === value.trim()) continue;
+            offenders.push(
+              `${locale}/${file} :: ${key}: "${value}" for "${from}", which the game calls "${own}"`,
+            );
           }
         }
       }

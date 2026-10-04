@@ -405,3 +405,121 @@ export function echoedFill(
   }
   return undefined;
 }
+
+/**
+ * The `game/vocabulary` families whose entries are the one right rendering of a
+ * LABEL a reader sees on its own, rather than a name that has to survive inside
+ * a sentence.
+ *
+ * `GAME_NAME_FAMILIES` above decides what prose is held to; this decides what
+ * prose is not allowed to hold at all. The two overlap because a mode's name is
+ * both, and `marks` is here and not there for the same reason it is a label:
+ * "2 Marks" is what a row in the marks panel says, and no sentence on the site
+ * writes it mid-flow, so holding prose to it would buy nothing and would push
+ * the catalogue's English into languages that have a word of their own.
+ */
+export const CATALOGUED_LABEL_FAMILIES: readonly string[] = [
+  ...GAME_NAME_FAMILIES,
+  "marks",
+];
+
+/**
+ * The catalogued names a stat label can be, by the key `statLabel` slugs them
+ * to.
+ *
+ * Built from the English `game/vocabulary` rather than listed here, so a name
+ * Wargaming adds is covered the day it is catalogued. A name carrying a
+ * placeholder is skipped for the same reason `gameNames` skips it: it is built
+ * from another entry and is nobody's label on its own.
+ *
+ * The names that are also an ordinary English word are dropped here for the
+ * same reason `gameNames` drops them: "Random" is a mode and an adjective, and
+ * a column headed "Random" is not necessarily the mode.
+ *
+ * ONE key per slug, and the first family wins. Several families catalogue the
+ * same English name ("Stronghold" is in two, "Skirmish" in three), and where
+ * they hold the same word the rest are simply redundant. Where a LOCALE
+ * disagrees with itself the first family is still what renders, which is the
+ * deliberate half: the index is built from the English catalogue and is shared
+ * by all thirty-six, so dropping a name here would drop it for the
+ * thirty-four that agree too, and a reader is better served by one of the two
+ * words than by English. `gameNames` and `cataloguedNames` drop it for their
+ * own purposes (holding prose to a word nothing can satisfy, and writing one
+ * into a file), and the suite's "names one thing once" check reports the
+ * contradiction so the catalogue gets settled rather than silently picked.
+ */
+export function cataloguedLabelKeys(
+  source: Record<string, unknown>,
+  slug: (label: string) => string,
+): Map<string, string> {
+  const keys = new Map<string, string>();
+  for (const family of CATALOGUED_LABEL_FAMILIES)
+    for (const [path, english] of leaves(source[family], family)) {
+      if (english.includes("{")) continue;
+      if (AMBIGUOUS_GAME_NAMES.has(english)) continue;
+      const key = slug(english);
+      if (key && !keys.has(key)) keys.set(key, path);
+    }
+  return keys;
+}
+
+/**
+ * What the game calls each of its own things, by the English name, including
+ * the languages that keep the English word.
+ *
+ * `gameNames` above answers a different question: it holds a SENTENCE to the
+ * name it contains, so it drops a name the locale renders exactly as English
+ * (there is nothing to check) and builds a pattern to find it mid-flow. This is
+ * for a string that is nothing but the name, where the answer is simply the
+ * catalogue's own word and "the same as English" is an answer like any other:
+ * the Norwegian client really does say "Marks of Excellence".
+ *
+ * A name the locale renders two ways is dropped here for the same reason it is
+ * dropped there, and `vocabulary.ts` reports it rather than leaving it silent.
+ */
+export function cataloguedNames(
+  source: Record<string, unknown>,
+  target: Record<string, unknown>,
+): Map<string, string> {
+  const renderings = new Map<string, Set<string>>();
+  for (const family of CATALOGUED_LABEL_FAMILIES) {
+    const theirs = Object.fromEntries(leaves(target[family], family));
+    for (const [path, english] of leaves(source[family], family)) {
+      const own = theirs[path];
+      if (english.includes("{") || AMBIGUOUS_GAME_NAMES.has(english)) continue;
+      if (!own) continue;
+      const held = renderings.get(english);
+      if (held) held.add(own);
+      else renderings.set(english, new Set([own]));
+    }
+  }
+  const settled = new Map<string, string>();
+  for (const [english, held] of renderings) {
+    const [own] = held;
+    if (held.size === 1 && own !== undefined) settled.set(english, own);
+  }
+  return settled;
+}
+
+/**
+ * The game's own word for a string that is nothing but one of its names.
+ *
+ * The failure this closes is the one that shipped: "3 marks" is the whole of a
+ * row in the marks panel, so a model reading it under a prose prompt has
+ * nothing around it to say these are the marks on a gun, and answered with a
+ * score. French read "3 points" beside a panel its own catalogue heads
+ * "Marques d'excellence", German "3 Punkte", Turkish "3 puan". The catalogue
+ * already held the right answer in every language, two files away.
+ *
+ * So a key whose English IS a catalogued name is filled from the catalogue and
+ * never sent to a model: there is exactly one right answer, it is written down,
+ * and asking for it again can only produce a second one. Matched exactly rather
+ * than loosely, case included, which is the same line `missingGameName` draws:
+ * "Random Battles" is the mode and "Random battles" is a phrase we wrote.
+ */
+export function cataloguedCopy(
+  source: string,
+  names: Map<string, string>,
+): string | undefined {
+  return names.get(source.trim());
+}

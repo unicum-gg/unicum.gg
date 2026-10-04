@@ -23,6 +23,8 @@ import {
 import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEFAULT_LOCALE, LOCALES } from "../src/lib/translations";
+import { statLabelKey } from "../src/components/stat-label";
+import { cataloguedLabelKeys } from "./translation-rules";
 
 const webRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const localesRoot = join(webRoot, "src", "locales");
@@ -99,6 +101,33 @@ export default dictionaries as Dictionaries;
   );
 }
 
+// `GAME_NAME_KEYS`: the stat labels that are one of the game's own names, by the
+// key `statLabel` slugs them to.
+//
+// Derived from the English `game/vocabulary` rather than listed by hand, so a
+// name Wargaming adds is covered the day it is catalogued and a prose file can
+// never quietly take one back. `composeStatLabels` says what reads it and why.
+const vocabulary = JSON.parse(
+  readFileSync(
+    join(localesRoot, DEFAULT_LOCALE, "game", "vocabulary.json"),
+    "utf-8",
+  ),
+) as Record<string, unknown>;
+const gameNameKeys = cataloguedLabelKeys(vocabulary, statLabelKey);
+
+writeFileSync(
+  join(outDir, "game-names.ts"),
+  `${HEADER}
+
+/** A stat label's slugged English -> its \`game/vocabulary\` key. */
+export const GAME_NAME_KEYS: Record<string, string> = {
+${[...gameNameKeys]
+  .map(([slug, key]) => `  ${JSON.stringify(slug)}: ${JSON.stringify(key)},`)
+  .join("\n")}
+};
+`,
+);
+
 const namespaceUnion = namespaces.length
   ? namespaces.map((namespace) => `\n  | ${JSON.stringify(namespace)}`).join("")
   : " never";
@@ -137,5 +166,5 @@ export function loadDictionaries(locale: Locale): Promise<Dictionaries> {
 );
 
 console.log(
-  `[locales] ${namespaces.length} namespace(s) x ${LOCALES.length} locale(s) -> ${relative(webRoot, outDir)}`,
+  `[locales] ${namespaces.length} namespace(s) x ${LOCALES.length} locale(s), ${gameNameKeys.size} catalogued label(s) -> ${relative(webRoot, outDir)}`,
 );
