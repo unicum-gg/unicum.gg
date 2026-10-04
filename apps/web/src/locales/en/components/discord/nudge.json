@@ -1,0 +1,13 @@
+{
+  "feedback": "This lands in our private channel, and the people who read it are on our Discord. Come and say it there too, or follow what happens next.",
+  "join-the-server": "Join the server",
+  "link-my-discord": "Link my Discord",
+  "linked": {
+    "review": "The verdict on your review will reach you as a Discord message, as long as we share a server with you.",
+    "video": "The verdict on your suggestion will reach you as a Discord message, as long as we share a server with you."
+  },
+  "unlinked": {
+    "review": "Nobody will tell you what becomes of your review. Link your Discord and join the server, and the verdict arrives as a message.",
+    "video": "Nobody will tell you what becomes of your suggestion. Link your Discord and join the server, and the verdict arrives as a message."
+  }
+}

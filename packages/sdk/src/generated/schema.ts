@@ -5341,6 +5341,8 @@ export interface components {
         };
         TankRateResponse: {
             ok: boolean;
+            /** @description Whether the caller has a Discord account linked, which is what lets a moderator's verdict reach them as a direct message. False is not an error: the review is queued either way and the site shows its status. */
+            discordLinked: boolean;
             /** @description What became of the written opinion. Distinguishes text newly queued from text that was already published, still pending, previously rejected, or dropped because written opinions are closed. A boolean here would have claimed 'with a moderator' about prose that was rejected weeks ago. */
             review: components["schemas"]["reviewOutcomeField"];
         };
@@ -6218,6 +6220,8 @@ export interface components {
         };
         VideoSuggestResponse: {
             ok: boolean;
+            /** @description Whether the caller has a Discord account linked, which is what lets the moderator's verdict reach them as a direct message. False is not an error: the suggestion is queued either way and the submitter's own queue on the site shows its status. */
+            discordLinked: boolean;
         };
         /**
          * @description How well the voter plays, cut on account WN8 at the same boundaries the site paints its ratings with.

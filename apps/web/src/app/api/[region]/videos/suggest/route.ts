@@ -12,6 +12,7 @@ import {
 } from "@unicum.gg/core/tanks/videos";
 import { isCompetitiveFormat } from "@unicum.gg/shared";
 import { isRegion } from "@unicum.gg/wargaming";
+import { getDiscordUserId } from "@unicum.gg/core/discord/supporter-role";
 import { jsonResponse } from "@/services/openapi/json-response";
 import ROUTES from "@/constants/routes";
 import { VideoSuggestBody, VideoSuggestResponse } from "./schema.api";
@@ -126,7 +127,10 @@ export async function POST(
       if (result.finish) after(result.finish);
       return jsonResponse(
         VideoSuggestResponse,
-        { ok: true },
+        // One indexed read, on a path that has just written a row and posted a
+        // card: whether the verdict can reach the submitter is worth knowing
+        // while they are still looking at the dialogue that asked for it.
+        { ok: true, discordLinked: !!(await getDiscordUserId(session.user.id)) },
         { headers: { "cache-control": "no-store" } },
       );
     case SubmitVideoOutcome.Duplicate:

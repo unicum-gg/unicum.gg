@@ -65,10 +65,20 @@ export const VideoSuggestBody = z.object({
 
 /** Response of `POST /{region}/videos/suggest`.
  *
- * A plain acknowledgement, like `/feedback`: every other outcome is an HTTP
- * status (409 duplicate, 422 unreachable), so a field enumerating them would
- * only ever hold one value and would be a second place to keep in step with
- * `SubmitVideoOutcome`. */
+ * An acknowledgement, like `/feedback`: every other outcome is an HTTP status
+ * (409 duplicate, 422 unreachable), so a field enumerating them would only ever
+ * hold one value and would be a second place to keep in step with
+ * `SubmitVideoOutcome`.
+ *
+ * `discordLinked` is caller state rather than an outcome, and it rides this
+ * response because this is the moment it matters: the suggestion has just gone
+ * to a moderator, and whether the verdict can reach its submitter is decided by
+ * it. Answered here rather than from a second request, since the endpoint has
+ * already established who is asking. */
 export const VideoSuggestResponse = z.object({
   ok: z.boolean(),
+  discordLinked: z.boolean().meta({
+    description:
+      "Whether the caller has a Discord account linked, which is what lets the moderator's verdict reach them as a direct message. False is not an error: the suggestion is queued either way and the submitter's own queue on the site shows its status.",
+  }),
 });

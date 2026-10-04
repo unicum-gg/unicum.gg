@@ -19,6 +19,7 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslation } from "@/hooks/use-translation";
+import { DiscordNudge, NudgeSubject } from "@/components/discord/nudge";
 import { cn } from "@/lib/utils";
 import UMAMI from "@/constants/umami";
 import {
@@ -47,13 +48,26 @@ export function FeedbackWidget() {
   const [sentiment, setSentiment] = useState<FeedbackSentiment | null>(null);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+  /** Keeps the panel open on a thank-you after a send. A toast lasts a few
+   * seconds, which is long enough to acknowledge the message and not long
+   * enough to read an invitation and act on it. */
+  const [sent, setSent] = useState(false);
 
   const canSend = !!topic && message.trim().length > 0 && !busy;
 
+  /**
+   * Blank slate for the next message.
+   *
+   * Run on OPEN rather than on close, like the video dialogue: closing happens
+   * through several paths and only some of them go through `onOpenChange`, so
+   * resetting there would leave the thank-you up and the panel offering nothing
+   * to type into the next time it is opened.
+   */
   function reset() {
     setTopic("");
     setSentiment(null);
     setMessage("");
+    setSent(false);
   }
 
   async function submit() {
@@ -75,9 +89,13 @@ export function FeedbackWidget() {
         body: JSON.stringify(body),
       });
       if (!res.ok) throw new Error(String(res.status));
-      toast.success(t("sent"));
-      reset();
-      setOpen(false);
+      // The panel stays open on its own confirmation instead: the form is gone,
+      // so there is room to say thank you and to point at where the people who
+      // read this are.
+      setTopic("");
+      setSentiment(null);
+      setMessage("");
+      setSent(true);
     } catch {
       toast.error(t("failed"));
     } finally {
@@ -86,7 +104,13 @@ export function FeedbackWidget() {
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (next) reset();
+      }}
+    >
       <PopoverTrigger asChild>
         <button
           type="button"
@@ -102,57 +126,69 @@ export function FeedbackWidget() {
         </button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80 p-3">
-        <div className="flex flex-col gap-2.5">
-          <div className="text-sm font-medium text-fd-foreground">
-            {t("title")}
+        {sent ? (
+          <div className="flex flex-col gap-2.5">
+            <div className="text-sm font-medium text-fd-foreground">
+              {t("sent")}
+            </div>
+            <DiscordNudge subject={NudgeSubject.Feedback} />
+            <Button size="sm" variant="ghost" onClick={() => setSent(false)}>
+              {t("send-another")}
+            </Button>
           </div>
-          <Select
-            value={topic}
-            onValueChange={(v) => setTopic(v as FeedbackTopic)}
-          >
-            <SelectTrigger className="w-full" size="sm">
-              <SelectValue placeholder={t("topic-placeholder")} />
-            </SelectTrigger>
-            <SelectContent>
-              {TOPICS.map((option) => (
-                <SelectItem key={option} value={option}>
-                  {t(`topics.${option}`)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            maxLength={MESSAGE_MAX_LENGTH}
-            placeholder={t("message-placeholder")}
-            className="min-h-24 resize-none text-sm"
-          />
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1">
-              {SENTIMENT_ORDER.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  aria-label={t(`sentiments.${s}`)}
-                  aria-pressed={sentiment === s}
-                  onClick={() => setSentiment((cur) => (cur === s ? null : s))}
-                  className={cn(
-                    "flex size-8 cursor-pointer items-center justify-center rounded-md text-lg transition-all hover:bg-fd-accent",
-                    sentiment === s
-                      ? "bg-fd-accent ring-2 ring-brand"
-                      : "opacity-60 hover:opacity-100",
+        ) : (
+          <div className="flex flex-col gap-2.5">
+            <div className="text-sm font-medium text-fd-foreground">
+              {t("title")}
+            </div>
+            <Select
+              value={topic}
+              onValueChange={(v) => setTopic(v as FeedbackTopic)}
+            >
+              <SelectTrigger className="w-full" size="sm">
+                <SelectValue placeholder={t("topic-placeholder")} />
+              </SelectTrigger>
+              <SelectContent>
+                {TOPICS.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {t(`topics.${option}`)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              maxLength={MESSAGE_MAX_LENGTH}
+              placeholder={t("message-placeholder")}
+              className="min-h-24 resize-none text-sm"
+            />
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1">
+                {SENTIMENT_ORDER.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    aria-label={t(`sentiments.${s}`)}
+                    aria-pressed={sentiment === s}
+                    onClick={() => setSentiment((cur) => (cur === s ? null : s))}
+                    className={cn(
+                      "flex size-8 cursor-pointer items-center justify-center rounded-md text-lg transition-all hover:bg-fd-accent",
+                      sentiment === s
+                        ? "bg-fd-accent ring-2 ring-brand"
+                        : "opacity-60 hover:opacity-100",
                   )}
                 >
                   {SENTIMENT_EMOJI[s]}
                 </button>
-              ))}
+                ))}
+              </div>
+              <Button size="sm" onClick={submit} disabled={!canSend}>
+                {busy ? <Spinner className="size-4" /> : t("send")}
+              </Button>
             </div>
-            <Button size="sm" onClick={submit} disabled={!canSend}>
-              {busy ? <Spinner className="size-4" /> : t("send")}
-            </Button>
           </div>
-        </div>
+        )}
       </PopoverContent>
     </Popover>
   );

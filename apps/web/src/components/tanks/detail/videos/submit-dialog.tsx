@@ -18,6 +18,7 @@ import {
 import ROUTES from "@/constants/routes";
 import { useSession } from "@/lib/auth-client";
 import { apiErrorStatus } from "@/lib/api-error";
+import { DiscordNudge, NudgeSubject } from "@/components/discord/nudge";
 import { unicum } from "@/services/sdk";
 import {
   BattleFields,
@@ -71,6 +72,9 @@ export function SubmitVideoDialog({
   const [error, setError] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
+  // Read off the submission's own response, so the success screen can ask for
+  // the one thing that makes a verdict deliverable. Null until it answers.
+  const [linked, setLinked] = useState<boolean | null>(null);
 
   // The battle context is required, the combined damage included, so the button
   // says so by staying disabled rather than letting the endpoint reject a form
@@ -92,7 +96,7 @@ export function SubmitVideoDialog({
     setSending(true);
     setError(null);
     try {
-      await unicum.region(region).videosSuggest({
+      const result = await unicum.region(region).videosSuggest({
         url: source.url.trim(),
         startSeconds: source.seconds ?? 0,
         arenaId: battle.arenaId,
@@ -110,6 +114,7 @@ export function SubmitVideoDialog({
         combinedDamage: Number(damage) + (assists ? Number(assists) : 0),
       });
       setDone(true);
+      setLinked(result.discordLinked);
       // The queued row is the receipt: it belongs in the list under the video
       // immediately, and on the player's seek bar, rather than after a reload.
       void mutate(ownVideosKey(region));
@@ -183,6 +188,12 @@ export function SubmitVideoDialog({
               : t("paste-a-youtube-link")}
           </DialogDescription>
         </DialogHeader>
+
+        {/* The one moment the invitation is not an interruption: they have just
+            sent something in, and this says who will tell them about it. */}
+        {done ? (
+          <DiscordNudge subject={NudgeSubject.Video} linked={linked ?? true} />
+        ) : null}
 
         {done ? null : (
           <div className="flex flex-col gap-3">

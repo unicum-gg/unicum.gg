@@ -17,6 +17,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { UnicumError } from "@unicum.gg/sdk";
 import { Button } from "@/components/ui/button";
+import { DiscordNudge, NudgeSubject } from "@/components/discord/nudge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { unicum } from "@/services/sdk";
@@ -88,6 +89,9 @@ export function RateForm({
   // a box that reset itself.
   const [anonymous, setAnonymous] = useState(existing?.anonymous ?? false);
   const [saving, setSaving] = useState(false);
+  // Whether their Discord is linked, as the last save reported it. Null while
+  // there is no verdict pending, which is when there is nothing to offer.
+  const [nudge, setNudge] = useState<boolean | null>(null);
 
   // Measured on the normalised string, the same one the server will store and
   // then measure. Counting raw characters here let somebody write eighty-two
@@ -122,6 +126,15 @@ export function RateForm({
         });
       toast.success(
         t(REVIEW_KEY[result.review as ReviewOutcome] ?? "review.none"),
+      );
+      // Only where a verdict is actually coming. A toast is gone in seconds, so
+      // the ask lives under the form instead, where it stays until they act on
+      // it or navigate away.
+      setNudge(
+        result.review === ReviewOutcome.Queued ||
+          result.review === ReviewOutcome.Pending
+          ? result.discordLinked
+          : null,
       );
       onSaved();
     } catch (err) {
@@ -261,6 +274,9 @@ export function RateForm({
             <p className="text-xs text-fd-muted-foreground">
               {t("your-review-was-not-published")}</p>
           ) : null}
+          {nudge === null ? null : (
+            <DiscordNudge subject={NudgeSubject.Review} linked={nudge} />
+          )}
         </div>
       ) : null}
 

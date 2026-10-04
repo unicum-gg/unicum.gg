@@ -50,6 +50,18 @@ export const TankRateBody = z.object({
 /** Response of `POST /{region}/tanks/{slug}/rate`. */
 export const TankRateResponse = z.object({
   ok: z.boolean(),
+  // Caller state rather than an outcome, and it rides the response because this
+  // is the moment it matters: a written opinion has just gone to a moderator,
+  // and whether the verdict can reach its author is decided by this. Answered
+  // here rather than from a second request, since the endpoint has already
+  // established who is asking. Always the real state, whether or not there is a
+  // verdict coming: `review` already says that, and a field that quietly
+  // answered something else when it judged itself irrelevant would be a second
+  // rule to know.
+  discordLinked: z.boolean().meta({
+    description:
+      "Whether the caller has a Discord account linked, which is what lets a moderator's verdict reach them as a direct message. False is not an error: the review is queued either way and the site shows its status.",
+  }),
   review: reviewOutcomeField.meta({
     description:
       "What became of the written opinion. Distinguishes text newly queued from text that was already published, still pending, previously rejected, or dropped because written opinions are closed. A boolean here would have claimed 'with a moderator' about prose that was rejected weeks ago.",

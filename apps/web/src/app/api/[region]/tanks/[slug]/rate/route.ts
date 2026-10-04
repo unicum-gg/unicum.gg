@@ -13,6 +13,7 @@ import {
   TankRatingAxis,
 } from "@unicum.gg/shared";
 import { isRegion, REGIONS } from "@unicum.gg/wargaming";
+import { getDiscordUserId } from "@unicum.gg/core/discord/supporter-role";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
 import ROUTES from "@/constants/routes";
@@ -136,7 +137,14 @@ export async function POST(
       }
       return jsonResponse(
         TankRateResponse,
-        { ok: true, review: result.review ?? ReviewOutcome.None },
+        {
+          ok: true,
+          review: result.review ?? ReviewOutcome.None,
+          // One indexed read on a path that has just written a row. The real
+          // state, always: `review` above says whether a verdict is coming,
+          // and the form reads both.
+          discordLinked: !!(await getDiscordUserId(session.user.id)),
+        },
         { headers: { "cache-control": "no-store" } },
       );
     case SubmitRatingOutcome.ReviewLength:
