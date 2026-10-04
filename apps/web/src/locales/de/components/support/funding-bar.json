@@ -11,7 +11,7 @@
   "pledges-cover": "Die Zusagen decken jetzt die monatlichen Kosten.",
   "raised-amount": "{amount} gesammelt",
   "raised-label": "Gesammelt",
-  "run-at-a-loss": "{name} wird seit {since} mit Verlust betrieben.",
+  "run-at-a-loss": "{name} wird seit dem {since} mit Verlust betrieben.",
   "run-rate": "Monatlicher Stand: {pledged}/Monat zugesagt gegenüber {cost}/Monat für den Betrieb.",
   "spent-since-launch": "Seit dem Start ausgegeben",
   "to-catch-up": "{amount}, um vollständig aufzuholen."

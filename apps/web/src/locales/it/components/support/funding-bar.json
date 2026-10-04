@@ -11,7 +11,7 @@
   "pledges-cover": "Le donazioni ora coprono la spesa mensile.",
   "raised-amount": "{amount} raccolti",
   "raised-label": "Raccolti",
-  "run-at-a-loss": "{name} è in perdita da {since}.",
+  "run-at-a-loss": "{name} è in perdita dal {since}.",
   "run-rate": "Andamento mensile: {pledged}/mese in contributi promessi contro {cost}/mese di costi operativi.",
   "spent-since-launch": "Speso dal lancio",
   "to-catch-up": "Mancano {amount} per tornare completamente in pari."
