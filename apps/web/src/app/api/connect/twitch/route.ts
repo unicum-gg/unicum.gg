@@ -1,7 +1,7 @@
 import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@unicum.gg/core/auth";
-import { env } from "@unicum.gg/shared";
+import { env, safePath } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import { signInRegion } from "@/lib/auth-region";
 
@@ -16,19 +16,27 @@ export const dynamic = "force-dynamic";
  * screen (and none of the client round-trips the old page needed: session load
  * + link-social). If somehow reached logged out, it bounces back through WG
  * login and returns here.
+ *
+ * `return` is where Twitch sends them once linked, defaulting to the home page
+ * the streamers rail that offers this lives on. The connections dialog needs
+ * it: it has no address of its own, so a reader who connected Twitch from it
+ * has nowhere to come back to but the page they were standing on, which also
+ * carries the flag that reopens it. Narrowed to a same-origin relative path,
+ * like `/api/link/discord`, or this would be an open redirect.
  */
-export async function GET(): Promise<Response> {
+export async function GET(request: Request): Promise<Response> {
   const requestHeaders = await headers();
-  const home = new URL("/", env.NEXT_PUBLIC_APP_URL);
+  const destination = safePath(new URL(request.url).searchParams.get("return"));
+  // Where a failure lands, which is wherever they came from: a reader has
+  // nothing to act on when Twitch or Better Auth refuses the link.
+  const back = new URL(destination, env.NEXT_PUBLIC_APP_URL);
 
   const session = await auth.api.getSession({ headers: requestHeaders });
   if (!session?.user) {
     const region = signInRegion(await cookies());
+    const resume = `/api/connect/twitch?return=${encodeURIComponent(destination)}`;
     return NextResponse.redirect(
-      new URL(
-        ROUTES.AUTH_SIGN_IN(region, "/api/connect/twitch"),
-        env.NEXT_PUBLIC_APP_URL,
-      ),
+      new URL(ROUTES.AUTH_SIGN_IN(region, resume), env.NEXT_PUBLIC_APP_URL),
     );
   }
 
@@ -38,18 +46,18 @@ export async function GET(): Promise<Response> {
   let linkResponse: Response;
   try {
     linkResponse = await auth.api.linkSocialAccount({
-      body: { provider: "twitch", callbackURL: "/" },
+      body: { provider: "twitch", callbackURL: destination },
       headers: requestHeaders,
       asResponse: true,
     });
   } catch {
-    return NextResponse.redirect(home);
+    return NextResponse.redirect(back);
   }
 
   const { url } = (await linkResponse.json().catch(() => ({}))) as {
     url?: string;
   };
-  if (!url) return NextResponse.redirect(home);
+  if (!url) return NextResponse.redirect(back);
 
   const res = NextResponse.redirect(url);
   const setCookies = (

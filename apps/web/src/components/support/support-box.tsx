@@ -4,6 +4,7 @@ import { DiscordLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { SupportMode } from "@unicum.gg/shared";
+import { ConnectionsDialog } from "@/components/account/connections-dialog";
 import { LoginButton } from "@/components/login-button";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -67,6 +68,7 @@ export function SupportBox() {
   const money = useMoney();
   const [status, setStatus] = useState<MeStatus | null>(null);
   const [busy, setBusy] = useState(false);
+  const [connectionsOpen, setConnectionsOpen] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -195,17 +197,40 @@ export function SupportBox() {
         </p>
         {anonymitySwitch}
         {me.discordRoleEnabled && (
-          <Button
-            variant="secondary"
-            onClick={() => {
-              window.location.href = "/api/connect/discord";
-            }}
-          >
-            <DiscordLogoIcon className="size-4" />
-            {me.discordLinked
-              ? t("re-sync-discord-role")
-              : t("claim-your-supporter-role-on-discord")}
-          </Button>
+          <div className="flex flex-col gap-2">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                window.location.href = "/api/connect/discord";
+              }}
+            >
+              <DiscordLogoIcon className="size-4" />
+              {me.discordLinked
+                ? t("re-sync-discord-role")
+                : t("claim-your-supporter-role-on-discord")}
+            </Button>
+            {/* Claiming the role is offered here, so this is where somebody
+                looks to undo it. */}
+            {me.discordLinked && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setConnectionsOpen(true)}
+                  className="cursor-pointer text-center text-xs text-fd-muted-foreground hover:text-fd-foreground hover:underline"
+                >
+                  {t("manage-connected-accounts")}
+                </button>
+                {/* Connecting from here leaves the site, so this mount reads
+                    the flag the round trip comes back with. It is the only
+                    connections dialog on this page, so nothing double-opens. */}
+                <ConnectionsDialog
+                  open={connectionsOpen}
+                  onOpenChange={setConnectionsOpen}
+                  reopenOnReturn
+                />
+              </>
+            )}
+          </div>
         )}
         <Button variant="secondary" onClick={manage} disabled={busy}>
           {busy ? <Spinner /> : t("manage-subscription")}

@@ -23,6 +23,20 @@ export function discordBotEnabled(): boolean {
   return Boolean(env.DISCORD_BOT_TOKEN && env.DISCORD_APP_ID);
 }
 
+/**
+ * Whether a player can connect their Discord account at all.
+ *
+ * The OAuth app, not the bot: the same two credentials `auth`'s
+ * `socialProviders` gates the provider on, so this answers exactly whether
+ * there is a link to start. Distinct from `discordBotEnabled` above (which can
+ * post and assign roles) and from `isSupporterRoleEnabled` (which additionally
+ * needs the guild and the role id): the link is worth having on its own, since
+ * it is what lets a moderation verdict reach somebody.
+ */
+export function discordLinkEnabled(): boolean {
+  return Boolean(env.DISCORD_APP_ID && env.DISCORD_CLIENT_SECRET);
+}
+
 async function botFetch<T>(
   path: string,
   init?: RequestInit,
@@ -136,6 +150,40 @@ export async function removeGuildRole(
     },
   ).catch(() => null);
   return Boolean(res && (res.ok || res.status === 404));
+}
+
+export type DiscordAccount = {
+  id: string;
+  /** The handle, without a discriminator on a migrated account. */
+  username: string;
+  /** What Discord shows instead of the handle, when they set one. */
+  globalName: string | null;
+};
+
+/**
+ * Who a linked Discord id actually is, so a page can name the account rather
+ * than reporting that one exists.
+ *
+ * It costs a call because nothing stores it: Better Auth keeps the id and the
+ * token, and the handle is the one thing a player can change at any time, so a
+ * copy of it would be a second truth that silently rots. Best-effort, and a
+ * null means "could not ask" rather than "not linked", which the caller already
+ * knows from its own row.
+ */
+export async function getDiscordAccount(
+  discordUserId: string,
+): Promise<DiscordAccount | null> {
+  const user = await botFetch<{
+    id: string;
+    username: string;
+    global_name: string | null;
+  }>(`/users/${discordUserId}`);
+  if (!user?.username) return null;
+  return {
+    id: user.id,
+    username: user.username,
+    globalName: user.global_name ?? null,
+  };
 }
 
 /** Post a single embed to a channel as the bot. Best-effort: `true` on success,

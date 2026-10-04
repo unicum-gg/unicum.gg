@@ -7,9 +7,8 @@ import {
   GlobeIcon,
   ShareNetworkIcon,
   StarIcon,
-  TwitchLogoIcon,
 } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,18 +19,22 @@ import {
 import { PageAiActions } from "@/components/page-ai-actions";
 import { ShareModal } from "@/components/share-modal";
 import { useSearchHistory } from "@/hooks/use-search-history";
-import { authClient, useSession } from "@/lib/auth-client";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming";
 import { unicumPublic } from "@/services/sdk";
 
 /**
- * Overflow menu for the player header, folding the per-player actions (favorite,
- * share, WoT portal, and, on your own profile, connect Twitch) behind a single
- * "⋯" button so the header stays uncluttered. Compare keeps its own button since
- * its search popover doesn't nest inside a menu.
+ * Overflow menu for the player header, folding the per-player actions
+ * (favorite, share, WoT portal) behind a single "⋯" button so the header stays
+ * uncluttered. Compare keeps its own button since its search popover doesn't
+ * nest inside a menu, and so does the connections button, for a different
+ * reason: a reader hunting for where to disconnect an account will not think to
+ * open a "⋯".
+ *
+ * Connecting Twitch and its orange-dot nudge used to live here and moved there
+ * with it, which also took this component's session read and its
+ * `listAccounts` call off every own-profile view.
  */
 export function PlayerActionsMenu({
   region,
@@ -45,7 +48,6 @@ export function PlayerActionsMenu({
   const { t } = useTranslation("components/players/detail/actions-menu");
   const { t: tMenu } = useTranslation("components/actions-menu");
   const { isFavorite, toggleFavorite } = useSearchHistory();
-  const { data: session } = useSession();
   const [shareOpen, setShareOpen] = useState(false);
 
   const favoriteItem = {
@@ -56,41 +58,14 @@ export function PlayerActionsMenu({
   const fav = isFavorite(favoriteItem);
   const url = `${APP.URL}${ROUTES.PLAYER(region, nickname)}`;
 
-  const wg = wgIdentityFromEmail(session?.user?.email);
-  const isOwnProfile = wg?.region === region && wg?.accountId === accountId;
-
-  // On your own profile, nudge you to link Twitch if you haven't yet (an orange
-  // dot on the trigger + the menu item). Only fetched for the owner.
-  const [twitchLinked, setTwitchLinked] = useState<boolean | null>(null);
-  useEffect(() => {
-    if (!isOwnProfile) return;
-    let cancelled = false;
-    authClient
-      .listAccounts()
-      .then((res) => {
-        if (!cancelled)
-          setTwitchLinked(
-            (res.data ?? []).some((a) => a.providerId === "twitch"),
-          );
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  }, [isOwnProfile]);
-  const needsTwitch = isOwnProfile && twitchLinked === false;
-
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
           aria-label={t("more-actions")}
-          className="relative inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground focus-visible:outline-none aria-expanded:bg-fd-secondary aria-expanded:text-fd-foreground"
+          className="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground focus-visible:outline-none aria-expanded:bg-fd-secondary aria-expanded:text-fd-foreground"
         >
           <DotsThreeVerticalIcon className="size-3.5" weight="bold" />
-          {needsTwitch ? (
-            <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-brand ring-2 ring-fd-background" />
-          ) : null}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem
@@ -121,23 +96,6 @@ export function PlayerActionsMenu({
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <PageAiActions />
-          {needsTwitch ? (
-            <>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onSelect={() =>
-                  authClient.linkSocial({
-                    provider: "twitch",
-                    callbackURL: window.location.pathname,
-                  })
-                }
-              >
-                <TwitchLogoIcon weight="bold" />
-                {t("connect-twitch")}
-                <span className="ml-auto size-2 rounded-full bg-brand" />
-              </DropdownMenuItem>
-            </>
-          ) : null}
         </DropdownMenuContent>
       </DropdownMenu>
 

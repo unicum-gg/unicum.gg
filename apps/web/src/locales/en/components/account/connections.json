@@ -1,0 +1,20 @@
+{
+  "title": "Connected accounts",
+  "description": "Each one unlocks something on the site. Disconnecting takes that back and hands the authorization to the service.",
+  "loading": "Reading your account",
+  "log-in-first": "Log in with your Wargaming.net ID to see the accounts connected to it.",
+  "log-in": "Log in",
+  "connect": "Connect",
+  "disconnect": "Disconnect",
+  "cancel": "Cancel",
+  "disconnect-name": "Disconnect {name}?",
+  "connected-since": "Connected on {date}",
+  "disconnected": "{name} disconnected.",
+  "could-not-disconnect": "Could not disconnect {name}. Try again in a moment.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "This is the account you sign in with, so it cannot be disconnected.",
+  "twitch-purpose": "Get your channel listed when you go live, and let the game mod post in your chat.",
+  "twitch-consequence": "Your channel stops being listed on the site and stops showing on your profile, and the game mod can no longer post in your chat. You can connect it again at any time.",
+  "discord-purpose": "Claim your supporter role, and hear back about the videos and reviews you send in.",
+  "discord-consequence": "You give up your supporter role on our server, and we can no longer tell you what became of a video or a review you sent in. You can connect it again at any time."
+}

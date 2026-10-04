@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Thank you for your donation!",
   "you-already-have-a-monthly-pledge": "You already have a monthly pledge. Use the billing portal to change it.",
   "you-are-a-supporter-thank": "You are a supporter. Thank you for keeping {NAME} alive.",
-  "you-have-given-so-far": "You have given {amount} so far. Thank you."
+  "you-have-given-so-far": "You have given {amount} so far. Thank you.",
+  "manage-connected-accounts": "Manage connected accounts"
 }

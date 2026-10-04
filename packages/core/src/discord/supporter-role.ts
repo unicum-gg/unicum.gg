@@ -70,6 +70,34 @@ async function otherActiveSupporterHasDiscord(
 }
 
 /**
+ * Give the supporter role back when a user disconnects Discord.
+ *
+ * Takes the Discord id rather than reading it, because by the time this is
+ * useful the link is about to be gone: `reconcileSupporterRole` below answers
+ * "never linked, nothing to reconcile" for exactly this user, so the role would
+ * stay granted to an account we no longer know anything about, with nothing
+ * left that would ever revoke it. The caller reads the id, calls this, then
+ * deletes the row.
+ *
+ * It keeps the shared-Discord guard: two supporters may have linked the same
+ * Discord account, and one of them leaving must not strip a role the other one
+ * is still owed. Best-effort, a Discord blip must not fail the disconnect.
+ */
+export async function releaseSupporterRole(
+  userId: string,
+  discordUserId: string,
+): Promise<void> {
+  const config = supporterRoleConfig();
+  if (!config) return;
+  try {
+    if (await otherActiveSupporterHasDiscord(discordUserId, userId)) return;
+    await removeGuildRole(config.guildId, discordUserId, config.roleId);
+  } catch {
+    // Best-effort: the link is being removed either way.
+  }
+}
+
+/**
  * Reconcile the supporter role for a user after their subscription changed
  * (called from the Stripe webhook). Grants when they are an active supporter,
  * revokes when they lapsed — but only if no other active supporter shares the same
