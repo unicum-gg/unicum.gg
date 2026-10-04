@@ -7,6 +7,7 @@ import {
   getDiscordUserId,
   isSupporterRoleEnabled,
 } from "@unicum.gg/core/discord/supporter-role";
+import { startDiscordLink } from "@/services/discord/link";
 import ROUTES from "@/constants/routes";
 import { signInRegion } from "@/lib/auth-region";
 
@@ -50,29 +51,16 @@ export async function GET(): Promise<Response> {
     );
   }
 
-  // Link Discord via Better Auth, then land on the sync route. `asResponse` hands
-  // back the OAuth-state Set-Cookie headers, which must reach the browser for the
-  // Discord callback to validate — forward them onto our own 302.
-  let linkResponse: Response;
-  try {
-    linkResponse = await auth.api.linkSocialAccount({
-      body: { provider: "discord", callbackURL: "/api/discord/sync-role" },
-      headers: requestHeaders,
-      asResponse: true,
-    });
-  } catch {
-    return NextResponse.redirect(support("error"));
-  }
-  const { url } = (await linkResponse.json().catch(() => ({}))) as {
-    url?: string;
-  };
-  if (!url) return NextResponse.redirect(support("error"));
+  // Link Discord via Better Auth, then land on the sync route. Shared with
+  // `/api/link/discord`, which performs the same link for its own reason.
+  const started = await startDiscordLink(
+    requestHeaders,
+    "/api/discord/sync-role",
+  );
+  if (!started) return NextResponse.redirect(support("error"));
 
-  const res = NextResponse.redirect(url);
-  const setCookies = (
-    linkResponse.headers as Headers & { getSetCookie?: () => string[] }
-  ).getSetCookie?.();
-  for (const cookie of setCookies ?? []) {
+  const res = NextResponse.redirect(started.url);
+  for (const cookie of started.setCookies) {
     res.headers.append("set-cookie", cookie);
   }
   return res;
