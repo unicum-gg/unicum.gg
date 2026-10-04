@@ -5,7 +5,7 @@ import { useRouter } from "@/hooks/use-router";
 import { useTranslation } from "@/hooks/use-translation";
 import type { MouseEvent } from "react";
 import { PanelHeader } from "@/components/panel";
-import { cn } from "@/lib/utils";
+import { TabBar, tabItemClass } from "@/components/ui/tab-bar";
 import { TANK_TABS, type TankTab, tankTabHref } from "./tabs";
 
 /**
@@ -41,7 +41,7 @@ export function TanksTabNav({
 
   return (
     <PanelHeader className="px-0! py-0!">
-      <nav className="flex items-center overflow-x-auto text-sm">
+      <TabBar>
         {TANK_TABS.map((tab) => (
           <Link
             key={tab.id}
@@ -52,17 +52,12 @@ export function TanksTabNav({
             // See `prefetch` in `@/components/link`.
             prefetch="intent"
             onClick={(e) => selectTab(e, tab.id)}
-            className={cn(
-              "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-              active === tab.id
-                ? "bg-fd-secondary/40 text-fd-foreground"
-                : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-            )}
+            className={tabItemClass(active === tab.id)}
           >
             {t(tab.id)}
           </Link>
         ))}
-      </nav>
+      </TabBar>
     </PanelHeader>
   );
 }

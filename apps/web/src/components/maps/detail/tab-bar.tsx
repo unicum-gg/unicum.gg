@@ -10,7 +10,7 @@ import {
   type MapDetailTab,
   mapDetailTabHref,
 } from "@/components/maps/detail/tabs";
-import { cn } from "@/lib/utils";
+import { TabBar, tabItemClass } from "@/components/ui/tab-bar";
 import { useTranslation } from "@/hooks/use-translation";
 
 /**
@@ -64,7 +64,7 @@ export function MapDetailTabs({
     // this page was tabbed to stop spending.
     <Panel screenLines={false}>
       <PanelHeader className="px-0! py-0!" screenLines={false}>
-        <nav className="flex items-center overflow-x-auto text-sm">
+        <TabBar>
           {tabs.map((t) => (
             <Link
               key={t.id}
@@ -73,12 +73,7 @@ export function MapDetailTabs({
               // loading boundary, so each one Next prefetched on sight would be
               // the destination in full. See `prefetch` in `@/components/link`.
               prefetch="intent"
-              className={cn(
-                "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-                active === t.id
-                  ? "bg-fd-secondary/40 text-fd-foreground"
-                  : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-              )}
+              className={tabItemClass(active === t.id)}
             >
               {counts[t.id]
                 ? tLabel("tab-count", {
@@ -88,7 +83,7 @@ export function MapDetailTabs({
                 : tLabel(`tabs.${t.id}`)}
             </Link>
           ))}
-        </nav>
+        </TabBar>
       </PanelHeader>
     </Panel>
   );

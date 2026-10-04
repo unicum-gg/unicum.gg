@@ -17,7 +17,7 @@ import {
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
+import { TabBar, TabKind, tabItemClass } from "@/components/ui/tab-bar";
 import { type VehicleMeta, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { BucketTab } from "./bucket-tab";
@@ -138,23 +138,18 @@ export function ClanCompareView({
 
       <Panel>
         <PanelHeader className="px-0! py-0!">
-          <nav className="flex items-center overflow-x-auto text-sm">
+          <TabBar>
             {TABS.map((t) => (
               <button
                 key={t.id}
                 type="button"
                 onClick={() => setTab(t.id)}
-                className={cn(
-                  "cursor-pointer border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-                  tab === t.id
-                    ? "bg-fd-secondary/40 text-fd-foreground"
-                    : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-                )}
+                className={tabItemClass(tab === t.id, TabKind.Button)}
               >
                 {statLabel(t.label, tStats)}
               </button>
             ))}
-          </nav>
+          </TabBar>
         </PanelHeader>
         <PanelContent className="p-0">
           {tab === CompareTab.Overall && (

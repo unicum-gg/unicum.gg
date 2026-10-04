@@ -1,20 +1,11 @@
 import Link from "@/components/link";
 import { Panel, PanelHeader } from "@/components/panel";
 import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
+import { TabBar, tabItemClass } from "@/components/ui/tab-bar";
 import type { Region } from "@unicum.gg/wargaming";
 import { getTranslation } from "@/lib/translations.server";
 import { battleTypeName } from "@/components/game-name";
 import { BattleType } from "@unicum.gg/shared";
-
-function tabClass(active: boolean): string {
-  return cn(
-    "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-    active
-      ? "bg-fd-secondary/40 text-fd-foreground"
-      : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-  );
-}
 
 // The game-mode tabs on the player landing: "Overall" (the WNX rating board at
 // /players) and "Steel Hunter" (the HR battle-royale board at
@@ -40,32 +31,32 @@ export async function PlayersModeTabs({
   return (
     <Panel>
       <PanelHeader className="px-0! py-0!" screenLines={false}>
-        <nav className="flex items-center overflow-x-auto text-sm">
+        <TabBar>
           {/* A tab bar is a row of whole pages, and with no loading boundary in
             this tree Next prefetched each one in full on sight. See `prefetch`
             in `@/components/link`. */}
           <Link
             href={ROUTES.PLAYERS(region)}
             prefetch="intent"
-            className={tabClass(active === "overall")}
+            className={tabItemClass(active === "overall")}
           >
             {t("modes.overall")}
           </Link>
           <Link
             href={ROUTES.PLAYERS_STEEL_HUNTER(region)}
             prefetch="intent"
-            className={tabClass(active === "steel-hunter")}
+            className={tabItemClass(active === "steel-hunter")}
           >
             {battleTypeName(BattleType.BattleRoyale, tGame)}
           </Link>
           <Link
             href={ROUTES.PLAYERS_ONSLAUGHT(region)}
             prefetch="intent"
-            className={tabClass(active === "onslaught")}
+            className={tabItemClass(active === "onslaught")}
           >
             {battleTypeName(BattleType.Onslaught, tGame)}
           </Link>
-        </nav>
+        </TabBar>
       </PanelHeader>
     </Panel>
   );

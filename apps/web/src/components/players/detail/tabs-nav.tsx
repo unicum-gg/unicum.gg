@@ -6,7 +6,7 @@ import { numberFormat } from "@/lib/format";
 import Link from "@/components/link";
 import { usePathname } from "@/hooks/use-pathname";
 import type { MouseEvent } from "react";
-import { cn } from "@/lib/utils";
+import { TabBar, tabItemClass } from "@/components/ui/tab-bar";
 import {
   PLAYER_MODES,
   PLAYER_SECTIONS,
@@ -54,12 +54,7 @@ function NavAnchor({
         event.preventDefault();
         onActivate();
       }}
-      className={cn(
-        "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-        active
-          ? "bg-fd-secondary/40 text-fd-foreground"
-          : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-      )}
+      className={tabItemClass(active)}
     >
       {children}
     </Link>
@@ -109,7 +104,7 @@ export function PlayerSectionNav({
   // beta flag is one entry, and deleting the entry is the whole rollout step.
   const beta = new Set<PlayerSection>([PlayerSection.Value]);
   return (
-    <nav className="flex items-center overflow-x-auto text-sm">
+    <TabBar>
       {PLAYER_SECTIONS.map((s) => (
         <NavAnchor
           key={s}
@@ -136,7 +131,7 @@ export function PlayerSectionNav({
           )}
         </NavAnchor>
       ))}
-    </nav>
+    </TabBar>
   );
 }
 
@@ -154,7 +149,7 @@ export function PlayerModeNav({
   const { t } = useTranslation("game/vocabulary");
 
   return (
-    <nav className="flex items-center overflow-x-auto text-sm">
+    <TabBar>
       {PLAYER_MODES.map((m) => (
         <NavAnchor
           key={m.id}
@@ -165,6 +160,6 @@ export function PlayerModeNav({
           {t(`player-modes.${m.id}`)}
         </NavAnchor>
       ))}
-    </nav>
+    </TabBar>
   );
 }

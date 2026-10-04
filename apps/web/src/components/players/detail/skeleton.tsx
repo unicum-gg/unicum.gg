@@ -26,7 +26,7 @@ import {
   PlayerSection,
 } from "@/components/players/detail/tabs";
 import { styles } from "@/lib/styles";
-import { cn } from "@/lib/utils";
+import { TabBar, TabKind, tabItemClass } from "@/components/ui/tab-bar";
 import { useTranslation } from "@/hooks/use-translation";
 
 // Mode → panel-title label, mirroring STRONGHOLD_MODES in tabs-view.
@@ -55,21 +55,16 @@ function StaticNav({
   label: (id: string) => string;
 }) {
   return (
-    <nav className="flex items-center overflow-x-auto text-sm">
+    <TabBar>
       {items.map((item) => (
         <span
           key={item.id}
-          className={cn(
-            "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap",
-            item.id === activeId
-              ? "bg-fd-secondary/40 text-fd-foreground"
-              : "text-fd-muted-foreground",
-          )}
+          className={tabItemClass(item.id === activeId, TabKind.Inert)}
         >
           {label(item.id)}
         </span>
       ))}
-    </nav>
+    </TabBar>
   );
 }
 

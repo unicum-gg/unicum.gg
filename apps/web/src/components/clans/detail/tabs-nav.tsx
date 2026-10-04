@@ -5,7 +5,7 @@ import { numberFormat } from "@/lib/format";
 
 import Link from "@/components/link";
 import type { MouseEvent } from "react";
-import { cn } from "@/lib/utils";
+import { TabBar, tabItemClass } from "@/components/ui/tab-bar";
 import {
   CLAN_MODES,
   CLAN_SECTIONS,
@@ -53,12 +53,7 @@ function NavAnchor({
         event.preventDefault();
         onActivate();
       }}
-      className={cn(
-        "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-        active
-          ? "bg-fd-secondary/40 text-fd-foreground"
-          : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-      )}
+      className={tabItemClass(active)}
     >
       {children}
     </Link>
@@ -120,7 +115,7 @@ export function ClanSectionNav({
   }
 
   return (
-    <nav className="flex items-center overflow-x-auto text-sm">
+    <TabBar>
       {CLAN_SECTIONS.map((id) => (
         <NavAnchor
           key={id}
@@ -133,7 +128,7 @@ export function ClanSectionNav({
           {label(id, locale)}
         </NavAnchor>
       ))}
-    </nav>
+    </TabBar>
   );
 }
 
@@ -151,7 +146,7 @@ export function ClanModeNav({
   const { t: tGame } = useTranslation("game/vocabulary");
 
   return (
-    <nav className="flex items-center overflow-x-auto text-sm">
+    <TabBar>
       {CLAN_MODES.map((m) => (
         <NavAnchor
           key={m.id}
@@ -162,6 +157,6 @@ export function ClanModeNav({
           {tGame(`clan-modes.${m.id}`)}
         </NavAnchor>
       ))}
-    </nav>
+    </TabBar>
   );
 }

@@ -22,6 +22,7 @@ import {
   ClanMode,
   ClanSection,
 } from "@/components/clans/detail/tabs";
+import { TabBar, TabKind, tabItemClass } from "@/components/ui/tab-bar";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
@@ -57,21 +58,16 @@ function StaticNav({
   label: (id: string) => string;
 }) {
   return (
-    <nav className="flex items-center overflow-x-auto text-sm">
+    <TabBar>
       {items.map((item) => (
         <span
           key={item.id}
-          className={cn(
-            "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap",
-            item.id === activeId
-              ? "bg-fd-secondary/40 text-fd-foreground"
-              : "text-fd-muted-foreground",
-          )}
+          className={tabItemClass(item.id === activeId, TabKind.Inert)}
         >
           {label(item.id)}
         </span>
       ))}
-    </nav>
+    </TabBar>
   );
 }
 
