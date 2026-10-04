@@ -17,6 +17,11 @@ const MEDAL: Record<number, string> = { 1: "🥇", 2: "🥈", 3: "🥉" };
  * pay-what-you-want checkout, the real infrastructure cost (reused from the
  * coverage page) and the supporters podium. A single column of full-width
  * panels so the page borders stay continuous down to the footer.
+ *
+ * The podium ranks by the total each supporter has given rather than by the
+ * monthly pledge they hold, which is what lets a one-off donation be recognised
+ * at all. The run-rate figure beside it still comes from the live pledges, so
+ * the two numbers answer their own question: what came in, and what recurs.
  */
 export async function SupportView({ locale }: { locale: string }) {
   const { t } = await getTranslation("components/support/support-view", locale);
@@ -110,7 +115,12 @@ export async function SupportView({ locale }: { locale: string }) {
           </section>
 
           <section className="space-y-6 p-4">
-            <h2 className="text-xl font-semibold">{t("top-supporters")}</h2>
+            <div className="space-y-1">
+              <h2 className="text-xl font-semibold">{t("top-supporters")}</h2>
+              <p className="text-xs text-fd-muted-foreground">
+                {t("ranked-by-the-total-given")}
+              </p>
+            </div>
             {supporters.length === 0 ? (
               <p className="py-10 text-center text-sm text-fd-muted-foreground">
                 {t("no-supporters-yet-be-the")}</p>

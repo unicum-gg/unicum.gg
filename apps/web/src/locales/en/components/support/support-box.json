@@ -5,17 +5,18 @@
   "could-not-open-the-billing-portal": "Could not open the billing portal.",
   "could-not-start-checkout-please-try-again": "Could not start checkout. Please try again.",
   "could-not-update-your-preference": "Could not update your preference.",
+  "give-extra-one-time": "Give extra, one time",
   "log-in-with-wargaming": "Log in with Wargaming",
   "log-in-with-wargaming-to": "Log in with Wargaming to support {NAME}.",
   "manage-subscription": "Manage subscription",
   "only-active-supporters-can-claim-the-discord": "Only active supporters can claim the Discord role.",
-  "or-choose-your-own-amount": "Or choose your own amount",
-  "pay-what-you-want": "Pay what you want.",
-  "pick-an-amount": "Pick an amount or type your own, from €{min}/month.",
   "re-sync-discord-role": "Re-sync Discord role",
-  "secured-by-stripe": "Secured by Stripe. Cancel anytime.",
   "show-me-anonymously-on-the": "Show me anonymously on the podium",
   "support-subscriptions-are-coming-soon": "Support subscriptions are coming soon.",
   "supporter-role-added-on-discord": "Supporter role added on Discord!",
-  "you-are-a-supporter-thank": "You are a supporter. Thank you for keeping {NAME} alive."
+  "thank-you-for-supporting": "Thank you for supporting {NAME}!",
+  "thank-you-for-your-donation": "Thank you for your donation!",
+  "you-already-have-a-monthly-pledge": "You already have a monthly pledge. Use the billing portal to change it.",
+  "you-are-a-supporter-thank": "You are a supporter. Thank you for keeping {NAME} alive.",
+  "you-have-given-so-far": "You have given {amount} so far. Thank you."
 }

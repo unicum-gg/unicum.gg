@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Supporter"
   },
-  "supporter-note": "An active {link}, kept public. Supporters who choose to stay anonymous carry no badge, by their own choice.",
+  "supporter-note": "An active {link}, kept public. Supporters who choose to stay anonymous carry no badge, by their own choice, and a one-off donation carries none either: the badge says the account is funding the site right now.",
   "the-marks-a-player-or": "The marks a player or a clan can carry on {NAME}, what each one says, and exactly what it takes to get it.",
   "tournament-winner": {
     "name": "Tournament winner",

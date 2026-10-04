@@ -11,9 +11,10 @@ import { user } from "./auth";
 /**
  * Support subscriptions (Stripe). One row per user: their pay-what-you-want
  * monthly pledge (>= the floor, chosen at checkout). Global like the auth
- * tables, not per-region. `amountCents` drives the supporters podium (ranked by
- * current monthly amount; the amount itself is never shown publicly). `anonymous`
- * hides the supporter's name on the podium.
+ * tables, not per-region. `amountCents` is the current monthly run-rate the
+ * funding bar measures the bill against; the supporters board itself ranks by
+ * what was actually received (see `supportPayment`), so a monthly pledge and a
+ * one-off donation are counted the same way.
  */
 export const subscription = pgTable(
   "subscription",
@@ -31,25 +32,62 @@ export const subscription = pgTable(
     currency: text("currency").notNull().default("eur"),
     currentPeriodEnd: timestamp("current_period_end"),
     cancelAtPeriodEnd: boolean("cancel_at_period_end").default(false).notNull(),
-    anonymous: boolean("anonymous").default(false).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
       .defaultNow()
       .$onUpdate(() => /* @__PURE__ */ new Date())
       .notNull(),
   },
-  // Podium query: filter active, order by amount desc.
+  // Run-rate query: filter active, sum the amounts.
   (table) => [
     index("subscription_status_amount_idx").on(table.status, table.amountCents),
   ],
 );
 
 /**
+ * Who a supporter is to us, independently of whether they are currently
+ * subscribed: their Stripe customer, and whether they want their name shown on
+ * the supporters board.
+ *
+ * Both used to live on the `subscription` row, which only worked while every
+ * contribution was a subscription. A one-off donor has no such row, so the
+ * anonymity switch had nothing to write to (they would be named on a public
+ * board with no way out) and every donation created a second Stripe customer
+ * for the same person, since the stored id was reachable only through a
+ * subscription they never opened.
+ *
+ * `stripeCustomerId` is what a checkout reuses. It is also mirrored onto the
+ * subscription row by the webhook, which is Stripe's own view of which customer
+ * holds the subscription and is what the billing portal and the charge-to-user
+ * resolution read; this one is the user's customer, written once when we create
+ * it.
+ */
+export const supportProfile = pgTable("support_profile", {
+  userId: text("user_id")
+    .primaryKey()
+    .references(() => user.id, { onDelete: "cascade" }),
+  // Null until the user opens their first checkout: a preference can be set
+  // before any money has moved, and is kept after a subscription is gone.
+  stripeCustomerId: text("stripe_customer_id"),
+  // Hides the name on the supporters board, and with it the public supporter
+  // badge on the player page.
+  anonymous: boolean("anonymous").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
+/**
  * Ledger of every successful support payment (one row per successful Stripe
  * charge, keyed by the charge id so webhook retries are idempotent). Summed to
  * get the total amount received since launch, which the funding bar measures
- * against the cumulative infrastructure cost. Unlike `subscription` (current
- * monthly amount), this is append-only history.
+ * against the cumulative infrastructure cost, and grouped by user to rank the
+ * supporters board. Unlike `subscription` (current monthly amount), this is
+ * append-only history, and it is the one table that sees both kinds of
+ * contribution: a monthly charge and a one-off donation arrive here alike,
+ * which is why neither the bar nor the board has to know which was which.
  */
 export const supportPayment = pgTable("support_payment", {
   // Stripe charge id, so a redelivered webhook cannot double-count, and a refund

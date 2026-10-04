@@ -11,8 +11,8 @@ import { measured } from "@/services/perf";
 export const dynamic = "force-dynamic";
 
 /**
- * Supporters podium
- * @description Active supporters ranked by their current monthly pledge, highest first. The pledge amount is never exposed, only the ranking; anonymous supporters appear as "Anonymous".
+ * Supporters board
+ * @description Everyone who has contributed, ranked by the net total they have given since launch, highest first, so a monthly pledge and a one-off donation are counted alike. Individual amounts are never exposed, only the ranking; anonymous supporters appear as "Anonymous". The aggregate monthly pledge is returned beside it for the funding run-rate.
  * @response SupportersPodiumResponse
  * @tag System
  * @openapi

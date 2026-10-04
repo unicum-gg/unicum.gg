@@ -1,12 +1,19 @@
-import { and, eq, gt, inArray, isNotNull, or } from "drizzle-orm";
+import { and, eq, gt, inArray, isNotNull, isNull, or } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { playersByRegion, streamers, subscription, user } from "@unicum.gg/shared";
+import {
+  playersByRegion,
+  streamers,
+  subscription,
+  supportProfile,
+  user,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 /**
  * The public, per-player badge crests carried in leaderboard/list payloads.
  * `verified` = the owner connected this WoT account on the site (Wargaming.net
- * ID sign-in); `supporter` = an active, non-anonymous support subscription;
+ * ID sign-in); `supporter` = an active, non-anonymous support subscription (a
+ * one-off donation is not one: the badge says the account is funding the site);
  * `streamer` = a linked Twitch channel (a streamer, live or not). The real-time
  * "live" pill is deliberately not here: it changes by the second and
  * self-resolves client-side from the shared streamers stream.
@@ -85,16 +92,22 @@ export async function resolvePlayerBadges(
     // Verified: a connected user exists (login is Wargaming-only, so any user
     // for the synthetic email means the account was connected here).
     db.select({ email: user.email }).from(user).where(inArray(user.email, emails)),
-    // Supporter: active, non-anonymous subscription for a connected user.
+    // Supporter: active, non-anonymous subscription for a connected user. The
+    // opt-out lives on the support profile (a one-off donor has no subscription
+    // to carry it), so a user with no profile row never opted out.
     db
       .select({ email: user.email })
       .from(subscription)
       .innerJoin(user, eq(user.id, subscription.userId))
+      .leftJoin(supportProfile, eq(supportProfile.userId, subscription.userId))
       .where(
         and(
           inArray(user.email, emails),
           inArray(subscription.status, [...ACTIVE_STATUSES]),
-          eq(subscription.anonymous, false),
+          or(
+            isNull(supportProfile.anonymous),
+            eq(supportProfile.anonymous, false),
+          ),
         ),
       ),
     // Streamer: a linked Twitch channel (curated seed or owner-confirmed).

@@ -32,10 +32,7 @@ import {
   type StrongholdStats,
 } from "@unicum.gg/core/players";
 import { tracedSync } from "@unicum.gg/core/lib/perf-trace";
-import {
-  getAccountSubscription,
-  isActiveStatus,
-} from "@unicum.gg/core/subscription";
+import { isAccountPublicSupporter } from "@unicum.gg/core/subscription";
 import {
   getAccountTwitchLogin,
   isAccountVerified,
@@ -112,7 +109,7 @@ export async function buildPlayerDetail(args: {
     wnxExpected,
     ratingHistory,
     specs,
-    supporterSub,
+    isSupporter,
     nameHistory,
     isVerified,
     twitchLogin,
@@ -126,7 +123,7 @@ export async function buildPlayerDetail(args: {
     getWNXExpectedValues(),
     getRatingHistory(region, player.id),
     getAllTankSpecs(),
-    getAccountSubscription(region, accountId),
+    isAccountPublicSupporter(region, accountId),
     getPlayerNameHistory(region, accountId),
     isAccountVerified(region, accountId),
     getAccountTwitchLogin(region, accountId),
@@ -144,10 +141,6 @@ export async function buildPlayerDetail(args: {
     // without adding a scan per profile view.
     getTankMoeByRegion(region),
   ]);
-  // Public supporter badge: active, and not opted out via podium anonymity.
-  const isSupporter = supporterSub
-    ? isActiveStatus(supporterSub.status) && !supporterSub.anonymous
-    : false;
   // Lite economics map for the vehicle rows' account-value fields.
   const economics = new Map<number, TankEconomics>();
   for (const [tankId, s] of specs) {

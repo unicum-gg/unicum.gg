@@ -20,3 +20,4 @@ export * from "./feedback";
 export * from "./glossary";
 export * from "./wot";
 export * from "./finance";
+export * from "./support";

@@ -6,8 +6,14 @@ import { setAnonymous } from "@unicum.gg/core/subscription";
 export const dynamic = "force-dynamic";
 
 /**
- * Toggle whether the logged-in supporter is shown anonymously on the podium.
- * Body: `{ anonymous: boolean }`. 401 if not logged in.
+ * Toggle whether the logged-in user is shown anonymously on the supporters
+ * board. Body: `{ anonymous: boolean }`. 401 if not logged in.
+ *
+ * Open to any signed-in user rather than to subscribers only: the board ranks
+ * by what was given, so a one-off donor appears on it and gets the same say
+ * over their name. The preference is stored whether or not they have given
+ * anything yet, which costs one row and means the answer is already there if
+ * they do.
  */
 export async function POST(request: Request): Promise<Response> {
   const session = await auth.api.getSession({ headers: await headers() });

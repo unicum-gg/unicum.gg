@@ -1,10 +1,13 @@
 import Stripe from "stripe";
-import { env } from "@unicum.gg/shared";
+import { clampSupportAmount, env, SupportMode } from "@unicum.gg/shared";
 import {
   getSubscription,
   getSubscriptionByCustomer,
+  getSupportProfile,
+  getUserIdByStripeCustomer,
   recordPayment,
   recordRefund,
+  setSupportCustomer,
   upsertSubscription,
   userExists,
 } from "@unicum.gg/core/subscription";
@@ -62,52 +65,65 @@ async function customerExists(s: Stripe, customerId: string): Promise<boolean> {
   return !!(await retrieveCustomer(s, customerId));
 }
 
-// Pay-what-you-want bounds (EUR cents): €3 floor, €1000 sanity cap.
-export const SUPPORT_MIN_CENTS = 300;
-export const SUPPORT_MAX_CENTS = 100_000;
-
-export function clampSupportAmount(cents: number): number {
-  return Math.min(Math.max(Math.round(cents), SUPPORT_MIN_CENTS), SUPPORT_MAX_CENTS);
+/**
+ * The Stripe customer for this user, created on first use and reused after.
+ *
+ * Reused rather than recreated so a repeat donor is one customer with one saved
+ * card, and so a supporter who cancels and comes back keeps their history. The
+ * stored id is checked first: an id from another Stripe mode (a local test run
+ * against the shared DB) or a deleted customer does not resolve under the
+ * active key and would make Checkout fail with `No such customer`.
+ *
+ * It lives on the support profile rather than on the subscription row, which is
+ * what makes it reachable for a one-off donor: they never open a subscription,
+ * so every donation used to mint a new customer.
+ */
+async function supportCustomerId(
+  s: Stripe,
+  userId: string,
+  name: string,
+): Promise<string> {
+  const profile = await getSupportProfile(userId);
+  const stored = profile?.stripeCustomerId ?? undefined;
+  if (stored && (await customerExists(s, stored))) return stored;
+  // No email set: WG accounts carry a synthetic `.local` email that can't
+  // receive receipts, so Checkout collects a real one from the supporter.
+  const customer = await s.customers.create({
+    name,
+    metadata: { userId },
+  });
+  await setSupportCustomer(userId, customer.id);
+  return customer.id;
 }
 
 /**
- * Pay-what-you-want recurring Checkout: the amount is set inline via `price_data`
- * (Stripe's `custom_unit_amount` PWYW does not support recurring), so the
- * supporter can pledge any monthly amount at or above the floor.
+ * Pay-what-you-want Checkout, in either shape: a monthly pledge the supporter
+ * controls from the billing portal, or a single payment that commits them to
+ * nothing. The amount is set inline via `price_data` in both cases (Stripe's
+ * `custom_unit_amount` PWYW does not support recurring, and we collect the
+ * amount ourselves anyway), so one product covers the two.
+ *
+ * Both run through a Stripe customer carrying our `userId`, which is what lets
+ * the webhook attribute the charge: a one-off donation produces no subscription
+ * to read it from, so the customer is the only thing both paths share.
  */
 export async function createSupportCheckout(opts: {
   userId: string;
   name: string;
   amountCents: number;
+  mode: SupportMode;
   successUrl: string;
   cancelUrl: string;
 }): Promise<string> {
   const s = requireStripe();
   if (!env.STRIPE_PRODUCT_ID) throw new Error("STRIPE_PRODUCT_ID missing");
   const amount = clampSupportAmount(opts.amountCents);
-
-  // Reuse the Stripe customer across (re)subscriptions to avoid duplicates, but
-  // only if it still resolves under the active key: a stored id from another
-  // Stripe mode (e.g. a local test run against the shared DB) or a deleted
-  // customer would otherwise make Checkout fail with `No such customer`.
-  const existing = await getSubscription(opts.userId);
-  let customerId = existing?.stripeCustomerId;
-  if (customerId && !(await customerExists(s, customerId))) {
-    customerId = undefined;
-  }
-  if (!customerId) {
-    // No email set: WG accounts carry a synthetic `.local` email that can't
-    // receive receipts, so Checkout collects a real one from the supporter.
-    const customer = await s.customers.create({
-      name: opts.name,
-      metadata: { userId: opts.userId },
-    });
-    customerId = customer.id;
-  }
+  const customer = await supportCustomerId(s, opts.userId, opts.name);
+  const oneOff = opts.mode === SupportMode.OneOff;
 
   const session = await s.checkout.sessions.create({
-    mode: "subscription",
-    customer: customerId,
+    mode: oneOff ? "payment" : "subscription",
+    customer,
     line_items: [
       {
         quantity: 1,
@@ -115,12 +131,16 @@ export async function createSupportCheckout(opts: {
           currency: "eur",
           product: env.STRIPE_PRODUCT_ID,
           unit_amount: amount,
-          recurring: { interval: "month" },
+          ...(oneOff ? {} : { recurring: { interval: "month" as const } }),
         },
       },
     ],
     // Carried onto the subscription so the webhook can map it back to our user.
-    subscription_data: { metadata: { userId: opts.userId } },
+    // A one-off has no subscription, so the same id rides the payment intent,
+    // which is what the Stripe dashboard shows beside the charge.
+    ...(oneOff
+      ? { payment_intent_data: { metadata: { userId: opts.userId } } }
+      : { subscription_data: { metadata: { userId: opts.userId } } }),
     success_url: opts.successUrl,
     cancel_url: opts.cancelUrl,
   });
@@ -174,25 +194,31 @@ function chargeCustomerId(charge: Stripe.Charge): string | undefined {
 /**
  * The user a charge belongs to, or null when the customer is not one of ours.
  *
- * The stored subscription is the normal path, but it cannot be the only one: on
- * a supporter's very first charge it does not exist yet. Checkout collects the
- * money before it creates the subscription, so Stripe emits `charge.succeeded`
- * seconds ahead of `customer.subscription.created`, and the row is written by
- * that second event. Resolving through the subscription alone therefore dropped
- * every first payment, silently and for good. The Stripe customer exists before
- * Checkout even opens and carries the same `userId` in its metadata, so it
- * answers the question at any point in the sequence.
+ * Resolved from the customer rather than from the subscription, and that is the
+ * whole reason a one-off donation reaches the ledger at all: a single payment
+ * creates no subscription to be resolved through. The same was already true of a
+ * supporter's very first charge, since Checkout collects the money before it
+ * creates the subscription, so Stripe emits `charge.succeeded` seconds ahead of
+ * `customer.subscription.created`; resolving through the subscription alone
+ * dropped every first payment, silently and for good.
+ *
+ * Three answers, cheapest first. Our own record of the customers we created
+ * covers everything that went through a checkout. The subscription row covers a
+ * customer created before that record existed. Stripe's own customer metadata is
+ * the last resort, and the only one whose id did not come out of a table we own.
  */
 async function chargeUserId(
   s: Stripe,
   customerId: string,
 ): Promise<string | null> {
+  const owned = await getUserIdByStripeCustomer(customerId);
+  if (owned) return owned;
   const sub = await getSubscriptionByCustomer(customerId);
   if (sub) return sub.userId;
   const customer = await retrieveCustomer(s, customerId);
   const userId = customer?.metadata?.userId;
   if (!userId) return null;
-  // Unlike the subscription path, this id comes from Stripe rather than from a
+  // Unlike the two paths above, this id comes from Stripe rather than from a
   // row we own, so it is checked before it lands in the ledger's foreign key.
   return (await userExists(userId)) ? userId : null;
 }
