@@ -679,7 +679,13 @@
     "moved": "انتقل",
     "scale": "المقياس",
     "those": "أولئك",
-    "went": "ذهب"
+    "went": "ذهب",
+    "Monthly": "شهري",
+    "carries": "حملات",
+    "comes": "يأتي",
+    "monthly": "شهريًا",
+    "none": "لا يوجد",
+    "type": "النوع"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1360,7 +1366,13 @@
     "moved": "перамешчана",
     "scale": "маштаб",
     "those": "тыя",
-    "went": "пайшоў"
+    "went": "пайшоў",
+    "Monthly": "Штомесяц",
+    "carries": "кэры",
+    "comes": "паходзіць",
+    "monthly": "штомесяц",
+    "none": "няма",
+    "type": "тып"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2242,7 +2254,13 @@
     "moved": "преместени",
     "scale": "скала",
     "those": "тези",
-    "went": "отиде"
+    "went": "отиде",
+    "Monthly": "Месечни",
+    "carries": "носения",
+    "comes": "идва",
+    "monthly": "месечно",
+    "none": "няма",
+    "type": "тип"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -2931,7 +2949,13 @@
     "moved": "pomjereno",
     "scale": "skala",
     "those": "oni",
-    "went": "otišao"
+    "went": "otišao",
+    "Monthly": "Mjesečno",
+    "carries": "nosi",
+    "comes": "dolazi",
+    "monthly": "mjesečno",
+    "none": "nema",
+    "type": "tip"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3824,7 +3848,13 @@
     "moved": "přesunuto",
     "scale": "stupnice",
     "those": "ti",
-    "went": "šel"
+    "went": "šel",
+    "Monthly": "Měsíční",
+    "carries": "přenáší",
+    "comes": "pochází",
+    "monthly": "měsíčně",
+    "none": "žádné",
+    "type": "typ"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4722,7 +4752,13 @@
     "moved": "flyttet",
     "scale": "skala",
     "those": "de",
-    "went": "gik"
+    "went": "gik",
+    "Monthly": "Månedlig",
+    "carries": "bærer",
+    "comes": "kommer",
+    "monthly": "månedlig",
+    "none": "ingen",
+    "type": "type"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5614,7 +5650,13 @@
     "moved": "verschoben",
     "scale": "Skala",
     "those": "diese",
-    "went": "ging"
+    "went": "ging",
+    "Monthly": "Monatlich",
+    "carries": "carries",
+    "comes": "kommt",
+    "monthly": "monatlich",
+    "none": "keine",
+    "type": "typ"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6511,7 +6553,13 @@
     "moved": "μετακινήθηκε",
     "scale": "κλίμακα",
     "those": "εκείνοι",
-    "went": "πήγε"
+    "went": "πήγε",
+    "Monthly": "Μηνιαία",
+    "carries": "κουβαλήματα",
+    "comes": "έρχεται",
+    "monthly": "μηνιαία",
+    "none": "κανένα",
+    "type": "τύπος"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7388,7 +7436,13 @@
     "moved": "movido",
     "scale": "escala",
     "those": "esos",
-    "went": "fue"
+    "went": "fue",
+    "Monthly": "Mensual",
+    "carries": "carrys",
+    "comes": "proviene",
+    "monthly": "mensual",
+    "none": "ninguno",
+    "type": "tipo"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8290,7 +8344,13 @@
     "moved": "siirretty",
     "scale": "asteikko",
     "those": "ne",
-    "went": "meni"
+    "went": "meni",
+    "Monthly": "Kuukausittain",
+    "carries": "carryt",
+    "comes": "tulee",
+    "monthly": "kuukausittain",
+    "none": "ei yhtään",
+    "type": "tyyppi"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9171,7 +9231,13 @@
     "moved": "déplacée",
     "scale": "échelle",
     "those": "ceux",
-    "went": "est allé"
+    "went": "est allé",
+    "Monthly": "Mensuel",
+    "carries": "porte",
+    "comes": "vient",
+    "monthly": "mensuel",
+    "none": "aucun",
+    "type": "type"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -9853,7 +9919,13 @@
     "moved": "स्थानांतरित",
     "scale": "पैमाना",
     "those": "वे",
-    "went": "गया"
+    "went": "गया",
+    "Monthly": "मासिक",
+    "carries": "ले जाता है",
+    "comes": "आता है",
+    "monthly": "मासिक",
+    "none": "कोई नहीं",
+    "type": "प्रकार"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -10749,7 +10821,13 @@
     "moved": "premješteno",
     "scale": "skala",
     "those": "oni",
-    "went": "otišli"
+    "went": "otišli",
+    "Monthly": "Mjesečno",
+    "carries": "nosi",
+    "comes": "dolazi",
+    "monthly": "mjesečno",
+    "none": "nema",
+    "type": "vrsta"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -11647,7 +11725,13 @@
     "moved": "áthelyezve",
     "scale": "skála",
     "those": "azok",
-    "went": "ment"
+    "went": "ment",
+    "Monthly": "Havi",
+    "carries": "carryk",
+    "comes": "érkezik",
+    "monthly": "havi",
+    "none": "nincs",
+    "type": "típus"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -12540,7 +12624,13 @@
     "moved": "spostata",
     "scale": "scala",
     "those": "quelli",
-    "went": "andato"
+    "went": "andato",
+    "Monthly": "Mensile",
+    "carries": "carry",
+    "comes": "proviene",
+    "monthly": "mensile",
+    "none": "nessuno",
+    "type": "tipo"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -13440,7 +13530,13 @@
     "moved": "移動",
     "scale": "スケール",
     "those": "それら",
-    "went": "行った"
+    "went": "行った",
+    "Monthly": "月間",
+    "carries": "キャリー",
+    "comes": "コメント",
+    "monthly": "月間",
+    "none": "なし",
+    "type": "種類"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -14126,7 +14222,13 @@
     "moved": "ауыстырылды",
     "scale": "шкала",
     "those": "солар",
-    "went": "кетті"
+    "went": "кетті",
+    "Monthly": "Ай сайынғы",
+    "carries": "алып жүреді",
+    "comes": "келеді",
+    "monthly": "ай сайынғы",
+    "none": "жоқ",
+    "type": "түрі"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -15031,7 +15133,13 @@
     "moved": "이동됨",
     "scale": "척도",
     "those": "해당",
-    "went": "진행됨"
+    "went": "진행됨",
+    "Monthly": "월간",
+    "carries": "보유",
+    "comes": "출처",
+    "monthly": "월간",
+    "none": "없음",
+    "type": "유형"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -15933,7 +16041,13 @@
     "moved": "perkelta",
     "scale": "skalė",
     "those": "tie",
-    "went": "įvyko"
+    "went": "įvyko",
+    "Monthly": "Mėnesio",
+    "carries": "nešimai",
+    "comes": "ateina",
+    "monthly": "mėnesio",
+    "none": "nėra",
+    "type": "tipas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -16819,7 +16933,13 @@
     "moved": "pārvietots",
     "scale": "mērogs",
     "those": "tie",
-    "went": "aizgāja"
+    "went": "aizgāja",
+    "Monthly": "Ikmēneša",
+    "carries": "iznestās spēles",
+    "comes": "nāk",
+    "monthly": "ikmēneša",
+    "none": "nav",
+    "type": "tips"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -17721,7 +17841,13 @@
     "moved": "verplaatst",
     "scale": "schaal",
     "those": "die",
-    "went": "gegaan"
+    "went": "gegaan",
+    "Monthly": "Maandelijks",
+    "carries": "carry's",
+    "comes": "komt",
+    "monthly": "maandelijks",
+    "none": "geen",
+    "type": "type"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -18615,7 +18741,13 @@
     "moved": "flyttet",
     "scale": "skala",
     "those": "disse",
-    "went": "gikk"
+    "went": "gikk",
+    "Monthly": "Månedlig",
+    "carries": "bærer",
+    "comes": "kommer",
+    "monthly": "månedlig",
+    "none": "ingen",
+    "type": "type"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -19505,7 +19637,13 @@
     "moved": "przeniesiono",
     "scale": "skala",
     "those": "te",
-    "went": "poszło"
+    "went": "poszło",
+    "Monthly": "Miesięcznie",
+    "carries": "przenosi",
+    "comes": "pochodzi",
+    "monthly": "miesięcznie",
+    "none": "brak",
+    "type": "typ"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -20388,7 +20526,13 @@
     "moved": "movido",
     "scale": "escala",
     "those": "esses",
-    "went": "foi"
+    "went": "foi",
+    "Monthly": "Mensal",
+    "carries": "carrega",
+    "comes": "vem",
+    "monthly": "mensal",
+    "none": "nenhum",
+    "type": "tipo"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -21271,7 +21415,13 @@
     "moved": "mutat",
     "scale": "scară",
     "those": "acelea",
-    "went": "a mers"
+    "went": "a mers",
+    "Monthly": "Lunar",
+    "carries": "poartă",
+    "comes": "vine",
+    "monthly": "lunar",
+    "none": "niciunul",
+    "type": "tip"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -22142,7 +22292,13 @@
     "moved": "перемещено",
     "scale": "шкала",
     "those": "те",
-    "went": "пошло"
+    "went": "пошло",
+    "Monthly": "Ежемесячный",
+    "carries": "тащит",
+    "comes": "приходит",
+    "monthly": "ежемесячный",
+    "none": "нет",
+    "type": "тип"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -22830,7 +22986,13 @@
     "moved": "premaknjeno",
     "scale": "lestvica",
     "those": "tisti",
-    "went": "šlo"
+    "went": "šlo",
+    "Monthly": "Mesečno",
+    "carries": "carryji",
+    "comes": "prihaja",
+    "monthly": "mesečno",
+    "none": "brez",
+    "type": "vrsta"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -23728,7 +23890,13 @@
     "moved": "померено",
     "scale": "скала",
     "those": "они",
-    "went": "пошло"
+    "went": "пошло",
+    "Monthly": "Mesečno",
+    "carries": "nosi",
+    "comes": "dolazi",
+    "monthly": "mesečno",
+    "none": "nema",
+    "type": "tip"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -24630,7 +24798,13 @@
     "moved": "flyttade",
     "scale": "skala",
     "those": "de",
-    "went": "gick"
+    "went": "gick",
+    "Monthly": "Månadsvis",
+    "carries": "bärningar",
+    "comes": "kommer",
+    "monthly": "månadsvis",
+    "none": "inga",
+    "type": "typ"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -25528,7 +25702,13 @@
     "moved": "ย้ายแล้ว",
     "scale": "มาตราส่วน",
     "those": "เหล่านั้น",
-    "went": "ไปแล้ว"
+    "went": "ไปแล้ว",
+    "Monthly": "รายเดือน",
+    "carries": "การแบกทีม",
+    "comes": "มา",
+    "monthly": "รายเดือน",
+    "none": "ไม่มี",
+    "type": "ประเภท"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -26215,7 +26395,13 @@
     "moved": "inilipat",
     "scale": "iskala",
     "those": "mga iyon",
-    "went": "nagpunta"
+    "went": "nagpunta",
+    "Monthly": "Buwan-buwan",
+    "carries": "mga carry",
+    "comes": "nagmumula",
+    "monthly": "buwan-buwan",
+    "none": "wala",
+    "type": "uri"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -27110,7 +27296,13 @@
     "moved": "taşındı",
     "scale": "ölçek",
     "those": "bunlar",
-    "went": "gitti"
+    "went": "gitti",
+    "Monthly": "Aylık",
+    "carries": "taşır",
+    "comes": "gelir",
+    "monthly": "aylık",
+    "none": "yok",
+    "type": "tür"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -27998,7 +28190,13 @@
     "moved": "переміщено",
     "scale": "шкала",
     "those": "ті",
-    "went": "пішло"
+    "went": "пішло",
+    "Monthly": "Щомісячні",
+    "carries": "Каррі",
+    "comes": "Коментарі",
+    "monthly": "щомісячні",
+    "none": "немає",
+    "type": "тип"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -28875,7 +29073,13 @@
     "moved": "đã chuyển",
     "scale": "thang đo",
     "those": "những",
-    "went": "đã xảy ra"
+    "went": "đã xảy ra",
+    "Monthly": "Hàng tháng",
+    "carries": "gánh team",
+    "comes": "đến",
+    "monthly": "hàng tháng",
+    "none": "không có",
+    "type": "loại"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -29773,6 +29977,12 @@
     "moved": "已移动",
     "scale": "评分标准",
     "those": "这些",
-    "went": "出错"
+    "went": "出错",
+    "Monthly": "每月",
+    "carries": "携带",
+    "comes": "来自",
+    "monthly": "每月",
+    "none": "无",
+    "type": "类型"
   }
 }

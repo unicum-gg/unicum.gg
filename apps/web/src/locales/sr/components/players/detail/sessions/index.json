@@ -9,7 +9,7 @@
     "month": "месец",
     "daily": "Дневно",
     "weekly": "Недељно",
-    "monthly": "Месечно"
+    "monthly": "Mesečno"
   },
   "week-of": "Недеља од {date}"
 }

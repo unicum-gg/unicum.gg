@@ -1,0 +1,14 @@
+{
+  "give-once": "Дарете {amount}",
+  "minimum-monthly": "Минимум {amount}/месец",
+  "minimum-once": "Минимум {amount}",
+  "monthly": "Месечно",
+  "one-time": "Еднократно",
+  "or-choose-your-own-amount": "Или изберете собствена сума",
+  "pay-what-you-want": "Платете колкото искате.",
+  "pick-an-amount-monthly": "Избери сума или въведи своя, от €{min}/месец.",
+  "pick-an-amount-once": "Избери сума или въведи своя, от €{min}. Еднократно плащане, нищо за отменяне.",
+  "secured-by-stripe-monthly": "Защитено от Stripe. Можете да отмените по всяко време.",
+  "secured-by-stripe-once": "Защитено от Stripe. Таксува се веднъж, никога повече.",
+  "support-with-monthly": "Подкрепете с {amount}/месец"
+}

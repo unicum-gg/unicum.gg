@@ -5,17 +5,18 @@
   "could-not-open-the-billing-portal": "Không thể mở cổng thanh toán.",
   "could-not-start-checkout-please-try-again": "Không thể bắt đầu thanh toán. Vui lòng thử lại.",
   "could-not-update-your-preference": "Không thể cập nhật tùy chọn của bạn.",
+  "give-extra-one-time": "Hỗ trợ thêm một lần",
   "log-in-with-wargaming": "Đăng nhập bằng Wargaming",
   "log-in-with-wargaming-to": "Đăng nhập bằng Wargaming để ủng hộ {NAME}.",
   "manage-subscription": "Quản lý đăng ký",
   "only-active-supporters-can-claim-the-discord": "Chỉ người ủng hộ đang hoạt động mới có thể nhận vai trò Discord.",
-  "or-choose-your-own-amount": "Hoặc chọn số tiền của riêng bạn",
-  "pay-what-you-want": "Thanh toán số tiền bạn muốn.",
-  "pick-an-amount": "Chọn một số tiền hoặc tự nhập, từ €{min}/tháng.",
   "re-sync-discord-role": "Đồng bộ lại vai trò Discord",
-  "secured-by-stripe": "Được Stripe bảo mật. Hủy bất cứ lúc nào.",
   "show-me-anonymously-on-the": "Hiển thị tôi ẩn danh trên bục vinh danh",
   "support-subscriptions-are-coming-soon": "Gói đăng ký Hỗ trợ sắp ra mắt.",
   "supporter-role-added-on-discord": "Đã thêm vai trò người ủng hộ trên Discord!",
-  "you-are-a-supporter-thank": "Bạn là người ủng hộ. Cảm ơn bạn đã giúp {NAME} tiếp tục hoạt động."
+  "thank-you-for-supporting": "Cảm ơn bạn đã hỗ trợ {NAME}!",
+  "thank-you-for-your-donation": "Cảm ơn bạn vì khoản quyên góp!",
+  "you-already-have-a-monthly-pledge": "Bạn đã có khoản cam kết hàng tháng. Sử dụng cổng thanh toán để thay đổi khoản này.",
+  "you-are-a-supporter-thank": "Bạn là người ủng hộ. Cảm ơn bạn đã giúp {NAME} tiếp tục hoạt động.",
+  "you-have-given-so-far": "Bạn đã đóng góp {amount} cho đến nay. Xin cảm ơn."
 }

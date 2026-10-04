@@ -1,0 +1,14 @@
+{
+  "give-once": "Přispět částkou {amount}",
+  "minimum-monthly": "Minimum {amount}/měsíc",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Měsíční",
+  "one-time": "Jednorázově",
+  "or-choose-your-own-amount": "Nebo vyberte vlastní částku",
+  "pay-what-you-want": "Zaplaťte, kolik chcete.",
+  "pick-an-amount-monthly": "Vyberte částku nebo zadejte vlastní, od {min} € měsíčně.",
+  "pick-an-amount-once": "Vyberte částku nebo zadejte vlastní, od {min} €. Jednorázová platba, nic není třeba rušit.",
+  "secured-by-stripe-monthly": "Platby zabezpečuje Stripe. Storno kdykoli.",
+  "secured-by-stripe-once": "Platby zabezpečuje Stripe. Stržena bude pouze jednou.",
+  "support-with-monthly": "Podpořit částkou {amount}/měsíc"
+}

@@ -1,0 +1,14 @@
+{
+  "give-once": "Lahjoita {amount}",
+  "minimum-monthly": "Vähintään {amount}/kuukausi",
+  "minimum-once": "Vähintään {amount}",
+  "monthly": "Kuukausittain",
+  "one-time": "Kerran",
+  "or-choose-your-own-amount": "Tai valitse oma summasi",
+  "pay-what-you-want": "Maksa mitä haluat.",
+  "pick-an-amount-monthly": "Valitse summa tai kirjoita oma summasi, alkaen {min} €/kuukausi.",
+  "pick-an-amount-once": "Valitse summa tai kirjoita oma summasi, alkaen {min} €. Yksi maksu, ei mitään peruttavaa.",
+  "secured-by-stripe-monthly": "Stripen suojaama. Peruuta milloin tahansa.",
+  "secured-by-stripe-once": "Stripen suojaama. Veloitetaan kerran, ei koskaan uudelleen.",
+  "support-with-monthly": "Tue summalla {amount}/kuukausi"
+}

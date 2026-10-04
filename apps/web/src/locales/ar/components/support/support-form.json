@@ -1,0 +1,14 @@
+{
+  "give-once": "قدّم {amount}",
+  "minimum-monthly": "الحد الأدنى {amount}/شهر",
+  "minimum-once": "الحد الأدنى {amount}",
+  "monthly": "شهري",
+  "one-time": "لمرة واحدة",
+  "or-choose-your-own-amount": "أو اختر المبلغ بنفسك",
+  "pay-what-you-want": "ادفع ما تريد.",
+  "pick-an-amount-monthly": "اختر مبلغًا أو اكتب المبلغ بنفسك، بدءًا من €{min}/شهر.",
+  "pick-an-amount-once": "اختر مبلغًا أو اكتب المبلغ بنفسك، بدءًا من €{min}. دفعة واحدة، ولا شيء لإلغائه.",
+  "secured-by-stripe-monthly": "مؤمّن بواسطة Stripe. ألغِ في أي وقت.",
+  "secured-by-stripe-once": "مؤمّن بواسطة Stripe. يُخصم مرة واحدة، ولن يُخصم مطلقًا مرة أخرى.",
+  "support-with-monthly": "قدّم الدعم مقابل {amount}/شهر"
+}

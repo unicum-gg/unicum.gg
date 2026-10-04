@@ -9,7 +9,7 @@
     "month": "mėnuo",
     "daily": "Kasdien",
     "weekly": "Kiekvieną savaitę",
-    "monthly": "Kiekvieną mėnesį"
+    "monthly": "Mėnesio"
   },
   "week-of": "Savaitė nuo {date}"
 }

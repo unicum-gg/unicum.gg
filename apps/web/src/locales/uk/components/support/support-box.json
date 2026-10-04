@@ -5,17 +5,18 @@
   "could-not-open-the-billing-portal": "Не вдалося відкрити платіжний портал.",
   "could-not-start-checkout-please-try-again": "Не вдалося розпочати оформлення оплати. Спробуйте ще раз.",
   "could-not-update-your-preference": "Можна не вдалося оновити ваш вибір.",
+  "give-extra-one-time": "Додати разово",
   "log-in-with-wargaming": "Увійти через Загальний",
   "log-in-with-wargaming-to": "Увійдіть через Загальний, щоб підтримати {NAME}.",
   "manage-subscription": "Керувати підпискою",
   "only-active-supporters-can-claim-the-discord": "Лише активні підтримувачі можуть отримати роль у Discord.",
-  "or-choose-your-own-amount": "Або виберіть власну суму",
-  "pay-what-you-want": "Платіть скільки хочете.",
-  "pick-an-amount": "Виберіть суму або введіть власну, від €{min}/місяць.",
   "re-sync-discord-role": "Повторно синхронізувати роль Discord",
-  "secured-by-stripe": "Захищено Stripe. Скасувати можна будь-коли.",
   "show-me-anonymously-on-the": "Показувати мене анонімно на п’єдесталі",
   "support-subscriptions-are-coming-soon": "Підписки підтримки скоро з’являться.",
   "supporter-role-added-on-discord": "Роль підтримувача додано в Discord!",
-  "you-are-a-supporter-thank": "Ви підтримувач. Дякуємо, що допомагаєте {NAME} працювати."
+  "thank-you-for-supporting": "Дякуємо за підтримку {NAME}!",
+  "thank-you-for-your-donation": "Дякуємо за вашу пожертву!",
+  "you-already-have-a-monthly-pledge": "У вас вже є щомісячна підтримка. Скористайтеся платіжним порталом, щоб змінити її.",
+  "you-are-a-supporter-thank": "Ви підтримувач. Дякуємо, що допомагаєте {NAME} працювати.",
+  "you-have-given-so-far": "Наразі ви внесли {amount}. Дякуємо."
 }

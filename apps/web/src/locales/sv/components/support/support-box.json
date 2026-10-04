@@ -5,17 +5,18 @@
   "could-not-open-the-billing-portal": "Det gick inte att öppna betalningsportalen.",
   "could-not-start-checkout-please-try-again": "Det gick inte att starta betalningen. Försök igen.",
   "could-not-update-your-preference": "Det gick inte att uppdatera din inställning.",
+  "give-extra-one-time": "Ge extra, en gång",
   "log-in-with-wargaming": "Logga in med Wargaming",
   "log-in-with-wargaming-to": "Logga in med Wargaming för att stötta {NAME}.",
   "manage-subscription": "Hantera prenumeration",
   "only-active-supporters-can-claim-the-discord": "Du måste vara aktiv Supporter för att hämta Roll på Discord.",
-  "or-choose-your-own-amount": "Eller välj ett eget belopp",
-  "pay-what-you-want": "Betala vad du vill.",
-  "pick-an-amount": "Välj ett belopp eller ange ett eget, från €{min}/månad.",
   "re-sync-discord-role": "Synkronisera Roll på Discord igen",
-  "secured-by-stripe": "Säkras av Stripe. Avbryt när som helst.",
   "show-me-anonymously-on-the": "Visa mig anonymt på prispallen",
   "support-subscriptions-are-coming-soon": "Supporterprenumerationer kommer snart.",
   "supporter-role-added-on-discord": "Roll som Supporter har lagts till på Discord!",
-  "you-are-a-supporter-thank": "Du är Supporter. Tack för att du håller {NAME} vid liv."
+  "thank-you-for-supporting": "Tack för att du stöder {NAME}!",
+  "thank-you-for-your-donation": "Tack för din donation!",
+  "you-already-have-a-monthly-pledge": "Du har redan ett månadsvis åtagande. Använd betalningsportalen för att förändra det.",
+  "you-are-a-supporter-thank": "Du är Supporter. Tack för att du håller {NAME} vid liv.",
+  "you-have-given-so-far": "Du har gett {amount} hittills. Tack."
 }

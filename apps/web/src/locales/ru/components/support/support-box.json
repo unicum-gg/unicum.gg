@@ -5,17 +5,18 @@
   "could-not-open-the-billing-portal": "Не удалось открыть платёжный портал.",
   "could-not-start-checkout-please-try-again": "Не удалось начать оформление оплаты. Попробуйте ещё раз.",
   "could-not-update-your-preference": "Не удалось обновить ваши настройки.",
+  "give-extra-one-time": "Дополнительное разовое пожертвование",
   "log-in-with-wargaming": "Войти через Общий",
   "log-in-with-wargaming-to": "Войдите через Общий, чтобы поддержать {NAME}.",
   "manage-subscription": "Управление подпиской",
   "only-active-supporters-can-claim-the-discord": "Только активные спонсоры могут получить роль Discord.",
-  "or-choose-your-own-amount": "Или выберите свою сумму",
-  "pay-what-you-want": "Платите сколько хотите.",
-  "pick-an-amount": "Выбрать сумму или ввести свою, от €{min}/месяц.",
   "re-sync-discord-role": "Повторно синхронизировать роль Discord",
-  "secured-by-stripe": "Защищено Stripe. Отмена в любое время.",
   "show-me-anonymously-on-the": "Показывать меня анонимно на пьедестале",
   "support-subscriptions-are-coming-soon": "Подписки поддержки скоро появятся.",
   "supporter-role-added-on-discord": "Роль спонсора добавлена в Discord!",
-  "you-are-a-supporter-thank": "Вы спонсор. Спасибо, что помогаете сохранять {NAME}."
+  "thank-you-for-supporting": "Спасибо за поддержку {NAME}!",
+  "thank-you-for-your-donation": "Спасибо за ваше пожертвование!",
+  "you-already-have-a-monthly-pledge": "У вас уже есть ежемесячное пожертвование. Изменить его можно в платёжном портале.",
+  "you-are-a-supporter-thank": "Вы спонсор. Спасибо, что помогаете сохранять {NAME}.",
+  "you-have-given-so-far": "Вы пожертвовали {amount}. Спасибо."
 }

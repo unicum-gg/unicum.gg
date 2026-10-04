@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Podržavatelj"
   },
-  "supporter-note": "Aktivna {link}, vidljiva javnosti. Podržavaoci koji odluče ostati anonimni ne nose značku, vlastitim izborom.",
+  "supporter-note": "Aktivna {link}, javno dostupna. Podržavatelji koji odluče ostati anonimni po vlastitom izboru nemaju značku, a ni jednokratna donacija ne nosi značku. Značka kaže da račun trenutno finansira stranicu.",
   "the-marks-a-player-or": "Oznake koje igrač ili klan mogu nositi na stranici {NAME}, šta svaka znači i tačno šta je potrebno za njeno dobijanje.",
   "tournament-winner": {
     "name": "Pobjednik turnira",

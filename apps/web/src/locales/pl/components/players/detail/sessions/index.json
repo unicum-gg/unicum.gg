@@ -9,7 +9,7 @@
     "month": "miesiąc",
     "daily": "Codzienny",
     "weekly": "Tygodniowy",
-    "monthly": "Miesięczny"
+    "monthly": "Miesięcznie"
   },
   "week-of": "Tydzień od {date}"
 }

@@ -1,0 +1,14 @@
+{
+  "give-once": "Paaukoti {amount}",
+  "minimum-monthly": "Minimumas {amount}/mėnesio",
+  "minimum-once": "Minimumas {amount}",
+  "monthly": "Mėnesio",
+  "one-time": "Vienkartinė",
+  "or-choose-your-own-amount": "Arba pasirinkti savo sumą",
+  "pay-what-you-want": "Mokėkite kiek norite.",
+  "pick-an-amount-monthly": "Pasirinkti sumą arba įvesti savo, nuo €{min}/mėnesio.",
+  "pick-an-amount-once": "Pasirinkti sumą arba įvesti savo, nuo €{min}. Vienas mokėjimas, nieko nereikia atšaukti.",
+  "secured-by-stripe-monthly": "Apsaugota Stripe. Atšaukti galite bet kada.",
+  "secured-by-stripe-once": "Apsaugota Stripe. Mokestis imamas vieną kartą ir daugiau niekada.",
+  "support-with-monthly": "Remti skiriant {amount}/mėnesio"
+}

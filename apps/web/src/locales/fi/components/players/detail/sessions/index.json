@@ -9,7 +9,7 @@
     "month": "kuukausi",
     "daily": "Päivittäinen",
     "weekly": "Viikoittainen",
-    "monthly": "Kuukausittainen"
+    "monthly": "Kuukausittain"
   },
   "week-of": "Viikko alkaen {date}"
 }

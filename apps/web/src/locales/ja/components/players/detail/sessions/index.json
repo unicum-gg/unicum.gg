@@ -9,7 +9,7 @@
     "month": "月",
     "daily": "デイリー",
     "weekly": "ウィークリー",
-    "monthly": "マンスリー"
+    "monthly": "月間"
   },
   "week-of": "{date}の週"
 }

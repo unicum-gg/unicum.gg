@@ -1,0 +1,14 @@
+{
+  "give-once": "{amount} беру",
+  "minimum-monthly": "Ең азы, айына {amount}",
+  "minimum-once": "Ең азы {amount}",
+  "monthly": "Ай сайынғы",
+  "one-time": "Бір рет",
+  "or-choose-your-own-amount": "Немесе соманы өзіңіз таңдаңыз",
+  "pay-what-you-want": "Қалағаныңызша төлеңіз.",
+  "pick-an-amount-monthly": "Соманы таңдаңыз немесе өзіңіздікін енгізіңіз, айына €{min}-тен бастап.",
+  "pick-an-amount-once": "Соманы таңдаңыз немесе өзіңіздікін енгізіңіз, €{min}-тен бастап. Бір ғана төлем, тоқтататын ештеңе жоқ.",
+  "secured-by-stripe-monthly": "Stripe арқылы қорғалған. Кез келген уақытта бас тартыңыз.",
+  "secured-by-stripe-once": "Stripe арқылы қорғалған. Бір рет алынады, ешқашан қайта алынбайды.",
+  "support-with-monthly": "Айына {amount} сомасымен қолдау көрсету"
+}

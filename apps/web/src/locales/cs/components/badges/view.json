@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Podporovatel"
   },
-  "supporter-note": "Aktivní {link}, který zůstává veřejně viditelný. Uživatelé s rolí Podporovatel, kteří chtějí zůstat anonymní, žádný odznak nemají, a to z vlastní volby.",
+  "supporter-note": "Aktivní {link}, ponechaný veřejný. Podporovatelé, kteří se rozhodnou zůstat anonymní, nemají z vlastní vůle žádný odznak a jednorázový dar také žádný nenese. Odznak říká, že účet právě financuje web.",
   "the-marks-a-player-or": "Značky, které mohou hráč nebo klan používat na webu {NAME}, co každá znamená a co přesně je k jejímu získání potřeba.",
   "tournament-winner": {
     "name": "Vítěz turnaje",

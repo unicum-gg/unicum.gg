@@ -1,0 +1,14 @@
+{
+  "give-once": "Ziedot {amount}",
+  "minimum-monthly": "Minimums {amount}/mēnesī",
+  "minimum-once": "Minimums {amount}",
+  "monthly": "Ikmēneša",
+  "one-time": "Vienreizējs",
+  "or-choose-your-own-amount": "Vai izvēlēties savu summu",
+  "pay-what-you-want": "Maksājiet, cik vēlaties.",
+  "pick-an-amount-monthly": "Izvēlēties summu vai ievadīt savu, sākot no €{min}/mēnesī.",
+  "pick-an-amount-once": "Izvēlēties summu vai ievadīt savu, sākot no €{min}. Viens maksājums, nekas nav jāatceļ.",
+  "secured-by-stripe-monthly": "Nodrošina Stripe. Atcelt jebkurā laikā.",
+  "secured-by-stripe-once": "Nodrošina Stripe. Maksa tiek iekasēta vienu reizi, nekad vairs.",
+  "support-with-monthly": "Atbalstīt ar {amount}/mēnesī"
+}

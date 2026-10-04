@@ -1,0 +1,14 @@
+{
+  "give-once": "{amount} 후원하기",
+  "minimum-monthly": "최소 {amount}/월",
+  "minimum-once": "최소 {amount}",
+  "monthly": "월간",
+  "one-time": "일회성",
+  "or-choose-your-own-amount": "또는 원하는 금액 선택",
+  "pay-what-you-want": "원하는 만큼 결제하세요.",
+  "pick-an-amount-monthly": "금액을 선택하거나 직접 입력하세요. 월 €{min}부터 가능합니다.",
+  "pick-an-amount-once": "금액을 선택하거나 직접 입력하세요. €{min}부터 가능합니다. 한 번만 결제되며 취소할 필요가 없습니다.",
+  "secured-by-stripe-monthly": "Stripe로 안전하게 보호됩니다. 언제든 취소할 수 있습니다.",
+  "secured-by-stripe-once": "Stripe로 안전하게 보호됩니다. 한 번만 청구되며 다시 청구되지 않습니다.",
+  "support-with-monthly": "월 {amount}로 지원하기"
+}

@@ -9,7 +9,7 @@
     "month": "månad",
     "daily": "Dagligen",
     "weekly": "Veckovis",
-    "monthly": "Månatligen"
+    "monthly": "Månadsvis"
   },
   "week-of": "Veckan som börjar {date}"
 }

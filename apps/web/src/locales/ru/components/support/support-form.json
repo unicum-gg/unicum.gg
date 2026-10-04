@@ -1,0 +1,14 @@
+{
+  "give-once": "Пожертвовать {amount}",
+  "minimum-monthly": "Минимум {amount}/месяц",
+  "minimum-once": "Минимум {amount}",
+  "monthly": "Ежемесячный",
+  "one-time": "Разовый",
+  "or-choose-your-own-amount": "Или выбрать свою сумму",
+  "pay-what-you-want": "Платите сколько хотите.",
+  "pick-an-amount-monthly": "Выбрать сумму или ввести свою, от €{min}/месяц.",
+  "pick-an-amount-once": "Выбрать сумму или ввести свою, от €{min}. Один платёж, ничего не нужно отменять.",
+  "secured-by-stripe-monthly": "Защищено Stripe. Отменить можно в любое время.",
+  "secured-by-stripe-once": "Защищено Stripe. Сумма списывается один раз и больше никогда.",
+  "support-with-monthly": "Поддержать на сумму {amount}/месяц"
+}

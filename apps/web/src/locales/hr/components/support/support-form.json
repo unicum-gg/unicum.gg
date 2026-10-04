@@ -1,0 +1,14 @@
+{
+  "give-once": "Doniraj {amount}",
+  "minimum-monthly": "Minimum {amount}/mjesec",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Mjesečno",
+  "one-time": "Jednokratno",
+  "or-choose-your-own-amount": "Ili odaberi vlastiti iznos",
+  "pay-what-you-want": "Plati koliko želiš.",
+  "pick-an-amount-monthly": "Odaberi iznos ili upiši vlastiti, od €{min}/mjesec.",
+  "pick-an-amount-once": "Odaberi iznos ili upiši vlastiti, od €{min}. Jednokratno plaćanje, nema otkazivanja.",
+  "secured-by-stripe-monthly": "Zaštićeno Stripeom. Odustani bilo kada.",
+  "secured-by-stripe-once": "Naplaćuje se jednom, nikad više.",
+  "support-with-monthly": "Podrži s {amount}/mjesec"
+}

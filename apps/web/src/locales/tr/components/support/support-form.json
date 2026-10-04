@@ -1,0 +1,14 @@
+{
+  "give-once": "{amount} ver",
+  "minimum-monthly": "Aylık minimum {amount}",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Aylık",
+  "one-time": "Tek seferlik",
+  "or-choose-your-own-amount": "Veya kendi tutarınızı seçin",
+  "pay-what-you-want": "İstediğiniz kadar ödeyin.",
+  "pick-an-amount-monthly": "Bir miktar seçin veya kendiniz yazın, aylık €{min} tutarından başlayarak.",
+  "pick-an-amount-once": "Bir miktar seçin veya kendiniz yazın, €{min} tutarından başlayarak. Tek ödeme, iptal edilecek hiçbir şey yok.",
+  "secured-by-stripe-monthly": "Stripe tarafından güvence altında. İstediğiniz zaman iptal edebilirsiniz.",
+  "secured-by-stripe-once": "Stripe tarafından güvence altında. Bir kez ücretlendirilir, bir daha asla.",
+  "support-with-monthly": "Aylık {amount} ile destek ol"
+}

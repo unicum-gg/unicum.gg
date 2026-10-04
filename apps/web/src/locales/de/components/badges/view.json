@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Unterstützer"
   },
-  "supporter-note": "{link} muss aktiv sein und öffentlich sichtbar bleiben. Unterstützer, die anonym bleiben möchten, tragen auf eigenen Wunsch kein Abzeichen.",
+  "supporter-note": "Ein aktiver {link}, der öffentlich bleibt. Unterstützer, die anonym bleiben möchten, tragen aus eigener Entscheidung kein Abzeichen, ebenso wenig wie bei einer einmaligen Spende. Das Abzeichen zeigt, dass das Konto die Website derzeit finanziert.",
   "the-marks-a-player-or": "Die Markierungen, die ein Spieler oder Clan auf {NAME} tragen kann, wofür jede steht und was genau nötig ist, um sie zu erhalten.",
   "tournament-winner": {
     "name": "Gewinner des Turniers",

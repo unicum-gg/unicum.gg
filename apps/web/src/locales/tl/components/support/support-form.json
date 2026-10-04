@@ -1,0 +1,14 @@
+{
+  "give-once": "Magbigay ng {amount}",
+  "minimum-monthly": "Pinakamababa na {amount}/buwan",
+  "minimum-once": "Pinakamababa na {amount}",
+  "monthly": "Buwan-buwan",
+  "one-time": "Isang beses",
+  "or-choose-your-own-amount": "O pumili ng sarili mong halaga",
+  "pay-what-you-want": "Magbayad ng halagang gusto mo.",
+  "pick-an-amount-monthly": "Pumili ng halaga o ilagay ang sarili mong halaga, mula €{min}/buwan.",
+  "pick-an-amount-once": "Pumili ng halaga o ilagay ang sarili mong halaga, mula €{min}. Isang bayad lang, walang kailangang kanselahin.",
+  "secured-by-stripe-monthly": "Pinoprotektahan ng Stripe. Kanselahin anumang oras.",
+  "secured-by-stripe-once": "Pinoprotektahan ng Stripe. Isang beses lang sisingilin, hindi kailanman muli.",
+  "support-with-monthly": "Suporta na {amount}/buwan"
+}

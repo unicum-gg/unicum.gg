@@ -1,0 +1,14 @@
+{
+  "give-once": "Donner {amount}",
+  "minimum-monthly": "Minimum {amount}/mois",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Mensuel",
+  "one-time": "Une seule fois",
+  "or-choose-your-own-amount": "Ou choisissez votre propre montant",
+  "pay-what-you-want": "Payez ce que vous voulez.",
+  "pick-an-amount-monthly": "Choisissez un montant ou saisissez le vôtre, à partir de {min} €/mois.",
+  "pick-an-amount-once": "Choisissez un montant ou saisissez le vôtre, à partir de {min} €. Un paiement unique, rien à annuler.",
+  "secured-by-stripe-monthly": "Sécurisé par Stripe. Annulez quand vous voulez.",
+  "secured-by-stripe-once": "Sécurisé par Stripe. Débité une seule fois, jamais plus.",
+  "support-with-monthly": "Soutenir avec {amount}/mois"
+}

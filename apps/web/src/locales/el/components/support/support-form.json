@@ -1,0 +1,14 @@
+{
+  "give-once": "Δώστε {amount}",
+  "minimum-monthly": "Ελάχιστο {amount}/μήνα",
+  "minimum-once": "Ελάχιστο {amount}",
+  "monthly": "Μηνιαία",
+  "one-time": "Μία φορά",
+  "or-choose-your-own-amount": "Ή επιλέξτε το δικό σας ποσό",
+  "pay-what-you-want": "Πληρώστε ό,τι θέλετε.",
+  "pick-an-amount-monthly": "Επιλογή ποσού ή πληκτρολογήστε το δικό σας, από €{min}/μήνα.",
+  "pick-an-amount-once": "Επιλογή ποσού ή πληκτρολογήστε το δικό σας, από €{min}. Μία μόνο πληρωμή, τίποτα για ακύρωση.",
+  "secured-by-stripe-monthly": "Ασφαλείς πληρωμές μέσω Stripe. Ακυρώστε οποτεδήποτε.",
+  "secured-by-stripe-once": "Ασφαλείς πληρωμές μέσω Stripe. Χρέωση μία φορά, ποτέ ξανά.",
+  "support-with-monthly": "Υποστήριξη με {amount}/μήνα"
+}

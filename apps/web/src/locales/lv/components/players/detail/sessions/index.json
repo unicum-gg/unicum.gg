@@ -9,7 +9,7 @@
     "month": "mēnesis",
     "daily": "Ikdienas",
     "weekly": "Nedēļas",
-    "monthly": "Mēneša"
+    "monthly": "Ikmēneša"
   },
   "week-of": "Nedēļa no {date}"
 }

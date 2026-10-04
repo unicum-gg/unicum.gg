@@ -5,17 +5,18 @@
   "could-not-open-the-billing-portal": "Portalul de facturare nu a putut fi deschis.",
   "could-not-start-checkout-please-try-again": "Ar putea începe plata. Încearcă din nou.",
   "could-not-update-your-preference": "Ar putea actualiza preferința ta.",
+  "give-extra-one-time": "Oferă o sumă suplimentară o singură dată",
   "log-in-with-wargaming": "Conectare cu Wargaming",
   "log-in-with-wargaming-to": "Conectează-te cu Wargaming pentru a susține {NAME}.",
   "manage-subscription": "Gestionați abonamentul",
   "only-active-supporters-can-claim-the-discord": "Doar susținătorii activi pot revendica rolul Discord.",
-  "or-choose-your-own-amount": "Sau alege propria sumă",
-  "pay-what-you-want": "Plătește cât dorești.",
-  "pick-an-amount": "Alege o sumă sau introdu propria sumă, de la €{min}/lună.",
   "re-sync-discord-role": "Resincronizează rolul Discord",
-  "secured-by-stripe": "Securizat de Stripe. Anulează oricând.",
   "show-me-anonymously-on-the": "Arată-mă anonim pe podium",
   "support-subscriptions-are-coming-soon": "Abonamentele de susținere vor fi disponibile în curând.",
   "supporter-role-added-on-discord": "Rolul de susținător a fost adăugat pe Discord!",
-  "you-are-a-supporter-thank": "Ești susținător. Îți mulțumim că menții {NAME} activ."
+  "thank-you-for-supporting": "Îți mulțumim că susții {NAME}!",
+  "thank-you-for-your-donation": "Îți mulțumim pentru donație!",
+  "you-already-have-a-monthly-pledge": "Ai deja o contribuție lunară. Folosește portalul de facturare pentru a o modifica.",
+  "you-are-a-supporter-thank": "Ești susținător. Îți mulțumim că menții {NAME} activ.",
+  "you-have-given-so-far": "Ai oferit până acum {amount}. Îți mulțumim."
 }

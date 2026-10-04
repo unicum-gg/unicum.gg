@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Supporter"
   },
-  "supporter-note": "Ett aktivt {link} som hålls offentligt. Den som är Supporter och väljer att förbli anonym bär inget märke, helt enligt eget val.",
+  "supporter-note": "En aktiv {link}, som hålls offentlig. Supporters som väljer att förbli anonyma bär inget märke, efter eget val, och en engångsdonation medför inte heller något märke. Märket säger att kontot finansierar webbplatsen just nu.",
   "the-marks-a-player-or": "Märken på {NAME} som en spelare eller klan kan bära, vad vart och ett betyder och exakt vad som krävs för att få det.",
   "tournament-winner": {
     "name": "Turneringsvinnare",

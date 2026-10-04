@@ -1,0 +1,14 @@
+{
+  "give-once": "{amount}を一度だけ支援",
+  "minimum-monthly": "最小 {amount}/月",
+  "minimum-once": "最小 {amount}",
+  "monthly": "月間",
+  "one-time": "一度だけ",
+  "or-choose-your-own-amount": "または希望額を選択",
+  "pay-what-you-want": "希望額をお支払いください。",
+  "pick-an-amount-monthly": "金額を選択するか、希望額を入力してください。€{min}/月から利用できます。",
+  "pick-an-amount-once": "金額を選択するか、希望額を入力してください。€{min}から利用できます。一度だけの支払いで、キャンセルするものはありません。",
+  "secured-by-stripe-monthly": "Stripeによって安全に保護されています。いつでもキャンセルできます。",
+  "secured-by-stripe-once": "Stripeによって安全に保護されています。一度だけ請求され、以後は請求されません。",
+  "support-with-monthly": "{amount}/月で支援"
+}

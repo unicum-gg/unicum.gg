@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Supporter"
   },
-  "supporter-note": "Un {link} actif et affiché publiquement. Les supporters qui choisissent de rester anonymes ne portent aucun badge, conformément à leur choix.",
+  "supporter-note": "Un {link} actif, conservé public. Les Supporters qui choisissent de rester anonymes ne portent aucun badge, de leur propre choix, et un don ponctuel n’en porte pas non plus : le badge indique que le compte finance actuellement le site.",
   "the-marks-a-player-or": "Les insignes qu’un joueur ou un clan peut porter sur {NAME}, ce que chacun signifie et les conditions exactes pour l’obtenir.",
   "tournament-winner": {
     "name": "Vainqueur de tournoi",

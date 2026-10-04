@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Người hỗ trợ"
   },
-  "supporter-note": "Một {link} đang hoạt động, được công khai. Những người ủng hộ chọn ẩn danh sẽ không có huy hiệu, theo lựa chọn của chính họ.",
+  "supporter-note": "Một {link} đang hoạt động, được giữ công khai. Những người hỗ trợ chọn ẩn danh sẽ không có huy hiệu, theo lựa chọn của họ, và khoản quyên góp một lần cũng không có huy hiệu: huy hiệu cho biết tài khoản đang tài trợ cho trang web ngay lúc này.",
   "the-marks-a-player-or": "Các dấu hiệu mà một người chơi hoặc một Clan có thể gánh đội trên {NAME}, điều mỗi dấu hiệu nói lên và chính xác điều kiện để kiếm được nó.",
   "tournament-winner": {
     "name": "Người thắng Giải đấu",

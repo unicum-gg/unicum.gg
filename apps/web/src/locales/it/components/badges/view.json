@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Sostenitore"
   },
-  "supporter-note": "Occorre che {link} sia in stato attivo e visibile pubblicamente. I sostenitori che scelgono di restare anonimi non mostrano alcun badge, per loro scelta.",
+  "supporter-note": "Un {link} attivo, mantenuto pubblico. I Sostenitori che scelgono di restare anonimi non hanno alcun distintivo, per loro scelta, e nemmeno una donazione una tantum ne assegna uno: il distintivo indica che l’account sta finanziando il sito al momento.",
   "the-marks-a-player-or": "I contrassegni che un giocatore o un clan può mostrare su {NAME}, che cosa indica ciascuno e i requisiti esatti per ottenerlo.",
   "tournament-winner": {
     "name": "Vincitore del torneo",

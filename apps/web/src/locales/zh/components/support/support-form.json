@@ -1,0 +1,14 @@
+{
+  "give-once": "捐赠 {amount}",
+  "minimum-monthly": "每月最低 {amount}",
+  "minimum-once": "最低 {amount}",
+  "monthly": "每月",
+  "one-time": "一次性",
+  "or-choose-your-own-amount": "或选择自定义金额",
+  "pay-what-you-want": "按你的意愿支付。",
+  "pick-an-amount-monthly": "选择金额或输入自定义金额，每月最低 €{min}。",
+  "pick-an-amount-once": "选择金额或输入自定义金额，最低 €{min}。一次性付款，无需取消。",
+  "secured-by-stripe-monthly": "由 Stripe 提供保障。随时取消。",
+  "secured-by-stripe-once": "由 Stripe 提供保障。仅扣款一次，不会再次扣款。",
+  "support-with-monthly": "每月支援 {amount}"
+}

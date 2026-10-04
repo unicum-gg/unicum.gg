@@ -1,0 +1,14 @@
+{
+  "give-once": "Prispieť sumou {amount}",
+  "minimum-monthly": "Minimum {amount}/mesiac",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Mesečno",
+  "one-time": "Jednorazovo",
+  "or-choose-your-own-amount": "Alebo si vyberte vlastnú sumu",
+  "pay-what-you-want": "Zaplaťte, koľko chcete.",
+  "pick-an-amount-monthly": "Izberi sumu alebo zadajte vlastnú, od €{min}/mesiac.",
+  "pick-an-amount-once": "Izberi sumu alebo zadajte vlastnú, od €{min}. Jedna platba, nič na zrušenie.",
+  "secured-by-stripe-monthly": "Zabezpečené službou Stripe. Zrušte kedykoľvek.",
+  "secured-by-stripe-once": "Zabezpečené službou Stripe. Strhne sa raz a už nikdy znova.",
+  "support-with-monthly": "Podporte sumou {amount}/mesiac"
+}

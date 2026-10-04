@@ -2,6 +2,6 @@
   "badge-title": "Sammanlagd skada: {combined}, jämfört med {threshold} för det märket",
   "empty": "Ingen kanon ligger bakom det här kontots prestationer med den.",
   "gun-carries": "kanonen har {marks}",
-  "none": "ingen",
+  "none": "inga",
   "recent-window": " (30d)"
 }

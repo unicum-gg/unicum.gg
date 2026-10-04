@@ -9,7 +9,7 @@
     "month": "mesiac",
     "daily": "Denný",
     "weekly": "Týždenný",
-    "monthly": "Mesičný"
+    "monthly": "Mesečno"
   },
   "week-of": "Týždeň od {date}"
 }

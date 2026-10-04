@@ -1,0 +1,14 @@
+{
+  "give-once": "Támogass {amount} összeggel",
+  "minimum-monthly": "Minimum {amount}/hónap",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Havi",
+  "one-time": "Egyszeri",
+  "or-choose-your-own-amount": "Vagy válaszd ki a saját összeget",
+  "pay-what-you-want": "Fizess, amennyit szeretnél.",
+  "pick-an-amount-monthly": "Válassz összeget vagy írd be a sajátodat, legalább €{min}/hónap összegben.",
+  "pick-an-amount-once": "Válassz összeget vagy írd be a sajátodat, legalább €{min} összegben. Egyszeri fizetés, nincs mit lemondani.",
+  "secured-by-stripe-monthly": "A Stripe biztonságossá teszi. Bármikor lemondható.",
+  "secured-by-stripe-once": "A Stripe biztonságossá teszi. Egyszer kerül felszámításra, soha többé.",
+  "support-with-monthly": "Támogasd {amount}/hónap összeggel"
+}

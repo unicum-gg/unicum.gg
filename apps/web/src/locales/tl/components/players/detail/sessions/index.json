@@ -9,7 +9,7 @@
     "month": "buwan",
     "daily": "Araw-araw",
     "weekly": "Lingguhan",
-    "monthly": "Buwanang"
+    "monthly": "Buwan-buwan"
   },
   "week-of": "Linggo ng {date}"
 }

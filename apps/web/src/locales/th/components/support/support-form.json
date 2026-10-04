@@ -1,0 +1,14 @@
+{
+  "give-once": "สนับสนุน {amount}",
+  "minimum-monthly": "ขั้นต่ำ {amount}/เดือน",
+  "minimum-once": "ขั้นต่ำ {amount}",
+  "monthly": "รายเดือน",
+  "one-time": "ครั้งเดียว",
+  "or-choose-your-own-amount": "หรือเลือกจำนวนเงินเอง",
+  "pay-what-you-want": "จ่ายเท่าที่ต้องการ",
+  "pick-an-amount-monthly": "เลือกจำนวนเงินหรือพิมพ์จำนวนที่ต้องการเอง เริ่มต้นที่ €{min}/เดือน",
+  "pick-an-amount-once": "เลือกจำนวนเงินหรือพิมพ์จำนวนที่ต้องการเอง เริ่มต้นที่ €{min} ชำระครั้งเดียว ไม่มีอะไรให้ยกเลิก",
+  "secured-by-stripe-monthly": "Stripe ดูแลความปลอดภัย ยกเลิกได้ทุกเวลา",
+  "secured-by-stripe-once": "Stripe ดูแลความปลอดภัย เรียกเก็บเงินครั้งเดียว ไม่เรียกเก็บอีก",
+  "support-with-monthly": "สนับสนุนด้วยจำนวน {amount}/เดือน"
+}

@@ -1,0 +1,14 @@
+{
+  "give-once": "{amount} दें",
+  "minimum-monthly": "न्यूनतम {amount}/महीना",
+  "minimum-once": "न्यूनतम {amount}",
+  "monthly": "मासिक",
+  "one-time": "एक बार",
+  "or-choose-your-own-amount": "या अपनी राशि चुनें",
+  "pay-what-you-want": "जितना चाहें उतना भुगतान करें।",
+  "pick-an-amount-monthly": "राशि चुनें या अपनी राशि लिखें, €{min}/महीना से शुरू।",
+  "pick-an-amount-once": "राशि चुनें या अपनी राशि लिखें, €{min} से शुरू। एक बार का भुगतान, रद्द करने के लिए कुछ नहीं।",
+  "secured-by-stripe-monthly": "Stripe द्वारा सुरक्षित। कभी भी रद्द करें।",
+  "secured-by-stripe-once": "Stripe द्वारा सुरक्षित। एक बार शुल्क लिया जाएगा, फिर कभी नहीं।",
+  "support-with-monthly": "{amount}/महीना देकर सहायता करें"
+}

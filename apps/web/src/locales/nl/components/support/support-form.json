@@ -1,0 +1,14 @@
+{
+  "give-once": "Geef {amount}",
+  "minimum-monthly": "Minimum {amount}/maand",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Maandelijks",
+  "one-time": "Eenmalig",
+  "or-choose-your-own-amount": "Of kies je eigen bedrag",
+  "pay-what-you-want": "Betaal wat je wilt.",
+  "pick-an-amount-monthly": "Kies een bedrag of typ je eigen bedrag, vanaf €{min}/maand.",
+  "pick-an-amount-once": "Kies een bedrag of typ je eigen bedrag, vanaf €{min}. Eén betaling, niets om te annuleren.",
+  "secured-by-stripe-monthly": "Beveiligd door Stripe. Annuleer wanneer je wilt.",
+  "secured-by-stripe-once": "Beveiligd door Stripe. Eenmalig in rekening gebracht, nooit meer.",
+  "support-with-monthly": "Ondersteun met {amount}/maand"
+}

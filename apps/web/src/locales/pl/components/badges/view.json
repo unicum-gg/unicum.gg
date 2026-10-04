@@ -35,7 +35,7 @@
   "supporter": {
     "name": "Supporter"
   },
-  "supporter-note": "Aktywne {link}, widoczne publicznie. Osoby ze statusem Supporter, które wolą pozostać anonimowe, zgodnie ze swoim wyborem nie otrzymują odznaki.",
+  "supporter-note": "Aktywny {link}, zachowany jako publiczny. Supporterzy, którzy wybiorą pozostanie anonimowymi, z własnej woli nie mają odznaki, a jednorazowa wpłata również jej nie przenosi. Odznaka mówi, że konto finansuje witrynę właśnie teraz.",
   "the-marks-a-player-or": "Znaki, które gracz lub klan może mieć w serwisie {NAME}, znaczenie każdego z nich oraz dokładne warunki ich zdobycia.",
   "tournament-winner": {
     "name": "Zwycięzca turnieju",

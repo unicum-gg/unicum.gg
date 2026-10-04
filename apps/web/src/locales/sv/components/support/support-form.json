@@ -1,0 +1,14 @@
+{
+  "give-once": "Ge {amount}",
+  "minimum-monthly": "Minimum {amount}/månad",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Månadsvis",
+  "one-time": "En gång",
+  "or-choose-your-own-amount": "Eller välj ditt eget belopp",
+  "pay-what-you-want": "Betala vad du vill.",
+  "pick-an-amount-monthly": "Välj ett belopp eller skriv in ditt eget, från €{min}/månad.",
+  "pick-an-amount-once": "Välj ett belopp eller skriv in ditt eget, från €{min}. En enda betalning, inget att avbryta.",
+  "secured-by-stripe-monthly": "Säkras av Stripe. Avbryt när som helst.",
+  "secured-by-stripe-once": "Säkras av Stripe. Debiteras en gång, aldrig igen.",
+  "support-with-monthly": "Stöd med {amount}/månad"
+}

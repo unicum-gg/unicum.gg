@@ -1,0 +1,14 @@
+{
+  "give-once": "Oferă {amount}",
+  "minimum-monthly": "Minim {amount}/lună",
+  "minimum-once": "Minim {amount}",
+  "monthly": "Lunar",
+  "one-time": "O singură dată",
+  "or-choose-your-own-amount": "Sau alege propria sumă",
+  "pay-what-you-want": "Plătește cât vrei.",
+  "pick-an-amount-monthly": "Alege o sumă sau introdu propria sumă, începând de la {min} €/lună.",
+  "pick-an-amount-once": "Alege o sumă sau introdu propria sumă, începând de la {min} €. O singură plată, nimic de anulat.",
+  "secured-by-stripe-monthly": "Protejat de Stripe. Poți anula oricând.",
+  "secured-by-stripe-once": "Protejat de Stripe. Se debitează o singură dată, niciodată din nou.",
+  "support-with-monthly": "Susține cu {amount}/lună"
+}

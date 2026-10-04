@@ -1,0 +1,14 @@
+{
+  "give-once": "Giv {amount}",
+  "minimum-monthly": "Minimum {amount}/måned",
+  "minimum-once": "Minimum {amount}",
+  "monthly": "Månedlig",
+  "one-time": "Én gang",
+  "or-choose-your-own-amount": "Eller vælg dit eget beløb",
+  "pay-what-you-want": "Betal hvad du vil.",
+  "pick-an-amount-monthly": "Vælg et beløb, eller skriv dit eget, fra €{min}/måned.",
+  "pick-an-amount-once": "Vælg et beløb, eller skriv dit eget, fra €{min}. Én enkelt betaling, intet at opsige.",
+  "secured-by-stripe-monthly": "Sikret af Stripe. Fortryd når som helst.",
+  "secured-by-stripe-once": "Sikret af Stripe. Opkræves én gang og aldrig igen.",
+  "support-with-monthly": "Støt med {amount}/måned"
+}

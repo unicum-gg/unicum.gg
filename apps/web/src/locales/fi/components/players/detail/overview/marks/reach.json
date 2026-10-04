@@ -2,6 +2,6 @@
   "badge-title": "{combined} yhteenlaskettua vahinkoa, kyseisen merkin raja on {threshold}",
   "empty": "Yksikään tykki ei jää jälkeen siitä, mitä tällä tilillä tehdään sillä.",
   "gun-carries": "tykillä on {marks}",
-  "none": "ei mitään",
+  "none": "ei yhtään",
   "recent-window": " (30 pv)"
 }

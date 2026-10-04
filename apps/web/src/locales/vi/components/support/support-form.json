@@ -1,0 +1,14 @@
+{
+  "give-once": "Hỗ trợ {amount}",
+  "minimum-monthly": "Tối thiểu {amount}/tháng",
+  "minimum-once": "Tối thiểu {amount}",
+  "monthly": "Hàng tháng",
+  "one-time": "Một lần",
+  "or-choose-your-own-amount": "Hoặc chọn số tiền của riêng bạn",
+  "pay-what-you-want": "Trả bao nhiêu tùy bạn.",
+  "pick-an-amount-monthly": "Chọn số tiền hoặc nhập số tiền của riêng bạn, từ €{min}/tháng.",
+  "pick-an-amount-once": "Chọn số tiền hoặc nhập số tiền của riêng bạn, từ €{min}. Thanh toán một lần, không có gì cần hủy bỏ.",
+  "secured-by-stripe-monthly": "Được Stripe bảo mật. Hủy bỏ bất cứ lúc nào.",
+  "secured-by-stripe-once": "Được Stripe bảo mật. Chỉ tính phí một lần, không bao giờ tính lại.",
+  "support-with-monthly": "Hỗ trợ với {amount}/tháng"
+}
