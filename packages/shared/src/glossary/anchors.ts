@@ -24,14 +24,23 @@ export type GlossaryAnchorPayload = {
 };
 
 /**
- * The same term, seen through a window or an average: "30d WN8", "Avg frags",
- * "Avg WN8 · 30d". A table qualifies its columns constantly, and every entry
- * would otherwise have to list one label per period it is ever shown over.
+ * The same term, seen through a window, an average, or a mode: "30d WN8", "Avg
+ * frags", "Avg WN8 · 30d", "Artillery Headquarters (Onslaught)". A table
+ * qualifies its columns constantly, and every entry would otherwise have to
+ * list one label per period and mode it is ever shown under.
  *
  * Only consulted after the whole label failed to match, so a term whose own
- * name starts with a qualifier ("Avg damage" is damage per game, "Average
- * tier" is its own statistic) still resolves to itself. Returns null when the
- * label carries no qualifier, so a caller can skip the second lookup.
+ * name starts with or ends in a qualifier ("Avg damage" is damage per game,
+ * "Module HP (max / repaired)" is its own anchor) still resolves to itself.
+ * Returns null when the label carries no qualifier, so a caller can skip the
+ * second lookup.
+ *
+ * The trailing parenthesis is stripped WHOLE rather than matched against a list
+ * of modes, because what sits inside it is the reader's language: English reads
+ * "(Onslaught)" and French "(Offensive)", so a list would be an English one and
+ * would leave every translated page on the fallback it is meant to be. Safe as
+ * a last resort by construction, since a label whose parenthesis is part of its
+ * name has already matched a line above.
  *
  * Here rather than in the browser's lookup because the coverage report reads it
  * too: a report that normalized labels differently from the page would call a
@@ -43,6 +52,7 @@ export function unqualifyGlossaryLabel(label: string): string | null {
   const stripped = trimmed
     .replace(/\s*[·(]\s*(?:24h|7d|30d|60d|90d)\s*\)?$/i, "")
     .replace(/^(?:avg|average|24h|7d|30d|last\s+(?:24h|7d|30d))\s+/i, "")
+    .replace(/\s*\([^()]*\)$/, "")
     .trim();
   return stripped.length > 1 && stripped !== trimmed ? stripped : null;
 }

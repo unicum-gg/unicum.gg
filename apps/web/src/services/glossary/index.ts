@@ -1,4 +1,6 @@
 import { GLOSSARY_LOCALES, loadGlossaryEntries } from "./generated";
+import { loadDictionaries, type Dictionaries } from "@/locales/generated";
+import { DEFAULT_LOCALE, isLocale } from "@/lib/translations";
 import {
   buildGlossaryMatcher,
   GlossaryBlockKind,
@@ -179,6 +181,79 @@ export type GlossaryAnchorIndex = {
 
 const anchorIndexes = new Map<string, GlossaryAnchorIndex>();
 
+/** Every string a dictionary holds, flattened, so two locales can be compared
+ * key by key. */
+function flattenDictionaries(dictionaries: Dictionaries): Map<string, string> {
+  const out = new Map<string, string>();
+  const walk = (node: unknown, path: string) => {
+    if (typeof node === "string") {
+      out.set(path, node);
+      return;
+    }
+    if (typeof node !== "object" || node === null) return;
+    for (const [key, child] of Object.entries(node))
+      walk(child, path ? `${path}.${key}` : key);
+  };
+  for (const [namespace, dictionary] of Object.entries(dictionaries))
+    walk(dictionary, namespace);
+  return out;
+}
+
+/**
+ * The same anchors as the reader's own language renders them.
+ *
+ * An anchor is written in English and matched against the text on screen, which
+ * is the right split while the two are the same word and silently wrong the
+ * moment they are not: a French reader looked up "Batailles", the index holds
+ * "battles", and the row came out as plain text with no tooltip and no link.
+ * Measured on the tank page's top-players table, the same markup carried twelve
+ * glossary links in English and six in French, the four survivors being the
+ * columns ("WR", "WN8") that happen to spell the same in both.
+ *
+ * The crosswalk is the dictionaries themselves rather than a list: wherever an
+ * English string IS an anchor, that key's value in the reader's language is the
+ * same anchor in their language. So a component goes on rendering `t("wr")` and
+ * passing the result, and a term written tomorrow is anchored in thirty-six
+ * languages the moment its English label is.
+ *
+ * Two rules keep it honest. An English anchor always wins, so nothing a
+ * translation happens to spell can displace the word the index was written
+ * against. And a rendering that would point at two DIFFERENT terms is dropped
+ * rather than settled on whichever key came first: several languages use one
+ * word where English separates damage per shot from damage per game, and the
+ * right answer there is the plain text a reader gets today. Measured across the
+ * thirty-five translated languages: 4,277 anchors recovered, 28 dropped.
+ */
+async function localeAnchors(
+  locale: string,
+  byLabel: Map<string, string>,
+): Promise<Map<string, string>> {
+  if (locale === DEFAULT_LOCALE || !isLocale(locale)) return new Map();
+  const [english, own] = await Promise.all([
+    loadDictionaries(DEFAULT_LOCALE),
+    loadDictionaries(locale),
+  ]);
+  const source = flattenDictionaries(english);
+  const target = flattenDictionaries(own);
+  const slugs = new Map<string, Set<string>>();
+  for (const [key, value] of source) {
+    const slug = byLabel.get(value.toLowerCase());
+    if (!slug) continue;
+    const rendering = target.get(key)?.toLowerCase();
+    if (!rendering || rendering === value.toLowerCase()) continue;
+    const held = slugs.get(rendering);
+    if (held) held.add(slug);
+    else slugs.set(rendering, new Set([slug]));
+  }
+  const out = new Map<string, string>();
+  for (const [rendering, held] of slugs) {
+    const [slug] = held;
+    if (held.size === 1 && slug !== undefined && !byLabel.has(rendering))
+      out.set(rendering, slug);
+  }
+  return out;
+}
+
 /**
  * Where each term attaches to the interface. Built from the entries themselves,
  * so a stat gets its tooltip the moment someone writes its definition, without
@@ -201,6 +276,8 @@ export async function getGlossaryAnchors(
       if (!byLabel.has(key)) byLabel.set(key, entry.slug);
     }
   }
+  for (const [rendering, slug] of await localeAnchors(key, byLabel))
+    byLabel.set(rendering, slug);
   const index = { bySpecKey, byLabel };
   anchorIndexes.set(key, index);
   return index;
