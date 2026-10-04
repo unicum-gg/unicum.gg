@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Hâlâ öğreniyorsan hatalarını ne kadar telafi ettiği.",
     "versatility": "Her haritada ve her takımda işe yarıyor mu?"
   },
+  "rating-axes-short": {
+    "overall": "Genel",
+    "fun": "Eğlence",
+    "firepower": "Ateş Gücü",
+    "armour": "Zırh",
+    "mobility": "Hareket Kabiliyeti",
+    "gunHandling": "Top Kullanımı",
+    "concealment": "Kamuflaj",
+    "beginnerFriendliness": "Yeni Başlayanlar",
+    "versatility": "Çok Yönlü"
+  },
+  "map-rating-axes": {
+    "overall": "Genel",
+    "fun": "Eğlence",
+    "balance": "Denge",
+    "variety": "Çeşitlilik",
+    "flow": "Akış",
+    "classFairness": "Sınıf adaleti",
+    "beginnerFriendliness": "Yeni başlayanlara uygunluk"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Tüm unsurlar değerlendirildiğinde bu harita ne kadar iyi?",
+    "fun": "Buraya gönderilmekten ne kadar keyif alıyorsunuz?",
+    "balance": "Her iki taraf da eşit şansla mı başlıyor?",
+    "variety": "Oynamanın birden fazla yolu mu var, yoksa herkesin aldığı tek bir yol mu?",
+    "flow": "Savaş hareket ediyor mu, yoksa bir açmaza mı giriyor?",
+    "classFairness": "Her araç sınıfının burada bir görevi var mı?",
+    "beginnerFriendliness": "Hâlâ öğreniyorsanız bu harita ne kadar affedici?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Genel",
+    "fun": "Eğlence",
+    "balance": "Denge",
+    "variety": "Çeşitlilik",
+    "flow": "Akış",
+    "classFairness": "Sınıflar",
+    "beginnerFriendliness": "Yeni Başlayanlar"
+  },
   "voter-brackets": {
     "unknown": "Değerlendirilmemiş",
     "learning": "Öğreniyor",

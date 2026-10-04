@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Váš záznam sme ešte nečítali. Práve sme oň požiadali Wargaming, skúste to znova o okamih.",
+  "checking-record": "Kontroluje sa váš záznam...",
+  "fetching-your-record": "Získavame váš záznam",
+  "have-you-played-here": "Hrali ste tu?",
+  "more-to-go": "Zostáva ešte {count} bitiek",
+  "more-to-go-one": "Zostáva ešte {count} bitka",
+  "sign-in-to-rate": "Prihláste sa pomocou účtu Wargaming a ohodnoťte túto mapu. Nikto si nevyberá, kam ho pošlú, preto žiadame o bitky na vašom účte, nie na tejto mape. Wargaming nezverejňuje záznam za jednotlivé mapy pre nikoho a nebudeme tvrdiť, že sme vykonali kontrolu, ktorú sme neurobili.",
+  "sign-in-to-rate-it": "Prihláste sa a ohodnoťte ju",
+  "signed-in-on": "Prihlásené do regiónu {region}",
+  "too-few-battles": "Váš účet má {played} odohraných bitiek. Pred započítaním hlasu za {map} žiadame {required}, čo je približne dvadsať prejdení každej mapy v rotácii, aby verdikt pochádzal od niekoho, kto tu pravzaprav bol."
+}

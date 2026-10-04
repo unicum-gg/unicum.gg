@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Eksen bazında",
+  "by-server": "Sunucuya göre",
+  "community-verdict": "Topluluk kararı",
+  "every-server-one-average": "Her sunucu, bir ortalama",
+  "n-shown": ", {count} gösterildi",
+  "opinion": "{count, plural, one {# görüş} other {# görüş}}",
+  "rate-the": "{mapName} için puan ver",
+  "same-map-different-metas": "Aynı zemin, farklı metalar",
+  "the-same-map-by-how": "Aynı harita, oy verenin ne kadar iyi oynadığına göre",
+  "what-players-wrote": "Oyuncular ne yazdı",
+  "who-is-saying-it": "Bunu kim söylüyor"
+}

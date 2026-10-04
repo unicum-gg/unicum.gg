@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Gaano ito kapagpatawad kung nag-aaral ka pa.",
     "versatility": "Gumagana ba ito sa anumang mapa at sa anumang koponan?"
   },
+  "rating-axes-short": {
+    "overall": "Pangkalahatan",
+    "fun": "Kasiyahan",
+    "firepower": "Lakas ng apoy",
+    "armour": "Baluti",
+    "mobility": "Kilos",
+    "gunHandling": "Pagkontrol ng baril",
+    "concealment": "Camouflage",
+    "beginnerFriendliness": "Baguhan",
+    "versatility": "Maraming gamit"
+  },
+  "map-rating-axes": {
+    "overall": "Pangkalahatan",
+    "fun": "Kasiyahan",
+    "balance": "Balanse",
+    "variety": "Pagkakaiba-iba",
+    "flow": "Daloy",
+    "classFairness": "Pagiging patas sa bawat klase",
+    "beginnerFriendliness": "Pabor sa baguhan"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Gaano kaganda ang mapang ito sa kabuuan?",
+    "fun": "Gaano mo kasaya ang pagpapadala sa iyo rito?",
+    "balance": "Nagsisimula ba ang magkabilang panig na may pantay na pagkakataon?",
+    "variety": "May higit pa ba sa isang paraan ng paglalaro rito, o iisang daan ang tinatahak ng lahat?",
+    "flow": "Umuusad ba ang labanan, o humihinto sa isang paghaharap?",
+    "classFairness": "May gawain ba rito ang bawat klase ng sasakyan?",
+    "beginnerFriendliness": "Gaano ito kapagpatawad kung nag-aaral ka pa?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Pangkalahatan",
+    "fun": "Kasiyahan",
+    "balance": "Balanse",
+    "variety": "Pagkakaiba-iba",
+    "flow": "Daloy",
+    "classFairness": "Klase",
+    "beginnerFriendliness": "Baguhan"
+  },
   "voter-brackets": {
     "unknown": "Walang rating",
     "learning": "Natututo",

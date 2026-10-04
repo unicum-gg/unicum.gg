@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Mỗi bình chọn đều được xác thực bằng kỷ lục của chính người bình chọn. Wargaming không đăng kỷ lục riêng theo bản đồ cho bất kỳ ai, vì vậy điều một bình chọn chứng minh là tác giả của bình chọn đó có chơi, chứ không phải họ đã được gửi đến đây.",
+  "every-vote-signed-average": "Mỗi bình chọn đều được xác thực bằng kỷ lục của chính người bình chọn, trung bình {battles} trận đấu trong 30 ngày qua. Wargaming không đăng kỷ lục riêng theo bản đồ cho bất kỳ ai, vì vậy điều một bình chọn chứng minh là tác giả của bình chọn đó có chơi, chứ không phải họ đã được gửi đến đây.",
+  "fun": "Vui vẻ",
+  "how-good-the-map-is": "Bản đồ tốt đến mức nào",
+  "how-much-people-enjoy-it": "Mọi người yêu thích việc được gửi đến đây đến mức nào",
+  "if-you-play-here": "Nếu bạn chơi, bạn chính xác là người mà trang này đang chờ đợi.",
+  "nobody-has-rated-this-map": "Không ai đánh giá bản đồ này cho đến nay.",
+  "overall": "Tổng thể",
+  "votes": "{count} bình chọn",
+  "votes-one": "{count} bình chọn"
+}

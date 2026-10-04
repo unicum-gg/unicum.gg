@@ -15,8 +15,9 @@
     "rejected": "Klasyfikacja zapisana. Twoja wcześniejsza opinia nie została opublikowana, dlatego liczą się tylko Twoje gwiazdki.",
     "closed": "Klasyfikacja zapisana. Możliwość dodawania pisemnych opinii jest obecnie wyłączona, więc tekst nie został zapisany."
   },
+  "review-length": "Twoja recenzja potrzebuje mieć od {min} do {max} znaków.",
   "save-failed": "Nie udało się tego zapisać. Spróbuj ponownie za chwilę.",
-  "say-why-optional": "Napisz, dlaczego (opcjonalnie)",
+  "say-why-optional": "Powiedz dlaczego (opcjonalnie)",
   "signed-with": "Podpisano liczbą bitew rozegranych przez Ciebie tym czołgiem: {battles}",
   "submit-my-rating": "Prześlij moją ocenę",
   "too-many-edits": "To zbyt wiele zmian naraz. Odczekaj minutę.",

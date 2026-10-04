@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "Videók",
+    "community": "Közösség",
+    "history": "Változások"
+  },
+  "tab-count": "{tab} ({count})"
+}

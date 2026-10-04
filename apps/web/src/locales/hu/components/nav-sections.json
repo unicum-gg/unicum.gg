@@ -8,9 +8,27 @@
     "servers": "Szerverek"
   },
   "links": {
-    "top-players": {
-      "label": "Legjobb játékosok",
-      "description": "Játékosok teljes idős ranglistája"
+    "advances": {
+      "description": "X-es szintű 15v15 rangsor"
+    },
+    "all-maps": {
+      "label": "Minden pálya",
+      "description": "A játék minden térképe"
+    },
+    "all-tournaments": {
+      "label": "Tornák",
+      "description": "Minden nyitott és lezárt verseny"
+    },
+    "battle-type": {
+      "description": "{type} pályák"
+    },
+    "map-changes": {
+      "label": "Változások",
+      "description": "Térkép-átalakítások frissítésenként"
+    },
+    "map-community": {
+      "label": "Közösségi értékelések",
+      "description": "Az oda küldött játékosok értékelései alapján"
     },
     "players-onslaught": {
       "description": "Roham ranglétra"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Battle royale ranglista"
     },
-    "top-clans": {
-      "label": "Legjobb klánok",
-      "description": "Klánok teljes idős ranglistája"
+    "servers-population": {
+      "label": "Szerver népsűrűség",
+      "description": "Online játékosok, most és időben"
     },
     "stronghold": {
       "description": "Csatározások ranglistája"
     },
-    "advances": {
-      "description": "X-es szintű 15v15 rangsor"
+    "tank-changes": {
+      "label": "Változások",
+      "description": "Erősítések és gyengítések frissítésenként"
     },
-    "tank-performances": {
-      "label": "Teljesítmények",
-      "description": "Győzelmi arány és sebzés tankonként"
-    },
-    "tank-specs": {
-      "label": "Műszaki adatok",
-      "description": "Minden tank statisztikái"
+    "tank-community": {
+      "label": "Közösségi értékelések",
+      "description": "Az őket birtokló játékosok értékelései alapján"
     },
     "tank-economics": {
       "label": "Gazdaság",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Osztály-jelvények küszöbértékei"
     },
-    "tank-changes": {
-      "label": "Változások",
-      "description": "Erősítések és gyengítések frissítésenként"
+    "tank-performances": {
+      "label": "Teljesítmények",
+      "description": "Győzelmi arány és sebzés tankonként"
     },
-    "tank-community": {
-      "label": "Közösségi értékelések",
-      "description": "Az őket birtokló játékosok értékelései alapján"
+    "tank-specs": {
+      "label": "Műszaki adatok",
+      "description": "Minden tank statisztikái"
     },
     "tank-videos": {
       "label": "Videók",
       "description": "Közösségi játékmenetek"
     },
-    "all-tournaments": {
-      "label": "Tornák",
-      "description": "Minden nyitott és lezárt verseny"
+    "top-clans": {
+      "label": "Legjobb klánok",
+      "description": "Klánok teljes idős ranglistája"
     },
-    "all-maps": {
-      "label": "Minden pálya",
-      "description": "A játék minden térképe"
-    },
-    "map-changes": {
-      "label": "Változások",
-      "description": "Térkép-átalakítások frissítésenként"
-    },
-    "battle-type": {
-      "description": "{type} pályák"
-    },
-    "servers-population": {
-      "label": "Szerver népsűrűség",
-      "description": "Online játékosok, most és időben"
+    "top-players": {
+      "label": "Legjobb játékosok",
+      "description": "Játékosok teljes idős ranglistája"
     }
   }
 }

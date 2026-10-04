@@ -41,6 +41,44 @@
     "beginnerFriendliness": "अगर आप अभी सीख रहे हैं तो यह कितनी गलतियाँ माफ करता है।",
     "versatility": "क्या यह किसी भी मानचित्र और किसी भी टीम में काम करता है?"
   },
+  "rating-axes-short": {
+    "overall": "कुल मिलाकर",
+    "fun": "मज़ा",
+    "firepower": "आग शक्ति",
+    "armour": "कवच",
+    "mobility": "गतिशीलता",
+    "gunHandling": "हैंडलिंग",
+    "concealment": "कैमो",
+    "beginnerFriendliness": "शुरुआती",
+    "versatility": "बहुमुखी"
+  },
+  "map-rating-axes": {
+    "overall": "कुल मिलाकर",
+    "fun": "मज़ा",
+    "balance": "संतुलन",
+    "variety": "विविधता",
+    "flow": "प्रवाह",
+    "classFairness": "श्रेणी की निष्पक्षता",
+    "beginnerFriendliness": "शुरुआती खिलाड़ियों के लिए अनुकूल"
+  },
+  "map-rating-axis-hints": {
+    "overall": "सभी बातों को ध्यान में रखते हुए यह मानचित्र कितना अच्छा है?",
+    "fun": "आपको यहाँ भेजे जाने में कितना आनंद आता है?",
+    "balance": "क्या दोनों पक्ष समान संभावना के साथ शुरू करते हैं?",
+    "variety": "क्या इसे खेलने के एक से अधिक तरीके हैं, या हर कोई एक ही रास्ता लेता है?",
+    "flow": "क्या युद्ध आगे बढ़ता है, या गतिरोध में रुक जाता है?",
+    "classFairness": "क्या हर वाहन श्रेणी का यहाँ कोई काम है?",
+    "beginnerFriendliness": "अगर आप अभी सीख रहे हैं, तो यह कितनी गलतियाँ माफ करता है?"
+  },
+  "map-rating-axes-short": {
+    "overall": "कुल मिलाकर",
+    "fun": "मज़ा",
+    "balance": "संतुलन",
+    "variety": "विविधता",
+    "flow": "प्रवाह",
+    "classFairness": "वर्ग",
+    "beginnerFriendliness": "शुरुआती"
+  },
   "voter-brackets": {
     "unknown": "रेट नहीं किया गया",
     "learning": "सीखना",

@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "По осям",
+  "by-server": "По серверам",
+  "community-verdict": "Вердикт сообщества",
+  "every-server-one-average": "Каждый сервер, одно среднее значение",
+  "n-shown": ", показано: {count}",
+  "opinion": "{count, plural, one {# мнение} few {# мнения} many {# мнений} other {# мнения}}",
+  "rate-the": "Оценить карту {mapName}",
+  "same-map-different-metas": "Одна карта, разные мета-игры",
+  "the-same-map-by-how": "Одна и та же карта, по уровню игры голосующего",
+  "what-players-wrote": "Что написали игроки",
+  "who-is-saying-it": "Кто это говорит"
+}

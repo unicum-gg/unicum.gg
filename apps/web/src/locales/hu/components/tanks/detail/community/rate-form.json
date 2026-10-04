@@ -15,10 +15,11 @@
     "rejected": "Értékelés mentve. A korábbi véleményed nem jelent meg, ezért csak a csillagaid számítanak.",
     "closed": "Értékelés mentve. Az írott vélemények jelenleg le vannak zárva, ezért a szöveg nem lett megtartva."
   },
+  "review-length": "Az értékelésednek {min} és {max} karakter között kell lennie.",
   "save-failed": "Nem sikerült menteni. Próbáld meg egy pillanat múlva.",
-  "say-why-optional": "Írd le, miért (opcionális)",
+  "say-why-optional": "Indokold meg (nem kötelező)",
   "signed-with": "A(z) {battles} csatáddal aláírva",
-  "submit-my-rating": "Értékelésem elküldése",
+  "submit-my-rating": "Értékelésem beküldése",
   "too-many-edits": "Ez egyszerre túl sok módosítás. Várj egy percet.",
   "update-my-rating": "Értékelésem frissítése",
   "what-it-is-good-at": "Miben jó, miben nem, és kinek érdemes játszania vele.",

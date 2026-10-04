@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Mennyire elnéző, ha még tanulod a játékot.",
     "versatility": "Bármelyik pályán, bármilyen csapatban megállja a helyét?"
   },
+  "rating-axes-short": {
+    "overall": "Összesen",
+    "fun": "Szórakozás",
+    "firepower": "Tűzerő",
+    "armour": "Páncélzat",
+    "mobility": "Mobilitás",
+    "gunHandling": "Lövegkezelés",
+    "concealment": "Álcázás",
+    "beginnerFriendliness": "Kezdőknek",
+    "versatility": "Sokoldalúság"
+  },
+  "map-rating-axes": {
+    "overall": "Összesen",
+    "fun": "Szórakozás",
+    "balance": "Egyensúly",
+    "variety": "Változatosság",
+    "flow": "Játékmenet",
+    "classFairness": "Osztályok közötti igazságosság",
+    "beginnerFriendliness": "Kezdőbarát"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Mennyire jó ez a pálya, mindent figyelembe véve?",
+    "fun": "Mennyire élvezik a játékosok, amikor ide küldik őket?",
+    "balance": "Egyenlő eséllyel kezdenek mindkét oldalon?",
+    "variety": "Többféleképpen is lehet játszani rajta, vagy mindenki ugyanazt az utat választja?",
+    "flow": "Halad a csata, vagy patthelyzetbe torkollik?",
+    "classFairness": "Minden járműosztálynak jut itt feladat?",
+    "beginnerFriendliness": "Mennyire elnéző a pálya, ha még tanulsz játszani?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Összesen",
+    "fun": "Szórakozás",
+    "balance": "Egyensúly",
+    "variety": "Változatosság",
+    "flow": "Játékmenet",
+    "classFairness": "Osztály",
+    "beginnerFriendliness": "Kezdőbarát"
+  },
   "voter-brackets": {
     "unknown": "Értékelés nélküli",
     "learning": "Tanulóban",

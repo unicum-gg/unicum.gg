@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Po osama",
+  "by-server": "Po serveru",
+  "community-verdict": "Presuda zajednice",
+  "every-server-one-average": "Svaki server, jedan prosjek",
+  "n-shown": ", prikazano: {count}",
+  "opinion": "{count, plural, one {# mišljenje} few {# mišljenja} other {# mišljenja}}",
+  "rate-the": "Stopa za mapu {mapName}",
+  "same-map-different-metas": "Isto tlo, drugačije mete",
+  "the-same-map-by-how": "Ista mapa, prema tome koliko dobro glasač igra",
+  "what-players-wrote": "Šta su igrači napisali",
+  "who-is-saying-it": "Ko to govori"
+}

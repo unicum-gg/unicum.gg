@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Os po os",
-  "by-server": "Prema poslužitelju",
-  "community-verdict": "Odluka zajednice",
+  "axis-by-axis": "Po osima",
+  "by-server": "Po serveru",
+  "community-verdict": "Ocjena zajednice",
   "every-server-one-average": "Svaki poslužitelj, jedan prosjek",
   "n-shown": ", prikazano {count}",
   "opinion": "{count, plural, one {# mišljenje} few {# mišljenja} other {# mišljenja}}",

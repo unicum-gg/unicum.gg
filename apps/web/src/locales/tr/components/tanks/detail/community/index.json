@@ -1,5 +1,5 @@
 {
-  "axis-by-axis": "Eksen eksen",
+  "axis-by-axis": "Eksen bazında",
   "by-server": "Sunucuya göre",
   "community-verdict": "Topluluk kararı",
   "every-server-one-average": "Her sunucu, tek ortalama",
@@ -10,6 +10,6 @@
   "reputation-against-results": "İtibar ve sonuçlar",
   "same-tank-different-metas": "Aynı tank, farklı metalar",
   "the-same-tank-by-how": "Aynı tank, oy veren oyuncunun ne kadar iyi oynadığına göre",
-  "what-players-wrote": "Oyuncular ne yazdı",
+  "what-players-wrote": "Oyuncuların yazdıkları",
   "who-is-saying-it": "Bunu kim söylüyor"
 }

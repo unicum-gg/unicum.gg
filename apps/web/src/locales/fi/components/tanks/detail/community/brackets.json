@@ -1,5 +1,6 @@
 {
   "battles": "{count} Taisteluita",
+  "battles-recent": "{count} taistelua 30 päivässä",
   "no-votes": "ei äänestä",
   "rated-higher": "Paremmat pelaajat arvioivat sen {stars} tähteä palvelimen muita panssarivaunuja korkeammalle. Tämä palkitsee osaamisen.",
   "rated-lower": "Paremmat pelaajat arvioivat sen {stars} tähteä palvelimen muita panssarivaunuja matalammalle. Se imartelee, kunnes siltä vaaditaan jotain.",

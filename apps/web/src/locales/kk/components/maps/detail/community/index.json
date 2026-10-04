@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Әр ось бойынша",
+  "by-server": "Сервер бойынша",
+  "community-verdict": "Қауымдастықтың пікірі",
+  "every-server-one-average": "Әр сервер, бір орташа мән",
+  "n-shown": ", {count} көрсетілді",
+  "opinion": "{count, plural, one {# пікір} other {# пікірлер}}",
+  "rate-the": "{mapName} бағалау",
+  "same-map-different-metas": "Бір жер, әртүрлі мета",
+  "the-same-map-by-how": "Бір карта, дауыс берушінің қаншалықты жақсы ойнайтыны бойынша",
+  "what-players-wrote": "Ойыншылар не жазды",
+  "who-is-saying-it": "Мұны кім айтып отыр"
+}

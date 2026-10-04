@@ -8,9 +8,27 @@
     "servers": "Сервери"
   },
   "links": {
-    "top-players": {
-      "label": "Топ гравці",
-      "description": "Таблиця лідерів гравців за весь час"
+    "advances": {
+      "description": "Рейтинг боїв 15×15 технікою X рівня"
+    },
+    "all-maps": {
+      "label": "Усі мапи",
+      "description": "Кожна карта в грі"
+    },
+    "all-tournaments": {
+      "label": "Турніри",
+      "description": "Кожен відкритий і завершений турнір"
+    },
+    "battle-type": {
+      "description": "Мапи {type}"
+    },
+    "map-changes": {
+      "label": "Зміни",
+      "description": "Переробки карт за оновленнями"
+    },
+    "map-community": {
+      "label": "Рейтинги спільноти",
+      "description": "Оцінено гравцями, яких надіслано туди"
     },
     "players-onslaught": {
       "description": "Рейтингова таблиця Натиску"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Таблиця лідерів королівської битви"
     },
-    "top-clans": {
-      "label": "Топ клани",
-      "description": "Таблиця лідерів кланів за весь час"
+    "servers-population": {
+      "label": "Кількість користувачів на сервері",
+      "description": "Гравці онлайн зараз і в різні періоди"
     },
     "stronghold": {
       "description": "Сходи вилазок"
     },
-    "advances": {
-      "description": "Рейтинг боїв 15×15 технікою X рівня"
+    "tank-changes": {
+      "label": "Зміни",
+      "description": "Посилення та послаблення в кожному оновленні"
     },
-    "tank-performances": {
-      "label": "Показники",
-      "description": "Відсоток перемог і шкода для кожного танка"
-    },
-    "tank-specs": {
-      "label": "Технічні характеристики",
-      "description": "Статистика кожного танка"
+    "tank-community": {
+      "label": "Спільнотні рейтинги",
+      "description": "Оцінки гравців, які володіють цими танками"
     },
     "tank-economics": {
       "label": "Економіка",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Порогові значення значків майстерності"
     },
-    "tank-changes": {
-      "label": "Зміни",
-      "description": "Посилення та послаблення в кожному оновленні"
+    "tank-performances": {
+      "label": "Показники",
+      "description": "Відсоток перемог і шкода для кожного танка"
     },
-    "tank-community": {
-      "label": "Спільнотні рейтинги",
-      "description": "Оцінки гравців, які володіють цими танками"
+    "tank-specs": {
+      "label": "Технічні характеристики",
+      "description": "Статистика кожного танка"
     },
     "tank-videos": {
       "label": "Відео",
       "description": "Ігрові відео спільноти"
     },
-    "all-tournaments": {
-      "label": "Турніри",
-      "description": "Кожен відкритий і завершений турнір"
+    "top-clans": {
+      "label": "Топ клани",
+      "description": "Таблиця лідерів кланів за весь час"
     },
-    "all-maps": {
-      "label": "Усі мапи",
-      "description": "Кожна карта в грі"
-    },
-    "map-changes": {
-      "label": "Зміни",
-      "description": "Переробки карт за оновленнями"
-    },
-    "battle-type": {
-      "description": "Мапи {type}"
-    },
-    "servers-population": {
-      "label": "Кількість користувачів на сервері",
-      "description": "Гравці онлайн зараз і в різні періоди"
+    "top-players": {
+      "label": "Топ гравці",
+      "description": "Таблиця лідерів гравців за весь час"
     }
   }
 }

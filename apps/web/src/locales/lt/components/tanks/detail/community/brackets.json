@@ -1,5 +1,6 @@
 {
   "battles": "{count} Mūšiai",
+  "battles-recent": "{count, plural, one {# mūšis per 30 dienų} few {# mūšiai per 30 dienų} other {# mūšių per 30 dienų}}",
   "no-votes": "ne balsų",
   "rated-higher": "Geresni žaidėjai jį įvertina {stars} žvaigždutėmis aukščiau nei likęs serveris. Šis tankas apdovanoja už žinojimą, ką darote.",
   "rated-lower": "Geresni žaidėjai jį įvertina {stars} žvaigždutėmis žemiau nei likęs serveris. Jis atrodo geras, kol iš jo nepaprašoma ko nors daugiau.",

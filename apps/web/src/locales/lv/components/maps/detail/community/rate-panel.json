@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Mēs vēl neesam izlasījuši tavu rekordu. Tikko lūdzām Wargaming to nosūtīt, tāpēc mēģini vēlreiz pēc brīža.",
+  "checking-record": "Tiek pārbaudīts tavs rekords...",
+  "fetching-your-record": "Iegūstam tavu rekordu",
+  "have-you-played-here": "Vai esi šeit spēlējis?",
+  "more-to-go": "Atlikušas vēl {count} kaujas",
+  "more-to-go-one": "Atlikusi vēl {count} kauja",
+  "sign-in-to-rate": "Piesakies ar savu Wargaming kontu, lai vērtētu šo karti. Neviens neizvēlas, uz kurieni tiek nosūtīts, tāpēc mēs pieprasām kaujas tava konta vēsturē, nevis šajā kartē. Wargaming nepublicē nevienam rekordu par katru karti, un mēs neapgalvosim, ka esam veikuši pārbaudi, ko patiesībā neesam veikuši.",
+  "sign-in-to-rate-it": "Piesakies, lai to vērtētu",
+  "signed-in-on": "Pieteicies reģionā {region}",
+  "too-few-battles": "Tavā kontā ir {played} kaujas. Mēs pieprasām {required}, pirms balsojums par {map} tiek ieskaitīts. Tas ir aptuveni divdesmit reižu katrā rotācijas kartē, lai spriedums nāktu no kāda, kurš patiešām šeit ir bijis."
+}

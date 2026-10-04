@@ -8,9 +8,27 @@
     "servers": "Serveri"
   },
   "links": {
-    "top-players": {
-      "label": "Najbolji igrači",
-      "description": "Ljestvica igrača za cijelo vrijeme"
+    "advances": {
+      "description": "Rangiranje 15 na 15 razine X"
+    },
+    "all-maps": {
+      "label": "Sve mape",
+      "description": "Svaka mapa u igri"
+    },
+    "all-tournaments": {
+      "label": "Turniri",
+      "description": "Svaki turnir, otvoren i završen"
+    },
+    "battle-type": {
+      "description": "{type} mape"
+    },
+    "map-changes": {
+      "label": "Promjene",
+      "description": "Prerade mapa po ažuriranju"
+    },
+    "map-community": {
+      "label": "Ocjene zajednice",
+      "description": "Ocijenjeno prema igračima koji su tamo poslani"
     },
     "players-onslaught": {
       "description": "Ljestvica rangirane Navale"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Ljestvica bitke royale"
     },
-    "top-clans": {
-      "label": "Najbolje klanske jedinice",
-      "description": "Ljestvica klanova za cijelo vrijeme"
+    "servers-population": {
+      "label": "Broj igrača na serveru",
+      "description": "Igrači na mreži, sada i kroz vrijeme"
     },
     "stronghold": {
       "description": "Ljestvicu okršaja"
     },
-    "advances": {
-      "description": "Rangiranje 15 na 15 razine X"
+    "tank-changes": {
+      "label": "Promjene",
+      "description": "Poboljšanja i oslabljivanja po ažuriranju"
     },
-    "tank-performances": {
-      "label": "Performanse",
-      "description": "Postotak pobjeda i šteta po tenku"
-    },
-    "tank-specs": {
-      "label": "Specifikacije",
-      "description": "Statistika za svaki tenk"
+    "tank-community": {
+      "label": "Ocjene zajednice",
+      "description": "Ocijenili igrači koji ih posjeduju"
     },
     "tank-economics": {
       "label": "Ekonomija",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Pragovi značke majstorstva"
     },
-    "tank-changes": {
-      "label": "Promjene",
-      "description": "Poboljšanja i oslabljivanja po ažuriranju"
+    "tank-performances": {
+      "label": "Performanse",
+      "description": "Postotak pobjeda i šteta po tenku"
     },
-    "tank-community": {
-      "label": "Ocjene zajednice",
-      "description": "Ocijenili igrači koji ih posjeduju"
+    "tank-specs": {
+      "label": "Specifikacije",
+      "description": "Statistika za svaki tenk"
     },
     "tank-videos": {
       "label": "Video",
       "description": "Snimke igranja zajednice"
     },
-    "all-tournaments": {
-      "label": "Turniri",
-      "description": "Svaki turnir, otvoren i završen"
+    "top-clans": {
+      "label": "Najbolje klanske jedinice",
+      "description": "Ljestvica klanova za cijelo vrijeme"
     },
-    "all-maps": {
-      "label": "Sve mape",
-      "description": "Svaka mapa u igri"
-    },
-    "map-changes": {
-      "label": "Promjene",
-      "description": "Prerade mapa po ažuriranju"
-    },
-    "battle-type": {
-      "description": "{type} mape"
-    },
-    "servers-population": {
-      "label": "Broj igrača na serveru",
-      "description": "Igrači na mreži, sada i kroz vrijeme"
+    "top-players": {
+      "label": "Najbolji igrači",
+      "description": "Ljestvica igrača za cijelo vrijeme"
     }
   }
 }

@@ -1,0 +1,15 @@
+{
+  "agreement": "Sutapimas",
+  "camouflage": "Sezonas, kuriame vyksta žemėlapio veiksmas.",
+  "fun": "Pramoga",
+  "map": "Žemėlapis",
+  "overall": "Bendrai",
+  "season": "Sezonas",
+  "tips": {
+    "overall": "Kaip gerai žaidėjai mano, kad jis įvertintas. Reitinguojama pagal vidurkį, pastūmėtą link visų žemėlapių balsų vidurkio, todėl žemėlapis su keturiais balsais negali aplenkti žemėlapio su keturiais šimtais.",
+    "fun": "Kiek žaidėjams patinka būti čia išsiųstiems, nors tai dažnai nėra tas pats klausimas.",
+    "votes": "Balsai, kiekvienas iš paskyros, už kurios slypi tikri mūšiai.",
+    "consensus": "Kiek skiriasi balsuotojų nuomonės. Rikiuokite mažėjančia tvarka, kad pamatytumėte žemėlapius, dėl kurių žaidėjai negali sutarti. Tai įdomesnis sąrašas."
+  },
+  "votes": "Balsai"
+}

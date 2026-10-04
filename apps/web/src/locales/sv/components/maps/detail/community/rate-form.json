@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Några ord till: {count} kvar.",
+  "could-not-withdraw": "Kunde inte ta tillbaka det. Försök igen om ett ögonblick.",
+  "hide-the-detailed-axes": "Dölj de detaljerade axlarna",
+  "not-enough-battles": "Ditt konto har inte spelat tillräckligt många strider för att en röst ska räknas.",
+  "published-once-read": "Publiceras när en moderator har läst den. Dina stjärnor räknas direkt.",
+  "rate-it-in-detail": "Gradera det i detalj (valfritt)",
+  "review": {
+    "none": "Betyget har sparats.",
+    "queued": "Betyget har sparats. Din recension granskas av en moderator.",
+    "published": "Betyget har sparats. Din recension är redan live.",
+    "pending": "Betyget har sparats. Din recension väntar fortfarande på en moderator.",
+    "rejected": "Betyget har sparats. Din tidigare recension publicerades inte, så endast dina stjärnor räknas.",
+    "closed": "Betyget har sparats. Skrivna åsikter är stängda just nu, så texten behölls inte."
+  },
+  "review-length": "Din recension behöver vara mellan {min} och {max} tecken.",
+  "save-failed": "Kunde inte spara det. Försök igen om ett ögonblick.",
+  "say-why-optional": "Berätta varför (valfritt)",
+  "signed-with": "Signerad med dina {battles} strider under de senaste 30 dagar",
+  "submit-my-rating": "Skicka in mitt betyg",
+  "too-many-edits": "Det där är många redigeringar på en gång. Vänta en minut.",
+  "update-my-rating": "Uppdatera mitt betyg",
+  "what-it-is-good-at": "Var striden avgörs, vilken sida som har det lättare och vem som bör vilja skickas hit.",
+  "withdraw": "Återkalla",
+  "your-rating-has-been-withdrawn": "Ditt betyg har återkallats.",
+  "your-review-is-waiting-on": "Din recension väntar på en moderator. Endast du kan se den här.",
+  "your-review-was-not-published": "Din recension publicerades inte. Dina stjärnor räknas fortfarande med i genomsnittet."
+}

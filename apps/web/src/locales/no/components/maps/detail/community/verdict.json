@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Hver stemme er signert med velgerens egen rekord. Wargaming publiserer ingen rekord per kart for alle, så det en stemme beviser, er at forfatteren spiller, ikke at vedkommende har blitt sendt hit.",
+  "every-vote-signed-average": "Hver stemme er signert med velgerens egen rekord, i gjennomsnitt {battles} kamper de siste 30 dagene. Wargaming publiserer ingen rekord per kart for alle, så det en stemme beviser, er at forfatteren spiller, ikke at vedkommende har blitt sendt hit.",
+  "fun": "Moro",
+  "how-good-the-map-is": "Hvor godt kartet er",
+  "how-much-people-enjoy-it": "Hvor mye personer liker å bli sendt hit",
+  "if-you-play-here": "Hvis du spiller, er du nøyaktig den siden venter på.",
+  "nobody-has-rated-this-map": "Ingen har vurdert dette kartet ennå.",
+  "overall": "Totalt",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stemme"
+}

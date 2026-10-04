@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Cât de iertător este dacă încă înveți.",
     "versatility": "Funcționează pe orice hartă, în orice echipă?"
   },
+  "rating-axes-short": {
+    "overall": "General",
+    "fun": "Distracție",
+    "firepower": "Putere de foc",
+    "armour": "Blindaj",
+    "mobility": "Mobilitate",
+    "gunHandling": "Manevrabilitate",
+    "concealment": "Camuflaj",
+    "beginnerFriendliness": "Începător",
+    "versatility": "Versatil"
+  },
+  "map-rating-axes": {
+    "overall": "General",
+    "fun": "Distracție",
+    "balance": "Echilibru",
+    "variety": "Diversitate",
+    "flow": "Cursivitate",
+    "classFairness": "Echitate între clase",
+    "beginnerFriendliness": "Prietenos pentru începători"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Cât de bună este această hartă, luând în considerare toate aspectele?",
+    "fun": "Cât de mult îți place să fii trimis aici?",
+    "balance": "Încep ambele părți cu șanse egale?",
+    "variety": "Există mai multe moduri de a o juca sau un singur drum pe care îl urmează toți?",
+    "flow": "Avansează bătălia sau se blochează într-un impas?",
+    "classFairness": "Are fiecare clasă de vehicul un rol aici?",
+    "beginnerFriendliness": "Cât de iertătoare este dacă încă înveți?"
+  },
+  "map-rating-axes-short": {
+    "overall": "General",
+    "fun": "Distracție",
+    "balance": "Echilibru",
+    "variety": "Varietate",
+    "flow": "Fluiditate",
+    "classFairness": "Clasa",
+    "beginnerFriendliness": "Începător"
+  },
   "voter-brackets": {
     "unknown": "Neretat",
     "learning": "Învățare",

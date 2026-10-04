@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Hvor tilgivende den er mens du fortsatt lærer.",
     "versatility": "Fungerer den på alle kart og i alle lag?"
   },
+  "rating-axes-short": {
+    "overall": "Totalt",
+    "fun": "Moro",
+    "firepower": "Ildkraft",
+    "armour": "Panser",
+    "mobility": "Mobilitet",
+    "gunHandling": "Håndtering",
+    "concealment": "Kamuflasje",
+    "beginnerFriendliness": "Nybegynner",
+    "versatility": "Allsidighet"
+  },
+  "map-rating-axes": {
+    "overall": "Totalt",
+    "fun": "Moro",
+    "balance": "Balanse",
+    "variety": "Variasjon",
+    "flow": "Flyt",
+    "classFairness": "Rettferdighet mellom klasser",
+    "beginnerFriendliness": "Nybegynnervennlighet"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Hvor god er dette kartet, når alt tas i betraktning?",
+    "fun": "Hvor mye liker du å bli sendt hit?",
+    "balance": "Starter begge sider med like stor sjanse?",
+    "variety": "Finnes det mer enn én måte å spille på, eller tar alle den samme veien?",
+    "flow": "Beveger kampen seg, eller stopper den opp i en fastlåst situasjon?",
+    "classFairness": "Har hver kjøretøyklasse en oppgave her?",
+    "beginnerFriendliness": "Hvor tilgivende er det hvis du fortsatt lærer?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Totalt",
+    "fun": "Moro",
+    "balance": "Balanse",
+    "variety": "Variasjon",
+    "flow": "Flyt",
+    "classFairness": "Klasse",
+    "beginnerFriendliness": "Nybegynner"
+  },
   "voter-brackets": {
     "unknown": "Ikke vurdert",
     "learning": "Lærer",

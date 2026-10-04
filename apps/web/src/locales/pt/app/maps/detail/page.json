@@ -1,5 +1,13 @@
 {
   "title": "Mapa {map} do World of Tanks ({region})",
   "description": "Mapa {map}: um mapa do World of Tanks com {width} × {height} m.",
-  "description-modes": "Mapa {map}: um mapa do World of Tanks com {width} × {height} m, disponível nos modos {modes}."
+  "description-modes": "Mapa {map}: um mapa do World of Tanks com {width} × {height} m, disponível nos modos {modes}.",
+  "community": {
+    "title": "Avaliações dos jogadores sobre {map} e classificação da comunidade ({region})",
+    "description": "O que os jogadores pensam de {map}: a classificação da comunidade de zero a cinco, dividida por quão bem os eleitores jogam, com vereditos escritos de contas que têm as batalhas atrás de si. Equilíbrio, variedade, fluxo e se cada classe de veículo tem uma função ali."
+  },
+  "history": {
+    "title": "Histórico de alterações de {map} ({region}), reformulações por atualização",
+    "description": "Cada alteração registrada em {map} ao longo das atualizações de World of Tanks: as bases, os pontos de surgimento e a área de jogo que a Wargaming moveu, versão por versão, desenhados no minimapa em que foram movidos."
+  }
 }

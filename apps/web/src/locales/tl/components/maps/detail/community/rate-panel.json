@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Hindi pa namin nababasa ang iyong rekord. Kakahingi pa lang namin nito sa Wargaming, kaya subukan muli pagkalipas ng ilang sandali.",
+  "checking-record": "Sinusuri ang iyong rekord...",
+  "fetching-your-record": "Kinukuha namin ang iyong rekord",
+  "have-you-played-here": "Nakapaglaro ka na ba rito?",
+  "more-to-go": "{count} pang mga laban ang kailangan",
+  "more-to-go-one": "{count} pang labanan ang kailangan",
+  "sign-in-to-rate": "Mag-sign in gamit ang iyong Wargaming account para i-rate ang mapang ito. Walang sinuman ang pumipili kung saan sila ipinapadala, kaya mga laban sa iyong account ang hinihingi namin sa halip na sa mapang ito. Walang rekord bawat mapa para sa sinuman na pini-publish ang Wargaming, at hindi kami mag-aangking nagsagawa ng pagsusuring hindi namin ginawa.",
+  "sign-in-to-rate-it": "Mag-sign in para i-rate ito",
+  "signed-in-on": "Naka-sign in sa {region}",
+  "too-few-battles": "May {played} laban ang iyong account. Humihingi kami ng {required} bago mabilang ang isang boto sa {map}, na humigit-kumulang dalawampung pagdaan sa bawat mapa sa rotasyon, upang magmula ang hatol sa isang taong talaga nang nakapunta rito."
+}

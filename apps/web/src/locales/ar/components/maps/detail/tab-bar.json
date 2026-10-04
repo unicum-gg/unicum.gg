@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "مقاطع الفيديو",
+    "community": "المجتمع",
+    "history": "التغييرات"
+  },
+  "tab-count": "{tab} ({count})"
+}

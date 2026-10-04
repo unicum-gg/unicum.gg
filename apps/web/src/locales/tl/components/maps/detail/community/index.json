@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Ayon sa bawat axis",
+  "by-server": "Ayon sa server",
+  "community-verdict": "Hatol ng komunidad",
+  "every-server-one-average": "Bawat server, isang karaniwan",
+  "n-shown": ", {count} ang ipinakita",
+  "opinion": "{count, plural, one {# opinyon} other {# mga opinyon}}",
+  "rate-the": "I-rate ang {mapName}",
+  "same-map-different-metas": "Parehong lugar, magkakaibang meta",
+  "the-same-map-by-how": "Ang parehong mapa, ayon sa kung gaano kaayos maglaro ang bumoto",
+  "what-players-wrote": "Isinulat ng mga manlalaro",
+  "who-is-saying-it": "Sino ang nagsasabi nito"
+}

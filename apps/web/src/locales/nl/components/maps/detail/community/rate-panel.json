@@ -1,0 +1,12 @@
+{
+  "block-no-record": "We hebben je record nog niet gelezen. We hebben het net aan Wargaming gevraagd, dus probeer het over een moment opnieuw.",
+  "checking-record": "Je record controleren...",
+  "fetching-your-record": "We halen je record op",
+  "have-you-played-here": "Heb je hier gespeeld?",
+  "more-to-go": "Nog {count} gevechten te gaan",
+  "more-to-go-one": "Nog {count} gevecht te gaan",
+  "sign-in-to-rate": "Meld je aan met je Wargaming-account om deze map te beoordelen. Niemand kiest waar dieheen wordt gestuurd, dus we vragen om gevechten op je account in plaats van op deze map. Wargaming publiceert voor niemand een record per map en we zullen niet beweren dat we een controle hebben uitgevoerd die we niet hebben uitgevoerd.",
+  "sign-in-to-rate-it": "Meld je aan om het te beoordelen",
+  "signed-in-on": "Aangemeld op {region}",
+  "too-few-battles": "Je account heeft {played} gevechten. We vragen om {required} voordat een stem over {map} meetelt. Dat zijn ongeveer twintig keer door elke map in de rotatie, zodat een oordeel afkomstig is van iemand die hier eigenlijk is geweest."
+}

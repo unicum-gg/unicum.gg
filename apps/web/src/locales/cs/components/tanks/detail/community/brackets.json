@@ -1,5 +1,6 @@
 {
   "battles": "{count} Bitev",
+  "battles-recent": "{count} bitev za 30 dní",
   "no-votes": "ne hlasy",
   "rated-higher": "Silnější hráči mu dávají o {stars} hvězdiček více než zbytek serveru. Tenhle tank odměňuje hráče, kteří vědí, co dělají.",
   "rated-lower": "Silnější hráči mu dávají o {stars} hvězdiček méně než zbytek serveru. Lichotí, dokud po něm nechcete, aby něco předvedl.",

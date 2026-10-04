@@ -1,7 +1,7 @@
 {
   "range": {
-    "buyCredits": "Preţ (credite)",
-    "buyGold": "Preţ (aur)",
+    "buyCredits": "Cost (credite)",
+    "buyGold": "Cost (aur)",
     "researchXp": "XP de cercetare",
     "shellCost": "Cost proiectil",
     "ammoCost": "Cost total muniție",

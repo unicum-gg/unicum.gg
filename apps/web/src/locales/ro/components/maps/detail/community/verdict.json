@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Fiecare vot este semnat cu propriul record al persoanei care votează. Wargaming nu publică recordul pentru fiecare hartă al nimănui, așa că un vot dovedește că autorul său joacă, nu că a fost trimis aici.",
+  "every-vote-signed-average": "Fiecare vot este semnat cu propriul record al persoanei care votează, cu o medie de {battles} bătălii în ultimele 30 de zile. Wargaming nu publică recordul pentru fiecare hartă al nimănui, așa că un vot dovedește că autorul său joacă, nu că a fost trimis aici.",
+  "fun": "Distracție",
+  "how-good-the-map-is": "Cât de bună este harta",
+  "how-much-people-enjoy-it": "Cât de mult se bucură persoanele să fie trimise aici",
+  "if-you-play-here": "Dacă joci, ești exact persoana pe care o așteaptă această pagină.",
+  "nobody-has-rated-this-map": "Nimeni nu a evaluat încă această hartă.",
+  "overall": "General",
+  "votes": "{count} voturi",
+  "votes-one": "{count} vot"
+}

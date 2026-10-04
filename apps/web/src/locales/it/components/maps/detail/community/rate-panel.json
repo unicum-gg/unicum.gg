@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Non abbiamo ancora letto il tuo record. Abbiamo appena richiesto i dati a Wargaming, quindi riprova tra un momento.",
+  "checking-record": "Controllo del tuo record...",
+  "fetching-your-record": "Stiamo recuperando il tuo record",
+  "have-you-played-here": "Hai giocato qui?",
+  "more-to-go": "Ancora {count} battaglie",
+  "more-to-go-one": "Ancora {count} battaglia",
+  "sign-in-to-rate": "Accedi con il tuo account Wargaming per valutare questa mappa. Nessuno sceglie dove viene inviato, quindi chiediamo le battaglie del tuo account invece di quelle su questa mappa: Wargaming non pubblica alcun record per mappa di chiunque e non dichiareremo di aver effettuato un controllo che non abbiamo fatto.",
+  "sign-in-to-rate-it": "Accedi per valutarla",
+  "signed-in-on": "Accesso effettuato su {region}",
+  "too-few-battles": "Il tuo account ha {played} battaglie. Ne chiediamo {required} prima che un voto su {map} venga conteggiato. Si tratta di circa venti passaggi su ogni mappa della rotazione, così il verdetto proviene da qualcuno che è stato effettivamente qui."
+}

@@ -8,9 +8,27 @@
     "servers": "Servere"
   },
   "links": {
-    "top-players": {
-      "label": "Topp spillere",
-      "description": "Spillerrangering totalt"
+    "advances": {
+      "description": "Rangering for nivå X med 15 mot 15"
+    },
+    "all-maps": {
+      "label": "Alle kart",
+      "description": "Alle kart i spillet"
+    },
+    "all-tournaments": {
+      "label": "Turneringer",
+      "description": "Alle turneringer, åpne og avsluttede"
+    },
+    "battle-type": {
+      "description": "{type} kart"
+    },
+    "map-changes": {
+      "label": "Endringer",
+      "description": "Kartendringer per oppdatering"
+    },
+    "map-community": {
+      "label": "Fellesskapets vurderinger",
+      "description": "Vurdert av spillerne som blir sendt dit"
     },
     "players-onslaught": {
       "description": "Rangert Onslaught-stige"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Rangering for battle royale"
     },
-    "top-clans": {
-      "label": "Topp klaner",
-      "description": "Klanrangering totalt"
+    "servers-population": {
+      "label": "Serverbefolkning",
+      "description": "Spillere pålogget nå og over tid"
     },
     "stronghold": {
       "description": "Rangering i trefninger"
     },
-    "advances": {
-      "description": "Rangering for nivå X med 15 mot 15"
+    "tank-changes": {
+      "label": "Endringer",
+      "description": "Forbedringer og svekkelser per oppdatering"
     },
-    "tank-performances": {
-      "label": "Ytelse",
-      "description": "Seiersprosent og skade per stridsvogn"
-    },
-    "tank-specs": {
-      "label": "Spesifikasjoner",
-      "description": "Statistikk for alle stridsvogner"
+    "tank-community": {
+      "label": "Fellesskapsvurderinger",
+      "description": "Vurdert av spillere som eier dem"
     },
     "tank-economics": {
       "label": "Økonomi",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Grenser for ekspertmerke"
     },
-    "tank-changes": {
-      "label": "Endringer",
-      "description": "Forbedringer og svekkelser per oppdatering"
+    "tank-performances": {
+      "label": "Ytelse",
+      "description": "Seiersprosent og skade per stridsvogn"
     },
-    "tank-community": {
-      "label": "Fellesskapsvurderinger",
-      "description": "Vurdert av spillere som eier dem"
+    "tank-specs": {
+      "label": "Spesifikasjoner",
+      "description": "Statistikk for alle stridsvogner"
     },
     "tank-videos": {
       "label": "Videoer",
       "description": "Spillvideoer fra fellesskapet"
     },
-    "all-tournaments": {
-      "label": "Turneringer",
-      "description": "Alle turneringer, åpne og avsluttede"
+    "top-clans": {
+      "label": "Topp klaner",
+      "description": "Klanrangering totalt"
     },
-    "all-maps": {
-      "label": "Alle kart",
-      "description": "Alle kart i spillet"
-    },
-    "map-changes": {
-      "label": "Endringer",
-      "description": "Kartendringer per oppdatering"
-    },
-    "battle-type": {
-      "description": "{type} kart"
-    },
-    "servers-population": {
-      "label": "Serverbefolkning",
-      "description": "Spillere pålogget nå og over tid"
+    "top-players": {
+      "label": "Topp spillere",
+      "description": "Spillerrangering totalt"
     }
   }
 }

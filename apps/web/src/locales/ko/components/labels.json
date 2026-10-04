@@ -41,6 +41,44 @@
     "beginnerFriendliness": "아직 배우는 중일 때 얼마나 실수를 보완해 주는가요?",
     "versatility": "어떤 지도와 어떤 팀에서도 잘 작동하나요?"
   },
+  "rating-axes-short": {
+    "overall": "전체",
+    "fun": "재미",
+    "firepower": "화력",
+    "armour": "장갑",
+    "mobility": "기동",
+    "gunHandling": "주포 조작",
+    "concealment": "위장",
+    "beginnerFriendliness": "초보자",
+    "versatility": "다재다능함"
+  },
+  "map-rating-axes": {
+    "overall": "전체",
+    "fun": "재미",
+    "balance": "균형",
+    "variety": "다양성",
+    "flow": "흐름",
+    "classFairness": "병과 공정성",
+    "beginnerFriendliness": "초보자 친화도"
+  },
+  "map-rating-axis-hints": {
+    "overall": "모든 요소를 고려했을 때 이 지도는 얼마나 좋은가요?",
+    "fun": "이곳으로 전송되는 것을 얼마나 즐기나요?",
+    "balance": "양측이 동일한 확률로 시작하나요?",
+    "variety": "플레이 방식이 여러 가지인가요, 아니면 모두가 하나의 길을 차지하나요?",
+    "flow": "전투가 진행되나요, 아니면 대치 상태로 멈추나요?",
+    "classFairness": "모든 차량 병과에 이곳에서 맡을 역할이 있나요?",
+    "beginnerFriendliness": "아직 배우는 중일 때 얼마나 관대한가요?"
+  },
+  "map-rating-axes-short": {
+    "overall": "전체",
+    "fun": "재미",
+    "balance": "균형",
+    "variety": "다양성",
+    "flow": "흐름",
+    "classFairness": "유형",
+    "beginnerFriendliness": "초보자"
+  },
   "voter-brackets": {
     "unknown": "평가되지 않음",
     "learning": "학습 중",

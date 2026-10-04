@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Mức độ dễ tha thứ nếu bạn vẫn đang học chơi.",
     "versatility": "Nó có hiệu quả trên mọi bản đồ, trong mọi đội hình không?"
   },
+  "rating-axes-short": {
+    "overall": "Tổng thể",
+    "fun": "Vui vẻ",
+    "firepower": "Hỏa lực",
+    "armour": "Giáp",
+    "mobility": "Độ Cơ động",
+    "gunHandling": "Điều khiển",
+    "concealment": "Ngụy trang",
+    "beginnerFriendliness": "Người mới",
+    "versatility": "Đa dụng"
+  },
+  "map-rating-axes": {
+    "overall": "Tổng thể",
+    "fun": "Vui vẻ",
+    "balance": "Cân bằng",
+    "variety": "Tính đa dạng",
+    "flow": "Nhịp độ",
+    "classFairness": "Công bằng giữa các hạng",
+    "beginnerFriendliness": "Thân thiện với người mới"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Xét trên mọi phương diện, bản đồ này tốt đến mức nào?",
+    "fun": "Bạn yêu thích việc được gửi đến đây đến mức nào?",
+    "balance": "Hai bên có bắt đầu với xác suất ngang nhau không?",
+    "variety": "Có nhiều cách chơi hay chỉ có một con đường mà mọi người đều đi?",
+    "flow": "Trận đấu có diễn biến tiếp hay bị đình trệ trong thế giằng co?",
+    "classFairness": "Mọi hạng xe tăng có vai trò tại đây không?",
+    "beginnerFriendliness": "Bản đồ này dễ tha thứ đến mức nào nếu bạn vẫn đang học chơi?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Tổng thể",
+    "fun": "Vui vẻ",
+    "balance": "Cân bằng",
+    "variety": "Tính đa dạng",
+    "flow": "Nhịp độ",
+    "classFairness": "Các hạng",
+    "beginnerFriendliness": "Người mới"
+  },
   "voter-brackets": {
     "unknown": "Chưa xếp hạng",
     "learning": "Đang học",

@@ -1,5 +1,13 @@
 {
   "title": "{map}，World of Tanks 地图（{region}）",
   "description": "{map}：一张{width} × {height}米的 World of Tanks 地图。",
-  "description-modes": "{map}：一张{width} × {height}米的 World of Tanks 地图，可进行{modes}。"
+  "description-modes": "{map}：一张{width} × {height}米的 World of Tanks 地图，可进行{modes}。",
+  "community": {
+    "title": "{map} 玩家评价和社区评分（{region}）",
+    "description": "玩家对 {map} 的看法：社区五分制评分，并按投票者的对战水平划分，同时展示来自经历过相关战斗场次的账号的文字结论。评估平衡性、多样性、战斗节奏，以及每种车辆类型是否都有自己的职责。"
+  },
+  "history": {
+    "title": "{map} 变更历史（{region}），按更新查看重制内容",
+    "description": "World of Tanks 各次更新中对 {map} 的所有已记录变更：Wargaming 按版本移动的基地、出生点和战斗区域，并绘制在它们被移动到的小地图上。"
+  }
 }

@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Ašis po ašies",
+  "axis-by-axis": "Pagal atskiras ašis",
   "by-server": "Pagal serverį",
-  "community-verdict": "Bendruomenės sprendimas",
+  "community-verdict": "Bendruomenės verdiktas",
   "every-server-one-average": "Kiekvienas serveris, vienas vidurkis",
   "n-shown": ", rodoma: {count}",
   "opinion": "{count, plural, one {# nuomonė} few {# nuomonės} other {# nuomonės}}",

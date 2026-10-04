@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Ancora qualche parola: ne mancano {count}.",
+  "could-not-withdraw": "Non è stato possibile ritirare la valutazione. Riprova tra un momento.",
+  "hide-the-detailed-axes": "Nascondi gli assi dettagliati",
+  "not-enough-battles": "Il tuo account non ha giocato abbastanza battaglie perché il voto venga conteggiato.",
+  "published-once-read": "Pubblicata dopo che un moderatore l’ha letta. Le tue stelle contano subito.",
+  "rate-it-in-detail": "Valutala nei dettagli (opzionale)",
+  "review": {
+    "none": "Valutazione salvata.",
+    "queued": "Valutazione salvata. La tua recensione è con un moderatore.",
+    "published": "Valutazione salvata. La tua recensione è già pubblicata.",
+    "pending": "Valutazione salvata. La tua recensione è ancora in attesa di un moderatore.",
+    "rejected": "Valutazione salvata. La tua recensione precedente non è stata pubblicata, quindi contano solo le tue stelle.",
+    "closed": "Valutazione salvata. Le opinioni scritte sono chiuse al momento, quindi il testo non è stato mantenuto."
+  },
+  "review-length": "La tua recensione deve contenere tra {min} e {max} caratteri.",
+  "save-failed": "Non è stato possibile salvarla. Riprova tra un momento.",
+  "say-why-optional": "Indica il motivo (facoltativo)",
+  "signed-with": "Firmata con le tue {battles} battaglie negli ultimi 30 giorni",
+  "submit-my-rating": "Invia la mia valutazione",
+  "too-many-edits": "Sono tante modifiche tutte insieme. Aspetta un minuto.",
+  "update-my-rating": "Aggiorna la mia valutazione",
+  "what-it-is-good-at": "Dove si decide la battaglia, quale lato è avvantaggiato e chi dovrebbe voler essere inviato qui.",
+  "withdraw": "Ritira",
+  "your-rating-has-been-withdrawn": "La tua valutazione è stata ritirata.",
+  "your-review-is-waiting-on": "La tua recensione è in attesa di un moderatore. Qui puoi visualizzarla solo tu.",
+  "your-review-was-not-published": "La tua recensione non è stata pubblicata. Le tue stelle contribuiscono comunque alla media."
+}

@@ -1,5 +1,6 @@
 {
   "battles": "{count} Bitwy",
+  "battles-recent": "Bitwy w ciągu 30 dni: {count}",
   "no-votes": "nie głosów",
   "rated-higher": "W ocenach lepszych graczy wypada o {stars} gwiazdek wyżej niż w ocenach reszty serwera. Tu opłaca się wiedzieć, co się robi.",
   "rated-lower": "W ocenach lepszych graczy wypada o {stars} gwiazdek niżej niż w ocenach reszty serwera. Dobrze wygląda, dopóki nie trzeba od niego czegoś wymagać.",

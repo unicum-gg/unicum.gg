@@ -15,8 +15,9 @@
     "rejected": "Đã lưu đánh giá. Đánh giá trước đó của bạn chưa được đăng, nên chỉ số sao được tính.",
     "closed": "Đã lưu đánh giá. Ý kiến bằng văn bản hiện đang đóng, nên phần văn bản không được giữ lại."
   },
+  "review-length": "Đánh giá của bạn cần có từ {min} đến {max} ký tự.",
   "save-failed": "Không thể lưu. Hãy thử lại sau giây lát.",
-  "say-why-optional": "Nêu lý do (tùy chọn)",
+  "say-why-optional": "Nêu lý do (không bắt buộc)",
   "signed-with": "Được ký với {battles} trận đấu của bạn",
   "submit-my-rating": "Gửi đánh giá của tôi",
   "too-many-edits": "Bạn đã chỉnh sửa quá nhiều cùng lúc. Hãy chờ một phút.",

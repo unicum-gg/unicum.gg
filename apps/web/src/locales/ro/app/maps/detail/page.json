@@ -1,5 +1,13 @@
 {
   "title": "{map}, hartă World of Tanks ({region})",
   "description": "{map}: o hartă World of Tanks de {width} × {height} m.",
-  "description-modes": "{map}: o hartă World of Tanks de {width} × {height} m, cu modurile {modes}."
+  "description-modes": "{map}: o hartă World of Tanks de {width} × {height} m, cu modurile {modes}.",
+  "community": {
+    "title": "Recenziile jucătorilor și ratingul comunității pentru {map} ({region})",
+    "description": "Ce cred jucătorii despre {map}: ratingul comunității din cinci, separat după cât de bine joacă cei care au votat, cu verdicte scrise de conturi cu bătălii în urma lor. Echilibru, diversitate, cursivitate și dacă fiecare clasă de vehicul are un rol acolo."
+  },
+  "history": {
+    "title": "Istoricul schimbărilor pentru {map} ({region}), refaceri în funcție de actualizare",
+    "description": "Fiecare schimbare înregistrată pentru {map} în toate actualizările World of Tanks: bazele, punctele de apariție și zona de joc mutate de Wargaming, versiune cu versiune, desenate pe mini-harta pe care au fost mutate."
+  }
 }

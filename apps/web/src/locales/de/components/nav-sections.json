@@ -8,9 +8,27 @@
     "servers": "Server"
   },
   "links": {
-    "top-players": {
-      "label": "Top-Spieler",
-      "description": "Ewige Bestenliste der Spieler"
+    "advances": {
+      "description": "15-gegen-15-Rangliste für Stufe X"
+    },
+    "all-maps": {
+      "label": "Alle Karten",
+      "description": "Jede Karte im Spiel"
+    },
+    "all-tournaments": {
+      "label": "Turniere",
+      "description": "Alle offenen und abgeschlossenen Turniere"
+    },
+    "battle-type": {
+      "description": "{type}-Karten"
+    },
+    "map-changes": {
+      "label": "Änderungen",
+      "description": "Kartenüberarbeitungen bei jedem Aktualisieren"
+    },
+    "map-community": {
+      "label": "Community-Wertungen",
+      "description": "Bewertet von den dorthin gesendeten Spielern"
     },
     "players-onslaught": {
       "description": "Rangliste für Ansturm"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Battle-Royale-Bestenliste"
     },
-    "top-clans": {
-      "label": "Top-Clans",
-      "description": "Ewige Bestenliste der Clans"
+    "servers-population": {
+      "label": "Serverpopulation",
+      "description": "Spieler online, aktuell und im Zeitverlauf"
     },
     "stronghold": {
       "description": "Scharmützel-Rangliste"
     },
-    "advances": {
-      "description": "15-gegen-15-Rangliste für Stufe X"
+    "tank-changes": {
+      "label": "Änderungen",
+      "description": "Buffs und Nerfs bei jedem Aktualisieren"
     },
-    "tank-performances": {
-      "label": "Leistungen",
-      "description": "Siegquote und Schaden je Panzer"
-    },
-    "tank-specs": {
-      "label": "Spezifikationen",
-      "description": "Statistik für jeden Panzer"
+    "tank-community": {
+      "label": "Community-Bewertungen",
+      "description": "Bewertet von Spielern, die sie besitzen"
     },
     "tank-economics": {
       "label": "Ökonomie",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Schwellenwerte für Abzeichen der Überlegenheit"
     },
-    "tank-changes": {
-      "label": "Änderungen",
-      "description": "Buffs und Nerfs bei jedem Aktualisieren"
+    "tank-performances": {
+      "label": "Leistungen",
+      "description": "Siegquote und Schaden je Panzer"
     },
-    "tank-community": {
-      "label": "Community-Bewertungen",
-      "description": "Bewertet von Spielern, die sie besitzen"
+    "tank-specs": {
+      "label": "Spezifikationen",
+      "description": "Statistik für jeden Panzer"
     },
     "tank-videos": {
       "label": "Videos",
       "description": "Gameplay aus der Community"
     },
-    "all-tournaments": {
-      "label": "Turniere",
-      "description": "Alle offenen und abgeschlossenen Turniere"
+    "top-clans": {
+      "label": "Top-Clans",
+      "description": "Ewige Bestenliste der Clans"
     },
-    "all-maps": {
-      "label": "Alle Karten",
-      "description": "Jede Karte im Spiel"
-    },
-    "map-changes": {
-      "label": "Änderungen",
-      "description": "Kartenüberarbeitungen bei jedem Aktualisieren"
-    },
-    "battle-type": {
-      "description": "{type}-Karten"
-    },
-    "servers-population": {
-      "label": "Serverpopulation",
-      "description": "Spieler online, aktuell und im Zeitverlauf"
+    "top-players": {
+      "label": "Top-Spieler",
+      "description": "Ewige Bestenliste der Spieler"
     }
   }
 }

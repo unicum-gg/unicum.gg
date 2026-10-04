@@ -1,0 +1,15 @@
+{
+  "agreement": "Concordância",
+  "camouflage": "A temporada em que o mapa se passa.",
+  "fun": "Diversão",
+  "map": "Mapa",
+  "overall": "Geral",
+  "season": "Temporada",
+  "tips": {
+    "overall": "O que os bons jogadores pensam dele. Classificado com base numa média ajustada em direção à média de todos os votos, para que um mapa com quatro votos não possa superar um com quatrocentos.",
+    "fun": "O quanto os jogadores desfrutam de serem enviados para aqui, o que muitas vezes não é a mesma questão.",
+    "votes": "Votos dados, todos por uma conta com batalhas reais atrás.",
+    "consensus": "O quão separados estão os votantes. Ordene de forma decrescente para ver os mapas sobre os quais os jogadores não conseguem chegar a acordo, que é a lista mais interessante."
+  },
+  "votes": "Votos"
+}

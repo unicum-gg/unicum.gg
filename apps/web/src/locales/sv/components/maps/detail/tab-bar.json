@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "Videor",
+    "community": "Community",
+    "history": "Ändringar"
+  },
+  "tab-count": "{tab} ({count})"
+}

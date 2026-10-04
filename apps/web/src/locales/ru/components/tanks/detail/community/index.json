@@ -1,6 +1,6 @@
 {
-  "axis-by-axis": "По каждой оси",
-  "by-server": "По серверу",
+  "axis-by-axis": "По осям",
+  "by-server": "По серверам",
   "community-verdict": "Вердикт сообщества",
   "every-server-one-average": "Все серверы, одно среднее",
   "n-shown": ", показано: {count}",

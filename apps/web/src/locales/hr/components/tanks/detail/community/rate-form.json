@@ -15,14 +15,15 @@
     "rejected": "Ocjena je spremljena. Vaša ranija recenzija nije objavljena, pa se računaju samo vaše zvjezdice.",
     "closed": "Ocjena je spremljena. Pisano izražavanje mišljenja trenutačno je zatvoreno, pa tekst nije zadržan."
   },
+  "review-length": "Vaša recenzija treba imati između {min} i {max} znakova.",
   "save-failed": "Nije moguće spremiti to. Pokušajte ponovno za trenutak.",
-  "say-why-optional": "Recite zašto (opcionalno)",
+  "say-why-optional": "Recite zašto (neobavezno)",
   "signed-with": "Potpisano s vaših {battles} bitki",
   "submit-my-rating": "Pošalji moju ocjenu",
   "too-many-edits": "To je mnogo promjena odjednom. Pričekajte minutu.",
   "update-my-rating": "Ažuriraj moju ocjenu",
   "what-it-is-good-at": "U čemu je dobar, u čemu nije i tko bi ga trebao igrati.",
-  "withdraw": "Odzovi",
+  "withdraw": "Povuci",
   "your-rating-has-been-withdrawn": "Vaša ocjena je povučena.",
   "your-review-is-waiting-on": "Vaša recenzija čeka moderatora. Ovdje je možete vidjeti samo vi.",
   "your-review-was-not-published": "Vaša recenzija nije objavljena. Vaše zvjezdice i dalje ulaze u prosjek."

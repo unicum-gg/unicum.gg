@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Ještě pár slov: zbývá {count}.",
+  "could-not-withdraw": "Toto hodnocení se nepodařilo stáhnout. Zkuste to za okamžik znovu.",
+  "hide-the-detailed-axes": "Skrýt podrobné osy",
+  "not-enough-battles": "Váš účet nemá odehráno dost bitev, aby se hlas započítal.",
+  "published-once-read": "Zveřejněno, jakmile to moderátor přečte. Vaše hvězdy se započítají přímo.",
+  "rate-it-in-detail": "Ohodnoťte to podrobně (volitelné)",
+  "review": {
+    "none": "Hodnocení uloženo.",
+    "queued": "Hodnocení uloženo. Vaše recenze čeká u moderátora.",
+    "published": "Hodnocení uloženo. Vaše recenze je již zveřejněna.",
+    "pending": "Hodnocení uloženo. Vaše recenze stále čeká na moderátora.",
+    "rejected": "Hodnocení uloženo. Vaše předchozí recenze nebyla zveřejněna, takže se započítají pouze vaše hvězdy.",
+    "closed": "Hodnocení uloženo. Psané názory jsou nyní uzavřené, takže text nebyl zachován."
+  },
+  "review-length": "Vaše recenze musí mít od {min} do {max} znaků.",
+  "save-failed": "Toto se nepodařilo uložit. Zkuste to znovu za okamžik.",
+  "say-why-optional": "Uveďte důvod (volitelné)",
+  "signed-with": "Ověřeno vašimi {battles} bitvami za posledních 30 dní",
+  "submit-my-rating": "Odeslat moje hodnocení",
+  "too-many-edits": "To je příliš mnoho úprav najednou. Dejte tomu minutu.",
+  "update-my-rating": "Aktualizovat moje hodnocení",
+  "what-it-is-good-at": "Kde se bitva rozhoduje, která strana to má snazší a kdo by sem měl chtít být odeslán.",
+  "withdraw": "Stáhnout",
+  "your-rating-has-been-withdrawn": "Vaše hodnocení bylo staženo.",
+  "your-review-is-waiting-on": "Vaše recenze čeká na moderátora. Zde ji můžete vidět pouze vy.",
+  "your-review-was-not-published": "Vaše recenze nebyla zveřejněna. Vaše hvězdy se stále započítávají do průměru."
+}

@@ -1,0 +1,15 @@
+{
+  "agreement": "Übereinstimmung",
+  "camouflage": "Die Saison, in der die Karte angesiedelt ist.",
+  "fun": "Spaß",
+  "map": "Karte",
+  "overall": "Insgesamt",
+  "season": "Saison",
+  "tips": {
+    "overall": "Wie gut Spieler sie einschätzen. Gewertet nach einem Durchschnitt, der zum Durchschnitt aller Kartenstimmen hin verschoben wird, sodass eine Karte mit vier Stimmen eine mit vierhundert nicht übertreffen kann.",
+    "fun": "Wie viel Spaß Spieler daran haben, hierher gesendet zu werden, was regelmäßig nicht dieselbe Frage ist.",
+    "votes": "Abgegebene Stimmen, jede von einem Konto mit echten Gefechten hinter sich.",
+    "consensus": "Wie weit die Wähler auseinanderliegen. Absteigend sortieren für die Karten, bei denen Spieler sich nicht einig werden können, was die interessantere Liste ist."
+  },
+  "votes": "Stimmen"
+}

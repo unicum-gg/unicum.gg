@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "视频",
+    "community": "社区",
+    "history": "变更"
+  },
+  "tab-count": "{tab}（{count}）"
+}

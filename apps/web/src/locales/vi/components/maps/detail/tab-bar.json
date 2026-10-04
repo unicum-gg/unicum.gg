@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "Video",
+    "community": "Cộng đồng",
+    "history": "Thay đổi"
+  },
+  "tab-count": "{tab} ({count})"
+}

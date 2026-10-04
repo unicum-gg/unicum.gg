@@ -8,9 +8,27 @@
     "servers": "Servrar"
   },
   "links": {
-    "top-players": {
-      "label": "Topp spelare",
-      "description": "Topplista för spelare genom tiderna"
+    "advances": {
+      "description": "Rankning för Klass X, 15 mot 15"
+    },
+    "all-maps": {
+      "label": "Alla kartor",
+      "description": "Alla kartor i spelet"
+    },
+    "all-tournaments": {
+      "label": "Turneringar",
+      "description": "Alla turneringar, öppna och avgjorda"
+    },
+    "battle-type": {
+      "description": "{type} kartor"
+    },
+    "map-changes": {
+      "label": "Ändringar",
+      "description": "Omarbetningar av kartor per uppdatering"
+    },
+    "map-community": {
+      "label": "Community-betyg",
+      "description": "Betygsatt av spelarna som skickas dit"
     },
     "players-onslaught": {
       "description": "Rankningsstege för Pansarstorm"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Topplista för battle royale"
     },
-    "top-clans": {
-      "label": "Toppklaner",
-      "description": "Topplista för klaner genom tiderna"
+    "servers-population": {
+      "label": "Serverbefolkning",
+      "description": "Spelare online, nu och över tid"
     },
     "stronghold": {
       "description": "Stege för skärmytslingar"
     },
-    "advances": {
-      "description": "Rankning för Klass X, 15 mot 15"
+    "tank-changes": {
+      "label": "Ändringar",
+      "description": "Buffar och nerfar per uppdatering"
     },
-    "tank-performances": {
-      "label": "Prestationer",
-      "description": "Vinstfrekvens och skada per tank"
-    },
-    "tank-specs": {
-      "label": "Specifikationer",
-      "description": "Statistik för varje tank"
+    "tank-community": {
+      "label": "Communitybetyg",
+      "description": "Betygsatta av spelare som äger dem"
     },
     "tank-economics": {
       "label": "Ekonomi",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Gränsvärden för Förtjänsttecken"
     },
-    "tank-changes": {
-      "label": "Ändringar",
-      "description": "Buffar och nerfar per uppdatering"
+    "tank-performances": {
+      "label": "Prestationer",
+      "description": "Vinstfrekvens och skada per tank"
     },
-    "tank-community": {
-      "label": "Communitybetyg",
-      "description": "Betygsatta av spelare som äger dem"
+    "tank-specs": {
+      "label": "Specifikationer",
+      "description": "Statistik för varje tank"
     },
     "tank-videos": {
       "label": "Videor",
       "description": "Spelvideor från communityn"
     },
-    "all-tournaments": {
-      "label": "Turneringar",
-      "description": "Alla turneringar, öppna och avgjorda"
+    "top-clans": {
+      "label": "Toppklaner",
+      "description": "Topplista för klaner genom tiderna"
     },
-    "all-maps": {
-      "label": "Alla kartor",
-      "description": "Alla kartor i spelet"
-    },
-    "map-changes": {
-      "label": "Ändringar",
-      "description": "Omarbetningar av kartor per uppdatering"
-    },
-    "battle-type": {
-      "description": "{type} kartor"
-    },
-    "servers-population": {
-      "label": "Serverbefolkning",
-      "description": "Spelare online, nu och över tid"
+    "top-players": {
+      "label": "Topp spelare",
+      "description": "Topplista för spelare genom tiderna"
     }
   }
 }

@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Kiek jis atlaidus, jei dar mokotės.",
     "versatility": "Ar jis veikia bet kuriame žemėlapyje ir bet kurioje komandoje?"
   },
+  "rating-axes-short": {
+    "overall": "Bendrai",
+    "fun": "Pramoga",
+    "firepower": "Šaunamoji galia",
+    "armour": "Šarvai",
+    "mobility": "Mobilumas",
+    "gunHandling": "Ginklo valdymas",
+    "concealment": "Maskuotė",
+    "beginnerFriendliness": "Pradedantysis",
+    "versatility": "Universalumas"
+  },
+  "map-rating-axes": {
+    "overall": "Bendrai",
+    "fun": "Pramoga",
+    "balance": "Balansas",
+    "variety": "Įvairovė",
+    "flow": "Eiga",
+    "classFairness": "Sąžiningumas klasėms",
+    "beginnerFriendliness": "Patogu pradedantiesiems"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Koks geras šis žemėlapis, įvertinus viską?",
+    "fun": "Kiek jums patinka, kai jus čia išsiunčia?",
+    "balance": "Ar abi pusės pradeda turėdamos vienodą tikimybę?",
+    "variety": "Ar yra daugiau nei vienas būdas jį žaisti, arba vienas kelias, kurį visi užima?",
+    "flow": "Ar mūšis juda, ar sustoja akistatoje?",
+    "classFairness": "Ar kiekviena transporto priemonių klasė čia turi savo paskirtį?",
+    "beginnerFriendliness": "Kiek jis atlaidus, jei vis dar mokotės?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Bendrai",
+    "fun": "Pramoga",
+    "balance": "Pusiausvyra",
+    "variety": "Įvairovė",
+    "flow": "Eiga",
+    "classFairness": "Klasės",
+    "beginnerFriendliness": "Pradedantysis"
+  },
   "voter-brackets": {
     "unknown": "Neįvertintas",
     "learning": "Mokymasis",

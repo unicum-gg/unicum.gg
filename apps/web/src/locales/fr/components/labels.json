@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Sa capacité à pardonner les erreurs quand vous êtes encore en phase d’apprentissage.",
     "versatility": "Est-il efficace sur n’importe quelle carte et dans n’importe quelle équipe ?"
   },
+  "rating-axes-short": {
+    "overall": "Global",
+    "fun": "Amusement",
+    "firepower": "Puissance de feu",
+    "armour": "Blindage",
+    "mobility": "Mobilité",
+    "gunHandling": "Maniement",
+    "concealment": "Camouflage",
+    "beginnerFriendliness": "Débutant",
+    "versatility": "Polyvalence"
+  },
+  "map-rating-axes": {
+    "overall": "Global",
+    "fun": "Amusement",
+    "balance": "Équilibre",
+    "variety": "Variété",
+    "flow": "Fluidité",
+    "classFairness": "Équité entre les classes",
+    "beginnerFriendliness": "Adaptée aux débutants"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Quelle est la qualité de cette carte, tous éléments pris en compte ?",
+    "fun": "Dans quelle mesure appréciez-vous d’être envoyé ici ?",
+    "balance": "Les deux côtés commencent-ils avec des chances égales ?",
+    "variety": "Y a-t-il plusieurs façons de la jouer, ou tout le monde prend-il la même route ?",
+    "flow": "La bataille avance-t-elle, ou se transforme-t-elle en face-à-face bloqué ?",
+    "classFairness": "Chaque classe de véhicule a-t-elle un rôle ici ?",
+    "beginnerFriendliness": "Dans quelle mesure cette carte pardonne-t-elle les erreurs si vous êtes encore en apprentissage ?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Global",
+    "fun": "Amusement",
+    "balance": "Équilibre",
+    "variety": "Variété",
+    "flow": "Fluidité",
+    "classFairness": "Classes",
+    "beginnerFriendliness": "Débutant"
+  },
   "voter-brackets": {
     "unknown": "Non classé",
     "learning": "En apprentissage",

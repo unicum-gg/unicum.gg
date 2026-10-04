@@ -41,6 +41,44 @@
     "beginnerFriendliness": "即使你仍在学习，它有多容易容错。",
     "versatility": "它能适应任何地图和任何队伍吗？"
   },
+  "rating-axes-short": {
+    "overall": "总体",
+    "fun": "乐趣",
+    "firepower": "火力",
+    "armour": "装甲",
+    "mobility": "机动",
+    "gunHandling": "炮控",
+    "concealment": "伪装",
+    "beginnerFriendliness": "新手",
+    "versatility": "多功能性"
+  },
+  "map-rating-axes": {
+    "overall": "总体",
+    "fun": "乐趣",
+    "balance": "平衡性",
+    "variety": "多样性",
+    "flow": "战斗节奏",
+    "classFairness": "类型公平性",
+    "beginnerFriendliness": "新手友好度"
+  },
+  "map-rating-axis-hints": {
+    "overall": "综合考虑，这张地图有多好？",
+    "fun": "你有多喜欢被发送到这里？",
+    "balance": "双方开始时的获胜概率是否相等？",
+    "variety": "这张地图是否有多种玩法，还是所有人都会走同一条路？",
+    "flow": "战斗是在推进，还是陷入僵持？",
+    "classFairness": "每种车辆类型在这里都有自己的职责吗？",
+    "beginnerFriendliness": "如果你还在学习，这张地图有多宽容？"
+  },
+  "map-rating-axes-short": {
+    "overall": "总体",
+    "fun": "乐趣",
+    "balance": "平衡",
+    "variety": "多样性",
+    "flow": "节奏",
+    "classFairness": "类型",
+    "beginnerFriendliness": "新手友好度"
+  },
   "voter-brackets": {
     "unknown": "未评分",
     "learning": "学习中",

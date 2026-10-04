@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Jede Karte wird von den Spielern, die dorthin gesendet werden, mit bis zu fünf bewertet. Niemand wählt aus, wo er spielt, daher erfordert eine Stimme Gefechte auf dem Konto statt auf der Karte, und das Urteil wird danach aufgeteilt, wie gut die Wähler spielen.",
+  "nobody-has-rated-a-map-yet": "Noch keine Karte wurde bewertet. Die ersten Stimmen können auf den Kartenseiten abgegeben werden.",
+  "think": "denken",
+  "title": "Was Spieler über die Karten {think}",
+  "votes-across-maps": "{totalVotes} Stimmen über {ratedMaps} Karten hinweg."
+}

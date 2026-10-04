@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Varje röst är signerad med väljarens eget rekord. Wargaming publicerar inget rekord per karta för vem som helst, så det en röst bevisar är att dess författare spelar, inte att de har skickats hit.",
+  "every-vote-signed-average": "Varje röst är signerad med väljarens eget rekord, i genomsnitt {battles} strider under de senaste 30 dagar. Wargaming publicerar inget rekord per karta för vem som helst, så det en röst bevisar är att dess författare spelar, inte att de har skickats hit.",
+  "fun": "Roligt",
+  "how-good-the-map-is": "Hur bra kartan är",
+  "how-much-people-enjoy-it": "Hur mycket personer gillar att skickas hit",
+  "if-you-play-here": "Om du spelar är du exakt den som den här sidan väntar på.",
+  "nobody-has-rated-this-map": "Ingen har betygsatt den här kartan ännu.",
+  "overall": "Övergripande",
+  "votes": "{count} röster",
+  "votes-one": "{count} röst"
+}

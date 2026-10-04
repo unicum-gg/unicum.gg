@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Jak wiele wybacza, jeśli wciąż się uczysz.",
     "versatility": "Czy sprawdza się na każdej mapie i w każdej drużynie?"
   },
+  "rating-axes-short": {
+    "overall": "Ogółem",
+    "fun": "Zabawa",
+    "firepower": "Siła ognia",
+    "armour": "Pancerz",
+    "mobility": "Mobilność",
+    "gunHandling": "Prowadzenie działa",
+    "concealment": "Kamuflaż",
+    "beginnerFriendliness": "Początkujący",
+    "versatility": "Wszechstronność"
+  },
+  "map-rating-axes": {
+    "overall": "Ogółem",
+    "fun": "Zabawa",
+    "balance": "Równowaga",
+    "variety": "Różnorodność",
+    "flow": "Płynność rozgrywki",
+    "classFairness": "Sprawiedliwość klas",
+    "beginnerFriendliness": "Przyjazna dla początkujących"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Jak dobra jest ta mapa, biorąc wszystko pod uwagę?",
+    "fun": "Jak bardzo podoba ci się trafianie na tę mapę?",
+    "balance": "Czy obie strony zaczynają z równą szansą?",
+    "variety": "Czy można grać na niej na więcej niż jeden sposób, czy wszyscy wybierają tę samą drogę?",
+    "flow": "Czy bitwa posuwa się naprzód, czy zamiera w impasie?",
+    "classFairness": "Czy każda klasa pojazdów ma tu swoje zadanie?",
+    "beginnerFriendliness": "Jak wybaczająca jest ta mapa, jeśli wciąż się uczysz?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Ogółem",
+    "fun": "Zabawa",
+    "balance": "Równowaga",
+    "variety": "Różnorodność",
+    "flow": "Płynność",
+    "classFairness": "Klasa",
+    "beginnerFriendliness": "Początkujący"
+  },
   "voter-brackets": {
     "unknown": "Bez oceny",
     "learning": "Uczący się",

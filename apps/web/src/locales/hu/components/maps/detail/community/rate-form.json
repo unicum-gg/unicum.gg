@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Még néhány szó: {count} van hátra.",
+  "could-not-withdraw": "Nem sikerült visszavonni. Próbáld újra egy pillanat múlva.",
+  "hide-the-detailed-axes": "Részletes tengelyek elrejtése",
+  "not-enough-battles": "A fiókodon még nem játszottál eleget ahhoz, hogy a szavazatod számítson.",
+  "published-once-read": "A moderátor elolvasása után közzétéve. A csillagjaid darabszáma azonnal számít.",
+  "rate-it-in-detail": "Részletes értékelés (opcionális)",
+  "review": {
+    "none": "Értékelés mentve.",
+    "queued": "Értékelés mentve. Az értékelésed moderátornál van.",
+    "published": "Értékelés mentve. Az értékelésed már élő.",
+    "pending": "Értékelés mentve. Az értékelésed még moderátorra vár.",
+    "rejected": "Értékelés mentve. A korábbi értékelésed nem lett közzétéve, ezért csak a csillagjaid számítanak.",
+    "closed": "Értékelés mentve. Az írott vélemények jelenleg le vannak zárva, ezért a szöveget nem tartottuk meg."
+  },
+  "review-length": "Az értékelésednek {min} és {max} karakter között kell lennie.",
+  "save-failed": "Nem sikerült menteni. Próbáld újra egy pillanat múlva.",
+  "say-why-optional": "Indokold meg (nem kötelező)",
+  "signed-with": "Az elmúlt 30 napban játszott {battles} csatáddal hitelesítve",
+  "submit-my-rating": "Értékelésem beküldése",
+  "too-many-edits": "Ez egyszerre túl sok módosítás. Várj egy percet.",
+  "update-my-rating": "Értékelésem frissítése",
+  "what-it-is-good-at": "Hol dől el a csata, melyik oldalnak könnyebb, és ki szeretne ide kerülni.",
+  "withdraw": "Visszavonás",
+  "your-rating-has-been-withdrawn": "Az értékelésed vissza lett vonva.",
+  "your-review-is-waiting-on": "Az értékelésed moderátorra vár. Itt csak te láthatod.",
+  "your-review-was-not-published": "Az értékelésed nem lett közzétéve. A csillagjaid továbbra is beleszámítanak az átlagba."
+}

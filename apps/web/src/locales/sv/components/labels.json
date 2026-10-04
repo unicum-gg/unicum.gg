@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Hur förlåtande den är om du fortfarande håller på att lära dig.",
     "versatility": "Fungerar den på alla kartor och i alla lag?"
   },
+  "rating-axes-short": {
+    "overall": "Övergripande",
+    "fun": "Roligt",
+    "firepower": "Eldkraft",
+    "armour": "Pansar",
+    "mobility": "Rörlighet",
+    "gunHandling": "Hantering",
+    "concealment": "Kamouflage",
+    "beginnerFriendliness": "Nybörjare",
+    "versatility": "Mångsidighet"
+  },
+  "map-rating-axes": {
+    "overall": "Övergripande",
+    "fun": "Roligt",
+    "balance": "Balans",
+    "variety": "Variation",
+    "flow": "Flöde",
+    "classFairness": "Rättvisa mellan klasser",
+    "beginnerFriendliness": "Nybörjarvänlig"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Hur bra är den här kartan, allt sammantaget?",
+    "fun": "Hur mycket gillar du att skickas hit?",
+    "balance": "Börjar båda sidor med samma chans?",
+    "variety": "Finns det mer än ett sätt att spela på, eller tar alla samma väg?",
+    "flow": "Rör sig striden eller stannar den upp i ett dödläge?",
+    "classFairness": "Har varje fordonsklass en uppgift här?",
+    "beginnerFriendliness": "Hur förlåtande är den om du fortfarande lär dig?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Övergripande",
+    "fun": "Roligt",
+    "balance": "Balans",
+    "variety": "Variation",
+    "flow": "Flöde",
+    "classFairness": "Typer",
+    "beginnerFriendliness": "Nybörjare"
+  },
   "voter-brackets": {
     "unknown": "Obedömd",
     "learning": "Lärande",

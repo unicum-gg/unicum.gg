@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Kiekvienas žemėlapis įvertintas nuo vieno iki penkių žmonių, kurie į jį išsiunčiami. Niekas nepasirenka, kur žaisti, todėl balsuojant prašoma mūšių paskyroje, o ne žemėlapyje, ir verdiktas suskirstomas pagal tai, kaip gerai žaidžia balsuotojai.",
+  "nobody-has-rated-a-map-yet": "Kol kas neįvertintas nė vienas žemėlapis. Pirmieji balsai pateikiami žemėlapių puslapiuose.",
+  "think": "manyti",
+  "title": "Ką žaidėjai gali {think} apie žemėlapius",
+  "votes-across-maps": "{totalVotes} balsų visoje {ratedMaps} žemėlapių."
+}

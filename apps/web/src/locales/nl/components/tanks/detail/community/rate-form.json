@@ -15,14 +15,15 @@
     "rejected": "Beoordeling opgeslagen. Je eerdere recensie is niet gepubliceerd, dus alleen je sterren tellen mee.",
     "closed": "Beoordeling opgeslagen. Geschreven meningen zijn momenteel niet mogelijk, dus de tekst is niet bewaard."
   },
+  "review-length": "Je beoordeling moet tussen {min} en {max} tekens lang zijn.",
   "save-failed": "Opslaan mislukt. Probeer het zo opnieuw.",
-  "say-why-optional": "Vertel waarom (optioneel)",
+  "say-why-optional": "Zeg waarom (optioneel)",
   "signed-with": "Ondertekend met je {battles} gevechten in deze tank",
   "submit-my-rating": "Mijn beoordeling indienen",
   "too-many-edits": "Dat zijn veel wijzigingen tegelijk. Wacht een minuut.",
   "update-my-rating": "Mijn beoordeling bijwerken",
   "what-it-is-good-at": "Waar deze tank goed in is, waar niet in en voor wie hij geschikt is.",
-  "withdraw": "Terugtrekken",
+  "withdraw": "Intrekken",
   "your-rating-has-been-withdrawn": "Je beoordeling is ingetrokken.",
   "your-review-is-waiting-on": "Je recensie wacht op een moderator. Alleen jij kunt hem hier zien.",
   "your-review-was-not-published": "Je recensie is niet gepubliceerd. Je sterren tellen nog steeds mee voor het gemiddelde."

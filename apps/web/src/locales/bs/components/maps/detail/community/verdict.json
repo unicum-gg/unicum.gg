@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Svaki glas je potpisan vlastitim rekordom glasača. Wargaming ne objavljuje rekord po mapi ni za koga, pa glas dokazuje da njegov autor igra, a ne da je poslan ovdje.",
+  "every-vote-signed-average": "Svaki glas je potpisan vlastitim rekordom glasača, s prosjekom od {battles} bitaka u posljednjih 30 dana. Wargaming ne objavljuje rekord po mapi ni za koga, pa glas dokazuje da njegov autor igra, a ne da je poslan ovdje.",
+  "fun": "Zabava",
+  "how-good-the-map-is": "Koliko je mapa dobra",
+  "how-much-people-enjoy-it": "Koliko ljudi uživa kada budu poslani ovdje",
+  "if-you-play-here": "Ako igrate, vi ste upravo osoba koju ova stranica čeka.",
+  "nobody-has-rated-this-map": "Niko još nije ocijenio ovu mapu.",
+  "overall": "Sveukupno",
+  "votes": "{count} glasova",
+  "votes-one": "{count} glas"
+}

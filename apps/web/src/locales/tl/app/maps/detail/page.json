@@ -1,5 +1,13 @@
 {
   "title": "{map}, mapa ng World of Tanks ({region})",
   "description": "{map}: isang {width} × {height} m na mapa ng World of Tanks.",
-  "description-modes": "{map}: isang {width} × {height} m na mapa ng World of Tanks na may mga mode na {modes}."
+  "description-modes": "{map}: isang {width} × {height} m na mapa ng World of Tanks na may mga mode na {modes}.",
+  "community": {
+    "title": "Mga pagsusuri ng mga manlalaro sa {map} at rating ng komunidad ({region})",
+    "description": "Palagay ng mga manlalaro tungkol sa {map}: rating ng komunidad mula isa hanggang lima, na hinati ayon sa kung gaano kaayos maglaro ang mga bumoto, kasama ang mga nakasulat na hatol mula sa mga account na may mga laban sa likod nila. Balanse, pagkakaiba-iba, daloy at kung may gawain ang bawat klase ng sasakyan doon."
+  },
+  "history": {
+    "title": "Kasaysayan ng mga pagbabago sa {map} ({region}), mga muling pagsasaayos ayon sa update",
+    "description": "Bawat naitalang pagbabago sa {map} sa lahat ng update ng World of Tanks: mga base, spawn at lugar ng paglalaro na inilipat ng Wargaming, bersyon bawat bersyon, na iginuhit sa minimapang pinaglipatan ng mga ito."
+  }
 }

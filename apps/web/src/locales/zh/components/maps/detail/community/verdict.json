@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "每次投票都会使用投票者自己的纪录进行认证。默认不会为任何人发布每张地图的纪录，因此投票能证明的是作者确实进行过对战，而不是作者曾被发送到这里。",
+  "every-vote-signed-average": "每次投票都会使用投票者自己的纪录进行认证，过去30天平均进行过{battles}场战斗。默认不会为任何人发布每张地图的纪录，因此投票能证明的是作者确实进行过对战，而不是作者曾被发送到这里。",
+  "fun": "乐趣",
+  "how-good-the-map-is": "地图有多好",
+  "how-much-people-enjoy-it": "玩家有多喜欢被发送到这里",
+  "if-you-play-here": "如果您在这里对战过，您正是此页面等待的人。",
+  "nobody-has-rated-this-map": "还没有人为此地图评分。",
+  "overall": "总体",
+  "votes": "{count}票",
+  "votes-one": "{count}票"
+}

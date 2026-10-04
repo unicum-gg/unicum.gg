@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Po oseh",
+  "by-server": "Po strežniku",
+  "community-verdict": "Sodba skupnosti",
+  "every-server-one-average": "Každý server, jedno priemerné hodnotenie",
+  "n-shown": ", {count} zobrazených",
+  "opinion": "{count, plural, one {# mnenie} few {# mnenia} many {# mnení} other {# mnení}}",
+  "rate-the": "Stopnja {mapName}",
+  "same-map-different-metas": "Rovnaké územie, odlišné mety",
+  "the-same-map-by-how": "Rovnaká mapa podľa toho, ako dobre hlasujúci hráč hraje",
+  "what-players-wrote": "Kaj so napisali igralci",
+  "who-is-saying-it": "Kto to hovorí"
+}

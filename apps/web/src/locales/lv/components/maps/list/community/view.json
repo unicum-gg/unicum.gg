@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Katra karte novērtēta ar vērtējumu no viena līdz pieci, ko snieguši uz to nosūtītie spēlētāji. Neviens neizvēlas, kur spēlēt, tāpēc balsojumā tiek prasītas kaujas kontā, nevis kartē, un spriedumu sadala pēc tā, cik labi spēlē balsotāji.",
+  "nobody-has-rated-a-map-yet": "Neviena karte vēl nav novērtēta. Pirmās balsis var iesniegt karšu lapās.",
+  "think": "domāt",
+  "title": "Ko spēlētāji mēdz {think} par kartēm",
+  "votes-across-maps": "{totalVotes} balsis visās {ratedMaps} kartēs."
+}

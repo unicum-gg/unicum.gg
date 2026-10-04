@@ -8,9 +8,27 @@
     "servers": "Serveriai"
   },
   "links": {
-    "top-players": {
-      "label": "Geriausi žaidėjai",
-      "description": "Viso laiko žaidėjų lyderių lentelė"
+    "advances": {
+      "description": "X lygio 15 prieš 15 reitingas"
+    },
+    "all-maps": {
+      "label": "Visos žemėlapiai",
+      "description": "Kiekvienas žaidimo žemėlapis"
+    },
+    "all-tournaments": {
+      "label": "Turnyrai",
+      "description": "Kiekvienas vykstantis ir pasibaigęs turnyras"
+    },
+    "battle-type": {
+      "description": "{type} žemėlapiai"
+    },
+    "map-changes": {
+      "label": "Pakeitimai",
+      "description": "Žemėlapių pakeitimai pagal atnaujinimą"
+    },
+    "map-community": {
+      "label": "Bendruomenės reitingai",
+      "description": "Įvertinta ten išsiųstų žaidėjų"
     },
     "players-onslaught": {
       "description": "Reitinginio Prasiveržimo lyderių lentelė"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Mūšio karališkumo lyderių lentelė"
     },
-    "top-clans": {
-      "label": "Geriausi klanai",
-      "description": "Viso laiko klanų lyderių lentelė"
+    "servers-population": {
+      "label": "Serverio populiacija",
+      "description": "Prisijungę žaidėjai dabar ir laikui bėgant"
     },
     "stronghold": {
       "description": "Išpuolių reitingas"
     },
-    "advances": {
-      "description": "X lygio 15 prieš 15 reitingas"
+    "tank-changes": {
+      "label": "Pakeitimai",
+      "description": "Stiprinimai ir susilpninimai pagal atnaujinimą"
     },
-    "tank-performances": {
-      "label": "Veiklos rezultatų",
-      "description": "Pergalių koeficientas ir žala pagal tanką"
-    },
-    "tank-specs": {
-      "label": "Specifikacijos",
-      "description": "Kiekvieno tanko statistika"
+    "tank-community": {
+      "label": "Bendruomenės reitingai",
+      "description": "Įvertinti juos turinčių žaidėjų"
     },
     "tank-economics": {
       "label": "Ekonomika",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Meistriškumo ženklelio ribos"
     },
-    "tank-changes": {
-      "label": "Pakeitimai",
-      "description": "Stiprinimai ir susilpninimai pagal atnaujinimą"
+    "tank-performances": {
+      "label": "Veiklos rezultatų",
+      "description": "Pergalių koeficientas ir žala pagal tanką"
     },
-    "tank-community": {
-      "label": "Bendruomenės reitingai",
-      "description": "Įvertinti juos turinčių žaidėjų"
+    "tank-specs": {
+      "label": "Specifikacijos",
+      "description": "Kiekvieno tanko statistika"
     },
     "tank-videos": {
       "label": "Vaizdo įrašai",
       "description": "Bendruomenės žaidimo įrašai"
     },
-    "all-tournaments": {
-      "label": "Turnyrai",
-      "description": "Kiekvienas vykstantis ir pasibaigęs turnyras"
+    "top-clans": {
+      "label": "Geriausi klanai",
+      "description": "Viso laiko klanų lyderių lentelė"
     },
-    "all-maps": {
-      "label": "Visos žemėlapiai",
-      "description": "Kiekvienas žaidimo žemėlapis"
-    },
-    "map-changes": {
-      "label": "Pakeitimai",
-      "description": "Žemėlapių pakeitimai pagal atnaujinimą"
-    },
-    "battle-type": {
-      "description": "{type} žemėlapiai"
-    },
-    "servers-population": {
-      "label": "Serverio populiacija",
-      "description": "Prisijungę žaidėjai dabar ir laikui bėgant"
+    "top-players": {
+      "label": "Geriausi žaidėjai",
+      "description": "Viso laiko žaidėjų lyderių lentelė"
     }
   }
 }

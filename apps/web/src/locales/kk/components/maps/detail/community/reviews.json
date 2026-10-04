@@ -1,0 +1,7 @@
+{
+  "battles-overall": "Жалпы {battles}",
+  "battles-recently": "30 күндегі {battles} ұрыс",
+  "no-written-opinions-yet": "Әзірге жазбаша пікірлер жоқ. Егер ойнасаңыз, сіздің пікіріңіз алғашқы болар еді.",
+  "win-rate": "Жеңіс пайызы: {winrate}%",
+  "written-on": "{gameVersion} нұсқасында жазылған"
+}

@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Podle jednotlivých os",
+  "by-server": "Podle serveru",
+  "community-verdict": "Verdikt komunity",
+  "every-server-one-average": "Každý server, jeden průměr",
+  "n-shown": ", {count} zobrazeno",
+  "opinion": "{count, plural, one {# názor} few {# názory} many {# názorů} other {# názoru}}",
+  "rate-the": "Ohodnotit {mapName}",
+  "same-map-different-metas": "Stejný terén, odlišné mety",
+  "the-same-map-by-how": "Stejná mapa podle toho, jak dobře hlasující hraje",
+  "what-players-wrote": "Co hráči napsali",
+  "who-is-saying-it": "Kdo to říká"
+}

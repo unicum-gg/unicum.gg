@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Theo từng trục",
+  "by-server": "Theo máy chủ",
+  "community-verdict": "Nhận định của cộng đồng",
+  "every-server-one-average": "Mỗi máy chủ, một mức trung bình",
+  "n-shown": ", hiển thị {count}",
+  "opinion": "{count, plural, other {# ý kiến}}",
+  "rate-the": "Tỷ lệ {mapName}",
+  "same-map-different-metas": "Cùng mặt đất, meta khác nhau",
+  "the-same-map-by-how": "Cùng một bản đồ, phân theo khả năng chơi tốt của người bình chọn",
+  "what-players-wrote": "Người chơi đã viết gì",
+  "who-is-saying-it": "Ai đang nói điều đó"
+}

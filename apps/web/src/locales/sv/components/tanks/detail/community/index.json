@@ -1,7 +1,7 @@
 {
   "axis-by-axis": "Axel för axel",
-  "by-server": "Efter server",
-  "community-verdict": "Gemenskapsutlåtande",
+  "by-server": "Per server",
+  "community-verdict": "Gemenskapens omdöme",
   "every-server-one-average": "Alla servrar, ett genomsnitt",
   "n-shown": ", {count} visas",
   "opinion": "{count, plural, one {# åsikt} other {# åsikter}}",
@@ -10,6 +10,6 @@
   "reputation-against-results": "Anseende jämfört med resultat",
   "same-tank-different-metas": "Samma stridsvagn, olika metaspel",
   "the-same-tank-by-how": "Samma stridsvagn, uppdelad efter de röstandes skicklighet",
-  "what-players-wrote": "Vad spelare skrev",
+  "what-players-wrote": "Vad spelarna skrev",
   "who-is-saying-it": "Vem säger det"
 }

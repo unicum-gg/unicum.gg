@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Ešte pár slov: zostáva {count}.",
+  "could-not-withdraw": "Lahko to neodvoláte. Skúste znova o chvíľu.",
+  "hide-the-detailed-axes": "Skryť podrobné osi",
+  "not-enough-battles": "Váš účet nemá odohraných dosť bitiek na to, aby sa hlas započítal.",
+  "published-once-read": "Zverejní sa, keď ho moderátor prečíta. Vaše zvezdice sa započítajú okamžite.",
+  "rate-it-in-detail": "Ohodnoťte ho podrobne (voliteľné)",
+  "review": {
+    "none": "Ocena shranjena.",
+    "queued": "Ocena shranjena. Vaša recenzia čaká na moderátora.",
+    "published": "Ocena shranjena. Vaša recenzia je už zverejnené.",
+    "pending": "Ocena shranjena. Vaša recenzia stále čaká na moderátora.",
+    "rejected": "Ocena shranjena. Vaša predchádzajúca recenzia nebola zverejnená, takže sa započítajú iba vaše zvezdice.",
+    "closed": "Ocena shranjena. Písané názory sú momentálne zatvorené, takže text sa neuchoval."
+  },
+  "review-length": "Vaša recenzia musí mať od {min} do {max} znakov.",
+  "save-failed": "To sa nepodarilo uložiť. Skúste to znova o okamih.",
+  "say-why-optional": "Povedzte prečo (neobvezno)",
+  "signed-with": "Podpísané vašimi {battles} bitkami za posledných 30 dni",
+  "submit-my-rating": "Pošlji mojo oceno",
+  "too-many-edits": "Naraz je to priveľa úprav. Počkajte minútu.",
+  "update-my-rating": "Posodobi mojo oceno",
+  "what-it-is-good-at": "Kde sa bitka rozhoduje, ktorá strana to má ľahšie a komu by malo vyhovovať, že je sem poslano.",
+  "withdraw": "Stiahnuť",
+  "your-rating-has-been-withdrawn": "Vaše hodnotenie bolo stiahnuté.",
+  "your-review-is-waiting-on": "Vaša recenzia čaká na moderátora. Tu ju vidíte iba vy.",
+  "your-review-was-not-published": "Vaša recenzia nebola zverejnená. Vaše zvezdice sa však stále započítavajú do priemeru."
+}

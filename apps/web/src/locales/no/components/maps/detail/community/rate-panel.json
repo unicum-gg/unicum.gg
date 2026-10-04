@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Vi har ikke lest rekorden din ennå. Vi har nettopp spurt Wargaming etter den, så prøv igjen om et øyeblikk.",
+  "checking-record": "Sjekker rekorden din ...",
+  "fetching-your-record": "Vi henter rekorden din",
+  "have-you-played-here": "Har du spilt her?",
+  "more-to-go": "{count} kamper igjen",
+  "more-to-go-one": "{count} kamp igjen",
+  "sign-in-to-rate": "Logg inn med Wargaming-kontoen din for å vurdere dette kartet. Ingen velger hvor de blir sendt, så vi ber om kamper på kontoen din i stedet for på dette kartet. Wargaming publiserer ingen rekord per kart for alle, og vi vil ikke påstå at vi har utført en sjekk vi ikke har gjort.",
+  "sign-in-to-rate-it": "Logg inn for å vurdere det",
+  "signed-in-on": "Logget inn på {region}",
+  "too-few-battles": "Kontoen din har {played} kamper. Vi ber om {required} før en stemme på {map} teller, noe som tilsvarer rundt tjue gjennomspillinger av hvert kart i rotasjonen, slik at en vurdering kommer fra noen som faktisk har vært her."
+}

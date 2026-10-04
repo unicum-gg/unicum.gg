@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Minden pályát öt pontból értékelnek azok a játékosok, akiket oda küldenek. Senki sem választja meg, hol játszik, ezért a szavazat a fiókon lejátszott csatákat kéri számon, nem a pályán lejátszottakat, és az eredményt az alapján bontják fel, hogy a szavazók milyen jól játszanak.",
+  "nobody-has-rated-a-map-yet": "Egyetlen pálya sem kapott még értékelést. Az első szavazatok a pályaoldalakon adhatók le.",
+  "think": "gondolj",
+  "title": "Amit a játékosok {think} a pályákról",
+  "votes-across-maps": "Összesen {totalVotes} szavazat {ratedMaps} értékelt pályán szerte."
+}

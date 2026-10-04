@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks -kartta ({region})",
   "description": "{map}: {width} × {height} m:n World of Tanks -kartta.",
-  "description-modes": "{map}: {width} × {height} m:n World of Tanks -kartta, jolla pelataan pelimuotoja {modes}."
+  "description-modes": "{map}: {width} × {height} m:n World of Tanks -kartta, jolla pelataan pelimuotoja {modes}.",
+  "community": {
+    "title": "Pelaajien arvostelut kartasta {map} ja yhteisön arvosana ({region})",
+    "description": "Mitä pelaajat ajattelevat kartasta {map}: yhteisön arvosana viidestä, jaoteltuna äänestäjien pelitaidon mukaan, sekä kirjalliset tuomiot tileiltä, joiden taustalla on taisteluita. Tasapaino, monipuolisuus, sujuvuus ja se, onko jokaisella ajoneuvoluokalla siellä tehtävä."
+  },
+  "history": {
+    "title": "Kartan {map} muutosten historia ({region}), uudistukset päivityksittäin",
+    "description": "Kaikki karttaan {map} tallennetut muutokset World of Tanks -päivitysten yli: tukikohdat, aloituspaikat ja pelialue, joita Wargaming siirsi versio versiolta, piirrettynä siihen minikarttaan, jolla ne siirrettiin."
+  }
 }

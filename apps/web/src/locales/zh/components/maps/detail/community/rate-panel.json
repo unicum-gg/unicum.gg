@@ -1,0 +1,12 @@
+{
+  "block-no-record": "我们还未阅读您的纪录。我们刚向默认询问了您的纪录，请稍后再试。",
+  "checking-record": "正在检查您的纪录……",
+  "fetching-your-record": "正在获取您的纪录",
+  "have-you-played-here": "您在这里对战过吗？",
+  "more-to-go": "还需要进行{count}场战斗",
+  "more-to-go-one": "还需要进行{count}场战斗",
+  "sign-in-to-rate": "使用您的默认账号登录，为此地图评分。没有人能选择自己被发送到哪里，因此我们要求提供您账号上的战斗场次，而不是此地图上的战斗场次：默认不会为任何人发布每张地图的纪录，我们也不会声称检查过并未检查的内容。",
+  "sign-in-to-rate-it": "登录后评分",
+  "signed-in-on": "已在{region}登录",
+  "too-few-battles": "您的账号进行过{played}场战斗。在对{map}进行投票前，我们要求至少有{required}场战斗，这大约相当于在轮换中的每张地图上经过二十次，以确保评判来自实际到过这里的人。"
+}

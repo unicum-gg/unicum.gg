@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Minden szavazat a szavazó saját rekordjával van hitelesítve. A Wargaming senkiről sem tesz közzé pályánkénti rekordot, ezért a szavazat csak azt bizonyítja, hogy a szerző játszik, nem pedig azt, hogy ide küldték.",
+  "every-vote-signed-average": "Minden szavazat a szavazó saját rekordjával van hitelesítve, az elmúlt 30 napban átlagosan {battles} csatával. A Wargaming senkiről sem tesz közzé pályánkénti rekordot, ezért a szavazat csak azt bizonyítja, hogy a szerző játszik, nem pedig azt, hogy ide küldték.",
+  "fun": "Szórakozás",
+  "how-good-the-map-is": "Mennyire jó a térkép",
+  "how-much-people-enjoy-it": "Mennyire élvezik, hogy ide vannak elküldve",
+  "if-you-play-here": "Ha játszol, pontosan te vagy az, akire ez az oldal vár.",
+  "nobody-has-rated-this-map": "Senki sem értékelte még ezt a térképet.",
+  "overall": "Összesen",
+  "votes": "{count} szavazat",
+  "votes-one": "{count} szavazat"
+}

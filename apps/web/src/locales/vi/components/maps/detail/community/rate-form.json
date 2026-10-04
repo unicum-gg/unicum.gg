@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Thêm vài từ nữa: còn {count}.",
+  "could-not-withdraw": "Không thể rút lại nội dung đó. Hãy thử lại sau một khoảnh khắc.",
+  "hide-the-detailed-axes": "Ẩn các trục chi tiết",
+  "not-enough-battles": "Tài khoản của bạn chưa chơi đủ trận đấu để bình chọn được tính.",
+  "published-once-read": "Được đăng sau khi người kiểm duyệt đã đọc. Số lượng sao của bạn được tính ngay lập tức.",
+  "rate-it-in-detail": "Đánh giá chi tiết (tùy chọn)",
+  "review": {
+    "none": "Đã lưu đánh giá.",
+    "queued": "Đã lưu đánh giá. Đánh giá của bạn đang được người kiểm duyệt xem xét.",
+    "published": "Đã lưu đánh giá. Đánh giá của bạn đã được đăng.",
+    "pending": "Đã lưu đánh giá. Đánh giá của bạn vẫn đang chờ người kiểm duyệt.",
+    "rejected": "Đã lưu đánh giá. Đánh giá trước đó của bạn không được đăng, vì vậy chỉ số sao của bạn được tính.",
+    "closed": "Đã lưu đánh giá. Ý kiến bằng văn bản hiện đang bị đóng, vì vậy phần văn bản không được giữ lại."
+  },
+  "review-length": "Đánh giá của bạn cần có từ {min} đến {max} ký tự.",
+  "save-failed": "Không thể lưu nội dung đó. Hãy thử lại sau một khoảnh khắc.",
+  "say-why-optional": "Nêu lý do (không bắt buộc)",
+  "signed-with": "Được xác thực bằng {battles} trận đấu bạn đã chơi trong 30 ngày qua",
+  "submit-my-rating": "Gửi đánh giá của tôi",
+  "too-many-edits": "Bạn đã chỉnh sửa quá nhiều cùng lúc. Hãy đợi một phút.",
+  "update-my-rating": "Cập nhật đánh giá của tôi",
+  "what-it-is-good-at": "Nơi trận đấu được quyết định, bên nào dễ chơi hơn và ai nên muốn được gửi đến đây.",
+  "withdraw": "Rút lại",
+  "your-rating-has-been-withdrawn": "Đánh giá của bạn đã được rút lại.",
+  "your-review-is-waiting-on": "Đánh giá của bạn đang chờ người kiểm duyệt. Chỉ bạn có thể xem đánh giá này tại đây.",
+  "your-review-was-not-published": "Đánh giá của bạn không được đăng. Số lượng sao của bạn vẫn được tính vào mức trung bình."
+}

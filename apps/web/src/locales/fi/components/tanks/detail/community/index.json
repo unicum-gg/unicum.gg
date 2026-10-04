@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Akseli kerrallaan",
-  "by-server": "Palvelin",
-  "community-verdict": "Yhteisön tuomio",
+  "axis-by-axis": "Akselikohtaisesti",
+  "by-server": "Palvelimen mukaan",
+  "community-verdict": "Yhteisön arvio",
   "every-server-one-average": "Jokainen palvelin, yksi keskiarvo",
   "n-shown": ", näytetään {count}",
   "opinion": "{count, plural, one {# mielipide} other {# mielipiteet}}",

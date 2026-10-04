@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Vi har inte läst ditt rekord ännu. Vi frågade just Wargaming efter det, så försök igen om ett ögonblick.",
+  "checking-record": "Kontrollerar ditt rekord...",
+  "fetching-your-record": "Vi hämtar ditt rekord",
+  "have-you-played-here": "Har du spelat här?",
+  "more-to-go": "{count} strider kvar",
+  "more-to-go-one": "{count} strid kvar",
+  "sign-in-to-rate": "Logga in med ditt Wargaming-konto för att gradera den här kartan. Ingen väljer vart de skickas, så vi frågar efter strider på ditt konto i stället för på den här kartan. Wargaming publicerar inget rekord per karta för vem som helst, och vi kommer inte att påstå att vi har gjort en kontroll som vi inte har gjort.",
+  "sign-in-to-rate-it": "Logga in för att gradera den",
+  "signed-in-on": "Inloggad på {region}",
+  "too-few-battles": "Ditt konto har {played} strider. Vi ber om {required} innan en röst på {map} räknas. Det motsvarar ungefär tjugo genomspelningar av varje karta i rotationen, så att ett omdöme kommer från någon som faktiskt har varit här."
+}

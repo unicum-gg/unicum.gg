@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "축별로",
+  "by-server": "서버별",
+  "community-verdict": "커뮤니티 평가",
+  "every-server-one-average": "서버별 평균 하나",
+  "n-shown": ", {count}개 표시됨",
+  "opinion": "{count, plural, other {#개 의견}}",
+  "rate-the": "{mapName} 평점 남기기",
+  "same-map-different-metas": "같은 전장, 다른 메타",
+  "the-same-map-by-how": "같은 지도, 투표자의 플레이 실력별",
+  "what-players-wrote": "플레이어들이 작성한 내용",
+  "who-is-saying-it": "누가 말하고 있나요"
+}

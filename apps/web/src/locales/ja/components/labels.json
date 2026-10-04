@@ -41,6 +41,44 @@
     "beginnerFriendliness": "まだ学習中の場合に、どの程度ミスを許容してくれるか。",
     "versatility": "どのマップでも、どのチームでも機能しますか？"
   },
+  "rating-axes-short": {
+    "overall": "総合",
+    "fun": "楽しさ",
+    "firepower": "火力",
+    "armour": "装甲",
+    "mobility": "機動性",
+    "gunHandling": "砲操作性",
+    "concealment": "迷彩",
+    "beginnerFriendliness": "初心者向け",
+    "versatility": "汎用性"
+  },
+  "map-rating-axes": {
+    "overall": "総合",
+    "fun": "楽しさ",
+    "balance": "バランス",
+    "variety": "多様性",
+    "flow": "流れ",
+    "classFairness": "車輌クラスの公平性",
+    "beginnerFriendliness": "初心者向け"
+  },
+  "map-rating-axis-hints": {
+    "overall": "あらゆる要素を考慮した場合、このマップはどの程度良いですか？",
+    "fun": "ここへ送られることをどの程度楽しめますか？",
+    "balance": "両陣営は同じ確率で開始しますか？",
+    "variety": "複数のプレイ方法がありますか、それとも全員が同じ道を通りますか？",
+    "flow": "戦闘は進行しますか、それとも膠着状態になりますか？",
+    "classFairness": "すべての車両クラスにここでの役割がありますか？",
+    "beginnerFriendliness": "まだ学習中の場合、どの程度ミスを許容してくれますか？"
+  },
+  "map-rating-axes-short": {
+    "overall": "総合",
+    "fun": "楽しさ",
+    "balance": "バランス",
+    "variety": "多様性",
+    "flow": "流れ",
+    "classFairness": "車輌クラス",
+    "beginnerFriendliness": "初心者"
+  },
   "voter-brackets": {
     "unknown": "評価なし",
     "learning": "学習中",

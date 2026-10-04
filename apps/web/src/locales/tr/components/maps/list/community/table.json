@@ -1,0 +1,15 @@
+{
+  "agreement": "Uyum",
+  "camouflage": "Haritanın geçtiği sezon.",
+  "fun": "Eğlence",
+  "map": "Harita",
+  "overall": "Genel",
+  "season": "Sezon",
+  "tips": {
+    "overall": "Oyuncuların ne kadar iyi olduğunu düşündüğü. Her harita oyununun ortalamasına doğru daraltılmış bir ortalamaya göre sıralanır, bu nedenle dört oy alan bir harita dört yüz oy alan bir haritayı geçemez.",
+    "fun": "Oyuncuların buraya gönderilmekten ne kadar keyif aldığı, bu düzenli olarak aynı soru değildir.",
+    "votes": "Verilen oylar, her biri arkasında gerçek savaşlar bulunan bir hesaptan.",
+    "consensus": "Oy verenlerin ne kadar ayrı düştüğü. Oyuncuların uzlaşamadığı haritaları bulmak için azalan sıralama yapın, bu daha ilginç listedir."
+  },
+  "votes": "Oylar"
+}

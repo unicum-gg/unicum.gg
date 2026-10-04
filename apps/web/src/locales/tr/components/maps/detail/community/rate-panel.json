@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Rekorunuzu henüz okumadık. Wargaming’den az önce istedik, bu yüzden bir an sonra tekrar deneyin.",
+  "checking-record": "Rekorunuz kontrol ediliyor...",
+  "fetching-your-record": "Rekorunuzu alıyoruz",
+  "have-you-played-here": "Burada oynadınız mı?",
+  "more-to-go": "{count} savaş daha kaldı",
+  "more-to-go-one": "{count} savaş daha kaldı",
+  "sign-in-to-rate": "Bu haritayı değerlendirmek için Wargaming hesabınızla giriş yapın. Kimse nereye gönderileceğini seçmez, bu yüzden bu harita yerine hesabınızdaki savaşları soruyoruz: Wargaming hiç kimse için harita başına rekor yayınlamaz ve yapmadığımız bir kontrolü yaptığımızı iddia etmeyeceğiz.",
+  "sign-in-to-rate-it": "Değerlendirmek için giriş yapın",
+  "signed-in-on": "{region} bölgesinde oturum açıldı",
+  "too-few-battles": "Hesabınızda {played} savaş var. {map} için bir oyun sayılmadan önce {required} savaş istiyoruz. Bu, rotasyondaki her haritada yaklaşık yirmi geçiş anlamına geliyor, böylece sonuç gerçekten burada bulunmuş birinden geliyor."
+}

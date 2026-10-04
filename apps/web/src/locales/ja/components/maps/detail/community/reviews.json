@@ -1,0 +1,7 @@
+{
+  "battles-overall": "総合{battles}戦闘",
+  "battles-recently": "30 日間で{battles}戦闘",
+  "no-written-opinions-yet": "記載された意見はまだありません。プレイすれば、あなたの意見が最初になります。",
+  "win-rate": "勝率{winrate}%",
+  "written-on": "{gameVersion}に記載"
+}

@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Cik piedodošs tas ir, ja vēl tikai mācies.",
     "versatility": "Vai tas darbojas jebkurā kartē un jebkurā komandā?"
   },
+  "rating-axes-short": {
+    "overall": "Kopējā",
+    "fun": "Izklaide",
+    "firepower": "Ugunsjauda",
+    "armour": "Bruņas",
+    "mobility": "Mobilitāte",
+    "gunHandling": "Vadāmība",
+    "concealment": "Kamuflāža",
+    "beginnerFriendliness": "Iesācējs",
+    "versatility": "Daudzpusība"
+  },
+  "map-rating-axes": {
+    "overall": "Kopējā",
+    "fun": "Izklaide",
+    "balance": "Līdzsvars",
+    "variety": "Daudzveidība",
+    "flow": "Kaujas plūsma",
+    "classFairness": "Taisnīgums pret klasēm",
+    "beginnerFriendliness": "Piemērota iesācējiem"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Cik laba ir šī karte, ņemot vērā visu?",
+    "fun": "Cik ļoti tev patīk, ka tevi nosūta uz šo karti?",
+    "balance": "Vai abas puses sāk ar vienādām iespējām?",
+    "variety": "Vai to var spēlēt vairākos veidos, vai arī visi izmanto vienu un to pašu ceļu?",
+    "flow": "Vai kauja virzās uz priekšu vai iestrēgst neizšķirtā stāvoklī?",
+    "classFairness": "Vai katrai transportlīdzekļu klasei te ir savs uzdevums?",
+    "beginnerFriendliness": "Cik piedodoša tā ir, ja tu vēl tikai mācies?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Kopējā",
+    "fun": "Izklaide",
+    "balance": "Līdzsvars",
+    "variety": "Daudzveidība",
+    "flow": "Kaujas plūsma",
+    "classFairness": "Klases",
+    "beginnerFriendliness": "Iesācējs"
+  },
   "voter-brackets": {
     "unknown": "Nepārtraukts",
     "learning": "Mācās",

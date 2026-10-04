@@ -1,5 +1,6 @@
 {
   "battles": "{count} Csaták",
+  "battles-recent": "{count} csata 30 nap alatt",
   "no-votes": "nem Szavazok",
   "rated-higher": "A jobb játékosok {stars} csillaggal magasabbra értékelik, mint a szerver többi játékosa. Ez a tank meghálálja a hozzáértést.",
   "rated-lower": "A jobb játékosok {stars} csillaggal alacsonyabbra értékelik, mint a szerver többi játékosa. Hízelgőnek tűnik, amíg nem kérnek tőle valami komolyat.",

@@ -1,0 +1,15 @@
+{
+  "agreement": "Shoda",
+  "camouflage": "Sezóna, ve které se mapa odehrává.",
+  "fun": "Zábava",
+  "map": "Mapa",
+  "overall": "Celkově",
+  "season": "Sezóna",
+  "tips": {
+    "overall": "Jak dobře si hráči myslí, že si vede. Pořadí je založeno na průměru staženém směrem k průměru hlasů všech map, takže mapa se čtyřmi hlasy nemůže překonat mapu se čtyřmi sty hlasy.",
+    "fun": "Jak moc si hráči užívají, když jsou sem odesláni, což pravidelně není totéž.",
+    "votes": "Hlasy, každý z účtu, za kterým stojí skutečné bitvy.",
+    "consensus": "Jak daleko od sebe se voliči nacházejí. Seřaďte sestupně mapy, na kterých se hráči nemohou shodnout, což je zajímavější seznam."
+  },
+  "votes": "Hlasy"
+}

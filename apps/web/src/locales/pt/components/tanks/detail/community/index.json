@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Eixo a eixo",
+  "axis-by-axis": "Eixo por eixo",
   "by-server": "Por servidor",
-  "community-verdict": "Veredicto da comunidade",
+  "community-verdict": "Veredito da comunidade",
   "every-server-one-average": "Todos os servidores, uma só média",
   "n-shown": ", {count} exibidos",
   "opinion": "{count, plural, one {# opinião} other {# opiniões}}",

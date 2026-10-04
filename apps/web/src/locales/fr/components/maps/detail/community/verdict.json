@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Chaque vote est associé au record personnel du votant. Wargaming ne publie aucun record par carte pour qui que ce soit, un vote prouve donc que son auteur joue, et non qu’il a été envoyé ici.",
+  "every-vote-signed-average": "Chaque vote est associé au record personnel du votant, avec en moyenne {battles} batailles au cours des 30 derniers jours. Wargaming ne publie aucun record par carte pour qui que ce soit, un vote prouve donc que son auteur joue, et non qu’il a été envoyé ici.",
+  "fun": "Amusement",
+  "how-good-the-map-is": "Qualité de la carte",
+  "how-much-people-enjoy-it": "Plaisir des personnes à être envoyées ici",
+  "if-you-play-here": "Si vous faites des parties, vous êtes exactement la personne que cette page attend.",
+  "nobody-has-rated-this-map": "Personne n’a encore noté cette carte.",
+  "overall": "Global",
+  "votes": "{count} votes",
+  "votes-one": "{count} vote"
+}

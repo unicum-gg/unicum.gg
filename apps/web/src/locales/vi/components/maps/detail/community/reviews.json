@@ -1,0 +1,7 @@
+{
+  "battles-overall": "Tổng cộng {battles}",
+  "battles-recently": "{battles} trận đấu trong 30 ngày",
+  "no-written-opinions-yet": "Chưa có ý kiến bằng văn bản. Nếu bạn chơi, ý kiến của bạn sẽ là ý kiến đầu tiên.",
+  "win-rate": "{winrate}% tỷ lệ thắng",
+  "written-on": "đã viết vào {gameVersion}"
+}

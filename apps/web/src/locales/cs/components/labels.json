@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Jak moc odpouští chyby, když se ještě učíte.",
     "versatility": "Funguje na každé mapě a v každém týmu?"
   },
+  "rating-axes-short": {
+    "overall": "Celkově",
+    "fun": "Zábava",
+    "firepower": "Palebná síla",
+    "armour": "Pancíř",
+    "mobility": "Pohyblivost",
+    "gunHandling": "Ovládání děla",
+    "concealment": "Maskování",
+    "beginnerFriendliness": "Pro začátečníky",
+    "versatility": "Všestrannost"
+  },
+  "map-rating-axes": {
+    "overall": "Celkově",
+    "fun": "Zábava",
+    "balance": "Rovnováha",
+    "variety": "Rozmanitost",
+    "flow": "Plynulost",
+    "classFairness": "Spravedlnost tříd",
+    "beginnerFriendliness": "Vhodnost pro začátečníky"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Jak dobrá je tato mapa po všech stránkách?",
+    "fun": "Jak moc si užíváte, když jste sem odesláni?",
+    "balance": "Začínají obě strany se stejnou šancí?",
+    "variety": "Existuje více způsobů, jak ji hrát, nebo všichni volí jednu cestu?",
+    "flow": "Probíhá bitva, nebo se zastaví v patové situaci?",
+    "classFairness": "Má zde každá třída vozidel svou úlohu?",
+    "beginnerFriendliness": "Jak moc odpouští chyby, pokud se stále učíte?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Celkově",
+    "fun": "Zábava",
+    "balance": "Rovnováha",
+    "variety": "Rozmanitost",
+    "flow": "Plynulost",
+    "classFairness": "Třídy",
+    "beginnerFriendliness": "Začátečník"
+  },
   "voter-brackets": {
     "unknown": "Neohodnoceno",
     "learning": "Učí se",

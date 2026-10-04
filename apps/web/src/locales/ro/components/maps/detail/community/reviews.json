@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} în total",
+  "battles-recently": "{battles} bătălii în 30 de zile",
+  "no-written-opinions-yet": "Nu există încă opinii scrise. Dacă joci, a ta ar fi prima.",
+  "win-rate": "Rată de victorii de {winrate}%",
+  "written-on": "scrisă în {gameVersion}"
+}

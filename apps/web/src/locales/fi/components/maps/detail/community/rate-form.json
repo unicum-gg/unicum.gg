@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Vielä muutama sana: {count} jäljellä.",
+  "could-not-withdraw": "Voisi olla, ettei sitä voitu peruuttaa. Yritä hetken kuluttua uudelleen.",
+  "hide-the-detailed-axes": "Piilota yksityiskohtaiset akselit",
+  "not-enough-battles": "Tililläsi ei ole pelattu riittävästi, jotta äänestä laskettaisiin.",
+  "published-once-read": "Julkaistaan, kun moderaattori on lukenut sen. Tähdet lasketaan heti.",
+  "rate-it-in-detail": "Arvioi yksityiskohtaisesti (valinnainen)",
+  "review": {
+    "none": "Arvio tallennettu.",
+    "queued": "Arvio tallennettu. Arvostelusi odottaa moderaattoria.",
+    "published": "Arvio tallennettu. Arvostelusi on jo julkaistu.",
+    "pending": "Arvio tallennettu. Arvostelusi odottaa edelleen moderaattoria.",
+    "rejected": "Arvio tallennettu. Aiempi arvostelusi ei tullut julkaistuksi, joten vain tähtesi lasketaan.",
+    "closed": "Arvio tallennettu. Kirjoitetut mielipiteet ovat tällä hetkellä suljettuina, joten tekstiä ei säilytetty."
+  },
+  "review-length": "Arvostelusi pituuden on oltava {min}–{max} merkkiä.",
+  "save-failed": "Sitä ei voitu tallentaa. Yritä hetken kuluttua uudelleen.",
+  "say-why-optional": "Kerro miksi (valinnainen)",
+  "signed-with": "Vahvistettu tilisi viimeisten 30 päivän {battles} taistelulla",
+  "submit-my-rating": "Lähetä arvioni",
+  "too-many-edits": "Muutoksia on kerralla paljon. Odota minuutti.",
+  "update-my-rating": "Päivitä arvioni",
+  "what-it-is-good-at": "Missä taistelu ratkaistaan, kummalla puolella on helpompaa ja kenen pitäisi haluta tulla lähetetyksi tänne.",
+  "withdraw": "Peruuta",
+  "your-rating-has-been-withdrawn": "Arviosi on peruttu.",
+  "your-review-is-waiting-on": "Arvostelusi odottaa moderaattoria. Vain sinä voit nähdä sen täällä.",
+  "your-review-was-not-published": "Arvosteluasi ei julkaistu. Tähtesi lasketaan silti keskiarvoon."
+}

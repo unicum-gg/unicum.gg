@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Cada voto está respaldado por el récord del propio votante. Wargaming no publica un récord por mapa de nadie, así que lo que demuestra un voto es que su autor juega, no que haya sido enviado aquí.",
+  "every-vote-signed-average": "Cada voto está respaldado por el récord del propio votante, con un promedio de {battles} batallas en los últimos 30 días. Wargaming no publica un récord por mapa de nadie, así que lo que demuestra un voto es que su autor juega, no que haya sido enviado aquí.",
+  "fun": "Diversión",
+  "how-good-the-map-is": "Qué tal es el mapa",
+  "how-much-people-enjoy-it": "Cuánto disfrutan las personas de ser enviadas aquí",
+  "if-you-play-here": "Si juegas, eres exactamente a quien espera esta página.",
+  "nobody-has-rated-this-map": "Nadie ha valorado este mapa todavía.",
+  "overall": "General",
+  "votes": "{count} votos",
+  "votes-one": "{count} voto"
+}

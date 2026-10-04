@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Todos os mapas avaliados numa escala de cinco pelas pessoas que são enviadas para eles. Ninguém escolhe onde joga, por isso um voto pede batalhas na conta, não no mapa, e o veredito é dividido pela forma como os votantes jogam.",
+  "nobody-has-rated-a-map-yet": "Nenhum mapa foi avaliado ainda. Os primeiros votos estão nas páginas dos mapas.",
+  "think": "pensar",
+  "title": "O que os jogadores costumam {think} sobre os mapas",
+  "votes-across-maps": "{totalVotes} votos em toda a parte, em {ratedMaps} mapas avaliados."
+}

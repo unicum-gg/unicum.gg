@@ -1,0 +1,15 @@
+{
+  "agreement": "Overeenstemming",
+  "camouflage": "Het seizoen waarin de kaart zich afspeelt.",
+  "fun": "Plezier",
+  "map": "Kaart",
+  "overall": "Totaal",
+  "season": "Seizoen",
+  "tips": {
+    "overall": "Hoe goed spelers denken dat de kaart is. Gerangschikt op een gemiddelde dat naar het gemiddelde van alle kaartstemmen is toegetrokken, zodat een kaart met vier stemmen een kaart met vierhonderd stemmen niet kan overtreffen.",
+    "fun": "Hoeveel plezier spelers eraan beleven om hierheen te worden verzonden, wat regelmatig niet hetzelfde is.",
+    "votes": "Uitgebrachte stemmen, allemaal van een account met echte gevechten achter de rug.",
+    "consensus": "Hoe ver de stemmers uit elkaar liggen. Sorteer aflopend voor de kaarten waar spelers het niet over eens kunnen worden, de interessantere lijst."
+  },
+  "votes": "Stemmen"
+}

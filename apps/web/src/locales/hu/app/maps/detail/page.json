@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks-térkép ({region})",
   "description": "{map}: egy {width} × {height} m méretű World of Tanks-térkép.",
-  "description-modes": "{map}: egy {width} × {height} m méretű World of Tanks-térkép, ahol ezek a játékmódok játszhatók: {modes}."
+  "description-modes": "{map}: egy {width} × {height} m méretű World of Tanks-térkép, ahol ezek a játékmódok játszhatók: {modes}.",
+  "community": {
+    "title": "{map} játékosértékelései és közösségi értékelése ({region})",
+    "description": "Mit gondolnak a játékosok a(z) {map} pályáról: a közösség ötös skálán adott értékelése, a szavazók játéktudása szerint csoportosítva, valamint írásos verdiktek olyan fiókoktól, amelyek mögött valódi csaták állnak. Egyensúly, változatosság, játékmenet és az, hogy minden járműosztálynak jut-e feladat."
+  },
+  "history": {
+    "title": "A(z) {map} változásainak előzményei ({region}), frissítésenkénti átdolgozások",
+    "description": "A(z) {map} minden rögzített változása a World of Tanks frissítései során: a bázisok, kezdőpontok és a játéktér, amelyeket a Wargaming áthelyezett, verziónként, azon a minitérképen megjelenítve, amelyen áthelyezték őket."
+  }
 }

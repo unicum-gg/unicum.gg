@@ -8,13 +8,14 @@
   "published-once-read": "Va fi publicată după ce un moderator o citește. Stelele tale sunt luate în calcul imediat.",
   "rate-it-in-detail": "Evaluează-l în detaliu (opțional)",
   "review": {
-    "none": "Evaluarea a fost salvată.",
+    "none": "Evaluare salvată.",
     "queued": "Evaluare salvată. Recenzia ta este la un moderator.",
     "published": "Evaluare salvată. Recenzia ta este deja publicată.",
     "pending": "Evaluare salvată. Recenzia ta încă așteaptă un moderator.",
     "rejected": "Evaluare salvată. Recenzia ta anterioară nu a fost publicată, așa că doar stelele tale sunt luate în calcul.",
     "closed": "Evaluare salvată. Opiniile scrise sunt închise momentan, așa că textul nu a fost păstrat."
   },
+  "review-length": "Recenzia ta trebuie să aibă între {min} și {max} caractere.",
   "save-failed": "Ar putea salva evaluarea. Încearcă din nou peste puțin timp.",
   "say-why-optional": "Spune de ce (opțional)",
   "signed-with": "Semnată cu cele {battles} bătălii ale tale",
@@ -22,7 +23,7 @@
   "too-many-edits": "Sunt multe modificări deodată. Așteaptă un minut.",
   "update-my-rating": "Actualizează evaluarea mea",
   "what-it-is-good-at": "La ce este bun, la ce nu este bun și cine ar trebui să-l joace.",
-  "withdraw": "Retragere",
+  "withdraw": "Retrage",
   "your-rating-has-been-withdrawn": "Evaluarea ta a fost retrasă.",
   "your-review-is-waiting-on": "Recenzia ta așteaptă un moderator. Doar tu o poți vedea aici.",
   "your-review-was-not-published": "Recenzia ta nu a fost publicată. Stelele tale sunt în continuare incluse în medie."

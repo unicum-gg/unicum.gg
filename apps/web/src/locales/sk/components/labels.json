@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Ako veľmi odpúšťa chyby, keď sa ešte len učíte.",
     "versatility": "Osvedčí sa na každej mape a v každom tíme?"
   },
+  "rating-axes-short": {
+    "overall": "Celkovo",
+    "fun": "Zábava",
+    "firepower": "Palebná sila",
+    "armour": "Brnenie",
+    "mobility": "Pohybovosť",
+    "gunHandling": "Ovládanie dela",
+    "concealment": "Kamufláža",
+    "beginnerFriendliness": "Začiatočník",
+    "versatility": "Vsestranski"
+  },
+  "map-rating-axes": {
+    "overall": "Celkovo",
+    "fun": "Zábava",
+    "balance": "Rovnováha",
+    "variety": "Rozmanitosť",
+    "flow": "Plynulosť",
+    "classFairness": "Spravodlivosť tried",
+    "beginnerFriendliness": "Prívetivé pre začiatočníkov"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Aká dobrá je táto mapa po zohľadnení všetkého?",
+    "fun": "Ako veľmi si užívate, keď vás sem pošlú?",
+    "balance": "Začínajú obe strany s rovnakou šancou?",
+    "variety": "Dá sa hrať viacerými spôsobmi alebo všetci používajú jednu cestu?",
+    "flow": "Posúva sa bitka alebo sa zastaví v patovej situácii?",
+    "classFairness": "Má tu každá trieda vozidiel svoju úlohu?",
+    "beginnerFriendliness": "Ako veľa odpúšťa, ak sa ešte len učíte?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Celkovo",
+    "fun": "Zábava",
+    "balance": "Rovnováha",
+    "variety": "Rozmanitosť",
+    "flow": "Plynulosť",
+    "classFairness": "Triedy",
+    "beginnerFriendliness": "Začiatočník"
+  },
   "voter-brackets": {
     "unknown": "Neohodnotené",
     "learning": "Učí sa",

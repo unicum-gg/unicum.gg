@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "แยกตามแต่ละแกน",
-  "by-server": "แยกตามเซิร์ฟเวอร์",
-  "community-verdict": "คำตัดสินจากชุมชน",
+  "axis-by-axis": "แยกตามแกน",
+  "by-server": "ตามเซิร์ฟเวอร์",
+  "community-verdict": "บทสรุปจากชุมชน",
   "every-server-one-average": "ทุกเซิร์ฟเวอร์ ค่าเฉลี่ยเดียว",
   "n-shown": ", แสดง {count} รายการ",
   "opinion": "{count, plural, other {# ความคิดเห็น}}",

@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "За осями",
+  "by-server": "За сервером",
+  "community-verdict": "Вердикт спільноти",
+  "every-server-one-average": "Кожен сервер, один середній показник",
+  "n-shown": ", показано {count}",
+  "opinion": "{count, plural, one {# думка} few {# думки} many {# думок} other {# думки}}",
+  "rate-the": "Рейтинг {mapName}",
+  "same-map-different-metas": "Та сама місцевість, різні мета",
+  "the-same-map-by-how": "Та сама карта, з урахуванням того, наскільки добре грає гравець",
+  "what-players-wrote": "Що написали гравці",
+  "who-is-saying-it": "Хто це каже"
+}

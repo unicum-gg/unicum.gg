@@ -8,9 +8,27 @@
     "servers": "เซิร์ฟเวอร์"
   },
   "links": {
-    "top-players": {
-      "label": "ผู้เล่นที่ดีที่สุด",
-      "description": "ตารางอันดับผู้เล่นตลอดช่วงเวลา"
+    "advances": {
+      "description": "การจัดอันดับระดับ X แบบ 15 ต่อ 15"
+    },
+    "all-maps": {
+      "label": "แผนที่ทั้งหมด",
+      "description": "แผนที่ทุกแห่งในเกม"
+    },
+    "all-tournaments": {
+      "label": "ทัวร์นาเมนต์",
+      "description": "ทัวร์นาเมนต์ทุกรายการ ทั้งที่เปิดและปิดแล้ว"
+    },
+    "battle-type": {
+      "description": "แผนที่ {type}"
+    },
+    "map-changes": {
+      "label": "การเปลี่ยนแปลง",
+      "description": "การปรับปรุงแผนที่แยกตามอัปเดต"
+    },
+    "map-community": {
+      "label": "คะแนนประเมินจากชุมชน",
+      "description": "จัดอันดับโดยผู้เล่นที่ถูกส่งไปที่นั่น"
     },
     "players-onslaught": {
       "description": "ตารางอันดับการบุกรุกแบบจัดอันดับ"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "ตารางอันดับแบตเทิลรอยัล"
     },
-    "top-clans": {
-      "label": "กลุ่มที่ดีที่สุด",
-      "description": "ตารางอันดับแคลนตลอดช่วงเวลา"
+    "servers-population": {
+      "label": "จำนวนผู้เล่นในเซิร์ฟเวอร์",
+      "description": "ผู้เล่นออนไลน์ ทั้งในขณะนี้และตามช่วงเวลา"
     },
     "stronghold": {
       "description": "อันดับการปะทะ"
     },
-    "advances": {
-      "description": "การจัดอันดับระดับ X แบบ 15 ต่อ 15"
+    "tank-changes": {
+      "label": "การเปลี่ยนแปลง",
+      "description": "การเพิ่มและลดความสามารถแยกตามอัปเดต"
     },
-    "tank-performances": {
-      "label": "ผลการเล่น",
-      "description": "อัตราชนะและความเสียหายต่อรถถัง"
-    },
-    "tank-specs": {
-      "label": "ข้อมูลจำเพาะ",
-      "description": "สถิติของรถถังทุกคัน"
+    "tank-community": {
+      "label": "การจัดอันดับของชุมชน",
+      "description": "ให้คะแนนโดยผู้เล่นที่เป็นเจ้าของรถถัง"
     },
     "tank-economics": {
       "label": "เศรษฐศาสตร์",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "เกณฑ์ตราความเชี่ยวชาญ"
     },
-    "tank-changes": {
-      "label": "การเปลี่ยนแปลง",
-      "description": "การเพิ่มและลดความสามารถแยกตามอัปเดต"
+    "tank-performances": {
+      "label": "ผลการเล่น",
+      "description": "อัตราชนะและความเสียหายต่อรถถัง"
     },
-    "tank-community": {
-      "label": "การจัดอันดับของชุมชน",
-      "description": "ให้คะแนนโดยผู้เล่นที่เป็นเจ้าของรถถัง"
+    "tank-specs": {
+      "label": "ข้อมูลจำเพาะ",
+      "description": "สถิติของรถถังทุกคัน"
     },
     "tank-videos": {
       "label": "วิดีโอ",
       "description": "เกมเพลย์จากชุมชน"
     },
-    "all-tournaments": {
-      "label": "ทัวร์นาเมนต์",
-      "description": "ทัวร์นาเมนต์ทุกรายการ ทั้งที่เปิดและปิดแล้ว"
+    "top-clans": {
+      "label": "กลุ่มที่ดีที่สุด",
+      "description": "ตารางอันดับแคลนตลอดช่วงเวลา"
     },
-    "all-maps": {
-      "label": "แผนที่ทั้งหมด",
-      "description": "แผนที่ทุกแห่งในเกม"
-    },
-    "map-changes": {
-      "label": "การเปลี่ยนแปลง",
-      "description": "การปรับปรุงแผนที่แยกตามอัปเดต"
-    },
-    "battle-type": {
-      "description": "แผนที่ {type}"
-    },
-    "servers-population": {
-      "label": "จำนวนผู้เล่นในเซิร์ฟเวอร์",
-      "description": "ผู้เล่นออนไลน์ ทั้งในขณะนี้และตามช่วงเวลา"
+    "top-players": {
+      "label": "ผู้เล่นที่ดีที่สุด",
+      "description": "ตารางอันดับผู้เล่นตลอดช่วงเวลา"
     }
   }
 }

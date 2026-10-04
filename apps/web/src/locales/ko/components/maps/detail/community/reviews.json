@@ -1,0 +1,7 @@
+{
+  "battles-overall": "종합 전투 {battles}회",
+  "battles-recently": "30일 동안 전투 {battles}회",
+  "no-written-opinions-yet": "아직 작성된 의견이 없습니다. 플레이하신다면 첫 번째 의견을 남기게 됩니다.",
+  "win-rate": "승률 {winrate}%",
+  "written-on": "{gameVersion}에 작성됨"
+}

@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "हर अक्ष के अनुसार",
+  "by-server": "सर्वर के अनुसार",
+  "community-verdict": "समुदाय का फैसला",
+  "every-server-one-average": "हर सर्वर का एक औसत",
+  "n-shown": ", {count} दिखाया गया",
+  "opinion": "{count, plural, one {# राय} other {# राय}}",
+  "rate-the": "{mapName} को रेटिंग दें",
+  "same-map-different-metas": "वही ज़मीन, अलग मेटा",
+  "the-same-map-by-how": "वही मानचित्र, वोट देने वाला कितनी अच्छी तरह खेलता है उसके अनुसार",
+  "what-players-wrote": "खिलाड़ियों ने क्या लिखा",
+  "who-is-saying-it": "यह कौन कह रहा है"
+}

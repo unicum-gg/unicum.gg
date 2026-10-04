@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} in totaal",
+  "battles-recently": "{battles} gevechten in 30 dagen",
+  "no-written-opinions-yet": "Nog geen geschreven meningen. Als je speelt, zou die van jou de eerste zijn.",
+  "win-rate": "{winrate}% winstpercentage",
+  "written-on": "geschreven op {gameVersion}"
+}

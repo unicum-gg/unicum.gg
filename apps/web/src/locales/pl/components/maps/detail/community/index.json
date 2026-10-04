@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Według osi",
+  "by-server": "Według serwera",
+  "community-verdict": "Werdykt społeczności",
+  "every-server-one-average": "Każdy serwer, jedna średnia",
+  "n-shown": ", wyświetlono {count}",
+  "opinion": "{count, plural, one {# opinia} few {# opinie} many {# opinii} other {# opinii}}",
+  "rate-the": "Oceń {mapName}",
+  "same-map-different-metas": "Ten sam teren, różne mety",
+  "the-same-map-by-how": "Ta sama mapa według tego, jak dobrze gra głosujący",
+  "what-players-wrote": "Co napisali gracze",
+  "who-is-saying-it": "Kto to mówi"
+}

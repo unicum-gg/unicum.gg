@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "Videoklipi",
+    "community": "Kopiena",
+    "history": "Izmaiņas"
+  },
+  "tab-count": "{tab} ({count})"
+}

@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Hvor tilgivende den er, hvis du stadig lærer.",
     "versatility": "Virker den på alle kort og på alle hold?"
   },
+  "rating-axes-short": {
+    "overall": "Samlet",
+    "fun": "Sjov",
+    "firepower": "Ildkraft",
+    "armour": "Panser",
+    "mobility": "Mobilitet",
+    "gunHandling": "Håndtering",
+    "concealment": "Camouflage",
+    "beginnerFriendliness": "Begynder",
+    "versatility": "Alsidig"
+  },
+  "map-rating-axes": {
+    "overall": "Samlet",
+    "fun": "Sjov",
+    "balance": "Balance",
+    "variety": "Variation",
+    "flow": "Flow",
+    "classFairness": "Retfærdighed mellem klasser",
+    "beginnerFriendliness": "Begyndervenlig"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Hvor god er dette kort, når alt tages i betragtning?",
+    "fun": "Hvor meget nyder du at blive sendt hertil?",
+    "balance": "Starter begge sider med en lige chance?",
+    "variety": "Er der mere end én måde at spille det på, eller tager alle den samme vej?",
+    "flow": "Bevæger kampen sig, eller går den i stå i en fastlåst situation?",
+    "classFairness": "Har hver køretøjsklasse en opgave her?",
+    "beginnerFriendliness": "Hvor tilgivende er det, hvis du stadig er ved at lære?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Samlet",
+    "fun": "Sjov",
+    "balance": "Balance",
+    "variety": "Variation",
+    "flow": "Flow",
+    "classFairness": "Klasser",
+    "beginnerFriendliness": "Begyndervenlighed"
+  },
   "voter-brackets": {
     "unknown": "Ikke bedømt",
     "learning": "Lærer",

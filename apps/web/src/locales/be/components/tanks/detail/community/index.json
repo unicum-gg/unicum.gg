@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Па кожнай восі",
+  "axis-by-axis": "Па восях",
   "by-server": "Па серверы",
-  "community-verdict": "Вердыкты супольнасці",
+  "community-verdict": "Вердыкт супольнасці",
   "every-server-one-average": "Кожны сервер, адно сярэдняе",
   "n-shown": ", паказана {count}",
   "opinion": "{count, plural, one {# меркаванне} few {# меркаванні} many {# меркаванняў} other {# меркаванні}}",

@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "แยกตามแกน",
+  "by-server": "ตามเซิร์ฟเวอร์",
+  "community-verdict": "บทสรุปจากชุมชน",
+  "every-server-one-average": "ทุกเซิร์ฟเวอร์ ค่าเฉลี่ยเดียว",
+  "n-shown": ", แสดงแล้ว {count}",
+  "opinion": "{count, plural, other {# ความคิดเห็น}}",
+  "rate-the": "อัตรา {mapName}",
+  "same-map-different-metas": "พื้นเดียวกัน เมตาแตกต่างกัน",
+  "the-same-map-by-how": "แผนที่เดียวกัน แยกตามระดับการเล่นของผู้โหวต",
+  "what-players-wrote": "สิ่งที่ผู้เล่นเขียน",
+  "who-is-saying-it": "ใครเป็นผู้พูด"
+}

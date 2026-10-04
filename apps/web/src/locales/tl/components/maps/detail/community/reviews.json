@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} sa pangkalahatan",
+  "battles-recently": "{battles} sa loob ng 30 araw",
+  "no-written-opinions-yet": "Wala pang mga isinulat na opinyon. Kung maglalaro ka, magiging iyo ang unang opinyon.",
+  "win-rate": "{winrate}% rate ng panalo",
+  "written-on": "isinulat noong {gameVersion}"
+}

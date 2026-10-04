@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Koliko oprašta pogreške dok još učiš.",
     "versatility": "Funkcionira li na svakoj mapi i u svakoj ekipi?"
   },
+  "rating-axes-short": {
+    "overall": "Sveukupno",
+    "fun": "Zabava",
+    "firepower": "Vatrena moć",
+    "armour": "Oklop",
+    "mobility": "Pokretljivost",
+    "gunHandling": "Rukovanje",
+    "concealment": "Kamuflaža",
+    "beginnerFriendliness": "Početnici",
+    "versatility": "Svestranost"
+  },
+  "map-rating-axes": {
+    "overall": "Sveukupno",
+    "fun": "Zabava",
+    "balance": "Ravnoteža",
+    "variety": "Raznolikost",
+    "flow": "Tijek",
+    "classFairness": "Pravednost klasa",
+    "beginnerFriendliness": "Prilagođeno početnicima"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Koliko je dobra ova mapa, uzimajući sve u obzir?",
+    "fun": "Koliko uživaš kada te pošalju ovamo?",
+    "balance": "Počinju li obje strane s jednakom šansom?",
+    "variety": "Postoji li više od jednog načina igranja ili svi zauzimaju isti put?",
+    "flow": "Kreće li se bitka ili se pretvara u pat-poziciju?",
+    "classFairness": "Ima li svaka klasa vozila svoju ulogu ovdje?",
+    "beginnerFriendliness": "Koliko oprašta pogreške ako još učiš?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Sveukupno",
+    "fun": "Zabava",
+    "balance": "Ravnoteža",
+    "variety": "Raznolikost",
+    "flow": "Tijek",
+    "classFairness": "Klase",
+    "beginnerFriendliness": "Početnici"
+  },
   "voter-brackets": {
     "unknown": "Neocijenjeno",
     "learning": "Učenje",

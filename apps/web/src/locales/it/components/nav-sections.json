@@ -8,9 +8,27 @@
     "servers": "Server"
   },
   "links": {
-    "top-players": {
-      "label": "Top giocatori",
-      "description": "Classifica giocatori di tutti i tempi"
+    "advances": {
+      "description": "Classifica 15 contro 15 di livello X"
+    },
+    "all-maps": {
+      "label": "Tutte le mappe",
+      "description": "Tutte le mappe del gioco"
+    },
+    "all-tournaments": {
+      "label": "Tornei",
+      "description": "Tutti i tornei, aperti e conclusi"
+    },
+    "battle-type": {
+      "description": "Mappe {type}"
+    },
+    "map-changes": {
+      "label": "Modifiche",
+      "description": "Rielaborazioni delle mappe per aggiornamento"
+    },
+    "map-community": {
+      "label": "Valutazioni della community",
+      "description": "Valutato dai giocatori inviati lì"
     },
     "players-onslaught": {
       "description": "Classifica di Aggressione classificata"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Classifica della modalità battle royale"
     },
-    "top-clans": {
-      "label": "Top clan",
-      "description": "Classifica clan di tutti i tempi"
+    "servers-population": {
+      "label": "Popolazione server",
+      "description": "Giocatori online, ora e nel tempo"
     },
     "stronghold": {
       "description": "Classifica delle Schermaglie"
     },
-    "advances": {
-      "description": "Classifica 15 contro 15 di livello X"
+    "tank-changes": {
+      "label": "Modifiche",
+      "description": "Buff e nerf per aggiornamento"
     },
-    "tank-performances": {
-      "label": "Prestazioni",
-      "description": "Percentuale di vittorie e danni per carro"
-    },
-    "tank-specs": {
-      "label": "Specifiche",
-      "description": "Statistiche di ogni carro"
+    "tank-community": {
+      "label": "Valutazioni della community",
+      "description": "Valutati dai giocatori che li possiedono"
     },
     "tank-economics": {
       "label": "Economia",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Soglie dei distintivi di maestria"
     },
-    "tank-changes": {
-      "label": "Modifiche",
-      "description": "Buff e nerf per aggiornamento"
+    "tank-performances": {
+      "label": "Prestazioni",
+      "description": "Percentuale di vittorie e danni per carro"
     },
-    "tank-community": {
-      "label": "Valutazioni della community",
-      "description": "Valutati dai giocatori che li possiedono"
+    "tank-specs": {
+      "label": "Specifiche",
+      "description": "Statistiche di ogni carro"
     },
     "tank-videos": {
       "label": "Video",
       "description": "Gameplay della community"
     },
-    "all-tournaments": {
-      "label": "Tornei",
-      "description": "Tutti i tornei, aperti e conclusi"
+    "top-clans": {
+      "label": "Top clan",
+      "description": "Classifica clan di tutti i tempi"
     },
-    "all-maps": {
-      "label": "Tutte le mappe",
-      "description": "Tutte le mappe del gioco"
-    },
-    "map-changes": {
-      "label": "Modifiche",
-      "description": "Rielaborazioni delle mappe per aggiornamento"
-    },
-    "battle-type": {
-      "description": "Mappe {type}"
-    },
-    "servers-population": {
-      "label": "Popolazione server",
-      "description": "Giocatori online, ora e nel tempo"
+    "top-players": {
+      "label": "Top giocatori",
+      "description": "Classifica giocatori di tutti i tempi"
     }
   }
 }

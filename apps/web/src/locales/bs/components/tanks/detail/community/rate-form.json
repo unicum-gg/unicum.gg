@@ -8,13 +8,14 @@
   "published-once-read": "Objavljuje se kada ga moderator pročita. Tvoje zvjezdice se računaju odmah.",
   "rate-it-in-detail": "Ocijeni ga detaljno (opcionalno)",
   "review": {
-    "none": "Ocjena je pohranjena.",
+    "none": "Ocjena sačuvana.",
     "queued": "Ocjena sačuvana. Tvoja recenzija je kod moderatora.",
     "published": "Ocjena sačuvana. Tvoja recenzija je već objavljena.",
     "pending": "Ocjena sačuvana. Tvoja recenzija još čeka moderatora.",
     "rejected": "Ocjena sačuvana. Tvoja ranija recenzija nije objavljena, pa se računaju samo tvoje zvjezdice.",
     "closed": "Ocjena sačuvana. Pisani komentari su trenutno zatvoreni, pa tekst nije zadržan."
   },
+  "review-length": "Vaša recenzija treba imati između {min} i {max} znakova.",
   "save-failed": "Moglo bi biti da to nije sačuvano. Pokušajte ponovo za trenutak.",
   "say-why-optional": "Reci zašto (opcionalno)",
   "signed-with": "Potpisano s tvojih {battles} bitki",

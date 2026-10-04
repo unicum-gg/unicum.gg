@@ -1,5 +1,6 @@
 {
   "battles": "{count} Batalhas",
+  "battles-recent": "{count} batalhas em 30 dias",
   "no-votes": "não votos",
   "rated-higher": "Os jogadores mais fortes dão-lhe mais {stars} estrelas do que os restantes jogadores do servidor. Este recompensa quem sabe o que está a fazer.",
   "rated-lower": "Os jogadores mais fortes dão-lhe menos {stars} estrelas do que os restantes jogadores do servidor. Este faz o jogador parecer melhor do que é até ter de mostrar o que vale.",

@@ -8,9 +8,27 @@
     "servers": "Serveurs"
   },
   "links": {
-    "top-players": {
-      "label": "Meilleurs joueurs",
-      "description": "Classement des joueurs de tous les temps"
+    "advances": {
+      "description": "Classement 15 contre 15 de rang X"
+    },
+    "all-maps": {
+      "label": "Toutes les cartes",
+      "description": "Toutes les cartes du jeu"
+    },
+    "all-tournaments": {
+      "label": "Tournois",
+      "description": "Tous les tournois, ouverts et terminés"
+    },
+    "battle-type": {
+      "description": "Cartes {type}"
+    },
+    "map-changes": {
+      "label": "Changements",
+      "description": "Refontes des cartes par mise à jour"
+    },
+    "map-community": {
+      "label": "Notations de la communauté",
+      "description": "Noté par les joueurs qui y sont envoyés"
     },
     "players-onslaught": {
       "description": "Échelon classé de l’Offensive"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Classement du mode battle royale"
     },
-    "top-clans": {
-      "label": "Meilleurs clans",
-      "description": "Classement des clans de tous les temps"
+    "servers-population": {
+      "label": "Population du serveur",
+      "description": "Joueurs en ligne, actuellement et au fil du temps"
     },
     "stronghold": {
       "description": "Classement des escarmouches"
     },
-    "advances": {
-      "description": "Classement 15 contre 15 de rang X"
+    "tank-changes": {
+      "label": "Changements",
+      "description": "Buffs et nerfs par mise à jour"
     },
-    "tank-performances": {
-      "label": "Performances",
-      "description": "Taux de victoire et dégâts par char"
-    },
-    "tank-specs": {
-      "label": "Spécifications",
-      "description": "Statistiques de chaque char"
+    "tank-community": {
+      "label": "Classements de la communauté",
+      "description": "Évalués par les joueurs qui les possèdent"
     },
     "tank-economics": {
       "label": "Économie",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Seuils des insignes de maîtrise"
     },
-    "tank-changes": {
-      "label": "Changements",
-      "description": "Buffs et nerfs par mise à jour"
+    "tank-performances": {
+      "label": "Performances",
+      "description": "Taux de victoire et dégâts par char"
     },
-    "tank-community": {
-      "label": "Classements de la communauté",
-      "description": "Évalués par les joueurs qui les possèdent"
+    "tank-specs": {
+      "label": "Spécifications",
+      "description": "Statistiques de chaque char"
     },
     "tank-videos": {
       "label": "Vidéos",
       "description": "Parties de la communauté"
     },
-    "all-tournaments": {
-      "label": "Tournois",
-      "description": "Tous les tournois, ouverts et terminés"
+    "top-clans": {
+      "label": "Meilleurs clans",
+      "description": "Classement des clans de tous les temps"
     },
-    "all-maps": {
-      "label": "Toutes les cartes",
-      "description": "Toutes les cartes du jeu"
-    },
-    "map-changes": {
-      "label": "Changements",
-      "description": "Refontes des cartes par mise à jour"
-    },
-    "battle-type": {
-      "description": "Cartes {type}"
-    },
-    "servers-population": {
-      "label": "Population du serveur",
-      "description": "Joueurs en ligne, actuellement et au fil du temps"
+    "top-players": {
+      "label": "Meilleurs joueurs",
+      "description": "Classement des joueurs de tous les temps"
     }
   }
 }

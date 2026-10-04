@@ -8,9 +8,27 @@
     "servers": "Mga server"
   },
   "links": {
-    "top-players": {
-      "label": "Mga nangungunang manlalaro",
-      "description": "Talaan ng ranggo ng mga manlalaro sa lahat ng oras"
+    "advances": {
+      "description": "Ranggo ng Antas X para sa 15 laban sa 15"
+    },
+    "all-maps": {
+      "label": "Lahat ng mga mapa",
+      "description": "Bawat mapa sa laro"
+    },
+    "all-tournaments": {
+      "label": "Mga torneo",
+      "description": "Bawat tournament, bukas at tapos na"
+    },
+    "battle-type": {
+      "description": "{type} na mga mapa"
+    },
+    "map-changes": {
+      "label": "Mga pagbabago",
+      "description": "Mga rework ng mapa bawat update"
+    },
+    "map-community": {
+      "label": "Mga rating ng Komunidad",
+      "description": "Namarkahan ng mga manlalarong ipinadala roon"
     },
     "players-onslaught": {
       "description": "Talaan ng ranggo ng Sugod"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Talaan ng ranggo ng battle royale"
     },
-    "top-clans": {
-      "label": "Mga nangungunang klan",
-      "description": "Talaan ng ranggo ng mga klano sa lahat ng oras"
+    "servers-population": {
+      "label": "Populasyon ng server",
+      "description": "Mga manlalarong online, ngayon at sa paglipas ng oras"
     },
     "stronghold": {
       "description": "Ranggo sa Skirmishes"
     },
-    "advances": {
-      "description": "Ranggo ng Antas X para sa 15 laban sa 15"
+    "tank-changes": {
+      "label": "Mga pagbabago",
+      "description": "Mga buff at nerf bawat update"
     },
-    "tank-performances": {
-      "label": "Pagganap",
-      "description": "Win rate at pinsala bawat tank"
-    },
-    "tank-specs": {
-      "label": "Mga espesipikasyon",
-      "description": "Istatistika para sa bawat tank"
+    "tank-community": {
+      "label": "Mga rating ng komunidad",
+      "description": "Ni-rate ng mga manlalarong nagmamay-ari ng mga ito"
     },
     "tank-economics": {
       "label": "Ekonomiya",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Mga threshold ng insignia ng mastery"
     },
-    "tank-changes": {
-      "label": "Mga pagbabago",
-      "description": "Mga buff at nerf bawat update"
+    "tank-performances": {
+      "label": "Pagganap",
+      "description": "Win rate at pinsala bawat tank"
     },
-    "tank-community": {
-      "label": "Mga rating ng komunidad",
-      "description": "Ni-rate ng mga manlalarong nagmamay-ari ng mga ito"
+    "tank-specs": {
+      "label": "Mga espesipikasyon",
+      "description": "Istatistika para sa bawat tank"
     },
     "tank-videos": {
       "label": "Mga video",
       "description": "Gameplay ng komunidad"
     },
-    "all-tournaments": {
-      "label": "Mga torneo",
-      "description": "Bawat tournament, bukas at tapos na"
+    "top-clans": {
+      "label": "Mga nangungunang klan",
+      "description": "Talaan ng ranggo ng mga klano sa lahat ng oras"
     },
-    "all-maps": {
-      "label": "Lahat ng mga mapa",
-      "description": "Bawat mapa sa laro"
-    },
-    "map-changes": {
-      "label": "Mga pagbabago",
-      "description": "Mga rework ng mapa bawat update"
-    },
-    "battle-type": {
-      "description": "{type} na mga mapa"
-    },
-    "servers-population": {
-      "label": "Populasyon ng server",
-      "description": "Mga manlalarong online, ngayon at sa paglipas ng oras"
+    "top-players": {
+      "label": "Mga nangungunang manlalaro",
+      "description": "Talaan ng ranggo ng mga manlalaro sa lahat ng oras"
     }
   }
 }

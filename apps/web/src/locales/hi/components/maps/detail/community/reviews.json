@@ -1,0 +1,7 @@
+{
+  "battles-overall": "कुल {battles} युद्ध",
+  "battles-recently": "30 दिन में {battles} युद्ध",
+  "no-written-opinions-yet": "अभी तक कोई लिखित राय नहीं है। अगर आप खेलते हैं, तो आपकी राय पहली होगी।",
+  "win-rate": "{winrate}% जीत दर",
+  "written-on": "{gameVersion} पर लिखा गया"
+}

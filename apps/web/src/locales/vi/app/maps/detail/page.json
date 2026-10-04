@@ -1,5 +1,13 @@
 {
   "title": "{map}, bản đồ World of Tanks ({region})",
   "description": "{map}: bản đồ World of Tanks kích thước {width} × {height} m.",
-  "description-modes": "{map}: bản đồ World of Tanks kích thước {width} × {height} m, có các chế độ {modes}."
+  "description-modes": "{map}: bản đồ World of Tanks kích thước {width} × {height} m, có các chế độ {modes}.",
+  "community": {
+    "title": "Đánh giá của người chơi và chỉ số đánh giá của cộng đồng về {map} ({region})",
+    "description": "Người chơi nghĩ gì về {map}: chỉ số đánh giá của cộng đồng trên thang năm, phân theo khả năng chơi tốt của người bình chọn, cùng những kết luận bằng văn bản từ các tài khoản đã trải qua các trận đấu đó. Sự cân bằng, tính đa dạng, nhịp độ và việc mọi hạng xe tăng có vai trò tại đó hay không."
+  },
+  "history": {
+    "title": "Lịch sử thay đổi của {map} ({region}), các lần chỉnh sửa theo bản cập nhật",
+    "description": "Mọi thay đổi được ghi nhận đối với {map} trên khắp các bản cập nhật World of Tanks: những căn cứ, điểm xuất phát và khu vực chơi mà Wargaming đã di chuyển, theo từng phiên bản, được thể hiện trên bản đồ nhỏ nơi chúng đã được di chuyển."
+  }
 }

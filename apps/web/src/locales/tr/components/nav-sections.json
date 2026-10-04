@@ -8,9 +8,27 @@
     "servers": "Sunucular"
   },
   "links": {
-    "top-players": {
-      "label": "En iyi oyuncular",
-      "description": "Tüm zamanların oyuncu liderlik tablosu"
+    "advances": {
+      "description": "Seviye X 15’e 15 sıralaması"
+    },
+    "all-maps": {
+      "label": "Tüm haritalar",
+      "description": "Oyundaki her harita"
+    },
+    "all-tournaments": {
+      "label": "Turnuvalar",
+      "description": "Açık ve tamamlanmış her turnuva"
+    },
+    "battle-type": {
+      "description": "{type} haritaları"
+    },
+    "map-changes": {
+      "label": "Değişiklikler",
+      "description": "Güncellemeye göre harita yeniden düzenlemeleri"
+    },
+    "map-community": {
+      "label": "Topluluk değerlendirmeleri",
+      "description": "Oraya gönderilen oyuncular tarafından puanlanan"
     },
     "players-onslaught": {
       "description": "Dereceli Hücum merdiveni"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Battle royale liderlik tablosu"
     },
-    "top-clans": {
-      "label": "En iyi klanlar",
-      "description": "Tüm zamanların klan liderlik tablosu"
+    "servers-population": {
+      "label": "Sunucu nüfusu",
+      "description": "Şu anda ve zaman içindeki çevrimiçi oyuncular"
     },
     "stronghold": {
       "description": "Çatışmalar merdiveni"
     },
-    "advances": {
-      "description": "Seviye X 15’e 15 sıralaması"
+    "tank-changes": {
+      "label": "Değişiklikler",
+      "description": "Güncellemeye göre güçlendirmeler ve zayıflatmalar"
     },
-    "tank-performances": {
-      "label": "Performanslar",
-      "description": "Tank başına galibiyet oranı ve hasar"
-    },
-    "tank-specs": {
-      "label": "Özellikler",
-      "description": "Her tank için istatistikler"
+    "tank-community": {
+      "label": "Topluluk değerlendirmeleri",
+      "description": "Onlara sahip oyuncular tarafından puanlandı"
     },
     "tank-economics": {
       "label": "Ekonomi",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Ustalık rozeti eşikleri"
     },
-    "tank-changes": {
-      "label": "Değişiklikler",
-      "description": "Güncellemeye göre güçlendirmeler ve zayıflatmalar"
+    "tank-performances": {
+      "label": "Performanslar",
+      "description": "Tank başına galibiyet oranı ve hasar"
     },
-    "tank-community": {
-      "label": "Topluluk değerlendirmeleri",
-      "description": "Onlara sahip oyuncular tarafından puanlandı"
+    "tank-specs": {
+      "label": "Özellikler",
+      "description": "Her tank için istatistikler"
     },
     "tank-videos": {
       "label": "Videolar",
       "description": "Topluluktan oynanış videoları"
     },
-    "all-tournaments": {
-      "label": "Turnuvalar",
-      "description": "Açık ve tamamlanmış her turnuva"
+    "top-clans": {
+      "label": "En iyi klanlar",
+      "description": "Tüm zamanların klan liderlik tablosu"
     },
-    "all-maps": {
-      "label": "Tüm haritalar",
-      "description": "Oyundaki her harita"
-    },
-    "map-changes": {
-      "label": "Değişiklikler",
-      "description": "Güncellemeye göre harita yeniden düzenlemeleri"
-    },
-    "battle-type": {
-      "description": "{type} haritaları"
-    },
-    "servers-population": {
-      "label": "Sunucu nüfusu",
-      "description": "Şu anda ve zaman içindeki çevrimiçi oyuncular"
+    "top-players": {
+      "label": "En iyi oyuncular",
+      "description": "Tüm zamanların oyuncu liderlik tablosu"
     }
   }
 }

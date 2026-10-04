@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Her harita, kendisine gönderilen oyuncular tarafından beş üzerinden puanlanır. Kimse nerede oynayacağını seçmez, bu nedenle bir oy haritadan ziyade hesapta savaş yapılmasını gerektirir ve karar, oy verenlerin ne kadar iyi oynadığına göre ayrılır.",
+  "nobody-has-rated-a-map-yet": "Henüz hiçbir harita puanlanmadı. İlk oylar harita sayfalarında verilir.",
+  "think": "düşün",
+  "title": "Oyuncular haritalar hakkında ne {think}üyor",
+  "votes-across-maps": "{totalVotes} oy, {ratedMaps} harita genelinde."
+}

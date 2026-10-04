@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks haritası ({region})",
   "description": "{map}: {width} × {height} m boyutunda bir World of Tanks haritası.",
-  "description-modes": "{map}: {width} × {height} m boyutunda, {modes} oynanan bir World of Tanks haritası."
+  "description-modes": "{map}: {width} × {height} m boyutunda, {modes} oynanan bir World of Tanks haritası.",
+  "community": {
+    "title": "{map} oyuncu incelemeleri ve topluluk puanı ({region})",
+    "description": "Oyuncular {map} hakkında ne düşünüyor: oy verenlerin ne kadar iyi oynadığına göre ayrılmış, topluluğun beş üzerinden puanı ve savaşları geride bırakmış hesaplardan yazılı kararlar. Denge, çeşitlilik, akış ve her araç sınıfının orada bir görevi olup olmadığı."
+  },
+  "history": {
+    "title": "{map} değişiklik geçmişi ({region}), güncellemelere göre yeniden düzenlemeler",
+    "description": "World of Tanks güncellemeleri genelinde {map} için kaydedilen her değişiklik: Wargaming’in sürüm sürüm taşıdığı üsler, doğma noktaları ve oyun alanı, taşındıkları mini harita üzerinde gösterilir."
+  }
 }

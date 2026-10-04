@@ -1,5 +1,5 @@
 {
-  "axis-by-axis": "Jedna osa po druhé",
+  "axis-by-axis": "Podle jednotlivých os",
   "by-server": "Podle serveru",
   "community-verdict": "Verdikt komunity",
   "every-server-one-average": "Všechny servery, jeden průměr",
@@ -10,6 +10,6 @@
   "reputation-against-results": "Pověst ve srovnání s výsledky",
   "same-tank-different-metas": "Stejný tank, různé mety",
   "the-same-tank-by-how": "Stejný tank podle toho, jak dobře hraje hlasující",
-  "what-players-wrote": "Co hráči napsali",
+  "what-players-wrote": "Co napsali hráči",
   "who-is-saying-it": "Kdo to říká"
 }

@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "Videá",
+    "community": "Skupnost",
+    "history": "Spremembe"
+  },
+  "tab-count": "{tab} ({count})"
+}

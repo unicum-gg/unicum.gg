@@ -1,0 +1,15 @@
+{
+  "agreement": "Zhoda",
+  "camouflage": "Sezóna, v ktorej je mapa zasadená.",
+  "fun": "Zábava",
+  "map": "Mapa",
+  "overall": "Celkovo",
+  "season": "Sezóna",
+  "tips": {
+    "overall": "Ako dobre si hráči myslia, že mapa funguje. Uvrstitev je založená na priemere posunutom smerom k povprečno všetkých hlasov za každú mapu, takže mapa so štyrmi hlasmi nemôže predbehnúť mapu so štyristo hlasmi.",
+    "fun": "Ako veľmi si hráči užívajú, keď sú sem poslano, čo zvyčajne nie je tá istá otázka.",
+    "votes": "Odovzdané hlasy, každý z účtu so skutočnými bitkami za sebou.",
+    "consensus": "Ako ďaleko od seba sú voliči. Zoraďte zostupne mapy, na ktorých nie je možné, aby sa hráči zhodli, čo je zaujímavejší zoznam."
+  },
+  "votes": "hlasy"
+}

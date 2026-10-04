@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "По осама",
+  "by-server": "По серверу",
+  "community-verdict": "Оцена заједнице",
+  "every-server-one-average": "Сваки сервер, један просек",
+  "n-shown": ", prikazano: {count}",
+  "opinion": "{count, plural, one {# мишљење} few {# мишљења} many {# мишљења} other {# мишљења}}",
+  "rate-the": "Ocena за {mapName}",
+  "same-map-different-metas": "Исто тло, различите мета игре",
+  "the-same-map-by-how": "Иста мапа, према томе колико добро гласач игра",
+  "what-players-wrote": "Шта су играчи написали",
+  "who-is-saying-it": "Ко то говори"
+}

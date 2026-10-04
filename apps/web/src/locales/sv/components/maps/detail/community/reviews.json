@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} övergripande",
+  "battles-recently": "{battles} strider på 30 dagar",
+  "no-written-opinions-yet": "Inga skrivna åsikter ännu. Om du spelar skulle din åsikt bli den första.",
+  "win-rate": "{winrate} % segerfrekvens",
+  "written-on": "skrivet den {gameVersion}"
+}

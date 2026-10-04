@@ -1,0 +1,15 @@
+{
+  "agreement": "Vienprātība",
+  "camouflage": "Sezona, kurā norisinās darbība kartē.",
+  "fun": "Izklaide",
+  "map": "Karte",
+  "overall": "Kopējā",
+  "season": "Sezona",
+  "tips": {
+    "overall": "Cik laba tā šķiet spēlētājiem. Ranga pamatā ir vidējais rādītājs, kas pietuvināts visu karšu balsojumu vidējam, tāpēc karte ar četrām balsīm nevar apsteigt karti ar četriem simtiem balsu.",
+    "fun": "Cik ļoti spēlētāji izbauda, ka tiek nosūtīti uz šo vietu, kas regulāri nav tas pats jautājums.",
+    "votes": "Iesniegtās balsis, katra no konta, aiz kura ir reālas kaujas.",
+    "consensus": "Cik atšķirīgi ir balsotāji. Kārto dilstoši, lai redzētu kartes, par kurām spēlētāji nevar vienoties, kas ir interesantāks saraksts."
+  },
+  "votes": "Balsis"
+}

@@ -15,8 +15,9 @@
     "rejected": "Bedømmelse gemt. Din tidligere anmeldelse blev ikke offentliggjort, så kun dine stjerner tæller.",
     "closed": "Bedømmelse gemt. Skriftlige meninger er lukket lige nu, så teksten blev ikke gemt."
   },
+  "review-length": "Din anmeldelse skal være på mellem {min} og {max} tegn.",
   "save-failed": "Kunne ikke gemme det. Prøv igen om et øjeblik.",
-  "say-why-optional": "Fortæl hvorfor (valgfrit)",
+  "say-why-optional": "Sig hvorfor (valgfrit)",
   "signed-with": "Signeret med dine {battles} kampe i den",
   "submit-my-rating": "Indsend min bedømmelse",
   "too-many-edits": "Det er mange ændringer på én gang. Giv det et minut.",

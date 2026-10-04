@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Ang bawat boto ay nilalagdaan gamit ang sariling rekord ng bumoto. Walang rekord bawat mapa para sa sinuman na pini-publish ang Wargaming, kaya ang pinatutunayan ng boto ay naglalaro ang may-akda nito, hindi na ipinadala siya rito.",
+  "every-vote-signed-average": "Ang bawat boto ay nilalagdaan gamit ang sariling rekord ng bumoto, na may karaniwang {battles} sa nakalipas na 30 araw. Walang rekord bawat mapa para sa sinuman na pini-publish ang Wargaming, kaya ang pinatutunayan ng boto ay naglalaro ang may-akda nito, hindi na ipinadala siya rito.",
+  "fun": "Kasiyahan",
+  "how-good-the-map-is": "Kung gaano kaganda ang mapa",
+  "how-much-people-enjoy-it": "Kung gaano kasiyahan ng mga tao ang maipadala rito",
+  "if-you-play-here": "Kung maglalaro ka, eksakto kang taong hinihintay ng pahinang ito.",
+  "nobody-has-rated-this-map": "Walang sinuman ang nakapagmarka sa mapang ito.",
+  "overall": "Pangkalahatan",
+  "votes": "{count} mga boto",
+  "votes-one": "{count} boto"
+}

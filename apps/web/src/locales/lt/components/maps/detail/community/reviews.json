@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} iš viso",
+  "battles-recently": "{battles} mūšiai per 30 dienų",
+  "no-written-opinions-yet": "Rašytinių nuomonių dar nėra. Jei žaidžiate, jūsų nuomonė būtų pirmoji.",
+  "win-rate": "{winrate}% pergalių rodiklis",
+  "written-on": "parašyta naudojant {gameVersion}"
+}

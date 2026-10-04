@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks-Karte ({region})",
   "description": "Karte {map} in World of Tanks: {width} × {height} m groß.",
-  "description-modes": "Karte {map} in World of Tanks: {width} × {height} m groß, mit den Spielmodi {modes}."
+  "description-modes": "Karte {map} in World of Tanks: {width} × {height} m groß, mit den Spielmodi {modes}.",
+  "community": {
+    "title": "Spielerbewertungen und Community-Wertung für {map} ({region})",
+    "description": "Was Spieler über {map} denken: die Wertung der Community bis fünf, aufgeschlüsselt nach der Spielstärke der abstimmenden Spieler, mit schriftlichen Urteilen von Konten, die die Gefechte hinter sich haben. Balance, Vielfalt, Spielfluss und die Frage, ob jede Fahrzeugklasse dort eine Aufgabe hat."
+  },
+  "history": {
+    "title": "Änderungsverlauf von {map} ({region}), Überarbeitungen nach Aktualisierung",
+    "description": "Jede aufgezeichnete Änderung an {map} über World of Tanks-Aktualisierungen hinweg: die Basen, Spawnpunkte und das Spielfeld, die Wargaming von Version zu Version verschoben hat, eingezeichnet auf der Minikarte, auf der sie verschoben wurden."
+  }
 }

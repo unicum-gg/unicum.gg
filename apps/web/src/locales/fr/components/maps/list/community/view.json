@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Chaque carte est notée sur cinq par les personnes qui y sont envoyées. Personne ne peut choisir où jouer, donc un vote demande des batailles sur le compte plutôt que sur la carte, et le verdict est réparti selon le niveau de jeu des votants.",
+  "nobody-has-rated-a-map-yet": "Aucune carte n’a encore été notée. Les premiers votes se trouvent sur les pages des cartes.",
+  "think": "penser",
+  "title": "Ce que les joueurs {think} des cartes",
+  "votes-across-maps": "{totalVotes} votes sur {ratedMaps} cartes."
+}

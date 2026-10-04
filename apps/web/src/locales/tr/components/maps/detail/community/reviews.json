@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} genel",
+  "battles-recently": "30 günde {battles} savaş",
+  "no-written-opinions-yet": "Henüz yazılı görüş yok. Oynarsanız, sizinki ilk olur.",
+  "win-rate": "%{winrate} kazanma oranı",
+  "written-on": "{gameVersion} sürümünde yazıldı"
+}

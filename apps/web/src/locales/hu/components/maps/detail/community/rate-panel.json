@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Még nem olvastuk be a rekordodat. Épp most kértük le a Wargamingtől, ezért próbáld újra egy pillanat múlva.",
+  "checking-record": "Rekordod ellenőrzése...",
+  "fetching-your-record": "Rekordod lekérése folyamatban",
+  "have-you-played-here": "Játszottál már itt?",
+  "more-to-go": "Még {count} csata van hátra",
+  "more-to-go-one": "Még {count} csata van hátra",
+  "sign-in-to-rate": "Jelentkezz be a Wargaming-fiókoddal a térkép értékeléséhez. Senki sem választja ki, hová küldik, ezért a fiókodon lévő csatákat kérjük a térkép helyett: a Wargaming senkiről sem tesz közzé pályánkénti rekordot, és nem állítjuk, hogy olyan ellenőrzést végeztünk, amit nem végeztünk el.",
+  "sign-in-to-rate-it": "Jelentkezz be az értékeléshez",
+  "signed-in-on": "Bejelentkezve ezen a régión: {region}",
+  "too-few-battles": "A fiókodon {played} csata szerepel. {required} csatát kérünk, mielőtt {map} értékelése számítana, ami körülbelül húsz áthaladást jelent minden térképen a rotációban, hogy az ítélet olyan játékostól származzon, aki valójában járt már itt."
+}

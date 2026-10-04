@@ -1,0 +1,15 @@
+{
+  "agreement": "Yksimielisyys",
+  "camouflage": "Kausi, johon kartta sijoittuu.",
+  "fun": "Hauskuus",
+  "map": "Kartta",
+  "overall": "Yhteensä",
+  "season": "Kausi",
+  "tips": {
+    "overall": "Kuinka hyväksi pelaajat sen kokevat. Sijoitus perustuu keskiarvoa kohti kutistettuun keskiarvoon kaikista karttaäänestyksistä, joten kartta, jolla on neljä ääntä, ei voi ohittaa karttaa, jolla on neljäsataa ääntä.",
+    "fun": "Kuinka paljon pelaajat nauttivat tänne lähetetyiksi joutumisesta, mikä ei yleensä ole sama asia.",
+    "votes": "Annetut äänet, kaikki tileiltä, joilla on takanaan todellisia taisteluita.",
+    "consensus": "Kuinka kaukana äänestäjien näkemykset ovat toisistaan. Lajittele laskevasti nähdäksesi kartat, joista pelaajat eivät voi olla samaa mieltä. Se on kiinnostavampi luettelo."
+  },
+  "votes": "Äänet"
+}

@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Još nismo pročitali vaš rekord. Upravo smo ga zatražili od Wargaminga, pa pokušajte ponovo za trenutak.",
+  "checking-record": "Provjeravamo vaš rekord...",
+  "fetching-your-record": "Dohvaćamo vaš rekord",
+  "have-you-played-here": "Jeste li igrali ovdje?",
+  "more-to-go": "Preostaje još {count} bitaka",
+  "more-to-go-one": "Preostaje još {count} bitka",
+  "sign-in-to-rate": "Prijavite se svojim Wargaming računom da biste ocijenili ovu mapu. Niko ne bira gdje će biti poslan, pa tražimo bitke na vašem računu, a ne na ovoj mapi: Wargaming ne objavljuje rekord po mapi ni za koga i nećemo tvrditi da smo provjerili nešto što nismo provjerili.",
+  "sign-in-to-rate-it": "Prijavite se da biste je ocijenili",
+  "signed-in-on": "Prijavljeni ste na {region}",
+  "too-few-battles": "Na vašem računu je {played} odigranih bitaka. Tražimo {required} bitaka prije nego što se glas o mapi {map} počne računati. To je otprilike dvadeset prolazaka kroz svaku mapu u rotaciji, kako bi presuda došla od nekoga ko je zapravo bio ovdje."
+}

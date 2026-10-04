@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Ос по ос",
-  "by-server": "По сървър",
-  "community-verdict": "Мнението на общността",
+  "axis-by-axis": "По оси",
+  "by-server": "По сървъри",
+  "community-verdict": "Оценка на общността",
   "every-server-one-average": "Всеки сървър, една средна стойност",
   "n-shown": ", показани са {count}",
   "opinion": "{count, plural, one {# мнение} other {# мнения}}",
@@ -10,6 +10,6 @@
   "reputation-against-results": "Репутация срещу резултати",
   "same-tank-different-metas": "Същият танк, различни метаигри",
   "the-same-tank-by-how": "Същият танк според уменията на гласуващия играч",
-  "what-players-wrote": "Какво написаха играчите",
+  "what-players-wrote": "Какво са написали играчите",
   "who-is-saying-it": "Кой го казва"
 }

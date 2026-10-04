@@ -1,0 +1,15 @@
+{
+  "agreement": "Pagsang-ayon",
+  "camouflage": "Ang season kung saan nakatakda ang mapa.",
+  "fun": "Kasiyahan",
+  "map": "Mapa",
+  "overall": "Pangkalahatan",
+  "season": "Season",
+  "tips": {
+    "overall": "Kung gaano ito kaganda sa palagay ng mga manlalaro. Niranggo batay sa isang mean na inilapit sa karaniwang halaga ng bawat boto sa mapa, kaya hindi maaaring malampasan ng mapang may apat na boto ang may apat na raang boto.",
+    "fun": "Kung gaano masiyahan ang mga manlalaro kapag ipinapadala sila rito, na madalas ay hindi parehong tanong.",
+    "votes": "Mga boto, bawat isa ay mula sa isang account na may tunay na mga labanan sa likod nito.",
+    "consensus": "Kung gaano magkakalayo ang mga botante. Pag-uriin nang pababa para makita ang mga mapang hindi maaaring pagkasunduan ng mga manlalaro, na siyang mas kawili-wiling listahan."
+  },
+  "votes": "Mga boto"
+}

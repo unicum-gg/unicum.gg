@@ -8,9 +8,27 @@
     "servers": "Palvelimet"
   },
   "links": {
-    "top-players": {
-      "label": "Parhaat pelaajat",
-      "description": "Pelaajien kaikkien aikojen tulostaulukko"
+    "advances": {
+      "description": "Tason X 15 vastaan 15 -sijoitus"
+    },
+    "all-maps": {
+      "label": "Kaikki kartat",
+      "description": "Jokainen pelin kartta"
+    },
+    "all-tournaments": {
+      "label": "Turnaukset",
+      "description": "Jokainen avoin ja päättynyt turnaus"
+    },
+    "battle-type": {
+      "description": "{type} kartat"
+    },
+    "map-changes": {
+      "label": "Muutokset",
+      "description": "Karttojen muutokset päivityksittäin"
+    },
+    "map-community": {
+      "label": "Yhteisön arvosanat",
+      "description": "Sinne lähetettyjen pelaajien arvioima"
     },
     "players-onslaught": {
       "description": "Rankatun Rynnistyksen sijoituslista"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Battle royale -tulostaulukko"
     },
-    "top-clans": {
-      "label": "Parhaat klaanit",
-      "description": "Klaanien kaikkien aikojen tulostaulukko"
+    "servers-population": {
+      "label": "Palvelimen populaatio",
+      "description": "Paikalla olevat pelaajat nyt ja ajan mittaan"
     },
     "stronghold": {
       "description": "Kahakat-portaat"
     },
-    "advances": {
-      "description": "Tason X 15 vastaan 15 -sijoitus"
+    "tank-changes": {
+      "label": "Muutokset",
+      "description": "Parannukset ja heikennykset päivityksittäin"
     },
-    "tank-performances": {
-      "label": "Suoritukset",
-      "description": "Voittoprosentti ja vahinko panssarivaunua kohden"
-    },
-    "tank-specs": {
-      "label": "Tiedot",
-      "description": "Jokaisen panssarivaunun tilastot"
+    "tank-community": {
+      "label": "Yhteisön arvioinnit",
+      "description": "Niiden omistavien pelaajien arvioimat"
     },
     "tank-economics": {
       "label": "Taloustiede",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Mestarimerkin rajat"
     },
-    "tank-changes": {
-      "label": "Muutokset",
-      "description": "Parannukset ja heikennykset päivityksittäin"
+    "tank-performances": {
+      "label": "Suoritukset",
+      "description": "Voittoprosentti ja vahinko panssarivaunua kohden"
     },
-    "tank-community": {
-      "label": "Yhteisön arvioinnit",
-      "description": "Niiden omistavien pelaajien arvioimat"
+    "tank-specs": {
+      "label": "Tiedot",
+      "description": "Jokaisen panssarivaunun tilastot"
     },
     "tank-videos": {
       "label": "Videot",
       "description": "Yhteisön pelivideot"
     },
-    "all-tournaments": {
-      "label": "Turnaukset",
-      "description": "Jokainen avoin ja päättynyt turnaus"
+    "top-clans": {
+      "label": "Parhaat klaanit",
+      "description": "Klaanien kaikkien aikojen tulostaulukko"
     },
-    "all-maps": {
-      "label": "Kaikki kartat",
-      "description": "Jokainen pelin kartta"
-    },
-    "map-changes": {
-      "label": "Muutokset",
-      "description": "Karttojen muutokset päivityksittäin"
-    },
-    "battle-type": {
-      "description": "{type} kartat"
-    },
-    "servers-population": {
-      "label": "Palvelimen populaatio",
-      "description": "Paikalla olevat pelaajat nyt ja ajan mittaan"
+    "top-players": {
+      "label": "Parhaat pelaajat",
+      "description": "Pelaajien kaikkien aikojen tulostaulukko"
     }
   }
 }

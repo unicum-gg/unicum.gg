@@ -8,15 +8,16 @@
   "published-once-read": "Se publicará cuando un moderador la haya leído. Tus estrellas cuentan de inmediato.",
   "rate-it-in-detail": "Valóralo en detalle (opcional)",
   "review": {
-    "none": "Calificación guardada.",
+    "none": "Valoración guardada.",
     "queued": "Clasificación guardada. Tu reseña está pendiente de revisión por un moderador.",
     "published": "Clasificación guardada. Tu reseña ya está publicada.",
     "pending": "Clasificación guardada. Tu reseña sigue pendiente de revisión por un moderador.",
     "rejected": "Clasificación guardada. Tu reseña anterior no se publicó, así que solo cuentan tus estrellas.",
     "closed": "Clasificación guardada. Ahora mismo no se admiten opiniones escritas, por lo que el texto no se guardó."
   },
+  "review-length": "Tu reseña necesita tener entre {min} y {max} caracteres.",
   "save-failed": "No se pudo guardar. Inténtalo de nuevo dentro de un momento.",
-  "say-why-optional": "Di por qué (opcional)",
+  "say-why-optional": "Indica el motivo (opcional)",
   "signed-with": "Firmada con tus {battles} batallas en este vehículo",
   "submit-my-rating": "Enviar mi valoración",
   "too-many-edits": "Son demasiados cambios de golpe. Espera un minuto.",

@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Dar neperskaitėme jūsų rekordo. Ką tik paprašėme Wargaming jį pateikti, todėl pabandykite dar kartą po akimirkos.",
+  "checking-record": "Tikrinamas jūsų rekordas...",
+  "fetching-your-record": "Gauname jūsų rekordą",
+  "have-you-played-here": "Ar čia žaidėte?",
+  "more-to-go": "Dar liko {count} mūšiai",
+  "more-to-go-one": "Dar liko {count} mūšis",
+  "sign-in-to-rate": "Prisijunkite naudodami savo Wargaming paskyrą, kad įvertintumėte šį žemėlapį. Niekas nepasirenka, kur yra išsiunčiamas, todėl prašome jūsų paskyros mūšių, o ne mūšių šiame žemėlapyje. Wargaming niekam neskelbia atskiro žemėlapio rekordo, todėl nepretenduosime į patikrinimą, kurio neatlikome.",
+  "sign-in-to-rate-it": "Prisijunkite, kad įvertintumėte",
+  "signed-in-on": "Prisijungta regione {region}",
+  "too-few-battles": "Jūsų paskyroje yra {played} mūšiai. Prašome {required}, kad balsas dėl {map} būtų įskaitytas. Tai yra maždaug dvidešimt kartų per kiekvieną rotacijos žemėlapį, kad išvadą pateiktų žmogus, kuris iš tikrųjų čia buvo."
+}

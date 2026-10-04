@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Noch ein paar Worte: {count} verbleiben.",
+  "could-not-withdraw": "Das konnte nicht zurückgenommen werden. Versuche es gleich noch einmal.",
+  "hide-the-detailed-axes": "Detaillierte Achsen ausblenden",
+  "not-enough-battles": "Mit deinem Konto wurden nicht genug Gefechte gespielt, damit eine Stimme zählt.",
+  "published-once-read": "Veröffentlicht, sobald ein Moderator sie gelesen hat. Deine Sterne zählen sofort.",
+  "rate-it-in-detail": "Im Detail bewerten (optional)",
+  "review": {
+    "none": "Bewertung gespeichert.",
+    "queued": "Bewertung gespeichert. Deine Bewertung liegt bei einem Moderator.",
+    "published": "Bewertung gespeichert. Deine Bewertung ist bereits live.",
+    "pending": "Bewertung gespeichert. Deine Bewertung wartet noch auf einen Moderator.",
+    "rejected": "Bewertung gespeichert. Deine frühere Bewertung wurde nicht veröffentlicht, daher zählen nur deine Sterne.",
+    "closed": "Bewertung gespeichert. Schriftliche Meinungen sind derzeit geschlossen, daher wurde der Text nicht beibehalten."
+  },
+  "review-length": "Deine Bewertung muss zwischen {min} und {max} Zeichen lang sein.",
+  "save-failed": "Das konnte nicht gespeichert werden. Versuche es in einem Moment erneut.",
+  "say-why-optional": "Warum? (optional)",
+  "signed-with": "Unterzeichnet mit deinen {battles} Gefechten in den letzten 30 Tagen",
+  "submit-my-rating": "Meine Bewertung abgeben",
+  "too-many-edits": "Das sind viele Änderungen auf einmal. Warte eine Minute.",
+  "update-my-rating": "Meine Bewertung aktualisieren",
+  "what-it-is-good-at": "Wo das Gefecht entschieden wird, welche Seite es leichter hat und wer hierher geschickt werden möchte.",
+  "withdraw": "Zurückziehen",
+  "your-rating-has-been-withdrawn": "Deine Bewertung wurde zurückgezogen.",
+  "your-review-is-waiting-on": "Deine Bewertung wartet auf einen Moderator. Nur du kannst sie hier sehen.",
+  "your-review-was-not-published": "Deine Bewertung wurde nicht veröffentlicht. Deine Sterne zählen weiterhin für den Durchschnitt."
+}

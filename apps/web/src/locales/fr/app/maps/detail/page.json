@@ -1,5 +1,13 @@
 {
   "title": "Carte World of Tanks : {map} ({region})",
   "description": "Carte de World of Tanks : {map} ({width} × {height} m).",
-  "description-modes": "Carte de World of Tanks : {map} ({width} × {height} m), disponible dans les modes {modes}."
+  "description-modes": "Carte de World of Tanks : {map} ({width} × {height} m), disponible dans les modes {modes}.",
+  "community": {
+    "title": "Avis des joueurs sur {map} et notation de la communauté ({region})",
+    "description": "Ce que les joueurs pensent de {map} : la notation de la communauté sur cinq, répartie selon le niveau de jeu des votants, avec des verdicts écrits par des comptes qui ont les batailles derrière eux. Équilibre, variété, fluidité et utilité de chaque classe de véhicule."
+  },
+  "history": {
+    "title": "Historique des modifications de {map} ({region}), remaniements par mise à jour",
+    "description": "Chaque modification enregistrée de {map} au fil des mises à jour de World of Tanks : les bases, les points de départ et la zone de jeu déplacés par Wargaming, version après version, représentés sur la minicarte où ils ont été déplacés."
+  }
 }

@@ -8,9 +8,27 @@
     "servers": "Сървъри"
   },
   "links": {
-    "top-players": {
-      "label": "Най-добри играчи",
-      "description": "Класация на играчите за всички времена"
+    "advances": {
+      "description": "Класация за ниво X 15v15"
+    },
+    "all-maps": {
+      "label": "Всички карти",
+      "description": "Всяка карта в играта"
+    },
+    "all-tournaments": {
+      "label": "Турнири",
+      "description": "Всеки турнир, отворен и приключил"
+    },
+    "battle-type": {
+      "description": "{type} карти"
+    },
+    "map-changes": {
+      "label": "Промени",
+      "description": "Преработки на картите по актуализация"
+    },
+    "map-community": {
+      "label": "Рейтинги на общността",
+      "description": "Оценени от играчите, изпратени там"
     },
     "players-onslaught": {
       "description": "Стълбица на ранговата Атака"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Класация на Battle Royale"
     },
-    "top-clans": {
-      "label": "Най-добри кланове",
-      "description": "Класация на клановете за всички времена"
+    "servers-population": {
+      "label": "Население на сървъра",
+      "description": "Игачи онлайн, сега и във времето"
     },
     "stronghold": {
       "description": "Лестница на схватките"
     },
-    "advances": {
-      "description": "Класация за ниво X 15v15"
+    "tank-changes": {
+      "label": "Промени",
+      "description": "Подобрения и отслабвания по актуализация"
     },
-    "tank-performances": {
-      "label": "Представления",
-      "description": "Процент победи и щети за всеки танк"
-    },
-    "tank-specs": {
-      "label": "Спецификации",
-      "description": "Статистики за всеки танк"
+    "tank-community": {
+      "label": "Рейтинг на общността",
+      "description": "Оценени от играчи, които ги притежават"
     },
     "tank-economics": {
       "label": "Икономика",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Прагове за значката за майсторство"
     },
-    "tank-changes": {
-      "label": "Промени",
-      "description": "Подобрения и отслабвания по актуализация"
+    "tank-performances": {
+      "label": "Представления",
+      "description": "Процент победи и щети за всеки танк"
     },
-    "tank-community": {
-      "label": "Рейтинг на общността",
-      "description": "Оценени от играчи, които ги притежават"
+    "tank-specs": {
+      "label": "Спецификации",
+      "description": "Статистики за всеки танк"
     },
     "tank-videos": {
       "label": "Видеа",
       "description": "Геймплей от общността"
     },
-    "all-tournaments": {
-      "label": "Турнири",
-      "description": "Всеки турнир, отворен и приключил"
+    "top-clans": {
+      "label": "Най-добри кланове",
+      "description": "Класация на клановете за всички времена"
     },
-    "all-maps": {
-      "label": "Всички карти",
-      "description": "Всяка карта в играта"
-    },
-    "map-changes": {
-      "label": "Промени",
-      "description": "Преработки на картите по актуализация"
-    },
-    "battle-type": {
-      "description": "{type} карти"
-    },
-    "servers-population": {
-      "label": "Население на сървъра",
-      "description": "Игачи онлайн, сега и във времето"
+    "top-players": {
+      "label": "Най-добри играчи",
+      "description": "Класация на играчите за всички времена"
     }
   }
 }

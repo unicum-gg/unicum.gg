@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Još nekoliko riječi: preostalo je {count}.",
+  "could-not-withdraw": "Nije moguće povući to. Pokušaj ponovno za trenutak.",
+  "hide-the-detailed-axes": "Sakrij detaljne osi",
+  "not-enough-battles": "Tvoj račun nije odigrao dovoljno bitaka da bi se glas računao.",
+  "published-once-read": "Objavljuje se nakon što ga moderator pročita. Tvoje se zvjezdice broje izravno.",
+  "rate-it-in-detail": "Ocijeni detaljno (opcionalno)",
+  "review": {
+    "none": "Ocjena spremljena.",
+    "queued": "Ocjena spremljena. Tvoja je recenzija kod moderatora.",
+    "published": "Ocjena spremljena. Tvoja je recenzija već uživo.",
+    "pending": "Ocjena spremljena. Tvoja recenzija još čeka moderatora.",
+    "rejected": "Ocjena spremljena. Tvoja ranija recenzija nije objavljena, pa se broje samo tvoje zvjezdice.",
+    "closed": "Ocjena spremljena. Pisana mišljenja trenutačno su zatvorena, pa tekst nije zadržan."
+  },
+  "review-length": "Tvoja recenzija treba imati između {min} i {max} znakova.",
+  "save-failed": "To se nije moglo spremiti. Pokušaj ponovno za trenutak.",
+  "say-why-optional": "Recite zašto (neobavezno)",
+  "signed-with": "Potpisano s tvojih {battles} bitaka u posljednjih 30 dana",
+  "submit-my-rating": "Pošalji moju ocjenu",
+  "too-many-edits": "To je mnogo izmjena odjednom. Pričekaj minutu.",
+  "update-my-rating": "Ažuriraj moju ocjenu",
+  "what-it-is-good-at": "Gdje se bitka odlučuje, kojoj je strani lakše i kome bi odgovaralo da bude poslan ovamo.",
+  "withdraw": "Povuci",
+  "your-rating-has-been-withdrawn": "Tvoja je ocjena povučena.",
+  "your-review-is-waiting-on": "Tvoja recenzija čeka moderatora. Ovdje je možeš vidjeti samo ti.",
+  "your-review-was-not-published": "Tvoja recenzija nije objavljena. Tvoje se zvjezdice i dalje ubrajaju u prosjek."
+}

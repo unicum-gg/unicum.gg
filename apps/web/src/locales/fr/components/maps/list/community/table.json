@@ -1,0 +1,15 @@
+{
+  "agreement": "Accord",
+  "camouflage": "La saison dans laquelle se déroule la carte.",
+  "fun": "Amusement",
+  "map": "Carte",
+  "overall": "Global",
+  "season": "Saison",
+  "tips": {
+    "overall": "L’opinion des bons joueurs. Classé selon une moyenne rapprochée de la moyenne de tous les votes de cartes, afin qu’une carte ayant reçu quatre votes ne puisse pas dépasser une carte en ayant reçu quatre cents.",
+    "fun": "Le plaisir que les joueurs prennent à être envoyés ici, ce qui ne répond régulièrement pas à la même question.",
+    "votes": "Votes exprimés, chacun provenant d’un compte ayant de vraies batailles derrière lui.",
+    "consensus": "L’écart entre les votants. Triez par ordre décroissant pour voir les cartes sur lesquelles les joueurs ne peuvent pas se mettre d’accord, la liste la plus intéressante."
+  },
+  "votes": "Votes"
+}

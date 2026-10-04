@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Pagal atskiras ašis",
+  "by-server": "Pagal serverį",
+  "community-verdict": "Bendruomenės verdiktas",
+  "every-server-one-average": "Kiekvienas serveris, vienas vidurkis",
+  "n-shown": ", rodoma {count}",
+  "opinion": "{count, plural, one {# nuomonė} few {# nuomonės} other {# nuomonių}}",
+  "rate-the": "Įvertinkite {mapName}",
+  "same-map-different-metas": "Tas pats žemėlapis, skirtingos žaidimo metos",
+  "the-same-map-by-how": "Tas pats žemėlapis pagal tai, kaip gerai žaidžia balsuojantis žaidėjas",
+  "what-players-wrote": "Ką parašė žaidėjai",
+  "who-is-saying-it": "Kas tai sako"
+}

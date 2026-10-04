@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "As voor as",
+  "axis-by-axis": "Per as",
   "by-server": "Per server",
-  "community-verdict": "Gemeenschaps oordeel",
+  "community-verdict": "Oordeel van de community",
   "every-server-one-average": "Elke server, één gemiddelde",
   "n-shown": ", {count} weergegeven",
   "opinion": "{count, plural, one {# mening} other {# meningen}}",

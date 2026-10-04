@@ -15,14 +15,15 @@
     "rejected": "Hodnocení uloženo. Vaše předchozí recenze nebyla zveřejněna, takže se započítávají pouze vaše hvězdičky.",
     "closed": "Hodnocení uloženo. Písemné recenze jsou momentálně uzavřeny, takže text nebyl uložen."
   },
+  "review-length": "Vaše recenze musí mít mezi {min} a {max} znaky.",
   "save-failed": "Toto hodnocení se nepodařilo uložit. Zkuste to za chvíli znovu.",
-  "say-why-optional": "Napište proč (volitelné)",
+  "say-why-optional": "Uveďte důvod (volitelné)",
   "signed-with": "Podepsáno s údajem o vašich {battles} bitvách s tímto tankem",
   "submit-my-rating": "Odeslat moje hodnocení",
   "too-many-edits": "To je příliš mnoho úprav najednou. Počkejte minutu.",
   "update-my-rating": "Aktualizovat moje hodnocení",
   "what-it-is-good-at": "V čem je dobrý, v čem ne a kdo by s ním měl hrát.",
-  "withdraw": "Odvolat",
+  "withdraw": "Stáhnout",
   "your-rating-has-been-withdrawn": "Vaše hodnocení bylo staženo.",
   "your-review-is-waiting-on": "Vaše recenze čeká na moderátora. Zde ji vidíte pouze vy.",
   "your-review-was-not-published": "Vaše recenze nebyla zveřejněna. Vaše hvězdičky se stále započítávají do průměru."

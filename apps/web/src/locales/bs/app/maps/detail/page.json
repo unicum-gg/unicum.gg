@@ -1,5 +1,13 @@
 {
   "title": "{map}, mapa igre World of Tanks ({region})",
   "description": "{map}: mapa igre World of Tanks dimenzija {width} × {height} m.",
-  "description-modes": "{map}: mapa igre World of Tanks dimenzija {width} × {height} m na kojoj se igraju režimi {modes}."
+  "description-modes": "{map}: mapa igre World of Tanks dimenzija {width} × {height} m na kojoj se igraju režimi {modes}.",
+  "community": {
+    "title": "Recenzije igrača i rejting zajednice za mapu {map} ({region})",
+    "description": "Šta igrači misle o mapi {map}: rejting zajednice od jedan do pet, podijeljen prema tome koliko dobro glasači igraju, uz napisane presude naloga koji iza sebe imaju bitke. Balans, raznolikost, tok bitke i pitanje ima li svaka klasa vozila svoju ulogu na njoj."
+  },
+  "history": {
+    "title": "Historija promjena mape {map} ({region}), prerade po ažuriranju",
+    "description": "Svaka zabilježena promjena mape {map} širom ažuriranja World of Tanks: baze, početne pozicije i područje za igranje koje je Wargaming pomjerio, verziju po verziju, nacrtano na minimapi na kojoj su pomjereni."
+  }
 }

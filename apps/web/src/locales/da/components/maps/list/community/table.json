@@ -1,0 +1,15 @@
+{
+  "agreement": "Enighed",
+  "camouflage": "Den sæson, kortet foregår i.",
+  "fun": "Sjov",
+  "map": "Kort",
+  "overall": "Samlet",
+  "season": "Sæson",
+  "tips": {
+    "overall": "Hvor god spillerne synes, det er. Rangordnet efter et gennemsnit, der er trukket mod gennemsnittet af alle kortbedømmelser, så et kort med fire stemmer ikke kan slå et med fire hundrede.",
+    "fun": "Hvor meget spillerne nyder at blive sendt hertil, hvilket ofte ikke er det samme spørgsmål.",
+    "votes": "Afgivne stemmer, hver eneste fra en konto med faktiske kampe bagved.",
+    "consensus": "Hvor langt fra hinanden stemmerne ligger. Sortér faldende for at se de kort, spillerne ikke kan blive enige om, hvilket er den mere interessante liste."
+  },
+  "votes": "Stemmer"
+}

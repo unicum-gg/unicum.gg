@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Quelques mots de plus : encore {count}.",
+  "could-not-withdraw": "Impossible de retirer cela. Réessayez dans un moment.",
+  "hide-the-detailed-axes": "Masquer les axes détaillés",
+  "not-enough-battles": "Votre compte n’a pas joué assez de parties pour qu’un vote soit pris en compte.",
+  "published-once-read": "Publié après lecture par un modérateur. Vos étoiles comptent immédiatement.",
+  "rate-it-in-detail": "Évaluez-le en détail (facultatif)",
+  "review": {
+    "none": "Évaluation enregistrée.",
+    "queued": "Évaluation enregistrée. Votre analyse est entre les mains d’un modérateur.",
+    "published": "Évaluation enregistrée. Votre analyse est déjà en direct.",
+    "pending": "Évaluation enregistrée. Votre analyse est toujours en attente d’un modérateur.",
+    "rejected": "Évaluation enregistrée. Votre analyse précédente n’a pas été publiée, seules vos étoiles comptent donc.",
+    "closed": "Évaluation enregistrée. Les avis écrits sont actuellement fermés, le texte n’a donc pas été conservé."
+  },
+  "review-length": "Votre analyse doit comporter entre {min} et {max} caractères.",
+  "save-failed": "Impossible d’enregistrer cela. Réessayez dans un moment.",
+  "say-why-optional": "Indiquez pourquoi (facultatif)",
+  "signed-with": "Validée par vos {battles} batailles au cours des 30 derniers jours",
+  "submit-my-rating": "Envoyer mon évaluation",
+  "too-many-edits": "Cela fait beaucoup de modifications d’un coup. Attendez une minute.",
+  "update-my-rating": "Mettre à jour mon évaluation",
+  "what-it-is-good-at": "L’endroit où la bataille se décide, le côté qui a le plus de facilité et les personnes qui devraient vouloir être envoyées ici.",
+  "withdraw": "Retirer",
+  "your-rating-has-been-withdrawn": "Votre évaluation a été retirée.",
+  "your-review-is-waiting-on": "Votre analyse est en attente d’un modérateur. Vous seul pouvez la voir ici.",
+  "your-review-was-not-published": "Votre analyse n’a pas été publiée. Vos étoiles comptent toujours dans la moyenne."
+}

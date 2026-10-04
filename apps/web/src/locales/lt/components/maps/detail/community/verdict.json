@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Kiekvienas balsas patvirtintas paties balsuotojo rekordu. Wargaming niekam neskelbia atskiro žemėlapio rekordo, todėl balsas įrodo, kad jo autorius žaidžia, o ne tai, kad jis buvo išsiųstas čia.",
+  "every-vote-signed-average": "Kiekvienas balsas patvirtintas paties balsuotojo rekordu, vidutiniškai {battles} mūšiais per pastarąsias 30 dienų. Wargaming niekam neskelbia atskiro žemėlapio rekordo, todėl balsas įrodo, kad jo autorius žaidžia, o ne tai, kad jis buvo išsiųstas čia.",
+  "fun": "Pramoga",
+  "how-good-the-map-is": "Kiek gera yra ši žemėlapio vieta",
+  "how-much-people-enjoy-it": "Kaip žmonėms patinka būti čia išsiųstiems",
+  "if-you-play-here": "Jei žaidžiate, esate būtent tas žmogus, kurio laukia šis puslapis.",
+  "nobody-has-rated-this-map": "Niekas dar neįvertino šio žemėlapio.",
+  "overall": "Bendrai",
+  "votes": "{count} balsai",
+  "votes-one": "{count} balsas"
+}

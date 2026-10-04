@@ -1,0 +1,15 @@
+{
+  "agreement": "Acord",
+  "camouflage": "Sezonul în care este plasată harta.",
+  "fun": "Distracție",
+  "map": "Harta",
+  "overall": "General",
+  "season": "Sezon",
+  "tips": {
+    "overall": "Cât de bună cred jucătorii că este. Clasată pe baza unei medii ajustate către media tuturor voturilor pentru hărți, astfel încât o hartă cu patru voturi nu o poate depăși pe una cu patru sute.",
+    "fun": "Cât de mult se bucură jucătorii să fie trimiși aici, ceea ce, de obicei, nu este aceeași întrebare.",
+    "votes": "Voturi acordate, fiecare provenind de la un cont cu bătălii reale în urma lui.",
+    "consensus": "Cât de diferite sunt opiniile votanților. Sortează descrescător pentru hărțile asupra cărora jucătorii nu pot ajunge la un acord, lista mai interesantă."
+  },
+  "votes": "Voturi"
+}

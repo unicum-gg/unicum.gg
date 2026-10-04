@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Akse for akse",
+  "by-server": "Per server",
+  "community-verdict": "Fellesskapets vurdering",
+  "every-server-one-average": "Hver server, ett gjennomsnitt",
+  "n-shown": ", {count} vist",
+  "opinion": "{count, plural, one {# mening} other {# meninger}}",
+  "rate-the": "Rate {mapName}",
+  "same-map-different-metas": "Samme terreng, forskjellige metaer",
+  "the-same-map-by-how": "Det samme kartet, etter hvor godt velgeren spiller",
+  "what-players-wrote": "Dette skrev spillerne",
+  "who-is-saying-it": "Hvem sier det"
+}

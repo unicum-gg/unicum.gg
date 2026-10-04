@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Katrs balsojums ir apstiprināts ar paša balsotāja rekordu. Wargaming nepublicē nevienam rekordu par katru karti, tāpēc balsojums pierāda to, ka tā autors spēlē, nevis to, ka viņš ir nosūtīts uz šo vietu.",
+  "every-vote-signed-average": "Katrs balsojums ir apstiprināts ar paša balsotāja rekordu, kurā vidēji ir {battles} kaujas pēdējo 30 dienu laikā. Wargaming nepublicē nevienam rekordu par katru karti, tāpēc balsojums pierāda to, ka tā autors spēlē, nevis to, ka viņš ir nosūtīts uz šo vietu.",
+  "fun": "Izklaide",
+  "how-good-the-map-is": "Cik laba ir karte",
+  "how-much-people-enjoy-it": "Cik ļoti spēlētājiem patīk tikt nosūtītiem uz šo vietu",
+  "if-you-play-here": "Ja spēlē, tu esi tieši tas, ko šī lapa gaida.",
+  "nobody-has-rated-this-map": "Neviens vēl nav novērtējis šo karti.",
+  "overall": "Kopējā",
+  "votes": "{count} balsojumi",
+  "votes-one": "{count} balsojums"
+}

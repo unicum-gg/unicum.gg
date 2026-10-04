@@ -1,0 +1,7 @@
+{
+  "battles-overall": "Kopā {battles} kaujas",
+  "battles-recently": "{battles} kaujas 30 dienās",
+  "no-written-opinions-yet": "Vēl nav rakstisku viedokļu. Ja spēlē, tavs būtu pirmais.",
+  "win-rate": "{winrate}% uzvaru līmenis",
+  "written-on": "rakstīts versijā {gameVersion}"
+}

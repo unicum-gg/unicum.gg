@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Každý hlas je podpísaný vlastným záznamom hlasujúceho. Wargaming nezverejňuje záznam za jednotlivé mapy pre nikoho, takže hlas dokazuje, že jeho autor hrá, nie že sem bol poslano.",
+  "every-vote-signed-average": "Každý hlas je podpísaný vlastným záznamom hlasujúceho, ktorý má v priemere {battles} bitiek za posledných 30 dni. Wargaming nezverejňuje záznam za jednotlivé mapy pre nikoho, takže hlas dokazuje, že jeho autor hrá, nie že sem bol poslano.",
+  "fun": "Zábava",
+  "how-good-the-map-is": "Aká dobrá je mapa",
+  "how-much-people-enjoy-it": "Ako veľmi ľudia užívajú, že sú sem posielaní",
+  "if-you-play-here": "Ak hráte, ste presne tým, na koho táto stránka čaká.",
+  "nobody-has-rated-this-map": "Nihče túto mapu zatiaľ nehodnotil.",
+  "overall": "Celkovo",
+  "votes": "{count} hlasov",
+  "votes-one": "{count} hlas"
+}

@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} συνολικά",
+  "battles-recently": "{battles} μάχες σε 30 ημέρες",
+  "no-written-opinions-yet": "Δεν υπάρχουν ακόμη γραπτές απόψεις. Αν παίζετε, η δική σας θα ήταν η πρώτη.",
+  "win-rate": "Ποσοστό νικών {winrate}%",
+  "written-on": "γραμμένο στην έκδοση {gameVersion}"
+}

@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} yhteensä",
+  "battles-recently": "{battles} taistelua 30 päivässä",
+  "no-written-opinions-yet": "Kirjoitettuja mielipiteitä ei vielä ole. Jos pelaat, sinun mielipiteesi olisi ensimmäinen.",
+  "win-rate": "{winrate} % voittoprosentti",
+  "written-on": "kirjoitettu versiolla {gameVersion}"
+}

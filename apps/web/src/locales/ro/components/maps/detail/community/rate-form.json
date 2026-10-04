@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Încă puține cuvinte: mai sunt {count} de scris.",
+  "could-not-withdraw": "Nu s-a putut retrage acest rating. Încearcă din nou peste un moment.",
+  "hide-the-detailed-axes": "Ascunde axele detaliate",
+  "not-enough-battles": "Contul tău nu a jucat suficient pentru ca votul să fie numărat.",
+  "published-once-read": "Publicată după ce un moderator a citit-o. Stelele tale sunt numărate direct.",
+  "rate-it-in-detail": "Evaluează în detaliu (opțional)",
+  "review": {
+    "none": "Evaluare salvată.",
+    "queued": "Evaluare salvată. Recenzia ta este la un moderator.",
+    "published": "Evaluare salvată. Recenzia ta este deja live.",
+    "pending": "Evaluare salvată. Recenzia ta este încă în așteptarea unui moderator.",
+    "rejected": "Evaluare salvată. Recenzia ta anterioară nu a fost publicată, așa că doar stelele tale sunt numărate.",
+    "closed": "Evaluare salvată. Opiniile scrise sunt închise momentan, așa că textul nu a fost păstrat."
+  },
+  "review-length": "Recenzia ta trebuie să aibă între {min} și {max} caractere.",
+  "save-failed": "Nu s-a putut salva. Încearcă din nou peste un moment.",
+  "say-why-optional": "Spune de ce (opțional)",
+  "signed-with": "Semnat cu cele {battles} bătălii ale tale din ultimele 30 de zile",
+  "submit-my-rating": "Trimite evaluarea mea",
+  "too-many-edits": "Sunt multe modificări deodată. Așteaptă un minut.",
+  "update-my-rating": "Actualizează evaluarea mea",
+  "what-it-is-good-at": "Unde se decide bătălia, cărei părți îi este mai ușor și cine ar trebui să vrea să fie trimis aici.",
+  "withdraw": "Retrage",
+  "your-rating-has-been-withdrawn": "Ratingul tău a fost retras.",
+  "your-review-is-waiting-on": "Recenzia ta este în așteptarea unui moderator. Doar tu o poți vedea aici.",
+  "your-review-was-not-published": "Recenzia ta nu a fost publicată. Stelele tale sunt în continuare incluse în medie."
+}

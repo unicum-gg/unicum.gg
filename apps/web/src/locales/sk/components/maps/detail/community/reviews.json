@@ -1,0 +1,7 @@
+{
+  "battles-overall": "Celkovo {battles}",
+  "battles-recently": "{battles} bitiek za 30 dni",
+  "no-written-opinions-yet": "Zatiaľ žiadne písané názory. Ak hráte, váš by bol prvý.",
+  "win-rate": "{winrate}% percento víťazstiev",
+  "written-on": "napísané vo verzii {gameVersion}"
+}

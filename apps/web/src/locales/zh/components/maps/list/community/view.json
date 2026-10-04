@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "每张地图都由被送到该地图的玩家按五分制评分。无人可以选择对战地点，因此投票要求账号拥有战斗场次，而不是地图上的战斗场次，最终结论还会根据投票者的对战水平进行拆分。",
+  "nobody-has-rated-a-map-yet": "还没有地图获得评分。首批投票位于地图页面。",
+  "think": "想法",
+  "title": "玩家对地图的{think}",
+  "votes-across-maps": "跨越{ratedMaps}张地图的{totalVotes}个投票。"
+}

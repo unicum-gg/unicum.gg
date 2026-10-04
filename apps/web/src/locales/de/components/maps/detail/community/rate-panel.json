@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Wir haben deinen Rekord noch nicht gelesen. Wir haben Wargaming gerade danach gefragt, versuche es also in einem Moment erneut.",
+  "checking-record": "Dein Rekord wird geprüft …",
+  "fetching-your-record": "Dein Rekord wird abgerufen",
+  "have-you-played-here": "Hast du hier gespielt?",
+  "more-to-go": "Noch {count} Gefechte",
+  "more-to-go-one": "Noch {count} Gefecht",
+  "sign-in-to-rate": "Melde dich mit deinem Wargaming-Konto an, um diese Karte zu bewerten. Niemand wählt aus, wohin er gesendet wird. Daher fragen wir nach Gefechten auf deinem Konto und nicht auf dieser Karte. Wargaming veröffentlicht für niemanden einen Rekord pro Karte, und wir behaupten nicht, eine Prüfung durchgeführt zu haben, die wir nicht gemacht haben.",
+  "sign-in-to-rate-it": "Anmelden, um sie zu bewerten",
+  "signed-in-on": "Angemeldet auf {region}",
+  "too-few-battles": "Auf deinem Konto wurden {played} Gefechte gespielt. Wir fragen nach {required}, bevor eine Stimme zu {map} zählt. Das entspricht ungefähr zwanzig Durchläufen auf jeder Karte der Rotation, damit ein Urteil von jemandem kommt, der tatsächlich hier war."
+}

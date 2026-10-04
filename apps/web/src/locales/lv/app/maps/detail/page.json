@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks karte ({region})",
   "description": "{map}: {width} × {height} mm World of Tanks karte.",
-  "description-modes": "{map}: {width} × {height} mm World of Tanks karte, kurā tiek spēlēti {modes}."
+  "description-modes": "{map}: {width} × {height} mm World of Tanks karte, kurā tiek spēlēti {modes}.",
+  "community": {
+    "title": "{map} spēlētāju apskati un kopienas vērtējums ({region})",
+    "description": "Ko spēlētāji domā par {map}: kopienas vērtējums piecu punktu skalā, sadalīts pēc tā, cik labi balsotāji spēlē, ar rakstiskiem spriedumiem no kontiem, kuriem aiz muguras ir kaujas. Līdzsvars, daudzveidība, kaujas plūsma un tas, vai katrai transportlīdzekļu klasei tur ir savs uzdevums."
+  },
+  "history": {
+    "title": "{map} izmaiņu vēsture ({region}), pārveidojumi pēc atjauninājumiem",
+    "description": "Katra reģistrētā izmaiņa kartē {map} World of Tanks atjauninājumos: bāzes, sākumpunkti un spēles zona, ko Wargaming pārvietoja no viena atjauninājuma uz nākamo, attēlota minikartē, uz kuras tie tika pārvietoti."
+  }
 }

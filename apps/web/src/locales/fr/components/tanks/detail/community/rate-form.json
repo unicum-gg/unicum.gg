@@ -15,8 +15,9 @@
     "rejected": "Note enregistrée. Votre précédent avis n’a pas été publié, seules vos étoiles sont donc prises en compte.",
     "closed": "Note enregistrée. Il n’est pas possible de publier un avis écrit pour le moment, le texte n’a donc pas été conservé."
   },
+  "review-length": "Votre avis doit comporter entre {min} et {max} caractères.",
   "save-failed": "Impossible d’enregistrer. Réessayez dans un instant.",
-  "say-why-optional": "Expliquez pourquoi (facultatif)",
+  "say-why-optional": "Indiquez pourquoi (optionnel)",
   "signed-with": "Signé avec vos {battles} batailles à son bord",
   "submit-my-rating": "Envoyer mon évaluation",
   "too-many-edits": "Cela fait beaucoup de modifications d’un coup. Attendez une minute.",

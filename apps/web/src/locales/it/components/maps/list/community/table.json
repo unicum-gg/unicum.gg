@@ -1,0 +1,15 @@
+{
+  "agreement": "Accordo",
+  "camouflage": "La stagione in cui è ambientata la mappa.",
+  "fun": "Divertimento",
+  "map": "Mappa",
+  "overall": "Globale",
+  "season": "Stagione",
+  "tips": {
+    "overall": "Quanto i giocatori pensano che sia buono. Classificato in base a una media spostata verso la media di ogni voto della mappa, così una mappa con quattro voti non può superare una con quattrocento.",
+    "fun": "Quanto ai giocatori piace essere inviati qui, cosa che regolarmente non è la stessa cosa.",
+    "votes": "Voti espressi, ognuno da un account con battaglie reali dietro di sé.",
+    "consensus": "Quanto sono distanti tra loro i votanti. Ordina in ordine decrescente per le mappe su cui i giocatori non possono concordare, che è la lista più interessante."
+  },
+  "votes": "Voti"
+}

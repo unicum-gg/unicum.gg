@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Колико опрашта грешке ако још учиш.",
     "versatility": "Да ли функционише на свакој мапи и у сваком тиму?"
   },
+  "rating-axes-short": {
+    "overall": "Ukupno",
+    "fun": "Zabava",
+    "firepower": "Vatrena moć",
+    "armour": "Оклоп",
+    "mobility": "Pokretljivost",
+    "gunHandling": "Управљање оруђем",
+    "concealment": "Kamuflaža",
+    "beginnerFriendliness": "Почетник",
+    "versatility": "Универзално"
+  },
+  "map-rating-axes": {
+    "overall": "Ukupno",
+    "fun": "Zabava",
+    "balance": "Баланс",
+    "variety": "Разноврсност",
+    "flow": "Ток битке",
+    "classFairness": "Правичност класа",
+    "beginnerFriendliness": "Погодно за почетнике"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Колико је ова мапа добра, када се све узме у обзир?",
+    "fun": "Колико уживате када вас пошаљу на ову мапу?",
+    "balance": "Да ли обе стране почињу са једнаком шансом?",
+    "variety": "Да ли постоји више начина за игру или сви заузимају исти пут?",
+    "flow": "Да ли се битка креће или се претвара у пат-позицију?",
+    "classFairness": "Да ли свака класа возила овде има своју улогу?",
+    "beginnerFriendliness": "Колико опрашта грешке ако још учите?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Ukupno",
+    "fun": "Zabava",
+    "balance": "Ravnoteža",
+    "variety": "Raznovrsnost",
+    "flow": "Tok",
+    "classFairness": "Klase",
+    "beginnerFriendliness": "Početnik"
+  },
   "voter-brackets": {
     "unknown": "Nema ocenu",
     "learning": "Uči",

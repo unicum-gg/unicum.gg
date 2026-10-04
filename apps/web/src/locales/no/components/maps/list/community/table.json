@@ -1,0 +1,15 @@
+{
+  "agreement": "Enighet",
+  "camouflage": "Sesongen kartet foregår i.",
+  "fun": "Moro",
+  "map": "Kart",
+  "overall": "Totalt",
+  "season": "Sesong",
+  "tips": {
+    "overall": "Hvor godt spillerne synes det er. Rangert etter et gjennomsnitt som er trukket mot gjennomsnittet av alle kartstemmene, slik at et kart med fire stemmer ikke kan slå et med fire hundre.",
+    "fun": "Hvor mye spillerne liker å bli sendt hit, noe som ofte ikke er det samme.",
+    "votes": "Avgitte stemmer, hver eneste fra en konto med faktiske kamper bak seg.",
+    "consensus": "Hvor langt fra hverandre de som stemmer står. Sorter synkende for kartene spillerne ikke kan bli enige om, som er den mer interessante listen."
+  },
+  "votes": "Stemmer"
+}

@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Nu ți-am citit încă recordul. Tocmai am întrebat Wargaming pentru el, așa că încearcă din nou peste un moment.",
+  "checking-record": "Se verifică recordul tău...",
+  "fetching-your-record": "Îți preluăm recordul",
+  "have-you-played-here": "Ai jucat aici?",
+  "more-to-go": "Mai sunt de parcurs {count} bătălii",
+  "more-to-go-one": "Mai este de parcurs {count} bătălie",
+  "sign-in-to-rate": "Conectează-te cu contul tău Wargaming pentru a evalua această hartă. Nimeni nu alege unde este trimis, așa că cerem bătălii din contul tău, nu de pe această hartă: Wargaming nu publică recordul pentru fiecare hartă al nimănui și nu vom pretinde că am făcut o verificare pe care nu am făcut-o.",
+  "sign-in-to-rate-it": "Conectează-te pentru a o evalua",
+  "signed-in-on": "Conectat în {region}",
+  "too-few-battles": "Contul tău are {played} bătălii. Cerem {required} înainte ca un vot pentru {map} să fie numărat. Asta înseamnă aproximativ douăzeci de treceri prin fiecare hartă din rotație, astfel încât verdictul să vină de la cineva care a fost de fapt aici."
+}

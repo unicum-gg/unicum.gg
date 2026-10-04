@@ -8,9 +8,27 @@
     "servers": "Servere"
   },
   "links": {
-    "top-players": {
-      "label": "Top spillere",
-      "description": "Spillerrangliste gennem hele historikken"
+    "advances": {
+      "description": "Niveau X 15-mod-15-rangliste"
+    },
+    "all-maps": {
+      "label": "Alle kort",
+      "description": "Alle kort i spillet"
+    },
+    "all-tournaments": {
+      "label": "Turneringer",
+      "description": "Alle turneringer, åbne og afsluttede"
+    },
+    "battle-type": {
+      "description": "{type} kort"
+    },
+    "map-changes": {
+      "label": "Ændringer",
+      "description": "Kortomarbejdninger pr. opdatering"
+    },
+    "map-community": {
+      "label": "Fællesskabets vurderinger",
+      "description": "Bedømt af spillerne, der bliver sendt dertil"
     },
     "players-onslaught": {
       "description": "Rangeret Onslaught-rangliste"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Battle royale-rangliste"
     },
-    "top-clans": {
-      "label": "Top klaner",
-      "description": "Klanrangliste gennem hele historikken"
+    "servers-population": {
+      "label": "Serverbefolkning",
+      "description": "Spillere online, nu og over tid"
     },
     "stronghold": {
       "description": "Træfninger rangliste"
     },
-    "advances": {
-      "description": "Niveau X 15-mod-15-rangliste"
+    "tank-changes": {
+      "label": "Ændringer",
+      "description": "Forbedringer og svækkelser pr. opdatering"
     },
-    "tank-performances": {
-      "label": "Præstationer",
-      "description": "Sejrsrate og skade pr. kampvogn"
-    },
-    "tank-specs": {
-      "label": "Specifikationer",
-      "description": "Statistik for alle kampvogne"
+    "tank-community": {
+      "label": "Bedømmelser for fællesskabet",
+      "description": "Vurderet af spillere, der ejer dem"
     },
     "tank-economics": {
       "label": "Økonomi",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Tærskler for mesterskabsmærker"
     },
-    "tank-changes": {
-      "label": "Ændringer",
-      "description": "Forbedringer og svækkelser pr. opdatering"
+    "tank-performances": {
+      "label": "Præstationer",
+      "description": "Sejrsrate og skade pr. kampvogn"
     },
-    "tank-community": {
-      "label": "Bedømmelser for fællesskabet",
-      "description": "Vurderet af spillere, der ejer dem"
+    "tank-specs": {
+      "label": "Specifikationer",
+      "description": "Statistik for alle kampvogne"
     },
     "tank-videos": {
       "label": "Videoer",
       "description": "Gameplay fra fællesskabet"
     },
-    "all-tournaments": {
-      "label": "Turneringer",
-      "description": "Alle turneringer, åbne og afsluttede"
+    "top-clans": {
+      "label": "Top klaner",
+      "description": "Klanrangliste gennem hele historikken"
     },
-    "all-maps": {
-      "label": "Alle kort",
-      "description": "Alle kort i spillet"
-    },
-    "map-changes": {
-      "label": "Ændringer",
-      "description": "Kortomarbejdninger pr. opdatering"
-    },
-    "battle-type": {
-      "description": "{type} kort"
-    },
-    "servers-population": {
-      "label": "Serverbefolkning",
-      "description": "Spillere online, nu og over tid"
+    "top-players": {
+      "label": "Top spillere",
+      "description": "Spillerrangliste gennem hele historikken"
     }
   }
 }

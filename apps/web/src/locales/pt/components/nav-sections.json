@@ -8,9 +8,27 @@
     "servers": "Servidores"
   },
   "links": {
-    "top-players": {
-      "label": "Top jogadores",
-      "description": "Classificação histórica de jogadores"
+    "advances": {
+      "description": "Classificação 15 contra 15 de nível X"
+    },
+    "all-maps": {
+      "label": "Todas as mapas",
+      "description": "Todos os mapas do jogo"
+    },
+    "all-tournaments": {
+      "label": "Torneios",
+      "description": "Todos os torneios, abertos e concluídos"
+    },
+    "battle-type": {
+      "description": "Mapas de {type}"
+    },
+    "map-changes": {
+      "label": "Alterações",
+      "description": "Reformulações de mapas por atualização"
+    },
+    "map-community": {
+      "label": "Classificações da Comunidade",
+      "description": "Avaliado pelos jogadores enviados para lá"
     },
     "players-onslaught": {
       "description": "classificação do Massacre classificatório"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Classificação do modo battle royale"
     },
-    "top-clans": {
-      "label": "Top clãs",
-      "description": "Classificação histórica de clãs"
+    "servers-population": {
+      "label": "População do servidor",
+      "description": "Jogadores online, agora e ao longo do tempo"
     },
     "stronghold": {
       "description": "Classificação de escaramuças"
     },
-    "advances": {
-      "description": "Classificação 15 contra 15 de nível X"
+    "tank-changes": {
+      "label": "Alterações",
+      "description": "Buffs e nerfs por atualização"
     },
-    "tank-performances": {
-      "label": "Desempenhos",
-      "description": "Taxa de vitórias e dano por tanque"
-    },
-    "tank-specs": {
-      "label": "Especificações",
-      "description": "Estatísticas de todos os tanques"
+    "tank-community": {
+      "label": "Classificações da comunidade",
+      "description": "Avaliados por jogadores que os possuem"
     },
     "tank-economics": {
       "label": "Economia",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Limiares dos emblemas de mestria"
     },
-    "tank-changes": {
-      "label": "Alterações",
-      "description": "Buffs e nerfs por atualização"
+    "tank-performances": {
+      "label": "Desempenhos",
+      "description": "Taxa de vitórias e dano por tanque"
     },
-    "tank-community": {
-      "label": "Classificações da comunidade",
-      "description": "Avaliados por jogadores que os possuem"
+    "tank-specs": {
+      "label": "Especificações",
+      "description": "Estatísticas de todos os tanques"
     },
     "tank-videos": {
       "label": "Vídeos",
       "description": "Partidas da comunidade"
     },
-    "all-tournaments": {
-      "label": "Torneios",
-      "description": "Todos os torneios, abertos e concluídos"
+    "top-clans": {
+      "label": "Top clãs",
+      "description": "Classificação histórica de clãs"
     },
-    "all-maps": {
-      "label": "Todas as mapas",
-      "description": "Todos os mapas do jogo"
-    },
-    "map-changes": {
-      "label": "Alterações",
-      "description": "Reformulações de mapas por atualização"
-    },
-    "battle-type": {
-      "description": "Mapas de {type}"
-    },
-    "servers-population": {
-      "label": "População do servidor",
-      "description": "Jogadores online, agora e ao longo do tempo"
+    "top-players": {
+      "label": "Top jogadores",
+      "description": "Classificação histórica de jogadores"
     }
   }
 }

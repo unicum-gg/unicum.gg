@@ -1,7 +1,7 @@
 {
   "axis-by-axis": "Әр ось бойынша",
   "by-server": "Сервер бойынша",
-  "community-verdict": "Қоғамдық пікір",
+  "community-verdict": "Қауымдастықтың пікірі",
   "every-server-one-average": "Әр сервер, бір орташа мән",
   "n-shown": ", {count} көрсетілді",
   "opinion": "{count, plural, one {# пікір} other {# пікірлер}}",

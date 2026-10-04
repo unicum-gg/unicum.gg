@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Et par ord mere: {count} tilbage.",
+  "could-not-withdraw": "Kunne ikke trække det tilbage. Prøv igen om et øjeblik.",
+  "hide-the-detailed-axes": "Skjul de detaljerede akser",
+  "not-enough-battles": "Din konto har ikke spillet nok til, at en stemme tæller.",
+  "published-once-read": "Offentliggøres, når en moderator har læst den. Dine stjerner tæller med det samme.",
+  "rate-it-in-detail": "Bedøm den i detaljer (valgfrit)",
+  "review": {
+    "none": "Bedømmelse gemt.",
+    "queued": "Bedømmelse gemt. Din anmeldelse er hos en moderator.",
+    "published": "Bedømmelse gemt. Din anmeldelse er allerede live.",
+    "pending": "Bedømmelse gemt. Din anmeldelse venter stadig på en moderator.",
+    "rejected": "Bedømmelse gemt. Din tidligere anmeldelse blev ikke offentliggjort, så kun dine stjerner tæller.",
+    "closed": "Bedømmelse gemt. Skriftlige meninger er lukket lige nu, så teksten blev ikke beholdt."
+  },
+  "review-length": "Din anmeldelse skal være på mellem {min} og {max} tegn.",
+  "save-failed": "Kunne ikke gemme det. Prøv igen om et øjeblik.",
+  "say-why-optional": "Sig hvorfor (valgfrit)",
+  "signed-with": "Signeret med dine {battles} kampe de sidste 30 dage",
+  "submit-my-rating": "Indsend min bedømmelse",
+  "too-many-edits": "Det er mange redigeringer på én gang. Giv det et minut.",
+  "update-my-rating": "Opdatér min bedømmelse",
+  "what-it-is-good-at": "Hvor kampen afgøres, hvilken side der har det nemmere, og hvem der bør ønske at blive sendt hertil.",
+  "withdraw": "Træk tilbage",
+  "your-rating-has-been-withdrawn": "Din bedømmelse er trukket tilbage.",
+  "your-review-is-waiting-on": "Din anmeldelse venter på en moderator. Kun du kan se den her.",
+  "your-review-was-not-published": "Din anmeldelse blev ikke offentliggjort. Dine stjerner tæller stadig med i gennemsnittet."
+}

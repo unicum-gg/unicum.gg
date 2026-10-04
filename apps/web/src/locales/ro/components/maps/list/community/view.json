@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Fiecare hartă este evaluată de la unu la cinci de persoanele trimise acolo. Nimeni nu alege unde joacă, așa că un vot solicită bătălii pe cont, nu pe hartă, iar verdictul este împărțit în funcție de cât de bine joacă votanții.",
+  "nobody-has-rated-a-map-yet": "Nicio hartă nu a fost încă evaluată. Primele voturi pot fi acordate pe paginile hărților.",
+  "think": "credeți",
+  "title": "Ce {think}, jucători, despre hărți",
+  "votes-across-maps": "{totalVotes} voturi în toate cele {ratedMaps} hărți evaluate."
+}

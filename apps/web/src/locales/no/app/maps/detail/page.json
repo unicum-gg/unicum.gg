@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks-kart ({region})",
   "description": "{map}: et {width} × {height} m World of Tanks-kart.",
-  "description-modes": "{map}: et {width} × {height} m World of Tanks-kart med {modes}."
+  "description-modes": "{map}: et {width} × {height} m World of Tanks-kart med {modes}.",
+  "community": {
+    "title": "Spillernes anmeldelser og fellesskapets vurdering av {map} ({region})",
+    "description": "Dette synes spillerne om {map}: fellesskapets vurdering på en skala fra én til fem, delt inn etter hvor godt velgerne spiller, med skriftlige dommer fra kontoer som har kampene bak seg. Balanse, variasjon, flyt og om hver kjøretøyklasse har en oppgave der."
+  },
+  "history": {
+    "title": "Historikk over endringer på {map} ({region}), omarbeidinger etter oppdatering",
+    "description": "Alle registrerte endringer på {map} på tvers av World of Tanks-oppdateringer: basene, startposisjonene og spillområdet Wargaming flyttet, versjon for versjon, tegnet inn på minikartet de ble flyttet på."
+  }
 }

@@ -8,9 +8,27 @@
     "servers": "Серверлер"
   },
   "links": {
-    "top-players": {
-      "label": "Ең жақсы ойыншылар",
-      "description": "Барлық уақыттағы ойыншылардың жетекші таблицасы"
+    "advances": {
+      "description": "X деңгейіндегі 15v15 рейтингі"
+    },
+    "all-maps": {
+      "label": "Барлық карталар",
+      "description": "Ойындағы барлық карта"
+    },
+    "all-tournaments": {
+      "label": "Турнирлер",
+      "description": "Барлық ашық және аяқталған турнир"
+    },
+    "battle-type": {
+      "description": "{type} карталары"
+    },
+    "map-changes": {
+      "label": "Өзгерістер",
+      "description": "Жаңарту бойынша карта өзгерістері"
+    },
+    "map-community": {
+      "label": "Қауымдастық рейтингтері",
+      "description": "Ол жерге жіберілген ойыншылардың бағалауы"
     },
     "players-onslaught": {
       "description": "Рейтингтік Шабуыл сатысы"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Battle royale жетекші таблицасы"
     },
-    "top-clans": {
-      "label": "Ең жақсы кланлар",
-      "description": "Барлық уақыттағы кландардың жетекші таблицасы"
+    "servers-population": {
+      "label": "Сервер популяциясы",
+      "description": "Қазір және уақыт бойынша желідегі ойыншылар"
     },
     "stronghold": {
       "description": "Қақтығыстар рейтингі"
     },
-    "advances": {
-      "description": "X деңгейіндегі 15v15 рейтингі"
+    "tank-changes": {
+      "label": "Өзгерістер",
+      "description": "Жаңарту бойынша күшейтулер мен әлсіретулер"
     },
-    "tank-performances": {
-      "label": "Өнімділіктер",
-      "description": "Әр танк бойынша жеңіс пайызы мен зақым"
-    },
-    "tank-specs": {
-      "label": "Техникалық сипаттамалар",
-      "description": "Әр танктің статистикасы"
+    "tank-community": {
+      "label": "Қоғамдық рейтингтер",
+      "description": "Оларға ие ойыншылар бағалаған"
     },
     "tank-economics": {
       "label": "Экономика",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Шеберлік белгісінің шектері"
     },
-    "tank-changes": {
-      "label": "Өзгерістер",
-      "description": "Жаңарту бойынша күшейтулер мен әлсіретулер"
+    "tank-performances": {
+      "label": "Өнімділіктер",
+      "description": "Әр танк бойынша жеңіс пайызы мен зақым"
     },
-    "tank-community": {
-      "label": "Қоғамдық рейтингтер",
-      "description": "Оларға ие ойыншылар бағалаған"
+    "tank-specs": {
+      "label": "Техникалық сипаттамалар",
+      "description": "Әр танктің статистикасы"
     },
     "tank-videos": {
       "label": "Бейнелер",
       "description": "Қауымдастықтың ойын бейнелері"
     },
-    "all-tournaments": {
-      "label": "Турнирлер",
-      "description": "Барлық ашық және аяқталған турнир"
+    "top-clans": {
+      "label": "Ең жақсы кланлар",
+      "description": "Барлық уақыттағы кландардың жетекші таблицасы"
     },
-    "all-maps": {
-      "label": "Барлық карталар",
-      "description": "Ойындағы барлық карта"
-    },
-    "map-changes": {
-      "label": "Өзгерістер",
-      "description": "Жаңарту бойынша карта өзгерістері"
-    },
-    "battle-type": {
-      "description": "{type} карталары"
-    },
-    "servers-population": {
-      "label": "Сервер популяциясы",
-      "description": "Қазір және уақыт бойынша желідегі ойыншылар"
+    "top-players": {
+      "label": "Ең жақсы ойыншылар",
+      "description": "Барлық уақыттағы ойыншылардың жетекші таблицасы"
     }
   }
 }

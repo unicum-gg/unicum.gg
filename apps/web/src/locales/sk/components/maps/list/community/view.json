@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Každá mapa je hodnotený od jedna do päť ľuďmi, ktorí sú na ňu poslano. Nikto si nevyberá, kde bude hrať, takže hlas vyžaduje bitky na účte, nie na mape, a verdikt sa rozdeľuje podľa toho, ako dobre voliči hrajú.",
+  "nobody-has-rated-a-map-yet": "Zatiaľ nebola hodnotená žiadna mapa. Prvé hlasy nájdete na stránkach máp.",
+  "think": "myslieť",
+  "title": "Čo si hráči môžu {think} o mapách",
+  "votes-across-maps": "{totalVotes} hlasov po {ratedMaps} hodnotených mapách."
+}

@@ -1,0 +1,15 @@
+{
+  "agreement": "Đồng thuận",
+  "camouflage": "Mùa giải mà bản đồ lấy bối cảnh.",
+  "fun": "Vui vẻ",
+  "map": "Bản đồ",
+  "overall": "Tổng thể",
+  "season": "Mùa giải",
+  "tips": {
+    "overall": "Mức độ tốt mà người chơi nghĩ bản đồ này đạt được. Được xếp hạng dựa trên giá trị trung bình được điều chỉnh về mức trung bình của mọi lượt bình chọn bản đồ, vì vậy một bản đồ có bốn lượt bình chọn không thể xếp trên bản đồ có bốn trăm lượt bình chọn.",
+    "fun": "Mức độ người chơi yêu thích việc được gửi đến đây, điều thường không phải là cùng một câu hỏi.",
+    "votes": "Các lượt bình chọn, mỗi lượt đều đến từ một tài khoản có các trận đấu thực tế phía sau.",
+    "consensus": "Mức độ khác biệt giữa những người bình chọn. Sắp xếp giảm dần để xem các bản đồ mà người chơi không thể đồng thuận, đây là danh sách thú vị hơn."
+  },
+  "votes": "Lượt bình chọn"
+}

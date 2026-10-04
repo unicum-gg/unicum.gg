@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Nous n’avons pas encore lu votre record. Nous venons de le demander à Wargaming, alors réessayez dans un moment.",
+  "checking-record": "Vérification de votre record…",
+  "fetching-your-record": "Récupération de votre record",
+  "have-you-played-here": "Avez-vous fait des parties ici ?",
+  "more-to-go": "Encore {count} batailles à faire",
+  "more-to-go-one": "Encore {count} bataille à faire",
+  "sign-in-to-rate": "Connectez-vous avec votre compte Wargaming pour évaluer cette carte. Personne ne choisit l’endroit où il est envoyé, nous demandons donc le nombre de batailles de votre compte plutôt que sur cette carte. Wargaming ne publie aucun record par carte pour qui que ce soit, et nous ne prétendrons pas avoir effectué une vérification que nous n’avons pas faite.",
+  "sign-in-to-rate-it": "Connectez-vous pour l’évaluer",
+  "signed-in-on": "Connecté sur {region}",
+  "too-few-battles": "Votre compte compte {played} parties. Nous demandons {required} parties avant qu’un vote sur {map} soit pris en compte, soit environ vingt passages sur chaque carte de la rotation, afin que le verdict vienne de quelqu’un qui est réellement venu ici."
+}

@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "Video’s",
+    "community": "Community",
+    "history": "Wijzigingen"
+  },
+  "tab-count": "{tab} ({count})"
+}

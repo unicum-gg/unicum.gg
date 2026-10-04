@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Quanto perdona gli errori se stai ancora imparando.",
     "versatility": "È efficace su qualsiasi mappa e in qualsiasi squadra?"
   },
+  "rating-axes-short": {
+    "overall": "Globale",
+    "fun": "Divertimento",
+    "firepower": "Potenza di fuoco",
+    "armour": "Corazza",
+    "mobility": "Mobilità",
+    "gunHandling": "Maneggevolezza",
+    "concealment": "Mimetica",
+    "beginnerFriendliness": "Principiante",
+    "versatility": "Versatile"
+  },
+  "map-rating-axes": {
+    "overall": "Globale",
+    "fun": "Divertimento",
+    "balance": "Equilibrio",
+    "variety": "Varietà",
+    "flow": "Fluidità",
+    "classFairness": "Equità tra le classi",
+    "beginnerFriendliness": "Facile per i principianti"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Quanto è buona questa mappa, considerando tutto?",
+    "fun": "Quanto ti piace essere inviato qui?",
+    "balance": "Entrambi i lati iniziano con le stesse probabilità?",
+    "variety": "C’è più di un modo per giocare, oppure c’è una sola strada che tutti prendono?",
+    "flow": "La battaglia si muove o si blocca in uno stallo?",
+    "classFairness": "Ogni classe di veicoli ha un ruolo qui?",
+    "beginnerFriendliness": "Quanto è indulgente se stai ancora imparando?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Globale",
+    "fun": "Divertimento",
+    "balance": "Bilanciamento",
+    "variety": "Varietà",
+    "flow": "Fluidità",
+    "classFairness": "Classe",
+    "beginnerFriendliness": "Principiante"
+  },
   "voter-brackets": {
     "unknown": "Non valutato",
     "learning": "In fase di apprendimento",

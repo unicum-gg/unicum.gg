@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Alle kort bedømt ud af fem af de personer, der bliver sendt dertil. Ingen vælger, hvor de spiller, så en stemme kræver kampe på kontoen frem for på kortet, og bedømmelsen opdeles efter, hvor godt spillerne spiller.",
+  "nobody-has-rated-a-map-yet": "Intet kort er blevet bedømt endnu. De første stemmer findes på kortsiderne.",
+  "think": "tænke",
+  "title": "Hvad spillerne {think} om kortene",
+  "votes-across-maps": "{totalVotes} stemmer på tværs af {ratedMaps} kort."
+}

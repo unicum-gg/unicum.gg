@@ -8,9 +8,27 @@
     "servers": "Servers"
   },
   "links": {
-    "top-players": {
-      "label": "Top spelers",
-      "description": "Klassement aller tijden voor spelers"
+    "advances": {
+      "description": "Klassement voor Niveau X, 15 tegen 15"
+    },
+    "all-maps": {
+      "label": "Alle kaarten",
+      "description": "Elke Kaart in het spel"
+    },
+    "all-tournaments": {
+      "label": "Toernooien",
+      "description": "Elk toernooi, open en afgerond"
+    },
+    "battle-type": {
+      "description": "{type} kaarten"
+    },
+    "map-changes": {
+      "label": "Wijzigingen",
+      "description": "Herwerkingen van Kaarten per Updaten"
+    },
+    "map-community": {
+      "label": "Beoordelingen van de community",
+      "description": "Beoordeeld door de spelers die erheen worden verzonden"
     },
     "players-onslaught": {
       "description": "Klassement voor gerangschikte Bestorming"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Klassement voor battle royale"
     },
-    "top-clans": {
-      "label": "Top clans",
-      "description": "Klassement aller tijden voor Clans"
+    "servers-population": {
+      "label": "Server populatie",
+      "description": "Spelers online, nu en in de loop van de tijd"
     },
     "stronghold": {
       "description": "Ranglijst voor schermutselingen"
     },
-    "advances": {
-      "description": "Klassement voor Niveau X, 15 tegen 15"
+    "tank-changes": {
+      "label": "Wijzigingen",
+      "description": "Buffs en nerfs per Updaten"
     },
-    "tank-performances": {
-      "label": "Prestaties",
-      "description": "Winstpercentage en Beschadig per Tank"
-    },
-    "tank-specs": {
-      "label": "Specificaties",
-      "description": "Statistieken voor elke Tank"
+    "tank-community": {
+      "label": "Gemeenschapsbeoordelingen",
+      "description": "Beoordeeld door spelers die ze bezitten"
     },
     "tank-economics": {
       "label": "Economics",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Drempelwaarden voor badges van Meesterschap"
     },
-    "tank-changes": {
-      "label": "Wijzigingen",
-      "description": "Buffs en nerfs per Updaten"
+    "tank-performances": {
+      "label": "Prestaties",
+      "description": "Winstpercentage en Beschadig per Tank"
     },
-    "tank-community": {
-      "label": "Gemeenschapsbeoordelingen",
-      "description": "Beoordeeld door spelers die ze bezitten"
+    "tank-specs": {
+      "label": "Specificaties",
+      "description": "Statistieken voor elke Tank"
     },
     "tank-videos": {
       "label": "Video’s",
       "description": "Gameplay van de community"
     },
-    "all-tournaments": {
-      "label": "Toernooien",
-      "description": "Elk toernooi, open en afgerond"
+    "top-clans": {
+      "label": "Top clans",
+      "description": "Klassement aller tijden voor Clans"
     },
-    "all-maps": {
-      "label": "Alle kaarten",
-      "description": "Elke Kaart in het spel"
-    },
-    "map-changes": {
-      "label": "Wijzigingen",
-      "description": "Herwerkingen van Kaarten per Updaten"
-    },
-    "battle-type": {
-      "description": "{type} kaarten"
-    },
-    "servers-population": {
-      "label": "Server populatie",
-      "description": "Spelers online, nu en in de loop van de tijd"
+    "top-players": {
+      "label": "Top spelers",
+      "description": "Klassement aller tijden voor spelers"
     }
   }
 }

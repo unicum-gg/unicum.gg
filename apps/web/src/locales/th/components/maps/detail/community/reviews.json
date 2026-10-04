@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} การรบโดยรวม",
+  "battles-recently": "{battles} การรบในช่วง 30 วัน",
+  "no-written-opinions-yet": "ยังไม่มีความคิดเห็นที่เขียนไว้ หากคุณเล่น ความคิดเห็นของคุณจะเป็นความคิดเห็นแรก",
+  "win-rate": "อัตราชนะ {winrate}%",
+  "written-on": "เขียนไว้เมื่อ {gameVersion}"
+}

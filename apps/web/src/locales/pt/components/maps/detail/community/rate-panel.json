@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Ainda não lemos o seu recorde. Acabámos de o pedir à Wargaming, por isso tente novamente dentro de um momento.",
+  "checking-record": "A verificar o seu recorde...",
+  "fetching-your-record": "A obter o seu recorde",
+  "have-you-played-here": "Já jogou aqui?",
+  "more-to-go": "Faltam {count} batalhas",
+  "more-to-go-one": "Falta {count} batalha",
+  "sign-in-to-rate": "Inicie sessão com a sua conta Wargaming para avaliar este mapa. Ninguém escolhe para onde é enviado, por isso pedimos as batalhas da sua conta em vez das batalhas neste mapa: a Wargaming não publica um recorde por mapa de qualquer um e não vamos afirmar que fizemos uma verificação que não fizemos.",
+  "sign-in-to-rate-it": "Inicie sessão para o avaliar",
+  "signed-in-on": "Sessão iniciada em {region}",
+  "too-few-battles": "A sua conta tem {played} batalhas. Pedimos {required} antes de um voto sobre {map} contar, o que corresponde a cerca de vinte passagens por cada mapa da rotação, para que o veredito venha de alguém que esteve aqui na verdade."
+}

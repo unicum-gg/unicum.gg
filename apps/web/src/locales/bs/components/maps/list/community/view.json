@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Svaka mapa ocijenjena ocjenom od jedan do pet od ljudi koji su poslani na nju. Niko ne može odabrati gdje igra, zato glas traži bitke na računu, a ne na mapi, i presuda je podijeljena prema tome koliko dobro igrači igraju.",
+  "nobody-has-rated-a-map-yet": "Nijedna mapa još nije ocijenjena. Prvi glasovi su na stranicama mapa.",
+  "think": "misliti",
+  "title": "Šta igrači {think} o mapama",
+  "votes-across-maps": "{totalVotes} glasova širom {ratedMaps} mapa."
+}

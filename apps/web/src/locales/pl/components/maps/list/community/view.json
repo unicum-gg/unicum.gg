@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Każda mapa oceniona w skali do pięciu przez osoby, które zostały na nią wysłane. Nikt nie wybiera, gdzie gra, więc głosowanie wymaga bitew na koncie, a nie na mapie, a werdykt zależy od tego, jak dobrze grają głosujący.",
+  "nobody-has-rated-a-map-yet": "Nie oceniono jeszcze żadnej mapy. Pierwsze głosy są na stronach map.",
+  "think": "myśleć",
+  "title": "Co gracze mogą {think} o mapach",
+  "votes-across-maps": "{totalVotes} głosów w całym zakresie {ratedMaps} map."
+}

@@ -1,5 +1,13 @@
 {
   "title": "World of Tanks-karta: {map} ({region})",
   "description": "{map}: en {width} × {height} m stor World of Tanks-karta.",
-  "description-modes": "{map}: en {width} × {height} m stor World of Tanks-karta för {modes}."
+  "description-modes": "{map}: en {width} × {height} m stor World of Tanks-karta för {modes}.",
+  "community": {
+    "title": "Spelarrecensioner och communitybetyg för {map} ({region})",
+    "description": "Vad spelarna tycker om {map}: communityts betyg från ett till fem, uppdelat efter hur väl de som röstar spelar, med skriftliga omdömen från konton som har striderna bakom sig. Balans, variation, flöde och om varje fordonsklass har en uppgift där."
+  },
+  "history": {
+    "title": "Historik över förändringar på {map} ({region}), omarbetningar per uppdatering",
+    "description": "Alla registrerade förändringar på {map} över World of Tanks-uppdateringar: baserna, spawnpunkterna och spelområdet som Wargaming flyttade, version för version, markerade på den minikarta där de flyttades."
+  }
 }

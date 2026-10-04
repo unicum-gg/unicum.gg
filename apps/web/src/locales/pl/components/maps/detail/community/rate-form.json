@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Jeszcze kilka słów: pozostało {count}.",
+  "could-not-withdraw": "Nie udało się wycofać tej oceny. Spróbuj ponownie za chwilę.",
+  "hide-the-detailed-axes": "Ukryj szczegółowe osie",
+  "not-enough-battles": "Na Twoim koncie rozegrano za mało bitew, aby głos się liczył.",
+  "published-once-read": "Opublikowano po przeczytaniu przez moderatora. Twoje gwiazdki liczą się od razu.",
+  "rate-it-in-detail": "Oceń szczegółowo (opcjonalnie)",
+  "review": {
+    "none": "Ocena zapisana.",
+    "queued": "Ocena zapisana. Twoja recenzja oczekuje u moderatora.",
+    "published": "Ocena zapisana. Twoja recenzja jest już na żywo.",
+    "pending": "Ocena zapisana. Twoja recenzja nadal oczekuje u moderatora.",
+    "rejected": "Ocena zapisana. Twoja wcześniejsza recenzja nie została opublikowana, więc liczą się tylko Twoje gwiazdki.",
+    "closed": "Ocena zapisana. Pisemne opinie są teraz zamknięte, więc tekst nie został zachowany."
+  },
+  "review-length": "Twoja recenzja potrzebuje od {min} do {max} znaków.",
+  "save-failed": "Nie udało się tego zapisać. Spróbuj ponownie za moment.",
+  "say-why-optional": "Powiedz dlaczego (opcjonalnie)",
+  "signed-with": "Podpisano Twoim rekordem obejmującym {battles} bitwy z ostatnich 30 dni",
+  "submit-my-rating": "Prześlij moją ocenę",
+  "too-many-edits": "To bardzo dużo zmian naraz. Daj temu minutę.",
+  "update-my-rating": "Zaktualizuj moją ocenę",
+  "what-it-is-good-at": "Gdzie rozstrzyga się bitwa, której stronie jest łatwiej i kto powinien chcieć, by go tu wysłano.",
+  "withdraw": "Wycofaj",
+  "your-rating-has-been-withdrawn": "Twoja ocena została wycofana.",
+  "your-review-is-waiting-on": "Twoja recenzja oczekuje u moderatora. Tylko Ty możesz ją tutaj zobaczyć.",
+  "your-review-was-not-published": "Twoja recenzja nie została opublikowana. Twoje gwiazdki nadal liczą się do średniej."
+}

@@ -1,0 +1,15 @@
+{
+  "agreement": "Egyetértés",
+  "camouflage": "A pálya történetének szezonja.",
+  "fun": "Szórakozás",
+  "map": "Pálya",
+  "overall": "Összesen",
+  "season": "Szezon",
+  "tips": {
+    "overall": "A játékosok szerint mennyire jó. Az összes pálya szavazatainak átlagos értékéhez zsugorított átlag alapján rangsorolva, így egy négy szavazattal rendelkező pálya nem előzhet meg egy négyszáz szavazattal rendelkezőt.",
+    "fun": "Mennyire élvezik a játékosok, hogy ide küldik őket, ami rendszerint nem ugyanaz a kérdés.",
+    "votes": "A leadott szavazatok száma, mindegyik mögött valódi csatákat megvívott fiókkal.",
+    "consensus": "Mennyire térnek el egymástól a szavazók. Rendezd csökkenő sorrendbe azokhoz a pályákhoz, amelyekről a játékosok nem tudnak megegyezni, ez az érdekesebb lista."
+  },
+  "votes": "Szavazatok"
+}

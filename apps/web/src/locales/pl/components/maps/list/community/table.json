@@ -1,0 +1,15 @@
+{
+  "agreement": "Zgodność",
+  "camouflage": "Sezon, w którym osadzona jest mapa.",
+  "fun": "Zabawa",
+  "map": "Mapa",
+  "overall": "Ogółem",
+  "season": "Sezon",
+  "tips": {
+    "overall": "Jak dobrzy gracze oceniają mapę. Ranking oparty na średniej przesuniętej w stronę średniej wszystkich głosów dotyczących map, więc mapa z czterema głosami nie może wyprzedzić mapy z czterystoma głosami.",
+    "fun": "Jak bardzo graczom podoba się trafianie tutaj, co często nie jest tym samym.",
+    "votes": "Oddane głosy, każdy z konta mającego za sobą rzeczywiste bitwy.",
+    "consensus": "Jak bardzo różnią się zdania głosujących. Sortuj malejąco, aby zobaczyć mapy, co do których gracze nie mogą się zgodzić. To ciekawsza lista."
+  },
+  "votes": "Głosy"
+}

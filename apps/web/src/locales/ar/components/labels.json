@@ -41,6 +41,44 @@
     "beginnerFriendliness": "مدى تسامحها مع الأخطاء إذا كنت لا تزال تتعلم.",
     "versatility": "هل تصلح على أي خريطة ومع أي فريق؟"
   },
+  "rating-axes-short": {
+    "overall": "بشكل عام",
+    "fun": "المتعة",
+    "firepower": "قوة النيران",
+    "armour": "التدريع",
+    "mobility": "تنقل",
+    "gunHandling": "التعامل مع المدفع",
+    "concealment": "تمويه",
+    "beginnerFriendliness": "المبتدئون",
+    "versatility": "متعدد الاستخدامات"
+  },
+  "map-rating-axes": {
+    "overall": "بشكل عام",
+    "fun": "المتعة",
+    "balance": "التوازن",
+    "variety": "التنوع",
+    "flow": "سير المعركة",
+    "classFairness": "إنصاف الفئات",
+    "beginnerFriendliness": "ملائمة للمبتدئين"
+  },
+  "map-rating-axis-hints": {
+    "overall": "ما مدى جودة هذه الخريطة، مع أخذ كل الأمور في الاعتبار؟",
+    "fun": "إلى أي مدى تستمتع بأن تُرسَل إلى هنا؟",
+    "balance": "هل يبدأ الجانبان بفرصة متساوية؟",
+    "variety": "هل توجد أكثر من طريقة للعبها، أم أن هناك طريقًا واحدًا يأخذه الجميع؟",
+    "flow": "هل تتحرك المعركة، أم تتوقف في مواجهة جامدة؟",
+    "classFairness": "هل لكل فئة من المركبات مهمة هنا؟",
+    "beginnerFriendliness": "ما مدى تسامحها معك إذا كنت لا تزال تتعلم؟"
+  },
+  "map-rating-axes-short": {
+    "overall": "بشكل عام",
+    "fun": "المتعة",
+    "balance": "التوازن",
+    "variety": "التنوع",
+    "flow": "الانسيابية",
+    "classFairness": "الفئة",
+    "beginnerFriendliness": "المبتدئ"
+  },
   "voter-brackets": {
     "unknown": "غير معدل",
     "learning": "في مرحلة التعلم",

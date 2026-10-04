@@ -1,0 +1,7 @@
+{
+  "battles-overall": "总体{battles}场",
+  "battles-recently": "30天内进行过{battles}场战斗",
+  "no-written-opinions-yet": "还没有文字意见。如果您进行过对战，您的意见将会是第一条。",
+  "win-rate": "胜率{winrate}%",
+  "written-on": "撰写于{gameVersion}"
+}

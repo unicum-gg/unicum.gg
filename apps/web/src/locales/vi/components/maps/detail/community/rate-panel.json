@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Chúng tôi chưa đọc kỷ lục của bạn. Chúng tôi vừa yêu cầu Wargaming cung cấp kỷ lục đó, vì vậy hãy thử lại sau một khoảnh khắc.",
+  "checking-record": "Đang kiểm tra kỷ lục của bạn...",
+  "fetching-your-record": "Đang lấy kỷ lục của bạn",
+  "have-you-played-here": "Bạn đã chơi ở đây chưa?",
+  "more-to-go": "Còn {count} trận đấu nữa",
+  "more-to-go-one": "Còn {count} trận đấu nữa",
+  "sign-in-to-rate": "Đăng nhập bằng tài khoản Wargaming của bạn để đánh giá bản đồ này. Không ai được chọn nơi mình được gửi đến, vì vậy chúng tôi yêu cầu số trận đấu trên tài khoản của bạn thay vì trên bản đồ này. Wargaming không đăng kỷ lục riêng theo bản đồ cho bất kỳ ai, và chúng tôi sẽ không tuyên bố đã kiểm tra điều mình chưa thực sự kiểm tra.",
+  "sign-in-to-rate-it": "Đăng nhập để đánh giá",
+  "signed-in-on": "Đã đăng nhập tại {region}",
+  "too-few-battles": "Tài khoản của bạn có {played} trận đấu đã chơi. Chúng tôi yêu cầu {required} trận đấu trước khi một bình chọn cho {map} được tính. Con số này tương đương khoảng hai mươi lượt đi qua mỗi bản đồ trong vòng xoay, để phán quyết đến từ người đã thực sự chơi ở đây."
+}

@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} укупно",
+  "battles-recently": "{battles} битака у 30 dana",
+  "no-written-opinions-yet": "Још нема писаних мишљења. Ако играте, ваше би било прво.",
+  "win-rate": "{winrate}% победа",
+  "written-on": "написано у верзији {gameVersion}"
+}

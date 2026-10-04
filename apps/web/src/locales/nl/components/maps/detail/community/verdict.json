@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Elke stem is ondertekend met het eigen record van de stemmer. Wargaming publiceert voor niemand een record per map, dus wat een stem bewijst, is dat de auteur speelt, niet dat die hierheen is gestuurd.",
+  "every-vote-signed-average": "Elke stem is ondertekend met het eigen record van de stemmer, gemiddeld {battles} gevechten in de afgelopen 30 dagen. Wargaming publiceert voor niemand een record per map, dus wat een stem bewijst, is dat de auteur speelt, niet dat die hierheen is gestuurd.",
+  "fun": "Plezier",
+  "how-good-the-map-is": "Hoe goed de map is",
+  "how-much-people-enjoy-it": "Hoeveel mensen het leuk vinden om hierheen gestuurd te worden",
+  "if-you-play-here": "Als je speelt, ben je precies op wie deze pagina wacht.",
+  "nobody-has-rated-this-map": "Niemand heeft deze map nog beoordeeld.",
+  "overall": "Totaal",
+  "votes": "{count} stemmen",
+  "votes-one": "{count} stem"
+}

@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Άξονας προς άξονα",
-  "by-server": "Κατά διακομιστή",
-  "community-verdict": "Απόφαση κοινότητας",
+  "axis-by-axis": "Ανά άξονα",
+  "by-server": "Ανά διακομιστή",
+  "community-verdict": "Ετυμηγορία κοινότητας",
   "every-server-one-average": "Κάθε διακομιστής, ένας μέσος όρος",
   "n-shown": ", εμφανίζονται {count}",
   "opinion": "{count, plural, one {# γνώμη} other {# γνώμες}}",

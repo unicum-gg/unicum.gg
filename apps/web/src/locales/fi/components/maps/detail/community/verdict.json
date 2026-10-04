@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Jokainen äänestä on vahvistettu äänestäjän omalla ennätyksellä. Wargaming ei julkaise kenellekään karttakohtaista ennätystä, joten äänestä käy ilmi, että sen kirjoittaja pelaa, ei se, että hänet olisi lähetetty tänne.",
+  "every-vote-signed-average": "Jokainen äänestä on vahvistettu äänestäjän omalla ennätyksellä, keskimäärin {battles} taistelulla viimeisten 30 päivän aikana. Wargaming ei julkaise kenellekään karttakohtaista ennätystä, joten äänestä käy ilmi, että sen kirjoittaja pelaa, ei se, että hänet olisi lähetetty tänne.",
+  "fun": "Hauskuus",
+  "how-good-the-map-is": "Kuinka hyvä kartta on",
+  "how-much-people-enjoy-it": "Kuinka paljon pelaajat nauttivat tänne lähettämisestä",
+  "if-you-play-here": "Jos pelaat, olet täsmälleen se, jota tämä sivu odottaa.",
+  "nobody-has-rated-this-map": "Kukaan ei ole vielä arvioinut tätä karttaa.",
+  "overall": "Yhteensä",
+  "votes": "{count} ääntä",
+  "votes-one": "{count} ääni"
+}

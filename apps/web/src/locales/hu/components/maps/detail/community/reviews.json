@@ -1,0 +1,7 @@
+{
+  "battles-overall": "Összesen: {battles}",
+  "battles-recently": "{battles} csata 30 nap alatt",
+  "no-written-opinions-yet": "Még nincsenek írott vélemények. Ha játszol, a tiéd lehet az első.",
+  "win-rate": "{winrate}%-os győzelmi arány",
+  "written-on": "írva: {gameVersion}"
+}

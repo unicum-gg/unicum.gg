@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "محورًا تلو الآخر",
+  "axis-by-axis": "محورًا بمحور",
   "by-server": "حسب الخادم",
-  "community-verdict": "حكم المجتمع",
+  "community-verdict": "رأي المجتمع",
   "every-server-one-average": "كل خادم، متوسط واحد",
   "n-shown": "، مع عرض {count}",
   "opinion": "{count, plural, zero {# رأي} one {# رأي} two {# رأيان} few {# آراء} many {# رأيًا} other {# رأي}}",

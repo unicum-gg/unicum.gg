@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Kuinka anteeksiantava se on, jos vielä opettelet.",
     "versatility": "Toimiiko se millä tahansa kartalla ja missä tahansa joukkueessa?"
   },
+  "rating-axes-short": {
+    "overall": "Yhteensä",
+    "fun": "Hauskuus",
+    "firepower": "Tulivoima",
+    "armour": "Panssarointi",
+    "mobility": "Liikkuvuus",
+    "gunHandling": "Hallittavuus",
+    "concealment": "Naamiointi",
+    "beginnerFriendliness": "Aloittelija",
+    "versatility": "Monipuolinen"
+  },
+  "map-rating-axes": {
+    "overall": "Yhteensä",
+    "fun": "Hauskuus",
+    "balance": "Tasapaino",
+    "variety": "Monipuolisuus",
+    "flow": "Sujuvuus",
+    "classFairness": "Luokkien oikeudenmukaisuus",
+    "beginnerFriendliness": "Aloittelijaystävällisyys"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Kuinka hyvä tämä kartta on, kun kaikki otetaan huomioon?",
+    "fun": "Kuinka paljon nautit siitä, että sinut lähetetään tänne?",
+    "balance": "Aloittavatko molemmat puolet yhtä suurella mahdollisuudella?",
+    "variety": "Onko karttaa mahdollista pelata useammalla tavalla tai kulkevatko kaikki samaa reittiä?",
+    "flow": "Eteneekö taistelu vai pysähtyykö se pattitilanteeksi?",
+    "classFairness": "Onko jokaisella ajoneuvoluokalla täällä tehtävä?",
+    "beginnerFriendliness": "Kuinka anteeksiantava kartta on, jos vielä opettelet?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Yhteensä",
+    "fun": "Hauskuus",
+    "balance": "Tasapaino",
+    "variety": "Monipuolisuus",
+    "flow": "Sujuvuus",
+    "classFairness": "Luokat",
+    "beginnerFriendliness": "Aloittelija"
+  },
   "voter-brackets": {
     "unknown": "Arvioimaton",
     "learning": "Oppiminen",

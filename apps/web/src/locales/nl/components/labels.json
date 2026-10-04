@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Hoe vergevingsgezind hij is als je het nog aan het leren bent.",
     "versatility": "Werkt hij op elke kaart en in elk team?"
   },
+  "rating-axes-short": {
+    "overall": "Totaal",
+    "fun": "Plezier",
+    "firepower": "Vuurkracht",
+    "armour": "Pantser",
+    "mobility": "Mobiliteit",
+    "gunHandling": "Besturing",
+    "concealment": "Camouflage",
+    "beginnerFriendliness": "Beginner",
+    "versatility": "Veelzijdig"
+  },
+  "map-rating-axes": {
+    "overall": "Totaal",
+    "fun": "Plezier",
+    "balance": "Balans",
+    "variety": "Variatie",
+    "flow": "Verloop",
+    "classFairness": "Eerlijkheid voor klassen",
+    "beginnerFriendliness": "Beginnervriendelijk"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Hoe goed is deze kaart, alles bij elkaar genomen?",
+    "fun": "Hoeveel plezier heb je ervan als je hierheen wordt verzonden?",
+    "balance": "Beginnen beide kanten met een gelijke kans?",
+    "variety": "Is er meer dan één manier om deze kaart te spelen, of neemt iedereen dezelfde route?",
+    "flow": "Beweegt het gevecht zich voort, of loopt het vast in een patstelling?",
+    "classFairness": "Heeft elke klasse voertuigen hier een taak?",
+    "beginnerFriendliness": "Hoe vergevingsgezind is deze kaart als je nog aan het leren bent?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Totaal",
+    "fun": "Plezier",
+    "balance": "Balans",
+    "variety": "Variatie",
+    "flow": "Verloop",
+    "classFairness": "Klasse",
+    "beginnerFriendliness": "Beginner"
+  },
   "voter-brackets": {
     "unknown": "Onbeoordeeld",
     "learning": "Leren",

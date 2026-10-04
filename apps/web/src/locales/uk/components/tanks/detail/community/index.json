@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "За кожною віссю",
+  "axis-by-axis": "За осями",
   "by-server": "За сервером",
-  "community-verdict": "Вирок спільноти",
+  "community-verdict": "Вердикт спільноти",
   "every-server-one-average": "Кожен сервер, одне середнє",
   "n-shown": ", показано {count}",
   "opinion": "{count, plural, one {# думка} few {# думки} many {# думок} other {# думок}}",

@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Unas palabras más: faltan {count}.",
+  "could-not-withdraw": "No se pudo retirar eso. Inténtalo de nuevo dentro de un momento.",
+  "hide-the-detailed-axes": "Ocultar los ejes detallados",
+  "not-enough-battles": "Tu cuenta no ha jugado lo suficiente como para que tu voto cuente.",
+  "published-once-read": "Se publicará cuando un moderador lo haya leído. Tus estrellas cuentan directamente.",
+  "rate-it-in-detail": "Tasa este mapa en detalle (opcional)",
+  "review": {
+    "none": "Valoración guardada.",
+    "queued": "Valoración guardada. Tu reseña está con un moderador.",
+    "published": "Valoración guardada. Tu reseña ya está en directo.",
+    "pending": "Valoración guardada. Tu reseña sigue en espera de un moderador.",
+    "rejected": "Valoración guardada. Tu reseña anterior no se publicó, así que solo cuentan tus estrellas.",
+    "closed": "Valoración guardada. Las opiniones escritas están cerradas ahora mismo, así que el texto no se ha conservado."
+  },
+  "review-length": "Tu reseña debe tener entre {min} y {max} caracteres.",
+  "save-failed": "No se ha podido guardar. Inténtalo de nuevo dentro de un momento.",
+  "say-why-optional": "Indica el motivo (opcional)",
+  "signed-with": "Firmado con tus {battles} batallas de los últimos 30 días",
+  "submit-my-rating": "Enviar mi valoración",
+  "too-many-edits": "Son demasiadas modificaciones de una vez. Espera un minuto.",
+  "update-my-rating": "Actualizar mi valoración",
+  "what-it-is-good-at": "Dónde se decide la batalla, qué lado lo tiene más fácil y quién debería querer ser enviado aquí.",
+  "withdraw": "Retirar",
+  "your-rating-has-been-withdrawn": "Tu valoración se ha retirado.",
+  "your-review-is-waiting-on": "Tu reseña está en espera de un moderador. Solo tú puedes verla aquí.",
+  "your-review-was-not-published": "Tu reseña no se publicó. Tus estrellas siguen contando para el promedio."
+}

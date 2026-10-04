@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} усяго",
+  "battles-recently": "{battles} баёў за 30 дзён",
+  "no-written-opinions-yet": "Пісьмовых меркаванняў пакуль няма. Калі вы гуляеце, вашы былі б першымі.",
+  "win-rate": "{winrate}% перамог",
+  "written-on": "напісаны ў версіі {gameVersion}"
+}

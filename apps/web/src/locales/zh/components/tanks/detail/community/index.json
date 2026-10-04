@@ -1,6 +1,6 @@
 {
-  "axis-by-axis": "逐项分析",
-  "by-server": "按服务器分类",
+  "axis-by-axis": "按维度",
+  "by-server": "按服务器",
   "community-verdict": "社区评价",
   "every-server-one-average": "每个服务器，一个平均值",
   "n-shown": "，显示{count}条",
@@ -10,6 +10,6 @@
   "reputation-against-results": "声誉与结果对比",
   "same-tank-different-metas": "同一辆坦克，不同环境",
   "the-same-tank-by-how": "根据投票者的对战水平查看同一辆坦克",
-  "what-players-wrote": "玩家写下的内容",
+  "what-players-wrote": "玩家评价",
   "who-is-saying-it": "谁在这样说"
 }

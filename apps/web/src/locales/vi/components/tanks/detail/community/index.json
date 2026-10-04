@@ -1,7 +1,7 @@
 {
-  "axis-by-axis": "Từng trục một",
+  "axis-by-axis": "Theo từng trục",
   "by-server": "Theo máy chủ",
-  "community-verdict": "Ý kiến cộng đồng",
+  "community-verdict": "Nhận định của cộng đồng",
   "every-server-one-average": "Mỗi máy chủ, một giá trị trung bình",
   "n-shown": ", hiển thị {count}",
   "opinion": "{count, plural, other {# ý kiến}}",

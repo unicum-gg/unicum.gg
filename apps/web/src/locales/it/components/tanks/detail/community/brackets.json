@@ -1,5 +1,6 @@
 {
   "battles": "{count} battaglie",
+  "battles-recent": "{count} battaglie in 30 giorni",
   "no-votes": "no voti",
   "rated-higher": "I giocatori più forti gli assegnano {stars} stelle in più rispetto al resto del server. Questo carro premia chi sa cosa sta facendo.",
   "rated-lower": "I giocatori più forti gli assegnano {stars} stelle in meno rispetto al resto del server. Fa sembrare bravi finché non gli si chiede di fare sul serio.",

@@ -1,0 +1,12 @@
+{
+  "block-no-record": "Emme ole vielä lukeneet ennätystäsi. Pyysimme sen juuri Wargamingilta, joten yritä hetken kuluttua uudelleen.",
+  "checking-record": "Tarkistetaan ennätystäsi...",
+  "fetching-your-record": "Haemme ennätystäsi",
+  "have-you-played-here": "Oletko pelannut täällä?",
+  "more-to-go": "Vielä {count} taistelua jäljellä",
+  "more-to-go-one": "Vielä {count} taistelu jäljellä",
+  "sign-in-to-rate": "Kirjaudu Wargaming-tilillesi arvioidaksesi tämän kartan. Kukaan ei valitse, minne hänet lähetetään, joten kysymme tilisi taisteluista emmekä tällä kartalla pelatuista taisteluista. Wargaming ei julkaise kenellekään karttakohtaista ennätystä, emmekä väitä tehneemme tarkistusta, jota emme ole tehneet.",
+  "sign-in-to-rate-it": "Kirjaudu arvioidaksesi sen",
+  "signed-in-on": "Kirjautuneena alueella {region}",
+  "too-few-battles": "Tililläsi on {played} pelattua taistelua. Kysymme {required} taistelua ennen kuin äänestä {map} lasketaan. Se vastaa noin kahtakymmentä kierrosta jokaisella kierron kartalla, jotta tuomio tulee joltain, joka on todella ollut täällä."
+}

@@ -8,9 +8,27 @@
     "servers": "Serveri"
   },
   "links": {
-    "top-players": {
-      "label": "Top spēlētāji",
-      "description": "Spēlētāju līderu saraksts visā vēsturē"
+    "advances": {
+      "description": "X līmeņa 15 pret 15 rangs"
+    },
+    "all-maps": {
+      "label": "Visas kartes",
+      "description": "Katra spēles karte"
+    },
+    "all-tournaments": {
+      "label": "Turnīri",
+      "description": "Katrs turnīrs, atvērts un noslēgts"
+    },
+    "battle-type": {
+      "description": "{type} kartes"
+    },
+    "map-changes": {
+      "label": "Izmaiņas",
+      "description": "Karšu pārveidojumi pēc atjauninājuma"
+    },
+    "map-community": {
+      "label": "Kopienas vērtējumi",
+      "description": "Novērtēts no tur nosūtītajiem spēlētājiem"
     },
     "players-onslaught": {
       "description": "Ranga Uzbrukuma līderu saraksts"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "Kaujas karalistes līderu saraksts"
     },
-    "top-clans": {
-      "label": "Top klani",
-      "description": "Klanu līderu saraksts visā vēsturē"
+    "servers-population": {
+      "label": "Servera apdzīvotība",
+      "description": "Tiešsaistes spēlētāji tagad un laika gaitā"
     },
     "stronghold": {
       "description": "Sadursmju rangs"
     },
-    "advances": {
-      "description": "X līmeņa 15 pret 15 rangs"
+    "tank-changes": {
+      "label": "Izmaiņas",
+      "description": "Uzlabošanas un vājināšanas pēc atjauninājuma"
     },
-    "tank-performances": {
-      "label": "Sniedzamība",
-      "description": "Uzvaru attiecība un bojājumi katram tankam"
-    },
-    "tank-specs": {
-      "label": "Specifikācijas",
-      "description": "Statistika par katru tanku"
+    "tank-community": {
+      "label": "Kopienas vērtējumi",
+      "description": "Novērtējuši spēlētāji, kuriem tie pieder"
     },
     "tank-economics": {
       "label": "Ekonomika",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "Meistarības nozīmīšu sliekšņi"
     },
-    "tank-changes": {
-      "label": "Izmaiņas",
-      "description": "Uzlabošanas un vājināšanas pēc atjauninājuma"
+    "tank-performances": {
+      "label": "Sniedzamība",
+      "description": "Uzvaru attiecība un bojājumi katram tankam"
     },
-    "tank-community": {
-      "label": "Kopienas vērtējumi",
-      "description": "Novērtējuši spēlētāji, kuriem tie pieder"
+    "tank-specs": {
+      "label": "Specifikācijas",
+      "description": "Statistika par katru tanku"
     },
     "tank-videos": {
       "label": "Video",
       "description": "Kopienas spēļu ieraksti"
     },
-    "all-tournaments": {
-      "label": "Turnīri",
-      "description": "Katrs turnīrs, atvērts un noslēgts"
+    "top-clans": {
+      "label": "Top klani",
+      "description": "Klanu līderu saraksts visā vēsturē"
     },
-    "all-maps": {
-      "label": "Visas kartes",
-      "description": "Katra spēles karte"
-    },
-    "map-changes": {
-      "label": "Izmaiņas",
-      "description": "Karšu pārveidojumi pēc atjauninājuma"
-    },
-    "battle-type": {
-      "description": "{type} kartes"
-    },
-    "servers-population": {
-      "label": "Servera apdzīvotība",
-      "description": "Tiešsaistes spēlētāji tagad un laika gaitā"
+    "top-players": {
+      "label": "Top spēlētāji",
+      "description": "Spēlētāju līderu saraksts visā vēsturē"
     }
   }
 }

@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Tengelyenként",
+  "by-server": "Szerver szerint",
+  "community-verdict": "Közösségi értékelés",
+  "every-server-one-average": "Minden szerver, egy átlag",
+  "n-shown": ", {count} megjelenítve",
+  "opinion": "{count, plural, one {# vélemény} other {# vélemény}}",
+  "rate-the": "A(z) {mapName} értékelése",
+  "same-map-different-metas": "Ugyanaz a terep, különböző meták",
+  "the-same-map-by-how": "Ugyanaz a pálya, a szavazó játéktudása szerint",
+  "what-players-wrote": "Amit a játékosok írtak",
+  "who-is-saying-it": "Ki mondja ezt"
+}

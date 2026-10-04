@@ -1,0 +1,15 @@
+{
+  "agreement": "Slaganje",
+  "camouflage": "Sezona u kojoj je mapa smještena.",
+  "fun": "Zabava",
+  "map": "Mapa",
+  "overall": "Sveukupno",
+  "season": "Sezona",
+  "tips": {
+    "overall": "Kako dobri igrači misle da je mapa dobra. Rangirano na prosjeku pomjerenom prema prosjeku svih glasova za mape, tako da mapa s četiri glasa ne može nadmašiti onu s četiri stotine.",
+    "fun": "Koliko igrači uživaju kada su poslani ovdje, što redovno nije isto pitanje.",
+    "votes": "Glasovi, svaki s računa koji ima stvarne bitke iza sebe.",
+    "consensus": "Koliko su glasači udaljeni jedni od drugih. Sortiraj opadajuće za mape oko kojih se igrači ne mogu složiti, što je zanimljivija lista."
+  },
+  "votes": "Glasovi"
+}

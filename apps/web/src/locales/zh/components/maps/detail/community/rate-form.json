@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "再说几句：还剩 {count} 个字。",
+  "could-not-withdraw": "暂时无法撤回该内容。请稍后再试。",
+  "hide-the-detailed-axes": "隐藏详细坐标轴",
+  "not-enough-battles": "您的账号进行过的战斗场次不足，投票不会计入统计。",
+  "published-once-read": "版主阅读后将发布。您的星级会立即计入。",
+  "rate-it-in-detail": "详细评分（可选）",
+  "review": {
+    "none": "评分已保存。",
+    "queued": "评分已保存。您的评价正在等待版主审核。",
+    "published": "评分已保存。您的评价已经发布。",
+    "pending": "评分已保存。您的评价仍在等待版主审核。",
+    "rejected": "评分已保存。您之前的评价未发布，因此只有您的星级会计入统计。",
+    "closed": "评分已保存。当前已关闭文字意见功能，因此未保留评价内容。"
+  },
+  "review-length": "您的评价需要包含{min}至{max}个字符。",
+  "save-failed": "暂时无法保存该内容。请稍后再试。",
+  "say-why-optional": "说说原因（可选）",
+  "signed-with": "凭借您过去30天的{battles}战斗场次进行认证",
+  "submit-my-rating": "提交我的评分",
+  "too-many-edits": "一次修改的内容太多了。请稍等片刻。",
+  "update-my-rating": "更新我的评分",
+  "what-it-is-good-at": "战斗在哪里决出胜负，哪一侧更容易，以及谁应该希望被发送到这里。",
+  "withdraw": "撤回",
+  "your-rating-has-been-withdrawn": "您的评分已撤回。",
+  "your-review-is-waiting-on": "您的评价正在等待版主审核。只有您能在此处查看。",
+  "your-review-was-not-published": "您的评价未发布。您的星级仍会计入平均值。"
+}

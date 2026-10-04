@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Birkaç kelime daha: {count} kaldı.",
+  "could-not-withdraw": "Geri çekilemedi. Bir an sonra tekrar deneyin.",
+  "hide-the-detailed-axes": "Ayrıntılı eksenleri gizle",
+  "not-enough-battles": "Hesabınızda bir oyun sayılması için yeterli savaş oynanmadı.",
+  "published-once-read": "Bir moderatör okuduktan sonra yayınlanır. Yıldızlarınız hemen sayılır.",
+  "rate-it-in-detail": "Ayrıntılı olarak değerlendir (isteğe bağlı)",
+  "review": {
+    "none": "Puan kaydedildi.",
+    "queued": "Puan kaydedildi. İncelemeniz bir moderatörde.",
+    "published": "Puan kaydedildi. İncelemeniz zaten yayınlandı.",
+    "pending": "Puan kaydedildi. İncelemeniz hâlâ bir moderatörü bekliyor.",
+    "rejected": "Puan kaydedildi. Önceki incelemeniz yayınlanmadı, bu nedenle yalnızca yıldızlarınız sayılır.",
+    "closed": "Puan kaydedildi. Yazılı görüşler şu anda kapalı, bu nedenle metin korunmadı."
+  },
+  "review-length": "İncelemeniz {min} ile {max} karakter arasında olmalı.",
+  "save-failed": "Kaydedilemedi. Bir an sonra tekrar deneyin.",
+  "say-why-optional": "Nedenini belirt (isteğe bağlı)",
+  "signed-with": "Son 30 günde oynanan {battles} savaşınızla imzalandı",
+  "submit-my-rating": "Puanımı gönder",
+  "too-many-edits": "Aynı anda çok fazla düzenleme yapıldı. Bir dakika bekleyin.",
+  "update-my-rating": "Puanımı güncelle",
+  "what-it-is-good-at": "Savaşın nerede kararlaştığı, hangi tarafın işinin daha kolay olduğu ve kimlerin buraya gönderilmek isteyeceği.",
+  "withdraw": "Geri çek",
+  "your-rating-has-been-withdrawn": "Puanınız geri çekildi.",
+  "your-review-is-waiting-on": "İncelemeniz bir moderatörü bekliyor. Burada yalnızca siz görebilirsiniz.",
+  "your-review-was-not-published": "İncelemeniz yayınlanmadı. Yıldızlarınız yine de ortalamaya sayılır."
+}

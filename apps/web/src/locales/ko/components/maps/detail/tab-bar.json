@@ -1,0 +1,8 @@
+{
+  "tabs": {
+    "videos": "동영상",
+    "community": "커뮤니티",
+    "history": "변경 사항"
+  },
+  "tab-count": "{tab} ({count})"
+}

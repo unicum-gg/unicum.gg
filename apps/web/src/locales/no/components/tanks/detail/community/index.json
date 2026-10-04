@@ -1,7 +1,7 @@
 {
   "axis-by-axis": "Akse for akse",
-  "by-server": "Etter server",
-  "community-verdict": "Samfunnsdommen",
+  "by-server": "Per server",
+  "community-verdict": "Fellesskapets vurdering",
   "every-server-one-average": "Alle servere, ett gjennomsnitt",
   "n-shown": ", {count} vist",
   "opinion": "{count, plural, one {# mening} other {# meninger}}",
@@ -10,6 +10,6 @@
   "reputation-against-results": "Omdømme mot resultater",
   "same-tank-different-metas": "Samme stridsvogn, forskjellige metaer",
   "the-same-tank-by-how": "Den samme stridsvognen, etter hvor godt stemmegiveren spiller",
-  "what-players-wrote": "Hva spillere skrev",
+  "what-players-wrote": "Det spillerne skrev",
   "who-is-saying-it": "Hvem som sier det"
 }

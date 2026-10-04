@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Varje karta betygsatt på en skala från ett till fem av personerna som skickas dit. Ingen väljer var de spelar, så en röst kräver strider på kontot snarare än på kartan, och omdömet delas upp efter hur bra väljarna spelar.",
+  "nobody-has-rated-a-map-yet": "Ingen karta har betygsatts ännu. De första rösterna finns på kartsidorna.",
+  "think": "tycker",
+  "title": "Vad spelarna {think} om kartorna",
+  "votes-across-maps": "{totalVotes} röster över {ratedMaps} kartor."
+}

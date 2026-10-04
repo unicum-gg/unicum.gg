@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Hver stemme er signeret med vælgerens egen rekord. Wargaming udgiver ingen rekord for hvert kort for nogen, så det, en stemme beviser, er, at dens forfatter spiller, ikke at vedkommende er blevet sendt hertil.",
+  "every-vote-signed-average": "Hver stemme er signeret med vælgerens egen gennemsnitlige rekord på {battles} kampe de sidste 30 dage. Wargaming udgiver ingen rekord for hvert kort for nogen, så det, en stemme beviser, er, at dens forfatter spiller, ikke at vedkommende er blevet sendt hertil.",
+  "fun": "Sjov",
+  "how-good-the-map-is": "Hvor godt kortet er",
+  "how-much-people-enjoy-it": "Hvor meget personer nyder at blive sendt hertil",
+  "if-you-play-here": "Hvis du spiller, er du præcis den, denne side venter på.",
+  "nobody-has-rated-this-map": "Ingen har bedømt dette kort endnu.",
+  "overall": "Samlet",
+  "votes": "{count} stemmer",
+  "votes-one": "{count} stemme"
+}

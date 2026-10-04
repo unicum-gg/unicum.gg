@@ -8,9 +8,27 @@
     "servers": "الخوادم"
   },
   "links": {
-    "top-players": {
-      "label": "أفضل اللاعبين",
-      "description": "قائمة المتصدرين للاعبين طوال الوقت"
+    "advances": {
+      "description": "تصنيف المستوى X ‏15 ضد 15"
+    },
+    "all-maps": {
+      "label": "جميع الخرائط",
+      "description": "كل خريطة في اللعبة"
+    },
+    "all-tournaments": {
+      "label": "بطولات",
+      "description": "كل البطولات، المفتوحة والمكتملة"
+    },
+    "battle-type": {
+      "description": "خرائط {type}"
+    },
+    "map-changes": {
+      "label": "التغييرات",
+      "description": "إعادة تصميم الخرائط حسب التحديث"
+    },
+    "map-community": {
+      "label": "تقييمات المجتمع",
+      "description": "مُقيّمة من قِبل اللاعبين المُرسَلين إليها"
     },
     "players-onslaught": {
       "description": "سلم الهجوم التصنيفي"
@@ -18,23 +36,20 @@
     "players-steel-hunter": {
       "description": "قائمة المتصدرين للمعركة الملكية"
     },
-    "top-clans": {
-      "label": "أفضل العشائر",
-      "description": "قائمة المتصدرين للعشائر طوال الوقت"
+    "servers-population": {
+      "label": "عدد اللاعبين على الخادم",
+      "description": "اللاعبون المتصلون الآن ومع مرور الوقت"
     },
     "stronghold": {
       "description": "سلم المناوشات"
     },
-    "advances": {
-      "description": "تصنيف المستوى X ‏15 ضد 15"
+    "tank-changes": {
+      "label": "التغييرات",
+      "description": "التعزيزات والإضعافات حسب التحديث"
     },
-    "tank-performances": {
-      "label": "الأداءات",
-      "description": "نسبة الفوز والضرر لكل دبابة"
-    },
-    "tank-specs": {
-      "label": "المواصفات",
-      "description": "إحصائيات كل دبابة"
+    "tank-community": {
+      "label": "التقييمات المجتمعية",
+      "description": "تقييمات اللاعبين الذين يملكونها"
     },
     "tank-economics": {
       "label": "اقتصاديات",
@@ -46,36 +61,25 @@
     "tank-mom": {
       "description": "حدود شارة الإتقان"
     },
-    "tank-changes": {
-      "label": "التغييرات",
-      "description": "التعزيزات والإضعافات حسب التحديث"
+    "tank-performances": {
+      "label": "الأداءات",
+      "description": "نسبة الفوز والضرر لكل دبابة"
     },
-    "tank-community": {
-      "label": "التقييمات المجتمعية",
-      "description": "تقييمات اللاعبين الذين يملكونها"
+    "tank-specs": {
+      "label": "المواصفات",
+      "description": "إحصائيات كل دبابة"
     },
     "tank-videos": {
       "label": "مقاطع الفيديو",
       "description": "لقطات لعب من المجتمع"
     },
-    "all-tournaments": {
-      "label": "بطولات",
-      "description": "كل البطولات، المفتوحة والمكتملة"
+    "top-clans": {
+      "label": "أفضل العشائر",
+      "description": "قائمة المتصدرين للعشائر طوال الوقت"
     },
-    "all-maps": {
-      "label": "جميع الخرائط",
-      "description": "كل خريطة في اللعبة"
-    },
-    "map-changes": {
-      "label": "التغييرات",
-      "description": "إعادة تصميم الخرائط حسب التحديث"
-    },
-    "battle-type": {
-      "description": "خرائط {type}"
-    },
-    "servers-population": {
-      "label": "عدد اللاعبين على الخادم",
-      "description": "اللاعبون المتصلون الآن ومع مرور الوقت"
+    "top-players": {
+      "label": "أفضل اللاعبين",
+      "description": "قائمة المتصدرين للاعبين طوال الوقت"
     }
   }
 }

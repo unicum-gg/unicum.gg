@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Jokainen kartta on arvioitu asteikolla yhdestä viiteen niiden pelaajien toimesta, jotka lähetetään sinne. Kukaan ei valitse, missä pelaa, joten äänestys pyytää tilin taisteluista eikä kartasta, ja tuomio jakautuu sen mukaan, kuinka hyvin äänestäjät pelaavat.",
+  "nobody-has-rated-a-map-yet": "Yhtäkään karttaa ei ole vielä arvioitu. Ensimmäiset äänet annetaan karttasivuilla.",
+  "think": "ajatella",
+  "title": "Mitä pelaajat {think} kartoista",
+  "votes-across-maps": "{totalVotes} ääntä yli {ratedMaps} kartan."
+}

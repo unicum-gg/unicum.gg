@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "محورًا بمحور",
+  "by-server": "حسب الخادم",
+  "community-verdict": "رأي المجتمع",
+  "every-server-one-average": "متوسط واحد لكل خادم",
+  "n-shown": "، {count} معروض",
+  "opinion": "{count, plural, zero {لا آراء} one {رأي واحد} two {رأيان} few {# آراء} many {# رأيًا} other {# رأي}}",
+  "rate-the": "معدل {mapName}",
+  "same-map-different-metas": "الأرض نفسها، وأساليب لعب مختلفة",
+  "the-same-map-by-how": "الخريطة نفسها، حسب مدى جودة لعب المصوّت",
+  "what-players-wrote": "ما كتبه اللاعبون",
+  "who-is-saying-it": "من يقول ذلك"
+}

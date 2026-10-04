@@ -15,14 +15,15 @@
     "rejected": "Valutazione salvata. La tua recensione precedente non è stata pubblicata, quindi contano solo le stelle che hai assegnato.",
     "closed": "Valutazione salvata. Al momento le recensioni scritte sono disattivate, quindi il testo non è stato salvato."
   },
+  "review-length": "La tua recensione deve contenere tra {min} e {max} caratteri.",
   "save-failed": "Impossibile salvare. Riprova tra poco.",
-  "say-why-optional": "Spiega perché (facoltativo)",
+  "say-why-optional": "Indica il motivo (facoltativo)",
   "signed-with": "Firmata con le tue {battles} battaglie giocate con questo carro",
   "submit-my-rating": "Invia la mia valutazione",
   "too-many-edits": "Sono troppe modifiche tutte insieme. Aspetta un minuto.",
   "update-my-rating": "Aggiorna la mia valutazione",
   "what-it-is-good-at": "In cosa eccelle, quali sono i suoi punti deboli e a chi è adatto.",
-  "withdraw": " Ritirati",
+  "withdraw": "Ritira",
   "your-rating-has-been-withdrawn": "La tua valutazione è stata ritirata.",
   "your-review-is-waiting-on": "La tua recensione è in attesa di un moderatore. Qui puoi vederla solo tu.",
   "your-review-was-not-published": "La tua recensione non è stata pubblicata. Le stelle che hai assegnato contribuiscono comunque alla media."

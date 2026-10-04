@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "按维度",
+  "by-server": "按服务器",
+  "community-verdict": "社区评价",
+  "every-server-one-average": "每个服务器一个平均值",
+  "n-shown": "，已显示 {count} 个",
+  "opinion": "{count, plural, other {# 条意见}}",
+  "rate-the": "为 {mapName} 评分",
+  "same-map-different-metas": "同一片战场，不同的版本环境",
+  "the-same-map-by-how": "同一张地图，按投票者的对战水平划分",
+  "what-players-wrote": "玩家写下的内容",
+  "who-is-saying-it": "谁在发表这些看法"
+}

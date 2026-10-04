@@ -1,5 +1,13 @@
 {
   "title": "Mapa {map} w World of Tanks ({region})",
   "description": "Mapa {map} w World of Tanks ma wymiary {width} × {height} m.",
-  "description-modes": "Mapa {map} w World of Tanks ma wymiary {width} × {height} m i jest dostępna w trybach {modes}."
+  "description-modes": "Mapa {map} w World of Tanks ma wymiary {width} × {height} m i jest dostępna w trybach {modes}.",
+  "community": {
+    "title": "Recenzje graczy i ocena społeczności mapy {map} ({region})",
+    "description": "Co gracze myślą o mapie {map}: ocena społeczności w skali od jednego do pięciu, z podziałem według tego, jak dobrze grają głosujący, oraz pisemne werdykty kont, za którymi stoją bitwy. Równowaga, różnorodność, płynność rozgrywki i to, czy każda klasa pojazdów ma tu swoje zadanie."
+  },
+  "history": {
+    "title": "Historia zmian mapy {map} ({region}), przebudowy według aktualizacji",
+    "description": "Każda zarejestrowana zmiana na mapie {map} w aktualizacjach World of Tanks: bazy, miejsca odrodzeń i obszar rozgrywki, które Wargaming przeniosło, wersja po wersji, zaznaczone na minimapie, na której je przeniesiono."
+  }
 }

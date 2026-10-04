@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Mỗi bản đồ được đánh giá theo thang năm điểm bởi những người được gửi đến đó. Không ai chọn nơi mình chơi, vì vậy một lượt bình chọn cần dựa trên các trận đấu của tài khoản thay vì trên bản đồ, và kết luận được phân tách theo mức độ chơi tốt của những người bình chọn.",
+  "nobody-has-rated-a-map-yet": "Chưa có bản đồ nào được đánh giá. Các lượt bình chọn đầu tiên nằm trên các trang bản đồ.",
+  "think": "nghĩ",
+  "title": "Người chơi {think} gì về các bản đồ",
+  "votes-across-maps": "{totalVotes} lượt bình chọn trên khắp {ratedMaps} bản đồ."
+}

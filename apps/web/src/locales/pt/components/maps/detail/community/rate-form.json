@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Mais algumas palavras: faltam {count}.",
+  "could-not-withdraw": "Não foi possível retirar isso. Tente novamente daqui a pouco.",
+  "hide-the-detailed-axes": "Ocultar os eixos detalhados",
+  "not-enough-battles": "A sua conta ainda não jogou batalhas suficientes para que um voto conte.",
+  "published-once-read": "Publicado assim que um moderador o ler. As suas estrelas contam diretamente.",
+  "rate-it-in-detail": "Avalie em detalhe (opcional)",
+  "review": {
+    "none": "Avaliação guardada.",
+    "queued": "Avaliação guardada. A sua avaliação está com um moderador.",
+    "published": "Avaliação guardada. A sua avaliação já está publicada.",
+    "pending": "Avaliação guardada. A sua avaliação continua a aguardar um moderador.",
+    "rejected": "Avaliação guardada. A sua avaliação anterior não foi publicada, por isso só as suas estrelas contam.",
+    "closed": "Avaliação guardada. As opiniões escritas estão encerradas neste momento, por isso o texto não foi mantido."
+  },
+  "review-length": "A sua avaliação precisa de ter entre {min} e {max} caracteres.",
+  "save-failed": "Não foi possível guardar. Tente novamente dentro de um momento.",
+  "say-why-optional": "Diga porquê (opcional)",
+  "signed-with": "Validada com as suas {battles} batalhas nos últimos 30 dias",
+  "submit-my-rating": "Enviar a minha avaliação",
+  "too-many-edits": "São muitas alterações de uma só vez. Aguarde um minuto.",
+  "update-my-rating": "Atualizar a minha avaliação",
+  "what-it-is-good-at": "Onde a batalha é decidida, qual dos lados tem mais facilidade e quem deveria querer ser enviado para aqui.",
+  "withdraw": "Retirar",
+  "your-rating-has-been-withdrawn": "A sua avaliação foi retirada.",
+  "your-review-is-waiting-on": "A sua avaliação está a aguardar um moderador. Só você a pode ver aqui.",
+  "your-review-was-not-published": "A sua avaliação não foi publicada. As suas estrelas continuam a contar para a média."
+}

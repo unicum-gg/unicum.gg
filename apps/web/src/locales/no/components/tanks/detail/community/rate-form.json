@@ -15,6 +15,7 @@
     "rejected": "Vurdering lagret. Den forrige anmeldelsen din ble ikke publisert, så bare stjernene dine teller.",
     "closed": "Vurdering lagret. Skrevne meninger er stengt akkurat nå, så teksten ble ikke beholdt."
   },
+  "review-length": "Anmeldelsen din må inneholde mellom {min} og {max} tegn.",
   "save-failed": "Kunne ikke lagre. Prøv igjen om litt.",
   "say-why-optional": "Si hvorfor (valgfritt)",
   "signed-with": "Signert med dine {battles} kamper i den",
@@ -22,7 +23,7 @@
   "too-many-edits": "Det er mange endringer på én gang. Vent litt.",
   "update-my-rating": "Oppdater vurderingen min",
   "what-it-is-good-at": "Hva den er god på, hva den ikke er god på, og hvem som bør spille den.",
-  "withdraw": "Tilbakekall",
+  "withdraw": "Trekk tilbake",
   "your-rating-has-been-withdrawn": "Vurderingen din er trukket tilbake.",
   "your-review-is-waiting-on": "Anmeldelsen din venter på en moderator. Bare du kan se den her.",
   "your-review-was-not-published": "Anmeldelsen din ble ikke publisert. Stjernene dine teller fortsatt med i gjennomsnittet."

@@ -1,0 +1,28 @@
+{
+  "a-few-more-words": "Nog een paar woorden: nog {count} te gaan.",
+  "could-not-withdraw": "Dat kon niet worden ingetrokken. Probeer het over een moment opnieuw.",
+  "hide-the-detailed-axes": "De gedetailleerde assen verbergen",
+  "not-enough-battles": "Je account heeft niet genoeg gespeeld om een stem te laten meetellen.",
+  "published-once-read": "Wordt gepubliceerd zodra een moderator het heeft gelezen. Je sterren tellen rechtstreeks mee.",
+  "rate-it-in-detail": "Beoordeel het gedetailleerd (optioneel)",
+  "review": {
+    "none": "Beoordeling opgeslagen.",
+    "queued": "Beoordeling opgeslagen. Je beoordeling ligt bij een moderator.",
+    "published": "Beoordeling opgeslagen. Je beoordeling staat al live.",
+    "pending": "Beoordeling opgeslagen. Je beoordeling wacht nog op een moderator.",
+    "rejected": "Beoordeling opgeslagen. Je eerdere beoordeling is niet gepubliceerd, dus alleen je sterren tellen mee.",
+    "closed": "Beoordeling opgeslagen. Geschreven meningen zijn momenteel gesloten, dus de tekst is niet behouden."
+  },
+  "review-length": "Je beoordeling moet tussen {min} en {max} tekens lang zijn.",
+  "save-failed": "Dat kon niet worden opgeslagen. Probeer het over een moment opnieuw.",
+  "say-why-optional": "Zeg waarom (optioneel)",
+  "signed-with": "Ondertekend met je {battles} gevechten in de afgelopen 30 dagen",
+  "submit-my-rating": "Mijn beoordeling indienen",
+  "too-many-edits": "Dat zijn veel wijzigingen tegelijk. Geef het een minuut.",
+  "update-my-rating": "Mijn beoordeling bijwerken",
+  "what-it-is-good-at": "Waar het gevecht wordt beslist, welke kant het makkelijker heeft en wie hierheen gestuurd zou willen worden.",
+  "withdraw": "Intrekken",
+  "your-rating-has-been-withdrawn": "Je beoordeling is ingetrokken.",
+  "your-review-is-waiting-on": "Je beoordeling wacht op een moderator. Alleen jij kunt deze hier zien.",
+  "your-review-was-not-published": "Je beoordeling is niet gepubliceerd. Je sterren tellen nog steeds mee voor het gemiddelde."
+}

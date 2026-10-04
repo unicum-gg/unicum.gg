@@ -1,5 +1,13 @@
 {
   "title": "Mapa {map} v hre World of Tanks ({region})",
   "description": "Mapa {map} v hre World of Tanks má rozmery {width} × {height} m.",
-  "description-modes": "Mapa {map} v hre World of Tanks má rozmery {width} × {height} m a podporuje režimy {modes}."
+  "description-modes": "Mapa {map} v hre World of Tanks má rozmery {width} × {height} m a podporuje režimy {modes}.",
+  "community": {
+    "title": "Recenzie hráčov k mape {map} a hodnotenie komunity ({region})",
+    "description": "Čo si hráči myslia o mape {map}: hodnotenie komunity od jednej do päť, rozdelené podľa toho, ako dobre hlasujúci hráči hrajú, spolu s písomnými sodbami od účtov, za ktorými stoja bitky. Rovnováha, rozmanitosť, plynulosť a to, či má každá trieda vozidiel svoju úlohu."
+  },
+  "history": {
+    "title": "História zmien na mape {map} ({region}), prepracovania podľa aktualizácií",
+    "description": "Každá zaznamenaná zmena na mape {map} v aktualizáciách World of Tanks: základne, izhodišča a hracia plocha, ktoré Wargaming presunul, verzia po verzii, zakreslené na minizemljevide, na ktorom boli presunuté."
+  }
 }

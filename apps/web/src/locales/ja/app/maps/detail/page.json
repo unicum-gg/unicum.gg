@@ -1,5 +1,13 @@
 {
   "title": "{map}、World of Tanksマップ（{region}地域）",
   "description": "{map}：幅{width} × 高さ{height} mのWorld of Tanksマップ。",
-  "description-modes": "{map}：幅{width} × 高さ{height} mで、{modes}をプレイするWorld of Tanksマップ。"
+  "description-modes": "{map}：幅{width} × 高さ{height} mで、{modes}をプレイするWorld of Tanksマップ。",
+  "community": {
+    "title": "{map}のプレイヤーレビューとコミュニティレーティング（{region}）",
+    "description": "プレイヤーは{map}をどう評価しているか。コミュニティによる5点満点のレーティングを、投票したプレイヤーのプレイの良し悪しで分けています。実際の戦闘を経験したアカウントによる、文章での判定も掲載しています。バランス、多様性、流れ、そしてすべての車両クラスに役割があるかを確認できます。"
+  },
+  "history": {
+    "title": "{map}の変更履歴（{region}）、更新ごとのリワーク",
+    "description": "World of Tanks の更新全体で記録された{map}へのすべての変更。Wargamingが更新ごとに移動した陣地、出現地点、プレイエリアを、移動先のミニマップ上に描画しています。"
+  }
 }

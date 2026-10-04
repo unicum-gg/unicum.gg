@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Cuánto margen de error ofrece si aún estás aprendiendo.",
     "versatility": "¿Funciona en cualquier mapa y con cualquier equipo?"
   },
+  "rating-axes-short": {
+    "overall": "General",
+    "fun": "Diversión",
+    "firepower": "Potencia de fuego",
+    "armour": "Blindaje",
+    "mobility": "Movilidad",
+    "gunHandling": "Manejo",
+    "concealment": "Camuflaje",
+    "beginnerFriendliness": "Principiante",
+    "versatility": "Versátil"
+  },
+  "map-rating-axes": {
+    "overall": "General",
+    "fun": "Diversión",
+    "balance": "Equilibrio",
+    "variety": "Variedad",
+    "flow": "Movimiento",
+    "classFairness": "Equidad de clases",
+    "beginnerFriendliness": "Apto para principiantes"
+  },
+  "map-rating-axis-hints": {
+    "overall": "¿Qué tan bueno es este mapa, teniendo todo en cuenta?",
+    "fun": "¿Cuánto disfrutas que te envíen aquí?",
+    "balance": "¿Empiezan ambos lados con la misma probabilidad?",
+    "variety": "¿Hay más de una forma de jugarlo o hay un camino que ocupa todo el mundo?",
+    "flow": "¿La batalla avanza o se estanca en un enfrentamiento?",
+    "classFairness": "¿Cada clase de vehículo tiene una función aquí?",
+    "beginnerFriendliness": "¿Cuánto perdona si todavía estás aprendiendo?"
+  },
+  "map-rating-axes-short": {
+    "overall": "General",
+    "fun": "Diversión",
+    "balance": "Equilibrio",
+    "variety": "Variedad",
+    "flow": "Fluidez",
+    "classFairness": "Clases",
+    "beginnerFriendliness": "Principiantes"
+  },
   "voter-brackets": {
     "unknown": "No clasificado",
     "learning": "Aprendiendo",

@@ -1,0 +1,15 @@
+{
+  "agreement": "Enighet",
+  "camouflage": "Säsongen som kartan utspelar sig i.",
+  "fun": "Roligt",
+  "map": "Karta",
+  "overall": "Övergripande",
+  "season": "Säsong",
+  "tips": {
+    "overall": "Hur bra spelarna tycker att den är. Rankad efter ett medelvärde som dras mot genomsnittet för alla kartomröstningar, så att en karta med fyra röster inte kan överträffa en med fyra hundra.",
+    "fun": "Hur mycket spelarna gillar att skickas hit, vilket regelbundet inte är samma fråga.",
+    "votes": "Avgivna röster, var och en från ett konto med verkliga strider bakom sig.",
+    "consensus": "Hur långt ifrån varandra röstarna står. Sortera fallande efter de kartor som spelarna inte kan enas om, vilket är den mer intressanta listan."
+  },
+  "votes": "Röster"
+}

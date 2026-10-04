@@ -1,5 +1,6 @@
 {
   "battles": "{count} Số trận",
+  "battles-recent": "{count} trận đấu trong 30 ngày",
   "no-votes": "không Vốt",
   "rated-higher": "Những người chơi giỏi hơn đánh giá xe này cao hơn {stars} sao so với phần còn lại của máy chủ. Xe này phát huy hiệu quả khi bạn biết mình đang làm gì.",
   "rated-lower": "Những người chơi giỏi hơn đánh giá xe này thấp hơn {stars} sao so với phần còn lại của máy chủ. Xe này tạo cảm giác tốt cho đến khi được yêu cầu làm điều gì đó.",

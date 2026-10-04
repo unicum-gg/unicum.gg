@@ -41,6 +41,44 @@
     "beginnerFriendliness": "Wie viele Fehler er verzeiht, wenn du noch lernst.",
     "versatility": "Ist er auf jeder Karte und in jedem Team einsetzbar?"
   },
+  "rating-axes-short": {
+    "overall": "Insgesamt",
+    "fun": "Spaß",
+    "firepower": "Feuerkraft",
+    "armour": "Panzerung",
+    "mobility": "Beweglichkeit",
+    "gunHandling": "Geschützhandhabung",
+    "concealment": "Tarnung",
+    "beginnerFriendliness": "Anfänger",
+    "versatility": "Vielseitig"
+  },
+  "map-rating-axes": {
+    "overall": "Insgesamt",
+    "fun": "Spaß",
+    "balance": "Balance",
+    "variety": "Vielfalt",
+    "flow": "Spielfluss",
+    "classFairness": "Fairness der Klassen",
+    "beginnerFriendliness": "Anfängerfreundlich"
+  },
+  "map-rating-axis-hints": {
+    "overall": "Wie gut ist diese Karte insgesamt?",
+    "fun": "Wie viel Spaß macht es dir, hierher gesendet zu werden?",
+    "balance": "Beginnen beide Seiten mit der gleichen Chance?",
+    "variety": "Gibt es mehr als eine Möglichkeit, die Karte zu spielen, oder nimmt jeder dieselbe Straße?",
+    "flow": "Bewegt sich das Gefecht oder kommt es zu einem Stellungskrieg?",
+    "classFairness": "Hat jede Fahrzeugklasse hier eine Aufgabe?",
+    "beginnerFriendliness": "Wie viele Fehler verzeiht die Karte, wenn du noch lernst?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Insgesamt",
+    "fun": "Spaß",
+    "balance": "Balance",
+    "variety": "Vielfalt",
+    "flow": "Spielfluss",
+    "classFairness": "Klassen",
+    "beginnerFriendliness": "Anfänger"
+  },
   "voter-brackets": {
     "unknown": "Ungestuft",
     "learning": "Lernend",

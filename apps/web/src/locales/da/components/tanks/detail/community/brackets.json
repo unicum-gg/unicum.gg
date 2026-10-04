@@ -1,5 +1,6 @@
 {
   "battles": "{count} kampe",
+  "battles-recent": "{count} kampe på 30 dage",
   "no-votes": "nej stemmer",
   "rated-higher": "Stærkere spillere bedømmer den {stars} stjerner højere end resten af serveren. Denne belønner, at man ved, hvad man laver.",
   "rated-lower": "Stærkere spillere bedømmer den {stars} stjerner lavere end resten af serveren. Den smigrer, indtil den bliver bedt om at gøre noget.",

@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks-kort ({region})",
   "description": "{map}: et {width} × {height} m World of Tanks-kort.",
-  "description-modes": "{map}: et {width} × {height} m World of Tanks-kort med {modes}."
+  "description-modes": "{map}: et {width} × {height} m World of Tanks-kort med {modes}.",
+  "community": {
+    "title": "Spilleranmeldelser af {map} og fællesskabets vurdering ({region})",
+    "description": "Hvad spillerne synes om {map}: fællesskabets vurdering på en skala fra en til fem, opdelt efter hvor godt dem, der stemmer, spiller, med skrevne bedømmelser fra konti, der har kampene bagved sig. Balance, variation, flow og om hver køretøjsklasse har en opgave der."
+  },
+  "history": {
+    "title": "Historik over ændringer på {map} ({region}), ombygninger efter opdatering",
+    "description": "Alle registrerede ændringer på {map} på tværs af World of Tanks-opdateringer: baserne, startpositionerne og spilleområdet, som Wargaming flyttede, version for version, tegnet på det minikort, de blev flyttet på."
+  }
 }
