@@ -1,5 +1,13 @@
 {
   "title": "{map}, World of Tanks map ({region})",
   "description": "{map}: a {width} × {height} m World of Tanks map.",
-  "description-modes": "{map}: a {width} × {height} m World of Tanks map playing {modes}."
+  "description-modes": "{map}: a {width} × {height} m World of Tanks map playing {modes}.",
+  "community": {
+    "title": "{map} player reviews and community rating ({region})",
+    "description": "What players think of {map}: the community’s rating out of five, split by how well the voters play, with written verdicts from accounts that have the battles behind them. Balance, variety, flow and whether every vehicle class has a job there."
+  },
+  "history": {
+    "title": "{map} changes history ({region}), reworks by update",
+    "description": "Every recorded change to {map} across World of Tanks updates: the bases, spawns and play area Wargaming moved, version by version, drawn on the minimap they were moved on."
+  }
 }

@@ -22,12 +22,9 @@ import {
   variantViewKey,
 } from "@/components/maps/detail/views";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
-import { MapVideosPanel } from "@/components/maps/detail/videos";
-import {
-  MapChangesHistory,
-  type MapHistoryVersion,
-} from "@/components/maps/detail/history";
-import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
+import { MapDetailTabs } from "@/components/maps/detail/tab-bar";
+import type { MapDetailTab } from "@/components/maps/detail/tabs";
+import ROUTES from "@/constants/routes";
 import {
   BattleType,
   TEAM_SIZE_BATTLE_TYPES,
@@ -65,32 +62,44 @@ function Stat({
   );
 }
 
-/** What the history endpoint returns, as the page hands it down. Null when the
- * endpoint could not be read at render time. */
-export type MapHistoryData = {
-  versions: MapHistoryVersion[];
-  addedVersion: string | null;
-  addedAt: string | Date | null;
-  removedVersion: string | null;
-  removedAt: string | Date | null;
-  present: boolean;
-  tracked: boolean;
-  testVersion: string | null;
-  testChanges: { field: string; previous: string | null; next: string | null }[];
-} | null;
-
-export function MapView({
+/**
+ * Everything a map page keeps while you move around it: the name, the minimap
+ * and the tab bar under them.
+ *
+ * It lives in the segment's layout rather than in each tab, which is what makes
+ * the selected view survive a tab change. Next only re-renders the segment below
+ * a shared layout, so the minimap keeps its mode pills, its variant and its
+ * overlays while the panel underneath is replaced. Rendered per tab, the same
+ * markup would reset an Onslaught layout back to Standard on every navigation.
+ *
+ * It is also why the tabs hold no geometry of their own: a tactic has to be read
+ * under the ground it was fought on, which is the rule the videos panel was
+ * written against ("under the minimap, never over it"), and a tab bar that moved
+ * the map off screen would have broken it.
+ */
+export function MapShell({
   detail: rawDetail,
   region,
-  videos,
-  history,
+  available,
+  counts,
+  children,
 }: {
   detail: MapDetail;
   region: Region;
-  /** Rendered by the server, so the tactics are in the HTML rather than
-   * fetched once the browser has caught up. */
-  videos: TankVideoCardData[];
-  history: MapHistoryData;
+  /** The tabs this map has something to show for. */
+  available: MapDetailTab[];
+  /** How much each of them holds, for the number beside its name. */
+  counts: Partial<Record<MapDetailTab, number>>;
+  /**
+   * The active tab, rendered by the server and handed down.
+   *
+   * A slot rather than components imported here, because this file is a client
+   * component and the tabs are async server components: the stars, the
+   * histograms, the tactics and the change rows belong in the HTML, which is
+   * what a crawler and the `.md` twin read, and only the controls inside them
+   * need the browser.
+   */
+  children: ReactNode;
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/maps/detail/view");
@@ -272,28 +281,18 @@ export function MapView({
         </PanelContent>
       </Panel>
 
-      <PanelSeparator />
+      {/* The bar, then the tab below it. Everything above stays put whichever
+          tab is open: a tactic has to be read under the ground it was fought
+          on, and the view selected in the minimap (an Onslaught layout, a
+          Waffenträger variant) survives the navigation because Next only
+          replaces the segment under a shared layout. */}
+      <MapDetailTabs
+        basePath={ROUTES.MAP(region, detail.slug)}
+        available={available}
+        counts={counts}
+      />
 
-      {/* Under the minimap, never over it: the geometry above is what makes a
-          tactic readable, and the video explains it rather than replacing it. */}
-      <MapVideosPanel region={region} map={detail} initialVideos={videos} />
-
-      {history?.tracked ? (
-        <>
-          <PanelSeparator />
-          <MapChangesHistory
-            detail={detail}
-            versions={history.versions}
-            testVersion={history.testVersion}
-            testChanges={history.testChanges}
-            addedVersion={history.addedVersion}
-            addedAt={history.addedAt}
-            removedVersion={history.removedVersion}
-            removedAt={history.removedAt}
-            present={history.present}
-          />
-        </>
-      ) : null}
+      {children}
     </div>
   );
 }

@@ -96,5 +96,16 @@ export const MapDetailResponse = mapSummary
         "The map's variants in full, each its own arena drawn as its own view.",
     }),
     randomEvents: z.array(mapRandomEvent),
+    rating: z
+      .object({
+        overall: z.number().nullable(),
+        votes: z.number().int(),
+        reviewCount: z.number().int(),
+      })
+      .optional()
+      .meta({
+        description:
+          "The community verdict in three numbers, so a caller that only needs a score and a count does not have to ask for two histograms, two splits and thirty review bodies. The full verdict is `GET /{region}/maps/{slug}/ratings`.",
+      }),
   })
   .meta({ id: "MapDetail", description: "A battle map with its full geometry." });

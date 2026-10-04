@@ -1,5 +1,5 @@
-import { useTranslation } from "@/hooks/use-translation";
-import { useFormat } from "@/hooks/use-format";
+import { dateFormat } from "@/lib/format";
+import { getTranslation } from "@/lib/translations.server";
 import { Fragment } from "react";
 import { GlossaryLabel } from "@/components/glossary/label";
 import {
@@ -17,10 +17,8 @@ import {
   areaLabel,
   areaRank,
 } from "@/components/maps/detail/history/areas";
-import {
-  hasVersionMinimap,
-  VersionMinimap,
-} from "@/components/maps/detail/history/version-map";
+import { hasVersionMinimap } from "@/components/maps/detail/history/plan";
+import { VersionMinimap } from "@/components/maps/detail/history/version-map";
 import {
   MAP_HISTORY_TRACKING_START,
   MAP_AREA_MAP,
@@ -76,18 +74,20 @@ function MinimapColumn({
  * map, and the Onslaught half is labelled, since it is the one a reader would
  * otherwise take for the map they know.
  */
-function VersionChanges({
+async function VersionChanges({
   detail,
   changes,
   context,
+  locale,
 }: {
   detail: MapDetail;
   changes: FormattedMapChange[];
   /** Which update (or test build) these rows are, for the enlarged minimap's
    * heading: the dialog covers the panel that says so. */
   context?: string;
+  locale: string;
 }) {
-  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tGame } = await getTranslation("game/vocabulary", locale);
   // The areas a version actually touched, in the order the rows come in: the map
   // first (its own changes are keyed without a prefix), then its Onslaught area,
   // then one per variant. Derived rather than listed, so a new kind of variant
@@ -162,7 +162,7 @@ function ChangeRow({ change }: { change: FormattedMapChange }) {
  * to the first update our mirror covers, so a map already in the game then is
  * only known to predate it.
  */
-export function MapChangesHistory({
+export async function MapChangesHistory({
   detail,
   versions,
   testVersion,
@@ -172,6 +172,7 @@ export function MapChangesHistory({
   removedVersion,
   removedAt,
   present,
+  locale,
 }: {
   detail: MapDetail;
   versions: MapHistoryVersion[];
@@ -185,11 +186,18 @@ export function MapChangesHistory({
   removedVersion: string | null;
   removedAt: string | Date | null;
   present: boolean;
+  locale: string;
 }) {
-  const { t } = useTranslation("components/maps/detail/history/index");
-  const { date } = useFormat();
-  const { t: tGame } = useTranslation("game/vocabulary");
-  const { t: tChange } = useTranslation("components/maps/change-format");
+  const { t } = await getTranslation(
+    "components/maps/detail/history/index",
+    locale,
+  );
+  const { t: tGame } = await getTranslation("game/vocabulary", locale);
+  const { t: tChange } = await getTranslation(
+    "components/maps/change-format",
+    locale,
+  );
+  const date = (pattern: string) => dateFormat(locale, pattern);
   const wording = { t: tChange, tGame };
   const sections = versions
     .map((version) => ({
@@ -236,6 +244,7 @@ export function MapChangesHistory({
               <VersionChanges
                 detail={detail}
                 changes={pending}
+                locale={locale}
                 context={[tGame("features.common-test"), testVersion]
                   .filter((part) => part)
                   .join(" ")}
@@ -266,6 +275,7 @@ export function MapChangesHistory({
               <VersionChanges
                 detail={detail}
                 changes={changes}
+                locale={locale}
                 context={t("update", { version: version.gameVersion })}
               />
             </PanelContent>
@@ -281,7 +291,12 @@ export function MapChangesHistory({
         <PanelContent className="p-0">
           <ul className="divide-y divide-fd-border">
             {addedVersion ? (
-              <LifecycleRow label={t("added")} version={addedVersion} at={addedAt} />
+              <LifecycleRow
+                label={t("added")}
+                version={addedVersion}
+                at={addedAt}
+                locale={locale}
+              />
             ) : (
               // Already in the client when tracking started: the real date is
               // unknown, so all we can say is that it came before.
@@ -290,6 +305,7 @@ export function MapChangesHistory({
                 version={MAP_HISTORY_TRACKING_START.version}
                 at={null}
                 before
+                locale={locale}
               />
             )}
             {!present && removedVersion ? (
@@ -297,6 +313,7 @@ export function MapChangesHistory({
                 label={t("removed")}
                 version={removedVersion}
                 at={removedAt}
+                locale={locale}
               />
             ) : null}
           </ul>
@@ -306,19 +323,24 @@ export function MapChangesHistory({
   );
 }
 
-function LifecycleRow({
+async function LifecycleRow({
   label,
   version,
   at,
   before = false,
+  locale,
 }: {
   label: string;
   version: string;
   at: string | Date | null;
   before?: boolean;
+  locale: string;
 }) {
-  const { t } = useTranslation("components/maps/detail/history/index");
-  const { date } = useFormat();
+  const { t } = await getTranslation(
+    "components/maps/detail/history/index",
+    locale,
+  );
+  const date = (pattern: string) => dateFormat(locale, pattern);
   return (
     <li className="flex items-center justify-between gap-4 px-4 py-2.5 text-sm">
       <span className="text-fd-muted-foreground">{label}</span>

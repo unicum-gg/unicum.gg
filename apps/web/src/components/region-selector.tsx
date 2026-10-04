@@ -54,7 +54,7 @@ const TANK_SLUG_PATTERN = new RegExp(
 // regional, and that is a tab of the page rather than a different page.
 const MAPS_PATTERN = new RegExp(`^/(?:(?:${REGIONS.join("|")})/)?maps(?:/|$)`);
 const MAP_SLUG_PATTERN = new RegExp(
-  `^/(?:(?:${REGIONS.join("|")})/)?maps/([^/?#]+)`,
+  `^/(?:(?:${REGIONS.join("|")})/)?maps/([^/?#]+)(/[^/?#]+)?`,
 );
 // The section root as it appears in THIS pathname, region prefix included or
 // not, which is what the tab helpers measure their segment against.
@@ -63,6 +63,11 @@ const MAPS_BASE_PATTERN = new RegExp(`^/(?:(?:${REGIONS.join("|")})/)?maps`);
 // before the slug pattern claims "changes" as a map name.
 const MAPS_CHANGES_PATTERN = new RegExp(
   `^/(?:(?:${REGIONS.join("|")})/)?maps/changes(?:/|$)`,
+);
+// Likewise the community board, for the same reason: without this, switching
+// region from `/maps/community` would ask for a map called "community".
+const MAPS_COMMUNITY_PATTERN = new RegExp(
+  `^/(?:(?:${REGIONS.join("|")})/)?maps/community(?:/|$)`,
 );
 // Servers and tournaments land on the new region's index, like clans and
 // players: a cluster and a tournament both belong to one realm, so there is
@@ -94,14 +99,22 @@ function targetForRegion(
     return `${base}${search}`;
   }
   if (MAPS_CHANGES_PATTERN.test(pathname)) return ROUTES.MAPS_CHANGES(region);
+  if (MAPS_COMMUNITY_PATTERN.test(pathname))
+    return ROUTES.MAPS_COMMUNITY(region);
   if (MAPS_PATTERN.test(pathname)) {
     // The same map in the new region, with its query (the mode view, the
     // gallery's filters). The gallery's `/all/<battle type>` segment is carried
     // across like the tank page's tab is: it is a place in the section, and
     // switching server should not also send the reader back to every battle
     // type. `all` is not a slug, it is the tab root.
-    const slug = pathname.match(MAP_SLUG_PATTERN)?.[1];
-    if (slug && slug !== TAB_ROOT) return `${ROUTES.MAP(region, slug)}${search}`;
+    const match = pathname.match(MAP_SLUG_PATTERN);
+    const slug = match?.[1];
+    // The detail page's own tab, carried like the tank page's: switching server
+    // should leave the reader on the verdict or the changes they were reading,
+    // not drop them back on the tactics.
+    const tabSegment = match?.[2] ?? "";
+    if (slug && slug !== TAB_ROOT)
+      return `${ROUTES.MAP(region, slug)}${tabSegment}${search}`;
     const currentBase = pathname.match(MAPS_BASE_PATTERN)?.[0] ?? ROUTES.MAPS(region);
     const tab = mapsTabFromPathname(pathname, currentBase);
     return `${mapsTabHref(ROUTES.MAPS(region), tab)}${search}`;
