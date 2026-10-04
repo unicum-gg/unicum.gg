@@ -1,0 +1,12 @@
+{
+  "block-no-record": "We have not read your record yet. We just asked Wargaming for it, so try again in a moment.",
+  "checking-record": "Checking your record...",
+  "fetching-your-record": "We are fetching your record",
+  "have-you-played-here": "Have you played here?",
+  "more-to-go": "{count} more battles to go",
+  "more-to-go-one": "{count} more battle to go",
+  "sign-in-to-rate": "Sign in with your Wargaming account to rate this map. Nobody chooses where they are sent, so we ask for battles on your account rather than on this map: Wargaming publishes no per-map record for anyone, and we will not claim a check we did not make.",
+  "sign-in-to-rate-it": "Sign in to rate it",
+  "signed-in-on": "Signed in on {region}",
+  "too-few-battles": "Your account has {played} battles. We ask for {required} before a vote on {map} counts, which is about twenty passages through each map in the rotation, so that a verdict comes from someone who has actually been here."
+}

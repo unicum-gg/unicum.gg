@@ -1,0 +1,12 @@
+{
+  "every-vote-signed": "Every vote is signed with the voter’s own record. Wargaming publishes no per-map record for anyone, so what a vote proves is that its author plays, not that they have been sent here.",
+  "every-vote-signed-average": "Every vote is signed with the voter’s own record, on average {battles} battles in the last 30 days. Wargaming publishes no per-map record for anyone, so what a vote proves is that its author plays, not that they have been sent here.",
+  "fun": "Fun",
+  "how-good-the-map-is": "How good the map is",
+  "how-much-people-enjoy-it": "How much people enjoy being sent here",
+  "if-you-play-here": "If you play, you are exactly who this page is waiting for.",
+  "nobody-has-rated-this-map": "Nobody has rated this map yet.",
+  "overall": "Overall",
+  "votes": "{count} votes",
+  "votes-one": "{count} vote"
+}

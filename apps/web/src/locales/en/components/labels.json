@@ -41,6 +41,44 @@
     "beginnerFriendliness": "How forgiving it is if you are still learning.",
     "versatility": "Does it work on any map, in any team?"
   },
+  "rating-axes-short": {
+    "overall": "Overall",
+    "fun": "Fun",
+    "firepower": "Firepower",
+    "armour": "Armour",
+    "mobility": "Mobility",
+    "gunHandling": "Handling",
+    "concealment": "Camo",
+    "beginnerFriendliness": "Beginner",
+    "versatility": "Versatile"
+  },
+  "map-rating-axes": {
+    "overall": "Overall",
+    "fun": "Fun",
+    "balance": "Balance",
+    "variety": "Variety",
+    "flow": "Flow",
+    "classFairness": "Class fairness",
+    "beginnerFriendliness": "Beginner friendly"
+  },
+  "map-rating-axis-hints": {
+    "overall": "How good is this map, all things considered?",
+    "fun": "How much do you enjoy being sent here?",
+    "balance": "Do both sides start with an equal chance?",
+    "variety": "Is there more than one way to play it, or one road everybody takes?",
+    "flow": "Does the battle move, or stall into a standoff?",
+    "classFairness": "Does every vehicle class have a job here?",
+    "beginnerFriendliness": "How forgiving is it if you are still learning?"
+  },
+  "map-rating-axes-short": {
+    "overall": "Overall",
+    "fun": "Fun",
+    "balance": "Balance",
+    "variety": "Variety",
+    "flow": "Flow",
+    "classFairness": "Classes",
+    "beginnerFriendliness": "Beginner"
+  },
   "voter-brackets": {
     "unknown": "Unrated",
     "learning": "Learning",

@@ -43,6 +43,7 @@ import {
   TankReviewStatus,
   VoterBracket,
 } from "@unicum.gg/shared/db/schema/tank-ratings";
+import { MapRatingAxis } from "@unicum.gg/shared/db/schema/map-ratings";
 import {
   RatingBlock,
   RatingConsensus,
@@ -100,6 +101,7 @@ export const OPENAPI_ENUM_SOURCES = {
   TANK_AXIS: Object.values(TankAxis),
   VOTER_BRACKET: Object.values(VoterBracket),
   TANK_RATING_AXIS: Object.values(TankRatingAxis),
+  MAP_RATING_AXIS: Object.values(MapRatingAxis),
   TANK_REVIEW_STATUS: Object.values(TankReviewStatus),
   RATING_CONSENSUS: Object.values(RatingConsensus),
   RATING_BLOCK: Object.values(RatingBlock),

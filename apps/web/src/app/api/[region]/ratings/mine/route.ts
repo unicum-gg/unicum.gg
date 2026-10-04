@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * My ratings
- * @description Every vehicle the caller has rated, newest first. Its job is to let a page know what is already done: a signed-in player's own garage uses it to suggest the tanks they play most and have not judged yet, which is where most votes come from. Region-independent like the votes themselves, so the same list is served whichever region the page was opened on. Signed out answers an empty list rather than a 401: the caller is asking what they have rated, and "nothing" is the true answer.
+ * @description Every vehicle the caller has rated, newest first. Its job is to let a page know what is already done: a signed-in player's own garage uses it to suggest the tanks they play most and have not judged yet, which is where most votes come from. Region-independent like the votes themselves, so the same list is served whichever region the page was opened on. The map twin is `GET /{region}/maps/ratings/mine`. Signed out answers an empty list rather than a 401: the caller is asking what they have rated, and "nothing" is the true answer.
  * @pathParams regionParams
  * @response OwnRatingsResponse
  * @tag Tanks

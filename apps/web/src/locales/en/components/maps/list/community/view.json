@@ -1,0 +1,7 @@
+{
+  "every-map-rated-out-of": "Every map rated out of five by the people who get sent to it. Nobody chooses where they play, so a vote asks for battles on the account rather than on the map, and the verdict is split by how well the voters play.",
+  "nobody-has-rated-a-map-yet": "No map has been rated yet. The first votes are on the map pages.",
+  "think": "think",
+  "title": "What players {think} of the maps",
+  "votes-across-maps": "{totalVotes} votes across {ratedMaps} maps."
+}

@@ -77,8 +77,10 @@ async function main(): Promise<void> {
       void handleVideoRejectModal(interaction);
       return;
     }
-    // The written opinions attached to a tank rating. Same routing rule and the
-    // same reason for it; only the prose is on trial, the stars already count.
+    // The written opinions attached to a community rating, vehicles and maps
+    // alike: one handler, which reads the queue off the card's own prefix. Same
+    // routing rule as above and the same reason for it; only the prose is on
+    // trial, the stars already count.
     if (interaction.isButton() && isRatingReviewButton(interaction.customId)) {
       void handleRatingReview(interaction);
     }

@@ -8,6 +8,7 @@ import {
   DEFAULT_RATING_METRIC,
   MapCamouflage,
   MapGameMode,
+  MapRatingAxis,
   PaintLock,
   RatingBlock,
   RatingConsensus,
@@ -244,6 +245,11 @@ export const voterBracketField = z.enum(VoterBracket).meta({
 export const tankRatingAxisField = z.enum(TankRatingAxis).meta({
   description: "An axis a vehicle is rated on.",
   "x-enum-source": "TANK_RATING_AXIS",
+} as EnumMeta);
+
+export const mapRatingAxisField = z.enum(MapRatingAxis).meta({
+  description: "An axis a map is rated on.",
+  "x-enum-source": "MAP_RATING_AXIS",
 } as EnumMeta);
 
 export const tankReviewStatusField = z.enum(TankReviewStatus).meta({
@@ -663,6 +669,49 @@ export const clanSummary = z
     description: "Clan row (additional fields may be present).",
   });
 
+
+/**
+ * One bar of a five-star community histogram.
+ *
+ * Shared by every community rating endpoint, which is why the prose names no
+ * subject: the shape and the meaning are identical whether the five stars were
+ * given to a vehicle or to a map. The share travels with the count so the bar
+ * needs no division at render, and so a client cannot draw a different
+ * distribution from the same numbers.
+ */
+export const starBar = z
+  .object({
+    stars: z.number().int().meta({ description: "1 to 5." }),
+    votes: z.number().int(),
+    share: z
+      .number()
+      .meta({ description: "Share of this subject's votes, 0 to 1." }),
+  })
+  .meta({
+    id: "StarBar",
+    description: "One bar of a five-star histogram.",
+  });
+
+/**
+ * What one server thinks of a rated subject, on its own.
+ *
+ * Shared for the same reason as the bar above, and the headline average is
+ * global for the same reason in both features: a tank and an arena are the same
+ * everywhere, so splitting the votes three ways would leave three averages
+ * nobody should trust. The split is still worth showing, because the servers
+ * play different metas.
+ */
+export const regionVerdict = z
+  .object({
+    region: regionPath,
+    votes: z.number().int(),
+    overall: z.number().nullable(),
+    fun: z.number().nullable(),
+  })
+  .meta({
+    id: "RegionVerdict",
+    description: "One server's own verdict on a rated subject.",
+  });
 
 /**
  * The language Wargaming's own words are answered in.

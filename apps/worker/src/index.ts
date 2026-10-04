@@ -112,10 +112,10 @@ async function startCrons(): Promise<void> {
   );
   startTankWarmCron();
 
-  const { startTankRatingsCron } = await import(
-    "@unicum.gg/core/tanks/ratings-aggregate"
+  const { startCommunityRatingsCron } = await import(
+    "@unicum.gg/core/community/ratings-cron"
   );
-  startTankRatingsCron();
+  startCommunityRatingsCron();
 
   const { startCoverageTrendsCron } = await import(
     "@unicum.gg/core/coverage/trends-aggregate"

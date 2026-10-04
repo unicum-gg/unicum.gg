@@ -392,12 +392,48 @@ class MapClient {
     );
   }
 
+  /** Rate a map */
+  rate(body: BodyOf<"/{region}/maps/{slug}/rate">) {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/rate", path),
+      () => this.api.POST("/{region}/maps/{slug}/rate", { params: { path }, body }),
+    );
+  }
+
+  /** Map community rating */
+  ratings() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/ratings", path),
+      () => this.api.GET("/{region}/maps/{slug}/ratings", { params: { path } }),
+    );
+  }
+
   /** Map videos */
   videos() {
     const path = { region: this.region, slug: this.slug };
     return handle(
       buildUrl(this.baseUrl, "/{region}/maps/{slug}/videos", path),
       () => this.api.GET("/{region}/maps/{slug}/videos", { params: { path } }),
+    );
+  }
+
+  /** Withdraw my map rating */
+  rateWithdraw() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/rate/withdraw", path),
+      () => this.api.POST("/{region}/maps/{slug}/rate/withdraw", { params: { path } }),
+    );
+  }
+
+  /** My rating of this map */
+  ratingsMe() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/ratings/me", path),
+      () => this.api.GET("/{region}/maps/{slug}/ratings/me", { params: { path } }),
     );
   }
 }
@@ -543,8 +579,12 @@ type MapsNamespace = ((slug: string) => MapClient) & {
   list(): RequestHandle<Data<"/{region}/maps">>;
   /** Map changes feed */
   changes(): RequestHandle<Data<"/{region}/maps/changes">>;
+  /** Map community ratings board */
+  ratings(): RequestHandle<Data<"/{region}/maps/ratings">>;
   /** Search maps */
   search(q: NonNullable<QueryOf<"/{region}/maps/search">>["q"]): RequestHandle<Data<"/{region}/maps/search">>;
+  /** My map ratings */
+  ratingsMine(): RequestHandle<Data<"/{region}/maps/ratings/mine">>;
   /** Streamed map search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
@@ -836,12 +876,28 @@ class RegionClient {
             params: { path: { region: this.region } },
           }),
       );
+    ns.ratings = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/maps/ratings", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/maps/ratings", {
+            params: { path: { region: this.region } },
+          }),
+      );
     ns.search = (q) =>
       handle(
         buildUrl(this.baseUrl, "/{region}/maps/search", { region: this.region }, { q }),
         () =>
           this.api.GET("/{region}/maps/search", {
             params: { path: { region: this.region }, query: { q } },
+          }),
+      );
+    ns.ratingsMine = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/maps/ratings/mine", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/maps/ratings/mine", {
+            params: { path: { region: this.region } },
           }),
       );
     ns.searchStream = (q, options) =>

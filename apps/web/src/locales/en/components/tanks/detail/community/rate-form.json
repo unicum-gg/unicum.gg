@@ -15,6 +15,7 @@
     "rejected": "Rating saved. Your earlier review was not published, so only your stars count.",
     "closed": "Rating saved. Written opinions are closed right now, so the text was not kept."
   },
+  "review-length": "Your review needs to be between {min} and {max} characters.",
   "save-failed": "Could not save that. Try again in a moment.",
   "say-why-optional": "Say why (optional)",
   "signed-with": "Signed with your {battles} battles in it",

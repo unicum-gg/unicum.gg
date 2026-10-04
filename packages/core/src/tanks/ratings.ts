@@ -1,7 +1,6 @@
 import { and, eq } from "drizzle-orm";
 import {
   DETAIL_AXES,
-  env,
   isStarValue,
   MAX_REVIEW_LENGTH,
   MIN_REVIEW_LENGTH,
@@ -15,10 +14,10 @@ import {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
-import { discordBotEnabled } from "@unicum.gg/core/discord";
 import { getRatingEligibility } from "@unicum.gg/core/tanks/ratings-eligibility";
-import { wg } from "@unicum.gg/core/wargaming/client";
-import { reviewDigest } from "@unicum.gg/core/tanks/ratings-moderation";
+import { currentRegionGameVersion } from "@unicum.gg/core/wargaming/wot/game-version";
+import { reviewDigest } from "@unicum.gg/core/community/review-digest";
+import { reviewsEnabled } from "@unicum.gg/core/community/reviews-open";
 import { postRatingModerationCard } from "@unicum.gg/core/tanks/rating-moderation-card";
 
 /**
@@ -29,13 +28,6 @@ import { postRatingModerationCard } from "@unicum.gg/core/tanks/rating-moderatio
  * written down, which is trusted differently: the stars are counted the instant
  * they are cast, the sentence beside them only once someone has read it.
  */
-
-/** Written opinions only open when a moderator could actually read them: a
- * queue nobody looks at is worse than no queue. The stars are unaffected, they
- * need no review. */
-export function tankReviewsEnabled(): boolean {
-  return discordBotEnabled() && Boolean(env.DISCORD_REVIEW_CHANNEL_ID);
-}
 
 export type RatingSubmission = {
   tankId: number;
@@ -89,22 +81,6 @@ export type SubmitRatingResult = {
   eligibility?: Awaited<ReturnType<typeof getRatingEligibility>>;
   review?: ReviewOutcome;
 };
-
-/**
- * The client version the vote is cast under, stamped rather than asked for.
- *
- * A tank is buffed and nerfed, and an opinion of it is an opinion of the
- * version it was played in: this is what lets the page draw the community's
- * verdict against the changes it already tracks. Null when WG does not answer,
- * which is better than a wrong version.
- */
-async function currentGameVersion(region: Region): Promise<string | null> {
-  return wg
-    .region(region)
-    .api.wot.encyclopedia.info({ fields: ["game_version"] })
-    .then((info) => info.game_version ?? null)
-    .catch(() => null);
-}
 
 /**
  * Save an opinion, replacing whatever this account said about the tank before.
@@ -173,7 +149,7 @@ export async function submitTankRating(
   const previousStatus =
     (existing?.reviewStatus as TankReviewStatus | undefined) ??
     TankReviewStatus.None;
-  const reviewsOpen = tankReviewsEnabled();
+  const reviewsOpen = reviewsEnabled();
 
   // What the row should end up holding, and why. `undefined` from the caller
   // means they said nothing about the text, so nothing about it changes.
@@ -232,7 +208,9 @@ export async function submitTankRating(
     playerWn8: player?.wn8 ?? null,
     playerBattles: player?.battles ?? null,
     bracket: voterBracket(player?.wn8 ?? null),
-    gameVersion: await currentGameVersion(submission.region),
+    // Stamped rather than asked for: a tank is buffed and nerfed, and an
+    // opinion of it is an opinion of the version it was played in.
+    gameVersion: await currentRegionGameVersion(submission.region),
     review: storedReview,
     reviewStatus,
     updatedAt: now,

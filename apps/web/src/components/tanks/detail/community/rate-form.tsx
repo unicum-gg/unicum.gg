@@ -148,7 +148,10 @@ export function RateForm({
           : status === 429
             ? t("too-many-edits")
             : status === 400
-              ? `Your review needs to be between ${MIN_REVIEW_LENGTH} and ${MAX_REVIEW_LENGTH} characters.`
+              ? t("review-length", {
+                  min: MIN_REVIEW_LENGTH,
+                  max: MAX_REVIEW_LENGTH,
+                })
               : t("save-failed"),
       );
     } finally {

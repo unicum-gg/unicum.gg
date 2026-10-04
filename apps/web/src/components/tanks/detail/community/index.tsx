@@ -1,5 +1,5 @@
 import { getTranslation } from "@/lib/translations.server";
-import type { TankRatingSummary } from "@unicum.gg/shared";
+import { drawableAxes, type TankRatingSummary } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   Panel,
@@ -45,6 +45,16 @@ export async function CommunityTab({
   locale: string;
 }) {
   const { t } = await getTranslation("components/tanks/detail/community/index", locale);
+  const { t: tLabel } = await getTranslation("components/labels", locale);
+  // The axes are named here rather than inside the radar: the chart is pure
+  // geometry and is shared with the map ratings, whose axes come from a
+  // different catalogue.
+  const spokes = drawableAxes(summary.axes).map((axis) => ({
+    key: axis.axis,
+    label: tLabel(`rating-axes.${axis.axis}`),
+    short: tLabel(`rating-axes-short.${axis.axis}`),
+    value: axis.value ?? 0,
+  }));
   return (
     <>
       <Panel>
@@ -116,7 +126,11 @@ export async function CommunityTab({
               <PanelTitle>{t("axis-by-axis")}</PanelTitle>
             </PanelHeader>
             <PanelContent>
-              <AxisRadar locale={locale} axes={summary.axes} axisVotes={summary.axisVotes} />
+              <AxisRadar
+                locale={locale}
+                spokes={spokes}
+                axisVotes={summary.axisVotes}
+              />
             </PanelContent>
           </Panel>
         </>

@@ -4,18 +4,11 @@ import { z } from "zod";
 import {
   ratingConsensusField,
   regionPath,
+  regionVerdict,
+  starBar,
   tankRatingAxisField,
   voterBracketField,
 } from "@/services/openapi/schemas";
-
-/** One bar of a five-star histogram. The share travels with the count so the
- * bar needs no division at render, and so a client cannot draw a different
- * distribution from the same numbers. */
-export const starBar = z.object({
-  stars: z.number().int().meta({ description: "1 to 5." }),
-  votes: z.number().int(),
-  share: z.number().meta({ description: "Share of this tank's votes, 0 to 1." }),
-});
 
 /**
  * What one slice of the population thinks.
@@ -34,15 +27,6 @@ export const bracketVerdict = z.object({
     description:
       "Mean battles these voters have on the tank, which is what makes the slice credible or not.",
   }),
-});
-
-/** The same split by server, for the metas that differ rather than the players
- * who do. */
-export const regionVerdict = z.object({
-  region: regionPath,
-  votes: z.number().int(),
-  overall: z.number().nullable(),
-  fun: z.number().nullable(),
 });
 
 /** One spoke of the radar, with what it rests on. */

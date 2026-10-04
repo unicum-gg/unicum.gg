@@ -788,7 +788,7 @@ export interface paths {
         };
         /**
          * My ratings
-         * @description Every vehicle the caller has rated, newest first. Its job is to let a page know what is already done: a signed-in player's own garage uses it to suggest the tanks they play most and have not judged yet, which is where most votes come from. Region-independent like the votes themselves, so the same list is served whichever region the page was opened on. Signed out answers an empty list rather than a 401: the caller is asking what they have rated, and "nothing" is the true answer.
+         * @description Every vehicle the caller has rated, newest first. Its job is to let a page know what is already done: a signed-in player's own garage uses it to suggest the tanks they play most and have not judged yet, which is where most votes come from. Region-independent like the votes themselves, so the same list is served whichever region the page was opened on. The map twin is `GET /{region}/maps/ratings/mine`. Signed out answers an empty list rather than a 401: the caller is asking what they have rated, and "nothing" is the true answer.
          */
         get: operations["get-{region}-ratings-mine"];
         put?: never;
@@ -1739,6 +1739,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map community ratings board
+         * @description Every map players have rated, with what they think of it. `overallBayes` is the mean shrunk towards the average of every map vote and is what the board sorts on, so a map three people liked cannot sit above one four hundred have judged. The prior is taken over the map votes alone rather than over every community vote on the site, because the two populations sit at different heights: people are far harder on the ground they are sent to than on the vehicles they chose to buy. Maps nobody has rated are absent rather than returned with nulls, so an unrated map is never read as a badly rated one. There is no over/underrated column here, unlike the vehicle board: it compares a reputation to a measured win rate, and no per-arena win rate exists anywhere. The votes are global, the identities are the region's catalogue.
+         */
+        get: operations["get-{region}-maps-ratings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/ratings/mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * My map ratings
+         * @description Every map the caller has rated, newest first. Its job is to let a page know what is already done, so the gallery can point a signed-in player at the maps they have not judged yet, which is where most votes come from. The vehicle twin is `GET /{region}/ratings/mine`. Region-independent like the votes themselves, so the same list is served whichever region the page was opened on. Signed out answers an empty list rather than a 401: the caller is asking what they have rated, and "nothing" is the true answer.
+         */
+        get: operations["get-{region}-maps-ratings-mine"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tournaments": {
         parameters: {
             query?: never;
@@ -1908,7 +1948,7 @@ export interface paths {
         };
         /**
          * Map detail
-         * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `randomEvents` carries the events that might fire on the map mid-battle, each with the minimap art of its danger area and of the ground it leaves behind. `slug` in the response is the canonical slug.
+         * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `randomEvents` carries the events that might fire on the map mid-battle, each with the minimap art of its danger area and of the ground it leaves behind. `rating` is the community verdict in three numbers, for a caller that needs a score and a count rather than the whole thing. `slug` in the response is the canonical slug.
          */
         get: operations["get-{region}-maps-{slug}"];
         put?: never;
@@ -1931,6 +1971,86 @@ export interface paths {
          * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, random events added or dropped, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
          */
         get: operations["get-{region}-maps-{slug}-history"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/{slug}/rate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Rate a map
+         * @description Cast or revise this account's opinion of a map. Requires a signed-in Wargaming account that has played enough of the game: unlike the vehicle ratings, the gate cannot read a record on the subject, because Wargaming publishes no per-arena record for anybody, so it reads the account's lifetime battle count instead and refuses with 403 below the threshold. The rotation is what makes that fair rather than arbitrary: nobody chooses where they are sent, so exposure follows from playing at all. One opinion per account per map, so sending again replaces the previous one rather than adding to it. The evidence the vote rests on (the account's battles, its trailing 30 days, its win rate and rating) is copied onto it at the moment it is cast, and the client version is stamped, so an opinion stays attached to the layout it was formed on. A written opinion is queued for moderation and never published here; the stars count immediately. The vote is recorded under the caller's own region, whatever region the page was opened on. 401 when signed out, 403 when the record is too thin, 404 for an unknown map.
+         */
+        post: operations["post-{region}-maps-{slug}-rate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/{slug}/rate/withdraw": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Withdraw my map rating
+         * @description Take back this account's opinion of a map, stars and written text together: what is being withdrawn is the whole verdict, not the sentence explaining it. A POST rather than a DELETE so it is reachable from the generated client, which speaks the two verbs the public API documents. Answering `removed: false` means there was nothing to take back, which is the outcome the caller asked for either way. 401 when signed out, 404 for an unknown map.
+         */
+        post: operations["post-{region}-maps-{slug}-rate-withdraw"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/{slug}/ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map community rating
+         * @description What players make of one map, and what that verdict is built on. The same machinery as the vehicle ratings, with one honest difference: Wargaming publishes no per-arena record, so a vote cannot be gated on having played this map and is gated on the account's own battle count instead, which the rotation makes a fair proxy since nobody chooses where they are sent. What the response does carry is who is saying it, split by how well the voters play and by which server they play on, alongside the star histograms and the optional per-axis radar. There is no `hype` here and there cannot be: that column compares a reputation to a measured win rate, and no per-arena win rate exists anywhere. Region-independent, the same verdict is served everywhere; the region in the path only resolves the slug.
+         */
+        get: operations["get-{region}-maps-{slug}-ratings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/{slug}/ratings/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * My rating of this map
+         * @description Whether the caller may rate this map, on what evidence, and what they already said about it. The gate is the honest part: the vehicle ratings read the caller's record on that exact tank, and nothing can do the same for an arena, because Wargaming publishes no per-arena record for anybody. So this answers with the caller's own account record, how many battles are still missing when they are short, and their existing vote if there is one (including a written opinion still waiting on a moderator, which only its author is shown). Signed out is not an error: it answers `signedIn: false` so the page can offer the sign-in rather than break. The rating is made under the caller's own Wargaming region, whatever region the page was opened on.
+         */
+        get: operations["get-{region}-maps-{slug}-ratings-me"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3159,11 +3279,28 @@ export interface components {
             premium: boolean;
             count: number;
         };
+        mapAxisAnswer: {
+            axis: components["schemas"]["mapRatingAxisField"];
+            value: number;
+        };
+        mapAxisVerdict: {
+            axis: components["schemas"]["mapRatingAxisField"];
+            value: number | null;
+            votes: number;
+        };
         /**
          * @description Top-level battle type a map belongs to.
          * @enum {string}
          */
         mapBattleTypeField: "random" | "battle_royale" | "frontline" | "onslaught" | "onslaught_night" | "grand_battle" | "clan_wars" | "waffentrager" | "last_stand" | "arcade" | "story_mode" | "training";
+        mapBracketVerdict: {
+            bracket: components["schemas"]["voterBracketField"];
+            votes: number;
+            overall: number | null;
+            fun: number | null;
+            /** @description Mean trailing-30-day battles these voters had played. Not battles on the map: Wargaming publishes no per-arena record, so what makes the slice credible is that its voters are active. */
+            avgBattles: number | null;
+        };
         /**
          * @description Vehicle camouflage kind the map is skinned with.
          * @enum {string}
@@ -3217,6 +3354,12 @@ export interface components {
             /** @description The Onslaught layout the map's own arena declares, null when it has none. A night version's layout is in `variants`. */
             onslaught: components["schemas"]["MapOnslaught"] | null;
             randomEvents: components["schemas"]["MapRandomEvent"][];
+            /** @description The community verdict in three numbers, so a caller that only needs a score and a count does not have to ask for two histograms, two splits and thirty review bodies. The full verdict is `GET /{region}/maps/{slug}/ratings`. */
+            rating?: {
+                overall: number | null;
+                votes: number;
+                reviewCount: number;
+            };
         };
         MapHistoryResponse: {
             arenaId: string;
@@ -3287,6 +3430,129 @@ export interface components {
             /** @description Minimap overlays redrawing the ground the event leaves behind. */
             afterUrls: string[];
         };
+        MapRateBody: {
+            /** @description How good the map is, all considered. */
+            overall: components["schemas"]["stars"];
+            /** @description How much the voter enjoys being sent here. */
+            fun: components["schemas"]["stars"];
+            /** @description Do both sides start with an equal chance? */
+            balance?: components["schemas"]["stars"] | null;
+            /** @description Is there more than one way to play it? */
+            variety?: components["schemas"]["stars"] | null;
+            /** @description Does the battle move, or stall into a standoff? */
+            flow?: components["schemas"]["stars"] | null;
+            /** @description Does every vehicle class have a job here? */
+            classFairness?: components["schemas"]["stars"] | null;
+            /** @description How forgiving is it if you are still learning? */
+            beginnerFriendliness?: components["schemas"]["stars"] | null;
+            /** @description A written opinion, queued for moderation rather than published. Send null to withdraw one previously written; leaving the field out entirely keeps whatever is already there. Measured after whitespace is collapsed. */
+            review?: string | null;
+        };
+        MapRateRefusedResponse: {
+            /** @enum {string} */
+            error: "not_eligible";
+            block: components["schemas"]["ratingBlockField"] | null;
+            required: number;
+            battles: number | null;
+        };
+        MapRateResponse: {
+            ok: boolean;
+            /** @description What became of the written opinion. Distinguishes text newly queued from text that was already published, still pending, previously rejected, or dropped because written opinions are closed. A boolean here would have claimed 'with a moderator' about prose that was rejected weeks ago. */
+            review: components["schemas"]["reviewOutcomeField"];
+        };
+        MapRateReviewLengthResponse: {
+            /** @enum {string} */
+            error: "review_length";
+            min: number;
+            max: number;
+        };
+        MapRateWithdrawResponse: {
+            ok: boolean;
+            removed: boolean;
+        };
+        /**
+         * @description An axis a map is rated on.
+         * @enum {string}
+         */
+        mapRatingAxisField: "overall" | "fun" | "balance" | "variety" | "flow" | "classFairness" | "beginnerFriendliness";
+        MapRatingBoardResponse: {
+            results: components["schemas"]["MapRatingRow"][];
+            /** @description Votes cast across every map, for the board's header. */
+            totalVotes: number;
+            ratedMaps: number;
+            /**
+             * Format: date-time
+             * @description When the rollup behind the shrunk means was last recomputed. Null before it has ever run, which is also when every shrunk mean is null.
+             */
+            computedAt: Date | null;
+        };
+        /** @description The catalogue's half of a rated map. */
+        MapRatingIdentity: {
+            arenaId: string;
+            slug: string;
+            /** @description The catalogue's English name, which is what the slug is derived from. A reader is shown Wargaming's own name in their language, resolved client-side from the arena id. */
+            name: string;
+            camouflage: components["schemas"]["mapCamouflageField"];
+            sizeMeters: number;
+            minimapUrl: string;
+            /** @description Whether only the Common Test client ships this map's space, so the board can say the verdict is about something nobody can play on a live server yet. */
+            commonTest: boolean;
+        };
+        MapRatingMeResponse: {
+            signedIn: boolean;
+            /** @description The server the caller votes on, read from their own account rather than from the path. Null when signed out. */
+            votingRegion: ("eu" | "na" | "asia") | null;
+            eligible: boolean;
+            /** @description Why the caller may not rate a map yet. Only `no_record` and `too_few_battles` are reachable here: `never_played` would need a per-arena record nobody publishes. */
+            block: components["schemas"]["ratingBlockField"] | null;
+            /** @description Battles on the account before it may rate a map. A weaker claim than the vehicle gate's and deliberately so, since the rotation decides where a player is sent rather than the player. */
+            required: number;
+            player: components["schemas"]["mapVoterProfile"] | null;
+            rating: components["schemas"]["ownMapRating"] | null;
+            /** @description Whether written opinions are being accepted. False closes the text field and leaves the stars working, since they need no moderation. One answer for the whole site: there is one queue and one moderator. */
+            reviewsOpen: boolean;
+        };
+        /** @description A map's community verdict. */
+        MapRatingRow: {
+            identity: components["schemas"]["MapRatingIdentity"];
+            votes: number;
+            /** @description Published written opinions on this map. */
+            reviews: number;
+            /** @description Plain mean of the Overall stars, 1 to 5. */
+            overall: number | null;
+            fun: number | null;
+            /** @description The Overall mean shrunk towards the average of every map vote. Sort on this, not on the plain mean, or the top of the board is whichever map three people rated. */
+            overallBayes: number | null;
+            funBayes: number | null;
+            /** @description How far apart the voters sit. High marks a divisive map. */
+            overallStddev: number | null;
+        };
+        MapRatingsResponse: {
+            /** @description The client's own arena id, which is what the votes are keyed on: a renamed map keeps it, a slug does not. */
+            arenaId: string;
+            votes: number;
+            /** @description Plain mean of the Overall stars, 1 to 5. */
+            overall: number | null;
+            fun: number | null;
+            /** @description The Overall mean shrunk towards the average of every map vote, which is what the board ranks on so a map three people rated cannot top it. Null until the rollup cron has run. */
+            overallBayes: number | null;
+            funBayes: number | null;
+            overallStddev: number | null;
+            /** @description How far apart the voters sit. Null under ten votes, where a spread is noise rather than a disagreement. */
+            consensus: components["schemas"]["ratingConsensusField"] | null;
+            overallDistribution: components["schemas"]["StarBar"][];
+            funDistribution: components["schemas"]["StarBar"][];
+            brackets: components["schemas"]["mapBracketVerdict"][];
+            regions: components["schemas"]["RegionVerdict"][];
+            axes: components["schemas"]["mapAxisVerdict"][];
+            /** @description How many voters filled in the optional axes, always far fewer than the headline count. */
+            axisVotes: number;
+            /** @description Mean trailing-30-day battles across everyone who voted: whether this average was formed by people still playing. */
+            avgVoterRecentBattles: number | null;
+            reviews: components["schemas"]["mapReview"][];
+            /** @description Published written opinions in total. Not the length of `reviews`, which is capped. */
+            reviewCount: number;
+        };
         /** @description Map row (additional fields may be present). */
         MapResolved: {
             arena_id: string;
@@ -3294,6 +3560,29 @@ export interface components {
             name: string;
             camouflage: string;
             minimap_url: string;
+        };
+        mapReview: {
+            id: number;
+            nickname: string;
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            overall: number;
+            fun: number;
+            /** @description Lifetime battles on the author's account. */
+            battles: number | null;
+            /** @description Battles in the author's trailing 30 days: whether this is an opinion about the map as it is now. */
+            recentBattles: number | null;
+            winrate: number | null;
+            bracket: components["schemas"]["voterBracketField"];
+            playerWn8: number | null;
+            /** @description Client version the opinion was formed under, so a reader can see it predates a rework. */
+            gameVersion: string | null;
+            body: string;
+            /** Format: date-time */
+            createdAt: Date;
         };
         MapSearchChunk: unknown;
         MapSearchResponse: {
@@ -3352,6 +3641,15 @@ export interface components {
         };
         MapVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];
+        };
+        mapVoterProfile: {
+            wn8: number | null;
+            /** @description Lifetime battles, which is what the gate is decided on. */
+            battles: number | null;
+            /** @description Battles in the trailing 30 days, which is what a published review is dated by. */
+            recentBattles: number | null;
+            winrate: number | null;
+            bracket: components["schemas"]["voterBracketField"];
         };
         /** @description A vehicle measured against the mark it has not earned yet: the region's combined-damage bar for that mark, the player's own combined damage over the window, and their ratio. Above 1 means the average already clears the bar. */
         MarkReachEntry: {
@@ -3605,6 +3903,28 @@ export interface components {
             onslaught_seasons?: number;
             is_supporter?: boolean;
             twitch_login?: string | null;
+        };
+        ownMapRating: {
+            overall: number;
+            fun: number;
+            axes: components["schemas"]["mapAxisAnswer"][];
+            review: string | null;
+            reviewStatus: components["schemas"]["tankReviewStatusField"];
+            gameVersion: string | null;
+            /** Format: date-time */
+            updatedAt: Date;
+        };
+        ownMapRatingRow: {
+            /** @description The client's own arena id, which is what the vote is keyed on. Resolve it against `GET /{region}/maps` for a slug and a name. */
+            arenaId: string;
+            overall: number;
+            fun: number;
+            reviewStatus: components["schemas"]["tankReviewStatusField"];
+            /** Format: date-time */
+            updatedAt: Date;
+        };
+        OwnMapRatingsResponse: {
+            ratings: components["schemas"]["ownMapRatingRow"][];
         };
         ownRating: {
             overall: number;
@@ -4413,7 +4733,8 @@ export interface components {
             } | null;
             points: components["schemas"]["RegionPopulationPoint"][];
         };
-        regionVerdict: {
+        /** @description One server's own verdict on a rated subject. */
+        RegionVerdict: {
             /**
              * @description Game server region.
              * @enum {string}
@@ -4714,11 +5035,12 @@ export interface components {
             low: number;
             high: number;
         };
-        starBar: {
+        /** @description One bar of a five-star histogram. */
+        StarBar: {
             /** @description 1 to 5. */
             stars: number;
             votes: number;
-            /** @description Share of this tank's votes, 0 to 1. */
+            /** @description Share of this subject's votes, 0 to 1. */
             share: number;
         };
         stars: number;
@@ -5425,10 +5747,10 @@ export interface components {
             overallStddev: number | null;
             /** @description How far apart the voters sit. Null under ten votes, where a spread is noise rather than a disagreement. */
             consensus: components["schemas"]["ratingConsensusField"] | null;
-            overallDistribution: components["schemas"]["starBar"][];
-            funDistribution: components["schemas"]["starBar"][];
+            overallDistribution: components["schemas"]["StarBar"][];
+            funDistribution: components["schemas"]["StarBar"][];
             brackets: components["schemas"]["bracketVerdict"][];
-            regions: components["schemas"]["regionVerdict"][];
+            regions: components["schemas"]["RegionVerdict"][];
             axes: components["schemas"]["axisVerdict"][];
             /** @description How many voters filled in the optional axes, always far fewer than the headline count. */
             axisVotes: number;
@@ -8529,6 +8851,52 @@ export interface operations {
             };
         };
     };
+    "get-{region}-maps-ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapRatingBoardResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-ratings-mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OwnMapRatingsResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-tournaments": {
         parameters: {
             query?: {
@@ -8787,6 +9155,122 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MapHistoryResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-maps-{slug}-rate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["MapRateBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapRateResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-maps-{slug}-rate-withdraw": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapRateWithdrawResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapRatingsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-ratings-me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapRatingMeResponse"];
                 };
             };
         };

@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { auth } from "@unicum.gg/core/auth";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { tankReviewsEnabled } from "@unicum.gg/core/tanks/ratings";
+import { reviewsEnabled } from "@unicum.gg/core/community/reviews-open";
 import { getRatingEligibility } from "@unicum.gg/core/tanks/ratings-eligibility";
 import { getOwnTankRating } from "@unicum.gg/core/tanks/ratings-board";
 import { MIN_BATTLES_TO_RATE, TankRatingAxis } from "@unicum.gg/shared";
@@ -31,7 +31,7 @@ export async function GET(
   const tank = await getTankBySlug(region, decodeURIComponent(slug));
   if (!tank) return Response.json({ error: "not_found" }, { status: 404 });
 
-  const reviewsOpen = tankReviewsEnabled();
+  const reviewsOpen = reviewsEnabled();
   // Never cached, in any layer: this is one reader's own state, and a shared
   // cache holding it would hand one player's vote to the next visitor.
   const noStore = { headers: { "cache-control": "private, no-store" } };

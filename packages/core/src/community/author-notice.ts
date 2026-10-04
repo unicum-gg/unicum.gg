@@ -5,11 +5,12 @@ import { getDiscordUserId } from "@unicum.gg/core/discord/supporter-role";
 /**
  * Telling a contributor what became of what they sent.
  *
- * Shared by the two moderated queues, the suggested videos and the written half
- * of a tank rating, because the delivery is the same in both and the thing that
- * must stay the same is what happens when it cannot be delivered. A notice is a
- * courtesy on top of the site, never the record: what the site shows the author
- * stays the answer, so nothing here may fail a review or hold one up.
+ * Shared by every moderated queue, the suggested videos and the written half of
+ * a vehicle or a map rating, because the delivery is the same in all of them and
+ * the thing that must stay the same is what happens when it cannot be
+ * delivered. A notice is a courtesy on top of the site, never the record: what
+ * the site shows the author stays the answer, so nothing here may fail a review
+ * or hold one up.
  */
 
 /** Red rather than the brand colour, so the two verdicts do not read alike in a

@@ -1,31 +1,29 @@
 import { sql } from "drizzle-orm";
 import {
-  playersByRegion,
   RATING_PRIOR_WEIGHT,
   tankRatingAggregates,
   tankRatings,
   tankStatsByRegion,
   vehiclesByRegion,
-  VoterBracket,
 } from "@unicum.gg/shared";
-import { Region, REGIONS } from "@unicum.gg/wargaming";
+import { Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
-import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 
 /**
- * Rolling every vote up into the per-tank table the catalogue pages read.
+ * Rolling every vehicle vote up into the per-tank table the catalogue pages
+ * read.
  *
  * The tank page never touches this: one vehicle's votes are an indexed
  * group-by, and running it live is what keeps the page honest the second a vote
  * lands. What cannot be done live is anything that compares tanks to each
  * other, which is everything below: the shrunk mean needs the site-wide prior,
  * and the over/underrated gap needs every vehicle in the tier ranked twice.
+ *
+ * The tick that calls this is `@unicum.gg/core/community/ratings-cron`, which
+ * owns it alongside the map rollup and the voter-bracket refresh: those three
+ * are one pass over the community votes, and splitting them across leases would
+ * relabel the brackets twice to learn the same fact.
  */
-
-// Half past the hour, out of the way of the leaderboard recompute that runs on
-// it. This is a single pass over a table measured in thousands of rows, so the
-// cadence is set by how fresh a board should feel rather than by cost.
-const RATINGS_AGGREGATE_SCHEDULE = "30 * * * *";
 
 /**
  * The server the measured half of `hype` is read from.
@@ -196,82 +194,4 @@ export async function refreshTankRatingAggregates(): Promise<number> {
   `);
 
   return rows.length;
-}
-
-/**
- * Keep the stored bracket in step with how the voter plays now.
- *
- * A vote records who cast it at the moment it was cast, which is right for the
- * evidence columns about the TANK: the opinion rested on that record and
- * rewriting it would be rewriting history.
- *
- * The three columns about the VOTER are the exception, and they move together:
- * the bracket is the axis the community split is read on, and the account
- * rating and battle count are what the reviews print beside a name. Left
- * frozen, a player who was average two years ago goes on speaking for the
- * average bracket forever, and the "unicums rate it higher" line slowly stops
- * being true of anybody.
- *
- * Cut on the same boundaries `voterBracket` uses. Kept in SQL rather than read
- * back through it, so this is one statement over the table instead of a row per
- * vote.
- */
-export async function refreshVoterBrackets(): Promise<void> {
-  // One branch per region, because the players tables are physically separate
-  // and a vote carries the region it was cast from. Built rather than written
-  // out so adding a fourth server is a change to `REGIONS`, not to this query.
-  const branches = REGIONS.map(
-    (region) => sql`
-      SELECT account_id, wn8, battles, ${region} AS region
-      FROM ${playersByRegion[region]}
-    `,
-  );
-
-  await db.execute(sql`
-    UPDATE ${tankRatings} r
-    SET
-      player_wn8 = p.wn8,
-      player_battles = p.battles,
-      -- The same cuts voterBracket applies, restated here because the update
-      -- has to happen in the database: reading a million votes back through
-      -- TypeScript to relabel them would be a million round trips to compute
-      -- four comparisons.
-      bracket = CASE
-        WHEN p.wn8 IS NULL THEN ${VoterBracket.Unknown}
-        WHEN p.wn8 < 900 THEN ${VoterBracket.Learning}
-        WHEN p.wn8 < 1600 THEN ${VoterBracket.Average}
-        WHEN p.wn8 < 2350 THEN ${VoterBracket.Strong}
-        ELSE ${VoterBracket.Unicum}
-      END
-    FROM (${sql.join(branches, sql` UNION ALL `)}) p
-    WHERE p.account_id = r.account_id
-      AND p.region = r.region
-      -- Only the rows that actually move. Postgres writes a new tuple version
-      -- for every row an UPDATE touches whether or not the values changed, so
-      -- an unguarded statement rewrites the whole table every hour and leaves
-      -- that many dead tuples and that much WAL behind it. Most accounts do not
-      -- change bracket between two ticks. This project has already had the
-      -- shared database fall over under an hourly recompute burst.
-      AND (r.player_wn8, r.player_battles, r.bracket) IS DISTINCT FROM (
-        p.wn8,
-        p.battles,
-        CASE
-          WHEN p.wn8 IS NULL THEN ${VoterBracket.Unknown}
-          WHEN p.wn8 < 900 THEN ${VoterBracket.Learning}
-          WHEN p.wn8 < 1600 THEN ${VoterBracket.Average}
-          WHEN p.wn8 < 2350 THEN ${VoterBracket.Strong}
-          ELSE ${VoterBracket.Unicum}
-        END
-      )
-  `);
-}
-
-export function startTankRatingsCron(): boolean {
-  return scheduleCron("tank-ratings-cron", RATINGS_AGGREGATE_SCHEDULE, async () => {
-    // Brackets first: the rollup does not read them, but the tank page's split
-    // does, and refreshing them in the same tick keeps the two consistent.
-    await refreshVoterBrackets();
-    const tanks = await refreshTankRatingAggregates();
-    console.log(`[tank-ratings-cron] rolled up ${tanks} vehicles`);
-  });
 }

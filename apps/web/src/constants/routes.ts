@@ -167,6 +167,13 @@ const ROUTES = {
     region === Region.EU
       ? "/maps/changes"
       : pathcat("/:region/maps/changes", { region }),
+  // The community board. Sits directly under /maps rather than under the
+  // /maps/all tab root, for the same reason the vehicle one does: it is not a
+  // view of the gallery, it is a page about what players say.
+  MAPS_COMMUNITY: (region: Region) =>
+    region === Region.EU
+      ? "/maps/community"
+      : pathcat("/:region/maps/community", { region }),
 
   // - Servers. The game's clusters and their population, which is a property of
   //   the region rather than of the game, so it is regional all the way down.

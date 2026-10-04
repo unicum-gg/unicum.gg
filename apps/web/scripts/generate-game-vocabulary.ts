@@ -36,8 +36,14 @@ import {
 import {
   TANK_RATING_AXIS_HINT,
   TANK_RATING_AXIS_LABEL,
+  TANK_RATING_AXIS_SHORT,
   VOTER_BRACKET_LABEL,
 } from "@unicum.gg/shared/db/schema/tank-ratings";
+import {
+  MAP_RATING_AXIS_HINT,
+  MAP_RATING_AXIS_LABEL,
+  MAP_RATING_AXIS_SHORT,
+} from "@unicum.gg/shared/db/schema/map-ratings";
 import { GLOSSARY_CATEGORY_LABEL } from "@unicum.gg/shared/glossary/category";
 import { TOURNAMENT_STATUS_LABEL } from "@unicum.gg/shared/wot/tournaments";
 import {
@@ -145,6 +151,18 @@ function englishLabels(): Json {
     "rating-consensus": { ...RATING_CONSENSUS_LABEL },
     "rating-axes": { ...TANK_RATING_AXIS_LABEL },
     "rating-axis-hints": { ...TANK_RATING_AXIS_HINT },
+    // The same axes, short enough to sit around a radar. Their own keys rather
+    // than a client-side truncation of the full ones, and translated like the
+    // rest: they were read straight off the constant at the call site, which
+    // left the ring labelled in English in all thirty-six languages, invisible
+    // to the copy check because a constant is not a string in the markup.
+    "rating-axes-short": { ...TANK_RATING_AXIS_SHORT },
+    // The map axes are their own set rather than a subset of the vehicle ones:
+    // a map has no firepower, and asking about its armour would get five
+    // answers about whatever tank the voter last drove.
+    "map-rating-axes": { ...MAP_RATING_AXIS_LABEL },
+    "map-rating-axis-hints": { ...MAP_RATING_AXIS_HINT },
+    "map-rating-axes-short": { ...MAP_RATING_AXIS_SHORT },
     "voter-brackets": { ...VOTER_BRACKET_LABEL },
     "glossary-categories": { ...GLOSSARY_CATEGORY_LABEL },
   };

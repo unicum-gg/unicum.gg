@@ -1,9 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { APP_IDENTITY, env } from "@unicum.gg/shared";
-import {
-  ReviewDecision,
-  reviewTankRating,
-} from "@unicum.gg/core/tanks/ratings-moderation";
+import { ReviewDecision } from "@unicum.gg/core/community/review-decision";
+import { reviewTankRating } from "@unicum.gg/core/tanks/ratings-moderation";
 import { notifyRatingAuthor } from "@unicum.gg/core/tanks/rating-author-notice";
 import { getTanksByIds } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { REGIONS } from "@unicum.gg/wargaming";

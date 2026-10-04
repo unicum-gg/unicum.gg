@@ -1,30 +1,48 @@
 import { numberFormat } from "@/lib/format";
 import { getTranslation } from "@/lib/translations.server";
 import {
-  drawableAxes,
   MAX_STARS,
   MIN_AXIS_VOTES,
   RATING_COLOR_HEX,
   starRatingColor,
-  TANK_RATING_AXIS_SHORT,
-  type AxisVerdict,
 } from "@unicum.gg/shared";
 import { Stars, StarValue } from "./stars";
 
 const INT_FORMAT = {} as const;
 
 /**
- * The community's read of a tank, axis by axis.
+ * The community's read of a subject, axis by axis.
  *
- * Hand-drawn SVG rather than a chart library: it is seven points on a circle,
- * it has no interaction worth the bundle, and drawing it here means it renders
- * on the server. On eleven hundred tank pages that is the difference between a
- * shape in the HTML and a shape that appears after hydration.
+ * Hand-drawn SVG rather than a chart library: it is a handful of points on a
+ * circle, it has no interaction worth the bundle, and drawing it here means it
+ * renders on the server. On eleven hundred tank pages that is the difference
+ * between a shape in the HTML and a shape that appears after hydration.
  *
  * It is only drawn once enough people have filled in the optional axes. Below
  * that the polygon is one person's opinion rendered as geometry, which reads as
  * far more authoritative than it is.
+ *
+ * Shared with the map ratings, which draw their own five axes on the same ring.
+ * Everything here is geometry and nothing is vocabulary: the caller arrives
+ * with the spokes already chosen (`drawableAxes` for a vehicle,
+ * `drawableMapAxes` for a map, both of which decide per axis which ones have
+ * earned a place) and already named, because the two features name their axes
+ * from different catalogues and a component that looked them up itself would
+ * have to know which subject it was drawing.
  */
+
+/** One spoke, as the caller hands it over: named, labelled and valued. */
+export type RadarSpoke = {
+  /** The axis the value belongs to, for the React key. */
+  key: string;
+  /** The reader's own word for it, spelled out in the list beside the ring. */
+  label: string;
+  /** The same word, short enough to sit at the side of the ring: it has about
+   * nine characters of room there, and the full labels were being clipped
+   * mid-word. */
+  short: string;
+  value: number;
+};
 
 /**
  * The canvas is wider than it is tall, and the polygon is not centred in a
@@ -64,28 +82,28 @@ function polygon(points: Point[]): string {
 }
 
 export async function AxisRadar({
-  axes,
-  axisVotes, locale,
+  spokes,
+  axisVotes,
+  locale,
 }: {
-  axes: AxisVerdict[];
+  /** Already filtered to the spokes that earned a place, and already named. */
+  spokes: RadarSpoke[];
   axisVotes: number;
   locale: string;
 }) {
-  const { t: tLabel } = await getTranslation("components/labels", locale);
   const { t } = await getTranslation("components/tanks/detail/community/radar", locale);
-  const drawable = drawableAxes(axes);
-  if (drawable.length < 3 || axisVotes < MIN_AXIS_VOTES) {
+  if (spokes.length < 3 || axisVotes < MIN_AXIS_VOTES) {
     return <NotEnoughAxisVotes votes={axisVotes} locale={locale} />;
   }
 
-  const count = drawable.length;
-  const shape = drawable.map((axis, i) =>
-    pointAt(i, count, ((axis.value ?? 0) / MAX_STARS) * RADIUS),
+  const count = spokes.length;
+  const shape = spokes.map((axis, i) =>
+    pointAt(i, count, (axis.value / MAX_STARS) * RADIUS),
   );
   // The polygon is painted at the colour its own mean would earn, so a weak
-  // tank does not draw the same picture as a strong one in a different shape.
-  const mean =
-    drawable.reduce((sum, a) => sum + (a.value ?? 0), 0) / drawable.length;
+  // subject does not draw the same picture as a strong one in a different
+  // shape.
+  const mean = spokes.reduce((sum, a) => sum + a.value, 0) / spokes.length;
   const colour = RATING_COLOR_HEX[starRatingColor(mean)];
 
   return (
@@ -100,7 +118,7 @@ export async function AxisRadar({
           <polygon
             key={ring}
             points={polygon(
-              drawable.map((_, i) =>
+              spokes.map((_, i) =>
                 pointAt(i, count, (RADIUS * (ring + 1)) / RINGS),
               ),
             )}
@@ -108,7 +126,7 @@ export async function AxisRadar({
             strokeWidth={ring === RINGS - 1 ? 1 : 0.5}
           />
         ))}
-        {drawable.map((_, i) => {
+        {spokes.map((_, i) => {
           const end = pointAt(i, count, RADIUS);
           return (
             <line
@@ -133,11 +151,11 @@ export async function AxisRadar({
         {shape.map((p, i) => (
           <circle key={i} cx={p.x} cy={p.y} r={2.5} fill={colour} />
         ))}
-        {drawable.map((axis, i) => {
+        {spokes.map((axis, i) => {
           const label = pointAt(i, count, RADIUS + LABEL_GAP);
           return (
             <text
-              key={axis.axis}
+              key={axis.key}
               x={label.x}
               y={label.y}
               textAnchor={
@@ -150,27 +168,23 @@ export async function AxisRadar({
               dominantBaseline="middle"
               className="fill-fd-muted-foreground text-[9px]"
             >
-              {/* The short form here and the full one in the list below: the
-                ring has about nine characters of room at the sides, and the
-                full labels were being clipped mid-word. */}
-              {TANK_RATING_AXIS_SHORT[axis.axis]}
+              {/* The short form here and the full one in the list below. */}
+              {axis.short}
             </text>
           );
         })}
       </svg>
 
-      {/* The same seven numbers, spelled out. The polygon says which way the
-        tank leans, the list says by how much, and one of the two is what
-        someone actually came for. */}
+      {/* The same numbers, spelled out. The polygon says which way the subject
+        leans, the list says by how much, and one of the two is what someone
+        actually came for. */}
       <ul className="flex w-full flex-col gap-1.5">
-        {drawable.map((axis) => (
+        {spokes.map((axis) => (
           <li
-            key={axis.axis}
+            key={axis.key}
             className="grid grid-cols-[1fr_auto_auto] items-center gap-3 text-sm"
           >
-            <span className="text-fd-muted-foreground">
-              {tLabel(`rating-axes.${axis.axis}`)}
-            </span>
+            <span className="text-fd-muted-foreground">{axis.label}</span>
             <Stars value={axis.value} size={12} />
             <StarValue value={axis.value} className="w-9 text-right text-xs" />
           </li>

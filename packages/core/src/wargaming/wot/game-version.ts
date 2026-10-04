@@ -17,3 +17,24 @@ export async function currentGameVersion(): Promise<string | null> {
     .then((info) => info.game_version ?? null)
     .catch(() => null);
 }
+
+/**
+ * The same read, on one server rather than on EU.
+ *
+ * Wargaming rolls an update out region by region, hours apart, so the version
+ * live on a voter's own server is not always the version live on EU. That
+ * matters wherever the stamp is a statement about a PERSON rather than about
+ * the catalogue: a community rating is an opinion of the build its author was
+ * playing, which is what lets the page read a verdict against the changes it
+ * tracks. The catalogues keep using the region-less read above, since the
+ * vehicles and arenas they parse come off the EU mirror branch.
+ */
+export async function currentRegionGameVersion(
+  region: Region,
+): Promise<string | null> {
+  return wg
+    .region(region)
+    .api.wot.encyclopedia.info({ fields: ["game_version"] })
+    .then((info) => info.game_version ?? null)
+    .catch(() => null);
+}

@@ -1,0 +1,7 @@
+{
+  "battles-overall": "{battles} overall",
+  "battles-recently": "{battles} battles in 30 days",
+  "no-written-opinions-yet": "No written opinions yet. If you play, yours would be the first.",
+  "win-rate": "{winrate}% win rate",
+  "written-on": "written on {gameVersion}"
+}

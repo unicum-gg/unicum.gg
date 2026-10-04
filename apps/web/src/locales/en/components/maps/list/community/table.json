@@ -1,0 +1,15 @@
+{
+  "agreement": "Agreement",
+  "camouflage": "The season the map is set in.",
+  "fun": "Fun",
+  "map": "Map",
+  "overall": "Overall",
+  "season": "Season",
+  "tips": {
+    "overall": "How good players think it is. Ranked on a mean shrunk towards the average of every map vote, so a map with four votes cannot outrank one with four hundred.",
+    "fun": "How much players enjoy being sent here, which is regularly not the same question.",
+    "votes": "Votes cast, every one from an account with real battles behind it.",
+    "consensus": "How far apart the voters sit. Sort descending for the maps players cannot agree on, which is the more interesting list."
+  },
+  "votes": "Votes"
+}

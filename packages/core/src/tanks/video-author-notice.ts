@@ -2,7 +2,7 @@ import { APP_IDENTITY, BRAND_COLOR_INT, youtubeThumbnailUrl } from "@unicum.gg/s
 import {
   REJECTED_COLOR,
   sendAuthorNotice,
-} from "@unicum.gg/core/tanks/author-notice";
+} from "@unicum.gg/core/community/author-notice";
 
 /**
  * Telling a submitter what became of their suggestion.

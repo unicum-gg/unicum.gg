@@ -1,0 +1,13 @@
+{
+  "axis-by-axis": "Axis by axis",
+  "by-server": "By server",
+  "community-verdict": "Community verdict",
+  "every-server-one-average": "Every server, one average",
+  "n-shown": ", {count} shown",
+  "opinion": "{count, plural, one {# opinion} other {# opinions}}",
+  "rate-the": "Rate {mapName}",
+  "same-map-different-metas": "Same ground, different metas",
+  "the-same-map-by-how": "The same map, by how well the voter plays",
+  "what-players-wrote": "What players wrote",
+  "who-is-saying-it": "Who is saying it"
+}

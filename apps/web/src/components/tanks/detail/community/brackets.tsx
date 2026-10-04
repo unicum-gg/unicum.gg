@@ -30,7 +30,21 @@ const INT_FORMAT = {} as const;
  * Brackets nobody has voted from are still drawn, greyed. An empty Unicum row
  * is information ("no strong player has said anything about this yet"), and
  * dropping it would silently change what the reader thinks they are comparing.
+ *
+ * Shared with the map ratings, which read the same split for the same reason
+ * and whose prose about "it" is already subject-free. The one thing that is not
+ * is what makes a slice credible, so that arrives as `evidence`: a vehicle
+ * verdict is weighed by battles on the vehicle, and a map has no such figure
+ * because Wargaming publishes none, so it is weighed by whether its voters are
+ * still playing at all.
  */
+
+export enum BracketEvidence {
+  /** Mean battles the slice has on the subject being rated. */
+  SubjectBattles = "battles",
+  /** Mean battles the slice played in its trailing thirty days. */
+  RecentBattles = "battles-recent",
+}
 
 /** Where each bracket's boundary sits, so the label can be coloured on the same
  * WN8 ladder the rest of the site paints ratings with. The value is the middle
@@ -47,9 +61,11 @@ const BRACKET_ANCHOR: Record<VoterBracket, number | null> = {
 export async function BracketSplit({
   brackets,
   locale,
+  evidence = BracketEvidence.SubjectBattles,
 }: {
   brackets: BracketVerdict[];
   locale: string;
+  evidence?: BracketEvidence;
 }) {
   const { t } = await getTranslation(
     "components/tanks/detail/community/brackets",
@@ -85,6 +101,7 @@ export async function BracketSplit({
             verdict={bracket}
             scale={scale}
             locale={locale}
+            evidence={evidence}
           />
         ))}
       </div>
@@ -96,10 +113,12 @@ async function BracketRow({
   verdict,
   scale,
   locale,
+  evidence,
 }: {
   verdict: BracketVerdict;
   scale: number;
   locale: string;
+  evidence: BracketEvidence;
 }) {
   const { t: tLabel } = await getTranslation("components/labels", locale);
   const { t } = await getTranslation(
@@ -153,7 +172,10 @@ async function BracketRow({
           {verdict.avgBattles != null ? (
             <>
               {" · "}
-              {t("battles", {
+              {/* The enum value IS the key, so a third kind of evidence is a
+                key that does not resolve rather than a branch somebody forgot
+                to extend. */}
+              {t(evidence, {
                 count: numberFormat(locale, INT_FORMAT).format(Math.round(verdict.avgBattles)),
               })}
             </>

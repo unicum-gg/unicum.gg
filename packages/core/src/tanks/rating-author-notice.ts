@@ -3,7 +3,7 @@ import {
   quoteBack,
   REJECTED_COLOR,
   sendAuthorNotice,
-} from "@unicum.gg/core/tanks/author-notice";
+} from "@unicum.gg/core/community/author-notice";
 
 /**
  * Telling someone what became of the opinion they wrote under their stars.

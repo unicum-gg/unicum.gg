@@ -16,6 +16,10 @@ import { isRegion, REGIONS } from "@unicum.gg/wargaming";
 import { getDiscordUserId } from "@unicum.gg/core/discord/supporter-role";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
+import {
+  createRateLimiter,
+  RATE_LIMIT_WINDOW_MS,
+} from "@/services/rate-limit";
 import ROUTES from "@/constants/routes";
 import { TankRateBody, TankRateResponse } from "./schema.api";
 
@@ -30,27 +34,11 @@ export const dynamic = "force-dynamic";
  * text produces an unbounded stream of moderation cards and one tidy row. The
  * limit is per user rather than per IP, since the endpoint already requires a
  * signed-in Wargaming account and that is the thing being rate limited.
- *
- * Best-effort and per-instance, like the feedback endpoint's: enough to stop a
- * script, not a distributed-systems guarantee.
  */
-const RATE_LIMIT = 10;
-const RATE_WINDOW_MS = 60_000;
-const hits = new Map<string, number[]>();
-
-function rateLimited(userId: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(userId) ?? []).filter(
-    (t) => now - t < RATE_WINDOW_MS,
-  );
-  if (recent.length >= RATE_LIMIT) {
-    hits.set(userId, recent);
-    return true;
-  }
-  recent.push(now);
-  hits.set(userId, recent);
-  return false;
-}
+const limiter = createRateLimiter({
+  limit: 10,
+  windowMs: RATE_LIMIT_WINDOW_MS,
+});
 
 /**
  * Rate a tank
@@ -76,7 +64,7 @@ export async function POST(
     return Response.json({ error: "unauthenticated" }, { status: 401 });
   }
 
-  if (rateLimited(session.user.id)) {
+  if (limiter.limited(session.user.id)) {
     return Response.json({ error: "rate_limited" }, { status: 429 });
   }
 

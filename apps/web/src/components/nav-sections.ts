@@ -199,6 +199,12 @@ export function navSections(
           href: ROUTES.MAPS_CHANGES(region),
           description: t("links.map-changes.description"),
         },
+        {
+          id: "map-community",
+          label: t("links.map-community.label"),
+          href: ROUTES.MAPS_COMMUNITY(region),
+          description: t("links.map-community.description"),
+        },
       ],
     },
     {

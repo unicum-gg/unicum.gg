@@ -8,28 +8,21 @@ import {
   sendFeedbackToDiscord,
 } from "@/services/discord/feedback";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
+import {
+  createRateLimiter,
+  RATE_LIMIT_WINDOW_MS,
+} from "@/services/rate-limit";
 import ROUTES from "@/constants/routes";
 
 export const dynamic = "force-dynamic";
 
-// A tiny in-memory sliding-window guard so one client can't flood the Discord
-// channel. Best-effort (per-instance, resets on redeploy) — enough to stop
-// accidental double-submits and casual abuse at this scale.
-const RATE_LIMIT = 5;
-const RATE_WINDOW_MS = 60_000;
-const hits = new Map<string, number[]>();
-
-function rateLimited(key: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(key) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
-  if (recent.length >= RATE_LIMIT) {
-    hits.set(key, recent);
-    return true;
-  }
-  recent.push(now);
-  hits.set(key, recent);
-  return false;
-}
+// A guard so one client cannot flood the Discord channel. Keyed on the caller's
+// address rather than on an account, since this endpoint takes anonymous
+// feedback and the address is all there is.
+const limiter = createRateLimiter({
+  limit: 5,
+  windowMs: RATE_LIMIT_WINDOW_MS,
+});
 
 /**
  * Send feedback
@@ -46,7 +39,7 @@ export async function POST(request: Request): Promise<Response> {
 
   const hdrs = await headers();
   const ip = hdrs.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (rateLimited(ip)) {
+  if (limiter.limited(ip)) {
     return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   }
 
