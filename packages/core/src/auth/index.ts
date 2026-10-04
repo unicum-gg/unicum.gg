@@ -2,11 +2,14 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { and, eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { account as accountTable, env } from "@unicum.gg/shared";
+import {
+  account as accountTable,
+  env,
+  wgIdentityFromAccountKey,
+} from "@unicum.gg/shared";
 import { getTwitchUsersById, isTwitchEnabled } from "@unicum.gg/core/twitch";
 import { upsertStreamer } from "@unicum.gg/core/twitch/streamers";
 import { refreshTwitchToken } from "@unicum.gg/core/twitch/refresh";
-import { isRegion } from "@unicum.gg/wargaming";
 import { wargaming } from "./wargaming";
 
 /**
@@ -95,11 +98,9 @@ export const auth = betterAuth({
             )
             .limit(1);
           if (!wg) return;
-          const dash = wg.accountId.indexOf("-");
-          if (dash < 0) return;
-          const region = wg.accountId.slice(0, dash);
-          const accountId = Number(wg.accountId.slice(dash + 1));
-          if (!isRegion(region) || !Number.isFinite(accountId)) return;
+          const identity = wgIdentityFromAccountKey(wg.accountId);
+          if (!identity) return;
+          const { region, accountId } = identity;
           const [twitchUser] = await getTwitchUsersById([
             twitchAccount.accountId,
           ]);

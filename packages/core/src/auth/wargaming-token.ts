@@ -2,8 +2,12 @@ import { and, eq } from "drizzle-orm";
 import { symmetricDecrypt, symmetricEncrypt } from "better-auth/crypto";
 import { db } from "@unicum.gg/core/db";
 import { wg } from "@unicum.gg/core/wargaming/client";
-import { account as accountTable, env } from "@unicum.gg/shared";
-import { Region, isRegion } from "@unicum.gg/wargaming";
+import {
+  account as accountTable,
+  env,
+  wgIdentityFromAccountKey,
+} from "@unicum.gg/shared";
+import { Region } from "@unicum.gg/wargaming";
 
 const PROVIDER_ID = "wargaming";
 // Refresh the token when it has less than this left, so a daily workflow
@@ -38,11 +42,9 @@ export async function getWargamingAccessToken(
 
   if (!acc?.accessToken) return { ok: false, reason: "no_account" };
 
-  // accountId is stored as `<region>-<wgAccountId>`.
-  const [regionPart, idPart] = acc.accountId.split("-");
-  if (!isRegion(regionPart) || !idPart) return { ok: false, reason: "no_account" };
-  const region = regionPart;
-  const accountId = Number(idPart);
+  const identity = wgIdentityFromAccountKey(acc.accountId);
+  if (!identity) return { ok: false, reason: "no_account" };
+  const { region, accountId } = identity;
 
   const key = env.BETTER_AUTH_SECRET as string;
   let token = await symmetricDecrypt({ key, data: acc.accessToken });

@@ -1,4 +1,5 @@
-import { isRegion, type Region } from "@unicum.gg/wargaming";
+import { type Region } from "@unicum.gg/wargaming";
+import { wgIdentityFromAccountKey } from "@unicum.gg/shared";
 import { accountBehindGameToken } from "@unicum.gg/core/auth/game-client-account";
 import { wargamingAccountOf } from "@unicum.gg/core/game-link";
 import {
@@ -159,12 +160,5 @@ async function provenAccount(req: Request): Promise<ProvenAccount | null> {
 async function linkedAccount(req: Request): Promise<ProvenAccount | null> {
   const client = await gameClientUser(req);
   if (!client) return null;
-  // Stored as `<region>-<account id>` by the Wargaming sign-in.
-  const wargaming = await wargamingAccountOf(client.userId);
-  if (!wargaming) return null;
-  const separator = wargaming.indexOf("-");
-  const region = wargaming.slice(0, separator);
-  const accountId = Number(wargaming.slice(separator + 1));
-  if (!isRegion(region) || !Number.isFinite(accountId)) return null;
-  return { region, accountId };
+  return wgIdentityFromAccountKey(await wargamingAccountOf(client.userId));
 }

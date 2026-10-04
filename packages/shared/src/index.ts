@@ -21,3 +21,4 @@ export * from "./glossary";
 export * from "./wot";
 export * from "./finance";
 export * from "./support";
+export * from "./auth";
