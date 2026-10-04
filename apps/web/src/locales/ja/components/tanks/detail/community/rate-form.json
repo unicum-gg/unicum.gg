@@ -4,6 +4,7 @@
   "could-not-withdraw-that-try-again-in-a-momen": "取り消せませんでした。しばらくしてから再試行してください",
   "hide-the-detailed-axes": "詳細軸を非表示",
   "not-enough-battles": "この戦車のプレイ数が少なすぎるため、投票を集計できません",
+  "publish-without-my-name": "名前を表示せずに公開。あなたのこの戦車での戦闘数、勝率、レーティングは引き続き表示されるため、レビューを読む価値があります。",
   "published-once-read": "モデレーターが既読にすると公開されます。星の数はすぐに集計されます",
   "rate-it-in-detail": "詳細に評価 (オプショナル)",
   "review": {

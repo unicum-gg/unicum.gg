@@ -1,4 +1,5 @@
 {
+  "anonymous": "Anonym",
   "battles-in-it": "{battles} Gefechte damit",
   "damage": "{damage} Schaden",
   "n-marks": "{count, plural, one {# Marke} other {# Marken}}",

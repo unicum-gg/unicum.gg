@@ -1,4 +1,5 @@
 {
+  "anonymous": "Анонімно",
   "battles-in-it": "{battles} боїв на ньому",
   "damage": "{damage} завдано шкоди",
   "n-marks": "{count, plural, one {# відмітка} few {# відмітки} many {# відміток} other {# відміток}}",

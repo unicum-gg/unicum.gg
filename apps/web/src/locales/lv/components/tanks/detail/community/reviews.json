@@ -1,4 +1,5 @@
 {
+  "anonymous": "Anonīms",
   "battles-in-it": "{battles} kaujas ar to",
   "damage": "{damage} Bojājumi",
   "n-marks": "{count, plural, zero {# atzīmes} one {# atzīme} other {# atzīmes}}",

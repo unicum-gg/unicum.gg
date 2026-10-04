@@ -1,4 +1,5 @@
 {
+  "anonymous": "Anonyymi",
   "battles-in-it": "{battles} taistelua sillä",
   "damage": "{damage} Vahinkoa aiheutettu",
   "n-marks": "{count, plural, one {# merkki} other {# merkit}}",

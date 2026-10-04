@@ -1,4 +1,5 @@
 {
+  "anonymous": "Анонимен",
   "battles-in-it": "{battles} битки с него",
   "damage": "{damage} поражения",
   "n-marks": "{count, plural, one {# знак} other {# знаци}}",

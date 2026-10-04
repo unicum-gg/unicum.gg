@@ -1,4 +1,5 @@
 {
+  "anonymous": "익명",
   "battles-in-it": "이 전차에서 {battles}회 전투",
   "damage": "{damage} 피해량",
   "n-marks": "{count, plural, other {#개 표식}}",

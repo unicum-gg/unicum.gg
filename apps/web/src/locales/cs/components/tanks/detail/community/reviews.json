@@ -1,4 +1,5 @@
 {
+  "anonymous": "Anonymní",
   "battles-in-it": "Bitev s tímto tankem: {battles}",
   "damage": "{damage} poškození",
   "n-marks": "{count, plural, one {# známka} few {# známky} many {# známek} other {# známek}}",

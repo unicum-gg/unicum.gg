@@ -1,4 +1,5 @@
 {
+  "anonymous": "匿名",
   "battles-in-it": "使用它进行过{battles}场战斗",
   "damage": "造成的损伤为 {damage} 损伤",
   "n-marks": "{count, plural, other {# 标记}}",

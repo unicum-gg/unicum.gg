@@ -1,4 +1,5 @@
 {
+  "anonymous": "Névtelen",
   "battles-in-it": "{battles} csata vele",
   "damage": "{damage} Sebzés",
   "n-marks": "{count, plural, one {# jel} other {# jelek}}",

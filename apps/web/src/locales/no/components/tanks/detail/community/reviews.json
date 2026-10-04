@@ -1,4 +1,5 @@
 {
+  "anonymous": "Anonym",
   "battles-in-it": "{battles} kamper i den",
   "damage": "{damage} skade",
   "n-marks": "{count, plural, one {# merke} other {# merker}}",

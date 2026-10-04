@@ -1,4 +1,5 @@
 {
+  "anonymous": "مجهول",
   "battles-in-it": "{battles} معارك بها",
   "damage": "{damage} ضرر",
   "n-marks": "{count, plural, zero {# علامة} one {# علامة} two {# علامتان} few {# علامات التميز} many {# علامات التميز} other {# علامة}}",
