@@ -1607,8 +1607,8 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Supporters podium
-         * @description Active supporters ranked by their current monthly pledge, highest first. The pledge amount is never exposed, only the ranking; anonymous supporters appear as "Anonymous".
+         * Supporters board
+         * @description Everyone who has contributed, ranked by the net total they have given since launch, highest first, so a monthly pledge and a one-off donation are counted alike. Individual amounts are never exposed, only the ranking; anonymous supporters appear as "Anonymous". The aggregate monthly pledge is returned beside it for the funding run-rate.
          */
         get: operations["get-support-podium"];
         put?: never;
@@ -4612,7 +4612,7 @@ export interface components {
             buyCredits: number | null;
             researchXp: number | null;
         };
-        /** @description One supporter on the podium, ranked by current monthly pledge. The amount is never exposed. */
+        /** @description One supporter on the board, ranked by the net total they have given since launch. The amount is never exposed. */
         PodiumSupporter: {
             rank: number;
             /** @description Supporter Wargaming nickname, or "Anonymous". */
@@ -5134,20 +5134,20 @@ export interface components {
         StrongholdTopResponse: {
             results: components["schemas"]["StrongholdLeaderboardEntry"][];
         };
-        /** @description Active supporters ranked by current monthly pledge, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
+        /** @description Everyone who has contributed, ranked by the net total given since launch, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
         SupportersPodium: {
             supporters: components["schemas"]["PodiumSupporter"][];
-            /** @description Total monthly pledge across all active supporters, in EUR cents (aggregate only, for the funding bar). */
+            /** @description Total monthly pledge across all active supporters, in EUR cents (aggregate only, for the funding bar's run-rate line). One-off donations are not in it: it answers what recurs every month, not what came in. */
             monthlyPledgedCents: number;
-            /** @description Total amount received from supporters since launch, in EUR cents (aggregate only, for the cumulative funding bar). */
+            /** @description Total amount received from supporters since launch, net of refunds, in EUR cents (aggregate only, for the cumulative funding bar). Monthly charges and one-off donations alike. */
             receivedCents: number;
         };
-        /** @description Active supporters ranked by current monthly pledge, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
+        /** @description Everyone who has contributed, ranked by the net total given since launch, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
         SupportersPodiumResponse: {
             supporters: components["schemas"]["PodiumSupporter"][];
-            /** @description Total monthly pledge across all active supporters, in EUR cents (aggregate only, for the funding bar). */
+            /** @description Total monthly pledge across all active supporters, in EUR cents (aggregate only, for the funding bar's run-rate line). One-off donations are not in it: it answers what recurs every month, not what came in. */
             monthlyPledgedCents: number;
-            /** @description Total amount received from supporters since launch, in EUR cents (aggregate only, for the cumulative funding bar). */
+            /** @description Total amount received from supporters since launch, net of refunds, in EUR cents (aggregate only, for the cumulative funding bar). Monthly charges and one-off donations alike. */
             receivedCents: number;
         };
         /** @description One medal earned on this vehicle. For a tiered medal the count is the tier reached, not a number of awards. */

@@ -1162,7 +1162,7 @@ type ServersNamespace = {
 type SupportNamespace = {
   /** Funding progress */
   funding(): RequestHandle<Data<"/support/funding">>;
-  /** Supporters podium */
+  /** Supporters board */
   podium(): RequestHandle<Data<"/support/podium">>;
 };
 
