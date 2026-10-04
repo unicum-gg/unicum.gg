@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Paldies par jūsu ziedojumu!",
   "you-already-have-a-monthly-pledge": "Jums jau ir ikmēneša apņemšanās. Izmantojiet norēķinu portālu, lai to mainītu.",
   "you-are-a-supporter-thank": "Tu esi atbalstītājs. Paldies, ka uzturi {NAME} dzīvu.",
-  "you-have-given-so-far": "Līdz šim esat ziedojis {amount}. Paldies."
+  "you-have-given-so-far": "Līdz šim esat ziedojis {amount}. Paldies.",
+  "manage-connected-accounts": "Pārvaldīt savienotos kontus"
 }

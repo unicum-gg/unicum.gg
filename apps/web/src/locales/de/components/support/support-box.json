@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Vielen Dank für deine Spende!",
   "you-already-have-a-monthly-pledge": "Du hast bereits eine monatliche Zusage. Ändere sie über das Abrechnungsportal.",
   "you-are-a-supporter-thank": "Du bist Unterstützer. Danke, dass du {NAME} am Leben hältst.",
-  "you-have-given-so-far": "Du hast bisher {amount} gegeben. Vielen Dank."
+  "you-have-given-so-far": "Du hast bisher {amount} gegeben. Vielen Dank.",
+  "manage-connected-accounts": "Verbundene Konten verwalten"
 }

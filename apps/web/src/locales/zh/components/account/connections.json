@@ -1,0 +1,20 @@
+{
+  "title": "已连接的账号",
+  "description": "每个账号都会在网站上解锁某些功能。断开连接会收回这些权限，并将授权交还给服务方。",
+  "loading": "正在读取你的账号",
+  "log-in-first": "使用你的 Wargaming.net ID 登录，以查看与其关联的账号。",
+  "log-in": "登录",
+  "connect": "连接",
+  "disconnect": "断开连接",
+  "cancel": "取消",
+  "disconnect-name": "断开与 {name} 的连接？",
+  "connected-since": "已于 {date} 连接",
+  "disconnected": "{name} 已断开连接。",
+  "could-not-disconnect": "无法断开与 {name} 的连接。请稍后再试。",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "这是你用于登录的账号，因此无法断开连接。",
+  "twitch-purpose": "让你的频道在直播时显示在列表中，并允许游戏模组在你的聊天中发帖。",
+  "twitch-consequence": "你的频道将不再列在网站上，也不再显示在你的个人资料中，游戏模组也无法再在你的聊天中发帖。你随时可以重新连接。",
+  "discord-purpose": "领取支持者角色，并获取你提交的视频和评价的后续回复。",
+  "discord-consequence": "你将失去我们服务器上的支持者角色，我们也无法再告知你所提交的视频或评价的处理结果。你随时可以重新连接。"
+}

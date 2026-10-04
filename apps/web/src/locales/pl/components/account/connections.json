@@ -1,0 +1,20 @@
+{
+  "title": "Połączone konta",
+  "description": "Każde z nich odblokowuje coś w witrynie. Odłączenie odbiera te uprawnienia i przekazuje autoryzację usłudze.",
+  "loading": "Odczytywanie Twojego konta",
+  "log-in-first": "Zaloguj się przy użyciu identyfikatora Wargaming.net, aby zobaczyć połączone z nim konta.",
+  "log-in": "Zaloguj się",
+  "connect": "Połącz",
+  "disconnect": "Odłącz",
+  "cancel": "Anuluj",
+  "disconnect-name": "Odłączyć {name}?",
+  "connected-since": "Połączono {date}",
+  "disconnected": "Odłączono {name}.",
+  "could-not-disconnect": "Nie można odłączyć {name}. Spróbuj ponownie za moment.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "To konto służy do logowania, więc nie można go odłączyć.",
+  "twitch-purpose": "Spraw, by Twój kanał był wymieniony, gdy transmitujesz na żywo, i pozwól modowi gry publikować na Twoim czacie.",
+  "twitch-consequence": "Twój kanał przestanie być wymieniony w witrynie i przestanie być widoczny w Twoim profilu, a mod gry nie będzie już mógł publikować na Twoim czacie. Możesz połączyć go ponownie w dowolnym momencie.",
+  "discord-purpose": "Odbierz swoją rolę wspierającego i dowiaduj się, co stało się z filmami i recenzjami, które wysłano.",
+  "discord-consequence": "Rezygnujesz z roli wspierającego na naszym serwerze i nie możemy już poinformować Cię, co stało się z filmem lub recenzją, które wysłano. Możesz ponownie połączyć to konto w dowolnym momencie."
+}

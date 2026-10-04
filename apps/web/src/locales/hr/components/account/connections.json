@@ -1,0 +1,20 @@
+{
+  "title": "Povezani računi",
+  "description": "Svaki od njih otključava nešto na web-mjestu. Prekid povezivanja to poništava i vraća autorizaciju usluzi.",
+  "loading": "Čitanje vašeg računa",
+  "log-in-first": "Prijavi se svojim Wargaming.net ID-jem da vidiš račune povezane s njim.",
+  "log-in": "Prijavi se",
+  "connect": "Poveži",
+  "disconnect": "Prekini povezivanje",
+  "cancel": "Odustani",
+  "disconnect-name": "Prekinuti povezivanje s {name}?",
+  "connected-since": "Povezano dana {date}",
+  "disconnected": "Povezivanje s {name} je prekinuto.",
+  "could-not-disconnect": "Nije moguće prekinuti povezivanje s {name}. Pokušaj ponovno za trenutak.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Ovo je račun kojim se prijavljuješ, pa se njegovo povezivanje ne može prekinuti.",
+  "twitch-purpose": "Neka tvoj kanal bude naveden kad ideš uživo i omogući modu da objavljuje u tvom chatu.",
+  "twitch-consequence": "Tvoj kanal više neće biti naveden na web-mjestu ni prikazan na tvom profilu, a mod više neće moći objavljivati u tvom chatu. Možeš ga ponovno povezati u bilo kojem trenutku.",
+  "discord-purpose": "Preuzmi ulogu podržavatelja i dobij odgovor o videozapisima i recenzijama koje pošalješ.",
+  "discord-consequence": "Odričeš se svoje uloge podržavatelja na našem poslužitelju i više ti ne možemo reći što se dogodilo s videozapisom ili recenzijom koje si poslao. Možeš ga ponovno povezati u bilo kojem trenutku."
+}

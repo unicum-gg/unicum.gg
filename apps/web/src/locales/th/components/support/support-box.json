@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "ขอบคุณสำหรับการบริจาคของคุณ!",
   "you-already-have-a-monthly-pledge": "คุณมีคำมั่นสนับสนุนรายเดือนอยู่แล้ว ใช้พอร์ทัลการเรียกเก็บเงินเพื่อเปลี่ยนแปลงได้",
   "you-are-a-supporter-thank": "คุณคือผู้สนับสนุน ขอบคุณที่ช่วยให้ {NAME} ยังคงทำงานอยู่",
-  "you-have-given-so-far": "จนถึงตอนนี้คุณสนับสนุนไปแล้ว {amount} ขอบคุณ"
+  "you-have-given-so-far": "จนถึงตอนนี้คุณสนับสนุนไปแล้ว {amount} ขอบคุณ",
+  "manage-connected-accounts": "จัดการบัญชีที่เชื่อมต่อ"
 }

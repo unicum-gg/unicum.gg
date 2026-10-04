@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Дзякуй за ваш ахвяраванне!",
   "you-already-have-a-monthly-pledge": "У вас ужо ёсць штомесячны ўнёсак. Каб змяніць яго, скарыстайцеся парталам для аплаты.",
   "you-are-a-supporter-thank": "Вы прыхільнік. Дзякуй, што падтрымліваеце {NAME}.",
-  "you-have-given-so-far": "Да гэтага часу вы ўнеслі {amount}. Дзякуй."
+  "you-have-given-so-far": "Да гэтага часу вы ўнеслі {amount}. Дзякуй.",
+  "manage-connected-accounts": "Кіраваць падключанымі ўліковымі запісамі"
 }

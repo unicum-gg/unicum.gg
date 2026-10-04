@@ -1,0 +1,20 @@
+{
+  "title": "Tilknyttede konti",
+  "description": "Hver konto låser noget op på webstedet. Hvis du frakobler en konto, tager du det tilbage og giver godkendelsen til tjenesten.",
+  "loading": "Læser din konto",
+  "log-in-first": "Log ind med dit Wargaming.net ID for at se de konti, der er tilknyttet det.",
+  "log-in": "Log ind",
+  "connect": "Forbind",
+  "disconnect": "Frakobl",
+  "cancel": "Fortryd",
+  "disconnect-name": "Frakobl {name}?",
+  "connected-since": "Tilknyttet {date}",
+  "disconnected": "{name} er frakoblet.",
+  "could-not-disconnect": "Kunne ikke frakoble {name}. Prøv igen om et øjeblik.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Dette er den konto, du logger ind med, så den kan ikke frakobles.",
+  "twitch-purpose": "Få din kanal opført, når du går live, og giv spilmoddet mulighed for at skrive i din chat.",
+  "twitch-consequence": "Din kanal bliver ikke længere opført på webstedet eller vist på din profil, og spilmoddet kan ikke længere skrive i din chat. Du kan tilknytte den igen når som helst.",
+  "discord-purpose": "Gør krav på din rolle som bidragyder, og få svar tilbage om de videoer og anmeldelser, du sender ind.",
+  "discord-consequence": "Du opgiver din bidragyderrolle på vores server, og vi kan ikke længere fortælle dig, hvad der blev af en video eller en anmeldelse, du har sendt ind. Du kan tilknytte den igen når som helst."
+}

@@ -1,7 +1,7 @@
 {
   "axis-by-axis": "Pa asīm",
   "by-server": "Pēc servera",
-  "community-verdict": "Kopienas spriedums",
+  "community-verdict": "Kopienas vērtējums",
   "every-server-one-average": "Katrs serveris, viens vidējais",
   "n-shown": ", parādīti {count}",
   "opinion": "{count, plural, zero {# viedokļu} one {# viedoklis} other {# viedokļi}}",

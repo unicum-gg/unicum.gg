@@ -1,0 +1,20 @@
+{
+  "title": "Susietos paskyros",
+  "description": "Kiekviena iš jų svetainėje suteikia prieigą prie tam tikrų funkcijų. Atsiejus ši prieiga panaikinama, o autorizacija perduodama paslaugai.",
+  "loading": "Nuskaitoma jūsų paskyra",
+  "log-in-first": "Prisijunkite naudodami savo Wargaming.net ID, kad pamatytumėte su juo susietas paskyras.",
+  "log-in": "Prisijungti",
+  "connect": "Prisijungti",
+  "disconnect": "Atsieti",
+  "cancel": "Atšaukti",
+  "disconnect-name": "Atsieti {name}?",
+  "connected-since": "Susieta: {date}",
+  "disconnected": "Ryšys su {name} nutrauktas.",
+  "could-not-disconnect": "Nepavyko atsieti {name}. Pabandykite dar kartą po akimirkos.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Tai paskyra, kuria prisijungiate, todėl jos atsieti negali.",
+  "twitch-purpose": "Pasirūpinkite, kad jūsų kanalas būtų įtrauktas, kai transliuojate tiesiogiai, ir leiskite žaidimo modui skelbti jūsų pokalbyje.",
+  "twitch-consequence": "Jūsų kanalas nebebus įtrauktas svetainėje ir nebebus rodomas jūsų profilyje, o žaidimo modas nebegalės skelbti jūsų pokalbyje. Bet kada galėsite vėl prie jo prisijungti.",
+  "discord-purpose": "Gaukite rėmėjo vaidmenį ir gaukite atsakymą apie išsiųstus vaizdo įrašus bei apžvalgas.",
+  "discord-consequence": "Atsisakote rėmėjo vaidmens mūsų serveryje, todėl mes nebegalime pranešti, kas nutiko jūsų išsiųstam vaizdo įrašui arba apžvalgai. Galite vėl prisijungti bet kuriuo laiku."
+}

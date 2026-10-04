@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "ご寄付ありがとうございます！",
   "you-already-have-a-monthly-pledge": "すでに月間の支援を申し込んでいます。請求ポータルで変更してください。",
   "you-are-a-supporter-thank": "あなたは支援者です。{NAME}を存続させてくださりありがとうございます。",
-  "you-have-given-so-far": "これまでに{amount}を支援しています。ありがとうございます。"
+  "you-have-given-so-far": "これまでに{amount}を支援しています。ありがとうございます。",
+  "manage-connected-accounts": "連携アカウントを管理"
 }

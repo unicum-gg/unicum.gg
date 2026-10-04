@@ -1,0 +1,20 @@
+{
+  "title": "Yhdistetyt tilit",
+  "description": "Jokainen niistä avaa jotain sivustolla. Yhteyden katkaiseminen ottaa sen takaisin ja luovuttaa valtuutuksen palvelulle.",
+  "loading": "Luetaan tiliäsi",
+  "log-in-first": "Kirjaudu sisään Wargaming.net-tunnuksellasi nähdäksesi siihen yhdistetyt tilit.",
+  "log-in": "Kirjaudu sisään",
+  "connect": "Yhdistä",
+  "disconnect": "Katkaise yhteys",
+  "cancel": "Peruuta",
+  "disconnect-name": "Katkaistaanko yhteys palveluun {name}?",
+  "connected-since": "Yhdistetty {date}",
+  "disconnected": "Yhteys palveluun {name} katkaistiin.",
+  "could-not-disconnect": "Yhteyttä palveluun {name} ei voitu katkaista. Yritä hetken kuluttua uudelleen.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Tämä on tili, jolla kirjaudut sisään, joten sen yhteyttä ei voi katkaista.",
+  "twitch-purpose": "Kanavasi listataan, kun olet livessä, ja pelin mod voi julkaista viestejä chatissasi.",
+  "twitch-consequence": "Kanavaasi ei enää listata sivustolla eikä näytetä profiilissasi, eikä pelin mod voi enää julkaista viestejä chatissasi. Voit yhdistää sen uudelleen milloin tahansa.",
+  "discord-purpose": "Lunasta tukijan roolisi ja saat tietoa lähettämiesi videoiden ja arvostelujen tilanteesta.",
+  "discord-consequence": "Luovut palvelimellamme olevasta tukijan roolistasi, emmekä voi enää kertoa, mitä lähettämällesi videolle tai arvostelulle tapahtui. Voit yhdistää sen uudelleen milloin tahansa."
+}

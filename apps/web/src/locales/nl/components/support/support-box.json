@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Bedankt voor je donatie!",
   "you-already-have-a-monthly-pledge": "Je hebt al een maandelijkse toezegging. Gebruik het betalingsportaal om deze te wijzigen.",
   "you-are-a-supporter-thank": "Je bent Supporter. Bedankt dat je {NAME} in leven houdt.",
-  "you-have-given-so-far": "Je hebt tot nu toe {amount} gegeven. Bedankt."
+  "you-have-given-so-far": "Je hebt tot nu toe {amount} gegeven. Bedankt.",
+  "manage-connected-accounts": "Beheer gekoppelde accounts"
 }

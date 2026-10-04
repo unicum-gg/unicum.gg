@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "شكرًا على تبرعك!",
   "you-already-have-a-monthly-pledge": "لديك بالفعل تعهّد شهري. استخدم بوابة الفوترة لتغييره.",
   "you-are-a-supporter-thank": "أنت داعم. شكرًا لإبقاء {NAME} قيد التشغيل.",
-  "you-have-given-so-far": "لقد قدّمت {amount} حتى الآن. شكرًا لك."
+  "you-have-given-so-far": "لقد قدّمت {amount} حتى الآن. شكرًا لك.",
+  "manage-connected-accounts": "إدارة الحسابات المرتبطة"
 }

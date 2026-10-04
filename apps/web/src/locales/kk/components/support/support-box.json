@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Қайырымдылық жасағаныңызға рақмет!",
   "you-already-have-a-monthly-pledge": "Сізде әлдеқашан ай сайынғы жарна бар. Оны өзгерту үшін төлем порталын пайдаланыңыз.",
   "you-are-a-supporter-thank": "Сіз қолдаушысыз. {NAME} жобасын жұмыс істетіп тұрғаныңыз үшін рақмет.",
-  "you-have-given-so-far": "Осы уақытқа дейін {amount} бердіңіз. Рақмет."
+  "you-have-given-so-far": "Осы уақытқа дейін {amount} бердіңіз. Рақмет.",
+  "manage-connected-accounts": "Қосылған аккаунттарды басқару"
 }

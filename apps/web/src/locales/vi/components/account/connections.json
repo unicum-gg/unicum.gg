@@ -1,0 +1,20 @@
+{
+  "title": "Tài khoản đã kết nối",
+  "description": "Mỗi tài khoản đều mở khóa một tính năng trên trang web. Việc ngắt kết nối sẽ thu hồi tính năng đó và chuyển quyền ủy quyền lại cho dịch vụ.",
+  "loading": "Đang đọc tài khoản của bạn",
+  "log-in-first": "Đăng nhập bằng ID Wargaming.net của bạn để xem các tài khoản đã kết nối với ID đó.",
+  "log-in": "Đăng nhập",
+  "connect": "Kết nối",
+  "disconnect": "Ngắt kết nối",
+  "cancel": "Hủy bỏ",
+  "disconnect-name": "Ngắt kết nối {name}?",
+  "connected-since": "Đã kết nối vào {date}",
+  "disconnected": "Đã ngắt kết nối {name}.",
+  "could-not-disconnect": "Không thể ngắt kết nối {name}. Hãy thử lại sau một khoảnh khắc.",
+  "wargaming-id": "ID Wargaming.net",
+  "wargaming-is-the-identity": "Đây là tài khoản bạn dùng để đăng nhập, vì vậy không thể ngắt kết nối tài khoản này.",
+  "twitch-purpose": "Đưa kênh của bạn vào danh sách khi bạn phát trực tiếp và cho phép mod trò chơi đăng bài trong cuộc trò chuyện của bạn.",
+  "twitch-consequence": "Kênh của bạn sẽ không còn được liệt kê trên trang web và không còn hiển thị trên hồ sơ của bạn, đồng thời mod trò chơi sẽ không thể đăng bài trong cuộc trò chuyện của bạn. Bạn có thể kết nối lại bất cứ lúc nào.",
+  "discord-purpose": "Nhận vai trò người ủng hộ và nhận phản hồi về các video và đánh giá bạn đã gửi.",
+  "discord-consequence": "Bạn sẽ từ bỏ vai trò người ủng hộ trên máy chủ của chúng tôi và chúng tôi không thể cho bạn biết kết quả của video hoặc đánh giá bạn đã gửi. Bạn có thể kết nối lại bất cứ lúc nào."
+}

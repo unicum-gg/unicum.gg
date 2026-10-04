@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Îți mulțumim pentru donație!",
   "you-already-have-a-monthly-pledge": "Ai deja o contribuție lunară. Folosește portalul de facturare pentru a o modifica.",
   "you-are-a-supporter-thank": "Ești susținător. Îți mulțumim că menții {NAME} activ.",
-  "you-have-given-so-far": "Ai oferit până acum {amount}. Îți mulțumim."
+  "you-have-given-so-far": "Ai oferit până acum {amount}. Îți mulțumim.",
+  "manage-connected-accounts": "Gestionează conturile conectate"
 }

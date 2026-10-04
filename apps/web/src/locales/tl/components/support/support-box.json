@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Salamat sa iyong donasyon!",
   "you-already-have-a-monthly-pledge": "Mayroon ka nang pangakong buwan-buwan. Gamitin ang billing portal para sa pagbabago nito.",
   "you-are-a-supporter-thank": "Isa kang tagasuporta. Salamat sa pagpapanatiling buhay kay {NAME}.",
-  "you-have-given-so-far": "Sa ngayon, nakapagbigay ka na ng {amount}. Salamat."
+  "you-have-given-so-far": "Sa ngayon, nakapagbigay ka na ng {amount}. Salamat.",
+  "manage-connected-accounts": "Pamahalaan ang mga nakakonektang account"
 }

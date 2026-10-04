@@ -1,0 +1,20 @@
+{
+  "title": "Conturi conectate",
+  "description": "Fiecare deblochează ceva pe site. Deconectarea retrage acel lucru și redă autorizarea serviciului.",
+  "loading": "Citește contul tău",
+  "log-in-first": "Conectare cu ID-ul tău Wargaming.net pentru a vedea conturile conectate la acesta.",
+  "log-in": "Conectare",
+  "connect": "Conectează",
+  "disconnect": "Deconectează",
+  "cancel": "Anulare",
+  "disconnect-name": "Deconectezi {name}?",
+  "connected-since": "Conectat din {date}",
+  "disconnected": "Deconectare reușită pentru {name}.",
+  "could-not-disconnect": "Nu s-a putut deconecta {name}. Încearcă din nou peste un moment.",
+  "wargaming-id": "ID Wargaming.net",
+  "wargaming-is-the-identity": "Acesta este contul cu care te conectezi, așa că nu poate fi deconectat.",
+  "twitch-purpose": "Fă-ți canalul listat când intri live și permite modului jocului să posteze în chat.",
+  "twitch-consequence": "Canalul tău nu va mai fi listat pe site și nu va mai fi afișat în profilul tău, iar modului jocului nu îi va mai fi permis să posteze în chat. Îl poți conecta din nou oricând.",
+  "discord-purpose": "Revendică-ți rolul de susținător și primește înapoi informații despre videoclipurile și recenziile pe care le-ai trimis.",
+  "discord-consequence": "Renunți la rolul de susținător pe serverul nostru și nu îți mai putem spune ce s-a întâmplat cu un video sau cu o recenzie pe care le-ai trimis. Poți reactiva conexiunea în orice timp."
+}

@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Köszönjük az adományodat!",
   "you-already-have-a-monthly-pledge": "Már van havi vállalásod. A számlázási portálon módosíthatod.",
   "you-are-a-supporter-thank": "Támogató vagy. Köszönjük, hogy életben tartod a(z) {NAME} oldalt.",
-  "you-have-given-so-far": "Eddig {amount} összeggel támogattál. Köszönjük."
+  "you-have-given-so-far": "Eddig {amount} összeggel támogattál. Köszönjük.",
+  "manage-connected-accounts": "Csatlakoztatott fiókok kezelése"
 }

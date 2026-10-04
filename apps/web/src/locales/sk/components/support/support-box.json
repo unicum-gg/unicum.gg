@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Ďakujeme za váš dar!",
   "you-already-have-a-monthly-pledge": "Už máte mesačný príspevok. Na jeho zmenu použite fakturačný portál.",
   "you-are-a-supporter-thank": "Ste podporovateľ. Ďakujeme, že pomáhate udržať projekt {NAME} v chode.",
-  "you-have-given-so-far": "Doteraz ste prispeli sumou {amount}. Ďakujeme."
+  "you-have-given-so-far": "Doteraz ste prispeli sumou {amount}. Ďakujeme.",
+  "manage-connected-accounts": "Spravovať povezane račune"
 }

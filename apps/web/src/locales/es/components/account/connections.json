@@ -1,0 +1,20 @@
+{
+  "title": "Cuentas conectadas",
+  "description": "Cada una desbloquea algo en el sitio. Al desconectarla, se retira ese acceso y se devuelve la autorización al servicio.",
+  "loading": "Leyendo tu cuenta",
+  "log-in-first": "Inicia sesión con tu Wargaming.net ID para ver las cuentas conectadas a él.",
+  "log-in": "Iniciar sesión",
+  "connect": "Conectar",
+  "disconnect": "Desconectar",
+  "cancel": "Cancelar",
+  "disconnect-name": "¿Desconectar {name}?",
+  "connected-since": "Conectado el {date}",
+  "disconnected": "{name} se desconectó.",
+  "could-not-disconnect": "No se pudo desconectar {name}. Inténtalo de nuevo en un momento.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Esta es la cuenta con la que inicias sesión, por lo que no se puede desconectar.",
+  "twitch-purpose": "Haz que tu canal aparezca listado cuando estés en directo y permite que el mod del juego publique en tu chat.",
+  "twitch-consequence": "Tu canal dejará de estar listado en el sitio y de mostrarse en tu perfil, y el mod del juego ya no podrá publicar en tu chat. Puedes volver a conectarlo en cualquier momento.",
+  "discord-purpose": "Reclama tu rol de colaborador y recibe respuesta sobre los vídeos y reseñas que envíes.",
+  "discord-consequence": "Renuncias a tu rol de colaborador en nuestro servidor y ya no podremos contarte qué fue de un vídeo o una reseña que hayas enviado. Puedes volver a conectarlo en cualquier momento."
+}

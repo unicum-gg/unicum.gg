@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Cảm ơn bạn vì khoản quyên góp!",
   "you-already-have-a-monthly-pledge": "Bạn đã có khoản cam kết hàng tháng. Sử dụng cổng thanh toán để thay đổi khoản này.",
   "you-are-a-supporter-thank": "Bạn là người ủng hộ. Cảm ơn bạn đã giúp {NAME} tiếp tục hoạt động.",
-  "you-have-given-so-far": "Bạn đã đóng góp {amount} cho đến nay. Xin cảm ơn."
+  "you-have-given-so-far": "Bạn đã đóng góp {amount} cho đến nay. Xin cảm ơn.",
+  "manage-connected-accounts": "Quản lý tài khoản đã kết nối"
 }

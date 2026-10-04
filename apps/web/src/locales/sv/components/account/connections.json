@@ -1,0 +1,20 @@
+{
+  "title": "Anslutna konton",
+  "description": "Var och en låser upp något på webbplatsen. Om du kopplar från ett konto tas det tillbaka och auktoriseringen lämnas över till tjänsten.",
+  "loading": "Läser ditt konto",
+  "log-in-first": "Logga in med ditt Wargaming.net-ID för att se kontona som är anslutna till det.",
+  "log-in": "Logga in",
+  "connect": "Anslut",
+  "disconnect": "Koppla från",
+  "cancel": "Avbryt",
+  "disconnect-name": "Koppla från {name}?",
+  "connected-since": "Ansluten den {date}",
+  "disconnected": "{name} kopplades från.",
+  "could-not-disconnect": "Kunde inte koppla från {name}. Försök igen om ett ögonblick.",
+  "wargaming-id": "Wargaming.net-ID",
+  "wargaming-is-the-identity": "Det här är kontot du loggar in med, så det kan inte kopplas från.",
+  "twitch-purpose": "Få din kanal listad när du går live och låt spelmodden skriva i din chatt.",
+  "twitch-consequence": "Din kanal slutar att vara listad på webbplatsen och visas inte längre i din profil, och spelmodden kan inte längre skriva i din chatt. Du kan ansluta den igen när som helst.",
+  "discord-purpose": "Ta din roll som supporter i anspråk och få svar tillbaka om de videor och recensioner du skickar in.",
+  "discord-consequence": "Du ger upp din roll som supporter på vår server, och vi kan inte längre berätta vad som hände med en video eller en recension som du skickat in. Du kan ansluta den igen när som helst."
+}

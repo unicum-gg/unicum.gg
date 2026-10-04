@@ -17,7 +17,7 @@
   },
   "review-length": "Votre avis doit comporter entre {min} et {max} caractères.",
   "save-failed": "Impossible d’enregistrer. Réessayez dans un instant.",
-  "say-why-optional": "Indiquez pourquoi (optionnel)",
+  "say-why-optional": "Indiquez pourquoi (facultatif)",
   "signed-with": "Signé avec vos {battles} batailles à son bord",
   "submit-my-rating": "Envoyer mon évaluation",
   "too-many-edits": "Cela fait beaucoup de modifications d’un coup. Attendez une minute.",

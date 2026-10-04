@@ -1,0 +1,20 @@
+{
+  "title": "Bağlı hesaplar",
+  "description": "Her biri sitede bir şeyin kilidini açar. Bağlantıyı kesince bu geri alınır ve yetkilendirme hizmete devredilir.",
+  "loading": "Hesabınız okunuyor",
+  "log-in-first": "Wargaming.net ID’nizle giriş yaparak ona bağlı hesapları görün.",
+  "log-in": "Giriş yap",
+  "connect": "Bağlan",
+  "disconnect": "Bağlantıyı kes",
+  "cancel": "İptal",
+  "disconnect-name": "Bağlantı {name} için kesilsin mi?",
+  "connected-since": "Bağlanma tarihi: {date}",
+  "disconnected": "Bağlantı {name} için kesildi.",
+  "could-not-disconnect": "Bağlantı {name} için kesilemedi. Bir an sonra tekrar deneyin.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Giriş yaptığınız hesap bu olduğundan bağlantısı kesilemez.",
+  "twitch-purpose": "Canlı olduğunuzda kanalınız listelensin ve mod sohbetinizde paylaşım yapabilsin.",
+  "twitch-consequence": "Kanalınız artık sitede listelenmez ve profilinizde gösterilmez, mod da sohbetinizde artık paylaşım yapamaz. İstediğiniz zaman yeniden bağlayabilirsiniz.",
+  "discord-purpose": "Destekçi rolünüzü alın ve gönderdiğiniz videolar ile incelemeler hakkında geri dönüş alın.",
+  "discord-consequence": "Sunucumuzdaki destekçi rolünüzden vazgeçersiniz ve gönderdiğiniz bir video veya incelemenin akıbetini artık size söyleyemeyiz. İstediğiniz zaman yeniden bağlayabilirsiniz."
+}

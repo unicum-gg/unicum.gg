@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Спасибо за ваше пожертвование!",
   "you-already-have-a-monthly-pledge": "У вас уже есть ежемесячное пожертвование. Изменить его можно в платёжном портале.",
   "you-are-a-supporter-thank": "Вы спонсор. Спасибо, что помогаете сохранять {NAME}.",
-  "you-have-given-so-far": "Вы пожертвовали {amount}. Спасибо."
+  "you-have-given-so-far": "Вы пожертвовали {amount}. Спасибо.",
+  "manage-connected-accounts": "Управлять подключенными аккаунтами"
 }

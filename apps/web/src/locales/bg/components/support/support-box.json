@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Благодарим ви за дарението!",
   "you-already-have-a-monthly-pledge": "Вече имате месечен ангажимент. Използвайте портала за плащане, за да го промените.",
   "you-are-a-supporter-thank": "Ти си поддръжник. Благодарим ти, че поддържаш {NAME} жив.",
-  "you-have-given-so-far": "Досега сте дали {amount}. Благодарим ви."
+  "you-have-given-so-far": "Досега сте дали {amount}. Благодарим ви.",
+  "manage-connected-accounts": "Управление на свързани акаунти"
 }

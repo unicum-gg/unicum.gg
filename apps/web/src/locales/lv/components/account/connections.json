@@ -1,0 +1,20 @@
+{
+  "title": "Savienotie konti",
+  "description": "Katrs no tiem vietnē atbloķē kaut ko. Savienojuma pārtraukšana to atsauc un nodod autorizāciju pakalpojumam.",
+  "loading": "Jūsu konts tiek nolasīts",
+  "log-in-first": "Pieslēdzieties ar savu Wargaming.net ID, lai skatītu ar to savienotos kontus.",
+  "log-in": "Pieslēgties",
+  "connect": "Savienot",
+  "disconnect": "Atvienot",
+  "cancel": "Atcelt",
+  "disconnect-name": "Atvienot {name}?",
+  "connected-since": "Savienojums izveidots {date}",
+  "disconnected": "Savienojums ar {name} ir pārtraukts.",
+  "could-not-disconnect": "Neizdevās atvienot {name}. Pēc brīža mēģiniet vēlreiz.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Šis ir konts, ar kuru pieslēdzaties, tāpēc to nevar atvienot.",
+  "twitch-purpose": "Panāciet, lai jūsu kanāls tiktu uzskaitīts, kad sākat tiešraidi, un ļaujiet spēles modam publicēt ziņas jūsu tērzēšanā.",
+  "twitch-consequence": "Jūsu kanāls vairs netiks uzskaitīts vietnē un nebūs redzams jūsu profilā, un spēles mods vairs nevarēs publicēt ziņas jūsu tērzēšanā. Savienojumu varat atjaunot jebkurā laikā.",
+  "discord-purpose": "Pieprasiet savu atbalstītāja lomu un saņemiet atbildi par iesūtītajiem video un apskatiem.",
+  "discord-consequence": "Jūs atsakāties no atbalstītāja lomas mūsu serverī, un mēs vairs nevarēsim jūs informēt, kas noticis ar jūsu iesūtīto video vai apskatu. Savienojumu varat atjaunot jebkurā laikā."
+}

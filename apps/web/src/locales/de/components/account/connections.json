@@ -1,0 +1,20 @@
+{
+  "title": "Verbundene Konten",
+  "description": "Jedes Konto schaltet etwas auf der Website frei. Beim Trennen wird dies zurückgenommen und die Autorisierung an den Dienst übergeben.",
+  "loading": "Konto wird gelesen",
+  "log-in-first": "Melde dich mit deiner Wargaming.net-ID an, um die damit verbundenen Konten zu sehen.",
+  "log-in": "Anmelden",
+  "connect": "Verbinden",
+  "disconnect": "Trennen",
+  "cancel": "Abbrechen",
+  "disconnect-name": "Verbindung zu {name} trennen?",
+  "connected-since": "Verbunden am {date}",
+  "disconnected": "{name} wurde getrennt.",
+  "could-not-disconnect": "Die Verbindung zu {name} konnte nicht getrennt werden. Versuche es nach einem Moment erneut.",
+  "wargaming-id": "Wargaming.net-ID",
+  "wargaming-is-the-identity": "Dies ist das Konto, mit dem du dich anmeldest, daher kann es nicht getrennt werden.",
+  "twitch-purpose": "Dein kanal wird gelistet, sobald du live gehst, und der Spiel-Mod kann in deinem Chat posten.",
+  "twitch-consequence": "Dein kanal wird nicht mehr auf der Website gelistet und nicht mehr in deinem Profil angezeigt. Der Spiel-Mod kann dann nicht länger in deinem Chat posten. Du kannst ihn jederzeit wieder verbinden.",
+  "discord-purpose": "Beanspruche deine Rolle als Unterstützer und erfahre, was aus den Videos und Bewertungen geworden ist, die du gesendet hast.",
+  "discord-consequence": "Du gibst deine Rolle als Unterstützer auf unserem Server auf, und wir können dir nicht länger sagen, was aus einem Video oder einer Bewertung geworden ist, die du gesendet hast. Du kannst die Verbindung zu jeder Zeit wiederherstellen."
+}

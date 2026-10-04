@@ -1,0 +1,20 @@
+{
+  "title": "Account collegati",
+  "description": "Ognuno sblocca qualcosa sul sito. Disconnetterlo revoca tale accesso e restituisce l’autorizzazione al servizio.",
+  "loading": "Lettura del tuo account",
+  "log-in-first": "Accedi con il tuo Wargaming.net ID per vedere gli account collegati.",
+  "log-in": "Accedi",
+  "connect": "Connetti",
+  "disconnect": "Disconnetti",
+  "cancel": "Annulla",
+  "disconnect-name": "Disconnettere {name}?",
+  "connected-since": "Collegato il {date}",
+  "disconnected": "Disconnessione di {name} completata.",
+  "could-not-disconnect": "Impossibile disconnettere {name}. Riprova tra un momento.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Questo è l’account con cui accedi, quindi non può essere disconnesso.",
+  "twitch-purpose": "Fai elencare il tuo canale quando vai in diretta e consenti al mod del gioco di pubblicare nella tua chat.",
+  "twitch-consequence": "Il tuo canale non sarà più elencato sul sito né mostrato nel tuo profilo e il mod del gioco non potrà più pubblicare nella tua chat. Puoi collegarlo di nuovo in qualsiasi momento.",
+  "discord-purpose": "Riscatta il tuo ruolo di sostenitore e ricevi aggiornamenti sui video e sulle recensioni che invii.",
+  "discord-consequence": "Rinunci al ruolo di sostenitore sul nostro server e non potremo più dirti che fine hanno fatto un video o una recensione che hai inviato. Puoi collegarlo di nuovo in qualsiasi momento."
+}

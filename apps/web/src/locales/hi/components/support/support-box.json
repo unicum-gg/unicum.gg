@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "आपके दान के लिए धन्यवाद!",
   "you-already-have-a-monthly-pledge": "आपके पास पहले से मासिक योगदान है। इसे बदलने के लिए बिलिंग पोर्टल का उपयोग करें।",
   "you-are-a-supporter-thank": "आप समर्थक हैं। {NAME} को चलाए रखने के लिए धन्यवाद।",
-  "you-have-given-so-far": "आपने अब तक {amount} दिए हैं। धन्यवाद।"
+  "you-have-given-so-far": "आपने अब तक {amount} दिए हैं। धन्यवाद।",
+  "manage-connected-accounts": "कनेक्टेड अकाउंट्स प्रबंधित करें"
 }

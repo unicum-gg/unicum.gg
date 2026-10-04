@@ -725,7 +725,13 @@
     "stars": "النجوم",
     "start": "ابدأ",
     "waiting": "قيد الانتظار",
-    "written": "مكتوب"
+    "written": "مكتوب",
+    "Cancel": "إلغاء",
+    "Connected accounts": "الحسابات المرتبطة",
+    "connected": "مرتبط",
+    "listed": "مدرج",
+    "profile": "الملف الشخصي",
+    "role": "الدور"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1452,7 +1458,13 @@
     "stars": "зоркі",
     "start": "пачаць",
     "waiting": "чаканне",
-    "written": "напісаны"
+    "written": "напісаны",
+    "Cancel": "Адмяніць",
+    "Connected accounts": "Падключаныя ўліковыя запісы",
+    "connected": "падключаны",
+    "listed": "пералічаны",
+    "profile": "профіль",
+    "role": "роля"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2379,7 +2391,12 @@
     "stars": "звезди",
     "start": "начало",
     "waiting": "изчакване",
-    "written": "написано"
+    "written": "написано",
+    "Connected accounts": "Свързани акаунти",
+    "connected": "свързан",
+    "listed": "изброен",
+    "profile": "профил",
+    "role": "роля"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3114,7 +3131,13 @@
     "stars": "zvjezdice",
     "start": "početak",
     "waiting": "čekanje",
-    "written": "napisano"
+    "written": "napisano",
+    "Cancel": "Otkaži",
+    "Connected accounts": "Povezani računi",
+    "connected": "povezan",
+    "listed": "naveden",
+    "profile": "profil",
+    "role": "uloga"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4052,7 +4075,12 @@
     "stars": "hvězdy",
     "start": "začít",
     "waiting": "čekání",
-    "written": "napsané"
+    "written": "napsané",
+    "Connected accounts": "Propojené účty",
+    "connected": "připojený",
+    "listed": "uvedený",
+    "profile": "profil",
+    "role": "role"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4995,7 +5023,12 @@
     "stars": "stjerner",
     "start": "start",
     "waiting": "venter",
-    "written": "skrevet"
+    "written": "skrevet",
+    "Connected accounts": "Tilknyttede konti",
+    "connected": "tilknyttet",
+    "listed": "opført",
+    "profile": "profil",
+    "role": "rolle"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5932,7 +5965,12 @@
     "stars": "Sterne",
     "start": "Start",
     "waiting": "wartend",
-    "written": "geschrieben"
+    "written": "geschrieben",
+    "Connected accounts": "Verbundene Konten",
+    "connected": "verbunden",
+    "listed": "gelistet",
+    "profile": "Profil",
+    "role": "Rolle"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6874,7 +6912,12 @@
     "stars": "αστέρια",
     "start": "έναρξη",
     "waiting": "αναμονή",
-    "written": "γραμμένο"
+    "written": "γραμμένο",
+    "Connected accounts": "Συνδεδεμένοι λογαριασμοί",
+    "connected": "συνδεδεμένος",
+    "listed": "καταχωρισμένος",
+    "profile": "προφίλ",
+    "role": "ρόλος"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7796,7 +7839,12 @@
     "stars": "estrellas",
     "start": "empezar",
     "waiting": "en espera",
-    "written": "escrito"
+    "written": "escrito",
+    "Connected accounts": "Cuentas conectadas",
+    "connected": "conectado",
+    "listed": "listado",
+    "profile": "perfil",
+    "role": "rol"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8743,7 +8791,12 @@
     "stars": "tähdet",
     "start": "aloita",
     "waiting": "odottaa",
-    "written": "kirjoitettu"
+    "written": "kirjoitettu",
+    "Connected accounts": "Yhdistetyt tilit",
+    "connected": "yhdistetty",
+    "listed": "listattu",
+    "profile": "profiili",
+    "role": "rooli"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9669,7 +9722,12 @@
     "stars": "étoiles",
     "start": "commencer",
     "waiting": "attente",
-    "written": "écrit"
+    "written": "écrit",
+    "Connected accounts": "Comptes connectés",
+    "connected": "connecté",
+    "listed": "répertorié",
+    "profile": "profil",
+    "role": "rôle"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -10397,7 +10455,13 @@
     "stars": "स्टार",
     "start": "शुरू करें",
     "waiting": "प्रतीक्षा में",
-    "written": "लिखा गया"
+    "written": "लिखा गया",
+    "Cancel": "रद्द करें",
+    "Connected accounts": "कनेक्टेड अकाउंट्स",
+    "connected": "कनेक्टेड",
+    "listed": "सूचीबद्ध",
+    "profile": "प्रोफ़ाइल",
+    "role": "भूमिका"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11338,7 +11402,12 @@
     "stars": "zvjezdice",
     "start": "početak",
     "waiting": "čekanje",
-    "written": "napisano"
+    "written": "napisano",
+    "Connected accounts": "Povezani računi",
+    "connected": "povezano",
+    "listed": "navedeno",
+    "profile": "profil",
+    "role": "uloga"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12281,7 +12350,12 @@
     "stars": "csillagok",
     "start": "kezdés",
     "waiting": "várakozás",
-    "written": "írt"
+    "written": "írt",
+    "Connected accounts": "Csatlakoztatott fiókok",
+    "connected": "csatlakoztatva",
+    "listed": "listázott",
+    "profile": "profil",
+    "role": "szerep"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13219,7 +13293,12 @@
     "stars": "stelle",
     "start": "inizio",
     "waiting": "attesa",
-    "written": "scritto"
+    "written": "scritto",
+    "Connected accounts": "Account collegati",
+    "connected": "collegato",
+    "listed": "elencato",
+    "profile": "profilo",
+    "role": "ruolo"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14164,7 +14243,12 @@
     "stars": "星",
     "start": "開始",
     "waiting": "待機中",
-    "written": "記載"
+    "written": "記載",
+    "Connected accounts": "連携アカウント",
+    "connected": "連携済み",
+    "listed": "掲載済み",
+    "profile": "プロフィール",
+    "role": "役割"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -14896,7 +14980,13 @@
     "stars": "жұлдыздар",
     "start": "бастау",
     "waiting": "күту",
-    "written": "жазылған"
+    "written": "жазылған",
+    "Cancel": "Болдырмау",
+    "Connected accounts": "Қосылған аккаунттар",
+    "connected": "қосылған",
+    "listed": "тізімделген",
+    "profile": "профиль",
+    "role": "рөл"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -15846,7 +15936,12 @@
     "stars": "별",
     "start": "시작",
     "waiting": "대기 중",
-    "written": "작성됨"
+    "written": "작성됨",
+    "Connected accounts": "연결된 계정",
+    "connected": "연결됨",
+    "listed": "등록된",
+    "profile": "프로필",
+    "role": "역할"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -16793,7 +16888,12 @@
     "stars": "žvaigždutės",
     "start": "pradėti",
     "waiting": "laukiama",
-    "written": "parašyta"
+    "written": "parašyta",
+    "Connected accounts": "Susietos paskyros",
+    "connected": "susietas",
+    "listed": "įtrauktas",
+    "profile": "profilis",
+    "role": "vaidmuo"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -17724,7 +17824,12 @@
     "stars": "zvaigznes",
     "start": "sākt",
     "waiting": "gaida",
-    "written": "rakstīts"
+    "written": "rakstīts",
+    "Connected accounts": "Savienotie konti",
+    "connected": "savienots",
+    "listed": "uzskaitīts",
+    "profile": "profils",
+    "role": "loma"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -18671,7 +18776,12 @@
     "stars": "sterren",
     "start": "starten",
     "waiting": "wachten",
-    "written": "geschreven"
+    "written": "geschreven",
+    "Connected accounts": "Gekoppelde accounts",
+    "connected": "verbonden",
+    "listed": "vermeld",
+    "profile": "profiel",
+    "role": "rol"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -19610,7 +19720,12 @@
     "stars": "stjerner",
     "start": "start",
     "waiting": "venter",
-    "written": "skrevet"
+    "written": "skrevet",
+    "Connected accounts": "Tilkoblede kontoer",
+    "connected": "tilkoblet",
+    "listed": "oppført",
+    "profile": "profil",
+    "role": "rolle"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -20545,7 +20660,12 @@
     "stars": "gwiazdki",
     "start": "początek",
     "waiting": "oczekuje",
-    "written": "napisane"
+    "written": "napisane",
+    "Connected accounts": "Połączone konta",
+    "connected": "połączone",
+    "listed": "wymienione",
+    "profile": "profil",
+    "role": "rola"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -21473,7 +21593,12 @@
     "stars": "estrelas",
     "start": "começar",
     "waiting": "a aguardar",
-    "written": "escrito"
+    "written": "escrito",
+    "Connected accounts": "Contas conectadas",
+    "connected": "conectado",
+    "listed": "listado",
+    "profile": "perfil",
+    "role": "função"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -22401,7 +22526,12 @@
     "stars": "stele",
     "start": "începe",
     "waiting": "în așteptare",
-    "written": "scris"
+    "written": "scris",
+    "Connected accounts": "Conturi conectate",
+    "connected": "conectat",
+    "listed": "listat",
+    "profile": "profil",
+    "role": "rol"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -23317,7 +23447,12 @@
     "stars": "звёзды",
     "start": "начать",
     "waiting": "ожидание",
-    "written": "написано"
+    "written": "написано",
+    "Connected accounts": "Подключенные аккаунты",
+    "connected": "подключен",
+    "listed": "указан",
+    "profile": "профиль",
+    "role": "роль"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -24051,7 +24186,12 @@
     "stars": "zvezdice",
     "start": "začni",
     "waiting": "čakanje",
-    "written": "napisano"
+    "written": "napisano",
+    "Cancel": "Prekliči",
+    "Connected accounts": "Povezani računi",
+    "connected": "povezan",
+    "listed": "naveden",
+    "role": "vloga"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -24994,7 +25134,12 @@
     "stars": "звездице",
     "start": "почетак",
     "waiting": "чекање",
-    "written": "написано"
+    "written": "написано",
+    "Connected accounts": "Повезани налози",
+    "connected": "повезан",
+    "listed": "наведен",
+    "profile": "профил",
+    "role": "улога"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -25941,7 +26086,12 @@
     "stars": "stjärnor",
     "start": "start",
     "waiting": "väntar",
-    "written": "skrivet"
+    "written": "skrivet",
+    "Connected accounts": "Anslutna konton",
+    "connected": "ansluten",
+    "listed": "listad",
+    "profile": "profil",
+    "role": "roll"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -26884,7 +27034,12 @@
     "stars": "ดาว",
     "start": "เริ่ม",
     "waiting": "รออยู่",
-    "written": "เขียนไว้"
+    "written": "เขียนไว้",
+    "Connected accounts": "บัญชีที่เชื่อมต่อ",
+    "connected": "เชื่อมต่อแล้ว",
+    "listed": "อยู่ในรายการ",
+    "profile": "โปรไฟล์",
+    "role": "บทบาท"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -27617,7 +27772,13 @@
     "stars": "mga bituin",
     "start": "Simulan",
     "waiting": "naghihintay",
-    "written": "isinulat"
+    "written": "isinulat",
+    "Cancel": "Kanselahin",
+    "Connected accounts": "Mga nakakonektang account",
+    "connected": "nakakonekta",
+    "listed": "nakalista",
+    "profile": "profile",
+    "role": "role"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -28557,7 +28718,12 @@
     "stars": "yıldızlar",
     "start": "Başlat",
     "waiting": "bekliyor",
-    "written": "yazılan"
+    "written": "yazılan",
+    "Connected accounts": "Bağlı hesaplar",
+    "connected": "bağlı",
+    "listed": "listelenen",
+    "profile": "profil",
+    "role": "rol"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -29490,7 +29656,12 @@
     "stars": "зірки",
     "start": "почати",
     "waiting": "в очікуванні",
-    "written": "написано"
+    "written": "написано",
+    "Connected accounts": "Підключені акаунти",
+    "connected": "підключений",
+    "listed": "зазначений",
+    "profile": "профіль",
+    "role": "роль"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -30412,7 +30583,12 @@
     "stars": "sao",
     "start": "bắt đầu",
     "waiting": "đang chờ",
-    "written": "đã viết"
+    "written": "đã viết",
+    "Connected accounts": "Tài khoản đã kết nối",
+    "connected": "đã kết nối",
+    "listed": "được liệt kê",
+    "profile": "hồ sơ",
+    "role": "vai trò"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -31355,6 +31531,11 @@
     "stars": "星级",
     "start": "开始",
     "waiting": "等待",
-    "written": "撰写"
+    "written": "撰写",
+    "Connected accounts": "已连接的账号",
+    "connected": "已连接",
+    "listed": "已列出",
+    "profile": "个人资料",
+    "role": "角色"
   }
 }

@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "¡Gracias por tu donación!",
   "you-already-have-a-monthly-pledge": "Ya tienes un compromiso mensual. Usa el portal de facturación para cambiarlo.",
   "you-are-a-supporter-thank": "Eres colaborador. Gracias por hacer posible que {NAME} siga funcionando.",
-  "you-have-given-so-far": "Has donado {amount} hasta ahora. Gracias."
+  "you-have-given-so-far": "Has donado {amount} hasta ahora. Gracias.",
+  "manage-connected-accounts": "Administrar cuentas conectadas"
 }

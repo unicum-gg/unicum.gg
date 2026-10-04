@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Bağışınız için teşekkürler!",
   "you-already-have-a-monthly-pledge": "Zaten aylık bir taahhüdünüz var. Değiştirmek için faturalandırma portalını kullanın.",
   "you-are-a-supporter-thank": "Destekçisiniz. {NAME} projesini yaşattığınız için teşekkürler.",
-  "you-have-given-so-far": "Şimdiye kadar {amount} verdiniz. Teşekkürler."
+  "you-have-given-so-far": "Şimdiye kadar {amount} verdiniz. Teşekkürler.",
+  "manage-connected-accounts": "Bağlı hesapları yönet"
 }

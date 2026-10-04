@@ -1,0 +1,20 @@
+{
+  "title": "연결된 계정",
+  "description": "각 계정은 사이트에서 무언가를 잠금 해제합니다. 연결을 해제하면 해당 기능이 다시 잠기고 서비스로 인증 권한이 이전됩니다.",
+  "loading": "계정 정보를 읽는 중",
+  "log-in-first": "연결된 계정을 확인하려면 워게이밍.net ID로 로그인하세요.",
+  "log-in": "로그인",
+  "connect": "연결",
+  "disconnect": "연결 해제",
+  "cancel": "취소",
+  "disconnect-name": "{name}의 연결을 해제할까요?",
+  "connected-since": "{date}에 연결됨",
+  "disconnected": "{name}의 연결이 해제되었습니다.",
+  "could-not-disconnect": "{name}의 연결을 해제할 수 없습니다. 잠시 후 다시 시도해 주세요.",
+  "wargaming-id": "워게이밍.net ID",
+  "wargaming-is-the-identity": "로그인에 사용하는 계정이므로 연결을 해제할 수 없습니다.",
+  "twitch-purpose": "실시간 방송을 시작하면 채널을 등록하고, 게임 클라이언트 모드가 채팅에 글을 게시하도록 합니다.",
+  "twitch-consequence": "채널이 사이트에 더 이상 등록되지 않고 프로필에도 표시되지 않으며, 게임 클라이언트 모드가 채팅에 더 이상 글을 게시할 수 없습니다. 언제든 다시 연결할 수 있습니다.",
+  "discord-purpose": "후원자 역할을 받고, 제출한 영상과 리뷰에 대한 답변을 받아보세요.",
+  "discord-consequence": "서버의 후원자 역할을 포기하게 되며, 보내신 영상이나 리뷰의 처리 결과를 더 이상 안내받을 수 없습니다. 언제든 다시 연결할 수 있습니다."
+}

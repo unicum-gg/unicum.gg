@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Hvala vam na donaciji!",
   "you-already-have-a-monthly-pledge": "Već imate mesečnu donaciju. Koristite portal za naplatu da je promenite.",
   "you-are-a-supporter-thank": "Ti si podržavalac. Hvala ti što održavaš {NAME} u životu.",
-  "you-have-given-so-far": "Do sada ste donirali {amount}. Hvala vam."
+  "you-have-given-so-far": "Do sada ste donirali {amount}. Hvala vam.",
+  "manage-connected-accounts": "Управљај повезаним налозима"
 }

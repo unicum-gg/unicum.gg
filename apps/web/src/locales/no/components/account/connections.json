@@ -1,0 +1,20 @@
+{
+  "title": "Tilkoblede kontoer",
+  "description": "Hver av dem låser opp noe på nettstedet. Hvis du kobler fra, tas dette tilbake, og autoriseringen overføres til tjenesten.",
+  "loading": "Leser kontoen din",
+  "log-in-first": "Logg inn med Wargaming.net ID-en din for å se kontoene som er tilkoblet den.",
+  "log-in": "Logg inn",
+  "connect": "Koble til",
+  "disconnect": "Koble fra",
+  "cancel": "Avbryt",
+  "disconnect-name": "Koble fra {name}?",
+  "connected-since": "Tilkoblet {date}",
+  "disconnected": "{name} er koblet fra.",
+  "could-not-disconnect": "Kunne ikke koble fra {name}. Prøv igjen om et øyeblikk.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Dette er kontoen du logger inn med, så den kan ikke kobles fra.",
+  "twitch-purpose": "Få kanalen din oppført når du går direkte, og la spillmodden legge ut innlegg i chatten din.",
+  "twitch-consequence": "Kanalen din slutter å være oppført på nettstedet og slutter å vises på profilen din, og spillmodden kan ikke lenger legge ut innlegg i chatten din. Du kan koble den til igjen når som helst.",
+  "discord-purpose": "Få støttespillerrollen din, og få svar om videoene og anmeldelsene du sender inn.",
+  "discord-consequence": "Du gir fra deg støttespillerrollen din på serveren vår, og vi kan ikke lenger fortelle deg hva som skjedde med en video eller en anmeldelse du sendte inn. Du kan koble den til igjen når som helst."
+}

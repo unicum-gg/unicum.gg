@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Tack för din donation!",
   "you-already-have-a-monthly-pledge": "Du har redan ett månadsvis åtagande. Använd betalningsportalen för att förändra det.",
   "you-are-a-supporter-thank": "Du är Supporter. Tack för att du håller {NAME} vid liv.",
-  "you-have-given-so-far": "Du har gett {amount} hittills. Tack."
+  "you-have-given-so-far": "Du har gett {amount} hittills. Tack.",
+  "manage-connected-accounts": "Hantera anslutna konton"
 }

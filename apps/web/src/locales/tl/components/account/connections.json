@@ -1,0 +1,20 @@
+{
+  "title": "Mga nakakonektang account",
+  "description": "Bawat isa ay nagbubukas ng isang feature sa website. Kapag diniskonekta, babawiin ang access na iyon at ibabalik ang awtorisasyon sa serbisyo.",
+  "loading": "Binabasa ang iyong account",
+  "log-in-first": "Mag-log in gamit ang iyong Wargaming.net ID para makita ang mga account na nakakonekta rito.",
+  "log-in": "Mag-log in",
+  "connect": "Kumonekta",
+  "disconnect": "Idiskonekta",
+  "cancel": "Kanselahin",
+  "disconnect-name": "Idiskonekta ang koneksyon para sa {name}?",
+  "connected-since": "Nakakonekta noong {date}",
+  "disconnected": "Nadiskonekta ang koneksyon sa {name}.",
+  "could-not-disconnect": "Hindi maalis ang koneksyon sa {name}. Subukang muli pagkalipas ng ilang sandali.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Ito ang account na ginagamit mo sa pag-log in, kaya hindi maaari itong idiskonekta.",
+  "twitch-purpose": "Ipalista ang iyong channel kapag naging live ka, at hayaang mag-post ang mod ng laro sa iyong chat.",
+  "twitch-consequence": "Hindi na nakalista ang iyong channel sa website at hindi na ito ipinapakita sa iyong profile, at hindi na maaaring mag-post ang mod ng laro sa iyong chat. Maaari mo itong ikonekta muli anumang oras.",
+  "discord-purpose": "I-claim ang iyong role bilang tagasuporta, at makatanggap ng tugon tungkol sa mga video at pagsusuring ipinapadala mo.",
+  "discord-consequence": "Isusuko mo ang iyong role bilang tagasuporta sa aming server, at hindi na namin maipapaalam sa iyo kung ano ang nangyari sa video o pagsusuring ipinadala mo. Maaari mo itong ikonekta muli anumang oras."
+}

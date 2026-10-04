@@ -1,0 +1,20 @@
+{
+  "title": "Contas conectadas",
+  "description": "Cada conta desbloqueia algo no site. Desconectá-la desfaz isso e devolve a autorização ao serviço.",
+  "loading": "Lendo sua conta",
+  "log-in-first": "Entre com seu Wargaming.net ID para ver as contas conectadas a ele.",
+  "log-in": "Entrar",
+  "connect": "Conectar",
+  "disconnect": "Desconectar",
+  "cancel": "Cancelar",
+  "disconnect-name": "Desconectar {name}?",
+  "connected-since": "Conectado desde {date}",
+  "disconnected": "{name} foi desconectado.",
+  "could-not-disconnect": "Poderia não ter sido possível desconectar {name}. Tente novamente daqui a um momento.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Esta é a conta com a qual você entra, portanto não pode ser desconectada.",
+  "twitch-purpose": "Tenha seu canal listado quando estiver ao vivo e permita que o mod do jogo publique no seu chat.",
+  "twitch-consequence": "Seu canal deixa de ser listado no site e de ser mostrado no seu perfil, e o mod do jogo não poderá mais publicar no seu chat. Você pode conectá-lo novamente a qualquer momento.",
+  "discord-purpose": "Reivindique sua função de apoiador e saiba mais sobre os vídeos e avaliações que você enviar.",
+  "discord-consequence": "Você abre mão da sua função de apoiador no nosso servidor e não poderemos mais informar o que aconteceu com um vídeo ou uma avaliação que você enviou. Você pode conectá-la novamente a qualquer momento."
+}

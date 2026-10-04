@@ -1,0 +1,20 @@
+{
+  "title": "連携アカウント",
+  "description": "それぞれでサイト上の機能が利用可能になります。連携を解除すると、その機能が利用できなくなり、認証情報がサービスに返却されます。",
+  "loading": "アカウントを読み込んでいます",
+  "log-in-first": "Wargaming.net IDでログインして、連携されているアカウントを確認してください。",
+  "log-in": "ログイン",
+  "connect": "接続",
+  "disconnect": "連携を解除",
+  "cancel": "キャンセル",
+  "disconnect-name": "{name}との連携を解除しますか？",
+  "connected-since": "{date}に連携",
+  "disconnected": "{name}との連携を解除しました。",
+  "could-not-disconnect": "{name}との連携を解除できませんでした。しばらくしてからもう一度お試しください。",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "これはログインに使用するアカウントのため、連携解除は不可です。",
+  "twitch-purpose": "ライブ配信を開始するとチャンネルが掲載済みになり、ゲームのmodがチャットに投稿できるようになります。",
+  "twitch-consequence": "チャンネルがサイトに掲載されなくなり、プロフィールにも表示されなくなります。また、ゲームのmodがチャットに投稿できなくなります。いつでも再接続できます。",
+  "discord-purpose": "支援者の役割を取得し、送信した動画やレビューについて返答を受け取れます。",
+  "discord-consequence": "サーバー上の支援者の役割を失い、送信した動画やレビューの結果をお知らせできなくなります。いつでも再接続できます。"
+}

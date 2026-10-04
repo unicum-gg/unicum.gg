@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Ačiū už jūsų auką!",
   "you-already-have-a-monthly-pledge": "Jūs jau esate įsipareigoję mokėti kas mėnesį. Naudokite atsiskaitymo portalą, kad pakeistumėte įsipareigojimą.",
   "you-are-a-supporter-thank": "Esate rėmėjas. Ačiū, kad padedate {NAME} gyvuoti.",
-  "you-have-given-so-far": "Iki šiol paaukojote {amount}. Ačiū."
+  "you-have-given-so-far": "Iki šiol paaukojote {amount}. Ačiū.",
+  "manage-connected-accounts": "Tvarkyti susietas paskyras"
 }

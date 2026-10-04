@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Grazie per la tua donazione!",
   "you-already-have-a-monthly-pledge": "Hai già un contributo mensile. Usa il portale di fatturazione per modificarlo.",
   "you-are-a-supporter-thank": "Sei tra i sostenitori. Grazie per mantenere in vita {NAME}.",
-  "you-have-given-so-far": "Finora hai donato {amount}. Grazie."
+  "you-have-given-so-far": "Finora hai donato {amount}. Grazie.",
+  "manage-connected-accounts": "Gestisci gli account collegati"
 }

@@ -17,7 +17,7 @@
   },
   "review-length": "レビューは{min}文字以上、{max}文字以下で入力してください。",
   "save-failed": "保存できませんでした。しばらくしてから再試行してください",
-  "say-why-optional": "理由を記入（オプショナル）",
+  "say-why-optional": "理由を記入（任意）",
   "signed-with": "{battles} 戦の戦績を添えて送信",
   "submit-my-rating": "評価を送信",
   "too-many-edits": "一度に多くの変更が行われました。少し時間を置いてください",

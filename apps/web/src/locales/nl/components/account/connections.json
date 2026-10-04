@@ -1,0 +1,20 @@
+{
+  "title": "Gekoppelde accounts",
+  "description": "Elk account ontgrendelt iets op de site. Als je de verbinding verbreekt, wordt dat ongedaan gemaakt en wordt de autorisatie aan de service teruggegeven.",
+  "loading": "Je account lezen",
+  "log-in-first": "Log in met je Wargaming.net ID om de accounts te zien die ermee verbonden zijn.",
+  "log-in": "Inloggen",
+  "connect": "Verbinden",
+  "disconnect": "Verbinding verbreken",
+  "cancel": "Annuleren",
+  "disconnect-name": "Verbinding met {name} verbreken?",
+  "connected-since": "Verbonden op {date}",
+  "disconnected": "De verbinding met {name} is verbroken.",
+  "could-not-disconnect": "Kan de verbinding met {name} niet verbreken. Probeer het over een moment opnieuw.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Dit is het account waarmee je inlogt, dus kan de verbinding niet worden verbroken.",
+  "twitch-purpose": "Laat je kanaal vermelden wanneer je live gaat en laat de mod berichten in je chat plaatsen.",
+  "twitch-consequence": "Je kanaal wordt niet langer op de site vermeld en wordt niet meer op je profiel getoond, en de mod kan niet langer berichten in je chat plaatsen. Je kunt het op elk moment opnieuw verbinden.",
+  "discord-purpose": "Claim je supporterrol en krijg terugkoppeling over de video’s en beoordelingen die je hebt verzonden.",
+  "discord-consequence": "Je doet afstand van je supporterrol op onze server en we kunnen je niet langer vertellen wat er is geworden van een video of beoordeling die je hebt verzonden. Je kunt op elk gewenst tijdstip opnieuw verbinding maken."
+}

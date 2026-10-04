@@ -1,0 +1,20 @@
+{
+  "title": "Propojené účty",
+  "description": "Každý z nich na webu něco odemkne. Odpojením se tato možnost zruší a oprávnění se předá službě.",
+  "loading": "Probíhá načítání vašeho účtu",
+  "log-in-first": "Přihlaste se pomocí svého Wargaming.net ID, abyste viděli účty připojené k tomuto ID.",
+  "log-in": "Přihlásit se",
+  "connect": "Připojit",
+  "disconnect": "Odpojit",
+  "cancel": "Storno",
+  "disconnect-name": "Odpojit {name}?",
+  "connected-since": "Připojeno dne {date}",
+  "disconnected": "Účet {name} byl odpojen.",
+  "could-not-disconnect": "Účet {name} se nepodařilo odpojit. Zkuste to znovu za okamžik.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Toto je účet, pomocí kterého se přihlašujete, takže jej nelze odpojit.",
+  "twitch-purpose": "Nechte svůj kanál uvést na webu, když vysíláte živě, a umožněte hernímu modu psát do vašeho chatu.",
+  "twitch-consequence": "Váš kanál přestane být uvedený na webu a přestane se zobrazovat na vašem profilu. Herní mod už také nebude moci psát do vašeho chatu. Kdykoli ho můžete znovu připojit.",
+  "discord-purpose": "Získejte svou roli podporovatele a dostávejte informace o videích a recenzích, které nám pošlete.",
+  "discord-consequence": "Na našem serveru se vzdáte role podporovatele a už vám nebudeme moci říct, jak dopadlo video nebo recenze, které jste nám poslali. Připojit ho můžete kdykoli znovu."
+}

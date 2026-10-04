@@ -1,0 +1,20 @@
+{
+  "title": "Csatlakoztatott fiókok",
+  "description": "Mindegyik felold valamit a webhelyen. A kapcsolat bontása ezt visszavonja, és az engedélyezést visszaadja a szolgáltatásnak.",
+  "loading": "A fiókod adatainak beolvasása",
+  "log-in-first": "A hozzá csatlakoztatott fiókok megtekintéséhez jelentkezz be a Wargaming.net ID-ddel.",
+  "log-in": "Bejelentkezés",
+  "connect": "Csatlakozás",
+  "disconnect": "Kapcsolat bontása",
+  "cancel": "Mégse",
+  "disconnect-name": "Megszünteted {name} csatlakozását?",
+  "connected-since": "Csatlakoztatva: {date}",
+  "disconnected": "Leválasztva: {name}.",
+  "could-not-disconnect": "Nem lehet bontani {name} kapcsolatát. Próbáld újra egy pillanat múlva.",
+  "wargaming-id": "Wargaming.net ID",
+  "wargaming-is-the-identity": "Ez az a fiók, amellyel bejelentkezel, ezért nem lehet leválasztani.",
+  "twitch-purpose": "A csatornád listázott lesz, amikor élőben vagy, és engedélyezheted, hogy a játék modja írjon a chatbe.",
+  "twitch-consequence": "A csatornád többé nem lesz listázott a webhelyen, és nem jelenik meg a profilodon, a játék modja pedig többé nem írhat a chatbe. Bármikor újra csatlakoztathatod.",
+  "discord-purpose": "Igényeld a támogató szerepet, és értesülj az általad elküldött videók és értékelések sorsáról.",
+  "discord-consequence": "Lemondasz a szerverünkön betöltött támogató szerepedről, és többé nem tudjuk megmondani, mi lett az általad elküldött videóval vagy értékeléssel. Bármikor újra csatlakoztathatod."
+}

@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Дякуємо за вашу пожертву!",
   "you-already-have-a-monthly-pledge": "У вас вже є щомісячна підтримка. Скористайтеся платіжним порталом, щоб змінити її.",
   "you-are-a-supporter-thank": "Ви підтримувач. Дякуємо, що допомагаєте {NAME} працювати.",
-  "you-have-given-so-far": "Наразі ви внесли {amount}. Дякуємо."
+  "you-have-given-so-far": "Наразі ви внесли {amount}. Дякуємо.",
+  "manage-connected-accounts": "Керувати підключеними акаунтами"
 }

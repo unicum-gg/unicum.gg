@@ -18,5 +18,6 @@
   "thank-you-for-your-donation": "Kiitos lahjoituksestasi!",
   "you-already-have-a-monthly-pledge": "Sinulla on jo kuukausittainen sitoumus. Muuta sitä laskutusportaalissa.",
   "you-are-a-supporter-thank": "Olet tukija. Kiitos, että pidät käyttäjän {NAME} toiminnassa.",
-  "you-have-given-so-far": "Olet lahjoittanut tähän mennessä {amount}. Kiitos."
+  "you-have-given-so-far": "Olet lahjoittanut tähän mennessä {amount}. Kiitos.",
+  "manage-connected-accounts": "Hallitse yhdistettyjä tilejä"
 }
