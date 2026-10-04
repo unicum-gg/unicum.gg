@@ -1,0 +1,13 @@
+{
+  "feedback": "Dette lander i vores private kanal, og de personer, der læser den, er på vores Discord. Kom og sig det der også, eller følg med i, hvad der sker bagefter.",
+  "join-the-server": "Deltag i serveren",
+  "link-my-discord": "Link min Discord",
+  "linked": {
+    "review": "Bedømmelsen af din anmeldelse kommer til dig som en Discord-besked, så længe vi deler en server med dig.",
+    "video": "Bedømmelsen af dit forslag kommer til dig som en Discord-besked, så længe vi deler en server med dig."
+  },
+  "unlinked": {
+    "review": "Ingen vil fortælle dig, hvad der sker med din anmeldelse. Link din Discord og deltag i serveren, så kommer bedømmelsen som en besked.",
+    "video": "Ingen vil fortælle dig, hvad der sker med dit forslag. Link din Discord og deltag i serveren, så kommer bedømmelsen som en besked."
+  }
+}

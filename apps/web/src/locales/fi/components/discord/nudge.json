@@ -1,0 +1,13 @@
+{
+  "feedback": "Tämä osuu yksityiseen kanavaamme, ja sitä lukevat pelaajat ovat Discordissamme. Tule sanomaan se sielläkin tai seuraa, mitä seuraavaksi tapahtuu.",
+  "join-the-server": "Liity palvelimelle",
+  "link-my-discord": "Linkitä Discordini",
+  "linked": {
+    "review": "Arvostelusi tuomio tulee sinulle Discord-viestinä, kunhan olemme samalla palvelimella kanssasi.",
+    "video": "Ehdotuksesi tuomio tulee sinulle Discord-viestinä, kunhan olemme samalla palvelimella kanssasi."
+  },
+  "unlinked": {
+    "review": "Ei kukaan kerro, mitä arvostelullesi tapahtuu. Linkitä Discordisi ja liity palvelimelle, niin tuomio tulee viestinä.",
+    "video": "Ei kukaan kerro, mitä ehdotuksellesi tapahtuu. Linkitä Discordisi ja liity palvelimelle, niin tuomio tulee viestinä."
+  }
+}

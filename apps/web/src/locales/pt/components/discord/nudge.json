@@ -1,0 +1,13 @@
+{
+  "feedback": "Isto chega ao nosso canal privado, e as pessoas que ler isso estão no nosso Discord. Venha dizer isso lá também, ou acompanhe o que acontece depois.",
+  "join-the-server": "Entrar no servidor",
+  "link-my-discord": "Linkar meu Discord",
+  "linked": {
+    "review": "O veredito da sua avaliação vem até você como uma mensagem do Discord, desde que possamos compartilhar um servidor com você.",
+    "video": "O veredito da sua sugestão vem até você como uma mensagem do Discord, desde que possamos compartilhar um servidor com você."
+  },
+  "unlinked": {
+    "review": "Ninguém vai dizer o que acontece com a sua avaliação. Linke seu Discord e entre no servidor, e o veredito chega como uma mensagem.",
+    "video": "Ninguém vai dizer o que acontece com a sua sugestão. Linke seu Discord e entre no servidor, e o veredito chega como uma mensagem."
+  }
+}

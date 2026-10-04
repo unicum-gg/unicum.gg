@@ -1,0 +1,13 @@
+{
+  "feedback": "Cela atterrit dans notre chaîne privée, et les personnes qui en font la lecture sont sur notre Discord. Venez aussi le dire là-bas, ou suivez ce qui arrive ensuite.",
+  "join-the-server": "Rejoindre le serveur",
+  "link-my-discord": "Lier mon Discord",
+  "linked": {
+    "review": "Le verdict de votre analyse vous atteindra sous forme de message Discord, à condition que nous partagions un serveur avec vous.",
+    "video": "Le verdict de votre suggestion vous atteindra sous forme de message Discord, à condition que nous partagions un serveur avec vous."
+  },
+  "unlinked": {
+    "review": "Personne ne vous dira ce qu’il advient de votre analyse. Liez votre Discord et rejoignez le serveur, et le verdict vous atteindra sous forme de message.",
+    "video": "Personne ne vous dira ce qu’il advient de votre suggestion. Liez votre Discord et rejoignez le serveur, et le verdict vous atteindra sous forme de message."
+  }
+}

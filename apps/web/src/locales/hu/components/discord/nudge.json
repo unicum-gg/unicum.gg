@@ -1,0 +1,13 @@
+{
+  "feedback": "Ez a privát csatornánkra érkezik, és az ezt olvasott játékosok a Discordunkon vannak. Gyere, és mondd el ott is, vagy kövesd, mi történik ezután.",
+  "join-the-server": "Csatlakozás a szerverhez",
+  "link-my-discord": "Hivatkozás a Discordomhoz",
+  "linked": {
+    "review": "Az értékelésedről szóló verdikt Discord-üzenetként érkezik el hozzád, amennyiben megosztunk veled egy szervert.",
+    "video": "A javaslatodról szóló verdikt Discord-üzenetként érkezik el hozzád, amennyiben megosztunk veled egy szervert."
+  },
+  "unlinked": {
+    "review": "Senki nem fogja közölni veled, mi történik az értékeléseddel. Készíts hivatkozást a Discordodhoz, és csatlakozz a szerverhez, így a verdikt üzenetként érkezik.",
+    "video": "Senki nem fogja közölni veled, mi történik a javaslatoddal. Készíts hivatkozást a Discordodhoz, és csatlakozz a szerverhez, így a verdikt üzenetként érkezik."
+  }
+}

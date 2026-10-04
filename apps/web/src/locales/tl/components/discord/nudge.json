@@ -1,0 +1,13 @@
+{
+  "feedback": "Dumarating ito sa aming pribadong channel, at ang mga taong nagbabasa nito ay nasa aming Discord. Halika at sabihin din ito roon, o tingnan kung ano ang susunod na nangyayari.",
+  "join-the-server": "Sumali sa server",
+  "link-my-discord": "I-link ang aking Discord",
+  "linked": {
+    "review": "Ang hatol sa iyong pagsusuri ay aabot sa iyo bilang mensahe sa Discord, basta may server kaming ibinabahagi sa iyo.",
+    "video": "Ang hatol sa iyong mungkahi ay aabot sa iyo bilang mensahe sa Discord, basta may server kaming ibinabahagi sa iyo."
+  },
+  "unlinked": {
+    "review": "Walang sinuman ang magsasabi sa iyo kung ano ang nangyayari sa iyong pagsusuri. I-link ang iyong Discord at sumali sa server, at dumarating ang hatol bilang mensahe.",
+    "video": "Walang sinuman ang magsasabi sa iyo kung ano ang nangyayari sa iyong mungkahi. I-link ang iyong Discord at sumali sa server, at dumarating ang hatol bilang mensahe."
+  }
+}

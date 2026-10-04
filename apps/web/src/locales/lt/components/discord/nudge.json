@@ -1,0 +1,13 @@
+{
+  "feedback": "Tai patenka į mūsų privatų kanalą, o žmonės, galintys tai skaityti, yra mūsų Discord. Ateikite ir pasakykite tai ten taip pat arba sekite, kas vyksta toliau.",
+  "join-the-server": "Prisijungti prie serverio",
+  "link-my-discord": "Susieti mano Discord",
+  "linked": {
+    "review": "Jūsų apžvalgos verdiktas jus pasieks kaip Discord žinutė, jei tik dalijamės serveriu su jumis.",
+    "video": "Jūsų pasiūlymo verdiktas jus pasieks kaip Discord žinutė, jei tik dalijamės serveriu su jumis."
+  },
+  "unlinked": {
+    "review": "Niekas jums nepasakys, kas vyksta su jūsų apžvalga. Susiekite savo Discord ir prisijunkite prie serverio, o verdiktas ateina kaip žinutė.",
+    "video": "Niekas jums nepasakys, kas vyksta su jūsų pasiūlymu. Susiekite savo Discord ir prisijunkite prie serverio, o verdiktas ateina kaip žinutė."
+  }
+}

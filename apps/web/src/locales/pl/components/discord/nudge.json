@@ -1,0 +1,13 @@
+{
+  "feedback": "To trafia do naszego prywatnego kanału, a osoby, które to przeczytają, są na naszym Discordzie. Przyjdź i powiedz to tam również lub obserwuj, co dzieje się dalej.",
+  "join-the-server": "Dołącz do serwera",
+  "link-my-discord": "Połącz mój Discord",
+  "linked": {
+    "review": "Werdykt dotyczący twojej recenzji dotrze do ciebie jako wiadomość na Discordzie, o ile mamy z tobą wspólny serwer.",
+    "video": "Werdykt dotyczący twojej sugestii dotrze do ciebie jako wiadomość na Discordzie, o ile mamy z tobą wspólny serwer."
+  },
+  "unlinked": {
+    "review": "Nikt nie powie ci, co stanie się z twoją recenzją. Połącz swój Discord i dołącz do serwera, a werdykt dotrze do ciebie jako wiadomość.",
+    "video": "Nikt nie powie ci, co stanie się z twoją sugestią. Połącz swój Discord i dołącz do serwera, a werdykt dotrze do ciebie jako wiadomość."
+  }
+}

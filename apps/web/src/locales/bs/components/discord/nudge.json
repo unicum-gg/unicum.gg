@@ -1,0 +1,13 @@
+{
+  "feedback": "Ovo slijeće u naš privatni kanal, a ljudi koji to čitaju su na našem Discordu. Dođi i reci to tamo ili prati šta se dešava dalje.",
+  "join-the-server": "Pridruži se serveru",
+  "link-my-discord": "Poveži moj Discord",
+  "linked": {
+    "review": "Presuda o tvojoj recenziji dolazi ti kao Discord poruka, ako s tobom dijelimo server.",
+    "video": "Presuda o tvom prijedlogu dolazi ti kao Discord poruka, ako s tobom dijelimo server."
+  },
+  "unlinked": {
+    "review": "Niko ti neće reći šta se dešava s tvojom recenzijom. Poveži svoj Discord i pridruži se serveru, pa presuda dolazi kao poruka.",
+    "video": "Niko ti neće reći šta se dešava s tvojim prijedlogom. Poveži svoj Discord i pridruži se serveru, pa presuda dolazi kao poruka."
+  }
+}

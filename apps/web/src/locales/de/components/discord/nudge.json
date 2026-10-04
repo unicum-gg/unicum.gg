@@ -1,0 +1,13 @@
+{
+  "feedback": "Das landet in unserem privaten kanal, und die Spieler, die es lesen, sind auf unserem Discord. Komm und sag es dort auch, oder verfolge, was als Nächstes passiert.",
+  "join-the-server": "Dem Server beitreten",
+  "link-my-discord": "Meinen Discord verknüpfen",
+  "linked": {
+    "review": "Das Urteil zu deiner Bewertung kommt als Discord-Nachricht bei dir an, solange wir einen Server mit dir teilen.",
+    "video": "Das Urteil zu deinem Vorschlag kommt als Discord-Nachricht bei dir an, solange wir einen Server mit dir teilen."
+  },
+  "unlinked": {
+    "review": "Niemand wird dir sagen, was aus deiner Bewertung wird. Verknüpfe deinen Discord und tritt dem Server bei, dann kommt das Urteil als Nachricht.",
+    "video": "Niemand wird dir sagen, was aus deinem Vorschlag wird. Verknüpfe deinen Discord und tritt dem Server bei, dann kommt das Urteil als Nachricht."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "feedback": "Tato zpráva přistane v našem soukromém kanálu a lidé, kteří si ji přečtou, jsou na našem Discordu. Přijďte to říct i tam nebo sledujte, co se děje dál.",
+  "join-the-server": "Připojit se k serveru",
+  "link-my-discord": "Propojit můj Discord",
+  "linked": {
+    "review": "Verdikt vaší recenze se k vám dostane jako zpráva na Discordu, pokud s vámi sdílíme server.",
+    "video": "Verdikt vašeho návrhu se k vám dostane jako zpráva na Discordu, pokud s vámi sdílíme server."
+  },
+  "unlinked": {
+    "review": "Nikdo vám neřekne, co se stane s vaší recenzí. Propojte svůj Discord a připojte se k serveru, pak vám verdikt dorazí jako zpráva.",
+    "video": "Nikdo vám neřekne, co se stane s vaším návrhem. Propojte svůj Discord a připojte se k serveru, pak vám verdikt dorazí jako zpráva."
+  }
+}

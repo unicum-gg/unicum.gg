@@ -1,0 +1,13 @@
+{
+  "feedback": "Toto pristane v našom súkromnom kanáli a ľudia, ktorí to vedia čítať, sú na našom Discorde. Pridruž sa a povedz to aj tam alebo sleduj, čo sa ďalej zgodi.",
+  "join-the-server": "Pridruž sa k serveru",
+  "link-my-discord": "Odkaz na môj Discord",
+  "linked": {
+    "review": "Sodba o vašej recenzii k vám prihádza ako sporočilo na Discorde, ak s vami delíme server.",
+    "video": "Sodba o vašom návrhu k vám prihádza ako sporočilo na Discorde, ak s vami delíme server."
+  },
+  "unlinked": {
+    "review": "Nihče vám nepovie, čo sa stane s vašou recenziou. Pridajte odkaz na svoj Discord a pridruž sa k serveru, sodba prihádza ako sporočilo.",
+    "video": "Nihče vám nepovie, čo sa stane s vaším návrhom. Pridajte odkaz na svoj Discord a pridruž sa k serveru, sodba prihádza ako sporočilo."
+  }
+}

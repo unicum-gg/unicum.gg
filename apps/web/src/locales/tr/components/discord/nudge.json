@@ -1,0 +1,13 @@
+{
+  "feedback": "Bu, özel kanalımıza ulaşır ve onu okuyan oyuncular Discord’umuzda. Oraya gelip bunu siz de söyleyin veya bundan sonra ne olduğunu takip edin.",
+  "join-the-server": "Sunucuya katıl",
+  "link-my-discord": "Discord’umu bağla",
+  "linked": {
+    "review": "İncelemenizle ilgili karar, sizinle aynı sunucuyu paylaştığımız sürece size Discord mesajı olarak gelir.",
+    "video": "Önerinizle ilgili karar, sizinle aynı sunucuyu paylaştığımız sürece size Discord mesajı olarak gelir."
+  },
+  "unlinked": {
+    "review": "Kimse incelemenizin ne olduğunu size söylemeyecek. Discord’unuzu bağlayın ve sunucuya katılın, karar mesaj olarak gelir.",
+    "video": "Kimse önerinizin ne olduğunu size söylemeyecek. Discord’unuzu bağlayın ve sunucuya katılın, karar mesaj olarak gelir."
+  }
+}

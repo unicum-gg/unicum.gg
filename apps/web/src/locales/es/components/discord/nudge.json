@@ -1,0 +1,13 @@
+{
+  "feedback": "Esto llega a nuestro canal privado y las personas que lo han leído están en nuestro Discord. Ven a decirlo allí también o sigue lo que sucede después.",
+  "join-the-server": "Únete al servidor",
+  "link-my-discord": "Vincular mi Discord",
+  "linked": {
+    "review": "El veredicto de tu reseña estará a tu alcance en un mensaje de Discord, siempre que compartamos un servidor contigo.",
+    "video": "El veredicto de tu sugerencia estará a tu alcance en un mensaje de Discord, siempre que compartamos un servidor contigo."
+  },
+  "unlinked": {
+    "review": "Nadie te dirá qué sucede con tu reseña. Vincula tu Discord y únete al servidor, y el veredicto llegará como un mensaje.",
+    "video": "Nadie te dirá qué sucede con tu sugerencia. Vincula tu Discord y únete al servidor, y el veredicto llegará como un mensaje."
+  }
+}

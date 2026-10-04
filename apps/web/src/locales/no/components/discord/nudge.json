@@ -1,0 +1,13 @@
+{
+  "feedback": "Dette lander i vår private kanal, og personene som har lest det, er på vår Discord. Kom og si det der også, eller følg med på hva som skjer videre.",
+  "join-the-server": "Bli med på server",
+  "link-my-discord": "Lenk Discord-kontoen min",
+  "linked": {
+    "review": "Dommen over anmeldelsen din kommer til deg som en Discord-melding, så lenge vi deler en server med deg.",
+    "video": "Dommen over forslaget ditt kommer til deg som en Discord-melding, så lenge vi deler en server med deg."
+  },
+  "unlinked": {
+    "review": "Ingen vil fortelle deg hva som blir av anmeldelsen din. Lenk Discord-kontoen din og bli med på server, så kommer dommen som en melding.",
+    "video": "Ingen vil fortelle deg hva som blir av forslaget ditt. Lenk Discord-kontoen din og bli med på server, så kommer dommen som en melding."
+  }
+}

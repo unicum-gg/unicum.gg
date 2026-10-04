@@ -685,7 +685,14 @@
     "comes": "يأتي",
     "monthly": "شهريًا",
     "none": "لا يوجد",
-    "type": "النوع"
+    "type": "النوع",
+    "Nobody": "لا أحد",
+    "happens": "يحدث",
+    "join": "انضم",
+    "lands": "يصل",
+    "message": "رسالة",
+    "share": "مشاركة",
+    "verdict": "الحكم"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1372,7 +1379,14 @@
     "comes": "паходзіць",
     "monthly": "штомесяц",
     "none": "няма",
-    "type": "тып"
+    "type": "тып",
+    "Nobody": "Ніхто",
+    "happens": "адбываецца",
+    "join": "далучыцца",
+    "lands": "трапляе",
+    "message": "паведамленне",
+    "share": "падзяліцца",
+    "verdict": "вердыкт"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2260,7 +2274,14 @@
     "comes": "идва",
     "monthly": "месечно",
     "none": "няма",
-    "type": "тип"
+    "type": "тип",
+    "Nobody": "Никой",
+    "happens": "се случва",
+    "join": "присъедини се",
+    "lands": "попада",
+    "message": "съобщение",
+    "share": "сподели",
+    "verdict": "присъда"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -2955,7 +2976,14 @@
     "comes": "dolazi",
     "monthly": "mjesečno",
     "none": "nema",
-    "type": "tip"
+    "type": "tip",
+    "Nobody": "Niko",
+    "happens": "dešava se",
+    "join": "pridruži se",
+    "lands": "slijeće",
+    "message": "poruka",
+    "share": "podijeli",
+    "verdict": "presuda"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3854,7 +3882,14 @@
     "comes": "pochází",
     "monthly": "měsíčně",
     "none": "žádné",
-    "type": "typ"
+    "type": "typ",
+    "Nobody": "Nikdo",
+    "happens": "děje se",
+    "join": "připojit se",
+    "lands": "přistane",
+    "message": "zpráva",
+    "share": "sdílet",
+    "verdict": "verdikt"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4758,7 +4793,14 @@
     "comes": "kommer",
     "monthly": "månedlig",
     "none": "ingen",
-    "type": "type"
+    "type": "type",
+    "Nobody": "Ingen",
+    "happens": "sker",
+    "join": "deltag",
+    "lands": "lander",
+    "message": "besked",
+    "share": "del",
+    "verdict": "bedømmelse"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5656,7 +5698,14 @@
     "comes": "kommt",
     "monthly": "monatlich",
     "none": "keine",
-    "type": "typ"
+    "type": "typ",
+    "Nobody": "Niemand",
+    "happens": "passiert",
+    "join": "beitreten",
+    "lands": "landet",
+    "message": "Nachricht",
+    "share": "teilen",
+    "verdict": "Urteil"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6559,7 +6608,14 @@
     "comes": "έρχεται",
     "monthly": "μηνιαία",
     "none": "κανένα",
-    "type": "τύπος"
+    "type": "τύπος",
+    "Nobody": "Κανείς",
+    "happens": "συμβαίνει",
+    "join": "συμμετοχή",
+    "lands": "καταλήγει",
+    "message": "μήνυμα",
+    "share": "κοινοποίηση",
+    "verdict": "συμπέρασμα"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7442,7 +7498,14 @@
     "comes": "proviene",
     "monthly": "mensual",
     "none": "ninguno",
-    "type": "tipo"
+    "type": "tipo",
+    "Nobody": "Nadie",
+    "happens": "sucede",
+    "join": "unirse",
+    "lands": "llega",
+    "message": "mensaje",
+    "share": "compartir",
+    "verdict": "veredicto"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8350,7 +8413,14 @@
     "comes": "tulee",
     "monthly": "kuukausittain",
     "none": "ei yhtään",
-    "type": "tyyppi"
+    "type": "tyyppi",
+    "Nobody": "Ei kukaan",
+    "happens": "tapahtuu",
+    "join": "liity",
+    "lands": "osuu",
+    "message": "viesti",
+    "share": "jaa",
+    "verdict": "tuomio"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9237,7 +9307,14 @@
     "comes": "vient",
     "monthly": "mensuel",
     "none": "aucun",
-    "type": "type"
+    "type": "type",
+    "Nobody": "Personne",
+    "happens": "arrive",
+    "join": "rejoindre",
+    "lands": "atterrit",
+    "message": "message",
+    "share": "partager",
+    "verdict": "verdict"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -9925,7 +10002,14 @@
     "comes": "आता है",
     "monthly": "मासिक",
     "none": "कोई नहीं",
-    "type": "प्रकार"
+    "type": "प्रकार",
+    "Nobody": "कोई नहीं",
+    "happens": "होता है",
+    "join": "जुड़ें",
+    "lands": "उतरता है",
+    "message": "संदेश",
+    "share": "साझा करें",
+    "verdict": "फैसला"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -10827,7 +10911,14 @@
     "comes": "dolazi",
     "monthly": "mjesečno",
     "none": "nema",
-    "type": "vrsta"
+    "type": "vrsta",
+    "Nobody": "Nitko",
+    "happens": "događa se",
+    "join": "pridruži se",
+    "lands": "slijeće",
+    "message": "poruka",
+    "share": "podijeli",
+    "verdict": "presuda"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -11731,7 +11822,14 @@
     "comes": "érkezik",
     "monthly": "havi",
     "none": "nincs",
-    "type": "típus"
+    "type": "típus",
+    "Nobody": "Senki",
+    "happens": "történik",
+    "join": "csatlakozás",
+    "lands": "érkezik",
+    "message": "üzenet",
+    "share": "megosztás",
+    "verdict": "verdikt"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -12630,7 +12728,14 @@
     "comes": "proviene",
     "monthly": "mensile",
     "none": "nessuno",
-    "type": "tipo"
+    "type": "tipo",
+    "Nobody": "Nessuno",
+    "happens": "succede",
+    "join": "unisciti",
+    "lands": "approda",
+    "message": "messaggio",
+    "share": "condividi",
+    "verdict": "verdetto"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -13536,7 +13641,14 @@
     "comes": "コメント",
     "monthly": "月間",
     "none": "なし",
-    "type": "種類"
+    "type": "種類",
+    "Nobody": "誰も",
+    "happens": "起こる",
+    "join": "参加する",
+    "lands": "到達する",
+    "message": "メッセージ",
+    "share": "共有する",
+    "verdict": "判定"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -14228,7 +14340,14 @@
     "comes": "келеді",
     "monthly": "ай сайынғы",
     "none": "жоқ",
-    "type": "түрі"
+    "type": "түрі",
+    "Nobody": "Ешкім",
+    "happens": "болады",
+    "join": "қосылу",
+    "lands": "қонады",
+    "message": "хабарлама",
+    "share": "бөлісу",
+    "verdict": "қорытынды"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -15139,7 +15258,14 @@
     "comes": "출처",
     "monthly": "월간",
     "none": "없음",
-    "type": "유형"
+    "type": "유형",
+    "Nobody": "아무도",
+    "happens": "발생합니다",
+    "join": "가입",
+    "lands": "도착합니다",
+    "message": "메시지",
+    "share": "공유",
+    "verdict": "판정"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -16047,7 +16173,14 @@
     "comes": "ateina",
     "monthly": "mėnesio",
     "none": "nėra",
-    "type": "tipas"
+    "type": "tipas",
+    "Nobody": "Niekas",
+    "happens": "vyksta",
+    "join": "prisijungti",
+    "lands": "patenka",
+    "message": "žinutė",
+    "share": "dalytis",
+    "verdict": "verdiktas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -16939,7 +17072,14 @@
     "comes": "nāk",
     "monthly": "ikmēneša",
     "none": "nav",
-    "type": "tips"
+    "type": "tips",
+    "Nobody": "Neviens",
+    "happens": "notiek",
+    "join": "pievienoties",
+    "lands": "trāpa",
+    "message": "ziņa",
+    "share": "dalīties",
+    "verdict": "spriedums"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -17847,7 +17987,14 @@
     "comes": "komt",
     "monthly": "maandelijks",
     "none": "geen",
-    "type": "type"
+    "type": "type",
+    "Nobody": "Niemand",
+    "happens": "gebeurt",
+    "join": "deelnemen",
+    "lands": "belandt",
+    "message": "bericht",
+    "share": "delen",
+    "verdict": "oordeel"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -18747,7 +18894,14 @@
     "comes": "kommer",
     "monthly": "månedlig",
     "none": "ingen",
-    "type": "type"
+    "type": "type",
+    "Nobody": "Ingen",
+    "happens": "skjer",
+    "join": "bli med",
+    "lands": "lander",
+    "message": "melding",
+    "share": "del",
+    "verdict": "dom"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -19643,7 +19797,14 @@
     "comes": "pochodzi",
     "monthly": "miesięcznie",
     "none": "brak",
-    "type": "typ"
+    "type": "typ",
+    "Nobody": "Nikt",
+    "happens": "dzieje się",
+    "join": "dołącz",
+    "lands": "trafia",
+    "message": "wiadomość",
+    "share": "udostępnij",
+    "verdict": "werdykt"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -20532,7 +20693,14 @@
     "comes": "vem",
     "monthly": "mensal",
     "none": "nenhum",
-    "type": "tipo"
+    "type": "tipo",
+    "Nobody": "Ninguém",
+    "happens": "acontece",
+    "join": "entrar",
+    "lands": "chega",
+    "message": "mensagem",
+    "share": "compartilhar",
+    "verdict": "veredito"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -21421,7 +21589,14 @@
     "comes": "vine",
     "monthly": "lunar",
     "none": "niciunul",
-    "type": "tip"
+    "type": "tip",
+    "Nobody": "nimeni",
+    "happens": "se întâmplă",
+    "join": "alătură-te",
+    "lands": "aterizează",
+    "message": "mesaj",
+    "share": "distribuie",
+    "verdict": "verdict"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -22298,7 +22473,14 @@
     "comes": "приходит",
     "monthly": "ежемесячный",
     "none": "нет",
-    "type": "тип"
+    "type": "тип",
+    "Nobody": "Никто",
+    "happens": "происходит",
+    "join": "присоединиться",
+    "lands": "оказывается",
+    "message": "сообщение",
+    "share": "поделиться",
+    "verdict": "вердикт"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -22992,7 +23174,14 @@
     "comes": "prihaja",
     "monthly": "mesečno",
     "none": "brez",
-    "type": "vrsta"
+    "type": "vrsta",
+    "Nobody": "Nihče",
+    "happens": "se zgodi",
+    "join": "pridruži se",
+    "lands": "pristane",
+    "message": "sporočilo",
+    "share": "deli",
+    "verdict": "sodba"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -23896,7 +24085,14 @@
     "comes": "dolazi",
     "monthly": "mesečno",
     "none": "nema",
-    "type": "tip"
+    "type": "tip",
+    "Nobody": "Нико",
+    "happens": "дешава се",
+    "join": "придружи се",
+    "lands": "слеће",
+    "message": "порука",
+    "share": "подели",
+    "verdict": "пресуда"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -24804,7 +25000,14 @@
     "comes": "kommer",
     "monthly": "månadsvis",
     "none": "inga",
-    "type": "typ"
+    "type": "typ",
+    "Nobody": "Ingen",
+    "happens": "händer",
+    "join": "gå med",
+    "lands": "landar",
+    "message": "meddelande",
+    "share": "dela",
+    "verdict": "omdöme"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -25708,7 +25911,14 @@
     "comes": "มา",
     "monthly": "รายเดือน",
     "none": "ไม่มี",
-    "type": "ประเภท"
+    "type": "ประเภท",
+    "Nobody": "ไม่มีใคร",
+    "happens": "เกิดขึ้น",
+    "join": "เข้าร่วม",
+    "lands": "ลง",
+    "message": "ข้อความ",
+    "share": "แชร์",
+    "verdict": "คำตัดสิน"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -26401,7 +26611,14 @@
     "comes": "nagmumula",
     "monthly": "buwan-buwan",
     "none": "wala",
-    "type": "uri"
+    "type": "uri",
+    "Nobody": "Walang sinuman",
+    "happens": "nangyayari",
+    "join": "sumali",
+    "lands": "dumarating",
+    "message": "mensahe",
+    "share": "ibahagi",
+    "verdict": "hatol"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -27302,7 +27519,14 @@
     "comes": "gelir",
     "monthly": "aylık",
     "none": "yok",
-    "type": "tür"
+    "type": "tür",
+    "Nobody": "Kimse",
+    "happens": "olur",
+    "join": "katıl",
+    "lands": "ulaşır",
+    "message": "mesaj",
+    "share": "paylaş",
+    "verdict": "karar"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -28196,7 +28420,14 @@
     "comes": "Коментарі",
     "monthly": "щомісячні",
     "none": "немає",
-    "type": "тип"
+    "type": "тип",
+    "Nobody": "Ніхто",
+    "happens": "відбувається",
+    "join": "приєднатися",
+    "lands": "посідає",
+    "message": "повідомлення",
+    "share": "поділитися",
+    "verdict": "вердикт"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -29079,7 +29310,14 @@
     "comes": "đến",
     "monthly": "hàng tháng",
     "none": "không có",
-    "type": "loại"
+    "type": "loại",
+    "Nobody": "Không ai",
+    "happens": "xảy ra",
+    "join": "tham gia",
+    "lands": "đổ bộ",
+    "message": "tin nhắn",
+    "share": "chia sẻ",
+    "verdict": "kết luận"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -29983,6 +30221,13 @@
     "comes": "来自",
     "monthly": "每月",
     "none": "无",
-    "type": "类型"
+    "type": "类型",
+    "Nobody": "无人",
+    "happens": "发生",
+    "join": "加入",
+    "lands": "落地",
+    "message": "消息",
+    "share": "分享",
+    "verdict": "结论"
   }
 }

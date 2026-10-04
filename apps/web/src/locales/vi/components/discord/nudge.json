@@ -1,0 +1,13 @@
+{
+  "feedback": "Nội dung này sẽ đổ bộ vào kênh riêng của chúng tôi, và những người đọc nó đều ở trên Discord. Hãy đến và nói điều đó ở đó nữa, hoặc theo dõi những gì xảy ra tiếp theo.",
+  "join-the-server": "Tham gia máy chủ",
+  "link-my-discord": "Liên kết Discord của tôi",
+  "linked": {
+    "review": "Kết luận về đánh giá của bạn sẽ đến với bạn dưới dạng tin nhắn Discord, miễn là chúng tôi chia sẻ máy chủ với bạn.",
+    "video": "Kết luận về đề xuất của bạn sẽ đến với bạn dưới dạng tin nhắn Discord, miễn là chúng tôi chia sẻ máy chủ với bạn."
+  },
+  "unlinked": {
+    "review": "Không ai sẽ cho bạn biết chuyện gì xảy ra với đánh giá của bạn. Hãy liên kết Discord của bạn và tham gia máy chủ, kết luận sẽ đến dưới dạng một tin nhắn.",
+    "video": "Không ai sẽ cho bạn biết chuyện gì xảy ra với đề xuất của bạn. Hãy liên kết Discord của bạn và tham gia máy chủ, kết luận sẽ đến dưới dạng một tin nhắn."
+  }
+}

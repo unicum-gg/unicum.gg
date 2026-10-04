@@ -1,0 +1,13 @@
+{
+  "feedback": "Dit belandt in ons privékanaal en de mensen die het lezen zitten op onze Discord. Kom het daar ook vertellen, of volg wat er daarna gebeurt.",
+  "join-the-server": "Deelnemen aan de server",
+  "link-my-discord": "Mijn Discord linken",
+  "linked": {
+    "review": "Het oordeel over je beoordeling komt als Discord-bericht bij je aan, zolang we een server met je delen.",
+    "video": "Het oordeel over je suggestie komt als Discord-bericht bij je aan, zolang we een server met je delen."
+  },
+  "unlinked": {
+    "review": "Niemand zal je vertellen wat er van je beoordeling wordt. Link je Discord en neem deel aan de server, dan komt het oordeel als bericht.",
+    "video": "Niemand zal je vertellen wat er van je suggestie wordt. Link je Discord en neem deel aan de server, dan komt het oordeel als bericht."
+  }
+}
