@@ -10,6 +10,7 @@ import {
   AUTH_REGION_COOKIE,
   AUTH_REGION_COOKIE_MAX_AGE,
   env,
+  safePath,
 } from "@unicum.gg/shared";
 
 const PROVIDER_ID = "wargaming";
@@ -32,19 +33,6 @@ function synthEmail(region: string, accountId: string): string {
 
 function appUrl(path: string): string {
   return path.startsWith("http") ? path : `${env.NEXT_PUBLIC_APP_URL}${path}`;
-}
-
-// Only accept a same-origin relative path as the post-login destination, so a
-// crafted `callbackURL` can never turn sign-in into an open redirect. Reject
-// `//host` and `/\host` (browsers treat the backslash form as protocol-relative)
-// and any backslash anywhere.
-function safePath(raw: string | undefined): string {
-  return raw &&
-    raw.startsWith("/") &&
-    !raw.startsWith("//") &&
-    !raw.includes("\\")
-    ? raw
-    : "/";
 }
 
 /**
