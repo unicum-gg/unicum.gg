@@ -5,12 +5,14 @@ import useSWR from "swr";
 import { moneyFormatter, type MoneyFormatter } from "@unicum.gg/shared";
 import { unicum } from "@/services/sdk";
 import { useRegion } from "./use-region";
+import { useFormat } from "./use-format";
 
 /**
  * Formatter for the site's own money figures (funding, infrastructure cost).
  * Those are all held in euros, and shown in the visitor's regional currency at
  * the live rate — never at a rate stored alongside the amount, which is what
- * used to make them wrong.
+ * used to make them wrong. Written in the reader's own language, which is a
+ * separate question from the currency: a French page writes "6 €", not "€6".
  *
  * Client-side because /support and /coverage are prerendered: the region comes
  * from the cookie, so the currency can only be known once we are in the browser.
@@ -19,10 +21,14 @@ import { useRegion } from "./use-region";
  */
 export function useMoney(): MoneyFormatter {
   const { region } = useRegion();
+  const { locale } = useFormat();
   const { data } = useSWR("exchange-rates", () => unicum.rates(), {
     revalidateOnFocus: false,
     revalidateIfStale: false,
     dedupingInterval: 3_600_000,
   });
-  return useMemo(() => moneyFormatter(region, data), [region, data]);
+  return useMemo(
+    () => moneyFormatter(region, data, locale),
+    [region, data, locale],
+  );
 }

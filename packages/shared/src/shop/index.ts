@@ -9,6 +9,7 @@
 // the visitor's realm). Update a table if WG re-prices that region's store.
 
 import { Region } from "@unicum.gg/wargaming";
+import { intlTag } from "../lib/intl-locale";
 
 /** A region's store gold bundles as [gold, price] in `currency`. Bulk bundles
  * are cheaper per gold, which is why the estimate is non-linear. */
@@ -149,11 +150,18 @@ export function storeCurrency(region: Region): string | null {
   return GOLD_PRICING[region]?.currency ?? null;
 }
 
-/** Currency formatter for a region's store currency (or null if none). */
-export function moneyFmt(region: Region): Intl.NumberFormat | null {
+/**
+ * Currency formatter for a region's store currency (or null if none), written
+ * the way `locale` writes money. The region picks the currency, the language
+ * picks where the symbol goes and how the digits are grouped.
+ */
+export function moneyFmt(
+  region: Region,
+  locale: string,
+): Intl.NumberFormat | null {
   const pricing = GOLD_PRICING[region];
   if (!pricing) return null;
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat(intlTag(locale), {
     style: "currency",
     currency: pricing.currency,
     maximumFractionDigits: 2,

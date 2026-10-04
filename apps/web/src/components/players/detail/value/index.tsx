@@ -101,7 +101,7 @@ export function ValueTab(
   }
 
   const { region, nickname, valuation, vehicles, vehiclesLoading } = props;
-  const fmt = moneyFmt(region);
+  const fmt = moneyFmt(region, locale);
   const money = (n: number) => (fmt ? fmt.format(n) : `~${n.toFixed(0)}`);
   const { account } = valuation;
   const num = (n: number) => numberFormat(locale, INT_FORMAT).format(n);

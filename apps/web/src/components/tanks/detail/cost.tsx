@@ -54,11 +54,11 @@ export function TankCost({
   region: Region;
   isReward: boolean;
 }) {
-  const { num } = useFormat();
+  const { num, locale } = useFormat();
   const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/tanks/detail/cost");
   const { tier, setTier, rate, rateInput, setRate } = useFreeXpSettings();
-  const fmt = moneyFmt(region);
+  const fmt = moneyFmt(region, locale);
   const price = (gold: number) => goldToMoney(region, gold)?.amount ?? null;
   const money = (n: number | null) =>
     n != null && fmt ? `~${fmt.format(n)}` : "";

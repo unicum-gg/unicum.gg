@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { dateLocale } from "./date-locale";
+import { intlTag } from "@unicum.gg/shared";
 /**
  * Numbers, dates and lists in the reader's own language.
  *
@@ -13,18 +14,6 @@ import { dateLocale } from "./date-locale";
  */
 const CACHE = new Map<string, Intl.NumberFormat>();
 
-/**
- * The locale to hand `Intl`.
- *
- * Our own codes are language-only and `Intl` wants a BCP-47 tag, which it
- * mostly is already. `en` is the exception worth naming: the site's own English
- * is written in British spelling, but its numbers and dates read better in the
- * form the majority of its English readers use, which is what "en-US" was
- * chosen for in the first place.
- */
-const INTL_LOCALE: Record<string, string> = { en: "en-US" };
-
-const tagFor = (locale: string) => INTL_LOCALE[locale] ?? locale;
 
 function cached<T extends Intl.NumberFormat>(
   kind: "n",
@@ -57,7 +46,7 @@ export function numberFormat(
   options: Intl.NumberFormatOptions = {},
 ): Intl.NumberFormat {
   return cached("n", locale, options, () =>
-    new Intl.NumberFormat(tagFor(locale), options),
+    new Intl.NumberFormat(intlTag(locale), options),
   );
 }
 
@@ -113,7 +102,7 @@ export function dateFormat(locale: string, pattern: string): DateFormatter {
 const ORDINAL_RULES = new Map<string, Intl.PluralRules>();
 
 export function ordinalForm(locale: string, n: number): Intl.LDMLPluralRule {
-  const tag = tagFor(locale);
+  const tag = intlTag(locale);
   let rules = ORDINAL_RULES.get(tag);
   if (!rules) {
     try {

@@ -117,13 +117,13 @@ export function TankCostsTable({
   nickname: string;
   vehicles: PlayerTankRow[];
 }) {
-  const { num } = useFormat();
+  const { num, locale } = useFormat();
   const { t } = useTranslation("components/players/detail/value/tank-costs");
   const { t: tTable } = useTranslation("components/tanks/table");
   const { t: tTanks } = useTranslation(
     "components/players/detail/tanks/table",
   );
-  const fmt = moneyFmt(region);
+  const fmt = moneyFmt(region, locale);
   const money = (n: number) => (fmt ? fmt.format(n) : `~${n.toFixed(0)}`);
   const unitFmt = num({ maximumFractionDigits: 0 });
   const [sort, setSort] = useState<SortState>({

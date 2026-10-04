@@ -103,7 +103,7 @@ export function buildEconColumns(
   rate: number,
   t: TranslateFunction, locale: string,
 ): EconColumn[] {
-  const fmt = moneyFmt(region);
+  const fmt = moneyFmt(region, locale);
   const cur = fmt?.resolvedOptions().currency ?? "";
   const base: EconColumn[] = [
     {

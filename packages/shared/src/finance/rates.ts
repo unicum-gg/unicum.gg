@@ -6,6 +6,7 @@
 // unreachable provider degrades to showing euros, never to a stale hardcoded
 // rate — that is the bug this module exists to remove.
 
+import { intlTag } from "../lib/intl-locale";
 import { Region } from "@unicum.gg/wargaming";
 import { BASE_CURRENCY, displayCurrency } from "./currency";
 
@@ -42,14 +43,21 @@ export type MoneyFormatter = {
 };
 
 /**
- * Formatter for a visitor on `region`, converting euro amounts at the live
- * rate. With no usable rate it falls back to euros rather than to a guess, so a
- * provider outage shows a correct amount in the wrong currency instead of a
- * wrong amount in the right one.
+ * Formatter for a visitor on `region` reading in `locale`, converting euro
+ * amounts at the live rate. With no usable rate it falls back to euros rather
+ * than to a guess, so a provider outage shows a correct amount in the wrong
+ * currency instead of a wrong amount in the right one.
+ *
+ * The region and the language decide different halves and both are needed. The
+ * region decides WHICH currency, since that is what the player's own store
+ * bills in. The language decides HOW it is written, and a hardcoded "en-US"
+ * here put the symbol where no European reader puts it: a French page read
+ * "€6" for what French writes "6 €".
  */
 export function moneyFormatter(
   region: Region,
   rates: RatesTable | null | undefined,
+  locale: string,
 ): MoneyFormatter {
   const wanted = displayCurrency(region);
   const rate = rateFromEur(wanted, rates);
@@ -61,7 +69,7 @@ export function moneyFormatter(
   const formatterFor = (digits: number) => {
     let fmt = formatters.get(digits);
     if (!fmt) {
-      fmt = new Intl.NumberFormat("en-US", {
+      fmt = new Intl.NumberFormat(intlTag(locale), {
         style: "currency",
         currency,
         maximumFractionDigits: digits,
