@@ -308,7 +308,7 @@ export function StrongholdStatsTable(
           return (
             <TableRow key={row.label}>
               <TableCell className="py-1.5! font-medium">
-                <GlossaryLabel label={statLabel(row.label, tStats)}>
+                <GlossaryLabel label={row.label}>
                   {statLabel(row.label, tStats)}
                 </GlossaryLabel>
               </TableCell>

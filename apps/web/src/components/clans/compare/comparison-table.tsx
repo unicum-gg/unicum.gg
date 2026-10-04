@@ -144,7 +144,7 @@ export function ComparisonTable({
           return (
             <TableRow key={row.label}>
               <TableCell className="font-medium">
-                <GlossaryLabel label={statLabel(row.label, tStats)}>
+                <GlossaryLabel label={row.label}>
                   {statLabel(row.label, tStats)}
                 </GlossaryLabel>
               </TableCell>
