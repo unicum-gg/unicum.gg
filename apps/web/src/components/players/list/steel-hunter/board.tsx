@@ -1,16 +1,8 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
-import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
-import {
-  type ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { RankingColumnHead } from "@/components/ranking-column-head";
 import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
@@ -83,55 +75,6 @@ export type SteelHunterRow = {
   tournament_featured_wins: number;
   tournament_best_title: string | null;
 };
-
-// The board is ranked server-side, always descending (best first), so a header
-// click re-fetches that column's true top-N (a different set of players, not a
-// reorder). The caret marks the active column rather than toggling asc/desc.
-// Mirrors the stronghold board's SortableHead.
-function SortableHead({
-  sortKey,
-  active,
-  onSort,
-  className,
-  children,
-}: {
-  sortKey: SteelHunterSort;
-  active: boolean;
-  onSort: (s: SteelHunterSort) => void;
-  className?: string;
-  children: ReactNode;
-}) {
-  const Icon = active ? CaretDownIcon : CaretUpDownIcon;
-  const button = (
-    <button
-      type="button"
-      onClick={() => onSort(sortKey)}
-      className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 max-w-full min-w-0 font-medium select-none hover:text-foreground",
-        active ? "text-foreground" : "",
-      )}
-    >
-      {/* `data-head-label` is what the tooltip measures: it shows the full
-            heading only when the column really cut it. */}
-      <span data-head-label className="truncate">
-        {children}
-      </span>
-      <Icon
-        weight="bold"
-        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
-  return (
-    <TableHead className={cn("text-right!", className)}>
-      <GlossaryHeadTooltip
-        label={typeof children === "string" ? children : undefined}
-      >
-        {button}
-      </GlossaryHeadTooltip>
-    </TableHead>
-  );
-}
 
 export function SteelHunterBoard({
   region,
@@ -284,51 +227,51 @@ export function SteelHunterBoard({
               <TableRow>
                 <TableHead className="w-12 text-center!">#</TableHead>
                 <TableHead>{t("columns.player")}</TableHead>
-                <SortableHead
+                <RankingColumnHead
                   sortKey={SteelHunterSort.Battles}
                   active={sort === SteelHunterSort.Battles}
                   onSort={changeSort}
                   className="w-24"
                 >
                   {t("columns.battles")}
-                </SortableHead>
-                <SortableHead
+                </RankingColumnHead>
+                <RankingColumnHead
                   sortKey={SteelHunterSort.Survival}
                   active={sort === SteelHunterSort.Survival}
                   onSort={changeSort}
                   className="hidden w-24 md:table-cell"
                 >
                   {t("columns.survival")}
-                </SortableHead>
-                <SortableHead
+                </RankingColumnHead>
+                <RankingColumnHead
                   sortKey={SteelHunterSort.Damage}
                   active={sort === SteelHunterSort.Damage}
                   onSort={changeSort}
                   className="hidden w-28 md:table-cell"
                 >
                   {t("columns.damage")}
-                </SortableHead>
-                <SortableHead
+                </RankingColumnHead>
+                <RankingColumnHead
                   sortKey={SteelHunterSort.Winrate}
                   active={sort === SteelHunterSort.Winrate}
                   onSort={changeSort}
                   className="hidden w-24 sm:table-cell"
                 >
-                  {tOwn("wr")}</SortableHead>
-                <SortableHead
+                  {tOwn("wr")}</RankingColumnHead>
+                <RankingColumnHead
                   sortKey={SteelHunterSort.Hr}
                   active={sort === SteelHunterSort.Hr}
                   onSort={changeSort}
                   className="w-24"
                 >
-                  {tOwn("hr")}</SortableHead>
-                <SortableHead
+                  {tOwn("hr")}</RankingColumnHead>
+                <RankingColumnHead
                   sortKey={SteelHunterSort.Hrb}
                   active={sort === SteelHunterSort.Hrb}
                   onSort={changeSort}
                   className="w-24"
                 >
-                  {tOwn("hrb")}</SortableHead>
+                  {tOwn("hrb")}</RankingColumnHead>
               </TableRow>
             </TableHeader>
             <TableBody>

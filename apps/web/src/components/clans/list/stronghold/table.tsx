@@ -1,8 +1,6 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
-import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
-import type { ReactNode } from "react";
 import { ClanName } from "@/components/entity/clan-name";
 import { clanIdentityFromRow } from "@/components/entity/clan-identity";
 import { RosterBoostBadge } from "@/components/clans/roster-boost-badge";
@@ -17,7 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
+import { RankingColumnHead } from "@/components/ranking-column-head";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
@@ -48,55 +46,6 @@ const PCT_FORMAT = {
 export type RankedStrongholdEntry = StrongholdLeaderboardEntry & {
   rank: number;
 };
-
-// The leaderboard is ranked server-side, always descending (best first), so a
-// header click just re-fetches that sort's top 100 (a different set of clans,
-// not a reorder). The caret marks the active column rather than toggling
-// asc/desc.
-function SortableHead({
-  sortKey,
-  active,
-  onSort,
-  className,
-  children,
-}: {
-  sortKey: StrongholdSort;
-  active: boolean;
-  onSort: (s: StrongholdSort) => void;
-  className?: string;
-  children: ReactNode;
-}) {
-  const Icon = active ? CaretDownIcon : CaretUpDownIcon;
-  const button = (
-    <button
-      type="button"
-      onClick={() => onSort(sortKey)}
-      className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 max-w-full min-w-0 font-medium select-none hover:text-foreground",
-        active ? "text-foreground" : "",
-      )}
-    >
-      {/* `data-head-label` is what the tooltip measures: it shows the full
-            heading only when the column really cut it. */}
-      <span data-head-label className="truncate">
-        {children}
-      </span>
-      <Icon
-        weight="bold"
-        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
-  return (
-    <TableHead className={cn("text-right!", className)}>
-      <GlossaryHeadTooltip
-        label={typeof children === "string" ? children : undefined}
-      >
-        {button}
-      </GlossaryHeadTooltip>
-    </TableHead>
-  );
-}
 
 /** The stronghold leaderboard table itself: sortable headers plus one row per
  * clan. `rows` is already searched/ranged by the caller's filter bar, and the
@@ -134,41 +83,41 @@ export function StrongholdTable({
             <TableHead className="w-12 text-center!">#</TableHead>
             <TableHead>{tCol("clan")}</TableHead>
             <TableHead className="w-24 text-center!">{tCol("members")}</TableHead>
-            <SortableHead
+            <RankingColumnHead
               sortKey={StrongholdSort.Elo}
               active={sort === StrongholdSort.Elo}
               onSort={onSort}
               className="w-24"
             >
-              {t("elo")}</SortableHead>
-            <SortableHead
+              {t("elo")}</RankingColumnHead>
+            <RankingColumnHead
               sortKey={StrongholdSort.Battles}
               active={sort === StrongholdSort.Battles}
               onSort={onSort}
               className="w-24"
             >
-              {t("battles")}</SortableHead>
-            <SortableHead
+              {t("battles")}</RankingColumnHead>
+            <RankingColumnHead
               sortKey={StrongholdSort.Winrate}
               active={sort === StrongholdSort.Winrate}
               onSort={onSort}
               className="w-28"
             >
-              {t("wr")}</SortableHead>
-            <SortableHead
+              {t("wr")}</RankingColumnHead>
+            <RankingColumnHead
               sortKey={StrongholdSort.Rating}
               active={sort === StrongholdSort.Rating}
               onSort={onSort}
               className="w-24"
             >
-              {t("sr")}</SortableHead>
-            <SortableHead
+              {t("sr")}</RankingColumnHead>
+            <RankingColumnHead
               sortKey={StrongholdSort.RatingBattles}
               active={sort === StrongholdSort.RatingBattles}
               onSort={onSort}
               className="w-24"
             >
-              {t("srb")}</SortableHead>
+              {t("srb")}</RankingColumnHead>
           </TableRow>
         </TableHeader>
         <TableBody>
