@@ -19,6 +19,27 @@
 export const typographic = (value: string): string =>
   value.replace(/(?<=[\p{L}\p{N}}€$£¥%])'/gu, "’");
 
+/**
+ * A translation leans on the edges its SOURCE leans on, and on no others.
+ *
+ * The companion rule to the English one: a string that needs a space beside it
+ * keeps that space in the JSX, because a translator drops it. The failure in
+ * this direction is the mirror and is the one nothing was watching, since the
+ * space is then supplied TWICE. `reach.tsx` composes its own (`` ` ${t(...)}` ``)
+ * and the English reads "(30d)", so every one of the thirty-four translated
+ * locales answering " (30j)", " (30д)", " (30天)" printed a double space at a
+ * reader, and only at a reader who is not English.
+ *
+ * Judged against the source rather than trimmed outright, for the same reason
+ * `shouts` is: the game's own catalogues really do hold a string that ends in a
+ * space, so "has an edge space" is not by itself a defect. What is a defect is
+ * an edge the English does not have.
+ */
+export function matchedEdges(value: string, source: string): string {
+  const lead = source !== source.trimStart() ? value : value.trimStart();
+  return source !== source.trimEnd() ? lead : lead.trimEnd();
+}
+
 /** Whether a string is written entirely in capitals, on its own terms. */
 function allCaps(value: string): boolean {
   const cased = [...value].filter((c) => c.toLowerCase() !== c.toUpperCase());

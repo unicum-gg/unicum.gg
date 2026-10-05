@@ -6,6 +6,6 @@
     "overall": "Panašus bendrai",
     "closest": "Artimiausias pagal {axes}",
     "closest-furthest": "Artimiausias pagal {axes}, tolimiausias pagal {apart}",
-    "and": " ir "
+    "and": "ir"
   }
 }

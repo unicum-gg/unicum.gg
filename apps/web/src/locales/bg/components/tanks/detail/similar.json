@@ -6,6 +6,6 @@
     "overall": "Подобно общо",
     "closest": "Най-близък по {axes}",
     "closest-furthest": "Най-близък по {axes}, най-далечен по {apart}",
-    "and": " и "
+    "and": "и"
   }
 }

@@ -6,6 +6,6 @@
     "overall": "Similar en general",
     "closest": "Más cercano en {axes}",
     "closest-furthest": "Más cercano en {axes}, más alejado en {apart}",
-    "and": " y "
+    "and": "y"
   }
 }

@@ -6,6 +6,6 @@
     "overall": "总体相似",
     "closest": "在{axes}上最接近",
     "closest-furthest": "在{axes}上最接近，在{apart}上相距最远",
-    "and": " 和 "
+    "and": "和"
   }
 }

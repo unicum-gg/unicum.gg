@@ -6,6 +6,6 @@
     "overall": "Giudizio globale",
     "closest": "Più simile per {axes}",
     "closest-furthest": "Più simile per {axes}, più diverso per {apart}",
-    "and": " e "
+    "and": "e"
   }
 }

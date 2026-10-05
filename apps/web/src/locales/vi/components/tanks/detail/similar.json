@@ -6,6 +6,6 @@
     "overall": "Tương tự tổng thể",
     "closest": "Gần nhất theo {axes}",
     "closest-furthest": "Gần nhất theo {axes}, xa nhất theo {apart}",
-    "and": " và "
+    "and": "và"
   }
 }

@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import test, { describe } from "node:test";
 import { isGameClientNamespace } from "../../../src/lib/game-vocabulary";
-import { shouts } from "../../../scripts/translation-rules";
+import { matchedEdges, shouts } from "../../../scripts/translation-rules";
 import {
   jsonFiles,
   keysOf,
@@ -155,6 +155,48 @@ export function qualityTests() {
         offenders,
         [],
         "A translator drops an edge space, so the space has to live in the JSX beside the call.",
+      );
+    });
+
+    /**
+     * The same rule from the other side, which is the direction that was
+     * actually broken.
+     *
+     * The test above guards the English, because a translator drops an edge
+     * space the source leans on. It says nothing about a translator ADDING one,
+     * and there the space is supplied twice: `marks/reach.tsx` composes its own
+     * (`` ` ${t("recent-window")}` ``), the English reads "(30d)" with none, and
+     * all thirty-four translated locales answered " (30j)", " (30д)", " (30天)".
+     * So every reader who is not English got a double space, and no English
+     * reader could ever see it.
+     *
+     * Judged against the source rather than trimmed, and exempt on the game's
+     * own catalogues, for the reason the English test is: one of Wargaming's
+     * strings really does end in a space.
+     */
+    test("no translation adds an edge space English does not have", () => {
+      const offenders: string[] = [];
+      for (const file of jsonFiles(path.join(LOCALES_DIR, SOURCE_LOCALE))) {
+        const namespace = file.replace(/\.json$/, "");
+        if (isGameClientNamespace(namespace)) continue;
+        const source = readLocale(SOURCE_LOCALE, file);
+        for (const locale of targetLocales) {
+          if (!fs.existsSync(path.join(LOCALES_DIR, locale, file))) continue;
+          const target = readLocale(locale, file);
+          for (const key of keysOf(source)) {
+            const value = valueAt(target, key);
+            if (!value) continue;
+            if (value !== matchedEdges(value, valueAt(source, key) ?? ""))
+              offenders.push(
+                `${locale}/${file}: ${key} = ${JSON.stringify(value)}`,
+              );
+          }
+        }
+      }
+      assert.deepStrictEqual(
+        offenders,
+        [],
+        "The JSX already supplies the space, so a translation that adds one prints two.",
       );
     });
 

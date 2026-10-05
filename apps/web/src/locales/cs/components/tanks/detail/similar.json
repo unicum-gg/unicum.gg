@@ -6,6 +6,6 @@
     "overall": "Celkově podobné",
     "closest": "Největší podobnost: {axes}",
     "closest-furthest": "Největší podobnost: {axes}, největší rozdíl: {apart}",
-    "and": " a "
+    "and": "a"
   }
 }

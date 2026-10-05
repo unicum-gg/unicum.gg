@@ -25,6 +25,7 @@ import {
   cataloguedNames,
   gameNames,
   isGameNamespace,
+  matchedEdges,
   missingGameName,
   shouts,
   typographic,
@@ -230,21 +231,30 @@ function merge(
   source: Json,
   target: Json,
   translated: Record<string, string>,
+  namespace: string,
   prefix = "",
 ): Json {
+  // The game's own catalogues are copied as they come, and one of them really
+  // does end in a space, so only our own prose is held to the source's edges.
+  const edges = (value: string, source: string): string =>
+    isGameNamespace(namespace) ? value : matchedEdges(value, source);
+
   const out: Json = {};
   for (const [key, child] of Object.entries(source)) {
     const path = prefix ? `${prefix}.${key}` : key;
     if (typeof child === "string") {
       const existing = target[key];
-      if (path in translated) out[key] = typographic(translated[path]);
-      else if (typeof existing === "string") out[key] = typographic(existing);
+      if (path in translated)
+        out[key] = edges(typographic(translated[path]), child);
+      else if (typeof existing === "string")
+        out[key] = edges(typographic(existing), child);
     } else {
       const existing = target[key];
       out[key] = merge(
         child,
         typeof existing === "object" && existing ? existing : {},
         translated,
+        namespace,
         path,
       );
     }
@@ -2023,7 +2033,11 @@ async function main(): Promise<void> {
       const namespace = rest.join("/");
       const targetPath = join(localesRoot, locale, `${namespace}.json`);
       const next =
-        JSON.stringify(merge(entry.source, entry.target, entry.translated), null, 2) +
+        JSON.stringify(
+          merge(entry.source, entry.target, entry.translated, namespace),
+          null,
+          2,
+        ) +
         "\n";
       if (existsSync(targetPath) && readFileSync(targetPath, "utf-8") === next) continue;
       mkdirSync(dirname(targetPath), { recursive: true });

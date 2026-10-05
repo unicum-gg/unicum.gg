@@ -6,6 +6,6 @@
     "overall": "Similar general",
     "closest": "Cel mai apropiat pe {axes}",
     "closest-furthest": "Cel mai apropiat pe {axes}, cel mai îndepărtat pe {apart}",
-    "and": " și "
+    "and": "și"
   }
 }

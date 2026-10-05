@@ -6,6 +6,6 @@
     "overall": "Hasonló összesen",
     "closest": "Legközelebb ezen: {axes}",
     "closest-furthest": "Legközelebb ezen: {axes}, legtávolabb ezen: {apart}",
-    "and": " és "
+    "and": "és"
   }
 }
