@@ -492,6 +492,15 @@ class BattleClient {
       () => this.api.GET("/{region}/battles/{id}", { params: { path } }),
     );
   }
+
+  /** Battle replay */
+  replay() {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/replay", path),
+      () => this.api.GET("/{region}/battles/{id}/replay", { params: { path } }),
+    );
+  }
 }
 
 /** A single glossary entry: unicum.glossary("..."). */

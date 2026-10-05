@@ -397,6 +397,15 @@ export type BattleDetail = {
   server: string | null;
   /** How many of our players reported it. */
   reporters: number;
+  /**
+   * Whether the archive holds this battle's replay file.
+   *
+   * A boolean rather than the key: the key names an object in a private
+   * bucket and nothing outside the server has any use for it. This answers
+   * the only question a reader has, which is whether the viewer has anything
+   * to draw. Expect it false far more often than true.
+   */
+  hasReplay: boolean;
   /** Every vehicle, both teams, ordered by team then by what they did. */
   participants: BattleParticipant[];
 };
@@ -499,6 +508,7 @@ export async function battleDetail(
     clientVersion: battle.clientVersion,
     server: battle.server,
     reporters: battle.reportedBy.length,
+    hasReplay: battle.replayKey !== null,
     participants,
   };
 }

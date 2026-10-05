@@ -111,14 +111,11 @@
   },
   "destroyed-list": "Destroyed {names}",
   "replay": {
-    "drop": "Choose this battle’s .wotreplay file",
-    "privacy": "The file is read in your browser and never leaves your machine. Nothing is uploaded and nothing is stored.",
-    "reading": "Reading the replay…",
-    "wrong-battle": "That replay is a different battle ({map}).",
-    "unfinished": "That replay has no packet stream: the battle was not played to the end.",
-    "no-positions": "That replay carries no positions this reader understands.",
     "no-bounds": "This arena has no extent in the catalogue, so the positions cannot be placed on its minimap.",
     "play": "Play",
-    "pause": "Pause"
+    "pause": "Pause",
+    "loading": "Loading this battle’s replay…",
+    "none": "No replay was kept for this battle. A replay only exists when somebody who played it had recording on and shared it.",
+    "failed": "This battle’s replay could not be read."
   }
 }

@@ -52,5 +52,7 @@ export type BattleDetailData = {
   server: string | null;
   clientVersion: string | null;
   reporters: number;
+  /** Whether the archive holds this battle's replay, so the viewer has something to draw. */
+  hasReplay: boolean;
   participants: Participant[];
 };

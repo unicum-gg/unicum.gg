@@ -189,6 +189,26 @@ export async function replayTargetOf(
   return row ?? null;
 }
 
+/**
+ * Where this battle's replay sits, or null when none was archived.
+ *
+ * Looked up by `arena_unique_id` alone, without the partition key, which the
+ * battle detail already does for the same reason: a reader arrives with a
+ * battle id out of a URL and nothing else. Null is the ordinary answer.
+ */
+export async function storedReplayKey(
+  region: Region,
+  arenaUniqueId: string,
+): Promise<string | null> {
+  const table = battlesByRegion[region];
+  const [row] = await db
+    .select({ key: table.replayKey })
+    .from(table)
+    .where(eq(table.arenaUniqueId, arenaUniqueId))
+    .limit(1);
+  return row?.key ?? null;
+}
+
 /** Write down where the file went, once it is actually in the bucket. */
 export async function attachReplay(
   region: Region,

@@ -93,6 +93,10 @@ export const BattleDetailResponse = z
     reporters: z.number().meta({
       description: "How many clients reported this battle.",
     }),
+    hasReplay: z.boolean().meta({
+      description:
+        "Whether the archive holds this battle's replay file, and so whether the 2D viewer has anything to draw. False for most battles: a replay only exists when a player who was there had recording on.",
+    }),
     participants: z.array(battleParticipant).meta({
       description: "Every vehicle, both teams, by team then by damage.",
     }),

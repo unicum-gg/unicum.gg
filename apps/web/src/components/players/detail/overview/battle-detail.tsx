@@ -359,7 +359,9 @@ export function BattleDetail({
 
         {tab === Tab.Replay && mine ? (
           <BattleReplay
+            region={region}
             battleId={battleId}
+            hasReplay={data.hasReplay}
             arenaId={arenaId}
             mapImage={mapImage}
             bounds={mapBounds}

@@ -259,6 +259,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/battles/{id}/replay": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Battle replay
+         * @description Where every vehicle was through a battle, for the 2D viewer, decoded from the replay file the players' own clients recorded. The decoded positions and nothing else: the file itself carries the whole packet stream the recording client received, the battle chat included, which is not published. 404 when no replay was kept for this battle, which is the ordinary case, since one exists only when a player who was there had recording on and shared it.
+         */
+        get: operations["get-{region}-battles-{id}-replay"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}": {
         parameters: {
             query?: never;
@@ -2419,8 +2439,35 @@ export interface components {
             server: string | null;
             /** @description How many clients reported this battle. */
             reporters: number;
+            /** @description Whether the archive holds this battle's replay file, and so whether the 2D viewer has anything to draw. False for most battles: a replay only exists when a player who was there had recording on. */
+            hasReplay: boolean;
             /** @description Every vehicle, both teams, by team then by damage. */
             participants: components["schemas"]["BattleParticipant"][];
+        };
+        /** @description Credits, experience and bonds as the game's own Detailed Report breaks them down. Every field is absent when it is zero. */
+        BattleEconomy: {
+            creditsBase?: number;
+            creditsBooster?: number;
+            creditsEvent?: number;
+            creditsOrder?: number;
+            creditsPenalty?: number;
+            creditsCompensation?: number;
+            creditsSubtotal?: number;
+            repairCost?: number;
+            ammoCost?: number;
+            suppliesCost?: number;
+            credits?: number;
+            xpBase?: number;
+            xpBooster?: number;
+            xpEvent?: number;
+            xpPremiumVehicle?: number;
+            xpPenalty?: number;
+            xp?: number;
+            freeXp?: number;
+            crewXp?: number;
+            bonds?: number;
+            bondsBase?: number;
+            premium?: boolean;
         };
         /**
          * @description Format the battle was played in.
@@ -2433,9 +2480,8 @@ export interface components {
             id: number;
             /** @description Wargaming account id, absent for a bot. */
             account?: number;
-            /** @description Their nickname, when this site holds the account. Null for a bot, or for an account nobody has ever looked up here. */
-            nickname: string | null;
-            clanTag: string | null;
+            /** @description How the site names this player: the nickname, the clan they wear and the crests they have earned. Null for a bot, or for an account nobody has ever looked up here. */
+            player: components["schemas"]["BattlePlayer"] | null;
             team: number;
             tank: {
                 id: number;
@@ -2451,10 +2497,45 @@ export interface components {
             own: {
                 [key: string]: number;
             };
+            /** @description The medals this battle awarded them, by the game's own ids. Absent when there are none, which is the usual case. */
+            medals?: number[];
             /** @description What this battle scored them, keyed by metric (`wn7`, `wn8`, `wnx`), against their own vehicle's expected values. */
             rating: {
                 [key: string]: number | null;
             };
+        };
+        /** @description A participant's public identity. */
+        BattlePlayer: {
+            accountId: number;
+            nickname: string;
+            clanTag: string | null;
+            clanColor: string | null;
+            /** @description The owner signed in here with this Wargaming account. */
+            isVerified: boolean;
+            /** @description An active, non-anonymous support subscription. */
+            isSupporter: boolean;
+            /** @description Their Twitch channel, when the account has linked one. */
+            twitchLogin: string | null;
+            tournamentWins: number;
+            tournamentFeaturedWins: number;
+            tournamentBestTitle: string | null;
+            onslaughtBestTier: string | null;
+            onslaughtBestRank: number | null;
+            onslaughtSeasons: number;
+        };
+        BattleReplayResponse: {
+            /** @description How long the recording runs, in seconds. */
+            duration: number;
+            /** @description Samples a second the points were thinned to. */
+            hz: number;
+            /** @description One entry per vehicle this battle's recording client could see. A vehicle it never spotted has no track, which is honest fog of war rather than a gap. */
+            tracks: components["schemas"]["BattleReplayTrack"][];
+        };
+        BattleReplayTrack: {
+            /** @description The battle-scoped vehicle id, the same one the battle's participants are keyed by. */
+            id: number;
+            /** @description The path, as [tenths of a second since the battle started, x, z]. Only the moments the vehicle moved: between two points it is exactly where it stopped. */
+            points: number[][];
         };
         /**
          * @description How the battle ended, as declared by the submitter.
@@ -4249,6 +4330,19 @@ export interface components {
             startedAt: Date;
             /** @description The arena's name, `45_north_america`, not its display title. */
             map: string;
+            /** @description The arena's extent in metres, which is what places a replay's coordinates on the minimap. */
+            mapBounds: {
+                bottomLeft: {
+                    x: number;
+                    z: number;
+                };
+                upperRight: {
+                    x: number;
+                    z: number;
+                };
+            } | null;
+            /** @description The minimap this arena is actually played on, resolved against the maps catalogue. An Onslaught night arena is played on its own `_comp7` image rather than the daylight one shipped under its name. */
+            mapImage: string | null;
             /** @description `ctf`, `domination`, `assault`… null when none was named. */
             gameplay: string | null;
             /** @description The game's own `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */
@@ -4271,6 +4365,8 @@ export interface components {
             players: number;
             /** @description How many clients reported this battle. Two means two of our players were in it. */
             reporters: number;
+            /** @description What the battle earned this player, present only when it was this account's own client that reported it. The results carry an economy for the reporting client alone, so a battle somebody else uploaded has none for them at any price. */
+            personal: components["schemas"]["BattleEconomy"] | null;
         };
         /** @description A player's most recent battles, as the clients that played them reported. */
         PlayerBattlesResponse: {
@@ -7185,6 +7281,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BattleDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-battles-{id}-replay": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BattleReplayResponse"];
                 };
             };
         };
