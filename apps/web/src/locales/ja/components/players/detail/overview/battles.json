@@ -29,7 +29,7 @@
     "track": "履帯アシスト",
     "stun": "スタンアシスト",
     "shots": "射撃数",
-    "hits": "命中",
+    "hits": "命中率",
     "piercings": "貫通",
     "accuracy": "精度",
     "received": "受けたダメージ",
@@ -53,7 +53,7 @@
     "dealt": "与えた",
     "gunnery": "射撃",
     "taken": "取得",
-    "earned": "獲得済み"
+    "earned": "獲得"
   },
   "close": "閉じる",
   "survived-the-battle": "戦闘を生き残った",
@@ -73,7 +73,7 @@
     "blocked": "装甲でブロックしたダメージ",
     "potential": "受けた潜在ダメージ",
     "team-damage": "味方チームに与えたダメージ",
-    "spotted": "敵チームの車両の発見数",
+    "spotted": "発見数",
     "damaged-destroyed": "ダメージを与えた車両 / 破壊した車両",
     "assistance": "このプレイヤーのアシストで与えたダメージ",
     "capture-defence": "拠点占領 / 防衛ポイント",
@@ -85,7 +85,7 @@
     "destroyed-at": "撃破された時間",
     "xp": "EXP",
     "credits": "クレジット",
-    "experience": "経験値",
+    "experience": "EXP",
     "bonds": "ボンズ",
     "earned-for-battle": "戦闘での獲得",
     "reserves": "パーソナルリザーブ",
@@ -93,18 +93,32 @@
     "orders": "指令",
     "ally-fine": "味方チームへのダメージに対する罰金",
     "compensation": "味方チームからの補償",
-    "subtotal": "戦闘合計",
     "repair": "自動修理",
     "ammo": "砲弾の自動補給",
     "supplies": "消耗品の自動補給",
-    "total": "計",
     "premium-vehicle": "プレミアム車両ボーナス",
     "free-xp": "フリーEXP",
     "crew-xp": "搭乗員経験値",
-    "with-premium": "これらの数値は、プレミアムボーナスがすでに適用された状態で、アカウントが実際に受け取ったものです。"
+    "with-premium": "このアカウントにはプレミアムが適用されていました。",
+    "with-bonuses": "ボーナス適用後",
+    "credited": "アカウントに加算",
+    "not-a-sum": "各行はゲームがそれぞれ独立して報告する数値であり、互いに合計したものではありません。"
   },
   "tab": {
     "teams": "チームスコア",
-    "report": "詳細レポート"
+    "report": "詳細レポート",
+    "replay": "リプレイ"
+  },
+  "destroyed-list": "撃破数: {names}",
+  "replay": {
+    "drop": "この戦闘の.wotreplayファイルを選択",
+    "privacy": "ファイルはブラウザー上で読み取られ、お使いの端末から外部に送信されることはありません。アップロードも保存もされません。",
+    "reading": "リプレイを読み込み中…",
+    "wrong-battle": "そのリプレイは別の戦闘です（{map}）。",
+    "unfinished": "そのリプレイにはパケット配信がありません。戦闘は最後までプレイ済みではありません。",
+    "no-positions": "そのリプレイには、このリーダーが理解できる位置情報がありません。",
+    "no-bounds": "このアリーナにはカタログ上の範囲がありません。そのため、位置情報をミニマップ上に配置できません。",
+    "play": "プレイ",
+    "pause": "一時停止"
   }
 }

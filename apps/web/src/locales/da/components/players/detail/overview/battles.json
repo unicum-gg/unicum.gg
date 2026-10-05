@@ -87,24 +87,38 @@
     "credits": "credits",
     "experience": "Xp",
     "bonds": "Obligationer",
-    "earned-for-battle": "Optjent i kamp",
+    "earned-for-battle": "Optjent for kampen",
     "reserves": "Personlige reserver",
     "missions": "Missioner og begivenheder",
     "orders": "Ordrer",
     "ally-fine": "Bøde for at skade allierede",
     "compensation": "Kompensation fra allierede",
-    "subtotal": "I alt for kampen",
     "repair": "Auto-reparation",
     "ammo": "Auto-genforsyn af ammunition",
     "supplies": "Auto-genforsyn af forbrugsvarer",
-    "total": "I alt",
     "premium-vehicle": "Premium-køretøjsbonus",
     "free-xp": "Gratis erfaring",
     "crew-xp": "Mandskabserfaring",
-    "with-premium": "Disse tal viser, hvad kontoen faktisk modtog, med dens Premium-bonus allerede anvendt."
+    "with-premium": "Denne konto havde premium.",
+    "with-bonuses": "Med anvendte bonusser",
+    "credited": "Krediteret til kontoen",
+    "not-a-sum": "Hver linje er et tal, som spillet rapporterer for sig, de lægger ikke sammen til ét tal."
   },
   "tab": {
     "teams": "Holdscore",
-    "report": "Detaljeret rapport"
+    "report": "Detaljeret rapport",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Ødelagt {names}",
+  "replay": {
+    "drop": "Vælg kampens .wotreplay-fil",
+    "privacy": "Filen bliver læst i din browser og forlader aldrig din maskine. Intet uploades, og intet gemmes.",
+    "reading": "Læser replayet…",
+    "wrong-battle": "Dette replay er fra en anden kamp ({map}).",
+    "unfinished": "Dette replay har ingen packet stream: kampen blev ikke spillet til ende.",
+    "no-positions": "Dette replay bærer ingen placeringer, som denne læser forstår.",
+    "no-bounds": "Denne arena har ingen udstrækning i kataloget, så placeringerne kan ikke placeres på dens minikort.",
+    "play": "Spil",
+    "pause": "Pause"
   }
 }

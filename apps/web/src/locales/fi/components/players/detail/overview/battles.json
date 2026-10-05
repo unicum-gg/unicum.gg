@@ -53,7 +53,7 @@
     "dealt": "Aiheutettu",
     "gunnery": "Ampuminen",
     "taken": "Otettu",
-    "earned": "Ansaittu"
+    "earned": "Ansaitut"
   },
   "close": "Sulje",
   "survived-the-battle": "Selviytyi taistelusta",
@@ -73,7 +73,7 @@
     "blocked": "Panssarin estämä vahinko",
     "potential": "Vastaanotettu potentiaalinen vahinko",
     "team-damage": "Liittolaisille aiheutettu vahinko",
-    "spotted": "Vihollisajoneuvot havaittu",
+    "spotted": "Vihollisvaunuja havaittu",
     "damaged-destroyed": "Vahingoitetut / tuhotut vihollisajoneuvot",
     "assistance": "Tämän pelaajan avustuksella aiheutettu vahinko",
     "capture-defence": "Perusvaltauksen valtauksen / puolustuksen pisteet",
@@ -83,28 +83,42 @@
     "battle-length": "Taistelun kesto",
     "alive-for": "Elossaoloaika",
     "destroyed-at": "Tuhoutumisaika",
-    "xp": "Kokemuspisteet",
+    "xp": "Kokemusta",
     "credits": "Krediitit",
     "experience": "Kokemusta",
     "bonds": "Arvopaperit",
-    "earned-for-battle": "Taistelusta ansaittu",
+    "earned-for-battle": "Ansaittu taistelusta",
     "reserves": "Henkilökohtaiset reservit",
     "missions": "Tehtävät ja tapahtumat",
     "orders": "Käskyt",
     "ally-fine": "Liittolaisten vahingoittamisesta määrätty sakko",
     "compensation": "Liittolaisilta saatu korvaus",
-    "subtotal": "Taistelun kokonaissumma",
     "repair": "Automaattinen täydennys: korjaus",
     "ammo": "Automaattinen täydennys: ammukset",
     "supplies": "Automaattinen täydennys: kulutustarvikkeet",
-    "total": "Kaikkiaan",
     "premium-vehicle": "Premium-ajoneuvon bonus",
     "free-xp": "Vapaata kokemusta",
     "crew-xp": "Miehistön kokemuspisteet",
-    "with-premium": "Nämä luvut ovat ne määrät, jotka tili itse asiassa vastaanotti, ja Premium-bonus on jo huomioitu."
+    "with-premium": "Tilillä oli premium käytössä.",
+    "with-bonuses": "Bonukset käytössä",
+    "credited": "Hyvitetty tilille",
+    "not-a-sum": "Jokainen rivi on pelin erikseen ilmoittama luku, eivätkä ne muodosta yhteissummaa."
   },
   "tab": {
     "teams": "Joukkueen tulos",
-    "report": "Yksityiskohtainen raportti"
+    "report": "Yksityiskohtainen raportti",
+    "replay": "Uusinta"
+  },
+  "destroyed-list": "Tuhotut: {names}",
+  "replay": {
+    "drop": "Valitse tämän taistelun .wotreplay-tiedosto",
+    "privacy": "Tiedosto luetaan selaimessasi, eikä se koskaan poistu koneeltasi. Ei mitään ladata eikä mitään tallenneta.",
+    "reading": "Uusintaa luetaan…",
+    "wrong-battle": "Tuo uusinta on erilaisesta taistelusta ({map}).",
+    "unfinished": "Tuo uusinta ei sisällä pakettistriimiä, koska taistelua ei pelattu loppuun.",
+    "no-positions": "Tuo uusinta ei sisällä sijainteja, joita tämä lukija ymmärtää.",
+    "no-bounds": "Tällä areenalla ei ole laajuutta luettelossa, joten sijainteja ei voi sijoittaa sen minikartalle.",
+    "play": "Pelaa",
+    "pause": "Keskeytä"
   }
 }

@@ -87,24 +87,38 @@
     "credits": "Crédits",
     "experience": "Expérience",
     "bonds": "Obligations",
-    "earned-for-battle": "Gagné lors de la bataille",
+    "earned-for-battle": "Gagné pour la bataille",
     "reserves": "Réserves personnelles",
     "missions": "Missions et événements",
     "orders": "Ordres",
     "ally-fine": "Amende pour dégâts infligés aux alliés",
     "compensation": "Compensation des alliés",
-    "subtotal": "Total pour la bataille",
     "repair": "Réparation automatique",
     "ammo": "Réapprovisionnement automatique des munitions",
     "supplies": "Réapprovisionnement automatique des consommables",
-    "total": "Total",
     "premium-vehicle": "Bonus du véhicule Premium",
     "free-xp": "Expérience libre",
     "crew-xp": "Expérience de l’équipage",
-    "with-premium": "Ces chiffres sont ceux réellement reçus par le compte, avec son bonus Premium déjà appliqué."
+    "with-premium": "Ce compte bénéficiait du statut premium.",
+    "with-bonuses": "Avec les bonus appliqués",
+    "credited": "Crédité sur le compte",
+    "not-a-sum": "Chaque ligne correspond à une valeur communiquée séparément par le jeu, elles ne s’additionnent pas."
   },
   "tab": {
     "teams": "Score de l’équipe",
-    "report": "Rapport détaillé"
+    "report": "Rapport détaillé",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Détruits {names}",
+  "replay": {
+    "drop": "Choisissez le fichier .wotreplay de cette bataille",
+    "privacy": "Le fichier est lu dans votre navigateur et ne quitte jamais votre machine. Rien n’est téléversé et rien n’est stocké.",
+    "reading": "Lecture du replay…",
+    "wrong-battle": "Ce replay correspond à une bataille différente ({map}).",
+    "unfinished": "Ce replay ne contient aucun stream de paquets, la bataille n’a pas été jouée jusqu’au bout.",
+    "no-positions": "Ce replay ne porte aucune position comprise par ce lecteur.",
+    "no-bounds": "Cette arène n’a pas d’étendue dans le catalogue, les positions ne peuvent donc pas être placées sur sa minicarte.",
+    "play": "Jouer",
+    "pause": "Pause"
   }
 }

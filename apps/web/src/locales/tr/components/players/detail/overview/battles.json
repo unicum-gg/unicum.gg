@@ -87,24 +87,38 @@
     "credits": "Krediler",
     "experience": "Deneyim",
     "bonds": "Tahviller",
-    "earned-for-battle": "Savaştan kazanılan",
+    "earned-for-battle": "Savaş için kazanılan",
     "reserves": "Kişisel rezervler",
     "missions": "Görevler ve etkinlikler",
     "orders": "Emirler",
     "ally-fine": "Müttefiklere hasar verme cezası",
     "compensation": "Müttefiklerden tazminat",
-    "subtotal": "Savaş toplamı",
     "repair": "Otomatik onarım",
     "ammo": "Mühimmatı otomatikman yeniden tedarik et",
     "supplies": "Sarf Malzemelerini otomatikman yeniden tedarik et",
-    "total": "Toplam",
     "premium-vehicle": "Premium araç bonusu",
     "free-xp": "Serbest Deneyim",
     "crew-xp": "Mürettebat deneyimi",
-    "with-premium": "Bu rakamlar, Premium bonusu zaten uygulanmış olarak hesabın aslında aldığı miktarlardır."
+    "with-premium": "Bu hesapta premium vardı.",
+    "with-bonuses": "Bonuslar uygulanmış hâliyle",
+    "credited": "Hesaba aktarıldı",
+    "not-a-sum": "Her satır, oyunun kendi başına bildirdiği bir sayıdır, bunlar birbirlerinin toplamını oluşturmaz."
   },
   "tab": {
     "teams": "Ekip skoru",
-    "report": "Detaylı Rapor"
+    "report": "Detaylı Rapor",
+    "replay": "Tekrar oynatma"
+  },
+  "destroyed-list": "İmha edilen {names}",
+  "replay": {
+    "drop": "Bu savaşın .wotreplay dosyasını seçin",
+    "privacy": "Dosya tarayıcınızda okunur ve makinenizden asla ayrılmaz. Hiçbir şey yüklenmez ve hiçbir şey depolanmaz.",
+    "reading": "Tekrar oynatma okunuyor…",
+    "wrong-battle": "Bu tekrar oynatma farklı bir savaşa ait ({map}).",
+    "unfinished": "Bu tekrar oynatmada paket akışı yok: savaş sonuna kadar oynanmadı.",
+    "no-positions": "Bu tekrar oynatma, bu okuyucunun anlayabildiği konumları taşımıyor.",
+    "no-bounds": "Bu arenanın katalogda bir kapsamı yok, bu nedenle konumlar mini haritaya yerleştirilemez.",
+    "play": "Oyna",
+    "pause": "Duraklat"
   }
 }

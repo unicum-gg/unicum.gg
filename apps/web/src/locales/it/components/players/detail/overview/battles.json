@@ -87,24 +87,38 @@
     "credits": "Crediti",
     "experience": "Esperienza",
     "bonds": "Titoli",
-    "earned-for-battle": "Guadagnati in battaglia",
+    "earned-for-battle": "Guadagnati per la battaglia",
     "reserves": "Riserve personali",
     "missions": "Missioni ed eventi",
     "orders": "Ordini",
     "ally-fine": "Multa per aver danneggiato gli alleati",
     "compensation": "Risarcimento dagli alleati",
-    "subtotal": "Totale della battaglia",
     "repair": "Riparazione automatica",
     "ammo": "Ricarica Automatica delle munizioni",
     "supplies": "Ricarica Automatica dei consumabili",
-    "total": "Totale",
     "premium-vehicle": "Bonus veicolo Premium",
     "free-xp": "Esperienza libera",
     "crew-xp": "Esperienza dell’equipaggio",
-    "with-premium": "Queste cifre sono quelle effettivamente ricevute dall’account, con il bonus Premium già applicato."
+    "with-premium": "Questo account aveva il premium.",
+    "with-bonuses": "Con i bonus applicati",
+    "credited": "Accreditati sull’account",
+    "not-a-sum": "Ogni linea è un valore che il gioco comunica autonomamente, i valori non si sommano tra loro."
   },
   "tab": {
     "teams": "Punteggio della Squadra",
-    "report": "Report dettagliato"
+    "report": "Report dettagliato",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Distrutti: {names}",
+  "replay": {
+    "drop": "Scegli il file .wotreplay di questa battaglia",
+    "privacy": "Il file viene letto nel browser e non abbandona mai il tuo dispositivo. Nulla viene caricato e nulla viene memorizzato.",
+    "reading": "Lettura del replay…",
+    "wrong-battle": "Quel replay è una battaglia diversa ({map}).",
+    "unfinished": "Quel replay non contiene alcuno stream di pacchetti, la battaglia non è stata giocata fino alla fine.",
+    "no-positions": "Quel replay non contiene posizioni che questo lettore comprende.",
+    "no-bounds": "Questa arena non ha un’estensione nel catalogo, quindi il lettore non può collocare le posizioni sulla sua minimappa.",
+    "play": "Gioca",
+    "pause": "Pausa"
   }
 }

@@ -87,24 +87,38 @@
     "credits": "Krediti",
     "experience": "Iskustvo",
     "bonds": "Obveznice",
-    "earned-for-battle": "Zarađeno u bici",
+    "earned-for-battle": "Osvojeno za bitku",
     "reserves": "Lične rezerve",
     "missions": "Misije i događaji",
     "orders": "Nalozi",
     "ally-fine": "Kazna za nanošenje štete saveznicima",
     "compensation": "Naknada od saveznika",
-    "subtotal": "Ukupno za bitku",
     "repair": "Automatska popravka",
     "ammo": "Automatska dopuna municije",
     "supplies": "Automatska dopuna sredstava",
-    "total": "Ukupno",
     "premium-vehicle": "Bonus Premium vozila",
     "free-xp": "Besplatno iskustvo",
     "crew-xp": "Iskustvo posade",
-    "with-premium": "Ove brojke predstavljaju ono što je račun zapravo primio, s već uračunatim Premium bonusom."
+    "with-premium": "Na ovom računu je bio premium.",
+    "with-bonuses": "Uz primijenjene bonuse",
+    "credited": "Pripisano računu",
+    "not-a-sum": "Svaka linija je vrijednost koju igra prijavljuje zasebno, ne zbrajaju se međusobno."
   },
   "tab": {
     "teams": "Skor tima",
-    "report": "Detaljan izvještaj"
+    "report": "Detaljan izvještaj",
+    "replay": "Snimak bitke"
+  },
+  "destroyed-list": "Uništeno: {names}",
+  "replay": {
+    "drop": "Odaberite .wotreplay datoteku ove bitke",
+    "privacy": "Datoteka se čita u vašem pregledniku i nikad ne napušta vaš uređaj. Ništa se ne otprema niti pohranjuje.",
+    "reading": "Čitanje snimka…",
+    "wrong-battle": "Ovaj snimak je iz drugačije bitke ({map}).",
+    "unfinished": "Ovaj snimak nema prijenos uživo paketa, bitka nije odigrano do kraja.",
+    "no-positions": "Ovaj snimak ne nosi nijednu poziciju koju ovaj čitač razumije.",
+    "no-bounds": "Ova arena nema granice u katalogu, pa se pozicije ne mogu smjestiti na njenu minimapu.",
+    "play": "Igraj",
+    "pause": "Pauziraj"
   }
 }

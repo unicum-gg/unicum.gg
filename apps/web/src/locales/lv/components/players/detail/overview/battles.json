@@ -73,7 +73,7 @@
     "blocked": "Ar bruņām bloķētie bojājumi",
     "potential": "Potenciāli saņemtie bojājumi",
     "team-damage": "Sabiedrotajiem nodarītie bojājumi",
-    "spotted": "Atklāti pretinieku transportlīdzekļi",
+    "spotted": "Atklātas bruņutehnikas",
     "damaged-destroyed": "Bojāti / iznīcināti pretinieku transportlīdzekļi",
     "assistance": "Bojājumi, kas nodarīti ar šī spēlētāja palīdzību",
     "capture-defence": "Bāzes ieņemšanas / aizsardzības punkti",
@@ -87,24 +87,38 @@
     "credits": "Kredīti",
     "experience": "Pieredze",
     "bonds": "Bonas",
-    "earned-for-battle": "Nopelnīts kaujā",
+    "earned-for-battle": "Nopelnīts par kauju",
     "reserves": "Personīgās rezerves",
     "missions": "Misijas un notikumi",
     "orders": "Rīkojumi",
     "ally-fine": "Sods par sabiedroto bojāšanu",
     "compensation": "Kompensācija no sabiedrotajiem",
-    "subtotal": "Kopā par kauju",
     "repair": "Automātiskais remonts",
     "ammo": "Automātiska papildināšana: munīcija",
     "supplies": "Automātiska papildināšana: aprīkojums",
-    "total": "Kopā",
     "premium-vehicle": "Premium transportlīdzekļa bonuss",
     "free-xp": "Brīvā pieredze",
     "crew-xp": "Apkalpes pieredze",
-    "with-premium": "Šie skaitļi parāda, ko konts patiesībā saņēma, Premium bonusam jau esot piemērotam."
+    "with-premium": "Šim kontam bija premium.",
+    "with-bonuses": "Ar piemērotajiem bonusiem",
+    "credited": "Ieskaitīts kontā",
+    "not-a-sum": "Katra rinda ir atsevišķs skaitlis, ko spēle ziņo pati par sevi, tie savā starpā nesummējas."
   },
   "tab": {
     "teams": "Komandas rezultāts",
-    "report": "Detalizēta atskaite"
+    "report": "Detalizēta atskaite",
+    "replay": "Atkārtojums"
+  },
+  "destroyed-list": "Iznīcināti {names}",
+  "replay": {
+    "drop": "Izvēlieties šīs kaujas .wotreplay failu",
+    "privacy": "Fails tiek lasīts jūsu pārlūkprogrammā un nekad nepamet jūsu datoru. Nekas netiek augšupielādēts un nekas netiek saglabāts.",
+    "reading": "Notiek atkārtojuma lasīšana…",
+    "wrong-battle": "Šis atkārtojums ir no atšķirīgas kaujas ({map}).",
+    "unfinished": "Šim atkārtojumam nav pakešu straumes, kauja netika spēlēta līdz beigām.",
+    "no-positions": "Šim atkārtojumam nav pozīciju, ko šis lasītājs saprot.",
+    "no-bounds": "Šai arēnai katalogā nav noteiktas robežas, tāpēc pozīcijas nevar izvietot tās minikartē.",
+    "play": "Spēlēt",
+    "pause": "Pauze"
   }
 }

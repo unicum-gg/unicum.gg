@@ -87,24 +87,38 @@
     "credits": "Credits",
     "experience": "Ervaring",
     "bonds": "Obligaties",
-    "earned-for-battle": "Verdiend voor gevecht",
+    "earned-for-battle": "Verdiend voor het gevecht",
     "reserves": "Persoonlijke reserves",
     "missions": "Missies en evenementen",
     "orders": "Orders",
     "ally-fine": "Boete voor schade aan bondgenoten",
     "compensation": "Compensatie van bondgenoten",
-    "subtotal": "Totaal voor het gevecht",
     "repair": "Automatische reparatie",
     "ammo": "Automatisch aanvullen van munitie",
     "supplies": "Automatisch aanvullen van verbruiksartikelen",
-    "total": "Totaal",
     "premium-vehicle": "Bonus voor Premium-voertuig",
     "free-xp": "Vrije ervaring",
     "crew-xp": "Bemanningservaring",
-    "with-premium": "Deze cijfers zijn wat het account eigenlijk heeft ontvangen, met de Premium-bonus al toegepast."
+    "with-premium": "Dit account had premium.",
+    "with-bonuses": "Met toegepaste bonussen",
+    "credited": "Bijgeschreven op het account",
+    "not-a-sum": "Elke regel is een cijfer dat het spel op zichzelf rapporteert, ze tellen niet bij elkaar op."
   },
   "tab": {
     "teams": "Teamscore",
-    "report": "Gedetailleerd rapport"
+    "report": "Gedetailleerd rapport",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Vernietigd: {names}",
+  "replay": {
+    "drop": "Kies het .wotreplay-bestand van dit gevecht",
+    "privacy": "Het bestand wordt in je browser gelezen en verlaat nooit je machine. Niets wordt geüpload en niets wordt opgeslagen.",
+    "reading": "Replay wordt gelezen…",
+    "wrong-battle": "Die replay betreft een verschillend gevecht ({map}).",
+    "unfinished": "Die replay bevat geen packetstream: het gevecht is niet tot het einde gespeeld.",
+    "no-positions": "Die replay bevat geen posities die deze lezer begrijpt.",
+    "no-bounds": "Deze arena heeft geen omvang in de catalogus, dus de posities kunnen niet op de minimap worden geplaatst.",
+    "play": "Spelen",
+    "pause": "Pauzeren"
   }
 }

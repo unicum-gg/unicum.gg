@@ -85,26 +85,40 @@
     "destroyed-at": "Tidspunkt for ødeleggelse",
     "xp": "Erfaring",
     "credits": "credits",
-    "experience": "erfaring",
+    "experience": "Erfaring",
     "bonds": "Sedler",
-    "earned-for-battle": "Opptjent i kamp",
+    "earned-for-battle": "Opptjent for kampen",
     "reserves": "Personlige reserver",
     "missions": "Oppdrag og hendelser",
     "orders": "Ordrer",
     "ally-fine": "Bot for å skade vårt lag",
     "compensation": "Kompensasjon fra vårt lag",
-    "subtotal": "Totalt for kampen",
     "repair": "Auto-reparasjon",
     "ammo": "Auto-forsyning av ammunisjon",
     "supplies": "Auto-forsyning av forbruksmateriell",
-    "total": "Totalt",
     "premium-vehicle": "Premium-kjøretøybonus",
     "free-xp": "Fri erfaring",
     "crew-xp": "Erfaring for besetning",
-    "with-premium": "Disse tallene viser hva kontoen faktisk mottok, med premiumbonusen allerede inkludert."
+    "with-premium": "Denne kontoen hadde premium.",
+    "with-bonuses": "Med bonuser lagt til",
+    "credited": "Godskrevet på konto",
+    "not-a-sum": "Hver linje er et tall spillet rapporterer for seg selv, de summeres ikke til hverandre."
   },
   "tab": {
     "teams": "Lagpoengsum",
-    "report": "Detaljert rapport"
+    "report": "Detaljert rapport",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Bekjempet {names}",
+  "replay": {
+    "drop": "Velg denne kampens .wotreplay-fil",
+    "privacy": "Filen leses i nettleseren din og forlater aldri maskinen din. Ingenting lastes opp, og ingenting lagres.",
+    "reading": "Leser replayen …",
+    "wrong-battle": "Dette replayet er fra en annen kamp ({map}).",
+    "unfinished": "Dette replayet har ingen pakkestrømming, kampen ble ikke spilt til slutten.",
+    "no-positions": "Dette replayet bærer ingen posisjoner som denne leseren forstår.",
+    "no-bounds": "Denne arenaen har ingen utstrekning i katalogen, så posisjonene kan ikke få plass på minikartet.",
+    "play": "Spill av",
+    "pause": "Pause"
   }
 }

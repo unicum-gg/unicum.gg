@@ -53,7 +53,7 @@
     "dealt": "Okozott",
     "gunnery": "Tüzérség",
     "taken": "Elszenvedett",
-    "earned": "Megszerzett"
+    "earned": "megszerzett"
   },
   "close": "Bezárás",
   "survived-the-battle": "Túlélte a csatát",
@@ -62,7 +62,7 @@
   "report": {
     "statistics": "Statisztika",
     "time": "Idő",
-    "earned": "Megszerezve",
+    "earned": "megszerzett",
     "shots": "Leadott lövések",
     "hits-pens": "Közvetlen találatok / átütések",
     "splash": "Területi sebzés",
@@ -87,24 +87,38 @@
     "credits": "Kreditek",
     "experience": "Tapasztalat",
     "bonds": "Kötvények",
-    "earned-for-battle": "A csatában megszerzett",
+    "earned-for-battle": "A csatáért megszerzett",
     "reserves": "Személyes tartalékok",
     "missions": "Küldetések és események",
     "orders": "Parancsok",
     "ally-fine": "Csapattársak sebzéséért járó büntetés",
     "compensation": "Csapattársaktól kapott kártérítés",
-    "subtotal": "Csata összesen",
     "repair": "Automata javítás",
     "ammo": "Automata feltöltés: lőszer",
     "supplies": "Automata feltöltés: fogyócikkek",
-    "total": "Összesen",
     "premium-vehicle": "Prémium jármű bónusza",
     "free-xp": "Szabad tapasztalat",
     "crew-xp": "Legénységi tapasztalat",
-    "with-premium": "Ezek az összegek azok, amelyeket a fiók valójában megkapott, a prémium bónusszal már megnövelve."
+    "with-premium": "Ezen a fiókon prémium volt.",
+    "with-bonuses": "Alkalmazott bónuszokkal",
+    "credited": "A fiókhoz jóváírva",
+    "not-a-sum": "Minden sor egy különálló, a játék által jelentett érték, ezek nem adódnak össze egyetlen értékké."
   },
   "tab": {
     "teams": "Csapat pontszáma",
-    "report": "Részletes jelentés"
+    "report": "Részletes jelentés",
+    "replay": "Visszajátszás"
+  },
+  "destroyed-list": "Megsemmisítve: {names}",
+  "replay": {
+    "drop": "Válaszd ki ennek a csatának a .wotreplay fájlját",
+    "privacy": "A fájlt a böngésződ olvassa be, és soha nem hagyja el a gépedet. Semmi nem kerül feltöltésre, és semmi nem lesz tárolva.",
+    "reading": "A visszajátszás olvasása…",
+    "wrong-battle": "Ez a visszajátszás egy különböző csatához tartozik ({map}).",
+    "unfinished": "Ebben a visszajátszásban nincs csomagközvetítés, a csatát nem játszották végig.",
+    "no-positions": "Ez a visszajátszás nem tartalmaz olyan pozíciókat, amelyeket ez az olvasó ért.",
+    "no-bounds": "Ennek az arénának nincs kiterjedése a katalógusban, ezért a pozíciókat nem lehet a minitérképre helyezni.",
+    "play": "Lejátszás",
+    "pause": "Szünet"
   }
 }

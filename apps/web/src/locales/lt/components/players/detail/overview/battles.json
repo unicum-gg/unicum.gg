@@ -93,18 +93,32 @@
     "orders": "Įsakymai",
     "ally-fine": "Bauda už saviškių žalojimą",
     "compensation": "Saviškių kompensacija",
-    "subtotal": "Viso už mūšį",
     "repair": "Automatinis remontas",
     "ammo": "Automatinis amunicijos papildymas",
     "supplies": "Automatinis ekipuotės papildymas",
-    "total": "Viso",
     "premium-vehicle": "Premium transporto priemonės premija",
     "free-xp": "Laisvoji patirtis",
     "crew-xp": "Įgulos patirtis",
-    "with-premium": "Šie skaičiai rodo, ką paskyra iš tikrųjų gavo, jau pritaikius Premium premiją."
+    "with-premium": "Ši paskyra turėjo premium statusą.",
+    "with-bonuses": "Su pritaikytais priedais",
+    "credited": "Įskaityta į paskyrą",
+    "not-a-sum": "Kiekviena eilutė yra atskiras žaidimo pateikiamas skaičius, šie skaičiai nesumuojami tarpusavyje."
   },
   "tab": {
     "teams": "Komandos rezultatas",
-    "report": "Detali ataskaita"
+    "report": "Detali ataskaita",
+    "replay": "Pakartojimas"
+  },
+  "destroyed-list": "Sunaikinta {names}",
+  "replay": {
+    "drop": "Pasirinkite šio mūšio .wotreplay failą",
+    "privacy": "Failas nuskaitomas jūsų naršyklėje ir niekada nepalieka jūsų įrenginio. Nieko neįkeliama ir niekas neišsaugoma.",
+    "reading": "Skaityti pakartojimą…",
+    "wrong-battle": "Tai skirtingo mūšio pakartojimas ({map}).",
+    "unfinished": "Šis pakartojimas neturi paketų srauto, mūšis nebuvo žaistas iki galo.",
+    "no-positions": "Šis pakartojimas neturi pozicijų, kurias supranta šis skaitytuvas.",
+    "no-bounds": "Ši arena kataloge neturi ribų, todėl minižemėlapis negali atvaizduoti pozicijų.",
+    "play": "Žaisti",
+    "pause": "Pristabdyti"
   }
 }

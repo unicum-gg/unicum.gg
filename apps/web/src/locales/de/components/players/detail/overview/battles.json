@@ -85,7 +85,7 @@
     "destroyed-at": "Zeitpunkt der Zerstörung",
     "xp": "Erfahrung",
     "credits": "Credits",
-    "experience": "erfahrung",
+    "experience": "Erfahrung",
     "bonds": "Anleihen",
     "earned-for-battle": "Im Gefecht verdient",
     "reserves": "Persönliche Reserven",
@@ -93,18 +93,32 @@
     "orders": "Befehle",
     "ally-fine": "Strafe für Schaden an Verbündeten",
     "compensation": "Entschädigung von Verbündeten",
-    "subtotal": "Gesamt für das Gefecht",
     "repair": "Automatische Reparatur",
     "ammo": "Nachladen der Munition",
     "supplies": "Nachladen des Verbrauchsmaterials",
-    "total": "Gesamt",
     "premium-vehicle": "Bonus für Premium-Fahrzeug",
     "free-xp": "Kostenlose erfahrung",
     "crew-xp": "Erfahrung der Besatzung",
-    "with-premium": "Diese Werte entsprechen dem, was das Konto tatsächlich erhalten hat, wobei der Premium-Bonus bereits angewendet wurde."
+    "with-premium": "Dieses Konto hatte Premium.",
+    "with-bonuses": "Mit angewendeten Boni",
+    "credited": "Dem Konto gutgeschrieben",
+    "not-a-sum": "Jede Zeile ist eine eigene vom Spiel gemeldete Zahl, sie ergeben zusammen nicht eine einzige Summe."
   },
   "tab": {
     "teams": "Team-Punktzahl",
-    "report": "Detaillierter Bericht"
+    "report": "Detaillierter Bericht",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Zerstört: {names}",
+  "replay": {
+    "drop": "Wähle die .wotreplay-Datei dieses Gefechts aus",
+    "privacy": "Die Datei wird in deinem Browser gelesen und verlässt dein Gerät nie. Nichts wird hochgeladen und nichts gespeichert.",
+    "reading": "Replay wird gelesen…",
+    "wrong-battle": "Dieses Replay gehört zu einem anderen Gefecht ({map}).",
+    "unfinished": "Dieses Replay enthält keinen Paket-Stream, das Gefecht wurde nicht bis zum Ende gespielt.",
+    "no-positions": "Dieses Replay enthält keine Positionen, die dieser Leser versteht.",
+    "no-bounds": "Für diese Arena ist im Katalog keine Ausdehnung hinterlegt, daher können die Positionen nicht auf ihrer Minikarte platziert werden.",
+    "play": "Spielen",
+    "pause": "Pause"
   }
 }

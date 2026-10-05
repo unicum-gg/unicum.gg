@@ -53,7 +53,7 @@
     "dealt": "Causado",
     "gunnery": "Artilharia",
     "taken": "Recebido",
-    "earned": "Conquistado"
+    "earned": "Obtida"
   },
   "close": "Fechar",
   "survived-the-battle": "Sobreviveu à batalha",
@@ -87,24 +87,38 @@
     "credits": "Créditos",
     "experience": "Experiência",
     "bonds": "Títulos",
-    "earned-for-battle": "Obtida pela batalha",
+    "earned-for-battle": "Obtida na batalha",
     "reserves": "Reservas pessoais",
     "missions": "Missões e eventos",
     "orders": "Ordens",
     "ally-fine": "Multa por causar dano aos aliados",
     "compensation": "Compensação dos aliados",
-    "subtotal": "Total da batalha",
     "repair": "Reparação automática",
     "ammo": "Auto-reabastecimento de munição",
     "supplies": "Auto-reabastecimento de consumíveis",
-    "total": "Total",
     "premium-vehicle": "Bónus de veículo Premium",
     "free-xp": "Experiência Livre",
     "crew-xp": "Experiência da tripulação",
-    "with-premium": "Estes valores são os que a conta recebeu na verdade, com o seu bónus Premium já aplicado."
+    "with-premium": "Esta conta tinha Premium.",
+    "with-bonuses": "Com bônus aplicados",
+    "credited": "Creditada na conta",
+    "not-a-sum": "Cada linha é um valor que o jogo informa por si só, e elas não resultam em um total."
   },
   "tab": {
     "teams": "Pontuação da equipa",
-    "report": "Relatório Detalhado"
+    "report": "Relatório Detalhado",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Destruídos: {names}",
+  "replay": {
+    "drop": "Escolha o arquivo .wotreplay desta batalha",
+    "privacy": "O arquivo é lido no seu navegador e nunca deixa o seu dispositivo. Nada é enviado nem armazenado.",
+    "reading": "Lendo o replay…",
+    "wrong-battle": "Esse replay é de uma batalha diferente ({map}).",
+    "unfinished": "Esse replay não carrega uma transmissão de pacotes: o jogo não foi jogado até o fim.",
+    "no-positions": "Esse replay não carrega posições que este leitor entende.",
+    "no-bounds": "Esta arena não tem extensão no catálogo, portanto o minimapa não pode exibir as posições.",
+    "play": "Jogar",
+    "pause": "Pausar"
   }
 }

@@ -93,18 +93,32 @@
     "orders": "Rozkazy",
     "ally-fine": "Kara za uszkodzenie sojuszników",
     "compensation": "Odszkodowanie od sojuszników",
-    "subtotal": "Suma za bitwę",
     "repair": "Automatyczna naprawa",
     "ammo": "Autouzupełnienie amunicji",
     "supplies": "Autouzupełnienie mat. eksploatacyjnych",
-    "total": "Suma",
     "premium-vehicle": "Premia za pojazd Premium",
     "free-xp": "Wolne doświadczenie",
     "crew-xp": "Doświadczenie załogi",
-    "with-premium": "Te wartości to te, które konto rzeczywiście otrzymało, z już uwzględnioną premią Premium."
+    "with-premium": "To konto miało premium.",
+    "with-bonuses": "Po zastosowaniu bonusów",
+    "credited": "Zaksięgowane na koncie",
+    "not-a-sum": "Każda linia to liczba raportowana przez grę osobno, nie sumują się."
   },
   "tab": {
     "teams": "Wynik drużyny",
-    "report": "Raport szczegółowy"
+    "report": "Raport szczegółowy",
+    "replay": "Powtórka"
+  },
+  "destroyed-list": "Zniszczony: {names}",
+  "replay": {
+    "drop": "Wybierz plik .wotreplay tej bitwy",
+    "privacy": "Plik jest odczytywany w przeglądarce i nigdy nie opuszcza twojego urządzenia. Nic nie jest przesyłane ani przechowywane.",
+    "reading": "Odczytywanie powtórki…",
+    "wrong-battle": "Ta powtórka dotyczy różnej bitwy ({map}).",
+    "unfinished": "Ta powtórka nie przenosi strumienia pakietów, bitwa nie została rozegrana do końca.",
+    "no-positions": "Ta powtórka nie przenosi żadnych pozycji rozpoznawanych przez ten czytnik.",
+    "no-bounds": "Ta arena nie ma określonego zasięgu w katalogu, więc nie można znaleźć dla pozycji miejsca na jej minimapie.",
+    "play": "Graj",
+    "pause": "Pauza"
   }
 }

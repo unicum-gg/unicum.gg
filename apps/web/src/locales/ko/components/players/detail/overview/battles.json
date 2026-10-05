@@ -57,7 +57,7 @@
   },
   "close": "닫기",
   "survived-the-battle": "전투에서 생존",
-  "destroyed": "격파됨",
+  "destroyed": "격파",
   "destroyed-by": "{nickname}에게 격파됨",
   "report": {
     "statistics": "전적",
@@ -83,9 +83,9 @@
     "battle-length": "전투 지속 시간",
     "alive-for": "생존 시간",
     "destroyed-at": "격파 시간",
-    "xp": "경험치",
+    "xp": "일반 경험치",
     "credits": "크레딧",
-    "experience": "경험치",
+    "experience": "일반 경험치",
     "bonds": "전쟁 채권",
     "earned-for-battle": "전투에서 획득함",
     "reserves": "개인 예비 물자",
@@ -93,18 +93,32 @@
     "orders": "명령",
     "ally-fine": "아군 피해에 대한 벌금",
     "compensation": "아군에게 받은 보상",
-    "subtotal": "전투 전체",
     "repair": "자동 수리",
     "ammo": "탄약 자동 재보급",
     "supplies": "소모품 자동 재보급",
-    "total": "전체",
     "premium-vehicle": "프리미엄 차량 보너스",
     "free-xp": "자유 경험치",
     "crew-xp": "승무원 경험치",
-    "with-premium": "이 수치는 프리미엄 보너스가 이미 적용된 계정이 실제로 받은 수치입니다."
+    "with-premium": "이 계정은 프리미엄 계정이었습니다.",
+    "with-bonuses": "보너스 적용",
+    "credited": "계정에 지급됨",
+    "not-a-sum": "각 행은 게임이 자체적으로 보고한 별도의 수치이며, 서로 합산되지 않습니다."
   },
   "tab": {
     "teams": "팀 점수",
-    "report": "세부 전투 기록"
+    "report": "세부 전투 기록",
+    "replay": "리플레이"
+  },
+  "destroyed-list": "격파한 {names}",
+  "replay": {
+    "drop": "해당 전투의 .wotreplay 파일 선택",
+    "privacy": "파일은 브라우저에서 읽기만 하며 사용자의 기기를 절대 벗어나지 않습니다. 업로드되거나 저장되는 내용은 없습니다.",
+    "reading": "리플레이 읽는 중…",
+    "wrong-battle": "해당 리플레이는 다른 전투입니다 ({map}).",
+    "unfinished": "해당 리플레이에는 패킷 방송이 없습니다. 전투가 끝까지 플레이되지 않았습니다.",
+    "no-positions": "해당 리플레이에는 이 리더가 이해할 수 있는 위치 정보가 없습니다.",
+    "no-bounds": "이 전투 지역은 카탈로그에 범위 정보가 없어 위치를 미니맵에 배치할 수 없습니다.",
+    "play": "플레이",
+    "pause": "일시정지"
   }
 }

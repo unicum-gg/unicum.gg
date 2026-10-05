@@ -87,24 +87,38 @@
     "credits": "Créditos",
     "experience": "Experiencia",
     "bonds": "Bonos",
-    "earned-for-battle": "Obtenido en batalla",
+    "earned-for-battle": "Obtenido para la batalla",
     "reserves": "Reservas personales",
     "missions": "Misiones y eventos",
     "orders": "Órdenes",
     "ally-fine": "Multa por dañar a aliados",
     "compensation": "Compensación de aliados",
-    "subtotal": "Total de la batalla",
     "repair": "Reparación automática",
     "ammo": "Autoabastecer munición",
     "supplies": "Autoabastecer consumibles",
-    "total": "Total",
     "premium-vehicle": "Bonificación por vehículo Premium",
     "free-xp": "Experiencia libre",
     "crew-xp": "Experiencia de la tripulación",
-    "with-premium": "Estas cifras son las que la cuenta recibió realmente, con su bonificación Premium ya aplicada."
+    "with-premium": "Esta cuenta tenía premium.",
+    "with-bonuses": "Con bonificaciones aplicadas",
+    "credited": "Abonado a la cuenta",
+    "not-a-sum": "Cada línea es una cifra que el juego comunica por derecho propio, no se suman entre sí."
   },
   "tab": {
     "teams": "Puntuación del equipo",
-    "report": "Informe detallado"
+    "report": "Informe detallado",
+    "replay": "Repetición"
+  },
+  "destroyed-list": "Destruidos: {names}",
+  "replay": {
+    "drop": "Elige el archivo .wotreplay de esta batalla",
+    "privacy": "El archivo se lee en tu navegador y nunca sale de tu equipo. Nada se sube ni se almacena.",
+    "reading": "Leyendo la repetición…",
+    "wrong-battle": "Esa repetición corresponde a una de las batallas diferentes ({map}).",
+    "unfinished": "Esa repetición no carrys ningún flujo de paquetes, la batalla no se jugó hasta el final.",
+    "no-positions": "Esa repetición no contiene posiciones que este lector entienda.",
+    "no-bounds": "Esta arena no tiene extensión en el catálogo, por lo que no se puede colocar las posiciones en su minimapa.",
+    "play": "Jugar",
+    "pause": "Pausa"
   }
 }

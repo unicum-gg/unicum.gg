@@ -87,24 +87,38 @@
     "credits": "Krediter",
     "experience": "Erfarenhet",
     "bonds": "Obligationer",
-    "earned-for-battle": "Intjänat för strid",
+    "earned-for-battle": "Intjänat för striden",
     "reserves": "Personliga reserver",
     "missions": "Uppdrag och evenemang",
     "orders": "Order",
     "ally-fine": "Böter för att skada allierade",
     "compensation": "Ersättning från allierade",
-    "subtotal": "Totalt för striden",
     "repair": "Reparation utförs automatiskt",
     "ammo": "Ammunition fylls på automatiskt",
     "supplies": "Förnödenheter fylls på automatiskt",
-    "total": "Totalt",
     "premium-vehicle": "Premium-fordonsbonus",
     "free-xp": "Gratis erfarenhet",
     "crew-xp": "Besättningserfarenhet",
-    "with-premium": "Dessa siffror är vad kontot faktiskt mottog, med dess Premium-bonus redan tillämpad."
+    "with-premium": "Det här kontot hade premium.",
+    "with-bonuses": "Med bonusar tillämpade",
+    "credited": "Krediterat till kontot",
+    "not-a-sum": "Varje rad är en siffra som spelet rapporterar för sig, de adderas inte till varandra."
   },
   "tab": {
     "teams": "Lagpoäng",
-    "report": "Detaljerad rapport"
+    "report": "Detaljerad rapport",
+    "replay": "Återuppspelning"
+  },
+  "destroyed-list": "Förstörda {names}",
+  "replay": {
+    "drop": "Välj .wotreplay-filen för den här striden",
+    "privacy": "Filen läses i din webbläsare och lämnar aldrig din maskin. Inget laddas upp och inget lagras.",
+    "reading": "Läser återuppspelningen…",
+    "wrong-battle": "Den återuppspelningen gäller en annan strid på {map}.",
+    "unfinished": "Den återuppspelningen innehåller ingen paketström, striden spelades inte till slutet.",
+    "no-positions": "Den återuppspelningen innehåller inga positioner som den här läsaren förstår.",
+    "no-bounds": "Den här arenan har ingen utsträckning i katalogen, så positionerna kan inte få plats på dess minikarta.",
+    "play": "Spela",
+    "pause": "Pausa"
   }
 }

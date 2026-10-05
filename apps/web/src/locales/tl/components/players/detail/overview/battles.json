@@ -83,28 +83,42 @@
     "battle-length": "Tagal ng labanan",
     "alive-for": "Tagal na nanatiling buhay",
     "destroyed-at": "Oras ng pagkawasak",
-    "xp": "XP",
+    "xp": "Karanasan",
     "credits": "credits",
     "experience": "Karanasan",
     "bonds": "Bonds",
-    "earned-for-battle": "Kinita sa labanan",
+    "earned-for-battle": "Nakuha para sa labanan",
     "reserves": "Mga personal na reserba",
     "missions": "Mga misyon at mga kaganapan",
     "orders": "Mga utos",
     "ally-fine": "Multa sa pagdulot ng pinsala sa mga kaalyado",
     "compensation": "Kabayaran mula sa mga kaalyado",
-    "subtotal": "Kabuuan para sa labanan",
     "repair": "Awtomatikong pagkukumpuni",
     "ammo": "Awtomatikong pagdaragdag ng Ammunisyon",
     "supplies": "Awtomatikong pagdaragdag ng Mga Consumable",
-    "total": "Kabuuan",
     "premium-vehicle": "Bonus sa Premium na sasakyan",
     "free-xp": "Libreng karanasan",
     "crew-xp": "Karanasan ng crew",
-    "with-premium": "Ang mga bilang na ito ang talagang natanggap ng account, na nailapat na ang Premium bonus nito."
+    "with-premium": "May premium ang account na ito.",
+    "with-bonuses": "May mga bonus na inilapat",
+    "credited": "Ipinagkredito sa account",
+    "not-a-sum": "Ang bawat linya ay numerong hiwalay na iniuulat ng laro, hindi nagdaragdag ang mga ito sa isa’t isa."
   },
   "tab": {
     "teams": "Score ng koponan",
-    "report": "Detalyadong ulat"
+    "report": "Detalyadong ulat",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Mga nawasak na {names}",
+  "replay": {
+    "drop": "Piliin ang .wotreplay file ng labanan na ito",
+    "privacy": "Binabasa ang file sa iyong browser at hindi kailanman umaalis sa iyong machine. Wala itong ina-upload at walang iniimbak.",
+    "reading": "Binabasa ang replay…",
+    "wrong-battle": "Ang replay na iyon ay para sa ibang labanan ({map}).",
+    "unfinished": "Walang packet stream ang replay na iyon. Hindi nilaro ang labanan hanggang sa huli.",
+    "no-positions": "Walang posisyong mga carry ang replay na iyon na nauunawaan ng reader na ito.",
+    "no-bounds": "Walang extent ang arena na ito sa katalogo, kaya hindi maaari na mailagay ang mga posisyon sa minimapa nito.",
+    "play": "Maglaro",
+    "pause": "I-pause"
   }
 }

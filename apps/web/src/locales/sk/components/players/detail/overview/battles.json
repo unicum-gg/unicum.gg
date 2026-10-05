@@ -93,18 +93,32 @@
     "orders": "Rozkazy",
     "ally-fine": "Pokuta za poškodenie spojencov",
     "compensation": "Kompenzácia od spojencov",
-    "subtotal": "Celkom za bitku",
     "repair": "Automatická oprava",
     "ammo": "Automatické doplnenie munície",
     "supplies": "Automatické doplnenie spotrebného materiálu",
-    "total": "Celkom",
     "premium-vehicle": "Bonus prémiového vozidla",
     "free-xp": "Bezplatné skúsenosti",
     "crew-xp": "Skúsenosti posádky",
-    "with-premium": "Tieto údaje predstavujú to, čo účet pravzaprav prijal, pričom jeho prémiový bonus už bol uplatnený."
+    "with-premium": "Tento račun mal premium.",
+    "with-bonuses": "Po uplatnení bonusov",
+    "credited": "Pripísané na račun",
+    "not-a-sum": "Každý riadok je údaj, ktorý hra uvádza samostatne, preto sa navzájom nesčítavajú."
   },
   "tab": {
     "teams": "Skóre tímu",
-    "report": "Podrobná správa"
+    "report": "Podrobná správa",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Zničené {names}",
+  "replay": {
+    "drop": "Vyberte súbor .wotreplay tejto bitky",
+    "privacy": "Súbor sa číta vo vašom prehliadači a nikdy neopustí vaše zariadenie. Nič sa nenahráva ani neukladá.",
+    "reading": "Číta sa replay…",
+    "wrong-battle": "Tento replay je z drugačnej bitky ({map}).",
+    "unfinished": "Tento replay nemá prenos paketov, bitka nebola odohrané do konca.",
+    "no-positions": "Tento replay nemá žiadne pozície, ktorým tento čítač rozumie.",
+    "no-bounds": "Táto aréna nemá v katalógu rozsah, takže nie je možné umiestniť pozície na jej minizemljevid.",
+    "play": "Igraj",
+    "pause": "Pozastaviť"
   }
 }

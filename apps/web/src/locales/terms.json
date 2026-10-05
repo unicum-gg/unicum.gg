@@ -745,7 +745,8 @@
     "hits": "الإصابات",
     "received": "المتلقّى",
     "single": "فردي",
-    "total": "الإجمالي"
+    "total": "الإجمالي",
+    "stream": "البث المباشر"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1493,7 +1494,8 @@
     "hits": "траплянні",
     "received": "атрыманы",
     "single": "адзінкавы",
-    "total": "усяго"
+    "total": "усяго",
+    "stream": "стрым"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2449,7 +2451,8 @@
     "hits": "попадения",
     "received": "получени",
     "single": "единичен",
-    "total": "общо"
+    "total": "общо",
+    "stream": "стрийм"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3204,7 +3207,8 @@
     "hits": "pogoci",
     "received": "primljeno",
     "single": "pojedinačno",
-    "total": "ukupno"
+    "total": "ukupno",
+    "stream": "prijenos uživo"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4171,7 +4175,8 @@
     "hits": "zásahy",
     "received": "obdržené",
     "single": "jednotlivý",
-    "total": "celkem"
+    "total": "celkem",
+    "stream": "stream"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5144,7 +5149,8 @@
     "hits": "træffere",
     "received": "modtaget",
     "single": "enkelt",
-    "total": "samlet"
+    "total": "samlet",
+    "stream": "stream"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6110,7 +6116,8 @@
     "hits": "treffer",
     "received": "erhalten",
     "single": "einzeln",
-    "total": "gesamt"
+    "total": "gesamt",
+    "stream": "stream"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7082,7 +7089,8 @@
     "hits": "χτυπήματα",
     "received": "ληφθείσα",
     "single": "μεμονωμένο",
-    "total": "σύνολο"
+    "total": "σύνολο",
+    "stream": "ροή"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8034,7 +8042,8 @@
     "hits": "impactos",
     "received": "recibido",
     "single": "individual",
-    "total": "total"
+    "total": "total",
+    "stream": "directo"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9011,7 +9020,8 @@
     "hits": "osumat",
     "received": "vastaanotettu",
     "single": "yksittäinen",
-    "total": "yhteensä"
+    "total": "yhteensä",
+    "stream": "striimi"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9967,7 +9977,8 @@
     "hits": "touches",
     "received": "reçus",
     "single": "seul",
-    "total": "total"
+    "total": "total",
+    "stream": "stream"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -10716,7 +10727,8 @@
     "hits": "प्रहार",
     "received": "प्राप्त",
     "single": "एकल",
-    "total": "कुल"
+    "total": "कुल",
+    "stream": "स्ट्रीम"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11686,7 +11698,8 @@
     "hits": "pogoci",
     "received": "primljeno",
     "single": "pojedinačno",
-    "total": "ukupno"
+    "total": "ukupno",
+    "stream": "prijenos uživo"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12658,7 +12671,8 @@
     "hits": "találatok",
     "received": "kapott",
     "single": "egyszeri",
-    "total": "összes"
+    "total": "összes",
+    "stream": "közvetítés"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13626,7 +13640,8 @@
     "hits": "colpi",
     "received": "ricevuti",
     "single": "singolo",
-    "total": "totale"
+    "total": "totale",
+    "stream": "stream"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14601,7 +14616,8 @@
     "hits": "命中",
     "received": "受けた",
     "single": "1戦",
-    "total": "合計"
+    "total": "合計",
+    "stream": "配信"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15353,7 +15369,8 @@
     "hits": "тигізулер",
     "received": "алынған",
     "single": "бір",
-    "total": "жалпы"
+    "total": "жалпы",
+    "stream": "стрим"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16333,7 +16350,8 @@
     "hits": "명중",
     "received": "받은",
     "single": "단일",
-    "total": "합계"
+    "total": "합계",
+    "stream": "방송"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17308,7 +17326,8 @@
     "hits": "pataikymai",
     "received": "gauta",
     "single": "vienas",
-    "total": "iš viso"
+    "total": "iš viso",
+    "stream": "srautas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18269,7 +18288,8 @@
     "hits": "trāpījumi",
     "received": "saņemts",
     "single": "atsevišķs",
-    "total": "kopā"
+    "total": "kopā",
+    "stream": "straume"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19246,7 +19266,8 @@
     "hits": "treffers",
     "received": "ontvangen",
     "single": "enkel",
-    "total": "totaal"
+    "total": "totaal",
+    "stream": "stream"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20214,7 +20235,8 @@
     "hits": "treff",
     "received": "mottatt",
     "single": "enkelt",
-    "total": "totalt"
+    "total": "totalt",
+    "stream": "strømming"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21179,7 +21201,8 @@
     "hits": "trafienia",
     "received": "otrzymane",
     "single": "pojedynczy",
-    "total": "łącznie"
+    "total": "łącznie",
+    "stream": "stream"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22137,7 +22160,8 @@
     "hits": "acertos",
     "received": "recebido",
     "single": "único",
-    "total": "total"
+    "total": "total",
+    "stream": "transmissão"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23095,7 +23119,8 @@
     "hits": "lovituri",
     "received": "primite",
     "single": "singură",
-    "total": "total"
+    "total": "total",
+    "stream": "stream"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24040,7 +24065,8 @@
     "hits": "попадания",
     "received": "полученный",
     "single": "одиночный",
-    "total": "всего"
+    "total": "всего",
+    "stream": "стрим"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -24793,7 +24819,8 @@
     "hits": "zásahy",
     "received": "prijaté",
     "single": "jednotlivý",
-    "total": "celkom"
+    "total": "celkom",
+    "stream": "prenos"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -25765,7 +25792,8 @@
     "hits": "погоци",
     "received": "примљено",
     "single": "један",
-    "total": "укупно"
+    "total": "укупно",
+    "stream": "strim"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -26742,7 +26770,8 @@
     "hits": "träffar",
     "received": "mottagen",
     "single": "enskild",
-    "total": "totalt"
+    "total": "totalt",
+    "stream": "stream"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -27715,7 +27744,8 @@
     "hits": "ยิงโดน",
     "received": "ที่ได้รับ",
     "single": "หนึ่งครั้ง",
-    "total": "รวม"
+    "total": "รวม",
+    "stream": "สตรีม"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -28469,7 +28499,8 @@
     "hits": "mga tama",
     "received": "natanggap",
     "single": "iisa",
-    "total": "kabuuan"
+    "total": "kabuuan",
+    "stream": "stream"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -29438,7 +29469,8 @@
     "hits": "isabetler",
     "received": "alınan",
     "single": "tek",
-    "total": "toplam"
+    "total": "toplam",
+    "stream": "akış"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -30400,7 +30432,8 @@
     "hits": "влучання",
     "received": "отримано",
     "single": "одиночний",
-    "total": "загальний"
+    "total": "загальний",
+    "stream": "стрім"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -31351,7 +31384,8 @@
     "hits": "lần bắn trúng",
     "received": "nhận được",
     "single": "đơn lẻ",
-    "total": "tổng"
+    "total": "tổng",
+    "stream": "phát trực tiếp"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -32324,6 +32358,7 @@
     "hits": "命中",
     "received": "承受",
     "single": "单场",
-    "total": "总计"
+    "total": "总计",
+    "stream": "直播"
   }
 }

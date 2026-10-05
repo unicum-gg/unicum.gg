@@ -93,18 +93,32 @@
     "orders": "指令",
     "ally-fine": "损伤我方的罚款",
     "compensation": "我方赔偿",
-    "subtotal": "本场战斗总计",
     "repair": "自动修理",
     "ammo": "自动装填弹药",
     "supplies": "自动装填给养",
-    "total": "总计",
     "premium-vehicle": "高级账号车辆加成",
     "free-xp": "全局经验",
     "crew-xp": "乘员经验",
-    "with-premium": "这些数据是账号实际上获得的数据，已经应用高级账号加成。"
+    "with-premium": "此账号曾启用高级账号。",
+    "with-bonuses": "已应用加成",
+    "credited": "已计入账号",
+    "not-a-sum": "每一行都是游戏单独报告的数值，它们不会彼此相加得到总和。"
   },
   "tab": {
     "teams": "队伍分数",
-    "report": "详细战绩"
+    "report": "详细战绩",
+    "replay": "回放"
+  },
+  "destroyed-list": "击毁 {names}",
+  "replay": {
+    "drop": "选择此场战斗的 .wotreplay 文件",
+    "privacy": "文件会在您的浏览器中读取，绝不会离开您的设备。无内容会被上传或存储。",
+    "reading": "正在阅读回放…",
+    "wrong-battle": "该回放对应不同的战斗（{map}）。",
+    "unfinished": "该回放不携带数据包流，战斗未进行到结束。",
+    "no-positions": "该回放不携带此阅读器能够理解的位置信息。",
+    "no-bounds": "此战场在目录中没有范围，因此无法将这些位置放置在其小地图上。",
+    "play": "播放",
+    "pause": "暂停"
   }
 }

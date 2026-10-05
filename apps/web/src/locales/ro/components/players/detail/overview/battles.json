@@ -93,18 +93,32 @@
     "orders": "Ordine",
     "ally-fine": "Penalizare pentru daune provocate aliaților",
     "compensation": "Compensație de la aliați",
-    "subtotal": "Total pentru bătălie",
     "repair": "Reparație automată",
     "ammo": "Realimentare automată muniție",
     "supplies": "Realimentare automată consumabile",
-    "total": "Total",
     "premium-vehicle": "Bonus pentru vehicul Premium",
     "free-xp": "Experienţă gratuită",
     "crew-xp": "Experienţă echipaj",
-    "with-premium": "Aceste valori sunt cele primite de fapt de cont, cu bonusul Premium deja aplicat."
+    "with-premium": "Acest cont a avut premium.",
+    "with-bonuses": "Cu bonusurile aplicate",
+    "credited": "Acreditate în cont",
+    "not-a-sum": "Fiecare linie este o cifră raportată de joc în mod individual, nu se adună una la alta."
   },
   "tab": {
     "teams": "Scorul echipei",
-    "report": "Raport detaliat"
+    "report": "Raport detaliat",
+    "replay": "Reluare"
+  },
+  "destroyed-list": "Distruse: {names}",
+  "replay": {
+    "drop": "Alege fișierul .wotreplay al acestei bătălii",
+    "privacy": "Fișierul este citit în browser și nu părăsește niciodată dispozitivul. Nimic nu este încărcat și nimic nu este stocat.",
+    "reading": "Se citește reluarea…",
+    "wrong-battle": "Acea reluare este a unei alte bătălii ({map}).",
+    "unfinished": "Acea reluare nu are un stream de pachete, bătălia nu a fost jucată până la capăt.",
+    "no-positions": "Acea reluare nu poartă poziții pe care acest cititor le înțelege.",
+    "no-bounds": "Această arenă nu are dimensiuni în catalog, astfel că pozițiile nu pot fi plasate pe mini-hartă.",
+    "play": "Joacă",
+    "pause": "Pauză"
   }
 }

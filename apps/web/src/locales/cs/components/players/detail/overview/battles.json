@@ -93,18 +93,32 @@
     "orders": "Rozkazy",
     "ally-fine": "Pokuta za poškození spojenců",
     "compensation": "Kompenzace od spojenců",
-    "subtotal": "Celkem za bitvu",
     "repair": "Automatická oprava",
     "ammo": "Doplnit munici",
     "supplies": "Automatické doplnění spotřebních doplňků",
-    "total": "Celkem",
     "premium-vehicle": "Bonus prémiového vozidla",
     "free-xp": "Volné zkušenosti",
     "crew-xp": "Zkušenosti posádky",
-    "with-premium": "Tyto hodnoty jsou tím, co účet ve skutečnosti obdržel, se započteným prémiovým bonusem."
+    "with-premium": "Na tomto účtu byl aktivní prémiový účet.",
+    "with-bonuses": "Po uplatnění bonusů",
+    "credited": "Připsáno na účet",
+    "not-a-sum": "Každý řádek je samostatná hodnota, kterou hra uvádí, jednotlivé řádky se nesčítají."
   },
   "tab": {
     "teams": "Skóre týmu",
-    "report": "Podrobná zpráva"
+    "report": "Podrobná zpráva",
+    "replay": "Záznam"
+  },
+  "destroyed-list": "Zničeno {names}",
+  "replay": {
+    "drop": "Vyberte soubor .wotreplay z této bitvy",
+    "privacy": "Soubor se přečte ve vašem prohlížeči a nikdy neopustí vaše zařízení. Nic se nenahrává a nic se neukládá.",
+    "reading": "Probíhá čtení záznamu…",
+    "wrong-battle": "Tento záznam se týká odlišné bitvy ({map}).",
+    "unfinished": "Tento záznam nemá paketový stream, bitva nebyla odehrána do konce.",
+    "no-positions": "Tento záznam nepřenáší žádné pozice, kterým tato čtečka rozumí.",
+    "no-bounds": "Tato aréna nemá v katalogu uvedený rozsah, takže pozice nelze umístit na její minimapu.",
+    "play": "Přehrát",
+    "pause": "Pozastavit"
   }
 }

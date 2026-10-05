@@ -93,18 +93,32 @@
     "orders": "Mệnh lệnh",
     "ally-fine": "Tiền phạt do gây sát thương cho Phe ta",
     "compensation": "Tiền bồi thường từ Phe ta",
-    "subtotal": "Tổng trong trận đấu",
     "repair": "Sửa chữa tự động",
     "ammo": "Tiếp tế tự động đạn dược",
     "supplies": "Tiếp tế tự động vật phẩm",
-    "total": "Tổng",
     "premium-vehicle": "Phần thưởng xe tăng Premium",
     "free-xp": "Kinh nghiệm Miễn phí",
     "crew-xp": "Kinh nghiệm kíp lái",
-    "with-premium": "Các số liệu này là những gì tài khoản thực sự nhận được, với phần thưởng Premium đã được áp dụng."
+    "with-premium": "Tài khoản này có premium.",
+    "with-bonuses": "Đã áp dụng tiền thưởng",
+    "credited": "Đã cộng vào tài khoản",
+    "not-a-sum": "Mỗi dòng là một số liệu mà trò chơi báo cáo riêng, chúng không cộng lại thành một tổng."
   },
   "tab": {
     "teams": "Điểm số Đội",
-    "report": "Báo cáo chi tiết"
+    "report": "Báo cáo chi tiết",
+    "replay": "Bản phát lại"
+  },
+  "destroyed-list": "Đã phá hủy {names}",
+  "replay": {
+    "drop": "Chọn tệp .wotreplay của trận đấu này",
+    "privacy": "Tệp được đọc trong trình duyệt của bạn và không bao giờ rời khỏi máy của bạn. Không có gì được tải lên và không có gì được lưu trữ.",
+    "reading": "Đang đọc bản phát lại…",
+    "wrong-battle": "Bản phát lại đó là của một trận đấu khác ({map}).",
+    "unfinished": "Bản phát lại đó không có luồng phát trực tiếp của các gói tin: trận đấu chưa được chơi đến hết.",
+    "no-positions": "Bản phát lại đó không có vị trí nào mà trình đọc này hiểu được.",
+    "no-bounds": "Đấu trường này không có phạm vi trong danh mục, vì vậy không thể xác định vị trí trên bản đồ nhỏ của nó.",
+    "play": "Chơi",
+    "pause": "Tạm dừng"
   }
 }

@@ -62,7 +62,7 @@
   "report": {
     "statistics": "Statistika",
     "time": "Vreme",
-    "earned": "Zarađeno",
+    "earned": "Зарађено",
     "shots": "Ispaljeni hici",
     "hits-pens": "Direktni pogoci / probijanja",
     "splash": "Eksplozivna šteta",
@@ -87,24 +87,38 @@
     "credits": "Kredita",
     "experience": "Iskustvo",
     "bonds": "Bonovi",
-    "earned-for-battle": "Zarađeno u bitci",
+    "earned-for-battle": "Зарађено за bitka",
     "reserves": "Lične rezerve",
     "missions": "Misije i događaji",
     "orders": "Nalozi",
     "ally-fine": "Kazna za nanošenje štete saveznicima",
     "compensation": "Nadoknada od saveznika",
-    "subtotal": "Ukupno za bitku",
     "repair": "Auto-popravka",
     "ammo": "Auto-snabdevanje municijom",
     "supplies": "Auto-snabdevanje potrošnom robom",
-    "total": "Ukupno",
     "premium-vehicle": "Premijum bonus vozila",
     "free-xp": "Slobodno iskustvo",
     "crew-xp": "Iskustvo posade",
-    "with-premium": "Ove brojke predstavljaju ono što je nalog zapravo primio, uz već primenjen premijum bonus."
+    "with-premium": "Ovaj nalog je imao premium.",
+    "with-bonuses": "Sa primenjenim bonusima",
+    "credited": "Pripisano nalogu",
+    "not-a-sum": "Svaka линија je број koji игра prijavljuje zasebno, ne sabiraju se međusobno."
   },
   "tab": {
     "teams": "Rezultat tima",
-    "report": "Detaljan izveštaj"
+    "report": "Detaljan izveštaj",
+    "replay": "Snimak bitke"
+  },
+  "destroyed-list": "Uništeno {names}",
+  "replay": {
+    "drop": "Izaberite .wotreplay datoteku za ovu bitka",
+    "privacy": "Datoteka se прочитано u vašem pregledaču i никад ne napušta vaš računar. Ništa se ne otprema i ništa se ne čuva.",
+    "reading": "Čitanje snimka…",
+    "wrong-battle": "Ovaj snimak je различит bitka ({map}).",
+    "unfinished": "Ovaj snimak nema paketni strim, bitka nije одиграно do kraja.",
+    "no-positions": "Ovaj snimak ne nosi nijedno mesto koje ovaj čitač razume.",
+    "no-bounds": "Ova arena nema granice u katalogu, pa mesta ne mogu da se postave na mini-mapa.",
+    "play": "Igraj",
+    "pause": "Pauziraj"
   }
 }
