@@ -111,6 +111,23 @@ export const env = createEnv({
     // displayed with. Web-only. Optional so the worker/bot boot without it and
     // the conversion degrades to showing euros rather than to a stale rate.
     UNIRATE_API_KEY: z.string().optional(),
+    // Object storage for the `.wotreplay` archive: a Garage bucket on our own
+    // host today, any S3 provider the day it outgrows the disk. Web + worker.
+    // All optional and read as a set: unset means the upload endpoint refuses
+    // politely and the mod stops offering files, which is what a local
+    // `pnpm dev` without a bucket should do. A half-filled set is a
+    // misconfiguration and is treated as unset rather than as a reason to
+    // crash, because the thing it would take down is the whole site.
+    // ENDPOINT is an origin with no trailing slash, and should be the INTERNAL
+    // one in production: web, worker and the bucket share a Docker network, so
+    // nothing needs to leave the host.
+    REPLAY_S3_ENDPOINT: z.string().optional(),
+    REPLAY_S3_BUCKET: z.string().optional(),
+    // Garage names its region `garage`; a move to Scaleway would say `fr-par`.
+    // It is part of the signature, so a wrong value is a 403, not a 404.
+    REPLAY_S3_REGION: z.string().optional(),
+    REPLAY_S3_KEY_ID: z.string().optional(),
+    REPLAY_S3_SECRET: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url(),
@@ -146,6 +163,11 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,
     UNIRATE_API_KEY: process.env.UNIRATE_API_KEY,
+    REPLAY_S3_ENDPOINT: process.env.REPLAY_S3_ENDPOINT,
+    REPLAY_S3_BUCKET: process.env.REPLAY_S3_BUCKET,
+    REPLAY_S3_REGION: process.env.REPLAY_S3_REGION,
+    REPLAY_S3_KEY_ID: process.env.REPLAY_S3_KEY_ID,
+    REPLAY_S3_SECRET: process.env.REPLAY_S3_SECRET,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   emptyStringAsUndefined: true,

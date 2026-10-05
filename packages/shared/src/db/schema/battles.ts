@@ -238,6 +238,24 @@ export function makeBattlesTable(region: string) {
         .array()
         .notNull()
         .default([]),
+      /**
+       * Where this battle's `.wotreplay` sits in the archive bucket, if it has
+       * one at all.
+       *
+       * Nullable and expected to stay null most of the time: the file only
+       * exists when the player had recording on, only one of the thirty
+       * clients needs to send it, and the bucket has a hard quota that will
+       * eventually refuse new ones. A battle without a replay is the normal
+       * case, not a failure.
+       *
+       * The full key rather than a flag, so the object can be found, fetched
+       * and deleted from this row alone. It encodes the region and the date,
+       * which means a row moved or a bucket re-laid-out is a data migration
+       * rather than a silent mismatch.
+       */
+      replayKey: text("replay_key"),
+      /** When it landed, which is what retention sweeps by. */
+      replayStoredAt: timestamp("replay_stored_at", { withTimezone: true }),
       createdAt: timestamp("created_at", { withTimezone: true })
         .notNull()
         .defaultNow(),
