@@ -32,11 +32,12 @@ export type BattleVehicle = {
   kills: number;
   /** Seconds alive; the battle's duration when they survived it. */
   lifeTime: number;
-  /** 0 when they survived, otherwise the game's own reason code. */
+  /** `-1` when they survived, otherwise the game's own reason code, where 0 is one. */
   deathReason: number;
   capturePoints: number;
   xp: number;
   credits: number;
+  /** Hit points left, negative on the shot that overkills. */
   health: number;
   maxHealth: number;
 };

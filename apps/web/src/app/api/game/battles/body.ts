@@ -51,12 +51,20 @@ const vehicle = z.object({
   kills: z.number().int().min(0).max(60),
   /** Seconds alive; the battle's own duration when they survived it. */
   lifeTime: counter,
-  /** 0 when they survived, otherwise the game's own reason code. */
-  deathReason: z.number().int().min(-1).max(16),
+  /**
+   * `-1` when they survived, otherwise the game's own reason code.
+   *
+   * Not `0`: that is a real reason, and the commonest one. Measured over 1424
+   * replays the codes run 0..29 with gaps, which is why this is capped well
+   * above the highest seen rather than at it: a new mode adds reasons, and a
+   * battle is not worth refusing over a number we have not met.
+   */
+  deathReason: z.number().int().min(-1).max(255),
   capturePoints: counter,
   xp: counter,
   credits: counter,
-  health: z.number().int(),
+  /** Hit points left, which goes **negative** on the shot that overkills. */
+  health: z.number().int().min(-100_000).max(100_000),
   maxHealth: counter,
 });
 
@@ -84,13 +92,15 @@ export const battleBody = z.object({
   duration: z.number().int().min(0).max(24 * 3600).nullish(),
   /** The team that won, 0 for a draw. */
   winnerTeam: z.number().int().min(0).max(32).nullish(),
-  finishReason: z.number().int().min(0).max(32).nullish(),
+  // Seen as high as 202, so the cap is the byte rather than the range the
+  // modes we have looked at happen to use.
+  finishReason: z.number().int().min(0).max(255).nullish(),
   /** The client that played it, which is what makes a replay playable. */
   clientVersion: z.string().min(1).max(32).nullish(),
   /** The physical cluster, `EU-201`. */
   server: z.string().min(1).max(32).nullish(),
-  // A battle holds thirty vehicles; Frontline holds sixty. The cap is here to
-  // refuse a payload that is not a battle at all.
+  // Thirty in a random battle, fourteen in a skirmish, sixty in Frontline, all
+  // measured. The cap is here to refuse a payload that is not a battle at all.
   vehicles: z.array(vehicle).min(1).max(120),
 });
 
