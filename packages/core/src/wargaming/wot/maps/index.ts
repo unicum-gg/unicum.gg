@@ -259,3 +259,36 @@ export async function resolveArenaRefs(
   }
   return out;
 }
+
+/**
+ * Every arena's own minimap, by arena id, base maps and folded variants alike.
+ *
+ * Built through `buildMapSummary`, which is what the gallery and the map pages
+ * resolve with, rather than from the id: an Onslaught night arena
+ * (`35_steppes_comp7_nb`) ships a daylight image under its own name and the
+ * real one under `<id>_comp7`, and only the arena's own gameplay declaration
+ * says which. Deriving it from a battle's mode would be a second rule to keep
+ * in step with the first.
+ *
+ * No Clan Wars pool, unlike `listMapSummaries`: that costs a `fronts` call and
+ * up to twenty pages of provinces, and it decides which tabs a map page draws
+ * while saying nothing about which image an arena is played on.
+ */
+export async function minimapsByArena(
+  region: Region,
+): Promise<Map<string, string>> {
+  const { arenas, index, variantArenas, testOnlyArenas } =
+    await getMapCatalog(region);
+  const out = new Map<string, string>();
+  for (const arena of arenas.values()) {
+    const slug = index.idToSlug.get(arena.arenaId);
+    if (!slug) continue;
+    const variants = variantArenas.get(arena.arenaId) ?? [];
+    const summary = buildMapSummary(arena, slug, [], variants, testOnlyArenas);
+    out.set(arena.arenaId, summary.minimapUrl);
+    for (const variant of summary.variants) {
+      out.set(variant.arenaId, variant.minimapUrl);
+    }
+  }
+  return out;
+}

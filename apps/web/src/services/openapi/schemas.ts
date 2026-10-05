@@ -78,6 +78,27 @@ export const playerLiveParams = z.object({
   nickname: z.string().meta({ description: "Player nickname." }),
 });
 
+/** One battle, by the game's own id. */
+export const battleParams = z.object({
+  region: regionPath,
+  id: z.string().meta({
+    description:
+      "The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.",
+  }),
+});
+
+/** How many battles a player's list returns. */
+export const playerBattlesQuery = z.object({
+  // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below.
+  limit: z.coerce
+    .number()
+    .int()
+    .min(1)
+    .max(50)
+    .optional()
+    .meta({ description: "Battles to return, newest first. Ten by default." }),
+});
+
 /** How a player's sessions are bucketed. */
 export const playerSessionsQuery = z.object({
   // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below.

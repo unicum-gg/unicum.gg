@@ -239,6 +239,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/battles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Battle
+         * @description One whole battle: every vehicle on both teams, each one named where this site holds the account and each one rated on this battle alone against its own vehicle's expected values. Wargaming publishes nothing about a single battle, so a battle exists here only because somebody who was in it shared it through the unicum.gg mod. 404 when we hold no such battle.
+         */
+        get: operations["get-{region}-battles-{id}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}": {
         parameters: {
             query?: never;
@@ -271,6 +291,26 @@ export interface paths {
          * @description The full Wargaming medal catalogue with the number of times this player earned each one (0 when never), grouped into Wargaming's own sections and ordered the way the in-game cabinet is. Includes retired event medals, flagged as outdated, so the client can offer them as a filter rather than decide for the reader. 404 when the nickname is unknown in this region.
          */
         get: operations["get-{region}-players-{nickname}-achievements"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/players/{nickname}/battles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player battles
+         * @description A player's most recent battles: the map, the mode, the vehicle they brought and what it did, newest first. Wargaming publishes an account's running totals and nothing about a single battle, so every battle here exists only because somebody who was in it runs the unicum.gg mod and shares them. A player's history therefore begins the day someone in their battles started sharing, and an empty list means nobody has, not that they have not played. 404 when the nickname is unknown in this region.
+         */
+        get: operations["get-{region}-players-{nickname}-battles"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2363,16 +2403,114 @@ export interface components {
             value: number | null;
             votes: number;
         };
+        /** @description A whole battle, as the clients that played it reported it. */
+        BattleDetailResponse: {
+            id: string;
+            /** Format: date-time */
+            startedAt: Date;
+            map: string;
+            gameplay: string | null;
+            battleType: number;
+            duration: number | null;
+            winnerTeam: number | null;
+            finishReason: number | null;
+            clientVersion: string | null;
+            /** @description The cluster it ran on, when the results carried one. */
+            server: string | null;
+            /** @description How many clients reported this battle. */
+            reporters: number;
+            /** @description Every vehicle, both teams, by team then by damage. */
+            participants: components["schemas"]["BattleParticipant"][];
+        };
         /**
          * @description Format the battle was played in.
          * @enum {string}
          */
         battleFormatField: "random" | "clan_wars" | "advances" | "skirmish" | "maneuvers" | "onslaught" | "tournament";
+        /** @description One vehicle in a battle, named and rated. */
+        BattleParticipant: {
+            /** @description Battle-scoped vehicle id, unique within the battle. */
+            id: number;
+            /** @description Wargaming account id, absent for a bot. */
+            account?: number;
+            /** @description Their nickname, when this site holds the account. Null for a bot, or for an account nobody has ever looked up here. */
+            nickname: string | null;
+            clanTag: string | null;
+            team: number;
+            tank: {
+                id: number;
+                name: string;
+                shortName: string;
+                tier: number;
+                type: string;
+                nation: string;
+                tag: string;
+                slug: string | null;
+            } | null;
+            /** @description Their whole line, exactly as the client's results reported it: damage, radio, track, stun, blocked, received, shots, hits, piercings, spotted, kills, lifeTime, deathReason, capturePoints, xp, credits, health, maxHealth. */
+            own: {
+                [key: string]: number;
+            };
+            /** @description What this battle scored them, keyed by metric (`wn7`, `wn8`, `wnx`), against their own vehicle's expected values. */
+            rating: {
+                [key: string]: number | null;
+            };
+        };
         /**
          * @description How the battle ended, as declared by the submitter.
          * @enum {string}
          */
         battleResultField: "victory" | "defeat" | "draw";
+        /** @description A vehicle as a battle row names it. */
+        BattleTank: {
+            /** @description `typeCompDescr`, which is the catalogue's own tank id. */
+            id: number;
+            name: string;
+            shortName: string;
+            tier: number;
+            /** @description `mediumTank`, `heavyTank`, … */
+            type: string;
+            nation: string;
+            /** @description The client's own tag, which the icon is addressed by. */
+            tag: string;
+            /** @description Our slug for the vehicle page, null when it has none. */
+            slug: string | null;
+        };
+        /** @description One vehicle's whole battle. */
+        BattleVehicle: {
+            /** @description Battle-scoped vehicle id, the key the results are mapped by. */
+            id: number;
+            /** @description Wargaming account id, absent for a bot. */
+            account?: number;
+            team: number;
+            /** @description `typeCompDescr` of the vehicle the account brought. */
+            tank: number;
+            damage: number;
+            /** @description Damage assisted by spotting. */
+            radio: number;
+            /** @description Damage assisted by tracking. */
+            track: number;
+            /** @description Damage assisted by stunning. */
+            stun: number;
+            /** @description Damage blocked by armour. */
+            blocked: number;
+            received: number;
+            shots: number;
+            hits: number;
+            piercings: number;
+            spotted: number;
+            kills: number;
+            /** @description Seconds alive; the battle's duration when they survived it. */
+            lifeTime: number;
+            /** @description `-1` when they survived, otherwise the game's own reason code, of which 0 is one. */
+            deathReason: number;
+            capturePoints: number;
+            xp: number;
+            credits: number;
+            /** @description Hit points left, negative on the shot that overkills. */
+            health: number;
+            maxHealth: number;
+        };
         bracketVerdict: {
             bracket: components["schemas"]["voterBracketField"];
             votes: number;
@@ -4099,6 +4237,48 @@ export interface components {
              * @description When the newest row was written.
              */
             computedAt: Date | null;
+        };
+        /** @description One battle, as a single player's line through it. */
+        PlayerBattle: {
+            /** @description The game's own battle id. A string, not a number: it runs to 19 digits, past what JSON carries. */
+            id: string;
+            /**
+             * Format: date-time
+             * @description When the battle started, from the game's own clock rather than our receipt.
+             */
+            startedAt: Date;
+            /** @description The arena's name, `45_north_america`, not its display title. */
+            map: string;
+            /** @description `ctf`, `domination`, `assault`… null when none was named. */
+            gameplay: string | null;
+            /** @description The game's own `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */
+            battleType: number;
+            /** @description Seconds. */
+            duration: number | null;
+            /** @description The player's own team. */
+            team: number;
+            /** @description Win, loss or draw for this player; unknown when no winner was named. */
+            outcome: string;
+            /** @description The vehicle they brought, named. Null for one the catalogue does not carry, which is what an unreleased or withdrawn vehicle looks like. */
+            tank: components["schemas"]["BattleTank"] | null;
+            /** @description This player's own line through the battle. */
+            own: components["schemas"]["BattleVehicle"];
+            /** @description What this one battle scored, keyed by metric (`wn7`, `wn8`, `wnx`). The same accumulators the lifetime figures use, fed a single battle: the ratings are defined per battle and only ever averaged. Null for a metric whose expected values do not carry this vehicle. */
+            rating: {
+                [key: string]: number | null;
+            };
+            /** @description Accounts the battle named, bots excluded. */
+            players: number;
+            /** @description How many clients reported this battle. Two means two of our players were in it. */
+            reporters: number;
+        };
+        /** @description A player's most recent battles, as the clients that played them reported. */
+        PlayerBattlesResponse: {
+            accountId: number;
+            /** @description The nickname this account carries now, which may differ from the one asked for. */
+            nickname: string;
+            /** @description Newest first. */
+            battles: components["schemas"]["PlayerBattle"][];
         };
         /** @description A player's current clan, from cached data only (no live Wargaming call). `clan` is null when the player is not in a clan or is not yet cached. */
         PlayerClan: {
@@ -6981,6 +7161,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-battles-{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BattleDetailResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-players-{nickname}": {
         parameters: {
             query?: never;
@@ -7035,6 +7243,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerAchievementsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-battles": {
+        parameters: {
+            query?: {
+                /** @description Battles to return, newest first. Ten by default. */
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerBattlesResponse"];
                 };
             };
         };

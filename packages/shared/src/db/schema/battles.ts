@@ -41,6 +41,86 @@ export type BattleVehicle = {
   /** Hit points left, negative on the shot that overkills. */
   health: number;
   maxHealth: number;
+  /**
+   * The medals this battle awarded them, by the game's own ids.
+   *
+   * Absent rather than empty when there are none, which is the usual case:
+   * measured over 6057 vehicle records, 28 carried any. Thirty empty arrays a
+   * battle would be a slice of every payload saying nothing.
+   */
+  medals?: number[];
+
+  // The rest of what the game's own post-battle panel shows about one player.
+  // Every one of these is absent when it is zero, which is how most of them
+  // are on most vehicles: thirty of them carrying ten zeroes each would be a
+  // third of a battle spent saying nothing.
+
+  /** Damage dealt from more than 300 metres, in the game's own wording. */
+  sniper?: number;
+  /** Shots that landed by splash rather than by hitting. */
+  splash?: number;
+  hitsReceived?: number;
+  piercingsReceived?: number;
+  /** Shots that landed and did nothing: the armour did its job. */
+  bounced?: number;
+  /** What would have landed had the armour not been there. */
+  potential?: number;
+  /** Hit points given back to allies. */
+  repaired?: number;
+  /** Metres driven. */
+  mileage?: number;
+  /** Capture points taken back off the other team. */
+  defended?: number;
+  teamDamage?: number;
+  /** Enemy vehicles damaged, beside the ones destroyed. */
+  damaged?: number;
+  /** The battle-scoped vehicle id of whoever destroyed them. */
+  killer?: number;
+};
+
+/**
+ * What a battle earned one account: the reporting client's own economy.
+ *
+ * Every field is optional because the mod sends each only when it is non-zero,
+ * which is how most of them are on most battles. The names are ours; the
+ * mapping from the results' own (`originalCredits`, `autoLoadCost`...) lives
+ * in the mod, beside the client that reads them.
+ */
+export type BattleEconomy = {
+  /** Credits earned by the battle itself, before bonuses and before costs. */
+  creditsBase?: number;
+  /** Personal reserves. */
+  creditsBooster?: number;
+  creditsEvent?: number;
+  creditsOrder?: number;
+  /** Fine for damaging allies. */
+  creditsPenalty?: number;
+  /** Compensation for damage allies caused them. */
+  creditsCompensation?: number;
+  /** Everything earned, before the costs below. */
+  creditsSubtotal?: number;
+  repairCost?: number;
+  /** The credits half of the ammunition bill; a gold resupply is deliberate. */
+  ammoCost?: number;
+  suppliesCost?: number;
+  /** What actually landed in the account. */
+  credits?: number;
+
+  xpBase?: number;
+  xpBooster?: number;
+  xpEvent?: number;
+  xpPremiumVehicle?: number;
+  xpPenalty?: number;
+  xp?: number;
+  freeXp?: number;
+  /** Crew experience. */
+  crewXp?: number;
+
+  bonds?: number;
+  bondsBase?: number;
+
+  /** Whether the account had premium when it played. */
+  premium?: boolean;
 };
 
 /**
@@ -126,6 +206,20 @@ export function makeBattlesTable(region: string) {
        */
       playerIds: bigint("player_ids", { mode: "number" }).array().notNull(),
       vehicles: jsonb("vehicles").notNull().$type<BattleVehicle[]>(),
+      /**
+       * What this battle earned the client that reported it.
+       *
+       * Its own column rather than a field inside `vehicles`, because it is
+       * neither a fact about a vehicle nor one about the battle: the results
+       * carry it under `personal.<vehicle>`, for the reporting account alone,
+       * and the other twenty-nine players have no economy in the payload at
+       * any price. It belongs to the FIRST id in `reported_by`, the one whose
+       * upload created the row; a second reporter adds their id and leaves
+       * this alone, because it is not theirs to overwrite.
+       *
+       * Null for a battle recorded before the mod sent it.
+       */
+      personal: jsonb("personal").$type<BattleEconomy>(),
       /**
        * The accounts that told us about this battle. Appended, never replaced.
        *

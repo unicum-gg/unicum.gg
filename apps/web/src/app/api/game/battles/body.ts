@@ -76,6 +76,65 @@ const vehicle = z.object({
   /** Hit points left, which goes **negative** on the shot that overkills. */
   health: z.number().int().min(-100_000).max(100_000),
   maxHealth: counter,
+  /**
+   * The medals the battle awarded, by the game's own ids.
+   *
+   * Absent when there are none, which is almost always: 28 of 6057 measured
+   * vehicle records carried any. The cap is well above the most a single
+   * vehicle has been seen to take.
+   */
+  medals: z.array(z.number().int().positive()).max(64).optional(),
+
+  // The rest of what the game's own post-battle panel shows. Optional because
+  // the mod sends each only when it is non-zero, and because a client older
+  // than this field sends none of them at all.
+  sniper: counter.optional(),
+  splash: counter.optional(),
+  hitsReceived: counter.optional(),
+  piercingsReceived: counter.optional(),
+  bounced: counter.optional(),
+  potential: counter.optional(),
+  repaired: counter.optional(),
+  /** Metres driven, which on a long Frontline runs past a counter's cap. */
+  mileage: z.number().int().min(0).max(10_000_000).optional(),
+  defended: counter.optional(),
+  teamDamage: counter.optional(),
+  /** Enemy vehicles damaged, which the game shows beside the ones destroyed. */
+  damaged: counter.optional(),
+  /** A battle-scoped vehicle id, not an account. */
+  killer: z.number().int().positive().optional(),
+});
+
+/**
+ * What the battle earned the client reporting it.
+ *
+ * Accepted once per battle rather than per vehicle, because that is what it
+ * is: the results carry it for the reporting account alone. Every field is
+ * optional, the mod sending each only when non-zero.
+ */
+const economy = z.object({
+  creditsBase: counter.optional(),
+  creditsBooster: counter.optional(),
+  creditsEvent: counter.optional(),
+  creditsOrder: counter.optional(),
+  creditsPenalty: counter.optional(),
+  creditsCompensation: counter.optional(),
+  creditsSubtotal: counter.optional(),
+  repairCost: counter.optional(),
+  ammoCost: counter.optional(),
+  suppliesCost: counter.optional(),
+  credits: counter.optional(),
+  xpBase: counter.optional(),
+  xpBooster: counter.optional(),
+  xpEvent: counter.optional(),
+  xpPremiumVehicle: counter.optional(),
+  xpPenalty: counter.optional(),
+  xp: counter.optional(),
+  freeXp: counter.optional(),
+  crewXp: counter.optional(),
+  bonds: counter.optional(),
+  bondsBase: counter.optional(),
+  premium: z.boolean().optional(),
 });
 
 export const battleBody = z.object({
@@ -116,6 +175,8 @@ export const battleBody = z.object({
   // Thirty in a random battle, fourteen in a skirmish, sixty in Frontline, all
   // measured. The cap is here to refuse a payload that is not a battle at all.
   vehicles: z.array(vehicle).min(1).max(120),
+  /** The sender's own economy, which only the sender can have. */
+  personal: economy.optional(),
 });
 
 export const battlesUploadBody = z.object({

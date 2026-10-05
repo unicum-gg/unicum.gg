@@ -238,5 +238,10 @@ function toRow(
     playerIds,
     reportedBy: [reporter],
     vehicles: battle.vehicles.map((vehicle) => ({ ...vehicle })),
+    // Stored on the first write only: the conflict path updates `reported_by`
+    // and nothing else, so a second reporter's economy never overwrites the
+    // first's. It belongs to whoever created the row, which is what
+    // `reported_by[0]` names.
+    personal: battle.personal ?? null,
   };
 }

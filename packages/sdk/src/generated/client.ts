@@ -55,6 +55,15 @@ class PlayerClient {
     );
   }
 
+  /** Player battles */
+  battles(limit?: NonNullable<QueryOf<"/{region}/players/{nickname}/battles">>["limit"]) {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/battles", path, { limit }),
+      () => this.api.GET("/{region}/players/{nickname}/battles", { params: { path, query: { limit } } }),
+    );
+  }
+
   /** Player current clan */
   clan() {
     const path = { region: this.region, nickname: this.nickname };
@@ -466,6 +475,25 @@ class TournamentClient {
   }
 }
 
+/** A single battle: unicum.eu.battles("..."). */
+class BattleClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly region: Region,
+    private readonly id: string,
+  ) {}
+
+  /** Battle */
+  detail() {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/battles/{id}", path),
+      () => this.api.GET("/{region}/battles/{id}", { params: { path } }),
+    );
+  }
+}
+
 /** A single glossary entry: unicum.glossary("..."). */
 class GlossaryTermClient {
   constructor(
@@ -597,6 +625,10 @@ type MapsNamespace = ((slug: string) => MapClient) & {
 type TournamentsNamespace = ((id: string) => TournamentClient) & {
   /** Tournaments */
   list(query?: QueryOf<"/{region}/tournaments">): RequestHandle<Data<"/{region}/tournaments">>;
+};
+
+type BattlesNamespace = ((id: string) => BattleClient) & {
+
 };
 
 type ServerNamespace = {
@@ -934,6 +966,13 @@ class RegionClient {
             params: { path: { region: this.region }, query },
           }),
       );
+    return ns;
+  }
+
+  get battles(): BattlesNamespace {
+    const ns = ((id: string) =>
+      new BattleClient(this.api, this.baseUrl, this.region, id)) as BattlesNamespace;
+
     return ns;
   }
 

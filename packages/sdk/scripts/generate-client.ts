@@ -93,6 +93,16 @@ const RESOURCES: Resource[] = [
     root: "detail",
     namespaceRoot: NAMESPACE_LIST,
   },
+  {
+    // Keyed by the game's own `arenaUniqueID`, which is the only thing that
+    // addresses a battle: it has no name, no slug, and the same map is played
+    // thousands of times a day. A string rather than a number, because the id
+    // runs to 19 digits.
+    name: "battles",
+    key: "id",
+    client: "BattleClient",
+    root: "detail",
+  },
 ];
 
 /**
