@@ -60,9 +60,34 @@ export type ReplayContainer = {
 /** The JSON header of a replay, and where the packet stream starts after it. */
 export type ReplayHeader = {
   blocks: unknown[];
+  /**
+   * The same blocks before `JSON.parse` touched them.
+   *
+   * Kept because the parsed form **loses the battle id**. `arenaUniqueID` is
+   * nineteen digits, past `Number.MAX_SAFE_INTEGER`, so JSON.parse rounds
+   * 90570953574329799 to 90570953574329800 and any comparison against the
+   * real id fails for every battle. It is the same reason the column holding
+   * it is `text`. Anything that needs the id reads it out of this.
+   */
+  texts: string[];
   /** Offset of the first byte past the last JSON block. */
   cursor: number;
 };
+
+/**
+ * The battle id a replay names, as digits, or null.
+ *
+ * Read with a regex over the raw JSON rather than from a parsed object, for
+ * the precision reason above. Every block after the first is searched: the
+ * metadata block has no id, and which of the later ones carries it varies.
+ */
+export function battleIdIn(header: ReplayHeader): string | null {
+  for (const text of header.texts.slice(1)) {
+    const found = /"arenaUniqueID"\s*:\s*"?(\d{1,24})"?/.exec(text);
+    if (found) return found[1];
+  }
+  return null;
+}
 
 /**
  * The JSON blocks only, without touching the encrypted stream.
@@ -84,6 +109,7 @@ export function readReplayHeader(file: Uint8Array): ReplayHeader {
   if (count > 16) throw new ReplayError("That replay's header is not readable");
 
   const blocks: unknown[] = [];
+  const texts: string[] = [];
   let cursor = 8;
   for (let i = 0; i < count; i += 1) {
     const size = u32(file, cursor);
@@ -95,6 +121,7 @@ export function readReplayHeader(file: Uint8Array): ReplayHeader {
       file.subarray(cursor, cursor + size),
     );
     cursor += size;
+    texts.push(text);
     try {
       blocks.push(JSON.parse(text));
     } catch {
@@ -103,7 +130,7 @@ export function readReplayHeader(file: Uint8Array): ReplayHeader {
       blocks.push(null);
     }
   }
-  return { blocks, cursor };
+  return { blocks, texts, cursor };
 }
 
 /** Split a replay into its JSON blocks and its packet stream. */

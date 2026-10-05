@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import * as z from "zod";
-import { readReplayHeader, ReplayError } from "@unicum.gg/shared";
+import { battleIdIn, readReplayHeader, ReplayError } from "@unicum.gg/shared";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import {
   attachReplay,
@@ -187,8 +187,11 @@ export async function POST(
   // wrong thirty people, which is the kind of wrong that is never noticed
   // again once it is in the archive.
   try {
-    const { blocks } = readReplayHeader(bytes);
-    if (!namesBattle(blocks, arenaUniqueId)) {
+    const named = battleIdIn(readReplayHeader(bytes));
+    // Null means the file names no battle at all, which is what an unfinished
+    // recording looks like: the block carrying the id is only written when the
+    // battle ends.
+    if (named === null || normaliseBattleId(named) !== arenaUniqueId) {
       return refuse(ReplayRefusal.NotThisBattle);
     }
   } catch (err) {
@@ -238,19 +241,4 @@ function refuse(reason: ReplayRefusal): Response {
     { refused: reason },
     { status: 200, headers: { "cache-control": "no-store" } },
   );
-}
-
-/**
- * Whether the replay's own header names this battle.
- *
- * The id lives in the second JSON block, the one the client writes when the
- * battle ends. A file for a battle still in progress has no second block, and
- * is refused: an unfinished replay has no packet stream either, so it is not
- * worth archiving.
- */
-function namesBattle(blocks: unknown[], arenaUniqueId: string): boolean {
-  const results = Array.isArray(blocks[1]) ? blocks[1][0] : blocks[1];
-  const id = (results as Record<string, unknown> | null)?.arenaUniqueID;
-  if (id === undefined || id === null) return false;
-  return normaliseBattleId(String(id)) === arenaUniqueId;
 }
