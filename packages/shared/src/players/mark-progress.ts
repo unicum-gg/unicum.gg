@@ -1,3 +1,4 @@
+import { MIN_MARKS_TIER } from "../constants/marks";
 import type { TankStats } from "../wot/tank-stats";
 import type { PlayerTankRow } from "./tanks";
 
@@ -168,7 +169,17 @@ export function buildPlayerMarkProgress(
     if (v.tier == null) continue;
     garage += 1;
 
-    if (v.moe != null && Number.isInteger(v.moe) && v.moe >= 0 && v.moe <= 3) {
+    // A gun carries no mark below tier V, so a value there is the portal's
+    // positional columns slipping and handing us a battle count (see
+    // `MIN_MARKS_TIER`). Counted, it put phantom marks in the matrix's bottom
+    // rows for any player who had taken a tier I out for three games.
+    if (
+      v.tier >= MIN_MARKS_TIER &&
+      v.moe != null &&
+      Number.isInteger(v.moe) &&
+      v.moe >= 0 &&
+      v.moe <= 3
+    ) {
       known += 1;
       const row = marksByTier.get(v.tier) ?? emptyMarksRow(v.tier);
       row[MARK_KEY[v.moe]] += 1;
@@ -228,6 +239,9 @@ function buildReach(
     // Only vehicles whose marks we know and that still have a mark to earn,
     // and that the encyclopedia knows (the row draws an icon and a class).
     if (v.tier == null || v.tag == null || v.type == null) continue;
+    // Same floor as the matrix above: there is no mark to reach for on a gun
+    // the game puts no marks on.
+    if (v.tier < MIN_MARKS_TIER) continue;
     if (v.moe == null || !Number.isInteger(v.moe) || v.moe < 0 || v.moe >= 3)
       continue;
     if (v.battles < MIN_TANK_BATTLES) continue;
