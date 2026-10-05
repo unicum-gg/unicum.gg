@@ -24,7 +24,9 @@ export function wgIdentityFromAccountKey(
   if (dash < 0) return null;
   const region = key.slice(0, dash);
   const accountId = Number(key.slice(dash + 1));
-  return isRegion(region) && Number.isFinite(accountId) && accountId > 0
+  // A safe integer, not merely finite: this guards the queries that run on
+  // the realm and the id, and `Number.isFinite` lets 1.5 through.
+  return isRegion(region) && Number.isSafeInteger(accountId) && accountId > 0
     ? { region, accountId }
     : null;
 }

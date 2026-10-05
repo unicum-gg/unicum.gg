@@ -41,10 +41,16 @@ export interface QuotaVerdict {
  * The window is derived from the clock rather than from the first call, so a
  * caller cannot keep a window alive by calling into it: every key rolls over
  * at the same instants, and a caller that is over waits at most one window.
+ *
+ * `cost` is how much of the quota this call spends, for an endpoint where one
+ * request is not one unit of work. The battle upload is the case: a call may
+ * carry twenty-five battles, so counting requests would have let a limit
+ * written as "ten battles an hour is already generous" pass three thousand.
  */
 export async function consumeQuota(
   key: string,
   { limit, windowSeconds }: Quota,
+  cost = 1,
 ): Promise<QuotaVerdict> {
   const redis = getRedisClient();
   if (!redis) {
@@ -54,8 +60,8 @@ export async function consumeQuota(
   const window = Math.floor(now / windowSeconds);
   const resetSeconds = (window + 1) * windowSeconds - now;
   try {
-    const counted = await redis.incr(`quota:${key}:${window}`);
-    if (counted === 1) {
+    const counted = await redis.incrby(`quota:${key}:${window}`, cost);
+    if (counted === cost) {
       // Only the call that opened the window sets the expiry, so a busy key
       // cannot keep pushing its own deadline out.
       await redis.expire(`quota:${key}:${window}`, windowSeconds + 1);

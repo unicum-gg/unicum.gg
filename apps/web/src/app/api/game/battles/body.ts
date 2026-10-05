@@ -33,8 +33,18 @@ const vehicle = z.object({
    * Optional because bot-filled modes exist, not as a convenience: a vehicle
    * without an account is a real thing the results report, and dropping those
    * rows would make a team look smaller than it was.
+   *
+   * Bounded at what a JSON number can carry rather than at anything smaller.
+   * Asia's ids go past int4 (the largest on this database is 3021341123,
+   * and 12.7% of Asia's accounts are above the limit), which is what the
+   * `bigint[]` column exists for; the open end of this bound is the column's
+   * range, not a guess at how high the game will go.
    */
-  account: z.number().int().positive().optional(),
+  account: z
+    .number()
+    .int()
+    .positive()
+    .max(Number.MAX_SAFE_INTEGER),
   team: z.number().int().min(0).max(32),
   /** `typeCompDescr`, the vehicle the account brought. */
   tank: z.number().int().positive(),
@@ -79,12 +89,16 @@ export const battleBody = z.object({
    */
   arenaUniqueId: z
     .string()
-    .regex(/^[0-9]{1,20}$/, "the battle id is digits"),
+    // No leading zeros, because the column is text: `0123` and `123` would be
+    // two battles for one id, and twenty paddings would store it twenty
+    // times. `normaliseBattleId` strips them anyway, so this only refuses
+    // what is not a number at all.
+    .regex(/^(0|[1-9][0-9]{0,19})$/, "the battle id is digits"),
   /** `arenaCreateTime`, the battle's own start, in seconds. */
   startedAt: z.number().int().positive(),
   /** `45_north_america`, the arena's name rather than its display title. */
   mapName: z.string().min(1).max(64),
-  /** The game's `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */
+  /** The game's own `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */
   battleType: z.number().int().min(0).max(255),
   /** `ctf`, `domination`, `assault`… */
   gameplayId: z.string().min(1).max(32).nullish(),
@@ -105,11 +119,9 @@ export const battleBody = z.object({
 });
 
 export const battlesUploadBody = z.object({
-  /**
-   * Named only on the unlinked path: a linked client's region comes from the
-   * account the link belongs to, which is a fact rather than a claim.
-   */
-  region: z.string().min(2).max(8).optional(),
+  // No `region` field. The region comes from the proven account, and a copy of
+  // it in the body would be a claim nobody reads: `loadoutsUploadBody` carries
+  // one and its route ignores it.
   battles: z.array(battleBody).min(1).max(MAX_BATTLES_PER_UPLOAD),
 });
 

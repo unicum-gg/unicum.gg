@@ -18,21 +18,31 @@ const { default: postgres } = await import(
   pathToFileURL(path.join(process.cwd(), "packages/core/node_modules/postgres/src/index.js")).href
 );
 
-const file = process.argv[2];
-const dry = process.argv.includes("--dry");
+const args = process.argv.slice(2);
+const dry = args.includes("--dry");
+// Found by shape rather than by position: `--dry` first used to land in
+// argv[2] and be read as the filename, which crashed on an unguarded read
+// instead of doing the dry run that was asked for.
+const file = args.find((arg) => !arg.startsWith("--"));
 if (!file) {
   console.error("usage: node scripts/apply-sql.mjs <file.sql> [--dry]");
   process.exit(1);
 }
 
-const envPath = path.join(process.cwd(), "apps/web/.env.local");
-const env = fs.readFileSync(envPath, "utf8");
-const line = env.split(/\r?\n/).find((l) => l.startsWith("DATABASE_URL="));
-if (!line) {
-  console.error("no DATABASE_URL in apps/web/.env.local");
-  process.exit(1);
+// The environment first, so this is usable outside a checkout (CI, a
+// one-off shell) and not only next to apps/web/.env.local.
+function databaseUrl() {
+  if (process.env.DATABASE_URL) return process.env.DATABASE_URL;
+  const envPath = path.join(process.cwd(), "apps/web/.env.local");
+  const env = fs.readFileSync(envPath, "utf8");
+  const line = env.split(/\r?\n/).find((l) => l.startsWith("DATABASE_URL="));
+  if (!line) {
+    console.error("no DATABASE_URL in the environment or apps/web/.env.local");
+    process.exit(1);
+  }
+  return line.slice("DATABASE_URL=".length).trim().replace(/^["']|["']$/g, "");
 }
-const url = line.slice("DATABASE_URL=".length).trim().replace(/^["']|["']$/g, "");
+const url = databaseUrl();
 const host = new URL(url).host;
 
 const text = fs.readFileSync(file, "utf8");
@@ -41,9 +51,9 @@ const sql = postgres(url, { max: 1, onnotice: (n) => console.log("  notice:", n.
 const name = (t) => t.replace(/_\d{4}_\d{2}$/, "_<month>");
 
 try {
-  console.log(`  base   : ${host}`);
-  console.log(`  fichier: ${file} (${text.length} octets)`);
-  console.log(`  mode   : ${dry ? "ESSAI, annule a la fin" : "APPLICATION REELLE"}`);
+  console.log(`  database: ${host}`);
+  console.log(`  file    : ${file} (${text.length} bytes)`);
+  console.log(`  mode    : ${dry ? "DRY RUN, rolled back at the end" : "APPLYING FOR REAL"}`);
 
   await sql.begin(async (tx) => {
     await tx.unsafe(text).simple();
@@ -59,22 +69,22 @@ try {
       const key = `${row.kind}:${name(row.name)}`;
       kinds[key] = (kinds[key] || 0) + 1;
     }
-    console.log(`  objets : ${tables.length} portant 'battles'`);
+    console.log(`  objects : ${tables.length} named like 'battles'`);
     for (const [key, count] of Object.entries(kinds).sort()) {
       const [kind, label] = key.split(":");
-      const what = { p: "table partitionnee", r: "partition", v: "vue", I: "index partitionne", i: "index" }[kind] || kind;
+      const what = { p: "partitioned table", r: "partition", v: "view", I: "partitioned index", i: "index" }[kind] || kind;
       console.log(`     ${String(count).padStart(3)}  ${what.padEnd(20)} ${label}`);
     }
 
     if (dry) throw new Error("__rollback__");
   });
-  console.log("  applique.");
+  console.log("  applied.");
 } catch (error) {
   if (error.message === "__rollback__") {
-    console.log("  essai annule, rien n'a ete conserve.");
+    console.log("  dry run rolled back, nothing was kept.");
   } else {
-    console.error("  ECHEC:", error.message);
-    if (error.position) console.error("  position:", error.position);
+    console.error("  FAILED:", error.message);
+    if (error.position) console.error("  at position:", error.position);
     process.exitCode = 1;
   }
 } finally {
