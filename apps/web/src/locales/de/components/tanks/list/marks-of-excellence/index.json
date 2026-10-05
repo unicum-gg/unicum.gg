@@ -4,10 +4,10 @@
       "tip": "1 Mark: dein gleitender Durchschnitt des kombinierten Schadens (letzte ~100 Gefechte) muss den von 65 % der spieler mit diesem Panzer in den letzten 14 Tagen übertreffen"
     },
     "mark2": {
-      "tip": "2 Marks: Dein gleitender Durchschnitt des kombinierten Schadens (letzte ~100 Gefechte) muss 85 % der spieler mit diesem Panzer in den letzten 14 Tagen übertreffen"
+      "tip": "2 Marks: Dein gleitender Durchschnitt des kombinierten Schadens (letzte ~100 Gefechte) muss 85 % der Spieler auf diesem Fahrzeug in den letzten 14 Tagen übertreffen"
     },
     "mark3": {
-      "tip": "3 Marks: Dein gleitender Durchschnitt des kombinierten Schadens (letzte ~100 Gefechte) muss 95 % der spieler mit diesem Panzer in den letzten 14 Tagen übertreffen"
+      "tip": "3 Marks: Dein gleitender Durchschnitt des kombinierten Schadens (bei den letzten ~100 Gefechten) muss den Durchschnittsschaden von 95 % der spieler auf diesem Panzer in den letzten 14 Tagen übertreffen"
     }
   }
 }
