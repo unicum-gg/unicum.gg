@@ -1,7 +1,3 @@
-import { type Region } from "@unicum.gg/wargaming";
-import { wgIdentityFromAccountKey } from "@unicum.gg/shared";
-import { accountBehindGameToken } from "@unicum.gg/core/auth/game-client-account";
-import { wargamingAccountOf } from "@unicum.gg/core/game-link";
 import {
   forgetAllTankLoadouts,
   forgetTankLoadouts,
@@ -9,7 +5,7 @@ import {
   saveTankLoadouts,
 } from "@unicum.gg/core/tanks/loadouts";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
-import { gameClientUser } from "@/services/game";
+import { provenAccount } from "@/services/game/proven-account";
 import { loadoutsUploadBody } from "./body";
 
 export const dynamic = "force-dynamic";
@@ -36,16 +32,8 @@ const UPLOAD_QUOTA = { limit: 20, windowSeconds: 3600 };
  * theirs, so a nickname in the body would be worthless: anyone could fill the
  * site with invented builds under the names that matter most.
  *
- * So the account is proven, two ways, and neither asks anything of the player:
- *
- * - a client whose player has linked their unicum.gg account authenticates
- *   with the link's own secret, and the account comes from the link;
- * - any other client sends its **WGNI web token**, the one the game mints for
- *   its own shop and portal, and Wargaming is asked whose it is.
- *
- * The second is the one that matters, because most people running the mod have
- * never signed in here and a feature that only worked for those who had would
- * describe the wrong half of the playerbase.
+ * So the account is proven rather than claimed, by `provenAccount`, which is
+ * where the two ways of proving it are written down.
  */
 export async function POST(req: Request): Promise<Response> {
   const account = await provenAccount(req);
@@ -142,23 +130,4 @@ export async function DELETE(req: Request): Promise<Response> {
     console.error("[api/game/loadouts] delete failed:", err);
     return Response.json({ error: "delete_failed" }, { status: 502 });
   }
-}
-
-type ProvenAccount = { region: Region; accountId: number };
-
-/** The Wargaming account this request may speak for, or null. */
-async function provenAccount(req: Request): Promise<ProvenAccount | null> {
-  const linked = await linkedAccount(req);
-  if (linked) return linked;
-  const token = req.headers.get("x-wargaming-token");
-  const region = req.headers.get("x-wargaming-region");
-  if (!token || !region) return null;
-  return accountBehindGameToken(region, token);
-}
-
-/** The account behind a linked client's bearer secret, when there is one. */
-async function linkedAccount(req: Request): Promise<ProvenAccount | null> {
-  const client = await gameClientUser(req);
-  if (!client) return null;
-  return wgIdentityFromAccountKey(await wargamingAccountOf(client.userId));
 }
