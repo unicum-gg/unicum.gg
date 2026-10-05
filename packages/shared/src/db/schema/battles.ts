@@ -1,4 +1,5 @@
 import {
+  bigint,
   index,
   integer,
   jsonb,
@@ -93,7 +94,7 @@ export function makeBattlesTable(region: string) {
       startedAt: timestamp("started_at", { withTimezone: true }).notNull(),
       /** `45_north_america`, the arena name rather than its display title. */
       mapName: text("map_name").notNull(),
-      /** The game's `battleType`: 1 random, 43 onslaught, 20/21 skirmishes. */
+      /** The game's own `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */
       battleType: integer("battle_type").notNull(),
       /** `ctf`, `domination`, `assault`… */
       gameplayId: text("gameplay_id"),
@@ -113,9 +114,36 @@ export function makeBattlesTable(region: string) {
        * fact nobody else collects.
        */
       server: text("server"),
-      /** Every account in the battle, bots excluded. Indexed, see above. */
-      playerIds: integer("player_ids").array().notNull(),
+      /**
+       * Every account in the battle, bots excluded. Indexed, see above.
+       *
+       * `bigint`, like every other account id in this schema, and not because
+       * of a hypothetical: measured on this database, 32394 of Asia's 254540
+       * accounts are above int4's ceiling, the largest being 3021341123. This
+       * column was `integer` in the first migration, which would have aborted
+       * the insert of ~98% of Asia's battles and left the mod retrying them
+       * for ever (see `drizzle/0121_battles_bigint_and_provenance.sql`).
+       */
+      playerIds: bigint("player_ids", { mode: "number" }).array().notNull(),
       vehicles: jsonb("vehicles").notNull().$type<BattleVehicle[]>(),
+      /**
+       * The accounts that told us about this battle. Appended, never replaced.
+       *
+       * A battle is a statement about thirty accounts and only the sender's is
+       * proven. The endpoint checks the sender is among the players, which
+       * bounds who must appear but not what is said about the other
+       * twenty-nine. Without this column a fabricated battle could be neither
+       * found nor withdrawn: nothing would answer "everything this account
+       * reported". `tank_loadouts` gets that for free by being keyed on the
+       * proven account; this table has to keep it deliberately.
+       *
+       * It is also the only honest measure of the multi-source coverage this
+       * whole design rests on: a battle with two reporters was seen twice.
+       */
+      reportedBy: bigint("reported_by", { mode: "number" })
+        .array()
+        .notNull()
+        .default([]),
       createdAt: timestamp("created_at", { withTimezone: true })
         .notNull()
         .defaultNow(),
