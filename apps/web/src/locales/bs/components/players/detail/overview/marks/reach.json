@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} ukupne štete, naspram {threshold} za tu oznaku",
-  "empty": "Nijedan tenk nije ispod onoga što ovaj račun postiže s njim.",
+  "empty": "Nijedno oružje ne može ostvariti oznaku bez njenog nošenja.",
   "gun-carries": "top nosi {marks}",
   "none": "nema",
   "recent-window": "(30d)"

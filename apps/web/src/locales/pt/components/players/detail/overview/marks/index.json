@@ -14,7 +14,7 @@
     "note-share": "{aces} de {garage} veículos carregam um Distribuidor Ace ({percent}% da garagem)."
   },
   "reach": {
-    "heading": "Desempenho acima da marca",
+    "heading": "Acima da barra, sem a marca",
     "description": "Veículos cujo dano combinado já ultrapassa o limiar de uma marca que ainda não têm. O distintivo apresenta esse dano combinado na cor da marca cujo limiar ultrapassa."
   },
   "none": "Nenhum"

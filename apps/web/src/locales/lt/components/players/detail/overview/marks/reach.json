@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} bendra žala, o šiam ženklui reikia {threshold}",
-  "empty": "Nė viena patranka neatsilieka nuo to, ką ši paskyra su ja daro.",
+  "empty": "Nė vienas pabūklas neįveikia ženklo, kurio nešimas jam neįmanomas.",
   "gun-carries": "patranka turi {marks}",
   "none": "nėra",
   "recent-window": "(30d)"

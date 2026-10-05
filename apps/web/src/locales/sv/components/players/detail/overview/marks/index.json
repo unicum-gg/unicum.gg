@@ -14,7 +14,7 @@
     "note-share": "{aces} av {garage} vagnar har märket Ace Tanker ({percent} % av garaget)."
   },
   "reach": {
-    "heading": "Presterar bättre än kanonen visar",
+    "heading": "Över ribban, utan märket",
     "description": "Vagnar vars kombinerade skada redan överstiger gränsen för ett märke de inte har. Etiketten visar den kombinerade skadan och färgas efter märket vars gräns den överstiger."
   },
   "none": "Inga"

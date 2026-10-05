@@ -14,7 +14,7 @@
     "note-share": "{aces} av {garage} kjøretøy har et Ace Tanker-merke ({percent} % av garasjen)."
   },
   "reach": {
-    "heading": "Spiller over kanonens nivå",
+    "heading": "Over streken uten merket",
     "description": "Kjøretøy der den samlede skaden allerede passerer et merke de ikke har. Merket er denne samlede skaden, farget etter merket den passerer."
   },
   "none": "Ingen"

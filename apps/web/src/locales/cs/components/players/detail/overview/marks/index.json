@@ -14,7 +14,7 @@
     "note-share": "Odznak Esence Tankista je na {aces} z {garage} vozidel ({percent} % vozidel v garáži)."
   },
   "reach": {
-    "heading": "Hra nad úrovní děla",
+    "heading": "Nad lištou bez známky",
     "description": "Vozidla, jejichž kombinované poškození už překračuje hranici znaku, který dosud nemají. Odznak představuje toto kombinované poškození a jeho barvu určuje překročený znak."
   },
   "none": "Žádný"

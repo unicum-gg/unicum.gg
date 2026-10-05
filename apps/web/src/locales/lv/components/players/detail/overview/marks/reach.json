@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} kopējie bojājumi pret {threshold} šai atzīmei",
-  "empty": "Neviens lielgabals neatpaliek no tā, ko šis konts ar to paveic.",
+  "empty": "Neviens lielgabals nepārvar atzīmi, kuras iznešana tam nav pieejama.",
   "gun-carries": "lielgabalam ir {marks}",
   "none": "nav",
   "recent-window": "(30d)"

@@ -14,7 +14,7 @@
     "note-share": "{aces} od {garage} vozila nose značku Ace Tanker ({percent}% garaže)."
   },
   "reach": {
-    "heading": "Igranje iznad topa",
+    "heading": "Iznad trake, bez oznake",
     "description": "Vozila čija ukupna šteta već doseže oznaku koju ne nose. Značka prikazuje tu ukupnu štetu, obojenu prema oznaci koju doseže."
   },
   "none": "Nema"

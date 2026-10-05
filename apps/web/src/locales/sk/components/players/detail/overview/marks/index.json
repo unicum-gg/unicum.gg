@@ -14,7 +14,7 @@
     "note-share": "{aces} z {garage} vozidiel má titul Jazdec elitných tankov ({percent} % garáže)."
   },
   "reach": {
-    "heading": "Výkon nad úrovňou znaku na hlavni",
+    "heading": "Nad vrstico, brez značke",
     "description": "Vozidlá, ktorých kombinované poškodenie už prekračuje hranicu znaku, ktorý ešte nemajú. Odznak zobrazuje toto kombinované poškodenie a jeho farba zodpovedá prekonanému znaku."
   },
   "none": "Žiadny"

@@ -1,11 +1,11 @@
 {
   "columns": {
     "buyCredits": {
-      "label": "Preţ (credite)",
+      "label": "Cost (credite)",
       "tip": "Preț de achiziție în credite (tancuri din arborele tehnologic)"
     },
     "buyGold": {
-      "label": "Preţ (aur)",
+      "label": "Cost (aur)",
       "tip": "Preț de achiziție în aur (tancuri premium)"
     },
     "researchXp": {
@@ -34,8 +34,8 @@
     }
   },
   "selector": {
-    "buyCredits": "Preţ (credite)",
-    "buyGold": "Preţ (aur)",
+    "buyCredits": "Cost (credite)",
+    "buyGold": "Cost (aur)",
     "researchXp": "XP de cercetare",
     "totalFreeXp": "XP gratuit",
     "shellCost": "Cost proiectil",

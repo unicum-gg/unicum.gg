@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} toplam hasar, bu işaret için {threshold} değerine karşı",
-  "empty": "Bu hesabın onunla yaptıklarının gerisinde kalan top yok.",
+  "empty": "Taşımadığı işareti hiçbir top aşamaz.",
   "gun-carries": "top {marks} taşıyor",
   "none": "yok",
   "recent-window": "(30g)"

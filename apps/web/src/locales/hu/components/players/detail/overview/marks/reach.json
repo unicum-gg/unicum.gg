@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} összesített sebzés, az adott jelhez szükséges {threshold} ellenében",
-  "empty": "Nincs olyan ágyú, amely elmaradna attól, amit ez a fiók vele elér.",
+  "empty": "Nincs olyan löveg, amely egy jel cipelése nélkül túljutna rajta.",
   "gun-carries": "az ágyú {marks} jelet cipel",
   "none": "nincs",
   "recent-window": "(30d)"

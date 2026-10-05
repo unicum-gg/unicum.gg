@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} de dano combinado, face a {threshold} para essa marca",
-  "empty": "Nenhum canhão fica aquém do que esta conta consegue fazer com ele.",
+  "empty": "Nenhum canhão supera uma marca que não consegue carregar.",
   "gun-carries": "o canhão ostenta {marks}",
   "none": "nenhum",
   "recent-window": "(30d)"

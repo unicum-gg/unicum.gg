@@ -14,7 +14,7 @@
     "note-share": "{aces} od {garage} vozila nose značku As tenkist ({percent}% garaže)."
   },
   "reach": {
-    "heading": "Igranje iznad topa",
+    "heading": "Iznad ljestvice, bez oznake",
     "description": "Vozila čija kombinirana šteta već doseže oznaku koju ne nose. Značka prikazuje tu kombiniranu štetu, obojenu prema oznaci koju doseže."
   },
   "none": "Nema"

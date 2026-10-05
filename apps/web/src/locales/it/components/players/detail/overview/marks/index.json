@@ -14,7 +14,7 @@
     "note-share": "Su {garage} veicoli, {aces} hanno il distintivo Asso carrista ({percent}% del garage)."
   },
   "reach": {
-    "heading": "Giocare oltre i limiti del cannone",
+    "heading": "Sopra la barra, senza il marchio",
     "description": "Veicoli il cui danno combinato supera già la soglia di un marchio che non hanno. L’indicatore riporta quel danno combinato, nel colore del marchio di cui supera la soglia."
   },
   "none": "Nessuno"

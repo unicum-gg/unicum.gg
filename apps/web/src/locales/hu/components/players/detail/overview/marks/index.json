@@ -14,7 +14,7 @@
     "note-share": "{garage} járműből {aces} cipel Asztali Tankért ({percent}% a garázsból)."
   },
   "reach": {
-    "heading": "Az ágyú szintje felett játszva",
+    "heading": "A sáv fölött, jel nélkül",
     "description": "Olyan járművek, amelyek összesített sebzése már meghalad egy olyan jelet, amellyel nem rendelkeznek. A jelvény ezt az összesített sebzést mutatja, annak a jelnek a színével, amelyet elér."
   },
   "none": "Nincs"

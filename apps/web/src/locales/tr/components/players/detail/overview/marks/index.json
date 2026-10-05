@@ -14,7 +14,7 @@
     "note-share": "{garage} aracın {aces} tanesi As Tankçı rozeti taşıyor (garajın %{percent} kadarı)."
   },
   "reach": {
-    "heading": "Topun seviyesinin üzerinde oynamak",
+    "heading": "İşaret olmadan çıtanın üzerinde",
     "description": "Birlikte verilen hasarı, taşımadıkları bir işareti şimdiden aşan araçlar. Rozet, aştığı işaretle renklendirilen bu toplam hasardır."
   },
   "none": "Hiçbiri"

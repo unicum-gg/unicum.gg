@@ -14,7 +14,7 @@
     "note-share": "Ace Tankers iznešana: {aces} no {garage} transportlīdzekļiem ({percent}% no garāžas)."
   },
   "reach": {
-    "heading": "Spēlē virs lielgabala",
+    "heading": "Virs joslas, bez atzīmes",
     "description": "Transportlīdzekļi, kuru kopējie bojājumi jau pārsniedz atzīmi, ko tie nenes. Nozīmīte ir šie kopējie bojājumi, iekrāsoti atbilstoši atzīmei, kuru tie pārsniedz."
   },
   "none": "Nav"

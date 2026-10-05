@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} kombinovaného poškození, hranice pro tuto známku je {threshold}",
-  "empty": "Děla nejsou tím, co stojí za výsledky tohoto účtu.",
+  "empty": "Žádné dělo nepřekoná známku, aniž by ji dokázalo táhnout.",
   "gun-carries": "Děla nesou {marks}",
   "none": "žádné",
   "recent-window": "(30d)"

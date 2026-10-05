@@ -14,7 +14,7 @@
     "note-share": "{aces} z {garage} pojazdów ma odznakę Ace Tanker ({percent}% pojazdów w garażu)."
   },
   "reach": {
-    "heading": "Gra powyżej poziomu odznak na lufie",
+    "heading": "Powyżej progu, bez odznaki",
     "description": "Pojazdy, których łączne uszkodzenia przekraczają już próg odznaki, której jeszcze nie mają. Znacznik pokazuje wartość tych łącznych uszkodzeń, a jego kolor odpowiada przekroczonemu progowi odznaki."
   },
   "none": "Brak"

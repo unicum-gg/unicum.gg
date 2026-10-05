@@ -14,7 +14,7 @@
     "note-share": "Auf {aces} von {garage} Fahrzeugen wurde Ace Tanker erreicht ({percent}% der Garage)."
   },
   "reach": {
-    "heading": "Mehr aus dem Geschütz herausholen",
+    "heading": "Über dem Balken, ohne die Marke",
     "description": "Fahrzeuge, deren kombinierter Schaden bereits den Schwellenwert einer Markierung übertrifft, die sie noch nicht tragen. Das Abzeichen zeigt diesen kombinierten Schaden und ist entsprechend der überschrittenen Markierung eingefärbt."
   },
   "none": "Keine"

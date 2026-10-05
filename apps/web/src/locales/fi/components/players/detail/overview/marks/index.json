@@ -14,7 +14,7 @@
     "note-share": "{aces}/{garage} ajoneuvolla on Ace Tanker ({percent}% tallista)."
   },
   "reach": {
-    "heading": "Tykin edellä pelaaminen",
+    "heading": "Palkin yläpuolella ilman merkkiä",
     "description": "Ajoneuvot, joiden yhteenlaskettu vahinko ylittää jo merkin, jota niillä ei ole. Merkki on tämä yhteenlaskettu vahinko, joka on väritetty sen ylittämän merkin mukaan."
   },
   "none": "Ei mitään"

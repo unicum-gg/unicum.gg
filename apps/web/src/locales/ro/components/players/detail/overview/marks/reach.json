@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} daune combinate, față de {threshold} pentru acel semn",
-  "empty": "Nicio armă nu rămâne în urma a ceea ce face acest cont cu ea.",
+  "empty": "Nicio armă nu depășește un semn pe care nu îl are în carry.",
   "gun-carries": "arma aduce {marks}",
   "none": "niciunul",
   "recent-window": "(30z)"

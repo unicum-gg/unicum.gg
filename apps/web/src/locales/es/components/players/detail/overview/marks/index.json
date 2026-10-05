@@ -14,7 +14,7 @@
     "note-share": "{aces} de {garage} Vehículos tienen la insignia As del Tanque ({percent}% del garaje)."
   },
   "reach": {
-    "heading": "Jugando por encima del Cañón",
+    "heading": "Por encima de la barra, sin la marca",
     "description": "Vehículos cuyo daño combinado ya supera el umbral de una Marca que aún no tienen. La insignia muestra ese daño combinado, con el color de la Marca cuyo umbral supera."
   },
   "none": "Ninguno"

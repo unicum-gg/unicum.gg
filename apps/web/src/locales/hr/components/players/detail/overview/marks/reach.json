@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} kombinirane štete, u usporedbi s {threshold} za tu oznaku",
-  "empty": "Nijedan top ne zaostaje za onime što ovaj račun postiže s njim.",
+  "empty": "Nijedan top ne može nadmašiti oznaku bez nošenja.",
   "gun-carries": "top nosi {marks}",
   "none": "nema",
   "recent-window": "(30d)"

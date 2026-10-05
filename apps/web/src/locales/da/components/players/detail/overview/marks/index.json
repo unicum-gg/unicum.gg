@@ -14,7 +14,7 @@
     "note-share": "{aces} af {garage} køretøjer bærer et Ace Tanker ({percent}% af garagen)."
   },
   "reach": {
-    "heading": "Spil over kanonens niveau",
+    "heading": "Over bjælken, uden mærket",
     "description": "Køretøjer, hvis samlede skade allerede overstiger et mærke, de ikke bærer. Mærket er den samlede skade, farvelagt efter det mærke, den overstiger."
   },
   "none": "Ingen"

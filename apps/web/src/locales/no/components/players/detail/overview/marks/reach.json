@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} samlet skade, mot {threshold} for dette merket",
-  "empty": "Ingen kanon ligger bak det denne kontoen gjør med den.",
+  "empty": "Ingen kanon passerer et merke den ikke bærer.",
   "gun-carries": "kanonen bærer {marks}",
   "none": "ingen",
   "recent-window": "(30d)"
