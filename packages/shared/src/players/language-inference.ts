@@ -36,28 +36,62 @@ export function inferPlayerLanguages(
   history: PlayerClanHistoryFull,
   nowMs: number,
 ): string[] {
-  const scores = new Map<string, number>();
+  return scoreLanguageStints(stintsOf(history, nowMs));
+}
 
-  const accumulate = (langs: string[], durationMs: number) => {
-    if (langs.length === 0 || durationMs <= 0) return;
-    const share = durationMs / langs.length;
-    for (const lang of langs) {
-      scores.set(lang, (scores.get(lang) ?? 0) + share);
-    }
-  };
+/**
+ * One stay in a clan, reduced to the only two things the scoring reads.
+ *
+ * It exists so a caller that does NOT hold a deserialized history can still get
+ * the same answer. The marks board's hourly pass is exactly that: it pulls the
+ * language arrays and the durations straight out of the stored JSON in SQL,
+ * because reading the whole history document for forty thousand accounts would
+ * move a hundred megabytes of clan metadata to score a handful of two-letter
+ * codes. What it must not do is score them differently, which is the whole
+ * reason this type is here instead of a second implementation.
+ */
+export type LanguageStint = {
+  languages: string[];
+  durationMs: number;
+};
 
+function* stintsOf(
+  history: PlayerClanHistoryFull,
+  nowMs: number,
+): Generator<LanguageStint> {
   if (history.currentStint) {
-    accumulate(
-      history.currentStint.clan.languages,
-      nowMs - history.currentStint.joinedAt.getTime(),
-    );
+    yield {
+      languages: history.currentStint.clan.languages,
+      durationMs: nowMs - history.currentStint.joinedAt.getTime(),
+    };
   }
   for (const s of history.pastStints) {
     if (!s.leftAt) continue;
-    accumulate(
-      s.clan.languages,
-      s.leftAt.getTime() - s.joinedAt.getTime(),
-    );
+    yield {
+      languages: s.clan.languages,
+      durationMs: s.leftAt.getTime() - s.joinedAt.getTime(),
+    };
+  }
+}
+
+/**
+ * The scoring itself: split each stay across the clan's declared languages,
+ * sum, and keep everything within `KEEP_RATIO` of the leader.
+ *
+ * Dominant language first, which is what lets a caller showing one flag show
+ * the right one.
+ */
+export function scoreLanguageStints(
+  stints: Iterable<LanguageStint>,
+): string[] {
+  const scores = new Map<string, number>();
+
+  for (const { languages, durationMs } of stints) {
+    if (languages.length === 0 || durationMs <= 0) continue;
+    const share = durationMs / languages.length;
+    for (const lang of languages) {
+      scores.set(lang, (scores.get(lang) ?? 0) + share);
+    }
   }
 
   if (scores.size === 0) return [];
