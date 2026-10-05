@@ -20,7 +20,8 @@ import { PlayerConnectionsButton } from "@/components/players/detail/connections
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import type { ClanStint } from "@unicum.gg/shared";
 import { Interpolate } from "@/components/interpolate";
-import { DateShape, useDateFormat } from "@/components/local-date";
+import { DateShape } from "@/lib/date-shapes";
+import { useDateFormat } from "@/components/local-date";
 import { useTranslation } from "@/hooks/use-translation";
 
 export function PlayerHeader(
