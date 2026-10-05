@@ -14,7 +14,7 @@
     "note-share": "{aces} of {garage} vehicles carry an Ace Tanker ({percent}% of the garage)."
   },
   "reach": {
-    "heading": "Playing above the gun",
+    "heading": "Above the bar, without the mark",
     "description": "Vehicles whose combined damage already clears a mark they do not carry. The badge is that combined damage, coloured by the mark it clears."
   },
   "none": "None"

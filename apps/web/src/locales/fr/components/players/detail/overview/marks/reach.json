@@ -1,6 +1,6 @@
 {
   "badge-title": "{combined} points de dégâts combinés, contre {threshold} requis pour cette marque",
-  "empty": "Aucun canon n’explique à lui seul ce que ce compte parvient à en tirer.",
+  "empty": "Aucun canon ne dépasse le seuil d’une marque qu’il n’arbore pas.",
   "gun-carries": "le canon porte {marks}",
   "none": "aucun",
   "recent-window": " (30j)"
