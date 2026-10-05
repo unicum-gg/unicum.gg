@@ -16,6 +16,7 @@ import {
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+import { writePlayerMarkCounts } from "./mark-counts";
 import { fetchPlayerMarksOnGun } from "./marks";
 import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
 import { computeDueAt } from "./refresh-policy";
@@ -579,6 +580,26 @@ export async function recordCurrentSnapshot(
         for (const t of tanks) {
           const m = marks.get(t.tank_id);
           if (m != null) t.marks_on_gun = m;
+        }
+        // The portal answers with the player's whole garage and no battle floor
+        // on it, which is the only floor-free reading of their marks we ever
+        // get, so this is where the three-marks board's counts are written from
+        // (see `*_player_marks` for why the nightly snapshot walk cannot be the
+        // source). Failing open for the reason `mirrorTournament` writes its
+        // clan attribution outside its own transaction: the counts are derived
+        // convenience and must never roll back a snapshot that arrived intact.
+        try {
+          await writePlayerMarkCounts(
+            region,
+            info.account_id,
+            marks,
+            info.statistics.all.battles,
+          );
+        } catch (err) {
+          console.error(
+            `[players] ${region}/${info.account_id} mark counts failed:`,
+            err,
+          );
         }
       }
     } else {

@@ -14,7 +14,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ROUTES from "@/constants/routes";
+import {
+  boardHref,
+  boardLanguageHref,
+  type FilterableBoard,
+} from "@/components/players/list/boards";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
 
@@ -26,20 +30,27 @@ export type PlayerLanguageOption = {
 const ALL = "all";
 
 /**
- * Compact language picker for the top-players board: a single select that
- * navigates to the chosen language leaderboard (or back to the all-languages
- * landing). Replaces the wide chip panel. The `strict` suffix is preserved
- * across switches.
+ * Compact language picker for a player board: a single select that navigates to
+ * the chosen language leaderboard (or back to the all-languages landing).
+ * Replaces the wide chip panel. The `strict` suffix is preserved across
+ * switches.
+ *
+ * `board` is which section's addresses to navigate to, since two boards now
+ * carry this picker and a reader filtering the marks board must not land on the
+ * rating one. It is a value rather than a pair of route builders because this
+ * runs in the browser and a server component cannot pass it a function.
  */
 export function PlayerLanguageSelect({
   available,
   active,
   region,
+  board,
   strict = false,
 }: {
   available: PlayerLanguageOption[];
   active: string | null;
   region: Region;
+  board: FilterableBoard;
   strict?: boolean;
 }) {
   const { locale } = useLocale();
@@ -48,8 +59,8 @@ export function PlayerLanguageSelect({
   const onChange = (value: string) => {
     router.push(
       value === ALL
-        ? ROUTES.PLAYERS(region)
-        : ROUTES.PLAYERS_BY_LANGUAGE(region, value, strict),
+        ? boardHref(board, region)
+        : boardLanguageHref(board, region, value, strict),
     );
   };
   return (

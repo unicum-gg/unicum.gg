@@ -5,6 +5,7 @@ import { assertPageInRange } from "@/lib/pagination";
 import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import { OnslaughtBoardLive } from "@/components/players/list/onslaught/board-live";
 import { RelativeTime } from "@/components/relative-time";
+import { PlayerBoard } from "@/components/players/list/boards";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { buildSafe, unicum } from "@/services/sdk";
@@ -168,7 +169,7 @@ export async function OnslaughtView({
 
       <PanelSeparator />
 
-      <PlayersModeTabs region={region} active="onslaught" locale={locale} />
+      <PlayersModeTabs region={region} active={PlayerBoard.Onslaught} locale={locale} />
 
       <PanelSeparator />
 

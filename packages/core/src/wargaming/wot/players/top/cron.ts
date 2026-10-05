@@ -5,6 +5,7 @@ import {
   topPlayersByRegion,
 } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
+import { recomputeMarksLanguages } from "@unicum.gg/core/players/mark-languages";
 import { db } from "@unicum.gg/core/db";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { computeTopPlayersAllMetrics, TopPlayersPeriod } from ".";
@@ -133,5 +134,22 @@ async function refreshRegion(region: Region): Promise<void> {
     );
   } catch (err) {
     console.error(`[top-players cron] ${region}/ratings failed:`, err);
+  }
+  // The same inference for the Marks of Excellence board, which the table above
+  // cannot serve: it only holds accounts with ten thousand battles that place in
+  // a metric's top ten thousand, and three-marking half a garage obliges a
+  // player to be neither. It rides this tick rather than a cron of its own
+  // because it answers the same question about the same accounts, from the same
+  // clan history, and two leases would learn it twice.
+  try {
+    const start = Date.now();
+    const n = await recomputeMarksLanguages(region);
+    console.log(
+      `[top-players cron] ${region}/marks-languages: ${n} rows in ${
+        Date.now() - start
+      }ms`,
+    );
+  } catch (err) {
+    console.error(`[top-players cron] ${region}/marks-languages failed:`, err);
   }
 }

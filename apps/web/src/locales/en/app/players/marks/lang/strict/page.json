@@ -1,0 +1,6 @@
+{
+  "title": "Most {marks}: strictly {language} players ({region})",
+  "description": "{name} {region} leaderboard of the players whose inferred clan-history language is exclusively {language}, holding the most guns at {marks}.",
+  "og-title": "Most {marks}: strictly {language}",
+  "og-subtitle": "{region} leaderboard"
+}

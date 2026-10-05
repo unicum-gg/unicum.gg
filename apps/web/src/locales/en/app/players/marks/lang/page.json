@@ -1,0 +1,6 @@
+{
+  "title": "Most {marks}: {language} players ({region})",
+  "description": "{name} {region} leaderboard of the {language}-speaking players holding the most guns at {marks}, broken down by tier.",
+  "og-title": "Most {marks}: {language}",
+  "og-subtitle": "{region} leaderboard"
+}

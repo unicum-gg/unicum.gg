@@ -1,0 +1,6 @@
+{
+  "title": "Most {marks} in World of Tanks ({region})",
+  "description": "{name} {region} leaderboard of the players holding the most guns at {marks}, broken down by tier and filterable by inferred clan-history language.",
+  "og-title": "Most {marks}",
+  "og-subtitle": "{region} leaderboard"
+}

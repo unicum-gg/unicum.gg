@@ -119,6 +119,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/marks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Marks of Excellence leaderboard
+         * @description Players ranked by how many guns carry three Marks of Excellence, in total or at one tier. `tiers` names the tiers with a ranking, `coverage` says which accounts it is drawn from.
+         */
+        get: operations["get-{region}-players-marks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/onslaught": {
         parameters: {
             query?: never;
@@ -3672,6 +3692,59 @@ export interface components {
              */
             window: "recent" | "lifetime";
         };
+        MarksCoverage: {
+            /** @description Accounts holding at least one three-mark gun. */
+            ranked: number;
+            measured: number;
+            tracked: number;
+            /** @description Battles an account needs before it is ranked here. */
+            min_battles: number;
+            /** Format: date-time */
+            newest: Date | null;
+            /** Format: date-time */
+            oldest: Date | null;
+        };
+        MarksLanguageStats: {
+            code: string;
+            total: number;
+            /** @description Accounts whose inferred set is exactly this language, with no co-dominant second one. */
+            strict: number;
+        };
+        /** @description Marks of Excellence leaderboard row. */
+        MarksSummary: {
+            account_id: number;
+            nickname: string;
+            clan_tag: string | null;
+            clan_color: string | null;
+            battles: number;
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+            /** @description Guns carrying three Marks of Excellence, every tier. */
+            marks3: number;
+            /** @description Three-mark guns per tier, index 0 holding tier 1. Every tier column the board draws is read out of this. Shorter than the tier count when the player holds none at the top tiers. */
+            marks3_by_tier: number[];
+            marks2: number;
+            marks1: number;
+            /** @description Vehicles a mark level was read for on this account, which is the row's own denominator: three marks mean more on a garage of forty than on one of nine hundred. */
+            known: number;
+            /**
+             * Format: date-time
+             * @description The newest observation these counts were taken from. Exact when the marks were read from the portal, and an upper bound for an account seeded from stored snapshots, since the bulk pipeline carries the last known marks forward without re-reading them.
+             */
+            measured_at: Date;
+            /** @description Languages inferred from the account's clan history, dominant first. Empty for an account we hold no history for. */
+            languages: string[];
+            is_verified?: boolean;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
+        };
         /** @description How many of the player's vehicles of one tier carry no mark, one, two or three Marks of Excellence. */
         MarksTierRow: {
             tier: number;
@@ -4211,6 +4284,12 @@ export interface components {
                 byTier: components["schemas"]["MasteryTierRow"][];
             };
             reach: components["schemas"]["MarkReachEntry"][];
+        };
+        PlayerMarksResponse: {
+            results: components["schemas"]["MarksSummary"][];
+            tiers: number[];
+            languages: components["schemas"]["MarksLanguageStats"][];
+            coverage: components["schemas"]["MarksCoverage"];
         };
         /** @description A player's standing at one instant. */
         PlayerOnslaughtPoint: {
@@ -6737,6 +6816,36 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerLanguagesResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-marks": {
+        parameters: {
+            query?: {
+                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
+                limit?: number;
+                /** @description Ranking column: `total` for three-mark guns across every tier, or `tier-<n>` for one tier (`tier-10`). Default `total`, which is also what an unrecognised value falls back to. Not an enum: which tiers the game has is Wargaming's to decide, and the response's `tiers` names the ones this region has a ranking for. */
+                sort?: string;
+                lang?: components["schemas"]["langField"];
+                strict?: components["schemas"]["strictField"];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerMarksResponse"];
                 };
             };
         };

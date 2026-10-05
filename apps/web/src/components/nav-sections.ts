@@ -63,6 +63,15 @@ export function navSections(
           description: t("links.top-players.description"),
         },
         {
+          // Wargaming's own name for the mark level, like the mode names below
+          // it: a label that is nothing but a name is already written down per
+          // language, so it is looked up rather than written here.
+          id: "players-marks",
+          label: tGame("marks.3"),
+          href: ROUTES.PLAYERS_MARKS(region),
+          description: t("links.players-marks.description"),
+        },
+        {
           id: "players-steel-hunter",
           label: tGame("player-modes.steel-hunter"),
           href: ROUTES.PLAYERS_STEEL_HUNTER(region),

@@ -1,0 +1,6 @@
+{
+  "tier": "Tier {tier}",
+  "read": "Garage read",
+  "empty": "No player on this board yet.",
+  "no-match": "No player matches the current filter."
+}

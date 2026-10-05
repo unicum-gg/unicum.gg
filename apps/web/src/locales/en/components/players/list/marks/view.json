@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Most <accent>{marks}</accent>",
+    "language": "Most <accent>{marks}</accent> among {language} players"
+  },
+  "intro": {
+    "all": "{region} players with the most guns at {marks}, broken down by tier (minimum {battles} battles).",
+    "language": "{region} players whose inferred clan-history language set includes {language}, with the most guns at {marks}.",
+    "strict": "{region} players whose inferred clan-history language is exclusively {language}, with the most guns at {marks}."
+  },
+  "board": {
+    "all": "Top {count} players by {marks}",
+    "language": "Top {count} {language} players by {marks}",
+    "strict": "Top {count} strictly {language} players by {marks}"
+  },
+  "coverage": {
+    "title": "What this board covers",
+    "body": "{marksName} are not in Wargaming’s public API, so we read them from the game portal one account at a time, which only happens when someone looks a profile up. This board ranks the {measured} accounts whose garage we have read, out of {tracked} that clear the battle floor: a player nobody has searched for is missing from it rather than last on it.",
+    "freshness": "The newest observation behind these counts is from {newest}, the oldest from {oldest}.",
+    "profile": "Looking a player up reads their marks, so a profile view is what puts them on this board."
+  }
+}

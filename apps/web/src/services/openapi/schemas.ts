@@ -540,6 +540,26 @@ export const steelHunterQuery = z.object({
     .meta({ description: "Ranking column (default hr)." }),
 });
 
+/**
+ * The Marks of Excellence board: one lifetime ranking, sortable by column, with
+ * the leaderboards' own language filter.
+ *
+ * `sort` is an open string rather than an enum, for the reason the glossary's
+ * `language` is: the set is not ours to publish. It is `total` plus one value
+ * per tier the game has, and a closed list here would be a copy of the tier
+ * list that goes stale silently. No `period` either: a mark is an achievement a
+ * player keeps, so there is no week or month of it to rank.
+ */
+export const playerMarksQuery = z.object({
+  limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
+  sort: z.string().optional().meta({
+    description:
+      "Ranking column: `total` for three-mark guns across every tier, or `tier-<n>` for one tier (`tier-10`). Default `total`, which is also what an unrecognised value falls back to. Not an enum: which tiers the game has is Wargaming's to decide, and the response's `tiers` names the ones this region has a ranking for.",
+  }),
+  lang: langField.optional(),
+  strict: strictField.optional(),
+});
+
 // The Onslaught board is the game's own full ranked standings (every player down
 // to the Master cutoff, a few thousand), not a top-N of a huge population, so it
 // gets a much higher cap than the WNX/SH boards.

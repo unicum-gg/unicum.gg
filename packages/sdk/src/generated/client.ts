@@ -511,6 +511,8 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   distribution(): RequestHandle<Data<"/{region}/players/distribution">>;
   /** Player languages */
   languages(): RequestHandle<Data<"/{region}/players/languages">>;
+  /** Marks of Excellence leaderboard */
+  marks(query?: QueryOf<"/{region}/players/marks">): RequestHandle<Data<"/{region}/players/marks">>;
   /** Onslaught leaderboard */
   onslaught(query?: QueryOf<"/{region}/players/onslaught">): RequestHandle<Data<"/{region}/players/onslaught">>;
   /** Search players */
@@ -650,6 +652,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/languages", {
             params: { path: { region: this.region } },
+          }),
+      );
+    ns.marks = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/marks", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/players/marks", {
+            params: { path: { region: this.region }, query },
           }),
       );
     ns.onslaught = (query) =>

@@ -1,17 +1,22 @@
 import { SegmentedControl } from "@/components/segmented-control";
-import ROUTES from "@/constants/routes";
+import {
+  boardLanguageHref,
+  type FilterableBoard,
+} from "@/components/players/list/boards";
 import type { Region } from "@unicum.gg/wargaming";
 import { getTranslation } from "@/lib/translations.server";
 
 /**
- * "Any / Strict" segmented switch above the filtered top-players list.
+ * "Any / Strict" segmented switch above a filtered player board.
  * "Any" = the inferred language set contains this language (alongside
  * others); "Strict" = the player's inferred language set is exactly this
- * one. Mirror of the clans toggle, pointing at `ROUTES.PLAYERS`.
+ * one. Mirror of the clans toggle, and `board` is which section's addresses it
+ * points at, like the language picker beside it.
  */
 export async function PlayerStrictModeToggle({
   region,
   language,
+  board,
   strict,
   total,
   strictCount,
@@ -19,6 +24,7 @@ export async function PlayerStrictModeToggle({
 }: {
   region: Region;
   language: string;
+  board: FilterableBoard;
   strict: boolean;
   total: number;
   strictCount: number;
@@ -33,13 +39,13 @@ export async function PlayerStrictModeToggle({
         {
           id: "any",
           label: t("any-toggle"),
-          href: ROUTES.PLAYERS_BY_LANGUAGE(region, language),
+          href: boardLanguageHref(board, region, language),
           count: total,
         },
         {
           id: "strict",
           label: t("strict-toggle"),
-          href: ROUTES.PLAYERS_BY_LANGUAGE(region, language, true),
+          href: boardLanguageHref(board, region, language, true),
           count: strictCount,
         },
       ]}

@@ -66,6 +66,25 @@ const ROUTES = {
     region === Region.EU
       ? "/players/onslaught"
       : pathcat("/:region/players/onslaught", { region }),
+  // The Marks of Excellence board: who holds the most three-mark guns. Its own
+  // section rather than a sort of the overall board, because it ranks a count
+  // of achievements rather than a career average and the two put entirely
+  // different people on top.
+  PLAYERS_MARKS: (region: Region) =>
+    region === Region.EU
+      ? "/players/marks"
+      : pathcat("/:region/players/marks", { region }),
+  PLAYERS_MARKS_BY_LANGUAGE: (
+    region: Region,
+    language: string,
+    strict: boolean = false,
+  ) => {
+    const base =
+      region === Region.EU
+        ? pathcat("/players/marks/lang/:language", { language })
+        : pathcat("/:region/players/marks/lang/:language", { region, language });
+    return strict ? `${base}/strict` : base;
+  },
   PLAYERS_BY_LANGUAGE: (
     region: Region,
     language: string,

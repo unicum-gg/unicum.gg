@@ -12,6 +12,7 @@ import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { Interpolate } from "@/components/interpolate";
 import { getTranslation } from "@/lib/translations.server";
+import { PlayerBoard } from "@/components/players/list/boards";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { PlayerLanguageSelect } from "@/components/players/list/language-select";
 import { PlayerStrictModeToggle } from "@/components/players/list/strict-mode-toggle";
@@ -190,7 +191,7 @@ export async function PlayersLandingView({
           landing including the per-language pages, mirroring the clan landing's
           stronghold tabs. */}
       <PanelSeparator />
-      <PlayersModeTabs region={region} active="overall" locale={locale} />
+      <PlayersModeTabs region={region} active={PlayerBoard.Overall} locale={locale} />
 
       <PanelSeparator />
 
@@ -220,6 +221,7 @@ export async function PlayersLandingView({
               }))}
               active={language}
               region={region}
+              board={PlayerBoard.Overall}
               strict={strict}
             />
             {language && filterCounts && (
@@ -227,6 +229,7 @@ export async function PlayersLandingView({
                 locale={locale}
                 region={region}
                 language={language}
+                board={PlayerBoard.Overall}
                 strict={strict}
                 total={filterCounts.total}
                 strictCount={filterCounts.strict}

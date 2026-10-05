@@ -8,6 +8,7 @@ import ROUTES from "@/constants/routes";
 import { assertPageInRange } from "@/lib/pagination";
 import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import { SteelHunterRatingScale } from "@/components/players/list/steel-hunter/rating-scale";
+import { PlayerBoard } from "@/components/players/list/boards";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import {
   Panel,
@@ -92,7 +93,7 @@ export async function SteelHunterView({
 
       <PanelSeparator />
 
-      <PlayersModeTabs region={region} active="steel-hunter" locale={locale} />
+      <PlayersModeTabs region={region} active={PlayerBoard.SteelHunter} locale={locale} />
 
       <PanelSeparator />
 

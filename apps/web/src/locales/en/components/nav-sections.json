@@ -30,6 +30,9 @@
       "label": "Community ratings",
       "description": "Rated by the players sent there"
     },
+    "players-marks": {
+      "description": "Who holds the most three-mark guns"
+    },
     "players-onslaught": {
       "description": "Ranked Onslaught ladder"
     },
