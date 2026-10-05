@@ -1,0 +1,6 @@
+{
+  "tier": "Taso {tier}",
+  "read": "Talli luettu",
+  "empty": "Yhtään pelaajaa ei ole vielä tässä tulostaulukossa.",
+  "no-match": "Yksikään pelaaja ei vastaa nykyistä suodatinta."
+}

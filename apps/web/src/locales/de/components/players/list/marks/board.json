@@ -1,0 +1,6 @@
+{
+  "tier": "Stufe {tier}",
+  "read": "Garage gelesen",
+  "empty": "Noch kein Spieler auf dieser Rangliste.",
+  "no-match": "Kein Spieler entspricht dem aktuellen Filter."
+}

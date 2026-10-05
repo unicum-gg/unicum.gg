@@ -30,6 +30,9 @@
       "label": "Mga rating ng Komunidad",
       "description": "Namarkahan ng mga manlalarong ipinadala roon"
     },
+    "players-marks": {
+      "description": "Sino ang may hawak ng pinakamaraming baril na may tatlong marka"
+    },
     "players-onslaught": {
       "description": "Talaan ng ranggo ng Sugod"
     },

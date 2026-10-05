@@ -1,0 +1,6 @@
+{
+  "title": "A legtöbb {marks}: szigorúan {language} játékosok ({region})",
+  "description": "{name} {region} ranglista azon játékosokról, akiknek a következtetett klántörténet-nyelve kizárólag {language}, és akiknél a legtöbb, {marks} jelet elérő ágyú van.",
+  "og-title": "A legtöbb {marks}: szigorúan {language}",
+  "og-subtitle": "{region} ranglista"
+}

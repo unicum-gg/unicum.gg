@@ -30,6 +30,9 @@
       "label": "Оцене заједнице",
       "description": "Оценили igrači poslato тамо"
     },
+    "players-marks": {
+      "description": "Ко има највише topova са три ознаке"
+    },
     "players-onslaught": {
       "description": "Ранг-листа рангираног Juriš-а"
     },

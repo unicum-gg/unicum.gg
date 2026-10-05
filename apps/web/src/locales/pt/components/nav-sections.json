@@ -30,6 +30,9 @@
       "label": "Classificações da Comunidade",
       "description": "Avaliado pelos jogadores enviados para lá"
     },
+    "players-marks": {
+      "description": "Quem mantém mais canhões com três marcas"
+    },
     "players-onslaught": {
       "description": "classificação do Massacre classificatório"
     },

@@ -1,0 +1,6 @@
+{
+  "title": "Највише {marks}: играчи на {language} језику ({region})",
+  "description": "{name} {region} ранг-листа играча на {language} језику који имају највише topova са {marks}, разврстаних по нивоу.",
+  "og-title": "Највише {marks}: {language}",
+  "og-subtitle": "Ранг-листа за {region}"
+}

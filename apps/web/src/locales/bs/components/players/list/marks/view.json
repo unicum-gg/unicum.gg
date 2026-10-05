@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Najviše <accent>{marks}</accent>",
+    "language": "Najviše <accent>{marks}</accent> među igračima koji govore {language}"
+  },
+  "intro": {
+    "all": "Igrači iz regije {region} s najviše topova s {marks}, raspoređeni po nivou, uz minimum od {battles} bitaka.",
+    "language": "Igrači iz regije {region} čiji skup jezika zaključених na osnovu historije klana uključuje {language}, a koji imaju najviše topova s {marks}.",
+    "strict": "Igrači iz regije {region} čiji jezik zaključен na osnovu historije klana isključivo glasi {language}, a koji imaju najviše topova s {marks}."
+  },
+  "board": {
+    "all": "Najboljih {count} igrača prema broju {marks}",
+    "language": "Najboljih {count} igrača koji govore {language}, prema broju {marks}",
+    "strict": "Najboljih {count} igrača koji strogo govore {language}, prema broju {marks}"
+  },
+  "coverage": {
+    "title": "Šta ova rang-lista obuhvata",
+    "body": "{marksName} nisu dostupne u javnom API-ju kompanije Wargaming, pa ih čitamo s portala igre, jedan račun po jedan, što se dešava samo kada neko potraži profil. Ova rang-lista rangira {measured} naloga čiju smo garažu pročitali, od ukupno {tracked} naloga koji ispunjavaju minimum bitaka. Igrač kojeg niko nije pretražio nedostaje na rang-listi, umjesto da bude posljednji na njoj.",
+    "freshness": "Najnovije opažanje iza ovih brojeva je iz vremena {newest}, a najstarije iz vremena {oldest}.",
+    "profile": "Kada potražite igrača, očitavaju se njegove oznake, pa ga upravo prikaz profila dodaje na ovu rang-listu."
+  }
+}

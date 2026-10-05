@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "最多 <accent>{marks}</accent>",
+    "language": "{language}语言玩家中最多 <accent>{marks}</accent>"
+  },
+  "intro": {
+    "all": "{region}地区拥有最多{marks}炮管的玩家，按等级细分（最低 {battles} 场战斗）。",
+    "language": "{region}地区推断的军团历史语言集合包含{language}的玩家中，拥有最多{marks}炮管的玩家。",
+    "strict": "{region}地区推断的军团历史语言仅为{language}的玩家中，拥有最多{marks}炮管的玩家。"
+  },
+  "board": {
+    "all": "按{marks}排名的前 {count} 名玩家",
+    "language": "按{marks}排名的前 {count} 名{language}语言玩家",
+    "strict": "按{marks}排名的前 {count} 名严格使用{language}语言的玩家"
+  },
+  "coverage": {
+    "title": "此榜单涵盖的内容",
+    "body": "{marksName}不在Wargaming的公开 API 中，因此我们从游戏门户逐个账号读取，只有有人查看个人资料时才会发生。此榜单对我们已读取车库的 {measured} 个账号进行排名，这些账号来自 {tracked} 个达到最低战斗场次要求的账号：没人搜索过的玩家不会出现在榜单上，而不是排在最后。",
+    "freshness": "这些数量所依据的最新观测来自 {newest}，最早的观测来自 {oldest}。",
+    "profile": "查看玩家个人资料会读取其标记，因此个人资料查看会将其加入此榜单。"
+  }
+}

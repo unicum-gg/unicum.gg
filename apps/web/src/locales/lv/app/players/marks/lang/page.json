@@ -1,0 +1,6 @@
+{
+  "title": "Visvairāk {marks}: spēlētāji, kuri runā {language} ({region})",
+  "description": "{name} {region} līderu saraksts ar spēlētājiem, kuri runā {language} un kuriem ir visvairāk lielgabalu ar {marks}, sadalīts pa līmeņiem.",
+  "og-title": "Visvairāk {marks}: {language}",
+  "og-subtitle": "{region} līderu saraksts"
+}

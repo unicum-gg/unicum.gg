@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Flest <accent>{marks}</accent>",
+    "language": "Flest <accent>{marks}</accent> bland {language}-spelare"
+  },
+  "intro": {
+    "all": "Spelare i {region} med flest kanoner med {marks} märken, uppdelat efter nivå, med minimum {battles} strider.",
+    "language": "Spelare i {region} vars härledda klanhistorikspråk innehåller {language}, med flest kanoner med {marks} märken.",
+    "strict": "Spelare i {region} vars härledda klanhistorikspråk uteslutande är {language}, med flest kanoner med {marks} märken."
+  },
+  "board": {
+    "all": "Topp {count} spelare efter {marks}",
+    "language": "Topp {count} {language}-spelare efter {marks}",
+    "strict": "Topp {count} enbart {language}-spelare efter {marks}"
+  },
+  "coverage": {
+    "title": "Vad denna topplista omfattar",
+    "body": "{marksName} finns inte i Wargamings offentliga API, så vi läser dem från spelportalen, ett konto i taget. Det händer bara när någon söker efter en profil. Denna topplista rangordnar de {measured} konton vars garage vi har läst, av {tracked} konton som klarar minimumgränsen för strider. En spelare som ingen har sökt efter saknas därför från topplistan i stället för att ligga sist på den.",
+    "freshness": "Den senaste observationen bakom dessa antal är från {newest}, och den äldsta är från {oldest}.",
+    "profile": "När du söker efter en spelare läses deras märken, så en profilvisning är det som placerar dem på denna topplista."
+  }
+}

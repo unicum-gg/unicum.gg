@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanks 中最多{marks}的玩家（{region}）",
+  "description": "{name} {region}地区拥有最多{marks}炮管的玩家排行榜，按等级细分，并可按推断的军团历史语言筛选。",
+  "og-title": "最多{marks}",
+  "og-subtitle": "{region}地区排行榜"
+}

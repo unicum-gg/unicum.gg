@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Eniten <accent>{marks}</accent>",
+    "language": "Eniten <accent>{marks}</accent> {language}-kielisten pelaajien joukossa"
+  },
+  "intro": {
+    "all": "{region}-alueen pelaajat, joiden hallussa on eniten {marks}-merkkisiä tykkejä, tasoittain jaoteltuna, vähintään {battles} taistelua.",
+    "language": "{region}-alueen pelaajat, joiden pääteltyyn klaanihistorian kielijoukkoon kuuluu {language} ja joiden hallussa on eniten {marks}-merkkisiä tykkejä.",
+    "strict": "{region}-alueen pelaajat, joiden päätelty klaanihistorian kieli on yksinomaan {language} ja joiden hallussa on eniten {marks}-merkkisiä tykkejä."
+  },
+  "board": {
+    "all": "Parhaat {count} pelaajaa {marks}-merkkien mukaan",
+    "language": "Parhaat {count} {language}-kielistä pelaajaa {marks}-merkkien mukaan",
+    "strict": "Parhaat {count} tiukasti {language}-kielistä pelaajaa {marks}-merkkien mukaan"
+  },
+  "coverage": {
+    "title": "Mitä tämä tulostaulukko kattaa",
+    "body": "{marksName} eivät ole Wargamingin julkisessa API:ssa, joten luemme ne peliportaalista yksi tili kerrallaan. Tämä tapahtuu vain, kun joku katsoo profiilia. Tämä tulostaulukko asettaa järjestykseen {measured} tiliä, joiden tallin olemme lukeneet, niiden {tracked} tilin joukosta, jotka ylittävät taistelurajan. Pelaaja, jota kukaan ei ole hakenut, puuttuu tulostaulukosta kokonaan eikä ole sen viimeisenä.",
+    "freshness": "Näiden määrien taustalla oleva uusin havainto on ajalta {newest} ja vanhin ajalta {oldest}.",
+    "profile": "Kun pelaajan profiilia katsotaan, hänen merkkinsä luetaan. Siksi profiilin katsominen lisää pelaajan tähän tulostaulukkoon."
+  }
+}

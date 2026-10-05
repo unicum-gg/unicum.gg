@@ -1,0 +1,6 @@
+{
+  "title": "Visvairāk {marks}: tikai spēlētāji, kuri runā {language} ({region})",
+  "description": "{name} {region} līderu saraksts ar spēlētājiem, kuru secinātā klana vēstures valoda ir tikai {language} un kuriem ir visvairāk lielgabalu ar {marks}.",
+  "og-title": "Visvairāk {marks}: tikai {language}",
+  "og-subtitle": "{region} līderu saraksts"
+}

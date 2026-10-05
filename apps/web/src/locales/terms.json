@@ -731,7 +731,10 @@
     "connected": "مرتبط",
     "listed": "مدرج",
     "profile": "الملف الشخصي",
-    "role": "الدور"
+    "role": "الدور",
+    "guns": "المدافع",
+    "holding": "المالكون",
+    "strictly": "فقط"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1464,7 +1467,10 @@
     "connected": "падключаны",
     "listed": "пералічаны",
     "profile": "профіль",
-    "role": "роля"
+    "role": "роля",
+    "guns": "гарматы",
+    "holding": "валоданне",
+    "strictly": "строга"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2396,7 +2402,10 @@
     "connected": "свързан",
     "listed": "изброен",
     "profile": "профил",
-    "role": "роля"
+    "role": "роля",
+    "guns": "оръдия",
+    "holding": "притежаващи",
+    "strictly": "строго"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3137,7 +3146,10 @@
     "connected": "povezan",
     "listed": "naveden",
     "profile": "profil",
-    "role": "uloga"
+    "role": "uloga",
+    "guns": "topovi",
+    "holding": "posjedovanje",
+    "strictly": "strogo"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4080,7 +4092,10 @@
     "connected": "připojený",
     "listed": "uvedený",
     "profile": "profil",
-    "role": "role"
+    "role": "role",
+    "guns": "děla",
+    "holding": "držení",
+    "strictly": "striktně"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5028,7 +5043,10 @@
     "connected": "tilknyttet",
     "listed": "opført",
     "profile": "profil",
-    "role": "rolle"
+    "role": "rolle",
+    "guns": "kanoner",
+    "holding": "besiddelse",
+    "strictly": "udelukkende"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5970,7 +5988,10 @@
     "connected": "verbunden",
     "listed": "gelistet",
     "profile": "Profil",
-    "role": "Rolle"
+    "role": "Rolle",
+    "guns": "Geschütze",
+    "holding": "haltend",
+    "strictly": "strikt"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6917,7 +6938,10 @@
     "connected": "συνδεδεμένος",
     "listed": "καταχωρισμένος",
     "profile": "προφίλ",
-    "role": "ρόλος"
+    "role": "ρόλος",
+    "guns": "πυροβόλα",
+    "holding": "διατήρηση",
+    "strictly": "αυστηρά"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7844,7 +7868,10 @@
     "connected": "conectado",
     "listed": "listado",
     "profile": "perfil",
-    "role": "rol"
+    "role": "rol",
+    "guns": "cañones",
+    "holding": "posesión",
+    "strictly": "estrictamente"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8796,7 +8823,10 @@
     "connected": "yhdistetty",
     "listed": "listattu",
     "profile": "profiili",
-    "role": "rooli"
+    "role": "rooli",
+    "guns": "tykit",
+    "holding": "hallussa",
+    "strictly": "tiukasti"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9727,7 +9757,10 @@
     "connected": "connecté",
     "listed": "répertorié",
     "profile": "profil",
-    "role": "rôle"
+    "role": "rôle",
+    "guns": "canons",
+    "holding": "détention",
+    "strictly": "strictement"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -10461,7 +10494,10 @@
     "connected": "कनेक्टेड",
     "listed": "सूचीबद्ध",
     "profile": "प्रोफ़ाइल",
-    "role": "भूमिका"
+    "role": "भूमिका",
+    "guns": "तोपें",
+    "holding": "धारण",
+    "strictly": "सख्ती से"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11407,7 +11443,10 @@
     "connected": "povezano",
     "listed": "navedeno",
     "profile": "profil",
-    "role": "uloga"
+    "role": "uloga",
+    "guns": "topovi",
+    "holding": "posjedovanje",
+    "strictly": "strogo"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12355,7 +12394,10 @@
     "connected": "csatlakoztatva",
     "listed": "listázott",
     "profile": "profil",
-    "role": "szerep"
+    "role": "szerep",
+    "guns": "ágyúk",
+    "holding": "tartás",
+    "strictly": "szigorúan"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13298,7 +13340,10 @@
     "connected": "collegato",
     "listed": "elencato",
     "profile": "profilo",
-    "role": "ruolo"
+    "role": "ruolo",
+    "guns": "cannoni",
+    "holding": "possesso",
+    "strictly": "strettamente"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14248,7 +14293,10 @@
     "connected": "連携済み",
     "listed": "掲載済み",
     "profile": "プロフィール",
-    "role": "役割"
+    "role": "役割",
+    "guns": "砲",
+    "holding": "保有",
+    "strictly": "厳密に"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -14986,7 +15034,10 @@
     "connected": "қосылған",
     "listed": "тізімделген",
     "profile": "профиль",
-    "role": "рөл"
+    "role": "рөл",
+    "guns": "зеңбіректер",
+    "holding": "иелену",
+    "strictly": "қатаң"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -15941,7 +15992,10 @@
     "connected": "연결됨",
     "listed": "등록된",
     "profile": "프로필",
-    "role": "역할"
+    "role": "역할",
+    "guns": "주포",
+    "holding": "보유",
+    "strictly": "엄격히"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -16893,7 +16947,10 @@
     "connected": "susietas",
     "listed": "įtrauktas",
     "profile": "profilis",
-    "role": "vaidmuo"
+    "role": "vaidmuo",
+    "guns": "pabūklai",
+    "holding": "laikymas",
+    "strictly": "griežtai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -17829,7 +17886,10 @@
     "connected": "savienots",
     "listed": "uzskaitīts",
     "profile": "profils",
-    "role": "loma"
+    "role": "loma",
+    "guns": "lielgabali",
+    "holding": "piederība",
+    "strictly": "tikai"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -18781,7 +18841,10 @@
     "connected": "verbonden",
     "listed": "vermeld",
     "profile": "profiel",
-    "role": "rol"
+    "role": "rol",
+    "guns": "kanonnen",
+    "holding": "in bezit",
+    "strictly": "strikt"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -19725,7 +19788,10 @@
     "connected": "tilkoblet",
     "listed": "oppført",
     "profile": "profil",
-    "role": "rolle"
+    "role": "rolle",
+    "guns": "kanoner",
+    "holding": "holder",
+    "strictly": "strengt"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -20665,7 +20731,10 @@
     "connected": "połączone",
     "listed": "wymienione",
     "profile": "profil",
-    "role": "rola"
+    "role": "rola",
+    "guns": "działa",
+    "holding": "posiadanie",
+    "strictly": "ściśle"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -21598,7 +21667,10 @@
     "connected": "conectado",
     "listed": "listado",
     "profile": "perfil",
-    "role": "função"
+    "role": "função",
+    "guns": "canhões",
+    "holding": "mantendo",
+    "strictly": "estritamente"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -22531,7 +22603,10 @@
     "connected": "conectat",
     "listed": "listat",
     "profile": "profil",
-    "role": "rol"
+    "role": "rol",
+    "guns": "tunuri",
+    "holding": "deținere",
+    "strictly": "strict"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -23452,7 +23527,10 @@
     "connected": "подключен",
     "listed": "указан",
     "profile": "профиль",
-    "role": "роль"
+    "role": "роль",
+    "guns": "орудия",
+    "holding": "владение",
+    "strictly": "строго"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -24191,7 +24269,10 @@
     "Connected accounts": "Povezani računi",
     "connected": "povezan",
     "listed": "naveden",
-    "role": "vloga"
+    "role": "vloga",
+    "guns": "topovi",
+    "holding": "posedovanje",
+    "strictly": "strogo"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -25139,7 +25220,10 @@
     "connected": "повезан",
     "listed": "наведен",
     "profile": "профил",
-    "role": "улога"
+    "role": "улога",
+    "guns": "topovi",
+    "holding": "posedovanje",
+    "strictly": "strogo"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -26091,7 +26175,10 @@
     "connected": "ansluten",
     "listed": "listad",
     "profile": "profil",
-    "role": "roll"
+    "role": "roll",
+    "guns": "kanoner",
+    "holding": "innehav",
+    "strictly": "strikt"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -27039,7 +27126,10 @@
     "connected": "เชื่อมต่อแล้ว",
     "listed": "อยู่ในรายการ",
     "profile": "โปรไฟล์",
-    "role": "บทบาท"
+    "role": "บทบาท",
+    "guns": "ปืน",
+    "holding": "การครอบครอง",
+    "strictly": "อย่างเคร่งครัด"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -27778,7 +27868,10 @@
     "connected": "nakakonekta",
     "listed": "nakalista",
     "profile": "profile",
-    "role": "role"
+    "role": "role",
+    "guns": "baril",
+    "holding": "paghawak",
+    "strictly": "mahigpit"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -28723,7 +28816,10 @@
     "connected": "bağlı",
     "listed": "listelenen",
     "profile": "profil",
-    "role": "rol"
+    "role": "rol",
+    "guns": "toplar",
+    "holding": "sahiplik",
+    "strictly": "yalnızca"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -29661,7 +29757,10 @@
     "connected": "підключений",
     "listed": "зазначений",
     "profile": "профіль",
-    "role": "роль"
+    "role": "роль",
+    "guns": "гармати",
+    "holding": "утримання",
+    "strictly": "строго"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -30588,7 +30687,10 @@
     "connected": "đã kết nối",
     "listed": "được liệt kê",
     "profile": "hồ sơ",
-    "role": "vai trò"
+    "role": "vai trò",
+    "guns": "pháo",
+    "holding": "sở hữu",
+    "strictly": "chỉ"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -31536,6 +31638,9 @@
     "connected": "已连接",
     "listed": "已列出",
     "profile": "个人资料",
-    "role": "角色"
+    "role": "角色",
+    "guns": "炮管",
+    "holding": "持有",
+    "strictly": "严格"
   }
 }

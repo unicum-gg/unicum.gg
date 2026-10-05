@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Najwięcej <accent>{marks}</accent>",
+    "language": "Najwięcej <accent>{marks}</accent> wśród graczy używających języka {language}"
+  },
+  "intro": {
+    "all": "Gracze z regionu {region} posiadający najwięcej dział z {marks}, z podziałem na poziomy, minimum {battles} bitew.",
+    "language": "Gracze z regionu {region}, których wywnioskowany zestaw języków historii klanu obejmuje {language}, posiadający najwięcej dział z {marks}.",
+    "strict": "Gracze z regionu {region}, których wywnioskowany język historii klanu to wyłącznie {language}, posiadający najwięcej dział z {marks}."
+  },
+  "board": {
+    "all": "Najlepszych {count} graczy według {marks}",
+    "language": "Najlepszych {count} graczy używających języka {language} według {marks}",
+    "strict": "Najlepszych {count} graczy używających wyłącznie języka {language} według {marks}"
+  },
+  "coverage": {
+    "title": "Co obejmuje ta tabela",
+    "body": "{marksName} nie są dostępne w publicznym API Wargaming, dlatego odczytujemy je z portalu gry, po jednym koncie naraz. Dzieje się to tylko wtedy, gdy ktoś wyszuka profil. Ta tabela szereguje {measured} kont, których garaż odczytaliśmy, spośród {tracked} kont spełniających minimum bitew. Gracz, którego nikt nie wyszukał, nie znajduje się na tej tabeli, zamiast zajmować na niej ostatnie miejsce.",
+    "freshness": "Najnowsza obserwacja uwzględniona w tych liczbach pochodzi z {newest}, a najstarsza z {oldest}.",
+    "profile": "Wyszukanie gracza odczytuje jego odznaki, więc wyświetlenie profilu umieszcza go na tej tabeli."
+  }
+}

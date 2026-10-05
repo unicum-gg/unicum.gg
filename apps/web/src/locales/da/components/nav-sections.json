@@ -30,6 +30,9 @@
       "label": "Fællesskabets vurderinger",
       "description": "Bedømt af spillerne, der bliver sendt dertil"
     },
+    "players-marks": {
+      "description": "Hvem har flest kanoner med tre mærker"
+    },
     "players-onslaught": {
       "description": "Rangeret Onslaught-rangliste"
     },

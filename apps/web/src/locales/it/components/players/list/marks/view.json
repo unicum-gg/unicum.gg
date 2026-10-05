@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Più <accent>{marks}</accent>",
+    "language": "Più <accent>{marks}</accent> tra i giocatori di lingua {language}"
+  },
+  "intro": {
+    "all": "Giocatori della {region} con il maggior numero di cannoni con {marks}, suddivisi per livello, minimo {battles} battaglie.",
+    "language": "Giocatori della {region} il cui insieme di lingue dedotte dalla cronologia del clan include {language}, con il maggior numero di cannoni con {marks}.",
+    "strict": "Giocatori della {region} la cui lingua dedotta dalla cronologia del clan è strettamente {language}, con il maggior numero di cannoni con {marks}."
+  },
+  "board": {
+    "all": "Top {count} giocatori per {marks}",
+    "language": "Top {count} giocatori di lingua {language} per {marks}",
+    "strict": "Top {count} giocatori strettamente di lingua {language} per {marks}"
+  },
+  "coverage": {
+    "title": "Cosa copre questa classifica",
+    "body": "I dati su {marksName} non sono disponibili nell’API pubblico di Wargaming, quindi li leggiamo dal portale di gioco, un account alla volta, cosa che succede solo quando qualcuno cerca un profilo. Questa classifica ordina i {measured} account di cui abbiamo letto l’officina, su {tracked} che superano la soglia minima di battaglie: un giocatore che nessuno ha cercato è assente, piuttosto che all’ultimo posto.",
+    "freshness": "L’osservazione più recente alla base di questi conteggi risale al {newest}, quella più vecchia al {oldest}.",
+    "profile": "Cercare un giocatore permette di leggere i suoi marchi, quindi è la visualizzazione del profilo a inserirlo in questa classifica."
+  }
+}

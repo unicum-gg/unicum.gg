@@ -30,6 +30,9 @@
       "label": "Ocjene zajednice",
       "description": "Ocijenjeno prema igračima koji su tamo poslani"
     },
+    "players-marks": {
+      "description": "Tko drži najviše topova s tri oznake"
+    },
     "players-onslaught": {
       "description": "Ljestvica rangirane Navale"
     },

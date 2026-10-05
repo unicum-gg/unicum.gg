@@ -30,6 +30,9 @@
       "label": "Valutazioni della community",
       "description": "Valutato dai giocatori inviati lì"
     },
+    "players-marks": {
+      "description": "Chi possiede il maggior numero di cannoni con tre marchi"
+    },
     "players-onslaught": {
       "description": "Classifica di Aggressione classificata"
     },

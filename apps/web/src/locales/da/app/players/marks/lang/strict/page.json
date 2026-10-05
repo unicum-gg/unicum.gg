@@ -1,0 +1,6 @@
+{
+  "title": "Flest {marks}: udelukkende {language}-spillere ({region})",
+  "description": "{name} {region}-rangliste over spillere, hvis udledte klanhistorik-sprog udelukkende er {language}, og som har flest kanoner med {marks}.",
+  "og-title": "Flest {marks}: udelukkende {language}",
+  "og-subtitle": "{region}-rangliste"
+}

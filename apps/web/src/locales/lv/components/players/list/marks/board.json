@@ -1,0 +1,6 @@
+{
+  "tier": "Līmenis {tier}",
+  "read": "Angāra lasījums",
+  "empty": "Šajā tabulā vēl nav neviena spēlētāja.",
+  "no-match": "Neviens spēlētājs neatbilst pašreizējam filtram."
+}

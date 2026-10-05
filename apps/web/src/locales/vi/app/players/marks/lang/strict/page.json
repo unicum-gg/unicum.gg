@@ -1,0 +1,6 @@
+{
+  "title": "Sở hữu nhiều {marks} nhất: người chơi chỉ dùng {language} ({region})",
+  "description": "{name} {region} bảng xếp hạng những người chơi có ngôn ngữ lịch sử Clan được suy đoán chỉ là {language}, sở hữu nhiều pháo đạt {marks} nhất.",
+  "og-title": "Sở hữu nhiều {marks} nhất: chỉ {language}",
+  "og-subtitle": "Bảng xếp hạng {region}"
+}

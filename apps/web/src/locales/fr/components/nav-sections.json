@@ -30,6 +30,9 @@
       "label": "Notations de la communauté",
       "description": "Noté par les joueurs qui y sont envoyés"
     },
+    "players-marks": {
+      "description": "Qui détient le plus de canons avec trois marques"
+    },
     "players-onslaught": {
       "description": "Échelon classé de l’Offensive"
     },

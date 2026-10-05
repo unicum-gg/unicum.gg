@@ -1,0 +1,6 @@
+{
+  "title": "厳密に{language}のプレイヤーの{marks}保有数最多（{region}）",
+  "description": "{name}の{region}ランキング。クラン履歴から推定された言語が{language}のみであるプレイヤーのうち、{marks}の砲を最も多く保有するプレイヤーを表示します。",
+  "og-title": "厳密に{language}の{marks}保有数最多",
+  "og-subtitle": "{region}ランキング"
+}

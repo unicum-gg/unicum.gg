@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "最も多くの<accent>{marks}</accent>",
+    "language": "{language}プレイヤーの中で最も多くの<accent>{marks}</accent>"
+  },
+  "intro": {
+    "all": "{region}のプレイヤーを、{marks}の砲の保有数が多い順にTier別で表示します（最小{battles}戦闘）。",
+    "language": "クラン履歴から推定された言語に{language}を含む{region}のプレイヤーを、{marks}の砲の保有数が多い順に表示します。",
+    "strict": "クラン履歴から推定された言語が{language}のみである{region}のプレイヤーを、{marks}の砲の保有数が多い順に表示します。"
+  },
+  "board": {
+    "all": "{marks}別トップ{count}プレイヤー",
+    "language": "{marks}別、{language}のトップ{count}プレイヤー",
+    "strict": "{marks}別、厳密に{language}のトップ{count}プレイヤー"
+  },
+  "coverage": {
+    "title": "このランキングの対象範囲",
+    "body": "{marksName}はWargamingの公開APIに含まれていないため、ゲームポータルからアカウントごとに読み取っています。これは誰かがプロフィールを検索したときにのみ起こります。このランキングでは、戦闘数の基準を満たす{tracked}アカウントのうち、ガレージを読み取った{measured}アカウントを順位付けしています。誰にも検索されていないプレイヤーは、最下位になるのではなくランキングから抜け落ちています。",
+    "freshness": "この件数の基になった最新の観測は{newest}、最も古い観測は{oldest}です。",
+    "profile": "プレイヤーを検索するとそのプレイヤーのマークが読み取られるため、プロフィール表示によってこのランキングに追加されます。"
+  }
+}

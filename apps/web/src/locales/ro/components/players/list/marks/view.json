@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Cele mai multe <accent>{marks}</accent>",
+    "language": "Cele mai multe <accent>{marks}</accent> printre jucătorii de limbă {language}"
+  },
+  "intro": {
+    "all": "Jucătorii din {region} cu cele mai multe tunuri cu {marks}, împărțiți pe niveluri, minim {battles} bătălii.",
+    "language": "Jucătorii din {region} al căror set de limbi dedus din istoricul clanului include {language}, cu cele mai multe tunuri cu {marks}.",
+    "strict": "Jucătorii din {region} al căror istoric al clanului dedus este exclusiv în {language}, cu cele mai multe tunuri cu {marks}."
+  },
+  "board": {
+    "all": "Primii {count} jucători după {marks}",
+    "language": "Primii {count} jucători de limbă {language} după {marks}",
+    "strict": "Primii {count} jucători strict de limbă {language} după {marks}"
+  },
+  "coverage": {
+    "title": "Ce acoperă acest clasament",
+    "body": "{marksName} nu sunt disponibile în API-ul public al Wargaming, așa că le citim din portalul jocului, câte un cont pe rând, lucru care se întâmplă doar când cineva caută un profil. Acest clasament ordonează cele {measured} conturi al căror garaj a fost citit, din cele {tracked} care depășesc pragul minim de bătălii. Un jucător pe care nimeni nu l-a căutat lipsește din clasament, nu se află pe ultimul loc.",
+    "freshness": "Cea mai recentă observație care stă la baza acestor numărări datează din {newest}, iar cea mai veche din {oldest}.",
+    "profile": "Căutarea unui jucător îi citește semnele, așa că vizualizarea profilului este cea care îl adaugă în acest clasament."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Nejvíce {marks}: striktně {language} hráči ({region})",
+  "description": "Žebříček hráčů z regionu {region} na webu {name}, jejichž odvozený jazyk historie klanu je výhradně {language} a kteří drží nejvíce děl se {marks}.",
+  "og-title": "Nejvíce {marks}: striktně {language}",
+  "og-subtitle": "Žebříček regionu {region}"
+}

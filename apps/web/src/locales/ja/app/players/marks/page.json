@@ -1,0 +1,6 @@
+{
+  "title": "World of Tanksの{marks}保有数最多（{region}）",
+  "description": "{name}の{region}ランキング。{marks}の砲を最も多く保有するプレイヤーをTier別に表示し、クラン履歴から推定された言語でフィルターできます。",
+  "og-title": "{marks}保有数最多",
+  "og-subtitle": "{region}ランキング"
+}

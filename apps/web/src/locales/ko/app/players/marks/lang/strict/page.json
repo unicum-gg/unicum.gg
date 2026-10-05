@@ -1,0 +1,6 @@
+{
+  "title": "최다 {marks} 보유: 엄격히 {language} 언어 플레이어들 ({region})",
+  "description": "{name} {region}의 클랜 기록에서 추정된 언어가 오직 {language}인 플레이어들 중 {marks} 주포를 가장 많이 보유한 플레이어 순위표입니다.",
+  "og-title": "최다 {marks} 보유: 엄격히 {language}",
+  "og-subtitle": "{region} 순위표"
+}

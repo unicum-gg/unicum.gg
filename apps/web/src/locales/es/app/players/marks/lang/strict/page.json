@@ -1,0 +1,6 @@
+{
+  "title": "Más {marks}: jugadores estrictamente de {language} ({region})",
+  "description": "Clasificación de {name} en {region} de los jugadores cuyo idioma inferido del historial del clan es exclusivamente {language}, y que tienen más cañones con {marks}.",
+  "og-title": "Más {marks}: estrictamente {language}",
+  "og-subtitle": "Clasificación de {region}"
+}

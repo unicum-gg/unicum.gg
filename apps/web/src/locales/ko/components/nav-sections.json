@@ -30,6 +30,9 @@
       "label": "커뮤니티 평점",
       "description": "해당 지도로 전송된 플레이어들이 평가"
     },
+    "players-marks": {
+      "description": "증표 3개 주포를 가장 많이 보유한 플레이어는 누구인가"
+    },
     "players-onslaught": {
       "description": "랭크 격전 순위"
     },

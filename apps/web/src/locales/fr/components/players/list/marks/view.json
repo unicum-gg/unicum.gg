@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Le plus de <accent>{marks}</accent>",
+    "language": "Le plus de <accent>{marks}</accent> parmi les joueurs de langue {language}"
+  },
+  "intro": {
+    "all": "Joueurs de {region} détenant le plus de canons avec {marks}, répartis par niveau, avec un minimum de {battles} batailles.",
+    "language": "Joueurs de {region} dont l’ensemble des langues déduites de l’historique de clan comprend {language}, détenant le plus de canons avec {marks}.",
+    "strict": "Joueurs de {region} dont la langue déduite de l’historique de clan est exclusivement {language}, détenant le plus de canons avec {marks}."
+  },
+  "board": {
+    "all": "Les {count} meilleurs joueurs selon {marks}",
+    "language": "Les {count} meilleurs joueurs de langue {language} selon {marks}",
+    "strict": "Les {count} meilleurs joueurs strictement de langue {language} selon {marks}"
+  },
+  "coverage": {
+    "title": "Ce que couvre ce classement",
+    "body": "{marksName} ne figurent pas dans l’API publique de Wargaming, nous les lisons donc depuis le portail du jeu, un compte à la fois, uniquement lorsqu’une personne consulte un profil. Ce classement répertorie les {measured} comptes dont nous avons lu le garage, parmi les {tracked} qui dépassent le minimum de batailles, un joueur que personne n’a recherché étant absent du classement plutôt que dernier.",
+    "freshness": "L’observation la plus récente utilisée pour ces comptages date du {newest}, et la plus ancienne du {oldest}.",
+    "profile": "La consultation d’un joueur lit ses marques, donc c’est la consultation d’un profil qui l’ajoute à ce classement."
+  }
+}

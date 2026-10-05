@@ -1,0 +1,6 @@
+{
+  "title": "Nejvíce {marks} ve World of Tanks ({region})",
+  "description": "Žebříček hráčů z regionu {region} na webu {name}, kteří drží nejvíce děl se {marks}, rozdělený podle úrovně a filtrovatelný podle odvozeného jazyka historie klanu.",
+  "og-title": "Nejvíce {marks}",
+  "og-subtitle": "Žebříček regionu {region}"
+}

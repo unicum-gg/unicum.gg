@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "최다 <accent>{marks}</accent> 보유",
+    "language": "{language} 언어 플레이어들 중 최다 <accent>{marks}</accent> 보유"
+  },
+  "intro": {
+    "all": "{region} 플레이어들 중 {marks} 주포를 가장 많이 보유한 플레이어들, 단계별 분류, 최소 {battles} 전투입니다.",
+    "language": "클랜 기록에서 추정된 언어 집합에 {language}가 포함된 {region} 플레이어들 중 {marks} 주포를 가장 많이 보유한 플레이어들입니다.",
+    "strict": "클랜 기록에서 추정된 언어가 오직 {language}인 {region} 플레이어들 중 {marks} 주포를 가장 많이 보유한 플레이어들입니다."
+  },
+  "board": {
+    "all": "{marks} 기준 상위 {count} 플레이어들",
+    "language": "{marks} 기준 상위 {count} {language} 언어 플레이어들",
+    "strict": "{marks} 기준 상위 {count} 엄격히 {language} 언어 플레이어들"
+  },
+  "coverage": {
+    "title": "이 리더보드의 범위",
+    "body": "{marksName}은 워게이밍의 공개 API에 포함되지 않으므로, 게임 포털에서 계정별로 하나씩 읽습니다. 이 작업은 누군가 프로필을 조회할 때만 발생합니다. 이 리더보드는 전투 기준을 충족한 {tracked}개 계정 중 차고를 읽은 {measured}개 계정의 순위를 매깁니다. 아무도 검색하지 않은 플레이어는 최하위가 아니라 리더보드에서 누락됩니다.",
+    "freshness": "이 수치의 최신 관측은 {newest}, 가장 오래된 관측은 {oldest}입니다.",
+    "profile": "플레이어를 조회하면 해당 플레이어의 증표를 읽으므로, 프로필 조회가 이 리더보드에 등록되는 계기가 됩니다."
+  }
+}

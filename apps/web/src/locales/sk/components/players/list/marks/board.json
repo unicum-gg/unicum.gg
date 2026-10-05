@@ -1,0 +1,6 @@
+{
+  "tier": "Úroveň {tier}",
+  "read": "Garáž načítaná",
+  "empty": "Na tejto lestvici zatiaľ nie je žiadny hráč.",
+  "no-match": "Žiadny hráč nezodpovedá aktuálnemu filtru."
+}

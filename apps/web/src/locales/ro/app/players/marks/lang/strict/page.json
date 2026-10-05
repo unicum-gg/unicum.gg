@@ -1,0 +1,6 @@
+{
+  "title": "Cele mai multe {marks}: strict jucători de limbă {language} ({region})",
+  "description": "Clasamentul {name} din {region} al jucătorilor al căror istoric al clanului dedus este exclusiv în {language}, care dețin cele mai multe tunuri cu {marks}.",
+  "og-title": "Cele mai multe {marks}: strict {language}",
+  "og-subtitle": "Clasament din {region}"
+}

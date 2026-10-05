@@ -1,0 +1,6 @@
+{
+  "title": "Eniten {marks}-merkkejä World of Tanksissa ({region})",
+  "description": "{name} {region}-alueen tulostaulukko pelaajista, joiden hallussa on eniten {marks}-merkkisiä tykkejä, tasoittain jaoteltuna ja päätellyn klaanihistorian kielen mukaan suodatettavana.",
+  "og-title": "Eniten {marks}-merkkejä",
+  "og-subtitle": "{region}-alueen tulostaulukko"
+}

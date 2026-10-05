@@ -1,0 +1,6 @@
+{
+  "title": "Τα περισσότερα {marks}: παίκτες που μιλούν {language} ({region})",
+  "description": "Πίνακας κατάταξης {name} {region} των παικτών που μιλούν {language} και κρατούν τα περισσότερα πυροβόλα με {marks}, ανά επίπεδο.",
+  "og-title": "Τα περισσότερα {marks}: {language}",
+  "og-subtitle": "Πίνακας κατάταξης {region}"
+}

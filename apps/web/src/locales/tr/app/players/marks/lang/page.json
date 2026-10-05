@@ -1,0 +1,6 @@
+{
+  "title": "En çok {marks}: {language} oyuncular ({region})",
+  "description": "{name} {region} liderlik tablosu, {marks} olan en fazla topa sahip, seviyeye göre ayrılmış {language} konuşan oyuncular.",
+  "og-title": "En çok {marks}: {language}",
+  "og-subtitle": "{region} liderlik tablosu"
+}

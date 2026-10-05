@@ -1,0 +1,6 @@
+{
+  "title": "Nejvíce {marks}: hráči s jazykem {language} ({region})",
+  "description": "Žebříček hráčů z regionu {region} na webu {name}, kteří mluví jazykem {language} a drží nejvíce děl se {marks}, rozdělený podle úrovně.",
+  "og-title": "Nejvíce {marks}: {language}",
+  "og-subtitle": "Žebříček regionu {region}"
+}

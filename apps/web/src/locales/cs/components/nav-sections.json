@@ -30,6 +30,9 @@
       "label": "Hodnocení komunity",
       "description": "Hodnoceno hráči odeslanými na dané místo"
     },
+    "players-marks": {
+      "description": "Kdo drží nejvíce děl se třemi známkami"
+    },
     "players-onslaught": {
       "description": "Žebříček hodnocených bitev v režimu Nápor"
     },

@@ -1,0 +1,6 @@
+{
+  "title": "Meeste {marks}: spelers met uitsluitend {language} als taal ({region})",
+  "description": "Klassement van {name} voor {region} van spelers wiens afgeleide clangeschiedenistaal uitsluitend {language} is en die de meeste kanonnen met {marks} in bezit hebben.",
+  "og-title": "Meeste {marks}: uitsluitend {language}",
+  "og-subtitle": "Klassement voor {region}"
+}

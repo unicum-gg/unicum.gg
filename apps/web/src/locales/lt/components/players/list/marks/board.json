@@ -1,0 +1,6 @@
+{
+  "tier": "Lygis {tier}",
+  "read": "Garažas perskaitytas",
+  "empty": "Šioje lentelėje dar nėra nė vieno žaidėjo.",
+  "no-match": "Nė vienas žaidėjas neatitinka dabartinio filtro."
+}

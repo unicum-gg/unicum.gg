@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Meeste <accent>{marks}</accent>",
+    "language": "Meeste <accent>{marks}</accent> onder spelers met {language} als taal"
+  },
+  "intro": {
+    "all": "Spelers uit {region} met de meeste kanonnen met {marks} in bezit, uitgesplitst per niveau, met minimum {battles} gevechten.",
+    "language": "Spelers uit {region} van wie de afgeleide clangeschiedenistaal {language} bevat en die de meeste kanonnen met {marks} in bezit hebben.",
+    "strict": "Spelers uit {region} wiens afgeleide clangeschiedenistaal uitsluitend {language} is en die de meeste kanonnen met {marks} in bezit hebben."
+  },
+  "board": {
+    "all": "Beste {count} spelers op basis van {marks}",
+    "language": "Beste {count} spelers met {language} als taal op basis van {marks}",
+    "strict": "Beste {count} spelers met uitsluitend {language} als taal op basis van {marks}"
+  },
+  "coverage": {
+    "title": "Wat dit klassement omvat",
+    "body": "{marksName} staan niet in de openbare API van Wargaming, dus lezen we ze één account tegelijk uit het spelportaal. Dat gebeurt alleen wanneer iemand een profiel opzoekt. Dit klassement rangschikt de {measured} accounts waarvan we de garage hebben gelezen, van de {tracked} accounts die de gevechtsdrempel halen. Een speler die niemand heeft opgezocht, ontbreekt in het klassement en staat dus niet onderaan.",
+    "freshness": "De nieuwste waarneming achter deze aantallen dateert van {newest}, de oudste van {oldest}.",
+    "profile": "Wanneer u een speler opzoekt, worden diens markeringen gelezen. Een profielweergave zorgt er dus voor dat de speler in dit klassement komt."
+  }
+}

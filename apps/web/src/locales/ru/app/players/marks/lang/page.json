@@ -1,0 +1,6 @@
+{
+  "title": "Больше всего {marks}: игроки на языке {language} ({region})",
+  "description": "Таблица лидеров {region} от {name} среди игроков на языке {language}, владеющих наибольшим количеством орудий с {marks}, с разбивкой по уровням.",
+  "og-title": "Больше всего {marks}: язык {language}",
+  "og-subtitle": "Таблица лидеров {region}"
+}

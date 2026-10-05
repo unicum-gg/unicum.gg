@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "A legtöbb <accent>{marks}</accent>",
+    "language": "A legtöbb <accent>{marks}</accent> a {language} játékosok között"
+  },
+  "intro": {
+    "all": "{region} játékosok, akiknél a legtöbb, {marks} jelet elérő ágyú van, szintenként bontva, legalább {battles} csatával.",
+    "language": "{region} játékosok, akiknek a következtetett klántörténet-nyelvi készlete tartalmazza ezt: {language}, és akiknél a legtöbb, {marks} jelet elérő ágyú van.",
+    "strict": "{region} játékosok, akiknek a következtetett klántörténet-nyelve kizárólag {language}, és akiknél a legtöbb, {marks} jelet elérő ágyú van."
+  },
+  "board": {
+    "all": "A {marks} szerinti legjobb {count} játékos",
+    "language": "A {marks} szerinti legjobb {count} {language} játékos",
+    "strict": "A {marks} szerinti legjobb {count} szigorúan {language} játékos"
+  },
+  "coverage": {
+    "title": "Mit tartalmaz ez a ranglista",
+    "body": "A {marksName} nem szerepel a Wargaming nyilvános API-jában, ezért egyenként olvassuk ki őket a játékportálról, ami csak akkor történik meg, amikor valaki rákeres egy profilra. Ez a ranglista azt a {measured} fiókot rangsorolja, amelyek garázsát már olvastuk, a csatahatárt elérő {tracked} fiók közül. Akit még senki sem keresett meg, az inkább hiányzik róla, mintsem az utolsó helyen szerepel.",
+    "freshness": "A darabszámok alapjául szolgáló legújabb megfigyelés dátuma {newest}, a legrégebbié pedig {oldest}.",
+    "profile": "Egy játékos profiljának megtekintése beolvassa a jeleit, ezért a profil megtekintése helyezi őt erre a ranglistára."
+  }
+}

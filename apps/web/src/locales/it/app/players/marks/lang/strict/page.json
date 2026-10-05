@@ -1,0 +1,6 @@
+{
+  "title": "Più {marks}: giocatori strettamente di lingua {language} ({region})",
+  "description": "Classifica {name} della {region} dei giocatori la cui lingua dedotta dalla cronologia del clan è strettamente {language}, in possesso del maggior numero di cannoni con {marks}.",
+  "og-title": "Più {marks}: strettamente {language}",
+  "og-subtitle": "Classifica della {region}"
+}

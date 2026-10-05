@@ -1,0 +1,6 @@
+{
+  "title": "Flest {marks}: enbart {language}-spelare ({region})",
+  "description": "{name} topplista för {region} över spelare vars härledda klanhistorikspråk uteslutande är {language}, med flest kanoner med {marks} märken.",
+  "og-title": "Flest {marks}: enbart {language}",
+  "og-subtitle": "Topplista för {region}"
+}

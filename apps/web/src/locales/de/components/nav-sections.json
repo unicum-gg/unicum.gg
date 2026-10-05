@@ -30,6 +30,9 @@
       "label": "Community-Wertungen",
       "description": "Bewertet von den dorthin gesendeten Spielern"
     },
+    "players-marks": {
+      "description": "Wer die meisten Geschütze mit 3 Marks hält"
+    },
     "players-onslaught": {
       "description": "Rangliste für Ansturm"
     },

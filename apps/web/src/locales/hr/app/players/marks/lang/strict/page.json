@@ -1,0 +1,6 @@
+{
+  "title": "Najviše {marks}: isključivo igrači na jeziku {language} ({region})",
+  "description": "{name}, {region} ljestvica igrača čiji je zaključeni jezik povijesti klana isključivo {language}, a posjeduju najviše topova s {marks}.",
+  "og-title": "Najviše {marks}: isključivo jezik {language}",
+  "og-subtitle": "Ljestvica za regiju {region}"
+}

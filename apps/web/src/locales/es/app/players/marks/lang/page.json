@@ -1,0 +1,6 @@
+{
+  "title": "Más {marks}: jugadores de {language} ({region})",
+  "description": "Clasificación de {name} en {region} de los jugadores de habla {language} que tienen más cañones con {marks}, desglosada por nivel.",
+  "og-title": "Más {marks}: {language}",
+  "og-subtitle": "Clasificación de {region}"
+}

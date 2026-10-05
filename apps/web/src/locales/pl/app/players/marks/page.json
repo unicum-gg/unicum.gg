@@ -1,0 +1,6 @@
+{
+  "title": "Najwięcej {marks} w World of Tanks ({region})",
+  "description": "{name} {region} ranking graczy posiadających najwięcej dział z {marks}, z podziałem na poziomy i filtrowaniem według wywnioskowanego języka historii klanu.",
+  "og-title": "Najwięcej {marks}",
+  "og-subtitle": "Ranking dla regionu {region}"
+}

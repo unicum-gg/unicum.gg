@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Flest <accent>{marks}</accent>",
+    "language": "Flest <accent>{marks}</accent> blandt {language}-spillere"
+  },
+  "intro": {
+    "all": "{region}-spillere med flest kanoner med {marks}, opdelt efter niveau, minimum {battles} kampe.",
+    "language": "{region}-spillere, hvis udledte klanhistorik-sprog omfatter {language}, med flest kanoner med {marks}.",
+    "strict": "{region}-spillere, hvis udledte klanhistorik-sprog udelukkende er {language}, med flest kanoner med {marks}."
+  },
+  "board": {
+    "all": "Top {count} spillere efter {marks}",
+    "language": "Top {count} {language}-spillere efter {marks}",
+    "strict": "Top {count} udelukkende {language}-spillere efter {marks}"
+  },
+  "coverage": {
+    "title": "Hvad denne rangliste dækker",
+    "body": "{marksName} findes ikke i Wargamings offentlige API, så vi læser dem fra spilportalen én konto ad gangen. Det sker kun, når nogen slår en profil op. Denne rangliste rangerer de {measured} konti, hvis garage vi har læst, ud af {tracked}, der klarer kampgrænsen. En spiller, som ingen har søgt efter, mangler derfor på ranglisten i stedet for at ligge sidst på den.",
+    "freshness": "Den nyeste observation bag dette antal er fra {newest}, den ældste fra {oldest}.",
+    "profile": "Når du slår en spiller op, læses spillerens mærker, så en profilvisning er det, der får spilleren med på denne rangliste."
+  }
+}

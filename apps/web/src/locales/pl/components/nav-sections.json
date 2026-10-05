@@ -30,6 +30,9 @@
       "label": "Oceny społeczności",
       "description": "Ocenione przez graczy, których tam wysłano"
     },
+    "players-marks": {
+      "description": "Kto posiada najwięcej dział z trzema odznakami"
+    },
     "players-onslaught": {
       "description": "Drabinka rankingowa w trybie Natarcie"
     },

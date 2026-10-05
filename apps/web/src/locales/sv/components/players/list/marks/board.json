@@ -1,0 +1,6 @@
+{
+  "tier": "Nivå {tier}",
+  "read": "Garage läst",
+  "empty": "Ingen spelare på denna topplista ännu.",
+  "no-match": "Ingen spelare matchar det aktuella filtret."
+}

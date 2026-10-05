@@ -1,0 +1,6 @@
+{
+  "title": "最多{marks}：严格使用{language}语言的玩家（{region}）",
+  "description": "{name} {region}地区严格使用{language}语言的玩家排行榜，这些玩家推断的军团历史语言仅为{language}，并拥有最多{marks}炮管。",
+  "og-title": "最多{marks}：严格使用{language}语言",
+  "og-subtitle": "{region}地区排行榜"
+}

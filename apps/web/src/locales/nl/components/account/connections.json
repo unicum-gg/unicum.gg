@@ -2,7 +2,7 @@
   "title": "Gekoppelde accounts",
   "description": "Elk account ontgrendelt iets op de site. Als je de verbinding verbreekt, wordt dat ongedaan gemaakt en wordt de autorisatie aan de service teruggegeven.",
   "loading": "Je account lezen",
-  "log-in-first": "Log in met je Wargaming.net ID om de accounts te zien die ermee verbonden zijn.",
+  "log-in-first": "Inloggen met uw Wargaming.net-ID om de daarmee verbonden accounts te bekijken.",
   "log-in": "Inloggen",
   "connect": "Verbinden",
   "disconnect": "Verbinding verbreken",

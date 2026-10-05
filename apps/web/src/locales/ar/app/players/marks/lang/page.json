@@ -1,0 +1,6 @@
+{
+  "title": "أكبر عدد من {marks}: اللاعبون الناطقون باللغة {language} ({region})",
+  "description": "{name}: قائمة المتصدرين في {region} للاعبين الناطقين باللغة {language} والمالكين لأكبر عدد من المدافع ذات {marks}، مقسّمة حسب المستوى.",
+  "og-title": "أكبر عدد من {marks}: {language}",
+  "og-subtitle": "قائمة المتصدرين في {region}"
+}

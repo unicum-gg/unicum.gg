@@ -1,0 +1,6 @@
+{
+  "title": "Daugiausia {marks}: griežtai {language} žaidėjai ({region})",
+  "description": "{name} regiono {region} lyderių lentelė, kurioje pateikiami žaidėjai, kurių numanoma klano istorijos kalba yra tik {language}, turintys daugiausia pabūklų su {marks}.",
+  "og-title": "Daugiausia {marks}: griežtai {language}",
+  "og-subtitle": "{region} lyderių lentelė"
+}

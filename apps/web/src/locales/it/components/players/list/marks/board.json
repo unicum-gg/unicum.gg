@@ -1,0 +1,6 @@
+{
+  "tier": "Livello {tier}",
+  "read": "Officina letta",
+  "empty": "Nessun giocatore è ancora in questa classifica.",
+  "no-match": "Nessun giocatore corrisponde al filtro attuale."
+}

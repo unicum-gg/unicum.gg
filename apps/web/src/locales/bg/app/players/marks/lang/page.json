@@ -1,0 +1,6 @@
+{
+  "title": "Най-много {marks}: игачи на {language} ({region})",
+  "description": "{name}, {region} класация на игачите, говорещи {language}, които притежават най-много оръдия с {marks}, подредени по ниво.",
+  "og-title": "Най-много {marks}: {language}",
+  "og-subtitle": "{region} класация"
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Najviac {marks} vo World of Tanks ({region})",
+  "description": "Rebríček {name} pre región {region} hráčov, ktorí držia najviac topov so {marks}, rozdelený podľa úrovne a filtrovateľný podľa odvodeného jazyka histórie klanu.",
+  "og-title": "Najviac {marks}",
+  "og-subtitle": "Rebríček pre región {region}"
+}

@@ -1,0 +1,6 @@
+{
+  "title": "A legtöbb {marks} a World of Tanksban ({region})",
+  "description": "{name} {region} ranglista azon játékosokról, akiknél a legtöbb, {marks} jelet elérő ágyú van, szintenként bontva és a következtetett klántörténet-nyelv szerint szűrhetően.",
+  "og-title": "A legtöbb {marks}",
+  "og-subtitle": "{region} ranglista"
+}

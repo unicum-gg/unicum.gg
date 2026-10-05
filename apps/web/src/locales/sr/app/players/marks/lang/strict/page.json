@@ -1,0 +1,6 @@
+{
+  "title": "Највише {marks}: strogo {language} играчи ({region})",
+  "description": "{name} {region} ранг-листа играча чији је изведени језик историје клана strogo {language}, а који имају највише topova са {marks}.",
+  "og-title": "Највише {marks}: strogo {language}",
+  "og-subtitle": "Ранг-листа за {region}"
+}

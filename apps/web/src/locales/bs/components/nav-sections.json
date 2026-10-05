@@ -30,6 +30,9 @@
       "label": "Ocjene zajednice",
       "description": "Ocijenjeno od igrača koji su tamo poslani"
     },
+    "players-marks": {
+      "description": "Ko posjeduje najviše topova sa tri oznake"
+    },
     "players-onslaught": {
       "description": "Ljestvica rangirane Ofenzive"
     },

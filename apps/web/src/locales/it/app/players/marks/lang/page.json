@@ -1,0 +1,6 @@
+{
+  "title": "Più {marks}: giocatori di lingua {language} ({region})",
+  "description": "Classifica {name} della {region} dei giocatori di lingua {language} in possesso del maggior numero di cannoni con {marks}, suddivisi per livello.",
+  "og-title": "Più {marks}: {language}",
+  "og-subtitle": "Classifica della {region}"
+}

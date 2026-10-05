@@ -30,6 +30,9 @@
       "label": "Beoordelingen van de community",
       "description": "Beoordeeld door de spelers die erheen worden verzonden"
     },
+    "players-marks": {
+      "description": "Wie de meeste kanonnen met drie markeringen in bezit heeft"
+    },
     "players-onslaught": {
       "description": "Klassement voor gerangschikte Bestorming"
     },

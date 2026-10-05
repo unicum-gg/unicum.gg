@@ -30,6 +30,9 @@
       "label": "社区评分",
       "description": "由被送到这些地图的玩家评分"
     },
+    "players-marks": {
+      "description": "谁持有最多三标炮管"
+    },
     "players-onslaught": {
       "description": "天梯战排名阶梯"
     },

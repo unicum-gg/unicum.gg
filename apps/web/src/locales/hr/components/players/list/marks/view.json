@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Najviše <accent>{marks}</accent>",
+    "language": "Najviše <accent>{marks}</accent> među igračima na jeziku {language}"
+  },
+  "intro": {
+    "all": "Igrači iz regije {region} s najviše topova s {marks}, razvrstani po razini, uz minimum od {battles} bitaka.",
+    "language": "Igrači iz regije {region} čiji skup zaključених jezika povijesti klana uključuje {language}, s najviše topova s {marks}.",
+    "strict": "Igrači iz regije {region} čiji je zaključeni jezik povijesti klana isključivo {language}, s najviše topova s {marks}."
+  },
+  "board": {
+    "all": "Najboljih {count} igrača prema broju {marks}",
+    "language": "Najboljih {count} igrača na jeziku {language} prema broju {marks}",
+    "strict": "Najboljih {count} igrača isključivo na jeziku {language} prema broju {marks}"
+  },
+  "coverage": {
+    "title": "Što ova ljestvica obuhvaća",
+    "body": "{marksName} nisu u javnom API-ju Wargaminga, pa ih čitamo s portala igre, jedan račun po jedan, što se događa samo kada netko pogleda profil. Ova ljestvica rangira {measured} računa čiju smo garažu pročitali, od {tracked} računa koji zadovoljavaju minimum bitaka. Igrač kojeg nitko nije tražio nedostaje s ljestvice, a nije na njezinu posljednjem mjestu.",
+    "freshness": "Najnovije opažanje iza ovih brojeva je od {newest}, a najstarije od {oldest}.",
+    "profile": "Traženje igrača čita njegove oznake, pa ga prikaz profila stavlja na ovu ljestvicu."
+  }
+}

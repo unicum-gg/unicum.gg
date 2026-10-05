@@ -1,0 +1,6 @@
+{
+  "title": "Sở hữu nhiều {marks} nhất: người chơi nói {language} ({region})",
+  "description": "{name} {region} bảng xếp hạng người chơi nói {language} sở hữu nhiều pháo đạt {marks} nhất, phân theo cấp.",
+  "og-title": "Sở hữu nhiều {marks} nhất: {language}",
+  "og-subtitle": "Bảng xếp hạng {region}"
+}

@@ -30,6 +30,9 @@
       "label": "Hodnotenia Skupnost",
       "description": "Hodnotené hráčmi, ktorí tam boli poslano"
     },
+    "players-marks": {
+      "description": "Kto drží najviac topov s tromi značkami"
+    },
     "players-onslaught": {
       "description": "Hodnotené poradie režimu Ofenzíva"
     },

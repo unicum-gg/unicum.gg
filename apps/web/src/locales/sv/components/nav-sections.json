@@ -30,6 +30,9 @@
       "label": "Community-betyg",
       "description": "Betygsatt av spelarna som skickas dit"
     },
+    "players-marks": {
+      "description": "Vem håller flest kanoner med tre märken"
+    },
     "players-onslaught": {
       "description": "Rankningsstege för Pansarstorm"
     },

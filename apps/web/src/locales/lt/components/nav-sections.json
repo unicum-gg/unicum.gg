@@ -30,6 +30,9 @@
       "label": "Bendruomenės reitingai",
       "description": "Įvertinta ten išsiųstų žaidėjų"
     },
+    "players-marks": {
+      "description": "Kas turi daugiausia pabūklų su trimis ženklais"
+    },
     "players-onslaught": {
       "description": "Reitinginio Prasiveržimo lyderių lentelė"
     },

@@ -1,0 +1,6 @@
+{
+  "title": "A legtöbb {marks}: {language} játékosok ({region})",
+  "description": "{name} {region} ranglista azon {language} nyelvű játékosokról, akiknél a legtöbb, {marks} jelet elérő ágyú van, szintenként bontva.",
+  "og-title": "A legtöbb {marks}: {language}",
+  "og-subtitle": "{region} ranglista"
+}

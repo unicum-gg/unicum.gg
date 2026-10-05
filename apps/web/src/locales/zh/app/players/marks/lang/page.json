@@ -1,0 +1,6 @@
+{
+  "title": "最多{marks}：{language}语言玩家（{region}）",
+  "description": "{name} {region}地区拥有最多{marks}炮管的{language}语言玩家排行榜，按等级细分。",
+  "og-title": "最多{marks}：{language}语言",
+  "og-subtitle": "{region}地区排行榜"
+}

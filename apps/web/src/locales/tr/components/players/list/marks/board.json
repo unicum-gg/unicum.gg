@@ -1,0 +1,6 @@
+{
+  "tier": "Seviye {tier}",
+  "read": "Garaj okuma",
+  "empty": "Bu tabloda henüz oyuncu yok.",
+  "no-match": "Mevcut filtreyle eşleşen oyuncu yok."
+}

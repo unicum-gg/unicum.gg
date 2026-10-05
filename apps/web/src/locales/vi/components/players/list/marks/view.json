@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Nhiều <accent>{marks}</accent> nhất",
+    "language": "Nhiều <accent>{marks}</accent> nhất trong số người chơi nói {language}"
+  },
+  "intro": {
+    "all": "Người chơi {region} sở hữu nhiều pháo đạt {marks} nhất, phân theo cấp, với tối thiểu {battles} trận đấu.",
+    "language": "Người chơi {region} có tập hợp ngôn ngữ lịch sử Clan được suy đoán bao gồm {language}, sở hữu nhiều pháo đạt {marks} nhất.",
+    "strict": "Người chơi {region} có ngôn ngữ lịch sử Clan được suy đoán chỉ là {language}, sở hữu nhiều pháo đạt {marks} nhất."
+  },
+  "board": {
+    "all": "{count} người chơi hàng đầu theo {marks}",
+    "language": "{count} người chơi {language} hàng đầu theo {marks}",
+    "strict": "{count} người chơi chỉ dùng {language} hàng đầu theo {marks}"
+  },
+  "coverage": {
+    "title": "Bảng xếp hạng này bao quát những gì",
+    "body": "{marksName} không có trong API công khai của Wargaming, vì vậy chúng tôi đọc dữ liệu từ cổng trò chơi, từng tài khoản một, và việc này chỉ xảy ra khi ai đó tra cứu một hồ sơ. Bảng xếp hạng này xếp hạng {measured} tài khoản mà chúng tôi đã đọc Ga-ra, trong số {tracked} tài khoản vượt qua ngưỡng trận đấu tối thiểu: người chơi chưa được ai tìm kiếm sẽ không có mặt trên bảng xếp hạng thay vì đứng cuối bảng.",
+    "freshness": "Lần quan sát mới nhất làm cơ sở cho số lượng này là từ {newest}, còn lần cũ nhất là từ {oldest}.",
+    "profile": "Tra cứu một người chơi sẽ đọc các dấu của họ, vì vậy lượt xem hồ sơ là thứ đưa họ lên bảng xếp hạng này."
+  }
+}

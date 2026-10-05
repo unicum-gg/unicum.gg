@@ -1,0 +1,6 @@
+{
+  "title": "{language}プレイヤーの{marks}保有数最多（{region}）",
+  "description": "{name}の{region}ランキング。{language}を話すプレイヤーのうち、{marks}の砲を最も多く保有するプレイヤーをTier別に表示します。",
+  "og-title": "{language}の{marks}保有数最多",
+  "og-subtitle": "{region}ランキング"
+}

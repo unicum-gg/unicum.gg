@@ -30,6 +30,9 @@
       "label": "Közösségi értékelések",
       "description": "Az oda küldött játékosok értékelései alapján"
     },
+    "players-marks": {
+      "description": "Kinél van a legtöbb háromjeles ágyú"
+    },
     "players-onslaught": {
       "description": "Roham ranglétra"
     },

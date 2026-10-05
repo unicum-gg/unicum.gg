@@ -1,0 +1,6 @@
+{
+  "title": "Cele mai multe {marks}: jucători de limbă {language} ({region})",
+  "description": "Clasamentul {name} din {region} al jucătorilor de limbă {language} care dețin cele mai multe tunuri cu {marks}, împărțit pe niveluri.",
+  "og-title": "Cele mai multe {marks}: {language}",
+  "og-subtitle": "Clasament din {region}"
+}

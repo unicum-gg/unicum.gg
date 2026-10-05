@@ -1,0 +1,6 @@
+{
+  "tier": "Nivel {tier}",
+  "read": "Garaj citit",
+  "empty": "Niciun jucător nu se află încă în acest clasament.",
+  "no-match": "Niciun jucător nu corespunde filtrului curent."
+}

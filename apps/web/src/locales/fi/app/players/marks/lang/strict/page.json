@@ -1,0 +1,6 @@
+{
+  "title": "Eniten {marks}: tiukasti {language}-kieliset pelaajat ({region})",
+  "description": "{name} {region}-alueen tulostaulukko pelaajista, joiden päätelty klaanihistorian kieli on yksinomaan {language} ja joiden hallussa on eniten {marks}-merkkisiä tykkejä.",
+  "og-title": "Eniten {marks}: tiukasti {language}",
+  "og-subtitle": "{region}-alueen tulostaulukko"
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Flest {marks}: {language}-spillere ({region})",
+  "description": "{name} {region}-rangliste over {language}-talende spillere, der har flest kanoner med {marks}, opdelt efter niveau.",
+  "og-title": "Flest {marks}: {language}",
+  "og-subtitle": "{region}-rangliste"
+}

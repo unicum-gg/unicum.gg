@@ -1,0 +1,6 @@
+{
+  "title": "Meeste {marks} in World of Tanks ({region})",
+  "description": "Klassement van {name} voor {region} van spelers die de meeste kanonnen met {marks} in bezit hebben, uitgesplitst per niveau en filterbaar op afgeleide clangeschiedenistaal.",
+  "og-title": "Meeste {marks}",
+  "og-subtitle": "Klassement voor {region}"
+}

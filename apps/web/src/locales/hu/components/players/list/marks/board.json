@@ -1,0 +1,6 @@
+{
+  "tier": "{tier}. szint",
+  "read": "Garázs olvasva",
+  "empty": "Még nincs játékos ezen a ranglistán.",
+  "no-match": "Egyetlen játékos sem felel meg a jelenlegi szűrőnek."
+}

@@ -1,0 +1,6 @@
+{
+  "title": "{marks} มากที่สุด: ผู้เล่นภาษา {language} ({region})",
+  "description": "ตารางอันดับ {region} ของ {name} สำหรับผู้เล่นที่ใช้ภาษา {language} ซึ่งครอบครองปืนที่มี {marks} มากที่สุด โดยแยกตามระดับ",
+  "og-title": "{marks} มากที่สุด: {language}",
+  "og-subtitle": "ตารางอันดับ {region}"
+}

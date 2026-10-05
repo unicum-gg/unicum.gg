@@ -30,6 +30,9 @@
       "label": "Chỉ số đánh giá của cộng đồng",
       "description": "Được những người chơi đã được gửi đến đó đánh giá"
     },
+    "players-marks": {
+      "description": "Ai sở hữu nhiều pháo có ba dấu nhất"
+    },
     "players-onslaught": {
       "description": "Bảng xếp hạng Cường kích"
     },

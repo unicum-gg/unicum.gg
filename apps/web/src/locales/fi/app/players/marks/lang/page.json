@@ -1,0 +1,6 @@
+{
+  "title": "Eniten {marks}: {language}-kieliset pelaajat ({region})",
+  "description": "{name} {region}-alueen tulostaulukko {language}-kielisistä pelaajista, joiden hallussa on eniten {marks}-merkkisiä tykkejä, tasoittain jaoteltuna.",
+  "og-title": "Eniten {marks}: {language}",
+  "og-subtitle": "{region}-alueen tulostaulukko"
+}

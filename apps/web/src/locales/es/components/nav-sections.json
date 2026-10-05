@@ -30,6 +30,9 @@
       "label": "Valoraciones de la comunidad",
       "description": "Valorado por los jugadores enviados allí"
     },
+    "players-marks": {
+      "description": "Quién tiene más cañones con tres marcas"
+    },
     "players-onslaught": {
       "description": "Clasificación de Asedio por Rango"
     },

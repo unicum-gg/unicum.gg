@@ -1,0 +1,6 @@
+{
+  "tier": "Poziom {tier}",
+  "read": "Odczyt garażu",
+  "empty": "Na tej tabeli nie ma jeszcze żadnego gracza.",
+  "no-match": "Żaden gracz nie pasuje do obecnego filtra."
+}

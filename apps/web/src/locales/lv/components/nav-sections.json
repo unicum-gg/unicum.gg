@@ -30,6 +30,9 @@
       "label": "Kopienas vērtējumi",
       "description": "Novērtēts no tur nosūtītajiem spēlētājiem"
     },
+    "players-marks": {
+      "description": "Kuriem ir visvairāk trīs atzīmju lielgabalu"
+    },
     "players-onslaught": {
       "description": "Ranga Uzbrukuma līderu saraksts"
     },

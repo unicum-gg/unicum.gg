@@ -1,0 +1,6 @@
+{
+  "title": "Najviše {marks}: igrači koji govore {language} ({region})",
+  "description": "{name} ljestvica za regiju {region} igrača koji govore {language} i posjeduju najviše topova s {marks}, raspoređeno po nivou.",
+  "og-title": "Najviše {marks}: {language}",
+  "og-subtitle": "Ljestvica za regiju {region}"
+}

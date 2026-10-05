@@ -30,6 +30,9 @@
       "label": "コミュニティのレーティング",
       "description": "そこへ送られたプレイヤーによる評価"
     },
+    "players-marks": {
+      "description": "3マークの砲を最も多く保有しているプレイヤー"
+    },
     "players-onslaught": {
       "description": "ランク戦オンスロートのランキング"
     },

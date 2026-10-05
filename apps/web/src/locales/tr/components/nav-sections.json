@@ -30,6 +30,9 @@
       "label": "Topluluk değerlendirmeleri",
       "description": "Oraya gönderilen oyuncular tarafından puanlanan"
     },
+    "players-marks": {
+      "description": "En çok üç işaretli topu kim tutuyor"
+    },
     "players-onslaught": {
       "description": "Dereceli Hücum merdiveni"
     },

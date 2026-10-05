@@ -30,6 +30,9 @@
       "label": "Fellesskapets vurderinger",
       "description": "Vurdert av spillerne som blir sendt dit"
     },
+    "players-marks": {
+      "description": "Hvem holder flest kanoner med tre merker"
+    },
     "players-onslaught": {
       "description": "Rangert Onslaught-stige"
     },

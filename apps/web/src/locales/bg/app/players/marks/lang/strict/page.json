@@ -1,0 +1,6 @@
+{
+  "title": "Най-много {marks}: строго игачи на {language} ({region})",
+  "description": "{name}, {region} класация на игачите, чийто предполагаем език от историята на клана е изключително {language}, които притежават най-много оръдия с {marks}.",
+  "og-title": "Най-много {marks}: строго {language}",
+  "og-subtitle": "{region} класация"
+}

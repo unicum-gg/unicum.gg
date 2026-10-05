@@ -1,0 +1,6 @@
+{
+  "title": "Najviac {marks}: striktne hráči s jazykom {language} ({region})",
+  "description": "Rebríček {name} pre región {region} hráčov, ktorých odvodený jazyk histórie klanu je výhradne {language} a ktorí držia najviac topov so {marks}.",
+  "og-title": "Najviac {marks}: striktne {language}",
+  "og-subtitle": "Rebríček pre región {region}"
+}

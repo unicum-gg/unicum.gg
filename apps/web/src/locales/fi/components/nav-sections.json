@@ -30,6 +30,9 @@
       "label": "Yhteisön arvosanat",
       "description": "Sinne lähetettyjen pelaajien arvioima"
     },
+    "players-marks": {
+      "description": "Kenellä on hallussaan eniten kolmen merkin tykkejä"
+    },
     "players-onslaught": {
       "description": "Rankatun Rynnistyksen sijoituslista"
     },

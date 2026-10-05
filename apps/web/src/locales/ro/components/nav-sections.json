@@ -30,6 +30,9 @@
       "label": "Evaluări ale Comunității",
       "description": "Evaluat de jucătorii trimiși acolo"
     },
+    "players-marks": {
+      "description": "Cine deține cele mai multe tunuri cu trei semne"
+    },
     "players-onslaught": {
       "description": "Clasamentul Violență"
     },

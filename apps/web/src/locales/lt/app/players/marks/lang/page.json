@@ -1,0 +1,6 @@
+{
+  "title": "Daugiausia {marks}: {language} žaidėjai ({region})",
+  "description": "{name} regiono {region} lyderių lentelė, kurioje pateikiami {language} kalba kalbantys žaidėjai, turintys daugiausia pabūklų su {marks}, suskirstytų pagal lygį.",
+  "og-title": "Daugiausia {marks}: {language}",
+  "og-subtitle": "{region} lyderių lentelė"
+}

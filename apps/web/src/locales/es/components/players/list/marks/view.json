@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Más <accent>{marks}</accent>",
+    "language": "Más <accent>{marks}</accent> entre jugadores de {language}"
+  },
+  "intro": {
+    "all": "Jugadores de {region} con más cañones con {marks}, desglosados por nivel, con un mínimo de {battles} batallas.",
+    "language": "Jugadores de {region} cuyo conjunto de idiomas inferidos del historial del clan incluye {language}, con más cañones con {marks}.",
+    "strict": "Jugadores de {region} cuyo idioma inferido del historial del clan es exclusivamente {language}, con más cañones con {marks}."
+  },
+  "board": {
+    "all": "Mejores jugadores: {count} por {marks}",
+    "language": "Mejores jugadores: {count} de {language}, por {marks}",
+    "strict": "Mejores jugadores: {count} estrictamente de {language}, por {marks}"
+  },
+  "coverage": {
+    "title": "Qué cubre esta clasificación",
+    "body": "{marksName} no están disponibles en la API pública de Wargaming, así que los leemos del portal del juego, una cuenta cada vez, únicamente cuando alguien consulta un perfil. Esta clasificación ordena las {measured} cuentas cuyo garaje hemos leído, de las {tracked} que superan el mínimo de batallas: si nadie ha buscado a un jugador, falta en la clasificación en lugar de ocupar el último puesto.",
+    "freshness": "La observación más reciente detrás de estos recuentos es de {newest}, y la más antigua, de {oldest}.",
+    "profile": "Consultar el perfil de un jugador permite leer sus marcas, así que una vista del perfil es lo que lo incluye en esta clasificación."
+  }
+}

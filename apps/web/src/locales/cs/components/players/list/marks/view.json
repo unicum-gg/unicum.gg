@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Nejvíce <accent>{marks}</accent>",
+    "language": "Nejvíce <accent>{marks}</accent> mezi hráči s jazykem {language}"
+  },
+  "intro": {
+    "all": "Hráči z regionu {region} s největším počtem děl se {marks}, rozdělení podle úrovně, minimum {battles} bitev.",
+    "language": "Hráči z regionu {region}, jejichž odvozená sada jazyků historie klanu zahrnuje {language} a kteří mají nejvíce děl se {marks}.",
+    "strict": "Hráči z regionu {region}, jejichž odvozený jazyk historie klanu je výhradně {language} a kteří mají nejvíce děl se {marks}."
+  },
+  "board": {
+    "all": "Nejlepších {count} hráčů podle {marks}",
+    "language": "Nejlepších {count} hráčů s jazykem {language} podle {marks}",
+    "strict": "Nejlepších {count} hráčů se striktně jazykem {language} podle {marks}"
+  },
+  "coverage": {
+    "title": "Co tento žebříček zahrnuje",
+    "body": "{marksName} nejsou součástí veřejného API Wargamingu, takže je čteme z herního portálu účet po účtu. To se děje pouze tehdy, když někdo vyhledá profil. Tento žebříček řadí {measured} účtů, jejichž garáž jsme přečetli, z celkem {tracked} účtů, které překračují minimální hranici bitev. Hráč, kterého nikdo nevyhledal, v něm chybí, místo aby byl poslední.",
+    "freshness": "Nejnovější údaj použitý pro tyto počty pochází z {newest}, nejstarší z {oldest}.",
+    "profile": "Vyhledání hráče přečte jeho známky, takže zobrazení profilu ho zařadí na tento žebříček."
+  }
+}

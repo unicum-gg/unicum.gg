@@ -1,0 +1,6 @@
+{
+  "tier": "Nível {tier}",
+  "read": "Garagem lida",
+  "empty": "Ainda não há nenhum jogador nesta classificação.",
+  "no-match": "Nenhum jogador corresponde ao filtro atual."
+}

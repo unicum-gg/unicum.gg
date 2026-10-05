@@ -1,0 +1,6 @@
+{
+  "title": "Die meisten {marks}: strikt {language}-sprachige Spieler ({region})",
+  "description": "{name}-Rangliste für {region} der Spieler, deren abgeleitete Sprache aus dem Clanverlauf ausschließlich {language} ist und die die meisten Geschütze mit {marks} halten.",
+  "og-title": "Die meisten {marks}: strikt {language}",
+  "og-subtitle": "Rangliste für {region}"
+}

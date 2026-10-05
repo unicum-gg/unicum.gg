@@ -1,0 +1,6 @@
+{
+  "title": "Le plus de {marks} : joueurs dont la langue est strictement {language} ({region})",
+  "description": "Classement {name} de {region} des joueurs dont la langue déduite de l’historique de clan est exclusivement {language}, détenant le plus de canons avec {marks}.",
+  "og-title": "Le plus de {marks} : strictement {language}",
+  "og-subtitle": "Classement de {region}"
+}

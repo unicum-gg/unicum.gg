@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Visvairāk <accent>{marks}</accent>",
+    "language": "Visvairāk <accent>{marks}</accent> starp spēlētājiem, kuri runā {language}"
+  },
+  "intro": {
+    "all": "{region} spēlētāji ar visvairāk lielgabaliem ar {marks}, sadalīti pa līmeņiem, minimums {battles} kaujas.",
+    "language": "{region} spēlētāji, kuru secinātajā klana vēstures valodu kopā ietilpst {language}, ar visvairāk lielgabaliem ar {marks}.",
+    "strict": "{region} spēlētāji, kuru secinātā klana vēstures valoda ir tikai {language}, ar visvairāk lielgabaliem ar {marks}."
+  },
+  "board": {
+    "all": "Top {count} spēlētāji pēc {marks}",
+    "language": "Top {count} spēlētāji, kuri runā {language}, pēc {marks}",
+    "strict": "Top {count} spēlētāji, kuri runā tikai {language}, pēc {marks}"
+  },
+  "coverage": {
+    "title": "Ko šī tabula aptver",
+    "body": "{marksName} nav Wargaming publiskajā API, tāpēc mēs tos lasām spēles portālā pa vienam kontam, un tas notiek tikai tad, kad kāds uzmeklē profilu. Šī tabula sarindo {measured} kontus, kuru angāru esam lasījuši, no {tracked} kontiem, kas pārsniedz kauju minimumu, tāpēc tajā trūkst spēlētāja, kuru neviens nav meklējis, nevis viņš ieņem tajā pēdējo vietu.",
+    "freshness": "Jaunākais novērojums aiz šiem skaitiem ir no {newest}, vecākais no {oldest}.",
+    "profile": "Spēlētāja uzmeklēšana nolasa viņa atzīmes, tāpēc profila skatījums ievieto viņu šajā tabulā."
+  }
+}

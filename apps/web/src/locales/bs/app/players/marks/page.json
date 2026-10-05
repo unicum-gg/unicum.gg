@@ -1,0 +1,6 @@
+{
+  "title": "Najviše {marks} u igri World of Tanks ({region})",
+  "description": "{name} ljestvica za regiju {region} igrača koji posjeduju najviše topova s {marks}, raspoređeno po nivou i filtrabilno prema zaključенom jeziku historije klana.",
+  "og-title": "Najviše {marks}",
+  "og-subtitle": "Ljestvica za regiju {region}"
+}

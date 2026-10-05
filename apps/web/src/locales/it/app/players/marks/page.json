@@ -1,0 +1,6 @@
+{
+  "title": "Più {marks} in World of Tanks ({region})",
+  "description": "Classifica {name} della {region} dei giocatori in possesso del maggior numero di cannoni con {marks}, suddivisi per livello e filtrabili per lingua dedotta dalla cronologia del clan.",
+  "og-title": "Più {marks}",
+  "og-subtitle": "Classifica della {region}"
+}

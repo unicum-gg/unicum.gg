@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Najviac <accent>{marks}</accent>",
+    "language": "Najviac <accent>{marks}</accent> medzi hráčmi s jazykom {language}"
+  },
+  "intro": {
+    "all": "Hráči z regiónu {region} s najväčším počtom topov so {marks}, rozdelení podľa úrovne, minimum {battles} bitiek.",
+    "language": "Hráči z regiónu {region}, ktorých odvodená množina jazykov histórie klanu zahŕňa {language} a ktorí majú najviac topov so {marks}.",
+    "strict": "Hráči z regiónu {region}, ktorých odvodený jazyk histórie klanu je výhradne {language} a ktorí majú najviac topov so {marks}."
+  },
+  "board": {
+    "all": "Najlepší hráči, počet {count}, podľa {marks}",
+    "language": "Najlepší hráči s jazykom {language}, počet {count}, podľa {marks}",
+    "strict": "Najlepší hráči s jazykom {language}, počet {count}, striktne podľa {marks}"
+  },
+  "coverage": {
+    "title": "Čo táto lestvica pokrýva",
+    "body": "{marksName} nie sú vo verejnom API Wargamingu, preto ich čítame z herného portálu po jednom účte. To sa zgodi iba vtedy, keď niekto vyhľadá profil. Táto lestvica uvrstí {measured} účtov, ktorých garáž sme prečítali, z {tracked} účtov, ktoré spĺňajú minimum bitiek. Hráč, ktorého nikto nevyhľadal, v nej chýba, namiesto toho, aby bol posledný.",
+    "freshness": "Najnovšie pozorovanie za týmito počtami pochádza z {newest}, najstaršie z {oldest}.",
+    "profile": "Vyhľadanie hráča prečíta jeho značky, takže na túto lestvicu ho zaradí zobrazenie profilu."
+  }
+}

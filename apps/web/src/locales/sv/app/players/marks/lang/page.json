@@ -1,0 +1,6 @@
+{
+  "title": "Flest {marks}: spelare som talar {language} ({region})",
+  "description": "{name} topplista för {region} över spelare som talar {language} och har flest kanoner med {marks} märken, uppdelat efter nivå.",
+  "og-title": "Flest {marks}: {language}",
+  "og-subtitle": "Topplista för {region}"
+}

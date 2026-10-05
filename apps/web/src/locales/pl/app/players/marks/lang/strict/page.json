@@ -1,0 +1,6 @@
+{
+  "title": "Najwięcej {marks}: wyłącznie gracze używający języka {language} ({region})",
+  "description": "{name} {region} ranking graczy, których wywnioskowany język historii klanu to wyłącznie {language}, posiadających najwięcej dział z {marks}.",
+  "og-title": "Najwięcej {marks}: wyłącznie język {language}",
+  "og-subtitle": "Ranking dla regionu {region}"
+}

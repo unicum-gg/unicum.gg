@@ -1,0 +1,6 @@
+{
+  "tier": "Razina {tier}",
+  "read": "Pročitana garaža",
+  "empty": "Na ovoj ljestvici još nema igrača.",
+  "no-match": "Nijedan igrač ne odgovara trenutačnom filtru."
+}

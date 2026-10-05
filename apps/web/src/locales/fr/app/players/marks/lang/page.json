@@ -1,0 +1,6 @@
+{
+  "title": "Le plus de {marks} : joueurs de langue {language} ({region})",
+  "description": "Classement {name} de {region} des joueurs de langue {language} détenant le plus de canons avec {marks}, répartis par niveau.",
+  "og-title": "Le plus de {marks} : {language}",
+  "og-subtitle": "Classement de {region}"
+}

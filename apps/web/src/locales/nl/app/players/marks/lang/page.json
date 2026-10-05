@@ -1,0 +1,6 @@
+{
+  "title": "Meeste {marks}: spelers met {language} als taal ({region})",
+  "description": "Klassement van {name} voor {region} van spelers met {language} als taal die de meeste kanonnen met {marks} in bezit hebben, uitgesplitst per niveau.",
+  "og-title": "Meeste {marks}: {language}",
+  "og-subtitle": "Klassement voor {region}"
+}

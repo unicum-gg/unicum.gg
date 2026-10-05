@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "En çok <accent>{marks}</accent>",
+    "language": "{language} oyuncular arasında en çok <accent>{marks}</accent>"
+  },
+  "intro": {
+    "all": "{region} oyuncular arasında, {marks} olan en fazla topa sahip olanlar, seviyeye göre ayrılmıştır (minimum {battles} savaş).",
+    "language": "Çıkarılan klan geçmişi dil kümesinde {language} bulunan ve {marks} olan en fazla topa sahip {region} oyuncular.",
+    "strict": "Çıkarılan klan geçmişi dili yalnızca {language} olan ve {marks} olan en fazla topa sahip {region} oyuncular."
+  },
+  "board": {
+    "all": "{marks} değerine göre en iyi {count} oyuncu",
+    "language": "{marks} değerine göre en iyi {count} {language} oyuncu",
+    "strict": "{marks} değerine göre en iyi {count} yalnızca {language} oyuncu"
+  },
+  "coverage": {
+    "title": "Bu tablonun kapsadığı şeyler",
+    "body": "{marksName}, Wargaming’in herkese açık API’sinde bulunmuyor. Bu nedenle onları oyun portalından hesapları tek tek inceleyerek okuyoruz. Bu işlem yalnızca biri bir profili aradığında olur. Bu tablo, savaş sınırını geçen {tracked} hesap arasından garajını okuduğumuz {measured} hesabı sıralar. Hiç aranmaymış bir oyuncu tabloda son sırada değil, tabloda yoktur.",
+    "freshness": "Bu sayıların arkasındaki en yeni gözlem {newest}, en eski gözlem ise {oldest} tarihli.",
+    "profile": "Bir oyuncuyu aramak işaretlerini okur, bu nedenle onu bu tabloya ekleyen şey profil görünümüdür."
+  }
+}

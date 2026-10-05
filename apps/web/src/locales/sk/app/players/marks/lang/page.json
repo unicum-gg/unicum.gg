@@ -1,0 +1,6 @@
+{
+  "title": "Najviac {marks}: hráči s jazykom {language} ({region})",
+  "description": "Rebríček {name} pre región {region} hráčov hovoriacich jazykom {language}, ktorí držia najviac topov so {marks}, rozdelený podľa úrovne.",
+  "og-title": "Najviac {marks}: {language}",
+  "og-subtitle": "Rebríček pre región {region}"
+}

@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Die meisten <accent>{marks}</accent>",
+    "language": "Die meisten <accent>{marks}</accent> unter {language}-sprachigen Spielern"
+  },
+  "intro": {
+    "all": "Spieler aus {region} mit den meisten Geschützen mit {marks}, aufgeschlüsselt nach Stufe, mindestens {battles} Gefechte.",
+    "language": "Spieler aus {region}, deren abgeleitete Sprache aus dem Clanverlauf {language} enthält und die die meisten Geschütze mit {marks} haben.",
+    "strict": "Spieler aus {region}, deren abgeleitete Sprache aus dem Clanverlauf ausschließlich {language} ist und die die meisten Geschütze mit {marks} haben."
+  },
+  "board": {
+    "all": "Top-{count}-Spieler nach {marks}",
+    "language": "Top-{count} {language}-sprachige Spieler nach {marks}",
+    "strict": "Top-{count} strikt {language}-sprachige Spieler nach {marks}"
+  },
+  "coverage": {
+    "title": "Was diese Rangliste abdeckt",
+    "body": "{marksName} sind nicht in der öffentlichen API von Wargaming enthalten. Deshalb lesen wir sie nacheinander aus dem Spielportal aus, was nur passiert, wenn jemand ein Profil aufruft. Diese Rangliste ordnet die {measured} Konten, deren Garage wir gelesen haben, von {tracked} Konten, die das Gefechte-Minimum erfüllen. Ein Spieler, nach dem niemand gesucht hat, fehlt in der Rangliste und steht nicht an letzter Stelle.",
+    "freshness": "Die neueste Beobachtung hinter diesen Anzahlen stammt vom {newest}, die älteste vom {oldest}.",
+    "profile": "Beim Aufrufen eines Spielers werden dessen Marken gelesen. Ein Profilaufruf sorgt daher dafür, dass der Spieler in dieser Rangliste erscheint."
+  }
+}

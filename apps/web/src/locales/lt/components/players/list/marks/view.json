@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Daugiausia <accent>{marks}</accent>",
+    "language": "Daugiausia <accent>{marks}</accent> tarp {language} žaidėjų"
+  },
+  "intro": {
+    "all": "{region} žaidėjai, turintys daugiausia pabūklų su {marks}, suskirstyti pagal lygį, mažiausiai {battles} mūšių.",
+    "language": "{region} žaidėjai, kurių numanomos klano istorijos kalbų rinkinyje yra {language}, turintys daugiausia pabūklų su {marks}.",
+    "strict": "{region} žaidėjai, kurių numanoma klano istorijos kalba yra tik {language}, turintys daugiausia pabūklų su {marks}."
+  },
+  "board": {
+    "all": "Geriausi {count} žaidėjai pagal {marks}",
+    "language": "Geriausi {count} {language} žaidėjai pagal {marks}",
+    "strict": "Geriausi {count} griežtai {language} žaidėjai pagal {marks}"
+  },
+  "coverage": {
+    "title": "Ką apima ši lentelė",
+    "body": "{marksName} nėra Wargaming viešojoje API, todėl juos skaitome žaidimo portale po vieną paskyrą. Tai vyksta tik tada, kai kas nors peržiūri profilį. Šioje lentelėje reitinguojamos {measured} paskyros, kurių garažą perskaitėme, iš {tracked} paskyrų, atitinkančių mūšių minimumą. Žaidėjas, kurio niekas neieškojo, joje ne paskutinis, o tiesiog į ją neįtrauktas.",
+    "freshness": "Naujausias šių skaičių stebėjimas yra iš {newest}, seniausias iš {oldest}.",
+    "profile": "Peržiūrėjus žaidėją perskaitomi jo ženklai, todėl profilio peržiūra įtraukia jį į šią lentelę."
+  }
+}

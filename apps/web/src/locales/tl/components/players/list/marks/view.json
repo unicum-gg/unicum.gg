@@ -1,0 +1,22 @@
+{
+  "heading": {
+    "plain": "Pinakamaraming <accent>{marks}</accent>",
+    "language": "Pinakamaraming <accent>{marks}</accent> sa mga manlalarong {language}"
+  },
+  "intro": {
+    "all": "Mga manlalaro sa {region} na may pinakamaraming baril na may {marks}, ayon sa tier, na may pinakamababang {battles}.",
+    "language": "Mga manlalaro sa {region} na ang nahinuhang set ng wika sa kasaysayan ng clan ay kinabibilangan ng {language}, at may pinakamaraming baril na may {marks}.",
+    "strict": "Mga manlalaro sa {region} na ang nahinuhang wika sa kasaysayan ng clan ay eksklusibong {language}, at may pinakamaraming baril na may {marks}."
+  },
+  "board": {
+    "all": "Nangungunang {count} manlalaro ayon sa {marks}",
+    "language": "Nangungunang {count} mga manlalarong {language} ayon sa {marks}",
+    "strict": "Nangungunang {count} mahigpit na mga manlalarong {language} ayon sa {marks}"
+  },
+  "coverage": {
+    "title": "Ano ang saklaw ng talahanayan ng ranggo na ito",
+    "body": "Ang {marksName} ay wala sa pampublikong API ng Wargaming, kaya binabasa namin ang mga ito mula sa portal ng laro nang paisa-isang account, na nangyayari lamang kapag may tumingin sa isang profile. Niraranggo ng talahanayan ng ranggo na ito ang {measured} mga account na nabasa na namin ang garahe, mula sa {tracked} na nakalampas sa pinakamababang bilang ng mga laban. Ang manlalarong hindi pa hinahanap ng sinuman ay wala rito sa halip na nasa huli.",
+    "freshness": "Ang pinakabagong obserbasyon na batayan ng mga bilang na ito ay mula sa {newest}, at ang pinakaluma ay mula sa {oldest}.",
+    "profile": "Kapag tiningnan ang profile ng isang manlalaro, nababasa ang mga marka nito, kaya ang pagtingin sa profile ang naglalagay sa manlalaro sa talahanayan ng ranggo na ito."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "title": "Najwięcej {marks}: gracze używający języka {language} ({region})",
+  "description": "{name} {region} ranking graczy używających języka {language}, posiadających najwięcej dział z {marks}, z podziałem na poziomy.",
+  "og-title": "Najwięcej {marks}: język {language}",
+  "og-subtitle": "Ranking dla regionu {region}"
+}

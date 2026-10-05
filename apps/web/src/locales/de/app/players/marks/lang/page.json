@@ -1,0 +1,6 @@
+{
+  "title": "Die meisten {marks}: {language}-sprachige Spieler ({region})",
+  "description": "{name}-Rangliste für {region} der {language}-sprachigen Spieler, die die meisten Geschütze mit {marks} halten, aufgeschlüsselt nach Stufe.",
+  "og-title": "Die meisten {marks}: {language}",
+  "og-subtitle": "Rangliste für {region}"
+}

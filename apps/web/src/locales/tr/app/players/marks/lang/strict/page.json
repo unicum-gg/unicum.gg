@@ -1,0 +1,6 @@
+{
+  "title": "En çok {marks}: yalnızca {language} oyuncular ({region})",
+  "description": "{name} {region} liderlik tablosu, çıkarılan klan geçmişi dili yalnızca {language} olan ve {marks} olan en fazla topa sahip oyuncular.",
+  "og-title": "En çok {marks}: yalnızca {language}",
+  "og-subtitle": "{region} liderlik tablosu"
+}

@@ -1,0 +1,6 @@
+{
+  "tier": "Nivo {tier}",
+  "read": "Garaža pročitana",
+  "empty": "Na ovoj rang-listi još nema igrača.",
+  "no-match": "Nijedan igrač ne odgovara trenutnom filteru."
+}

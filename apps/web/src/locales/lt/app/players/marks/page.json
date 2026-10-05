@@ -1,0 +1,6 @@
+{
+  "title": "Daugiausia {marks} žaidime World of Tanks ({region})",
+  "description": "{name} regiono {region} lyderių lentelė, kurioje pateikiami žaidėjai, turintys daugiausia pabūklų su {marks}, suskirstytų pagal lygį ir filtruojamų pagal numanomą klano istorijos kalbą.",
+  "og-title": "Daugiausia {marks}",
+  "og-subtitle": "{region} lyderių lentelė"
+}
