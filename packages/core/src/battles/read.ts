@@ -72,6 +72,15 @@ export type PlayerBattle = {
    * falls back to the id-derived one.
    */
   mapImage: string | null;
+  /**
+   * The arena's extent in metres, which is what places a replay's coordinates
+   * on that image. Null for an arena whose definition carries no box, and the
+   * viewer then has nothing to project onto.
+   */
+  mapBounds: {
+    bottomLeft: { x: number; z: number };
+    upperRight: { x: number; z: number };
+  } | null;
   /** `ctf`, `domination`… null when the client did not name one. */
   gameplay: string | null;
   /** The game's own `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */
@@ -239,7 +248,8 @@ export async function recentBattlesOf(
       id: row.id,
       startedAt: row.startedAt,
       map: row.map,
-      mapImage: minimaps.get(row.map) ?? null,
+      mapImage: minimaps.get(row.map)?.minimapUrl ?? null,
+      mapBounds: minimaps.get(row.map)?.bounds ?? null,
       gameplay: row.gameplay,
       battleType: row.battleType,
       duration: row.duration,

@@ -66,6 +66,7 @@ export function BattlePlayerPanel({
   region,
   participant,
   killer,
+  victims,
   metric,
   startedAt,
   battleDuration,
@@ -78,6 +79,8 @@ export function BattlePlayerPanel({
   participant: Participant;
   /** Whoever destroyed them, when the battle named one. */
   killer: Participant | null;
+  /** Everyone they destroyed, named. A kill count raises this and cannot say it. */
+  victims: string[];
   metric: RatingMetric;
   /** The battle's own start, for the Time block. */
   startedAt: string;
@@ -231,6 +234,13 @@ export function BattlePlayerPanel({
                 ? t("destroyed-by", { nickname: killer.player.nickname })
                 : t("destroyed")}
           </p>
+          {/* The other direction, which nothing else in the results names: a
+              kill count is a number, and this is who it was. */}
+          {victims.length > 0 ? (
+            <p className="text-muted-foreground text-xs">
+              {t("destroyed-list", { names: victims.join(", ") })}
+            </p>
+          ) : null}
         </div>
         <Button
           variant="ghost"

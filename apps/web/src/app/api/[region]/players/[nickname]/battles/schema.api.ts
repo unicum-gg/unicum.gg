@@ -115,6 +115,16 @@ export const playerBattle = z
     map: z.string().meta({
       description: "The arena's name, `45_north_america`, not its display title.",
     }),
+    mapBounds: z
+      .object({
+        bottomLeft: z.object({ x: z.number(), z: z.number() }),
+        upperRight: z.object({ x: z.number(), z: z.number() }),
+      })
+      .nullable()
+      .meta({
+        description:
+          "The arena's extent in metres, which is what places a replay's coordinates on the minimap.",
+      }),
     mapImage: z.string().nullable().meta({
       description:
         "The minimap this arena is actually played on, resolved against the maps catalogue. An Onslaught night arena is played on its own `_comp7` image rather than the daylight one shipped under its name.",

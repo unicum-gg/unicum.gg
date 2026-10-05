@@ -25,6 +25,7 @@ import { PlayerName } from "@/components/entity/player-name";
 import { SegmentedControl } from "@/components/segmented-control";
 import { BattlePlayerPanel } from "./battle-player";
 import { BattleReport } from "./battle-report";
+import { BattleReplay } from "./battle-replay";
 import type {
   BattleDetailData,
   BattleEconomy,
@@ -87,6 +88,7 @@ const RATING_COLOR: Record<RatingMetric, (value: number) => RatingColor> = {
 enum Tab {
   Teams = "teams",
   Report = "report",
+  Replay = "replay",
 }
 
 /**
@@ -97,6 +99,44 @@ enum Tab {
  * already decided for the reader: somebody who wants to know who blocked the
  * most, or who lived longest, should be able to ask.
  */
+/** Who destroyed whom, both ways round, named. */
+export type Kills = {
+  /** Whoever destroyed this vehicle, by battle-scoped vehicle id. */
+  killerOf: Map<number, string>;
+  /** Everyone this vehicle destroyed. */
+  victimsOf: Map<number, string[]>;
+};
+
+/**
+ * Who killed whom, read off `killer` and inverted.
+ *
+ * The results name the vehicle that destroyed each player, and nothing names
+ * the other direction: a player's kill count is a number with no victims
+ * attached. Inverting the one map gives the other for free, and "who did this
+ * player take out" is the question a kill count actually raises.
+ *
+ * A bot or an account nobody has looked up here has no name, so it is listed
+ * by its vehicle instead: an unnamed killer is still a fact about the battle.
+ */
+function killsOf(participants: Participant[], unnamed: string): Kills {
+  const nameOf = (p: Participant) =>
+    p.player?.nickname ?? p.tank?.shortName ?? unnamed;
+  const byId = new Map(participants.map((p) => [p.id, p]));
+  const killerOf = new Map<number, string>();
+  const victimsOf = new Map<number, string[]>();
+  for (const p of participants) {
+    const killerId = p.own.killer;
+    if (!killerId) continue;
+    const killer = byId.get(killerId);
+    if (!killer) continue;
+    killerOf.set(p.id, nameOf(killer));
+    const list = victimsOf.get(killerId);
+    if (list) list.push(nameOf(p));
+    else victimsOf.set(killerId, [nameOf(p)]);
+  }
+  return { killerOf, victimsOf };
+}
+
 type Column = {
   id: string;
   /** What the tooltip says. The heading itself is usually the icon. */
@@ -107,6 +147,8 @@ type Column = {
   value: (p: Participant, metric: RatingMetric) => number | null;
   /** How it is drawn, when a plain number is not it. */
   render?: (value: number) => string;
+  /** What hovering the CELL says, when the figure has names behind it. */
+  tip?: (p: Participant, kills: Kills) => string | null;
   className?: string;
 };
 
@@ -138,11 +180,21 @@ export function BattleDetail({
   startedAt,
   duration: cardDuration,
   personal,
+  arenaId,
+  mapImage,
+  mapBounds,
   metric,
   highlightAccount,
 }: {
   region: Region;
   battleId: string;
+  /** The arena, its minimap and its extent, for the replay viewer. */
+  arenaId: string;
+  mapImage: string | null;
+  mapBounds: {
+    bottomLeft: { x: number; z: number };
+    upperRight: { x: number; z: number };
+  } | null;
   /** The battle's own start, which the card already holds. */
   startedAt: string;
   duration: number | null;
@@ -227,6 +279,11 @@ export function BattleDetail({
       label: t("column.kills"),
       icon: <SkullIcon className="size-4" weight="fill" />,
       value: (p) => p.own.kills ?? 0,
+      // A kill count with no victims is a number; this is what it means.
+      tip: (p, kills) => {
+        const victims = kills.victimsOf.get(p.id);
+        return victims?.length ? victims.join(", ") : null;
+      },
       className: "w-10",
     },
     {
@@ -258,6 +315,7 @@ export function BattleDetail({
     },
   ];
 
+  const kills = killsOf(data.participants, t("unnamed"));
   const teams = [...new Set(data.participants.map((p) => p.team))].sort();
   // The page's own player, when they were in this battle: the report is about
   // them and nobody else.
@@ -284,6 +342,7 @@ export function BattleDetail({
               segments={[
                 { id: Tab.Teams, label: t("tab.teams") },
                 { id: Tab.Report, label: t("tab.report") },
+                { id: Tab.Replay, label: t("tab.replay") },
               ]}
             />
           ) : (
@@ -298,7 +357,17 @@ export function BattleDetail({
           </span>
         </div>
 
-        {tab === Tab.Report && mine ? (
+        {tab === Tab.Replay && mine ? (
+          <BattleReplay
+            battleId={battleId}
+            arenaId={arenaId}
+            mapImage={mapImage}
+            bounds={mapBounds}
+            participants={data.participants}
+            highlightAccount={highlightAccount}
+            t={t}
+          />
+        ) : tab === Tab.Report && mine ? (
           <BattleReport
             participant={{ ...mine, personal }}
             startedAt={startedAt}
@@ -327,6 +396,7 @@ export function BattleDetail({
                 region={region}
                 participant={open}
                 killer={killer}
+                victims={kills.victimsOf.get(open.id) ?? []}
                 metric={metric}
                 startedAt={startedAt}
                 battleDuration={data.duration}
@@ -348,6 +418,7 @@ export function BattleDetail({
                 }
                 participants={data.participants.filter((p) => p.team === team)}
                 columns={columns}
+                kills={kills}
                 metric={metric}
                 sort={sort}
                 onSort={setSort}
@@ -374,6 +445,7 @@ function TeamTable({
   lost,
   participants,
   columns,
+  kills,
   metric,
   sort,
   onSort,
@@ -389,6 +461,7 @@ function TeamTable({
   lost: boolean;
   participants: Participant[];
   columns: Column[];
+  kills: Kills;
   metric: RatingMetric;
   sort: { id: string; desc: boolean };
   onSort: (next: { id: string; desc: boolean }) => void;
@@ -511,6 +584,13 @@ function TeamTable({
               aria-selected={p.id === opened}
               className={cn(
                 "hover:bg-foreground/5 cursor-pointer transition-colors",
+                // Destroyed, said the way the game says it: the whole line
+                // dims. An icon in the name column was a glyph to learn and a
+                // column of width to pay for; a dimmed row is read without
+                // being looked at. Set on the row so every cell inherits it,
+                // and the rating cell keeps its own colour because a `<td>`
+                // that declares one never inherits.
+                p.own.deathReason !== SURVIVED && "text-muted-foreground",
                 p.account !== undefined &&
                   p.account === highlightAccount &&
                   "bg-primary/10",
@@ -520,37 +600,28 @@ function TeamTable({
               <TableCell className={cn(gutter, NAME_WIDTH)}>
                 <span className="flex items-center gap-1.5 overflow-hidden whitespace-nowrap">
                   {p.player ? (
-                    // The site's one format for naming a player, with the link
-                    // off: the row itself is the target, and sixty link targets
-                    // across two rosters is something a reader has to steer
-                    // around while scanning. The panel is where a name becomes
-                    // a link.
-                    <PlayerName
+                    // The site's one format for naming a player, given a
+                    // deliberately thin identity: the name and the clan, and
+                    // none of the crests. `PlayerName` renders every honour it
+                    // is handed, which is exactly right on a leaderboard and
+                    // wrong on thirty rows at once, where fourteen crests say
+                    // nothing about the battle and crowd the names they sit
+                    // beside. The panel gets the whole identity, because there
+                    // the reader asked about one player.
+                    //
+                    // The link is off for the same reason: the row is the
+                    // target, and sixty link targets across two rosters is
+                    // something a reader has to steer around while scanning.
+                    <NameWithKiller
                       region={region}
                       player={p.player}
-                      link={false}
-                      className="min-w-0"
-                      linkClassName="truncate"
+                      killer={kills.killerOf.get(p.id) ?? null}
+                      t={t}
                     />
                   ) : (
                     <span className="text-muted-foreground italic">
                       {t("unnamed")}
                     </span>
-                  )}
-                  {p.own.deathReason === SURVIVED ? null : (
-                    // The same skull the kills column uses, which is what
-                    // makes it read as "destroyed" rather than as a dot whose
-                    // meaning has to be learnt.
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <SkullIcon
-                          aria-label={t("died")}
-                          className="text-muted-foreground size-3.5 shrink-0"
-                          weight="fill"
-                        />
-                      </TooltipTrigger>
-                      <TooltipContent>{t("died")}</TooltipContent>
-                    </Tooltip>
                   )}
                 </span>
               </TableCell>
@@ -601,13 +672,12 @@ function TeamTable({
                       c.className,
                     )}
                   >
-                    {value === null ? (
-                      <span className="text-muted-foreground">&mdash;</span>
-                    ) : c.render ? (
-                      c.render(value)
-                    ) : (
-                      count.format(value)
-                    )}
+                    <CellValue
+                      value={value}
+                      render={c.render}
+                      count={count}
+                      tip={c.tip ? c.tip(p, kills) : null}
+                    />
                   </TableCell>
                 );
               })}
@@ -616,5 +686,82 @@ function TeamTable({
         </TableBody>
       </Table>
     </div>
+  );
+}
+
+/**
+ * A name, and what hovering it says about how their battle ended.
+ *
+ * The dimmed row already says they were destroyed; this says by whom, which is
+ * the question the dimming raises and cannot answer. On the name rather than in
+ * a column of its own, because a column wide enough for a nickname is a column
+ * the two rosters do not have between them.
+ */
+function NameWithKiller({
+  region,
+  player,
+  killer,
+  t,
+}: {
+  region: Region;
+  player: NonNullable<Participant["player"]>;
+  killer: string | null;
+  t: TranslateFunction;
+}) {
+  // A deliberately thin identity: the name and the clan, none of the crests.
+  // `PlayerName` renders every honour it is handed, which is right on a
+  // leaderboard and wrong on thirty rows at once. The panel gets the whole one.
+  const name = (
+    <PlayerName
+      region={region}
+      player={{
+        nickname: player.nickname,
+        clanTag: player.clanTag,
+        clanColor: player.clanColor,
+      }}
+      // The row is the click target; sixty link targets across two rosters is
+      // something a reader has to steer around while scanning.
+      link={false}
+      className="min-w-0"
+      linkClassName="truncate"
+    />
+  );
+  if (!killer) return name;
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span className="min-w-0">{name}</span>
+      </TooltipTrigger>
+      <TooltipContent>{t("destroyed-by", { nickname: killer })}</TooltipContent>
+    </Tooltip>
+  );
+}
+
+/** A figure, and the names behind it when it has any. */
+function CellValue({
+  value,
+  render,
+  count,
+  tip,
+}: {
+  value: number | null;
+  render?: (value: number) => string;
+  count: Intl.NumberFormat;
+  tip: string | null;
+}) {
+  if (value === null) {
+    return <span className="text-muted-foreground">&mdash;</span>;
+  }
+  const shown = render ? render(value) : count.format(value);
+  if (!tip) return <>{shown}</>;
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span className="underline decoration-dotted underline-offset-2">
+          {shown}
+        </span>
+      </TooltipTrigger>
+      <TooltipContent>{tip}</TooltipContent>
+    </Tooltip>
   );
 }

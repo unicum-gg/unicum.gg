@@ -87,24 +87,38 @@
     "credits": "Credits",
     "experience": "Experience",
     "bonds": "Bonds",
-    "earned-for-battle": "Earned for battle",
+    "earned-for-battle": "Earned for the battle",
     "reserves": "Personal reserves",
     "missions": "Missions and events",
     "orders": "Orders",
     "ally-fine": "Fine for damaging allies",
     "compensation": "Compensation from allies",
-    "subtotal": "Total for the battle",
     "repair": "Auto-repair",
     "ammo": "Auto-resupply ammunition",
     "supplies": "Auto-resupply consumables",
-    "total": "Total",
     "premium-vehicle": "Premium vehicle bonus",
     "free-xp": "Free experience",
     "crew-xp": "Crew experience",
-    "with-premium": "These figures are what the account actually received, with its premium bonus already applied."
+    "with-premium": "This account had premium.",
+    "with-bonuses": "With bonuses applied",
+    "credited": "Credited to the account",
+    "not-a-sum": "Each line is a figure the game reports in its own right; they do not add up to one another."
   },
   "tab": {
     "teams": "Team score",
-    "report": "Detailed report"
+    "report": "Detailed report",
+    "replay": "Replay"
+  },
+  "destroyed-list": "Destroyed {names}",
+  "replay": {
+    "drop": "Choose this battle’s .wotreplay file",
+    "privacy": "The file is read in your browser and never leaves your machine. Nothing is uploaded and nothing is stored.",
+    "reading": "Reading the replay…",
+    "wrong-battle": "That replay is a different battle ({map}).",
+    "unfinished": "That replay has no packet stream: the battle was not played to the end.",
+    "no-positions": "That replay carries no positions this reader understands.",
+    "no-bounds": "This arena has no extent in the catalogue, so the positions cannot be placed on its minimap.",
+    "play": "Play",
+    "pause": "Pause"
   }
 }

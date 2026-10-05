@@ -111,6 +111,12 @@ export function BattleReport({
       render: (v) => `${count.format(Math.round(v / 10) / 100)} km`,
     }),
     line(t("report.repaired"), own.repaired),
+    own.health === undefined
+      ? null
+      : {
+          label: t("field.health"),
+          value: `${count.format(own.health)} / ${count.format(own.maxHealth ?? 0)}`,
+        },
   ];
 
   const timing: (Row | null)[] = [
@@ -126,34 +132,42 @@ export function BattleReport({
         },
   ];
 
-  const credits: (Row | null)[] = [
+  // The breakdown when the economy is there, the flat total when it is not.
+  // The vehicle line always carries what the battle paid and earned, so a
+  // report that showed nothing at all until the mod started sending the
+  // breakdown would be hiding a figure it has.
+  const credits: (Row | null)[] = money.credits === undefined
+    ? [line(t("report.credited"), own.credits)]
+    : [
     line(t("report.earned-for-battle"), money.creditsBase),
     line(t("report.reserves"), money.creditsBooster, { under: true }),
     line(t("report.missions"), money.creditsEvent, { under: true }),
     line(t("report.orders"), money.creditsOrder, { under: true }),
     line(t("report.ally-fine"), money.creditsPenalty, { cost: true, under: true }),
     line(t("report.compensation"), money.creditsCompensation, { under: true }),
-    line(t("report.subtotal"), money.creditsSubtotal),
+    line(t("report.with-bonuses"), money.creditsSubtotal),
     line(t("report.repair"), money.repairCost, { cost: true, under: true }),
     line(t("report.ammo"), money.ammoCost, { cost: true, under: true }),
     line(t("report.supplies"), money.suppliesCost, { cost: true, under: true }),
-    line(t("report.total"), money.credits),
+    line(t("report.credited"), money.credits),
   ];
 
-  const experience: (Row | null)[] = [
+  const experience: (Row | null)[] = money.xp === undefined
+    ? [line(t("report.credited"), own.xp)]
+    : [
     line(t("report.earned-for-battle"), money.xpBase),
     line(t("report.reserves"), money.xpBooster, { under: true }),
     line(t("report.missions"), money.xpEvent, { under: true }),
     line(t("report.premium-vehicle"), money.xpPremiumVehicle, { under: true }),
     line(t("report.ally-fine"), money.xpPenalty, { cost: true, under: true }),
-    line(t("report.total"), money.xp),
+    line(t("report.credited"), money.xp),
     line(t("report.free-xp"), money.freeXp),
     line(t("report.crew-xp"), money.crewXp),
   ];
 
   const bonds: (Row | null)[] = [
     line(t("report.earned-for-battle"), money.bondsBase),
-    line(t("report.total"), money.bonds),
+    line(t("report.credited"), money.bonds),
   ];
 
   const blocks = [
@@ -205,11 +219,18 @@ export function BattleReport({
           </div>
         );
       })}
-      {money.premium ? (
-        <p className="text-muted-foreground text-xs md:col-span-2 xl:col-span-3">
-          {t("report.with-premium")}
-        </p>
-      ) : null}
+      {/*
+        Named, never summed. Each line is a figure the game reports in its own
+        right, and they do not form a chain: measured on a real battle, the
+        credits came to 43958 without premium, 65937 with it, a repair bill of
+        11804, and 75828 actually credited, which is not the subtotal minus the
+        bill. Rather than invent a derivation out of the fields the results
+        happen to expose, each line says what it is.
+      */}
+      <p className="text-muted-foreground text-xs md:col-span-2 xl:col-span-3">
+        {money.premium ? `${t("report.with-premium")} ` : ""}
+        {t("report.not-a-sum")}
+      </p>
     </div>
   );
 }

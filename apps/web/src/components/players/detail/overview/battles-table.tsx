@@ -12,7 +12,9 @@ import {
   UsersThreeIcon,
 } from "@phosphor-icons/react";
 import {
+  gameplayLabel,
   minimapUrl,
+  modeLabel,
   RATING_COLOR_CLASS,
   RatingMetric,
   wn7Color,
@@ -51,6 +53,11 @@ export type PlayerBattleRow = {
   map: string;
   /** The minimap the arena is played on, resolved server-side. */
   mapImage: string | null;
+  /** The arena's extent in metres, which places a replay on that image. */
+  mapBounds: {
+    bottomLeft: { x: number; z: number };
+    upperRight: { x: number; z: number };
+  } | null;
   gameplay: string | null;
   battleType: number;
   duration: number | null;
@@ -159,6 +166,12 @@ export function PlayerBattlesTable({
         const survived = battle.own.deathReason === SURVIVED;
         const rating = battle.rating[metric];
         const title = mapName(battle.map, battle.map, tMaps);
+        const mode = modeLabel(battle.battleType);
+        // Not beside Onslaught, where `comp7` is the mode saying itself twice.
+        const play =
+          mode === null || battle.gameplay === "comp7"
+            ? null
+            : gameplayLabel(battle.gameplay);
         const length = clock(battle.duration);
         const expanded = open === battle.id;
         return (
@@ -263,6 +276,15 @@ export function PlayerBattlesTable({
                 )}
               </span>
               <span className="text-muted-foreground flex flex-wrap items-center gap-x-2 text-xs">
+                {/* Which queue it came from, and what the teams were doing in
+                    it. Two independent facts: a random battle is Standard,
+                    Encounter or Assault depending on the arena, and the card
+                    said neither. Unnamed modes show nothing rather than a
+                    number, which would be the site showing its plumbing. */}
+                {mode ? (
+                  <span className="text-foreground font-medium">{mode}</span>
+                ) : null}
+                {play ? <span>{play}</span> : null}
                 <span>{when.format(battle.startedAt)}</span>
                 <span className="inline-flex items-center gap-1">
                   <UsersThreeIcon className="size-3" weight="fill" />
@@ -344,6 +366,9 @@ export function PlayerBattlesTable({
               startedAt={battle.startedAt}
               duration={battle.duration}
               personal={battle.personal}
+              arenaId={battle.map}
+              mapImage={battle.mapImage}
+              mapBounds={battle.mapBounds}
               metric={metric}
               highlightAccount={accountId}
             />

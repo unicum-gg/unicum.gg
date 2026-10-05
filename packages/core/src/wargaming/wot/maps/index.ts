@@ -9,6 +9,7 @@ import {
   type MapGameMode,
   type MapMarker,
   type MapPoi,
+  type MapPoint,
   type MapSummary,
 } from "@unicum.gg/shared";
 import { getMapCatalog, type MapCatalog } from "./catalog";
@@ -274,20 +275,44 @@ export async function resolveArenaRefs(
  * up to twenty pages of provinces, and it decides which tabs a map page draws
  * while saying nothing about which image an arena is played on.
  */
+export type ArenaDrawing = {
+  /** The minimap the arena is actually played on. */
+  minimapUrl: string;
+  /**
+   * The arena's own extent in metres, which is what turns a replay's
+   * coordinates into a position on that image. Null for an arena whose
+   * definition carries no box.
+   */
+  bounds: { bottomLeft: MapPoint; upperRight: MapPoint } | null;
+};
+
 export async function minimapsByArena(
   region: Region,
-): Promise<Map<string, string>> {
+): Promise<Map<string, ArenaDrawing>> {
   const { arenas, index, variantArenas, testOnlyArenas } =
     await getMapCatalog(region);
-  const out = new Map<string, string>();
+  const out = new Map<string, ArenaDrawing>();
   for (const arena of arenas.values()) {
     const slug = index.idToSlug.get(arena.arenaId);
     if (!slug) continue;
     const variants = variantArenas.get(arena.arenaId) ?? [];
     const summary = buildMapSummary(arena, slug, [], variants, testOnlyArenas);
-    out.set(arena.arenaId, summary.minimapUrl);
+    out.set(arena.arenaId, {
+      minimapUrl: summary.minimapUrl,
+      bounds: arena.boundingBox ?? null,
+    });
     for (const variant of summary.variants) {
-      out.set(variant.arenaId, variant.minimapUrl);
+      // A variant is a whole arena of its own, so it carries its own box: the
+      // Onslaught night versions are played on a smaller square than the map
+      // they darken, and borrowing the base map's extent would put every
+      // replay position in the wrong place by a quarter of the image.
+      const raw = variantArenas
+        .get(arena.arenaId)
+        ?.find((a) => a.arenaId === variant.arenaId);
+      out.set(variant.arenaId, {
+        minimapUrl: variant.minimapUrl,
+        bounds: raw?.boundingBox ?? arena.boundingBox ?? null,
+      });
     }
   }
   return out;
