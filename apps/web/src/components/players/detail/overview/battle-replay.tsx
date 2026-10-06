@@ -20,9 +20,9 @@ type Bounds = {
   upperRight: { x: number; z: number };
 };
 
-/** One vehicle's path, as the endpoint sends it: `[tenths of a second, x, z]`. */
+/** One vehicle's path, as the endpoint sends it: `[clock ticks, x, z]`. */
 type Track = { id: number; points: [number, number, number][] };
-type Motion = { duration: number; hz: number; tracks: Track[] };
+type Motion = { duration: number; ticksPerSecond: number; tracks: Track[] };
 
 /** How fast the drawing advances while playing, in battle seconds per second. */
 const SPEED = 4;
@@ -135,7 +135,14 @@ export function BattleReplay({
     if (!playing || !motion) return;
     let last = performance.now();
     const step = (now: number) => {
-      const delta = ((now - last) / 1000) * SPEED;
+      // Clamped, because `requestAnimationFrame` stops while a tab is hidden
+      // or busy and then hands back the whole elapsed time at once: a stall of
+      // a few seconds otherwise skips minutes of battle and lands on the end,
+      // where there is nothing left to draw. A quarter second is longer than
+      // any real frame and short enough that a stall costs a stutter rather
+      // than the rest of the replay.
+      const elapsed = Math.min(now - last, 250);
+      const delta = (elapsed / 1000) * SPEED;
       last = now;
       setAt((previous) => {
         const next = previous + delta;
@@ -166,6 +173,15 @@ export function BattleReplay({
   // Scaled with the map for the reason the overlay's markers are: a fixed
   // pixel glyph that reads well at 512 swamps a phone's map.
   const markerPx = Math.max(9, Math.round((mapWidth || 512) * 0.032));
+  // Defaulted, because a browser may still hold a response from before this
+  // field existed, whose clocks were in tenths. Reading it as `undefined`
+  // turns every comparison into NaN and the map draws no vehicles at all,
+  // which is exactly what happened.
+  const ticks = motion?.ticksPerSecond || 10;
+  // The name rides at the glyph's shoulder, so it follows the same scale. Not
+  // below 7px: under that it is a smudge rather than a word, and a smudge on
+  // every one of thirty vehicles is worse than no label at all.
+  const labelPx = Math.max(7, Math.round(mapWidth * 0.019));
   const ourTeam =
     participants.find((p) => p.account !== undefined && p.account === highlightAccount)
       ?.team ?? 1;
@@ -213,7 +229,7 @@ export function BattleReplay({
               // test into the enemy colour. Verified on a real battle: six
               // such tracks, five landing at 0.00% from a declared objective.
               if (!who) return null;
-              const point = pointAt(track.points, at);
+              const point = pointAt(track.points, at, ticks);
               if (!point) return null;
               // x and z only: the minimap is a plan view, and a tank on a hill
               // is at the same place on it as one under the hill.
@@ -259,6 +275,22 @@ export function BattleReplay({
                         style={{ width: markerPx * 0.5, height: markerPx * 0.5 }}
                       />
                     )}
+                    {/* The tank's name beside its glyph, where the game puts
+                        it. Absolutely positioned out of the marker's own box
+                        so it cannot push the glyph off the point it marks,
+                        and never wrapped: a name that folds onto two lines
+                        over a minimap is unreadable either way. */}
+                    {who.tank?.shortName ? (
+                      <span
+                        className={cn(
+                          "pointer-events-none absolute left-full top-1/2 whitespace-nowrap font-medium leading-none",
+                          side,
+                        )}
+                        style={{ fontSize: labelPx, paddingLeft: labelPx * 0.3 }}
+                      >
+                        {who.tank.shortName}
+                      </span>
+                    ) : null}
                   </span>
               );
             })
@@ -319,16 +351,16 @@ function clock(seconds: number): string {
 }
 
 /**
- * The longest gap, in tenths of a second, worth sliding across.
+ * The longest gap, in seconds, worth sliding across.
  *
- * Positions arrive twice a second, so a normal step is 5. Anything much
- * longer is not a vehicle moving slowly, it is a vehicle nobody could see:
- * the stream only carries what the recording client was shown, so a tank that
- * goes unspotted for twenty seconds reappears somewhere else entirely. Sliding
- * across that would draw it gliding through half the map, which is the thing
- * the first version of this refused to do by never interpolating at all.
+ * Positions arrive about ten a second, so a normal step is a tenth. Anything
+ * much longer is not a vehicle moving slowly, it is a vehicle nobody could
+ * see: the stream only carries what the recording client was shown, so a tank
+ * that goes unspotted for twenty seconds reappears somewhere else entirely.
+ * Sliding across that would draw it gliding through half the map, which is
+ * what the first version refused by never interpolating at all.
  */
-const SLIDE_LIMIT = 15;
+const SLIDE_LIMIT_S = 1.5;
 
 /**
  * Where a vehicle was at `at` seconds, between its two nearest samples.
@@ -342,12 +374,13 @@ const SLIDE_LIMIT = 15;
 function pointAt(
   points: [number, number, number][],
   at: number,
+  ticks: number,
 ): [number, number] | null {
-  const tenths = at * 10;
+  const now = at * ticks;
   let before: [number, number, number] | null = null;
   let after: [number, number, number] | null = null;
   for (const point of points) {
-    if (point[0] <= tenths) before = point;
+    if (point[0] <= now) before = point;
     else {
       after = point;
       break;
@@ -356,8 +389,8 @@ function pointAt(
   if (!before) return null;
   if (!after) return [before[1], before[2]];
   const span = after[0] - before[0];
-  if (span <= 0 || span > SLIDE_LIMIT) return [before[1], before[2]];
-  const k = (tenths - before[0]) / span;
+  if (span <= 0 || span > SLIDE_LIMIT_S * ticks) return [before[1], before[2]];
+  const k = (now - before[0]) / span;
   return [
     before[1] + (after[1] - before[1]) * k,
     before[2] + (after[2] - before[2]) * k,

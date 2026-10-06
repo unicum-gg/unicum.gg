@@ -9,17 +9,16 @@ import { BattleReplayResponse } from "./schema.api";
 export const dynamic = "force-dynamic";
 
 /**
- * How often a position is kept, in samples per second.
+ * Clock ticks a second in the timestamps below.
  *
- * The file holds every change the client saw, which for a seven-minute battle
- * is a megabyte and a half of JSON once it reaches the browser. Two a second
- * is what a plan view of tanks that top out at 60 km/h can actually show: a
- * tank moves eight metres between samples, on a map drawn five hundred pixels
- * across for a kilometre, so four pixels.
+ * Hundredths, not tenths. The recording is ten samples a second, so rounding
+ * the clock to tenths would quantise the timing by the whole of the gap
+ * between two points, and the stutter that removal of the thinning was meant
+ * to cure would come straight back through the timestamps.
  */
-const HZ = 2;
+const TICKS = 100;
 
-/** One vehicle's path, as `[tenths of a second, x, z]`. */
+/** One vehicle's path, as `[clock ticks, x, z]`. */
 type Track = { id: number; points: [number, number, number][] };
 
 /**
@@ -86,7 +85,7 @@ async function GET__perf(
 
   const tracks: Track[] = [];
   for (const track of motion.tracks) {
-    const points = decimate(track.points);
+    const points = thin(track.points);
     if (points.length > 0) tracks.push({ id: track.id, points });
   }
   if (tracks.length === 0) {
@@ -95,38 +94,56 @@ async function GET__perf(
 
   return jsonResponse(
     BattleReplayResponse,
-    { duration: Math.round(motion.duration), hz: HZ, tracks },
+    { duration: Math.round(motion.duration), ticksPerSecond: TICKS, tracks },
     {
       headers: {
-        // A battle that has been played never changes, and neither does its
-        // replay. Decoding one costs Blowfish over a couple of megabytes, so
-        // this is worth not doing twice.
-        "cache-control": "public, max-age=86400, immutable",
+        // Long, because a battle that has been played never changes and
+        // decoding its replay costs Blowfish over a couple of megabytes.
+        //
+        // But NOT `immutable`, which is a promise about the bytes and not
+        // about the battle: the shape of this answer did change once, and
+        // every client that had cached it kept drawing nothing for a day
+        // while the server was already right. `stale-while-revalidate` keeps
+        // the speed and lets a changed shape reach people within the hour.
+        "cache-control": "public, max-age=3600, stale-while-revalidate=86400",
       },
     },
   );
 }
 
 /**
- * One track, thinned to `HZ` and rounded to whole metres.
+ * One track, rounded but not thinned.
  *
- * Rounded here rather than in the browser because it is most of the saving:
- * a coordinate written to six decimals costs eight characters where four do,
- * and a vehicle sitting still then writes the same three numbers, which
- * compresses to nothing.
+ * **Every point the replay holds.** An earlier version kept two a second, on
+ * the grounds that a plan view of tanks topping out at 60 km/h cannot show
+ * more. It can: the recording is ten a second (measured, median gap 0.1 s),
+ * and at two the viewer draws a tank as a sequence of straight segments that
+ * reads as a stutter however smoothly it interpolates between them. Keeping
+ * everything costs 77 to 105 KB gzipped against 23 to 29, on a response
+ * cached for a day, which is a trade worth making once.
+ *
+ * Hundredths of a second, not tenths, for the same reason: with points a
+ * tenth apart, rounding the clock to tenths quantises the timing by the whole
+ * of the gap, and the stutter comes back through the timestamps instead.
+ *
+ * Coordinates are rounded to whole metres, which is where the compression
+ * comes from: half a metre is already under a pixel on a minimap, and a
+ * vehicle sitting still then writes the same numbers, which deflate to
+ * nothing.
  */
-function decimate(
+function thin(
   points: [number, number, number, number][],
 ): [number, number, number][] {
   const out: [number, number, number][] = [];
-  let next = -Infinity;
+  let last = -1;
   for (const [at, x, , z] of points) {
-    if (at < next) continue;
-    next = at + 1 / HZ;
     if (!Number.isFinite(x) || !Number.isFinite(z)) continue;
-    // Tenths of a second: a battle runs under half an hour, so this stays a
-    // small integer, and the viewer wants a number it can compare, not a float.
-    out.push([Math.round(at * 10), Math.round(x), Math.round(z)]);
+    const when = Math.round(at * 100);
+    // Two samples landing on the same hundredth are the same instant as far
+    // as anything drawn from this is concerned.
+    if (when === last) continue;
+    last = when;
+    out.push([when, Math.round(x), Math.round(z)]);
   }
   return out;
 }

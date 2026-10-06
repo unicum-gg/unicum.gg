@@ -16,7 +16,7 @@ export const BattleReplayTrack = z.object({
   }),
   points: z.array(z.array(z.number()).length(3)).meta({
     description:
-      "The path, as [tenths of a second since the battle started, x, z]. Only the moments the vehicle moved: between two points it is exactly where it stopped.",
+      "The path, as [clock ticks since the battle started, x, z in the arena's own metres]. Every position the recording client was shown, which is about ten a second; only the moments the vehicle actually moved are kept, so between two points it stood still.",
   }),
 });
 
@@ -24,8 +24,9 @@ export const BattleReplayResponse = z.object({
   duration: z.number().meta({
     description: "How long the recording runs, in seconds.",
   }),
-  hz: z.number().meta({
-    description: "Samples a second the points were thinned to.",
+  ticksPerSecond: z.number().meta({
+    description:
+      "Clock ticks a second in each point's first value. Hundredths, so a point's instant in seconds is its tick divided by this.",
   }),
   tracks: z.array(BattleReplayTrack).meta({
     description:

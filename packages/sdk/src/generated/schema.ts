@@ -2526,15 +2526,15 @@ export interface components {
         BattleReplayResponse: {
             /** @description How long the recording runs, in seconds. */
             duration: number;
-            /** @description Samples a second the points were thinned to. */
-            hz: number;
+            /** @description Clock ticks a second in each point's first value. Hundredths, so a point's instant in seconds is its tick divided by this. */
+            ticksPerSecond: number;
             /** @description One entry per vehicle this battle's recording client could see. A vehicle it never spotted has no track, which is honest fog of war rather than a gap. */
             tracks: components["schemas"]["BattleReplayTrack"][];
         };
         BattleReplayTrack: {
             /** @description The battle-scoped vehicle id, the same one the battle's participants are keyed by. */
             id: number;
-            /** @description The path, as [tenths of a second since the battle started, x, z]. Only the moments the vehicle moved: between two points it is exactly where it stopped. */
+            /** @description The path, as [clock ticks since the battle started, x, z in the arena's own metres]. Every position the recording client was shown, which is about ten a second; only the moments the vehicle actually moved are kept, so between two points it stood still. */
             points: number[][];
         };
         /**
