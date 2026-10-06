@@ -128,6 +128,14 @@ export function BattleReplay({
   if (error || !motion) return <Notice>{t("replay.failed")}</Notice>;
 
   const byId = new Map(participants.map((p) => [p.id, p]));
+  // Green is "on my side", not "team 1". The team numbers are the game's own
+  // and say nothing about who is reading the page: this battle had the page's
+  // player in team 2, so colouring by the raw number painted his own six
+  // team-mates as the enemy. Falls back to team 1 when the page belongs to
+  // nobody in the battle, which is the only case with no side to take.
+  const ourTeam =
+    participants.find((p) => p.account !== undefined && p.account === highlightAccount)
+      ?.team ?? 1;
 
   return (
     <div className="space-y-3 px-4 py-3">
@@ -158,24 +166,33 @@ export function BattleReplay({
         ) : null}
         {bounds
           ? motion.tracks.map((track) => {
+              const who = byId.get(track.id);
+              // Only what we can name. The packet stream carries more than
+              // vehicles: on Onslaught the five capturable objectives and the
+              // control point are world entities with ids of their own, and
+              // they sit in the stream exactly like a tank would. Drawn
+              // blindly they became red dots pinned on every objective,
+              // because a track with no participant falls through the team
+              // test into the enemy colour. Verified on a real battle: six
+              // such tracks, five landing at 0.00% from a declared objective.
+              if (!who) return null;
               const point = pointAt(track.points, at);
               if (!point) return null;
               // x and z only: the minimap is a plan view, and a tank on a hill
               // is at the same place on it as one under the hill.
               const where = projectPoint({ x: point[1], z: point[2] }, bounds);
-              const who = byId.get(track.id);
               const mine =
-                who?.account !== undefined && who.account === highlightAccount;
+                who.account !== undefined && who.account === highlightAccount;
               return (
                 <span
                   key={track.id}
-                  title={who?.player?.nickname ?? String(track.id)}
+                  title={who.player?.nickname ?? String(track.id)}
                   style={{ left: `${where.left}%`, top: `${where.top}%` }}
                   className={cn(
                     "absolute size-2 -translate-x-1/2 -translate-y-1/2 rounded-full ring-1 ring-black/50",
                     mine
                       ? "size-2.5 bg-amber-400"
-                      : who?.team === 1
+                      : who.team === ourTeam
                         ? "bg-emerald-400"
                         : "bg-red-400",
                   )}
