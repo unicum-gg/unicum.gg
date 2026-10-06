@@ -300,7 +300,20 @@ export function BattleReplay({
                       // the component sets a colour of its own inside, so a
                       // parent's `text-…` never reaches the glyph and every
                       // tank came out the same pale grey.
-                      <span className="relative block">
+                      <span
+                        // Sized to the glyph exactly, so the ring has a square
+                        // to centre on. Left to its own devices the box is an
+                        // inline one and carries the baseline's descender
+                        // space below the icon, which pushes the ring up by a
+                        // couple of pixels and reads as crooked.
+                        // `flex`, not `block`: the icon is an inline-flex
+                        // element, so in a block box it sits on a baseline and
+                        // the ring, centred on the box, came out two pixels
+                        // high on every vehicle. A flex child has no baseline
+                        // to sit on.
+                        className="relative flex items-center justify-center"
+                        style={{ width: markerPx, height: markerPx }}
+                      >
                         {share !== null && share > 0 ? (
                           <HealthRing share={share} size={markerPx} />
                         ) : null}
@@ -389,8 +402,17 @@ export function BattleReplay({
  * it, and what a reader wants from a ring is "nearly dead" at a glance.
  */
 function HealthRing({ share, size }: { share: number; size: number }) {
-  const box = size * 1.45;
-  const r = box / 2 - 1;
+  // Thick enough to read at a glance on a busy map, and proportional like
+  // everything else here so it holds up on a phone's smaller one.
+  const stroke = Math.max(2, Math.round(size * 0.17));
+  // Whole pixels, and an even difference from the glyph's box, so the offset
+  // below is an integer: centring by `left: 50%` and a half translate lands on
+  // a fraction of a pixel that the browser rounds, which drew the ring one
+  // pixel high on every vehicle.
+  const box = size + 2 * Math.round(size * 0.28);
+  // The radius is to the stroke's CENTRE, so half of it has to come off or a
+  // thicker ring grows outwards and clips against the viewBox.
+  const r = (box - stroke) / 2;
   const circumference = 2 * Math.PI * r;
   const colour =
     share > 0.6 ? "#4ade80" : share > 0.3 ? "#fbbf24" : "#f87171";
@@ -400,15 +422,18 @@ function HealthRing({ share, size }: { share: number; size: number }) {
       height={box}
       viewBox={`0 0 ${box} ${box}`}
       aria-hidden
-      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+      className="pointer-events-none absolute"
+      // Exact arithmetic against the parent, which is the glyph's own square:
+      // the overhang is the same whole number of pixels on all four sides.
+      style={{ left: (size - box) / 2, top: (size - box) / 2 }}
     >
       <circle
         cx={box / 2}
         cy={box / 2}
         r={r}
         fill="none"
-        stroke="rgba(0,0,0,0.45)"
-        strokeWidth={1.5}
+        stroke="rgba(0,0,0,0.55)"
+        strokeWidth={stroke}
       />
       <circle
         cx={box / 2}
@@ -416,8 +441,8 @@ function HealthRing({ share, size }: { share: number; size: number }) {
         r={r}
         fill="none"
         stroke={colour}
-        strokeWidth={1.5}
-        strokeLinecap="round"
+        strokeWidth={stroke}
+        strokeLinecap="butt"
         strokeDasharray={`${circumference * share} ${circumference}`}
         transform={`rotate(-90 ${box / 2} ${box / 2})`}
       />
