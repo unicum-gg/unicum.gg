@@ -67,11 +67,15 @@ export function Marker({
   src,
   size,
   marker,
+  scale = 1,
 }: {
   src: string;
   size: number;
   marker: MapMarker;
+  /** Multiplies the pixel size, for a minimap drawn smaller than this page's. */
+  scale?: number;
 }) {
+  const drawn = Math.round(size * scale);
   return (
     // `width: max-content` so the shrink-to-fit box isn't squeezed by the space
     // left to the container edge: a marker near the right/left border would
@@ -83,8 +87,8 @@ export function Marker({
       <Image
         src={src}
         alt=""
-        width={size}
-        height={size}
+        width={drawn}
+        height={drawn}
         className="drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]"
       />
     </span>
@@ -101,6 +105,7 @@ function CaptureZone({
   sizeX,
   sizeY,
   iconSize = 60,
+  scale = 1,
 }: {
   icon: string;
   ring: readonly [string, string];
@@ -108,6 +113,7 @@ function CaptureZone({
   sizeX: number;
   sizeY: number;
   iconSize?: number;
+  scale?: number;
 }) {
   return (
     <>
@@ -121,7 +127,7 @@ function CaptureZone({
           background: ring[1],
         }}
       />
-      <Marker src={icon} size={iconSize} marker={marker} />
+      <Marker src={icon} size={iconSize} marker={marker} scale={scale} />
     </>
   );
 }
@@ -145,12 +151,21 @@ export function Overlay({
   capY,
   mapWidth,
   mapHeight,
+  scale = 1,
 }: {
   geometry: ViewGeometry;
   capX: number;
   capY: number;
   mapWidth: number;
   mapHeight: number;
+  /**
+   * Multiplies every icon's pixel size. The capture circles are already a
+   * percentage of the play area and scale themselves; the icons are pixels,
+   * chosen against the width this page draws its minimap at, so a smaller
+   * minimap elsewhere needs them brought down or they swamp it. Default 1
+   * leaves this page exactly as it was.
+   */
+  scale?: number;
 }) {
   return (
     <>
@@ -162,6 +177,7 @@ export function Overlay({
           marker={p}
           sizeX={capX}
           sizeY={capY}
+          scale={scale}
         />
       ))}
       {geometry.bases.team2.map((p, i) => (
@@ -172,13 +188,26 @@ export function Overlay({
           marker={p}
           sizeX={capX}
           sizeY={capY}
+          scale={scale}
         />
       ))}
       {geometry.spawns.team1.map((p, i) => (
-        <Marker key={`s1-${i}`} src={spawnUrl("team1", i)} size={58} marker={p} />
+        <Marker
+          key={`s1-${i}`}
+          src={spawnUrl("team1", i)}
+          size={58}
+          marker={p}
+          scale={scale}
+        />
       ))}
       {geometry.spawns.team2.map((p, i) => (
-        <Marker key={`s2-${i}`} src={spawnUrl("team2", i)} size={58} marker={p} />
+        <Marker
+          key={`s2-${i}`}
+          src={spawnUrl("team2", i)}
+          size={58}
+          marker={p}
+          scale={scale}
+        />
       ))}
       {geometry.pois.map((poi, i) => {
         const d = 2 * poiRadiusM(poi.type);
@@ -191,6 +220,7 @@ export function Overlay({
             sizeX={(d / mapWidth) * 100}
             sizeY={(d / mapHeight) * 100}
             iconSize={30}
+            scale={scale}
           />
         );
       })}
@@ -201,6 +231,7 @@ export function Overlay({
           marker={geometry.controlPoint}
           sizeX={capX}
           sizeY={capY}
+          scale={scale}
         />
       )}
     </>

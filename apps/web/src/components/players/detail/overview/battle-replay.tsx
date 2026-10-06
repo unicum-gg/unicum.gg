@@ -36,6 +36,21 @@ const SPEED = 4;
 const CAPTURE_DIAMETER_M = 100;
 
 /**
+ * The minimap width the shared overlay's icon sizes were chosen against.
+ *
+ * They are plain pixels, picked while looking at the map detail page, which
+ * draws its minimap around this wide on a desktop. This viewer's map is half
+ * that, so at scale 1 a spawn marker covers 11% of it where it covers 6% over
+ * there, which is exactly the "far too big" it looks. Measured, not guessed:
+ * 58 px on a 926 px map against 58 px on a 512 px one.
+ *
+ * So the icons are scaled by this map's own measured width over that
+ * reference, which keeps them the same fraction of the image at any size,
+ * including on a phone.
+ */
+const OVERLAY_REFERENCE_WIDTH = 926;
+
+/**
  * The battle replayed on its own minimap, out of the archived replay.
  *
  * It reads the **decoded positions**, not the file: a few hundred kilobytes
@@ -77,6 +92,20 @@ export function BattleReplay({
   const [at, setAt] = useState(0);
   const [playing, setPlaying] = useState(false);
   const frame = useRef<number | null>(null);
+  const map = useRef<HTMLDivElement | null>(null);
+  const [mapWidth, setMapWidth] = useState(0);
+
+  // Measured rather than assumed: the container is fluid under its max width,
+  // so a phone gets a much smaller map and the icons have to follow it.
+  useEffect(() => {
+    const node = map.current;
+    if (!node || typeof ResizeObserver === "undefined") return;
+    const watch = new ResizeObserver(([entry]) =>
+      setMapWidth(entry.contentRect.width),
+    );
+    watch.observe(node);
+    return () => watch.disconnect();
+  });
 
   // Through the SDK like every other read on this page: a hand-written fetch
   // against our own API is the one thing this repo does not allow, because the
@@ -139,7 +168,10 @@ export function BattleReplay({
 
   return (
     <div className="space-y-3 px-4 py-3">
-      <div className="relative mx-auto aspect-square w-full max-w-lg overflow-hidden rounded">
+      <div
+        ref={map}
+        className="relative mx-auto aspect-square w-full max-w-lg overflow-hidden rounded"
+      >
         <MinimapImage
           src={mapImage ?? minimapUrl(arenaId)}
           arenaId={arenaId}
@@ -162,6 +194,7 @@ export function BattleReplay({
             capY={(CAPTURE_DIAMETER_M / overlay.heightMeters) * 100}
             mapWidth={overlay.widthMeters}
             mapHeight={overlay.heightMeters}
+            scale={(mapWidth || OVERLAY_REFERENCE_WIDTH) / OVERLAY_REFERENCE_WIDTH}
           />
         ) : null}
         {bounds
