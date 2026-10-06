@@ -252,11 +252,11 @@ export function BattleReplay({
                     )}
                   >
                     {!point.spotted ? (
-                      // Lost sight of: the game draws a bare dot at the last
-                      // place the vehicle was seen, and so does this. Drawing
-                      // the glyph and the name there would claim to know
-                      // something nobody knows, which is that the tank is
-                      // still on that square.
+                      // Lost sight of: a bare dot at the last place the
+                      // vehicle was seen, as the game draws it. Only the glyph
+                      // goes; the name stays, because the question a reader
+                      // has about a dot on the far side of the map is which
+                      // tank it was, and the dot alone cannot answer it.
                       <span
                         className="block rounded-full bg-current opacity-70 ring-1 ring-black/60"
                         style={{ width: markerPx * 0.42, height: markerPx * 0.42 }}
@@ -290,7 +290,7 @@ export function BattleReplay({
                         so it cannot push the glyph off the point it marks,
                         and never wrapped: a name that folds onto two lines
                         over a minimap is unreadable either way. */}
-                    {point.spotted && who.tank?.shortName ? (
+                    {who.tank?.shortName ? (
                       <span
                         className={cn(
                           "pointer-events-none absolute left-full top-1/2 whitespace-nowrap font-medium leading-none",
