@@ -20,8 +20,8 @@ const isBone = (o: THREE.Object3D): o is THREE.Bone =>
 /** `?wheels=off` stops the wheels turning, for looking at the belt on its own. */
 const turnWheels = () => switched("wheels") !== "off";
 
-/** A belt already laid along a path, tagged with the side it runs down. */
-export type LaidBelt = ReturnType<typeof layTrack> & { sign: number };
+/** A belt already laid along a path, tagged with the line it runs down. */
+export type LaidBelt = ReturnType<typeof layTrack> & { at: number };
 
 type Wheel = {
   bone: THREE.Bone;
@@ -174,8 +174,24 @@ export function runningGear({
     );
   };
 
-  const bandFor = (sign: number) => {
-    const side = wheels.filter((w) => Math.sign(w.axle.x) === sign);
+  // **A wheel answers to the belt it runs under, not to the side it is on.**
+  // Grouped by the sign of x, the Object 279 (e)'s sixteen left wheels built
+  // one band for both of its left belts, so the outer pair was reshaped onto
+  // the inner one and simply stopped existing: the vehicle came out with two
+  // tracks and two rows of bare wheels. 29 vehicles publish more than two
+  // belts, eight of them six, and 20 run them down more than two lines.
+  // A vehicle with one belt a side has one line a side, so its nearest line is
+  // the side the wheel is on: checked over the catalogue, not one wheel of the
+  // 968 two-line vehicles lands in a different group than the sign put it in,
+  // so none of them moves.
+  const lines = [...new Set(belts.map((belt) => belt.at))];
+  const lineFor = (x: number) =>
+    lines.reduce((best, line) =>
+      Math.abs(line - x) < Math.abs(best - x) ? line : best,
+    );
+
+  const bandFor = (line: number) => {
+    const side = wheels.filter((w) => lineFor(w.axle.x) === line);
     if (side.length < 2) return null;
     // The belt rides on the road wheels, so their plane is its plane.
     const widest = side.reduce((big, w) => (w.wrap > big.wrap ? w : big));
@@ -283,11 +299,10 @@ export function runningGear({
       banded = kneelAt;
       const bands = new Map<number, number[][]>();
       for (const belt of belts) {
-        if (!bands.has(belt.sign))
-          bands.set(belt.sign, bandFor(belt.sign) ?? []);
+        if (!bands.has(belt.at)) bands.set(belt.at, bandFor(belt.at) ?? []);
       }
       for (const belt of belts) {
-        const band = bands.get(belt.sign);
+        const band = bands.get(belt.at);
         if (band && band.length >= 3) belt.reshape(band, 0);
       }
     }

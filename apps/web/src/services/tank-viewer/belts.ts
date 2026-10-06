@@ -168,7 +168,7 @@ export async function layBelts({
         // Assigned onto the belt rather than spread into a copy: `total` is a
         // getter that follows a reshaped path, and a spread would freeze it at
         // the length the belt happened to have when it was laid.
-        belts.push(Object.assign(laid, { sign: Math.sign(path[0]![0]!) }));
+        belts.push(Object.assign(laid, { at: path[0]![0]! }));
         links += laid.count;
         triangles += ((o.geometry.index?.count ?? 0) / 3) * laid.count;
       });
