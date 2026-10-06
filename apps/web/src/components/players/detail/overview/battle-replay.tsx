@@ -26,6 +26,9 @@ type Track = {
   points: [number, number, number][];
   /** The tick it was destroyed, in this same clock, or null if it survived. */
   diedAt: number | null;
+  maxHealth: number;
+  /** `[tick, hit points]`, one entry per change, implicitly starting at full. */
+  health: [number, number][];
 };
 type Motion = { duration: number; ticksPerSecond: number; tracks: Track[] };
 
@@ -262,6 +265,7 @@ export function BattleReplay({
                   ? "text-emerald-400/40"
                   : "text-red-400/40";
               const side = dead ? faded : full;
+              const share = dead ? 0 : healthAt(track, at, ticks);
               return (
                   <span
                     key={track.id}
@@ -296,11 +300,16 @@ export function BattleReplay({
                       // the component sets a colour of its own inside, so a
                       // parent's `text-…` never reaches the glyph and every
                       // tank came out the same pale grey.
-                      <VehicleTypeIcon
-                        type={who.tank.type}
-                        size={markerPx}
-                        className={side}
-                      />
+                      <span className="relative block">
+                        {share !== null && share > 0 ? (
+                          <HealthRing share={share} size={markerPx} />
+                        ) : null}
+                        <VehicleTypeIcon
+                          type={who.tank.type}
+                          size={markerPx}
+                          className={side}
+                        />
+                      </span>
                     ) : (
                       // A vehicle whose class we do not hold: still drawn,
                       // because where it was is the point, and a missing
@@ -370,6 +379,52 @@ export function BattleReplay({
   );
 }
 
+/**
+ * The ring the game draws around a vehicle for the hit points it has left.
+ *
+ * An arc rather than a bar, because the mark it rings is already a glyph on a
+ * crowded map and a bar beside it would be one more thing to disentangle. It
+ * runs clockwise from the top, like the game's, and it is coloured by how much
+ * is left rather than by side: the side is already said by the glyph inside
+ * it, and what a reader wants from a ring is "nearly dead" at a glance.
+ */
+function HealthRing({ share, size }: { share: number; size: number }) {
+  const box = size * 1.45;
+  const r = box / 2 - 1;
+  const circumference = 2 * Math.PI * r;
+  const colour =
+    share > 0.6 ? "#4ade80" : share > 0.3 ? "#fbbf24" : "#f87171";
+  return (
+    <svg
+      width={box}
+      height={box}
+      viewBox={`0 0 ${box} ${box}`}
+      aria-hidden
+      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    >
+      <circle
+        cx={box / 2}
+        cy={box / 2}
+        r={r}
+        fill="none"
+        stroke="rgba(0,0,0,0.45)"
+        strokeWidth={1.5}
+      />
+      <circle
+        cx={box / 2}
+        cy={box / 2}
+        r={r}
+        fill="none"
+        stroke={colour}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeDasharray={`${circumference * share} ${circumference}`}
+        transform={`rotate(-90 ${box / 2} ${box / 2})`}
+      />
+    </svg>
+  );
+}
+
 /** The one shape every state that is not a drawing takes. */
 function Notice({ children }: { children: React.ReactNode }) {
   return (
@@ -419,6 +474,24 @@ const SPOT_GAP_S = 1;
  * it is only across a long gap that it becomes a lie, which `SLIDE_LIMIT`
  * refuses.
  */
+/**
+ * The share of its hit points a vehicle still had at `at`, from 0 to 1.
+ *
+ * The last value the recording client was told, not an interpolation: health
+ * does not drift, it drops when a shell lands. Full until the first change,
+ * which is why the series can be empty for a vehicle that was never hit.
+ */
+function healthAt(track: Track, at: number, ticks: number): number | null {
+  if (!track.maxHealth) return null;
+  const now = at * ticks;
+  let hp = track.maxHealth;
+  for (const [when, value] of track.health) {
+    if (when > now) break;
+    hp = value;
+  }
+  return Math.max(0, Math.min(1, hp / track.maxHealth));
+}
+
 /** Where a vehicle is, and whether anyone can currently see it there. */
 type Seen = { x: number; z: number; spotted: boolean };
 

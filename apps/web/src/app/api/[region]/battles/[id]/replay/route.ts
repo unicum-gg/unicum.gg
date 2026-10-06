@@ -29,7 +29,7 @@ const TICKS = 100;
  * the version in the validator, an old body simply fails to match and is
  * replaced on the next request.
  */
-const FORMAT = 3;
+const FORMAT = 4;
 
 /**
  * Always revalidate, and the ETag decides.
@@ -53,6 +53,17 @@ type Track = {
    * grey every wreck a minute early.
    */
   diedAt: number | null;
+  /** Hit points at full, so a reader can turn the figures below into a share. */
+  maxHealth: number;
+  /**
+   * Hit points over time, as `[clock ticks, hit points]`, one entry per change.
+   *
+   * It starts at full and only changes when the recording client was told it
+   * had: a vehicle it loses sight of keeps the last value it heard, which is
+   * why four of fourteen end above the health the results record. That is the
+   * same fog of war the positions have, not a decoding error.
+   */
+  health: [number, number][];
 };
 
 /**
@@ -173,6 +184,8 @@ async function GET__perf(
       .filter((v) => v.died && v.lifeTime > 0)
       .map((v) => [v.id, v.lifeTime]),
   );
+  const health = new Map(motion.health.map((h) => [h.id, h.points]));
+  const maxHealth = new Map(battle.vehicles.map((v) => [v.id, v.maxHealth]));
   const tracks: Track[] = built.map((track) => {
     const life = died.get(track.id);
     return {
@@ -182,6 +195,10 @@ async function GET__perf(
         life !== undefined && offset !== null
           ? Math.round((life + offset) * TICKS)
           : null,
+      maxHealth: maxHealth.get(track.id) ?? 0,
+      health: (health.get(track.id) ?? []).map(
+        ([at, hp]) => [Math.round(at * TICKS), hp] as [number, number],
+      ),
     };
   });
   if (tracks.length === 0) {

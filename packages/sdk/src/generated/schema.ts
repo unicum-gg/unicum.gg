@@ -2534,6 +2534,12 @@ export interface components {
         BattleReplayTrack: {
             /** @description The battle-scoped vehicle id, the same one the battle's participants are keyed by. */
             id: number;
+            /** @description The clock tick this vehicle was destroyed, or null if it survived or the recording cannot say. In the recording's clock, which runs about fifty seconds ahead of the battle's because it starts during the countdown. */
+            diedAt: number | null;
+            /** @description Hit points at full, zero when the battle's results do not name any. */
+            maxHealth: number;
+            /** @description Hit points over time, as [clock tick, hit points], one entry per change. Starts implicitly at maxHealth. A vehicle the recording client lost sight of keeps the last value it was told, so a track can end above the health the results record: the same fog of war the positions have. */
+            health: number[][];
             /** @description The path, as [clock ticks since the battle started, x, z in the arena's own metres]. Every position the recording client was shown, which is about ten a second; only the moments the vehicle actually moved are kept, so between two points it stood still. */
             points: number[][];
         };

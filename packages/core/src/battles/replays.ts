@@ -214,7 +214,7 @@ export type ReplayBattle = {
   key: string;
   /** The battle's own length in seconds, which anchors the replay's clock. */
   duration: number | null;
-  vehicles: { id: number; lifeTime: number; died: boolean }[];
+  vehicles: { id: number; lifeTime: number; died: boolean; maxHealth: number }[];
 };
 
 /**
@@ -249,6 +249,7 @@ export async function replayBattle(
       // `deathReason` is -1 for a vehicle that was still alive at the end and
       // a reason code otherwise, so anything at or above zero died.
       died: Number(vehicle.deathReason ?? -1) >= 0,
+      maxHealth: Number(vehicle.maxHealth ?? 0),
     })),
   };
 }

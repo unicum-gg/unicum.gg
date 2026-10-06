@@ -190,8 +190,24 @@ export type Track = {
   heading: number | null;
 };
 
+/** One vehicle's health as the recording client was told it, over time. */
+export type HealthTrack = {
+  id: number;
+  /** `[seconds, hit points]`, in order, one entry per change. */
+  points: [number, number][];
+};
+
 export type ReplayMotion = {
   tracks: Track[];
+  /**
+   * Health over time, for the vehicles the stream reports it for.
+   *
+   * The layout of the packet that carries this is not something to be found
+   * by probing offsets, and was not: it is documented by the open decoder at
+   * replay.wot-tools.dev, whose reading of it is followed here. Guessing had
+   * already produced a plausible field that was in fact `method`.
+   */
+  health: HealthTrack[];
   /** How long the stream runs, in seconds. */
   duration: number;
   /** Every packet type seen and how often, which is what makes a gap findable. */
@@ -213,6 +229,7 @@ export type ReplayMotion = {
 export function readMotion(stream: Uint8Array): ReplayMotion {
   const view = new DataView(stream.buffer, stream.byteOffset, stream.byteLength);
   const byVehicle = new Map<number, [number, number, number, number][]>();
+  const health = new Map<number, [number, number][]>();
   const headings = new Map<number, number>();
   const seen: Record<number, number> = {};
   let duration = 0;
@@ -267,6 +284,35 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
         byVehicle.set(id, points);
       }
     }
+
+    // A vehicle's own methods, of which exactly one is wanted here.
+    //
+    //     id      u32 at +12
+    //     method  u32 at +16
+    //     size    u32 at +20
+    //     body         at +24
+    //
+    // Method 4 with a ten-byte body is the health change: the new value, the
+    // one before it, and who caused it. Both checks matter, because method 1
+    // is a shot and sits in the same packet type; reading the body without
+    // them yields numbers that look like health and are not.
+    if (type === 0x08 && packetSize >= 24) {
+      const packet = cursor - packetSize;
+      const id = u32(stream, packet + 12);
+      const method = u32(stream, packet + 16);
+      const size = u32(stream, packet + 20);
+      if (method === 4 && size === 10 && packet + 34 <= stream.length) {
+        const hp = view.getInt16(packet + 24, true);
+        if (hp >= 0 && hp < 100000) {
+          const series = health.get(id) ?? [];
+          const previous = series.at(-1);
+          if (!previous || previous[1] !== hp) {
+            series.push([clock, hp]);
+            health.set(id, series);
+          }
+        }
+      }
+    }
   }
 
   return {
@@ -275,6 +321,7 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
       points,
       heading: headings.get(id) ?? null,
     })),
+    health: [...health].map(([id, points]) => ({ id, points })),
     duration,
     seen,
   };
