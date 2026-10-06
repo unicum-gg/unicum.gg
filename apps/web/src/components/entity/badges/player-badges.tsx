@@ -22,6 +22,7 @@ import {
 import type { PlayerIdentity } from "@/components/entity/player-identity";
 import ROUTES from "@/constants/routes";
 import type { TranslateFunction } from "@onruntime/translations";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 import { onslaughtCrestName } from "@/components/game-name";
 import { useTranslation } from "@/hooks/use-translation";
 
@@ -58,6 +59,7 @@ export function buildPlayerBadges({
   size,
   t,
   tGame,
+  tStats,
 }: {
   region: Region;
   nickname: string;
@@ -66,6 +68,16 @@ export function buildPlayerBadges({
   t: TranslateFunction;
   /** `game/vocabulary`, for the crests whose name is Wargaming's own. */
   tGame: TranslateFunction;
+  /**
+   * `components/stat-labels`, for the two crests named there.
+   *
+   * Their names are generic enough that the whole site shares them, so
+   * they live with the headings rather than here. They used to be written
+   * as English literals and translated downstream by `statLabel`, which
+   * meant the cluster slugged every OTHER label too: a French reader's
+   * "Regarder X sur Twitch" became a lookup for `regarder-x-sur-twitch`.
+   */
+  tStats: TranslateFunction;
   /** Null when there is no supporter crest to draw at all. */
   supporterState: SupporterBadgeState | null;
   twitchLogin: string | null;
@@ -138,7 +150,7 @@ export function buildPlayerBadges({
       // Every folded badge keeps the destination its crest had, or the fold
       // would be a way of losing links rather than of saving room.
       href: ROUTES.SUPPORT,
-      label: "Supporter",
+      label: tStats("supporter"),
       crest: <Crest kind={CrestKind.Supporter} muted={supporterMuted} />,
       tint: crestTincture(CrestKind.Supporter, supporterMuted),
       node: <SupporterBadge state={supporterState} size={size} />,
@@ -159,7 +171,7 @@ export function buildPlayerBadges({
   if (isVerified) {
     badges.push({
       key: "verified",
-      label: "Verified account",
+      label: tStats("verified-account"),
       crest: <Crest kind={CrestKind.Verified} />,
       tint: crestTincture(CrestKind.Verified),
       node: <VerifiedBadge size={size} />,
@@ -193,9 +205,11 @@ export function PlayerBadges({
 }) {
   const { t } = useTranslation("components/entity/badges/player-badges");
   const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tStats } = useStatLabels();
   const badges = buildPlayerBadges({
     t,
     tGame,
+    tStats,
     region,
     nickname: player.nickname,
     isVerified: Boolean(player.isVerified),

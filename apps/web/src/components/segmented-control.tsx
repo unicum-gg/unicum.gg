@@ -1,7 +1,5 @@
 "use client";
 
-import { useStatLabels } from "@/hooks/use-stat-labels";
-import { statLabel } from "@/components/stat-label";
 import Link from "@/components/link";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +11,16 @@ import { cn } from "@/lib/utils";
  */
 export type Segment<T extends string> = {
   id: T;
+  /**
+   * What the reader sees, in the reader's language.
+   *
+   * Translated by the caller, because only the caller knows which
+   * namespace the word belongs to. This component used to run it through
+   * `statLabel`, which looks a heading up by its own English slugged: fed
+   * a label that had already been translated it asked for `aucun` and
+   * `score-de-l-quipe`, keys no catalogue can hold, and logged a miss for
+   * every segment on the page in every language but English.
+   */
   label: string;
   href?: string;
   /** Optional tally after the label, so the scope difference reads before the
@@ -40,7 +48,6 @@ export function SegmentedControl<T extends string>({
   onSelect?: (id: T) => void;
   className?: string;
 }) {
-  const { t: tStats } = useStatLabels();
   return (
     <div
       className={cn(
@@ -51,7 +58,7 @@ export function SegmentedControl<T extends string>({
       {segments.map((segment) => {
         const content = (
           <>
-            <span>{statLabel(segment.label, tStats)}</span>
+            <span>{segment.label}</span>
             {segment.count === undefined ? null : (
               <span className="text-fd-muted-foreground/70">
                 {segment.count}

@@ -23,6 +23,7 @@ import { Interpolate } from "@/components/interpolate";
 import { DateShape } from "@/lib/date-shapes";
 import { useDateFormat } from "@/components/local-date";
 import { useTranslation } from "@/hooks/use-translation";
+import { useStatLabels } from "@/hooks/use-stat-labels";
 
 export function PlayerHeader(
   props:
@@ -54,6 +55,7 @@ export function PlayerHeader(
   const { t: tBadges } = useTranslation(
     "components/entity/badges/player-badges",
   );
+  const { t: tStats } = useStatLabels();
   const formatDate = useDateFormat();
   if ("loading" in props) {
     return <PlayerHeaderSkeleton nickname={props.nickname} />;
@@ -86,6 +88,7 @@ export function PlayerHeader(
   const badges = buildPlayerBadges({
     t: tBadges,
     tGame,
+    tStats,
     region,
     nickname,
     isVerified: verified,

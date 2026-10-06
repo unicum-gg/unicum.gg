@@ -1,6 +1,11 @@
 {
   "date": "Date",
   "featured-tournament": "Featured tournament",
+  "filter": {
+    "open": "Open & live",
+    "completed": "Completed",
+    "all": "All"
+  },
   "format": "Format",
   "mode": "Mode",
   "no-tournament-matches-the-current": "No tournament matches the current filters.",

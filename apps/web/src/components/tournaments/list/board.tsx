@@ -91,10 +91,16 @@ export enum TournamentFilter {
   All = "all",
 }
 
+/**
+ * The three views, in the order they are offered.
+ *
+ * Ids only. A segment's label is prose the reader reads, and prose cannot
+ * be written at module scope where there is no translator to hand.
+ */
 const FILTERS = [
-  { id: TournamentFilter.Open, label: "Open & live" },
-  { id: TournamentFilter.Completed, label: "Completed" },
-  { id: TournamentFilter.All, label: "All" },
+  TournamentFilter.Open,
+  TournamentFilter.Completed,
+  TournamentFilter.All,
 ];
 
 const DEFAULT_FILTER = TournamentFilter.Open;
@@ -236,7 +242,7 @@ export function TournamentsBoard({
           })}
         </PanelTitle>
         <SegmentedControl
-          segments={FILTERS}
+          segments={FILTERS.map((id) => ({ id, label: t(`filter.${id}`) }))}
           active={filter}
           onSelect={changeFilter}
         />

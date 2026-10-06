@@ -1,7 +1,6 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
-import { statLabel } from "@/components/stat-label";
 
 import Link from "@/components/link";
 import { useState } from "react";
@@ -25,7 +24,6 @@ import {
 } from "@/components/ui/tooltip";
 import { unicum } from "@/services/sdk";
 import { useTranslation } from "@/hooks/use-translation";
-import { useStatLabels } from "@/hooks/use-stat-labels";
 import { cn } from "@/lib/utils";
 
 /**
@@ -90,7 +88,6 @@ export function MarksMatrix<K extends string>({
   param: "moe" | "mom";
   levelOf: (tank: PlayerTankRow) => number | null;
 }) {
-  const { t: tStats } = useStatLabels();
   const { t } = useTranslation("components/players/detail/overview/marks/matrix");
   // Armed by the first hover, never on mount: the panel is above the fold on
   // every profile and this list is a few hundred rows.
@@ -117,7 +114,7 @@ export function MarksMatrix<K extends string>({
             {columns.map((c) => (
               <TableHead key={c.key} className="text-right">
                 <span className="inline-flex items-center justify-end">
-                  {statLabel(c.label, tStats)}
+                  {c.label}
                 </span>
               </TableHead>
             ))}
