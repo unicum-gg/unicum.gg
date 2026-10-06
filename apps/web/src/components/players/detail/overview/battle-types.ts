@@ -1,5 +1,19 @@
+import type { MapMarker } from "@unicum.gg/shared";
 import type { BattleEconomy } from "@unicum.gg/shared";
 import type { PlayerIdentity } from "@/components/entity/player-identity";
+
+export type MapOverlay = {
+  bounds: {
+    bottomLeft: { x: number; z: number };
+    upperRight: { x: number; z: number };
+  };
+  widthMeters: number;
+  heightMeters: number;
+  bases: { team1: MapMarker[]; team2: MapMarker[] };
+  spawns: { team1: MapMarker[]; team2: MapMarker[] };
+  controlPoint: MapMarker | null;
+  pois: { marker: MapMarker; type: number }[];
+};
 
 export type { BattleEconomy };
 

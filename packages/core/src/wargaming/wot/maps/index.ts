@@ -4,6 +4,7 @@ import {
   buildMapDetail,
   buildMapSummary,
   gameModeFromRaw,
+  projectPoint,
   variantOf,
   type MapDetail,
   type MapGameMode,
@@ -275,6 +276,25 @@ export async function resolveArenaRefs(
  * up to twenty pages of provinces, and it decides which tabs a map page draws
  * while saying nothing about which image an arena is played on.
  */
+/**
+ * What one gameplay mode puts on the minimap, already projected.
+ *
+ * Its own `bounds` and not the arena's, because a mode may shrink the play
+ * area (Onslaught's `comp7` does) and the markers have to be projected into
+ * the same box as the vehicles drawn beside them. Handing back two boxes is
+ * how flags end up a quarter of an image away from the tanks capturing them.
+ */
+export type ArenaOverlay = {
+  bounds: { bottomLeft: MapPoint; upperRight: MapPoint };
+  /** The play area in metres, which the capture circles are scaled against. */
+  widthMeters: number;
+  heightMeters: number;
+  bases: { team1: MapMarker[]; team2: MapMarker[] };
+  spawns: { team1: MapMarker[]; team2: MapMarker[] };
+  controlPoint: MapMarker | null;
+  pois: { marker: MapMarker; type: number }[];
+};
+
 export type ArenaDrawing = {
   /** The minimap the arena is actually played on. */
   minimapUrl: string;
@@ -284,7 +304,46 @@ export type ArenaDrawing = {
    * definition carries no box.
    */
   bounds: { bottomLeft: MapPoint; upperRight: MapPoint } | null;
+  /**
+   * The overlay of each gameplay mode this arena defines, keyed by the raw
+   * mode token the battle results carry in `gameplayId` (`ctf`, `domination`,
+   * `assault`, `comp7`). A battle looks itself up here; a mode we were never
+   * told about simply has no entry and the map draws bare.
+   */
+  overlays: Record<string, ArenaOverlay>;
 };
+
+/** Every mode's overlay for one arena, projected into each mode's own box. */
+function buildOverlays(arena: WotSrcArena): Record<string, ArenaOverlay> {
+  const out: Record<string, ArenaOverlay> = {};
+  for (const gameplay of arena.gameplay) {
+    const box = gameplay.boundingBox ?? arena.boundingBox;
+    if (!box) continue;
+    const into = (points: { x: number; z: number }[]) =>
+      points.map((point) => projectPoint(point, box));
+    out[gameplay.mode] = {
+      bounds: box,
+      widthMeters: Math.round(box.upperRight.x - box.bottomLeft.x),
+      heightMeters: Math.round(box.upperRight.z - box.bottomLeft.z),
+      bases: {
+        team1: into(gameplay.bases.team1),
+        team2: into(gameplay.bases.team2),
+      },
+      spawns: {
+        team1: into(gameplay.spawns.team1),
+        team2: into(gameplay.spawns.team2),
+      },
+      controlPoint: gameplay.controlPoint
+        ? projectPoint(gameplay.controlPoint, box)
+        : null,
+      pois: gameplay.pointsOfInterest.map((poi) => ({
+        marker: projectPoint(poi.position, box),
+        type: poi.type,
+      })),
+    };
+  }
+  return out;
+}
 
 export async function minimapsByArena(
   region: Region,
@@ -300,6 +359,7 @@ export async function minimapsByArena(
     out.set(arena.arenaId, {
       minimapUrl: summary.minimapUrl,
       bounds: arena.boundingBox ?? null,
+      overlays: buildOverlays(arena),
     });
     for (const variant of summary.variants) {
       // A variant is a whole arena of its own, so it carries its own box: the
@@ -312,6 +372,10 @@ export async function minimapsByArena(
       out.set(variant.arenaId, {
         minimapUrl: variant.minimapUrl,
         bounds: raw?.boundingBox ?? arena.boundingBox ?? null,
+        // The variant's own gameplay when we have it: a night Onslaught arena
+        // defines its own reduced box and its own points, and falling back to
+        // the daylight map's would misplace every one of them.
+        overlays: raw ? buildOverlays(raw) : buildOverlays(arena),
       });
     }
   }

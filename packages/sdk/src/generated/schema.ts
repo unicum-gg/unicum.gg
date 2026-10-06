@@ -3660,6 +3660,33 @@ export interface components {
                 type: number;
             }[];
         };
+        mapOverlay: {
+            bounds: {
+                bottomLeft: {
+                    x: number;
+                    z: number;
+                };
+                upperRight: {
+                    x: number;
+                    z: number;
+                };
+            };
+            widthMeters: number;
+            heightMeters: number;
+            bases: {
+                team1: components["schemas"]["marker"][];
+                team2: components["schemas"]["marker"][];
+            };
+            spawns: {
+                team1: components["schemas"]["marker"][];
+                team2: components["schemas"]["marker"][];
+            };
+            controlPoint: components["schemas"]["marker"] | null;
+            pois: {
+                marker: components["schemas"]["marker"];
+                type: number;
+            }[];
+        };
         /** @description An event that might fire on the map mid-battle, with the minimap art of its danger area and of its aftermath. */
         MapRandomEvent: {
             id: string;
@@ -3889,6 +3916,10 @@ export interface components {
             recentBattles: number | null;
             winrate: number | null;
             bracket: components["schemas"]["voterBracketField"];
+        };
+        marker: {
+            left: number;
+            top: number;
         };
         /** @description A vehicle measured against the mark it has not earned yet: the region's combined-damage bar for that mark, the player's own combined damage over the window, and their ratio. Above 1 means the average already clears the bar. */
         MarkReachEntry: {
@@ -4343,6 +4374,8 @@ export interface components {
             } | null;
             /** @description The minimap this arena is actually played on, resolved against the maps catalogue. An Onslaught night arena is played on its own `_comp7` image rather than the daylight one shipped under its name. */
             mapImage: string | null;
+            /** @description What this battle's own mode puts on the minimap: base flags, spawn points, the control point and Onslaught's capturable points, already projected into `mapBounds` as percentages of the image. Null when the arena declares nothing for this mode. */
+            mapOverlay: components["schemas"]["mapOverlay"] | null;
             /** @description `ctf`, `domination`, `assault`… null when none was named. */
             gameplay: string | null;
             /** @description The game's own `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */

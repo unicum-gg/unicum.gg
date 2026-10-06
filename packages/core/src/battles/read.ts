@@ -24,7 +24,11 @@ import {
 import { db } from "@unicum.gg/core/db";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { minimapsByArena } from "@unicum.gg/core/wargaming/wot/maps";
+import {
+  minimapsByArena,
+  type ArenaDrawing,
+  type ArenaOverlay,
+} from "@unicum.gg/core/wargaming/wot/maps";
 import { resolvePlayerBadges } from "@unicum.gg/core/players/badges";
 import {
   getWN8ExpectedValues,
@@ -81,6 +85,16 @@ export type PlayerBattle = {
     bottomLeft: { x: number; z: number };
     upperRight: { x: number; z: number };
   } | null;
+  /**
+   * What this battle's own mode puts on the minimap: base flags, spawns, the
+   * control point, and Onslaught's capturable points. Already projected into
+   * `mapBounds`, which is the same box the vehicles are drawn in, because two
+   * boxes is how a flag ends up a quarter of an image from the tanks on it.
+   *
+   * Null when the arena declares nothing for this mode, and the map then draws
+   * bare rather than guessing.
+   */
+  mapOverlay: ArenaOverlay | null;
   /** `ctf`, `domination`… null when the client did not name one. */
   gameplay: string | null;
   /** The game's own `bonusType`: 1 random, 43 onslaught, 20/21 skirmishes. */
@@ -177,6 +191,30 @@ function outcomeOf(team: number, winner: number | null): BattleOutcome {
  * other players' numbers to the page to throw them away would make every
  * response ten times its useful size.
  */
+/**
+ * The image, the box and the overlay a battle is drawn with.
+ *
+ * All three together and from one place, because they have to agree: a mode
+ * that shrinks the play area (Onslaught) must hand back ITS box, not the
+ * arena's, or the vehicles and the flags are projected differently and the
+ * drawing is quietly wrong rather than visibly broken.
+ */
+function drawing(
+  arena: ArenaDrawing | undefined,
+  gameplay: string | null,
+): {
+  mapImage: string | null;
+  mapBounds: ArenaOverlay["bounds"] | null;
+  mapOverlay: ArenaOverlay | null;
+} {
+  const overlay = gameplay ? (arena?.overlays[gameplay] ?? null) : null;
+  return {
+    mapImage: arena?.minimapUrl ?? null,
+    mapBounds: overlay?.bounds ?? arena?.bounds ?? null,
+    mapOverlay: overlay,
+  };
+}
+
 export async function recentBattlesOf(
   region: Region,
   accountId: number,
@@ -248,8 +286,7 @@ export async function recentBattlesOf(
       id: row.id,
       startedAt: row.startedAt,
       map: row.map,
-      mapImage: minimaps.get(row.map)?.minimapUrl ?? null,
-      mapBounds: minimaps.get(row.map)?.bounds ?? null,
+      ...drawing(minimaps.get(row.map), row.gameplay),
       gameplay: row.gameplay,
       battleType: row.battleType,
       duration: row.duration,

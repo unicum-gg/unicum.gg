@@ -30,6 +30,7 @@ import type {
   BattleDetailData,
   BattleEconomy,
   Participant,
+  MapOverlay,
 } from "./battle-types";
 import { Spinner } from "@/components/ui/spinner";
 import {
@@ -183,6 +184,7 @@ export function BattleDetail({
   arenaId,
   mapImage,
   mapBounds,
+  mapOverlay,
   metric,
   highlightAccount,
 }: {
@@ -191,6 +193,7 @@ export function BattleDetail({
   /** The arena, its minimap and its extent, for the replay viewer. */
   arenaId: string;
   mapImage: string | null;
+  mapOverlay: MapOverlay | null;
   mapBounds: {
     bottomLeft: { x: number; z: number };
     upperRight: { x: number; z: number };
@@ -365,6 +368,7 @@ export function BattleDetail({
             arenaId={arenaId}
             mapImage={mapImage}
             bounds={mapBounds}
+            overlay={mapOverlay}
             participants={data.participants}
             highlightAccount={highlightAccount}
             t={t}

@@ -101,6 +101,21 @@ const battleEconomy = z
   });
 
 /** One battle, read as a single player's line through it. */
+const marker = z.object({ left: z.number(), top: z.number() });
+
+const mapOverlay = z.object({
+  bounds: z.object({
+    bottomLeft: z.object({ x: z.number(), z: z.number() }),
+    upperRight: z.object({ x: z.number(), z: z.number() }),
+  }),
+  widthMeters: z.number(),
+  heightMeters: z.number(),
+  bases: z.object({ team1: z.array(marker), team2: z.array(marker) }),
+  spawns: z.object({ team1: z.array(marker), team2: z.array(marker) }),
+  controlPoint: marker.nullable(),
+  pois: z.array(z.object({ marker, type: z.number() })),
+});
+
 export const playerBattle = z
   .object({
     id: z.string().meta({
@@ -128,6 +143,10 @@ export const playerBattle = z
     mapImage: z.string().nullable().meta({
       description:
         "The minimap this arena is actually played on, resolved against the maps catalogue. An Onslaught night arena is played on its own `_comp7` image rather than the daylight one shipped under its name.",
+    }),
+    mapOverlay: mapOverlay.nullable().meta({
+      description:
+        "What this battle's own mode puts on the minimap: base flags, spawn points, the control point and Onslaught's capturable points, already projected into `mapBounds` as percentages of the image. Null when the arena declares nothing for this mode.",
     }),
     gameplay: z.string().nullable().meta({
       description: "`ctf`, `domination`, `assault`… null when none was named.",

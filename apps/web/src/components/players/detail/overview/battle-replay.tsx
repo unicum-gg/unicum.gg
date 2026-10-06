@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { unicum } from "@/services/sdk";
 import { cn } from "@/lib/utils";
-import type { Participant } from "./battle-types";
+import { Overlay } from "@/components/maps/detail/minimap-overlay";
+import type { MapOverlay, Participant } from "./battle-types";
 
 type Bounds = {
   bottomLeft: { x: number; z: number };
@@ -24,6 +25,15 @@ type Motion = { duration: number; hz: number; tracks: Track[] };
 
 /** How fast the drawing advances while playing, in battle seconds per second. */
 const SPEED = 4;
+
+/**
+ * The capture circle, in metres across.
+ *
+ * A base is captured from within 50 m of its flag, so the ring is 100 m wide.
+ * Drawn to the map's real scale rather than a fixed pixel size, which is what
+ * makes it register 1:1 with the minimap and with the tanks standing in it.
+ */
+const CAPTURE_DIAMETER_M = 100;
 
 /**
  * The battle replayed on its own minimap, out of the archived replay.
@@ -48,6 +58,7 @@ export function BattleReplay({
   hasReplay,
   mapImage,
   bounds,
+  overlay,
   participants,
   highlightAccount,
   t,
@@ -58,6 +69,7 @@ export function BattleReplay({
   hasReplay: boolean;
   mapImage: string | null;
   bounds: Bounds | null;
+  overlay: MapOverlay | null;
   participants: Participant[];
   highlightAccount?: number;
   t: TranslateFunction;
@@ -127,6 +139,23 @@ export function BattleReplay({
           sizes="512px"
           className="h-full w-full object-cover"
         />
+        {/* The mode's own flags, spawns and capture circles, the same drawing
+            the map page makes, from the same component. Under the vehicles on
+            purpose: a tank standing on a base should read as on top of it. */}
+        {overlay ? (
+          <Overlay
+            geometry={{
+              bases: overlay.bases,
+              spawns: overlay.spawns,
+              controlPoint: overlay.controlPoint,
+              pois: overlay.pois,
+            }}
+            capX={(CAPTURE_DIAMETER_M / overlay.widthMeters) * 100}
+            capY={(CAPTURE_DIAMETER_M / overlay.heightMeters) * 100}
+            mapWidth={overlay.widthMeters}
+            mapHeight={overlay.heightMeters}
+          />
+        ) : null}
         {bounds
           ? motion.tracks.map((track) => {
               const point = pointAt(track.points, at);

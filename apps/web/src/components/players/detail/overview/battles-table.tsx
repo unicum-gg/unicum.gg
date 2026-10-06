@@ -39,7 +39,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { BattleDetail } from "./battle-detail";
-import type { BattleEconomy } from "./battle-types";
+import type { BattleEconomy, MapOverlay } from "./battle-types";
 
 const INT = { maximumFractionDigits: 0 } as const;
 // The battle's own start, to the minute: two battles in an evening are told
@@ -54,6 +54,7 @@ export type PlayerBattleRow = {
   /** The minimap the arena is played on, resolved server-side. */
   mapImage: string | null;
   /** The arena's extent in metres, which places a replay on that image. */
+  mapOverlay: MapOverlay | null;
   mapBounds: {
     bottomLeft: { x: number; z: number };
     upperRight: { x: number; z: number };
@@ -369,6 +370,7 @@ export function PlayerBattlesTable({
               arenaId={battle.map}
               mapImage={battle.mapImage}
               mapBounds={battle.mapBounds}
+              mapOverlay={battle.mapOverlay}
               metric={metric}
               highlightAccount={accountId}
             />
