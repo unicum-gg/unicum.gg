@@ -29,7 +29,7 @@ const TICKS = 100;
  * the version in the validator, an old body simply fails to match and is
  * replaced on the next request.
  */
-const FORMAT = 4;
+const FORMAT = 5;
 
 /**
  * Always revalidate, and the ETag decides.
@@ -207,7 +207,16 @@ async function GET__perf(
 
   return jsonResponse(
     BattleReplayResponse,
-    { duration: Math.round(motion.duration), ticksPerSecond: TICKS, tracks },
+    {
+      duration: Math.round(motion.duration),
+      ticksPerSecond: TICKS,
+      // When the countdown ends, in this same clock. Before it nothing moves,
+      // so a reader of these tracks cannot tell a vehicle standing on its
+      // spawn from one nobody can see: positions are only written down when
+      // they change.
+      startsAt: offset !== null ? Math.round(offset * TICKS) : 0,
+      tracks,
+    },
     {
       headers: { etag, ...CACHE },
     },

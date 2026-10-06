@@ -30,7 +30,13 @@ type Track = {
   /** `[tick, hit points]`, one entry per change, implicitly starting at full. */
   health: [number, number][];
 };
-type Motion = { duration: number; ticksPerSecond: number; tracks: Track[] };
+type Motion = {
+  duration: number;
+  ticksPerSecond: number;
+  /** The tick the countdown ends; before it nothing moves and all is visible. */
+  startsAt: number;
+  tracks: Track[];
+};
 
 /** How fast the drawing advances while playing, in battle seconds per second. */
 const SPEED = 4;
@@ -237,7 +243,7 @@ export function BattleReplay({
               // test into the enemy colour. Verified on a real battle: six
               // such tracks, five landing at 0.00% from a declared objective.
               if (!who) return null;
-              const point = pointAt(track.points, at, ticks);
+              const point = pointAt(track.points, at, ticks, motion.startsAt ?? 0);
               if (!point) return null;
               // x and z only: the minimap is a plan view, and a tank on a hill
               // is at the same place on it as one under the hill.
@@ -524,6 +530,7 @@ function pointAt(
   points: [number, number, number][],
   at: number,
   ticks: number,
+  startsAt: number,
 ): Seen | null {
   const now = at * ticks;
   let before: [number, number, number] | null = null;
@@ -536,12 +543,17 @@ function pointAt(
     }
   }
   if (!before) return null;
+  // During the countdown every vehicle is on its spawn and perfectly still,
+  // and a position is only written down when it changes, so the gap test would
+  // call the whole field unspotted and draw thirty dots. Nobody is hidden
+  // before the battle starts.
+  const counting = now < startsAt;
   // Nothing after it: the recording holds no more of this vehicle, so this is
   // where it was last seen and not where it is.
-  if (!after) return { x: before[1], z: before[2], spotted: false };
+  if (!after) return { x: before[1], z: before[2], spotted: counting };
 
   const span = after[0] - before[0];
-  const spotted = span > 0 && span <= SPOT_GAP_S * ticks;
+  const spotted = counting || (span > 0 && span <= SPOT_GAP_S * ticks);
   if (!spotted || span > SLIDE_LIMIT_S * ticks) {
     return { x: before[1], z: before[2], spotted };
   }

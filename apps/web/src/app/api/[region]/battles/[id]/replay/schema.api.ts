@@ -39,6 +39,10 @@ export const BattleReplayResponse = z.object({
     description:
       "Clock ticks a second in each point's first value. Hundredths, so a point's instant in seconds is its tick divided by this.",
   }),
+  startsAt: z.number().meta({
+    description:
+      "The clock tick the countdown ends and the battle begins. Zero when it cannot be worked out. Before it every vehicle sits on its spawn without moving, and since positions are only recorded when they change, a reader must treat that stretch as everybody being visible rather than nobody.",
+  }),
   tracks: z.array(BattleReplayTrack).meta({
     description:
       "One entry per vehicle this battle's recording client could see. A vehicle it never spotted has no track, which is honest fog of war rather than a gap.",
