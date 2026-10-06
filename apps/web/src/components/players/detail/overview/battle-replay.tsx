@@ -21,7 +21,12 @@ type Bounds = {
 };
 
 /** One vehicle's path, as the endpoint sends it: `[clock ticks, x, z]`. */
-type Track = { id: number; points: [number, number, number][] };
+type Track = {
+  id: number;
+  points: [number, number, number][];
+  /** The tick it was destroyed, in this same clock, or null if it survived. */
+  diedAt: number | null;
+};
 type Motion = { duration: number; ticksPerSecond: number; tracks: Track[] };
 
 /** How fast the drawing advances while playing, in battle seconds per second. */
@@ -236,11 +241,18 @@ export function BattleReplay({
               const where = projectPoint({ x: point.x, z: point.z }, bounds);
               const mine =
                 who.account !== undefined && who.account === highlightAccount;
-              const side = mine
-                ? "text-amber-300"
-                : who.team === ourTeam
-                  ? "text-emerald-400"
-                  : "text-red-400";
+              // Dead is read off the battle's own account of who survived,
+              // not off the track running out: a wreck keeps reporting for
+              // several seconds, and a vehicle that simply went unspotted
+              // stops reporting without having died at all.
+              const dead = track.diedAt !== null && at * ticks >= track.diedAt;
+              const side = dead
+                ? "text-fd-muted-foreground/60"
+                : mine
+                  ? "text-amber-300"
+                  : who.team === ourTeam
+                    ? "text-emerald-400"
+                    : "text-red-400";
               return (
                   <span
                     key={track.id}
@@ -251,7 +263,7 @@ export function BattleReplay({
                       side,
                     )}
                   >
-                    {!point.spotted ? (
+                    {dead || !point.spotted ? (
                       // Lost sight of: a bare dot at the last place the
                       // vehicle was seen, as the game draws it. Only the glyph
                       // goes; the name stays, because the question a reader

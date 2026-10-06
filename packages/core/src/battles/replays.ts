@@ -209,6 +209,50 @@ export async function storedReplayKey(
   return row?.key ?? null;
 }
 
+/** What the viewer needs about a battle besides its file: who died, and when. */
+export type ReplayBattle = {
+  key: string;
+  /** The battle's own length in seconds, which anchors the replay's clock. */
+  duration: number | null;
+  vehicles: { id: number; lifeTime: number; died: boolean }[];
+};
+
+/**
+ * The stored replay and the battle's own account of who survived it.
+ *
+ * Read together because they only mean anything together: `lifeTime` is in
+ * battle seconds while a replay's clock starts during the countdown, so one
+ * without the other cannot say when, on the recording, a vehicle stopped
+ * being alive.
+ */
+export async function replayBattle(
+  region: Region,
+  arenaUniqueId: string,
+): Promise<ReplayBattle | null> {
+  const table = battlesByRegion[region];
+  const [row] = await db
+    .select({
+      key: table.replayKey,
+      duration: table.duration,
+      vehicles: table.vehicles,
+    })
+    .from(table)
+    .where(eq(table.arenaUniqueId, arenaUniqueId))
+    .limit(1);
+  if (!row?.key) return null;
+  return {
+    key: row.key,
+    duration: row.duration,
+    vehicles: row.vehicles.map((vehicle) => ({
+      id: vehicle.id,
+      lifeTime: Number(vehicle.lifeTime ?? 0),
+      // `deathReason` is -1 for a vehicle that was still alive at the end and
+      // a reason code otherwise, so anything at or above zero died.
+      died: Number(vehicle.deathReason ?? -1) >= 0,
+    })),
+  };
+}
+
 /** Write down where the file went, once it is actually in the bucket. */
 export async function attachReplay(
   region: Region,

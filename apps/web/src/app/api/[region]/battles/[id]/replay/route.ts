@@ -1,7 +1,8 @@
+import { createHash } from "node:crypto";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { readMotion, readReplay } from "@unicum.gg/shared";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
-import { fetchReplay, storedReplayKey } from "@unicum.gg/core/battles/replays";
+import { fetchReplay, replayBattle } from "@unicum.gg/core/battles/replays";
 import { measured } from "@/services/perf";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { BattleReplayResponse } from "./schema.api";
@@ -18,8 +19,70 @@ export const dynamic = "force-dynamic";
  */
 const TICKS = 100;
 
-/** One vehicle's path, as `[clock ticks, x, z]`. */
-type Track = { id: number; points: [number, number, number][] };
+/**
+ * The shape of this answer, bumped whenever a field is added or renamed.
+ *
+ * It rides in the ETag, which is what makes a format change reach people. The
+ * first version of this route answered `immutable` and then changed shape
+ * twice; every browser holding the old body kept drawing a stale map for as
+ * long as the cache lasted, while the server had been right all along. With
+ * the version in the validator, an old body simply fails to match and is
+ * replaced on the next request.
+ */
+const FORMAT = 3;
+
+/**
+ * Always revalidate, and the ETag decides.
+ *
+ * Not a long `max-age`: a battle never changes but the SHAPE of this answer
+ * does, and a body cached by time cannot be told it is out of date. The
+ * round trip costs a 304 with no body and no decode, which is cheap enough to
+ * pay every time for an answer that is never quietly wrong.
+ */
+const CACHE = { "cache-control": "public, max-age=0, must-revalidate" };
+
+/** One vehicle's path, as `[clock ticks, x, z]`, and when it stopped living. */
+type Track = {
+  id: number;
+  points: [number, number, number][];
+  /**
+   * The tick this vehicle was destroyed, or null if it survived.
+   *
+   * In the recording's clock, not the battle's: the two differ by the
+   * countdown, about fifty seconds, so handing back the battle figure would
+   * grey every wreck a minute early.
+   */
+  diedAt: number | null;
+};
+
+/**
+ * How far the recording's clock runs ahead of the battle's, in seconds.
+ *
+ * A replay starts recording during the countdown, so its clock is not battle
+ * time. The vehicles that survived are what pins the two together: they lived
+ * exactly as long as the battle, so the gap between where their track ends and
+ * their own `lifeTime` is the offset, and they all agree on it (measured on a
+ * real battle: 52.6 s for every survivor, against 57 to 69 for the dead, whose
+ * wrecks keep reporting for a while after they stop being alive).
+ *
+ * The median rather than any one of them, so a single odd track cannot move
+ * it. Null when nobody survived, and the caller then greys nothing rather than
+ * guessing.
+ */
+function clockOffset(
+  tracks: { id: number; last: number }[],
+  vehicles: { id: number; lifeTime: number; died: boolean }[],
+): number | null {
+  const gaps: number[] = [];
+  for (const vehicle of vehicles) {
+    if (vehicle.died || vehicle.lifeTime <= 0) continue;
+    const track = tracks.find((t) => t.id === vehicle.id);
+    if (track) gaps.push(track.last - vehicle.lifeTime);
+  }
+  if (gaps.length === 0) return null;
+  gaps.sort((a, b) => a - b);
+  return gaps[Math.floor(gaps.length / 2)];
+}
 
 /**
  * Where everybody was, for the 2D viewer, out of this battle's archived replay.
@@ -59,12 +122,21 @@ async function GET__perf(
     return Response.json({ error: "invalid_battle" }, { status: 400 });
   }
 
-  const key = await storedReplayKey(region as Region, normaliseBattleId(id));
-  if (!key) {
+  const battle = await replayBattle(region as Region, normaliseBattleId(id));
+  if (!battle) {
     return Response.json({ error: "no_replay" }, { status: 404 });
   }
 
-  const file = await fetchReplay(key);
+  // Answered before anything is decoded. The validator is the object's key
+  // and the format's version, neither of which needs the file opened: a
+  // battle's replay never changes, so a match means the client's copy is
+  // still exactly right and a megabyte of Blowfish can be skipped.
+  const etag = `W/"${FORMAT}-${createHash("sha1").update(battle.key).digest("base64url")}"`;
+  if (_req.headers.get("if-none-match") === etag) {
+    return new Response(null, { status: 304, headers: { etag, ...CACHE } });
+  }
+
+  const file = await fetchReplay(battle.key);
   if (!file) {
     // The row points at an object the bucket no longer has: retention removed
     // it, or it was never written. Not a 500, because nothing is broken for
@@ -83,11 +155,35 @@ async function GET__perf(
     return Response.json({ error: "unreadable_replay" }, { status: 422 });
   }
 
-  const tracks: Track[] = [];
+  const built: { id: number; points: [number, number, number][]; last: number }[] =
+    [];
   for (const track of motion.tracks) {
     const points = thin(track.points);
-    if (points.length > 0) tracks.push({ id: track.id, points });
+    if (points.length === 0) continue;
+    built.push({
+      id: track.id,
+      points,
+      last: points[points.length - 1][0] / TICKS,
+    });
   }
+
+  const offset = clockOffset(built, battle.vehicles);
+  const died = new Map(
+    battle.vehicles
+      .filter((v) => v.died && v.lifeTime > 0)
+      .map((v) => [v.id, v.lifeTime]),
+  );
+  const tracks: Track[] = built.map((track) => {
+    const life = died.get(track.id);
+    return {
+      id: track.id,
+      points: track.points,
+      diedAt:
+        life !== undefined && offset !== null
+          ? Math.round((life + offset) * TICKS)
+          : null,
+    };
+  });
   if (tracks.length === 0) {
     return Response.json({ error: "no_replay" }, { status: 404 });
   }
@@ -96,17 +192,7 @@ async function GET__perf(
     BattleReplayResponse,
     { duration: Math.round(motion.duration), ticksPerSecond: TICKS, tracks },
     {
-      headers: {
-        // Long, because a battle that has been played never changes and
-        // decoding its replay costs Blowfish over a couple of megabytes.
-        //
-        // But NOT `immutable`, which is a promise about the bytes and not
-        // about the battle: the shape of this answer did change once, and
-        // every client that had cached it kept drawing nothing for a day
-        // while the server was already right. `stale-while-revalidate` keeps
-        // the speed and lets a changed shape reach people within the hour.
-        "cache-control": "public, max-age=3600, stale-while-revalidate=86400",
-      },
+      headers: { etag, ...CACHE },
     },
   );
 }

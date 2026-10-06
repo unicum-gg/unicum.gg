@@ -14,6 +14,10 @@ export const BattleReplayTrack = z.object({
     description:
       "The battle-scoped vehicle id, the same one the battle's participants are keyed by.",
   }),
+  diedAt: z.number().nullable().meta({
+    description:
+      "The clock tick this vehicle was destroyed, or null if it survived or the recording cannot say. In the recording's clock, which runs about fifty seconds ahead of the battle's because it starts during the countdown.",
+  }),
   points: z.array(z.array(z.number()).length(3)).meta({
     description:
       "The path, as [clock ticks since the battle started, x, z in the arena's own metres]. Every position the recording client was shown, which is about ten a second; only the moments the vehicle actually moved are kept, so between two points it stood still.",
