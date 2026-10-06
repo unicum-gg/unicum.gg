@@ -142,7 +142,7 @@ export const playerBattle = z
       }),
     mapImage: z.string().nullable().meta({
       description:
-        "The minimap this arena is actually played on, resolved against the maps catalogue. An Onslaught night arena is played on its own `_comp7` image rather than the daylight one shipped under its name.",
+        "The minimap this battle was actually played on, resolved against the maps catalogue for this battle's own mode. Onslaught redraws most maps into a smaller play area and ships that as its own `_comp7` image, so a `comp7` battle is given that picture rather than the full-size one shipped under the arena's name, whether the arena is an Onslaught-only one or a map that also runs random battles.",
     }),
     mapOverlay: mapOverlay.nullable().meta({
       description:

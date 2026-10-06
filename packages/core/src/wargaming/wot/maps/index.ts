@@ -4,6 +4,7 @@ import {
   buildMapDetail,
   buildMapSummary,
   gameModeFromRaw,
+  onslaughtMinimapUrl,
   projectPoint,
   variantOf,
   type MapDetail,
@@ -286,6 +287,20 @@ export async function resolveArenaRefs(
  */
 export type ArenaOverlay = {
   bounds: { bottomLeft: MapPoint; upperRight: MapPoint };
+  /**
+   * The image this mode is played on, when it is not the arena's own.
+   *
+   * Onslaught redraws most maps into a smaller play area and ships that as
+   * its own minimap, so a `comp7` battle on an arena that also runs random
+   * battles needs the variant picture, not the base one. Without this the
+   * mode's reduced BOX was taken from the overlay while the PICTURE stayed
+   * the full map, which drew every position onto a map the battle was not
+   * played on.
+   *
+   * Null for a mode played on the arena's own image. Not every Onslaught map
+   * ships a variant either; the renderer's fallback chain covers the 404.
+   */
+  minimapUrl: string | null;
   /** The play area in metres, which the capture circles are scaled against. */
   widthMeters: number;
   heightMeters: number;
@@ -323,6 +338,12 @@ function buildOverlays(arena: WotSrcArena): Record<string, ArenaOverlay> {
       points.map((point) => projectPoint(point, box));
     out[gameplay.mode] = {
       bounds: box,
+      // The mirror publishes the variant as `<arena>_comp7.webp`, which is
+      // exactly what `onslaughtMinimapUrl` builds. Asked for by mode rather
+      // than by arena, because the same arena has a full-size picture for
+      // every other mode it runs.
+      minimapUrl:
+        gameplay.mode === "comp7" ? onslaughtMinimapUrl(arena.arenaId) : null,
       widthMeters: Math.round(box.upperRight.x - box.bottomLeft.x),
       heightMeters: Math.round(box.upperRight.z - box.bottomLeft.z),
       bases: {

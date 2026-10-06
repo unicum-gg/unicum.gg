@@ -209,7 +209,12 @@ function drawing(
 } {
   const overlay = gameplay ? (arena?.overlays[gameplay] ?? null) : null;
   return {
-    mapImage: arena?.minimapUrl ?? null,
+    // The overlay's own picture wins. This function exists to hand back a
+    // box and an image that agree, and it used to take the box from the
+    // overlay and the image from the arena: an Onslaught battle on a map
+    // that also runs random battles was drawn on the full-size picture with
+    // the reduced mode's coordinates, so the right map was the wrong map.
+    mapImage: overlay?.minimapUrl ?? arena?.minimapUrl ?? null,
     mapBounds: overlay?.bounds ?? arena?.bounds ?? null,
     mapOverlay: overlay,
   };
