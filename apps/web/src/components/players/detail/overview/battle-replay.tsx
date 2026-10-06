@@ -321,7 +321,11 @@ export function BattleReplay({
                         style={{ width: markerPx, height: markerPx }}
                       >
                         {share !== null && share > 0 ? (
-                          <HealthRing share={share} size={markerPx} />
+                          <HealthRing
+                            share={share}
+                            size={markerPx}
+                            className={side}
+                          />
                         ) : null}
                         <VehicleTypeIcon
                           type={who.tank.type}
@@ -403,11 +407,25 @@ export function BattleReplay({
  *
  * An arc rather than a bar, because the mark it rings is already a glyph on a
  * crowded map and a bar beside it would be one more thing to disentangle. It
- * runs clockwise from the top, like the game's, and it is coloured by how much
- * is left rather than by side: the side is already said by the glyph inside
- * it, and what a reader wants from a ring is "nearly dead" at a glance.
+ * runs clockwise from the top, like the game's, and it takes the SIDE's own
+ * colour, so only the arc's length says how much is left.
+ *
+ * It was coloured by the share at first, green above 60% and red below 30%,
+ * which read as the opposite of what it meant: those two are the side
+ * colours themselves (`emerald-400` and `red-400`), so a healthy enemy drew
+ * an ally-green ring and a wounded ally drew an enemy-red one. Colour here
+ * is spoken for, and length was free.
  */
-function HealthRing({ share, size }: { share: number; size: number }) {
+function HealthRing({
+  share,
+  size,
+  className,
+}: {
+  share: number;
+  size: number;
+  /** The side's colour class, which the stroke reads as `currentColor`. */
+  className?: string;
+}) {
   // Thick enough to read at a glance on a busy map, and proportional like
   // everything else here so it holds up on a phone's smaller one.
   const stroke = Math.max(2, Math.round(size * 0.17));
@@ -420,15 +438,13 @@ function HealthRing({ share, size }: { share: number; size: number }) {
   // thicker ring grows outwards and clips against the viewBox.
   const r = (box - stroke) / 2;
   const circumference = 2 * Math.PI * r;
-  const colour =
-    share > 0.6 ? "#4ade80" : share > 0.3 ? "#fbbf24" : "#f87171";
   return (
     <svg
       width={box}
       height={box}
       viewBox={`0 0 ${box} ${box}`}
       aria-hidden
-      className="pointer-events-none absolute"
+      className={cn("pointer-events-none absolute", className)}
       // Exact arithmetic against the parent, which is the glyph's own square:
       // the overhang is the same whole number of pixels on all four sides.
       style={{ left: (size - box) / 2, top: (size - box) / 2 }}
@@ -446,7 +462,7 @@ function HealthRing({ share, size }: { share: number; size: number }) {
         cy={box / 2}
         r={r}
         fill="none"
-        stroke={colour}
+        stroke="currentColor"
         strokeWidth={stroke}
         strokeLinecap="butt"
         strokeDasharray={`${circumference * share} ${circumference}`}
