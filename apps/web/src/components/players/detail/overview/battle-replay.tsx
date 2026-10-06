@@ -126,8 +126,12 @@ export function BattleReplay({
   // against our own API is the one thing this repo does not allow, because the
   // response type would stop being generated from the served spec.
   const request = () => unicum.region(region).battles(battleId).replay();
+  // Hoisted: it is this read's cache key AND the identity of the replay
+  // currently on screen, which the reset below compares against. `.url()`
+  // is side-effect-free by contract, so naming it costs nothing.
+  const key = hasReplay ? request().url() : null;
   const { data, isLoading, error } = useSWR(
-    hasReplay ? request().url() : null,
+    key,
     () => request().then((r) => r as unknown as Motion),
     { revalidateOnFocus: false },
   );
@@ -137,13 +141,20 @@ export function BattleReplay({
   // SWR already knows, and keeping a second copy of them is how they drift.
   const missing = !hasReplay || (!isLoading && !error && !motion?.tracks.length);
 
-  useEffect(() => {
-    // Start playing once, when a replay first lands, and not on every render.
-    if (motion && motion.tracks.length > 0) {
-      setAt(0);
-      setPlaying(true);
-    }
-  }, [motion]);
+  // Back to the start, and playing, once per replay that lands.
+  //
+  // Adjusted during render rather than in an effect, which is the pattern
+  // React documents for state that has to follow a prop. An effect would run
+  // after the browser had already painted, so opening a second battle drew
+  // one frame at the previous one's clock before snapping back to zero, and
+  // the cascading render that causes is what `react-hooks/set-state-in-effect`
+  // is pointing at.
+  const [startedFor, setStartedFor] = useState<string | null>(null);
+  if (key && motion && motion.tracks.length > 0 && startedFor !== key) {
+    setStartedFor(key);
+    setAt(0);
+    setPlaying(true);
+  }
 
   useEffect(() => {
     if (!playing || !motion) return;
