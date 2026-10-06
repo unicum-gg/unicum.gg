@@ -12,6 +12,7 @@ import { Slider } from "@/components/ui/slider";
 import { unicum } from "@/services/sdk";
 import { cn } from "@/lib/utils";
 import { Overlay } from "@/components/maps/detail/minimap-overlay";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import type { MapOverlay, Participant } from "./battle-types";
 
 type Bounds = {
@@ -162,6 +163,9 @@ export function BattleReplay({
   // player in team 2, so colouring by the raw number painted his own six
   // team-mates as the enemy. Falls back to team 1 when the page belongs to
   // nobody in the battle, which is the only case with no side to take.
+  // Scaled with the map for the reason the overlay's markers are: a fixed
+  // pixel glyph that reads well at 512 swamps a phone's map.
+  const markerPx = Math.max(9, Math.round((mapWidth || 512) * 0.032));
   const ourTeam =
     participants.find((p) => p.account !== undefined && p.account === highlightAccount)
       ?.team ?? 1;
@@ -213,23 +217,49 @@ export function BattleReplay({
               if (!point) return null;
               // x and z only: the minimap is a plan view, and a tank on a hill
               // is at the same place on it as one under the hill.
-              const where = projectPoint({ x: point[1], z: point[2] }, bounds);
+              const where = projectPoint({ x: point[0], z: point[1] }, bounds);
               const mine =
                 who.account !== undefined && who.account === highlightAccount;
+              const side = mine
+                ? "text-amber-300"
+                : who.team === ourTeam
+                  ? "text-emerald-400"
+                  : "text-red-400";
               return (
-                <span
-                  key={track.id}
-                  title={who.player?.nickname ?? String(track.id)}
-                  style={{ left: `${where.left}%`, top: `${where.top}%` }}
-                  className={cn(
-                    "absolute size-2 -translate-x-1/2 -translate-y-1/2 rounded-full ring-1 ring-black/50",
-                    mine
-                      ? "size-2.5 bg-amber-400"
-                      : who.team === ourTeam
-                        ? "bg-emerald-400"
-                        : "bg-red-400",
-                  )}
-                />
+                  <span
+                    key={track.id}
+                    title={who.player?.nickname ?? String(track.id)}
+                    style={{ left: `${where.left}%`, top: `${where.top}%` }}
+                    className={cn(
+                      "absolute -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]",
+                      side,
+                    )}
+                  >
+                    {who.tank?.type ? (
+                      // The game's own class glyph, which is what a player
+                      // reads a minimap by: a heavy and a scout at the same
+                      // spot mean very different things, and two identical
+                      // discs say neither.
+                      //
+                      // The side colour goes ON the icon, not on this span:
+                      // the component sets a colour of its own inside, so a
+                      // parent's `text-…` never reaches the glyph and every
+                      // tank came out the same pale grey.
+                      <VehicleTypeIcon
+                        type={who.tank.type}
+                        size={markerPx}
+                        className={side}
+                      />
+                    ) : (
+                      // A vehicle whose class we do not hold: still drawn,
+                      // because where it was is the point, and a missing
+                      // catalogue entry is no reason to lose it off the map.
+                      <span
+                        className="block rounded-full bg-current ring-1 ring-black/50"
+                        style={{ width: markerPx * 0.5, height: markerPx * 0.5 }}
+                      />
+                    )}
+                  </span>
               );
             })
           : null}
@@ -289,21 +319,47 @@ function clock(seconds: number): string {
 }
 
 /**
- * Where a vehicle was at `at` seconds.
+ * The longest gap, in tenths of a second, worth sliding across.
  *
- * The last point at or before the instant, found by walking back: a track
- * holds only the moments it moved, so between two of them a vehicle is exactly
- * where it stopped. Interpolating would draw it gliding through walls.
+ * Positions arrive twice a second, so a normal step is 5. Anything much
+ * longer is not a vehicle moving slowly, it is a vehicle nobody could see:
+ * the stream only carries what the recording client was shown, so a tank that
+ * goes unspotted for twenty seconds reappears somewhere else entirely. Sliding
+ * across that would draw it gliding through half the map, which is the thing
+ * the first version of this refused to do by never interpolating at all.
+ */
+const SLIDE_LIMIT = 15;
+
+/**
+ * Where a vehicle was at `at` seconds, between its two nearest samples.
+ *
+ * Interpolated, because the samples are half a second apart and stepping
+ * between them reads as a stutter rather than as movement. Straight-line
+ * between two points 8 m apart is a very good approximation of a tank's path;
+ * it is only across a long gap that it becomes a lie, which `SLIDE_LIMIT`
+ * refuses.
  */
 function pointAt(
   points: [number, number, number][],
   at: number,
-): [number, number, number] | null {
+): [number, number] | null {
   const tenths = at * 10;
-  let found: [number, number, number] | null = null;
+  let before: [number, number, number] | null = null;
+  let after: [number, number, number] | null = null;
   for (const point of points) {
-    if (point[0] > tenths) break;
-    found = point;
+    if (point[0] <= tenths) before = point;
+    else {
+      after = point;
+      break;
+    }
   }
-  return found;
+  if (!before) return null;
+  if (!after) return [before[1], before[2]];
+  const span = after[0] - before[0];
+  if (span <= 0 || span > SLIDE_LIMIT) return [before[1], before[2]];
+  const k = (tenths - before[0]) / span;
+  return [
+    before[1] + (after[1] - before[1]) * k,
+    before[2] + (after[2] - before[2]) * k,
+  ];
 }
