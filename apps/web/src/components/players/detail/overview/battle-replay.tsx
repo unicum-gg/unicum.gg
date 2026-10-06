@@ -233,7 +233,7 @@ export function BattleReplay({
               if (!point) return null;
               // x and z only: the minimap is a plan view, and a tank on a hill
               // is at the same place on it as one under the hill.
-              const where = projectPoint({ x: point[0], z: point[1] }, bounds);
+              const where = projectPoint({ x: point.x, z: point.z }, bounds);
               const mine =
                 who.account !== undefined && who.account === highlightAccount;
               const side = mine
@@ -251,7 +251,17 @@ export function BattleReplay({
                       side,
                     )}
                   >
-                    {who.tank?.type ? (
+                    {!point.spotted ? (
+                      // Lost sight of: the game draws a bare dot at the last
+                      // place the vehicle was seen, and so does this. Drawing
+                      // the glyph and the name there would claim to know
+                      // something nobody knows, which is that the tank is
+                      // still on that square.
+                      <span
+                        className="block rounded-full bg-current opacity-70 ring-1 ring-black/60"
+                        style={{ width: markerPx * 0.42, height: markerPx * 0.42 }}
+                      />
+                    ) : who.tank?.type ? (
                       // The game's own class glyph, which is what a player
                       // reads a minimap by: a heavy and a scout at the same
                       // spot mean very different things, and two identical
@@ -280,7 +290,7 @@ export function BattleReplay({
                         so it cannot push the glyph off the point it marks,
                         and never wrapped: a name that folds onto two lines
                         over a minimap is unreadable either way. */}
-                    {who.tank?.shortName ? (
+                    {point.spotted && who.tank?.shortName ? (
                       <span
                         className={cn(
                           "pointer-events-none absolute left-full top-1/2 whitespace-nowrap font-medium leading-none",
@@ -363,6 +373,19 @@ function clock(seconds: number): string {
 const SLIDE_LIMIT_S = 1.5;
 
 /**
+ * How stale a position may be and still count as "somebody can see this".
+ *
+ * A spotted vehicle sends about ten positions a second, and it keeps sending
+ * them while standing still: measured on one battle, a third of a track's
+ * segments move less than half a metre, so silence means lost sight of rather
+ * than stopped. The split is clean rather than arbitrary, which is why the
+ * exact second matters so little: a third of the battle falls in long gaps at
+ * a half-second threshold and still a third at three seconds. Gaps are either
+ * a tenth of a second or they are tens of them.
+ */
+const SPOT_GAP_S = 1;
+
+/**
  * Where a vehicle was at `at` seconds, between its two nearest samples.
  *
  * Interpolated, because the samples are half a second apart and stepping
@@ -371,11 +394,14 @@ const SLIDE_LIMIT_S = 1.5;
  * it is only across a long gap that it becomes a lie, which `SLIDE_LIMIT`
  * refuses.
  */
+/** Where a vehicle is, and whether anyone can currently see it there. */
+type Seen = { x: number; z: number; spotted: boolean };
+
 function pointAt(
   points: [number, number, number][],
   at: number,
   ticks: number,
-): [number, number] | null {
+): Seen | null {
   const now = at * ticks;
   let before: [number, number, number] | null = null;
   let after: [number, number, number] | null = null;
@@ -387,12 +413,19 @@ function pointAt(
     }
   }
   if (!before) return null;
-  if (!after) return [before[1], before[2]];
+  // Nothing after it: the recording holds no more of this vehicle, so this is
+  // where it was last seen and not where it is.
+  if (!after) return { x: before[1], z: before[2], spotted: false };
+
   const span = after[0] - before[0];
-  if (span <= 0 || span > SLIDE_LIMIT_S * ticks) return [before[1], before[2]];
+  const spotted = span > 0 && span <= SPOT_GAP_S * ticks;
+  if (!spotted || span > SLIDE_LIMIT_S * ticks) {
+    return { x: before[1], z: before[2], spotted };
+  }
   const k = (now - before[0]) / span;
-  return [
-    before[1] + (after[1] - before[1]) * k,
-    before[2] + (after[2] - before[2]) * k,
-  ];
+  return {
+    x: before[1] + (after[1] - before[1]) * k,
+    z: before[2] + (after[2] - before[2]) * k,
+    spotted,
+  };
 }
