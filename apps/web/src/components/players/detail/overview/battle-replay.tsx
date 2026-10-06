@@ -246,13 +246,22 @@ export function BattleReplay({
               // several seconds, and a vehicle that simply went unspotted
               // stops reporting without having died at all.
               const dead = track.diedAt !== null && at * ticks >= track.diedAt;
-              const side = dead
-                ? "text-fd-muted-foreground/60"
-                : mine
-                  ? "text-amber-300"
-                  : who.team === ourTeam
-                    ? "text-emerald-400"
-                    : "text-red-400";
+              // Dimmed, not greyed. A flat grey says "dead" and loses the one
+              // thing still worth reading off a wreck, which is whose it was:
+              // six dead allies and six dead enemies in the same colour tell
+              // you a lot less than where each side lost them. So the side
+              // keeps its colour and only its strength goes.
+              const full = mine
+                ? "text-amber-300"
+                : who.team === ourTeam
+                  ? "text-emerald-400"
+                  : "text-red-400";
+              const faded = mine
+                ? "text-amber-300/40"
+                : who.team === ourTeam
+                  ? "text-emerald-400/40"
+                  : "text-red-400/40";
+              const side = dead ? faded : full;
               return (
                   <span
                     key={track.id}
@@ -263,12 +272,16 @@ export function BattleReplay({
                       side,
                     )}
                   >
-                    {dead || !point.spotted ? (
-                      // Lost sight of: a bare dot at the last place the
-                      // vehicle was seen, as the game draws it. Only the glyph
-                      // goes; the name stays, because the question a reader
-                      // has about a dot on the far side of the map is which
-                      // tank it was, and the dot alone cannot answer it.
+                    {!dead && !point.spotted ? (
+                      // Alive but out of sight: a bare dot at the last place
+                      // it was seen, as the game draws it. The name stays,
+                      // because the question a reader has about a dot on the
+                      // far side of the map is which tank it was.
+                      //
+                      // A destroyed vehicle keeps its glyph instead, faded.
+                      // The two states are different claims: a dot says
+                      // nobody knows where this tank is now, a faded glyph
+                      // says this is exactly where it stopped.
                       <span
                         className="block rounded-full bg-current opacity-70 ring-1 ring-black/60"
                         style={{ width: markerPx * 0.42, height: markerPx * 0.42 }}
