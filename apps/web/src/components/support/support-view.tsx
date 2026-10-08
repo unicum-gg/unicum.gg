@@ -4,13 +4,11 @@ import { CostBreakdown } from "@/components/coverage/cost-breakdown";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import { Region } from "@unicum.gg/wargaming";
 import { FundingBar } from "./funding-bar";
+import { SupportersPodium } from "./podium";
 import { SupportBox } from "./support-box";
-
-const MEDAL: Record<number, string> = { 1: "🥇", 2: "🥈", 3: "🥉" };
 
 /**
  * The /support page body (server component): a clean hero, the funding bar +
@@ -37,8 +35,6 @@ export async function SupportView({ locale }: { locale: string }) {
   const receivedEur = receivedCents / 100;
   // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per render; passed down so the client bar computes the same figures the prerendered HTML did
   const nowMs = Date.now();
-  const top = supporters.slice(0, 3);
-  const rest = supporters.slice(3);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -125,52 +121,7 @@ export async function SupportView({ locale }: { locale: string }) {
               <p className="py-10 text-center text-sm text-fd-muted-foreground">
                 {t("no-supporters-yet-be-the")}</p>
             ) : (
-              <div className="space-y-6">
-                <ol className="flex items-end justify-center gap-3">
-                  {top.map((s) => (
-                    <li
-                      key={s.rank}
-                      className={cn(
-                        "flex flex-1 flex-col items-center gap-2 rounded-lg border border-fd-border p-4 text-center",
-                        s.rank === 1 && "order-2 bg-brand/10",
-                        s.rank === 2 && "order-1",
-                        s.rank === 3 && "order-3",
-                      )}
-                    >
-                      <span className="text-3xl">{MEDAL[s.rank]}</span>
-                      <span
-                        className={cn(
-                          "w-full truncate text-sm font-semibold",
-                          s.anonymous && "font-normal italic opacity-70",
-                        )}
-                        title={s.name}
-                      >
-                        {s.name}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-                {rest.length > 0 && (
-                  <ol className="flex flex-col divide-y divide-fd-border text-sm">
-                    {rest.map((s) => (
-                      <li key={s.rank} className="flex items-center gap-3 py-2">
-                        <span className="w-6 shrink-0 text-center tabular-nums text-fd-muted-foreground">
-                          {s.rank}
-                        </span>
-                        <span
-                          className={cn(
-                            "truncate",
-                            s.anonymous && "italic opacity-70",
-                          )}
-                          title={s.name}
-                        >
-                          {s.name}
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                )}
-              </div>
+              <SupportersPodium supporters={supporters} />
             )}
           </section>
         </PanelContent>

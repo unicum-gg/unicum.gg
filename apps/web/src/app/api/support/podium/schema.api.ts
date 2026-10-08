@@ -15,6 +15,9 @@ const podiumSupporter = z
       "One supporter on the board, ranked by the net total they have given since launch. The amount is never exposed.",
   });
 
+/** One row of the supporters board. */
+export type PodiumSupporter = z.infer<typeof podiumSupporter>;
+
 /** Response of `GET /support/podium`. */
 export const SupportersPodiumResponse = z
   .object({
