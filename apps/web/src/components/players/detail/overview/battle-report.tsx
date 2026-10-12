@@ -1,7 +1,9 @@
 "use client";
 
 import type { TranslateFunction } from "@onruntime/translations";
+import type { Region } from "@unicum.gg/wargaming";
 import { cn } from "@/lib/utils";
+import { BattleLoadout } from "./battle-loadout";
 import type { Participant } from "./battle-types";
 
 /** One line: a label, a value, and whether it breaks down the line above it. */
@@ -33,6 +35,8 @@ function clock(seconds: number): string {
  * and a battle recorded before the mod carried a field has none of it.
  */
 export function BattleReport({
+  region,
+  battleId,
   participant,
   startedAt,
   battleDuration,
@@ -40,6 +44,9 @@ export function BattleReport({
   count,
   time,
 }: {
+  region: Region;
+  /** The battle, which is what its loadout is keyed on. */
+  battleId: string;
   participant: Participant;
   startedAt: string;
   battleDuration: number | null;
@@ -179,7 +186,28 @@ export function BattleReport({
   ];
 
   return (
-    <div className="grid gap-x-8 gap-y-4 px-4 py-3 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-x-8 gap-y-4 px-4 py-3 xl:grid-cols-3">
+      {/*
+        The figures on the left, the configuration on the right, rather than a
+        band of boxes across the top.
+
+        Two things were wrong with the band. It pushed every number below the
+        fold on a short panel, and the groups that belong together -- what a
+        battle cost and what it paid -- were split across a three-column grid
+        by nothing but the order they happened to be declared in. Given a
+        column of their own, the money blocks stack and the configuration sits
+        beside them, which is also where the loadout boxes want to be: in a
+        narrow column they wrap into a stack on their own, with no second
+        layout to maintain.
+
+        Three EQUAL columns, and the arithmetic is why it is written this way:
+        the outer grid gives thirds, the figures take two of them and split
+        that span with the same gap, so each half comes to exactly one third
+        as well. A fixed width on the right, which this had, made the third
+        column narrower than the two beside it for no reason a reader could
+        see.
+      */}
+      <div className="grid min-w-0 gap-x-8 gap-y-4 md:grid-cols-2 xl:col-span-2">
       {blocks.map((block) => {
         const rows = block.rows.filter((row): row is Row => row !== null);
         if (rows.length === 0) return null;
@@ -227,10 +255,18 @@ export function BattleReport({
         bill. Rather than invent a derivation out of the fields the results
         happen to expose, each line says what it is.
       */}
-      <p className="text-muted-foreground text-xs md:col-span-2 xl:col-span-3">
+      <p className="text-muted-foreground text-xs md:col-span-2">
         {money.premium ? `${t("report.with-premium")} ` : ""}
         {t("report.not-a-sum")}
       </p>
+      </div>
+
+      <BattleLoadout
+        region={region}
+        battleId={battleId}
+        vehicleId={participant.id}
+        className="min-w-0"
+      />
     </div>
   );
 }

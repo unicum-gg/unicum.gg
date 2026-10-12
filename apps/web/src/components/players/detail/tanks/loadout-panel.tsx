@@ -12,6 +12,8 @@ import {
   type LoadoutIcon,
 } from "@unicum.gg/core/tanks/loadout-icons";
 import { getTankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
+import { getTankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
+import { localizeBuild } from "@/components/tanks/detail/localize-build";
 import {
   CrewGroup,
   Group,
@@ -71,6 +73,7 @@ export async function PlayerTankLoadoutPanel({
     { t },
     icons,
     tankCrew,
+    tankFieldMods,
   ] = await Promise.all([
     getTranslation("game/equipment", locale),
     getTranslation("game/crew-perks", locale),
@@ -87,6 +90,12 @@ export async function PlayerTankLoadoutPanel({
     // perks' roles a member's skills run on as one undifferentiated row.
     isRegion(region)
       ? getTankCrew(region as Region, loadout.tankId)
+      : Promise.resolve(null),
+    // The vehicle's own post-progression tree, which is what turns "level 6
+    // and three pairs" into the picture the tank page draws. A fact about the
+    // tank, like its crew seats, so it is fetched the same way.
+    isRegion(region)
+      ? getTankFieldMods(region as Region, loadout.tankId)
       : Promise.resolve(null),
   ]);
 
@@ -217,18 +226,42 @@ export async function PlayerTankLoadoutPanel({
   }));
 
   const progression = loadout.progression;
-  const fieldMods =
-    progression && !isSkillTree(progression) && progression.pairs.length
-      ? {
-          label: `${t("field-mods")} ${progression.level}`,
-          // A pair's two sides are separate entries in the game's own
-          // catalogue, keyed by the pair's name and a suffix, so the side
-          // chosen is what names the entry.
-          names: progression.pairs.map((pair) =>
-            tEquipment(`${pair.name}_${pair.side === "first" ? 1 : 2}`),
-          ),
-        }
-      : null;
+  // The tree, named in the reader's language by the same helper the tank page
+  // uses, so a modification is called the same thing on both.
+  const { fieldMods: tree } = localizeBuild(
+    { loadout: null, crew: null, fieldMods: tankFieldMods, skillTree: null },
+    { equipment: tEquipment, perks: tPerks },
+  );
+
+  /**
+   * The modifications actually taken, as slots.
+   *
+   * Boxes and not the tank page's tree. The tree is a thing to CHOOSE from: it
+   * draws every rank and both sides of every pair so a reader can pick. This
+   * panel reports what one player runs, which is three or four items, and the
+   * same box the equipment above it uses says that in a line instead of a
+   * widget the height of the rest of the panel.
+   *
+   * The picture and the name still come from the tree, which is the only place
+   * that knows which side of a pair a key names and what it looks like.
+   */
+  const fieldModSlots: LoadoutSlotView[] = [];
+  if (progression && !isSkillTree(progression)) {
+    const taken = new Map(progression.pairs.map((p) => [p.name, p.side]));
+    for (const step of tree?.steps ?? []) {
+      if (!step.pair) continue;
+      const side = taken.get(step.pair.key);
+      if (!side) continue;
+      const item = side === "first" ? step.pair.first : step.pair.second;
+      fieldModSlots.push({
+        filled: true,
+        name: item.name,
+        image: item.image,
+      });
+    }
+  }
+  const fieldModLevel =
+    progression && !isSkillTree(progression) ? progression.level : null;
 
   return (
     <LoadoutTooltips>
@@ -291,19 +324,12 @@ export async function PlayerTankLoadoutPanel({
 
         {crew.length > 0 ? <CrewGroup label={t("crew")} crew={crew} /> : null}
 
-        {fieldMods ? (
-          <div className="mt-4">
-            <Group label={fieldMods.label}>
-              {fieldMods.names.map((name) => (
-                <span
-                  key={name}
-                  className="rounded border border-fd-border px-1.5 py-0.5 text-xs"
-                >
-                  {name}
-                </span>
-              ))}
-            </Group>
-          </div>
+        {fieldModSlots.length ? (
+          <SlotGroup
+            label={`${t("field-mods")}${fieldModLevel ? ` ${fieldModLevel}` : ""}`}
+            layouts={[fieldModSlots]}
+            active={0}
+          />
         ) : null}
 
       </section>

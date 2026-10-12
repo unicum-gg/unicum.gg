@@ -116,6 +116,14 @@
     "pause": "Pause",
     "loading": "Loading this battle’s replay…",
     "none": "No replay was kept for this battle. A replay only exists when somebody who played it had recording on and shared it.",
-    "failed": "This battle’s replay could not be read."
+    "failed": "This battle’s replay could not be read.",
+    "still-standing": "Vehicles still in the battle, on each side",
+    "chat": "Battle chat",
+    "chat-none": "Nobody typed anything in this battle.",
+    "chat-yet": "Nothing said yet.",
+    "deaths-none": "Nobody was destroyed in this battle.",
+    "deaths-yet": "Everyone is still alive.",
+    "deaths-unknown": "a vehicle",
+    "deaths-destroyed": "Destroyed"
   }
 }

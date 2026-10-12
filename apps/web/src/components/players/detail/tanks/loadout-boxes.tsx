@@ -30,6 +30,15 @@ import { cn } from "@/lib/utils";
 
 /** One slot: what is in it, or nothing. */
 export interface LoadoutSlotView {
+  /**
+   * Whether the slot is occupied, when the name cannot say.
+   *
+   * The garage knows a slot is filled because it has a name for what is in
+   * it. A battle row has no names at all -- translating them would make the
+   * whole list vary by language -- so it says so here instead. Left out, the
+   * name and the picture decide, which is what every caller did before.
+   */
+  filled?: boolean;
   /** The game's own name, or null for a free slot. */
   name: string | null;
   image: string | null;
@@ -76,28 +85,60 @@ export function SlotGroup({
         {layouts.map((slots, layout) => (
           <Row key={layout}>
             {slots.map((slot, index) => (
-              <Box
-                key={index}
-                tip={slot.name ?? undefined}
-                filled={!!slot.name}
-                overlay={slot.overlay}
-                categories={slot.categories}
-              >
-                {slot.name && slot.image ? (
-                  <Picture src={slot.image} alt={slot.name} size={26} />
-                ) : slot.name ? (
-                  // Wargaming publishes no picture for this one. Its name is
-                  // still the answer, so the box carries it rather than a hole.
-                  <span className="px-0.5 text-center text-[8px] leading-tight text-fd-muted-foreground">
-                    {slot.name}
-                  </span>
-                ) : null}
-              </Box>
+              <LoadoutSlotBox key={index} slot={slot} />
             ))}
           </Row>
         ))}
       </Layouts>
     </Group>
+  );
+}
+
+/**
+ * One loadout slot, filled or free, at whatever size the caller draws at.
+ *
+ * The single slot in the application, deliberately. There were two for a
+ * while: this one on the garage panel and a hand-rolled square on the battle
+ * rows, and the copy immediately drifted -- it lost the grade badge that
+ * tells a Bounty Rammer from an ordinary one, and the category dots, so the
+ * same device looked like two different things on two pages. Anything that
+ * draws a fitted item goes through here.
+ *
+ * `size` scales the frame, the picture and the badge together. The name is
+ * drawn inside the box as a last resort when Wargaming publishes no picture,
+ * which only a box big enough to hold words can do; below that the box stays
+ * filled and empty-looking, which still says "something is here".
+ */
+export function LoadoutSlotBox({
+  slot,
+  size = 40,
+}: {
+  slot: LoadoutSlotView;
+  size?: number;
+}) {
+  const filled = slot.filled ?? !!(slot.name || slot.image);
+  return (
+    <Box
+      tip={slot.name ?? undefined}
+      filled={filled}
+      overlay={slot.overlay}
+      categories={slot.categories}
+      size={size}
+    >
+      {slot.image ? (
+        <Picture
+          src={slot.image}
+          alt={slot.name ?? ""}
+          size={Math.round(size * 0.65)}
+        />
+      ) : slot.name && size >= 32 ? (
+        // Wargaming publishes no picture for this one. Its name is still the
+        // answer, so the box carries it rather than a hole.
+        <span className="px-0.5 text-center text-[8px] leading-tight text-fd-muted-foreground">
+          {slot.name}
+        </span>
+      ) : null}
+    </Box>
   );
 }
 
@@ -310,10 +351,13 @@ function Box({
   dimmed,
   overlay,
   categories,
+  size = BOX,
   children,
 }: {
   tip?: string;
   filled: boolean;
+  /** The box's edge in pixels. The grade badge and the dots scale with it. */
+  size?: number;
   accent?: boolean;
   subdued?: boolean;
   /** Present but carrying nothing: a round the gun fires and the player does not. */
@@ -322,14 +366,18 @@ function Box({
   categories?: string[];
   children?: React.ReactNode;
 }) {
+  const small = size < BOX;
   const box = (
     <span
+      style={{ width: size, height: size }}
       className={cn(
-        "relative flex size-10 shrink-0 items-center justify-center rounded-lg",
-        !filled && "border-2 border-dashed border-fd-border",
+        "relative flex shrink-0 items-center justify-center",
+        small ? "rounded" : "rounded-lg",
+        !filled && "border-dashed border-fd-border",
+        !filled && (small ? "border" : "border-2"),
         filled && "bg-fd-secondary/30",
         filled && subdued && "border border-fd-border",
-        filled && !subdued && "border-2",
+        filled && !subdued && (small ? "border" : "border-2"),
         filled && !subdued && accent && "border-amber-500/50",
         filled && !subdued && !accent && "border-fd-border",
         dimmed && "opacity-40",
@@ -352,10 +400,14 @@ function Box({
           width={OVERLAY}
           height={OVERLAY}
           className="pointer-events-none absolute top-0 left-0"
-          style={{ width: OVERLAY, height: OVERLAY }}
+          style={{ width: size * OVERLAY_SHARE, height: size * OVERLAY_SHARE }}
         />
       ) : null}
-      {categories?.length ? (
+      {/* Only where the box is big enough to carry them. They hang off the
+          bottom edge by a fixed amount, which is a mark on a 40px tile and an
+          overflowing blob on a 20px one; at that size the box is a preview and
+          the category is not what it is being read for. */}
+      {categories?.length && !small ? (
         <span className="absolute -bottom-1 left-1 flex gap-0.5">
           {categories.map((category) => (
             <span
@@ -378,6 +430,10 @@ function Box({
 }
 
 /** The corner badge: a mark, not a second picture. */
+/** The box's own edge, which everything inside it is measured against. */
+const BOX = 40;
+/** How much of the box the grade badge takes, kept across every size. */
+const OVERLAY_SHARE = 15 / BOX;
 const OVERLAY = 15;
 
 // The site's own accent per Equipment 2.0 category (the game paints every

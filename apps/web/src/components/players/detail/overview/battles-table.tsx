@@ -25,6 +25,11 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import Link from "@/components/link";
 import { mapName } from "@/components/game-name";
+import {
+  LoadoutSlotBox,
+  LoadoutTooltips,
+  type LoadoutSlotView,
+} from "@/components/players/detail/tanks/loadout-boxes";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
@@ -74,6 +79,24 @@ export type PlayerBattleRow = {
     tag: string;
     slug: string | null;
   } | null;
+  /**
+   * The optional devices this account had fitted, by slot, as pictures.
+   *
+   * Absent for almost every row: a loadout exists only where a recording of
+   * the battle carried one. A null entry is a slot left free, while an entry
+   * with no picture is a slot that WAS filled with something no catalogue
+   * here can draw -- different things, and a preview that showed two boxes
+   * where three were fitted would misstate the build at a glance.
+   */
+  devices?: LoadoutSlotView[];
+  /** Directives fitted, by slot. Absent when none were. */
+  boosters?: LoadoutSlotView[];
+  /** Consumables carried, by slot. */
+  consumables?: LoadoutSlotView[];
+  /** The rounds loaded, named and pictured, without their counts. */
+  shells?: { name: string; image: string }[];
+  /** The field modifications carried, in the tree's own order. */
+  fieldMods?: LoadoutSlotView[];
   own: {
     damage: number;
     radio: number;
@@ -300,6 +323,52 @@ export function PlayerBattlesTable({
               </span>
             </span>
 
+            {/*
+              To the RIGHT, on two rows, as its own column between the text and
+              the figures.
+
+              It sat on the first line for a while, which crowded the tank's
+              name with ten boxes that say nothing about which tank it is, and
+              then on the second, which buried it on the left among the dates.
+              It belongs to neither: it is a third thing about the battle, and
+              a column of its own is what lets it be read without competing
+              with either. Two rows because ten boxes in one make a strip
+              nearly as wide as the name beside it; split by what they are --
+              what was bolted on above, what was carried below -- they stay a
+              glance.
+
+              Hidden below `lg`, like the figures beside it would be if they
+              could: at that width the row is already choosing between the map,
+              the name and the numbers, and a preview is the first thing to go.
+            */}
+            {battle.devices?.length ||
+            battle.consumables?.length ||
+            battle.shells?.length ||
+            battle.fieldMods?.length ? (
+              <LoadoutTooltips>
+                <span className="hidden shrink-0 flex-col items-end gap-1 self-center lg:flex">
+                  {/* Bolted on the tank: devices, directives and the field
+                      modifications, which belong with them rather than with
+                      what the tank carries. */}
+                  <span className="flex items-center gap-3">
+                    <SlotRow slots={battle.devices} />
+                    <SlotRow slots={battle.boosters} />
+                    <SlotRow slots={battle.fieldMods} />
+                  </span>
+                  <span className="flex items-center gap-3">
+                    <SlotRow slots={battle.consumables} />
+                    <SlotRow
+                      slots={battle.shells?.map((shell) => ({
+                        filled: true,
+                        name: shell.name,
+                        image: shell.image,
+                      }))}
+                    />
+                  </span>
+                </span>
+              </LoadoutTooltips>
+            ) : null}
+
             {/* Two rows of two rather than one row of four: it halves the width
                 the figures need, which is what makes room for the map on a
                 narrow screen. */}
@@ -421,3 +490,27 @@ function Figure({
     </Tooltip>
   );
 }
+
+/** The edge of a preview box, small enough to sit on one line of a row. */
+const PREVIEW = 20;
+
+/**
+ * One group of slots, or nothing.
+ *
+ * Through the garage's own box, not a square of this file's own. There was one
+ * here for a while and it drifted within the hour: it lost the grade badge
+ * that tells a Bounty device from an ordinary one, and the category dots, so
+ * the same device looked like two different things on two pages. The reason to
+ * share the component is exactly that, and it is why this file now has none.
+ */
+function SlotRow({ slots }: { slots?: LoadoutSlotView[] }) {
+  if (!slots?.length) return null;
+  return (
+    <span className="flex items-center gap-1">
+      {slots.map((slot, at) => (
+        <LoadoutSlotBox key={at} slot={slot} size={PREVIEW} />
+      ))}
+    </span>
+  );
+}
+

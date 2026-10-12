@@ -12,6 +12,7 @@ import {
   type RatingColor,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { BattleLoadout } from "./battle-loadout";
 import Link from "@/components/link";
 import { PlayerName } from "@/components/entity/player-name";
 import { TankIcon } from "@/components/tanks/tank-icon";
@@ -64,6 +65,7 @@ type Row = { label: string; value: string; under?: boolean };
  */
 export function BattlePlayerPanel({
   region,
+  battleId,
   participant,
   killer,
   victims,
@@ -76,6 +78,8 @@ export function BattlePlayerPanel({
   time,
 }: {
   region: Region;
+  /** The battle this vehicle fought in, which is what its loadout is keyed on. */
+  battleId: string;
   participant: Participant;
   /** Whoever destroyed them, when the battle named one. */
   killer: Participant | null;
@@ -293,6 +297,19 @@ export function BattlePlayerPanel({
             </div>
           );
         })}
+        {/*
+          Inside the padded column, as one more block among the figures, and
+          not after it: outside, it ran edge to edge while every heading above
+          it sat four units in. Silent when there is nothing -- a loadout
+          exists only where a recording of this battle carried one, which
+          means the player who recorded it and any team mate they followed
+          after dying, so for most rows this draws nothing at all.
+        */}
+        <BattleLoadout
+          region={region}
+          battleId={battleId}
+          vehicleId={participant.id}
+        />
       </div>
     </div>
   );
