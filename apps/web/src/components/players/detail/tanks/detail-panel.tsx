@@ -154,6 +154,15 @@ export function PlayerTankDetailPanel({
               color={MOE_COLORS[detail.moe as 1 | 2 | 3]}
             />
           ) : null}
+          {/* The real figure from the client's dossier, shown beside the bars
+              rather than instead of them: the bars say what was earned, this
+              says how far the next one is, and a gun on its way to a first
+              mark has the second without the first. */}
+          {detail.moePercent == null ? null : (
+            <span className="text-fd-muted-foreground text-sm tabular-nums">
+              {detail.moePercent.toFixed(detail.moePercent >= 99.95 ? 0 : 2)}%
+            </span>
+          )}
         </div>
       </PanelHeader>
 

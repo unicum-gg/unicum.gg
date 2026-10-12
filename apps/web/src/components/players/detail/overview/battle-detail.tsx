@@ -389,6 +389,7 @@ export function BattleDetail({
             region={region}
             battleId={battleId}
             participant={{ ...mine, personal }}
+            mark={data.mark}
             startedAt={startedAt}
             battleDuration={data.duration ?? cardDuration}
             t={t}

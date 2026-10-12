@@ -68,5 +68,7 @@ export type BattleDetailData = {
   reporters: number;
   /** Whether the archive holds this battle's replay, so the viewer has something to draw. */
   hasReplay: boolean;
+  /** Where the reporter's mark stood after this battle, and after the one before. */
+  mark: { percent: number; previous: number | null } | null;
   participants: Participant[];
 };

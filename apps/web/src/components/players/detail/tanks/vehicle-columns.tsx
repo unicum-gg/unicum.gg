@@ -92,28 +92,42 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
   {
     key: "marks",
     label: "Marks",
-    tip: "Marks of Excellence earned on the gun",
+    tip: "Marks of Excellence on the gun, and how far the next one is",
     align: "center",
     defaultVisible: true,
     hideOnMobile: true,
     cell: (r, ctx) => {
       const marks = r.moe;
-      if (!marks || marks < 1 || marks > 3) return { node: DASH };
-      const bars = marks as 1 | 2 | 3;
+      const percent = r.moePercent;
+      const bars = marks && marks >= 1 && marks <= 3 ? (marks as 1 | 2 | 3) : null;
+      // A gun with no mark yet still has progress worth showing, and a gun
+      // with three still has a figure that moves. So the two are drawn
+      // independently and the cell is empty only when there is neither.
+      if (!bars && percent == null) return { node: DASH };
       return {
         node: (
           <span
-            title={ctx.t("n-marks-of-excellence",
-              { count: marks },
-            )}
-            className="flex justify-center"
+            title={
+              bars
+                ? ctx.t("n-marks-of-excellence", { count: bars })
+                : undefined
+            }
+            className="flex items-center justify-center gap-1.5"
           >
-            <MoEIcon bars={bars} color={MOE_COLORS[bars]} />
+            {bars ? <MoEIcon bars={bars} color={MOE_COLORS[bars]} /> : null}
+            {percent == null ? null : (
+              <span className="text-fd-muted-foreground tabular-nums">
+                {percent.toFixed(percent >= 99.95 ? 0 : 1)}%
+              </span>
+            )}
           </span>
         ),
       };
     },
-    sortValue: (r) => r.moe ?? -1,
+    // The percent sorts the column when we have it, because it separates two
+    // guns that both show three bars; the count is the fallback, scaled so a
+    // tank with marks and no percent still sorts above one with neither.
+    sortValue: (r) => r.moePercent ?? (r.moe != null ? r.moe * 25 : -1),
   },
   {
     key: "battles",

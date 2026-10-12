@@ -102,7 +102,10 @@
     "with-premium": "This account had premium.",
     "with-bonuses": "With bonuses applied",
     "credited": "Credited to the account",
-    "not-a-sum": "Each line is a figure the game reports in its own right; they do not add up to one another."
+    "not-a-sum": "Each line is a figure the game reports in its own right; they do not add up to one another.",
+    "marks": "Mark of Excellence",
+    "mark-of-excellence": "Progress",
+    "mark-movement": "This battle"
   },
   "tab": {
     "teams": "Team score",

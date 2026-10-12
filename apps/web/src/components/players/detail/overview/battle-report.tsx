@@ -9,6 +9,20 @@ import type { Participant } from "./battle-types";
 /** One line: a label, a value, and whether it breaks down the line above it. */
 type Row = { label: string; value: string; under?: boolean; cost?: boolean };
 
+/**
+ * "+1 % (94 -> 95)", or "0 %" when the battle held the line.
+ *
+ * Signed on purpose, and the sign is the point: a mark percentage is a figure
+ * a player watches move, and an unsigned "1" beside a standing of 95 reads as
+ * a second standing rather than as a gain. The previous value is spelled out
+ * beside it because a single percent of movement is small enough that the
+ * reader wants to see both ends of it.
+ */
+function moved(delta: number, previous: number): string {
+  const sign = delta > 0 ? "+" : "";
+  return `${sign}${delta}% (${previous} → ${previous + delta})`;
+}
+
 function clock(seconds: number): string {
   const m = Math.floor(seconds / 60);
   return `${m}:${String(seconds % 60).padStart(2, "0")}`;
@@ -38,6 +52,7 @@ export function BattleReport({
   region,
   battleId,
   participant,
+  mark,
   startedAt,
   battleDuration,
   t,
@@ -48,6 +63,8 @@ export function BattleReport({
   /** The battle, which is what its loadout is keyed on. */
   battleId: string;
   participant: Participant;
+  /** Where the mark stood after this battle, and after the one before it. */
+  mark: { percent: number; previous: number | null } | null;
   startedAt: string;
   battleDuration: number | null;
   t: TranslateFunction;
@@ -177,8 +194,34 @@ export function BattleReport({
     line(t("report.credited"), money.bonds),
   ];
 
+  // The mark of excellence, which is the one figure on this screen that is
+  // about the tank rather than about the battle. Its own block and not a line
+  // among the damage counts, because a reader looking for "did I move" should
+  // not have to find it between "shots fired" and "spotted".
+  //
+  // The movement is shown only when there is a battle before this one to
+  // measure against: the game gives the standing and never the gain, so a
+  // first battle has a percentage and no arrow. A zero movement is still
+  // worth drawing -- a battle that held the line is an answer to the question.
+  const marks: (Row | null)[] = mark
+    ? [
+        {
+          label: t("report.mark-of-excellence"),
+          value: `${mark.percent}%`,
+        },
+        mark.previous == null
+          ? null
+          : {
+              label: t("report.mark-movement"),
+              value: moved(mark.percent - mark.previous, mark.previous),
+              under: true,
+            },
+      ]
+    : [];
+
   const blocks = [
     { label: t("report.statistics"), rows: statistics },
+    { label: t("report.marks"), rows: marks },
     { label: t("report.time"), rows: timing },
     { label: t("report.credits"), rows: credits },
     { label: t("report.experience"), rows: experience },
