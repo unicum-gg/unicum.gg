@@ -102,7 +102,10 @@
     "with-premium": "Ezen a fiókon prémium volt.",
     "with-bonuses": "Alkalmazott bónuszokkal",
     "credited": "A fiókhoz jóváírva",
-    "not-a-sum": "Minden sor egy különálló, a játék által jelentett érték, ezek nem adódnak össze egyetlen értékké."
+    "not-a-sum": "Minden sor egy különálló, a játék által jelentett érték, ezek nem adódnak össze egyetlen értékké.",
+    "marks": "Kiválósági jel",
+    "mark-of-excellence": "Haladás",
+    "mark-movement": "Ez a csata"
   },
   "tab": {
     "teams": "Csapat pontszáma",

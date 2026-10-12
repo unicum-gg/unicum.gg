@@ -102,7 +102,10 @@
     "with-premium": "Bu hesapta premium vardı.",
     "with-bonuses": "Bonuslar uygulanmış hâliyle",
     "credited": "Hesaba aktarıldı",
-    "not-a-sum": "Her satır, oyunun kendi başına bildirdiği bir sayıdır, bunlar birbirlerinin toplamını oluşturmaz."
+    "not-a-sum": "Her satır, oyunun kendi başına bildirdiği bir sayıdır, bunlar birbirlerinin toplamını oluşturmaz.",
+    "marks": "Üstünlük İşareti",
+    "mark-of-excellence": "İlerleme",
+    "mark-movement": "Bu savaş"
   },
   "tab": {
     "teams": "Ekip skoru",

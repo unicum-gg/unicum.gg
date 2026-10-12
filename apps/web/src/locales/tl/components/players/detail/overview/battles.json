@@ -102,7 +102,10 @@
     "with-premium": "May premium ang account na ito.",
     "with-bonuses": "May mga bonus na inilapat",
     "credited": "Ipinagkredito sa account",
-    "not-a-sum": "Ang bawat linya ay numerong hiwalay na iniuulat ng laro, hindi nagdaragdag ang mga ito sa isa’t isa."
+    "not-a-sum": "Ang bawat linya ay numerong hiwalay na iniuulat ng laro, hindi nagdaragdag ang mga ito sa isa’t isa.",
+    "marks": "Marka ng Kahusayan",
+    "mark-of-excellence": "Pag-unlad",
+    "mark-movement": "Labanang ito"
   },
   "tab": {
     "teams": "Score ng koponan",

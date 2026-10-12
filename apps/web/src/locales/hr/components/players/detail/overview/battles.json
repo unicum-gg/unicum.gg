@@ -102,7 +102,10 @@
     "with-premium": "Ovaj račun imao je premium.",
     "with-bonuses": "S primijenjenim bonusima",
     "credited": "Pripisano računu",
-    "not-a-sum": "Svaki redak je brojka koju igra prijavljuje zasebno, ne zbrajaju se međusobno."
+    "not-a-sum": "Svaki redak je brojka koju igra prijavljuje zasebno, ne zbrajaju se međusobno.",
+    "marks": "Oznaka izvrsnosti",
+    "mark-of-excellence": "Napredak",
+    "mark-movement": "Ova bitka"
   },
   "tab": {
     "teams": "Rezultat tima",

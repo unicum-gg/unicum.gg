@@ -102,7 +102,10 @@
     "with-premium": "Esta cuenta tenía premium.",
     "with-bonuses": "Con bonificaciones aplicadas",
     "credited": "Abonado a la cuenta",
-    "not-a-sum": "Cada línea es una cifra que el juego comunica por derecho propio, no se suman entre sí."
+    "not-a-sum": "Cada línea es una cifra que el juego comunica por derecho propio, no se suman entre sí.",
+    "marks": "Marca de excelencia",
+    "mark-of-excellence": "Progreso",
+    "mark-movement": "Esta batalla"
   },
   "tab": {
     "teams": "Puntuación del equipo",

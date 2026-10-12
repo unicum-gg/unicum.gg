@@ -102,7 +102,10 @@
     "with-premium": "Dieses Konto hatte Premium.",
     "with-bonuses": "Mit angewendeten Boni",
     "credited": "Dem Konto gutgeschrieben",
-    "not-a-sum": "Jede Zeile ist eine eigene vom Spiel gemeldete Zahl, sie ergeben zusammen nicht eine einzige Summe."
+    "not-a-sum": "Jede Zeile ist eine eigene vom Spiel gemeldete Zahl, sie ergeben zusammen nicht eine einzige Summe.",
+    "marks": "Zeichen der Überlegenheit",
+    "mark-of-excellence": "Fortschritt",
+    "mark-movement": "Dieses Gefecht"
   },
   "tab": {
     "teams": "Team-Punktzahl",

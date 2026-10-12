@@ -102,7 +102,10 @@
     "with-premium": "Šim kontam bija premium.",
     "with-bonuses": "Ar piemērotajiem bonusiem",
     "credited": "Ieskaitīts kontā",
-    "not-a-sum": "Katra rinda ir atsevišķs skaitlis, ko spēle ziņo pati par sevi, tie savā starpā nesummējas."
+    "not-a-sum": "Katra rinda ir atsevišķs skaitlis, ko spēle ziņo pati par sevi, tie savā starpā nesummējas.",
+    "marks": "Izcilības atzīme",
+    "mark-of-excellence": "Progress",
+    "mark-movement": "Šī kauja"
   },
   "tab": {
     "teams": "Komandas rezultāts",

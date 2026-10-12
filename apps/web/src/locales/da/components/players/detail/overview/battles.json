@@ -102,7 +102,10 @@
     "with-premium": "Denne konto havde premium.",
     "with-bonuses": "Med anvendte bonusser",
     "credited": "Krediteret til kontoen",
-    "not-a-sum": "Hver linje er et tal, som spillet rapporterer for sig, de lægger ikke sammen til ét tal."
+    "not-a-sum": "Hver linje er et tal, som spillet rapporterer for sig, de lægger ikke sammen til ét tal.",
+    "marks": "Mærke for fremragende præstation",
+    "mark-of-excellence": "Fremskridt",
+    "mark-movement": "Denne kamp"
   },
   "tab": {
     "teams": "Holdscore",

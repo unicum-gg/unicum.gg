@@ -102,7 +102,10 @@
     "with-premium": "Det här kontot hade premium.",
     "with-bonuses": "Med bonusar tillämpade",
     "credited": "Krediterat till kontot",
-    "not-a-sum": "Varje rad är en siffra som spelet rapporterar för sig, de adderas inte till varandra."
+    "not-a-sum": "Varje rad är en siffra som spelet rapporterar för sig, de adderas inte till varandra.",
+    "marks": "Märke för stridsutmärkelse",
+    "mark-of-excellence": "Framsteg",
+    "mark-movement": "Denna strid"
   },
   "tab": {
     "teams": "Lagpoäng",

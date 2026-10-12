@@ -102,7 +102,10 @@
     "with-premium": "Denne kontoen hadde premium.",
     "with-bonuses": "Med bonuser lagt til",
     "credited": "Godskrevet på konto",
-    "not-a-sum": "Hver linje er et tall spillet rapporterer for seg selv, de summeres ikke til hverandre."
+    "not-a-sum": "Hver linje er et tall spillet rapporterer for seg selv, de summeres ikke til hverandre.",
+    "marks": "Merke for dyktighet",
+    "mark-of-excellence": "Fremgang",
+    "mark-movement": "Denne kampen"
   },
   "tab": {
     "teams": "Lagpoengsum",

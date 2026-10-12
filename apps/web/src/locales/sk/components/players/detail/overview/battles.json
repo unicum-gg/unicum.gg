@@ -102,7 +102,10 @@
     "with-premium": "Tento račun mal premium.",
     "with-bonuses": "Po uplatnení bonusov",
     "credited": "Pripísané na račun",
-    "not-a-sum": "Každý riadok je údaj, ktorý hra uvádza samostatne, preto sa navzájom nesčítavajú."
+    "not-a-sum": "Každý riadok je údaj, ktorý hra uvádza samostatne, preto sa navzájom nesčítavajú.",
+    "marks": "Znaki odličnosti",
+    "mark-of-excellence": "Napredek",
+    "mark-movement": "Ta bitka"
   },
   "tab": {
     "teams": "Skóre tímu",

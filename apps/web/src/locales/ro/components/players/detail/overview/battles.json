@@ -102,7 +102,10 @@
     "with-premium": "Acest cont a avut premium.",
     "with-bonuses": "Cu bonusurile aplicate",
     "credited": "Acreditate în cont",
-    "not-a-sum": "Fiecare linie este o cifră raportată de joc în mod individual, nu se adună una la alta."
+    "not-a-sum": "Fiecare linie este o cifră raportată de joc în mod individual, nu se adună una la alta.",
+    "marks": "Semn de excelență",
+    "mark-of-excellence": "Progres",
+    "mark-movement": "Această bătălie"
   },
   "tab": {
     "teams": "Scorul echipei",

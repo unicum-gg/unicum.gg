@@ -102,7 +102,10 @@
     "with-premium": "Ši paskyra turėjo premium statusą.",
     "with-bonuses": "Su pritaikytais priedais",
     "credited": "Įskaityta į paskyrą",
-    "not-a-sum": "Kiekviena eilutė yra atskiras žaidimo pateikiamas skaičius, šie skaičiai nesumuojami tarpusavyje."
+    "not-a-sum": "Kiekviena eilutė yra atskiras žaidimo pateikiamas skaičius, šie skaičiai nesumuojami tarpusavyje.",
+    "marks": "Meistriškumo ženklas",
+    "mark-of-excellence": "Progresas",
+    "mark-movement": "Šis mūšis"
   },
   "tab": {
     "teams": "Komandos rezultatas",

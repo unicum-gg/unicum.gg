@@ -102,7 +102,10 @@
     "with-premium": "此账号曾启用高级账号。",
     "with-bonuses": "已应用加成",
     "credited": "已计入账号",
-    "not-a-sum": "每一行都是游戏单独报告的数值，它们不会彼此相加得到总和。"
+    "not-a-sum": "每一行都是游戏单独报告的数值，它们不会彼此相加得到总和。",
+    "marks": "卓越标记",
+    "mark-of-excellence": "进度",
+    "mark-movement": "本场战斗"
   },
   "tab": {
     "teams": "队伍分数",

@@ -102,7 +102,10 @@
     "with-premium": "Tài khoản này có premium.",
     "with-bonuses": "Đã áp dụng tiền thưởng",
     "credited": "Đã cộng vào tài khoản",
-    "not-a-sum": "Mỗi dòng là một số liệu mà trò chơi báo cáo riêng, chúng không cộng lại thành một tổng."
+    "not-a-sum": "Mỗi dòng là một số liệu mà trò chơi báo cáo riêng, chúng không cộng lại thành một tổng.",
+    "marks": "Dấu hiệu xuất sắc",
+    "mark-of-excellence": "Tiến độ",
+    "mark-movement": "Trận đấu này"
   },
   "tab": {
     "teams": "Điểm số Đội",

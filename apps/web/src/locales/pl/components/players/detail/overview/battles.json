@@ -102,7 +102,10 @@
     "with-premium": "To konto miało premium.",
     "with-bonuses": "Po zastosowaniu bonusów",
     "credited": "Zaksięgowane na koncie",
-    "not-a-sum": "Każda linia to liczba raportowana przez grę osobno, nie sumują się."
+    "not-a-sum": "Każda linia to liczba raportowana przez grę osobno, nie sumują się.",
+    "marks": "Odznaka biegłości",
+    "mark-of-excellence": "Postęp",
+    "mark-movement": "Ta bitwa"
   },
   "tab": {
     "teams": "Wynik drużyny",

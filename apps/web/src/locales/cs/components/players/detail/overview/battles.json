@@ -102,7 +102,10 @@
     "with-premium": "Na tomto účtu byl aktivní prémiový účet.",
     "with-bonuses": "Po uplatnění bonusů",
     "credited": "Připsáno na účet",
-    "not-a-sum": "Každý řádek je samostatná hodnota, kterou hra uvádí, jednotlivé řádky se nesčítají."
+    "not-a-sum": "Každý řádek je samostatná hodnota, kterou hra uvádí, jednotlivé řádky se nesčítají.",
+    "marks": "Známka výbornosti",
+    "mark-of-excellence": "Pokrok",
+    "mark-movement": "Tato bitva"
   },
   "tab": {
     "teams": "Skóre týmu",

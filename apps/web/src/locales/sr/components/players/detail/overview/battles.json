@@ -102,7 +102,10 @@
     "with-premium": "Ovaj nalog je imao premium.",
     "with-bonuses": "Sa primenjenim bonusima",
     "credited": "Pripisano nalogu",
-    "not-a-sum": "Svaka линија je број koji игра prijavljuje zasebno, ne sabiraju se međusobno."
+    "not-a-sum": "Svaka линија je број koji игра prijavljuje zasebno, ne sabiraju se međusobno.",
+    "marks": "Ознака изврсности",
+    "mark-of-excellence": "Напредак",
+    "mark-movement": "Ова битка"
   },
   "tab": {
     "teams": "Rezultat tima",

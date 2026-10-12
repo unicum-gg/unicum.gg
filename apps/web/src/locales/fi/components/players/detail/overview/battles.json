@@ -102,7 +102,10 @@
     "with-premium": "Tilillä oli premium käytössä.",
     "with-bonuses": "Bonukset käytössä",
     "credited": "Hyvitetty tilille",
-    "not-a-sum": "Jokainen rivi on pelin erikseen ilmoittama luku, eivätkä ne muodosta yhteissummaa."
+    "not-a-sum": "Jokainen rivi on pelin erikseen ilmoittama luku, eivätkä ne muodosta yhteissummaa.",
+    "marks": "Erinomaisuuden merkki",
+    "mark-of-excellence": "Edistyminen",
+    "mark-movement": "Tämä taistelu"
   },
   "tab": {
     "teams": "Joukkueen tulos",

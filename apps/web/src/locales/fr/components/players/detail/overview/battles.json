@@ -102,7 +102,10 @@
     "with-premium": "Ce compte bénéficiait du statut premium.",
     "with-bonuses": "Avec les bonus appliqués",
     "credited": "Crédité sur le compte",
-    "not-a-sum": "Chaque ligne correspond à une valeur communiquée séparément par le jeu, elles ne s’additionnent pas."
+    "not-a-sum": "Chaque ligne correspond à une valeur communiquée séparément par le jeu, elles ne s’additionnent pas.",
+    "marks": "Marque d’excellence",
+    "mark-of-excellence": "Progression",
+    "mark-movement": "Cette bataille"
   },
   "tab": {
     "teams": "Score de l’équipe",
