@@ -1,6 +1,13 @@
 import { createHash } from "node:crypto";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
-import { readMotion, readReplay } from "@unicum.gg/shared";
+import {
+  activeLayout,
+  readLoadouts,
+  readMotion,
+  readReplay,
+  type ChatLine,
+  type ReplayLoadout,
+} from "@unicum.gg/shared";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import { fetchReplay, replayBattle } from "@unicum.gg/core/battles/replays";
 import { measured } from "@/services/perf";
@@ -29,7 +36,15 @@ const TICKS = 100;
  * the version in the validator, an old body simply fails to match and is
  * replaced on the next request.
  */
-const FORMAT = 5;
+const FORMAT = 13;
+
+/**
+ * The largest countdown worth believing, in seconds.
+ *
+ * Two minutes. The real one is tens of seconds, and anything past this is a
+ * sign the survivors' tracks are not anchoring anything, not a long wait.
+ */
+const MAX_OFFSET = 120;
 
 /**
  * Always revalidate, and the ETag decides.
@@ -40,6 +55,17 @@ const FORMAT = 5;
  * pay every time for an answer that is never quietly wrong.
  */
 const CACHE = { "cache-control": "public, max-age=0, must-revalidate" };
+
+/**
+ * The colour the game paints an ally's chat line, read off real replays.
+ *
+ * The line carries no team field: the client has already resolved the sides at
+ * the moment it draws the message, and what it stores is the result. So the
+ * colour IS the side, and a line in any other colour is somebody on the other
+ * team. Compared against the one value rather than a list, so an unknown colour
+ * reads as "not an ally" instead of silently becoming one.
+ */
+const ALLY_COLOUR = "#80D63A";
 
 /** One vehicle's path, as `[clock ticks, x, z]`, and when it stopped living. */
 type Track = {
@@ -88,11 +114,26 @@ function clockOffset(
   for (const vehicle of vehicles) {
     if (vehicle.died || vehicle.lifeTime <= 0) continue;
     const track = tracks.find((t) => t.id === vehicle.id);
-    if (track) gaps.push(track.last - vehicle.lifeTime);
+    if (!track) continue;
+    const gap = track.last - vehicle.lifeTime;
+    // A survivor's track cannot end BEFORE the battle it survived, so a
+    // negative gap is not a measurement of the countdown, it is a track that
+    // stopped early: a training room where somebody left and came back, a
+    // vehicle the recording client lost for the rest of the battle. Dropped
+    // rather than averaged in, because one of them drags the median under
+    // zero and a negative offset puts every death before the recording
+    // starts, which draws a full team as wrecks on the first frame. Seen on a
+    // real battle: an offset of -86.8s and a tank dead at -57.9s.
+    if (gap < 0) continue;
+    gaps.push(gap);
   }
   if (gaps.length === 0) return null;
   gaps.sort((a, b) => a - b);
-  return gaps[Math.floor(gaps.length / 2)];
+  const median = gaps[Math.floor(gaps.length / 2)];
+  // And a last net on the other side. The countdown is tens of seconds; an
+  // offset of several minutes means the anchor is wrong whatever its sign, and
+  // greying nothing is better than greying the wrong things.
+  return median > MAX_OFFSET ? null : median;
 }
 
 /**
@@ -156,12 +197,20 @@ async function GET__perf(
   }
 
   let motion;
+  let loadouts: ReplayLoadout[] = [];
   try {
     const { stream } = await readReplay(file);
     if (stream.length === 0) {
       return Response.json({ error: "no_replay" }, { status: 404 });
     }
     motion = readMotion(stream);
+    // A second walk over the same stream rather than another branch inside
+    // `readMotion`. That function runs for every map that is drawn, and the
+    // loadout lives in packets it has no other reason to look at; keeping them
+    // apart means a reader who only wants the paths does not pay for the
+    // crew, and the walk itself is a rounding error beside the decryption and
+    // the inflate that had to happen first.
+    loadouts = readLoadouts(stream);
   } catch {
     return Response.json({ error: "unreadable_replay" }, { status: 422 });
   }
@@ -205,6 +254,41 @@ async function GET__perf(
     return Response.json({ error: "no_replay" }, { status: 404 });
   }
 
+  // Matched by victim, and by time when a victim appears twice: a vehicle can
+  // be reported at zero more than once, and the entry meant is the one next to
+  // the death the results recorded.
+  const byVictim = new Map<number, typeof motion.kills>();
+  for (const kill of motion.kills) {
+    const into = byVictim.get(kill.victim) ?? [];
+    into.push(kill);
+    byVictim.set(kill.victim, into);
+  }
+  const reasons = new Map(
+    battle.vehicles.map((vehicle) => [vehicle.id, vehicle.deathReason]),
+  );
+  const deaths = tracks
+    .filter((track) => track.diedAt !== null)
+    .map((track) => {
+      const when = (track.diedAt as number) / TICKS;
+      const candidates = byVictim.get(track.id) ?? [];
+      let best = null as (typeof motion.kills)[number] | null;
+      for (const kill of candidates) {
+        if (!best || Math.abs(kill.at - when) < Math.abs(best.at - when)) {
+          best = kill;
+        }
+      }
+      return {
+        at: track.diedAt as number,
+        victim: track.id,
+        by: best?.by ?? null,
+        damage: best?.damage ?? null,
+        // The game's own code for how it died, which is what picks the
+        // sentence: drowned, rammed, burned, shot.
+        reason: reasons.get(track.id) ?? null,
+      };
+    })
+    .sort((a, b) => a.at - b.at);
+
   return jsonResponse(
     BattleReplayResponse,
     {
@@ -216,6 +300,81 @@ async function GET__perf(
       // they change.
       startsAt: offset !== null ? Math.round(offset * TICKS) : 0,
       tracks,
+      // What the player who recorded this had fitted, one entry per life.
+      //
+      // Flattened to the layout that was in USE. The client keeps two groups
+      // of setups, each with its own spare layout, and a vehicle can be on its
+      // second ammunition layout and its first equipment layout at the same
+      // time; publishing both would describe a setup this battle never saw.
+      // The garage page shows both deliberately, because there "what else is
+      // configured" is a real question. Here it is not.
+      //
+      // Only ever the recorder's own. The server strips the devices out of
+      // every other vehicle's public information before it reaches a client,
+      // so there is no second loadout in the file to publish or withhold.
+      loadouts: loadouts.map((life: ReplayLoadout) => {
+        const ammo = activeLayout(life.setups?.ammo);
+        const devices = activeLayout(life.setups?.devices);
+        return {
+          vehicle: life.entityId,
+          at: Math.round(life.at * TICKS),
+          optDevices: devices?.optDevices ?? [],
+          boosters: devices?.boosters ?? [],
+          consumables: ammo?.consumables ?? [],
+          shells: (ammo?.shells ?? []).map((shell) => ({
+            name: shell.name,
+            type: shell.type,
+            premium: shell.premium,
+            count: shell.count,
+          })),
+          crew: (life.crew ?? []).map((member) => ({
+            role: member.role,
+            skills: member.skills,
+          })),
+        };
+      }),
+      // Every death, with whoever caused it where the recording heard who.
+      //
+      // The WHEN comes from `diedAt`, which is the battle's own results and so
+      // knows about a tank nobody watched die; the WHO comes from the packet,
+      // which only speaks for what the recording client could see. Taking the
+      // better half of each rather than one or the other is why this is built
+      // here and not in the parser: only this function holds both.
+      deaths,
+      // What was typed, in the clock the rest of this answer uses.
+      //
+      // Published on the site owner's explicit decision, twice stated. It is
+      // worth being plain about what it is: thirty people agreed to play a
+      // battle, not to have their messages republished, and unlike a position
+      // this is not something the game already shows to anyone who looks. The
+      // parser hands it over as plain strings with the game's own markup taken
+      // apart, so nothing a player typed is ever rendered as HTML.
+      chat: motion.chat.map((line: ChatLine) => ({
+        at: Math.round(line.at * TICKS),
+        from: line.from,
+        vehicle: line.vehicle,
+        text: line.text,
+        ally: line.colour === ALLY_COLOUR,
+        command: line.command ?? null,
+        // Handed over unresolved. On a real recording it is the sender's
+        // VEHICLE id, the same id the tracks carry, but not for every command:
+        // a waypoint's ran to nineteen digits and is plainly something else.
+        // So the check is "does this name somebody in this battle", and the
+        // list to check against is on the page, not here.
+        sender: line.sender ?? null,
+        // The message's own placeholders travel with it, unfilled: `%(target)s`
+        // needs a name, and the names are on the page. Rounded here because a
+        // reload of 4.9173 seconds is a reload of 5.
+        target: line.target ?? null,
+        reloadTime:
+          line.reloadTime != null ? Math.round(line.reloadTime) : null,
+        label: line.label ?? null,
+        // Rounded like every other coordinate here: half a metre is already
+        // under a pixel on a minimap.
+        where: line.where
+          ? { x: Math.round(line.where.x), z: Math.round(line.where.z) }
+          : null,
+      })),
     },
     {
       headers: { etag, ...CACHE },

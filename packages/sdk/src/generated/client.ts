@@ -493,6 +493,15 @@ class BattleClient {
     );
   }
 
+  /** Battle loadouts */
+  loadouts() {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/loadouts", path),
+      () => this.api.GET("/{region}/battles/{id}/loadouts", { params: { path } }),
+    );
+  }
+
   /** Battle replay */
   replay() {
     const path = { region: this.region, id: this.id };

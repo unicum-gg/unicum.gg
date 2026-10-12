@@ -1,6 +1,13 @@
 import { createHash } from "node:crypto";
 import * as z from "zod";
-import { battleIdIn, readReplayHeader, ReplayError } from "@unicum.gg/shared";
+import {
+  battleIdIn,
+  readFieldMods,
+  readLoadouts,
+  readReplay,
+  readReplayHeader,
+  ReplayError,
+} from "@unicum.gg/shared";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import {
   attachReplay,
@@ -11,6 +18,7 @@ import {
   ReplayStoreError,
   storeReplay,
 } from "@unicum.gg/core/battles/replays";
+import { storeBattleLoadouts } from "@unicum.gg/core/battles/loadouts";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
 import { provenAccount } from "@/services/game/proven-account";
 
@@ -206,6 +214,12 @@ export async function POST(
   // over an identical one.
   if (await replayExists(key)) {
     await attachReplay(account.region, arenaUniqueId, startedAt, key);
+    // Still read, even though the file is not written again. The loadout is
+    // keyed on the battle and the VEHICLE, so a second reporter contributes
+    // their own vehicle's, which the first could not see; and a file stored
+    // before this was collected at all has none, so an offer of it backfills.
+    // The insert ignores conflicts, so offering the same one twice is free.
+    await writeLoadouts(account.region, arenaUniqueId, startedAt, bytes);
     return refuse(ReplayRefusal.AlreadyStored);
   }
 
@@ -228,10 +242,81 @@ export async function POST(
   // produces a broken download for a reader.
   await attachReplay(account.region, arenaUniqueId, startedAt, key);
 
+  // What the recorder had fitted, written down now rather than decoded again
+  // on every read. This is the one moment the bytes are already in memory, and
+  // the answer never changes afterwards.
+  //
+  // Guarded on its own, and deliberately after the row that references the
+  // object: the replay is what the player offered and what the quota was spent
+  // on, so a fault in reading the loadout out of it must not turn a stored
+  // file into a failed upload. A loadout that could not be read is a null
+  // column; a replay refused for that reason would be a file the mod deletes.
+  await writeLoadouts(account.region, arenaUniqueId, startedAt, bytes);
+
   return Response.json(
     { stored: key },
     { headers: { "cache-control": "no-store" } },
   );
+}
+
+/**
+ * Decode the recorder's loadout and store it, swallowing any fault.
+ *
+ * `readReplay` is the expensive half of this -- a Blowfish pass and an inflate
+ * over about a megabyte -- and it happens here instead of on the read path for
+ * exactly that reason. A recording from a client this cannot be read from
+ * simply yields nothing, which is a battle with no loadout rather than an
+ * error: coverage is a thing to measure, not to fail on.
+ */
+async function writeLoadouts(
+  region: Parameters<typeof storeBattleLoadouts>[0],
+  arenaUniqueId: string,
+  startedAt: Date,
+  bytes: Uint8Array,
+): Promise<void> {
+  try {
+    const { blocks, stream } = await readReplay(bytes);
+    if (stream.length === 0) return;
+    const loadouts = readLoadouts(stream);
+    if (loadouts.length === 0) return;
+    const header = blocks[0] as { clientVersionFromXml?: unknown } | null;
+    const version =
+      typeof header?.clientVersionFromXml === "string"
+        ? clientVersion(header.clientVersionFromXml)
+        : null;
+    await storeBattleLoadouts(
+      region,
+      arenaUniqueId,
+      startedAt,
+      loadouts,
+      version,
+      readFieldMods(blocks),
+    );
+  } catch (error) {
+    console.error(
+      `[api/game/battles/replay] ${region}/${arenaUniqueId}: loadout not stored`,
+      error,
+    );
+  }
+}
+
+/**
+ * `2.4.0.2` out of `World of Tanks v.2.4.0.2 #966`, or null.
+ *
+ * The replay header writes the version the long way; the mod sends the short
+ * form and that is what every battle row holds. Storing the header's spelling
+ * beside those would put two vocabularies in one column, and the whole reason
+ * to record the version is to keep figures from different patches apart -- a
+ * comparison that silently split the same build in two would be worse than no
+ * version at all.
+ *
+ * The same expression the mod uses, down to the non-breaking spaces the client
+ * writes these with. The xml version rather than the exe's, which the header
+ * also carries but which stops at the release before a hotfix.
+ */
+function clientVersion(full: string): string | null {
+  const found = /v\.\s*([0-9]+(?:\.[0-9]+)+)/.exec(full.replace(/\u00a0/g, " "));
+  return found ? found[1] : null;
 }
 
 function refuse(reason: ReplayRefusal): Response {

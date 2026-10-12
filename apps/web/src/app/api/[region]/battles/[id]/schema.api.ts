@@ -1,6 +1,7 @@
 // Co-located response schema. The `.api.ts` suffix is required so
 // next-openapi-gen scans it.
 import { z } from "zod";
+import { mapOverlay } from "@/app/api/[region]/players/[nickname]/battles/schema.api";
 
 /** A participant's public identity, as the site's one naming format takes it. */
 const battlePlayer = z
@@ -69,6 +70,60 @@ const battleParticipant = z
       description:
         "What this battle scored them, keyed by metric (`wn7`, `wn8`, `wnx`), against their own vehicle's expected values.",
     }),
+    loadouts: z
+      .array(
+        z
+          .object({
+            life: z.number().meta({
+              description:
+                "Counted from zero, in the order the lives were played. Always zero outside a mode with respawns.",
+            }),
+            optDevices: z.array(z.string().nullable()).meta({
+              description:
+                "The optional devices fitted, by slot. A free slot is a null in place, because a device's grade and category depend on which slot it sits in. An item no catalogue here knows keeps its number under an `unknown:` prefix rather than becoming a null, so a filled slot is never mistaken for an empty one.",
+            }),
+            boosters: z.array(z.string().nullable()).meta({
+              description: "Directives fitted, by slot, a free one being null.",
+            }),
+            consumables: z.array(z.string().nullable()).meta({
+              description: "Consumables carried, by slot, a free one being null.",
+            }),
+            shells: z
+              .array(
+                z.object({
+                  name: z.string(),
+                  type: z.string().meta({
+                    description:
+                      "ARMOR_PIERCING, ARMOR_PIERCING_CR, HOLLOW_CHARGE or HIGH_EXPLOSIVE, which is what picks the round's icon.",
+                  }),
+                  premium: z.boolean(),
+                  count: z.number(),
+                }),
+              )
+              .meta({ description: "The rounds loaded, in the client's own order." }),
+            crew: z
+              .array(
+                z.object({
+                  role: z.string().meta({
+                    description: "commander, gunner, driver, radioman or loader.",
+                  }),
+                  skills: z.array(z.string()).meta({
+                    description: "Skills trained, in the order they were learned.",
+                  }),
+                }),
+              )
+              .meta({
+                description:
+                  "One entry per seat, each with its own skills. Kept per seat rather than flattened: for the five skills every seat can learn, how many of the crew trained it is the whole effect.",
+              }),
+          })
+          .meta({ id: "BattleParticipantLoadout" }),
+      )
+      .optional()
+      .meta({
+        description:
+          "What this vehicle had fitted, one entry per life. Absent for almost every participant, and that is the designed state: a loadout exists only where a recording of the battle carried it, which means the player who recorded it and any team mate they followed after dying. Nothing is ever known this way about the other team.",
+      }),
   })
   .meta({
     id: "BattleParticipant",
@@ -78,6 +133,24 @@ const battleParticipant = z
 /** Response of `GET /{region}/battles/{id}`. */
 export const BattleDetailResponse = z
   .object({
+    mapImage: z.string().nullable().meta({
+      description:
+        "The minimap this battle was played on, resolved for its own mode: a mode that redraws the map into a smaller play area ships its own picture, and this is that one.",
+    }),
+    mapBounds: z
+      .object({
+        bottomLeft: z.object({ x: z.number(), z: z.number() }),
+        upperRight: z.object({ x: z.number(), z: z.number() }),
+      })
+      .nullable()
+      .meta({
+        description:
+          "The arena's extent in metres, which places a replay's coordinates on that image.",
+      }),
+    mapOverlay: mapOverlay.nullable().meta({
+      description:
+        "What this battle's mode puts on the minimap, already projected into `mapBounds`. Null when the arena declares nothing for it.",
+    }),
     id: z.string(),
     startedAt: z.string().meta({ format: "date-time" }),
     map: z.string(),

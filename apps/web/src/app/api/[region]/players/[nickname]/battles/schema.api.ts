@@ -103,7 +103,10 @@ const battleEconomy = z
 /** One battle, read as a single player's line through it. */
 const marker = z.object({ left: z.number(), top: z.number() });
 
-const mapOverlay = z.object({
+/** Exported so a battle's own page describes its minimap with the same shape
+ *  the list does: two spellings of one overlay would be two things to keep
+ *  true. */
+export const mapOverlay = z.object({
   bounds: z.object({
     bottomLeft: z.object({ x: z.number(), z: z.number() }),
     upperRight: z.object({ x: z.number(), z: z.number() }),
@@ -114,6 +117,28 @@ const mapOverlay = z.object({
   spawns: z.object({ team1: z.array(marker), team2: z.array(marker) }),
   controlPoint: marker.nullable(),
   pois: z.array(z.object({ marker, type: z.number() })),
+});
+
+/** One loadout slot on a battle row, drawn by the same box the garage uses. */
+const loadoutSlot = z.object({
+  name: z.string().nullable().meta({
+    description:
+      "The item's name in the reader's language, or null for a free slot. Here so a preview box can carry a tooltip: ten unlabelled pictures say very little. It is why this endpoint is privately cached rather than shared.",
+  }),
+  filled: z.boolean().meta({
+    description:
+      "Whether the slot is occupied. Said outright because a row carries no names to infer it from, and because a slot filled with something no catalogue here can picture must not read as an empty one.",
+  }),
+  image: z.string().nullable().meta({
+    description: "The item's picture, or null where Wargaming publishes none.",
+  }),
+  overlay: z.string().nullable().meta({
+    description:
+      "The grade badge drawn in the corner, which is what tells a Bounty device from an ordinary one: the picture underneath is the same.",
+  }),
+  categories: z.array(z.string()).optional().meta({
+    description: "The Equipment 2.0 categories the game dots the box with.",
+  }),
 });
 
 export const playerBattle = z
@@ -171,6 +196,45 @@ export const playerBattle = z
       .meta({
         description:
           "What this one battle scored, keyed by metric (`wn7`, `wn8`, `wnx`). The same accumulators the lifetime figures use, fed a single battle: the ratings are defined per battle and only ever averaged. Null for a metric whose expected values do not carry this vehicle.",
+      }),
+    devices: z
+      .array(loadoutSlot)
+      .optional()
+      .meta({
+        description:
+          "The optional devices this account had fitted, by slot, as pictures only. A free slot is a null in place; a slot that was filled with something no catalogue here can picture is an object with a null image, which is a different thing. Absent for almost every battle: a loadout exists only where a recording of it carried one. The first life's, in a mode with respawns. Names are not here on purpose, since naming them would make this list vary by language and cost it its shared cache; the battle's own panel names everything.",
+      }),
+    boosters: z
+      .array(loadoutSlot)
+      .optional()
+      .meta({
+        description:
+          "Directives fitted, by slot, as pictures. Absent when none were, which is the usual case.",
+      }),
+    consumables: z
+      .array(loadoutSlot)
+      .optional()
+      .meta({ description: "Consumables carried, by slot, as pictures." }),
+    shells: z
+      .array(
+        z.object({
+          name: z.string().meta({
+            description: "AP, APCR, HEAT or HE, in the reader's language.",
+          }),
+          image: z.string(),
+        }),
+      )
+      .optional()
+      .meta({
+        description:
+          "The rounds loaded, as pictures, in the client's own order and WITHOUT their counts: a row is a glance, and a figure under every box would cost it twice the height. The battle's own panel carries the counts.",
+      }),
+    fieldMods: z
+      .array(loadoutSlot)
+      .optional()
+      .meta({
+        description:
+          "The field modifications this vehicle carried, as pictures, in the tree's own order so two players on one tank can be compared position by position. Present far more often than the fitted loadout: a recording carries these for everyone who has any, about twelve of the thirty.",
       }),
     players: z.number().meta({
       description: "Accounts the battle named, bots excluded.",

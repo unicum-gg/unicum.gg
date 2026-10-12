@@ -1,11 +1,14 @@
-import { desc, eq, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, getTableName, inArray, sql } from "drizzle-orm";
 import type { Region } from "@unicum.gg/wargaming";
 import {
+  battleLoadoutsByRegion,
   battlesByRegion,
   clansByRegion,
   playersByRegion,
   RatingMetric,
   type BattleEconomy,
+  type LoadoutCrewMember,
+  type LoadoutShell,
   wn7AccAdd,
   wn7AccZero,
   wn7Finalize,
@@ -130,6 +133,39 @@ export type PlayerBattle = {
    * brand new or withdrawn vehicle looks like.
    */
   rating: Partial<Record<RatingMetric, number | null>>;
+  /**
+   * The optional devices this account had fitted, by slot, for the preview.
+   *
+   * Keys and not pictures: naming and illustrating an item is the web layer's
+   * job, and it needs a locale and a per-vehicle catalogue that have no
+   * business in a database read. Absent for the overwhelming majority of
+   * battles, because a loadout exists only where a recording carried one.
+   *
+   * The FIRST life's, in a mode that has several. A row in a list is a glance,
+   * and a glance cannot show three sets of three; the battle's own page shows
+   * every life.
+   */
+  devices?: (string | null)[];
+  /** Directives fitted, by slot, for the same preview. */
+  boosters?: (string | null)[];
+  /** Consumables carried, by slot. */
+  consumables?: (string | null)[];
+  /**
+   * The KINDS of round loaded, in order, without the counts.
+   *
+   * A row is a glance: the kinds say what the gun was fed, and the counts
+   * would need a figure under every box and twice the height to say it. The
+   * battle's own panel has them.
+   */
+  shells?: string[];
+  /**
+   * The field modifications, still packed. See `fieldModSlots` to draw them.
+   *
+   * Raw here because decoding needs the vehicle's post-progression tree, and a
+   * database read has no business fetching catalogues. Present far more often
+   * than the rest: a replay carries these for everyone who has any.
+   */
+  fieldModsPacked?: number[];
   /** How many accounts the battle named, bots excluded. */
   players: number;
   /**
@@ -226,6 +262,9 @@ export async function recentBattlesOf(
   limit: number = RECENT_BATTLES,
 ): Promise<PlayerBattle[]> {
   const table = battlesByRegion[region];
+  const loadouts = battleLoadoutsByRegion[region];
+  /** This table's own name, to qualify it inside the subquery below. */
+  const outer = sql.identifier(getTableName(table));
   const wanted = Math.min(Math.max(1, Math.trunc(limit)), MAX_RECENT_BATTLES);
   const rows = await db
     .select({
@@ -251,6 +290,38 @@ export async function recentBattlesOf(
       own: sql<BattleVehicle | null>`(
         SELECT v FROM jsonb_array_elements(${table.vehicles}) AS v
         WHERE (v->>'account')::bigint = ${accountId}
+        LIMIT 1
+      )`,
+      // What they had fitted, for the preview on the row. A correlated
+      // subquery rather than a join or a second round trip: it rides the
+      // loadout table's primary key, which starts with the same two columns
+      // this row is already found by, and it answers null for the battles
+      // that have no loadout without costing them anything.
+      //
+      // The outer columns are qualified BY HAND, and they have to be. Passing
+      // the column objects renders them bare -- `l.started_at = "started_at"`
+      // -- and Postgres then resolves that name against the innermost table
+      // that has it, which is `l`. The predicate becomes `l.started_at =
+      // l.started_at`, always true, and the subquery quietly returns any
+      // loadout the account ever had: every battle in the list showed the
+      // same three devices, including battles with no loadout at all. It
+      // reads correctly and is wrong, which is the worst way to be wrong.
+      // One row of the loadout table as JSON, rather than four subqueries
+      // for four columns: the correlation and the index probe are the cost
+      // here, and paying it once for the whole row is the difference between
+      // one lookup per battle and four.
+      loadout: sql<{
+        opt_devices: (string | null)[] | null;
+        boosters: (string | null)[] | null;
+        consumables: (string | null)[] | null;
+        shells: { type: string }[] | null;
+        field_mods_packed: number[] | null;
+      } | null>`(
+        SELECT to_jsonb(l) FROM ${loadouts} l
+        WHERE l.started_at = ${outer}.started_at
+          AND l.arena_unique_id = ${outer}.arena_unique_id
+          AND l.account_id = ${accountId}
+        ORDER BY l.life
         LIMIT 1
       )`,
     })
@@ -300,6 +371,25 @@ export async function recentBattlesOf(
       tank: namedTank(book[String(row.own.tank)], row.own.tank, slugs),
       own: row.own,
       rating: rateOne(row.own, row.winnerTeam, book, wn8Expected, wnxExpected),
+      ...(row.loadout
+        ? {
+            ...(row.loadout.opt_devices?.length
+              ? { devices: row.loadout.opt_devices }
+              : {}),
+            ...(row.loadout.boosters?.some(Boolean)
+              ? { boosters: row.loadout.boosters }
+              : {}),
+            ...(row.loadout.consumables?.length
+              ? { consumables: row.loadout.consumables }
+              : {}),
+            ...(row.loadout.shells?.length
+              ? { shells: row.loadout.shells.map((shell) => shell.type) }
+              : {}),
+            ...(row.loadout.field_mods_packed?.length
+              ? { fieldModsPacked: row.loadout.field_mods_packed }
+              : {}),
+          }
+        : {}),
       players: row.players,
       reporters: row.reporters,
       personal: row.personal ?? null,
@@ -422,6 +512,32 @@ export type BattleParticipant = {
   medals?: number[];
   /** What this battle scored them, per metric. See `PlayerBattle["rating"]`. */
   rating: Partial<Record<RatingMetric, number | null>>;
+  /** What they had fitted, per life, when a recording of this battle said so. */
+  loadouts?: BattleLoadout[];
+};
+
+/**
+ * What one vehicle had fitted for one life, where a recording says so.
+ *
+ * Present only for the player whose client recorded the battle, because that
+ * is the only vehicle a replay carries this for: the server strips the optional
+ * devices out of every other vehicle's public information before broadcasting
+ * it. So expect this on at most one participant, and on none at all for a
+ * battle whose replay was never offered.
+ *
+ * An array because a respawn mode gives one loadout per life, in the order they
+ * were played.
+ */
+export type BattleLoadout = {
+  /** Counted from zero, in the order the lives were played. */
+  life: number;
+  /** The devices fitted, by slot; a free slot is a null in place. */
+  optDevices: (string | null)[];
+  boosters: (string | null)[];
+  consumables: (string | null)[];
+  shells: LoadoutShell[];
+  /** One entry per seat, each with the skills that seat was taught. */
+  crew: LoadoutCrewMember[];
 };
 
 /** A whole battle: both teams, named and rated. */
@@ -448,6 +564,16 @@ export type BattleDetail = {
    * to draw. Expect it false far more often than true.
    */
   hasReplay: boolean;
+  /**
+   * The minimap, its extent and the mode's overlay, all three agreeing.
+   *
+   * Here as well as on a list row because a battle has a page of its own now,
+   * and a page resolving its own arena would be a second place for the
+   * mode-shrinks-the-map rule to be got wrong.
+   */
+  mapImage: string | null;
+  mapBounds: ArenaOverlay["bounds"] | null;
+  mapOverlay: ArenaOverlay | null;
   /** Every vehicle, both teams, ordered by team then by what they did. */
   participants: BattleParticipant[];
 };
@@ -486,13 +612,19 @@ export async function battleDetail(
         .filter((id): id is number => Boolean(id)),
     ),
   ];
-  const [book, wn8Expected, wnxExpected, names, badges] = await Promise.all([
-    getVehicleEncyclopedia(region),
-    getWN8ExpectedValues(),
-    getWNXExpectedValues(),
-    nicknamesOf(region, accounts),
-    resolvePlayerBadges(region, accounts),
-  ]);
+  const [book, wn8Expected, wnxExpected, names, badges, minimaps] =
+    await Promise.all([
+      getVehicleEncyclopedia(region),
+      getWN8ExpectedValues(),
+      getWNXExpectedValues(),
+      nicknamesOf(region, accounts),
+      resolvePlayerBadges(region, accounts),
+      minimapsByArena(region),
+    ]);
+  // Read whatever a recording of this battle was able to say about what was
+  // fitted. Decoded once when the file arrived, not here: this is a plain
+  // lookup on the same partition key the battle itself was found by.
+  const fitted = await loadoutsOf(region, arenaUniqueId, battle.startedAt);
   const slugs = new Map<number, string | null>();
   for (const id of new Set(battle.vehicles.map((vehicle) => vehicle.tank))) {
     slugs.set(id, await getTankSlug(region, id));
@@ -530,6 +662,9 @@ export async function battleDetail(
       own: withoutMedals(vehicle),
       ...(vehicle.medals?.length ? { medals: vehicle.medals } : {}),
       rating: rateOne(vehicle, battle.winnerTeam, book, wn8Expected, wnxExpected),
+      ...(fitted.get(vehicle.id)?.length
+        ? { loadouts: fitted.get(vehicle.id) }
+        : {}),
     };
   });
   // The player's own team first, then damage: a reader opens this to find
@@ -550,9 +685,66 @@ export async function battleDetail(
     clientVersion: battle.clientVersion,
     server: battle.server,
     reporters: battle.reportedBy.length,
+    ...drawing(minimaps.get(battle.mapName), battle.gameplayId),
     hasReplay: battle.replayKey !== null,
     participants,
   };
+}
+
+/**
+ * What a recording of this battle said was fitted, by vehicle.
+ *
+ * Keyed on the vehicle rather than the account because that is the key the
+ * rows carry and the key the participants are matched by, and because a bot
+ * has a vehicle but no account. Ordered by life so the first entry is the
+ * first tank taken out.
+ *
+ * Empty for the overwhelming majority of battles, which is the designed state:
+ * a loadout only exists here if somebody's client offered the replay, and the
+ * game keeps one replay at a time by default.
+ */
+async function loadoutsOf(
+  region: Region,
+  arenaUniqueId: string,
+  startedAt: Date,
+): Promise<Map<number, BattleLoadout[]>> {
+  const table = battleLoadoutsByRegion[region];
+  const rows = await db
+    .select({
+      vehicleId: table.vehicleId,
+      life: table.life,
+      optDevices: table.optDevices,
+      boosters: table.boosters,
+      consumables: table.consumables,
+      shells: table.shells,
+      crew: table.crew,
+    })
+    .from(table)
+    // `eq` rather than a raw `sql` template: the template has no idea the
+    // column is a timestamptz and hands the driver the Date untouched, which
+    // fails with "the string argument must be of type string ... received an
+    // instance of Date". The comparison helpers carry the column's type.
+    .where(
+      and(
+        eq(table.startedAt, startedAt),
+        eq(table.arenaUniqueId, arenaUniqueId),
+      ),
+    );
+
+  const out = new Map<number, BattleLoadout[]>();
+  for (const row of rows.sort((a, b) => a.life - b.life)) {
+    const list = out.get(row.vehicleId) ?? [];
+    list.push({
+      life: row.life,
+      optDevices: row.optDevices ?? [],
+      boosters: row.boosters ?? [],
+      consumables: row.consumables ?? [],
+      shells: row.shells ?? [],
+      crew: row.crew ?? [],
+    });
+    out.set(row.vehicleId, list);
+  }
+  return out;
 }
 
 /**

@@ -259,6 +259,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/battles/{id}/loadouts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Battle loadouts
+         * @description What the vehicles of one battle had fitted, already named in the reader's language and pictured. One panel per vehicle per life, and only for the vehicles a recording could speak for: the player whose client recorded the battle, and any team mate they followed after dying. Empty for a battle with no recording, which is most of them. Nothing is ever known this way about the other team.
+         */
+        get: operations["get-{region}-battles-{id}-loadouts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/battles/{id}/replay": {
         parameters: {
             query?: never;
@@ -2474,6 +2494,52 @@ export interface components {
          * @enum {string}
          */
         battleFormatField: "random" | "clan_wars" | "advances" | "skirmish" | "maneuvers" | "onslaught" | "tournament";
+        BattleLoadoutCrew: {
+            /** @description The seat, in the reader's language: commander, gunner, driver… */
+            role: string;
+            /** @description The seat's badge. */
+            roleImage: string | null;
+            /** @description The skills this seat carries, taught or granted by its role, in the order they were learned. */
+            skills: {
+                name: string;
+                image: string;
+            }[];
+        };
+        BattleLoadoutPanel: {
+            /** @description The battle-scoped vehicle id, which is how a panel is matched to a participant. */
+            vehicle: number;
+            /** @description Counted from zero, in the order the lives were played. Always zero outside a mode with respawns. */
+            life: number;
+            optDevices: components["schemas"]["BattleLoadoutSlot"][];
+            boosters: components["schemas"]["BattleLoadoutSlot"][];
+            consumables: components["schemas"]["BattleLoadoutSlot"][];
+            shells: components["schemas"]["BattleLoadoutShell"][];
+            /** @description The field modifications this vehicle carried, in the tree's own order. Present far more often than the rest: a recording carries these for everyone who has any. */
+            fieldMods: components["schemas"]["BattleLoadoutSlot"][];
+            crew: components["schemas"]["BattleLoadoutCrew"][];
+        };
+        BattleLoadoutShell: {
+            /** @description AP, APCR, HEAT or HE, in the reader's language. */
+            kind: string;
+            /** @description How many were loaded. */
+            count: number;
+            /** @description Whether the round costs gold. */
+            premium: boolean;
+            /** @description The round's icon. */
+            image: string;
+        };
+        BattleLoadoutSlot: {
+            /** @description The item's name in the reader's language, or null for a free slot. Position is kept, so a free slot is an entry rather than a gap: a device's grade and category depend on the slot it sits in. */
+            name: string | null;
+            /** @description The item's picture, or null where Wargaming publishes none. A named slot with no picture is drawn as its name, not as a hole. */
+            image: string | null;
+            /** @description The grade mark drawn in the corner, for a device that has one, or null. */
+            overlay: string | null;
+        };
+        BattleLoadoutsResponse: {
+            /** @description One panel per vehicle per life, for the vehicles a recording of this battle could speak for: the player whose client recorded it, and any team mate they followed after dying. Empty for a battle with no recording, which is most of them. Nothing is ever known this way about the other team, because the server strips the devices out of every other vehicle's public information before it is broadcast. */
+            panels: components["schemas"]["BattleLoadoutPanel"][];
+        };
         /** @description One vehicle in a battle, named and rated. */
         BattleParticipant: {
             /** @description Battle-scoped vehicle id, unique within the battle. */
@@ -2503,6 +2569,32 @@ export interface components {
             rating: {
                 [key: string]: number | null;
             };
+            /** @description What this vehicle had fitted, one entry per life. Absent for almost every participant, and that is the designed state: a loadout exists only where a recording of the battle carried it, which means the player who recorded it and any team mate they followed after dying. Nothing is ever known this way about the other team. */
+            loadouts?: {
+                /** @description Counted from zero, in the order the lives were played. Always zero outside a mode with respawns. */
+                life: number;
+                /** @description The optional devices fitted, by slot. A free slot is a null in place, because a device's grade and category depend on which slot it sits in. An item no catalogue here knows keeps its number under an `unknown:` prefix rather than becoming a null, so a filled slot is never mistaken for an empty one. */
+                optDevices: (string | null)[];
+                /** @description Directives fitted, by slot, a free one being null. */
+                boosters: (string | null)[];
+                /** @description Consumables carried, by slot, a free one being null. */
+                consumables: (string | null)[];
+                /** @description The rounds loaded, in the client's own order. */
+                shells: {
+                    name: string;
+                    /** @description ARMOR_PIERCING, ARMOR_PIERCING_CR, HOLLOW_CHARGE or HIGH_EXPLOSIVE, which is what picks the round's icon. */
+                    type: string;
+                    premium: boolean;
+                    count: number;
+                }[];
+                /** @description One entry per seat, each with its own skills. Kept per seat rather than flattened: for the five skills every seat can learn, how many of the crew trained it is the whole effect. */
+                crew: {
+                    /** @description commander, gunner, driver, radioman or loader. */
+                    role: string;
+                    /** @description Skills trained, in the order they were learned. */
+                    skills: string[];
+                }[];
+            }[];
         };
         /** @description A participant's public identity. */
         BattlePlayer: {
@@ -2523,6 +2615,77 @@ export interface components {
             onslaughtBestRank: number | null;
             onslaughtSeasons: number;
         };
+        BattleReplayChatLine: {
+            /** @description The clock tick the line was sent, in the same clock the tracks use. */
+            at: number;
+            /** @description Who typed it, with their clan tag when they had one, exactly as the game wrote it into the recording. */
+            from: string;
+            /** @description The vehicle they were in, or null when the line carries none. */
+            vehicle: string | null;
+            /** @description What they typed, as plain text. The game stores the line as markup; it is taken apart on the way out, so this is never HTML and must never be rendered as any. */
+            text: string;
+            /** @description Whether the sender was on the recording client's own side, read off the colour the game painted the line, which is the only side information the line carries. Always false for a quick command, which carries no colour. */
+            ally: boolean;
+            /** @description The quick command this line is, as the game names it internally (`RELOADINGGUN`, `SOS`, `ATTACK_BASE`), or null for a line somebody typed. The reload callouts, the map pings and the radial menu all travel as an action id on a different packet from the chat, and arrive resolved into the client's own words; repeats inside the game's own five-second cooldown are folded, since a held marker re-sends itself twice a second. */
+            command: string | null;
+            /** @description Where on the map the command pinged, in the arena's own metres, the same frame the tracks use. Null for a command that pings nothing, which is most of them. */
+            where: {
+                x: number;
+                z: number;
+            } | null;
+            /** @description The vehicle a command is about, to match against this battle's own vehicle ids, and null when it is about nobody. The game's messages name it: `Requesting fire at %(target)s!`. */
+            target: number | null;
+            /** @description Seconds left on a reload, for the callouts whose text says so, rounded. */
+            reloadTime: number | null;
+            /** @description A base or objective label the message names, when it names one. */
+            label: string | null;
+            /** @description Who sent a quick command, as an id to match against this battle's own vehicle ids, and null for a typed line. On a real recording it is the sender's vehicle id, the same one the tracks are keyed by; it is not that for every command, a waypoint's being plainly something else, so it is worth showing only where it names a vehicle that was in this battle. */
+            sender: number | null;
+        };
+        BattleReplayDeath: {
+            /** @description The clock tick the vehicle was destroyed, in the recording's clock. */
+            at: number;
+            /** @description The vehicle that died. */
+            victim: number;
+            /** @description The vehicle that finished it, or null: either nobody did (fire, drowning, a fall) or the recording client never saw the shot, since damage only reaches a client for a vehicle it can see. */
+            by: number | null;
+            /** @description What the killing blow took, in hit points, when the recording heard it. */
+            damage: number | null;
+            /** @description How it died, as the game's own `deathReason`: 0 and 30 a shot, 1 fire, 2 ramming, 3 a crash, 5 drowning, 7 overturning, 12 self-destruction, and so on. The game names each one under `common/vehicleState/dead<reason>`, which is what turns a row of this timeline into the sentence the battle results would print. */
+            reason: number | null;
+        };
+        BattleReplayLoadout: {
+            /** @description The vehicle entity this life belongs to. Lives in a respawn mode share a battle but not a tank, so this is what tells them apart. */
+            vehicle: number;
+            /** @description The clock tick the loadout was sent, in the same clock the tracks use, which places the life within the battle. */
+            at: number;
+            /** @description The optional devices fitted, by slot. A free slot is a null in place, because a device's category and grade depend on which slot it sits in. A name this site does not know is also null. */
+            optDevices: (string | null)[];
+            /** @description Directives fitted, by slot, a free one being null. */
+            boosters: (string | null)[];
+            /** @description Consumables carried, by slot, a free one being null. */
+            consumables: (string | null)[];
+            /** @description The rounds loaded, in the client's own order. */
+            shells: components["schemas"]["BattleReplayLoadoutShell"][];
+            /** @description The crew, one entry per seat, each with its own skills. Kept per seat rather than flattened: for the five skills every seat can learn, how many of the crew trained it is the whole effect, and a deduplicated list cannot say. */
+            crew: components["schemas"]["BattleReplayLoadoutCrew"][];
+        };
+        BattleReplayLoadoutCrew: {
+            /** @description commander, gunner, driver, radioman or loader. */
+            role: string;
+            /** @description Skills trained, in the order they were learned. */
+            skills: string[];
+        };
+        BattleReplayLoadoutShell: {
+            /** @description The client's own name for the round, scoped to its nation, the same name the garage loadouts are stored under. */
+            name: string;
+            /** @description ARMOR_PIERCING, ARMOR_PIERCING_CR, HOLLOW_CHARGE or HIGH_EXPLOSIVE, which is what picks the round's icon. */
+            type: string;
+            /** @description Whether the round costs gold. */
+            premium: boolean;
+            /** @description How many of them were loaded. */
+            count: number;
+        };
         BattleReplayResponse: {
             /** @description How long the recording runs, in seconds. */
             duration: number;
@@ -2530,8 +2693,14 @@ export interface components {
             ticksPerSecond: number;
             /** @description The clock tick the countdown ends and the battle begins. Zero when it cannot be worked out. Before it every vehicle sits on its spawn without moving, and since positions are only recorded when they change, a reader must treat that stretch as everybody being visible rather than nobody. */
             startsAt: number;
+            /** @description Every line typed in the battle, in order. Empty for a battle nobody spoke in, which is the commoner case: two of four real recordings carried none at all. */
+            chat: components["schemas"]["BattleReplayChatLine"][];
+            /** @description Every vehicle destroyed, in order. The timing is the battle's own, so a tank nobody watched die is still here; the killer is the recording's, so it is null wherever the client could not see the shot. */
+            deaths: components["schemas"]["BattleReplayDeath"][];
             /** @description One entry per vehicle this battle's recording client could see. A vehicle it never spotted has no track, which is honest fog of war rather than a gap. */
             tracks: components["schemas"]["BattleReplayTrack"][];
+            /** @description What the player who recorded this had fitted, one entry per life: one for an ordinary battle, one per tank taken out in a mode with respawns. Only ever theirs, and empty for a recording whose client version this cannot be read from. */
+            loadouts: components["schemas"]["BattleReplayLoadout"][];
         };
         BattleReplayTrack: {
             /** @description The battle-scoped vehicle id, the same one the battle's participants are keyed by. */
@@ -3526,6 +3695,18 @@ export interface components {
             premium: boolean;
             count: number;
         };
+        loadoutSlot: {
+            /** @description The item's name in the reader's language, or null for a free slot. Here so a preview box can carry a tooltip: ten unlabelled pictures say very little. It is why this endpoint is privately cached rather than shared. */
+            name: string | null;
+            /** @description Whether the slot is occupied. Said outright because a row carries no names to infer it from, and because a slot filled with something no catalogue here can picture must not read as an empty one. */
+            filled: boolean;
+            /** @description The item's picture, or null where Wargaming publishes none. */
+            image: string | null;
+            /** @description The grade badge drawn in the corner, which is what tells a Bounty device from an ordinary one: the picture underneath is the same. */
+            overlay: string | null;
+            /** @description The Equipment 2.0 categories the game dots the box with. */
+            categories?: string[];
+        };
         mapAxisAnswer: {
             axis: components["schemas"]["mapRatingAxisField"];
             value: number;
@@ -4380,7 +4561,7 @@ export interface components {
                     z: number;
                 };
             } | null;
-            /** @description The minimap this arena is actually played on, resolved against the maps catalogue. An Onslaught night arena is played on its own `_comp7` image rather than the daylight one shipped under its name. */
+            /** @description The minimap this battle was actually played on, resolved against the maps catalogue for this battle's own mode. Onslaught redraws most maps into a smaller play area and ships that as its own `_comp7` image, so a `comp7` battle is given that picture rather than the full-size one shipped under the arena's name, whether the arena is an Onslaught-only one or a map that also runs random battles. */
             mapImage: string | null;
             /** @description What this battle's own mode puts on the minimap: base flags, spawn points, the control point and Onslaught's capturable points, already projected into `mapBounds` as percentages of the image. Null when the arena declares nothing for this mode. */
             mapOverlay: components["schemas"]["mapOverlay"] | null;
@@ -4402,6 +4583,20 @@ export interface components {
             rating: {
                 [key: string]: number | null;
             };
+            /** @description The optional devices this account had fitted, by slot, as pictures only. A free slot is a null in place; a slot that was filled with something no catalogue here can picture is an object with a null image, which is a different thing. Absent for almost every battle: a loadout exists only where a recording of it carried one. The first life's, in a mode with respawns. Names are not here on purpose, since naming them would make this list vary by language and cost it its shared cache; the battle's own panel names everything. */
+            devices?: components["schemas"]["loadoutSlot"][];
+            /** @description Directives fitted, by slot, as pictures. Absent when none were, which is the usual case. */
+            boosters?: components["schemas"]["loadoutSlot"][];
+            /** @description Consumables carried, by slot, as pictures. */
+            consumables?: components["schemas"]["loadoutSlot"][];
+            /** @description The rounds loaded, as pictures, in the client's own order and WITHOUT their counts: a row is a glance, and a figure under every box would cost it twice the height. The battle's own panel carries the counts. */
+            shells?: {
+                /** @description AP, APCR, HEAT or HE, in the reader's language. */
+                name: string;
+                image: string;
+            }[];
+            /** @description The field modifications this vehicle carried, as pictures, in the tree's own order so two players on one tank can be compared position by position. Present far more often than the fitted loadout: a recording carries these for everyone who has any, about twelve of the thirty. */
+            fieldMods?: components["schemas"]["loadoutSlot"][];
             /** @description Accounts the battle named, bots excluded. */
             players: number;
             /** @description How many clients reported this battle. Two means two of our players were in it. */
@@ -7322,6 +7517,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BattleDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-battles-{id}-loadouts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BattleLoadoutsResponse"];
                 };
             };
         };
