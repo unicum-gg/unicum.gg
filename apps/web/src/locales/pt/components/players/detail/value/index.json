@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Custo para recriar a mesma garagem através da loja do jogo",
   "every-tank-and-what-it": "Cada tanque e quanto a loja cobra por ele",
   "n-credits": "{units} créditos",
-  "n-free-xp": "{units} XP livre",
+  "n-free-xp": "{units} de Experiência Livre",
   "n-gold": "{units} ouro",
   "n-gold-in-total": "{gold} ouro no total",
   "premiums-label": "Tanques Premium",
   "purchase-label": "Adquirir tanques",
   "rebuild-value": "Valor de reconstrução",
   "research-label": "Pesquisa",
-  "researched-with-free-xp": "{count} tanques pesquisados com XP livre, à taxa do jogo de {rate} XP por ouro.",
+  "researched-with-free-xp": "{count} tanques pesquisados com Experiência Livre, à taxa de {rate} XP por ouro do jogo.",
   "that-is-n-gold": "Isso equivale a {gold} ouro.",
-  "the-real-money-cost-to-research": "O custo em dinheiro real para pesquisar, usando XP livre, e adquirir todos os tanques da conta, com os tanques Premium precificados em ouro."
+  "the-real-money-cost-to-research": "O custo em dinheiro real para pesquisar com Experiência Livre e comprar todos os tanques da conta, considerando os tanques premium pelo preço em ouro."
 }

@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Kostnad for å oppnå samme garasje gjennom butikken i spillet",
   "every-tank-and-what-it": "Hver stridsvogn og hva butikken tar for den",
   "n-credits": "{units} credits",
-  "n-free-xp": "{units} Gratis XP",
+  "n-free-xp": "{units} Fri erfaring",
   "n-gold": "{units} gull",
   "n-gold-in-total": "{gold} gull totalt",
   "premiums-label": "Premium-stridsvogner",
   "purchase-label": "Kjøp av stridsvogner",
   "rebuild-value": "Gjenoppbyggingsverdi",
   "research-label": "Utvikling",
-  "researched-with-free-xp": "{count} stridsvogner utviklet med Gratis XP, til spillets rate på {rate} XP per gull.",
+  "researched-with-free-xp": "{count} stridsvogner forsket frem med Fri erfaring, med spillets rate på {rate} XP per gull.",
   "that-is-n-gold": "Det er {gold} gull.",
-  "the-real-money-cost-to-research": "Kostnaden i faktiske penger for å utvikle med gratis XP og kjøpe alle stridsvognene på kontoen, med Premium-stridsvogner priset i gull."
+  "the-real-money-cost-to-research": "Den faktiske kostnaden i penger for å forske på (Fri erfaring) og kjøpe hver stridsvogn på kontoen, med premiumstridsvogner priset i gull."
 }

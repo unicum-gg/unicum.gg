@@ -13,7 +13,7 @@
       "tip": "XP nécessaire pour débloquer (chemin le moins coûteux)"
     },
     "totalFreeXp": {
-      "label": "Expérience libre (rang {tier})",
+      "label": "Expérience libre (T{tier})",
       "tip": "XP cumulée nécessaire pour débloquer le char à partir du rang {tier}, modules prérequis inclus"
     },
     "shellCost": {
@@ -30,17 +30,17 @@
     },
     "freeXpMoney": {
       "label": "Expérience libre ({currency})",
-      "tip": "Coût estimé en argent réel pour débloquer le char avec de l’XP libre à partir du rang {tier}, en {currency}"
+      "tip": "Coût estimé en argent réel pour rechercher le char avec l’Expérience libre du niveau {tier}, en {currency}"
     }
   },
   "selector": {
     "buyCredits": "Coût (crédits)",
     "buyGold": "Coût (or)",
     "researchXp": "XP de recherche",
-    "totalFreeXp": "XP gratuit",
+    "totalFreeXp": "Expérience libre",
     "shellCost": "Coût des obus",
     "ammoCost": "Coût complet des munitions",
     "acquireMoney": "Coût d’achat (argent réel)",
-    "freeXpMoney": "Expérience libre (argent réel)"
+    "freeXpMoney": "Expérience libre (argent)"
   }
 }

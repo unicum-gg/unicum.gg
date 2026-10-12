@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Costo per ottenere lo stesso garage tramite il negozio di gioco",
   "every-tank-and-what-it": "Ogni carro armato e quanto costa nel negozio",
   "n-credits": "{units} crediti",
-  "n-free-xp": "{units} Exp gratuita",
+  "n-free-xp": "{units} Esperienza tecnica",
   "n-gold": "{units} oro",
   "n-gold-in-total": "{gold} oro in totale",
   "premiums-label": "Carri armati Premium",
   "purchase-label": "Acquisti di carri armati",
   "rebuild-value": "Valore di ricostruzione",
   "research-label": "Ricerca",
-  "researched-with-free-xp": "{count} carri armati ricercati con Exp gratuita, al tasso del gioco di {rate} Exp per oro.",
+  "researched-with-free-xp": "{count} carri armati ricercati con l’Esperienza tecnica, al tasso del gioco di {rate} XP per oro.",
   "that-is-n-gold": "Sono {gold} oro.",
-  "the-real-money-cost-to-research": "Il costo in denaro reale per ricercare con Exp gratuita e acquistare ogni carro armato dell’account, con i Premium prezzati in oro."
+  "the-real-money-cost-to-research": "Il costo in denaro reale per ricercare con l’Esperienza tecnica e acquistare ogni carro armato dell’account, con i carri premium al prezzo in oro."
 }

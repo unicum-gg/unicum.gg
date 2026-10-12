@@ -748,7 +748,9 @@
     "total": "الإجمالي",
     "stream": "البث المباشر",
     "Open & live": "مفتوح ومباشر",
-    "alive": "حي"
+    "alive": "حي",
+    "Free Experience": "الخبرة الحرة",
+    "research": "البحث"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1499,7 +1501,9 @@
     "total": "усяго",
     "stream": "стрым",
     "Open & live": "Адкрытыя і жывыя",
-    "alive": "жывы"
+    "alive": "жывы",
+    "Free Experience": "Вольны вопыт",
+    "research": "даследаванне"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2459,7 +2463,9 @@
     "stream": "стрийм",
     "Affirmative!": "Тъй вярно!",
     "Open & live": "Отворени и активни",
-    "alive": "активен"
+    "alive": "активен",
+    "Combat Experience": "Боен опит",
+    "research": "проучване"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3217,7 +3223,9 @@
     "total": "ukupno",
     "stream": "prijenos uživo",
     "Open & live": "Otvoreno i uživo",
-    "alive": "živo"
+    "alive": "živo",
+    "Free Experience": "Slobodno iskustvo",
+    "research": "istraživanje"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4188,7 +4196,9 @@
     "stream": "stream",
     "Affirmative!": "Potvrzuji!",
     "Open & live": "Otevřené a živé",
-    "alive": "aktivní"
+    "alive": "aktivní",
+    "Combat Experience": "Bojové zkušenosti",
+    "research": "výzkum"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5165,7 +5175,9 @@
     "stream": "stream",
     "Affirmative!": "Bekræftet!",
     "Open & live": "Åben & live",
-    "alive": "i live"
+    "alive": "i live",
+    "Combat Experience": "Kamp xp",
+    "research": "forskning"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6135,7 +6147,9 @@
     "stream": "stream",
     "Affirmative!": "Verstanden!",
     "Open & live": "Offen & live",
-    "alive": "aktiv"
+    "alive": "aktiv",
+    "Combat Experience": "Gefechtserfahrung",
+    "research": "Forschung"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7111,7 +7125,9 @@
     "stream": "ροή",
     "Affirmative!": "Θετικό!",
     "Open & live": "Ανοιχτά & ζωντανά",
-    "alive": "ζωντανά"
+    "alive": "ζωντανά",
+    "Combat Experience": "Combat Experience",
+    "research": "έρευνα"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8067,7 +8083,9 @@
     "stream": "directo",
     "Affirmative!": "¡Afirmativo!",
     "Open & live": "Abierto y activo",
-    "alive": "vivo"
+    "alive": "vivo",
+    "Combat Experience": "Experiencia de combate",
+    "research": "investigación"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9048,7 +9066,8 @@
     "stream": "striimi",
     "Affirmative!": "Selvä!",
     "Open & live": "Avoin ja käynnissä",
-    "alive": "elossa"
+    "alive": "elossa",
+    "research": "tutkimus"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10008,7 +10027,9 @@
     "stream": "stream",
     "Affirmative!": "Affirmatif !",
     "Open & live": "Ouvert & en direct",
-    "alive": "actif"
+    "alive": "actif",
+    "Combat Experience": "Expérience de bataille",
+    "research": "recherche"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -10760,7 +10781,9 @@
     "total": "कुल",
     "stream": "स्ट्रीम",
     "Open & live": "खुला और लाइव",
-    "alive": "सक्रिय"
+    "alive": "सक्रिय",
+    "Free Experience": "मुफ़्त अनुभव",
+    "research": "शोध"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11734,7 +11757,9 @@
     "stream": "prijenos uživo",
     "Affirmative!": "Razumijem!",
     "Open & live": "Otvoreno i uživo",
-    "alive": "aktivni"
+    "alive": "aktivni",
+    "Combat Experience": "Borbeno iskustvo",
+    "research": "istraživanje"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12710,7 +12735,9 @@
     "stream": "közvetítés",
     "Affirmative!": "Értettem!",
     "Open & live": "Nyitott és élő",
-    "alive": "élő"
+    "alive": "élő",
+    "Combat Experience": "Harci tapasztalat",
+    "research": "kutatás"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13682,7 +13709,9 @@
     "stream": "stream",
     "Affirmative!": "Affermativo!",
     "Open & live": "Aperto e in tempo reale",
-    "alive": "attivo"
+    "alive": "attivo",
+    "Combat Experience": "Esperienza di battaglia",
+    "research": "ricerca"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14661,7 +14690,9 @@
     "stream": "配信",
     "Affirmative!": "了解！",
     "Open & live": "募集中・開催中",
-    "alive": "生存"
+    "alive": "生存",
+    "Combat Experience": "戦闘EXP",
+    "research": "研究"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15416,7 +15447,9 @@
     "total": "жалпы",
     "stream": "стрим",
     "Open & live": "Ашық әрі белсенді",
-    "alive": "белсенді"
+    "alive": "белсенді",
+    "Free Experience": "Еркін тәжірибе",
+    "research": "зерттеу"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16400,7 +16433,9 @@
     "stream": "방송",
     "Affirmative!": "확인",
     "Open & live": "공개 및 실시간",
-    "alive": "생존"
+    "alive": "생존",
+    "Combat Experience": "일반 경험치",
+    "research": "연구"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17379,7 +17414,9 @@
     "stream": "srautas",
     "Affirmative!": "Tikrai taip!",
     "Open & live": "Atvira ir tiesioginė",
-    "alive": "gyva"
+    "alive": "gyva",
+    "Combat Experience": "Kovinė patirtis",
+    "research": "tyrimai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18344,7 +18381,9 @@
     "stream": "straume",
     "Affirmative!": "Sapratu!",
     "Open & live": "Atvērts un aktīvs",
-    "alive": "aktīvs"
+    "alive": "aktīvs",
+    "Combat Experience": "Kaujas pieredze",
+    "research": "izpēte"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19325,7 +19364,9 @@
     "stream": "stream",
     "Affirmative!": "Begrepen!",
     "Open & live": "Open & live",
-    "alive": "in leven"
+    "alive": "in leven",
+    "Combat Experience": "Gevechtservaring",
+    "research": "onderzoek"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20297,7 +20338,9 @@
     "stream": "strømming",
     "Affirmative!": "Bekreftet!",
     "Open & live": "Åpen og live",
-    "alive": "live"
+    "alive": "live",
+    "Combat Experience": "Erfaringspoeng",
+    "research": "forskning"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21266,7 +21309,9 @@
     "stream": "stream",
     "Affirmative!": "Tak jest!",
     "Open & live": "Otwarte i na żywo",
-    "alive": "żywy"
+    "alive": "żywy",
+    "Combat Experience": "Doświadczenie bojowe",
+    "research": "badania"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22228,7 +22273,9 @@
     "stream": "transmissão",
     "Affirmative!": "Afirmativo!",
     "Open & live": "Aberto e ao vivo",
-    "alive": "vivo"
+    "alive": "vivo",
+    "Combat Experience": "Experiência de Batalha",
+    "research": "pesquisa"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23190,7 +23237,9 @@
     "stream": "stream",
     "Affirmative!": "Recepționat!",
     "Open & live": "Deschis și în desfășurare",
-    "alive": "activ"
+    "alive": "activ",
+    "Combat Experience": "Experienţă de luptă",
+    "research": "cercetare"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24139,7 +24188,9 @@
     "stream": "стрим",
     "Affirmative!": "Так точно!",
     "Open & live": "Открытые и активные",
-    "alive": "активен"
+    "alive": "активен",
+    "Combat Experience": "Боевой опыт",
+    "research": "исследование"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -24895,7 +24946,9 @@
     "total": "celkom",
     "stream": "prenos",
     "Open & live": "Otvorené a prebiehajúce",
-    "alive": "nažive"
+    "alive": "nažive",
+    "Free Experience": "Proste izkušnje",
+    "research": "raziskovanje"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -25871,7 +25924,9 @@
     "stream": "strim",
     "Affirmative!": "Razumem!",
     "Open & live": "Отворено и уживо",
-    "alive": "жив"
+    "alive": "жив",
+    "Combat Experience": "Borbeno iskustvo",
+    "research": "istraživanje"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -26852,7 +26907,9 @@
     "stream": "stream",
     "Affirmative!": "Uppfattat!",
     "Open & live": "Öppen & live",
-    "alive": "vid liv"
+    "alive": "vid liv",
+    "Combat Experience": "Stridserfarenhet",
+    "research": "forskning"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -27829,7 +27886,9 @@
     "stream": "สตรีม",
     "Affirmative!": "รับทราบ!",
     "Open & live": "เปิดรับสมัครและกำลังดำเนินอยู่",
-    "alive": "ยังมีชีวิตอยู่"
+    "alive": "ยังมีชีวิตอยู่",
+    "Combat Experience": "ประสบการณ์การรบ",
+    "research": "วิจัย"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -28586,7 +28645,9 @@
     "total": "kabuuan",
     "stream": "stream",
     "Open & live": "Bukas at live",
-    "alive": "buhay"
+    "alive": "buhay",
+    "Free Experience": "Libreng Karanasan",
+    "research": "pananaliksik"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -29559,7 +29620,9 @@
     "stream": "akış",
     "Affirmative!": "Olumlu!",
     "Open & live": "Açık ve canlı",
-    "alive": "hayatta"
+    "alive": "hayatta",
+    "Combat Experience": "Savaş Deneyimi",
+    "research": "araştırma"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -30525,7 +30588,9 @@
     "stream": "стрім",
     "Affirmative!": "Так!",
     "Open & live": "Відкриті й активні",
-    "alive": "активний"
+    "alive": "активний",
+    "Combat Experience": "Бойовий досвід",
+    "research": "дослідження"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -31479,7 +31544,9 @@
     "total": "tổng",
     "stream": "phát trực tiếp",
     "Open & live": "Đang mở & đang diễn ra",
-    "alive": "sống sót"
+    "alive": "sống sót",
+    "Combat Experience": "Kinh nghiệm Chiến đấu",
+    "research": "nghiên cứu"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -32456,6 +32523,8 @@
     "stream": "直播",
     "Affirmative!": "收到！",
     "Open & live": "开放与进行中",
-    "alive": "存活"
+    "alive": "存活",
+    "Combat Experience": "战斗经验",
+    "research": "研发"
   }
 }

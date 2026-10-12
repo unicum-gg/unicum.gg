@@ -13,7 +13,7 @@
       "tip": "XP zum Freischalten (günstigster Weg)"
     },
     "totalFreeXp": {
-      "label": "Freie XP (Stufe {tier})",
+      "label": "Freie Erfahrung (Stufe {tier})",
       "tip": "Kumulierte EP für die Erforschung ab Stufe {tier}, einschließlich erforderlicher Module"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Geschätzte Echtgeldkosten für den Erwerb des Panzers (Erforschung + Kauf), in {currency}"
     },
     "freeXpMoney": {
-      "label": "Freie XP ({currency})",
-      "tip": "Geschätzte Echtgeldkosten, um den Panzer ab Stufe {tier} mit freien EP zu erforschen, in {currency}"
+      "label": "Freie Erfahrung ({currency})",
+      "tip": "Geschätzte Echtgeldkosten für die Forschung des Panzers durch Freie Erfahrung ab Stufe {tier}, in {currency}"
     }
   },
   "selector": {
     "buyCredits": "Kosten (Credits)",
     "buyGold": "Kosten (Gold)",
     "researchXp": "Forschungs-XP",
-    "totalFreeXp": "Freie XP",
+    "totalFreeXp": "Freie Erfahrung",
     "shellCost": "Geschosskosten",
     "ammoCost": "Kosten für volle Munition",
     "acquireMoney": "Kaufpreis (Geld)",
-    "freeXpMoney": "Freie XP (Geld)"
+    "freeXpMoney": "Freie Erfahrung (Geld)"
   }
 }

@@ -154,6 +154,10 @@
     "common-test": "Жалпы Тест",
     "tournaments": "Турнирлер"
   },
+  "resources": {
+    "free-experience": "Еркін тәжірибе",
+    "combat-experience": "Жауынгерлік тәжірибе"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Mark",

@@ -154,14 +154,14 @@
     "common-test": "Κοινό Τεστ",
     "tournaments": "Τουρνουά"
   },
+  "resources": {
+    "free-experience": "Free Experience",
+    "combat-experience": "Combat Experience"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Διακριτικά Υπεροχής"
-  },
-  "resources": {
-    "free-experience": "Free Experience",
-    "combat-experience": "Combat Experience"
   }
 }

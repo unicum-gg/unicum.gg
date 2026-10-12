@@ -154,14 +154,14 @@
     "common-test": "공통 테스트",
     "tournaments": "토너먼트"
   },
+  "resources": {
+    "free-experience": "자유 경험치",
+    "combat-experience": "일반 경험치"
+  },
   "marks": {
     "1": "1 마크",
     "2": "2 마크",
     "3": "3 마크",
     "name": "화력의 증표"
-  },
-  "resources": {
-    "free-experience": "자유 경험치",
-    "combat-experience": "일반 경험치"
   }
 }

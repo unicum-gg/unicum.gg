@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Preis für dieselbe Garage über den In-Game-Shop",
   "every-tank-and-what-it": "Jeder Panzer und der Preis, den der Shop dafür verlangt",
   "n-credits": "{units} Kreditpunkte",
-  "n-free-xp": "{units} Freie XP",
+  "n-free-xp": "{units} Freie Erfahrung",
   "n-gold": "{units} Gold",
   "n-gold-in-total": "Insgesamt {gold} Gold",
   "premiums-label": "Premium-Panzer",
   "purchase-label": "Panzerkäufe",
   "rebuild-value": "Wiederaufbauwert",
   "research-label": "Erforschen",
-  "researched-with-free-xp": "{count} Panzer, die mit Freier XP erforscht wurden, nach der Spiel-Rate von {rate} XP pro Gold.",
+  "researched-with-free-xp": "{count} Panzer durch Freie Erfahrung erforscht, zum Spielkurs von {rate} Erfahrung pro Gold.",
   "that-is-n-gold": "Das sind {gold} Gold.",
-  "the-real-money-cost-to-research": "Die Echtgeldkosten für das Erforschen mit Freier XP und den Kauf jedes Panzers auf dem Konto, wobei Premium-Panzer in Gold bewertet werden."
+  "the-real-money-cost-to-research": "Die Echtgeldkosten für die Forschung durch Freie Erfahrung und den Kauf jedes Panzers auf dem Konto, Premiumfahrzeuge zum Goldpreis."
 }

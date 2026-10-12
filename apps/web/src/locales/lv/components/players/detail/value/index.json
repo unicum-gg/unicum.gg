@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Izmaksas, lai spēles veikalā iegūtu tādu pašu garāžu",
   "every-tank-and-what-it": "Katrs tanks un cena, ko veikals par to prasa",
   "n-credits": "{units} kredīti",
-  "n-free-xp": "{units} Brīvs XP",
+  "n-free-xp": "{units} Brīvā pieredze",
   "n-gold": "{units} zelts",
   "n-gold-in-total": "Kopā {gold} zelts",
   "premiums-label": "Premium tanki",
   "purchase-label": "Nopirkt",
   "rebuild-value": "Rebuild vērtība",
   "research-label": "Izpētīt",
-  "researched-with-free-xp": "{count} tanki izpētīti ar Brīvs XP pēc spēles kursa {rate} XP par zeltu.",
+  "researched-with-free-xp": "{count} tanki izpētīti ar Brīvo pieredzi, izmantojot spēles likmi {rate} pieredzes par zeltu.",
   "that-is-n-gold": "Tas ir {gold} zelts.",
-  "the-real-money-cost-to-research": "Reālās naudas izmaksas, lai izpētītu ar Brīvs XP un nopirktu visus konta tankus, Premium tankiem cenu nosakot zeltā."
+  "the-real-money-cost-to-research": "Reālās naudas izmaksas, lai ar Brīvo pieredzi izpētītu un iegādātos visus konta tankus, premium tanku cenas izteiktas zeltā."
 }

@@ -154,14 +154,14 @@
     "common-test": "Algemene Test",
     "tournaments": "Toernooien"
   },
+  "resources": {
+    "free-experience": "Vrije ervaring",
+    "combat-experience": "Gevechtservaring"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Markeringen van uitmuntendheid"
-  },
-  "resources": {
-    "free-experience": "Vrije ervaring",
-    "combat-experience": "Gevechtservaring"
   }
 }

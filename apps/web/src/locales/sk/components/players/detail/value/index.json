@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Náklady na získanie rovnakej garáže prostredníctvom obchodu v hre",
   "every-tank-and-what-it": "Každý tank a cena, ktorú zaň účtuje obchod",
   "n-credits": "{units} kredity",
-  "n-free-xp": "{units} Voľný XP",
+  "n-free-xp": "{units} Proste izkušnje",
   "n-gold": "{units} zlato",
   "n-gold-in-total": "Spolu {gold} zlato",
   "premiums-label": "Prémiové tanky",
   "purchase-label": "Nákupy tankov",
   "rebuild-value": "Hodnota obnovy",
   "research-label": "Výskum",
-  "researched-with-free-xp": "{count} tanky preskúmané pomocou Voľný XP podľa hernej miery {rate} XP za zlato.",
+  "researched-with-free-xp": "{count} tankov preskúmaných pomocou Proste izkušnje pri hernej miere {rate} XP za zlato.",
   "that-is-n-gold": "To je {gold} zlato.",
-  "the-real-money-cost-to-research": "Skutočná peňažná cena za výskum pomocou Voľný XP a nákup všetkých tankov na račun, pričom Prémiové tanky sú ocenené v zlate."
+  "the-real-money-cost-to-research": "Cena v skutočných peniazoch za raziskovanie (Proste izkušnje) a nákup každého tanku na účet, pričom prémiové tanky sú ocenené v zlate."
 }

@@ -13,7 +13,7 @@
       "tip": "Kilidi açmak için gereken XP (en ucuz yol)"
     },
     "totalFreeXp": {
-      "label": "Ücretsiz XP (T{tier})",
+      "label": "Serbest Deneyim (S{tier})",
       "tip": "{tier} seviyeden araştırmak için gereken toplam XP, ön koşul modülleri dâhil"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Tankı edinmek için tahmini gerçek para maliyeti (araştırma + satın alma), {currency} cinsinden"
     },
     "freeXpMoney": {
-      "label": "Ücretsiz XP ({currency})",
-      "tip": "Tankı {tier} seviyeden Ücretsiz XP ile açmak için tahmini gerçek para maliyeti, {currency} cinsinden"
+      "label": "Serbest Deneyim ({currency})",
+      "tip": "{tier} seviyeden Serbest Deneyim kullanılarak tankı araştırmanın {currency} cinsinden tahmini gerçek para maliyeti"
     }
   },
   "selector": {
     "buyCredits": "Maliyet (kredi)",
     "buyGold": "Maliyet (altın)",
     "researchXp": "Araştırma XP",
-    "totalFreeXp": "Ücretsiz XP",
+    "totalFreeXp": "Serbest Deneyim",
     "shellCost": "Mühimmat maliyeti",
     "ammoCost": "Tam mühimmat maliyeti",
     "acquireMoney": "Satın alma maliyeti (para)",
-    "freeXpMoney": "Ücretsiz XP (para)"
+    "freeXpMoney": "Serbest Deneyim (para)"
   }
 }

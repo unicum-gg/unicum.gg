@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Oyun içi mağazadan aynı garaja ulaşma maliyeti",
   "every-tank-and-what-it": "Her tank ve mağazanın bunun için talep ettiği fiyat",
   "n-credits": "{units} kredi",
-  "n-free-xp": "{units} Ücretsiz XP",
+  "n-free-xp": "{units} Serbest Deneyim",
   "n-gold": "{units} altın",
   "n-gold-in-total": "Toplam {gold} altın",
   "premiums-label": "Premium tanklar",
   "purchase-label": "Tank satın alımları",
   "rebuild-value": "Yeniden yapılandırma değeri",
   "research-label": "Araştır",
-  "researched-with-free-xp": "Ücretsiz XP ile araştırılan {count} tanklar, oyunun altın başına {rate} XP değerlendirmesi üzerinden.",
+  "researched-with-free-xp": "Serbest Deneyim ile araştırılan tank sayısı: {count}, oyunun altın başına {rate} Deneyim değerlendirmesiyle.",
   "that-is-n-gold": "Bu, {gold} altın eder.",
-  "the-real-money-cost-to-research": "Hesaptaki tüm tankları araştırmanın, yani Ücretsiz XP kullanmanın ve satın almanın gerçek para maliyeti, Premium tanklar altın üzerinden fiyatlandırılmıştır."
+  "the-real-money-cost-to-research": "Hesaptaki tüm tankları araştırma (Serbest Deneyim) ve satın alma için gerçek para maliyeti, premium tankların fiyatı altın cinsindendir."
 }

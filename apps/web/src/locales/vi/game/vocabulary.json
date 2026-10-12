@@ -154,14 +154,14 @@
     "common-test": "Kiểm tra chung",
     "tournaments": "Tour đấu"
   },
+  "resources": {
+    "free-experience": "Kinh nghiệm Tự do",
+    "combat-experience": "Kinh nghiệm Chiến đấu"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Dấu hiệu Thiện chiến"
-  },
-  "resources": {
-    "free-experience": "Kinh nghiệm Tự do",
-    "combat-experience": "Kinh nghiệm Chiến đấu"
   }
 }

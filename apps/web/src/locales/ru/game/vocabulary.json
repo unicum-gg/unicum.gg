@@ -154,14 +154,14 @@
     "common-test": "Общий тест",
     "tournaments": "Турниры"
   },
+  "resources": {
+    "free-experience": "Свободный опыт",
+    "combat-experience": "Боевой опыт"
+  },
   "marks": {
     "1": "1 Знак",
     "2": "2 Знака",
     "3": "3 Знака",
     "name": "Отличительные отметки"
-  },
-  "resources": {
-    "free-experience": "Свободный опыт",
-    "combat-experience": "Боевой опыт"
   }
 }

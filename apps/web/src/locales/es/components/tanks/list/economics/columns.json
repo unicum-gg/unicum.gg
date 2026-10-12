@@ -13,7 +13,7 @@
       "tip": "XP necesaria para desbloquear (ruta más barata)"
     },
     "totalFreeXp": {
-      "label": "XP gratis (T{tier})",
+      "label": "Experiencia libre (nivel {tier})",
       "tip": "XP acumulada necesaria para investigar desde el nivel {tier}, incluidos los módulos requeridos"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Dinero real estimado para adquirir el tanque (investigación + compra), en {currency}"
     },
     "freeXpMoney": {
-      "label": "XP gratis ({currency})",
-      "tip": "Dinero real estimado para investigar el tanque con XP libre desde el nivel {tier}, en {currency}"
+      "label": "Experiencia libre ({currency})",
+      "tip": "Dinero real estimado para investigar el tanque con Experiencia libre desde el nivel {tier}, en {currency}"
     }
   },
   "selector": {
     "buyCredits": "Coste (créditos)",
     "buyGold": "Coste (oro)",
     "researchXp": "XP de investigación",
-    "totalFreeXp": "XP gratis",
+    "totalFreeXp": "Experiencia libre",
     "shellCost": "Coste del proyectil",
     "ammoCost": "Coste de munición completa",
     "acquireMoney": "Coste de compra (dinero)",
-    "freeXpMoney": "XP gratis (dinero)"
+    "freeXpMoney": "Experiencia libre (dinero)"
   }
 }

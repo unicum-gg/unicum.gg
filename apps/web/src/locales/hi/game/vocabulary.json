@@ -154,6 +154,10 @@
     "common-test": "सामान्य परीक्षण",
     "tournaments": "टूर्नामेंट्स"
   },
+  "resources": {
+    "free-experience": "मुफ़्त अनुभव",
+    "combat-experience": "युद्ध अनुभव"
+  },
   "marks": {
     "1": "1 मार्क",
     "2": "2 मार्क्स",

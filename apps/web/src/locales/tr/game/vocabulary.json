@@ -154,14 +154,14 @@
     "common-test": "Ortak Test",
     "tournaments": "Turnuvalar"
   },
+  "resources": {
+    "free-experience": "Serbest Deneyim",
+    "combat-experience": "Savaş Deneyimi"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Mark",
     "3": "3 Mark",
     "name": "Mükemmellik İşaretleri"
-  },
-  "resources": {
-    "free-experience": "Serbest Deneyim",
-    "combat-experience": "Savaş Deneyimi"
   }
 }

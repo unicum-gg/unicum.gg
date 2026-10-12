@@ -154,6 +154,10 @@
     "common-test": "Агульны тест",
     "tournaments": "Турніры"
   },
+  "resources": {
+    "free-experience": "Вольны вопыт",
+    "combat-experience": "Баявы вопыт"
+  },
   "marks": {
     "1": "1 Марка",
     "2": "2 Маркі",

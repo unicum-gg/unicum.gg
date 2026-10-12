@@ -13,7 +13,7 @@
       "tip": "Exp necessaria per lo sblocco (percorso meno costoso)"
     },
     "totalFreeXp": {
-      "label": "Exp tecnica (T{tier})",
+      "label": "Esperienza tecnica (L{tier})",
       "tip": "XP cumulativa necessaria per la ricerca a partire dal livello {tier}, moduli prerequisiti inclusi"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Costo stimato in denaro reale per ottenere il carro (ricerca + acquisto), in {currency}"
     },
     "freeXpMoney": {
-      "label": "Exp tecnica ({currency})",
-      "tip": "Costo stimato in denaro reale per ricercare il carro usando XP libera a partire dal livello {tier}, in {currency}"
+      "label": "Esperienza tecnica ({currency})",
+      "tip": "Denaro reale stimato per ricercare il carro armato con l’Esperienza tecnica dal livello {tier}, in {currency}"
     }
   },
   "selector": {
     "buyCredits": "Costo (crediti)",
     "buyGold": "Costo (oro)",
     "researchXp": "Exp ricerca",
-    "totalFreeXp": "Exp gratuita",
+    "totalFreeXp": "Esperienza tecnica",
     "shellCost": "Costo proiettile",
     "ammoCost": "Costo munizioni completo",
     "acquireMoney": "Costo d’acquisto (denaro reale)",
-    "freeXpMoney": "Exp tecnica (denaro reale)"
+    "freeXpMoney": "Esperienza tecnica (denaro)"
   }
 }

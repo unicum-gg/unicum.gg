@@ -13,7 +13,7 @@
       "tip": "XP atrakinimui (pigiausias kelias)"
     },
     "totalFreeXp": {
-      "label": "Laisva XP (T{tier})",
+      "label": "Laisvoji patirtis (T{tier})",
       "tip": "Bendra XP suma, reikalinga ištirti nuo {tier} lygio, įskaitant būtinuosius modulius"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Apskaičiuota tikrų pinigų suma tankui įsigyti (tyrimui ir pirkimui), {currency} valiuta"
     },
     "freeXpMoney": {
-      "label": "Laisva XP ({currency})",
-      "tip": "Apskaičiuota tikrų pinigų suma tankui ištirti naudojant Laisvą XP nuo {tier} lygio, {currency} valiuta"
+      "label": "Laisvoji patirtis ({currency})",
+      "tip": "Apskaičiuota kaina tikrais pinigais tankui ištirti naudojant Laisvąją patirtį iš {tier} lygio, valiuta: {currency}"
     }
   },
   "selector": {
     "buyCredits": "Kaina (kreditas)",
     "buyGold": "Kaina (aukso)",
     "researchXp": "Tyrimų XP",
-    "totalFreeXp": "Laisva XP",
+    "totalFreeXp": "Laisvoji patirtis",
     "shellCost": "Šaudmenų kaina",
     "ammoCost": "Viso šaudmenų kaina",
     "acquireMoney": "Pirkimo kaina (pinigai)",
-    "freeXpMoney": "Laisva XP (pinigai)"
+    "freeXpMoney": "Laisvoji patirtis (pinigais)"
   }
 }

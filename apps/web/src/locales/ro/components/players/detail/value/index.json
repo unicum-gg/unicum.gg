@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Costul pentru a ajunge la același garaj prin magazinul din joc",
   "every-tank-and-what-it": "Fiecare tanc și prețul solicitat de magazin",
   "n-credits": "{units} credite",
-  "n-free-xp": "{units} XP gratuit",
+  "n-free-xp": "{units} Experiență liberă",
   "n-gold": "{units} aur",
   "n-gold-in-total": "În total, {gold} aur",
   "premiums-label": "Tancuri Premium",
   "purchase-label": "Achiziții de tancuri",
   "rebuild-value": "Valoare de reconstrucție",
   "research-label": "Cercetare",
-  "researched-with-free-xp": "{count} tancuri cercetate cu XP gratuit, la rata din joc de {rate} XP pentru un aur.",
+  "researched-with-free-xp": "{count} tancuri cercetate cu Experiență liberă, la rata de {rate} XP per aur a jocului.",
   "that-is-n-gold": "Asta înseamnă {gold} aur.",
-  "the-real-money-cost-to-research": "Costul în bani reali pentru a cerceta cu XP gratuit și a cumpăra fiecare tanc al contului, cu tancurile Premium evaluate în aur."
+  "the-real-money-cost-to-research": "Costul în bani reali pentru cercetarea cu Experiență liberă și cumpărarea tuturor tancurilor din cont, cu tancurile premium evaluate în aur."
 }

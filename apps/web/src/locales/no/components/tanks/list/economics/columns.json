@@ -13,7 +13,7 @@
       "tip": "XP for å låse opp (billigste vei)"
     },
     "totalFreeXp": {
-      "label": "Gratis XP (T{tier})",
+      "label": "Fri erfaring (nivå {tier})",
       "tip": "Samlet XP som kreves for å forske fra nivå {tier}, inkludert nødvendige moduler"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Beregnet faktisk pengebeløp for å skaffe stridsvognen (forskning + kjøp), i {currency}"
     },
     "freeXpMoney": {
-      "label": "Gratis XP ({currency})",
-      "tip": "Anslått kostnad i ekte penger for å bruke Gratis XP på stridsvognen fra nivå {tier}, i {currency}"
+      "label": "Fri erfaring ({currency})",
+      "tip": "Anslått kostnad i faktiske penger for å forske frem stridsvognen med Fri erfaring fra nivå {tier}, i {currency}"
     }
   },
   "selector": {
     "buyCredits": "Kostnad (kreditter)",
     "buyGold": "Kostnad (gull)",
     "researchXp": "Forskning XP",
-    "totalFreeXp": "Gratis XP",
+    "totalFreeXp": "Fri erfaring",
     "shellCost": "Projiseringskostnad",
     "ammoCost": "Full ammunisjonskostnad",
     "acquireMoney": "Kjøpskostnad (penger)",
-    "freeXpMoney": "Gratis XP (penger)"
+    "freeXpMoney": "Fri erfaring (penger)"
   }
 }

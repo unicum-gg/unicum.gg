@@ -13,7 +13,7 @@
       "tip": "अनलॉक करने के लिए XP (सबसे सस्ता मार्ग)"
     },
     "totalFreeXp": {
-      "label": "फ़्री XP (T{tier})",
+      "label": "मुफ़्त अनुभव (T{tier})",
       "tip": "टियर {tier} से शोध करने के लिए संचयी XP, आवश्यक मॉड्यूल सहित"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "टैंक प्राप्त करने के लिए अनुमानित वास्तविक धन (शोध + खरीद), {currency} में"
     },
     "freeXpMoney": {
-      "label": "फ़्री XP ({currency})",
-      "tip": "टियर {tier} से टैंक को फ्री XP करने की अनुमानित वास्तविक धनराशि, {currency} में"
+      "label": "मुफ़्त अनुभव ({currency})",
+      "tip": "{currency} में टियर {tier} से मुफ़्त अनुभव का उपयोग करके टैंक पर शोध करने के लिए अनुमानित वास्तविक धनराशि"
     }
   },
   "selector": {
     "buyCredits": "Cost (credits)",
     "buyGold": "Cost (gold)",
     "researchXp": "अनुसंधान XP",
-    "totalFreeXp": "फ्री XP",
+    "totalFreeXp": "मुफ़्त अनुभव",
     "shellCost": "गोला लागत",
     "ammoCost": "पूर्ण गोला बारूद लागत",
     "acquireMoney": "खरीदने की लागत (धन)",
-    "freeXpMoney": "फ्री XP (धन)"
+    "freeXpMoney": "मुफ़्त अनुभव (धनराशि)"
   }
 }

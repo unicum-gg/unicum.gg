@@ -154,14 +154,14 @@
     "common-test": "Загальний тест",
     "tournaments": "Турніри"
   },
+  "resources": {
+    "free-experience": "Вільний досвід",
+    "combat-experience": "Бойовий досвід"
+  },
   "marks": {
     "1": "1 Мітка",
     "2": "2 Мітки",
     "3": "3 Мітки",
     "name": "Відмітні позначки"
-  },
-  "resources": {
-    "free-experience": "Вільний досвід",
-    "combat-experience": "Бойовий досвід"
   }
 }

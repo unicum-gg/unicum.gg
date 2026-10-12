@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "通过游戏内商店获得相同车库的费用",
   "every-tank-and-what-it": "每辆坦克及其商店价格",
   "n-credits": "{units}银币",
-  "n-free-xp": "{units}免费经验",
+  "n-free-xp": "{units} 全局经验",
   "n-gold": "{units}金币",
   "n-gold-in-total": "总计{gold}金币",
   "premiums-label": "高级账号坦克",
   "purchase-label": "坦克购买",
   "rebuild-value": "重建价值",
   "research-label": "研发",
-  "researched-with-free-xp": "以游戏中每金币{rate}免费经验的比率研发的{count}辆坦克。",
+  "researched-with-free-xp": "{count} 辆坦克使用全局经验研发，按游戏中每金币兑换 {rate} 经验的比率计算。",
   "that-is-n-gold": "即{gold}金币。",
-  "the-real-money-cost-to-research": "研发（免费经验）并购买账号上的每辆坦克所需的真实货币费用，高级账号坦克按金币计价。"
+  "the-real-money-cost-to-research": "使用全局经验研发并购买账号中的每辆坦克所需的真实货币费用，金币坦克按金币价格计算。"
 }

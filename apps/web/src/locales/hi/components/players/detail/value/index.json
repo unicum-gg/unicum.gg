@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "गेम के स्टोर के ज़रिए वही गैराज बनाने की लागत",
   "every-tank-and-what-it": "हर टैंक और स्टोर उसकी कितनी कीमत लेता है",
   "n-credits": "{units} क्रेडिट्स",
-  "n-free-xp": "{units} फ्री XP",
+  "n-free-xp": "{units} मुफ़्त अनुभव",
   "n-gold": "{units} गोल्ड",
   "n-gold-in-total": "कुल {gold} गोल्ड",
   "premiums-label": "प्रीमियम टैंक",
   "purchase-label": "टैंक खरीद",
   "rebuild-value": "पुनर्निर्माण मूल्य",
   "research-label": "शोध",
-  "researched-with-free-xp": "{count} टैंक फ्री XP से शोध किए गए, गेम की दर के अनुसार प्रति गोल्ड {rate} XP पर।",
+  "researched-with-free-xp": "मुफ़्त अनुभव से शोध किए गए {count} टैंक, गेम की दर {rate} XP प्रति गोल्ड है।",
   "that-is-n-gold": "यानी {gold} गोल्ड।",
-  "the-real-money-cost-to-research": "खाते के हर टैंक पर शोध करने (फ्री XP) और उसे खरीदने की वास्तविक धन लागत, जिसमें प्रीमियम टैंकों की कीमत गोल्ड में तय की गई है।"
+  "the-real-money-cost-to-research": "खाते के हर टैंक पर मुफ़्त अनुभव से शोध करने और उसे खरीदने की वास्तविक धनराशि लागत, प्रीमियम टैंकों की कीमत गोल्ड में।"
 }

@@ -154,14 +154,14 @@
     "common-test": "Bendras testas",
     "tournaments": "Turnyrai"
   },
+  "resources": {
+    "free-experience": "Laisvoji patirtis",
+    "combat-experience": "Kovinė patirtis"
+  },
   "marks": {
     "1": "1 Markas",
     "2": "2 Markai",
     "3": "3 Markai",
     "name": "Meistriškumo žymos"
-  },
-  "resources": {
-    "free-experience": "Laisvoji patirtis",
-    "combat-experience": "Kovinė patirtis"
   }
 }

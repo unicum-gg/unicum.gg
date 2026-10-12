@@ -13,7 +13,7 @@
       "tip": "XP potrzebne do odblokowania (najtańsza ścieżka)"
     },
     "totalFreeXp": {
-      "label": "Darmowe XP (T{tier})",
+      "label": "Wolne doświadczenie (P{tier})",
       "tip": "Łączna liczba XP potrzebna do opracowania od poziomu {tier}, wraz z wymaganymi modułami"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Szacowany koszt zdobycia pojazdu za prawdziwe pieniądze (opracowanie + zakup), w walucie {currency}"
     },
     "freeXpMoney": {
-      "label": "Darmowe XP ({currency})",
-      "tip": "Szacowany koszt opracowania pojazdu od poziomu {tier} za pomocą opcji Darmowe XP, w walucie {currency}"
+      "label": "Wolne doświadczenie ({currency})",
+      "tip": "Szacunkowy koszt w rzeczywistych pieniądzach zbadania czołgu za pomocą Wolnego doświadczenia od poziomu {tier}, w walucie {currency}"
     }
   },
   "selector": {
     "buyCredits": "Koszt (kredyty)",
     "buyGold": "Koszt (złoto)",
     "researchXp": "XP badawcze",
-    "totalFreeXp": "Darmowe XP",
+    "totalFreeXp": "Wolne doświadczenie",
     "shellCost": "Koszt pocisku",
     "ammoCost": "Koszt pełnego amunicji",
     "acquireMoney": "Koszt zakupu (pieniądze)",
-    "freeXpMoney": "Darmowe XP (pieniądze)"
+    "freeXpMoney": "Wolne doświadczenie (pieniądze)"
   }
 }

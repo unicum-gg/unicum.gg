@@ -154,14 +154,14 @@
     "common-test": "Vanlig Test",
     "tournaments": "Turneringar"
   },
+  "resources": {
+    "free-experience": "Fri Erfarenhet",
+    "combat-experience": "Stridserfarenhet"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Mark",
     "3": "3 Mark",
     "name": "Skyttemärken"
-  },
-  "resources": {
-    "free-experience": "Fri Erfarenhet",
-    "combat-experience": "Stridserfarenhet"
   }
 }

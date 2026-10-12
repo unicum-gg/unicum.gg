@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Gastos para maabot ang parehong garahe sa in-game store",
   "every-tank-and-what-it": "Bawat tank at ang presyong sinisingil dito ng tindahan",
   "n-credits": "{units} credits",
-  "n-free-xp": "{units} Libreng XP",
+  "n-free-xp": "{units} Libreng Karanasan",
   "n-gold": "{units} gold",
   "n-gold-in-total": "{gold} gold sa kabuuan",
   "premiums-label": "Mga Premium na tangke",
   "purchase-label": "Mga pagbili ng tangke",
   "rebuild-value": "Rebuild value",
   "research-label": "Pananaliksik",
-  "researched-with-free-xp": "{count} mga tangke na sinaliksik gamit ang Libreng XP, sa antas ng laro na {rate} XP bawat gold.",
+  "researched-with-free-xp": "{count} mga tangke na sinaliksik gamit ang Libreng Karanasan, sa antas ng laro na {rate} XP bawat gold.",
   "that-is-n-gold": "Iyon ay {gold} gold.",
-  "the-real-money-cost-to-research": "Ang gastos sa tunay na pera para saliksikin gamit ang Libreng XP at bilhin ang bawat tangke sa account, kasama ang mga Premium na tangke na may presyo sa gold."
+  "the-real-money-cost-to-research": "Ang tunay na gastos sa pera para sa pananaliksik gamit ang Libreng Karanasan at pagbili ng bawat tank sa account, na may presyong gold ang mga premium."
 }

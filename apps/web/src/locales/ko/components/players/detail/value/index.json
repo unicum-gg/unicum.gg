@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "게임 내 상점에서 같은 차고를 구성하는 비용",
   "every-tank-and-what-it": "모든 전차와 상점 가격",
   "n-credits": "{units} 크레딧",
-  "n-free-xp": "{units} 무료 XP",
+  "n-free-xp": "{units} 자유 경험치",
   "n-gold": "{units} 골드",
   "n-gold-in-total": "전체 {gold} 골드",
   "premiums-label": "프리미엄 전차",
   "purchase-label": "전차 구매",
   "rebuild-value": "재구성 가치",
   "research-label": "연구",
-  "researched-with-free-xp": "{count} 전차를 무료 XP로 연구했으며, 게임 내 비율인 골드당 {rate} XP가 적용됩니다.",
+  "researched-with-free-xp": "자유 경험치로 연구한 전차 {count}대, 게임 내 골드당 {rate} 경험치 비율 기준",
   "that-is-n-gold": "즉, {gold} 골드입니다.",
-  "the-real-money-cost-to-research": "계정의 모든 전차를 연구하고 무료 XP로 연구 비용을 충당한 뒤 구매하는 데 드는 실제 비용입니다. 프리미엄 전차는 골드로 가격을 책정합니다."
+  "the-real-money-cost-to-research": "계정의 모든 전차를 자유 경험치로 연구하고 구매하는 데 드는 실제 비용, 프리미엄 전차는 골드 가격 기준"
 }

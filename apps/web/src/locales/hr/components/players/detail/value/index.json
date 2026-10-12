@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Trošak postizanja iste garaže putem trgovine u igri",
   "every-tank-and-what-it": "Svaki tenk i cijena koju trgovina traži za njega",
   "n-credits": "{units} kredita",
-  "n-free-xp": "{units} Slobodni XP",
+  "n-free-xp": "{units} Slobodno iskustvo",
   "n-gold": "{units} zlata",
   "n-gold-in-total": "Ukupno {gold} zlata",
   "premiums-label": "Premium tenkovi",
   "purchase-label": "Kupnje tenkova",
   "rebuild-value": "Vrijednost obnove",
   "research-label": "Istraživanje",
-  "researched-with-free-xp": "{count} tenkova istraženih pomoću Slobodnih XP, po stopi igre od {rate} XP po zlatu.",
+  "researched-with-free-xp": "{count} tenkova istraženo uz Slobodno iskustvo, po stopi od {rate} XP-a po zlatu u igri.",
   "that-is-n-gold": "To je {gold} zlata.",
-  "the-real-money-cost-to-research": "Stvarni novčani trošak za istraživanje pomoću Slobodnih XP i kupnju svakog tenka na računu, pri čemu se Premium tenkovi cijene u zlatu."
+  "the-real-money-cost-to-research": "Stvarni novčani trošak istraživanja pomoću Slobodnog iskustva i kupnje svih tenkova na računu, pri čemu su premiumi izraženi u zlatu."
 }

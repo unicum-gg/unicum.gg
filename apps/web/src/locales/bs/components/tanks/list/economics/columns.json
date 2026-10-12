@@ -13,7 +13,7 @@
       "tip": "XP za otključavanje (najjeftiniji put)"
     },
     "totalFreeXp": {
-      "label": "Slobodni XP (T{tier})",
+      "label": "Slobodno iskustvo (N{tier})",
       "tip": "Ukupni XP potreban za istraživanje od nivoa {tier}, uključujući obavezne module"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Procijenjeni iznos stvarnog novca za nabavku tenka (istraživanje + kupovina), u {currency}"
     },
     "freeXpMoney": {
-      "label": "Slobodni XP ({currency})",
-      "tip": "Procijenjeni iznos stvarnog novca za istraživanje tenka pomoću Slobodnog XP-a od nivoa {tier}, u {currency}"
+      "label": "Slobodno iskustvo ({currency})",
+      "tip": "Procijenjena cijena u stvarnom novcu za istraživanje tenka pomoću Slobodnog iskustva od nivoa {tier}, u valuti {currency}"
     }
   },
   "selector": {
     "buyCredits": "Cijena (krediti)",
     "buyGold": "Cijena (zlato)",
     "researchXp": "Istraživački XP",
-    "totalFreeXp": "Slobodni XP",
+    "totalFreeXp": "Slobodno iskustvo",
     "shellCost": "Cijena projektila",
     "ammoCost": "Cijena punog municije",
     "acquireMoney": "Cijena kupovine (novac)",
-    "freeXpMoney": "Slobodni XP (novac)"
+    "freeXpMoney": "Slobodno iskustvo (novac)"
   }
 }

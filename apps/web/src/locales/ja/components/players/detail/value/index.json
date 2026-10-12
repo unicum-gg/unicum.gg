@@ -6,7 +6,7 @@
   "cost-to-reach-the-same": "ゲーム内ストアで同じガレージを揃える費用",
   "every-tank-and-what-it": "すべての戦車と、ショップでの価格",
   "n-credits": "{units}クレジット",
-  "n-free-xp": "{units}フリー経験値",
+  "n-free-xp": "{units} フリーEXP",
   "n-gold": "{units}ゴールド",
   "n-gold-in-total": "合計{gold}ゴールド",
   "premiums-label": "プレミアム戦車",
@@ -15,5 +15,5 @@
   "research-label": "研究",
   "researched-with-free-xp": "フリー経験値で研究した戦車が{count}両あります。ゲーム内のゴールド1枚あたり{rate}XPというレートで計算しています。",
   "that-is-n-gold": "これは{gold}ゴールドです。",
-  "the-real-money-cost-to-research": "アカウント上のすべての戦車を研究（フリー経験値）して購入するための実際の金銭的コストです。プレミアム戦車はゴールド価格で計算しています。"
+  "the-real-money-cost-to-research": "アカウント内のすべての戦車をフリーEXPで研究して購入するための実際のコスト。プレミアム車両はゴールド価格。"
 }

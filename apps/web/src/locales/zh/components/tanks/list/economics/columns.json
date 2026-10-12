@@ -30,17 +30,17 @@
     },
     "freeXpMoney": {
       "label": "全局经验（{currency}）",
-      "tip": "从{tier}级开始使用全局经验研发该坦克所需的预估真实费用，单位为{currency}"
+      "tip": "使用来自{tier}等级的全局经验研发该坦克所需的真实货币估算费用，单位为{currency}"
     }
   },
   "selector": {
     "buyCredits": "费用（信用）",
     "buyGold": "费用（金币）",
     "researchXp": "研究经验",
-    "totalFreeXp": "免费经验",
+    "totalFreeXp": "全局经验",
     "shellCost": "弹药成本",
     "ammoCost": "满弹药费用",
     "acquireMoney": "购买费用（货币）",
-    "freeXpMoney": "免费经验（货币）"
+    "freeXpMoney": "全局经验（货币）"
   }
 }

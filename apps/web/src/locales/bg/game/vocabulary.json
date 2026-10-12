@@ -154,14 +154,14 @@
     "common-test": "Общ тест",
     "tournaments": "Турнири"
   },
+  "resources": {
+    "free-experience": "Свободен опит",
+    "combat-experience": "Боен опит"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Mark",
     "3": "3 Mark",
     "name": "Знаци за отлични постижения"
-  },
-  "resources": {
-    "free-experience": "Свободен опит",
-    "combat-experience": "Боен опит"
   }
 }

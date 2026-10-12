@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Kostnad för att skaffa ett motsvarande garage via spelbutiken",
   "every-tank-and-what-it": "Varje vagn och vad butiken kostar för den",
   "n-credits": "{units} krediter",
-  "n-free-xp": "{units} Gratis XP",
+  "n-free-xp": "{units} Fri Erfarenhet",
   "n-gold": "{units} guld",
   "n-gold-in-total": "{gold} guld totalt",
   "premiums-label": "Premium-vagnar",
   "purchase-label": "Vagnköp",
   "rebuild-value": "Återuppbyggnadsvärde",
   "research-label": "Forska",
-  "researched-with-free-xp": "{count} vagnar utforskade med Gratis XP, enligt spelets grad på {rate} XP per guld.",
+  "researched-with-free-xp": "Forskning av {count} vagnar med Fri Erfarenhet, enligt spelets grad på {rate} XP per guld.",
   "that-is-n-gold": "Det är {gold} guld.",
-  "the-real-money-cost-to-research": "Den verkliga kostnaden i pengar för att forska med Gratis XP och köpa varje vagn på kontot, med Premium-vagnar prissatta i guld."
+  "the-real-money-cost-to-research": "Den verkliga kostnaden i pengar för att forska fram (Fri Erfarenhet) och köpa varje vagn på kontot, med premiumvagnar prissatta i guld."
 }

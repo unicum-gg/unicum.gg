@@ -154,14 +154,14 @@
     "common-test": "Vanlig test",
     "tournaments": "Turneringer"
   },
+  "resources": {
+    "free-experience": "Fri erfaring",
+    "combat-experience": "Erfaringspoeng"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Marks of Excellence"
-  },
-  "resources": {
-    "free-experience": "Fri erfaring",
-    "combat-experience": "Erfaringspoeng"
   }
 }

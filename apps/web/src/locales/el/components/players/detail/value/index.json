@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Κόστος για την απόκτηση του ίδιου γκαράζ μέσω του καταστήματος του παιχνιδιού",
   "every-tank-and-what-it": "Κάθε άρμα και η τιμή του στο κατάστημα",
   "n-credits": "{units} credits",
-  "n-free-xp": "{units} Δωρεάν XP",
+  "n-free-xp": "{units} Free Experience",
   "n-gold": "{units} gold",
   "n-gold-in-total": "{gold} gold συνολικά",
   "premiums-label": "Προνομιακά άρματα",
   "purchase-label": "Αγορές αρμάτων",
   "rebuild-value": "Αξία ανακατασκευής",
   "research-label": "Ανακάλυψη",
-  "researched-with-free-xp": "{count} άρματα που ανακαλύφθηκαν με Δωρεάν XP, με την αξιολόγηση του παιχνιδιού των {rate} XP ανά gold.",
+  "researched-with-free-xp": "{count} άρματα με έρευνα μέσω Free Experience, με αξιολόγηση παιχνιδιού {rate} XP ανά gold.",
   "that-is-n-gold": "Αυτό είναι {gold} gold.",
-  "the-real-money-cost-to-research": "Το κόστος σε πραγματικά χρήματα για την ανακάλυψη με Δωρεάν XP και την αγορά κάθε άρματος του λογαριασμού, με τα προνομιακά άρματα να τιμολογούνται σε gold."
+  "the-real-money-cost-to-research": "Το κόστος σε πραγματικά χρήματα για την έρευνα και την αγορά κάθε άρματος στον λογαριασμό, με τα premium άρματα να έχουν τιμή σε gold."
 }

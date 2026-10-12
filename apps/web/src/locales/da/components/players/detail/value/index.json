@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Pris for at nå samme garage gennem spillets butik",
   "every-tank-and-what-it": "Hver kampvogn, og hvad butikken opkræver for den",
   "n-credits": "{units} credits",
-  "n-free-xp": "{units} Gratis XP",
+  "n-free-xp": "{units} Fri xp",
   "n-gold": "{units} guld",
   "n-gold-in-total": "{gold} guld i alt",
   "premiums-label": "Premium-kampvogne",
   "purchase-label": "Køb af kampvogne",
   "rebuild-value": "Genopbygningsværdi",
   "research-label": "Forskning",
-  "researched-with-free-xp": "{count} kampvogne undersøgt med Gratis XP til spillets bedømmelse på {rate} XP pr. guld.",
+  "researched-with-free-xp": "Forskning af {count} kampvogne med Fri xp, med spillets bedømmelse på {rate} Xp pr. guld.",
   "that-is-n-gold": "Det er {gold} guld.",
-  "the-real-money-cost-to-research": "Den faktiske omkostning i rigtige penge ved at undersøge (Gratis XP) og købe alle kampvogne på kontoen, hvor Premium-kampvogne prissættes i guld."
+  "the-real-money-cost-to-research": "Den faktiske omkostning i penge ved forskning af alle kampvogne på kontoen med Fri xp og køb af dem, premiumkampvogne prissat i guld."
 }

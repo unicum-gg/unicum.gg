@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Kaina tokiai pačiai garažo sudėčiai pasiekti žaidimo parduotuvėje",
   "every-tank-and-what-it": "Kiekvienas tankas ir jo kaina parduotuvėje",
   "n-credits": "{units} kreditų",
-  "n-free-xp": "{units} Laisva XP",
+  "n-free-xp": "{units} laisvosios patirties",
   "n-gold": "{units} aukso",
   "n-gold-in-total": "Iš viso {gold} aukso",
   "premiums-label": "Premium tankai",
   "purchase-label": "Tankų pirkimai",
   "rebuild-value": "Atstatymo vertė",
   "research-label": "Išrasti",
-  "researched-with-free-xp": "{count} tankai išrasti naudojant Laisva XP pagal žaidimo rodiklį, kuris yra {rate} XP už auksą.",
+  "researched-with-free-xp": "Ištirta {count} tankų naudojant Laisvąją patirtį, taikant žaidimo rodiklį {rate} patirties už aukso vienetą.",
   "that-is-n-gold": "Tai yra {gold} aukso.",
-  "the-real-money-cost-to-research": "Tikra pinigų kaina, reikalinga visiems paskyros tankams išrasti naudojant Laisva XP ir nupirkti, kai Premium tankai įkainoti auksu."
+  "the-real-money-cost-to-research": "Tikrais pinigais išreikšta kaina visiems paskyroje esantiems tankams ištirti naudojant Laisvąją patirtį ir įsigyti, premium tankų kaina nurodyta auksu."
 }

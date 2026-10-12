@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Prijs om via de winkel in de game dezelfde garage samen te stellen",
   "every-tank-and-what-it": "Elke tank en wat de winkel ervoor kost",
   "n-credits": "{units} credits",
-  "n-free-xp": "{units} Gratis XP",
+  "n-free-xp": "{units} Vrije ervaring",
   "n-gold": "{units} Goud",
   "n-gold-in-total": "In totaal {gold} Goud",
   "premiums-label": "Premium-tanks",
   "purchase-label": "Aankopen van tanks",
   "rebuild-value": "Herbouwaarde",
   "research-label": "Onderzoek",
-  "researched-with-free-xp": "{count} tanks onderzocht met Gratis XP, tegen de spelbeoordeling van {rate} XP per Goud.",
+  "researched-with-free-xp": "{count} tanks onderzocht met Vrije ervaring, tegen de in het spel geldende beoordeling van {rate} XP per Goud.",
   "that-is-n-gold": "Dat is {gold} Goud.",
-  "the-real-money-cost-to-research": "De kosten in echt geld om elke tank op het account te onderzoeken met Gratis XP en te kopen, waarbij Premium-tanks in Goud zijn geprijsd."
+  "the-real-money-cost-to-research": "De kosten in echt geld voor het onderzoeken met Vrije ervaring en kopen van elke tank op het account, waarbij premiumtanks in Goud worden geprijsd."
 }

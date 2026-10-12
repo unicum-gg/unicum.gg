@@ -154,6 +154,10 @@
     "common-test": "Karaniwang Pagsubok",
     "tournaments": "Mga torneo"
   },
+  "resources": {
+    "free-experience": "Libreng Karanasan",
+    "combat-experience": "Karanasan sa Labanan"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marks",

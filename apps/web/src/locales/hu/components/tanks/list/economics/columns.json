@@ -13,7 +13,7 @@
       "tip": "Feloldáshoz szükséges XP (legolcsóbb útvonal)"
     },
     "totalFreeXp": {
-      "label": "Szabad XP (T{tier})",
+      "label": "Szabad tapasztalat (T{tier})",
       "tip": "A {tier}. szinttől a kutatáshoz szükséges összesített XP, az előfeltétel-modulokkal együtt"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "A tank megszerzéséhez szükséges becsült valódi pénz (kutatás + vásárlás), {currency} pénznemben"
     },
     "freeXpMoney": {
-      "label": "Szabad XP ({currency})",
-      "tip": "A tank szabad XP-vel történő fejlesztésének becsült valódi pénzköltsége a(z) {tier}. szintről, {currency} pénznemben"
+      "label": "Szabad tapasztalat ({currency})",
+      "tip": "A tank {tier}. szintről származó Szabad tapasztalattal történő kutatásának becsült valódi pénzköltsége, {currency} pénznemben"
     }
   },
   "selector": {
     "buyCredits": "Költség (credit)",
     "buyGold": "Költség (arany)",
     "researchXp": "Kutatási XP",
-    "totalFreeXp": "Ingyen XP",
+    "totalFreeXp": "Szabad tapasztalat",
     "shellCost": "Lőszer költség",
     "ammoCost": "Teljes lőszer költség",
     "acquireMoney": "Vásárlási költség (pénz)",
-    "freeXpMoney": "Ingyen XP (pénz)"
+    "freeXpMoney": "Szabad tapasztalat (pénz)"
   }
 }

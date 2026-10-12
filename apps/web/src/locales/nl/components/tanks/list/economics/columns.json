@@ -13,7 +13,7 @@
       "tip": "XP om vrij te spelen (goedkoopste route)"
     },
     "totalFreeXp": {
-      "label": "Gratis XP (T{tier})",
+      "label": "Vrije ervaring (T{tier})",
       "tip": "Cumulatieve XP voor onderzoek vanaf tier {tier}, inclusief vereiste modules"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Geschatte prijs in echt geld om de tank te verkrijgen (onderzoek + aankoop), uitgedrukt in {currency}"
     },
     "freeXpMoney": {
-      "label": "Gratis XP ({currency})",
-      "tip": "Geschatte prijs in echt geld om de tank vanaf tier {tier} met Gratis XP vrij te spelen, uitgedrukt in {currency}"
+      "label": "Vrije ervaring ({currency})",
+      "tip": "Geschatte kosten in echt geld om de tank te onderzoeken met Vrije ervaring vanaf niveau {tier}, in {currency}"
     }
   },
   "selector": {
     "buyCredits": "Kosten (credits)",
     "buyGold": "Kosten (goud)",
     "researchXp": "Onderzoek XP",
-    "totalFreeXp": "Gratis XP",
+    "totalFreeXp": "Vrije ervaring",
     "shellCost": "Kogelkosten",
     "ammoCost": "Volledige munitiekosten",
     "acquireMoney": "Aankoopprijs (geld)",
-    "freeXpMoney": "Gratis XP (geld)"
+    "freeXpMoney": "Vrije ervaring (geld)"
   }
 }

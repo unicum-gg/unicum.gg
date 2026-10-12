@@ -13,7 +13,7 @@
       "tip": "XP potrebné na odomknutie (najlacnejšia cesta)"
     },
     "totalFreeXp": {
-      "label": "Voľné XP (T{tier})",
+      "label": "Proste izkušnje (T{tier})",
       "tip": "Celkové XP potrebné na výskum od úrovne {tier} vrátane požadovaných modulov"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Odhadované náklady v reálnych peniazoch na získanie tanku (výskum + nákup), vyjadrené v mene {currency}"
     },
     "freeXpMoney": {
-      "label": "Voľné XP ({currency})",
-      "tip": "Odhadované náklady v reálnych peniazoch na odomknutie tanku pomocou voľných XP od úrovne {tier}, vyjadrené v mene {currency}"
+      "label": "Proste izkušnje ({currency})",
+      "tip": "Odhadovaná cena v skutočných peniazoch na raziskovanie tanku pomocou Proste izkušnje od úrovne {tier}, v mene {currency}"
     }
   },
   "selector": {
     "buyCredits": "Cena (kredity)",
     "buyGold": "Cena (zlato)",
     "researchXp": "XP za výskum",
-    "totalFreeXp": "Voľný XP",
+    "totalFreeXp": "Proste izkušnje",
     "shellCost": "Cena granátu",
     "ammoCost": "Cena plnej munície",
     "acquireMoney": "Cena nákupu (peniaze)",
-    "freeXpMoney": "Voľné XP (peniaze)"
+    "freeXpMoney": "Proste izkušnje (peniaze)"
   }
 }

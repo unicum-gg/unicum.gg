@@ -154,6 +154,10 @@
     "common-test": "Zajednički test",
     "tournaments": "Turniri"
   },
+  "resources": {
+    "free-experience": "Slobodno iskustvo",
+    "combat-experience": "Borbeno iskustvo"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marka",

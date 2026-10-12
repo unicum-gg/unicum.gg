@@ -154,14 +154,14 @@
     "common-test": "Teste Comum",
     "tournaments": "Torneios"
   },
+  "resources": {
+    "free-experience": "Experiência Livre",
+    "combat-experience": "Experiência de Batalha"
+  },
   "marks": {
     "1": "1 Marcação",
     "2": "2 Marcas",
     "3": "3 Marcas",
     "name": "Marcas de Excelência"
-  },
-  "resources": {
-    "free-experience": "Experiência Livre",
-    "combat-experience": "Experiência de Batalha"
   }
 }

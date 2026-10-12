@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Ugyanennek a garázsnak a költsége a játékon belüli áruházon keresztül",
   "every-tank-and-what-it": "Minden tank és az értük felszámított áruházbeli ár",
   "n-credits": "{units} kredit",
-  "n-free-xp": "{units} Ingyen XP",
+  "n-free-xp": "{units} Szabad tapasztalat",
   "n-gold": "{units} arany",
   "n-gold-in-total": "Összesen {gold} arany",
   "premiums-label": "Prémium tankok",
   "purchase-label": "Tankvásárlások",
   "rebuild-value": "Újraépítési érték",
   "research-label": "Fejlesztés",
-  "researched-with-free-xp": "{count} tank Ingyen XP-ért kifejlesztve, a játék {rate} XP/arany értékelése alapján.",
+  "researched-with-free-xp": "{count} tank kutatva Szabad tapasztalattal, a játék {rate} tapasztalat aranyonkénti értékelése alapján.",
   "that-is-n-gold": "Ez {gold} arany.",
-  "the-real-money-cost-to-research": "A fiók összes tankjának kifejlesztéséhez (Ingyen XP) és megvásárlásához szükséges valódi pénzben kifejezett költség, az aranyban árazott Prémium tankokkal együtt."
+  "the-real-money-cost-to-research": "Az összes tank Szabad tapasztalattal történő kutatásának és a fiókon való megvásárlásának valódi pénzben kifejezett költsége, a prémium tankok aranyban meghatározott ára alapján."
 }

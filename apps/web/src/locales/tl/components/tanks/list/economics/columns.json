@@ -13,7 +13,7 @@
       "tip": "XP para ma-unlock, pinakamurang daan"
     },
     "totalFreeXp": {
-      "label": "Libreng XP (T{tier})",
+      "label": "Libreng Karanasan (T{tier})",
       "tip": "Pinagsama-samang XP para magsaliksik mula tier {tier}, kasama ang mga kinakailangang module"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Tinatayang totoong perang kailangan para makuha ang tank, pananaliksik at pagbili, sa {currency}"
     },
     "freeXpMoney": {
-      "label": "Libreng XP ({currency})",
-      "tip": "Tinatayang totoong perang kailangan para gawing Libreng XP ang tank mula tier {tier}, sa {currency}"
+      "label": "Libreng Karanasan ({currency})",
+      "tip": "Tinatayang tunay na gastos sa pera para sa pananaliksik sa tank gamit ang Libreng Karanasan mula sa antas {tier}, sa {currency}"
     }
   },
   "selector": {
     "buyCredits": "Gastos (credits)",
     "buyGold": "Gastos (ginto)",
     "researchXp": "Research XP",
-    "totalFreeXp": "Libreng XP",
+    "totalFreeXp": "Libreng Karanasan",
     "shellCost": "Gastos ng bala",
     "ammoCost": "Buong gastos ng bala",
     "acquireMoney": "Gastos sa pagbili (pera)",
-    "freeXpMoney": "Libreng XP (pera)"
+    "freeXpMoney": "Libreng Karanasan (pera)"
   }
 }

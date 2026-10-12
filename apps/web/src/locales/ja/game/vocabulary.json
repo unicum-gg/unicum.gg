@@ -154,14 +154,14 @@
     "common-test": "共通テスト",
     "tournaments": "トーナメント"
   },
+  "resources": {
+    "free-experience": "フリーEXP",
+    "combat-experience": "戦闘EXP"
+  },
   "marks": {
     "1": "1マーク",
     "2": "2マーク",
     "3": "3マーク",
     "name": "優等マーク"
-  },
-  "resources": {
-    "free-experience": "フリーEXP",
-    "combat-experience": "戦闘EXP"
   }
 }

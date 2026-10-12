@@ -154,14 +154,14 @@
     "common-test": "Test Comun",
     "tournaments": "Turneele"
   },
+  "resources": {
+    "free-experience": "Experiență liberă",
+    "combat-experience": "Experienţă de luptă"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Însemne de Excelenţă"
-  },
-  "resources": {
-    "free-experience": "Experiență liberă",
-    "combat-experience": "Experienţă de luptă"
   }
 }

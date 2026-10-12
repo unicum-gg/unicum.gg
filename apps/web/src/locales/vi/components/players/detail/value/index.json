@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Chi phí để đạt nhà chứa xe tương tự qua cửa hàng trong trò chơi",
   "every-tank-and-what-it": "Mỗi xe tăng và giá cửa hàng tính cho xe đó",
   "n-credits": "{units} bạc",
-  "n-free-xp": "{units} XP miễn phí",
+  "n-free-xp": "{units} Kinh nghiệm Tự do",
   "n-gold": "{units} vàng",
   "n-gold-in-total": "Tổng cộng {gold} vàng",
   "premiums-label": "Xe tăng Premium",
   "purchase-label": "Mua xe tăng",
   "rebuild-value": "Giá trị xây dựng lại",
   "research-label": "Nghiên cứu",
-  "researched-with-free-xp": "{count} xe tăng được nghiên cứu bằng XP miễn phí, theo tỷ lệ {rate} XP cho mỗi vàng của trò chơi.",
+  "researched-with-free-xp": "{count} xe tăng được nghiên cứu bằng Kinh nghiệm Tự do, theo tỷ lệ {rate} XP cho mỗi vàng trong trò chơi.",
   "that-is-n-gold": "Tương đương {gold} vàng.",
-  "the-real-money-cost-to-research": "Chi phí bằng tiền thật để nghiên cứu bằng XP miễn phí và mua mọi xe tăng trong tài khoản, với xe tăng Premium được định giá bằng vàng."
+  "the-real-money-cost-to-research": "Chi phí bằng tiền thực tế để nghiên cứu bằng Kinh nghiệm Tự do và mua mọi xe tăng trong tài khoản, xe tăng cao cấp được tính giá bằng vàng."
 }

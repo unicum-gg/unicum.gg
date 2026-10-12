@@ -13,7 +13,7 @@
       "tip": "잠금 해제에 필요한 XP (최저 비용 경로)"
     },
     "totalFreeXp": {
-      "label": "자유 XP (T{tier})",
+      "label": "자유 경험치(T{tier}단계)",
       "tip": "단계 {tier}부터 연구하는 데 필요한 누적 XP, 선행 모듈 포함"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "탱크를 획득하는 데 필요한 실제 비용 추정치 (연구 + 구매), {currency} 기준"
     },
     "freeXpMoney": {
-      "label": "자유 XP ({currency})",
-      "tip": "단계 {tier}에서 탱크를 자유 XP로 연구하는 데 필요한 실제 비용 추정치, {currency} 기준"
+      "label": "자유 경험치({currency})",
+      "tip": "{tier}단계에서 얻은 자유 경험치로 전차를 연구하는 데 필요한 예상 실제 비용, {currency} 기준"
     }
   },
   "selector": {
     "buyCredits": "비용 (크레딧)",
     "buyGold": "비용 (골드)",
     "researchXp": "연구 XP",
-    "totalFreeXp": "무료 XP",
+    "totalFreeXp": "자유 경험치",
     "shellCost": "포탄 비용",
     "ammoCost": "전체 탄약 비용",
     "acquireMoney": "구매 비용 (크레딧)",
-    "freeXpMoney": "무료 XP (크레딧)"
+    "freeXpMoney": "자유 경험치(금액)"
   }
 }

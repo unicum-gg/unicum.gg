@@ -13,7 +13,7 @@
       "tip": "X để mở khóa (đường rẻ nhất)"
     },
     "totalFreeXp": {
-      "label": "X tự do (T{tier})",
+      "label": "Kinh nghiệm Tự do (Cấp {tier})",
       "tip": "Tổng X cần để nghiên cứu từ cấp {tier}, bao gồm các mô-đun bắt buộc trước đó"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Ước tính số tiền thực tế để sở hữu xe tăng (nghiên cứu + mua), bằng {currency}"
     },
     "freeXpMoney": {
-      "label": "X tự do ({currency})",
-      "tip": "Ước tính số tiền thực tế để dùng X tự do nghiên cứu xe tăng từ cấp {tier}, bằng {currency}"
+      "label": "Kinh nghiệm Tự do ({currency})",
+      "tip": "Ước tính số tiền thực tế để nghiên cứu xe tăng bằng Kinh nghiệm Tự do từ cấp {tier}, tính bằng {currency}"
     }
   },
   "selector": {
     "buyCredits": "Chi phí (tiền tín dụng)",
     "buyGold": "Chi phí (vàng)",
     "researchXp": "XP nghiên cứu",
-    "totalFreeXp": "XP miễn phí",
+    "totalFreeXp": "Kinh nghiệm Tự do",
     "shellCost": "Chi phí đạn",
     "ammoCost": "Chi phí đạn dược đầy đủ",
     "acquireMoney": "Chi phí mua (tiền)",
-    "freeXpMoney": "XP miễn phí (tiền)"
+    "freeXpMoney": "Kinh nghiệm Tự do (tiền)"
   }
 }

@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Saman tallin saavuttamisen hinta pelin sisäisessä kaupassa",
   "every-tank-and-what-it": "Jokainen panssarivaunu ja mitä kauppa siitä veloittaa",
   "n-credits": "{units} krediittiä",
-  "n-free-xp": "{units} Ilmaista XP:tä",
+  "n-free-xp": "{units} Vapaata kokemusta",
   "n-gold": "{units} kultaa",
   "n-gold-in-total": "Yhteensä {gold} kultaa",
   "premiums-label": "Premium-panssarivaunut",
   "purchase-label": "Panssarivaunujen ostot",
   "rebuild-value": "Uudelleenrakennusarvo",
   "research-label": "Tutki",
-  "researched-with-free-xp": "{count} Ilmaisella XP:llä tutkittua panssarivaunua pelin kurssilla, {rate} XP:tä kultaa kohden.",
+  "researched-with-free-xp": "{count} panssarivaunua tutkittu Vapaata kokemusta käyttäen, pelin arviolla {rate} XP:tä kultaa kohti.",
   "that-is-n-gold": "Se on {gold} kultaa.",
-  "the-real-money-cost-to-research": "Todellisen rahan hinta kaikkien tilin panssarivaunujen tutkimiseen, Ilmaisella XP:llä, ja ostamiseen, Premium-panssarivaunut kullassa hinnoiteltuina."
+  "the-real-money-cost-to-research": "Tilillä olevien kaikkien panssarivaunujen tutkimisen ja ostamisen todellinen rahahinta Vapaata kokemusta käyttäen, premium-panssarivaunujen hinnat kultana."
 }

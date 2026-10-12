@@ -13,7 +13,7 @@
       "tip": "アンロックに必要なXP（最短ルート）"
     },
     "totalFreeXp": {
-      "label": "フリー経験値（T{tier}）",
+      "label": "フリーEXP（T{tier}）",
       "tip": "Tier {tier}から研究するための累計XP（前提モジュールを含む）"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "戦車の入手に必要な実際の金額の推定値（研究＋購入、{currency}）"
     },
     "freeXpMoney": {
-      "label": "フリー経験値（{currency}）",
-      "tip": "Tier {tier}から戦車をフリー経験値で研究するために必要な実際の金額の推定値（{currency}）"
+      "label": "フリーEXP（{currency}）",
+      "tip": "Tier {tier}からのフリーEXPで戦車を研究するための、{currency}での推定実際のコスト"
     }
   },
   "selector": {
     "buyCredits": "コスト（クレジット）",
     "buyGold": "コスト（金）",
     "researchXp": "リサーチ経験値",
-    "totalFreeXp": "フリー経験値",
+    "totalFreeXp": "フリーEXP",
     "shellCost": "弾薬コスト",
     "ammoCost": "弾薬フルコスト",
     "acquireMoney": "購入コスト（お金）",
-    "freeXpMoney": "フリー経験値（お金）"
+    "freeXpMoney": "フリーEXP（実際のコスト）"
   }
 }

@@ -154,14 +154,14 @@
     "common-test": "Közönséges Teszt",
     "tournaments": "Tornák"
   },
+  "resources": {
+    "free-experience": "Szabad tapasztalat",
+    "combat-experience": "Harci tapasztalat"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Mark",
     "3": "3 Mark",
     "name": "Kiválóság jele"
-  },
-  "resources": {
-    "free-experience": "Szabad tapasztalat",
-    "combat-experience": "Harci tapasztalat"
   }
 }

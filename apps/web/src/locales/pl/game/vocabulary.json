@@ -154,14 +154,14 @@
     "common-test": "Test ogólny",
     "tournaments": "Turnieje"
   },
+  "resources": {
+    "free-experience": "Wolne doświadczenie",
+    "combat-experience": "Doświadczenie bojowe"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marki",
     "3": "3 Marki",
     "name": "Odznaki biegłości"
-  },
-  "resources": {
-    "free-experience": "Wolne doświadczenie",
-    "combat-experience": "Doświadczenie bojowe"
   }
 }

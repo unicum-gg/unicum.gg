@@ -13,7 +13,7 @@
       "tip": "XP pentru deblocare (cea mai ieftină cale)"
     },
     "totalFreeXp": {
-      "label": "XP liber ({tier})",
+      "label": "Experiență liberă (nivelul {tier})",
       "tip": "XP cumulativ necesar pentru cercetare începând de la nivelul {tier}, inclusiv modulele premergătoare"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Bani reali estimați pentru achiziționarea tancului (cercetare + cumpărare), în {currency}"
     },
     "freeXpMoney": {
-      "label": "XP liber ({currency})",
-      "tip": "Banii reali estimați pentru a transforma în XP gratuit XP-ul tancului de la nivelul {tier}, în {currency}"
+      "label": "Experiență liberă ({currency})",
+      "tip": "Bani reali estimați pentru cercetarea tancului cu Experiență liberă de la nivelul {tier}, în {currency}"
     }
   },
   "selector": {
     "buyCredits": "Cost (credite)",
     "buyGold": "Cost (aur)",
     "researchXp": "XP de cercetare",
-    "totalFreeXp": "XP gratuit",
+    "totalFreeXp": "Experiență liberă",
     "shellCost": "Cost proiectil",
     "ammoCost": "Cost total muniție",
     "acquireMoney": "Cost de cumpărare (bani)",
-    "freeXpMoney": "XP gratuit (bani)"
+    "freeXpMoney": "Experiență liberă (bani)"
   }
 }

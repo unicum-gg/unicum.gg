@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Coût nécessaire pour obtenir le même garage dans la boutique en jeu",
   "every-tank-and-what-it": "Chaque char, et le prix que la boutique demande pour lui",
   "n-credits": "{units} crédits",
-  "n-free-xp": "{units} XP gratuit",
+  "n-free-xp": "{units} Expérience libre",
   "n-gold": "{units} or",
   "n-gold-in-total": "{gold} or au total",
   "premiums-label": "Chars Premium",
   "purchase-label": "Achats de chars",
   "rebuild-value": "Valeur de reconstruction",
   "research-label": "Rechercher",
-  "researched-with-free-xp": "{count} chars recherchés avec de l’XP gratuit, au taux du jeu de {rate} XP par or.",
+  "researched-with-free-xp": "{count} chars recherchés avec de l’Expérience libre, au taux de {rate} XP par or dans le jeu.",
   "that-is-n-gold": "Cela représente {gold} or.",
-  "the-real-money-cost-to-research": "Le coût en argent réel pour rechercher avec de l’XP gratuit et acheter chaque char du compte, les chars Premium étant évalués en or."
+  "the-real-money-cost-to-research": "Coût estimé en argent réel pour rechercher avec l’Expérience libre et acheter tous les chars du compte, les chars premium étant tarifés en or."
 }

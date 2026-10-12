@@ -154,6 +154,10 @@
     "common-test": "اختبار مشترك",
     "tournaments": "بطولات"
   },
+  "resources": {
+    "free-experience": "الخبرة الحرة",
+    "combat-experience": "الخبرة القتالية"
+  },
   "marks": {
     "1": "علامة 1",
     "2": "علامتين 2",

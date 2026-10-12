@@ -13,7 +13,7 @@
       "tip": "Avaukseen tarvittava XP (halvin reitti)"
     },
     "totalFreeXp": {
-      "label": "Ilmainen XP (T{tier})",
+      "label": "Vapaata kokemusta (T{tier})",
       "tip": "Kumulatiivinen XP, joka tarvitaan tutkimiseen tasolta {tier}, vaaditut moduulit mukaan lukien"
     },
     "shellCost": {
@@ -29,18 +29,18 @@
       "tip": "Arvioitu todellisen rahan määrä panssarivaunun hankkimiseen (tutkimus + osto), valuutassa {currency}"
     },
     "freeXpMoney": {
-      "label": "Ilmainen XP ({currency})",
-      "tip": "Arvioitu todellisen rahan määrä panssarivaunun muuntamiseen ilmaisella XP:llä tasolta {tier}, valuutassa {currency}"
+      "label": "Vapaata kokemusta ({currency})",
+      "tip": "Arvioitu todellinen rahamäärä panssarivaunun tutkimiseen Vapaata kokemusta käyttäen tasolta {tier}, valuutassa {currency}"
     }
   },
   "selector": {
     "buyCredits": "Hinta (kreditit)",
     "buyGold": "Hinta (kulta)",
     "researchXp": "Tutkimus XP",
-    "totalFreeXp": "Ilmainen XP",
+    "totalFreeXp": "Vapaata kokemusta",
     "shellCost": "Kuoren hinta",
     "ammoCost": "Täyden ammuksen hinta",
     "acquireMoney": "Ostohinta (raha)",
-    "freeXpMoney": "Ilmainen XP (raha)"
+    "freeXpMoney": "Vapaata kokemusta (raha)"
   }
 }

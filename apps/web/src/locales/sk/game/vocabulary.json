@@ -154,6 +154,10 @@
     "common-test": "Všeobecný test",
     "tournaments": "Turnaje"
   },
+  "resources": {
+    "free-experience": "Proste izkušnje",
+    "combat-experience": "Bojne izkušnje"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Marks",

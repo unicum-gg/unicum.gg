@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Koszt skompletowania takiego samego garażu za pośrednictwem sklepu w grze",
   "every-tank-and-what-it": "Każdy czołg i cena, jaką pobiera za niego sklep",
   "n-credits": "{units} kredytów",
-  "n-free-xp": "{units} Darmowe XP",
+  "n-free-xp": "{units} Wolnego doświadczenia",
   "n-gold": "{units} złota",
   "n-gold-in-total": "Łącznie {gold} złota",
   "premiums-label": "Czołgi Premium",
   "purchase-label": "Kupowanie czołgów",
   "rebuild-value": "Wartość odbudowy",
   "research-label": "Badaj",
-  "researched-with-free-xp": "{count} czołgów zbadanych za Darmowe XP, według przelicznika gry wynoszącego {rate} XP za złoto.",
+  "researched-with-free-xp": "{count} czołgów zbadanych za Wolne doświadczenie, przy kursie gry wynoszącym {rate} doświadczenia za złoto.",
   "that-is-n-gold": "To {gold} złota.",
-  "the-real-money-cost-to-research": "Rzeczywisty koszt pieniężny zbadania za Darmowe XP i kupienia każdego czołgu na koncie, przy wycenie czołgów Premium w złocie."
+  "the-real-money-cost-to-research": "Rzeczywisty koszt pieniężny zbadania za pomocą Wolnego doświadczenia i kupienia każdego czołgu na koncie, czołgi premium wycenione w złocie."
 }

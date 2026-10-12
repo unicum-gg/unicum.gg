@@ -154,13 +154,14 @@
     "common-test": "Yhteinen testi",
     "tournaments": "Turnaukset"
   },
+  "resources": {
+    "free-experience": "Vapaata kokemusta",
+    "combat-experience": "Taistelukokemusta"
+  },
   "marks": {
     "1": "1 Mark",
     "2": "2 Markkia",
     "3": "3 Markkia",
     "name": "Merkit erinomaisuudesta"
-  },
-  "resources": {
-    "free-experience": "Vapaata kokemusta"
   }
 }
