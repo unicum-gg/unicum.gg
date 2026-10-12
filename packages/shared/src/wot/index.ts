@@ -7,6 +7,8 @@ export * from "./vehicle-modes";
 export * from "./battle-modes";
 export * from "./replay/blowfish";
 export * from "./replay/death-messages";
+export * from "./replay/loadout-families";
+export * from "./replay/loadout";
 export * from "./replay/parse";
 export * from "./crew";
 export * from "./ratings";
