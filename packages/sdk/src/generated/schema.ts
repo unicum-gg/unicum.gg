@@ -2445,6 +2445,21 @@ export interface components {
         };
         /** @description A whole battle, as the clients that played it reported it. */
         BattleDetailResponse: {
+            /** @description The minimap this battle was played on, resolved for its own mode: a mode that redraws the map into a smaller play area ships its own picture, and this is that one. */
+            mapImage: string | null;
+            /** @description The arena's extent in metres, which places a replay's coordinates on that image. */
+            mapBounds: {
+                bottomLeft: {
+                    x: number;
+                    z: number;
+                };
+                upperRight: {
+                    x: number;
+                    z: number;
+                };
+            } | null;
+            /** @description What this battle's mode puts on the minimap, already projected into `mapBounds`. Null when the arena declares nothing for it. */
+            mapOverlay: components["schemas"]["mapOverlay"] | null;
             id: string;
             /** Format: date-time */
             startedAt: Date;
@@ -2461,6 +2476,11 @@ export interface components {
             reporters: number;
             /** @description Whether the archive holds this battle's replay file, and so whether the 2D viewer has anything to draw. False for most battles: a replay only exists when a player who was there had recording on. */
             hasReplay: boolean;
+            /** @description Where the reporter's mark of excellence stood when this battle ended, and where it stood at the end of their previous battle in the same tank. The game gives no 'before' of its own, so the movement is only knowable by looking at the battle before. Null when the reporting client is too old to send it, when the mode does not count towards marks, or when no earlier battle in that tank is held. */
+            mark: {
+                percent: number;
+                previous: number | null;
+            } | null;
             /** @description Every vehicle, both teams, by team then by damage. */
             participants: components["schemas"]["BattleParticipant"][];
         };
@@ -5005,6 +5025,8 @@ export interface components {
             mom: number | null;
             /** @description Marks of Excellence on the gun, 0-3. */
             moe: number | null;
+            /** @description Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it. */
+            moePercent: number | null;
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
@@ -5062,6 +5084,8 @@ export interface components {
             mom: number | null;
             /** @description Marks of Excellence on the gun, 0-3. */
             moe: number | null;
+            /** @description Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it. */
+            moePercent: number | null;
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
@@ -5192,6 +5216,8 @@ export interface components {
             isPremium: boolean;
             mom: number | null;
             moe: number | null;
+            /** @description Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it. */
+            moePercent: number | null;
             battles: number;
             avgDamage: number | null;
             avgXp: number | null;
