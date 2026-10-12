@@ -247,8 +247,12 @@ export function VersionMinimap({
         </span>
       </DialogTrigger>
       {/* Sized off the viewport's shorter side, less the heading's own height,
-          so the square never pushes the dialog taller than the screen. */}
-      <DialogContent className="w-[min(95vw,calc(95vh-5.5rem))] max-w-[min(95vw,calc(95vh-5.5rem))] gap-0 p-0 sm:max-w-[min(95vw,calc(95vh-5.5rem))]">
+          so the square never pushes the dialog taller than the screen. The
+          height it is allowed is the dialog's own cap (`100dvh` less its 1rem
+          gutter on each side) rather than a figure of its own, or the square
+          would ask for a few pixels more than the cap grants on a short
+          screen and the whole dialog would scroll to give them. */}
+      <DialogContent className="w-[min(95vw,calc(100dvh-7.5rem))] max-w-[min(95vw,calc(100dvh-7.5rem))] gap-0 p-0 sm:max-w-[min(95vw,calc(100dvh-7.5rem))]">
         <DialogHeader className="px-4 pt-4 pr-14 pb-3">
           <DialogTitle>{name}</DialogTitle>
           {subtitle ? <DialogDescription>{subtitle}</DialogDescription> : null}

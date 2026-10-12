@@ -172,7 +172,7 @@ export function SubmitVideoDialog({
           The `sm:` prefix is load-bearing, since the primitive caps itself with
           `sm:max-w-md`, so a plain `max-w-*` here loses to it above 640px and
           the dialog stays 448px wide however large the value. */}
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
+      <DialogContent className="sm:max-w-3xl">
         {/* The header follows the state instead of standing above it. Left
             fixed, the instructions for a form that is no longer on screen sat
             over the confirmation, and the two competed to be read. The

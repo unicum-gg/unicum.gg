@@ -336,7 +336,7 @@ export function TankCompareColumnHeader({
               <SlidersHorizontalIcon className="size-3" weight="bold" />
               {tCopy("setup")}</button>
           </DialogTrigger>
-          <DialogContent className="max-h-[85vh] gap-0 overflow-y-auto p-0 sm:max-w-3xl">
+          <DialogContent className="gap-0 p-0 sm:max-w-3xl">
             {/* `pr-12` keeps the header's actions clear of the dialog's own
                 close button, which floats at `top-3 right-3`. */}
             <DialogHeader className="flex-row flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-fd-border py-3 pr-12 pl-4">

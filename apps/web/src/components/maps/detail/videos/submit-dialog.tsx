@@ -233,7 +233,7 @@ export function SubmitTacticDialog({
         <Button variant="outline" size="sm">
           {t("suggest-a-tactic")}</Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
+      <DialogContent className="sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle>{done ? t("suggestion-sent") : t("suggest-a-tactic")}</DialogTitle>
           <DialogDescription>

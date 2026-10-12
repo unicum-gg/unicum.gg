@@ -84,7 +84,7 @@ export function VideoEditDialog({
           is a 16:9 player above a dozen fields, which the primitive's default
           size cannot hold. The `sm:` prefix is load-bearing, since the
           primitive caps itself with `sm:max-w-md`. */}
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
+      <DialogContent className="sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle>{t("correct-a-suggestion")}</DialogTitle>
           <DialogDescription>

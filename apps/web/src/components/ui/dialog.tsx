@@ -48,6 +48,28 @@ function DialogOverlay({
   )
 }
 
+/**
+ * A dialog, bounded by the viewport it is centred in.
+ *
+ * Centred on `top-1/2` with a half translate, a dialog taller than the screen
+ * loses BOTH of its ends to it, and neither can be reached: the overflow is
+ * split above and below the viewport, so there is no page scroll to recover it
+ * and, with no cap, no inner one either. The title and the action are the two
+ * things at those ends, which is the whole dialog on a short screen.
+ *
+ * So the height is capped exactly as the width already is, against the same
+ * 1rem gutter, and the body scrolls once it exceeds it. `dvh` rather than `vh`
+ * because a phone's address bar counts towards the height, and a phone is the
+ * one viewport where this is reached by an ordinary dialog rather than by a
+ * long form. `overscroll-contain` keeps the page behind from taking over once
+ * the dialog's own scroll reaches its end.
+ *
+ * Capped here rather than per dialog: four call sites had each written their
+ * own `overflow-y-auto` against a figure of their own (three at `90vh`, one at
+ * `85vh`), and the ones that had not were exactly the ones overflowing. The
+ * login picker measures 689px of content, so it loses its last two lines and
+ * its title on any screen under 700px tall, which a phone in portrait is.
+ */
 function DialogContent({
   className,
   children,
@@ -63,7 +85,7 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          "fixed left-1/2 top-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border border-fd-border bg-background p-6 shadow-lg duration-200 sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "fixed left-1/2 top-1/2 z-50 grid max-h-[calc(100dvh-2rem)] w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto overscroll-contain rounded-lg border border-fd-border bg-background p-6 shadow-lg duration-200 sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           className,
         )}
         {...props}
