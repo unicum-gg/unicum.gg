@@ -82,6 +82,8 @@ export async function saveTankLoadouts(
       crew: loadout.crew ?? null,
       progression: progression ?? null,
       setups: loadout.setups ?? null,
+      marks: loadout.marks ?? null,
+      markPercent: loadout.markPercent ?? null,
       updatedAt: now,
     };
   });
@@ -103,6 +105,12 @@ export async function saveTankLoadouts(
         crew: sql`excluded.crew`,
         progression: sql`excluded.progression`,
         setups: sql`excluded.setups`,
+        // Kept when the incoming sweep has nothing to say, rather than wiped.
+        // A client older than this field reports no marks at all, and letting
+        // it overwrite would mean one garage visit from an un-updated install
+        // erasing a whole fleet's progress.
+        marks: sql`coalesce(excluded.marks, ${table.marks})`,
+        markPercent: sql`coalesce(excluded.mark_percent, ${table.markPercent})`,
         updatedAt: sql`excluded.updated_at`,
       },
     });

@@ -34,6 +34,15 @@ export type PlayerTankRow = {
   // Marks of Excellence on the gun (0-3), from the portal. null when we have not
   // reached the portal for this player yet.
   moe: number | null;
+  /**
+   * Progress towards the next mark of excellence, 0 to 100 with two decimals.
+   *
+   * Null for every account that does not run the mod: this number lives only
+   * in the client's own vehicle dossier, so neither the public API nor the
+   * portal can supply it. Where it is null the site still shows its own
+   * estimate, derived from average damage against the mark thresholds.
+   */
+  moePercent: number | null;
   battles: number;
   avgDamage: number | null;
   avgXp: number | null;
@@ -91,6 +100,7 @@ export function buildPlayerTankRows(
         isReward: meta?.isReward ?? false,
         mom: tank.mark_of_mastery ?? null,
         moe: tank.marks_on_gun ?? null,
+        moePercent: tank.mark_percent ?? null,
         battles,
         avgDamage,
         avgXp,

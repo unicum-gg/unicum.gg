@@ -1,6 +1,6 @@
 import { and, asc, between, desc, eq, inArray, isNotNull, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, computeHR, type Stats, type StrongholdStats } from "@unicum.gg/shared";
+import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankLoadoutsByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, computeHR, type Stats, type StrongholdStats } from "@unicum.gg/shared";
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import { discoverFromClanHistoryBackground } from "@unicum.gg/core/discovery/player-history";
 import { playerChannel, publish } from "@unicum.gg/core/live/pubsub";
@@ -608,6 +608,11 @@ export async function recordCurrentSnapshot(
       // null. Fresh marks land on the next on-demand (page-view) refresh.
       await carryForwardMarks(region, player.id, tanks);
     }
+    // And the mod's own figures over either of those, on BOTH paths. The
+    // portal gives a count and gives it slowly, a page at a time and only when
+    // somebody visits; the garage sweep gives the whole fleet at once, with
+    // the percent the portal has never carried. Applied last so it wins.
+    await applyGarageMarks(region, info.account_id, tanks);
     await bulkInsertTankSnapshots(region, player.id, tanks);
     await updatePlayerRatings(region, player.id, info, tanks);
   }
@@ -669,6 +674,49 @@ async function carryForwardMarks(
   for (const t of tanks) {
     const m = byTank.get(t.tank_id);
     if (m != null) t.marks_on_gun = m;
+  }
+}
+
+/**
+ * The marks the mod reported from the garage, which beat anything scraped.
+ *
+ * Two reasons it takes precedence rather than filling gaps. It is fresher: a
+ * garage sweep covers the fleet in one pass on the player's own client, while
+ * the portal is read one profile at a time against a cap near one request a
+ * second, so a scraped count can be weeks behind a gun that has since earned
+ * its third mark. And it is the only source for the PERCENT at all -- the
+ * portal has never carried it, and until now the site estimated it from average
+ * damage against the mark thresholds.
+ *
+ * Keyed on the account and not the player row: `tank_loadouts` is written by
+ * the upload, which knows the game account and nothing about our own ids.
+ *
+ * Silent when the account has never run the mod, which is almost every account:
+ * no rows, nothing applied, and the scraped counts stand as they did.
+ */
+async function applyGarageMarks(
+  region: Region,
+  accountId: number,
+  tanks: TankStats[],
+): Promise<void> {
+  const loadouts = tankLoadoutsByRegion[region];
+  const rows = await db
+    .select({
+      tankId: loadouts.tankId,
+      marks: loadouts.marks,
+      markPercent: loadouts.markPercent,
+    })
+    .from(loadouts)
+    .where(eq(loadouts.accountId, accountId));
+  if (rows.length === 0) return;
+  const byTank = new Map(rows.map((r) => [r.tankId, r]));
+  for (const tank of tanks) {
+    const found = byTank.get(tank.tank_id);
+    if (!found) continue;
+    // Each value on its own: a client old enough to send a loadout without
+    // marks must not blank a count the portal did manage to read.
+    if (found.marks != null) tank.marks_on_gun = found.marks;
+    if (found.markPercent != null) tank.mark_percent = found.markPercent;
   }
 }
 
@@ -800,6 +848,7 @@ async function updatePlayerRatings(
             markOfMastery: r.markOfMastery,
             // Not needed for the rating diff.
             marksOnGun: null,
+            markPercent: null,
             survivedBattles: null,
             hits: null,
             shots: null,

@@ -84,6 +84,10 @@ export const PlayerTankDetailResponse = z
       .number()
       .nullable()
       .meta({ description: "Marks of Excellence on the gun, 0-3." }),
+    moePercent: z
+      .number()
+      .nullable()
+      .meta({ description: "Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it." }),
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),

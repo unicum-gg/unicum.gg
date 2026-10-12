@@ -187,6 +187,7 @@ type RawTankSnapshot = {
   xp: number | null;
   mark_of_mastery: number | null;
   marks_on_gun: number | null;
+  mark_percent: number | null;
 };
 
 type RawClanHistory = {
@@ -399,6 +400,7 @@ function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
     xp: r.xp == null ? null : Number(r.xp),
     markOfMastery: r.mark_of_mastery == null ? null : Number(r.mark_of_mastery),
     marksOnGun: r.marks_on_gun == null ? null : Number(r.marks_on_gun),
+    markPercent: r.mark_percent == null ? null : Number(r.mark_percent),
     // Unused by the player page's period rating diff.
     survivedBattles: null,
     hits: null,
@@ -491,7 +493,7 @@ export async function loadPlayerInitialData(
   const tankCols = sql`
       player_id, tank_id, taken_at, battles, wins, damage_dealt, spotted, frags,
       dropped_capture_points, radio_assisted_damage, track_assisted_damage, xp,
-      mark_of_mastery, marks_on_gun`;
+      mark_of_mastery, marks_on_gun, mark_percent`;
   const pickTanks = (rank: string) => sql`
       (SELECT json_agg(row_to_json(t))
        FROM (SELECT ${tankCols} FROM tank_scan WHERE ${sql.raw(rank)} = 1) t)`;

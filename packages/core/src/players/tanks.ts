@@ -29,6 +29,7 @@ function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot 
     xp: a.xp,
     markOfMastery: t.mark_of_mastery,
     marksOnGun: t.marks_on_gun ?? null,
+    markPercent: t.mark_percent ?? null,
     survivedBattles: a.survived_battles ?? null,
     hits: a.hits ?? null,
     shots: a.shots ?? null,
@@ -79,6 +80,10 @@ export async function bulkInsertTankSnapshots(
           // COALESCE so a marks-less insert never wipes a previously-stored
           // value (unlike the columns above, which are always in the API row).
           marksOnGun: sql`COALESCE(EXCLUDED.marks_on_gun, ${table.marksOnGun})`,
+          // Same reasoning, and it matters more here: the percent arrives only
+          // from a client running the mod, so most refreshes have nothing to
+          // say about it and must leave what is there alone.
+          markPercent: sql`COALESCE(EXCLUDED.mark_percent, ${table.markPercent})`,
           survivedBattles: sql`EXCLUDED.survived_battles`,
           hits: sql`EXCLUDED.hits`,
           shots: sql`EXCLUDED.shots`,
@@ -152,6 +157,7 @@ export async function getLatestTankSnapshotsByAccounts(
       xp: row.xp == null ? null : Number(row.xp),
       markOfMastery: row.mark_of_mastery == null ? null : Number(row.mark_of_mastery),
       marksOnGun: null,
+      markPercent: null,
       survivedBattles: null,
       hits: null,
       shots: null,
@@ -235,6 +241,7 @@ export async function getTankSnapshotsByAccountsBefore(
       xp: row.xp == null ? null : Number(row.xp),
       markOfMastery: row.mark_of_mastery == null ? null : Number(row.mark_of_mastery),
       marksOnGun: null,
+      markPercent: null,
       survivedBattles: null,
       hits: null,
       shots: null,
@@ -260,6 +267,7 @@ export function tankSnapshotsToTankStats(
     tank_id: s.tankId,
     mark_of_mastery: s.markOfMastery,
     marks_on_gun: s.marksOnGun,
+    mark_percent: s.markPercent,
     all: {
       battles: s.battles,
       wins: s.wins,

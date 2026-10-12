@@ -78,6 +78,10 @@ export const playerVehicle = z
     isPremium: z.boolean(),
     mom: z.number().nullable(),
     moe: z.number().nullable(),
+    moePercent: z
+      .number()
+      .nullable()
+      .meta({ description: "Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it." }),
     battles: z.number(),
     avgDamage: z.number().nullable(),
     avgXp: z.number().nullable(),

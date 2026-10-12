@@ -43,6 +43,15 @@ export type PlayerTankDetail = {
   /** Mark of Mastery (0-4) and Marks of Excellence on the gun (0-3). */
   mom: number | null;
   moe: number | null;
+  /**
+   * Progress towards the next mark of excellence, 0 to 100 with two decimals.
+   *
+   * Null for every account that does not run the mod: this number lives only
+   * in the client's own vehicle dossier, so neither the public API nor the
+   * portal can supply it. Where it is null the site still shows its own
+   * estimate, derived from average damage against the mark thresholds.
+   */
+  moePercent: number | null;
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
@@ -130,6 +139,7 @@ export function buildPlayerTankDetail(
     battles,
     mom: tank.mark_of_mastery ?? null,
     moe: tank.marks_on_gun ?? null,
+    moePercent: tank.mark_percent ?? null,
     wn7: computeWN7(
       {
         battles,
