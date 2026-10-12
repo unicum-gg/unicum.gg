@@ -2,9 +2,6 @@ import { createHash } from "node:crypto";
 import * as z from "zod";
 import {
   battleIdIn,
-  readFieldMods,
-  readLoadouts,
-  readReplay,
   readReplayHeader,
   ReplayError,
 } from "@unicum.gg/shared";
@@ -18,7 +15,7 @@ import {
   ReplayStoreError,
   storeReplay,
 } from "@unicum.gg/core/battles/replays";
-import { storeBattleLoadouts } from "@unicum.gg/core/battles/loadouts";
+import { storeLoadoutsFromReplay } from "@unicum.gg/core/battles/loadouts";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
 import { provenAccount } from "@/services/game/proven-account";
 
@@ -262,61 +259,29 @@ export async function POST(
 /**
  * Decode the recorder's loadout and store it, swallowing any fault.
  *
- * `readReplay` is the expensive half of this -- a Blowfish pass and an inflate
- * over about a megabyte -- and it happens here instead of on the read path for
- * exactly that reason. A recording from a client this cannot be read from
- * simply yields nothing, which is a battle with no loadout rather than an
- * error: coverage is a thing to measure, not to fail on.
+ * The decode is the expensive half -- a decryption and an inflate over about a
+ * megabyte -- and it happens here rather than on the read path for exactly that
+ * reason. A recording from a client this cannot read simply yields nothing,
+ * which is a battle with no loadout rather than an error: coverage is a thing
+ * to measure, not to fail on.
+ *
+ * The reading itself lives in `core` because the backfill does the same work on
+ * the same files, and the two must not drift.
  */
 async function writeLoadouts(
-  region: Parameters<typeof storeBattleLoadouts>[0],
+  region: Parameters<typeof storeLoadoutsFromReplay>[0],
   arenaUniqueId: string,
   startedAt: Date,
   bytes: Uint8Array,
 ): Promise<void> {
   try {
-    const { blocks, stream } = await readReplay(bytes);
-    if (stream.length === 0) return;
-    const loadouts = readLoadouts(stream);
-    if (loadouts.length === 0) return;
-    const header = blocks[0] as { clientVersionFromXml?: unknown } | null;
-    const version =
-      typeof header?.clientVersionFromXml === "string"
-        ? clientVersion(header.clientVersionFromXml)
-        : null;
-    await storeBattleLoadouts(
-      region,
-      arenaUniqueId,
-      startedAt,
-      loadouts,
-      version,
-      readFieldMods(blocks),
-    );
+    await storeLoadoutsFromReplay(region, arenaUniqueId, startedAt, bytes);
   } catch (error) {
     console.error(
       `[api/game/battles/replay] ${region}/${arenaUniqueId}: loadout not stored`,
       error,
     );
   }
-}
-
-/**
- * `2.4.0.2` out of `World of Tanks v.2.4.0.2 #966`, or null.
- *
- * The replay header writes the version the long way; the mod sends the short
- * form and that is what every battle row holds. Storing the header's spelling
- * beside those would put two vocabularies in one column, and the whole reason
- * to record the version is to keep figures from different patches apart -- a
- * comparison that silently split the same build in two would be worse than no
- * version at all.
- *
- * The same expression the mod uses, down to the non-breaking spaces the client
- * writes these with. The xml version rather than the exe's, which the header
- * also carries but which stops at the release before a hotfix.
- */
-function clientVersion(full: string): string | null {
-  const found = /v\.\s*([0-9]+(?:\.[0-9]+)+)/.exec(full.replace(/\u00a0/g, " "));
-  return found ? found[1] : null;
 }
 
 function refuse(reason: ReplayRefusal): Response {
