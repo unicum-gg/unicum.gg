@@ -6,6 +6,7 @@ import {
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { postChannelMessage } from "@unicum.gg/core/discord";
+import { getRedisClient } from "@unicum.gg/core/redis";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 
@@ -41,14 +42,81 @@ const SCHEDULE = "*/20 * * * *";
  */
 const STALL_AFTER_MS = 60 * 60 * 1000;
 
-/** Regions currently known to be stalled, so a single incident alerts once. */
-const stalled = new Set<Region>();
+/**
+ * How long a reported stall is remembered, so an incident that is still open a
+ * week later is said once more rather than never again. Long enough that no
+ * ordinary outage is repeated, short enough that the key does not outlive the
+ * thing it describes.
+ */
+const STALL_MEMORY_SECONDS = 7 * 24 * 60 * 60;
+
+/** Fallback for a process with no Redis (local dev), and for a Redis blip. */
+const stalledInProcess = new Set<Region>();
+
+function stallKey(region: Region): string {
+  return `onslaught:watchdog:stalled:${region}`;
+}
+
+/**
+ * Whether this region's stall has already been reported.
+ *
+ * Kept in Redis rather than in memory because the alert is edge-triggered and
+ * the process is not long-lived: the worker is redeployed several times on a
+ * busy day, and each restart used to replay every open alert. A missing key is
+ * read as "not reported", so an eviction or an unreachable Redis costs one
+ * repeated warning, which is exactly the behaviour this replaces, and never a
+ * silent one.
+ */
+async function wasReported(region: Region): Promise<boolean> {
+  const redis = getRedisClient();
+  if (!redis) return stalledInProcess.has(region);
+  try {
+    return (await redis.get(stallKey(region))) !== null;
+  } catch {
+    return stalledInProcess.has(region);
+  }
+}
+
+/** Record (or clear) that this region's stall has been reported. */
+async function setReported(region: Region, reported: boolean): Promise<void> {
+  if (reported) stalledInProcess.add(region);
+  else stalledInProcess.delete(region);
+
+  const redis = getRedisClient();
+  if (!redis) return;
+  try {
+    if (reported) {
+      await redis.set(
+        stallKey(region),
+        new Date().toISOString(),
+        "EX",
+        STALL_MEMORY_SECONDS,
+      );
+    } else {
+      await redis.del(stallKey(region));
+    }
+  } catch {
+    // Best effort: the in-process set above still holds this tick's answer.
+  }
+}
 
 export type CaptureFreshness = {
   region: Region;
   eventId: string | null;
+  /**
+   * Whether a season is being played right now. Outside that window the source
+   * publishes no board at all, so nothing landing is the correct state rather
+   * than a stall.
+   */
+  live: boolean;
   lastCapture: Date | null;
+  /** Age of the newest sample, null when the season has none yet. */
   ageMs: number | null;
+  /**
+   * How long nothing has landed, measured from the season's start when nothing
+   * ever has: a season that opened ten minutes ago is not behind, it is new.
+   */
+  behindMs: number | null;
 };
 
 /** How long ago the newest sample of the newest season landed, per region. */
@@ -59,14 +127,25 @@ export async function readCaptureFreshness(
   const snapshots = onslaughtSeasonSnapshotsByRegion[region];
 
   const [season] = await db
-    .select({ eventId: seasons.eventId })
+    .select({
+      eventId: seasons.eventId,
+      startDate: seasons.startDate,
+      endDate: seasons.endDate,
+    })
     .from(seasons)
     // NULLS LAST, like every other newest-season read: Postgres sorts DESC with
     // nulls first, so a dateless row would win and report its empty series.
     .orderBy(sql`${seasons.startDate} DESC NULLS LAST`)
     .limit(1);
   if (!season) {
-    return { region, eventId: null, lastCapture: null, ageMs: null };
+    return {
+      region,
+      eventId: null,
+      live: false,
+      lastCapture: null,
+      ageMs: null,
+      behindMs: null,
+    };
   }
 
   const [newest] = await db
@@ -76,11 +155,21 @@ export async function readCaptureFreshness(
     .orderBy(desc(snapshots.capturedAt))
     .limit(1);
 
+  const now = Date.now();
+  // A null bound is read as "no bound": the feeder stamps both from the event
+  // definition, but a season it has only half-written must still be watched,
+  // since a missed hour of it is lost either way.
+  const started = season.startDate == null || season.startDate.getTime() <= now;
+  const ended = season.endDate != null && season.endDate.getTime() <= now;
+  const since = newest?.capturedAt ?? season.startDate;
+
   return {
     region,
     eventId: season.eventId,
+    live: started && !ended,
     lastCapture: newest?.capturedAt ?? null,
-    ageMs: newest ? Date.now() - newest.capturedAt.getTime() : null,
+    ageMs: newest ? now - newest.capturedAt.getTime() : null,
+    behindMs: since ? now - since.getTime() : null,
   };
 }
 
@@ -92,10 +181,15 @@ function minutes(ms: number): number {
  * Check every region and report the ones that changed state.
  *
  * Reports on the EDGES only, so an incident is one message and its recovery is
- * another, rather than a line every twenty minutes for as long as it lasts. The
- * memory is per process, so a worker restart can repeat one alert, which is the
- * right way round: a repeated warning is noise, a silent one is a missed
- * outage.
+ * another, rather than a line every twenty minutes for as long as it lasts.
+ *
+ * A region is only judged while its season is being played. Outside that
+ * window the source serves no board, so the capture correctly writes nothing,
+ * and reading that as a stall is a false alarm that cannot clear itself: a
+ * finished season stays finished for weeks, so every redeploy replayed the
+ * same three warnings (observed over 2026-10-11/12, with the season having
+ * ended on the 10th and 11th). An open alert is dropped silently when the
+ * season ends rather than announced as a recovery, since nothing recovered.
  */
 export async function checkCaptureFreshness(): Promise<CaptureFreshness[]> {
   const readings = await Promise.all(REGIONS.map(readCaptureFreshness));
@@ -104,17 +198,23 @@ export async function checkCaptureFreshness(): Promise<CaptureFreshness[]> {
     // A region with no season at all is not stalled, it is unseeded: the very
     // first capture has not run yet, and there is nothing to be late for.
     if (r.eventId == null) continue;
-    const late = r.ageMs == null || r.ageMs > STALL_AFTER_MS;
+    if (!r.live) {
+      await setReported(r.region, false);
+      continue;
+    }
 
-    if (late && !stalled.has(r.region)) {
-      stalled.add(r.region);
+    const late = r.behindMs == null || r.behindMs > STALL_AFTER_MS;
+    const reported = await wasReported(r.region);
+
+    if (late && !reported) {
+      await setReported(r.region, true);
       const age =
         r.ageMs == null ? "never" : `${minutes(r.ageMs)} minutes ago`;
       await report(
         `⚠️ Onslaught capture stalled on ${r.region.toUpperCase()}: last sample ${age} (${r.eventId}). The source keeps no history, so anything missed now is lost.`,
       );
-    } else if (!late && stalled.has(r.region)) {
-      stalled.delete(r.region);
+    } else if (!late && reported) {
+      await setReported(r.region, false);
       await report(
         `✅ Onslaught capture recovered on ${r.region.toUpperCase()}: sampling again (${r.eventId}).`,
       );
@@ -135,17 +235,18 @@ async function report(message: string): Promise<void> {
   }
 }
 
+/** One region's state, for the tick's own log line. */
+export function describeFreshness(r: CaptureFreshness): string {
+  if (r.eventId == null) return `${r.region}=unseeded`;
+  const age = r.ageMs == null ? "none" : `${minutes(r.ageMs)}m`;
+  return r.live ? `${r.region}=${age}` : `${r.region}=${age} (off-season)`;
+}
+
 /** Schedule the watchdog. One global job: it reads three small rows. */
 export function startOnslaughtWatchdogCron(): void {
   const armed = scheduleCron("onslaught-watchdog", SCHEDULE, async () => {
     const readings = await checkCaptureFreshness();
-    const summary = readings
-      .map(
-        (r) =>
-          `${r.region}=${r.ageMs == null ? "none" : `${minutes(r.ageMs)}m`}`,
-      )
-      .join(" ");
-    console.log(`[onslaught-watchdog] ${summary}`);
+    console.log(`[onslaught-watchdog] ${readings.map(describeFreshness).join(" ")}`);
   });
   if (armed) console.log(`[onslaught-watchdog] scheduled (${SCHEDULE})`);
 }
