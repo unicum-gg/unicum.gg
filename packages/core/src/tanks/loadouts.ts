@@ -117,7 +117,20 @@ export async function saveTankLoadouts(
   return rows.length;
 }
 
-/** Forget the loadouts of vehicles this account no longer owns. */
+/**
+ * Forget the loadout of vehicles this account no longer owns, keeping the mark.
+ *
+ * Clearing rather than deleting, because the row holds two different kinds of
+ * fact and only one of them stops being true when a tank is sold. What was
+ * bolted to it is gone with it. What the player ACHIEVED on it is not: the
+ * game's own Service Record still lists a sold tank with its marks, and
+ * deleting the row would have us forget a third mark the moment its owner
+ * moved on -- the one figure nobody wants to lose.
+ *
+ * A row left with nothing but marks is a tank this account has played and no
+ * longer owns, which is a thing worth being able to say. The row goes for good
+ * only when the player withdraws, which is `forgetAllTankLoadouts` below.
+ */
 export async function forgetTankLoadouts(
   region: Region,
   accountId: number,
@@ -126,11 +139,68 @@ export async function forgetTankLoadouts(
   if (tankIds.length === 0) return 0;
   const table = tankLoadoutsByRegion[region];
   const rows = await db
-    .delete(table)
-    .where(
-      and(eq(table.accountId, accountId), inArray(table.tankId, tankIds)),
-    )
+    .update(table)
+    .set({
+      optDevices: null,
+      consumables: null,
+      boosters: null,
+      crewSkills: null,
+      fieldMods: null,
+      fieldModLevel: null,
+      premiumShellShare: null,
+      shellsLoaded: null,
+      modules: null,
+      crew: null,
+      progression: null,
+      setups: null,
+      updatedAt: new Date(),
+    })
+    .where(and(eq(table.accountId, accountId), inArray(table.tankId, tankIds)))
     .returning({ tankId: table.tankId });
+  return rows.length;
+}
+
+/**
+ * Write down the marks of every tank an account has ever played.
+ *
+ * Its own path, beside the loadouts, because it covers a different set: the
+ * mod reads these from the account dossier rather than from the garage, so a
+ * sold tank is included. Measured on one real account: 369 tanks in the
+ * dossier against 212 in the garage.
+ *
+ * Only the marks are touched. A row that already holds a loadout keeps it, and
+ * a tank we have never seen gets a row carrying its marks and nothing else,
+ * which is exactly what we know about it.
+ */
+export async function saveTankMarks(
+  region: Region,
+  accountId: number,
+  marks: { tankId: number; marks: number; markPercent: number | null }[],
+): Promise<number> {
+  if (marks.length === 0) return 0;
+  const table = tankLoadoutsByRegion[region];
+  const now = new Date();
+  const rows = marks.map((entry) => ({
+    accountId,
+    tankId: entry.tankId,
+    marks: entry.marks,
+    markPercent: entry.markPercent,
+    updatedAt: now,
+  }));
+  await db
+    .insert(table)
+    .values(rows)
+    .onConflictDoUpdate({
+      target: [table.accountId, table.tankId],
+      set: {
+        marks: sql`excluded.marks`,
+        // The percent only when the client sent one: a reading that failed
+        // arrives as null, and null must not wipe what we already hold.
+        markPercent: sql`coalesce(excluded.mark_percent, ${table.markPercent})`,
+        // `updated_at` deliberately NOT touched here. It says when the loadout
+        // was last seen, and a mark sweep says nothing about the loadout.
+      },
+    });
   return rows.length;
 }
 

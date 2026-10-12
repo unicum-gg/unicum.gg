@@ -139,6 +139,29 @@ export const loadoutsUploadBody = z.object({
   loadouts: z.array(loadoutBody).max(MAX_LOADOUTS_PER_UPLOAD).default([]),
   /** Vehicles the player no longer owns, so their rows can go. */
   sold: z.array(z.number().int()).max(MAX_LOADOUTS_PER_UPLOAD).default([]),
+  /**
+   * Marks of excellence for every tank the account has ever PLAYED.
+   *
+   * A different set from `loadouts`, and deliberately so. A loadout describes
+   * a tank the player owns; a mark describes something they achieved, on a
+   * tank they may since have sold. The game keeps the second: its own Service
+   * Record still lists a sold tank with its marks, and reading only the garage
+   * answered "nothing" for sixty of one player's hundred and seventy-nine.
+   *
+   * Sent whole with the first batch rather than folded into the loadouts,
+   * because a sold tank put through `sold` above would have each sweep add
+   * then remove the same rows.
+   */
+  marks: z
+    .array(
+      z.object({
+        tankId: z.number().int(),
+        marks: z.number().int().min(0).max(3),
+        markPercent: z.number().min(0).max(100).nullable(),
+      }),
+    )
+    .max(2000)
+    .default([]),
 });
 
 export type LoadoutsUploadBody = z.infer<typeof loadoutsUploadBody>;

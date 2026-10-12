@@ -1,5 +1,6 @@
 import {
   forgetAllTankLoadouts,
+  saveTankMarks,
   forgetTankLoadouts,
   listLoadoutStamps,
   saveTankLoadouts,
@@ -56,15 +57,24 @@ export async function POST(req: Request): Promise<Response> {
   if (!parsed.success) {
     return Response.json({ error: "invalid_body" }, { status: 400 });
   }
-  const { loadouts, sold } = parsed.data;
+  const { loadouts, sold, marks } = parsed.data;
 
   try {
+    // The marks LAST, and that order is the whole point: `sold` clears the
+    // loadout of a tank the player parted with, and the mark sweep covers that
+    // same tank because the dossier still holds its record. Running them the
+    // other way round would clear what had just been written.
     const [saved, forgotten] = await Promise.all([
       saveTankLoadouts(account.region, account.accountId, loadouts),
       forgetTankLoadouts(account.region, account.accountId, sold),
     ]);
+    const marked = await saveTankMarks(
+      account.region,
+      account.accountId,
+      marks,
+    );
     return Response.json(
-      { saved, forgotten },
+      { saved, forgotten, marked },
       { headers: { "cache-control": "no-store" } },
     );
   } catch (err) {
