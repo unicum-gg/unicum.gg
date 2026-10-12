@@ -17,18 +17,51 @@ export const MOE_COLORS: Record<1 | 2 | 3, string> = {
 export function MoEIcon({
   bars,
   color,
+  empty = false,
 }: {
-  bars: 1 | 2 | 3;
+  /** Zero is only meaningful with `empty`: three places, none of them earned. */
+  bars: 0 | 1 | 2 | 3;
   color: string;
+  /**
+   * Draw all three places, the unearned ones faint.
+   *
+   * For a COLUMN, where the icon sits beside a figure on every row: sized to
+   * its bars, one mark is a third as wide as three and everything after it
+   * shifts, so a column of percentages comes out ragged. Three places always
+   * occupy the same width, and the faint bars are not padding -- they say how
+   * much is left, which is the thing somebody grinding a mark wants to see.
+   *
+   * Off by default, because a single icon standing on its own should be as
+   * wide as what it shows.
+   */
+  empty?: boolean;
 }) {
+  if (!empty) {
+    if (bars === 0) return null;
+    return (
+      <svg
+        viewBox={`0 0 ${MARK_WIDTH[bars]} 12`}
+        className="inline-block h-3.5 w-auto"
+        fill={color}
+        aria-hidden
+      >
+        <path fillRule="evenodd" d={MARK_BARS.slice(0, bars).join("")} />
+      </svg>
+    );
+  }
   return (
     <svg
-      viewBox={`0 0 ${MARK_WIDTH[bars]} 12`}
-      className="inline-block h-3.5 w-auto"
-      fill={color}
+      viewBox={`0 0 ${MARK_WIDTH[3]} 12`}
+      className="text-fd-muted-foreground inline-block h-3.5 w-4 shrink-0"
       aria-hidden
     >
-      <path fillRule="evenodd" d={MARK_BARS.slice(0, bars).join("")} />
+      <path
+        fillRule="evenodd"
+        d={MARK_BARS.slice(bars).join("")}
+        fill="currentColor"
+        opacity={0.2}
+      />
+      <path fillRule="evenodd" d={MARK_BARS.slice(0, bars).join("")} fill={color} />
     </svg>
   );
 }
