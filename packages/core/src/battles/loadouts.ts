@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, eq, gt, isNotNull, sql } from "drizzle-orm";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   LOADOUT_SOURCE,
@@ -13,7 +13,13 @@ import {
   type NewBattleLoadoutRow,
   type ReplayLoadout,
 } from "@unicum.gg/shared";
+import {
+  readFieldMods,
+  readLoadouts,
+  readReplay,
+} from "@unicum.gg/shared";
 import { db } from "../db";
+import { fetchReplay } from "./replays";
 
 /**
  * Write down the loadouts a replay carries, one row per vehicle per life.
@@ -169,11 +175,99 @@ export async function storeBattleLoadouts(
     });
   }
 
-  // Nothing to update on a conflict. A loadout that was already written is the
-  // same loadout: the row is a statement about a battle that has finished, and
-  // a second offer of the same file cannot know anything the first did not.
-  await db.insert(battleLoadoutsByRegion[region]).values(rows).onConflictDoNothing();
+  const table = battleLoadoutsByRegion[region];
+
+  // On a conflict, fill the gaps and change nothing else.
+  //
+  // This used to do nothing at all, on the reasoning that a battle has finished
+  // and a second offer of the same file cannot know anything the first did not.
+  // The reasoning holds for a FACT. It does not hold for a gap, and the
+  // difference cost a day of readings: the field modifications were added after
+  // some rows had already been written, so a vehicle that had no row got one
+  // and a vehicle that HAD a row kept its empty column forever. Since the only
+  // vehicle with a row is the one whose loadout we read -- the player who
+  // recorded -- the result was a battle showing everyone's field modifications
+  // except the recorder's own, which is the one person looking.
+  //
+  // The same shape recurs whenever a second replay of one battle arrives: it
+  // carries the loadout of a vehicle we may know only the modifications of, and
+  // that loadout would have been dropped for exactly the same reason.
+  //
+  // `coalesce(existing, incoming)` keeps whatever is already written, so no
+  // fact is ever restated and the rows stay immutable in the sense the schema
+  // claims. Only a null moves.
+  const fillable = [
+    table.accountId,
+    table.tankId,
+    table.clientVersion,
+    table.optDevices,
+    table.devicesTriple,
+    table.boosters,
+    table.consumables,
+    table.crewSkills,
+    table.crewRoleSkills,
+    table.premiumShellShare,
+    table.shellsLoaded,
+    table.fieldModsPacked,
+    table.crew,
+    table.shells,
+  ];
+  const keep = (column: (typeof fillable)[number]) =>
+    sql`coalesce(${column}, excluded.${sql.identifier(column.name)})`;
+
+  await db
+    .insert(table)
+    .values(rows)
+    .onConflictDoUpdate({
+      target: [
+        table.startedAt,
+        table.arenaUniqueId,
+        table.vehicleId,
+        table.life,
+      ],
+      set: Object.fromEntries(
+        fillable.map((column) => [columnKey(table, column), keep(column)]),
+      ),
+      // And only when there is a gap to fill, so that re-reading an archive
+      // does not rewrite every row it already agrees with. A backfill offers
+      // the same thousand rows it offered last time; without this each pass
+      // would be a thousand row versions for the vacuum to collect.
+      setWhere: sql.join(
+        fillable.map(
+          (column) =>
+            sql`(${column} is null and excluded.${sql.identifier(column.name)} is not null)`,
+        ),
+        sql` or `,
+      ),
+    });
   return rows.length;
+}
+
+/**
+ * The property name a column is reached by, which is what `set` is keyed on.
+ *
+ * Drizzle's `set` takes the TypeScript property (`fieldModsPacked`), not the
+ * column name (`field_mods_packed`), and the list above holds columns so that
+ * the name, the gap test and the coalesce all come from one place. This maps
+ * back, and throws rather than silently skipping a column: a typo here would
+ * quietly stop filling one kind of gap, which is the exact failure this whole
+ * block exists to undo.
+ */
+function columnKey(
+  table: (typeof battleLoadoutsByRegion)[Region],
+  column: { name: string },
+): string {
+  for (const [key, candidate] of Object.entries(table)) {
+    if (
+      candidate &&
+      typeof candidate === "object" &&
+      "name" in candidate &&
+      candidate.name === column.name
+    ) {
+      return key;
+    }
+  }
+  throw new Error(`no property on battle_loadouts for column ${column.name}`);
 }
 
 /** One stored loadout, as a page needs it before the names are resolved. */
@@ -281,5 +375,201 @@ async function vehiclesOf(
       tank: vehicle.tank,
     });
   }
+  return out;
+}
+
+/**
+ * `2.4.0.2` out of `World of Tanks v. 2.4.0.2 #966`.
+ *
+ * One copy, because three readers need it and they must agree. The column
+ * exists to keep one patch's figures apart from another's, and two spellings
+ * of one build would split that in half -- a comparison that looks right and
+ * compares nothing. The xml version rather than the exe's, which the header
+ * also carries but which stops at the release before a hotfix, and with the
+ * non-breaking spaces the client writes these with folded to ordinary ones.
+ */
+export function replayClientVersion(full: string): string | null {
+  const found = /v\.\s*([0-9]+(?:\.[0-9]+)+)/.exec(full.replace(/\u00a0/g, " "));
+  return found ? found[1] : null;
+}
+
+/**
+ * Everything one recording says about what its battle was played with.
+ *
+ * The expensive half -- a decryption and an inflate over about a megabyte --
+ * so every caller does it once, and on a path nobody is waiting on.
+ *
+ * A recording with no packet stream is not a failure: a battle still being
+ * played has none yet, and its header already names every vehicle's field
+ * modifications, which are worth keeping on their own.
+ */
+export async function storeLoadoutsFromReplay(
+  region: Region,
+  arenaUniqueId: string,
+  startedAt: Date,
+  bytes: Uint8Array,
+): Promise<number> {
+  const { blocks, stream } = await readReplay(bytes);
+  const loadouts = stream.length === 0 ? [] : readLoadouts(stream);
+  const header = blocks[0] as { clientVersionFromXml?: unknown } | null;
+  const version =
+    typeof header?.clientVersionFromXml === "string"
+      ? replayClientVersion(header.clientVersionFromXml)
+      : null;
+  return storeBattleLoadouts(
+    region,
+    arenaUniqueId,
+    startedAt,
+    loadouts,
+    version,
+    readFieldMods(blocks),
+  );
+}
+
+/** What one pass of the backfill did, and where the next one starts. */
+export interface LoadoutBackfill {
+  /** Battles whose file was opened. */
+  read: number;
+  /** Battles that yielded at least one row. */
+  filled: number;
+  /** Rows offered, counting those an existing row already agreed with. */
+  rows: number;
+  /** Battles whose recording held nothing readable. */
+  empty: number;
+  /** Battles whose file could not be fetched or read. */
+  failed: number;
+  /**
+   * The last battle's `startedAt`, to hand back as `after`.
+   *
+   * A cursor rather than a position stored somewhere, so a pass is a pure
+   * function of its arguments and can be retried, resumed, or run from
+   * anywhere. Null once the sweep has reached the end.
+   */
+  next: Date | null;
+}
+
+/**
+ * Re-read archived recordings and write down what they say.
+ *
+ * Shared by the command line and by the production route, and not for
+ * tidiness: the archive answers from inside the deployment and not from a
+ * laptop, so the sweep that matters runs on the server while the one that is
+ * easy to watch runs locally. Two implementations of that would drift, and the
+ * one nobody runs would be the one that is wrong.
+ *
+ * One file at a time on purpose. Each is about a megabyte off object storage,
+ * then a decryption and an inflate; the archive shares a disk with this
+ * database, and a backfill is never the most urgent thing running.
+ */
+export async function backfillBattleLoadouts(
+  region: Region,
+  options: {
+    /** Battles to open in this pass. */
+    limit?: number;
+    /** Resume point: only battles that started strictly after this. */
+    after?: Date | null;
+    /** One battle, by arena id, for checking a change rather than sweeping. */
+    arenaUniqueId?: string | null;
+    /**
+     * Only battles that already hold a row with a hole in it.
+     *
+     * The case this was written for: a fact collected after some rows exist
+     * reaches the vehicles that had no row, and never the one that did.
+     */
+    gapsOnly?: boolean;
+    /** Only battles with no row at all, which is the ordinary resumed sweep. */
+    missingOnly?: boolean;
+    /** Called for each battle that yielded rows. */
+    onBattle?: (arenaUniqueId: string, rows: number) => void;
+    /** Called for each battle that could not be read. */
+    onFailure?: (arenaUniqueId: string, reason: unknown) => void;
+  } = {},
+): Promise<LoadoutBackfill> {
+  const battles = battlesByRegion[region];
+  const loadouts = battleLoadoutsByRegion[region];
+  const limit = Math.max(1, Math.min(options.limit ?? 25, 500));
+
+  const conditions = [isNotNull(battles.replayKey)];
+  if (options.arenaUniqueId) {
+    conditions.push(eq(battles.arenaUniqueId, options.arenaUniqueId));
+  }
+  if (options.after) conditions.push(gt(battles.startedAt, options.after));
+  if (options.missingOnly) {
+    conditions.push(sql`not exists (
+      select 1 from ${loadouts}
+      where ${loadouts.startedAt} = ${battles.startedAt}
+        and ${loadouts.arenaUniqueId} = ${battles.arenaUniqueId}
+    )`);
+  }
+  if (options.gapsOnly) {
+    // A row carrying a loadout and no field modifications. Narrow on purpose:
+    // a vehicle that simply has no modifications leaves the same null behind,
+    // so a broader test would re-read those files forever. The cursor is what
+    // carries a sweep past them.
+    conditions.push(sql`exists (
+      select 1 from ${loadouts}
+      where ${loadouts.startedAt} = ${battles.startedAt}
+        and ${loadouts.arenaUniqueId} = ${battles.arenaUniqueId}
+        and ${loadouts.optDevices} is not null
+        and ${loadouts.fieldModsPacked} is null
+    )`);
+  }
+
+  const todo = await db
+    .select({
+      arenaUniqueId: battles.arenaUniqueId,
+      startedAt: battles.startedAt,
+      key: battles.replayKey,
+    })
+    .from(battles)
+    .where(and(...conditions))
+    .orderBy(battles.startedAt)
+    .limit(limit);
+
+  const out: LoadoutBackfill = {
+    read: 0,
+    filled: 0,
+    rows: 0,
+    empty: 0,
+    failed: 0,
+    next: null,
+  };
+
+  for (const battle of todo) {
+    if (!battle.key) continue;
+    out.read += 1;
+    out.next = battle.startedAt;
+    try {
+      const file = await fetchReplay(battle.key);
+      if (!file) {
+        out.failed += 1;
+        options.onFailure?.(
+          battle.arenaUniqueId,
+          `the archive no longer holds ${battle.key}`,
+        );
+        continue;
+      }
+      const written = await storeLoadoutsFromReplay(
+        region,
+        battle.arenaUniqueId,
+        battle.startedAt,
+        file,
+      );
+      if (written === 0) {
+        out.empty += 1;
+        continue;
+      }
+      out.rows += written;
+      out.filled += 1;
+      options.onBattle?.(battle.arenaUniqueId, written);
+    } catch (error) {
+      out.failed += 1;
+      options.onFailure?.(battle.arenaUniqueId, error);
+    }
+  }
+
+  // Null at the end of the sweep, so a caller looping on the cursor stops
+  // rather than asking again for a page it has already had.
+  if (todo.length < limit) out.next = null;
   return out;
 }
