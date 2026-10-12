@@ -43,8 +43,10 @@ function PanelTitle({
 }: React.ComponentProps<"h2"> & {
   /** The heading level. A panel is a section of the page, so `h2` is the
    * default; pass `h3` when the panel is itself one entry of a section that
-   * already carries an `h2`, so the outline says which section it belongs to. */
-  as?: "h2" | "h3" | "h4";
+   * already carries an `h2`, so the outline says which section it belongs to.
+   * `h1` is for the one panel that IS the page -- a battle's own page has a
+   * single subject and no section above it to belong to. */
+  as?: "h1" | "h2" | "h3" | "h4";
 }) {
   return (
     <Tag

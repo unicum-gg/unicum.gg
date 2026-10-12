@@ -338,14 +338,25 @@ export function BattleDetail({
           {/* Only offered where it can be whole: the detailed report is about
               this account's own battle, and the economy half of it exists only
               when this account's own client reported it. */}
-          {mine ? (
+          {/*
+            The REPORT needs a player, the replay does not.
+            
+            This used to offer nothing at all unless the battle was the page
+            owner's, which was right while a battle could only be read inside
+            somebody's page. It is wrong now that a battle has a page of its
+            own: there the replay is the whole point, and gating the control
+            on an owner who does not exist hid it completely.
+          */}
+          {mine || data.hasReplay ? (
             <SegmentedControl
               active={tab}
               onSelect={setTab}
               segments={[
                 { id: Tab.Teams, label: t("tab.teams") },
-                { id: Tab.Report, label: t("tab.report") },
-                { id: Tab.Replay, label: t("tab.replay") },
+                ...(mine ? [{ id: Tab.Report, label: t("tab.report") }] : []),
+                ...(data.hasReplay
+                  ? [{ id: Tab.Replay, label: t("tab.replay") }]
+                  : []),
               ]}
             />
           ) : (
@@ -360,7 +371,7 @@ export function BattleDetail({
           </span>
         </div>
 
-        {tab === Tab.Replay && mine ? (
+        {tab === Tab.Replay && data.hasReplay ? (
           <BattleReplay
             region={region}
             battleId={battleId}
@@ -375,6 +386,8 @@ export function BattleDetail({
           />
         ) : tab === Tab.Report && mine ? (
           <BattleReport
+            region={region}
+            battleId={battleId}
             participant={{ ...mine, personal }}
             startedAt={startedAt}
             battleDuration={data.duration ?? cardDuration}
@@ -400,6 +413,7 @@ export function BattleDetail({
               <BattlePlayerPanel
                 key={team}
                 region={region}
+                battleId={battleId}
                 participant={open}
                 killer={killer}
                 victims={kills.victimsOf.get(open.id) ?? []}
