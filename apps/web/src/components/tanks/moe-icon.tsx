@@ -1,10 +1,20 @@
 // The in-house Marks-of-Excellence chevrons (1-3 bars), shared by the tank
 // Marks tab and the player vehicles table. Colours are a prestige ramp by mark
 // level: bronze (1) -> silver (2) -> gold (3).
+// Each bar in ABSOLUTE coordinates, and that matters more than it looks.
+//
+// These were written relative: the second and third opened with a lowercase
+// `m`, so each one started from wherever the previous one left off. That works
+// only while the bars are concatenated from the first, which is what drawing
+// "the marks earned" happens to do. Drawing the UNEARNED ones is a second path
+// that starts in the middle of the set, and a relative start made it leap back
+// toward the origin -- the middle bar came out sliced.
+//
+// Absolute, each bar stands where it belongs whichever ones are drawn.
 const MARK_BARS = [
   "M3.765 0h2.824L2.823 12H0L3.765 0z",
-  "m4.706 0h2.824L7.529 12H4.706L8.471 0z",
-  "m4.706 0H16l-3.765 12H9.412l3.764-12h.001z",
+  "M8.471 0h2.824L7.529 12H4.706L8.471 0z",
+  "M13.177 0H16l-3.765 12H9.412l3.764-12h.001z",
 ];
 const MARK_WIDTH = { 1: 6.6, 2: 11.3, 3: 16 } as const;
 
