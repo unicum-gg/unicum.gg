@@ -693,8 +693,16 @@ async function carryForwardMarks(
  *
  * Silent when the account has never run the mod, which is almost every account:
  * no rows, nothing applied, and the scraped counts stand as they did.
+ *
+ * **Applied on the way OUT as well as on the way in**, which is the whole point
+ * and was learned the hard way. A snapshot is written when a tank is PLAYED, so
+ * attaching the percent to one meant a tank parked since September kept the row
+ * it had in September and showed nothing. Measured on a real garage: 209 tanks
+ * with a percent, 88 of them visible. The percent is a state the garage reports
+ * today, not a measurement taken at the time of a battle, so the page reads it
+ * from the fleet and the snapshot column is left to carry the history.
  */
-async function applyGarageMarks(
+export async function applyGarageMarks(
   region: Region,
   accountId: number,
   tanks: TankStats[],

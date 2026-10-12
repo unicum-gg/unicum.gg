@@ -25,6 +25,7 @@ import {
   falloutStatsFromSnapshot,
   fortifiedStatsFromSnapshot,
   rankedStatsFromSnapshot,
+  applyGarageMarks,
   recordCurrentSnapshot,
   skirmishStatsFromSnapshot,
   statsFromSnapshot,
@@ -336,12 +337,16 @@ export async function loadPlayerDetail(
 ): Promise<PlayerDetailData | null> {
   const initial = await loadPlayerInitialData(region, { nickname });
   if (!initial.player || !initial.latestSnapshot) return null;
+  // The fleet's marks over the snapshots', because a snapshot only carries
+  // what was true the last time that tank was played. See `applyGarageMarks`.
+  const detailTanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
+  await applyGarageMarks(region, initial.player.accountId, detailTanks);
   return buildPlayerDetail({
     region,
     accountId: initial.player.accountId,
     player: initial.player,
     latest: initial.latestSnapshot,
-    tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
+    tanks: detailTanks,
     clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
     initial,
   });
@@ -363,6 +368,7 @@ export async function loadPlayerTanks(
   if (!initial.player) return null;
 
   const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
+  await applyGarageMarks(region, initial.player.accountId, tanks);
   const [encyclopedia, wn8Expected, wnxExpected, specs] = await Promise.all([
     getVehicleEncyclopedia(region),
     getWN8ExpectedValues(),
