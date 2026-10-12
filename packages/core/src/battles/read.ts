@@ -1,4 +1,4 @@
-import { and, desc, eq, getTableName, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, getTableName, gte, inArray, lt, sql } from "drizzle-orm";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   battleLoadoutsByRegion,
@@ -574,6 +574,22 @@ export type BattleDetail = {
   mapImage: string | null;
   mapBounds: ArenaOverlay["bounds"] | null;
   mapOverlay: ArenaOverlay | null;
+  /**
+   * The mark of excellence this battle moved, when we can see it move.
+   *
+   * `percent` is where the gun stood when the battle ended, which the results
+   * carry. `previous` is where it stood at the end of the last battle the same
+   * account played in the same tank, which nothing carries: the game gives no
+   * "before" to pair with the "after" the way the mastery badge has one, so
+   * the only way to know what a battle GAINED is to look at the battle before
+   * it. That is a question about a series and belongs here, not in the client.
+   *
+   * Null when the reporter ran a client too old to send it, when the mode does
+   * not count towards marks, or when this is the first battle we hold for that
+   * tank. `previous` alone can be null while `percent` is not: a first battle
+   * has a standing and no movement.
+   */
+  mark: { percent: number; previous: number | null } | null;
   /** Every vehicle, both teams, ordered by team then by what they did. */
   participants: BattleParticipant[];
 };
@@ -676,6 +692,7 @@ export async function battleDetail(
   return {
     id: battle.arenaUniqueId,
     startedAt: battle.startedAt,
+    mark: await markMove(region, battle),
     map: battle.mapName,
     gameplay: battle.gameplayId,
     battleType: battle.battleType,
@@ -798,3 +815,79 @@ async function nicknamesOf(
   }
   return out;
 }
+
+/**
+ * Where this battle left the gun, and where the one before it did.
+ *
+ * Asked of the battles table rather than derived from anything on this row,
+ * because the movement is a fact about two battles and only one of them is
+ * here. The previous battle is the latest one the SAME account played in the
+ * SAME tank before this one, which is why both halves of that have to be
+ * matched: an account that played three tanks this evening has three separate
+ * series running, and reading across them would show a mark leaping about.
+ *
+ * **Why it is a second query.** The figure sits inside the `personal` document
+ * of a battle row, so there is no column to join on and no index that would
+ * help; a lateral over the partitioned table would read the same month either
+ * way. One extra statement on the page of a single battle is a fair price, and
+ * nothing else on the page pays it.
+ *
+ * Returns null rather than a zero movement when there is nothing to say. A
+ * battle whose reporter sent no percent, or a mode that does not count towards
+ * marks, has no standing to report; showing 0 % there would read as a gun that
+ * lost everything.
+ */
+/** How far back a previous battle may sit and still count as "the one before". */
+const MARK_WINDOW = 45 * 24 * 60 * 60 * 1000;
+
+async function markMove(
+  region: Region,
+  battle: { arenaUniqueId: string; startedAt: Date; personal: BattleEconomy | null; reportedBy: number[]; vehicles: BattleVehicle[] },
+): Promise<{ percent: number; previous: number | null } | null> {
+  const percent = battle.personal?.markPercent;
+  if (percent == null) return null;
+
+  // The tank the reporter played, which is the one the percent belongs to.
+  // The results name the reporting account, and that account's vehicle in this
+  // battle names the tank; without it there is a percent and no series to put
+  // it in.
+  const account = Number(battle.reportedBy[0]);
+  const own = Number.isFinite(account)
+    ? battle.vehicles.find((vehicle) => vehicle.account === account)
+    : undefined;
+  if (!own?.tank) return { percent, previous: null };
+
+  const table = battlesByRegion[region];
+  const [before] = await db
+    .select({ personal: table.personal })
+    .from(table)
+    .where(
+      and(
+        lt(table.startedAt, battle.startedAt),
+        // And no further back than this. Two reasons, and either alone would
+        // be enough. The table is partitioned by month, so an unbounded `<`
+        // reads every partition there has ever been to find one row. And a
+        // standing from two months ago is not what this battle moved from: a
+        // gap that long means the tank was parked, and drawing an arrow
+        // across it would credit one battle with a season of play.
+        gte(table.startedAt, new Date(battle.startedAt.getTime() - MARK_WINDOW)),
+        // `array[...]::bigint[]` spelled out rather than a bound array: the
+        // driver flattens a one-element array parameter back to a scalar and
+        // then refuses it, which is a bind error at request time and not a
+        // type error at build time.
+        sql`${table.reportedBy} @> array[${account}]::bigint[]`,
+        sql`${table.personal} ->> 'markPercent' is not null`,
+        sql`exists (
+          select 1 from jsonb_array_elements(${table.vehicles}) as v
+          where (v ->> 'account')::bigint = ${account}
+            and (v ->> 'tank')::bigint = ${own.tank}
+        )`,
+      ),
+    )
+    .orderBy(desc(table.startedAt))
+    .limit(1);
+
+  const was = before?.personal?.markPercent;
+  return { percent, previous: typeof was === "number" ? was : null };
+}
+

@@ -170,6 +170,16 @@ export const BattleDetailResponse = z
       description:
         "Whether the archive holds this battle's replay file, and so whether the 2D viewer has anything to draw. False for most battles: a replay only exists when a player who was there had recording on.",
     }),
+    mark: z
+      .object({
+        percent: z.number(),
+        previous: z.number().nullable(),
+      })
+      .nullable()
+      .meta({
+        description:
+          "Where the reporter's mark of excellence stood when this battle ended, and where it stood at the end of their previous battle in the same tank. The game gives no 'before' of its own, so the movement is only knowable by looking at the battle before. Null when the reporting client is too old to send it, when the mode does not count towards marks, or when no earlier battle in that tank is held.",
+      }),
     participants: z.array(battleParticipant).meta({
       description: "Every vehicle, both teams, by team then by damage.",
     }),
