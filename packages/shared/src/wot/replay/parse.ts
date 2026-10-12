@@ -1,4 +1,5 @@
 import { Blowfish } from "./blowfish";
+import { CHAT_COMMANDS } from "./chat-commands";
 
 /**
  * Reading a `.wotreplay` the player chose, in their own browser.
@@ -197,6 +198,66 @@ export type HealthTrack = {
   points: [number, number][];
 };
 
+/** One line somebody typed in the battle, as the client recorded it. */
+export type ChatLine = {
+  /** Seconds on the replay's own clock, the same one the positions use. */
+  at: number;
+  /** Who typed it, with their clan tag if they had one, as the game wrote it. */
+  from: string;
+  /** The vehicle they were in, or null when the line carries none. */
+  vehicle: string | null;
+  /** What they typed, with the game's HTML entities resolved. Never markup. */
+  text: string;
+  /** The colour the game gave the line, which is how it says ally or enemy. */
+  colour: string | null;
+  /**
+   * The quick command this line IS, when it is one rather than something typed.
+   *
+   * A reload callout, a map ping, "Help!": the game sends those as an action
+   * id on another packet entirely. This is the client's own `msgText` key, the
+   * one `game/chat-commands` files the sentence under in every language.
+   * Absent for a line somebody actually typed.
+   */
+  command?: string;
+  /**
+   * Where on the map a ping was put, in the arena's own metres, or null.
+   *
+   * `strArg2`, twelve bytes when the command carries a place: three
+   * little-endian floats, x, height, z, in the frame the positions use. The
+   * height is read and dropped, as everywhere else here, because a minimap is a
+   * plan view. Null for a command that pings nothing, where the field is empty.
+   */
+  where?: { x: number; z: number } | null;
+  /** The vehicle a command is ABOUT, when it is about one. `int32Arg1`. */
+  target?: number | null;
+  /** Seconds left on a reload, for the callouts that say so. `floatArg1`. */
+  reloadTime?: number | null;
+  /** A base or objective label the message names. `strArg1`. */
+  label?: string | null;
+  /**
+   * Who sent a command, as an id to match against the battle's own vehicles.
+   *
+   * `int64Arg1`. On a real recording it came back as the sender's VEHICLE id,
+   * the same id the tracks are keyed by, which is what makes it resolvable at
+   * all. Not for every command though: a waypoint's ran to nineteen digits and
+   * is plainly something else. So it is handed over unresolved and shown only
+   * where it names somebody who was there.
+   */
+  sender?: number | null;
+};
+
+/** One vehicle finishing another, as the recording client heard it. */
+export type Kill = {
+  /** Seconds on the replay's own clock. */
+  at: number;
+  /** The vehicle that died, keyed like the tracks. */
+  victim: number;
+  /** Who finished it, or null when nobody did: fire, drowning, a fall. */
+  by: number | null;
+  /** The hit points the killing blow took, which is what it was worth. */
+  damage: number;
+};
+
 export type ReplayMotion = {
   tracks: Track[];
   /**
@@ -210,6 +271,17 @@ export type ReplayMotion = {
   health: HealthTrack[];
   /** How long the stream runs, in seconds. */
   duration: number;
+  /** Every line typed in the battle, in the order they were sent. */
+  chat: ChatLine[];
+  /**
+   * Every kill this client heard about, in order.
+   *
+   * Heard about, not every kill there was: health only reaches a client for a
+   * vehicle it can see, so a tank finished out of sight leaves no event here
+   * even though the battle's own results know it died. The same fog of war the
+   * positions have, and the reason the results stay the authority on WHO died.
+   */
+  kills: Kill[];
   /** Every packet type seen and how often, which is what makes a gap findable. */
   seen: Record<number, number>;
 };
@@ -226,10 +298,269 @@ export type ReplayMotion = {
  * The clock is sanity-checked because a misaligned walk produces float noise
  * rather than an error, and an eight-hour battle is the clearest sign of it.
  */
+const CHAT_DECODER = new TextDecoder("utf-8", { fatal: false });
+
+/**
+ * One chat line out of a `0x23` packet, or null when it is not one we can read.
+ *
+ * The packet is `[u32 length][utf8]`, and the string the game stores is already
+ * marked up, which is a gift and a trap in equal measure:
+ *
+ *     <font color='#80D63A'>Finder30 (Pz. 55)&nbsp;: </font>
+ *     <font color='#80D63A'>j&apos;arrive</font>
+ *
+ * The gift is that the sender, the clan tag, the vehicle and the side's colour
+ * are all there with no cross-referencing. The trap is that it is markup
+ * carrying text a player typed, so it is taken APART here and handed on as
+ * plain strings. Nothing downstream is ever given the markup to render, and
+ * nothing here passes a player's own characters through as HTML.
+ *
+ * Verified against four real replays of this client: two carried lines, two
+ * carried the packet type not at all, which is simply a battle nobody spoke in.
+ */
+const ACTION_NAME = "bw_chat2.onActionReceived";
+
+/** The game's own cooldown for sending the same command again, in seconds. */
+const COMMAND_REPEAT = 5;
+
+/**
+ * One quick command out of a `0x31` packet, or null when it is not one.
+ *
+ * The packet is `[u32 nameLen][method name][u32 bodyLen][python pickle]`, and
+ * only one method name matters. The pickle is protocol 2 and the client's own
+ * `FixedDict`, which is more than is needed here: the id is the FIRST integer
+ * after the two-byte header, verified on three real packets, one of which
+ * resolved to the waypoint command while also spelling out `prebattlemarker`
+ * in its own payload. The sender is `int64Arg1`, found by its key rather than
+ * by an offset, because the dict's order is the client's business and not ours.
+ *
+ * No general pickle reader, deliberately: two fields are wanted, and a reader
+ * that interprets a pickle is a reader that interprets whatever a file holds.
+ */
+function readCommand(
+  stream: Uint8Array,
+  at: number,
+  from: number,
+  to: number,
+): ChatLine | null {
+  const view = new DataView(stream.buffer, stream.byteOffset, stream.byteLength);
+  if (to - from < 8) return null;
+  const nameLength = view.getUint32(from, true);
+  if (nameLength !== ACTION_NAME.length || from + 8 + nameLength > to) return null;
+  if (
+    CHAT_DECODER.decode(stream.subarray(from + 4, from + 4 + nameLength)) !==
+    ACTION_NAME
+  ) {
+    return null;
+  }
+  const body = from + 8 + nameLength;
+  // The pickle's own header, then the id as a one-byte int.
+  if (body + 4 > to || stream[body] !== 0x80 || stream[body + 1] !== 0x02) return null;
+  if (stream[body + 2] !== 0x4b) return null;
+  const command = CHAT_COMMANDS[stream[body + 3]];
+  // An id outside the table is one of the commands with no words of its own: a
+  // reply, a cancel, a marker-only ping. Nothing was said, so nothing is kept.
+  if (!command) return null;
+
+  return {
+    at,
+    from: "",
+    vehicle: null,
+    // The English, as the fallback. The sentence a reader actually sees is
+    // looked up from `game/chat-commands` under the key below, in the words
+    // their own client would have used.
+    text: command.english,
+    colour: null,
+    command: command.key,
+    // Handed over as a number for the caller to match against the battle's own
+    // participants, and shown only if it matches one. It is `int64Arg1`, which
+    // is an account id for some commands and something else entirely for
+    // others: a waypoint's was nineteen digits, past what a JavaScript number
+    // holds exactly. Resolving it against a list of people who were actually
+    // there is the only check worth having, so the check is where that list is.
+    sender: senderOf(stream, body, to),
+    where: placeOf(stream, body, to),
+    // What the message's own placeholders need. `int32Arg1` is the TARGET
+    // (`getFirstTargetID`) against `int64Arg1` for the sender
+    // (`getSenderVehID`): two fields that are easy to swap, and the client
+    // names them plainly, so they were read there rather than inferred.
+    target: numberOr(argOf(stream, body, to, "int32Arg1")),
+    reloadTime: numberOr(argOf(stream, body, to, "floatArg1")),
+    label: stringOr(argOf(stream, body, to, "strArg1")),
+  };
+}
+
+/**
+ * One value out of the pickled dict, found by its key rather than by an offset.
+ *
+ * The client's `FixedDict` orders itself as it pleases, so the keys are the only
+ * stable thing. Six opcodes are read and no more: this is not a pickle
+ * interpreter, and a reader that interprets a pickle interprets whatever a file
+ * happens to hold.
+ */
+function argOf(
+  stream: Uint8Array,
+  from: number,
+  to: number,
+  key: string,
+): number | string | null {
+  const view = new DataView(stream.buffer, stream.byteOffset, stream.byteLength);
+  for (let at = from; at + key.length + 2 < to; at += 1) {
+    if (stream[at] !== key.charCodeAt(0)) continue;
+    if (CHAT_DECODER.decode(stream.subarray(at, at + key.length)) !== key) continue;
+    const value = at + key.length;
+    const code = stream[value];
+    // BININT1 and BININT2, what a small number pickles as.
+    if (code === 0x4b) return stream[value + 1];
+    if (code === 0x4d) return view.getUint16(value + 1, true);
+    // BININT4, signed, what a vehicle id pickles as.
+    if (code === 0x4a) return value + 5 > to ? null : view.getInt32(value + 1, true);
+    // LONG1: a length byte, then that many bytes, little-endian.
+    if (code === 0x8a) {
+      const length = stream[value + 1];
+      if (length === 0 || value + 2 + length > to) return null;
+      let out = 0;
+      for (let byte = length - 1; byte >= 0; byte -= 1) {
+        out = out * 256 + stream[value + 2 + byte];
+      }
+      return out;
+    }
+    // BINFLOAT, eight bytes BIG-endian, which is the one that is not.
+    if (code === 0x47) return value + 9 > to ? null : view.getFloat64(value + 1, false);
+    // SHORT_BINSTRING.
+    if (code === 0x55) {
+      const length = stream[value + 1];
+      if (value + 2 + length > to) return null;
+      return CHAT_DECODER.decode(stream.subarray(value + 2, value + 2 + length));
+    }
+    return null;
+  }
+  return null;
+}
+
+/** Narrowing, so one reader can serve fields of three different types. */
+function numberOr(value: number | string | null): number | null {
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+function stringOr(value: number | string | null): string | null {
+  return typeof value === "string" && value.length > 0 ? value : null;
+}
+
+/**
+ * `strArg2` as a place on the map, or null when the command carries none.
+ *
+ * Twelve bytes, three floats, x height z. The length is CHECKED rather than
+ * assumed: the same field is empty on a command that pings nothing, and reading
+ * four bytes of nothing as a coordinate would put a marker at a plausible
+ * looking place nobody chose.
+ */
+function placeOf(
+  stream: Uint8Array,
+  from: number,
+  to: number,
+): { x: number; z: number } | null {
+  const key = "strArg2";
+  const view = new DataView(stream.buffer, stream.byteOffset, stream.byteLength);
+  for (let at = from; at + key.length + 2 < to; at += 1) {
+    if (stream[at] !== 0x73) continue;
+    if (CHAT_DECODER.decode(stream.subarray(at, at + key.length)) !== key) continue;
+    const value = at + key.length;
+    // SHORT_BINSTRING: the opcode, one length byte, then the bytes.
+    if (stream[value] !== 0x55 || stream[value + 1] !== 12) return null;
+    if (value + 14 > to) return null;
+    const x = view.getFloat32(value + 2, true);
+    const z = view.getFloat32(value + 10, true);
+    if (!Number.isFinite(x) || !Number.isFinite(z)) return null;
+    return { x, z };
+  }
+  return null;
+}
+
+/** `int64Arg1` out of the pickle, found by its key. Null when it is not there. */
+function senderOf(stream: Uint8Array, from: number, to: number): number | null {
+  const key = "int64Arg1";
+  for (let at = from; at + key.length + 2 < to; at += 1) {
+    if (stream[at] !== 0x69) continue;
+    if (CHAT_DECODER.decode(stream.subarray(at, at + key.length)) !== key) continue;
+    const value = at + key.length;
+    // LONG1: one length byte, then that many bytes, little-endian.
+    if (stream[value] === 0x8a) {
+      const length = stream[value + 1];
+      if (length === 0 || value + 2 + length > to) return null;
+      let out = 0;
+      for (let byte = length - 1; byte >= 0; byte -= 1) {
+        out = out * 256 + stream[value + 2 + byte];
+      }
+      return out;
+    }
+    if (stream[value] === 0x4b) return stream[value + 1];
+    return null;
+  }
+  return null;
+}
+
+function readChatLine(
+  stream: Uint8Array,
+  at: number,
+  from: number,
+  to: number,
+): ChatLine | null {
+  if (to - from < 5) return null;
+  const view = new DataView(stream.buffer, stream.byteOffset, stream.byteLength);
+  const length = view.getUint32(from, true);
+  // Bounded by the packet itself rather than trusted: a length that overruns
+  // is a misread walk, not a long message.
+  if (length === 0 || length > to - from - 4) return null;
+  const raw = CHAT_DECODER.decode(stream.subarray(from + 4, from + 4 + length));
+
+  // `[^]` rather than `.` with the `s` flag, which this project's target does
+  // not reach. Same thing: anything including a newline, and a message can
+  // carry one.
+  const spans = [
+    ...raw.matchAll(/<font[^>]*color='([^']*)'[^>]*>([^]*?)<\/font>/g),
+  ];
+  if (spans.length < 2) return null;
+  const head = entities(spans[0][2]).trim();
+  const text = entities(spans.slice(1).map((span) => span[2]).join("")).trim();
+  if (!text) return null;
+
+  // "Nickname[CLAN] (Vehicle) :" is the shape, and the vehicle is the one part
+  // that may be absent. Taken from the LAST parentheses, since a nickname is
+  // allowed to contain them and the vehicle is always final.
+  const vehicle = head.match(/\(([^()]*)\)\s*:?\s*$/);
+  const from_ = head
+    .replace(/\(([^()]*)\)\s*:?\s*$/, "")
+    .replace(/[\s:]+$/, "")
+    .trim();
+  return {
+    at,
+    from: from_ || head,
+    vehicle: vehicle ? vehicle[1].trim() : null,
+    text,
+    colour: spans[0][1] || null,
+  };
+}
+
+/** The five entities the game writes, and nothing else: this is not an HTML parser. */
+function entities(raw: string): string {
+  return raw
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+}
+
 export function readMotion(stream: Uint8Array): ReplayMotion {
   const view = new DataView(stream.buffer, stream.byteOffset, stream.byteLength);
   const byVehicle = new Map<number, [number, number, number, number][]>();
   const health = new Map<number, [number, number][]>();
+  const chat: ChatLine[] = [];
+  const kills: Kill[] = [];
+  const commandAt = new Map<string, number>();
   const headings = new Map<number, number>();
   const seen: Record<number, number> = {};
   let duration = 0;
@@ -303,6 +634,10 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
       const size = u32(stream, packet + 20);
       if (method === 4 && size === 10 && packet + 34 <= stream.length) {
         const hp = view.getInt16(packet + 24, true);
+        const was = view.getInt16(packet + 26, true);
+        // Who did it, the third field of the same body. Zero for damage with
+        // no author: fire, drowning, falling, the end-of-battle wipe.
+        const by = u32(stream, packet + 28);
         if (hp >= 0 && hp < 100000) {
           const series = health.get(id) ?? [];
           const previous = series.at(-1);
@@ -310,6 +645,41 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
             series.push([clock, hp]);
             health.set(id, series);
           }
+          // The shot that finished somebody, kept apart from the health series
+          // because it is an event and not a sample: a reader wants "who killed
+          // whom, when", and that is not derivable from two curves.
+          if (hp === 0 && was > 0) {
+            kills.push({ at: clock, victim: id, by: by || null, damage: was });
+          }
+        }
+      }
+    }
+
+    // Everything somebody typed. Last of the three because it is the rarest:
+    // two of four real battles carried none at all.
+    if (type === 0x23) {
+      const packet = cursor - packetSize;
+      const line = readChatLine(stream, clock, packet + 12, cursor);
+      if (line) chat.push(line);
+    }
+
+    // And the quick commands, a different packet carrying a number rather than
+    // a sentence. Into the same list, because a reader wants one record of what
+    // was said and does not care which wire each line came down.
+    if (type === 0x31) {
+      const packet = cursor - packetSize;
+      const line = readCommand(stream, clock, packet + 12, cursor);
+      // Folded, because a held marker re-sends itself two or three times a
+      // second: one real battle produced a hundred and sixty-nine of these for
+      // what a player would call four or five callouts. The window is the
+      // game's own cooldown for repeating a command, five seconds, so this
+      // collapses exactly what the game would not have let anyone send twice.
+      if (line) {
+        const seen = `${line.command}:${line.sender ?? "?"}`;
+        const last = commandAt.get(seen);
+        if (last === undefined || clock - last > COMMAND_REPEAT) {
+          commandAt.set(seen, clock);
+          chat.push(line);
         }
       }
     }
@@ -322,6 +692,8 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
       heading: headings.get(id) ?? null,
     })),
     health: [...health].map(([id, points]) => ({ id, points })),
+    chat,
+    kills,
     duration,
     seen,
   };

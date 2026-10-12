@@ -62,6 +62,12 @@ export const GAME_CLIENT_NAMESPACES: readonly string[] = [
   "game/skill-tree",
   "game/skill-tree-descriptions",
   "game/onslaught-seasons",
+  // The quick commands, which a replay records as an action id and never as
+  // words: "Reloading!", "Help!", the pings. Every value is the sentence the
+  // client itself puts on a player's screen, placeholders and all.
+  "game/chat-commands",
+  // The battle feed's own sentence for a destruction.
+  "game/battle-messages",
 ];
 
 /**

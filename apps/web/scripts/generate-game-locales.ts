@@ -32,6 +32,8 @@ import {
   GameCatalogue,
   gameLocaleUrl,
   parseArenaCatalogue,
+  parseBattleMessages,
+  parseChatCommands,
   parseBattleTypeNames,
   parseNamedCatalogue,
   parsePo,
@@ -143,7 +145,17 @@ async function read(
 
 /** Everything one language contributes, from the catalogues that carry it. */
 async function catalogueFor(language: GameLanguage) {
-  const [arenas, artefacts, perks, menuText, comp7Text, skillTreeText, profile] =
+  const [
+    arenas,
+    artefacts,
+    perks,
+    menuText,
+    comp7Text,
+    skillTreeText,
+    profile,
+    chatCommands,
+    battleMessages,
+  ] =
     await Promise.all([
       read(language, GameCatalogue.Arenas).then(parseArenaCatalogue),
       read(language, GameCatalogue.Artefacts).then(parseNamedCatalogue),
@@ -157,6 +169,15 @@ async function catalogueFor(language: GameLanguage) {
       read(language, GameCatalogue.Profile)
         .then(parsePo)
         .catch(() => new Map<string, string>()),
+      // Optional for the same reason as `profile`: a mirror that has not
+      // rebuilt since this was added must not stop the ones that have been
+      // there all along from being written.
+      read(language, GameCatalogue.IngameGui)
+        .then(parseChatCommands)
+        .catch(() => ({}) as Record<string, string>),
+      read(language, GameCatalogue.IngameGui)
+        .then(parseBattleMessages)
+        .catch(() => ({}) as Record<string, string>),
     ]);
   // One fetch, two vocabularies: the statistics table and the battle-type picker
   // both live in `menu`.
@@ -169,6 +190,8 @@ async function catalogueFor(language: GameLanguage) {
     seasons: parseSeasonNames(comp7Text),
     skillTree: parseSkillTreeDescriptions(skillTreeText),
     skillTreeNames: parseSkillTreeNames(skillTreeText),
+    chatCommands,
+    battleMessages,
     terms: termSource({
       profile,
       menu: parsePo(menuText),
@@ -451,6 +474,13 @@ async function main(): Promise<void> {
       ["game/skill-tree", catalogue.skillTreeNames],
       ["game/skill-tree-descriptions", catalogue.skillTree],
       ["game/onslaught-seasons", catalogue.seasons],
+      // The quick commands a replay records as an action id, in the words the
+      // client itself puts on screen. Keyed by the command table's `msgText`,
+      // which is the only name both halves share.
+      ["game/chat-commands", catalogue.chatCommands],
+      // The battle feed's own words for a destruction, which a replay carries
+      // only as a reason code.
+      ["game/battle-messages", catalogue.battleMessages],
       // English keeps our own labels; every other language gets the client's.
       [
         "game/tank-params",

@@ -88,6 +88,14 @@ export enum GameCatalogue {
    * version of: the game already names most of what the page says.
    */
   Profile = "profile",
+  /**
+   * The in-battle interface, whose `chat_shortcuts/` keys are the quick
+   * commands: the reload callouts, the pings, "Help!". A replay records those
+   * as an action id rather than as words, so this is the only place the words
+   * exist, and the only way a French reader sees "Je recharge !" rather than
+   * the English the id resolves to here.
+   */
+  IngameGui = "ingame_gui",
 }
 
 /** Raw-content URL of one gettext catalogue in one language. */
@@ -152,6 +160,43 @@ export type NamedCatalogue = {
   names: Record<string, string>;
   descriptions: Record<string, string>;
 };
+
+/**
+ * The quick commands, keyed by the name the command table calls its `msgText`.
+ *
+ * `chat_shortcuts/` and nothing else out of a file that holds the whole battle
+ * interface: the neighbouring `chat_example/` keys are the samples the settings
+ * screen shows, whose placeholders are decorative (`<Enemy Name>`), while these
+ * are what the client actually says and carry real ones (`%(target)s`).
+ */
+/**
+ * The battle feed's own death messages, keyed as the client keys them.
+ *
+ * `DEATH_FROM_<cause>_<attacker>_<target>`, where the two sides are relative to
+ * whoever is reading: the same shot is "X destroyed Y" to one bench and
+ * "Enemy X destroyed enemy Y" to the other. This is the feed that scrolls
+ * during a battle, not the after-battle report, which words the same events
+ * differently and from the victim's side.
+ */
+export function parseBattleMessages(text: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  const prefix = "player_messages/DEATH_";
+  for (const [key, value] of parsePo(text)) {
+    if (!value || !key.startsWith(prefix)) continue;
+    out[key.slice(prefix.length)] = value;
+  }
+  return out;
+}
+
+export function parseChatCommands(text: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  const prefix = "chat_shortcuts/";
+  for (const [key, value] of parsePo(text)) {
+    if (!value || !key.startsWith(prefix)) continue;
+    out[key.slice(prefix.length)] = value;
+  }
+  return out;
+}
 
 export function parseNamedCatalogue(text: string): NamedCatalogue {
   const out: NamedCatalogue = { names: {}, descriptions: {} };
