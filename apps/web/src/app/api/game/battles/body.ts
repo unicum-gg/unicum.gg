@@ -104,6 +104,15 @@ const vehicle = z.object({
   damaged: counter.optional(),
   /** A battle-scoped vehicle id, not an account. */
   killer: z.number().int().positive().optional(),
+  /**
+   * Marks of excellence painted on this gun, 0 to 3.
+   *
+   * For EVERY vehicle in the battle, not only the reporting one: the results
+   * carry it in the public half, so one report names the marks of all thirty.
+   * Absent rather than zero when there are none, so thirty vehicles do not
+   * each carry a field saying nothing.
+   */
+  marks: z.number().int().min(1).max(3).optional(),
 });
 
 /**
@@ -136,6 +145,20 @@ const economy = z.object({
   bonds: counter.optional(),
   bondsBase: counter.optional(),
   premium: z.boolean().optional(),
+  /**
+   * Where the mark of excellence stood when this battle ended, as a percent.
+   *
+   * The state AFTER the battle, which is the only one the game gives: there is
+   * no `prevDamageRating` to pair with it the way the mastery badge has one.
+   * What a battle GAINED is therefore the difference with the last battle in
+   * the same tank, which this end can work out and the client cannot.
+   *
+   * A whole percent, because that is the precision the results carry; the
+   * garage knows it to the hundredth and sends that separately. Absent rather
+   * than zero: the modes that do not count towards marks report zero, and
+   * storing that would read as a gun that lost everything.
+   */
+  markPercent: z.number().int().min(1).max(100).optional(),
 });
 
 export const battleBody = z.object({

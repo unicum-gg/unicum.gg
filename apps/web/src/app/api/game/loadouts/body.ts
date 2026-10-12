@@ -108,6 +108,26 @@ export const loadoutBody = z.object({
       devices: setupGroup(devicesLayout).optional(),
     }),
   ),
+  /**
+   * Marks of excellence on this gun, 1 to 3. Absent for a gun with none.
+   *
+   * Read from the garage's own dossier rather than from what the hangar
+   * paints: the client lets a player hide the decoration, and a figure that
+   * honoured that setting would show their whole fleet losing its marks the
+   * day they turned it off.
+   */
+  marks: absent(z.number().int().min(1).max(3)),
+  /**
+   * How far along the next mark is, as a percent with two decimals.
+   *
+   * Finer than the figure a battle reports, which rounds to the percent, and
+   * this is the one the fleet is measured by: the dossier holds hundredths and
+   * the mod divides them down, so 95.12 arrives as 95.12.
+   *
+   * Absent and not zero when it could not be read, because a gun genuinely at
+   * zero and a gun we failed to read are different facts.
+   */
+  markPercent: absent(z.number().min(0).max(100)),
 });
 
 export const loadoutsUploadBody = z.object({
