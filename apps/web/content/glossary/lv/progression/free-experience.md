@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Pieredze, ko var tērēt uz jebkuru transportlīdzekli vai moduli, uzkrāta kā maza daļa no visām nopelnītajām pieredzēm un pārvēršama no elitiem transportlīdzekļiem ar zeltu.

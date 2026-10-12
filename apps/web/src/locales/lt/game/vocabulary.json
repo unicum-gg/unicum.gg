@@ -159,5 +159,9 @@
     "2": "2 Markai",
     "3": "3 Markai",
     "name": "Meistriškumo žymos"
+  },
+  "resources": {
+    "free-experience": "Laisvoji patirtis",
+    "combat-experience": "Kovinė patirtis"
   }
 }

@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Deneyim, herhangi bir araçta veya modülde harcanabilir ve elit araçlardan altın ile dönüştürülebilir.

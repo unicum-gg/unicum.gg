@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Az a tapasztalat, amely bármely járműre vagy modulra költhető, a megszerzett tapasztalat kis részének felhalmozásával szerzik, és aranyért átkonvertálható elit járművekből.

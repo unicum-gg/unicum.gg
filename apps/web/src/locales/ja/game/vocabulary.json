@@ -159,5 +159,9 @@
     "2": "2マーク",
     "3": "3マーク",
     "name": "優等マーク"
+  },
+  "resources": {
+    "free-experience": "フリーEXP",
+    "combat-experience": "戦闘EXP"
   }
 }

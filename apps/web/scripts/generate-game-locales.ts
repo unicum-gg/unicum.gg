@@ -54,6 +54,7 @@ import {
   isGameClientNamespace,
 } from "../src/lib/game-vocabulary";
 import { DEFAULT_LOCALE, type Locale } from "../src/lib/translations";
+import { typographic } from "./translation-rules";
 
 const webRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const localesRoot = join(webRoot, "src", "locales");
@@ -328,6 +329,21 @@ function englishTankParams(): Record<string, string> {
 }
 
 /**
+ * The families whose entries are filled from the term sheet by their English
+ * label, with no mapping of their own: our English IS the string the client is
+ * matched on, so whatever the sheet decided for it is the game's own word for
+ * that thing.
+ *
+ * `features` names what the site has a page about (`Upgrades` is the one the
+ * tank page's progression panel is titled with; the rest fill in as the client
+ * turns out to name them). `resources` names what an account holds, and exists
+ * because a model left to itself writes "free XP" word for word in every
+ * language, beside a tech tree the same player's client heads "Expérience
+ * libre".
+ */
+const TERM_FILLED_FAMILIES = ["features", "resources"] as const;
+
+/**
  * The two mode namespaces, merged into the locale's `game/vocabulary` rather
  * than written over it: that file also holds words the game has no name for,
  * which the translator wrote and which this must not erase. The client's names
@@ -343,7 +359,7 @@ function mergeVocabulary(
   battleTypes: Record<string, string>,
   /** The client's battle-type picker, for the names `arenas` gets wrong. */
   picker: Record<string, string>,
-  /** This language's official terms, for the features named in prose. */
+  /** This language's official terms, for the names carried in prose. */
   terms: Record<string, string>,
 ): boolean {
   const path = localePath(locale, "game/vocabulary");
@@ -354,24 +370,32 @@ function mergeVocabulary(
   const modes: Record<string, string> = {
     ...((vocabulary["map-modes"] as Record<string, string>) ?? {}),
   };
-  const features: Record<string, string> = {
-    ...((vocabulary.features as Record<string, string>) ?? {}),
-  };
   let changed = false;
-  // A feature's name needs no mapping of its own: our English label IS the
-  // string the client is matched on, so whatever the term sheet decided for it
-  // is the game's own word for that feature. `Upgrades` is the one the tank
-  // page's progression panel is titled with; the rest fill in as the client
-  // turns out to name them.
-  const englishFeatures = (readJson(
-    localePath(DEFAULT_LOCALE, "game/vocabulary"),
-  ).features ?? {}) as Record<string, string>;
-  for (const [feature, label] of Object.entries(englishFeatures)) {
-    const name = terms[label];
-    if (name && features[feature] !== name) {
-      features[feature] = name;
-      changed = true;
+  const english = readJson(localePath(DEFAULT_LOCALE, "game/vocabulary"));
+  const filled: Record<string, Record<string, string>> = {};
+  for (const family of TERM_FILLED_FAMILIES) {
+    const own: Record<string, string> = {
+      ...((vocabulary[family] as Record<string, string>) ?? {}),
+    };
+    for (const [key, label] of Object.entries(
+      (english[family] ?? {}) as Record<string, string>,
+    )) {
+      // The client writes the ASCII quote and the rest of the tree writes
+      // U+2019, so a name taken verbatim would spell its apostrophe one way
+      // here and the other way two entries down, where the translator wrote it.
+      // The comparison against the client already normalises before judging
+      // ("Traqueur d'acier" and "Traqueur d’acier" are one word in two house
+      // styles), but `cataloguedNames` does not: it sees one English name
+      // rendered two ways, drops it, and the mechanical copy that keeps "3
+      // Marques" out of a model's hands quietly stops applying to it.
+      const official = terms[label];
+      const name = official ? typographic(official) : undefined;
+      if (name && own[key] !== name) {
+        own[key] = name;
+        changed = true;
+      }
     }
+    filled[family] = own;
   }
   const named: [string, string | undefined][] = [
     ...Object.entries(BATTLE_TYPE_TOKEN).map(
@@ -400,7 +424,7 @@ function mergeVocabulary(
     ...vocabulary,
     "battle-types": types,
     "map-modes": modes,
-    features,
+    ...filled,
   });
 }
 
@@ -443,74 +467,92 @@ async function main(): Promise<void> {
     failures.push(`en/terms: ${String(error)}`);
   }
   const gameTerms: Record<string, Record<string, string>> = {};
+  // The sheet a previous run committed, which is what a language the branch
+  // cannot answer for is filled from today.
+  //
+  // The rule above says a branch that has never been built must not empty the
+  // files a previous run wrote, and this is its other half: a name CATALOGUED
+  // today must still reach every language on a day the mirror is down, or it
+  // falls to the model and comes back as the invented word the catalogue exists
+  // to replace. The sheet is in the repository and is the last thing the game
+  // said, so it answers the same question as the branch, one build later.
+  const committedTerms = readJson(GAME_TERMS_PATH) as Record<
+    string,
+    Record<string, string>
+  >;
 
   for (const [locale, language] of entries) {
-    let catalogue;
+    let catalogue: Awaited<ReturnType<typeof catalogueFor>> | null = null;
     try {
       catalogue = await catalogueFor(language);
     } catch (error) {
-      // One language failing must not drop the others, and a branch that has
-      // never been built must not empty the files a previous run committed:
-      // they are the last thing the game said, which beats nothing. Held back
-      // rather than printed here: every language failing is one fact (the
-      // branch is unreachable), not twenty-two, and this runs on every install.
+      // One language failing must not drop the others. Held back rather than
+      // printed here: every language failing is one fact (the branch is
+      // unreachable), not twenty-two, and this runs on every install.
       failures.push(`${locale}: ${String(error)}`);
-      continue;
     }
-    reached++;
-    for (const [namespace, value] of [
-      ["game/maps", catalogue.arenas.maps],
-      ["game/map-descriptions", catalogue.arenas.descriptions],
-      ["game/equipment", catalogue.artefacts.names],
-      // The blurb under the name, from the same catalogue: the parser already
-      // read it, and a tooltip that names a device in French and then explains
-      // it in English is half-translated.
-      ["game/equipment-descriptions", catalogue.artefacts.descriptions],
-      ["game/crew-perks", catalogue.perks.names],
-      // The paragraph under the skill's name, from the same catalogue.
-      ["game/crew-perk-descriptions", catalogue.perks.descriptions],
-      // The upgrade tree's own tooltips, both halves: a node named in English
-      // under a sentence in the reader's language is worse than neither.
-      ["game/skill-tree", catalogue.skillTreeNames],
-      ["game/skill-tree-descriptions", catalogue.skillTree],
-      ["game/onslaught-seasons", catalogue.seasons],
-      // The quick commands a replay records as an action id, in the words the
-      // client itself puts on screen. Keyed by the command table's `msgText`,
-      // which is the only name both halves share.
-      ["game/chat-commands", catalogue.chatCommands],
-      // The battle feed's own words for a destruction, which a replay carries
-      // only as a reason code.
-      ["game/battle-messages", catalogue.battleMessages],
-      // English keeps our own labels; every other language gets the client's.
-      [
-        "game/tank-params",
-        locale === DEFAULT_LOCALE
-          ? englishTankParams()
-          : tankParams(catalogue.menu),
-      ],
-    ] as const) {
-      // A namespace this writes is either the client's alone or mixed with our
-      // own words, and the translator behaves differently for each. Classifying
-      // it is not optional: an unclassified one silently gets the mixed rule,
-      // which is what let a model rewrite the client's own sentences.
-      if (!isGameClientNamespace(namespace) && !MIXED_NAMESPACES.has(namespace)) {
-        throw new Error(
-          `[game-locales] ${namespace} is written here but classified neither in GAME_CLIENT_NAMESPACES nor as mixed`,
-        );
-      }
-      if (writeJson(localePath(locale, namespace), sorted(value))) {
-        written++;
-        console.log(`[game-locales] ${locale}/${namespace}`);
+    if (catalogue) {
+      reached++;
+      for (const [namespace, value] of [
+        ["game/maps", catalogue.arenas.maps],
+        ["game/map-descriptions", catalogue.arenas.descriptions],
+        ["game/equipment", catalogue.artefacts.names],
+        // The blurb under the name, from the same catalogue: the parser already
+        // read it, and a tooltip that names a device in French and then explains
+        // it in English is half-translated.
+        ["game/equipment-descriptions", catalogue.artefacts.descriptions],
+        ["game/crew-perks", catalogue.perks.names],
+        // The paragraph under the skill's name, from the same catalogue.
+        ["game/crew-perk-descriptions", catalogue.perks.descriptions],
+        // The upgrade tree's own tooltips, both halves: a node named in English
+        // under a sentence in the reader's language is worse than neither.
+        ["game/skill-tree", catalogue.skillTreeNames],
+        ["game/skill-tree-descriptions", catalogue.skillTree],
+        ["game/onslaught-seasons", catalogue.seasons],
+        // The quick commands a replay records as an action id, in the words the
+        // client itself puts on screen. Keyed by the command table's `msgText`,
+        // which is the only name both halves share.
+        ["game/chat-commands", catalogue.chatCommands],
+        // The battle feed's own words for a destruction, which a replay carries
+        // only as a reason code.
+        ["game/battle-messages", catalogue.battleMessages],
+        // English keeps our own labels; every other language gets the client's.
+        [
+          "game/tank-params",
+          locale === DEFAULT_LOCALE
+            ? englishTankParams()
+            : tankParams(catalogue.menu),
+        ],
+      ] as const) {
+        // A namespace this writes is either the client's alone or mixed with our
+        // own words, and the translator behaves differently for each. Classifying
+        // it is not optional: an unclassified one silently gets the mixed rule,
+        // which is what let a model rewrite the client's own sentences.
+        if (!isGameClientNamespace(namespace) && !MIXED_NAMESPACES.has(namespace)) {
+          throw new Error(
+            `[game-locales] ${namespace} is written here but classified neither in GAME_CLIENT_NAMESPACES nor as mixed`,
+          );
+        }
+        if (writeJson(localePath(locale, namespace), sorted(value))) {
+          written++;
+          console.log(`[game-locales] ${locale}/${namespace}`);
+        }
       }
     }
-    const terms =
-      englishTerms && locale !== DEFAULT_LOCALE
+    if (locale === DEFAULT_LOCALE) continue;
+    const read =
+      catalogue && englishTerms
         ? officialTerms(englishTerms, catalogue.terms)
-        : {};
-    if (englishTerms && locale !== DEFAULT_LOCALE) gameTerms[locale] = terms;
+        : null;
+    if (read) gameTerms[locale] = read;
+    const terms = read ?? committedTerms[locale] ?? {};
     if (
-      locale !== DEFAULT_LOCALE &&
-      mergeVocabulary(locale, catalogue.arenas.battleTypes, catalogue.modes, terms)
+      mergeVocabulary(
+        locale,
+        catalogue?.arenas.battleTypes ?? {},
+        catalogue?.modes ?? {},
+        terms,
+      )
     ) {
       written++;
       console.log(`[game-locales] ${locale}/game/vocabulary (modes)`);
@@ -519,7 +561,7 @@ async function main(): Promise<void> {
 
   if (reached === 0) {
     console.warn(
-      `[game-locales] no language could be read (${failures[0] ?? "no language configured"}), keeping the committed files`,
+      `[game-locales] no language could be read (${failures[0] ?? "no language configured"}), keeping the committed files and filling the catalogue from the committed term sheet`,
     );
     return;
   }

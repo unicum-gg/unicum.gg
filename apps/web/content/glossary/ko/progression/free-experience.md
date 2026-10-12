@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 전 차량이나 모듈에 사용할 수 있는 경험치로, 모든 전투에서 얻은 경험치의 작은 비율로 축적되며, 골드로 엘리트 차량에서 변환할 수 있습니다.

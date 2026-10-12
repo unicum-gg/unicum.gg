@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Iskustvo koje se može potrošiti na bilo koje vozilo ili modul, akumulirano kao mali postotak svega zarađenog i pretvarljivo iz elitnih vozila uz pomoć zlata.

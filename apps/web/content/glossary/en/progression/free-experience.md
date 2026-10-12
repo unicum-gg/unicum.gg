@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Experience that can be spent on any vehicle or module, accumulated as a small share of everything earned and convertible from elite vehicles with gold.

@@ -159,5 +159,9 @@
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Marchi d’Eccellenza"
+  },
+  "resources": {
+    "free-experience": "Esperienza tecnica",
+    "combat-experience": "Esperienza di battaglia"
   }
 }

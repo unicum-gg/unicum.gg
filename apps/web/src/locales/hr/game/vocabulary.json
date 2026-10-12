@@ -159,5 +159,9 @@
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Oznake izvrsnosti"
+  },
+  "resources": {
+    "free-experience": "Slobodno iskustvo",
+    "combat-experience": "Borbeno iskustvo"
   }
 }

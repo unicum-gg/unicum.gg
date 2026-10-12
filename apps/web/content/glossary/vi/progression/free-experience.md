@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Kinh nghiệm có thể được sử dụng trên bất kỳ phương tiện hoặc mô-đun nào, tích lũy như một phần nhỏ của mọi thứ được kiếm và có thể chuyển đổi từ các phương tiện ưu tú bằng vàng.

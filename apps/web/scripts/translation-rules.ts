@@ -110,6 +110,14 @@ export function isGameNamespace(namespace: string): boolean {
  * is "Support", `map-modes.standard` is "Standard"), and forcing the game's
  * rendering of those onto "Standard shell damage" or "Support us" is how a rule
  * meant to fix a handful of headings rewrites the tree.
+ *
+ * `resources` is here because it is the same failure one step further from a
+ * mode: Free Experience is a thing the game names, and the English it is named
+ * with ("Free XP", before this) is close enough to two ordinary words that
+ * every one of the thirty-five translated it rather than looking it up. The
+ * currencies are not catalogued at all, for the reason the paragraph above
+ * gives: credits, gold and bonds already come back as the game's own words, and
+ * "Gold instead of steel" is a sentence of ours about a medal.
  */
 export const GAME_NAME_FAMILIES: readonly string[] = [
   "battle-types",
@@ -118,6 +126,7 @@ export const GAME_NAME_FAMILIES: readonly string[] = [
   "clan-boards",
   "stronghold-tiers",
   "features",
+  "resources",
   "mastery-badges",
 ];
 

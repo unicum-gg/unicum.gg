@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Erfarenhet som kan spenderas på vilket fordon eller modul som helst, ackumulerat som en liten del av allt som tjänas och konvertibelt från elitfordon med guld.

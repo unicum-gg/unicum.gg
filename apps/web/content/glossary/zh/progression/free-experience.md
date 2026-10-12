@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 可以用于任何车辆或模块的经验，以每次获得的经验的一小部分形式积累，并可通过金币从精英车辆转换而来。

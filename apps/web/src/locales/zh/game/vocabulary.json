@@ -159,5 +159,9 @@
     "2": "2星",
     "3": "3星",
     "name": "特级标识"
+  },
+  "resources": {
+    "free-experience": "全局经验",
+    "combat-experience": "战斗经验"
   }
 }

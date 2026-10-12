@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Experiência que pode ser gasta em qualquer veículo ou módulo, acumulada como uma pequena parte de tudo que é ganho e convertível de veículos de elite com ouro.

@@ -159,5 +159,9 @@
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Fortræffelighedsmærker"
+  },
+  "resources": {
+    "free-experience": "Fri xp",
+    "combat-experience": "Kamp xp"
   }
 }

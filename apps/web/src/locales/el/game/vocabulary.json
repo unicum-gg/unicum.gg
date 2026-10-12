@@ -159,5 +159,9 @@
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Διακριτικά Υπεροχής"
+  },
+  "resources": {
+    "free-experience": "Free Experience",
+    "combat-experience": "Combat Experience"
   }
 }

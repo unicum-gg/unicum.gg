@@ -12,7 +12,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Erfahrung, die für jedes Fahrzeug oder Modul ausgegeben werden kann, als kleiner Anteil aller verdienten Erfahrung gesammelt wird und mit Gold von Elitefahrzeugen umgewandelt werden kann.

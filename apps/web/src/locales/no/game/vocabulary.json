@@ -159,5 +159,9 @@
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Marks of Excellence"
+  },
+  "resources": {
+    "free-experience": "Fri erfaring",
+    "combat-experience": "Erfaringspoeng"
   }
 }

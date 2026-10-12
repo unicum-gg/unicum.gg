@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Experiență care poate fi cheltuită pe orice vehicul sau modul, acumulată ca o mică parte din tot ce este câștigat și convertibilă din vehiculele de elită cu aur.

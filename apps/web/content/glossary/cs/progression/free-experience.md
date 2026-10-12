@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Zkušenosti, které lze použít na jakékoli vozidlo nebo modul, se hromadí jako malá část všech získaných zkušeností a lze je také převést z elitních vozidel za zlaťáky.

@@ -159,5 +159,9 @@
     "2": "2 Marques",
     "3": "3 Marques",
     "name": "Marques d’excellence"
+  },
+  "resources": {
+    "free-experience": "Expérience libre",
+    "combat-experience": "Expérience de bataille"
   }
 }

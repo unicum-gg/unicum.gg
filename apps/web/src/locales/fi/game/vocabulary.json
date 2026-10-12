@@ -159,5 +159,8 @@
     "2": "2 Markkia",
     "3": "3 Markkia",
     "name": "Merkit erinomaisuudesta"
+  },
+  "resources": {
+    "free-experience": "Vapaata kokemusta"
   }
 }

@@ -242,6 +242,20 @@ function englishVocabulary(): Json {
       "common-test": "Common Test",
       tournaments: "Tournaments",
     },
+    // What an account holds, named as the game names it. The client's own
+    // `research/labels/*`, which is the screen a player reads these on.
+    //
+    // Only the two that a model will not get right on its own. Left to itself
+    // it answers "free XP" word for word in every language ("XP gratuit",
+    // "Freie XP", "Darmowe XP"), beside a tech tree the same player's client
+    // heads "Expérience libre". The currencies are deliberately absent: credits,
+    // gold and bonds already come back as the game's own words, and "Gold
+    // instead of steel" is a sentence of ours about a medal rather than about
+    // the currency, which is exactly what a name family must not rewrite.
+    resources: {
+      "free-experience": "Free Experience",
+      "combat-experience": "Combat Experience",
+    },
     // Wargaming's name for the gun marks, and for each count of them.
     marks: {
       name: "Marks of Excellence",

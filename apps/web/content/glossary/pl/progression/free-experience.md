@@ -12,7 +12,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Doświadczenie, które można wydać na dowolny pojazd lub moduł, gromadzone jako niewielka część całego zdobytego doświadczenia i możliwe do uzyskania przez konwersję doświadczenia z pojazdów elitarnych za złoto.

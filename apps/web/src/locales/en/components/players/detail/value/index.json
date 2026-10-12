@@ -6,14 +6,14 @@
   "cost-to-reach-the-same": "Cost to reach the same garage through the in-game store",
   "every-tank-and-what-it": "Every tank, and what the store charges for it",
   "n-credits": "{units} credits",
-  "n-free-xp": "{units} free XP",
+  "n-free-xp": "{units} Free Experience",
   "n-gold": "{units} gold",
   "n-gold-in-total": "{gold} gold in total",
   "premiums-label": "Premium tanks",
   "purchase-label": "Tank purchases",
   "rebuild-value": "Rebuild value",
   "research-label": "Research",
-  "researched-with-free-xp": "{count} tanks researched with free XP, at the game’s rate of {rate} XP per gold.",
+  "researched-with-free-xp": "{count} tanks researched with Free Experience, at the game’s rate of {rate} XP per gold.",
   "that-is-n-gold": "That is {gold} gold.",
-  "the-real-money-cost-to-research": "The real-money cost to research (free XP) and buy every tank on the account, premiums priced in gold."
+  "the-real-money-cost-to-research": "The real-money cost to research (Free Experience) and buy every tank on the account, premiums priced in gold."
 }

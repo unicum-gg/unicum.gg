@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Erfaring som kan brukes på ethvert kjøretøy eller modul, samlet inn som en liten andel av alt som er tjent og konverterbar fra elitekjøretøy med gull.

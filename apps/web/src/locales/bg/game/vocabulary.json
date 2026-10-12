@@ -159,5 +159,9 @@
     "2": "2 Mark",
     "3": "3 Mark",
     "name": "Знаци за отлични постижения"
+  },
+  "resources": {
+    "free-experience": "Свободен опит",
+    "combat-experience": "Боен опит"
   }
 }

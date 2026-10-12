@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Izkušnje, ki jih je mogoče porabiti za katero koli vozilo ali modul, so akumulirane kot majhen delež vsega zasluženega in se lahko pretvorijo iz elitnih vozil za gold.

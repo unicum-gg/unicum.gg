@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Patirtis, kurią galima išleisti bet kuriam transporto priemonės ar moduliui, sukaupta kaip maža visko, kas uždirbta, dalis ir keičiama iš elitinių transporto priemonių už auksą.

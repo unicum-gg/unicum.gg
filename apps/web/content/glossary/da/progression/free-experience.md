@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Experience, der kan bruges på ethvert køretøj eller modul, optjent som en lille andel af alt, hvad der er tjent, og konvertibel fra elite køretøjer med guld.

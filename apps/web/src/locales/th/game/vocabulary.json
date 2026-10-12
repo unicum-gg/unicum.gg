@@ -159,5 +159,9 @@
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "เครื่องหมายเชิดชูเกียรติ"
+  },
+  "resources": {
+    "free-experience": "ประสบการณ์อิสระ",
+    "combat-experience": "ประสบการณ์การรบ"
   }
 }

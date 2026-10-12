@@ -159,5 +159,9 @@
     "2": "2 Marks",
     "3": "3 Marks",
     "name": "Dấu hiệu Thiện chiến"
+  },
+  "resources": {
+    "free-experience": "Kinh nghiệm Tự do",
+    "combat-experience": "Kinh nghiệm Chiến đấu"
   }
 }

@@ -159,5 +159,9 @@
     "2": "2 Markas",
     "3": "3 Markas",
     "name": "Izcilības zīmes"
+  },
+  "resources": {
+    "free-experience": "Brīvā pieredze",
+    "combat-experience": "Kaujas pieredze"
   }
 }

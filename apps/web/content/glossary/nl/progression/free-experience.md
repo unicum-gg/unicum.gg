@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Ervaring die kan worden besteed aan elk voertuig of module, opgebouwd als een klein percentage van alles wat verdiend is en om te zetten van elite voertuigen met goud.

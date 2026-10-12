@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Kokemus, jota voidaan käyttää mihin tahansa ajoneuvoon tai moduuliin, kerätty pieneksi osaksi kaikesta ansaitusta ja muunnettavissa eliitti-ajoneuvoista kultarahalla.

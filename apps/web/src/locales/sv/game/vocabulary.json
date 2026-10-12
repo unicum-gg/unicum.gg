@@ -159,5 +159,9 @@
     "2": "2 Mark",
     "3": "3 Mark",
     "name": "Skyttemärken"
+  },
+  "resources": {
+    "free-experience": "Fri Erfarenhet",
+    "combat-experience": "Stridserfarenhet"
   }
 }

@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 Ang karanasang maaaring gastusin sa anumang sasakyan o module, na naipon bilang isang maliit na bahagi ng lahat ng nakamit at maaaring i-convert mula sa mga elite na sasakyan gamit ang ginto.

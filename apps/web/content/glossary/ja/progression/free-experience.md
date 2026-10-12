@@ -11,7 +11,7 @@ related:
   - research
 anchors:
   labels:
-    - Free XP
+    - Free Experience
 ---
 
 任意の車両やモジュールに使用できる経験値で、すべての獲得経験値のわずかな割合として蓄積され、エリート車両からゴールドで変換可能です。
