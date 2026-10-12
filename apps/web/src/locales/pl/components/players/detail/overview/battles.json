@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Zniszczony: {names}",
   "replay": {
-    "drop": "Wybierz plik .wotreplay tej bitwy",
-    "privacy": "Plik jest odczytywany w przeglądarce i nigdy nie opuszcza twojego urządzenia. Nic nie jest przesyłane ani przechowywane.",
-    "reading": "Odczytywanie powtórki…",
-    "wrong-battle": "Ta powtórka dotyczy różnej bitwy ({map}).",
-    "unfinished": "Ta powtórka nie przenosi strumienia pakietów, bitwa nie została rozegrana do końca.",
-    "no-positions": "Ta powtórka nie przenosi żadnych pozycji rozpoznawanych przez ten czytnik.",
     "no-bounds": "Ta arena nie ma określonego zasięgu w katalogu, więc nie można znaleźć dla pozycji miejsca na jej minimapie.",
     "play": "Graj",
-    "pause": "Pauza"
+    "pause": "Pauza",
+    "loading": "Ładowanie powtórki bitwy…",
+    "none": "Powtórka tej bitwy nie została zachowana. Powtórka istnieje tylko wtedy, gdy ktoś, kto ją rozegrał, miał włączone nagrywanie i ją udostępnił.",
+    "failed": "Nie można przeczytać powtórki tej bitwy.",
+    "still-standing": "Pojazdy nadal w bitwie po każdej stronie",
+    "chat": "Czat bitwy",
+    "chat-none": "Nikt niczego nie napisał w tej bitwie.",
+    "chat-yet": "Nic jeszcze nie powiedziano.",
+    "deaths-none": "Nikt nie został zniszczony w tej bitwie.",
+    "deaths-yet": "Wszyscy są nadal żywi.",
+    "deaths-unknown": "pojazd",
+    "deaths-destroyed": "Zniszczony"
   }
 }

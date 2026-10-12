@@ -1,6 +1,11 @@
 {
   "date": "Datum",
   "featured-tournament": "Utvald turnering",
+  "filter": {
+    "open": "Öppen & live",
+    "completed": "Slutfört",
+    "all": "Alla"
+  },
   "format": "Format",
   "mode": "Läge",
   "no-tournament-matches-the-current": "Ingen turnering matchar de aktuella filtren.",

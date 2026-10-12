@@ -1,6 +1,11 @@
 {
   "date": "Datum",
   "featured-tournament": "Ausgewähltes Turnier",
+  "filter": {
+    "open": "Offen & live",
+    "completed": "Abgeschlossen",
+    "all": "Alle"
+  },
   "format": "Format",
   "mode": "Modus",
   "no-tournament-matches-the-current": "Kein Turnier entspricht den aktuellen Filtern.",

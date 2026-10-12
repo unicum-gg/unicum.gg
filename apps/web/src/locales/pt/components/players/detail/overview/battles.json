@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Destruídos: {names}",
   "replay": {
-    "drop": "Escolha o arquivo .wotreplay desta batalha",
-    "privacy": "O arquivo é lido no seu navegador e nunca deixa o seu dispositivo. Nada é enviado nem armazenado.",
-    "reading": "Lendo o replay…",
-    "wrong-battle": "Esse replay é de uma batalha diferente ({map}).",
-    "unfinished": "Esse replay não carrega uma transmissão de pacotes: o jogo não foi jogado até o fim.",
-    "no-positions": "Esse replay não carrega posições que este leitor entende.",
     "no-bounds": "Esta arena não tem extensão no catálogo, portanto o minimapa não pode exibir as posições.",
     "play": "Jogar",
-    "pause": "Pausar"
+    "pause": "Pausar",
+    "loading": "Carregando o replay desta batalha…",
+    "none": "Nenhum replay foi mantido para esta batalha. Um replay só existe quando alguém que jogou nela tinha a gravação ativada e o compartilhou.",
+    "failed": "Não foi possível ler o replay desta batalha.",
+    "still-standing": "Veículos que ainda estão na batalha, de cada lado",
+    "chat": "Chat da batalha",
+    "chat-none": "Ninguém digitou nada nesta batalha.",
+    "chat-yet": "Nada dito ainda.",
+    "deaths-none": "Ninguém foi destruído nesta batalha.",
+    "deaths-yet": "Todos ainda estão vivos.",
+    "deaths-unknown": "um veículo",
+    "deaths-destroyed": "Destruídos"
   }
 }

@@ -1,6 +1,11 @@
 {
   "date": "Dato",
   "featured-tournament": "Fremhævet turnering",
+  "filter": {
+    "open": "Åben & live",
+    "completed": "Fuldført",
+    "all": "Alle"
+  },
   "format": "Format",
   "mode": "Tilstand",
   "no-tournament-matches-the-current": "Ingen turnering matcher de nuværende filtre.",

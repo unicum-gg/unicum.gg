@@ -1,6 +1,11 @@
 {
   "date": "Dátum",
   "featured-tournament": "Vybavený turnaj",
+  "filter": {
+    "open": "Otvorené a prebiehajúce",
+    "completed": "Dokončené",
+    "all": "Všetky"
+  },
   "format": "Formát",
   "mode": "Mód",
   "no-tournament-matches-the-current": "Žiadny turnaj nezodpovedá aktuálnym filtrom.",

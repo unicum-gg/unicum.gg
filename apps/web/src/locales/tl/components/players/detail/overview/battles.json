@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Mga nawasak na {names}",
   "replay": {
-    "drop": "Piliin ang .wotreplay file ng labanan na ito",
-    "privacy": "Binabasa ang file sa iyong browser at hindi kailanman umaalis sa iyong machine. Wala itong ina-upload at walang iniimbak.",
-    "reading": "Binabasa ang replay…",
-    "wrong-battle": "Ang replay na iyon ay para sa ibang labanan ({map}).",
-    "unfinished": "Walang packet stream ang replay na iyon. Hindi nilaro ang labanan hanggang sa huli.",
-    "no-positions": "Walang posisyong mga carry ang replay na iyon na nauunawaan ng reader na ito.",
     "no-bounds": "Walang extent ang arena na ito sa katalogo, kaya hindi maaari na mailagay ang mga posisyon sa minimapa nito.",
     "play": "Maglaro",
-    "pause": "I-pause"
+    "pause": "I-pause",
+    "loading": "Naglo-load ng replay ng labanang ito…",
+    "none": "Walang replay na pinanatili para sa labanang ito. Umiiral lang ang replay kapag may naglaro nito na naka-on ang pagre-record at ibinahagi ito.",
+    "failed": "Hindi mabasa ang replay ng labanang ito.",
+    "still-standing": "Mga sasakyan na nasa labanan pa, sa bawat panig",
+    "chat": "Chat ng labanan",
+    "chat-none": "Walang sinuman ang nag-type ng anuman sa labanang ito.",
+    "chat-yet": "Wala pang sinabi.",
+    "deaths-none": "Walang sinuman ang nawasak sa labanang ito.",
+    "deaths-yet": "Buhay pa ang lahat.",
+    "deaths-unknown": "isang sasakyan",
+    "deaths-destroyed": "Nawasak"
   }
 }

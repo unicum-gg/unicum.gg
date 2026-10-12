@@ -111,14 +111,19 @@
   },
   "destroyed-list": "击毁 {names}",
   "replay": {
-    "drop": "选择此场战斗的 .wotreplay 文件",
-    "privacy": "文件会在您的浏览器中读取，绝不会离开您的设备。无内容会被上传或存储。",
-    "reading": "正在阅读回放…",
-    "wrong-battle": "该回放对应不同的战斗（{map}）。",
-    "unfinished": "该回放不携带数据包流，战斗未进行到结束。",
-    "no-positions": "该回放不携带此阅读器能够理解的位置信息。",
     "no-bounds": "此战场在目录中没有范围，因此无法将这些位置放置在其小地图上。",
     "play": "播放",
-    "pause": "暂停"
+    "pause": "暂停",
+    "loading": "正在加载这场战斗的回放…",
+    "none": "这场战斗没有保留回放。只有进行过这场战斗的人开启了纪录并分享了回放，才会有回放。",
+    "failed": "无法阅读这场战斗的回放。",
+    "still-standing": "每一侧仍在战斗中的坦克",
+    "chat": "战斗聊天",
+    "chat-none": "无人在这场战斗中输入任何内容。",
+    "chat-yet": "目前还没有任何发言。",
+    "deaths-none": "这场战斗中无人被击毁。",
+    "deaths-yet": "所有人仍然存活。",
+    "deaths-unknown": "一辆车辆",
+    "deaths-destroyed": "击毁"
   }
 }

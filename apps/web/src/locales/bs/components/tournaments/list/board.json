@@ -1,6 +1,11 @@
 {
   "date": "Datum",
   "featured-tournament": "Istaknuti turnir",
+  "filter": {
+    "open": "Otvoreno i uživo",
+    "completed": "Završeno",
+    "all": "Sve"
+  },
   "format": "Format",
   "mode": "Način",
   "no-tournament-matches-the-current": "Nijedan turnir ne odgovara trenutnim filterima.",

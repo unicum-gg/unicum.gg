@@ -1,6 +1,11 @@
 {
   "date": "Ngày",
   "featured-tournament": "Giải đấu nổi bật",
+  "filter": {
+    "open": "Đang mở & đang diễn ra",
+    "completed": "Đã hoàn tất",
+    "all": "Tất cả"
+  },
   "format": "Định dạng",
   "mode": "Chế độ",
   "no-tournament-matches-the-current": "Không có giải đấu nào phù hợp với các bộ lọc hiện tại.",

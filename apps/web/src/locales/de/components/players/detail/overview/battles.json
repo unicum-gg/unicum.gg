@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Zerstört: {names}",
   "replay": {
-    "drop": "Wähle die .wotreplay-Datei dieses Gefechts aus",
-    "privacy": "Die Datei wird in deinem Browser gelesen und verlässt dein Gerät nie. Nichts wird hochgeladen und nichts gespeichert.",
-    "reading": "Replay wird gelesen…",
-    "wrong-battle": "Dieses Replay gehört zu einem anderen Gefecht ({map}).",
-    "unfinished": "Dieses Replay enthält keinen Paket-Stream, das Gefecht wurde nicht bis zum Ende gespielt.",
-    "no-positions": "Dieses Replay enthält keine Positionen, die dieser Leser versteht.",
     "no-bounds": "Für diese Arena ist im Katalog keine Ausdehnung hinterlegt, daher können die Positionen nicht auf ihrer Minikarte platziert werden.",
     "play": "Spielen",
-    "pause": "Pause"
+    "pause": "Pause",
+    "loading": "Wiederholung dieses Gefechts wird geladen …",
+    "none": "Für dieses Gefecht wurde keine Wiederholung beibehalten. Eine Wiederholung gibt es nur, wenn jemand, der es gespielt hat, die Aufzeichnung aktiviert und sie geteilt hat.",
+    "failed": "Die Wiederholung dieses Gefechts konnte nicht gelesen werden.",
+    "still-standing": "Fahrzeuge, die auf jeder Seite noch am Gefecht teilnehmen",
+    "chat": "Gefechtschat",
+    "chat-none": "Niemand hat in diesem Gefecht etwas geschrieben.",
+    "chat-yet": "Noch nichts gesagt.",
+    "deaths-none": "Niemand wurde in diesem Gefecht zerstört.",
+    "deaths-yet": "Alle Fahrzeuge sind noch aktiv.",
+    "deaths-unknown": "ein Fahrzeug",
+    "deaths-destroyed": "Zerstört"
   }
 }

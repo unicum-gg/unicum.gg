@@ -1,6 +1,11 @@
 {
   "date": "Dată",
   "featured-tournament": "Turneu prezentat",
+  "filter": {
+    "open": "Deschis și în desfășurare",
+    "completed": "Finalizată",
+    "all": "Toate"
+  },
   "format": "Format",
   "mode": "Mod",
   "no-tournament-matches-the-current": "Niciun turneu nu corespunde filtrelor curente.",

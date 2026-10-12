@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Distruse: {names}",
   "replay": {
-    "drop": "Alege fișierul .wotreplay al acestei bătălii",
-    "privacy": "Fișierul este citit în browser și nu părăsește niciodată dispozitivul. Nimic nu este încărcat și nimic nu este stocat.",
-    "reading": "Se citește reluarea…",
-    "wrong-battle": "Acea reluare este a unei alte bătălii ({map}).",
-    "unfinished": "Acea reluare nu are un stream de pachete, bătălia nu a fost jucată până la capăt.",
-    "no-positions": "Acea reluare nu poartă poziții pe care acest cititor le înțelege.",
     "no-bounds": "Această arenă nu are dimensiuni în catalog, astfel că pozițiile nu pot fi plasate pe mini-hartă.",
     "play": "Joacă",
-    "pause": "Pauză"
+    "pause": "Pauză",
+    "loading": "Se încarcă reluarea acestei bătălii…",
+    "none": "Nu s-a păstrat nicio reluare pentru această bătălie. O reluare există doar când cineva care a jucat-o avea înregistrarea activată și a distribuit-o.",
+    "failed": "Reluarea acestei bătălii nu a putut fi citită.",
+    "still-standing": "Vehicule încă active în bătălie, de fiecare parte",
+    "chat": "Chatul bătăliei",
+    "chat-none": "Nimeni nu a tastat nimic în această bătălie.",
+    "chat-yet": "Nimic nu s-a spus încă.",
+    "deaths-none": "Nimeni nu a fost distrus în această bătălie.",
+    "deaths-yet": "Toată lumea este încă activă.",
+    "deaths-unknown": "un vehicul",
+    "deaths-destroyed": "Distrus"
   }
 }

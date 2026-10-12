@@ -1,6 +1,11 @@
 {
   "date": "Дата",
   "featured-tournament": "Рекомендований турнір",
+  "filter": {
+    "open": "Відкриті й активні",
+    "completed": "Виконано",
+    "all": "Усі"
+  },
   "format": "Формат",
   "mode": "Режим",
   "no-tournament-matches-the-current": "Жоден турнір не відповідає поточним фільтрам.",

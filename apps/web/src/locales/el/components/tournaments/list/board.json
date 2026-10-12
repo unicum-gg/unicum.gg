@@ -1,6 +1,11 @@
 {
   "date": "Ημερομηνία",
   "featured-tournament": "Δημοφιλές τουρνουά",
+  "filter": {
+    "open": "Ανοιχτά & ζωντανά",
+    "completed": "Ολοκληρώθηκε",
+    "all": "Όλα"
+  },
   "format": "Μορφή",
   "mode": "Μόδα",
   "no-tournament-matches-the-current": "Κανένα τουρνουά δεν ταιριάζει με τα τρέχοντα φίλτρα.",

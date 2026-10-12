@@ -1,6 +1,11 @@
 {
   "date": "Dato",
   "featured-tournament": "Fremhevet turnering",
+  "filter": {
+    "open": "Åpen og live",
+    "completed": "Fullført",
+    "all": "Alle"
+  },
   "format": "Format",
   "mode": "Modus",
   "no-tournament-matches-the-current": "Ingen turneringer samsvarer med de nåværende filtrene.",

@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Sunaikinta {names}",
   "replay": {
-    "drop": "Pasirinkite šio mūšio .wotreplay failą",
-    "privacy": "Failas nuskaitomas jūsų naršyklėje ir niekada nepalieka jūsų įrenginio. Nieko neįkeliama ir niekas neišsaugoma.",
-    "reading": "Skaityti pakartojimą…",
-    "wrong-battle": "Tai skirtingo mūšio pakartojimas ({map}).",
-    "unfinished": "Šis pakartojimas neturi paketų srauto, mūšis nebuvo žaistas iki galo.",
-    "no-positions": "Šis pakartojimas neturi pozicijų, kurias supranta šis skaitytuvas.",
     "no-bounds": "Ši arena kataloge neturi ribų, todėl minižemėlapis negali atvaizduoti pozicijų.",
     "play": "Žaisti",
-    "pause": "Pristabdyti"
+    "pause": "Pristabdyti",
+    "loading": "Kraunama šio mūšio pakartojimo peržiūra…",
+    "none": "Šiam mūšiui nebuvo išlaikyta pakartojimo versija. Pakartojimas egzistuoja tik tada, kai jį žaidęs asmuo buvo įjungęs įrašymą ir juo pasidalijo.",
+    "failed": "Nepavyko skaityti šio mūšio pakartojimo.",
+    "still-standing": "Mūšyje vis dar esanti technika kiekvienoje pusėje",
+    "chat": "Mūšio pokalbis",
+    "chat-none": "Niekas šiame mūšyje nieko neparašė.",
+    "chat-yet": "Kol kas nieko nepasakyta.",
+    "deaths-none": "Šiame mūšyje niekas nebuvo sunaikinta.",
+    "deaths-yet": "Visa technika vis dar gyva.",
+    "deaths-unknown": "transporto priemonė",
+    "deaths-destroyed": "Sunaikinta"
   }
 }

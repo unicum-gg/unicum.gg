@@ -1,6 +1,11 @@
 {
   "date": "التاريخ",
   "featured-tournament": "بطولة مميزة",
+  "filter": {
+    "open": "مفتوح ومباشر",
+    "completed": "مكتمل",
+    "all": "الكل"
+  },
   "format": "تنسيق",
   "mode": "وضع",
   "no-tournament-matches-the-current": "لا توجد بطولة تطابق المرشحات الحالية.",

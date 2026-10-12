@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Vernietigd: {names}",
   "replay": {
-    "drop": "Kies het .wotreplay-bestand van dit gevecht",
-    "privacy": "Het bestand wordt in je browser gelezen en verlaat nooit je machine. Niets wordt geüpload en niets wordt opgeslagen.",
-    "reading": "Replay wordt gelezen…",
-    "wrong-battle": "Die replay betreft een verschillend gevecht ({map}).",
-    "unfinished": "Die replay bevat geen packetstream: het gevecht is niet tot het einde gespeeld.",
-    "no-positions": "Die replay bevat geen posities die deze lezer begrijpt.",
     "no-bounds": "Deze arena heeft geen omvang in de catalogus, dus de posities kunnen niet op de minimap worden geplaatst.",
     "play": "Spelen",
-    "pause": "Pauzeren"
+    "pause": "Pauzeren",
+    "loading": "De replay van dit gevecht wordt geladen…",
+    "none": "Er is geen replay van dit gevecht behouden. Een replay bestaat alleen wanneer iemand die het gevecht heeft gespeeld opnemen had ingeschakeld en de replay heeft gedeeld.",
+    "failed": "De replay van dit gevecht kon niet worden gelezen.",
+    "still-standing": "Voertuigen die nog in het gevecht zijn, aan elke kant",
+    "chat": "Gevechtschat",
+    "chat-none": "Niemand heeft iets getypt in dit gevecht.",
+    "chat-yet": "Niets gezegd tot nu toe.",
+    "deaths-none": "Niemand is vernietigd in dit gevecht.",
+    "deaths-yet": "Iedereen is nog in leven.",
+    "deaths-unknown": "een voertuig",
+    "deaths-destroyed": "Vernietigd"
   }
 }

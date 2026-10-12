@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Uništen {names}",
   "replay": {
-    "drop": "Odaberite datoteku .wotreplay ove bitke",
-    "privacy": "Datoteka se čita u vašem pregledniku i nikad ne napušta vaše računalo. Ništa se ne prenosi niti se išta pohranjuje.",
-    "reading": "Čitanje snimke…",
-    "wrong-battle": "Ta snimka prikazuje drugačiju bitku ({map}).",
-    "unfinished": "Ta snimka ne nosi prijenos uživo paketa: bitka nije odigrana do kraja.",
-    "no-positions": "Ta snimka ne nosi nijednu poziciju koju ovaj čitač razumije.",
     "no-bounds": "Ovo borilište nema opseg u katalogu, pa se pozicije ne mogu smjestiti na njegovu minimapu.",
     "play": "Igraj",
-    "pause": "Pauziraj"
+    "pause": "Pauziraj",
+    "loading": "Učitavanje ponovnog prikaza ove bitke…",
+    "none": "Za ovu bitku nije zadržan ponovni prikaz. Ponovni prikaz postoji samo kada je netko tko ju je odigrao imao uključeno snimanje i podijelio ga.",
+    "failed": "Nije bilo moguće pročitati ponovni prikaz ove bitke.",
+    "still-standing": "Vozila koja su još u bitki na svakoj strani",
+    "chat": "Chat bitke",
+    "chat-none": "Nitko nije ništa upisao u ovoj bitki.",
+    "chat-yet": "Ništa još nije rečeno.",
+    "deaths-none": "Nitko nije uništen u ovoj bitki.",
+    "deaths-yet": "Svi su još aktivni.",
+    "deaths-unknown": "vozilo",
+    "deaths-destroyed": "Uništen"
   }
 }

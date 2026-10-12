@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Zničeno {names}",
   "replay": {
-    "drop": "Vyberte soubor .wotreplay z této bitvy",
-    "privacy": "Soubor se přečte ve vašem prohlížeči a nikdy neopustí vaše zařízení. Nic se nenahrává a nic se neukládá.",
-    "reading": "Probíhá čtení záznamu…",
-    "wrong-battle": "Tento záznam se týká odlišné bitvy ({map}).",
-    "unfinished": "Tento záznam nemá paketový stream, bitva nebyla odehrána do konce.",
-    "no-positions": "Tento záznam nepřenáší žádné pozice, kterým tato čtečka rozumí.",
     "no-bounds": "Tato aréna nemá v katalogu uvedený rozsah, takže pozice nelze umístit na její minimapu.",
     "play": "Přehrát",
-    "pause": "Pozastavit"
+    "pause": "Pozastavit",
+    "loading": "Načítání záznamu této bitvy…",
+    "none": "Žádný záznam této bitvy nebyl zachován. Záznam existuje pouze tehdy, když měl někdo, kdo bitvu odehrál, zapnuté nahrávání a sdílel ho.",
+    "failed": "Záznam této bitvy se nepodařilo přečíst.",
+    "still-standing": "Vozidla, která jsou stále v bitvě, na každé straně",
+    "chat": "Chat bitvy",
+    "chat-none": "Nikdo v této bitvě nic nenapsal.",
+    "chat-yet": "Nic zatím nebylo řečeno.",
+    "deaths-none": "Nikdo nebyl v této bitvě zničen.",
+    "deaths-yet": "Všichni jsou stále aktivní.",
+    "deaths-unknown": "vozidlo",
+    "deaths-destroyed": "Zničeno"
   }
 }

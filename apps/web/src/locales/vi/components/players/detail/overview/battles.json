@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Đã phá hủy {names}",
   "replay": {
-    "drop": "Chọn tệp .wotreplay của trận đấu này",
-    "privacy": "Tệp được đọc trong trình duyệt của bạn và không bao giờ rời khỏi máy của bạn. Không có gì được tải lên và không có gì được lưu trữ.",
-    "reading": "Đang đọc bản phát lại…",
-    "wrong-battle": "Bản phát lại đó là của một trận đấu khác ({map}).",
-    "unfinished": "Bản phát lại đó không có luồng phát trực tiếp của các gói tin: trận đấu chưa được chơi đến hết.",
-    "no-positions": "Bản phát lại đó không có vị trí nào mà trình đọc này hiểu được.",
     "no-bounds": "Đấu trường này không có phạm vi trong danh mục, vì vậy không thể xác định vị trí trên bản đồ nhỏ của nó.",
     "play": "Chơi",
-    "pause": "Tạm dừng"
+    "pause": "Tạm dừng",
+    "loading": "Đang tải bản phát lại của trận đấu này…",
+    "none": "Không có bản phát lại nào được giữ lại cho trận đấu này. Bản phát lại chỉ tồn tại khi có người đã chơi trận đấu đó bật ghi kỷ lục và chia sẻ nó.",
+    "failed": "Không thể đọc bản phát lại của trận đấu này.",
+    "still-standing": "Xe vẫn còn trong trận đấu, ở mỗi bên",
+    "chat": "Trò chuyện trong trận đấu",
+    "chat-none": "Không ai nhập bất kỳ điều gì trong trận đấu này.",
+    "chat-yet": "Chưa có gì được nói.",
+    "deaths-none": "Không ai đã bị phá hủy trong trận đấu này.",
+    "deaths-yet": "Mọi người vẫn còn sống sót.",
+    "deaths-unknown": "một xe tăng",
+    "deaths-destroyed": "Đã phá hủy"
   }
 }

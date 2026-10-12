@@ -1,6 +1,11 @@
 {
   "date": "Petsa",
   "featured-tournament": "Itinatampok na palaro",
+  "filter": {
+    "open": "Bukas at live",
+    "completed": "Kumpleto",
+    "all": "Lahat"
+  },
   "format": "Format",
   "mode": "Mode",
   "no-tournament-matches-the-current": "Walang tornéo na tumutugma sa kasalukuyang mga filter.",

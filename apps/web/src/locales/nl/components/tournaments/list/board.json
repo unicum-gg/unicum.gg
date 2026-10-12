@@ -1,6 +1,11 @@
 {
   "date": "Datum",
   "featured-tournament": "Uitgelicht toernooi",
+  "filter": {
+    "open": "Open & live",
+    "completed": "Voltooid",
+    "all": "Alle"
+  },
   "format": "Formaat",
   "mode": "Modus",
   "no-tournament-matches-the-current": "Geen enkel toernooi komt overeen met de huidige filters.",

@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Förstörda {names}",
   "replay": {
-    "drop": "Välj .wotreplay-filen för den här striden",
-    "privacy": "Filen läses i din webbläsare och lämnar aldrig din maskin. Inget laddas upp och inget lagras.",
-    "reading": "Läser återuppspelningen…",
-    "wrong-battle": "Den återuppspelningen gäller en annan strid på {map}.",
-    "unfinished": "Den återuppspelningen innehåller ingen paketström, striden spelades inte till slutet.",
-    "no-positions": "Den återuppspelningen innehåller inga positioner som den här läsaren förstår.",
     "no-bounds": "Den här arenan har ingen utsträckning i katalogen, så positionerna kan inte få plats på dess minikarta.",
     "play": "Spela",
-    "pause": "Pausa"
+    "pause": "Pausa",
+    "loading": "Laddar reprisen från den här striden…",
+    "none": "Ingen behöll någon repris för den här striden. En repris finns bara när någon som spelade den hade inspelning aktiverad och delade den.",
+    "failed": "Det gick inte att läsa reprisen från den här striden.",
+    "still-standing": "Vagnar som fortfarande är med i striden, på varje sida",
+    "chat": "Stridschatt",
+    "chat-none": "Ingen skrev något i den här striden.",
+    "chat-yet": "Inget har sagts ännu.",
+    "deaths-none": "Ingen förstördes i den här striden.",
+    "deaths-yet": "Alla är fortfarande vid liv.",
+    "deaths-unknown": "ett fordon",
+    "deaths-destroyed": "Förstörda"
   }
 }

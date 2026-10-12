@@ -1,6 +1,11 @@
 {
   "date": "Datums",
   "featured-tournament": "Izceltais turnīrs",
+  "filter": {
+    "open": "Atvērts un aktīvs",
+    "completed": "Izpildīta",
+    "all": "Visi"
+  },
   "format": "Formāts",
   "mode": "Režīms",
   "no-tournament-matches-the-current": "Neviens turnīrs neatbilst pašreizējiem filtriem.",

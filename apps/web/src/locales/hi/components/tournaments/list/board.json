@@ -1,6 +1,11 @@
 {
   "date": "तारीख",
   "featured-tournament": "विशेषित टूर्नामेंट",
+  "filter": {
+    "open": "खुला और लाइव",
+    "completed": "पूर्ण",
+    "all": "सभी"
+  },
   "format": "स्वरूप",
   "mode": "मोड",
   "no-tournament-matches-the-current": "वर्तमान फ़िल्टर से कोई टूर्नामेंट मेल नहीं खाता।",

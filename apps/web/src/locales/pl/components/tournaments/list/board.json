@@ -1,6 +1,11 @@
 {
   "date": "Data",
   "featured-tournament": "Wyróżniony turniej",
+  "filter": {
+    "open": "Otwarte i na żywo",
+    "completed": "Ukończona",
+    "all": "Wszystkie"
+  },
   "format": "Format",
   "mode": "Tryb",
   "no-tournament-matches-the-current": "Żaden turniej nie pasuje do bieżących filtrów.",

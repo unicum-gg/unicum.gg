@@ -1,6 +1,11 @@
 {
   "date": "Күні",
   "featured-tournament": "ерекше турнир",
+  "filter": {
+    "open": "Ашық әрі белсенді",
+    "completed": "Аяқталған",
+    "all": "Барлығы"
+  },
   "format": "Формат",
   "mode": "Режим",
   "no-tournament-matches-the-current": "Ағымдағы фильтрлерге сәйкес турнир жоқ.",

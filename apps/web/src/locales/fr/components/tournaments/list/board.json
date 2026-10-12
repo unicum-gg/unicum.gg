@@ -1,6 +1,11 @@
 {
   "date": "Date",
   "featured-tournament": "Tournoi à la une",
+  "filter": {
+    "open": "Ouvert & en direct",
+    "completed": "Accomplie",
+    "all": "Tous"
+  },
   "format": "Format",
   "mode": "Mode",
   "no-tournament-matches-the-current": "Aucun tournoi ne correspond aux filtres actuels.",

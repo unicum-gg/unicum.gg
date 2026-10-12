@@ -1,6 +1,11 @@
 {
   "date": "날짜",
   "featured-tournament": "특집 토너먼트",
+  "filter": {
+    "open": "공개 및 실시간",
+    "completed": "완료",
+    "all": "모두"
+  },
   "format": "형식",
   "mode": "모드",
   "no-tournament-matches-the-current": "현재 필터와 일치하는 토너먼트가 없습니다.",

@@ -1,6 +1,11 @@
 {
   "date": "Дата",
   "featured-tournament": "Рекомендуемый турнир",
+  "filter": {
+    "open": "Открытые и активные",
+    "completed": "Выполнено",
+    "all": "Все"
+  },
   "format": "Формат",
   "mode": "Режим",
   "no-tournament-matches-the-current": "Ни один турнир не соответствует текущим фильтрам.",

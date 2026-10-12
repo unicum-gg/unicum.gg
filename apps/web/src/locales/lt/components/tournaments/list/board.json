@@ -1,6 +1,11 @@
 {
   "date": "Data",
   "featured-tournament": "Išskirtinis turnyras",
+  "filter": {
+    "open": "Atvira ir tiesioginė",
+    "completed": "Įvykdyta",
+    "all": "Visi"
+  },
   "format": "Formatas",
   "mode": "Režimas",
   "no-tournament-matches-the-current": "Nė vienas turnyras neatitinka dabartinių filtrų.",

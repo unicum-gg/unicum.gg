@@ -1,6 +1,11 @@
 {
   "date": "Дата",
   "featured-tournament": "Выдатны турнір",
+  "filter": {
+    "open": "Адкрытыя і жывыя",
+    "completed": "Завершаны",
+    "all": "Усе"
+  },
   "format": "Фармат",
   "mode": "Рэжым",
   "no-tournament-matches-the-current": "Ніводны турнір не адпавядае бягучым фільтрам.",

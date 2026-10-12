@@ -1,6 +1,11 @@
 {
   "date": "Päivämäärä",
   "featured-tournament": "Ominaisuuskilpailu",
+  "filter": {
+    "open": "Avoin ja käynnissä",
+    "completed": "Suoritettu",
+    "all": "Kaikki"
+  },
   "format": "Muoto",
   "mode": "Tila",
   "no-tournament-matches-the-current": "Mikään turnaus ei vastaa nykyisiä suodattimia.",

@@ -1,6 +1,11 @@
 {
   "date": "Dátum",
   "featured-tournament": "Kiemelt verseny",
+  "filter": {
+    "open": "Nyitott és élő",
+    "completed": "Teljesítve",
+    "all": "Összes"
+  },
   "format": "Formátum",
   "mode": "Mód",
   "no-tournament-matches-the-current": "Egyetlen verseny sem felel meg a jelenlegi szűrőknek.",

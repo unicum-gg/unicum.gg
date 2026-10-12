@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Megsemmisítve: {names}",
   "replay": {
-    "drop": "Válaszd ki ennek a csatának a .wotreplay fájlját",
-    "privacy": "A fájlt a böngésződ olvassa be, és soha nem hagyja el a gépedet. Semmi nem kerül feltöltésre, és semmi nem lesz tárolva.",
-    "reading": "A visszajátszás olvasása…",
-    "wrong-battle": "Ez a visszajátszás egy különböző csatához tartozik ({map}).",
-    "unfinished": "Ebben a visszajátszásban nincs csomagközvetítés, a csatát nem játszották végig.",
-    "no-positions": "Ez a visszajátszás nem tartalmaz olyan pozíciókat, amelyeket ez az olvasó ért.",
     "no-bounds": "Ennek az arénának nincs kiterjedése a katalógusban, ezért a pozíciókat nem lehet a minitérképre helyezni.",
     "play": "Lejátszás",
-    "pause": "Szünet"
+    "pause": "Szünet",
+    "loading": "Betöltés: a csata visszajátszása…",
+    "none": "Ehhez a csatához nincs megtartva visszajátszás. Visszajátszás csak akkor létezik, ha valaki, aki játszott benne, bekapcsolta a rögzítést, és megosztotta.",
+    "failed": "A csata visszajátszása nem olvasható.",
+    "still-standing": "A csatában még élő járművek mindkét oldalon",
+    "chat": "Csata chat",
+    "chat-none": "Senki sem írt semmit ebben a csatában.",
+    "chat-yet": "Eddig nem hangzott el semmi.",
+    "deaths-none": "Ebben a csatában senki sem lett megsemmisítve.",
+    "deaths-yet": "Még mindenki élő.",
+    "deaths-unknown": "egy jármű",
+    "deaths-destroyed": "Megsemmisítve"
   }
 }

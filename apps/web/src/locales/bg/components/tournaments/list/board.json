@@ -1,6 +1,11 @@
 {
   "date": "Дата",
   "featured-tournament": "Избрано състезание",
+  "filter": {
+    "open": "Отворени и активни",
+    "completed": "Изпълнено",
+    "all": "Всички"
+  },
   "format": "Формат",
   "mode": "Режим",
   "no-tournament-matches-the-current": "Няма турнир, съответстващ на текущите филтри.",

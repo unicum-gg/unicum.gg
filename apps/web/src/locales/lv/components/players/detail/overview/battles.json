@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Iznīcināti {names}",
   "replay": {
-    "drop": "Izvēlieties šīs kaujas .wotreplay failu",
-    "privacy": "Fails tiek lasīts jūsu pārlūkprogrammā un nekad nepamet jūsu datoru. Nekas netiek augšupielādēts un nekas netiek saglabāts.",
-    "reading": "Notiek atkārtojuma lasīšana…",
-    "wrong-battle": "Šis atkārtojums ir no atšķirīgas kaujas ({map}).",
-    "unfinished": "Šim atkārtojumam nav pakešu straumes, kauja netika spēlēta līdz beigām.",
-    "no-positions": "Šim atkārtojumam nav pozīciju, ko šis lasītājs saprot.",
     "no-bounds": "Šai arēnai katalogā nav noteiktas robežas, tāpēc pozīcijas nevar izvietot tās minikartē.",
     "play": "Spēlēt",
-    "pause": "Pauze"
+    "pause": "Pauze",
+    "loading": "Ielādē šīs kaujas atkārtojumu…",
+    "none": "Šai kaujai nav saglabāts atkārtojums. Atkārtojums pastāv tikai tad, ja kāds, kurš to spēlēja, bija ieslēdzis ierakstīšanu un dalījās ar to.",
+    "failed": "Šīs kaujas atkārtojumu nevarēja lasīt.",
+    "still-standing": "Kaujas laukā vēl esošā bruņutehnika katrā pusē",
+    "chat": "Kaujas tērzēšana",
+    "chat-none": "Neviens šajā kaujā neko neuzrakstīja.",
+    "chat-yet": "Pagaidām nekas nav teikts.",
+    "deaths-none": "Neviens šajā kaujā netika iznīcināts.",
+    "deaths-yet": "Visi joprojām ir aktīvi.",
+    "deaths-unknown": "transportlīdzeklis",
+    "deaths-destroyed": "Iznīcināts"
   }
 }

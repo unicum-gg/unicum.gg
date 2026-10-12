@@ -111,14 +111,19 @@
   },
   "destroyed-list": "İmha edilen {names}",
   "replay": {
-    "drop": "Bu savaşın .wotreplay dosyasını seçin",
-    "privacy": "Dosya tarayıcınızda okunur ve makinenizden asla ayrılmaz. Hiçbir şey yüklenmez ve hiçbir şey depolanmaz.",
-    "reading": "Tekrar oynatma okunuyor…",
-    "wrong-battle": "Bu tekrar oynatma farklı bir savaşa ait ({map}).",
-    "unfinished": "Bu tekrar oynatmada paket akışı yok: savaş sonuna kadar oynanmadı.",
-    "no-positions": "Bu tekrar oynatma, bu okuyucunun anlayabildiği konumları taşımıyor.",
     "no-bounds": "Bu arenanın katalogda bir kapsamı yok, bu nedenle konumlar mini haritaya yerleştirilemez.",
     "play": "Oyna",
-    "pause": "Duraklat"
+    "pause": "Duraklat",
+    "loading": "Bu savaşın tekrarı yükleniyor…",
+    "none": "Bu savaş için bir tekrar korunmadı. Tekrar, yalnızca savaşı oynayan kişilerden biri kaydı açıkken savaşı kaydedip paylaştıysa mevcut olur.",
+    "failed": "Bu savaşın tekrarı okunamadı.",
+    "still-standing": "Her iki tarafta da savaşta kalan araçlar",
+    "chat": "Savaş sohbeti",
+    "chat-none": "Kimse bu savaşta hiçbir şey yazmadı.",
+    "chat-yet": "Henüz söylenen bir şey yok.",
+    "deaths-none": "Bu savaşta kimse imha edilmedi.",
+    "deaths-yet": "Herkes hâlâ hayatta.",
+    "deaths-unknown": "bir araç",
+    "deaths-destroyed": "İmha edilen"
   }
 }

@@ -1,6 +1,11 @@
 {
   "date": "Tarih",
   "featured-tournament": "Öne çıkan turnuva",
+  "filter": {
+    "open": "Açık ve canlı",
+    "completed": "Tamamlandı",
+    "all": "Tümü"
+  },
   "format": "Format",
   "mode": "Mod",
   "no-tournament-matches-the-current": "Mevcut filtrelerle eşleşen turnuva yok.",

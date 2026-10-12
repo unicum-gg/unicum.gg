@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Ødelagt {names}",
   "replay": {
-    "drop": "Vælg kampens .wotreplay-fil",
-    "privacy": "Filen bliver læst i din browser og forlader aldrig din maskine. Intet uploades, og intet gemmes.",
-    "reading": "Læser replayet…",
-    "wrong-battle": "Dette replay er fra en anden kamp ({map}).",
-    "unfinished": "Dette replay har ingen packet stream: kampen blev ikke spillet til ende.",
-    "no-positions": "Dette replay bærer ingen placeringer, som denne læser forstår.",
     "no-bounds": "Denne arena har ingen udstrækning i kataloget, så placeringerne kan ikke placeres på dens minikort.",
     "play": "Spil",
-    "pause": "Pause"
+    "pause": "Pause",
+    "loading": "Indlæser denne kamps replay…",
+    "none": "Der blev ikke beholdt nogen replay af denne kamp. En replay findes kun, hvis nogen, der spillede den, havde optagelse slået til og delte den.",
+    "failed": "Denne kamps replay kunne ikke læses.",
+    "still-standing": "Køretøjer, der stadig er i kampen, på hver side",
+    "chat": "Kampchat",
+    "chat-none": "Ingen skrev noget i denne kamp.",
+    "chat-yet": "Intet sagt endnu.",
+    "deaths-none": "Ingen blev ødelagt i denne kamp.",
+    "deaths-yet": "Alle er stadig i live.",
+    "deaths-unknown": "et køretøj",
+    "deaths-destroyed": "Ødelagt"
   }
 }

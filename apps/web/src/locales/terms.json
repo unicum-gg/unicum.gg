@@ -746,7 +746,9 @@
     "received": "المتلقّى",
     "single": "فردي",
     "total": "الإجمالي",
-    "stream": "البث المباشر"
+    "stream": "البث المباشر",
+    "Open & live": "مفتوح ومباشر",
+    "alive": "حي"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1495,7 +1497,9 @@
     "received": "атрыманы",
     "single": "адзінкавы",
     "total": "усяго",
-    "stream": "стрым"
+    "stream": "стрым",
+    "Open & live": "Адкрытыя і жывыя",
+    "alive": "жывы"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2452,7 +2456,10 @@
     "received": "получени",
     "single": "единичен",
     "total": "общо",
-    "stream": "стрийм"
+    "stream": "стрийм",
+    "Affirmative!": "Тъй вярно!",
+    "Open & live": "Отворени и активни",
+    "alive": "активен"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3208,7 +3215,9 @@
     "received": "primljeno",
     "single": "pojedinačno",
     "total": "ukupno",
-    "stream": "prijenos uživo"
+    "stream": "prijenos uživo",
+    "Open & live": "Otvoreno i uživo",
+    "alive": "živo"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4176,7 +4185,10 @@
     "received": "obdržené",
     "single": "jednotlivý",
     "total": "celkem",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Potvrzuji!",
+    "Open & live": "Otevřené a živé",
+    "alive": "aktivní"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5150,7 +5162,10 @@
     "received": "modtaget",
     "single": "enkelt",
     "total": "samlet",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Bekræftet!",
+    "Open & live": "Åben & live",
+    "alive": "i live"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6117,7 +6132,10 @@
     "received": "erhalten",
     "single": "einzeln",
     "total": "gesamt",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Verstanden!",
+    "Open & live": "Offen & live",
+    "alive": "aktiv"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7090,7 +7108,10 @@
     "received": "ληφθείσα",
     "single": "μεμονωμένο",
     "total": "σύνολο",
-    "stream": "ροή"
+    "stream": "ροή",
+    "Affirmative!": "Θετικό!",
+    "Open & live": "Ανοιχτά & ζωντανά",
+    "alive": "ζωντανά"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8043,7 +8064,10 @@
     "received": "recibido",
     "single": "individual",
     "total": "total",
-    "stream": "directo"
+    "stream": "directo",
+    "Affirmative!": "¡Afirmativo!",
+    "Open & live": "Abierto y activo",
+    "alive": "vivo"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9021,7 +9045,10 @@
     "received": "vastaanotettu",
     "single": "yksittäinen",
     "total": "yhteensä",
-    "stream": "striimi"
+    "stream": "striimi",
+    "Affirmative!": "Selvä!",
+    "Open & live": "Avoin ja käynnissä",
+    "alive": "elossa"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9978,7 +10005,10 @@
     "received": "reçus",
     "single": "seul",
     "total": "total",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Affirmatif !",
+    "Open & live": "Ouvert & en direct",
+    "alive": "actif"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -10728,7 +10758,9 @@
     "received": "प्राप्त",
     "single": "एकल",
     "total": "कुल",
-    "stream": "स्ट्रीम"
+    "stream": "स्ट्रीम",
+    "Open & live": "खुला और लाइव",
+    "alive": "सक्रिय"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11699,7 +11731,10 @@
     "received": "primljeno",
     "single": "pojedinačno",
     "total": "ukupno",
-    "stream": "prijenos uživo"
+    "stream": "prijenos uživo",
+    "Affirmative!": "Razumijem!",
+    "Open & live": "Otvoreno i uživo",
+    "alive": "aktivni"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12672,7 +12707,10 @@
     "received": "kapott",
     "single": "egyszeri",
     "total": "összes",
-    "stream": "közvetítés"
+    "stream": "közvetítés",
+    "Affirmative!": "Értettem!",
+    "Open & live": "Nyitott és élő",
+    "alive": "élő"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13641,7 +13679,10 @@
     "received": "ricevuti",
     "single": "singolo",
     "total": "totale",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Affermativo!",
+    "Open & live": "Aperto e in tempo reale",
+    "alive": "attivo"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14617,7 +14658,10 @@
     "received": "受けた",
     "single": "1戦",
     "total": "合計",
-    "stream": "配信"
+    "stream": "配信",
+    "Affirmative!": "了解！",
+    "Open & live": "募集中・開催中",
+    "alive": "生存"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15370,7 +15414,9 @@
     "received": "алынған",
     "single": "бір",
     "total": "жалпы",
-    "stream": "стрим"
+    "stream": "стрим",
+    "Open & live": "Ашық әрі белсенді",
+    "alive": "белсенді"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16351,7 +16397,10 @@
     "received": "받은",
     "single": "단일",
     "total": "합계",
-    "stream": "방송"
+    "stream": "방송",
+    "Affirmative!": "확인",
+    "Open & live": "공개 및 실시간",
+    "alive": "생존"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17327,7 +17376,10 @@
     "received": "gauta",
     "single": "vienas",
     "total": "iš viso",
-    "stream": "srautas"
+    "stream": "srautas",
+    "Affirmative!": "Tikrai taip!",
+    "Open & live": "Atvira ir tiesioginė",
+    "alive": "gyva"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18289,7 +18341,10 @@
     "received": "saņemts",
     "single": "atsevišķs",
     "total": "kopā",
-    "stream": "straume"
+    "stream": "straume",
+    "Affirmative!": "Sapratu!",
+    "Open & live": "Atvērts un aktīvs",
+    "alive": "aktīvs"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19267,7 +19322,10 @@
     "received": "ontvangen",
     "single": "enkel",
     "total": "totaal",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Begrepen!",
+    "Open & live": "Open & live",
+    "alive": "in leven"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20236,7 +20294,10 @@
     "received": "mottatt",
     "single": "enkelt",
     "total": "totalt",
-    "stream": "strømming"
+    "stream": "strømming",
+    "Affirmative!": "Bekreftet!",
+    "Open & live": "Åpen og live",
+    "alive": "live"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21202,7 +21263,10 @@
     "received": "otrzymane",
     "single": "pojedynczy",
     "total": "łącznie",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Tak jest!",
+    "Open & live": "Otwarte i na żywo",
+    "alive": "żywy"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22161,7 +22225,10 @@
     "received": "recebido",
     "single": "único",
     "total": "total",
-    "stream": "transmissão"
+    "stream": "transmissão",
+    "Affirmative!": "Afirmativo!",
+    "Open & live": "Aberto e ao vivo",
+    "alive": "vivo"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23120,7 +23187,10 @@
     "received": "primite",
     "single": "singură",
     "total": "total",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Recepționat!",
+    "Open & live": "Deschis și în desfășurare",
+    "alive": "activ"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24066,7 +24136,10 @@
     "received": "полученный",
     "single": "одиночный",
     "total": "всего",
-    "stream": "стрим"
+    "stream": "стрим",
+    "Affirmative!": "Так точно!",
+    "Open & live": "Открытые и активные",
+    "alive": "активен"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -24820,7 +24893,9 @@
     "received": "prijaté",
     "single": "jednotlivý",
     "total": "celkom",
-    "stream": "prenos"
+    "stream": "prenos",
+    "Open & live": "Otvorené a prebiehajúce",
+    "alive": "nažive"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -25793,7 +25868,10 @@
     "received": "примљено",
     "single": "један",
     "total": "укупно",
-    "stream": "strim"
+    "stream": "strim",
+    "Affirmative!": "Razumem!",
+    "Open & live": "Отворено и уживо",
+    "alive": "жив"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -26771,7 +26849,10 @@
     "received": "mottagen",
     "single": "enskild",
     "total": "totalt",
-    "stream": "stream"
+    "stream": "stream",
+    "Affirmative!": "Uppfattat!",
+    "Open & live": "Öppen & live",
+    "alive": "vid liv"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -27745,7 +27826,10 @@
     "received": "ที่ได้รับ",
     "single": "หนึ่งครั้ง",
     "total": "รวม",
-    "stream": "สตรีม"
+    "stream": "สตรีม",
+    "Affirmative!": "รับทราบ!",
+    "Open & live": "เปิดรับสมัครและกำลังดำเนินอยู่",
+    "alive": "ยังมีชีวิตอยู่"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -28500,7 +28584,9 @@
     "received": "natanggap",
     "single": "iisa",
     "total": "kabuuan",
-    "stream": "stream"
+    "stream": "stream",
+    "Open & live": "Bukas at live",
+    "alive": "buhay"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -29470,7 +29556,10 @@
     "received": "alınan",
     "single": "tek",
     "total": "toplam",
-    "stream": "akış"
+    "stream": "akış",
+    "Affirmative!": "Olumlu!",
+    "Open & live": "Açık ve canlı",
+    "alive": "hayatta"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -30433,7 +30522,10 @@
     "received": "отримано",
     "single": "одиночний",
     "total": "загальний",
-    "stream": "стрім"
+    "stream": "стрім",
+    "Affirmative!": "Так!",
+    "Open & live": "Відкриті й активні",
+    "alive": "активний"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -31385,7 +31477,9 @@
     "received": "nhận được",
     "single": "đơn lẻ",
     "total": "tổng",
-    "stream": "phát trực tiếp"
+    "stream": "phát trực tiếp",
+    "Open & live": "Đang mở & đang diễn ra",
+    "alive": "sống sót"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -32359,6 +32453,9 @@
     "received": "承受",
     "single": "单场",
     "total": "总计",
-    "stream": "直播"
+    "stream": "直播",
+    "Affirmative!": "收到！",
+    "Open & live": "开放与进行中",
+    "alive": "存活"
   }
 }

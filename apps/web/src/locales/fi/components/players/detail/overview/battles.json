@@ -111,14 +111,19 @@
   },
   "destroyed-list": "Tuhotut: {names}",
   "replay": {
-    "drop": "Valitse tämän taistelun .wotreplay-tiedosto",
-    "privacy": "Tiedosto luetaan selaimessasi, eikä se koskaan poistu koneeltasi. Ei mitään ladata eikä mitään tallenneta.",
-    "reading": "Uusintaa luetaan…",
-    "wrong-battle": "Tuo uusinta on erilaisesta taistelusta ({map}).",
-    "unfinished": "Tuo uusinta ei sisällä pakettistriimiä, koska taistelua ei pelattu loppuun.",
-    "no-positions": "Tuo uusinta ei sisällä sijainteja, joita tämä lukija ymmärtää.",
     "no-bounds": "Tällä areenalla ei ole laajuutta luettelossa, joten sijainteja ei voi sijoittaa sen minikartalle.",
     "play": "Pelaa",
-    "pause": "Keskeytä"
+    "pause": "Keskeytä",
+    "loading": "Ladataan tämän taistelun uusintaa…",
+    "none": "Tästä taistelusta ei ole säilytetty uusintaa. Uusinta on olemassa vain, jos joku sen pelannut on pitänyt tallennuksen päällä ja jakanut sen.",
+    "failed": "Tämän taistelun uusintaa ei voitu lukea.",
+    "still-standing": "Taistelussa yhä olevat vaunut kummallakin puolella",
+    "chat": "Taisteluchat",
+    "chat-none": "Ei kukaan kirjoittanut mitään tässä taistelussa.",
+    "chat-yet": "Ei mitään ole vielä sanottu.",
+    "deaths-none": "Ketään ei tuhottu tässä taistelussa.",
+    "deaths-yet": "Kaikki ovat yhä elossa.",
+    "deaths-unknown": "ajoneuvo",
+    "deaths-destroyed": "Tuhottu"
   }
 }

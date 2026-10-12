@@ -1,6 +1,11 @@
 {
   "date": "日期",
   "featured-tournament": "特色赛事",
+  "filter": {
+    "open": "开放与进行中",
+    "completed": "已完成",
+    "all": "全部"
+  },
   "format": "格式",
   "mode": "模式",
   "no-tournament-matches-the-current": "没有锦标赛符合当前筛选条件。",
