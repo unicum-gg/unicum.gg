@@ -8,6 +8,12 @@
  *
  *   node scripts/apply-sql.mjs apps/web/drizzle/0120_battles.sql --dry
  *   node scripts/apply-sql.mjs apps/web/drizzle/0120_battles.sql
+ *
+ * The summary it prints matches `%_battle%` rather than `%_battles%`, which it
+ * did when `battles` was the only partitioned table here. The narrower pattern
+ * made the dry run silent about `battle_loadouts`: the file ran, nothing
+ * failed, and the listing showed no sign of the eighty-one objects it had just
+ * created. A dry run that cannot show its own work is not much of a check.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -62,14 +68,14 @@ try {
       SELECT c.relname AS name, c.relkind AS kind
       FROM pg_class c
       JOIN pg_namespace n ON n.oid = c.relnamespace
-      WHERE n.nspname = 'public' AND c.relname LIKE '%_battles%'
+      WHERE n.nspname = 'public' AND c.relname LIKE '%_battle%'
       ORDER BY c.relname`;
     const kinds = {};
     for (const row of tables) {
       const key = `${row.kind}:${name(row.name)}`;
       kinds[key] = (kinds[key] || 0) + 1;
     }
-    console.log(`  objects : ${tables.length} named like 'battles'`);
+    console.log(`  objects : ${tables.length} named like 'battle'`);
     for (const [key, count] of Object.entries(kinds).sort()) {
       const [kind, label] = key.split(":");
       const what = { p: "partitioned table", r: "partition", v: "view", I: "partitioned index", i: "index" }[kind] || kind;
