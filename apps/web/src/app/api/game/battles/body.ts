@@ -44,7 +44,8 @@ const vehicle = z.object({
     .number()
     .int()
     .positive()
-    .max(Number.MAX_SAFE_INTEGER),
+    .max(Number.MAX_SAFE_INTEGER)
+    .optional(),
   team: z.number().int().min(0).max(32),
   /** `typeCompDescr`, the vehicle the account brought. */
   tank: z.number().int().positive(),
