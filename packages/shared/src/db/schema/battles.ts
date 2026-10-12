@@ -76,6 +76,14 @@ export type BattleVehicle = {
   damaged?: number;
   /** The battle-scoped vehicle id of whoever destroyed them. */
   killer?: number;
+  /**
+   * Marks of excellence on this gun, 1 to 3, absent for none.
+   *
+   * Known for every vehicle in the battle and not just the reporting one: the
+   * game broadcasts the count with the public half of the results, which is
+   * why a single report can say what the whole team was carrying.
+   */
+  marks?: number;
 };
 
 /**
@@ -121,6 +129,18 @@ export type BattleEconomy = {
 
   /** Whether the account had premium when it played. */
   premium?: boolean;
+  /**
+   * The mark of excellence percent this battle left the gun at, 1 to 100.
+   *
+   * The state on arrival, never the gain: the game gives no "before" to pair
+   * it with. The progress of one battle is the difference with the previous
+   * battle in the same tank, which is a question for whoever reads a series of
+   * these and cannot be answered by one row alone.
+   *
+   * Whole percents here because that is what the results carry. The garage
+   * knows it to the hundredth and reports that on the tank itself.
+   */
+  markPercent?: number;
 };
 
 /**

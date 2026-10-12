@@ -7,6 +7,19 @@ export type TankStats = {
   // Marks of Excellence on the gun (0-3). Not part of the WG public API — merged
   // in from the WoT portal, so it is optional/absent on the raw API shape.
   marks_on_gun?: number | null;
+  /**
+   * How far along the next mark of excellence is, 0 to 100 with two decimals.
+   *
+   * Not in Wargaming's public API and not on the portal either: the only place
+   * this number exists is the vehicle dossier inside the client, so it reaches
+   * us from the mod's garage sweep or not at all. Null means nobody has told
+   * us, which is different from a gun with no progress.
+   *
+   * Until this arrived the site ESTIMATED the figure by dividing a player's
+   * average combined damage by the threshold for the next mark. That estimate
+   * is still what shows for an account without the mod.
+   */
+  mark_percent?: number | null;
   /** Personal bests on the vehicle, the game's "Record Score". Top level in
    * Wargaming's response, not inside a battle-mode block. */
   max_xp?: number;

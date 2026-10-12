@@ -107,6 +107,32 @@ export function makeTankLoadoutsTable(region: string) {
        */
       setups: jsonb("setups"),
 
+      /**
+       * Marks of excellence on this gun, 0 to 3, null when never reported.
+       *
+       * Null and zero mean different things and both occur: null is a client
+       * too old to send it, zero is a gun that genuinely has none.
+       *
+       * `{region}_tank_snapshots.marks_on_gun` holds the same count from the
+       * WoT portal, which is scraped a page at a time and only when somebody
+       * visits. This one arrives with the garage sweep, for the whole fleet at
+       * once, and is the fresher of the two for an account running the mod.
+       */
+      marks: smallint("marks"),
+      /**
+       * How far along the next mark is, as a percent with two decimals.
+       *
+       * The real figure, which nothing else here has ever had. The portal
+       * gives the count alone and the site has until now ESTIMATED the
+       * progress by dividing a player's average damage by the threshold for
+       * the next mark -- a fair guess, and not the number the client shows.
+       *
+       * `real` and not an integer because the dossier knows hundredths: the
+       * value a battle reports rounds to the whole percent, and rounding is
+       * exactly what makes a slow climb look like it stopped.
+       */
+      markPercent: real("mark_percent"),
+
       updatedAt: timestamp("updated_at", { withTimezone: true })
         .notNull()
         .defaultNow(),

@@ -46,6 +46,19 @@ export function makeTankSnapshotsTable(
       // (`/wotup/profile/vehicles/list/`), not the public API, so it is only set
       // on refreshes that reach the portal; nullable + organically backfilled.
       marksOnGun: integer("marks_on_gun"),
+      /**
+       * Progress towards the next mark of excellence, 0 to 100, two decimals.
+       *
+       * Kept on the snapshot and not only on the current row, because the
+       * progress is a thing to watch MOVE: a column here turns the series of
+       * snapshots we already take into the history of a mark being earned,
+       * which is what somebody grinding one actually wants to see.
+       *
+       * Only ever known for an account running the mod. Neither Wargaming's
+       * public API nor the portal carries it; it lives in the client's own
+       * vehicle dossier. Null is "nobody has told us", which is most rows.
+       */
+      markPercent: real("mark_percent"),
       // Added later for the per-tank server-average table (KDR, Hit%, Pen%,
       // Blocked, Survival). Nullable + organically backfilled, same as xp above.
       // `damageBlocked` is a cumulative total: WG only exposes the per-battle

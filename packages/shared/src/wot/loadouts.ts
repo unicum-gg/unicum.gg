@@ -120,6 +120,18 @@ export interface PlayerLoadout {
   crew?: LoadoutCrewMember[];
   progression?: LoadoutProgression;
   setups?: LoadoutSetups;
+  /** Marks of excellence on the gun, 1 to 3, absent for none. */
+  marks?: number;
+  /**
+   * Progress towards the next mark, 0 to 100 with two decimals.
+   *
+   * From the garage's own dossier and nowhere else. Finer than the whole
+   * percent a battle reports, and read in a way that ignores the player's
+   * "show marks on gun" setting: that one decides what the hangar paints, and
+   * honouring it here would show a fleet losing its marks the day it is
+   * switched off.
+   */
+  markPercent?: number;
 }
 
 /** A stored loadout, with when it was last seen. */
