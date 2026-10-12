@@ -95,10 +95,21 @@ export interface LoadoutSkillTree {
 
 export type LoadoutProgression = LoadoutFieldMods | LoadoutSkillTree;
 
+/**
+ * Whether this is a tier XI skill tree rather than field modifications.
+ *
+ * The tree has to be NON-EMPTY, not merely present. On the wire the two shapes
+ * are one flat object carrying `level`, `pairs` and `tree` together -- the
+ * endpoint's own schema says so, and that a tier XI vehicle is the one with
+ * `tree` filled, `level` null and `pairs` empty. Testing only for the key was
+ * therefore always true, every loadout read as a skill tree, and the field
+ * modifications were dropped on the floor: the garage panel has never drawn a
+ * single one, on any vehicle, since the day the wire shape was flattened.
+ */
 export function isSkillTree(
   progression: LoadoutProgression,
 ): progression is LoadoutSkillTree {
-  return "tree" in progression;
+  return "tree" in progression && progression.tree.length > 0;
 }
 
 /** One vehicle's whole setup, as the mod sends it and the page draws it. */

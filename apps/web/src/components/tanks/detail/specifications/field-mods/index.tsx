@@ -177,11 +177,14 @@ function PairTile({
   mounted,
   locked,
   onPick,
+  readOnly = false,
 }: {
   item: FieldModItem;
   mounted: boolean;
   locked: boolean;
   onPick: () => void;
+  /** Reported, not offered: no pointer, and the box does not answer a click. */
+  readOnly?: boolean;
 }) {
   return (
     <Tooltip>
@@ -192,7 +195,13 @@ function PairTile({
           aria-pressed={mounted}
           aria-disabled={locked}
           aria-label={item.name}
-          className={locked ? "cursor-not-allowed" : "cursor-pointer"}
+          className={
+            readOnly
+              ? "cursor-default"
+              : locked
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
+          }
         >
           <span
             className={cn(
@@ -244,12 +253,15 @@ export function TankFieldModifications({
   onReset,
   screenLines = true,
   headerBorder = false,
+  readOnly = false,
 }: {
   fieldMods: TankFieldMods;
   level: number;
-  onLevel: (level: number) => void;
+  /** Omitted in `readOnly`, where a server component renders this and cannot
+   *  pass a function across the boundary at all. */
+  onLevel?: (level: number) => void;
   pairChoices: Record<string, "first" | "second" | null>;
-  onTogglePair: (key: string, side: "first" | "second") => void;
+  onTogglePair?: (key: string, side: "first" | "second") => void;
   /** Whether the section deviates from its default (shows the reset button). */
   dirty?: boolean;
   /** Reset the section to its default (level 0, no pair chosen). */
@@ -258,6 +270,16 @@ export function TankFieldModifications({
   screenLines?: boolean;
   /** A local under-title line (column-width), when stacked below another panel. */
   headerBorder?: boolean;
+  /**
+   * Draw what was chosen without offering to change it.
+   *
+   * The same tree, reported rather than configured: a player's own page shows
+   * the modifications they actually run, and there is nothing for a reader to
+   * pick there. A mode on this component rather than a second one beside it --
+   * a read-only copy would be a tree that drifts from the real one the first
+   * time Wargaming adds a rank.
+   */
+  readOnly?: boolean;
 }) {
   const { t: tSection } = useTranslation("components/tanks/detail/sections");
   const { t: tWidget } = useTranslation("components/tanks/detail/widgets");
@@ -278,7 +300,7 @@ export function TankFieldModifications({
           )}
         >
           <PanelTitle>{tSection("field-mods")}</PanelTitle>
-          {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
+          {dirty && onReset && !readOnly ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         {/* On the rail like the tech tree above it: the progression is eight
             levels wide and a phone shows four, and a native scrollbar under a
@@ -308,10 +330,13 @@ export function TankFieldModifications({
                           type="button"
                           // Clicking the current level steps back below it, so the
                           // last node also toggles off.
-                          onClick={() => onLevel(lv === level ? lv - 1 : lv)}
+                          onClick={() =>
+                            readOnly ? undefined : onLevel?.(lv === level ? lv - 1 : lv)
+                          }
+                          aria-disabled={readOnly}
                           aria-pressed={unlocked}
                           aria-label={tWidget("level", { n: lv })}
-                          className="cursor-pointer"
+                          className={readOnly ? "cursor-default" : "cursor-pointer"}
                         >
                           <span
                             className={cn(
@@ -367,13 +392,19 @@ export function TankFieldModifications({
                           item={pair.first}
                           mounted={unlocked && pairChoices[pair.key] === "first"}
                           locked={!unlocked}
-                          onPick={() => onTogglePair(pair.key, "first")}
+                          onPick={() =>
+                            readOnly ? undefined : onTogglePair?.(pair.key, "first")
+                          }
+                          readOnly={readOnly}
                         />
                         <PairTile
                           item={pair.second}
                           mounted={unlocked && pairChoices[pair.key] === "second"}
                           locked={!unlocked}
-                          onPick={() => onTogglePair(pair.key, "second")}
+                          onPick={() =>
+                            readOnly ? undefined : onTogglePair?.(pair.key, "second")
+                          }
+                          readOnly={readOnly}
                         />
                       </div>
                     ) : null}
