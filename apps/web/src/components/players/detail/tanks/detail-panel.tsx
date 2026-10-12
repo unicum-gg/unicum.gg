@@ -160,7 +160,7 @@ export function PlayerTankDetailPanel({
               mark has the second without the first. */}
           {detail.moePercent == null ? null : (
             <span className="text-fd-muted-foreground text-sm tabular-nums">
-              {detail.moePercent.toFixed(detail.moePercent >= 99.95 ? 0 : 2)}%
+              {detail.moePercent.toFixed(2)}%
             </span>
           )}
         </div>

@@ -9,18 +9,28 @@ import type { Participant } from "./battle-types";
 /** One line: a label, a value, and whether it breaks down the line above it. */
 type Row = { label: string; value: string; under?: boolean; cost?: boolean };
 
+/** Two decimals everywhere a mark percentage is shown. See `MARK_PLACES`. */
+const MARK_PLACES = 2;
+
 /**
- * "+1 % (94 -> 95)", or "0 %" when the battle held the line.
+ * "+1.00 % (94.00 -> 95.00)", or "0.00 %" when the battle held the line.
  *
  * Signed on purpose, and the sign is the point: a mark percentage is a figure
  * a player watches move, and an unsigned "1" beside a standing of 95 reads as
  * a second standing rather than as a gain. The previous value is spelled out
- * beside it because a single percent of movement is small enough that the
- * reader wants to see both ends of it.
+ * beside it because the movement is small enough that the reader wants to see
+ * both ends of it.
+ *
+ * Two decimals, like every other mark percentage on the site, even though a
+ * battle's own figure arrives as a whole number: the garage reports hundredths
+ * and the two are read side by side, so one place rounding to a tenth and the
+ * next to a hundredth would look like two different measurements of the same
+ * thing.
  */
 function moved(delta: number, previous: number): string {
   const sign = delta > 0 ? "+" : "";
-  return `${sign}${delta}% (${previous} → ${previous + delta})`;
+  const at = (value: number) => value.toFixed(MARK_PLACES);
+  return `${sign}${at(delta)}% (${at(previous)} → ${at(previous + delta)})`;
 }
 
 function clock(seconds: number): string {
@@ -207,7 +217,7 @@ export function BattleReport({
     ? [
         {
           label: t("report.mark-of-excellence"),
-          value: `${mark.percent}%`,
+          value: `${mark.percent.toFixed(MARK_PLACES)}%`,
         },
         mark.previous == null
           ? null

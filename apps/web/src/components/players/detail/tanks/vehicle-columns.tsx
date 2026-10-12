@@ -117,7 +117,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
             {bars ? <MoEIcon bars={bars} color={MOE_COLORS[bars]} /> : null}
             {percent == null ? null : (
               <span className="text-fd-muted-foreground tabular-nums">
-                {percent.toFixed(percent >= 99.95 ? 0 : 1)}%
+                {percent.toFixed(2)}%
               </span>
             )}
           </span>
