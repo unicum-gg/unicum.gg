@@ -31,7 +31,17 @@ services:
       CLOUDFLARE_ZONE_ID: ${CLOUDFLARE_ZONE_ID}
       CLOUDFLARE_RULESET_ID: ${CLOUDFLARE_RULESET_ID}
       CLOUDFLARE_RULE_ID: ${CLOUDFLARE_RULE_ID}
-      SENTINEL_POLL_SECONDS: ${SENTINEL_POLL_SECONDS:-60}
-      SENTINEL_WINDOW_MINUTES: ${SENTINEL_WINDOW_MINUTES:-5}
-      SENTINEL_STALL_THRESHOLD: ${SENTINEL_STALL_THRESHOLD:-3}
-      SENTINEL_CALM_MINUTES: ${SENTINEL_CALM_MINUTES:-20}
+      # Passed through with no fallback of their own, deliberately. A default
+      # written here as well as in the code is two numbers that must agree, and
+      # when they stop agreeing this one wins silently: the threshold was raised
+      # from 3 to 6 in index.ts on 13 October and the sentinel kept running at 3,
+      # because compose was still handing it the old value. Unset reaches the
+      # code as an empty string, which its `Number(...) || default` reads as
+      # absent, so the code stays the single place the numbers live and Coolify
+      # can still override any of them.
+      SENTINEL_POLL_SECONDS: ${SENTINEL_POLL_SECONDS:-}
+      SENTINEL_WINDOW_MINUTES: ${SENTINEL_WINDOW_MINUTES:-}
+      SENTINEL_STALL_THRESHOLD: ${SENTINEL_STALL_THRESHOLD:-}
+      SENTINEL_SUSTAIN_READINGS: ${SENTINEL_SUSTAIN_READINGS:-}
+      SENTINEL_CALM_MINUTES: ${SENTINEL_CALM_MINUTES:-}
+      SENTINEL_WARMUP_SECONDS: ${SENTINEL_WARMUP_SECONDS:-}
