@@ -16,6 +16,27 @@ const FILE_NAME = /^[a-z0-9-]+\.json$/;
 const KEY_SEGMENT = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
 
 /**
+ * Under `game/`, a segment may also carry `/`.
+ *
+ * Those namespaces are not ours: they hold the words the game itself uses, keyed
+ * by the client's own token, and the client names some of them with a path.
+ * `global_msg/atk/focus_hq` is one chat command's identifier, slashes included,
+ * exactly as the client spells it, and the rule above already says why a name
+ * something else gave is kept rather than restyled.
+ *
+ * Scoped to `game/` rather than allowed everywhere, because the reason is local
+ * to those files. A slash in a namespace we write ourselves would be somebody
+ * inventing structure inside an identifier, which is what the rule is for, and
+ * it is still caught there.
+ */
+const GAME_KEY_SEGMENT = /^[A-Za-z0-9][A-Za-z0-9_/-]*$/;
+
+/** Whether this namespace mirrors the game's own naming rather than ours. */
+function isGameNamespace(file: string): boolean {
+  return file.split(path.sep).join("/").startsWith("game/");
+}
+
+/**
  * Conventions on the English files only, since they are the ones written by
  * hand. The namespace is the path from `src/locales/<locale>/`, so a file name
  * is a piece of the identifier every call site types.
@@ -33,10 +54,12 @@ export function namingTests() {
 
     test("keys are lowercase or kebab-case ASCII", () => {
       const invalid: string[] = [];
-      for (const file of sourceFiles)
+      for (const file of sourceFiles) {
+        const allowed = isGameNamespace(file) ? GAME_KEY_SEGMENT : KEY_SEGMENT;
         for (const key of keysOf(readLocale(SOURCE_LOCALE, file)))
-          if (key.split(".").some((segment) => !KEY_SEGMENT.test(segment)))
+          if (key.split(".").some((segment) => !allowed.test(segment)))
             invalid.push(`${file}: ${key}`);
+      }
       assert.deepStrictEqual(
         invalid,
         [],
