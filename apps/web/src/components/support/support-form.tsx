@@ -1,6 +1,7 @@
 "use client";
 
 import { LockIcon } from "@phosphor-icons/react/dist/ssr";
+import { PaymentMarks } from "./payment-marks";
 import { useState } from "react";
 import {
   SUPPORT_MIN_CENTS,
@@ -129,9 +130,15 @@ export function SupportForm({
         {busy ? <Spinner /> : cta}
       </Button>
 
-      <div className="flex items-center justify-center gap-1.5 text-xs text-fd-muted-foreground">
-        <LockIcon className="size-3.5" />
-        {t(once ? "secured-by-stripe-once" : "secured-by-stripe-monthly")}
+      <div className="flex flex-col items-center gap-2">
+        <div className="flex items-center justify-center gap-1.5 text-xs text-fd-muted-foreground">
+          <LockIcon className="size-3.5" />
+          {t(once ? "secured-by-stripe-once" : "secured-by-stripe-monthly")}
+        </div>
+        {/* Under the lock line rather than beside the amount: this answers "is
+            it safe to type my card here", which is a question somebody asks
+            once they have decided how much, not while they are choosing. */}
+        <PaymentMarks />
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import { useMoney } from "@/hooks/use-money";
 import { useRouter } from "@/hooks/use-router";
 import { useTranslation } from "@/hooks/use-translation";
 import { useSession } from "@/lib/auth-client";
+import { PaymentMarks } from "./payment-marks";
 import { SupportForm } from "./support-form";
 
 type MeStatus = {
@@ -176,6 +177,11 @@ export function SupportBox() {
         <LoginButton callbackURL={ROUTES.SUPPORT}>
           <Button>{t("log-in-with-wargaming")}</Button>
         </LoginButton>
+        {/* Shown before signing in as much as after it. Someone weighing
+            whether to bother is looking at a Wargaming login button, not at a
+            payment form, and "will I be able to pay the way I usually do" is a
+            question they have to answer before they click, not after. */}
+        <PaymentMarks />
       </div>
     );
   }
