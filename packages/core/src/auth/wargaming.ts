@@ -3,6 +3,7 @@ import type { BetterAuthPlugin } from "better-auth";
 import { createAuthEndpoint } from "better-auth/api";
 import { setSessionCookie } from "better-auth/cookies";
 import { handleOAuthUserInfo } from "better-auth/oauth2";
+import { syncPlayerGarage } from "@unicum.gg/core/players/garage";
 import { isRegion } from "@unicum.gg/wargaming";
 import { wg } from "@unicum.gg/core/wargaming/client";
 import { resolveVerifiedNickname } from "@unicum.gg/core/auth/wargaming-nickname";
@@ -201,6 +202,19 @@ export function wargaming(): BetterAuthPlugin {
             throw ctx.redirect(appUrl("/?auth=error"));
           }
           await setSessionCookie(ctx, result.data);
+          // Read the garage with the token WG just confirmed, which is the one
+          // moment we are certain to hold a live one. Deliberately not awaited:
+          // this is a per-vehicle WG call whose retry budget runs to minutes,
+          // and the player is sitting on a redirect. A failure costs nothing
+          // (the profile keeps saying the garage is unverified) and the nightly
+          // pass picks the account up anyway.
+          void syncPlayerGarage({
+            region,
+            accountId: verified.account_id,
+            accessToken: verified.access_token,
+          }).catch((err) => {
+            console.error("[auth.wargaming] garage sync failed:", err);
+          });
           // Remember the region for the next login, now that WG has actually
           // authenticated it. Writing it when the player clicked a region in
           // the picker would record an attempt instead: someone who picks the

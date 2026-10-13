@@ -17,6 +17,7 @@ export * from "./battle-loadouts";
 export * from "./battles";
 export * from "./player-achievements";
 export * from "./player-tank-achievements";
+export * from "./player-garage";
 export * from "./player-marks";
 export * from "./player-ratings";
 export * from "./player-clan-history";

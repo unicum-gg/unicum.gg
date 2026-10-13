@@ -104,6 +104,11 @@ async function startCrons(): Promise<void> {
   );
   startStreamerReconcileCron();
 
+  const { startGarageSyncCron } = await import(
+    "@unicum.gg/core/players/garage-cron"
+  );
+  startGarageSyncCron();
+
   const { startChangelogCron } = await import("@unicum.gg/core/changelog/cron");
   startChangelogCron();
 
