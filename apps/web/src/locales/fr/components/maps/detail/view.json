@@ -5,5 +5,5 @@
   "n-random-events": "{count, plural, one {# événement aléatoire} other {# événements aléatoires}}",
   "random-events": "Événements aléatoires",
   "size": "Taille",
-  "team-size": "Taille d’Équipe"
+  "team-size": "Taille de l’équipe"
 }

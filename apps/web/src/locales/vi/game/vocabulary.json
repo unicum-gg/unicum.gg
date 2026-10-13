@@ -119,7 +119,7 @@
   },
   "vehicle-classes-short": {
     "heavyTank": "Hạng nặng",
-    "mediumTank": "Medium",
+    "mediumTank": "\"Medium\"",
     "lightTank": "Nhẹ",
     "AT-SPG": "TD",
     "SPG": "SPG"
