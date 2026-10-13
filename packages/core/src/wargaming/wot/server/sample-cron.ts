@@ -100,14 +100,86 @@ export async function sampleAllServersOnline(): Promise<Record<string, number>> 
   return counts;
 }
 
+/**
+ * How many ticks in a row may come back empty before the cron starts skipping.
+ *
+ * Three, because a single empty tick is ordinary (one slow answer, one blip)
+ * and the series is worth one wasted attempt. Three in a row is not a blip.
+ */
+const EMPTY_TICKS_BEFORE_BACKOFF = 3;
+
+/**
+ * The widest the backoff goes, counted in sampling periods.
+ *
+ * Six periods is half an hour, and it is the cost of RECOVERY rather than of
+ * the outage: when Wargaming comes back we notice up to half an hour late and
+ * lose at most six samples of a curve that was already flat. Against that, a
+ * sustained outage costs 756 wasted calls a day out of the SHARED Wargaming
+ * budget, which is the same budget the player pipeline draws on, so an endpoint
+ * nobody can reach was quietly slowing down the collection that still worked.
+ */
+const MAX_SKIP_PERIODS = 6;
+
+let consecutiveEmptyTicks = 0;
+let periodsToSkip = 0;
+let backoffAnnounced = false;
+
+/**
+ * Whether this tick should call Wargaming at all.
+ *
+ * The schedule stays on the sampling interval rather than being rescheduled,
+ * because the instants have to keep landing on the wall clock for the series to
+ * line up. So the backoff is a skip counter here rather than a new cron
+ * expression: the tick still fires every period and simply declines to spend
+ * anything on a source that has not answered in a quarter of an hour.
+ */
+function shouldAttemptTick(): boolean {
+  if (periodsToSkip > 0) {
+    periodsToSkip -= 1;
+    return false;
+  }
+  return true;
+}
+
+function noteTickOutcome(recorded: number): void {
+  if (recorded > 0) {
+    if (backoffAnnounced) {
+      console.log("[server-online-cron] source answering again, back to every tick");
+    }
+    consecutiveEmptyTicks = 0;
+    periodsToSkip = 0;
+    backoffAnnounced = false;
+    return;
+  }
+
+  consecutiveEmptyTicks += 1;
+  if (consecutiveEmptyTicks < EMPTY_TICKS_BEFORE_BACKOFF) {
+    console.warn("[server-online-cron] no cluster recorded this tick");
+    return;
+  }
+
+  // Double the wait each time, capped. The first backoff waits one period, so
+  // a short outage barely changes the cadence and a long one settles at the cap.
+  const steps = consecutiveEmptyTicks - EMPTY_TICKS_BEFORE_BACKOFF;
+  periodsToSkip = Math.min(2 ** steps, MAX_SKIP_PERIODS);
+
+  // Announced once per outage rather than per tick: five days of this filled the
+  // log with one identical warning every five minutes, which is how the waste
+  // stayed invisible for five days.
+  if (!backoffAnnounced) {
+    console.warn(
+      `[server-online-cron] source down for ${consecutiveEmptyTicks} ticks, backing off (up to ${MAX_SKIP_PERIODS} periods between attempts)`,
+    );
+    backoffAnnounced = true;
+  }
+}
+
 export function startServerOnlineCron(): void {
   if (
     scheduleCron("server-online-cron", SCHEDULE, async () => {
+      if (!shouldAttemptTick()) return;
       const counts = await sampleAllServersOnline();
-      const recorded = Object.values(counts).reduce((a, b) => a + b, 0);
-      if (recorded === 0) {
-        console.warn("[server-online-cron] no cluster recorded this tick");
-      }
+      noteTickOutcome(Object.values(counts).reduce((a, b) => a + b, 0));
     })
   ) {
     console.log(`[server-online-cron] scheduled (${SCHEDULE})`);
