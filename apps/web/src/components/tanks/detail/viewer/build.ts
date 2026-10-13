@@ -140,11 +140,42 @@ export async function buildStage({
   // bearing is a property of the gun. Choosing the E 100's 15 cm and
   // reading either off `Gun_04` puts the new barrel on the old mount and
   // gives it the stock gun's depression.
-  const named = Object.keys(collision?.parts ?? {}).sort();
+  // **The armour names the pieces, and it is the half a run can lose.**
+  // `parts` carries one mesh per piece and is by far the heaviest thing in
+  // this file, so a mirror run that dies part way through publishes the rest
+  // of the collision without it: 26 vehicles came out of the 2.4.1 extraction
+  // that way. Read from `parts` alone, the turret then has no name, the gun's
+  // mount is looked up under the empty string and comes back nothing, and the
+  // barrel is hung at the turret's own origin. On the BZ-75 that is 317 mm low
+  // and 1.31 m back, so the gun starts inside the hull and the muzzle comes
+  // out through the front plate; on the Crusher, 426 mm and 1.34 m.
+  //
+  // The mounts name the same pieces and are a few hundred bytes, so they
+  // survive what `parts` does not: `guns` is keyed by the turret carrying
+  // them and `pitch` by the gun itself. Read from those instead, a vehicle
+  // whose armour never arrived costs the armour tab and nothing else.
+  //
+  // **Only when there is no armour at all**, never merged into it. The two
+  // lists disagree on a complete vehicle more often than they look like they
+  // would: of 148 sampled, three name a gun or a turret in their mounts that
+  // their armour does not carry, and the Saladin names five. Merging would
+  // let one of those win on a vehicle that is perfectly fine today, which is
+  // a worse trade than the 26 this repairs.
+  const plated = Object.keys(collision?.parts ?? {});
+  const named = (
+    plated.length
+      ? plated
+      : [
+          ...new Set([
+            ...Object.keys(collision?.mounts?.guns ?? {}),
+            ...Object.keys(collision?.mounts?.pitch ?? {}),
+          ]),
+        ]
+  ).sort();
   const worn = (slot: "gun" | "turret" | "chassis") => {
     const key = fitted?.[slot];
     const piece = key ? collision?.modules?.[key] : undefined;
-    return piece && collision?.parts?.[piece] ? piece : undefined;
+    return piece && named.includes(piece) ? piece : undefined;
   };
   const first = (prefix: string) => {
     const slot =
@@ -156,8 +187,7 @@ export async function buildStage({
             ? "chassis"
             : null;
     return (
-      (slot ? worn(slot) : undefined) ??
-      named.find((n) => n.startsWith(prefix))
+      (slot ? worn(slot) : undefined) ?? named.find((n) => n.startsWith(prefix))
     );
   };
   const turretName = first("Turret") ?? "";
@@ -212,9 +242,7 @@ export async function buildStage({
   ring.rotation.x = ((collision?.mounts?.turretPitch ?? 0) * Math.PI) / 180;
   const turret = new THREE.Group();
   const gun = new THREE.Group();
-  gun.position.fromArray(
-    collision?.mounts?.guns?.[turretName] ?? [0, 0, 0],
-  );
+  gun.position.fromArray(collision?.mounts?.guns?.[turretName] ?? [0, 0, 0]);
   turret.add(gun);
   ring.add(turret);
   hull.add(ring);
