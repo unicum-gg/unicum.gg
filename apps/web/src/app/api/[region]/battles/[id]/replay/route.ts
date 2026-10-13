@@ -158,6 +158,31 @@ function clockOffset(
  * @tag Players
  * @openapi
  */
+/**
+ * Every `stride` ticks at most, keeping the ends.
+ *
+ * The first point of each window rather than an average: these are positions,
+ * and a vehicle averaged between two moments stands where it never was. The
+ * last point is always kept, so a track still finishes where its vehicle did.
+ *
+ * `stride` of zero hands the points back untouched, which is what the site's
+ * own viewer asks for.
+ */
+function everyNTicks(points: [number, number, number][], stride: number) {
+  if (stride <= 0 || points.length < 3) return points;
+  const out: [number, number, number][] = [];
+  let next = -Infinity;
+  for (const point of points) {
+    if (point[0] >= next) {
+      out.push(point);
+      next = point[0] + stride;
+    }
+  }
+  const last = points[points.length - 1];
+  if (out[out.length - 1] !== last) out.push(last);
+  return out;
+}
+
 export async function GET(...args: Parameters<typeof GET__perf>) {
   return measured("GET /{region}/battles/{id}/replay", () => GET__perf(...args));
 }
@@ -233,13 +258,29 @@ async function GET__perf(
       .filter((v) => v.died && v.lifeTime > 0)
       .map((v) => [v.id, v.lifeTime]),
   );
+  // How many ticks apart the points handed back are, at the least.
+  //
+  // The full answer is 730 KB of which 729 is tracks: 48 791 points over 32
+  // vehicles, roughly four a second each. The site's viewer wants that -- it
+  // scrubs, zooms and interpolates. A caller drawing a small map in a game's
+  // results screen does not, and 730 KB is a lot to push through an interface
+  // model that was built for a few hundred bytes.
+  //
+  // `?every=<seconds>` thins them: the first point of each window is kept,
+  // plus the last point of the track, so a vehicle still ends where it died.
+  // Everything else about the answer is unchanged, so one reader can ask for
+  // less without a second route to keep in step with this one.
+  const every = Number(new URL(_req.url).searchParams.get("every") ?? 0);
+  const stride =
+    Number.isFinite(every) && every > 0 ? Math.round(every * TICKS) : 0;
+
   const health = new Map(motion.health.map((h) => [h.id, h.points]));
   const maxHealth = new Map(battle.vehicles.map((v) => [v.id, v.maxHealth]));
   const tracks: Track[] = built.map((track) => {
     const life = died.get(track.id);
     return {
       id: track.id,
-      points: track.points,
+      points: everyNTicks(track.points, stride),
       diedAt:
         life !== undefined && offset !== null
           ? Math.round((life + offset) * TICKS)
