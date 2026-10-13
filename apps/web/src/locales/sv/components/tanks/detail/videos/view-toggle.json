@@ -1,4 +1,5 @@
 {
   "cards": "Kort",
-  "table": "Tabell"
+  "table": "Tabell",
+  "view-named": "{view} visa"
 }

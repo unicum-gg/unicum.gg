@@ -1,4 +1,6 @@
 {
   "columns": "คอลัมน์",
+  "mark-bar-title": "ความเสียหายรวมกัน {combined} ตลอด {battles} การรบ ต่อสู้กับแถบ {marks, plural, other {# เครื่องหมาย}} ของ {bar}",
+  "mark-bar-title-recent": "ความเสียหายรวมกัน {combined} ตลอด {battles} การรบในช่วง 30 วันล่าสุด ต่อสู้กับแถบ {marks, plural, other {# เครื่องหมาย}} ของ {bar}",
   "n-marks-of-excellence": "{count, plural, other {# เครื่องหมายแห่งความเป็นเลิศ}}"
 }

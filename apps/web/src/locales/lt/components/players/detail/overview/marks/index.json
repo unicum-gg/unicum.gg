@@ -15,7 +15,8 @@
   },
   "reach": {
     "heading": "Virš juostos, be ženklo",
-    "description": "Transporto priemonės, kurių bendra žala jau viršija ženklui reikalingą ribą, nors jos jo neturi. Ženklelis rodo šią bendrą žalą, nuspalvintą pagal viršytą ženklą."
+    "description": "Transporto priemonės, kurių bendra žala jau viršija ženklui reikalingą ribą, nors jos jo neturi. Ženklelis rodo šią bendrą žalą, nuspalvintą pagal viršytą ženklą.",
+    "all-vehicles": "Peržiūrėti kiekvieną transporto priemonę pagal jos juostas"
   },
   "none": "Nėra"
 }

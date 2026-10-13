@@ -2,6 +2,7 @@
   "battles": "معارك",
   "by-class": "حسب الفئة",
   "by-tier": "حسب المرتبة",
+  "n-vehicles": "{count, plural, zero {# مركبة} one {# مركبة} two {# مركبتين} few {# مركبات} many {# مركبة} other {# مركبة}}",
   "share-of-battles": "حصة المعارك",
   "unit-class": "الفئة",
   "unit-tier": "المستوى",

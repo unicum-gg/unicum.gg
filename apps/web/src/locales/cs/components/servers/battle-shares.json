@@ -2,6 +2,7 @@
   "battles": "Bitev",
   "by-class": "Podle třídy",
   "by-tier": "Podle úrovně",
+  "n-vehicles": "{count, plural, one {# vozidlo} few {# vozidla} many {# vozidel} other {# vozidel}}",
   "share-of-battles": "Sdílet Bitev",
   "unit-class": "Třída",
   "unit-tier": "Úroveň",

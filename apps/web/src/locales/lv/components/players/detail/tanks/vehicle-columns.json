@@ -1,4 +1,6 @@
 {
   "columns": "Kolonnas",
+  "mark-bar-title": "{combined} bojājumi {battles} kaujās pret {marks, plural, one {# atzīmes} other {# atzīmju}} joslu, ko norāda {bar}",
+  "mark-bar-title-recent": "{combined} bojājumi {battles} kaujās pēdējo 30 dienas laikā pret {marks, plural, one {# atzīmes} other {# atzīmju}} joslu, ko norāda {bar}",
   "n-marks-of-excellence": "{count, plural, zero {# izcilības atzīmju} one {# izcilības atzīme} other {# izcilības atzīmes}}"
 }

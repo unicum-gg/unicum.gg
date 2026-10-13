@@ -1,4 +1,5 @@
 {
   "cards": "Cartes",
-  "table": "Table"
+  "table": "Table",
+  "view-named": "Afficher {view}"
 }

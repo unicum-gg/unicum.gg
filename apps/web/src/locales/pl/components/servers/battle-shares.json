@@ -2,6 +2,7 @@
   "battles": "Bitwy",
   "by-class": "Według klasy",
   "by-tier": "Wg poziomu",
+  "n-vehicles": "{count, plural, one {# pojazd} few {# pojazdy} many {# pojazdów} other {# pojazdu}}",
   "share-of-battles": "Udostępnij bitwy",
   "unit-class": "Klasa",
   "unit-tier": "Poziom",

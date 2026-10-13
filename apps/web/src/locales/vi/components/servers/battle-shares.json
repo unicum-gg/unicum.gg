@@ -2,6 +2,7 @@
   "battles": "Số trận",
   "by-class": "Theo loại",
   "by-tier": "Theo cấp xe",
+  "n-vehicles": "{count, plural, other {# xe tăng}}",
   "share-of-battles": "Tỷ lệ trận đấu",
   "unit-class": "Loại",
   "unit-tier": "Cấp",

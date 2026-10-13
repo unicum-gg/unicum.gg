@@ -1,4 +1,6 @@
 {
   "columns": "Бағандар",
+  "mark-bar-title": "{battles} ұрыстағы {combined} біріктірілген зақым, {bar} мәніндегі {marks, plural, other {# белгі}} жолағына қарсы",
+  "mark-bar-title-recent": "Соңғы 30 күндегі {battles} ұрыстағы {combined} біріктірілген зақым, {bar} мәніндегі {marks, plural, other {# белгі}} жолағына қарсы",
   "n-marks-of-excellence": "{count, plural, one {# шеберлік белгісі} other {# шеберлік белгілері}}"
 }

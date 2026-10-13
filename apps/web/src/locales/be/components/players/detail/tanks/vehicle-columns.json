@@ -1,4 +1,6 @@
 {
   "columns": "Слупкі",
+  "mark-bar-title": "{combined} сумарныя страты за {battles} баі, супраць планкі ў {marks, plural, one {# знак} few {# знакі} many {# знакаў} other {# знакаў}} для {bar}",
+  "mark-bar-title-recent": "{combined} сумарныя страты за {battles} баі за апошнія 30 дзён, супраць планкі ў {marks, plural, one {# знак} few {# знакі} many {# знакаў} other {# знакаў}} для {bar}",
   "n-marks-of-excellence": "{count, plural, one {# знак выдатнасці} few {# знакі выдатнасці} many {# знакаў выдатнасці} other {# знакі выдатнасці}}"
 }

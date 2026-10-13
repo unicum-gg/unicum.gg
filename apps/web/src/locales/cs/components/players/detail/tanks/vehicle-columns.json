@@ -1,4 +1,6 @@
 {
   "columns": "Sloupce",
+  "mark-bar-title": "{combined} kombinovaného poškození během {battles} bitev proti liště {marks, plural, one {# známka} few {# známky} many {# známek} other {# známek}} u {bar}",
+  "mark-bar-title-recent": "{combined} kombinovaného poškození během {battles} bitev za posledních 30 dní proti liště {marks, plural, one {# známka} few {# známky} many {# známek} other {# známek}} u {bar}",
   "n-marks-of-excellence": "{count, plural, one {# známka výbornosti} few {# známky výbornosti} many {# známek výbornosti} other {# známek výbornosti}}"
 }

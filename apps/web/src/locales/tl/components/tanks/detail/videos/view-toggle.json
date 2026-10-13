@@ -1,4 +1,5 @@
 {
   "cards": "Mga Karta",
-  "table": "Talahanayan"
+  "table": "Talahanayan",
+  "view-named": "Tingnan ang {view}"
 }

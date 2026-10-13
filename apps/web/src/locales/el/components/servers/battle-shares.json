@@ -2,6 +2,7 @@
   "battles": "Μάχες",
   "by-class": "Βάσει κλάσης",
   "by-tier": "Σύμφωνα με τη βαθμίδα",
+  "n-vehicles": "{count, plural, one {# όχημα} other {# οχήματα}}",
   "share-of-battles": "Μερίδιο μαχών",
   "unit-class": "Κλάση",
   "unit-tier": "επίπεδο",

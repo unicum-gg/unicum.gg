@@ -1,4 +1,6 @@
 {
   "columns": "Kolonner",
+  "mark-bar-title": "{combined} samlet skade over {battles} kampe, mod bjælken for {marks, plural, one {# mærke} other {# mærker}} ved {bar}",
+  "mark-bar-title-recent": "{combined} samlet skade over {battles} kampe i de seneste 30 dage, mod bjælken for {marks, plural, one {# mærke} other {# mærker}} ved {bar}",
   "n-marks-of-excellence": "{count, plural, one {# mærke for fremragende præstation} other {# mærker for fremragende præstation}}"
 }

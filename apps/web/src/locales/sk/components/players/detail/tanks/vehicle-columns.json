@@ -1,4 +1,6 @@
 {
   "columns": "Stĺpce",
+  "mark-bar-title": "{combined} kombinované poškodenie za {battles} bitiek proti lište pre {marks, plural, one {# značka} few {# značky} other {# značiek}} pri hodnote {bar}",
+  "mark-bar-title-recent": "{combined} kombinované poškodenie za {battles} bitiek počas posledných 30 dni proti lište pre {marks, plural, one {# značka} few {# značky} other {# značiek}} pri hodnote {bar}",
   "n-marks-of-excellence": "{count, plural, one {# značka výnimočnosti} few {# značky výnimočnosti} other {# značiek výnimočnosti}}"
 }

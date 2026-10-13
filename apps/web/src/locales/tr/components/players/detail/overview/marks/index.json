@@ -15,7 +15,8 @@
   },
   "reach": {
     "heading": "İşaret olmadan çıtanın üzerinde",
-    "description": "Birlikte verilen hasarı, taşımadıkları bir işareti şimdiden aşan araçlar. Rozet, aştığı işaretle renklendirilen bu toplam hasardır."
+    "description": "Birlikte verilen hasarı, taşımadıkları bir işareti şimdiden aşan araçlar. Rozet, aştığı işaretle renklendirilen bu toplam hasardır.",
+    "all-vehicles": "Her aracı kendi çubuklarına karşı görün"
   },
   "none": "Hiçbiri"
 }

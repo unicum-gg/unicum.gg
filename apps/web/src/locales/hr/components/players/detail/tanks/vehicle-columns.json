@@ -1,4 +1,6 @@
 {
   "columns": "Stupci",
+  "mark-bar-title": "Kombinirano: {combined} šteta tijekom {battles} bitki, protiv trake od {marks, plural, one {# oznake} few {# oznake} other {# oznaka}} za {bar}",
+  "mark-bar-title-recent": "Kombinirano: {combined} šteta tijekom {battles} bitki u posljednjih 30 dana, protiv trake od {marks, plural, one {# oznake} few {# oznake} other {# oznaka}} za {bar}",
   "n-marks-of-excellence": "{count, plural, one {# oznaka izvrsnosti} few {# oznake izvrsnosti} other {# oznaka izvrsnosti}}"
 }

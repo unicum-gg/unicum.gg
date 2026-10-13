@@ -2,6 +2,7 @@
   "battles": "Бої",
   "by-class": "Па класах",
   "by-tier": "Па тэрах",
+  "n-vehicles": "{count, plural, one {# машына} few {# машыны} many {# машын} other {# машын}}",
   "share-of-battles": "Доля баёў",
   "unit-class": "Клас",
   "unit-tier": "Узровень",

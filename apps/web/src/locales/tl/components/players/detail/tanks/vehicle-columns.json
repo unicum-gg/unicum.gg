@@ -1,4 +1,6 @@
 {
   "columns": "Mga haligi",
+  "mark-bar-title": "{combined} pinagsamang pinsala sa loob ng {battles} mga laban, laban sa bar na {bar} para sa {marks, plural, one {# marka} other {# mga marka}}",
+  "mark-bar-title-recent": "{combined} pinagsamang pinsala sa loob ng {battles} mga laban sa nakalipas na 30 araw, laban sa bar na {bar} para sa {marks, plural, one {# marka} other {# mga marka}}",
   "n-marks-of-excellence": "{count, plural, one {# marka ng kahusayan} other {# mga marka ng kahusayan}}"
 }

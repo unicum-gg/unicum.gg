@@ -1,4 +1,6 @@
 {
   "columns": "Kolumny",
+  "mark-bar-title": "Łącznie {combined} uszkodzeń na przestrzeni {battles} bitew, przeciwko paskowi odznaki dla {marks, plural, one {# odznaki} few {# odznak} many {# odznak} other {# odznaki}} o wartości {bar}",
+  "mark-bar-title-recent": "Łącznie {combined} uszkodzeń na przestrzeni {battles} bitew w ciągu ostatnich 30 dni, przeciwko paskowi odznaki dla {marks, plural, one {# odznaki} few {# odznak} many {# odznak} other {# odznaki}} o wartości {bar}",
   "n-marks-of-excellence": "{count, plural, one {# odznaka biegłości} few {# odznaki biegłości} many {# odznak biegłości} other {# odznak biegłości}}"
 }

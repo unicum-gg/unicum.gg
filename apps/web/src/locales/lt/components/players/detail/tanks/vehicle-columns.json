@@ -1,4 +1,6 @@
 {
   "columns": "Stulpeliai",
+  "mark-bar-title": "{combined} bendros žalos per {battles} mūšių, prieš {marks, plural, one {# ženklo} few {# ženklų} other {# ženklų}} juostą ties {bar}",
+  "mark-bar-title-recent": "{combined} bendros žalos per {battles} mūšių per pastarąsias 30 dienų, prieš {marks, plural, one {# ženklo} few {# ženklų} other {# ženklų}} juostą ties {bar}",
   "n-marks-of-excellence": "{count, plural, one {# meistriškumo ženklas} few {# meistriškumo ženklai} other {# meistriškumo ženklai}}"
 }

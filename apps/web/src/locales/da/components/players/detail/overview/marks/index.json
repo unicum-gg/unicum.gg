@@ -15,7 +15,8 @@
   },
   "reach": {
     "heading": "Over bjælken, uden mærket",
-    "description": "Køretøjer, hvis samlede skade allerede overstiger et mærke, de ikke bærer. Mærket er den samlede skade, farvelagt efter det mærke, den overstiger."
+    "description": "Køretøjer, hvis samlede skade allerede overstiger et mærke, de ikke bærer. Mærket er den samlede skade, farvelagt efter det mærke, den overstiger.",
+    "all-vehicles": "Se alle køretøjer mod deres bjælker"
   },
   "none": "Ingen"
 }

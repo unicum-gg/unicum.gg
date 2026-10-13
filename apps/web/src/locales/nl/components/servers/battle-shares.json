@@ -2,6 +2,7 @@
   "battles": "Gevechten",
   "by-class": "Op klasse",
   "by-tier": "Per niveau",
+  "n-vehicles": "{count, plural, one {# voertuig} other {# voertuigen}}",
   "share-of-battles": "Delen van Gevechten",
   "unit-class": "Klasse",
   "unit-tier": "niveau",

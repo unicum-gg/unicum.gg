@@ -1,4 +1,5 @@
 {
   "cards": "Kortelės",
-  "table": "Stalas"
+  "table": "Stalas",
+  "view-named": "Peržiūra: {view}"
 }

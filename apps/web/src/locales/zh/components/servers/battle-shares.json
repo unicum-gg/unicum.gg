@@ -2,6 +2,7 @@
   "battles": "战斗场次",
   "by-class": "按类型",
   "by-tier": "按等级",
+  "n-vehicles": "{count, plural, other {# 辆车辆}}",
   "share-of-battles": "战斗占比",
   "unit-class": "类型",
   "unit-tier": "等级",

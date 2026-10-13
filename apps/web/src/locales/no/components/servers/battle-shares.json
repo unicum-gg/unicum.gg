@@ -2,6 +2,7 @@
   "battles": "Kamper",
   "by-class": "Etter classe",
   "by-tier": "Etter nivå",
+  "n-vehicles": "{count, plural, one {# kjøretøy} other {# kjøretøy}}",
   "share-of-battles": "Andel kamper",
   "unit-class": "Klasse",
   "unit-tier": "Nivå",

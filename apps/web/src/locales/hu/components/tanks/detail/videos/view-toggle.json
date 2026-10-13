@@ -1,4 +1,5 @@
 {
   "cards": "Kártyák",
-  "table": "Asztal"
+  "table": "Asztal",
+  "view-named": "{view} nézet"
 }

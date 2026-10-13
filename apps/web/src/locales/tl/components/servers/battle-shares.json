@@ -2,6 +2,7 @@
   "battles": "Mga labanan",
   "by-class": "Sa klase",
   "by-tier": "Sa tier",
+  "n-vehicles": "{count, plural, one {# sasakyan} other {# mga sasakyan}}",
   "share-of-battles": "Bahagi ng mga laban",
   "unit-class": "Klase",
   "unit-tier": "Antas",

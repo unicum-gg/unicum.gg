@@ -1,4 +1,6 @@
 {
   "columns": "Kolumner",
+  "mark-bar-title": "{combined} kombinerad skada under {battles} strider, mot stapeln för {marks, plural, one {# märke} other {# märken}} vid {bar}",
+  "mark-bar-title-recent": "{combined} kombinerad skada under {battles} strider de senaste 30 dagarna, mot gränsen för {marks, plural, one {# märke} other {# märken}} på {bar}",
   "n-marks-of-excellence": "{count, plural, one {# märke för stridsutmärkelse} other {# märken för stridsutmärkelse}}"
 }

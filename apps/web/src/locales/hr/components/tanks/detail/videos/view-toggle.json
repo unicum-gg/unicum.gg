@@ -1,4 +1,5 @@
 {
   "cards": "Karte",
-  "table": "Tablica"
+  "table": "Tablica",
+  "view-named": "{view} prikaz"
 }

@@ -2,6 +2,7 @@
   "battles": "Strider",
   "by-class": "Efter typ",
   "by-tier": "Efter klass",
+  "n-vehicles": "{count, plural, one {# fordon} other {# fordon}}",
   "share-of-battles": "Dela av strider",
   "unit-class": "Typ",
   "unit-tier": "Nivå",

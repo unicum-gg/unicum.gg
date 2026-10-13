@@ -1,4 +1,6 @@
 {
   "columns": "Стовпці",
+  "mark-bar-title": "{combined} сумарної шкоди за {battles} боїв, проти планки з {marks, plural, one {# відмітка} other {# відмітки}} для {bar}",
+  "mark-bar-title-recent": "{combined} сумарної шкоди за {battles} боїв за останні 30 діб, проти планки з {marks, plural, one {# відмітка} other {# відмітки}} для {bar}",
   "n-marks-of-excellence": "{count, plural, one {# відмітка майстерності} few {# відмітки майстерності} many {# відміток майстерності} other {# відміток майстерності}}"
 }

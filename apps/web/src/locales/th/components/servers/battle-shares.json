@@ -2,6 +2,7 @@
   "battles": "การรบ",
   "by-class": "ตามชั้น",
   "by-tier": "โดยระดับ",
+  "n-vehicles": "{count, plural, other {# ยานพาหนะ}}",
   "share-of-battles": "สัดส่วนการรบ",
   "unit-class": "ชั้น",
   "unit-tier": "ระดับ",

@@ -1,4 +1,6 @@
 {
   "columns": "Kolommen",
+  "mark-bar-title": "{combined} gecombineerde schade over {battles} gevechten, tegen de balk voor {marks, plural, one {# markering} other {# markeringen}} van {bar}",
+  "mark-bar-title-recent": "{combined} gecombineerde schade over {battles} gevechten in de laatste 30 dagen, tegen de balk voor {marks, plural, one {# markering} other {# markeringen}} van {bar}",
   "n-marks-of-excellence": "{count, plural, one {# markering van uitmuntendheid} other {# markeringen van uitmuntendheid}}"
 }

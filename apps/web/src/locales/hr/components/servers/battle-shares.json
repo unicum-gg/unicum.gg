@@ -2,6 +2,7 @@
   "battles": "Bitke",
   "by-class": "Po klasi",
   "by-tier": "Po razini",
+  "n-vehicles": "{count, plural, one {# vozilo} few {# vozila} other {# vozila}}",
   "share-of-battles": "Udio bitaka",
   "unit-class": "Klasa",
   "unit-tier": "Razina",

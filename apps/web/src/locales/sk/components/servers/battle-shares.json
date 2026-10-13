@@ -2,6 +2,7 @@
   "battles": "Bitky",
   "by-class": "Podľa triedy",
   "by-tier": "Po triedah",
+  "n-vehicles": "{count, plural, one {# vozidlo} few {# vozidlá} other {# vozidiel}}",
   "share-of-battles": "Podiel bitiek",
   "unit-class": "Razred",
   "unit-tier": "Stopnja",

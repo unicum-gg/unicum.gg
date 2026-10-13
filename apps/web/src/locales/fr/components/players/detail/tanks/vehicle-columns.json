@@ -1,4 +1,6 @@
 {
   "columns": "Colonnes",
+  "mark-bar-title": "{combined} dégâts combinés sur {battles} batailles, contre la barre à {marks, plural, one {# marque} other {# marques}} de {bar}",
+  "mark-bar-title-recent": "{combined} dégâts combinés sur {battles} batailles au cours des 30 jours derniers, contre la barre à {marks, plural, one {# marque} other {# marques}} de {bar}",
   "n-marks-of-excellence": "{count, plural, one {# marque d’excellence} other {# marques d’excellence}}"
 }

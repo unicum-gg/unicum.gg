@@ -1,4 +1,5 @@
 {
   "cards": "카드",
-  "table": "표"
+  "table": "표",
+  "view-named": "{view} 보기"
 }

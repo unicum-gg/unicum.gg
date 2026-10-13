@@ -2,6 +2,7 @@
   "battles": "戦闘数",
   "by-class": "クラス別",
   "by-tier": "Tier 別",
+  "n-vehicles": "{count, plural, other {# 車両}}",
   "share-of-battles": "戦闘の割合",
   "unit-class": "車輌クラス",
   "unit-tier": "Tier",

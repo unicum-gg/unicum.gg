@@ -762,7 +762,11 @@
     "nobody": "لا أحد",
     "prices": "الأسعار",
     "signed": "موقّع",
-    "whatever": "أيًا كان"
+    "whatever": "أيًا كان",
+    "First mark": "العلامة الأولى",
+    "Next mark": "العلامة التالية",
+    "Second mark": "العلامة الثانية",
+    "Third mark": "العلامة الثالثة"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1527,7 +1531,11 @@
     "nobody": "ніхто",
     "prices": "цэны",
     "signed": "падпісаны",
-    "whatever": "што заўгодна"
+    "whatever": "што заўгодна",
+    "First mark": "Першая адзнака",
+    "Next mark": "Наступная адзнака",
+    "Second mark": "Другая адзнака",
+    "Third mark": "Трэцяя адзнака"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2502,7 +2510,11 @@
     "nobody": "никой",
     "prices": "цени",
     "signed": "подписан",
-    "whatever": "каквото и да е"
+    "whatever": "каквото и да е",
+    "First mark": "Първи знак",
+    "Next mark": "Следващ знак",
+    "Second mark": "Втори знак",
+    "Third mark": "Трети знак"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3274,7 +3286,11 @@
     "nobody": "niko",
     "prices": "cijene",
     "signed": "potpisano",
-    "whatever": "šta god"
+    "whatever": "šta god",
+    "First mark": "Prva oznaka",
+    "Next mark": "Sljedeća oznaka",
+    "Second mark": "Druga oznaka",
+    "Third mark": "Treća oznaka"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4260,7 +4276,11 @@
     "nobody": "nikdo",
     "prices": "ceny",
     "signed": "podepsáno",
-    "whatever": "cokoli"
+    "whatever": "cokoli",
+    "First mark": "První značka",
+    "Next mark": "Další značka",
+    "Second mark": "Druhá značka",
+    "Third mark": "Třetí značka"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5252,7 +5272,11 @@
     "nobody": "ingen",
     "prices": "priser",
     "signed": "underskrevet",
-    "whatever": "hvad som helst"
+    "whatever": "hvad som helst",
+    "First mark": "Første mærke",
+    "Next mark": "Næste mærke",
+    "Second mark": "Andet mærke",
+    "Third mark": "Tredje mærke"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6237,7 +6261,11 @@
     "nobody": "niemand",
     "prices": "Preise",
     "signed": "signiert",
-    "whatever": "was auch immer"
+    "whatever": "was auch immer",
+    "First mark": "Erste Markierung",
+    "Next mark": "Nächste Markierung",
+    "Second mark": "Zweite Markierung",
+    "Third mark": "Dritte Markierung"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7228,7 +7256,11 @@
     "nobody": "κανείς",
     "prices": "τιμές",
     "signed": "υπογεγραμμένο",
-    "whatever": "οτιδήποτε"
+    "whatever": "οτιδήποτε",
+    "First mark": "Πρώτο σήμα",
+    "Next mark": "Επόμενο σήμα",
+    "Second mark": "Δεύτερο σήμα",
+    "Third mark": "Τρίτο σήμα"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8199,7 +8231,11 @@
     "nobody": "nadie",
     "prices": "precios",
     "signed": "firmado",
-    "whatever": "lo que sea"
+    "whatever": "lo que sea",
+    "First mark": "Primera marca",
+    "Next mark": "Siguiente marca",
+    "Second mark": "Segunda marca",
+    "Third mark": "Tercera marca"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9194,7 +9230,11 @@
     "nobody": "ei kukaan",
     "prices": "hinnat",
     "signed": "allekirjoitettu",
-    "whatever": "mikä tahansa"
+    "whatever": "mikä tahansa",
+    "First mark": "Ensimmäinen ansiomerkki",
+    "Next mark": "Seuraava ansiomerkki",
+    "Second mark": "Toinen ansiomerkki",
+    "Third mark": "Kolmas ansiomerkki"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10169,7 +10209,11 @@
     "nobody": "personne",
     "prices": "prix",
     "signed": "signé",
-    "whatever": "peu importe"
+    "whatever": "peu importe",
+    "First mark": "Première marque",
+    "Next mark": "Marque suivante",
+    "Second mark": "Deuxième marque",
+    "Third mark": "Troisième marque"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -10935,7 +10979,11 @@
     "nobody": "कोई नहीं",
     "prices": "कीमतें",
     "signed": "हस्ताक्षरित",
-    "whatever": "जो भी"
+    "whatever": "जो भी",
+    "First mark": "पहला निशान",
+    "Next mark": "अगला निशान",
+    "Second mark": "दूसरा निशान",
+    "Third mark": "तीसरा निशान"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11924,7 +11972,11 @@
     "nobody": "nitko",
     "prices": "cijene",
     "signed": "potpisano",
-    "whatever": "što god"
+    "whatever": "što god",
+    "First mark": "Prva oznaka",
+    "Next mark": "Sljedeća oznaka",
+    "Second mark": "Druga oznaka",
+    "Third mark": "Treća oznaka"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12915,7 +12967,11 @@
     "nobody": "senki",
     "prices": "árak",
     "signed": "aláírva",
-    "whatever": "bármi"
+    "whatever": "bármi",
+    "First mark": "Első kiválósági jel",
+    "Next mark": "Következő kiválósági jel",
+    "Second mark": "Második kiválósági jel",
+    "Third mark": "Harmadik kiválósági jel"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13902,7 +13958,11 @@
     "nobody": "nessuno",
     "prices": "prezzi",
     "signed": "firmato",
-    "whatever": "qualsiasi cosa"
+    "whatever": "qualsiasi cosa",
+    "First mark": "Primo marchio",
+    "Next mark": "Marchio successivo",
+    "Second mark": "Secondo marchio",
+    "Third mark": "Terzo marchio"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14896,7 +14956,11 @@
     "nobody": "誰もいない",
     "prices": "価格",
     "signed": "署名済み",
-    "whatever": "何でも"
+    "whatever": "何でも",
+    "First mark": "1つ目の優等マーク",
+    "Next mark": "次の優等マーク",
+    "Second mark": "2つ目の優等マーク",
+    "Third mark": "3つ目の優等マーク"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15665,7 +15729,11 @@
     "nobody": "ешкім",
     "prices": "бағалар",
     "signed": "қол қойылған",
-    "whatever": "не болса да"
+    "whatever": "не болса да",
+    "First mark": "Бірінші белгі",
+    "Next mark": "Келесі белгі",
+    "Second mark": "Екінші белгі",
+    "Third mark": "Үшінші белгі"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16664,7 +16732,11 @@
     "nobody": "아무도 없음",
     "prices": "가격",
     "signed": "서명됨",
-    "whatever": "무엇이든"
+    "whatever": "무엇이든",
+    "First mark": "첫 번째 표식",
+    "Next mark": "다음 표식",
+    "Second mark": "두 번째 표식",
+    "Third mark": "세 번째 표식"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17658,7 +17730,11 @@
     "nobody": "niekas",
     "prices": "kainos",
     "signed": "pasirašyta",
-    "whatever": "nesvarbu"
+    "whatever": "nesvarbu",
+    "First mark": "Pirmasis ženklas",
+    "Next mark": "Kitas ženklas",
+    "Second mark": "Antrasis ženklas",
+    "Third mark": "Trečiasis ženklas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18638,7 +18714,11 @@
     "nobody": "neviens",
     "prices": "cenas",
     "signed": "parakstīts",
-    "whatever": "jebkas"
+    "whatever": "jebkas",
+    "First mark": "Pirmā atzīme",
+    "Next mark": "Nākamā atzīme",
+    "Second mark": "Otrā atzīme",
+    "Third mark": "Trešā atzīme"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19634,7 +19714,11 @@
     "nobody": "niemand",
     "prices": "prijzen",
     "signed": "ondertekend",
-    "whatever": "wat dan ook"
+    "whatever": "wat dan ook",
+    "First mark": "Eerste markering",
+    "Next mark": "Volgende markering",
+    "Second mark": "Tweede markering",
+    "Third mark": "Derde markering"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20621,7 +20705,11 @@
     "nobody": "ingen",
     "prices": "priser",
     "signed": "signert",
-    "whatever": "uansett"
+    "whatever": "uansett",
+    "First mark": "Første merke",
+    "Next mark": "Neste merke",
+    "Second mark": "Andre merke",
+    "Third mark": "Tredje merke"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21605,7 +21693,11 @@
     "nobody": "nikt",
     "prices": "ceny",
     "signed": "podpisany",
-    "whatever": "cokolwiek"
+    "whatever": "cokolwiek",
+    "First mark": "Pierwsza odznaka biegłości",
+    "Next mark": "Następna odznaka biegłości",
+    "Second mark": "Druga odznaka biegłości",
+    "Third mark": "Trzecia odznaka biegłości"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22582,7 +22674,11 @@
     "nobody": "ninguém",
     "prices": "preços",
     "signed": "assinado",
-    "whatever": "qualquer coisa"
+    "whatever": "qualquer coisa",
+    "First mark": "Primeira marca",
+    "Next mark": "Próxima marca",
+    "Second mark": "Segunda marca",
+    "Third mark": "Terceira marca"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23559,7 +23655,11 @@
     "nobody": "nimeni",
     "prices": "prețuri",
     "signed": "semnat",
-    "whatever": "orice"
+    "whatever": "orice",
+    "First mark": "Prima marcă",
+    "Next mark": "Următoarea marcă",
+    "Second mark": "A doua marcă",
+    "Third mark": "A treia marcă"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24523,7 +24623,11 @@
     "nobody": "никто",
     "prices": "цены",
     "signed": "подписан",
-    "whatever": "что угодно"
+    "whatever": "что угодно",
+    "First mark": "Первая отметка",
+    "Next mark": "Следующая отметка",
+    "Second mark": "Вторая отметка",
+    "Third mark": "Третья отметка"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25293,7 +25397,11 @@
     "nobody": "nihče",
     "prices": "cene",
     "signed": "podpisano",
-    "whatever": "karkoli"
+    "whatever": "karkoli",
+    "First mark": "Prva oznaka",
+    "Next mark": "Naslednja oznaka",
+    "Second mark": "Druga oznaka",
+    "Third mark": "Tretja oznaka"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26284,7 +26392,11 @@
     "nobody": "нико",
     "prices": "цене",
     "signed": "потписано",
-    "whatever": "било шта"
+    "whatever": "било шта",
+    "First mark": "Прва ознака",
+    "Next mark": "Следећа ознака",
+    "Second mark": "Друга ознака",
+    "Third mark": "Трећа ознака"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27280,7 +27392,11 @@
     "nobody": "ingen",
     "prices": "priser",
     "signed": "signerat",
-    "whatever": "vad som helst"
+    "whatever": "vad som helst",
+    "First mark": "Första märket",
+    "Next mark": "Nästa märke",
+    "Second mark": "Andra märket",
+    "Third mark": "Tredje märket"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28272,7 +28388,11 @@
     "nobody": "ไม่มีใคร",
     "prices": "ราคา",
     "signed": "ลงชื่อแล้ว",
-    "whatever": "อะไรก็ตาม"
+    "whatever": "อะไรก็ตาม",
+    "First mark": "เครื่องหมายแรก",
+    "Next mark": "เครื่องหมายถัดไป",
+    "Second mark": "เครื่องหมายที่สอง",
+    "Third mark": "เครื่องหมายที่สาม"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29043,7 +29163,11 @@
     "nobody": "walang sinuman",
     "prices": "mga presyo",
     "signed": "nilagdaan",
-    "whatever": "anuman"
+    "whatever": "anuman",
+    "First mark": "Unang marka",
+    "Next mark": "Susunod na marka",
+    "Second mark": "Ikalawang marka",
+    "Third mark": "Ikatlong marka"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30031,7 +30155,11 @@
     "nobody": "hiç kimse",
     "prices": "fiyatlar",
     "signed": "imzalı",
-    "whatever": "her neyse"
+    "whatever": "her neyse",
+    "First mark": "İlk işaret",
+    "Next mark": "Sonraki işaret",
+    "Second mark": "İkinci işaret",
+    "Third mark": "Üçüncü işaret"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31012,7 +31140,11 @@
     "nobody": "ніхто",
     "prices": "ціни",
     "signed": "підписано",
-    "whatever": "будь-що"
+    "whatever": "будь-що",
+    "First mark": "Перша відмітка",
+    "Next mark": "Наступна відмітка",
+    "Second mark": "Друга відмітка",
+    "Third mark": "Третя відмітка"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -31981,7 +32113,11 @@
     "nobody": "không ai",
     "prices": "giá",
     "signed": "đã ký",
-    "whatever": "bất kỳ"
+    "whatever": "bất kỳ",
+    "First mark": "Dấu hiệu đầu tiên",
+    "Next mark": "Dấu hiệu tiếp theo",
+    "Second mark": "Dấu hiệu thứ hai",
+    "Third mark": "Dấu hiệu thứ ba"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -32973,6 +33109,10 @@
     "nobody": "无人",
     "prices": "价格",
     "signed": "已签名",
-    "whatever": "无论什么"
+    "whatever": "无论什么",
+    "First mark": "一环",
+    "Next mark": "下一环",
+    "Second mark": "二环",
+    "Third mark": "三环"
   }
 }

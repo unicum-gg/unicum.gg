@@ -1,4 +1,6 @@
 {
   "columns": "Sarakkeet",
+  "mark-bar-title": "{combined} yhdistettyä vahinkoa {battles} taistelun aikana, arvon {bar} {marks, plural, one {# merkin} other {# merkin}} palkkia vastaan",
+  "mark-bar-title-recent": "{combined} yhdistettyä vahinkoa {battles} taistelun aikana viimeisten 30 päivän aikana, arvon {bar} {marks, plural, one {# merkin} other {# merkin}} palkkia vastaan",
   "n-marks-of-excellence": "{count, plural, one {# erinomaisuuden merkki} other {# erinomaisuuden merkit}}"
 }

@@ -15,7 +15,8 @@
   },
   "reach": {
     "heading": "Powyżej progu, bez odznaki",
-    "description": "Pojazdy, których łączne uszkodzenia przekraczają już próg odznaki, której jeszcze nie mają. Znacznik pokazuje wartość tych łącznych uszkodzeń, a jego kolor odpowiada przekroczonemu progowi odznaki."
+    "description": "Pojazdy, których łączne uszkodzenia przekraczają już próg odznaki, której jeszcze nie mają. Znacznik pokazuje wartość tych łącznych uszkodzeń, a jego kolor odpowiada przekroczonemu progowi odznaki.",
+    "all-vehicles": "Zobacz każdy pojazd przeciwko jego paskom"
   },
   "none": "Brak"
 }

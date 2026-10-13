@@ -1,4 +1,5 @@
 {
   "cards": "Kartlar",
-  "table": "Tablo"
+  "table": "Tablo",
+  "view-named": "{view} görünümü"
 }

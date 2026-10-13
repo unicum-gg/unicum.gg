@@ -2,6 +2,7 @@
   "battles": "Kampe",
   "by-class": "Efter klasse",
   "by-tier": "Efter niveau",
+  "n-vehicles": "{count, plural, one {# køretøj} other {# køretøjer}}",
   "share-of-battles": "Andel af kampe",
   "unit-class": "Klasse",
   "unit-tier": "Niveau",

@@ -1,4 +1,6 @@
 {
   "columns": "Coloane",
+  "mark-bar-title": "{combined} daune de tip combinat în {battles} bătălii, împotriva barei pentru {bar}, corespunzătoare următorului număr de {marks, plural, one {# semn} other {# semne}}",
+  "mark-bar-title-recent": "{combined} daune de tip combinat în {battles} bătălii din ultimele 30 de zile, împotriva barei pentru {bar}, corespunzătoare următorului număr de {marks, plural, one {# semn} other {# semne}}",
   "n-marks-of-excellence": "{count, plural, one {# semn de excelență} few {# semne de excelență} other {# de semne de excelență}}"
 }

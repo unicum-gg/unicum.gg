@@ -2,6 +2,7 @@
   "battles": "Mūšiai",
   "by-class": "Pagal klasę",
   "by-tier": "Pagal lygį",
+  "n-vehicles": "{count, plural, one {# transporto priemonė} few {# transporto priemonės} other {# transporto priemonių}}",
   "share-of-battles": "Mūšių dalis",
   "unit-class": "Klasė",
   "unit-tier": "lygis",

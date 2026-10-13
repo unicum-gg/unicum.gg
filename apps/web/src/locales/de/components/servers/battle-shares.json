@@ -2,6 +2,7 @@
   "battles": "Gefechte",
   "by-class": "Nach Klasse",
   "by-tier": "Nach Stufe",
+  "n-vehicles": "{count, plural, one {# Fahrzeug} other {# Fahrzeuge}}",
   "share-of-battles": "Teilen von Gefechten",
   "unit-class": "Klasse",
   "unit-tier": "Stufe",

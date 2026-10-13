@@ -1,4 +1,6 @@
 {
   "columns": "列",
+  "mark-bar-title": "{combined} 综合伤害，经过 {battles} 战斗场次，对抗 {bar} 的 {marks, plural, other {# 个标记}}标记线",
+  "mark-bar-title-recent": "{combined} 综合伤害，在最近 30天内经过 {battles} 战斗场次，对抗 {bar} 的 {marks, plural, other {# 个标记}}标记线",
   "n-marks-of-excellence": "{count, plural, other {# 卓越标记}}"
 }

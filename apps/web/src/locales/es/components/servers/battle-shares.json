@@ -2,6 +2,7 @@
   "battles": "Batallas",
   "by-class": "Por clase",
   "by-tier": "Por nivel",
+  "n-vehicles": "{count, plural, one {# vehículo} other {# vehículos}}",
   "share-of-battles": "Compartir Batallas",
   "unit-class": "Clase",
   "unit-tier": "nivel",

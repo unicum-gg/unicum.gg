@@ -1,4 +1,6 @@
 {
   "columns": "Sütunlar",
+  "mark-bar-title": "{battles} savaşta {combined} birleştirilmiş hasar, {bar} değerindeki {marks, plural, other {# işaret}} çubuğuna karşı",
+  "mark-bar-title-recent": "Son 30 günde {battles} savaşta {combined} birleştirilmiş hasar, {bar} değerindeki {marks, plural, other {# işaret}} çubuğuna karşı",
   "n-marks-of-excellence": "{count, plural, one {# üstünlük işareti} other {# üstünlük işaretleri}}"
 }

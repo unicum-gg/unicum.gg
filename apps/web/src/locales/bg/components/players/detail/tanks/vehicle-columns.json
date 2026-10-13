@@ -1,4 +1,6 @@
 {
   "columns": "Колони",
+  "mark-bar-title": "{combined} комбинирани щети за {battles} битки, срещу лентата за {marks, plural, one {# знак} other {# знака}} на {bar}",
+  "mark-bar-title-recent": "{combined} комбинирани щети за {battles} битки през последните 30 дни, срещу лентата за {marks, plural, one {# знак} other {# знака}} на {bar}",
   "n-marks-of-excellence": "{count, plural, one {# знак за отличие} other {# знаци за отличие}}"
 }

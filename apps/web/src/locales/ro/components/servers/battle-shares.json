@@ -2,6 +2,7 @@
   "battles": "Lupte",
   "by-class": "Per clasă",
   "by-tier": "Pe generaţii",
+  "n-vehicles": "{count, plural, one {# vehicul} other {# vehicule}}",
   "share-of-battles": "Proporția bătăliilor",
   "unit-class": "Clasa",
   "unit-tier": "nivel",

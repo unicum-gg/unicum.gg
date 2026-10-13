@@ -1,4 +1,6 @@
 {
   "columns": "Spalten",
+  "mark-bar-title": "{combined} kombinierter Schaden in {battles} gegen die Leiste von {bar} mit {marks, plural, one {# Marke} other {# Marken}}",
+  "mark-bar-title-recent": "{combined} kombinierter Schaden in {battles} in den letzten 30 Tage gegen die Leiste von {bar} mit {marks, plural, one {# Marke} other {# Marken}}",
   "n-marks-of-excellence": "{count, plural, one {# Marke der Überlegenheit} other {# Marken der Überlegenheit}}"
 }

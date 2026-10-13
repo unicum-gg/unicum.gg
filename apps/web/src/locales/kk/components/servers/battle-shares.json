@@ -2,6 +2,7 @@
   "battles": "Соғыстар",
   "by-class": "Сынып бойынша",
   "by-tier": "Дәреже бойынша",
+  "n-vehicles": "{count, plural, other {# техника}}",
   "share-of-battles": "Ұрыстар үлесі",
   "unit-class": "Сынып",
   "unit-tier": "Деңгей",

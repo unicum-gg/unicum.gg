@@ -2,6 +2,7 @@
   "battles": "Битки",
   "by-class": "По клас",
   "by-tier": "По ниво",
+  "n-vehicles": "{count, plural, one {# бойна машина} other {# бойни машини}}",
   "share-of-battles": "Дял от битките",
   "unit-class": "Клас",
   "unit-tier": "Ниво",

@@ -2,6 +2,7 @@
   "battles": "Borbi",
   "by-class": "Po klasi",
   "by-tier": "Po nivou",
+  "n-vehicles": "{count, plural, one {# возило} few {# возила} many {# возила} other {# возила}}",
   "share-of-battles": "Удео битака",
   "unit-class": "Klasa",
   "unit-tier": "Nivo",

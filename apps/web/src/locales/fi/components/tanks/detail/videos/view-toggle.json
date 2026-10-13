@@ -1,4 +1,5 @@
 {
   "cards": "Kortit",
-  "table": "Taulukko"
+  "table": "Taulukko",
+  "view-named": "Näkymä: {view}"
 }

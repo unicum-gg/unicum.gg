@@ -2,6 +2,7 @@
   "battles": "Taisteluita",
   "by-class": "Luokan mukaan",
   "by-tier": "Tason mukaan",
+  "n-vehicles": "{count, plural, one {# ajoneuvo} other {# ajoneuvoa}}",
   "share-of-battles": "Osuus taisteluista",
   "unit-class": "Luokka",
   "unit-tier": "Taso",

@@ -1,4 +1,6 @@
 {
   "columns": "Kolumne",
+  "mark-bar-title": "Kombinovano {combined} štete tokom {battles} bitki, protiv {marks, plural, one {# oznake} few {# oznake} other {# oznaka}} trake od {bar}",
+  "mark-bar-title-recent": "Kombinovano {combined} štete tokom {battles} bitki u posljednjih 30 dana, protiv {marks, plural, one {# oznake} few {# oznake} other {# oznaka}} trake od {bar}",
   "n-marks-of-excellence": "{count, plural, one {# oznaka izvrsnosti} few {# oznake izvrsnosti} other {# oznaka izvrsnosti}}"
 }

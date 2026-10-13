@@ -1,4 +1,6 @@
 {
   "columns": "Στήλες",
+  "mark-bar-title": "{combined} συνδυασμένη ζημιά σε {battles} μάχες, εναντίον της μπάρας για {marks, plural, one {# σήμα} other {# σήματα}} στο {bar}",
+  "mark-bar-title-recent": "{combined} συνδυασμένη ζημιά σε {battles} μάχες τις τελευταίες 30 ημέρες, εναντίον της μπάρας για {marks, plural, one {# σήμα} other {# σήματα}} στο {bar}",
   "n-marks-of-excellence": "{count, plural, one {# σήμα αριστείας} other {# σήματα αριστείας}}"
 }

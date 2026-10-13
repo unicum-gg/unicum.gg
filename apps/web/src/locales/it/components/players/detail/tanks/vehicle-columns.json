@@ -1,4 +1,6 @@
 {
   "columns": "Colonne",
+  "mark-bar-title": "Danno combinato di {combined} in {battles} battaglie, contro la barra di {bar} per {marks, plural, one {# marchio} other {# marchi}}",
+  "mark-bar-title-recent": "Danno combinato di {combined} in {battles} battaglie negli ultimi 30 giorni, contro la barra di {bar} per {marks, plural, one {# marchio} other {# marchi}}",
   "n-marks-of-excellence": "{count, plural, one {# marchio d’eccellenza} other {# marchi d’eccellenza}}"
 }

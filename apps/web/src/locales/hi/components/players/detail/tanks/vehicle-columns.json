@@ -1,4 +1,6 @@
 {
   "columns": "कॉलम्स",
+  "mark-bar-title": "{battles} युद्धों में {combined} की संयुक्त क्षति, {bar} के {marks, plural, one {# निशान} other {# निशान}} वाले बार के विरुद्ध",
+  "mark-bar-title-recent": "पिछले 30 दिन में {battles} युद्धों में {combined} की संयुक्त क्षति, {bar} के {marks, plural, one {# निशान} other {# निशान}} वाले बार के विरुद्ध",
   "n-marks-of-excellence": "{count, plural, one {# उत्कृष्टता का निशान} other {# उत्कृष्टता के निशान}}"
 }

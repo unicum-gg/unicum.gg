@@ -1,4 +1,5 @@
 {
   "cards": "بطاقات",
-  "table": "جدول"
+  "table": "جدول",
+  "view-named": "العرض {view}"
 }

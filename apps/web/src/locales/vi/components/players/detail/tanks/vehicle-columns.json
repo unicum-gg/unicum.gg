@@ -1,4 +1,6 @@
 {
   "columns": "Cột",
+  "mark-bar-title": "{combined} sát thương tổng hợp trong {battles} trận đấu, đối đầu với ngưỡng {marks, plural, one {# dấu} other {# các dấu}} của {bar}",
+  "mark-bar-title-recent": "{combined} sát thương tổng hợp trong {battles} trận đấu trong 30 ngày qua, đối đầu với ngưỡng {marks, plural, one {# dấu} other {# các dấu}} của {bar}",
   "n-marks-of-excellence": "{count, plural, other {# các dấu xuất sắc}}"
 }

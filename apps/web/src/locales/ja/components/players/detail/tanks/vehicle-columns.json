@@ -1,4 +1,6 @@
 {
   "columns": "列",
+  "mark-bar-title": "{battles} 戦闘での {combined} 合算ダメージ、{bar} の {marks, plural, other {# マーク}}バーに対して",
+  "mark-bar-title-recent": "過去 30 日間の {battles} 戦闘での {combined} 合算ダメージ、{bar} の {marks, plural, other {# マーク}}バーに対して",
   "n-marks-of-excellence": "{count, plural, other {#個の優等マーク}}"
 }

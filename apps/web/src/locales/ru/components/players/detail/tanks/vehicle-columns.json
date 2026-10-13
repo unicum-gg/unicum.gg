@@ -1,4 +1,6 @@
 {
   "columns": "Столбцы",
+  "mark-bar-title": "{combined} комбинированного урона за {battles} боёв против шкалы для {marks, plural, one {# отметки} few {# отметок} many {# отметок} other {# отметок}} у {bar}",
+  "mark-bar-title-recent": "{combined} комбинированного урона за {battles} боёв за последние 30 дней против шкалы для {marks, plural, one {# отметки} few {# отметок} many {# отметок} other {# отметок}} у {bar}",
   "n-marks-of-excellence": "{count, plural, one {# отметка отличия} few {# отметки отличия} many {# отметок отличия} other {# отметки отличия}}"
 }

@@ -2,6 +2,7 @@
   "battles": "Kaujas",
   "by-class": "Pēc klases",
   "by-tier": "Pēc līmeņa",
+  "n-vehicles": "{count, plural, one {# transportlīdzeklis} other {# transportlīdzekļi}}",
   "share-of-battles": "Kauju daļa",
   "unit-class": "Klase",
   "unit-tier": "Līmenis",

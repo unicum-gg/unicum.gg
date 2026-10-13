@@ -15,7 +15,8 @@
   },
   "reach": {
     "heading": "Acima da barra, sem a marca",
-    "description": "Veículos cujo dano combinado já ultrapassa o limiar de uma marca que ainda não têm. O distintivo apresenta esse dano combinado na cor da marca cujo limiar ultrapassa."
+    "description": "Veículos cujo dano combinado já ultrapassa o limiar de uma marca que ainda não têm. O distintivo apresenta esse dano combinado na cor da marca cujo limiar ultrapassa.",
+    "all-vehicles": "Veja todos os veículos contra suas barras"
   },
   "none": "Nenhum"
 }

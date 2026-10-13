@@ -1,4 +1,6 @@
 {
   "columns": "Oszlopok",
+  "mark-bar-title": "{combined} összesített sebzés {battles} csata alatt, {bar} értékű, {marks, plural, one {# jelhez} other {# jelhez}} tartozó sáv ellen",
+  "mark-bar-title-recent": "{combined} összesített sebzés az elmúlt 30 nap {battles} csatája alatt, {bar} értékű, {marks, plural, one {# jelhez} other {# jelhez}} tartozó sáv ellen",
   "n-marks-of-excellence": "{count, plural, one {# kiválósági jel} other {# kiválósági jel}}"
 }

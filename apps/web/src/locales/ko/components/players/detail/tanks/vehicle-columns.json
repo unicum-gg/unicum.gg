@@ -1,4 +1,6 @@
 {
   "columns": "열",
+  "mark-bar-title": "{battles} 전투 동안 {combined} 합산 피해, {bar}의 {marks, plural, other {# 증표}} 표식 막대 상대",
+  "mark-bar-title-recent": "최근 30일 동안 {battles} 전투에서 {combined} 합산 피해, {bar}의 {marks, plural, other {# 증표}} 표식 막대 상대",
   "n-marks-of-excellence": "{count, plural, other {#개 우수성 표식}}"
 }

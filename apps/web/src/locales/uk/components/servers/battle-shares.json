@@ -2,6 +2,7 @@
   "battles": "Бої",
   "by-class": "За типом",
   "by-tier": "За рівнем",
+  "n-vehicles": "{count, plural, one {# одиниця техніки} few {# одиниці техніки} many {# одиниць техніки} other {# одиниці техніки}}",
   "share-of-battles": "Частка боїв",
   "unit-class": "Тип",
   "unit-tier": "Рівень",

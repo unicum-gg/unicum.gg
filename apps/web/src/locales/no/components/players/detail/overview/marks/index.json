@@ -15,7 +15,8 @@
   },
   "reach": {
     "heading": "Over streken uten merket",
-    "description": "Kjøretøy der den samlede skaden allerede passerer et merke de ikke har. Merket er denne samlede skaden, farget etter merket den passerer."
+    "description": "Kjøretøy der den samlede skaden allerede passerer et merke de ikke har. Merket er denne samlede skaden, farget etter merket den passerer.",
+    "all-vehicles": "Se alle kjøretøy opp mot merkene sine"
   },
   "none": "Ingen"
 }

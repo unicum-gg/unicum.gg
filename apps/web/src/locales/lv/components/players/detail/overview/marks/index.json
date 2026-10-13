@@ -15,7 +15,8 @@
   },
   "reach": {
     "heading": "Virs joslas, bez atzīmes",
-    "description": "Transportlīdzekļi, kuru kopējie bojājumi jau pārsniedz atzīmi, ko tie nenes. Nozīmīte ir šie kopējie bojājumi, iekrāsoti atbilstoši atzīmei, kuru tie pārsniedz."
+    "description": "Transportlīdzekļi, kuru kopējie bojājumi jau pārsniedz atzīmi, ko tie nenes. Nozīmīte ir šie kopējie bojājumi, iekrāsoti atbilstoši atzīmei, kuru tie pārsniedz.",
+    "all-vehicles": "Skatīt katru transportlīdzekli pret tā joslām"
   },
   "none": "Nav"
 }

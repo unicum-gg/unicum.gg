@@ -1,4 +1,6 @@
 {
   "columns": "أعمدة",
+  "mark-bar-title": "ضرر مجمّع بقيمة {combined} خلال {battles} من المعارك، ضد شريط {marks, plural, zero {# علامة تميز} one {# علامة تميز} two {# علامتا تميز} few {# علامات تميز} many {# علامة تميز} other {# علامة تميز}} عند {bar}",
+  "mark-bar-title-recent": "ضرر مجمّع بقيمة {combined} خلال {battles} من المعارك في آخر 30 يومًا، ضد شريط {marks, plural, zero {# علامة تميز} one {# علامة تميز} two {# علامتا تميز} few {# علامات تميز} many {# علامة تميز} other {# علامة تميز}} عند {bar}",
   "n-marks-of-excellence": "{count, plural, zero {# علامة التميز} one {# علامة التميز} two {# علامتا التميز} few {# علامات التميز} many {# علامة التميز} other {# علامة التميز}}"
 }

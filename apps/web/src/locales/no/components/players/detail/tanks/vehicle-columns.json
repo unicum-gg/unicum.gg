@@ -1,4 +1,6 @@
 {
   "columns": "Kolonner",
+  "mark-bar-title": "{combined} samlet skade over {battles} kamper, mot {bar}-grensen for {marks, plural, one {# merke} other {# merker}}",
+  "mark-bar-title-recent": "{combined} samlet skade over {battles} kamper de siste 30 dager, mot {bar}-grensen for {marks, plural, one {# merke} other {# merker}}",
   "n-marks-of-excellence": "{count, plural, one {# merke for dyktighet} other {# merker for dyktighet}}"
 }

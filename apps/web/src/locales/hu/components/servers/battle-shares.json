@@ -2,6 +2,7 @@
   "battles": "Csaták",
   "by-class": "Osztály szerint",
   "by-tier": "Szint szerint",
+  "n-vehicles": "{count, plural, one {# jármű} other {# jármű}}",
   "share-of-battles": "Csaták aránya",
   "unit-class": "Osztály",
   "unit-tier": "szint",
