@@ -32,7 +32,7 @@ import { cn } from "@/lib/utils";
 import {
   VEHICLE_CLASSES,
 } from "@unicum.gg/shared";
-import type { TankFilters } from "@/hooks/use-tank-filters";
+import { GarageState, type TankFilters } from "@/hooks/use-tank-filters";
 import { useTranslation } from "@/hooks/use-translation";
 import { useStatLabels } from "@/hooks/use-stat-labels";
 import { markCountName, masteryBadgeName } from "@/components/game-name";
@@ -52,6 +52,13 @@ const CATEGORY_OPTIONS = [
 // an English noun glued together.
 const MOE_OPTIONS = [0, 1, 2, 3] as const;
 const MOM_OPTIONS = [0, 1, 2, 3, 4] as const;
+// Held first because it is nearly the whole garage, then the two a reader comes
+// to this row looking for.
+const GARAGE_OPTIONS = [
+  GarageState.Held,
+  GarageState.Unplayed,
+  GarageState.Sold,
+] as const;
 
 export function TankFilterBar<T>({
   filters,
@@ -246,6 +253,27 @@ export function TankFilterBar<T>({
                     ? t("mom.0")
                     : masteryBadgeName(value as 1 | 2 | 3 | 4, tGame)}
                 </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
+        </ChipRow>
+      )}
+      {filters.hasGarage && (
+        <ChipRow>
+          <TooltipProvider delayDuration={100}>
+            {GARAGE_OPTIONS.map((value) => (
+              <Tooltip key={value}>
+                <TooltipTrigger asChild>
+                  <Chip
+                    active={filters.garageSel.has(value)}
+                    onClick={() => filters.toggleGarage(value)}
+                  >
+                    <span className="text-[11px] font-medium">
+                      {t(`garage.${value}`)}
+                    </span>
+                  </Chip>
+                </TooltipTrigger>
+                <TooltipContent>{t(`garageHint.${value}`)}</TooltipContent>
               </Tooltip>
             ))}
           </TooltipProvider>

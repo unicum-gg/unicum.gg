@@ -33,7 +33,12 @@ import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { TablePager, usePagination } from "@/components/table-pager";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
-import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
+import {
+  GarageState,
+  type RangeColumn,
+  useTankFilters,
+} from "@/hooks/use-tank-filters";
+import { GarageBadge } from "@/components/players/detail/tanks/garage-badge";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
@@ -153,7 +158,22 @@ export function PlayerTanksTable({
   // renamed on the row, so the rest of the table keeps reading `moe`/`mom`.
   const filterable = useMemo(
     () =>
-      vehicles.map((v) => ({ ...v, gunMarks: v.moe, masteryBadge: v.mom })),
+      vehicles.map((v) => ({
+        ...v,
+        gunMarks: v.moe,
+        masteryBadge: v.mom,
+        // Null on an unverified profile, where `owned` is null on every row and
+        // the site cannot tell a sold vehicle from a held one. The chip row and
+        // the badges hide themselves on that, rather than guessing.
+        garageState:
+          v.owned == null
+            ? null
+            : v.owned === false
+              ? GarageState.Sold
+              : v.battles === 0
+                ? GarageState.Unplayed
+                : GarageState.Held,
+      })),
     [vehicles],
   );
   const { filtered, filters } = useTankFilters(filterable, rangeCols, "battles");
@@ -299,6 +319,19 @@ export function PlayerTanksTable({
                 const name = r.shortName || r.name || `#${r.tankId}`;
                 const isPremium = r.isPremium;
                 const selected = selectedSlug != null && r.slug === selectedSlug;
+                // A vehicle owned and never driven has no record to open: the
+                // record is built from a per-tank snapshot, and Wargaming
+                // publishes none for a tank that has never been in a battle, so
+                // that URL is a genuine 404 rather than a page we forgot to
+                // write. The row still has somewhere to go, and it is the
+                // vehicle's own page, which is the only one with anything to
+                // say about a tank you own and have not played.
+                const unplayed = r.garageState === GarageState.Unplayed;
+                const href = !r.slug
+                  ? null
+                  : unplayed
+                    ? ROUTES.TANK(region, r.slug)
+                    : ROUTES.PLAYER_TANK(region, nickname, r.slug);
                 return (
                   <TableRow
                     key={r.tankId}
@@ -308,19 +341,17 @@ export function PlayerTanksTable({
                     // the same place, so the destination does not depend on
                     // where in the row the reader clicked.
                     onClick={() => {
-                      if (r.slug) {
-                        // `scroll: false`: the reader is picking a row half way
-                        // down 157 of them, and the record opens beside it.
-                        // Jumping to the top of the page would take both the
-                        // row and the record they just asked for off screen.
-                        router.push(
-                          ROUTES.PLAYER_TANK(region, nickname, r.slug),
-                          { scroll: false },
-                        );
-                      }
+                      if (!href) return;
+                      // `scroll: false` for the record, which opens beside the
+                      // row: the reader is picking a row half way down 157 of
+                      // them, and jumping to the top of the page would take
+                      // both the row and the record they just asked for off
+                      // screen. An unplayed row leaves this page entirely, so
+                      // it keeps the normal scroll-to-top.
+                      router.push(href, unplayed ? undefined : { scroll: false });
                     }}
                     className={cn(
-                      r.slug && "cursor-pointer",
+                      href && "cursor-pointer",
                       // A left edge rather than a row tint: the rating columns
                       // paint their own cells, so a background would show
                       // through on some columns and not others.
@@ -369,17 +400,15 @@ export function PlayerTanksTable({
                             className="h-3.5 w-auto shrink-0 object-contain"
                           />
                         ) : null}
-                        {r.slug ? (
+                        {href ? (
                           <Link
-                            // Same destination as the row around it. Sending
-                            // the name to the vehicle's own page instead made
-                            // one row answer two ways depending on where it
-                            // was clicked, which reads as a broken link rather
-                            // than a second destination. The vehicle's page
-                            // stays one click away, from the heading of the
-                            // record this opens.
-                            href={ROUTES.PLAYER_TANK(region, nickname, r.slug)}
-                            scroll={false}
+                            // Same destination as the row around it, whichever
+                            // of the two it is. Sending the name somewhere else
+                            // made one row answer two ways depending on where
+                            // it was clicked, which reads as a broken link
+                            // rather than as a second destination.
+                            href={href}
+                            scroll={unplayed ? undefined : false}
                             className="hover:underline"
                           >
                             {name}
@@ -387,6 +416,7 @@ export function PlayerTanksTable({
                         ) : (
                           <span>{name}</span>
                         )}
+                        <GarageBadge state={r.garageState} />
                       </span>
                     </TableCell>
                     {visibleColumns.map((c) => {

@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Reward"
+  },
+  "common-test": "Changed by the Common Test: new vehicles and rebalanced ones",
+  "garage": {
+    "held": "In garage",
+    "unplayed": "Never played",
+    "sold": "Sold"
+  },
+  "garageHint": {
+    "held": "Still in the garage, and driven at least once.",
+    "unplayed": "Owned and never taken into battle. These have no record anywhere, so they only show up because this player verified their garage.",
+    "sold": "Driven in the past and no longer owned. Wargaming keeps reporting them, which is why they are here at all."
+  },
+  "max": "Max",
+  "min": "Min",
+  "moe": {
+    "0": "No mark yet"
+  },
+  "mom": {
+    "0": "No badge yet"
+  },
+  "none": "None",
   "search": {
     "tanks": "Search among {count} tanks",
     "rated-tanks": "Search among {count} rated tanks",
@@ -7,20 +32,5 @@
     "clans": "Search {count} clans",
     "tournaments": "Search {count} tournaments",
     "teams": "Search {count} teams"
-  },
-  "min": "Min",
-  "max": "Max",
-  "none": "None",
-  "common-test": "Changed by the Common Test: new vehicles and rebalanced ones",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Reward"
-  },
-  "moe": {
-    "0": "No mark yet"
-  },
-  "mom": {
-    "0": "No badge yet"
   }
 }

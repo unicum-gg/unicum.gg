@@ -10,6 +10,25 @@ import {
 } from "react";
 import { VEHICLE_ROLES, roleSuffix } from "@unicum.gg/shared";
 
+/**
+ * Where a vehicle stands in its owner's garage, which only a verified account
+ * can answer (see `*_player_garage`).
+ *
+ * A partition rather than two flags, because every row of a verified garage
+ * falls in exactly one of these and the chip row is a plain multi-select like
+ * the categories beside it. `Unplayed` is the vehicle nothing else on the site
+ * can see: it has no stats row anywhere, so it exists only because the garage
+ * reading reported it.
+ */
+export enum GarageState {
+  /** Still owned, and driven at least once. */
+  Held = "held",
+  /** Still owned, never taken into battle. */
+  Unplayed = "unplayed",
+  /** Driven, and no longer in the garage. */
+  Sold = "sold",
+}
+
 export type FilterableTank = {
   tier: number | null;
   nation: string | null;
@@ -28,6 +47,10 @@ export type FilterableTank = {
    * catalogue already uses for the region's thresholds. */
   gunMarks?: number | null;
   masteryBadge?: number | null;
+  /** Optional like the two above, and for the same reason: only a profile whose
+   * owner has signed in carries it, so its chip row hides itself everywhere
+   * else. Mapped by the caller from `owned` + `battles`. */
+  garageState?: GarageState | null;
   name: string;
   shortName: string | null;
 };
@@ -78,6 +101,11 @@ export type TankFilters<T> = {
   /** Whether the list carries marks / badges at all, so the rows can hide. */
   hasMoe: boolean;
   hasMom: boolean;
+  /** Garage states to keep. Empty means no filter. */
+  garageSel: Set<string>;
+  toggleGarage: (v: string) => void;
+  /** Whether this garage has been verified at all, so the row can hide. */
+  hasGarage: boolean;
   rangeCol: string;
   setRangeCol: (k: string) => void;
   minVal: string;
@@ -138,6 +166,7 @@ export function useTankFilters<T extends FilterableTank>(
   const [testOnly, setTestOnly] = useState(false);
   const [moeSel, setMoeSel] = useState<Set<number>>(() => new Set());
   const [momSel, setMomSel] = useState<Set<number>>(() => new Set());
+  const [garageSel, setGarageSel] = useState<Set<string>>(() => new Set());
   // No test running (or nothing changed): the control has nothing to filter.
   const hasTestChanges = useMemo(
     () => items.some((t) => t.isCommonTest || (t.testChanges ?? 0) > 0),
@@ -146,6 +175,10 @@ export function useTankFilters<T extends FilterableTank>(
   const hasMoe = useMemo(() => items.some((t) => t.gunMarks != null), [items]);
   const hasMom = useMemo(
     () => items.some((t) => t.masteryBadge != null),
+    [items],
+  );
+  const hasGarage = useMemo(
+    () => items.some((t) => t.garageState != null),
     [items],
   );
 
@@ -177,6 +210,8 @@ export function useTankFilters<T extends FilterableTank>(
     if (moe.size) setMoeSel(moe);
     const mom = parseNumSet(params.get("mom"));
     if (mom.size) setMomSel(mom);
+    const garage = parseSet(params.get("garage"));
+    if (garage.size) setGarageSel(garage);
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -205,6 +240,7 @@ export function useTankFilters<T extends FilterableTank>(
     setOrDel("test", testOnly ? "1" : "");
     setOrDel("moe", setStr(moeSel));
     setOrDel("mom", setStr(momSel));
+    setOrDel("garage", setStr(garageSel));
     // The range column is only meaningful with a bound, so only persist the
     // trio together.
     const hasRange = minVal.trim() !== "" || maxVal.trim() !== "";
@@ -227,6 +263,7 @@ export function useTankFilters<T extends FilterableTank>(
     testOnly,
     moeSel,
     momSel,
+    garageSel,
     rangeCol,
     minVal,
     maxVal,
@@ -297,6 +334,12 @@ export function useTankFilters<T extends FilterableTank>(
       if (hasMom && momSel.size > 0) {
         if (t.masteryBadge == null || !momSel.has(t.masteryBadge)) return false;
       }
+      // Gated on the garage being verified, like the two above: a `?garage=`
+      // carried over from a profile that has one onto a profile that has not
+      // would otherwise empty the table through a chip row not on screen.
+      if (hasGarage && garageSel.size > 0) {
+        if (t.garageState == null || !garageSel.has(t.garageState)) return false;
+      }
       if (
         activeRangeCol &&
         ((min != null && !Number.isNaN(min)) ||
@@ -335,8 +378,10 @@ export function useTankFilters<T extends FilterableTank>(
     testOnly,
     moeSel,
     momSel,
+    garageSel,
     hasMoe,
     hasMom,
+    hasGarage,
   ]);
 
   return {
@@ -363,6 +408,9 @@ export function useTankFilters<T extends FilterableTank>(
       toggleMom: (v) => toggleSet(setMomSel, v),
       hasMoe,
       hasMom,
+      garageSel,
+      toggleGarage: (v) => toggleSet(setGarageSel, v),
+      hasGarage,
       rangeCol,
       setRangeCol,
       minVal,
