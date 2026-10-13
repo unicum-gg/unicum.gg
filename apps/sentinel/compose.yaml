@@ -1,0 +1,37 @@
+# Coolify "Docker Compose" resource. One container that watches the web's health
+# and decides whether the site's Cloudflare challenge should be on.
+#
+# It needs the Docker socket because its signal (the web's event-loop stalls) is
+# in that container's log and nowhere else. Read-only, and the API token it
+# carries can do exactly one thing on exactly one zone, so the blast radius of
+# both is small and deliberate.
+#
+# Set in the Coolify resource env:
+#   CLOUDFLARE_API_TOKEN     scoped to Zone WAF: Edit on unicum.gg only
+#   CLOUDFLARE_ZONE_ID       the unicum.gg zone
+#   CLOUDFLARE_RULESET_ID    the http_request_firewall_custom entrypoint
+#   CLOUDFLARE_RULE_ID       the challenge rule
+#   WEB_CONTAINER_PREFIX     the web resource's uuid, which survives redeploys
+#                            (the trailing timestamp does not)
+#   SENTINEL_MODE            observe (default) or enforce
+services:
+  sentinel:
+    # Context is apps/sentinel relative to the repo root, like apps/proxy:
+    # Coolify runs compose with --project-directory at the repo root.
+    build:
+      context: apps/sentinel
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      SENTINEL_MODE: ${SENTINEL_MODE:-observe}
+      WEB_CONTAINER_PREFIX: ${WEB_CONTAINER_PREFIX}
+      CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_API_TOKEN}
+      CLOUDFLARE_ZONE_ID: ${CLOUDFLARE_ZONE_ID}
+      CLOUDFLARE_RULESET_ID: ${CLOUDFLARE_RULESET_ID}
+      CLOUDFLARE_RULE_ID: ${CLOUDFLARE_RULE_ID}
+      SENTINEL_POLL_SECONDS: ${SENTINEL_POLL_SECONDS:-60}
+      SENTINEL_WINDOW_MINUTES: ${SENTINEL_WINDOW_MINUTES:-5}
+      SENTINEL_STALL_THRESHOLD: ${SENTINEL_STALL_THRESHOLD:-3}
+      SENTINEL_CALM_MINUTES: ${SENTINEL_CALM_MINUTES:-20}
