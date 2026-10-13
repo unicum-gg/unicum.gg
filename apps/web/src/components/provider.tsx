@@ -98,25 +98,32 @@ export function Provider({
         debug={process.env.NODE_ENV === "development"}
         load={load}
       >
-        <RootProvider
-          search={{ SearchDialog }}
-          i18n={{ locale, translations: fumaTranslations }}
-        >
-          <CookieConsentProvider>
-            {/* One provider for the whole app, which is what lets `Hint` be a
-                leaf anywhere: Radix refuses a tooltip with no provider above
-                it, and the alternative (every hint carrying its own) would
-                give a table of fifty rows fifty of them and lose the shared
-                delay, where moving from one cell to the next re-waits. The
-                local providers that remain are the ones tuning their own
-                delay, and they nest harmlessly. */}
-            <TooltipProvider delayDuration={150}>
+        {/* One provider for the whole app, which is what lets `Hint` be a
+            leaf anywhere: Radix refuses a tooltip with no provider above it,
+            and the alternative (every hint carrying its own) would give a
+            table of fifty rows fifty of them and lose the shared delay, where
+            moving from one cell to the next re-waits. The local providers that
+            remain are the ones tuning their own delay, and they nest
+            harmlessly.
+
+            **It sits above `RootProvider`, and that is load-bearing.** fumadocs
+            mounts the search dialog itself, as a SIBLING of the children it was
+            handed, so the dialog's tree never passes through anything placed
+            underneath it. Nested inside, every hint the dialog draws threw
+            "`Tooltip` must be used within `TooltipProvider`" the moment a
+            reader opened it, while the rest of the site was fine. */}
+        <TooltipProvider delayDuration={150}>
+          <RootProvider
+            search={{ SearchDialog }}
+            i18n={{ locale, translations: fumaTranslations }}
+          >
+            <CookieConsentProvider>
               {children}
               <CookieConsent />
               <Script />
-            </TooltipProvider>
-          </CookieConsentProvider>
-        </RootProvider>
+            </CookieConsentProvider>
+          </RootProvider>
+        </TooltipProvider>
       </AppTranslationProvider>
     </SWRConfig>
   );
