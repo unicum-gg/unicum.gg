@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standardní",
+    "premium": "Prémium",
+    "reward": "Odměna"
+  },
+  "common-test": "Změněno v rámci akce Společný test: nová a znovu vyvážená vozidla",
+  "garage": {
+    "held": "V garáži",
+    "unplayed": "Nikdy nehráno",
+    "sold": "Prodáno"
+  },
+  "garageHint": {
+    "held": "Stále v garáži a alespoň jednou řízeno.",
+    "unplayed": "Vlastněno a nikdy neobdržené do bitvy. Nikde pro něj neexistuje záznam, takže se zobrazuje pouze proto, že tento hráč ověřil svou garáž.",
+    "sold": "V minulosti odehráno a již nevlastněno. Wargaming ho stále vykazuje, proto se zde vůbec zobrazuje."
+  },
+  "max": "Max",
+  "min": "Min",
+  "moe": {
+    "0": "Zatím bez znaku"
+  },
+  "mom": {
+    "0": "Zatím bez odznaku"
+  },
+  "none": "Žádný",
   "search": {
     "tanks": "Hledat mezi {count} tanky",
     "rated-tanks": "Hledat mezi {count} hodnocenými tanky",
@@ -7,20 +32,5 @@
     "clans": "Hledat mezi {count} klany",
     "tournaments": "Hledat mezi {count} turnaji",
     "teams": "Hledat mezi {count} týmy"
-  },
-  "min": "Min",
-  "max": "Max",
-  "none": "Žádný",
-  "common-test": "Změněno v rámci akce Společný test: nová a znovu vyvážená vozidla",
-  "category": {
-    "standard": "Standardní",
-    "premium": "Prémium",
-    "reward": "Odměna"
-  },
-  "moe": {
-    "0": "Zatím bez znaku"
-  },
-  "mom": {
-    "0": "Zatím bez odznaku"
   }
 }

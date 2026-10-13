@@ -42,7 +42,7 @@
     "how": "Tím priradený ku klanu vyhral turnaj. Wargaming zaznamenáva tímy a účty, nikdy nie klany, preto sa toto priradenie obnovuje porovnaním každej súpisky s členstvom v klane platným v deň konania turnaja."
   },
   "verified": {
-    "name": "Overený",
+    "name": "Preverjeno",
     "how": "Majiteľ sa prihlásil pomocou svojho Wargaming.net ID a prepojil tento účet. Jedinou podmienkou je prihlásenie a je bezplatné."
   }
 }

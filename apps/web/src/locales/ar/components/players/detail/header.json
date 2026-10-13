@@ -1,7 +1,7 @@
 {
   "joined": "انضم في {date}",
   "last-battle": "آخر معركة {when}",
-  "never-played": "لم يلعب مطلقًا",
+  "never-played": "لم يلعب قط",
   "updated": "محدث {when}",
   "clan-role-joined": "{role} · انضم في {date}"
 }

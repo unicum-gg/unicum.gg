@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standarts",
+    "premium": "Premium",
+    "reward": "Apmaksāšana"
+  },
+  "common-test": "Mainīts Kopējā testa dēļ: jauni un pārbalansēti transportlīdzekļi",
+  "garage": {
+    "held": "Angārā",
+    "unplayed": "Nav spēlēts",
+    "sold": "Pārdots"
+  },
+  "garageHint": {
+    "held": "Joprojām garāžā un vismaz reizi izspēlēts.",
+    "unplayed": "Pieder spēlētājam, bet nekad nav paņemts kaujā. Par šiem transportlīdzekļiem nekur nav rekorda, tāpēc tie parādās tikai tādēļ, ka šis spēlētājs verificēja savu garāžu.",
+    "sold": "Agrāk izspēlēts, bet vairs nepieder. Wargaming joprojām ziņo par tiem, tāpēc tie vispār ir šeit."
+  },
+  "max": "Maks.",
+  "min": "Min.",
+  "moe": {
+    "0": "Vēl nav izcilības zīmes"
+  },
+  "mom": {
+    "0": "Vēl nav nozīmītes"
+  },
+  "none": "Nav",
   "search": {
     "tanks": "Meklēt starp {count} tankiem",
     "rated-tanks": "Meklēt starp {count} novērtētajiem tankiem",
@@ -7,20 +32,5 @@
     "clans": "Meklēt {count} klanus",
     "tournaments": "Meklēt {count} turnīrus",
     "teams": "Meklēt {count} komandas"
-  },
-  "min": "Min.",
-  "max": "Maks.",
-  "none": "Nav",
-  "common-test": "Mainīts Kopējā testa dēļ: jauni un pārbalansēti transportlīdzekļi",
-  "category": {
-    "standard": "Standarts",
-    "premium": "Premium",
-    "reward": "Apmaksāšana"
-  },
-  "moe": {
-    "0": "Vēl nav izcilības zīmes"
-  },
-  "mom": {
-    "0": "Vēl nav nozīmītes"
   }
 }

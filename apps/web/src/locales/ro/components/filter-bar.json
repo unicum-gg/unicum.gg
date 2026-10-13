@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Recompensă"
+  },
+  "common-test": "Modificat de Testul Comun: vehicule noi și vehicule reechilibrate",
+  "garage": {
+    "held": "În garaj",
+    "unplayed": "Nu a jucat niciodată",
+    "sold": "Vândut"
+  },
+  "garageHint": {
+    "held": "Încă în garaj și jucat cel puțin o dată.",
+    "unplayed": "Deținut și niciodată folosit într-o bătălie. Acestea nu au niciun record nicăieri, așa că apar doar deoarece acest jucător și-a verificat garajul.",
+    "sold": "Jucat în trecut și nu mai este deținut. Wargaming continuă să îl raporteze, motiv pentru care apare aici."
+  },
+  "max": "Max",
+  "min": "Min",
+  "moe": {
+    "0": "Nicio marcă încă"
+  },
+  "mom": {
+    "0": "Nicio insignă încă"
+  },
+  "none": "Nimic",
   "search": {
     "tanks": "Caută printre {count} tancuri",
     "rated-tanks": "Caută printre {count} tancuri clasate",
@@ -7,20 +32,5 @@
     "clans": "Caută {count} clanuri",
     "tournaments": "Caută {count} turnee",
     "teams": "Caută {count} echipe"
-  },
-  "min": "Min",
-  "max": "Max",
-  "none": "Nimic",
-  "common-test": "Modificat de Testul Comun: vehicule noi și vehicule reechilibrate",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Recompensă"
-  },
-  "moe": {
-    "0": "Nicio marcă încă"
-  },
-  "mom": {
-    "0": "Nicio insignă încă"
   }
 }

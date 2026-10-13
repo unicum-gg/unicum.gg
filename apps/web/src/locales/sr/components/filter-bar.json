@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premijum",
+    "reward": "Nagrada"
+  },
+  "common-test": "Promenjeno na Zajedničkom testu: nova vozila i ona kojima je promenjen balans",
+  "garage": {
+    "held": "U garaži",
+    "unplayed": "Није играо",
+    "sold": "Продато"
+  },
+  "garageHint": {
+    "held": "Још увек је у гаражи и вожено је бар једном.",
+    "unplayed": "У власништву је, али никад није узето у битку. За њега не постоји никакав рекорд, па се појављује само зато што је овај играч верификовао своју гаражу.",
+    "sold": "Одиграно је у прошлости и више није у власништву. Wargaming и даље објављује податке о њему, због чега је овде уопште и наведено."
+  },
+  "max": "Макс.",
+  "min": "Мин.",
+  "moe": {
+    "0": "Још нема ознаке"
+  },
+  "mom": {
+    "0": "Још нема значке"
+  },
+  "none": "Nema",
   "search": {
     "tanks": "Претражи међу {count} тенкова",
     "rated-tanks": "Претражи међу {count} оцењених тенкова",
@@ -7,20 +32,5 @@
     "clans": "Претражи {count} кланова",
     "tournaments": "Претражи {count} турнира",
     "teams": "Претражи {count} тимова"
-  },
-  "min": "Мин.",
-  "max": "Макс.",
-  "none": "Nema",
-  "common-test": "Promenjeno na Zajedničkom testu: nova vozila i ona kojima je promenjen balans",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premijum",
-    "reward": "Nagrada"
-  },
-  "moe": {
-    "0": "Још нема ознаке"
-  },
-  "mom": {
-    "0": "Још нема значке"
   }
 }

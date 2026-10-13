@@ -1,0 +1,6 @@
+{
+  "never-played": "Ei pelannut koskaan",
+  "never-played-hint": "Omistuksessa, eikä sitä ole koskaan otettu taisteluun. Wargaming ei julkaise siitä ennätystä, joten se näkyy täällä vain, koska tämä pelaaja vahvisti tallinsa.",
+  "sold": "Myyty",
+  "sold-hint": "Pelattu aiemmin, eikä enää tallissa. Wargaming ilmoittaa siitä edelleen, minkä vuoksi se on yhä listattu."
+}

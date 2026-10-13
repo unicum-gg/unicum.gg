@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "A játékos {date} napján Wargaming.net ID-val jelentkezett be, ezért ez a ténylegesen a garázsában lévő járművek árát számítja ki: az eladott járművek kimaradnak, a tulajdonban lévő, de soha nem vezetett járművek pedig beleszámítanak.",
+  "counts-every-vehicle-ever-driven": "Senki nem jelentkezett be ezzel a fiókkal, ezért ez minden olyan járművet számításba vesz, amellyel valaha csatába mentek. A Wargaming egy idegennek azt közli, mely járművekkel játszottak, azt viszont soha nem, hogy melyek vannak még tulajdonban, ezért a régen eladott járművek ára itt szerepel, a megvásárolt, de soha nem vezetett járművek pedig hiányoznak.",
+  "unverified-garage": "Becsült garázs.",
+  "verified-garage": "Hitelesített garázs.",
+  "verify-my-garage": "Garázsom hitelesítése"
+}

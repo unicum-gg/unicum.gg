@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "玩家于 {date} 使用 Wargaming.net ID 登录，因此这里统计的是其车库中实际拥有的车辆。已出售的车辆不计入，拥有但从未驾驶过的车辆会计入。",
+  "counts-every-vehicle-ever-driven": "无人使用此账号登录，因此这里统计该账号曾投入战斗的每辆车辆。默认会告诉陌生人哪些车辆进行过对战，却不会告诉他们哪些车辆仍归玩家所有，因此很久以前出售的车辆会在这里计入，而买来后从未驾驶过的车辆则不会显示。",
+  "unverified-garage": "估算车库",
+  "verified-garage": "已验证车库",
+  "verify-my-garage": "验证我的车库"
+}

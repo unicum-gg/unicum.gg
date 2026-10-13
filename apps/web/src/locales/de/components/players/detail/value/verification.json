@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Der Spieler hat sich am {date} mit seiner Wargaming.net-ID angemeldet. Daher werden die Fahrzeuge bewertet, die sich tatsächlich in seiner Garage befinden. Verkaufte Fahrzeuge werden ausgelassen, und Fahrzeuge, die er besitzt, aber noch nie gefahren hat, werden gezählt.",
+  "counts-every-vehicle-ever-driven": "Niemand hat sich mit diesem Konto angemeldet. Daher wird jedes Fahrzeug gezählt, das damit jemals in ein Gefecht genommen wurde. Wargaming teilt Außenstehenden mit, welche Fahrzeuge gespielt wurden, aber nie, welche noch im Besitz sind. Deshalb werden hier auch Fahrzeuge bewertet, die vor langer Zeit verkauft wurden, während gekaufte und noch nie gefahrene Fahrzeuge fehlen.",
+  "unverified-garage": "Geschätzte Garage",
+  "verified-garage": "Verifizierte Garage",
+  "verify-my-garage": "Meine Garage verifizieren"
+}

@@ -42,7 +42,7 @@
     "how": "Turnaj vyhrál tým přiřazený ke klanu. Wargaming eviduje týmy a účty, nikdy ne klany, takže se přiřazení obnovuje porovnáním každé soupisky s členstvím v klanu platným v den, kdy se hrálo."
   },
   "verified": {
-    "name": "Ověřený",
+    "name": "Ověřeno",
     "how": "Majitel se přihlásil pomocí svého Wargaming.net ID a propojil tento účet. Jedinou podmínkou je přihlášení a je zdarma."
   }
 }

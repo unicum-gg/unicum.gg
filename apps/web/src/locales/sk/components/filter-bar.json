@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Štandard",
+    "premium": "Prémiový",
+    "reward": "Odmena"
+  },
+  "common-test": "Zmenené všeobecným testom: nové a vyvážené vozidlá",
+  "garage": {
+    "held": "V garáži",
+    "unplayed": "Nikoli igrano",
+    "sold": "Prodano"
+  },
+  "garageHint": {
+    "held": "Stále v garáži a aspoň raz vožené.",
+    "unplayed": "Vo vlastníctve a nikdy nebolo prijaté do bitky. Nikde o ňom neexistuje žiadny záznam, pretože sa zobrazuje iba preto, že tento hráč overil svoju garáž.",
+    "sold": "V minulosti vožené a už nie je vo vlastníctve. Wargaming ho naďalej uvádza, pretože je tu vôbec uvedené."
+  },
+  "max": "Max.",
+  "min": "Min.",
+  "moe": {
+    "0": "Zatiaľ žiadny znak"
+  },
+  "mom": {
+    "0": "Zatiaľ žiadny odznak"
+  },
+  "none": "Žiadny",
   "search": {
     "tanks": "Hľadať medzi tankami ({count})",
     "rated-tanks": "Hľadať medzi hodnotenými tankami ({count})",
@@ -7,20 +32,5 @@
     "clans": "Hľadať medzi klanmi ({count})",
     "tournaments": "Hľadať medzi turnajmi ({count})",
     "teams": "Hľadať medzi tímami ({count})"
-  },
-  "min": "Min.",
-  "max": "Max.",
-  "none": "Žiadny",
-  "common-test": "Zmenené všeobecným testom: nové a vyvážené vozidlá",
-  "category": {
-    "standard": "Štandard",
-    "premium": "Prémiový",
-    "reward": "Odmena"
-  },
-  "moe": {
-    "0": "Zatiaľ žiadny znak"
-  },
-  "mom": {
-    "0": "Zatiaľ žiadny odznak"
   }
 }

@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "标准",
+    "premium": "高级账号",
+    "reward": "奖励"
+  },
+  "common-test": "公共测试变更：新车辆和重新平衡的车辆",
+  "garage": {
+    "held": "在车库中",
+    "unplayed": "未玩过",
+    "sold": "已出售"
+  },
+  "garageHint": {
+    "held": "仍在车库中，并且至少驾驶过一次。",
+    "unplayed": "已拥有但从未投入战斗。这些车辆在任何地方都没有纪录，因此只有在该玩家验证了车库后才会显示。",
+    "sold": "过去驾驶过，但已不再拥有。默认仍会报告这些车辆，因此它们才会显示在这里。"
+  },
+  "max": "最大",
+  "min": "最小",
+  "moe": {
+    "0": "暂无标记"
+  },
+  "mom": {
+    "0": "暂无徽章"
+  },
+  "none": "无",
   "search": {
     "tanks": "在 {count} 辆坦克中搜 索",
     "rated-tanks": "在 {count} 辆评级坦克中搜 索",
@@ -7,20 +32,5 @@
     "clans": "搜 索 {count} 个军团",
     "tournaments": "搜 索 {count} 个锦标赛",
     "teams": "搜 索 {count} 支队伍"
-  },
-  "min": "最小",
-  "max": "最大",
-  "none": "无",
-  "common-test": "公共测试变更：新车辆和重新平衡的车辆",
-  "category": {
-    "standard": "标准",
-    "premium": "高级账号",
-    "reward": "奖励"
-  },
-  "moe": {
-    "0": "暂无标记"
-  },
-  "mom": {
-    "0": "暂无徽章"
   }
 }

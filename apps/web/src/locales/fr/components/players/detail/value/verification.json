@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Le joueur s’est connecté avec son identifiant Wargaming.net le {date}, le prix correspond donc aux véhicules réellement présents dans son garage. Ceux qu’il a vendus sont exclus, tandis que ceux qu’il possède mais n’a jamais joués sont comptés.",
+  "counts-every-vehicle-ever-driven": "Personne ne s’est connecté à ce compte, ce qui compte tous les véhicules qu’il a déjà pris en bataille. Wargaming indique à un inconnu quels véhicules ont été joués, jamais lesquels sont encore possédés. Les véhicules vendus depuis longtemps sont donc pris en compte ici, tandis que ceux achetés et jamais joués sont absents.",
+  "unverified-garage": "Garage estimé.",
+  "verified-garage": "Garage vérifié.",
+  "verify-my-garage": "Vérifier mon garage"
+}

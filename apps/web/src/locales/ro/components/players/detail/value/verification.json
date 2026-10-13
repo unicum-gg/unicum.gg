@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Jucătorul s-a conectat cu ID-ul Wargaming.net la data de {date}, așa că aici sunt evaluate vehiculele aflate de fapt în garajul său: cele pe care le-a vândut sunt omise, iar cele pe care le deține, dar nu le-a jucat niciodată, sunt incluse.",
+  "counts-every-vehicle-ever-driven": "Nimeni nu s-a conectat cu acest cont, așa că sunt numărate toate vehiculele cu care a intrat vreodată în bătălie. Wargaming îi spune unei persoane din afară ce vehicule au fost jucate, dar nu și care sunt încă deținute, așa că vehiculele vândute cu mult timp în urmă sunt evaluate aici, iar vehiculele cumpărate și niciodată jucate lipsesc.",
+  "unverified-garage": "Garaj estimat.",
+  "verified-garage": "Garaj verificat.",
+  "verify-my-garage": "Verifică-mi garajul"
+}

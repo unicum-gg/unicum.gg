@@ -42,7 +42,7 @@
     "how": "Et hold, der er tilskrevet klanen, vandt en turnering. Wargaming registrerer hold og konti, aldrig klaner, så tilskrivningen findes ved at sammenligne hver holdopstilling med klanmedlemskabet på kampdagen."
   },
   "verified": {
-    "name": "Verificeret",
+    "name": "Bekræftet",
     "how": "Ejeren er logget ind med sit Wargaming.net-ID og har forbundet denne konto. Login er hele kravet, og det koster ikke noget."
   }
 }

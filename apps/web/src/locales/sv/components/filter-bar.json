@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belöning"
+  },
+  "common-test": "Ändring genom Vanlig Test: nya och ombalanserade fordon",
+  "garage": {
+    "held": "I garaget",
+    "unplayed": "Aldrig spelat",
+    "sold": "Sålt"
+  },
+  "garageHint": {
+    "held": "Fortfarande i garaget och körda minst en gång.",
+    "unplayed": "Ägda och aldrig tagna i strid. Dessa har inget rekord någonstans, så de visas bara på grund av att spelaren verifierade sitt garage.",
+    "sold": "Körda tidigare och inte längre ägda. Wargaming behåller rapporteringen om dem, vilket är anledningen till att de visas över huvud taget."
+  },
+  "max": "Max",
+  "min": "Min",
+  "moe": {
+    "0": "Inget märke ännu"
+  },
+  "mom": {
+    "0": "Ingen utmärkelse ännu"
+  },
+  "none": "Inga",
   "search": {
     "tanks": "Hitta bland {count} Tanken",
     "rated-tanks": "Hitta bland {count} rankade Tanken",
@@ -7,20 +32,5 @@
     "clans": "Hitta bland {count} Klaner",
     "tournaments": "Hitta bland {count} Turneringar",
     "teams": "Hitta bland {count} Lag"
-  },
-  "min": "Min",
-  "max": "Max",
-  "none": "Inga",
-  "common-test": "Ändring genom Vanlig Test: nya och ombalanserade fordon",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Belöning"
-  },
-  "moe": {
-    "0": "Inget märke ännu"
-  },
-  "mom": {
-    "0": "Ingen utmärkelse ännu"
   }
 }

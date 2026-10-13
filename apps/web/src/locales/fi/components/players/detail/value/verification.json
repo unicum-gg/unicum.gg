@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Pelaaja kirjautui Wargaming.net ID:llä {date}, joten tässä hinnoitellaan ajoneuvot, jotka ovat itse asiassa hänen tallissaan: myydyt ajoneuvot jätetään pois, ja omistetut mutta ei koskaan ajetut ajoneuvot lasketaan mukaan.",
+  "counts-every-vehicle-ever-driven": "Ei kukaan ole kirjautunut tällä tilillä, joten tässä lasketaan mukaan kaikki ajoneuvot, jotka sillä on koskaan otettu taisteluun. Wargaming kertoo ulkopuoliselle, millä ajoneuvoilla pelattiin, mutta ei koskaan sitä, mitkä ovat yhä omistuksessa, joten kauan sitten myydyt ajoneuvot hinnoitellaan tässä ja ostetut, mutta ei koskaan ajetut ajoneuvot puuttuvat.",
+  "unverified-garage": "Arvioitu talli.",
+  "verified-garage": "Vahvistettu talli.",
+  "verify-my-garage": "Vahvista tallini"
+}

@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Padrão",
+    "premium": "Premium",
+    "reward": "Recompensa"
+  },
+  "common-test": "Alterados no Teste Comum: veículos novos e reequilibrados",
+  "garage": {
+    "held": "Na Garagem",
+    "unplayed": "Nunca jogou",
+    "sold": "Vendido"
+  },
+  "garageHint": {
+    "held": "Ainda na garagem, com batalhas jogadas pelo menos uma vez.",
+    "unplayed": "Possuído e nunca recebido em batalha. Não há nenhum recorde sobre esses veículos, por isso eles só aparecem porque este jogador verificou a garagem.",
+    "sold": "Jogado no passado e não mais possuído. A Wargaming mantém esses veículos nos registros, por isso eles aparecem aqui."
+  },
+  "max": "Máx.",
+  "min": "Mín.",
+  "moe": {
+    "0": "Ainda sem marca"
+  },
+  "mom": {
+    "0": "Ainda sem distintivo"
+  },
+  "none": "Nenhum",
   "search": {
     "tanks": "Pesquisar entre {count} tanques",
     "rated-tanks": "Pesquisar entre {count} tanques classificados",
@@ -7,20 +32,5 @@
     "clans": "Pesquisar entre {count} clãs",
     "tournaments": "Pesquisar entre {count} torneios",
     "teams": "Pesquisar entre {count} equipas"
-  },
-  "min": "Mín.",
-  "max": "Máx.",
-  "none": "Nenhum",
-  "common-test": "Alterados no Teste Comum: veículos novos e reequilibrados",
-  "category": {
-    "standard": "Padrão",
-    "premium": "Premium",
-    "reward": "Recompensa"
-  },
-  "moe": {
-    "0": "Ainda sem marca"
-  },
-  "mom": {
-    "0": "Ainda sem distintivo"
   }
 }

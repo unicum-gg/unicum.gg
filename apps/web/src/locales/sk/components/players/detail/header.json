@@ -1,7 +1,7 @@
 {
   "joined": "Registrácia {date}",
   "last-battle": "Posledná bitka {when}",
-  "never-played": "Nikdy nehral",
+  "never-played": "Nikoli igrano",
   "updated": "Aktualizované {when}",
   "clan-role-joined": "{role} · v klane od {date}"
 }

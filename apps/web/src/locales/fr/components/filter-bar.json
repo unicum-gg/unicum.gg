@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Récompense"
+  },
+  "common-test": "Modifiés par le Test commun : nouveaux véhicules et véhicules rééquilibrés",
+  "garage": {
+    "held": "Dans le garage",
+    "unplayed": "Jamais joué",
+    "sold": "Vendu"
+  },
+  "garageHint": {
+    "held": "Toujours dans le garage et joués au moins une fois.",
+    "unplayed": "Possédés et jamais pris en bataille. Aucun record n’existe à leur sujet, ils apparaissent donc uniquement parce que ce joueur a vérifié son garage.",
+    "sold": "Joués dans le passé et plus possédés. Wargaming continue de les signaler, c’est pourquoi ils apparaissent ici."
+  },
+  "max": "Max",
+  "min": "Min",
+  "moe": {
+    "0": "Pas encore de marque"
+  },
+  "mom": {
+    "0": "Pas encore d’insigne"
+  },
+  "none": "Aucun",
   "search": {
     "tanks": "Rechercher parmi {count} chars",
     "rated-tanks": "Rechercher parmi {count} chars évalués",
@@ -7,20 +32,5 @@
     "clans": "Rechercher parmi {count} clans",
     "tournaments": "Rechercher parmi {count} tournois",
     "teams": "Rechercher parmi {count} équipes"
-  },
-  "min": "Min",
-  "max": "Max",
-  "none": "Aucun",
-  "common-test": "Modifiés par le Test commun : nouveaux véhicules et véhicules rééquilibrés",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Récompense"
-  },
-  "moe": {
-    "0": "Pas encore de marque"
-  },
-  "mom": {
-    "0": "Pas encore d’insigne"
   }
 }

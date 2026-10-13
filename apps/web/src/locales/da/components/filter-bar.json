@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belønning"
+  },
+  "common-test": "Ændret af Offentlig Test: nye køretøjer og ombalancerede køretøjer",
+  "garage": {
+    "held": "I garage",
+    "unplayed": "Aldrig spillet",
+    "sold": "Solgt"
+  },
+  "garageHint": {
+    "held": "Stadig i garage og kørt mindst én gang.",
+    "unplayed": "Ejet og aldrig taget i kamp. Disse har ingen rekord noget sted, så de vises kun, fordi denne spiller bekræftede sin garage.",
+    "sold": "Kørt tidligere og ikke længere ejet. Wargaming beholder rapporteringen om dem, og derfor er de overhovedet her."
+  },
+  "max": "Maks.",
+  "min": "Min.",
+  "moe": {
+    "0": "Ingen mærker endnu"
+  },
+  "mom": {
+    "0": "Ingen badges endnu"
+  },
+  "none": "Ingen",
   "search": {
     "tanks": "Søg blandt {count} kampvogne",
     "rated-tanks": "Søg blandt {count} vurderede kampvogne",
@@ -7,20 +32,5 @@
     "clans": "Søg efter {count} klaner",
     "tournaments": "Søg efter {count} turneringer",
     "teams": "Søg efter {count} hold"
-  },
-  "min": "Min.",
-  "max": "Maks.",
-  "none": "Ingen",
-  "common-test": "Ændret af Offentlig Test: nye køretøjer og ombalancerede køretøjer",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Belønning"
-  },
-  "moe": {
-    "0": "Ingen mærker endnu"
-  },
-  "mom": {
-    "0": "Ingen badges endnu"
   }
 }

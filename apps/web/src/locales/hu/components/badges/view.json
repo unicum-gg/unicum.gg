@@ -42,7 +42,7 @@
     "how": "Egy, a klánhoz rendelt csapat megnyert egy Torna eseményt. A Wargaming csapatokat és fiókokat tart nyilván, klánokat soha, ezért a hozzárendelést úgy állapítjuk meg, hogy minden névsort összevetünk a mérkőzés napján érvényes klántagsággal."
   },
   "verified": {
-    "name": "Igazolt",
+    "name": "Hitelesített",
     "how": "A tulajdonos bejelentkezett a Wargaming.net ID használatával, és összekapcsolta ezt a fiókot. Mindössze be kell jelentkezni, és ez semmibe sem kerül."
   }
 }

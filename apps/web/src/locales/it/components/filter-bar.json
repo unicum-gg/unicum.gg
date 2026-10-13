@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Ricompensa"
+  },
+  "common-test": "Cambiato dal Test comune: nuovi veicoli e veicoli ribilanciati",
+  "garage": {
+    "held": "In officina",
+    "unplayed": "Mai giocato",
+    "sold": "Venduto"
+  },
+  "garageHint": {
+    "held": "Ancora in officina e combattute almeno una volta.",
+    "unplayed": "Posseduti e mai portati in battaglia. Questi non hanno un record da nessuna parte, quindi compaiono solo perché questo giocatore ha verificato la propria officina.",
+    "sold": "Giocati in passato e non più posseduti. Wargaming continua a segnalarli, ed è per questo che sono qui."
+  },
+  "max": "Max",
+  "min": "Min",
+  "moe": {
+    "0": "Nessun marchio per ora"
+  },
+  "mom": {
+    "0": "Nessun distintivo per ora"
+  },
+  "none": "Nessuno",
   "search": {
     "tanks": "Cerca tra {count} carri armati",
     "rated-tanks": "Cerca tra {count} carri armati classificati",
@@ -7,20 +32,5 @@
     "clans": "Cerca tra {count} clan",
     "tournaments": "Cerca tra {count} tornei",
     "teams": "Cerca tra {count} squadre"
-  },
-  "min": "Min",
-  "max": "Max",
-  "none": "Nessuno",
-  "common-test": "Cambiato dal Test comune: nuovi veicoli e veicoli ribilanciati",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Ricompensa"
-  },
-  "moe": {
-    "0": "Nessun marchio per ora"
-  },
-  "mom": {
-    "0": "Nessun distintivo per ora"
   }
 }

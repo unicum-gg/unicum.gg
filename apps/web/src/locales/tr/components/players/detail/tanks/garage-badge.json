@@ -1,0 +1,6 @@
+{
+  "never-played": "Hiç oynanmadı",
+  "never-played-hint": "Sahip olunan ve asla savaşa alınmayan. Wargaming bununla ilgili kayıt yayınlamıyor, bu nedenle yalnızca bu oyuncu garajını doğruladığı için burada görünür.",
+  "sold": "Satıldı",
+  "sold-hint": "Geçmişte oynanan ve artık garajda olmayan. Wargaming bunu bildirmeyi sürdürüyor, bu nedenle hâlâ listeleniyor."
+}

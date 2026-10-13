@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Spilleren har signert inn med Wargaming.net-ID den {date}, så dette priser kjøretøyene som faktisk er i garasjen deres. De som er solgt, er utelatt, og de som eies, men aldri er kjørt, telles med.",
+  "counts-every-vehicle-ever-driven": "Ingen har signert inn med denne kontoen, så dette teller antall kjøretøy den noen gang har tatt i kamp. Wargaming forteller en utenforstående hvilke kjøretøy som er spilt med, men aldri hvilke som fortsatt eies. Derfor prises kjøretøy som ble solgt for lenge siden her, mens kjøretøy som er kjøpt og aldri kjørt, mangler.",
+  "unverified-garage": "Estimert garasje.",
+  "verified-garage": "Verifisert garasje.",
+  "verify-my-garage": "Verifiser garasjen min"
+}

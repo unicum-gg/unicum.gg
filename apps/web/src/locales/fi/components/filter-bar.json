@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standardi",
+    "premium": "Premium",
+    "reward": "Palkkio"
+  },
+  "common-test": "Muutettu Yhteisessä testissä: uudet ajoneuvot ja tasapainotetut ajoneuvot",
+  "garage": {
+    "held": "Tallissa",
+    "unplayed": "Ei pelannut koskaan",
+    "sold": "Myyty"
+  },
+  "garageHint": {
+    "held": "Edelleen tallissa ja ajettu vähintään kerran.",
+    "unplayed": "Omistuksessa, eikä niitä ole koskaan otettu taisteluun. Näistä ei ole ennätystä missään, joten ne näkyvät vain, koska tämä pelaaja vahvisti tallinsa.",
+    "sold": "Aiemmin pelattu, mutta ei enää omistuksessa. Wargaming ilmoittaa niistä edelleen, minkä vuoksi ne ovat täällä ylipäätään."
+  },
+  "max": "Maks.",
+  "min": "Min.",
+  "moe": {
+    "0": "Ei merkkiä vielä"
+  },
+  "mom": {
+    "0": "Ei merkkiä vielä"
+  },
+  "none": "Ei mitään",
   "search": {
     "tanks": "Etsi {count} panssarivaunun joukosta",
     "rated-tanks": "Etsi {count} rankatun panssarivaunun joukosta",
@@ -7,20 +32,5 @@
     "clans": "Etsi {count} klaania",
     "tournaments": "Etsi {count} turnausta",
     "teams": "Etsi {count} joukkuetta"
-  },
-  "min": "Min.",
-  "max": "Maks.",
-  "none": "Ei mitään",
-  "common-test": "Muutettu Yhteisessä testissä: uudet ajoneuvot ja tasapainotetut ajoneuvot",
-  "category": {
-    "standard": "Standardi",
-    "premium": "Premium",
-    "reward": "Palkkio"
-  },
-  "moe": {
-    "0": "Ei merkkiä vielä"
-  },
-  "mom": {
-    "0": "Ei merkkiä vielä"
   }
 }

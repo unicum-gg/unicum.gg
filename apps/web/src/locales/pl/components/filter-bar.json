@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standardowy",
+    "premium": "Premium",
+    "reward": "Nagroda"
+  },
+  "common-test": "Zmieniono w wersji Test ogólny: nowe i ponownie zbalansowane pojazdy",
+  "garage": {
+    "held": "W garażu",
+    "unplayed": "Nie rozegrano",
+    "sold": "Sprzedany"
+  },
+  "garageHint": {
+    "held": "Nadal w garażu i rozegranych co najmniej raz.",
+    "unplayed": "Posiadane i nigdy nie rozegrane w bitwie. Nie mają żadnego rekordu, więc pojawiają się tylko dlatego, że ten gracz zweryfikował swój garaż.",
+    "sold": "Rozegrane w przeszłości i już nieposiadane. Wargaming nadal je zgłasza, dlatego w ogóle się tutaj znajdują."
+  },
+  "max": "Maks.",
+  "min": "Min.",
+  "moe": {
+    "0": "Jeszcze nie ma odznaki biegłości"
+  },
+  "mom": {
+    "0": "Jeszcze nie ma odznaki"
+  },
+  "none": "Brak",
   "search": {
     "tanks": "Szukaj wśród {count} czołgów",
     "rated-tanks": "Szukaj wśród {count} sklasyfikowanych czołgów",
@@ -7,20 +32,5 @@
     "clans": "Szukaj wśród {count} klanów",
     "tournaments": "Szukaj wśród {count} turniejów",
     "teams": "Szukaj wśród {count} drużyn"
-  },
-  "min": "Min.",
-  "max": "Maks.",
-  "none": "Brak",
-  "common-test": "Zmieniono w wersji Test ogólny: nowe i ponownie zbalansowane pojazdy",
-  "category": {
-    "standard": "Standardowy",
-    "premium": "Premium",
-    "reward": "Nagroda"
-  },
-  "moe": {
-    "0": "Jeszcze nie ma odznaki biegłości"
-  },
-  "mom": {
-    "0": "Jeszcze nie ma odznaki"
   }
 }

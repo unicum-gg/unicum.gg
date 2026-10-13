@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Il giocatore ha effettuato l’accesso con Wargaming.net ID il {date}, quindi questo assegna un prezzo ai veicoli effettivamente presenti nella sua officina: quelli che ha venduto vengono lasciati fuori e quelli che possiede ma non ha mai combattuto vengono conteggiati.",
+  "counts-every-vehicle-ever-driven": "Nessuno ha effettuato l’accesso con questo account, quindi questo conteggia ogni veicolo che abbia mai portato in battaglia. Wargaming comunica a un estraneo quali veicoli sono stati giocati, ma mai quali siano ancora posseduti, quindi qui viene assegnato un prezzo ai veicoli venduti molto tempo fa e mancano quelli acquistati e mai combattuti.",
+  "unverified-garage": "Officina stimata.",
+  "verified-garage": "Officina verificata.",
+  "verify-my-garage": "Verifica la mia officina"
+}

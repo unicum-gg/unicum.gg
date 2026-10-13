@@ -1,0 +1,6 @@
+{
+  "never-played": "Nav spēlēts",
+  "never-played-hint": "Pieder spēlētājam, bet nekad nav paņemts kaujā. Wargaming par to nepublicē rekordu, tāpēc tas šeit parādās tikai tādēļ, ka šis spēlētājs verificēja savu garāžu.",
+  "sold": "Pārdots",
+  "sold-hint": "Agrāk izspēlēts, bet vairs neatrodas garāžā. Wargaming joprojām ziņo par to, tāpēc tas vēl ir uzskaitīts."
+}

@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Hráč se přihlásil pomocí Wargaming.net ID dne {date}, takže tato cena zahrnuje vozidla, která jsou ve skutečnosti v jeho garáži. Vozidla, která prodal, jsou vynechána, zatímco vozidla, která vlastní, ale nikdy s nimi nehrál, se započítávají.",
+  "counts-every-vehicle-ever-driven": "Nikdo se k tomuto účtu nepřihlásil, takže se započítává každé vozidlo, se kterým kdy vyrazil do bitvy. Wargaming cizímu uživateli sděluje, která vozidla byla odehraná, ale nikdy neuvádí, která jsou stále vlastněná. Proto se zde oceňují i vozidla prodaná před dlouhou dobou a chybí vozidla zakoupená, která nikdy nebyla řízena.",
+  "unverified-garage": "Odhadovaná garáž.",
+  "verified-garage": "Ověřená garáž.",
+  "verify-my-garage": "Ověřit mou garáž"
+}

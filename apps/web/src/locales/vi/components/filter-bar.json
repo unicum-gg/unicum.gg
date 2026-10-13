@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Tiêu chuẩn",
+    "premium": "Premium",
+    "reward": "Phần thưởng"
+  },
+  "common-test": "Được thay đổi bởi Kiểm tra chung: xe tăng mới và xe tăng được cân bằng lại",
+  "garage": {
+    "held": "Trong nhà chứa xe",
+    "unplayed": "Chưa từng chơi",
+    "sold": "Đã bán"
+  },
+  "garageHint": {
+    "held": "Vẫn còn trong nhà chứa xe và đã chơi ít nhất một lần.",
+    "unplayed": "Đã sở hữu nhưng chưa bao giờ tham gia trận đấu. Những xe tăng này không có kỷ lục ở bất kỳ đâu, vì vậy chúng chỉ hiển thị vì người chơi này đã xác minh nhà chứa xe của mình.",
+    "sold": "Đã chơi trước đây nhưng không còn được sở hữu. Wargaming vẫn đang báo cáo chúng, vì vậy chúng mới xuất hiện ở đây."
+  },
+  "max": "Tối đa",
+  "min": "Tối thiểu",
+  "moe": {
+    "0": "Chưa có dấu hiệu"
+  },
+  "mom": {
+    "0": "Chưa có huy hiệu"
+  },
+  "none": "Không có",
   "search": {
     "tanks": "Tìm trong số {count} xe tăng",
     "rated-tanks": "Tìm trong số {count} xe tăng được đánh giá",
@@ -7,20 +32,5 @@
     "clans": "Tìm {count} Clan",
     "tournaments": "Tìm {count} giải đấu",
     "teams": "Tìm {count} đội"
-  },
-  "min": "Tối thiểu",
-  "max": "Tối đa",
-  "none": "Không có",
-  "common-test": "Được thay đổi bởi Kiểm tra chung: xe tăng mới và xe tăng được cân bằng lại",
-  "category": {
-    "standard": "Tiêu chuẩn",
-    "premium": "Premium",
-    "reward": "Phần thưởng"
-  },
-  "moe": {
-    "0": "Chưa có dấu hiệu"
-  },
-  "mom": {
-    "0": "Chưa có huy hiệu"
   }
 }

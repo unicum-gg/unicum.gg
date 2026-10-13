@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Prémium",
+    "reward": "Jutalom"
+  },
+  "common-test": "Megváltozott a Közönséges Teszt hatására: új és újraegyensúlyozott járművek",
+  "garage": {
+    "held": "Garázsban",
+    "unplayed": "Soha nem játszott",
+    "sold": "Eladva"
+  },
+  "garageHint": {
+    "held": "Még a garázsban van, és legalább egyszer lejátszották.",
+    "unplayed": "Tulajdonban van, és soha nem vitték csatába. Ezekről sehol nincs rekord, ezért csak azért jelennek meg, mert ez a játékos hitelesítette a garázsát.",
+    "sold": "Korábban lejátszották, és már nincs tulajdonban. A Wargaming továbbra is jelentést tesz róluk, ezért szerepelnek itt egyáltalán."
+  },
+  "max": "Max.",
+  "min": "Min.",
+  "moe": {
+    "0": "Még nincs kiválósági jel"
+  },
+  "mom": {
+    "0": "Még nincs jelvény"
+  },
+  "none": "Nincs",
   "search": {
     "tanks": "Keresés {count} tank között",
     "rated-tanks": "Keresés {count} értékelt tank között",
@@ -7,20 +32,5 @@
     "clans": "Klánok keresése ({count})",
     "tournaments": "Tornák keresése ({count})",
     "teams": "Csapatok keresése ({count})"
-  },
-  "min": "Min.",
-  "max": "Max.",
-  "none": "Nincs",
-  "common-test": "Megváltozott a Közönséges Teszt hatására: új és újraegyensúlyozott járművek",
-  "category": {
-    "standard": "Standard",
-    "premium": "Prémium",
-    "reward": "Jutalom"
-  },
-  "moe": {
-    "0": "Még nincs kiválósági jel"
-  },
-  "mom": {
-    "0": "Még nincs jelvény"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Gracz zalogował się za pomocą identyfikatora Wargaming.net w dniu {date}, więc ta cena obejmuje pojazdy rzeczywiście znajdujące się w jego garażu. Sprzedane pojazdy są pomijane, a posiadane pojazdy, którymi nigdy nie rozegrano bitwy, są uwzględniane.",
+  "counts-every-vehicle-ever-driven": "Nikt nie zalogował się na to konto, więc uwzględniane są wszystkie pojazdy, którymi kiedykolwiek rozegrano bitwę. Wargaming informuje osoby postronne, którymi pojazdami grał gracz, ale nigdy nie wskazuje, które nadal posiada. Dlatego pojazdy sprzedane dawno temu są tutaj wyceniane, a pojazdy kupione i nigdy nieużyte w bitwie nie są uwzględniane.",
+  "unverified-garage": "Szacunkowa wartość garażu.",
+  "verified-garage": "Zweryfikowany garaż.",
+  "verify-my-garage": "Zweryfikuj mój garaż"
+}

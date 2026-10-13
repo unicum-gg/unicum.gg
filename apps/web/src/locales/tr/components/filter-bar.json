@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standart",
+    "premium": "Premium",
+    "reward": "Ödül"
+  },
+  "common-test": "Ortak Test tarafından değiştirilenler: yeni araçlar ve dengelenen araçlar",
+  "garage": {
+    "held": "Garajda",
+    "unplayed": "Hiç oynanmadı",
+    "sold": "Satıldı"
+  },
+  "garageHint": {
+    "held": "Hâlâ garajda ve en az bir kez sürülmüş.",
+    "unplayed": "Sahip olunan ve asla savaşa alınmayan. Bunlar hiçbir yerde rekora sahip değil, bu nedenle yalnızca bu oyuncu garajını doğruladığı için görünür.",
+    "sold": "Geçmişte sürülmüş ve artık sahip olunmayan. Wargaming bunlarla ilgili raporları tutuyor, bu nedenle burada görünüyorlar."
+  },
+  "max": "Maks",
+  "min": "Min",
+  "moe": {
+    "0": "Henüz nişan yok"
+  },
+  "mom": {
+    "0": "Henüz rozet yok"
+  },
+  "none": "Hiçbiri",
   "search": {
     "tanks": "{count} tank arasında ara",
     "rated-tanks": "{count} dereceli tank arasında ara",
@@ -7,20 +32,5 @@
     "clans": "{count} klan ara",
     "tournaments": "{count} turnuva ara",
     "teams": "{count} takım ara"
-  },
-  "min": "Min",
-  "max": "Maks",
-  "none": "Hiçbiri",
-  "common-test": "Ortak Test tarafından değiştirilenler: yeni araçlar ve dengelenen araçlar",
-  "category": {
-    "standard": "Standart",
-    "premium": "Premium",
-    "reward": "Ödül"
-  },
-  "moe": {
-    "0": "Henüz nişan yok"
-  },
-  "mom": {
-    "0": "Henüz rozet yok"
   }
 }

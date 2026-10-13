@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belønning"
+  },
+  "common-test": "Endret av Vanlig test: nye kjøretøy og ombalanserte kjøretøy",
+  "garage": {
+    "held": "I garasjen",
+    "unplayed": "Aldri spilt",
+    "sold": "Solgt"
+  },
+  "garageHint": {
+    "held": "Fortsatt i garasjen og kjørt minst én gang.",
+    "unplayed": "Eies og er aldri tatt i kamp. Disse har ingen rekord noe sted, så de vises bare fordi denne spilleren har verifisert garasjen sin.",
+    "sold": "Kjørt tidligere og ikke lenger eid. Wargaming fortsetter å rapportere dem, og det er derfor de i det hele tatt er her."
+  },
+  "max": "Maks",
+  "min": "Min",
+  "moe": {
+    "0": "Ingen merke ennå"
+  },
+  "mom": {
+    "0": "Ingen merke ennå"
+  },
+  "none": "Ingen",
   "search": {
     "tanks": "Søk blant {count} stridsvogner",
     "rated-tanks": "Søk blant {count} rangerte stridsvogner",
@@ -7,20 +32,5 @@
     "clans": "Søk blant {count} klaner",
     "tournaments": "Søk blant {count} turneringer",
     "teams": "Søk blant {count} lag"
-  },
-  "min": "Min",
-  "max": "Maks",
-  "none": "Ingen",
-  "common-test": "Endret av Vanlig test: nye kjøretøy og ombalanserte kjøretøy",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Belønning"
-  },
-  "moe": {
-    "0": "Ingen merke ennå"
-  },
-  "mom": {
-    "0": "Ingen merke ennå"
   }
 }

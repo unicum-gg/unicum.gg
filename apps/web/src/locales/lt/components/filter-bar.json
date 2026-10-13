@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standartinis",
+    "premium": "Premium",
+    "reward": "Atlygis"
+  },
+  "common-test": "Pakeista per Bendrą testą: naujos transporto priemonės ir iš naujo subalansuotos transporto priemonės",
+  "garage": {
+    "held": "Garaže",
+    "unplayed": "Niekada nežaista",
+    "sold": "Parduota"
+  },
+  "garageHint": {
+    "held": "Vis dar garaže ir vairuota bent kartą.",
+    "unplayed": "Priklauso žaidėjui ir niekada nebuvo paimta į mūšį. Šios transporto priemonės neturi jokio rekordo, todėl jos rodomos tik todėl, kad šis žaidėjas patvirtino savo garažą.",
+    "sold": "Anksčiau vairuota ir garaže nebeturima. Wargaming ją vis dar skelbia, todėl ji vis dar įtraukta."
+  },
+  "max": "Maks.",
+  "min": "Min.",
+  "moe": {
+    "0": "Ženklo dar nėra"
+  },
+  "mom": {
+    "0": "Ženklelio dar nėra"
+  },
+  "none": "Nėra",
   "search": {
     "tanks": "Ieškoti tarp {count} tankų",
     "rated-tanks": "Ieškoti tarp {count} reitinguojamų tankų",
@@ -7,20 +32,5 @@
     "clans": "Ieškoti klanų: {count}",
     "tournaments": "Ieškoti turnyrų: {count}",
     "teams": "Ieškoti komandų: {count}"
-  },
-  "min": "Min.",
-  "max": "Maks.",
-  "none": "Nėra",
-  "common-test": "Pakeista per Bendrą testą: naujos transporto priemonės ir iš naujo subalansuotos transporto priemonės",
-  "category": {
-    "standard": "Standartinis",
-    "premium": "Premium",
-    "reward": "Atlygis"
-  },
-  "moe": {
-    "0": "Ženklo dar nėra"
-  },
-  "mom": {
-    "0": "Ženklelio dar nėra"
   }
 }

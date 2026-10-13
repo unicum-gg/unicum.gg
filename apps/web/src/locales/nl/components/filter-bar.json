@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standaard",
+    "premium": "Premium",
+    "reward": "Beloning"
+  },
+  "common-test": "Veranderd door de Algemene Test: nieuwe en opnieuw gebalanceerde voertuigen",
+  "garage": {
+    "held": "In garage",
+    "unplayed": "Nooit gespeeld",
+    "sold": "Verkocht"
+  },
+  "garageHint": {
+    "held": "Nog in de garage en minstens één keer gereden.",
+    "unplayed": "In bezit en nooit in een gevecht genomen. Hiervoor bestaat nergens een record, dus ze verschijnen alleen omdat deze speler de garage heeft geverifieerd.",
+    "sold": "In het verleden gereden en niet langer in bezit. Wargaming behoudt de rapportage hierover, en daarom staan ze hier überhaupt vermeld."
+  },
+  "max": "Max",
+  "min": "Min",
+  "moe": {
+    "0": "Nog geen markering"
+  },
+  "mom": {
+    "0": "Nog geen badge"
+  },
+  "none": "Geen",
   "search": {
     "tanks": "Zoeken tussen {count} tanks",
     "rated-tanks": "Zoeken tussen {count} beoordeelde tanks",
@@ -7,20 +32,5 @@
     "clans": "Zoeken tussen {count} clans",
     "tournaments": "Zoeken tussen {count} toernooien",
     "teams": "Zoeken tussen {count} teams"
-  },
-  "min": "Min",
-  "max": "Max",
-  "none": "Geen",
-  "common-test": "Veranderd door de Algemene Test: nieuwe en opnieuw gebalanceerde voertuigen",
-  "category": {
-    "standard": "Standaard",
-    "premium": "Premium",
-    "reward": "Beloning"
-  },
-  "moe": {
-    "0": "Nog geen markering"
-  },
-  "mom": {
-    "0": "Nog geen badge"
   }
 }

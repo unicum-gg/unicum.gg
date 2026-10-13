@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Người chơi đã đăng nhập bằng ID Wargaming.net vào {date}, vì vậy giá này tính những xe tăng thực sự có trong nhà chứa xe của họ: những xe tăng họ đã bán bị loại khỏi tính toán, còn những xe tăng họ sở hữu nhưng chưa bao giờ chơi vẫn được tính.",
+  "counts-every-vehicle-ever-driven": "Không ai đã đăng nhập bằng tài khoản này, vì vậy số lượng bao gồm mọi xe tăng mà tài khoản này từng lấy vào trận đấu. Wargaming cho người ngoài biết những xe tăng nào đã được chơi, nhưng không bao giờ cho biết xe nào vẫn còn được sở hữu, vì vậy những xe tăng đã bán từ lâu vẫn được tính giá ở đây, còn những xe tăng đã mua nhưng chưa bao giờ chơi thì bị thiếu.",
+  "unverified-garage": "Nhà chứa xe ước tính.",
+  "verified-garage": "Nhà chứa xe đã xác minh.",
+  "verify-my-garage": "Xác minh nhà chứa xe của tôi"
+}

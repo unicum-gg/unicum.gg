@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "Spēlētājs pierakstījās ar Wargaming.net ID {date}, tāpēc šeit tiek aprēķināta cena transportlīdzekļiem, kas patiesībā atrodas viņa garāžā. Pārdotie transportlīdzekļi netiek iekļauti, bet īpašumā esošie transportlīdzekļi, kas nekad nav izspēlēti, tiek ieskaitīti.",
+  "counts-every-vehicle-ever-driven": "Neviens nav pierakstījies ar šo kontu, tāpēc šeit tiek skaitīti visi transportlīdzekļi, kas ar to jebkad paņemti kaujā. Wargaming svešiniekam pasaka, kuri transportlīdzekļi tika spēlēti, bet nekad nepasaka, kuri joprojām pieder spēlētājam. Tāpēc šeit tiek aprēķināta cena transportlīdzekļiem, kas pārdoti jau sen, bet trūkst transportlīdzekļu, kas nopirkti un nekad nav izspēlēti.",
+  "unverified-garage": "Aptuvenā garāža.",
+  "verified-garage": "Verificēta garāža.",
+  "verify-my-garage": "Verificēt manu garāžu"
+}

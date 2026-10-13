@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Pamantayan",
+    "premium": "Premium",
+    "reward": "Gantimpala"
+  },
+  "common-test": "Binago ng Karaniwang Pagsubok: mga bagong sasakyan at mga na-rebalance",
+  "garage": {
+    "held": "Nasa garahe",
+    "unplayed": "Hindi pa naglaro",
+    "sold": "Naibenta"
+  },
+  "garageHint": {
+    "held": "Nasa garahe pa rin at ginamit nang kahit isang beses.",
+    "unplayed": "Pagmamay-ari at hindi kailanman natanggap sa labanan. Walang rekord ang mga ito saanman, kaya lumilitaw lamang ang mga ito dahil beripikado ng manlalarong ito ang garahe nito.",
+    "sold": "Ginamit noong nakaraan at hindi na pagmamay-ari. Patuloy na iniuulat ng Wargaming ang mga ito, kaya narito ang mga ito."
+  },
+  "max": "Pinakamataas",
+  "min": "Pinakamababa",
+  "moe": {
+    "0": "Wala pang mark"
+  },
+  "mom": {
+    "0": "Wala pang badge"
+  },
+  "none": "Wala",
   "search": {
     "tanks": "Maghanap sa {count} mga tangke",
     "rated-tanks": "Maghanap sa {count} mga rated na tangke",
@@ -7,20 +32,5 @@
     "clans": "Maghanap ng {count} mga clan",
     "tournaments": "Maghanap ng {count} mga torneo",
     "teams": "Maghanap ng {count} mga team"
-  },
-  "min": "Pinakamababa",
-  "max": "Pinakamataas",
-  "none": "Wala",
-  "common-test": "Binago ng Karaniwang Pagsubok: mga bagong sasakyan at mga na-rebalance",
-  "category": {
-    "standard": "Pamantayan",
-    "premium": "Premium",
-    "reward": "Gantimpala"
-  },
-  "moe": {
-    "0": "Wala pang mark"
-  },
-  "mom": {
-    "0": "Wala pang badge"
   }
 }

@@ -1,4 +1,29 @@
 {
+  "category": {
+    "standard": "Standard",
+    "premium": "Premium",
+    "reward": "Belohnung"
+  },
+  "common-test": "Geändert durch den Gemeinsamen Test: neue und neu ausbalancierte Fahrzeuge",
+  "garage": {
+    "held": "In der Garage",
+    "unplayed": "Noch nicht gespielt",
+    "sold": "Verkauft"
+  },
+  "garageHint": {
+    "held": "Noch in der Garage und mindestens einmal gefahren.",
+    "unplayed": "Im Besitz und noch nie in ein Gefecht genommen. Für diese Fahrzeuge gibt es nirgendwo einen Rekord, daher erscheinen sie nur, weil dieser Spieler seine Garage verifiziert hat.",
+    "sold": "Früher gefahren und nicht mehr im Besitz. Wargaming meldet sie weiterhin, deshalb sind sie überhaupt hier."
+  },
+  "max": "Max.",
+  "min": "Min.",
+  "moe": {
+    "0": "Noch keine Erfolgsmarkierung"
+  },
+  "mom": {
+    "0": "Noch kein Meisterschaftsabzeichen"
+  },
+  "none": "Keine",
   "search": {
     "tanks": "{count} Panzer durchsuchen",
     "rated-tanks": "{count} gewertete Panzer durchsuchen",
@@ -7,20 +32,5 @@
     "clans": "{count} Clans durchsuchen",
     "tournaments": "{count} Turniere durchsuchen",
     "teams": "{count} Teams durchsuchen"
-  },
-  "min": "Min.",
-  "max": "Max.",
-  "none": "Keine",
-  "common-test": "Geändert durch den Gemeinsamen Test: neue und neu ausbalancierte Fahrzeuge",
-  "category": {
-    "standard": "Standard",
-    "premium": "Premium",
-    "reward": "Belohnung"
-  },
-  "moe": {
-    "0": "Noch keine Erfolgsmarkierung"
-  },
-  "mom": {
-    "0": "Noch kein Meisterschaftsabzeichen"
   }
 }
