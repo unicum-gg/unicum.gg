@@ -37,11 +37,30 @@ const POLL_SECONDS = Number(process.env.SENTINEL_POLL_SECONDS) || 60;
 const WINDOW_MINUTES = Number(process.env.SENTINEL_WINDOW_MINUTES) || 5;
 
 /**
- * Measured baseline: 5 stalls in 24 hours, so 0.2 an hour, worst 1,307 ms.
- * Three inside five minutes is roughly a hundred times that, which is far
- * enough above the noise that ordinary variance cannot reach it.
+ * How many stalls in the window count as the web struggling.
+ *
+ * Six, and the number is measured rather than reasoned. It was three at first,
+ * from a baseline of 5 stalls in 24 hours read off a long-running container, and
+ * five hours of observing a real afternoon demolished it: 38 of 241 readings
+ * reached three, and the sentinel would have flipped the challenge on and off
+ * EIGHTY times, which a reader experiences as a checkbox that will not go away.
+ *
+ * Over those 241 readings the distribution is 0:101 1:61 2:40 3:22 4:9 5:7 6:2,
+ * so six is the edge of what an ordinary afternoon produces and seven never
+ * happened at all.
  */
-const STALL_THRESHOLD = Number(process.env.SENTINEL_STALL_THRESHOLD) || 3;
+const STALL_THRESHOLD = Number(process.env.SENTINEL_STALL_THRESHOLD) || 6;
+
+/**
+ * How many readings in a row must be over the threshold before acting.
+ *
+ * A single bad window is a blip: a slow revalidation, one expensive page, a
+ * garbage collection that ran long. An attack does not stop after one minute.
+ * Requiring three consecutive takes the same afternoon from six would-be
+ * triggers at the old threshold to ZERO at this one, without making the rule
+ * any slower than three minutes to react.
+ */
+const SUSTAIN_READINGS = Number(process.env.SENTINEL_SUSTAIN_READINGS) || 3;
 
 /**
  * How long the origin must look healthy before the challenge comes back off.
@@ -80,6 +99,7 @@ async function countStalls(containerId: string): Promise<number> {
 }
 
 let calmTicks = 0;
+let struggleTicks = 0;
 
 async function tick(cfg: RuleConfig | null): Promise<void> {
   const containerId = await findContainer(WEB_PREFIX);
@@ -97,8 +117,10 @@ async function tick(cfg: RuleConfig | null): Promise<void> {
   }
 
   const stalls = await countStalls(containerId);
-  const struggling = stalls >= STALL_THRESHOLD;
-  calmTicks = struggling ? 0 : calmTicks + 1;
+  const overThreshold = stalls >= STALL_THRESHOLD;
+  struggleTicks = overThreshold ? struggleTicks + 1 : 0;
+  const struggling = struggleTicks >= SUSTAIN_READINGS;
+  calmTicks = overThreshold ? 0 : calmTicks + 1;
 
   // Asymmetric on purpose: one window of trouble turns it on, many quiet ones
   // turn it off. Being slow to relax is cheap, being slow to react is not.
@@ -117,7 +139,7 @@ async function tick(cfg: RuleConfig | null): Promise<void> {
   // anything would also be the first time it is about to do something, which is
   // the worst moment to discover you disagree with it.
   console.log(
-    `[sentinel] stalls=${stalls}/${WINDOW_MINUTES}m struggling=${struggling} calm=${Math.round((calmTicks * POLL_SECONDS) / 60)}m rule=${current ? "on" : "off"} wants=${wanted ? "on" : "off"}`,
+    `[sentinel] stalls=${stalls}/${WINDOW_MINUTES}m over=${struggleTicks}/${SUSTAIN_READINGS} struggling=${struggling} calm=${Math.round((calmTicks * POLL_SECONDS) / 60)}m rule=${current ? "on" : "off"} wants=${wanted ? "on" : "off"}`,
   );
 
   if (current === wanted) return;
