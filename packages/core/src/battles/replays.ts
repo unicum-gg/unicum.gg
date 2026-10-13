@@ -214,8 +214,14 @@ export type ReplayBattle = {
   key: string;
   /** The battle's own length in seconds, which anchors the replay's clock. */
   duration: number | null;
+  /** The arena it was played on, which names the picture to draw it over. */
+  mapName: string;
+  /** The mode, since a mode can redraw the map into a smaller play area. */
+  gameplayId: string | null;
   vehicles: {
     id: number;
+    /** Which side, so tracks can be coloured without the battle's document. */
+    team: number;
     lifeTime: number;
     died: boolean;
     /**
@@ -247,6 +253,8 @@ export async function replayBattle(
     .select({
       key: table.replayKey,
       duration: table.duration,
+      mapName: table.mapName,
+      gameplayId: table.gameplayId,
       vehicles: table.vehicles,
     })
     .from(table)
@@ -256,8 +264,11 @@ export async function replayBattle(
   return {
     key: row.key,
     duration: row.duration,
+    mapName: row.mapName,
+    gameplayId: row.gameplayId,
     vehicles: row.vehicles.map((vehicle) => ({
       id: vehicle.id,
+      team: vehicle.team,
       lifeTime: Number(vehicle.lifeTime ?? 0),
       // `deathReason` is -1 for a vehicle that was still alive at the end and
       // a reason code otherwise, so anything at or above zero died.

@@ -14,6 +14,10 @@ export const BattleReplayTrack = z.object({
     description:
       "The battle-scoped vehicle id, the same one the battle's participants are keyed by.",
   }),
+  team: z.number().meta({
+    description:
+      "Which side the vehicle fought on, so the tracks can be coloured without loading the battle's own document. 0 when the results name no team for it.",
+  }),
   diedAt: z.number().nullable().meta({
     description:
       "The clock tick this vehicle was destroyed, or null if it survived or the recording cannot say. In the recording's clock, which runs about fifty seconds ahead of the battle's because it starts during the countdown.",
@@ -184,6 +188,23 @@ export const BattleReplayResponse = z.object({
   deaths: z.array(BattleReplayDeath).meta({
     description:
       "Every vehicle destroyed, in order. The timing is the battle's own, so a tank nobody watched die is still here; the killer is the recording's, so it is null wherever the client could not see the shot.",
+  }),
+  mapImage: z.string().nullable().meta({
+    description:
+      "The minimap this battle was played on, resolved for its own mode. Here as well as on the battle itself so a caller holding only this answer can draw the positions on something.",
+  }),
+  mapBounds: z
+    .object({
+      bottomLeft: z.object({ x: z.number(), z: z.number() }),
+      upperRight: z.object({ x: z.number(), z: z.number() }),
+    })
+    .nullable()
+    .meta({
+      description:
+        "The arena's extent in metres, which is what turns a position in these tracks into a place on `mapImage`. Same shape as on the battle itself.",
+    }),
+  mapOverlay: z.unknown().nullable().meta({
+    description: "The mode's own overlay for that map, when it has one.",
   }),
   tracks: z.array(BattleReplayTrack).meta({
     description:

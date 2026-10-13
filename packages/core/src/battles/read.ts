@@ -235,7 +235,14 @@ function outcomeOf(team: number, winner: number | null): BattleOutcome {
  * arena's, or the vehicles and the flags are projected differently and the
  * drawing is quietly wrong rather than visibly broken.
  */
-function drawing(
+/**
+ * The picture, its extent and the mode's overlay, all three agreeing.
+ *
+ * Exported because two readers need it: the battle's own document, and the
+ * replay, whose caller may hold nothing else. Resolving the arena twice would
+ * be two places for the "a mode can shrink the map" rule to drift apart.
+ */
+export function drawing(
   arena: ArenaDrawing | undefined,
   gameplay: string | null,
 ): {

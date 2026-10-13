@@ -10,6 +10,8 @@ import {
 } from "@unicum.gg/shared";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import { fetchReplay, replayBattle } from "@unicum.gg/core/battles/replays";
+import { drawing } from "@unicum.gg/core/battles/read";
+import { minimapsByArena } from "@unicum.gg/core/wargaming/wot/maps/index";
 import { measured } from "@/services/perf";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { BattleReplayResponse } from "./schema.api";
@@ -70,6 +72,8 @@ const ALLY_COLOUR = "#80D63A";
 /** One vehicle's path, as `[clock ticks, x, z]`, and when it stopped living. */
 type Track = {
   id: number;
+  /** Which side it fought on, 0 when the results name none. */
+  team: number;
   points: [number, number, number][];
   /**
    * The tick this vehicle was destroyed, or null if it survived.
@@ -274,12 +278,17 @@ async function GET__perf(
   const stride =
     Number.isFinite(every) && every > 0 ? Math.round(every * TICKS) : 0;
 
+  const teams = new Map(battle.vehicles.map((v) => [v.id, v.team]));
   const health = new Map(motion.health.map((h) => [h.id, h.points]));
   const maxHealth = new Map(battle.vehicles.map((v) => [v.id, v.maxHealth]));
   const tracks: Track[] = built.map((track) => {
     const life = died.get(track.id);
     return {
       id: track.id,
+      // Which side, so a reader can colour the dots without the battle's own
+      // document. Zero when the results do not name one, which is a vehicle
+      // we cannot put on a team rather than team zero.
+      team: teams.get(track.id) ?? 0,
       points: everyNTicks(track.points, stride),
       diedAt:
         life !== undefined && offset !== null
@@ -335,6 +344,12 @@ async function GET__perf(
     {
       duration: Math.round(motion.duration),
       ticksPerSecond: TICKS,
+      // The map and its extent, so a caller can place these positions without
+      // resolving the arena itself. The viewer on the site gets them from the
+      // battle it already loaded; a caller with nothing but this answer -- the
+      // game's own results screen, for one -- would otherwise have to guess a
+      // scale from the points, which puts every vehicle slightly wrong.
+      ...drawing((await minimapsByArena(region)).get(battle.mapName), battle.gameplayId),
       // When the countdown ends, in this same clock. Before it nothing moves,
       // so a reader of these tracks cannot tell a vehicle standing on its
       // spawn from one nobody can see: positions are only written down when
