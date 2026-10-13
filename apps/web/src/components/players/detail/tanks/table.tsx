@@ -22,16 +22,20 @@ import { NationFlag } from "@/components/tanks/nation-flag";
 import {
   PLAYER_COLUMNS,
   PLAYER_COLUMN_BY_KEY,
+  PLAYER_RANGE_COLUMNS,
   PlayerColumnSelector,
-  ratingForMetric,
+  type PlayerSortCtx,
   COMPACT_COLUMN_KEYS,
   usePlayerColumns,
 } from "@/components/players/detail/tanks/vehicle-columns";
+import {
+  MarkTargetSelect,
+  useMarkTarget,
+} from "@/components/players/detail/tanks/mark-target-select";
 import { TankIcon } from "@/components/tanks/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/tanks/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { TablePager, usePagination } from "@/components/table-pager";
-import { metricLabel } from "@/components/tanks/perf-columns";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
 import {
   GarageState,
@@ -63,7 +67,7 @@ const TYPE_ABBR: Record<string, string> = {
 function sortValue(
   row: PlayerTankRow,
   key: string,
-  metric: RatingMetric,
+  ctx: PlayerSortCtx,
 ): number | string {
   switch (key) {
     case "nation":
@@ -75,7 +79,7 @@ function sortValue(
     case "name":
       return row.name.toLowerCase();
     default:
-      return PLAYER_COLUMN_BY_KEY[key]?.sortValue(row, metric) ?? -1;
+      return PLAYER_COLUMN_BY_KEY[key]?.sortValue(row, ctx) ?? -1;
   }
 }
 
@@ -83,13 +87,13 @@ function compareRows(
   a: PlayerTankRow,
   b: PlayerTankRow,
   state: SortState,
-  metric: RatingMetric,
+  ctx: PlayerSortCtx,
 ): number {
   // Default: most battles first.
   if (!state) return b.battles - a.battles;
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
-  const av = sortValue(a, state.key, metric);
-  const bv = sortValue(b, state.key, metric);
+  const av = sortValue(a, state.key, ctx);
+  const bv = sortValue(b, state.key, ctx);
   if (typeof av === "string" && typeof bv === "string") {
     return mul * av.localeCompare(bv);
   }
@@ -130,27 +134,37 @@ export function PlayerTanksTable({
     key: "battles",
     direction: SortDirection.Desc,
   });
+  const { target: markTarget, pinned: markPinned } = useMarkTarget();
+  const sortCtx: PlayerSortCtx = useMemo(
+    () => ({ metric, markTarget }),
+    [metric, markTarget],
+  );
+  // A link that names a mark is asking "which of these could I take there", so
+  // the table opens on that answer rather than on the battle count. Once only,
+  // like the filters' own seed from the URL: re-applying it would undo the
+  // reader's next column click, and changing the target afterwards is a change
+  // of bar rather than a new question.
+  const seededSort = useRef(false);
+  useEffect(() => {
+    if (seededSort.current || !markPinned) return;
+    seededSort.current = true;
+    setSort({ key: "markReach", direction: SortDirection.Desc });
+  }, [markPinned]);
   const [visibleKeys] = usePlayerColumns();
 
-  // Numeric columns the min/max range filter can target (the rating column
-  // follows the selected metric, like the table's own rating column).
+  // Numeric columns the min/max range filter can target, taken from the columns
+  // themselves so a new one arrives in the filter the day it is added rather
+  // than whenever somebody notices. Labels follow the same headings as the
+  // table, which is what makes the two name the same thing: both the rating and
+  // the mark column rename themselves after the reader's own choice.
   const rangeCols: RangeColumn<PlayerTankRow>[] = useMemo(
-    () => [
-      { key: "battles", label: "Battles", value: (r) => r.battles },
-      { key: "avgDamage", label: "Avg damage", value: (r) => r.avgDamage },
-      { key: "avgXp", label: "Avg XP", value: (r) => r.avgXp },
-      {
-        key: "winrate",
-        label: "WR %",
-        value: (r) => (r.winrate != null ? r.winrate * 100 : null),
-      },
-      {
-        key: "rating",
-        label: metricLabel(metric),
-        value: (r) => ratingForMetric(r, metric),
-      },
-    ],
-    [metric],
+    () =>
+      PLAYER_RANGE_COLUMNS.map((c) => ({
+        key: c.key,
+        label: c.header ? c.header(sortCtx) : c.label,
+        value: (r: PlayerTankRow) => c.rangeValue(r, sortCtx),
+      })),
+    [sortCtx],
   );
 
   // The filter hook names these for what they hold, since the tank catalogue
@@ -176,10 +190,14 @@ export function PlayerTanksTable({
       })),
     [vehicles],
   );
+  const hasMarkReach = useMemo(
+    () => vehicles.some((v) => v.markReach != null),
+    [vehicles],
+  );
   const { filtered, filters } = useTankFilters(filterable, rangeCols, "battles");
   const sorted = useMemo(
-    () => [...filtered].sort((a, b) => compareRows(a, b, sort, metric)),
-    [filtered, sort, metric],
+    () => [...filtered].sort((a, b) => compareRows(a, b, sort, sortCtx)),
+    [filtered, sort, sortCtx],
   );
   const { paged, pager } = usePagination(sorted);
 
@@ -214,11 +232,17 @@ export function PlayerTanksTable({
     () =>
       PLAYER_COLUMNS.filter(
         (c) =>
-          visibleKeys.has(c.key) &&
+          // A reader who asked for a mark asked for the column that answers
+          // it, whether or not their stored columns hold it: the set is a
+          // cookie, so everybody who had ever touched it would otherwise
+          // follow a link from the marks panel to a table with no mark column.
+          (visibleKeys.has(c.key) || (markPinned && c.key === "markReach")) &&
           (!selectedSlug || COMPACT_COLUMN_KEYS.has(c.key)),
       ),
-    [visibleKeys, selectedSlug],
+    [visibleKeys, selectedSlug, markPinned],
   );
+
+  const showsMarkColumn = visibleColumns.some((c) => c.key === "markReach");
 
   function toggleSort(key: string) {
     setSort((prev) => {
@@ -243,7 +267,20 @@ export function PlayerTanksTable({
           searchNoun={FilterSubject.Tanks}
           // Hidden while a record is open: the columns are imposed then, and a
           // picker that answers "7 of 7" over a four-column table is a lie.
-          extra={selectedSlug ? undefined : <PlayerColumnSelector />}
+          extra={
+            selectedSlug ? undefined : (
+              <>
+                {/* Only where it has something to act on. Two ways it can
+                    have nothing: a garage with no mark bars anywhere (every
+                    vehicle under tier 5, or a region whose bars failed to
+                    load), and a reader whose stored columns leave the mark
+                    column out, where the control would change a column that is
+                    not on the table. */}
+                {hasMarkReach && showsMarkColumn && <MarkTargetSelect />}
+                <PlayerColumnSelector />
+              </>
+            )
+          }
         />
       </div>
       <div className="border-t border-fd-border">
@@ -308,7 +345,7 @@ export function PlayerTanksTable({
                     hideOnMobile={c.hideOnMobile}
                     tooltip={statLabel(c.tip, tStats)}
                   >
-                    {statLabel(c.header ? c.header(metric) : c.label, tStats)}
+                    {statLabel(c.header ? c.header(sortCtx) : c.label, tStats)}
                   </SortableHead>
                 ))}
               </TableRow>
@@ -420,7 +457,13 @@ export function PlayerTanksTable({
                       </span>
                     </TableCell>
                     {visibleColumns.map((c) => {
-                      const { node, className } = c.cell(r, { region, metric, num, t: tCols });
+                      const { node, className } = c.cell(r, {
+                        region,
+                        metric,
+                        markTarget,
+                        num,
+                        t: tCols,
+                      });
                       return (
                         <TableCell
                           key={c.key}

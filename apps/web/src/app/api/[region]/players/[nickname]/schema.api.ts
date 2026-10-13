@@ -66,6 +66,25 @@ const playerDerivedStats = z
       "Per-tank-breakdown derivations: average tier, assistance damages and WN7/WN8/WNX per column.",
   });
 
+const markReach = z
+  .object({
+    combined: z.number(),
+    battles: z.number(),
+    window: z.enum(MarkWindow).meta({
+      description:
+        "Which average `combined` was taken over: the last 30 days when the vehicle saw enough battles, its lifetime otherwise.",
+      "x-enum-source": "MARK_WINDOW",
+    } as EnumMeta),
+    mark1: z.number(),
+    mark2: z.number(),
+    mark3: z.number(),
+  })
+  .meta({
+    id: "TankMarkReach",
+    description:
+      "Where the account's own combined damage sits against the region's three Marks of Excellence bars on this vehicle: `combined` over `markN` is how much of that mark's bar the player's average covers, and 1 or more means it already clears it. Null where no honest reading exists: below tier 5 (the game awards no marks there), under 25 battles on the vehicle, or when the region has no usable bars for it. This is an average against a published bar, never the game's own rolling-window progress, which is `moePercent`.",
+  });
+
 export const playerVehicle = z
   .object({
     tankId: z.number(),
@@ -91,6 +110,9 @@ export const playerVehicle = z
       .number()
       .nullable()
       .meta({ description: "Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it." }),
+    // Optional for the reason `owned` above is: a response cached under the
+    // previous shape carries no such field and the client parses this schema.
+    markReach: markReach.nullable().optional(),
     battles: z.number(),
     avgDamage: z.number().nullable(),
     avgXp: z.number().nullable(),

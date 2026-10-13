@@ -5221,6 +5221,7 @@ export interface components {
             moe: number | null;
             /** @description Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it. */
             moePercent: number | null;
+            markReach?: components["schemas"]["TankMarkReach"] | null;
             battles: number;
             avgDamage: number | null;
             avgXp: number | null;
@@ -6201,6 +6202,19 @@ export interface components {
             directives: components["schemas"]["loadoutDirective"][];
             /** @description The consumables the vehicle can mount (repair/first-aid kits, extinguishers, food, fuel, ...) in three generic slots. */
             consumables: components["schemas"]["loadoutConsumable"][];
+        };
+        /** @description Where the account's own combined damage sits against the region's three Marks of Excellence bars on this vehicle: `combined` over `markN` is how much of that mark's bar the player's average covers, and 1 or more means it already clears it. Null where no honest reading exists: below tier 5 (the game awards no marks there), under 25 battles on the vehicle, or when the region has no usable bars for it. This is an average against a published bar, never the game's own rolling-window progress, which is `moePercent`. */
+        TankMarkReach: {
+            combined: number;
+            battles: number;
+            /**
+             * @description Which average `combined` was taken over: the last 30 days when the vehicle saw enough battles, its lifetime otherwise.
+             * @enum {string}
+             */
+            window: "recent" | "lifetime";
+            mark1: number;
+            mark2: number;
+            mark3: number;
         };
         /** @description The combined-damage thresholds for the 1st, 2nd and 3rd Marks of Excellence on a tank, mirrored per region. */
         TankMarksOfExcellence: {

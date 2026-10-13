@@ -10,6 +10,11 @@ import {
 } from "@/components/panel";
 import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
 import { MoMIcon } from "@/components/tanks/mom-icon";
+import Link from "@/components/link";
+import {
+  MARK_TARGET_PARAM,
+  MarkTarget,
+} from "@/components/players/detail/tanks/mark-target";
 import { MarksMatrix, type MatrixLevel } from "./matrix";
 import { MarksReach } from "./reach";
 
@@ -186,13 +191,27 @@ export function PlayerMarksPanels({
             lift/drag rows so a name and its number are never an inch apart. */}
         {hasMarks && reach.length > 0 && (
           <div className="border-t border-fd-border">
-            <div className="px-4 py-2">
-              <span className="text-sm font-semibold">
-                {t("reach.heading")}
-              </span>
-              <p className="mt-0.5 text-xs text-fd-muted-foreground">
-                {t("reach.description")}
-              </p>
+            <div className="flex items-baseline justify-between gap-3 px-4 py-2">
+              <div>
+                <span className="text-sm font-semibold">
+                  {t("reach.heading")}
+                </span>
+                <p className="mt-0.5 text-xs text-fd-muted-foreground">
+                  {t("reach.description")}
+                </p>
+              </div>
+              {/* This list is deliberately only the vehicles already past a bar
+                  they do not carry, which leaves out the one a reader asking
+                  "what could I take to three marks" most wants: the gun sitting
+                  just under it. The table answers that, with every vehicle
+                  against the bar of whichever mark is picked, so the link is
+                  what keeps the panel from reading as the whole answer. */}
+              <Link
+                href={`${tanksHref}?${MARK_TARGET_PARAM}=${MarkTarget.Next}`}
+                className="shrink-0 text-xs font-medium text-fd-muted-foreground hover:text-fd-foreground hover:underline"
+              >
+                {t("reach.all-vehicles")}
+              </Link>
             </div>
             <div className="grid gap-px border-t border-fd-border bg-fd-border md:grid-cols-2">
               <div className="bg-fd-card">

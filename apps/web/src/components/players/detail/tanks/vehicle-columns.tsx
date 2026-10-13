@@ -16,11 +16,17 @@ import {
   useState,
 } from "react";
 import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
+import {
+  MARK_TARGET_LABEL,
+  MarkTarget,
+  markBarRatio,
+  markFor,
+} from "./mark-target";
 import { MoMIcon } from "@/components/tanks/mom-icon";
 import { Hint } from "@/components/hint";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { useCookie } from "@/hooks/use-cookie";
-import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type PlayerTankRow } from "@unicum.gg/shared";
+import { markBar, MarkWindow, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type PlayerTankRow } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.player_vehicle_columns";
@@ -33,6 +39,13 @@ const DEC2_FORMAT = {
 const PCT2_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
+} as const;
+// One decimal rather than two: the column is read down rather than across, and
+// a tenth of a percent is already finer than the estimate behind it. Rounding
+// to a whole percent would print the same figure on rows the sort separates.
+const PCT1_FORMAT = {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
 } as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
@@ -51,12 +64,20 @@ function ratingColorClass(value: number, metric: RatingMetric): string {
   return RATING_COLOR_CLASS[wnxColor(value)];
 }
 
+/** What a column needs to answer for a row beyond the row itself: the reader's
+ * two choices, which no column definition can read on its own (they are module
+ * constants, so they have no hook). Split from `PlayerCellCtx` because sorting
+ * needs these and none of the rendering machinery. */
+export type PlayerSortCtx = {
+  metric: RatingMetric;
+  markTarget: MarkTarget;
+};
+
 /** What a cell needs beyond its own row. `num` rides here rather than being a
  * third parameter: the context already exists for exactly this, and a column
  * definition is data at module scope that cannot read a hook. */
-export type PlayerCellCtx = {
+export type PlayerCellCtx = PlayerSortCtx & {
   region: Region;
-  metric: RatingMetric;
   num: NumberFormatter;
   /** This file's own namespace, handed in like `num`: a column is a module
    * constant, so it has no hook of its own to read a string with. */
@@ -70,10 +91,26 @@ export type PlayerColumn = {
   align: "center" | "end";
   defaultVisible: boolean;
   hideOnMobile?: boolean;
-  // The rating column's header follows the selected metric.
-  header?: (metric: RatingMetric) => string;
+  // The rating and mark columns' headers follow the reader's own choices.
+  header?: (ctx: PlayerSortCtx) => string;
   cell: (r: PlayerTankRow, ctx: PlayerCellCtx) => PlayerCell;
-  sortValue: (r: PlayerTankRow, metric: RatingMetric) => number;
+  sortValue: (r: PlayerTankRow, ctx: PlayerSortCtx) => number;
+  /**
+   * What the min/max filter ranges over, in the unit the cell SHOWS (a win rate
+   * is a percentage here and a fraction on the row), or null on a row the
+   * column cannot answer for.
+   *
+   * Declared here rather than listed again beside the table, which is how the
+   * filter came to be missing half the columns: the list was written once and
+   * every column added afterwards was invisible to it. A column without one is
+   * deliberately not rangeable (the mastery badge and the mark count are small
+   * value sets, and the chip rows filter those exactly).
+   *
+   * Null rather than `sortValue`'s -1: that sentinel exists to sort an unknown
+   * below everything, and ranged over it would make `min: -5` keep every
+   * vehicle the column knows nothing about.
+   */
+  rangeValue?: (r: PlayerTankRow, ctx: PlayerSortCtx) => number | null;
 };
 
 export const PLAYER_COLUMNS: PlayerColumn[] = [
@@ -137,6 +174,68 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     sortValue: (r) => r.moePercent ?? (r.moe != null ? r.moe * 25 : -1),
   },
   {
+    key: "markReach",
+    // The heading names the bar the column is dividing by, which the reader
+    // picks beside the column selector. The default is the one the garage
+    // reads naturally: every gun against the mark it would earn next.
+    label: MARK_TARGET_LABEL[MarkTarget.Next],
+    tip: "How much of that mark's combined-damage bar this account's own average on the vehicle covers. 100% is the bar itself",
+    align: "end",
+    defaultVisible: true,
+    hideOnMobile: true,
+    header: ({ markTarget }) => MARK_TARGET_LABEL[markTarget],
+    cell: (r, ctx) => {
+      const reach = r.markReach;
+      const mark = markFor(ctx.markTarget, r.moe);
+      const ratio = markBarRatio(reach, ctx.markTarget, r.moe);
+      // No bars for the vehicle, too few battles on it, a tier the game puts no
+      // marks on, or a gun with three marks under the "next mark" heading,
+      // which has no next mark. Said as an absence rather than as a zero, which
+      // would sort below vehicles that are merely far off.
+      if (!reach || ratio == null || mark == null) return { node: DASH };
+      const cleared = ratio >= 1;
+      return {
+        node: (
+          // The bar is named, not just given. Under `Next` the column heading
+          // cannot say which mark a row was measured against, and for a vehicle
+          // whose marks we have never read (the whole garage, on an account no
+          // page view has ever sent through the portal) the next mark is taken
+          // as the first, which is a guess the figure must not hide.
+          <Hint
+            content={ctx.t(
+              reach.window === MarkWindow.Recent
+                ? "mark-bar-title-recent"
+                : "mark-bar-title",
+              {
+                combined: ctx.num(INT_FORMAT).format(reach.combined),
+                bar: ctx.num(INT_FORMAT).format(markBar(reach, mark)),
+                battles: ctx.num(INT_FORMAT).format(reach.battles),
+                marks: mark,
+              },
+            )}
+          >
+            <span
+              className="tabular-nums"
+              // Coloured only once the average is past the bar, in the mark's
+              // own colour: that is the one state worth spotting down a column
+              // of three hundred rows, and it is the same grammar the marks
+              // panel uses for the vehicles already over a bar.
+              style={cleared ? { color: MOE_COLORS[mark] } : undefined}
+            >
+              {ctx.num(PCT1_FORMAT).format(ratio * 100)}%
+            </span>
+          </Hint>
+        ),
+      };
+    },
+    sortValue: (r, ctx) =>
+      markBarRatio(r.markReach, ctx.markTarget, r.moe) ?? -1,
+    rangeValue: (r, ctx) => {
+      const ratio = markBarRatio(r.markReach, ctx.markTarget, r.moe);
+      return ratio == null ? null : ratio * 100;
+    },
+  },
+  {
     key: "battles",
     label: "Battles",
     tip: "Total games played on the tank",
@@ -144,6 +243,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     defaultVisible: true,
     cell: (r, { num }) => ({ node: num(INT_FORMAT).format(r.battles) }),
     sortValue: (r) => r.battles,
+    rangeValue: (r) => r.battles,
   },
   {
     key: "avgDamage",
@@ -152,6 +252,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     defaultVisible: true,
     cell: (r, { num }) => ({ node: r.avgDamage != null ? num(INT_FORMAT).format(r.avgDamage) : DASH }),
     sortValue: (r) => r.avgDamage ?? -1,
+    rangeValue: (r) => r.avgDamage,
   },
   {
     key: "avgXp",
@@ -161,6 +262,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     hideOnMobile: true,
     cell: (r, { num }) => ({ node: r.avgXp != null ? num(INT_FORMAT).format(r.avgXp) : DASH }),
     sortValue: (r) => r.avgXp ?? -1,
+    rangeValue: (r) => r.avgXp,
   },
   {
     key: "winrate",
@@ -174,13 +276,15 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
         r.winrate != null ? RATING_COLOR_CLASS[winrateColor(r.winrate)] : undefined,
     }),
     sortValue: (r) => r.winrate ?? -1,
+    // Percentage points, like the cell: a reader typing 55 means 55%.
+    rangeValue: (r) => (r.winrate != null ? r.winrate * 100 : null),
   },
   {
     key: "rating",
     label: "Rating (WN)",
     align: "end",
     defaultVisible: true,
-    header: (m) => metricLabel(m),
+    header: ({ metric }) => metricLabel(metric),
     cell: (r, { metric, num }) => {
       const v = ratingForMetric(r, metric);
       return {
@@ -188,9 +292,19 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
         className: v != null ? ratingColorClass(v, metric) : undefined,
       };
     },
-    sortValue: (r, m) => ratingForMetric(r, m) ?? -1,
+    sortValue: (r, { metric }) => ratingForMetric(r, metric) ?? -1,
+    rangeValue: (r, { metric }) => ratingForMetric(r, metric),
   },
 ];
+
+/** The columns the min/max filter can range over, in table order. */
+export const PLAYER_RANGE_COLUMNS = PLAYER_COLUMNS.filter(
+  (
+    c,
+  ): c is PlayerColumn & {
+    rangeValue: NonNullable<PlayerColumn["rangeValue"]>;
+  } => c.rangeValue != null,
+);
 
 export const PLAYER_COLUMN_BY_KEY: Record<string, PlayerColumn> =
   Object.fromEntries(PLAYER_COLUMNS.map((c) => [c.key, c]));

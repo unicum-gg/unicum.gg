@@ -51,6 +51,7 @@ import {
 import {
   diffTanks,
   tankSnapshotsToTankStats,
+  type TankSnapshotMap,
 } from "@unicum.gg/core/players/tanks";
 import {
   loadPlayerClanHistoryFromWG,
@@ -74,7 +75,7 @@ import {
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { computePlayerValuation, type TankEconomics } from "@unicum.gg/shared";
 import { loadPlayerGarage } from "@unicum.gg/core/players/garage";
-import { buildPlayerMarkProgress } from "@unicum.gg/shared";
+import { buildPlayerMarkProgress, withTankMarkReach } from "@unicum.gg/shared";
 import { getTankMoeByRegion } from "@unicum.gg/core/moe";
 
 // The client-safe shapes (`PlayerDetailData`, the stronghold-mode types) and
@@ -240,29 +241,36 @@ export async function buildPlayerDetail(args: {
       wnxExpected,
     ),
   );
+  // Where each vehicle's own combined damage sits against the region's mark
+  // bars, attached to the rows rather than computed twice: the panel's reach
+  // list and the Tanks tab's mark column are the same arithmetic asked of
+  // different subsets, and two of it is two answers waiting to disagree.
+  const recent = recentTankStats(
+    tanks,
+    initial.periodSnapshots.d30,
+    initial.periodTankSnapshots.d30,
+  );
   const vehicles = tracedSync("tankRows", () =>
-    buildPlayerTankRows(
+    withTankMarkReach(
+      buildPlayerTankRows(
+        tanks,
+        encyclopedia,
+        wn8Expected,
+        wnxExpected,
+        economics,
+        garage?.tankIds ?? null,
+      ),
       tanks,
-      encyclopedia,
-      wn8Expected,
-      wnxExpected,
-      economics,
-      garage?.tankIds ?? null,
+      recent,
+      moeThresholds,
     ),
   );
 
   // Marks, mastery and the vehicles playing above their gun. Pure arithmetic
-  // over rows the payload already holds: `vehicles` carries the marks and
-  // badges, `periodTanks.d30` the recent form the reach estimate prefers over
-  // the lifetime average.
-  //
-  // Except when it is not recent at all: `periodTankDiff` hands back the whole
-  // `tanks` array when the 30-day baseline is the poisoned first snapshot, and
-  // the reach rows would then label a lifetime average as 30-day form. Identity
-  // is the check, since that is exactly how the fallback returns it.
-  const recentTanks = periodTanks.d30 === tanks ? null : periodTanks.d30;
+  // over rows the payload already holds: `vehicles` carries the marks, the
+  // badges and the mark reach attached above.
   const markProgress = tracedSync("markProgress", () =>
-    buildPlayerMarkProgress(vehicles, tanks, recentTanks, moeThresholds),
+    buildPlayerMarkProgress(vehicles),
   );
 
   return {
@@ -361,6 +369,27 @@ export async function loadPlayerDetail(
 }
 
 /**
+ * The per-tank form of the last 30 days, or null when there is no such thing.
+ *
+ * What the mark estimate compares against: Wargaming scores a mark on a rolling
+ * window of recent battles, so a 30-day average is the closer analogue of it
+ * than a career one. Null is returned rather than the lifetime array, in three
+ * cases that all mean the same thing: no baseline, a baseline holding no tanks,
+ * and the poisoned first snapshot (`battles === 0`, where WG's aggregate lagged
+ * the per-tank data at first sight) whose diff IS the lifetime total. Labelling
+ * a career average as 30-day form is the one mistake here that cannot be seen
+ * in the output.
+ */
+function recentTankStats(
+  tanks: TankStats[],
+  baseline: PlayerSnapshot | null,
+  baselineTanks: TankSnapshotMap,
+): TankStats[] | null {
+  if (!baseline || baseline.battles === 0) return null;
+  return baselineTanks.size > 0 ? diffTanks(tanks, baselineTanks) : null;
+}
+
+/**
  * Loader for the on-demand per-tank list endpoint (the heavy `vehicles` array
  * that used to ride along in the detail payload). Resolves the player from the
  * DB, loads the latest per-tank snapshots and builds the rows the exact same way
@@ -377,13 +406,18 @@ export async function loadPlayerTanks(
 
   const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
   await applyGarageMarks(region, initial.player.accountId, tanks);
-  const [encyclopedia, wn8Expected, wnxExpected, specs, garage] =
+  const [encyclopedia, wn8Expected, wnxExpected, specs, garage, moeThresholds] =
     await Promise.all([
       getVehicleEncyclopedia(region),
       getWN8ExpectedValues(),
       getWNXExpectedValues(),
       getAllTankSpecs(),
       loadPlayerGarage(region, initial.player.accountId),
+      // The region's mark bars, for the mark column. A cached catalogue read
+      // like the detail endpoint's, so the heaviest list we serve pays nothing
+      // for it, and the table is where the reader asks "which of these could I
+      // mark" in the first place.
+      getTankMoeByRegion(region),
     ]);
   const economics = new Map<number, TankEconomics>();
   for (const [tankId, s] of specs) {
@@ -393,13 +427,22 @@ export async function loadPlayerTanks(
       researchXp: s.researchXp,
     });
   }
-  return buildPlayerTankRows(
+  return withTankMarkReach(
+    buildPlayerTankRows(
+      tanks,
+      encyclopedia,
+      wn8Expected,
+      wnxExpected,
+      economics,
+      garage?.tankIds ?? null,
+    ),
     tanks,
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
-    economics,
-    garage?.tankIds ?? null,
+    recentTankStats(
+      tanks,
+      initial.periodSnapshots.d30,
+      initial.periodTankSnapshots.d30,
+    ),
+    moeThresholds,
   );
 }
 

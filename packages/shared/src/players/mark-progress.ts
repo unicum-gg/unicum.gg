@@ -55,6 +55,26 @@ export enum MarkWindow {
 }
 
 /**
+ * Where an account's own combined damage sits against the region's three bars
+ * on one vehicle.
+ *
+ * The bars ride the row rather than being looked up again by whoever reads it.
+ * They belong to the vehicle rather than to the player, but a player's table
+ * holds one row per vehicle anyway, and the figure alone would leave a reader
+ * unable to say what it is a figure OF. With both, any of the three marks can
+ * be asked about without a second round trip, which is what the Tanks tab's
+ * mark column is: the arithmetic the reach list below does, asked of every
+ * vehicle instead of only the ones already past a bar.
+ */
+export type TankMarkReach = MarkThresholds & {
+  /** The account's combined damage per battle over `window`. */
+  combined: number;
+  /** Battles that average covers. */
+  battles: number;
+  window: MarkWindow;
+};
+
+/**
  * A vehicle the player performs above their marks on.
  *
  * The comparison is between two things the player already owns: the marks on
@@ -152,11 +172,16 @@ function emptyMasteryRow(tier: number): MasteryTierRow {
 const MARK_KEY = ["none", "mark1", "mark2", "mark3"] as const;
 const MASTERY_KEY = ["none", "class3", "class2", "class1", "ace"] as const;
 
+/**
+ * The panel's counts and the vehicles worth converting, from the rows alone.
+ *
+ * Everything the reach half needs is already on the row (`withTankMarkReach`
+ * puts it there), so this takes no thresholds and no stats of its own. Two
+ * copies of "where does this average sit against the bars" is exactly how the
+ * panel and the Tanks tab would come to disagree about one vehicle.
+ */
 export function buildPlayerMarkProgress(
   vehicles: PlayerTankRow[],
-  tanks: TankStats[],
-  recentTanks: TankStats[] | null,
-  thresholds: Map<number, MarkThresholds>,
 ): PlayerMarkProgress {
   const marksByTier = new Map<number, MarksTierRow>();
   const masteryByTier = new Map<number, MasteryTierRow>();
@@ -221,35 +246,103 @@ export function buildPlayerMarkProgress(
       total: masteryTotal,
       byTier: [...masteryByTier.values()].sort((a, b) => b.tier - a.tier),
     },
-    reach: buildReach(vehicles, tanks, recentTanks, thresholds),
+    reach: buildReach(vehicles),
   };
 }
 
-function buildReach(
+function buildReach(vehicles: PlayerTankRow[]): MarkReachEntry[] {
+  const entries: MarkReachEntry[] = [];
+
+  for (const v of vehicles) {
+    // The row's own reach carries the tier floor, the battle floor and the
+    // sanity check on the region's bars, so a vehicle with one has an average
+    // worth comparing. What is left is this list's own condition: a gun whose
+    // marks we know and that still has one to earn, on a vehicle the
+    // encyclopedia can draw (the row shows an icon and a class).
+    const reach = v.markReach;
+    if (!reach) continue;
+    if (v.tier == null || v.tag == null || v.type == null) continue;
+    if (v.moe == null || !Number.isInteger(v.moe) || v.moe < 0 || v.moe >= 3)
+      continue;
+
+    const playingAt = marksClearedBy(reach.combined, reach);
+    // Performing at or below the marks already on the gun is the normal case
+    // and says nothing: the list is the vehicles where the two disagree.
+    if (playingAt <= v.moe) continue;
+
+    const nextBar = markBar(reach, v.moe + 1);
+    entries.push({
+      tankId: v.tankId,
+      slug: v.slug,
+      name: v.name,
+      tier: v.tier,
+      tag: v.tag,
+      type: v.type,
+      isPremium: v.isPremium,
+      marks: v.moe,
+      playingAt,
+      threshold: markBar(reach, playingAt),
+      combined: reach.combined,
+      ratio: nextBar > 0 ? reach.combined / nextBar : 1,
+      battles: reach.battles,
+      window: reach.window,
+    });
+  }
+
+  // Widest gap first (a two-mark shortfall outranks a one-mark one), then by
+  // how far past the bar the average sits, so the surest conversions lead.
+  return entries
+    .sort(
+      (a, b) =>
+        b.playingAt - b.marks - (a.playingAt - a.marks) || b.ratio - a.ratio,
+    )
+    .slice(0, REACH_LIMIT);
+}
+
+/** The region's combined-damage bar for one of the three marks on a vehicle. */
+export function markBar(bars: MarkThresholds, mark: number): number {
+  return mark >= 3 ? bars.mark3 : mark === 2 ? bars.mark2 : bars.mark1;
+}
+
+/** The highest mark a combined-damage average clears, 0 when it clears none. */
+export function marksClearedBy(
+  combined: number,
+  bars: MarkThresholds,
+): number {
+  if (combined >= bars.mark3) return 3;
+  if (combined >= bars.mark2) return 2;
+  if (combined >= bars.mark1) return 1;
+  return 0;
+}
+
+/**
+ * The mark reach of every vehicle the arithmetic can speak for, keyed by tank.
+ *
+ * Absent rather than zeroed wherever it cannot speak: a vehicle under the tier
+ * the game marks at, under the battles an average needs to mean anything, or
+ * one whose region bars are missing or published out of order. A reader handed
+ * nothing for a tank has to render the absence, which is the honest reading,
+ * and a reader handed something can trust all three bars.
+ */
+export function buildTankMarkReach(
   vehicles: PlayerTankRow[],
   tanks: TankStats[],
   recentTanks: TankStats[] | null,
   thresholds: Map<number, MarkThresholds>,
-): MarkReachEntry[] {
+): Map<number, TankMarkReach> {
   const lifetime = new Map(tanks.map((t) => [t.tank_id, t]));
   const recent = new Map((recentTanks ?? []).map((t) => [t.tank_id, t]));
-  const entries: MarkReachEntry[] = [];
+  const out = new Map<number, TankMarkReach>();
 
   for (const v of vehicles) {
-    // Only vehicles whose marks we know and that still have a mark to earn,
-    // and that the encyclopedia knows (the row draws an icon and a class).
-    if (v.tier == null || v.tag == null || v.type == null) continue;
-    // Same floor as the matrix above: there is no mark to reach for on a gun
-    // the game puts no marks on.
-    if (v.tier < MIN_MARKS_TIER) continue;
-    if (v.moe == null || !Number.isInteger(v.moe) || v.moe < 0 || v.moe >= 3)
-      continue;
+    if (v.tier == null || v.tier < MIN_MARKS_TIER) continue;
     if (v.battles < MIN_TANK_BATTLES) continue;
 
     const bar = thresholds.get(v.tankId);
     // All three bars must be present and ascending. A zero (or a pair the
-    // provider published out of order) would make `combined >= bar.mark3` true
-    // for any damage at all and send the vehicle to the top of the list.
+    // provider published out of order) would make `combined >= mark3` true for
+    // any damage at all, and every reader below trusts this check rather than
+    // repeating it.
     if (!bar) continue;
     if (!(bar.mark1 > 0 && bar.mark2 >= bar.mark1 && bar.mark3 >= bar.mark2)) {
       continue;
@@ -263,46 +356,40 @@ function buildReach(
     const source = useRecent ? windowTank : lifetime.get(v.tankId);
     if (!source || source.all.battles <= 0) continue;
 
-    const combined = combinedDamage(source) / source.all.battles;
-    const playingAt =
-      combined >= bar.mark3
-        ? 3
-        : combined >= bar.mark2
-          ? 2
-          : combined >= bar.mark1
-            ? 1
-            : 0;
-    // Performing at or below the marks already on the gun is the normal case
-    // and says nothing: the list is the vehicles where the two disagree.
-    if (playingAt <= v.moe) continue;
-
-    const next = v.moe + 1;
-    const nextBar = next === 1 ? bar.mark1 : next === 2 ? bar.mark2 : bar.mark3;
-    entries.push({
-      tankId: v.tankId,
-      slug: v.slug,
-      name: v.name,
-      tier: v.tier,
-      tag: v.tag,
-      type: v.type,
-      isPremium: v.isPremium,
-      marks: v.moe,
-      playingAt,
-      threshold:
-        playingAt === 3 ? bar.mark3 : playingAt === 2 ? bar.mark2 : bar.mark1,
-      combined,
-      ratio: nextBar > 0 ? combined / nextBar : 1,
+    out.set(v.tankId, {
+      mark1: bar.mark1,
+      mark2: bar.mark2,
+      mark3: bar.mark3,
+      // Rounded, because the bars it is divided by are whole numbers and every
+      // reader of it formats whole numbers. A float here is fifteen digits of
+      // JSON per vehicle, which on a 967-vehicle garage was a fifth of the
+      // whole tank payload for a precision nothing can show.
+      combined: Math.round(combinedDamage(source) / source.all.battles),
       battles: source.all.battles,
       window: useRecent ? MarkWindow.Recent : MarkWindow.Lifetime,
     });
   }
 
-  // Widest gap first (a two-mark shortfall outranks a one-mark one), then by
-  // how far past the bar the average sits, so the surest conversions lead.
-  return entries
-    .sort(
-      (a, b) =>
-        b.playingAt - b.marks - (a.playingAt - a.marks) || b.ratio - a.ratio,
-    )
-    .slice(0, REACH_LIMIT);
+  return out;
+}
+
+/**
+ * The vehicle rows with their mark reach attached.
+ *
+ * Only the rows that have one are rebuilt, so a garage of a thousand vehicles
+ * where a few hundred qualify copies a few hundred objects. Everything else
+ * keeps the null the row was built with.
+ */
+export function withTankMarkReach(
+  vehicles: PlayerTankRow[],
+  tanks: TankStats[],
+  recentTanks: TankStats[] | null,
+  thresholds: Map<number, MarkThresholds>,
+): PlayerTankRow[] {
+  const reach = buildTankMarkReach(vehicles, tanks, recentTanks, thresholds);
+  if (reach.size === 0) return vehicles;
+  return vehicles.map((v) => {
+    const r = reach.get(v.tankId);
+    return r ? { ...v, markReach: r } : v;
+  });
 }

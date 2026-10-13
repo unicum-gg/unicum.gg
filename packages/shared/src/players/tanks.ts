@@ -9,6 +9,7 @@ import {
 import { buildTankSlugIndex } from "../wot/tanks/slug";
 import type { TankStats } from "../wot/tank-stats";
 import type { VehicleMeta } from "../wot/tanks/meta";
+import type { TankMarkReach } from "./mark-progress";
 
 // One computed row per tank a player has battles in: vehicle metadata joined
 // from the encyclopedia plus derived per-battle stats and all three ratings.
@@ -56,6 +57,18 @@ export type PlayerTankRow = {
    * estimate, derived from average damage against the mark thresholds.
    */
   moePercent: number | null;
+  /**
+   * Where this account's own combined damage sits against the region's three
+   * Marks of Excellence bars on this vehicle, or null where no honest reading
+   * exists (see `buildTankMarkReach`).
+   *
+   * Not a second opinion on `moePercent`, which is the game's own progress
+   * towards the NEXT mark on the rolling window Wargaming scores, and which
+   * only an account running the mod ever has. This is the comparison the whole
+   * site can make for everybody: an average against a published bar. The two
+   * are kept apart, and are never sorted or counted together.
+   */
+  markReach: TankMarkReach | null;
   battles: number;
   avgDamage: number | null;
   avgXp: number | null;
@@ -128,6 +141,7 @@ export function buildPlayerTankRows(
         mom: tank.mark_of_mastery ?? null,
         moe: tank.marks_on_gun ?? null,
         moePercent: tank.mark_percent ?? null,
+        markReach: null,
         battles,
         avgDamage,
         avgXp,
@@ -190,6 +204,7 @@ export function buildPlayerTankRows(
       mom: null,
       moe: null,
       moePercent: null,
+      markReach: null,
       battles: 0,
       avgDamage: null,
       avgXp: null,

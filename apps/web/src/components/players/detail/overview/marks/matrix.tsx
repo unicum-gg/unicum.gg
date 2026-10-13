@@ -23,6 +23,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { unicum } from "@/services/sdk";
+import {
+  MARK_TARGET_PARAM,
+  MarkTarget,
+} from "@/components/players/detail/tanks/mark-target";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 
@@ -148,7 +152,17 @@ export function MarksMatrix<K extends string>({
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Link
-                          href={`${tanksHref}?tier=${row.tier}&${param}=${c.value}`}
+                          // A mark cell also names the bar the table should
+                          // measure against, which is what turns the link into
+                          // "and here is which of them you could take further".
+                          // `Next` rather than this cell's own level plus one:
+                          // the column reads each gun, so it stays right when
+                          // the reader drops the mark filter it arrived with.
+                          href={`${tanksHref}?tier=${row.tier}&${param}=${c.value}${
+                            param === "moe"
+                              ? `&${MARK_TARGET_PARAM}=${MarkTarget.Next}`
+                              : ""
+                          }`}
                           className="block px-2 py-1.5 hover:bg-fd-secondary/40"
                         >
                           {count}
