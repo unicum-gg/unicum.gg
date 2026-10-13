@@ -76,6 +76,15 @@ export const playerVehicle = z
     nation: z.string().nullable(),
     type: z.string().nullable(),
     isPremium: z.boolean(),
+    // Optional for the reason `breakdown` is below: a response cached under the
+    // previous shape carries no such field, and the client parses this schema,
+    // so a required one would throw on every hit until the cache turned over.
+    // Absent reads as unverified, which is what it was.
+    owned: z
+      .boolean()
+      .nullable()
+      .optional()
+      .meta({ description: "Whether the account still holds this vehicle. Null means nobody has verified that garage: Wargaming answers `in_garage` null for every caller but the account itself, so a vehicle sold years ago is indistinguishable from one still owned. Only a player who has signed in with Wargaming.net ID can turn this into a real boolean, and when they have, a false row is a vehicle they no longer have." }),
     mom: z.number().nullable(),
     moe: z.number().nullable(),
     moePercent: z
@@ -97,7 +106,7 @@ export const playerVehicle = z
   .meta({
     id: "PlayerVehicle",
     description:
-      "A tank the player has battles in, with per-battle averages and WN7/WN8/WNX ratings.",
+      "A tank in the player's record, with per-battle averages and WN7/WN8/WNX ratings. Normally a tank they have battles in, which is all Wargaming publishes about a stranger. On an account whose owner has signed in here, the list is their actual garage instead: vehicles they have sold are marked `owned: false`, and vehicles they own but have never driven appear with zero battles and null averages.",
   });
 
 const liftDragRow = z
@@ -383,6 +392,7 @@ export const PlayerDetailResponse = z.object({
         .object({
           amount: z.number(),
           currency: z.string(),
+          verifiedAt: z.string().nullable().optional(),
           breakdown: z
             .object({
               gold: z.number(),
@@ -396,7 +406,7 @@ export const PlayerDetailResponse = z.object({
     })
     .meta({
       description:
-        "What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it.",
+        "What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it. `verifiedAt` is when the account's own owner last confirmed their garage by signing in with Wargaming.net ID, and it is what separates a figure from an estimate: null means this prices every vehicle the account has ever DRIVEN, because `in_garage` is null for any caller but the account itself, so vehicles sold years ago are still counted and vehicles bought and never driven are missing entirely.",
     }),
   liftDrag: z.object({
     wn7: liftDragByMetricEntry,

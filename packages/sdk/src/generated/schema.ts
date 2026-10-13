@@ -4707,11 +4707,12 @@ export interface components {
             tankCount: number;
             achievementCount: number;
             tournamentCount: number;
-            /** @description What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it. */
+            /** @description What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it. `verifiedAt` is when the account's own owner last confirmed their garage by signing in with Wargaming.net ID, and it is what separates a figure from an estimate: null means this prices every vehicle the account has ever DRIVEN, because `in_garage` is null for any caller but the account itself, so vehicles sold years ago are still counted and vehicles bought and never driven are missing entirely. */
             valuation: {
                 account: {
                     amount: number;
                     currency: string;
+                    verifiedAt?: string | null;
                     breakdown?: {
                         gold: number;
                         research: components["schemas"]["rebuildLine"];
@@ -5204,7 +5205,7 @@ export interface components {
              */
             lastAt: Date;
         };
-        /** @description A tank the player has battles in, with per-battle averages and WN7/WN8/WNX ratings. */
+        /** @description A tank in the player's record, with per-battle averages and WN7/WN8/WNX ratings. Normally a tank they have battles in, which is all Wargaming publishes about a stranger. On an account whose owner has signed in here, the list is their actual garage instead: vehicles they have sold are marked `owned: false`, and vehicles they own but have never driven appear with zero battles and null averages. */
         PlayerVehicle: {
             tankId: number;
             name: string;
@@ -5214,6 +5215,8 @@ export interface components {
             nation: string | null;
             type: string | null;
             isPremium: boolean;
+            /** @description Whether the account still holds this vehicle. Null means nobody has verified that garage: Wargaming answers `in_garage` null for every caller but the account itself, so a vehicle sold years ago is indistinguishable from one still owned. Only a player who has signed in with Wargaming.net ID can turn this into a real boolean, and when they have, a false row is a vehicle they no longer have. */
+            owned?: boolean | null;
             mom: number | null;
             moe: number | null;
             /** @description Progress towards the next mark of excellence, 0-100 with two decimals. Only ever known for an account running the mod: the value lives in the client's own vehicle dossier and is in neither the public API nor the portal. Null when nobody has reported it. */

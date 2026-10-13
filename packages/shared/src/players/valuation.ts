@@ -11,11 +11,23 @@
 // garage. What a garage costs at the official store is the question the store
 // itself answers, so it is the one left here.
 //
-// It is a floor rather than a valuation of the garage, and the reason is in the
-// input: `buildPlayerTankRows` keeps a row per vehicle the account has BATTLES
-// in (`battles > 0`), because that is what Wargaming publishes. There is no
-// endpoint listing what a garage holds, so a tank bought and never driven is
-// invisible to us and adds nothing here. The page says so beside the figure.
+// What it is priced FROM depends on whether the account has ever signed in
+// here, and the two readings are different enough that the figure carries the
+// answer (`verifiedAt`) rather than leaving the page to guess.
+//
+// Unverified, the input is `buildPlayerTankRows`, which keeps a row per vehicle
+// the account has BATTLES in, because that is all Wargaming publishes to a
+// stranger: `in_garage` comes back null on every row, so a vehicle sold years
+// ago is indistinguishable from one still held, and a vehicle bought and never
+// driven is invisible. Measured on a 185-vehicle account, 60 of those rows were
+// already sold, so this reading is not a floor in either direction. The page
+// says so beside the figure.
+//
+// Verified, the account's own access token has answered, `*_player_garage`
+// holds what it reported, and the figure prices exactly what is in the garage:
+// the sold vehicles drop out and the never-driven ones come in. That is the
+// only reading worth the word "value", which is why signing in is what the page
+// offers in place of an apology.
 //
 // Pure and client-safe: computed server-side for the API/SDK (so the bot and
 // external consumers get it too), and the constants stay tunable in one place.
@@ -67,6 +79,16 @@ export type RebuildBreakdown = {
 export type AccountValue = {
   amount: number;
   currency: string;
+  /**
+   * When the garage this was priced from was confirmed by its owner's own
+   * token, or null when it was not.
+   *
+   * It is the difference between a figure and an estimate, so it travels with
+   * the figure rather than beside it: unverified, the vehicles priced here are
+   * the ones the account has ever DRIVEN, which on a measured account was a
+   * third more than it still holds, and the page has to say so.
+   */
+  verifiedAt?: string | null;
   // Optional for the reason `markProgress` is on the payload above: a response
   // cached under the previous shape (the detail cache is a 60s TTL, so at most
   // one minute of them) carries the total with no lines under it, and reads as
@@ -167,6 +189,7 @@ function addToLine(line: RebuildLine, units: number, gold: number, amount: numbe
 export function computeAccountValue(
   vehicles: PlayerTankRow[],
   region: Region,
+  verifiedAt?: Date | null,
 ): AccountValue {
   const probe = goldToMoney(region, 0);
   if (!probe) return null;
@@ -175,6 +198,11 @@ export function computeAccountValue(
   const premiums = emptyLine();
   let total = 0;
   for (const v of vehicles) {
+    // `false` is the only value that excludes a vehicle, and it only exists on
+    // a verified garage. Null means nobody has read this account's garage, so
+    // the vehicle is priced the way it always was: dropping it instead would
+    // empty the figure for everyone who has never signed in.
+    if (v.owned === false) continue;
     const cost = vehicleRebuildCost(v, region);
     if (!cost) continue;
     if (cost.purchaseCurrency === RebuildCurrency.Gold) {
@@ -190,6 +218,7 @@ export function computeAccountValue(
   return {
     amount: total,
     currency: probe.currency,
+    verifiedAt: verifiedAt ? verifiedAt.toISOString() : null,
     breakdown: {
       gold: research.gold + credits.gold + premiums.gold,
       research,
@@ -207,6 +236,7 @@ export type PlayerValuation = {
 export function computePlayerValuation(
   vehicles: PlayerTankRow[],
   region: Region,
+  verifiedAt?: Date | null,
 ): PlayerValuation {
-  return { account: computeAccountValue(vehicles, region) };
+  return { account: computeAccountValue(vehicles, region, verifiedAt) };
 }

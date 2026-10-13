@@ -73,6 +73,7 @@ import {
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { computePlayerValuation, type TankEconomics } from "@unicum.gg/shared";
+import { loadPlayerGarage } from "@unicum.gg/core/players/garage";
 import { buildPlayerMarkProgress } from "@unicum.gg/shared";
 import { getTankMoeByRegion } from "@unicum.gg/core/moe";
 
@@ -117,6 +118,7 @@ export async function buildPlayerDetail(args: {
     achievementCount,
     tournamentCount,
     moeThresholds,
+    garage,
   ] = await Promise.all([
     withDisbandedFlags(region, args.clanHistory),
     getVehicleEncyclopedia(region),
@@ -141,6 +143,11 @@ export async function buildPlayerDetail(args: {
     // A cached catalogue read (see `@unicum.gg/core/moe`), so it rides here
     // without adding a scan per profile view.
     getTankMoeByRegion(region),
+    // The account's own garage, when its owner has signed in with Wargaming.net
+    // ID. A primary-key range read on a table holding a few hundred rows per
+    // verified account, so it rides this batch rather than costing the profile
+    // a round trip, and it answers null for everybody else.
+    loadPlayerGarage(region, accountId),
   ]);
   // Lite economics map for the vehicle rows' account-value fields.
   const economics = new Map<number, TankEconomics>();
@@ -240,6 +247,7 @@ export async function buildPlayerDetail(args: {
       wn8Expected,
       wnxExpected,
       economics,
+      garage?.tankIds ?? null,
     ),
   );
 
@@ -285,7 +293,7 @@ export async function buildPlayerDetail(args: {
     tankCount: vehicles.length,
     achievementCount,
     tournamentCount,
-    valuation: computePlayerValuation(vehicles, region),
+    valuation: computePlayerValuation(vehicles, region, garage?.verifiedAt),
     markProgress,
     liftDrag: tracedSync("liftDrag", () => ({
       wn7: buildLiftDrag(
@@ -369,12 +377,14 @@ export async function loadPlayerTanks(
 
   const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
   await applyGarageMarks(region, initial.player.accountId, tanks);
-  const [encyclopedia, wn8Expected, wnxExpected, specs] = await Promise.all([
-    getVehicleEncyclopedia(region),
-    getWN8ExpectedValues(),
-    getWNXExpectedValues(),
-    getAllTankSpecs(),
-  ]);
+  const [encyclopedia, wn8Expected, wnxExpected, specs, garage] =
+    await Promise.all([
+      getVehicleEncyclopedia(region),
+      getWN8ExpectedValues(),
+      getWNXExpectedValues(),
+      getAllTankSpecs(),
+      loadPlayerGarage(region, initial.player.accountId),
+    ]);
   const economics = new Map<number, TankEconomics>();
   for (const [tankId, s] of specs) {
     economics.set(tankId, {
@@ -389,6 +399,7 @@ export async function loadPlayerTanks(
     wn8Expected,
     wnxExpected,
     economics,
+    garage?.tankIds ?? null,
   );
 }
 

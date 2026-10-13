@@ -106,6 +106,12 @@ const ROUTES = {
   // the matching mode instead of the overview, like Steel Hunter above.
   PLAYER_ONSLAUGHT: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/onslaught", { region, nickname }),
+  // A player's account-value tab, which is where a sign-in started from this
+  // page has to land: the whole point of signing in there is to watch the
+  // figure change, so sending the reader back to the home page would hide the
+  // one thing they did it for.
+  PLAYER_VALUE: (region: Region, nickname: string) =>
+    pathcat("/:region/players/:nickname/value", { region, nickname }),
   // A player's Tournaments tab, where the winner's crest sends a reader: the
   // crest says they have won, this is the record of what.
   PLAYER_TOURNAMENTS: (region: Region, nickname: string) =>

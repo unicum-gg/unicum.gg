@@ -1,0 +1,7 @@
+{
+  "confirmed-by-the-owner-on": "The player signed in with Wargaming.net ID on {date}, so this prices the vehicles actually in their garage: the ones they have sold are left out, and the ones they own but have never driven are counted.",
+  "counts-every-vehicle-ever-driven": "Nobody has signed in with this account, so this counts every vehicle it has ever taken into battle. Wargaming tells a stranger which vehicles were played, never which are still owned, so vehicles sold long ago are priced here and vehicles bought and never driven are missing.",
+  "unverified-garage": "Estimated garage.",
+  "verified-garage": "Verified garage.",
+  "verify-my-garage": "Verify my garage"
+}

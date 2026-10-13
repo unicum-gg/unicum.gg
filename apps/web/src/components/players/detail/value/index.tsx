@@ -25,6 +25,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Skeleton } from "@/components/ui/skeleton";
+import { GarageVerification } from "@/components/players/detail/value/verification";
 import { TankCostsTable } from "@/components/players/detail/value/tank-costs";
 import { COSTS_SKELETON_COLUMNS } from "@/components/players/detail/value/skeleton-columns";
 import { TableSkeleton } from "@/components/table-skeleton";
@@ -152,6 +153,15 @@ export function ValueTab(
                   </p>
                 )}
               </div>
+              {/* Directly under the figure, because it says what the figure IS
+                  rather than commenting on it: unverified, the vehicles priced
+                  above are the ones the account has ever driven rather than the
+                  ones it holds. */}
+              <GarageVerification
+                region={region}
+                nickname={nickname}
+                verifiedAt={account?.verifiedAt}
+              />
               {/* Absent only while a payload cached under the previous shape is
                   still being served (60s at most), where the total stands on
                   its own exactly as it did before. */}
@@ -209,7 +219,10 @@ export function ValueTab(
       <Panel>
         <PanelContent className="px-4 py-4">
           <p className="text-xs leading-relaxed text-fd-muted-foreground">
-            {t("an-indicative-estimate-only-store")}</p>
+            {account?.verifiedAt
+              ? t("an-indicative-estimate-only-verified")
+              : t("an-indicative-estimate-only-store")}
+          </p>
         </PanelContent>
       </Panel>
 
@@ -225,7 +238,12 @@ export function ValueTab(
             <TankCostsTable
               region={region}
               nickname={nickname}
-              vehicles={vehicles}
+              // The table has to list exactly what the total prices, or it
+              // breaks down a figure it disagrees with. On a verified garage
+              // that means dropping the vehicles the account has sold, which
+              // the total already skips; unverified, `owned` is null on every
+              // row and nothing is dropped.
+              vehicles={vehicles.filter((v) => v.owned !== false)}
             />
           )}
         </PanelContent>
