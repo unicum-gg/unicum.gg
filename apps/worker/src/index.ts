@@ -112,6 +112,11 @@ async function startCrons(): Promise<void> {
   const { startChangelogCron } = await import("@unicum.gg/core/changelog/cron");
   startChangelogCron();
 
+  const { startModChangelogCron } = await import(
+    "@unicum.gg/core/changelog/mod/cron"
+  );
+  startModChangelogCron();
+
   const { startTankWarmCron } = await import(
     "@unicum.gg/core/wargaming/wot/tanks/warm-cron"
   );

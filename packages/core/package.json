@@ -28,6 +28,8 @@
     "./discord": "./src/discord/index.ts",
     "./changelog": "./src/changelog/index.ts",
     "./changelog/cron": "./src/changelog/cron.ts",
+    "./changelog/mod": "./src/changelog/mod/index.ts",
+    "./changelog/mod/cron": "./src/changelog/mod/cron.ts",
     "./twitch": "./src/twitch/index.ts",
     "./tournaments": "./src/tournaments/index.ts",
     "./tournaments/cron": "./src/tournaments/cron.ts",

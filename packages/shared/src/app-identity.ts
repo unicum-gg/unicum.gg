@@ -16,6 +16,13 @@ export const APP_IDENTITY = {
   /** `owner/name` of the public repository. Its commit log is what the
    * changelog is written from, and the web's GitHub link points at it. */
   REPO: "unicum-gg/unicum.gg",
+  /** `owner/name` of the client mod's own repository.
+   *
+   * Here rather than in the web's `constants/app` (which also names it, for the
+   * download buttons) because the worker needs it too: the mod's changelog is
+   * read from that repository's releases, and a slug written down twice is two
+   * answers waiting to disagree the day the repo moves. */
+  MOD_REPO: "unicum-gg/unicum.gg-mod",
 };
 
 export default APP_IDENTITY;
