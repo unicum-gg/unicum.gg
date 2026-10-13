@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
+import { Hint } from "@/components/hint";
 
 const COMPACT_FORMAT = {
   notation: "compact",
@@ -162,15 +163,16 @@ function PathNode({
         >
           {tier}
         </span>
-        <span
-          className={cn(
-            "max-w-20 truncate text-xs",
-            current ? "font-semibold text-brand" : "text-fd-foreground/85",
-          )}
-          title={meta.name}
-        >
-          {meta.shortName || meta.name}
-        </span>
+        <Hint content={meta.name}>
+          <span
+            className={cn(
+              "max-w-20 truncate text-xs",
+              current ? "font-semibold text-brand" : "text-fd-foreground/85",
+            )}
+          >
+            {meta.shortName || meta.name}
+          </span>
+        </Hint>
         {item.researchXp || item.buyCredits ? (
           <div className="flex items-center gap-2 text-[10px] leading-none text-fd-muted-foreground">
             {item.researchXp ? (

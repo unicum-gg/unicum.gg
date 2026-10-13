@@ -24,6 +24,7 @@ import { DateShape } from "@/lib/date-shapes";
 import { useDateFormat } from "@/components/local-date";
 import { useTranslation } from "@/hooks/use-translation";
 import { useStatLabels } from "@/hooks/use-stat-labels";
+import { Hint } from "@/components/hint";
 
 export function PlayerHeader(
   props:
@@ -139,19 +140,23 @@ export function PlayerHeader(
             containerClassName="flex-1"
             className="flex flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-nowrap sm:items-center sm:gap-x-2 sm:whitespace-nowrap"
           >
-            <span title={formatDate(createdAt, DateShape.Day)}>
-              {t("joined", {
-                date: formatDate(createdAt, DateShape.MonthShort),
-              })}
-            </span>
+            <Hint content={formatDate(createdAt, DateShape.Day)}>
+              <span>
+                {t("joined", {
+                  date: formatDate(createdAt, DateShape.MonthShort),
+                })}
+              </span>
+            </Hint>
             <span className="hidden sm:inline">·</span>
             {lastBattleAt ? (
-              <span title={formatDate(lastBattleAt, DateShape.DateTime)}>
-                <Interpolate
-                  template={t("last-battle")}
-                  values={{ when: <RelativeTime date={lastBattleAt} /> }}
-                />
-              </span>
+              <Hint content={formatDate(lastBattleAt, DateShape.DateTime)}>
+                <span>
+                  <Interpolate
+                    template={t("last-battle")}
+                    values={{ when: <RelativeTime date={lastBattleAt} /> }}
+                  />
+                </span>
+              </Hint>
             ) : (
               <span>{t("never-played")}</span>
             )}

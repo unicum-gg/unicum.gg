@@ -45,6 +45,7 @@ import {
 import { cn } from "@/lib/utils";
 import { BattleDetail } from "./battle-detail";
 import type { BattleEconomy, MapOverlay } from "./battle-types";
+import { Hint } from "@/components/hint";
 
 const INT = { maximumFractionDigits: 0 } as const;
 // The battle's own start, to the minute: two battles in an evening are told
@@ -403,16 +404,17 @@ export function PlayerBattlesTable({
                 for a vehicle the expected values do not carry. */}
             <span className="flex w-16 shrink-0 items-center justify-end self-center">
               {typeof rating === "number" ? (
-                <span
-                  className={cn(
-                    "rounded px-1.5 py-0.5 text-sm font-semibold tabular-nums",
-                    "bg-foreground/5",
-                    RATING_COLOR_CLASS[RATING_COLOR[metric](rating)],
-                  )}
-                  title={t("rating-title", { metric: metric.toUpperCase() })}
-                >
-                  {count.format(rating)}
-                </span>
+                <Hint content={t("rating-title", { metric: metric.toUpperCase() })}>
+                  <span
+                    className={cn(
+                      "rounded px-1.5 py-0.5 text-sm font-semibold tabular-nums",
+                      "bg-foreground/5",
+                      RATING_COLOR_CLASS[RATING_COLOR[metric](rating)],
+                    )}
+                  >
+                    {count.format(rating)}
+                  </span>
+                </Hint>
               ) : (
                 <span className="text-muted-foreground">&mdash;</span>
               )}

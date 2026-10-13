@@ -27,6 +27,7 @@ import type { Region } from "@unicum.gg/wargaming";
 import type { ClanTournamentEntry } from "./row";
 import { FilterSubject } from "@/components/filter-subject";
 import { useTranslation } from "@/hooks/use-translation";
+import { Hint } from "@/components/hint";
 
 /** The band as this table shows it: the numeral, or its own placeholder. */
 const tierBandOrDash = (from: number | null, to: number | null) =>
@@ -156,15 +157,15 @@ export function ClanTournamentsTable({
                 {/* Not a link: the title beside it already leads to this same
                     team, and two anchors to one destination in one row read as
                     two different places to go. */}
-                <span
-                  title={
+                <Hint
+                  content={
                     e.clanMembers === null
-                      ? undefined
+                      ? null
                       : t("n-of-the-roster-were-in-the-clan", { count: e.clanMembers })
                   }
                 >
-                  {e.teamTitle}
-                </span>
+                  <span>{e.teamTitle}</span>
+                </Hint>
               </TableCell>
               <TableCell className="hidden md:table-cell">
                 <TournamentStatusBadge status={e.status} settled />

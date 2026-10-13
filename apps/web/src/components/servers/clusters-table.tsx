@@ -11,6 +11,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { formatMoment, formatPlayers, formatShare } from "./format";
 import { useDisplayZone } from "./use-display-zone";
+import { Hint } from "@/components/hint";
 
 /**
  * Every cluster the region reported, in its own order rather than by
@@ -88,17 +89,19 @@ export function ClustersTable({
             >
               {/* The identifier stays in reach on hover: the label is ours,
                   the identifier is Wargaming's. */}
-              <td className="px-4 py-2 font-medium" title={cluster.server}>
-                {serverDisplayName(region, cluster.server)}
-              </td>
+              <Hint content={cluster.server}>
+                <td className="px-4 py-2 font-medium">
+                  {serverDisplayName(region, cluster.server)}
+                </td>
+              </Hint>
               <td className="px-4 py-2 text-right tabular-nums">
                 {cluster.current == null ? (
                   // Absent from the last sample. Wargaming stops listing a
                   // cluster it has taken down rather than reporting it at zero,
                   // so an empty cell is the honest reading, not "0 players".
-                  <span className="text-fd-muted-foreground" title={t("not-reported")}>
-                    —
-                  </span>
+                  <Hint content={t("not-reported")}>
+                    <span className="text-fd-muted-foreground">—</span>
+                  </Hint>
                 ) : (
                   formatPlayers(cluster.current, locale)
                 )}
@@ -106,12 +109,13 @@ export function ClustersTable({
               <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
                 {cluster.share > 0 ? formatShare(cluster.share, locale) : "—"}
               </td>
-              <td
-                className="px-4 py-2 text-right tabular-nums"
-                title={cluster.peakAt ? formatMoment(cluster.peakAt, zone, locale) : undefined}
+              <Hint
+                content={cluster.peakAt ? formatMoment(cluster.peakAt, zone, locale) : null}
               >
-                {formatPlayers(cluster.peak, locale)}
-              </td>
+                <td className="px-4 py-2 text-right tabular-nums">
+                  {formatPlayers(cluster.peak, locale)}
+                </td>
+              </Hint>
               <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
                 {formatPlayers(cluster.average, locale)}
               </td>
@@ -123,9 +127,9 @@ export function ClustersTable({
             <td className="px-4 py-2">{t("total")}</td>
             <td className="px-4 py-2 text-right tabular-nums">
               {total == null ? (
-                <span className="text-fd-muted-foreground" title={t("not-reported")}>
-                  —
-                </span>
+                <Hint content={t("not-reported")}>
+                  <span className="text-fd-muted-foreground">—</span>
+                </Hint>
               ) : (
                 formatPlayers(total, locale)
               )}
@@ -135,12 +139,11 @@ export function ClustersTable({
             <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
               {total == null ? "—" : formatShare(1, locale)}
             </td>
-            <td
-              className="px-4 py-2 text-right tabular-nums"
-              title={peak?.at ? formatMoment(peak.at, zone, locale) : undefined}
-            >
-              {peak == null ? "—" : formatPlayers(peak.players, locale)}
-            </td>
+            <Hint content={peak?.at ? formatMoment(peak.at, zone, locale) : null}>
+              <td className="px-4 py-2 text-right tabular-nums">
+                {peak == null ? "—" : formatPlayers(peak.players, locale)}
+              </td>
+            </Hint>
             <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
               {formatPlayers(average, locale)}
             </td>

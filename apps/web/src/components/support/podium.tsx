@@ -3,6 +3,7 @@ import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { Hint } from "@/components/hint";
 
 /**
  * A board row as this component consumes it: the response schema with `region`
@@ -132,16 +133,19 @@ function Place({
       >
         {rank}
       </span>
-      <span
+      {/* `as`, because the podium is server-rendered: a hint cannot clone a
+          child built on that side of the boundary (see `Hint`). */}
+      <Hint
+        as="span"
         className={cn(
           "mt-2 flex w-full justify-center truncate px-1 text-center text-xs font-semibold sm:text-sm",
           ghost && "text-fd-muted-foreground/50",
           supporter?.anonymous && "font-normal italic opacity-70",
         )}
-        title={supporter?.name}
+        content={supporter?.name}
       >
         {supporter ? <SupporterName supporter={supporter} /> : "—"}
-      </span>
+      </Hint>
       <div
         className={cn(
           "relative mt-3 flex w-full items-center justify-center rounded-t-md border-x border-t",

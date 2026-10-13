@@ -17,6 +17,7 @@ import {
 } from "react";
 import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
 import { MoMIcon } from "@/components/tanks/mom-icon";
+import { Hint } from "@/components/hint";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { useCookie } from "@/hooks/use-cookie";
 import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type PlayerTankRow } from "@unicum.gg/shared";
@@ -106,28 +107,27 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
       if (!bars && percent == null) return { node: DASH };
       return {
         node: (
-          <span
-            title={
-              bars
-                ? ctx.t("n-marks-of-excellence", { count: bars })
-                : undefined
+          <Hint
+            content={
+              bars ? ctx.t("n-marks-of-excellence", { count: bars }) : null
             }
-            className="flex items-center justify-center gap-1.5"
           >
-            {/*
+            <span className="flex items-center justify-center gap-1.5">
+              {/*
               Both halves are a fixed width, which is the whole trick. The icon
               draws its three places whatever was earned, and the figure is
               held to the width of its longest form, "100.00%". Either one left
               to size itself puts the column out of true: one mark is a third
               the width of three, and a hundred is a digit wider than ninety.
-            */}
-            <MoEIcon bars={bars ?? 0} color={bars ? MOE_COLORS[bars] : ""} empty />
-            {percent == null ? null : (
-              <span className="text-fd-muted-foreground w-[7ch] text-right tabular-nums">
-                {percent.toFixed(2)}%
-              </span>
-            )}
-          </span>
+              */}
+              <MoEIcon bars={bars ?? 0} color={bars ? MOE_COLORS[bars] : ""} empty />
+              {percent == null ? null : (
+                <span className="text-fd-muted-foreground w-[7ch] text-right tabular-nums">
+                  {percent.toFixed(2)}%
+                </span>
+              )}
+            </span>
+          </Hint>
         ),
       };
     },

@@ -18,6 +18,7 @@ import type {
   SelectableRow,
 } from "@/components/search/row-model";
 import { cn } from "@/lib/utils";
+import { Hint } from "@/components/hint";
 
 export function ResultsArea({
   status,
@@ -165,18 +166,19 @@ function RowActionButton({
   children: React.ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      aria-label={label}
-      title={label}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick();
-      }}
-      className="inline-flex size-6 cursor-pointer items-center justify-center rounded text-fd-muted-foreground hover:bg-fd-border/50 hover:text-fd-foreground"
-    >
-      {children}
-    </button>
+    <Hint content={label}>
+      <button
+        type="button"
+        aria-label={label}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+        className="inline-flex size-6 cursor-pointer items-center justify-center rounded text-fd-muted-foreground hover:bg-fd-border/50 hover:text-fd-foreground"
+      >
+        {children}
+      </button>
+    </Hint>
   );
 }
 

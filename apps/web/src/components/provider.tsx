@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, type ReactNode } from "react";
 import { SWRConfig } from "swr";
 import { CookieConsent } from "@/components/cookie-consent";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import Script from "@/components/script";
 import { CookieConsentProvider } from "@/contexts/cookie-consent";
 import STORAGE from "@/constants/storage";
@@ -102,9 +103,18 @@ export function Provider({
           i18n={{ locale, translations: fumaTranslations }}
         >
           <CookieConsentProvider>
-            {children}
-            <CookieConsent />
-            <Script />
+            {/* One provider for the whole app, which is what lets `Hint` be a
+                leaf anywhere: Radix refuses a tooltip with no provider above
+                it, and the alternative (every hint carrying its own) would
+                give a table of fifty rows fifty of them and lose the shared
+                delay, where moving from one cell to the next re-waits. The
+                local providers that remain are the ones tuning their own
+                delay, and they nest harmlessly. */}
+            <TooltipProvider delayDuration={150}>
+              {children}
+              <CookieConsent />
+              <Script />
+            </TooltipProvider>
           </CookieConsentProvider>
         </RootProvider>
       </AppTranslationProvider>

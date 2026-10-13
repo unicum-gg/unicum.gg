@@ -13,6 +13,7 @@ import { useHydrated } from "@/hooks/use-hydrated";
 import { usePlayersOnline } from "@/hooks/use-players-online";
 import { cn } from "@/lib/utils";
 import { formatPlayers } from "./format";
+import { Hint } from "@/components/hint";
 
 /**
  * The live population, straight from Wargaming over SSE.
@@ -86,9 +87,11 @@ export function ServersLiveHeader({
               key={cluster.server}
               className="inline-flex items-baseline gap-2 rounded-md border border-fd-border bg-fd-card px-2.5 py-1 text-sm"
             >
-              <span className="font-medium" title={cluster.server}>
-                {serverDisplayName(region, cluster.server)}
-              </span>
+              <Hint content={cluster.server}>
+                <span className="font-medium">
+                  {serverDisplayName(region, cluster.server)}
+                </span>
+              </Hint>
               <span className="tabular-nums text-fd-muted-foreground">
                 {cluster.players == null ? "—" : formatPlayers(cluster.players, locale)}
               </span>

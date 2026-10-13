@@ -29,6 +29,7 @@ import {
   wnxColor,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { Hint } from "@/components/hint";
 
 const DASH = "—";
 
@@ -179,29 +180,30 @@ export function TeamRosterTable({
                           line-up that never played. Shown when either half has
                           changed. */}
                       {recorded && (
-                        <span
-                          className="shrink-0 truncate text-xs text-fd-muted-foreground"
-                          title={t("registered-as", { nickname: p.nickname })}
+                        <Hint
+                          content={t("registered-as", { nickname: p.nickname })}
                         >
-                          {p.recordedClanTag ? (
-                            <Interpolate
-                              template={t("alias-with-clan", {
-                                nickname: p.nickname,
-                              })}
-                              values={{
-                                clan: (
-                                  <ClanTag
-                                    tag={p.recordedClanTag}
-                                    color={p.recordedClanColor}
-                                    className="font-mono"
-                                  />
-                                ),
-                              }}
-                            />
-                          ) : (
-                            t("alias", { nickname: p.nickname })
-                          )}
-                        </span>
+                          <span className="shrink-0 truncate text-xs text-fd-muted-foreground">
+                            {p.recordedClanTag ? (
+                              <Interpolate
+                                template={t("alias-with-clan", {
+                                  nickname: p.nickname,
+                                })}
+                                values={{
+                                  clan: (
+                                    <ClanTag
+                                      tag={p.recordedClanTag}
+                                      color={p.recordedClanColor}
+                                      className="font-mono"
+                                    />
+                                  ),
+                                }}
+                              />
+                            ) : (
+                              t("alias", { nickname: p.nickname })
+                            )}
+                          </span>
+                        </Hint>
                       )}
                     </>
                   }

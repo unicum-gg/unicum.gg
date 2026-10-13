@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { Overlay } from "@/components/maps/detail/minimap-overlay";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import type { MapOverlay, Participant } from "./battle-types";
+import { Hint } from "@/components/hint";
 
 type Bounds = {
   bottomLeft: { x: number; z: number };
@@ -393,7 +394,6 @@ export function BattleReplay({
                     height: markerPx * 1.6,
                     opacity: 0.25 + 0.6 * left,
                   }}
-                  title={line.text}
                 />
               );
             })
@@ -440,92 +440,95 @@ export function BattleReplay({
               const side = dead ? faded : full;
               const share = dead ? 0 : healthAt(track, at, ticks);
               return (
-                  <span
+                  <Hint
                     key={track.id}
-                    title={who.player?.nickname ?? String(track.id)}
-                    style={{ left: `${where.left}%`, top: `${where.top}%` }}
-                    className={cn(
-                      "absolute -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]",
-                      side,
-                    )}
+                    content={who.player?.nickname ?? String(track.id)}
                   >
-                    {!dead && !point.spotted ? (
-                      // Alive but out of sight: a bare dot at the last place
-                      // it was seen, as the game draws it. The name stays,
-                      // because the question a reader has about a dot on the
-                      // far side of the map is which tank it was.
-                      //
-                      // A destroyed vehicle keeps its glyph instead, faded.
-                      // The two states are different claims: a dot says
-                      // nobody knows where this tank is now, a faded glyph
-                      // says this is exactly where it stopped.
-                      <span
-                        className="block rounded-full bg-current opacity-70 ring-1 ring-black/60"
-                        style={{ width: markerPx * 0.42, height: markerPx * 0.42 }}
-                      />
-                    ) : who.tank?.type ? (
-                      // The game's own class glyph, which is what a player
-                      // reads a minimap by: a heavy and a scout at the same
-                      // spot mean very different things, and two identical
-                      // discs say neither.
-                      //
-                      // The side colour goes ON the icon, not on this span:
-                      // the component sets a colour of its own inside, so a
-                      // parent's `text-…` never reaches the glyph and every
-                      // tank came out the same pale grey.
-                      <span
-                        // Sized to the glyph exactly, so the ring has a square
-                        // to centre on. Left to its own devices the box is an
-                        // inline one and carries the baseline's descender
-                        // space below the icon, which pushes the ring up by a
-                        // couple of pixels and reads as crooked.
-                        // `flex`, not `block`: the icon is an inline-flex
-                        // element, so in a block box it sits on a baseline and
-                        // the ring, centred on the box, came out two pixels
-                        // high on every vehicle. A flex child has no baseline
-                        // to sit on.
-                        className="relative flex items-center justify-center"
-                        style={{ width: markerPx, height: markerPx }}
-                      >
-                        {share !== null && share > 0 ? (
-                          <HealthRing
-                            share={share}
+                    <span
+                      style={{ left: `${where.left}%`, top: `${where.top}%` }}
+                      className={cn(
+                        "absolute -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]",
+                        side,
+                      )}
+                    >
+                      {!dead && !point.spotted ? (
+                        // Alive but out of sight: a bare dot at the last place
+                        // it was seen, as the game draws it. The name stays,
+                        // because the question a reader has about a dot on the
+                        // far side of the map is which tank it was.
+                        //
+                        // A destroyed vehicle keeps its glyph instead, faded.
+                        // The two states are different claims: a dot says
+                        // nobody knows where this tank is now, a faded glyph
+                        // says this is exactly where it stopped.
+                        <span
+                          className="block rounded-full bg-current opacity-70 ring-1 ring-black/60"
+                          style={{ width: markerPx * 0.42, height: markerPx * 0.42 }}
+                        />
+                      ) : who.tank?.type ? (
+                        // The game's own class glyph, which is what a player
+                        // reads a minimap by: a heavy and a scout at the same
+                        // spot mean very different things, and two identical
+                        // discs say neither.
+                        //
+                        // The side colour goes ON the icon, not on this span:
+                        // the component sets a colour of its own inside, so a
+                        // parent's `text-…` never reaches the glyph and every
+                        // tank came out the same pale grey.
+                        <span
+                          // Sized to the glyph exactly, so the ring has a square
+                          // to centre on. Left to its own devices the box is an
+                          // inline one and carries the baseline's descender
+                          // space below the icon, which pushes the ring up by a
+                          // couple of pixels and reads as crooked.
+                          // `flex`, not `block`: the icon is an inline-flex
+                          // element, so in a block box it sits on a baseline and
+                          // the ring, centred on the box, came out two pixels
+                          // high on every vehicle. A flex child has no baseline
+                          // to sit on.
+                          className="relative flex items-center justify-center"
+                          style={{ width: markerPx, height: markerPx }}
+                        >
+                          {share !== null && share > 0 ? (
+                            <HealthRing
+                              share={share}
+                              size={markerPx}
+                              className={side}
+                            />
+                          ) : null}
+                          <VehicleTypeIcon
+                            type={who.tank.type}
                             size={markerPx}
                             className={side}
                           />
-                        ) : null}
-                        <VehicleTypeIcon
-                          type={who.tank.type}
-                          size={markerPx}
-                          className={side}
+                        </span>
+                      ) : (
+                        // A vehicle whose class we do not hold: still drawn,
+                        // because where it was is the point, and a missing
+                        // catalogue entry is no reason to lose it off the map.
+                        <span
+                          className="block rounded-full bg-current ring-1 ring-black/50"
+                          style={{ width: markerPx * 0.5, height: markerPx * 0.5 }}
                         />
-                      </span>
-                    ) : (
-                      // A vehicle whose class we do not hold: still drawn,
-                      // because where it was is the point, and a missing
-                      // catalogue entry is no reason to lose it off the map.
-                      <span
-                        className="block rounded-full bg-current ring-1 ring-black/50"
-                        style={{ width: markerPx * 0.5, height: markerPx * 0.5 }}
-                      />
-                    )}
-                    {/* The tank's name beside its glyph, where the game puts
-                        it. Absolutely positioned out of the marker's own box
-                        so it cannot push the glyph off the point it marks,
-                        and never wrapped: a name that folds onto two lines
-                        over a minimap is unreadable either way. */}
-                    {who.tank?.shortName ? (
-                      <span
-                        className={cn(
-                          "pointer-events-none absolute left-full top-1/2 whitespace-nowrap font-medium leading-none",
-                          side,
-                        )}
-                        style={{ fontSize: labelPx, paddingLeft: labelPx * 0.3 }}
-                      >
-                        {who.tank.shortName}
-                      </span>
-                    ) : null}
+                      )}
+                      {/* The tank's name beside its glyph, where the game puts
+                          it. Absolutely positioned out of the marker's own box
+                          so it cannot push the glyph off the point it marks,
+                          and never wrapped: a name that folds onto two lines
+                          over a minimap is unreadable either way. */}
+                      {who.tank?.shortName ? (
+                        <span
+                          className={cn(
+                            "pointer-events-none absolute left-full top-1/2 whitespace-nowrap font-medium leading-none",
+                            side,
+                          )}
+                          style={{ fontSize: labelPx, paddingLeft: labelPx * 0.3 }}
+                        >
+                          {who.tank.shortName}
+                        </span>
+                      ) : null}
                   </span>
+                  </Hint>
               );
             })
           : null}
@@ -1413,14 +1416,13 @@ function TeamStrip({
           the size of a scoreline because that is the shape a reader expects in
           the middle of a bar like this, and it is the one number here that
           answers "who is winning" without arithmetic. */}
-      <div
-        className="flex shrink-0 items-center font-semibold tabular-nums"
-        title={t("replay.still-standing")}
-      >
-        <span className="text-emerald-400 text-sm">{sides.ours.alive}</span>
-        <span className="text-muted-foreground/50 mx-1.5 text-[10px]">vs</span>
-        <span className="text-red-400 text-sm">{sides.theirs.alive}</span>
-      </div>
+      <Hint content={t("replay.still-standing")}>
+        <div className="flex shrink-0 items-center font-semibold tabular-nums">
+          <span className="text-emerald-400 text-sm">{sides.ours.alive}</span>
+          <span className="text-muted-foreground/50 mx-1.5 text-[10px]">vs</span>
+          <span className="text-red-400 text-sm">{sides.theirs.alive}</span>
+        </div>
+      </Hint>
       <Side side={sides.theirs} tone="enemy" align="left" />
     </div>
   );
@@ -1522,24 +1524,26 @@ function Side({
                   ? "text-emerald-400"
                   : "text-red-400";
             return (
-              <span key={member.id} title={member.name ?? undefined}>
-                {member.type ? (
-                  // The colour goes ON the icon. The component sets one of its
-                  // own inside, so a parent's `text-…` never reaches the glyph
-                  // and every vehicle came out the same pale grey: the same
-                  // trap the map's markers carry a comment about, walked into
-                  // again here.
-                  <VehicleTypeIcon
-                    type={member.type}
-                    size={11}
-                    className={tone}
-                  />
-                ) : (
-                  <span
-                    className={cn("block size-[7px] rounded-full bg-current", tone)}
-                  />
-                )}
-              </span>
+              <Hint key={member.id} content={member.name}>
+                <span>
+                  {member.type ? (
+                    // The colour goes ON the icon. The component sets one of its
+                    // own inside, so a parent's `text-…` never reaches the glyph
+                    // and every vehicle came out the same pale grey: the same
+                    // trap the map's markers carry a comment about, walked into
+                    // again here.
+                    <VehicleTypeIcon
+                      type={member.type}
+                      size={11}
+                      className={tone}
+                    />
+                  ) : (
+                    <span
+                      className={cn("block size-[7px] rounded-full bg-current", tone)}
+                    />
+                  )}
+                </span>
+              </Hint>
             );
           })}
         </span>

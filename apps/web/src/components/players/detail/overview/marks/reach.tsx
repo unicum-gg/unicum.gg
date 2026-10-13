@@ -8,6 +8,7 @@ import { VehicleRow } from "@/components/tanks/vehicle-row";
 import ROUTES from "@/constants/routes";
 import { MARK_CELL_CLASS } from "./colors";
 import { cn } from "@/lib/utils";
+import { Hint } from "@/components/hint";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -64,18 +65,21 @@ export function MarksReach({
             e.window === MarkWindow.Recent ? ` ${t("recent-window")}` : undefined
           }
           badge={
-            <span
-              className={cn(
-                "px-2 py-0.5 text-xs",
-                MARK_CELL_CLASS[e.playingAt as 1 | 2 | 3],
-              )}
-              title={t("badge-title", {
+            <Hint
+              content={t("badge-title", {
                 combined: numberFormat(locale, INT_FORMAT).format(e.combined),
                 threshold: numberFormat(locale, INT_FORMAT).format(e.threshold),
               })}
             >
-              {numberFormat(locale, INT_FORMAT).format(e.combined)}
-            </span>
+              <span
+                className={cn(
+                  "px-2 py-0.5 text-xs",
+                  MARK_CELL_CLASS[e.playingAt as 1 | 2 | 3],
+                )}
+              >
+                {numberFormat(locale, INT_FORMAT).format(e.combined)}
+              </span>
+            </Hint>
           }
           caption={
             <span className="flex items-center gap-1 text-xs font-medium text-fd-muted-foreground">

@@ -36,6 +36,7 @@ import { cn } from "@/lib/utils";
 import type { CommunityBoardRow } from "./row";
 import { useTranslation } from "@/hooks/use-translation";
 import { useStatLabels } from "@/hooks/use-stat-labels";
+import { Hint } from "@/components/hint";
 
 const INT_FORMAT = {} as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
@@ -341,13 +342,12 @@ function Gap({ hype }: { hype: number | null }) {
   const verdict = ratingHype(hype);
   if (verdict == null || hype == null) return DASH;
   return (
-    <span
-      className={cn("font-medium", HYPE_CLASS[verdict])}
-      title={tLabel(`rating-hype.${verdict}`)}
-    >
-      {hype > 0 ? "+" : ""}
-      {(hype * 100).toFixed(0)}
-    </span>
+    <Hint content={tLabel(`rating-hype.${verdict}`)}>
+      <span className={cn("font-medium", HYPE_CLASS[verdict])}>
+        {hype > 0 ? "+" : ""}
+        {(hype * 100).toFixed(0)}
+      </span>
+    </Hint>
   );
 }
 

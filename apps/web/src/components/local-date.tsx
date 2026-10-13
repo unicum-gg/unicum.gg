@@ -6,6 +6,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { useCallback } from "react";
 import { DATE_PATTERNS, DateShape } from "@/lib/date-shapes";
 import { DEFAULT_LOCALE } from "@/lib/translations";
+import { Hint } from "@/components/hint";
 
 function formatterFor(locale: string, shape: DateShape) {
   return dateFormat(locale, DATE_PATTERNS[shape]);
@@ -13,7 +14,7 @@ function formatterFor(locale: string, shape: DateShape) {
 
 /**
  * A date formatter in the reader's language, for the places that need a string
- * rather than a node: a `title` attribute, an `aria-label`.
+ * rather than a node: a hint's content, an `aria-label`.
  */
 export function useDateFormat(): (date: Date, shape: DateShape) => string {
   const { locale } = useLocale();
@@ -24,7 +25,13 @@ export function useDateFormat(): (date: Date, shape: DateShape) => string {
   );
 }
 
-/** A date written in the reader's language, as a `<time>` a crawler can read. */
+/**
+ * A date written in the reader's language, as a `<time>` a crawler can read.
+ *
+ * `title` is the exact instant behind a shortened one, drawn as a hint rather
+ * than handed to the browser: a caller passing it is explaining the date it
+ * shortened, which is the site speaking and should look like it.
+ */
 export function LocalDate({
   date,
   shape,
@@ -39,8 +46,10 @@ export function LocalDate({
 
   const format = useDateFormat();
   return (
-    <time className={className} dateTime={date.toISOString()} title={title}>
-      {format(date, shape)}
-    </time>
+    <Hint content={title}>
+      <time className={className} dateTime={date.toISOString()}>
+        {format(date, shape)}
+      </time>
+    </Hint>
   );
 }

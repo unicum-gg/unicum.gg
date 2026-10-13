@@ -10,6 +10,7 @@ import {
   type Slot,
   type Equipment,
 } from "./category";
+import { Hint } from "@/components/hint";
 
 /** One equipment slot: an empty dashed frame (tinted by the slot's category as a
  * hint) or the mounted device, with a category-bonus "+" badge when the device
@@ -62,13 +63,14 @@ export function SlotBox({
             style={{ width: 28, height: 28 }}
           />
           {bonus && color ? (
-            <span
-              className="absolute -right-2.5 -top-2.5 rounded-full px-1 text-[9px] font-bold text-white"
-              style={{ backgroundColor: color }}
-              title={t("category-bonus-active")}
-            >
-              +
-            </span>
+            <Hint content={t("category-bonus-active")}>
+              <span
+                className="absolute -right-2.5 -top-2.5 rounded-full px-1 text-[9px] font-bold text-white"
+                style={{ backgroundColor: color }}
+              >
+                +
+              </span>
+            </Hint>
           ) : null}
         </div>
       ) : (

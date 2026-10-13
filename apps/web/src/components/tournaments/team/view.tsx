@@ -44,6 +44,7 @@ import type { TournamentRecord, TournamentTeam } from "@/components/tournaments/
 import { TeamSlot, teamRun, type TeamMatch } from "@/components/tournaments/detail/team-run";
 import { TeamRosterTable, type RosterEntry } from "./roster-table";
 import { TeamMetrics, TeamResult } from "./result";
+import { Hint } from "@/components/hint";
 
 const DASH = "—";
 
@@ -65,19 +66,22 @@ function KickOff({ at }: { at: Date }) {
   const { t } = useTranslation("components/tournaments/team/view");
   const hydrated = useHydrated();
   return (
-    <time
-      dateTime={at.toISOString()}
-      className="text-xs text-fd-muted-foreground tabular-nums"
-      title={
+    <Hint
+      content={
         hydrated
           ? t("first-battle-at", { when: format(at, "EEEE d MMMM yyyy 'at' HH:mm", { locale: dateLocale(locale) }) })
           : t("when-the-first-battle-started")
       }
     >
-      {hydrated
-        ? format(at, "d MMM, HH:mm", { locale: dateLocale(locale) })
-        : date(UTC_PATTERN).format(at)}
-    </time>
+      <time
+        dateTime={at.toISOString()}
+        className="text-xs text-fd-muted-foreground tabular-nums"
+      >
+        {hydrated
+          ? format(at, "d MMM, HH:mm", { locale: dateLocale(locale) })
+          : date(UTC_PATTERN).format(at)}
+      </time>
+    </Hint>
   );
 }
 

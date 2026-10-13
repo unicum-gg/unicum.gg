@@ -5,6 +5,7 @@ import { CardsThreeIcon, RowsIcon } from "@phosphor-icons/react";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
+import { Hint } from "@/components/hint";
 
 export enum VideosView {
   Cards = "cards",
@@ -66,22 +67,27 @@ function ViewButton({
   label: string;
   children: React.ReactNode;
 }) {
+  const { t } = useTranslation("components/tanks/detail/videos/view-toggle");
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={`${label} view`}
-      aria-pressed={active}
-      title={`${label} view`}
-      className={cn(
-        "flex cursor-pointer items-center gap-1.5 px-2.5 py-1.5 text-sm transition-colors first:rounded-l-md last:rounded-r-md",
-        active
-          ? "bg-fd-secondary/50 text-fd-foreground"
-          : "text-fd-muted-foreground hover:text-fd-foreground",
-      )}
-    >
-      {children}
-      <span className="hidden sm:inline">{label}</span>
-    </button>
+    // The accessible name was "<label> view" with the word written straight
+    // into the attribute, which is English on all thirty-six locales and is
+    // exactly what nothing renders until a pointer rests on it.
+    <Hint content={t("view-named", { view: label })}>
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={t("view-named", { view: label })}
+        aria-pressed={active}
+        className={cn(
+          "flex cursor-pointer items-center gap-1.5 px-2.5 py-1.5 text-sm transition-colors first:rounded-l-md last:rounded-r-md",
+          active
+            ? "bg-fd-secondary/50 text-fd-foreground"
+            : "text-fd-muted-foreground hover:text-fd-foreground",
+        )}
+      >
+        {children}
+        <span className="hidden sm:inline">{label}</span>
+      </button>
+    </Hint>
   );
 }

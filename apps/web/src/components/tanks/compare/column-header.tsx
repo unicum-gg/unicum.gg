@@ -48,6 +48,7 @@ import {
 import { TankClient } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import { Hint } from "@/components/hint";
 
 /** The two configurations the game itself offers per column, and all a reader
  * needs before opening the full setup: what the vehicle ships with, and what it
@@ -189,38 +190,42 @@ export function TankCompareColumnHeader({
       )}
       <div className="flex items-start justify-end gap-1">
         <div className="flex items-center gap-0.5">
-          <button
-            type="button"
-            onClick={onPin}
-            aria-label={
-              pinned
-                ? t("is-the-reference", { tank: meta.name })
-                : t("compare-against", { tank: meta.name })
-            }
-            title={
+          <Hint
+            content={
               pinned
                 ? t("reference-column")
                 : t("compare-the-others-against-this-one")
             }
-            className={cn(
-              "inline-flex size-5 cursor-pointer items-center justify-center rounded transition-colors",
-              pinned
-                ? "text-brand"
-                : "text-fd-muted-foreground/60 hover:bg-fd-border/50 hover:text-fd-foreground",
-            )}
           >
-            <PushPinIcon className="size-3.5" weight={pinned ? "fill" : "bold"} />
-          </button>
-          {onDuplicate && (
             <button
               type="button"
-              onClick={onDuplicate}
-              aria-label={t("duplicate-tank", { tank: meta.name })}
-              title={t("a-second-column-on-the-same")}
-              className="inline-flex size-5 cursor-pointer items-center justify-center rounded text-fd-muted-foreground/60 transition-colors hover:bg-fd-border/50 hover:text-fd-foreground"
+              onClick={onPin}
+              aria-label={
+                pinned
+                  ? t("is-the-reference", { tank: meta.name })
+                  : t("compare-against", { tank: meta.name })
+              }
+              className={cn(
+                "inline-flex size-5 cursor-pointer items-center justify-center rounded transition-colors",
+                pinned
+                  ? "text-brand"
+                  : "text-fd-muted-foreground/60 hover:bg-fd-border/50 hover:text-fd-foreground",
+              )}
             >
-              <CopyIcon className="size-3.5" weight="bold" />
+              <PushPinIcon className="size-3.5" weight={pinned ? "fill" : "bold"} />
             </button>
+          </Hint>
+          {onDuplicate && (
+            <Hint content={t("a-second-column-on-the-same")}>
+              <button
+                type="button"
+                onClick={onDuplicate}
+                aria-label={t("duplicate-tank", { tank: meta.name })}
+                className="inline-flex size-5 cursor-pointer items-center justify-center rounded text-fd-muted-foreground/60 transition-colors hover:bg-fd-border/50 hover:text-fd-foreground"
+              >
+                <CopyIcon className="size-3.5" weight="bold" />
+              </button>
+            </Hint>
           )}
           {onRemove && (
             <button
@@ -321,21 +326,23 @@ export function TankCompareColumnHeader({
           onToggle={build.mode.toggle}
         />
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <button
-              type="button"
-              aria-label={t("configure-tank", { tank: meta.name })}
-              title={t("ammunition-equipment-crew-and-progression")}
-              className={cn(
-                "inline-flex cursor-pointer items-center gap-1 rounded-md border px-1.5 py-0.5 text-[0.6875rem] transition-colors",
-                build.canResetAll
-                  ? "border-brand/40 bg-brand/10 text-brand"
-                  : "border-fd-border text-fd-muted-foreground hover:bg-fd-secondary/50 hover:text-fd-foreground",
-              )}
-            >
-              <SlidersHorizontalIcon className="size-3" weight="bold" />
-              {tCopy("setup")}</button>
-          </DialogTrigger>
+          <Hint content={t("ammunition-equipment-crew-and-progression")}>
+            <DialogTrigger asChild>
+              <button
+                type="button"
+                aria-label={t("configure-tank", { tank: meta.name })}
+                className={cn(
+                  "inline-flex cursor-pointer items-center gap-1 rounded-md border px-1.5 py-0.5 text-[0.6875rem] transition-colors",
+                  build.canResetAll
+                    ? "border-brand/40 bg-brand/10 text-brand"
+                    : "border-fd-border text-fd-muted-foreground hover:bg-fd-secondary/50 hover:text-fd-foreground",
+                )}
+              >
+                <SlidersHorizontalIcon className="size-3" weight="bold" />
+                {tCopy("setup")}
+              </button>
+            </DialogTrigger>
+          </Hint>
           <DialogContent className="gap-0 p-0 sm:max-w-3xl">
             {/* `pr-12` keeps the header's actions clear of the dialog's own
                 close button, which floats at `top-3 right-3`. */}

@@ -24,6 +24,7 @@ import type {
 } from "@/components/tournaments/detail/record";
 import type { TeamMatch } from "@/components/tournaments/detail/team-run";
 import { cn } from "@/lib/utils";
+import { Hint } from "@/components/hint";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const PCT_FORMAT = {
@@ -83,25 +84,24 @@ function MetricColumn({
   colorClass: string | null;
 }) {
   return (
-    // Sized to its label rather than fixed at the clan header's width: the rank
-    // rides in the label here, and a label that wraps to two lines pushes its
-    // colour block down out of line with the one beside it.
-    <div
-      className="flex flex-1 flex-col border-fd-border sm:min-w-32 sm:flex-none sm:shrink-0 sm:border-l"
-      title={title}
-    >
-      <div className="px-4 py-2 text-center text-xs whitespace-nowrap text-fd-muted-foreground">
-        {label}
+    <Hint content={title}>
+      {/* Sized to its label rather than fixed at the clan header's width: the
+          rank rides in the label here, and a label that wraps to two lines
+          pushes its colour block down out of line with the one beside it. */}
+      <div className="flex flex-1 flex-col border-fd-border sm:min-w-32 sm:flex-none sm:shrink-0 sm:border-l">
+        <div className="px-4 py-2 text-center text-xs whitespace-nowrap text-fd-muted-foreground">
+          {label}
+        </div>
+        <div
+          className={cn(
+            "flex flex-1 items-center justify-center border-t border-fd-border py-2 text-xl font-semibold tabular-nums",
+            colorClass,
+          )}
+        >
+          {value}
+        </div>
       </div>
-      <div
-        className={cn(
-          "flex flex-1 items-center justify-center border-t border-fd-border py-2 text-xl font-semibold tabular-nums",
-          colorClass,
-        )}
-      >
-        {value}
-      </div>
-    </div>
+    </Hint>
   );
 }
 

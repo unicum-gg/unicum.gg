@@ -35,6 +35,7 @@ import { cn } from "@/lib/utils";
 import { mapName } from "@/components/game-name";
 import { useTranslation } from "@/hooks/use-translation";
 import type { MapCommunityRow } from "./row";
+import { Hint } from "@/components/hint";
 
 const INT_FORMAT = {} as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
@@ -263,15 +264,14 @@ export function MapCommunityTable({
               return (
                 <TableRow key={row.arenaId}>
                   <TableCell className="text-center">
-                    <span
-                      className={camo.className}
-                      title={tGame(`map-camouflage.${row.camouflage}`)}
-                    >
-                      <CamoIcon
-                        weight="fill"
-                        className="mx-auto size-4 shrink-0"
-                      />
-                    </span>
+                    <Hint content={tGame(`map-camouflage.${row.camouflage}`)}>
+                      <span className={camo.className}>
+                        <CamoIcon
+                          weight="fill"
+                          className="mx-auto size-4 shrink-0"
+                        />
+                      </span>
+                    </Hint>
                   </TableCell>
                   <TableCell className="font-medium">
                     <Link

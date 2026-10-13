@@ -9,6 +9,7 @@ import { useHydrated } from "@/hooks/use-hydrated";
 import { useTranslation } from "@/hooks/use-translation";
 import { authClient, useSession } from "@/lib/auth-client";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
+import { Hint } from "@/components/hint";
 
 /**
  * Connected accounts, on the one page a player already thinks of as theirs.
@@ -73,21 +74,23 @@ export function PlayerConnectionsButton({
 
   return (
     <>
-      {/* `title` + `aria-label` rather than a `Tooltip`, matching the overflow
-          menu it sits beside: the two are one row of controls and should not
-          behave differently on hover. */}
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        title={t("connected-accounts")}
-        aria-label={t("connected-accounts")}
-        className="relative inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
-      >
-        <UserGearIcon className="size-3.5" weight="bold" />
-        {needsTwitch ? (
-          <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-brand ring-2 ring-fd-background" />
-        ) : null}
-      </button>
+      {/* The label is drawn on hover and announced through `aria-label`, which
+          the tooltip never replaces: one describes, the other names. The
+          overflow menu beside it carries the same pair, since the two are one
+          row of controls and must not behave differently on hover. */}
+      <Hint content={t("connected-accounts")}>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label={t("connected-accounts")}
+          className="relative inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
+        >
+          <UserGearIcon className="size-3.5" weight="bold" />
+          {needsTwitch ? (
+            <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-brand ring-2 ring-fd-background" />
+          ) : null}
+        </button>
+      </Hint>
 
       {/* This page is where a connect round trip comes back to, so this is the
           mount that reads the flag and reopens. */}

@@ -3,6 +3,7 @@
 import { useLocale } from "@onruntime/translations/react";
 import { useSyncExternalStore } from "react";
 import { DEFAULT_LOCALE } from "@/lib/translations";
+import { Hint } from "@/components/hint";
 
 /** Largest first, so the first unit the distance fills is the one it reads in. */
 const UNITS: readonly [Intl.RelativeTimeFormatUnit, number][] = [
@@ -93,8 +94,12 @@ export function RelativeTime({
   const { locale } = useLocale();
 
   return (
-    <time className={className} dateTime={date.toISOString()} title={title}>
-      {formatRelative(date, now, locale || DEFAULT_LOCALE)}
-    </time>
+    // The exact instant behind "3 hours ago", drawn rather than left to the
+    // browser's own box (see `Hint`). Absent when the caller passes none.
+    <Hint content={title}>
+      <time className={className} dateTime={date.toISOString()}>
+        {formatRelative(date, now, locale || DEFAULT_LOCALE)}
+      </time>
+    </Hint>
   );
 }

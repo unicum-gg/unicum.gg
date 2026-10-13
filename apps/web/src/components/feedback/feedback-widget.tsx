@@ -30,6 +30,7 @@ import {
   type FeedbackBody,
   type FeedbackSentiment,
 } from "./schema";
+import { Hint } from "@/components/hint";
 
 const TOPICS = Object.values(FeedbackTopic);
 
@@ -111,20 +112,24 @@ export function FeedbackWidget() {
         if (next) reset();
       }}
     >
-      <PopoverTrigger asChild>
-        <button
-          type="button"
-          title={t("trigger")}
-          aria-label={t("trigger")}
-          className="shrink-0 cursor-pointer font-medium text-fd-muted-foreground transition-colors hover:text-fd-foreground"
-        >
-          {/* A speech bubble on a phone: the word is the widest thing on the
-              strip in several languages, and this one is understood without
-              it. The label stays the accessible name. */}
-          <span className="hidden sm:inline">{t("trigger")}</span>
-          <ChatCircleTextIcon className="size-4 sm:hidden" aria-hidden />
-        </button>
-      </PopoverTrigger>
+      {/* The hint wraps the trigger rather than sitting inside it: an
+          `asChild` trigger hands its props to its single child, and a wrapper
+          that does not forward them would leave the popover unable to open. */}
+      <Hint content={t("trigger")}>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            aria-label={t("trigger")}
+            className="shrink-0 cursor-pointer font-medium text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+          >
+            {/* A speech bubble on a phone: the word is the widest thing on the
+                strip in several languages, and this one is understood without
+                it. The label stays the accessible name. */}
+            <span className="hidden sm:inline">{t("trigger")}</span>
+            <ChatCircleTextIcon className="size-4 sm:hidden" aria-hidden />
+          </button>
+        </PopoverTrigger>
+      </Hint>
       <PopoverContent align="end" className="w-80 p-3">
         {sent ? (
           <div className="flex flex-col gap-2.5">

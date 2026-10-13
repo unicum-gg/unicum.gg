@@ -20,6 +20,7 @@ import { usePlayersOnline } from "@/hooks/use-players-online";
 import { useRegion } from "@/hooks/use-region";
 import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
+import { Hint } from "@/components/hint";
 
 const FMT_FORMAT = {} as const;
 
@@ -98,9 +99,11 @@ export function PlayersOnline() {
                 key={s.server}
                 className="flex items-center justify-between gap-4"
               >
-                <span className="text-background/70" title={s.server}>
-                  {serverDisplayName(region, s.server)}
-                </span>
+                <Hint content={s.server}>
+                  <span className="text-background/70">
+                    {serverDisplayName(region, s.server)}
+                  </span>
+                </Hint>
                 <span className="font-medium">
                   {s.players == null ? "—" : num(FMT_FORMAT).format(s.players)}
                 </span>

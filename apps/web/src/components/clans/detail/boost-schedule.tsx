@@ -5,6 +5,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { Interpolate } from "@/components/interpolate";
 import { joinNames } from "@/lib/list-format";
 import { useTranslation } from "@/hooks/use-translation";
+import { Hint } from "@/components/hint";
 
 const HHMM = (min: number) => {
   const m = ((min % 1440) + 1440) % 1440;
@@ -103,15 +104,15 @@ export function BoostSchedulePreview({
           />
           {/* Each activation (clipped to the day at 24:00). */}
           {blocks.map((b) => (
-            <div
-              key={b.start}
-              title={`${HHMM(b.start)} - ${HHMM(b.end)}`}
-              className="absolute inset-y-1 rounded-sm border border-brand/40 bg-brand/70"
-              style={{
-                left: `${pct(b.start)}%`,
-                width: `${pct(b.end) - pct(b.start)}%`,
-              }}
-            />
+            <Hint key={b.start} content={`${HHMM(b.start)} - ${HHMM(b.end)}`}>
+              <div
+                className="absolute inset-y-1 rounded-sm border border-brand/40 bg-brand/70"
+                style={{
+                  left: `${pct(b.start)}%`,
+                  width: `${pct(b.end) - pct(b.start)}%`,
+                }}
+              />
+            </Hint>
           ))}
           {/* Cursor readout line. */}
           {hoverMin !== null && (

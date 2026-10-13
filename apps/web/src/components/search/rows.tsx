@@ -23,6 +23,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
 import { mapName } from "@/components/game-name";
+import { Hint } from "@/components/hint";
 
 /** `link` is off: the row itself is the click target and picks the result. The
  * crests keep their own links, which the row can hold now that it is an option
@@ -133,11 +134,15 @@ export function MapRow({ map }: { map: MapSearchResult }) {
           {mapName(map.arena_id, map.name, tMaps)}
         </span>
       </span>
-      <span className={cn("shrink-0", camo.className)} title={tCamo("camouflage-map", {
+      <Hint
+        content={tCamo("camouflage-map", {
           camouflage: tGame(`map-camouflage.${map.camouflage}`),
-        })}>
-        <CamoIcon weight="fill" className="size-3.5" />
-      </span>
+        })}
+      >
+        <span className={cn("shrink-0", camo.className)}>
+          <CamoIcon weight="fill" className="size-3.5" />
+        </span>
+      </Hint>
     </>
   );
 }

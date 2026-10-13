@@ -14,6 +14,7 @@ import {
 import { PanelTitle } from "@/components/panel";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { formatShare, formatWinrate } from "./format";
+import { Hint } from "@/components/hint";
 
 /** Wargaming's own name for a vehicle class, from the catalogue their API
  * publishes per language. Our English is the fallback for a class the
@@ -149,15 +150,23 @@ async function ShareTable({
                 key={row.label}
                 className="border-b border-fd-border last:border-b-0"
               >
-                <td
+                {/* English was written straight into this attribute, which is
+                    exactly what a native title hides: nothing renders it until
+                    a pointer rests on it, so no review and no locale sweep ever
+                    saw it.
+
+                    `as`, because this is a server component and the hint
+                    cannot clone a cell built here (see `Hint`). */}
+                <Hint
+                  as="td"
                   className="px-4 py-2 font-medium"
-                  title={`${row.tanks} vehicles`}
+                  content={tr("n-vehicles", { count: row.tanks })}
                 >
                   <span className="flex items-center gap-2">
                     {row.icon}
                     {row.label}
                   </span>
-                </td>
+                </Hint>
                 <td className="px-4 py-2">
                   <span className="flex items-center gap-2">
                     <span className="h-3 flex-1 overflow-hidden rounded-[2px] bg-fd-border/40">

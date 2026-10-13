@@ -26,6 +26,7 @@ import type {
 } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import { useTranslation } from "@/hooks/use-translation";
+import { Hint } from "@/components/hint";
 
 const COMPACT_FORMAT = {
   notation: "compact",
@@ -269,12 +270,11 @@ export function CurrentTankNode({
         <span className="text-[11px] font-bold text-brand">
           {meta.tier ? toRoman(meta.tier) : String(meta.tier)}
         </span>
-        <span
-          className="max-w-24 truncate text-xs font-semibold text-brand"
-          title={meta.name}
-        >
-          {meta.shortName || meta.name}
-        </span>
+        <Hint content={meta.name}>
+          <span className="max-w-24 truncate text-xs font-semibold text-brand">
+            {meta.shortName || meta.name}
+          </span>
+        </Hint>
       </div>
     </div>
   );
@@ -305,12 +305,11 @@ export function NextTankNode({
           <span className="text-[11px] font-bold text-fd-muted-foreground">
             {meta.tier ? toRoman(meta.tier) : String(meta.tier)}
           </span>
-          <span
-            className="max-w-24 truncate text-xs text-fd-foreground/85"
-            title={meta.name}
-          >
-            {meta.shortName || meta.name}
-          </span>
+          <Hint content={meta.name}>
+            <span className="max-w-24 truncate text-xs text-fd-foreground/85">
+              {meta.shortName || meta.name}
+            </span>
+          </Hint>
           {item.researchXp ? (
             <span className="flex items-center gap-0.5 text-[10px] leading-none text-fd-muted-foreground">
               <CurrencyIcon type="xp" className="size-2.5" />

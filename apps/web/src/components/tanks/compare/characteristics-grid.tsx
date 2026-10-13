@@ -27,6 +27,7 @@ import {
 import { categoryScore, MAX_SCORE } from "@/components/tanks/compare/score";
 import { bestOf } from "@/components/compare/cells";
 import { cn } from "@/lib/utils";
+import { Hint } from "@/components/hint";
 
 /** A column of the comparison, the same shape a tank page's own table reads. */
 export type CompareColumnSpecs = SpecColumn;
@@ -235,33 +236,34 @@ function SpecGroupRows({
           {heading}
         </th>
         {scores.map((score, i) => (
-          <td
+          <Hint
             key={i}
-            className="border-l border-fd-border px-3 py-2 text-right tabular-nums"
-            title={t("score-tip", {
+            content={t("score-tip", {
               group: heading.toLowerCase(),
               max: MAX_SCORE,
             })}
           >
-            {score == null ? (
-              <span className="text-fd-muted-foreground">—</span>
-            ) : (
-              <span
-                className={cn(
-                  "font-semibold",
-                  best.has(i) && "font-bold",
-                  pinned !== i &&
-                    referenceScore != null &&
-                    score !== referenceScore &&
-                    (score > referenceScore
-                      ? "text-emerald-500"
-                      : "text-red-500"),
-                )}
-              >
-                {score}
-              </span>
-            )}
-          </td>
+            <td className="border-l border-fd-border px-3 py-2 text-right tabular-nums">
+              {score == null ? (
+                <span className="text-fd-muted-foreground">—</span>
+              ) : (
+                <span
+                  className={cn(
+                    "font-semibold",
+                    best.has(i) && "font-bold",
+                    pinned !== i &&
+                      referenceScore != null &&
+                      score !== referenceScore &&
+                      (score > referenceScore
+                        ? "text-emerald-500"
+                        : "text-red-500"),
+                  )}
+                >
+                  {score}
+                </span>
+              )}
+            </td>
+          </Hint>
         ))}
       </tr>
       {group.rows.map((row, index) => {

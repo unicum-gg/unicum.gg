@@ -51,6 +51,7 @@ import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
 import { StreamChat } from "./stream-chat";
 import type { Region } from "@unicum.gg/wargaming";
+import { Hint } from "@/components/hint";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -186,15 +187,16 @@ export function LiveStreams({
           <div className="ms-auto flex items-center gap-1.5">
             <AddChannelCta />
             {onHide ? (
-              <button
-                type="button"
-                onClick={onHide}
-                aria-label={t("hide")}
-                title={t("hide")}
-                className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
-              >
-                <XIcon className="size-4" />
-              </button>
+              <Hint content={t("hide")}>
+                <button
+                  type="button"
+                  onClick={onHide}
+                  aria-label={t("hide")}
+                  className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
+                >
+                  <XIcon className="size-4" />
+                </button>
+              </Hint>
             ) : null}
           </div>
         </PanelHeader>
@@ -212,12 +214,11 @@ export function LiveStreams({
               </div>
               <div className="flex items-center gap-3 border-t border-fd-border p-4">
                 <div className="min-w-0 flex-1">
-                  <p
-                    className="truncate text-sm font-medium"
-                    title={active.title}
-                  >
-                    {active.title}
-                  </p>
+                  <Hint content={active.title}>
+                    <p className="truncate text-sm font-medium">
+                      {active.title}
+                    </p>
+                  </Hint>
                   <p className="mt-0.5 truncate text-sm text-fd-muted-foreground">
                     {/* No live pill and no streamer crest here: the card IS
                         the stream, so both would say what the reader is already

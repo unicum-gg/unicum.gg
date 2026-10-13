@@ -10,6 +10,7 @@ import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
 import { useTranslation } from "@/hooks/use-translation";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
+import { Hint } from "@/components/hint";
 
 type UserClanTag = { tag: string; name: string; color: string };
 
@@ -99,22 +100,23 @@ export function LoginWidget() {
     return (
       <span className="flex min-w-0 items-center gap-2">
         {name}
-        <button
-          type="button"
-          onClick={() =>
-            signOut({
-              fetchOptions: { onSuccess: () => window.location.reload() },
-            })
-          }
-          title={t("logout")}
-          aria-label={t("logout")}
-          className="shrink-0 cursor-pointer text-fd-muted-foreground transition-colors hover:text-fd-foreground"
-        >
-          {/* An icon on a phone, where the words would cost a third of the
-              strip. The label stays the accessible name either way. */}
-          <span className="hidden sm:inline">{t("logout")}</span>
-          <SignOutIcon className="size-4 sm:hidden" aria-hidden />
-        </button>
+        <Hint content={t("logout")}>
+          <button
+            type="button"
+            onClick={() =>
+              signOut({
+                fetchOptions: { onSuccess: () => window.location.reload() },
+              })
+            }
+            aria-label={t("logout")}
+            className="shrink-0 cursor-pointer text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+          >
+            {/* An icon on a phone, where the words would cost a third of the
+                strip. The label stays the accessible name either way. */}
+            <span className="hidden sm:inline">{t("logout")}</span>
+            <SignOutIcon className="size-4 sm:hidden" aria-hidden />
+          </button>
+        </Hint>
       </span>
     );
   }
