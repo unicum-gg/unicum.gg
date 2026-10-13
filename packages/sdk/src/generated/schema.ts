@@ -5238,6 +5238,8 @@ export interface components {
             /** @description Supporter Wargaming nickname, or "Anonymous". */
             name: string;
             anonymous: boolean;
+            /** @description Realm the supporter's account lives on, so their name can link to their profile. Null for an anonymous supporter, and for an account whose Wargaming link cannot be read: either way the name renders as plain text. */
+            region: ("eu" | "na" | "asia") | null;
         };
         /** @description A clan that current members previously belonged to. */
         PreviousClan: {

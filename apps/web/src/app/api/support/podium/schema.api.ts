@@ -1,5 +1,6 @@
 // Co-located response schema (`.api.ts` suffix is load-bearing for the generator).
 import { z } from "zod";
+import { regionPath } from "@/services/openapi/schemas";
 
 const podiumSupporter = z
   .object({
@@ -8,6 +9,10 @@ const podiumSupporter = z
       .string()
       .meta({ description: 'Supporter Wargaming nickname, or "Anonymous".' }),
     anonymous: z.boolean(),
+    region: regionPath.nullable().meta({
+      description:
+        "Realm the supporter's account lives on, so their name can link to their profile. Null for an anonymous supporter, and for an account whose Wargaming link cannot be read: either way the name renders as plain text.",
+    }),
   })
   .meta({
     id: "PodiumSupporter",

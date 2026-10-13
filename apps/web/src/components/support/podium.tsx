@@ -1,5 +1,50 @@
 import type { PodiumSupporter } from "@/app/api/support/podium/schema.api";
+import Link from "@/components/link";
+import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import type { Region } from "@unicum.gg/wargaming";
+
+/**
+ * A board row as this component consumes it: the response schema with `region`
+ * widened to a plain string.
+ *
+ * The schema infers it as the `Region` enum while the SDK, generated from the
+ * served document, types the same field as the literal union it really is on
+ * the wire. TypeScript enums are nominal, so the two describe one value and do
+ * not assign to each other. Widening the one field here is what lets the page
+ * hand over the SDK's rows untouched, and keeps the narrowing to a single cast
+ * at the one place that needs the enum back.
+ */
+type PodiumRow = Omit<PodiumSupporter, "region"> & { region: string | null };
+
+/**
+ * A supporter's name, linked to their player page when there is one to link to.
+ *
+ * The board is the one place a reader meets a supporter by name, and until now
+ * it was a dead end: the names are real players, several of them with a profile
+ * worth opening. A row links only when the payload carried a realm, which it
+ * withholds for an anonymous supporter and for an unreadable Wargaming link, so
+ * the decision is made once in the query rather than guessed at here.
+ */
+function SupporterName({
+  supporter,
+  className,
+}: {
+  supporter: PodiumRow;
+  className?: string;
+}) {
+  const label = <span className={cn("truncate", className)}>{supporter.name}</span>;
+  if (!supporter.region) return label;
+  return (
+    <Link
+      href={ROUTES.PLAYER(supporter.region as Region, supporter.name)}
+      className="min-w-0 truncate hover:text-brand hover:underline underline-offset-2"
+      title={supporter.name}
+    >
+      {label}
+    </Link>
+  );
+}
 
 /**
  * The three metals, in the tints the site already draws a Mark of Mastery in
@@ -57,7 +102,7 @@ function Place({
   supporter,
 }: {
   rank: number;
-  supporter: PodiumSupporter | null;
+  supporter: PodiumRow | null;
 }) {
   const { face, ink } = METAL[rank];
   const { height, medal, engraved, order } = STEP[rank];
@@ -89,13 +134,13 @@ function Place({
       </span>
       <span
         className={cn(
-          "mt-2 w-full truncate px-1 text-center text-xs font-semibold sm:text-sm",
+          "mt-2 flex w-full justify-center truncate px-1 text-center text-xs font-semibold sm:text-sm",
           ghost && "text-fd-muted-foreground/50",
           supporter?.anonymous && "font-normal italic opacity-70",
         )}
         title={supporter?.name}
       >
-        {supporter?.name ?? "—"}
+        {supporter ? <SupporterName supporter={supporter} /> : "—"}
       </span>
       <div
         className={cn(
@@ -142,7 +187,7 @@ function Place({
  * only thing a step can carry is the place itself: the height, the metal and
  * the crown are what say how the three differ.
  */
-export function SupportersPodium({ supporters }: { supporters: PodiumSupporter[] }) {
+export function SupportersPodium({ supporters }: { supporters: PodiumRow[] }) {
   const byRank = new Map(supporters.slice(0, 3).map((s) => [s.rank, s]));
   const rest = supporters.slice(3);
 
@@ -160,12 +205,10 @@ export function SupportersPodium({ supporters }: { supporters: PodiumSupporter[]
               <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-fd-muted text-[11px] font-semibold tabular-nums text-fd-muted-foreground">
                 {s.rank}
               </span>
-              <span
-                className={cn("truncate", s.anonymous && "italic opacity-70")}
-                title={s.name}
-              >
-                {s.name}
-              </span>
+              <SupporterName
+                supporter={s}
+                className={cn(s.anonymous && "italic opacity-70")}
+              />
             </li>
           ))}
         </ol>

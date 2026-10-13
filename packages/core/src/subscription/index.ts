@@ -2,11 +2,14 @@ import { randomUUID } from "node:crypto";
 import { and, asc, desc, eq, inArray, isNull, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
+  account,
   subscription,
   supportPayment,
   supportProfile,
   user,
+  wgIdentityFromAccountKey,
 } from "@unicum.gg/shared";
+import type { Region } from "@unicum.gg/wargaming";
 
 export type Subscription = typeof subscription.$inferSelect;
 export type SupportProfile = typeof supportProfile.$inferSelect;
@@ -264,8 +267,21 @@ export async function getMonthlyPledgeCents(): Promise<number> {
   return Number(row?.total ?? 0);
 }
 
-/** One board row. The amount is never exposed, only the ranking. */
-export type PodiumEntry = { rank: number; name: string; anonymous: boolean };
+/**
+ * One board row. The amount is never exposed, only the ranking.
+ *
+ * `region` is what lets the board link a name to the profile behind it, and it
+ * is null for exactly two rows: an anonymous supporter, whose whole point is
+ * not to be traceable back to an account, and a user whose Wargaming link is
+ * missing or malformed. Both keep their rank and render as plain text, so a
+ * name is a link only when there is somewhere real to go.
+ */
+export type PodiumEntry = {
+  rank: number;
+  name: string;
+  anonymous: boolean;
+  region: Region | null;
+};
 
 /**
  * The supporters board: everyone who has given something, ranked by the net
@@ -286,10 +302,23 @@ export type PodiumEntry = { rank: number; name: string; anonymous: boolean };
  */
 export async function getSupportersPodium(limit = 50): Promise<PodiumEntry[]> {
   const rows = await db
-    .select({ name: user.name, anonymous: supportProfile.anonymous })
+    .select({
+      name: user.name,
+      anonymous: supportProfile.anonymous,
+      // Aggregated rather than grouped on: a user holds one `account` row per
+      // linked provider (Twitch sits beside Wargaming), and the join is already
+      // narrowed to the Wargaming one. Taking the max keeps the row count at
+      // one per supporter even if a second WG link ever appears, where grouping
+      // on it would split one supporter's total across two board rows.
+      accountKey: sql<string | null>`max(${account.accountId})`,
+    })
     .from(supportPayment)
     .innerJoin(user, eq(user.id, supportPayment.userId))
     .leftJoin(supportProfile, eq(supportProfile.userId, supportPayment.userId))
+    .leftJoin(
+      account,
+      and(eq(account.userId, user.id), eq(account.providerId, "wargaming")),
+    )
     .groupBy(user.id, user.name, supportProfile.anonymous)
     .having(
       sql`sum(${supportPayment.amountCents} - ${supportPayment.amountRefundedCents}) > 0`,
@@ -305,5 +334,11 @@ export async function getSupportersPodium(limit = 50): Promise<PodiumEntry[]> {
     rank: i + 1,
     name: r.anonymous ? "Anonymous" : r.name,
     anonymous: !!r.anonymous,
+    // Resolved only for a named supporter: an anonymous row must not carry the
+    // realm either, since the board already shows the rank and a realm narrows
+    // the search for whoever is behind it.
+    region: r.anonymous
+      ? null
+      : (wgIdentityFromAccountKey(r.accountKey)?.region ?? null),
   }));
 }
