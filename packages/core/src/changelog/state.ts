@@ -1,9 +1,13 @@
 import { eq, sql } from "drizzle-orm";
-import { changelogState } from "@unicum.gg/shared";
+import { ChangelogProduct, changelogState } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 
 /**
- * How far the changelog has been published, and when it last ran.
+ * How far each product's changelog has been published, and when it last ran.
+ *
+ * One row per product: the site, whose marker is the last commit its digest
+ * covered, and the mod, whose marker is the last release tag it announced. The
+ * table was a singleton while the site was the only thing announcing anything.
  *
  * Postgres, not Redis. The first version was a Redis key, on the reasoning that
  * one string surviving a redeploy needs no schema. It survived redeploys and
@@ -14,11 +18,8 @@ import { db } from "@unicum.gg/core/db";
  * publish the previous day's entries a second time.
  *
  * A row cannot be evicted, which is the whole requirement: this value is not a
- * cache, it is the only record of what the channel has already been told.
+ * cache, it is the only record of what each channel has already been told.
  */
-
-/** The singleton row's id, enforced by a check constraint on the table. */
-const ROW_ID = 1;
 
 /** Attempts for the marker write. It runs after Discord has accepted the post,
  * so a lost write is not a failed publish: it is a batch the next run covers
@@ -32,8 +33,11 @@ const sleep = (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 export type ChangelogState = {
-  /** Full SHA of the last commit a published changelog covered. */
-  sha: string;
+  /** How far it was published: a full commit SHA for the site, a release tag
+   * for the mod. A `ref` rather than a `sha` because both live in this one
+   * column, and a name that fits only one of them is a name that misleads on
+   * the other. */
+  ref: string;
   /**
    * When the digest last ran to completion, whatever it had to say.
    *
@@ -54,19 +58,21 @@ export type ChangelogState = {
  * published" it republishes a batch, and read as "never ran" it publishes off
  * schedule. Rethrowing aborts the run instead, which costs a tick.
  */
-export async function readChangelogState(): Promise<ChangelogState | null> {
+export async function readChangelogState(
+  product: ChangelogProduct,
+): Promise<ChangelogState | null> {
   try {
     const [row] = await db
       .select({
-        sha: changelogState.lastPublishedSha,
+        ref: changelogState.lastPublishedRef,
         lastRunAt: changelogState.publishedAt,
       })
       .from(changelogState)
-      .where(eq(changelogState.id, ROW_ID))
+      .where(eq(changelogState.product, product))
       .limit(1);
     return row ?? null;
   } catch (err) {
-    console.error("[changelog] could not read the state row:", err);
+    console.error(`[changelog] could not read the ${product} state row:`, err);
     throw err;
   }
 }
@@ -75,27 +81,30 @@ export async function readChangelogState(): Promise<ChangelogState | null> {
  * has already happened by the time this runs, so reporting a failure for it
  * would be a lie, and the loud line is what the next run's near-duplicate is
  * explained by. */
-export async function writeLastPublished(sha: string): Promise<void> {
+export async function writeLastPublished(
+  product: ChangelogProduct,
+  ref: string,
+): Promise<void> {
   for (let attempt = 1; attempt <= WRITE_ATTEMPTS; attempt += 1) {
     try {
       await db
         .insert(changelogState)
-        .values({ id: ROW_ID, lastPublishedSha: sha })
+        .values({ product, lastPublishedRef: ref })
         .onConflictDoUpdate({
-          target: changelogState.id,
-          set: { lastPublishedSha: sha, publishedAt: sql`NOW()` },
+          target: changelogState.product,
+          set: { lastPublishedRef: ref, publishedAt: sql`NOW()` },
         });
       return;
     } catch (err) {
       console.error(
-        `[changelog] could not persist the published sha (attempt ${attempt}/${WRITE_ATTEMPTS}):`,
+        `[changelog] could not persist the published ${product} ref (attempt ${attempt}/${WRITE_ATTEMPTS}):`,
         err,
       );
       if (attempt < WRITE_ATTEMPTS) await sleep(attempt * 500);
     }
   }
   console.error(
-    "[changelog] the published sha is unrecorded, so the next run will cover this batch again",
+    `[changelog] the published ${product} ref is unrecorded, so the next run will cover this batch again`,
   );
 }
 
@@ -107,20 +116,20 @@ export async function writeLastPublished(sha: string): Promise<void> {
  * empty window every hour and then publish a one-line digest on whatever day
  * the next commit happened to land, which is the cadence it exists to protect.
  *
- * An UPDATE and not an upsert, because the row's sha is `NOT NULL` and a run
+ * An UPDATE and not an upsert, because the row's ref is `NOT NULL` and a run
  * with no commits has none to write. Before the first publish ever there is
  * therefore nothing to stamp, and the state stays "never ran", which the
  * catch-up reads as overdue until a commit lands. That is the right answer, but
  * it is also indistinguishable from a write that did nothing, hence the line.
  */
-export async function touchLastRun(): Promise<void> {
+export async function touchLastRun(product: ChangelogProduct): Promise<void> {
   const stamped = await db
     .update(changelogState)
     .set({ publishedAt: sql`NOW()` })
-    .where(eq(changelogState.id, ROW_ID))
-    .returning({ id: changelogState.id })
+    .where(eq(changelogState.product, product))
+    .returning({ product: changelogState.product })
     .catch((err) => {
-      console.error("[changelog] could not stamp the run:", err);
+      console.error(`[changelog] could not stamp the ${product} run:`, err);
       return [];
     });
   if (stamped.length === 0) {

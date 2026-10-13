@@ -1,4 +1,4 @@
-import { env } from "@unicum.gg/shared";
+import { ChangelogProduct, env } from "@unicum.gg/shared";
 import { discordBotEnabled, postChannelMessage } from "@unicum.gg/core/discord";
 import { listNewCommits } from "./commits";
 import { renderChangelogMessage } from "./message";
@@ -55,8 +55,8 @@ export function changelogEnabled(): boolean {
 export async function publishChangelog(
   options: { dryRun?: boolean; model?: string } = {},
 ): Promise<ChangelogResult> {
-  const state = await readChangelogState();
-  let commits = await listNewCommits(state?.sha ?? null, FALLBACK_HOURS);
+  const state = await readChangelogState(ChangelogProduct.Web);
+  let commits = await listNewCommits(state?.ref ?? null, FALLBACK_HOURS);
   // Null is "GitHub did not answer", which is not "nothing shipped": the empty
   // case below consumes the slot, and consuming it on a failed read is a digest
   // the channel never gets.
@@ -68,7 +68,7 @@ export async function publishChangelog(
       // Nothing landed. Stamp the run anyway: it is as done as a published one,
       // and left unstamped the catch-up would re-read this window every hour
       // and then post a one-line digest on whatever day the next commit landed.
-      await touchLastRun();
+      await touchLastRun(ChangelogProduct.Web);
       return { outcome: ChangelogOutcome.NoCommits, commits: 0 };
     }
     // A dry run whose only answer is "nothing new" is useless for tuning the
@@ -95,7 +95,7 @@ export async function publishChangelog(
   if (isEmptyDraft(draft)) {
     // Internal-only batch: consume it anyway, otherwise every later run pays to
     // re-read the same commits and the model keeps answering "nothing here".
-    if (!options.dryRun) await writeLastPublished(head);
+    if (!options.dryRun) await writeLastPublished(ChangelogProduct.Web, head);
     return { outcome: ChangelogOutcome.NothingToSay, commits: commits.length };
   }
 
@@ -133,7 +133,7 @@ export async function publishChangelog(
   }
 
   // Only after Discord took it.
-  await writeLastPublished(head);
+  await writeLastPublished(ChangelogProduct.Web, head);
   return {
     outcome: ChangelogOutcome.Posted,
     commits: commits.length,

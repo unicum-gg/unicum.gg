@@ -1,4 +1,4 @@
-import { env } from "@unicum.gg/shared";
+import { ChangelogProduct, env } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { ChangelogOutcome, changelogEnabled, publishChangelog } from ".";
 import { readChangelogState } from "./state";
@@ -119,7 +119,8 @@ export function startChangelogCron(): void {
     async () => {
       // Reads the stamp every completed run leaves, so a digest that went out
       // late, or found nothing to say, counts as the week being answered.
-      const lastRunAt = (await readChangelogState())?.lastRunAt ?? null;
+      const lastRunAt =
+        (await readChangelogState(ChangelogProduct.Web))?.lastRunAt ?? null;
       if (lastRunAt && Date.now() - lastRunAt.getTime() <= MAX_SILENCE_MS) {
         return;
       }
