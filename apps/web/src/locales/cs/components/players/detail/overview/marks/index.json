@@ -16,7 +16,7 @@
   "reach": {
     "heading": "Nad lištou bez známky",
     "description": "Vozidla, jejichž kombinované poškození už překračuje hranici znaku, který dosud nemají. Odznak představuje toto kombinované poškození a jeho barvu určuje překročený znak.",
-    "all-vehicles": "Zobrazit každé vozidlo proti jeho lištám"
+    "all-vehicles": "Porovnat všechna vozidla s prahovými hodnotami jejich známek"
   },
   "none": "Žádný"
 }

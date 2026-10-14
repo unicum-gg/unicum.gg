@@ -16,7 +16,7 @@
   "reach": {
     "heading": "Palkin yläpuolella ilman merkkiä",
     "description": "Ajoneuvot, joiden yhteenlaskettu vahinko ylittää jo merkin, jota niillä ei ole. Merkki on tämä yhteenlaskettu vahinko, joka on väritetty sen ylittämän merkin mukaan.",
-    "all-vehicles": "Näytä kaikki ajoneuvot niiden palkkeja vastaan"
+    "all-vehicles": "Vertaile kaikkien ajoneuvojen merkkien kynnysarvoja"
   },
   "none": "Ei mitään"
 }

@@ -42,7 +42,7 @@
   "maxRange": "ระยะสูงสุด",
   "medium": "… ปานกลาง",
   "mobility": "ความคล่องตัว",
-  "module-hp-max-repaired": "HP ของชิ้นส่วน (สูงสุด / การซ่อม)",
+  "module-hp-max-repaired": "HP ของโมดูล (สูงสุด / หลังการซ่อม)",
   "moduleDamage": "… ปะทะโมดูล",
   "penetration": "การเจาะเกราะ",
   "penetration500": "… ที่ 500 ม.",

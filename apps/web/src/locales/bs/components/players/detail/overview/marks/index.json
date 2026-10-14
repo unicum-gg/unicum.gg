@@ -16,7 +16,7 @@
   "reach": {
     "heading": "Iznad trake, bez oznake",
     "description": "Vozila čija ukupna šteta već doseže oznaku koju ne nose. Značka prikazuje tu ukupnu štetu, obojenu prema oznaci koju doseže.",
-    "all-vehicles": "Pogledajte svako vozilo protiv njegovih traka"
+    "all-vehicles": "Poredi svako vozilo s pragovima njegove oznake"
   },
   "none": "Nema"
 }

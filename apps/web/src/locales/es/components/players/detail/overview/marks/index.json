@@ -16,7 +16,7 @@
   "reach": {
     "heading": "Por encima de la barra, sin la marca",
     "description": "Vehículos cuyo daño combinado ya supera el umbral de una Marca que aún no tienen. La insignia muestra ese daño combinado, con el color de la Marca cuyo umbral supera.",
-    "all-vehicles": "Consulta todos los vehículos contra sus barras"
+    "all-vehicles": "Comparar todos los vehículos con sus umbrales de marca"
   },
   "none": "Ninguno"
 }

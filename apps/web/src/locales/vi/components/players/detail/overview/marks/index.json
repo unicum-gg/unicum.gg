@@ -16,7 +16,7 @@
   "reach": {
     "heading": "Trên thanh tiến trình, không có dấu",
     "description": "Các xe tăng có tổng sát thương hiện đã vượt qua một dấu mà chúng chưa có. Huy hiệu chính là tổng sát thương đó, được tô màu theo dấu đã vượt qua.",
-    "all-vehicles": "Xem từng xe tăng đối đầu với các thanh của chúng"
+    "all-vehicles": "So sánh mọi xe tăng với các ngưỡng dấu của mình"
   },
   "none": "Không có"
 }

@@ -16,7 +16,7 @@
   "reach": {
     "heading": "A sáv fölött, jel nélkül",
     "description": "Olyan járművek, amelyek összesített sebzése már meghalad egy olyan jelet, amellyel nem rendelkeznek. A jelvény ezt az összesített sebzést mutatja, annak a jelnek a színével, amelyet elér.",
-    "all-vehicles": "Tekintsd meg az összes járművet a sávjaik ellenében"
+    "all-vehicles": "Összehasonlít minden járművet a jelük küszöbértékeivel"
   },
   "none": "Nincs"
 }

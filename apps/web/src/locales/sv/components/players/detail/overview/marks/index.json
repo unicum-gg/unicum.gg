@@ -16,7 +16,7 @@
   "reach": {
     "heading": "Över ribban, utan märket",
     "description": "Vagnar vars kombinerade skada redan överstiger gränsen för ett märke de inte har. Etiketten visar den kombinerade skadan och färgas efter märket vars gräns den överstiger.",
-    "all-vehicles": "Se varje fordon mot dess staplar"
+    "all-vehicles": "Jämför varje fordon med tröskelvärdena för märket"
   },
   "none": "Inga"
 }
