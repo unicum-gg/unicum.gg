@@ -141,28 +141,6 @@ function clockOffset(
 }
 
 /**
- * Where everybody was, for the 2D viewer, out of this battle's archived replay.
- *
- * **The decoded positions, never the file.** Two reasons, and the second is
- * the one that decides it: the positions are a few hundred kilobytes against
- * the file's 1.3 MB, and the file carries the whole packet stream the client
- * received, including the battle chat. Handing that out would publish what
- * thirty people typed, which nothing on this site asks for and nobody
- * consented to beyond the replay being kept.
- *
- * 404 when no replay was archived, which is the ordinary case: the player's
- * client only writes one when recording is on, one of the thirty needs to have
- * sent it, and the archive has a quota.
- */
-/**
- * Battle replay
- * @description Where every vehicle was through a battle, for the 2D viewer, decoded from the replay file the players' own clients recorded. The decoded positions and nothing else: the file itself carries the whole packet stream the recording client received, the battle chat included, which is not published. 404 when no replay was kept for this battle, which is the ordinary case, since one exists only when a player who was there had recording on and shared it.
- * @pathParams battleParams
- * @response BattleReplayResponse
- * @tag Players
- * @openapi
- */
-/**
  * Every `stride` ticks at most, keeping the ends.
  *
  * The first point of each window rather than an average: these are positions,
@@ -187,6 +165,28 @@ function everyNTicks(points: [number, number, number][], stride: number) {
   return out;
 }
 
+/**
+ * Where everybody was, for the 2D viewer, out of this battle's archived replay.
+ *
+ * **The decoded positions, never the file.** Two reasons, and the second is
+ * the one that decides it: the positions are a few hundred kilobytes against
+ * the file's 1.3 MB, and the file carries the whole packet stream the client
+ * received, including the battle chat. Handing that out would publish what
+ * thirty people typed, which nothing on this site asks for and nobody
+ * consented to beyond the replay being kept.
+ *
+ * 404 when no replay was archived, which is the ordinary case: the player's
+ * client only writes one when recording is on, one of the thirty needs to have
+ * sent it, and the archive has a quota.
+ */
+/**
+ * Battle replay
+ * @description Where every vehicle was through a battle, for the 2D viewer, decoded from the replay file the players' own clients recorded. The decoded positions and nothing else: the file itself carries the whole packet stream the recording client received, the battle chat included, which is not published. 404 when no replay was kept for this battle, which is the ordinary case, since one exists only when a player who was there had recording on and shared it.
+ * @pathParams battleParams
+ * @response BattleReplayResponse
+ * @tag Players
+ * @openapi
+ */
 export async function GET(...args: Parameters<typeof GET__perf>) {
   return measured("GET /{region}/battles/{id}/replay", () => GET__perf(...args));
 }

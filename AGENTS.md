@@ -439,6 +439,7 @@ Adding a public endpoint: write the handler, its Zod schemas, and the JSDoc bloc
 - **`.default()` on enum params is not serialized**: doc defaults live in `QUERY_PARAM_DEFAULTS` (sourced from app constants like `DEFAULT_RATING_METRIC`) and are applied per param name in `normalizeParameters`.
 - **Enum params get wrapped in a single-element `allOf`**, which stops Scalar rendering a `<select>`; `normalizeParameters` flattens it.
 - **A literal `example: "example"` placeholder** is injected on every param; `normalizeParameters` replaces it with the first enum value (so `region` prefills `eu`) or drops it.
+- **The block must touch the handler.** It is read as the JSDoc OF `export async function GET`, so anything between the two detaches it: a second comment, a helper, a blank-separated prose block. A detached block is not an error, the endpoint is simply absent from the spec, `generate:client` drops its fluent method, and the build dies hundreds of lines away on the call site (`Property 'replay' does not exist on type 'BattleClient'`). Worse, the committed client still carries the method, so it type-checks locally against a client the build will not reproduce. The replay endpoint spent a night red that way, its `@openapi` block stranded above a `everyNTicks` helper thirty lines from the handler.
 - **Without `@tag`** the sidebar groups everything under the first path segment (`{region}`); tag handlers `Clans`/`Players`/`System`.
 
 ## Authentication (Better Auth + Wargaming.net ID)
