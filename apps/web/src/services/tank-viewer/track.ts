@@ -101,7 +101,9 @@ export function layTrack(
   let { curve, total } = pathOf(points);
   // A chassis that counts its own links is the better authority than any
   // division: laying exactly that many leaves no part link at the join.
-  const count = links ?? Math.max(1, Math.round(total / linkLength));
+  const counted = links ?? null;
+  const fits = () => Math.max(1, Math.round(total / linkLength));
+  let count = counted ?? fits();
   const mesh = new THREE.InstancedMesh(geometry, material, count);
   // What the link itself measures, and where its middle sits. Measured about
   // that middle rather than about the origin, so a link modelled off centre
@@ -149,22 +151,56 @@ export function layTrack(
     }
     mesh.instanceMatrix.needsUpdate = true;
   };
+  /**
+   * Take the belt to a new link count, growing the instance buffer for it.
+   *
+   * Lowering is free, since `count` only says how many of the allocated
+   * matrices are drawn. Growing past what was allocated needs a new buffer,
+   * which is why this is not simply an assignment, and it is affordable
+   * because a belt is only ever resized when the band it runs on is rebuilt.
+   */
+  const resize = (next: number) => {
+    if (next > mesh.instanceMatrix.count) {
+      mesh.instanceMatrix = new THREE.InstancedBufferAttribute(
+        new Float32Array(next * 16),
+        16,
+      );
+      mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    }
+    count = next;
+    mesh.count = next;
+  };
   place(0);
   /**
-   * Run the same links round a different path.
+   * Run the links round a different path.
    *
-   * The belt keeps its link count, because that is what the chassis says it
-   * has: a suspension that compresses does not add links, it takes up the
-   * slack, so the same number spread over a slightly different band is exactly
-   * what happens. The instance count never changes, so nothing is rebuilt.
+   * **A chassis that counts its links keeps that count**, because that is what
+   * it says the belt has: a suspension that compresses does not add links, it
+   * takes up the slack, so the same number spread over a slightly different
+   * band is exactly what happens.
+   *
+   * **A chassis that declares a pitch divides again**, because the pitch is
+   * what it declared and the count was only ever that division. The band is
+   * built from the wheels and the division was done on the client's own path,
+   * and those are not the same length: the median vehicle is within a tenth of
+   * a percent, but 63 of 2014 belts are more than 5% apart and the Crusher's
+   * band is 17.72 m against a 22.09 m path. Keeping the count there crams 110
+   * plates of 282 mm into a band that holds 88, so they overlap by 43% instead
+   * of 29 and the belt reads as a thick chunky rope standing off the hull.
+   * The other way round, a band that comes out longer than the path (the Char
+   * Murat's is twice it) would leave the links strung out with daylight
+   * between them.
    */
   const reshape = (next: number[][], offset: number) => {
     ({ curve, total } = pathOf(next));
+    if (counted === null) resize(fits());
     place(offset);
   };
   return {
     mesh,
-    count,
+    get count() {
+      return count;
+    },
     place,
     reshape,
     get total() {
