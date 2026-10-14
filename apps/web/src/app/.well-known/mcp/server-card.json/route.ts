@@ -1,11 +1,11 @@
 import APP from "@/constants/app";
-import { MCP_NAME } from "@/services/mcp/skill";
+import { MCP_SERVER_NAME } from "@/services/mcp/registry";
 
 export function GET(): Response {
   const card = {
     $schema:
       "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
-    name: `${APP.NAME}/${MCP_NAME}`,
+    name: MCP_SERVER_NAME,
     version: APP.VERSION,
     title: APP.NAME,
     description:
