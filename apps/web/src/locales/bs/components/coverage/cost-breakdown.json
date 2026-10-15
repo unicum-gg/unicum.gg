@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mj.",
+  "amount-per-year": "{amount}/god.",
   "billed-in-euros": "Naplaćuje se u eurima, preračunato u {currency} prema današnjem kursu.",
   "cost-breakdown": "Trošak detaljno",
   "estimated-annual-cost": "Procijenjeni godišnji trošak",

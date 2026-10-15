@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/hó",
+  "amount-per-year": "{amount}/év",
   "billed-in-euros": "Euróban számlázva, a mai árfolyamon {currency} pénznemre átváltva.",
   "cost-breakdown": "Költség-összesítés",
   "estimated-annual-cost": "Becsült éves költség",

@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mån",
+  "amount-per-year": "{amount}/år",
   "billed-in-euros": "Debiteras i euro, omräknat till {currency} enligt dagens kurs.",
   "cost-breakdown": "Kostnadsfördelning",
   "estimated-annual-cost": "Beräknad årskostnad",

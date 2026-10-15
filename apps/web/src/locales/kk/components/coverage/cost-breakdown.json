@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/ай",
+  "amount-per-year": "{amount}/жыл",
   "billed-in-euros": "Еуромен есептеледі, бүгінгі бағам бойынша {currency} валютасына айырбасталады.",
   "cost-breakdown": "Бағасы бойынша бөліну",
   "estimated-annual-cost": "Болжамды жылдық құны",

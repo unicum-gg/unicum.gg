@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/мес.",
+  "amount-per-year": "{amount}/год.",
   "billed-in-euros": "Таксувано в евро, преобразувано в {currency} по днешния курс.",
   "cost-breakdown": "Разбивка на цената",
   "estimated-annual-cost": "Очаквана годишна цена",

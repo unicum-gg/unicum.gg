@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/월",
+  "amount-per-year": "{amount}/년",
   "billed-in-euros": "유로로 청구되며, 오늘 환율에 따라 {currency}로 환산됩니다.",
   "cost-breakdown": "비용 분배",
   "estimated-annual-cost": "예상 연간 비용",

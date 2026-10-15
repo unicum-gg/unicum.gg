@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mėn.",
+  "amount-per-year": "{amount}/metus",
   "billed-in-euros": "Sąskaita pateikiama eurais, perskaičiuota į {currency} pagal šiandienos kursą.",
   "cost-breakdown": "Kainos analizė",
   "estimated-annual-cost": "Numatomos metinės išlaidos",

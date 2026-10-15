@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/buwan",
+  "amount-per-year": "{amount}/taon",
   "billed-in-euros": "Sinisingil sa euro, kino-convert sa {currency} ayon sa rate ngayon.",
   "cost-breakdown": "Pagbawas ng gastos",
   "estimated-annual-cost": "Tinatayang taunang gastos",

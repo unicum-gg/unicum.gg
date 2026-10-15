@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mesec",
+  "amount-per-year": "{amount}/leto",
   "billed-in-euros": "Účtované v eurách, prepočítané na {currency} podľa dnešného kurzu.",
   "cost-breakdown": "Razčlenitev stroškov",
   "estimated-annual-cost": "Odhadované ročné náklady",

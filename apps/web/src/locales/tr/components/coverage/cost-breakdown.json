@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/ay",
+  "amount-per-year": "{amount}/yıl",
   "billed-in-euros": "Euro cinsinden ücretlendirilir ve bugünkü kurla {currency} para birimine dönüştürülür.",
   "cost-breakdown": "Maliyet dökümü",
   "estimated-annual-cost": "Tahmini yıllık maliyet",

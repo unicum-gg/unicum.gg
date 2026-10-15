@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/мес.",
+  "amount-per-year": "{amount}/год",
   "billed-in-euros": "Счёт выставляется в евро и конвертируется в {currency} по сегодняшнему курсу.",
   "cost-breakdown": "Разбивка стоимости",
   "estimated-annual-cost": "Расчётная годовая стоимость",

@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/เดือน",
+  "amount-per-year": "{amount}/ปี",
   "billed-in-euros": "เรียกเก็บเป็นยูโร แปลงเป็น {currency} ตามอัตราวันนี้",
   "cost-breakdown": "รายละเอียดค่าใช้จ่าย",
   "estimated-annual-cost": "ค่าใช้จ่ายรายปีโดยประมาณ",

@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/شهريًا",
+  "amount-per-year": "{amount}/سنويًا",
   "billed-in-euros": "تُحتسب الفاتورة باليورو، وتُحوّل إلى {currency} بسعر اليوم.",
   "cost-breakdown": "تفصيل التكلفة",
   "estimated-annual-cost": "التكلفة السنوية المقدّرة",

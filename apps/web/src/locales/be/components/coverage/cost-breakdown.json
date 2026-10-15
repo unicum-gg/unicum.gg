@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/мес.",
+  "amount-per-year": "{amount}/год",
   "billed-in-euros": "Разлік у еўра, пералічана ў {currency} па сённяшнім курсе.",
   "cost-breakdown": "Кошт расклад",
   "estimated-annual-cost": "Разліковы гадавы кошт",

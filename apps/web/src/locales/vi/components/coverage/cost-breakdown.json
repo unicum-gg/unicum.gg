@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/tháng",
+  "amount-per-year": "{amount}/năm",
   "billed-in-euros": "Tính phí bằng euro, quy đổi sang {currency} theo tỷ giá hôm nay.",
   "cost-breakdown": "Phân tích giá",
   "estimated-annual-cost": "Chi phí hằng năm ước tính",

@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/माह",
+  "amount-per-year": "{amount}/वर्ष",
   "billed-in-euros": "यूरो में बिल किया गया, आज की दर पर {currency} में बदला गया।",
   "cost-breakdown": "लागत का विवरण",
   "estimated-annual-cost": "अनुमानित वार्षिक लागत",

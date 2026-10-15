@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/kk",
+  "amount-per-year": "{amount}/v",
   "billed-in-euros": "Laskutetaan euroina ja muunnetaan valuutaksi {currency} tämän päivän kurssilla.",
   "cost-breakdown": "Hintaerittely",
   "estimated-annual-cost": "Arvioitu vuosikustannus",

@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mnd",
+  "amount-per-year": "{amount}/jr",
   "billed-in-euros": "Gefactureerd in euro’s, omgerekend naar {currency} tegen de koers van vandaag.",
   "cost-breakdown": "Prijsopbouw",
   "estimated-annual-cost": "Geschatte prijs per jaar",

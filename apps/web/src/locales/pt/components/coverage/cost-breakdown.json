@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mês",
+  "amount-per-year": "{amount}/ano",
   "billed-in-euros": "Cobrado em euros, convertido para {currency} pela taxa de hoje.",
   "cost-breakdown": "Detalhamento de custos",
   "estimated-annual-cost": "Custo anual estimado",

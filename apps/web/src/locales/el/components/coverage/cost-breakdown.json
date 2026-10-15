@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/μήνα",
+  "amount-per-year": "{amount}/έτος",
   "billed-in-euros": "Χρέωση σε ευρώ, μετατροπή σε {currency} με τη σημερινή ισοτιμία.",
   "cost-breakdown": "Ανάλυση κόστος",
   "estimated-annual-cost": "Εκτιμώμενο ετήσιο κόστος",

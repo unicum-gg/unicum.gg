@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/міс.",
+  "amount-per-year": "{amount}/рік",
   "billed-in-euros": "Рахунок виставлено в євро, конвертація в {currency} за сьогоднішнім курсом.",
   "cost-breakdown": "Вартість зламу",
   "estimated-annual-cost": "Орієнтовна річна вартість",

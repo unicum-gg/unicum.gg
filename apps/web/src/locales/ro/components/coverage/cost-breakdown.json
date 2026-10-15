@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/lună",
+  "amount-per-year": "{amount}/an",
   "billed-in-euros": "Facturat în euro, convertit în {currency} la cursul de astăzi.",
   "cost-breakdown": "Detalierea costului",
   "estimated-annual-cost": "Cost anual estimat",

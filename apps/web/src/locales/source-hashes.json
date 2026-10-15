@@ -626,6 +626,8 @@
   "components/cookie-consent:accept": "821d1f7909a5",
   "components/copy-snippet:copied": "8e3df45a49db",
   "components/copy-snippet:copy-to-clipboard": "d8f482edf74e",
+  "components/coverage/cost-breakdown:amount-per-month": "00d7d76841d6",
+  "components/coverage/cost-breakdown:amount-per-year": "bbb5b0bdf401",
   "components/coverage/cost-breakdown:billed-in-euros": "bbd01d8e429e",
   "components/coverage/cost-breakdown:cost-breakdown": "e233f3feab16",
   "components/coverage/cost-breakdown:estimated-annual-cost": "ccdba45d65bb",

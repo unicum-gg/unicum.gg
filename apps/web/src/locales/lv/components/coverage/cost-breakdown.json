@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mēn.",
+  "amount-per-year": "{amount}/gadā",
   "billed-in-euros": "Rēķins eiro, konvertēts uz {currency} pēc šodienas kursa.",
   "cost-breakdown": "Cena sadalījums",
   "estimated-annual-cost": "Aprēķinātās gada izmaksas",
