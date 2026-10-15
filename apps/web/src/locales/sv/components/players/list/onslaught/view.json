@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} till {end}",
     "final": "slutställning",
-    "live": "pågående säsong",
-    "updated": "uppdaterad {when}"
+    "live": "pågående säsong"
   },
   "board": "Topp {count} spelare i {mode}",
   "columns": {

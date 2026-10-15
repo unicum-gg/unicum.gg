@@ -4,8 +4,7 @@
   "season": {
     "range": "{start}부터 {end}까지",
     "final": "최종 순위",
-    "live": "진행 중인 시즌",
-    "updated": "업데이트됨 {when}"
+    "live": "진행 중인 시즌"
   },
   "board": "{mode} 최고의 플레이어 {count}명",
   "columns": {

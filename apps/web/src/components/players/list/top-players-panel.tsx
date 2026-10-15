@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import useSWR from "swr";
 import { useLocale } from "@onruntime/translations/react";
-import { BoardUpdated } from "@/components/board-updated";
 import { Interpolate } from "@/components/interpolate";
 import {
   Panel,
@@ -59,7 +58,6 @@ export type LanguageCount = { code: string; total: number; strict: number };
 export function TopPlayersPanel({
   region,
   initial,
-  computedAt,
   page,
   title,
   language,
@@ -68,8 +66,6 @@ export function TopPlayersPanel({
 }: {
   region: Region;
   initial: TopPlayersByMetric;
-  /** When the prerendered Overall board was computed. */
-  computedAt: string | null;
   page?: number;
   /** The heading template's key in `components/players/list/view`, and what fills it. */
   title: { key: "board.all" | "board.language" | "board.strict"; language?: string };
@@ -99,19 +95,12 @@ export function TopPlayersPanel({
               ...(lang ? { lang } : {}),
               ...(s ? { strict: "true" as const } : {}),
             })
-            .then((res) => ({
-              rows: res.results as unknown as TopPlayerByLanguageResult[],
-              computedAt: res.computed_at,
-            })),
+            .then((res) => res.results as unknown as TopPlayerByLanguageResult[]),
         ),
       );
-      return {
-        boards: Object.fromEntries(
-          RATING_METRICS.map((m, i) => [m, lists[i].rows]),
-        ) as TopPlayersByMetric,
-        // One cron pass writes every metric, so any list's stamp is the board's.
-        computedAt: lists[0]?.computedAt ?? null,
-      };
+      return Object.fromEntries(
+        RATING_METRICS.map((m, i) => [m, lists[i]]),
+      ) as TopPlayersByMetric;
     },
     { keepPreviousData: true },
   );
@@ -124,8 +113,7 @@ export function TopPlayersPanel({
         .then((res) => res.results as LanguageCount[]),
     { keepPreviousData: true },
   );
-  const boards = overall ? initial : (data?.boards ?? initial);
-  const updatedAt = overall ? computedAt : (data?.computedAt ?? null);
+  const boards = overall ? initial : (data ?? initial);
   const stats = overall ? languageStats : (periodStats ?? languageStats);
   const loading = !overall && (isLoading || data === undefined);
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
@@ -162,28 +150,25 @@ export function TopPlayersPanel({
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-        <div className="space-y-1">
-          <PanelTitle>
-            <Interpolate
-              template={t(title.key, {
-                count: numberFormat(locale).format(count),
-                language: title.language ?? "",
-              })}
-              values={{
-                metric: (
-                  <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
-                ),
-              }}
-            />{" "}
-            <PeriodInlineSelect
-              period={period}
-              periods={BOARD_PERIODS}
-              label={(p) => tGame(`stronghold-periods.${p}`)}
-              onChange={setPeriod}
-            />
-          </PanelTitle>
-          <BoardUpdated at={updatedAt} />
-        </div>
+        <PanelTitle>
+          <Interpolate
+            template={t(title.key, {
+              count: numberFormat(locale).format(count),
+              language: title.language ?? "",
+            })}
+            values={{
+              metric: (
+                <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
+              ),
+            }}
+          />{" "}
+          <PeriodInlineSelect
+            period={period}
+            periods={BOARD_PERIODS}
+            label={(p) => tGame(`stronghold-periods.${p}`)}
+            onChange={setPeriod}
+          />
+        </PanelTitle>
         <div className="flex flex-wrap items-center gap-2">
           <PlayerLanguageSelect
             available={stats.map((s) => ({ code: s.code, playersCount: s.total }))}

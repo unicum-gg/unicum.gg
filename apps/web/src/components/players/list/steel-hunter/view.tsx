@@ -7,6 +7,7 @@ import PAGINATION from "@/constants/pagination";
 import ROUTES from "@/constants/routes";
 import { assertPageInRange } from "@/lib/pagination";
 import { PaginationRelLinks } from "@/components/pagination-rel-links";
+import { BoardUpdated } from "@/components/board-updated";
 import { SteelHunterRatingScale } from "@/components/players/list/steel-hunter/rating-scale";
 import { PlayerBoard } from "@/components/players/list/boards";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
@@ -53,9 +54,9 @@ export async function SteelHunterView({
     getTranslation("components/home/rating-scale", locale),
   ]);
   const mode = battleTypeName(BattleType.BattleRoyale, tGame);
-  const { results } = await buildSafe(
+  const { results, computed_at } = await buildSafe(
     () => unicum.region(region).players.steelHunter({ limit: LIMIT }),
-    { results: [] },
+    { results: [], computed_at: null },
   );
 
   const pagedRows = results.length;
@@ -73,7 +74,7 @@ export async function SteelHunterView({
         locale={locale}
       />
       <Panel>
-        <PanelContent className="px-4 py-12 text-center">
+        <PanelContent className="relative px-4 py-12 text-center">
           <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
@@ -88,6 +89,7 @@ export async function SteelHunterView({
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             {t("intro", { mode, region: REGION_LABEL[region] })}
           </p>
+          <BoardUpdated at={computed_at} />
         </PanelContent>
       </Panel>
 

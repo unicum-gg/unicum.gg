@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} से {end} तक",
     "final": "अंतिम रैंकिंग",
-    "live": "जारी सीज़न",
-    "updated": "अपडेटेड {when}"
+    "live": "जारी सीज़न"
   },
   "board": "{mode} के शीर्ष {count} खिलाड़ी",
   "columns": {

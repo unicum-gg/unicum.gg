@@ -47,6 +47,7 @@ async function GET__perf(
     const results = await getTopSteelHunter(region, limit, sort);
     return jsonResponse(SteelHunterResponse, {
       results: await attachPlayerBadges(region, results),
+      computed_at: new Date().toISOString(),
     });
   } catch (err) {
     console.error(`[api/${region}/players/steel-hunter] failed:`, err);

@@ -5764,6 +5764,7 @@ export interface components {
         stars: number;
         SteelHunterResponse: {
             results: components["schemas"]["SteelHunterSummary"][];
+            computed_at: string | null;
         };
         /** @description Steel Hunter leaderboard row (ranked by HR). */
         SteelHunterSummary: {
@@ -5851,6 +5852,7 @@ export interface components {
         };
         StrongholdTopResponse: {
             results: components["schemas"]["StrongholdLeaderboardEntry"][];
+            computed_at: string | null;
         };
         /** @description Everyone who has contributed, ranked by the net total given since launch, highest first. Individual amounts are never exposed; anonymous supporters appear as "Anonymous". */
         SupportersPodium: {

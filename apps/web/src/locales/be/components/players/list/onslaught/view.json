@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} да {end}",
     "final": "выніковая табліца",
-    "live": "сезон ідзе",
-    "updated": "абноўлена {when}"
+    "live": "сезон ідзе"
   },
   "board": "Лепшыя {count} гульцоў у рэжыме {mode}",
   "columns": {

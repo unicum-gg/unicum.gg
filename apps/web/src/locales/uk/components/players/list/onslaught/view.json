@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} — {end}",
     "final": "підсумкова таблиця",
-    "live": "поточний сезон",
-    "updated": "оновлено {when}"
+    "live": "поточний сезон"
   },
   "board": "Найкращі {count} гравців режиму {mode}",
   "columns": {

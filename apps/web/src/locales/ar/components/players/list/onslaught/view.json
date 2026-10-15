@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} إلى {end}",
     "final": "الترتيب النهائي",
-    "live": "الموسم الجاري",
-    "updated": "محدث {when}"
+    "live": "الموسم الجاري"
   },
   "board": "أفضل {count} لاعبين في {mode}",
   "columns": {

@@ -4,8 +4,7 @@
   "season": {
     "range": "Od {start} do {end}",
     "final": "końcowa klasyfikacja",
-    "live": "trwający sezon",
-    "updated": "zaktualizowane {when}"
+    "live": "trwający sezon"
   },
   "board": "Najlepsi gracze w trybie {mode}: {count}",
   "columns": {

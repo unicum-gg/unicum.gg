@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} do {end}",
     "final": "konačni poredak",
-    "live": "sezona u toku",
-    "updated": "ažurirano {when}"
+    "live": "sezona u toku"
   },
   "board": "Najboljih {count} igrača režima {mode}",
   "columns": {

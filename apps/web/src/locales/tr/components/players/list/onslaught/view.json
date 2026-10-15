@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} - {end}",
     "final": "nihai sıralama",
-    "live": "devam eden sezon",
-    "updated": "güncellendi {when}"
+    "live": "devam eden sezon"
   },
   "board": "En iyi {count} {mode} oyuncusu",
   "columns": {

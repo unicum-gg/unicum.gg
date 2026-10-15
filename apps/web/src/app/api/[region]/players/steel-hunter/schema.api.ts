@@ -41,4 +41,6 @@ export const steelHunterSummary = z
 /** Response of `GET /{region}/players/steel-hunter` (the Steel Hunter board). */
 export const SteelHunterResponse = z.object({
   results: z.array(steelHunterSummary),
+  // The board ranks straight off `*_players`, so the rows are as of the read.
+  computed_at: z.string().nullable(),
 });

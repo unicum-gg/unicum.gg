@@ -1,6 +1,7 @@
 "use client";
 
 import { Interpolate } from "@/components/interpolate";
+import { BoardUpdated } from "@/components/board-updated";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useSWR from "swr";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
@@ -40,10 +41,13 @@ export function StrongholdLeaderboardView({
   region,
   tier,
   initialResults,
+  computedAt,
 }: {
   region: Region;
   tier: StrongholdTier;
   initialResults: StrongholdLeaderboardEntry[];
+  /** When the prerendered board was computed; every window shares the pass. */
+  computedAt: string | null;
 }) {
   const { t } = useTranslation("components/clans/list/stronghold/view");
   const { t: tGame } = useTranslation("game/vocabulary");
@@ -158,7 +162,7 @@ export function StrongholdLeaderboardView({
   return (
     <div className="mx-auto w-full max-w-7xl">
       <Panel>
-        <PanelContent className="px-4 py-12 text-center">
+        <PanelContent className="relative px-4 py-12 text-center">
           <p className="mb-2 text-sm text-muted-foreground">
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </p>
@@ -193,6 +197,7 @@ export function StrongholdLeaderboardView({
               },
             )}
           </p>
+          <BoardUpdated at={computedAt} />
         </PanelContent>
       </Panel>
 

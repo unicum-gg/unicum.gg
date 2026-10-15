@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} до {end}",
     "final": "крайно класиране",
-    "live": "сезон в ход",
-    "updated": "актуализирано {when}"
+    "live": "сезон в ход"
   },
   "board": "Най-добрите {count} играчи в режим {mode}",
   "columns": {

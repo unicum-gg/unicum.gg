@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} līdz {end}",
     "final": "galīgais kopvērtējums",
-    "live": "aktīvā sezona",
-    "updated": "atjaunots {when}"
+    "live": "aktīvā sezona"
   },
   "board": "Labākie {count} spēlētāji režīmā {mode}",
   "columns": {

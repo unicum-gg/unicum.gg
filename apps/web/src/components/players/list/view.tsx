@@ -3,6 +3,7 @@ import ROUTES from "@/constants/routes";
 import { assertPageInRange } from "@/lib/pagination";
 import { PaginationRelLinks } from "@/components/pagination-rel-links";
 import Image from "next/image";
+import { BoardUpdated } from "@/components/board-updated";
 import {
   RatingScale,
   RatingScaleTitle,
@@ -107,7 +108,7 @@ export async function PlayersLandingView({
         locale={locale}
       />
       <Panel>
-        <PanelContent className="px-4 py-12 text-center">
+        <PanelContent className="relative px-4 py-12 text-center">
           {language ? (
             <div className="mb-2 inline-flex items-center gap-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
               {langCountry && (
@@ -160,6 +161,7 @@ export async function PlayersLandingView({
               strict={strict}
             />
           </div>
+          <BoardUpdated at={wnxTop.computed_at ?? wn8Top.computed_at} />
         </PanelContent>
       </Panel>
 
@@ -174,7 +176,6 @@ export async function PlayersLandingView({
       <TopPlayersPanel
         region={region}
         page={page}
-        computedAt={wnxTop.computed_at ?? wn8Top.computed_at}
         initial={{
           [RatingMetric.Wn7]: wn7Results,
           [RatingMetric.Wn8]: wn8Results,

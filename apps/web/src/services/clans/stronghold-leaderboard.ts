@@ -39,6 +39,12 @@ export type StrongholdLeaderboardEntry = {
   badges?: ClanRankBadge[];
 };
 
+/** A board and when the hourly cron last rewrote `*_stronghold_ratings`. */
+export type StrongholdLeaderboard = {
+  results: StrongholdLeaderboardEntry[];
+  computedAt: Date | null;
+};
+
 // SRB is SR bumped by a volume bonus that only ever adds (>= SR), on a single
 // absolute scale across tiers (see SRB_VOLUME_K in shared). Computed inline from
 // the materialized sr + battles.
@@ -78,7 +84,7 @@ export async function getStrongholdLeaderboard(
   sort: StrongholdSort,
   period: StrongholdPeriod,
   limit: number,
-): Promise<StrongholdLeaderboardEntry[]> {
+): Promise<StrongholdLeaderboard> {
   const table = strongholdRatingsByRegion[region];
   // Min-battles floor: SR has no volume brake, so a floor keeps a tiny lucky
   // sample off the board. `battles` is the period's count and the floor is
@@ -89,7 +95,7 @@ export async function getStrongholdLeaderboard(
     SELECT
       clan_id, tag, name, color, COALESCE(emblem, '') AS emblem, languages,
       members_count, elo, battles, wins, personal_rating, boost_ratio, sr,
-      ${srbSql()} AS srb
+      ${srbSql()} AS srb, computed_at
     FROM ${table}
     WHERE tier = ${tier} AND period = ${period} AND is_active
       AND battles >= ${minBattles}
@@ -110,9 +116,10 @@ export async function getStrongholdLeaderboard(
     boost_ratio: number | string | null;
     sr: number | string | null;
     srb: number | string | null;
+    computed_at: Date | string;
   }>;
 
-  return rows.map((r) => ({
+  const results = rows.map((r) => ({
     clanId: Number(r.clan_id),
     tag: r.tag,
     name: r.name,
@@ -129,6 +136,11 @@ export async function getStrongholdLeaderboard(
     sr: r.sr === null ? null : Number(r.sr),
     srb: r.srb === null ? null : Number(r.srb),
   }));
+  // One cron pass rewrites the table in one transaction: the rows share it.
+  return {
+    results,
+    computedAt: rows[0] ? new Date(rows[0].computed_at) : null,
+  };
 }
 
 /**

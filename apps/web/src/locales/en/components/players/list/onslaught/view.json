@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} to {end}",
     "final": "final standings",
-    "live": "live season",
-    "updated": "updated {when}"
+    "live": "live season"
   },
   "board": "Top {count} {mode} players",
   "columns": {

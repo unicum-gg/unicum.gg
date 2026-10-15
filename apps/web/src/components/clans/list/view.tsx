@@ -97,7 +97,7 @@ export async function ClansLandingView({
   return (
     <div className="mx-auto w-full max-w-7xl">
       <Panel>
-        <PanelContent className="px-4 py-12 text-center">
+        <PanelContent className="relative px-4 py-12 text-center">
           {language ? (
             <div className="mb-2 inline-flex items-center gap-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
               {langCountry && (
@@ -156,6 +156,7 @@ export async function ClansLandingView({
               strict={strict}
             />
           </div>
+          <BoardUpdated at={wnxTop.computed_at ?? wn8Top.computed_at} />
         </PanelContent>
       </Panel>
 
@@ -170,29 +171,26 @@ export async function ClansLandingView({
 
       <Panel>
         <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-          <div className="space-y-1">
-            <PanelTitle>
-              <Interpolate
-                template={t(
-                  language
-                    ? strict
-                      ? "board.strict"
-                      : "board.language"
-                    : "board.all",
-                  {
-                    count: numberFormat(locale).format(totalCount),
-                    language: langName ?? "",
-                  },
-                )}
-                values={{
-                  metric: (
-                    <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
-                  ),
-                }}
-              />
-            </PanelTitle>
-            <BoardUpdated at={wnxTop.computed_at ?? wn8Top.computed_at} />
-          </div>
+          <PanelTitle>
+            <Interpolate
+              template={t(
+                language
+                  ? strict
+                    ? "board.strict"
+                    : "board.language"
+                  : "board.all",
+                {
+                  count: numberFormat(locale).format(totalCount),
+                  language: langName ?? "",
+                },
+              )}
+              values={{
+                metric: (
+                  <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
+                ),
+              }}
+            />
+          </PanelTitle>
           <div className="flex flex-wrap items-center gap-2">
             <ClanLanguageSelect
               available={stats.map((s) => ({

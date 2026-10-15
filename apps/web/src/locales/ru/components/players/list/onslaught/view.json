@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} — {end}",
     "final": "итоговые результаты",
-    "live": "текущий сезон",
-    "updated": "обновлено {when}"
+    "live": "текущий сезон"
   },
   "board": "Топ-{count} игроков режима {mode}",
   "columns": {

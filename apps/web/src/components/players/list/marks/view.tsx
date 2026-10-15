@@ -118,7 +118,7 @@ export async function MarksLandingView({
         locale={locale}
       />
       <Panel>
-        <PanelContent className="px-4 py-12 text-center">
+        <PanelContent className="relative px-4 py-12 text-center">
           {language ? (
             <div className="mb-2 inline-flex items-center gap-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
               {langCountry && (
@@ -159,6 +159,7 @@ export async function MarksLandingView({
               },
             )}
           </p>
+          <BoardUpdated at={coverage.newest} />
         </PanelContent>
       </Panel>
 
@@ -170,20 +171,16 @@ export async function MarksLandingView({
 
       <Panel>
         <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-          <div className="space-y-1">
-            <PanelTitle>
-              {t(
-                language ? (strict ? "board.strict" : "board.language") : "board.all",
-                {
-                  count: num.format(rows.length),
-                  language: langName ?? "",
-                  marks,
-                },
-              )}
-            </PanelTitle>
-            {/* A live read of the marks table: it last moved when a garage was. */}
-            <BoardUpdated at={coverage.newest} />
-          </div>
+          <PanelTitle>
+            {t(
+              language ? (strict ? "board.strict" : "board.language") : "board.all",
+              {
+                count: num.format(rows.length),
+                language: langName ?? "",
+                marks,
+              },
+            )}
+          </PanelTitle>
           <div className="flex flex-wrap items-center gap-2">
             <PlayerLanguageSelect
               available={languages.map((l) => ({

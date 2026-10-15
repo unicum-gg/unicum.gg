@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} đến {end}",
     "final": "bảng xếp hạng chung cuộc",
-    "live": "mùa giải đang diễn ra",
-    "updated": "Đã cập nhật {when}"
+    "live": "mùa giải đang diễn ra"
   },
   "board": "{count} người chơi {mode} hàng đầu",
   "columns": {

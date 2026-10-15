@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} έως {end}",
     "final": "τελική κατάταξη",
-    "live": "σεζόν σε εξέλιξη",
-    "updated": "Ενημερωμένο {when}"
+    "live": "σεζόν σε εξέλιξη"
   },
   "board": "Κορυφαίοι {count} παίκτες στη {mode}",
   "columns": {

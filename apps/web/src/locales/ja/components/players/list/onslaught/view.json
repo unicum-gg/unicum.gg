@@ -4,8 +4,7 @@
   "season": {
     "range": "{start}から{end}まで",
     "final": "最終順位",
-    "live": "開催中のシーズン",
-    "updated": "更新日期 {when}"
+    "live": "開催中のシーズン"
   },
   "board": "{mode}のトップ{count}プレイヤー",
   "columns": {

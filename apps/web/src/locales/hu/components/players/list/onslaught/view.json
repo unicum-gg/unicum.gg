@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} – {end}",
     "final": "végeredmény",
-    "live": "folyamatban lévő szezon",
-    "updated": "frissítve: {when}"
+    "live": "folyamatban lévő szezon"
   },
   "board": "A(z) {mode} legjobb {count} játékosa",
   "columns": {

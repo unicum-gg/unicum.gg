@@ -4,8 +4,7 @@
   "season": {
     "range": "{start}至{end}",
     "final": "最终排名",
-    "live": "进行中的赛季",
-    "updated": "更新于 {when}"
+    "live": "进行中的赛季"
   },
   "board": "{mode}中排名前{count}的玩家",
   "columns": {

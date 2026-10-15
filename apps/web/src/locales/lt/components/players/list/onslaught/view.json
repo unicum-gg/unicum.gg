@@ -4,8 +4,7 @@
   "season": {
     "range": "{start}–{end}",
     "final": "galutinė lentelė",
-    "live": "vykstantis sezonas",
-    "updated": "atnaujinta {when}"
+    "live": "vykstantis sezonas"
   },
   "board": "{count} geriausi režimo {mode} žaidėjai",
   "columns": {

@@ -75,4 +75,6 @@ export const strongholdTopQuery = z.object({
 /** Response of `GET /{region}/clans/stronghold/top`. */
 export const StrongholdTopResponse = z.object({
   results: z.array(strongholdLeaderboardEntry),
+  // When the hourly cron last rewrote `*_stronghold_ratings`.
+  computed_at: z.string().nullable(),
 });

@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} hanggang {end}",
     "final": "pinal na ranggo",
-    "live": "kasalukuyang season",
-    "updated": "na-update {when}"
+    "live": "kasalukuyang season"
   },
   "board": "Nangungunang {count} manlalaro sa {mode}",
   "columns": {

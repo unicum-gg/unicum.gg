@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} do {end}",
     "final": "konečné pořadí",
-    "live": "probíhající sezóna",
-    "updated": "aktualizováno {when}"
+    "live": "probíhající sezóna"
   },
   "board": "Nejlepších {count} hráčů v režimu {mode}",
   "columns": {

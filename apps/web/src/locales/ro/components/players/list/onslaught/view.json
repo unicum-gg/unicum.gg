@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} până la {end}",
     "final": "clasament final",
-    "live": "sezon în desfășurare",
-    "updated": "actualizat {when}"
+    "live": "sezon în desfășurare"
   },
   "board": "Cei mai buni {count} jucători de {mode}",
   "columns": {

@@ -33,11 +33,12 @@ export async function StrongholdLeaderboardPage({
   // The page consumes its own public API through the SDK (top 100 fixed by
   // the endpoint). `buildSafe` lets a DB-less prerender emit an empty shell
   // that heals on first revalidation, like the other ISR boards.
-  const { results } = (await buildSafe(
+  const { results, computed_at } = (await buildSafe(
     () => unicum.region(region).clans.strongholdTop({ tier, sort, period }),
-    { results: [] },
+    { results: [], computed_at: null },
   )) as unknown as {
     results: StrongholdLeaderboardEntry[];
+    computed_at: string | null;
   };
 
   return (
@@ -45,6 +46,7 @@ export async function StrongholdLeaderboardPage({
       region={region}
       tier={tier}
       initialResults={results}
+      computedAt={computed_at}
     />
   );
 }

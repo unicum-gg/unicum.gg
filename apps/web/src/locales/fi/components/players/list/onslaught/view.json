@@ -4,8 +4,7 @@
   "season": {
     "range": "{start}–{end}",
     "final": "lopullinen sijoitustilanne",
-    "live": "käynnissä oleva kausi",
-    "updated": "päivitetty {when}"
+    "live": "käynnissä oleva kausi"
   },
   "board": "{count} parasta pelimuodon {mode} pelaajaa",
   "columns": {

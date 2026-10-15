@@ -3,8 +3,8 @@ import PAGINATION from "@/constants/pagination";
 import ROUTES from "@/constants/routes";
 import { assertPageInRange } from "@/lib/pagination";
 import { PaginationRelLinks } from "@/components/pagination-rel-links";
+import { BoardUpdated } from "@/components/board-updated";
 import { OnslaughtBoardLive } from "@/components/players/list/onslaught/board-live";
-import { RelativeTime } from "@/components/relative-time";
 import { PlayerBoard } from "@/components/players/list/boards";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
@@ -121,7 +121,7 @@ export async function OnslaughtView({
         locale={locale}
       />
       <Panel>
-        <PanelContent className="px-4 py-12 text-center">
+        <PanelContent className="relative px-4 py-12 text-center">
           <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
@@ -139,31 +139,12 @@ export async function OnslaughtView({
           {seasonLine ? (
             <p className="mt-3 text-sm text-fd-muted-foreground">
               {seasonLine}
-              {/* When these standings were true, which is the source's own
-                  recomputation time rather than when we asked. A reader needs
-                  to know whether they are looking at the board as it stands or
-                  at something that stopped moving, and on a live season the
-                  answer changes what they do next. Absolute in the HTML and
-                  relative on screen, so an ISR page half an hour old still
-                  reads the right distance. */}
-              {updatedAt ? (
-                <>
-                  {" · "}
-                  <Interpolate
-                    template={t("season.updated", { when: "{when}" })}
-                    values={{
-                      when: (
-                        <RelativeTime
-                          date={updatedAt}
-                          title={updatedAt.toISOString()}
-                        />
-                      ),
-                    }}
-                  />
-                </>
-              ) : null}
             </p>
           ) : null}
+          {/* The source's own recomputation time rather than when we asked:
+              on a live season, whether the board is still moving changes
+              what a reader does next. */}
+          <BoardUpdated at={updatedAt} />
         </PanelContent>
       </Panel>
 

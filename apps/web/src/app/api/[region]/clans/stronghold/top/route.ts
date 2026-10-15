@@ -50,7 +50,7 @@ async function GET__perf(
     PERIODS.has(periodParam) ? periodParam : StrongholdPeriod.Overall
   ) as StrongholdPeriod;
 
-  const results = await getStrongholdLeaderboard(
+  const { results, computedAt } = await getStrongholdLeaderboard(
     region,
     tier,
     sort,
@@ -69,5 +69,6 @@ async function GET__perf(
       void clan_id;
       return rest;
     }),
+    computed_at: computedAt?.toISOString() ?? null,
   });
 }

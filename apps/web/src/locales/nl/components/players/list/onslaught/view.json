@@ -4,8 +4,7 @@
   "season": {
     "range": "{start} tot {end}",
     "final": "eindstand",
-    "live": "lopend seizoen",
-    "updated": "bijgewerkt {when}"
+    "live": "lopend seizoen"
   },
   "board": "Top {count} spelers in {mode}",
   "columns": {

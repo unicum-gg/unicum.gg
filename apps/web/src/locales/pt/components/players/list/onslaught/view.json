@@ -4,8 +4,7 @@
   "season": {
     "range": "De {start} a {end}",
     "final": "classificação final",
-    "live": "temporada em curso",
-    "updated": "atualizado {when}"
+    "live": "temporada em curso"
   },
   "board": "Os {count} melhores jogadores no modo {mode}",
   "columns": {
