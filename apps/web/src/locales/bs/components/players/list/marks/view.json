@@ -9,9 +9,9 @@
     "strict": "Igrači iz regije {region} čiji jezik zaključен na osnovu historije klana isključivo glasi {language}, a koji imaju najviše topova s {marks}."
   },
   "board": {
-    "all": "Najboljih {count} igrača prema broju {marks}",
-    "language": "Najboljih {count} igrača koji govore {language}, prema broju {marks}",
-    "strict": "Najboljih {count} igrača koji strogo govore {language}, prema broju {marks}"
+    "all": "Top {count} igrača: {marks}",
+    "language": "Top {count} igrača ({language}): {marks}",
+    "strict": "Top {count} igrača (samo {language}): {marks}"
   },
   "coverage": {
     "title": "Šta ova rang-lista obuhvata",

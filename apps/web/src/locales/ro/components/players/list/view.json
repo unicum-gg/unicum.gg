@@ -9,9 +9,9 @@
     "strict": "Jucători din {region} al căror istoric de clan dedus este exclusiv în limba {language}, ordonați după {metric}, cu minimum 10.000 de bătălii."
   },
   "board": {
-    "all": "Cei mai buni {count} jucători după {metric}",
-    "language": "Cei mai buni {count} jucători {language} după {metric}",
-    "strict": "Cei mai buni {count} jucători strict {language} după {metric}"
+    "all": "Top {count} jucători după {metric}",
+    "language": "Top {count} jucători ({language}) după {metric}",
+    "strict": "Top {count} jucători (doar {language}) după {metric}"
   },
   "modes": {
     "overall": "General"

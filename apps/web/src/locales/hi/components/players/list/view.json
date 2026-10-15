@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{metric} के अनुसार शीर्ष {count} खिलाड़ी",
-    "language": "{metric} के अनुसार शीर्ष {count} {language} खिलाड़ी",
-    "strict": "{metric} के अनुसार केवल {language} वाले शीर्ष {count} खिलाड़ी"
+    "language": "{metric} के अनुसार शीर्ष {count} खिलाड़ी ({language})",
+    "strict": "{metric} के अनुसार शीर्ष {count} खिलाड़ी (केवल {language})"
   },
   "modes": {
     "overall": "कुल मिलाकर"

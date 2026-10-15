@@ -9,9 +9,9 @@
     "strict": "Игачи от регион {region}, чийто предполагаем език от историята на клана е изключително {language}, с най-много оръдия с {marks}."
   },
   "board": {
-    "all": "Най-добрите {count} игачи по {marks}",
-    "language": "Най-добрите {count} игачи на {language} по {marks}",
-    "strict": "Най-добрите {count} строго {language} игачи по {marks}"
+    "all": "Топ {count} играчи по {marks}",
+    "language": "Топ {count} играчи ({language}) по {marks}",
+    "strict": "Топ {count} играчи (само {language}) по {marks}"
   },
   "coverage": {
     "title": "Какво обхваща тази класация",

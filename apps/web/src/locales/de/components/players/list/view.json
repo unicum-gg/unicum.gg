@@ -9,9 +9,9 @@
     "strict": "Rangliste der spieler aus {region}, deren anhand der Clanhistorie ermittelte Sprache ausschließlich {language} ist, geordnet nach {metric} (mindestens 10.000 Gefechte)."
   },
   "board": {
-    "all": "Die besten {count} Spieler nach {metric}",
-    "language": "Die besten {count} Spieler ({language}) nach {metric}",
-    "strict": "Die besten {count} Spieler (ausschließlich {language}) nach {metric}"
+    "all": "Top {count} Spieler nach {metric}",
+    "language": "Top {count} Spieler ({language}) nach {metric}",
+    "strict": "Top {count} Spieler (nur {language}) nach {metric}"
   },
   "modes": {
     "overall": "Insgesamt"

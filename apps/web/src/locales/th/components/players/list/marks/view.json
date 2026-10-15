@@ -9,9 +9,9 @@
     "strict": "ผู้เล่นใน {region} ซึ่งภาษาประวัติแคลนที่อนุมานได้มีเพียง {language} และมีปืนที่มี {marks} มากที่สุด"
   },
   "board": {
-    "all": "ผู้เล่นอันดับต้น ๆ จำนวน {count} ตาม {marks}",
-    "language": "ผู้เล่นภาษา {language} อันดับต้น ๆ จำนวน {count} ตาม {marks}",
-    "strict": "ผู้เล่นภาษา {language} อย่างเคร่งครัดอันดับต้น ๆ จำนวน {count} ตาม {marks}"
+    "all": "ผู้เล่น {count} อันดับแรก ตาม {marks}",
+    "language": "ผู้เล่น {count} อันดับแรก ({language}) ตาม {marks}",
+    "strict": "ผู้เล่น {count} อันดับแรก (เฉพาะ{language}) ตาม {marks}"
   },
   "coverage": {
     "title": "กระดานอันดับนี้ครอบคลุมอะไรบ้าง",

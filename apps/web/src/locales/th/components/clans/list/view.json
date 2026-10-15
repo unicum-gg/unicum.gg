@@ -9,9 +9,9 @@
     "strict": "แคลนใน{region}ที่ประกาศให้{language}เป็นภาษาเดียวของแคลน จัดอันดับตาม {metric} ซึ่งคำนวณค่าเฉลี่ยจากสมาชิกที่ติดตามแล้ว (ขั้นต่ำ 25 สมาชิกที่มีการรบ)"
   },
   "board": {
-    "all": "แคลนที่ดีที่สุด {count} แคลนตาม {metric}",
-    "language": "แคลน {language} ที่ดีที่สุด {count} แคลนตาม {metric}",
-    "strict": "แคลน {language} โดยเฉพาะที่ดีที่สุด {count} แคลนตาม {metric}"
+    "all": "แคลน {count} อันดับแรก ตาม {metric}",
+    "language": "แคลน {count} อันดับแรก ({language}) ตาม {metric}",
+    "strict": "แคลน {count} อันดับแรก (เฉพาะ{language}) ตาม {metric}"
   },
   "members": "สมาชิก",
   "strict-toggle": "เข้มงวด",

@@ -9,9 +9,9 @@
     "strict": "{region} régió azon klánjai, amelyek egyetlen megadott nyelve {language}, a nyomon követett tagjaik körében számított átlagos {metric} alapján rangsorolva (klánonként legalább 25 már csatázott tag)."
   },
   "board": {
-    "all": "Legjobb {count} klán {metric} alapján",
-    "language": "Legjobb {count} {language} nyelvű klán {metric} alapján",
-    "strict": "Legjobb {count} kizárólag {language} nyelvű klán {metric} alapján"
+    "all": "Top {count} klán {metric} alapján",
+    "language": "Top {count} klán ({language}) {metric} alapján",
+    "strict": "Top {count} klán (csak {language}) {metric} alapján"
   },
   "members": "Tagok",
   "strict-toggle": "Szigorú",

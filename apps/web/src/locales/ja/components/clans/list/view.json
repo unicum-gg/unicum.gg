@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{metric}によるトップ{count}クラン",
-    "language": "{metric}によるトップ{count} {language}クラン",
-    "strict": "{metric}による{language}のみのトップ{count}クラン"
+    "language": "{metric}によるトップ{count}クラン（{language}）",
+    "strict": "{metric}によるトップ{count}クラン（{language}のみ）"
   },
   "members": "メンバー",
   "strict-toggle": "厳密",

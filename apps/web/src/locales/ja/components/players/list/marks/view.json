@@ -9,9 +9,9 @@
     "strict": "クラン履歴から推定された言語が{language}のみである{region}のプレイヤーを、{marks}の砲の保有数が多い順に表示します。"
   },
   "board": {
-    "all": "{marks}別トップ{count}プレイヤー",
-    "language": "{marks}別、{language}のトップ{count}プレイヤー",
-    "strict": "{marks}別、厳密に{language}のトップ{count}プレイヤー"
+    "all": "{marks}によるトップ{count}プレイヤー",
+    "language": "{marks}によるトップ{count}プレイヤー（{language}）",
+    "strict": "{marks}によるトップ{count}プレイヤー（{language}のみ）"
   },
   "coverage": {
     "title": "このランキングの対象範囲",

@@ -9,9 +9,9 @@
     "strict": "Clãs da região {region} que declararam {language} como o seu único idioma, ordenados pela média de {metric} dos respetivos membros monitorizados (mínimo de 25 membros com batalhas)."
   },
   "board": {
-    "all": "Os {count} melhores clãs por {metric}",
-    "language": "Os {count} melhores clãs de língua {language} por {metric}",
-    "strict": "Os {count} melhores clãs exclusivamente de língua {language} por {metric}"
+    "all": "Top {count} clãs por {metric}",
+    "language": "Top {count} clãs ({language}) por {metric}",
+    "strict": "Top {count} clãs (apenas {language}) por {metric}"
   },
   "members": "Membros",
   "strict-toggle": "Estrito",

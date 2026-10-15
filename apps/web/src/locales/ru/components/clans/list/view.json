@@ -9,9 +9,9 @@
     "strict": "Кланы региона {region}, указавшие только {language} в качестве языка, рейтинговый показатель — {metric}, усреднённый по их отслеживаемым участникам, минимум 25 участников с боями."
   },
   "board": {
-    "all": "Топ {count} кланов по показателю {metric}",
-    "language": "Топ {count} кланов на языке {language} по показателю {metric}",
-    "strict": "Топ {count} кланов только на языке {language} по показателю {metric}"
+    "all": "Топ-{count} кланов по {metric}",
+    "language": "Топ-{count} кланов ({language}) по {metric}",
+    "strict": "Топ-{count} кланов (только {language}) по {metric}"
   },
   "members": "Члены",
   "strict-toggle": "Строго",

@@ -9,9 +9,9 @@
     "strict": "Những người chơi khu vực {region} có ngôn ngữ suy ra từ lịch sử Clan chỉ là {language}, xếp theo {metric}, tối thiểu 10.000 trận đấu."
   },
   "board": {
-    "all": "{count} người chơi hàng đầu theo {metric}",
-    "language": "{count} người chơi {language} hàng đầu theo {metric}",
-    "strict": "{count} người chơi chỉ dùng {language} hàng đầu theo {metric}"
+    "all": "Top {count} người chơi theo {metric}",
+    "language": "Top {count} người chơi ({language}) theo {metric}",
+    "strict": "Top {count} người chơi (chỉ {language}) theo {metric}"
   },
   "modes": {
     "overall": "Tổng thể"

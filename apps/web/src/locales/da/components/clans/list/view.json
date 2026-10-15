@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Top {count} klaner efter {metric}",
-    "language": "Top {count} {language}-klaner efter {metric}",
-    "strict": "Top {count} udelukkende {language}-klaner efter {metric}"
+    "language": "Top {count} klaner ({language}) efter {metric}",
+    "strict": "Top {count} klaner (kun {language}) efter {metric}"
   },
   "members": "Medlemmer",
   "strict-toggle": "Streng",

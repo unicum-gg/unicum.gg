@@ -9,9 +9,9 @@
     "strict": "Παίκτες της {region} των οποίων η συναγόμενη γλώσσα ιστορικού κλαν είναι αποκλειστικά τα {language}, ταξινομημένοι κατά {metric}, με ελάχιστο 10.000 μάχες."
   },
   "board": {
-    "all": "Κορυφαίοι {count} παίκτες κατά {metric}",
-    "language": "Κορυφαίοι {count} παίκτες με {language} κατά {metric}",
-    "strict": "Κορυφαίοι {count} αποκλειστικά παίκτες με {language} κατά {metric}"
+    "all": "Top {count} παίκτες κατά {metric}",
+    "language": "Top {count} παίκτες ({language}) κατά {metric}",
+    "strict": "Top {count} παίκτες (μόνο {language}) κατά {metric}"
   },
   "modes": {
     "overall": "Γενικά"

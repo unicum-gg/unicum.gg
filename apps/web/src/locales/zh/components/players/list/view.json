@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "按{metric}排名前{count}的玩家",
-    "language": "按{metric}排名前{count}的{language}玩家",
-    "strict": "按{metric}排名前{count}的纯{language}玩家"
+    "language": "按{metric}排名前{count}的玩家（{language}）",
+    "strict": "按{metric}排名前{count}的玩家（仅{language}）"
   },
   "modes": {
     "overall": "总体"

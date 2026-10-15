@@ -9,9 +9,9 @@
     "strict": "{language} тілін жалғыз тілі ретінде көрсеткен {region} кландар. Бақыланатын мүшелерінің орташа {metric} көрсеткіші бойынша рейтингтік, ұрысқа қатысатын кемінде 25 мүше."
   },
   "board": {
-    "all": "{metric} бойынша ең жақсы {count} клан",
-    "language": "{metric} бойынша ең жақсы {count} {language} клан",
-    "strict": "{metric} бойынша ең жақсы тек {language} тіліндегі {count} клан"
+    "all": "{metric} бойынша үздік {count} клан",
+    "language": "{metric} бойынша үздік {count} клан ({language})",
+    "strict": "{metric} бойынша үздік {count} клан (тек {language})"
   },
   "members": "Мүшелері",
   "strict-toggle": "Қатаң",

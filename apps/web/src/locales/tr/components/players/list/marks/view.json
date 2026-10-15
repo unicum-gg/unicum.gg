@@ -9,9 +9,9 @@
     "strict": "Çıkarılan klan geçmişi dili yalnızca {language} olan ve {marks} olan en fazla topa sahip {region} oyuncular."
   },
   "board": {
-    "all": "{marks} değerine göre en iyi {count} oyuncu",
-    "language": "{marks} değerine göre en iyi {count} {language} oyuncu",
-    "strict": "{marks} değerine göre en iyi {count} yalnızca {language} oyuncu"
+    "all": "{marks} sayısına göre en iyi {count} oyuncu",
+    "language": "{marks} sayısına göre en iyi {count} oyuncu ({language})",
+    "strict": "{marks} sayısına göre en iyi {count} oyuncu (yalnızca {language})"
   },
   "coverage": {
     "title": "Bu tablonun kapsadığı şeyler",

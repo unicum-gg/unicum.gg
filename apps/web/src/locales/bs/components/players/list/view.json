@@ -9,9 +9,9 @@
     "strict": "Igrači iz regije {region} čiji je jezik izveden iz historije klana isključivo {language}, rangirani prema {metric}, uz minimum od 10.000 bitaka."
   },
   "board": {
-    "all": "Najboljih {count} igrača prema {metric}",
-    "language": "Najboljih {count} igrača na jeziku {language} prema {metric}",
-    "strict": "Najboljih {count} igrača isključivo na jeziku {language} prema {metric}"
+    "all": "Top {count} igrača prema {metric}",
+    "language": "Top {count} igrača ({language}) prema {metric}",
+    "strict": "Top {count} igrača (samo {language}) prema {metric}"
   },
   "modes": {
     "overall": "Sveukupno"

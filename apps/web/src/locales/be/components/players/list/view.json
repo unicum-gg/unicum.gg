@@ -9,9 +9,9 @@
     "strict": "{region} гульцы, чый вызначаны набор моваў у гісторыя клана выключна {language}, з рэйтынгам паводле {metric} (мінімум 10 000 баі)."
   },
   "board": {
-    "all": "Найлепшыя {count} гульцоў па {metric}",
-    "language": "Найлепшыя {count} гульцоў з мовай {language} па {metric}",
-    "strict": "Найлепшыя {count} гульцоў выключна з мовай {language} па {metric}"
+    "all": "Топ-{count} гульцоў па {metric}",
+    "language": "Топ-{count} гульцоў ({language}) па {metric}",
+    "strict": "Топ-{count} гульцоў (толькі {language}) па {metric}"
   },
   "modes": {
     "overall": "У цэлым"

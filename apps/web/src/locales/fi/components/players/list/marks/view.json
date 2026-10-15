@@ -9,9 +9,9 @@
     "strict": "{region}-alueen pelaajat, joiden päätelty klaanihistorian kieli on yksinomaan {language} ja joiden hallussa on eniten {marks}-merkkisiä tykkejä."
   },
   "board": {
-    "all": "Parhaat {count} pelaajaa {marks}-merkkien mukaan",
-    "language": "Parhaat {count} {language}-kielistä pelaajaa {marks}-merkkien mukaan",
-    "strict": "Parhaat {count} tiukasti {language}-kielistä pelaajaa {marks}-merkkien mukaan"
+    "all": "Top {count} pelaajaa: {marks}",
+    "language": "Top {count} pelaajaa ({language}): {marks}",
+    "strict": "Top {count} pelaajaa (vain {language}): {marks}"
   },
   "coverage": {
     "title": "Mitä tämä tulostaulukko kattaa",

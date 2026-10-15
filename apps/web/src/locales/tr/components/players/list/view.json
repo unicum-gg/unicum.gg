@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{metric} değerine göre en iyi {count} oyuncu",
-    "language": "{metric} değerine göre en iyi {count} {language} oyuncusu",
-    "strict": "Yalnızca {language} olan en iyi {count} oyuncu, {metric} değerine göre"
+    "language": "{metric} değerine göre en iyi {count} oyuncu ({language})",
+    "strict": "{metric} değerine göre en iyi {count} oyuncu (yalnızca {language})"
   },
   "modes": {
     "overall": "Genel"

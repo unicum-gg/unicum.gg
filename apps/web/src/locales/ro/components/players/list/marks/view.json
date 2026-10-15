@@ -9,9 +9,9 @@
     "strict": "Jucătorii din {region} al căror istoric al clanului dedus este exclusiv în {language}, cu cele mai multe tunuri cu {marks}."
   },
   "board": {
-    "all": "Primii {count} jucători după {marks}",
-    "language": "Primii {count} jucători de limbă {language} după {marks}",
-    "strict": "Primii {count} jucători strict de limbă {language} după {marks}"
+    "all": "Top {count} jucători după {marks}",
+    "language": "Top {count} jucători ({language}) după {marks}",
+    "strict": "Top {count} jucători (doar {language}) după {marks}"
   },
   "coverage": {
     "title": "Ce acoperă acest clasament",

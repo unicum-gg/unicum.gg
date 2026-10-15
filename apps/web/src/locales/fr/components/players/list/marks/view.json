@@ -9,9 +9,9 @@
     "strict": "Joueurs de {region} dont la langue déduite de l’historique de clan est exclusivement {language}, détenant le plus de canons avec {marks}."
   },
   "board": {
-    "all": "Les {count} meilleurs joueurs selon {marks}",
-    "language": "Les {count} meilleurs joueurs de langue {language} selon {marks}",
-    "strict": "Les {count} meilleurs joueurs strictement de langue {language} selon {marks}"
+    "all": "Top {count} des joueurs en {marks}",
+    "language": "Top {count} des joueurs ({language}) en {marks}",
+    "strict": "Top {count} des joueurs (exclusivement {language}) en {marks}"
   },
   "coverage": {
     "title": "Ce que couvre ce classement",

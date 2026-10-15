@@ -9,9 +9,9 @@
     "strict": "Играчи из региона {region} чији је изведени језик историје клана strogo {language}, са највише topova са {marks}."
   },
   "board": {
-    "all": "Најбољих {count} играча према {marks}",
-    "language": "Најбољих {count} играча на {language} језику према {marks}",
-    "strict": "Најбољих {count} strogo {language} играча према {marks}"
+    "all": "Топ {count} играча: {marks}",
+    "language": "Топ {count} играча ({language}): {marks}",
+    "strict": "Топ {count} играча (само {language}): {marks}"
   },
   "coverage": {
     "title": "Шта ова табела обухвата",

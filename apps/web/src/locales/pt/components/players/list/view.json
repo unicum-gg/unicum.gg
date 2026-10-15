@@ -9,9 +9,9 @@
     "strict": "Jogadores da região {region} cujo idioma, inferido a partir do histórico de clãs, é exclusivamente {language}, classificados segundo {metric} (mínimo de 10 000 batalhas)."
   },
   "board": {
-    "all": "{count} melhores jogadores segundo {metric}",
-    "language": "{count} melhores jogadores, idioma: {language}, segundo {metric}",
-    "strict": "{count} melhores jogadores, idioma exclusivo: {language}, segundo {metric}"
+    "all": "Top {count} jogadores por {metric}",
+    "language": "Top {count} jogadores ({language}) por {metric}",
+    "strict": "Top {count} jogadores (apenas {language}) por {metric}"
   },
   "modes": {
     "overall": "Geral"

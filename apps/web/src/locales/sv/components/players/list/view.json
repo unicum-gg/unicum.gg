@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Topp {count} spelare efter {metric}",
-    "language": "Topp {count} spelare på {language} efter {metric}",
-    "strict": "Topp {count} spelare med enbart {language} i språkprofilen efter {metric}"
+    "language": "Topp {count} spelare ({language}) efter {metric}",
+    "strict": "Topp {count} spelare (endast {language}) efter {metric}"
   },
   "modes": {
     "overall": "Övergripande"

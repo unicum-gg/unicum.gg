@@ -9,9 +9,9 @@
     "strict": "Клани регіону {region}, які вказали {language} як єдину мову, рейтинговий показник {metric}, усереднений для їхніх відстежуваних учасників, мінімум 25 учасників із боями."
   },
   "board": {
-    "all": "Топ {count} кланів за показником {metric}",
-    "language": "Топ {count} кланів мовою {language} за показником {metric}",
-    "strict": "Топ {count} кланів лише мовою {language} за показником {metric}"
+    "all": "Топ-{count} кланів за {metric}",
+    "language": "Топ-{count} кланів ({language}) за {metric}",
+    "strict": "Топ-{count} кланів (лише {language}) за {metric}"
   },
   "members": "Члени",
   "strict-toggle": "Суворий",

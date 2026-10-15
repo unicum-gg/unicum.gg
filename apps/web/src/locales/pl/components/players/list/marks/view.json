@@ -9,9 +9,9 @@
     "strict": "Gracze z regionu {region}, których wywnioskowany język historii klanu to wyłącznie {language}, posiadający najwięcej dział z {marks}."
   },
   "board": {
-    "all": "Najlepszych {count} graczy według {marks}",
-    "language": "Najlepszych {count} graczy używających języka {language} według {marks}",
-    "strict": "Najlepszych {count} graczy używających wyłącznie języka {language} według {marks}"
+    "all": "Top {count} graczy według {marks}",
+    "language": "Top {count} graczy ({language}) według {marks}",
+    "strict": "Top {count} graczy (tylko {language}) według {marks}"
   },
   "coverage": {
     "title": "Co obejmuje ta tabela",

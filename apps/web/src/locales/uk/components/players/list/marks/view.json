@@ -9,9 +9,9 @@
     "strict": "Гравці регіону {region}, у яких припущена мова історії клану виключно {language}, і які утримують найбільше гармат із {marks} відмітками."
   },
   "board": {
-    "all": "Топ {count} гравців за кількістю {marks}",
-    "language": "Топ {count} гравців із мовою {language} за кількістю {marks}",
-    "strict": "Топ {count} гравців лише з мовою {language} за кількістю {marks}"
+    "all": "Топ-{count} гравців: {marks}",
+    "language": "Топ-{count} гравців ({language}): {marks}",
+    "strict": "Топ-{count} гравців (лише {language}): {marks}"
   },
   "coverage": {
     "title": "Що охоплює ця таблиця",

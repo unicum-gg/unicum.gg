@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Nangungunang {count} manlalaro ayon sa {metric}",
-    "language": "Nangungunang {count} manlalaro sa {language} ayon sa {metric}",
-    "strict": "Nangungunang {count} eksklusibong {language} na manlalaro ayon sa {metric}"
+    "language": "Nangungunang {count} manlalaro ({language}) ayon sa {metric}",
+    "strict": "Nangungunang {count} manlalaro (puro {language}) ayon sa {metric}"
   },
   "modes": {
     "overall": "Pangkalahatan"

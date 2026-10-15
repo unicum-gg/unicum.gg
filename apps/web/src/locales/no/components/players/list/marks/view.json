@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Topp {count} spillere etter {marks}",
-    "language": "Topp {count} spillere på {language} etter {marks}",
-    "strict": "Topp {count} spillere som strengt tatt er på {language}, etter {marks}"
+    "language": "Topp {count} spillere ({language}) etter {marks}",
+    "strict": "Topp {count} spillere (kun {language}) etter {marks}"
   },
   "coverage": {
     "title": "Hva denne tavlen dekker",

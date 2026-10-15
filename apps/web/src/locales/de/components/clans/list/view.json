@@ -9,9 +9,9 @@
     "strict": "Clans aus {region}, die {language} als ihre einzige Sprache angegeben haben, sortiert nach dem durchschnittlichen {metric}-Wert ihrer erfassten Mitglieder (mindestens 25 Mitglieder mit Gefechten)."
   },
   "board": {
-    "all": "Die {count} Top-Clans, sortiert nach {metric}",
-    "language": "Die {count} Top-Clans mit {language} als Sprache, sortiert nach {metric}",
-    "strict": "Die {count} Top-Clans ausschließlich mit {language} als Sprache, sortiert nach {metric}"
+    "all": "Top {count} Clans nach {metric}",
+    "language": "Top {count} Clans ({language}) nach {metric}",
+    "strict": "Top {count} Clans (nur {language}) nach {metric}"
   },
   "members": "Mitglieder",
   "strict-toggle": "Streng",

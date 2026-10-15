@@ -9,9 +9,9 @@
     "strict": "{region} 中仅将 {language} 声明为唯一语言的军团，按其已追踪成员的平均 {metric} 排位（至少需要 25 名有战斗记录的成员）。"
   },
   "board": {
-    "all": "按 {metric} 排位的前 {count} 名军团",
-    "language": "按 {metric} 排位的前 {count} 名 {language} 军团",
-    "strict": "按 {metric} 排位的前 {count} 名纯 {language} 军团"
+    "all": "按{metric}排名前{count}的军团",
+    "language": "按{metric}排名前{count}的军团（{language}）",
+    "strict": "按{metric}排名前{count}的军团（仅{language}）"
   },
   "members": "成员",
   "strict-toggle": "严格",

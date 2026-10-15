@@ -9,9 +9,9 @@
     "strict": "{region} játékosok, akiknek a következtetett klántörténet-nyelve kizárólag {language}, és akiknél a legtöbb, {marks} jelet elérő ágyú van."
   },
   "board": {
-    "all": "A {marks} szerinti legjobb {count} játékos",
-    "language": "A {marks} szerinti legjobb {count} {language} játékos",
-    "strict": "A {marks} szerinti legjobb {count} szigorúan {language} játékos"
+    "all": "Top {count} játékos {marks} alapján",
+    "language": "Top {count} játékos ({language}) {marks} alapján",
+    "strict": "Top {count} játékos (csak {language}) {marks} alapján"
   },
   "coverage": {
     "title": "Mit tartalmaz ez a ranglista",

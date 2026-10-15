@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "أفضل {count} من اللاعبين حسب {marks}",
-    "language": "أفضل {count} من اللاعبين الناطقين باللغة {language} حسب {marks}",
-    "strict": "أفضل {count} من اللاعبين الناطقين باللغة {language} فقط حسب {marks}"
+    "language": "أفضل {count} من اللاعبين ({language}) حسب {marks}",
+    "strict": "أفضل {count} من اللاعبين ({language} فقط) حسب {marks}"
   },
   "coverage": {
     "title": "ما الذي تغطيه لوحة المتصدرين هذه",

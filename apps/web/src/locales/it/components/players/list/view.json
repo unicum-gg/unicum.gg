@@ -9,9 +9,9 @@
     "strict": "Giocatori della regione {region} la cui unica lingua, dedotta dalla cronologia dei clan, è {language}, classificati per {metric} (minimo 10.000 battaglie)."
   },
   "board": {
-    "all": "Migliori {count} giocatori in base a {metric}",
-    "language": "Migliori {count} giocatori che parlano {language} in base a {metric}",
-    "strict": "Migliori {count} giocatori che parlano esclusivamente {language} in base a {metric}"
+    "all": "Top {count} giocatori per {metric}",
+    "language": "Top {count} giocatori ({language}) per {metric}",
+    "strict": "Top {count} giocatori (solo {language}) per {metric}"
   },
   "modes": {
     "overall": "Globale"

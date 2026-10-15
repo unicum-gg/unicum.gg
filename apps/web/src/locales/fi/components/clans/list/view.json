@@ -9,9 +9,9 @@
     "strict": "Alueen {region} klaanit, jotka ilmoittivat {language}:n ainoaksi kielekseen, rankattuna mittarin {metric} mukaan seuratuista jäsenistä lasketun keskiarvon perusteella (vähintään 25 jäsentä, joilla on taisteluita)."
   },
   "board": {
-    "all": "Parhaat {count} klaanit mittarilla {metric}",
-    "language": "Parhaat {count} kielen {language} klaanit mittarilla {metric}",
-    "strict": "Parhaat {count} vain {language}-kieliset klaanit mittarin {metric} perusteella"
+    "all": "Top {count} klaania mittarilla {metric}",
+    "language": "Top {count} klaania ({language}) mittarilla {metric}",
+    "strict": "Top {count} klaania (vain {language}) mittarilla {metric}"
   },
   "members": "Jäsenet",
   "strict-toggle": "Tiukka",

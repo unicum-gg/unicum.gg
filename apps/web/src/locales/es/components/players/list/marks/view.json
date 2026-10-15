@@ -9,9 +9,9 @@
     "strict": "Jugadores de {region} cuyo idioma inferido del historial del clan es exclusivamente {language}, con más cañones con {marks}."
   },
   "board": {
-    "all": "Mejores jugadores: {count} por {marks}",
-    "language": "Mejores jugadores: {count} de {language}, por {marks}",
-    "strict": "Mejores jugadores: {count} estrictamente de {language}, por {marks}"
+    "all": "Top {count} jugadores por {marks}",
+    "language": "Top {count} jugadores ({language}) por {marks}",
+    "strict": "Top {count} jugadores (solo {language}) por {marks}"
   },
   "coverage": {
     "title": "Qué cubre esta clasificación",

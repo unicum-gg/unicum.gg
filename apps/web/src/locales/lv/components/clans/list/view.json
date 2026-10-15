@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Top {count} klani pēc {metric}",
-    "language": "Top {count} {language} klani pēc {metric}",
-    "strict": "Top {count} tikai {language} klani pēc {metric}"
+    "language": "Top {count} klani ({language}) pēc {metric}",
+    "strict": "Top {count} klani (tikai {language}) pēc {metric}"
   },
   "members": "Dalībnieki",
   "strict-toggle": "Ierobežots",

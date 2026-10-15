@@ -9,9 +9,9 @@
     "strict": "클랜 기록에서 추정한 언어가 {language} 하나뿐인 {region} 플레이어들입니다. {metric}으로 순위를 매겼으며 최소 전투 10,000회입니다."
   },
   "board": {
-    "all": "{metric} 기준 최고의 플레이어 {count}명",
-    "language": "{metric} 기준 최고의 {language} 플레이어 {count}명",
-    "strict": "{metric} 기준 엄선된 {language} 플레이어 {count}명"
+    "all": "{metric} 기준 상위 {count} 플레이어",
+    "language": "{metric} 기준 상위 {count} 플레이어 ({language})",
+    "strict": "{metric} 기준 상위 {count} 플레이어 ({language} 전용)"
   },
   "modes": {
     "overall": "전체"

@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{metric}によるトップ{count}プレイヤー",
-    "language": "{metric}による{language}のトップ{count}プレイヤー",
-    "strict": "{metric}による厳密な{language}のトップ{count}プレイヤー"
+    "language": "{metric}によるトップ{count}プレイヤー（{language}）",
+    "strict": "{metric}によるトップ{count}プレイヤー（{language}のみ）"
   },
   "modes": {
     "overall": "総合"

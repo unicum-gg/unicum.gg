@@ -9,9 +9,9 @@
     "strict": "Гульцы рэгіёна {region}, чыя мова, вызначаная па гісторыі клана, выключна {language}, і якія валодаюць найбольшай колькасцю гармат з {marks} знакамі."
   },
   "board": {
-    "all": "Топ {count} гульцоў па колькасці {marks}",
-    "language": "Топ {count} гульцоў з мовай {language} па колькасці {marks}",
-    "strict": "Топ {count} гульцоў са строгай мовай {language} па колькасці {marks}"
+    "all": "Топ-{count} гульцоў: {marks}",
+    "language": "Топ-{count} гульцоў ({language}): {marks}",
+    "strict": "Топ-{count} гульцоў (толькі {language}): {marks}"
   },
   "coverage": {
     "title": "Што ахоплівае гэтая табліца",

@@ -9,9 +9,9 @@
     "strict": "Klaner i {region} som har angett {language} som sitt enda språk, rangordnade efter genomsnittet för {metric} bland sina spårade medlemmar (minst 25 medlemmar med strider)."
   },
   "board": {
-    "all": "Toppklaner efter {metric}: de {count} högst rankade",
-    "language": "Toppklaner med {language} som språk efter {metric}: de {count} högst rankade",
-    "strict": "Toppklaner med endast {language} efter {metric}: de {count} högst rankade"
+    "all": "Topp {count} klaner efter {metric}",
+    "language": "Topp {count} klaner ({language}) efter {metric}",
+    "strict": "Topp {count} klaner (endast {language}) efter {metric}"
   },
   "members": "Medlemmar",
   "strict-toggle": "Strikt",

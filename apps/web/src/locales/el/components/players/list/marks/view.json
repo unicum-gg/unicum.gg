@@ -9,9 +9,9 @@
     "strict": "Παίκτες από την {region} των οποίων η συναγόμενη γλώσσα από το ιστορικό κλαν είναι αποκλειστικά {language}, με τα περισσότερα πυροβόλα με {marks}."
   },
   "board": {
-    "all": "Κορυφαίοι {count} παίκτες κατά {marks}",
-    "language": "Κορυφαίοι {count} παίκτες που μιλούν {language} κατά {marks}",
-    "strict": "Κορυφαίοι {count} παίκτες, αυστηρά {language}, κατά {marks}"
+    "all": "Top {count} παίκτες κατά {marks}",
+    "language": "Top {count} παίκτες ({language}) κατά {marks}",
+    "strict": "Top {count} παίκτες (μόνο {language}) κατά {marks}"
   },
   "coverage": {
     "title": "Τι καλύπτει αυτή η κατάταξη",

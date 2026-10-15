@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Top {count} clans op basis van {metric}",
-    "language": "Top {count} clans met {language} als taal op basis van {metric}",
-    "strict": "Top {count} clans met uitsluitend {language} als taal op basis van {metric}"
+    "language": "Top {count} clans ({language}) op basis van {metric}",
+    "strict": "Top {count} clans (alleen {language}) op basis van {metric}"
   },
   "members": "Leden",
   "strict-toggle": "Streng",

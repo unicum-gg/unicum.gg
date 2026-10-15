@@ -9,9 +9,9 @@
     "strict": "Играчи от {region}, чийто предполагаем език в историята на клана е изключително {language}, подредени по {metric}, с минимум 10 000 битки."
   },
   "board": {
-    "all": "Най-добрите {count} играчи по {metric}",
-    "language": "Най-добрите {count} играчи на {language} по {metric}",
-    "strict": "Най-добрите {count} играчи само на {language} по {metric}"
+    "all": "Топ {count} играчи по {metric}",
+    "language": "Топ {count} играчи ({language}) по {metric}",
+    "strict": "Топ {count} играчи (само {language}) по {metric}"
   },
   "modes": {
     "overall": "Общо"

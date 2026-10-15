@@ -9,9 +9,9 @@
     "strict": "Người chơi {region} có ngôn ngữ lịch sử Clan được suy đoán chỉ là {language}, sở hữu nhiều pháo đạt {marks} nhất."
   },
   "board": {
-    "all": "{count} người chơi hàng đầu theo {marks}",
-    "language": "{count} người chơi {language} hàng đầu theo {marks}",
-    "strict": "{count} người chơi chỉ dùng {language} hàng đầu theo {marks}"
+    "all": "Top {count} người chơi theo {marks}",
+    "language": "Top {count} người chơi ({language}) theo {marks}",
+    "strict": "Top {count} người chơi (chỉ {language}) theo {marks}"
   },
   "coverage": {
     "title": "Bảng xếp hạng này bao quát những gì",

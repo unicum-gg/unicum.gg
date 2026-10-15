@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{metric} değerine göre en iyi {count} klan",
-    "language": "{metric} değerine göre en iyi {count} {language} klanı",
-    "strict": "{metric} değerine göre en iyi {count} yalnızca {language} klanı"
+    "language": "{metric} değerine göre en iyi {count} klan ({language})",
+    "strict": "{metric} değerine göre en iyi {count} klan (yalnızca {language})"
   },
   "members": "Üyeler",
   "strict-toggle": "Sıkı",

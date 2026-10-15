@@ -9,9 +9,9 @@
     "strict": "{region} žaidėjai, kurių numanoma klano istorijos kalba yra tik {language}, turintys daugiausia pabūklų su {marks}."
   },
   "board": {
-    "all": "Geriausi {count} žaidėjai pagal {marks}",
-    "language": "Geriausi {count} {language} žaidėjai pagal {marks}",
-    "strict": "Geriausi {count} griežtai {language} žaidėjai pagal {marks}"
+    "all": "Top {count} žaidėjų pagal {marks}",
+    "language": "Top {count} žaidėjų ({language}) pagal {marks}",
+    "strict": "Top {count} žaidėjų (tik {language}) pagal {marks}"
   },
   "coverage": {
     "title": "Ką apima ši lentelė",

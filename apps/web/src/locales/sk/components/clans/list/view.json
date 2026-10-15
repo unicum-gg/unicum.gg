@@ -9,9 +9,9 @@
     "strict": "Klany v regióne {region}, ktoré uviedli jazyk {language} ako svoj jediný jazyk, zoradené podľa priemeru ukazovateľa {metric} u sledovaných členov (minimálne 25 členov s bitkami)."
   },
   "board": {
-    "all": "Najlepších {count} klanov podľa ukazovateľa {metric}",
-    "language": "Najlepších {count} klanov používajúcich jazyk {language} podľa ukazovateľa {metric}",
-    "strict": "Najlepších {count} klanov používajúcich iba jazyk {language} podľa ukazovateľa {metric}"
+    "all": "Top {count} klanov podľa {metric}",
+    "language": "Top {count} klanov ({language}) podľa {metric}",
+    "strict": "Top {count} klanov (iba {language}) podľa {metric}"
   },
   "members": "Členovia",
   "strict-toggle": "Prísny",

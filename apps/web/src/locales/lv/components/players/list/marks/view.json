@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Top {count} spēlētāji pēc {marks}",
-    "language": "Top {count} spēlētāji, kuri runā {language}, pēc {marks}",
-    "strict": "Top {count} spēlētāji, kuri runā tikai {language}, pēc {marks}"
+    "language": "Top {count} spēlētāji ({language}) pēc {marks}",
+    "strict": "Top {count} spēlētāji (tikai {language}) pēc {marks}"
   },
   "coverage": {
     "title": "Ko šī tabula aptver",

@@ -9,9 +9,9 @@
     "strict": "Spieler aus {region}, deren abgeleitete Sprache aus dem Clanverlauf ausschließlich {language} ist und die die meisten Geschütze mit {marks} haben."
   },
   "board": {
-    "all": "Top-{count}-Spieler nach {marks}",
-    "language": "Top-{count} {language}-sprachige Spieler nach {marks}",
-    "strict": "Top-{count} strikt {language}-sprachige Spieler nach {marks}"
+    "all": "Top {count} Spieler nach {marks}",
+    "language": "Top {count} Spieler ({language}) nach {marks}",
+    "strict": "Top {count} Spieler (nur {language}) nach {marks}"
   },
   "coverage": {
     "title": "Was diese Rangliste abdeckt",

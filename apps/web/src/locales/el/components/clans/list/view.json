@@ -9,9 +9,9 @@
     "strict": "Κλαν της {region} που δήλωσαν τη {language} ως μοναδική γλώσσα τους, κατάταξης με βάση τον {metric}, ως μέσος όρος στα παρακολουθούμενα μέλη τους, με ελάχιστο αριθμό 25 μελών με μάχες."
   },
   "board": {
-    "all": "Κορυφαία {count} κλαν ανά {metric}",
-    "language": "Κορυφαία {count} κλαν {language} ανά {metric}",
-    "strict": "Κορυφαία {count} κλαν αποκλειστικά {language} ανά {metric}"
+    "all": "Top {count} κλαν κατά {metric}",
+    "language": "Top {count} κλαν ({language}) κατά {metric}",
+    "strict": "Top {count} κλαν (μόνο {language}) κατά {metric}"
   },
   "members": "Μέλη",
   "strict-toggle": "Αυστηρό",

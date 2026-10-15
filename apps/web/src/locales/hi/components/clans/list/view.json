@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{metric} के अनुसार शीर्ष {count} क्लान",
-    "language": "{metric} के अनुसार शीर्ष {count} {language} क्लान",
-    "strict": "{metric} के अनुसार शीर्ष {count} केवल {language} वाले क्लान"
+    "language": "{metric} के अनुसार शीर्ष {count} क्लान ({language})",
+    "strict": "{metric} के अनुसार शीर्ष {count} क्लान (केवल {language})"
   },
   "members": "सदस्य",
   "strict-toggle": "कठोर",

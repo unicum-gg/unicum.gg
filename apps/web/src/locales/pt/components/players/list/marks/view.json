@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Top {count} jogadores por {marks}",
-    "language": "Top {count} jogadores de {language} por {marks}",
-    "strict": "Top {count} jogadores estritamente de {language} por {marks}"
+    "language": "Top {count} jogadores ({language}) por {marks}",
+    "strict": "Top {count} jogadores (apenas {language}) por {marks}"
   },
   "coverage": {
     "title": "O que esta classificação cobre",

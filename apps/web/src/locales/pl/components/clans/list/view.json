@@ -9,9 +9,9 @@
     "strict": "Klany z regionu {region}, dla których jedynym zadeklarowanym językiem jest {language}, uszeregowane według wartości wskaźnika {metric} uśrednionej dla monitorowanych członków (co najmniej 25 członków z rozegranymi bitwami)."
   },
   "board": {
-    "all": "Najlepsze klany według wskaźnika {metric}, liczba pozycji: {count}",
-    "language": "Najlepsze klany według wskaźnika {metric}, język: {language}, liczba pozycji: {count}",
-    "strict": "Najlepsze klany według wskaźnika {metric}, jedyny język: {language}, liczba pozycji: {count}"
+    "all": "Top {count} klanów według {metric}",
+    "language": "Top {count} klanów ({language}) według {metric}",
+    "strict": "Top {count} klanów (tylko {language}) według {metric}"
   },
   "members": "Członkowie",
   "strict-toggle": "Ścisły",

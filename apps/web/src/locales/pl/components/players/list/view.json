@@ -9,9 +9,9 @@
     "strict": "Gracze z regionu {region}, dla których na podstawie historii przynależności do klanów ustalono wyłącznie język {language}, sklasyfikowani według wskaźnika {metric} (minimum 10 000 bitew)."
   },
   "board": {
-    "all": "{count} najlepszych graczy według wskaźnika {metric}",
-    "language": "{count} najlepszych graczy według wskaźnika {metric}, język: {language}",
-    "strict": "{count} najlepszych graczy według wskaźnika {metric}, język: wyłącznie {language}"
+    "all": "Top {count} graczy według {metric}",
+    "language": "Top {count} graczy ({language}) według {metric}",
+    "strict": "Top {count} graczy (tylko {language}) według {metric}"
   },
   "modes": {
     "overall": "Ogółem"

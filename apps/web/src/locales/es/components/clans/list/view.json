@@ -9,9 +9,9 @@
     "strict": "Clanes de {region} que declararon {language} como su único idioma, ordenados según el promedio de {metric} entre sus miembros de los que se hace seguimiento (mínimo de 25 miembros con batallas)."
   },
   "board": {
-    "all": "Los {count} mejores clanes por {metric}",
-    "language": "Los {count} mejores clanes en {language} por {metric}",
-    "strict": "Los {count} mejores clanes exclusivamente en {language} por {metric}"
+    "all": "Top {count} clanes por {metric}",
+    "language": "Top {count} clanes ({language}) por {metric}",
+    "strict": "Top {count} clanes (solo {language}) por {metric}"
   },
   "members": "Miembros",
   "strict-toggle": "Estricto",

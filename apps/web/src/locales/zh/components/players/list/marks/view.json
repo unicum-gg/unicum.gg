@@ -9,9 +9,9 @@
     "strict": "{region}地区推断的军团历史语言仅为{language}的玩家中，拥有最多{marks}炮管的玩家。"
   },
   "board": {
-    "all": "按{marks}排名的前 {count} 名玩家",
-    "language": "按{marks}排名的前 {count} 名{language}语言玩家",
-    "strict": "按{marks}排名的前 {count} 名严格使用{language}语言的玩家"
+    "all": "按{marks}排名前{count}的玩家",
+    "language": "按{marks}排名前{count}的玩家（{language}）",
+    "strict": "按{marks}排名前{count}的玩家（仅{language}）"
   },
   "coverage": {
     "title": "此榜单涵盖的内容",

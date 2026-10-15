@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Top {count} spelers op basis van {metric}",
-    "language": "Top {count} spelers met {language} als taal op basis van {metric}",
-    "strict": "Top {count} spelers met uitsluitend {language} als taal op basis van {metric}"
+    "language": "Top {count} spelers ({language}) op basis van {metric}",
+    "strict": "Top {count} spelers (alleen {language}) op basis van {metric}"
   },
   "modes": {
     "overall": "Totaal"

@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{metric} бойынша үздік {count} ойыншы",
-    "language": "{language} тілі бойынша {metric} көрсеткішіндегі үздік {count} ойыншы",
-    "strict": "Тек {language} тіліндегі {metric} көрсеткіші бойынша үздік {count} ойыншы"
+    "language": "{metric} бойынша үздік {count} ойыншы ({language})",
+    "strict": "{metric} бойынша үздік {count} ойыншы (тек {language})"
   },
   "modes": {
     "overall": "Жалпы"

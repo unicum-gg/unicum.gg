@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "{marks} के आधार पर शीर्ष {count} खिलाड़ी",
-    "language": "{marks} के आधार पर शीर्ष {count} {language} भाषा के खिलाड़ी",
-    "strict": "{marks} के आधार पर सख्ती से {language} भाषा के शीर्ष {count} खिलाड़ी"
+    "language": "{marks} के आधार पर शीर्ष {count} खिलाड़ी ({language})",
+    "strict": "{marks} के आधार पर शीर्ष {count} खिलाड़ी (केवल {language})"
   },
   "coverage": {
     "title": "यह लीडरबोर्ड क्या दर्शाता है",

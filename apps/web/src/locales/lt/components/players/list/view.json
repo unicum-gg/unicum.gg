@@ -9,9 +9,9 @@
     "strict": "{region} žaidėjai, kurių numanoma klano istorijos kalba yra tik {language}, surikiuoti pagal {metric} (mažiausiai 10 000 mūšių)."
   },
   "board": {
-    "all": "{count} geriausi žaidėjai pagal {metric}",
-    "language": "{count} geriausi {language} žaidėjai pagal {metric}",
-    "strict": "{count} geriausi tik {language} žaidėjai pagal {metric}"
+    "all": "Top {count} žaidėjų pagal {metric}",
+    "language": "Top {count} žaidėjų ({language}) pagal {metric}",
+    "strict": "Top {count} žaidėjų (tik {language}) pagal {metric}"
   },
   "modes": {
     "overall": "Bendrai"

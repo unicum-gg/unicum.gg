@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Nangungunang {count} clan ayon sa {metric}",
-    "language": "Nangungunang {count} {language} clan ayon sa {metric}",
-    "strict": "Nangungunang {count} clan na puro {language} ayon sa {metric}"
+    "language": "Nangungunang {count} clan ({language}) ayon sa {metric}",
+    "strict": "Nangungunang {count} clan (puro {language}) ayon sa {metric}"
   },
   "members": "Mga miyembro",
   "strict-toggle": "Mahigpit",

@@ -9,9 +9,9 @@
     "strict": "Игроки из региона {region}, чей выведенный язык истории клана исключительно {language}, с наибольшим количеством орудий с {marks}."
   },
   "board": {
-    "all": "Топ {count} игроков по количеству {marks}",
-    "language": "Топ {count} игроков на языке {language} по количеству {marks}",
-    "strict": "Топ {count} игроков строго на языке {language} по количеству {marks}"
+    "all": "Топ-{count} игроков: {marks}",
+    "language": "Топ-{count} игроков ({language}): {marks}",
+    "strict": "Топ-{count} игроков (только {language}): {marks}"
   },
   "coverage": {
     "title": "Что охватывает эта таблица",

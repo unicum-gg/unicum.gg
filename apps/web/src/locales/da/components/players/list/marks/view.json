@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Top {count} spillere efter {marks}",
-    "language": "Top {count} {language}-spillere efter {marks}",
-    "strict": "Top {count} udelukkende {language}-spillere efter {marks}"
+    "language": "Top {count} spillere ({language}) efter {marks}",
+    "strict": "Top {count} spillere (kun {language}) efter {marks}"
   },
   "coverage": {
     "title": "Hvad denne rangliste dækker",

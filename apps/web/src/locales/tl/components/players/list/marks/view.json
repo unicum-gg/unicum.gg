@@ -10,8 +10,8 @@
   },
   "board": {
     "all": "Nangungunang {count} manlalaro ayon sa {marks}",
-    "language": "Nangungunang {count} mga manlalarong {language} ayon sa {marks}",
-    "strict": "Nangungunang {count} mahigpit na mga manlalarong {language} ayon sa {marks}"
+    "language": "Nangungunang {count} manlalaro ({language}) ayon sa {marks}",
+    "strict": "Nangungunang {count} manlalaro (puro {language}) ayon sa {marks}"
   },
   "coverage": {
     "title": "Ano ang saklaw ng talahanayan ng ranggo na ito",

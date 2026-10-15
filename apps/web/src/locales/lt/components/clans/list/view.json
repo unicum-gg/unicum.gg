@@ -9,9 +9,9 @@
     "strict": "{region} klanai, nurodę {language} kaip vienintelę savo kalbą, reitinguojami pagal {metric}, apskaičiuotą kaip jų stebimų narių vidurkį (minimumas: 25 nariai, turintys mūšių)."
   },
   "board": {
-    "all": "Geriausi {count} klanai pagal {metric}",
-    "language": "Geriausi {count} {language} klanai pagal {metric}",
-    "strict": "Geriausi {count} tik {language} klanai pagal {metric}"
+    "all": "Top {count} klanų pagal {metric}",
+    "language": "Top {count} klanų ({language}) pagal {metric}",
+    "strict": "Top {count} klanų (tik {language}) pagal {metric}"
   },
   "members": "Nariai",
   "strict-toggle": "Griežtas",

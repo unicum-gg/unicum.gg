@@ -9,9 +9,9 @@
     "strict": "Hráči z regionu {region}, jejichž odvozený jazyk historie klanu je výhradně {language} a kteří mají nejvíce děl se {marks}."
   },
   "board": {
-    "all": "Nejlepších {count} hráčů podle {marks}",
-    "language": "Nejlepších {count} hráčů s jazykem {language} podle {marks}",
-    "strict": "Nejlepších {count} hráčů se striktně jazykem {language} podle {marks}"
+    "all": "Top {count} hráčů podle {marks}",
+    "language": "Top {count} hráčů ({language}) podle {marks}",
+    "strict": "Top {count} hráčů (pouze {language}) podle {marks}"
   },
   "coverage": {
     "title": "Co tento žebříček zahrnuje",

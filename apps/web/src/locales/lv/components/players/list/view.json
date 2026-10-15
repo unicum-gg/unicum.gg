@@ -9,9 +9,9 @@
     "strict": "{region} spēlētāji, kuru noteiktā klanu vēstures valoda ir tikai {language}, sakārtoti pēc {metric}, ņemot vērā vismaz 10 000 kauju."
   },
   "board": {
-    "all": "Labākie {count} spēlētāji pēc {metric}",
-    "language": "Labākie {count} {language} spēlētāji pēc {metric}",
-    "strict": "Labākie {count} tikai {language} spēlētāji pēc {metric}"
+    "all": "Top {count} spēlētāji pēc {metric}",
+    "language": "Top {count} spēlētāji ({language}) pēc {metric}",
+    "strict": "Top {count} spēlētāji (tikai {language}) pēc {metric}"
   },
   "modes": {
     "overall": "Kopējā"

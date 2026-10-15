@@ -9,9 +9,9 @@
     "strict": "A(z) {region} játékosai, akiknek a feltételezett klántörténeti nyelve kizárólag a(z) {language}, {metric} szerint rendezve, minimum 10 000 csatával."
   },
   "board": {
-    "all": "A(z) {metric} szerinti legjobb {count} játékos",
-    "language": "A(z) {metric} szerinti legjobb {count} {language} játékos",
-    "strict": "A(z) {metric} szerinti legjobb {count} kizárólag {language} játékos"
+    "all": "Top {count} játékos {metric} alapján",
+    "language": "Top {count} játékos ({language}) {metric} alapján",
+    "strict": "Top {count} játékos (csak {language}) {metric} alapján"
   },
   "modes": {
     "overall": "Összesen"

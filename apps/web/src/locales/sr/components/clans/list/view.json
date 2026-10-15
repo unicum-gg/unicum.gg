@@ -9,9 +9,9 @@
     "strict": "Кланови из региона {region} који су навели {language} као свој једини језик, рангирани по просечној вредности {metric} за своје праћене чланове (минимум 25 чланова са биткама)."
   },
   "board": {
-    "all": "Најбољих {count} кланова по параметру {metric}",
-    "language": "Најбољих {count} кланова на језику {language} по параметру {metric}",
-    "strict": "Најбољих {count} искључиво {language} кланова по параметру {metric}"
+    "all": "Топ {count} кланова према {metric}",
+    "language": "Топ {count} кланова ({language}) према {metric}",
+    "strict": "Топ {count} кланова (само {language}) према {metric}"
   },
   "members": "Članovi",
   "strict-toggle": "Strog",

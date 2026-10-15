@@ -9,9 +9,9 @@
     "strict": "Hráči z regiónu {region}, ktorých odvodený jazyk histórie klanu je výhradne {language} a ktorí majú najviac topov so {marks}."
   },
   "board": {
-    "all": "Najlepší hráči, počet {count}, podľa {marks}",
-    "language": "Najlepší hráči s jazykom {language}, počet {count}, podľa {marks}",
-    "strict": "Najlepší hráči s jazykom {language}, počet {count}, striktne podľa {marks}"
+    "all": "Top {count} hráčov podľa {marks}",
+    "language": "Top {count} hráčov ({language}) podľa {marks}",
+    "strict": "Top {count} hráčov (iba {language}) podľa {marks}"
   },
   "coverage": {
     "title": "Čo táto lestvica pokrýva",
