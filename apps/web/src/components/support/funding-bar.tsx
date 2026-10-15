@@ -21,8 +21,11 @@ function Stat({
   sub: string;
   accent?: boolean;
 }) {
+  // Centred rather than top-aligned: a label that wraps to two lines (which
+  // "Spent since launch" does in most languages) would otherwise push its
+  // figure down the cell while its neighbours stay at the top.
   return (
-    <div className="flex flex-col items-center gap-0.5 px-2 py-3 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-0.5 px-2 py-3 text-center">
       <span className="text-[11px] uppercase tracking-wide text-fd-muted-foreground">
         {label}
       </span>
