@@ -1,0 +1,6 @@
+{
+  "head": "30 napos {metric}",
+  "head-hint": "{metric} az elmúlt 30 napban. A ranglista sorrendje nem változik.",
+  "hint": "{metric} az elmúlt 30 napban, {battles} csatából",
+  "none": "Az elmúlt 30 napban nem volt csata"
+}

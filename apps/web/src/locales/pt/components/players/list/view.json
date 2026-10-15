@@ -8,6 +8,11 @@
     "language": "Jogadores da região {region} cujo conjunto de idiomas, inferido a partir do histórico de clãs, inclui {language}, classificados segundo {metric} (mínimo de 10 000 batalhas).",
     "strict": "Jogadores da região {region} cujo idioma, inferido a partir do histórico de clãs, é exclusivamente {language}, classificados segundo {metric} (mínimo de 10 000 batalhas)."
   },
+  "intro-period": {
+    "all": "Classificação da região {region}, em ordem classificatória por {metric}. {period}, mínimo de {battles} batalhas.",
+    "language": "Jogadores da região {region} de quem o conjunto de idiomas inferido do histórico do clã inclui {language}, em ordem classificatória por {metric}. {period}, mínimo de {battles} batalhas.",
+    "strict": "Jogadores da região {region} de quem o idioma inferido do histórico do clã é exclusivamente {language}, em ordem classificatória por {metric}. {period}, mínimo de {battles} batalhas."
+  },
   "board": {
     "all": "Top {count} jogadores por {metric}",
     "language": "Top {count} jogadores ({language}) por {metric}",

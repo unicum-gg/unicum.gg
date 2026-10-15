@@ -1,0 +1,6 @@
+{
+  "head": "30 dana {metric}",
+  "head-hint": "{metric} u posljednjih 30 dana. Redoslijed ljestvice se ne mijenja.",
+  "hint": "{metric} u posljednjih 30 dana, na temelju {battles} bitke",
+  "none": "Nema bitke u posljednjih 30 dana"
+}

@@ -1,0 +1,6 @@
+{
+  "head": "30ng {metric}",
+  "head-hint": "{metric} trong 30 ngày qua. Thứ tự của bảng xếp hạng không thay đổi.",
+  "hint": "{metric} trong 30 ngày qua, dựa trên {battles} trận đấu",
+  "none": "Không có trận đấu nào trong 30 ngày qua"
+}

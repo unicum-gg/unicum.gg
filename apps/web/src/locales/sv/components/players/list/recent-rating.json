@@ -1,0 +1,6 @@
+{
+  "head": "30 d {metric}",
+  "head-hint": "{metric} under de senaste 30 dagarna. Topplistans ordning ändras inte.",
+  "hint": "{metric} under de senaste 30 dagarna, från {battles} strider",
+  "none": "Ingen strid under de senaste 30 dagarna"
+}

@@ -8,6 +8,11 @@
     "language": "Igrači iz regije {region} čiji skup jezika izveden iz historije klana uključuje {language}, rangirani prema {metric}, uz minimum od 10.000 bitaka.",
     "strict": "Igrači iz regije {region} čiji je jezik izveden iz historije klana isključivo {language}, rangirani prema {metric}, uz minimum od 10.000 bitaka."
   },
+  "intro-period": {
+    "all": "Ljestvica za {region}, rangirano prema {metric}. {period}, minimum {battles} bitki.",
+    "language": "Igrači iz {region} čiji skup jezika, zaključeno na osnovu historije klana, uključuje {language}, rangirano prema {metric}. {period}, minimum {battles} bitki.",
+    "strict": "Igrači iz {region} čiji jezik, zaključeno na osnovu historije klana, glasi isključivo {language}, rangirano prema {metric}. {period}, minimum {battles} bitki."
+  },
   "board": {
     "all": "Top {count} igrača prema {metric}",
     "language": "Top {count} igrača ({language}) prema {metric}",

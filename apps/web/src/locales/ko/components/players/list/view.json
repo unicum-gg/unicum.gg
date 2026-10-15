@@ -8,6 +8,11 @@
     "language": "클랜 기록에서 추정한 언어 집합에 {language}이(가) 포함된 {region} 플레이어들입니다. {metric}으로 순위를 매겼으며 최소 전투 10,000회입니다.",
     "strict": "클랜 기록에서 추정한 언어가 {language} 하나뿐인 {region} 플레이어들입니다. {metric}으로 순위를 매겼으며 최소 전투 10,000회입니다."
   },
+  "intro-period": {
+    "all": "{region} 리더보드, {metric}으로 랭크. {period}, 최소 {battles} 전투.",
+    "language": "추정된 클랜 기록 언어 집합에 {language}가 포함된 {region} 플레이어들, {metric}으로 랭크. {period}, 최소 {battles} 전투.",
+    "strict": "추정된 클랜 기록 언어가 {language} 전용인 {region} 플레이어들, {metric}으로 랭크. {period}, 최소 {battles} 전투."
+  },
   "board": {
     "all": "{metric} 기준 상위 {count} 플레이어",
     "language": "{metric} 기준 상위 {count} 플레이어 ({language})",

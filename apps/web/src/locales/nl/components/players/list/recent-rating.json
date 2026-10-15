@@ -1,0 +1,6 @@
+{
+  "head": "30d {metric}",
+  "head-hint": "{metric} over de afgelopen 30 dagen. De volgorde van het klassement ondergaat geen wijziging.",
+  "hint": "{metric} over de afgelopen 30 dagen, op basis van {battles} gevechten",
+  "none": "Geen gevecht in de afgelopen 30 dagen"
+}

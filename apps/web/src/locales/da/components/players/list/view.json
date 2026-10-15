@@ -8,6 +8,11 @@
     "language": "Spillere fra {region}, hvis udledte sprog fra klanhistorikken omfatter {language}, rangeret efter {metric}, med minimum 10.000 kampe.",
     "strict": "Spillere fra {region}, hvis udledte sprog fra klanhistorikken udelukkende er {language}, rangeret efter {metric}, med minimum 10.000 kampe."
   },
+  "intro-period": {
+    "all": "Rangliste for {region}, rangeret efter {metric}. {period}, minimum {battles} kampe.",
+    "language": "Spillere fra {region}, hvis udledte sprog baseret på klanhistorik omfatter {language}, rangeret efter {metric}. {period}, minimum {battles} kampe.",
+    "strict": "Spillere fra {region}, hvis udledte sprog baseret på klanhistorik udelukkende er {language}, rangeret efter {metric}. {period}, minimum {battles} kampe."
+  },
   "board": {
     "all": "Top {count} spillere efter {metric}",
     "language": "Top {count} spillere ({language}) efter {metric}",

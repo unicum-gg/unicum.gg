@@ -8,6 +8,11 @@
     "language": "A(z) {region} játékosai, akiknek a feltételezett klántörténeti nyelvkészlete tartalmazza a(z) {language} nyelvet, {metric} szerint rendezve, minimum 10 000 csatával.",
     "strict": "A(z) {region} játékosai, akiknek a feltételezett klántörténeti nyelve kizárólag a(z) {language}, {metric} szerint rendezve, minimum 10 000 csatával."
   },
+  "intro-period": {
+    "all": "{region} régió ranglistája, {metric} szerint rangsorolva. {period}, minimum {battles} csatával.",
+    "language": "{region} régió játékosai, akiknek a következtetett klántörténeti nyelvei között szerepel {language}, {metric} szerint rangsorolva. {period}, minimum {battles} csatával.",
+    "strict": "{region} régió játékosai, akiknél a következtetett klántörténet nyelve kizárólag {language}, {metric} szerint rangsorolva. {period}, minimum {battles} csatával."
+  },
   "board": {
     "all": "Top {count} játékos {metric} alapján",
     "language": "Top {count} játékos ({language}) {metric} alapján",

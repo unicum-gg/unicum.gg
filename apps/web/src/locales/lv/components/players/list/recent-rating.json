@@ -1,0 +1,6 @@
+{
+  "head": "30 d {metric}",
+  "head-hint": "{metric} pēdējo 30 dienu laikā. Tabulas secība nemainās.",
+  "hint": "{metric} pēdējo 30 dienu laikā, no {battles} kaujām",
+  "none": "Pēdējo 30 dienu laikā nav bijusi neviena kauja"
+}

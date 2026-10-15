@@ -1,0 +1,6 @@
+{
+  "head": "30d {metric}",
+  "head-hint": "{metric} i de seneste 30 dage. Der er ingen ændring i ranglistens rækkefølge.",
+  "hint": "{metric} i de seneste 30 dage, baseret på {battles} kampe",
+  "none": "Nej, der er ingen kamp i de seneste 30 dage"
+}

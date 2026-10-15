@@ -8,6 +8,11 @@
     "language": "Joueurs {region} dont les langues déduites de l’historique des clans incluent {language}, classés selon {metric} (10 000 batailles minimum).",
     "strict": "Joueurs {region} dont la langue déduite de l’historique des clans est exclusivement {language}, classés selon {metric} (10 000 batailles minimum)."
   },
+  "intro-period": {
+    "all": "Classement des joueurs de {region}, classés par {metric}. {period}, minimum {battles} batailles.",
+    "language": "Joueurs de {region} dont la langue déduite de l’historique de clan inclut {language}, classés par {metric}. {period}, minimum {battles} batailles.",
+    "strict": "Joueurs de {region} dont la langue déduite de l’historique de clan est exclusivement {language}, classés par {metric}. {period}, minimum {battles} batailles."
+  },
   "board": {
     "all": "Top {count} des joueurs en {metric}",
     "language": "Top {count} des joueurs ({language}) en {metric}",

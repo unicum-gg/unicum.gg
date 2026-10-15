@@ -1,0 +1,6 @@
+{
+  "head": "30g {metric}",
+  "head-hint": "{metric} negli ultimi 30 giorni. L’ordine della classifica non cambia.",
+  "hint": "{metric} negli ultimi 30 giorni, su {battles} battaglie",
+  "none": "Nessuna battaglia negli ultimi 30 giorni"
+}

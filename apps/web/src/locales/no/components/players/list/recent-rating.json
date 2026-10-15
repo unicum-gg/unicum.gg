@@ -1,0 +1,6 @@
+{
+  "head": "30 d {metric}",
+  "head-hint": "{metric} de siste 30 dager. Rekkefølgen på tavlen endres ikke.",
+  "hint": "{metric} de siste 30 dager, fra {battles} kamper",
+  "none": "Ingen kamper de siste 30 dager"
+}

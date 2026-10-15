@@ -1,0 +1,6 @@
+{
+  "head": "30 dni {metric}",
+  "head-hint": "{metric} za posledných 30 dni. Poradie lestvice sa nemení.",
+  "hint": "{metric} za posledných 30 dni, z {battles} bitky",
+  "none": "Žiadna bitka za posledných 30 dni"
+}

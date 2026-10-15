@@ -1,0 +1,6 @@
+{
+  "head": "30 d {metric}",
+  "head-hint": "{metric} za posledních 30 dní. Pořadí žebříčku se nemění.",
+  "hint": "{metric} za posledních 30 dní z {battles} bitev",
+  "none": "Žádná bitva za posledních 30 dní"
+}

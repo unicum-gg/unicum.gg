@@ -1,0 +1,6 @@
+{
+  "head": "30 d {metric}",
+  "head-hint": "{metric} durante los últimos 30 días. El orden de la clasificación no experimenta ningún cambio.",
+  "hint": "{metric} durante los últimos 30 días, a partir de {battles} batallas",
+  "none": "No hay ninguna batalla en los últimos 30 días"
+}

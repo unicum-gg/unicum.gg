@@ -1,0 +1,6 @@
+{
+  "head": "30 araw {metric}",
+  "head-hint": "{metric} sa nakalipas na 30 araw. Walang pagbabago sa ayos ng talahanayan ng ranggo.",
+  "hint": "{metric} sa nakalipas na 30 araw, mula sa {battles} mga laban",
+  "none": "Walang labanan sa nakalipas na 30 araw"
+}

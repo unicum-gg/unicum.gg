@@ -1,0 +1,6 @@
+{
+  "head": "30 dn. {metric}",
+  "head-hint": "{metric} z ostatnich 30 dni. Kolejność tabeli nie zmienia się.",
+  "hint": "{metric} z ostatnich 30 dni, na podstawie {battles} bitew",
+  "none": "Brak bitew w ciągu ostatnich 30 dni"
+}

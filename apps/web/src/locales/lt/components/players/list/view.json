@@ -8,6 +8,11 @@
     "language": "{region} žaidėjai, kurių numanomame klano istorijos kalbų rinkinyje yra {language}, surikiuoti pagal {metric} (mažiausiai 10 000 mūšių).",
     "strict": "{region} žaidėjai, kurių numanoma klano istorijos kalba yra tik {language}, surikiuoti pagal {metric} (mažiausiai 10 000 mūšių)."
   },
+  "intro-period": {
+    "all": "Lyderių lentelė {region} regione, reitinguojama pagal {metric}. {period}, minimumas {battles} mūšių.",
+    "language": "Žaidėjai {region} regione, kurių numanomos klano istorijos kalbų rinkinyje yra {language}, reitinguojami pagal {metric}. {period}, minimumas {battles} mūšių.",
+    "strict": "Žaidėjai {region} regione, kurių numanoma klano istorijos kalba yra išskirtinai {language}, reitinguojami pagal {metric}. {period}, minimumas {battles} mūšių."
+  },
   "board": {
     "all": "Top {count} žaidėjų pagal {metric}",
     "language": "Top {count} žaidėjų ({language}) pagal {metric}",

@@ -1,0 +1,6 @@
+{
+  "head": "30 d. {metric}",
+  "head-hint": "{metric} per paskutines 30 dienų. Lentelės vieta nesikeičia.",
+  "hint": "{metric} per paskutines 30 dienų, iš {battles} mūšių",
+  "none": "Per paskutines 30 dienų nebuvo mūšių"
+}

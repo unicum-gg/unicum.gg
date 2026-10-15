@@ -1,0 +1,6 @@
+{
+  "head": "30 gün {metric}",
+  "head-hint": "Son 30 gündeki {metric}. Tablo sırası değişmez.",
+  "hint": "Son 30 gündeki {metric}, {battles} savaştan.",
+  "none": "Son 30 günde savaş yok"
+}

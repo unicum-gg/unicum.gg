@@ -8,6 +8,11 @@
     "language": "クラン履歴から推定した言語セットに{language}を含む{region}のプレイヤーを、{metric}で順位付けしています（最低10,000戦）。",
     "strict": "クラン履歴から推定した言語が{language}のみである{region}のプレイヤーを、{metric}で順位付けしています（最低10,000戦）。"
   },
+  "intro-period": {
+    "all": "{region}ランキング、{metric}でランク戦。{period}、最小{battles}戦闘。",
+    "language": "推定されたクラン履歴の言語セットに{language}が含まれる{region}のプレイヤーを、{metric}でランク戦。{period}、最小{battles}戦闘。",
+    "strict": "推定されたクラン履歴の言語が{language}のみである{region}のプレイヤーを、{metric}でランク戦。{period}、最小{battles}戦闘。"
+  },
   "board": {
     "all": "{metric}によるトップ{count}プレイヤー",
     "language": "{metric}によるトップ{count}プレイヤー（{language}）",

@@ -1,0 +1,6 @@
+{
+  "head": "30天 {metric}",
+  "head-hint": "{metric} 在过去30天内的数据。榜单顺序不会变更。",
+  "hint": "{metric} 在过去30天内的数据，来自 {battles} 战斗场次",
+  "none": "过去30天内没有战斗"
+}

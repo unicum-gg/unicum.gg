@@ -1,0 +1,6 @@
+{
+  "head": "30p {metric}",
+  "head-hint": "Viimeiset 30 päivää kattava {metric}. Tulostaulukon järjestys ei muutu.",
+  "hint": "{metric} viimeisten 30 päivän ajalta, taistelut: {battles}",
+  "none": "Taistelut puuttuvat viimeisten 30 päivän ajalta"
+}

@@ -8,6 +8,11 @@
     "language": "Hráči z regionu {region}, jejichž sada jazyků odhadnutá z historie členství v klanech obsahuje položku s označením {language}, seřazení podle metriky {metric} (minimálně 10 000 bitev).",
     "strict": "Hráči z regionu {region}, jejichž sada jazyků odhadnutá z historie členství v klanech obsahuje pouze položku s označením {language}, seřazení podle metriky {metric} (minimálně 10 000 bitev)."
   },
+  "intro-period": {
+    "all": "Žebříček regionu {region}, hodnocený podle {metric}. {period}, minimum {battles} bitev.",
+    "language": "Hráči z regionu {region}, čí odvozená jazyková sada historie klanu zahrnuje {language}, hodnocení podle {metric}. {period}, minimum {battles} bitev.",
+    "strict": "Hráči z regionu {region}, čí odvozený jazyk historie klanu je výhradně {language}, hodnocení podle {metric}. {period}, minimum {battles} bitev."
+  },
   "board": {
     "all": "Top {count} hráčů podle {metric}",
     "language": "Top {count} hráčů ({language}) podle {metric}",

@@ -8,6 +8,11 @@
     "language": "{region}中推断的军团历史语言集合包含{language}的玩家，按{metric}排名（最低10,000场战斗）。",
     "strict": "{region}中推断的军团历史语言仅为{language}的玩家，按{metric}排名（最低10,000场战斗）。"
   },
+  "intro-period": {
+    "all": "{region}地区排行榜，按 {metric} 排位。{period}，最低 {battles} 战斗场次。",
+    "language": "{region}地区玩家，其推断的军团历史语言集合包括 {language}，按 {metric} 排位。{period}，最低 {battles} 战斗场次。",
+    "strict": "{region}地区玩家，其推断的军团历史语言仅为 {language}，按 {metric} 排位。{period}，最低 {battles} 战斗场次。"
+  },
   "board": {
     "all": "按{metric}排名前{count}的玩家",
     "language": "按{metric}排名前{count}的玩家（{language}）",

@@ -8,6 +8,11 @@
     "language": "Những người chơi khu vực {region} có tập ngôn ngữ suy ra từ lịch sử Clan bao gồm {language}, xếp theo {metric}, tối thiểu 10.000 trận đấu.",
     "strict": "Những người chơi khu vực {region} có ngôn ngữ suy ra từ lịch sử Clan chỉ là {language}, xếp theo {metric}, tối thiểu 10.000 trận đấu."
   },
+  "intro-period": {
+    "all": "Bảng xếp hạng của khu vực {region}, xếp hạng theo {metric}. {period}, tối thiểu {battles} trận đấu.",
+    "language": "Người chơi ở khu vực {region} có tập hợp ngôn ngữ lịch sử Clan được suy đoán bao gồm {language}, xếp hạng theo {metric}. {period}, tối thiểu {battles} trận đấu.",
+    "strict": "Người chơi ở khu vực {region} có ngôn ngữ lịch sử Clan được suy đoán chỉ gồm {language}, xếp hạng theo {metric}. {period}, tối thiểu {battles} trận đấu."
+  },
   "board": {
     "all": "Top {count} người chơi theo {metric}",
     "language": "Top {count} người chơi ({language}) theo {metric}",

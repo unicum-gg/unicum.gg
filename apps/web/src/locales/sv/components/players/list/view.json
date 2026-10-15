@@ -8,6 +8,11 @@
     "language": "Spelare i {region} vars uppskattade språkprofil baserad på klanhistoriken inkluderar {language}, rankade efter {metric} (minst 10 000 strider).",
     "strict": "Spelare i {region} vars uppskattade språkprofil baserad på klanhistoriken endast innehåller {language}, rankade efter {metric} (minst 10 000 strider)."
   },
+  "intro-period": {
+    "all": "Topplista över spelare i {region}, rankad efter {metric}. {period}, minimum {battles} strider.",
+    "language": "Topplista över spelare i {region} vars härledda språkuppsättning i klanhistoriken innehåller {language}, rankad efter {metric}. {period}, minimum {battles} strider.",
+    "strict": "Topplista över spelare i {region} vars härledda språk i klanhistoriken endast är {language}, rankad efter {metric}. {period}, minimum {battles} strider."
+  },
   "board": {
     "all": "Topp {count} spelare efter {metric}",
     "language": "Topp {count} spelare ({language}) efter {metric}",

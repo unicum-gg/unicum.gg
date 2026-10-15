@@ -8,6 +8,11 @@
     "language": "Tahmin edilen klan geçmişi dil kümesinde {language} bulunan {region} oyuncuları, {metric} değerine göre sıralanır, minimum 10.000 savaş.",
     "strict": "Tahmin edilen klan geçmişi dili yalnızca {language} olan {region} oyuncuları, {metric} değerine göre sıralanır, minimum 10.000 savaş."
   },
+  "intro-period": {
+    "all": "{region} bölgesi liderlik tablosu, {metric} değerine göre dereceli. {period}, minimum {battles} savaş.",
+    "language": "Çıkarılan klan geçmişi dil kümesinde {language} bulunan {region} bölgesindeki oyuncular, {metric} değerine göre dereceli. {period}, minimum {battles} savaş.",
+    "strict": "Çıkarılan klan geçmişi dili sadece {language} olan {region} bölgesindeki oyuncular, {metric} değerine göre dereceli. {period}, minimum {battles} savaş."
+  },
   "board": {
     "all": "{metric} değerine göre en iyi {count} oyuncu",
     "language": "{metric} değerine göre en iyi {count} oyuncu ({language})",
