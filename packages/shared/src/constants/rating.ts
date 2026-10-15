@@ -1,3 +1,5 @@
+import { StrongholdPeriod } from "./stronghold";
+
 /**
  * Primary rating metric the user wants surfaced across the site. Stored in
  * a cookie via `STORAGE.COOKIES.RATING` and broadcast to every consumer
@@ -33,3 +35,19 @@ export function ratingMetricFromCookie(
 ): RatingMetric {
   return raw && isRatingMetric(raw) ? raw : DEFAULT_RATING_METRIC;
 }
+
+/**
+ * Battles a player needs inside a leaderboard's window to be ranked on it.
+ *
+ * Keyed by the site's four-window axis (named for the stronghold boards that
+ * needed it first, see `useStatsPeriod`), whose values are the API's `period`
+ * and the period cookie alike, so a client can state the floor of the board it
+ * is showing without importing the server enum. The recent floors scale with the window so a ranking is not won on a
+ * handful of lucky games.
+ */
+export const TOP_PLAYERS_MIN_BATTLES: Record<StrongholdPeriod, number> = {
+  [StrongholdPeriod.Day]: 20,
+  [StrongholdPeriod.Week]: 140,
+  [StrongholdPeriod.Month]: 600,
+  [StrongholdPeriod.Overall]: 20000,
+};

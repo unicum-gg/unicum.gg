@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/table";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import { RecentRatingCell, RecentRatingHead } from "@/components/players/list/recent-rating";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   DEFAULT_MARKS_SORT,
@@ -33,6 +34,8 @@ import {
   markCountAtTier,
   marksSortForTier,
   RATING_COLOR_CLASS,
+  RATING_METRICS,
+  RatingMetric,
   wn7Color,
   wn8Color,
   wnxColor,
@@ -66,6 +69,10 @@ export type MarksRow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  wn7_30d: number | null;
+  wn8_30d: number | null;
+  wnx_30d: number | null;
+  battles_30d: number | null;
   marks3: number;
   marks3_by_tier: number[];
   marks2: number;
@@ -107,10 +114,10 @@ export type MarksRow = {
  */
 function RatingCells({ row }: { row: MarksRow }) {
   const { num } = useFormat();
-  const values: Array<[string, number | null, (v: number) => string]> = [
-    ["wn7", row.wn7, (v) => RATING_COLOR_CLASS[wn7Color(v)]],
-    ["wn8", row.wn8, (v) => RATING_COLOR_CLASS[wn8Color(v)]],
-    ["wnx", row.wnx, (v) => RATING_COLOR_CLASS[wnxColor(v)]],
+  const values: Array<[RatingMetric, number | null, (v: number) => string]> = [
+    [RatingMetric.Wn7, row.wn7, (v) => RATING_COLOR_CLASS[wn7Color(v)]],
+    [RatingMetric.Wn8, row.wn8, (v) => RATING_COLOR_CLASS[wn8Color(v)]],
+    [RatingMetric.Wnx, row.wnx, (v) => RATING_COLOR_CLASS[wnxColor(v)]],
   ];
   return (
     <>
@@ -119,16 +126,28 @@ function RatingCells({ row }: { row: MarksRow }) {
           key={metric}
           data-rating-col={metric}
           className={cn(
-            // `pr-4` on each of them rather than through the table's
-            // `td:last-child` rule: that selector still names the wnx cell when
-            // the reader is on wn7, so the padding would land on a cell nobody
-            // can see and the visible one would run into the table's edge.
-            "pr-4! text-right font-semibold tabular-nums",
+            // Each cell carries its own edge padding rather than relying on
+            // the table's `td:last-child` rule: that selector names the last
+            // cell in the markup, which is one the CSS may be hiding. On a
+            // phone the 30-day column is hidden and this one is the edge.
+            "text-right font-semibold tabular-nums max-sm:pr-4!",
             value == null ? "text-muted-foreground" : colorOf(value),
           )}
         >
           {value == null ? "—" : num(INT_FORMAT).format(value)}
         </TableCell>
+      ))}
+      {/* The rating as the player plays it now, beside the career, as on the
+          clan members table: the board ranks by marks either way. */}
+      {RATING_METRICS.map((metric) => (
+        <RecentRatingCell
+          key={`${metric}-30d`}
+          ratingCol
+          metric={metric}
+          value={row[`${metric}_30d`]}
+          battles={row.battles_30d}
+          className="hidden pr-4! sm:table-cell"
+        />
       ))}
     </>
   );
@@ -342,15 +361,23 @@ export function MarksBoard({
               {/* One heading per metric, hidden by the same rule as the cells
                   under it, so the column that shows always has its own name
                   above it. */}
-              <TableHead data-rating-col="wn7" className="w-20 pr-4! text-right!">
+              <TableHead data-rating-col="wn7" className="w-20 text-right! max-sm:pr-4!">
                 {tView("wn7")}
               </TableHead>
-              <TableHead data-rating-col="wn8" className="w-20 pr-4! text-right!">
+              <TableHead data-rating-col="wn8" className="w-20 text-right! max-sm:pr-4!">
                 {tView("wn8")}
               </TableHead>
-              <TableHead data-rating-col="wnx" className="w-20 pr-4! text-right!">
+              <TableHead data-rating-col="wnx" className="w-20 text-right! max-sm:pr-4!">
                 {tView("wnx")}
               </TableHead>
+              {RATING_METRICS.map((metric) => (
+                <RecentRatingHead
+                  key={metric}
+                  ratingCol
+                  metric={metric}
+                  className="hidden w-20 pr-4! sm:table-cell"
+                />
+              ))}
             </TableRow>
           </TableHeader>
           <TableBody>

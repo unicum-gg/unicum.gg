@@ -5,6 +5,8 @@ import {
   getTopPlayersByMetric,
   TopPlayersPeriod,
 } from "@unicum.gg/core/wargaming/wot/players/top";
+import { isRecentPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period-ratings";
+import { getPeriodBoard } from "@unicum.gg/core/wargaming/wot/players/top/period-board";
 import { getTopPlayersByLanguage } from "@/services/wargaming/wot/players/top/by-language";
 import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { isRegion } from "@unicum.gg/wargaming";
@@ -58,9 +60,25 @@ async function GET__perf(
   const strict = url.searchParams.get("strict") === "true";
 
   try {
+    // A recent window reads its own materialized pool, which carries the
+    // inferred languages, so it filters by language exactly like the lifetime
+    // board does below, over every account the window ranks.
+    if (isRecentPeriod(period)) {
+      const results = await getPeriodBoard(region, {
+        metric,
+        period,
+        language: lang,
+        strict,
+        limit,
+      });
+      return jsonResponse(TopPlayersResponse, {
+        results: await attachPlayerBadges(region, results),
+        computed_at: null,
+      });
+    }
     if (lang || withLanguages) {
-      // Language boards are lifetime WNX rankings scoped to clans declaring
-      // the language (`strict` = the clan declares only that one).
+      // The lifetime language board, scoped to clans declaring the language
+      // (`strict` = the clan declares only that one).
       const results = await getTopPlayersByLanguage(
         region,
         metric,

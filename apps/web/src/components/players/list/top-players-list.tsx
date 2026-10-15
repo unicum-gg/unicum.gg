@@ -4,6 +4,7 @@ import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
+import { RecentRatingCell, RecentRatingHead } from "@/components/players/list/recent-rating";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, LanguageSource } from "@unicum.gg/shared";
 import {
   Table,
@@ -37,6 +38,7 @@ export function TopPlayersList({
   metric,
   rankOffset = 0,
   locale,
+  recent = false,
 }: {
   region: Region;
   results: TopPlayerByLanguageResult[];
@@ -45,6 +47,12 @@ export function TopPlayersList({
   // true leaderboard rank instead of restarting at 1.
   rankOffset?: number;
   locale: string;
+  /**
+   * Print the 30-day rating beside the lifetime one, as the clan members table
+   * does. Only on a lifetime board: over a recent window the ranked figure is
+   * already recent.
+   */
+  recent?: boolean;
 }) {
   const { t } = useTranslation("components/players/list/view");
   const { t: tOwn } = useTranslation("components/players/list/top-players-list");
@@ -76,11 +84,16 @@ export function TopPlayersList({
           <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
             <GlossaryLabel>{tOwn("wr")}</GlossaryLabel>
           </TableHead>
-          <TableHead className="w-24 text-right!">
+          {/* The 30-day column is hidden on a phone, so the rating is the
+              last cell there and takes the row's edge padding itself. */}
+          <TableHead className={cn("w-24 text-right!", recent && "max-sm:pr-4!")}>
             <GlossaryLabel label={RATING_METRIC_LABEL[metric]}>
               {RATING_METRIC_LABEL[metric]}
             </GlossaryLabel>
           </TableHead>
+          {recent && (
+            <RecentRatingHead metric={metric} className="hidden sm:table-cell" />
+          )}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -130,11 +143,20 @@ export function TopPlayersList({
               <TableCell
                 className={cn(
                   "text-right font-semibold tabular-nums",
+                  recent && "max-sm:pr-4!",
                   colorFor(r.wnx),
                 )}
               >
                 {numberFormat(locale, INT_FORMAT).format(r.wnx)}
               </TableCell>
+              {recent && (
+                <RecentRatingCell
+                  metric={metric}
+                  value={r.wnx_30d}
+                  battles={r.battles_30d}
+                  className="hidden sm:table-cell"
+                />
+              )}
             </TableRow>
           );
         })}

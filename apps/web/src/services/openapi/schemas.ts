@@ -507,6 +507,12 @@ const langField = z.string().meta({
     "Two-letter language code. When set, the leaderboard is filtered to players/clans whose clan declares this language (period is ignored: language boards are lifetime WNX).",
 });
 
+/** The player board's own wording: it filters by language over every window. */
+const playerLangField = z.string().meta({
+  description:
+    "Two-letter language code. When set, the leaderboard is filtered to players whose clan history infers this language, over the requested period like the unfiltered board.",
+});
+
 /**
  * The name the filter used to have, still accepted and marked for removal.
  *
@@ -527,14 +533,19 @@ const strictField = z.enum(["true", "false"]).meta({
 });
 const withLanguagesField = z.enum(["true", "false"]).meta({
   description:
-    "Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language.",
+    "Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language. The recent periods always carry them.",
+});
+
+/** Which board's pool the language counts are taken over. */
+export const playerLanguagesQuery = z.object({
+  period: periodField.optional(),
 });
 
 export const playersTopQuery = z.object({
   period: periodField.optional(),
   limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
-  lang: langField.optional(),
+  lang: playerLangField.optional(),
   language: deprecatedLangField.optional(),
   strict: strictField.optional(),
   languages: withLanguagesField.optional(),
@@ -648,6 +659,11 @@ export const playerSummary = z
     nickname: z.string(),
     // Lifetime win rate (0..1). Present on the top-players leaderboard rows.
     winrate: z.number().nullable().optional(),
+    // The ranked metric over the last 30 days, beside the lifetime value, on
+    // the lifetime leaderboard rows. Null when the player has not played inside
+    // the window.
+    wnx_30d: z.number().nullable().optional(),
+    battles_30d: z.number().nullable().optional(),
     // Public badges (present on leaderboard/list rows): the owner connected this
     // account on the site, is an active non-anonymous supporter, and/or has a
     // linked Twitch channel.

@@ -1,4 +1,3 @@
-import { numberFormat } from "@/lib/format";
 import PAGINATION from "@/constants/pagination";
 import ROUTES from "@/constants/routes";
 import { assertPageInRange } from "@/lib/pagination";
@@ -9,14 +8,12 @@ import {
   RatingScaleTitle,
 } from "@/components/home/rating-scale";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
-import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { Interpolate } from "@/components/interpolate";
 import { getTranslation } from "@/lib/translations.server";
 import { PlayerBoard } from "@/components/players/list/boards";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
-import { PlayerLanguageSelect } from "@/components/players/list/language-select";
-import { PlayerStrictModeToggle } from "@/components/players/list/strict-mode-toggle";
-import { TopPlayersBoard } from "@/components/players/list/top-players-board";
+import { TopPlayersIntro } from "@/components/players/list/top-players-intro";
+import { TopPlayersPanel } from "@/components/players/list/top-players-panel";
 import {
   Panel,
   PanelContent,
@@ -36,22 +33,6 @@ import {
 
 // The full ranking is fetched once and paginated client-side (TablePager).
 const LIMIT = 1000;
-/**
- * Inline metric label gated by `html[data-rating-metric]` CSS. All three
- * variants ship in the HTML, only the matching one shows. Keeps the page
- * output identical regardless of the user's rating cookie.
- */
-async function MetricInline({ locale }: { locale: string }) {
-  const { t } = await getTranslation("components/players/list/view", locale);
-  return (
-    <>
-      <span data-rating-col="wn7">{t("wn7")}</span>
-      <span data-rating-col="wn8">{t("wn8")}</span>
-      <span data-rating-col="wnx">{t("wnx")}</span>
-    </>
-  );
-}
-
 /**
  * Shared body for both /players (EU default) and /<region>/players pages.
  * Pass `language: null` for the unfiltered landing and the language code
@@ -111,7 +92,6 @@ export async function PlayersLandingView({
   const pagedRows = Math.max(wn7Results.length, wn8Results.length, wnxResults.length);
   assertPageInRange(page, pagedRows, PAGINATION.SIZE.LEADERBOARD);
   const stats = languageStats.results;
-  const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language, locale) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
 
@@ -165,14 +145,10 @@ export async function PlayersLandingView({
             )}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            {/* The metric is a picker, not a word, so it rides the sentence as a
-                node: half the languages we publish put it somewhere else. */}
-            <Interpolate
-              template={t(
-                language ? (strict ? "intro.strict" : "intro.language") : "intro.all",
-                { region: REGION_LABEL[region], language: langName ?? "" },
-              )}
-              values={{ metric: <MetricInline locale={locale} /> }}
+            <TopPlayersIntro
+              variant={language ? (strict ? "strict" : "language") : "all"}
+              region={REGION_LABEL[region]}
+              language={langName ?? ""}
             />
           </p>
           <div className="mt-6 flex justify-center">
@@ -195,75 +171,22 @@ export async function PlayersLandingView({
 
       <PanelSeparator />
 
-      <Panel>
-        <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-          <PanelTitle>
-            <Interpolate
-              template={t(
-                language ? (strict ? "board.strict" : "board.language") : "board.all",
-                {
-                  count: numberFormat(locale).format(wnxResults.length),
-                  language: langName ?? "",
-                },
-              )}
-              values={{
-                metric: (
-                  <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
-                ),
-              }}
-            />
-          </PanelTitle>
-          <div className="flex flex-wrap items-center gap-2">
-            <PlayerLanguageSelect
-              available={stats.map((s) => ({
-                code: s.code,
-                playersCount: s.total,
-              }))}
-              active={language}
-              region={region}
-              board={PlayerBoard.Overall}
-              strict={strict}
-            />
-            {language && filterCounts && (
-              <PlayerStrictModeToggle
-                locale={locale}
-                region={region}
-                language={language}
-                board={PlayerBoard.Overall}
-                strict={strict}
-                total={filterCounts.total}
-                strictCount={filterCounts.strict}
-              />
-            )}
-          </div>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <div data-rating-col="wn7">
-            <TopPlayersBoard
-              region={region}
-              metric={RatingMetric.Wn7}
-              results={wn7Results}
-              page={page}
-            />
-          </div>
-          <div data-rating-col="wn8">
-            <TopPlayersBoard
-              region={region}
-              metric={RatingMetric.Wn8}
-              results={wn8Results}
-              page={page}
-            />
-          </div>
-          <div data-rating-col="wnx">
-            <TopPlayersBoard
-              region={region}
-              metric={RatingMetric.Wnx}
-              results={wnxResults}
-              page={page}
-            />
-          </div>
-        </PanelContent>
-      </Panel>
+      <TopPlayersPanel
+        region={region}
+        page={page}
+        initial={{
+          [RatingMetric.Wn7]: wn7Results,
+          [RatingMetric.Wn8]: wn8Results,
+          [RatingMetric.Wnx]: wnxResults,
+        }}
+        title={{
+          key: language ? (strict ? "board.strict" : "board.language") : "board.all",
+          language: langName ?? undefined,
+        }}
+        language={language}
+        strict={strict}
+        languageStats={stats}
+      />
 
       <PanelSeparator />
 

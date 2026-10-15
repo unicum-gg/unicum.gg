@@ -20,6 +20,7 @@ export * from "./player-tank-achievements";
 export * from "./player-garage";
 export * from "./player-marks";
 export * from "./player-ratings";
+export * from "./player-period-ratings";
 export * from "./player-clan-history";
 export * from "./player-name-history";
 export * from "./clan-name-history";

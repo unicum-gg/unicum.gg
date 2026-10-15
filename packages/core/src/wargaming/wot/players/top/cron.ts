@@ -1,6 +1,7 @@
 import { and, eq } from "drizzle-orm";
 import {
   RATING_METRICS,
+  playerPeriodRatingsByRegion,
   playerRatingsByRegion,
   topPlayersByRegion,
 } from "@unicum.gg/shared";
@@ -10,8 +11,11 @@ import { db } from "@unicum.gg/core/db";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { computeTopPlayersAllMetrics, TopPlayersPeriod } from ".";
 import { recomputePlayerRatings } from "./ratings";
+import { recomputePlayerPeriodRatings } from "./period-ratings";
 
 const SCHEDULE = "0 * * * *";
+// What the home panels read. The /players boards for the recent windows read
+// `*_player_period_ratings`, which holds every eligible account.
 const TOP_N = 30;
 const PERIODS: TopPlayersPeriod[] = [
   TopPlayersPeriod.Day,
@@ -59,6 +63,23 @@ async function runInitialIfEmpty(): Promise<void> {
           console.log(`[top-players cron] ${region}/ratings seeded: ${n} rows`);
         } catch (err) {
           console.error(`[top-players cron] ${region}/ratings seed failed:`, err);
+        }
+      }
+      // Same for the recent windows' pool, or the 24h/7d/30d boards on
+      // /players answer empty until the next hourly tick after a deploy.
+      const periodRatings = playerPeriodRatingsByRegion[region];
+      const hasPeriodRatings = await db
+        .select({ accountId: periodRatings.accountId })
+        .from(periodRatings)
+        .limit(1);
+      if (hasPeriodRatings.length === 0) {
+        console.log(`[top-players cron] ${region} period ratings empty, seeding`);
+        try {
+          // Uncapped: an empty table has no previous answer to carry.
+          const n = await recomputePlayerPeriodRatings(region, Infinity);
+          console.log(`[top-players cron] ${region}/period-ratings seeded: ${n} rows`);
+        } catch (err) {
+          console.error(`[top-players cron] ${region}/period-ratings seed failed:`, err);
         }
       }
     }
@@ -134,6 +155,19 @@ async function refreshRegion(region: Region): Promise<void> {
     );
   } catch (err) {
     console.error(`[top-players cron] ${region}/ratings failed:`, err);
+  }
+  // Every account the recent windows rank, with the same inference, so the
+  // /players board can be read over 24h/7d/30d and still filter by language.
+  try {
+    const start = Date.now();
+    const n = await recomputePlayerPeriodRatings(region);
+    console.log(
+      `[top-players cron] ${region}/period-ratings: ${n} rows in ${
+        Date.now() - start
+      }ms`,
+    );
+  } catch (err) {
+    console.error(`[top-players cron] ${region}/period-ratings failed:`, err);
   }
   // The same inference for the Marks of Excellence board, which the table above
   // cannot serve: it only holds accounts with ten thousand battles that place in

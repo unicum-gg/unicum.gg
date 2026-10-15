@@ -8,6 +8,11 @@
     "language": "{region} players whose inferred clan-history language set includes {language}, ranked by {metric} (minimum 10,000 battles).",
     "strict": "{region} players whose inferred clan-history language is exclusively {language}, ranked by {metric} (minimum 10,000 battles)."
   },
+  "intro-period": {
+    "all": "{region} leaderboard, ranked by {metric}. {period}, minimum {battles} battles.",
+    "language": "{region} players whose inferred clan-history language set includes {language}, ranked by {metric}. {period}, minimum {battles} battles.",
+    "strict": "{region} players whose inferred clan-history language is exclusively {language}, ranked by {metric}. {period}, minimum {battles} battles."
+  },
   "board": {
     "all": "Top {count} players by {metric}",
     "language": "Top {count} {language} players by {metric}",

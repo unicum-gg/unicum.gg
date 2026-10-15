@@ -108,7 +108,7 @@ export interface paths {
         };
         /**
          * Player languages
-         * @description Languages the region's tracked players speak (inferred from their clan's declared languages), with total and strict (single-language clans) counts. Backs the by-language leaderboards.
+         * @description Languages the region's ranked players speak (inferred from their clan history), with total and strict (single-language) counts, over the pool of the requested leaderboard period. Backs the by-language leaderboards.
          */
         get: operations["get-{region}-players-languages"];
         put?: never;
@@ -4262,6 +4262,14 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            /** @description WN7 over the last 30 days. Null for an account with no battle inside that window. */
+            wn7_30d: number | null;
+            /** @description WN8 over the last 30 days. Null for an account with no battle inside that window. */
+            wn8_30d: number | null;
+            /** @description WNX over the last 30 days. Null for an account with no battle inside that window. */
+            wnx_30d: number | null;
+            /** @description Battles played over the last 30 days, behind the three ratings above. */
+            battles_30d: number | null;
             /** @description Guns carrying three Marks of Excellence, every tier. */
             marks3: number;
             /** @description Three-mark guns per tier, index 0 holding tier 1. Every tier column the board draws is read out of this. Shorter than the tier count when the player holds none at the top tiers. */
@@ -4875,6 +4883,8 @@ export interface components {
              */
             computedAt: Date | null;
         };
+        /** @description Two-letter language code. When set, the leaderboard is filtered to players whose clan history infers this language, over the requested period like the unfiltered board. */
+        playerLangField: string;
         PlayerLanguagesResponse: {
             results: components["schemas"]["LanguageStat"][];
         };
@@ -5077,6 +5087,8 @@ export interface components {
             account_id: number;
             nickname: string;
             winrate?: number | null;
+            wnx_30d?: number | null;
+            battles_30d?: number | null;
             is_verified?: boolean;
             is_supporter?: boolean;
             twitch_login?: string | null;
@@ -7284,7 +7296,7 @@ export interface components {
             markOfMastery: number | null;
         };
         /**
-         * @description Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language.
+         * @description Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language. The recent periods always carry them.
          * @enum {string}
          */
         withLanguagesField: "true" | "false";
@@ -7362,7 +7374,7 @@ export interface operations {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 metric?: "wn7" | "wn8" | "wnx";
-                lang?: components["schemas"]["langField"];
+                lang?: components["schemas"]["playerLangField"];
                 /** @deprecated */
                 language?: components["schemas"]["deprecatedLangField"];
                 strict?: components["schemas"]["strictField"];
@@ -7439,7 +7451,9 @@ export interface operations {
     };
     "get-{region}-players-languages": {
         parameters: {
-            query?: never;
+            query?: {
+                period?: "24h" | "7d" | "30d" | "overall";
+            };
             header?: never;
             path: {
                 /** @example eu */

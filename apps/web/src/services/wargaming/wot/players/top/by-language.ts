@@ -2,6 +2,11 @@ import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion, playerRatingsByRegion, playersByRegion, type PlayerBadgeFlags } from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
+import {
+  recentBattlesSql,
+  recentRatingSql,
+  type RecentRatingMetric,
+} from "@unicum.gg/core/players/recent-rating";
 
 export type TopPlayerByLanguageResult = {
   account_id: number;
@@ -11,6 +16,15 @@ export type TopPlayerByLanguageResult = {
   battles: number;
   winrate: number | null;
   wnx: number;
+  /**
+   * The ranked metric over the last 30 days, printed beside the lifetime one,
+   * null when the player has not played inside the window. Named after `wnx`
+   * for the same reason `wnx` is: it carries whichever metric was asked for.
+   * Present on the lifetime boards only.
+   */
+  wnx_30d?: number | null;
+  /** The battles behind `wnx_30d`. */
+  battles_30d?: number | null;
   languages: string[];
 } & PlayerBadgeFlags;
 
@@ -20,7 +34,7 @@ export type TopPlayerByLanguageResult = {
 // the materialization pool floor in `players/top/ratings.ts`.
 const MIN_BATTLES = 10000;
 
-const VALID_METRIC_COLUMNS: Record<string, string> = {
+const VALID_METRIC_COLUMNS: Record<string, RecentRatingMetric> = {
   wn7: "wn7",
   wn8: "wn8",
   wnx: "wnx",
@@ -28,7 +42,7 @@ const VALID_METRIC_COLUMNS: Record<string, string> = {
 
 async function getTopPlayersGlobal(
   region: Region,
-  col: string,
+  col: RecentRatingMetric,
   limit: number,
 ): Promise<TopPlayerByLanguageResult[]> {
   // No language filter: just the top N by metric straight off the players
@@ -39,6 +53,7 @@ async function getTopPlayersGlobal(
   const rows = (await db.execute(sql`
     SELECT
       p.account_id, p.nickname, p.battles, p.winrate, ${metricCol} AS value,
+      ${recentRatingSql(col, "p")} AS recent, ${recentBattlesSql("p")} AS recent_battles,
       c.tag AS clan_tag, c.color AS clan_color
     FROM ${players} p
     LEFT JOIN ${clans} c ON c.id = p.clan_id
@@ -53,6 +68,8 @@ async function getTopPlayersGlobal(
     battles: number;
     winrate: number | null;
     value: number | string;
+    recent: number | string | null;
+    recent_battles: number | null;
     clan_tag: string | null;
     clan_color: string | null;
   }>;
@@ -64,6 +81,8 @@ async function getTopPlayersGlobal(
     battles: r.battles,
     winrate: r.winrate,
     wnx: Number(r.value),
+    wnx_30d: r.recent == null ? null : Number(r.recent),
+    battles_30d: r.recent_battles,
     languages: [],
   }));
 }
@@ -91,27 +110,37 @@ export async function getTopPlayersByLanguage(
   if (!language) return getTopPlayersGlobal(region, col, limit);
 
   const table = playerRatingsByRegion[region];
-  const metricCol = sql.raw(`"${col}"`);
+  const players = playersByRegion[region];
+  const metricCol = sql.raw(`r."${col}"`);
   // Strict mode: a player whose inferred set is exactly {language}.
   const langClause = strict
-    ? sql`AND languages = ARRAY[${language}]::text[]`
-    : sql`AND ${language} = ANY(languages)`;
+    ? sql`AND r.languages = ARRAY[${language}]::text[]`
+    : sql`AND ${language} = ANY(r.languages)`;
+  // The 30-day figure lives on the players row, not in the materialized
+  // ratings, so the top N are joined back to it: N primary-key lookups.
   const rows = (await db.execute(sql`
     SELECT
-      account_id, nickname, battles, winrate, ${metricCol} AS value,
-      clan_tag, clan_color, languages
-    FROM ${table}
-    WHERE ${metricCol} IS NOT NULL
-      AND battles >= ${MIN_BATTLES}
-      ${langClause}
+      r.account_id, r.nickname, r.battles, r.winrate, ${metricCol} AS value,
+      ${recentRatingSql(col, "p")} AS recent, ${recentBattlesSql("p")} AS recent_battles,
+      r.clan_tag, r.clan_color, r.languages
+    FROM (
+      SELECT * FROM ${table} r
+      WHERE ${metricCol} IS NOT NULL
+        AND r.battles >= ${MIN_BATTLES}
+        ${langClause}
+      ORDER BY ${metricCol} DESC
+      LIMIT ${limit}
+    ) r
+    LEFT JOIN ${players} p ON p.account_id = r.account_id
     ORDER BY ${metricCol} DESC
-    LIMIT ${limit}
   `)) as unknown as Array<{
     account_id: number | string;
     nickname: string;
     battles: number;
     winrate: number | null;
     value: number | string;
+    recent: number | string | null;
+    recent_battles: number | null;
     clan_tag: string | null;
     clan_color: string | null;
     languages: string[] | null;
@@ -124,6 +153,8 @@ export async function getTopPlayersByLanguage(
     battles: r.battles,
     winrate: r.winrate,
     wnx: Number(r.value),
+    wnx_30d: r.recent == null ? null : Number(r.recent),
+    battles_30d: r.recent_battles,
     languages: r.languages ?? [],
   }));
 }

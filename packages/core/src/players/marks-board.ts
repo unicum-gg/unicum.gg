@@ -10,6 +10,7 @@ import {
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { createRegionCache } from "@unicum.gg/core/lib/region-cache";
+import { recentBattlesSql, recentRatingSql } from "@unicum.gg/core/players/recent-rating";
 import type { Region } from "@unicum.gg/wargaming";
 
 /**
@@ -37,6 +38,12 @@ export type MarksBoardRow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  /** The three ratings over the last 30 days, null for an account that has not
+   * played inside them. See `recentRatingSql`. */
+  wn7_30d: number | null;
+  wn8_30d: number | null;
+  wnx_30d: number | null;
+  battles_30d: number | null;
   /** Three-mark guns across every tier. */
   marks3: number;
   /** The per-tier tally, index `i` holding tier `i + 1`. Every column the board
@@ -65,6 +72,10 @@ type RawRow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  wn7_30d: number | string | null;
+  wn8_30d: number | string | null;
+  wnx_30d: number | string | null;
+  battles_30d: number | null;
   marks3: number;
   marks3_by_tier: number[] | null;
   marks2: number;
@@ -130,6 +141,10 @@ export async function getMarksBoard(
   const rows = (await db.execute(sql`
     SELECT
       p.account_id, p.nickname, p.battles, p.wn7, p.wn8, p.wnx,
+      ${recentRatingSql("wn7")} AS wn7_30d,
+      ${recentRatingSql("wn8")} AS wn8_30d,
+      ${recentRatingSql("wnx")} AS wnx_30d,
+      ${recentBattlesSql()} AS battles_30d,
       c.tag AS clan_tag, c.color AS clan_color,
       ${marks.marks3Total} AS marks3,
       ${marks.marks3ByTier} AS marks3_by_tier,
@@ -158,6 +173,10 @@ export async function getMarksBoard(
     wn7: r.wn7 == null ? null : Number(r.wn7),
     wn8: r.wn8 == null ? null : Number(r.wn8),
     wnx: r.wnx == null ? null : Number(r.wnx),
+    wn7_30d: r.wn7_30d == null ? null : Number(r.wn7_30d),
+    wn8_30d: r.wn8_30d == null ? null : Number(r.wn8_30d),
+    wnx_30d: r.wnx_30d == null ? null : Number(r.wnx_30d),
+    battles_30d: r.battles_30d,
     marks3: Number(r.marks3),
     marks3_by_tier: r.marks3_by_tier ?? [],
     marks2: Number(r.marks2),

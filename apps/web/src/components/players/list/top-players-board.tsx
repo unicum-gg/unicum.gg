@@ -28,12 +28,15 @@ export function TopPlayersBoard({
   metric,
   results,
   page,
+  recent = false,
 }: {
   region: Region;
   metric: RatingMetric;
   results: TopPlayerByLanguageResult[];
   /** The page this render is of, from the route's own `/page/[n]` segment. */
   page?: number;
+  /** Print the 30-day rating column, see `TopPlayersList`. */
+  recent?: boolean;
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/players/list/view");
@@ -80,6 +83,7 @@ export function TopPlayersBoard({
         results={paged}
         metric={metric}
         rankOffset={pager.firstShown - 1}
+        recent={recent}
       />
       {pager.total > 0 && <TablePager pager={pager} />}
     </>

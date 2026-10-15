@@ -1,20 +1,75 @@
-import { and, asc, desc, eq, gte, isNotNull } from "drizzle-orm";
-import { RatingMetric, playersByRegion, topPlayersByRegion, type PlayerBadgeFlags } from "@unicum.gg/shared";
+import { and, asc, desc, eq, gte, inArray, isNotNull, sql } from "drizzle-orm";
+import {
+  RatingMetric,
+  StrongholdPeriod,
+  TOP_PLAYERS_MIN_BATTLES,
+  clansByRegion,
+  playersByRegion,
+  topPlayersByRegion,
+  type PlayerBadgeFlags,
+} from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { type Region } from "@unicum.gg/wargaming";
 import { TopPlayersPeriod } from "./period";
 
 export { TopPlayersPeriod } from "./period";
 
-const MIN_BATTLES: Record<TopPlayersPeriod, number> = {
-  [TopPlayersPeriod.Day]: 20,
-  [TopPlayersPeriod.Week]: 140,
-  [TopPlayersPeriod.Month]: 600,
-  [TopPlayersPeriod.Overall]: 20000,
+// The two enums carry the same wire values; shared names the floors so the
+// page can state the one of the board it shows.
+const MIN_BATTLES = TOP_PLAYERS_MIN_BATTLES as Record<
+  TopPlayersPeriod | StrongholdPeriod,
+  number
+>;
+
+/** How far back each recent window reaches, for the inactivity guard. */
+export const PERIOD_WINDOW: Record<Exclude<TopPlayersPeriod, TopPlayersPeriod.Overall>, string> = {
+  [TopPlayersPeriod.Day]: "24 hours",
+  [TopPlayersPeriod.Week]: "7 days",
+  [TopPlayersPeriod.Month]: "30 days",
 };
 
-const ENRICH_CANDIDATES = 30;
+/**
+ * Clan tag and colour for a set of accounts, read from our own tables.
+ *
+ * This went to Wargaming's `clans/accountinfo` while a board held thirty rows,
+ * which was harmless. At a thousand rows a window it is thirty batched calls
+ * per period per region every hour against a budget the page views need, for
+ * data the players table already links: `clan_id` is what the overall board on
+ * /players has always joined on, so both boards now name the same clan.
+ */
+async function clansFromDb(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, { tag: string; color: string }>> {
+  const out = new Map<number, { tag: string; color: string }>();
+  if (accountIds.length === 0) return out;
+  const players = playersByRegion[region];
+  const clans = clansByRegion[region];
+  const rows = await db
+    .select({ accountId: players.accountId, tag: clans.tag, color: clans.color })
+    .from(players)
+    .innerJoin(clans, eq(clans.id, players.clanId))
+    .where(inArray(players.accountId, accountIds));
+  for (const r of rows) out.set(Number(r.accountId), { tag: r.tag, color: r.color });
+  return out;
+}
+
+async function attachClans(region: Region, out: TopPlayersAllMetrics) {
+  const uniqueIds = new Set<number>();
+  for (const list of Object.values(out)) {
+    for (const r of list) uniqueIds.add(r.account_id);
+  }
+  const clansByAccount = await clansFromDb(region, [...uniqueIds]);
+  for (const list of Object.values(out)) {
+    for (const r of list) {
+      const clan = clansByAccount.get(r.account_id);
+      if (clan) {
+        r.clan_tag = clan.tag;
+        r.clan_color = clan.color;
+      }
+    }
+  }
+}
 
 export type TopPlayerResult = {
   account_id: number;
@@ -22,6 +77,8 @@ export type TopPlayerResult = {
   clan_tag: string | null;
   clan_color: string | null;
   battles: number;
+  /** Win rate (0-1) over the board's window. Only the stored boards carry it. */
+  winrate?: number | null;
   wnx: number;
 } & PlayerBadgeFlags;
 
@@ -63,7 +120,7 @@ export async function computeTopPlayersAllMetrics(
           s[field] !== null,
       )
       .sort((a, b) => b[field] - a[field])
-      .slice(0, ENRICH_CANDIDATES)
+      .slice(0, limit)
       .map((s) => ({
         account_id: s.account_id,
         nickname: s.nickname,
@@ -79,30 +136,8 @@ export async function computeTopPlayersAllMetrics(
     [RatingMetric.Wn8]: topByScore("wn8"),
     [RatingMetric.Wnx]: topByScore("wnx"),
   };
-
-  // Enrich the UNION of all 3 top lists with clan info in one batch.
-  const uniqueIds = new Set<number>();
-  for (const m of Object.values(out)) {
-    for (const r of m) uniqueIds.add(r.account_id);
-  }
-  if (uniqueIds.size === 0) return out;
-  const clansByAccount = await getPlayerClansBatch(region, [...uniqueIds]);
-  for (const list of Object.values(out)) {
-    for (const r of list) {
-      const clan = clansByAccount.get(r.account_id);
-      if (clan) {
-        r.clan_tag = clan.tag;
-        r.clan_color = clan.color;
-      }
-    }
-  }
-
-  // Trim each list to the requested limit (was working off ENRICH_CANDIDATES).
-  return {
-    [RatingMetric.Wn7]: out[RatingMetric.Wn7].slice(0, limit),
-    [RatingMetric.Wn8]: out[RatingMetric.Wn8].slice(0, limit),
-    [RatingMetric.Wnx]: out[RatingMetric.Wnx].slice(0, limit),
-  };
+  await attachClans(region, out);
+  return out;
 }
 
 /**
@@ -175,7 +210,19 @@ export async function computePlayerPeriodRatings(
       wnx: cols.wnx,
     })
     .from(players)
-    .where(gte(cols.battles, minBattles));
+    .where(
+      and(
+        gte(cols.battles, minBattles),
+        // The window columns are only rewritten when the account moves, so a
+        // player who stopped keeps the window of their last battle forever.
+        // Without this an account idle since spring still ranks on "the past
+        // 7 days" it played in April.
+        gte(
+          players.lastBattleAt,
+          sql`now() - ${sql.raw(`interval '${PERIOD_WINDOW[period as keyof typeof PERIOD_WINDOW]}'`)}`,
+        ),
+      ),
+    );
 
   return rows.map((r) => ({
     account_id: Number(r.account_id),
@@ -190,7 +237,7 @@ export async function computePlayerPeriodRatings(
 /**
  * Overall ranking fast path: the players row holds the cached lifetime
  * wn7/wn8/wnx (refreshed by snapshot-cron) plus `battles`. So the lifetime
- * top 30 is a single typed Drizzle query per metric, no raw SQL, no
+ * top N is a single typed Drizzle query per metric, no raw SQL, no
  * DISTINCT-ON scan of any snapshot table.
  */
 async function computeOverallFromCache(
@@ -213,7 +260,7 @@ async function computeOverallFromCache(
       .from(players)
       .where(and(gte(players.battles, minBattles), isNotNull(column)))
       .orderBy(desc(column))
-      .limit(ENRICH_CANDIDATES);
+      .limit(limit);
     return rows.map((r) => ({
       account_id: Number(r.accountId),
       nickname: r.nickname,
@@ -235,29 +282,30 @@ async function computeOverallFromCache(
     [RatingMetric.Wn8]: wn8,
     [RatingMetric.Wnx]: wnx,
   };
+  await attachClans(region, out);
+  return out;
+}
 
-  const uniqueIds = new Set<number>();
-  for (const list of Object.values(out)) {
-    for (const r of list) uniqueIds.add(r.account_id);
+/**
+ * The win rate over the board's own window (0-1), read off the players row at
+ * request time rather than stored on the board: the wins are counted by the
+ * same pass that counts the window's battles, so the two agree, and a lifetime
+ * win rate beside a 7-day rating would be answering a different question.
+ */
+function winrateFor(
+  players: (typeof playersByRegion)[Region],
+  period: TopPlayersPeriod,
+) {
+  switch (period) {
+    case TopPlayersPeriod.Day:
+      return sql<number | null>`${players.wins24h}::real / NULLIF(${players.battles24h}, 0)`;
+    case TopPlayersPeriod.Week:
+      return sql<number | null>`${players.wins7d}::real / NULLIF(${players.battles7d}, 0)`;
+    case TopPlayersPeriod.Month:
+      return sql<number | null>`${players.wins30d}::real / NULLIF(${players.battles30d}, 0)`;
+    case TopPlayersPeriod.Overall:
+      return sql<number | null>`${players.winrate}`;
   }
-  if (uniqueIds.size > 0) {
-    const clansByAccount = await getPlayerClansBatch(region, [...uniqueIds]);
-    for (const list of Object.values(out)) {
-      for (const r of list) {
-        const clan = clansByAccount.get(r.account_id);
-        if (clan) {
-          r.clan_tag = clan.tag;
-          r.clan_color = clan.color;
-        }
-      }
-    }
-  }
-
-  return {
-    [RatingMetric.Wn7]: out[RatingMetric.Wn7].slice(0, limit),
-    [RatingMetric.Wn8]: out[RatingMetric.Wn8].slice(0, limit),
-    [RatingMetric.Wnx]: out[RatingMetric.Wnx].slice(0, limit),
-  };
 }
 
 export type TopPlayersSnapshot = {
@@ -272,9 +320,20 @@ export async function getTopPlayersByMetric(
   limit: number,
 ): Promise<TopPlayersSnapshot> {
   const topPlayers = topPlayersByRegion[region];
+  const players = playersByRegion[region];
   const rows = await db
-    .select()
+    .select({
+      accountId: topPlayers.accountId,
+      nickname: topPlayers.nickname,
+      clanTag: topPlayers.clanTag,
+      clanColor: topPlayers.clanColor,
+      battles: topPlayers.battles,
+      value: topPlayers.value,
+      computedAt: topPlayers.computedAt,
+      winrate: winrateFor(players, period),
+    })
     .from(topPlayers)
+    .leftJoin(players, eq(players.accountId, topPlayers.accountId))
     .where(
       and(eq(topPlayers.metric, metric), eq(topPlayers.period, period)),
     )
@@ -288,6 +347,7 @@ export async function getTopPlayersByMetric(
       clan_tag: r.clanTag,
       clan_color: r.clanColor,
       battles: r.battles,
+      winrate: r.winrate == null ? null : Number(r.winrate),
       wnx: Number(r.value),
     })),
     computedAt: rows[0]?.computedAt ?? null,

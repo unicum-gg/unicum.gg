@@ -22,6 +22,21 @@ export const marksSummary = z
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    wn7_30d: z.number().nullable().meta({
+      description:
+        "WN7 over the last 30 days. Null for an account with no battle inside that window.",
+    }),
+    wn8_30d: z.number().nullable().meta({
+      description:
+        "WN8 over the last 30 days. Null for an account with no battle inside that window.",
+    }),
+    wnx_30d: z.number().nullable().meta({
+      description:
+        "WNX over the last 30 days. Null for an account with no battle inside that window.",
+    }),
+    battles_30d: z.number().nullable().meta({
+      description: "Battles played over the last 30 days, behind the three ratings above.",
+    }),
     marks3: z.number().meta({
       description: "Guns carrying three Marks of Excellence, every tier.",
     }),
