@@ -125,21 +125,40 @@ const HOSTING: Expense[] = [
   }),
   monthly({
     label: "VPS hosting",
-    // EUR 40.27 excl. VAT + 20% VAT, monthly no-commit billing.
+    // The rate below, less the EUR 5 credit netcup gives a newsletter
+    // subscriber on a first order. Invoice nc-5519595 settled this month at
+    // EUR 42.32, so charging the standing rate for it would invent six euros
+    // that were never paid.
+    eur: 42.32,
+    from: "2026-08-29",
+    to: "2026-09-29",
+    note: "netcup RS 4000 G12, first month less the welcome credit",
+  }),
+  monthly({
+    label: "VPS hosting",
+    // EUR 39.77 for the machine and EUR 0.50 for the IPv4 it comes with, excl.
+    // VAT, + 20% VAT. Billed monthly with no commitment, on the 29th.
     eur: 48.32,
-    from: "2026-08-30",
+    from: "2026-09-29",
     note: "netcup RS 4000 G12, 12 vCPU / 32 GB RAM / 1 TB NVMe",
   }),
 ];
 
-/** One additional IPv4 per month at the current host. Each extra egress IP buys
- * its own G-Core per-IP rate budget, so Wargaming traffic can spread across
- * them. netcup bills EUR 1.68 excl. VAT; the OVH rate this replaced is recorded
- * on the closed line below rather than here. */
-const EGRESS_IP_EUR_MONTHLY = 2.02;
-/** The day the current host took over, and therefore the earliest a line priced
- * at its rate can start. */
-const EGRESS_IPS_FROM = "2026-08-30";
+/** One additional IPv4 at the current host, for a year at a time. Each extra
+ * egress IP buys its own G-Core per-IP rate budget, so Wargaming traffic can
+ * spread across them. The OVH rate this replaced is recorded on the closed line
+ * below rather than here.
+ *
+ * netcup quotes EUR 1.68 excl. VAT a month and then bills twelve of them up
+ * front on a twelve-month minimum term: invoice nc-5600209 charges `12 x 1.68`
+ * for 31.08.2026 to 31.08.2027, and the next invoice has nothing queued for
+ * this line. So it is a yearly line for the same reason the domain is one.
+ * Read as monthly it reported EUR 4.04 paid where EUR 24.19 had actually
+ * left the account, and it would have understated the line for a year. */
+const EGRESS_IP_EUR_YEARLY = 24.19;
+/** The day the current host's additional address started being billed, and
+ * therefore the anniversary each later charge lands on. */
+const EGRESS_IPS_FROM = "2026-08-31";
 
 // Egress-IP periods already paid for, closed and priced at the rate that was
 // actually billed at the time. These are recorded rather than derived for the
@@ -177,6 +196,16 @@ const ONE_OFF_EXPENSES: readonly OneOffExpense[] = [
     incurredAt: "2026-08-16",
     note: "Getting the site in front of World of Tanks players",
   },
+  {
+    label: "Egress IPs",
+    // Charged once, when the address was added, and not again on renewal, so
+    // it belongs here rather than in the yearly line above. EUR 4.20 excl. VAT
+    // on invoice nc-5600209, which netcup dated to its own billing day rather
+    // than to the day the address started.
+    eur: 5.04,
+    incurredAt: "2026-09-18",
+    note: "netcup set-up fee for the additional IPv4",
+  },
 ];
 
 /**
@@ -206,9 +235,9 @@ export function buildExpenseLedger(additionalEgressIps: number): ExpenseLedger {
     ...EGRESS_IP_HISTORY,
     ...(additionalEgressIps > 0
       ? [
-          monthly({
+          yearly({
             label: "Egress IPs",
-            eur: additionalEgressIps * EGRESS_IP_EUR_MONTHLY,
+            eur: additionalEgressIps * EGRESS_IP_EUR_YEARLY,
             from: EGRESS_IPS_FROM,
             note: `${additionalEgressIps} additional IPv4 for multi-IP Wargaming throughput`,
           }),
