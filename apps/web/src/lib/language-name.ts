@@ -12,7 +12,50 @@
  */
 const CACHE = new Map<string, Intl.DisplayNames>();
 
-export function languageDisplayName(code: string, locale: string): string {
+/**
+ * Codes clans declare that CLDR folds into another language's name.
+ *
+ * `mo` is the withdrawn ISO code for Moldovan, which CLDR canonicalises to
+ * Romanian, so a menu listing both `ro` and `mo` (they carry different flags)
+ * read "Romanian" twice. Asked for as `ro-MD` instead, which CLDR names as
+ * Moldavian in every locale we publish ("moldave", "Moldauisch").
+ */
+const DISPLAY_TAG: Record<string, string> = {
+  mo: "ro-MD",
+};
+
+/**
+ * Capitalise a string's first letter by the reader's own rules.
+ *
+ * CLDR writes a language the way it reads mid-sentence, which is lowercase in
+ * French, Spanish, Italian, Polish and most of the languages we publish
+ * ("joueurs français"). That is right in a sentence and wrong as a label on its
+ * own, a menu entry or a chip, where those same languages capitalise it.
+ * `Intl.DisplayNames` has no option for the standalone form, so it is done
+ * here, with the locale's casing (Turkish `i` → `İ`).
+ */
+export function capitalizeFirst(name: string, locale: string): string {
+  const first = String.fromCodePoint(name.codePointAt(0) ?? 0);
+  if (!first) return name;
+  let upper: string;
+  try {
+    upper = first.toLocaleUpperCase(locale);
+  } catch {
+    upper = first.toUpperCase();
+  }
+  return upper + name.slice(first.length);
+}
+
+export function languageDisplayName(
+  code: string,
+  locale: string,
+  {
+    standalone = false,
+  }: {
+    /** A label on its own (a menu entry) rather than a word in a sentence. */
+    standalone?: boolean;
+  } = {},
+): string {
   let names = CACHE.get(locale);
   if (!names) {
     // An unknown locale would throw rather than fall back, and the segment
@@ -25,9 +68,11 @@ export function languageDisplayName(code: string, locale: string): string {
     CACHE.set(locale, names);
   }
   // `of` throws on a malformed tag, and these codes come from clan metadata.
+  let name: string;
   try {
-    return names.of(code) ?? code.toUpperCase();
+    name = names.of(DISPLAY_TAG[code] ?? code) ?? code.toUpperCase();
   } catch {
     return code.toUpperCase();
   }
+  return standalone ? capitalizeFirst(name, locale) : name;
 }

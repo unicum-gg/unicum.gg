@@ -3,7 +3,7 @@
 import type { TranslateFunction } from "@onruntime/translations";
 import { useTranslation } from "@/hooks/use-translation";
 import { useLocale } from "@onruntime/translations/react";
-import { languageDisplayName } from "@/lib/language-name";
+import { capitalizeFirst, languageDisplayName } from "@/lib/language-name";
 import Image from "next/image";
 import Link from "@/components/link";
 import {
@@ -42,7 +42,11 @@ function tooltipFor(
   t: TranslateFunction,
 ): string {
   const language = languageDisplayName(code, locale);
-  const origin = t(ORIGIN_KEY[source], { language });
+  // Most templates open on the name ("{language}. Our guess…"), and CLDR
+  // writes it lowercase in most of our languages, so the sentence is
+  // capitalised as a whole: wherever a translation put the name, the sentence
+  // starts with a capital and the name keeps its mid-sentence form.
+  const origin = capitalizeFirst(t(ORIGIN_KEY[source], { language }), locale);
   if (!clickable) return origin;
   const cta = t(source === LanguageSource.Declared ? "cta-clans" : "cta-players", {
     language,

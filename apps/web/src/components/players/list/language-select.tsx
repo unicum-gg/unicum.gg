@@ -87,7 +87,7 @@ export function PlayerLanguageSelect({
                     className="h-3 w-auto"
                   />
                 )}
-                <span>{languageDisplayName(lang.code, locale)}</span>
+                <span>{languageDisplayName(lang.code, locale, { standalone: true })}</span>
                 <span className="text-fd-muted-foreground/70 tabular-nums">
                   {numberFormat(locale).format(lang.playersCount)}
                 </span>
