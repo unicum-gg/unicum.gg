@@ -57,6 +57,7 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
   const { t: tLabel } = await getTranslation("components/labels", locale);
   const { t: tr } = await getTranslation("components/coverage/coverage-view", locale);
   const stats = await unicum.region(region).coverage();
+  const { sources } = await unicum.sources();
 
   // How many tracked players already have at least one snapshot, which is what
   // `firstSnapshotsDaily` accumulates to. The refresh-policy breakdown already
@@ -364,6 +365,46 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
                 : numberFormat(locale, INT_FORMAT).format(stats.funFacts.discordServers)
             }
           />
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>{tr("external-sources")}</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="space-y-4 p-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {sources.map((source) => (
+              <StatCell
+                key={source.id}
+                /* The rating's own name, uppercased from its id rather than
+                   translated: WN8 and WNX are product names the site keeps in
+                   English everywhere, so a source added later needs no string. */
+                label={`${source.id.toUpperCase()} · ${source.origin}`}
+                value={
+                  source.fetchedAt ? (
+                    <span>
+                      <RelativeTime date={source.fetchedAt} />
+                      {source.tanks === null ? null : (
+                        <span className="ml-2 text-fd-muted-foreground">
+                          {tr("n-vehicles", {
+                            count: numberFormat(locale, INT_FORMAT).format(source.tanks),
+                          })}
+                        </span>
+                      )}
+                    </span>
+                  ) : (
+                    tr("never-read")
+                  )
+                }
+              />
+            ))}
+          </div>
+          <p className="text-sm text-fd-muted-foreground">
+            {tr("external-sources-note")}
+          </p>
         </PanelContent>
       </Panel>
     </div>

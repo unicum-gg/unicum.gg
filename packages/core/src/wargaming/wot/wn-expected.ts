@@ -28,6 +28,25 @@ type WNXExpectedRaw = {
 /** What both origins answer: the per-tank rows under one key. */
 type ExpectedPayload<Raw> = { data: Raw[] };
 
+/**
+ * Where each table is read from.
+ *
+ * Here rather than inline in the two fetchers because the freshness endpoint
+ * names the origin it is reporting on, and an origin spelled in two places is
+ * one that eventually disagrees with itself.
+ *
+ * The WN8 entry is the `/wg/` URL, the auto-updating "latest" pointer XVM
+ * regenerates daily and which includes the post-2024 tanks (Tier 11, recent
+ * premiums). The plain `/wn8exp.json` URL is a stale 2024-09 snapshot, missing
+ * ~100 tanks. See `/en/wn8-expected-values-by-date/`.
+ */
+export const EXPECTED_ORIGINS: Record<ExpectedValuesSource, string> = {
+  [ExpectedValuesSource.WN8]:
+    "https://static.modxvm.com/wn8-data-exp/json/wg/wn8exp.json",
+  [ExpectedValuesSource.WNX]:
+    "https://api.tomato.gg/api/wnx/wnx-expected-values.json",
+};
+
 const EXPECTED_TTL_MS = 60 * 60 * 1000;
 
 // How long a table that failed to refresh is served before the origin is asked
@@ -170,14 +189,9 @@ const wn8Cache = expectedCache(ExpectedValuesSource.WN8, toWN8Map);
 
 export async function getWN8ExpectedValues(): Promise<Map<number, WN8Expected>> {
   return wn8Cache(async () => {
-    // The `/wg/wn8exp.json` URL is the auto-updating "latest" pointer that
-    // XVM regenerates daily and that includes the post-2024 tanks (Tier 11,
-    // recent premiums). The plain `/wn8exp.json` URL is a stale 2024-09
-    // snapshot, missing ~100 tanks. See `/en/wn8-expected-values-by-date/`.
-    const res = await fetch(
-      "https://static.modxvm.com/wn8-data-exp/json/wg/wn8exp.json",
-      { headers: botHeaders() },
-    );
+    const res = await fetch(EXPECTED_ORIGINS[ExpectedValuesSource.WN8], {
+      headers: botHeaders(),
+    });
     if (!res.ok) {
       throw new Error(`WN8 expected values HTTP ${res.status}`);
     }
@@ -202,13 +216,61 @@ const wnxCache = expectedCache(ExpectedValuesSource.WNX, toWNXMap);
 
 export async function getWNXExpectedValues(): Promise<Map<number, WNXExpected>> {
   return wnxCache(async () => {
-    const res = await fetch(
-      "https://api.tomato.gg/api/wnx/wnx-expected-values.json",
-      { headers: botHeaders() },
-    );
+    const res = await fetch(EXPECTED_ORIGINS[ExpectedValuesSource.WNX], {
+      headers: botHeaders(),
+    });
     if (!res.ok) {
       throw new Error(`WNX expected values HTTP ${res.status}`);
     }
     return (await res.json()) as ExpectedPayload<WNXExpectedRaw>;
+  });
+}
+
+/** One rating's table, as last read. `fetchedAt` is null when none has ever
+ * been read successfully, which is a different fact from "read long ago" and is
+ * why the row is still listed rather than omitted. */
+export type ExpectedValuesFreshness = {
+  source: ExpectedValuesSource;
+  /** The third party the table is read from, so a reader can tell whose outage
+   * they are looking at. */
+  origin: string;
+  /** When the last successful read landed, or null if there has never been one. */
+  fetchedAt: Date | null;
+  /** How many tanks that table carries. A table that grew is a table that was
+   * really refreshed, which a timestamp alone cannot show. */
+  tanks: number | null;
+};
+
+/**
+ * When each expected-values table was last read, for the coverage page.
+ *
+ * Every source is listed whether or not it has a row, since "never read" is an
+ * answer and an omitted line reads as "nothing to report". The count comes from
+ * the stored payload rather than being recorded separately, so it cannot drift
+ * from the table it describes.
+ */
+export async function listExpectedValuesFreshness(): Promise<
+  ExpectedValuesFreshness[]
+> {
+  const rows = await db
+    .select({
+      source: expectedValues.source,
+      fetchedAt: expectedValues.fetchedAt,
+      tanks: sql<number>`jsonb_array_length(${expectedValues.payload} -> 'data')`,
+    })
+    .from(expectedValues)
+    .catch((error: unknown) => {
+      console.error("[expected] could not read the stored tables:", error);
+      return [] as { source: string; fetchedAt: Date; tanks: number }[];
+    });
+  const held = new Map(rows.map((r) => [r.source, r]));
+  return Object.values(ExpectedValuesSource).map((source) => {
+    const row = held.get(source);
+    return {
+      source,
+      origin: EXPECTED_ORIGINS[source],
+      fetchedAt: row?.fetchedAt ?? null,
+      tanks: row?.tanks ?? null,
+    };
   });
 }

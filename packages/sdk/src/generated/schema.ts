@@ -1679,6 +1679,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Data sources
+         * @description When each externally sourced table the site depends on was last read successfully. The WN8 and WNX expected values come from third parties we do not run and are read while rendering any player page, so a failed refresh serves the last table we hold instead of failing the page. This endpoint is what says how far behind that table is, and `fetchedAt` is null when one has never been read at all.
+         */
+        get: operations["get-sources"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/support/funding": {
         parameters: {
             query?: never;
@@ -2717,6 +2737,20 @@ export interface components {
             chat: components["schemas"]["BattleReplayChatLine"][];
             /** @description Every vehicle destroyed, in order. The timing is the battle's own, so a tank nobody watched die is still here; the killer is the recording's, so it is null wherever the client could not see the shot. */
             deaths: components["schemas"]["BattleReplayDeath"][];
+            /** @description The minimap this battle was played on, resolved for its own mode. Here as well as on the battle itself so a caller holding only this answer can draw the positions on something. */
+            mapImage: string | null;
+            /** @description The arena's extent in metres, which is what turns a position in these tracks into a place on `mapImage`. Same shape as on the battle itself. */
+            mapBounds: {
+                bottomLeft: {
+                    x: number;
+                    z: number;
+                };
+                upperRight: {
+                    x: number;
+                    z: number;
+                };
+            } | null;
+            mapOverlay: unknown | null;
             /** @description One entry per vehicle this battle's recording client could see. A vehicle it never spotted has no track, which is honest fog of war rather than a gap. */
             tracks: components["schemas"]["BattleReplayTrack"][];
             /** @description What the player who recorded this had fitted, one entry per life: one for an ordinary battle, one per tank taken out in a mode with respawns. Only ever theirs, and empty for a recording whose client version this cannot be read from. */
@@ -2725,6 +2759,8 @@ export interface components {
         BattleReplayTrack: {
             /** @description The battle-scoped vehicle id, the same one the battle's participants are keyed by. */
             id: number;
+            /** @description Which side the vehicle fought on, so the tracks can be coloured without loading the battle's own document. 0 when the results name no team for it. */
+            team: number;
             /** @description The clock tick this vehicle was destroyed, or null if it survived or the recording cannot say. In the recording's clock, which runs about fifty seconds ahead of the battle's because it starts during the countdown. */
             diedAt: number | null;
             /** @description Hit points at full, zero when the battle's results do not name any. */
@@ -3325,6 +3361,52 @@ export interface components {
             /** @description UTC day, YYYY-MM-DD. */
             day: string;
             count: number;
+        };
+        /** @description When each externally sourced table the site depends on was last read successfully. These come from parties we do not run, and a failed refresh serves the last table we hold rather than failing the page, so this is what says how far behind that table is. */
+        DataSources: {
+            /** @description Every table we read from a third party, listed whether or not it has ever been read, since an omitted row reads as nothing to report. */
+            sources: {
+                /**
+                 * @description Stable key for the table, so a caller can match a row without parsing its label. One of `wn8`, `wnx`.
+                 * @example wn8
+                 */
+                id: string;
+                /**
+                 * @description Host the table is read from, so a reader can tell whose outage they are looking at.
+                 * @example static.modxvm.com
+                 */
+                origin: string;
+                /**
+                 * Format: date-time
+                 * @description When the last successful read landed, or null when the table has never been read. Null is a different fact from an old date: it means nothing is stored and the rating this table feeds reads as absent rather than stale.
+                 */
+                fetchedAt: Date | null;
+                /** @description How many vehicles that stored table carries, counted from the table itself. A table that grew is one that was really refreshed, which a timestamp on its own cannot show. */
+                tanks: number | null;
+            }[];
+        };
+        /** @description When each externally sourced table the site depends on was last read successfully. These come from parties we do not run, and a failed refresh serves the last table we hold rather than failing the page, so this is what says how far behind that table is. */
+        DataSourcesResponse: {
+            /** @description Every table we read from a third party, listed whether or not it has ever been read, since an omitted row reads as nothing to report. */
+            sources: {
+                /**
+                 * @description Stable key for the table, so a caller can match a row without parsing its label. One of `wn8`, `wnx`.
+                 * @example wn8
+                 */
+                id: string;
+                /**
+                 * @description Host the table is read from, so a reader can tell whose outage they are looking at.
+                 * @example static.modxvm.com
+                 */
+                origin: string;
+                /**
+                 * Format: date-time
+                 * @description When the last successful read landed, or null when the table has never been read. Null is a different fact from an old date: it means nothing is stored and the rating this table feeds reads as absent rather than stale.
+                 */
+                fetchedAt: Date | null;
+                /** @description How many vehicles that stored table carries, counted from the table itself. A table that grew is one that was really refreshed, which a timestamp on its own cannot show. */
+                tanks: number | null;
+            }[];
         };
         /**
          * @deprecated
@@ -9437,6 +9519,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RatingScalesResponse"];
+                };
+            };
+        };
+    };
+    "get-sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DataSources"];
                 };
             };
         };

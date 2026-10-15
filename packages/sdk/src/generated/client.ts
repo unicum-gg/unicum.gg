@@ -1319,6 +1319,14 @@ export class Unicum {
     );
   }
 
+  /** Data sources */
+  sources() {
+    return handle(
+      buildUrl(this.baseUrl, "/sources"),
+      () => this.api.GET("/sources", {}),
+    );
+  }
+
   /** OG image cards: unicum.og.eu.players("Animal").url() → /og/eu/players/Animal. */
   get og(): OgClient {
     return new OgClient(this.api, this.baseUrl);
