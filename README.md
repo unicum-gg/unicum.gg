@@ -4,6 +4,26 @@ Free, open-source World of Tanks stats tracker. Player profiles, clan pages, lea
 
 Live at [unicum.gg](https://unicum.gg).
 
+## Use it
+
+- [Player stats](https://unicum.gg/players): WN8, WNX and win rate leaderboards, per-tank records, Marks of Excellence
+- [Clan stats](https://unicum.gg/clans): rankings, members, Stronghold and Clan Wars
+- [Tank stats](https://unicum.gg/tanks): specifications, mark thresholds, buffs and nerfs across updates
+- [Maps](https://unicum.gg/maps) and [server population](https://unicum.gg/servers)
+- [Public API](https://unicum.gg/docs): the same data the site reads, documented with OpenAPI
+
+## MCP server
+
+Every API endpoint is also a tool on a remote MCP server, no key needed. It is listed in the [official MCP Registry](https://registry.modelcontextprotocol.io) as `gg.unicum/wot-stats`.
+
+```json
+{
+  "mcpServers": {
+    "unicum": { "url": "https://unicum.gg/api/mcp" }
+  }
+}
+```
+
 ## Stack
 
 Next.js 16, React 19, TypeScript, PostgreSQL via Drizzle, Tailwind v4, shadcn/ui, Recharts.
