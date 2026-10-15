@@ -62,8 +62,25 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
                   </span>
                 )}
               </span>
-              <span className="tabular-nums">
-                {line.eurAnnual > 0 ? money.format(line.eurAnnual, 2) : t("free")}
+              <span className="whitespace-nowrap text-right tabular-nums">
+                {line.eurAnnual > 0 ? (
+                  <>
+                    {t("amount-per-year", { amount: money.format(line.eurAnnual, 2) })}
+                    {/* What the invoice actually says, when that is not the
+                        figure above. The annual column has to sum to the
+                        headline, so a line billed monthly shows both rather
+                        than leaving the reader to divide by twelve. */}
+                    {line.chargesPerYear === 12 && (
+                      <span className="block text-xs font-normal text-fd-muted-foreground">
+                        {t("amount-per-month", {
+                          amount: money.format(line.eurPerCharge, 2),
+                        })}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  t("free")
+                )}
               </span>
             </li>
           ))}
@@ -90,9 +107,12 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
                   </span>
                 </span>
                 <span className="whitespace-nowrap tabular-nums">
-                  {`${money.format(line.eurPerCharge, 2)}${
-                    line.chargesPerYear === 12 ? "/mo" : "/yr"
-                  }`}
+                  {t(
+                    line.chargesPerYear === 12
+                      ? "amount-per-month"
+                      : "amount-per-year",
+                    { amount: money.format(line.eurPerCharge, 2) },
+                  )}
                 </span>
               </li>
             ))}

@@ -1,4 +1,6 @@
 {
+  "amount-per-month": "{amount}/mo",
+  "amount-per-year": "{amount}/yr",
   "billed-in-euros": "Billed in euros, converted to {currency} at today’s rate.",
   "cost-breakdown": "Cost breakdown",
   "estimated-annual-cost": "Estimated annual cost",
