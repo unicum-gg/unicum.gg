@@ -25,6 +25,12 @@ export type TopClanByLanguageResult = {
   tournament_best_title?: string | null;
 };
 
+/** A board and when the hourly cron last rewrote `*_clan_ratings`. */
+export type TopClansByLanguage = {
+  results: TopClanByLanguageResult[];
+  computedAt: Date | null;
+};
+
 // Higher floor on the global leaderboard so the headline list reads as
 // elite-only, but languages with a small footprint (Albanian, Tajik, etc.)
 // would never produce a leaderboard at 50, so we drop to 25 once a
@@ -49,7 +55,7 @@ export async function getTopClansByLanguage(
   language: string | null,
   limit: number,
   strict: boolean = false,
-): Promise<TopClanByLanguageResult[]> {
+): Promise<TopClansByLanguage> {
   if (!VALID_METRIC_COLUMNS[metric]) {
     throw new Error(`top-clans by-language: unknown metric ${metric}`);
   }
@@ -65,7 +71,7 @@ export async function getTopClansByLanguage(
   const rows = (await db.execute(sql`
     SELECT
       clan_id, tag, name, color, emblem, languages,
-      members_count, rated_members_count, avg_value, winrate
+      members_count, rated_members_count, avg_value, winrate, computed_at
     FROM ${table}
     WHERE metric = ${metric}
       AND members_count >= ${minMembers}
@@ -84,8 +90,9 @@ export async function getTopClansByLanguage(
     rated_members_count: number;
     avg_value: number | string;
     winrate: number | null;
+    computed_at: Date | string;
   }>;
-  return rows.map((r) => ({
+  const results = rows.map((r) => ({
     clan_id: Number(r.clan_id),
     tag: r.tag,
     name: r.name,
@@ -97,4 +104,9 @@ export async function getTopClansByLanguage(
     avg_value: Number(r.avg_value),
     winrate: r.winrate,
   }));
+  // One cron pass rewrites the table in one transaction: the rows share it.
+  return {
+    results,
+    computedAt: rows[0] ? new Date(rows[0].computed_at) : null,
+  };
 }

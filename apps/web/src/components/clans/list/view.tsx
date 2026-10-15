@@ -1,5 +1,6 @@
 import { numberFormat } from "@/lib/format";
 import Image from "next/image";
+import { BoardUpdated } from "@/components/board-updated";
 import { ClanLanguageSelect } from "@/components/clans/list/language-select";
 import { StrictModeToggle } from "@/components/clans/list/strict-mode-toggle";
 import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
@@ -169,26 +170,29 @@ export async function ClansLandingView({
 
       <Panel>
         <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-          <PanelTitle>
-            <Interpolate
-              template={t(
-                language
-                  ? strict
-                    ? "board.strict"
-                    : "board.language"
-                  : "board.all",
-                {
-                  count: numberFormat(locale).format(totalCount),
-                  language: langName ?? "",
-                },
-              )}
-              values={{
-                metric: (
-                  <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
-                ),
-              }}
-            />
-          </PanelTitle>
+          <div className="space-y-1">
+            <PanelTitle>
+              <Interpolate
+                template={t(
+                  language
+                    ? strict
+                      ? "board.strict"
+                      : "board.language"
+                    : "board.all",
+                  {
+                    count: numberFormat(locale).format(totalCount),
+                    language: langName ?? "",
+                  },
+                )}
+                values={{
+                  metric: (
+                    <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
+                  ),
+                }}
+              />
+            </PanelTitle>
+            <BoardUpdated at={wnxTop.computed_at ?? wn8Top.computed_at} />
+          </div>
           <div className="flex flex-wrap items-center gap-2">
             <ClanLanguageSelect
               available={stats.map((s) => ({

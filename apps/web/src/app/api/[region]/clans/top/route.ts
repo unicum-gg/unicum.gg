@@ -63,7 +63,7 @@ async function GET__perf(
     if (lang || withLanguages) {
       // Language boards are lifetime WNX rankings scoped to clans declaring
       // the language (`strict` = the clan declares only that one).
-      const results = await getTopClansByLanguage(
+      const { results, computedAt } = await getTopClansByLanguage(
         region,
         metric,
         lang,
@@ -72,7 +72,7 @@ async function GET__perf(
       );
       return jsonResponse(TopClansResponse, {
         results: await attachClanBadges(region, results),
-        computed_at: null,
+        computed_at: computedAt?.toISOString() ?? null,
       });
     }
     const { results, computedAt } = await getTopClansByMetric(

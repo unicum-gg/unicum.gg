@@ -18,6 +18,9 @@ export type PeriodBoardRow = {
   languages: string[];
 };
 
+/** A window's board and when the hourly cron last rewrote it. */
+export type PeriodBoard = { results: PeriodBoardRow[]; computedAt: Date | null };
+
 const METRIC_COLUMN: Record<RatingMetric, string> = {
   [RatingMetric.Wn7]: "wn7",
   [RatingMetric.Wn8]: "wn8",
@@ -48,7 +51,7 @@ export async function getPeriodBoard(
     strict?: boolean;
     limit: number;
   },
-): Promise<PeriodBoardRow[]> {
+): Promise<PeriodBoard> {
   const table = playerPeriodRatingsByRegion[region];
   const col = sql.raw(`"${METRIC_COLUMN[metric]}"`);
   const langClause = !language
@@ -58,7 +61,7 @@ export async function getPeriodBoard(
       : sql`AND languages @> ARRAY[${language}]::text[]`;
   const rows = (await db.execute(sql`
     SELECT account_id, nickname, clan_tag, clan_color, battles, wins,
-      ${col} AS value, languages
+      ${col} AS value, languages, computed_at
     FROM ${table}
     WHERE period = ${period}
       AND ${col} IS NOT NULL
@@ -74,8 +77,9 @@ export async function getPeriodBoard(
     wins: number | null;
     value: number | string;
     languages: string[] | null;
+    computed_at: Date | string;
   }>;
-  return rows.map((r) => ({
+  const results = rows.map((r) => ({
     account_id: Number(r.account_id),
     nickname: r.nickname,
     clan_tag: r.clan_tag,
@@ -85,6 +89,11 @@ export async function getPeriodBoard(
     wnx: Number(r.value),
     languages: r.languages ?? [],
   }));
+  // The pass rewrites every window in one transaction, so the rows share it.
+  return {
+    results,
+    computedAt: rows[0] ? new Date(rows[0].computed_at) : null,
+  };
 }
 
 export type PeriodLanguageStats = { code: string; total: number; strict: number };

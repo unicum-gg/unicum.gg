@@ -174,6 +174,7 @@ export async function PlayersLandingView({
       <TopPlayersPanel
         region={region}
         page={page}
+        computedAt={wnxTop.computed_at ?? wn8Top.computed_at}
         initial={{
           [RatingMetric.Wn7]: wn7Results,
           [RatingMetric.Wn8]: wn8Results,

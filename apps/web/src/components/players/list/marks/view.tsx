@@ -1,4 +1,5 @@
 import { numberFormat } from "@/lib/format";
+import { BoardUpdated } from "@/components/board-updated";
 import { Interpolate } from "@/components/interpolate";
 import { DateShape } from "@/lib/date-shapes";
 import { LocalDate } from "@/components/local-date";
@@ -169,16 +170,20 @@ export async function MarksLandingView({
 
       <Panel>
         <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
-          <PanelTitle>
-            {t(
-              language ? (strict ? "board.strict" : "board.language") : "board.all",
-              {
-                count: num.format(rows.length),
-                language: langName ?? "",
-                marks,
-              },
-            )}
-          </PanelTitle>
+          <div className="space-y-1">
+            <PanelTitle>
+              {t(
+                language ? (strict ? "board.strict" : "board.language") : "board.all",
+                {
+                  count: num.format(rows.length),
+                  language: langName ?? "",
+                  marks,
+                },
+              )}
+            </PanelTitle>
+            {/* A live read of the marks table: it last moved when a garage was. */}
+            <BoardUpdated at={coverage.newest} />
+          </div>
           <div className="flex flex-wrap items-center gap-2">
             <PlayerLanguageSelect
               available={languages.map((l) => ({

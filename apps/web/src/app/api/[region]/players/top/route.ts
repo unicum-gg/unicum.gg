@@ -64,7 +64,7 @@ async function GET__perf(
     // inferred languages, so it filters by language exactly like the lifetime
     // board does below, over every account the window ranks.
     if (isRecentPeriod(period)) {
-      const results = await getPeriodBoard(region, {
+      const { results, computedAt } = await getPeriodBoard(region, {
         metric,
         period,
         language: lang,
@@ -73,13 +73,13 @@ async function GET__perf(
       });
       return jsonResponse(TopPlayersResponse, {
         results: await attachPlayerBadges(region, results),
-        computed_at: null,
+        computed_at: computedAt?.toISOString() ?? null,
       });
     }
     if (lang || withLanguages) {
       // The lifetime language board, scoped to clans declaring the language
       // (`strict` = the clan declares only that one).
-      const results = await getTopPlayersByLanguage(
+      const { results, computedAt } = await getTopPlayersByLanguage(
         region,
         metric,
         lang,
@@ -88,7 +88,7 @@ async function GET__perf(
       );
       return jsonResponse(TopPlayersResponse, {
         results: await attachPlayerBadges(region, results),
-        computed_at: null,
+        computed_at: computedAt?.toISOString() ?? null,
       });
     }
     const { results, computedAt } = await getTopPlayersByMetric(

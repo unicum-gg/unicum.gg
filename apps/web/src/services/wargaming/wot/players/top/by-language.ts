@@ -28,6 +28,16 @@ export type TopPlayerByLanguageResult = {
   languages: string[];
 } & PlayerBadgeFlags;
 
+/**
+ * A board and the instant its rows describe. For the materialized language
+ * boards that is when the hourly cron rewrote the table; for the global board,
+ * which ranks straight off `*_players`, it is the read itself.
+ */
+export type TopPlayersByLanguage = {
+  results: TopPlayerByLanguageResult[];
+  computedAt: Date | null;
+};
+
 // Lower than the global Overall leaderboard floor (20k) because the
 // language-filtered pool is smaller — a 10k floor surfaces enough candidates
 // per language for niche communities to produce a useful leaderboard. Matches
@@ -44,7 +54,7 @@ async function getTopPlayersGlobal(
   region: Region,
   col: RecentRatingMetric,
   limit: number,
-): Promise<TopPlayerByLanguageResult[]> {
+): Promise<TopPlayersByLanguage> {
   // No language filter: just the top N by metric straight off the players
   // table (indexed, cheap) — no inference needed. Mirrors the "All" tab.
   const players = playersByRegion[region];
@@ -73,7 +83,7 @@ async function getTopPlayersGlobal(
     clan_tag: string | null;
     clan_color: string | null;
   }>;
-  return rows.map((r) => ({
+  const results = rows.map((r) => ({
     account_id: Number(r.account_id),
     nickname: r.nickname,
     clan_tag: r.clan_tag,
@@ -85,6 +95,7 @@ async function getTopPlayersGlobal(
     battles_30d: r.recent_battles,
     languages: [],
   }));
+  return { results, computedAt: new Date() };
 }
 
 /**
@@ -102,7 +113,7 @@ export async function getTopPlayersByLanguage(
   language: string | null,
   limit: number,
   strict: boolean = false,
-): Promise<TopPlayerByLanguageResult[]> {
+): Promise<TopPlayersByLanguage> {
   const col = VALID_METRIC_COLUMNS[metric];
   if (!col) {
     throw new Error(`top-players by-language: unknown metric ${metric}`);
@@ -122,7 +133,7 @@ export async function getTopPlayersByLanguage(
     SELECT
       r.account_id, r.nickname, r.battles, r.winrate, ${metricCol} AS value,
       ${recentRatingSql(col, "p")} AS recent, ${recentBattlesSql("p")} AS recent_battles,
-      r.clan_tag, r.clan_color, r.languages
+      r.clan_tag, r.clan_color, r.languages, r.computed_at
     FROM (
       SELECT * FROM ${table} r
       WHERE ${metricCol} IS NOT NULL
@@ -144,8 +155,9 @@ export async function getTopPlayersByLanguage(
     clan_tag: string | null;
     clan_color: string | null;
     languages: string[] | null;
+    computed_at: Date | string;
   }>;
-  return rows.map((r) => ({
+  const results = rows.map((r) => ({
     account_id: Number(r.account_id),
     nickname: r.nickname,
     clan_tag: r.clan_tag,
@@ -157,4 +169,11 @@ export async function getTopPlayersByLanguage(
     battles_30d: r.recent_battles,
     languages: r.languages ?? [],
   }));
+  // One cron pass rewrites the whole table in one transaction, so every row
+  // carries the same stamp.
+  return {
+    results,
+    computedAt: rows[0] ? new Date(rows[0].computed_at) : null,
+  };
 }
+
