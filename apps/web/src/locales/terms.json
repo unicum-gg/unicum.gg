@@ -766,7 +766,8 @@
     "First mark": "العلامة الأولى",
     "Next mark": "العلامة التالية",
     "Second mark": "العلامة الثانية",
-    "Third mark": "العلامة الثالثة"
+    "Third mark": "العلامة الثالثة",
+    "stops": "توقفات"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1535,7 +1536,8 @@
     "First mark": "Першая адзнака",
     "Next mark": "Наступная адзнака",
     "Second mark": "Другая адзнака",
-    "Third mark": "Трэцяя адзнака"
+    "Third mark": "Трэцяя адзнака",
+    "stops": "спыненні"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2514,7 +2516,8 @@
     "First mark": "Първи знак",
     "Next mark": "Следващ знак",
     "Second mark": "Втори знак",
-    "Third mark": "Трети знак"
+    "Third mark": "Трети знак",
+    "stops": "спирания"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3290,7 +3293,8 @@
     "First mark": "Prva oznaka",
     "Next mark": "Sljedeća oznaka",
     "Second mark": "Druga oznaka",
-    "Third mark": "Treća oznaka"
+    "Third mark": "Treća oznaka",
+    "stops": "zaustavljanja"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3505,7 +3509,7 @@
     "Good": "Dobrý",
     "Grand Battle": "Velká bitva",
     "Gun": "Děla",
-    "Gun Depression": "Roztpyl děla",
+    "Gun Depression": "Sklápění děla",
     "Gun Dispersion": "Rozptyl děla",
     "Gun Elevation": "Náměr děla",
     "Gun depression": "Sklon děla",
@@ -4280,7 +4284,8 @@
     "First mark": "První značka",
     "Next mark": "Další značka",
     "Second mark": "Druhá značka",
-    "Third mark": "Třetí značka"
+    "Third mark": "Třetí značka",
+    "stops": "zastávky"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5276,7 +5281,8 @@
     "First mark": "Første mærke",
     "Next mark": "Næste mærke",
     "Second mark": "Andet mærke",
-    "Third mark": "Tredje mærke"
+    "Third mark": "Tredje mærke",
+    "stops": "stop"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6265,7 +6271,8 @@
     "First mark": "Erste Markierung",
     "Next mark": "Nächste Markierung",
     "Second mark": "Zweite Markierung",
-    "Third mark": "Dritte Markierung"
+    "Third mark": "Dritte Markierung",
+    "stops": "stopps"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7260,7 +7267,8 @@
     "First mark": "Πρώτο σήμα",
     "Next mark": "Επόμενο σήμα",
     "Second mark": "Δεύτερο σήμα",
-    "Third mark": "Τρίτο σήμα"
+    "Third mark": "Τρίτο σήμα",
+    "stops": "στάσεις"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8235,7 +8243,8 @@
     "First mark": "Primera marca",
     "Next mark": "Siguiente marca",
     "Second mark": "Segunda marca",
-    "Third mark": "Tercera marca"
+    "Third mark": "Tercera marca",
+    "stops": "paradas"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9234,7 +9243,8 @@
     "First mark": "Ensimmäinen ansiomerkki",
     "Next mark": "Seuraava ansiomerkki",
     "Second mark": "Toinen ansiomerkki",
-    "Third mark": "Kolmas ansiomerkki"
+    "Third mark": "Kolmas ansiomerkki",
+    "stops": "pysäytykset"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10213,7 +10223,8 @@
     "First mark": "Première marque",
     "Next mark": "Marque suivante",
     "Second mark": "Deuxième marque",
-    "Third mark": "Troisième marque"
+    "Third mark": "Troisième marque",
+    "stops": "arrêts"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -10983,7 +10994,8 @@
     "First mark": "पहला निशान",
     "Next mark": "अगला निशान",
     "Second mark": "दूसरा निशान",
-    "Third mark": "तीसरा निशान"
+    "Third mark": "तीसरा निशान",
+    "stops": "स्टॉप"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11976,7 +11988,8 @@
     "First mark": "Prva oznaka",
     "Next mark": "Sljedeća oznaka",
     "Second mark": "Druga oznaka",
-    "Third mark": "Treća oznaka"
+    "Third mark": "Treća oznaka",
+    "stops": "zaustavljanja"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12971,7 +12984,8 @@
     "First mark": "Első kiválósági jel",
     "Next mark": "Következő kiválósági jel",
     "Second mark": "Második kiválósági jel",
-    "Third mark": "Harmadik kiválósági jel"
+    "Third mark": "Harmadik kiválósági jel",
+    "stops": "megállók"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13962,7 +13976,8 @@
     "First mark": "Primo marchio",
     "Next mark": "Marchio successivo",
     "Second mark": "Secondo marchio",
-    "Third mark": "Terzo marchio"
+    "Third mark": "Terzo marchio",
+    "stops": "stop"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14960,7 +14975,8 @@
     "First mark": "1つ目の優等マーク",
     "Next mark": "次の優等マーク",
     "Second mark": "2つ目の優等マーク",
-    "Third mark": "3つ目の優等マーク"
+    "Third mark": "3つ目の優等マーク",
+    "stops": "停止"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15733,7 +15749,8 @@
     "First mark": "Бірінші белгі",
     "Next mark": "Келесі белгі",
     "Second mark": "Екінші белгі",
-    "Third mark": "Үшінші белгі"
+    "Third mark": "Үшінші белгі",
+    "stops": "тоқтаулар"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16736,7 +16753,8 @@
     "First mark": "첫 번째 표식",
     "Next mark": "다음 표식",
     "Second mark": "두 번째 표식",
-    "Third mark": "세 번째 표식"
+    "Third mark": "세 번째 표식",
+    "stops": "중단"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17734,7 +17752,8 @@
     "First mark": "Pirmasis ženklas",
     "Next mark": "Kitas ženklas",
     "Second mark": "Antrasis ženklas",
-    "Third mark": "Trečiasis ženklas"
+    "Third mark": "Trečiasis ženklas",
+    "stops": "sustojimai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18718,7 +18737,8 @@
     "First mark": "Pirmā atzīme",
     "Next mark": "Nākamā atzīme",
     "Second mark": "Otrā atzīme",
-    "Third mark": "Trešā atzīme"
+    "Third mark": "Trešā atzīme",
+    "stops": "pieturas"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19718,7 +19738,8 @@
     "First mark": "Eerste markering",
     "Next mark": "Volgende markering",
     "Second mark": "Tweede markering",
-    "Third mark": "Derde markering"
+    "Third mark": "Derde markering",
+    "stops": "stops"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20709,7 +20730,8 @@
     "First mark": "Første merke",
     "Next mark": "Neste merke",
     "Second mark": "Andre merke",
-    "Third mark": "Tredje merke"
+    "Third mark": "Tredje merke",
+    "stops": "stopp"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21697,7 +21719,8 @@
     "First mark": "Pierwsza odznaka biegłości",
     "Next mark": "Następna odznaka biegłości",
     "Second mark": "Druga odznaka biegłości",
-    "Third mark": "Trzecia odznaka biegłości"
+    "Third mark": "Trzecia odznaka biegłości",
+    "stops": "przystanki"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22678,7 +22701,8 @@
     "First mark": "Primeira marca",
     "Next mark": "Próxima marca",
     "Second mark": "Segunda marca",
-    "Third mark": "Terceira marca"
+    "Third mark": "Terceira marca",
+    "stops": "paragens"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23659,7 +23683,8 @@
     "First mark": "Prima marcă",
     "Next mark": "Următoarea marcă",
     "Second mark": "A doua marcă",
-    "Third mark": "A treia marcă"
+    "Third mark": "A treia marcă",
+    "stops": "opriri"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24627,7 +24652,9 @@
     "First mark": "Первая отметка",
     "Next mark": "Следующая отметка",
     "Second mark": "Вторая отметка",
-    "Third mark": "Третья отметка"
+    "Third mark": "Третья отметка",
+    "Duration": "Время действия",
+    "stops": "остановки"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25401,7 +25428,8 @@
     "First mark": "Prva oznaka",
     "Next mark": "Naslednja oznaka",
     "Second mark": "Druga oznaka",
-    "Third mark": "Tretja oznaka"
+    "Third mark": "Tretja oznaka",
+    "stops": "postanki"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26396,7 +26424,8 @@
     "First mark": "Прва ознака",
     "Next mark": "Следећа ознака",
     "Second mark": "Друга ознака",
-    "Third mark": "Трећа ознака"
+    "Third mark": "Трећа ознака",
+    "stops": "tačke"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27396,7 +27425,8 @@
     "First mark": "Första märket",
     "Next mark": "Nästa märke",
     "Second mark": "Andra märket",
-    "Third mark": "Tredje märket"
+    "Third mark": "Tredje märket",
+    "stops": "stopp"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28392,7 +28422,8 @@
     "First mark": "เครื่องหมายแรก",
     "Next mark": "เครื่องหมายถัดไป",
     "Second mark": "เครื่องหมายที่สอง",
-    "Third mark": "เครื่องหมายที่สาม"
+    "Third mark": "เครื่องหมายที่สาม",
+    "stops": "จุด"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29167,7 +29198,8 @@
     "First mark": "Unang marka",
     "Next mark": "Susunod na marka",
     "Second mark": "Ikalawang marka",
-    "Third mark": "Ikatlong marka"
+    "Third mark": "Ikatlong marka",
+    "stops": "mga hinto"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30159,7 +30191,8 @@
     "First mark": "İlk işaret",
     "Next mark": "Sonraki işaret",
     "Second mark": "İkinci işaret",
-    "Third mark": "Üçüncü işaret"
+    "Third mark": "Üçüncü işaret",
+    "stops": "duraklar"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31144,7 +31177,8 @@
     "First mark": "Перша відмітка",
     "Next mark": "Наступна відмітка",
     "Second mark": "Друга відмітка",
-    "Third mark": "Третя відмітка"
+    "Third mark": "Третя відмітка",
+    "stops": "зупинки"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32117,7 +32151,9 @@
     "First mark": "Dấu hiệu đầu tiên",
     "Next mark": "Dấu hiệu tiếp theo",
     "Second mark": "Dấu hiệu thứ hai",
-    "Third mark": "Dấu hiệu thứ ba"
+    "Third mark": "Dấu hiệu thứ ba",
+    "Duration": "Thời lượng",
+    "stops": "mốc"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33113,6 +33149,7 @@
     "First mark": "一环",
     "Next mark": "下一环",
     "Second mark": "二环",
-    "Third mark": "三环"
+    "Third mark": "三环",
+    "stops": "停止"
   }
 }

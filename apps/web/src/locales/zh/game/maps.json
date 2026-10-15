@@ -39,6 +39,7 @@
   "208_bf_epic_normandy": "诺曼底",
   "209_wg_epic_suburbia": "发电厂",
   "210_bf_epic_desert": "海市蜃楼",
+  "212_epic_random_valley": "尼德堡",
   "212_epic_random_valley_sm25": "尼德堡",
   "217_er_alaska": "克朗代克",
   "23_westfeld": "韦斯特菲尔德",
@@ -66,5 +67,6 @@
   "63_tundra": "喀秋莎",
   "95_lost_city_ctf": "魅影小镇",
   "99_poland": "斯杜季昂奇",
+  "hangar_v4_fortrush": "Empty_name",
   "invalid_map": "地图无效"
 }

@@ -39,6 +39,7 @@
   "208_bf_epic_normandy": "Нормандия",
   "209_wg_epic_suburbia": "Крафтверк",
   "210_bf_epic_desert": "Фата Моргана",
+  "212_epic_random_valley": "Небелбург",
   "212_epic_random_valley_sm25": "Небелбург",
   "217_er_alaska": "Клондайк",
   "23_westfeld": "Уестфилд",
@@ -66,5 +67,6 @@
   "63_tundra": "Тундра",
   "95_lost_city_ctf": "Призрачен град",
   "99_poland": "Студзянки",
+  "hangar_v4_fortrush": "Empty_name",
   "invalid_map": "Невалидна карта"
 }

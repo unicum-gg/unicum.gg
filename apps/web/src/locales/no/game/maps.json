@@ -39,6 +39,7 @@
   "208_bf_epic_normandy": "Normandie",
   "209_wg_epic_suburbia": "Kraftwerk",
   "210_bf_epic_desert": "Fata Morgana",
+  "212_epic_random_valley": "Nebelburg",
   "212_epic_random_valley_sm25": "Nebelburg",
   "217_er_alaska": "Klondike",
   "23_westfeld": "Westfield",
@@ -66,5 +67,6 @@
   "63_tundra": "Tundra",
   "95_lost_city_ctf": "Ghost Town",
   "99_poland": "Studzianki",
+  "hangar_v4_fortrush": "empty_name",
   "invalid_map": "Ugyldig kart"
 }

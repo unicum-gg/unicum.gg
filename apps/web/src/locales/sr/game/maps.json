@@ -39,6 +39,7 @@
   "208_bf_epic_normandy": "Normandija",
   "209_wg_epic_suburbia": "Kraftwerk",
   "210_bf_epic_desert": "Fatamorgana",
+  "212_epic_random_valley": "Nebelburg",
   "212_epic_random_valley_sm25": "Nebelburg",
   "217_er_alaska": "Klondajk",
   "23_westfeld": "Vestfild",
@@ -66,5 +67,6 @@
   "63_tundra": "Tundra",
   "95_lost_city_ctf": "Grad duhova",
   "99_poland": "Studzianki",
+  "hangar_v4_fortrush": "Empty_name",
   "invalid_map": "Nepravilna mapa"
 }

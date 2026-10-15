@@ -39,6 +39,7 @@
   "208_bf_epic_normandy": "노르망디",
   "209_wg_epic_suburbia": "발전소",
   "210_bf_epic_desert": "신기루",
+  "212_epic_random_valley": "네벨부르크",
   "212_epic_random_valley_sm25": "네벨부르크",
   "217_er_alaska": "클론다이크",
   "23_westfeld": "웨스트필드",
@@ -66,5 +67,6 @@
   "63_tundra": "툰드라",
   "95_lost_city_ctf": "유령 도시",
   "99_poland": "스투지안키",
+  "hangar_v4_fortrush": "Empty_name",
   "invalid_map": "유효하지 않은 지도"
 }

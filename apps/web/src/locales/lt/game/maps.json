@@ -39,6 +39,7 @@
   "208_bf_epic_normandy": "Normadija",
   "209_wg_epic_suburbia": "Kraftwerk",
   "210_bf_epic_desert": "Fata Morgana",
+  "212_epic_random_valley": "Nebelburgas",
   "212_epic_random_valley_sm25": "Nebelburgas",
   "217_er_alaska": "Klondaikas",
   "23_westfeld": "Vestfildas",
@@ -66,5 +67,6 @@
   "63_tundra": "Tundra",
   "95_lost_city_ctf": "Pamirštas miestas",
   "99_poland": "Studziankai",
+  "hangar_v4_fortrush": "Empty_name",
   "invalid_map": "Žemėlapis negalimas"
 }
