@@ -68,7 +68,15 @@ export type BattleDetailData = {
   reporters: number;
   /** Whether the archive holds this battle's replay, so the viewer has something to draw. */
   hasReplay: boolean;
-  /** Where the reporter's mark stood after this battle, and after the one before. */
-  mark: { percent: number; previous: number | null } | null;
+  /**
+   * Where one player's mark stood after this battle, and after the one before,
+   * with `account` naming whose gun it is.
+   *
+   * The owner has to travel with the figure. It comes from one client's own
+   * results, so in a battle somebody else reported it belongs to them, and a
+   * page showing another participant was putting a stranger's mark and a
+   * stranger's progress under its own player's name.
+   */
+  mark: { percent: number; previous: number | null; account: number } | null;
   participants: Participant[];
 };

@@ -2496,10 +2496,11 @@ export interface components {
             reporters: number;
             /** @description Whether the archive holds this battle's replay file, and so whether the 2D viewer has anything to draw. False for most battles: a replay only exists when a player who was there had recording on. */
             hasReplay: boolean;
-            /** @description Where the reporter's mark of excellence stood when this battle ended, and where it stood at the end of their previous battle in the same tank. The game gives no 'before' of its own, so the movement is only knowable by looking at the battle before. Null when the reporting client is too old to send it, when the mode does not count towards marks, or when no earlier battle in that tank is held. */
+            /** @description Where one player's mark of excellence stood when this battle ended, and where it stood at the end of their previous battle in the same tank, with `account` naming whose gun it is. The figure comes from that client's own results and belongs to them alone, so a reader showing another participant must not show it. The game gives no 'before' of its own, so the movement is only knowable by looking at the battle before. Null when the reporting client is too old to send it, when the mode does not count towards marks, or when no earlier battle in that tank is held. */
             mark: {
                 percent: number;
                 previous: number | null;
+                account: number;
             } | null;
             /** @description Every vehicle, both teams, by team then by damage. */
             participants: components["schemas"]["BattleParticipant"][];

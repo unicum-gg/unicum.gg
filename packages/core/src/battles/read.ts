@@ -595,8 +595,13 @@ export type BattleDetail = {
    * not count towards marks, or when this is the first battle we hold for that
    * tank. `previous` alone can be null while `percent` is not: a first battle
    * has a standing and no movement.
+   *
+   * `account` is WHOSE gun this is, and it has to be said rather than assumed.
+   * The figure comes from the reporting client's own results, so it belongs to
+   * one player in the battle and to nobody else; a reader looking at another
+   * participant's page is looking at a stranger's mark unless the two match.
    */
-  mark: { percent: number; previous: number | null } | null;
+  mark: { percent: number; previous: number | null; account: number } | null;
   /** Every vehicle, both teams, ordered by team then by what they did. */
   participants: BattleParticipant[];
 };
@@ -850,7 +855,7 @@ const MARK_WINDOW = 45 * 24 * 60 * 60 * 1000;
 async function markMove(
   region: Region,
   battle: { arenaUniqueId: string; startedAt: Date; personal: BattleEconomy | null; reportedBy: number[]; vehicles: BattleVehicle[] },
-): Promise<{ percent: number; previous: number | null } | null> {
+): Promise<{ percent: number; previous: number | null; account: number } | null> {
   const percent = battle.personal?.markPercent;
   if (percent == null) return null;
 
@@ -859,10 +864,12 @@ async function markMove(
   // battle names the tank; without it there is a percent and no series to put
   // it in.
   const account = Number(battle.reportedBy[0]);
-  const own = Number.isFinite(account)
-    ? battle.vehicles.find((vehicle) => vehicle.account === account)
-    : undefined;
-  if (!own?.tank) return { percent, previous: null };
+  // Without a nameable owner the figure cannot be shown to anybody safely, so
+  // it is not shown at all: an unattributed mark on a page reads as that
+  // page's player, which is the one thing it must never do.
+  if (!Number.isFinite(account)) return null;
+  const own = battle.vehicles.find((vehicle) => vehicle.account === account);
+  if (!own?.tank) return { percent, previous: null, account };
 
   const table = battlesByRegion[region];
   const [before] = await db
@@ -895,6 +902,6 @@ async function markMove(
     .limit(1);
 
   const was = before?.personal?.markPercent;
-  return { percent, previous: typeof was === "number" ? was : null };
+  return { percent, previous: typeof was === "number" ? was : null, account };
 }
 

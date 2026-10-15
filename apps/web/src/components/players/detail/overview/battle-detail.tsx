@@ -389,7 +389,12 @@ export function BattleDetail({
             region={region}
             battleId={battleId}
             participant={{ ...mine, personal }}
-            mark={data.mark}
+            // Only when it is THIS player's gun. The figure comes from one
+            // client's own results, so in a battle somebody else reported it
+            // belongs to them, and showing it here put a stranger's mark and
+            // a stranger's progress under the name of the player whose page
+            // this is.
+            mark={data.mark && data.mark.account === highlightAccount ? data.mark : null}
             startedAt={startedAt}
             battleDuration={data.duration ?? cardDuration}
             t={t}

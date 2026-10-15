@@ -174,11 +174,12 @@ export const BattleDetailResponse = z
       .object({
         percent: z.number(),
         previous: z.number().nullable(),
+        account: z.number(),
       })
       .nullable()
       .meta({
         description:
-          "Where the reporter's mark of excellence stood when this battle ended, and where it stood at the end of their previous battle in the same tank. The game gives no 'before' of its own, so the movement is only knowable by looking at the battle before. Null when the reporting client is too old to send it, when the mode does not count towards marks, or when no earlier battle in that tank is held.",
+          "Where one player's mark of excellence stood when this battle ended, and where it stood at the end of their previous battle in the same tank, with `account` naming whose gun it is. The figure comes from that client's own results and belongs to them alone, so a reader showing another participant must not show it. The game gives no 'before' of its own, so the movement is only knowable by looking at the battle before. Null when the reporting client is too old to send it, when the mode does not count towards marks, or when no earlier battle in that tank is held.",
       }),
     participants: z.array(battleParticipant).meta({
       description: "Every vehicle, both teams, by team then by damage.",
