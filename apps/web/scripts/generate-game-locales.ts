@@ -54,7 +54,11 @@ import {
   isGameClientNamespace,
 } from "../src/lib/game-vocabulary";
 import { DEFAULT_LOCALE, type Locale } from "../src/lib/translations";
-import { typographic } from "./translation-rules";
+import {
+  GAME_OWNED_PATH,
+  type GameOwnedKeys,
+  typographic,
+} from "./translation-rules";
 
 const webRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const localesRoot = join(webRoot, "src", "locales");
@@ -120,6 +124,24 @@ function writeJson(path: string, value: Json): boolean {
 /** Sort keys so a rebuild diffs on content rather than on catalogue order. */
 const sorted = (entries: Record<string, string>): Json =>
   Object.fromEntries(Object.entries(entries).sort(([a], [b]) => a.localeCompare(b)));
+
+/**
+ * A translated locale's file as the translator would leave it: sorted, and with
+ * its apostrophes written the way `generate-translations` writes them.
+ *
+ * The client writes the ASCII quote and the translator rewrites every value of
+ * every locale it merges with `typographic`, the ones it only carried over
+ * included. Written verbatim here, every file holding an elision ("Région
+ * d'Ensk") came back different on each install and went back on the next
+ * translation run. English is left verbatim: the translator never writes it.
+ */
+const translated = (entries: Record<string, string>): Json =>
+  Object.fromEntries(
+    Object.entries(sorted(entries)).map(([key, value]) => [
+      key,
+      typographic(value as string),
+    ]),
+  );
 
 /**
  * A local harvest to read instead of the published branch, as the mirror's own
@@ -301,6 +323,21 @@ function tankParams(menu: Record<string, string>): Record<string, string> {
   return out;
 }
 
+/**
+ * The rows a translated `game/tank-params` already holds, limited to the ones
+ * our English still has, so a row we dropped does not survive in the others.
+ */
+function keptRows(
+  existing: Json,
+  english: Record<string, string>,
+): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [key, value] of Object.entries(existing)) {
+    if (typeof value === "string" && Object.hasOwn(english, key)) out[key] = value;
+  }
+  return out;
+}
+
 /** The English side: our own labels, so the file the others translate from is
  * the table itself rather than a copy of it that can drift. */
 function englishTankParams(): Record<string, string> {
@@ -361,6 +398,8 @@ function mergeVocabulary(
   picker: Record<string, string>,
   /** This language's official terms, for the names carried in prose. */
   terms: Record<string, string>,
+  /** Filled with the dotted path of every entry the client supplied. */
+  owned: string[],
 ): boolean {
   const path = localePath(locale, "game/vocabulary");
   const vocabulary = readJson(path);
@@ -390,6 +429,7 @@ function mergeVocabulary(
       // Marques" out of a model's hands quietly stops applying to it.
       const official = terms[label];
       const name = official ? typographic(official) : undefined;
+      if (name) owned.push(`${family}.${key}`);
       if (name && own[key] !== name) {
         own[key] = name;
         changed = true;
@@ -406,14 +446,26 @@ function mergeVocabulary(
       ([type, token]) => [type, picker[token]] as [string, string | undefined],
     ),
   ];
-  for (const [type, name] of named) {
+  const englishTypes = (english["battle-types"] ?? {}) as Record<string, string>;
+  for (const [type, token] of named) {
+    // The term sheet first, the catalogue token only where it has nothing. The
+    // two are both the client, and can disagree: Romanian's battle-type picker
+    // says "Vânător de oţel" while every other string of the client, and so
+    // the sheet, says "Vânătorul de oţel". The locale suite holds the
+    // vocabulary to the sheet, so the token's spelling was corrected by the
+    // translator on every run and restored by this on every install.
+    const label = englishTypes[type];
+    const official = (label ? terms[label] : undefined) ?? token;
+    const name = official ? typographic(official) : undefined;
+    if (name) owned.push(`battle-types.${type}`);
     if (name && types[type] !== name) {
       types[type] = name;
       changed = true;
     }
   }
   for (const [mode, token] of Object.entries(GAME_MODE_TOKEN)) {
-    const name = battleTypes[token];
+    const name = battleTypes[token] ? typographic(battleTypes[token]) : undefined;
+    if (name) owned.push(`map-modes.${mode}`);
     if (name && modes[mode] !== name) {
       modes[mode] = name;
       changed = true;
@@ -480,6 +532,11 @@ async function main(): Promise<void> {
     string,
     Record<string, string>
   >;
+  // Which entries of the mixed namespaces the client wrote, per language. Starts
+  // from the committed manifest so a language the branch cannot answer for today
+  // keeps the claim a previous run made, exactly as its files are kept.
+  const owned = readJson(GAME_OWNED_PATH) as GameOwnedKeys;
+  const englishParams = englishTankParams();
 
   for (const [locale, language] of entries) {
     let catalogue: Awaited<ReturnType<typeof catalogueFor>> | null = null;
@@ -491,6 +548,8 @@ async function main(): Promise<void> {
       // unreachable), not twenty-two, and this runs on every install.
       failures.push(`${locale}: ${String(error)}`);
     }
+    const clientParams =
+      catalogue && locale !== DEFAULT_LOCALE ? tankParams(catalogue.menu) : {};
     if (catalogue) {
       reached++;
       for (const [namespace, value] of [
@@ -517,11 +576,22 @@ async function main(): Promise<void> {
         // only as a reason code.
         ["game/battle-messages", catalogue.battleMessages],
         // English keeps our own labels; every other language gets the client's.
+        //
+        // Merged into what is there rather than written over it: the client
+        // names only the rows it has a parameter for (about a third), and the
+        // rest are the translator's. Written over, every install dropped those
+        // rows and the next translation run bought them back from the model.
         [
           "game/tank-params",
           locale === DEFAULT_LOCALE
-            ? englishTankParams()
-            : tankParams(catalogue.menu),
+            ? englishParams
+            : {
+                ...keptRows(
+                  readJson(localePath(locale, "game/tank-params")),
+                  englishParams,
+                ),
+                ...clientParams,
+              },
         ],
       ] as const) {
         // A namespace this writes is either the client's alone or mixed with our
@@ -533,13 +603,15 @@ async function main(): Promise<void> {
             `[game-locales] ${namespace} is written here but classified neither in GAME_CLIENT_NAMESPACES nor as mixed`,
           );
         }
-        if (writeJson(localePath(locale, namespace), sorted(value))) {
+        const shaped = locale === DEFAULT_LOCALE ? sorted(value) : translated(value);
+        if (writeJson(localePath(locale, namespace), shaped)) {
           written++;
           console.log(`[game-locales] ${locale}/${namespace}`);
         }
       }
     }
     if (locale === DEFAULT_LOCALE) continue;
+    const vocabularyOwned: string[] = [];
     const read =
       catalogue && englishTerms
         ? officialTerms(englishTerms, catalogue.terms)
@@ -552,10 +624,17 @@ async function main(): Promise<void> {
         catalogue?.arenas.battleTypes ?? {},
         catalogue?.modes ?? {},
         terms,
+        vocabularyOwned,
       )
     ) {
       written++;
       console.log(`[game-locales] ${locale}/game/vocabulary (modes)`);
+    }
+    if (catalogue) {
+      owned[locale] = {
+        "game/tank-params": Object.keys(clientParams).sort(),
+        "game/vocabulary": [...new Set(vocabularyOwned)].sort(),
+      };
     }
   }
 
@@ -564,6 +643,15 @@ async function main(): Promise<void> {
       `[game-locales] no language could be read (${failures[0] ?? "no language configured"}), keeping the committed files and filling the catalogue from the committed term sheet`,
     );
     return;
+  }
+  const sortedOwned = Object.fromEntries(
+    Object.keys(owned)
+      .sort()
+      .map((locale) => [locale, owned[locale]]),
+  );
+  if (writeJson(GAME_OWNED_PATH, sortedOwned)) {
+    written++;
+    console.log("[game-locales] game-owned.json");
   }
   if (Object.keys(gameTerms).length > 0) {
     const sortedTerms = Object.fromEntries(

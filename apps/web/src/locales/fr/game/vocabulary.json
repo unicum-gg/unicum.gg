@@ -51,9 +51,9 @@
     "t6": "Escarmouche VI"
   },
   "map-modes": {
-    "standard": "Standard",
+    "standard": "Bataille standard",
     "encounter": "Bataille impromptue",
-    "assault": "Assaillant",
+    "assault": "Assaut",
     "attack-defense": "Attaque/Défense"
   },
   "map-camouflage": {

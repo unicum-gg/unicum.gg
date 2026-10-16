@@ -51,9 +51,9 @@
     "t6": "Escarmușă VI"
   },
   "map-modes": {
-    "standard": "Standard",
+    "standard": "Luptă standard",
     "encounter": "Contact",
-    "assault": "Assalt",
+    "assault": "Asalt",
     "attack-defense": "Atac/Apărare"
   },
   "map-camouflage": {

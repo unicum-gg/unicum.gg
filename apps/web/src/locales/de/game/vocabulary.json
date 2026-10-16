@@ -51,9 +51,9 @@
     "t6": "Scharmützel VI"
   },
   "map-modes": {
-    "standard": "Standard",
+    "standard": "Standardgefecht",
     "encounter": "Begegnungsgefecht",
-    "assault": "Sturm",
+    "assault": "Angriff",
     "attack-defense": "Angriff/Verteidigung"
   },
   "map-camouflage": {

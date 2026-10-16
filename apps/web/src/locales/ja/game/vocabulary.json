@@ -51,9 +51,9 @@
     "t6": "前衛戦 VI"
   },
   "map-modes": {
-    "standard": "標準",
+    "standard": "通常戦",
     "encounter": "遭遇戦",
-    "assault": "攻撃的",
+    "assault": "強襲戦",
     "attack-defense": "攻撃/防衛戦"
   },
   "map-camouflage": {

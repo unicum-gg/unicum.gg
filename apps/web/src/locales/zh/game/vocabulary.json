@@ -51,9 +51,9 @@
     "t6": "前哨战 VI"
   },
   "map-modes": {
-    "standard": "标准",
+    "standard": "随机战",
     "encounter": "夺旗战",
-    "assault": "突击型",
+    "assault": "攻防战",
     "attack-defense": "攻防战"
   },
   "map-camouflage": {

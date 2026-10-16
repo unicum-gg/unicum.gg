@@ -51,7 +51,7 @@
     "t6": "Schermutseling VI"
   },
   "map-modes": {
-    "standard": "Standaard",
+    "standard": "Standaard gevecht",
     "encounter": "Ontmoetingsgevecht",
     "assault": "Aanval",
     "attack-defense": "Aanval/Verdediging"

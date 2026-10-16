@@ -51,9 +51,9 @@
     "t6": "Çatışma VI"
   },
   "map-modes": {
-    "standard": "Standart",
+    "standard": "Standart Savaş",
     "encounter": "Karşılaşma Savaşı",
-    "assault": "Taarruzcu",
+    "assault": "Hücum",
     "attack-defense": "Saldırı/Savunma"
   },
   "map-camouflage": {

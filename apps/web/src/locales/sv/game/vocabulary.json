@@ -51,9 +51,9 @@
     "t6": "Skärmytsling VI"
   },
   "map-modes": {
-    "standard": "Standard",
+    "standard": "Standardstrid",
     "encounter": "Sammanstötning",
-    "assault": "Stormvagn",
+    "assault": "Stormning",
     "attack-defense": "Attack/Försvar"
   },
   "map-camouflage": {

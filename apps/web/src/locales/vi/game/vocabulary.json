@@ -51,9 +51,9 @@
     "t6": "Giao tranh VI"
   },
   "map-modes": {
-    "standard": "Tiêu chuẩn",
+    "standard": "Chế độ Cơ bản",
     "encounter": "Chế độ Đôi công",
-    "assault": "Tấn công",
+    "assault": "Xung kích",
     "attack-defense": "Tấn công/Phòng thủ"
   },
   "map-camouflage": {

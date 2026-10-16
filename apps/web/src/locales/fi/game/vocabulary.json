@@ -51,9 +51,9 @@
     "t6": "Kahakka VI"
   },
   "map-modes": {
-    "standard": "Standardi",
+    "standard": "Normaalitaistelu",
     "encounter": "Kohtaamistaistelu",
-    "assault": "Rynnäköijä",
+    "assault": "Hyökkäys",
     "attack-defense": "Hyökkäys/Puolustus"
   },
   "map-camouflage": {

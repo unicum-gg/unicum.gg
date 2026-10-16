@@ -51,9 +51,9 @@
     "t6": "การรบประจัญบาน VI"
   },
   "map-modes": {
-    "standard": "มาตรฐาน",
+    "standard": "การรบปกติ",
     "encounter": "การรบเผชิญหน้า",
-    "assault": "ยานจู่โจม",
+    "assault": "การรบบุกทะลวง",
     "attack-defense": "โจมตี/ป้องกัน"
   },
   "map-camouflage": {

@@ -51,9 +51,9 @@
     "t6": "Okršaj VI"
   },
   "map-modes": {
-    "standard": "Standard",
+    "standard": "Standardna bitka",
     "encounter": "Bitka susreta",
-    "assault": "Juriš",
+    "assault": "Napad",
     "attack-defense": "Napad/Obrana"
   },
   "map-camouflage": {

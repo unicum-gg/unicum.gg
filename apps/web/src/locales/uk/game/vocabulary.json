@@ -51,7 +51,7 @@
     "t6": "Вилазка VI"
   },
   "map-modes": {
-    "standard": "Стандартний",
+    "standard": "Стандартний бій",
     "encounter": "Зустрічний бій",
     "assault": "Штурм",
     "attack-defense": "Атака/Захист"

@@ -51,9 +51,9 @@
     "t6": "Šarvátka VI"
   },
   "map-modes": {
-    "standard": "Standardní",
+    "standard": "Standardní bitva",
     "encounter": "Střetnutí",
-    "assault": "Útočný",
+    "assault": "Útok",
     "attack-defense": "Útok/Obrana"
   },
   "map-camouflage": {

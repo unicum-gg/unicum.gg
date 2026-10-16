@@ -51,9 +51,9 @@
     "t6": "Схватка VI"
   },
   "map-modes": {
-    "standard": "Стандарт",
+    "standard": "Стандартна битка",
     "encounter": "Насрещна битка",
-    "assault": "Щурмови",
+    "assault": "Атака",
     "attack-defense": "Атака/Отбрана"
   },
   "map-camouflage": {

@@ -7,6 +7,32 @@
  * a rule the test enforces and the writer does not fails every run.
  */
 
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+/**
+ * Where `generate-game-locales` records which entries of the two mixed
+ * namespaces (`game/tank-params`, `game/vocabulary`) the game client wrote, per
+ * language, as dotted paths.
+ *
+ * The translator reads it to leave those entries alone. Without it, a client
+ * label the term sheet words differently ("Rozrzut na 100 m" where the sheet
+ * says "Rozrzut") read as stale and was rewritten by the model, then put back
+ * by the next install, then rewritten again: the two scripts took turns on the
+ * same hundred files forever. Beside `game-terms.json` and for the same reason:
+ * it is what the translator is told, not a dictionary the site serves.
+ */
+export const GAME_OWNED_PATH = join(
+  dirname(fileURLToPath(import.meta.url)),
+  "..",
+  "src",
+  "locales",
+  "game-owned.json",
+);
+
+/** `game-owned.json`: locale, then namespace, then the client's dotted keys. */
+export type GameOwnedKeys = Record<string, Record<string, string[]>>;
+
 /** The apostrophe is one character, and it is not the one on the keyboard.
  *
  * French elides, English contracts, Turkish suffixes a symbol, and all three

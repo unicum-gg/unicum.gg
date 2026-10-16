@@ -23,6 +23,8 @@ import {
   echoedFill,
   cataloguedCopy,
   cataloguedNames,
+  GAME_OWNED_PATH,
+  type GameOwnedKeys,
   gameNames,
   isGameNamespace,
   matchedEdges,
@@ -899,6 +901,24 @@ function readHashes(): Record<string, string> {
 
 /** Read once: every job compares against the same snapshot. */
 const hashes = readHashes();
+
+/**
+ * The entries of the mixed namespaces the game client wrote, by locale and
+ * namespace, as `generate-game-locales` last recorded them. Absent on a
+ * checkout whose mirror has never been read, which leaves every entry the
+ * model's, as before.
+ */
+const clientOwned = (() => {
+  const all: GameOwnedKeys = existsSync(GAME_OWNED_PATH)
+    ? JSON.parse(readFileSync(GAME_OWNED_PATH, "utf-8"))
+    : {};
+  const sets = new Map<string, Set<string>>();
+  for (const [locale, namespaces] of Object.entries(all))
+    for (const [namespace, keys] of Object.entries(namespaces))
+      sets.set(`${locale}:${namespace}`, new Set(keys));
+  return (locale: Locale, namespace: string, key: string): boolean =>
+    sets.get(`${locale}:${namespace}`)?.has(key) ?? false;
+})();
 const seeding = Object.keys(hashes).length === 0;
 
 const hashOf = (value: string): string =>
@@ -937,6 +957,12 @@ function isStale(
   // languages no client ships. See `GAME_CLIENT_NAMESPACES` for what a stale check
   // did to these files the one time the English side moved.
   if (isGameClientNamespace(namespace)) return false;
+  // The same rule for the client's half of a mixed namespace. The term sheet
+  // and the game-name checks below would otherwise judge the client's own
+  // label against the model's wording and rewrite it, and the next install of
+  // `generate-game-locales` would put it back: the two took turns on every row
+  // the client names, on every run.
+  if (clientOwned(locale, namespace, key)) return false;
   // An identifier that came back changed has to be written again, as itself.
   if (isIdentifier(source) && current !== source) return true;
   // The same rule for a key filled from `game/vocabulary` rather than from

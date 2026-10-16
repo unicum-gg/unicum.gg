@@ -51,9 +51,9 @@
     "t6": "Escaramuza VI"
   },
   "map-modes": {
-    "standard": "Estándar",
+    "standard": "Batalla estándar",
     "encounter": "Encuentro",
-    "assault": "Asaltante",
+    "assault": "Asalto",
     "attack-defense": "Ataque/Defensa"
   },
   "map-camouflage": {

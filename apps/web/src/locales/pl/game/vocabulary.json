@@ -51,9 +51,9 @@
     "t6": "Potyczki VI"
   },
   "map-modes": {
-    "standard": "Standardowy",
+    "standard": "Bitwa standardowa",
     "encounter": "Bitwa spotkaniowa",
-    "assault": "Szturmowiec",
+    "assault": "Szturm",
     "attack-defense": "Atak/Obrona"
   },
   "map-camouflage": {

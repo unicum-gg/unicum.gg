@@ -51,9 +51,9 @@
     "t6": "Αψιμαχία VI"
   },
   "map-modes": {
-    "standard": "Τυπικό",
+    "standard": "Κανονική Μάχη",
     "encounter": "Μάχη Διεκδίκησης",
-    "assault": "Επίθεσης",
+    "assault": "Επίθεση",
     "attack-defense": "Επίθεση/Άμυνα"
   },
   "map-camouflage": {

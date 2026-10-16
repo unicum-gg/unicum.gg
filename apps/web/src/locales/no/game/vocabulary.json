@@ -51,9 +51,9 @@
     "t6": "Trefning VI"
   },
   "map-modes": {
-    "standard": "Standard",
+    "standard": "Standard kamp",
     "encounter": "Møtekamp",
-    "assault": "Angrep",
+    "assault": "Angrip",
     "attack-defense": "Angrep/Forsvar"
   },
   "map-camouflage": {

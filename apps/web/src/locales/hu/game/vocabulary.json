@@ -51,9 +51,9 @@
     "t6": "Csatározás VI"
   },
   "map-modes": {
-    "standard": "Standard",
+    "standard": "Normál csata",
     "encounter": "Csata ütközet",
-    "assault": "Támadó",
+    "assault": "Támadás",
     "attack-defense": "Támadás/Védekezés"
   },
   "map-camouflage": {

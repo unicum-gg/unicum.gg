@@ -51,9 +51,9 @@
     "t6": "쟁탈전 VI"
   },
   "map-modes": {
-    "standard": "기준",
+    "standard": "일반 전투",
     "encounter": "조우전",
-    "assault": "강습",
+    "assault": "강습전",
     "attack-defense": "공방전"
   },
   "map-camouflage": {

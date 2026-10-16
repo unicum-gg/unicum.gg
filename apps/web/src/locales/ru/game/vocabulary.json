@@ -51,7 +51,7 @@
     "t6": "Вылазки VI"
   },
   "map-modes": {
-    "standard": "Стандарт",
+    "standard": "Стандартный бой",
     "encounter": "Встречный бой",
     "assault": "Штурм",
     "attack-defense": "Атака/Оборона"

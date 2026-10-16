@@ -51,9 +51,9 @@
     "t6": "Sadursme VI"
   },
   "map-modes": {
-    "standard": "Standarts",
+    "standard": "Standarta kauja",
     "encounter": "Sadursmes kauja",
-    "assault": "Uzbrucējs",
+    "assault": "Iekarošana",
     "attack-defense": "Uzbrukums/Aizsardzība"
   },
   "map-camouflage": {
