@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { GlossaryLabel } from "@/components/glossary/label";
+import { RatingBandName } from "@/components/rating-band-name";
 import { styles } from "@/lib/styles";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
@@ -98,7 +99,7 @@ export function RatingScale() {
                       colorClass,
                     )}
                   >
-                    {t(`tiers.${row.id}`)}
+                    <RatingBandName color={row.color}>{t(`tiers.${row.id}`)}</RatingBandName>
                   </TableCell>
                   <TableCell className="text-right tabular-nums text-muted-foreground whitespace-nowrap">
                     {row.wr}

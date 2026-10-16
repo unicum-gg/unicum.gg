@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { GlossaryLabel } from "@/components/glossary/label";
+import { RatingBandName } from "@/components/rating-band-name";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import {
@@ -87,7 +88,7 @@ export function StrongholdRatingScale() {
                     RATING_COLOR_CLASS[r.color],
                   )}
                 >
-                  {statLabel(TIER_LABEL[r.color], tLocal)}
+                  <RatingBandName color={r.color}>{statLabel(TIER_LABEL[r.color], tLocal)}</RatingBandName>
                 </TableCell>
                 <TableCell className="text-right tabular-nums text-muted-foreground whitespace-nowrap">
                   {WR_RANGE[r.color]}

@@ -41,6 +41,26 @@ export const RATING_COLOR_CLASS: Record<RatingColor, string> = {
   [RatingColor.Top]: "bg-[#5A3175]! text-white",
 };
 
+/**
+ * The players' own nickname for each band, shown beside its name. Unicum,
+ * Super Unicum and Tomato are the community's words (Tomato from XVM painting
+ * low stats red), and the rest extend the vegetable patch Tomato started. Bot
+ * closes it because the black band is where accounts suspected of being run
+ * by one sit. Deliberately not in the locale tree: they are slang, and a
+ * translator would turn "Potato" into the word for the vegetable.
+ */
+export const RATING_COLOR_NICKNAME: Record<RatingColor, string> = {
+  [RatingColor.VeryBad]: "Bot",
+  [RatingColor.Bad]: "Tomato",
+  [RatingColor.BelowAvg]: "Carrot",
+  [RatingColor.Average]: "Potato",
+  [RatingColor.Good]: "Lime",
+  [RatingColor.VeryGood]: "Cucumber",
+  [RatingColor.Super]: "Blueberry",
+  [RatingColor.Excellent]: "Unicum",
+  [RatingColor.Top]: "Super Unicum",
+};
+
 export function winrateColor(wr: number): RatingColor {
   if (wr < 0.45) return RatingColor.VeryBad;
   if (wr < 0.47) return RatingColor.Bad;

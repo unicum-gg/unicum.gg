@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { GlossaryLabel } from "@/components/glossary/label";
+import { RatingBandName } from "@/components/rating-band-name";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, RatingColor } from "@unicum.gg/shared";
@@ -87,7 +88,7 @@ export function SteelHunterRatingScale() {
                     RATING_COLOR_CLASS[band.color],
                   )}
                 >
-                  {tScale(`tiers.${band.tier}`)}
+                  <RatingBandName color={band.color}>{tScale(`tiers.${band.tier}`)}</RatingBandName>
                 </TableCell>
                 <TableCell className="text-right tabular-nums text-muted-foreground whitespace-nowrap">
                   {band.wr}
