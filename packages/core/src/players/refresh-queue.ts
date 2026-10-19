@@ -1,4 +1,4 @@
-import { eq, gte, inArray, sql } from "drizzle-orm";
+import { eq, gte, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { playerRefreshQueueByRegion } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -35,10 +35,8 @@ export type EnqueuePlayerOptions = {
 };
 
 export type EnqueuePlayerResult = {
-  // Players newly inserted into the queue.
+  // Players newly inserted into the queue, or whose priority this call raised.
   admitted: number;
-  // Players already queued whose priority this call raised.
-  bumped: number;
   // True when the live lane was full, so no new player was admitted. The caller
   // reports a wait only for players it actually queued.
   laneFull: boolean;
@@ -58,7 +56,7 @@ export async function enqueuePlayerRefresh(
   accountIds: number[],
   options: EnqueuePlayerOptions = {},
 ): Promise<EnqueuePlayerResult> {
-  const empty = { admitted: 0, bumped: 0, laneFull: false };
+  const empty = { admitted: 0, laneFull: false };
   if (accountIds.length === 0) return empty;
   const priority = options.priority ?? 0;
   const table = playerRefreshQueueByRegion[region];
@@ -75,21 +73,27 @@ export async function enqueuePlayerRefresh(
       .where(gte(table.priority, LIVE_REFRESH_PRIORITY));
     const depth = row?.depth ?? 0;
     if (depth >= LIVE_QUEUE_MAX) {
-      const bumped = await bumpExisting(region, unique, priority);
-      return { admitted: 0, bumped, laneFull: true };
+      // Nothing, deliberately. Raising a queued player's priority is what puts
+      // them IN this lane, so doing it on a full lane is how the ceiling
+      // defeats itself: measured 2026-10-19, the lane went 36 to 541 in five
+      // minutes while the backlog fell by exactly as much, because every view
+      // of a player sitting at a lower priority promoted them across. The lane
+      // can only drain 2/s whoever is asking, so past the ceiling the honest
+      // answer is no, and the caller reports `queued: false` rather than a wait
+      // nobody will see the end of.
+      return { admitted: 0, laneFull: true };
     }
     // Admit only up to the ceiling. The slice is by account id rather than by
     // caller order, which is fine: a live call carries one player.
     const room = LIVE_QUEUE_MAX - depth;
     if (unique.length > room) {
-      const bumped = await bumpExisting(region, unique.slice(room), priority);
       await insertChunked(region, unique.slice(0, room), priority);
-      return { admitted: room, bumped, laneFull: true };
+      return { admitted: room, laneFull: true };
     }
   }
 
   await insertChunked(region, unique, priority);
-  return { admitted: unique.length, bumped: 0, laneFull: false };
+  return { admitted: unique.length, laneFull: false };
 }
 
 async function insertChunked(
@@ -111,31 +115,6 @@ async function insertChunked(
         },
       });
   }
-}
-
-/**
- * Raise the priority of players ALREADY queued, inserting nothing. This is the
- * full-lane path: an upsert would admit the rows the ceiling just refused,
- * since `ON CONFLICT` only fires when the row is already there.
- */
-async function bumpExisting(
-  region: Region,
-  accountIds: number[],
-  priority: number,
-): Promise<number> {
-  if (accountIds.length === 0) return 0;
-  const table = playerRefreshQueueByRegion[region];
-  let bumped = 0;
-  for (let i = 0; i < accountIds.length; i += CHUNK_SIZE) {
-    const chunk = accountIds.slice(i, i + CHUNK_SIZE);
-    const rows = await db
-      .update(table)
-      .set({ priority: sql`GREATEST(${table.priority}, ${priority})` })
-      .where(inArray(table.accountId, chunk))
-      .returning({ accountId: table.accountId });
-    bumped += rows.length;
-  }
-  return bumped;
 }
 
 /**

@@ -66,7 +66,7 @@ export async function POST(
   // one. Say so rather than inventing a countdown: the page is already serving
   // the data we hold, and `snapshot-pipeline` refreshes this player on its own
   // cadence without going through the portal.
-  if (enqueued.admitted === 0 && enqueued.bumped === 0) {
+  if (enqueued.admitted === 0) {
     return Response.json({ estimatedSeconds: null, queued: false });
   }
 
