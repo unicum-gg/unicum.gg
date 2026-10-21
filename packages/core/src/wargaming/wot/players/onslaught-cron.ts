@@ -55,10 +55,11 @@ export function startOnslaughtReconcileCron(): void {
  * violet pill wearing a steel-blue crest, which reads as a bug rather than as
  * a badge that has not caught up.
  *
- * It is affordable because the source is small and the write is conditional.
- * The recompute reads about 32,000 rows on EU and costs ~230ms, and rows are
- * written only where a value actually changed, so between two seasons the job
- * updates nothing at all.
+ * It is affordable because the write is conditional. The recompute pairs every
+ * history row with the season snapshot of its instant, since Legend has to be
+ * judged against the cutoff of that instant (5.6M rows on EU, ~1.3s), and rows
+ * are written only where a value actually changed, so between two seasons the
+ * job updates nothing at all.
  */
 const CREST_SCHEDULE = "2,17,32,47 * * * *";
 
