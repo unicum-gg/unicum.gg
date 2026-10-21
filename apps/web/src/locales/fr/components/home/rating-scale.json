@@ -1,7 +1,7 @@
 {
   "title": "Échelle de notation",
   "description": "Seuils de couleur utilisés sur l’ensemble du site pour le taux de victoires et l’indicateur d’évaluation sélectionné dans la barre de navigation.",
-  "tier": "Rang",
+  "tier": "Niveau",
   "tiers": {
     "top": "Meilleurs",
     "excellent": "Excellent",

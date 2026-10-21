@@ -1,7 +1,7 @@
 {
   "title": "Rating scale",
   "description": "Color thresholds used across the site for win rate and the rating metric selected in the navbar.",
-  "tier": "Tier",
+  "tier": "Level",
   "tiers": {
     "top": "Top",
     "excellent": "Excellent",
