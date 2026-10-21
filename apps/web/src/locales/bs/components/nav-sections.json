@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Ljestvica rangirane Ofenzive"
     },
-    "players-steel-hunter": {
-      "description": "Ljestvica battle royale režima"
-    },
     "servers-population": {
       "label": "Stanovništvo servera",
       "description": "Igrači online, sada i kroz vrijeme"

@@ -40,7 +40,7 @@ const LINK_ICON: Record<string, ReactNode> = {
   // subject, one icon, whichever section a reader comes at it from.
   "players-marks": <MedalIcon />,
   "players-onslaught": <SwordIcon />,
-  "players-steel-hunter": <CrosshairIcon />,
+  "players-rampage": <CrosshairIcon />,
   "top-clans": <UsersThreeIcon />,
   stronghold: <ShieldIcon />,
   advances: <FlagBannerIcon />,

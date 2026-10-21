@@ -26,7 +26,8 @@
     "mark-disbanded-clans": "tsx --env-file-if-exists=../web/.env.local src/scripts/mark-disbanded-clans.ts",
     "start:single": "NODE_ENV=production tsx src/index.ts",
     "refresh-tank-specs": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-tank-specs.ts",
-    "rebuild-onslaught-daily": "tsx --env-file-if-exists=../web/.env.local src/scripts/rebuild-onslaught-daily.ts"
+    "rebuild-onslaught-daily": "tsx --env-file-if-exists=../web/.env.local src/scripts/rebuild-onslaught-daily.ts",
+    "recompute-rampage-ratings": "tsx --env-file-if-exists=../web/.env.local src/scripts/recompute-rampage-ratings.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",

@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Clasificación de Asedio por Rango"
     },
-    "players-steel-hunter": {
-      "description": "Tabla clasificatoria del modo battle royale"
-    },
     "servers-population": {
       "label": "Población del servidor",
       "description": "Jugadores en línea, ahora y a lo largo del tiempo"

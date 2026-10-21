@@ -52,7 +52,7 @@ const MODE_SEGMENT: Record<PlayerMode, string | null> = {
   [PlayerMode.ClanWarsX]: "cw-x",
   [PlayerMode.ClanWarsVIII]: "cw-viii",
   [PlayerMode.ClanWarsVI]: "cw-vi",
-  [PlayerMode.Rampage]: "steel-hunter",
+  [PlayerMode.Rampage]: "rampage",
   [PlayerMode.Onslaught]: "onslaught",
   [PlayerMode.ClanBattles]: "clan",
   [PlayerMode.TankCompany]: "company",

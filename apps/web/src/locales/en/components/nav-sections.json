@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Ranked Onslaught ladder"
     },
-    "players-steel-hunter": {
-      "description": "Battle royale leaderboard"
-    },
     "servers-population": {
       "label": "Server population",
       "description": "Players online, now and over time"
@@ -83,6 +80,9 @@
     "top-players": {
       "label": "Top players",
       "description": "All-time player leaderboard"
+    },
+    "players-rampage": {
+      "description": "Who ranked highest in Rampage, the 2015 event mode."
     }
   }
 }

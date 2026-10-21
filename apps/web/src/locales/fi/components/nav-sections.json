@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Rankatun Rynnistyksen sijoituslista"
     },
-    "players-steel-hunter": {
-      "description": "Battle royale -tulostaulukko"
-    },
     "servers-population": {
       "label": "Palvelimen populaatio",
       "description": "Paikalla olevat pelaajat nyt ja ajan mittaan"

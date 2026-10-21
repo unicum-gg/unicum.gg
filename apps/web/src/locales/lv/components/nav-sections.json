@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Ranga Uzbrukuma līderu saraksts"
     },
-    "players-steel-hunter": {
-      "description": "Kaujas karalistes līderu saraksts"
-    },
     "servers-population": {
       "label": "Servera apdzīvotība",
       "description": "Tiešsaistes spēlētāji tagad un laika gaitā"

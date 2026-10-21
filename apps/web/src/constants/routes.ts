@@ -101,7 +101,7 @@ const ROUTES = {
   // A player's Rampage tab, so that leaderboard links straight to the
   // matching mode instead of the overview.
   PLAYER_RAMPAGE: (region: Region, nickname: string) =>
-    pathcat("/:region/players/:nickname/steel-hunter", { region, nickname }),
+    pathcat("/:region/players/:nickname/rampage", { region, nickname }),
   // A player's Onslaught mode, so the Onslaught leaderboard links straight to
   // the matching mode instead of the overview, like Rampage above.
   PLAYER_ONSLAUGHT: (region: Region, nickname: string) =>

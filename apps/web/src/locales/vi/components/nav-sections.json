@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Bảng xếp hạng Cường kích"
     },
-    "players-steel-hunter": {
-      "description": "Bảng xếp hạng battle royale"
-    },
     "servers-population": {
       "label": "Dân số máy chủ",
       "description": "Người chơi trực tuyến, hiện tại và theo thời gian"

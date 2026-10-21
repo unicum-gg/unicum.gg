@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Drabinka rankingowa w trybie Natarcie"
     },
-    "players-steel-hunter": {
-      "description": "Klasyfikacja trybu battle royale"
-    },
     "servers-population": {
       "label": "Ludność serwera",
       "description": "Gracze online teraz i na przestrzeni czasu"

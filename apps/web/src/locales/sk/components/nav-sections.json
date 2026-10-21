@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Hodnotené poradie režimu Ofenzíva"
     },
-    "players-steel-hunter": {
-      "description": "Rebríček režimu battle royale"
-    },
     "servers-population": {
       "label": "Počet hráčov na serveri",
       "description": "Hráči online teraz aj v priebehu času"

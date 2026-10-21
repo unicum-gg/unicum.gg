@@ -72,10 +72,10 @@ export function navSections(
           description: t("links.players-marks.description"),
         },
         {
-          id: "players-steel-hunter",
-          label: tGame("player-modes.steel-hunter"),
+          id: "players-rampage",
+          label: tGame("player-modes.rampage"),
           href: ROUTES.PLAYERS_RAMPAGE(region),
-          description: t("links.players-steel-hunter.description"),
+          description: t("links.players-rampage.description"),
         },
         {
           id: "players-onslaught",

@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Ljestvica rangirane Navale"
     },
-    "players-steel-hunter": {
-      "description": "Ljestvica bitke royale"
-    },
     "servers-population": {
       "label": "Broj igrača na serveru",
       "description": "Igrači na mreži, sada i kroz vrijeme"

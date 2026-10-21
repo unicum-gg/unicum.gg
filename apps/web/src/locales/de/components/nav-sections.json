@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Rangliste für Ansturm"
     },
-    "players-steel-hunter": {
-      "description": "Battle-Royale-Bestenliste"
-    },
     "servers-population": {
       "label": "Serverpopulation",
       "description": "Spieler online, aktuell und im Zeitverlauf"

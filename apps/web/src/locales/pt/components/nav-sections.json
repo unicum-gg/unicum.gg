@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "classificação do Massacre classificatório"
     },
-    "players-steel-hunter": {
-      "description": "Classificação do modo battle royale"
-    },
     "servers-population": {
       "label": "População do servidor",
       "description": "Jogadores online, agora e ao longo do tempo"

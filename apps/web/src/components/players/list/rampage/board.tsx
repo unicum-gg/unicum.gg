@@ -38,13 +38,13 @@ import {
   RampageSort,
   RatedMode,
   RATING_COLOR_CLASS,
+  TankBattleMode,
 } from "@unicum.gg/shared";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
 import { FilterSubject } from "@/components/filter-subject";
 import { useTranslation } from "@/hooks/use-translation";
-import { battleTypeName } from "@/components/game-name";
-import { BattleType } from "@unicum.gg/shared";
+import { tankModeName } from "@/components/game-name";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
@@ -92,7 +92,7 @@ export function RampageBoard({
   const { t } = useTranslation("components/players/list/rampage/view");
   const { t: tOwn } = useTranslation("components/players/list/rampage/board");
   const { t: tGame } = useTranslation("game/vocabulary");
-  const mode = battleTypeName(BattleType.BattleRoyale, tGame);
+  const mode = tankModeName(TankBattleMode.Fallout, tGame);
   // The page is prerendered (ISR) at the canonical view (HR sort), seeded here
   // with the full ranking as `initialResults`, then paginated client-side. A
   // column click re-ranks the WHOLE board, so it re-fetches the full ranking in

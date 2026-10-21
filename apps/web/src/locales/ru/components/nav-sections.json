@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Рейтинговая таблица Натиска"
     },
-    "players-steel-hunter": {
-      "description": "Таблица лидеров королевской битвы"
-    },
     "servers-population": {
       "label": "Население сервера",
       "description": "Игроки онлайн сейчас и в динамике"

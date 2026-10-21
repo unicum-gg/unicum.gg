@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "سلم الهجوم التصنيفي"
     },
-    "players-steel-hunter": {
-      "description": "قائمة المتصدرين للمعركة الملكية"
-    },
     "servers-population": {
       "label": "عدد اللاعبين على الخادم",
       "description": "اللاعبون المتصلون الآن ومع مرور الوقت"

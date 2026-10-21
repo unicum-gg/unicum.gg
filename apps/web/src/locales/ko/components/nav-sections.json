@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "랭크 격전 순위"
     },
-    "players-steel-hunter": {
-      "description": "배틀 로얄 순위표"
-    },
     "servers-population": {
       "label": "서버 인구",
       "description": "현재 및 시간별 온라인 플레이어"

@@ -24,7 +24,8 @@ export const BATTLE_TYPE_LABEL: Record<BattleType, string> = {
   // the client's `type/fallout/name` is "Steel Hunter", French "Traque d'acier",
   // German "Stählerne Jagd". "Battle Royale" was our generic word for the
   // rotation, and it left English as the one language calling it something the
-  // game never does, including on our own /players/steel-hunter page.
+  // game never does. (Our own board at /players/rampage is a different mode:
+  // see `RatedMode.Rampage`.)
   [BattleType.BattleRoyale]: "Steel Hunter",
   [BattleType.Frontline]: "Frontline",
   [BattleType.Onslaught]: "Onslaught",

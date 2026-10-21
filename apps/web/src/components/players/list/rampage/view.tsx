@@ -92,6 +92,15 @@ export async function RampageView({
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             {t("intro", { mode, region: REGION_LABEL[region] })}
           </p>
+          {/* Said on the board rather than left for a reader to work out from
+              the dates. Every other leaderboard on the site moves, and this one
+              cannot: measured on its own top 100, not one account gained a
+              Rampage battle across 144 days while 74 of them played World of
+              Tanks inside 90. Without the line, a stale ranking reads as a
+              broken one. */}
+          <p className="mx-auto mt-2 max-w-2xl text-sm text-fd-muted-foreground/80">
+            {t("archived")}
+          </p>
           <BoardUpdated at={computed_at} />
         </PanelContent>
       </Panel>

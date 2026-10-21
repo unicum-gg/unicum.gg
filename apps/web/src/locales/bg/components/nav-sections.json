@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Стълбица на ранговата Атака"
     },
-    "players-steel-hunter": {
-      "description": "Класация на Battle Royale"
-    },
     "servers-population": {
       "label": "Население на сървъра",
       "description": "Игачи онлайн, сега и във времето"

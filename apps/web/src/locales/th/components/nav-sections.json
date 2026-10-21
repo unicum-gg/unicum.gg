@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "ตารางอันดับการบุกรุกแบบจัดอันดับ"
     },
-    "players-steel-hunter": {
-      "description": "ตารางอันดับแบตเทิลรอยัล"
-    },
     "servers-population": {
       "label": "จำนวนผู้เล่นในเซิร์ฟเวอร์",
       "description": "ผู้เล่นออนไลน์ ทั้งในขณะนี้และตามช่วงเวลา"

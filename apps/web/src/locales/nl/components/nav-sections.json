@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Klassement voor gerangschikte Bestorming"
     },
-    "players-steel-hunter": {
-      "description": "Klassement voor battle royale"
-    },
     "servers-population": {
       "label": "Server populatie",
       "description": "Spelers online, nu en in de loop van de tijd"

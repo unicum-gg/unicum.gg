@@ -21,6 +21,7 @@
     "./moe/refresh-cron": "./src/moe/refresh-cron.ts",
     "./players": "./src/players/index.ts",
     "./players/resolve-account": "./src/players/resolve-account.ts",
+    "./players/mode-ratings": "./src/players/mode-ratings.ts",
     "./search": "./src/search/index.ts",
     "./languages": "./src/languages/index.ts",
     "./resolve": "./src/resolve/index.ts",

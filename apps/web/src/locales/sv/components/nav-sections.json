@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Rankningsstege för Pansarstorm"
     },
-    "players-steel-hunter": {
-      "description": "Topplista för battle royale"
-    },
     "servers-population": {
       "label": "Serverbefolkning",
       "description": "Spelare online, nu och över tid"

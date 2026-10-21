@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Rangert Onslaught-stige"
     },
-    "players-steel-hunter": {
-      "description": "Rangering for battle royale"
-    },
     "servers-population": {
       "label": "Serverbefolkning",
       "description": "Spillere pålogget nå og over tid"

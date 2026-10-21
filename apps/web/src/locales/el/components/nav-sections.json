@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Πίνακας κατάταξης Επέλασης"
     },
-    "players-steel-hunter": {
-      "description": "Πίνακας κατάταξης battle royale"
-    },
     "servers-population": {
       "label": "Πληθυσμός server",
       "description": "Παίκτες online, τώρα και με την πάροδο του χρόνου"

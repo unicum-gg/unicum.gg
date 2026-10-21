@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "天梯战排名阶梯"
     },
-    "players-steel-hunter": {
-      "description": "大逃杀排行榜"
-    },
     "servers-population": {
       "label": "服务器人数",
       "description": "当前及历史在线玩家数"

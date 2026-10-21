@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Žebříček hodnocených bitev v režimu Nápor"
     },
-    "players-steel-hunter": {
-      "description": "Žebříček režimu battle royale"
-    },
     "servers-population": {
       "label": "Populace serveru",
       "description": "Hráči online nyní i v průběhu času"

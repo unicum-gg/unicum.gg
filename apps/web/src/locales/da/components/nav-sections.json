@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Rangeret Onslaught-rangliste"
     },
-    "players-steel-hunter": {
-      "description": "Battle royale-rangliste"
-    },
     "servers-population": {
       "label": "Serverbefolkning",
       "description": "Spillere online, nu og over tid"

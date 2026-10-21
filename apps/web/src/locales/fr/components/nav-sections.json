@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Échelon classé de l’Offensive"
     },
-    "players-steel-hunter": {
-      "description": "Classement du mode battle royale"
-    },
     "servers-population": {
       "label": "Population du serveur",
       "description": "Joueurs en ligne, actuellement et au fil du temps"

@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "ランク戦オンスロートのランキング"
     },
-    "players-steel-hunter": {
-      "description": "バトルロイヤルのランキング"
-    },
     "servers-population": {
       "label": "サーバー人口",
       "description": "現在および時間推移のオンラインプレイヤー数"

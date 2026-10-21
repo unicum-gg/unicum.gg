@@ -36,9 +36,6 @@
     "players-onslaught": {
       "description": "Reitinginio Prasiveržimo lyderių lentelė"
     },
-    "players-steel-hunter": {
-      "description": "Mūšio karališkumo lyderių lentelė"
-    },
     "servers-population": {
       "label": "Serverio populiacija",
       "description": "Prisijungę žaidėjai dabar ir laikui bėgant"

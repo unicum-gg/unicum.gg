@@ -5,8 +5,8 @@ import ROUTES from "@/constants/routes";
 import { TabBar, tabItemClass } from "@/components/ui/tab-bar";
 import type { Region } from "@unicum.gg/wargaming";
 import { getTranslation } from "@/lib/translations.server";
-import { battleTypeName } from "@/components/game-name";
-import { BattleType } from "@unicum.gg/shared";
+import { battleTypeName, tankModeName } from "@/components/game-name";
+import { BattleType, TankBattleMode } from "@unicum.gg/shared";
 
 // The board tabs on the player landing: "Overall" (the WNX rating board at
 // /players), the two game modes, and "3 Marks" (the Marks of Excellence board
@@ -58,7 +58,7 @@ export async function PlayersModeTabs({
             prefetch="intent"
             className={tabItemClass(active === PlayerBoard.Rampage)}
           >
-            {battleTypeName(BattleType.BattleRoyale, tGame)}
+            {tankModeName(TankBattleMode.Fallout, tGame)}
           </Link>
           <Link
             href={ROUTES.PLAYERS_ONSLAUGHT(region)}
