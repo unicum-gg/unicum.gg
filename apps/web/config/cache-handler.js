@@ -113,13 +113,77 @@ const TIMEOUT_MS = 1_000;
 const ISR_REDIS_URL = process.env.NEXT_ISR_REDIS_URL || process.env.REDIS_URL;
 
 // In-memory hot tier + fallback. Also the sole store in dev / when Redis is
-// down. Small, per-instance; holds the parsed entry objects directly.
+// down. Per-instance; holds the parsed entry objects directly.
+//
+// BOUNDED IN BYTES, not in entries, and that is the whole reason this block
+// looks the way it does. A count cap is what the header above rightly refuses
+// for the disk cache, and it had been reintroduced here: 256 entries sounds
+// small until the entries are measured. Measured 2026-10-21: the 601 entries in
+// the ISR Redis averaged 1870 kB with the heaviest at 8.6 MB, so 256 of them is
+// 479 MB of V8 heap per worker at that average and 2.2 GB at the top, times
+// three workers. The cluster is sized by memory rather than by cores
+// (`ecosystem.config.cjs` divides a budget across the workers and PM2 kills one
+// that passes its share), so that is not a cache growing too large, it is the
+// cluster dying on a schedule: each of the three workers was killed 82 times in
+// 36 hours, two of them within the same minute, which leaves one process
+// serving the whole site.
+//
+// The budget is read from the heap ceiling this worker is actually running
+// under rather than written down here, so it follows `WEB_CLUSTER_INSTANCES`
+// and `WEB_MEMORY_BUDGET_MB` on its own. A second copy of that arithmetic is
+// exactly how `NON_HEAP_MB` came to describe something 500 MB away from what it
+// measures.
 const LRU_MAX_SIZE = 256;
+const HOT_TIER_HEAP_SHARE = 0.1;
+const LRU_MAX_BYTES =
+  Number(process.env.NEXT_ISR_HOT_TIER_BYTES) ||
+  Math.floor(v8.getHeapStatistics().heap_size_limit * HOT_TIER_HEAP_SHARE);
+// A page past this is served from Redis and never held in the heap. It bounds
+// what ONE entry may take of the budget above, so a single 8.6 MB page cannot
+// evict every other page in order to hold itself. What refusing it costs is a
+// `v8.deserialize` on each hit instead of a map lookup, which is why it is not
+// set lower: the pages that exceed it are the ones whose deserialisation is
+// expensive, so excluding more of them spends CPU to save heap.
+const MAX_ENTRY_BYTES =
+  Number(process.env.NEXT_ISR_MAX_ENTRY_BYTES) || 2_097_152;
+// What an entry is charged when its size is not known, which happens only when
+// Redis is down or refused it: the exact size is the serialised buffer's length,
+// and that buffer exists only because Redis needs it. Charging the measured
+// average keeps the bound honest without serialising a second time to weigh it.
+const ASSUMED_ENTRY_BYTES = 1_914_880;
+
+// Entries are held as `{ entry, bytes }` so the running total can never drift
+// from what the map contains, which a parallel size map would allow.
 const lru = (globalThis.__isrLru ||= new Map());
-function lruSet(key, entry) {
-  if (lru.has(key)) lru.delete(key);
-  else if (lru.size >= LRU_MAX_SIZE) lru.delete(lru.keys().next().value);
-  lru.set(key, entry);
+let lruBytes = 0;
+for (const held of lru.values()) lruBytes += (held && held.bytes) || 0;
+
+/** Insert into the hot tier, evicting oldest-first until both bounds hold. */
+function lruSet(key, entry, bytes) {
+  const held = lru.get(key);
+  if (held) {
+    lru.delete(key);
+    lruBytes -= held.bytes;
+  }
+  // Too big to hold. It stays in Redis, and the copy deleted just above must
+  // not come back, so this returns rather than keeping a now-stale entry.
+  if (bytes > MAX_ENTRY_BYTES) return;
+  lru.set(key, { entry, bytes });
+  lruBytes += bytes;
+  for (const [k, v] of lru) {
+    if (lruBytes <= LRU_MAX_BYTES && lru.size <= LRU_MAX_SIZE) break;
+    // Never the entry just written: it is the newest, so evicting it would pay
+    // for an eviction and keep nothing.
+    if (k === key) continue;
+    lru.delete(k);
+    lruBytes -= v.bytes;
+  }
+}
+
+/** The hot-tier entry for a key, or null. */
+function lruGet(key) {
+  const held = lru.get(key);
+  return held ? held.entry : null;
 }
 
 // Redis only at runtime in production: never during `next build`
@@ -205,28 +269,37 @@ module.exports = class CacheHandler {
           const entry = v8.deserialize(buf);
           // bump access time for LRU, populate the hot tier
           redis.zadd(LRU_INDEX, Date.now(), key).catch(() => {});
-          lruSet(key, entry);
+          // `buf.length` is what the entry costs, already in hand here, so the
+          // hot tier is weighed without serialising anything a second time.
+          lruSet(key, entry, buf.length);
           return entry;
         }
       } catch {
         // fall through to the in-memory tier
       }
     }
-    return lru.get(key) || null;
+    return lruGet(key);
   }
 
   async set(key, data, ctx) {
     const tags = (ctx && ctx.tags) || [];
     const entry = { value: data, lastModified: Date.now(), tags };
-    lruSet(key, entry);
-    if (!redis || !ready) return;
 
-    let buf;
-    try {
-      buf = v8.serialize(entry);
-    } catch {
-      return; // unserialisable entry → skip caching rather than throw
+    // Serialised BEFORE the hot tier sees it, because the buffer Redis needs is
+    // also the only exact measure of what the entry costs, and the hot tier is
+    // bounded in bytes. Weighing it any other way would mean serialising twice
+    // or reading Next's internal payload shape, which moves between versions.
+    let buf = null;
+    if (redis && ready) {
+      try {
+        buf = v8.serialize(entry);
+      } catch {
+        // Unserialisable: it cannot go to Redis. It is still held in the hot
+        // tier, charged at the assumed size, as it was before this bound.
+      }
     }
+    lruSet(key, entry, buf ? buf.length : ASSUMED_ENTRY_BYTES);
+    if (!buf) return; // no Redis, or unserialisable: the hot tier has it
     try {
       const pipe = redis.pipeline();
       pipe.set(CACHE_PREFIX + key, buf, "EX", TTL_SECONDS);
@@ -245,8 +318,12 @@ module.exports = class CacheHandler {
 
   async revalidateTag(tags) {
     const list = Array.isArray(tags) ? tags : [tags];
-    for (const [key, entry] of lru) {
-      if (entry.tags && entry.tags.some((t) => list.includes(t))) lru.delete(key);
+    for (const [key, held] of lru) {
+      const { entry, bytes } = held;
+      if (entry.tags && entry.tags.some((t) => list.includes(t))) {
+        lru.delete(key);
+        lruBytes -= bytes;
+      }
     }
     if (!redis || !ready) return;
     try {
