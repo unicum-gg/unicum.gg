@@ -2,7 +2,7 @@
   "stat": "Stat",
   "rows": {
     "battles": "Kamper",
-    "tier": "Nivå",
+    "tier": "Gjennomsnittlig nivå",
     "wins": "Seire",
     "losses": "Tap",
     "draws": "Uavgjort",

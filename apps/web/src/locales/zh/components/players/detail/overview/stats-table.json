@@ -2,7 +2,7 @@
   "stat": "统计",
   "rows": {
     "battles": "战斗场次",
-    "tier": "等级",
+    "tier": "平均等级",
     "wins": "胜利",
     "losses": "失败",
     "draws": "平局",

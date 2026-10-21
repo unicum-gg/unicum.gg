@@ -2,7 +2,7 @@
   "stat": "통계",
   "rows": {
     "battles": "전투",
-    "tier": "단계",
+    "tier": "평균 티어",
     "wins": "승리",
     "losses": "패배",
     "draws": "무승부",

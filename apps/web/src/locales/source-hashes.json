@@ -1546,7 +1546,7 @@
   "components/players/detail/overview/rating-chart:chart-label": "56bdcba582a7",
   "components/players/detail/overview/stats-table:stat": "49df26a3505e",
   "components/players/detail/overview/stats-table:rows.battles": "2e1adabbdbaa",
-  "components/players/detail/overview/stats-table:rows.tier": "5bd44ebe63cd",
+  "components/players/detail/overview/stats-table:rows.tier": "78e4f613d8d1",
   "components/players/detail/overview/stats-table:rows.wins": "b6c015d12e1b",
   "components/players/detail/overview/stats-table:rows.losses": "0f9a484f1388",
   "components/players/detail/overview/stats-table:rows.draws": "ffd06810b930",

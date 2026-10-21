@@ -2,7 +2,7 @@
   "stat": "Statistik",
   "rows": {
     "battles": "Gefechte",
-    "tier": "Stufe",
+    "tier": "Durchschnittliches Tier",
     "wins": "Siege",
     "losses": "Niederlagen",
     "draws": "Unentschieden",

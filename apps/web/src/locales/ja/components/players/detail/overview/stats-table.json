@@ -2,7 +2,7 @@
   "stat": "統計",
   "rows": {
     "battles": "戦闘数",
-    "tier": "Tier",
+    "tier": "平均ティア",
     "wins": "勝利",
     "losses": "敗北",
     "draws": "引き分け",
