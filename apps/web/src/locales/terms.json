@@ -772,7 +772,8 @@
     "follows": "يتابع",
     "opens": "يفتح",
     "fought": "خاضها",
-    "counted": "المحتسبة"
+    "counted": "المحتسبة",
+    "Level": "مستوى"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1547,7 +1548,8 @@
     "follows": "падпісваецца",
     "opens": "адкрывае",
     "counted": "улічана",
-    "fought": "праведзена"
+    "fought": "праведзена",
+    "Level": "Узровень"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2536,7 +2538,8 @@
     "Historical Battles": "Исторически битки",
     "Team Battles": "Отборни битки",
     "Maximum Damage": "Максимални поражения",
-    "counted": "отчетени"
+    "counted": "отчетени",
+    "Level": "Ниво"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3318,7 +3321,8 @@
     "follows": "prati",
     "opens": "otvara",
     "counted": "izbrojane",
-    "fought": "odigrane"
+    "fought": "odigrane",
+    "Level": "Nivo"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4318,7 +4322,8 @@
     "Historical Battles": "Historické bitvy",
     "Team Battles": "Týmové bitvy",
     "Maximum Damage": "Maximální poškození",
-    "counted": "započítáno"
+    "counted": "započítáno",
+    "Level": "Úroveň"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5324,7 +5329,8 @@
     "Historical Battles": "Historiske kampe",
     "Team Battles": "Holdkampe",
     "Maximum Damage": "Maksimal skade",
-    "counted": "talt"
+    "counted": "talt",
+    "Level": "Niveau"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6323,7 +6329,8 @@
     "Historical Battles": "Historische Gefechte",
     "Team Battles": "Teamgefechte",
     "Maximum Damage": "Höchstschaden",
-    "counted": "gezählt"
+    "counted": "gezählt",
+    "Level": "Stufe"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7328,7 +7335,8 @@
     "Historical Battles": "Ιστορικές Μάχες",
     "Team Battles": "Μάχες με Ομάδα",
     "Maximum Damage": "Μέγιστη Φθορά",
-    "counted": "μετρημένα"
+    "counted": "μετρημένα",
+    "Level": "Επίπεδο"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8313,7 +8321,8 @@
     "Historical Battles": "Batallas históricas",
     "Team Battles": "Batallas en equipo",
     "Maximum Damage": "Daño máximo",
-    "counted": "contabilizados"
+    "counted": "contabilizados",
+    "Level": "Nivel"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9322,7 +9331,8 @@
     "Historical Battles": "Historialliset taistelut",
     "Team Battles": "Joukkuetaistelut",
     "Maximum Damage": "Maksimivahinko",
-    "counted": "laskettu"
+    "counted": "laskettu",
+    "Level": "Taso"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10311,7 +10321,8 @@
     "Historical Battles": "Batailles historiques",
     "Team Battles": "Batailles en équipe",
     "Maximum Damage": "Maximum de dégâts",
-    "counted": "comptabilisés"
+    "counted": "comptabilisés",
+    "Level": "Niveau"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11087,7 +11098,8 @@
     "follows": "फ़ॉलो करता है",
     "opens": "खोलता है",
     "fought": "लड़ी गईं",
-    "counted": "गिने गए"
+    "counted": "गिने गए",
+    "Level": "स्तर"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12090,7 +12102,8 @@
     "Historical Battles": "Povijesne bitke",
     "Team Battles": "Timske bitke",
     "Maximum Damage": "Maksimalna šteta",
-    "counted": "brojano"
+    "counted": "brojano",
+    "Level": "Razina"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13095,7 +13108,8 @@
     "Team Battles": "Csapatos Csaták",
     "Maximum Damage": "Maximális sebzés",
     "counted": "számított",
-    "fought": "lejátszott"
+    "fought": "lejátszott",
+    "Level": "Szint"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14096,7 +14110,8 @@
     "Historical Battles": "Battaglie Storiche",
     "Team Battles": "Battaglie di Squadra",
     "Maximum Damage": "Danno massimo",
-    "counted": "conteggiati"
+    "counted": "conteggiati",
+    "Level": "Livello"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15104,7 +15119,8 @@
     "Historical Battles": "ヒストリカルバトル",
     "Team Battles": "チームバトル",
     "Maximum Damage": "最大ダメージ",
-    "counted": "集計済み"
+    "counted": "集計済み",
+    "Level": "レベル"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15883,7 +15899,8 @@
     "follows": "бақылайды",
     "opens": "ашады",
     "fought": "шайқасты",
-    "counted": "есептелген"
+    "counted": "есептелген",
+    "Level": "Деңгей"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16896,7 +16913,8 @@
     "Historical Battles": "역사 전투",
     "Team Battles": "팀 전투",
     "Maximum Damage": "최고 피해 기록",
-    "counted": "집계됨"
+    "counted": "집계됨",
+    "Level": "레벨"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17904,7 +17922,8 @@
     "Historical Battles": "Istoriniai mūšiai",
     "Team Battles": "Komandiniai mūšiai",
     "Maximum Damage": "Maksimali žala",
-    "counted": "įskaičiuota"
+    "counted": "įskaičiuota",
+    "Level": "Lygis"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18898,7 +18917,8 @@
     "Historical Battles": "Vēsturiskās kaujas",
     "Team Battles": "Komandu kaujas",
     "Maximum Damage": "Maksimālie Bojājumi",
-    "counted": "uzskaitīts"
+    "counted": "uzskaitīts",
+    "Level": "Līmenis"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19908,7 +19928,8 @@
     "Team Battles": "Teamgevechten",
     "Maximum Damage": "Maximale schade",
     "counted": "geteld",
-    "fought": "gevochten"
+    "fought": "gevochten",
+    "Level": "Niveau"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20909,7 +20930,8 @@
     "Historical Battles": "Historiske kamper",
     "Team Battles": "Lagkamper",
     "Maximum Damage": "Maksimal skade",
-    "counted": "telt"
+    "counted": "telt",
+    "Level": "Nivå"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21907,7 +21929,8 @@
     "Historical Battles": "Bitwy historyczne",
     "Team Battles": "Bitwy drużynowe",
     "Maximum Damage": "Maksymalne uszkodzenia",
-    "counted": "uwzględniono"
+    "counted": "uwzględniono",
+    "Level": "Poziom"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22898,7 +22921,8 @@
     "Historical Battles": "Batalhas Históricas",
     "Team Battles": "Batalhas em Equipa",
     "Maximum Damage": "Dano Máximo",
-    "counted": "contabilizado"
+    "counted": "contabilizado",
+    "Level": "Nível"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23889,7 +23913,8 @@
     "Historical Battles": "Lupte istorice",
     "Team Battles": "Lupte pe echipe",
     "Maximum Damage": "Daune maxime",
-    "counted": "contabilizat"
+    "counted": "contabilizat",
+    "Level": "Nivel"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24868,7 +24893,8 @@
     "Historical Battles": "Исторические бои",
     "Team Battles": "Командные бои",
     "Maximum Damage": "Максимальный урон",
-    "counted": "учтено"
+    "counted": "учтено",
+    "Level": "Уровень"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25648,7 +25674,8 @@
     "follows": "sledenja",
     "opens": "odprtja",
     "fought": "odigranih",
-    "counted": "šteto"
+    "counted": "šteto",
+    "Level": "Raven"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26653,7 +26680,8 @@
     "Historical Battles": "Istorijske bobre",
     "Team Battles": "Timske borbe",
     "Maximum Damage": "Maksimalna šteta",
-    "counted": "uračunato"
+    "counted": "uračunato",
+    "Level": "Ниво"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27663,7 +27691,8 @@
     "Historical Battles": "Historiska strider",
     "Team Battles": "Lagstrider",
     "Maximum Damage": "Maximal skada",
-    "counted": "räknade"
+    "counted": "räknade",
+    "Level": "Nivå"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28669,7 +28698,8 @@
     "Historical Battles": "การรบตามประวัติศาสตร์",
     "Team Battles": "การรบแบบเป็นทีม",
     "Maximum Damage": "ความเสียหายสูงสุด",
-    "counted": "นับแล้ว"
+    "counted": "นับแล้ว",
+    "Level": "ระดับ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29450,7 +29480,8 @@
     "follows": "sinusundan",
     "opens": "binubuksan",
     "counted": "nabilang",
-    "fought": "nakipaglaban"
+    "fought": "nakipaglaban",
+    "Level": "Antas"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30452,7 +30483,8 @@
     "Historical Battles": "Tarihsel Savaşlar",
     "Team Battles": "Ekip Savaşları",
     "Maximum Damage": "Maksimum Hasar",
-    "counted": "sayılmış"
+    "counted": "sayılmış",
+    "Level": "Seviye"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31447,7 +31479,8 @@
     "Historical Battles": "Історичні бої",
     "Team Battles": "Командні бої",
     "Maximum Damage": "Максимальна шкода",
-    "counted": "враховано"
+    "counted": "враховано",
+    "Level": "Рівень"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32431,7 +32464,8 @@
     "Historical Battles": "Trận đánh Lịch sử",
     "Team Battles": "Đấu Đội",
     "Maximum Damage": "Sát thương Tối đa",
-    "counted": "được tính"
+    "counted": "được tính",
+    "Level": "Cấp độ"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33437,6 +33471,7 @@
     "Historical Battles": "历史战",
     "Team Battles": "战队",
     "Maximum Damage": "最高损伤",
-    "counted": "已统计"
+    "counted": "已统计",
+    "Level": "等级"
   }
 }

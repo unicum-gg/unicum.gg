@@ -1,7 +1,7 @@
 {
   "title": "Hodnotiaca škála",
   "description": "Farebné hranice používané na celom webe pre mieru víťazstiev a metriku hodnotenia vybranú v navigačnom paneli.",
-  "tier": "Stopnja",
+  "tier": "Raven",
   "tiers": {
     "top": "Najboljši",
     "excellent": "Vynikajúce",

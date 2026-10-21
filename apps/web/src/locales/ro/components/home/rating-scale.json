@@ -1,7 +1,7 @@
 {
   "title": "Scarǎ de evaluare",
   "description": "Pragurile de culoare folosite pe site pentru rata victoriilor și pentru indicatorul de rating selectat în bara de navigare.",
-  "tier": "nivel",
+  "tier": "Nivel",
   "tiers": {
     "top": "Cei mai buni",
     "excellent": "Excelent",
