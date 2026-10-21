@@ -6,9 +6,12 @@ import { useFormat } from "@/hooks/use-format";
 import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
 import { FilterSubject } from "@/components/filter-subject";
+import { Hint } from "@/components/hint";
+import { Interpolate } from "@/components/interpolate";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { RankingColumnHead } from "@/components/ranking-column-head";
 import { RankMedal } from "@/components/rank-medal";
+import { RelativeTime } from "@/components/relative-time";
 import { TablePager, usePagination } from "@/components/table-pager";
 import PAGINATION from "@/constants/pagination";
 import {
@@ -408,7 +411,21 @@ export function MarksBoard({
                     {num(INT_FORMAT).format(r.known)}
                   </TableCell>
                   <TableCell className="text-right font-semibold tabular-nums">
-                    {num(INT_FORMAT).format(r.marks3)}
+                    {/* When this garage was read, which is what the counts are
+                        as of: the top of every column is re-read within the
+                        hour of a battle, a row further down only when somebody
+                        opens the profile. */}
+                    <Hint
+                      side="left"
+                      content={
+                        <Interpolate
+                          template={t("read-at")}
+                          values={{ when: <RelativeTime date={new Date(r.measured_at)} /> }}
+                        />
+                      }
+                    >
+                      <span>{num(INT_FORMAT).format(r.marks3)}</span>
+                    </Hint>
                   </TableCell>
                   {tiers.map((tier, index) => {
                     const count = markCountAtTier(r.marks3_by_tier, tier);
