@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, sql } from "drizzle-orm";
+import { asc, eq, sql } from "drizzle-orm";
 import {
   onslaughtRatingHistoryByRegion,
   onslaughtRatingsByRegion,
@@ -91,8 +91,9 @@ export async function getOnslaughtSeasonHistory(
   };
 }
 
-// How many samples of a player's own climb a profile ships. Enough to draw the
-// shape of a season, bounded so an active player on a long season cannot turn a
+// How many samples of a player's own climb a profile ships, give or take the
+// three kept on top of the thinning. Enough to draw the shape of a season,
+// bounded so an active player on a long season cannot turn a
 // page view into an unbounded transfer.
 const PLAYER_HISTORY_LIMIT = 500;
 
@@ -282,31 +283,47 @@ export async function getPlayerOnslaught(
       (a.startDate == null ? 0 : Date.parse(a.startDate)),
   );
 
-  // The climb through the most recent season they ranked in, most recent samples
-  // first and then reversed, so the series is bounded by construction. The
-  // capture writes a row per player per instant they moved, so an active player
-  // over a six week season runs to thousands: worth reading the tail of, never
-  // worth shipping whole on a page view.
+  // The climb through the most recent season they ranked in, thinned to a
+  // bounded number of samples spread over the WHOLE season. The capture writes a
+  // row per player per instant they moved, so an active player over a six week
+  // season runs to thousands: worth thinning, never worth shipping whole on a
+  // page view. Taking the newest samples instead drew only the last few days of
+  // an active player (szalonywpp on EU: 3,288 rows, a curve starting on 6
+  // October of a season that opened on the 2nd of September), hiding the peak
+  // the crest is earned on. Every n-th row is kept, plus the first, the last
+  // and the best place, so the line starts and ends where the season did and
+  // its peak survives the thinning.
   const latest = allStandings[0];
   const points = latest
-    ? await db
-        .select({
-          capturedAt: history.capturedAt,
-          rank: history.rank,
-          rating: history.rating,
-          battles: history.battles,
-        })
-        .from(history)
-        .where(
-          and(
-            eq(history.eventId, latest.eventId),
-            eq(history.accountId, accountId),
-          ),
-        )
-        .orderBy(desc(history.capturedAt))
-        .limit(PLAYER_HISTORY_LIMIT)
+    ? (
+        await db.execute<{
+          captured_at: Date | string;
+          rank: number;
+          rating: number;
+          battles: number;
+        }>(sql`
+          WITH climb AS (
+            SELECT captured_at, rank, rating, battles,
+                   row_number() OVER (ORDER BY captured_at) AS i,
+                   count(*) OVER () AS n,
+                   row_number() OVER (ORDER BY rank, captured_at) AS best
+            FROM ${history}
+            WHERE ${history.eventId} = ${latest.eventId}
+              AND ${history.accountId} = ${accountId}
+          )
+          SELECT captured_at, rank, rating, battles
+          FROM climb
+          WHERE i = 1 OR i = n OR best = 1
+             OR i % ceil(n::numeric / ${PLAYER_HISTORY_LIMIT})::int = 0
+          ORDER BY captured_at
+        `)
+      ).map((r) => ({
+        capturedAt: new Date(r.captured_at),
+        rank: r.rank,
+        rating: r.rating,
+        battles: r.battles,
+      }))
     : [];
-  points.reverse();
 
   return {
     accountId,
