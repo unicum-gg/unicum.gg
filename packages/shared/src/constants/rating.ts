@@ -50,8 +50,8 @@ export function ratingMetricFromCookie(
  * tier counted, high enough to be the only thing standing between the board and
  * a low-tier farm, and it still lost: on 2026-10-21, 19 of the 30-day WN8
  * board's top 20 on EU had averaged tier 3 to 5 over the month. With the farm
- * out of the count the floor only has to rule out luck, which is the figure
- * tomato.gg settled on (75) for a week and twice that for a month.
+ * out of the count the floor only has to rule out luck: 75 for a week and
+ * twice that for a month.
  */
 export const TOP_PLAYERS_MIN_BATTLES: Record<StrongholdPeriod, number> = {
   [StrongholdPeriod.Day]: 20,
