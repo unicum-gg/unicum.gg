@@ -26,7 +26,7 @@ export { searchMaps, type MapSearchResult } from "./search";
 // arena, exactly as it earns Onslaught Night by having a night one.
 function extraBattleTypes(
   arenaId: string,
-  clanWars: Set<string>,
+  clanWars: ReadonlySet<string>,
   variants: WotSrcArena[],
 ): BattleType[] {
   const types: BattleType[] = [];
@@ -74,20 +74,26 @@ function arenaIdOf(catalog: MapCatalog, slug: string): string | undefined {
   );
 }
 
-/** Resolve a URL slug (or a bare arena id) to its full map detail, or null. The
- * returned `slug` is always the canonical one, so the page can redirect a legacy
- * id form onto it. */
-export async function getMapDetailBySlug(
-  region: Region,
+/** For a caller that reads no `battleTypes`: the one field the Clan Wars pool
+ * feeds, so asking for the pool would buy nothing. See `resolveArenaRefs`. */
+const NO_CLAN_WARS: ReadonlySet<string> = new Set();
+
+/** A detail built from an already-resolved catalogue and a given Clan Wars pool,
+ * with no fetching of its own.
+ *
+ * Split out so a caller can decide whether the pool is worth a Global Map call,
+ * and so a caller resolving many arenas resolves the catalogue once rather than
+ * once per arena. */
+function detailFrom(
+  catalog: MapCatalog,
   slug: string,
-): Promise<MapDetail | null> {
-  const catalog = await getMapCatalog(region);
+  clanWars: ReadonlySet<string>,
+): MapDetail | null {
   const { arenas, index, variantArenas, testOnlyArenas } = catalog;
   const arenaId = arenaIdOf(catalog, slug);
   if (arenaId === undefined) return null;
   const arena = arenas.get(arenaId);
   if (!arena) return null;
-  const clanWars = await getClanWarsArenaIds(region);
   const variants = variantArenas.get(arenaId) ?? [];
   return buildMapDetail(
     arena,
@@ -96,6 +102,20 @@ export async function getMapDetailBySlug(
     variants,
     testOnlyArenas,
   );
+}
+
+/** Resolve a URL slug (or a bare arena id) to its full map detail, or null. The
+ * returned `slug` is always the canonical one, so the page can redirect a legacy
+ * id form onto it. */
+export async function getMapDetailBySlug(
+  region: Region,
+  slug: string,
+): Promise<MapDetail | null> {
+  const [catalog, clanWars] = await Promise.all([
+    getMapCatalog(region),
+    getClanWarsArenaIds(region),
+  ]);
+  return detailFrom(catalog, slug, clanWars);
 }
 
 /** The map a declared battle names: enough to check the battle against the
@@ -238,6 +258,21 @@ function sidesFor(detail: MapDetail, mode: MapGameMode | null, raw: string) {
  *
  * An id the catalogue does not know is simply absent from the result, so a
  * caller renders it as the text it is rather than as a link to nothing.
+ *
+ * No Clan Wars pool, for the reason `resolveBattleMap` has none: it costs a
+ * Global Map call, and a `MapRef` carries no battle types for it to reach.
+ * Verified rather than assumed, since the pool does feed `buildMapDetail`: it
+ * only ever adds `ClanWars` to `battleTypes`, `minimapUrl` is keyed on the arena
+ * id alone, and `runsRandomEvents` gates on `Random`, which comes from the
+ * arena's own declaration and never from the extras. So every field read below
+ * is identical with the pool and without it.
+ *
+ * That this was not free is the lesson. On 2026-10-20 Wargaming's EU
+ * `globalmap/fronts` answered `504 SOURCE_NOT_AVAILABLE`, which the transport
+ * spends 110s of retries on, and a tournament page waited the whole 110s for a
+ * value it then discarded: 76 of the 85 requests over ten seconds in one
+ * half-hour window were this endpoint. A pool is now bounded (see
+ * `WALK_DEADLINE_MS`) and this caller does not ask for it at all.
  */
 export async function resolveArenaRefs(
   region: Region,
@@ -245,13 +280,13 @@ export async function resolveArenaRefs(
   battleType?: string,
 ): Promise<Map<string, MapRef>> {
   if (arenaIds.length === 0) return new Map();
-  const { index } = await getMapCatalog(region);
+  const catalog = await getMapCatalog(region);
   const mode = battleType ? gameModeFromRaw(battleType) : null;
   const out = new Map<string, MapRef>();
   for (const arenaId of new Set(arenaIds)) {
-    const slug = index.idToSlug.get(arenaId);
+    const slug = catalog.index.idToSlug.get(arenaId);
     if (!slug) continue;
-    const detail = await getMapDetailBySlug(region, slug);
+    const detail = detailFrom(catalog, slug, NO_CLAN_WARS);
     if (!detail) continue;
     out.set(arenaId, {
       arenaId,
