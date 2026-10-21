@@ -1,6 +1,6 @@
 {
-  "day": "Ranking według {metric} z ostatnich 24 godzin (min. 20 bitew).",
-  "week": "Ranking według {metric} z ostatnich 7 dni (min. 140 bitew).",
-  "month": "Ranking według {metric} z ostatnich 30 dni (min. 600 bitew).",
+  "day": "Rankingowe według {metric}, przeszłość: 24 godziny, poziom VI i wyżej (min. 20 bitew).",
+  "week": "Rankingowe według {metric}, przeszłość: 7 dni, poziom VI i wyżej (min. 140 bitew).",
+  "month": "Rankingowe według {metric}, przeszłość: 30 dni, poziom VI i wyżej (min. 600 bitew).",
   "overall": "Ranking według {metric} z całego okresu (min. 20 000 bitew)."
 }

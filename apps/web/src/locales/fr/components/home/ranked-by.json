@@ -1,6 +1,6 @@
 {
-  "day": "Classement selon {metric} sur les dernières 24 heures (20 batailles min.).",
-  "week": "Classement selon {metric} sur les 7 derniers jours (140 batailles min.).",
-  "month": "Classement selon {metric} sur les 30 derniers jours (600 batailles min.).",
+  "day": "Classé par {metric} au cours des 24 dernières heures, niveau VI et plus (20 batailles min.).",
+  "week": "Classé par {metric} au cours des 7 derniers jours, niveau VI et plus (140 batailles min.).",
+  "month": "Classé par {metric} au cours des 30 derniers jours, niveau VI et plus (600 batailles min.).",
   "overall": "Classement par {metric} sur l’ensemble de la carrière (min. 20 000 batailles)."
 }

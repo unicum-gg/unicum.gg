@@ -1,6 +1,6 @@
 {
-  "day": "Rangert etter {metric} de siste 24 timene (min. 20 kamper).",
-  "week": "Rangert etter {metric} de siste 7 dager (min. 140 kamper).",
-  "month": "Rangert etter {metric} de siste 30 dager (min. 600 kamper).",
+  "day": "Rangert etter {metric} i løpet av tidligere 24 timer, nivå 6 og oppover (min. 20 kamper).",
+  "week": "Rangert etter {metric} i løpet av tidligere 7 dager, nivå 6 og oppover (min. 140 kamper).",
+  "month": "Rangert etter {metric} i løpet av tidligere 30 dager, nivå 6 og oppover (min. 600 kamper).",
   "overall": "Rangert etter {metric} totalt (min. 20 000 kamper)."
 }

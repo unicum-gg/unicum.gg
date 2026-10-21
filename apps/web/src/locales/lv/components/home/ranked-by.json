@@ -1,6 +1,6 @@
 {
-  "day": "Rangs pēc {metric} pēdējo 24 stundu laikā (vismaz 20 kaujas).",
-  "week": "Rangs pēc {metric} pēdējo 7 dienu laikā (vismaz 140 kaujas).",
-  "month": "Rangs pēc {metric} pēdējo 30 dienu laikā (vismaz 600 kaujas).",
+  "day": "Ranga pēc {metric} par pagājušajām 24 stundām, VI līmenis un augstāks, vismaz 20 kaujas.",
+  "week": "Ranga pēc {metric} par pagājušajām 7 dienām, VI līmenis un augstāks, vismaz 140 kaujas.",
+  "month": "Ranga pēc {metric} par pagājušajām 30 dienām, VI līmenis un augstāks, vismaz 600 kaujas.",
   "overall": "Rangs pēc visa laika {metric} (vismaz 20 000 kaujas)."
 }

@@ -1,6 +1,6 @@
 {
-  "day": "Clasat după {metric} în ultimele 24 de ore, minimum 20 de bătălii.",
-  "week": "Clasat după {metric} în ultimele 7 zile, minimum 140 de bătălii.",
-  "month": "Clasat după {metric} în ultimele 30 de zile, minimum 600 de bătălii.",
+  "day": "Clasat după {metric} în ultimele 24 de ore, nivel VI și mai mare, minimum 20 de bătălii.",
+  "week": "Clasat după {metric} în ultimele 7 zile, nivel VI și mai mare, minimum 140 de bătălii.",
+  "month": "Clasat după {metric} în ultimele 30 de zile, nivel VI și mai mare, minimum 600 de bătălii.",
   "overall": "Clasat după {metric} din toate timpurile, minimum 20.000 de bătălii."
 }

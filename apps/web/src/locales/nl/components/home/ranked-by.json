@@ -1,6 +1,6 @@
 {
-  "day": "Gerangschikt op basis van {metric} over de afgelopen 24 uur (min. 20 gevechten).",
-  "week": "Gerangschikt op basis van {metric} over de afgelopen 7 dagen (min. 140 gevechten).",
-  "month": "Gerangschikt op basis van {metric} over de afgelopen 30 dagen (min. 600 gevechten).",
+  "day": "Gerangschikt op {metric} in de afgelopen 24 uur, niveau VI en hoger (min. 20 gevechten).",
+  "week": "Gerangschikt op {metric} in de afgelopen 7 dagen, niveau VI en hoger (min. 140 gevechten).",
+  "month": "Gerangschikt op {metric} in de afgelopen 30 dagen, niveau VI en hoger (min. 600 gevechten).",
   "overall": "Gerangschikt op basis van {metric} over de gehele periode (min. 20.000 gevechten)."
 }

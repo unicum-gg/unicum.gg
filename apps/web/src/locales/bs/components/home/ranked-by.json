@@ -1,6 +1,6 @@
 {
-  "day": "Rangirano po {metric} u protekla 24 sata, najmanje 20 bitki.",
-  "week": "Rangirano po {metric} u proteklih 7 dana, najmanje 140 bitki.",
-  "month": "Rangirano po {metric} u proteklih 30 dana, najmanje 600 bitki.",
+  "day": "Rangirano prema {metric} tokom prošlo 24 sata, nivo VI i viši (min. 20 bitki).",
+  "week": "Rangirano prema {metric} tokom prošlo 7 dana, nivo VI i viši (min. 140 bitki).",
+  "month": "Rangirano prema {metric} tokom prošlo 30 dana, nivo VI i viši (min. 600 bitki).",
   "overall": "Rangirano po ukupnom {metric}, najmanje 20.000 bitki."
 }
