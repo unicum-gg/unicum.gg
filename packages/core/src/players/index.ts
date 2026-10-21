@@ -605,7 +605,9 @@ export async function recordCurrentSnapshot(
     } else {
       // Bulk path: skip the 1 RPS portal call and carry the last known marks
       // forward so a new-battles snapshot doesn't reset the Marks column to
-      // null. Fresh marks land on the next on-demand (page-view) refresh.
+      // null. A later page-view refresh will usually NOT re-read them, since
+      // it finds these battles already recorded and takes the fast path; the
+      // board's accounts are re-read by `marks-refresh-cron` instead.
       await carryForwardMarks(region, player.id, tanks);
     }
     // And the mod's own figures over either of those, on BOTH paths. The

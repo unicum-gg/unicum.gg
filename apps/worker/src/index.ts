@@ -109,6 +109,11 @@ async function startCrons(): Promise<void> {
   );
   startGarageSyncCron();
 
+  const { startMarksRefreshCron } = await import(
+    "@unicum.gg/core/players/mark-refresh-cron"
+  );
+  startMarksRefreshCron();
+
   const { startChangelogCron } = await import("@unicum.gg/core/changelog/cron");
   startChangelogCron();
 
