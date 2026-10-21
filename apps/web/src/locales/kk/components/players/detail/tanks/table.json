@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Әзірге танктер ойналмаған.",
   "no-tanks-match-these-filters": "Бұл сүзгілерге сәйкес танктер жоқ.",
-  "name": "Аты"
+  "name": "Аты",
+  "no-tanks-played-in-this-mode": "Бұл режимде ойналған танктер жоқ."
 }

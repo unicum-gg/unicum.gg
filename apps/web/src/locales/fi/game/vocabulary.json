@@ -23,7 +23,17 @@
     "cw-viii": "Klaanisodat VIII",
     "cw-vi": "Klaanisodat VI",
     "steel-hunter": "Teräksen metsästäjä",
-    "onslaught": "Rynnistys"
+    "onslaught": "Rynnistys",
+    "clan": "Klaanitaisteluita",
+    "company": "Panssarihyökkäyskomppania",
+    "team": "Joukkuetaistelut",
+    "permanent-teams": "Pysyvät joukkueet",
+    "historical": "Historialliset taistelut"
+  },
+  "tank-modes": {
+    "globalmap": "Maailmankartta",
+    "ranked_10x10": "Liigataistelut 10x10",
+    "fallout": "Laskeuma"
   },
   "stronghold-tiers": {
     "advances": "Hyökkäysoperaatiot",

@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Wala pang tank na nilaro.",
   "no-tanks-match-these-filters": "Walang tank na tumutugma sa mga filter na ito.",
-  "name": "Pangalan"
+  "name": "Pangalan",
+  "no-tanks-played-in-this-mode": "Walang mga tangke ang nilaro sa mode na ito."
 }

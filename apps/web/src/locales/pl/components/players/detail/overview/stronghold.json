@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Brak jeszcze danych dla kategorii {label}. Sprawdź ponownie po następnej aktualizacji.",
-  "title": "Statystyki {label}: {nickname}"
+  "title": "Statystyki {label}: {nickname}",
+  "see-tank-by-tank": "{mode}, czołg po czołgu"
 }

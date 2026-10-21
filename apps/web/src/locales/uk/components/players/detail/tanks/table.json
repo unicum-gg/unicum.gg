@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "На танках ще не грали.",
   "no-tanks-match-these-filters": "Жоден танк не відповідає цим фільтрам.",
-  "name": "Назва"
+  "name": "Назва",
+  "no-tanks-played-in-this-mode": "У цьому режимі не зіграно жодного бою на танках."
 }

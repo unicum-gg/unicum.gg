@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Henüz {label} verisi yok. Bir sonraki anlık görüntüden sonra tekrar kontrol et.",
-  "title": "{nickname} adlı oyuncunun {label} istatistikleri"
+  "title": "{nickname} adlı oyuncunun {label} istatistikleri",
+  "see-tank-by-tank": "{mode}, tank bazında"
 }

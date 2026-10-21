@@ -23,7 +23,17 @@
     "cw-viii": "Klánháborúk VIII",
     "cw-vi": "Klánháborúk VI",
     "steel-hunter": "Acélvadász",
-    "onslaught": "Roham"
+    "onslaught": "Roham",
+    "clan": "Kláncsaták",
+    "company": "Tank század",
+    "team": "Csapatos Csaták",
+    "permanent-teams": "Állandó csapatok",
+    "historical": "Történelmi csaták"
+  },
+  "tank-modes": {
+    "globalmap": "Világtérkép",
+    "ranked_10x10": "Rangsorolt csaták 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Előrenyomulások",

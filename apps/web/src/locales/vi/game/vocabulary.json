@@ -23,7 +23,17 @@
     "cw-viii": "Clan Wars VIII",
     "cw-vi": "Clan Wars VI",
     "steel-hunter": "Săn Thiết giáp",
-    "onslaught": "Cường kích"
+    "onslaught": "Cường kích",
+    "clan": "Trận đấu Clan",
+    "company": "Đại đội xe tăng",
+    "team": "Đấu Đội",
+    "permanent-teams": "Đội cố định",
+    "historical": "Trận đánh Lịch sử"
+  },
+  "tank-modes": {
+    "globalmap": "Bản đồ Chiến sự",
+    "ranked_10x10": "Trận đấu Xếp hạng 10x10",
+    "fallout": "Tận thế"
   },
   "stronghold-tiers": {
     "advances": "Tiến công",

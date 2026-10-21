@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Chưa chơi xe tăng nào.",
   "no-tanks-match-these-filters": "Không có xe tăng nào khớp với các bộ lọc này.",
-  "name": "Tên"
+  "name": "Tên",
+  "no-tanks-played-in-this-mode": "Không có xe tăng nào được chơi trong chế độ này."
 }

@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Әзірге {label} деректері жоқ. Келесі суреттен кейін артқа қарап тексеріңіз.",
-  "title": "{nickname} лақап аты: {label} статистикасы"
+  "title": "{nickname} лақап аты: {label} статистикасы",
+  "see-tank-by-tank": "{mode}, әр танк бойынша"
 }

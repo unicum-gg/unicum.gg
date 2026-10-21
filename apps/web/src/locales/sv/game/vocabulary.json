@@ -23,7 +23,17 @@
     "cw-viii": "Klankrig VIII",
     "cw-vi": "Klankrig VI",
     "steel-hunter": "Pansarjakt",
-    "onslaught": "Pansarstorm"
+    "onslaught": "Pansarstorm",
+    "clan": "Klanstrider",
+    "company": "Tankkompani",
+    "team": "Lagstrider",
+    "permanent-teams": "Permanenta lag",
+    "historical": "Historiska strider"
+  },
+  "tank-modes": {
+    "globalmap": "Världskarta",
+    "ranked_10x10": "Rankade strider 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Offensiver",

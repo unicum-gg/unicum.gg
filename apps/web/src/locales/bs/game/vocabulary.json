@@ -23,7 +23,17 @@
     "cw-viii": "Klanovski ratovi VIII",
     "cw-vi": "Klanovski ratovi VI",
     "steel-hunter": "Čelik lovac",
-    "onslaught": "Ofenziva"
+    "onslaught": "Ofenziva",
+    "clan": "Bitke klana",
+    "company": "Kompanija tenkova",
+    "team": "Timske bitke",
+    "permanent-teams": "Trajni timovi",
+    "historical": "Historijske bitke"
+  },
+  "tank-modes": {
+    "globalmap": "Globalna mapa",
+    "ranked_10x10": "Rangirane bitke 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Napredovanja",

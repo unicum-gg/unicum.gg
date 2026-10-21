@@ -23,7 +23,17 @@
     "cw-viii": "Ратови кланова VIII",
     "cw-vi": "Ратови кланова VI",
     "steel-hunter": "Čelični lovac",
-    "onslaught": "Juriš"
+    "onslaught": "Juriš",
+    "clan": "Klanovske borbe",
+    "company": "Tenajk četa",
+    "team": "Timske borbe",
+    "permanent-teams": "Stalni timovi",
+    "historical": "Istorijske bobre"
+  },
+  "tank-modes": {
+    "globalmap": "Globalna mapa",
+    "ranked_10x10": "Rangirane borbe 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Napadi",

@@ -4,5 +4,9 @@
   "metric-progression": "{metric}-Fortschritt",
   "not-enough-history-on-this": "Für diesen Panzer liegen noch nicht genügend Verlaufsdaten vor. Um eine Linie zu zeichnen, sind mindestens zwei Datenstände aus den letzten 90 Tagen erforderlich.",
   "record-score": "Rekordwertung",
-  "updated": "Aktualisiert"
+  "updated": "Aktualisiert",
+  "mode-retired": "Dieser Modus wird nicht mehr Gespielt, daher kann der untenstehende Rekord nur schrumpfen, wenn Konten verfallen.",
+  "mode-multi-vehicle": "Dieser Modus ermöglichte es dir, mehrere Fahrzeuge in einem Gefecht einzusetzen, daher wird ein Gefecht für jedes von ihnen gezählt und diese Anzahlen ergeben keine Gesamtanzahl für den Modus.",
+  "by-mode": "Wo es Gespielt wurde",
+  "never-played-in": "Dieses Fahrzeug wurde Nie in {mode} genommen, daher ist der untenstehende Rekord der einzige, den es hat."
 }

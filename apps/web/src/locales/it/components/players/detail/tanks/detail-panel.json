@@ -4,5 +4,9 @@
   "metric-progression": "Progressione di {metric}",
   "not-enough-history-on-this": "Non ci sono ancora abbastanza dati storici per questo veicolo. Servono almeno due rilevazioni negli ultimi 90 giorni per tracciare una linea.",
   "record-score": "Record Punteggio",
-  "updated": "Aggiornato"
+  "updated": "Aggiornato",
+  "mode-retired": "Questa modalità non viene più giocata, quindi il record qui sotto può solo diminuire man mano che gli account diventano inattivi.",
+  "mode-multi-vehicle": "Questa modalità permetteva di schierare diversi veicoli in una sola battaglia, quindi una battaglia viene conteggiata per ciascuno di essi e questi numeri non corrispondono al totale della modalità.",
+  "by-mode": "Dove si è giocato",
+  "never-played-in": "Questo veicolo non è mai stato impiegato in {mode}, quindi il record qui sotto è quello disponibile."
 }

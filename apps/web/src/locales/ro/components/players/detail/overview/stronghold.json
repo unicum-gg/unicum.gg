@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Nu există încă date pentru {label}. Verifică din nou după următorul instantaneu.",
-  "title": "Statistici {label}: {nickname}"
+  "title": "Statistici {label}: {nickname}",
+  "see-tank-by-tank": "{mode}, tanc cu tanc"
 }

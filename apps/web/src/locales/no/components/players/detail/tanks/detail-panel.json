@@ -4,5 +4,9 @@
   "metric-progression": "{metric}-utvikling",
   "not-enough-history-on-this": "Ikke nok historikk for denne stridsvognen ennå. Det trengs minst to registreringer de siste 90 dagene for å tegne en linje.",
   "record-score": "Rekordpoeng",
-  "updated": "Oppdatert"
+  "updated": "Oppdatert",
+  "mode-retired": "Denne modusen spilles ikke lengre, så rekorden nedenfor kan bare bli mindre etter hvert som kontoer faller bort.",
+  "mode-multi-vehicle": "Denne modusen lot deg bruke flere kjøretøy i én kamp, så en kamp blir telt for hvert av dem, og disse tallene blir ikke lagt sammen til et totalt antall for modusen.",
+  "by-mode": "Hvor det ble spilt",
+  "never-played-in": "Dette kjøretøyet ble aldri tatt med i {mode}, så rekorden nedenfor er den eneste det har."
 }

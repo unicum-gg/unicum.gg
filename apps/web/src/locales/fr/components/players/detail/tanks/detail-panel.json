@@ -4,5 +4,9 @@
   "metric-progression": "Progression de {metric}",
   "not-enough-history-on-this": "Pas assez d’historique sur ce char pour l’instant. Il a besoin d’au moins deux captures sur les 90 derniers jours pour tracer une ligne.",
   "record-score": "Score record",
-  "updated": "Mis à jour"
+  "updated": "Mis à jour",
+  "mode-retired": "Ce mode n’est plus joué, le record ci-dessous ne peut donc que diminuer à mesure que les comptes deviennent inactifs.",
+  "mode-multi-vehicle": "Ce mode permettait d’aligner plusieurs véhicules dans une même bataille, une bataille est donc comptabilisée pour chacun d’eux et ces nombres ne correspondent pas à un total pour le mode.",
+  "by-mode": "Mode de jeu",
+  "never-played-in": "Ce véhicule n’a jamais été pris en bataille dans {mode}, le record ci-dessous est donc le seul qu’il possède."
 }

@@ -771,7 +771,8 @@
     "exclusively": "حصريًا",
     "follows": "يتابع",
     "opens": "يفتح",
-    "fought": "خاضها"
+    "fought": "خاضها",
+    "counted": "المحتسبة"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1544,7 +1545,9 @@
     "stops": "спыненні",
     "exclusively": "выключна",
     "follows": "падпісваецца",
-    "opens": "адкрывае"
+    "opens": "адкрывае",
+    "counted": "улічана",
+    "fought": "праведзена"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2528,7 +2531,12 @@
     "exclusively": "само",
     "follows": "следва",
     "opens": "отваря",
-    "fought": "изиграни"
+    "fought": "изиграни",
+    "Global Map": "Глобална карта",
+    "Historical Battles": "Исторически битки",
+    "Team Battles": "Отборни битки",
+    "Maximum Damage": "Максимални поражения",
+    "counted": "отчетени"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3308,7 +3316,9 @@
     "stops": "zaustavljanja",
     "exclusively": "isključivo",
     "follows": "prati",
-    "opens": "otvara"
+    "opens": "otvara",
+    "counted": "izbrojane",
+    "fought": "odigrane"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4303,7 +4313,12 @@
     "exclusively": "výhradně",
     "follows": "sleduje",
     "opens": "otevírá",
-    "fought": "odehráno"
+    "fought": "odehráno",
+    "Global Map": "Globální mapa",
+    "Historical Battles": "Historické bitvy",
+    "Team Battles": "Týmové bitvy",
+    "Maximum Damage": "Maximální poškození",
+    "counted": "započítáno"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5304,7 +5319,12 @@
     "exclusively": "udelukkende",
     "follows": "følger",
     "opens": "åbner",
-    "fought": "kampe"
+    "fought": "kampe",
+    "Global Map": "Globalt kort",
+    "Historical Battles": "Historiske kampe",
+    "Team Battles": "Holdkampe",
+    "Maximum Damage": "Maksimal skade",
+    "counted": "talt"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6298,7 +6318,12 @@
     "exclusively": "ausschließlich",
     "follows": "folgt",
     "opens": "öffnet",
-    "fought": "gespielt"
+    "fought": "gespielt",
+    "Global Map": "Weltkarte",
+    "Historical Battles": "Historische Gefechte",
+    "Team Battles": "Teamgefechte",
+    "Maximum Damage": "Höchstschaden",
+    "counted": "gezählt"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7298,7 +7323,12 @@
     "exclusively": "αποκλειστικά",
     "follows": "ακολουθεί",
     "opens": "ανοίγει",
-    "fought": "πολέμησε"
+    "fought": "πολέμησε",
+    "Global Map": "Παγκόσμιος Χάρτης",
+    "Historical Battles": "Ιστορικές Μάχες",
+    "Team Battles": "Μάχες με Ομάδα",
+    "Maximum Damage": "Μέγιστη Φθορά",
+    "counted": "μετρημένα"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8278,7 +8308,12 @@
     "exclusively": "exclusivamente",
     "follows": "seguimientos",
     "opens": "aperturas",
-    "fought": "libradas"
+    "fought": "libradas",
+    "Global Map": "Mapa global",
+    "Historical Battles": "Batallas históricas",
+    "Team Battles": "Batallas en equipo",
+    "Maximum Damage": "Daño máximo",
+    "counted": "contabilizados"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9282,7 +9317,12 @@
     "exclusively": "vain",
     "follows": "seuraa",
     "opens": "avaa",
-    "fought": "taistellut"
+    "fought": "taistellut",
+    "Global Map": "Maailmankartta",
+    "Historical Battles": "Historialliset taistelut",
+    "Team Battles": "Joukkuetaistelut",
+    "Maximum Damage": "Maksimivahinko",
+    "counted": "laskettu"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10266,7 +10306,12 @@
     "exclusively": "exclusivement",
     "follows": "suit",
     "opens": "ouvre",
-    "fought": "combattues"
+    "fought": "combattues",
+    "Global Map": "Carte globale",
+    "Historical Battles": "Batailles historiques",
+    "Team Battles": "Batailles en équipe",
+    "Maximum Damage": "Maximum de dégâts",
+    "counted": "comptabilisés"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11041,7 +11086,8 @@
     "exclusively": "केवल",
     "follows": "फ़ॉलो करता है",
     "opens": "खोलता है",
-    "fought": "लड़ी गईं"
+    "fought": "लड़ी गईं",
+    "counted": "गिने गए"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12039,7 +12085,12 @@
     "exclusively": "isključivo",
     "follows": "prati",
     "opens": "otvara",
-    "fought": "borio se"
+    "fought": "borio se",
+    "Global Map": "Globalna mapa",
+    "Historical Battles": "Povijesne bitke",
+    "Team Battles": "Timske bitke",
+    "Maximum Damage": "Maksimalna šteta",
+    "counted": "brojano"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13038,7 +13089,13 @@
     "stops": "megállók",
     "exclusively": "kizárólag",
     "follows": "követések",
-    "opens": "megnyitások"
+    "opens": "megnyitások",
+    "Global Map": "Világtérkép",
+    "Historical Battles": "Történelmi csaták",
+    "Team Battles": "Csapatos Csaták",
+    "Maximum Damage": "Maximális sebzés",
+    "counted": "számított",
+    "fought": "lejátszott"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14034,7 +14091,12 @@
     "exclusively": "esclusivamente",
     "follows": "segue",
     "opens": "apre",
-    "fought": "combattuto"
+    "fought": "combattuto",
+    "Global Map": "Mappa Globale",
+    "Historical Battles": "Battaglie Storiche",
+    "Team Battles": "Battaglie di Squadra",
+    "Maximum Damage": "Danno massimo",
+    "counted": "conteggiati"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15037,7 +15099,12 @@
     "exclusively": "のみ",
     "follows": "フォロー",
     "opens": "開く",
-    "fought": "戦闘数"
+    "fought": "戦闘数",
+    "Global Map": "グローバルマップ",
+    "Historical Battles": "ヒストリカルバトル",
+    "Team Battles": "チームバトル",
+    "Maximum Damage": "最大ダメージ",
+    "counted": "集計済み"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15815,7 +15882,8 @@
     "exclusively": "тек",
     "follows": "бақылайды",
     "opens": "ашады",
-    "fought": "шайқасты"
+    "fought": "шайқасты",
+    "counted": "есептелген"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16823,7 +16891,12 @@
     "exclusively": "전용",
     "follows": "팔로우",
     "opens": "열기",
-    "fought": "전투 횟수"
+    "fought": "전투 횟수",
+    "Global Map": "세계 지도",
+    "Historical Battles": "역사 전투",
+    "Team Battles": "팀 전투",
+    "Maximum Damage": "최고 피해 기록",
+    "counted": "집계됨"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17826,7 +17899,12 @@
     "exclusively": "išskirtinai",
     "follows": "seka",
     "opens": "atidaro",
-    "fought": "mūšiai"
+    "fought": "mūšiai",
+    "Global Map": "Globalus žemėlapis",
+    "Historical Battles": "Istoriniai mūšiai",
+    "Team Battles": "Komandiniai mūšiai",
+    "Maximum Damage": "Maksimali žala",
+    "counted": "įskaičiuota"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18815,7 +18893,12 @@
     "exclusively": "tikai",
     "follows": "seko",
     "opens": "atver",
-    "fought": "izspēlēts"
+    "fought": "izspēlēts",
+    "Global Map": "Globālā karte",
+    "Historical Battles": "Vēsturiskās kaujas",
+    "Team Battles": "Komandu kaujas",
+    "Maximum Damage": "Maksimālie Bojājumi",
+    "counted": "uzskaitīts"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19819,7 +19902,13 @@
     "stops": "stops",
     "exclusively": "uitsluitend",
     "follows": "volgt",
-    "opens": "opent"
+    "opens": "opent",
+    "Global Map": "Wereldkaart",
+    "Historical Battles": "Historische gevechten",
+    "Team Battles": "Teamgevechten",
+    "Maximum Damage": "Maximale schade",
+    "counted": "geteld",
+    "fought": "gevochten"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20815,7 +20904,12 @@
     "exclusively": "utelukkende",
     "follows": "følger",
     "opens": "åpner",
-    "fought": "kjempet"
+    "fought": "kjempet",
+    "Global Map": "Globalt kart",
+    "Historical Battles": "Historiske kamper",
+    "Team Battles": "Lagkamper",
+    "Maximum Damage": "Maksimal skade",
+    "counted": "telt"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21808,7 +21902,12 @@
     "exclusively": "wyłącznie",
     "follows": "obserwuje",
     "opens": "otwiera",
-    "fought": "rozegranych"
+    "fought": "rozegranych",
+    "Global Map": "Mapa globalna",
+    "Historical Battles": "Bitwy historyczne",
+    "Team Battles": "Bitwy drużynowe",
+    "Maximum Damage": "Maksymalne uszkodzenia",
+    "counted": "uwzględniono"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22794,7 +22893,12 @@
     "exclusively": "exclusivamente",
     "follows": "segue",
     "opens": "abre",
-    "fought": "batalhas"
+    "fought": "batalhas",
+    "Global Map": "Mapa Global",
+    "Historical Battles": "Batalhas Históricas",
+    "Team Battles": "Batalhas em Equipa",
+    "Maximum Damage": "Dano Máximo",
+    "counted": "contabilizado"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23780,7 +23884,12 @@
     "exclusively": "exclusiv",
     "follows": "urmărește",
     "opens": "deschide",
-    "fought": "jucate"
+    "fought": "jucate",
+    "Global Map": "Harta globală",
+    "Historical Battles": "Lupte istorice",
+    "Team Battles": "Lupte pe echipe",
+    "Maximum Damage": "Daune maxime",
+    "counted": "contabilizat"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24754,7 +24863,12 @@
     "exclusively": "исключительно",
     "follows": "подписки",
     "opens": "открытия",
-    "fought": "бои"
+    "fought": "бои",
+    "Global Map": "Глобальная карта",
+    "Historical Battles": "Исторические бои",
+    "Team Battles": "Командные бои",
+    "Maximum Damage": "Максимальный урон",
+    "counted": "учтено"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25533,7 +25647,8 @@
     "exclusively": "výhradne",
     "follows": "sledenja",
     "opens": "odprtja",
-    "fought": "odigranih"
+    "fought": "odigranih",
+    "counted": "šteto"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26533,7 +26648,12 @@
     "exclusively": "isključivo",
     "follows": "праћења",
     "opens": "отварања",
-    "fought": "борио се"
+    "fought": "борио се",
+    "Global Map": "Globalna mapa",
+    "Historical Battles": "Istorijske bobre",
+    "Team Battles": "Timske borbe",
+    "Maximum Damage": "Maksimalna šteta",
+    "counted": "uračunato"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27538,7 +27658,12 @@
     "exclusively": "endast",
     "follows": "följningar",
     "opens": "öppningar",
-    "fought": "spelade"
+    "fought": "spelade",
+    "Global Map": "Världskarta",
+    "Historical Battles": "Historiska strider",
+    "Team Battles": "Lagstrider",
+    "Maximum Damage": "Maximal skada",
+    "counted": "räknade"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28539,7 +28664,12 @@
     "exclusively": "เท่านั้น",
     "follows": "ติดตาม",
     "opens": "เปิด",
-    "fought": "เข้าร่วมการรบ"
+    "fought": "เข้าร่วมการรบ",
+    "Global Map": "แผนที่โลก",
+    "Historical Battles": "การรบตามประวัติศาสตร์",
+    "Team Battles": "การรบแบบเป็นทีม",
+    "Maximum Damage": "ความเสียหายสูงสุด",
+    "counted": "นับแล้ว"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29318,7 +29448,9 @@
     "stops": "mga hinto",
     "exclusively": "eksklusibo",
     "follows": "sinusundan",
-    "opens": "binubuksan"
+    "opens": "binubuksan",
+    "counted": "nabilang",
+    "fought": "nakipaglaban"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30315,7 +30447,12 @@
     "exclusively": "sadece",
     "follows": "takip eder",
     "opens": "açar",
-    "fought": "savaştı"
+    "fought": "savaştı",
+    "Global Map": "Dünya Haritası",
+    "Historical Battles": "Tarihsel Savaşlar",
+    "Team Battles": "Ekip Savaşları",
+    "Maximum Damage": "Maksimum Hasar",
+    "counted": "sayılmış"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31305,7 +31442,12 @@
     "exclusively": "виключно",
     "follows": "підписки",
     "opens": "відкриття",
-    "fought": "бився"
+    "fought": "бився",
+    "Global Map": "Глобальна мапа",
+    "Historical Battles": "Історичні бої",
+    "Team Battles": "Командні бої",
+    "Maximum Damage": "Максимальна шкода",
+    "counted": "враховано"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32284,7 +32426,12 @@
     "exclusively": "chỉ",
     "follows": "theo dõi",
     "opens": "lượt mở",
-    "fought": "đã tham chiến"
+    "fought": "đã tham chiến",
+    "Global Map": "Bản đồ Chiến sự",
+    "Historical Battles": "Trận đánh Lịch sử",
+    "Team Battles": "Đấu Đội",
+    "Maximum Damage": "Sát thương Tối đa",
+    "counted": "được tính"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33285,6 +33432,11 @@
     "exclusively": "仅",
     "follows": "关注",
     "opens": "打开",
-    "fought": "战斗过"
+    "fought": "战斗过",
+    "Global Map": "领土战",
+    "Historical Battles": "历史战",
+    "Team Battles": "战队",
+    "Maximum Damage": "最高损伤",
+    "counted": "已统计"
   }
 }

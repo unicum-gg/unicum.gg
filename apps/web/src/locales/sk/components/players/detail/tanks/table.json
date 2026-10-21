@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Zatiaľ neboli odohrané žiadne tanky.",
   "no-tanks-match-these-filters": "Týmto filtrom nezodpovedajú žiadne tanky.",
-  "name": "Názov"
+  "name": "Názov",
+  "no-tanks-played-in-this-mode": "V tomto režime sa nehrali žiadne tanky."
 }

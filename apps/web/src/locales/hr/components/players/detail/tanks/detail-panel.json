@@ -4,5 +4,9 @@
   "metric-progression": "Napredak {metric}",
   "not-enough-history-on-this": "Još nema dovoljno povijesti za ovaj tenk. Za prikaz retka potrebne su najmanje dvije snimke u posljednjih 90 dana.",
   "record-score": "Rekordni rezultat",
-  "updated": "Ažurirano"
+  "updated": "Ažurirano",
+  "mode-retired": "Ovaj se način više ne igra, pa se rekord u nastavku može samo smanjivati kako računi prestaju biti aktivni.",
+  "mode-multi-vehicle": "Ovaj je način omogućavao korištenje više vozila u jednoj bitci, pa se bitka broji za svako od njih i ti se brojevi ne zbrajaju u ukupno za način.",
+  "by-mode": "Gdje je odigrano",
+  "never-played-in": "Ovo vozilo nikad nije uzeto u {mode}, pa je rekord u nastavku jedini koji ima."
 }

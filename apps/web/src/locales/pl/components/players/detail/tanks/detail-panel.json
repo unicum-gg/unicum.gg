@@ -4,5 +4,9 @@
   "metric-progression": "Postęp: {metric}",
   "not-enough-history-on-this": "Za mało danych historycznych dla tego czołgu. Potrzebne są co najmniej dwa zapisy stanu z ostatnich 90 dni, aby narysować linię.",
   "record-score": "Rekordowy wynik",
-  "updated": "Zaktualizowane"
+  "updated": "Zaktualizowane",
+  "mode-retired": "Tego trybu nie rozgrywa się już, więc poniższy rekord może tylko maleć w miarę wygasania kont.",
+  "mode-multi-vehicle": "Ten tryb pozwalał wystawić kilka pojazdów w jednej bitwie, dlatego bitwę uwzględniono dla każdego z nich, a te liczby nie sumują się do łącznej liczby dla trybu.",
+  "by-mode": "Miejsce rozegrania",
+  "never-played-in": "Ten pojazd nigdy nie został użyty w trybie {mode}, więc poniższy rekord jest jedynym, jaki posiada."
 }

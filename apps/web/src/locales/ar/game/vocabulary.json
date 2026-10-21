@@ -23,7 +23,17 @@
     "cw-viii": "حروب العشائر VIII",
     "cw-vi": "حروب العشائر VI",
     "steel-hunter": "صياد الصلب",
-    "onslaught": "الهجوم"
+    "onslaught": "الهجوم",
+    "clan": "معارك العشائر",
+    "company": "سرية الدبابات",
+    "team": "معارك الفرق",
+    "permanent-teams": "الفرق الدائمة",
+    "historical": "المعارك التاريخية"
+  },
+  "tank-modes": {
+    "globalmap": "الخريطة العالمية",
+    "ranked_10x10": "المعارك المصنّفة 10×10",
+    "fallout": "تداعيات"
   },
   "stronghold-tiers": {
     "advances": "تقدّمات",

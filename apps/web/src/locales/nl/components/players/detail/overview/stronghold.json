@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Nog geen gegevens voor {label}. Kijk opnieuw na de volgende momentopname.",
-  "title": "Statistieken voor {label} van {nickname}"
+  "title": "Statistieken voor {label} van {nickname}",
+  "see-tank-by-tank": "{mode}, tank voor tank"
 }

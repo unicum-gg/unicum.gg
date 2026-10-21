@@ -23,7 +23,17 @@
     "cw-viii": "Clankriege VIII",
     "cw-vi": "Clankriege VI",
     "steel-hunter": "Stählerner Jäger",
-    "onslaught": "Ansturm"
+    "onslaught": "Ansturm",
+    "clan": "Clangefechte",
+    "company": "Panzerkompanie",
+    "team": "Teamgefechte",
+    "permanent-teams": "Feste Teams",
+    "historical": "Historische Gefechte"
+  },
+  "tank-modes": {
+    "globalmap": "Weltkarte",
+    "ranked_10x10": "Gewertete Gefechte 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Vorstöße",

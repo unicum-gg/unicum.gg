@@ -23,7 +23,17 @@
     "cw-viii": "Wojny klanów VIII",
     "cw-vi": "Wojny klanów VI",
     "steel-hunter": "Stalowy łowca",
-    "onslaught": "Natarcie"
+    "onslaught": "Natarcie",
+    "clan": "Bitwy klanowe",
+    "company": "Kompania czołgów",
+    "team": "Bitwy drużynowe",
+    "permanent-teams": "Stałe drużyny",
+    "historical": "Bitwy historyczne"
+  },
+  "tank-modes": {
+    "globalmap": "Mapa globalna",
+    "ranked_10x10": "Bitwy rankingowe 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Natarcia",

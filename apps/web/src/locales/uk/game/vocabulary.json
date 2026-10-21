@@ -23,7 +23,17 @@
     "cw-viii": "Кланові війни VIII",
     "cw-vi": "Кланові війни VI",
     "steel-hunter": "Сталевий мисливець",
-    "onslaught": "Натиск"
+    "onslaught": "Натиск",
+    "clan": "Кланові бої",
+    "company": "Танкова рота",
+    "team": "Командні бої",
+    "permanent-teams": "Постійні команди",
+    "historical": "Історичні бої"
+  },
+  "tank-modes": {
+    "globalmap": "Глобальна мапа",
+    "ranked_10x10": "Гра в Ладдері 10x10",
+    "fallout": "Фоллаут"
   },
   "stronghold-tiers": {
     "advances": "Наступи",

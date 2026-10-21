@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Tankai dar nežaisti.",
   "no-tanks-match-these-filters": "Nė vienas tankas neatitinka šių filtrų.",
-  "name": "Pavadinimas"
+  "name": "Pavadinimas",
+  "no-tanks-played-in-this-mode": "Šiame režime nebuvo žaista nė vienu tanku."
 }

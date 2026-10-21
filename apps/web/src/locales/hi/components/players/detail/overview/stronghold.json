@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "अभी {label} का डेटा नहीं है। अगले स्नैपशॉट के बाद फिर जाँचें।",
-  "title": "{nickname} के {label} आँकड़े"
+  "title": "{nickname} के {label} आँकड़े",
+  "see-tank-by-tank": "{mode}, टैंक-दर-टैंक"
 }

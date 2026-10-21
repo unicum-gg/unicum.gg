@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "ยังไม่มีรถถังที่เล่นแล้ว",
   "no-tanks-match-these-filters": "ไม่มีรถถังที่ตรงกับตัวกรองเหล่านี้",
-  "name": "ชื่อ"
+  "name": "ชื่อ",
+  "no-tanks-played-in-this-mode": "ไม่มีรถถังที่เล่นในโหมดนี้"
 }

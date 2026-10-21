@@ -4,5 +4,9 @@
   "metric-progression": "Progressão de {metric}",
   "not-enough-history-on-this": "Ainda não há histórico suficiente para este tanque. São necessários pelo menos dois registos nos últimos 90 dias para traçar uma linha.",
   "record-score": "Pontuação recorde",
-  "updated": "Atualizado"
+  "updated": "Atualizado",
+  "mode-retired": "Este modo já não é jogado, por isso o recorde abaixo só pode diminuir à medida que as contas ficam inativas.",
+  "mode-multi-vehicle": "Este modo permitia usar vários veículos na mesma batalha, por isso uma batalha é contabilizada para cada um deles e estas contagens não correspondem ao total do modo.",
+  "by-mode": "Onde foi jogado",
+  "never-played-in": "Este veículo nunca foi recebido em {mode}, por isso o recorde abaixo é o que tem."
 }

@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "{label}データはまだありません。次のスナップショット後に確認してください。",
-  "title": "{nickname}の{label}戦績"
+  "title": "{nickname}の{label}戦績",
+  "see-tank-by-tank": "{mode}、戦車別"
 }

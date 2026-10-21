@@ -23,7 +23,17 @@
     "cw-viii": "Клановые войны VIII",
     "cw-vi": "Клановые войны VI",
     "steel-hunter": "Стальной охотник",
-    "onslaught": "Натиск"
+    "onslaught": "Натиск",
+    "clan": "Бои кланов",
+    "company": "Танковая рота",
+    "team": "Командные бои",
+    "permanent-teams": "Постоянные команды",
+    "historical": "Исторические бои"
+  },
+  "tank-modes": {
+    "globalmap": "Глобальная карта",
+    "ranked_10x10": "Игра в Ладдере 10x10",
+    "fallout": "Противостояние"
   },
   "stronghold-tiers": {
     "advances": "Наступления",

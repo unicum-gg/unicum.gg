@@ -4,5 +4,9 @@
   "metric-progression": "{metric} attīstība",
   "not-enough-history-on-this": "Par šo tanku vēl nav pietiekami daudz vēstures. Lai uzzīmētu rindu, pēdējo 90 dienu laikā nepieciešami vismaz divi momentuzņēmumi.",
   "record-score": "Rekords",
-  "updated": "Atjaunots"
+  "updated": "Atjaunots",
+  "mode-retired": "Šis režīms vairs netiek spēlēts, tāpēc zemāk redzamais rekords var tikai samazināties, kontiem pārtraucot darbību.",
+  "mode-multi-vehicle": "Šis režīms ļāva vienā kaujā izmantot vairākus transportlīdzekļus, tāpēc kauja tiek uzskaitīta katram no tiem un šie skaiti nesummējas režīma kopā.",
+  "by-mode": "Kur tas tika spēlēts",
+  "never-played-in": "Šis transportlīdzeklis nekad nav paņemts režīmā {mode}, tāpēc zemāk redzamais rekords ir vienīgais, kas tam ir."
 }

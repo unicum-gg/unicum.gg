@@ -23,7 +23,17 @@
     "cw-viii": "Războaie între clanuri VIII",
     "cw-vi": "Războaie între clanuri VI",
     "steel-hunter": "Vânătorul de oţel",
-    "onslaught": "Violență"
+    "onslaught": "Violență",
+    "clan": "Lupte de clan",
+    "company": "Companie de tancuri",
+    "team": "Lupte pe echipe",
+    "permanent-teams": "Echipe permanente",
+    "historical": "Lupte istorice"
+  },
+  "tank-modes": {
+    "globalmap": "Harta globală",
+    "ranked_10x10": "Lupte de clasament 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Ofensive",

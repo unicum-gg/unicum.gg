@@ -4,5 +4,9 @@
   "metric-progression": "{metric} fejlődése",
   "not-enough-history-on-this": "Még nincs elegendő előzmény erről a tankról. A sor megrajzolásához legalább két pillanatképre van szükség az elmúlt 90 napból.",
   "record-score": "Rekord pontszám",
-  "updated": "Frissítve"
+  "updated": "Frissítve",
+  "mode-retired": "Ezt a játékmódot már nem játszották, ezért az alábbi rekord csak csökkenhet, ahogy a fiókok megszűnnek.",
+  "mode-multi-vehicle": "Ez a játékmód lehetővé tette, hogy egy csatában több járművet is bevesse, ezért egy csata mindegyiknél számított, és ezek a számok nem adódnak össze a játékmód összesévé.",
+  "by-mode": "Ahol játszották",
+  "never-played-in": "Ezzel a járművel soha nem játszottak {mode} játékmódban, ezért az alábbi rekord az egyetlen, amellyel rendelkezik."
 }

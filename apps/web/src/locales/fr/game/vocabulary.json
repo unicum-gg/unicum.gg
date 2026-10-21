@@ -23,7 +23,17 @@
     "cw-viii": "Guerres de clans VIII",
     "cw-vi": "Guerres de clans VI",
     "steel-hunter": "Traqueur d’acier",
-    "onslaught": "Offensive"
+    "onslaught": "Offensive",
+    "clan": "Batailles de clan",
+    "company": "Compagnie de chars",
+    "team": "Batailles en équipe",
+    "permanent-teams": "Équipes permanentes",
+    "historical": "Batailles historiques"
+  },
+  "tank-modes": {
+    "globalmap": "Carte globale",
+    "ranked_10x10": "Batailles classées 10x10",
+    "fallout": "Retombées"
   },
   "stronghold-tiers": {
     "advances": "Incursions",

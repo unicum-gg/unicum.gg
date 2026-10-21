@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "لا تتوفر بيانات {label} بعد. تحقق مجددًا بعد اللقطة التالية.",
-  "title": "إحصائيات {label} الخاصة بـ {nickname}"
+  "title": "إحصائيات {label} الخاصة بـ {nickname}",
+  "see-tank-by-tank": "{mode}، الدبابة تلو الأخرى"
 }

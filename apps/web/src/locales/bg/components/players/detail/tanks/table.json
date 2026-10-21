@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Все още няма изиграни танкове.",
   "no-tanks-match-these-filters": "Няма танкове, отговарящи на тези филтри.",
-  "name": "Име"
+  "name": "Име",
+  "no-tanks-played-in-this-mode": "Няма танкове, с които е играно в този режим."
 }

@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Pas encore de données {label}. Vérifier après la prochaine capture.",
-  "title": "Statistiques de {label} de {nickname}"
+  "title": "Statistiques de {label} de {nickname}",
+  "see-tank-by-tank": "{mode}, char par char"
 }

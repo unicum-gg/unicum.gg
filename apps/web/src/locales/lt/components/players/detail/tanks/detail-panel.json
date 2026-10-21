@@ -4,5 +4,9 @@
   "metric-progression": "{metric} progresas",
   "not-enough-history-on-this": "Šio tanko istorijos dar nepakanka. Eilutei nubraižyti reikia bent dviejų momentinių kopijų per pastarąsias 90 dienų.",
   "record-score": "Rekordiniai rezultatai",
-  "updated": "Atnaujinta"
+  "updated": "Atnaujinta",
+  "mode-retired": "Šiame režime daugiau nebežaista, todėl toliau pateiktas rekordas gali tik mažėti, kai paskyros tampa neaktyvios.",
+  "mode-multi-vehicle": "Šis režimas leido viename mūšyje naudoti kelias transporto priemones, todėl kiekvienai iš jų įskaičiuota po mūšį, o šie skaičiai nesudaro bendro režimo skaičiaus iš viso.",
+  "by-mode": "Kur žaista",
+  "never-played-in": "Šia transporto priemone niekada nebuvo žaista režime {mode}, todėl toliau pateiktas rekordas yra vienintelis, kurį ji turi."
 }
