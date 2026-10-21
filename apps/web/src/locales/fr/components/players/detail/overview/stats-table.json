@@ -1,5 +1,5 @@
 {
-  "stat": "Statistique",
+  "stat": "Stat",
   "rows": {
     "battles": "Batailles",
     "tier": "Niveau",
@@ -18,7 +18,7 @@
     "base-capture": "Capture de base",
     "base-defense": "Défense de base",
     "experience": "Expérience",
-    "hit-rate": "Précision",
+    "hit-rate": "Taux de réussite",
     "personal-rating": "Cote personnelle",
     "wtr": "Cote World of Tanks",
     "wn7": "WN7",
