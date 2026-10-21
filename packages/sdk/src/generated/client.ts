@@ -101,11 +101,11 @@ class PlayerClient {
   }
 
   /** Player tanks */
-  tanks() {
+  tanks(mode?: NonNullable<QueryOf<"/{region}/players/{nickname}/tanks">>["mode"]) {
     const path = { region: this.region, nickname: this.nickname };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks", path),
-      () => this.api.GET("/{region}/players/{nickname}/tanks", { params: { path } }),
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks", path, { mode }),
+      () => this.api.GET("/{region}/players/{nickname}/tanks", { params: { path, query: { mode } } }),
     );
   }
 

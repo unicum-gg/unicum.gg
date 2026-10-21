@@ -30,6 +30,7 @@ import { ServerStatsRange } from "@unicum.gg/shared/wot/server-stats";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
 import { TankClient } from "@unicum.gg/shared/wot/tanks/common-test";
 import { PaintLock } from "@unicum.gg/shared/wot/paint-lock";
+import { TankBattleMode } from "@unicum.gg/shared/wot/tank-modes";
 import { LanguageSource } from "@unicum.gg/shared/wot/language-flags";
 import { TankAxis } from "@unicum.gg/shared/wot/tank-spec-fields";
 import {
@@ -99,6 +100,7 @@ export const OPENAPI_ENUM_SOURCES = {
   PAINT_LOCK: Object.values(PaintLock),
   LANGUAGE_SOURCE: Object.values(LanguageSource),
   TANK_AXIS: Object.values(TankAxis),
+  TANK_BATTLE_MODE: Object.values(TankBattleMode),
   VOTER_BRACKET: Object.values(VoterBracket),
   TANK_RATING_AXIS: Object.values(TankRatingAxis),
   MAP_RATING_AXIS: Object.values(MapRatingAxis),

@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "No {label} data yet. Check back after the next snapshot.",
-  "title": "{nickname}’s {label} stats"
+  "title": "{nickname}’s {label} stats",
+  "see-tank-by-tank": "{mode}, tank by tank"
 }

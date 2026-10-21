@@ -8,7 +8,16 @@ import { useRouter } from "@/hooks/use-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import ROUTES from "@/constants/routes";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RatingMetric, type PlayerTankRow } from "@unicum.gg/shared";
+import {
+  DEFAULT_RATING_METRIC,
+  DEFAULT_TANK_BATTLE_MODE,
+  isRatedTankMode,
+  isRatingMetric,
+  RatingMetric,
+  type PlayerTankRow,
+  type TankBattleMode,
+} from "@unicum.gg/shared";
+import { withTankMode } from "@/hooks/use-tank-mode";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {
@@ -26,6 +35,7 @@ import {
   PlayerColumnSelector,
   type PlayerSortCtx,
   COMPACT_COLUMN_KEYS,
+  RATING_COLUMN_KEY,
   usePlayerColumns,
 } from "@/components/players/detail/tanks/vehicle-columns";
 import {
@@ -105,6 +115,7 @@ export function PlayerTanksTable({
   nickname,
   vehicles,
   selectedSlug,
+  mode = DEFAULT_TANK_BATTLE_MODE,
 }: {
   region: Region;
   nickname: string;
@@ -112,6 +123,12 @@ export function PlayerTanksTable({
   /** The vehicle whose record is open beside the table, highlighted here so the
    * two halves agree on what is being read. */
   selectedSlug?: string | null;
+  /** The battle mode these rows describe. Three things read it: an empty list
+   * means something different under a mode (a player with 215 vehicles and no
+   * Skirmish among them has not "played no tanks yet"), the WN column comes off
+   * outside Random (`TANK_MODES_RATED`), and every row carries it onto the
+   * record it opens so the panel lands on the same mode. */
+  mode?: TankBattleMode;
 }) {
   const { num } = useFormat();
   const { t: tStats } = useStatLabels();
@@ -150,6 +167,20 @@ export function PlayerTanksTable({
     seededSort.current = true;
     setSort({ key: "markReach", direction: SortDirection.Desc });
   }, [markPinned]);
+  const rated = isRatedTankMode(mode);
+  const filteredByMode = mode !== DEFAULT_TANK_BATTLE_MODE;
+  // A reader who sorted by rating and then picked a mode would be left sorting
+  // on a column that is gone and holds nothing. The stored sort is untouched,
+  // so going back to Random restores it. Memoized because the fallback is a
+  // fresh object and the sort below lists it as a dependency: rebuilt every
+  // render, it would re-sort up to 655 rows on every keystroke in the filters.
+  const effectiveSort = useMemo(
+    () =>
+      !rated && sort?.key === RATING_COLUMN_KEY
+        ? { key: "battles", direction: SortDirection.Desc }
+        : sort,
+    [rated, sort],
+  );
   const [visibleKeys] = usePlayerColumns();
 
   // Numeric columns the min/max range filter can target, taken from the columns
@@ -159,12 +190,16 @@ export function PlayerTanksTable({
   // the mark column rename themselves after the reader's own choice.
   const rangeCols: RangeColumn<PlayerTankRow>[] = useMemo(
     () =>
-      PLAYER_RANGE_COLUMNS.map((c) => ({
-        key: c.key,
-        label: c.header ? c.header(sortCtx) : c.label,
-        value: (r: PlayerTankRow) => c.rangeValue(r, sortCtx),
-      })),
-    [sortCtx],
+      PLAYER_RANGE_COLUMNS
+        // Dropped outside Random: a min/max over a column of nulls filters
+        // everything out the moment anybody touches it.
+        .filter((c) => rated || c.key !== RATING_COLUMN_KEY)
+        .map((c) => ({
+          key: c.key,
+          label: c.header ? c.header(sortCtx) : c.label,
+          value: (r: PlayerTankRow) => c.rangeValue(r, sortCtx),
+        })),
+    [sortCtx, rated],
   );
 
   // The filter hook names these for what they hold, since the tank catalogue
@@ -195,9 +230,18 @@ export function PlayerTanksTable({
     [vehicles],
   );
   const { filtered, filters } = useTankFilters(filterable, rangeCols, "battles");
+  // Picking a mode outside Random takes the WN column away, and with it the
+  // range column a reader may have bounds set on. `resetRange` puts the
+  // selector and the bounds back on a column that still exists, so the filter
+  // cannot keep narrowing the list under a name that has gone.
+  const rangeColKey = filters.rangeCol;
+  const resetRange = filters.resetRange;
+  useEffect(() => {
+    if (!rated && rangeColKey === RATING_COLUMN_KEY) resetRange("battles");
+  }, [rated, rangeColKey, resetRange]);
   const sorted = useMemo(
-    () => [...filtered].sort((a, b) => compareRows(a, b, sort, sortCtx)),
-    [filtered, sort, sortCtx],
+    () => [...filtered].sort((a, b) => compareRows(a, b, effectiveSort, sortCtx)),
+    [filtered, effectiveSort, sortCtx],
   );
   const { paged, pager } = usePagination(sorted);
 
@@ -237,9 +281,10 @@ export function PlayerTanksTable({
           // cookie, so everybody who had ever touched it would otherwise
           // follow a link from the marks panel to a table with no mark column.
           (visibleKeys.has(c.key) || (markPinned && c.key === "markReach")) &&
+          (rated || c.key !== RATING_COLUMN_KEY) &&
           (!selectedSlug || COMPACT_COLUMN_KEYS.has(c.key)),
       ),
-    [visibleKeys, selectedSlug, markPinned],
+    [visibleKeys, selectedSlug, markPinned, rated],
   );
 
   const showsMarkColumn = visibleColumns.some((c) => c.key === "markReach");
@@ -255,7 +300,9 @@ export function PlayerTanksTable({
 
   if (vehicles.length === 0) {
     return (
-      <p className="p-4 text-sm text-muted-foreground">{t("no-tanks-played-yet")}</p>
+      <p className="p-4 text-sm text-muted-foreground">
+        {t(filteredByMode ? "no-tanks-played-in-this-mode" : "no-tanks-played-yet")}
+      </p>
     );
   }
 
@@ -277,7 +324,7 @@ export function PlayerTanksTable({
                     column out, where the control would change a column that is
                     not on the table. */}
                 {hasMarkReach && showsMarkColumn && <MarkTargetSelect />}
-                <PlayerColumnSelector />
+                <PlayerColumnSelector rated={rated} />
               </>
             )
           }
@@ -368,7 +415,14 @@ export function PlayerTanksTable({
                   ? null
                   : unplayed
                     ? ROUTES.TANK(region, r.slug)
-                    : ROUTES.PLAYER_TANK(region, nickname, r.slug);
+                    : // In the mode the row is being read in, so a record
+                      // opened from a Skirmish list opens on Skirmish. The
+                      // vehicle's own page above is not a per-mode view, so it
+                      // carries nothing.
+                      withTankMode(
+                        ROUTES.PLAYER_TANK(region, nickname, r.slug),
+                        mode,
+                      );
                 return (
                   <TableRow
                     key={r.tankId}

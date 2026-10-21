@@ -11,6 +11,7 @@ import {
   PlayerSectionNav,
 } from "@/components/players/detail/tabs-nav";
 import {
+  ARCHIVED_PLAYER_MODES,
   PlayerMode,
   PlayerSection,
   playerModeHref,
@@ -25,9 +26,14 @@ import {
   type StrongholdData,
 } from "@/components/players/detail/overview/stronghold";
 import { STEEL_HUNTER_ROWS } from "@/components/players/detail/overview/stronghold-stats-table";
+import {
+  PLAYER_MODE_TANK_VIEW,
+  archivedModeRecord,
+} from "@/components/players/detail/overview/mode-tank-view";
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
+import { useTankMode } from "@/hooks/use-tank-mode";
 import {
   OnslaughtTab,
   type PlayerOnslaughtData,
@@ -36,13 +42,17 @@ import { TournamentsTab } from "@/components/players/detail/tournaments";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
-import { SessionGranularity, steelHunterWinrateColor } from "@unicum.gg/shared";
+import {
+  DEFAULT_TANK_BATTLE_MODE,
+  SessionGranularity,
+  steelHunterWinrateColor,
+} from "@unicum.gg/shared";
 import type {
   PlayerAchievements,
   PlayerDetailData,
   PlayerSession,
   PlayerTankRecord,
-  PlayerTankRow,
+  PlayerTanksPayload,
   RatingMetric,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -67,6 +77,14 @@ const STRONGHOLD_MODES: {
   { id: PlayerMode.ClanWarsVIII, label: "Clan Wars Tier VIII" },
   { id: PlayerMode.ClanWarsVI, label: "Clan Wars Tier VI" },
   { id: PlayerMode.SteelHunter, label: "Steel Hunter" },
+  // The five that ended. Same panel, same table: what makes them different is
+  // that their record is finished, which shows as empty period columns rather
+  // than as a different component.
+  { id: PlayerMode.ClanBattles, label: "Clan Battles" },
+  { id: PlayerMode.TankCompany, label: "Tank Company" },
+  { id: PlayerMode.TeamBattles, label: "Team Battles" },
+  { id: PlayerMode.PermanentTeams, label: "Permanent Teams" },
+  { id: PlayerMode.Historical, label: "Historical Battles" },
 ];
 
 export type PlayerTabsViewProps = {
@@ -86,7 +104,7 @@ export type PlayerTabsViewProps = {
   // Present only when Tanks is the section the server rendered, so its content
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
-  initialTanks: PlayerTankRow[] | null;
+  initialTanks: PlayerTanksPayload | null;
   /** The vehicle record the URL names, server-rendered beside the table. */
   tankDetail: PlayerTankRecord | null;
   /** The loadout panel for the open vehicle, rendered on the SERVER and
@@ -140,22 +158,50 @@ export function PlayerTabsView({
   // through the SDK. SWR keys on the URL and only runs when the Tanks section is
   // active (null key = no request); when the server already rendered Tanks
   // (`initialTanks` seeds the cache), skip the on-mount revalidation.
-  const tanksReq = () => unicum.region(region).players(nickname).tanks();
+  const [tankMode, setTankMode] = useTankMode();
+  // Value prices the garage, so it asks for the WHOLE one, which is what the
+  // endpoint answers with no mode: the valuation is about the vehicles OWNED,
+  // and a tank only ever taken into Clan Battles is owned like any other. That
+  // costs the two sections the one request they used to share, which is a
+  // second fetch only for a reader who opens both.
+  const tanksMode = section === PlayerSection.Value ? undefined : tankMode;
+  const tanksReq = () =>
+    unicum.region(region).players(nickname).tanks(tanksMode);
   const seededTanks = initialTanks != null;
-  // Value reads the same list (its per-vehicle cost table prices each row), so
-  // both sections key off one request: opening one then the other is a cache
-  // hit rather than a second fetch of 500 rows.
   const needsTanks =
     section === PlayerSection.Tanks || section === PlayerSection.Value;
-  const { data: tanks } = useSWR(
+  const { data: tanksData } = useSWR(
     // Key off the request's own URL; null disables the fetch until it is needed.
+    // The URL carries the mode, so switching mode is a new key and a new fetch
+    // rather than a stale table under a new label.
     needsTanks ? tanksReq().url() : null,
-    () => tanksReq().then((r) => r.tanks as unknown as PlayerTankRow[]),
+    () => tanksReq().then((r) => r as unknown as PlayerTanksPayload),
     {
-      fallbackData: initialTanks ?? undefined,
-      revalidateOnMount: !seededTanks,
+      // The server renders the default mode, so it only seeds the default: a
+      // reader who arrives with `?mode=` already set gets a fetch rather than a
+      // brief flash of another mode's rows under this one's name.
+      fallbackData:
+        tanksMode === DEFAULT_TANK_BATTLE_MODE
+          ? (initialTanks ?? undefined)
+          : undefined,
+      revalidateOnMount: !seededTanks || tanksMode !== DEFAULT_TANK_BATTLE_MODE,
+      // The option list is a property of the garage, not of the chosen mode, so
+      // it must not blink away between two fetches.
+      keepPreviousData: true,
     },
   );
+  const tanks = tanksData?.tanks;
+  // `keepPreviousData` holds the previous mode's rows while the next ones load,
+  // which is what keeps the option list from blinking. The payload says which
+  // mode its rows describe, so anything that LABELS them reads that rather than
+  // the URL: otherwise the header counts the old mode's vehicles under the new
+  // mode's name, the WN column vanishes over rows that still carry ratings, and
+  // every row link stamps a mode its vehicle may have no record in.
+  const rowsMode = tanksData?.mode ?? DEFAULT_TANK_BATTLE_MODE;
+  const switchingMode = tanksMode !== undefined && rowsMode !== tanksMode;
+  // The modes the garage has anything in. Taken from whichever payload is in
+  // hand: every one of them carries the same list.
+  const tankModes = tanksData?.modes ?? initialTanks?.modes ?? [];
 
   // Same shape as the tank list: a 510-entry payload only this tab renders, so
   // it is never fetched until the tab is opened (null key = no request), and a
@@ -250,6 +296,13 @@ export function PlayerTabsView({
     tanksHref: playerSectionHref(basePath, PlayerSection.Tanks),
     nowMs,
   };
+  // An ended mode is null where the account never played it, and the panel
+  // renders its own "no data yet" for that. `EMPTY_MODE` keeps the record type
+  // total so a mode added later cannot be forgotten here.
+  const EMPTY_MODE: StrongholdData = {
+    current: null,
+    periods: { h24: null, d7: null, d30: null },
+  };
   const strongholds: Record<StrongholdModeId, StrongholdData> = {
     [PlayerMode.Skirmish]: detail.strongholds.skirmish,
     [PlayerMode.Advances]: detail.strongholds.fortified,
@@ -259,7 +312,20 @@ export function PlayerTabsView({
     [PlayerMode.ClanWarsVIII]: detail.strongholds.cwChampion,
     [PlayerMode.ClanWarsVI]: detail.strongholds.cwMiddle,
     [PlayerMode.SteelHunter]: detail.strongholds.fallout,
+    [PlayerMode.ClanBattles]: detail.strongholds.clan ?? EMPTY_MODE,
+    [PlayerMode.TankCompany]: detail.strongholds.company ?? EMPTY_MODE,
+    [PlayerMode.TeamBattles]: detail.strongholds.team ?? EMPTY_MODE,
+    [PlayerMode.PermanentTeams]: detail.strongholds.regularTeam ?? EMPTY_MODE,
+    [PlayerMode.Historical]: detail.strongholds.historical ?? EMPTY_MODE,
   };
+  // Which ended modes this account actually has, so the nav offers only those.
+  // Through the same lookup the page uses to decide the route exists at all, or
+  // a tab could be offered for a URL that redirects away.
+  const playedArchived = new Set<PlayerMode>(
+    ARCHIVED_PLAYER_MODES.filter(
+      (m) => archivedModeRecord(detail, m) !== null,
+    ),
+  );
   const onTanks = section === PlayerSection.Tanks;
   const onValue = section === PlayerSection.Value;
   const onAchievements = section === PlayerSection.Achievements;
@@ -293,6 +359,7 @@ export function PlayerTabsView({
               <PlayerModeNav
                 basePath={basePath}
                 mode={mode}
+                played={playedArchived}
                 onSelect={selectMode}
               />
             </PanelHeader>
@@ -335,9 +402,15 @@ export function PlayerTabsView({
           region={region}
           nickname={nickname}
           vehicles={tanks ?? []}
-          loading={onTanks && !tanks}
+          loading={onTanks && (!tanks || switchingMode)}
           tankDetail={tankDetail}
           tankLoadout={tankLoadout}
+          modes={tankModes}
+          // The select follows the reader's click immediately; the table reads
+          // the mode its rows are actually in.
+          mode={tankMode}
+          rowsMode={rowsMode}
+          onSelectMode={setTankMode}
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />
@@ -359,6 +432,10 @@ export function PlayerTabsView({
           winrateColorFn={
             mode === PlayerMode.SteelHunter ? steelHunterWinrateColor : undefined
           }
+          // Absent for the modes Wargaming reports no comparable per-vehicle
+          // block for, which is where the link would promise one.
+          tankView={PLAYER_MODE_TANK_VIEW[mode]}
+          tanksHref={overall.tanksHref}
         />
       )}
     </>

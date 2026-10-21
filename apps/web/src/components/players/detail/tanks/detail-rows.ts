@@ -7,7 +7,7 @@ import {
   wn7Color,
   wn8Color,
   wnxColor,
-  type PlayerTankDetail,
+  type TankRecordStats,
 } from "@unicum.gg/shared";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
@@ -95,7 +95,7 @@ const int = (v: number | null, locale: string) => (v === null ? null : numberFor
  * the game's own behaviour: every tank reports zero, and a column of zeroes on
  * a heavy says nothing about it.
  */
-export function generalRows(d: PlayerTankDetail, locale: string): DetailRow[] {
+export function generalRows(d: TankRecordStats, locale: string): DetailRow[] {
   return [
     ...row("Battles", int(d.battles, locale)),
     ...row("Victories", pct(d.winrate, locale), false, coloredPct(d.winrate, winrateColor)),
@@ -111,19 +111,22 @@ export function generalRows(d: PlayerTankDetail, locale: string): DetailRow[] {
 /**
  * The "Record Score" block: the best single battle on this vehicle.
  *
- * Two lines where the game shows three. Its maximum damage has no per-tank
- * source in Wargaming's API: the field exists only inside the battle-mode
- * blocks, and those answer 0 for every tank of every account tried.
+ * Three lines on a mode and two on the overall record, which is as far as
+ * Wargaming's API goes. Maximum damage exists only inside the battle-mode
+ * blocks, where it is real for every mode except Random, Clan, Tank Company and
+ * Global Map; nothing reports one for the vehicle as a whole, so the line is
+ * absent there rather than dashed.
  */
-export function recordRows(d: PlayerTankDetail, locale: string): DetailRow[] {
+export function recordRows(d: TankRecordStats, locale: string): DetailRow[] {
   return [
     ...row("Maximum experience", int(d.maxXp, locale)),
     ...row("Maximum destroyed", int(d.maxFrags, locale)),
+    ...row("Maximum damage", int(d.maxDamage, locale)),
   ];
 }
 
 /** The "Average Score per Battle" block, in the game's order. */
-export function averageRows(d: PlayerTankDetail, locale: string): DetailRow[] {
+export function averageRows(d: TankRecordStats, locale: string): DetailRow[] {
   return [
     // The rating first: it is the one line that answers "was this any good",
     // and the rest of the block is what it was computed from.

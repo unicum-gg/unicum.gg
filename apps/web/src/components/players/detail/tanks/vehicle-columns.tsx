@@ -31,6 +31,10 @@ import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.player_vehicle_columns";
 
+/** The WN column's key, named here because two other things hide it: the table
+ * drops it outside Random Battles, and so does the picker below. */
+export const RATING_COLUMN_KEY = "rating";
+
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const DEC2_FORMAT = {
   minimumFractionDigits: 2,
@@ -280,7 +284,7 @@ export const PLAYER_COLUMNS: PlayerColumn[] = [
     rangeValue: (r) => (r.winrate != null ? r.winrate * 100 : null),
   },
   {
-    key: "rating",
+    key: RATING_COLUMN_KEY,
     label: "Rating (WN)",
     align: "end",
     defaultVisible: true,
@@ -355,12 +359,23 @@ export function usePlayerColumns(): [Set<string>, (key: string) => void] {
   return [selected, toggle];
 }
 
-export function PlayerColumnSelector() {
+export function PlayerColumnSelector({
+  /** Outside Random Battles the WN column holds nothing and the table drops it,
+   * so offering it here would be a switch that does nothing. See
+   * `TANK_MODES_RATED`. */
+  rated = true,
+}: {
+  rated?: boolean;
+} = {}) {
   const { t: tStats } = useStatLabels();
   const { t } = useTranslation(
     "components/players/detail/tanks/vehicle-columns",
   );
   const [selected, onToggle] = usePlayerColumns();
+  const offered = useMemo(
+    () => PLAYER_COLUMNS.filter((c) => rated || c.key !== RATING_COLUMN_KEY),
+    [rated],
+  );
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -383,12 +398,12 @@ export function PlayerColumnSelector() {
         <SlidersHorizontalIcon weight="bold" className="size-3.5" />
         {t("columns")}
         <span className="text-fd-muted-foreground">
-          {selected.size}/{PLAYER_COLUMNS.length}
+          {offered.filter((c) => selected.has(c.key)).length}/{offered.length}
         </span>
       </button>
       {open && (
         <div className="absolute left-0 z-20 mt-1 max-h-96 w-56 overflow-y-auto rounded-lg border border-fd-border bg-fd-popover p-2 shadow-lg">
-          {PLAYER_COLUMNS.map((c) => (
+          {offered.map((c) => (
             <label
               key={c.key}
               className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-xs hover:bg-fd-secondary/40"

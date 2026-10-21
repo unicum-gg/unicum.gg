@@ -23,7 +23,17 @@
     "cw-viii": "Clan Wars VIII",
     "cw-vi": "Clan Wars VI",
     "steel-hunter": "Steel Hunter",
-    "onslaught": "Onslaught"
+    "onslaught": "Onslaught",
+    "clan": "Clan Battles",
+    "company": "Tank Company",
+    "team": "Team Battles",
+    "permanent-teams": "Permanent Teams",
+    "historical": "Historical Battles"
+  },
+  "tank-modes": {
+    "globalmap": "Global Map",
+    "ranked_10x10": "Ranked Battles 10x10",
+    "fallout": "Fallout"
   },
   "stronghold-tiers": {
     "advances": "Advances",

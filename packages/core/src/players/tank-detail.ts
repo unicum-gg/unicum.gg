@@ -2,7 +2,9 @@ import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
   buildPlayerTankDetail,
+  buildPlayerTankModeRecords,
   playersByRegion,
+  tankModeBlocks,
   tankSnapshotsByRegion,
   type PlayerTankRecord,
   type TankStats,
@@ -12,6 +14,7 @@ import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/ency
 import { getRatingHistory } from "@unicum.gg/core/players/rating-history";
 import { getTankAwards } from "@unicum.gg/core/players/tank-achievements";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import { getTankModeRows } from "@unicum.gg/core/players/tank-modes";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
@@ -121,7 +124,7 @@ export async function getPlayerTankDetail(
     },
   };
 
-  const [encyclopedia, wn8Expected, wnxExpected, history, awards] =
+  const [encyclopedia, wn8Expected, wnxExpected, history, awards, modeRows] =
     await Promise.all([
       getVehicleEncyclopedia(region),
       getWN8ExpectedValues(),
@@ -144,6 +147,15 @@ export async function getPlayerTankDetail(
         console.error(`[tank-detail] awards failed (${region}/${slug}):`, err);
         return null;
       }),
+      // Where those battles were fought. A read of its own rather than columns
+      // on the snapshot above, because a vehicle has between zero and ten of
+      // these and the primary key's own prefix goes straight to them.
+      getTankModeRows(region, Number(row.pid), identity.tankId).catch((err) => {
+        // Same trade as the medals: the record is worth serving without its
+        // breakdown, and the reverse is not true.
+        console.error(`[tank-detail] modes failed (${region}/${slug}):`, err);
+        return [];
+      }),
     ]);
 
   const detail = buildPlayerTankDetail(
@@ -155,5 +167,24 @@ export async function getPlayerTankDetail(
     wn8Expected,
     wnxExpected,
   );
-  return detail && { ...detail, ratingHistory: history.points, awards };
+  if (!detail) return null;
+  return {
+    ...detail,
+    ratingHistory: history.points,
+    awards,
+    // Random comes out of the snapshot and the two other parts of `all` rather
+    // than out of a row of its own. See `deriveRandomBlock`.
+    modes: buildPlayerTankModeRecords(
+      identity.tankId,
+      tankModeBlocks(
+        tank.all,
+        { maxXp: tank.max_xp ?? null, maxFrags: tank.max_frags ?? null },
+        modeRows,
+      ),
+      identity.meta?.tier ?? null,
+      encyclopedia,
+      wn8Expected,
+      wnxExpected,
+    ),
+  };
 }

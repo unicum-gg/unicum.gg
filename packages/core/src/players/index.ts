@@ -15,10 +15,12 @@ import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
-import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+import type { TankStats, TankStatsWithModes } from "@unicum.gg/core/wargaming/wot/tanks";
 import { writePlayerMarkCounts } from "./mark-counts";
 import { fetchPlayerMarksOnGun } from "./marks";
 import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
+import { bulkUpsertTankModes } from "./tank-modes";
+import { upsertPlayerArchivedModes } from "./archived-modes";
 import { computeDueAt } from "./refresh-policy";
 import { computeWindowRatings, writeTierWindowRatings } from "./window-ratings";
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
@@ -409,7 +411,9 @@ export async function recordCurrentSnapshot(
   region: Region,
   info: PlayerInfo,
   wtr: number | null = null,
-  tanks: TankStats[] = [],
+  // The wide shape, because this is where the per-mode blocks are written from.
+  // Everything downstream of here that only reads `all` keeps the narrow one.
+  tanks: TankStatsWithModes[] = [],
   // Fetch fresh Marks of Excellence from the clan portal. The portal is capped
   // at ~1 RPS/region, so the bulk backfill passes `false` (it would otherwise
   // serialise snapshot writes to one player per second and wreck on-time
@@ -467,8 +471,10 @@ export async function recordCurrentSnapshot(
   if (!stale) {
     if (tanks.length > 0) {
       await bulkInsertTankSnapshots(region, player.id, tanks);
+      await bulkUpsertTankModes(region, player.id, tanks);
       await updatePlayerRatings(region, player.id, info, tanks);
     }
+    await upsertPlayerArchivedModes(region, player.id, info);
     return { player, latest: await backfillWtr(region, latest, wtr) };
   }
 
@@ -618,8 +624,12 @@ export async function recordCurrentSnapshot(
     // the percent the portal has never carried. Applied last so it wins.
     await applyGarageMarks(region, info.account_id, tanks);
     await bulkInsertTankSnapshots(region, player.id, tanks);
+    await bulkUpsertTankModes(region, player.id, tanks);
     await updatePlayerRatings(region, player.id, info, tanks);
   }
+  // Off the same `account/info` this snapshot was built from, so it costs no
+  // call: the five blocks come back whether or not anything asked for them.
+  await upsertPlayerArchivedModes(region, player.id, info);
   publish(playerChannel(region, info.account_id), { kind: "snapshot" });
   // Fresh data just landed: drop the cached detail payload so the next request
   // rebuilds from it instead of serving the (now stale) cache until its TTL.

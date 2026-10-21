@@ -298,8 +298,14 @@ export function useTankFilters<T extends FilterableTank>(
     return VEHICLE_ROLES.filter((r) => present.has(r));
   }, [items]);
 
-  const activeRangeCol =
-    rangeColumns.find((c) => c.key === rangeCol) ?? rangeColumns[0];
+  // Undefined rather than the first column when the named one is gone. A tab
+  // (or a battle mode) can take a range column away while its bounds are still
+  // set, and falling back to `rangeColumns[0]` silently retargets them: a
+  // min of 2000 meant for a rating starts filtering on battles instead, under a
+  // selector still naming the column that left. No column means no range
+  // filter, which is what an absent column honestly implies. Callers that can
+  // see it coming also call `resetRange`, so the visible state follows.
+  const activeRangeCol = rangeColumns.find((c) => c.key === rangeCol);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

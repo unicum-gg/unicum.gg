@@ -11,14 +11,18 @@ import { toRoman } from "roman-numerals";
 import {
   DEFAULT_RATING_METRIC,
   RATING_METRIC_LABEL,
+  DEFAULT_TANK_BATTLE_MODE,
   isRatingMetric,
   type PlayerAchievement,
   type PlayerTankDetail,
+  type PlayerTankModeRecord,
   type RatingHistoryPoint,
+  type TankRecordStats,
 } from "@unicum.gg/shared";
 import { MountOnVisible } from "@/components/mount-on-visible";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { TankAwards } from "./awards";
+import { TankModeSelect } from "./mode-select";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import type { Region } from "@unicum.gg/wargaming";
@@ -37,6 +41,8 @@ import {
   recordRows,
   type DetailRow,
 } from "./detail-rows";
+import { useTankMode } from "@/hooks/use-tank-mode";
+import { tankModeName } from "@/components/game-name";
 
 
 // Same treatment as the profile's own chart: recharts is ~40% of the page's JS,
@@ -64,6 +70,7 @@ export function PlayerTankDetailPanel({
   ratingHistory,
   awards,
   loadout,
+  modes = [],
 }: {
   region: Region;
   detail: PlayerTankDetail;
@@ -78,10 +85,40 @@ export function PlayerTankDetailPanel({
    * players we hold no loadout for, which is most of them: only the mod can
    * read one, and Wargaming publishes none. */
   loadout?: React.ReactNode;
+  /** Where those battles were fought. Empty on a vehicle only ever taken into
+   * Random Battles, which is most of them, and the pills then draw nothing. */
+  modes?: PlayerTankModeRecord[];
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/players/detail/tanks/detail-panel");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const name = detail.shortName || detail.name || `#${detail.tankId}`;
+  // The SAME `?mode=` the table beside it reads, so the Tanks tab has one
+  // notion of which mode is being looked at: a row clicked from a Skirmish list
+  // opens its record on Skirmish, and the link can be sent to somebody.
+  //
+  // A vehicle may hold nothing in the mode the URL names, which a hand-typed
+  // link can do and a click never can (the list only shows what was played in
+  // it). Then Random stands in, or the first mode this vehicle DOES have when
+  // it was never taken into a random battle at all, rather than leaving the
+  // panel on a block it has no numbers for.
+  const [urlMode, setUrlMode] = useTankMode();
+  const holdsUrlMode = modes.some((m) => m.mode === urlMode);
+  const activeMode = holdsUrlMode
+    ? urlMode
+    : modes.some((m) => m.mode === DEFAULT_TANK_BATTLE_MODE)
+      ? DEFAULT_TANK_BATTLE_MODE
+      : (modes[0]?.mode ?? DEFAULT_TANK_BATTLE_MODE);
+  const modeRecord = modes.find((m) => m.mode === activeMode) ?? null;
+  // The table beside this panel is on a mode this vehicle was never taken into,
+  // so the record stayed where it could. Said rather than left to be inferred
+  // from a select that quietly disagrees with the list next to it.
+  const notPlayedIn = !holdsUrlMode && modes.length > 0 ? urlMode : null;
+  // The three blocks read the selected mode: the stat half of the record and
+  // the stat half of a mode are the same shape, which is the whole reason
+  // `TankRecordStats` was split out. `detail` stands in only while the record
+  // predates the breakdown being collected, which fills in on the next refresh.
+  const shown: TankRecordStats = modeRecord ?? detail;
   const [storedMetric] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -102,7 +139,10 @@ export function PlayerTankDetailPanel({
           it. */}
       <PanelHeader
         screenLines={false}
-        className="flex items-center justify-between gap-3 border-b border-fd-border"
+        // `min-h-14` matches the vehicle table's header across from it, see
+        // the note there: the two rules have to meet and their content alone
+        // is four pixels apart.
+        className="flex min-h-14 items-center justify-between gap-3 border-b border-fd-border"
       >
         {/* Tier, flag and class icon ahead of the name, the way the tank page's
             own hero reads them. They say what a "Tier VIII · CZECH · Premium"
@@ -167,9 +207,62 @@ export function PlayerTankDetailPanel({
       </PanelHeader>
 
       <div className="flex flex-col gap-4 overflow-y-auto p-4">
-        <Block title={t("general-parameters")} rows={generalRows(detail, locale)} />
-        <Block title={t("average-score-per-battle")} rows={averageRows(detail, locale)} />
-        <Block title={t("record-score")} rows={recordRows(detail, locale)} />
+        {/* What a mode's numbers are, where the name alone does not say it: a
+            retired ladder is an archive, and Fallout's battles are counted once
+            per vehicle fielded. */}
+        {notPlayedIn ? (
+          <p className={styles.mutedDescription}>
+            {t("never-played-in", { mode: tankModeName(notPlayedIn, tGame) })}
+          </p>
+        ) : null}
+        {modeRecord?.retired || modeRecord?.multiVehicle ? (
+          <p className={styles.mutedDescription}>
+            {modeRecord.multiVehicle
+              ? t("mode-multi-vehicle")
+              : t("mode-retired")}
+          </p>
+        ) : null}
+        {/* The mode rides the first block's heading rather than a headed row of
+            its own. It governs all three blocks below, so a line naming it
+            separately was a heading for a control, stacked above the heading
+            of the thing the control acts on. The select says what it does by
+            sitting on the numbers it changes, which is how the table beside it
+            already carries its own copy, across from the count it narrows. */}
+        <Block
+          title={t("general-parameters")}
+          rows={generalRows(shown, locale)}
+          action={
+            modes.length > 0 ? (
+              <TankModeSelect
+                options={modes.map((m) => ({
+                  mode: m.mode,
+                  // One vehicle, so a count beside each mode would read "1"
+                  // eleven times. The select leaves it out at zero.
+                  tanks: 0,
+                  retired: m.retired,
+                  multiVehicle: m.multiVehicle,
+                }))}
+                // The URL's mode, not the one the blocks fell back to. They
+                // differ only when this vehicle holds nothing in what the URL
+                // names, and the note above says so; showing the fallback here
+                // instead would make picking it a no-op (Radix fires nothing
+                // for the value already selected), leaving the reader no way
+                // out of the mismatch from the control that caused it.
+                active={urlMode}
+                onSelect={setUrlMode}
+                // Named here because its heading no longer is: "General
+                // parameters" says what the block holds, not what the control
+                // does, so the accessible name has to come from the control.
+                label={t("by-mode")}
+                // Narrower than the table's, which appends a vehicle count to
+                // every name and needs the room.
+                className="w-48 shrink-0"
+              />
+            ) : null
+          }
+        />
+        <Block title={t("average-score-per-battle")} rows={averageRows(shown, locale)} />
+        <Block title={t("record-score")} rows={recordRows(shown, locale)} />
 
         <div>
           {/* The same inline picker the profile's chart carries: the metric is
@@ -214,12 +307,33 @@ export function PlayerTankDetailPanel({
   );
 }
 
-function Block({ title, rows }: { title: string; rows: DetailRow[] }) {
+function Block({
+  title,
+  rows,
+  action,
+}: {
+  title: string;
+  rows: DetailRow[];
+  /** A control for the block, on the heading's own line.
+   *
+   * It keeps the block alive on its own: a block with no rows is normally
+   * nothing worth drawing, but the one control that can change which rows
+   * there are must not disappear with them. That is exactly the state a reader
+   * reaches by picking a mode this vehicle was never taken into, and losing
+   * the select there would leave them no way back out of it. */
+  action?: React.ReactNode;
+}) {
   const { t: tStats } = useStatLabels();
-  if (rows.length === 0) return null;
+  if (rows.length === 0 && !action) return null;
   return (
     <div>
-      <h4 className="mb-1.5 text-sm font-semibold">{title}</h4>
+      {/* One line, like the panel's own header: the rows below are a
+          label-and-number list where a heading earns its line, and a single
+          control does not. */}
+      <div className="mb-1.5 flex min-h-8 flex-wrap items-center justify-between gap-3">
+        <h4 className="text-sm font-semibold">{title}</h4>
+        {action}
+      </div>
       {/* Dotted leaders rather than a rule under every line, the way the tank
           page's own characteristics read: the eye follows one label to one
           number instead of crossing a ladder. */}

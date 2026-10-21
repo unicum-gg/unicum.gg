@@ -23,6 +23,13 @@ export type StrongholdModeData = {
 
 // One entry per non-random game mode shown on the player page, keyed by the
 // domain mode name (the WG snapshot column prefixes), not by UI tab id.
+//
+// The first eight are live modes read out of the snapshot series, so they carry
+// periods. The five after them are modes nobody can play any more, read from
+// `*_player_archived_modes`: their totals are finished, so their periods are
+// structurally empty rather than merely unknown, and a player who never played
+// one has no entry at all rather than an entry full of zeroes. That absence is
+// what lets the profile offer a tab only where there is something behind it.
 export type PlayerStrongholdModes = {
   skirmish: StrongholdModeData;
   fortified: StrongholdModeData;
@@ -32,6 +39,11 @@ export type PlayerStrongholdModes = {
   cwAbsolute: StrongholdModeData;
   cwChampion: StrongholdModeData;
   cwMiddle: StrongholdModeData;
+  clan: StrongholdModeData | null;
+  company: StrongholdModeData | null;
+  team: StrongholdModeData | null;
+  regularTeam: StrongholdModeData | null;
+  historical: StrongholdModeData | null;
 };
 
 // The player detail resource: everything the player page tabs render and the

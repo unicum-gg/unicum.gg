@@ -428,7 +428,7 @@ export interface paths {
         };
         /**
          * Player tanks
-         * @description Per-tank rows for a player: the tank-by-tank breakdown with per-battle averages and WN7/WN8/WNX ratings. This is the heavy list on the player page, so it lives on its own endpoint and is loaded on demand (a deep link to `?section=tanks` server-renders it; otherwise the client fetches it when the Tanks section is first opened). 404 when the player is unknown.
+         * @description Per-tank rows for a player: the tank-by-tank breakdown with per-battle averages and WN7/WN8/WNX ratings. This is the heavy list on the player page, so it lives on its own endpoint and is loaded on demand (a deep link to `?section=tanks` server-renders it; otherwise the client fetches it when the Tanks section is first opened). Pass `mode` to get the same rows for one battle mode instead of the vehicle's whole record, narrowed to the vehicles the player actually took into it. 404 when the player is unknown.
          */
         get: operations["get-{region}-players-{nickname}-tanks"];
         put?: never;
@@ -2772,6 +2772,11 @@ export interface components {
             points: number[][];
         };
         /**
+         * @description Wargaming's own key for the battle mode. `random` is derived from the overall figures and the two other parts of them (`all` is `random` + `clan` + `company`, exactly); the rest are stored as reported.
+         * @enum {string}
+         */
+        battleMode: "random" | "clan" | "company" | "globalmap" | "stronghold_skirmish" | "stronghold_defense" | "epic" | "ranked_10x10" | "team" | "regular_team" | "fallout";
+        /**
          * @description How the battle ended, as declared by the submitter.
          * @enum {string}
          */
@@ -4825,6 +4830,7 @@ export interface components {
             markProgress?: components["schemas"]["PlayerMarkProgress"];
             ratingHistory: components["schemas"]["RatingHistoryPoint"][];
             clanHistory: components["schemas"]["PlayerClanHistory"];
+            /** @description Per-mode records. The first eight are live modes read from the snapshot series, so they carry 24h/7d/30d periods. The last five are modes nobody can play any more (Clan Battles, Tank Company, Team Battles, Permanent Teams and Historical Battles): their totals are finished, so their periods are always null, and the whole entry is null for an account that never played the mode. */
             strongholds: {
                 skirmish: components["schemas"]["StrongholdMode"];
                 fortified: components["schemas"]["StrongholdMode"];
@@ -4834,6 +4840,11 @@ export interface components {
                 cwAbsolute: components["schemas"]["StrongholdMode"];
                 cwChampion: components["schemas"]["StrongholdMode"];
                 cwMiddle: components["schemas"]["StrongholdMode"];
+                clan: components["schemas"]["StrongholdMode"] | null;
+                company: components["schemas"]["StrongholdMode"] | null;
+                team: components["schemas"]["StrongholdMode"] | null;
+                regularTeam: components["schemas"]["StrongholdMode"] | null;
+                historical: components["schemas"]["StrongholdMode"] | null;
             };
         };
         /** @description How a region's players and battles are distributed. */
@@ -5158,10 +5169,14 @@ export interface components {
             /** @description Best single battle on the vehicle: the game's Record Score. */
             maxXp: number | null;
             maxFrags: number | null;
+            /** @description Always null on the overall record: Wargaming reports no best-damage figure outside the per-mode blocks, and answers 0 for Random Battles. See `modes[].maxDamage`, which carries it for every other mode. */
+            maxDamage: number | null;
             /** @description Daily rating series for this player on this vehicle, over the last 90 days. */
             ratingHistory: components["schemas"]["TankRatingHistoryPoint"][];
             /** @description Medals earned on this vehicle, in the game's own cabinet order. Earned only, and null when they are not known for this player yet. */
             awards: components["schemas"]["TankAward"][] | null;
+            /** @description Where those battles were fought, in mode order. Empty on a vehicle only ever taken into Random Battles (which is most of them) and on a record predating the breakdown being collected, which fills in on the player's next refresh: Wargaming reports lifetime totals, so there is nothing historical to backfill. */
+            modes: components["schemas"]["PlayerTankModeRecord"][];
         };
         /** @description One player's record on one vehicle. */
         PlayerTankDetailResponse: {
@@ -5217,10 +5232,14 @@ export interface components {
             /** @description Best single battle on the vehicle: the game's Record Score. */
             maxXp: number | null;
             maxFrags: number | null;
+            /** @description Always null on the overall record: Wargaming reports no best-damage figure outside the per-mode blocks, and answers 0 for Random Battles. See `modes[].maxDamage`, which carries it for every other mode. */
+            maxDamage: number | null;
             /** @description Daily rating series for this player on this vehicle, over the last 90 days. */
             ratingHistory: components["schemas"]["TankRatingHistoryPoint"][];
             /** @description Medals earned on this vehicle, in the game's own cabinet order. Earned only, and null when they are not known for this player yet. */
             awards: components["schemas"]["TankAward"][] | null;
+            /** @description Where those battles were fought, in mode order. Empty on a vehicle only ever taken into Random Battles (which is most of them) and on a record predating the breakdown being collected, which fills in on the player's next refresh: Wargaming reports lifetime totals, so there is nothing historical to backfill. */
+            modes: components["schemas"]["PlayerTankModeRecord"][];
         };
         /** @description How this player has set this vehicle up. Null when we hold nothing: Wargaming publishes none of this, so a loadout exists only because that player runs the unicum.gg mod, which reads it from their own client. Null is also the answer for a player who asked for their loadouts not to be shown. */
         PlayerTankLoadoutResponse: {
@@ -5243,8 +5262,61 @@ export interface components {
                 updatedAt: Date;
             } | null;
         };
+        /** @description A battle mode this player's garage has a record in. */
+        PlayerTankModeOption: {
+            mode: components["schemas"]["battleMode"];
+            /** @description Vehicles this player has a record on in this mode. Vehicles rather than battles on purpose: a multi-vehicle mode counts one battle against every vehicle fielded in it, so a battle total over vehicles would be inflated for that mode alone. */
+            tanks: number;
+            retired: boolean;
+            multiVehicle: boolean;
+        };
+        /** @description One player's record on one vehicle in one battle mode. `wn7`, `wn8` and `wnx` are null on every mode but `random`: all three are built against expected values measured on random battles, where a shorter tier-limited format and a win rate nowhere near 50% make them score a mode against a standard it was never set by. */
+        PlayerTankModeRecord: {
+            /**
+             * @description Wargaming's own key for the battle mode. `random` is derived from the overall figures and the two other parts of them (`all` is `random` + `clan` + `company`, exactly); the rest are stored as reported.
+             * @enum {string}
+             */
+            mode: "random" | "clan" | "company" | "globalmap" | "stronghold_skirmish" | "stronghold_defense" | "epic" | "ranked_10x10" | "team" | "regular_team" | "fallout";
+            /** @description The mode is no longer played, so these numbers are an archive that can only shrink as accounts lapse. */
+            retired: boolean;
+            /** @description One battle is counted against every vehicle fielded in it, so these battles must never be summed into a mode total. True for Fallout, which allowed a lineup with respawns. */
+            multiVehicle: boolean;
+            battles: number;
+            /** @description Null on every mode but `random`, along with `wn8` and `wnx`: the expected values behind them are measured on random battles. */
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+            /** @description Ratio in 0..1, not a percentage. */
+            winrate: number;
+            survivalRate: number | null;
+            hitRate: number | null;
+            damageRatio: number | null;
+            destructionRatio: number | null;
+            armorUseEfficiency: number | null;
+            stuns: number | null;
+            avgXp: number | null;
+            avgDamage: number;
+            avgDamageReceived: number | null;
+            avgAssist: number;
+            avgAssistRadio: number;
+            avgAssistTrack: number;
+            avgAssistStun: number | null;
+            avgBlocked: number | null;
+            avgSpotted: number;
+            avgFrags: number;
+            avgCapture: number | null;
+            avgDefense: number;
+            avgStuns: number | null;
+            maxXp: number | null;
+            maxFrags: number | null;
+            maxDamage: number | null;
+        };
         PlayerTanksResponse: {
             tanks: components["schemas"]["PlayerVehicle"][];
+            /** @description The mode the rows describe, or null for the vehicle's whole record. */
+            mode: components["schemas"]["battleMode"] | null;
+            /** @description Every mode this player has a record in, in mode order. Empty for a player whose vehicles predate the breakdown being collected, which fills in on their next refresh: Wargaming reports lifetime totals, so there is nothing historical to backfill. */
+            modes: components["schemas"]["PlayerTankModeOption"][];
         };
         /** @description One tournament a player entered, and how their team finished. */
         PlayerTournamentEntry: {
@@ -7906,7 +7978,9 @@ export interface operations {
     };
     "get-{region}-players-{nickname}-tanks": {
         parameters: {
-            query?: never;
+            query?: {
+                mode?: components["schemas"]["battleMode"];
+            };
             header?: never;
             path: {
                 /** @example eu */

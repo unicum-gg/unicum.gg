@@ -4,5 +4,9 @@
   "metric-progression": "{metric} progression",
   "not-enough-history-on-this": "Not enough history on this tank yet. It needs at least two snapshots in the last 90 days to draw a line.",
   "record-score": "Record score",
-  "updated": "Updated"
+  "updated": "Updated",
+  "mode-retired": "This mode is no longer played, so the record below can only shrink as accounts lapse.",
+  "mode-multi-vehicle": "This mode let you field several vehicles in one battle, so a battle is counted on each of them and these numbers do not add up to a mode total.",
+  "by-mode": "Where it was played",
+  "never-played-in": "This vehicle was never taken into {mode}, so the record below is the one it does have."
 }

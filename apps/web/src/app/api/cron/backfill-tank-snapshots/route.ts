@@ -7,6 +7,7 @@ import {
   tankSnapshotsByRegion,
 } from "@unicum.gg/shared";
 import { bulkInsertTankSnapshots } from "@unicum.gg/core/players/tanks";
+import { bulkUpsertTankModes } from "@unicum.gg/core/players/tank-modes";
 import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 
@@ -54,6 +55,10 @@ async function backfillTankSnapshots(region: Region): Promise<{
         fetched += 1;
         if (tanks.length > 0) {
           await bulkInsertTankSnapshots(region, target.playerId, tanks);
+          // The breakdown rides the same fetch, so a backfill pass fills it in
+          // for the player it just rewrote rather than leaving it to their next
+          // page view.
+          await bulkUpsertTankModes(region, target.playerId, tanks);
           inserted += tanks.length;
         }
       } catch (err) {

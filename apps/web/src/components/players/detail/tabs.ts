@@ -54,7 +54,35 @@ const MODE_SEGMENT: Record<PlayerMode, string | null> = {
   [PlayerMode.ClanWarsVI]: "cw-vi",
   [PlayerMode.SteelHunter]: "steel-hunter",
   [PlayerMode.Onslaught]: "onslaught",
+  [PlayerMode.ClanBattles]: "clan",
+  [PlayerMode.TankCompany]: "company",
+  [PlayerMode.TeamBattles]: "team",
+  [PlayerMode.PermanentTeams]: "permanent-teams",
+  [PlayerMode.Historical]: "historical",
 };
+
+/**
+ * The modes that are offered to everybody.
+ *
+ * The rest are finished: `account/info` still answers their totals, but nobody
+ * can add to them, so a tab saying "no data yet, check back" would be a lie. A
+ * player who played one gets its tab, everyone else never sees it. Same rule as
+ * the map page's History tab, and the same reason.
+ */
+export const ARCHIVED_PLAYER_MODES: PlayerMode[] = [
+  PlayerMode.ClanBattles,
+  PlayerMode.TankCompany,
+  PlayerMode.TeamBattles,
+  PlayerMode.PermanentTeams,
+  PlayerMode.Historical,
+];
+
+const ARCHIVED_MODES = new Set<PlayerMode>(ARCHIVED_PLAYER_MODES);
+
+/** Whether this mode is only shown to an account that has a record in it. */
+export function isArchivedPlayerMode(mode: PlayerMode): boolean {
+  return ARCHIVED_MODES.has(mode);
+}
 
 const MODE_VIEWS: PlayerView[] = (
   Object.keys(PLAYER_MODE_LABEL) as PlayerMode[]
@@ -117,6 +145,17 @@ export const PLAYER_MODES = MODE_VIEWS.map((v) => ({
   id: v.mode,
   label: v.label,
 }));
+
+/**
+ * The modes every account is offered, which is what a skeleton can know.
+ *
+ * Whether an ended mode appears depends on the payload, and a skeleton has
+ * none: painting all fifteen would flash five tabs that vanish on hydration,
+ * on the longest row on the site.
+ */
+export const ALWAYS_SHOWN_PLAYER_MODES = PLAYER_MODES.filter(
+  (m) => !isArchivedPlayerMode(m.id),
+);
 
 /** The view at the bare player path: Overview, Random Battles. */
 export const DEFAULT_PLAYER_VIEW: PlayerView = MODE_VIEWS[0];

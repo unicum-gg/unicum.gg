@@ -7,10 +7,12 @@ import {
   DEFAULT_PLAYER_VIEW,
   PlayerMode,
   PlayerSection,
+  isArchivedPlayerMode,
   type PlayerView,
   playerViewHref,
 } from "@/components/players/detail/tabs";
 import { PlayerProfile } from "@/components/players/detail/view";
+import { archivedModeRecord } from "@/components/players/detail/overview/mode-tank-view";
 import { AccountLockedView } from "@/components/players/detail/account-locked";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
@@ -33,7 +35,8 @@ import {
   type PlayerDetailData,
   type PlayerSession,
   type PlayerTankRecord,
-  type PlayerTankRow,
+  DEFAULT_TANK_BATTLE_MODE,
+  type PlayerTanksPayload,
   type StoredPlayerLoadout,
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
@@ -289,6 +292,21 @@ async function PlayerProfileServer({
   }
   if (!detail) notFound();
 
+  // A mode nobody can play any more only has a page where the account has a
+  // record in it. The nav already hides the tab, but the SEGMENT resolves for
+  // anyone, and this route is `force-static` with a 24h revalidate, a canonical
+  // and 36 hreflang alternates: ungated, that is five indexable pages per
+  // player across millions of profiles whose whole body is "no data yet", each
+  // one holding a slot in the ISR cache this project has already filled once.
+  // `loadMapTab` turns a tab its map has nothing for into a redirect for the
+  // same reason; here the profile itself is the honest destination.
+  if (
+    isArchivedPlayerMode(view.mode) &&
+    archivedModeRecord(detail, view.mode) === null
+  ) {
+    redirect(localizePath(ROUTES.PLAYER(region, detail.player.nickname), locale));
+  }
+
   // Send the visitor to the nickname this account actually goes by. Two cases
   // land here: a different casing (the lookup is case-insensitive, so
   // `/players/animal` resolves but would otherwise sit at its own URL), and a
@@ -312,10 +330,15 @@ async function PlayerProfileServer({
   // demand. Server-render it only for a `?section=tanks` deep-link (SEO /
   // crawlers); with the static section default it is normally null, so the
   // client loads it lazily when the section is first opened.
-  const initialTanks: PlayerTankRow[] | null =
+  const initialTanks: PlayerTanksPayload | null =
     section === PlayerSection.Tanks
-      ? ((await unicum.region(region).players(decoded).tanks())
-          .tanks as unknown as PlayerTankRow[])
+      ? ((await unicum
+          .region(region)
+          .players(decoded)
+          // The mode the tab opens on, so the server renders the table the
+          // client is about to want rather than one it would immediately
+          // refetch. There is no overall view; see `DEFAULT_TANK_BATTLE_MODE`.
+          .tanks(DEFAULT_TANK_BATTLE_MODE)) as unknown as PlayerTanksPayload)
       : null;
   // Same treatment for the medal cabinet: server-rendered when the visitor
   // landed straight on `/achievements`, so a crawler (and the first paint) get

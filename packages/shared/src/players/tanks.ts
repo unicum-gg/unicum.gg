@@ -7,6 +7,8 @@ import {
   type WNXExpected,
 } from "../wot/ratings";
 import { buildTankSlugIndex } from "../wot/tanks/slug";
+import type { TankBattleMode } from "../wot/tank-modes";
+import type { TankModeAvailability } from "./tank-modes";
 import type { TankStats } from "../wot/tank-stats";
 import type { VehicleMeta } from "../wot/tanks/meta";
 import type { TankMarkReach } from "./mark-progress";
@@ -73,6 +75,8 @@ export type PlayerTankRow = {
   avgDamage: number | null;
   avgXp: number | null;
   winrate: number | null;
+  /** Null when the rows describe a mode the WN ratings do not apply to, which
+   * is every mode but Random Battles. See `TANK_MODES_RATED`. */
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
@@ -91,6 +95,21 @@ export type TankEconomics = {
   researchXp: number | null;
 };
 
+/**
+ * `rated` decides whether the three WN ratings are computed.
+ *
+ * False for every battle mode but Random: the expected values behind them are
+ * measured on random battles, so elsewhere they score a format against a
+ * standard it was never set by. Null rather than a wrong number, which is what
+ * lets the table drop the column instead of filling it with dashes. See
+ * `TANK_MODES_RATED`.
+ *
+ * It composes with `played` rather than replacing it, because the two are
+ * different absences: `played` is a vehicle with no record to rate (owned,
+ * never driven, which only a verified garage can even show), and `rated` is a
+ * record with no standard to rate it against. Either one alone is enough to
+ * make a rating meaningless, so both have to hold.
+ */
 export function buildPlayerTankRows(
   tanks: TankStats[],
   encyclopedia: Record<string, VehicleMeta>,
@@ -99,6 +118,7 @@ export function buildPlayerTankRows(
   economics?: Map<number, TankEconomics>,
   /** The account's verified garage, when one has been read. */
   garage?: ReadonlySet<number> | null,
+  rated = true,
 ): PlayerTankRow[] {
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
   const { idToSlug } = buildTankSlugIndex(encyclopedia);
@@ -146,7 +166,7 @@ export function buildPlayerTankRows(
         avgDamage,
         avgXp,
         winrate: played ? tank.all.wins / battles : null,
-        wn7: played
+        wn7: played && rated
           ? computeWN7(
               {
                 battles,
@@ -159,10 +179,11 @@ export function buildPlayerTankRows(
               meta?.tier ?? null,
             )
           : null,
-        wn8: played
-          ? computeWN8([tank], wn8Expected, encyclopedia, wn8Fallback)
-          : null,
-        wnx: played ? computeWNX([tank], wnxExpected) : null,
+        wn8:
+          played && rated
+            ? computeWN8([tank], wn8Expected, encyclopedia, wn8Fallback)
+            : null,
+        wnx: played && rated ? computeWNX([tank], wnxExpected) : null,
         buyGold: economics?.get(tank.tank_id)?.buyGold ?? null,
         buyCredits: economics?.get(tank.tank_id)?.buyCredits ?? null,
         researchXp: economics?.get(tank.tank_id)?.researchXp ?? null,
@@ -219,3 +240,21 @@ export function buildPlayerTankRows(
   }
   return rows;
 }
+
+
+/**
+ * The garage list as the endpoint serves it: the rows, which battle mode they
+ * describe, and what else the player has a record in.
+ *
+ * The last two ride the same payload rather than an endpoint of their own,
+ * because the selector has to be right on the first paint: fetched separately
+ * it would appear a beat after the table, and a reader would see the mode they
+ * are already looking at arrive as an option.
+ */
+export type PlayerTanksPayload = {
+  tanks: PlayerTankRow[];
+  /** Null for the vehicle's whole record, which is what the rest of the site
+   * means by its stats. */
+  mode: TankBattleMode | null;
+  modes: TankModeAvailability[];
+};

@@ -4,15 +4,16 @@ import {
   type PeriodStats,
   type PlayerDerivedStats,
   buildLiftDrag,
-  type LiftDrag,
   buildPlayerTankRows,
-  type PlayerTankRow,
+  type LiftDrag,
   type Player,
   type PlayerSnapshot,
   type PlayerClanHistoryFull,
   EMPTY_CLAN_HISTORY,
   type PlayerDetailData,
   type StrongholdModeData,
+  type PlayerStrongholdModes,
+  PlayerArchivedMode,
   lastBattleOrNull,
 } from "@unicum.gg/shared";
 import {
@@ -72,7 +73,7 @@ import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
-import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+import type { TankStats, TankStatsWithModes } from "@unicum.gg/core/wargaming/wot/tanks";
 import { computePlayerValuation, type TankEconomics } from "@unicum.gg/shared";
 import { loadPlayerGarage } from "@unicum.gg/core/players/garage";
 import { buildPlayerMarkProgress, withTankMarkReach } from "@unicum.gg/shared";
@@ -211,6 +212,35 @@ export async function buildPlayerDetail(args: {
     ),
   };
 
+  /**
+   * The modes that ended, in the payload's shape.
+   *
+   * A finished record has a total and no periods, so `periods` is three nulls
+   * rather than three zeroes: nothing was measured over those windows, and the
+   * panel reads a null as "no reading" where it reads a zero as "no battles".
+   * Absent entirely where the account never played the mode.
+   */
+  function archivedModes(
+    stats: Map<PlayerArchivedMode, StrongholdStats>,
+  ): Pick<
+    PlayerStrongholdModes,
+    "clan" | "company" | "team" | "regularTeam" | "historical"
+  > {
+    const read = (m: PlayerArchivedMode): StrongholdModeData | null => {
+      const current = stats.get(m);
+      return current
+        ? { current, periods: { h24: null, d7: null, d30: null } }
+        : null;
+    };
+    return {
+      clan: read(PlayerArchivedMode.Clan),
+      company: read(PlayerArchivedMode.Company),
+      team: read(PlayerArchivedMode.TeamBattles),
+      regularTeam: read(PlayerArchivedMode.PermanentTeams),
+      historical: read(PlayerArchivedMode.Historical),
+    };
+  }
+
   function mode(
     fromSnap: (s: PlayerSnapshot) => StrongholdStats | null,
   ): StrongholdModeData {
@@ -337,6 +367,9 @@ export async function buildPlayerDetail(args: {
       cwAbsolute: mode(cwAbsoluteStatsFromSnapshot),
       cwChampion: mode(cwChampionStatsFromSnapshot),
       cwMiddle: mode(cwMiddleStatsFromSnapshot),
+      // Finished records, so a total and no periods. Null where the account
+      // never played the mode, which is what keeps its tab off the nav.
+      ...archivedModes(initial.archivedModes),
     },
   };
 }
@@ -380,7 +413,7 @@ export async function loadPlayerDetail(
  * a career average as 30-day form is the one mistake here that cannot be seen
  * in the output.
  */
-function recentTankStats(
+export function recentTankStats(
   tanks: TankStats[],
   baseline: PlayerSnapshot | null,
   baselineTanks: TankSnapshotMap,
@@ -388,64 +421,6 @@ function recentTankStats(
   if (!baseline || baseline.battles === 0) return null;
   return baselineTanks.size > 0 ? diffTanks(tanks, baselineTanks) : null;
 }
-
-/**
- * Loader for the on-demand per-tank list endpoint (the heavy `vehicles` array
- * that used to ride along in the detail payload). Resolves the player from the
- * DB, loads the latest per-tank snapshots and builds the rows the exact same way
- * `buildPlayerDetail` does. DB-only (no live WG fetch): the detail endpoint
- * already resolves/records cold accounts, so by the time the Tanks section is
- * opened the player is tracked. Returns null when the player is unknown.
- */
-export async function loadPlayerTanks(
-  region: Region,
-  nickname: string,
-): Promise<PlayerTankRow[] | null> {
-  const initial = await loadPlayerInitialData(region, { nickname });
-  if (!initial.player) return null;
-
-  const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
-  await applyGarageMarks(region, initial.player.accountId, tanks);
-  const [encyclopedia, wn8Expected, wnxExpected, specs, garage, moeThresholds] =
-    await Promise.all([
-      getVehicleEncyclopedia(region),
-      getWN8ExpectedValues(),
-      getWNXExpectedValues(),
-      getAllTankSpecs(),
-      loadPlayerGarage(region, initial.player.accountId),
-      // The region's mark bars, for the mark column. A cached catalogue read
-      // like the detail endpoint's, so the heaviest list we serve pays nothing
-      // for it, and the table is where the reader asks "which of these could I
-      // mark" in the first place.
-      getTankMoeByRegion(region),
-    ]);
-  const economics = new Map<number, TankEconomics>();
-  for (const [tankId, s] of specs) {
-    economics.set(tankId, {
-      buyGold: s.buyGold,
-      buyCredits: s.buyCredits,
-      researchXp: s.researchXp,
-    });
-  }
-  return withTankMarkReach(
-    buildPlayerTankRows(
-      tanks,
-      encyclopedia,
-      wn8Expected,
-      wnxExpected,
-      economics,
-      garage?.tankIds ?? null,
-    ),
-    tanks,
-    recentTankStats(
-      tanks,
-      initial.periodSnapshots.d30,
-      initial.periodTankSnapshots.d30,
-    ),
-    moeThresholds,
-  );
-}
-
 export enum PlayerDetailLiveStatus {
   /** Full detail payload available. */
   Found = "found",
@@ -532,7 +507,7 @@ export async function loadPlayerDetailLive(
   const [fetchedTanks, fetchedWtr, fetchedClanHistory] = await Promise.all([
     getTanksStats(region, accountId).catch((err) => {
       console.warn("[player detail] getTanksStats failed:", err);
-      return [] as TankStats[];
+      return [] as TankStatsWithModes[];
     }),
     getAccountWTR(region, accountId).catch(() => null),
     loadPlayerClanHistoryFromWG(region, accountId).catch((err) => {

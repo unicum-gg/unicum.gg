@@ -12,7 +12,7 @@ import {
 } from "@unicum.gg/core/wargaming/wot/accounts";
 import {
   getTanksStatsBatch,
-  type TankStats,
+  type TankStatsWithModes,
 } from "@unicum.gg/core/wargaming/wot/tanks";
 import { recordCurrentSnapshot } from ".";
 import { dueAtSql } from "./refresh-policy";
@@ -398,9 +398,9 @@ async function processRegionBatch(
     changedIds.length
       ? getTanksStatsBatch(region, changedIds).catch((err) => {
           console.error(`[snapshot-pipeline-${region}] tanks/stats batch failed:`, err);
-          return new Map<number, TankStats[]>();
+          return new Map<number, TankStatsWithModes[]>();
         })
-      : new Map<number, TankStats[]>(),
+      : new Map<number, TankStatsWithModes[]>(),
     changedIds.length
       ? getAccountsWTRBatch(region, changedIds).catch((err) => {
           console.error(`[snapshot-pipeline-${region}] wtr batch failed:`, err);

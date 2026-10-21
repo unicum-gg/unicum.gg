@@ -149,6 +149,11 @@ export const GAME_NAME_FAMILIES: readonly string[] = [
   "battle-types",
   "clan-modes",
   "player-modes",
+  // The three per-vehicle mode names nothing else in the catalogue carries.
+  // They have a family BECAUSE a model answered each with a different synonym
+  // per file, which is the failure this rule exists for, so leaving them out
+  // would exempt the names that needed it most.
+  "tank-modes",
   "clan-boards",
   "stronghold-tiers",
   "features",
@@ -361,10 +366,20 @@ export function missingGameName(
  * covered, which errs towards saying nothing rather than towards reporting a
  * sentence nobody wrote wrong.
  */
+/**
+ * The helpers that resolve a catalogued name whose family is decided at
+ * runtime. A placeholder filled through one of these holds a catalogued name
+ * just as surely as a literal `tGame("features.stronghold")` does, and reading
+ * only the literal spelling would exempt every name that needs a resolver,
+ * which is exactly the set with more than one possible home.
+ */
+const GAME_NAME_RESOLVERS = ["tankModeName", "battleTypeName", "mapModeName"];
+
 export function catalogueFilledPlaceholders(sources: Iterable<string>): Set<string> {
   const families = GAME_NAME_FAMILIES.join("|");
+  const resolvers = GAME_NAME_RESOLVERS.join("|");
   const call = new RegExp(
-    `(\\w+)\\s*:\\s*t[A-Za-z]*\\(\\s*["'\`](?:${families})\\.`,
+    `(\\w+)\\s*:\\s*(?:t[A-Za-z]*\\(\\s*["'\`](?:${families})\\.|(?:${resolvers})\\()`,
     "g",
   );
   const found = new Set<string>();

@@ -1,5 +1,10 @@
 import type { TranslateFunction } from "@onruntime/translations";
-import { BattleType, resolveMapMode } from "@unicum.gg/shared";
+import {
+  BattleType,
+  TANK_MODE_VOCABULARY_KEY,
+  resolveMapMode,
+  type TankBattleMode,
+} from "@unicum.gg/shared";
 
 /**
  * A battle type's name in the reader's language.
@@ -188,4 +193,28 @@ export function masteryBadgeName(
 ): string {
   const key = (["class3", "class2", "class1", "ace"] as const)[mastery - 1];
   return tGame(`mastery-badges.${key}`);
+}
+
+/**
+ * What the game calls one of a VEHICLE's battle modes, in the reader's
+ * language.
+ *
+ * The eleven modes Wargaming reports a vehicle's record in do not have a family
+ * of their own in the catalogue, and deliberately: four of their names were
+ * already catalogued under the family that needed them first (Skirmish under
+ * the features, Advances and Grand Battles under the profile's mode tabs,
+ * Random Battles under the clan modes), and a name the catalogue renders two
+ * ways holds nothing to either rendering. So `TANK_MODE_VOCABULARY_KEY` says
+ * where each one lives and this reads it there.
+ *
+ * Anything that renders one goes through here rather than guessing a path, for
+ * the reason `battleTypeName` and `mapModeName` exist: a raw read of a key the
+ * family does not carry answers with the key and silently falls back to
+ * English.
+ */
+export function tankModeName(
+  mode: TankBattleMode,
+  tGame: TranslateFunction,
+): string {
+  return tGame(TANK_MODE_VOCABULARY_KEY[mode]);
 }

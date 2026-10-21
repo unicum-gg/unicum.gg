@@ -69,6 +69,7 @@ import { MAP_POI_LABEL } from "@unicum.gg/shared/wot/maps/points-of-interest";
 import { ONSLAUGHT_RANK_LABEL } from "@unicum.gg/shared/wot/onslaught-ranks";
 import { SPAWN_DIRECTION_LABEL } from "@unicum.gg/shared/wot/tanks/videos";
 import { TOURNAMENT_GAME_MODE_LABEL } from "@unicum.gg/shared/wot/tournaments";
+import { TANK_MODE_VOCABULARY } from "@unicum.gg/shared/wot/tank-modes";
 import { PLAYER_MODE_LABEL } from "../src/components/players/detail/modes";
 import { WARGAMING_LANGUAGE } from "../src/lib/game-vocabulary";
 import { DEFAULT_LOCALE, type Locale } from "../src/lib/translations";
@@ -187,6 +188,14 @@ function englishVocabulary(): Json {
       [BattleType.OnslaughtNight]: "{onslaught} Night",
     },
     "player-modes": { ...PLAYER_MODE_LABEL },
+    // The modes a VEHICLE's record is reported in, which is not the profile's
+    // list: Wargaming answers a different set per vehicle than per account (one
+    // Global Map block where the account splits into three Clan Wars tiers,
+    // plus four retired ladders the profile never showed). Taken from their own
+    // API reference's descriptions rather than invented. Only the names no
+    // other family already carried: a name rendered twice holds nothing to
+    // either rendering, so `tankModeName` reads the other four where they are.
+    "tank-modes": { ...TANK_MODE_VOCABULARY },
     "stronghold-tiers": { ...STRONGHOLD_TIER_LABEL },
     "stronghold-periods": { ...STRONGHOLD_PERIOD_LABEL },
     "stronghold-sorts": { ...STRONGHOLD_SORT_LABEL },

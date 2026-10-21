@@ -1,7 +1,21 @@
 import { sql } from "drizzle-orm";
 import { traced, tracedSync } from "@unicum.gg/core/lib/perf-trace";
 import { db } from "@unicum.gg/core/db";
-import { type Player, type PlayerSnapshot, type TankSnapshot, playerClanHistoryByRegion, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, type PlayerClanHistoryFull } from "@unicum.gg/shared";
+import {
+  type Player,
+  type PlayerArchivedMode,
+  type PlayerArchivedModeRow,
+  type PlayerSnapshot,
+  type StrongholdStats,
+  type TankSnapshot,
+  playerArchivedModesByRegion,
+  playerClanHistoryByRegion,
+  playerSnapshotsByRegion,
+  playersByRegion,
+  tankSnapshotsByRegion,
+  type PlayerClanHistoryFull,
+} from "@unicum.gg/shared";
+import { archivedModeStats } from "@unicum.gg/core/players/archived-modes";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   type SerializedClanHistory,
@@ -200,6 +214,9 @@ export type PlayerInitialData = {
   latestSnapshot: PlayerSnapshot | null;
   latestTankSnapshots: TankSnapshot[];
   clanHistory: { fetchedAt: Date; data: PlayerClanHistoryFull } | null;
+  /** The modes nobody can play any more, keyed by mode. Empty for an account
+   * that played none of them, which is most. See `PlayerArchivedMode`. */
+  archivedModes: Map<PlayerArchivedMode, StrongholdStats>;
   periodSnapshots: {
     h24: PlayerSnapshot | null;
     d7: PlayerSnapshot | null;
@@ -211,6 +228,46 @@ export type PlayerInitialData = {
     d30: TankSnapshotMap;
   };
 };
+
+
+/** `json_agg` gives the row with its column names, so the numbers arrive as
+ * JSON numbers or strings depending on the column type. Narrowed back here,
+ * beside the other `*FromRaw` readers. */
+type RawArchivedMode = {
+  player_id: number;
+  mode: string;
+  battles: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  survived_battles: number;
+  frags: number;
+  damage_dealt: number | string;
+  spotted: number;
+  capture_points: number;
+  dropped_capture_points: number;
+  battle_avg_xp: number;
+  updated_at: string;
+};
+
+function archivedModeFromRaw(r: RawArchivedMode): PlayerArchivedModeRow {
+  return {
+    playerId: Number(r.player_id),
+    mode: r.mode,
+    battles: Number(r.battles),
+    wins: Number(r.wins),
+    losses: Number(r.losses),
+    draws: Number(r.draws),
+    survivedBattles: Number(r.survived_battles),
+    frags: Number(r.frags),
+    damageDealt: Number(r.damage_dealt),
+    spotted: Number(r.spotted),
+    capturePoints: Number(r.capture_points),
+    droppedCapturePoints: Number(r.dropped_capture_points),
+    battleAvgXp: Number(r.battle_avg_xp),
+    updatedAt: new Date(r.updated_at),
+  };
+}
 
 function playerFromRaw(r: RawPlayer): Player {
   return {
@@ -434,6 +491,7 @@ export async function loadPlayerInitialData(
   const playerSnapshots = playerSnapshotsByRegion[region];
   const tankSnapshots = tankSnapshotsByRegion[region];
   const playerClanHistory = playerClanHistoryByRegion[region];
+  const archivedModes = playerArchivedModesByRegion[region];
 
   const matchClause =
     "accountId" in lookup
@@ -531,6 +589,12 @@ export async function loadPlayerInitialData(
        FROM ${playerClanHistory} ch
        WHERE ch.account_id = ${accountIdClause}
        LIMIT 1) AS clan_history,
+      -- The modes that ended. In this query rather than a read of its own:
+      -- the primary key takes it straight to at most five narrow rows, and
+      -- most accounts have none.
+      (SELECT COALESCE(json_agg(am.*), '[]'::json)
+       FROM ${archivedModes} am
+       WHERE am.player_id = (SELECT id FROM p)) AS archived_modes,
       (SELECT row_to_json(snap_24h.*) FROM snap_24h) AS snap_24h,
       (SELECT row_to_json(snap_7d.*) FROM snap_7d) AS snap_7d,
       (SELECT row_to_json(snap_30d.*) FROM snap_30d) AS snap_30d,
@@ -542,6 +606,7 @@ export async function loadPlayerInitialData(
     latest_snapshot: RawPlayerSnapshot | null;
     latest_tank_snapshots: RawTankSnapshot[] | null;
     clan_history: RawClanHistory | null;
+    archived_modes: RawArchivedMode[] | null;
     snap_24h: RawPlayerSnapshot | null;
     snap_7d: RawPlayerSnapshot | null;
     snap_30d: RawPlayerSnapshot | null;
@@ -562,6 +627,9 @@ export async function loadPlayerInitialData(
           data: deserializeClanHistory(row.clan_history.data as SerializedClanHistory),
         }
       : null,
+    archivedModes: archivedModeStats(
+      (row.archived_modes ?? []).map(archivedModeFromRaw),
+    ),
     periodSnapshots: {
       h24: row.snap_24h ? snapshotFromRaw(row.snap_24h) : null,
       d7: row.snap_7d ? snapshotFromRaw(row.snap_7d) : null,

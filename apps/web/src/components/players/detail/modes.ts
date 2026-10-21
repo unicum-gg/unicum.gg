@@ -15,6 +15,14 @@ export enum PlayerMode {
   ClanWarsVI = "cw-vi",
   SteelHunter = "steel-hunter",
   Onslaught = "onslaught",
+  // Modes nobody can play any more, whose record `account/info` still answers
+  // and the profile never read. Offered only to the accounts that played them;
+  // see `PLAYER_ARCHIVED_MODES` and `availablePlayerModes`.
+  ClanBattles = "clan",
+  TankCompany = "company",
+  TeamBattles = "team",
+  PermanentTeams = "permanent-teams",
+  Historical = "historical",
 }
 
 /**
@@ -36,4 +44,11 @@ export const PLAYER_MODE_LABEL: Record<PlayerMode, string> = {
   [PlayerMode.ClanWarsVI]: "Clan Wars VI",
   [PlayerMode.SteelHunter]: "Steel Hunter",
   [PlayerMode.Onslaught]: "Onslaught",
+  // The same strings `TANK_BATTLE_MODE_LABEL` gives the per-vehicle blocks:
+  // one mode seen from two sides must not meet a reader under two words.
+  [PlayerMode.ClanBattles]: "Clan Battles",
+  [PlayerMode.TankCompany]: "Tank Company",
+  [PlayerMode.TeamBattles]: "Team Battles",
+  [PlayerMode.PermanentTeams]: "Permanent Teams",
+  [PlayerMode.Historical]: "Historical Battles",
 };

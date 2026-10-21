@@ -1,3 +1,4 @@
+export * from "./archived-modes";
 export * from "./achievements";
 export * from "./badge-flags";
 export * from "./derived-stats";
@@ -13,5 +14,6 @@ export * from "./sessions";
 export * from "./stats";
 export * from "./stronghold-stats";
 export * from "./tank-detail";
+export * from "./tank-modes";
 export * from "./tanks";
 export * from "./valuation";

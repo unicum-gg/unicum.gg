@@ -1,3 +1,43 @@
+import type { TankBattleMode } from "./tank-modes";
+
+/**
+ * The counters one battle-mode block reports.
+ *
+ * The first eighteen are in every block Wargaming answers, zeroed rather than
+ * absent on a vehicle the mode was never played in. The rest depend on the
+ * mode: the armour figures come with `fallout`, `globalmap` and the two
+ * Stronghold blocks only, and the record scores with every mode except
+ * `company` and `globalmap`. See `TankBattleMode`.
+ */
+export type TankModeStatistics = {
+  battles: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  survived_battles: number;
+  frags: number;
+  damage_dealt: number;
+  damage_received: number;
+  spotted: number;
+  capture_points: number;
+  dropped_capture_points: number;
+  xp: number;
+  hits: number;
+  shots: number;
+  radio_assisted_damage: number;
+  track_assisted_damage: number;
+  stun_number: number;
+  stun_assisted_damage: number;
+  piercings?: number;
+  /** Per battle, as Wargaming reports it. Stored cumulative. */
+  avg_damage_blocked?: number;
+  tanking_factor?: number;
+  /** The game's Record Score, for this mode. Maxima, never to be diffed. */
+  max_damage?: number;
+  max_xp?: number;
+  max_frags?: number;
+};
+
 /** The curated per-tank shape the app consumes (a narrow slice of the WG
  * response). Client-safe type (no I/O); the fetcher lives in core
  * (`wargaming/wot/tanks`). */
@@ -53,3 +93,18 @@ export type TankStats = {
     tanking_factor?: number;
   };
 };
+
+/**
+ * The same row with the per-mode blocks beside `all`.
+ *
+ * Wargaming puts them at the top level as siblings of `all`, keyed by the mode
+ * name, so the shape follows theirs: a mapped type over `TankBattleMode`, whose
+ * values ARE those keys. Every block is optional because `fields` decides which
+ * come back, and `null` is Wargaming's answer for an `extra` block on a vehicle
+ * the mode was never played in (the non-extra blocks come back zeroed instead).
+ *
+ * A supertype of `TankStats`, so the readers that only ever wanted `all` keep
+ * taking the narrow type and need no change.
+ */
+export type TankStatsWithModes = TankStats &
+  Partial<Record<TankBattleMode, TankModeStatistics | null>>;

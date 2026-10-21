@@ -20,7 +20,7 @@ import { PlayerClansHistory } from "@/components/players/detail/overview/clans-h
 import { ValueTab } from "@/components/players/detail/value";
 import { TANKS_SKELETON_COLUMNS } from "@/components/players/detail/tanks/skeleton-columns";
 import {
-  PLAYER_MODES,
+  ALWAYS_SHOWN_PLAYER_MODES,
   PLAYER_SECTIONS,
   PlayerMode,
   PlayerSection,
@@ -175,7 +175,7 @@ export function PlayerProfileSkeleton({
           <Panel>
             <PanelHeader className="px-0! py-0!" screenLines={false}>
               <StaticNav
-              items={PLAYER_MODES}
+              items={ALWAYS_SHOWN_PLAYER_MODES}
               activeId={mode}
               label={(id) => tGame(`player-modes.${id}`)}
             />

@@ -440,14 +440,24 @@ export const PlayerDetailResponse = z.object({
   markProgress: markProgress.optional(),
   ratingHistory: z.array(ratingHistoryPoint),
   clanHistory: playerClanHistory,
-  strongholds: z.object({
-    skirmish: strongholdMode,
-    fortified: strongholdMode,
-    epic: strongholdMode,
-    ranked: strongholdMode,
-    fallout: strongholdMode,
-    cwAbsolute: strongholdMode,
-    cwChampion: strongholdMode,
-    cwMiddle: strongholdMode,
-  }),
+  strongholds: z
+    .object({
+      skirmish: strongholdMode,
+      fortified: strongholdMode,
+      epic: strongholdMode,
+      ranked: strongholdMode,
+      fallout: strongholdMode,
+      cwAbsolute: strongholdMode,
+      cwChampion: strongholdMode,
+      cwMiddle: strongholdMode,
+      clan: strongholdMode.nullable(),
+      company: strongholdMode.nullable(),
+      team: strongholdMode.nullable(),
+      regularTeam: strongholdMode.nullable(),
+      historical: strongholdMode.nullable(),
+    })
+    .meta({
+      description:
+        "Per-mode records. The first eight are live modes read from the snapshot series, so they carry 24h/7d/30d periods. The last five are modes nobody can play any more (Clan Battles, Tank Company, Team Battles, Permanent Teams and Historical Battles): their totals are finished, so their periods are always null, and the whole entry is null for an account that never played the mode.",
+    }),
 });
