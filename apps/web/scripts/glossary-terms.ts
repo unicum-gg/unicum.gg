@@ -26,7 +26,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { typographic } from "./translation-rules";
+import { isIdentifier, typographic } from "./translation-rules";
 
 export const GLOSSARY_DIR = join(
   dirname(fileURLToPath(import.meta.url)),
@@ -98,7 +98,9 @@ export function glossaryTerms(locale: string): Map<string, string> {
     if (!source) continue;
     const from = glossaryTitle(readFileSync(source, "utf-8"));
     const to = glossaryTitle(readFileSync(path, "utf-8"));
-    if (from && to) out.set(from, typographic(to));
+    // An identifier is written as itself by the interface translator ("ELO"
+    // stays "ELO"), whatever the entry is titled, so it decides nothing here.
+    if (from && to && !isIdentifier(from)) out.set(from, typographic(to));
   }
   return out;
 }

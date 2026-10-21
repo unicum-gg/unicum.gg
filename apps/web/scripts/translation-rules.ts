@@ -33,6 +33,23 @@ export const GAME_OWNED_PATH = join(
 /** `game-owned.json`: locale, then namespace, then the client's dotted keys. */
 export type GameOwnedKeys = Record<string, Record<string, string[]>>;
 
+/**
+ * A value that is an identifier rather than a word: `WN8`, `WR`, `HRB`, `MoE`.
+ *
+ * These are the names of metrics and they are the same in every language, the
+ * way `WN8` is. A model asked to translate one obliges: French came back with
+ * `VH` for `HR`, Greek with `ΠΕ`, Russian with `Успех`, and a column header
+ * became a word nobody can look up. Thirty-two of them across the tree.
+ *
+ * Recognised by shape rather than by a list, so a metric we add is covered the
+ * day it appears: short, no spaces, and at least two capitals, which is what
+ * separates `HRb` from `Tier` and from any real word.
+ */
+export function isIdentifier(value: string): boolean {
+  if (value.length > 5 || /\s/.test(value)) return false;
+  return [...value].filter((c) => c >= "A" && c <= "Z").length >= 2;
+}
+
 /** The apostrophe is one character, and it is not the one on the keyboard.
  *
  * French elides, English contracts, Turkish suffixes a symbol, and all three
