@@ -58,7 +58,8 @@ function boardHref(region: Region, standing: Standing, isLatest: boolean) {
  * The player's Onslaught record: where they stand this season, how they climbed
  * to it, and every season they have ranked in before.
  *
- * A battle mode beside Steel Hunter, but one that renders nothing like the
+ * A battle mode beside the stronghold-style tabs, but one that renders
+ * nothing like the
  * others: the rest of that row draw the per-account statistics Wargaming
  * publishes per mode, and Onslaught has none (the per-player dossier is
  * readable only from inside a game session). What exists is a standing on a

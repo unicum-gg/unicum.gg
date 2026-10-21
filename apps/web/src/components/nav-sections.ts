@@ -74,7 +74,7 @@ export function navSections(
         {
           id: "players-steel-hunter",
           label: tGame("player-modes.steel-hunter"),
-          href: ROUTES.PLAYERS_STEEL_HUNTER(region),
+          href: ROUTES.PLAYERS_RAMPAGE(region),
           description: t("links.players-steel-hunter.description"),
         },
         {

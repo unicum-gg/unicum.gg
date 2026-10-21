@@ -162,7 +162,7 @@ function RatingCells({ row }: { row: MarksRow }) {
  * Every column ranks a different population, which is why a header click
  * re-fetches instead of reordering: a player with three hundred low-tier marks
  * leads the total and is nowhere near the tier X column. Same mechanism as the
- * Steel Hunter board, including the `?sort=` deep link the static page can only
+ * Rampage board, including the `?sort=` deep link the static page can only
  * read after mount.
  *
  * The tier columns come from `tiers`, which the endpoint derives from the rows,

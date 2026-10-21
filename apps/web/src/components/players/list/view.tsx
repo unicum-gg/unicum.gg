@@ -165,7 +165,7 @@ export async function PlayersLandingView({
         </PanelContent>
       </Panel>
 
-      {/* Game-mode boards (Overall WNX vs Steel Hunter HR), on every player
+      {/* Game-mode boards (Overall WNX vs Rampage MR), on every player
           landing including the per-language pages, mirroring the clan landing's
           stronghold tabs. */}
       <PanelSeparator />

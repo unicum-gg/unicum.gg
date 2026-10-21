@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Rating colour scales
- * @description Every colour scale the site paints a number with: the three rating metrics, random and Steel Hunter and Stronghold win rates, the Steel Hunter ratings, the two Stronghold ratings and the community star rating. Each is a list of half-open bands with the colour's name and its hex. Region-less, because a threshold is the same on every server, and static, because it only moves when the site's own scale does. Fetch it once and paint from it rather than re-implementing the ladder, which is what makes a client drift the day a threshold changes.
+ * @description Every colour scale the site paints a number with: the three rating metrics, random and Rampage and Stronghold win rates, the two mode ratings (MR and MRB), the two Stronghold ratings and the community star rating. Each is a list of half-open bands with the colour's name and its hex. Region-less, because a threshold is the same on every server, and static, because it only moves when the site's own scale does. Fetch it once and paint from it rather than re-implementing the ladder, which is what makes a client drift the day a threshold changes.
  * @response RatingScalesResponse
  * @tag System
  * @openapi

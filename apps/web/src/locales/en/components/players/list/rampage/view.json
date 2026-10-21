@@ -1,0 +1,14 @@
+{
+  "heading": "Top players in <accent>{mode}</accent>",
+  "intro": "{mode} was a World of Tanks event mode, played from September 2015 to May 2016. The {region} leaderboard, ranked by MR (minimum 100 {mode} battles).",
+  "archived": "The mode ended in May 2016, so this ranking is an archive: the totals behind it cannot change again.",
+  "board": "Top {count} {mode} players",
+  "columns": {
+    "player": "Player",
+    "battles": "Battles",
+    "survival": "Survival",
+    "survival-percent": "Survival %",
+    "damage": "Avg damage"
+  },
+  "scale-description": "Color thresholds for the {mode} board, calibrated on the population of players with at least 100 {mode} battles."
+}

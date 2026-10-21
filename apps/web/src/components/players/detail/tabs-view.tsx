@@ -25,11 +25,12 @@ import {
   StrongholdTab,
   type StrongholdData,
 } from "@/components/players/detail/overview/stronghold";
-import { STEEL_HUNTER_ROWS } from "@/components/players/detail/overview/stronghold-stats-table";
+import { modeRatingRows } from "@/components/players/detail/overview/stronghold-stats-table";
 import {
   PLAYER_MODE_TANK_VIEW,
   archivedModeRecord,
 } from "@/components/players/detail/overview/mode-tank-view";
+import { PLAYER_MODE_RATING } from "@/components/players/detail/overview/mode-rating";
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
@@ -45,7 +46,7 @@ import { unicum } from "@/services/sdk";
 import {
   DEFAULT_TANK_BATTLE_MODE,
   SessionGranularity,
-  steelHunterWinrateColor,
+  modeWinrateColor,
 } from "@unicum.gg/shared";
 import type {
   PlayerAchievements,
@@ -76,7 +77,7 @@ const STRONGHOLD_MODES: {
   { id: PlayerMode.ClanWarsX, label: "Clan Wars Tier X" },
   { id: PlayerMode.ClanWarsVIII, label: "Clan Wars Tier VIII" },
   { id: PlayerMode.ClanWarsVI, label: "Clan Wars Tier VI" },
-  { id: PlayerMode.SteelHunter, label: "Steel Hunter" },
+  { id: PlayerMode.Rampage, label: "Rampage" },
   // The five that ended. Same panel, same table: what makes them different is
   // that their record is finished, which shows as empty period columns rather
   // than as a different component.
@@ -311,7 +312,7 @@ export function PlayerTabsView({
     [PlayerMode.ClanWarsX]: detail.strongholds.cwAbsolute,
     [PlayerMode.ClanWarsVIII]: detail.strongholds.cwChampion,
     [PlayerMode.ClanWarsVI]: detail.strongholds.cwMiddle,
-    [PlayerMode.SteelHunter]: detail.strongholds.fallout,
+    [PlayerMode.Rampage]: detail.strongholds.fallout,
     [PlayerMode.ClanBattles]: detail.strongholds.clan ?? EMPTY_MODE,
     [PlayerMode.TankCompany]: detail.strongholds.company ?? EMPTY_MODE,
     [PlayerMode.TeamBattles]: detail.strongholds.team ?? EMPTY_MODE,
@@ -326,6 +327,10 @@ export function PlayerTabsView({
       (m) => archivedModeRecord(detail, m) !== null,
     ),
   );
+  // Which mode's own population this tab's rating reads against, when it has
+  // one. Undefined drops the rating rows rather than dashing them, the same
+  // rule the garage table applies to the WN column outside Random Battles.
+  const ratedMode = PLAYER_MODE_RATING[mode];
   const onTanks = section === PlayerSection.Tanks;
   const onValue = section === PlayerSection.Value;
   const onAchievements = section === PlayerSection.Achievements;
@@ -426,11 +431,17 @@ export function PlayerTabsView({
           nickname={nickname}
           label={STRONGHOLD_MODES.find((s) => s.id === mode)?.label ?? ""}
           data={strongholds[mode]}
+          // MR on every mode that has anchors, MRB on Rampage alone. The
+          // modes with no entry are each a reason rather than an omission; see
+          // `PLAYER_MODE_RATING`.
           trailingRows={
-            mode === PlayerMode.SteelHunter ? STEEL_HUNTER_ROWS : undefined
+            ratedMode ? modeRatingRows(ratedMode) : undefined
           }
+          // Against the mode's own median rather than 50%, or the whole Rampage
+          // board reads red for sitting where multi-team battles put it (42.2%)
+          // and Clan Wars VI reads green for the same reason in reverse (53.2%).
           winrateColorFn={
-            mode === PlayerMode.SteelHunter ? steelHunterWinrateColor : undefined
+            ratedMode ? (wr) => modeWinrateColor(ratedMode, wr) : undefined
           }
           // Absent for the modes Wargaming reports no comparable per-vehicle
           // block for, which is where the link would promise one.

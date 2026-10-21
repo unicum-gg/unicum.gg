@@ -18,10 +18,13 @@ import { PlayerMode } from "@/components/players/detail/modes";
  *   the only per-vehicle one Wargaming still fills is `ranked_10x10`, which
  *   their own reference calls an archive of the retired 10v10 ladder. Two
  *   different things sharing a name is exactly what a link must not imply.
- * - **Steel Hunter** has none either, and that one is worse than a mismatch:
- *   the account block behind that tab is `fallout`, the 2016 Fallout event,
- *   which Wargaming names as such and which no Steel Hunter vehicle appears in.
- *   Linking it would carry a mislabel into a second page.
+ * - **Rampage** HAS one, and this is where it used to be refused. The tab was
+ *   labelled Steel Hunter while reading `fallout`, the 2015 Rampage event, so
+ *   linking it would have carried that mislabel into a second page. Now that
+ *   both sides name the mode Rampage they are the same block and the link is
+ *   honest: the per-vehicle sum runs 1.6x to 2.6x over the account figure
+ *   because a battle counted on every vehicle fielded, which the panel says in
+ *   prose.
  * - **Onslaught** has none because nothing per-vehicle exists for it at all:
  *   the tab is built from our own capture of the season board, and
  *   **Historical Battles** has none for the same reason: `tanks/stats` answers

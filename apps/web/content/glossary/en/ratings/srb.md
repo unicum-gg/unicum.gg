@@ -6,7 +6,7 @@ related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -25,4 +25,4 @@ SRB = SR x (1 + ln(1 + battles / 1000))
 Logarithmic, so the first hundred battles are worth far more than the thousandth.
 ```
 
-One volume constant across every tier, on purpose: Skirmish Tier X is played continuously while Advances runs in bursts a few weeks a year, so the tiers that really are played more earn a bigger bonus. It is the same idea as HRB next to HR on the Steel Hunter board.
+One volume constant across every tier, on purpose: Skirmish Tier X is played continuously while Advances runs in bursts a few weeks a year, so the tiers that really are played more earn a bigger bonus. It is the same idea as MRB next to MR on the Rampage board.

@@ -40,9 +40,21 @@ export enum TankBattleMode {
   TeamBattles = "team",
   /** "Battle statistics of permanent teams", the ladder's unranked sibling. */
   PermanentTeams = "regular_team",
-  /** The 2016 Fallout event. NOT Steel Hunter: the vehicles carrying these
-   * battles are ordinary tier VIII-X tanks, and Wargaming's reference names it
-   * Fallout. See `TANK_MODES_MULTI_VEHICLE`. */
+  /**
+   * Rampage, the event that ran from update 9.10 (September 2015) to 9.15 (May
+   * 2016). `fallout` is Wargaming's internal token for it, which their API
+   * reference labels "Fallout statistics".
+   *
+   * **NOT Steel Hunter**, although the site published it under that name until
+   * October 2026. The 184,627 per-vehicle rows carrying these battles sit on
+   * ordinary tier VIII to X tanks (Bat.-Châtillon 25 t leads with 182,872
+   * battles), and the eight dedicated Steel Hunter vehicles carry ZERO rows
+   * here or in any other mode: Wargaming publishes no Steel Hunter statistics
+   * at all. The trap had one more turn in it, which is how the mislabel
+   * happened: Rampage's own headline battle type was called "Steel Hunt".
+   *
+   * See `TANK_MODES_MULTI_VEHICLE` and `RatedMode.Rampage`.
+   */
   Fallout = "fallout",
 }
 
@@ -72,7 +84,7 @@ export const TANK_BATTLE_MODE_LABEL: Record<TankBattleMode, string> = {
   [TankBattleMode.Ranked]: "Ranked Battles 10x10",
   [TankBattleMode.TeamBattles]: "Team Battles",
   [TankBattleMode.PermanentTeams]: "Permanent Teams",
-  [TankBattleMode.Fallout]: "Fallout",
+  [TankBattleMode.Fallout]: "Rampage",
 };
 
 /**
@@ -96,20 +108,23 @@ export const TANK_MODE_VOCABULARY_KEY: Record<TankBattleMode, string> = {
   [TankBattleMode.Skirmish]: "features.skirmish",
   [TankBattleMode.Advances]: "player-modes.advances",
   [TankBattleMode.GrandBattles]: "player-modes.grand",
-  // The four the profile now names too, since it grew a tab for each: one mode
+  // The five the profile now names too, since it grew a tab for each: one mode
   // seen from two sides reads from one entry.
   [TankBattleMode.Clan]: "player-modes.clan",
   [TankBattleMode.Company]: "player-modes.company",
   [TankBattleMode.TeamBattles]: "player-modes.team",
   [TankBattleMode.PermanentTeams]: "player-modes.permanent-teams",
-  // The three with nothing to borrow. `globalmap` has no account-level twin
-  // (the profile splits it into three Clan Wars tiers); `ranked_10x10` is the
-  // retired 10v10 and the profile's Ranked tab is the current format; and
-  // `fallout` is named Fallout here where the profile still calls that block
-  // Steel Hunter, which is a mislabel this must not borrow.
+  // `fallout` joined them with the Rampage rename. It had an entry of its own
+  // only because the profile called the same block Steel Hunter, which was a
+  // mislabel this must not borrow; both sides name the mode Rampage now, so the
+  // reason is gone and a second entry would be one more cell to keep in
+  // agreement for no gain.
+  [TankBattleMode.Fallout]: "player-modes.rampage",
+  // The two with nothing to borrow. `globalmap` has no account-level twin (the
+  // profile splits it into three Clan Wars tiers), and `ranked_10x10` is the
+  // retired 10v10 where the profile's Ranked tab is the current format.
   [TankBattleMode.GlobalMap]: "tank-modes.globalmap",
   [TankBattleMode.Ranked]: "tank-modes.ranked_10x10",
-  [TankBattleMode.Fallout]: "tank-modes.fallout",
 };
 
 /**

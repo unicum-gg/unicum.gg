@@ -19,7 +19,7 @@ import { measured } from "@/services/perf";
  * @description Players ranked by how many guns carry three Marks of Excellence, in total or at one tier. `tiers` names the tiers with a ranking, `coverage` says which accounts it is drawn from.
  *
  * One line, because next-openapi-gen keeps only the first line of a
- * `@description` and silently drops the rest (the Steel Hunter route's reads as
+ * `@description` and silently drops the rest (the Rampage route's reads as
  * a sentence cut in half for exactly that reason).
  *
  * Marks are absent from Wargaming's public API, so they are read from the game

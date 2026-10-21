@@ -58,10 +58,10 @@ const ROUTES = {
   // - Players
   PLAYERS: (region: Region) =>
     region === Region.EU ? "/players" : pathcat("/:region/players", { region }),
-  PLAYERS_STEEL_HUNTER: (region: Region) =>
+  PLAYERS_RAMPAGE: (region: Region) =>
     region === Region.EU
-      ? "/players/steel-hunter"
-      : pathcat("/:region/players/steel-hunter", { region }),
+      ? "/players/rampage"
+      : pathcat("/:region/players/rampage", { region }),
   PLAYERS_ONSLAUGHT: (region: Region) =>
     region === Region.EU
       ? "/players/onslaught"
@@ -98,12 +98,12 @@ const ROUTES = {
   },
   PLAYER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname", { region, nickname }),
-  // A player's Steel Hunter tab, so the SH leaderboard links straight to the
+  // A player's Rampage tab, so that leaderboard links straight to the
   // matching mode instead of the overview.
-  PLAYER_STEEL_HUNTER: (region: Region, nickname: string) =>
+  PLAYER_RAMPAGE: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/steel-hunter", { region, nickname }),
   // A player's Onslaught mode, so the Onslaught leaderboard links straight to
-  // the matching mode instead of the overview, like Steel Hunter above.
+  // the matching mode instead of the overview, like Rampage above.
   PLAYER_ONSLAUGHT: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/onslaught", { region, nickname }),
   // A player's account-value tab, which is where a sign-in started from this

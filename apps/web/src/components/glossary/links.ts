@@ -42,8 +42,8 @@ export function glossaryLinkHref(link: GlossaryLink, region: Region): string {
       return ROUTES.STRONGHOLD(region, StrongholdTier.Advances);
     case GlossaryLinkTarget.Onslaught:
       return ROUTES.PLAYERS_ONSLAUGHT(region);
-    case GlossaryLinkTarget.SteelHunter:
-      return ROUTES.PLAYERS_STEEL_HUNTER(region);
+    case GlossaryLinkTarget.Rampage:
+      return ROUTES.PLAYERS_RAMPAGE(region);
     case GlossaryLinkTarget.Coverage:
       return ROUTES.COVERAGE(region);
     case GlossaryLinkTarget.Docs:
@@ -69,7 +69,7 @@ const LABEL: Record<GlossaryLinkTarget, string> = {
   [GlossaryLinkTarget.Stronghold]: "Stronghold ladder",
   [GlossaryLinkTarget.Advances]: "Advances ranking",
   [GlossaryLinkTarget.Onslaught]: "Onslaught ladder",
-  [GlossaryLinkTarget.SteelHunter]: "Steel Hunter leaderboard",
+  [GlossaryLinkTarget.Rampage]: "Rampage leaderboard",
   [GlossaryLinkTarget.Coverage]: "Tracking coverage",
   [GlossaryLinkTarget.Docs]: "API reference",
   [GlossaryLinkTarget.Tank]: "This tank",

@@ -561,10 +561,10 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   marks(query?: QueryOf<"/{region}/players/marks">): RequestHandle<Data<"/{region}/players/marks">>;
   /** Onslaught leaderboard */
   onslaught(query?: QueryOf<"/{region}/players/onslaught">): RequestHandle<Data<"/{region}/players/onslaught">>;
+  /** Rampage leaderboard */
+  rampage(query?: QueryOf<"/{region}/players/rampage">): RequestHandle<Data<"/{region}/players/rampage">>;
   /** Search players */
   search(q: NonNullable<QueryOf<"/{region}/players/search">>["q"]): RequestHandle<Data<"/{region}/players/search">>;
-  /** Steel Hunter leaderboard */
-  steelHunter(query?: QueryOf<"/{region}/players/steel-hunter">): RequestHandle<Data<"/{region}/players/steel-hunter">>;
   /** Top players */
   top(query?: QueryOf<"/{region}/players/top">): RequestHandle<Data<"/{region}/players/top">>;
   /** Win rate by tier and rating band */
@@ -720,20 +720,20 @@ class RegionClient {
             params: { path: { region: this.region }, query },
           }),
       );
+    ns.rampage = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/rampage", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/players/rampage", {
+            params: { path: { region: this.region }, query },
+          }),
+      );
     ns.search = (q) =>
       handle(
         buildUrl(this.baseUrl, "/{region}/players/search", { region: this.region }, { q }),
         () =>
           this.api.GET("/{region}/players/search", {
             params: { path: { region: this.region }, query: { q } },
-          }),
-      );
-    ns.steelHunter = (query) =>
-      handle(
-        buildUrl(this.baseUrl, "/{region}/players/steel-hunter", { region: this.region }, query),
-        () =>
-          this.api.GET("/{region}/players/steel-hunter", {
-            params: { path: { region: this.region }, query },
           }),
       );
     ns.top = (query) =>

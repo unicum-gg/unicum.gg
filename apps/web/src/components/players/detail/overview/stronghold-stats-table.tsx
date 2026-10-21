@@ -19,10 +19,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useStatsPeriod } from "@/hooks/use-period";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { StrongholdPeriod, computeHR, computeHRB, hrbColor, hrColor, winrateColor, RATING_COLOR_CLASS, type HRInputs, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
+import { StrongholdPeriod, computeMR, computeMRB, mrbColor, mrColor, RatedMode, winrateColor, RATING_COLOR_CLASS, type MRInputs, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
 
 // The Wins row colors its win rate with the mode's own scale. Defaults to the
-// random-battle 50%-anchored one; Steel Hunter passes its lower-baseline scale
+// random-battle 50%-anchored one; a rated mode passes its own median-anchored scale
 // (top-5 placement, ~41% median) via the table's `winrateColorFn` prop.
 export type WinrateColorFn = (wr: number) => RatingColor;
 
@@ -56,14 +56,11 @@ export type RowDef = {
   render: (s: StrongholdStats, num: NumberFormatter) => Cell;
 };
 
-// Steel Hunter only: the two Hunter ratings, colored like the leaderboard's
-// columns. Appended as trailing rows for the fallout mode (see StrongholdTab),
-// so the other seven stronghold-style modes keep their shared row set
-// untouched. Both computes return null with no battles, which renders the
-// em-dash placeholder.
-function hunterRow(
+// A rating row, appended to a mode's shared row set (see StrongholdTab). The
+// compute returns null with no battles, which renders the em-dash placeholder.
+function ratingRow(
   label: string,
-  compute: (s: HRInputs) => number | null,
+  compute: (s: MRInputs) => number | null,
   color: (value: number) => RatingColor,
 ): RowDef {
   return {
@@ -81,13 +78,32 @@ function hunterRow(
   };
 }
 
-// HRB reads the same period columns as HR, and deliberately so: it rewards
-// volume where HR discounts it, so a 24h column with a handful of runs lands
-// far below the total. That contrast is the rating's point, not a glitch.
-export const STEEL_HUNTER_ROWS: RowDef[] = [
-  hunterRow("HR", computeHR, hrColor),
-  hunterRow("HRB", computeHRB, hrbColor),
-];
+/**
+ * The rating rows for one mode: MR everywhere, and MRB on Rampage alone.
+ *
+ * MR is the one thing these tabs never had. The WN ratings are built against
+ * expected damage measured in random battles, so none of them can read a
+ * Skirmish, and the columns came off rather than dashing; MR reads each mode
+ * against its own population instead, so 1000 is the median player in all of
+ * them. See `computeMR`.
+ *
+ * MRB stays on Rampage because that is the one board publishing it as a
+ * sortable column, and because the volume reward amplifies each mode's battle
+ * count distribution rather than normalising it, so one ladder over all seven
+ * would not be honest the way `mrColor` is.
+ *
+ * Both read the same period columns as the rest of the table, and on an ENDED
+ * mode every period is empty by construction: Rampage finished in May 2016, so
+ * its 24h, 7d and 30d cells are what a finished record looks like rather than a
+ * gap. On a live mode MRB's 24h column lands far below the total on purpose, it
+ * rewards volume where MR discounts it.
+ */
+export function modeRatingRows(mode: RatedMode): RowDef[] {
+  const mr = ratingRow("MR", (s) => computeMR(mode, s), mrColor);
+  return mode === RatedMode.Rampage
+    ? [mr, ratingRow("MRB", computeMRB, mrbColor)]
+    : [mr];
+}
 
 function buildRowDefs(wrColor: WinrateColorFn): RowDef[] {
   return [
@@ -252,9 +268,9 @@ export function StrongholdStatsTable(
   const { t } = useTranslation("components/players/detail/overview/stronghold-stats-table");
   const { t: tStats } = useStatLabels();
   const loading = "loading" in props;
-  // Mode-specific rows (e.g. the Steel Hunter HR) appended to the shared set,
+  // Mode-specific rows (a mode's MR, plus MRB on Rampage) appended to the shared set,
   // so the skeleton and the real table always render the same labels. The win
-  // rate scale is the mode's (Steel Hunter passes its own baseline).
+  // rate scale is the mode's own median rather than 50%.
   const rows = [
     ...buildRowDefs(props.winrateColorFn ?? winrateColor),
     ...(props.trailingRows ?? []),

@@ -30,7 +30,7 @@ export type StrongholdData = {
 
 /** The Overview section under any of the eight stronghold-style modes: a single
  * stronghold stats table, or a "no data yet" fallback. `trailingRows` appends
- * mode-specific rows (the Steel Hunter HR) after the shared set. */
+ * mode-specific rows (a mode's MR, and MRB on Rampage) after the shared set. */
 export function StrongholdTab({
   nickname,
   label,

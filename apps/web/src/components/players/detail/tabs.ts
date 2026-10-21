@@ -15,7 +15,7 @@ export { PlayerMode, PLAYER_MODE_LABEL };
 //   /eu/players/Animal/tanks          Tanks
 //   /eu/players/Animal/sessions       Sessions
 //   /eu/players/Animal/achievements   Achievements
-//   /eu/players/Animal/steel-hunter   Overview + Steel Hunter
+//   /eu/players/Animal/rampage        Overview + Rampage
 //   /eu/players/Animal/onslaught      Overview + Onslaught
 //   /eu/players/Animal/tournaments    Tournaments
 //   /eu/players/Animal/value          Value
@@ -52,7 +52,7 @@ const MODE_SEGMENT: Record<PlayerMode, string | null> = {
   [PlayerMode.ClanWarsX]: "cw-x",
   [PlayerMode.ClanWarsVIII]: "cw-viii",
   [PlayerMode.ClanWarsVI]: "cw-vi",
-  [PlayerMode.SteelHunter]: "steel-hunter",
+  [PlayerMode.Rampage]: "steel-hunter",
   [PlayerMode.Onslaught]: "onslaught",
   [PlayerMode.ClanBattles]: "clan",
   [PlayerMode.TankCompany]: "company",

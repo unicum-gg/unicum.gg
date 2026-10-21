@@ -179,7 +179,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/players/steel-hunter": {
+    "/{region}/players/rampage": {
         parameters: {
             query?: never;
             header?: never;
@@ -187,10 +187,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Steel Hunter leaderboard
-         * @description The Steel Hunter (battle-royale) player leaderboard for a region,
+         * Rampage leaderboard
+         * @description The Rampage player leaderboard for a region, ranked by the chosen `sort` column (MR by default). Only players with at least 100 Rampage battles are ranked. Rampage is the 2015 event Wargaming carries as `statistics.fallout`, which this board was published as "Steel Hunter" until October 2026; the two are different modes and Wargaming publishes no Steel Hunter statistics at all. It ended in May 2016, so the ranking is an archive: no row in it can move again.
          */
-        get: operations["get-{region}-players-steel-hunter"];
+        get: operations["get-{region}-players-rampage"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2581,6 +2581,11 @@ export interface components {
             /** @description One panel per vehicle per life, for the vehicles a recording of this battle could speak for: the player whose client recorded it, and any team mate they followed after dying. Empty for a battle with no recording, which is most of them. Nothing is ever known this way about the other team, because the server strips the devices out of every other vehicle's public information before it is broadcast. */
             panels: components["schemas"]["BattleLoadoutPanel"][];
         };
+        /**
+         * @description Wargaming's own key for the battle mode. `random` is derived from the overall figures and the two other parts of them (`all` is `random` + `clan` + `company`, exactly); the rest are stored as reported.
+         * @enum {string}
+         */
+        battleMode: "random" | "clan" | "company" | "globalmap" | "stronghold_skirmish" | "stronghold_defense" | "epic" | "ranked_10x10" | "team" | "regular_team" | "fallout";
         /** @description One vehicle in a battle, named and rated. */
         BattleParticipant: {
             /** @description Battle-scoped vehicle id, unique within the battle. */
@@ -2771,11 +2776,6 @@ export interface components {
             /** @description The path, as [clock ticks since the battle started, x, z in the arena's own metres]. Every position the recording client was shown, which is about ten a second; only the moments the vehicle actually moved are kept, so between two points it stood still. */
             points: number[][];
         };
-        /**
-         * @description Wargaming's own key for the battle mode. `random` is derived from the overall figures and the two other parts of them (`all` is `random` + `clan` + `company`, exactly); the rest are stored as reported.
-         * @enum {string}
-         */
-        battleMode: "random" | "clan" | "company" | "globalmap" | "stronghold_skirmish" | "stronghold_defense" | "epic" | "ranked_10x10" | "team" | "regular_team" | "fallout";
         /**
          * @description How the battle ended, as declared by the submitter.
          * @enum {string}
@@ -3588,7 +3588,7 @@ export interface components {
              * @description Which page of the site the link leads to.
              * @enum {string}
              */
-            target: "top-players" | "top-clans" | "tanks" | "tank-economics" | "marks-of-excellence" | "marks-of-mastery" | "tank-changes" | "maps" | "stronghold" | "advances" | "onslaught" | "steel-hunter" | "coverage" | "docs" | "tank" | "map";
+            target: "top-players" | "top-clans" | "tanks" | "tank-economics" | "marks-of-excellence" | "marks-of-mastery" | "tank-changes" | "maps" | "stronghold" | "advances" | "onslaught" | "rampage" | "coverage" | "docs" | "tank" | "map";
             slug?: string;
             label?: string;
         };
@@ -5425,6 +5425,34 @@ export interface components {
             totalCount: number;
             cameFromCount: number;
         };
+        RampageResponse: {
+            results: components["schemas"]["RampageSummary"][];
+            computed_at: string | null;
+        };
+        /** @description Rampage leaderboard row (ranked by MR). */
+        RampageSummary: {
+            account_id: number;
+            nickname: string;
+            clan_tag: string | null;
+            clan_color: string | null;
+            mr: number;
+            mrb: number;
+            battles: number;
+            wins: number;
+            survived: number;
+            damage: number;
+            frags: number;
+            is_verified?: boolean;
+            /** @description Tournaments this account was on the winning roster of, for the winner's crest. */
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
+        };
         /**
          * @description Why a signed-in account may not rate this tank yet.
          * @enum {string}
@@ -5466,7 +5494,7 @@ export interface components {
              * @description Which quantity this scale paints.
              * @enum {string}
              */
-            scale: "wn7" | "wn8" | "wnx" | "winrate" | "hr" | "hrb" | "steelHunterWinrate" | "strongholdRating" | "strongholdRatingBattles" | "strongholdWinrate" | "starRating";
+            scale: "wn7" | "wn8" | "wnx" | "winrate" | "mr" | "mrb" | "rampageWinrate" | "strongholdRating" | "strongholdRatingBattles" | "strongholdWinrate" | "starRating";
             /**
              * @description How its numbers are written: `ratio` runs 0 to 1, `points` and `stars` are the value as shown. A caller holding a win rate as a percentage has to divide before comparing it to a `ratio` scale.
              * @enum {string}
@@ -5839,34 +5867,6 @@ export interface components {
             share: number;
         };
         stars: number;
-        SteelHunterResponse: {
-            results: components["schemas"]["SteelHunterSummary"][];
-            computed_at: string | null;
-        };
-        /** @description Steel Hunter leaderboard row (ranked by HR). */
-        SteelHunterSummary: {
-            account_id: number;
-            nickname: string;
-            clan_tag: string | null;
-            clan_color: string | null;
-            hr: number;
-            hrb: number;
-            battles: number;
-            wins: number;
-            survived: number;
-            damage: number;
-            frags: number;
-            is_verified?: boolean;
-            /** @description Tournaments this account was on the winning roster of, for the winner's crest. */
-            tournament_wins?: number;
-            tournament_featured_wins?: number;
-            tournament_best_title?: string | null;
-            onslaught_best_tier?: string | null;
-            onslaught_best_rank?: number | null;
-            onslaught_seasons?: number;
-            is_supporter?: boolean;
-            twitch_login?: string | null;
-        };
         /**
          * @description With `lang`: only count clans that declare exactly this one language.
          * @enum {string}
@@ -7639,13 +7639,13 @@ export interface operations {
             };
         };
     };
-    "get-{region}-players-steel-hunter": {
+    "get-{region}-players-rampage": {
         parameters: {
             query?: {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
-                /** @description Ranking column (default hr). */
-                sort?: "hr" | "hrb" | "battles" | "winrate" | "survival" | "damage";
+                /** @description Ranking column (default mr). */
+                sort?: "mr" | "mrb" | "battles" | "winrate" | "survival" | "damage";
             };
             header?: never;
             path: {
@@ -7662,7 +7662,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SteelHunterResponse"];
+                    "application/json": components["schemas"]["RampageResponse"];
                 };
             };
         };

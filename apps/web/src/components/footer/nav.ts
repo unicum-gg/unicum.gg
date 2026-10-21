@@ -60,7 +60,7 @@ export function footerColumns(
         clans.links[0], // Top clans
         { label: t("links.top-tanks"), href: ROUTES.TANKS(region) },
         ...clans.links.slice(1), // Stronghold, Advances
-        ...players.links.slice(1), // Onslaught, Steel Hunter
+        ...players.links.slice(1), // Onslaught, Rampage
         ...singlePage, // Server population, Tournaments
       ],
     },

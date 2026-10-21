@@ -39,8 +39,8 @@ export function PlayerName({
   /** Wrap the name and tag in a link to the profile. Off for the player's own
    * header and for non-navigational rows. */
   link?: boolean;
-  /** Where the name points, when it is not the profile: the Steel Hunter board
-   * sends a row to that player's own Steel Hunter tab. The format stays the
+  /** Where the name points, when it is not the profile: the Rampage board
+   * sends a row to that player's own Rampage tab. The format stays the
    * same everywhere; only the destination varies. */
   href?: string;
   /** Anything that belongs after the crests, on the same line (the language

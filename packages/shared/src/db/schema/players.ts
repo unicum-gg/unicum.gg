@@ -105,21 +105,30 @@ export function makePlayersTable(region: string) {
       // wins/battles at every snapshot-cron tick. Powers the "Player WR" column
       // of the per-tank server-average table (average driver account WR).
       winrate: real("winrate"),
-      // Steel Hunter (battle royale) leaderboard, kept in lockstep by the
-      // snapshot-cron from the latest `fallout_*` snapshot (WG's repurposed
-      // Steel Hunter block). `hr` is the computed rating (see computeHR);
-      // the raw totals ride along so the board renders winrate/survival/avg
-      // damage without a snapshots join, exactly like the wnx columns above let
-      // the main top-players board rank by a cached column. Only players with
-      // `sh_battles >= HR_MIN_BATTLES` are ranked (the query gates, the
-      // partial index below serves it).
+      // Rampage leaderboard, kept in lockstep by the snapshot-cron from the
+      // latest `fallout_*` snapshot. `hr` is the computed rating (see
+      // `computeMR`); the raw totals ride along so the board renders
+      // winrate/survival/avg damage without a snapshots join, exactly like the
+      // wnx columns above let the main top-players board rank by a cached
+      // column. Only players with `sh_battles >= MR_MIN_BATTLES` are ranked
+      // (the query gates, the partial index below serves it).
+      //
+      // **The `sh_` prefix and `hr` are misnomers kept on purpose.** They read
+      // "Steel Hunter" and "Hunter Rating", and the block behind them is the
+      // 2015 Rampage event (`statistics.fallout`), a different mode four years
+      // earlier: Wargaming publishes no Steel Hunter statistics at all, and its
+      // eight dedicated vehicles carry zero rows in every mode block we store.
+      // Correcting the names is three `ALTER TABLE`s and an index rename, which
+      // is cheap, but it breaks every running instance between the migration
+      // and the deploy, so it needs a deploy of its own rather than riding this
+      // one. See `RatedMode.Rampage`.
       hr: real("hr"),
       shBattles: integer("sh_battles"),
       shWins: integer("sh_wins"),
       shSurvived: integer("sh_survived"),
       shDamage: bigint("sh_damage", { mode: "number" }),
       shFrags: integer("sh_frags"),
-      // Average XP per Steel Hunter battle. The XP formula already integrates
+      // Average XP per Rampage battle. The XP formula already integrates
       // damage, frags, spotting and placement, so `hr` weighs it as the single
       // effectiveness axis alongside win rate (see computeHR).
       shAvgXp: real("sh_avg_xp"),
@@ -198,11 +207,11 @@ export function makePlayersTable(region: string) {
       // find the (usually small) due set, then the mode's ORDER BY sorts that
       // subset via the two indexes above.
       index(`${region}_players_due_at_idx`).on(sql`${t.dueAt} ASC`),
-      // Serves the Steel Hunter (HR) leaderboard:
+      // Serves the Rampage (MR) leaderboard:
       // `WHERE sh_battles >= 100 ORDER BY hr DESC LIMIT 100`. Partial (only
       // ranked SH players, a small fraction of the ~2M rows) + DESC so Postgres
       // walks it in board order instead of sorting the whole table. The 100
-      // matches HR_MIN_BATTLES.
+      // matches MR_MIN_BATTLES.
       index(`${region}_players_hr_idx`)
         .on(sql`${t.hr} DESC NULLS LAST`)
         .where(sql`${t.shBattles} >= 100`),

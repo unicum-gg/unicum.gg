@@ -12,7 +12,7 @@ import type { Region } from "@unicum.gg/wargaming";
  */
 export enum PlayerBoard {
   Overall = "overall",
-  SteelHunter = "steel-hunter",
+  Rampage = "rampage",
   Onslaught = "onslaught",
   Marks = "marks",
 }
@@ -26,7 +26,7 @@ export enum PlayerBoard {
  * not an option: the picker is a client component and a server component
  * cannot hand it a function.
  *
- * Steel Hunter and Onslaught are absent because neither has a language view:
+ * Rampage and Onslaught are absent because neither has a language view:
  * one ranks the game's own standings and the other a mode's rating, and nothing
  * on either page offers the filter. Asking for their addresses is a mistake
  * worth a compile error rather than a URL that 404s.

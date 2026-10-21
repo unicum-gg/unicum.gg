@@ -12,6 +12,7 @@ export * from "./replay/loadout";
 export * from "./replay/parse";
 export * from "./crew";
 export * from "./ratings";
+export * from "./mode-ratings";
 export * from "./onslaught-ranks";
 export * from "./server-online";
 export * from "./server-stats";

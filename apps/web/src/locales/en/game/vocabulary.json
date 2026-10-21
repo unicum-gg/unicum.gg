@@ -22,7 +22,7 @@
     "cw-x": "Clan Wars X",
     "cw-viii": "Clan Wars VIII",
     "cw-vi": "Clan Wars VI",
-    "steel-hunter": "Steel Hunter",
+    "rampage": "Rampage",
     "onslaught": "Onslaught",
     "clan": "Clan Battles",
     "company": "Tank Company",
@@ -32,8 +32,7 @@
   },
   "tank-modes": {
     "globalmap": "Global Map",
-    "ranked_10x10": "Ranked Battles 10x10",
-    "fallout": "Fallout"
+    "ranked_10x10": "Ranked Battles 10x10"
   },
   "stronghold-tiers": {
     "advances": "Advances",

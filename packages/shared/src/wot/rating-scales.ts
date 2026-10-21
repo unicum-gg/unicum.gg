@@ -1,8 +1,11 @@
 import { RatingColor, RATING_COLOR_HEX } from "./ratings";
 import {
-  hrColor,
-  hrbColor,
-  steelHunterWinrateColor,
+  modeWinrateColor,
+  mrbColor,
+  mrColor,
+  RatedMode,
+} from "./mode-ratings";
+import {
   strongholdRatingBattlesColor,
   strongholdRatingColor,
   strongholdWinrateColor,
@@ -26,9 +29,9 @@ export enum RatingScale {
   Wn8 = "wn8",
   Wnx = "wnx",
   Winrate = "winrate",
-  Hr = "hr",
-  Hrb = "hrb",
-  SteelHunterWinrate = "steelHunterWinrate",
+  Mr = "mr",
+  Mrb = "mrb",
+  RampageWinrate = "rampageWinrate",
   StrongholdRating = "strongholdRating",
   StrongholdRatingBattles = "strongholdRatingBattles",
   StrongholdWinrate = "strongholdWinrate",
@@ -99,9 +102,12 @@ const SCALES: Record<
   [RatingScale.Wn8]: { colorOf: wn8Color, unit: RatingScaleUnit.Points, min: -2000, max: 10_000, precision: 1 },
   [RatingScale.Wnx]: { colorOf: wnxColor, unit: RatingScaleUnit.Points, min: -2000, max: 10_000, precision: 1 },
   [RatingScale.Winrate]: { colorOf: winrateColor, unit: RatingScaleUnit.Percent, min: 0, max: 1, precision: 0.0001, scaleBy: 100, bounded: true },
-  [RatingScale.Hr]: { bounded: true, colorOf: hrColor, unit: RatingScaleUnit.Points, min: 0, max: 5000, precision: 1 },
-  [RatingScale.Hrb]: { bounded: true, colorOf: hrbColor, unit: RatingScaleUnit.Points, min: 0, max: 10_000, precision: 1 },
-  [RatingScale.SteelHunterWinrate]: { colorOf: steelHunterWinrateColor, unit: RatingScaleUnit.Percent, min: 0, max: 1, precision: 0.0001, scaleBy: 100, bounded: true },
+  [RatingScale.Mr]: { bounded: true, colorOf: mrColor, unit: RatingScaleUnit.Points, min: 0, max: 5000, precision: 1 },
+  [RatingScale.Mrb]: { bounded: true, colorOf: mrbColor, unit: RatingScaleUnit.Points, min: 0, max: 10_000, precision: 1 },
+  // One ladder serves MR in every mode (see `mrColor`), so only the win rate
+  // needs a mode: its anchor is the mode's own median rather than 50%, and
+  // Rampage is the one whose anchor the site publishes a board against.
+  [RatingScale.RampageWinrate]: { colorOf: (wr: number) => modeWinrateColor(RatedMode.Rampage, wr), unit: RatingScaleUnit.Percent, min: 0, max: 1, precision: 0.0001, scaleBy: 100, bounded: true },
   [RatingScale.StrongholdRating]: { bounded: true, colorOf: strongholdRatingColor, unit: RatingScaleUnit.Points, min: 0, max: 20_000, precision: 1 },
   [RatingScale.StrongholdRatingBattles]: { bounded: true, colorOf: strongholdRatingBattlesColor, unit: RatingScaleUnit.Points, min: 0, max: 40_000, precision: 1 },
   [RatingScale.StrongholdWinrate]: { colorOf: strongholdWinrateColor, unit: RatingScaleUnit.Percent, min: 0, max: 1, precision: 0.0001, scaleBy: 100, bounded: true },

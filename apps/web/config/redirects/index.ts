@@ -46,6 +46,35 @@ const mapVariantRedirects = [
   },
 ]);
 
+/**
+ * The Steel Hunter rename.
+ *
+ * The board, the profile tab and the endpoint were published as Steel Hunter
+ * and read `statistics.fallout`, which is the 2015 Rampage event and a
+ * different mode: Wargaming publishes no Steel Hunter statistics at all. Every
+ * one of these was a live, indexed, linkable URL, and the two glossary slugs
+ * went with the ratings they named (HR and HRB became MR and MRB), so each old
+ * address keeps its readers rather than 404ing on a correction they had no part
+ * in.
+ */
+const rampageRenameRedirects = [
+  ["/players/steel-hunter", "/players/rampage"],
+  ["/:region(eu|na|asia)/players/steel-hunter", "/:region/players/rampage"],
+  [
+    "/:region(eu|na|asia)/players/:nickname/steel-hunter",
+    "/:region/players/:nickname/rampage",
+  ],
+  // The public API path. A 404 would be louder, but an SDK caller following a
+  // redirect keeps working while they upgrade, and the response shape changed
+  // only in renaming `hr`/`hrb` to `mr`/`mrb`.
+  [
+    "/api/:region(eu|na|asia)/players/steel-hunter",
+    "/api/:region/players/rampage",
+  ],
+  ["/glossary/hr", "/glossary/mr"],
+  ["/glossary/hrb", "/glossary/mrb"],
+].map(([source, destination]) => ({ source, destination, permanent: true }));
+
 export const redirects: NextConfig["redirects"] = async () => [
   // Tank detail: `?tab=performances` → `/tanks/is-7/performances`.
   ...legacyQueryRedirects({
@@ -131,6 +160,7 @@ export const redirects: NextConfig["redirects"] = async () => [
   // one. They are views of their base map now, and the slug is gone with the
   // card, so each old URL keeps its readers by landing on the view it named.
   ...mapVariantRedirects,
+  ...rampageRenameRedirects,
   // Creator vanity URLs (`/remi`). Declared rather than routed so they cannot
   // shadow a real page: a catch-all `/[slug]` at the root would swallow every
   // unmatched path on the site.

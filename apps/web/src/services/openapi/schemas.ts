@@ -578,15 +578,14 @@ export const clansTopQuery = z.object({
   languages: withLanguagesField.optional(),
 });
 
-// The Steel Hunter board is a single lifetime ranking, sortable by column.
-// Inline literals: locked to `SteelHunterSort` in
-// `@unicum.gg/shared/constants/steel-hunter`.
-export const steelHunterQuery = z.object({
+// The Rampage board is a single lifetime ranking, sortable by column. Inline
+// literals: locked to `RampageSort` in `@unicum.gg/shared/constants/rampage`.
+export const rampageQuery = z.object({
   limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
   sort: z
-    .enum(["hr", "hrb", "battles", "winrate", "survival", "damage"])
+    .enum(["mr", "mrb", "battles", "winrate", "survival", "damage"])
     .optional()
-    .meta({ description: "Ranking column (default hr)." }),
+    .meta({ description: "Ranking column (default mr)." }),
 });
 
 /**

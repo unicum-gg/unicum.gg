@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
  * set in another order. So there is no direction to toggle, and the caret marks
  * which column the board is ranked by.
  *
- * Shared because it was written twice, byte for byte, by the Steel Hunter board
+ * Shared because it was written twice, byte for byte, by the Rampage board
  * and the stronghold table, and the marks board would have made three. The easy
  * thing to get wrong when copying it is where the padding lives (on the cell
  * here, not on the button, the opposite of the client-sort head), which draws

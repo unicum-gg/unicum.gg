@@ -11,8 +11,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { PlayerHeader } from "@/components/players/detail/header";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
+import { PLAYER_MODE_RATING } from "@/components/players/detail/overview/mode-rating";
 import {
-  STEEL_HUNTER_ROWS,
+  modeRatingRows,
   StrongholdStatsTable,
 } from "@/components/players/detail/overview/stronghold-stats-table";
 import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
@@ -38,7 +39,7 @@ const STRONGHOLD_LABEL: Partial<Record<PlayerMode, string>> = {
   [PlayerMode.ClanWarsX]: "Clan Wars Tier X",
   [PlayerMode.ClanWarsVIII]: "Clan Wars Tier VIII",
   [PlayerMode.ClanWarsVI]: "Clan Wars Tier VI",
-  [PlayerMode.SteelHunter]: "Steel Hunter",
+  [PlayerMode.Rampage]: "Rampage",
 };
 
 /** One nav row as inert spans, matching PlayerSectionNav/PlayerModeNav so the
@@ -149,6 +150,7 @@ export function PlayerProfileSkeleton({
   // The mode row only shows under Overview, matching PlayerTabsView.
   const showModes = !onValue && !onTanks;
   const strongholdLabel = showModes ? STRONGHOLD_LABEL[mode] : undefined;
+  const ratedMode = PLAYER_MODE_RATING[mode];
 
   return (
     <>
@@ -209,8 +211,11 @@ export function PlayerProfileSkeleton({
             <PanelContent className="p-0">
               <StrongholdStatsTable
                 loading
+                // Same row count as the loaded table, or the skeleton is a
+                // different height than what replaces it. See
+                // `PLAYER_MODE_RATING`.
                 trailingRows={
-                  mode === PlayerMode.SteelHunter ? STEEL_HUNTER_ROWS : undefined
+                  ratedMode ? modeRatingRows(ratedMode) : undefined
                 }
               />
             </PanelContent>

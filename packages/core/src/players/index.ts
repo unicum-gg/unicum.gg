@@ -1,6 +1,6 @@
 import { and, between, desc, eq, inArray, isNotNull, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankLoadoutsByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, computeHR, type Stats, type StrongholdStats } from "@unicum.gg/shared";
+import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankLoadoutsByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, computeMR, RatedMode, type Stats, type StrongholdStats } from "@unicum.gg/shared";
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import { discoverFromClanHistoryBackground } from "@unicum.gg/core/discovery/player-history";
 import { playerChannel, publish } from "@unicum.gg/core/live/pubsub";
@@ -138,6 +138,11 @@ export function epicStatsFromSnapshot(s: PlayerSnapshot): StrongholdStats | null
   };
 }
 
+/**
+ * The 2015 Rampage event's record, which Wargaming carries as
+ * `statistics.fallout`. Named for the column prefix rather than the mode, like
+ * every sibling here. See `RatedMode.Rampage` for why this is not Steel Hunter.
+ */
 export function falloutStatsFromSnapshot(s: PlayerSnapshot): StrongholdStats | null {
   if (s.falloutBattles === null) return null;
   return {
@@ -782,19 +787,28 @@ async function updatePlayerRatings(
   const wn8 = computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
   const wnx = computeWNX(tanks, wnxExpected);
 
-  // Steel Hunter (battle royale) leaderboard cache: the HR rating + the raw
-  // SH totals, from WG's `statistics.fallout` block (Steel Hunter reuses that
-  // slot). Kept on the row so the board ranks by a cached column; null when the
-  // account has no Steel Hunter battles.
+  // Rampage leaderboard cache: the MR rating + the raw totals, from WG's
+  // `statistics.fallout` block. Kept on the row so the board ranks by a cached
+  // column; null when the account has no Rampage battles.
+  //
+  // The `sh_*` column names and `hr` read Steel Hunter, which this block is
+  // not: it is the 2015 Rampage event, and Wargaming publishes no Steel Hunter
+  // statistics anywhere (its eight dedicated vehicles carry zero rows in every
+  // mode block we store). The names are physical columns on a two-million-row
+  // table in three regions, so correcting them needs a deploy of its own.
   const fa = info.statistics.fallout;
   const shBattles = fa?.battles ?? null;
   const shAvgXp = fa?.battle_avg_xp ?? null;
-  // Gate hr on a known avg XP too: HR is XP-driven, so without it the score
-  // would be understated. Keeping the two in lockstep also lets the leaderboard
-  // treat `hr NOT NULL` as "sh_avg_xp present" (HRB divides by it).
+  // Gate the rating on a known avg XP too: MR is XP-driven, so without it the
+  // score would be understated. Keeping the two in lockstep also lets the
+  // leaderboard treat `hr NOT NULL` as "sh_avg_xp present" (MRB divides by it).
   const hr =
     shBattles && shBattles > 0 && shAvgXp != null
-      ? computeHR({ battles: shBattles, wins: fa?.wins ?? 0, avgXp: shAvgXp })
+      ? computeMR(RatedMode.Rampage, {
+          battles: shBattles,
+          wins: fa?.wins ?? 0,
+          avgXp: shAvgXp,
+        })
       : null;
 
   // Recent-window ratings for each leaderboard period (24h / 7d / 30d), over

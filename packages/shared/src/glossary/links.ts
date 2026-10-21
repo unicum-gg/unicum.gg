@@ -17,7 +17,7 @@ export enum GlossaryLinkTarget {
   Stronghold = "stronghold",
   Advances = "advances",
   Onslaught = "onslaught",
-  SteelHunter = "steel-hunter",
+  Rampage = "rampage",
   Coverage = "coverage",
   Docs = "docs",
   /** One vehicle, by catalogue slug (`is-7`). */

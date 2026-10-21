@@ -54,9 +54,9 @@ export async function PlayersModeTabs({
             {tGame("marks.3")}
           </Link>
           <Link
-            href={ROUTES.PLAYERS_STEEL_HUNTER(region)}
+            href={ROUTES.PLAYERS_RAMPAGE(region)}
             prefetch="intent"
-            className={tabItemClass(active === PlayerBoard.SteelHunter)}
+            className={tabItemClass(active === PlayerBoard.Rampage)}
           >
             {battleTypeName(BattleType.BattleRoyale, tGame)}
           </Link>
