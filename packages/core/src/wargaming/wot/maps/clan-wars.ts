@@ -109,39 +109,79 @@ function fetchClanWarsArenaIds(region: Region): Promise<Set<string>> {
   ).then((ids) => new Set(ids));
 }
 
+/** Refresh the pool in the background, one walk per region at a time.
+ *
+ * It fills the memo on its own rather than through its caller, so a reader that
+ * stopped waiting (or never waited at all, see below) still leaves the next one
+ * a warm value. */
+function refreshClanWarsArenaIds(region: Region): Promise<Set<string>> {
+  const held = inflight.get(region);
+  if (held) return held;
+
+  const promise = fetchClanWarsArenaIds(region)
+    .catch(() => new Set<string>())
+    .then((value) => {
+      const ttl = value.size > 0 ? CACHE_TTL_MS : EMPTY_CACHE_TTL_MS;
+      cache.set(region, { value, expiresAt: Date.now() + ttl });
+      return value;
+    })
+    .finally(() => {
+      inflight.delete(region);
+    });
+
+  inflight.set(region, promise);
+  return promise;
+}
+
 /** The arena ids in the current Global Map (Clan Wars) map pool for a region.
  * Cached, bounded and fail-open: a WG failure, an off-season with no active
- * Front, or a walk still running at `WALK_DEADLINE_MS` all answer with an empty
- * set, so the maps catalogue always renders, just without the Clan Wars tag,
- * and never later than the deadline.
+ * Front, or a first walk still running at `WALK_DEADLINE_MS` all answer with an
+ * empty set, so the maps catalogue always renders, just without the Clan Wars
+ * tag, and never later than the deadline.
  *
- * The `catch` below is only the net under the cache layer itself (an
- * unreachable Redis), since the walk's own failures are absorbed one level down,
- * where they can be cached. */
+ * An EXPIRED value is served as it stands while the refresh runs behind it,
+ * which is what keeps the deadline off the hot path. Awaiting the refresh
+ * instead left `/api/eu/maps` answering in 8.2s, measured on five consecutive
+ * probes on 2026-10-21 against 2.5s for NA and 0.06s for Asia, and the reason
+ * is that both expiries land together: the memo's empty window and the Redis
+ * key's are the same `EMPTY_CACHE_TTL_MS`, written at the same instant by the
+ * same walk. So the memo never expires onto a Redis hit, it expires onto a
+ * miss, and the walk that follows takes 110s for as long as Wargaming EU
+ * answers `504 SOURCE_NOT_AVAILABLE` (the transport rightly retries that code).
+ * Every reader arriving inside those 110s paid the full deadline, about a
+ * quarter of them. Shortening the memo would not have moved it, since the walk
+ * is relaunched by the Redis expiry rather than by the memo's.
+ *
+ * Serving the stale value costs nothing it was not already costing: what is
+ * held during a Wargaming outage is the empty set the deadline would have
+ * answered with anyway, and what is held during a slow walk is the real pool,
+ * which is strictly better than the empty one. It also means a region whose
+ * season genuinely ended keeps answering instantly instead of re-walking.
+ *
+ * The `catch` inside the refresh is the net under the cache layer itself (an
+ * unreachable Redis), since the walk's own failures are absorbed one level
+ * down, where they can be cached. */
 export async function getClanWarsArenaIds(region: Region): Promise<Set<string>> {
-  const cached = cache.get(region);
-  if (cached && cached.expiresAt > Date.now()) return cached.value;
+  const held = cache.get(region);
+  if (held && held.expiresAt > Date.now()) return held.value;
 
-  let promise = inflight.get(region);
-  if (!promise) {
-    promise = fetchClanWarsArenaIds(region)
-      .catch(() => new Set<string>())
-      .then((value) => {
-        const ttl = value.size > 0 ? CACHE_TTL_MS : EMPTY_CACHE_TTL_MS;
-        cache.set(region, { value, expiresAt: Date.now() + ttl });
-        inflight.delete(region);
-        return value;
-      });
-    inflight.set(region, promise);
+  const promise = refreshClanWarsArenaIds(region);
+  if (held) {
+    // Detached on purpose: the refresh writes the memo itself, and nothing here
+    // is waiting for it. It never rejects, so there is no unhandled rejection
+    // to answer for.
+    void promise;
+    return held.value;
   }
 
-  // The deadline bounds the WAIT and never the walk, which is the whole reason
-  // it can be this short. The walk keeps running, still writes Redis for six
-  // hours and still fills the memo, so a healthy region whose walk is simply
-  // slower than the deadline loses its Clan Wars tag for one reader rather than
-  // for a cache window. Racing it inside the cached compute instead would have
-  // DISCARDED that walk's result and cached the empty set for five minutes, so
-  // a region taking longer than the deadline would have lost the tag
-  // repeatedly, forever, which is a worse bug than the one being fixed.
+  // Only a cold region reaches the deadline, and it bounds the WAIT rather than
+  // the walk, which is the whole reason it can be this short. The walk keeps
+  // running, still writes Redis for six hours and still fills the memo, so a
+  // healthy region whose first walk is simply slower than the deadline loses
+  // its Clan Wars tag for one reader rather than for a cache window. Racing it
+  // inside the cached compute instead would have DISCARDED that walk's result
+  // and cached the empty set for five minutes, so a region taking longer than
+  // the deadline would have lost the tag repeatedly, forever, which is a worse
+  // bug than the one being fixed.
   return (await withDeadline(promise, WALK_DEADLINE_MS)) ?? new Set();
 }
