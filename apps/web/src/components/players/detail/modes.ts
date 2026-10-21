@@ -13,6 +13,7 @@ export enum PlayerMode {
   ClanWarsX = "cw-x",
   ClanWarsVIII = "cw-viii",
   ClanWarsVI = "cw-vi",
+  Onslaught = "onslaught",
   /**
    * The 2015 Rampage event, which WG's API carries as `statistics.fallout` and
    * which this tab was published as "Steel Hunter" until October 2026. They are
@@ -21,9 +22,16 @@ export enum PlayerMode {
    * were Domination and "Steel Hunt", one letter from the name it was given
    * here. Steel Hunter is the battle royale on eight dedicated vehicles, and
    * Wargaming publishes no statistics for it anywhere. See `RatedMode.Rampage`.
+   *
+   * **Last of the modes offered to everybody, and the order is the point.** It
+   * ended in May 2016, so it belongs after the ones still being played and
+   * right against the archived block below, which is what it is in all but
+   * name: it is only shown to every account rather than to those who played it
+   * because, unlike those five, its record has always been read here. This
+   * order drives the profile's tab row, the nav cards and the board tabs, which
+   * all read `PLAYER_MODE_LABEL`.
    */
   Rampage = "rampage",
-  Onslaught = "onslaught",
   // Modes nobody can play any more, whose record `account/info` still answers
   // and the profile never read. Offered only to the accounts that played them;
   // see `PLAYER_ARCHIVED_MODES` and `availablePlayerModes`.
@@ -51,8 +59,8 @@ export const PLAYER_MODE_LABEL: Record<PlayerMode, string> = {
   [PlayerMode.ClanWarsX]: "Clan Wars X",
   [PlayerMode.ClanWarsVIII]: "Clan Wars VIII",
   [PlayerMode.ClanWarsVI]: "Clan Wars VI",
-  [PlayerMode.Rampage]: "Rampage",
   [PlayerMode.Onslaught]: "Onslaught",
+  [PlayerMode.Rampage]: "Rampage",
   // The same strings `TANK_BATTLE_MODE_LABEL` gives the per-vehicle blocks:
   // one mode seen from two sides must not meet a reader under two words.
   [PlayerMode.ClanBattles]: "Clan Battles",

@@ -54,18 +54,18 @@ export async function PlayersModeTabs({
             {tGame("marks.3")}
           </Link>
           <Link
-            href={ROUTES.PLAYERS_RAMPAGE(region)}
-            prefetch="intent"
-            className={tabItemClass(active === PlayerBoard.Rampage)}
-          >
-            {tankModeName(TankBattleMode.Fallout, tGame)}
-          </Link>
-          <Link
             href={ROUTES.PLAYERS_ONSLAUGHT(region)}
             prefetch="intent"
             className={tabItemClass(active === PlayerBoard.Onslaught)}
           >
             {battleTypeName(BattleType.Onslaught, tGame)}
+          </Link>
+          <Link
+            href={ROUTES.PLAYERS_RAMPAGE(region)}
+            prefetch="intent"
+            className={tabItemClass(active === PlayerBoard.Rampage)}
+          >
+            {tankModeName(TankBattleMode.Fallout, tGame)}
           </Link>
         </TabBar>
       </PanelHeader>

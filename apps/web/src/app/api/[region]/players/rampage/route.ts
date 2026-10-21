@@ -9,7 +9,7 @@ import { measured } from "@/services/perf";
 
 /**
  * Rampage leaderboard
- * @description The Rampage player leaderboard for a region, ranked by the chosen `sort` column (MR by default). Only players with at least 100 Rampage battles are ranked. Rampage is the 2015 event Wargaming carries as `statistics.fallout`, which this board was published as "Steel Hunter" until October 2026; the two are different modes and Wargaming publishes no Steel Hunter statistics at all. It ended in May 2016, so the ranking is an archive: no row in it can move again.
+ * @description The Rampage player leaderboard for a region, ranked by the chosen `sort` column (MR by default). Only players with at least 100 Rampage battles are ranked. Rampage is the event Wargaming carries as `statistics.fallout`, which this board was published as "Steel Hunter" until October 2026; the two are different modes and Wargaming publishes no Steel Hunter statistics at all. The mode is not in the current rotation, so the totals behind this ranking are not moving.
  * @pathParams regionParams
  * @queryParams rampageQuery
  * @response RampageResponse

@@ -72,16 +72,16 @@ export function navSections(
           description: t("links.players-marks.description"),
         },
         {
-          id: "players-rampage",
-          label: tGame("player-modes.rampage"),
-          href: ROUTES.PLAYERS_RAMPAGE(region),
-          description: t("links.players-rampage.description"),
-        },
-        {
           id: "players-onslaught",
           label: tGame("player-modes.onslaught"),
           href: ROUTES.PLAYERS_ONSLAUGHT(region),
           description: t("links.players-onslaught.description"),
+        },
+        {
+          id: "players-rampage",
+          label: tGame("player-modes.rampage"),
+          href: ROUTES.PLAYERS_RAMPAGE(region),
+          description: t("links.players-rampage.description"),
         },
       ],
     },

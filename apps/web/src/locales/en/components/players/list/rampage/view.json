@@ -1,7 +1,7 @@
 {
   "heading": "Top players in <accent>{mode}</accent>",
-  "intro": "{mode} was a World of Tanks event mode, played from September 2015 to May 2016. The {region} leaderboard, ranked by MR (minimum 100 {mode} battles).",
-  "archived": "The mode ended in May 2016, so this ranking is an archive: the totals behind it cannot change again.",
+  "intro": "{mode} is a World of Tanks event mode. The {region} leaderboard, ranked by MR (minimum 100 {mode} battles).",
+  "archived": "{mode} is not in the current rotation, so this ranking is not moving.",
   "board": "Top {count} {mode} players",
   "columns": {
     "player": "Player",
