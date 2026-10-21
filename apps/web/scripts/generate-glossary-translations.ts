@@ -42,6 +42,8 @@ import {
   type Locale,
 } from "../src/lib/translations";
 import { GAME_CLIENT_LANGUAGE } from "../src/lib/game-vocabulary";
+import { cataloguedNames } from "./translation-rules";
+import { KNOWN_CATALOGUE_ERRORS } from "./glossary-terms";
 
 const SOURCE_DIR = join(webRoot, "content", "glossary");
 const OUT_DIR = join(webRoot, "content", "glossary");
@@ -90,6 +92,29 @@ const hashOf = (value: string) =>
 
 type Entry = { category: string; slug: string; source: string };
 
+/**
+ * What the game calls its own modes and ratings in one language, from
+ * `game/vocabulary`, which is what the interface renders beside the tooltip.
+ *
+ * The glossary was translated with nothing to hold it to, so its titles
+ * disagreed with the page around them: French titled Onslaught "Assaut" under
+ * a board headed "Offensive", German Stronghold "Bollwerk" beside a table
+ * headed "Festung". The interface now takes its terms from the glossary, which
+ * makes a title that contradicts the game a contradiction on every page.
+ */
+const vocabularies = new Map<string, Map<string, string>>();
+function gameNamesIn(locale: Locale): Map<string, string> {
+  const held = vocabularies.get(locale);
+  if (held) return held;
+  const read = (l: string) =>
+    JSON.parse(
+      readFileSync(join(webRoot, "src", "locales", l, "game", "vocabulary.json"), "utf8"),
+    ) as Record<string, unknown>;
+  const names = cataloguedNames(read(DEFAULT_LOCALE), read(locale));
+  vocabularies.set(locale, names);
+  return names;
+}
+
 /** Every English entry, in a stable order. */
 function readSource(): Entry[] {
   const out: Entry[] = [];
@@ -129,6 +154,13 @@ async function translate(
   const { data, content } = frontmatter(entry.source);
   const source = data as { term?: string; aliases?: string[] };
   const published = GAME_CLIENT_LANGUAGE[locale] !== undefined;
+  const names = gameNamesIn(locale);
+  const named = [...names].filter(
+    ([english, own]) =>
+      own !== english &&
+      entry.source.includes(english) &&
+      !KNOWN_CATALOGUE_ERRORS.has(`${locale}:${english}`),
+  );
   const prompt = `Translate a World of Tanks glossary entry from English into ${LOCALE_LABEL[locale]} (${locale}).
 
 Rules:
@@ -142,7 +174,11 @@ Rules:
         : `World of Tanks is NOT published in ${LOCALE_LABEL[locale]}, so there is no official wording to match. Write what a player of that language would naturally say, and keep the English for anything that is a proper name.`
     }
 - \`aliases\` are the other words a reader might search for. Keep an English acronym or spelling that players of that language actually type (WN8, HE, "armor"), and add the natural words of that language beside them. Drop an alias that has no equivalent rather than inventing one.
-- No em-dashes and no semicolons.
+- No em-dashes and no semicolons.${
+    named.length
+      ? `\n- These are the game's own names in ${LOCALE_LABEL[locale]}, already used by the page around this entry. Use them exactly wherever the entry names one, declined as the grammar needs:\n${named.map(([english, own]) => `  - ${english}: ${own}`).join("\n")}`
+      : ""
+  }
 
 term: ${JSON.stringify(source.term ?? entry.slug)}
 aliases: ${JSON.stringify(source.aliases ?? [])}
@@ -154,6 +190,14 @@ ${content.trim()}`;
     prompt,
   });
   const { output } = first;
+  // A title that IS one of the game's names is the catalogue's, not the
+  // model's: there is one right answer and it is written down.
+  const ownTitle =
+    source.term && !KNOWN_CATALOGUE_ERRORS.has(`${locale}:${source.term}`)
+      ? names.get(source.term)
+      : undefined;
+  const settle = (out: typeof output) =>
+    ownTitle ? { ...out, term: ownTitle.replace(/\u2019/g, "'") } : out;
   usage.calls++;
   usage.input += first.usage?.inputTokens ?? 0;
   usage.output += first.usage?.outputTokens ?? 0;
@@ -170,7 +214,7 @@ ${content.trim()}`;
       (p, i) => p.length > 40 && !p.startsWith("\`\`\`") && to[i] === p,
     );
   };
-  if (!echoed(output.body)) return output;
+  if (!echoed(output.body)) return settle(output);
   const retry = await generateText({
     model: openai(MODEL),
     output: Output.object({ schema: OUTPUT }),
@@ -179,7 +223,7 @@ ${content.trim()}`;
   usage.calls++;
   usage.input += retry.usage?.inputTokens ?? 0;
   usage.output += retry.usage?.outputTokens ?? 0;
-  return retry.output;
+  return settle(retry.output);
 }
 
 /**
