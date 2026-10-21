@@ -64,3 +64,4 @@ apps/web/.openapi-gen/
 
 # temp / scratch working dir (tool outputs, not tracked)
 /temp/
+/scratchpad/
