@@ -133,6 +133,26 @@ export class WargamingHttpError extends Error {
   }
 }
 
+/**
+ * Throw for a non-2xx, releasing the response body first.
+ *
+ * A `Response` whose body is never read holds the bytes already buffered for it
+ * until the collector gets round to it, and on this transport a non-2xx is the
+ * ORDINARY path rather than the failing one: the stronghold host answers 404 for
+ * a clan with no Stronghold and most clans have none, so a sweep produces them
+ * continuously. Cancelling is the right release rather than reading: the bytes
+ * are not wanted, and the status and path are all the error carries.
+ *
+ * Every non-2xx goes through here so none of the call sites can be the one that
+ * forgets. `body` is null on a 204 or 304, and a cancel that rejects is
+ * swallowed because failing to free memory must not replace the HTTP error the
+ * caller has to see.
+ */
+async function throwHttp(res: Response, pathname: string): Promise<never> {
+  await res.body?.cancel().catch(() => {});
+  throw new WargamingHttpError(res.status, res.statusText, pathname);
+}
+
 type WgEnvelope<T> =
   | { status: "ok"; data: T; meta?: { count: number } }
   | { status: "error"; error: { code: number; message: string; field?: string; value?: string } };
@@ -410,7 +430,7 @@ export class Transport {
             signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
             dispatcher: lane.dispatcher,
           } as FetchInit);
-          if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
+          if (!res.ok) await throwHttp(res, url.pathname);
           const envelope = (await res.json()) as WgEnvelope<T>;
           if (envelope.status === "error") {
             throw new WargamingApiError(envelope.error.message, envelope.error.field);
@@ -448,7 +468,7 @@ export class Transport {
             signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
             dispatcher: lane.dispatcher,
           } as FetchInit);
-          if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
+          if (!res.ok) await throwHttp(res, url.pathname);
           return (await res.json()) as T;
         } catch (err) {
           if (isTimeoutError(err)) {
@@ -485,7 +505,7 @@ export class Transport {
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
           dispatcher: lane?.dispatcher,
         } as FetchInit);
-        if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
+        if (!res.ok) await throwHttp(res, url.pathname);
         return res;
       }),
     );
@@ -558,7 +578,7 @@ export class Transport {
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
           dispatcher: lane?.dispatcher,
         } as FetchInit);
-        if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
+        if (!res.ok) await throwHttp(res, url.pathname);
         return (await res.json()) as T;
       }),
     );
