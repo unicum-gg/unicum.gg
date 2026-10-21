@@ -108,7 +108,7 @@ export interface paths {
         };
         /**
          * Player languages
-         * @description Languages the region's ranked players speak (inferred from their clan history), with total and strict (single-language) counts, over the pool of the requested leaderboard period. Backs the by-language leaderboards.
+         * @description Languages the region's ranked players speak (inferred from their clan history), with total and strict (single-language) counts, over the pool of the requested leaderboard period (and tier floor, on a recent period). Backs the by-language leaderboards.
          */
         get: operations["get-{region}-players-languages"];
         put?: never;
@@ -4319,6 +4319,11 @@ export interface components {
             jsonrpc: string;
             id: (string | number) | null;
         };
+        /**
+         * @description Recent periods only: count only the battles fought at this tier or above (10 includes XI), so a low-tier farm cannot carry the board. Ignored on the lifetime board.
+         * @enum {string}
+         */
+        minTierField: "6" | "8" | "10";
         moduleShell: {
             type: string;
             damage: number;
@@ -7373,6 +7378,7 @@ export interface operations {
         parameters: {
             query?: {
                 period?: "24h" | "7d" | "30d" | "overall";
+                min_tier?: components["schemas"]["minTierField"];
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 metric?: "wn7" | "wn8" | "wnx";
@@ -7455,6 +7461,7 @@ export interface operations {
         parameters: {
             query?: {
                 period?: "24h" | "7d" | "30d" | "overall";
+                min_tier?: components["schemas"]["minTierField"];
             };
             header?: never;
             path: {
@@ -8017,7 +8024,8 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        estimatedSeconds: number;
+                        estimatedSeconds: null;
+                        queued: boolean;
                     };
                 };
             };

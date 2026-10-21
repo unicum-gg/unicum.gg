@@ -1,4 +1,4 @@
-import { and, asc, between, desc, eq, inArray, isNotNull, lt, or, sql } from "drizzle-orm";
+import { and, between, desc, eq, inArray, isNotNull, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankLoadoutsByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, computeHR, type Stats, type StrongholdStats } from "@unicum.gg/shared";
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
@@ -20,6 +20,8 @@ import { writePlayerMarkCounts } from "./mark-counts";
 import { fetchPlayerMarksOnGun } from "./marks";
 import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
 import { computeDueAt } from "./refresh-policy";
+import { computeWindowRatings, writeTierWindowRatings } from "./window-ratings";
+import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 
@@ -744,7 +746,6 @@ async function updatePlayerRatings(
   tanks: TankStats[],
 ): Promise<void> {
   const players = playersByRegion[region];
-  const tankSnapshots = tankSnapshotsByRegion[region];
   const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
     getVehicleEncyclopedia(region),
     getWN8ExpectedValues(),
@@ -786,132 +787,18 @@ async function updatePlayerRatings(
       ? computeHR({ battles: shBattles, wins: fa?.wins ?? 0, avgXp: shAvgXp })
       : null;
 
-  // Recent-window ratings for each leaderboard period (24h / 7d / 30d). Per
-  // tank we take the newest snapshot older than the cutoff, or (for players
-  // tracked less than the window) the oldest snapshot other than the current
-  // one, so a short history still reflects the games played instead of coming
-  // back empty. Mirrors the player-page period baseline in initial-data.ts.
-  // Cheap per-player DISTINCT-ON queries run in parallel; keeping these cached
-  // columns in lockstep with every snapshot is what lets the top-players cron
-  // rank by a column (see wargaming/wot/players/top) instead of scanning the
-  // 300M-row tank_snapshots table every hour.
-  const periodRating = async (cutoffMs: number) => {
-    const cutoff = new Date(Date.now() - cutoffMs);
-    const cutoffTs = sql`${cutoff.toISOString()}::timestamptz`;
-    const rows = await db
-      .selectDistinctOn([tankSnapshots.tankId], {
-        tankId: tankSnapshots.tankId,
-        battles: tankSnapshots.battles,
-        wins: tankSnapshots.wins,
-        damageDealt: tankSnapshots.damageDealt,
-        spotted: tankSnapshots.spotted,
-        frags: tankSnapshots.frags,
-        droppedCapturePoints: tankSnapshots.droppedCapturePoints,
-        radioAssistedDamage: tankSnapshots.radioAssistedDamage,
-        trackAssistedDamage: tankSnapshots.trackAssistedDamage,
-        xp: tankSnapshots.xp,
-        markOfMastery: tankSnapshots.markOfMastery,
-        takenAt: tankSnapshots.takenAt,
-      })
-      .from(tankSnapshots)
-      .where(
-        and(
-          eq(tankSnapshots.playerId, playerId),
-          or(
-            lt(tankSnapshots.takenAt, cutoff),
-            sql`${tankSnapshots.takenAt} < (SELECT MAX(ts2.taken_at) FROM ${tankSnapshots} ts2 WHERE ts2.player_id = ${playerId} AND ts2.tank_id = ${tankSnapshots.tankId})`,
-          ),
-        ),
-      )
-      .orderBy(
-        tankSnapshots.tankId,
-        sql`(${tankSnapshots.takenAt} < ${cutoffTs}) DESC`,
-        sql`CASE WHEN ${tankSnapshots.takenAt} < ${cutoffTs} THEN ${tankSnapshots.takenAt} END DESC`,
-        asc(tankSnapshots.takenAt),
-        // Same-`taken_at` tie-break: battles is monotonic per tank (see
-        // carryForwardMarks).
-        desc(tankSnapshots.battles),
-      );
-    let pWn7: number | null = null;
-    let pWn8: number | null = null;
-    let pWnx: number | null = null;
-    let pBattles: number | null = null;
-    let pWins: number | null = null;
-    if (rows.length > 0) {
-      const baseline = new Map(
-        rows.map((r) => [
-          r.tankId,
-          {
-            id: 0,
-            playerId,
-            tankId: r.tankId,
-            takenAt: r.takenAt,
-            battles: r.battles,
-            wins: r.wins,
-            damageDealt: r.damageDealt,
-            spotted: r.spotted,
-            frags: r.frags,
-            droppedCapturePoints: r.droppedCapturePoints,
-            radioAssistedDamage: r.radioAssistedDamage,
-            trackAssistedDamage: r.trackAssistedDamage,
-            xp: r.xp,
-            markOfMastery: r.markOfMastery,
-            // Not needed for the rating diff.
-            marksOnGun: null,
-            markPercent: null,
-            survivedBattles: null,
-            hits: null,
-            shots: null,
-            piercings: null,
-            damageBlocked: null,
-            damageReceived: null,
-            capturePoints: null,
-            stunNumber: null,
-            stunAssistedDamage: null,
-            tankingFactor: null,
-            maxXp: null,
-            maxFrags: null,
-          },
-        ]),
-      );
-      const recent = diffTanks(tanks, baseline);
-      if (recent.length > 0) {
-        pWnx = computeWNX(recent, wnxExpected);
-        pWn8 = computeWN8(recent, wn8Expected, encyclopedia, wn8Fallback);
-        // WN7 needs aggregate stats and the average tier over the same window.
-        const agg = recent.reduce(
-          (acc, t) => {
-            acc.battles += t.all.battles;
-            acc.wins += t.all.wins;
-            acc.frags += t.all.frags;
-            acc.damageDealt += t.all.damage_dealt;
-            acc.spotted += t.all.spotted;
-            acc.droppedCapturePoints += t.all.dropped_capture_points;
-            return acc;
-          },
-          { battles: 0, wins: 0, frags: 0, damageDealt: 0, spotted: 0, droppedCapturePoints: 0 },
-        );
-        pBattles = agg.battles;
-        // Kept alongside the battles it was counted with, rather than consumed
-        // by WN7 and dropped. A window's win rate is `wins / battles` over the
-        // SAME diff, and recovering it later means either a second pass over
-        // the snapshots or a different window, which is how a recent win rate
-        // ends up disagreeing with the recent rating printed beside it.
-        pWins = agg.wins;
-        if (agg.battles > 0) {
-          pWn7 = computeWN7(agg, computeAvgTier(recent, encyclopedia));
-        }
-      }
-    }
-    return { wn7: pWn7, wn8: pWn8, wnx: pWnx, battles: pBattles, wins: pWins };
-  };
-
-  const DAY_MS = 24 * 60 * 60 * 1000;
-  const [p24h, p7d, p30d] = await Promise.all([
-    periodRating(DAY_MS),
-    periodRating(7 * DAY_MS),
-    periodRating(30 * DAY_MS),
-  ]);
+  // Recent-window ratings for each leaderboard period (24h / 7d / 30d), over
+  // every battle (the columns below, read by the profile and the clan pages)
+  // and over each tier floor's share of them (the recent leaderboards).
+  const windows = await computeWindowRatings(region, playerId, tanks, {
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+    wn8Fallback,
+  });
+  const p24h = windows[TopPlayersPeriod.Day].all;
+  const p7d = windows[TopPlayersPeriod.Week].all;
+  const p30d = windows[TopPlayersPeriod.Month].all;
 
   await db
     .update(players)
@@ -951,6 +838,7 @@ async function updatePlayerRatings(
       firstSnapshotAt: sql`COALESCE(${players.firstSnapshotAt}, NOW())`,
     })
     .where(eq(players.id, playerId));
+  await writeTierWindowRatings(region, info.account_id, windows);
 }
 
 async function backfillWtr(

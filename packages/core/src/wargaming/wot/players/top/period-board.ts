@@ -1,5 +1,10 @@
 import { sql } from "drizzle-orm";
-import { RatingMetric, playerPeriodRatingsByRegion } from "@unicum.gg/shared";
+import {
+  DEFAULT_TIER_FLOOR,
+  RatingMetric,
+  type TierFloor,
+  playerPeriodRatingsByRegion,
+} from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { type Region } from "@unicum.gg/wargaming";
 import type { RecentPeriod } from "./period-ratings";
@@ -28,7 +33,8 @@ const METRIC_COLUMN: Record<RatingMetric, string> = {
 };
 
 /**
- * One recent window's player board, optionally narrowed to a language.
+ * One recent window's player board at one tier floor, optionally narrowed to a
+ * language.
  *
  * A cheap indexed read of `*_player_period_ratings`, which the top-players
  * cron fills with every eligible account: the unfiltered board walks the
@@ -41,12 +47,15 @@ export async function getPeriodBoard(
   {
     metric,
     period,
+    minTier = DEFAULT_TIER_FLOOR,
     language = null,
     strict = false,
     limit,
   }: {
     metric: RatingMetric;
     period: RecentPeriod;
+    /** Only the battles at or above this tier are counted. */
+    minTier?: TierFloor;
     language?: string | null;
     strict?: boolean;
     limit: number;
@@ -64,6 +73,7 @@ export async function getPeriodBoard(
       ${col} AS value, languages, computed_at
     FROM ${table}
     WHERE period = ${period}
+      AND min_tier = ${minTier}
       AND ${col} IS NOT NULL
       ${langClause}
     ORDER BY ${col} DESC
@@ -99,13 +109,15 @@ export async function getPeriodBoard(
 export type PeriodLanguageStats = { code: string; total: number; strict: number };
 
 /**
- * The languages present on one recent window's board, counted over the very
+ * The languages present on one recent window's board (at one tier floor),
+ * counted over the very
  * pool it ranks, so a chip's count is the number of rows behind it. The
  * lifetime twin is `getPlayerLanguageStats` over `*_player_ratings`.
  */
 export async function getPeriodLanguageStats(
   region: Region,
   period: RecentPeriod,
+  minTier: TierFloor = DEFAULT_TIER_FLOOR,
 ): Promise<PeriodLanguageStats[]> {
   const table = playerPeriodRatingsByRegion[region];
   const rows = (await db.execute(sql`
@@ -113,7 +125,7 @@ export async function getPeriodLanguageStats(
       COUNT(*)::int AS total,
       COUNT(*) FILTER (WHERE cardinality(languages) = 1)::int AS strict
     FROM ${table}, unnest(languages) AS lang
-    WHERE period = ${period}
+    WHERE period = ${period} AND min_tier = ${minTier}
     GROUP BY lang
     ORDER BY total DESC
   `)) as unknown as PeriodLanguageStats[];

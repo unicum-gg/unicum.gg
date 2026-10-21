@@ -1,7 +1,9 @@
 "use client";
 
 import { Interpolate } from "@/components/interpolate";
+import { toRoman } from "roman-numerals";
 import { useStatsPeriod } from "@/hooks/use-period";
+import { useTierFloor } from "@/hooks/use-tier-floor";
 import { useTranslation } from "@/hooks/use-translation";
 import { useFormat } from "@/hooks/use-format";
 import {
@@ -46,6 +48,7 @@ export function TopPlayersIntro({
   const { t: tGame } = useTranslation("game/vocabulary");
   const { num } = useFormat();
   const [period] = useStatsPeriod();
+  const [tier] = useTierFloor();
   const template =
     period === StrongholdPeriod.Overall
       ? t(`intro.${variant}`, { region, language })
@@ -53,6 +56,7 @@ export function TopPlayersIntro({
           region,
           language,
           period: tGame(`stronghold-periods.${period}`),
+          tier: toRoman(tier),
           battles: num({ maximumFractionDigits: 0 }).format(
             TOP_PLAYERS_MIN_BATTLES[period],
           ),

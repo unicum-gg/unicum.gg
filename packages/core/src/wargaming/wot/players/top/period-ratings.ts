@@ -3,6 +3,7 @@ import {
   TOP_PLAYERS_MIN_BATTLES,
   clansByRegion,
   playerPeriodRatingsByRegion,
+  playerTierWindowRatingsByRegion,
   playersByRegion,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
@@ -38,36 +39,30 @@ const LANGUAGES_TTL = "24 hours";
  */
 const HOURLY_INFER_CAP = 15000;
 
-/** The players-row columns behind one window. */
-function windowColumns(region: Region, period: RecentPeriod) {
-  const p = playersByRegion[region];
-  switch (period) {
-    case TopPlayersPeriod.Day:
-      return { battles: p.battles24h, wins: p.wins24h, wn7: p.wn724h, wn8: p.wn824h, wnx: p.wnx24h };
-    case TopPlayersPeriod.Week:
-      return { battles: p.battles7d, wins: p.wins7d, wn7: p.wn77d, wn8: p.wn87d, wnx: p.wnx7d };
-    case TopPlayersPeriod.Month:
-      return { battles: p.battles30d, wins: p.wins30d, wn7: p.wn730d, wn8: p.wn830d, wnx: p.wnx30d };
-  }
-}
-
 /**
- * Who a window ranks: its battle floor, played inside it, not deleted.
+ * Who a window ranks: its battle floor counted over the battles at or above
+ * each tier floor, played inside it, not deleted.
  *
- * The window columns are only rewritten when an account moves, so the
- * `last_battle_at` guard is what keeps a player who stopped in April off the
- * board for "the past 7 days" they last played in.
+ * The per-floor ratings are written by the snapshot path, which already drops
+ * a row under the battle floor; the floor is applied again here so a change to
+ * it takes effect on the next pass rather than on each account's next battle.
+ * The rows are only rewritten when an account moves, so the `last_battle_at`
+ * guard is what keeps a player who stopped in April off the board for "the
+ * past 7 days" they last played in.
  */
 function poolFor(region: Region, period: RecentPeriod): SQL {
   const players = playersByRegion[region];
-  const c = windowColumns(region, period);
+  const tier = playerTierWindowRatingsByRegion[region];
   return sql`
-    SELECT ${period}::text AS period, ${players.accountId} AS account_id,
+    SELECT ${period}::text AS period, ${tier.minTier} AS min_tier,
+      ${players.accountId} AS account_id,
       ${players.nickname} AS nickname, ${players.clanId} AS clan_id,
-      ${c.battles} AS battles, ${c.wins} AS wins,
-      ${c.wn7} AS wn7, ${c.wn8} AS wn8, ${c.wnx} AS wnx
-    FROM ${players}
-    WHERE ${c.battles} >= ${TOP_PLAYERS_MIN_BATTLES[period]}
+      ${tier.battles} AS battles, ${tier.wins} AS wins,
+      ${tier.wn7} AS wn7, ${tier.wn8} AS wn8, ${tier.wnx} AS wnx
+    FROM ${tier}
+    INNER JOIN ${players} ON ${players.accountId} = ${tier.accountId}
+    WHERE ${tier.period} = ${period}
+      AND ${tier.battles} >= ${TOP_PLAYERS_MIN_BATTLES[period]}
       AND ${players.lastBattleAt} >= now() - ${sql.raw(`interval '${PERIOD_WINDOW[period]}'`)}
       AND ${players.softDeletedAt} IS NULL`;
 }
@@ -76,9 +71,9 @@ function poolFor(region: Region, period: RecentPeriod): SQL {
  * Recompute every recent window's pool for a region and replace its rows in
  * `*_player_period_ratings`.
  *
- * One statement for all three windows, so an account eligible for several is
- * scored once. The pool is read off the players row (the same cached window
- * columns the `*_top_players` boards rank on) and every eligible account is
+ * One statement for all three windows and their three tier floors, so an
+ * account eligible for several is scored once. The pool is read off
+ * `*_player_tier_window_ratings` (see `poolFor`) and every eligible account is
  * stored, languages or not, because the unfiltered recent boards read here too.
  *
  * The languages are the expensive half, so they are carried: an account whose
@@ -126,7 +121,7 @@ export async function recomputePlayerPeriodRatings(
         ${limit}
       ),
       ${languageInferenceCtes(region, sql`SELECT account_id FROM todo`)}
-      SELECT p.period, p.account_id, p.nickname, p.battles, p.wins,
+      SELECT p.period, p.min_tier, p.account_id, p.nickname, p.battles, p.wins,
         p.wn7, p.wn8, p.wnx,
         COALESCE(
           CASE WHEN t.account_id IS NOT NULL THEN l.languages ELSE prev.languages END,
@@ -143,10 +138,10 @@ export async function recomputePlayerPeriodRatings(
     await tx.delete(table);
     const inserted = await tx.execute(sql`
       INSERT INTO ${table} (
-        period, account_id, nickname, battles, wins, wn7, wn8, wnx,
+        period, min_tier, account_id, nickname, battles, wins, wn7, wn8, wnx,
         languages, languages_at, clan_tag, clan_color
       )
-      SELECT period, account_id, nickname, battles, wins, wn7, wn8, wnx,
+      SELECT period, min_tier, account_id, nickname, battles, wins, wn7, wn8, wnx,
         languages, languages_at, clan_tag, clan_color
       FROM next_period_ratings
     `);

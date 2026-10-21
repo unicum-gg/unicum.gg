@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { toRoman } from "roman-numerals";
 import useSWR from "swr";
 import { useLocale } from "@onruntime/translations/react";
 import { Interpolate } from "@/components/interpolate";
@@ -17,6 +18,7 @@ import { PlayerBoard, boardLanguageHref } from "@/components/players/list/boards
 import { PlayerLanguageSelect } from "@/components/players/list/language-select";
 import { TopPlayersBoard } from "@/components/players/list/top-players-board";
 import { isStrongholdPeriod, useStatsPeriod } from "@/hooks/use-period";
+import { useTierFloor } from "@/hooks/use-tier-floor";
 import { useTranslation } from "@/hooks/use-translation";
 import { numberFormat } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -26,6 +28,8 @@ import {
   RATING_METRICS,
   RatingMetric,
   StrongholdPeriod,
+  TIER_FLOORS,
+  type TierFloor,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -33,6 +37,11 @@ import type { Region } from "@unicum.gg/wargaming";
 const BOARD_PERIODS = Object.values(StrongholdPeriod);
 
 const LIMIT = 1000;
+
+/** A floor as the API's `min_tier` spells it. */
+function tierParam(floor: TierFloor): "6" | "8" | "10" {
+  return String(floor) as "6" | "8" | "10";
+}
 
 export type TopPlayersByMetric = Record<RatingMetric, TopPlayerByLanguageResult[]>;
 
@@ -49,6 +58,12 @@ export type LanguageCount = { code: string; total: number; strict: number };
  * navigation. The window is the site's shared period cookie, so a reader who
  * picked 30 days on the home page or a stronghold board lands here on it too,
  * and `?period=` keeps a link to it shareable.
+ *
+ * A recent window is ranked three times over, by the battles fought at tier VI,
+ * VIII and X and up (`TierFloor`), picked by the segments beside the language
+ * filter and carried in `?tier=`. Counting every tier let a low-tier farm take
+ * the top of the board, so a recent window always counts from a floor. The
+ * lifetime board has no floor and shows no segments.
  *
  * The language filter works on every window. Its chips and the strict toggle
  * count the pool of the window on screen (the lifetime counts arrive with the
@@ -79,11 +94,12 @@ export function TopPlayersPanel({
   const { t } = useTranslation("components/players/list/view");
   const { t: tGame } = useTranslation("game/vocabulary");
   const [period, setPeriodCookie] = useStatsPeriod();
+  const [tier, setTier] = useTierFloor();
   const overall = period === StrongholdPeriod.Overall;
 
   const { data, isLoading } = useSWR(
-    overall ? null : (["players-top", region, period, language, strict] as const),
-    async ([, r, p, lang, s]) => {
+    overall ? null : (["players-top", region, period, tier, language, strict] as const),
+    async ([, r, p, floor, lang, s]) => {
       const api = unicum.region(r).players;
       const lists = await Promise.all(
         RATING_METRICS.map((metric) =>
@@ -91,6 +107,7 @@ export function TopPlayersPanel({
             .top({
               metric,
               period: p,
+              min_tier: tierParam(floor),
               limit: LIMIT,
               ...(lang ? { lang } : {}),
               ...(s ? { strict: "true" as const } : {}),
@@ -105,11 +122,11 @@ export function TopPlayersPanel({
     { keepPreviousData: true },
   );
   const { data: periodStats } = useSWR(
-    overall ? null : (["players-languages", region, period] as const),
-    ([, r, p]) =>
+    overall ? null : (["players-languages", region, period, tier] as const),
+    ([, r, p, floor]) =>
       unicum
         .region(r)
-        .players.languages(p)
+        .players.languages({ period: p, min_tier: tierParam(floor) })
         .then((res) => res.results as LanguageCount[]),
     { keepPreviousData: true },
   );
@@ -170,6 +187,16 @@ export function TopPlayersPanel({
           />
         </PanelTitle>
         <div className="flex flex-wrap items-center gap-2">
+          {!overall && (
+            <SegmentedControl
+              active={tierParam(tier)}
+              onSelect={(id) => setTier(Number(id) as TierFloor)}
+              segments={TIER_FLOORS.map((floor) => ({
+                id: tierParam(floor),
+                label: t("tier-floor", { tier: toRoman(floor) }),
+              }))}
+            />
+          )}
           <PlayerLanguageSelect
             available={stats.map((s) => ({ code: s.code, playersCount: s.total }))}
             active={language}

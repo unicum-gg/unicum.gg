@@ -1,4 +1,4 @@
-import { ratingMetricFromCookie } from "@unicum.gg/shared";
+import { parseTierFloor, ratingMetricFromCookie } from "@unicum.gg/shared";
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import {
@@ -67,6 +67,7 @@ async function GET__perf(
       const { results, computedAt } = await getPeriodBoard(region, {
         metric,
         period,
+        minTier: parseTierFloor(url.searchParams.get("min_tier")),
         language: lang,
         strict,
         limit,

@@ -5,6 +5,7 @@ import {
   pgTable,
   primaryKey,
   real,
+  smallint,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
@@ -12,7 +13,7 @@ import { Region } from "@unicum.gg/wargaming";
 
 // Every account eligible for a recent leaderboard window (24h, 7d, 30d), with
 // its ratings over that window and the languages inferred from its clan
-// history, one row per (period, account). Recomputed hourly by the top-players
+// history, one row per (period, tier floor, account). Recomputed hourly by the top-players
 // cron. It is the recent twin of `player_ratings`, and exists for the same
 // reason: the player board filters by language, the inference is too slow to
 // run per request, and `player_ratings` only holds the LIFETIME pool (10k
@@ -25,6 +26,10 @@ export function makePlayerPeriodRatingsTable(region: string) {
     {
       // The window's wire value: `24h`, `7d` or `30d`.
       period: text("period").notNull(),
+      // The lowest tier whose battles the ratings count, a `TierFloor` value.
+      // Each window is ranked three times (tier 6, 8 and 10 and up), so a
+      // low-tier farm cannot carry a recent board.
+      minTier: smallint("min_tier").notNull().default(6),
       accountId: bigint("account_id", { mode: "number" }).notNull(),
       nickname: text("nickname").notNull(),
       // Battles and wins INSIDE the window, so the board's win rate is the
@@ -49,16 +54,16 @@ export function makePlayerPeriodRatingsTable(region: string) {
         .defaultNow(),
     },
     (t) => [
-      primaryKey({ columns: [t.period, t.accountId] }),
+      primaryKey({ columns: [t.period, t.minTier, t.accountId] }),
       index(`${region}_player_period_ratings_languages_idx`).using(
         "gin",
         t.languages,
       ),
-      // The unfiltered board is `WHERE period = $1 ORDER BY <metric> DESC
-      // LIMIT 1000` over up to ~60k rows, so each metric gets its ordering.
-      index(`${region}_player_period_ratings_wn7_idx`).on(t.period, t.wn7.desc()),
-      index(`${region}_player_period_ratings_wn8_idx`).on(t.period, t.wn8.desc()),
-      index(`${region}_player_period_ratings_wnx_idx`).on(t.period, t.wnx.desc()),
+      // The unfiltered board is `WHERE period = $1 AND min_tier = $2 ORDER BY
+      // <metric> DESC LIMIT 1000`, so each metric gets its ordering.
+      index(`${region}_player_period_ratings_wn7_idx`).on(t.period, t.minTier, t.wn7.desc()),
+      index(`${region}_player_period_ratings_wn8_idx`).on(t.period, t.minTier, t.wn8.desc()),
+      index(`${region}_player_period_ratings_wnx_idx`).on(t.period, t.minTier, t.wnx.desc()),
     ],
   );
 }

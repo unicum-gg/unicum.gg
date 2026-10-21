@@ -6,6 +6,7 @@ import {
   BattleType,
   ClanBoard,
   DEFAULT_RATING_METRIC,
+  DEFAULT_TIER_FLOOR,
   MapCamouflage,
   MapGameMode,
   MapRatingAxis,
@@ -536,13 +537,29 @@ const withLanguagesField = z.enum(["true", "false"]).meta({
     "Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language. The recent periods always carry them.",
 });
 
+/**
+ * The lowest tier whose battles a recent board counts (`TierFloor`).
+ *
+ * Literal strings rather than the enum: `TierFloor` is numeric, a query string
+ * is not, and the generator cannot read an imported list anyway. The handlers
+ * read it through `parseTierFloor`, which falls back to the default rather than
+ * rejecting, so a value added to the enum before this list only goes
+ * undocumented.
+ */
+const minTierField = z.enum(["6", "8", "10"]).meta({
+  description:
+    "Recent periods only: count only the battles fought at this tier or above (10 includes XI), so a low-tier farm cannot carry the board. Ignored on the lifetime board.",
+});
+
 /** Which board's pool the language counts are taken over. */
 export const playerLanguagesQuery = z.object({
   period: periodField.optional(),
+  min_tier: minTierField.optional(),
 });
 
 export const playersTopQuery = z.object({
   period: periodField.optional(),
+  min_tier: minTierField.optional(),
   limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
   lang: playerLangField.optional(),
@@ -629,6 +646,7 @@ export const onslaughtHistoryQuery = z.object({
 export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
   period: TopPlayersPeriod.Overall,
   metric: DEFAULT_RATING_METRIC,
+  min_tier: String(DEFAULT_TIER_FLOOR),
   granularity: SessionGranularity.Daily,
   range: ServerStatsRange.Day,
   window: DEFAULT_ACTIVITY_WINDOW,

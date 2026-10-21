@@ -1,4 +1,5 @@
 import { isRegion } from "@unicum.gg/wargaming";
+import { parseTierFloor } from "@unicum.gg/shared";
 import { getPlayerLanguageStats } from "@/services/players/available-languages";
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
@@ -10,7 +11,7 @@ import { measured } from "@/services/perf";
 
 /**
  * Player languages
- * @description Languages the region's ranked players speak (inferred from their clan history), with total and strict (single-language) counts, over the pool of the requested leaderboard period. Backs the by-language leaderboards.
+ * @description Languages the region's ranked players speak (inferred from their clan history), with total and strict (single-language) counts, over the pool of the requested leaderboard period (and tier floor, on a recent period). Backs the by-language leaderboards.
  * @pathParams regionParams
  * @queryParams playerLanguagesQuery
  * @response PlayerLanguagesResponse
@@ -30,11 +31,16 @@ async function GET__perf(
   }
   // Counted over the pool the chosen board ranks, so a chip's count is the
   // number of rows behind it whichever window the reader is on.
+  const query = new URL(req.url).searchParams;
   const period = S.periodField
     .catch(TopPlayersPeriod.Overall)
-    .parse(new URL(req.url).searchParams.get("period"));
+    .parse(query.get("period"));
   const results = isRecentPeriod(period)
-    ? await getPeriodLanguageStats(region, period)
+    ? await getPeriodLanguageStats(
+        region,
+        period,
+        parseTierFloor(query.get("min_tier")),
+      )
     : await getPlayerLanguageStats(region);
   return jsonResponse(PlayerLanguagesResponse, { results });
 }
