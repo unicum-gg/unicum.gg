@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Offensiver
 aliases:
   - fort strider
   - advance

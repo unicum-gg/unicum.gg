@@ -14,7 +14,7 @@
     },
     "damage": {
       "label": "Schaden",
-      "tip": "Alpha-Schaden"
+      "tip": "Alphaschaden"
     },
     "moduleDamage": {
       "label": "Modulschaden"
@@ -107,7 +107,7 @@
     },
     "health": {
       "label": "Strukturpunkte",
-      "tip": "Hitpoints"
+      "tip": "Strukturpunkte"
     },
     "engineHealth": {
       "label": "Motorstrukturpunkte"

@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: 클랜 전쟁
 aliases:
   - CW
   - 글로벌 맵

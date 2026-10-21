@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: خط المواجهة
 aliases:
   - front line
   - FL

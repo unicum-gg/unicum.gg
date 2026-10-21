@@ -22,7 +22,16 @@
     "cw-x": "Klankriger X",
     "cw-viii": "Klankriger VIII",
     "cw-vi": "Klankriger VI",
-    "onslaught": "Onslaught"
+    "onslaught": "Onslaught",
+    "clan": "Klankamper",
+    "company": "Kampvognkompani",
+    "team": "Lagkamper",
+    "permanent-teams": "Faste lag",
+    "historical": "Historiske kamper"
+  },
+  "tank-modes": {
+    "globalmap": "Globalt kart",
+    "ranked_10x10": "Rangerte kamper 10x10"
   },
   "stronghold-tiers": {
     "advances": "Fremrykkinger",

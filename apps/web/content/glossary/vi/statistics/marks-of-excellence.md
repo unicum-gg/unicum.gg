@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Dấu hiệu Thiện chiến
 aliases:
   - MoE
   - marks

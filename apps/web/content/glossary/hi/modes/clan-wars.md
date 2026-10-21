@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: क्लान युद्ध
 aliases:
   - CW
   - global map

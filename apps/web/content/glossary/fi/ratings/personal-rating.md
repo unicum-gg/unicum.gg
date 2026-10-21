@@ -1,5 +1,5 @@
 ---
-term: Henkilökohtainen arvio
+term: Henkilökohtainen luokitus
 aliases:
   - global rating
   - wg rating

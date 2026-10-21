@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Fortăreață
 aliases:
   - strongholds
   - clan base

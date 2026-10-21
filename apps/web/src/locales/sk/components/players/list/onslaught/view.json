@@ -20,7 +20,7 @@
   "ranks": {
     "title": "Hodnosti",
     "meaning": "Význam",
-    "tier": "Stopnja",
+    "tier": "Raven",
     "intro": "Hodnosti v režime {mode} si zvyšujete víťazstvami v bitkách. Každé víťazstvo udeľuje točke ocene podľa toho, ako dobre ste hrali. Hodnosť {champion} je najvyššia hodnosť, ktorú môžete dosiahnuť iba bodmi, a jej dosiahnutie vás zaradí do rebríčka. {legend} nie je pevný prag, ide o najvyššie hodnotenú časť hráčov v hodnosti {champion}, takže jeho hranica sa mení podľa konkurencie, pričom pri rovnosti rozhoduje počet odohraných bitiek. Presné prahy {legend} a {champion} sú prahy zobrazenej sezóny a sú vyznačené na lestvici.",
     "legend-blurb": "Najvyššie hodnotení hráči s hodnosťou {champion}. Hra ju každú sezónu obmedzuje pevne stanovenou pozíciou v rebríčku, takže jej veľkosť sa líši podľa sezóny a regiónu, nie pevnou bodovou hranicou. Ak klesnete pod posledného hráča s hodnosťou {legend}, vrátite sa na hodnosť {champion}.",
     "champion-blurb": "Najvyššia hodnosť, ktorú môžete dosiahnuť pomocou bodov hodnotenia, a vstupná hodnosť do rebríčka. Každý hráč v rebríčku má prinajmenšom hodnosť {champion}."

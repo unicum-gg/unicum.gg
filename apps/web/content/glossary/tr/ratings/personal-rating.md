@@ -1,5 +1,5 @@
 ---
-term: Kişisel Derece
+term: Kişisel Reyting
 aliases:
   - global rating
   - wg rating

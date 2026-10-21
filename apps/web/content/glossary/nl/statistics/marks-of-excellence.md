@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Markeringen van uitmuntendheid
 aliases:
   - MoE
   - marks

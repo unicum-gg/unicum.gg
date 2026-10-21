@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: Personlig rating
 aliases:
   - global rating
   - wg rating

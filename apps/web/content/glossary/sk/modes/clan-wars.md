@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klanské vojny
 aliases:
   - CW
   - global map

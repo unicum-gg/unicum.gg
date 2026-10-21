@@ -22,7 +22,16 @@
     "cw-x": "Klanų karai X",
     "cw-viii": "Klanų karai VIII",
     "cw-vi": "Klanų karai VI",
-    "onslaught": "Prasiveržimas"
+    "onslaught": "Prasiveržimas",
+    "clan": "Klanų mūšiai",
+    "company": "Tankų kuopa",
+    "team": "Komandiniai mūšiai",
+    "permanent-teams": "Nuolatinės komandos",
+    "historical": "Istoriniai mūšiai"
+  },
+  "tank-modes": {
+    "globalmap": "Globalus žemėlapis",
+    "ranked_10x10": "Reitinguojami mūšiai 10x10"
   },
   "stronghold-tiers": {
     "advances": "Puolimai",

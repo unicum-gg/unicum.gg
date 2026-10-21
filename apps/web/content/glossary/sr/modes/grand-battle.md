@@ -1,5 +1,5 @@
 ---
-term: Velika Bitka
+term: Velika Borba
 aliases:
   - grand battles
 related:

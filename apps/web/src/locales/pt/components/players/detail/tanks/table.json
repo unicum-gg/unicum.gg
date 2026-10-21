@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Ainda não há tanques jogados.",
   "no-tanks-match-these-filters": "Nenhum tanque corresponde a estes filtros.",
-  "name": "Nome"
+  "name": "Nome",
+  "no-tanks-played-in-this-mode": "Não há nenhum tanque jogado neste modo."
 }

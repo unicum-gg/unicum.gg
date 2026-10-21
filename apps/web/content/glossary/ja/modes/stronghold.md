@@ -1,5 +1,5 @@
 ---
-term: 強固拠点
+term: 拠点
 aliases:
   - strongholds
   - クラン基地

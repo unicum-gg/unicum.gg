@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: ฐานที่มั่น
 aliases:
   - strongholds
   - ฐานกิจกรรม

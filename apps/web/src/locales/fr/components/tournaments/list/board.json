@@ -14,6 +14,6 @@
   "region-tournaments": "Tournois de la région {region} ({count})",
   "status": "Statut",
   "teams": "Équipes",
-  "tier": "Niveau",
+  "tier": "Rang",
   "tournament": "Tournoi"
 }

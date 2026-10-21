@@ -22,7 +22,16 @@
     "cw-x": "Πόλεμοι Φυλών X",
     "cw-viii": "Πόλεμοι Φυλών VIII",
     "cw-vi": "Πόλεμοι Φυλών VI",
-    "onslaught": "Επέλαση"
+    "onslaught": "Επέλαση",
+    "clan": "Μάχες Clan",
+    "company": "Λόχος Τανκ",
+    "team": "Μάχες με Ομάδα",
+    "permanent-teams": "Μόνιμες Ομάδες",
+    "historical": "Ιστορικές Μάχες"
+  },
+  "tank-modes": {
+    "globalmap": "Παγκόσμιος Χάρτης",
+    "ranked_10x10": "Μάχες Κατάταξης 10x10"
   },
   "stronghold-tiers": {
     "advances": "Προωθήσεις",

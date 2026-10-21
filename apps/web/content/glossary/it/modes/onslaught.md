@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Aggressione
 aliases:
   - comp7
   - competitivo 7

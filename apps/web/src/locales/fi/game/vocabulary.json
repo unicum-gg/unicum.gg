@@ -22,7 +22,16 @@
     "cw-x": "Klaanisodat X",
     "cw-viii": "Klaanisodat VIII",
     "cw-vi": "Klaanisodat VI",
-    "onslaught": "Rynnistys"
+    "onslaught": "Rynnistys",
+    "clan": "Klaanitaisteluita",
+    "company": "Panssarihyökkäyskomppania",
+    "team": "Joukkuetaistelut",
+    "permanent-teams": "Pysyvät joukkueet",
+    "historical": "Historialliset taistelut"
+  },
+  "tank-modes": {
+    "globalmap": "Maailmankartta",
+    "ranked_10x10": "Liigataistelut 10x10"
   },
   "stronghold-tiers": {
     "advances": "Hyökkäysoperaatiot",

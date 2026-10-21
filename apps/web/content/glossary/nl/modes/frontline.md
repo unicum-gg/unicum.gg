@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Frontlinie
 aliases:
   - front line
   - FL

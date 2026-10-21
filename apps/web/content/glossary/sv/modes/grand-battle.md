@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Pansarslag
 aliases:
   - grand battles
 related:

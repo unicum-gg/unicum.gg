@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Slučajne Bitke
 aliases:
   - randoms
   - pubs

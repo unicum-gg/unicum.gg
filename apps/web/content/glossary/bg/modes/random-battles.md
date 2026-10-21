@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Случайни битки
 aliases:
   - randoms
   - пубове

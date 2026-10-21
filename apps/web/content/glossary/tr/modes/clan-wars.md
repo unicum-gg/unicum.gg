@@ -1,5 +1,5 @@
 ---
-term: Clan Savaşları
+term: Klan Savaşları
 aliases:
   - CW
   - küresel harita

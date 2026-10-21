@@ -3,5 +3,5 @@
   "loading-one": "{count} véhicule de rang {tier}, chargement de son nom…",
   "and-more": "et {count} autres",
   "hint": "Cliquez pour les ouvrir dans l’onglet Chars",
-  "tier": "Niveau"
+  "tier": "Rang"
 }

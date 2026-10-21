@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Αψιμαχία
 aliases:
   - skirmishes
   - κλειστός αγώνας

@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Mga marka ng kahusayan
 aliases:
   - MoE
   - marks

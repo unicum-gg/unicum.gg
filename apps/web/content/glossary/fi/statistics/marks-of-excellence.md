@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Merkit erinomaisuudesta
 aliases:
   - MoE
   - merkit

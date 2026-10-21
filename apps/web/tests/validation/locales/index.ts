@@ -5,6 +5,7 @@ import { boundaryTests } from "./boundary";
 import { articlesTests } from "./articles";
 import { copyTests } from "./copy";
 import { directiveTests } from "./directive";
+import { glossaryTests } from "./glossary";
 import { holesTests } from "./holes";
 import { completenessTests } from "./completeness";
 import { namingTests } from "./naming";
@@ -80,4 +81,5 @@ export function localesTests() {
   directiveTests();
   articlesTests();
   vocabularyTests();
+  glossaryTests();
 }

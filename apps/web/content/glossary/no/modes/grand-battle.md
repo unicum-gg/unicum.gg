@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Storkamp
 aliases:
   - grand battles
 related:

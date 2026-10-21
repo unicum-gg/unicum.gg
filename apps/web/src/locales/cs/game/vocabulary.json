@@ -22,7 +22,16 @@
     "cw-x": "Klanové války X",
     "cw-viii": "Klanové války VIII",
     "cw-vi": "Klanové války VI",
-    "onslaught": "Nápor"
+    "onslaught": "Nápor",
+    "clan": "Klanové bitvy",
+    "company": "Tanková rota",
+    "team": "Týmové bitvy",
+    "permanent-teams": "Stálé týmy",
+    "historical": "Historické bitvy"
+  },
+  "tank-modes": {
+    "globalmap": "Globální mapa",
+    "ranked_10x10": "Hodnocené bitvy 10x10"
   },
   "stronghold-tiers": {
     "advances": "Ofenzívy",
@@ -40,8 +49,8 @@
     "sr": "SR",
     "srb": "SRB",
     "elo": "ELO",
-    "battles": "Bitev",
-    "winrate": "Míra výher"
+    "battles": "Bitvy",
+    "winrate": "Procento vítězství"
   },
   "clan-boards": {
     "advances": "Ofenzívy",
@@ -110,7 +119,7 @@
     "iron": "Železný",
     "bronze": "Bronzový",
     "silver": "Stříbrný",
-    "gold": "Zlatý",
+    "gold": "Zlaťáky",
     "champion": "Šampion",
     "legend": "Legenda",
     "crest": "{mode} {tier}",
@@ -124,7 +133,7 @@
     "SPG": "SPG"
   },
   "vehicle-roles": {
-    "assault": "Útočný",
+    "assault": "Útok",
     "break": "Průlomový",
     "support": "Podpůrný",
     "universal": "Všestranný",

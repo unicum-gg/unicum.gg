@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Đại Chiến
 aliases:
   - grand battles
 related:

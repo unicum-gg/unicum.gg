@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Befästning
 aliases:
   - strongholds
   - klanbas

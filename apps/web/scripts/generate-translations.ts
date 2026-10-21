@@ -30,9 +30,11 @@ import {
   matchedEdges,
   missingGameName,
   shouts,
+  isIdentifier,
   typographic,
   type GameName,
 } from "./translation-rules";
+import { glossaryTerms } from "./glossary-terms";
 import { interpolations, type Fill } from "./interpolations";
 import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -281,36 +283,20 @@ let askedTerms: Set<string> | undefined;
 /**
  * What an ambiguous term names HERE.
  *
- * The sheet asks about bare words, and a bare word carries no sense: "Tier"
- * came back as the French "Rang", which is a rank or a league, where World of
- * Tanks says "Niveau" for a vehicle's place in the tech tree. German and Polish
- * happened to answer correctly ("Stufe", "Poziom"), which is exactly why this
- * has to be stated rather than left to luck. Every language decides again with
- * the sense in hand.
- */
-/**
- * Terms the client's own match gets wrong, so the model decides them instead.
+ * The sheet asks about bare words, and a bare word carries no sense, so every
+ * language decides with the sense in hand.
  *
- * `game-terms.json` pairs a client string with its translation BY KEY, which is
- * right almost everywhere and silently wrong when two different screens share
- * an English word. "Tier" is the case that showed: some client key reading
- * "Tier" in English is "Rang" in French, which is the Ranked Battles word, and
- * it won over everything because the official sheet is applied before the model
- * is asked. Wargaming's own French prose says "niveau" twelve times and "rang"
- * never, so the client match is naming a different thing.
- *
- * Listed by TERM rather than by language: every language re-decides, and the
- * ones the client got right (German "Stufe", Polish "poziom") answer the same
- * way from the meaning alone.
+ * "Tier" is the one that went wrong twice, in opposite directions. It was first
+ * excluded from the client match and steered to "niveau" in French, on the
+ * reading that the client's "Rang" was the Ranked Battles word. It is not: the
+ * French client writes "Rang X" on the vehicle, "Tous les rangs" on the tech
+ * tree filter and "Rang du véhicule" on the card, the glossary says "Rang", and
+ * players say "rang". Steering the model away from it is what left the site
+ * reading "Niveau" in one column and "Rang VI" in the next.
  */
-const CLIENT_MISMATCH = new Set(["Tier"]);
-
 const TERM_MEANINGS: [string, string][] = [
-  // Measured against Wargaming's own prose rather than assumed: their French
-  // descriptions say "niveau" twelve times and "rang" never, Spanish "nivel"
-  // ten times against one "rango". The word for a LEVEL, not for a rank.
-  ["Tier", "a vehicle's level in the tech tree, written I to X. The word your language uses for a LEVEL or a step, which is what World of Tanks itself writes: 'niveau' in French, 'Stufe' in German, 'nivel' in Spanish, 'poziom' in Polish. Never the word for a rank, a grade, a league or a division"],
-  ["Rank", "a position in a leaderboard, the ordinal a row sits at. It must NOT be the same word you chose for Tier: they are different things and the interface shows them side by side"],
+  ["Tier", "a vehicle's level in the tech tree, written I to X. The word World of Tanks itself writes on the vehicle, even where that word can also mean a rank: 'rang' in French, 'Stufe' in German, 'nivel' in Spanish, 'poziom' in Polish. Never a league or a division"],
+  ["Rank", "a position in a leaderboard, the ordinal a row sits at. It must NOT be the same word you chose for Tier: they are different things and the interface shows them side by side."],
   ["Marks", "the Marks of Excellence painted on a gun barrel, not scores or grades"],
   ["Crew", "the tankers inside a vehicle, not a team of players"],
   ["Class", "the vehicle's kind: light, medium, heavy, tank destroyer, artillery"],
@@ -1044,23 +1030,6 @@ const comparable = (value: string): string =>
     (text, name) => text.split(name).join("@"),
     value.replace(/\{[^}]*\}/g, "@"),
   );
-
-/**
- * A value that is an identifier rather than a word: `WN8`, `WR`, `HRB`, `MoE`.
- *
- * These are the names of metrics and they are the same in every language, the
- * way `WN8` is. A model asked to translate one obliges: French came back with
- * `VH` for `HR`, Greek with `ΠΕ`, Russian with `Успех`, and a column header
- * became a word nobody can look up. Thirty-two of them across the tree.
- *
- * Recognised by shape rather than by a list, so a metric we add is covered the
- * day it appears: short, no spaces, and at least two capitals, which is what
- * separates `HRb` from `Tier` and from any real word.
- */
-function isIdentifier(value: string): boolean {
-  if (value.length > 5 || /\s/.test(value)) return false;
-  return [...value].filter((c) => c >= "A" && c <= "Z").length >= 2;
-}
 
 /**
  * A translation that still says the English word for something the site has
@@ -1961,8 +1930,7 @@ async function main(): Promise<void> {
       // exact match can see.
       const inLabels = termsInLabels(namespaces, official);
       for (const term of [...terms, ...clientOnly, ...inLabels]) {
-        if (official[term] && !CLIENT_MISMATCH.has(term))
-          known[term] = official[term];
+        if (official[term]) known[term] = official[term];
       }
       const missing = Object.fromEntries(
         terms.filter((term) => !known[term]).map((term) => [term, term]),
@@ -1994,9 +1962,12 @@ async function main(): Promise<void> {
       // two rows up is how the tree ended up saying "Bastion" and "forteresse"
       // on one screen. Written through, they would also outlive their own
       // catalogue, since `known` is seeded from the previous file and nothing
-      // there is ever removed.
+      // there is ever removed. The glossary's titles sit between the two, for
+      // the same reason and with the same exemption from the file: see
+      // `glossary-terms.ts` for why they outrank the model and the client.
       termSheets.set(locale, {
         ...known,
+        ...Object.fromEntries(glossaryTerms(locale)),
         ...Object.fromEntries(
           gameNamesFor(locale).map(({ english, own }) => [english, own]),
         ),

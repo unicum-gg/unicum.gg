@@ -1,5 +1,5 @@
 ---
-term: Znaky mistrovství
+term: Vítězné znaky
 aliases:
   - MoE
   - znaky

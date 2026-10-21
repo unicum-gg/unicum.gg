@@ -22,7 +22,16 @@
     "cw-x": "X级军团战",
     "cw-viii": "VIII级军团战",
     "cw-vi": "VI级军团战",
-    "onslaught": "天梯战"
+    "onslaught": "天梯战",
+    "clan": "军团战斗",
+    "company": "坦克连",
+    "team": "战队",
+    "permanent-teams": "永久队伍",
+    "historical": "历史战"
+  },
+  "tank-modes": {
+    "globalmap": "领土战",
+    "ranked_10x10": "排位赛 10x10"
   },
   "stronghold-tiers": {
     "advances": "攻城战",

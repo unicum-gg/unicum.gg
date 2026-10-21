@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: Scor personal
 aliases:
   - global rating
   - wg rating

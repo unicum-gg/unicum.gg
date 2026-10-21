@@ -1,7 +1,7 @@
 {
   "title": "Thang đánh giá",
   "description": "Các ngưỡng màu được sử dụng trên toàn trang cho tỷ lệ thắng và chỉ số đánh giá được chọn trong thanh điều hướng.",
-  "tier": "Cấp",
+  "tier": "Cấp độ",
   "tiers": {
     "top": "Hạng nhất",
     "excellent": "Xuất sắc",

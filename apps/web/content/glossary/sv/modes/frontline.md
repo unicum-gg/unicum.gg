@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Frontstrid
 aliases:
   - front line
   - FL

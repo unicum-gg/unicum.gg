@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Nejaušas kaujas
 aliases:
   - randoms
   - pubs

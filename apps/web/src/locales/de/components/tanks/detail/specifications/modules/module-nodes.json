@@ -1,11 +1,11 @@
 {
-  "aim-time": "Zielzeit",
+  "aim-time": "Einzielzeit",
   "ammo": "Munition",
   "armor": "Panzerung",
   "dispersion": "Streuung",
   "fire-chance": "Brandchance",
-  "gun-arc": "Waffenbogen",
-  "hit-points": "Hitpoints",
+  "gun-arc": "Geschützrichtbereich",
+  "hit-points": "Strukturpunkte",
   "load-limit": "Ladegrenze",
   "mounted-on": "Eingebaut in {tanks}",
   "power": "Leistung",
@@ -13,5 +13,5 @@
   "signal-range": "Signalreichweite",
   "tier": "Stufe {tier}",
   "traverse": "Drehung",
-  "view-range": "Sichtbereich"
+  "view-range": "Sichtweite"
 }

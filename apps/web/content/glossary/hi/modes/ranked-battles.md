@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: रैंक वाली लड़ाइयाँ
 aliases:
   - ranked
   - chevrons

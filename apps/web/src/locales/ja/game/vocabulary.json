@@ -22,7 +22,16 @@
     "cw-x": "Clan Wars X",
     "cw-viii": "Clan Wars VIII",
     "cw-vi": "Clan Wars VI",
-    "onslaught": "オンスロート"
+    "onslaught": "オンスロート",
+    "clan": "クラン戦闘数",
+    "company": "戦車中隊",
+    "team": "チームバトル",
+    "permanent-teams": "常設チーム",
+    "historical": "ヒストリカルバトル"
+  },
+  "tank-modes": {
+    "globalmap": "グローバルマップ",
+    "ranked_10x10": "ランク戦 10x10"
   },
   "stronghold-tiers": {
     "advances": "進撃戦",

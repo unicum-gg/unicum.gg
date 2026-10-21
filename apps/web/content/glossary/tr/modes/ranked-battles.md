@@ -1,5 +1,5 @@
 ---
-term: Sıralı Savaşlar
+term: Dereceli Savaşlar
 aliases:
   - sıralı
   - chevrons

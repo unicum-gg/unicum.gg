@@ -14,7 +14,7 @@
     "training": "Ausbildung"
   },
   "player-modes": {
-    "overall": "Zufällige Schlachten",
+    "overall": "Zufallsgefechte",
     "skirmish": "Scharmützel",
     "advances": "Vorstöße",
     "grand": "Großgefechte",
@@ -22,7 +22,16 @@
     "cw-x": "Clankriege X",
     "cw-viii": "Clankriege VIII",
     "cw-vi": "Clankriege VI",
-    "onslaught": "Ansturm"
+    "onslaught": "Ansturm",
+    "clan": "Clangefechte",
+    "company": "Panzerkompanie",
+    "team": "Teamgefechte",
+    "permanent-teams": "Feste Teams",
+    "historical": "Historische Gefechte"
+  },
+  "tank-modes": {
+    "globalmap": "Weltkarte",
+    "ranked_10x10": "Gewertete Gefechte 10x10"
   },
   "stronghold-tiers": {
     "advances": "Vorstöße",
@@ -41,7 +50,7 @@
     "srb": "SRB",
     "elo": "ELO",
     "battles": "Gefechte",
-    "winrate": "Gewinnrate"
+    "winrate": "Siegquote"
   },
   "clan-boards": {
     "advances": "Vorstöße",
@@ -61,8 +70,8 @@
     "desert": "Wüste"
   },
   "map-poi": {
-    "1": "Artillerie-Hauptquartier",
-    "2": "Kommunikationszentrum",
+    "1": "Artilleriehauptquartier",
+    "2": "Funkzentrale",
     "3": "Beobachtungsposten"
   },
   "tournament-modes": {
@@ -124,7 +133,7 @@
     "SPG": "SPG"
   },
   "vehicle-roles": {
-    "assault": "Sturm",
+    "assault": "Angriff",
     "break": "Durchbruch",
     "support": "Unterstützung",
     "universal": "Mehrzweck",
@@ -138,7 +147,7 @@
     "ace": "Ace Tanker"
   },
   "clan-modes": {
-    "random": "Zufällige Schlachten",
+    "random": "Zufallsgefechte",
     "stronghold": "Festung",
     "skirmish": "Scharmützel",
     "clan-wars": "Clan Wars"

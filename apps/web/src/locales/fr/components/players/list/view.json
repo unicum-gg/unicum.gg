@@ -9,9 +9,9 @@
     "strict": "Joueurs {region} dont la langue déduite de l’historique des clans est exclusivement {language}, classés selon {metric} (10 000 batailles minimum)."
   },
   "intro-period": {
-    "all": "Classement de {region}, classé par {metric} sur les batailles combattues au niveau {tier} et supérieur. {period}, minimum {battles} batailles.",
-    "language": "Joueurs de {region} dont l’ensemble des langues déduit de l’historique de clan inclut {language}, classés par {metric} sur les batailles combattues au niveau {tier} et supérieur. {period}, minimum {battles} batailles.",
-    "strict": "Joueurs de {region} dont la langue déduite de l’historique de clan est exclusivement {language}, classés par {metric} sur les batailles combattues au niveau {tier} et supérieur. {period}, minimum {battles} batailles."
+    "all": "Classement de {region}, classé par {metric} sur les batailles combattues au rang {tier} et supérieur. {period}, minimum {battles} batailles.",
+    "language": "Joueurs de {region} dont l’ensemble des langues déduit de l’historique de clan inclut {language}, classés par {metric} sur les batailles combattues au rang {tier} et supérieur. {period}, minimum {battles} batailles.",
+    "strict": "Joueurs de {region} dont la langue déduite de l’historique de clan est exclusivement {language}, classés par {metric} sur les batailles combattues au rang {tier} et supérieur. {period}, minimum {battles} batailles."
   },
   "board": {
     "all": "Top {count} des joueurs en {metric}",
@@ -31,5 +31,5 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
-  "tier-floor": "Niveau {tier}+"
+  "tier-floor": "Rang {tier}+"
 }

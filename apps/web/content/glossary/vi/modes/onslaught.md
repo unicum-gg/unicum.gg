@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Cường kích
 aliases:
   - comp7
   - competitive 7

@@ -22,7 +22,16 @@
     "cw-x": "Klankrige X",
     "cw-viii": "Klankrige VIII",
     "cw-vi": "Klankrige VI",
-    "onslaught": "Onslaught"
+    "onslaught": "Onslaught",
+    "clan": "Klankampe",
+    "company": "Tankkompagni",
+    "team": "Holdkampe",
+    "permanent-teams": "Permanente hold",
+    "historical": "Historiske kampe"
+  },
+  "tank-modes": {
+    "globalmap": "Globalt kort",
+    "ranked_10x10": "Rangerede kampe 10x10"
   },
   "stronghold-tiers": {
     "advances": "Fremrykninger",

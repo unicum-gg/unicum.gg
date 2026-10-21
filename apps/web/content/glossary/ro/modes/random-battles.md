@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Bătălii aleatorii
 aliases:
   - randoms
   - pubs

@@ -5,6 +5,6 @@
   "n-vehicles": "{count, plural, one {# véhicule} other {# véhicules}}",
   "share-of-battles": "Part des batailles",
   "unit-class": "Classe",
-  "unit-tier": "Niveau",
-  "win-rate": "Taux de victoire"
+  "unit-tier": "Rang",
+  "win-rate": "Taux de victoires"
 }

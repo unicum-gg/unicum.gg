@@ -4,7 +4,7 @@
   "consumable-slot": "Pozice spotřebního doplňku {n}",
   "consumable-slot-filled": "Pozice spotřebního doplňku {n}: {name}",
   "level": "Úroveň {n}",
-  "stock": "Základní",
+  "stock": "Základní konfigurace",
   "specialize": "Kliknutím specializujete tuto pozici.",
   "clear-specialization": "Kliknutím zrušíte specializaci této pozice.",
   "crew-skills": "Dovednosti posádky",

@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Fremrykkinger
 aliases:
   - fort battles
   - fremryk

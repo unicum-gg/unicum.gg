@@ -22,7 +22,16 @@
     "cw-x": "Clan Wars X",
     "cw-viii": "Clan Wars VIII",
     "cw-vi": "Clan Wars VI",
-    "onslaught": "Aggressione"
+    "onslaught": "Aggressione",
+    "clan": "Battaglie di Clan",
+    "company": "Compagnia di carri",
+    "team": "Battaglie di Squadra",
+    "permanent-teams": "Squadre permanenti",
+    "historical": "Battaglie Storiche"
+  },
+  "tank-modes": {
+    "globalmap": "Mappa Globale",
+    "ranked_10x10": "Battaglie qualificate 10x10"
   },
   "stronghold-tiers": {
     "advances": "Offensive",

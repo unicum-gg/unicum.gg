@@ -1,5 +1,5 @@
 ---
-term: Személyes Értékelés
+term: Személyes értékelés
 aliases:
   - globális értékelés
   - wg értékelés

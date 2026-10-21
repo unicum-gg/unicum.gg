@@ -4,5 +4,9 @@
   "metric-progression": "{metric}-udvikling",
   "not-enough-history-on-this": "Der er ikke nok historik for denne kampvogn endnu. Der kræves mindst to øjebliksbilleder inden for de seneste 90 dage for at tegne en linje.",
   "record-score": "Rekordscore",
-  "updated": "Opdateret"
+  "updated": "Opdateret",
+  "mode-retired": "Denne spiltilstand bliver ikke længere spillet, så rekorden nedenfor kan kun blive mindre, efterhånden som konti udløber.",
+  "mode-multi-vehicle": "Denne spiltilstand lod dig indsætte flere køretøjer i én kamp, så en kamp bliver talt for hvert af dem, og disse tal lægges ikke sammen til et samlet antal for spiltilstanden.",
+  "by-mode": "Hvor det blev spillet",
+  "never-played-in": "Dette køretøj blev aldrig taget med i {mode}, så rekorden nedenfor er den, det har."
 }

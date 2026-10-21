@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Πρώτη Γραμμή
 aliases:
   - front line
   - FL

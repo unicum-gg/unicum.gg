@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: تقدّمات
 aliases:
   - fort battles
   - تقدمات

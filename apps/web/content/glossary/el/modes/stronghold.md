@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Οχυρώσεις
 aliases:
   - strongholds
   - κάλυκες

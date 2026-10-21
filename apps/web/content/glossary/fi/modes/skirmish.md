@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Kahakka
 aliases:
   - skirmishes
   - clan skirmish

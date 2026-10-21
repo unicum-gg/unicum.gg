@@ -22,7 +22,16 @@
     "cw-x": "Guerras de Clãs X",
     "cw-viii": "Guerras de Clãs VIII",
     "cw-vi": "Guerras de Clãs VI",
-    "onslaught": "Massacre"
+    "onslaught": "Massacre",
+    "clan": "Batalhas de Clã",
+    "company": "Companhia de Tanques",
+    "team": "Batalhas em Equipa",
+    "permanent-teams": "Equipas permanentes",
+    "historical": "Batalhas Históricas"
+  },
+  "tank-modes": {
+    "globalmap": "Mapa Global",
+    "ranked_10x10": "Batalhas Classificadas 10x10"
   },
   "stronghold-tiers": {
     "advances": "Avanços",

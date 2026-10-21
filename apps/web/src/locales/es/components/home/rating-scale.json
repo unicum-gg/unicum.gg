@@ -1,7 +1,7 @@
 {
   "title": "Escala de calificación",
   "description": "Umbrales de color utilizados en todo el sitio para el porcentaje de victorias y la métrica de valoración seleccionada en la barra de navegación.",
-  "tier": "nivel",
+  "tier": "Nivel",
   "tiers": {
     "top": "Mejores",
     "excellent": "Excelente",

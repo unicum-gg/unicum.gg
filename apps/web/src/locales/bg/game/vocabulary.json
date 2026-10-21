@@ -22,7 +22,16 @@
     "cw-x": "Кланови войни X",
     "cw-viii": "Кланови войни VIII",
     "cw-vi": "Кланови войни VI",
-    "onslaught": "Атака"
+    "onslaught": "Атака",
+    "clan": "Кланови битки",
+    "company": "Танкова рота",
+    "team": "Отборни битки",
+    "permanent-teams": "Постоянни отбори",
+    "historical": "Исторически битки"
+  },
+  "tank-modes": {
+    "globalmap": "Глобална карта",
+    "ranked_10x10": "Битки за Класацията 10x10"
   },
   "stronghold-tiers": {
     "advances": "Настъпления",

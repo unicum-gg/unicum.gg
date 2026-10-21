@@ -22,7 +22,16 @@
     "cw-x": "Кланавыя войны X",
     "cw-viii": "Кланавыя войны VIII",
     "cw-vi": "Кланавыя войны VI",
-    "onslaught": "Наступ"
+    "onslaught": "Наступ",
+    "clan": "Кланавыя баі",
+    "company": "Танкавая рота",
+    "team": "Камандныя баі",
+    "permanent-teams": "Пастаянныя каманды",
+    "historical": "Гістарычныя баі"
+  },
+  "tank-modes": {
+    "globalmap": "Глабальная карта",
+    "ranked_10x10": "Рангавыя баі 10x10"
   },
   "stronghold-tiers": {
     "advances": "Наступы",

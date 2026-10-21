@@ -1,5 +1,5 @@
 ---
-term: Marke izvrstanosti
+term: Oznake izvrsnosti
 aliases:
   - MoE
   - marke

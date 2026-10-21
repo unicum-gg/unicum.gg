@@ -22,7 +22,16 @@
     "cw-x": "Ратови кланова X",
     "cw-viii": "Ратови кланова VIII",
     "cw-vi": "Ратови кланова VI",
-    "onslaught": "Juriš"
+    "onslaught": "Juriš",
+    "clan": "Klanovske borbe",
+    "company": "Tenajk četa",
+    "team": "Timske borbe",
+    "permanent-teams": "Stalni timovi",
+    "historical": "Istorijske bobre"
+  },
+  "tank-modes": {
+    "globalmap": "Globalna mapa",
+    "ranked_10x10": "Rangirane borbe 10x10"
   },
   "stronghold-tiers": {
     "advances": "Napadi",
@@ -149,7 +158,7 @@
     "marks-of-excellence": "Ocene Izvrsnosti",
     "marks-of-mastery": "Marke majstorstva",
     "personal-rating": "Lični rejting",
-    "world-of-tanks-rating": "World of Tanks рејтинг",
+    "world-of-tanks-rating": "World of Tanks rejting",
     "common-test": "Zajednički test",
     "tournaments": "Turniri"
   },

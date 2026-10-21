@@ -4,7 +4,7 @@
   "credits-per-gold": "{amount} {credits} = 1 {gold}",
   "cumulative-xp-to-research-from": "Expérience cumulée nécessaire pour la recherche à partir du rang {effectiveTier}, modules prérequis inclus · {rate} EXP = 1 pièce d’or",
   "free-xp": "Expérience libre",
-  "free-xp-from-tier": "Expérience libre du niveau",
+  "free-xp-from-tier": "Expérience libre du rang",
   "free-xp-line": "{xp} XP = {gold} or",
   "free-xp-line-money": "{xp} XP = {gold} or = {money}",
   "gold": "or",

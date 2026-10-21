@@ -2,7 +2,7 @@
   "stat": "Statystyka",
   "rows": {
     "battles": "Bitwy",
-    "tier": "Poziom",
+    "tier": "Średni tier",
     "wins": "Wygrane",
     "losses": "Przegrane",
     "draws": "Remisy",
@@ -15,7 +15,7 @@
     "spotting-damages": "Obrażenia wykrywania",
     "assisting-damages": "Obrażenia wspomagania",
     "combined-damages": "Obrażenia łączne",
-    "base-capture": "Przechwycenie bazy",
+    "base-capture": "Przejęcie bazy",
     "base-defense": "Obrona bazy",
     "experience": "Doświadczenie",
     "hit-rate": "Skuteczność trafień",

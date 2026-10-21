@@ -1,5 +1,5 @@
 ---
-term: Reitinga cīņas
+term: Ranga kaujas
 aliases:
   - ranked
   - chevrons

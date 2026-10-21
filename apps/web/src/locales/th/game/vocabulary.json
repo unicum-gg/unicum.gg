@@ -22,7 +22,16 @@
     "cw-x": "สงครามกองทัพ X",
     "cw-viii": "สงครามกองทัพ VIII",
     "cw-vi": "สงครามกองทัพ VI",
-    "onslaught": "การบุกรุก"
+    "onslaught": "การบุกรุก",
+    "clan": "การรบของกองทัพ",
+    "company": "กองร้อยรถถัง",
+    "team": "การรบแบบเป็นทีม",
+    "permanent-teams": "ทีมถาวร",
+    "historical": "การรบตามประวัติศาสตร์"
+  },
+  "tank-modes": {
+    "globalmap": "แผนที่โลก",
+    "ranked_10x10": "การรบจัดอันดับ 10x10"
   },
   "stronghold-tiers": {
     "advances": "การรบรุกคืบ",

@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Pansarstorm
 aliases:
   - comp7
   - competitive 7

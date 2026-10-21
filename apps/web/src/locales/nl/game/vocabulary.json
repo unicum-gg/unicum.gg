@@ -22,7 +22,16 @@
     "cw-x": "Clan Wars X",
     "cw-viii": "Clan Wars VIII",
     "cw-vi": "Clan Wars VI",
-    "onslaught": "Bestorming"
+    "onslaught": "Bestorming",
+    "clan": "Clan gevechten",
+    "company": "Tankcompagnie",
+    "team": "Teamgevechten",
+    "permanent-teams": "Permanente teams",
+    "historical": "Historische gevechten"
+  },
+  "tank-modes": {
+    "globalmap": "Wereldkaart",
+    "ranked_10x10": "Klassementsgevechten 10x10"
   },
   "stronghold-tiers": {
     "advances": "Offensieven",

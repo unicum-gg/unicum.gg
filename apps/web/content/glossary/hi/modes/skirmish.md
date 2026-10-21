@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: झड़प
 aliases:
   - skirmishes
   - क्लान स्कर्मिश

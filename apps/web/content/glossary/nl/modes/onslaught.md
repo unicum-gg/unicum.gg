@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Bestorming
 aliases:
   - comp7
   - competitief 7

@@ -10,11 +10,11 @@
   "columns": {
     "dpm": {
       "label": "DPM",
-      "tip": "Zadane uszkodzenia na minutę"
+      "tip": "Uszkodzenia na minutę"
     },
     "damage": {
       "label": "Zadane uszkodzenia",
-      "tip": "Zadane uszkodzenia"
+      "tip": "Obrażenia alfa"
     },
     "moduleDamage": {
       "label": "Zadane uszkodzenia"
@@ -107,7 +107,7 @@
     },
     "health": {
       "label": "Wytrzymałość",
-      "tip": "Punkty życia"
+      "tip": "Punkty wytrzymałości"
     },
     "engineHealth": {
       "label": "Stan silnika"

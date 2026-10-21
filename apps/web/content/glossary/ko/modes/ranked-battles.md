@@ -1,5 +1,5 @@
 ---
-term: 랭크전
+term: 순위 전투
 aliases:
   - ranked
   - chevrons

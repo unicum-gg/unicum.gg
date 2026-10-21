@@ -1,6 +1,6 @@
 {
-  "gun-depression": "Opad lufy",
-  "gun-elevation": "Wzniesienie lufy",
+  "gun-depression": "Kąt opuszczenia działa",
+  "gun-elevation": "Kąt podniesienia działa",
   "mode-heading": "Tryb: {mode}",
   "switch-on-off": "Włącz / wyłącz"
 }

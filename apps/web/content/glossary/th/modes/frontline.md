@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: แนวรบ
 aliases:
   - front line
   - FL

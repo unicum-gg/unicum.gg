@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "{label} dati vēl nav pieejami. Pārbaudi vēlreiz pēc nākamā momentuzņēmuma.",
-  "title": "{nickname} {label} statistika"
+  "title": "{nickname} {label} statistika",
+  "see-tank-by-tank": "{mode}, katrs tanks atsevišķi"
 }

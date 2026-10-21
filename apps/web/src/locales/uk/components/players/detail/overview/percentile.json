@@ -1,5 +1,5 @@
 {
-  "win-rate": "Процент виграшу",
+  "win-rate": "Відсоток перемог",
   "versus": "{metric} проти {region}",
   "top": "Топ {percent}%",
   "ahead-of": "Попереду за {percent}% гравців",

@@ -22,7 +22,16 @@
     "cw-x": "Клан соғыстары X",
     "cw-viii": "Клан соғыстары VIII",
     "cw-vi": "Клан соғыстары VI",
-    "onslaught": "Шабуыл"
+    "onslaught": "Шабуыл",
+    "clan": "Клан шайқастары",
+    "company": "Танк ротасы",
+    "team": "Команда шайқастары",
+    "permanent-teams": "Тұрақты командалар",
+    "historical": "Тарихи соғыстар"
+  },
+  "tank-modes": {
+    "globalmap": "Жаһандық карта",
+    "ranked_10x10": "Рейтингтік шайқастар 10x10"
   },
   "stronghold-tiers": {
     "advances": "Шабуылдар",

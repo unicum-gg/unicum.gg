@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: การรบจัดอันดับ
 aliases:
   - ranked
   - chevrons

@@ -4,5 +4,9 @@
   "metric-progression": "Pag-unlad ng {metric}",
   "not-enough-history-on-this": "Hindi pa sapat ang kasaysayan ng tank na ito. Kailangan nito ng hindi bababa sa dalawang snapshot sa nakalipas na 90 araw para makagawa ng linya.",
   "record-score": "Rekord na iskor",
-  "updated": "Na-update"
+  "updated": "Na-update",
+  "mode-retired": "Ang mode na ito ay hindi na nilaro, kaya maaari lamang lumiit ang rekord sa ibaba habang nagiging hindi aktibo ang mga account.",
+  "mode-multi-vehicle": "Pinapayagan ka ng mode na ito na gumamit ng ilang sasakyan sa isang labanan, kaya nabilang ang isang labanan para sa bawat isa sa mga ito at hindi katumbas ng kabuuan ng mode ang mga bilang na ito.",
+  "by-mode": "Kung saan ito nilaro",
+  "never-played-in": "Ang sasakyang ito ay hindi kailanman natanggap sa {mode}, kaya ang rekord sa ibaba lamang ang mayroon ito."
 }

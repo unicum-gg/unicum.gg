@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Данных по «{label}» пока нет. Проверьте снова после следующего снимка.",
-  "title": "Статистика игрока {nickname} по «{label}»"
+  "title": "Статистика игрока {nickname} по «{label}»",
+  "see-tank-by-tank": "{mode}, по каждому танку"
 }

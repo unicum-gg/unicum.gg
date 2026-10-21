@@ -1,5 +1,5 @@
 {
-  "aim-time": "Zielzeit",
+  "aim-time": "Einzielzeit",
   "ammo-capacity": "Munitionkapazität",
   "ammo-rack-hp": "Munitionstank HP",
   "camouflage": "Tarnung",
@@ -18,15 +18,15 @@
   "engine-power": "Motorleistung",
   "foliage-camo": "Blättertarnung",
   "fuel-tank-hp": "Kraftstofftank HP",
-  "gun-depression": "Waffenabsenkung",
-  "gun-elevation": "Waffenanhebung",
+  "gun-depression": "Geschützneigung",
+  "gun-elevation": "Geschützerhöhung",
   "he-shell-damage": "Schaden von HE-Granaten",
   "he-shell-velocity": "Geschwindigkeit der HE-Geschosse",
-  "hit-points": "Hitpoints",
+  "hit-points": "Strukturpunkte",
   "hull-hit-points": "Wannen-Hitpoints",
-  "hull-traverse": "Wannenwendung",
+  "hull-traverse": "Wannendrehgeschwindigkeit",
   "hull-traverse-still": "Wannenwendung (im Stand)",
-  "intra-clip-reload": "Nachladezeit zwischen den Schüssen",
+  "intra-clip-reload": "Nachladezeit im Magazin",
   "moving-demask": "Bewegendes Demaskieren",
   "no-characteristic-effect": "Kein Effekt auf Eigenschaften.",
   "pivot-turn-speed": "Wendegeschwindigkeit auf der Stelle",
@@ -46,6 +46,6 @@
   "top-speed": "Höchstgeschwindigkeit",
   "track-hp": "Ketten HP",
   "track-repair-speed": "Kettenreparaturgeschwindigkeit",
-  "turret-traverse": "Turmdrehung",
-  "view-range": "Sichtbereich"
+  "turret-traverse": "Turmdrehgeschwindigkeit",
+  "view-range": "Sichtweite"
 }

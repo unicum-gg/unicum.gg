@@ -22,7 +22,16 @@
     "cw-x": "Guerras de clanes X",
     "cw-viii": "Guerras de clanes VIII",
     "cw-vi": "Guerras de clanes VI",
-    "onslaught": "Asedio"
+    "onslaught": "Asedio",
+    "clan": "Batallas de clan",
+    "company": "Compañía de tanques",
+    "team": "Batallas en equipo",
+    "permanent-teams": "Equipos permanentes",
+    "historical": "Batallas históricas"
+  },
+  "tank-modes": {
+    "globalmap": "Mapa global",
+    "ranked_10x10": "Batallas de clasificación 10x10"
   },
   "stronghold-tiers": {
     "advances": "Avances",

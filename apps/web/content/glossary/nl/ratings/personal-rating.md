@@ -1,5 +1,5 @@
 ---
-term: Persoonlijke Rating
+term: Persoonlijke beoordeling
 aliases:
   - global rating
   - wg rating

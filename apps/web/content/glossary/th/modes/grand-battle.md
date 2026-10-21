@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: การรบใหญ่
 aliases:
   - grand battles
 related:

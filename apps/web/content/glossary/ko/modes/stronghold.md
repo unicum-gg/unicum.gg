@@ -1,5 +1,5 @@
 ---
-term: 강력한 요새
+term: 요새
 aliases:
   - strongholds
   - 클랜 기지

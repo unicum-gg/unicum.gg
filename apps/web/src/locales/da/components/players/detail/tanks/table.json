@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Ingen kampvogne spillet endnu.",
   "no-tanks-match-these-filters": "Ingen kampvogne matcher disse filtre.",
-  "name": "Navn"
+  "name": "Navn",
+  "no-tanks-played-in-this-mode": "Ingen kampvogne er blevet spillet i denne spiltilstand."
 }

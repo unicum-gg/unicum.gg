@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Fortaleza
 aliases:
   - strongholds
   - base do clã

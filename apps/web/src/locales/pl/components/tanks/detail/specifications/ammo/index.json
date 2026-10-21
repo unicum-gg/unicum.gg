@@ -2,7 +2,7 @@
   "damage": "Zadane uszkodzenia",
   "penetration": "Penetracja",
   "velocity": "Prędkość",
-  "splash": "Rozprysk",
+  "splash": "Obszar rażenia",
   "cost": "Koszt",
   "at-500m": "… przy 500m"
 }

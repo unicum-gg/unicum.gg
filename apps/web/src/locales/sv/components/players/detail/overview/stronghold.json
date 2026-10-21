@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Inga data för {label} ännu. Kom tillbaka efter nästa ögonblicksbild.",
-  "title": "Statistik för {nickname} i {label}"
+  "title": "Statistik för {nickname} i {label}",
+  "see-tank-by-tank": "{mode}, vagn för vagn"
 }

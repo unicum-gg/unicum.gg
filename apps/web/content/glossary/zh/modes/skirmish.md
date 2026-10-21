@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: 冲突战
 aliases:
   - skirmishes
   - clan skirmish

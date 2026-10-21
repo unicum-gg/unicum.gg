@@ -1,7 +1,7 @@
 {
   "title": "Beoordelingsschaal",
   "description": "Kleurgrenzen die op de hele site worden gebruikt voor het winstpercentage en de in de navigatiebalk geselecteerde ratingmaatstaf.",
-  "tier": "niveau",
+  "tier": "Niveau",
   "tiers": {
     "top": "Top",
     "excellent": "Uitstekend",

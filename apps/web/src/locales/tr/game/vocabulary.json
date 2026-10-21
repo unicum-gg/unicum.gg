@@ -22,7 +22,16 @@
     "cw-x": "Klan Savaşları X",
     "cw-viii": "Klan Savaşları VIII",
     "cw-vi": "Klan Savaşları VI",
-    "onslaught": "Hücum"
+    "onslaught": "Hücum",
+    "clan": "Klan Savaşları",
+    "company": "Tank Bölüğü",
+    "team": "Ekip Savaşları",
+    "permanent-teams": "Kalıcı Takımlar",
+    "historical": "Tarihsel Savaşlar"
+  },
+  "tank-modes": {
+    "globalmap": "Dünya Haritası",
+    "ranked_10x10": "Dereceli Savaşlar 10x10"
   },
   "stronghold-tiers": {
     "advances": "İlerlemeler",

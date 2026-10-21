@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Nagy csata
 aliases:
   - grand battles
 related:

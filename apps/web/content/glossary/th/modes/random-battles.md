@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: การต่อสู้แบบสุ่ม
 aliases:
   - randoms
   - pubs

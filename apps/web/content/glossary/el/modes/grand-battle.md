@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Μεγάλη Μάχη
 aliases:
   - grand battles
   - μεγάλες μάχες

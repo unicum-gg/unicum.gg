@@ -22,7 +22,16 @@
     "cw-x": "Klanu kari X",
     "cw-viii": "Klanu kari VIII",
     "cw-vi": "Klanu kari VI",
-    "onslaught": "Uzbrukums"
+    "onslaught": "Uzbrukums",
+    "clan": "Klanu kaujas",
+    "company": "Tanku rota",
+    "team": "Komandu kaujas",
+    "permanent-teams": "Pastāvīgās komandas",
+    "historical": "Vēsturiskās kaujas"
+  },
+  "tank-modes": {
+    "globalmap": "Globālā karte",
+    "ranked_10x10": "Ranga kaujas 10x10"
   },
   "stronghold-tiers": {
     "advances": "Uzbrukumi",

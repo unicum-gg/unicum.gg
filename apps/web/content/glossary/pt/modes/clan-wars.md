@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Guerras de Clãs
 aliases:
   - CW
   - mapa global

@@ -5,6 +5,6 @@
   "n-vehicles": "{count, plural, one {# jármű} other {# jármű}}",
   "share-of-battles": "Csaták aránya",
   "unit-class": "Osztály",
-  "unit-tier": "szint",
+  "unit-tier": "Szint",
   "win-rate": "Győzelmi arány"
 }

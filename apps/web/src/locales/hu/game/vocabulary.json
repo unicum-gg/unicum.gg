@@ -22,7 +22,16 @@
     "cw-x": "Klánháborúk X",
     "cw-viii": "Klánháborúk VIII",
     "cw-vi": "Klánháborúk VI",
-    "onslaught": "Roham"
+    "onslaught": "Roham",
+    "clan": "Kláncsaták",
+    "company": "Tank század",
+    "team": "Csapatos Csaták",
+    "permanent-teams": "Állandó csapatok",
+    "historical": "Történelmi csaták"
+  },
+  "tank-modes": {
+    "globalmap": "Világtérkép",
+    "ranked_10x10": "Rangsorolt csaták 10x10"
   },
   "stronghold-tiers": {
     "advances": "Előrenyomulások",

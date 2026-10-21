@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: การรบรุกคืบ
 aliases:
   - fort battles
   - advance

@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Tranh chấp
 aliases:
   - skirmishes
   - clan skirmish

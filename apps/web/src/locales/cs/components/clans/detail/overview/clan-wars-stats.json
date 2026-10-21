@@ -15,7 +15,7 @@
   "rows": {
     "provinces": "Provincie",
     "elo": "ELO",
-    "battles": "Bitev",
-    "winrate": "Míra výher"
+    "battles": "Bitvy",
+    "winrate": "Procento vítězství"
   }
 }

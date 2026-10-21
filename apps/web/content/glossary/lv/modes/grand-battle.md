@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Galvenā kauja
 aliases:
   - grand battles
 related:

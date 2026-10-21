@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Πολέμου Κλασμάτων
 aliases:
   - CW
   - παγκόσμιος χάρτης

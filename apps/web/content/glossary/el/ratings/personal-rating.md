@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: Προσωπική Βαθμολογία
 aliases:
   - global rating
   - wg rating

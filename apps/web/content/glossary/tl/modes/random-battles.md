@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Randong Labanan
 aliases:
   - randoms
   - pubs

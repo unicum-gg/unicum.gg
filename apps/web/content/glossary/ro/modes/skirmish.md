@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Raid
 aliases:
   - skirmishes
   - clan skirmish

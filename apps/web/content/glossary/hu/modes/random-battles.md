@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Véletlenszerű Csata
 aliases:
   - randoms
   - pubs

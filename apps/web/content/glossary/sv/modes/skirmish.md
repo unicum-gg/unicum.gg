@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Skärmytsling
 aliases:
   - skirmishes
   - clan skirmish

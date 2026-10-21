@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Знаци за отлични постижения
 aliases:
   - MoE
   - marks

@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: अग्रिम अभियान
 aliases:
   - fort battles
   - अग्रिम

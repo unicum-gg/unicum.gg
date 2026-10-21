@@ -22,7 +22,16 @@
     "cw-x": "क्लैन युद्ध X",
     "cw-viii": "क्लैन युद्ध VIII",
     "cw-vi": "क्लैन युद्ध VI",
-    "onslaught": "ऑन्स्लॉट"
+    "onslaught": "ऑन्स्लॉट",
+    "clan": "क्लान युद्ध",
+    "company": "टैंक कंपनी",
+    "team": "टीम युद्ध",
+    "permanent-teams": "स्थायी टीमें",
+    "historical": "ऐतिहासिक युद्ध"
+  },
+  "tank-modes": {
+    "globalmap": "ग्लोबल नक्शा",
+    "ranked_10x10": "रैंक वाली लड़ाइयाँ 10x10"
   },
   "stronghold-tiers": {
     "advances": "अग्रिम अभियान",

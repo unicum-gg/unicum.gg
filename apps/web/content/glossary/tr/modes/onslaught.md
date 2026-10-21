@@ -1,5 +1,5 @@
 ---
-term: Saldırı
+term: Hücum
 aliases:
   - comp7
   - rekabetçi 7

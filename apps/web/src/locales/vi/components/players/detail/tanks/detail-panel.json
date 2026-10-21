@@ -4,5 +4,9 @@
   "metric-progression": "Tiến trình {metric}",
   "not-enough-history-on-this": "Chưa có đủ lịch sử trên xe tăng này. Cần ít nhất hai lần chụp trong 90 ngày qua để vẽ dòng.",
   "record-score": "Điểm kỷ lục",
-  "updated": "Đã cập nhật"
+  "updated": "Đã cập nhật",
+  "mode-retired": "Chế độ này không còn được chơi, vì vậy kỷ lục bên dưới chỉ có thể giảm khi các tài khoản không còn hoạt động.",
+  "mode-multi-vehicle": "Chế độ này cho phép bạn đưa nhiều xe tăng vào một trận đấu, vì vậy một trận đấu được tính cho từng xe tăng và các số này không cộng lại thành tổng của chế độ.",
+  "by-mode": "Nơi đã chơi",
+  "never-played-in": "Xe tăng này không bao giờ được đưa vào {mode}, vì vậy kỷ lục bên dưới là kỷ lục duy nhất mà nó có."
 }

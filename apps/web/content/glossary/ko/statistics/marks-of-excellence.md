@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: 화력의 증표
 aliases:
   - MoE
   - marks

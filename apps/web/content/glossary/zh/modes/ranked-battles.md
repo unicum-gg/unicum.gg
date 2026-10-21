@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: 排位赛
 aliases:
   - ranked
   - chevrons

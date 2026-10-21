@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Navala
 aliases:
   - comp7
   - konkurentna 7

@@ -4,5 +4,9 @@
   "metric-progression": "Progresul pentru {metric}",
   "not-enough-history-on-this": "Nu există încă suficient istoric pentru acest tanc. Sunt necesare cel puțin două eșantionări în ultimele 90 de zile pentru a desena o linie.",
   "record-score": "Scor record",
-  "updated": "Actualizat"
+  "updated": "Actualizat",
+  "mode-retired": "Acest mod nu mai este jucat, așa că recordul de mai jos se poate doar micșora pe măsură ce conturile devin inactive.",
+  "mode-multi-vehicle": "Acest mod îți permitea să folosești mai multe vehicule într-o singură bătălie, așa că o bătălie este contabilizată pentru fiecare dintre ele, iar aceste numărări nu se adună la un total al modului.",
+  "by-mode": "Unde a fost jucat",
+  "never-played-in": "Acest vehicul nu a fost niciodată primit în {mode}, așa că recordul de mai jos este singurul pe care îl are."
 }

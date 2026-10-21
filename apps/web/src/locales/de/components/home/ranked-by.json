@@ -1,6 +1,6 @@
 {
-  "day": "Rangliste nach {metric} in den letzten 24 Stunden (mind. 20 Gefechte).",
-  "week": "Rangliste nach {metric} in den letzten 7 Tagen (mind. 140 Gefechte).",
-  "month": "Rangliste nach {metric} in den letzten 30 Tagen (mind. 600 Gefechte).",
+  "day": "Nach {metric} in den vergangenen 24 Stunden gewertet, Stufe VI und höher (mind. 20 Gefechte).",
+  "week": "Nach {metric} in den vergangenen 7 Tagen gewertet, Stufe VI und höher (mind. 140 Gefechte).",
+  "month": "Nach {metric} in den vergangenen 30 Tagen gewertet, Stufe VI und höher (mind. 600 Gefechte).",
   "overall": "Rangliste nach {metric} über alle Gefechte hinweg (mind. 20.000 Gefechte)."
 }

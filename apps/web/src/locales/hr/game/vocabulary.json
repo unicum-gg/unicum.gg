@@ -22,7 +22,16 @@
     "cw-x": "Klanski ratovi X",
     "cw-viii": "Klanski ratovi VIII",
     "cw-vi": "Klanski ratovi VI",
-    "onslaught": "Navala"
+    "onslaught": "Navala",
+    "clan": "Klanovske bitke",
+    "company": "Tenka četa",
+    "team": "Timske bitke",
+    "permanent-teams": "Stalni timovi",
+    "historical": "Povijesne bitke"
+  },
+  "tank-modes": {
+    "globalmap": "Globalna mapa",
+    "ranked_10x10": "Rangirane bitke 10x10"
   },
   "stronghold-tiers": {
     "advances": "Napretci",

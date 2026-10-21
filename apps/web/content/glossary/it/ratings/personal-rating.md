@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: Punteggio Personale
 aliases:
   - global rating
   - wg rating

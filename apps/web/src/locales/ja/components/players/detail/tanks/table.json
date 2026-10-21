@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "まだプレイした戦車はありません。",
   "no-tanks-match-these-filters": "これらのフィルターに一致する戦車はありません。",
-  "name": "名称"
+  "name": "名称",
+  "no-tanks-played-in-this-mode": "このモードでプレイされた戦車はありません。"
 }

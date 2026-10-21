@@ -22,7 +22,16 @@
     "cw-x": "Clan Wars X",
     "cw-viii": "Clan Wars VIII",
     "cw-vi": "Clan Wars VI",
-    "onslaught": "Sugod"
+    "onslaught": "Sugod",
+    "clan": "Mga Labanan ng Klan",
+    "company": "Kompanya ng mga Tangke",
+    "team": "Mga Labanan ng Koponan",
+    "permanent-teams": "Mga Permanenteng Koponan",
+    "historical": "Mga Makasaysayang Labanan"
+  },
+  "tank-modes": {
+    "globalmap": "Pandaigdigang Mapa",
+    "ranked_10x10": "Mga Laban na may Ranggo 10x10"
   },
   "stronghold-tiers": {
     "advances": "Advances",

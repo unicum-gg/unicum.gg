@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: 天梯战
 aliases:
   - comp7
   - 竞争7

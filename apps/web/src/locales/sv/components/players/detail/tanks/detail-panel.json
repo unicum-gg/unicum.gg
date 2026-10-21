@@ -4,5 +4,9 @@
   "metric-progression": "{metric}-utveckling",
   "not-enough-history-on-this": "Det finns ännu inte tillräckligt med historik för den här stridsvagnen. Minst två ögonblicksbilder under de senaste 90 dagarna krävs för att rita en linje.",
   "record-score": "Rekordpoäng",
-  "updated": "Uppdaterad"
+  "updated": "Uppdaterad",
+  "mode-retired": "Det här läget spelas inte längre, så rekordet nedan kan bara minska när konton blir inaktiva.",
+  "mode-multi-vehicle": "Det här läget gjorde det möjligt att använda flera fordon i samma strid, så en strid räknas för vart och ett av dem och de här numren blir inte lägets totala antal.",
+  "by-mode": "Var den spelades",
+  "never-played-in": "Det här fordonet togs aldrig in i {mode}, så rekordet nedan är det enda det har."
 }

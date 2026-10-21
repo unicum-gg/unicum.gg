@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "अभी कोई टैंक नहीं खेला गया।",
   "no-tanks-match-these-filters": "इन फ़िल्टर से कोई टैंक मेल नहीं खाता।",
-  "name": "नाम"
+  "name": "नाम",
+  "no-tanks-played-in-this-mode": "इस मोड में कोई टैंक नहीं खेले गए।"
 }

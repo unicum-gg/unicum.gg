@@ -4,5 +4,9 @@
   "metric-progression": "Vývoj {metric}",
   "not-enough-history-on-this": "Pro tento tank zatím není dostatek historických dat. K vykreslení křivky jsou potřeba alespoň dva snímky za posledních 90 dní.",
   "record-score": "Rekordní skóre",
-  "updated": "Aktualizováno"
+  "updated": "Aktualizováno",
+  "mode-retired": "Tento režim se již nehraje, takže níže uvedený záznam se může pouze zmenšovat, jak účty zanikají.",
+  "mode-multi-vehicle": "V tomto režimu jste mohli v jedné bitvě nasadit několik vozidel, takže bitva se započítává u každého z nich a tyto počty dohromady nepředstavují celkem za režim.",
+  "by-mode": "Kde bylo odehráno",
+  "never-played-in": "Toto vozidlo nebylo nikdy nasazeno do režimu {mode}, takže níže uvedený záznam je jediný, který má."
 }

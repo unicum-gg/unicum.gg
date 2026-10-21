@@ -1,7 +1,7 @@
 {
   "title": "Skala ocenjivanja",
   "description": "Прагови боја који се користе на целом сајту за проценат победа и параметар рејтинга изабран у навигацији.",
-  "tier": "Nivo",
+  "tier": "Ниво",
   "tiers": {
     "top": "Najbolji",
     "excellent": "Izvrstan",

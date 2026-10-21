@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Tvirtovė
 aliases:
   - strongholds
   - klano bazė

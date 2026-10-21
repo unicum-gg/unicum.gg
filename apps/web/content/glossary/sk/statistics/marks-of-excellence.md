@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Značky excelencie
 aliases:
   - MoE
   - značke

@@ -1,5 +1,5 @@
 ---
-term: Mükafat Nişanları
+term: Mükemmellik İşaretleri
 aliases:
   - MoE
   - mükafatlar

@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Sadursme
 aliases:
   - skirmishes
   - clan skirmish

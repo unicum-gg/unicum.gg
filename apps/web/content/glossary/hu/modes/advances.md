@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Előrenyomulások
 aliases:
   - fort battles
   - advance

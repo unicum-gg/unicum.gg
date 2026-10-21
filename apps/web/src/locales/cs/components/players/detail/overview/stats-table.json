@@ -1,8 +1,8 @@
 {
   "stat": "Statistika",
   "rows": {
-    "battles": "Bitev",
-    "tier": "Úroveň",
+    "battles": "Bitvy",
+    "tier": "Průměrný tier",
     "wins": "Výhry",
     "losses": "Prohry",
     "draws": "Remízy",
@@ -15,7 +15,7 @@
     "spotting-damages": "Poškození odhalováním",
     "assisting-damages": "Poškození z asistence",
     "combined-damages": "Kombinované poškození",
-    "base-capture": "Získané základny",
+    "base-capture": "Obsazení základny",
     "base-defense": "Obrana základny",
     "experience": "Zkušenosti",
     "hit-rate": "Úspěšnost zásahů",

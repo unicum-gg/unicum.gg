@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: उच्चता के मार्क्स
 aliases:
   - MoE
   - marks

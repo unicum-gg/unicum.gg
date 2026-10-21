@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Juriš
 aliases:
   - comp7
   - konkurentni 7

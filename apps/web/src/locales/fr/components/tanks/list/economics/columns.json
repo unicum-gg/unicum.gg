@@ -30,7 +30,7 @@
     },
     "freeXpMoney": {
       "label": "Expérience libre ({currency})",
-      "tip": "Coût estimé en argent réel pour rechercher le char avec l’Expérience libre du niveau {tier}, en {currency}"
+      "tip": "Coût estimé en argent réel pour rechercher le char avec l’Expérience libre du rang {tier}, en {currency}"
     }
   },
   "selector": {

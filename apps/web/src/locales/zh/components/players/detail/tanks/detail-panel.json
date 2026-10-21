@@ -4,5 +4,9 @@
   "metric-progression": "{metric}进展",
   "not-enough-history-on-this": "这辆坦克的历史记录还不够。过去90天内至少需要两次快照才能绘制曲线。",
   "record-score": "最高战斗数据",
-  "updated": "更新"
+  "updated": "更新",
+  "mode-retired": "该模式已不再进行，因此下面的纪录只会随着账号失效而减少。",
+  "mode-multi-vehicle": "该模式允许你在一场战斗中派出多辆车辆，因此一场战斗会在每辆车辆上分别统计，这些数量不会相加为模式总计。",
+  "by-mode": "进行过的模式",
+  "never-played-in": "该车辆从未在{mode}中进行过对战，因此下面的纪录就是它已有的纪录。"
 }

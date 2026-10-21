@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Битки за Класацията
 aliases:
   - ranked
   - chevrons

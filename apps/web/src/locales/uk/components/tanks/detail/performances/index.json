@@ -26,6 +26,6 @@
   "survival": "Виживання",
   "tank-id-expected-values-are": "ID танка {tankId}. Очікувані значення отримано з наборів даних WN8 / WNX спільноти, вони оновлюються автоматично.",
   "top-tank-players-by": "Найкращі гравці на {tank} {by} {metric}",
-  "win-rate": "Процент виграшу",
+  "win-rate": "Відсоток перемог",
   "with-battles": ", {battles} боїв, мін. 100 кожного"
 }

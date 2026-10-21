@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Pevnosť
 aliases:
   - strongholds
   - klan baza

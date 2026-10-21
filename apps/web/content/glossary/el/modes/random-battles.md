@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Τυχαίες Μάχες
 aliases:
   - randoms
   - pubs

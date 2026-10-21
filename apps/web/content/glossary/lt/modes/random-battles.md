@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Atsitiktinės kovos
 aliases:
   - randoms
   - pubs

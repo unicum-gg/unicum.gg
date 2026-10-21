@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Tahkimat
 aliases:
   - strongholds
   - klan üssü

@@ -22,7 +22,16 @@
     "cw-x": "Guerres de clans X",
     "cw-viii": "Guerres de clans VIII",
     "cw-vi": "Guerres de clans VI",
-    "onslaught": "Offensive"
+    "onslaught": "Offensive",
+    "clan": "Batailles de clan",
+    "company": "Compagnie de chars",
+    "team": "Batailles en équipe",
+    "permanent-teams": "Équipes permanentes",
+    "historical": "Batailles historiques"
+  },
+  "tank-modes": {
+    "globalmap": "Carte globale",
+    "ranked_10x10": "Batailles classées 10x10"
   },
   "stronghold-tiers": {
     "advances": "Incursions",
@@ -41,7 +50,7 @@
     "srb": "SRB",
     "elo": "ELO",
     "battles": "Batailles",
-    "winrate": "Taux de victoire"
+    "winrate": "Taux de victoires"
   },
   "clan-boards": {
     "advances": "Incursions",
@@ -110,7 +119,7 @@
     "iron": "Fer",
     "bronze": "Bronze",
     "silver": "Argent",
-    "gold": "Or",
+    "gold": "Pièces d’or",
     "champion": "Champion",
     "legend": "Légende",
     "crest": "{mode} {tier}",
@@ -124,7 +133,7 @@
     "SPG": "SPG"
   },
   "vehicle-roles": {
-    "assault": "Assaillant",
+    "assault": "Assaut",
     "break": "Percée",
     "support": "Soutien",
     "universal": "Polyvalent",
@@ -149,7 +158,7 @@
     "marks-of-excellence": "Marques d’excellence",
     "marks-of-mastery": "Marques de maîtrise",
     "personal-rating": "Cote personnelle",
-    "world-of-tanks-rating": "Classement World of Tanks",
+    "world-of-tanks-rating": "Cote World of Tanks",
     "common-test": "Test commun",
     "tournaments": "Tournois"
   },

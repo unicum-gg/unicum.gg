@@ -4,5 +4,9 @@
   "metric-progression": "{metric} gelişimi",
   "not-enough-history-on-this": "Bu tank için henüz yeterli geçmiş yok. Çizgi oluşturmak için son 90 gün içinde en az iki anlık görüntü gerekir.",
   "record-score": "Rekor skor",
-  "updated": "Güncellendi"
+  "updated": "Güncellendi",
+  "mode-retired": "Bu mod artık oynanmıyor, bu nedenle aşağıdaki rekor yalnızca hesaplar etkinliğini yitirdikçe küçülebilir.",
+  "mode-multi-vehicle": "Bu mod, tek bir savaşta birden fazla araç kullanmanıza izin veriyordu, bu nedenle bir savaş her araç için sayılmıştır ve bu sayılar bir mod toplamına eklenmez.",
+  "by-mode": "Oynandığı mod",
+  "never-played-in": "Bu araç {mode} içinde asla oynanmadı, dolayısıyla aşağıdaki rekor sahip olduğu tek rekordur."
 }

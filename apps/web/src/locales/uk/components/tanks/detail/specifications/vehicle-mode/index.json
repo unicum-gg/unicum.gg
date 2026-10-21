@@ -1,6 +1,6 @@
 {
-  "gun-depression": "Занурення гармати",
-  "gun-elevation": "Підйом гармати",
+  "gun-depression": "Кут схилення гармати",
+  "gun-elevation": "Кут піднесення гармати",
   "mode-heading": "Режим {mode}",
   "switch-on-off": "Увімкнути / вимкнути"
 }

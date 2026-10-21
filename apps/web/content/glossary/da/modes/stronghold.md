@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Højborg
 aliases:
   - strongholds
   - klanbase

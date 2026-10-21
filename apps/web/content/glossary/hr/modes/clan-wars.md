@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klanske ratove
 aliases:
   - CW
   - global map

@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Grande Batalha
 aliases:
   - grand battles
 related:

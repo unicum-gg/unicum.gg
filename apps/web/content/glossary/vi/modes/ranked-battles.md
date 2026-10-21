@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Trận đấu Xếp hạng
 aliases:
   - ranked
   - chevrons

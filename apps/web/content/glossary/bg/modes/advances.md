@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Настъпления
 aliases:
   - fort battles
   - нападения

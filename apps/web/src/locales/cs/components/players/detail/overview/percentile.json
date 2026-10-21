@@ -1,5 +1,5 @@
 {
-  "win-rate": "Míra výher",
+  "win-rate": "Procento vítězství",
   "versus": "{metric} oproti regionu {region}",
   "top": "Nejlepší {percent}%",
   "ahead-of": "Lepší než {percent} %",

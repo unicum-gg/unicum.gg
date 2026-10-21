@@ -2,7 +2,7 @@
   "stat": "Statistik",
   "rows": {
     "battles": "Kampe",
-    "tier": "Niveau",
+    "tier": "Gennemsnitligt niveau",
     "wins": "Sejre",
     "losses": "Nederlag",
     "draws": "Uafgjorte",

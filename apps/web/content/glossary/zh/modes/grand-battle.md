@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: 战役模式
 aliases:
   - grand battles
   - 大型战斗

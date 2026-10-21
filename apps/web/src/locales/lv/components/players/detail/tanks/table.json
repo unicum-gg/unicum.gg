@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Pagaidām nav spēlēts neviens tanks.",
   "no-tanks-match-these-filters": "Neviens tanks neatbilst šiem filtriem.",
-  "name": "Nosaukums"
+  "name": "Nosaukums",
+  "no-tanks-played-in-this-mode": "Šajā režīmā nav spēlēti tanki."
 }

@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Podaci za {label} još nisu dostupni. Provjerite ponovo nakon sljedećeg snimka.",
-  "title": "Statistike igrača {nickname} za {label}"
+  "title": "Statistike igrača {nickname} za {label}",
+  "see-tank-by-tank": "{mode}, tenk po tenk"
 }

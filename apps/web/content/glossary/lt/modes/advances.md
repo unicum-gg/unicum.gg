@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Puolimai
 aliases:
   - fort battles
   - pirmyn

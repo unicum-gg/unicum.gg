@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: การปะทะ
 aliases:
   - skirmishes
   - clan skirmish

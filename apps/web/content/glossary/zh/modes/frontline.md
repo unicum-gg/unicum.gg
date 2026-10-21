@@ -1,5 +1,5 @@
 ---
-term: 前线
+term: 前线模式
 aliases:
   - front line
   - FL

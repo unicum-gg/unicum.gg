@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Schermaglia
 aliases:
   - skirmishes
   - clan skirmish

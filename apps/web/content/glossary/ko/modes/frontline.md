@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: 전선 대격돌
 aliases:
   - front line
   - FL

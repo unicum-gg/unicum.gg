@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Sugod
 aliases:
   - comp7
   - competitive 7

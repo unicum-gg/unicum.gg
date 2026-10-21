@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Skyttemärken
 aliases:
   - MoE
   - marks

@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: गढ़
 aliases:
   - strongholds
   - क्लान का आधार

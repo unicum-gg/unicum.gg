@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Hodnotené bitky
 aliases:
   - ranked
   - chevrons

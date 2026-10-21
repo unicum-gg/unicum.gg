@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Postupy
 aliases:
   - fort battles
   - napadi

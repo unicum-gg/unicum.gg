@@ -1,5 +1,5 @@
 ---
-term: 스커미시
+term: 쟁탈전
 aliases:
   - skirmishes
   - clan skirmish

@@ -22,7 +22,16 @@
     "cw-x": "클랜전 X",
     "cw-viii": "클랜전 VIII",
     "cw-vi": "클랜전 VI",
-    "onslaught": "격전"
+    "onslaught": "격전",
+    "clan": "클랜 전투",
+    "company": "전차 중대",
+    "team": "팀 전투",
+    "permanent-teams": "상설 팀",
+    "historical": "역사 전투"
+  },
+  "tank-modes": {
+    "globalmap": "세계 지도",
+    "ranked_10x10": "순위 전투 10x10"
   },
   "stronghold-tiers": {
     "advances": "원정",

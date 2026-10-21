@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Non ci sono ancora dati su {label}. Ricontrolla dopo la prossima istantanea.",
-  "title": "Statistiche {label} di {nickname}"
+  "title": "Statistiche {label} di {nickname}",
+  "see-tank-by-tank": "{mode}, carro armato per carro armato"
 }

@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Suurtaistelu
 aliases:
   - grand battles
 related:

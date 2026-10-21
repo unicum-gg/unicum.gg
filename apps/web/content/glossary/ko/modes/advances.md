@@ -1,5 +1,5 @@
 ---
-term: 진격
+term: 원정
 aliases:
   - fort battles
   - advance

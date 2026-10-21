@@ -1,5 +1,5 @@
 ---
-term: アドバンス
+term: 進撃戦
 aliases:
   - fort battles
   - アドバンス

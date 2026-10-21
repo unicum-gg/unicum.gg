@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Wala pang datos ng {label}. Suriin muli pagkatapos ng susunod na snapshot.",
-  "title": "Istatistika ni {nickname} sa {label}"
+  "title": "Istatistika ni {nickname} sa {label}",
+  "see-tank-by-tank": "{mode}, bawat tank"
 }

@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Escaramuça
 aliases:
   - skirmishes
   - clan skirmish

@@ -1,4 +1,5 @@
 {
   "no-data-yet-check-back": "Дані {label} ще недоступні. Перевірте знову після наступного знімка.",
-  "title": "Статистика {label}: {nickname}"
+  "title": "Статистика {label}: {nickname}",
+  "see-tank-by-tank": "{mode}, танк за танком"
 }

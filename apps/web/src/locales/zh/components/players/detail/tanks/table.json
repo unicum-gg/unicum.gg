@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "尚未使用坦克进行对战。",
   "no-tanks-match-these-filters": "没有坦克符合这些筛选条件。",
-  "name": "坦克名称"
+  "name": "坦克名称",
+  "no-tanks-played-in-this-mode": "没有在此模式中进行过对战的坦克。"
 }

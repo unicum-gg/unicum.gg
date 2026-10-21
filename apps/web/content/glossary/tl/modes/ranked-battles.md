@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Mga Laban na may Ranggo
 aliases:
   - ranked
   - chevrons

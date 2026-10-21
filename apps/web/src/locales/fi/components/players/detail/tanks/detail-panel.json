@@ -4,5 +4,9 @@
   "metric-progression": "{metric}-kehitys",
   "not-enough-history-on-this": "Tästä panssarivaunusta ei ole vielä riittävästi historiaa. Viivan piirtämiseen tarvitaan vähintään kaksi tilannekuvaa viimeisten 90 päivän ajalta.",
   "record-score": "Ennätystulos",
-  "updated": "Päivitetty"
+  "updated": "Päivitetty",
+  "mode-retired": "Tätä pelimuotoa ei enää pelata, joten alla oleva ennätys voi vain pienentyä tilien vanhetessa.",
+  "mode-multi-vehicle": "Tässä pelimuodossa saattoi käyttää useita ajoneuvoja yhdessä taistelussa, joten taistelu on laskettu jokaiselle niistä, eivätkä nämä määrät muodosta pelimuodon yhteismäärää.",
+  "by-mode": "Missä sitä pelattiin",
+  "never-played-in": "Tätä ajoneuvoa ei koskaan otettu käyttöön pelimuodossa {mode}, joten alla oleva ennätys on ainoa, joka sillä on."
 }

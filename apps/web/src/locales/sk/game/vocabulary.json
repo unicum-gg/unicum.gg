@@ -22,7 +22,16 @@
     "cw-x": "Klanové vojny X",
     "cw-viii": "Klanové vojny VIII",
     "cw-vi": "Klanové vojny VI",
-    "onslaught": "Ofenzíva"
+    "onslaught": "Ofenzíva",
+    "clan": "Clanové bitky",
+    "company": "Tanková rota",
+    "team": "Tímové bitky",
+    "permanent-teams": "Stále tímy",
+    "historical": "Historické bitky"
+  },
+  "tank-modes": {
+    "globalmap": "Globálna mapa",
+    "ranked_10x10": "Hodnotené bitky 10x10"
   },
   "stronghold-tiers": {
     "advances": "Postupy",

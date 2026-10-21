@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Προωθήσεις
 aliases:
   - fort battles
   - επιθέσεις

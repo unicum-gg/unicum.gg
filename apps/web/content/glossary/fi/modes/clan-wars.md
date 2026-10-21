@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klaanisodat
 aliases:
   - CW
   - globaalikartta

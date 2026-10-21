@@ -1,5 +1,6 @@
 {
   "no-tanks-played-yet": "Még egy tankkal sem játszottál.",
   "no-tanks-match-these-filters": "Egyetlen tank sem felel meg ezeknek a szűrőknek.",
-  "name": "Név"
+  "name": "Név",
+  "no-tanks-played-in-this-mode": "Ebben a játékmódban nem játszottak tankokkal."
 }

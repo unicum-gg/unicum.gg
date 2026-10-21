@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Čarke
 aliases:
   - skirmishes
   - clan skirmish

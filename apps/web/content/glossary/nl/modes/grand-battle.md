@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Groots gevecht
 aliases:
   - grand battles
   - grote gevechten

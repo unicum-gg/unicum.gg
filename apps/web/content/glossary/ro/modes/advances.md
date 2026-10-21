@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Ofensive
 aliases:
   - fort battles
   - avanseaza

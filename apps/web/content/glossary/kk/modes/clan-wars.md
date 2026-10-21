@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: клан соғыстары
 aliases:
   - CW
   - глобал карта

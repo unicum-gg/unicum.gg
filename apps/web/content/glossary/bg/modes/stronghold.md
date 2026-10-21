@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Укрепление
 aliases:
   - strongholds
   - кланова база
