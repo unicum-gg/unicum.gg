@@ -770,7 +770,8 @@
     "stops": "توقفات",
     "exclusively": "حصريًا",
     "follows": "يتابع",
-    "opens": "يفتح"
+    "opens": "يفتح",
+    "fought": "خاضها"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -2526,7 +2527,8 @@
     "stops": "спирания",
     "exclusively": "само",
     "follows": "следва",
-    "opens": "отваря"
+    "opens": "отваря",
+    "fought": "изиграни"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -4300,7 +4302,8 @@
     "stops": "zastávky",
     "exclusively": "výhradně",
     "follows": "sleduje",
-    "opens": "otevírá"
+    "opens": "otevírá",
+    "fought": "odehráno"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5300,7 +5303,8 @@
     "stops": "stop",
     "exclusively": "udelukkende",
     "follows": "følger",
-    "opens": "åbner"
+    "opens": "åbner",
+    "fought": "kampe"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6293,7 +6297,8 @@
     "stops": "stopps",
     "exclusively": "ausschließlich",
     "follows": "folgt",
-    "opens": "öffnet"
+    "opens": "öffnet",
+    "fought": "gespielt"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7292,7 +7297,8 @@
     "stops": "στάσεις",
     "exclusively": "αποκλειστικά",
     "follows": "ακολουθεί",
-    "opens": "ανοίγει"
+    "opens": "ανοίγει",
+    "fought": "πολέμησε"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8271,7 +8277,8 @@
     "stops": "paradas",
     "exclusively": "exclusivamente",
     "follows": "seguimientos",
-    "opens": "aperturas"
+    "opens": "aperturas",
+    "fought": "libradas"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9274,7 +9281,8 @@
     "stops": "pysäytykset",
     "exclusively": "vain",
     "follows": "seuraa",
-    "opens": "avaa"
+    "opens": "avaa",
+    "fought": "taistellut"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10257,7 +10265,8 @@
     "stops": "arrêts",
     "exclusively": "exclusivement",
     "follows": "suit",
-    "opens": "ouvre"
+    "opens": "ouvre",
+    "fought": "combattues"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11031,7 +11040,8 @@
     "stops": "स्टॉप",
     "exclusively": "केवल",
     "follows": "फ़ॉलो करता है",
-    "opens": "खोलता है"
+    "opens": "खोलता है",
+    "fought": "लड़ी गईं"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12028,7 +12038,8 @@
     "stops": "zaustavljanja",
     "exclusively": "isključivo",
     "follows": "prati",
-    "opens": "otvara"
+    "opens": "otvara",
+    "fought": "borio se"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14022,7 +14033,8 @@
     "stops": "stop",
     "exclusively": "esclusivamente",
     "follows": "segue",
-    "opens": "apre"
+    "opens": "apre",
+    "fought": "combattuto"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15024,7 +15036,8 @@
     "stops": "停止",
     "exclusively": "のみ",
     "follows": "フォロー",
-    "opens": "開く"
+    "opens": "開く",
+    "fought": "戦闘数"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15801,7 +15814,8 @@
     "stops": "тоқтаулар",
     "exclusively": "тек",
     "follows": "бақылайды",
-    "opens": "ашады"
+    "opens": "ашады",
+    "fought": "шайқасты"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16808,7 +16822,8 @@
     "stops": "중단",
     "exclusively": "전용",
     "follows": "팔로우",
-    "opens": "열기"
+    "opens": "열기",
+    "fought": "전투 횟수"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17810,7 +17825,8 @@
     "stops": "sustojimai",
     "exclusively": "išskirtinai",
     "follows": "seka",
-    "opens": "atidaro"
+    "opens": "atidaro",
+    "fought": "mūšiai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18798,7 +18814,8 @@
     "stops": "pieturas",
     "exclusively": "tikai",
     "follows": "seko",
-    "opens": "atver"
+    "opens": "atver",
+    "fought": "izspēlēts"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20797,7 +20814,8 @@
     "stops": "stopp",
     "exclusively": "utelukkende",
     "follows": "følger",
-    "opens": "åpner"
+    "opens": "åpner",
+    "fought": "kjempet"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21789,7 +21807,8 @@
     "stops": "przystanki",
     "exclusively": "wyłącznie",
     "follows": "obserwuje",
-    "opens": "otwiera"
+    "opens": "otwiera",
+    "fought": "rozegranych"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22774,7 +22793,8 @@
     "stops": "paragens",
     "exclusively": "exclusivamente",
     "follows": "segue",
-    "opens": "abre"
+    "opens": "abre",
+    "fought": "batalhas"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23759,7 +23779,8 @@
     "stops": "opriri",
     "exclusively": "exclusiv",
     "follows": "urmărește",
-    "opens": "deschide"
+    "opens": "deschide",
+    "fought": "jucate"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24732,7 +24753,8 @@
     "stops": "остановки",
     "exclusively": "исключительно",
     "follows": "подписки",
-    "opens": "открытия"
+    "opens": "открытия",
+    "fought": "бои"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25510,7 +25532,8 @@
     "stops": "postanki",
     "exclusively": "výhradne",
     "follows": "sledenja",
-    "opens": "odprtja"
+    "opens": "odprtja",
+    "fought": "odigranih"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26509,7 +26532,8 @@
     "stops": "tačke",
     "exclusively": "isključivo",
     "follows": "праћења",
-    "opens": "отварања"
+    "opens": "отварања",
+    "fought": "борио се"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27513,7 +27537,8 @@
     "stops": "stopp",
     "exclusively": "endast",
     "follows": "följningar",
-    "opens": "öppningar"
+    "opens": "öppningar",
+    "fought": "spelade"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28513,7 +28538,8 @@
     "stops": "จุด",
     "exclusively": "เท่านั้น",
     "follows": "ติดตาม",
-    "opens": "เปิด"
+    "opens": "เปิด",
+    "fought": "เข้าร่วมการรบ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -30288,7 +30314,8 @@
     "stops": "duraklar",
     "exclusively": "sadece",
     "follows": "takip eder",
-    "opens": "açar"
+    "opens": "açar",
+    "fought": "savaştı"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31277,7 +31304,8 @@
     "stops": "зупинки",
     "exclusively": "виключно",
     "follows": "підписки",
-    "opens": "відкриття"
+    "opens": "відкриття",
+    "fought": "бився"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32255,7 +32283,8 @@
     "stops": "mốc",
     "exclusively": "chỉ",
     "follows": "theo dõi",
-    "opens": "lượt mở"
+    "opens": "lượt mở",
+    "fought": "đã tham chiến"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33255,6 +33284,7 @@
     "stops": "停止",
     "exclusively": "仅",
     "follows": "关注",
-    "opens": "打开"
+    "opens": "打开",
+    "fought": "战斗过"
   }
 }

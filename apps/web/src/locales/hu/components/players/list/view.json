@@ -9,9 +9,9 @@
     "strict": "A(z) {region} játékosai, akiknek a feltételezett klántörténeti nyelve kizárólag a(z) {language}, {metric} szerint rendezve, minimum 10 000 csatával."
   },
   "intro-period": {
-    "all": "{region} régió ranglistája, {metric} szerint rangsorolva. {period}, minimum {battles} csatával.",
-    "language": "{region} régió játékosai, akiknek a következtetett klántörténeti nyelvei között szerepel {language}, {metric} szerint rangsorolva. {period}, minimum {battles} csatával.",
-    "strict": "{region} régió játékosai, akiknél a következtetett klántörténet nyelve kizárólag {language}, {metric} szerint rangsorolva. {period}, minimum {battles} csatával."
+    "all": "{region} ranglistája, a(z) {metric} alapján rangsorolva, a {tier}. szinttől felfelé vívott csaták alapján. {period}, legalább {battles} csata.",
+    "language": "{region} játékosai, akiknek a klántörténetükből kikövetkeztetett nyelvi készletében szerepel: {language}, a(z) {metric} alapján rangsorolva, a {tier}. szinttől felfelé vívott csaták alapján. {period}, legalább {battles} csata.",
+    "strict": "{region} játékosai, akiknek a klántörténetükből kikövetkeztetett nyelve kizárólag {language}, a(z) {metric} alapján rangsorolva, a {tier}. szinttől felfelé vívott csaták alapján. {period}, legalább {battles} csata."
   },
   "board": {
     "all": "Top {count} játékos {metric} alapján",
@@ -30,5 +30,6 @@
   "battles": "Csaták",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "{tier}. szint vagy magasabb"
 }

@@ -9,9 +9,9 @@
     "strict": "Giocatori della regione {region} la cui unica lingua, dedotta dalla cronologia dei clan, è {language}, classificati per {metric} (minimo 10.000 battaglie)."
   },
   "intro-period": {
-    "all": "Classifica della regione {region}, classificata per {metric}. {period}, minimo {battles} battaglie.",
-    "language": "Giocatori della regione {region} il cui insieme di lingue dedotte dalla cronologia del clan include {language}, classificati per {metric}. {period}, minimo {battles} battaglie.",
-    "strict": "Giocatori della regione {region} la cui lingua dedotta dalla cronologia del clan è esclusivamente {language}, classificati per {metric}. {period}, minimo {battles} battaglie."
+    "all": "Classifica della regione {region}, classificata per {metric} nelle battaglie combattute al livello {tier} o superiore. {period}, minimo {battles} battaglie.",
+    "language": "Giocatori della regione {region} il cui insieme di lingue dedotto dalla cronologia del clan include {language}, classificati per {metric} nelle battaglie combattute al livello {tier} o superiore. {period}, minimo {battles} battaglie.",
+    "strict": "Giocatori della regione {region} la cui lingua dedotta dalla cronologia del clan è esclusivamente {language}, classificati per {metric} nelle battaglie combattute al livello {tier} o superiore. {period}, minimo {battles} battaglie."
   },
   "board": {
     "all": "Top {count} giocatori per {metric}",
@@ -30,5 +30,6 @@
   "battles": "Battaglie",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Livello {tier}+"
 }

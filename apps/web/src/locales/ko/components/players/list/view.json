@@ -9,9 +9,9 @@
     "strict": "클랜 기록에서 추정한 언어가 {language} 하나뿐인 {region} 플레이어들입니다. {metric}으로 순위를 매겼으며 최소 전투 10,000회입니다."
   },
   "intro-period": {
-    "all": "{region} 리더보드, {metric}으로 랭크. {period}, 최소 {battles} 전투.",
-    "language": "추정된 클랜 기록 언어 집합에 {language}가 포함된 {region} 플레이어들, {metric}으로 랭크. {period}, 최소 {battles} 전투.",
-    "strict": "추정된 클랜 기록 언어가 {language} 전용인 {region} 플레이어들, {metric}으로 랭크. {period}, 최소 {battles} 전투."
+    "all": "{region} 순위표, 단계 {tier} 이상에서의 전투 횟수를 기준으로 {metric}에 따라 랭크됨. {period}, 최소 {battles} 전투.",
+    "language": "클랜 기록에서 추정된 언어 집합에 {language}가 포함된 {region} 플레이어들, 단계 {tier} 이상에서의 전투 횟수를 기준으로 {metric}에 따라 랭크됨. {period}, 최소 {battles} 전투.",
+    "strict": "클랜 기록에서 추정된 언어가 {language} 전용인 {region} 플레이어들, 단계 {tier} 이상에서의 전투 횟수를 기준으로 {metric}에 따라 랭크됨. {period}, 최소 {battles} 전투."
   },
   "board": {
     "all": "{metric} 기준 상위 {count} 플레이어",
@@ -30,5 +30,6 @@
   "battles": "전투",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "단계 {tier}+"
 }

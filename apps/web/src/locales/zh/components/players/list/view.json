@@ -9,9 +9,9 @@
     "strict": "{region}中推断的军团历史语言仅为{language}的玩家，按{metric}排名（最低10,000场战斗）。"
   },
   "intro-period": {
-    "all": "{region}地区排行榜，按 {metric} 排位。{period}，最低 {battles} 战斗场次。",
-    "language": "{region}地区玩家，其推断的军团历史语言集合包括 {language}，按 {metric} 排位。{period}，最低 {battles} 战斗场次。",
-    "strict": "{region}地区玩家，其推断的军团历史语言仅为 {language}，按 {metric} 排位。{period}，最低 {battles} 战斗场次。"
+    "all": "{region} 排行榜，按 {metric} 排名，统计在 {tier} 级及以上等级战斗过的战斗场次。{period}，最低战斗场次为 {battles}。",
+    "language": "{region} 地区玩家，其推断的军团历史语言集合包括 {language}，按 {metric} 排名，统计在 {tier} 级及以上等级战斗过的战斗场次。{period}，最低战斗场次为 {battles}。",
+    "strict": "{region} 地区玩家，其推断的军团历史语言仅为 {language}，按 {metric} 排名，统计在 {tier} 级及以上等级战斗过的战斗场次。{period}，最低战斗场次为 {battles}。"
   },
   "board": {
     "all": "按{metric}排名前{count}的玩家",
@@ -30,5 +30,6 @@
   "battles": "战斗场次",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "等级 {tier}+"
 }

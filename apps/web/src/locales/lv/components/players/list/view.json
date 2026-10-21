@@ -9,9 +9,9 @@
     "strict": "{region} spēlētāji, kuru noteiktā klanu vēstures valoda ir tikai {language}, sakārtoti pēc {metric}, ņemot vērā vismaz 10 000 kauju."
   },
   "intro-period": {
-    "all": "{region} līderu saraksts, ranžēts pēc {metric}. {period}, minimums: {battles} kaujas.",
-    "language": "{region} spēlētāji, kuru secinātais klana vēstures valodu kopums ietver {language}, ranžēti pēc {metric}. {period}, minimums: {battles} kaujas.",
-    "strict": "{region} spēlētāji, kuru secinātā klana vēstures valoda ir tikai {language}, ranžēti pēc {metric}. {period}, minimums: {battles} kaujas."
+    "all": "{region} līderu saraksts, ranžēts pēc {metric} kaujās, kas izspēlētas līmenī {tier} un augstāk. {period}, minimums {battles} kaujas.",
+    "language": "{region} spēlētāji, kuru secinātais klana vēstures valodu kopums ietver {language}, ranžēti pēc {metric} kaujās, kas izspēlētas līmenī {tier} un augstāk. {period}, minimums {battles} kaujas.",
+    "strict": "{region} spēlētāji, kuru secinātā klana vēstures valoda ir tikai {language}, ranžēti pēc {metric} kaujās, kas izspēlētas līmenī {tier} un augstāk. {period}, minimums {battles} kaujas."
   },
   "board": {
     "all": "Top {count} spēlētāji pēc {metric}",
@@ -30,5 +30,6 @@
   "battles": "Kaujas",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Līmenis {tier}+"
 }

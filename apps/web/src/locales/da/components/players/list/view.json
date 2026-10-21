@@ -9,9 +9,9 @@
     "strict": "Spillere fra {region}, hvis udledte sprog fra klanhistorikken udelukkende er {language}, rangeret efter {metric}, med minimum 10.000 kampe."
   },
   "intro-period": {
-    "all": "Rangliste for {region}, rangeret efter {metric}. {period}, minimum {battles} kampe.",
-    "language": "Spillere fra {region}, hvis udledte sprog baseret på klanhistorik omfatter {language}, rangeret efter {metric}. {period}, minimum {battles} kampe.",
-    "strict": "Spillere fra {region}, hvis udledte sprog baseret på klanhistorik udelukkende er {language}, rangeret efter {metric}. {period}, minimum {battles} kampe."
+    "all": "Rangliste for {region}, rangeret efter {metric} baseret på kampe på niveau {tier} og derover. {period}, minimum {battles} kampe.",
+    "language": "Spillere fra {region}, hvis udledte sprog i klanhistorikken omfatter {language}, rangeret efter {metric} baseret på kampe på niveau {tier} og derover. {period}, minimum {battles} kampe.",
+    "strict": "Spillere fra {region}, hvis udledte sprog i klanhistorikken udelukkende er {language}, rangeret efter {metric} baseret på kampe på niveau {tier} og derover. {period}, minimum {battles} kampe."
   },
   "board": {
     "all": "Top {count} spillere efter {metric}",
@@ -30,5 +30,6 @@
   "battles": "Kampe",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Niveau {tier}+"
 }

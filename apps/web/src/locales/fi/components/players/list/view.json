@@ -9,9 +9,9 @@
     "strict": "{region}-alueen pelaajat, joiden päätelty klaanihistorian kieli on yksinomaan {language}, rankattuna {metric}-arvon mukaan, vähintään 10 000 taistelua."
   },
   "intro-period": {
-    "all": "{region} tulostaulukko, rankattu tunnusluvun {metric} perusteella. {period}, taisteluiden vähimmäismäärä: {battles}.",
-    "language": "{region} pelaajat, joiden klaanihistoriasta päätelty kielijoukko sisältää kielen {language}, rankattu tunnusluvun {metric} perusteella. {period}, taisteluiden vähimmäismäärä: {battles}.",
-    "strict": "{region} pelaajat, joiden klaanihistoriasta päätelty kieli on vain {language}, rankattu tunnusluvun {metric} perusteella. {period}, taisteluiden vähimmäismäärä: {battles}."
+    "all": "Alueen {region} tulostaulukko, rankattu arvon {metric} perusteella tasolla {tier} tai sitä korkeammilla tasoilla taistelluissa taisteluissa. {period}, vähimmäismäärä {battles} taistelua.",
+    "language": "Alueen {region} pelaajat, joiden päätelty klaanihistorian kielijoukko sisältää kielen {language}, rankattuina arvon {metric} perusteella tasolla {tier} tai sitä korkeammilla tasoilla taistelluissa taisteluissa. {period}, vähimmäismäärä {battles} taistelua.",
+    "strict": "Alueen {region} pelaajat, joiden klaanihistoriasta päätelty kieli on vain {language}, rankattuina arvon {metric} perusteella tasolla {tier} tai sitä korkeammilla tasoilla taistelluissa taisteluissa. {period}, vähimmäismäärä {battles} taistelua."
   },
   "board": {
     "all": "Top {count} pelaajaa mittarilla {metric}",
@@ -30,5 +30,6 @@
   "battles": "Taisteluita",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Taso {tier}+"
 }

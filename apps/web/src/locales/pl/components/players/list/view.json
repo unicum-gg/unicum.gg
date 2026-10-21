@@ -9,9 +9,9 @@
     "strict": "Gracze z regionu {region}, dla których na podstawie historii przynależności do klanów ustalono wyłącznie język {language}, sklasyfikowani według wskaźnika {metric} (minimum 10 000 bitew)."
   },
   "intro-period": {
-    "all": "Ranking dla regionu {region} według {metric}. {period}, minimum {battles} bitew.",
-    "language": "Gracze z regionu {region}, których wywnioskowany zestaw języków z historii klanu zawiera {language}, w rankingu według {metric}. {period}, minimum {battles} bitew.",
-    "strict": "Gracze z regionu {region}, których wywnioskowany język historii klanu to wyłącznie {language}, w rankingu według {metric}. {period}, minimum {battles} bitew."
+    "all": "Ranking dla regionu {region} według {metric}, na podstawie bitew rozegranych na poziomie {tier} lub wyższym. {period}, minimum {battles} bitew.",
+    "language": "Gracze z regionu {region}, których wywnioskowany zestaw języków z historii klanu obejmuje {language}, w rankingu według {metric}, na podstawie bitew rozegranych na poziomie {tier} lub wyższym. {period}, minimum {battles} bitew.",
+    "strict": "Gracze z regionu {region}, których wywnioskowany język z historii klanu to wyłącznie {language}, w rankingu według {metric}, na podstawie bitew rozegranych na poziomie {tier} lub wyższym. {period}, minimum {battles} bitew."
   },
   "board": {
     "all": "Top {count} graczy według {metric}",
@@ -30,5 +30,6 @@
   "battles": "Bitwy",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Poziom {tier}+"
 }

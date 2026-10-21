@@ -9,9 +9,9 @@
     "strict": "Играчи из региона {region} чији је претпостављени језик историје кланова искључиво {language}, рангирани према {metric}, уз минимум од 10.000 битака."
   },
   "intro-period": {
-    "all": "Ранг-листа за {region}, рангиране према показатељу {metric}. {period}, минимум {battles} битака.",
-    "language": "Играчи из региона {region} чији изведени скуп језика историје клана укључује {language}, рангиране према показатељу {metric}. {period}, минимум {battles} битака.",
-    "strict": "Играчи из региона {region} чији је изведени језик историје клана искључиво {language}, рангиране према показатељу {metric}. {period}, минимум {battles} битака."
+    "all": "Ранг-листа за {region}, рангиране према {metric} током bitke у којима се борио на ниво {tier} и вишем. {period}, минимум {battles} bitke.",
+    "language": "За {region}: igrači чији је скуп језика, изведено из историја клана, који укључује {language}, рангиране према {metric} током bitke у којима се борио на ниво {tier} и вишем. {period}, минимум {battles} bitke.",
+    "strict": "За {region}: igrači чији је језик, изведено из историја клана, isključivo {language}, рангиране према {metric} током bitke у којима се борио на ниво {tier} и вишем. {period}, минимум {battles} bitke."
   },
   "board": {
     "all": "Топ {count} играча према {metric}",
@@ -30,5 +30,6 @@
   "battles": "Borbi",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Nivo {tier}+"
 }

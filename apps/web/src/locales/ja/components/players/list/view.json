@@ -9,9 +9,9 @@
     "strict": "クラン履歴から推定した言語が{language}のみである{region}のプレイヤーを、{metric}で順位付けしています（最低10,000戦）。"
   },
   "intro-period": {
-    "all": "{region}ランキング、{metric}でランク戦。{period}、最小{battles}戦闘。",
-    "language": "推定されたクラン履歴の言語セットに{language}が含まれる{region}のプレイヤーを、{metric}でランク戦。{period}、最小{battles}戦闘。",
-    "strict": "推定されたクラン履歴の言語が{language}のみである{region}のプレイヤーを、{metric}でランク戦。{period}、最小{battles}戦闘。"
+    "all": "{region}地域のランキング。Tier {tier}以上での戦闘数における{metric}でランク戦。{period}、戦闘数の最小は{battles}戦闘。",
+    "language": "推定されたクラン履歴の言語セットに{language}を含む{region}地域のプレイヤーを、Tier {tier}以上での戦闘数における{metric}でランク戦。{period}、戦闘数の最小は{battles}戦闘。",
+    "strict": "推定されたクラン履歴の言語が{language}のみである{region}地域のプレイヤーを、Tier {tier}以上での戦闘数における{metric}でランク戦。{period}、戦闘数の最小は{battles}戦闘。"
   },
   "board": {
     "all": "{metric}によるトップ{count}プレイヤー",
@@ -30,5 +30,6 @@
   "battles": "戦闘数",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Tier {tier}以上"
 }

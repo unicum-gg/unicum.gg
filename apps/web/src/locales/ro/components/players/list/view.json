@@ -9,9 +9,9 @@
     "strict": "Jucători din {region} al căror istoric de clan dedus este exclusiv în limba {language}, ordonați după {metric}, cu minimum 10.000 de bătălii."
   },
   "intro-period": {
-    "all": "Clasament pentru {region}, clasat după {metric}. {period}, minim {battles} bătălii.",
-    "language": "Jucători din {region} al căror set de limbi dedus din istoricul clanului include {language}, clasați după {metric}. {period}, minim {battles} bătălii.",
-    "strict": "Jucători din {region} a căror limbă dedusă din istoricul clanului este exclusiv {language}, clasați după {metric}. {period}, minim {battles} bătălii."
+    "all": "Clasamentul pentru {region}, clasat în funcție de {metric} pe baza bătăliilor jucate la nivelul {tier} și mai sus. {period}, minim {battles} bătălii.",
+    "language": "Jucători din {region} a căror listă de limbi dedusă din istoricul clanului include {language}, clasați în funcție de {metric} pe baza bătăliilor jucate la nivelul {tier} și mai sus. {period}, minim {battles} bătălii.",
+    "strict": "Jucători din {region} a căror limbă dedusă din istoricul clanului este exclusiv {language}, clasați în funcție de {metric} pe baza bătăliilor jucate la nivelul {tier} și mai sus. {period}, minim {battles} bătălii."
   },
   "board": {
     "all": "Top {count} jucători după {metric}",
@@ -30,5 +30,6 @@
   "battles": "Lupte",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "nivel {tier}+"
 }

@@ -9,9 +9,9 @@
     "strict": "Mga manlalaro sa {region} na eksklusibong {language} ang natukoy na wika mula sa kasaysayan ng klano, niraranggo ayon sa {metric}, na may pinakamababang 10,000 laban."
   },
   "intro-period": {
-    "all": "Talaan ng ranggo ng {region}, ranked ayon sa {metric}. {period}, pinakamababa na {battles} mga laban.",
-    "language": "Mga manlalaro sa {region} na ang nahinuhang hanay ng wika sa kasaysayan ng clan ay kinabibilangan ng {language}, ranked ayon sa {metric}. {period}, pinakamababa na {battles} mga laban.",
-    "strict": "Mga manlalaro sa {region} na ang nahinuhang wika sa kasaysayan ng clan ay eksklusibong {language}, ranked ayon sa {metric}. {period}, pinakamababa na {battles} mga laban."
+    "all": "Talahanayan ng ranggo sa {region}, batay sa {metric} sa mga laban na nilaro sa tier {tier} pataas. {period}, minimum na {battles} laban.",
+    "language": "Mga manlalaro sa {region} na ang mga wikang tinataya batay sa kasaysayan ng clan ay kinabibilangan ng {language}, niranggo ayon sa {metric} sa mga laban na nilaro sa tier {tier} pataas. {period}, minimum na {battles} laban.",
+    "strict": "Mga manlalaro sa {region} na ang tinatayang wika batay sa kasaysayan ng clan ay {language} lamang, niranggo ayon sa {metric} sa mga laban na nilaro sa tier {tier} pataas. {period}, minimum na {battles} laban."
   },
   "board": {
     "all": "Nangungunang {count} manlalaro ayon sa {metric}",
@@ -30,5 +30,6 @@
   "battles": "Mga labanan",
   "wn7": "WN7",
   "wn8": "WN8",
-  "wnx": "WNX"
+  "wnx": "WNX",
+  "tier-floor": "Tier {tier} pataas"
 }
