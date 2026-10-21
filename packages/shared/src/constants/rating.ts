@@ -46,14 +46,14 @@ export function ratingMetricFromCookie(
  * the window so a ranking is not won on a handful of lucky games.
  *
  * On a recent window they count only the battles at or above the board's
- * `TierFloor`. The month keeps the same 600 it had while every tier counted,
- * twenty battles a day: a thirty-day board is a statement about someone who
- * plays, and 150 let a casual month rank beside a full one. The week sits at
- * 75 for now.
+ * `TierFloor`. Every recent floor is twenty battles a day over its window,
+ * the same figures they had while every tier counted: a recent board is a
+ * statement about someone who plays, and a lower floor (150 for the month was
+ * tried) let a casual month rank beside a full one.
  */
 export const TOP_PLAYERS_MIN_BATTLES: Record<StrongholdPeriod, number> = {
   [StrongholdPeriod.Day]: 20,
-  [StrongholdPeriod.Week]: 75,
+  [StrongholdPeriod.Week]: 140,
   [StrongholdPeriod.Month]: 600,
   [StrongholdPeriod.Overall]: 20000,
 };
