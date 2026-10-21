@@ -1,6 +1,5 @@
 {
   "heading": "Cei mai buni jucători în <accent>{mode}</accent>",
-  "intro": "{mode} este modul battle royale din World of Tanks. Clasamentul pentru {region}, ordonat după HR, cu minimum 100 de bătălii {mode}.",
   "board": "Cei mai buni {count} jucători de {mode}",
   "columns": {
     "player": "Jucător",

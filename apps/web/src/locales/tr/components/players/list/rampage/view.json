@@ -1,6 +1,5 @@
 {
   "heading": "<accent>{mode}</accent> modundaki en iyi oyuncular",
-  "intro": "{mode}, World of Tanks’ın battle royale modudur. En az 100 {mode} savaşı şartıyla HR’ye göre sıralanan {region} liderlik tablosu.",
   "board": "En iyi {count} {mode} oyuncusu",
   "columns": {
     "player": "Oyuncu",

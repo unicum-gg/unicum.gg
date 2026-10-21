@@ -1,6 +1,5 @@
 {
   "heading": "Top-Spieler in <accent>{mode}</accent>",
-  "intro": "{mode} ist der Battle-Royale-Modus von World of Tanks. Die Bestenliste für {region}, sortiert nach HR (mindestens 100 Gefechte in {mode}).",
   "board": "Top {count} {mode}-Spieler",
   "columns": {
     "player": "Spieler",

@@ -1,6 +1,5 @@
 {
   "heading": "Найкращі гравці в <accent>{mode}</accent>",
-  "intro": "{mode} — це режим королівської битви World of Tanks. Таблиця лідерів регіону {region}, упорядкована за HR, мінімум 100 боїв у режимі {mode}.",
   "board": "Найкращі {count} гравців режиму {mode}",
   "columns": {
     "player": "Гравець",

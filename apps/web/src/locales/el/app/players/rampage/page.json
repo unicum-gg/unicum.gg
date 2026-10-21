@@ -1,6 +1,3 @@
 {
-  "title": "Καλύτεροι παίκτες battle royale στη λειτουργία {mode} του World of Tanks ({region})",
-  "description": "Πίνακας κατάταξης {name} στην περιοχή {region} για τη λειτουργία {mode}, τη λειτουργία battle royale του World of Tanks, με κατάταξη βάσει της δικής μας βαθμολογίας HR (μέσος όρος XP συν ποσοστό νικών).",
-  "og-title": "Καλύτεροι παίκτες στη λειτουργία {mode}",
-  "og-subtitle": "Πίνακας κατάταξης battle royale στην περιοχή {region}"
+  "og-title": "Καλύτεροι παίκτες στη λειτουργία {mode}"
 }

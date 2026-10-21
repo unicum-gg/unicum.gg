@@ -1,6 +1,5 @@
 {
   "heading": "<accent>{mode}</accent> ішіндегі үздік ойыншылар",
-  "intro": "{mode} — World of Tanks ойынындағы battle royale режимі. HR бойынша рейтингтелген {region} жетекші таблицасы, кемінде 100 {mode} шайқасы қажет.",
   "board": "{mode} ішіндегі үздік {count} ойыншы",
   "columns": {
     "player": "Ойыншы",

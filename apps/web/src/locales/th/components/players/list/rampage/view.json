@@ -1,6 +1,5 @@
 {
   "heading": "ผู้เล่นชั้นนำใน <accent>{mode}</accent>",
-  "intro": "{mode} คือโหมดแบตเทิลรอยัลของ World of Tanks ตารางอันดับของ {region} จัดอันดับด้วย HR (ขั้นต่ำ 100 การรบใน {mode})",
   "board": "ผู้เล่น {mode} ชั้นนำ {count} คน",
   "columns": {
     "player": "ผู้เล่น",

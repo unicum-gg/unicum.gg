@@ -1,6 +1,5 @@
 {
   "heading": "Bedste spillere i <accent>{mode}</accent>",
-  "intro": "{mode} er World of Tanks’ battle royale-spiltilstand. Ranglisten for {region}, rangeret efter HR, med minimum 100 kampe i {mode}.",
   "board": "De bedste {count} spillere i {mode}",
   "columns": {
     "player": "Spiller",

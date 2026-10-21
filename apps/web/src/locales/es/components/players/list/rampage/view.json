@@ -1,6 +1,5 @@
 {
   "heading": "Mejores jugadores en <accent>{mode}</accent>",
-  "intro": "{mode} es el modo battle royale de World of Tanks. La clasificación de la región {region}, ordenada por HR (mínimo de 100 batallas de {mode}).",
   "board": "Los {count} mejores jugadores de {mode}",
   "columns": {
     "player": "Jugador",

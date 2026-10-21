@@ -1,6 +1,5 @@
 {
   "heading": "<accent>{mode}</accent>のトッププレイヤー",
-  "intro": "{mode}はWorld of Tanksのバトルロイヤルモードです。HRでランク付けした{region}ランキングです（{mode}で最低100戦）。",
   "board": "{mode}のトップ{count}プレイヤー",
   "columns": {
     "player": "プレイヤー",

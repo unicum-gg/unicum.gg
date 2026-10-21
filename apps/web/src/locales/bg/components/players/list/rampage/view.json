@@ -1,6 +1,5 @@
 {
   "heading": "Най-добрите играчи в <accent>{mode}</accent>",
-  "intro": "{mode} е режимът battle royale на World of Tanks. Класацията за {region}, подредена по HR, с минимум 100 битки в {mode}.",
   "board": "Най-добрите {count} играчи в режим {mode}",
   "columns": {
     "player": "Играч",

@@ -1,6 +1,5 @@
 {
   "heading": "Mga nangungunang manlalaro sa <accent>{mode}</accent>",
-  "intro": "Ang {mode} ay battle royale mode ng World of Tanks. Ang talaan ng ranggo ng {region}, niraranggo ayon sa HR, na may pinakamababang 100 labanan sa {mode}.",
   "board": "Nangungunang {count} manlalaro sa {mode}",
   "columns": {
     "player": "Manlalaro",

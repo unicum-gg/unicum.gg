@@ -1,6 +1,5 @@
 {
   "heading": "Najlepší hráči v režime <accent>{mode}</accent>",
-  "intro": "{mode} je režim battle royale v hre World of Tanks. Rebríček regiónu {region}, zoradený podľa HR (minimálne 100 bitiek v režime {mode}).",
   "board": "Najlepších {count} hráčov v režime {mode}",
   "columns": {
     "player": "Hráč",

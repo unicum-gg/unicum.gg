@@ -1,6 +1,5 @@
 {
   "heading": "Geriausi žaidėjai režime <accent>{mode}</accent>",
-  "intro": "{mode} yra World of Tanks mūšio karališkasis režimas. {region} lyderių lentelė, surikiuota pagal HR (mažiausiai 100 režimo {mode} mūšių).",
   "board": "{count} geriausi režimo {mode} žaidėjai",
   "columns": {
     "player": "Žaidėjas",
