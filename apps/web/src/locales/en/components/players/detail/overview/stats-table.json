@@ -2,7 +2,7 @@
   "stat": "Stat",
   "rows": {
     "battles": "Battles",
-    "tier": "Tier",
+    "tier": "Avg tier",
     "wins": "Wins",
     "losses": "Losses",
     "draws": "Draws",
