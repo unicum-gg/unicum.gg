@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Майдан шебі
 aliases:
   - front line
   - FL

@@ -6,7 +6,7 @@
   },
   "columns": {
     "battles": {
-      "label": "Bitev",
+      "label": "Bitvy",
       "tip": "Celkem bitev odehraných s tankem"
     },
     "count": {

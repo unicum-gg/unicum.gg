@@ -1,5 +1,5 @@
 ---
-term: Naključni boji
+term: Náhodné bitky
 aliases:
   - randoms
   - pubs

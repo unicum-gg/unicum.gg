@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Batalla épica
 aliases:
   - grand battles
 related:

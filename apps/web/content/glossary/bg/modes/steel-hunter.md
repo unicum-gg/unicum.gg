@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Стоманен ловец
 aliases:
   - battle royale
   - SH

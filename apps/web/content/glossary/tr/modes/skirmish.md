@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Çatışma
 aliases:
   - skirmishes
   - klan çatışması

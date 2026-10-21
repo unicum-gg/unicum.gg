@@ -26,6 +26,6 @@
   "survival": "Überleben",
   "tank-id-expected-values-are": "Panzer-ID {tankId}. Die Erwartungswerte stammen aus den WN8 / WNX-Datensätzen der Community und werden automatisch aktualisiert.",
   "top-tank-players-by": "Top-Spieler für {tank} {by} {metric}",
-  "win-rate": "Gewinnrate",
+  "win-rate": "Siegquote",
   "with-battles": ", {battles} Gefechte, je mind. 100"
 }

@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Etulinja
 aliases:
   - front line
   - FL

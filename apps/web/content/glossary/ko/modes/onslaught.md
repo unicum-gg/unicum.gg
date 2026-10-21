@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: 격전
 aliases:
   - comp7
   - competitive 7

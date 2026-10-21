@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Războaie de clan
 aliases:
   - CW
   - harta globală

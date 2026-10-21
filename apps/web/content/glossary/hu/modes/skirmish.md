@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Csatározás
 aliases:
   - skirmishes
   - klán meccs

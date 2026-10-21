@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klán Háborúk
 aliases:
   - CW
   - globális térkép

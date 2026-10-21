@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Tilfeldige kamper
 aliases:
   - randoms
   - pubs

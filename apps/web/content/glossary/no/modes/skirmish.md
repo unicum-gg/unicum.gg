@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Trefning
 aliases:
   - skirmishes
   - clan skirmish

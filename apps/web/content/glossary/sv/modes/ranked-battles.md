@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Rankade strider
 aliases:
   - ranked
   - chevrons

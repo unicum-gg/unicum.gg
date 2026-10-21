@@ -1,5 +1,5 @@
 {
-  "win-rate": "Taux de victoire",
+  "win-rate": "Taux de victoires",
   "versus": "{metric} par rapport à {region}",
   "top": "Top {percent}%",
   "ahead-of": "Devance {percent} % des joueurs",

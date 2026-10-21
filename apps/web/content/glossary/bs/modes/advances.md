@@ -1,5 +1,5 @@
 ---
-term: Napadi
+term: Napredovanja
 aliases:
   - fort bitke
   - napad

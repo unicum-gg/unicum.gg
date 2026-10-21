@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: Osobni rejting
 aliases:
   - global rating
   - wg rating

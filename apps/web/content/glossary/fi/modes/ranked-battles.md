@@ -1,5 +1,5 @@
 ---
-term: Rankatut Taistelut
+term: Liigataistelut
 aliases:
   - rankatut
   - chevrons

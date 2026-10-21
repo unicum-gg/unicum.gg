@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: यादृच्छिक लड़ाई
 aliases:
   - randoms
   - pubs

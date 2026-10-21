@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Plieninis medžiotojas
 aliases:
   - battle royale
   - SH

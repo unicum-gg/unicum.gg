@@ -1,5 +1,5 @@
 ---
-term: معارك عشوائية
+term: المعارك العشوائية
 aliases:
   - randoms
   - pubs

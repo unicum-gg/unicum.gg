@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Μάχες Κατάταξης
 aliases:
   - ranked
   - chevrons

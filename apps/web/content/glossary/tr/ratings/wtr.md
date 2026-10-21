@@ -1,5 +1,5 @@
 ---
-term: World of Tanks Derecelendirmesi
+term: World of Tanks Reytingi
 aliases:
   - WTR
   - wot derecelendirmesi

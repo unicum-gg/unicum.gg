@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Avances
 aliases:
   - fort battles
   - avance

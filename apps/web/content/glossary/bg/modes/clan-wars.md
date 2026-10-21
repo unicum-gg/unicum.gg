@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Кланови войни
 aliases:
   - CW
   - глобална карта

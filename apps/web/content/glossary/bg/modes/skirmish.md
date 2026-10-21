@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Схватка
 aliases:
   - skirmishes
   - кланови сражения

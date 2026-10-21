@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Rangirane bitke
 aliases:
   - ranked
   - chevrons

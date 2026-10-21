@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Tiến công
 aliases:
   - fort battles
   - các trận chiến bóp méo

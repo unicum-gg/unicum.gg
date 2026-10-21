@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Slumptävlingar
 aliases:
   - randoms
   - pubs

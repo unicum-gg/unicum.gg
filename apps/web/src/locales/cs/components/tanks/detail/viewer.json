@@ -9,7 +9,7 @@
     "off": "Vrátit vozidlo mimo střed"
   },
   "hull-down": {
-    "on": "Kryt",
+    "on": "Pozice se skrytou korbou",
     "off": "Srovnat vozidlo"
   },
   "tracks": {

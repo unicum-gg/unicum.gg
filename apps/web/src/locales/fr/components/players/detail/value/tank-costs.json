@@ -1,8 +1,8 @@
 {
   "n-reward-tanks-are-not": "{count} chars de récompense ne sont pas listés : la boutique ne leur attribue aucun prix. Ils ne sont pas gratuits non plus, puisque Wargaming les attribue via ses propres événements, notamment les enchères et les niveaux de Passe de combat payants, au prix demandé chaque fois plutôt qu’à un prix publié.",
-  "n-tier-i-vehicles-are": "{count} véhicules de niveau I ne sont pas listés non plus, étant gratuits.",
+  "n-tier-i-vehicles-are": "{count} véhicules de rang I ne sont pas listés non plus, étant gratuits.",
   "only-vehicles-this-account-has": "Seuls les véhicules que ce compte a pris en bataille peuvent apparaître ici : Wargaming publie un record par véhicule, jamais une liste de ce que contient le garage. Un char possédé mais jamais joué est donc invisible pour nous.",
   "purchase": "Acheter",
-  "research": "Rechercher",
+  "research": "Recherche",
   "total": "Total"
 }

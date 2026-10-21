@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Bolwerk
 aliases:
   - strongholds
   - clan basis

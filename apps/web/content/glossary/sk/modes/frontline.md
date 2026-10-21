@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Frontová línia
 aliases:
   - front line
   - FL

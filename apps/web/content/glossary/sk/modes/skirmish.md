@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Šarvátka
 aliases:
   - skirmishes
   - klanski skirmish

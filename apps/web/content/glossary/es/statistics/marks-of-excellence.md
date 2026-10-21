@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Marcas de excelencia
 aliases:
   - MoE
   - marcas

@@ -9,7 +9,7 @@
     "off": "Remettre le véhicule en position décentrée"
   },
   "hull-down": {
-    "on": "Caisse basse",
+    "on": "Défilement de tourelle",
     "off": "Remettre le véhicule à l’horizontale"
   },
   "tracks": {

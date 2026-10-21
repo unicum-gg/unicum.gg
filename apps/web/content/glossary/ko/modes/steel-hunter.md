@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: 배틀 로얄
 aliases:
   - battle royale
   - SH

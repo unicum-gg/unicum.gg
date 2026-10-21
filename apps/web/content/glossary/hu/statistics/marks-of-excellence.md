@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Kiválóság jele
 aliases:
   - MoE
   - marks

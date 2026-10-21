@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Ofenziva
 aliases:
   - comp7
   - 7 na 7

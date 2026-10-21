@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klanu kari
 aliases:
   - CW
   - globālā karte

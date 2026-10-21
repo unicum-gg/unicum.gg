@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: 要塞
 aliases:
   - strongholds
   - clan base

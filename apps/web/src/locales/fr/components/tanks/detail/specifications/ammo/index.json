@@ -2,7 +2,7 @@
   "damage": "Dégâts",
   "penetration": "Pénétration",
   "velocity": "Vélocité",
-  "splash": "Splash",
+  "splash": "Dégâts d’explosion",
   "cost": "Coût",
   "at-500m": "… à 500 m"
 }

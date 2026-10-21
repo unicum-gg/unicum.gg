@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Генерално сражение
 aliases:
   - grand battles
 related:

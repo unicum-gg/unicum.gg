@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: кездейсоқ шайқастар
 aliases:
   - randoms
   - pubs

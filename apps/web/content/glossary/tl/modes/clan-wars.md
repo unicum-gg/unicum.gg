@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Digmaan ng Clans
 aliases:
   - CW
   - global map

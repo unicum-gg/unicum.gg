@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Ocelový lovec
 aliases:
   - battle royale
   - SH

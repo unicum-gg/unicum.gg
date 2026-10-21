@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Утврђење
 aliases:
   - strongholds
   - klan baza

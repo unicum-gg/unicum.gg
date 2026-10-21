@@ -1,5 +1,5 @@
 ---
-term: 推进战
+term: 攻城战
 aliases:
   - fort battles
   - 推进战

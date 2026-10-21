@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Tērauda Mednieks
 aliases:
   - battle royale
   - SH

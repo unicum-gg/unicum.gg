@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Διακριτικά Υπεροχής
 aliases:
   - MoE
   - marks

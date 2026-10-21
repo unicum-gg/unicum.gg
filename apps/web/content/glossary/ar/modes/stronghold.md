@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: المعقل
 aliases:
   - strongholds
   - clan base

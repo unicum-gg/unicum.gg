@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: ลำดับส่วนตัว
 aliases:
   - global rating
   - wg rating

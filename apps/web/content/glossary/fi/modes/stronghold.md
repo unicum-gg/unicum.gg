@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Linnoitus
 aliases:
   - strongholds
   - klanibaasi

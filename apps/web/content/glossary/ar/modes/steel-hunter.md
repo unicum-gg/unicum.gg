@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: صياد الصلب
 aliases:
   - battle royale
   - SH

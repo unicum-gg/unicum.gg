@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: 優等マーク
 aliases:
   - MoE
   - マーク

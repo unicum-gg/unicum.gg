@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Бекініс
 aliases:
   - strongholds
   - клан базасы

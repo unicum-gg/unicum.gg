@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Жетістік белгілері
 aliases:
   - MoE
   - marks

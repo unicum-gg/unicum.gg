@@ -1,5 +1,5 @@
 ---
-term: Авансы
+term: Наступы
 aliases:
   - fort battles
   - наступленні

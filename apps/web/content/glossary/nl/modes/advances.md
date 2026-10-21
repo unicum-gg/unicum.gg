@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Offensieven
 aliases:
   - fort battles
   - aanval

@@ -1,7 +1,7 @@
 {
   "alias": "(jako {nickname})",
   "alias-with-clan": "(jako {nickname} {clan})",
-  "battles": "Bitev",
+  "battles": "Bitvy",
   "player": "Hráč",
   "registered-as": "Registrováno jako {nickname}",
   "team-captain": "Kapitan týmu",

@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Okršaji
 aliases:
   - skirmishes
   - clan skirmish

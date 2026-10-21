@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Умацаваны раён
 aliases:
   - strongholds
   - кланавая база

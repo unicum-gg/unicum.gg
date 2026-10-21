@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: Însemne de Excelenţă
 aliases:
   - MoE
   - marks

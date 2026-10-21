@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Επέλαση
 aliases:
   - comp7
   - competitive 7

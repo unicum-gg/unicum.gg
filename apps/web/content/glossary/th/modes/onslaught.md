@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: การบุกรุก
 aliases:
   - comp7
   - competitive 7

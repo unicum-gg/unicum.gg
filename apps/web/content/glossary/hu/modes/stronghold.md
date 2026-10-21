@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Erődítmény
 aliases:
   - strongholds
   - klán bázis

@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Træfning
 aliases:
   - skirmishes
   - clan skirmish

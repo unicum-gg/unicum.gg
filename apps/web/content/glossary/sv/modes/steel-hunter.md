@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Pansarjakt
 aliases:
   - battle royale
   - SH

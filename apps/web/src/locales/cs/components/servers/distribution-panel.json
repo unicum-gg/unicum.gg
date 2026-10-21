@@ -4,6 +4,6 @@
   "metric-rating": "Hodnocení {metric}",
   "rating-distribution-chart": "Rozložení {metric} napříč hráči sledovanými v regionu",
   "tracked-accounts-with-at-least": "Každý z {players} sledovaných účtů má alespoň {minBattles} Bitev. Barvy odpovídají stejným pásmům, která web používá všude jinde.",
-  "win-rate": "Míra výher",
+  "win-rate": "Procento vítězství",
   "win-rate-distribution-across-the-region-s-tr": "Míra výher: rozložení mezi sledovanými hráči v regionu"
 }

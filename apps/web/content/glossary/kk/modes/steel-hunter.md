@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Сталеви аңшы
 aliases:
   - battle royale
   - SH

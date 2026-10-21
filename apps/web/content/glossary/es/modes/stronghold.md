@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Fortaleza
 aliases:
   - strongholds
   - clan base

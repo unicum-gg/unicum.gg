@@ -1,5 +1,5 @@
 ---
-term: Hyökkäykset
+term: Hyökkäysoperaatiot
 aliases:
   - fort battles
   - hyökkäys

@@ -4,7 +4,7 @@
     "language": "Le plus de <accent>{marks}</accent> parmi les joueurs de langue {language}"
   },
   "intro": {
-    "all": "Joueurs de {region} détenant le plus de canons avec {marks}, répartis par niveau, avec un minimum de {battles} batailles.",
+    "all": "Joueurs de {region} détenant le plus de canons avec {marks}, répartis par rang, avec un minimum de {battles} batailles.",
     "language": "Joueurs de {region} dont l’ensemble des langues déduites de l’historique de clan comprend {language}, détenant le plus de canons avec {marks}.",
     "strict": "Joueurs de {region} dont la langue déduite de l’historique de clan est exclusivement {language}, détenant le plus de canons avec {marks}."
   },

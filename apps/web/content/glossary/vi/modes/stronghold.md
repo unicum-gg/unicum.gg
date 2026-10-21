@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Pháo đài
 aliases:
   - strongholds
   - căn cứ gia tộc

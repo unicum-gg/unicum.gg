@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Nasumične bitke
 aliases:
   - randoms
   - pubs

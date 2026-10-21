@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: 前衛戦
 aliases:
   - skirmishes
   - クランスカーミッシュ

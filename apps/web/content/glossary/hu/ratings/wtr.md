@@ -1,5 +1,5 @@
 ---
-term: World of Tanks értékelés
+term: World of Tanks-értékelés
 aliases:
   - WTR
   - wot értékelés

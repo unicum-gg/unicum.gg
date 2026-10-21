@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Batalhas Classificadas
 aliases:
   - ranked
   - chevrons

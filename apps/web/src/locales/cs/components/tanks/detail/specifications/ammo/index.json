@@ -2,7 +2,7 @@
   "damage": "Poškození",
   "penetration": "Průbojnost",
   "velocity": "Rychlost",
-  "splash": "Výbuch",
+  "splash": "Plošné poškození",
   "cost": "Cena",
   "at-500m": "… na 500m"
 }

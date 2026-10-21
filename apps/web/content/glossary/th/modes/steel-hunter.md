@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: พรานเหล็ก
 aliases:
   - battle royale
   - SH

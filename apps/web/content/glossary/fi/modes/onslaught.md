@@ -1,5 +1,5 @@
 ---
-term: Kovuus
+term: Rynnistys
 aliases:
   - comp7
   - kilpailullinen 7

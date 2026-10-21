@@ -1,5 +1,5 @@
 ---
-term: World of Tanks Rating
+term: World of Tanks-betyg
 aliases:
   - WTR
   - wot rating

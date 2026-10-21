@@ -15,11 +15,11 @@
     "tip": "Ennemis détruits par bataille"
   },
   "damageRatio": {
-    "label": "Taux de dégâts",
+    "label": "Ratio de dégâts",
     "tip": "Dégâts infligés par rapport aux dégâts reçus"
   },
   "kd": {
-    "label": "Taux de destruction",
+    "label": "Ratio de destruction",
     "tip": "Ennemis détruits par véhicule perdu"
   },
   "survivalRate": {
@@ -30,7 +30,7 @@
     "tip": "Ennemis repérés par bataille"
   },
   "avgDefense": {
-    "label": "Défense de base",
+    "label": "Défense de la base",
     "tip": "Points de défense par bataille"
   },
   "avgXp": {

@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klankrige
 aliases:
   - CW
   - global map

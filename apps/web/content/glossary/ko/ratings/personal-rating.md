@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: 개인 성적
 aliases:
   - global rating
   - wg rating

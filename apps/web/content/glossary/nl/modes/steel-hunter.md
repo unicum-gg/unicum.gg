@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Staaljager
 aliases:
   - battle royale
   - SH

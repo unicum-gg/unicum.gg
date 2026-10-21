@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Išpuolis
 aliases:
   - skirmishes
   - klano skirmish

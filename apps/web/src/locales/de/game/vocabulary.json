@@ -14,7 +14,7 @@
     "training": "Ausbildung"
   },
   "player-modes": {
-    "overall": "Zufällige Schlachten",
+    "overall": "Zufallsgefechte",
     "skirmish": "Scharmützel",
     "advances": "Vorstöße",
     "grand": "Großgefechte",
@@ -149,7 +149,7 @@
     "ace": "Ace Tanker"
   },
   "clan-modes": {
-    "random": "Zufällige Schlachten",
+    "random": "Zufallsgefechte",
     "stronghold": "Festung",
     "skirmish": "Scharmützel",
     "clan-wars": "Clan Wars"

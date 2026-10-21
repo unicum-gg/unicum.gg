@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klan ratovi
 aliases:
   - CW
   - global map

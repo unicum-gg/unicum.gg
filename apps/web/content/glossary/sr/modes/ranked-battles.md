@@ -1,5 +1,5 @@
 ---
-term: Rangirane Bitke
+term: Rangirane borbe
 aliases:
   - rangirane
   - chevrons

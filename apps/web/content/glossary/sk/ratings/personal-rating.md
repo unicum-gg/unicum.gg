@@ -1,5 +1,5 @@
 ---
-term: Osobna ocena
+term: Osobné hodnotenie
 aliases:
   - global rating
   - wg rating

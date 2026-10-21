@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Massacre
 aliases:
   - comp7
   - competitivo 7

@@ -16,7 +16,7 @@
   "rows": {
     "elo": "ELO",
     "sr": "SR",
-    "battles": "Bitev",
-    "winrate": "Míra výher"
+    "battles": "Bitvy",
+    "winrate": "Procento vítězství"
   }
 }

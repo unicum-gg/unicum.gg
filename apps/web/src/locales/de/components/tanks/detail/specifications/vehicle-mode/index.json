@@ -1,6 +1,6 @@
 {
-  "gun-depression": "Waffenabsenkung",
-  "gun-elevation": "Waffenanhebung",
+  "gun-depression": "Geschützneigung",
+  "gun-elevation": "Geschützerhöhung",
   "mode-heading": "{mode}-Modus",
   "switch-on-off": "Ein- / ausschalten"
 }

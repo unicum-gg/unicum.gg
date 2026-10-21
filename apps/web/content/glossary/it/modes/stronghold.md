@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Roccaforte
 aliases:
   - strongholds
   - clan base

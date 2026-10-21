@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Clanoorlogen
 aliases:
   - CW
   - wereldkaart

@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: オンスロート
 aliases:
   - comp7
   - competitive 7

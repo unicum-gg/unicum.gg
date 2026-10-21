@@ -1,5 +1,5 @@
 ---
-term: Skirmish
+term: Schermutseling
 aliases:
   - skirmishes
   - clan skirmish

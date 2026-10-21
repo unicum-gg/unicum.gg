@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Генеральная бітва
 aliases:
   - grand battles
   - грандыя бітвы

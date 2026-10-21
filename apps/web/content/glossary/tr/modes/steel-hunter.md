@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Çelik Avcısı
 aliases:
   - battle royale
   - SH

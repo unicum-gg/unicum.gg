@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Tilfældige Kampe
 aliases:
   - randoms
   - pubs

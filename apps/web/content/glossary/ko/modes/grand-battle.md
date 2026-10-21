@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: 대규모 전투
 aliases:
   - grand battles
 related:

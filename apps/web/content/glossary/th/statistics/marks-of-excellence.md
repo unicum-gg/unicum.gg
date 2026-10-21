@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: เครื่องหมายเชิดชูเกียรติ
 aliases:
   - MoE
   - marks

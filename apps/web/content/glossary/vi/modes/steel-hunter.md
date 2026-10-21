@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Săn Thiết giáp
 aliases:
   - battle royale
   - SH

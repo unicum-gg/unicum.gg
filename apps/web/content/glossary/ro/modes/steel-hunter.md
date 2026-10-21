@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Vânătorul de oţel
 aliases:
   - battle royale
   - SH

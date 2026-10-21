@@ -1,5 +1,5 @@
 {
-  "win-rate": "Wskaźnik zwycięstw",
+  "win-rate": "Współczynnik zwycięstw",
   "versus": "{metric} na tle regionu {region}",
   "top": "Najlepszy {percent}%",
   "ahead-of": "Wyprzedza {percent}% graczy",

@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Шабуыл
 aliases:
   - comp7
   - competitive 7

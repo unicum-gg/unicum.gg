@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: สงครามแคลน
 aliases:
   - CW
   - แผนที่โลก

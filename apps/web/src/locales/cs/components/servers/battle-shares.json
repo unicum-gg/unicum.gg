@@ -1,10 +1,10 @@
 {
-  "battles": "Bitev",
+  "battles": "Bitvy",
   "by-class": "Podle třídy",
   "by-tier": "Podle úrovně",
   "n-vehicles": "{count, plural, one {# vozidlo} few {# vozidla} many {# vozidel} other {# vozidel}}",
   "share-of-battles": "Sdílet Bitev",
   "unit-class": "Třída",
   "unit-tier": "Úroveň",
-  "win-rate": "Míra výher"
+  "win-rate": "Procento vítězství"
 }

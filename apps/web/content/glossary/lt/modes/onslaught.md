@@ -1,5 +1,5 @@
 ---
-term: Onslaught
+term: Prasiveržimas
 aliases:
   - comp7
   - competitive 7

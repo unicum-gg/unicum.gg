@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Teräksen metsästäjä
 aliases:
   - battle royale
   - SH

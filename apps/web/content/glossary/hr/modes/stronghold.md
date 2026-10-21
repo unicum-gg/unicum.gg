@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Utvrda
 aliases:
   - strongholds
   - klanska baza

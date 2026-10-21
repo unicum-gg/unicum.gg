@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: Spelarbetyg
 aliases:
   - global rating
   - wg rating

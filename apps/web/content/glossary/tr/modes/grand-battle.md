@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Büyük Savaş
 aliases:
   - grand battles
   - büyük savaşlar

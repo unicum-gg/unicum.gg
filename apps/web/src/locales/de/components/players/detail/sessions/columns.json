@@ -19,7 +19,7 @@
     "tip": "Verursachter Schaden im Verhältnis zum erhaltenen Schaden"
   },
   "kd": {
-    "label": "Zerstörungs-Verhältnis",
+    "label": "Zerstörungsverhältnis",
     "tip": "Zerstörte Gegner im Verhältnis zu verlorenen Fahrzeugen"
   },
   "survivalRate": {

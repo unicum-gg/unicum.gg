@@ -1,5 +1,5 @@
 ---
-term: World of Tanks įvertinimas
+term: World of Tanks reitingas
 aliases:
   - WTR
   - wot įvertinimas

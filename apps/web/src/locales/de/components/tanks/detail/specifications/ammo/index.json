@@ -2,7 +2,7 @@
   "damage": "Schaden",
   "penetration": "Durchschlagskraft",
   "velocity": "Geschwindigkeit",
-  "splash": "Splash",
+  "splash": "Explosionsschaden",
   "cost": "Preis",
   "at-500m": "… in 500m"
 }

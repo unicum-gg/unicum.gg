@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Veľká bitka
 aliases:
   - grand battles
 related:

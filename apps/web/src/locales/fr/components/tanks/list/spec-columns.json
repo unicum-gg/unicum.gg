@@ -23,7 +23,7 @@
       "label": "Rayon d’explosion"
     },
     "reload": {
-      "label": "Recharger",
+      "label": "Rechargement",
       "tip": "Temps de rechargement (barillet complet pour les chargeurs automatiques)"
     },
     "rof": {
@@ -107,7 +107,7 @@
     },
     "health": {
       "label": "Points de structure",
-      "tip": "Points de vie"
+      "tip": "Points de structure"
     },
     "engineHealth": {
       "label": "Points de structure du moteur"

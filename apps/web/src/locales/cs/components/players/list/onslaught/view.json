@@ -10,7 +10,7 @@
   "columns": {
     "player": "Hráč",
     "rank": "Hodnost",
-    "battles": "Bitev",
+    "battles": "Bitvy",
     "rating": "Body hodnocení",
     "battles-per-day": "Bitvy/den",
     "points-per-day": "Body/den",

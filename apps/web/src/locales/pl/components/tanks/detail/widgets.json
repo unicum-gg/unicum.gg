@@ -4,7 +4,7 @@
   "consumable-slot": "Miejsce na materiały eksploatacyjne {n}",
   "consumable-slot-filled": "Miejsce na materiały eksploatacyjne {n}: {name}",
   "level": "Poziom {n}",
-  "stock": "Stan",
+  "stock": "Stockowy",
   "specialize": "Kliknij, aby ustawić specjalizację tego miejsca.",
   "clear-specialization": "Kliknij, aby usunąć specjalizację tego miejsca.",
   "crew-skills": "Umiejętności załogi",

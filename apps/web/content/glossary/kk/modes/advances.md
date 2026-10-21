@@ -1,5 +1,5 @@
 ---
-term: Алға жылжу
+term: Шабуылдар
 aliases:
   - fort battles
   - алға кеткен соғыстар

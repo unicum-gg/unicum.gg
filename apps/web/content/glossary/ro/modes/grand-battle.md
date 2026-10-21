@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Luptă Epică
 aliases:
   - grand battles
 related:

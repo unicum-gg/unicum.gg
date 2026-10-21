@@ -1,5 +1,5 @@
 ---
-term: Personal Rating
+term: Personal na Ranggo
 aliases:
   - global rating
   - wg rating

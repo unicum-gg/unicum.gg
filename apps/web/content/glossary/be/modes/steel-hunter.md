@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Сталевы паляўнічы
 aliases:
   - battle royale
   - SH

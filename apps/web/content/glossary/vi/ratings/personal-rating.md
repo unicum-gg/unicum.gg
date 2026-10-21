@@ -1,5 +1,5 @@
 ---
-term: Xếp hạng Cá nhân
+term: Chỉ số Cá nhân
 aliases:
   - global rating
   - wg rating

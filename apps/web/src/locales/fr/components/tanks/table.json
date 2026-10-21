@@ -1,6 +1,6 @@
 {
   "nation": "Nation",
   "type": "Type",
-  "tier": "Niveau",
+  "tier": "Rang",
   "name": "Nom"
 }

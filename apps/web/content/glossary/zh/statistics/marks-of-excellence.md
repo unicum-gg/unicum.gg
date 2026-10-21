@@ -1,5 +1,5 @@
 ---
-term: Marks of Excellence
+term: 特级标识
 aliases:
   - MoE
   - marks

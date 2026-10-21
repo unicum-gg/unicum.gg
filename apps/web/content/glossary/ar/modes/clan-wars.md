@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: حروب العشائر
 aliases:
   - CW
   - خريطة العالم

@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Čelik lovac
 aliases:
   - battle royale
   - SH

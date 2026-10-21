@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Rangerede kampe
 aliases:
   - ranked
   - chevrons

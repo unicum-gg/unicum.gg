@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Bojišnica
 aliases:
   - front line
   - FL

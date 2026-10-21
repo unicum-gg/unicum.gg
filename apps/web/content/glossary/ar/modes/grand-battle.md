@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: معركة كبرى
 aliases:
   - grand battles
 related:

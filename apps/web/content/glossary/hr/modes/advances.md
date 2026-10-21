@@ -1,5 +1,5 @@
 ---
-term: Advances
+term: Napretci
 aliases:
   - fort battles
   - napad

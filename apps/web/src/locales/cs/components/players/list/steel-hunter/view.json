@@ -4,7 +4,7 @@
   "board": "Nejlepších {count} hráčů v režimu {mode}",
   "columns": {
     "player": "Hráč",
-    "battles": "Bitev",
+    "battles": "Bitvy",
     "survival": "Životnost",
     "survival-percent": "Životnost %",
     "damage": "Průměrná poškození"

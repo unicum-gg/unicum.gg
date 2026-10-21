@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Acélvadász
 aliases:
   - battle royale
   - SH

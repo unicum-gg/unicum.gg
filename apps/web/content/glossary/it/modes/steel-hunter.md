@@ -1,5 +1,5 @@
 ---
-term: Steel Hunter
+term: Cacciatore d'acciaio
 aliases:
   - battle royale
   - SH

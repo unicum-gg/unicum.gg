@@ -14,7 +14,7 @@
     },
     "damage": {
       "label": "Poškození",
-      "tip": "Alpha poškození"
+      "tip": "Alfa poškození"
     },
     "moduleDamage": {
       "label": "Poškození modulů"
@@ -23,7 +23,7 @@
       "label": "Poloměr výbuchu"
     },
     "reload": {
-      "label": "Nabití",
+      "label": "Nabíjení",
       "tip": "Nabití (celého zásobníku u automatického nabíjení)"
     },
     "rof": {
@@ -107,7 +107,7 @@
     },
     "health": {
       "label": "Výdrž",
-      "tip": "Zdraví"
+      "tip": "Body výdrže"
     },
     "engineHealth": {
       "label": "Zdraví motoru"

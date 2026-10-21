@@ -1,5 +1,5 @@
 ---
-term: Stronghold
+term: Festning
 aliases:
   - strongholds
   - klan base

@@ -1,5 +1,5 @@
 ---
-term: Ranked Battles
+term: Rangsorolt csaták
 aliases:
   - ranked
   - chevrons

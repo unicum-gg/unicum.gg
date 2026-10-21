@@ -1,5 +1,5 @@
 ---
-term: Rankede Kamper
+term: Rangerte kamper
 aliases:
   - ranked
   - chevrons

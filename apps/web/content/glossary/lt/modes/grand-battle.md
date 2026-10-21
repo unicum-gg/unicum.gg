@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Didysis mūšis
 aliases:
   - grand battles
 related:

@@ -1,5 +1,5 @@
 ---
-term: Лични Рейтинг
+term: Lični rejting
 aliases:
   - глобални рејтинг
   - wg рејтинг

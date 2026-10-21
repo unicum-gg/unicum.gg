@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: विशाल लड़ाई
 aliases:
   - grand battles
 related:

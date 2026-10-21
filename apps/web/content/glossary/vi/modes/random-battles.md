@@ -1,5 +1,5 @@
 ---
-term: Random Battles
+term: Trận đấu ngẫu nhiên
 aliases:
   - randoms
   - pubs

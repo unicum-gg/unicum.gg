@@ -1,5 +1,5 @@
 ---
-term: Clan Wars
+term: Klano karai
 aliases:
   - CW
   - global map

@@ -15,7 +15,7 @@
     "tip": "Liczba zniszczonych przeciwników na bitwę"
   },
   "damageRatio": {
-    "label": "Współczynnik uszkodzeń",
+    "label": "Stosunek zadanych uszkodzeń",
     "tip": "Stosunek wartości „Zadane uszkodzenia” do wartości „Otrzymane uszkodzenia”"
   },
   "kd": {

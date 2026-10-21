@@ -1,6 +1,6 @@
 {
-  "gun-depression": "Понижение орудия",
-  "gun-elevation": "Поднятие орудия",
+  "gun-depression": "Угол склонения орудия",
+  "gun-elevation": "Угол возвышения орудия",
   "mode-heading": "Режим {mode}",
   "switch-on-off": "Включить / выключить"
 }

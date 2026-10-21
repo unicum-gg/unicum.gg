@@ -1,5 +1,5 @@
 ---
-term: Случайныя Бояў
+term: Слухмяшаныя баі
 aliases:
   - randoms
   - pubs

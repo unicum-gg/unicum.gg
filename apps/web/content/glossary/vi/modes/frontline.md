@@ -1,5 +1,5 @@
 ---
-term: Frontline
+term: Chiến tuyến
 aliases:
   - front line
   - FL

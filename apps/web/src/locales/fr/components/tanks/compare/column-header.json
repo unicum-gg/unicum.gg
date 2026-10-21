@@ -16,7 +16,7 @@
   "reset-all": "Réinitialiser tout",
   "setup": "Configuration",
   "setup-n": "Configuration {n}",
-  "stock": "Stock",
+  "stock": "Configuration de base",
   "tank-setup": "Configuration : {tank}",
   "the-same-vehicle-under-a-setup": "Le même véhicule avec une configuration qui lui est propre",
   "top": "Meilleurs",

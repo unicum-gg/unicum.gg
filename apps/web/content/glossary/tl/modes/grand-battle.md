@@ -1,5 +1,5 @@
 ---
-term: Grand Battle
+term: Malawakang Laban
 aliases:
   - grand battles
 related:

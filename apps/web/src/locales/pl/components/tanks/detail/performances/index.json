@@ -26,6 +26,6 @@
   "survival": "Przeżycie",
   "tank-id-expected-values-are": "Czołg, ID: {tankId}. Wartości oczekiwane pochodzą ze społecznościowych zbiorów danych WN8 / WNX i są automatycznie odświeżane.",
   "top-tank-players-by": "Najlepsi gracze czołgu {tank} {by} {metric}",
-  "win-rate": "Wskaźnik zwycięstw",
+  "win-rate": "Współczynnik zwycięstw",
   "with-battles": ", {battles} bitew, min. 100 na gracza"
 }
