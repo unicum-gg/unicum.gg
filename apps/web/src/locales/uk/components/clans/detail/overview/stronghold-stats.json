@@ -14,7 +14,7 @@
     "t6": "{skirmish} Рівень VI (7v7)"
   },
   "rows": {
-    "elo": "Рейтинг Ело",
+    "elo": "ELO",
     "sr": "SR",
     "battles": "Бої",
     "winrate": "Відсоток перемог"

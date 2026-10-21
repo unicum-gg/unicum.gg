@@ -52,7 +52,7 @@
     "srb": "SRB",
     "elo": "ELO",
     "battles": "Batailles",
-    "winrate": "Taux de victoire"
+    "winrate": "Taux de victoires"
   },
   "clan-boards": {
     "advances": "Incursions",
@@ -121,7 +121,7 @@
     "iron": "Fer",
     "bronze": "Bronze",
     "silver": "Argent",
-    "gold": "Or",
+    "gold": "Pièces d’or",
     "champion": "Champion",
     "legend": "Légende",
     "crest": "{mode} {tier}",
@@ -135,7 +135,7 @@
     "SPG": "SPG"
   },
   "vehicle-roles": {
-    "assault": "Assaillant",
+    "assault": "Assaut",
     "break": "Percée",
     "support": "Soutien",
     "universal": "Polyvalent",

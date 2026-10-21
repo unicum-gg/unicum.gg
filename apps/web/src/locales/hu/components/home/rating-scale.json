@@ -1,7 +1,7 @@
 {
   "title": "Értékelési skála",
   "description": "A webhely egészén használt színküszöbök a győzelmi arányhoz és a navigációs sávban kiválasztott értékelési mutatóhoz.",
-  "tier": "szint",
+  "tier": "Szint",
   "tiers": {
     "top": "Legjobb",
     "excellent": "Kiváló",

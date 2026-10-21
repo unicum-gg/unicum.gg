@@ -14,7 +14,7 @@
     "t6": "{skirmish} уровня VI (7 на 7)"
   },
   "rows": {
-    "elo": "Рейтинг Эло",
+    "elo": "ELO",
     "sr": "SR",
     "battles": "Бои",
     "winrate": "Процент побед"

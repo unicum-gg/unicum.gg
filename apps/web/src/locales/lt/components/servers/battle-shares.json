@@ -5,6 +5,6 @@
   "n-vehicles": "{count, plural, one {# transporto priemonė} few {# transporto priemonės} other {# transporto priemonių}}",
   "share-of-battles": "Mūšių dalis",
   "unit-class": "Klasė",
-  "unit-tier": "lygis",
+  "unit-tier": "Lygis",
   "win-rate": "Pergalės rodiklis"
 }

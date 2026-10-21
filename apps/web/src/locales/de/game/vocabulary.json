@@ -52,7 +52,7 @@
     "srb": "SRB",
     "elo": "ELO",
     "battles": "Gefechte",
-    "winrate": "Gewinnrate"
+    "winrate": "Siegquote"
   },
   "clan-boards": {
     "advances": "Vorstöße",
@@ -72,8 +72,8 @@
     "desert": "Wüste"
   },
   "map-poi": {
-    "1": "Artillerie-Hauptquartier",
-    "2": "Kommunikationszentrum",
+    "1": "Artilleriehauptquartier",
+    "2": "Funkzentrale",
     "3": "Beobachtungsposten"
   },
   "tournament-modes": {
@@ -135,7 +135,7 @@
     "SPG": "SPG"
   },
   "vehicle-roles": {
-    "assault": "Sturm",
+    "assault": "Angriff",
     "break": "Durchbruch",
     "support": "Unterstützung",
     "universal": "Mehrzweck",

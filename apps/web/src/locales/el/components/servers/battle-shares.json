@@ -5,6 +5,6 @@
   "n-vehicles": "{count, plural, one {# όχημα} other {# οχήματα}}",
   "share-of-battles": "Μερίδιο μαχών",
   "unit-class": "Κλάση",
-  "unit-tier": "επίπεδο",
+  "unit-tier": "Βαθμίδα",
   "win-rate": "Ποσοστό νικών"
 }

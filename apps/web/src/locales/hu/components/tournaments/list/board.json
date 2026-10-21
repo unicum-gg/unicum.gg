@@ -14,6 +14,6 @@
   "region-tournaments": "{region} versenyei ({count})",
   "status": "Állapot",
   "teams": "Csapatok",
-  "tier": "szint",
+  "tier": "Szint",
   "tournament": "Torna"
 }

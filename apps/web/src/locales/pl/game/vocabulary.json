@@ -52,7 +52,7 @@
     "srb": "SRB",
     "elo": "ELO",
     "battles": "Bitwy",
-    "winrate": "Wskaźnik zwycięstw"
+    "winrate": "Współczynnik zwycięstw"
   },
   "clan-boards": {
     "advances": "Natarcia",
@@ -72,13 +72,13 @@
     "desert": "Pustynny"
   },
   "map-poi": {
-    "1": "Kwatera artylerii",
+    "1": "Kwatera główna artylerii",
     "2": "Centrum łączności",
     "3": "Punkt obserwacyjny"
   },
   "tournament-modes": {
     "ctf": "Standardowy",
-    "domination": "Spotkaniowa",
+    "domination": "Bitwa spotkaniowa",
     "assault2": "Atak/Obrona",
     "comp7": "Natarcie"
   },
@@ -135,7 +135,7 @@
     "SPG": "SPG"
   },
   "vehicle-roles": {
-    "assault": "Szturmowiec",
+    "assault": "Szturm",
     "break": "Przełamanie",
     "support": "Wsparcie",
     "universal": "Uniwersalny",

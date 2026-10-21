@@ -5,6 +5,6 @@
   "n-vehicles": "{count, plural, one {# voertuig} other {# voertuigen}}",
   "share-of-battles": "Delen van Gevechten",
   "unit-class": "Klasse",
-  "unit-tier": "niveau",
+  "unit-tier": "Niveau",
   "win-rate": "Winstpercentage"
 }
