@@ -46,17 +46,15 @@ export function ratingMetricFromCookie(
  * the window so a ranking is not won on a handful of lucky games.
  *
  * On a recent window they count only the battles at or above the board's
- * `TierFloor`. They were 140 and 600 for the week and the month while every
- * tier counted, high enough to be the only thing standing between the board and
- * a low-tier farm, and it still lost: on 2026-10-21, 19 of the 30-day WN8
- * board's top 20 on EU had averaged tier 3 to 5 over the month. With the farm
- * out of the count the floor only has to rule out luck: 75 for a week and
- * twice that for a month.
+ * `TierFloor`. The month keeps the same 600 it had while every tier counted,
+ * twenty battles a day: a thirty-day board is a statement about someone who
+ * plays, and 150 let a casual month rank beside a full one. The week sits at
+ * 75 for now.
  */
 export const TOP_PLAYERS_MIN_BATTLES: Record<StrongholdPeriod, number> = {
   [StrongholdPeriod.Day]: 20,
   [StrongholdPeriod.Week]: 75,
-  [StrongholdPeriod.Month]: 150,
+  [StrongholdPeriod.Month]: 600,
   [StrongholdPeriod.Overall]: 20000,
 };
 
