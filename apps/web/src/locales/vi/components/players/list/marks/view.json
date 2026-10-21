@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Bảng xếp hạng này bao quát những gì",
-    "body": "{marksName} không có trong API công khai của Wargaming, vì vậy chúng tôi đọc dữ liệu từ cổng trò chơi, từng tài khoản một, và việc này chỉ xảy ra khi ai đó tra cứu một hồ sơ. Bảng xếp hạng này xếp hạng {measured} tài khoản mà chúng tôi đã đọc Ga-ra, trong số {tracked} tài khoản vượt qua ngưỡng trận đấu tối thiểu: người chơi chưa được ai tìm kiếm sẽ không có mặt trên bảng xếp hạng thay vì đứng cuối bảng.",
+    "body": "{marksName} không có trong API công khai của Wargaming, vì vậy chúng tôi đọc chúng từ cổng thông tin trò chơi, từng tài khoản một. Bảng xếp hạng này xếp hạng {measured} tài khoản mà chúng tôi đã đọc nhà chứa xe, trong số {tracked} tài khoản đạt ngưỡng trận đấu: người chơi mà không ai tìm kiếm sẽ không có trong bảng thay vì đứng cuối bảng.",
     "freshness": "Lần quan sát mới nhất làm cơ sở cho số lượng này là từ {newest}, còn lần cũ nhất là từ {oldest}.",
-    "profile": "Tra cứu một người chơi sẽ đọc các dấu của họ, vì vậy lượt xem hồ sơ là thứ đưa họ lên bảng xếp hạng này."
+    "profile": "Người chơi hiển thị trong mỗi bảng xếp hạng được đọc lại trong vòng một giờ sau khi họ chơi, vì vậy phần đầu bảng theo dõi trò chơi. Ở phía dưới, nhà chứa xe được đọc khi ai đó mở hồ sơ, và đó cũng là điều đưa người chơi mới vào bảng xếp hạng này. Di chuột qua số lượng để xem thời điểm nó được đọc."
   }
 }

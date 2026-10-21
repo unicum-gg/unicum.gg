@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Co obejmuje ta tabela",
-    "body": "{marksName} nie są dostępne w publicznym API Wargaming, dlatego odczytujemy je z portalu gry, po jednym koncie naraz. Dzieje się to tylko wtedy, gdy ktoś wyszuka profil. Ta tabela szereguje {measured} kont, których garaż odczytaliśmy, spośród {tracked} kont spełniających minimum bitew. Gracz, którego nikt nie wyszukał, nie znajduje się na tej tabeli, zamiast zajmować na niej ostatnie miejsce.",
+    "body": "{marksName} nie są dostępne w publicznym API Wargaming, więc przeczytaj je z portalu gry, po jednym koncie naraz. Ta tabela ustala miejsce kont {measured}, których garaż przeczytaj, spośród {tracked} kont spełniających próg bitew: gracz, którego nikt nie wyszukał, nie jest w niej uwzględniony, a nie zajmuje ostatniego miejsca.",
     "freshness": "Najnowsza obserwacja uwzględniona w tych liczbach pochodzi z {newest}, a najstarsza z {oldest}.",
-    "profile": "Wyszukanie gracza odczytuje jego odznaki, więc wyświetlenie profilu umieszcza go na tej tabeli."
+    "profile": "Graczy wyświetlono w każdej tabeli, a ich dane przeczytaj ponownie w ciągu godziny po tym, jak zaczną grać, dzięki czemu czołówka tabeli obserwuje grę. Niżej garaż przeczytaj, gdy ktoś otwiera ten profil, co również dodaje nowego gracza do tej tabeli. Najedź na liczbę, aby zobaczyć, kiedy ją przeczytaj."
   }
 }

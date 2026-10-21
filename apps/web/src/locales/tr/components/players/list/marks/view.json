@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Bu tablonun kapsadığı şeyler",
-    "body": "{marksName}, Wargaming’in herkese açık API’sinde bulunmuyor. Bu nedenle onları oyun portalından hesapları tek tek inceleyerek okuyoruz. Bu işlem yalnızca biri bir profili aradığında olur. Bu tablo, savaş sınırını geçen {tracked} hesap arasından garajını okuduğumuz {measured} hesabı sıralar. Hiç aranmaymış bir oyuncu tabloda son sırada değil, tabloda yoktur.",
+    "body": "{marksName}, Wargaming’in herkese açık API’sinde yer almadığından, bunları oyun portalından her seferinde bir hesap olmak üzere okuyoruz. Bu tablo, savaş tabanını geçen {tracked} hesap arasından garajını okuduğumuz {measured} hesabı sıralar. Hiç kimsenin aramadığı bir oyuncu tabloda son sırada değil, tabloda yer almaz.",
     "freshness": "Bu sayıların arkasındaki en yeni gözlem {newest}, en eski gözlem ise {oldest} tarihli.",
-    "profile": "Bir oyuncuyu aramak işaretlerini okur, bu nedenle onu bu tabloya ekleyen şey profil görünümüdür."
+    "profile": "Her sıralamadaki gösterilen oyuncular, oynadıktan sonraki bir saat içinde yeniden okunur, böylece tablonun üst kısmı oyunu takip eder. Daha alt sıralarda bir garaj, biri o profili açtığında okunur. Yeni bir oyuncuyu bu tabloya ekleyen de budur. Bir sayının üzerine gelerek ne zaman okunduğunu görebilirsiniz."
   }
 }

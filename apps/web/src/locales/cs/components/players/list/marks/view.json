@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Co tento žebříček zahrnuje",
-    "body": "{marksName} nejsou součástí veřejného API Wargamingu, takže je čteme z herního portálu účet po účtu. To se děje pouze tehdy, když někdo vyhledá profil. Tento žebříček řadí {measured} účtů, jejichž garáž jsme přečetli, z celkem {tracked} účtů, které překračují minimální hranici bitev. Hráč, kterého nikdo nevyhledal, v něm chybí, místo aby byl poslední.",
+    "body": "{marksName} nejsou ve veřejném API Wargaming, takže je z herního portálu lze přečíst po jednom účtu. Tento žebříček určuje pořadí účtů {measured}, čí garáž jsme nechali přečíst, z {tracked}, které splňují minimální počet bitev. Hráč, kterého nikdo nevyhledal, v něm chybí, místo aby byl poslední.",
     "freshness": "Nejnovější údaj použitý pro tyto počty pochází z {newest}, nejstarší z {oldest}.",
-    "profile": "Vyhledání hráče přečte jeho známky, takže zobrazení profilu ho zařadí na tento žebříček."
+    "profile": "Hráči zobrazení v každém žebříčku se nechají znovu přečíst do hodiny poté, co hrají, takže vrchol žebříčku sleduje hru. Níže se garáž nechá přečíst, když někdo otevře profil, což také přidá nového hráče do tohoto žebříčku. Umístěním kurzoru na počet zjistíte, kdy byl přečten."
   }
 }

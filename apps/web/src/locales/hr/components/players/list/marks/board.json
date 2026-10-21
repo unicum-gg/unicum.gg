@@ -2,5 +2,6 @@
   "tier": "Razina {tier}",
   "read": "Pročitana garaža",
   "empty": "Na ovoj ljestvici još nema igrača.",
-  "no-match": "Nijedan igrač ne odgovara trenutačnom filtru."
+  "no-match": "Nijedan igrač ne odgovara trenutačnom filtru.",
+  "read-at": "Garaža, pročitano {when}"
 }

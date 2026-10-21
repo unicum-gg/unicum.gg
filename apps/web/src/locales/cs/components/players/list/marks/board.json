@@ -2,5 +2,6 @@
   "tier": "Úroveň {tier}",
   "read": "Garáž přečtena",
   "empty": "Na tomto žebříčku zatím není žádný hráč.",
-  "no-match": "Žádný hráč neodpovídá aktuálnímu filtru."
+  "no-match": "Žádný hráč neodpovídá aktuálnímu filtru.",
+  "read-at": "Garáž přečíst {when}"
 }

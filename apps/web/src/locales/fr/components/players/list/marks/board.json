@@ -2,5 +2,6 @@
   "tier": "Niveau {tier}",
   "read": "Lecture du garage",
   "empty": "Aucun joueur dans ce classement pour le moment.",
-  "no-match": "Aucun joueur ne correspond au filtre actuel."
+  "no-match": "Aucun joueur ne correspond au filtre actuel.",
+  "read-at": "Lecture du garage {when}"
 }

@@ -2,5 +2,6 @@
   "tier": "Nivel {tier}",
   "read": "Garaje leído",
   "empty": "Aún no hay ningún jugador en esta clasificación.",
-  "no-match": "Ningún jugador coincide con el filtro actual."
+  "no-match": "Ningún jugador coincide con el filtro actual.",
+  "read-at": "Garaje leído {when}"
 }

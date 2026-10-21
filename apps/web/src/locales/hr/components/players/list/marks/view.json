@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Što ova ljestvica obuhvaća",
-    "body": "{marksName} nisu u javnom API-ju Wargaminga, pa ih čitamo s portala igre, jedan račun po jedan, što se događa samo kada netko pogleda profil. Ova ljestvica rangira {measured} računa čiju smo garažu pročitali, od {tracked} računa koji zadovoljavaju minimum bitaka. Igrač kojeg nitko nije tražio nedostaje s ljestvice, a nije na njezinu posljednjem mjestu.",
+    "body": "{marksName} nisu javno dostupne u API-ju Wargaminga, pa je njihovo stanje pročitano s portala igre, jedan račun po jedan. Ova ljestvica rangira {measured} računa za čije je garaže pročitano, od {tracked} praćenih računa koji prelaze prag bitke: igrač kojeg nitko nije pretražio nedostaje s nje, umjesto da bude zadnji na njoj.",
     "freshness": "Najnovije opažanje iza ovih brojeva je od {newest}, a najstarije od {oldest}.",
-    "profile": "Traženje igrača čita njegove oznake, pa ga prikaz profila stavlja na ovu ljestvicu."
+    "profile": "Igrači prikazani u svakoj ljestvici ponovno se provjeravaju unutar sat vremena nakon igranja, pa vrh ljestvice prati igru. Niže na ljestvici garaža se čita kada netko otvori taj profil, čime novi igrač također dospijeva na ovu ljestvicu. Zadržite pokazivač iznad broja da vidite kada je pročitano."
   }
 }

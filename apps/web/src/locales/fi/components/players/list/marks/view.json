@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Mitä tämä tulostaulukko kattaa",
-    "body": "{marksName} eivät ole Wargamingin julkisessa API:ssa, joten luemme ne peliportaalista yksi tili kerrallaan. Tämä tapahtuu vain, kun joku katsoo profiilia. Tämä tulostaulukko asettaa järjestykseen {measured} tiliä, joiden tallin olemme lukeneet, niiden {tracked} tilin joukosta, jotka ylittävät taistelurajan. Pelaaja, jota kukaan ei ole hakenut, puuttuu tulostaulukosta kokonaan eikä ole sen viimeisenä.",
+    "body": "{marksName} eivät ole Wargamingin julkisessa API:ssa, joten luemme ne pelin portaalista yksi tili kerrallaan. Tämä tulostaulukko asettaa {measured} tiliä paremmuusjärjestykseen niiden {tracked} tilin joukosta, jotka ylittävät taistelujen vähimmäisrajan ja joiden talli on luettu: pelaaja, jota ei kukaan ole hakenut, puuttuu siitä pikemminkin kuin olisi siinä viimeisenä.",
     "freshness": "Näiden määrien taustalla oleva uusin havainto on ajalta {newest} ja vanhin ajalta {oldest}.",
-    "profile": "Kun pelaajan profiilia katsotaan, hänen merkkinsä luetaan. Siksi profiilin katsominen lisää pelaajan tähän tulostaulukkoon."
+    "profile": "Kussakin sijoituksessa näytetyt pelaajat luetaan uudelleen tunnin kuluessa siitä, kun he pelaavat, joten tulostaulukon kärki seuraa peliä. Alempana talli luetaan, kun joku avaa kyseisen profiilin, mikä myös lisää uuden pelaajan tähän tulostaulukkoon. Vie hiiri määrän päälle nähdäksesi, milloin se on luettu."
   }
 }

@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Šta ova rang-lista obuhvata",
-    "body": "{marksName} nisu dostupne u javnom API-ju kompanije Wargaming, pa ih čitamo s portala igre, jedan račun po jedan, što se dešava samo kada neko potraži profil. Ova rang-lista rangira {measured} naloga čiju smo garažu pročitali, od ukupno {tracked} naloga koji ispunjavaju minimum bitaka. Igrač kojeg niko nije pretražio nedostaje na rang-listi, umjesto da bude posljednji na njoj.",
+    "body": "{marksName} nisu dio javnog API-ja Wargaminga, pa ih čitamo s portala igre, jedan račun po jedan. Ova rang-lista rangira {measured} naloga čiji su podaci o garaži pročitani, od ukupno {tracked} naloga koji prelaze prag bitaka: igrač kojeg niko nije pretražio nedostaje s nje, radije nego da zauzima posljednju poziciju na njoj.",
     "freshness": "Najnovije opažanje iza ovih brojeva je iz vremena {newest}, a najstarije iz vremena {oldest}.",
-    "profile": "Kada potražite igrača, očitavaju se njegove oznake, pa ga upravo prikaz profila dodaje na ovu rang-listu."
+    "profile": "Igrači prikazani u svakoj rang-listi ponovo se pročitaju u roku od sat vremena nakon igranja, pa vrh rang-liste prati igru. Niže na rang-listi, garaža se pročita kada je profil otvoren, što novog igrača takođe stavlja na ovu rang-listu. Zadržite pokazivač iznad broja da vidite kada je pročitano."
   }
 }

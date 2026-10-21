@@ -768,7 +768,9 @@
     "Second mark": "العلامة الثانية",
     "Third mark": "العلامة الثالثة",
     "stops": "توقفات",
-    "exclusively": "حصريًا"
+    "exclusively": "حصريًا",
+    "follows": "يتابع",
+    "opens": "يفتح"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1539,7 +1541,9 @@
     "Second mark": "Другая адзнака",
     "Third mark": "Трэцяя адзнака",
     "stops": "спыненні",
-    "exclusively": "выключна"
+    "exclusively": "выключна",
+    "follows": "падпісваецца",
+    "opens": "адкрывае"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2520,7 +2524,9 @@
     "Second mark": "Втори знак",
     "Third mark": "Трети знак",
     "stops": "спирания",
-    "exclusively": "само"
+    "exclusively": "само",
+    "follows": "следва",
+    "opens": "отваря"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3298,7 +3304,9 @@
     "Second mark": "Druga oznaka",
     "Third mark": "Treća oznaka",
     "stops": "zaustavljanja",
-    "exclusively": "isključivo"
+    "exclusively": "isključivo",
+    "follows": "prati",
+    "opens": "otvara"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4290,7 +4298,9 @@
     "Second mark": "Druhá značka",
     "Third mark": "Třetí značka",
     "stops": "zastávky",
-    "exclusively": "výhradně"
+    "exclusively": "výhradně",
+    "follows": "sleduje",
+    "opens": "otevírá"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5288,7 +5298,9 @@
     "Second mark": "Andet mærke",
     "Third mark": "Tredje mærke",
     "stops": "stop",
-    "exclusively": "udelukkende"
+    "exclusively": "udelukkende",
+    "follows": "følger",
+    "opens": "åbner"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6279,7 +6291,9 @@
     "Second mark": "Zweite Markierung",
     "Third mark": "Dritte Markierung",
     "stops": "stopps",
-    "exclusively": "ausschließlich"
+    "exclusively": "ausschließlich",
+    "follows": "folgt",
+    "opens": "öffnet"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7276,7 +7290,9 @@
     "Second mark": "Δεύτερο σήμα",
     "Third mark": "Τρίτο σήμα",
     "stops": "στάσεις",
-    "exclusively": "αποκλειστικά"
+    "exclusively": "αποκλειστικά",
+    "follows": "ακολουθεί",
+    "opens": "ανοίγει"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8253,7 +8269,9 @@
     "Second mark": "Segunda marca",
     "Third mark": "Tercera marca",
     "stops": "paradas",
-    "exclusively": "exclusivamente"
+    "exclusively": "exclusivamente",
+    "follows": "seguimientos",
+    "opens": "aperturas"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9254,7 +9272,9 @@
     "Second mark": "Toinen ansiomerkki",
     "Third mark": "Kolmas ansiomerkki",
     "stops": "pysäytykset",
-    "exclusively": "vain"
+    "exclusively": "vain",
+    "follows": "seuraa",
+    "opens": "avaa"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10235,7 +10255,9 @@
     "Second mark": "Deuxième marque",
     "Third mark": "Troisième marque",
     "stops": "arrêts",
-    "exclusively": "exclusivement"
+    "exclusively": "exclusivement",
+    "follows": "suit",
+    "opens": "ouvre"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11007,7 +11029,9 @@
     "Second mark": "दूसरा निशान",
     "Third mark": "तीसरा निशान",
     "stops": "स्टॉप",
-    "exclusively": "केवल"
+    "exclusively": "केवल",
+    "follows": "फ़ॉलो करता है",
+    "opens": "खोलता है"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12002,7 +12026,9 @@
     "Second mark": "Druga oznaka",
     "Third mark": "Treća oznaka",
     "stops": "zaustavljanja",
-    "exclusively": "isključivo"
+    "exclusively": "isključivo",
+    "follows": "prati",
+    "opens": "otvara"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12999,7 +13025,9 @@
     "Second mark": "Második kiválósági jel",
     "Third mark": "Harmadik kiválósági jel",
     "stops": "megállók",
-    "exclusively": "kizárólag"
+    "exclusively": "kizárólag",
+    "follows": "követések",
+    "opens": "megnyitások"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13992,7 +14020,9 @@
     "Second mark": "Secondo marchio",
     "Third mark": "Terzo marchio",
     "stops": "stop",
-    "exclusively": "esclusivamente"
+    "exclusively": "esclusivamente",
+    "follows": "segue",
+    "opens": "apre"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14992,7 +15022,9 @@
     "Second mark": "2つ目の優等マーク",
     "Third mark": "3つ目の優等マーク",
     "stops": "停止",
-    "exclusively": "のみ"
+    "exclusively": "のみ",
+    "follows": "フォロー",
+    "opens": "開く"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15767,7 +15799,9 @@
     "Second mark": "Екінші белгі",
     "Third mark": "Үшінші белгі",
     "stops": "тоқтаулар",
-    "exclusively": "тек"
+    "exclusively": "тек",
+    "follows": "бақылайды",
+    "opens": "ашады"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16772,7 +16806,9 @@
     "Second mark": "두 번째 표식",
     "Third mark": "세 번째 표식",
     "stops": "중단",
-    "exclusively": "전용"
+    "exclusively": "전용",
+    "follows": "팔로우",
+    "opens": "열기"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17772,7 +17808,9 @@
     "Second mark": "Antrasis ženklas",
     "Third mark": "Trečiasis ženklas",
     "stops": "sustojimai",
-    "exclusively": "išskirtinai"
+    "exclusively": "išskirtinai",
+    "follows": "seka",
+    "opens": "atidaro"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18758,7 +18796,9 @@
     "Second mark": "Otrā atzīme",
     "Third mark": "Trešā atzīme",
     "stops": "pieturas",
-    "exclusively": "tikai"
+    "exclusively": "tikai",
+    "follows": "seko",
+    "opens": "atver"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19760,7 +19800,9 @@
     "Second mark": "Tweede markering",
     "Third mark": "Derde markering",
     "stops": "stops",
-    "exclusively": "uitsluitend"
+    "exclusively": "uitsluitend",
+    "follows": "volgt",
+    "opens": "opent"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20753,7 +20795,9 @@
     "Second mark": "Andre merke",
     "Third mark": "Tredje merke",
     "stops": "stopp",
-    "exclusively": "utelukkende"
+    "exclusively": "utelukkende",
+    "follows": "følger",
+    "opens": "åpner"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21743,7 +21787,9 @@
     "Second mark": "Druga odznaka biegłości",
     "Third mark": "Trzecia odznaka biegłości",
     "stops": "przystanki",
-    "exclusively": "wyłącznie"
+    "exclusively": "wyłącznie",
+    "follows": "obserwuje",
+    "opens": "otwiera"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22726,7 +22772,9 @@
     "Second mark": "Segunda marca",
     "Third mark": "Terceira marca",
     "stops": "paragens",
-    "exclusively": "exclusivamente"
+    "exclusively": "exclusivamente",
+    "follows": "segue",
+    "opens": "abre"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23709,7 +23757,9 @@
     "Second mark": "A doua marcă",
     "Third mark": "A treia marcă",
     "stops": "opriri",
-    "exclusively": "exclusiv"
+    "exclusively": "exclusiv",
+    "follows": "urmărește",
+    "opens": "deschide"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24680,7 +24730,9 @@
     "Third mark": "Третья отметка",
     "Duration": "Время действия",
     "stops": "остановки",
-    "exclusively": "исключительно"
+    "exclusively": "исключительно",
+    "follows": "подписки",
+    "opens": "открытия"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25456,7 +25508,9 @@
     "Second mark": "Druga oznaka",
     "Third mark": "Tretja oznaka",
     "stops": "postanki",
-    "exclusively": "výhradne"
+    "exclusively": "výhradne",
+    "follows": "sledenja",
+    "opens": "odprtja"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26453,7 +26507,9 @@
     "Second mark": "Друга ознака",
     "Third mark": "Трећа ознака",
     "stops": "tačke",
-    "exclusively": "isključivo"
+    "exclusively": "isključivo",
+    "follows": "праћења",
+    "opens": "отварања"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27455,7 +27511,9 @@
     "Second mark": "Andra märket",
     "Third mark": "Tredje märket",
     "stops": "stopp",
-    "exclusively": "endast"
+    "exclusively": "endast",
+    "follows": "följningar",
+    "opens": "öppningar"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28453,7 +28511,9 @@
     "Second mark": "เครื่องหมายที่สอง",
     "Third mark": "เครื่องหมายที่สาม",
     "stops": "จุด",
-    "exclusively": "เท่านั้น"
+    "exclusively": "เท่านั้น",
+    "follows": "ติดตาม",
+    "opens": "เปิด"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29230,7 +29290,9 @@
     "Second mark": "Ikalawang marka",
     "Third mark": "Ikatlong marka",
     "stops": "mga hinto",
-    "exclusively": "eksklusibo"
+    "exclusively": "eksklusibo",
+    "follows": "sinusundan",
+    "opens": "binubuksan"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30224,7 +30286,9 @@
     "Second mark": "İkinci işaret",
     "Third mark": "Üçüncü işaret",
     "stops": "duraklar",
-    "exclusively": "sadece"
+    "exclusively": "sadece",
+    "follows": "takip eder",
+    "opens": "açar"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31211,7 +31275,9 @@
     "Second mark": "Друга відмітка",
     "Third mark": "Третя відмітка",
     "stops": "зупинки",
-    "exclusively": "виключно"
+    "exclusively": "виключно",
+    "follows": "підписки",
+    "opens": "відкриття"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32187,7 +32253,9 @@
     "Third mark": "Dấu hiệu thứ ba",
     "Duration": "Thời lượng",
     "stops": "mốc",
-    "exclusively": "chỉ"
+    "exclusively": "chỉ",
+    "follows": "theo dõi",
+    "opens": "lượt mở"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33185,6 +33253,8 @@
     "Second mark": "二环",
     "Third mark": "三环",
     "stops": "停止",
-    "exclusively": "仅"
+    "exclusively": "仅",
+    "follows": "关注",
+    "opens": "打开"
   }
 }

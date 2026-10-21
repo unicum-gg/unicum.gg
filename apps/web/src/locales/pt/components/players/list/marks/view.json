@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "O que esta classificação cobre",
-    "body": "{marksName} não fazem parte da API pública da Wargaming, então nós os lemos no portal do jogo, uma conta de cada vez, o que só acontece quando alguém consulta um perfil. Esta classificação ordena as {measured} contas cuja garagem lemos, entre as {tracked} contas rastreadas que superam o mínimo de batalhas. Um jogador que ninguém pesquisou fica de fora, em vez de aparecer por último.",
+    "body": "{marksName} não estão na API pública da Wargaming, por isso lemo-las no portal do jogo, uma conta de cada vez. Esta classificação ordena as contas de {measured} cuja garagem lemos, entre {tracked} contas rastreadas que atingem o mínimo de batalhas: um jogador que ninguém pesquisou não aparece nela, em vez de ficar na última posição.",
     "freshness": "A observação mais recente por trás destas contagens é de {newest}, e a mais antiga é de {oldest}.",
-    "profile": "Consultar um jogador lê suas marcas, então a visualização de um perfil é o que o coloca nesta classificação."
+    "profile": "Os jogadores exibidos em cada classificação são lidos novamente dentro de uma hora depois de jogar, por isso o topo da classificação segue o jogo. Mais abaixo, uma garagem é lida quando alguém abre esse perfil, o que também coloca um novo jogador nesta classificação. Passe o cursor sobre uma contagem para ver quando ela foi lida."
   }
 }

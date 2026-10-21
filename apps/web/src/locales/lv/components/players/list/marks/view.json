@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Ko šī tabula aptver",
-    "body": "{marksName} nav Wargaming publiskajā API, tāpēc mēs tos lasām spēles portālā pa vienam kontam, un tas notiek tikai tad, kad kāds uzmeklē profilu. Šī tabula sarindo {measured} kontus, kuru angāru esam lasījuši, no {tracked} kontiem, kas pārsniedz kauju minimumu, tāpēc tajā trūkst spēlētāja, kuru neviens nav meklējis, nevis viņš ieņem tajā pēdējo vietu.",
+    "body": "{marksName} nav Wargaming publiskajā API, tāpēc tās lasām no spēles portāla pa vienam kontam. Šī tabula sarindo {measured} kontus, kuru angārus esam lasījuši, no {tracked} kontiem, kas pārsniedz kauju slieksni: spēlētājs, kuru neviens nav meklējis, tabulā trūkst, nevis viņš tajā ieņem pēdējo vietu.",
     "freshness": "Jaunākais novērojums aiz šiem skaitiem ir no {newest}, vecākais no {oldest}.",
-    "profile": "Spēlētāja uzmeklēšana nolasa viņa atzīmes, tāpēc profila skatījums ievieto viņu šajā tabulā."
+    "profile": "Katrā reitingā parādītie spēlētāji tiek lasīti vēlreiz stundas laikā pēc spēlēšanas, tāpēc tabulas augšgals seko spēlei. Tālāk tabulā angārs tiek lasīts, kad kāds atver šo profilu, un tieši tas arī iekļauj jaunu spēlētāju šajā tabulā. Novietojiet kursoru virs skaita, lai redzētu, kad tas tika lasīts."
   }
 }

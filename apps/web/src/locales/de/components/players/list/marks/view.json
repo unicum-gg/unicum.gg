@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Was diese Rangliste abdeckt",
-    "body": "{marksName} sind nicht in der öffentlichen API von Wargaming enthalten. Deshalb lesen wir sie nacheinander aus dem Spielportal aus, was nur passiert, wenn jemand ein Profil aufruft. Diese Rangliste ordnet die {measured} Konten, deren Garage wir gelesen haben, von {tracked} Konten, die das Gefechte-Minimum erfüllen. Ein Spieler, nach dem niemand gesucht hat, fehlt in der Rangliste und steht nicht an letzter Stelle.",
+    "body": "{marksName} sind nicht in Wargamings öffentlicher API enthalten, daher lesen wir sie aus dem Spielportal, ein Konto nach dem anderen. Diese Rangliste ordnet die {measured} Konten, deren Garage wir gelesen haben, von {tracked} Konten, die die Gefechtsgrenze erreichen: Ein Spieler, nach dem niemand gesucht hat, fehlt darin, statt Letzter zu sein.",
     "freshness": "Die neueste Beobachtung hinter diesen Anzahlen stammt vom {newest}, die älteste vom {oldest}.",
-    "profile": "Beim Aufrufen eines Spielers werden dessen Marken gelesen. Ein Profilaufruf sorgt daher dafür, dass der Spieler in dieser Rangliste erscheint."
+    "profile": "Die in jeder Rangliste angezeigten Spieler werden innerhalb einer Stunde nach ihrem Spielen erneut gelesen, sodass die Spitze der Rangliste dem Spiel folgt. Weiter unten wird eine Garage gelesen, wenn jemand dieses Profil öffnet, wodurch auch ein neuer Spieler in diese Rangliste aufgenommen wird. Bewege den Mauszeiger über eine Anzahl, um zu sehen, wann sie gelesen wurde."
   }
 }

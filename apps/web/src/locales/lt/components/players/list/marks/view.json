@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Ką apima ši lentelė",
-    "body": "{marksName} nėra Wargaming viešojoje API, todėl juos skaitome žaidimo portale po vieną paskyrą. Tai vyksta tik tada, kai kas nors peržiūri profilį. Šioje lentelėje reitinguojamos {measured} paskyros, kurių garažą perskaitėme, iš {tracked} paskyrų, atitinkančių mūšių minimumą. Žaidėjas, kurio niekas neieškojo, joje ne paskutinis, o tiesiog į ją neįtrauktas.",
+    "body": "{marksName} nėra Wargaming viešojoje API, todėl juos skaitome iš žaidimo portalo po vieną paskyrą. Šioje lentelėje rikiuojamos {measured} paskyros, kurių garažą perskaitėme, iš {tracked} paskyrų, atitinkančių mūšių ribą: žaidėjas, kurio niekas neieškojo, joje nerodomas, o ne užima paskutinę vietą.",
     "freshness": "Naujausias šių skaičių stebėjimas yra iš {newest}, seniausias iš {oldest}.",
-    "profile": "Peržiūrėjus žaidėją perskaitomi jo ženklai, todėl profilio peržiūra įtraukia jį į šią lentelę."
+    "profile": "Kiekviename reitinge rodomi žaidėjai perskaitomi iš naujo per valandą po to, kai jie žaidžia, todėl lentelės viršus seka žaidimą. Žemiau garažas perskaitomas, kai kas nors atidaro profilį, ir būtent taip naujas žaidėjas patenka į šią lentelę. Užveskite pelės žymeklį ant skaičiaus, kad pamatytumėte, kada jis buvo perskaitytas."
   }
 }

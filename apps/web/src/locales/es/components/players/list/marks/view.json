@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Qué cubre esta clasificación",
-    "body": "{marksName} no están disponibles en la API pública de Wargaming, así que los leemos del portal del juego, una cuenta cada vez, únicamente cuando alguien consulta un perfil. Esta clasificación ordena las {measured} cuentas cuyo garaje hemos leído, de las {tracked} que superan el mínimo de batallas: si nadie ha buscado a un jugador, falta en la clasificación en lugar de ocupar el último puesto.",
+    "body": "Los datos de {marksName} no figuran en la API pública de Wargaming, así que los leemos desde el portal del juego, una cuenta cada vez. Esta clasificación establece los rangos de las cuentas {measured} cuyo garaje hemos leído, de un total de {tracked} que superan el umbral de batalla. Un jugador al que nadie ha buscado falta en ella, más bien que aparecer en el último puesto.",
     "freshness": "La observación más reciente detrás de estos recuentos es de {newest}, y la más antigua, de {oldest}.",
-    "profile": "Consultar el perfil de un jugador permite leer sus marcas, así que una vista del perfil es lo que lo incluye en esta clasificación."
+    "profile": "Los jugadores mostrados en cada clasificación vuelven a leerse durante la hora posterior a jugar, por lo que la parte superior de la clasificación sigue la evolución del juego. Más abajo, el garaje se lee cuando alguien abre ese perfil, lo que también añade un jugador nuevo a esta clasificación. Pasa el cursor sobre un recuento para ver cuándo fue leído."
   }
 }

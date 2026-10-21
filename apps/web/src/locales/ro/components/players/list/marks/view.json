@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Ce acoperă acest clasament",
-    "body": "{marksName} nu sunt disponibile în API-ul public al Wargaming, așa că le citim din portalul jocului, câte un cont pe rând, lucru care se întâmplă doar când cineva caută un profil. Acest clasament ordonează cele {measured} conturi al căror garaj a fost citit, din cele {tracked} care depășesc pragul minim de bătălii. Un jucător pe care nimeni nu l-a căutat lipsește din clasament, nu se află pe ultimul loc.",
+    "body": "{marksName} nu sunt disponibile în API-ul public al Wargaming, așa că le citim din portalul jocului, câte un cont pe rând. Acest clasament ordonează cele {measured} conturi al căror garaj a fost citit, dintre cele {tracked} care îndeplinesc pragul de bătălii. Un jucător pe care nimeni nu l-a căutat lipsește din clasament, nu se află pe ultimul loc.",
     "freshness": "Cea mai recentă observație care stă la baza acestor numărări datează din {newest}, iar cea mai veche din {oldest}.",
-    "profile": "Căutarea unui jucător îi citește semnele, așa că vizualizarea profilului este cea care îl adaugă în acest clasament."
+    "profile": "Jucătorii afișați în fiecare clasament sunt citiți din nou în decurs de o oră după ce joacă, astfel încât partea de sus a clasamentului urmărește jocul. Mai jos, un garaj este citit când cineva deschide profilul respectiv, iar acest lucru adaugă și un jucător nou în clasament. Treceți cursorul peste un număr pentru a vedea când a fost citit."
   }
 }

@@ -2,5 +2,6 @@
   "tier": "Antas {tier}",
   "read": "Nabasa na ang garahe",
   "empty": "Wala pang manlalaro sa talahanayan ng ranggo na ito.",
-  "no-match": "Walang manlalarong tumutugma sa kasalukuyang salaan."
+  "no-match": "Walang manlalarong tumutugma sa kasalukuyang salaan.",
+  "read-at": "Binasa ang garahe noong {when}"
 }

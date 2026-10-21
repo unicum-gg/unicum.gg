@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Čo táto lestvica pokrýva",
-    "body": "{marksName} nie sú vo verejnom API Wargamingu, preto ich čítame z herného portálu po jednom účte. To sa zgodi iba vtedy, keď niekto vyhľadá profil. Táto lestvica uvrstí {measured} účtov, ktorých garáž sme prečítali, z {tracked} účtov, ktoré spĺňajú minimum bitiek. Hráč, ktorého nikto nevyhľadal, v nej chýba, namiesto toho, aby bol posledný.",
+    "body": "{marksName} nie sú vo verejnom API Wargaming, preto ich čítame z portálu hry, po jednom účte. Táto lestvica zoraďuje {measured} účtov, ktorých garáž sme prečítali, z celkového počtu {tracked} účtov, ktoré prekračujú minimálny počet bitiek. Hráč, ktorého nikto nevyhľadal, v nej skôr chýba, než by bol na poslednom mieste.",
     "freshness": "Najnovšie pozorovanie za týmito počtami pochádza z {newest}, najstaršie z {oldest}.",
-    "profile": "Vyhľadanie hráča prečíta jeho značky, takže na túto lestvicu ho zaradí zobrazenie profilu."
+    "profile": "Hráči zobrazení v každej lestvici sa znova čítajú do hodiny po tom, čo hrajú, takže vrch lestvice sleduje hru. Nižšie na lestvici sa garáž číta, keď niekto otvorí daný profil, čím sa nový hráč zároveň dostane na túto lestvicu. Umiestnite kurzor nad počet a zobrazte, kedy bol údaj prečítaný."
   }
 }

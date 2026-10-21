@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Hvad denne rangliste dækker",
-    "body": "{marksName} findes ikke i Wargamings offentlige API, så vi læser dem fra spilportalen én konto ad gangen. Det sker kun, når nogen slår en profil op. Denne rangliste rangerer de {measured} konti, hvis garage vi har læst, ud af {tracked}, der klarer kampgrænsen. En spiller, som ingen har søgt efter, mangler derfor på ranglisten i stedet for at ligge sidst på den.",
+    "body": "{marksName} findes ikke i Wargamings offentlige API, så vi får dem læst fra spilportalen én konto ad gangen. Denne rangliste rangerer de {measured} konti, hvis garage vi har læst, ud af {tracked} sporede konti, der opfylder kampgrænsen: En spiller, som ingen har søgt efter, mangler på ranglisten snarere end at være sidst på den.",
     "freshness": "Den nyeste observation bag dette antal er fra {newest}, den ældste fra {oldest}.",
-    "profile": "Når du slår en spiller op, læses spillerens mærker, så en profilvisning er det, der får spilleren med på denne rangliste."
+    "profile": "Spillerne, der vises i hver rangering, læses igen inden for en time efter, at de spiller, så toppen af ranglisten følger spillet. Længere nede læses en garage, når nogen åbner denne profil, hvilket også er det, der får en ny spiller på denne rangliste. Hold markøren over et antal for at se, hvornår det blev læst."
   }
 }

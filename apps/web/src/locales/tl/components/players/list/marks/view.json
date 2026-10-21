@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Ano ang saklaw ng talahanayan ng ranggo na ito",
-    "body": "Ang {marksName} ay wala sa pampublikong API ng Wargaming, kaya binabasa namin ang mga ito mula sa portal ng laro nang paisa-isang account, na nangyayari lamang kapag may tumingin sa isang profile. Niraranggo ng talahanayan ng ranggo na ito ang {measured} mga account na nabasa na namin ang garahe, mula sa {tracked} na nakalampas sa pinakamababang bilang ng mga laban. Ang manlalarong hindi pa hinahanap ng sinuman ay wala rito sa halip na nasa huli.",
+    "body": "Ang {marksName} ay wala sa pampublikong API ng Wargaming, kaya binabasa namin ang mga ito mula sa portal ng laro, paisang account. Niraranggo ng talahanayan ng ranggo na ito ang {measured} mga account na ang garahe ay binasa namin, mula sa {tracked} mga account na nakalampas sa minimum na bilang ng labanan. Ang manlalarong walang sinuman ang naghanap ay hindi kasama rito, sa halip na nasa pinakahuli ng talahanayan ng ranggo.",
     "freshness": "Ang pinakabagong obserbasyon na batayan ng mga bilang na ito ay mula sa {newest}, at ang pinakaluma ay mula sa {oldest}.",
-    "profile": "Kapag tiningnan ang profile ng isang manlalaro, nababasa ang mga marka nito, kaya ang pagtingin sa profile ang naglalagay sa manlalaro sa talahanayan ng ranggo na ito."
+    "profile": "Ang mga manlalarong ipinakita sa bawat ranggo ay muling binabasa sa loob ng isang oras matapos silang maglaro, kaya sinusundan ng tuktok ng talahanayan ng ranggo ang laro. Sa bandang ibaba, binabasa ang isang garahe kapag may nagbubukas ng profile na iyon, at iyon din ang naglalagay ng bagong manlalaro sa talahanayan ng ranggo. I-hover ang isang bilang para makita kung kailan ito binasa."
   }
 }

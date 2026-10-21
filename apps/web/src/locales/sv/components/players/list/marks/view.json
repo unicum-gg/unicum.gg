@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Vad denna topplista omfattar",
-    "body": "{marksName} finns inte i Wargamings offentliga API, så vi läser dem från spelportalen, ett konto i taget. Det händer bara när någon söker efter en profil. Denna topplista rangordnar de {measured} konton vars garage vi har läst, av {tracked} konton som klarar minimumgränsen för strider. En spelare som ingen har sökt efter saknas därför från topplistan i stället för att ligga sist på den.",
+    "body": "{marksName} finns inte i Wargamings offentliga API, så vi läser dem från spelportalen, ett konto i taget. Den här topplistan ranker de {measured} konton vars garage vi har läst, av {tracked} som klarar stridsgränsen: en spelare som ingen har sökt efter saknas i den i stället för att ligga sist i den.",
     "freshness": "Den senaste observationen bakom dessa antal är från {newest}, och den äldsta är från {oldest}.",
-    "profile": "När du söker efter en spelare läses deras märken, så en profilvisning är det som placerar dem på denna topplista."
+    "profile": "Spelarna som visas i varje topplista läses igen inom en timme efter att de spelar, så toppen av topplistan följer spelet. Längre ner läses ett garage när någon öppnar profilen, vilket också är det som placerar en ny spelare på den här topplistan. Håll muspekaren över ett antal för att se när det lästes."
   }
 }

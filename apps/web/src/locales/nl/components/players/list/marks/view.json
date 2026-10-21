@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Wat dit klassement omvat",
-    "body": "{marksName} staan niet in de openbare API van Wargaming, dus lezen we ze één account tegelijk uit het spelportaal. Dat gebeurt alleen wanneer iemand een profiel opzoekt. Dit klassement rangschikt de {measured} accounts waarvan we de garage hebben gelezen, van de {tracked} accounts die de gevechtsdrempel halen. Een speler die niemand heeft opgezocht, ontbreekt in het klassement en staat dus niet onderaan.",
+    "body": "{marksName} zijn niet beschikbaar in de openbare API van Wargaming, dus worden ze uit het spelportaal per account gelezen. Dit klassement rangschikt de {measured} accounts wiens garage we hebben gelezen, van de {tracked} accounts die de gevechtsdrempel halen: een speler die niemand heeft opgezocht, ontbreekt in het klassement en staat er dus niet onderaan.",
     "freshness": "De nieuwste waarneming achter deze aantallen dateert van {newest}, de oudste van {oldest}.",
-    "profile": "Wanneer u een speler opzoekt, worden diens markeringen gelezen. Een profielweergave zorgt er dus voor dat de speler in dit klassement komt."
+    "profile": "De spelers die in elk klassement worden weergegeven, worden binnen een uur nadat ze spelen opnieuw gelezen, zodat de top van het klassement het spel volgt. Verder naar beneden wordt een garage gelezen wanneer iemand dat profiel opent. Daarmee komt ook een nieuwe speler op dit klassement. Houd de muis boven een aantal om te zien wanneer het is gelezen."
   }
 }

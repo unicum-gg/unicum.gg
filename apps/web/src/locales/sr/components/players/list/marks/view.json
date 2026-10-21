@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Шта ова табела обухвата",
-    "body": "{marksName} нису доступне у јавном API-ју компаније Wargaming, па их читамо са портала игре, један nalog по један, што се дешава само када неко потражи профил. Ова табела рангира {measured} naloga чију смо гаражу прочитали, од {tracked} naloga који испуњавају минимум за битке: играч кога нико није потражио недостаје на табли, а није последњи на њој.",
+    "body": "{marksName} nisu dostupne u API-ju koji je javno dostupan kompanije Wargaming, pa je njihovo stanje прочитано sa portala igre, jedan nalog po jedan. Ova табела rangira {measured} naloga čija je гаража прочитано, od ukupno {tracked} naloga koji prelaze prag bitke: играч koga нико nije pretraživao nedostaje na njoj, umesto da bude poslednji.",
     "freshness": "Најновије посматрање иза ових бројеви је из {newest}, а најстарије из {oldest}.",
-    "profile": "Када потражите играча, читају се његове ознаке, па га преглед профила поставља на ову табелу."
+    "profile": "Prikazano je koji igrači pripadaju svakom rangu, a njihovo stanje se ponovo pročita u roku od h nakon što kliknu na „играј“, pa vrh табеле prati игру. Niže na табели, гаража se прочитано kada neko отвори taj профил, čime se novi играч takođe pojavljuje na ovoj табели. Pređite kursorom preko броја da vidite kada je прочитано."
   }
 }

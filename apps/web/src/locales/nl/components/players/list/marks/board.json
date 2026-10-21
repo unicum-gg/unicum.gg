@@ -2,5 +2,6 @@
   "tier": "Niveau {tier}",
   "read": "Garage gelezen",
   "empty": "Nog geen speler in dit klassement.",
-  "no-match": "Geen speler voldoet aan het huidige filter."
+  "no-match": "Geen speler voldoet aan het huidige filter.",
+  "read-at": "Garage gelezen {when}"
 }

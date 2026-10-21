@@ -2,5 +2,6 @@
   "tier": "Nivå {tier}",
   "read": "Garasje lest",
   "empty": "Ingen spiller på denne tavlen ennå.",
-  "no-match": "Ingen spiller passer til nåværende filter."
+  "no-match": "Ingen spiller passer til nåværende filter.",
+  "read-at": "Garasje lest {when}"
 }

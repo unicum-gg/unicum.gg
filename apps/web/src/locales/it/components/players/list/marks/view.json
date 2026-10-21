@@ -15,8 +15,8 @@
   },
   "coverage": {
     "title": "Cosa copre questa classifica",
-    "body": "I dati su {marksName} non sono disponibili nell’API pubblico di Wargaming, quindi li leggiamo dal portale di gioco, un account alla volta, cosa che succede solo quando qualcuno cerca un profilo. Questa classifica ordina i {measured} account di cui abbiamo letto l’officina, su {tracked} che superano la soglia minima di battaglie: un giocatore che nessuno ha cercato è assente, piuttosto che all’ultimo posto.",
+    "body": "{marksName} non sono nell’API pubblica di Wargaming, quindi vengono letti dal portale del gioco, un account alla volta. Questa classifica ordina {measured} account di cui abbiamo letto l’officina, su un totale di {tracked} account che superano la soglia delle battaglie: un giocatore che nessuno ha cercato non vi compare, piuttosto che essere all’ultimo posto.",
     "freshness": "L’osservazione più recente alla base di questi conteggi risale al {newest}, quella più vecchia al {oldest}.",
-    "profile": "Cercare un giocatore permette di leggere i suoi marchi, quindi è la visualizzazione del profilo a inserirlo in questa classifica."
+    "profile": "I giocatori mostrati in ogni classifica vengono riletti entro un’ora da quando giocano, così la parte alta della classifica segue il gioco. Più in basso, un’officina viene letta quando qualcuno apre quel profilo, ed è anche così che un nuovo giocatore entra in questa classifica. Passa il mouse su un numero per vedere quando è stato letto."
   }
 }
