@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Približne rovnako rušno ako zvyčajne v tomto čase týždňa.",
   "busier-than-usual": "rušnejšie ako zvyčajne v tomto čase týždňa.",
+  "last-recorded-on": "Naposledy zaznamenané: {at}",
+  "nothing-recorded-yet": "Nič zatiaľ nebolo zaznamenané",
   "players-online": "hráči online",
-  "quieter-than-usual": "pokojnejšie ako zvyčajne v tomto čase týždňa."
+  "quieter-than-usual": "pokojnejšie ako zvyčajne v tomto čase týždňa.",
+  "wargaming-has-not-published-since": "Wargaming odvtedy nezverejnil sliku. Zaznamenávanie sa automaticky obnoví hneď, ako ich zdroj opäť odpovie."
 }

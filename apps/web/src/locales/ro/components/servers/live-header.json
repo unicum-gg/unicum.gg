@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Aproximativ la fel de aglomerat ca de obicei pentru această perioadă a săptămânii.",
   "busier-than-usual": "mai aglomerat decât de obicei pentru această perioadă a săptămânii.",
+  "last-recorded-on": "Ultima înregistrare: {at}",
+  "nothing-recorded-yet": "Nimic nu a fost încă înregistrat",
   "players-online": "jucători online",
-  "quieter-than-usual": "mai liniștit decât de obicei pentru această perioadă a săptămânii."
+  "quieter-than-usual": "mai liniștit decât de obicei pentru această perioadă a săptămânii.",
+  "wargaming-has-not-published-since": "Wargaming nu a mai publicat cifra de atunci. Înregistrarea se reia automat de îndată ce sursa lor răspunde din nou."
 }

@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Omtrent like travelt som vanlig på denne tiden av uken.",
   "busier-than-usual": "travlere enn vanlig på denne tiden av uken.",
+  "last-recorded-on": "Sist registrert {at}",
+  "nothing-recorded-yet": "Ingenting er registrert ennå",
   "players-online": "spillere online",
-  "quieter-than-usual": "roligere enn vanlig på denne tiden av uken."
+  "quieter-than-usual": "roligere enn vanlig på denne tiden av uken.",
+  "wargaming-has-not-published-since": "Wargaming har ikke publisert tallet siden. Registreringen gjenopptas automatisk så snart kilden deres svarer igjen."
 }

@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Mniej więcej taki ruch jak zwykle o tej porze tygodnia.",
   "busier-than-usual": "większy ruch niż zwykle o tej porze tygodnia.",
+  "last-recorded-on": "Ostatni rekord zarejestrowano dnia {at}",
+  "nothing-recorded-yet": "Nic jeszcze nie zarejestrowano",
   "players-online": "graczy Online",
-  "quieter-than-usual": "mniejszy ruch niż zwykle o tej porze tygodnia."
+  "quieter-than-usual": "mniejszy ruch niż zwykle o tej porze tygodnia.",
+  "wargaming-has-not-published-since": "Wargaming: od tego czasu nie opublikowano liczby. Rejestrowanie wznowi się automatycznie, gdy tylko ich źródło ponownie odpowie."
 }

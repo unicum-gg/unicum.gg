@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Mức độ bận rộn gần như bình thường so với thời điểm này trong tuần.",
   "busier-than-usual": "bận rộn hơn bình thường so với thời điểm này trong tuần.",
+  "last-recorded-on": "Được ghi nhận lần cuối vào {at}",
+  "nothing-recorded-yet": "Không có gì được ghi nhận",
   "players-online": "người chơi trực tuyến",
-  "quieter-than-usual": "vắng hơn bình thường so với thời điểm này trong tuần."
+  "quieter-than-usual": "vắng hơn bình thường so với thời điểm này trong tuần.",
+  "wargaming-has-not-published-since": "Wargaming chưa đăng hình kể từ đó. Việc ghi nhận sẽ tự động tiếp tục ngay khi nguồn của họ phản hồi lại."
 }

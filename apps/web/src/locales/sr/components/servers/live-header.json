@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Отприлике уобичајена активност за овај дан у недељи.",
   "busier-than-usual": "активније него обично за овај дан у недељи.",
+  "last-recorded-on": "Poslednji put забележено {at}",
+  "nothing-recorded-yet": "Ništa još nije забележено",
   "players-online": "igrači online",
-  "quieter-than-usual": "мирније него обично за овај дан у недељи."
+  "quieter-than-usual": "мирније него обично за овај дан у недељи.",
+  "wargaming-has-not-published-since": "Wargaming od tada nema objavljeno za фигура. Beleženje se automatski nastavlja čim njihov извор ponovo odgovori."
 }

@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "सप्ताह के इस समय के लिए लगभग सामान्य व्यस्तता।",
   "busier-than-usual": "सप्ताह के इस समय से अधिक व्यस्त।",
+  "last-recorded-on": "अंतिम बार {at} पर दर्ज किया गया",
+  "nothing-recorded-yet": "अभी तक कुछ नहीं दर्ज किया गया",
   "players-online": "खिलाड़ी ऑनलाइन",
-  "quieter-than-usual": "सप्ताह के इस समय से कम व्यस्त।"
+  "quieter-than-usual": "सप्ताह के इस समय से कम व्यस्त।",
+  "wargaming-has-not-published-since": "Wargaming ने तब से आंकड़ा प्रकाशित नहीं किया है। उनके स्रोत के फिर से जवाब देते ही रिकॉर्डिंग अपने आप फिर शुरू हो जाएगी।"
 }

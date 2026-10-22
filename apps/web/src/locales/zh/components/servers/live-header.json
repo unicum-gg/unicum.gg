@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "与这一周的通常情况大致相同。",
   "busier-than-usual": "比这一周的通常情况更繁忙。",
+  "last-recorded-on": "最后已记录于 {at}",
+  "nothing-recorded-yet": "无已记录内容",
   "players-online": "在线玩家",
-  "quieter-than-usual": "比这一周的通常情况更安静。"
+  "quieter-than-usual": "比这一周的通常情况更安静。",
+  "wargaming-has-not-published-since": "默认自此后未发布该数值。来源再次响应后，将自动恢复纪录。"
 }

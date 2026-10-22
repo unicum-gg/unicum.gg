@@ -776,7 +776,8 @@
     "… viewport": "… نافذة العرض",
     "… vs modules": "… ضد الوحدات",
     "ranking": "التصنيف",
-    "Listed on": "مدرج على"
+    "Listed on": "مدرج على",
+    "figure": "رقم"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1555,7 +1556,8 @@
     "… viewport": "… поле агляду",
     "… vs modules": "… супраць модуляў",
     "ranking": "рэйтынг",
-    "Listed on": "Размешчана на"
+    "Listed on": "Размешчана на",
+    "figure": "паказчык"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2548,7 +2550,8 @@
     "… viewport": "… зрителен прозорец",
     "… vs modules": "… срещу модули",
     "ranking": "класация",
-    "Listed on": "Посочено в"
+    "Listed on": "Посочено в",
+    "figure": "фигура"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3334,7 +3337,8 @@
     "… viewport": "… vidno polje",
     "… vs modules": "… protiv modula",
     "ranking": "rangiranje",
-    "Listed on": "Navedeno na"
+    "Listed on": "Navedeno na",
+    "figure": "figura"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4338,7 +4342,8 @@
     "… viewport": "… zorné pole",
     "… vs modules": "… vs moduly",
     "ranking": "žebříček",
-    "Listed on": "Uvedeno na"
+    "Listed on": "Uvedeno na",
+    "figure": "údaj"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5348,7 +5353,8 @@
     "… viewport": "… synsfelt",
     "… vs modules": "… vs moduler",
     "ranking": "rangliste",
-    "Listed on": "Listet på"
+    "Listed on": "Listet på",
+    "figure": "tal"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6351,7 +6357,8 @@
     "… viewport": "… Sichtfeld",
     "… vs modules": "… vs Module",
     "ranking": "Rangliste",
-    "Listed on": "Gelistet auf"
+    "Listed on": "Gelistet auf",
+    "figure": "Zahl"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7360,7 +7367,8 @@
     "… viewport": "… οπτικό πεδίο",
     "… vs modules": "… εναντίον μονάδων",
     "ranking": "κατάταξη",
-    "Listed on": "Καταχωρισμένο σε"
+    "Listed on": "Καταχωρισμένο σε",
+    "figure": "αριθμός"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8349,7 +8357,8 @@
     "… viewport": "… visor",
     "… vs modules": "… vs módulos",
     "ranking": "clasificación",
-    "Listed on": "Listado en"
+    "Listed on": "Listado en",
+    "figure": "figura"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9362,7 +9371,8 @@
     "… viewport": "… näkymäikkuna",
     "… vs modules": "… vs moduulit",
     "ranking": "sijoitus",
-    "Listed on": "Listattu palvelussa"
+    "Listed on": "Listattu palvelussa",
+    "figure": "luku"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10355,7 +10365,8 @@
     "… viewport": "… vitrage",
     "… vs modules": "… vs modules",
     "ranking": "classement",
-    "Listed on": "Répertorié sur"
+    "Listed on": "Répertorié sur",
+    "figure": "chiffre"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11135,7 +11146,8 @@
     "… viewport": "… व्यू पोर्ट",
     "… vs modules": "… बनाम मॉड्यूल्स",
     "ranking": "रैंकिंग",
-    "Listed on": "पर सूचीबद्ध"
+    "Listed on": "पर सूचीबद्ध",
+    "figure": "आंकड़ा"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12142,7 +12154,8 @@
     "… viewport": "… vidno polje",
     "… vs modules": "… protiv modula",
     "ranking": "poredak",
-    "Listed on": "Navedeno na"
+    "Listed on": "Navedeno na",
+    "figure": "brojka"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13151,7 +13164,8 @@
     "… viewport": "… kilátó",
     "… vs modules": "… vs modulok",
     "ranking": "ranglista",
-    "Listed on": "Listázva itt"
+    "Listed on": "Listázva itt",
+    "figure": "ábra"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14156,7 +14170,8 @@
     "… viewport": "… finestrino",
     "… vs modules": "… vs moduli",
     "ranking": "classifica",
-    "Listed on": "Elencato su"
+    "Listed on": "Elencato su",
+    "figure": "dato"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15168,7 +15183,8 @@
     "… viewport": "… ビューポート",
     "… vs modules": "… モジュール対抗",
     "ranking": "ランキング",
-    "Listed on": "掲載先"
+    "Listed on": "掲載先",
+    "figure": "図"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15951,7 +15967,8 @@
     "… viewport": "… көрініс терезесі",
     "… vs modules": "… модульдерге қарсы",
     "ranking": "рейтинг",
-    "Listed on": "Көрсетілген орны"
+    "Listed on": "Көрсетілген орны",
+    "figure": "сан"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16968,7 +16985,8 @@
     "… viewport": "… 뷰포트",
     "… vs modules": "… 모듈 대",
     "ranking": "랭킹",
-    "Listed on": "게시 위치"
+    "Listed on": "게시 위치",
+    "figure": "수치"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17980,7 +17998,8 @@
     "… viewport": "… vaizdo langas",
     "… vs modules": "… vs moduliai",
     "ranking": "reitingas",
-    "Listed on": "Nurodyta svetainėje"
+    "Listed on": "Nurodyta svetainėje",
+    "figure": "skaičius"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18978,7 +18997,8 @@
     "… viewport": "… skatījuma logs",
     "… vs modules": "… pret moduļiem",
     "ranking": "reitings",
-    "Listed on": "Publicēts vietnē"
+    "Listed on": "Publicēts vietnē",
+    "figure": "skaitlis"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19992,7 +20012,8 @@
     "… viewport": "… kijkopening",
     "… vs modules": "… vs modules",
     "ranking": "ranglijst",
-    "Listed on": "Vermeld op"
+    "Listed on": "Vermeld op",
+    "figure": "figuur"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20997,7 +21018,8 @@
     "… viewport": "… visningsport",
     "… vs modules": "… vs moduler",
     "ranking": "rangering",
-    "Listed on": "Listet på"
+    "Listed on": "Listet på",
+    "figure": "tall"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21999,7 +22021,8 @@
     "… viewport": "… wizjer",
     "… vs modules": "… w porównaniu do modułów",
     "ranking": "ranking",
-    "Listed on": "Dostępne na"
+    "Listed on": "Dostępne na",
+    "figure": "liczba"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22994,7 +23017,8 @@
     "… viewport": "… visor",
     "… vs modules": "… vs módulos",
     "ranking": "classificação",
-    "Listed on": "Listados em"
+    "Listed on": "Listados em",
+    "figure": "valor"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23989,7 +24013,8 @@
     "… viewport": "… fereastră de vizualizare",
     "… vs modules": "… vs module",
     "ranking": "clasament",
-    "Listed on": "Listat pe"
+    "Listed on": "Listat pe",
+    "figure": "cifră"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24972,7 +24997,8 @@
     "… viewport": "… обзорное окно",
     "… vs modules": "… против модулей",
     "ranking": "рейтинг",
-    "Listed on": "Размещено на"
+    "Listed on": "Размещено на",
+    "figure": "показатель"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25756,7 +25782,8 @@
     "… viewport": "… pohľadové okno",
     "… vs modules": "… vs moduly",
     "ranking": "lestvica",
-    "Listed on": "Navedeno na"
+    "Listed on": "Navedeno na",
+    "figure": "slika"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26765,7 +26792,8 @@
     "… viewport": "… vidni otvor",
     "… vs modules": "… protiv modula",
     "ranking": "rangiranje",
-    "Listed on": "Наведено на"
+    "Listed on": "Наведено на",
+    "figure": "фигура"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27779,7 +27807,8 @@
     "… viewport": "… synfält",
     "… vs modules": "… vs moduler",
     "ranking": "ranking",
-    "Listed on": "Listad på"
+    "Listed on": "Listad på",
+    "figure": "figur"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28789,7 +28818,8 @@
     "… viewport": "… มุมมองภาพ",
     "… vs modules": "… ปะทะโมดูล",
     "ranking": "อันดับ",
-    "Listed on": "แสดงบน"
+    "Listed on": "แสดงบน",
+    "figure": "ตัวเลข"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29574,7 +29604,8 @@
     "… viewport": "… viewport",
     "… vs modules": "… laban sa mga module",
     "ranking": "ranggo",
-    "Listed on": "Nakalista sa"
+    "Listed on": "Nakalista sa",
+    "figure": "bilang"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30580,7 +30611,8 @@
     "… viewport": "… görüntü penceresi",
     "… vs modules": "… modüllere karşı",
     "ranking": "sıralama",
-    "Listed on": "Listelendiği yer"
+    "Listed on": "Listelendiği yer",
+    "figure": "sayı"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31579,7 +31611,8 @@
     "… viewport": "… оглядове вікно",
     "… vs modules": "… проти модулів",
     "ranking": "рейтинг",
-    "Listed on": "Зазначено на"
+    "Listed on": "Зазначено на",
+    "figure": "показник"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32567,7 +32600,8 @@
     "… viewport": "… kính quan sát",
     "… vs modules": "… so với các mô-đun",
     "ranking": "xếp hạng",
-    "Listed on": "Được liệt kê trên"
+    "Listed on": "Được liệt kê trên",
+    "figure": "hình"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33577,6 +33611,7 @@
     "… viewport": "… 视口",
     "… vs modules": "… 对模块",
     "ranking": "排名",
-    "Listed on": "收录于"
+    "Listed on": "收录于",
+    "figure": "数值"
   }
 }

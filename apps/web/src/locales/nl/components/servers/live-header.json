@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Ongeveer even druk als gebruikelijk op dit tijdstip van de week.",
   "busier-than-usual": "drukker dan gebruikelijk op dit tijdstip van de week.",
+  "last-recorded-on": "Laatst geregistreerd op {at}",
+  "nothing-recorded-yet": "Nog niets geregistreerd",
   "players-online": "spelers online",
-  "quieter-than-usual": "rustiger dan gebruikelijk op dit tijdstip van de week."
+  "quieter-than-usual": "rustiger dan gebruikelijk op dit tijdstip van de week.",
+  "wargaming-has-not-published-since": "Wargaming heeft het figuur sindsdien niet gepubliceerd. Het registreren wordt automatisch hervat zodra hun bron weer antwoordt."
 }

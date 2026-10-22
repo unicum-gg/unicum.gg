@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Haftanın bu zamanı için her zamanki kadar yoğun.",
   "busier-than-usual": "haftanın bu zamanı için her zamankinden yoğun.",
+  "last-recorded-on": "Son kaydedilme tarihi: {at}",
+  "nothing-recorded-yet": "Henüz hiçbir şey kaydedilmedi",
   "players-online": "çevrimiçi oyuncular",
-  "quieter-than-usual": "haftanın bu zamanı için her zamankinden sakin."
+  "quieter-than-usual": "haftanın bu zamanı için her zamankinden sakin.",
+  "wargaming-has-not-published-since": "Wargaming o zamandan beri bu sayıyı yayınlamadı. Kayıt, kaynakları yeniden yanıt verir vermez kendiliğinden devam eder."
 }

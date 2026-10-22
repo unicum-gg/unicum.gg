@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Otprilike jednako opterećeno kao obično u ovo doba tjedna.",
   "busier-than-usual": "opterećenije nego obično u ovo doba tjedna.",
+  "last-recorded-on": "Posljednje zabilježeno {at}",
+  "nothing-recorded-yet": "Ništa još nije zabilježeno",
   "players-online": "igrači na mreži",
-  "quieter-than-usual": "mirnije nego obično u ovo doba tjedna."
+  "quieter-than-usual": "mirnije nego obično u ovo doba tjedna.",
+  "wargaming-has-not-published-since": "Wargaming od tada nije objavio brojku. Bilježenje se automatski nastavlja čim njihov izvor ponovno odgovori."
 }

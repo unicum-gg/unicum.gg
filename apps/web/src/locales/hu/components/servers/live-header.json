@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Körülbelül a hét ezen időszakában megszokott terheltség.",
   "busier-than-usual": "A hét ezen időszakában megszokottnál terheltebb.",
+  "last-recorded-on": "Utolsó rögzített időpont: {at}",
+  "nothing-recorded-yet": "Semmi sincs még rögzítve",
   "players-online": "játékosok online",
-  "quieter-than-usual": "A hét ezen időszakában megszokottnál csendesebb."
+  "quieter-than-usual": "A hét ezen időszakában megszokottnál csendesebb.",
+  "wargaming-has-not-published-since": "Az ábra azóta nincs közzétéve a Wargaming által. A rögzítés magától folytatódik, amint a forrásuk ismét válaszol."
 }

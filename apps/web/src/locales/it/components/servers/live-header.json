@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Più o meno affollato come al solito in questo momento della settimana.",
   "busier-than-usual": "più affollato del solito in questo momento della settimana.",
+  "last-recorded-on": "Ultimo dato registrato il {at}",
+  "nothing-recorded-yet": "Niente è stato ancora registrato",
   "players-online": "giocatori online",
-  "quieter-than-usual": "meno affollato del solito in questo momento della settimana."
+  "quieter-than-usual": "meno affollato del solito in questo momento della settimana.",
+  "wargaming-has-not-published-since": "Wargaming non ha pubblicato il dato da allora. La registrazione riprenderà automaticamente non appena la loro fonte risponderà di nuovo."
 }

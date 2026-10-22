@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Etwa so viel los wie zu dieser Zeit der Woche üblich.",
   "busier-than-usual": "mehr los als zu dieser Zeit der Woche üblich.",
+  "last-recorded-on": "Zuletzt aufgezeichnet am {at}",
+  "nothing-recorded-yet": "Nichts wurde bisher aufgezeichnet",
   "players-online": "spieler online",
-  "quieter-than-usual": "weniger los als zu dieser Zeit der Woche üblich."
+  "quieter-than-usual": "weniger los als zu dieser Zeit der Woche üblich.",
+  "wargaming-has-not-published-since": "Wargaming hat die Zahl seitdem nicht veröffentlicht. Die Aufzeichnung wird automatisch fortgesetzt, sobald die Quelle wieder antwortet."
 }

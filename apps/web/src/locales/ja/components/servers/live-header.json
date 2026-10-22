@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "この曜日のこの時間帯としては、普段と同じくらいの混雑です。",
   "busier-than-usual": "この曜日のこの時間帯としては、普段より混雑しています。",
+  "last-recorded-on": "最終記録日時: {at}",
+  "nothing-recorded-yet": "まだ記録なし",
   "players-online": "オンラインプレイヤー",
-  "quieter-than-usual": "この曜日のこの時間帯としては、普段より空いています。"
+  "quieter-than-usual": "この曜日のこの時間帯としては、普段より空いています。",
+  "wargaming-has-not-published-since": "Wargaming はそれ以降、この図を公開済みにしていません。ソースが再び応答するとすぐに、記録が自動的に再開されます。"
 }

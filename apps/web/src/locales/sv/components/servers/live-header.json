@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Ungefär lika mycket aktivitet som vanligt vid den här tiden i veckan.",
   "busier-than-usual": "mer aktivitet än vanligt vid den här tiden i veckan.",
+  "last-recorded-on": "Senast registrerad: {at}",
+  "nothing-recorded-yet": "Inget registrerat ännu",
   "players-online": "spelare online",
-  "quieter-than-usual": "mindre aktivitet än vanligt vid den här tiden i veckan."
+  "quieter-than-usual": "mindre aktivitet än vanligt vid den här tiden i veckan.",
+  "wargaming-has-not-published-since": "Sedan dess har figuren inte varit publicerad av Wargaming. Registreringen återupptas automatiskt så snart deras källa svarar igen."
 }

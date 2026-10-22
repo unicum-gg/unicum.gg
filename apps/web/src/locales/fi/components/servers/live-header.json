@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Suunnilleen yhtä vilkas kuin tavallisesti tähän viikon aikaan.",
   "busier-than-usual": "Vil­kkaampi kuin tavallisesti tähän viikon aikaan.",
+  "last-recorded-on": "Viimeksi tallennettu {at}",
+  "nothing-recorded-yet": "Ei mitään ole vielä tallennettu",
   "players-online": "pelaajat verkossa",
-  "quieter-than-usual": "Hiljaisempi kuin tavallisesti tähän viikon aikaan."
+  "quieter-than-usual": "Hiljaisempi kuin tavallisesti tähän viikon aikaan.",
+  "wargaming-has-not-published-since": "Wargamingilta ei ole julkaistu lukua sen jälkeen. Tallennus jatkuu automaattisesti heti, kun heidän lähteensä vastaa jälleen."
 }

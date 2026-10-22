@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "Más o menos igual de concurrido que de costumbre a estas horas de la semana.",
   "busier-than-usual": "más concurrido de lo habitual a estas horas de la semana.",
+  "last-recorded-on": "Último dato registrado el {at}",
+  "nothing-recorded-yet": "Nada registrado todavía",
   "players-online": "jugadores en línea",
-  "quieter-than-usual": "menos concurrido de lo habitual a estas horas de la semana."
+  "quieter-than-usual": "menos concurrido de lo habitual a estas horas de la semana.",
+  "wargaming-has-not-published-since": "Wargaming no ha publicado la figura desde entonces. El registro se reanuda por sí solo en cuanto su fuente vuelve a responder."
 }
