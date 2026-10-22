@@ -63,7 +63,15 @@ export function PlayersOnline() {
     recorded?.clusters ?? [],
   );
 
-  const count = total == null ? "—" : num(FMT_FORMAT).format(total);
+  // Nothing to show is shown as nothing. This sits in the chrome of every page
+  // on the site, so a placeholder reads as a broken number everywhere at once,
+  // which is what a Wargaming outage turned it into: `wgn/servers/info` has
+  // answered `504 SOURCE_NOT_AVAILABLE` for days at a time, and the recorded
+  // fallback below only covers it until that too runs out. Saying "we do not
+  // have it" by not claiming a count is the honest reading, and the quiet one.
+  if (total == null) return null;
+
+  const count = num(FMT_FORMAT).format(total);
 
   // The count is the shortest way into the servers page, which is this number
   // over time: the tooltip answers "who is where right now", the link answers
@@ -84,9 +92,13 @@ export function PlayersOnline() {
     </Link>
   );
 
-  // Before either source lands there is no per-server breakdown to show, so
-  // render the placeholder count on its own without a tooltip.
-  if (servers.length === 0) return label;
+  // A cluster we hold no figure for is left out rather than dashed, the same
+  // rule one level down. With none of them measured there is no breakdown to
+  // show, so the count stands on its own without a tooltip.
+  const measured = servers.filter(
+    (s): s is typeof s & { players: number } => s.players != null,
+  );
+  if (measured.length === 0) return label;
 
   return (
     <TooltipProvider>
@@ -94,7 +106,7 @@ export function PlayersOnline() {
         <TooltipTrigger asChild>{label}</TooltipTrigger>
         <TooltipContent side="bottom">
           <div className="flex flex-col gap-1">
-            {servers.map((s) => (
+            {measured.map((s) => (
               <div
                 key={s.server}
                 className="flex items-center justify-between gap-4"
@@ -105,7 +117,7 @@ export function PlayersOnline() {
                   </span>
                 </Hint>
                 <span className="font-medium">
-                  {s.players == null ? "—" : num(FMT_FORMAT).format(s.players)}
+                  {num(FMT_FORMAT).format(s.players)}
                 </span>
               </div>
             ))}

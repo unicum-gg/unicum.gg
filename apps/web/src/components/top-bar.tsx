@@ -25,7 +25,15 @@ export function TopBar({ feedbackEnabled }: { feedbackEnabled: boolean }) {
     <div className="border-b border-fd-border bg-fd-background">
       <div className="mx-auto w-full max-w-7xl">
         <div className="relative flex h-9 items-center justify-between gap-2 border-x border-fd-border px-4 text-xs sm:gap-3">
-          <PlayersOnline />
+          {/* The slot stays even when the counter has nothing to show, so
+              `justify-between` still has a left edge to push the right-hand
+              group against. Without it, a Wargaming outage moves "Support
+              us" and the login widget across to the other side of the
+              strip, which reads as a different page rather than as a
+              missing number. */}
+          <div className="shrink-0">
+            <PlayersOnline />
+          </div>
           {/* `min-w-0` so the signed-in nickname is what truncates when the
               strip runs out of room, rather than the row overflowing the page
               and taking the horizontal scrollbar with it. */}
