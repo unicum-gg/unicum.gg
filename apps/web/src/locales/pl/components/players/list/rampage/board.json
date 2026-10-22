@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Nie ma jeszcze graczy rankingowych w Rozwałce.",
   "no-player-matches-the-current": "Żaden gracz nie pasuje do bieżących filtrów.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

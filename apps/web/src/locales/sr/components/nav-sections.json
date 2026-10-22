@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Najbolji igrači",
       "description": "Ранг-листа играча за све време"
+    },
+    "players-rampage": {
+      "description": "Ko ima najviši rang u režimu Boj do poslednjeg."
     }
   }
 }

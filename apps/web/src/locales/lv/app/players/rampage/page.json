@@ -1,3 +1,6 @@
 {
-  "og-title": "Labākie {mode} spēlētāji"
+  "title": "Labākie World of Tanks {mode} spēlētāji ({region})",
+  "description": "{name} {region} līderu saraksts režīmam {mode}, ranžēts pēc mūsu MR vērtējuma (vidējais XP + uzvaru vērtējums).",
+  "og-title": "Labākie {mode} spēlētāji",
+  "og-subtitle": "{region} līderu saraksts"
 }

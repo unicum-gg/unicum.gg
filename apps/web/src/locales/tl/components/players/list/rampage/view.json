@@ -1,5 +1,7 @@
 {
   "heading": "Mga nangungunang manlalaro sa <accent>{mode}</accent>",
+  "intro": "Ang {mode} ay isang mode ng kaganapan sa World of Tanks. Talaan ng ranggo para sa {region}, ranked ayon sa MR, na nangangailangan ng hindi bababa sa 100 laban sa {mode}.",
+  "archived": "Wala ang {mode} sa kasalukuyang rotasyon, kaya hindi gumagalaw ang ranggong ito.",
   "board": "Nangungunang {count} manlalaro sa {mode}",
   "columns": {
     "player": "Manlalaro",

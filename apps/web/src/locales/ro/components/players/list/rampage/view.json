@@ -1,5 +1,7 @@
 {
   "heading": "Cei mai buni jucători în <accent>{mode}</accent>",
+  "intro": "{mode} este un mod de eveniment din World of Tanks. Clasamentul din {region}, clasat după MR, cu un minim de 100 de bătălii în {mode}.",
+  "archived": "{mode} nu mai face parte din rotația curentă, așa că acest clasament nu este în mișcare.",
   "board": "Cei mai buni {count} jucători de {mode}",
   "columns": {
     "player": "Jucător",

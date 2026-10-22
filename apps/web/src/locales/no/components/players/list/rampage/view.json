@@ -1,5 +1,7 @@
 {
   "heading": "Beste spillere i <accent>{mode}</accent>",
+  "intro": "{mode} er en hendelsesmodus i World of Tanks. Rangeringen for {region}, rangert etter MR, med minimum 100 kamper i {mode}.",
+  "archived": "{mode} er ikke med i den nåværende rotasjonen, så denne rangeringen er ikke i bevegelse.",
   "board": "De {count} beste spillerne i {mode}",
   "columns": {
     "player": "Spiller",

@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Henüz dereceli Hücum oyuncusu yok.",
   "no-player-matches-the-current": "Mevcut filtrelerle eşleşen oyuncu yok.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

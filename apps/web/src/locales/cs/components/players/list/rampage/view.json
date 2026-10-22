@@ -1,5 +1,7 @@
 {
   "heading": "Nejlepší hráči v režimu <accent>{mode}</accent>",
+  "intro": "{mode} je událostní režim ve hře World of Tanks. Žebříček pro region {region}, hodnocený podle MR (minimum 100 bitev v režimu {mode}).",
+  "archived": "Režim {mode} není v aktuální rotaci, takže se tento žebříček nepohybuje.",
   "board": "Nejlepších {count} hráčů v režimu {mode}",
   "columns": {
     "player": "Hráč",

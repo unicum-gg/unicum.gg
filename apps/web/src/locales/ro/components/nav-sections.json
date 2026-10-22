@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Jucători de top",
       "description": "Clasamentul jucătorilor din toate timpurile"
+    },
+    "players-rampage": {
+      "description": "Cine s-a clasat cel mai sus în Exterminare."
     }
   }
 }

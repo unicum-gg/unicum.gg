@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Người chơi hàng đầu",
       "description": "Bảng xếp hạng người chơi mọi thời điểm"
+    },
+    "players-rampage": {
+      "description": "Ai được xếp hạng cao nhất trong Chiến đấu Tới cùng."
     }
   }
 }

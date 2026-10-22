@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "아직 랭크된 무한 결사전 플레이어들이 없습니다.",
   "no-player-matches-the-current": "현재 필터와 일치하는 플레이어가 없습니다.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

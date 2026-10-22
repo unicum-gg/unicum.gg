@@ -1,5 +1,7 @@
 {
   "heading": "Bedste spillere i <accent>{mode}</accent>",
+  "intro": "{mode} er en spiltilstand til en World of Tanks-begivenhed. Ranglisten for {region}, rangeret efter MR (minimum 100 {mode}-kampe).",
+  "archived": "{mode} er ikke i den nuværende rotation, så denne rangliste er ikke i bevægelse.",
   "board": "De bedste {count} spillere i {mode}",
   "columns": {
     "player": "Spiller",

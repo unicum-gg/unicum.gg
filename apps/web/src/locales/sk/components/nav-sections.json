@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Najlepší hráči",
       "description": "Rebríček hráčov za celé obdobie"
+    },
+    "players-rampage": {
+      "description": "Ktorí hráči boli najvyššie hodnotení v režime Rampage."
     }
   }
 }

@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "ยังไม่มีผู้เล่นการรบอาละวาดที่ได้รับการจัดอันดับ",
   "no-player-matches-the-current": "ไม่มีผู้เล่นที่ตรงกับตัวกรองปัจจุบัน",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

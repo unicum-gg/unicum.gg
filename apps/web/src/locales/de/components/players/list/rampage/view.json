@@ -1,5 +1,7 @@
 {
   "heading": "Top-Spieler in <accent>{mode}</accent>",
+  "intro": "{mode} ist ein World of Tanks-Ereignismodus. Rangliste für {region}, nach MR gewertet (Minimum: 100 {mode}-Gefechte).",
+  "archived": "{mode} ist nicht in der aktuellen Rotation, daher ist diese Rangliste nicht in Bewegung.",
   "board": "Top {count} {mode}-Spieler",
   "columns": {
     "player": "Spieler",

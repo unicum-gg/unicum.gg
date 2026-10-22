@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Nog geen gerangschikte Razernij-spelers.",
   "no-player-matches-the-current": "Geen enkele speler voldoet aan de huidige filters.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

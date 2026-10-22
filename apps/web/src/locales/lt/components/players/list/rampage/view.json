@@ -1,5 +1,7 @@
 {
   "heading": "Geriausi žaidėjai režime <accent>{mode}</accent>",
+  "intro": "World of Tanks įvykio režimas yra „{mode}“. Lyderių lentelė regione {region}, reitinguojama pagal MR (minimumas: 100 mūšių režime {mode}).",
+  "archived": "Režimo „{mode}“ nėra dabartinėje rotacijoje, todėl šio reitingo judėjimas sustojęs.",
   "board": "{count} geriausi režimo {mode} žaidėjai",
   "columns": {
     "player": "Žaidėjas",

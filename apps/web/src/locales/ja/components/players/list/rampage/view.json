@@ -1,5 +1,7 @@
 {
   "heading": "<accent>{mode}</accent>のトッププレイヤー",
+  "intro": "{mode}はWorld of Tanksのイベントモードです。{region}ランキングはMRによる順位付けです（{mode}での戦闘数は最小100）。",
+  "archived": "{mode}は現在のローテーションに含まれていないため、このランキングは移動していません。",
   "board": "{mode}のトップ{count}プレイヤー",
   "columns": {
     "player": "プレイヤー",

@@ -1,5 +1,7 @@
 {
   "heading": "Најбољи играчи у <accent>{mode}</accent>",
+  "intro": "Režim {mode} je režim događaja u igri World of Tanks. Rang-lista regiona {region}, rangirana prema MR-u, uz minimum od 100 bitaka u režimu {mode}.",
+  "archived": "Režim {mode} nije u trenutnoj rotaciji, pa se ovo rangiranje ne kreće.",
   "board": "Најбољих {count} играча у режиму {mode}",
   "columns": {
     "player": "Igrač",

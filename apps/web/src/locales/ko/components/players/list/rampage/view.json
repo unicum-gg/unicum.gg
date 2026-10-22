@@ -1,5 +1,7 @@
 {
   "heading": "<accent>{mode}</accent> 최고의 플레이어들",
+  "intro": "{mode}은 World of Tanks 이벤트 모드입니다. {region} 순위표는 MR 기준으로 랭크되며, 최소 {mode} 전투 100회가 필요합니다.",
+  "archived": "{mode}은 현재 로테이션에 없으므로 이 랭킹은 더 이상 이동하지 않습니다.",
   "board": "{mode} 최고의 플레이어 {count}명",
   "columns": {
     "player": "플레이어",

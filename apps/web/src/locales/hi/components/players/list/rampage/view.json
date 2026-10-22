@@ -1,5 +1,7 @@
 {
   "heading": "<accent>{mode}</accent> में शीर्ष खिलाड़ी",
+  "intro": "{mode}, World of Tanks का इवेंट मोड है। {region} का लीडरबोर्ड, MR के आधार पर रैंक्ड (न्यूनतम 100 {mode} युद्ध)।",
+  "archived": "{mode} वर्तमान रोटेशन में नहीं है, इसलिए यह रैंकिंग गतिमान नहीं है।",
   "board": "{mode} के शीर्ष {count} खिलाड़ी",
   "columns": {
     "player": "खिलाड़ी",

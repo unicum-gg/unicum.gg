@@ -1,5 +1,7 @@
 {
   "heading": "Najbolji igrači u <accent>{mode}</accent>",
+  "intro": "Način {mode} je događajni način igre World of Tanks. Ljestvica za regiju {region}, rangirana prema MR-u (minimum 100 bitaka u načinu {mode}).",
+  "archived": "{mode} nije u trenutnoj rotaciji pa se ovaj poredak ne mijenja.",
   "board": "Najboljih {count} igrača načina {mode}",
   "columns": {
     "player": "Igrač",

@@ -1,3 +1,6 @@
 {
-  "og-title": "Parhaat {mode}-pelaajat"
+  "title": "World of Tanksin parhaat pelaajat pelimuodossa {mode} ({region})",
+  "description": "Palvelun {name} tulostaulukko alueella {region}, pelimuodossa {mode}, rankattuna MR-arvosanamme mukaan (XP:n keskiarvo + voittoprosentti).",
+  "og-title": "Parhaat {mode}-pelaajat",
+  "og-subtitle": "Alueen {region} tulostaulukko"
 }

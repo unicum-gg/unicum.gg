@@ -1,5 +1,7 @@
 {
   "heading": "<accent>{mode}</accent> modundaki en iyi oyuncular",
+  "intro": "{mode}, World of Tanks etkinlik modudur. {region} liderlik tablosu, MR puanına göre derecelendirilmiştir (minimum 100 {mode} savaşı).",
+  "archived": "{mode} mevcut rotasyonda değil, bu nedenle bu sıralama hareketli değil.",
   "board": "En iyi {count} {mode} oyuncusu",
   "columns": {
     "player": "Oyuncu",

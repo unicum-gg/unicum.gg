@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Top giocatori",
       "description": "Classifica giocatori di tutti i tempi"
+    },
+    "players-rampage": {
+      "description": "Chi ha ottenuto la posizione più alta in Furia."
     }
   }
 }

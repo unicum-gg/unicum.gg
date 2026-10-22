@@ -1,5 +1,7 @@
 {
   "heading": "أفضل اللاعبين في <accent>{mode}</accent>",
+  "intro": "نمط {mode} هو نمط حدث في World of Tanks. قائمة المتصدرين في منطقة {region}، مصنّفة حسب MR، بحد أدنى 100 معركة في نمط {mode}.",
+  "archived": "نمط {mode} ليس ضمن التناوب الحالي، لذا لا يتحرك هذا التصنيف.",
   "board": "أفضل {count} لاعبين في {mode}",
   "columns": {
     "player": "لاعب",

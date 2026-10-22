@@ -1,5 +1,7 @@
 {
   "heading": "Legjobb játékosok a <accent>{mode}</accent> játékmódban",
+  "intro": "A World of Tanks egyik esemény-játékmódja a következő: {mode}. Ranglista a következő régióhoz: {region}, MR szerint rangsorolva, minimum 100 csata a következő játékmódban: {mode}.",
+  "archived": "A jelenlegi rotációban nem szerepel: {mode}, ezért ez nem mozgó ranglista.",
   "board": "A(z) {mode} legjobb {count} játékosa",
   "columns": {
     "player": "Játékos",

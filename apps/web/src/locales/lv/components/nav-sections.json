@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Top spēlētāji",
       "description": "Spēlētāju līderu saraksts visā vēsturē"
+    },
+    "players-rampage": {
+      "description": "Kurš Plosīšanās režīmā ieguva augstāko vietu."
     }
   }
 }

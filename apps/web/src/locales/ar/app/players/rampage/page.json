@@ -1,3 +1,6 @@
 {
-  "og-title": "أفضل لاعبي نمط {mode}"
+  "title": "أفضل لاعبي World of Tanks في نمط {mode} ({region})",
+  "description": "قائمة المتصدرين لـ {name} في منطقة {region} لنمط {mode}، مصنّفة حسب تقييم MR لدينا (متوسط XP + معدل الفوز).",
+  "og-title": "أفضل لاعبي نمط {mode}",
+  "og-subtitle": "قائمة المتصدرين في منطقة {region}"
 }

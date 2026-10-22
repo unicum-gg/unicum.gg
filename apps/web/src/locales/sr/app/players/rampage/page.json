@@ -1,3 +1,6 @@
 {
-  "og-title": "Најбоље рангирани igrači режима {mode}"
+  "title": "Najbolji igrači World of Tanks u režimu {mode} ({region})",
+  "description": "Rang-lista za {name} u regionu {region} za režim {mode}, rangirana prema našem MR rejtingu (prosečno XP + stopa pobeda).",
+  "og-title": "Најбоље рангирани igrači режима {mode}",
+  "og-subtitle": "Rang-lista regiona {region}"
 }

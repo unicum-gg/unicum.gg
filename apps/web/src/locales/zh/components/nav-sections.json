@@ -80,6 +80,9 @@
     "top-players": {
       "label": "顶级玩家",
       "description": "历史玩家排行榜"
+    },
+    "players-rampage": {
+      "description": "巅峰战中排名最高的玩家。"
     }
   }
 }

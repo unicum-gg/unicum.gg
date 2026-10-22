@@ -1,5 +1,7 @@
 {
   "heading": "Những người chơi hàng đầu trong <accent>{mode}</accent>",
+  "intro": "{mode} là chế độ sự kiện của World of Tanks. Bảng xếp hạng khu vực {region}, được xếp hạng theo MR (tối thiểu 100 trận đấu {mode}).",
+  "archived": "{mode} không nằm trong vòng xoay hiện tại, vì vậy bảng xếp hạng này không di chuyển.",
   "board": "{count} người chơi {mode} hàng đầu",
   "columns": {
     "player": "Người chơi",

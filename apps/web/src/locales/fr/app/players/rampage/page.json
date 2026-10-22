@@ -1,3 +1,6 @@
 {
-  "og-title": "Meilleurs joueurs de {mode}"
+  "title": "Meilleurs joueurs de World of Tanks en mode {mode} ({region})",
+  "description": "Classement de {name} pour la région {region}, pour le mode {mode}, classé selon notre notation MR (moyenne d’XP + taux de victoire).",
+  "og-title": "Meilleurs joueurs de {mode}",
+  "og-subtitle": "Classement de la région {region}"
 }

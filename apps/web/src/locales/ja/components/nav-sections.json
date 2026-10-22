@@ -80,6 +80,9 @@
     "top-players": {
       "label": "トッププレイヤー",
       "description": "全期間のプレイヤーランキング"
+    },
+    "players-rampage": {
+      "description": "乱戦で最も高い順位のプレイヤー。"
     }
   }
 }

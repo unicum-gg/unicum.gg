@@ -1,5 +1,7 @@
 {
   "heading": "Labākie spēlētāji režīmā <accent>{mode}</accent>",
+  "intro": "{mode} ir World of Tanks notikuma režīms. {region} līderu saraksts, ranžēts pēc MR (minimums 100 {mode} kaujas).",
+  "archived": "{mode} nav pašreizējā rotācijā, tāpēc šis reitings nav kustībā.",
   "board": "Labākie {count} spēlētāji režīmā {mode}",
   "columns": {
     "player": "Spēlētājs",

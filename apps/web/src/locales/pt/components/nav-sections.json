@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Top jogadores",
       "description": "Classificação histórica de jogadores"
+    },
+    "players-rampage": {
+      "description": "Quem alcançou a melhor posição em Fúria."
     }
   }
 }

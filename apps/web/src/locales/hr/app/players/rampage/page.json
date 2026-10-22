@@ -1,3 +1,6 @@
 {
-  "og-title": "Najbolji igrači načina {mode}"
+  "title": "Najbolji igrači World of Tanks u načinu {mode} ({region})",
+  "description": "Ljestvica {name} za regiju {region} i način {mode}, rangirana prema našoj MR ocjeni (prosjek XP-a + stopa pobjeda).",
+  "og-title": "Najbolji igrači načina {mode}",
+  "og-subtitle": "Ljestvica za regiju {region}"
 }

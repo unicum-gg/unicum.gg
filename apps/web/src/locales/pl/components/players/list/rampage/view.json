@@ -1,5 +1,7 @@
 {
   "heading": "Najlepsi gracze w trybie <accent>{mode}</accent>",
+  "intro": "{mode} to tryb wydarzenia w World of Tanks. Ranking w regionie {region}, ustalany według MR (minimum 100 bitew w trybie {mode}).",
+  "archived": "{mode} nie jest w obecnej rotacji, więc ten ranking nie jest w ruchu.",
   "board": "{count} najlepszych graczy w trybie {mode}",
   "columns": {
     "player": "Gracz",

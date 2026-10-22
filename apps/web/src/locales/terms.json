@@ -775,7 +775,8 @@
     "… track": "… الجنزير",
     "… turret ring": "… حلقة البرج",
     "… viewport": "… نافذة العرض",
-    "… vs modules": "… ضد الوحدات"
+    "… vs modules": "… ضد الوحدات",
+    "ranking": "التصنيف"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1553,7 +1554,8 @@
     "… track": "… гусеніца",
     "… turret ring": "… круг башні",
     "… viewport": "… поле агляду",
-    "… vs modules": "… супраць модуляў"
+    "… vs modules": "… супраць модуляў",
+    "ranking": "рэйтынг"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -1936,7 +1938,7 @@
     "Quartermaster": "Квартир-майстор",
     "Radio": "Радиостанции",
     "Rammed Single Charge": "Единично зареждане с трамбовка",
-    "Rampage": "Rampage",
+    "Rampage": "Буйство",
     "Random": "Случайна",
     "Random Battle": "Случайна битка",
     "Random Battles": "Случайни битки",
@@ -2545,7 +2547,8 @@
     "… track": "… верига",
     "… turret ring": "… пръстен на купола",
     "… viewport": "… зрителен прозорец",
-    "… vs modules": "… срещу модули"
+    "… vs modules": "… срещу модули",
+    "ranking": "класация"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3330,7 +3333,8 @@
     "… track": "… gusjenica",
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidno polje",
-    "… vs modules": "… protiv modula"
+    "… vs modules": "… protiv modula",
+    "ranking": "rangiranje"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3718,7 +3722,7 @@
     "Quartermaster": "Proviantní důstojník",
     "Radio": "Rádia",
     "Rammed Single Charge": "Posílený částečný náboj",
-    "Rampage": "Rampage",
+    "Rampage": "Běsnění",
     "Random": "Náhodná",
     "Random Battle": "Náhodná bitva",
     "Random Battles": "Náhodné bitvy",
@@ -4333,7 +4337,8 @@
     "… track": "… pás",
     "… turret ring": "… obrušovací kroužek",
     "… viewport": "… zorné pole",
-    "… vs modules": "… vs moduly"
+    "… vs modules": "… vs moduly",
+    "ranking": "žebříček"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4729,7 +4734,7 @@
     "Quartermaster": "Kvartermester",
     "Radio": "Radio",
     "Rammed Single Charge": "Indført enkelt-ladning",
-    "Rampage": "Rampage",
+    "Rampage": "Raseri",
     "Random": "Tilfældig",
     "Random Battle": "Standard kamp",
     "Random Battles": "Tilfældige Kampe",
@@ -5342,7 +5347,8 @@
     "… track": "… bælte",
     "… turret ring": "… tårnring",
     "… viewport": "… synsfelt",
-    "… vs modules": "… vs moduler"
+    "… vs modules": "… vs moduler",
+    "ranking": "rangliste"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5734,7 +5740,7 @@
     "Quartermaster": "Quartiermeister",
     "Radio": "Funkgerät",
     "Rammed Single Charge": "Angesetzte Einzelladung",
-    "Rampage": "Rampage",
+    "Rampage": "Verwüstung",
     "Random": "Zufall",
     "Random Battle": "Zufallsgefecht",
     "Random Battles": "Zufällige Schlachten",
@@ -6344,7 +6350,8 @@
     "… track": "… Kette",
     "… turret ring": "… Turm-Ring",
     "… viewport": "… Sichtfeld",
-    "… vs modules": "… vs Module"
+    "… vs modules": "… vs Module",
+    "ranking": "Rangliste"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6736,7 +6743,7 @@
     "Quartermaster": "Θησαυροφύλακας",
     "Radio": "Ασύρματος",
     "Rammed Single Charge": "Συμπιεσμένη Μονή Γόμωση",
-    "Rampage": "Rampage",
+    "Rampage": "Εφόρμηση",
     "Random": "Τυχαία",
     "Random Battle": "Τυχαία Μάχη",
     "Random Battles": "Τυχαίες Μάχες",
@@ -7352,7 +7359,8 @@
     "… track": "… ερπυστριο",
     "… turret ring": "… δαχτυλίδι πύργου",
     "… viewport": "… οπτικό πεδίο",
-    "… vs modules": "… εναντίον μονάδων"
+    "… vs modules": "… εναντίον μονάδων",
+    "ranking": "κατάταξη"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7729,7 +7737,7 @@
     "Quartermaster": "Oficial de intendencia",
     "Radio": "Radio",
     "Rammed Single Charge": "Carga individual embestida",
-    "Rampage": "Rampage",
+    "Rampage": "Devastación",
     "Random": "Aleatoria",
     "Random Battle": "Batalla aleatoria",
     "Random Battles": "Batallas Aleatorias",
@@ -8340,7 +8348,8 @@
     "… track": "… oruga",
     "… turret ring": "… anillo de torreta",
     "… viewport": "… visor",
-    "… vs modules": "… vs módulos"
+    "… vs modules": "… vs módulos",
+    "ranking": "clasificación"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8735,7 +8744,7 @@
     "Quartermaster": "Rahastonhoitaja",
     "Radio": "Radio",
     "Rammed Single Charge": "Ahdettu yksittäinen viritys",
-    "Rampage": "Rampage",
+    "Rampage": "Teräsmyrsky",
     "Random": "Satunnainen",
     "Random Battle": "Satunnaistaistelu",
     "Random Battles": "Satunnaista taistelua",
@@ -9352,7 +9361,8 @@
     "… track": "… ketju",
     "… turret ring": "… tornirenka",
     "… viewport": "… näkymäikkuna",
-    "… vs modules": "… vs moduulit"
+    "… vs modules": "… vs moduulit",
+    "ranking": "sijoitus"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9731,7 +9741,7 @@
     "Quartermaster": "Quartier-maître",
     "Radio": "Radio",
     "Rammed Single Charge": "Charge unique compacte",
-    "Rampage": "Rampage",
+    "Rampage": "Ravages",
     "Random": "Aléatoire",
     "Random Battle": "Bataille aléatoire",
     "Random Battles": "Batailles aléatoires",
@@ -10344,7 +10354,8 @@
     "… track": "… chenille",
     "… turret ring": "… couronne de tourelle",
     "… viewport": "… vitrage",
-    "… vs modules": "… vs modules"
+    "… vs modules": "… vs modules",
+    "ranking": "classement"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11123,7 +11134,8 @@
     "… track": "… ट्रैक",
     "… turret ring": "… टॉरट रिंग",
     "… viewport": "… व्यू पोर्ट",
-    "… vs modules": "… बनाम मॉड्यूल्स"
+    "… vs modules": "… बनाम मॉड्यूल्स",
+    "ranking": "रैंकिंग"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -11515,7 +11527,7 @@
     "Quartermaster": "Intendant",
     "Radio": "Radio",
     "Rammed Single Charge": "Nabijeni pojedinačni naboj",
-    "Rampage": "Rampage",
+    "Rampage": "Divljanje",
     "Random": "Slučajno",
     "Random Battle": "Slučajna bitka",
     "Random Battles": "Slučajne Bitke",
@@ -12129,7 +12141,8 @@
     "… track": "… gusjenica",
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidno polje",
-    "… vs modules": "… protiv modula"
+    "… vs modules": "… protiv modula",
+    "ranking": "poredak"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -12520,7 +12533,7 @@
     "Quartermaster": "Szállásmester",
     "Radio": "Rádió",
     "Rammed Single Charge": "Ütközéses egyszeri töltés",
-    "Rampage": "Rampage",
+    "Rampage": "Dühöngés",
     "Random": "Véletlenszerű",
     "Random Battle": "Normál csata",
     "Random Battles": "Véletlenszerű Csata",
@@ -13137,7 +13150,8 @@
     "… track": "… futómű",
     "… turret ring": "… toronygyűrű",
     "… viewport": "… kilátó",
-    "… vs modules": "… vs modulok"
+    "… vs modules": "… vs modulok",
+    "ranking": "ranglista"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -13526,7 +13540,7 @@
     "Quartermaster": "Tesoriere",
     "Radio": "Radio",
     "Rammed Single Charge": "Carica singola compressa",
-    "Rampage": "Rampage",
+    "Rampage": "Furia",
     "Random": "Casuale",
     "Random Battle": "Battaglia Casuale",
     "Random Battles": "Battaglie casuali",
@@ -14141,7 +14155,8 @@
     "… track": "… cingolo",
     "… turret ring": "… anello della torretta",
     "… viewport": "… finestrino",
-    "… vs modules": "… vs moduli"
+    "… vs modules": "… vs moduli",
+    "ranking": "classifica"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -14537,7 +14552,7 @@
     "Quartermaster": "需品科士官",
     "Radio": "無線機",
     "Rammed Single Charge": "加圧単一チャージ",
-    "Rampage": "Rampage",
+    "Rampage": "乱戦",
     "Random": "ランダム",
     "Random Battle": "ランダム戦",
     "Random Battles": "ランダムバトル",
@@ -15152,7 +15167,8 @@
     "… track": "… 履帯",
     "… turret ring": "… 砲塔リング",
     "… viewport": "… ビューポート",
-    "… vs modules": "… モジュール対抗"
+    "… vs modules": "… モジュール対抗",
+    "ranking": "ランキング"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15934,7 +15950,8 @@
     "… track": "… тракт",
     "… turret ring": "… башы сақинасы",
     "… viewport": "… көрініс терезесі",
-    "… vs modules": "… модульдерге қарсы"
+    "… vs modules": "… модульдерге қарсы",
+    "ranking": "рейтинг"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16333,7 +16350,7 @@
     "Quartermaster": "회계 장교",
     "Radio": "무전기",
     "Rammed Single Charge": "압축형 단일 장약",
-    "Rampage": "Rampage",
+    "Rampage": "무한 결사전",
     "Random": "무작위",
     "Random Battle": "무작위 전투",
     "Random Battles": "무작위 전투",
@@ -16950,7 +16967,8 @@
     "… track": "… 트랙",
     "… turret ring": "… 포탑 링",
     "… viewport": "… 뷰포트",
-    "… vs modules": "… 모듈 대"
+    "… vs modules": "… 모듈 대",
+    "ranking": "랭킹"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17346,7 +17364,7 @@
     "Quartermaster": "Iždininkas",
     "Radio": "Radio",
     "Rammed Single Charge": "Suspausta užkrova",
-    "Rampage": "Rampage",
+    "Rampage": "Siautėjimas",
     "Random": "Atsitiktinė",
     "Random Battle": "Atsitiktinis mūšis",
     "Random Battles": "Atsitiktinės kovos",
@@ -17961,7 +17979,8 @@
     "… track": "… pavažą",
     "… turret ring": "… bokštelio žiedas",
     "… viewport": "… vaizdo langas",
-    "… vs modules": "… vs moduliai"
+    "… vs modules": "… vs moduliai",
+    "ranking": "reitingas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18344,7 +18363,7 @@
     "Quartermaster": "Kvartirmeistars",
     "Radio": "Radiostacijas",
     "Rammed Single Charge": "Ielādēta vienreizējā uzlāde",
-    "Rampage": "Rampage",
+    "Rampage": "Plosīšanās",
     "Random": "Nejauša",
     "Random Battle": "Gadījuma kauja",
     "Random Battles": "Nejaušas kaujas",
@@ -18958,7 +18977,8 @@
     "… track": "… kloķis",
     "… turret ring": "… torvīša gredzens",
     "… viewport": "… skatījuma logs",
-    "… vs modules": "… pret moduļiem"
+    "… vs modules": "… pret moduļiem",
+    "ranking": "reitings"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19355,7 +19375,7 @@
     "Quartermaster": "Kwartiermeester",
     "Radio": "Radio",
     "Rammed Single Charge": "Geramde enkelvoudige lading",
-    "Rampage": "Rampage",
+    "Rampage": "Razernij",
     "Random": "Willekeurig",
     "Random Battle": "Willekeurig gevecht",
     "Random Battles": "Willekeurige Gevechten",
@@ -19971,7 +19991,8 @@
     "… track": "… rupsband",
     "… turret ring": "… koepelring",
     "… viewport": "… kijkopening",
-    "… vs modules": "… vs modules"
+    "… vs modules": "… vs modules",
+    "ranking": "ranglijst"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20360,7 +20381,7 @@
     "Quartermaster": "Finansoffiser",
     "Radio": "Radio",
     "Rammed Single Charge": "Rampet enkeltladning",
-    "Rampage": "Rampage",
+    "Rampage": "Ødeleggelse",
     "Random": "Tilfeldig",
     "Random Battle": "Tilfeldig kamp",
     "Random Battles": "Tilfeldige kamper",
@@ -20975,7 +20996,8 @@
     "… track": "… belte",
     "… turret ring": "… tårnring",
     "… viewport": "… visningsport",
-    "… vs modules": "… vs moduler"
+    "… vs modules": "… vs moduler",
+    "ranking": "rangering"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21363,7 +21385,7 @@
     "Quartermaster": "Kwatermistrz",
     "Radio": "Radia",
     "Rammed Single Charge": "Dobite pojedyncze doładowanie",
-    "Rampage": "Rampage",
+    "Rampage": "Rozwałka",
     "Random": "Losowa",
     "Random Battle": "Bitwa losowa",
     "Random Battles": "Bitwy losowe",
@@ -21976,7 +21998,8 @@
     "… track": "… gąsienica",
     "… turret ring": "… pierścień wieży",
     "… viewport": "… wizjer",
-    "… vs modules": "… w porównaniu do modułów"
+    "… vs modules": "… w porównaniu do modułów",
+    "ranking": "ranking"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22355,7 +22378,7 @@
     "Quartermaster": "Tesoureiro",
     "Radio": "Rádio",
     "Rammed Single Charge": "Carga Única Comprimida",
-    "Rampage": "Rampage",
+    "Rampage": "Fúria",
     "Random": "Aleatório",
     "Random Battle": "Batalha Aleatória",
     "Random Battles": "Batalhas aleatórias",
@@ -22970,7 +22993,8 @@
     "… track": "… esteira",
     "… turret ring": "… anel da torre",
     "… viewport": "… visor",
-    "… vs modules": "… vs módulos"
+    "… vs modules": "… vs módulos",
+    "ranking": "classificação"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23355,7 +23379,7 @@
     "Quartermaster": "Intendent",
     "Radio": "Radio",
     "Rammed Single Charge": "Încărcare parțială accelerată",
-    "Rampage": "Rampage",
+    "Rampage": "Exterminare",
     "Random": "Standard",
     "Random Battle": "Luptă standard",
     "Random Battles": "Bătălii aleatorii",
@@ -23964,7 +23988,8 @@
     "… track": "… șenile",
     "… turret ring": "… inel turelă",
     "… viewport": "… fereastră de vizualizare",
-    "… vs modules": "… vs module"
+    "… vs modules": "… vs module",
+    "ranking": "clasament"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24946,7 +24971,8 @@
     "… track": "… гусеница",
     "… turret ring": "… обод башни",
     "… viewport": "… обзорное окно",
-    "… vs modules": "… против модулей"
+    "… vs modules": "… против модулей",
+    "ranking": "рейтинг"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25729,7 +25755,8 @@
     "… track": "… pás",
     "… turret ring": "… kruh veže",
     "… viewport": "… pohľadové okno",
-    "… vs modules": "… vs moduly"
+    "… vs modules": "… vs moduly",
+    "ranking": "lestvica"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26123,7 +26150,7 @@
     "Quartermaster": "Intendant",
     "Radio": "Radio",
     "Rammed Single Charge": "Nabijeno jedno punjenje",
-    "Rampage": "Rampage",
+    "Rampage": "Boj do poslednjeg",
     "Random": "Nasumični",
     "Random Battle": "Slučajne borba",
     "Random Battles": "Nasumične bitke",
@@ -26737,7 +26764,8 @@
     "… track": "… gusenica",
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidni otvor",
-    "… vs modules": "… protiv modula"
+    "… vs modules": "… protiv modula",
+    "ranking": "rangiranje"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27134,7 +27162,7 @@
     "Quartermaster": "Kvartermästare",
     "Radio": "Radio",
     "Rammed Single Charge": "Snabbare enkelladdning",
-    "Rampage": "Rampage",
+    "Rampage": "Härjning",
     "Random": "Slumpvis",
     "Random Battle": "Slumpvis matchad strid",
     "Random Battles": "Slumptävlingar",
@@ -27750,7 +27778,8 @@
     "… track": "… kedja",
     "… turret ring": "… tornring",
     "… viewport": "… synfält",
-    "… vs modules": "… vs moduler"
+    "… vs modules": "… vs moduler",
+    "ranking": "ranking"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28142,7 +28171,7 @@
     "Quartermaster": "นายทหารส่งกำลัง",
     "Radio": "วิทยุ",
     "Rammed Single Charge": "ประจุเดียวพุ่งชน",
-    "Rampage": "Rampage",
+    "Rampage": "การรบอาละวาด",
     "Random": "สุ่ม",
     "Random Battle": "การรบแบบสุ่ม",
     "Random Battles": "การต่อสู้แบบสุ่ม",
@@ -28759,7 +28788,8 @@
     "… track": "… เส้นทาง",
     "… turret ring": "… แหวนหอคอย",
     "… viewport": "… มุมมองภาพ",
-    "… vs modules": "… ปะทะโมดูล"
+    "… vs modules": "… ปะทะโมดูล",
+    "ranking": "อันดับ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29543,7 +29573,8 @@
     "… track": "… trak",
     "… turret ring": "… singsing ng tore",
     "… viewport": "… viewport",
-    "… vs modules": "… laban sa mga module"
+    "… vs modules": "… laban sa mga module",
+    "ranking": "ranggo"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -29937,7 +29968,7 @@
     "Quartermaster": "Levazım Subayı",
     "Radio": "Telsiz",
     "Rammed Single Charge": "Çarpma Tek Şarj",
-    "Rampage": "Rampage",
+    "Rampage": "Hücum",
     "Random": "Rastgele",
     "Random Battle": "Rastgele Savaş",
     "Random Battles": "Rastgele Savaşlar",
@@ -30548,7 +30579,8 @@
     "… track": "… palet",
     "… turret ring": "… kule halka",
     "… viewport": "… görüntü penceresi",
-    "… vs modules": "… modüllere karşı"
+    "… vs modules": "… modüllere karşı",
+    "ranking": "sıralama"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31546,7 +31578,8 @@
     "… track": "… гусениця",
     "… turret ring": "… кільце башти",
     "… viewport": "… оглядове вікно",
-    "… vs modules": "… проти модулів"
+    "… vs modules": "… проти модулів",
+    "ranking": "рейтинг"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -31930,7 +31963,7 @@
     "Quartermaster": "Sĩ quan Hậu cần",
     "Radio": "Radio",
     "Rammed Single Charge": "Sạc đơn nhồi",
-    "Rampage": "Rampage",
+    "Rampage": "Chiến đấu Tới cùng",
     "Random": "Ngẫu nhiên",
     "Random Battle": "Trận đấu Ngẫu nhiên",
     "Random Battles": "Trận đấu ngẫu nhiên",
@@ -32533,7 +32566,8 @@
     "… track": "… xích",
     "… turret ring": "… vành tháp pháo",
     "… viewport": "… kính quan sát",
-    "… vs modules": "… so với các mô-đun"
+    "… vs modules": "… so với các mô-đun",
+    "ranking": "xếp hạng"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -32929,7 +32963,7 @@
     "Quartermaster": "财务官",
     "Radio": "无线电台",
     "Rammed Single Charge": "加速型应急补能",
-    "Rampage": "Rampage",
+    "Rampage": "巅峰战",
     "Random": "随机",
     "Random Battle": "标准模式",
     "Random Battles": "随机战斗",
@@ -33542,6 +33576,7 @@
     "… track": "… 履带",
     "… turret ring": "… 炮塔环",
     "… viewport": "… 视口",
-    "… vs modules": "… 对模块"
+    "… vs modules": "… 对模块",
+    "ranking": "排名"
   }
 }

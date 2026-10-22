@@ -80,6 +80,9 @@
     "top-players": {
       "label": "상위 플레이어들",
       "description": "전체 기간 플레이어 순위표"
+    },
+    "players-rampage": {
+      "description": "무한 결사전에서 가장 높게 랭크된 플레이어들"
     }
   }
 }

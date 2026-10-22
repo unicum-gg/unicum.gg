@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Még nincsenek rangsorolt játékosok a Dühöngésben.",
   "no-player-matches-the-current": "Egyetlen játékos sem felel meg a jelenlegi szűrőknek.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

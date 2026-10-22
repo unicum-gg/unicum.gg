@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Aucun joueur de Ravages classé pour le moment.",
   "no-player-matches-the-current": "Aucun joueur ne correspond aux filtres actuels.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

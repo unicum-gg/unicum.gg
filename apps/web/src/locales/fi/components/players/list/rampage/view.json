@@ -1,5 +1,7 @@
 {
   "heading": "Parhaat pelaajat pelimuodossa <accent>{mode}</accent>",
+  "intro": "{mode} on World of Tanksin tapahtumapelimuoto. Alueen {region} tulostaulukko on rankattu MR:n mukaan, vähintään 100 taistelua pelimuodossa {mode}.",
+  "archived": "{mode} ei kuulu nykyiseen kiertoon, joten tämä sijoitus ei muutu.",
   "board": "{count} parasta pelimuodon {mode} pelaajaa",
   "columns": {
     "player": "Pelaaja",

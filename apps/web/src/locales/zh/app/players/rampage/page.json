@@ -1,3 +1,6 @@
 {
-  "og-title": "最佳{mode}玩家"
+  "title": "World of Tanks {mode}模式顶尖玩家（{region}）",
+  "description": "{name}{region}地区的{mode}模式排行榜，按我们的 MR 评分排名（平均经验值 + 胜利比率）。",
+  "og-title": "最佳{mode}玩家",
+  "og-subtitle": "{region}地区排行榜"
 }

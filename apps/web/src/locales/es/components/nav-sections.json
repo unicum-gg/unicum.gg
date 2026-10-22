@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Mejores jugadores",
       "description": "Tabla clasificatoria histórica de jugadores"
+    },
+    "players-rampage": {
+      "description": "Quién obtuvo el puesto más alto en Devastación."
     }
   }
 }

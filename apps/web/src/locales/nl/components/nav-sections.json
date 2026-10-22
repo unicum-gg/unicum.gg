@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Top spelers",
       "description": "Klassement aller tijden voor spelers"
+    },
+    "players-rampage": {
+      "description": "Wie het hoogst gerangschikt is in Razernij."
     }
   }
 }

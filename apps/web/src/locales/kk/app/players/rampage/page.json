@@ -1,3 +1,6 @@
 {
-  "og-title": "Үздік {mode} ойыншылары"
+  "title": "World of Tanks {mode} бойынша үздік ойыншылар ({region})",
+  "description": "{name} {region} {mode} бойынша жетекші таблицасы, біздің MR рейтингіміз бойынша рейтингтік (орташа XP + жеңіс пайызы).",
+  "og-title": "Үздік {mode} ойыншылары",
+  "og-subtitle": "{region} жетекші таблицасы"
 }

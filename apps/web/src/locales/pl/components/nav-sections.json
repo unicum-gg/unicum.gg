@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Najlepsi gracze",
       "description": "Klasyfikacja graczy wszech czasów"
+    },
+    "players-rampage": {
+      "description": "Kto zajął najwyższe miejsce w Rozwałce."
     }
   }
 }

@@ -1,3 +1,6 @@
 {
-  "og-title": "Cei mai buni jucători în modul {mode}"
+  "title": "Cei mai buni jucători de World of Tanks pentru {mode} ({region})",
+  "description": "Clasamentul {name} din {region} pentru {mode}, clasat după ratingul nostru MR (medie XP + rată de victorii).",
+  "og-title": "Cei mai buni jucători în modul {mode}",
+  "og-subtitle": "Clasament din {region}"
 }

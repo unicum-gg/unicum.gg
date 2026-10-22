@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Top-Spieler",
       "description": "Ewige Bestenliste der Spieler"
+    },
+    "players-rampage": {
+      "description": "Wer in Verwüstung den höchsten Rang erreicht hat."
     }
   }
 }

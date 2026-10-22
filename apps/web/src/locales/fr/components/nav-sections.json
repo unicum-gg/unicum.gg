@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Meilleurs joueurs",
       "description": "Classement des joueurs de tous les temps"
+    },
+    "players-rampage": {
+      "description": "Qui a obtenu le meilleur classement en Ravages."
     }
   }
 }

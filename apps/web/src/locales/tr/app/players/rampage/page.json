@@ -1,3 +1,6 @@
 {
-  "og-title": "En iyi {mode} oyuncuları"
+  "title": "En iyi World of Tanks {mode} oyuncuları ({region})",
+  "description": "{name} {region} {mode} liderlik tablosu, ortalama CP ve kazanma oranından oluşan MR puanımıza göre derecelendirilmiştir.",
+  "og-title": "En iyi {mode} oyuncuları",
+  "og-subtitle": "{region} liderlik tablosu"
 }

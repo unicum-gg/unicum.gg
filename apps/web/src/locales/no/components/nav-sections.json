@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Topp spillere",
       "description": "Spillerrangering totalt"
+    },
+    "players-rampage": {
+      "description": "Hvem som er høyest rangert i Ødeleggelse."
     }
   }
 }

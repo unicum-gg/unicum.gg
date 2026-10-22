@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Ingen rangerte spillere i Ødeleggelse ennå.",
   "no-player-matches-the-current": "Ingen spiller samsvarer med de nåværende filtrene.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

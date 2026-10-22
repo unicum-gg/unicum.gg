@@ -1,3 +1,6 @@
 {
-  "og-title": "ผู้เล่นโหมด {mode} อันดับสูงสุด"
+  "title": "ผู้เล่น World of Tanks {mode} อันดับสูงสุด ({region})",
+  "description": "ตารางอันดับของ {name} {region} สำหรับ{mode} จัดอันดับด้วยคะแนนประเมิน MR ของเรา (XP เฉลี่ย + อัตราชนะ)",
+  "og-title": "ผู้เล่นโหมด {mode} อันดับสูงสุด",
+  "og-subtitle": "ตารางอันดับของ{region}"
 }

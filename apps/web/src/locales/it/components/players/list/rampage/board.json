@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Non ci sono ancora giocatori di Furia classificati.",
   "no-player-matches-the-current": "Nessun giocatore corrisponde ai filtri attuali.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Parhaat pelaajat",
       "description": "Pelaajien kaikkien aikojen tulostaulukko"
+    },
+    "players-rampage": {
+      "description": "Ketkä saavuttivat korkeimman sijoituksen Teräsmyrskyssä."
     }
   }
 }

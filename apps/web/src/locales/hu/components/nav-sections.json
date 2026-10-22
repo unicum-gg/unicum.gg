@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Legjobb játékosok",
       "description": "Játékosok teljes idős ranglistája"
+    },
+    "players-rampage": {
+      "description": "Kik értek el legmagasabb helyezést a Dühöngésben?"
     }
   }
 }

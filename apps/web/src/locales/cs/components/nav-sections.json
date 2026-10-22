@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Nejlepší hráči",
       "description": "Žebříček za celou dobu v kategorii Hráč"
+    },
+    "players-rampage": {
+      "description": "Kdo se umístil nejvýše v režimu Běsnění."
     }
   }
 }

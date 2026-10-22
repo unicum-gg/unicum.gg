@@ -1,5 +1,7 @@
 {
   "heading": "Melhores jogadores no modo <accent>{mode}</accent>",
+  "intro": "{mode} é um modo de evento de World of Tanks. A classificação para {region}, classificatória por MR (mínimo de 100 batalhas de {mode}).",
+  "archived": "{mode} não está na rotação atual, então esta classificação não está em movimento.",
   "board": "Os {count} melhores jogadores no modo {mode}",
   "columns": {
     "player": "Jogador",

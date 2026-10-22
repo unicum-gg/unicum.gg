@@ -1,3 +1,6 @@
 {
-  "og-title": "Người chơi {mode} hàng đầu"
+  "title": "Người chơi {mode} hàng đầu của World of Tanks ({region})",
+  "description": "Bảng xếp hạng {mode} tại {region} của {name}, được xếp hạng theo chỉ số đánh giá MR của chúng tôi (XP trung bình + tỷ lệ thắng).",
+  "og-title": "Người chơi {mode} hàng đầu",
+  "og-subtitle": "Bảng xếp hạng khu vực {region}"
 }

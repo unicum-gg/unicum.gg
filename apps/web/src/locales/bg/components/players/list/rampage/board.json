@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Все още не са класирани игачи в Буйство.",
   "no-player-matches-the-current": "Няма играч, отговарящ на текущите филтри.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

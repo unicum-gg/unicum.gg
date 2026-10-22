@@ -1,3 +1,6 @@
 {
-  "og-title": "{mode}プレイヤー上位"
+  "title": "World of Tanksの{mode}上位プレイヤー（{region}）",
+  "description": "{name}の{region}における{mode}ランキング。平均XPと勝率によるMRレーティングで順位付けされています。",
+  "og-title": "{mode}プレイヤー上位",
+  "og-subtitle": "{region}ランキング"
 }

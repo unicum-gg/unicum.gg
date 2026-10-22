@@ -1,3 +1,6 @@
 {
-  "og-title": "शीर्ष {mode} खिलाड़ी"
+  "title": "World of Tanks में {mode} के शीर्ष खिलाड़ी ({region})",
+  "description": "{name} के {region} का {mode} लीडरबोर्ड, हमारी MR रेटिंग (औसत XP + जीत दर) के आधार पर रैंक्ड।",
+  "og-title": "शीर्ष {mode} खिलाड़ी",
+  "og-subtitle": "{region} का लीडरबोर्ड"
 }

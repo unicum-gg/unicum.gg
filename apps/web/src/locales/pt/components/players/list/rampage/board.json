@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Ainda não há jogadores de Fúria classificados.",
   "no-player-matches-the-current": "Nenhum jogador corresponde aos filtros atuais.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

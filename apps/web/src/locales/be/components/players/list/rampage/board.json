@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Пакуль няма рэйтынгавых гульцоў у Rampage.",
   "no-player-matches-the-current": "Няма гульца, які адпавядае бягучым фільтрам.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

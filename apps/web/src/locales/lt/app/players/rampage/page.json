@@ -1,3 +1,6 @@
 {
-  "og-title": "Geriausi {mode} žaidėjai"
+  "title": "Geriausi World of Tanks žaidėjai režime {mode} ({region} regione)",
+  "description": "{name} {region} regiono lyderių lentelė režimui {mode}, reitinguojama pagal mūsų MR reitingą (vidutinis XP + pergalių rodiklis).",
+  "og-title": "Geriausi {mode} žaidėjai",
+  "og-subtitle": "{region} regiono lyderių lentelė"
 }

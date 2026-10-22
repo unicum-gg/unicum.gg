@@ -1,3 +1,6 @@
 {
-  "og-title": "최고의 {mode} 플레이어들"
+  "title": "World of Tanks {mode} 최고 플레이어들 ({region})",
+  "description": "{name} {region} {mode} 순위표, 당사의 MR 평점(평균 XP + 승리 비율)으로 랭크됨.",
+  "og-title": "최고의 {mode} 플레이어들",
+  "og-subtitle": "{region} 순위표"
 }

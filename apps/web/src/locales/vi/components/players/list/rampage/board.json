@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Chưa có người chơi Chiến đấu Tới cùng nào được xếp hạng.",
   "no-player-matches-the-current": "Không có người chơi nào khớp với các bộ lọc hiện tại.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

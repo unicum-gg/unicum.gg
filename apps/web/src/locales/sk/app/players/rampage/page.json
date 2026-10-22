@@ -1,3 +1,6 @@
 {
-  "og-title": "Najlepší hráči režimu {mode}"
+  "title": "Najlepší hráči World of Tanks v režime {mode} ({region})",
+  "description": "Rebríček pre {name} v regióne {region} a režime {mode}, hodnotený podľa nášho hodnotenia MR (povrečno XP + miera víťazstiev).",
+  "og-title": "Najlepší hráči režimu {mode}",
+  "og-subtitle": "Rebríček regiónu {region}"
 }

@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Najbolji igrači",
       "description": "Ljestvica igrača za cijelo vrijeme"
+    },
+    "players-rampage": {
+      "description": "Tko je najbolje rangiran u Divljanju."
     }
   }
 }

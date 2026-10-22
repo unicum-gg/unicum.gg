@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Geriausi žaidėjai",
       "description": "Viso laiko žaidėjų lyderių lentelė"
+    },
+    "players-rampage": {
+      "description": "Kas užėmė aukščiausią vietą Siautėjime."
     }
   }
 }

@@ -1,3 +1,6 @@
 {
-  "og-title": "Pinakamahuhusay na mga manlalaro ng {mode}"
+  "title": "Mga nangungunang manlalaro ng {mode} sa World of Tanks ({region})",
+  "description": "Talaan ng ranggo ng {name} sa {region} para sa {mode}, ranked ayon sa aming MR rating (karaniwang XP + rate ng panalo).",
+  "og-title": "Pinakamahuhusay na mga manlalaro ng {mode}",
+  "og-subtitle": "Talaan ng ranggo sa {region}"
 }

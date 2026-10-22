@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Top spillere",
       "description": "Spillerrangliste gennem hele historikken"
+    },
+    "players-rampage": {
+      "description": "Hvem der blev rangeret højest i Raseri."
     }
   }
 }

@@ -80,6 +80,9 @@
     "top-players": {
       "label": "En iyi oyuncular",
       "description": "Tüm zamanların oyuncu liderlik tablosu"
+    },
+    "players-rampage": {
+      "description": "Hücum’da en üst sırada yer alan oyuncular."
     }
   }
 }

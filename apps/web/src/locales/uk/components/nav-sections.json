@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Топ гравці",
       "description": "Таблиця лідерів гравців за весь час"
+    },
+    "players-rampage": {
+      "description": "Хто посів найвище місце в Rampage."
     }
   }
 }

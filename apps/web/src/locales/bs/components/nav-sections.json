@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Najbolji igrači",
       "description": "Ljestvica igrača svih vremena"
+    },
+    "players-rampage": {
+      "description": "Ko je imao najvišu poziciju u režimu Rampage."
     }
   }
 }

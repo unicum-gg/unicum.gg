@@ -1,3 +1,6 @@
 {
-  "og-title": "Beste {mode}-spillere"
+  "title": "Beste World of Tanks-spillere i {mode} ({region})",
+  "description": "Rangering for {name} i {region} og {mode}, rangert etter vår MR-vurdering (gjennomsnittlig XP + seiersrate).",
+  "og-title": "Beste {mode}-spillere",
+  "og-subtitle": "Rangering for {region}"
 }

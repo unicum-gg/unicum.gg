@@ -1,5 +1,7 @@
 {
   "heading": "Top spelers in <accent>{mode}</accent>",
+  "intro": "{mode} is een evenementspeltype van World of Tanks. Het klassement voor {region}, gerangschikt op basis van MR (minimum 100 {mode}-gevechten).",
+  "archived": "{mode} maakt geen deel uit van de huidige rotatie, dus deze ranglijst verandert niet.",
   "board": "Top {count} spelers in {mode}",
   "columns": {
     "player": "Speler",

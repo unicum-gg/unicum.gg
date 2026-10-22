@@ -80,6 +80,9 @@
     "top-players": {
       "label": "Topp spelare",
       "description": "Topplista för spelare genom tiderna"
+    },
+    "players-rampage": {
+      "description": "Spelare med högst placering i Härjning."
     }
   }
 }

@@ -80,6 +80,9 @@
     "top-players": {
       "label": "शीर्ष खिलाड़ी",
       "description": "अब तक का खिलाड़ी लीडरबोर्ड"
+    },
+    "players-rampage": {
+      "description": "Rampage में सबसे ऊँची रैंक वाले खिलाड़ी।"
     }
   }
 }

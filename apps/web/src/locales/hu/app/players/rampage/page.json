@@ -1,3 +1,6 @@
 {
-  "og-title": "Legjobb játékosok: {mode}"
+  "title": "A World of Tanks {mode} játékmódjának legjobb játékosai ({region})",
+  "description": "{name} {region} régiós ranglistája {mode} játékmódban, a saját MR értékelésünk szerint rangsorolva (átlagos XP + győzelmi arány).",
+  "og-title": "Legjobb játékosok: {mode}",
+  "og-subtitle": "{region} régiós ranglista"
 }

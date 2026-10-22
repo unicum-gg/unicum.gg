@@ -1,5 +1,7 @@
 {
   "heading": "Meilleurs joueurs de <accent>{mode}</accent>",
+  "intro": "{mode} est un mode événement de World of Tanks. Classement de la région {region}, classé selon le MR, avec un minimum de 100 batailles en mode {mode}.",
+  "archived": "{mode} ne fait pas partie de la rotation actuelle, ce classement n’est donc pas en déplacement.",
   "board": "Les {count} meilleurs joueurs de {mode}",
   "columns": {
     "player": "Joueur",

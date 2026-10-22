@@ -1,6 +1,7 @@
 {
+  "no-ranked-rampage-players": "Noch keine gewerteten Verwüstung-Spieler.",
   "no-player-matches-the-current": "Kein spieler entspricht den aktuellen Filtern.",
   "wr": "WR",
-  "hr": "HR",
-  "hrb": "HRB"
+  "mr": "MR",
+  "mrb": "MRB"
 }

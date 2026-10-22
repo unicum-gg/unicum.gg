@@ -1,5 +1,7 @@
 {
   "heading": "Topp spelare i <accent>{mode}</accent>",
+  "intro": "{mode} är ett evenemangsläge i World of Tanks. Topplistan för {region}, rankad efter MR (minimum 100 strider i {mode}).",
+  "archived": "{mode} finns inte i den aktuella rotationen, så denna ranking är inte rörlig.",
   "board": "Topp {count} spelare i {mode}",
   "columns": {
     "player": "Spelare",
