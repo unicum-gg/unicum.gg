@@ -18,6 +18,7 @@
   "example-unicum-gg-world-of": "unicum.ggのWorld of Tanksプレイヤー戦績カードの例",
   "eyebrow": "Discordボット",
   "hero": "{player}、{clan}、{tank}、{maps}の戦績をDiscordで確認",
+  "listed-on": "掲載先",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "Discordボット",
   "one-click-adds": "ワンクリックでボットをサーバーに追加し、{discord}にも参加できます。",

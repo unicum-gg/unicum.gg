@@ -18,6 +18,7 @@
   "example-unicum-gg-world-of": "Példa egy unicum.gg World of Tanks játékosstatisztikai kártyára",
   "eyebrow": "Discord bot",
   "hero": "Statisztikák közvetlenül a Discordodon: {player}, {clan}, {tank} és {maps}",
+  "listed-on": "Listázva itt",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "Discord bot",
   "one-click-adds": "Egy kattintással hozzáadhatod a botot a szerveredhez, és csatlakozhatsz a közösségünkhöz itt: {discord}.",

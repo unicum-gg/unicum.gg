@@ -18,6 +18,7 @@
   "example-unicum-gg-world-of": "unicum.gg World of Tanks 玩家数据卡片示例",
   "eyebrow": "Discord 机器人",
   "hero": "{player}、{clan}、{tank}和{maps}数据，直接显示在你的 Discord 中",
+  "listed-on": "收录于",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "Discord 机器人",
   "one-click-adds": "点击一次即可将机器人添加到你的服务器，并加入我们的{discord}。",

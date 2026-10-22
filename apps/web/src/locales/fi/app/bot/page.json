@@ -18,6 +18,7 @@
   "example-unicum-gg-world-of": "Esimerkki unicum.gg:n World of Tanks -pelaajan tilastokortista",
   "eyebrow": "Discord-botti",
   "hero": "{player}-, {clan}-, {tank}- ja {maps}-tilastot suoraan Discordissasi",
+  "listed-on": "Listattu palvelussa",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "Discord-botti",
   "one-click-adds": "Yksi napsautus lisää botin palvelimellesi ja tuo sinut {discord}imme.",

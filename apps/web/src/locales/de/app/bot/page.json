@@ -18,6 +18,7 @@
   "example-unicum-gg-world-of": "Beispiel für eine unicum.gg-Statistikkarte eines World of Tanks-Spielers",
   "eyebrow": "Discord Bot",
   "hero": "Statistiken zu {player}, {clan}, {tank} und {maps}, direkt in deinem Discord",
+  "listed-on": "Gelistet auf",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "Discord Bot",
   "one-click-adds": "Mit einem Klick fügst du den Bot deinem Server hinzu und trittst unserem {discord} bei.",

@@ -775,7 +775,8 @@
     "… turret ring": "… حلقة البرج",
     "… viewport": "… نافذة العرض",
     "… vs modules": "… ضد الوحدات",
-    "ranking": "التصنيف"
+    "ranking": "التصنيف",
+    "Listed on": "مدرج على"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1553,7 +1554,8 @@
     "… turret ring": "… круг башні",
     "… viewport": "… поле агляду",
     "… vs modules": "… супраць модуляў",
-    "ranking": "рэйтынг"
+    "ranking": "рэйтынг",
+    "Listed on": "Размешчана на"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2545,7 +2547,8 @@
     "… turret ring": "… пръстен на купола",
     "… viewport": "… зрителен прозорец",
     "… vs modules": "… срещу модули",
-    "ranking": "класация"
+    "ranking": "класация",
+    "Listed on": "Посочено в"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3330,7 +3333,8 @@
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidno polje",
     "… vs modules": "… protiv modula",
-    "ranking": "rangiranje"
+    "ranking": "rangiranje",
+    "Listed on": "Navedeno na"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4333,7 +4337,8 @@
     "… turret ring": "… obrušovací kroužek",
     "… viewport": "… zorné pole",
     "… vs modules": "… vs moduly",
-    "ranking": "žebříček"
+    "ranking": "žebříček",
+    "Listed on": "Uvedeno na"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5342,7 +5347,8 @@
     "… turret ring": "… tårnring",
     "… viewport": "… synsfelt",
     "… vs modules": "… vs moduler",
-    "ranking": "rangliste"
+    "ranking": "rangliste",
+    "Listed on": "Listet på"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6344,7 +6350,8 @@
     "… turret ring": "… Turm-Ring",
     "… viewport": "… Sichtfeld",
     "… vs modules": "… vs Module",
-    "ranking": "Rangliste"
+    "ranking": "Rangliste",
+    "Listed on": "Gelistet auf"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7352,7 +7359,8 @@
     "… turret ring": "… δαχτυλίδι πύργου",
     "… viewport": "… οπτικό πεδίο",
     "… vs modules": "… εναντίον μονάδων",
-    "ranking": "κατάταξη"
+    "ranking": "κατάταξη",
+    "Listed on": "Καταχωρισμένο σε"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8340,7 +8348,8 @@
     "… turret ring": "… anillo de torreta",
     "… viewport": "… visor",
     "… vs modules": "… vs módulos",
-    "ranking": "clasificación"
+    "ranking": "clasificación",
+    "Listed on": "Listado en"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9352,7 +9361,8 @@
     "… turret ring": "… tornirenka",
     "… viewport": "… näkymäikkuna",
     "… vs modules": "… vs moduulit",
-    "ranking": "sijoitus"
+    "ranking": "sijoitus",
+    "Listed on": "Listattu palvelussa"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10344,7 +10354,8 @@
     "… turret ring": "… couronne de tourelle",
     "… viewport": "… vitrage",
     "… vs modules": "… vs modules",
-    "ranking": "classement"
+    "ranking": "classement",
+    "Listed on": "Répertorié sur"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11123,7 +11134,8 @@
     "… turret ring": "… टॉरट रिंग",
     "… viewport": "… व्यू पोर्ट",
     "… vs modules": "… बनाम मॉड्यूल्स",
-    "ranking": "रैंकिंग"
+    "ranking": "रैंकिंग",
+    "Listed on": "पर सूचीबद्ध"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12129,7 +12141,8 @@
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidno polje",
     "… vs modules": "… protiv modula",
-    "ranking": "poredak"
+    "ranking": "poredak",
+    "Listed on": "Navedeno na"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13137,7 +13150,8 @@
     "… turret ring": "… toronygyűrű",
     "… viewport": "… kilátó",
     "… vs modules": "… vs modulok",
-    "ranking": "ranglista"
+    "ranking": "ranglista",
+    "Listed on": "Listázva itt"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14141,7 +14155,8 @@
     "… turret ring": "… anello della torretta",
     "… viewport": "… finestrino",
     "… vs modules": "… vs moduli",
-    "ranking": "classifica"
+    "ranking": "classifica",
+    "Listed on": "Elencato su"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15152,7 +15167,8 @@
     "… turret ring": "… 砲塔リング",
     "… viewport": "… ビューポート",
     "… vs modules": "… モジュール対抗",
-    "ranking": "ランキング"
+    "ranking": "ランキング",
+    "Listed on": "掲載先"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15934,7 +15950,8 @@
     "… turret ring": "… башы сақинасы",
     "… viewport": "… көрініс терезесі",
     "… vs modules": "… модульдерге қарсы",
-    "ranking": "рейтинг"
+    "ranking": "рейтинг",
+    "Listed on": "Көрсетілген орны"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16950,7 +16967,8 @@
     "… turret ring": "… 포탑 링",
     "… viewport": "… 뷰포트",
     "… vs modules": "… 모듈 대",
-    "ranking": "랭킹"
+    "ranking": "랭킹",
+    "Listed on": "게시 위치"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17961,7 +17979,8 @@
     "… turret ring": "… bokštelio žiedas",
     "… viewport": "… vaizdo langas",
     "… vs modules": "… vs moduliai",
-    "ranking": "reitingas"
+    "ranking": "reitingas",
+    "Listed on": "Nurodyta svetainėje"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18958,7 +18977,8 @@
     "… turret ring": "… torvīša gredzens",
     "… viewport": "… skatījuma logs",
     "… vs modules": "… pret moduļiem",
-    "ranking": "reitings"
+    "ranking": "reitings",
+    "Listed on": "Publicēts vietnē"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -19971,7 +19991,8 @@
     "… turret ring": "… koepelring",
     "… viewport": "… kijkopening",
     "… vs modules": "… vs modules",
-    "ranking": "ranglijst"
+    "ranking": "ranglijst",
+    "Listed on": "Vermeld op"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -20975,7 +20996,8 @@
     "… turret ring": "… tårnring",
     "… viewport": "… visningsport",
     "… vs modules": "… vs moduler",
-    "ranking": "rangering"
+    "ranking": "rangering",
+    "Listed on": "Listet på"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -21976,7 +21998,8 @@
     "… turret ring": "… pierścień wieży",
     "… viewport": "… wizjer",
     "… vs modules": "… w porównaniu do modułów",
-    "ranking": "ranking"
+    "ranking": "ranking",
+    "Listed on": "Dostępne na"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -22970,7 +22993,8 @@
     "… turret ring": "… anel da torre",
     "… viewport": "… visor",
     "… vs modules": "… vs módulos",
-    "ranking": "classificação"
+    "ranking": "classificação",
+    "Listed on": "Listados em"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -23964,7 +23988,8 @@
     "… turret ring": "… inel turelă",
     "… viewport": "… fereastră de vizualizare",
     "… vs modules": "… vs module",
-    "ranking": "clasament"
+    "ranking": "clasament",
+    "Listed on": "Listat pe"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24946,7 +24971,8 @@
     "… turret ring": "… обод башни",
     "… viewport": "… обзорное окно",
     "… vs modules": "… против модулей",
-    "ranking": "рейтинг"
+    "ranking": "рейтинг",
+    "Listed on": "Размещено на"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25729,7 +25755,8 @@
     "… turret ring": "… kruh veže",
     "… viewport": "… pohľadové okno",
     "… vs modules": "… vs moduly",
-    "ranking": "lestvica"
+    "ranking": "lestvica",
+    "Listed on": "Navedeno na"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26737,7 +26764,8 @@
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidni otvor",
     "… vs modules": "… protiv modula",
-    "ranking": "rangiranje"
+    "ranking": "rangiranje",
+    "Listed on": "Наведено на"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27750,7 +27778,8 @@
     "… turret ring": "… tornring",
     "… viewport": "… synfält",
     "… vs modules": "… vs moduler",
-    "ranking": "ranking"
+    "ranking": "ranking",
+    "Listed on": "Listad på"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28759,7 +28788,8 @@
     "… turret ring": "… แหวนหอคอย",
     "… viewport": "… มุมมองภาพ",
     "… vs modules": "… ปะทะโมดูล",
-    "ranking": "อันดับ"
+    "ranking": "อันดับ",
+    "Listed on": "แสดงบน"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29543,7 +29573,8 @@
     "… turret ring": "… singsing ng tore",
     "… viewport": "… viewport",
     "… vs modules": "… laban sa mga module",
-    "ranking": "ranggo"
+    "ranking": "ranggo",
+    "Listed on": "Nakalista sa"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30548,7 +30579,8 @@
     "… turret ring": "… kule halka",
     "… viewport": "… görüntü penceresi",
     "… vs modules": "… modüllere karşı",
-    "ranking": "sıralama"
+    "ranking": "sıralama",
+    "Listed on": "Listelendiği yer"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31546,7 +31578,8 @@
     "… turret ring": "… кільце башти",
     "… viewport": "… оглядове вікно",
     "… vs modules": "… проти модулів",
-    "ranking": "рейтинг"
+    "ranking": "рейтинг",
+    "Listed on": "Зазначено на"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32533,7 +32566,8 @@
     "… turret ring": "… vành tháp pháo",
     "… viewport": "… kính quan sát",
     "… vs modules": "… so với các mô-đun",
-    "ranking": "xếp hạng"
+    "ranking": "xếp hạng",
+    "Listed on": "Được liệt kê trên"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33542,6 +33576,7 @@
     "… turret ring": "… 炮塔环",
     "… viewport": "… 视口",
     "… vs modules": "… 对模块",
-    "ranking": "排名"
+    "ranking": "排名",
+    "Listed on": "收录于"
   }
 }

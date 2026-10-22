@@ -18,6 +18,7 @@
   "example-unicum-gg-world-of": "ตัวอย่างการ์ดสถิติผู้เล่น World of Tanks จาก unicum.gg",
   "eyebrow": "บอท Discord",
   "hero": "สถิติของ {player}, {clan}, {tank} และ {maps} ใน Discord ของคุณ",
+  "listed-on": "แสดงบน",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "บอท Discord",
   "one-click-adds": "คลิกเดียวก็เพิ่มบอตลงในเซิร์ฟเวอร์ของคุณ และพาคุณเข้าสู่ {discord} ของเรา",

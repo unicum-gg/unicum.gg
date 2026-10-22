@@ -18,6 +18,7 @@
   "example-unicum-gg-world-of": "unicum.gg World of Tanks 플레이어 통계 카드 예시",
   "eyebrow": "Discord 봇",
   "hero": "Discord에서 바로 확인하는 {player}, {clan}, {tank}, {maps} 통계",
+  "listed-on": "게시 위치",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "Discord 봇",
   "one-click-adds": "한 번 클릭하면 봇이 서버에 추가되고 우리 {discord}에 참여할 수 있습니다.",
