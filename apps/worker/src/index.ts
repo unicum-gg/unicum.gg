@@ -142,6 +142,11 @@ async function startCrons(): Promise<void> {
   );
   startServerOnlineCron();
 
+  const { startServerOnlineWatchdogCron } = await import(
+    "@unicum.gg/core/wargaming/wot/server/watchdog"
+  );
+  startServerOnlineWatchdogCron();
+
   const { startPlayerDistributionCron } = await import(
     "@unicum.gg/core/players/distribution"
   );
