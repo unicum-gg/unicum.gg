@@ -11,7 +11,6 @@
  */
 export enum RampageSort {
   Mr = "mr",
-  Mrb = "mrb",
   Battles = "battles",
   Winrate = "winrate",
   Survival = "survival",
@@ -20,7 +19,6 @@ export enum RampageSort {
 
 export const RAMPAGE_SORT_LABEL: Record<RampageSort, string> = {
   [RampageSort.Mr]: "MR",
-  [RampageSort.Mrb]: "MRB",
   [RampageSort.Battles]: "Battles",
   [RampageSort.Winrate]: "Win rate",
   [RampageSort.Survival]: "Survival",

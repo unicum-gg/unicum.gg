@@ -19,7 +19,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useStatsPeriod } from "@/hooks/use-period";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { StrongholdPeriod, computeMR, computeMRB, mrbColor, mrColor, RatedMode, winrateColor, RATING_COLOR_CLASS, type MRInputs, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
+import { StrongholdPeriod, computeMR, mrColor, RatedMode, winrateColor, RATING_COLOR_CLASS, type MRInputs, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
 
 // The Wins row colors its win rate with the mode's own scale. Defaults to the
 // random-battle 50%-anchored one; a rated mode passes its own median-anchored scale
@@ -79,7 +79,7 @@ function ratingRow(
 }
 
 /**
- * The rating rows for one mode: MR everywhere, and MRB on Rampage alone.
+ * The rating row for one mode: MR, on every mode that carries anchors.
  *
  * MR is the one thing these tabs never had. The WN ratings are built against
  * expected damage measured in random battles, so none of them can read a
@@ -87,22 +87,13 @@ function ratingRow(
  * against its own population instead, so 1000 is the median player in all of
  * them. See `computeMR`.
  *
- * MRB stays on Rampage because that is the one board publishing it as a
- * sortable column, and because the volume reward amplifies each mode's battle
- * count distribution rather than normalising it, so one ladder over all seven
- * would not be honest the way `mrColor` is.
- *
- * Both read the same period columns as the rest of the table, and on an ENDED
+ * It reads the same period columns as the rest of the table, and on an ENDED
  * mode every period is empty by construction: Rampage finished in May 2016, so
  * its 24h, 7d and 30d cells are what a finished record looks like rather than a
- * gap. On a live mode MRB's 24h column lands far below the total on purpose, it
- * rewards volume where MR discounts it.
+ * gap.
  */
 export function modeRatingRows(mode: RatedMode): RowDef[] {
-  const mr = ratingRow("MR", (s) => computeMR(mode, s), mrColor);
-  return mode === RatedMode.Rampage
-    ? [mr, ratingRow("MRB", computeMRB, mrbColor)]
-    : [mr];
+  return [ratingRow("MR", (s) => computeMR(mode, s), mrColor)];
 }
 
 function buildRowDefs(wrColor: WinrateColorFn): RowDef[] {
@@ -268,7 +259,7 @@ export function StrongholdStatsTable(
   const { t } = useTranslation("components/players/detail/overview/stronghold-stats-table");
   const { t: tStats } = useStatLabels();
   const loading = "loading" in props;
-  // Mode-specific rows (a mode's MR, plus MRB on Rampage) appended to the shared set,
+  // The mode-specific row (a mode's MR) appended to the shared set,
   // so the skeleton and the real table always render the same labels. The win
   // rate scale is the mode's own median rather than 50%.
   const rows = [

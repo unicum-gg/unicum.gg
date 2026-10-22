@@ -1,7 +1,6 @@
 import { RatingColor, RATING_COLOR_HEX } from "./ratings";
 import {
   modeWinrateColor,
-  mrbColor,
   mrColor,
   RatedMode,
 } from "./mode-ratings";
@@ -30,7 +29,6 @@ export enum RatingScale {
   Wnx = "wnx",
   Winrate = "winrate",
   Mr = "mr",
-  Mrb = "mrb",
   RampageWinrate = "rampageWinrate",
   StrongholdRating = "strongholdRating",
   StrongholdRatingBattles = "strongholdRatingBattles",
@@ -103,7 +101,6 @@ const SCALES: Record<
   [RatingScale.Wnx]: { colorOf: wnxColor, unit: RatingScaleUnit.Points, min: -2000, max: 10_000, precision: 1 },
   [RatingScale.Winrate]: { colorOf: winrateColor, unit: RatingScaleUnit.Percent, min: 0, max: 1, precision: 0.0001, scaleBy: 100, bounded: true },
   [RatingScale.Mr]: { bounded: true, colorOf: mrColor, unit: RatingScaleUnit.Points, min: 0, max: 5000, precision: 1 },
-  [RatingScale.Mrb]: { bounded: true, colorOf: mrbColor, unit: RatingScaleUnit.Points, min: 0, max: 10_000, precision: 1 },
   // One ladder serves MR in every mode (see `mrColor`), so only the win rate
   // needs a mode: its anchor is the mode's own median rather than 50%, and
   // Rampage is the one whose anchor the site publishes a board against.

@@ -53,9 +53,9 @@ const mapVariantRedirects = [
  * and read `statistics.fallout`, which is the 2015 Rampage event and a
  * different mode: Wargaming publishes no Steel Hunter statistics at all. Every
  * one of these was a live, indexed, linkable URL, and the two glossary slugs
- * went with the ratings they named (HR and HRB became MR and MRB), so each old
- * address keeps its readers rather than 404ing on a correction they had no part
- * in.
+ * went with the ratings they named (HR became MR, and HRB became MRB before
+ * that column was withdrawn, see `mrbRemovalRedirects`), so each old address
+ * keeps its readers rather than 404ing on a correction they had no part in.
  */
 const rampageRenameRedirects = [
   ["/players/steel-hunter", "/players/rampage"],
@@ -65,15 +65,37 @@ const rampageRenameRedirects = [
     "/:region/players/:nickname/rampage",
   ],
   // The public API path. A 404 would be louder, but an SDK caller following a
-  // redirect keeps working while they upgrade, and the response shape changed
-  // only in renaming `hr`/`hrb` to `mr`/`mrb`.
+  // redirect keeps reading every field they already read: `hr` was renamed to
+  // `mr`, and `hrb`/`mrb` has since been withdrawn (see
+  // `mrbRemovalRedirects`), which no redirect can soften.
   [
     "/api/:region(eu|na|asia)/players/steel-hunter",
     "/api/:region/players/rampage",
   ],
   ["/glossary/hr", "/glossary/mr"],
-  ["/glossary/hrb", "/glossary/mrb"],
+  ["/glossary/hrb", "/glossary/mr"],
 ].map(([source, destination]) => ({ source, destination, permanent: true }));
+
+/**
+ * The MRB withdrawal.
+ *
+ * MRB was MR with the battle brake replaced by a volume reward, published as a
+ * sortable column on the Rampage board. It came off because it was measured
+ * against the two columns it sat between and found to be a blend of them rather
+ * than an axis of its own: on EU its top 100 shares 56 rows with MR's and 58
+ * with a plain sort by battles, and at the very top it disagreed with MR loudly
+ * enough to contradict it (a player at the mode's exact median effectiveness
+ * ranked 10th on MRB and 140th on MR, while the best average XP in the top of
+ * the board ranked 5th on MR and 118th on MRB). Two neighbouring columns under
+ * two colour ladders told a reader opposite things with nothing to say which to
+ * believe.
+ *
+ * The glossary entry was indexed and is the only URL the withdrawal strands, so
+ * it lands on MR, which is the rating the board still publishes.
+ */
+const mrbRemovalRedirects = [["/glossary/mrb", "/glossary/mr"]].map(
+  ([source, destination]) => ({ source, destination, permanent: true }),
+);
 
 export const redirects: NextConfig["redirects"] = async () => [
   // Tank detail: `?tab=performances` → `/tanks/is-7/performances`.
@@ -161,6 +183,7 @@ export const redirects: NextConfig["redirects"] = async () => [
   // card, so each old URL keeps its readers by landing on the view it named.
   ...mapVariantRedirects,
   ...rampageRenameRedirects,
+  ...mrbRemovalRedirects,
   // Creator vanity URLs (`/remi`). Declared rather than routed so they cannot
   // shadow a real page: a catch-all `/[slug]` at the root would swallow every
   // unmatched path on the site.

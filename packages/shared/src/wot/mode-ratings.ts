@@ -1,7 +1,7 @@
 import { RatingColor } from "./ratings";
 
 /**
- * MR, the per-mode performance rating, and MRB, its volume-rewarding sibling.
+ * MR, the per-mode performance rating.
  *
  * Wargaming answers a statistics block per battle mode, and none of the WN
  * ratings can read them: all three are built against expected damage measured
@@ -250,59 +250,6 @@ export function modeWinrateColor(mode: RatedMode, wr: number): RatingColor {
   for (let i = 0; i < thresholds.length; i++) {
     if (wr < thresholds[i]) return WR_COLORS[i];
   }
-  return RatingColor.Top;
-}
-
-/**
- * MRB, the same effectiveness score with battle volume REWARDED instead of
- * braked: `ln(1 + battles/50)` in place of `battles/(battles+100)`.
- *
- * **Rampage only, and the reason it is not rolled out is that its stated
- * justification turned out to be false.** It was written as "winning is very
- * hard in battle royale, so winning AND playing a lot is the real feat", about
- * a mode this block never held. What is actually true of Rampage is that its
- * win rate is low because battles were multi-team, which is an argument about
- * the win-rate anchor and not about rewarding volume.
- *
- * It is kept because it is a sortable column on a board that has been published
- * for months, and removing a column is a decision about the product rather than
- * about the data. It is not generalised because the volume term amplifies each
- * mode's battle-count distribution rather than normalising it: aligning the
- * medians still leaves p85/p50 running 1.33 in Clan Wars VI against 1.64 in
- * Skirmish, so one ladder over all seven would not be honest the way `mrColor`
- * is.
- */
-export const MRB_VOLUME_K = 50;
-
-/** The median MRB score on Rampage, so its median player lands at 1000 too. */
-export const MRB_SCORE_BASE = 1.5081;
-
-export function computeMRB(s: MRInputs): number | null {
-  if (!s.battles || s.battles <= 0) return null;
-  const a = MODE_RATING_ANCHORS[RatedMode.Rampage];
-  const rXp = s.avgXp / a.xpBase;
-  const rWin = s.wins / s.battles / a.wrBase;
-  const vol = Math.log(1 + s.battles / MRB_VOLUME_K);
-  const mrb =
-    (MR_SCALE * (MR_W_XP * rXp + MR_W_WIN * rWin) * vol) / MRB_SCORE_BASE;
-  return Number.isFinite(mrb) ? Math.round(mrb) : null;
-}
-
-/**
- * Calibrated on the Rampage MRB distribution (4,090 rows; p50 1000, p85 1590,
- * p95 2044, p98 2371, p99 2547, max 3602), by the same percentiles as
- * `mrColor`. Wider than MR because the volume reward spreads the top, hence its
- * own ladder rather than a reuse.
- */
-export function mrbColor(value: number): RatingColor {
-  if (value < 540) return RatingColor.VeryBad;
-  if (value < 645) return RatingColor.Bad;
-  if (value < 760) return RatingColor.BelowAvg;
-  if (value < 1120) return RatingColor.Average;
-  if (value < 1590) return RatingColor.Good;
-  if (value < 2040) return RatingColor.VeryGood;
-  if (value < 2370) return RatingColor.Super;
-  if (value < 2550) return RatingColor.Excellent;
   return RatingColor.Top;
 }
 

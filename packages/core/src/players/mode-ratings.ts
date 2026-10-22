@@ -20,8 +20,7 @@ import { type Region } from "@unicum.gg/wargaming";
  * 2016, so an account's figures never move again and nothing obliges the
  * pipeline to revisit the row. Left alone, the board would rank a mixture of
  * values computed under two different calibrations for as long as the table
- * lives, with MRB (evaluated live in SQL) on the new scale beside an MR still
- * on the old one.
+ * lives, half of them on the new calibration and half still on the old one.
  *
  * Deliberate rather than a cron: it is a one-shot after the deploy that changed
  * the formula, and running it before that deploy would leave the serving code
@@ -38,7 +37,7 @@ export async function recomputeRampageRatings(region: Region): Promise<number> {
   const a = MODE_RATING_ANCHORS[RatedMode.Rampage];
   // Float literals rather than bound parameters: `sh_battles` is an integer
   // column, so an integer divisor would truncate, and postgres cannot infer a
-  // parameter's type inside the arithmetic. Same reason as `mrbSql`.
+  // parameter's type inside the arithmetic.
   const f = (n: number) => sql.raw(Number.isInteger(n) ? `${n}.0` : String(n));
   const mr = sql`round(
     ${f(MR_SCALE)}

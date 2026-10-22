@@ -583,7 +583,7 @@ export const clansTopQuery = z.object({
 export const rampageQuery = z.object({
   limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
   sort: z
-    .enum(["mr", "mrb", "battles", "winrate", "survival", "damage"])
+    .enum(["mr", "battles", "winrate", "survival", "damage"])
     .optional()
     .meta({ description: "Ranking column (default mr)." }),
 });

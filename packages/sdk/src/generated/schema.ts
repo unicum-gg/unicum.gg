@@ -188,7 +188,7 @@ export interface paths {
         };
         /**
          * Rampage leaderboard
-         * @description The Rampage player leaderboard for a region, ranked by the chosen `sort` column (MR by default). Only players with at least 100 Rampage battles are ranked. Rampage is the 2015 event Wargaming carries as `statistics.fallout`, which this board was published as "Steel Hunter" until October 2026; the two are different modes and Wargaming publishes no Steel Hunter statistics at all. It ended in May 2016, so the ranking is an archive: no row in it can move again.
+         * @description The Rampage player leaderboard for a region, ranked by the chosen `sort` column (MR by default). Only players with at least 100 Rampage battles are ranked. Rampage is the event Wargaming carries as `statistics.fallout`, which this board was published as "Steel Hunter" until October 2026; the two are different modes and Wargaming publishes no Steel Hunter statistics at all. The mode is not in the current rotation, so the totals behind this ranking are not moving.
          */
         get: operations["get-{region}-players-rampage"];
         put?: never;
@@ -1668,7 +1668,7 @@ export interface paths {
         };
         /**
          * Rating colour scales
-         * @description Every colour scale the site paints a number with: the three rating metrics, random and Steel Hunter and Stronghold win rates, the Steel Hunter ratings, the two Stronghold ratings and the community star rating. Each is a list of half-open bands with the colour's name and its hex. Region-less, because a threshold is the same on every server, and static, because it only moves when the site's own scale does. Fetch it once and paint from it rather than re-implementing the ladder, which is what makes a client drift the day a threshold changes.
+         * @description Every colour scale the site paints a number with: the three rating metrics, random and Rampage and Stronghold win rates, the mode rating (MR), the two Stronghold ratings and the community star rating. Each is a list of half-open bands with the colour's name and its hex. Region-less, because a threshold is the same on every server, and static, because it only moves when the site's own scale does. Fetch it once and paint from it rather than re-implementing the ladder, which is what makes a client drift the day a threshold changes.
          */
         get: operations["get-ratings-scales"];
         put?: never;
@@ -5436,7 +5436,6 @@ export interface components {
             clan_tag: string | null;
             clan_color: string | null;
             mr: number;
-            mrb: number;
             battles: number;
             wins: number;
             survived: number;
@@ -5494,7 +5493,7 @@ export interface components {
              * @description Which quantity this scale paints.
              * @enum {string}
              */
-            scale: "wn7" | "wn8" | "wnx" | "winrate" | "mr" | "mrb" | "rampageWinrate" | "strongholdRating" | "strongholdRatingBattles" | "strongholdWinrate" | "starRating";
+            scale: "wn7" | "wn8" | "wnx" | "winrate" | "mr" | "rampageWinrate" | "strongholdRating" | "strongholdRatingBattles" | "strongholdWinrate" | "starRating";
             /**
              * @description How its numbers are written: `ratio` runs 0 to 1, `points` and `stars` are the value as shown. A caller holding a win rate as a percentage has to divide before comparing it to a `ratio` scale.
              * @enum {string}
@@ -7645,7 +7644,7 @@ export interface operations {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 /** @description Ranking column (default mr). */
-                sort?: "mr" | "mrb" | "battles" | "winrate" | "survival" | "damage";
+                sort?: "mr" | "battles" | "winrate" | "survival" | "damage";
             };
             header?: never;
             path: {

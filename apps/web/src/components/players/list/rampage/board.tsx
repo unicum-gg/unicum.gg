@@ -33,7 +33,6 @@ import {
   DEFAULT_RAMPAGE_SORT,
   isRampageSort,
   modeWinrateColor,
-  mrbColor,
   mrColor,
   RampageSort,
   RatedMode,
@@ -63,7 +62,6 @@ export type RampageRow = {
   clan_tag: string | null;
   clan_color: string | null;
   mr: number;
-  mrb: number;
   battles: number;
   wins: number;
   survived: number;
@@ -111,7 +109,6 @@ export function RampageBoard({
   const rangeCols = useMemo<RangeColumn<RampageRow>[]>(
     () => [
       { key: "mr", label: "MR", value: (r) => r.mr },
-      { key: "mrb", label: "MRB", value: (r) => r.mrb },
       { key: "battles", label: t("columns.battles"), value: (r) => r.battles },
       {
         key: "winrate",
@@ -266,13 +263,6 @@ export function RampageBoard({
                   className="w-24"
                 >
                   {tOwn("mr")}</RankingColumnHead>
-                <RankingColumnHead
-                  sortKey={RampageSort.Mrb}
-                  active={sort === RampageSort.Mrb}
-                  onSort={changeSort}
-                  className="w-24"
-                >
-                  {tOwn("mrb")}</RankingColumnHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -328,14 +318,6 @@ export function RampageBoard({
                       )}
                     >
                       {num(INT_FORMAT).format(r.mr)}
-                    </TableCell>
-                    <TableCell
-                      className={cn(
-                        "text-right font-semibold tabular-nums",
-                        RATING_COLOR_CLASS[mrbColor(r.mrb)],
-                      )}
-                    >
-                      {num(INT_FORMAT).format(r.mrb)}
                     </TableCell>
                   </TableRow>
                 );

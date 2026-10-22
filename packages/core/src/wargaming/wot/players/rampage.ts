@@ -2,16 +2,9 @@ import { and, desc, eq, gte, isNotNull, sql, type SQL } from "drizzle-orm";
 import {
   clansByRegion,
   DEFAULT_RAMPAGE_SORT,
-  MODE_RATING_ANCHORS,
   MR_MIN_BATTLES,
-  MR_SCALE,
-  MR_W_WIN,
-  MR_W_XP,
-  MRB_SCORE_BASE,
-  MRB_VOLUME_K,
   playersByRegion,
   RampageSort,
-  RatedMode,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { type Region } from "@unicum.gg/wargaming";
@@ -31,7 +24,6 @@ export type TopRampageResult = {
   clan_tag: string | null;
   clan_color: string | null;
   mr: number;
-  mrb: number;
   battles: number;
   wins: number;
   survived: number;
@@ -39,35 +31,12 @@ export type TopRampageResult = {
   frags: number;
 };
 
-// Every constant enters the expression as a float literal: `sh_battles` is an
-// integer column, so `sh_battles / 50` would truncate, and a bound parameter
-// would leave postgres with a type it cannot infer inside the arithmetic.
-function float(n: number): SQL {
-  return sql.raw(Number.isInteger(n) ? `${n}.0` : String(n));
-}
-
-// MRB, the volume-rewarding sibling of MR: the same effectiveness score (XP +
-// win rate, each against Rampage's own median) with a growing `ln(1+battles/50)`
-// term instead of MR's confidence brake, divided by the mode's own median so its
-// median player lands at 1000 like MR's. The same formula as `computeMRB` in
-// @unicum.gg/shared, whose constants it reads, evaluated here in SQL because the
-// board ranks the whole population; computed inline (rather than a cached
-// column) since it is a pure function of the cached sh_* totals. The gate
-// (sh_battles >= 100 AND hr NOT NULL) guarantees a positive divisor and a
-// non-null sh_avg_xp.
-function mrbSql(players: (typeof playersByRegion)[Region]): SQL {
-  const a = MODE_RATING_ANCHORS[RatedMode.Rampage];
-  return sql`(${float(MR_SCALE)} * (${float(MR_W_XP)} * (${players.shAvgXp} / ${float(a.xpBase)}) + ${float(MR_W_WIN)} * ((${players.shWins}::float / ${players.shBattles}) / ${float(a.wrBase)})) * ln(1 + ${players.shBattles} / ${float(MRB_VOLUME_K)}) / ${float(MRB_SCORE_BASE)})`;
-}
-
 // Per-column ORDER BY. MR rides the partial `*_players_hr_idx`; the derived
-// per-battle metrics (winrate/survival/damage) and MRB sort within the same
-// gated set (sh_battles >= MR_MIN_BATTLES, so the divisor is always positive), a
-// small bitmap-then-sort over a few thousand rows.
+// per-battle metrics (winrate/survival/damage) sort within the same gated set
+// (sh_battles >= MR_MIN_BATTLES, so the divisor is always positive), a small
+// bitmap-then-sort over a few thousand rows.
 function orderExpr(sort: RampageSort, players: (typeof playersByRegion)[Region]): SQL {
   switch (sort) {
-    case RampageSort.Mrb:
-      return sql`${mrbSql(players)} DESC`;
     case RampageSort.Battles:
       return desc(players.shBattles);
     case RampageSort.Winrate:
@@ -111,7 +80,6 @@ export async function getTopRampage(
       accountId: players.accountId,
       nickname: players.nickname,
       mr: players.hr,
-      mrb: mrbSql(players),
       battles: players.shBattles,
       wins: players.shWins,
       survived: players.shSurvived,
@@ -127,8 +95,8 @@ export async function getTopRampage(
         gte(players.shBattles, MR_MIN_BATTLES),
         isNotNull(players.hr),
         // MR now implies a non-null avg XP (see updatePlayerRatings), but guard
-        // it explicitly so the MRB expression never divides by null on a legacy
-        // row written before the sh_avg_xp backfill.
+        // it explicitly so a legacy row written before the sh_avg_xp backfill
+        // cannot reach the board with no effectiveness behind its rating.
         isNotNull(players.shAvgXp),
       ),
     )
@@ -141,7 +109,6 @@ export async function getTopRampage(
     clan_tag: r.clanTag ?? null,
     clan_color: r.clanColor ?? null,
     mr: Math.round(Number(r.mr)),
-    mrb: Math.round(Number(r.mrb)),
     battles: r.battles ?? 0,
     wins: r.wins ?? 0,
     survived: r.survived ?? 0,

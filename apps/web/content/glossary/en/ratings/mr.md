@@ -5,7 +5,6 @@ aliases:
 related:
   - skirmish
   - win-rate
-  - mrb
   - wn8
 anchors:
   labels:

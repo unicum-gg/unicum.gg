@@ -801,7 +801,7 @@ async function updatePlayerRatings(
   const shAvgXp = fa?.battle_avg_xp ?? null;
   // Gate the rating on a known avg XP too: MR is XP-driven, so without it the
   // score would be understated. Keeping the two in lockstep also lets the
-  // leaderboard treat `hr NOT NULL` as "sh_avg_xp present" (MRB divides by it).
+  // leaderboard treat `hr NOT NULL` as "sh_avg_xp present".
   const hr =
     shBattles && shBattles > 0 && shAvgXp != null
       ? computeMR(RatedMode.Rampage, {

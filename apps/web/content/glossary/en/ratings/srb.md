@@ -25,4 +25,4 @@ SRB = SR x (1 + ln(1 + battles / 1000))
 Logarithmic, so the first hundred battles are worth far more than the thousandth.
 ```
 
-One volume constant across every tier, on purpose: Skirmish Tier X is played continuously while Advances runs in bursts a few weeks a year, so the tiers that really are played more earn a bigger bonus. It is the same idea as MRB next to MR on the Rampage board.
+One volume constant across every tier, on purpose: Skirmish Tier X is played continuously while Advances runs in bursts a few weeks a year, so the tiers that really are played more earn a bigger bonus. The volume bonus is what separates a clan that has held a rating over hundreds of battles from one that reached it over twenty.

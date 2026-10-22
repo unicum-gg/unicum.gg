@@ -30,7 +30,6 @@ type TierRow = {
   tier: string;
   wr: string;
   mr: string;
-  mrb: string;
 };
 
 /** The band words, darkest to brightest, matching the ascending thresholds. */
@@ -61,11 +60,11 @@ function range(band: RatingScaleBand, lowest: boolean, unit: RatingScaleUnit): s
 }
 
 // Derived from the colour functions by bisection rather than copied, which is
-// what `ratingScale` exists for: the thresholds are written once, in
-// `mrColor`, `mrbColor` and `modeWinrateColor`, and a table repeating them
-// here is a table to keep in sync, quietly mislabelling a published scale the
-// day one of them moves. It was a hand-kept copy until the Rampage rename
-// moved all three ladders at once, which is the drift this removes.
+// what `ratingScale` exists for: the thresholds are written once, in `mrColor`
+// and `modeWinrateColor`, and a table repeating them here is a table to keep in
+// sync, quietly mislabelling a published scale the day one of them moves. It
+// was a hand-kept copy until the Rampage rename moved both ladders at once,
+// which is the drift this removes.
 //
 // The win-rate column is anchored on the mode's own 42.2% median rather than
 // 50%: Rampage's battles were multi-team, so one team of several won and the
@@ -73,21 +72,19 @@ function range(band: RatingScaleBand, lowest: boolean, unit: RatingScaleUnit): s
 const TIERS: TierRow[] = (() => {
   const wr = ratingScale(RatingScale.RampageWinrate);
   const mr = ratingScale(RatingScale.Mr);
-  const mrb = ratingScale(RatingScale.Mrb);
-  // The three ladders have one band per colour and share their order, so they
-  // zip by index. Reversed, because the table reads best band first.
+  // Both ladders have one band per colour and share their order, so they zip
+  // by index. Reversed, because the table reads best band first.
   return mr.bands
     .map((band, i) => ({
       color: band.color,
       tier: TIER_KEY[band.color],
       wr: range(wr.bands[i], i === 0, wr.unit),
       mr: range(band, i === 0, mr.unit),
-      mrb: range(mrb.bands[i], i === 0, mrb.unit),
     }))
     .reverse();
 })();
 
-/** Color thresholds for the Rampage board: win rate, MR and MRB. */
+/** Color thresholds for the Rampage board: win rate and MR. */
 export function RampageRatingScale() {
   const { t } = useTranslation("components/players/list/rampage/view");
   const { t: tOwn } = useTranslation("components/players/list/rampage/rating-scale");
@@ -112,11 +109,8 @@ export function RampageRatingScale() {
               <TableHead className="text-right!">
                 <GlossaryLabel>{tOwn("wr")}</GlossaryLabel>
               </TableHead>
-              <TableHead className="text-right!">
-                <GlossaryLabel>{tOwn("mr")}</GlossaryLabel>
-              </TableHead>
               <TableHead className="pr-4 text-right!">
-                <GlossaryLabel>{tOwn("mrb")}</GlossaryLabel>
+                <GlossaryLabel>{tOwn("mr")}</GlossaryLabel>
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -139,11 +133,8 @@ export function RampageRatingScale() {
                 <TableCell className="text-right tabular-nums text-muted-foreground whitespace-nowrap">
                   {band.wr}
                 </TableCell>
-                <TableCell className="text-right tabular-nums text-muted-foreground whitespace-nowrap">
-                  {band.mr}
-                </TableCell>
                 <TableCell className="pr-4 text-right tabular-nums text-muted-foreground whitespace-nowrap">
-                  {band.mrb}
+                  {band.mr}
                 </TableCell>
               </TableRow>
             ))}

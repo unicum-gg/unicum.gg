@@ -431,9 +431,8 @@ export function PlayerTabsView({
           nickname={nickname}
           label={STRONGHOLD_MODES.find((s) => s.id === mode)?.label ?? ""}
           data={strongholds[mode]}
-          // MR on every mode that has anchors, MRB on Rampage alone. The
-          // modes with no entry are each a reason rather than an omission; see
-          // `PLAYER_MODE_RATING`.
+          // MR on every mode that has anchors. The modes with no entry are
+          // each a reason rather than an omission; see `PLAYER_MODE_RATING`.
           trailingRows={
             ratedMode ? modeRatingRows(ratedMode) : undefined
           }

@@ -14,8 +14,6 @@ export const rampageSummary = z
     // MR, the mode rating: average XP and win rate, each against Rampage's own
     // population median, braked by battle volume. 1000 is the median player.
     mr: z.number(),
-    // MRB, the same score with battle volume rewarded instead of braked.
-    mrb: z.number(),
     battles: z.number(),
     wins: z.number(),
     survived: z.number(),

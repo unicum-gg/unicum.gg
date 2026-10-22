@@ -4,7 +4,6 @@ aliases:
   - fallout
 related:
   - mr
-  - mrb
   - steel-hunter
   - random-battles
 links:
