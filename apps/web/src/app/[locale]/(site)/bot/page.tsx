@@ -12,6 +12,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
+import { type Directory, ListedOn } from "@/components/listed-on";
 import {
   Panel,
   PanelContent,
@@ -172,6 +173,12 @@ const STATUS: Record<
     text: "something-went-wrong-with-the-install-please",
   },
 };
+
+const DIRECTORIES: Directory[] = [
+  { name: "Top.gg", href: "https://top.gg/bot/1526167806025138246" },
+  { name: "discord.bots.gg", href: "https://discord.bots.gg/bots/1526167806025138246" },
+  { name: "Void Bots", href: "https://voidbots.net/bot/1526167806025138246" },
+];
 
 export default async function BotPage({
   params,
@@ -365,6 +372,10 @@ export default async function BotPage({
           ))}
         </PanelContent>
       </Panel>
+
+      <PanelSeparator />
+
+      <ListedOn label={t("listed-on")} directories={DIRECTORIES} />
     </div>
   );
 }

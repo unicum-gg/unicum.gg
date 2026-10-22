@@ -9,6 +9,7 @@ import {
 import Link from "@/components/link";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
+import { type Directory, ListedOn } from "@/components/listed-on";
 import { CopySnippet } from "@/components/copy-snippet";
 import {
   Panel,
@@ -152,6 +153,16 @@ const FEATURES = [
     title: "generated-from-the-api",
     text: "tools-are-derived-from-the-public-openapi-sp",
   },
+];
+
+const DIRECTORIES: Directory[] = [
+  { name: "Smithery", href: "https://smithery.ai/servers/unicum/wot-stats" },
+  {
+    name: "Cursor Directory",
+    href: "https://cursor.directory/plugins/unicumgg-world-of-tanks-stats",
+  },
+  { name: "MCP Mux", href: "https://mcpmux.com/servers/gg.unicum-wot-stats-http/" },
+  { name: "LibHunt", href: "https://www.libhunt.com/r/unicum.gg" },
 ];
 
 function toolParams(def: (typeof TOOL_DEFS)[number]): string {
@@ -334,6 +345,10 @@ export default async function McpPage({
           />
         </PanelContent>
       </Panel>
+
+      <PanelSeparator />
+
+      <ListedOn label={t("listed-on")} directories={DIRECTORIES} />
     </div>
   );
 }
