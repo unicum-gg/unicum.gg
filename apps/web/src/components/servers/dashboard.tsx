@@ -7,6 +7,7 @@ import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import useSWR from "swr";
 import {
+  isServerRecordingStalled,
   SERVER_STATS_RANGES,
   type ServerComparison,
   type ServerStats,
@@ -25,7 +26,7 @@ import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import { ClustersTable } from "./clusters-table";
 import { PopulationChart, RegionsChart } from "./charts-lazy";
-import { ServerRecords } from "./records";
+import { hasServerRecords, ServerRecords } from "./records";
 import { RhythmHeatmap } from "./rhythm-heatmap";
 
 /**
@@ -85,6 +86,9 @@ export function ServersDashboard({
   const shown = stats ?? initialStats;
   const shownRange = shown.range;
   const pending = statsLoading && !stats;
+  // Decided once here and handed to each panel, so the chart, the grid and the
+  // headline cannot disagree about whether the recording stopped.
+  const stalled = isServerRecordingStalled(shown);
 
   return (
     <>
@@ -108,14 +112,18 @@ export function ServersDashboard({
             points={shown.points}
             range={shownRange}
             region={region}
+            stalled={stalled}
+            until={shown.until}
           />
         </PanelContent>
         {/* Inside the chart's panel rather than beside it: these four figures
             summarise the very range the switcher above selects, so they are
             part of that section rather than a section of their own. */}
-        <PanelContent className="border-t border-fd-border p-0">
-          <ServerRecords stats={shown} range={shownRange} />
-        </PanelContent>
+        {hasServerRecords(shown) ? (
+          <PanelContent className="border-t border-fd-border p-0">
+            <ServerRecords stats={shown} range={shownRange} />
+          </PanelContent>
+        ) : null}
       </Panel>
 
       <PanelSeparator />
@@ -134,6 +142,8 @@ export function ServersDashboard({
             total={shown.current}
             peak={shown.peak}
             average={shown.average}
+            stalled={stalled}
+            until={shown.until}
           />
         </PanelContent>
       </Panel>
@@ -145,7 +155,11 @@ export function ServersDashboard({
           <PanelTitle>{t("when-players-are-online", { label })}</PanelTitle>
         </PanelHeader>
         <PanelContent>
-          <RhythmHeatmap rhythm={shown.rhythm} />
+          <RhythmHeatmap
+            rhythm={shown.rhythm}
+            stalled={stalled}
+            until={shown.until}
+          />
         </PanelContent>
       </Panel>
 
@@ -159,27 +173,36 @@ export function ServersDashboard({
           {comparison ? (
             <>
               <RegionsChart regions={comparison.regions} range={shownRange} />
+              {/* A region with no current figure is left out rather than shown
+                  with a dash beside its name, the same rule the cluster pills
+                  and the top bar follow. With none of them measured the row is
+                  gone and the chart's own sentence is what stands. */}
               <ul className="flex flex-wrap gap-2 text-sm">
-                {comparison.regions.map((series) => (
-                  <li
-                    key={series.region}
-                    className={cn(
-                      "inline-flex items-baseline gap-2 rounded-md border px-2.5 py-1",
-                      series.region === region
-                        ? "border-brand/40 bg-brand/10"
-                        : "border-fd-border bg-fd-card",
-                    )}
-                  >
-                    <span className="font-medium">
-                      {REGION_LABEL[series.region]}
-                    </span>
-                    <span className="tabular-nums text-fd-muted-foreground">
-                      {series.current == null
-                        ? "—"
-                        : numberFormat(locale).format(series.current)}
-                    </span>
-                  </li>
-                ))}
+                {comparison.regions
+                  .filter(
+                    (
+                      series,
+                    ): series is typeof series & { current: number } =>
+                      series.current != null,
+                  )
+                  .map((series) => (
+                    <li
+                      key={series.region}
+                      className={cn(
+                        "inline-flex items-baseline gap-2 rounded-md border px-2.5 py-1",
+                        series.region === region
+                          ? "border-brand/40 bg-brand/10"
+                          : "border-fd-border bg-fd-card",
+                      )}
+                    >
+                      <span className="font-medium">
+                        {REGION_LABEL[series.region]}
+                      </span>
+                      <span className="tabular-nums text-fd-muted-foreground">
+                        {numberFormat(locale).format(series.current)}
+                      </span>
+                    </li>
+                  ))}
               </ul>
             </>
           ) : (

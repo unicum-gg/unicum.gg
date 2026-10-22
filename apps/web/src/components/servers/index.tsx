@@ -55,6 +55,7 @@ function emptyStats(region: Region): ServerStats {
     allTimePeak: null,
     rhythm: [],
     since: null,
+    until: null,
   };
 }
 
@@ -125,6 +126,7 @@ export async function ServersView({ region, locale }: { region: Region; locale: 
               fallbackTotal={stats.current}
               fallbackClusters={stats.clusters}
               rhythm={stats.rhythm}
+              until={stats.until}
             />
           </div>
         </PanelContent>

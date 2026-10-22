@@ -5554,6 +5554,11 @@ export interface components {
                 at: Date;
             } | null;
             points: components["schemas"]["RegionPopulationPoint"][];
+            /**
+             * Format: date-time
+             * @description The newest sample on record for this region, whatever range was asked for. Well behind now means Wargaming's source stopped answering rather than this region having nothing to show.
+             */
+            until: Date | null;
         };
         /** @description One server's own verdict on a rated subject. */
         RegionVerdict: {
@@ -5744,6 +5749,11 @@ export interface components {
              * @description The oldest sample on record. Wargaming publishes population as an instant and keeps no history, so this series starts when the sampling started and nothing before it can be recovered.
              */
             since: Date | null;
+            /**
+             * Format: date-time
+             * @description The newest sample on record, whatever range was asked for. Well behind now means Wargaming's source stopped answering, which is what empties `current` and `clusters`, and is the difference between a history too young to fill the range and one that stopped.
+             */
+            until: Date | null;
         };
         /** @description One region's recorded server population. */
         ServerStatsResponse: {
@@ -5773,6 +5783,11 @@ export interface components {
              * @description The oldest sample on record. Wargaming publishes population as an instant and keeps no history, so this series starts when the sampling started and nothing before it can be recovered.
              */
             since: Date | null;
+            /**
+             * Format: date-time
+             * @description The newest sample on record, whatever range was asked for. Well behind now means Wargaming's source stopped answering, which is what empties `current` and `clusters`, and is the difference between a history too young to fill the range and one that stopped.
+             */
+            until: Date | null;
         };
         /** @description One vehicle's share of a session. */
         SessionVehicle: {

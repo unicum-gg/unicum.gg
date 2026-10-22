@@ -11,6 +11,37 @@ import type { OnlinePayload } from "./server-online";
  * point on the day series, since that series is the raw samples. */
 export const SERVER_SAMPLE_INTERVAL_MINUTES = 5;
 
+/** How old the newest sample may be and still describe now. Six ticks, so a
+ * failed fetch or two is absorbed and nothing is claimed past that. Applied in
+ * core, on the read's own `now()`, and never a second time downstream. */
+export const SERVER_SAMPLE_MAX_AGE_MINUTES = 30;
+
+/**
+ * Whether the recording has stopped, which is a statement about Wargaming
+ * rather than about us: `wgn/servers/info` answers the current instant and
+ * keeps no history, so when it fails the sampler writes nothing (zeros would be
+ * indistinguishable from a dead cluster and would drag every average through
+ * them for as long as the table lives). Verified live: it answered
+ * `504 SOURCE_NOT_AVAILABLE` on all three regions from 2026-10-08.
+ *
+ * Read off the payload rather than off a clock, which matters twice. The page
+ * is prerendered and read later, so a component deciding this with `new Date()`
+ * renders one answer into the HTML and possibly another on hydration, and React
+ * throws the subtree away for a text node. And `current` is already null for
+ * exactly this reason and no other, since the read that fills it is bounded by
+ * `SERVER_SAMPLE_MAX_AGE_MINUTES`: the thing that empties the page is then the
+ * same thing that explains it, and the two cannot come apart.
+ *
+ * A null `until` is a region nothing has ever been recorded for, which is a
+ * start rather than a gap.
+ */
+export function isServerRecordingStalled(payload: {
+  current: number | null;
+  until: Date | null;
+}): boolean {
+  return payload.current == null && payload.until != null;
+}
+
 /** How far back a population series reads. */
 export enum ServerStatsRange {
   Day = "day",
@@ -195,6 +226,10 @@ export type ServerStats = {
    * actually goes, since it starts the day sampling started and there is no
    * backfill for what came before. */
   since: Date | null;
+  /** The newest sample on record, whatever the range asked for. It is what
+   * separates a history too young to fill the range from one that stopped, and
+   * the page says which. Null before the first sample. */
+  until: Date | null;
 };
 
 /** One region's totals, for the cross-region comparison. */
@@ -203,6 +238,11 @@ export type RegionPopulationSeries = {
   current: number | null;
   peak: ServerRecord | null;
   points: { at: Date; total: number }[];
+  /** The newest sample on record for this region, as on `ServerStats`. The
+   * comparison is empty on every region at once when the source is down, and
+   * this is what lets the chart say so instead of claiming it has not recorded
+   * enough yet. */
+  until: Date | null;
 };
 
 export type ServerComparison = {

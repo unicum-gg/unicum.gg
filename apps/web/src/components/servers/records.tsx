@@ -12,6 +12,19 @@ import { type DisplayZone, formatMoment, formatPlayers } from "./format";
 import { useDisplayZone } from "./use-display-zone";
 
 /**
+ * Whether this strip has anything at all to print.
+ *
+ * Exported because the panel around it draws a rule of its own, and a rule
+ * over an empty strip is a stray line across the page. The caller and the
+ * component have to agree on the answer, so there is one.
+ */
+export function hasServerRecords(stats: ServerStats): boolean {
+  return Boolean(
+    stats.peak || stats.trough || stats.allTimePeak || stats.average > 0,
+  );
+}
+
+/**
  * The four figures that summarise a range: its high, its low, its mean, and the
  * highest total ever recorded.
  *
@@ -37,6 +50,11 @@ export function ServerRecords({
   const { t: tRange } = useTranslation("components/servers/ranges");
   const label = tRange(range);
   const zone = useDisplayZone();
+
+  // With not one of the four to show, the strip is its own rules and padding
+  // around nothing, so it goes entirely. The panels around it say why.
+  if (!hasServerRecords(stats)) return null;
+
   return (
     <dl className="flex flex-col divide-y divide-fd-border md:flex-row md:divide-x md:divide-y-0">
       <Cell title={t("peak-last", { label })} record={stats.peak} zone={zone} />
@@ -51,6 +69,16 @@ export function ServerRecords({
   );
 }
 
+/**
+ * One figure, or nothing at all.
+ *
+ * A figure we do not have is left out rather than dashed: these carry their
+ * own heading, so a dash under "Peak, last 24 hours" reads as a number that
+ * broke, where an absent cell reads as a range with nothing in it. The row is
+ * a flex strip rather than a fixed grid precisely so the survivors close
+ * ranks, and with Wargaming's source down three of the four empty out
+ * together while the all-time record still stands.
+ */
 function Cell({
   title,
   record,
@@ -64,12 +92,13 @@ function Cell({
 }) {
   const { locale } = useFormat();
   const shown = value ?? (record ? formatPlayers(record.players, locale) : null);
+  if (shown == null) return null;
   return (
     <div className="flex flex-1 flex-col gap-1 p-4">
       <dt className="text-xs uppercase tracking-wide text-fd-muted-foreground">
         {title}
       </dt>
-      <dd className="text-2xl font-semibold tabular-nums">{shown ?? "—"}</dd>
+      <dd className="text-2xl font-semibold tabular-nums">{shown}</dd>
       <dd className="text-xs text-fd-muted-foreground">
         {record ? formatMoment(record.at, zone, locale) : " "}
       </dd>

@@ -12,7 +12,8 @@ import type { Region } from "@unicum.gg/wargaming";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { usePlayersOnline } from "@/hooks/use-players-online";
 import { cn } from "@/lib/utils";
-import { formatPlayers } from "./format";
+import { formatMoment, formatPlayers } from "./format";
+import { useDisplayZone } from "./use-display-zone";
 import { Hint } from "@/components/hint";
 
 /**
@@ -29,6 +30,7 @@ export function ServersLiveHeader({
   fallbackTotal,
   fallbackClusters,
   rhythm,
+  until,
 }: {
   region: Region;
   fallbackTotal: number | null;
@@ -36,9 +38,14 @@ export function ServersLiveHeader({
   fallbackClusters: { server: string; current: number | null }[];
   /** The weekly rhythm, to say whether right now is busy for the hour it is. */
   rhythm: ServerRhythmCell[];
+  /** The newest sample on record. With no figure to show, this is what
+   * separates a source that stopped answering from a region we have never
+   * recorded, and the headline says which rather than printing a dash. */
+  until: Date | null;
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/servers/live-header");
+  const zone = useDisplayZone();
   const live = usePlayersOnline(region);
 
   const { total, servers: clusters } = mergeServerOnline(
@@ -46,6 +53,13 @@ export function ServersLiveHeader({
     live,
     fallbackTotal,
     fallbackClusters,
+  );
+
+  // A cluster we hold no figure for is left out rather than shown with a dash,
+  // the same rule the top bar's tooltip follows: these are pills, not cells in
+  // a column that needs its rows to line up.
+  const measured = clusters.filter(
+    (c): c is typeof c & { players: number } => c.players != null,
   );
 
   // Against the average for this weekday and hour, so "busy" means busy for a
@@ -62,6 +76,33 @@ export function ServersLiveHeader({
       ? null
       : rhythmDeviation(rhythm, new Date(), total);
 
+  // No figure means no figure, rather than a dash the size of the headline,
+  // which reads as a broken number where the honest reading is that nobody is
+  // publishing one. `current` is null for exactly one reason, the newest sample
+  // being too old to describe now, so a recorded `until` here IS the source
+  // having stopped and the page can date it. See `isServerRecordingStalled`.
+  if (total == null) {
+    return (
+      <div className="flex flex-col items-center gap-2 text-center">
+        <div className="flex items-baseline gap-3">
+          <span
+            className="size-2 shrink-0 rounded-full bg-fd-muted-foreground/40"
+            aria-hidden
+          />
+          <span className="font-heading text-xl font-bold md:text-2xl">
+            {until
+              ? t("last-recorded-on", { at: formatMoment(until, zone, locale) })
+              : t("nothing-recorded-yet")}
+          </span>
+        </div>
+        {until ? (
+          <p className="text-sm text-fd-muted-foreground">
+            {t("wargaming-has-not-published-since")}</p>
+        ) : null}
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex items-baseline gap-3">
@@ -73,16 +114,16 @@ export function ServersLiveHeader({
           aria-hidden
         />
         <span className="font-heading text-4xl font-bold tabular-nums md:text-5xl">
-          {total == null ? "—" : formatPlayers(total, locale)}
+          {formatPlayers(total, locale)}
         </span>
         <span className="text-fd-muted-foreground">{t("players-online")}</span>
       </div>
 
       {deviation === null ? null : <DeviationNote deviation={deviation} />}
 
-      {clusters.length === 0 ? null : (
+      {measured.length === 0 ? null : (
         <ul className="flex flex-wrap items-center justify-center gap-2">
-          {clusters.map((cluster) => (
+          {measured.map((cluster) => (
             <li
               key={cluster.server}
               className="inline-flex items-baseline gap-2 rounded-md border border-fd-border bg-fd-card px-2.5 py-1 text-sm"
@@ -93,7 +134,7 @@ export function ServersLiveHeader({
                 </span>
               </Hint>
               <span className="tabular-nums text-fd-muted-foreground">
-                {cluster.players == null ? "—" : formatPlayers(cluster.players, locale)}
+                {formatPlayers(cluster.players, locale)}
               </span>
             </li>
           ))}

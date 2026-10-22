@@ -10,6 +10,7 @@ import {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { formatMoment, formatPlayers, formatShare } from "./format";
+import { RecordingNote } from "./recording-note";
 import { useDisplayZone } from "./use-display-zone";
 import { Hint } from "@/components/hint";
 
@@ -32,6 +33,8 @@ export function ClustersTable({
   total,
   peak,
   average,
+  stalled,
+  until,
 }: {
   clusters: ServerClusterStat[];
   range: ServerStatsRange;
@@ -45,6 +48,10 @@ export function ClustersTable({
   total: number | null;
   peak: ServerRecord | null;
   average: number;
+  /** Whether the recording has stopped, from `isServerRecordingStalled`. */
+  stalled: boolean;
+  /** The newest sample on record, to date the sentence that says so. */
+  until: Date | null;
 }) {
   const { locale } = useFormat();
   const { t } = useTranslation("components/servers/clusters-table");
@@ -56,7 +63,12 @@ export function ClustersTable({
   if (clusters.length === 0) {
     return (
       <p className="px-4 py-3 text-sm text-fd-muted-foreground">
-        {t("no-cluster-recorded-yet")}</p>
+        <RecordingNote
+          stalled={stalled}
+          until={until}
+          instead={t("no-cluster-recorded-yet")}
+        />
+      </p>
     );
   }
 

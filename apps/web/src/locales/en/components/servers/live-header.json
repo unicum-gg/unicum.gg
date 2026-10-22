@@ -1,6 +1,9 @@
 {
   "about-as-busy-as-usual": "About as busy as usual for this time of week.",
   "busier-than-usual": "busier than usual for this time of week.",
+  "last-recorded-on": "Last recorded on {at}",
+  "nothing-recorded-yet": "Nothing recorded yet",
   "players-online": "players online",
-  "quieter-than-usual": "quieter than usual for this time of week."
+  "quieter-than-usual": "quieter than usual for this time of week.",
+  "wargaming-has-not-published-since": "Wargaming has not published the figure since. Recording resumes on its own as soon as their source answers again."
 }

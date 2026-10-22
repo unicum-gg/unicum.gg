@@ -26,6 +26,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { formatMoment, formatPlayersCompact, formatTick } from "./format";
+import { RecordingNote } from "./recording-note";
 import { useDisplayZone } from "./use-display-zone";
 
 /**
@@ -56,11 +57,17 @@ export function PopulationChart({
   points,
   range,
   region,
+  stalled,
+  until,
 }: {
   servers: string[];
   points: ServerPopulationPoint[];
   range: ServerStatsRange;
   region: Region;
+  /** Whether the recording has stopped, from `isServerRecordingStalled`. */
+  stalled: boolean;
+  /** The newest sample on record, to date the sentence that says so. */
+  until: Date | null;
 }) {
   const { locale } = useFormat();
   const { t } = useTranslation("components/servers/population-chart");
@@ -134,11 +141,17 @@ export function PopulationChart({
 
   // Two points make a curve. One draws five stranded dots that read as a broken
   // chart rather than as a range the recording has not reached yet, which is
-  // what it is for as long as the history is younger than the range.
+  // what it is for as long as the history is younger than the range, and is
+  // NOT what it is once the source has stopped answering.
   if (points.length < 2) {
     return (
       <p className="flex h-64 items-center justify-center px-4 text-center text-sm text-fd-muted-foreground">
-        {t("not-enough-recorded-yet-for")}</p>
+        <RecordingNote
+          stalled={stalled}
+          until={until}
+          instead={t("not-enough-recorded-yet-for")}
+        />
+      </p>
     );
   }
 

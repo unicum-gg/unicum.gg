@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { formatPlayers, weekdayLabels } from "./format";
+import { RecordingNote } from "./recording-note";
 
 /**
  * When the region is actually busy: the average population of every hour of the
@@ -35,7 +36,19 @@ import { formatPlayers, weekdayLabels } from "./format";
  * "no data" and "nobody playing" are the same colour otherwise, and for the
  * first weeks of recording most of the grid is the former.
  */
-export function RhythmHeatmap({ rhythm }: { rhythm: ServerRhythmCell[] }) {
+export function RhythmHeatmap({
+  rhythm,
+  stalled,
+  until,
+}: {
+  rhythm: ServerRhythmCell[];
+  /** Whether the recording has stopped, from `isServerRecordingStalled`. The
+   * grid reads the trailing four weeks, so it survives an outage for a month
+   * and then empties out like the rest. */
+  stalled: boolean;
+  /** The newest sample on record, to date the sentence that says so. */
+  until: Date | null;
+}) {
   const { t } = useTranslation("components/servers/rhythm-heatmap");
   const { locale } = useLocale();
   // Named by `Intl` in the reader's language, not by a table of English
@@ -80,7 +93,12 @@ export function RhythmHeatmap({ rhythm }: { rhythm: ServerRhythmCell[] }) {
   if (!busiest) {
     return (
       <p className="text-sm text-fd-muted-foreground">
-        {t("not-enough-recorded-yet-to")}</p>
+        <RecordingNote
+          stalled={stalled}
+          until={until}
+          instead={t("not-enough-recorded-yet-to")}
+        />
+      </p>
     );
   }
 

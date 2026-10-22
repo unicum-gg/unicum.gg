@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
   type RegionPopulationSeries,
+  SERVER_SAMPLE_MAX_AGE_MINUTES,
   SERVER_STATS_RANGE_SPAN,
   type ServerClusterStat,
   type ServerComparison,
@@ -43,11 +44,16 @@ const RHYTHM_DAYS = 28;
  *
  * Six missed ticks. Without a bound, `max(sampled_at)` answers whatever the
  * last row is, so a region whose sampling stopped weeks ago (the worker down,
- * or Wargaming's endpoint 504ing, which is a documented state for Asia) would
- * publish a three-week-old figure as its live count, under a pulsing dot,
- * beside cluster peaks and averages that ARE windowed and so read zero.
+ * or Wargaming's endpoint 504ing, which it has done on all three regions since
+ * 2026-10-08) would publish a three-week-old figure as its live count, under a
+ * pulsing dot, beside cluster peaks and averages that ARE windowed and so read
+ * zero.
+ *
+ * Shared with the front rather than kept here, because the page says why the
+ * figures are gone the moment this read stops publishing them, and two copies
+ * of the threshold would drift into a page that blanks out silently.
  */
-const LATEST_MAX_AGE_MINUTES = 30;
+const LATEST_MAX_AGE_MINUTES = SERVER_SAMPLE_MAX_AGE_MINUTES;
 
 type PeakRow = {
   peak: number | null;
@@ -195,6 +201,27 @@ async function readRhythm(region: Region): Promise<ServerRhythmCell[]> {
   }));
 }
 
+/**
+ * The newest sample on record, with no window on it at all.
+ *
+ * Its own read rather than a column of `readLatest`, which is deliberately
+ * bounded and answers nothing once the recording stops: this is the one figure
+ * that has to survive that bound, since it is what says how long it has been
+ * stopped. Cheap whatever the state of the table, which holds one row per
+ * cluster per five minutes and is tens of thousands of rows, not millions.
+ *
+ * Exported for the watchdog, so what alerts and what the page prints are the
+ * same read rather than two queries that agree until one of them is edited.
+ */
+export async function readLastSampleAt(region: Region): Promise<Date | null> {
+  const t = serverOnlineByRegion[region];
+  const rows = await db.execute<{ until_epoch: number | null }>(
+    sql`SELECT extract(epoch FROM max(sampled_at))::double precision AS until_epoch
+        FROM ${t}`,
+  );
+  return toDate(rows[0]?.until_epoch);
+}
+
 /** Each cluster's population at the last instant recorded, provided that
  * instant is recent enough to still describe now. A cluster missing from it is
  * missing from the result: Wargaming stops listing a
@@ -299,7 +326,7 @@ export async function loadServerStats(
   region: Region,
   range: ServerStatsRange,
 ): Promise<ServerStats> {
-  const [seriesRows, totals, allTime, rhythm, latest, clusterTotals] =
+  const [seriesRows, totals, allTime, rhythm, latest, clusterTotals, until] =
     await Promise.all([
       readSeries(region, range),
       readRangeTotals(region, range),
@@ -307,6 +334,7 @@ export async function loadServerStats(
       readRhythm(region),
       readLatest(region),
       readClusterTotals(region, range),
+      readLastSampleAt(region),
     ]);
 
   // Busiest first, and a cluster absent from the latest sample is ordered by
@@ -346,6 +374,7 @@ export async function loadServerStats(
     allTimePeak: allTime.peak,
     rhythm,
     since: allTime.since,
+    until,
   };
 }
 
@@ -354,10 +383,11 @@ async function loadRegionSeries(
   region: Region,
   range: ServerStatsRange,
 ): Promise<RegionPopulationSeries> {
-  const [seriesRows, totals, latest] = await Promise.all([
+  const [seriesRows, totals, latest, until] = await Promise.all([
     readSeries(region, range),
     readRangeTotals(region, range),
     readLatest(region),
+    readLastSampleAt(region),
   ]);
   const servers = [...new Set(seriesRows.map((r) => r.server))];
   return {
@@ -370,6 +400,7 @@ async function loadRegionSeries(
       at,
       total,
     })),
+    until,
   };
 }
 

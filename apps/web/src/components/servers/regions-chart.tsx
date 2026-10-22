@@ -4,7 +4,11 @@ import { useFormat } from "@/hooks/use-format";
 import { useTranslation } from "@/hooks/use-translation";
 import { useMemo } from "react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
-import type { RegionPopulationSeries, ServerStatsRange } from "@unicum.gg/shared";
+import {
+  isServerRecordingStalled,
+  type RegionPopulationSeries,
+  type ServerStatsRange,
+} from "@unicum.gg/shared";
 import { REGION_LABEL } from "@unicum.gg/wargaming";
 import {
   type ChartConfig,
@@ -15,6 +19,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { formatMoment, formatPlayersCompact, formatTick } from "./format";
+import { RecordingNote } from "./recording-note";
 import { useDisplayZone } from "./use-display-zone";
 
 /**
@@ -73,11 +78,32 @@ export function RegionsChart({
     return [...byInstant.values()].sort((a, b) => a.t - b.t);
   }, [regions]);
 
+  /**
+   * This chart draws three regions, so it is only the source that has stopped
+   * when every one of them has: one region down is a region-specific outage and
+   * the other two curves still say so on their own. The date shown is the
+   * newest any of them reached, which is when the last of them went quiet.
+   */
+  const stalled =
+    regions.length > 0 && regions.every((series) => isServerRecordingStalled(series));
+  const until = useMemo(() => {
+    const stamps = regions
+      .map((series) => series.until)
+      .filter((at): at is Date => at != null);
+    if (stamps.length === 0) return null;
+    return new Date(Math.max(...stamps.map((at) => at.getTime())));
+  }, [regions]);
+
   // Same rule as the population chart: one instant is not a curve.
   if (data.length < 2) {
     return (
       <p className="flex h-56 items-center justify-center px-4 text-center text-sm text-fd-muted-foreground">
-        {t("not-enough-recorded-yet-for")}</p>
+        <RecordingNote
+          stalled={stalled}
+          until={until}
+          instead={t("not-enough-recorded-yet-for")}
+        />
+      </p>
     );
   }
 

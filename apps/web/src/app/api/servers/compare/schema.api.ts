@@ -23,6 +23,10 @@ const regionSeries = z
       .nullable()
       .meta({ description: "Highest total inside the range." }),
     points: z.array(totalPoint),
+    until: z.coerce.date().nullable().meta({
+      description:
+        "The newest sample on record for this region, whatever range was asked for. Well behind now means Wargaming's source stopped answering rather than this region having nothing to show.",
+    }),
   })
   .meta({
     id: "RegionPopulationSeries",
