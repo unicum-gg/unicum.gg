@@ -1,13 +1,11 @@
 import { desc, eq, sql } from "drizzle-orm";
 import {
-  env,
   onslaughtSeasonSnapshotsByRegion,
   onslaughtSeasonsByRegion,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import { postChannelMessage } from "@unicum.gg/core/discord";
-import { getRedisClient } from "@unicum.gg/core/redis";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
+import { createStallAlert } from "@unicum.gg/core/cron/stall-alert";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 
 /**
@@ -42,63 +40,13 @@ const SCHEDULE = "*/20 * * * *";
  */
 const STALL_AFTER_MS = 60 * 60 * 1000;
 
-/**
- * How long a reported stall is remembered, so an incident that is still open a
- * week later is said once more rather than never again. Long enough that no
- * ordinary outage is repeated, short enough that the key does not outlive the
- * thing it describes.
- */
-const STALL_MEMORY_SECONDS = 7 * 24 * 60 * 60;
-
-/** Fallback for a process with no Redis (local dev), and for a Redis blip. */
-const stalledInProcess = new Set<Region>();
-
-function stallKey(region: Region): string {
-  return `onslaught:watchdog:stalled:${region}`;
-}
-
-/**
- * Whether this region's stall has already been reported.
- *
- * Kept in Redis rather than in memory because the alert is edge-triggered and
- * the process is not long-lived: the worker is redeployed several times on a
- * busy day, and each restart used to replay every open alert. A missing key is
- * read as "not reported", so an eviction or an unreachable Redis costs one
- * repeated warning, which is exactly the behaviour this replaces, and never a
- * silent one.
- */
-async function wasReported(region: Region): Promise<boolean> {
-  const redis = getRedisClient();
-  if (!redis) return stalledInProcess.has(region);
-  try {
-    return (await redis.get(stallKey(region))) !== null;
-  } catch {
-    return stalledInProcess.has(region);
-  }
-}
-
-/** Record (or clear) that this region's stall has been reported. */
-async function setReported(region: Region, reported: boolean): Promise<void> {
-  if (reported) stalledInProcess.add(region);
-  else stalledInProcess.delete(region);
-
-  const redis = getRedisClient();
-  if (!redis) return;
-  try {
-    if (reported) {
-      await redis.set(
-        stallKey(region),
-        new Date().toISOString(),
-        "EX",
-        STALL_MEMORY_SECONDS,
-      );
-    } else {
-      await redis.del(stallKey(region));
-    }
-  } catch {
-    // Best effort: the in-process set above still holds this tick's answer.
-  }
-}
+const alert = createStallAlert({
+  name: "onslaught-watchdog",
+  // The spelling the open incidents are already keyed under in Redis. It must
+  // not change: a new prefix reads as "never announced" and re-announces every
+  // stall that is open at the moment of the deploy.
+  keyPrefix: "onslaught:watchdog",
+});
 
 export type CaptureFreshness = {
   region: Region;
@@ -199,40 +147,25 @@ export async function checkCaptureFreshness(): Promise<CaptureFreshness[]> {
     // first capture has not run yet, and there is nothing to be late for.
     if (r.eventId == null) continue;
     if (!r.live) {
-      await setReported(r.region, false);
+      await alert.forget(r.region);
       continue;
     }
 
     const late = r.behindMs == null || r.behindMs > STALL_AFTER_MS;
-    const reported = await wasReported(r.region);
-
-    if (late && !reported) {
-      await setReported(r.region, true);
-      const age =
-        r.ageMs == null ? "never" : `${minutes(r.ageMs)} minutes ago`;
-      await report(
+    if (late) {
+      const age = r.ageMs == null ? "never" : `${minutes(r.ageMs)} minutes ago`;
+      await alert.announce(
+        r.region,
         `⚠️ Onslaught capture stalled on ${r.region.toUpperCase()}: last sample ${age} (${r.eventId}). The source keeps no history, so anything missed now is lost.`,
       );
-    } else if (!late && reported) {
-      await setReported(r.region, false);
-      await report(
+    } else {
+      await alert.recover(
+        r.region,
         `✅ Onslaught capture recovered on ${r.region.toUpperCase()}: sampling again (${r.eventId}).`,
       );
     }
   }
   return readings;
-}
-
-/** Say it in the channel when there is one, and in the logs either way. */
-async function report(message: string): Promise<void> {
-  console.warn(`[onslaught-watchdog] ${message}`);
-  const channel = env.DISCORD_ALERTS_CHANNEL_ID;
-  if (!channel) return;
-  try {
-    await postChannelMessage(channel, message);
-  } catch (err) {
-    console.error("[onslaught-watchdog] could not reach Discord:", err);
-  }
 }
 
 /** One region's state, for the tick's own log line. */
