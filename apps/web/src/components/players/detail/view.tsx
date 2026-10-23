@@ -12,6 +12,7 @@ import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
+import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import { useCookie } from "@/hooks/use-cookie";
 import STORAGE from "@/constants/storage";
 import { unicum } from "@/services/sdk";
@@ -50,6 +51,7 @@ export function PlayerProfile({
   initialAchievements,
   initialTournaments,
   initialOnslaught,
+  initialBattles,
 }: {
   region: Region;
   nickname: string;
@@ -80,6 +82,8 @@ export function PlayerProfile({
   initialTournaments: PlayerTournamentRecord | null;
   /** Onslaught record, server-rendered on a direct `/onslaught` landing. */
   initialOnslaught: PlayerOnslaughtData | null;
+  /** Battles shared through the mod, server-rendered under Overview. */
+  initialBattles: PlayerBattlesPayload | null;
 }) {
   // The active metric is client state (the cookie), not a server prop: the page
   // is statically cached and metric-agnostic (the payload carries all three
@@ -201,6 +205,7 @@ export function PlayerProfile({
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
+        initialBattles={initialBattles}
       />
     </>
   );

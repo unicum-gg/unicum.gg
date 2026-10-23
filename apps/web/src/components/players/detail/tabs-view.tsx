@@ -21,6 +21,7 @@ import {
   OverallTab,
   type OverallData,
 } from "@/components/players/detail/overview";
+import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import {
   StrongholdTab,
   type StrongholdData,
@@ -125,6 +126,8 @@ export type PlayerTabsViewProps = {
   /** Onslaught record, server-rendered on a direct `/onslaught` landing; null
    * on every other view, where the client fetches it when the mode is opened. */
   initialOnslaught: PlayerOnslaughtData | null;
+  /** Battles shared through the mod, server-rendered under Overview. */
+  initialBattles: PlayerBattlesPayload | null;
 };
 
 export function PlayerTabsView({
@@ -144,6 +147,7 @@ export function PlayerTabsView({
   initialAchievements,
   initialTournaments,
   initialOnslaught,
+  initialBattles,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -296,6 +300,7 @@ export function PlayerTabsView({
     markProgress: detail.markProgress ?? null,
     tanksHref: playerSectionHref(basePath, PlayerSection.Tanks),
     nowMs,
+    initialBattles,
   };
   // An ended mode is null where the account never played it, and the panel
   // renders its own "no data yet" for that. `EMPTY_MODE` keeps the record type

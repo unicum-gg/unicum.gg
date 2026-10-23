@@ -1,6 +1,7 @@
 "use client";
 
 import useSWR from "swr";
+import { useLocale } from "@onruntime/translations/react";
 import { InfoIcon } from "@phosphor-icons/react";
 import type { RatingMetric } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -14,6 +15,11 @@ import {
 import { unicum } from "@/services/sdk";
 import { useTranslation } from "@/hooks/use-translation";
 import { PlayerBattlesTable, type PlayerBattleRow } from "./battles-table";
+
+export type PlayerBattlesPayload = {
+  accountId: number;
+  battles: PlayerBattleRow[];
+};
 
 /**
  * The battles we know this player fought, newest first.
@@ -31,41 +37,54 @@ import { PlayerBattlesTable, type PlayerBattleRow } from "./battles-table";
  * afford its empty state because it describes sampling we do ourselves, which
  * every account eventually gets; this describes other people's generosity.
  *
- * Fetched by the panel itself rather than threaded through the profile payload.
- * The page's own payload is cached and server-rendered, and battles move every
- * few minutes: a player checking their own page after a game would otherwise
- * read a list that was right when the page was built. Keyed on the SDK
- * request's own url, which is the pattern the rest of the profile uses for
- * anything it loads on demand.
+ * Seeded by the server and refetched on mount, rather than one or the other.
+ * Fetched only in the browser, the panel could not exist before hydration plus
+ * a round trip to the endpoint (~0.5s), so it popped in late and pushed the
+ * page down. Seeded only, it would show the list as it stood when the page was
+ * cached, up to a day old, while battles move every few minutes. So the cached
+ * HTML carries the list it was built with and the browser swaps in the current
+ * one, keyed on the SDK request's own url like everything else the profile
+ * loads on demand.
  */
 export function PlayerBattlesPanel({
   region,
   nickname,
   metric,
+  initialBattles,
 }: {
   region: Region;
   nickname: string;
   /** The reader's own metric, the one the rest of the profile is showing. */
   metric: RatingMetric;
+  /** The list the server rendered the page with, null when it did not ask. */
+  initialBattles: PlayerBattlesPayload | null;
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
   );
-  const request = () => unicum.region(region).players(nickname).battles();
-  const { data, isLoading } = useSWR(
+  const { locale } = useLocale();
+  // In the page's own language, which is also what the server seeded it with,
+  // so the seed and the refetch share one key.
+  const request = () =>
+    unicum.region(region).players(nickname).battles({ language: locale });
+  const { data } = useSWR(
     request().url(),
-    () =>
-      request().then(
-        (r) =>
-          r as unknown as { accountId: number; battles: PlayerBattleRow[] },
-      ),
-    { revalidateOnFocus: false, shouldRetryOnError: false },
+    () => request().then((r) => r as unknown as PlayerBattlesPayload),
+    {
+      fallbackData: initialBattles ?? undefined,
+      // Explicit, because the seed can be a day old: the cached HTML is only
+      // what to show until the current list arrives.
+      revalidateOnMount: true,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
   );
 
   // Nothing while it loads either: a panel that appears, shows a skeleton and
   // then vanishes for the overwhelming majority of accounts is worse than one
-  // that arrives when it has something.
-  if (isLoading || !data || data.battles.length === 0) return null;
+  // that arrives when it has something. A seeded panel has data from the first
+  // paint, so this only waits on a view the server did not render the list for.
+  if (!data || data.battles.length === 0) return null;
 
   return (
     <>

@@ -16,6 +16,7 @@ import { archivedModeRecord } from "@/components/players/detail/overview/mode-ta
 import { AccountLockedView } from "@/components/players/detail/account-locked";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
+import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -282,6 +283,22 @@ async function PlayerProfileServer({
   tankSlug?: string;
 }) {
   const { section, mode } = view;
+  // The battles shared through the mod, under the one view that draws them.
+  // Started before the detail rather than after it: the two are independent,
+  // so the render waits for the slower of them instead of their sum. Without
+  // it the panel only existed after hydration plus its own round trip, and
+  // popped in half a second late. Caught like the tournaments below, for the
+  // same reason (this endpoint resolves the nickname against our own table),
+  // and because an absent list is the common answer: the panel draws nothing.
+  const battlesPromise: Promise<PlayerBattlesPayload | null> =
+    section === PlayerSection.Overview && mode === PlayerMode.Overall
+      ? unicum
+          .region(region)
+          .players(decoded)
+          .battles({ language: locale })
+          .then((r) => r as unknown as PlayerBattlesPayload)
+          .catch(() => null)
+      : Promise.resolve(null);
   const detail = await loadDetail(region, decoded);
   if (detail && "locked" in detail) {
     return <AccountLockedView
@@ -444,6 +461,8 @@ async function PlayerProfileServer({
     <PlayerTankLoadoutEmpty locale={locale} />
   );
 
+  const initialBattles = await battlesPromise;
+
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
 
@@ -490,6 +509,7 @@ async function PlayerProfileServer({
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
+        initialBattles={initialBattles}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side
           borders run down to the footer instead of stopping at the last panel,

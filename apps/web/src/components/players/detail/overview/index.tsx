@@ -21,7 +21,10 @@ import {
 import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
 import { PlayerNameHistory } from "@/components/players/detail/overview/name-history";
 import { PlayerMarksPanels } from "@/components/players/detail/overview/marks";
-import { PlayerBattlesPanel } from "@/components/players/detail/overview/battles";
+import {
+  PlayerBattlesPanel,
+  type PlayerBattlesPayload,
+} from "@/components/players/detail/overview/battles";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
 import { PlayerPercentile } from "@/components/players/detail/overview/percentile";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
@@ -81,6 +84,8 @@ export type OverallData = {
    * cell's tier and level already selected. */
   tanksHref: string;
   nowMs: number;
+  /** The battles list the server rendered, so the panel paints with the page. */
+  initialBattles: PlayerBattlesPayload | null;
 };
 
 /** The Overview section under the default Random Battles mode: lifetime stats,
@@ -102,6 +107,7 @@ export function OverallTab({
   markProgress,
   tanksHref,
   nowMs,
+  initialBattles,
 }: OverallData & { region: Region; nickname: string }) {
   const { locale } = useLocale();
   const { t } = useTranslation(
@@ -154,6 +160,19 @@ export function OverallTab({
         </PanelContent>
       </Panel>
 
+      {/* Second on the page, straight after the career figures and above the
+          rating chart. It is the most recent and most specific thing we hold
+          about an account -- what they did in the last ten battles, against
+          what they have done in twenty thousand -- and it was the last thing
+          anyone would scroll to. It draws its own separator, and nothing at all
+          for an account nobody has shared a battle for, which is most of them. */}
+      <PlayerBattlesPanel
+        region={region}
+        nickname={nickname}
+        metric={metric}
+        initialBattles={initialBattles}
+      />
+
       <PanelSeparator />
 
       <Panel>
@@ -202,18 +221,6 @@ export function OverallTab({
           )}
         </PanelContent>
       </Panel>
-
-      {/* Third on the page, straight after the career figures and the rating
-          chart. It is the most recent and most specific thing we hold about an
-          account -- what they did in the last ten battles, against what they
-          have done in twenty thousand -- and it was the last thing anyone
-          would scroll to. It draws its own separator, and nothing at all for
-          an account nobody has shared a battle for, which is most of them. */}
-      <PlayerBattlesPanel
-        region={region}
-        nickname={nickname}
-        metric={metric}
-      />
 
       <PanelSeparator />
 
