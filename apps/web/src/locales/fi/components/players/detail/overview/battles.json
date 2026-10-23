@@ -4,6 +4,10 @@
   "seen-by": "nähty {count} kertaa",
   "died": "Tuhottu tässä taistelussa",
   "unknown-vehicle": "Tuntematon ajoneuvo",
+  "empty-heading": "Jaa taistelut",
+  "example": "Esimerkki",
+  "empty-blurb": "Wargaming ei julkaise mitään yksittäisestä taistelusta, eikä kukaan ole vielä jakanut yhtäkään {nickname}-käyttäjän taisteluista. Modilla nimeltä {name} pelaamasi taistelut näkyvät täällä koko kokoonpanon kanssa.",
+  "empty-cta": "Lataa modi",
   "rating-title": "{metric} tässä taistelussa",
   "column": {
     "damage": "Vahinkoa aiheutettu",

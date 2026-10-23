@@ -4,6 +4,10 @@
   "seen-by": "viđeno od {count}",
   "died": "Uništen u ovoj bitci",
   "unknown-vehicle": "Nepoznato vozilo",
+  "empty-heading": "Dijeli svoje bitke",
+  "example": "Primjer",
+  "empty-blurb": "Wargaming ne objavljuje ništa o pojedinačnoj bitki, a nitko još nije učinio zajedničkom nijednu bitku igrača {nickname}. S modom {name} bitke koje igraš prikazuju se ovdje, s cijelom postavom.",
+  "empty-cta": "Preuzmi mod",
   "rating-title": "{metric} za ovu bitku",
   "column": {
     "damage": "Šteta",

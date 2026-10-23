@@ -4,6 +4,10 @@
   "seen-by": "nakita ng {count}",
   "died": "Nawasak sa labanang ito",
   "unknown-vehicle": "Hindi kilalang sasakyan",
+  "empty-heading": "Ibahagi ang iyong mga laban",
+  "example": "Halimbawa",
+  "empty-blurb": "Walang nagpa-publish ang Wargaming tungkol sa iisang labanan, at walang sinuman ang nagbahagi ng isa sa mga laban ni {nickname}. Gamit ang {name} mod, ipapakita rito ang mga laban na iyong nilalaro, kasama ang buong talaan.",
+  "empty-cta": "Kunin ang mod",
   "rating-title": "{metric} para sa labanang ito",
   "column": {
     "damage": "Pinsala",

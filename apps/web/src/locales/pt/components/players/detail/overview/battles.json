@@ -4,6 +4,10 @@
   "seen-by": "vista por {count}",
   "died": "Destruídos nesta batalha",
   "unknown-vehicle": "Veículo desconhecido",
+  "empty-heading": "Compartilhar suas batalhas",
+  "example": "Exemplo",
+  "empty-blurb": "A Wargaming não publica nada sobre uma única batalha, e ninguém ainda compartilhou uma das batalhas de {nickname}. Com o mod {name}, as batalhas que você jogar serão mostradas aqui, com a lista inteira.",
+  "empty-cta": "Obter o mod",
   "rating-title": "{metric} nesta batalha",
   "column": {
     "damage": "Dano",

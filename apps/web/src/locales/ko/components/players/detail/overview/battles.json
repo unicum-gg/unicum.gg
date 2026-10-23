@@ -4,6 +4,10 @@
   "seen-by": "{count}명이 확인",
   "died": "이 전투에서 격파됨",
   "unknown-vehicle": "차량 알 수 없음",
+  "empty-heading": "전투 공유",
+  "example": "예시",
+  "empty-blurb": "워게이밍은 단일 전투에 관한 내용을 게시하지 않으며, 아직 {nickname}의 전투를 공유한 사람은 아무도 없음. {name} 모드로 플레이한 전투가 전체 명단과 함께 여기에 표시됩니다.",
+  "empty-cta": "모드 받기",
   "rating-title": "이 전투의 {metric}",
   "column": {
     "damage": "피해량",

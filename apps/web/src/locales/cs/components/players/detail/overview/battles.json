@@ -4,6 +4,10 @@
   "seen-by": "zobrazeno uživateli {count}",
   "died": "Zničeno v této bitvě",
   "unknown-vehicle": "Neznámé vozidlo",
+  "empty-heading": "Sdílet své bitvy",
+  "example": "Příklad",
+  "empty-blurb": "Wargaming o jednotlivé bitvě nic nezveřejňuje a nikdo zatím nemá sdílené nic z bitev hráče s přezdívkou {nickname}. S modem {name} se zde zobrazí bitvy, které hrajete, včetně celé soupisky.",
+  "empty-cta": "Stáhnout mod",
   "rating-title": "{metric} pro tuto bitvu",
   "column": {
     "damage": "Poškození",

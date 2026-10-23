@@ -4,6 +4,10 @@
   "seen-by": "văzută de {count}",
   "died": "Distrus în această bătălie",
   "unknown-vehicle": "Vehicul necunoscut",
+  "empty-heading": "Împărtășește-ți bătăliile",
+  "example": "Exemplu",
+  "empty-blurb": "Wargaming nu publică nimic despre o singură bătălie și nimeni nu a partajat încă vreuna dintre bătăliile jucate de {nickname}. Cu mod-ul {name}, bătăliile pe care le joci sunt afișate aici, cu întreaga listă.",
+  "empty-cta": "Descarcă mod-ul",
   "rating-title": "{metric} pentru această bătălie",
   "column": {
     "damage": "Daune produse",

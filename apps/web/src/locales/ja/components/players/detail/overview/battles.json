@@ -4,6 +4,10 @@
   "seen-by": "{count}人が確認済み",
   "died": "この戦闘での撃破数",
   "unknown-vehicle": "不明な車両",
+  "empty-heading": "戦闘を共有",
+  "example": "例",
+  "empty-blurb": "Wargamingは1戦について何も公開しておらず、{nickname}の戦闘もまだ誰も共有していません。{name} MODを導入すると、プレイした戦闘がロスター全体とともにここに表示されます。",
+  "empty-cta": "MODを入手",
   "rating-title": "この戦闘の{metric}",
   "column": {
     "damage": "ダメージ",

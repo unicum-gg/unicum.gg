@@ -777,7 +777,9 @@
     "… vs modules": "… ضد الوحدات",
     "ranking": "التصنيف",
     "Listed on": "مدرج على",
-    "figure": "رقم"
+    "figure": "رقم",
+    "Get the mod": "احصل على المود",
+    "shared": "مشترك"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1557,7 +1559,9 @@
     "… vs modules": "… супраць модуляў",
     "ranking": "рэйтынг",
     "Listed on": "Размешчана на",
-    "figure": "паказчык"
+    "figure": "паказчык",
+    "Get the mod": "Спампаваць мод",
+    "shared": "агульны"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2551,7 +2555,9 @@
     "… vs modules": "… срещу модули",
     "ranking": "класация",
     "Listed on": "Посочено в",
-    "figure": "фигура"
+    "figure": "фигура",
+    "Get the mod": "Изтеглете мода",
+    "shared": "споделени"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3338,7 +3344,9 @@
     "… vs modules": "… protiv modula",
     "ranking": "rangiranje",
     "Listed on": "Navedeno na",
-    "figure": "figura"
+    "figure": "figura",
+    "Get the mod": "Preuzmite mod",
+    "shared": "zajedničko"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4343,7 +4351,9 @@
     "… vs modules": "… vs moduly",
     "ranking": "žebříček",
     "Listed on": "Uvedeno na",
-    "figure": "údaj"
+    "figure": "údaj",
+    "Get the mod": "Stáhnout mod",
+    "shared": "sdílené"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5354,7 +5364,9 @@
     "… vs modules": "… vs moduler",
     "ranking": "rangliste",
     "Listed on": "Listet på",
-    "figure": "tal"
+    "figure": "tal",
+    "Get the mod": "Hent moddet",
+    "shared": "delt"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6358,7 +6370,9 @@
     "… vs modules": "… vs Module",
     "ranking": "Rangliste",
     "Listed on": "Gelistet auf",
-    "figure": "Zahl"
+    "figure": "Zahl",
+    "Get the mod": "Mod herunterladen",
+    "shared": "gemeinsam"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7368,7 +7382,9 @@
     "… vs modules": "… εναντίον μονάδων",
     "ranking": "κατάταξη",
     "Listed on": "Καταχωρισμένο σε",
-    "figure": "αριθμός"
+    "figure": "αριθμός",
+    "Get the mod": "Κατέβασε το mod",
+    "shared": "κοινά"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8358,7 +8374,9 @@
     "… vs modules": "… vs módulos",
     "ranking": "clasificación",
     "Listed on": "Listado en",
-    "figure": "figura"
+    "figure": "figura",
+    "Get the mod": "Descarga el mod",
+    "shared": "compartido"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9372,7 +9390,9 @@
     "… vs modules": "… vs moduulit",
     "ranking": "sijoitus",
     "Listed on": "Listattu palvelussa",
-    "figure": "luku"
+    "figure": "luku",
+    "Get the mod": "Lataa modi",
+    "shared": "jaettu"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10366,7 +10386,9 @@
     "… vs modules": "… vs modules",
     "ranking": "classement",
     "Listed on": "Répertorié sur",
-    "figure": "chiffre"
+    "figure": "chiffre",
+    "Get the mod": "Obtenir le mod",
+    "shared": "partagé"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11147,7 +11169,9 @@
     "… vs modules": "… बनाम मॉड्यूल्स",
     "ranking": "रैंकिंग",
     "Listed on": "पर सूचीबद्ध",
-    "figure": "आंकड़ा"
+    "figure": "आंकड़ा",
+    "Get the mod": "मॉड प्राप्त करें",
+    "shared": "साझा"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12155,7 +12179,9 @@
     "… vs modules": "… protiv modula",
     "ranking": "poredak",
     "Listed on": "Navedeno na",
-    "figure": "brojka"
+    "figure": "brojka",
+    "Get the mod": "Preuzmi mod",
+    "shared": "zajedničko"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13165,7 +13191,9 @@
     "… vs modules": "… vs modulok",
     "ranking": "ranglista",
     "Listed on": "Listázva itt",
-    "figure": "ábra"
+    "figure": "ábra",
+    "Get the mod": "Mod letöltése",
+    "shared": "megosztott"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14171,7 +14199,9 @@
     "… vs modules": "… vs moduli",
     "ranking": "classifica",
     "Listed on": "Elencato su",
-    "figure": "dato"
+    "figure": "dato",
+    "Get the mod": "Scarica la mod",
+    "shared": "condiviso"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15184,7 +15214,9 @@
     "… vs modules": "… モジュール対抗",
     "ranking": "ランキング",
     "Listed on": "掲載先",
-    "figure": "図"
+    "figure": "図",
+    "Get the mod": "MODを入手",
+    "shared": "共有"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -15968,7 +16000,9 @@
     "… vs modules": "… модульдерге қарсы",
     "ranking": "рейтинг",
     "Listed on": "Көрсетілген орны",
-    "figure": "сан"
+    "figure": "сан",
+    "Get the mod": "Модты жүктеп алу",
+    "shared": "ортақ"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -16986,7 +17020,9 @@
     "… vs modules": "… 모듈 대",
     "ranking": "랭킹",
     "Listed on": "게시 위치",
-    "figure": "수치"
+    "figure": "수치",
+    "Get the mod": "모드 받기",
+    "shared": "공유"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -17999,7 +18035,9 @@
     "… vs modules": "… vs moduliai",
     "ranking": "reitingas",
     "Listed on": "Nurodyta svetainėje",
-    "figure": "skaičius"
+    "figure": "skaičius",
+    "Get the mod": "Gauti modą",
+    "shared": "bendri"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -18998,7 +19036,9 @@
     "… vs modules": "… pret moduļiem",
     "ranking": "reitings",
     "Listed on": "Publicēts vietnē",
-    "figure": "skaitlis"
+    "figure": "skaitlis",
+    "Get the mod": "Iegūt modu",
+    "shared": "koplietots"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20013,7 +20053,9 @@
     "… vs modules": "… vs modules",
     "ranking": "ranglijst",
     "Listed on": "Vermeld op",
-    "figure": "figuur"
+    "figure": "figuur",
+    "Get the mod": "Download de mod",
+    "shared": "gedeeld"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -21019,7 +21061,9 @@
     "… vs modules": "… vs moduler",
     "ranking": "rangering",
     "Listed on": "Listet på",
-    "figure": "tall"
+    "figure": "tall",
+    "Get the mod": "Last ned modden",
+    "shared": "delt"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -22022,7 +22066,9 @@
     "… vs modules": "… w porównaniu do modułów",
     "ranking": "ranking",
     "Listed on": "Dostępne na",
-    "figure": "liczba"
+    "figure": "liczba",
+    "Get the mod": "Pobierz mod",
+    "shared": "wspólne"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -23018,7 +23064,9 @@
     "… vs modules": "… vs módulos",
     "ranking": "classificação",
     "Listed on": "Listados em",
-    "figure": "valor"
+    "figure": "valor",
+    "Get the mod": "Obter o mod",
+    "shared": "compartilhado"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -24014,7 +24062,9 @@
     "… vs modules": "… vs module",
     "ranking": "clasament",
     "Listed on": "Listat pe",
-    "figure": "cifră"
+    "figure": "cifră",
+    "Get the mod": "Descarcă mod-ul",
+    "shared": "partajat"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -24998,7 +25048,9 @@
     "… vs modules": "… против модулей",
     "ranking": "рейтинг",
     "Listed on": "Размещено на",
-    "figure": "показатель"
+    "figure": "показатель",
+    "Get the mod": "Скачать мод",
+    "shared": "общие"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25783,7 +25835,9 @@
     "… vs modules": "… vs moduly",
     "ranking": "lestvica",
     "Listed on": "Navedeno na",
-    "figure": "slika"
+    "figure": "slika",
+    "Get the mod": "Prenesi mod",
+    "shared": "skupno"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26793,7 +26847,9 @@
     "… vs modules": "… protiv modula",
     "ranking": "rangiranje",
     "Listed on": "Наведено на",
-    "figure": "фигура"
+    "figure": "фигура",
+    "Get the mod": "Преузми мод",
+    "shared": "заједничко"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27808,7 +27864,9 @@
     "… vs modules": "… vs moduler",
     "ranking": "ranking",
     "Listed on": "Listad på",
-    "figure": "figur"
+    "figure": "figur",
+    "Get the mod": "Ladda ner modden",
+    "shared": "delad"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28819,7 +28877,9 @@
     "… vs modules": "… ปะทะโมดูล",
     "ranking": "อันดับ",
     "Listed on": "แสดงบน",
-    "figure": "ตัวเลข"
+    "figure": "ตัวเลข",
+    "Get the mod": "ดาวน์โหลดม็อด",
+    "shared": "ร่วมกัน"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29605,7 +29665,9 @@
     "… vs modules": "… laban sa mga module",
     "ranking": "ranggo",
     "Listed on": "Nakalista sa",
-    "figure": "bilang"
+    "figure": "bilang",
+    "Get the mod": "Kunin ang mod",
+    "shared": "magkasama"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30612,7 +30674,9 @@
     "… vs modules": "… modüllere karşı",
     "ranking": "sıralama",
     "Listed on": "Listelendiği yer",
-    "figure": "sayı"
+    "figure": "sayı",
+    "Get the mod": "Modu al",
+    "shared": "paylaşılan"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31612,7 +31676,9 @@
     "… vs modules": "… проти модулів",
     "ranking": "рейтинг",
     "Listed on": "Зазначено на",
-    "figure": "показник"
+    "figure": "показник",
+    "Get the mod": "Отримати мод",
+    "shared": "спільні"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32601,7 +32667,9 @@
     "… vs modules": "… so với các mô-đun",
     "ranking": "xếp hạng",
     "Listed on": "Được liệt kê trên",
-    "figure": "hình"
+    "figure": "hình",
+    "Get the mod": "Tải mod",
+    "shared": "chung"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33612,6 +33680,8 @@
     "… vs modules": "… 对模块",
     "ranking": "排名",
     "Listed on": "收录于",
-    "figure": "数值"
+    "figure": "数值",
+    "Get the mod": "获取模组",
+    "shared": "共享"
   }
 }

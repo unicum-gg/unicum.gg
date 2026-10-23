@@ -4,6 +4,10 @@
   "seen-by": "videlo {count}",
   "died": "Zničené v tejto bitke",
   "unknown-vehicle": "Neznáme vozidlo",
+  "empty-heading": "Zdieľať svoje bitky",
+  "example": "Príklad",
+  "empty-blurb": "Wargaming zverejňuje nič o jednotlivý bitka a nihče ešte skupno nezdieľal žiadnu z bitiek od {nickname}. S modom {name} sa bitky, ktoré môžete hrať, prikaži tu spolu s celý zostava.",
+  "empty-cta": "Prenesi mod",
   "rating-title": "{metric} pre túto bitku",
   "column": {
     "damage": "Poškodenie",

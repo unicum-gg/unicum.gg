@@ -4,6 +4,10 @@
   "seen-by": "widziana przez {count}",
   "died": "Zniszczony w tej bitwie",
   "unknown-vehicle": "Nieznany pojazd",
+  "empty-heading": "Udostępnij swoje bitwy",
+  "example": "Przykład",
+  "empty-blurb": "Wargaming nic nie publikuje na temat pojedynczej bitwy, a bitwy wspólne dla {nickname} nikt jeszcze nie udostępnił. Z modem {name} bitwy, w które grasz, pokażemy tutaj wraz z całym składem.",
+  "empty-cta": "Pobierz mod",
   "rating-title": "{metric} dla tej bitwy",
   "column": {
     "damage": "Zadane uszkodzenia",

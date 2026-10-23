@@ -4,6 +4,10 @@
   "seen-by": "set af {count}",
   "died": "Ødelagt i denne kamp",
   "unknown-vehicle": "Ukendt køretøj",
+  "empty-heading": "Del dine kampe",
+  "example": "Eksempel",
+  "empty-blurb": "Wargaming udgiver ingenting om en enkelt kamp, og ingen har endnu delt en af kampene fra {nickname}. Med moddet {name} vises de kampe, du spiller, her sammen med hele holdopstillingen.",
+  "empty-cta": "Hent moddet",
   "rating-title": "{metric} for denne kamp",
   "column": {
     "damage": "Skade",

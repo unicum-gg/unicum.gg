@@ -4,6 +4,10 @@
   "seen-by": "redzējuši {count}",
   "died": "Iznīcināts šajā kaujā",
   "unknown-vehicle": "Nezināms transportlīdzeklis",
+  "empty-heading": "Kopīgot savas kaujas",
+  "example": "Piemērs",
+  "empty-blurb": "Wargaming neko nepublicē par atsevišķu kauju, un neviens vēl nav koplietojis nevienu no {nickname} kaujām. Ar {name} modu kaujas, kuras spēlējat, tiek rādītas šeit kopā ar visu sastāvu.",
+  "empty-cta": "Iegūt modu",
   "rating-title": "{metric} šajā kaujā",
   "column": {
     "damage": "Bojājumi",

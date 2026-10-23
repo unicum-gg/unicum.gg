@@ -4,6 +4,10 @@
   "seen-by": "videlo {count}",
   "died": "Uništeno u ovoj bici",
   "unknown-vehicle": "Nepoznato возило",
+  "empty-heading": "Podeli битке",
+  "example": "Пример",
+  "empty-blurb": "Wargaming не објављује ништа о једној битци, а нико још није поделио ниједну од битки које припадају {nickname}. Са модом {name}, битке које играш приказују се овде, са целим саставом.",
+  "empty-cta": "Преузми мод",
   "rating-title": "{metric} za ovu bitku",
   "column": {
     "damage": "Naneta šteta",

@@ -4,6 +4,10 @@
   "seen-by": "sedda av {count}",
   "died": "Förstörda i denna strid",
   "unknown-vehicle": "Okänt fordon",
+  "empty-heading": "Dela dina strider",
+  "example": "Exempel",
+  "empty-blurb": "Wargaming publicerar inget om en enskild strid, och ingen har ännu delat någon strid som {nickname} har spelat. Med modden som heter {name} visas striderna du spelar här, tillsammans med hela laguppställningen.",
+  "empty-cta": "Ladda ner modden",
   "rating-title": "{metric} för denna strid",
   "column": {
     "damage": "Skada",

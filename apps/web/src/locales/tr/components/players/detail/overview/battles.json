@@ -4,6 +4,10 @@
   "seen-by": "{count} kişi tarafından görüldü",
   "died": "Bu savaşta imha edildi",
   "unknown-vehicle": "Bilinmeyen araç",
+  "empty-heading": "Savaşlarını paylaş",
+  "example": "Örnek",
+  "empty-blurb": "Wargaming tek bir savaş hakkında hiçbir şey yayınlamaz ve hiç kimse {nickname} adlı oyuncunun savaşlarından birini henüz paylaşmadı. {name} moduyla oynadığın savaşlar, kadronun tümüyle birlikte burada gösterilir.",
+  "empty-cta": "Modu al",
   "rating-title": "Bu savaş için {metric}",
   "column": {
     "damage": "Hasar",

@@ -4,6 +4,10 @@
   "seen-by": "matė: {count}",
   "died": "Sunaikinta šiame mūšyje",
   "unknown-vehicle": "Nežinoma transporto priemonė",
+  "empty-heading": "Dalintis savo mūšiais",
+  "example": "Pavyzdys",
+  "empty-blurb": "Wargaming nieko neskelbia apie vieną mūšį, o niekas dar nepasidalijo nė vienu iš {nickname} bendrų mūšių. Naudojant modą {name}, jūsų žaidžiami mūšiai rodomi čia kartu su visa sudėtimi.",
+  "empty-cta": "Gauti modą",
   "rating-title": "{metric} šiame mūšyje",
   "column": {
     "damage": "Žala",

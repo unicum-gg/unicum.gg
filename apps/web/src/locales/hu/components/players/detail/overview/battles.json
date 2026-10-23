@@ -4,6 +4,10 @@
   "seen-by": "Megtekintések száma: {count}",
   "died": "Megsemmisítve ebben a csatában",
   "unknown-vehicle": "Ismeretlen jármű",
+  "empty-heading": "Csatáid megosztása",
+  "example": "Példa",
+  "empty-blurb": "A Wargaming semmit sem tesz közzé egyszeri csatáról, és még senki sem osztotta meg {nickname} egyik csatáját sem. A {name} moddal az általad játszott csaták itt jelennek meg az egész névsorral együtt.",
+  "empty-cta": "Mod letöltése",
   "rating-title": "{metric} ehhez a csatához",
   "column": {
     "damage": "Sebzés",

@@ -4,6 +4,10 @@
   "seen-by": "被 {count} 人看到",
   "died": "在此战斗中被击毁",
   "unknown-vehicle": "未知车辆",
+  "empty-heading": "分享你的战斗场次",
+  "example": "示例",
+  "empty-blurb": "默认不会发布任何单场战斗的信息，也无人共享过{nickname}的战斗场次。使用{name}模组后，你对战的战斗场次会显示在这里，并附带整个名单。",
+  "empty-cta": "获取模组",
   "rating-title": "此战斗的{metric}",
   "column": {
     "damage": "损伤",

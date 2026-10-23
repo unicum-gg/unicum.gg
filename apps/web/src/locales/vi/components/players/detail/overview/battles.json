@@ -4,6 +4,10 @@
   "seen-by": "được nhìn thấy bởi {count}",
   "died": "Đã bị phá hủy trong trận đấu này",
   "unknown-vehicle": "Xe tăng Không xác định",
+  "empty-heading": "Chia sẻ các trận đấu của bạn",
+  "example": "Ví dụ",
+  "empty-blurb": "Wargaming không đăng gì về một trận đấu đơn lẻ, và chưa ai chia sẻ trận nào của {nickname}. Với mod {name}, các trận đấu bạn chơi sẽ hiển thị ở đây, cùng toàn bộ danh sách.",
+  "empty-cta": "Tải mod",
   "rating-title": "{metric} cho trận đấu này",
   "column": {
     "damage": "Sát thương",

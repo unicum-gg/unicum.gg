@@ -4,6 +4,10 @@
   "seen-by": "gezien door {count}",
   "died": "Vernietigd in dit gevecht",
   "unknown-vehicle": "Onbekend voertuig",
+  "empty-heading": "Deel je gevechten",
+  "example": "Voorbeeld",
+  "empty-blurb": "Wargaming publiceert niets over een enkel gevecht, en niemand heeft er van {nickname} nog een gedeeld. Met de mod met de naam {name} verschijnen de gevechten die je speelt hier, met de gehele selectie.",
+  "empty-cta": "Download de mod",
   "rating-title": "{metric} voor dit gevecht",
   "column": {
     "damage": "Beschadig",

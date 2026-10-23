@@ -4,6 +4,10 @@
   "seen-by": "vu par {count}",
   "died": "Détruits dans cette bataille",
   "unknown-vehicle": "Véhicule inconnu",
+  "empty-heading": "Partager vos batailles",
+  "example": "Exemple",
+  "empty-blurb": "Wargaming ne publie rien au sujet d’une seule bataille, et personne n’a encore partagé l’une des batailles de {nickname}. Avec le mod {name}, les batailles de vos parties sont affichées ici, avec tout l’effectif.",
+  "empty-cta": "Obtenir le mod",
   "rating-title": "{metric} pour cette bataille",
   "column": {
     "damage": "Dégâts",

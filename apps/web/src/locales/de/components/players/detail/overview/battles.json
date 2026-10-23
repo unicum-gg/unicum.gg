@@ -4,6 +4,10 @@
   "seen-by": "von {count} gesehen",
   "died": "In diesem Gefecht zerstört",
   "unknown-vehicle": "Unbekanntes Fahrzeug",
+  "empty-heading": "Gefechte teilen",
+  "example": "Beispiel",
+  "empty-blurb": "Wargaming veröffentlicht nichts über ein einzelnes Gefecht, und niemand hat bisher eines der Gefechte von {nickname} gemeinsam genutzt. Mit dem Mod {name} werden die von dir gespielten Gefechte hier mit der ganzen Aufstellung angezeigt.",
+  "empty-cta": "Mod herunterladen",
   "rating-title": "{metric} für dieses Gefecht",
   "column": {
     "damage": "Schaden",

@@ -4,6 +4,10 @@
   "seen-by": "visto por {count}",
   "died": "Destruidos en esta batalla",
   "unknown-vehicle": "Vehículo desconocido",
+  "empty-heading": "Compartir tus batallas",
+  "example": "Ejemplo",
+  "empty-blurb": "Wargaming no publica nada sobre una batalla individual, y nadie ha compartido todavía ninguna de las batallas de {nickname}. Con el mod {name}, las batallas que juegas se muestran aquí, con toda la lista.",
+  "empty-cta": "Descarga el mod",
   "rating-title": "{metric} para esta batalla",
   "column": {
     "damage": "Daño",
