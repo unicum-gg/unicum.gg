@@ -2505,6 +2505,17 @@ export interface components {
             xpPenalty?: number;
             xp?: number;
             freeXp?: number;
+            freeXpBase?: number;
+            freeXpBooster?: number;
+            freeXpEvent?: number;
+            freeXpOrder?: number;
+            freeXpWotPlus?: number;
+            freeXpSubtotal?: number;
+            creditsWotPlus?: number;
+            xpWotPlus?: number;
+            piggyBank?: number;
+            /** @description The daily first-victory multiplier, times ten: 20 is the x2. */
+            xpDailyFactor?: number;
             crewXp?: number;
             bonds?: number;
             bondsBase?: number;
