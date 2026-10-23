@@ -72,6 +72,10 @@ export type BattleVehicle = {
   /** Capture points taken back off the other team. */
   defended?: number;
   teamDamage?: number;
+  /** Allies destroyed. */
+  teamKills?: number;
+  /** Hits taken from a shell's blast rather than from the shell itself. */
+  splashReceived?: number;
   /** Enemy vehicles damaged, beside the ones destroyed. */
   damaged?: number;
   /** The battle-scoped vehicle id of whoever destroyed them. */
@@ -121,6 +125,21 @@ export type BattleEconomy = {
   xpPenalty?: number;
   xp?: number;
   freeXp?: number;
+  /** The free experience behind each experience line: the game's report
+   * shows it as a second column beside the experience. */
+  freeXpBase?: number;
+  freeXpBooster?: number;
+  freeXpEvent?: number;
+  freeXpOrder?: number;
+  freeXpWotPlus?: number;
+  freeXpSubtotal?: number;
+  /** WoT Plus's own bonus to the battle's credits and experience. */
+  creditsWotPlus?: number;
+  xpWotPlus?: number;
+  /** Credits put aside in the WoT Plus reserve stock. */
+  piggyBank?: number;
+  /** The daily first-victory multiplier, times ten: 20 is the x2. */
+  xpDailyFactor?: number;
   /** Crew experience. */
   crewXp?: number;
 

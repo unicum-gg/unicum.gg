@@ -100,6 +100,10 @@ const vehicle = z.object({
   mileage: z.number().int().min(0).max(10_000_000).optional(),
   defended: counter.optional(),
   teamDamage: counter.optional(),
+  /** Allies destroyed, which the game shows beside the damage done to them. */
+  teamKills: counter.optional(),
+  /** Hits taken from a shell's blast rather than from the shell itself. */
+  splashReceived: counter.optional(),
   /** Enemy vehicles damaged, which the game shows beside the ones destroyed. */
   damaged: counter.optional(),
   /** A battle-scoped vehicle id, not an account. */
@@ -141,6 +145,21 @@ const economy = z.object({
   xpPenalty: counter.optional(),
   xp: counter.optional(),
   freeXp: counter.optional(),
+  /** The free experience behind each experience line, which the game's own
+   * report shows as a second column. */
+  freeXpBase: counter.optional(),
+  freeXpBooster: counter.optional(),
+  freeXpEvent: counter.optional(),
+  freeXpOrder: counter.optional(),
+  freeXpWotPlus: counter.optional(),
+  freeXpSubtotal: counter.optional(),
+  /** WoT Plus's own bonus to the battle's credits and experience. */
+  creditsWotPlus: counter.optional(),
+  xpWotPlus: counter.optional(),
+  /** Credits put aside in the WoT Plus reserve stock ("piggy bank"). */
+  piggyBank: counter.optional(),
+  /** The daily first-victory multiplier, times ten: 20 is the x2. */
+  xpDailyFactor: z.number().int().min(0).max(1000).optional(),
   crewXp: counter.optional(),
   bonds: counter.optional(),
   bondsBase: counter.optional(),

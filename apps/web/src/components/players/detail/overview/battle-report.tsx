@@ -1,12 +1,10 @@
 "use client";
 
 import type { TranslateFunction } from "@onruntime/translations";
-import { cn } from "@/lib/utils";
 import { BattleLoadout } from "./battle-loadout";
+import { ReportBlock, type Block, type Row } from "./battle-report-block";
 import type { Participant } from "./battle-types";
 
-/** One line: a label, a value, and whether it breaks down the line above it. */
-type Row = { label: string; value: string; under?: boolean; cost?: boolean };
 
 /** Two decimals everywhere a mark percentage is shown. See `MARK_PLACES`. */
 const MARK_PLACES = 2;
@@ -120,9 +118,11 @@ export function BattleReport({
     line(t("report.hits-received"), own.hitsReceived),
     line(t("report.pens-received"), own.piercingsReceived, { under: true }),
     line(t("report.bounced"), own.bounced, { under: true }),
+    line(t("report.splash-received"), own.splashReceived),
     line(t("report.blocked"), own.blocked),
     line(t("report.potential"), own.potential),
-    line(t("report.team-damage"), own.teamDamage),
+    // Destroyed / hit points, the game's own order for this line.
+    pair(t("report.team-damage"), own.teamKills, own.teamDamage),
     line(t("report.spotted"), own.spotted),
     pair(t("report.damaged-destroyed"), own.damaged, own.kills),
     line(
@@ -171,6 +171,7 @@ export function BattleReport({
     line(t("report.reserves"), money.creditsBooster, { under: true }),
     line(t("report.missions"), money.creditsEvent, { under: true }),
     line(t("report.orders"), money.creditsOrder, { under: true }),
+    line(t("report.wot-plus"), money.creditsWotPlus, { under: true }),
     line(t("report.ally-fine"), money.creditsPenalty, { cost: true, under: true }),
     line(t("report.compensation"), money.creditsCompensation, { under: true }),
     line(t("report.with-bonuses"), money.creditsSubtotal),
@@ -178,18 +179,61 @@ export function BattleReport({
     line(t("report.ammo"), money.ammoCost, { cost: true, under: true }),
     line(t("report.supplies"), money.suppliesCost, { cost: true, under: true }),
     line(t("report.credited"), money.credits),
+    line(t("report.piggy-bank"), money.piggyBank),
   ];
+
+  // An experience line and the free experience behind it, the game's two
+  // columns. Either half can be absent: orders pay only free experience, a
+  // premium vehicle only experience.
+  const xpLine = (
+    label: string,
+    xp: number | undefined,
+    free: number | undefined,
+    opts: { under?: boolean; cost?: boolean } = {},
+  ): Row | null =>
+    xp === undefined && free === undefined
+      ? null
+      : {
+          label,
+          value:
+            xp === undefined
+              ? ""
+              : opts.cost
+                ? `-${count.format(xp)}`
+                : count.format(xp),
+          free: free === undefined ? "" : count.format(free),
+          under: opts.under,
+          cost: opts.cost,
+        };
+  // The first victory of the day multiplies both columns, and the game writes
+  // the factor rather than a figure. Only when it applied: a factor of one is
+  // what every other battle of the day carries.
+  const daily = (money.xpDailyFactor ?? 0) > 10 ? money.xpDailyFactor! / 10 : null;
+  // Whether the mod sent the free experience line by line. A battle reported
+  // before it did has the total alone, which keeps its own line below.
+  const freeColumn =
+    money.freeXpBase !== undefined || money.freeXpSubtotal !== undefined;
 
   const experience: (Row | null)[] = money.xp === undefined
     ? [line(t("report.credited"), own.xp)]
     : [
-    line(t("report.earned-for-battle"), money.xpBase),
-    line(t("report.reserves"), money.xpBooster, { under: true }),
-    line(t("report.missions"), money.xpEvent, { under: true }),
+    xpLine(t("report.earned-for-battle"), money.xpBase, money.freeXpBase),
+    daily === null
+      ? null
+      : {
+          label: t("report.first-win"),
+          value: `×${daily}`,
+          free: freeColumn ? `×${daily}` : undefined,
+          under: true,
+        },
+    xpLine(t("report.reserves"), money.xpBooster, money.freeXpBooster, { under: true }),
+    xpLine(t("report.missions"), money.xpEvent, money.freeXpEvent, { under: true }),
+    xpLine(t("report.orders"), undefined, money.freeXpOrder, { under: true }),
     line(t("report.premium-vehicle"), money.xpPremiumVehicle, { under: true }),
+    xpLine(t("report.wot-plus"), money.xpWotPlus, money.freeXpWotPlus, { under: true }),
     line(t("report.ally-fine"), money.xpPenalty, { cost: true, under: true }),
-    line(t("report.credited"), money.xp),
-    line(t("report.free-xp"), money.freeXp),
+    xpLine(t("report.credited"), money.xp, freeColumn ? money.freeXp : undefined),
+    freeColumn ? null : line(t("report.free-xp"), money.freeXp),
     line(t("report.crew-xp"), money.crewXp),
   ];
 
@@ -227,7 +271,7 @@ export function BattleReport({
   // row is as tall as its tallest block, so the three lines of Time sat beside
   // the whole of Statistics and Experience started under a gap that tall. The
   // battle's own figures on one side, what it took and paid on the other.
-  const columns = [
+  const columns: Block[][] = [
     [
       { label: t("report.statistics"), rows: statistics },
       { label: t("report.marks"), rows: marks },
@@ -235,7 +279,13 @@ export function BattleReport({
     [
       { label: t("report.time"), rows: timing },
       { label: t("report.credits"), rows: credits },
-      { label: t("report.experience"), rows: experience },
+      {
+        label: t("report.experience"),
+        rows: experience,
+        columns: freeColumn
+          ? ([t("report.xp-column"), t("report.free-xp-column")] as const)
+          : undefined,
+      },
       { label: t("report.bonds"), rows: bonds },
     ],
   ];
@@ -265,45 +315,9 @@ export function BattleReport({
       <div className="grid min-w-0 gap-x-8 gap-y-4 md:grid-cols-2 xl:col-span-2">
       {columns.map((column, at) => (
       <div key={at} className="flex min-w-0 flex-col gap-y-4">
-      {column.map((block) => {
-        const rows = block.rows.filter((row): row is Row => row !== null);
-        if (rows.length === 0) return null;
-        return (
-          <div key={block.label} className="min-w-0">
-            <h4 className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wide">
-              {block.label}
-            </h4>
-            <dl className="text-sm">
-              {rows.map((row) => (
-                <div
-                  key={row.label}
-                  className="flex items-baseline justify-between gap-3 py-0.5"
-                >
-                  <dt
-                    className={cn(
-                      "truncate",
-                      row.under && "text-muted-foreground ps-4",
-                    )}
-                  >
-                    {row.label}
-                  </dt>
-                  <dd
-                    className={cn(
-                      "shrink-0 tabular-nums",
-                      row.under && "text-muted-foreground",
-                      // A cost reads as a cost, which is the one thing a column
-                      // of positive numbers cannot say.
-                      row.cost && "text-red-500",
-                    )}
-                  >
-                    {row.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        );
-      })}
+      {column.map((block) => (
+        <ReportBlock key={block.label} block={block} />
+      ))}
       </div>
       ))}
       {/*
