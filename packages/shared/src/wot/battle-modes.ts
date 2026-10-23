@@ -40,11 +40,19 @@ export enum BattleMode {
   WeekendBrawl = 36,
   Mapbox = 37,
   MapsTraining = 38,
+  /** Fun Random, which runs the arcade maps (`140_fall_tanks`…). */
+  FunRandom = 42,
   Onslaught = 43,
   Winback = 44,
   RandomNp2 = 46,
   TournamentOnslaught = 47,
   OnslaughtLight = 49,
+  /** The Halloween event, by difficulty. Injected by the event's own
+   * scripts rather than declared with the rest, and reused from one year's
+   * event to the next. */
+  Halloween = 101,
+  HalloweenMedium = 102,
+  HalloweenHard = 103,
   StoryMode = 104,
 }
 
@@ -73,11 +81,15 @@ export const BATTLE_MODE_LABEL: Record<BattleMode, string> = {
   [BattleMode.WeekendBrawl]: "Weekend Brawl",
   [BattleMode.Mapbox]: "Mapbox",
   [BattleMode.MapsTraining]: "Maps Training",
+  [BattleMode.FunRandom]: "Fun Random",
   [BattleMode.Onslaught]: "Onslaught",
   [BattleMode.Winback]: "Winback",
   [BattleMode.RandomNp2]: "Random Battle",
   [BattleMode.TournamentOnslaught]: "Tournament",
   [BattleMode.OnslaughtLight]: "Onslaught",
+  [BattleMode.Halloween]: "Halloween",
+  [BattleMode.HalloweenMedium]: "Halloween (Medium)",
+  [BattleMode.HalloweenHard]: "Halloween (Hard)",
   [BattleMode.StoryMode]: "Story Mode",
 };
 
