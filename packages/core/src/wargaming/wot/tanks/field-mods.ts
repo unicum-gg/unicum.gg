@@ -3,6 +3,7 @@ import {
   type PostProgressionStep,
   Region,
   type PostProgressionModification,
+  type TankPostProgression,
   WotSrcBranch,
 } from "@unicum.gg/wargaming";
 import { assetsRefFor, iconUrl } from "@unicum.gg/shared";
@@ -67,6 +68,27 @@ const featureImage = (base: string, key: string): string => {
 };
 
 /**
+ * A tank's raw post-progression tree, as wot-src declares it.
+ *
+ * Cached like the resolved tree below, and for a reason that only shows on the
+ * battle pages: reading it fetches and parses four client XML files, three of
+ * them shared by every vehicle, which is about half a second of CPU to answer
+ * something that only changes with a game patch. Uncached, every battle
+ * carrying field modifications paid that per vehicle, on every view.
+ */
+export function getTankPostProgression(
+  region: Region,
+  tankId: number,
+  branch?: WotSrcBranch,
+): Promise<TankPostProgression | null> {
+  return cachedInRedis(
+    `wotsrc:post-progression:${region}${branch ? `:${branch}` : ""}:${tankId}`,
+    WOTSRC_TTL_SECONDS,
+    () => wg.region(region).source.postProgression.postProgression(tankId, branch),
+  );
+}
+
+/**
  * A tank's field modifications (vehicle post progression): the tree resolved
  * from the vehicle's role (or its own special tree), each step's stat effects
  * from the client XML, and display names from the client localization. Returns
@@ -89,7 +111,7 @@ async function computeTankFieldMods(
 ): Promise<TankFieldMods | null> {
   const src = wg.region(region).source.postProgression;
   // A test vehicle's tree lives on the CT branch alongside the vehicle itself.
-  const pp = await src.postProgression(tankId, branch);
+  const pp = await getTankPostProgression(region, tankId, branch);
   if (!pp || pp.steps.length === 0) return null;
   const [names, titles] = await Promise.all([
     src.names(),
@@ -249,7 +271,7 @@ export async function fieldModSlots(
 ): Promise<FieldModSlot[]> {
   if (packed.length === 0) return [];
   const [raw, resolved] = await Promise.all([
-    wg.region(region).source.postProgression.postProgression(tankId, branch),
+    getTankPostProgression(region, tankId, branch),
     getTankFieldMods(region, tankId, branch),
   ]);
   if (!raw || !resolved) return [];
