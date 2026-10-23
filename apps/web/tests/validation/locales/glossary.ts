@@ -97,6 +97,50 @@ export function glossaryTests() {
       }
       assert.deepStrictEqual(offenders, []);
     });
+
+    /**
+     * The 36 trees hold the same entries.
+     *
+     * Nothing else looks. The JSON tree has `completeness`, and the glossary
+     * had no equivalent, so an entry could sit in English alone and the only
+     * symptom was a page of English prose under translated chrome, on a reader
+     * no review here has. Five were in that state when this was written, two of
+     * them reached by three redirects apiece: the Rampage rename replaced `hr`
+     * and `hrb` with `mr` and deleted 71 translated files, correctly, since
+     * their prose asserted the battle royale the rename existed to deny, and
+     * the translator that should have rewritten them read its source tree from
+     * the wrong path and reported "0 to write" on every run.
+     *
+     * The other direction matters as much and is rarer: an entry a language
+     * holds after English has dropped it is a page that answers in 35 languages
+     * and 404s in the one it was written in.
+     */
+    test("the glossary holds the same entries in every language", () => {
+      const english = glossaryEntries(SOURCE_LOCALE);
+      const absent = new Map<string, string[]>();
+      const orphaned = new Map<string, string[]>();
+      for (const locale of targetLocales) {
+        const held = glossaryEntries(locale);
+        for (const entry of english.keys()) {
+          if (!held.has(entry))
+            absent.set(entry, [...(absent.get(entry) ?? []), locale]);
+        }
+        for (const entry of held.keys()) {
+          if (!english.has(entry))
+            orphaned.set(entry, [...(orphaned.get(entry) ?? []), locale]);
+        }
+      }
+      // Reported per entry rather than per file: one entry missing everywhere
+      // is one thing to fix, and 35 lines saying so buries the next one.
+      const say = (what: string, found: Map<string, string[]>) =>
+        [...found]
+          .sort()
+          .map(([entry, locales]) => `${entry} ${what} ${locales.length} language(s)`);
+      assert.deepStrictEqual(
+        [...say("missing from", absent), ...say("only in", orphaned)],
+        [],
+      );
+    });
   });
 }
 

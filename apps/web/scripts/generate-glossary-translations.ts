@@ -45,7 +45,14 @@ import { GAME_CLIENT_LANGUAGE } from "../src/lib/game-vocabulary";
 import { cataloguedNames } from "./translation-rules";
 import { KNOWN_CATALOGUE_ERRORS } from "./glossary-terms";
 
-const SOURCE_DIR = join(webRoot, "content", "glossary");
+// The English tree, which is a SIBLING of the translations rather than their
+// parent: `content/glossary/en/<category>/<slug>.md`. Pointed at
+// `content/glossary` instead, `readSource` walks the locale directories as
+// though they were categories, finds no `.md` directly inside any of them, and
+// reports zero entries, which prints as "0 to write" and exits 0. So the script
+// read as up to date on every run since the feature shipped, while five entries
+// added or reworded after it stayed English-only in all thirty-five languages.
+const SOURCE_DIR = join(webRoot, "content", "glossary", DEFAULT_LOCALE);
 const OUT_DIR = join(webRoot, "content", "glossary");
 const HASHES_PATH = join(OUT_DIR, "source-hashes.json");
 
@@ -128,6 +135,15 @@ function readSource(): Entry[] {
         source: readFileSync(join(dir, file), "utf8"),
       });
     }
+  }
+  // An empty source tree is never a real answer, and it is the one failure this
+  // script cannot report by doing nothing: no entries means no jobs, which
+  // prints "0 to write" and exits 0, the same two lines a tree that really is up
+  // to date prints. Read as success for as long as the source path was wrong.
+  if (out.length === 0) {
+    throw new Error(
+      `no glossary entries under ${SOURCE_DIR}: expected ${DEFAULT_LOCALE}/<category>/<slug>.md`,
+    );
   }
   return out;
 }
@@ -328,6 +344,9 @@ async function pool<T>(items: T[], worker: (item: T) => Promise<boolean>) {
 
 async function main(): Promise<void> {
   const entries = readSource();
+  // Every language a translation is owed, which is not the same as the ones
+  // this run writes: the staleness record is shared by all of them.
+  const everyLocale = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
   const targets = (picked.length
     ? LOCALES.filter((l) => picked.includes(l))
     : LOCALES
@@ -344,13 +363,23 @@ async function main(): Promise<void> {
     /* first run */
   }
 
+  // Which entries the English has moved under since they were last written.
+  // Kept, because it is what decides whether a locale already holding a file
+  // holds the RIGHT one, and the stamping below needs that after the run.
+  const staleEntries = new Set<string>();
+  for (const entry of entries) {
+    const id = `${entry.category}/${entry.slug}`;
+    if (hashes[id] !== undefined && hashes[id] !== hashOf(entry.source)) {
+      staleEntries.add(id);
+    }
+  }
+
   const jobs: { entry: Entry; locale: Locale }[] = [];
   for (const locale of targets) {
     for (const entry of entries) {
       const out = join(OUT_DIR, locale, entry.category, `${entry.slug}.md`);
       const id = `${entry.category}/${entry.slug}`;
-      const stale = hashes[id] !== undefined && hashes[id] !== hashOf(entry.source);
-      if (existsSync(out) && !stale) continue;
+      if (existsSync(out) && !staleEntries.has(id)) continue;
       jobs.push({ entry, locale });
     }
   }
@@ -360,20 +389,43 @@ async function main(): Promise<void> {
   );
   if (scoped.length === 0) return;
 
+  const wrote = new Set<string>();
   const { written, failed } = await pool(scoped, async ({ entry, locale }) => {
     const translated = await translate(entry, locale);
     const out = join(OUT_DIR, locale, entry.category, `${entry.slug}.md`);
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, render(entry, translated));
+    wrote.add(`${locale}:${entry.category}/${entry.slug}`);
     console.log(`[glossary-translate] ${locale}/${entry.category}/${entry.slug}`);
     return true;
   });
 
-  // Stamped from the source, so an entry nothing needed this run is recorded
-  // too and a later edit to it is still caught.
+  // Stamped per entry, and only once EVERY locale holds the translation this
+  // English produced.
+  //
+  // The record is one hash per entry covering all 35 locales, so it is the only
+  // thing that can ever say "re-translate this". Stamping it unconditionally
+  // settled an entry the run never reached, and every way of not reaching one is
+  // ordinary: the budget ceiling, a `--limit`, a failed call, or naming a single
+  // locale on the command line. The stale files stayed stale on disk and were
+  // recorded as current, so nothing asked for them again. A MISSING file is safe
+  // either way, since its absence is a job on its own, which is what the comment
+  // this replaces was reasoning about; a stale one is found by nothing but this
+  // hash. Judged against every locale rather than the run's own targets, or
+  // translating one language would settle the other thirty-four.
   const next: Record<string, string> = {};
   for (const entry of entries) {
-    next[`${entry.category}/${entry.slug}`] = hashOf(entry.source);
+    const id = `${entry.category}/${entry.slug}`;
+    const settled = everyLocale.every(
+      (locale) =>
+        wrote.has(`${locale}:${id}`) ||
+        (!staleEntries.has(id) &&
+          existsSync(join(OUT_DIR, locale, entry.category, `${entry.slug}.md`))),
+    );
+    // An entry left unsettled keeps the hash it had, so it is still reported
+    // stale next run. Absent stays absent, which is what seeds a new entry.
+    if (settled) next[id] = hashOf(entry.source);
+    else if (hashes[id] !== undefined) next[id] = hashes[id];
   }
   mkdirSync(OUT_DIR, { recursive: true });
   writeFileSync(HASHES_PATH, `${JSON.stringify(next, null, 2)}\n`);
