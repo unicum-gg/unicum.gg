@@ -4,6 +4,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import Link from "@/components/link";
+import { CtaCard } from "@/components/cta-card";
 import {
   Card as HomeCard,
   CardDescription,
@@ -30,7 +31,6 @@ import {
 } from "@/components/panel";
 import APP from "@/constants/app";
 import { RATING_METRICS, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
-import { styles } from "@/lib/styles";
 import { getTranslation } from "@/lib/translations.server";
 import type {
   TopClansPeriod,
@@ -234,39 +234,29 @@ export async function HomePage({
         </PanelHeader>
 
         <PanelContent>
-          <div
-            className={`relative overflow-hidden rounded-lg ${styles.cardBorder} bg-linear-to-br from-fd-primary/5 via-fd-primary/10 to-fd-primary/5 p-8`}
+          <CtaCard
+            heading={t("community.heading")}
+            description={t("community.description")}
           >
-            <div className="absolute inset-0 bg-linear-to-br from-transparent via-fd-primary/5 to-transparent" />
-            <div className="relative space-y-4 text-center">
-              <h3 className="mb-2 text-xl font-semibold">
-                {t("community.heading")}
-              </h3>
-              <p className={`${styles.mutedText} mx-auto mb-6 max-w-md`}>
-                {t("community.description")}
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <Link
-                  href={APP.EXTERNAL.DISCORD}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonVariants({ variant: "primary" })}
-                >
-                  <DiscordLogoIcon weight="fill" className="mr-2 size-4" />
-                  {t("community.discord")}
-                </Link>
-                <Link
-                  href={APP.EXTERNAL.GITHUB}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonVariants({ variant: "outline" })}
-                >
-                  <GithubLogoIcon weight="fill" className="mr-2 size-4" />
-                  {t("community.github")}
-                </Link>
-              </div>
-            </div>
-          </div>
+            <Link
+              href={APP.EXTERNAL.DISCORD}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonVariants({ variant: "primary" })}
+            >
+              <DiscordLogoIcon weight="fill" className="mr-2 size-4" />
+              {t("community.discord")}
+            </Link>
+            <Link
+              href={APP.EXTERNAL.GITHUB}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              <GithubLogoIcon weight="fill" className="mr-2 size-4" />
+              {t("community.github")}
+            </Link>
+          </CtaCard>
         </PanelContent>
       </Panel>
 
