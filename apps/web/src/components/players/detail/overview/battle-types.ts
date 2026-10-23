@@ -18,6 +18,19 @@ export type MapOverlay = {
 export type { BattleEconomy };
 
 /**
+ * Which view of a battle is open, as the game's own results screen names them.
+ *
+ * Here rather than beside the component that draws them, because the battle
+ * page reads `?tab=` on the server, and a value imported from a client module
+ * reaches a server component as a client reference rather than as a string.
+ */
+export enum BattleTab {
+  Teams = "teams",
+  Report = "report",
+  Replay = "replay",
+}
+
+/**
  * What the battle endpoint hands over, as the roster and its panel read it.
  *
  * Kept apart from both so the panel and the table agree by construction rather

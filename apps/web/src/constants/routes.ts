@@ -209,6 +209,10 @@ const ROUTES = {
   //   does, Servers included, so the section has a URL without a region in it.
   //   A tournament itself stays regional all the way down: it is run on one
   //   realm and its teams are that realm's accounts.
+  // - One battle, on the page it is shared by. Regional like a tournament: a
+  //   battle was fought on one realm and its id is that realm's.
+  BATTLE: (region: Region, id: string) =>
+    pathcat("/:region/battles/:id", { region, id }),
   TOURNAMENT: (region: Region, id: number | string) =>
     pathcat("/:region/tournaments/:id", { region, id: String(id) }),
   TOURNAMENTS: (region: Region) =>

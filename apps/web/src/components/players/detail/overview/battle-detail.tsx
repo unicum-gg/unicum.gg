@@ -27,12 +27,14 @@ import { SegmentedControl } from "@/components/segmented-control";
 import { BattlePlayerPanel } from "./battle-player";
 import { BattleReport } from "./battle-report";
 import { BattleReplay } from "./battle-replay";
-import type {
-  BattleDetailData,
-  BattleEconomy,
-  Participant,
-  MapOverlay,
+import {
+  BattleTab,
+  type BattleDetailData,
+  type BattleEconomy,
+  type Participant,
+  type MapOverlay,
 } from "./battle-types";
+import { BattleShare } from "./battle-share";
 import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
@@ -85,13 +87,6 @@ const RATING_COLOR: Record<RatingMetric, (value: number) => RatingColor> = {
   [RatingMetric.Wn8]: wn8Color,
   [RatingMetric.Wnx]: wnxColor,
 };
-
-/** Which view of the battle is open, as the game's own results screen names them. */
-enum Tab {
-  Teams = "teams",
-  Report = "report",
-  Replay = "replay",
-}
 
 /**
  * One column of the roster, which is also one way of asking who did what.
@@ -188,6 +183,8 @@ export function BattleDetail({
   mapOverlay,
   metric,
   highlightAccount,
+  initialTab = BattleTab.Teams,
+  shareable = true,
 }: {
   region: Region;
   battleId: string;
@@ -213,6 +210,12 @@ export function BattleDetail({
   metric: RatingMetric;
   /** The player whose page this is, so their own row stands out. */
   highlightAccount?: number;
+  /** The view to open on, which a shared link names. A view this battle
+   * cannot offer falls back to the rosters. */
+  initialTab?: BattleTab;
+  /** Whether to offer the share button. Off on the battle's own page, whose
+   * title already carries one. */
+  shareable?: boolean;
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -224,7 +227,7 @@ export function BattleDetail({
   const time = date("HH:mm:ss");
   // The row a reader has opened, by its battle-scoped vehicle id.
   const [opened, setOpened] = useState<number | null>(null);
-  const [tab, setTab] = useState<Tab>(Tab.Teams);
+  const [tab, setTab] = useState<BattleTab>(initialTab);
   // Experience, which is how the game's own results screen orders a team: it
   // is the one figure that already folds damage, assists, defence and the win
   // together, and a reader arriving from the end-of-battle screen finds the
@@ -356,10 +359,10 @@ export function BattleDetail({
               active={tab}
               onSelect={setTab}
               segments={[
-                { id: Tab.Teams, label: t("tab.teams") },
-                ...(mine ? [{ id: Tab.Report, label: t("tab.report") }] : []),
+                { id: BattleTab.Teams, label: t("tab.teams") },
+                ...(mine ? [{ id: BattleTab.Report, label: t("tab.report") }] : []),
                 ...(data.hasReplay
-                  ? [{ id: Tab.Replay, label: t("tab.replay") }]
+                  ? [{ id: BattleTab.Replay, label: t("tab.replay") }]
                   : []),
               ]}
             />
@@ -372,10 +375,18 @@ export function BattleDetail({
             {data.clientVersion ? <span>{data.clientVersion}</span> : null}
             {/* Nobody else publishes this: how many clients told us about it. */}
             <span>{t("reported-by", { count: data.reporters })}</span>
+            {shareable ? (
+              <BattleShare
+                region={region}
+                battleId={battleId}
+                arenaId={arenaId}
+                replay={tab === BattleTab.Replay && data.hasReplay}
+              />
+            ) : null}
           </span>
         </div>
 
-        {tab === Tab.Replay && data.hasReplay ? (
+        {tab === BattleTab.Replay && data.hasReplay ? (
           <BattleReplay
             region={region}
             battleId={battleId}
@@ -388,7 +399,7 @@ export function BattleDetail({
             highlightAccount={highlightAccount}
             t={t}
           />
-        ) : tab === Tab.Report && mine ? (
+        ) : tab === BattleTab.Report && mine ? (
           <BattleReport
             participant={{ ...mine, personal }}
             // Only when it is THIS player's gun. The figure comes from one

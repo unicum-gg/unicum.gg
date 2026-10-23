@@ -5,6 +5,7 @@ import { battleDetail } from "@unicum.gg/core/battles/read";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import { BattleDetail } from "@/components/players/detail/overview/battle-detail";
 import { ShareButton } from "@/components/share-button";
+import { BattleTab } from "@/components/players/detail/overview/battle-types";
 import {
   Panel,
   PanelContent,
@@ -30,10 +31,16 @@ import APP from "@/constants/app";
  */
 export default async function BattlePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string; region: string; id: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const { locale, region, id } = await params;
+  // The view a shared link names, so a replay sent to somebody opens on the
+  // replay rather than on the rosters above it. Anything else is the rosters.
+  const { tab } = await searchParams;
+  const initialTab = tab === BattleTab.Replay ? BattleTab.Replay : BattleTab.Teams;
   if (!isRegion(region)) notFound();
   if (!/^[0-9]{1,20}$/.test(id)) notFound();
 
@@ -79,6 +86,9 @@ export default async function BattlePage({
             // own battle and stays on their own page.
             personal={null}
             metric={RatingMetric.Wnx}
+            initialTab={initialTab}
+            // The title above already carries one.
+            shareable={false}
           />
         </PanelContent>
       </Panel>
