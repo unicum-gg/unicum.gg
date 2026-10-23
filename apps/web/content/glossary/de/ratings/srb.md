@@ -1,13 +1,12 @@
 ---
-term: Gefechtbasierte Festungswertung
+term: Gefechtsbasierte Festungswertung
 aliases:
   - SRB
-  - Festungswertung nach Gefechtsanzahl
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -16,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Die Festungswertung, bei der die Gefechtsanzahl belohnt wird, statt lediglich als Schwellenwert zu dienen, sodass ein Clan, der sich über Hunderte von Gefechten bewährt hat, höher eingestuft wird als einer mit demselben SR nach zwanzig Gefechten.
+Die Festungswertung, bei der die Anzahl der Gefechte belohnt und nicht nur als Voraussetzung gewertet wird, sodass ein Clan, der sich über Hunderte von Gefechten bewährt hat, höher eingestuft wird als einer mit derselben SR nach zwanzig Gefechten.
 
-SR ignoriert bewusst, wie viel ein Clan spielt. SRB verwendet dieselbe Wertung und multipliziert sie mit einem Faktor, der mit der Zahl der zugrunde liegenden Gefechte wächst, sodass sie immer nur höher sein kann als der SR, auf dem sie basiert.
+Die SR ignoriert bewusst, wie viel ein Clan spielt. Die SRB übernimmt dieselbe Wertung und multipliziert sie mit einem Faktor, der mit der Anzahl der absolvierten Gefechte wächst, sodass sie stets höher sein kann als die SR, auf der sie basiert.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logarithmisch, daher sind die ersten hundert Gefechte weit mehr wert als das tausendste. ```
+Logarithmisch, daher sind die ersten hundert Gefechte weitaus mehr wert als das tausendste. ```
 
-Bewusst eine einzige Volumenkonstante für jede Stufe: Scharmützel der Stufe X werden kontinuierlich gespielt, während Vorstöße nur einige Wochen im Jahr in Schüben stattfinden, sodass die Stufen, die tatsächlich häufiger gespielt werden, einen größeren Bonus erhalten. Es ist dieselbe Idee wie bei HRB neben HR in der Bestenliste von Stählerner Jäger.
+Bewusst gilt für jede Stufe dieselbe Volumenkonstante: Scharmützel der Stufe X werden durchgehend gespielt, während Vorstöße nur einige Wochen im Jahr phasenweise stattfinden, sodass die tatsächlich häufiger gespielten Stufen einen größeren Bonus erhalten. Der Volumenbonus unterscheidet einen Clan, der eine Wertung über Hunderte von Gefechten gehalten hat, von einem Clan, der sie nach zwanzig Gefechten erreicht hat.

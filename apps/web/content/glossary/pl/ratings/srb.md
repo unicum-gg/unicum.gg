@@ -6,7 +6,7 @@ related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Ranking Twierdzy, który premiuje liczbę rozegranych bitew, zamiast jedynie wymagać minimalnej liczby, dzięki czemu klan, który sprawdził się w setkach bitew, zajmuje wyższą pozycję niż klan z takim samym SR po dwudziestu bitwach.
+Ranking Twierdzy, który premiuje liczbę rozegranych bitew, zamiast jedynie wymagać ich minimalnej liczby, dzięki czemu klan sprawdzony w setkach bitew zajmuje wyższe miejsce niż klan z takim samym SR osiągniętym w dwudziestu bitwach.
 
-SR celowo nie uwzględnia tego, jak dużo gra klan. SRB wykorzystuje ten sam ranking i mnoży go przez czynnik, który rośnie wraz z liczbą rozegranych bitew, dlatego nigdy nie może być niższy od SR, na którym się opiera.
+SR celowo nie uwzględnia tego, jak często gra klan. SRB bierze ten sam ranking i mnoży go przez czynnik rosnący wraz z liczbą rozegranych bitew, więc zawsze może być tylko wyższy od SR, na którym się opiera.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
 Wzrost jest logarytmiczny, więc pierwsze sto bitew ma znacznie większą wartość niż tysięczna. ```
 
-Jedna stała liczby bitew obowiązuje celowo na każdym poziomie. Potyczki X poziomu są rozgrywane bez przerwy, podczas gdy Natarcia odbywają się seriami przez kilka tygodni w roku, dlatego poziomy, na których rzeczywiście gra się więcej, zapewniają większą premię. To ten sam pomysł co HRB obok HR w rankingu Stalowego łowcy.
+Celowo zastosowano jedną stałą liczby bitew dla wszystkich poziomów: Potyczki X poziomu są rozgrywane stale, podczas gdy Natarcia odbywają się seriami przez kilka tygodni w roku, więc poziomy, na których faktycznie rozgrywa się więcej bitew, zapewniają większą premię. Premia za liczbę bitew odróżnia klan, który utrzymywał dany ranking przez setki bitew, od klanu, który osiągnął go w dwudziestu.

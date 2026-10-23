@@ -1,9 +1,11 @@
 ---
-term: Free experience
+term: Proste izkušnje
 aliases:
   - free XP
   - FXP
-  - convert xp
+  - voľné XP
+  - voľné skúsenosti
+  - konverzia XP
 related:
   - experience
   - elite-status
@@ -14,8 +16,8 @@ anchors:
     - Free Experience
 ---
 
-Izkušnje, ki jih je mogoče porabiti za katero koli vozilo ali modul, so akumulirane kot majhen delež vsega zasluženega in se lahko pretvorijo iz elitnih vozil za gold.
+Skúsenosti, ktoré možno použiť na akékoľvek vozidlo alebo modul, získavané ako malý podiel zo všetkých zarobených skúseností a konvertovateľné z elitných vozidiel za zlato.
 
-Majhen odstotek izkušenj, pridobljenih v vsaki bitki, se postavi na stran kot proste izkušnje. Ni vezan na vozilo, zato ga je mogoče uporabiti za preskok osnovne konfiguracije, takojšnje odklenitev modula ali napredovanje v drevesu.
+Malé percento skúseností získaných v každej bitke sa odkladá ako Proste izkušnje. Nie sú viazané na vozidlo, takže ich možno použiť na preskočenie základnej konfigurácie, priame odomknutie modulu alebo postup ďalej v technologickom strome.
 
-Izkušnje, ki so na elitnem vozilu, se lahko prav tako pretvorijo v proste izkušnje za gold, kar je način, kako igralci, ki so zaključili linijo, spremenijo neaktivno bilanco v napredek na drugem mestu.
+Skúsenosti nahromadené na elitnom vozidle možno za zlato konvertovať aj na Proste izkušnje. Takto hráči, ktorí dokončili vetvu, premenia nevyužitý zostatok na postup inde.

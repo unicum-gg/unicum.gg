@@ -1,12 +1,12 @@
 ---
-term: Hodnocení opevnění podle počtu bitev
+term: Hodnocení Pevnosti založené na počtu bitev
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Hodnocení opevnění, které počet odehraných bitev odměňuje, místo aby ho používalo jen jako podmínku, takže klan, který se osvědčil ve stovkách bitev, je v žebříčku výše než klan se stejným SR po dvaceti bitvách.
+Hodnocení Pevnosti, které odměňuje počet odehraných bitev, místo aby jej používalo pouze jako podmínku, takže klan, který se osvědčil ve stovkách bitev, se umístí výše než klan se stejným SR dosaženým ve dvaceti bitvách.
 
-SR záměrně nebere v úvahu, jak často klan hraje. SRB toto hodnocení násobí členem, který roste s počtem odehraných bitev, takže nikdy nemůže být nižší než SR, z něhož vychází.
+SR záměrně nezohledňuje, kolik toho klan odehraje. SRB používá stejné hodnocení a násobí je členem, který roste s počtem odehraných bitev, takže může být vždy pouze vyšší než SR, ze kterého vychází.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Růst je logaritmický, takže prvních sto bitev má mnohem větší hodnotu než tisící bitva. ```
+Logaritmický růst znamená, že prvních sto bitev má mnohem větší hodnotu než tisící bitva. ```
 
-Pro všechny úrovně je záměrně použita jedna konstanta objemu: Šarvátky X. úrovně se hrají nepřetržitě, zatímco Postupy probíhají v nárazových obdobích po několik týdnů v roce, takže více hrané úrovně získávají větší bonus. Jde o stejný princip jako u HRB vedle HR v žebříčku Ocelového lovce.
+Pro všechny úrovně se záměrně používá jedna konstanta počtu bitev. Šarvátka X. úrovně se hraje nepřetržitě, zatímco Ofenzívy probíhají v nárazech několik týdnů v roce, takže více hrané úrovně získávají větší bonus. Bonus za počet bitev odlišuje klan, který si udržel hodnocení po stovky bitev, od klanu, který ho dosáhl ve dvaceti bitvách.

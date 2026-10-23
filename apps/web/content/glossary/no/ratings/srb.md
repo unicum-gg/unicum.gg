@@ -1,12 +1,12 @@
 ---
-term: Battles-basert Stronghold Rating
+term: Kampbasert festningsrating
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Stronghold Rating med kampvolum som belønnes snarere enn bare gates, så en klan som har bevist seg over hundrevis av kamper rangeres høyere enn en med samme SR over tjue.
+Festningsratingen der kampmengde belønnes i stedet for bare å være et minstekrav, slik at en klan som har bevist seg gjennom hundrevis av kamper, rangeres høyere enn en med samme SR etter tjue.
 
-SR ignorerer bevisst hvor mye en klan spiller. SRB tar den samme rangeringen og multipliserer den med et begrep som vokser med kampene bak, så det kan aldri være lavere enn SR det er bygget på.
+SR ser bevisst bort fra hvor mye en klan spiller. SRB tar den samme ratingen og multipliserer den med et ledd som vokser med antallet spilte kamper, slik at den bare kan være høyere enn SR-en den bygger på.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritmisk, så de første hundre kampene er verdt langt mer enn den tusende. ```
+Logaritmisk, slik at de første hundre kampene er verdt langt mer enn den tusende. ```
 
-En volums konstant på tvers av hvert nivå, med vilje: Skirmish Tier X spilles kontinuerlig mens Advances kjører i utbrudd noen få uker i året, så nivåene som faktisk spilles mer får en større bonus. Det er den samme ideen som HRB ved siden av HR på Steel Hunter-brettet.
+Én volumkonstant på tvers av alle nivåer, med hensikt: Trefning på nivå X spilles kontinuerlig, mens Fremrykkinger foregår i perioder noen få uker i året, slik at nivåene som faktisk spilles mer, får en større bonus. Volumbonusen er det som skiller en klan som har opprettholdt en rating gjennom hundrevis av kamper, fra en som nådde den etter tjue.

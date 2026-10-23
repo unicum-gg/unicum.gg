@@ -1,9 +1,9 @@
 ---
-term: Free experience
+term: Kinh nghiệm Tự do
 aliases:
-  - free XP
+  - XP tự do
   - FXP
-  - convert xp
+  - chuyển đổi XP
 related:
   - experience
   - elite-status
@@ -14,8 +14,8 @@ anchors:
     - Free Experience
 ---
 
-Kinh nghiệm có thể được sử dụng trên bất kỳ phương tiện hoặc mô-đun nào, tích lũy như một phần nhỏ của mọi thứ được kiếm và có thể chuyển đổi từ các phương tiện ưu tú bằng vàng.
+Kinh nghiệm có thể dùng cho bất kỳ xe hoặc mô-đun nào, được tích lũy dưới dạng một phần nhỏ trong tổng kinh nghiệm kiếm được và có thể chuyển đổi từ xe tinh nhuệ bằng Vàng.
 
-Một tỷ lệ nhỏ của kinh nghiệm kiếm được trong mỗi trận chiến được dành riêng như kinh nghiệm tự do. Nó không bị ràng buộc với một phương tiện, vì vậy nó có thể được sử dụng để bỏ qua một cấu hình gốc, mở khóa một mô-đun ngay lập tức, hoặc nhảy lên phía trước trong một cây.
+Một tỷ lệ nhỏ kinh nghiệm kiếm được trong mỗi trận đánh sẽ được dành làm Kinh nghiệm Tự do. Kinh nghiệm này không gắn với một xe cụ thể, vì vậy có thể dùng để bỏ qua cấu hình ban đầu, mở khóa ngay một mô-đun hoặc tiến nhanh hơn trong cây công nghệ.
 
-Kinh nghiệm ngồi trên một phương tiện ưu tú cũng có thể được chuyển đổi thành kinh nghiệm tự do bằng vàng, điều này cho phép người chơi đã hoàn thành một nhánh biến số dư không sử dụng thành tiến bộ ở nơi khác.
+Kinh nghiệm còn lại trên xe tinh nhuệ cũng có thể được chuyển đổi thành Kinh nghiệm Tự do bằng Vàng. Đây là cách những người chơi đã hoàn thành một nhánh biến lượng kinh nghiệm chưa sử dụng thành tiến độ ở nơi khác.

@@ -1,9 +1,10 @@
 ---
-term: Free experience
+term: Esperienza tecnica
 aliases:
   - free XP
   - FXP
-  - convert xp
+  - XP libera
+  - convertire XP
 related:
   - experience
   - elite-status
@@ -14,8 +15,8 @@ anchors:
     - Free Experience
 ---
 
-Esperienza che può essere spesa su qualsiasi veicolo o modulo, accumulata come una piccola parte di tutto ciò che si guadagna e convertibile da veicoli elite con oro.
+Esperienza che può essere spesa per qualsiasi veicolo o modulo, accumulata come una piccola quota di tutta l'esperienza ottenuta e convertibile dai veicoli d'élite usando oro.
 
-Una piccola percentuale dell'esperienza guadagnata in ogni battaglia è messa da parte come esperienza libera. Non è legata a un veicolo, quindi può essere spesa per saltare una configurazione base, sbloccare un modulo direttamente o avanzare in un albero.
+Una piccola percentuale dell'esperienza ottenuta in ogni battaglia viene accantonata come Esperienza tecnica. Non è legata a un veicolo, quindi può essere spesa per evitare una configurazione di base, sbloccare direttamente un modulo o avanzare nell'albero tecnologico.
 
-L'esperienza accumulata su un veicolo elite può anche essere convertita in esperienza libera con oro, che è il modo in cui i giocatori che hanno terminato una linea trasformano un saldo dormiente in progresso altrove.
+L'esperienza accumulata su un veicolo d'élite può anche essere convertita in Esperienza tecnica usando oro. In questo modo, i giocatori che hanno completato una linea possono trasformare un saldo inutilizzato in progressi altrove.

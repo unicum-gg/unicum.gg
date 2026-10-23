@@ -1,9 +1,10 @@
 ---
-term: Free experience
+term: Serbest Deneyim
 aliases:
   - free XP
+  - serbest XP
   - FXP
-  - convert xp
+  - deneyim dönüştürme
 related:
   - experience
   - elite-status
@@ -14,8 +15,8 @@ anchors:
     - Free Experience
 ---
 
-Deneyim, herhangi bir araçta veya modülde harcanabilir ve elit araçlardan altın ile dönüştürülebilir.
+Herhangi bir araç veya modül için harcanabilen, kazanılan tüm deneyimin küçük bir payı olarak biriken ve elit araçlardan altın kullanılarak dönüştürülebilen deneyim.
 
-Her savaşta kazanılan deneyimin küçük bir yüzdesi, serbest deneyim olarak ayrılır. Bu deneyim bir araca bağlı değildir, bu yüzden stok konfigürasyonunu atlamak, bir modülü doğrudan açmak veya bir ağaçta ilerlemek için harcanabilir.
+Her savaşta kazanılan deneyimin küçük bir yüzdesi Serbest Deneyim olarak ayrılır. Belirli bir araca bağlı olmadığından stok yapılandırmayı atlamak, bir modülü doğrudan araştırmak veya Teknoloji Ağacında ilerlemek için harcanabilir.
 
-Bir elit araçta bekleyen deneyim de altın ile serbest deneyime çevrilebilir. Bu, bir hattı tamamlayan oyuncuların pasif bakiyelerini başka yerde ilerleme kaydetmek için kullanmasıdır.
+Elit bir araçta biriken deneyim de altın kullanılarak Serbest Deneyime dönüştürülebilir. Böylece bir hattı tamamlayan oyuncular, kullanılmadan duran deneyimlerini başka yerlerde ilerlemeye dönüştürebilir.

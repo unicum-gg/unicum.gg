@@ -1,12 +1,12 @@
 ---
-term: Cīņām balstīts Pusēku Novērtējums
+term: Uz kauju skaitu balstīts Cietokšņa reitings
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Cīņām balstīts Pusēku Novērtējums ir vērtējums, kas balstīts uz cīņu apjomu, kas tiek apbalvots, nevis vienkārši noteikts, tāpēc klans, kas sevi pierādījis simtiem cīņu, rangā ir augstāk par tādiem, kuriem ir tāds pats SR pār divdesmit.
+Tas ir Cietokšņa reitings, kurā kauju skaits tiek novērtēts, nevis tikai izmantots kā kvalifikācijas slieksnis, tāpēc klans, kas sevi pierādījis simtiem kauju, ierindojas augstāk par klanu ar tādu pašu SR, kas aizvadījis divdesmit kaujas.
 
-SR apzināti ignorē to, cik daudz klans spēlē. SRB ņem šo pašu novērtējumu un reizina to ar terminu, kas aug ar aiz muguras esošajām cīņām, tādējādi tas vienmēr var būt tikai augstāks par SR, uz kura tas balstīts.
+SR apzināti neņem vērā, cik daudz kauju klans aizvada. SRB izmanto to pašu reitingu un reizina to ar koeficientu, kas pieaug līdz ar aizvadīto kauju skaitu, tāpēc tas vienmēr var būt tikai augstāks par SR, uz kura tas balstīts.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritmisks, tāpēc pirmajām simt cīņām ir daudz lielāka vērtība nekā tūkstošajai. ```
+Logaritmiska sakarība, tāpēc pirmajām simt kaujām ir daudz lielāka vērtība nekā tūkstošajai. ```
 
-Viens apjoma konstante visās pakāpēs, mērķtiecīgi: Skirmish Tier X tiek spēlēts nepārtraukti, kamēr Advances tiek spēlēts sprādzienos dažas nedēļas gadā, tāpēc tie līmeņi, kas patiešām tiek spēlēti vairāk, saņem lielāku bonusu. Tas ir tas pats princips kā HRB blakus HR Steel Hunter tabulā.
+Visiem līmeņiem apzināti izmantota viena kauju skaita konstante: Sadursmes X līmenī spēlē nepārtraukti, savukārt Uzbrukumi norisinās periodiski dažas nedēļas gadā, tāpēc līmeņi, kuros patiešām spēlē vairāk, saņem lielāku bonusu. Kauju skaita bonuss nošķir klanu, kas saglabājis reitingu simtiem kauju, no klana, kas to sasniedzis divdesmit kaujās.

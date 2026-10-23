@@ -1,9 +1,10 @@
 ---
-term: Free experience
+term: Fri xp
 aliases:
   - free XP
   - FXP
-  - convert xp
+  - fri erfaring
+  - konverter xp
 related:
   - experience
   - elite-status
@@ -14,8 +15,8 @@ anchors:
     - Free Experience
 ---
 
-Experience, der kan bruges på ethvert køretøj eller modul, optjent som en lille andel af alt, hvad der er tjent, og konvertibel fra elite køretøjer med guld.
+Erfaring, der kan bruges på ethvert køretøj eller modul, optjenes som en lille andel af al optjent erfaring og kan konverteres fra elitekøretøjer med gold.
 
-En lille procentdel af den erfaring, der er optjent i hver kamp, bliver sat til side som fri erfaring. Den er ikke bundet til et køretøj, så den kan bruges til at springe over en standardkonfiguration, låse et modul op direkte eller hoppe frem i et træ.
+En lille procentdel af den erfaring, der optjenes i hver kamp, sættes til side som Fri xp. Den er ikke knyttet til et køretøj, så den kan bruges til at springe en stock-konfiguration over, låse et modul op med det samme eller rykke frem i et teknologitræ.
 
-Erfaring, der sidder på et elite køretøj, kan også konverteres til fri erfaring med guld, hvilket er hvordan spillere, der har afsluttet en linje, kan omsætte en inaktiv balance til fremskridt andre steder.
+Erfaring på et elitekøretøj kan også konverteres til Fri xp med gold, hvilket er sådan, spillere, der har færdiggjort en linje, omsætter en ubrugt saldo til fremskridt andre steder.

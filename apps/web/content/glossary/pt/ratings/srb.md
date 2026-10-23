@@ -1,12 +1,12 @@
 ---
-term: Battles-based Stronghold Rating
+term: Classificação de Fortaleza baseada em batalhas
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-O Stronghold Rating com volume de batalha recompensado em vez de apenas limitado, de modo que um clã que se provou ao longo de centenas de batalhas classifica-se acima de um com o mesmo SR ao longo de vinte.
+A Classificação de Fortaleza em que o volume de batalhas é recompensado, em vez de servir apenas como requisito, fazendo com que um clã que se provou ao longo de centenas de batalhas fique acima de outro com a mesma SR obtida em vinte.
 
-O SR ignora deliberadamente quanto um clã joga. O SRB pega essa mesma classificação e a multiplica por um termo que cresce com as batalhas que a sustentam, de modo que ele pode ser sempre maior do que o SR em que se baseia.
+A SR ignora deliberadamente quanto um clã joga. A SRB usa essa mesma classificação e a multiplica por um termo que cresce com o número de batalhas acumuladas, portanto nunca pode ser inferior à SR na qual se baseia.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logarítmico, então as primeiras cem batalhas valem muito mais do que a milésima. ```
+Logarítmica, portanto as primeiras cem batalhas valem muito mais do que a milésima. ```
 
-Um volume constante em todos os níveis, de propósito: o Skirmish Tier X é jogado continuamente enquanto os Advances ocorrem em picos algumas semanas por ano, então os níveis que realmente são jogados mais ganham um bônus maior. É a mesma ideia do HRB ao lado do HR no quadro Steel Hunter.
+Uma única constante de volume para todos os níveis, de propósito: a Escaramuça de Nível X é jogada continuamente, enquanto os Avanços ocorrem em períodos concentrados durante algumas semanas por ano, portanto os níveis que realmente são mais jogados recebem um bônus maior. O bônus de volume é o que diferencia um clã que manteve uma classificação ao longo de centenas de batalhas de outro que a alcançou em vinte.

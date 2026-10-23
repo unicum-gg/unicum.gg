@@ -1,12 +1,12 @@
 ---
-term: Battles-based Stronghold Rating
+term: Hodnotenie Pevnosti podľa počtu bitiek
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Stronghold Rating, ki temelji na količini bitk, nagrajuje več kot zgolj dostop. 
+Hodnotenie Pevnosti, ktoré odmeňuje počet odohraných bitiek namiesto toho, aby ho iba používalo ako podmienku, takže klan, ktorý sa osvedčil v stovkách bitiek, sa umiestni vyššie než klan s rovnakým SR po dvadsiatich bitkách.
 
-SR namerno ignorira koliko igra klan. SRB vzame to oceno in jo pomnoži s pojmom, ki narašča z bitkami za njim, tako da je lahko vedno samo višja od SR, na kateri temelji.
+SR zámerne nezohľadňuje, koľko klan hrá. SRB preberá rovnaké hodnotenie a násobí ho členom, ktorý rastie s počtom odohraných bitiek, takže môže byť vždy len vyššie než SR, z ktorého vychádza.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritmična, zato prvih sto bitk velja veliko več kot tisoča. ```
+Logaritmický rast znamená, že prvých sto bitiek má omnoho väčšiu hodnotu než tisíca bitka. ```
 
-Ena količina, konstantna po vseh nivojih, namenoma: Škirmi Nivo X se igra neprekinjeno, medtem ko napadi potekajo v izbruhanju nekaj tednov na leto, tako da tisti nivoji, ki se dejansko igrajo več, dobijo večji bonus. To je ista ideja kot HRB ob HR na Steel Hunter tabeli.
+Jeden koeficient počtu bitiek pre všetky úrovne, a to zámerne: Šarvátka úrovne X sa hrá nepretržite, zatiaľ čo Postupy prebiehajú nárazovo niekoľko týždňov v roku, takže úrovne, ktoré sa naozaj hrajú viac, získajú väčší bonus. Bonus za počet bitiek odlišuje klan, ktorý si udržal hodnotenie počas stoviek bitiek, od klanu, ktorý ho dosiahol po dvadsiatich.

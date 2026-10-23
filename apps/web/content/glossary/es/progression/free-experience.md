@@ -1,9 +1,9 @@
 ---
-term: Free experience
+term: Experiencia libre
 aliases:
-  - free XP
+  - XP libre
   - FXP
-  - convert xp
+  - convertir experiencia
 related:
   - experience
   - elite-status
@@ -14,8 +14,8 @@ anchors:
     - Free Experience
 ---
 
-La experiencia que se puede gastar en cualquier vehículo o módulo, acumulada como una pequeña parte de todo lo ganado y convertible de vehículos élite con oro.
+Experiencia que puede gastarse en cualquier vehículo o módulo, que se acumula como una pequeña parte de toda la experiencia obtenida y puede convertirse desde vehículos de élite usando oro.
 
-Un pequeño porcentaje de la experiencia ganada en cada batalla se reserva como experiencia libre. No está vinculada a un vehículo, por lo que se puede gastar para omitir una configuración estándar, desbloquear un módulo de inmediato o avanzar en un árbol.
+Un pequeño porcentaje de la experiencia obtenida en cada batalla se reserva como Experiencia libre. No está vinculada a ningún vehículo, por lo que puede usarse para evitar una configuración inicial, desbloquear un módulo directamente o avanzar en un árbol tecnológico.
 
-La experiencia acumulada en un vehículo élite también se puede convertir en experiencia libre con oro, que es cómo los jugadores que han terminado una línea convierten un saldo inactivo en progreso en otros lugares.
+La experiencia acumulada en un vehículo de élite también puede convertirse en Experiencia libre usando oro, que es la forma en que los jugadores que han completado una línea transforman un saldo inactivo en progreso en otra parte.

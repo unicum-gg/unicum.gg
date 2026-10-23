@@ -1,9 +1,11 @@
 ---
-term: Free experience
+term: Libreng Karanasan
 aliases:
   - free XP
   - FXP
-  - convert xp
+  - convert XP
+  - libreng XP
+  - i-convert ang XP
 related:
   - experience
   - elite-status
@@ -14,8 +16,8 @@ anchors:
     - Free Experience
 ---
 
-Ang karanasang maaaring gastusin sa anumang sasakyan o module, na naipon bilang isang maliit na bahagi ng lahat ng nakamit at maaaring i-convert mula sa mga elite na sasakyan gamit ang ginto.
+Karanasan na maaaring gastusin sa anumang sasakyan o module, naiipon bilang maliit na bahagi ng lahat ng kinita at maaaring i-convert mula sa mga elite na sasakyan gamit ang gold.
 
-Isang maliit na porsyento ng karanasang nakuha sa bawat laban ay inilaan bilang libreng karanasan. Hindi ito nakatali sa isang sasakyan, kaya maaari itong gastusin para makalampas sa isang stock configuration, i-unlock ang isang module nang tuwid, o umusad sa isang puno.
+Inihihiwalay bilang Libreng Karanasan ang maliit na porsiyento ng karanasang kinikita sa bawat labanan. Hindi ito nakatali sa isang sasakyan, kaya maaari itong gastusin para laktawan ang stock configuration, agad na i-unlock ang isang module, o lumaktaw sa mas malayong bahagi ng isang tech tree.
 
-Ang karanasang nasa isang elite na sasakyan ay maaari ring i-convert sa libreng karanasan gamit ang ginto, na kung saan ang mga manlalaro na nakatapos ng isang linya ay ginagawang progreso ang isang natutulog na balanse sa ibang lugar.
+Maaari ding i-convert sa Libreng Karanasan gamit ang gold ang karanasang nakaimbak sa isang elite na sasakyan. Sa ganitong paraan, nagagamit ng mga manlalarong nakatapos na ng isang linya ang hindi nagagamit na balanse para umusad sa ibang bahagi.

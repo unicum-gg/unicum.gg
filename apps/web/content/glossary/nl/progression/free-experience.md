@@ -1,9 +1,10 @@
 ---
-term: Free experience
+term: Vrije ervaring
 aliases:
   - free XP
+  - vrije XP
   - FXP
-  - convert xp
+  - XP omzetten
 related:
   - experience
   - elite-status
@@ -14,8 +15,8 @@ anchors:
     - Free Experience
 ---
 
-Ervaring die kan worden besteed aan elk voertuig of module, opgebouwd als een klein percentage van alles wat verdiend is en om te zetten van elite voertuigen met goud.
+Ervaring die aan elk voertuig of elke module kan worden besteed en die wordt verzameld als een klein deel van alle verdiende ervaring of met goud wordt omgezet vanuit elitevoertuigen.
 
-Een klein percentage van de ervaring die in elke strijd is verdiend, wordt gereserveerd als vrije ervaring. Het is niet gebonden aan een voertuig, dus het kan worden besteed om een standaardconfiguratie over te slaan, een module direct te ontgrendelen of vooruit te springen in een boom.
+Een klein percentage van de ervaring die in elk gevecht wordt verdiend, wordt apart gehouden als Vrije ervaring. Deze is niet aan een voertuig gebonden en kan dus worden besteed om een stockconfiguratie over te slaan, een module direct vrij te spelen of verder vooruit te springen in een voertuiglijn.
 
-Ervaring die zich op een elite voertuig bevindt, kan ook worden omgezet in vrije ervaring met goud, wat is hoe spelers die een lijn hebben voltooid een inactief saldo omzetten in vooruitgang elders.
+Ervaring die op een elitevoertuig staat, kan ook met goud worden omgezet in Vrije ervaring. Zo kunnen spelers die een voertuiglijn hebben voltooid een ongebruikt saldo gebruiken om elders voortgang te boeken.

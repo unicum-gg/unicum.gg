@@ -1,9 +1,10 @@
 ---
-term: Free experience
+term: Szabad tapasztalat
 aliases:
   - free XP
+  - szabad XP
   - FXP
-  - convert xp
+  - tapasztalat átváltása
 related:
   - experience
   - elite-status
@@ -14,8 +15,8 @@ anchors:
     - Free Experience
 ---
 
-Az a tapasztalat, amely bármely járműre vagy modulra költhető, a megszerzett tapasztalat kis részének felhalmozásával szerzik, és aranyért átkonvertálható elit járművekből.
+Olyan tapasztalat, amely bármely járműre vagy modulra elkölthető, az összes megszerzett tapasztalat kis hányadaként gyűlik, és az elit járművekről aranyért váltható át.
 
-A minden csatában megszerzett tapasztalat kis százaléka szabad tapasztalatként van félretéve. Ez nincs egy járműhöz kötve, így felhasználható egy alap konfiguráció átugrására, egy modul közvetlen unlockolására, vagy egy ágban való előrelépésre.
+A minden csatában megszerzett tapasztalat kis százaléka Szabad tapasztalatként különül el. Nem kötődik járműhöz, így elkölthető az alapkonfiguráció kihagyására, egy modul azonnali kifejlesztésére vagy a gyorsabb előrehaladásra a fejlesztési fán.
 
-Az elit járműn ülő tapasztalat aranyért is átkonvertálható szabad tapasztalattá, ami lehetővé teszi a játékosok számára, akik befejeztek egy vonalat, hogy egy inaktív egyenleget egy másik helyen előrehaladássá alakítsanak.
+Az elit járművön összegyűlt tapasztalat szintén átváltható Szabad tapasztalatra aranyért, így azok a játékosok, akik befejeztek egy ágat, a fel nem használt mennyiséget máshol fordíthatják fejlődésre.

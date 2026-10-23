@@ -1,9 +1,10 @@
 ---
-term: Bezmaksas pieredze
+term: Brīvā pieredze
 aliases:
-  - bezmaksas XP
+  - free XP
+  - brīvā XP
   - FXP
-  - pārvērst xp
+  - konvertēt XP
 related:
   - experience
   - elite-status
@@ -14,8 +15,8 @@ anchors:
     - Free Experience
 ---
 
-Pieredze, ko var tērēt uz jebkuru transportlīdzekli vai moduli, uzkrāta kā maza daļa no visām nopelnītajām pieredzēm un pārvēršama no elitiem transportlīdzekļiem ar zeltu.
+Pieredze, ko var izmantot jebkura transportlīdzekļa vai moduļa izpētei, kas tiek uzkrāta kā neliela daļa no visas nopelnītās pieredzes un ko var konvertēt no elitāriem transportlīdzekļiem par zeltu.
 
-Neliela procentuālā daļa no pieredzes, kas nopelnīta katrā cīņā, tiek rezervēta kā bezmaksas pieredze. Tā nav saistīta ar transportlīdzekli, tādēļ to var iztērēt, lai apietu standarta konfigurāciju, atbloķētu moduli uzreiz vai pārietu uz priekšu kokā.
+Neliela daļa no katrā kaujā nopelnītās pieredzes tiek piešķirta kā Brīvā pieredze. Tā nav piesaistīta konkrētam transportlīdzeklim, tāpēc to var izmantot, lai izlaistu sākuma komplektāciju, uzreiz izpētītu moduli vai ātrāk virzītos uz priekšu izpētes kokā.
 
-Pieredze, kas uzkrāta elitāra transportlīdzekļa, var arī tikt pārvērsta par bezmaksas pieredzi ar zeltu, kas ir veids, kā spēlētāji, kuri ir pabeiguši kādu līniju, pārvērš neaktīvu atlikumu par progresu citās vietās.
+Elitārā transportlīdzeklī uzkrāto pieredzi var arī konvertēt Brīvajā pieredzē par zeltu, tādējādi spēlētāji, kuri ir pabeiguši izpētes zaru, var citur izmantot neaktīvo pieredzes uzkrājumu progresam.

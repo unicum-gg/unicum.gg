@@ -1,12 +1,12 @@
 ---
-term: Bodovna ocjena temeljenih na bitkama
+term: Ocjena Utvrde na temelju bitaka
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Bodovna ocjena temeljenih na bitkama je ocjena koja nagrađuje volumen bitaka umjesto da ga samo ograničava, tako da klan koji se dokazao kroz stotine bitaka zauzima više mjesto od onog s istim SR koji igra samo dvadeset.
+Ocjena Utvrde koja nagrađuje broj bitaka umjesto da ga koristi samo kao uvjet, pa je klan koji se dokazao tijekom stotina bitaka rangiran iznad klana s istim SR-om ostvarenim tijekom dvadeset bitaka.
 
-SR namjerno ignorira koliko klan igra. SRB uzima tu istu ocjenu i množi je s pojmom koji raste s bitkama iza nje, tako da može biti uvijek veća od SR na kojoj se temelji.
+SR namjerno zanemaruje koliko klan igra. SRB uzima tu istu ocjenu i množi je faktorom koji raste s brojem odigranih bitaka, pa nikada ne može biti niži od SR-a na kojem se temelji.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritamski, tako da je prvih stotinu bitaka vrijedno mnogo više od tisućite. ```
+Rast je logaritamski, pa prvih sto bitaka vrijedi mnogo više od tisućite. ```
 
-Jedna stalna vrijednost preko svih razina, namjerno: Skirmish Tier X se igra neprekidno dok Advances djeluje u praskama nekoliko tjedana godišnje, tako da razine koje se stvarno igraju više dobivaju veći bonus. To je ista ideja kao HRB pored HR na tabli Steel Hunter.
+Namjerno se primjenjuje jedna konstanta broja bitaka za sve razine: Okršaji na razini X igraju se neprekidno, dok se Napretci održavaju u naletima tijekom nekoliko tjedana godišnje, pa razine koje se doista igraju više dobivaju veći bonus. Bonus za broj bitaka razlikuje klan koji je održao ocjenu tijekom stotina bitaka od klana koji ju je dosegnuo tijekom dvadeset.

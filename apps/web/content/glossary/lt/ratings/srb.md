@@ -1,12 +1,12 @@
 ---
-term: Battles-based Stronghold Rating
+term: Mūšiais pagrįstas Tvirtovės reitingas
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Stronghold reitingas, vertinamas pagal kovų apimtį, o ne tiesiog apribojamas, todėl klanas, kuris įrodė savo galią per šimtus kovų, užima aukštesnę vietą nei tas, kuris turi tą patį SR per dvidešimt.
+Tvirtovės reitingas, kuriame atlyginama už mūšių skaičių, o ne tik nustatoma minimali jų riba, todėl šimtus mūšių savo pajėgumą įrodęs klanas užima aukštesnę vietą nei tokį patį SR per dvidešimt mūšių pasiekęs klanas.
 
-SR sąmoningai ignoruoja, kiek klanas žaidžia. SRB paima tą patį reitingą ir padaugina jį iš termino, kuris auga kartu su už jo esančiomis kovomis, todėl jis visada bus didesnis nei SR, kurio pagrindu jis buvo sukurtas.
+SR sąmoningai neatsižvelgia į tai, kiek klanas žaidžia. SRB tą patį reitingą padaugina iš daugiklio, kuris didėja kartu su sužaistų mūšių skaičiumi, todėl jis visada gali būti tik didesnis už SR, kuriuo remiasi.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritminis, todėl pirmos šimtos kovos vertos žymiai daugiau nei tūkstantoji. ```
+Augimas logaritminis, todėl pirmasis šimtas mūšių vertas gerokai daugiau nei tūkstantasis. ```
 
-Vienas apimties konstantas visose pakopose, tyčia: Skirmish Tier X žaidžiamas nuolat, kol Advances vyksta per kelias savaites per metus, todėl tos pakopos, kurios tikrai žaidžiamos daugiau, gauna didesnį priedą. Tai ta pati idėja kaip HRB šalia HR Steel Hunter lentelėje.
+Visoms pakopoms sąmoningai taikoma ta pati mūšių skaičiaus konstanta: X pakopos Išpuoliai žaidžiami nuolat, o Puolimai vyksta pliūpsniais kelias savaites per metus, todėl pakopos, kuriose iš tikrųjų žaidžiama daugiau, gauna didesnį priedą. Mūšių skaičiaus priedas atskiria klaną, kuris išlaikė reitingą per šimtus mūšių, nuo klano, kuris jį pasiekė per dvidešimt.

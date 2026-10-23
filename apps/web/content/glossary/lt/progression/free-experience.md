@@ -1,9 +1,9 @@
 ---
-term: Free experience
+term: Laisvoji patirtis
 aliases:
-  - free XP
+  - laisvoji XP
   - FXP
-  - convert xp
+  - konvertuoti patirtį
 related:
   - experience
   - elite-status
@@ -14,8 +14,8 @@ anchors:
     - Free Experience
 ---
 
-Patirtis, kurią galima išleisti bet kuriam transporto priemonės ar moduliui, sukaupta kaip maža visko, kas uždirbta, dalis ir keičiama iš elitinių transporto priemonių už auksą.
+Patirtis, kurią galima išleisti bet kuriai transporto priemonei ar moduliui, kaupiama kaip nedidelė visos uždirbtos patirties dalis ir gali būti konvertuojama iš elitinių transporto priemonių už auksą.
 
-Kiekvienoje mūšyje uždirbtos patirties mažas procentas yra atidedamas kaip laisva patirtis. Ji nėra susieta su transporto priemone, todėl gali būti išleista norint praleisti standartinę konfigūraciją, tiesiogiai atrakinti modulį arba pereiti į kitą grandinę.
+Nedidelė kiekviename mūšyje uždirbtos patirties dalis atidedama kaip Laisvoji patirtis. Ji nėra susieta su konkrečia transporto priemone, todėl ją galima išleisti pradinei komplektacijai praleisti, moduliui iš karto atrakinti arba greičiau žengti pirmyn technikos medyje.
 
-Patirtis, esanti ant elitinės transporto priemonės, taip pat gali būti keičiama į laisvą patirtį už auksą, kas yra būdas, kaip žaidėjai, užbaigę liniją, paverčia neveikiančią balansą pažanga kitur.
+Elitinėje transporto priemonėje sukauptą patirtį taip pat galima konvertuoti į Laisvąją patirtį už auksą. Taip šaką užbaigę žaidėjai nepanaudotą patirties likutį paverčia pažanga kitur.

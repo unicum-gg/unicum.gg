@@ -1,12 +1,13 @@
 ---
-term: Savaş Tabanlı Karkas Derecesi
+term: Savaş Bazlı Tahkimat Reytingi
 aliases:
   - SRB
+  - savaş bazlı reyting
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +16,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-Savaş hacmi ile ödüllendirilen, yalnızca kapatılan bir Karkas Derecesi, böylece yüzlerce savaşla kendini kanıtlayan bir klan, aynı SR'ye sahip olan bir klanın üstünde sıralanır.
+Yalnızca bir eşik olarak kullanılmak yerine savaş sayısının ödüllendirildiği Tahkimat Reytingidir, böylece yüzlerce savaşta kendini kanıtlamış bir klan, yirmi savaşta aynı SR'ye ulaşmış bir klanın üzerinde yer alır.
 
-SR kasıtlı olarak bir klanın ne kadar oynadığını göz ardı eder. SRB bu aynı derecelendirmeyi alır ve arkasındaki savaşlarla büyüyen bir terimle çarpar, böylece yalnızca üzerine inşa edildiği SR'den daha yüksek olabilir.
+SR, bir klanın ne kadar oynadığını bilinçli olarak dikkate almaz. SRB, aynı reytingi alıp geride kalan savaşların sayısıyla büyüyen bir terimle çarpar, bu nedenle yalnızca temel aldığı SR'den daha yüksek olabilir.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritmik, bu nedenle ilk yüz savaş, binincisinden çok daha değerli. ```
+Logaritmik olduğundan ilk yüz savaş, bininci savaştan çok daha değerlidir. ```
 
-Her kademe için isteyerek sabit bir hacim: Çatışma Tier X sürekli oynanırken, İlerlemeler yılda birkaç hafta boyunca patlama halinde çalışır, böylece gerçekten daha fazla oynanan katmanlar daha büyük bir bonus alır. Steel Hunter tablosunda HR'ye yanındaki aynı fikir HRB'dir.
+Tüm seviyelerde bilinçli olarak tek bir hacim sabiti kullanılır. X. Seviye Çatışma sürekli oynanırken İlerlemeler yılda birkaç hafta boyunca dönemler hâlinde gerçekleşir, bu nedenle gerçekten daha fazla oynanan seviyeler daha büyük bir bonus kazanır. Hacim bonusu, yüzlerce savaş boyunca bir reytingi koruyan bir klanı, o reytinge yirmi savaşta ulaşan bir klandan ayırır.

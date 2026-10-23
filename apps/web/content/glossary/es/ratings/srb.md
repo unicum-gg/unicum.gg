@@ -1,12 +1,13 @@
 ---
-term: Battles-based Stronghold Rating
+term: Clasificación de Fortaleza basada en batallas
 aliases:
   - SRB
+  - clasificación de Fortaleza por batallas
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +16,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-El Stronghold Rating con un volumen de batallas recompensado en lugar de simplemente limitado, de modo que un clan que se ha probado a sí mismo en cientos de batallas ocupa un lugar por encima de uno con el mismo SR en veinte.
+La clasificación de Fortaleza que recompensa el volumen de batallas en vez de usarlo solo como requisito, de modo que un clan que ha demostrado su valía a lo largo de cientos de batallas se sitúa por encima de otro con la misma SR conseguida en veinte.
 
-El SR ignora deliberadamente cuánto juega un clan. El SRB toma esa misma calificación y la multiplica por un término que crece con las batallas detrás de él, por lo que solo puede ser siempre más alto que el SR en el que se basa.
+La SR ignora deliberadamente cuánto juega un clan. La SRB toma esa misma clasificación y la multiplica por un término que crece con el número de batallas que la respaldan, por lo que solo puede ser superior a la SR en la que se basa.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logarítmico, por lo que las primeras cien batallas valen mucho más que la milésima. ```
+Al ser logarítmica, las primeras cien batallas valen mucho más que la milésima. ```
 
-Un volumen constante en cada nivel, a propósito: el Skirmish Tier X se juega continuamente mientras que los Advances se ejecutan en ráfagas unas pocas semanas al año, por lo que los niveles que realmente se juegan más ganan un bono mayor. Es la misma idea que el HRB junto al HR en la tabla de Steel Hunter.
+Una única constante de volumen para todos los niveles, a propósito: la Escaramuza de nivel X se juega continuamente, mientras que los Avances se disputan en periodos concentrados unas pocas semanas al año, por lo que los niveles en los que realmente se juega más reciben una bonificación mayor. La bonificación por volumen es lo que distingue a un clan que ha mantenido una clasificación durante cientos de batallas de otro que la alcanzó en veinte.

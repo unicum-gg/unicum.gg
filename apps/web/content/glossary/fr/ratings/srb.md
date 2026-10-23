@@ -1,12 +1,12 @@
 ---
-term: Cote de Bastion basée sur les batailles
+term: Classement du Bastion basé sur les batailles
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-La cote de Bastion qui récompense le volume de batailles au lieu de simplement l’utiliser comme seuil, de sorte qu’un clan qui a fait ses preuves au cours de centaines de batailles soit mieux classé qu’un clan ayant la même SR après seulement vingt batailles.
+Le classement du Bastion qui récompense le nombre de batailles au lieu d'en faire un simple seuil, afin qu'un clan ayant fait ses preuves sur des centaines de batailles soit mieux classé qu'un clan ayant le même SR après seulement vingt batailles.
 
-La SR ignore délibérément le nombre de batailles disputées par un clan. La SRB reprend cette même cote et la multiplie par un terme qui augmente avec le nombre de batailles disputées, elle ne peut donc être que supérieure à la SR sur laquelle elle repose.
+Le SR ne tient délibérément pas compte du nombre de parties disputées par un clan. Le SRB reprend ce même classement et le multiplie par un terme qui augmente avec le nombre de batailles jouées, il ne peut donc jamais être inférieur au SR sur lequel il repose.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
 La progression est logarithmique, les cent premières batailles valent donc bien plus que la millième. ```
 
-Une seule constante de volume s’applique à tous les rangs, à dessein : les Escarmouches de rang X se jouent en continu, tandis que les Incursions ont lieu par périodes pendant quelques semaines par an, de sorte que les rangs réellement les plus joués obtiennent un bonus plus élevé. C’est le même principe que celui de la HRB par rapport à la HR dans le classement de Traqueur d’acier.
+Une seule constante de volume pour tous les rangs, et ce volontairement : l'Escarmouche de rang X se joue en continu, tandis que les Incursions sont disputées par périodes quelques semaines par an, de sorte que les rangs réellement les plus joués obtiennent un bonus plus important. Le bonus de volume distingue un clan qui a maintenu un classement pendant des centaines de batailles d'un autre qui l'a atteint en vingt batailles.

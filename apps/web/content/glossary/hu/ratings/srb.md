@@ -1,12 +1,12 @@
 ---
-term: Battles-based Stronghold Rating
+term: Csataszám-alapú Erődítmény-értékelés
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-A Stronghold értékelés, amely a csaták számán alapul, nem csupán az akadályozásukon.
+Az Erődítmény-értékelés olyan változata, amelyben a csaták száma nem pusztán feltétel, hanem jutalmat is jelent, így egy több száz csatában bizonyított klán előrébb kerül a rangsorban, mint egy ugyanolyan SR-rel rendelkező, húsz csatát játszó klán.
 
-Az SR szándékosan figyelmen kívül hagyja, hogy egy klán mennyit játszik. Az SRB ezt a besorolást veszi alapul, és megszorozza egy olyan értékkel, amely a mögötte álló csaták számával nő, így ennél fogva mindig magasabb lesz, mint az SR, amelyből kiindul.
+Az SR szándékosan figyelmen kívül hagyja, hogy mennyit játszik egy klán. Az SRB ugyanezt az értékelést megszorozza egy olyan tényezővel, amely az alapjául szolgáló csaták számával nő, így csakis magasabb lehet, mint az alapjául szolgáló SR.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritmikus, így az első száz csata sokkal értékesebb, mint az ezredik. ```
+Logaritmikus, ezért az első száz csata sokkal többet ér, mint az ezredik. ```
 
-Egy mennyiségi állandó minden szinten, szándékosan: a Skirmish Tier X folyamatosan játszódik, míg az Advances időszakosan, évente néhány héten keresztül, így azok a szintek, amelyeket valóban többet játszanak, nagyobb bónuszt kapnak. Ugyanez az elképzelés érvényes az HRB-re és az HR-re a Steel Hunter táblán.
+Szándékosan egyetlen, minden szinten azonos csataszám-állandó érvényes: a X-es szintű Csatározást folyamatosan játsszák, míg az Előrenyomulások évente néhány héten, időszakosan zajlanak, így a ténylegesen többet játszott szintek nagyobb bónuszt kapnak. A csataszámért járó bónusz különbözteti meg azt a klánt, amely több száz csatán át tartott egy értékelést, attól, amely húsz csata alatt érte el.

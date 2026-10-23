@@ -1,9 +1,11 @@
 ---
-term: Free experience
+term: Slobodno iskustvo
 aliases:
   - free XP
   - FXP
-  - konvertuj XP
+  - slobodni XP
+  - pretvoriti XP
+  - konverzija iskustva
 related:
   - experience
   - elite-status
@@ -14,8 +16,8 @@ anchors:
     - Free Experience
 ---
 
-Iskustvo koje se može potrošiti na bilo koje vozilo ili modul, akumulirano kao mali deo svega zarađenog i konvertibilno iz elitnih vozila sa zlatom.
+Iskustvo koje se može potrošiti na bilo koje vozilo ili modul, prikuplja se kao mali dio ukupno zarađenog iskustva i može se pretvoriti s elitnih vozila pomoću zlata.
 
-Mali procenat iskustva zarađenog u svakoj bitci se rezerviše kao slobodno iskustvo. Nije vezano za vozilo, tako da se može potrošiti za preskočiti osnovnu konfiguraciju, otključati modul odmah, ili napredovati u stablu.
+Mali postotak iskustva zarađenog u svakoj bici izdvaja se kao Slobodno iskustvo. Nije vezano za određeno vozilo, pa se može potrošiti za preskakanje početne konfiguracije, direktno otključavanje modula ili brže napredovanje kroz stablo.
 
-Iskustvo koje čeka na elitnom vozilu se takođe može konvertovati u slobodno iskustvo sa zlatom, što je način na koji igrači koji su završili liniju pretvaraju neaktivni saldo u napredak negdje drugdje.
+Iskustvo koje se nalazi na elitnom vozilu također se može pretvoriti u Slobodno iskustvo pomoću zlata, čime igrači koji su završili granu mogu neiskorištenu zalihu pretvoriti u napredak na drugom mjestu.

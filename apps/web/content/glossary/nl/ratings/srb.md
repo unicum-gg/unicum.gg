@@ -1,12 +1,12 @@
 ---
-term: Battles-based Stronghold Rating
+term: Op gevechten gebaseerde Bolwerk-rating
 aliases:
   - SRB
 related:
   - sr
   - stronghold
   - advances
-  - hr
+  - mr
 links:
   - target: stronghold
 anchors:
@@ -15,13 +15,13 @@ anchors:
     - Battles-based Stronghold Rating
 ---
 
-De Stronghold Rating met een aantal behaalde gevechten dat wordt beloond in plaats van alleen maar geblokkeerd, zodat een clan die zich heeft bewezen over honderden gevechten hoger staat dan een met dezelfde SR over twintig.
+De Bolwerk-rating waarbij het aantal gevechten wordt beloond in plaats van alleen als voorwaarde te dienen, zodat een clan die zich over honderden gevechten heeft bewezen hoger eindigt dan een clan met dezelfde SR na twintig gevechten.
 
-SR negeert opzettelijk hoeveel een clan speelt. SRB neemt diezelfde rating en vermenigvuldigt deze met een term die groeit met de gevechten erachter, zodat deze nooit lager kan zijn dan de SR waarop het is gebaseerd.
+SR houdt bewust geen rekening met hoeveel een clan speelt. SRB neemt diezelfde rating en vermenigvuldigt deze met een term die groeit met het aantal achterliggende gevechten, waardoor SRB alleen maar hoger kan zijn dan de SR waarop deze is gebaseerd.
 
 ```formula
 SRB = SR x (1 + ln(1 + battles / 1000))
 
-Logaritmisch, zodat de eerste honderd gevechten veel meer waard zijn dan de duizendste. ```
+Logaritmisch, dus de eerste honderd gevechten zijn veel meer waard dan het duizendste. ```
 
-Een constant volume over elke tier, met opzet: Skirmish Tier X wordt continu gespeeld terwijl Advances in bursts een paar weken per jaar draaien, zodat de tiers die echt meer worden gespeeld een grotere bonus verdienen. Het is hetzelfde idee als HRB naast HR op het Steel Hunter-bord.
+Met opzet geldt één volumeconstante voor elke tier: Schermutseling op Tier X wordt doorlopend gespeeld, terwijl Offensieven slechts enkele weken per jaar in periodes plaatsvinden, waardoor tiers die daadwerkelijk vaker worden gespeeld een grotere bonus opleveren. De volumebonus maakt het verschil tussen een clan die een rating honderden gevechten lang heeft vastgehouden en een clan die deze na twintig gevechten heeft bereikt.
