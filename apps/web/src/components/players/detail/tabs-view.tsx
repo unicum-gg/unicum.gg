@@ -41,6 +41,7 @@ import {
   type PlayerOnslaughtData,
 } from "@/components/players/detail/onslaught";
 import { TournamentsTab } from "@/components/players/detail/tournaments";
+import { BattlesTab } from "@/components/players/detail/battles";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
@@ -126,7 +127,8 @@ export type PlayerTabsViewProps = {
   /** Onslaught record, server-rendered on a direct `/onslaught` landing; null
    * on every other view, where the client fetches it when the mode is opened. */
   initialOnslaught: PlayerOnslaughtData | null;
-  /** Battles shared through the mod, server-rendered under Overview. */
+  /** Battles shared through the mod, server-rendered under Overview (its last
+   * ten) and on the Battles tab (its first page). */
   initialBattles: PlayerBattlesPayload | null;
 };
 
@@ -341,8 +343,14 @@ export function PlayerTabsView({
   const onAchievements = section === PlayerSection.Achievements;
   const onSessions = section === PlayerSection.Sessions;
   const onTournaments = section === PlayerSection.Tournaments;
+  const onBattles = section === PlayerSection.Battles;
   const showModes =
-    !onTanks && !onValue && !onAchievements && !onSessions && !onTournaments;
+    !onTanks &&
+    !onValue &&
+    !onAchievements &&
+    !onSessions &&
+    !onTournaments &&
+    !onBattles;
 
   return (
     <>
@@ -354,6 +362,8 @@ export function PlayerTabsView({
             tankCount={detail.tankCount}
             achievementCount={detail.achievementCount}
             tournamentCount={detail.tournamentCount}
+            // Absent from a profile cached before the field existed.
+            battleCount={detail.battleCount ?? 0}
             onSelect={selectSection}
           />
         </PanelHeader>
@@ -377,7 +387,15 @@ export function PlayerTabsView({
         </>
       )}
 
-      {onTournaments ? (
+      {onBattles ? (
+        <BattlesTab
+          region={region}
+          nickname={nickname}
+          metric={metric}
+          battleCount={detail.battleCount ?? 0}
+          initialBattles={initialBattles}
+        />
+      ) : onTournaments ? (
         <TournamentsTab
           region={region}
           nickname={nickname}

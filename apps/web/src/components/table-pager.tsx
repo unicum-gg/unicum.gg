@@ -30,6 +30,11 @@ export type PagerState = {
   hrefFor: (page: number) => string;
   /** Whether those controls are links a crawler may follow. See the options. */
   crawlable: boolean;
+  /** The row counts offered, `PAGE_SIZES` when absent. */
+  sizes?: readonly number[];
+  /** Whether "all" is offered. On unless a table's rows are fetched a page at
+   * a time, where it would be one request for everything. */
+  allowAll?: boolean;
 };
 
 export type PaginationOptions = {
@@ -60,16 +65,16 @@ export type PaginationOptions = {
 };
 
 /** The `?ps=` twin of a page param, so two tables do not share one row count. */
-function sizeParamFor(param: string): string {
+export function sizeParamFor(param: string): string {
   return param === PAGINATION.PARAM ? "ps" : `${param}-ps`;
 }
 
-function parsePage(raw: string | null): number | null {
+export function parsePage(raw: string | null): number | null {
   const value = Number(raw);
   return raw !== null && Number.isInteger(value) && value > 0 ? value : null;
 }
 
-function parseSize(raw: string | null, fallback: PageSize): PageSize {
+export function parseSize(raw: string | null, fallback: PageSize): PageSize {
   if (raw === "all") return "all";
   const value = Number(raw);
   return raw !== null && Number.isFinite(value) && value > 0 ? value : fallback;
@@ -317,12 +322,14 @@ export function TablePager({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {PAGE_SIZES.map((n) => (
+            {(pager.sizes ?? PAGE_SIZES).map((n) => (
               <SelectItem key={n} value={String(n)}>
                 {n}
               </SelectItem>
             ))}
-            <SelectItem value="all">{t("all")}</SelectItem>
+            {pager.allowAll === false ? null : (
+              <SelectItem value="all">{t("all")}</SelectItem>
+            )}
           </SelectContent>
         </Select>
       </div>

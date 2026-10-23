@@ -2,6 +2,7 @@ import { isRegion } from "@unicum.gg/wargaming";
 import {
   MAX_RECENT_BATTLES,
   RECENT_BATTLES,
+  countPlayerBattles,
   recentBattlesOf,
 } from "@unicum.gg/core/battles/read";
 import { resolveAccountByNickname } from "@unicum.gg/core/players/resolve-account";
@@ -21,6 +22,11 @@ import { getTranslation } from "@/lib/translations.server";
 import { contentLanguage, interfaceLanguage } from "@/services/openapi/locale";
 import { gradeOverlay } from "@/components/players/detail/tanks/loadout-marks";
 import { measured } from "@/services/perf";
+import {
+  playerBattleFacets,
+  type PlayerBattleFilter,
+} from "@unicum.gg/core/battles/filters";
+import { BattleResultFilter } from "@unicum.gg/shared";
 
 /**
  * Player battles
@@ -45,19 +51,36 @@ async function GET__perf(
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
   const decoded = decodeURIComponent(nickname);
-  const asked = Number(new URL(req.url).searchParams.get("limit"));
-  const limit = Number.isFinite(asked) && asked > 0 ? asked : RECENT_BATTLES;
+  const query = new URL(req.url).searchParams;
+  const asked = Number(query.get("limit"));
+  const limit = Math.min(
+    Number.isFinite(asked) && asked > 0 ? Math.trunc(asked) : RECENT_BATTLES,
+    MAX_RECENT_BATTLES,
+  );
+  const askedPage = Number(query.get("page"));
+  const page = Number.isInteger(askedPage) && askedPage > 0 ? askedPage : 1;
+  const filter = battleFilterFrom(query);
 
   try {
     const account = await resolveAccountByNickname(region, decoded);
     if (!account) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
-    const battles = await recentBattlesOf(
-      region,
-      account.accountId,
-      Math.min(limit, MAX_RECENT_BATTLES),
-    );
+    const [battles, total, facets] = await Promise.all([
+      recentBattlesOf(
+        region,
+        account.accountId,
+        limit,
+        (page - 1) * limit,
+        filter,
+      ),
+      countPlayerBattles(region, account.accountId, filter),
+      // Only for a page that draws the filters: the overview's ten battles
+      // have no use for them and are read on every profile view.
+      query.get("facets") === "true"
+        ? playerBattleFacets(region, account.accountId)
+        : Promise.resolve(undefined),
+    ]);
     // One catalogue per DISTINCT vehicle, not per row. A page of twenty
     // battles is usually two or three tanks, and a cold catalogue read pulls
     // a vehicle's whole profile; asking once per row would have made the list
@@ -119,6 +142,8 @@ async function GET__perf(
         // to go with it, which a rename history lookup can. The asked-for name
         // is then the only one there is, and it is the one the reader typed.
         nickname: account.nickname ?? decoded,
+        total,
+        ...(facets ? { facets } : {}),
         // `devices` is pulled OUT of the spread rather than written over it:
         // the database layer hands back catalogue KEYS under that name and
         // this answer carries PICTURES, so spreading first would put both
@@ -251,4 +276,24 @@ function pictured(
       ...(entry?.categories?.length ? { categories: entry.categories } : {}),
     };
   });
+}
+
+/**
+ * The filters a request names, each dropped rather than rejected when it does
+ * not parse: a filter that reads as nothing gives the whole list, which is
+ * what a hand-edited URL with a typo in it should get.
+ */
+function battleFilterFrom(query: URLSearchParams): PlayerBattleFilter {
+  const filter: PlayerBattleFilter = {};
+  const mode = Number(query.get("mode"));
+  if (query.get("mode") && Number.isInteger(mode)) filter.battleType = mode;
+  const tank = Number(query.get("tank"));
+  if (query.get("tank") && Number.isInteger(tank)) filter.tank = tank;
+  const map = query.get("map");
+  if (map) filter.map = map;
+  const result = query.get("result");
+  if (Object.values(BattleResultFilter).includes(result as BattleResultFilter)) {
+    filter.result = result as BattleResultFilter;
+  }
+  return filter;
 }

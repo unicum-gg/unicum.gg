@@ -7,6 +7,10 @@
     "title": "{name} achievements ({region}), {medals} medals earned",
     "description": "The {medals} World of Tanks medals {name} has earned on {region}, from Kolobanov’s and Pool’s to the honorary ranks and epic medals, plus every one still left to earn."
   },
+  "battles": {
+    "title": "{name} battles ({region})",
+    "description": "Every battle of {name} on {region} shared through the unicum.gg mod: the map, the vehicle, the damage, the full roster, the loadout and the replay when one was kept."
+  },
   "tournaments": {
     "title": "{name} tournaments ({region})",
     "description": "Every Wargaming tournament {name} has entered on {region}: the team they played for, the format, and how far it got. A record Wargaming publishes from the tournament’s side only, never the player’s."

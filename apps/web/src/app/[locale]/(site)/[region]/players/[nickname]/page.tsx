@@ -20,6 +20,7 @@ import type { PlayerBattlesPayload } from "@/components/players/detail/overview/
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
+import PAGINATION from "@/constants/pagination";
 import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { breadcrumbSchema, personSchema } from "@/lib/schema-org";
@@ -124,11 +125,13 @@ function viewCopy(
         ? "achievements"
         : view.section === PlayerSection.Tournaments
           ? "tournaments"
-          : view.section === PlayerSection.Value
-            ? "value"
-            : view.mode !== PlayerMode.Overall
-              ? "mode"
-              : "overview";
+          : view.section === PlayerSection.Battles
+            ? "battles"
+            : view.section === PlayerSection.Value
+              ? "value"
+              : view.mode !== PlayerMode.Overall
+                ? "mode"
+                : "overview";
   return {
     title: t(`${block}.title`, values),
     description: t(`${block}.description`, values),
@@ -190,7 +193,13 @@ export async function playerMetadata(
   // every link on this page (the tab nav, the clan, the Twitch profile) also
   // sits on the profile itself, which is indexed and followed, so no link is
   // stranded by not being crawled from this one.
-  const noIndex = view.section === PlayerSection.Achievements;
+  //
+  // The Battles tab likewise when it holds none: most accounts have never had
+  // a battle shared, and their tab is an offer to install the mod, the same
+  // across two million profiles.
+  const noIndex =
+    view.section === PlayerSection.Achievements ||
+    (view.section === PlayerSection.Battles && !detail.battleCount);
 
   const { current } = detail;
   const copy = viewCopy(
@@ -283,22 +292,34 @@ async function PlayerProfileServer({
   tankSlug?: string;
 }) {
   const { section, mode } = view;
-  // The battles shared through the mod, under the one view that draws them.
-  // Started before the detail rather than after it: the two are independent,
-  // so the render waits for the slower of them instead of their sum. Without
-  // it the panel only existed after hydration plus its own round trip, and
-  // popped in half a second late. Caught like the tournaments below, for the
-  // same reason (this endpoint resolves the nickname against our own table),
-  // and because an absent list is the common answer: the panel draws nothing.
-  const battlesPromise: Promise<PlayerBattlesPayload | null> =
+  // The battles shared through the mod, under the two views that draw them:
+  // the overview's last ten, and the Battles tab's first page at the size it
+  // opens on. Started before the detail rather than after it: the two are
+  // independent, so the render waits for the slower of them instead of their
+  // sum. Without it the panel only existed after hydration plus its own round
+  // trip, and popped in half a second late. Caught like the tournaments below,
+  // for the same reason (this endpoint resolves the nickname against our own
+  // table); a failure leaves the panel to fetch on its own.
+  const battlesQuery =
     section === PlayerSection.Overview && mode === PlayerMode.Overall
-      ? unicum
-          .region(region)
-          .players(decoded)
-          .battles({ language: locale })
-          .then((r) => r as unknown as PlayerBattlesPayload)
-          .catch(() => null)
-      : Promise.resolve(null);
+      ? { language: locale }
+      : section === PlayerSection.Battles
+        ? {
+            language: locale,
+            limit: PAGINATION.SIZE.FEED,
+            // With the filters' choices, so they render with the list
+            // rather than arriving after it and pushing it down.
+            facets: "true" as const,
+          }
+        : null;
+  const battlesPromise: Promise<PlayerBattlesPayload | null> = battlesQuery
+    ? unicum
+        .region(region)
+        .players(decoded)
+        .battles(battlesQuery)
+        .then((r) => r as unknown as PlayerBattlesPayload)
+        .catch(() => null)
+    : Promise.resolve(null);
   const detail = await loadDetail(region, decoded);
   if (detail && "locked" in detail) {
     return <AccountLockedView

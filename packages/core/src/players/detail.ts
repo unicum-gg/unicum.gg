@@ -67,6 +67,7 @@ import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import type { Region } from "@unicum.gg/wargaming";
 import { countEarnedAchievements } from "@unicum.gg/core/players/achievements";
 import { countPlayerTournaments } from "@unicum.gg/core/tournaments/read";
+import { countPlayerBattles } from "@unicum.gg/core/battles/read";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import {
@@ -119,6 +120,7 @@ export async function buildPlayerDetail(args: {
     twitchLogin,
     achievementCount,
     tournamentCount,
+    battleCount,
     moeThresholds,
     garage,
   ] = await Promise.all([
@@ -141,6 +143,10 @@ export async function buildPlayerDetail(args: {
     // on the roster's `account_id`, so it rides this batch like the medal count
     // above rather than making the tab's own read happen on every section.
     countPlayerTournaments(region, accountId),
+    // Battles shared through the mod, for the "Battles (N)" tab label. Same
+    // reasoning as the tournaments above: the GIN index on `player_ids`
+    // answers it in milliseconds, and the label belongs on every section.
+    countPlayerBattles(region, accountId),
     // The region's Marks of Excellence bars, for the profile's marks panel.
     // A cached catalogue read (see `@unicum.gg/core/moe`), so it rides here
     // without adding a scan per profile view.
@@ -331,6 +337,7 @@ export async function buildPlayerDetail(args: {
     tankCount: vehicles.length,
     achievementCount,
     tournamentCount,
+    battleCount,
     valuation: computePlayerValuation(vehicles, region, garage?.verifiedAt),
     markProgress,
     liftDrag: tracedSync("liftDrag", () => ({

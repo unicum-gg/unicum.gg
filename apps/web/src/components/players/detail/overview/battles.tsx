@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { useLocale } from "@onruntime/translations/react";
-import { InfoIcon, PuzzlePieceIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import type { RatingMetric } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import {
@@ -13,19 +13,24 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { unicum } from "@/services/sdk";
-import { useHydrated } from "@/hooks/use-hydrated";
 import { useTranslation } from "@/hooks/use-translation";
-import { buttonVariants } from "fumadocs-ui/components/ui/button";
-import { CtaCard } from "@/components/cta-card";
 import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
-import APP from "@/constants/app";
-import { EXAMPLE_BATTLES } from "./battles-example";
+import { numberFormat } from "@/lib/format";
+import { PlayerSection, playerSectionHref } from "@/components/players/detail/tabs";
+import { PlayerBattlesOffer } from "./battles-offer";
+import { PlayerBattlesProvenance } from "./battles-provenance";
 import { PlayerBattlesTable, type PlayerBattleRow } from "./battles-table";
+import type { BattleFacets } from "@/components/players/detail/battles/filters";
 
 export type PlayerBattlesPayload = {
   accountId: number;
   battles: PlayerBattleRow[];
+  /** Every battle we hold for the account that matches the filters, across
+   * all pages. */
+  total: number;
+  /** What the filters can offer, when the request asked for it. */
+  facets?: BattleFacets;
 };
 
 /**
@@ -69,7 +74,6 @@ export function PlayerBattlesPanel({
     "components/players/detail/overview/battles",
   );
   const { locale } = useLocale();
-  const hydrated = useHydrated();
   // In the page's own language, which is also what the server seeded it with,
   // so the seed and the refetch share one key.
   const request = () =>
@@ -103,62 +107,14 @@ export function PlayerBattlesPanel({
           </PanelTitle>
         </PanelHeader>
         {empty ? (
-          // What the panel turns into, under the offer to fill it: a sentence
-          // cannot show a reader what a shared battle looks like, three rows
-          // can. Faded, inert and hidden from assistive tech, since none of it
-          // is this player's, and labelled so nobody reads it as theirs. Drawn
-          // only once hydrated, so the invented rows never reach the HTML a
-          // crawler or the `.md` twin reads as this player's battles, into a
-          // box of fixed height so their arrival moves nothing.
-          <PanelContent className="p-0">
-            <div className="relative h-64 overflow-hidden">
-              {hydrated ? (
-                <div
-                  inert
-                  aria-hidden
-                  className="pointer-events-none select-none opacity-75 [mask-image:linear-gradient(to_bottom,black_55%,transparent)]"
-                >
-                  <PlayerBattlesTable
-                    region={region}
-                    nickname={nickname}
-                    metric={metric}
-                    accountId={0}
-                    battles={EXAMPLE_BATTLES}
-                  />
-                </div>
-              ) : null}
-              <span className="bg-fd-background/90 text-fd-muted-foreground absolute top-4 left-4 rounded-md px-2 py-0.5 text-xs font-medium sm:left-8">
-                {t("example")}
-              </span>
-            </div>
-            <div className="relative -mt-14 px-4 pb-4">
-              <CtaCard
-                className="bg-fd-background/90 backdrop-blur-sm"
-                heading={t("empty-heading")}
-                description={t("empty-blurb", { nickname, name: APP.NAME })}
-              >
-                <Link
-                  href={ROUTES.MOD}
-                  className={buttonVariants({ variant: "primary" })}
-                >
-                  <PuzzlePieceIcon weight="fill" className="mr-2 size-4" />
-                  {t("empty-cta")}
-                </Link>
-              </CtaCard>
-            </div>
-          </PanelContent>
+          <PlayerBattlesOffer
+            region={region}
+            nickname={nickname}
+            metric={metric}
+          />
         ) : (
           <>
-            {/* Said before the list, not under it. A reader who does not know
-                where these rows come from will read an incomplete list as a
-                complete one, and the gap is most of it: a battle is here only if
-                somebody in it shared it. */}
-            <PanelContent>
-              <p className="text-muted-foreground flex items-start gap-2 text-sm">
-                <InfoIcon className="mt-0.5 size-4 shrink-0" weight="fill" />
-                <span>{t("provenance")}</span>
-              </p>
-            </PanelContent>
+            <PlayerBattlesProvenance />
             <PanelContent className="p-0">
               <PlayerBattlesTable
                 region={region}
@@ -168,6 +124,24 @@ export function PlayerBattlesPanel({
                 battles={data.battles}
               />
             </PanelContent>
+            {/* Only when there is more than this panel shows. The tab holds
+                every battle, a page at a time. */}
+            {data.total > data.battles.length ? (
+              <PanelContent className="border-t border-fd-border py-3">
+                <Link
+                  href={playerSectionHref(
+                    ROUTES.PLAYER(region, nickname),
+                    PlayerSection.Battles,
+                  )}
+                  className="text-fd-primary inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
+                >
+                  {t("see-all", {
+                    count: numberFormat(locale).format(data.total),
+                  })}
+                  <ArrowRightIcon className="size-3.5" weight="bold" />
+                </Link>
+              </PanelContent>
+            ) : null}
           </>
         )}
       </Panel>

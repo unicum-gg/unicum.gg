@@ -13,6 +13,7 @@ export { PlayerMode, PLAYER_MODE_LABEL };
 //   /eu/players/Animal/skirmish       Overview + Skirmish
 //   /eu/players/Animal/cw-x           Overview + Clan Wars X
 //   /eu/players/Animal/tanks          Tanks
+//   /eu/players/Animal/battles        Battles
 //   /eu/players/Animal/sessions       Sessions
 //   /eu/players/Animal/achievements   Achievements
 //   /eu/players/Animal/rampage        Overview + Rampage
@@ -26,6 +27,7 @@ export { PlayerMode, PLAYER_MODE_LABEL };
 export enum PlayerSection {
   Overview = "overview",
   Tanks = "tanks",
+  Battles = "battles",
   Sessions = "sessions",
   Value = "value",
   Achievements = "achievements",
@@ -102,6 +104,12 @@ export const PLAYER_VIEWS: PlayerView[] = [
     label: "Tanks",
   },
   {
+    section: PlayerSection.Battles,
+    mode: PlayerMode.Overall,
+    segment: "battles",
+    label: "Battles",
+  },
+  {
     section: PlayerSection.Sessions,
     mode: PlayerMode.Overall,
     segment: "sessions",
@@ -134,6 +142,7 @@ export const PLAYER_VIEWS: PlayerView[] = [
 export const PLAYER_SECTIONS: PlayerSection[] = [
   PlayerSection.Overview,
   PlayerSection.Tanks,
+  PlayerSection.Battles,
   PlayerSection.Sessions,
   PlayerSection.Achievements,
   PlayerSection.Tournaments,

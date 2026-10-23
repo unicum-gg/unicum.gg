@@ -1,6 +1,7 @@
 export * from "./archived-modes";
 export * from "./achievements";
 export * from "./badge-flags";
+export * from "./battle-filters";
 export * from "./derived-stats";
 export * from "./refresh-policy";
 export * from "./language-inference";

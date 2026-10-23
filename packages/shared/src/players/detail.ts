@@ -120,6 +120,12 @@ export type PlayerDetailData = {
    * already inside the tab.
    */
   tournamentCount: number;
+  /**
+   * Battles shared through the mod that this account fought, for the
+   * "Battles (N)" tab label. Optional because the payload is cached as JSON,
+   * and an entry written before this field existed is served without it.
+   */
+  battleCount?: number;
   // What the garage would cost to rebuild at the official store, computed from
   // the vehicle rows. See `./valuation`.
   valuation: PlayerValuation;

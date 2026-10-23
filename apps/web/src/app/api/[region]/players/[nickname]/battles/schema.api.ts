@@ -3,6 +3,7 @@
 // contains "api"); a plain `schema.ts` resolves by name but builds empty.
 import { z } from "zod";
 import { BattleOutcome } from "@unicum.gg/core/battles/read";
+import { BattleResultFilter } from "@unicum.gg/shared";
 
 /** One vehicle's whole battle, as the client's own results reported it. */
 const battleVehicle = z
@@ -253,6 +254,38 @@ export const playerBattle = z
     description: "One battle, as a single player's line through it.",
   });
 
+/** Every value each battles filter can take for this account, counted. */
+const playerBattleFacets = z
+  .object({
+    modes: z
+      .array(z.object({ value: z.number(), count: z.number() }))
+      .meta({ description: "Modes by the game's own `bonusType`, most played first." }),
+    tanks: z
+      .array(
+        z.object({
+          value: z.object({
+            id: z.number(),
+            name: z.string(),
+            shortName: z.string(),
+            tier: z.number(),
+          }),
+          count: z.number(),
+        }),
+      )
+      .meta({ description: "Vehicles this account brought, most played first." }),
+    maps: z
+      .array(z.object({ value: z.string(), count: z.number() }))
+      .meta({ description: "Arenas by the game's own id, most played first." }),
+    results: z
+      .array(z.object({ value: z.enum(BattleResultFilter), count: z.number() }))
+      .meta({ description: "Wins, losses and draws, in that order." }),
+  })
+  .meta({
+    id: "PlayerBattleFacets",
+    description:
+      "What the battles list can be filtered to, counted over every battle we hold for the account rather than over the filtered page.",
+  });
+
 /** Response of `GET /{region}/players/{nickname}/battles`. */
 export const PlayerBattlesResponse = z
   .object({
@@ -262,6 +295,13 @@ export const PlayerBattlesResponse = z
     }),
     battles: z.array(playerBattle).meta({
       description: "Newest first.",
+    }),
+    total: z.number().meta({
+      description:
+        "How many battles match the filters across every page, which is what was shared rather than everything they played.",
+    }),
+    facets: playerBattleFacets.optional().meta({
+      description: "Present when `facets=true` was asked for.",
     }),
   })
   .meta({

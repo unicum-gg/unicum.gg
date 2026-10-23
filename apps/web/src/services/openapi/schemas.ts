@@ -18,6 +18,7 @@ import {
   ActivityWindow,
   DEFAULT_ACTIVITY_WINDOW,
   ServerStatsRange,
+  BattleResultFilter,
   SessionGranularity,
   SpawnDirection,
   TankClient,
@@ -93,18 +94,64 @@ export const battleParams = z.object({
   }),
 });
 
-/** How many battles a player's list returns, and the language it names
- * equipment in. */
+/** Which page of a player's battles to return, how long a page is, and the
+ * language it names equipment in. */
 export const playerBattlesQuery = z.object({
   language: answerLanguageField.optional(),
+  page: z.coerce
+    .number()
+    .int()
+    .min(1)
+    .optional()
+    .meta({
+      description:
+        "Which page of `limit` battles, newest first, counted from one. The first by default; `total` in the answer says how many there are.",
+    }),
+  mode: z.coerce
+    .number()
+    .int()
+    .optional()
+    .meta({
+      description:
+        "Only battles of this mode, by the game's own `bonusType` (1 is random battles). `facets.modes` lists the ones this account has.",
+    }),
+  tank: z.coerce
+    .number()
+    .int()
+    .optional()
+    .meta({
+      description:
+        "Only battles this account fought in this vehicle, by its tank id. `facets.tanks` lists the ones it has.",
+    }),
+  map: z
+    .string()
+    .optional()
+    .meta({
+      description:
+        "Only battles on this arena, by the game's own map id (`05_prohorovka`). `facets.maps` lists the ones it has.",
+    }),
+  result: z
+    .enum(BattleResultFilter)
+    .optional()
+    .meta({
+      description: "Only battles this account won, lost or drew.",
+      "x-enum-source": "BATTLE_RESULT_FILTER",
+    } as EnumMeta),
+  facets: z
+    .enum(["true", "false"])
+    .optional()
+    .meta({
+      description:
+        "`true` to also answer `facets`: every mode, vehicle, map and result this account's battles have, counted over all of them regardless of the filters above. Left out by default, since only a page that draws filters needs it.",
+    }),
   // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below.
   limit: z.coerce
     .number()
     .int()
     .min(1)
-    .max(50)
+    .max(100)
     .optional()
-    .meta({ description: "Battles to return, newest first. Ten by default." }),
+    .meta({ description: "Battles per page, newest first. Ten by default, a hundred at most." }),
 });
 
 /** How a player's sessions are bucketed. */

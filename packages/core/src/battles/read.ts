@@ -25,6 +25,10 @@ import {
   type WNXExpected,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
+import {
+  playerBattlesWhere,
+  type PlayerBattleFilter,
+} from "@unicum.gg/core/battles/filters";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import {
@@ -58,8 +62,9 @@ import {
 /** How many battles a player page asks for. */
 export const RECENT_BATTLES = 10;
 
-/** The most a caller may ask for in one go. */
-export const MAX_RECENT_BATTLES = 50;
+/** The most a caller may ask for in one go: the largest page the profile's
+ * Battles tab offers. */
+export const MAX_RECENT_BATTLES = 100;
 
 /** One battle as a single player's own line through it. */
 export type PlayerBattle = {
@@ -263,10 +268,33 @@ export function drawing(
   };
 }
 
+/**
+ * How many battles we hold that this account fought, for the Battles tab's
+ * label and its last page.
+ *
+ * The same filter the list reads, on the same GIN index over `player_ids`, so
+ * it costs what one page does: a few milliseconds on an account with hundreds.
+ */
+export async function countPlayerBattles(
+  region: Region,
+  accountId: number,
+  filter: PlayerBattleFilter = {},
+): Promise<number> {
+  const table = battlesByRegion[region];
+  const [row] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(table)
+    .where(playerBattlesWhere(table, accountId, filter));
+  return row?.count ?? 0;
+}
+
 export async function recentBattlesOf(
   region: Region,
   accountId: number,
   limit: number = RECENT_BATTLES,
+  /** How many of the newest to skip, for a page past the first. */
+  offset = 0,
+  filter: PlayerBattleFilter = {},
 ): Promise<PlayerBattle[]> {
   const table = battlesByRegion[region];
   const loadouts = battleLoadoutsByRegion[region];
@@ -333,9 +361,10 @@ export async function recentBattlesOf(
       )`,
     })
     .from(table)
-    .where(sql`${table.playerIds} @> ARRAY[${accountId}]::bigint[]`)
+    .where(playerBattlesWhere(table, accountId, filter))
     .orderBy(desc(table.startedAt))
-    .limit(wanted);
+    .limit(wanted)
+    .offset(Math.max(0, Math.trunc(offset)));
 
   // One catalogue read for the whole page, from a cache that is already warm
   // in any process that has drawn a vehicle. The expected values are global,

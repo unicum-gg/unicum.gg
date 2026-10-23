@@ -71,6 +71,7 @@ export function PlayerSectionNav({
   tankCount,
   achievementCount,
   tournamentCount,
+  battleCount,
   onSelect,
 }: {
   basePath: string;
@@ -87,6 +88,9 @@ export function PlayerSectionNav({
   // has ever entered one, so a count there would be a column of zeroes across
   // the site saying nothing.
   tournamentCount: number;
+  // Battles shared through the mod, shown as "Battles (N)". Omitted at zero
+  // like the tournaments, and for the same reason: most accounts have none.
+  battleCount: number;
   onSelect: (section: PlayerSection) => void;
 }) {
   const { locale } = useLocale();
@@ -100,6 +104,7 @@ export function PlayerSectionNav({
     ...(tournamentCount > 0
       ? { [PlayerSection.Tournaments]: tournamentCount }
       : {}),
+    ...(battleCount > 0 ? { [PlayerSection.Battles]: battleCount } : {}),
   };
   // Sections still being shaped. Same idea as `counts`: adding or removing a
   // beta flag is one entry, and deleting the entry is the whole rollout step.

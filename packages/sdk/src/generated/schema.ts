@@ -4676,6 +4676,34 @@ export interface components {
             /** @description What the battle earned this player, present only when it was this account's own client that reported it. The results carry an economy for the reporting client alone, so a battle somebody else uploaded has none for them at any price. */
             personal: components["schemas"]["BattleEconomy"] | null;
         };
+        /** @description What the battles list can be filtered to, counted over every battle we hold for the account rather than over the filtered page. */
+        PlayerBattleFacets: {
+            /** @description Modes by the game's own `bonusType`, most played first. */
+            modes: {
+                value: number;
+                count: number;
+            }[];
+            /** @description Vehicles this account brought, most played first. */
+            tanks: {
+                value: {
+                    id: number;
+                    name: string;
+                    shortName: string;
+                    tier: number;
+                };
+                count: number;
+            }[];
+            /** @description Arenas by the game's own id, most played first. */
+            maps: {
+                value: string;
+                count: number;
+            }[];
+            /** @description Wins, losses and draws, in that order. */
+            results: {
+                value: string;
+                count: number;
+            }[];
+        };
         /** @description A player's most recent battles, as the clients that played them reported. */
         PlayerBattlesResponse: {
             accountId: number;
@@ -4683,6 +4711,10 @@ export interface components {
             nickname: string;
             /** @description Newest first. */
             battles: components["schemas"]["PlayerBattle"][];
+            /** @description How many battles match the filters across every page, which is what was shared rather than everything they played. */
+            total: number;
+            /** @description Present when `facets=true` was asked for. */
+            facets?: components["schemas"]["PlayerBattleFacets"];
         };
         /** @description A player's current clan, from cached data only (no live Wargaming call). `clan` is null when the player is not in a clan or is not yet cached. */
         PlayerClan: {
@@ -4759,6 +4791,8 @@ export interface components {
             tankCount: number;
             achievementCount: number;
             tournamentCount: number;
+            /** @description Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed. */
+            battleCount?: number;
             /** @description What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it. `verifiedAt` is when the account's own owner last confirmed their garage by signing in with Wargaming.net ID, and it is what separates a figure from an estimate: null means this prices every vehicle the account has ever DRIVEN, because `in_garage` is null for any caller but the account itself, so vehicles sold years ago are still counted and vehicles bought and never driven are missing entirely. */
             valuation: {
                 account: {
@@ -7801,7 +7835,19 @@ export interface operations {
         parameters: {
             query?: {
                 language?: components["schemas"]["answerLanguageField"];
-                /** @description Battles to return, newest first. Ten by default. */
+                /** @description Which page of `limit` battles, newest first, counted from one. The first by default; `total` in the answer says how many there are. */
+                page?: number;
+                /** @description Only battles of this mode, by the game's own `bonusType` (1 is random battles). `facets.modes` lists the ones this account has. */
+                mode?: number;
+                /** @description Only battles this account fought in this vehicle, by its tank id. `facets.tanks` lists the ones it has. */
+                tank?: number;
+                /** @description Only battles on this arena, by the game's own map id (`05_prohorovka`). `facets.maps` lists the ones it has. */
+                map?: string;
+                /** @description Only battles this account won, lost or drew. */
+                result?: "win" | "loss" | "draw";
+                /** @description `true` to also answer `facets`: every mode, vehicle, map and result this account's battles have, counted over all of them regardless of the filters above. Left out by default, since only a page that draws filters needs it. */
+                facets?: "true" | "false";
+                /** @description Battles per page, newest first. Ten by default, a hundred at most. */
                 limit?: number;
             };
             header?: never;

@@ -408,6 +408,10 @@ export const PlayerDetailResponse = z.object({
   tankCount: z.number(),
   achievementCount: z.number(),
   tournamentCount: z.number(),
+  battleCount: z.number().optional().meta({
+    description:
+      "Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed.",
+  }),
   valuation: z
     .object({
       account: z
