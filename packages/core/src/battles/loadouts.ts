@@ -8,8 +8,6 @@ import {
   crewSkillNames,
   premiumShellShare,
   shellsLoaded,
-  type LoadoutCrewMember,
-  type LoadoutShell,
   type NewBattleLoadoutRow,
   type ReplayLoadout,
 } from "@unicum.gg/shared";
@@ -268,86 +266,6 @@ function columnKey(
     }
   }
   throw new Error(`no property on battle_loadouts for column ${column.name}`);
-}
-
-/** One stored loadout, as a page needs it before the names are resolved. */
-export interface StoredBattleLoadout {
-  vehicleId: number;
-  life: number;
-  /** Needed to find this vehicle's catalogue of pictures. */
-  tankId: number | null;
-  optDevices: (string | null)[];
-  boosters: (string | null)[];
-  consumables: (string | null)[];
-  shells: LoadoutShell[];
-  premiumShellShare: number | null;
-  crew: LoadoutCrewMember[];
-  /** The field modifications, still packed. See `fieldModSlots` to draw them. */
-  fieldModsPacked: number[];
-}
-
-/**
- * The loadouts stored for one battle, in the order they were played.
- *
- * Found by the battle id alone, which means one extra lookup to learn the
- * partition key: the id is unique on its own, but every index here leads with
- * `started_at` because Postgres requires the partition key in a partitioned
- * table's primary key, so a query without it would scan every month.
- *
- * `tankId` is filled in from the battle's own results where this table left it
- * null, which it does for a vehicle that respawned. A page can draw a loadout
- * without knowing the tank; it just loses the pictures, which come from the
- * vehicle's own catalogue.
- */
-export async function readBattleLoadouts(
-  region: Region,
-  arenaUniqueId: string,
-): Promise<StoredBattleLoadout[]> {
-  const battles = battlesByRegion[region];
-  const [battle] = await db
-    .select({ startedAt: battles.startedAt, vehicles: battles.vehicles })
-    .from(battles)
-    .where(eq(battles.arenaUniqueId, arenaUniqueId))
-    .limit(1);
-  if (!battle) return [];
-
-  const table = battleLoadoutsByRegion[region];
-  const rows = await db
-    .select({
-      vehicleId: table.vehicleId,
-      life: table.life,
-      tankId: table.tankId,
-      optDevices: table.optDevices,
-      boosters: table.boosters,
-      consumables: table.consumables,
-      shells: table.shells,
-      premiumShellShare: table.premiumShellShare,
-      crew: table.crew,
-      fieldModsPacked: table.fieldModsPacked,
-    })
-    .from(table)
-    .where(
-      and(
-        eq(table.startedAt, battle.startedAt),
-        eq(table.arenaUniqueId, arenaUniqueId),
-      ),
-    );
-
-  const tanks = new Map(battle.vehicles.map((v) => [v.id, v.tank]));
-  return rows
-    .sort((a, b) => a.vehicleId - b.vehicleId || a.life - b.life)
-    .map((row) => ({
-      vehicleId: row.vehicleId,
-      life: row.life,
-      tankId: row.tankId ?? tanks.get(row.vehicleId) ?? null,
-      optDevices: row.optDevices ?? [],
-      boosters: row.boosters ?? [],
-      consumables: row.consumables ?? [],
-      shells: row.shells ?? [],
-      premiumShellShare: row.premiumShellShare,
-      crew: row.crew ?? [],
-      fieldModsPacked: row.fieldModsPacked ?? [],
-    }));
 }
 
 /** The account and tank the battle's own results name for each vehicle. */

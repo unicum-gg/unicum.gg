@@ -4,11 +4,14 @@ import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { BattleDetailResponse } from "./schema.api";
 import { measured } from "@/services/perf";
+import { contentLanguage, interfaceLanguage } from "@/services/openapi/locale";
+import { nameBattleLoadouts } from "@/services/battles/loadouts";
 
 /**
  * Battle
- * @description One whole battle: every vehicle on both teams, each one named where this site holds the account and each one rated on this battle alone against its own vehicle's expected values. Wargaming publishes nothing about a single battle, so a battle exists here only because somebody who was in it shared it through the unicum.gg mod. 404 when we hold no such battle.
+ * @description One whole battle: every vehicle on both teams, each one named where this site holds the account and each one rated on this battle alone against its own vehicle's expected values, with what a recording of it said they had fitted, named in the requested language. Wargaming publishes nothing about a single battle, so a battle exists here only because somebody who was in it shared it through the unicum.gg mod. 404 when we hold no such battle.
  * @pathParams battleParams
+ * @queryParams battleDetailQuery
  * @response BattleDetailResponse
  * @tag Players
  * @openapi
@@ -17,7 +20,7 @@ export async function GET(...args: Parameters<typeof GET__perf>) {
   return measured("GET /{region}/battles/{id}", () => GET__perf(...args));
 }
 async function GET__perf(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ region: string; id: string }> },
 ) {
   const { region, id } = await params;
@@ -33,20 +36,28 @@ async function GET__perf(
     if (!battle) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
+    const served = interfaceLanguage(req);
+    const participants = await nameBattleLoadouts(
+      region,
+      served,
+      battle.participants,
+    );
     // A battle never changes once it has been played, so this is as cacheable
     // as anything on the site. `s-maxage` rather than `max-age`: the shared
     // cache keeps it for an hour, and a reader's own browser revalidates, so a
     // change to what this endpoint answers reaches them on their next visit
     // instead of an hour later. The only thing that moves is `reporters`, when
-    // a second client reports the same battle.
+    // a second client reports the same battle. The loadouts are named in one
+    // language, which is safe in a shared cache because that language is in
+    // the URL rather than in a cookie.
     return jsonResponse(
       BattleDetailResponse,
-      { ...battle, startedAt: battle.startedAt.toISOString() },
-      {
+      { ...battle, participants, startedAt: battle.startedAt.toISOString() },
+      contentLanguage(served, {
         headers: {
           "cache-control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
         },
-      },
+      }),
     );
   } catch (err) {
     console.error(`[api/${region}/battles/${id}] failed:`, err);

@@ -1,7 +1,6 @@
 "use client";
 
 import type { TranslateFunction } from "@onruntime/translations";
-import type { Region } from "@unicum.gg/wargaming";
 import { cn } from "@/lib/utils";
 import { BattleLoadout } from "./battle-loadout";
 import type { Participant } from "./battle-types";
@@ -59,8 +58,6 @@ function clock(seconds: number): string {
  * and a battle recorded before the mod carried a field has none of it.
  */
 export function BattleReport({
-  region,
-  battleId,
   participant,
   mark,
   startedAt,
@@ -69,9 +66,6 @@ export function BattleReport({
   count,
   time,
 }: {
-  region: Region;
-  /** The battle, which is what its loadout is keyed on. */
-  battleId: string;
   participant: Participant;
   /** Where the mark stood after this battle, and after the one before it. */
   mark: { percent: number; previous: number | null } | null;
@@ -314,12 +308,7 @@ export function BattleReport({
       </p>
       </div>
 
-      <BattleLoadout
-        region={region}
-        battleId={battleId}
-        vehicleId={participant.id}
-        className="min-w-0"
-      />
+      <BattleLoadout loadouts={participant.loadouts} className="min-w-0" />
     </div>
   );
 }

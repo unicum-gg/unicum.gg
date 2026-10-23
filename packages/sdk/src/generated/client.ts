@@ -485,20 +485,11 @@ class BattleClient {
   ) {}
 
   /** Battle */
-  detail() {
+  detail(language?: NonNullable<QueryOf<"/{region}/battles/{id}">>["language"]) {
     const path = { region: this.region, id: this.id };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/battles/{id}", path),
-      () => this.api.GET("/{region}/battles/{id}", { params: { path } }),
-    );
-  }
-
-  /** Battle loadouts */
-  loadouts(language?: NonNullable<QueryOf<"/{region}/battles/{id}/loadouts">>["language"]) {
-    const path = { region: this.region, id: this.id };
-    return handle(
-      buildUrl(this.baseUrl, "/{region}/battles/{id}/loadouts", path, { language }),
-      () => this.api.GET("/{region}/battles/{id}/loadouts", { params: { path, query: { language } } }),
+      buildUrl(this.baseUrl, "/{region}/battles/{id}", path, { language }),
+      () => this.api.GET("/{region}/battles/{id}", { params: { path, query: { language } } }),
     );
   }
 

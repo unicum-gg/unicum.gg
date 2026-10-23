@@ -1,6 +1,7 @@
 "use client";
 
 import useSWR from "swr";
+import { useLocale } from "@onruntime/translations/react";
 import { useState, type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
 import {
@@ -233,7 +234,10 @@ export function BattleDetail({
     desc: true,
   });
 
-  const request = () => unicum.region(region).battles(battleId).detail();
+  // In the page's language: the battle carries its loadouts already named, so
+  // the language is part of what it answers.
+  const { locale } = useLocale();
+  const request = () => unicum.region(region).battles(battleId).detail(locale);
   const { data, isLoading, error } = useSWR(
     request().url(),
     () => request().then((r) => r as unknown as BattleDetailData),
@@ -386,8 +390,6 @@ export function BattleDetail({
           />
         ) : tab === Tab.Report && mine ? (
           <BattleReport
-            region={region}
-            battleId={battleId}
             participant={{ ...mine, personal }}
             // Only when it is THIS player's gun. The figure comes from one
             // client's own results, so in a battle somebody else reported it
@@ -419,7 +421,6 @@ export function BattleDetail({
               <BattlePlayerPanel
                 key={team}
                 region={region}
-                battleId={battleId}
                 participant={open}
                 killer={killer}
                 victims={kills.victimsOf.get(open.id) ?? []}

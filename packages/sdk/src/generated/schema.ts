@@ -248,29 +248,9 @@ export interface paths {
         };
         /**
          * Battle
-         * @description One whole battle: every vehicle on both teams, each one named where this site holds the account and each one rated on this battle alone against its own vehicle's expected values. Wargaming publishes nothing about a single battle, so a battle exists here only because somebody who was in it shared it through the unicum.gg mod. 404 when we hold no such battle.
+         * @description One whole battle: every vehicle on both teams, each one named where this site holds the account and each one rated on this battle alone against its own vehicle's expected values, with what a recording of it said they had fitted, named in the requested language. Wargaming publishes nothing about a single battle, so a battle exists here only because somebody who was in it shared it through the unicum.gg mod. 404 when we hold no such battle.
          */
         get: operations["get-{region}-battles-{id}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/battles/{id}/loadouts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Battle loadouts
-         * @description What the vehicles of one battle had fitted, already named in the reader's language and pictured. One panel per vehicle per life, and only for the vehicles a recording could speak for: the player whose client recorded the battle, and any team mate they followed after dying. Empty for a battle with no recording, which is most of them. Nothing is ever known this way about the other team.
-         */
-        get: operations["get-{region}-battles-{id}-loadouts"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2546,19 +2526,6 @@ export interface components {
                 image: string;
             }[];
         };
-        BattleLoadoutPanel: {
-            /** @description The battle-scoped vehicle id, which is how a panel is matched to a participant. */
-            vehicle: number;
-            /** @description Counted from zero, in the order the lives were played. Always zero outside a mode with respawns. */
-            life: number;
-            optDevices: components["schemas"]["BattleLoadoutSlot"][];
-            boosters: components["schemas"]["BattleLoadoutSlot"][];
-            consumables: components["schemas"]["BattleLoadoutSlot"][];
-            shells: components["schemas"]["BattleLoadoutShell"][];
-            /** @description The field modifications this vehicle carried, in the tree's own order. Present far more often than the rest: a recording carries these for everyone who has any. */
-            fieldMods: components["schemas"]["BattleLoadoutSlot"][];
-            crew: components["schemas"]["BattleLoadoutCrew"][];
-        };
         BattleLoadoutShell: {
             /** @description AP, APCR, HEAT or HE, in the reader's language. */
             kind: string;
@@ -2576,10 +2543,6 @@ export interface components {
             image: string | null;
             /** @description The grade mark drawn in the corner, for a device that has one, or null. */
             overlay: string | null;
-        };
-        BattleLoadoutsResponse: {
-            /** @description One panel per vehicle per life, for the vehicles a recording of this battle could speak for: the player whose client recorded it, and any team mate they followed after dying. Empty for a battle with no recording, which is most of them. Nothing is ever known this way about the other team, because the server strips the devices out of every other vehicle's public information before it is broadcast. */
-            panels: components["schemas"]["BattleLoadoutPanel"][];
         };
         /**
          * @description Wargaming's own key for the battle mode. `random` is derived from the overall figures and the two other parts of them (`all` is `random` + `clan` + `company`, exactly); the rest are stored as reported.
@@ -2615,32 +2578,20 @@ export interface components {
             rating: {
                 [key: string]: number | null;
             };
-            /** @description What this vehicle had fitted, one entry per life. Absent for almost every participant, and that is the designed state: a loadout exists only where a recording of the battle carried it, which means the player who recorded it and any team mate they followed after dying. Nothing is ever known this way about the other team. */
-            loadouts?: {
-                /** @description Counted from zero, in the order the lives were played. Always zero outside a mode with respawns. */
-                life: number;
-                /** @description The optional devices fitted, by slot. A free slot is a null in place, because a device's grade and category depend on which slot it sits in. An item no catalogue here knows keeps its number under an `unknown:` prefix rather than becoming a null, so a filled slot is never mistaken for an empty one. */
-                optDevices: (string | null)[];
-                /** @description Directives fitted, by slot, a free one being null. */
-                boosters: (string | null)[];
-                /** @description Consumables carried, by slot, a free one being null. */
-                consumables: (string | null)[];
-                /** @description The rounds loaded, in the client's own order. */
-                shells: {
-                    name: string;
-                    /** @description ARMOR_PIERCING, ARMOR_PIERCING_CR, HOLLOW_CHARGE or HIGH_EXPLOSIVE, which is what picks the round's icon. */
-                    type: string;
-                    premium: boolean;
-                    count: number;
-                }[];
-                /** @description One entry per seat, each with its own skills. Kept per seat rather than flattened: for the five skills every seat can learn, how many of the crew trained it is the whole effect. */
-                crew: {
-                    /** @description commander, gunner, driver, radioman or loader. */
-                    role: string;
-                    /** @description Skills trained, in the order they were learned. */
-                    skills: string[];
-                }[];
-            }[];
+            /** @description What this vehicle had fitted, one entry per life, named in the requested language and pictured. Absent for almost every participant, and that is the designed state: a loadout exists only where a recording of the battle carried it, which means the player who recorded it and any team mate they followed after dying. Nothing is ever known this way about the other team, because the server strips the devices out of every other vehicle's public information before it is broadcast. */
+            loadouts?: components["schemas"]["BattleParticipantLoadout"][];
+        };
+        /** @description One vehicle's loadout for one life, named and pictured. */
+        BattleParticipantLoadout: {
+            /** @description Counted from zero, in the order the lives were played. Always zero outside a mode with respawns. */
+            life: number;
+            optDevices: components["schemas"]["BattleLoadoutSlot"][];
+            boosters: components["schemas"]["BattleLoadoutSlot"][];
+            consumables: components["schemas"]["BattleLoadoutSlot"][];
+            shells: components["schemas"]["BattleLoadoutShell"][];
+            /** @description The field modifications this vehicle carried, in the tree's own order. Present far more often than the rest: a recording carries these for everyone who has any. */
+            fieldMods: components["schemas"]["BattleLoadoutSlot"][];
+            crew: components["schemas"]["BattleLoadoutCrew"][];
         };
         /** @description A participant's public identity. */
         BattlePlayer: {
@@ -7732,34 +7683,6 @@ export interface operations {
     };
     "get-{region}-battles-{id}": {
         parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example eu */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description The game's own battle id (`arenaUniqueID`), as digits. A string, not a number: it runs to 19 digits.
-                 * @example 123
-                 */
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["BattleDetailResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-battles-{id}-loadouts": {
-        parameters: {
             query?: {
                 language?: components["schemas"]["answerLanguageField"];
             };
@@ -7783,7 +7706,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["BattleLoadoutsResponse"];
+                    "application/json": components["schemas"]["BattleDetailResponse"];
                 };
             };
         };

@@ -56,6 +56,30 @@ export type Participant = {
    * is AND only when their own client reported it. See `BattleEconomy`.
    */
   personal?: BattleEconomy | null;
+  /** What they had fitted, per life, when a recording of this battle said so. */
+  loadouts?: BattleLoadoutView[];
+};
+
+/** One loadout slot, named and pictured, or empty. */
+export type BattleLoadoutSlot = {
+  name: string | null;
+  image: string | null;
+  overlay: string | null;
+};
+
+/** One vehicle's loadout for one life, as the battle endpoint names it. */
+export type BattleLoadoutView = {
+  life: number;
+  optDevices: BattleLoadoutSlot[];
+  boosters: BattleLoadoutSlot[];
+  consumables: BattleLoadoutSlot[];
+  shells: { kind: string; count: number; premium: boolean; image: string }[];
+  fieldMods: BattleLoadoutSlot[];
+  crew: {
+    role: string;
+    roleImage: string | null;
+    skills: { name: string; image: string }[];
+  }[];
 };
 
 export type BattleDetailData = {

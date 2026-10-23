@@ -65,7 +65,6 @@ type Row = { label: string; value: string; under?: boolean };
  */
 export function BattlePlayerPanel({
   region,
-  battleId,
   participant,
   killer,
   victims,
@@ -78,8 +77,6 @@ export function BattlePlayerPanel({
   time,
 }: {
   region: Region;
-  /** The battle this vehicle fought in, which is what its loadout is keyed on. */
-  battleId: string;
   participant: Participant;
   /** Whoever destroyed them, when the battle named one. */
   killer: Participant | null;
@@ -305,11 +302,7 @@ export function BattlePlayerPanel({
           means the player who recorded it and any team mate they followed
           after dying, so for most rows this draws nothing at all.
         */}
-        <BattleLoadout
-          region={region}
-          battleId={battleId}
-          vehicleId={participant.id}
-        />
+        <BattleLoadout loadouts={participant.loadouts} />
       </div>
     </div>
   );

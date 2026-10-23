@@ -1,8 +1,6 @@
 "use client";
 
-import useSWR from "swr";
-import { useLocale } from "@onruntime/translations/react";
-import type { Region } from "@unicum.gg/wargaming";
+import type { BattleLoadoutView, BattleLoadoutSlot } from "./battle-types";
 import {
   CrewGroup,
   LoadoutTooltips,
@@ -13,7 +11,6 @@ import {
   type LoadoutSlotView,
 } from "@/components/players/detail/tanks/loadout-boxes";
 import { useTranslation } from "@/hooks/use-translation";
-import { unicum } from "@/services/sdk";
 
 /**
  * What one vehicle had fitted in this battle, drawn with the garage's own boxes.
@@ -35,61 +32,29 @@ import { unicum } from "@/services/sdk";
  * and the garage panel's own "install the mod" blurb would be a lie here, since
  * no mod of ours could have collected a stranger's loadout.
  *
- * The names and the pictures arrive finished. They have to: the dictionaries
- * that name equipment and crew skills are deliberately kept off the wire, so a
- * client component that asked for one would get the key back, and the battle's
- * own endpoint cannot carry them either because it is cached in a shared cache
- * for an hour and the language is a cookie. The loadouts endpoint resolves both
- * where the locale and the catalogues exist.
+ * The names and the pictures arrive finished, inside the battle the page has
+ * already loaded. They have to: the dictionaries that name equipment and crew
+ * skills are deliberately kept off the wire, so a client component that asked
+ * for one would get the key back. The battle endpoint resolves them in the
+ * language the page asked for.
  */
 
-interface Slot {
-  name: string | null;
-  image: string | null;
-  overlay: string | null;
-}
-
-interface Panel {
-  vehicle: number;
-  life: number;
-  optDevices: Slot[];
-  boosters: Slot[];
-  consumables: Slot[];
-  shells: { kind: string; count: number; premium: boolean; image: string }[];
-  fieldMods: Slot[];
-  crew: { role: string; roleImage: string | null; skills: { name: string; image: string }[] }[];
-}
-
 export function BattleLoadout({
-  region,
-  battleId,
-  vehicleId,
+  loadouts,
   className,
 }: {
-  region: Region;
-  battleId: string;
-  /** The battle-scoped vehicle whose loadout to draw. */
-  vehicleId: number;
+  /** The participant's loadouts, one per life, as the battle endpoint names
+   * them. Absent for almost every participant. */
+  loadouts: BattleLoadoutView[] | undefined;
   /** How the caller places it: a column in a panel, a full row in a grid. */
   className?: string;
 }) {
   const { t } = useTranslation("components/players/detail/tanks/loadout-panel");
-  const { locale } = useLocale();
 
-  // Keyed on the battle, not on the vehicle: one request answers for every
-  // vehicle in it, and a reader who opens four rows in turn should not fetch
-  // four times. SWR shares the entry across every panel on the page.
-  const request = () => unicum.region(region).battles(battleId).loadouts(locale);
-  const { data } = useSWR(
-    request().url(),
-    () => request().then((r) => r as unknown as { panels: Panel[] }),
-    { revalidateOnFocus: false, shouldRetryOnError: false },
-  );
-
-  const panels = (data?.panels ?? []).filter((panel) => panel.vehicle === vehicleId);
+  const panels = loadouts ?? [];
   if (panels.length === 0) return null;
 
-  const slots = (from: Slot[]): LoadoutSlotView[] =>
+  const slots = (from: BattleLoadoutSlot[]): LoadoutSlotView[] =>
     from.map((slot) => ({
       name: slot.name,
       image: slot.image,

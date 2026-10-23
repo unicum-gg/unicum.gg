@@ -545,6 +545,11 @@ export type BattleLoadout = {
   shells: LoadoutShell[];
   /** One entry per seat, each with the skills that seat was taught. */
   crew: LoadoutCrewMember[];
+  /** The vehicle this life was played in, when the recording named it. Null
+   * for a respawn, whose vehicle is the participant's own. */
+  tankId: number | null;
+  /** The field modifications, still packed. See `fieldModSlots` to draw them. */
+  fieldModsPacked: number[];
 };
 
 /** A whole battle: both teams, named and rated. */
@@ -747,6 +752,8 @@ async function loadoutsOf(
       consumables: table.consumables,
       shells: table.shells,
       crew: table.crew,
+      tankId: table.tankId,
+      fieldModsPacked: table.fieldModsPacked,
     })
     .from(table)
     // `eq` rather than a raw `sql` template: the template has no idea the
@@ -770,6 +777,8 @@ async function loadoutsOf(
       consumables: row.consumables ?? [],
       shells: row.shells ?? [],
       crew: row.crew ?? [],
+      tankId: row.tankId,
+      fieldModsPacked: row.fieldModsPacked ?? [],
     });
     out.set(row.vehicleId, list);
   }

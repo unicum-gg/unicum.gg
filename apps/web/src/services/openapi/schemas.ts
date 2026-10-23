@@ -80,7 +80,7 @@ export const playerLiveParams = z.object({
 });
 
 /** The language a battle's loadouts are named in. */
-export const battleLoadoutsQuery = z.object({
+export const battleDetailQuery = z.object({
   language: answerLanguageField.optional(),
 });
 
