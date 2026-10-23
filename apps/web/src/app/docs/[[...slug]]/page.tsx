@@ -15,6 +15,7 @@ import { getDocsSections, source } from "@/lib/docs-source";
 import { constructMetadata } from "@/lib/metadata";
 import { DEFAULT_LOCALE } from "@/lib/translations";
 import { breadcrumbSchema } from "@/lib/schema-org";
+import type { Directory } from "@/components/listed-on";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 
@@ -77,6 +78,15 @@ export async function generateMetadata({
     canonical: ROUTES.DOCS,
   });
 }
+
+/**
+ * The API directories that list this API, on the overview. Same rule as the
+ * "Listed on" lines of /mcp and /bot: only a listing that is live and links to
+ * us without `nofollow`.
+ */
+const DIRECTORIES: Directory[] = [
+  { name: "Free Public APIs", href: "https://www.freepublicapis.com/unicum-api" },
+];
 
 type Crumb = { name: string; href: string };
 
@@ -211,6 +221,17 @@ export default async function Page({
             />
           ))}
         </Cards>
+        <p className="text-sm text-fd-muted-foreground">
+          Listed on{" "}
+          {DIRECTORIES.map((directory, index) => (
+            <span key={directory.href}>
+              {index > 0 ? " · " : null}
+              <a href={directory.href} target="_blank" rel="noopener">
+                {directory.name}
+              </a>
+            </span>
+          ))}
+        </p>
       </DocsBody>
     </DocsPage>
   );
