@@ -7,6 +7,10 @@
     "title": "Postignuća igrača {name} ({region}), zarađeno medalja: {medals}",
     "description": "{medals} medalja igre World of Tanks koje je {name} zaradio na regiji {region}, od Kolobanovljeve i Poolove do počasnih činova i epskih medalja, uz sve one koje još treba zaraditi."
   },
+  "battles": {
+    "title": "Bitke igrača {name} ({region})",
+    "description": "Svaka bitka igrača {name} u regiji {region} podijeljena putem moda unicum.gg: mapa, vozilo, šteta, potpuna postava, oprema i snimka bitke ako je zadržana."
+  },
   "tournaments": {
     "title": "Turniri igrača {name} ({region})",
     "description": "Svaki Wargamingov turnir na regiji {region} u kojem je {name} sudjelovao: tim za koji je igrao, format i koliko je daleko stigao. To je zapis koji Wargaming objavljuje samo iz perspektive turnira, nikad igrača."

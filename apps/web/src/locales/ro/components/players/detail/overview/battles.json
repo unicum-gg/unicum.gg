@@ -6,6 +6,20 @@
   "unknown-vehicle": "Vehicul necunoscut",
   "empty-heading": "Împărtășește-ți bătăliile",
   "example": "Exemplu",
+  "see-all": "Vezi toate cele {count} bătălii",
+  "filter": {
+    "battles": "{count} bătălii",
+    "all-tanks": "Toate vehiculele",
+    "all-maps": "Toate hărțile",
+    "clear": "Șterge filtrele",
+    "empty": "Nicio bătălie nu corespunde acestor filtre.",
+    "result": {
+      "win": "Victorii",
+      "loss": "Înfrângeri",
+      "draw": "Remize"
+    }
+  },
+  "title-count": "Bătăliile jucătorului {nickname} ({count})",
   "empty-blurb": "Wargaming nu publică nimic despre o singură bătălie și nimeni nu a partajat încă vreuna dintre bătăliile jucate de {nickname}. Cu mod-ul {name}, bătăliile pe care le joci sunt afișate aici, cu întreaga listă.",
   "empty-cta": "Descarcă mod-ul",
   "rating-title": "{metric} pentru această bătălie",

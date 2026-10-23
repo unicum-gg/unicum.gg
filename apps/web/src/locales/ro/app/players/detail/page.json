@@ -7,6 +7,10 @@
     "title": "Realizările lui {name} ({region}), {medals} medalii câștigate",
     "description": "Cele {medals} medalii World of Tanks câștigate de {name} în {region}, de la Kolobanov și Pool până la gradele onorifice și medaliile epice, plus toate cele care mai pot fi câștigate."
   },
+  "battles": {
+    "title": "Bătăliile jucătorului {name} ({region})",
+    "description": "Fiecare bătălie a jucătorului {name} din {region}, partajată prin mod unicum.gg: harta, vehiculul, daunele, lista completă, configurația și reluarea, atunci când a fost păstrată."
+  },
   "tournaments": {
     "title": "Turneele lui {name} ({region})",
     "description": "Fiecare turneu Wargaming la care a participat {name} în {region}: echipa pentru care a jucat, formatul și cât de departe a ajuns. O înregistrare publicată de Wargaming doar din perspectiva turneului, niciodată a jucătorului."

@@ -6,6 +6,20 @@
   "unknown-vehicle": "Ukjent kjøretøy",
   "empty-heading": "Del dine kamper",
   "example": "Eksempel",
+  "see-all": "Se alle {count} kamper",
+  "filter": {
+    "battles": "{count} kamper",
+    "all-tanks": "Alle kjøretøy",
+    "all-maps": "Alle kart",
+    "clear": "Tøm filtre",
+    "empty": "Ingen kamper samsvarer med disse filtrene.",
+    "result": {
+      "win": "Seire",
+      "loss": "Tap",
+      "draw": "Uavgjort"
+    }
+  },
+  "title-count": "Kamper med {nickname} ({count})",
   "empty-blurb": "Wargaming publiserer ingenting om en enkelt kamp, og ingen har delt en av kampene til {nickname} ennå. Med modden som heter {name} vises kampene du spiller her, med hele lagoppstillingen.",
   "empty-cta": "Last ned modden",
   "rating-title": "{metric} for denne kampen",

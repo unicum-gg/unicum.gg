@@ -7,6 +7,10 @@
     "title": "{name} prestasjoner ({region}), {medals} medaljer opptjent",
     "description": "De {medals} World of Tanks-medaljene {name} har opptjent på {region}, fra Kolobanovs og Pools til æresgrader og episke medaljer, pluss alle som fortsatt kan opptjenes."
   },
+  "battles": {
+    "title": "Kamper for {name} ({region})",
+    "description": "Alle kamper med {name} på {region} delt gjennom unicum.gg-modden: kartet, kjøretøyet, skaden, den fullstendige lagoppstillingen, oppsettet og reprisen når den ble beholdt."
+  },
   "tournaments": {
     "title": "{name} turneringer ({region})",
     "description": "Alle Wargaming-turneringer {name} har deltatt i på {region}: laget spilleren spilte for, formatet og hvor langt det kom. En oversikt Wargaming publiserer kun fra turneringens side, aldri spillerens."

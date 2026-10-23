@@ -7,6 +7,10 @@
     "title": "{name} başarıları ({region}), kazanılan {medals} madalya",
     "description": "{name} tarafından {region} bölgesinde kazanılan {medals} World of Tanks madalyası: Kolobanov ve Pool madalyalarından onur rütbelerine ve destansı madalyalara kadar, ayrıca hâlâ kazanılmayı bekleyen her biri."
   },
+  "battles": {
+    "title": "{name} adlı oyuncunun savaşları ({region})",
+    "description": "{name} adlı oyuncunun {region} bölgesinde unicum.gg moduyla paylaşılan her savaşı: harita, araç, hasar, tam kadro, donanım ve korunduysa tekrar oynatma kaydı."
+  },
   "tournaments": {
     "title": "{name} turnuvaları ({region})",
     "description": "{name} tarafından {region} bölgesinde katılınan her Wargaming turnuvası: oynadığı takım, biçim ve ne kadar ilerlediği. Wargaming’in turnuvanın tarafından yayınladığı, oyuncunun tarafından asla yayınlamadığı bir kayıt."

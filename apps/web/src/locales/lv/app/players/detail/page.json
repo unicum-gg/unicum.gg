@@ -7,6 +7,10 @@
     "title": "{name} sasniegumi ({region}), nopelnītas {medals} medaļas",
     "description": "{medals} World of Tanks medaļas, ko {name} nopelnījis reģionā {region}, no Kolobanova un Pūla medaļām līdz goda pakāpēm un episkajām medaļām, kā arī visas vēl nenopelnītās."
   },
+  "battles": {
+    "title": "Spēlētāja {name} kaujas ({region})",
+    "description": "Katra kauja, kurā piedalījās {name} {region} reģionā un kas tika koplietota, izmantojot unicum.gg modu: karte, transportlīdzeklis, bojājumi, pilns sastāvs, aprīkojums un atkārtojums, ja tāds tika saglabāts."
+  },
   "tournaments": {
     "title": "{name} turnīri ({region})",
     "description": "Katrs Wargaming turnīrs, kurā {name} piedalījies reģionā {region}: komanda, kurā spēlēja, formāts un sasniegtais rezultāts. Ieraksts, ko Wargaming publicē tikai no turnīra puses, nevis spēlētāja."

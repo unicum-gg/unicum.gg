@@ -7,6 +7,10 @@
     "title": "{name}:n saavutukset ({region}), {medals} ansaittua mitalia",
     "description": "{name}:n alueella {region} ansaitsemat {medals} World of Tanks -mitalia Kolobanovin ja Poolin mitaleista kunniamerkkeihin ja eeppisiin mitaleihin sekä kaikki vielä ansaitsematta olevat mitalit."
   },
+  "battles": {
+    "title": "Pelaajan {name} taistelut ({region})",
+    "description": "Kaikki pelaajan {name} taistelut alueella {region}, jotka on jaettu unicum.gg-modilla: kartta, ajoneuvo, vahinko, täysi kokoonpano, varustus ja uusinta, jos sellainen säilytettiin."
+  },
   "tournaments": {
     "title": "{name}:n turnaukset ({region})",
     "description": "Jokainen Wargaming-turnaus, johon {name} on osallistunut alueella {region}: joukkue, jossa hän pelasi, pelimuoto ja saavutettu vaihe. Wargaming julkaisee tiedot vain turnauksen näkökulmasta, ei koskaan pelaajan näkökulmasta."

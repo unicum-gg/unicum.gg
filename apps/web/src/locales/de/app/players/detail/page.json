@@ -7,6 +7,10 @@
     "title": "Erfolge von {name} ({region}), {medals} Medaillen verdient",
     "description": "Alle {medals} World of Tanks-Medaillen, die {name} in der Region {region} verdient hat, von der Kolobanov- und der Pool-Medaille bis hin zu Ehrenrängen und epischen Medaillen sowie allen, die noch verdient werden können."
   },
+  "battles": {
+    "title": "Gefechte von {name} ({region})",
+    "description": "Jedes Gefecht von {name} auf {region}, das über den unicum.gg-Mod geteilt wurde: die Karte, das Fahrzeug, der Schaden, die vollständige Aufstellung, die Ausrüstung und das Replay, sofern eines beibehalten wurde."
+  },
   "tournaments": {
     "title": "Turniere von {name} ({region})",
     "description": "Alle Wargaming-Turniere, an denen {name} in der Region {region} teilgenommen hat: das jeweilige Team, für das gespielt wurde, das Format und wie weit es kam. Diese Daten veröffentlicht Wargaming nur auf Turnierseite, nie auf Spielerseite."

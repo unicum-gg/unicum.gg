@@ -6,6 +6,20 @@
   "unknown-vehicle": "Nezināms transportlīdzeklis",
   "empty-heading": "Kopīgot savas kaujas",
   "example": "Piemērs",
+  "see-all": "Skatīt visas {count} kaujas",
+  "filter": {
+    "battles": "{count} kaujas",
+    "all-tanks": "Visai bruņutehnikai",
+    "all-maps": "Visas kartes",
+    "clear": "Notīrīt filtrus",
+    "empty": "Neviena kauja neatbilst šiem filtriem.",
+    "result": {
+      "win": "Uzvaras",
+      "loss": "Zaudējumi",
+      "draw": "Neizšķirti"
+    }
+  },
+  "title-count": "Kaujas, kurās piedalījās {nickname} ({count})",
   "empty-blurb": "Wargaming neko nepublicē par atsevišķu kauju, un neviens vēl nav koplietojis nevienu no {nickname} kaujām. Ar {name} modu kaujas, kuras spēlējat, tiek rādītas šeit kopā ar visu sastāvu.",
   "empty-cta": "Iegūt modu",
   "rating-title": "{metric} šajā kaujā",

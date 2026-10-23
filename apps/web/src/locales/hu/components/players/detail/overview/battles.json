@@ -6,6 +6,20 @@
   "unknown-vehicle": "Ismeretlen jármű",
   "empty-heading": "Csatáid megosztása",
   "example": "Példa",
+  "see-all": "Mind a {count} csata megtekintése",
+  "filter": {
+    "battles": "{count} csata",
+    "all-tanks": "Minden jármű",
+    "all-maps": "Minden pálya",
+    "clear": "Szűrők törlése",
+    "empty": "Egyetlen csata sem felel meg ezeknek a szűrőknek.",
+    "result": {
+      "win": "Győzelmek",
+      "loss": "Vereségek",
+      "draw": "Döntetlenek"
+    }
+  },
+  "title-count": "{nickname} csatái ({count})",
   "empty-blurb": "A Wargaming semmit sem tesz közzé egyszeri csatáról, és még senki sem osztotta meg {nickname} egyik csatáját sem. A {name} moddal az általad játszott csaták itt jelennek meg az egész névsorral együtt.",
   "empty-cta": "Mod letöltése",
   "rating-title": "{metric} ehhez a csatához",

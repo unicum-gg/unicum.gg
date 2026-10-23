@@ -6,6 +6,20 @@
   "unknown-vehicle": "Nežinoma transporto priemonė",
   "empty-heading": "Dalintis savo mūšiais",
   "example": "Pavyzdys",
+  "see-all": "Peržiūrėti visus mūšius ({count})",
+  "filter": {
+    "battles": "{count} mūšių",
+    "all-tanks": "Visus šarvuočiams",
+    "all-maps": "Visi žemėlapiai",
+    "clear": "Išvalyti filtrus",
+    "empty": "Nė vienas mūšis neatitinka šių filtrų.",
+    "result": {
+      "win": "Pergalės",
+      "loss": "Pralaimėjimai",
+      "draw": "Lygiosios"
+    }
+  },
+  "title-count": "Mūšiai, kuriuose dalyvavo {nickname} ({count})",
   "empty-blurb": "Wargaming nieko neskelbia apie vieną mūšį, o niekas dar nepasidalijo nė vienu iš {nickname} bendrų mūšių. Naudojant modą {name}, jūsų žaidžiami mūšiai rodomi čia kartu su visa sudėtimi.",
   "empty-cta": "Gauti modą",
   "rating-title": "{metric} šiame mūšyje",

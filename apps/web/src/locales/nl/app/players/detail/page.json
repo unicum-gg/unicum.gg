@@ -7,6 +7,10 @@
     "title": "Prestaties van {name} ({region}), {medals} medailles behaald",
     "description": "De {medals} World of Tanks-medailles die {name} op {region} heeft behaald, van de medailles van Kolobanov en Pool tot ererangen en epische medailles, plus alle medailles die nog te behalen zijn."
   },
+  "battles": {
+    "title": "Gevechten van {name} ({region})",
+    "description": "Elk gevecht van {name} op {region}, gedeeld via de unicum.gg-mod: de kaart, het voertuig, de schade, de volledige selectie, de uitrusting en de replay als die is behouden."
+  },
   "tournaments": {
     "title": "Toernooien van {name} ({region})",
     "description": "Elk Wargaming-toernooi waaraan {name} op {region} heeft deelgenomen: het team waarvoor de speler uitkwam, de opzet en hoe ver dat team kwam. Een overzicht dat Wargaming alleen via het toernooi publiceert, nooit via de speler."

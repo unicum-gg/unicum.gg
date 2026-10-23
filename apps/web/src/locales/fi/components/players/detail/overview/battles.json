@@ -6,6 +6,20 @@
   "unknown-vehicle": "Tuntematon ajoneuvo",
   "empty-heading": "Jaa taistelut",
   "example": "Esimerkki",
+  "see-all": "Näytä kaikki taistelut ({count})",
+  "filter": {
+    "battles": "Taistelut ({count})",
+    "all-tanks": "Kaikki vaunut",
+    "all-maps": "Kaikki kartat",
+    "clear": "Tyhjennä suodattimet",
+    "empty": "Näitä suodattimia vastaavaa taistelua ei löytynyt.",
+    "result": {
+      "win": "Voittoja",
+      "loss": "Tappioita",
+      "draw": "Tasapelit"
+    }
+  },
+  "title-count": "Nimimerkin {nickname} taistelut ({count})",
   "empty-blurb": "Wargaming ei julkaise mitään yksittäisestä taistelusta, eikä kukaan ole vielä jakanut yhtäkään {nickname}-käyttäjän taisteluista. Modilla nimeltä {name} pelaamasi taistelut näkyvät täällä koko kokoonpanon kanssa.",
   "empty-cta": "Lataa modi",
   "rating-title": "{metric} tässä taistelussa",

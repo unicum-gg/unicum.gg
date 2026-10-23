@@ -6,6 +6,20 @@
   "unknown-vehicle": "Onbekend voertuig",
   "empty-heading": "Deel je gevechten",
   "example": "Voorbeeld",
+  "see-all": "Bekijk alle {count} gevechten",
+  "filter": {
+    "battles": "{count} gevechten",
+    "all-tanks": "Alle voertuigen",
+    "all-maps": "Alle kaarten",
+    "clear": "Wis filters",
+    "empty": "Geen gevecht voldoet aan deze filters.",
+    "result": {
+      "win": "Overwinningen",
+      "loss": "Nederlagen",
+      "draw": "Gelijkspel"
+    }
+  },
+  "title-count": "Gevechten van {nickname} ({count})",
   "empty-blurb": "Wargaming publiceert niets over een enkel gevecht, en niemand heeft er van {nickname} nog een gedeeld. Met de mod met de naam {name} verschijnen de gevechten die je speelt hier, met de gehele selectie.",
   "empty-cta": "Download de mod",
   "rating-title": "{metric} voor dit gevecht",

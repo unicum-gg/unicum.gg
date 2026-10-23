@@ -6,6 +6,20 @@
   "unknown-vehicle": "Vehículo desconocido",
   "empty-heading": "Compartir tus batallas",
   "example": "Ejemplo",
+  "see-all": "Ver las {count} batallas",
+  "filter": {
+    "battles": "{count} batallas",
+    "all-tanks": "Todos los vehículos",
+    "all-maps": "Todos los mapas",
+    "clear": "Limpiar filtros",
+    "empty": "Ninguna batalla coincide con estos filtros.",
+    "result": {
+      "win": "Victorias",
+      "loss": "Derrotas",
+      "draw": "Empates"
+    }
+  },
+  "title-count": "Batallas de {nickname} ({count})",
   "empty-blurb": "Wargaming no publica nada sobre una batalla individual, y nadie ha compartido todavía ninguna de las batallas de {nickname}. Con el mod {name}, las batallas que juegas se muestran aquí, con toda la lista.",
   "empty-cta": "Descarga el mod",
   "rating-title": "{metric} para esta batalla",

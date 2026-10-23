@@ -7,6 +7,10 @@
     "title": "{name}의 업적 ({region}), {medals}개 훈장 획득",
     "description": "{name}이(가) {region} 지역에서 획득한 {medals}개의 World of Tanks 훈장입니다. 콜로바노프 훈장과 풀 훈장부터 명예 계급 및 영웅 훈장까지 포함하며, 아직 획득하지 못한 모든 훈장도 확인할 수 있습니다."
   },
+  "battles": {
+    "title": "{name}의 전투 ({region})",
+    "description": "unicum.gg 모드를 통해 {region}에서 공유된 {name}의 모든 전투입니다. 지도, 차량, 피해, 전체 명단, 장비 구성, 유지된 경우 리플레이가 포함됩니다."
+  },
   "tournaments": {
     "title": "{name}의 토너먼트 ({region})",
     "description": "{name}이(가) {region} 지역에서 참가한 모든 Wargaming 토너먼트입니다. 함께 플레이한 팀, 형식 및 진출 결과를 확인할 수 있습니다. Wargaming이 토너먼트 측에서만 게시하는 기록이며, 플레이어 측 기록은 절대 아닙니다."

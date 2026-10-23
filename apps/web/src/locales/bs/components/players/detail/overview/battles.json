@@ -6,6 +6,20 @@
   "unknown-vehicle": "Nepoznato vozilo",
   "empty-heading": "Podijeli svoje bitke",
   "example": "Primjer",
+  "see-all": "Pogledaj sve bitke ({count})",
+  "filter": {
+    "battles": "Bitke: {count}",
+    "all-tanks": "Sva vozila",
+    "all-maps": "Sve mape",
+    "clear": "Obriši filtere",
+    "empty": "Nijedna bitka ne odgovara ovim filterima.",
+    "result": {
+      "win": "Pobjede",
+      "loss": "Porazi",
+      "draw": "Neriješeno"
+    }
+  },
+  "title-count": "Bitke igrača s nadimkom {nickname} ({count})",
   "empty-blurb": "Wargaming ne objavljuje ništa o pojedinačnoj bitki, a niko još nije ostvario zajedničko dijeljenje nijedne bitke nadimka {nickname}. Uz mod {name}, bitke iz vašeg igranja prikazuju se ovdje, s cijelim sastavom.",
   "empty-cta": "Preuzmite mod",
   "rating-title": "{metric} za ovu bitku",

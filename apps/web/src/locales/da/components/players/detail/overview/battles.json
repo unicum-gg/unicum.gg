@@ -6,6 +6,20 @@
   "unknown-vehicle": "Ukendt køretøj",
   "empty-heading": "Del dine kampe",
   "example": "Eksempel",
+  "see-all": "Se alle {count} kampe",
+  "filter": {
+    "battles": "{count} kampe",
+    "all-tanks": "Alle køretøjer",
+    "all-maps": "Alle kort",
+    "clear": "Ryd filtre",
+    "empty": "Ingen kampe matcher disse filtre.",
+    "result": {
+      "win": "Sejre",
+      "loss": "Nederlag",
+      "draw": "Uafgjorte"
+    }
+  },
+  "title-count": "Kampe for {nickname} ({count})",
   "empty-blurb": "Wargaming udgiver ingenting om en enkelt kamp, og ingen har endnu delt en af kampene fra {nickname}. Med moddet {name} vises de kampe, du spiller, her sammen med hele holdopstillingen.",
   "empty-cta": "Hent moddet",
   "rating-title": "{metric} for denne kamp",

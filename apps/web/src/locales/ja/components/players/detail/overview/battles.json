@@ -6,6 +6,20 @@
   "unknown-vehicle": "不明な車両",
   "empty-heading": "戦闘を共有",
   "example": "例",
+  "see-all": "{count}戦闘を全て見る",
+  "filter": {
+    "battles": "{count}戦闘",
+    "all-tanks": "全ての車輌",
+    "all-maps": "全マップ",
+    "clear": "フィルターをクリア",
+    "empty": "これらのフィルターに一致する戦闘はありません。",
+    "result": {
+      "win": "勝率",
+      "loss": "敗北",
+      "draw": "引き分け"
+    }
+  },
+  "title-count": "{nickname}の戦闘（{count}）",
   "empty-blurb": "Wargamingは1戦について何も公開しておらず、{nickname}の戦闘もまだ誰も共有していません。{name} MODを導入すると、プレイした戦闘がロスター全体とともにここに表示されます。",
   "empty-cta": "MODを入手",
   "rating-title": "この戦闘の{metric}",

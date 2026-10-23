@@ -6,6 +6,20 @@
   "unknown-vehicle": "Okänt fordon",
   "empty-heading": "Dela dina strider",
   "example": "Exempel",
+  "see-all": "Visa alla {count} strider",
+  "filter": {
+    "battles": "{count} strider",
+    "all-tanks": "Alla vagnar",
+    "all-maps": "Alla kartor",
+    "clear": "Rensa filter",
+    "empty": "Ingen strid matchar dessa filter.",
+    "result": {
+      "win": "Segrar",
+      "loss": "Förluster",
+      "draw": "Oavgjorda"
+    }
+  },
+  "title-count": "Strider för {nickname} ({count})",
   "empty-blurb": "Wargaming publicerar inget om en enskild strid, och ingen har ännu delat någon strid som {nickname} har spelat. Med modden som heter {name} visas striderna du spelar här, tillsammans med hela laguppställningen.",
   "empty-cta": "Ladda ner modden",
   "rating-title": "{metric} för denna strid",

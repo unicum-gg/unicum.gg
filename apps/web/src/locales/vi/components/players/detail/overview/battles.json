@@ -6,6 +6,20 @@
   "unknown-vehicle": "Xe tăng Không xác định",
   "empty-heading": "Chia sẻ các trận đấu của bạn",
   "example": "Ví dụ",
+  "see-all": "Xem tất cả {count} trận đấu",
+  "filter": {
+    "battles": "{count} trận đấu",
+    "all-tanks": "Tất cả xe",
+    "all-maps": "Tất cả bản đồ",
+    "clear": "Xóa các bộ lọc",
+    "empty": "Không có trận đấu nào khớp với các bộ lọc này.",
+    "result": {
+      "win": "Chiến thắng",
+      "loss": "Thất bại",
+      "draw": "Trận hòa"
+    }
+  },
+  "title-count": "Trận đấu của {nickname} ({count})",
   "empty-blurb": "Wargaming không đăng gì về một trận đấu đơn lẻ, và chưa ai chia sẻ trận nào của {nickname}. Với mod {name}, các trận đấu bạn chơi sẽ hiển thị ở đây, cùng toàn bộ danh sách.",
   "empty-cta": "Tải mod",
   "rating-title": "{metric} cho trận đấu này",

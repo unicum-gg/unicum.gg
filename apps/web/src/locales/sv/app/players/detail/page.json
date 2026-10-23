@@ -7,6 +7,10 @@
     "title": "Prestationer för {name} ({region}), {medals} intjänade medaljer",
     "description": "De {medals} World of Tanks-medaljer som {name} har tjänat in på {region}, från Kolobanovs och Pools medaljer till hedersgrader och episka medaljer, samt alla som fortfarande är borta från samlingen och kan tjänas in."
   },
+  "battles": {
+    "title": "{name} strider ({region})",
+    "description": "Varje strid med {name} på {region} som delats via unicum.gg-modden: kartan, fordonet, skadan, den fullständiga laguppställningen, utrustningen och reprisen när en sådan behölls."
+  },
   "tournaments": {
     "title": "Turneringar för {name} ({region})",
     "description": "Varje Wargaming-turnering som {name} har deltagit i på {region}: laget som spelaren representerade, formatet och hur långt laget gick. En förteckning som Wargaming enbart publicerar ur turneringens perspektiv, aldrig spelarens."

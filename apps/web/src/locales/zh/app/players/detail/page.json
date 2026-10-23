@@ -7,6 +7,10 @@
     "title": "{name}的成就（{region}），获得{medals}枚奖章",
     "description": "{name}在{region}获得的{medals}枚 World of Tanks 奖章，从科洛巴诺夫和普尔奖章到荣誉军衔和史诗奖章，以及仍未获得的每一枚奖章。"
   },
+  "battles": {
+    "title": "{name}的战斗场次（{region}）",
+    "description": "{name}在{region}上通过 unicum.gg 模组共享的每场战斗：地图、车辆、伤害、完整名单、配置，以及保留的回放（如有）。"
+  },
   "tournaments": {
     "title": "{name}的锦标赛（{region}）",
     "description": "{name}在{region}参加过的每场默认锦标赛：所属队伍、比赛形式以及队伍走了多远。这是默认从锦标赛一方发布的记录，不代表玩家一方。"

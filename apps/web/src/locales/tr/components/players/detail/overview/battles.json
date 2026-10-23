@@ -6,6 +6,20 @@
   "unknown-vehicle": "Bilinmeyen araç",
   "empty-heading": "Savaşlarını paylaş",
   "example": "Örnek",
+  "see-all": "Tüm {count} savaşı gör",
+  "filter": {
+    "battles": "{count} savaş",
+    "all-tanks": "Tüm araçlar",
+    "all-maps": "Tüm haritalar",
+    "clear": "Filtreleri temizle",
+    "empty": "Bu filtrelerle eşleşen maç yok.",
+    "result": {
+      "win": "Zaferler",
+      "loss": "Yenilgiler",
+      "draw": "Beraberlikler"
+    }
+  },
+  "title-count": "{nickname} adlı oyuncunun savaşları ({count})",
   "empty-blurb": "Wargaming tek bir savaş hakkında hiçbir şey yayınlamaz ve hiç kimse {nickname} adlı oyuncunun savaşlarından birini henüz paylaşmadı. {name} moduyla oynadığın savaşlar, kadronun tümüyle birlikte burada gösterilir.",
   "empty-cta": "Modu al",
   "rating-title": "Bu savaş için {metric}",

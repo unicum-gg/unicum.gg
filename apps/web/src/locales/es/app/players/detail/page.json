@@ -7,6 +7,10 @@
     "title": "Logros de {name} ({region}), {medals} medallas conseguidas",
     "description": "Las {medals} medallas de World of Tanks que {name} ha conseguido en {region}, desde las de Kolobanov y Pool hasta los rangos honoríficos y las medallas épicas, además de todas las que aún puede conseguir."
   },
+  "battles": {
+    "title": "Batallas de {name} ({region})",
+    "description": "Cada batalla de {name} en {region} compartida mediante el mod de unicum.gg: el mapa, el vehículo, el daño, la lista completa, la configuración y la repetición cuando se conservó."
+  },
   "tournaments": {
     "title": "Torneos de {name} ({region})",
     "description": "Todos los torneos de Wargaming en los que {name} ha participado en {region}: el equipo con el que jugó, el formato y hasta dónde llegó. Un registro que Wargaming publica únicamente desde la perspectiva del torneo, nunca desde la del jugador."

@@ -7,6 +7,10 @@
     "title": "إنجازات {name} ({region})، {medals} ميدالية مكتسبة",
     "description": "ميداليات World of Tanks الـ{medals} التي كسبها {name} في {region}، من ميداليتي Kolobanov وPool إلى الرتب الفخرية والميداليات الملحمية، إضافة إلى كل ميدالية ما زالت بانتظاره."
   },
+  "battles": {
+    "title": "المعارك الخاصة بـ {name} ({region})",
+    "description": "كل معركة لـ {name} في {region} تمت مشاركتها عبر تعديل unicum.gg: الخريطة، المركبة، الضرر، التشكيلة الكاملة، التجهيزات، والتسجيل عندما احتُفظ به."
+  },
   "tournaments": {
     "title": "بطولات {name} ({region})",
     "description": "كل بطولة Wargaming شارك فيها {name} في {region}: الفريق الذي لعب له، والصيغة، والمدى الذي بلغه. سجل تنشره Wargaming من جهة البطولة فقط، وليس من جهة اللاعب."

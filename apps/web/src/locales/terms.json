@@ -779,7 +779,9 @@
     "Listed on": "مدرج على",
     "figure": "رقم",
     "Get the mod": "احصل على المود",
-    "shared": "مشترك"
+    "shared": "مشترك",
+    "All maps": "جميع الخرائط",
+    "Victories": "الانتصارات"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1561,7 +1563,9 @@
     "Listed on": "Размешчана на",
     "figure": "паказчык",
     "Get the mod": "Спампаваць мод",
-    "shared": "агульны"
+    "shared": "агульны",
+    "All maps": "Усе карты",
+    "Victories": "Перамогі"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2557,7 +2561,10 @@
     "Listed on": "Посочено в",
     "figure": "фигура",
     "Get the mod": "Изтеглете мода",
-    "shared": "споделени"
+    "shared": "споделени",
+    "All vehicles": "Всички машини",
+    "Defeats": "Загуби",
+    "All maps": "Всички карти"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3346,7 +3353,9 @@
     "Listed on": "Navedeno na",
     "figure": "figura",
     "Get the mod": "Preuzmite mod",
-    "shared": "zajedničko"
+    "shared": "zajedničko",
+    "All maps": "Sve mape",
+    "Victories": "Pobjede"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4353,7 +4362,10 @@
     "Listed on": "Uvedeno na",
     "figure": "údaj",
     "Get the mod": "Stáhnout mod",
-    "shared": "sdílené"
+    "shared": "sdílené",
+    "All vehicles": "Všemi vozidly",
+    "Defeats": "Porážek",
+    "All maps": "Všechny mapy"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5366,7 +5378,10 @@
     "Listed on": "Listet på",
     "figure": "tal",
     "Get the mod": "Hent moddet",
-    "shared": "delt"
+    "shared": "delt",
+    "All vehicles": "Alle køretøjer",
+    "Defeats": "Nederlag",
+    "All maps": "Alle kort"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6372,7 +6387,10 @@
     "Listed on": "Gelistet auf",
     "figure": "Zahl",
     "Get the mod": "Mod herunterladen",
-    "shared": "gemeinsam"
+    "shared": "gemeinsam",
+    "All vehicles": "Alle Fahrzeuge",
+    "Defeats": "Niederlagen",
+    "All maps": "Alle Karten"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7384,7 +7402,10 @@
     "Listed on": "Καταχωρισμένο σε",
     "figure": "αριθμός",
     "Get the mod": "Κατέβασε το mod",
-    "shared": "κοινά"
+    "shared": "κοινά",
+    "All vehicles": "Όλα τα οχήματα",
+    "Defeats": "Ήττες",
+    "All maps": "Όλοι οι χάρτες"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8376,7 +8397,10 @@
     "Listed on": "Listado en",
     "figure": "figura",
     "Get the mod": "Descarga el mod",
-    "shared": "compartido"
+    "shared": "compartido",
+    "All vehicles": "Todos los vehículos",
+    "Defeats": "Derrotas",
+    "All maps": "Todos los mapas"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9392,7 +9416,10 @@
     "Listed on": "Listattu palvelussa",
     "figure": "luku",
     "Get the mod": "Lataa modi",
-    "shared": "jaettu"
+    "shared": "jaettu",
+    "All vehicles": "Kaikki vaunut",
+    "Defeats": "Tappioita",
+    "All maps": "Kaikki kartat"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10388,7 +10415,10 @@
     "Listed on": "Répertorié sur",
     "figure": "chiffre",
     "Get the mod": "Obtenir le mod",
-    "shared": "partagé"
+    "shared": "partagé",
+    "All vehicles": "Tous les véhicules",
+    "Defeats": "Défaites",
+    "All maps": "Toutes les cartes"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11171,7 +11201,9 @@
     "Listed on": "पर सूचीबद्ध",
     "figure": "आंकड़ा",
     "Get the mod": "मॉड प्राप्त करें",
-    "shared": "साझा"
+    "shared": "साझा",
+    "All maps": "सभी नक्शे",
+    "Victories": "जीत"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12181,7 +12213,10 @@
     "Listed on": "Navedeno na",
     "figure": "brojka",
     "Get the mod": "Preuzmi mod",
-    "shared": "zajedničko"
+    "shared": "zajedničko",
+    "All vehicles": "Sva vozila",
+    "Defeats": "Poraza",
+    "All maps": "Sve mape"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13193,7 +13228,10 @@
     "Listed on": "Listázva itt",
     "figure": "ábra",
     "Get the mod": "Mod letöltése",
-    "shared": "megosztott"
+    "shared": "megosztott",
+    "All vehicles": "Minden jármű",
+    "Defeats": "Vereségek",
+    "All maps": "Minden pálya"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14201,7 +14239,10 @@
     "Listed on": "Elencato su",
     "figure": "dato",
     "Get the mod": "Scarica la mod",
-    "shared": "condiviso"
+    "shared": "condiviso",
+    "All vehicles": "Tutti i veicoli",
+    "Defeats": "Sconfitte",
+    "All maps": "Tutte le mappe"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15216,7 +15257,10 @@
     "Listed on": "掲載先",
     "figure": "図",
     "Get the mod": "MODを入手",
-    "shared": "共有"
+    "shared": "共有",
+    "All vehicles": "全ての車輌",
+    "Defeats": "敗北",
+    "All maps": "全マップ"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16002,7 +16046,9 @@
     "Listed on": "Көрсетілген орны",
     "figure": "сан",
     "Get the mod": "Модты жүктеп алу",
-    "shared": "ортақ"
+    "shared": "ортақ",
+    "All maps": "Барлық карталар",
+    "Victories": "Жеңістер"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17022,7 +17068,9 @@
     "Listed on": "게시 위치",
     "figure": "수치",
     "Get the mod": "모드 받기",
-    "shared": "공유"
+    "shared": "공유",
+    "All vehicles": "모두 표시",
+    "All maps": "모든 지도"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18037,7 +18085,10 @@
     "Listed on": "Nurodyta svetainėje",
     "figure": "skaičius",
     "Get the mod": "Gauti modą",
-    "shared": "bendri"
+    "shared": "bendri",
+    "All vehicles": "Visus šarvuočiams",
+    "Defeats": "Pralaimėjimai",
+    "All maps": "Visi žemėlapiai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -19038,7 +19089,10 @@
     "Listed on": "Publicēts vietnē",
     "figure": "skaitlis",
     "Get the mod": "Iegūt modu",
-    "shared": "koplietots"
+    "shared": "koplietots",
+    "All vehicles": "Visai bruņutehnikai",
+    "Defeats": "Zaudējumi",
+    "All maps": "Visas kartes"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20055,7 +20109,10 @@
     "Listed on": "Vermeld op",
     "figure": "figuur",
     "Get the mod": "Download de mod",
-    "shared": "gedeeld"
+    "shared": "gedeeld",
+    "All vehicles": "Alle voertuigen",
+    "Defeats": "Nederlagen",
+    "All maps": "Alle kaarten"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -21063,7 +21120,10 @@
     "Listed on": "Listet på",
     "figure": "tall",
     "Get the mod": "Last ned modden",
-    "shared": "delt"
+    "shared": "delt",
+    "All vehicles": "Alle kjøretøy",
+    "Defeats": "Tap",
+    "All maps": "Alle kart"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -22068,7 +22128,10 @@
     "Listed on": "Dostępne na",
     "figure": "liczba",
     "Get the mod": "Pobierz mod",
-    "shared": "wspólne"
+    "shared": "wspólne",
+    "All vehicles": "Wszystkich pojazdów",
+    "Defeats": "Przegrane",
+    "All maps": "Wszystkie mapy"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -23066,7 +23129,10 @@
     "Listed on": "Listados em",
     "figure": "valor",
     "Get the mod": "Obter o mod",
-    "shared": "compartilhado"
+    "shared": "compartilhado",
+    "All vehicles": "Todos os veículos",
+    "Defeats": "Derrotas",
+    "All maps": "Todos os mapas"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -24064,7 +24130,10 @@
     "Listed on": "Listat pe",
     "figure": "cifră",
     "Get the mod": "Descarcă mod-ul",
-    "shared": "partajat"
+    "shared": "partajat",
+    "All vehicles": "Toate vehiculele",
+    "Defeats": "Înfrângeri",
+    "All maps": "Toate hărțile"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -25050,7 +25119,10 @@
     "Listed on": "Размещено на",
     "figure": "показатель",
     "Get the mod": "Скачать мод",
-    "shared": "общие"
+    "shared": "общие",
+    "All vehicles": "Всю технику",
+    "Defeats": "Поражений",
+    "All maps": "Все карты"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25837,7 +25909,9 @@
     "Listed on": "Navedeno na",
     "figure": "slika",
     "Get the mod": "Prenesi mod",
-    "shared": "skupno"
+    "shared": "skupno",
+    "All maps": "Vsi zemljevidi",
+    "Victories": "Zmage"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26849,7 +26923,10 @@
     "Listed on": "Наведено на",
     "figure": "фигура",
     "Get the mod": "Преузми мод",
-    "shared": "заједничко"
+    "shared": "заједничко",
+    "All vehicles": "Sva vozila",
+    "Defeats": "Porazi",
+    "All maps": "Sve mape"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27866,7 +27943,10 @@
     "Listed on": "Listad på",
     "figure": "figur",
     "Get the mod": "Ladda ner modden",
-    "shared": "delad"
+    "shared": "delad",
+    "All vehicles": "Alla vagnar",
+    "Defeats": "Förluster",
+    "All maps": "Alla kartor"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28879,7 +28959,10 @@
     "Listed on": "แสดงบน",
     "figure": "ตัวเลข",
     "Get the mod": "ดาวน์โหลดม็อด",
-    "shared": "ร่วมกัน"
+    "shared": "ร่วมกัน",
+    "All vehicles": "พาหนะทุกคัน",
+    "Defeats": "แพ้",
+    "All maps": "แผนที่ทั้งหมด"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29667,7 +29750,9 @@
     "Listed on": "Nakalista sa",
     "figure": "bilang",
     "Get the mod": "Kunin ang mod",
-    "shared": "magkasama"
+    "shared": "magkasama",
+    "All maps": "Lahat ng mapa",
+    "Victories": "Mga tagumpay"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30676,7 +30761,10 @@
     "Listed on": "Listelendiği yer",
     "figure": "sayı",
     "Get the mod": "Modu al",
-    "shared": "paylaşılan"
+    "shared": "paylaşılan",
+    "All vehicles": "Tüm araçlar",
+    "Defeats": "Yenilgiler",
+    "All maps": "Tüm haritalar"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31678,7 +31766,10 @@
     "Listed on": "Зазначено на",
     "figure": "показник",
     "Get the mod": "Отримати мод",
-    "shared": "спільні"
+    "shared": "спільні",
+    "All vehicles": "Всю техніку",
+    "Defeats": "Поразок",
+    "All maps": "Усі карти"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32669,7 +32760,10 @@
     "Listed on": "Được liệt kê trên",
     "figure": "hình",
     "Get the mod": "Tải mod",
-    "shared": "chung"
+    "shared": "chung",
+    "All vehicles": "Tất cả xe",
+    "Defeats": "Thất bại",
+    "All maps": "Tất cả bản đồ"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33682,6 +33776,9 @@
     "Listed on": "收录于",
     "figure": "数值",
     "Get the mod": "获取模组",
-    "shared": "共享"
+    "shared": "共享",
+    "All vehicles": "所有坦克",
+    "Defeats": "失败",
+    "All maps": "所有地图"
   }
 }

@@ -6,6 +6,20 @@
   "unknown-vehicle": "Neznáme vozidlo",
   "empty-heading": "Zdieľať svoje bitky",
   "example": "Príklad",
+  "see-all": "Zobraziť všetkých {count} bitiek",
+  "filter": {
+    "battles": "{count} bitiek",
+    "all-tanks": "Všetky vozidlá",
+    "all-maps": "Vsi zemljevidi",
+    "clear": "Vymazať filtre",
+    "empty": "Týmto filtrom nezodpovedá žiadna bitka.",
+    "result": {
+      "win": "Zmage",
+      "loss": "prehry",
+      "draw": "remízy"
+    }
+  },
+  "title-count": "Bitky hráča s prezývkou {nickname} ({count})",
   "empty-blurb": "Wargaming zverejňuje nič o jednotlivý bitka a nihče ešte skupno nezdieľal žiadnu z bitiek od {nickname}. S modom {name} sa bitky, ktoré môžete hrať, prikaži tu spolu s celý zostava.",
   "empty-cta": "Prenesi mod",
   "rating-title": "{metric} pre túto bitku",

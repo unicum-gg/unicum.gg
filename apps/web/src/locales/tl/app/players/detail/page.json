@@ -7,6 +7,10 @@
     "title": "Mga achievement ni {name} ({region}), {medals} medalya ang kinita",
     "description": "Ang {medals} medalya ng World of Tanks na kinita ni {name} sa {region}, mula sa mga medalya nina Kolobanov at Pool hanggang sa mga honorary rank at epic medalya, dagdag ang bawat isa na maaari pa niyang makuha."
   },
+  "battles": {
+    "title": "Mga laban ni {name} ({region})",
+    "description": "Bawat labanan ni {name} sa {region} na magkasamang ibinahagi sa pamamagitan ng mod ng unicum.gg: ang mapa, ang sasakyan, ang pinsala, ang kumpletong talaan, ang loadout at ang replay kapag may pinanatili."
+  },
   "tournaments": {
     "title": "Mga torneo ni {name} ({region})",
     "description": "Bawat torneo ng Wargaming na sinalihan ni {name} sa {region}: ang koponang kanyang nilaruan, ang format at kung gaano kalayo ang narating nito. Rekord ito na inilalathala ng Wargaming mula lamang sa panig ng torneo, hindi kailanman sa panig ng manlalaro."

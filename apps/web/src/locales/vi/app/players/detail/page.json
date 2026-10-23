@@ -7,6 +7,10 @@
     "title": "Thành tích của {name} ({region}), đã kiếm được {medals} huy chương",
     "description": "{medals} huy chương World of Tanks {name} đã kiếm được trên {region}, từ Kolobanov và Pool đến các cấp bậc danh dự và huy chương sử thi, cùng mọi huy chương vẫn còn có thể kiếm được."
   },
+  "battles": {
+    "title": "Trận đấu của {name} ({region})",
+    "description": "Mọi trận đấu của {name} trên {region} được chia sẻ qua mod unicum.gg: bản đồ, xe tăng, sát thương, danh sách đầy đủ, trang bị và bản phát lại nếu có bản đã giữ."
+  },
   "tournaments": {
     "title": "Các giải đấu của {name} ({region})",
     "description": "Mọi giải đấu Wargaming {name} đã tham gia trên {region}: đội mà họ đã chơi cho, thể thức và họ đã tiến xa đến đâu. Đây là hồ sơ Wargaming công bố chỉ từ phía giải đấu, không bao giờ từ phía người chơi."

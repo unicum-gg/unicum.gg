@@ -7,6 +7,10 @@
     "title": "Úspechy: {name} ({region}), získané medaily: {medals}",
     "description": "Prehľad medailí World of Tanks na serveri {region}: {name} ich má {medals}, od Kolobanovovej medaily a Poolovej medaily až po čestné hodnosti a epické medaily, vrátane všetkých, ktoré ešte možno získať."
   },
+  "battles": {
+    "title": "Bitky hráča {name} ({region})",
+    "description": "Každá bitka hráča {name} v regióne {region}, skupno zdieľaná cez mod unicum.gg: mapa, vozidlo, poškodenie, úplná zostava, výbava a záznam bitky, ak ho niekto ohranil."
+  },
   "tournaments": {
     "title": "Turnaje: {name} ({region})",
     "description": "Všetky turnaje Wargaming na serveri {region}, kde súťažil hráč {name}: tím, za ktorý hral, formát a kam až sa tím dostal. Ide o záznam, ktorý Wargaming zverejňuje iba z pohľadu turnaja, nikdy nie z pohľadu hráča."

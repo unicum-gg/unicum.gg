@@ -6,6 +6,20 @@
   "unknown-vehicle": "Nieznany pojazd",
   "empty-heading": "Udostępnij swoje bitwy",
   "example": "Przykład",
+  "see-all": "Zobacz wszystkie bitwy ({count})",
+  "filter": {
+    "battles": "{count} bitew",
+    "all-tanks": "Wszystkich pojazdów",
+    "all-maps": "Wszystkie mapy",
+    "clear": "Wyczyść filtry",
+    "empty": "Żadna bitwa nie pasuje do tych filtrów.",
+    "result": {
+      "win": "Zwycięstwa",
+      "loss": "Przegrane",
+      "draw": "Remisy"
+    }
+  },
+  "title-count": "Bitwy gracza o nicku {nickname} ({count})",
   "empty-blurb": "Wargaming nic nie publikuje na temat pojedynczej bitwy, a bitwy wspólne dla {nickname} nikt jeszcze nie udostępnił. Z modem {name} bitwy, w które grasz, pokażemy tutaj wraz z całym składem.",
   "empty-cta": "Pobierz mod",
   "rating-title": "{metric} dla tej bitwy",

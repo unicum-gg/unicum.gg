@@ -7,6 +7,10 @@
     "title": "Osiągnięcia: {name} ({region}), zdobyte medale: {medals}",
     "description": "Konto gracza {name} na serwerze {region}: zdobyte medale World of Tanks: {medals}, od medalu Kołobanowa i medalu Poola po odznaki honorowe i medale epickie, a także wszystkie, które wciąż można zdobyć."
   },
+  "battles": {
+    "title": "Bitwy gracza {name} ({region})",
+    "description": "Wspólne informacje z każdej bitwy gracza {name} w regionie {region}, udostępnione za pośrednictwem moda unicum.gg: mapa, pojazd, uszkodzenia, pełny skład, wyposażenie oraz powtórka, jeśli nagranie zostało zachowane."
+  },
   "tournaments": {
     "title": "Turnieje: {name} ({region})",
     "description": "Każdy turniej Wargaming z udziałem gracza {name} na serwerze {region}: reprezentowana drużyna, format i osiągnięty etap. Są to dane publikowane przez Wargaming wyłącznie z perspektywy turnieju, nigdy z perspektywy gracza."

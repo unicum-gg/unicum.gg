@@ -7,6 +7,10 @@
     "title": "{name} pasiekimai ({region}), uždirbta {medals} medalių",
     "description": "{medals} World of Tanks medalių, kuriuos {name} uždirbo regione {region}, nuo Kolobanovo ir Poolo medalių iki garbės laipsnių ir epinių medalių, taip pat kiekvienas dar neuždirbtas medalis."
   },
+  "battles": {
+    "title": "{name} mūšiai ({region})",
+    "description": "Kiekvienas {name} mūšis regione {region}, bendrinamas per unicum.gg modą: žemėlapis, transporto priemonė, žala, pilna sudėtis, komplektacija ir pakartojimas, jei jis buvo išlaikytas."
+  },
   "tournaments": {
     "title": "{name} turnyrai ({region})",
     "description": "Visi Wargaming turnyrai, kuriuose {name} dalyvavo regione {region}: komanda, už kurią žaista, formatas ir kiek toli ji nuėjo. Tai Wargaming skelbiama turnyro istorija tik iš turnyro pusės, o ne žaidėjo."

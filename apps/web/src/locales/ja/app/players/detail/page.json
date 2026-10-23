@@ -7,6 +7,10 @@
     "title": "{name}の実績（{region}地域）、{medals}個のメダルを獲得",
     "description": "{region}地域で{name}が獲得した{medals}個のWorld of Tanksメダル。コロバノフ勲章やプール勲章から名誉階級、英雄勲章まで、未獲得のメダルもすべて表示します。"
   },
+  "battles": {
+    "title": "{name}の戦闘（{region}）",
+    "description": "unicum.gg modを通じて共有された、{name}の{region}での全戦闘。マップ、車両、ダメージ、完全なロスター、ロードアウト、維持されている場合はリプレイを確認できます。"
+  },
   "tournaments": {
     "title": "{name}のトーナメント（{region}地域）",
     "description": "{region}地域で{name}が参加したすべてのWargamingトーナメント。所属チーム、形式、勝ち進んだ段階を確認できます。Wargamingがトーナメント側から公開する記録のみで、プレイヤー側の記録ではありません。"

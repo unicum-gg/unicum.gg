@@ -6,6 +6,20 @@
   "unknown-vehicle": "Neznámé vozidlo",
   "empty-heading": "Sdílet své bitvy",
   "example": "Příklad",
+  "see-all": "Zobrazit všechny bitvy ({count})",
+  "filter": {
+    "battles": "{count} bitev",
+    "all-tanks": "Všemi vozidly",
+    "all-maps": "Všechny mapy",
+    "clear": "Vymazat filtry",
+    "empty": "Žádné bitvy neodpovídají těmto filtrům.",
+    "result": {
+      "win": "Vítězství",
+      "loss": "Porážek",
+      "draw": "Remízy"
+    }
+  },
+  "title-count": "Bitvy hráče s přezdívkou {nickname} ({count})",
   "empty-blurb": "Wargaming o jednotlivé bitvě nic nezveřejňuje a nikdo zatím nemá sdílené nic z bitev hráče s přezdívkou {nickname}. S modem {name} se zde zobrazí bitvy, které hrajete, včetně celé soupisky.",
   "empty-cta": "Stáhnout mod",
   "rating-title": "{metric} pro tuto bitvu",

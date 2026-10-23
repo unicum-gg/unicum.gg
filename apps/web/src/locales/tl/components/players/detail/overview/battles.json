@@ -6,6 +6,20 @@
   "unknown-vehicle": "Hindi kilalang sasakyan",
   "empty-heading": "Ibahagi ang iyong mga laban",
   "example": "Halimbawa",
+  "see-all": "Tingnan ang lahat ng {count} na mga laban",
+  "filter": {
+    "battles": "{count} na mga laban",
+    "all-tanks": "Lahat ng mga sasakyan",
+    "all-maps": "Lahat ng mapa",
+    "clear": "I-clear ang mga filter",
+    "empty": "Walang mga laban na tumutugma sa mga filter na ito.",
+    "result": {
+      "win": "Mga tagumpay",
+      "loss": "Mga pagkatalo",
+      "draw": "Tabla"
+    }
+  },
+  "title-count": "Mga laban ni {nickname} ({count})",
   "empty-blurb": "Walang nagpa-publish ang Wargaming tungkol sa iisang labanan, at walang sinuman ang nagbahagi ng isa sa mga laban ni {nickname}. Gamit ang {name} mod, ipapakita rito ang mga laban na iyong nilalaro, kasama ang buong talaan.",
   "empty-cta": "Kunin ang mod",
   "rating-title": "{metric} para sa labanang ito",

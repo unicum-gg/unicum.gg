@@ -7,6 +7,10 @@
     "title": "Faits d’armes du joueur {name} ({region}), {medals} médailles obtenues",
     "description": "Les {medals} médailles World of Tanks obtenues par {name} sur {region}, des médailles de Kolobanov et de Pool aux grades honorifiques et aux médailles épiques, ainsi que toutes celles qu’il lui reste à obtenir."
   },
+  "battles": {
+    "title": "Batailles de {name} ({region})",
+    "description": "Chaque bataille de {name} sur {region} partagée via le mod unicum.gg, avec la carte, le véhicule, les dégâts, l’effectif complet, la configuration et le replay lorsqu’il a été conservé."
+  },
   "tournaments": {
     "title": "Tournois du joueur {name} ({region})",
     "description": "Tous les tournois Wargaming auxquels {name} a participé sur {region} : l’équipe représentée, le format et jusqu’où elle est allée. Un historique publié par Wargaming uniquement du point de vue du tournoi, jamais de celui du joueur."

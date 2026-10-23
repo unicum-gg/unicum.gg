@@ -6,6 +6,20 @@
   "unknown-vehicle": "Unbekanntes Fahrzeug",
   "empty-heading": "Gefechte teilen",
   "example": "Beispiel",
+  "see-all": "Alle {count} Gefechte ansehen",
+  "filter": {
+    "battles": "{count} Gefechte",
+    "all-tanks": "Alle Fahrzeuge",
+    "all-maps": "Alle Karten",
+    "clear": "Filter löschen",
+    "empty": "Kein Gefecht entspricht diesen Filtern.",
+    "result": {
+      "win": "Siege",
+      "loss": "Niederlagen",
+      "draw": "Unentschieden"
+    }
+  },
+  "title-count": "Gefechte von {nickname} ({count})",
   "empty-blurb": "Wargaming veröffentlicht nichts über ein einzelnes Gefecht, und niemand hat bisher eines der Gefechte von {nickname} gemeinsam genutzt. Mit dem Mod {name} werden die von dir gespielten Gefechte hier mit der ganzen Aufstellung angezeigt.",
   "empty-cta": "Mod herunterladen",
   "rating-title": "{metric} für dieses Gefecht",

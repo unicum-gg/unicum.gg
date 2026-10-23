@@ -7,6 +7,10 @@
     "title": "Kitüntetések: {name} ({region}), {medals} megszerzett medál",
     "description": "A {medals} World of Tanks-medál, amelyet {name} szerzett {region} régióban, a Kolobanov- és Pool-medáltól a tiszteletbeli rangokig és az epikus medálokig, valamint az összes még megszerezhető medál."
   },
+  "battles": {
+    "title": "{name} csatái ({region})",
+    "description": "Minden, {name} részvételével vívott csata {region} régióban, az unicum.gg modon keresztül megosztva: a pálya, a jármű, a sebzés, a teljes névsor, a felszerelés és a visszajátszás, ha megtartották."
+  },
   "tournaments": {
     "title": "Tornák: {name} ({region})",
     "description": "Minden, a Wargaming által rendezett torna, amelyen {name} részt vett {region} régióban: a csapata, a formátum és hogy meddig jutott. A Wargaming ezeket az adatokat kizárólag a torna oldalán teszi közzé, a játékosén soha."
