@@ -12,14 +12,13 @@ import {
   loadoutIcons,
   type LoadoutIcon,
 } from "@unicum.gg/core/tanks/loadout-icons";
-import type { NextRequest } from "next/server";
 import { iconUrl } from "@unicum.gg/shared";
 import {
   fieldModSlots,
   type FieldModSlot,
 } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
 import { getTranslation } from "@/lib/translations.server";
-import { getPreferredLocale } from "@/lib/translations";
+import { contentLanguage, interfaceLanguage } from "@/services/openapi/locale";
 import { gradeOverlay } from "@/components/players/detail/tanks/loadout-marks";
 import { measured } from "@/services/perf";
 
@@ -38,9 +37,7 @@ export async function GET(...args: Parameters<typeof GET__perf>) {
   );
 }
 async function GET__perf(
-  // `NextRequest`, because the locale is decided by a cookie and only
-  // Next's request exposes them as an object.
-  req: NextRequest,
+  req: Request,
   { params }: { params: Promise<{ region: string; nickname: string }> },
 ) {
   const { region, nickname } = await params;
@@ -74,14 +71,12 @@ async function GET__perf(
       ),
     ];
     // The dictionaries that name equipment, so the preview boxes can carry a
-    // tooltip. This does make the answer vary by language, and it is why the
-    // cache below is private rather than shared -- a trade made deliberately:
-    // the window is sixty seconds on a page that belongs to one player, so
-    // the shared cache was saving very little, and a row of ten unlabelled
-    // pictures is unreadable without them.
+    // tooltip. In the language the URL names, so the answer stays one per URL
+    // and a shared cache cannot hand one reader another's.
+    const served = interfaceLanguage(req);
     const [{ t: tEquipment }, { t: tGame }] = await Promise.all([
-      getTranslation("game/equipment", getPreferredLocale(req)),
-      getTranslation("game/vocabulary", getPreferredLocale(req)),
+      getTranslation("game/equipment", served),
+      getTranslation("game/vocabulary", served),
     ]);
     // The field modifications, resolved once per (vehicle, packed value).
     // Keyed on both because the same tank with a different tree position is a
@@ -184,12 +179,9 @@ async function GET__perf(
           },
         ),
       },
-      // Private, because the answer now carries words in ONE language and the
-      // language is a cookie: a shared cache would hand the next reader the
-      // previous reader's. The window is sixty seconds on a page that belongs
-      // to one player, so what a shared cache was saving here was small, and
-      // ten unlabelled pictures a row cost more than it was worth.
-      { headers: { "cache-control": "private, max-age=60" } },
+      contentLanguage(served, {
+        headers: { "cache-control": "public, max-age=60" },
+      }),
     );
   } catch (err) {
     console.error(`[api/${region}/players/${decoded}/battles] failed:`, err);

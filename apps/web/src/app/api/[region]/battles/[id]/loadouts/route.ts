@@ -1,5 +1,4 @@
 import * as z from "zod";
-import type { NextRequest } from "next/server";
 import { isRegion, crewRoleBadgeUrl, type Region } from "@unicum.gg/wargaming";
 import { iconUrl } from "@unicum.gg/shared";
 import { readBattleLoadouts } from "@unicum.gg/core/battles/loadouts";
@@ -13,7 +12,7 @@ import {
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import { gradeOverlay } from "@/components/players/detail/tanks/loadout-marks";
 import { getTranslation } from "@/lib/translations.server";
-import { getPreferredLocale } from "@/lib/translations";
+import { contentLanguage, interfaceLanguage } from "@/services/openapi/locale";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
 import { BattleLoadoutsResponse } from "./schema.api";
@@ -25,6 +24,7 @@ const AMMO_ICONS = iconUrl("ammopanel/ammo");
  * Battle loadouts
  * @description What the vehicles of one battle had fitted, already named in the reader's language and pictured. One panel per vehicle per life, and only for the vehicles a recording could speak for: the player whose client recorded the battle, and any team mate they followed after dying. Empty for a battle with no recording, which is most of them. Nothing is ever known this way about the other team.
  * @pathParams battleParams
+ * @queryParams battleLoadoutsQuery
  * @response BattleLoadoutsResponse
  * @tag Players
  * @openapi
@@ -34,10 +34,7 @@ export async function GET(...args: Parameters<typeof GET__perf>) {
 }
 
 async function GET__perf(
-  // `NextRequest` rather than `Request`: the locale is decided by a cookie,
-  // and only Next's request exposes them as an object. `proxy.ts` reads it the
-  // same way for the same reason.
-  req: NextRequest,
+  req: Request,
   { params }: { params: Promise<{ region: string; id: string }> },
 ) {
   const { region, id } = await params;
@@ -51,10 +48,10 @@ async function GET__perf(
   try {
     const stored = await readBattleLoadouts(region, normaliseBattleId(id));
     if (stored.length === 0) {
-      return answer({ panels: [] });
+      return answer({ panels: [] }, interfaceLanguage(req));
     }
 
-    const locale = getPreferredLocale(req);
+    const locale = interfaceLanguage(req);
     const [{ t: tEquipment }, { t: tPerks }, { t: tRoles }, { t: tGame }] =
       await Promise.all([
         getTranslation("game/equipment", locale),
@@ -177,7 +174,7 @@ async function GET__perf(
       };
     });
 
-    return answer({ panels });
+    return answer({ panels }, locale);
   } catch (err) {
     console.error(`[api/${region}/battles/${id}/loadouts] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });
@@ -185,18 +182,22 @@ async function GET__perf(
 }
 
 /**
- * The answer, cached in the reader's own browser and nowhere else.
- *
- * `private` and not `s-maxage`, unlike the battle it belongs to. A battle never
- * changes and is the same for everybody, so a shared cache can hold it for an
- * hour; this carries words in ONE language, and the language is decided by a
- * cookie. Varying a shared cache on the cookie would give every session its own
- * entry, which is not a cache at all, and leaving it shared would hand the next
- * reader the previous reader's language. So the reader's own browser keeps it,
- * where there is exactly one language to be wrong about.
+ * The answer, cached like the battle it belongs to. It carries words in one
+ * language, but that language is in the URL, so a shared cache holds one entry
+ * per language rather than handing one reader another's.
  */
-function answer(body: z.infer<typeof BattleLoadoutsResponse>) {
-  return jsonResponse(BattleLoadoutsResponse, body, {
-    headers: { "cache-control": "private, max-age=3600" },
-  });
+function answer(
+  body: z.infer<typeof BattleLoadoutsResponse>,
+  served: string,
+) {
+  return jsonResponse(
+    BattleLoadoutsResponse,
+    body,
+    contentLanguage(served, {
+      headers: {
+        "cache-control":
+          "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    }),
+  );
 }

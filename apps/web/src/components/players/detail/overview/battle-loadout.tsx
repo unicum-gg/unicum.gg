@@ -1,6 +1,7 @@
 "use client";
 
 import useSWR from "swr";
+import { useLocale } from "@onruntime/translations/react";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   CrewGroup,
@@ -73,11 +74,12 @@ export function BattleLoadout({
   className?: string;
 }) {
   const { t } = useTranslation("components/players/detail/tanks/loadout-panel");
+  const { locale } = useLocale();
 
   // Keyed on the battle, not on the vehicle: one request answers for every
   // vehicle in it, and a reader who opens four rows in turn should not fetch
   // four times. SWR shares the entry across every panel on the page.
-  const request = () => unicum.region(region).battles(battleId).loadouts();
+  const request = () => unicum.region(region).battles(battleId).loadouts(locale);
   const { data } = useSWR(
     request().url(),
     () => request().then((r) => r as unknown as { panels: Panel[] }),

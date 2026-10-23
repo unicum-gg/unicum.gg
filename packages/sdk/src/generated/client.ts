@@ -56,11 +56,11 @@ class PlayerClient {
   }
 
   /** Player battles */
-  battles(limit?: NonNullable<QueryOf<"/{region}/players/{nickname}/battles">>["limit"]) {
+  battles(query?: QueryOf<"/{region}/players/{nickname}/battles">) {
     const path = { region: this.region, nickname: this.nickname };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/players/{nickname}/battles", path, { limit }),
-      () => this.api.GET("/{region}/players/{nickname}/battles", { params: { path, query: { limit } } }),
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/battles", path, query),
+      () => this.api.GET("/{region}/players/{nickname}/battles", { params: { path, query } }),
     );
   }
 
@@ -494,11 +494,11 @@ class BattleClient {
   }
 
   /** Battle loadouts */
-  loadouts() {
+  loadouts(language?: NonNullable<QueryOf<"/{region}/battles/{id}/loadouts">>["language"]) {
     const path = { region: this.region, id: this.id };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/battles/{id}/loadouts", path),
-      () => this.api.GET("/{region}/battles/{id}/loadouts", { params: { path } }),
+      buildUrl(this.baseUrl, "/{region}/battles/{id}/loadouts", path, { language }),
+      () => this.api.GET("/{region}/battles/{id}/loadouts", { params: { path, query: { language } } }),
     );
   }
 

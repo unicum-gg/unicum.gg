@@ -79,6 +79,11 @@ export const playerLiveParams = z.object({
   nickname: z.string().meta({ description: "Player nickname." }),
 });
 
+/** The language a battle's loadouts are named in. */
+export const battleLoadoutsQuery = z.object({
+  language: answerLanguageField.optional(),
+});
+
 /** One battle, by the game's own id. */
 export const battleParams = z.object({
   region: regionPath,
@@ -88,8 +93,10 @@ export const battleParams = z.object({
   }),
 });
 
-/** How many battles a player's list returns. */
+/** How many battles a player's list returns, and the language it names
+ * equipment in. */
 export const playerBattlesQuery = z.object({
+  language: answerLanguageField.optional(),
   // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below.
   limit: z.coerce
     .number()

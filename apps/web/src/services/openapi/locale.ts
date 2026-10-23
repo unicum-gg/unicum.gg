@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { DEFAULT_LOCALE } from "@/lib/translations";
+import { DEFAULT_LOCALE, isLocale, type Locale } from "@/lib/translations";
 
 /**
  * The parameter a caller names the language of the ANSWER with.
@@ -31,6 +31,17 @@ export const answerLanguageField = z.string().meta({
 /** The language a request asked its answer to be written in. */
 export function requestedLanguage(req: Request): string | undefined {
   return new URL(req.url).searchParams.get("language") ?? undefined;
+}
+
+/**
+ * The language an answer named from our OWN dictionaries is served in.
+ *
+ * Those exist in every interface locale, so the asked-for one is served
+ * whenever it is one of ours, and anything else is English.
+ */
+export function interfaceLanguage(req: Request): Locale {
+  const asked = requestedLanguage(req);
+  return isLocale(asked) ? asked : DEFAULT_LOCALE;
 }
 
 /**

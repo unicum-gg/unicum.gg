@@ -7760,7 +7760,9 @@ export interface operations {
     };
     "get-{region}-battles-{id}-loadouts": {
         parameters: {
-            query?: never;
+            query?: {
+                language?: components["schemas"]["answerLanguageField"];
+            };
             header?: never;
             path: {
                 /** @example eu */
@@ -7875,6 +7877,7 @@ export interface operations {
     "get-{region}-players-{nickname}-battles": {
         parameters: {
             query?: {
+                language?: components["schemas"]["answerLanguageField"];
                 /** @description Battles to return, newest first. Ten by default. */
                 limit?: number;
             };
