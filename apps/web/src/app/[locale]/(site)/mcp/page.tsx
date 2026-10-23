@@ -163,6 +163,10 @@ const DIRECTORIES: Directory[] = [
   },
   { name: "MCP Mux", href: "https://mcpmux.com/servers/gg.unicum-wot-stats-http/" },
   { name: "LibHunt", href: "https://www.libhunt.com/r/unicum.gg" },
+  {
+    name: "AllMCPs",
+    href: "https://allmcps.com/mcp/unicum-gg-world-of-tanks-stats",
+  },
 ];
 
 function toolParams(def: (typeof TOOL_DEFS)[number]): string {
