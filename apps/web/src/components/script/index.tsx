@@ -56,8 +56,8 @@ export default function Script() {
       {/* Headless signals, posted on the global the tracker calls before each
           send. Inline and synchronous for the same reason as the patch above:
           the tracker is deferred but reads the global as soon as it runs, so it
-          has to already be there. It only labels a payload today, it never drops
-          one, see `bot-signals`. */}
+          has to already be there. It cancels a payload on the signals measured
+          to carry no readers and labels the rest, see `bot-signals`. */}
       <script dangerouslySetInnerHTML={{ __html: BOT_SIGNALS_SCRIPT }} />
       <NextScript
         defer
