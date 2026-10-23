@@ -60,6 +60,7 @@ const LINK_ICON: Record<string, ReactNode> = {
   "maps-grand-battle": <LightningIcon />,
   "maps-clan-wars": <ShieldIcon />,
   "map-changes": <PencilRulerIcon />,
+  "map-community": <ChatsCircleIcon />,
   "all-tournaments": <RankingIcon />,
 };
 
