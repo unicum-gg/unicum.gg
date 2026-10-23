@@ -223,13 +223,21 @@ export function BattleReport({
       ]
     : [];
 
-  const blocks = [
-    { label: t("report.statistics"), rows: statistics },
-    { label: t("report.marks"), rows: marks },
-    { label: t("report.time"), rows: timing },
-    { label: t("report.credits"), rows: credits },
-    { label: t("report.experience"), rows: experience },
-    { label: t("report.bonds"), rows: bonds },
+  // Two columns that stack on their own, not a grid of rows. In a grid each
+  // row is as tall as its tallest block, so the three lines of Time sat beside
+  // the whole of Statistics and Experience started under a gap that tall. The
+  // battle's own figures on one side, what it took and paid on the other.
+  const columns = [
+    [
+      { label: t("report.statistics"), rows: statistics },
+      { label: t("report.marks"), rows: marks },
+    ],
+    [
+      { label: t("report.time"), rows: timing },
+      { label: t("report.credits"), rows: credits },
+      { label: t("report.experience"), rows: experience },
+      { label: t("report.bonds"), rows: bonds },
+    ],
   ];
 
   return (
@@ -255,7 +263,9 @@ export function BattleReport({
         see.
       */}
       <div className="grid min-w-0 gap-x-8 gap-y-4 md:grid-cols-2 xl:col-span-2">
-      {blocks.map((block) => {
+      {columns.map((column, at) => (
+      <div key={at} className="flex min-w-0 flex-col gap-y-4">
+      {column.map((block) => {
         const rows = block.rows.filter((row): row is Row => row !== null);
         if (rows.length === 0) return null;
         return (
@@ -294,6 +304,8 @@ export function BattleReport({
           </div>
         );
       })}
+      </div>
+      ))}
       {/*
         Named, never summed. Each line is a figure the game reports in its own
         right, and they do not form a chain: measured on a real battle, the
