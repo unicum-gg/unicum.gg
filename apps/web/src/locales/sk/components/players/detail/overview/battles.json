@@ -16,7 +16,7 @@
     "result": {
       "win": "Zmage",
       "loss": "prehry",
-      "draw": "remízy"
+      "draw": "Remízy"
     }
   },
   "title-count": "Bitky hráča s prezývkou {nickname} ({count})",
@@ -88,9 +88,15 @@
     "hits-received": "Prijaté zásahy",
     "pens-received": "Prijaté prieraznosti",
     "bounced": "Neprierazné zásahy",
+    "splash-received": "Zásahy prijaté od poškodenia výbuchom",
+    "wot-plus": "Bonus za bitku WoT Plus",
+    "piggy-bank": "dodano do rezervných Zásoby",
+    "first-win": "Prvé víťazstvo dňa",
+    "xp-column": "Skúsenosti",
+    "free-xp-column": "Proste izkušnje",
     "blocked": "Poškodenie zablokované pancierom",
     "potential": "Potenciálne prijaté poškodenie",
-    "team-damage": "Poškodenie spôsobené spojencom",
+    "team-damage": "Poškodenie spôsobené spojencom (zničené / HP)",
     "spotted": "Odhalené nepriateľské vozidlá",
     "damaged-destroyed": "Poškodené / zničené nepriateľské vozidlá",
     "assistance": "Poškodenie spôsobené s asistenciou tohto hráča",
