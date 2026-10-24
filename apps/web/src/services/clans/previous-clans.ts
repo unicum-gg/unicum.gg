@@ -114,9 +114,19 @@ const getPreviousClansCached = unstable_cache(
   ["previous-clans"],
   // Member rosters change slowly (hourly cron + on-demand refresh), and
   // clan-history blobs update on player-page visits or via the snapshot
-  // pipeline. 5 minutes is well under the data's actual mutation rate
-  // while still amortizing the JSONB lateral-unnest across page hits.
-  { revalidate: 300, tags: ["clan-members"] },
+  // pipeline, so anything under an hour is well inside the data's own
+  // mutation rate while still amortizing the JSONB lateral-unnest.
+  //
+  // THIS NUMBER ALSO SETS THE CLAN PAGE'S CACHE WINDOW, so it must never drop
+  // below that page's `revalidate`. `services/sdk/loopback.ts` dispatches an
+  // SDK call to the route handler IN PROCESS at runtime as well as at build,
+  // so this helper runs inside the page's own render scope, and Next takes the
+  // MINIMUM revalidate across that scope. At 300 the clan page declared 1800
+  // and production served `s-maxage=300` on every clan (measured 2026-10-24 on
+  // FAME, KAIZN and P_A), regenerating an entity family of hundreds of
+  // thousands of URLs six times more often than the page says it does, with
+  // nothing in the page to hint at it.
+  { revalidate: 1800, tags: ["clan-members"] },
 );
 
 export function getPreviousClans(
