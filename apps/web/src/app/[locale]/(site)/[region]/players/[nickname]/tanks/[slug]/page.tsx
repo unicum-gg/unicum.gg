@@ -20,7 +20,27 @@ import type { PlayerTankDetail } from "@unicum.gg/shared";
 // A static `tanks/` sibling of the `[view]` segment, which keeps serving the
 // bare `/tanks` list: a path only matches a route that has a page at its own
 // depth, and this one has none at `tanks/`.
-export const dynamic = "force-dynamic";
+//
+// ISR on the same cadence as the base player page and the `[view]` sibling,
+// both of which render through the `renderPlayerPage` imported above. That page
+// documents why the profile render is static and why the window is a day, and
+// every word of it applies here: same render, same metric-agnostic payload,
+// same `LiveSync` hot-swap and per-hit refresh enqueue, no cookie, no
+// `searchParams`, no `Date.now()`. This route was simply left behind on
+// `force-dynamic` when the others moved, so Next answered `private, no-cache,
+// no-store, must-revalidate` with no ETag, and nothing, the edge included, was
+// allowed to hold the result.
+//
+// What that cost, measured on 2026-10-24 under a crawler sweep: 2,915 ms of CPU
+// per request at 5.2 requests a second, the heaviest route on the site by a
+// factor of three over the next one, which saturated the event loop (89 stalls
+// in ten minutes, up to 14 s each) while player pages timed out at 40 s. The
+// only link to a vehicle record is the player's own tanks table, cached on the
+// same day, so nobody reaches one before the table naming it has refreshed,
+// which is also why a cached 404 for a tank acquired since the last render is
+// unreachable by navigation.
+export const dynamic = "force-static";
+export const revalidate = 86400; // 24h, matches the player page and `[view]`
 
 const TANKS_VIEW = PLAYER_VIEWS.find(
   (v) => v.section === PlayerSection.Tanks,
