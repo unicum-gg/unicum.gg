@@ -9,15 +9,30 @@ import { constructMetadata } from "@/lib/metadata";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { RosterEntry } from "@/components/tournaments/team/roster-table";
 
-// Dynamic, like every other per-entity page on the site, and here the rule
-// earns its keep twice over. There are 455,505 mirrored teams, and this page
-// reads the WHOLE tournament (every team, every roster, the entire bracket) to
-// render one of them: cached statically, each of those entries would store the
-// full payload, which is the unbounded-ISR growth that once filled the disk and
-// took the database down. The caching belongs to the endpoint, which already
-// serves this read with `max-age=300`, so a page view is a local hop onto a
-// cached payload rather than a new entry in an unbounded store.
-export const dynamic = "force-dynamic";
+// ISR on the same window as the bracket this page is a slice of. That page
+// documents why, and the two measurements it rests on apply here unchanged: the
+// endpoint's `max-age=300` caches nothing the render pays for, and
+// `force-dynamic` forbade the edge to hold the result. This is the heaviest page
+// of the family, at 923 ms of CPU per request over 476 requests in forty
+// minutes, and the one whose output is most worth holding: it reads the WHOLE
+// tournament to render one team, so every hit rebuilt the entire bracket, up to
+// 147 teams on the EU ones measured, to print a single roster.
+//
+// That read is also why this route carried the stronger objection, and it is now
+// the wrong way round. Keyed statically over 455,505 teams, each entry stores
+// the full payload, so one tournament's bracket would be held once per team. It
+// never accumulates: the ISR store is bounded by a TTL and an LRU key cap on a
+// dedicated Redis, and an entry nobody asks for twice is by construction the
+// least recently used, so these are exactly the entries LRU drops. What used to
+// fill a disk was a cache with no eviction at all.
+//
+// A team id the tournament does not hold is a 404 cached for the window, which
+// is unreachable by navigation for the same reason the vehicle records are: the
+// only link to a team is the tournament's own team table, cached on this very
+// cadence, so a team registered since the last render is not linked from
+// anywhere yet.
+export const dynamic = "force-static";
+export const revalidate = 900; // 15 min, matches the tournament and the catalogue
 
 /**
  * A team's own page, at the path Wargaming addresses one on

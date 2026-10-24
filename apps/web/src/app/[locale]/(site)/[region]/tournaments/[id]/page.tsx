@@ -9,12 +9,39 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { unicum } from "@/services/sdk";
 
-// Dynamic, like the player, clan and tank pages: AGENTS puts per-entity pages
-// here and their caching in the endpoints, and 5,939 mirrored tournaments (each
-// holding a full bracket) is precisely the shape that made that rule. The
-// endpoint serves this read with `max-age=300`, so the per-request cost is a
-// local hop onto a cached payload rather than a bracket rebuilt per view.
-export const dynamic = "force-dynamic";
+// ISR on the catalogue's own cadence, not dynamic. What this replaces rested on
+// two premises, both measured false at the origin on 2026-10-24.
+//
+// The endpoint's `max-age=300` caches nothing we pay for: `getTournament` holds
+// no server-side cache, the page's own server-side fetch is uncached, and the
+// Cloudflare cache rule excludes `/api/` by design, so that header only ever
+// reaches a caller hitting the API directly. Five consecutive reads of one
+// tournament ran 69 to 273 ms with no decay, so the bracket really is rebuilt
+// per view. And `force-dynamic` made Next answer `private, no-cache, no-store,
+// must-revalidate` with no ETag over 1.1 MB of HTML, so nothing, the edge
+// included, could hold a settled tournament that can never change again: 580 ms
+// of CPU per request over 1,120 requests in forty minutes, re-paid on every hit
+// by every crawler. The path already matches the zone's cache rule (it carries
+// `contains "/tournaments"`), so the origin header was the only thing refusing.
+//
+// The unbounded-growth objection is gone too: entries live in a dedicated Redis
+// under a TTL and an LRU key cap, never on the container disk, so the 2026-07-24
+// disk fill cannot recur. That store does run at its ceiling (3.73 of 4.00 GiB,
+// `allkeys-lru`, 1,972 entries averaging 1.89 MB), and the churn a crawler sweep
+// adds is what `config/cache-handler.js` documents the dedicated instance for:
+// the one-shot entity long tail is the oldest thing in it, so it is what LRU
+// drops, and the leaderboards stay warm.
+//
+// 900s matches `/{region}/tournaments` one level up, and the window has to stay
+// short for a reason the player pages do not share: `TournamentView` renders the
+// payload it is handed and never refetches, so no `LiveSync` and no
+// `revalidateOnMount` would correct a stale bracket on screen. The live cron
+// re-mirrors an unsettled tournament every five minutes, so this is three of its
+// cycles. A 404 on an unknown id is cached for the same window, self-healing and
+// unreachable by navigation, since the only link to a tournament is the
+// catalogue, cached on this very cadence.
+export const dynamic = "force-static";
+export const revalidate = 900; // 15 min, matches the catalogue page
 
 async function loadTournament(
   region: Region,
