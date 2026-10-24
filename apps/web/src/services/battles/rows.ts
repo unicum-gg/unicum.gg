@@ -8,6 +8,7 @@ import {
 } from "@unicum.gg/core/tanks/loadout-icons";
 import {
   fieldModSlots,
+  getTankFieldMods,
   type FieldModSlot,
 } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
 import { gradeOverlay } from "@/components/players/detail/tanks/loadout-marks";
@@ -65,6 +66,27 @@ export async function pictureBattleRows(
         key,
         await fieldModSlots(region, battle.own.tank, battle.fieldModsPacked ?? []),
       );
+    }),
+  );
+  // How many pairs each vehicle's tree offers, for the rows that carry a
+  // loadout and no modification at all: a player who has taken none still has
+  // the tree's slots, and they are drawn empty rather than left out, so a row
+  // says "none of seven" instead of looking like a vehicle with no tree.
+  const pairs = new Map<number, number>();
+  await Promise.all(
+    [
+      ...new Set(
+        battles
+          .filter(
+            (battle) =>
+              (battle.devices?.length || battle.consumables?.length) &&
+              !battle.fieldModsPacked?.length,
+          )
+          .map((battle) => battle.own.tank),
+      ),
+    ].map(async (tank) => {
+      const tree = await getTankFieldMods(region, tank).catch(() => null);
+      pairs.set(tank, tree?.steps.filter((step) => step.pair).length ?? 0);
     }),
   );
   const pictures = new Map<number, Map<string, LoadoutIcon>>();
@@ -125,7 +147,16 @@ export async function pictureBattleRows(
                 };
               }),
             }
-          : {}),
+          : (pairs.get(battle.own.tank) ?? 0) > 0
+            ? {
+                fieldMods: Array.from({ length: pairs.get(battle.own.tank)! }, () => ({
+                  filled: false,
+                  name: null,
+                  image: null,
+                  overlay: null,
+                })),
+              }
+            : {}),
       };
     },
   );

@@ -455,9 +455,17 @@ async function assembleBattles(
             ...(row.loadout.opt_devices?.length
               ? { devices: row.loadout.opt_devices }
               : {}),
-            ...(row.loadout.boosters?.some(Boolean)
+            // By slot, empty ones included: a directive slot left free is
+            // part of the build, and drawn as a free slot like a free device
+            // slot, rather than the whole group vanishing.
+            // A layout with no directive mounted can arrive with its slot list
+            // empty rather than holding a free slot. Every vehicle has one, so
+            // a battle that carries a loadout shows it free.
+            ...(row.loadout.boosters?.length
               ? { boosters: row.loadout.boosters }
-              : {}),
+              : row.loadout.opt_devices?.length
+                ? { boosters: [null] }
+                : {}),
             ...(row.loadout.consumables?.length
               ? { consumables: row.loadout.consumables }
               : {}),
