@@ -173,6 +173,14 @@ const DIRECTORIES: Directory[] = [
     name: "MCP Marketplace",
     href: "https://mcp-marketplace.io/server/gg-unicum-wot-stats",
   },
+  {
+    name: "MCP Server Spot",
+    href: "https://www.mcpserverspot.com/servers/unicumgg-world-of-tanks-stats",
+  },
+  {
+    name: "MCP Server Hub",
+    href: "https://mcpserver.dev/s/unicum-gg-world-of-tanks-stats_ngfh9qn",
+  },
 ];
 
 function toolParams(def: (typeof TOOL_DEFS)[number]): string {

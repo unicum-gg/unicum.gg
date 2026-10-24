@@ -86,6 +86,7 @@ export async function generateMetadata({
  */
 const DIRECTORIES: Directory[] = [
   { name: "Free Public APIs", href: "https://www.freepublicapis.com/unicum-api" },
+  { name: "DevShelf", href: "https://devshelf.ritualdev.in/tools/unicumgg.html" },
 ];
 
 type Crumb = { name: string; href: string };
