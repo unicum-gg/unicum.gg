@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "@/components/link";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,9 @@ export type Segment<T extends string> = {
   /** Optional tally after the label, so the scope difference reads before the
    * click rather than after it. */
   count?: number;
+  /** Optional picture before the label, when the choice has one the game
+   * already draws (a crew seat's badge). */
+  icon?: ReactNode;
 };
 
 /**
@@ -58,6 +62,7 @@ export function SegmentedControl<T extends string>({
       {segments.map((segment) => {
         const content = (
           <>
+            {segment.icon}
             <span>{segment.label}</span>
             {segment.count === undefined ? null : (
               <span className="text-fd-muted-foreground/70">
