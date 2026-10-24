@@ -112,9 +112,16 @@ export function SlotGroup({
 export function LoadoutSlotBox({
   slot,
   size = 40,
+  subdued,
+  pictureClassName,
 }: {
   slot: LoadoutSlotView;
   size?: number;
+  /** The thin frame the crew perks are drawn in, for a box that sits in a run
+   * of many rather than as one of three slots. */
+  subdued?: boolean;
+  /** Passed to the picture: the crew role badge needs `dark:invert`. */
+  pictureClassName?: string;
 }) {
   const filled = slot.filled ?? !!(slot.name || slot.image);
   return (
@@ -124,12 +131,14 @@ export function LoadoutSlotBox({
       overlay={slot.overlay}
       categories={slot.categories}
       size={size}
+      subdued={subdued}
     >
       {slot.image ? (
         <Picture
           src={slot.image}
           alt={slot.name ?? ""}
           size={Math.round(size * 0.65)}
+          className={pictureClassName}
         />
       ) : slot.name && size >= 32 ? (
         // Wargaming publishes no picture for this one. Its name is still the
@@ -157,20 +166,7 @@ export function ShellGroup({
         {layouts.map((layout, index) => (
           <Row key={index}>
             {layout.shells.map((shell) => (
-              <Box
-                key={shell.id}
-                tip={`${shell.kind} x ${shell.count}`}
-                filled
-                accent={shell.premium && shell.count > 0}
-                dimmed={shell.count === 0}
-              >
-                <Picture src={shell.image} alt={shell.kind} size={26} />
-                {/* The count on the box rather than beside it, which is
-                    where the game itself puts it. */}
-                <span className="absolute -right-1 -bottom-1.5 rounded bg-fd-background px-0.5 text-[10px] leading-tight font-medium tabular-nums">
-                  {shell.count}
-                </span>
-              </Box>
+              <LoadoutShellBox key={shell.id} shell={shell} />
             ))}
             {layout.goldPercent !== null && layout.goldPercent > 0 ? (
               <span className="self-center pl-1 text-xs font-medium tabular-nums text-amber-600 dark:text-amber-400">
@@ -181,6 +177,34 @@ export function ShellGroup({
         ))}
       </Layouts>
     </Group>
+  );
+}
+
+/**
+ * One kind of round and how many are loaded, with the count on the box where
+ * the game itself puts it. Exported for the tank page's builds list, so a rack
+ * reads the same on both pages.
+ */
+export function LoadoutShellBox({
+  shell,
+  size = BOX,
+}: {
+  shell: Pick<LoadoutShellView, "kind" | "count" | "premium" | "image">;
+  size?: number;
+}) {
+  return (
+    <Box
+      tip={`${shell.kind} x ${shell.count}`}
+      filled
+      size={size}
+      accent={shell.premium && shell.count > 0}
+      dimmed={shell.count === 0}
+    >
+      <Picture src={shell.image} alt={shell.kind} size={Math.round(size * 0.65)} />
+      <span className="absolute -right-1 -bottom-1.5 rounded bg-fd-background px-0.5 text-[10px] leading-tight font-medium tabular-nums">
+        {shell.count}
+      </span>
+    </Box>
   );
 }
 
