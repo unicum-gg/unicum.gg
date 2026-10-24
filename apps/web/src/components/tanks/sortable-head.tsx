@@ -36,6 +36,7 @@ export function SortableHead({
   hideOnMobile,
   headClassName,
   tooltip,
+  ratingCol,
   children,
 }: {
   col: string;
@@ -45,6 +46,9 @@ export function SortableHead({
   hideOnMobile?: boolean;
   headClassName?: string;
   tooltip?: string;
+  /** Tags the column with the rating metric it shows, so the site's
+   * cookie-painted CSS hides it unless that metric is the one selected. */
+  ratingCol?: string;
   children: React.ReactNode;
 }) {
   const active = state?.key === col;
@@ -77,6 +81,7 @@ export function SortableHead({
   );
   return (
     <TableHead
+      data-rating-col={ratingCol}
       className={cn(
         "p-0",
         hideOnMobile && styles.hiddenColumn,
