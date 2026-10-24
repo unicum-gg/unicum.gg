@@ -64,7 +64,20 @@ async function loadDetail(
 ): Promise<PlayerDetailData | LockedAccount | null> {
   try {
     const detail = await unicum.region(region).players(nickname).detail();
-    return detail as unknown as PlayerDetailData;
+    // A nickname that collides with a sibling route under
+    // `/api/{region}/players/` resolves to THAT endpoint rather than to this
+    // account, and those answer 200 with a payload of their own shape, so
+    // neither status guard below ever fires. `/eu/players/top` therefore
+    // rendered on a leaderboard payload until something read `player.nickname`
+    // off `undefined`, and the page answered 500 where it owed a 404 (measured
+    // 2026-10-24 on `top`, `compare`, `search`, `distribution` and
+    // `activity`). Judged on the shape rather than against a list of reserved
+    // names, so a sibling added later is covered without touching this file,
+    // and a 404 is the honest answer either way: an account really called
+    // `top` is unreachable at this address whatever we do here.
+    const shaped = detail as unknown as PlayerDetailData;
+    if (typeof shaped?.player?.accountId !== "number") return null;
+    return shaped;
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
     // The endpoint answers 403 "account_locked" when WG resolves the nickname

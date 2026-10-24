@@ -53,6 +53,13 @@ async function loadOverview(region: Region, tag: string) {
       tournamentBestTitle,
       tournamentCount,
     } = await unicum.region(region).clans(tag).overview();
+    // A tag colliding with a sibling route under `/api/{region}/clans/`
+    // (`top`, `compare`, `search`, `languages`) answers 200 with that
+    // endpoint's own payload, which carries no `clan`, so the render reached
+    // `clanAddress(undefined)` and 500ed where a 404 was owed. See the same
+    // guard on the player page for why this is checked on the shape rather
+    // than against a list of names.
+    if (!clan) return null;
     return {
       clan: clan as unknown as ClanFullInfo,
       ratings: ratings as unknown as ClanRatings,
