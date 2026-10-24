@@ -44,6 +44,8 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { BattleDetail } from "./battle-detail";
+import { PlayerName } from "@/components/entity/player-name";
+import type { PlayerIdentity } from "@/components/entity/player-identity";
 import type { BattleEconomy, MapOverlay } from "./battle-types";
 import { Hint } from "@/components/hint";
 
@@ -120,6 +122,19 @@ export type PlayerBattleRow = {
    * alone.
    */
   personal: BattleEconomy | null;
+  /**
+   * Who fought it, for a list of battles by different players (a vehicle's
+   * best battles). The card then leads with the player instead of the
+   * vehicle, which every row of such a list shares, and the roster it opens
+   * on highlights them. Absent on a player's own list, where both are theirs.
+   */
+  player?: {
+    identity: PlayerIdentity;
+    accountId: number;
+    /** Where the name leads, when not the profile: a vehicle's page sends it
+     * to the player's own page on that vehicle. */
+    href?: string;
+  };
 };
 
 /** What `deathReason` says when nobody killed them. Not 0: 0 is a real reason. */
@@ -167,10 +182,12 @@ export function PlayerBattlesTable({
   battles,
 }: {
   region: Region;
-  nickname: string;
+  /** Whose list this is. Absent on a list of different players' battles,
+   * where each row names its own (`player`). */
+  nickname?: string;
   metric: RatingMetric;
   /** Whose page this is, so their own row stands out in the roster. */
-  accountId: number;
+  accountId?: number;
   battles: PlayerBattleRow[];
 }) {
   const { t } = useTranslation(
@@ -198,10 +215,15 @@ export function PlayerBattlesTable({
             ? null
             : gameplayLabel(battle.gameplay);
         const length = clock(battle.duration);
-        const expanded = open === battle.id;
+        // A battle is one row on a player's own list, but a list of several
+        // players' battles can hold the same battle twice, once per player.
+        const rowKey = battle.player
+          ? `${battle.id}-${battle.player.accountId}`
+          : battle.id;
+        const expanded = open === rowKey;
         return (
           <li
-            key={battle.id}
+            key={rowKey}
             className={cn(
               battle.outcome === "win" && "bg-emerald-500/10",
               battle.outcome === "loss" && "bg-red-500/10",
@@ -211,7 +233,7 @@ export function PlayerBattlesTable({
           <button
             type="button"
             aria-expanded={expanded}
-            onClick={() => setOpen(expanded ? null : battle.id)}
+            onClick={() => setOpen(expanded ? null : rowKey)}
             className="hover:bg-foreground/5 flex w-full items-stretch gap-3 pe-3 ps-0 text-start transition-colors"
           >
             {/* The result as a full-height rail: it reads straight down the
@@ -256,7 +278,13 @@ export function PlayerBattlesTable({
 
             <span className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-2">
               <span className="flex min-w-0 items-center gap-1.5">
-                {battle.tank ? (
+                {battle.player ? (
+                  <PlayerName
+                    region={region}
+                    player={battle.player.identity}
+                    href={battle.player.href}
+                  />
+                ) : battle.tank ? (
                   <>
                     <VehicleTypeIcon type={battle.tank.type} />
                     <span className="text-fd-muted-foreground text-xs">
@@ -268,7 +296,7 @@ export function PlayerBattlesTable({
                       type={battle.tank.type}
                       className="h-3.5 w-auto shrink-0 object-contain"
                     />
-                    {battle.tank.slug ? (
+                    {battle.tank.slug && nickname ? (
                       <Link
                         // This player on this vehicle, like the profile's other
                         // vehicle lists: the row is one battle of their record.
@@ -443,7 +471,7 @@ export function PlayerBattlesTable({
               mapBounds={battle.mapBounds}
               mapOverlay={battle.mapOverlay}
               metric={metric}
-              highlightAccount={accountId}
+              highlightAccount={battle.player?.accountId ?? accountId}
             />
           ) : null}
           </li>
