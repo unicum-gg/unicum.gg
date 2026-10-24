@@ -72,7 +72,16 @@ async function loadOverview(region: Region, tag: string) {
       tournamentCount: tournamentCount ?? 0,
     };
   } catch (error) {
-    if (error instanceof UnicumError && error.status === 404) return null;
+    // 400 as well as 404, for the reason the player page documents: `compare`
+    // demands its own query params and answers 400 (`missing_tags`), so the
+    // shape guard above never runs. Narrow on purpose, since this handler's
+    // 503 is its cold-cache path.
+    if (
+      error instanceof UnicumError &&
+      (error.status === 404 || error.status === 400)
+    ) {
+      return null;
+    }
     throw error;
   }
 }

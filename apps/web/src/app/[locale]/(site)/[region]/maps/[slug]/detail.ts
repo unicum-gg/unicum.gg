@@ -33,12 +33,31 @@ export async function loadMapDetail(
     // Cast like every enum crossing the API: the payload carries them as
     // strings and a TS string enum is nominal, so the two are the same
     // characters and not the same type.
-    return (await unicum
+    const detail = (await unicum
       .region(region)
       .maps(slug)
       .detail()) as unknown as MapDetailPayload;
+    // A slug colliding with a sibling route under `/api/{region}/maps/`
+    // (`ratings`, `search`) resolves to THAT endpoint, and both answer 200 with
+    // a board payload of their own shape, so the status guard below never
+    // fires: `/eu/maps/ratings` and `/eu/maps/search` rendered on `{results:
+    // []}` and 500ed where a 404 was owed (measured 2026-10-24). The vehicle
+    // pages are immune for a structural reason rather than a better guard: the
+    // SDK reads a tank at `/{slug}/detail`, one segment deeper than the
+    // siblings, so nothing can collide. Judged on the shape rather than against
+    // a list of names, as the player and clan pages are.
+    if (typeof detail?.arenaId !== "string") return null;
+    return detail;
   } catch (error) {
-    if (error instanceof UnicumError && error.status === 404) return null;
+    // 400 as well as 404: a sibling demanding its own query params answers 400,
+    // which the shape guard cannot see. Narrow on purpose, so a 5xx still
+    // propagates instead of caching a 404 over it.
+    if (
+      error instanceof UnicumError &&
+      (error.status === 404 || error.status === 400)
+    ) {
+      return null;
+    }
     throw error;
   }
 }

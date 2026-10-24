@@ -79,7 +79,21 @@ async function loadDetail(
     if (typeof shaped?.player?.accountId !== "number") return null;
     return shaped;
   } catch (error) {
-    if (error instanceof UnicumError && error.status === 404) return null;
+    // 400 as well as 404. A colliding sibling that needs query params of its
+    // own answers 400 rather than 200, so the shape guard above never runs and
+    // the status is the only signal left: `/api/{region}/players/compare` says
+    // `missing_names`, and `/eu/players/compare` 500ed on it (measured
+    // 2026-10-24, after the shape guard had already fixed the seven siblings
+    // that answer 200). Deliberately NOT every 4xx: this handler's own 403 is
+    // the locked account below, and its 502/503 are transient, so widening the
+    // rule would CACHE a 404 over a cold start or an upstream blip for the
+    // page's whole 24h window.
+    if (
+      error instanceof UnicumError &&
+      (error.status === 404 || error.status === 400)
+    ) {
+      return null;
+    }
     // The endpoint answers 403 "account_locked" when WG resolves the nickname
     // but has locked the account (its data is gone from the API).
     if (error instanceof UnicumError && error.status === 403) {
