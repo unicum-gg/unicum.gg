@@ -7,6 +7,10 @@
     "title": "{tank} pagganap ({region}), mga istatistika ng server at pinakamahusay na mga manlalaro",
     "description": "{tank} ({region}) World of Tanks pagganap: karaniwang rate ng panalo, damage at assist sa server, ang pinakamahusay na mga manlalaro sa tier {tier} {nation} na tank na ito, dagdag ang WN8 at WNX expected values."
   },
+  "loadouts": {
+    "title": "Pinakamahusay na kagamitan at mga kasanayan ng crew para sa {tank} ({region})",
+    "description": "Mga loadout ng {tank} ({region}) sa World of Tanks: ang kagamitan, mga consumable, mga direktiba, mga pagbabago sa patlang at mga kasanayan ng crew na aktuwal na ikinakabit ng mga manlalaro sa labanan, kung paano gumaganap ang bawat configurasyon, dagdag ang mga build at pinakamahusay na laban ng pinakamahusay na mga manlalaro sa tier {tier} na {nation} tank na ito."
+  },
   "marks": {
     "title": "{tank} mga marka ng kahusayan at mastery ({region})",
     "description": "{tank} ({region}) World of Tanks mga kinakailangan para sa mga marka ng kahusayan at mga marka ng mastery, kasama ang kasaysayan ng mga ito sa tier {tier} {nation} na tank na ito."

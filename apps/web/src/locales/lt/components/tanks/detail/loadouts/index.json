@@ -1,0 +1,40 @@
+{
+  "title": "Ką žaidėjai sumontavo tankui {tank}",
+  "what-they-fit": "Komplektacijos",
+  "equipment": "Įranga",
+  "consumables": "Ekipuotė",
+  "directives": "Instrukcijos",
+  "field-mods": "Lauko modifikacijos",
+  "col": {
+    "build": "Sąranka",
+    "player": "Žaidėjas",
+    "usage": "Naudojimas",
+    "damage": "Žala",
+    "winrate": "WR",
+    "player-winrate": "Žaidėjo WR",
+    "player-winrate-tip": "Bendras tų pačių žaidėjų pergalės rodiklis visoje jų paskyroje, įvertinus jų mūšius su šia sąranka.",
+    "delta": "±",
+    "delta-tip": "Šios sąrankos skaičius, atėmus bendrą tų pačių žaidėjų skaičių visoje jų paskyroje.",
+    "assisted": "Pagalba",
+    "usage-tip": "Žaidėjai, kurie ją naudojo bent viename įskaičiuotame mūšyje, palyginti su įskaičiuotais žaidėjais.",
+    "player-rating": "Žaidėjo {metric}",
+    "player-rating-tip": "Bendras tų pačių žaidėjų reitingas visoje jų paskyroje, įvertinus jų mūšius su šia sąranka.",
+    "battles": "Mūšiai",
+    "skill": "Įgūdis"
+  },
+  "crew-skills": "Įgulos įgūdžiai",
+  "crew-skills-hint": "Kiekvienas įgūdis, kurį buvo išmokęs vaidmens {role} narys, tarp žaidėjų, kurių įgula turi šią vietą, ir kaip sekėsi mūšiuose su juo.",
+  "counted": {
+    "equipment": "Įskaičiuota kaip visos trijų įrenginių komplektacijos, taip, kaip žaidėjai jas sumontavo, tarp žaidėjų, kurie naudojo kiekvieną komplektaciją.",
+    "consumables": "Įskaičiuota kaip visos trijų eksploatacinių medžiagų komplektacijos, tarp žaidėjų, kurie naudojo kiekvieną komplektaciją.",
+    "directives": "Įskaičiuota po vieną instrukciją, tarp žaidėjų, kurie ją naudojo.",
+    "field-mods": "Įskaičiuota kaip visi lauko modifikacijų medžiai, kiekviena pora taip, kaip ją pasirinko žaidėjas, tarp žaidėjų, kurie naudojo kiekvieną medį."
+  },
+  "top-battles": "Geriausi mūšiai",
+  "top-battles-hint": "Geriausias kiekvieno žaidėjo mūšis su šiuo tanku pagal padarytą žalą ir tiksliai tai, ką jis jame sumontavo. Atidarykite mūšį, kad pamatytumėte pilną ataskaitą.",
+  "thin-row": "Šią sąranką naudojo mažiau nei {count} žaidėjų, todėl šie rodikliai daugiau pasako apie juos nei apie sąranką.",
+  "top-players": "Geriausi žaidėjai",
+  "top-players-hint": "Geriausi šio tanko žaidėjai tarp tų, kurių mūšiai užfiksuoti, reitinguojami pagal visą jų rekordą su šiuo tanku, nurodant, ką jie sumontavo paskutiniame užfiksuotame mūšyje. Atidarykite eilutę, kad pamatytumėte jų įgulą.",
+  "crew": "Įgula",
+  "show-crew": "Rodyti įgulą"
+}

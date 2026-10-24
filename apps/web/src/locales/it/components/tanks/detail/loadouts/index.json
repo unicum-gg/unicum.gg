@@ -1,0 +1,40 @@
+{
+  "title": "Configurazioni dei giocatori con {tank}",
+  "what-they-fit": "Configurazioni",
+  "equipment": "Equipaggiamento",
+  "consumables": "Consumabili",
+  "directives": "Direttive",
+  "field-mods": "Modifiche sul campo",
+  "col": {
+    "build": "Configurazione",
+    "player": "Giocatore",
+    "usage": "Utilizzo",
+    "damage": "Danno",
+    "winrate": "WR",
+    "player-winrate": "WR giocatore",
+    "player-winrate-tip": "Il tasso di vittorie complessivo degli stessi giocatori, attraverso tutto il loro account, ponderato in base alle battaglie combattute con questa configurazione.",
+    "delta": "±",
+    "delta-tip": "Il dato di questa configurazione meno quello complessivo degli stessi giocatori, attraverso tutto il loro account.",
+    "assisted": "Assistenza",
+    "usage-tip": "Giocatori che l’hanno usata in almeno una battaglia conteggiata, rispetto al numero di giocatori conteggiati.",
+    "player-rating": "Valutazione del giocatore {metric}",
+    "player-rating-tip": "La valutazione complessiva degli stessi giocatori, attraverso tutto il loro account, ponderata in base alle battaglie combattute con questa configurazione.",
+    "battles": "Battaglie",
+    "skill": "Abilità"
+  },
+  "crew-skills": "Abilità dell’equipaggio",
+  "crew-skills-hint": "Ogni abilità che {role} aveva addestrato, conteggiata tra i giocatori il cui equipaggio ha quel ruolo, accanto alle prestazioni delle battaglie combattute con essa.",
+  "counted": {
+    "equipment": "Conteggiato come interi set di tre dispositivi, nel modo in cui i giocatori li installano, tra i giocatori che hanno usato ogni set.",
+    "consumables": "Conteggiato come interi set di tre consumabili, tra i giocatori che hanno usato ogni set.",
+    "directives": "Conteggiato una direttiva alla volta, tra i giocatori che l’hanno usata.",
+    "field-mods": "Conteggiato come interi alberi di modifiche sul campo, con ogni coppia così come l’ha scelta il giocatore, tra i giocatori che hanno usato ogni albero."
+  },
+  "top-battles": "Migliori battaglie",
+  "top-battles-hint": "La migliore battaglia di ogni giocatore con questo carro armato, in base al danno inflitto, e tutto ciò che vi ha installato. Apri una battaglia per il rapporto completo.",
+  "thin-row": "Meno di {count} giocatori l’hanno usata, quindi questi valori dicono più su di loro che sulla configurazione.",
+  "top-players": "Migliori giocatori",
+  "top-players-hint": "I migliori giocatori con questo carro armato tra quelli le cui battaglie sono registrate, classificati in base al loro record complessivo con esso, con ciò che hanno installato nella loro battaglia registrata più recente. Apri una riga per il loro equipaggio.",
+  "crew": "Equipaggio",
+  "show-crew": "Mostra l’equipaggio"
+}

@@ -1,0 +1,6 @@
+{
+  "counted-from": "Uwzględniono {battles} bitew w trybie {mode}, rozegranych przez {players} graczy w ciągu ostatnich 90 dni, zarejestrowanych przez {mod}. Ostatnia rozegrana",
+  "the-mod": "mod unicum.gg",
+  "small-sample": "To niewielka próba, dlatego każdy wiersz zaczyna się od własnej liczby graczy, a nie od wartości procentowej, i mówi więcej o tych graczach niż o konfiguracji.",
+  "correlation": "Każda konfiguracja to konfiguracja zamontowana w danej bitwie, a podane obok osiągi są wynikiem tych bitew. To nadal tylko korelacja, ponieważ gracze wybierają swoje konfiguracje, dlatego każdy wiersz pokazuje również ogólne statystyki tych samych graczy."
+}

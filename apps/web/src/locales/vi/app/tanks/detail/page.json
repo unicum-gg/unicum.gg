@@ -7,6 +7,10 @@
     "title": "Hiệu suất của {tank} ({region}), thống kê máy chủ và người chơi tốt nhất",
     "description": "Hiệu suất World of Tanks của {tank} ({region}): tỷ lệ thắng, sát thương và hỗ trợ trung bình trên máy chủ, những người chơi tốt nhất với xe tăng {nation} cấp {tier} này, cộng với các giá trị kỳ vọng WN8 và WNX."
   },
+  "loadouts": {
+    "title": "Trang bị và kỹ năng kíp lái tốt nhất của {tank} ({region})",
+    "description": "Bộ trang bị của {tank} ({region}) trong World of Tanks: trang bị, vật tư tiêu hao, Ứ.dụng K.thuật, cải tiến trường và kỹ năng kíp lái mà người chơi thực sự lắp trong trận đấu, cùng hiệu suất của từng cấu hình, cộng với các cấu hình và trận đấu tốt nhất của những người chơi tốt nhất với xe tăng cấp {tier} {nation} này."
+  },
   "marks": {
     "title": "Các dấu xuất sắc và tinh thông của {tank} ({region})",
     "description": "Yêu cầu về các dấu xuất sắc và các dấu tinh thông World of Tanks của {tank} ({region}), cùng lịch sử của chúng trên xe tăng {nation} cấp {tier} này."

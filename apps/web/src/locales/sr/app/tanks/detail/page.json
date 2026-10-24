@@ -7,6 +7,10 @@
     "title": "{tank}: перформансе ({region}), статистика сервера и најбољи igrači",
     "description": "Перформансе World of Tanks за {tank} ({region}): просечан проценат победа на серверу, штета и асистенција, најбољи igrači на овом тенку нивоа {tier} нације {nation}, плус очекиване вредности за WN8 и WNX."
   },
+  "loadouts": {
+    "title": "Najbolja oprema i veštine posade za {tank} ({region})",
+    "description": "Konfiguracije za World of Tanks za {tank} ({region}): oprema, potrošni materijali, direktive, modifikacije polja i veštine posade koje igrači zapravo koriste u bitci, uz podatke o tome kako se svaka konfiguracija ponaša, plus konfiguracije i najbolje bitke najboljih igrača na tenku nivoa {tier} nacije {nation}."
+  },
   "marks": {
     "title": "{tank}: ознаке изврсности и мајсторства ({region})",
     "description": "Услови за ознаке изврсности и ознаке мајсторства за {tank} ({region}) у World of Tanks, са њиховом историјом за овај тенк нивоа {tier} нације {nation}."

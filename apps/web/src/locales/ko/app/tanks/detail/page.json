@@ -7,6 +7,10 @@
     "title": "{tank} 성능 ({region}), 서버 통계 및 최고 플레이어들",
     "description": "{tank} ({region}) World of Tanks 성능: 서버 평균 승률, 피해 및 도움 피해, 이 {tier}단계 {nation} 전차의 최고 플레이어들, WN8 및 WNX 기대값입니다."
   },
+  "loadouts": {
+    "title": "{tank} 최고 장비 및 승무원 스킬 ({region})",
+    "description": "{tank} ({region}) World of Tanks 장비 구성: 플레이어들이 전투에서 실제로 장착한 장비, 소모품, 지휘명령, 항목 개조 및 승무원 스킬과 각 세팅의 성능, 그리고 이 단계 {tier} {nation} 전차에서 최고 플레이어들의 빌드와 최고 전투를 확인할 수 있습니다."
+  },
   "marks": {
     "title": "{tank} 우수성 증표 및 숙련도 증표 ({region})",
     "description": "{tank} ({region}) World of Tanks 우수성 증표 및 숙련도 증표 요구 사항과 이 {tier}단계 {nation} 전차의 증표 기록입니다."

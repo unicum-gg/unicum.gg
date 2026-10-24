@@ -1,0 +1,6 @@
+{
+  "counted-from": "Počet z {battles} bitiek v režime {mode} od {players} hráčov za posledných 90 dni, zaznamenaných prostredníctvom {mod}. Posledná odohraná",
+  "the-mod": "mod unicum.gg",
+  "small-sample": "Ide o malú vzorku, každý riadok preto začína vlastným počtom hráčov namiesto percenta a jeho podatki hovoria viac o týchto hráčoch než o postavitve.",
+  "correlation": "Každá postavitve je tá, ktorú hráč použil v danej bitke, a výkon vedľa nej je výsledkom týchto bitiek. Stále však ide o koreláciu, hráči si svoju postavitve vyberajú, preto každý riadok zobrazuje aj celkové údaje tých istých hráčov."
+}

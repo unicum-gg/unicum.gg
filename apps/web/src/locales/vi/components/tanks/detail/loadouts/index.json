@@ -1,0 +1,40 @@
+{
+  "title": "Những gì người chơi lắp cho {tank}",
+  "what-they-fit": "Bộ trang bị",
+  "equipment": "Thiết bị",
+  "consumables": "Vật phẩm",
+  "directives": "Ứ.dụng K.thuật",
+  "field-mods": "Mod trường",
+  "col": {
+    "build": "Cấu hình",
+    "player": "Người chơi",
+    "usage": "Mức sử dụng",
+    "damage": "Sát thương",
+    "winrate": "WR",
+    "player-winrate": "Tỷ lệ thắng người chơi",
+    "player-winrate-tip": "Tỷ lệ thắng tổng thể của những người chơi đó trên toàn bộ tài khoản, được tính theo số trận đấu của họ với cấu hình này.",
+    "delta": "±",
+    "delta-tip": "Hình của cấu hình này trừ đi hình tổng thể của những người chơi đó trên toàn bộ tài khoản.",
+    "assisted": "Hỗ trợ",
+    "usage-tip": "Số người chơi đã sử dụng cấu hình này trong ít nhất một trận đấu được tính, trên tổng số người chơi được tính.",
+    "player-rating": "{metric} của người chơi",
+    "player-rating-tip": "Xếp hạng tổng thể của những người chơi đó trên toàn bộ tài khoản, được tính theo số trận đấu của họ với cấu hình này.",
+    "battles": "Số trận",
+    "skill": "Kỹ năng"
+  },
+  "crew-skills": "Kỹ năng kíp lái",
+  "crew-skills-hint": "Mỗi kỹ năng mà {role} đã được huấn luyện, được tính trong số những người chơi có vị trí đó trong kíp lái, bên cạnh kết quả của các trận đấu đã tham chiến với kỹ năng đó.",
+  "counted": {
+    "equipment": "Được tính theo toàn bộ bộ ba thiết bị, đúng như cách người chơi lắp chúng, trong số những người chơi đã sử dụng từng bộ.",
+    "consumables": "Được tính theo toàn bộ bộ ba vật tư tiêu hao, trong số những người chơi đã sử dụng từng bộ.",
+    "directives": "Được tính từng Ứ.dụng K.thuật một, trong số những người chơi đã sử dụng nó.",
+    "field-mods": "Được tính theo toàn bộ cây cải tiến trường, với từng cặp đúng như người chơi đã chọn, trong số những người chơi đã sử dụng từng cây."
+  },
+  "top-battles": "Trận đấu tốt nhất",
+  "top-battles-hint": "Trận đấu tốt nhất của mỗi người chơi với xe tăng này theo sát thương gây ra, cùng chính xác những gì họ đã lắp cho trận đó. Mở một trận đấu để xem báo cáo đầy đủ.",
+  "thin-row": "Có ít hơn {count} người chơi đã sử dụng cấu hình này, vì vậy những số liệu này nói nhiều hơn về họ thay vì về cấu hình.",
+  "top-players": "Người chơi tốt nhất",
+  "top-players-hint": "Những người chơi tốt nhất với xe tăng này trong số những người có trận đấu được ghi nhận, được xếp hạng dựa trên toàn bộ kỷ lục của họ với xe tăng này, kèm những gì họ đã lắp trong trận đấu được ghi nhận gần nhất. Mở một hàng để xem kíp lái của họ.",
+  "crew": "Kíp lái",
+  "show-crew": "Hiển thị kíp lái"
+}

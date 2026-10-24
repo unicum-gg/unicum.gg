@@ -7,6 +7,10 @@
     "title": "{tank}表现（{region}），服务器数据和最佳玩家",
     "description": "{tank}（{region}）World of Tanks 表现：服务器平均胜率、伤害和协助伤害，这辆{tier}级{nation}坦克的最佳玩家，以及 WN8 和 WNX 预期值。"
   },
+  "loadouts": {
+    "title": "{tank}最佳配件和乘员技能（{region}）",
+    "description": "{tank}（{region}）《World of Tanks》装备方案：玩家在战斗中实际安装的配件、消耗品、指令、字段改装和乘员技能，以及每种配置的表现，加上该等级 {tier} 的{nation}坦克的顶尖玩家配置和最佳战斗场次。"
+  },
   "marks": {
     "title": "{tank}的精通徽章和战绩徽章（{region}）",
     "description": "{tank}（{region}）World of Tanks 精通徽章和战绩徽章要求，以及这辆{tier}级{nation}坦克的历史记录。"

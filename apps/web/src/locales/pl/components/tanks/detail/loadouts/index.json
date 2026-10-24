@@ -1,0 +1,40 @@
+{
+  "title": "Co gracze montują w czołgu {tank}",
+  "what-they-fit": "Wyposażenie",
+  "equipment": "Wyposażenie",
+  "consumables": "Materiały eksploatacyjne",
+  "directives": "Dyrektywy",
+  "field-mods": "Modyfikacje polowe",
+  "col": {
+    "build": "Konfiguracja",
+    "player": "Gracz",
+    "usage": "Użycie",
+    "damage": "Zadane uszkodzenia",
+    "winrate": "WR",
+    "player-winrate": "WR gracza",
+    "player-winrate-tip": "Ogólna wygralność tych samych graczy w całym koncie, ważona bitwami rozegranymi z tą konfiguracją.",
+    "delta": "±",
+    "delta-tip": "Liczba dla tej konfiguracji minus ogólna liczba tych samych graczy w całym koncie.",
+    "assisted": "Wsparcie",
+    "usage-tip": "Gracze, którzy użyli tej konfiguracji w co najmniej jednej uwzględnionej bitwie, w stosunku do uwzględnionych graczy.",
+    "player-rating": "Ocena gracza {metric}",
+    "player-rating-tip": "Ogólna ocena tych samych graczy w całym koncie, ważona bitwami rozegranymi z tą konfiguracją.",
+    "battles": "Bitwy",
+    "skill": "Umiejętność"
+  },
+  "crew-skills": "Umiejętności załogi",
+  "crew-skills-hint": "Każda umiejętność, którą wyszkoliła załoga na stanowisku {role}, uwzględniona wśród graczy, których załoga ma to stanowisko, wraz z informacją, jak wypadły rozegrane z nią bitwy.",
+  "counted": {
+    "equipment": "Uwzględniono całe zestawy trzech elementów wyposażenia, tak jak montują je gracze, wśród graczy, którzy użyli każdego zestawu.",
+    "consumables": "Uwzględniono całe zestawy trzech materiałów eksploatacyjnych wśród graczy, którzy użyli każdego zestawu.",
+    "directives": "Uwzględniono pojedyncze dyrektywy wśród graczy, którzy ich użyli.",
+    "field-mods": "Uwzględniono całe drzewa modyfikacji polowych, każdą parę w takiej formie, w jakiej wybrał ją gracz, wśród graczy, którzy użyli każdego drzewa."
+  },
+  "top-battles": "Najlepsze bitwy",
+  "top-battles-hint": "Najlepsza bitwa każdego gracza w tym czołgu pod względem zadanych uszkodzeń oraz dokładne informacje o tym, co zostało w niej zamontowane. Otwórz bitwę, aby zobaczyć pełny raport.",
+  "thin-row": "Mniej niż {count} graczy użyło tej konfiguracji, więc te statystyki mówią więcej o nich niż o samej konfiguracji.",
+  "top-players": "Najlepsi gracze",
+  "top-players-hint": "Najlepsi gracze w tym czołgu spośród tych, których bitwy są zarejestrowane, sklasyfikowani na podstawie całego rekordu w tym czołgu, wraz z informacjami o tym, co zamontowali w swojej ostatniej zarejestrowanej bitwie. Otwórz wiersz, aby zobaczyć ich załogę.",
+  "crew": "Załoga",
+  "show-crew": "Pokaż załogę"
+}

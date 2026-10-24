@@ -7,6 +7,10 @@
     "title": "Izvedba tenka {tank} ({region}), statistika poslužitelja i najbolji igrači",
     "description": "Izvedba tenka {tank} ({region}) u igri World of Tanks: prosječni postotak pobjeda, šteta i pomoć na poslužitelju, najbolji igrači ovog tenka razine {tier}, nacije {nation}, uz očekivane vrijednosti WN8 i WNX."
   },
+  "loadouts": {
+    "title": "Najbolja oprema i vještine posade za {tank} ({region})",
+    "description": "Konfiguracije za tenk {tank} ({region}) u igri World of Tanks: oprema, potrošni materijali, smjernice, modifikacije polja i vještine posade koje igrači zapravo ugrađuju u bitkama, uz učinak svake konfiguracije, kao i konfiguracije i najbolje bitke najboljih igrača na tenku razine {tier} nacije {nation}."
+  },
   "marks": {
     "title": "Oznake izvrsnosti i majstorstva tenka {tank} ({region})",
     "description": "Zahtjevi za Oznake izvrsnosti i Oznake majstorstva tenka {tank} ({region}) u igri World of Tanks, uz njihovu povijest za ovaj tenk razine {tier}, nacije {nation}."

@@ -1,0 +1,6 @@
+{
+  "counted-from": "Talt fra {battles} {mode}-kampe af {players} spillere i løbet af de seneste 90 dage, registreret gennem {mod}. Sidst spillet",
+  "the-mod": "unicum.gg-moddet",
+  "small-sample": "Det er et lille udsnit: hver række viser først sit eget antal spillere i stedet for en procentdel, og dens tal siger mere om disse spillere end om opsætningen.",
+  "correlation": "Hver opsætning er den, der blev monteret til den pågældende kamp, og præstationen ved siden af er resultatet af disse kampe. Det er stadig en korrelation: spillerne vælger deres opsætning, så hver række viser også de samme spilleres samlede tal."
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Mit szereltek fel a játékosok a(z) {tank} esetében",
+  "what-they-fit": "Felszerelések",
+  "equipment": "Felszerelés",
+  "consumables": "Fogyócikkek",
+  "directives": "Direktívák",
+  "field-mods": "Mezőmódosítások",
+  "col": {
+    "build": "Összeállítás",
+    "player": "Játékos",
+    "usage": "Használat",
+    "damage": "Sebzés",
+    "winrate": "WR",
+    "player-winrate": "Játékos WR",
+    "player-winrate-tip": "Ugyanezen játékosok összesített győzelmi aránya a teljes fiókjukban, a jelen összeállítással vívott csatáik alapján súlyozva.",
+    "delta": "±",
+    "delta-tip": "Ennek az összeállításnak az adata mínusz ugyanezen játékosok összesített adata a teljes fiókjukban.",
+    "assisted": "Támogatás",
+    "usage-tip": "Azok a játékosok, akik legalább egy számított csatában használták, osztva a számított játékosok számával.",
+    "player-rating": "Játékos {metric}",
+    "player-rating-tip": "Ugyanezen játékosok összesített értékelése a teljes fiókjukban, a jelen összeállítással vívott csatáik alapján súlyozva.",
+    "battles": "Csaták",
+    "skill": "Képesség"
+  },
+  "crew-skills": "Legénységi készségek",
+  "crew-skills-hint": "Minden képesség, amelyet a(z) {role} betanult, a legénység ezen posztját betöltő játékosoknál számítva, a vele lejátszott csaták eredménye mellett.",
+  "counted": {
+    "equipment": "Egész, három eszközből álló készletekként számítva, úgy, ahogy a játékosok felszerelték őket, minden készletet használó játékosnál.",
+    "consumables": "Egész, három fogyócikkből álló készletekként számítva, minden készletet használó játékosnál.",
+    "directives": "Direktívánként számítva, minden azt használó játékosnál.",
+    "field-mods": "Egész mezőmódosítási fákként számítva, minden párt úgy véve, ahogy a játékos választotta, minden fát használó játékosnál."
+  },
+  "top-battles": "Legjobb csaták",
+  "top-battles-hint": "Minden játékos legjobb csatája ebben a tankban az okozott sebzés alapján, pontosan megmutatva, mit szerelt fel hozzá. Nyiss meg egy csatát a teljes jelentéséhez.",
+  "thin-row": "Kevesebb mint {count} játékos használta ezt, ezért ezek az adatok inkább róluk, mint az összeállításról árulkodnak.",
+  "top-players": "Legjobb játékosok",
+  "top-players-hint": "A legjobb játékosok ebben a tankban azok közül, akiknek a csatái rögzítve vannak, a teljes rekordjuk alapján rangsorolva, és megmutatva, mit szereltek fel a legutóbbi rögzített csatájukban. Nyiss meg egy sort a legénységükhöz.",
+  "crew": "Legénység",
+  "show-crew": "Legénység megjelenítése"
+}

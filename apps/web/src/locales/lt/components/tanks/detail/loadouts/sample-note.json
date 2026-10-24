@@ -1,0 +1,6 @@
+{
+  "counted-from": "Įskaičiuota iš {battles} {mode} mūšių, kuriuos per pastarąsias 90 dienų žaidė {players} žaidėjai, užfiksuota naudojant {mod}. Paskutinis žaistas",
+  "the-mod": "unicum.gg modas",
+  "small-sample": "Tai nedidelė imtis: kiekviena eilutė pradedama savo žaidėjų skaičiumi, o ne procentine dalimi, ir jos rodikliai daugiau pasako apie tuos žaidėjus nei apie sąranką.",
+  "correlation": "Kiekviena sąranka yra ta, kuri buvo sumontuota tam mūšiui, o šalia pateiktas našumas yra tų mūšių rezultatas. Tai vis tiek yra koreliacija: žaidėjai pasirenka savo sąranką, todėl kiekvienoje eilutėje taip pat rodomi bendri tų pačių žaidėjų rodikliai."
+}

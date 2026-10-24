@@ -1,0 +1,6 @@
+{
+  "counted-from": "Contabilizat din {battles} bătălii în modul {mode}, jucate de {players} jucători în ultimele 90 de zile, înregistrate prin {mod}. Ultima bătălie jucată",
+  "the-mod": "mod-ul unicum.gg",
+  "small-sample": "Acesta este un eșantion mic: fiecare rând începe cu propriul număr de jucători, nu cu un procent, iar cifrele sale spun mai multe despre acei jucători decât despre configurație.",
+  "correlation": "Fiecare configurație este cea folosită pentru bătălia respectivă, iar performanța de lângă ea este rezultatul acelor bătălii. Este totuși o corelație: jucătorii își aleg configurația, așa că fiecare rând afișează și cifrele generale ale acelorași jucători."
+}

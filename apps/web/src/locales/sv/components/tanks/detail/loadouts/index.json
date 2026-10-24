@@ -1,0 +1,40 @@
+{
+  "title": "Vad spelare monterar på {tank}",
+  "what-they-fit": "Utrustningsuppsättningar",
+  "equipment": "Utrustning",
+  "consumables": "Förbrukningsartiklar",
+  "directives": "Anvisningar",
+  "field-mods": "Fältmodifieringar",
+  "col": {
+    "build": "Konfiguration",
+    "player": "Spelare",
+    "usage": "Användning",
+    "damage": "Skada",
+    "winrate": "WR",
+    "player-winrate": "Spelar WR",
+    "player-winrate-tip": "Samma spelares övergripande vinstgrad över hela kontot, viktad efter deras strider med den här konfigurationen.",
+    "delta": "±",
+    "delta-tip": "Den här konfigurationens figur minus samma spelares övergripande figur över hela kontot.",
+    "assisted": "Assistans",
+    "usage-tip": "Spelare som använde den i minst en räknad strid, av de räknade spelarna.",
+    "player-rating": "Spelarens {metric}",
+    "player-rating-tip": "Samma spelares övergripande betyg över hela kontot, viktat efter deras strider med den här konfigurationen.",
+    "battles": "Strider",
+    "skill": "Skicklighet"
+  },
+  "crew-skills": "Besättningsfärdigheter",
+  "crew-skills-hint": "Varje färdighet som {role} hade tränat, räknad bland spelare vars besättning har den platsen, bredvid hur striderna som spelades med den gick.",
+  "counted": {
+    "equipment": "Räknas som hela uppsättningar med tre enheter, på det sätt spelare monterar dem, bland spelare som använde varje uppsättning.",
+    "consumables": "Räknas som hela uppsättningar med tre förbrukningsartiklar, bland spelare som använde varje uppsättning.",
+    "directives": "Räknas som en anvisning i taget, bland spelare som använde den.",
+    "field-mods": "Räknas som hela träd av fältmodifieringar, med varje par exakt som spelaren tog det, bland spelare som använde varje träd."
+  },
+  "top-battles": "Bästa strider",
+  "top-battles-hint": "Varje spelares bästa strid med den här vagnen efter utdelad skada, och exakt vad de monterade inför den. Öppna en strid för dess fullständiga rapport.",
+  "thin-row": "Färre än {count} spelare använde detta, så dessa siffror säger mer om dem än om konfigurationen.",
+  "top-players": "Bästa spelare",
+  "top-players-hint": "De bästa spelarna med den här vagnen bland dem vars strider är registrerade, rankade efter hela deras rekord med den, med vad de monterade i sin senaste registrerade strid. Öppna en rad för deras besättning.",
+  "crew": "Besättning",
+  "show-crew": "Visa besättningen"
+}

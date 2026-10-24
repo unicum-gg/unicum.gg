@@ -1,0 +1,40 @@
+{
+  "title": "Wat spelers op {tank} monteren",
+  "what-they-fit": "Uitrustingen",
+  "equipment": "Uitrusting",
+  "consumables": "Verbruiksartikelen",
+  "directives": "Gevechtsbevelen",
+  "field-mods": "Veldmods",
+  "col": {
+    "build": "Configuratie",
+    "player": "Speler",
+    "usage": "Gebruik",
+    "damage": "Beschadig",
+    "winrate": "WR",
+    "player-winrate": "Speler WR",
+    "player-winrate-tip": "Het totale winstpercentage van dezelfde spelers over hun hele account, gewogen op basis van hun gevechten met deze configuratie.",
+    "delta": "±",
+    "delta-tip": "Het cijfer van deze configuratie min het totale cijfer van dezelfde spelers over hun hele account.",
+    "assisted": "Assistentie",
+    "usage-tip": "Spelers die deze configuratie in minstens één geteld gevecht gebruikten, gedeeld door het aantal getelde spelers.",
+    "player-rating": "Beoordeling van speler {metric}",
+    "player-rating-tip": "De totale beoordeling van dezelfde spelers over hun hele account, gewogen op basis van hun gevechten met deze configuratie.",
+    "battles": "Gevechten",
+    "skill": "Vaardigheid"
+  },
+  "crew-skills": "Bemanningsvaardigheden",
+  "crew-skills-hint": "Elke vaardigheid die door {role} was getraind, geteld bij spelers van wie de bemanning die positie bezet, naast hoe de gevechten ermee verliepen.",
+  "counted": {
+    "equipment": "Geteld als gehelen van drie apparaten, zoals spelers ze monteren, bij spelers die elke set gebruikten.",
+    "consumables": "Geteld als gehelen van drie verbruiksartikelen, bij spelers die elke set gebruikten.",
+    "directives": "Per gevechtsbevel geteld, bij spelers die het gebruikten.",
+    "field-mods": "Geteld als volledige bomen voor veldmodificaties, elk paar zoals de speler het nam, bij spelers die elke boom gebruikten."
+  },
+  "top-battles": "Beste gevechten",
+  "top-battles-hint": "Het beste gevecht van elke speler met deze tank op basis van toegebrachte schade, en precies wat die speler daarvoor monteerde. Openen een gevecht voor het volledige rapport.",
+  "thin-row": "Minder dan {count} spelers gebruikten dit, dus deze cijfers zeggen meer over hen dan over de configuratie.",
+  "top-players": "Beste spelers",
+  "top-players-hint": "De beste spelers met deze tank onder degenen van wie de gevechten zijn geregistreerd, gerangschikt op hun volledige record ermee, met wat ze in hun laatste geregistreerde gevecht monteerden. Openen een rij voor hun bemanning.",
+  "crew": "Bemanning",
+  "show-crew": "De bemanning tonen"
+}

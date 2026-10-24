@@ -7,6 +7,10 @@
     "title": "{tank}の戦績（{region}地域）、サーバー統計とトッププレイヤー",
     "description": "{tank}（{region}地域）のWorld of Tanks戦績。サーバー平均の勝率、ダメージ、アシスト、Tier {tier} {nation}戦車の最高プレイヤー、WN8とWNXの期待値を表示します。"
   },
+  "loadouts": {
+    "title": "{tank}の最高の拡張パーツと搭乗員スキル（{region}）",
+    "description": "{tank}（{region}）のWorld of Tanks装備構成。プレイヤーが戦闘で実際に搭載した拡張パーツ、消耗品、ディレクティブ、項目改修、搭乗員スキルと各セットアップの性能、さらにこのTier {tier}の{nation}戦車で最高のプレイヤーが使用したビルドと最高の戦闘を紹介します。"
+  },
   "marks": {
     "title": "{tank}の優秀戦車長マークとマスターバッジ（{region}地域）",
     "description": "{tank}（{region}地域）のWorld of Tanks優秀戦車長マークとマスターバッジの獲得条件、およびTier {tier} {nation}戦車での履歴を表示します。"

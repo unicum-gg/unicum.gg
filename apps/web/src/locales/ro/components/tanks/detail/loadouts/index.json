@@ -1,0 +1,40 @@
+{
+  "title": "Ce echipează jucătorii pe {tank}",
+  "what-they-fit": "Configurații",
+  "equipment": "Echipament",
+  "consumables": "Consumabile",
+  "directives": "Directive",
+  "field-mods": "Modificări de câmp",
+  "col": {
+    "build": "Configurație",
+    "player": "Jucător",
+    "usage": "Utilizare",
+    "damage": "Daune produse",
+    "winrate": "WR",
+    "player-winrate": "WR jucător",
+    "player-winrate-tip": "Rata generală de victorii a acelorași jucători, în toate bătăliile contului lor, ponderată în funcție de bătăliile jucate cu această configurație.",
+    "delta": "±",
+    "delta-tip": "Cifra acestei configurații minus cifra generală a acelorași jucători, în toate bătăliile contului lor.",
+    "assisted": "Asistență",
+    "usage-tip": "Jucătorii care au folosit-o în cel puțin o bătălie contabilizată, raportat la numărul jucătorilor contabilizați.",
+    "player-rating": "Jucător {metric}",
+    "player-rating-tip": "Evaluarea generală a acelorași jucători, în toate bătăliile contului lor, ponderată în funcție de bătăliile jucate cu această configurație.",
+    "battles": "Bătălii",
+    "skill": "Abilitate"
+  },
+  "crew-skills": "Abilitățile echipajului",
+  "crew-skills-hint": "Fiecare abilitate pe care echipajul o avea antrenată pentru postul {role}, contabilizată pentru jucătorii al căror echipaj are acel post, alături de modul în care s-au desfășurat bătăliile jucate cu aceasta.",
+  "counted": {
+    "equipment": "Contabilizat ca seturi întregi de trei dispozitive, în configurația folosită de jucători, pentru jucătorii care au folosit fiecare set.",
+    "consumables": "Contabilizat ca seturi întregi de trei consumabile, pentru jucătorii care au folosit fiecare set.",
+    "directives": "Contabilizat câte o directivă, pentru jucătorii care au folosit-o.",
+    "field-mods": "Contabilizat ca arbori întregi de modificări de câmp, fiecare pereche exact așa cum a ales-o jucătorul, pentru jucătorii care au folosit fiecare arbore."
+  },
+  "top-battles": "Cele mai bune bătălii",
+  "top-battles-hint": "Cea mai bună bătălie a fiecărui jucător cu acest tanc, după daunele produse, și exact ce a echipat pentru aceasta. Deschide o bătălie pentru raportul complet.",
+  "thin-row": "Mai puțin de {count} jucători au folosit această configurație, așa că aceste cifre spun mai multe despre ei decât despre configurație.",
+  "top-players": "Cei mai buni jucători",
+  "top-players-hint": "Cei mai buni jucători cu acest tanc dintre cei ale căror bătălii sunt înregistrate, clasați după recordul lor general cu acesta, împreună cu echipamentul folosit în cea mai recentă bătălie înregistrată. Deschide un rând pentru echipajul lor.",
+  "crew": "Echipaj",
+  "show-crew": "Afișează echipajul"
+}

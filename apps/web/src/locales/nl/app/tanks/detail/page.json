@@ -7,6 +7,10 @@
     "title": "Prestaties van {tank} ({region}), serverstatistieken en beste spelers",
     "description": "Prestaties in World of Tanks voor {tank} ({region}): servergemiddelden voor winstpercentage, schade en geassisteerde schade, de beste spelers met deze tank van niveau {tier} uit {nation}, plus verwachte waarden voor WN8 en WNX."
   },
+  "loadouts": {
+    "title": "Beste uitrusting en bemanningsvaardigheden voor {tank} ({region})",
+    "description": "World of Tanks-configuraties voor {tank} ({region}): de uitrusting, verbruiksartikelen, gevechtsbevelen, veldmodificaties en bemanningsvaardigheden die spelers daadwerkelijk in gevechten monteren, met hoe elke configuratie presteert, plus de configuraties en beste gevechten van de beste spelers met deze tank van niveau {tier} uit {nation}."
+  },
   "marks": {
     "title": "Prestatiemarkeringen en meesterschapsbadges van {tank} ({region})",
     "description": "Vereisten voor prestatiemarkeringen en meesterschapsbadges in World of Tanks voor {tank} ({region}), inclusief het historische verloop voor deze tank van niveau {tier} uit {nation}."

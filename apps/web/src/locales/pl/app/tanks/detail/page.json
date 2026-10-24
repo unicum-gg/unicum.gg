@@ -7,6 +7,10 @@
     "title": "Osiągi: {tank} ({region}), statystyki serwera i ranking najlepszych graczy",
     "description": "World of Tanks, {tank} ({region}): średnie serwerowe, w tym współczynnik zwycięstw, zadane uszkodzenia i uszkodzenia z asysty, ranking najlepszych graczy tym pojazdem poziomu {tier} (nacja: {nation}) oraz oczekiwane wartości WN8 i WNX."
   },
+  "loadouts": {
+    "title": "{tank}: najlepsze wyposażenie i umiejętności załogi ({region})",
+    "description": "Wyposażenie czołga {tank} ({region}) w World of Tanks: wyposażenie, materiały eksploatacyjne, dyrektywy, modyfikacje polowe i umiejętności załogi, które gracze rzeczywiście montują w bitwie, wraz z informacjami o tym, jak spisuje się każda konfiguracja, a także konfiguracje i najlepsze bitwy najlepszych graczy tego czołga poziomu {tier} nacji {nation}."
+  },
   "marks": {
     "title": "Odznaki biegłości i odznaki mistrzowskie: {tank} ({region})",
     "description": "World of Tanks, {tank} ({region}): wymagania dotyczące odznak biegłości i odznak mistrzowskich oraz historia ich progów dla pojazdu poziomu {tier} (nacja: {nation})."

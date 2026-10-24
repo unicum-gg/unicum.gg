@@ -7,6 +7,10 @@
     "title": "Výkony vo World of Tanks: {tank} ({region}), štatistiky servera a najlepší hráči",
     "description": "{tank} ({region}): výkony vo World of Tanks vrátane priemernej miery víťazstiev, poškodenia a asistencie na serveri, najlepších hráčov s týmto vozidlom (úroveň {tier}, národ {nation}) a očakávaných hodnôt WN8 a WNX."
   },
+  "loadouts": {
+    "title": "Najlepšia výbava a zručnosti posádky pre {tank} ({region})",
+    "description": "Postavitve World of Tanks pre {tank} ({region}): oprema, potrošný materiál, direktívy, úpravy poľa a spretnosti posadke, ktoré hráči pravzaprav používajú v bitke, s údajmi o tom, ako jednotlivé postavitve fungujú, plus zostavy a najlepšie bitky najlepších hráčov na tanku úrovne {tier} národa {nation}."
+  },
   "marks": {
     "title": "Znaky výnimočnosti a odznaky majstrovstva: {tank} ({region})",
     "description": "{tank} ({region}): požiadavky na získanie znakov výnimočnosti a odznakov majstrovstva vo World of Tanks spolu s ich históriou pre toto vozidlo (úroveň {tier}, národ {nation})."

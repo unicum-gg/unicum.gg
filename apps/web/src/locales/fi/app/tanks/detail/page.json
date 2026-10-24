@@ -7,6 +7,10 @@
     "title": "{tank}: suorituskyky ({region}), palvelintilastot ja parhaat pelaajat",
     "description": "{tank} ({region}) World of Tanks -suorituskyky: palvelimen keskimääräinen voittoprosentti, vahinko ja avustettu vahinko, tason {tier} {nation} panssarivaunun parhaat pelaajat sekä WN8:n ja WNX:n odotusarvot."
   },
+  "loadouts": {
+    "title": "Panssarivaunun {tank} parhaat varusteet ja miehistön taidot ({region})",
+    "description": "Panssarivaunun {tank} ({region}) World of Tanks -varustukset: varusteet, kulutustarvikkeet, direktiivit, kenttämodit ja miehistön taidot, joita pelaajat todella asentavat taistelussa, sekä kunkin kokoonpanon suorituskyky, tason {tier} {nation}-panssarivaunun parhaiden pelaajien kokoonpanot ja parhaat taistelut."
+  },
   "marks": {
     "title": "{tank}: erinomaisuuden ja mestaruuden merkit ({region})",
     "description": "{tank} ({region}) World of Tanksin erinomaisuuden ja mestaruuden merkkien vaatimukset sekä niiden historia tämän tason {tier} {nation} panssarivaunulla."

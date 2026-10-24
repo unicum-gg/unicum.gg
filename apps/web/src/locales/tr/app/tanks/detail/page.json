@@ -7,6 +7,10 @@
     "title": "{tank} performansı ({region}), sunucu istatistikleri ve en iyi oyuncular",
     "description": "{tank} ({region}) World of Tanks performansı: sunucu ortalaması galibiyet oranı, hasar ve yardım, bu {tier} seviye {nation} tankındaki en iyi oyuncular, ayrıca WN8 ve WNX beklenen değerleri."
   },
+  "loadouts": {
+    "title": "{tank} için en iyi donanım ve mürettebat becerileri ({region})",
+    "description": "{tank} ({region}) World of Tanks donanımları: oyuncuların savaşta aslında kullandığı donanım, sarf malzemeleri, yönergeler, alan modifikasyonları ve mürettebat becerileri, her kurulumun nasıl performans gösterdiği, ayrıca bu seviye {tier} {nation} tankındaki en iyi oyuncuların kurulumları ve en iyi savaşları."
+  },
   "marks": {
     "title": "{tank} üstünlük ve ustalık işaretleri ({region})",
     "description": "{tank} ({region}) World of Tanks üstünlük işaretleri ve ustalık işareti gereksinimleri, bu {tier} seviye {nation} tankındaki geçmişleriyle birlikte."

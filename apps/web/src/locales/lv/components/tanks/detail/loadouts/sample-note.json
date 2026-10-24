@@ -1,0 +1,6 @@
+{
+  "counted-from": "Skaits no {battles} {mode} kaujām, kuras pēdējo 90 dienu laikā izspēlēja {players} spēlētāji, reģistrēts ar {mod}. Pēdējā izspēlēta",
+  "the-mod": "unicum.gg mod",
+  "small-sample": "Tas ir neliels paraugs: katra rinda sākas ar savu spēlētāju skaitu, nevis procentuālo daļu, un tās rādītāji vairāk raksturo šos spēlētājus, nevis konfigurāciju.",
+  "correlation": "Katra konfigurācija ir tā, kas tika uzstādīta šai kaujai, un blakus redzamais sniegums ir šo kauju rezultāts. Tā joprojām ir korelācija: spēlētāji izvēlas savu konfigurāciju, tāpēc katrā rindā redzami arī to pašu spēlētāju kopējie rādītāji."
+}

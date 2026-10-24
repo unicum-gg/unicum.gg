@@ -14,7 +14,7 @@
   "reference-column": "参考列",
   "remove-tank": "移除{tank}",
   "reset-all": "重置所有",
-  "setup": "设置",
+  "setup": "配置",
   "setup-n": "配置 {n}",
   "stock": "库存",
   "tank-setup": "{tank}配置",

@@ -1,0 +1,6 @@
+{
+  "counted-from": "Được tính từ {battles} trận đấu {mode} của {players} người chơi trong 90 ngày qua, được ghi nhận qua {mod}. Trận đấu cuối đã chơi",
+  "the-mod": "mod unicum.gg",
+  "small-sample": "Đó là một mẫu nhỏ: mỗi hàng bắt đầu bằng số lượng người chơi riêng thay vì phần trăm, và các số liệu của hàng nói nhiều hơn về những người chơi đó thay vì về cấu hình.",
+  "correlation": "Mỗi cấu hình là cấu hình đã lắp cho trận đấu đó, còn hiệu suất bên cạnh là kết quả của những trận đấu đó. Tuy nhiên, đây vẫn chỉ là mối tương quan: người chơi chọn cấu hình của mình, vì vậy mỗi hàng cũng hiển thị các số liệu tổng thể của chính những người chơi đó."
+}

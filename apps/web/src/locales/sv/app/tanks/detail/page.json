@@ -7,6 +7,10 @@
     "title": "Prestanda för {tank} ({region}), serverstatistik och bästa spelare",
     "description": "Prestanda i World of Tanks för {tank} ({region}): genomsnittlig segerfrekvens, skada och assisterad skada på servern, bästa spelare med denna tank från {nation} på nivå {tier}, samt förväntade värden för WN8 och WNX."
   },
+  "loadouts": {
+    "title": "Bästa utrustning och besättningsfärdigheter för {tank} ({region})",
+    "description": "Utrustningsuppsättningar för {tank} ({region}) i World of Tanks: utrustningen, förbrukningsartiklarna, anvisningarna, fältmodifieringarna och besättningsfärdigheterna som spelare faktiskt monterar i strid, med information om hur varje konfiguration presterar, plus byggena och de bästa striderna för de bästa spelarna på denna nivå {tier} av {nation}-vagn."
+  },
   "marks": {
     "title": "Utmärkelsemärken och expertutmärkelser för {tank} ({region})",
     "description": "Krav för utmärkelsemärken och expertutmärkelser i World of Tanks för {tank} ({region}), med historik för denna tank från {nation} på nivå {tier}."

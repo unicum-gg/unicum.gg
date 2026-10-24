@@ -1,0 +1,6 @@
+{
+  "counted-from": "Geteld uit {battles} {mode}-gevechten van {players} spelers gedurende de afgelopen 90 dagen, geregistreerd via {mod}. Laatst gespeeld",
+  "the-mod": "de unicum.gg-mod",
+  "small-sample": "Dat is een kleine steekproef: elke rij begint met het eigen aantal spelers in plaats van een percentage, en de cijfers zeggen meer over die spelers dan over de configuratie.",
+  "correlation": "Elke configuratie is de configuratie die voor dat gevecht gemonteerd was, en de prestatie ernaast is het resultaat van die gevechten. Het blijft een correlatie: spelers kiezen hun configuratie, dus elke rij toont ook de totale cijfers van dezelfde spelers."
+}

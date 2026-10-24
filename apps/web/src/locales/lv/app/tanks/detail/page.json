@@ -7,6 +7,10 @@
     "title": "{tank} sniegums ({region}), servera statistika un labākie spēlētāji",
     "description": "{tank} ({region}) World of Tanks sniegums: servera vidējais uzvaru procents, bojājumi un atbalsts, labākie spēlētāji ar šo {tier}. līmeņa {nation} tanku, kā arī WN8 un WNX sagaidāmās vērtības."
   },
+  "loadouts": {
+    "title": "Labākais aprīkojums un apkalpes prasmes tankam {tank} ({region})",
+    "description": "World of Tanks komplektācijas tankam {tank} ({region}): aprīkojums, patēriņa materiāli, direktīvas, lauka modifikācijas un apkalpes prasmes, ko spēlētāji patiesībā uzstāda kaujā, kā darbojas katra konfigurācija, kā arī labāko spēlētāju konfigurācijas un labākās kaujas ar šo {tier} līmeņa {nation} tanku."
+  },
   "marks": {
     "title": "{tank} izcilības un meistarības zīmes ({region})",
     "description": "{tank} ({region}) World of Tanks izcilības un meistarības zīmju prasības, kā arī to vēsture šim {tier}. līmeņa {nation} tankam."

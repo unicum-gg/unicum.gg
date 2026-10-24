@@ -1,0 +1,6 @@
+{
+  "counted-from": "Gezählt aus {battles} {mode}-Gefechten von {players} Spielern in den letzten 90 Tagen, aufgezeichnet durch {mod}. Zuletzt gespielt",
+  "the-mod": "der unicum.gg-Mod",
+  "small-sample": "Das ist eine kleine Stichprobe: Jede Zeile beginnt mit ihrer eigenen Anzahl an Spielern statt mit einem Prozentsatz, und ihre Werte sagen mehr über diese Spieler als über die Konfiguration aus.",
+  "correlation": "Jede Konfiguration ist diejenige, die für dieses Gefecht eingebaut wurde, und die daneben angezeigte Leistung ist das Ergebnis dieser Gefechte. Es handelt sich weiterhin um eine Korrelation: Spieler wählen ihre Konfiguration selbst aus, daher zeigt jede Zeile auch die Gesamtwerte derselben Spieler."
+}

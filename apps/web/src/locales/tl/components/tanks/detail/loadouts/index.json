@@ -1,0 +1,40 @@
+{
+  "title": "Ano ang ikinakabit ng mga manlalaro sa {tank}",
+  "what-they-fit": "Mga loadout",
+  "equipment": "Kagamitan",
+  "consumables": "Mga Consumable",
+  "directives": "Mga Direktiba",
+  "field-mods": "Mga mod sa patlang",
+  "col": {
+    "build": "Konpigurasyon",
+    "player": "Manlalaro",
+    "usage": "Paggamit",
+    "damage": "Pinsala",
+    "winrate": "WR",
+    "player-winrate": "Player WR",
+    "player-winrate-tip": "Ang pangkalahatang antas ng panalo ng parehong mga manlalaro, sa lahat ng kanilang account, na tinitimbang ayon sa mga laban nila gamit ang configurasyong ito.",
+    "delta": "±",
+    "delta-tip": "Ang bilang ng configurasyong ito na ibinawas sa pangkalahatang bilang ng parehong mga manlalaro, sa lahat ng kanilang account.",
+    "assisted": "Tulong",
+    "usage-tip": "Mga manlalarong gumamit nito sa kahit isang nabilang na labanan, kumpara sa mga nabilang na manlalaro.",
+    "player-rating": "Manlalaro {metric}",
+    "player-rating-tip": "Ang pangkalahatang rating ng parehong mga manlalaro, sa lahat ng kanilang account, na tinitimbang ayon sa mga laban nila gamit ang configurasyong ito.",
+    "battles": "Mga labanan",
+    "skill": "Kasanayan"
+  },
+  "crew-skills": "Mga kasanayan ng crew",
+  "crew-skills-hint": "Bawat kasanayang sinanay ng {role}, na binilang sa mga manlalarong may crew na may puwestong iyon, katabi ng pagganap sa mga laban na nilaro gamit ito.",
+  "counted": {
+    "equipment": "Binilang bilang buong set ng tatlong kagamitan, ayon sa paraan ng pagkakabit ng mga manlalaro, sa mga manlalarong gumamit ng bawat set.",
+    "consumables": "Binilang bilang buong set ng tatlong consumable, sa mga manlalarong gumamit ng bawat set.",
+    "directives": "Binilang nang paisa-isang direktiba, sa mga manlalarong gumamit nito.",
+    "field-mods": "Binilang bilang buong puno ng mga pagbabago sa patlang, bawat pares ayon sa paraan ng pagkuha nito ng manlalaro, sa mga manlalarong gumamit ng bawat puno."
+  },
+  "top-battles": "Pinakamahusay na mga laban",
+  "top-battles-hint": "Pinakamahusay na laban ng bawat manlalaro sa tank na ito batay sa pinsalang naidulot, at eksakto kung ano ang ikinabit nila para rito. Buksan ang isang labanan para sa kumpletong ulat nito.",
+  "thin-row": "Mas kaunti sa bilang na {count} mga manlalaro ang gumamit nito, kaya mas marami itong sinasabi tungkol sa mga iyon kaysa sa configurasyon.",
+  "top-players": "Pinakamahusay na mga manlalaro",
+  "top-players-hint": "Ang pinakamahusay na mga manlalaro sa tank na ito mula sa mga manlalarong naitala ang mga laban, na niraranggo batay sa kanilang buong rekord dito, kasama ang ikinabit nila sa kanilang pinakabagong naitalang labanan. Buksan ang isang hilera para sa kanilang crew.",
+  "crew": "Crew",
+  "show-crew": "Ipakita ang crew"
+}

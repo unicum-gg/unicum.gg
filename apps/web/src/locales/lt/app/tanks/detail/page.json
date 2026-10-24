@@ -7,6 +7,10 @@
     "title": "{tank} rezultatai ({region}), serverio statistika ir geriausi žaidėjai",
     "description": "{tank} ({region}) World of Tanks rezultatai: serverio pergalių procento, žalos ir pagalbos vidurkis, geriausi šio {tier} lygio {nation} tanko žaidėjai, taip pat WN8 ir WNX tikėtinos reikšmės."
   },
+  "loadouts": {
+    "title": "Geriausia įranga ir įgulos įgūdžiai tankui {tank} ({region})",
+    "description": "Tankui {tank} ({region}) skirtos World of Tanks komplektacijos: įranga, eksploatacinės medžiagos, instrukcijos, lauko modifikacijos ir įgulos įgūdžiai, kuriuos žaidėjai iš tikrųjų sumontavo mūšiuose, taip pat kiekvienos sąrankos našumas, geriausių šio {tier} lygio {nation} tanko žaidėjų sąrankos ir geriausi mūšiai."
+  },
   "marks": {
     "title": "{tank} meistriškumo ir meistriškumo ženklai ({region})",
     "description": "{tank} ({region}) World of Tanks meistriškumo ženklų ir meistriškumo reikalavimai bei jų istorija su šiuo {tier} lygio {nation} tanku."

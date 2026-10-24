@@ -1,0 +1,6 @@
+{
+  "counted-from": "Contabilizadas a partir de {battles} batallas de {mode} libradas por {players} jugadores durante los últimos 90 días, registradas mediante {mod}. Última jugada",
+  "the-mod": "el mod de unicum.gg",
+  "small-sample": "Es una muestra pequeña: cada fila muestra primero su propio recuento de jugadores en lugar de un porcentaje, y sus cifras dicen más sobre esos jugadores que sobre la configuración.",
+  "correlation": "Cada configuración es la que se equipó para esa batalla, y el rendimiento que aparece junto a ella es el resultado de esas batallas. Sigue siendo una correlación: los jugadores eligen su configuración, así que cada fila también muestra las cifras generales de esos mismos jugadores."
+}

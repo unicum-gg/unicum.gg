@@ -7,6 +7,10 @@
     "title": "Leistungsdaten: {tank} ({region}), Serverstatistiken und beste spieler",
     "description": "Leistungsdaten in World of Tanks: {tank} ({region}), mit durchschnittlicher Siegquote, durchschnittlichem Schaden und durchschnittlicher Unterstützung auf dem Server, den besten spielern mit diesem {nation}-Panzer der Stufe {tier} sowie den Erwartungswerten für WN8 und WNX."
   },
+  "loadouts": {
+    "title": "Beste Ausrüstung und Besatzungsfertigkeiten für {tank} ({region})",
+    "description": "World of Tanks-Ausrüstungen für {tank} ({region}): Zubehör, Verbrauchsmaterial, Direktiven, Feldmodifikationen und Besatzungsfertigkeiten, die Spieler im Gefecht tatsächlich eingebaut haben, mit den Leistungen jeder Konfiguration sowie den Builds und besten Gefechten der besten Spieler mit diesem Panzer der Stufe {tier} von {nation}."
+  },
   "marks": {
     "title": "Gefechtsmarkierungen und Meisterschaftsabzeichen für {tank} ({region})",
     "description": "Erfolgsmarkierungen und Anforderungen für Meisterschaftsabzeichen in World of Tanks: {tank} ({region}), samt historischem Verlauf für diesen {nation}-Panzer der Stufe {tier}."

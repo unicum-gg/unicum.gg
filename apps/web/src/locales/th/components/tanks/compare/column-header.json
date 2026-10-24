@@ -14,7 +14,7 @@
   "reference-column": "คอลัมน์อ้างอิง",
   "remove-tank": "นำ {tank} ออก",
   "reset-all": "รีเซ็ตทั้งหมด",
-  "setup": "ตั้งค่า",
+  "setup": "การจัดชุด",
   "setup-n": "การจัดชุด {n}",
   "stock": "สต็อก",
   "tank-setup": "การตั้งค่า {tank}",

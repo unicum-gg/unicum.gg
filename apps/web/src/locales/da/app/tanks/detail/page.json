@@ -7,6 +7,10 @@
     "title": "{tank}-resultater ({region}), serverstatistik og bedste spillere",
     "description": "{tank} ({region}) World of Tanks-resultater: serverens gennemsnitlige sejrsrate, skade og assistance, de bedste spillere på denne niveau {tier} {nation}-kampvogn samt forventede WN8- og WNX-værdier."
   },
+  "loadouts": {
+    "title": "{tank}: bedste udstyr og besætningsfærdigheder ({region})",
+    "description": "Udrustninger til {tank} ({region}) i World of Tanks: det udstyr, de forbrugsstoffer, direktiver, feltmodifikationer og besætningsfærdigheder, spillerne faktisk monterer i kamp, med oplysninger om, hvordan hver opsætning præsterer, plus opsætningerne og de bedste kampe for de bedste spillere på denne kampvogn på niveau {tier} fra {nation}."
+  },
   "marks": {
     "title": "{tank} Marks of Excellence og mastery ({region})",
     "description": "{tank} ({region}) World of Tanks-krav til Marks of Excellence og Marks of Mastery med deres historik for denne niveau {tier} {nation}-kampvogn."

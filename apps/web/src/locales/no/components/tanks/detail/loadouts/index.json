@@ -1,0 +1,40 @@
+{
+  "title": "Hva spillere monterer på {tank}",
+  "what-they-fit": "Oppsett",
+  "equipment": "Utstyr",
+  "consumables": "Forbruksmateriell",
+  "directives": "Direktiver",
+  "field-mods": "Feltmodifikasjoner",
+  "col": {
+    "build": "Oppsett",
+    "player": "Spiller",
+    "usage": "Bruk",
+    "damage": "Skade",
+    "winrate": "WR",
+    "player-winrate": "Spiller WR",
+    "player-winrate-tip": "De samme spillernes totale seiersrate på tvers av hele kontoen, vektet etter kampene deres med dette oppsettet.",
+    "delta": "±",
+    "delta-tip": "Dette oppsettets tall minus de samme spillernes totale tall på tvers av hele kontoen.",
+    "assisted": "Assistanse",
+    "usage-tip": "Spillere som brukte det i minst én telt kamp, delt på antallet spillere som er telt.",
+    "player-rating": "Spiller {metric}",
+    "player-rating-tip": "De samme spillernes totale vurdering på tvers av hele kontoen, vektet etter kampene deres med dette oppsettet.",
+    "battles": "Kamper",
+    "skill": "Ferdighet"
+  },
+  "crew-skills": "Mannskapsferdigheter",
+  "crew-skills-hint": "Hver ferdighet trent av {role}, telt blant spillere hvis mannskap har denne plassen, ved siden av hvordan kampene med den gikk.",
+  "counted": {
+    "equipment": "Telt som hele sett på tre enheter, slik spillerne monterte dem, blant spillere som brukte hvert sett.",
+    "consumables": "Telt som hele sett på tre forbruksvarer, blant spillere som brukte hvert sett.",
+    "directives": "Telt ett direktiv om gangen, blant spillere som brukte det.",
+    "field-mods": "Telt som hele trær av feltmodifikasjoner, med hvert par slik spilleren valgte det, blant spillere som brukte hvert tre."
+  },
+  "top-battles": "Beste kamper",
+  "top-battles-hint": "Hver spillers beste kamp med denne stridsvognen etter utdelt skade, og nøyaktig hva de monterte til den. Åpne en kamp for den fullstendige rapporten.",
+  "thin-row": "Færre enn {count} spillere brukte dette, så disse tallene sier mer om dem enn om oppsettet.",
+  "top-players": "Beste spillere",
+  "top-players-hint": "De beste spillerne med denne stridsvognen blant dem hvis kamper er registrert, rangert etter hele rekorden deres med den, med det de monterte i sin siste registrerte kamp. Åpne en rad for mannskapet deres.",
+  "crew": "Besetning",
+  "show-crew": "Vis mannskapet"
+}

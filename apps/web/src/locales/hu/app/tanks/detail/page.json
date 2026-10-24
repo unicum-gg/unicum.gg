@@ -7,6 +7,10 @@
     "title": "Teljesítmény: {tank} ({region}), szerverstatisztikák és legjobb játékosok",
     "description": "World of Tanks-teljesítményadatok: {tank} ({region}). Szerverátlagos győzelmi arány, sebzés és assziszt, a legjobb játékosok eredményei a {tier}. szintű {nation} Tank esetében, valamint a WN8 és a WNX várható értékei."
   },
+  "loadouts": {
+    "title": "{tank} legjobb felszerelései és legénységi képességei ({region})",
+    "description": "{tank} ({region}) World of Tanks-felszerelések: a felszerelés, a fogyócikkek, a Direktívák, a mezőmódosítások és azok a legénységi képességek, amelyeket a játékosok valójában csatába visznek, bemutatva az egyes összeállítások teljesítményét, valamint a legjobb játékosok összeállításait és legjobb csatáit ezen a {tier} szintű {nation} tankon."
+  },
   "marks": {
     "title": "Kiválóságjelek és mesterjelvények: {tank} ({region})",
     "description": "World of Tanks: a kiválóságjelek és mesterjelvények követelményei, valamint azok változásai a {tier}. szintű {nation} Tank esetében: {tank} ({region})."

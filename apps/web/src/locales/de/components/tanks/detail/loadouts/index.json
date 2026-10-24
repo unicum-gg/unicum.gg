@@ -1,0 +1,40 @@
+{
+  "title": "Was Spieler in {tank} einbauen",
+  "what-they-fit": "Ausrüstungen",
+  "equipment": "Zubehör",
+  "consumables": "Verbrauchsmaterial",
+  "directives": "Direktiven",
+  "field-mods": "Feldmodifikationen",
+  "col": {
+    "build": "Konfiguration",
+    "player": "Spieler",
+    "usage": "Nutzung",
+    "damage": "Schaden",
+    "winrate": "WR",
+    "player-winrate": "Spieler WR",
+    "player-winrate-tip": "Die Gesamt-Siegrate derselben Spieler über ihr gesamtes Konto, gewichtet nach ihren Gefechten mit dieser Konfiguration.",
+    "delta": "±",
+    "delta-tip": "Die Zahl dieser Konfiguration minus die Gesamtzahl derselben Spieler über ihr gesamtes Konto.",
+    "assisted": "Unterstützung",
+    "usage-tip": "Spieler, die diese Konfiguration in mindestens einem gezählten Gefecht verwendet haben, geteilt durch die Anzahl der gezählten Spieler.",
+    "player-rating": "Spieler-{metric}",
+    "player-rating-tip": "Die Gesamtwertung derselben Spieler über ihr gesamtes Konto, gewichtet nach ihren Gefechten mit dieser Konfiguration.",
+    "battles": "Gefechte",
+    "skill": "Spielstärke"
+  },
+  "crew-skills": "Besatzungsfertigkeiten",
+  "crew-skills-hint": "Jede Fertigkeit, die {role} trainiert hatte, gezählt bei Spielern mit dieser Besatzungsposition, neben dem Verlauf der damit gespielten Gefechte.",
+  "counted": {
+    "equipment": "Als ganze Sätze aus drei Geräten gezählt, so wie Spieler sie einbauen, bei Spielern, die jeden Satz verwendet haben.",
+    "consumables": "Als ganze Sätze aus drei Verbrauchsmaterialien gezählt, bei Spielern, die jeden Satz verwendet haben.",
+    "directives": "Eine Direktive nach der anderen gezählt, bei Spielern, die sie verwendet haben.",
+    "field-mods": "Als ganze Feldmodifikationsbäume gezählt, jedes Paar so, wie der Spieler es ausgewählt hat, bei Spielern, die jeden Baum verwendet haben."
+  },
+  "top-battles": "Beste Gefechte",
+  "top-battles-hint": "Das beste Gefecht jedes Spielers mit diesem Panzer nach verursachtetem Schaden und genau das, was dafür eingebaut wurde. Öffnen Sie ein Gefecht für den vollständigen Bericht.",
+  "thin-row": "Weniger als {count} Spieler haben dies verwendet, daher sagen diese Werte mehr über sie als über die Konfiguration aus.",
+  "top-players": "Beste Spieler",
+  "top-players-hint": "Die besten Spieler mit diesem Panzer unter den Spielern, deren Gefechte aufgezeichnet sind, eingestuft nach ihrem gesamten Rekord mit ihm, mit dem, was sie in ihrem letzten aufgezeichneten Gefecht eingebaut haben. Öffnen Sie eine Zeile für ihre Besatzung.",
+  "crew": "Besatzung",
+  "show-crew": "Besatzung anzeigen"
+}

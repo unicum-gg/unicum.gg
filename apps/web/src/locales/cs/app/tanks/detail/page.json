@@ -7,6 +7,10 @@
     "title": "Tank {tank}: výkony ({region}), statistiky serveru a nejlepší hráči",
     "description": "Výkony tanku {tank} ({region}) ve World of Tanks: průměrná míra vítězství, poškození a asistované poškození na serveru, nejlepší hráči s tímto tankem úrovně {tier} ({nation}) a očekávané hodnoty WN8 a WNX."
   },
+  "loadouts": {
+    "title": "Nejlepší vybavení a dovednosti posádky tanku {tank} ({region})",
+    "description": "Výbavy tanku {tank} ({region}) ve World of Tanks: vybavení, spotřební doplňky, směrnice, úpravy pole a dovednosti posádky, které hráči skutečně používají v bitvě, včetně toho, jak jednotlivé konfigurace fungují, a také sestavení a nejlepších bitev nejlepších hráčů s tankem úrovně {tier} národa {nation}."
+  },
   "marks": {
     "title": "Tank {tank}: znaky kvality a odznaky mistrovství ({region})",
     "description": "Požadavky ve World of Tanks na znaky kvality a odznaky mistrovství pro tank {tank} ({region}), včetně jejich historického vývoje u tohoto tanku úrovně {tier} ({nation})."

@@ -1,0 +1,6 @@
+{
+  "counted-from": "Laskettu viimeisten 90 päivän aikana {players} pelaajan {battles} {mode}-pelimuodossa pelaamista taisteluista, tallennettu {mod}-modilla. Viimeksi pelattu",
+  "the-mod": "unicum.gg-modi",
+  "small-sample": "Otos on pieni: jokainen rivi alkaa omalla pelaajamäärällään prosenttiosuuden sijaan, ja sen luvut kertovat enemmän kyseisistä pelaajista kuin kokoonpanosta.",
+  "correlation": "Jokainen kokoonpano on kyseistä taistelua varten asennettu kokoonpano, ja sen vieressä oleva suorituskyky on näiden taisteluiden tulos. Kyse on silti korrelaatiosta: pelaajat valitsevat kokoonpanonsa, joten jokaisella rivillä näytetään myös samojen pelaajien kokonaisuutena lasketut luvut."
+}

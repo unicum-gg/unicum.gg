@@ -1,0 +1,40 @@
+{
+  "title": "Šta igrači opremaju na tenku {tank}",
+  "what-they-fit": "Konfiguracije",
+  "equipment": "Oprema",
+  "consumables": "Potrošna roba",
+  "directives": "Direktive",
+  "field-mods": "Modifikacije polja",
+  "col": {
+    "build": "Postavka",
+    "player": "Igrač",
+    "usage": "Upotreba",
+    "damage": "Naneta šteta",
+    "winrate": "WR",
+    "player-winrate": "WR igrača",
+    "player-winrate-tip": "Ukupna stopa pobeda istih igrača, na celom njihovom nalogu, ponderisana prema njihovim bitkama sa ovom konfiguracijom.",
+    "delta": "±",
+    "delta-tip": "Brojka ove konfiguracije umanjena za ukupnu brojku istih igrača, na celom njihovom nalogu.",
+    "assisted": "Asistencija",
+    "usage-tip": "Igrači koji su je koristili u najmanje jednoj uračunatoj bitci, u odnosu na broj uračunatih igrača.",
+    "player-rating": "Rejting igrača {metric}",
+    "player-rating-tip": "Ukupan rejting istih igrača, na celom njihovom nalogu, ponderisan prema njihovim bitkama sa ovom konfiguracijom.",
+    "battles": "Bitke",
+    "skill": "Veština"
+  },
+  "crew-skills": "Veštine posade",
+  "crew-skills-hint": "Svaka veština koju je {role} imao obučenu, računajući igrače čija posada ima to mesto, uz podatak kako su protekle bitke odigrane s njom.",
+  "counted": {
+    "equipment": "Brojano kao celi kompleti od tri uređaja, onako kako ih igrači opremaju, među igračima koji su koristili svaki komplet.",
+    "consumables": "Brojano kao celi kompleti od tri potrošna materijala, među igračima koji su koristili svaki komplet.",
+    "directives": "Brojano jednu po jednu direktivu, među igračima koji su je koristili.",
+    "field-mods": "Brojano kao cela stabla modifikacija polja, svaki par onako kako ga je igrač izabrao, među igračima koji su koristili svako stablo."
+  },
+  "top-battles": "Najbolje bitke",
+  "top-battles-hint": "Najbolja bitka svakog igrača u ovom tenku prema nanetoj šteti i tačno ono što je za nju opremio. Otvori bitku za njen potpuni izveštaj.",
+  "thin-row": "Manje od {count} igrača je koristilo ovo, zato ove brojke više govore o njima nego o konfiguraciji.",
+  "top-players": "Najbolji igrači",
+  "top-players-hint": "Najbolji igrači u ovom tenku među onima čije su bitke zabeležene, rangirani prema celokupnom rekordu u njemu, sa onim što su opremili u svojoj poslednjoj zabeleženoj bitci. Otvori red za njihovu posadu.",
+  "crew": "Posada",
+  "show-crew": "Prikaži posadu"
+}

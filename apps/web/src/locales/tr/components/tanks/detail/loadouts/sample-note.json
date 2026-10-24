@@ -1,0 +1,6 @@
+{
+  "counted-from": "Son 90 günde {players} oyuncu tarafından oynanan {battles} {mode} savaşından sayılmıştır, {mod} üzerinden kaydedilmiştir. Son oynanan",
+  "the-mod": "unicum.gg modu",
+  "small-sample": "Bu küçük bir örneklem: her satır yüzde yerine kendi oyuncu sayısıyla başlar ve değerleri kurulumdan çok bu oyuncular hakkında bilgi verir.",
+  "correlation": "Her kurulum o savaş için takılandır ve yanındaki performans bu savaşların sonucudur. Bu yine de bir korelasyondur: oyuncular kurulumlarını seçer, bu nedenle her satır aynı oyuncuların genel değerlerini de gösterir."
+}

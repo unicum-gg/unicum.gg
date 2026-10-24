@@ -1,0 +1,6 @@
+{
+  "counted-from": "Broj izbrojan iz {battles} bitki u režimu {mode}, koje je odigralo {players} igrača tokom posljednjih 90 dana, zabilježeno pomoću moda {mod}. Posljednja odigrana",
+  "the-mod": "mod unicum.gg",
+  "small-sample": "To je mali uzorak: svaki red počinje vlastitim brojem igrača umjesto procentom, a njegove brojke više govore o tim igračima nego o konfiguraciji.",
+  "correlation": "Svaka konfiguracija je ona koja je bila ugrađena za tu bitku, a učinak pored nje rezultat je tih bitki. To je ipak korelacija: igrači biraju svoju konfiguraciju, pa svaki red prikazuje i ukupne brojke istih igrača."
+}

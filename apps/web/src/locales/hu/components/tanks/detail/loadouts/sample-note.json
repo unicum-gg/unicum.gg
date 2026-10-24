@@ -1,0 +1,6 @@
+{
+  "counted-from": "Számbavétel {battles} {mode} csatából, {players} játékos részvételével az elmúlt 90 napban, a(z) {mod} segítségével rögzítve. Utolsó lejátszás",
+  "the-mod": "a unicum.gg mod",
+  "small-sample": "Ez kis minta, ezért minden sor először a saját játékos-darabszámát mutatja százalék helyett, és az adatai inkább ezekről a játékosokról, mint az összeállításról árulkodnak.",
+  "correlation": "Minden összeállítás az adott csatához felszerelt összeállítás, a mellette látható teljesítmény pedig ezeknek a csatáknak az eredménye. Ez továbbra is csak korreláció, a játékosok választják az összeállításukat, ezért minden sor ugyanezen játékosok összesített adatait is megmutatja."
+}

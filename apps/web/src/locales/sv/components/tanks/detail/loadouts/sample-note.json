@@ -1,0 +1,6 @@
+{
+  "counted-from": "Räknat från {battles} strider i läget {mode} med {players} spelare under de senaste 90 dagarna, registrerade genom {mod}. Senast spelad",
+  "the-mod": "unicum.gg-modden",
+  "small-sample": "Det är ett litet urval: varje rad börjar med sitt eget antal spelare i stället för en procentsats, och dess siffror säger mer om de spelarna än om konfigurationen.",
+  "correlation": "Varje konfiguration är den som monterades inför den striden, och prestandan bredvid är resultatet av de striderna. Det är fortfarande en korrelation: spelare väljer sin konfiguration, så varje rad visar också samma spelares övergripande siffror."
+}

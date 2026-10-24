@@ -781,7 +781,17 @@
     "Get the mod": "احصل على المود",
     "shared": "مشترك",
     "All maps": "جميع الخرائط",
-    "Victories": "الانتصارات"
+    "Victories": "الانتصارات",
+    "Best": "الأفضل",
+    "Loadouts": "التجهيزات",
+    "Setup": "الإعداد",
+    "beside": "بجانب",
+    "consumables": "المستهلكات",
+    "field": "الحقل",
+    "figures": "الأرقام",
+    "fitted": "مجهّزة",
+    "performs": "الأداء",
+    "skills": "المهارات"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1565,7 +1575,18 @@
     "Get the mod": "Спампаваць мод",
     "shared": "агульны",
     "All maps": "Усе карты",
-    "Victories": "Перамогі"
+    "Victories": "Перамогі",
+    "Best": "Лепшыя",
+    "Loadouts": "Камплектацыі",
+    "Setup": "Зборка",
+    "beside": "побач",
+    "consumables": "расходнікі",
+    "field": "поле",
+    "figures": "паказчыкі",
+    "fitted": "усталяванае",
+    "performance": "эфектыўнасць",
+    "performs": "паказвае сябе",
+    "skills": "навыкі"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2564,7 +2585,18 @@
     "shared": "споделени",
     "All vehicles": "Всички машини",
     "Defeats": "Загуби",
-    "All maps": "Всички карти"
+    "All maps": "Всички карти",
+    "Best": "Най-добри",
+    "Loadouts": "Конфигурации",
+    "Setup": "Настройка",
+    "beside": "до",
+    "consumables": "консумативи",
+    "field": "поле",
+    "figures": "показатели",
+    "fitted": "монтирано",
+    "performance": "ефективност",
+    "performs": "представя се",
+    "skills": "умения"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3355,7 +3387,18 @@
     "Get the mod": "Preuzmite mod",
     "shared": "zajedničko",
     "All maps": "Sve mape",
-    "Victories": "Pobjede"
+    "Victories": "Pobjede",
+    "Best": "Najbolji",
+    "Loadouts": "Konfiguracije",
+    "Setup": "Postavka",
+    "beside": "pored",
+    "consumables": "potrošni materijali",
+    "field": "polje",
+    "figures": "brojke",
+    "fitted": "ugrađeno",
+    "performance": "učinak",
+    "performs": "se ponaša",
+    "skills": "vještine"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4365,7 +4408,18 @@
     "shared": "sdílené",
     "All vehicles": "Všemi vozidly",
     "Defeats": "Porážek",
-    "All maps": "Všechny mapy"
+    "All maps": "Všechny mapy",
+    "Best": "Nejlepší",
+    "Loadouts": "Výbavy",
+    "Setup": "Sestava",
+    "beside": "vedle",
+    "consumables": "spotřební doplňky",
+    "field": "pole",
+    "figures": "údaje",
+    "fitted": "osazeno",
+    "performance": "výkon",
+    "performs": "výkony",
+    "skills": "dovednosti"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5381,7 +5435,18 @@
     "shared": "delt",
     "All vehicles": "Alle køretøjer",
     "Defeats": "Nederlag",
-    "All maps": "Alle kort"
+    "All maps": "Alle kort",
+    "Best": "Bedste",
+    "Loadouts": "Udrustninger",
+    "Setup": "Opsætning",
+    "beside": "ved siden af",
+    "consumables": "forbrugsstoffer",
+    "field": "felt",
+    "figures": "tal",
+    "fitted": "monteret",
+    "performance": "præstation",
+    "performs": "præsterer",
+    "skills": "færdigheder"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6390,7 +6455,18 @@
     "shared": "gemeinsam",
     "All vehicles": "Alle Fahrzeuge",
     "Defeats": "Niederlagen",
-    "All maps": "Alle Karten"
+    "All maps": "Alle Karten",
+    "Best": "Beste",
+    "Loadouts": "Ausrüstungen",
+    "Setup": "Konfiguration",
+    "beside": "neben",
+    "consumables": "Verbrauchsmaterial",
+    "field": "Feld",
+    "figures": "Werte",
+    "fitted": "eingebaut",
+    "performance": "Leistung",
+    "performs": "Leistungen",
+    "skills": "Fertigkeiten"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7405,7 +7481,18 @@
     "shared": "κοινά",
     "All vehicles": "Όλα τα οχήματα",
     "Defeats": "Ήττες",
-    "All maps": "Όλοι οι χάρτες"
+    "All maps": "Όλοι οι χάρτες",
+    "Best": "Καλύτερο",
+    "Loadouts": "Διατάξεις",
+    "Setup": "Στήσιμο",
+    "beside": "δίπλα",
+    "consumables": "αναλώσιμα",
+    "field": "πεδίο",
+    "figures": "στοιχεία",
+    "fitted": "τοποθετημένα",
+    "performance": "απόδοση",
+    "performs": "αποδίδει",
+    "skills": "δεξιότητες"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8400,7 +8487,18 @@
     "shared": "compartido",
     "All vehicles": "Todos los vehículos",
     "Defeats": "Derrotas",
-    "All maps": "Todos los mapas"
+    "All maps": "Todos los mapas",
+    "Best": "Mejores",
+    "Loadouts": "Configuraciones",
+    "Setup": "Configuración",
+    "beside": "junto a",
+    "consumables": "consumibles",
+    "field": "campo",
+    "figures": "cifras",
+    "fitted": "equipado",
+    "performance": "rendimiento",
+    "performs": "rinde",
+    "skills": "habilidades"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9419,7 +9517,18 @@
     "shared": "jaettu",
     "All vehicles": "Kaikki vaunut",
     "Defeats": "Tappioita",
-    "All maps": "Kaikki kartat"
+    "All maps": "Kaikki kartat",
+    "Best": "Parhaat",
+    "Loadouts": "Varustukset",
+    "Setup": "Kokoonpano",
+    "beside": "vieressä",
+    "consumables": "kulutustarvikkeet",
+    "field": "kenttä",
+    "figures": "luvut",
+    "fitted": "asennettu",
+    "performance": "suorituskyky",
+    "performs": "suoriutuu",
+    "skills": "taidot"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10418,7 +10527,18 @@
     "shared": "partagé",
     "All vehicles": "Tous les véhicules",
     "Defeats": "Défaites",
-    "All maps": "Toutes les cartes"
+    "All maps": "Toutes les cartes",
+    "Best": "Meilleur",
+    "Loadouts": "Configurations",
+    "Setup": "Configuration",
+    "beside": "à côté",
+    "consumables": "consommables",
+    "field": "champ",
+    "figures": "chiffres",
+    "fitted": "montés",
+    "performance": "performance",
+    "performs": "performe",
+    "skills": "compétences"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11203,7 +11323,18 @@
     "Get the mod": "मॉड प्राप्त करें",
     "shared": "साझा",
     "All maps": "सभी नक्शे",
-    "Victories": "जीत"
+    "Victories": "जीत",
+    "Best": "सर्वश्रेष्ठ",
+    "Loadouts": "लोडआउट",
+    "Setup": "सेटअप",
+    "beside": "बगल में",
+    "consumables": "उपभोग्य वस्तुएँ",
+    "field": "फ़ील्ड",
+    "figures": "आंकड़े",
+    "fitted": "सुसज्जित",
+    "performance": "प्रदर्शन",
+    "performs": "प्रदर्शन करता है",
+    "skills": "कौशल"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12216,7 +12347,18 @@
     "shared": "zajedničko",
     "All vehicles": "Sva vozila",
     "Defeats": "Poraza",
-    "All maps": "Sve mape"
+    "All maps": "Sve mape",
+    "Best": "Najbolji",
+    "Loadouts": "Konfiguracije",
+    "Setup": "Postava",
+    "beside": "pored",
+    "consumables": "potrošni materijali",
+    "field": "polje",
+    "figures": "brojke",
+    "fitted": "ugrađeno",
+    "performance": "učinak",
+    "performs": "učinak",
+    "skills": "vještine"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13231,7 +13373,18 @@
     "shared": "megosztott",
     "All vehicles": "Minden jármű",
     "Defeats": "Vereségek",
-    "All maps": "Minden pálya"
+    "All maps": "Minden pálya",
+    "Best": "Legjobb",
+    "Loadouts": "Felszerelések",
+    "Setup": "Összeállítás",
+    "beside": "mellett",
+    "consumables": "fogyócikkek",
+    "field": "mező",
+    "figures": "adatok",
+    "fitted": "felszerelt",
+    "performance": "teljesítmény",
+    "performs": "teljesít",
+    "skills": "képességek"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14242,7 +14395,18 @@
     "shared": "condiviso",
     "All vehicles": "Tutti i veicoli",
     "Defeats": "Sconfitte",
-    "All maps": "Tutte le mappe"
+    "All maps": "Tutte le mappe",
+    "Best": "Migliori",
+    "Loadouts": "Configurazioni",
+    "Setup": "Configurazione",
+    "beside": "accanto a",
+    "consumables": "consumabili",
+    "field": "campo",
+    "figures": "valori",
+    "fitted": "installato",
+    "performance": "prestazioni",
+    "performs": "rende",
+    "skills": "abilità"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15260,7 +15424,18 @@
     "shared": "共有",
     "All vehicles": "全ての車輌",
     "Defeats": "敗北",
-    "All maps": "全マップ"
+    "All maps": "全マップ",
+    "Best": "最高",
+    "Loadouts": "装備構成",
+    "Setup": "セットアップ",
+    "beside": "横に",
+    "consumables": "消耗品",
+    "field": "項目",
+    "figures": "数値",
+    "fitted": "搭載済み",
+    "performance": "性能",
+    "performs": "活躍する",
+    "skills": "スキル"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16048,7 +16223,17 @@
     "Get the mod": "Модты жүктеп алу",
     "shared": "ортақ",
     "All maps": "Барлық карталар",
-    "Victories": "Жеңістер"
+    "Victories": "Жеңістер",
+    "Best": "Үздік",
+    "Loadouts": "Жинақтар",
+    "Setup": "Баптау",
+    "beside": "жанында",
+    "consumables": "шығын материалдары",
+    "field": "өріс",
+    "figures": "көрсеткіштер",
+    "fitted": "орнатылған",
+    "performs": "көрсеткіштері",
+    "skills": "дағдылар"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17070,7 +17255,18 @@
     "Get the mod": "모드 받기",
     "shared": "공유",
     "All vehicles": "모두 표시",
-    "All maps": "모든 지도"
+    "All maps": "모든 지도",
+    "Best": "최고",
+    "Loadouts": "장비 구성",
+    "Setup": "세팅",
+    "beside": "옆에",
+    "consumables": "소모품",
+    "field": "항목",
+    "figures": "수치",
+    "fitted": "장착",
+    "performance": "성능",
+    "performs": "활약",
+    "skills": "기술"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18088,7 +18284,18 @@
     "shared": "bendri",
     "All vehicles": "Visus šarvuočiams",
     "Defeats": "Pralaimėjimai",
-    "All maps": "Visi žemėlapiai"
+    "All maps": "Visi žemėlapiai",
+    "Best": "Geriausi",
+    "Loadouts": "Komplektacijos",
+    "Setup": "Sąranka",
+    "beside": "šalia",
+    "consumables": "eksploatacinės medžiagos",
+    "field": "laukas",
+    "figures": "rodikliai",
+    "fitted": "sumontuota",
+    "performance": "našumas",
+    "performs": "pasirodo",
+    "skills": "įgūdžiai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -19092,7 +19299,18 @@
     "shared": "koplietots",
     "All vehicles": "Visai bruņutehnikai",
     "Defeats": "Zaudējumi",
-    "All maps": "Visas kartes"
+    "All maps": "Visas kartes",
+    "Best": "Labākais",
+    "Loadouts": "Komplektācijas",
+    "Setup": "Iestatījums",
+    "beside": "blakus",
+    "consumables": "patēriņa materiāli",
+    "field": "lauks",
+    "figures": "rādītāji",
+    "fitted": "uzstādīts",
+    "performance": "sniegums",
+    "performs": "darbojas",
+    "skills": "prasmes"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20112,7 +20330,18 @@
     "shared": "gedeeld",
     "All vehicles": "Alle voertuigen",
     "Defeats": "Nederlagen",
-    "All maps": "Alle kaarten"
+    "All maps": "Alle kaarten",
+    "Best": "Beste",
+    "Loadouts": "Uitrustingen",
+    "Setup": "Configuratie",
+    "beside": "naast",
+    "consumables": "verbruiksartikelen",
+    "field": "veld",
+    "figures": "cijfers",
+    "fitted": "gemonteerd",
+    "performance": "prestatie",
+    "performs": "presteert",
+    "skills": "vaardigheden"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -21123,7 +21352,18 @@
     "shared": "delt",
     "All vehicles": "Alle kjøretøy",
     "Defeats": "Tap",
-    "All maps": "Alle kart"
+    "All maps": "Alle kart",
+    "Best": "Beste",
+    "Loadouts": "Oppsett",
+    "Setup": "Oppsett",
+    "beside": "ved siden av",
+    "consumables": "forbruksvarer",
+    "field": "felt",
+    "figures": "tall",
+    "fitted": "montert",
+    "performance": "prestasjon",
+    "performs": "presterer",
+    "skills": "ferdigheter"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -22131,7 +22371,18 @@
     "shared": "wspólne",
     "All vehicles": "Wszystkich pojazdów",
     "Defeats": "Przegrane",
-    "All maps": "Wszystkie mapy"
+    "All maps": "Wszystkie mapy",
+    "Best": "Najlepsze",
+    "Loadouts": "Wyposażenie",
+    "Setup": "Konfiguracja",
+    "beside": "obok",
+    "consumables": "materiały eksploatacyjne",
+    "field": "pole",
+    "figures": "statystyki",
+    "fitted": "zamontowane",
+    "performance": "osiągi",
+    "performs": "spisuje się",
+    "skills": "umiejętności"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -23132,7 +23383,18 @@
     "shared": "compartilhado",
     "All vehicles": "Todos os veículos",
     "Defeats": "Derrotas",
-    "All maps": "Todos os mapas"
+    "All maps": "Todos os mapas",
+    "Best": "Melhores",
+    "Loadouts": "Configurações",
+    "Setup": "Configuração",
+    "beside": "ao lado",
+    "consumables": "consumíveis",
+    "field": "campo",
+    "figures": "valores",
+    "fitted": "equipado",
+    "performance": "desempenho",
+    "performs": "tem desempenho",
+    "skills": "habilidades"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -24133,7 +24395,18 @@
     "shared": "partajat",
     "All vehicles": "Toate vehiculele",
     "Defeats": "Înfrângeri",
-    "All maps": "Toate hărțile"
+    "All maps": "Toate hărțile",
+    "Best": "Cele mai bune",
+    "Loadouts": "Configurații",
+    "Setup": "Configurație",
+    "beside": "lângă",
+    "consumables": "consumabile",
+    "field": "câmp",
+    "figures": "cifre",
+    "fitted": "echipate",
+    "performance": "performanță",
+    "performs": "performanțe",
+    "skills": "aptitudini"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -25122,7 +25395,18 @@
     "shared": "общие",
     "All vehicles": "Всю технику",
     "Defeats": "Поражений",
-    "All maps": "Все карты"
+    "All maps": "Все карты",
+    "Best": "Лучшие",
+    "Loadouts": "Комплектации",
+    "Setup": "Конфигурация",
+    "beside": "рядом",
+    "consumables": "расходники",
+    "field": "поле",
+    "figures": "показатели",
+    "fitted": "установленные",
+    "performance": "эффективность",
+    "performs": "показывает себя",
+    "skills": "умения"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -25911,7 +26195,17 @@
     "Get the mod": "Prenesi mod",
     "shared": "skupno",
     "All maps": "Vsi zemljevidi",
-    "Victories": "Zmage"
+    "Victories": "Zmage",
+    "Best": "Najboljši",
+    "Loadouts": "Postavitve",
+    "Setup": "Nastavitev",
+    "beside": "poleg",
+    "consumables": "potrošni material",
+    "field": "polje",
+    "figures": "podatki",
+    "fitted": "nameščeno",
+    "performs": "zmogljivosti",
+    "skills": "spretnosti"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -26926,7 +27220,18 @@
     "shared": "заједничко",
     "All vehicles": "Sva vozila",
     "Defeats": "Porazi",
-    "All maps": "Sve mape"
+    "All maps": "Sve mape",
+    "Best": "Najbolje",
+    "Loadouts": "Konfiguracije",
+    "Setup": "Postavka",
+    "beside": "pored",
+    "consumables": "potrošni materijali",
+    "field": "polje",
+    "figures": "brojke",
+    "fitted": "opremljeno",
+    "performance": "učinak",
+    "performs": "ponaša se",
+    "skills": "veštine"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -27946,7 +28251,18 @@
     "shared": "delad",
     "All vehicles": "Alla vagnar",
     "Defeats": "Förluster",
-    "All maps": "Alla kartor"
+    "All maps": "Alla kartor",
+    "Best": "Bäst",
+    "Loadouts": "Utrustningsuppsättningar",
+    "Setup": "Uppsättning",
+    "beside": "bredvid",
+    "consumables": "förbrukningsartiklar",
+    "field": "fält",
+    "figures": "siffror",
+    "fitted": "monterad",
+    "performance": "prestanda",
+    "performs": "presterar",
+    "skills": "färdigheter"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -28962,7 +29278,18 @@
     "shared": "ร่วมกัน",
     "All vehicles": "พาหนะทุกคัน",
     "Defeats": "แพ้",
-    "All maps": "แผนที่ทั้งหมด"
+    "All maps": "แผนที่ทั้งหมด",
+    "Best": "ดีที่สุด",
+    "Loadouts": "ชุดอุปกรณ์",
+    "Setup": "การจัดชุด",
+    "beside": "ข้างๆ",
+    "consumables": "ยุทโธปกรณ์",
+    "field": "ช่อง",
+    "figures": "ตัวเลข",
+    "fitted": "ติดตั้งแล้ว",
+    "performance": "ประสิทธิภาพ",
+    "performs": "ทำผลงาน",
+    "skills": "ทักษะ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -29752,7 +30079,17 @@
     "Get the mod": "Kunin ang mod",
     "shared": "magkasama",
     "All maps": "Lahat ng mapa",
-    "Victories": "Mga tagumpay"
+    "Victories": "Mga tagumpay",
+    "Best": "Pinakamahusay",
+    "Loadouts": "Mga loadout",
+    "Setup": "Konpigurasyon",
+    "beside": "katabi",
+    "consumables": "mga consumable",
+    "field": "patlang",
+    "figures": "mga bilang",
+    "fitted": "nakakabit",
+    "performs": "pagganap",
+    "skills": "mga kasanayan"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -30764,7 +31101,18 @@
     "shared": "paylaşılan",
     "All vehicles": "Tüm araçlar",
     "Defeats": "Yenilgiler",
-    "All maps": "Tüm haritalar"
+    "All maps": "Tüm haritalar",
+    "Best": "En iyi",
+    "Loadouts": "Donanımlar",
+    "Setup": "Kurulum",
+    "beside": "yanında",
+    "consumables": "sarf malzemeleri",
+    "field": "alan",
+    "figures": "değerler",
+    "fitted": "takılı",
+    "performance": "performans",
+    "performs": "performans gösterir",
+    "skills": "beceriler"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -31769,7 +32117,18 @@
     "shared": "спільні",
     "All vehicles": "Всю техніку",
     "Defeats": "Поразок",
-    "All maps": "Усі карти"
+    "All maps": "Усі карти",
+    "Best": "Найкращі",
+    "Loadouts": "Комплектації",
+    "Setup": "Комплектація",
+    "beside": "поруч",
+    "consumables": "спорядження",
+    "field": "поле",
+    "figures": "показники",
+    "fitted": "встановлено",
+    "performance": "результативність",
+    "performs": "показує",
+    "skills": "навички"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -32763,7 +33122,18 @@
     "shared": "chung",
     "All vehicles": "Tất cả xe",
     "Defeats": "Thất bại",
-    "All maps": "Tất cả bản đồ"
+    "All maps": "Tất cả bản đồ",
+    "Best": "Tốt nhất",
+    "Loadouts": "Bộ trang bị",
+    "Setup": "Thiết lập",
+    "beside": "bên cạnh",
+    "consumables": "vật tư tiêu hao",
+    "field": "trường",
+    "figures": "số liệu",
+    "fitted": "đã lắp",
+    "performance": "hiệu suất",
+    "performs": "thể hiện",
+    "skills": "kỹ năng"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -33779,6 +34149,17 @@
     "shared": "共享",
     "All vehicles": "所有坦克",
     "Defeats": "失败",
-    "All maps": "所有地图"
+    "All maps": "所有地图",
+    "Best": "最佳",
+    "Loadouts": "装备方案",
+    "Setup": "配置",
+    "beside": "旁边",
+    "consumables": "消耗品",
+    "field": "字段",
+    "figures": "数值",
+    "fitted": "已安装",
+    "performance": "表现",
+    "performs": "表现",
+    "skills": "技能"
   }
 }

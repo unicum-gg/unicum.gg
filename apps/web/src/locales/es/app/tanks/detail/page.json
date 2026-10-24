@@ -7,6 +7,10 @@
     "title": "Rendimiento: {tank} ({region}), estadísticas del servidor y mejores jugadores",
     "description": "Rendimiento en World of Tanks: {tank} ({region}), con los promedios del servidor de porcentaje de victorias, daño y asistencia, los mejores jugadores con este tanque de nivel {tier} de {nation} y los valores esperados de WN8 y WNX."
   },
+  "loadouts": {
+    "title": "Mejor equipamiento y habilidades de la tripulación para {tank} ({region})",
+    "description": "Configuraciones de World of Tanks para {tank} ({region}): el equipamiento, los consumibles, las directivas, las modificaciones de campo y las habilidades de la tripulación que los jugadores realmente equipan en batalla, cómo rinde cada configuración, además de las configuraciones y mejores batallas de los mejores jugadores con este tanque de nivel {tier} de {nation}."
+  },
   "marks": {
     "title": "Marcas de excelencia y maestría: {tank} ({region})",
     "description": "Requisitos de las marcas de excelencia y las insignias de maestría en World of Tanks: {tank} ({region}), junto con su historial para este tanque de nivel {tier} de {nation}."

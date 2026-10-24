@@ -7,6 +7,10 @@
     "title": "Prestazioni: {tank} ({region}), statistiche del server e migliori giocatori",
     "description": "Prestazioni in World of Tanks, {tank} ({region}): percentuale di vittorie media del server, danni e assistenza medi, migliori giocatori su questo carro {nation} di livello {tier}, oltre ai valori attesi WN8 e WNX."
   },
+  "loadouts": {
+    "title": "Migliore equipaggiamento e abilità dell’equipaggio per {tank} ({region})",
+    "description": "Configurazioni di World of Tanks per {tank} ({region}): l’equipaggiamento, i consumabili, le direttive, le modifiche sul campo e le abilità dell’equipaggio che i giocatori installano effettivamente in battaglia, con le prestazioni di ogni configurazione, oltre alle configurazioni e alle migliori battaglie dei migliori giocatori con questo carro armato di livello {tier} della {nation}."
+  },
   "marks": {
     "title": "Marchi d’eccellenza e maestria: {tank} ({region})",
     "description": "Requisiti per i marchi d’eccellenza e i distintivi di maestria in World of Tanks, {tank} ({region}), con la relativa cronologia per questo carro {nation} di livello {tier}."
