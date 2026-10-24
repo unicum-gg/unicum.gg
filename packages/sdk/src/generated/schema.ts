@@ -1199,6 +1199,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tanks/{slug}/loadouts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank loadouts
+         * @description What a vehicle's players actually fit to it in battle: equipment, consumables, directives, field modifications, crew skills, the complete setups players run, how much of the rack costs gold, and the best battles with exactly what was fitted for each. Counted from the battles recorded through the unicum.gg mod, one battle mode at a time (random by default, never pooled), over the last 90 days, never from what sits in a garage today: equipment changes with the game, and a setup belongs beside the battle it was fitted for. Wargaming publishes what a tank does and never what anyone put on it, so this is the only source for any of it. Every share is counted in players and comes with the sample it was counted over, and the performance beside a setup is the result of the battles it was fitted in, next to the same players' result in the vehicle over all their counted battles.
+         */
+        get: operations["get-{region}-tanks-{slug}-loadouts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tanks/{slug}/rate": {
         parameters: {
             query?: never;
@@ -3686,6 +3706,19 @@ export interface components {
             role: string;
             skills: string[];
         };
+        LoadoutCrewSkillUsage: {
+            role: string;
+            skill: string;
+            /** @description Players whose crew had this seat trained in it. */
+            count: number;
+            /** @description Battles fought with it. */
+            battles: number;
+            /** @description Players whose crew has this seat at all, which share is over. */
+            crews: number;
+            /** @description count over crews rather than over the whole sample, since crews are not all the same size. */
+            share: number;
+            performance: components["schemas"]["LoadoutPerformance"];
+        };
         /** @description One equipment-and-directives setup. Both lists are indexed by slot, so an empty slot is null. */
         LoadoutDevicesLayout: {
             optDevices: (string | null)[];
@@ -3743,10 +3776,59 @@ export interface components {
             categories: string[];
             effects: components["schemas"]["equipmentEffect"][];
         };
+        LoadoutItemUsage: {
+            /**
+             * @description Which family the fitted item belongs to.
+             * @enum {string}
+             */
+            kind: "equipment" | "consumable" | "directive" | "fieldMod";
+            /** @description The client's own key, e.g. improvedVentilation_tier1. A field modification is keyed by the catalogue key of the side of the pair taken. */
+            key: string;
+            /** @description Players who ran it in at least one counted battle. */
+            count: number;
+            /** @description Battles it was fitted in. */
+            battles: number;
+            /** @description count over the sample, 0 to 1. A player who ran two setups counts under both, so a family's shares need not add up to one. */
+            share: number;
+            performance: components["schemas"]["LoadoutPerformance"];
+        };
         /** @description A fitted module. `id` is the game's compact descriptor, which is its identity; `name` is the client's own name for it and is scoped to a nation. */
         LoadoutModule: {
             id: number;
             name: string;
+        };
+        /** @description How the battles behind a row went, beside the same players' usual figures in the vehicle. Present at any size: below five players a row describes the people more than the setup, which a caller should say rather than hide. Each figure is the result of the battles the setup was actually fitted in, which still says who runs it as much as what it does. */
+        LoadoutPerformance: {
+            /** @description Different players among the battles behind this row. */
+            players: number;
+            /** @description Battles behind this row. */
+            battles: number;
+            /** @description Battles won over battles, 0 to 1. A draw is not a win. */
+            winrate: number | null;
+            /** @description The same players' overall account win rate, weighted by their battles under this row, over the players a win rate is held for. The difference with winrate says how the setup plays against how good its players are in general. */
+            playerWinrate: number | null;
+            /** @description Damage dealt per battle. */
+            avgDamage: number | null;
+            /** @description Damage dealt by others on this player's spotting or tracking, per battle. */
+            avgAssist: number | null;
+            /** @description WN7, WN8 and WNX over these battles, with the site's own formulas and expected values. */
+            rating: components["schemas"]["ratings"];
+            /** @description The same players' overall account ratings, weighted by their battles under this row, over the players a rating is held for. */
+            playerRating: components["schemas"]["ratings"];
+        };
+        LoadoutPopularSetup: {
+            /**
+             * @description Which family this combines: equipment and consumables, filled as a set of three, or field mods, the whole tree of choices in the tree's own order.
+             * @enum {string}
+             */
+            kind: "equipment" | "consumable" | "directive" | "fieldMod";
+            /** @description What is fitted, in the slot order most of its battles used. The same three are one setup however the slots were arranged. */
+            items: string[];
+            /** @description Players who ran it in at least one counted battle. */
+            count: number;
+            battles: number;
+            share: number;
+            performance: components["schemas"]["LoadoutPerformance"];
         };
         /** @description Field modifications: the level reached and the side taken of each pair. A tier XI vehicle has a skill tree instead, and carries its received steps in `tree` with `level` null and `pairs` empty. */
         LoadoutProgression: {
@@ -3776,6 +3858,14 @@ export interface components {
             overlay: string | null;
             /** @description The Equipment 2.0 categories the game dots the box with. */
             categories?: string[];
+        };
+        loadoutsQueryOutput: {
+            /**
+             * @description Which battle mode to count, random by default. Modes are never pooled: each has its own economy and its own idea of a good result, so every figure in the response belongs to the one asked for. The modes field says which ones hold anything for this vehicle.
+             * @enum {string}
+             */
+            mode?: "random" | "onslaught" | "skirmish" | "advance";
+            language?: Record<string, never>;
         };
         mapAxisAnswer: {
             axis: components["schemas"]["mapRatingAxisField"];
@@ -5469,6 +5559,11 @@ export interface components {
             wn8: number | null;
             wnx: number | null;
         };
+        ratings: {
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+        };
         /** @description One half-open band of a scale: `from` included, `to` excluded. */
         RatingScaleBand: {
             /**
@@ -6387,6 +6482,44 @@ export interface components {
             /** @description The consumables the vehicle can mount (repair/first-aid kits, extinguishers, food, fuel, ...) in three generic slots. */
             consumables: components["schemas"]["loadoutConsumable"][];
         };
+        TankLoadoutsResponse: {
+            tankId: number;
+            /**
+             * @description The battle mode every figure below was counted in.
+             * @enum {string}
+             */
+            mode: "random" | "onslaught" | "skirmish" | "advance";
+            /** @description Every mode's own sample for this vehicle, whichever mode was asked for, so a caller can pick a mode that holds something. */
+            modes: {
+                /**
+                 * @description A battle mode the vehicle can be counted in.
+                 * @enum {string}
+                 */
+                mode: "random" | "onslaught" | "skirmish" | "advance";
+                players: number;
+                battles: number;
+            }[];
+            /** @description Players in this mode. Every share in this payload is over this number, so a share should never be read without it. */
+            sample: number;
+            /** @description Their battles, which the performance figures are counted over. */
+            battles: number;
+            items: components["schemas"]["LoadoutItemUsage"][];
+            crewSkills: components["schemas"]["LoadoutCrewSkillUsage"][];
+            setups: components["schemas"]["LoadoutPopularSetup"][];
+            ammo: {
+                battles: number;
+                /** @description Mean share of the rack bought with gold, 0 to 1, per battle rather than per round. Null while no counted battle carries a premium round, since the flag it is read from may simply not have been reported. */
+                premiumShare: number | null;
+                shellsLoaded: number | null;
+            };
+            topPlayers: components["schemas"]["TankTopPlayer"][];
+            topBattles: components["schemas"]["TankTopBattle"][];
+            /**
+             * Format: date-time
+             * @description Newest battle counted, so a reader can see how current this is.
+             */
+            updatedAt: Date | null;
+        };
         /** @description Where the account's own combined damage sits against the region's three Marks of Excellence bars on this vehicle: `combined` over `markN` is how much of that mark's bar the player's average covers, and 1 or more means it already clears it. Null where no honest reading exists: below tier 5 (the game awards no marks there), under 25 battles on the vehicle, or when the region has no usable bars for it. This is an average against a published bar, never the game's own rolling-window progress, which is `moePercent`. */
         TankMarkReach: {
             combined: number;
@@ -6749,6 +6882,71 @@ export interface components {
             tier: number;
             nation: string;
             type: string;
+        };
+        /** @description One player's best battle in this vehicle by damage dealt, with exactly what was fitted for it. One battle per player. Players who asked not to be shown are absent here while still counting towards every share above. */
+        TankTopBattle: {
+            player: components["schemas"]["TankTopBattlePlayer"];
+            /** @description The battle, exactly as the player's own Battles tab answers it, loadout included. */
+            battle: components["schemas"]["PlayerBattle"];
+        };
+        TankTopBattlePlayer: {
+            nickname: string;
+            accountId: number;
+            clanTag: string | null;
+            clanColor: string | null;
+            isVerified: boolean;
+            isSupporter: boolean;
+            twitchLogin: string | null;
+            tournamentWins: number;
+            tournamentFeaturedWins: number;
+            tournamentBestTitle: string | null;
+            onslaughtBestTier: string | null;
+            onslaughtBestRank: number | null;
+            onslaughtSeasons: number;
+        };
+        /** @description One of the best players in this vehicle among those whose battles are recorded, ranked on their career in it, with the loadout of their latest recorded battle in this mode. The top ten of each rating metric are included. Players who asked not to be shown are absent. */
+        TankTopPlayer: {
+            nickname: string;
+            accountId: number;
+            clanTag: string | null;
+            clanColor: string | null;
+            isVerified: boolean;
+            isSupporter: boolean;
+            twitchLogin: string | null;
+            tournamentWins: number;
+            tournamentFeaturedWins: number;
+            tournamentBestTitle: string | null;
+            onslaughtBestTier: string | null;
+            onslaughtBestRank: number | null;
+            onslaughtSeasons: number;
+            /** @description Their whole record in this vehicle. */
+            battles: number;
+            winrate: number | null;
+            avgDamage: number | null;
+            /** @description WN7, WN8 and WNX over their whole record in this vehicle, which the ranking reads. */
+            rating: components["schemas"]["ratings"];
+            /** @description The recorded battle the loadout was read from: their latest in this mode. */
+            loadoutBattle: {
+                arenaUniqueId: string;
+                /** Format: date-time */
+                startedAt: Date;
+            };
+            /** @description By slot, a free slot as null. */
+            equipment: (string | null)[];
+            directives: (string | null)[];
+            consumables: (string | null)[];
+            /** @description Every pair of the vehicle's tree, in tree order: the side taken, or null for a pair not taken. */
+            fieldMods: (string | null)[];
+            crew: {
+                role: string;
+                skills: string[];
+            }[];
+            shells: {
+                name: string;
+                type: string;
+                premium: boolean;
+                count: number;
+            }[];
         };
         tankVideo: {
             id: number;
@@ -9044,6 +9242,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TankHistoryResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-loadouts": {
+        parameters: {
+            query?: {
+                /** @description Which battle mode to count, random by default. Modes are never pooled: each has its own economy and its own idea of a good result, so every figure in the response belongs to the one asked for. The modes field says which ones hold anything for this vehicle. */
+                mode?: "random" | "onslaught" | "skirmish" | "advance";
+                language?: components["schemas"]["answerLanguageField"];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankLoadoutsResponse"];
                 };
             };
         };

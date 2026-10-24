@@ -292,6 +292,15 @@ class TankClient {
     );
   }
 
+  /** Tank loadouts */
+  loadouts(query?: QueryOf<"/{region}/tanks/{slug}/loadouts">) {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/loadouts", path, query),
+      () => this.api.GET("/{region}/tanks/{slug}/loadouts", { params: { path, query } }),
+    );
+  }
+
   /** Tank Marks of Excellence */
   marksOfExcellence() {
     const path = { region: this.region, slug: this.slug };
