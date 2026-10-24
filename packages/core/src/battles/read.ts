@@ -297,11 +297,47 @@ export async function recentBattlesOf(
   filter: PlayerBattleFilter = {},
 ): Promise<PlayerBattle[]> {
   const table = battlesByRegion[region];
+  const wanted = Math.min(Math.max(1, Math.trunc(limit)), MAX_RECENT_BATTLES);
+  const rows = await battleRows(region, accountId)
+    .where(playerBattlesWhere(table, accountId, filter))
+    .orderBy(desc(table.startedAt))
+    .limit(wanted)
+    .offset(Math.max(0, Math.trunc(offset)));
+  return assembleBattles(region, accountId, rows);
+}
+
+/**
+ * One battle, as the row of `accountId`'s list would draw it, or null.
+ *
+ * For a surface that already knows which battles it wants (a vehicle's best
+ * battles, one per player) and must draw them exactly as the player's own
+ * Battles tab does. Found by the primary key, so it is one index probe.
+ */
+export async function battleOfAccount(
+  region: Region,
+  accountId: number,
+  id: string,
+  startedAt: Date,
+): Promise<PlayerBattle | null> {
+  const table = battlesByRegion[region];
+  const rows = await battleRows(region, accountId)
+    .where(and(eq(table.startedAt, startedAt), eq(table.arenaUniqueId, id)))
+    .limit(1);
+  return (await assembleBattles(region, accountId, rows))[0] ?? null;
+}
+
+/**
+ * The columns a battle row is read with, for one account, before any filter.
+ *
+ * Shared by the list and the single-battle read so the two can never draw a
+ * battle differently.
+ */
+function battleRows(region: Region, accountId: number) {
+  const table = battlesByRegion[region];
   const loadouts = battleLoadoutsByRegion[region];
   /** This table's own name, to qualify it inside the subquery below. */
   const outer = sql.identifier(getTableName(table));
-  const wanted = Math.min(Math.max(1, Math.trunc(limit)), MAX_RECENT_BATTLES);
-  const rows = await db
+  return db
     .select({
       id: table.arenaUniqueId,
       startedAt: table.startedAt,
@@ -361,10 +397,17 @@ export async function recentBattlesOf(
       )`,
     })
     .from(table)
-    .where(playerBattlesWhere(table, accountId, filter))
-    .orderBy(desc(table.startedAt))
-    .limit(wanted)
-    .offset(Math.max(0, Math.trunc(offset)));
+    .$dynamic();
+}
+
+type BattleRowRecord = Awaited<ReturnType<ReturnType<typeof battleRows>["execute"]>>[number];
+
+/** Rows of `battleRows`, named, rated and drawn. */
+async function assembleBattles(
+  region: Region,
+  accountId: number,
+  rows: BattleRowRecord[],
+): Promise<PlayerBattle[]> {
 
   // One catalogue read for the whole page, from a cache that is already warm
   // in any process that has drawn a vehicle. The expected values are global,
