@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Häntä eksponentti venyttää mittausasteikon yläosaa, joten hyvän ja erinomaisen tilin välinen ero pysyy näkyvissä sen sijaan että se puristuisi. ```
 
-Odotusarvot tulevat tomato.gg:stä, joka laskee ne uudelleen suuresta otoksesta seurattuja tilejä. Tämä on oletusluokitus unicum.gg:ssä, koska se reagoi nopeimmin siihen, miten ajoneuvoa pelataan nykyisin.
+Odotusarvot lasketaan uudelleen suuresta otoksesta seurattuja tilejä. Tämä on oletusluokitus unicum.gg:ssä, koska se reagoi nopeimmin siihen, miten ajoneuvoa pelataan nykyisin.

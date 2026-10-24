@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 De tail exponent strekt de top van de schaal uit, zodat de kloof tussen een goed en een uitzonderlijk account zichtbaar blijft in plaats van samengedrukt te worden. ```
 
-De verwachte waarden komen van tomato.gg, die ze opnieuw berekent op basis van een grote steekproef van bijgehouden accounts. Dit is de standaard beoordeling op unicum.gg omdat het het snelst reageert op hoe een voertuig vandaag de dag daadwerkelijk wordt gespeeld.
+De verwachte waarden worden opnieuw berekend op basis van een grote steekproef van bijgehouden accounts. Dit is de standaard beoordeling op unicum.gg omdat het het snelst reageert op hoe een voertuig vandaag de dag daadwerkelijk wordt gespeeld.

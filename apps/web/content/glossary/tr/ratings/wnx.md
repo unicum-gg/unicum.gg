@@ -28,4 +28,4 @@ Not: Yukarıdaki formülle çözümleyin ve elde edilen sonucu kesirli veya tam 
 
 Sonuç üssü ölçek üstünü genişletir, bu nedenle iyi ve olağanüstü hesaplar arasındaki fark görünür kalır, sıkışmaz. ```
 
-Beklenen değerler, büyük bir izlenen hesap örneğinden yeniden hesaplanan tomato.gg'den gelir. Bu, unicum.gg'deki varsayılan derecelendirmedir çünkü bir aracın bugün nasıl oynandığına en hızlı tepki verir.
+Beklenen değerler, izlenen hesaplardan oluşan büyük bir örneklemden yeniden hesaplanır. Bu, unicum.gg'deki varsayılan derecelendirmedir çünkü bir aracın bugün nasıl oynandığına en hızlı tepki verir.

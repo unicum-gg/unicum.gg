@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Wykładnik końcowy rozciąga górną część skali, dzięki czemu różnica między dobrym a wybitnym kontem pozostaje widoczna, zamiast ulegać spłaszczeniu. ```
 
-Oczekiwane wartości pochodzą z tomato.gg, które przelicza je na podstawie dużej próby śledzonych kont. Jest to domyślna ocena na unicum.gg, ponieważ najszybciej reaguje na to, jak danym pojazdem faktycznie gra się obecnie.
+Oczekiwane wartości są przeliczane na podstawie dużej próby śledzonych kont. Jest to domyślna ocena na unicum.gg, ponieważ najszybciej reaguje na to, jak danym pojazdem faktycznie gra się obecnie.

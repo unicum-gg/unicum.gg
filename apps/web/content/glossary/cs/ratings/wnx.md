@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Exponent v chvostu roztahuje horní část stupnice, takže rozdíl mezi dobrým a výjimečným účtem zůstává viditelný, místo aby se zmenšoval. ```
 
-Očekávané hodnoty pocházejí z tomato.gg, který je přepočítává z velkého vzorku sledovaných účtů. Jde o výchozí hodnocení na unicum.gg, protože nejrychleji reaguje na to, jak se s daným vozidlem skutečně hraje v současnosti.
+Očekávané hodnoty se přepočítávají z velkého vzorku sledovaných účtů. Jde o výchozí hodnocení na unicum.gg, protože nejrychleji reaguje na to, jak se s daným vozidlem skutečně hraje v současnosti.

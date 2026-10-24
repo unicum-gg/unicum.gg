@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 El exponente final estira la parte superior de la escala, por lo que la diferencia entre una buena y una cuenta excepcional se mantiene visible en lugar de comprimirse. ```
 
-Los valores esperados provienen de tomato.gg, que los recomputa a partir de una gran muestra de cuentas rastreadas. Esta es la clasificación predeterminada en unicum.gg porque reacciona más rápido a cómo se juega realmente un vehículo hoy en día.
+Los valores esperados se recalculan a partir de una gran muestra de cuentas rastreadas. Esta es la clasificación predeterminada en unicum.gg porque reacciona más rápido a cómo se juega realmente un vehículo hoy en día.

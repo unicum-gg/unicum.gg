@@ -25,4 +25,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 A kifejezés szorzója meghosszabbítja a skála tetejét, így a különbség egy jó és egy kivételes teljesítmény között látható marad a tömörítés helyett. ```
 
-A várható értékek a tomato.gg-től származnak, amelyeket egy nagy mintán nyilvántartott fiókok alapján számítanak újra. Ez a default értékelés az unicum.gg-n, mert a leggyorsabban reagál arra, ahogy egy járműt valójában ma játszanak.
+A várható értékeket nyilvántartott fiókok nagy mintája alapján számítják újra. Ez a default értékelés az unicum.gg-n, mert a leggyorsabban reagál arra, ahogy egy járműt valójában ma játszanak.

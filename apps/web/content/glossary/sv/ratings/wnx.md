@@ -25,4 +25,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Not: Exponenten i slutet sträcker toppen av skalan, så avståndet mellan ett bra och ett exceptionellt konto förblir synligt istället för att komprimeras. ```
 
-De förväntade värdena kommer från tomato.gg, som omberäknar dem från ett stort urval av spårade konton. Detta är standardbetyget på unicum.gg eftersom det reagerar snabbast på hur ett fordon faktiskt spelas idag.
+De förväntade värdena räknas om från ett stort urval av spårade konton. Detta är standardbetyget på unicum.gg eftersom det reagerar snabbast på hur ett fordon faktiskt spelas idag.

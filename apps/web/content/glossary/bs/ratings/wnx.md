@@ -25,4 +25,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Tail eksponent rasteže vrh skale, tako da razlika između dobrog i izuzetnog naloga ostaje vidljiva umjesto da se kompresuje. ```
 
-Očekivane vrijednosti dolaze sa tomato.gg, koja ih preračunava iz velikog uzorka praćenih naloga. Ovo je podrazumijevajući rejting na unicum.gg jer najbrže reaguje na način na koji se vozilo trenutno igra.
+Očekivane vrijednosti se preračunavaju iz velikog uzorka praćenih naloga. Ovo je podrazumijevajući rejting na unicum.gg jer najbrže reaguje na način na koji se vozilo trenutno igra.

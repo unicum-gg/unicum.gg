@@ -27,4 +27,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 ``` 
 
-Mūsu sagaidāmās vērtības nāk no tomato.gg, kas tās aprēķina no liela sekojošo kontu parauga. Tas ir noklusējuma reitings uz unicum.gg, jo tas reaģē visstraujāk uz to, kā transportlīdzeklis tiek spēlēts šodien.
+Sagaidāmās vērtības tiek pārrēķinātas no liela sekoto kontu parauga. Tas ir noklusējuma reitings uz unicum.gg, jo tas reaģē visstraujāk uz to, kā transportlīdzeklis tiek spēlēts šodien.

@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 L'exposant final étire le haut de l'échelle, de sorte que l'écart entre un bon compte et un compte exceptionnel reste visible au lieu d'être comprimé. ```
 
-Les valeurs attendues proviennent de tomato.gg, qui les recalcule à partir d'un vaste échantillon de comptes suivis. Il s'agit de la cote par défaut sur unicum.gg, car elle s'adapte le plus rapidement à la manière dont un véhicule est réellement joué aujourd'hui.
+Les valeurs attendues sont recalculées à partir d’un vaste échantillon de comptes suivis. Il s'agit de la cote par défaut sur unicum.gg, car elle s'adapte le plus rapidement à la manière dont un véhicule est réellement joué aujourd'hui.

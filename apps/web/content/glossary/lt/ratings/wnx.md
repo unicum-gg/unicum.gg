@@ -25,4 +25,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Pabaigos eksponentas ištempia skalės viršūnę, todėl atotrūkis tarp gero ir išskirtinio paskyros išlieka matomas, o ne suspaustas. ```
 
-Tikėtinos vertės gaunamos iš tomato.gg, kuris jas perskaičiuoja iš didelės sekamos paskyrų imties. Tai yra numatytasis reitingas unicum.gg, nes jis greičiausiai reaguoja į tai, kaip tankas iš tikrųjų žaidžiamas šiandien.
+Tikėtinos vertės perskaičiuojamos iš didelės sekamų paskyrų imties. Tai yra numatytasis reitingas unicum.gg, nes jis greičiausiai reaguoja į tai, kaip tankas iš tikrųjų žaidžiamas šiandien.

@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Der Exponent am oberen Ende streckt den Spitzenbereich der Skala, sodass der Abstand zwischen einem guten und einem außergewöhnlichen Konto sichtbar bleibt, statt gestaucht zu werden. ```
 
-Die Erwartungswerte stammen von tomato.gg, wo sie anhand einer großen Stichprobe erfasster Konten neu berechnet werden. Dies ist die Standardwertung auf unicum.gg, da sie am schnellsten darauf reagiert, wie ein Fahrzeug aktuell tatsächlich gespielt wird.
+Die Erwartungswerte werden anhand einer großen Stichprobe erfasster Konten neu berechnet. Dies ist die Standardwertung auf unicum.gg, da sie am schnellsten darauf reagiert, wie ein Fahrzeug aktuell tatsächlich gespielt wird.

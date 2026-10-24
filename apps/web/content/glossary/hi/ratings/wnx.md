@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 The tail exponent stretches the top of the scale, so the gap between a good and an exceptional account stays visible instead of compressing. ```
 
-अपेक्षित मान tomato.gg से आते हैं, जो उन्हें ट्रैक किए गए खातों के एक बड़े नमूने से फिर से गणना करता है। यह unicum.gg पर डिफ़ॉल्ट रेटिंग है क्योंकि यह आज वाहन को वास्तव में कैसे खेला जाता है, पर सबसे तेज़ प्रतिक्रिया करता है।
+अपेक्षित मानों की गणना ट्रैक किए गए खातों के एक बड़े नमूने से फिर से की जाती है। यह unicum.gg पर डिफ़ॉल्ट रेटिंग है क्योंकि यह आज वाहन को वास्तव में कैसे खेला जाता है, पर सबसे तेज़ प्रतिक्रिया करता है।

@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Opomba: Ta formula je zasnovana tako, da nagrajuje večji doseg med dobrim in izjemnim računom. ```
 
-Pričakovane vrednosti prihajajo iz tomato.gg, ki jih preračunava na podlagi velikega vzorca spremljanih računov. To je privzet ocena na unicum.gg, ker se najhitreje odzove na način, kako se tank danes dejansko igra.
+Očakávané hodnoty sa prepočítavajú z veľkej vzorky sledovaných účtov. To je privzet ocena na unicum.gg, ker se najhitreje odzove na način, kako se tank danes dejansko igra.

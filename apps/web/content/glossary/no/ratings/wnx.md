@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Notatet: Eksponenten på halen strekker toppen av skalaen, så gapet mellom en god og en eksepsjonell konto forblir synlig i stedet for å bli komprimert. ```
 
-De forventede verdiene kommer fra tomato.gg, som beregner dem på nytt fra et stort utvalg av sporede kontoer. Dette er den standard vurderingen på unicum.gg fordi den reagerer raskest på hvordan et kjøretøy faktisk spilles i dag.
+De forventede verdiene beregnes på nytt fra et stort utvalg av sporede kontoer. Dette er den standard vurderingen på unicum.gg fordi den reagerer raskest på hvordan et kjøretøy faktisk spilles i dag.

@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Tail eksponenten strækker toppen af skalaen, så forskellen mellem en god og en exceptionel konto forbliver synlig i stedet for at blive komprimeret. ```
 
-De forventede værdier kommer fra tomato.gg, som genberegner dem fra et stort udvalg af sporede konti. Dette er den standardbedømmelse på unicum.gg fordi den reagerer hurtigst på hvordan et køretøj faktisk spilles i dag.
+De forventede værdier genberegnes ud fra et stort udvalg af sporede konti. Dette er den standardbedømmelse på unicum.gg fordi den reagerer hurtigst på hvordan et køretøj faktisk spilles i dag.

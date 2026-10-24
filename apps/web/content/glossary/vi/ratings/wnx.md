@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Phần số mũ kéo dài đầu của thang, do đó khoảng cách giữa một tài khoản tốt và một tài khoản xuất sắc vẫn được hiển thị thay vì bị nén. ```
 
-Các giá trị dự kiến đến từ tomato.gg, nơi tính toán lại chúng từ một mẫu lớn các tài khoản đã được theo dõi. Đây là xếp hạng mặc định trên unicum.gg vì nó phản ứng nhanh nhất với cách mà một xe thực sự được chơi ngày hôm nay.
+Các giá trị dự kiến được tính toán lại từ một mẫu lớn các tài khoản đã được theo dõi. Đây là xếp hạng mặc định trên unicum.gg vì nó phản ứng nhanh nhất với cách mà một xe thực sự được chơi ngày hôm nay.

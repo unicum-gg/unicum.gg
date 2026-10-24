@@ -25,4 +25,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Eksponent na kraju širi vrh ljestvice, tako da razlika između dobrog i izvanrednog računa ostaje vidljiva umjesto da se komprimira. ```
 
-Očekivane vrijednosti dolaze s tomato.gg, koja ih preračunava iz velikog uzorka praćenih računa. Ovo je defaultna ocjena na unicum.gg jer najbrže reagira na to kako se vozilo zapravo igra danas.
+Očekivane vrijednosti preračunavaju se iz velikog uzorka praćenih računa. Ovo je defaultna ocjena na unicum.gg jer najbrže reagira na to kako se vozilo zapravo igra danas.

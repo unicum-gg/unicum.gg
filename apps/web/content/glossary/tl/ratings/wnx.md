@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Ang tail exponent ay nagpapahaba sa itaas ng scale, kaya ang agwat sa pagitan ng isang magandang account at isang pambihirang account ay nananatiling nakikita sa halip na kumikilos. ```
 
-Ang mga inaasahang halaga ay nagmula sa tomato.gg, na nire-recompute ito mula sa isang malaking sample ng mga na-tracked na account. Ito ang default na rating sa unicum.gg dahil ito ay mabilis na tumutugon sa kung paano talaga nilalaro ang isang sasakyan sa ngayon.
+Ang mga inaasahang halaga ay muling kinukuwenta mula sa isang malaking sample ng mga sinusubaybayang account. Ito ang default na rating sa unicum.gg dahil ito ay mabilis na tumutugon sa kung paano talaga nilalaro ang isang sasakyan sa ngayon.

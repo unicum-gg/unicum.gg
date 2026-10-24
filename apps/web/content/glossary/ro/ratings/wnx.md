@@ -26,4 +26,4 @@ raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x
 
 Exponentul de la coadă întinde partea de sus a scalei, astfel încât distanța dintre un cont bun și unul excepțional rămâne vizibilă în loc să se comprime. ```
 
-Valorile așteptate provin de la tomato.gg, care le recomputează dintr-un eșantion mare de conturi monitorizate. Aceasta este evaluarea implicită pe unicum.gg deoarece reacționează cel mai rapid la modul în care este jucat efectiv un vehicul astăzi.
+Valorile așteptate sunt recalculate dintr-un eșantion mare de conturi monitorizate. Aceasta este evaluarea implicită pe unicum.gg deoarece reacționează cel mai rapid la modul în care este jucat efectiv un vehicul astăzi.
