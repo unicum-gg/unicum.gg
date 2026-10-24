@@ -1,7 +1,15 @@
 import { UnicumError } from "@unicum.gg/sdk";
-import type { TankRatingSummary } from "@unicum.gg/shared";
+import {
+  LoadoutMode,
+  LOADOUT_MODES,
+  type TankRatingSummary,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
+import type {
+  TankLoadoutModeView,
+  TankLoadoutsPayload,
+} from "@/components/tanks/detail/loadouts/view";
 import type { SimilarTankRow } from "@/app/api/[region]/tanks/[slug]/similar/schema.api";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { buildSafe, unicum } from "@/services/sdk";
@@ -182,6 +190,13 @@ export function availableTabs(detail: TankDetail): TankDetailTab[] {
   return [
     ...(hasSpecifications ? [TankDetailTab.Specifications] : []),
     TankDetailTab.Performances,
+    // Always offered, and deliberately not read off the detail payload. That
+    // payload is cached under a shape version, so adding a loadout count to it
+    // would crash every cache hit until the old shape expired; and an empty
+    // Loadouts tab is where the mod that fills it gets explained, so hiding it
+    // on the vehicles with nothing would hide it from exactly the readers who
+    // could change that.
+    TankDetailTab.Loadouts,
     ...(hasMarks ? [TankDetailTab.Marks] : []),
     ...(hasHistory ? [TankDetailTab.History] : []),
     // Always offered, unlike the others, which hide when the payload has
@@ -192,4 +207,63 @@ export function availableTabs(detail: TankDetail): TankDetailTab[] {
     // to offer the form, or no vehicle could ever get its first vote.
     TankDetailTab.Community,
   ];
+}
+
+/**
+ * What this vehicle's players fit to it in battle, for the Loadouts tab: every
+ * battle mode that holds anything.
+ *
+ * Asked for per mode, because the tab ships them all and lets the reader
+ * switch without a round trip. That is forced rather than chosen:
+ * the catalogues naming each device and perk in the reader's language never
+ * reach the browser, so a client-side refetch would come back as a list of
+ * client keys nobody could read. The first answer carries every mode's sample,
+ * so only the modes with players are asked for at all, which on most vehicles
+ * today is none or one.
+ *
+ * `buildSafe`, not a bare catch, for the reason the ratings loader gives: this
+ * page is ISR, so a runtime failure has to propagate or one timed-out
+ * revalidation bakes an empty tab into the cache for half an hour on a vehicle
+ * that has plenty.
+ */
+export async function loadTankLoadouts(
+  region: Region,
+  slug: string,
+  /** Names the fitted items of the best battles, which the endpoint draws. */
+  locale: string,
+): Promise<TankLoadoutModeView[]> {
+  return buildSafe(async () => {
+    const ask = (mode: LoadoutMode) =>
+      unicum
+        .region(region)
+        .tanks(slug)
+        .loadouts({ mode, language: locale })
+        .then((r) => r as unknown as TankLoadoutsPayload)
+        // A slug the catalogue does not know is not a loadout failure: the tab
+        // resolves the vehicle through `loadTankTab`, which is what calls
+        // `notFound()`. Both run together, so letting the 404 out of here
+        // rejects the pair before the resolve can answer and a missing tank
+        // renders as a 500 on this tab alone.
+        .catch((error) => {
+          if (error instanceof UnicumError && error.status === 404) return null;
+          throw error;
+        });
+
+    const first = await ask(LoadoutMode.Random);
+    if (!first) return [];
+    const held = new Set(
+      first.modes.filter((entry) => entry.players > 0).map((entry) => entry.mode),
+    );
+    const modes = LOADOUT_MODES.filter((mode) => held.has(mode));
+
+    const views = await Promise.all(
+      modes.map(async (mode) => ({
+        mode,
+        stats: mode === LoadoutMode.Random ? first : await ask(mode),
+      })),
+    );
+    return views.filter(
+      (view): view is TankLoadoutModeView => view.stats !== null,
+    );
+  }, []);
 }

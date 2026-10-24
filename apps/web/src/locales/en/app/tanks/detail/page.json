@@ -7,6 +7,10 @@
     "title": "{tank} performances ({region}), server stats and best players",
     "description": "{tank} ({region}) World of Tanks performances: server-average winrate, damage and assist, the best players on this tier {tier} {nation} tank, plus WN8 and WNX expected values."
   },
+  "loadouts": {
+    "title": "{tank} best equipment and crew skills ({region})",
+    "description": "{tank} ({region}) World of Tanks loadouts: the equipment, consumables, directives, field modifications and crew skills players actually fit in battle, with how each setup performs, plus the builds and best battles of the top players on this tier {tier} {nation} tank."
+  },
   "marks": {
     "title": "{tank} marks of excellence and mastery ({region})",
     "description": "{tank} ({region}) World of Tanks marks of excellence and marks of mastery requirements, with their history on this tier {tier} {nation} tank."

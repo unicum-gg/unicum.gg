@@ -7,6 +7,7 @@
 export enum TankDetailTab {
   Specifications = "specifications",
   Performances = "performances",
+  Loadouts = "loadouts",
   Marks = "marks",
   History = "history",
   Videos = "videos",
@@ -19,6 +20,7 @@ export const TANK_DETAIL_TABS: {
 }[] = [
   { id: TankDetailTab.Specifications, segment: null },
   { id: TankDetailTab.Performances, segment: "performances" },
+  { id: TankDetailTab.Loadouts, segment: "loadouts" },
   { id: TankDetailTab.Marks, segment: "marks" },
   { id: TankDetailTab.History, segment: "history" },
   { id: TankDetailTab.Videos, segment: "videos" },

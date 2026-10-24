@@ -37,6 +37,7 @@ import {
   availableTabs,
   loadSimilarTanks,
   loadTankDetail,
+  loadTankLoadouts,
   loadTankRatings,
   loadTankVideos,
   type TankDetail,
@@ -110,7 +111,12 @@ export async function tankMetadata(
     // unrated, because that is where the rating form lives, but a page whose
     // only content is an empty form is not a page worth indexing.
     (tab === TankDetailTab.Community &&
-      (await loadTankRatings(region, detail.slug)).votes === 0);
+      (await loadTankRatings(region, detail.slug)).votes === 0) ||
+    // And the same again for Loadouts, which is likewise always offered so the
+    // mod that fills it can be explained on the vehicles that have nothing. A
+    // tab whose only content is that explanation is not a page worth indexing.
+    (tab === TankDetailTab.Loadouts &&
+      (await loadTankLoadouts(region, detail.slug, locale)).length === 0);
   return constructMetadata({
     locale,
     title,

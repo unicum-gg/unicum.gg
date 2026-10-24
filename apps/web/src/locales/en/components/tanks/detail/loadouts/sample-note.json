@@ -1,0 +1,6 @@
+{
+  "counted-from": "Counted from {battles} {mode} battles by {players} players over the last 90 days, recorded through {mod}. Last one played",
+  "the-mod": "the unicum.gg mod",
+  "small-sample": "That is a small sample: each row leads with its own count of players rather than a percentage, and its figures say more about those players than about the setup.",
+  "correlation": "Every setup is the one fitted for that battle, and the performance beside it is the result of those battles. It is still a correlation: players choose their setup, so each row also shows the same players’ overall figures."
+}

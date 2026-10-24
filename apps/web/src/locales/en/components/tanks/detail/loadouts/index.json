@@ -1,0 +1,40 @@
+{
+  "title": "What players fit to the {tank}",
+  "what-they-fit": "Loadouts",
+  "equipment": "Equipment",
+  "consumables": "Consumables",
+  "directives": "Directives",
+  "field-mods": "Field mods",
+  "col": {
+    "build": "Setup",
+    "player": "Player",
+    "usage": "Usage",
+    "damage": "Damage",
+    "winrate": "WR",
+    "player-winrate": "Player WR",
+    "player-winrate-tip": "The same players’ overall win rate, across their whole account, weighted by their battles with this setup.",
+    "delta": "±",
+    "delta-tip": "This setup’s figure minus the same players’ overall one, across their whole account.",
+    "assisted": "Assist",
+    "usage-tip": "Players who ran it in at least one counted battle, over the players counted.",
+    "player-rating": "Player {metric}",
+    "player-rating-tip": "The same players’ overall rating, across their whole account, weighted by their battles with this setup.",
+    "battles": "Battles",
+    "skill": "Skill"
+  },
+  "crew-skills": "Crew skills",
+  "crew-skills-hint": "Each skill the {role} had trained, counted in players whose crew has that seat, beside how the battles fought with it went.",
+  "counted": {
+    "equipment": "Counted as whole sets of three devices, the way players fit them, in players who ran each set.",
+    "consumables": "Counted as whole sets of three consumables, in players who ran each set.",
+    "directives": "Counted one directive at a time, in players who ran it.",
+    "field-mods": "Counted as whole field modification trees, every pair as the player took it, in players who ran each tree."
+  },
+  "top-battles": "Best battles",
+  "top-battles-hint": "Each player’s best battle in this tank by damage dealt, and exactly what they fitted for it. Open a battle for its full report.",
+  "thin-row": "Fewer than {count} players ran this, so these figures say more about them than about the setup.",
+  "top-players": "Best players",
+  "top-players-hint": "The best players in this tank among those whose battles are recorded, ranked on their whole record in it, with what they fitted in their latest recorded battle. Open a row for their crew.",
+  "crew": "Crew",
+  "show-crew": "Show the crew"
+}

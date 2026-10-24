@@ -3,6 +3,7 @@ export * from "./reserves";
 export * from "./equipment";
 export * from "./field-mods";
 export * from "./loadouts";
+export * from "./loadout-stats";
 export * from "./vehicle-modes";
 export * from "./battle-modes";
 export * from "./replay/blowfish";
