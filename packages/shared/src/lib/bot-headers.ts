@@ -3,7 +3,7 @@ import APP from "../app-identity";
 
 /**
  * Identification headers attached to every outbound HTTP request so
- * upstream services (Wargaming, G-Core CDN, tomato.gg) see a clearly named
+ * upstream services (Wargaming, G-Core CDN, the expected-values hosts) see a clearly named
  * bot rather than a generic `node`/`curl` signature:
  *
  * - `user-agent`: Googlebot-style `name/region/version (+url)` — the marker
@@ -16,7 +16,7 @@ import APP from "../app-identity";
  *   is a stable, honest signal.
  *
  * Region is optional: include it for Wargaming/portal calls (per-region
- * rate limits), omit for global services (tomato.gg, modxvm).
+ * rate limits), omit for global services (the expected-values hosts).
  */
 export function botHeaders(region?: Region): Record<string, string> {
   const product = region

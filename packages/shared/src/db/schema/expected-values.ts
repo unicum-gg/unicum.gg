@@ -10,7 +10,7 @@ import { jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 export enum ExpectedValuesSource {
   /** XVM's per-tank table, from `static.modxvm.com`. */
   WN8 = "wn8",
-  /** Tomato.gg's per-tank table. */
+  /** The WNX per-tank table (see `wn-expected` for its host). */
   WNX = "wnx",
 }
 
