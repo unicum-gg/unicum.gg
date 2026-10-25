@@ -154,6 +154,39 @@ export const playerBattlesQuery = z.object({
     .meta({ description: "Battles per page, newest first. Ten by default, a hundred at most." }),
 });
 
+/** The battles list's own filters, narrowing which battles the players met are
+ * counted over. */
+export const playerBattleEncountersQuery = z.object({
+  mode: z.coerce
+    .number()
+    .int()
+    .optional()
+    .meta({
+      description:
+        "Only count battles of this mode, by the game's own `bonusType` (1 is random battles).",
+    }),
+  tank: z.coerce
+    .number()
+    .int()
+    .optional()
+    .meta({
+      description: "Only count battles this account fought in this vehicle, by its tank id.",
+    }),
+  map: z
+    .string()
+    .optional()
+    .meta({
+      description: "Only count battles on this arena, by the game's own map id (`05_prohorovka`).",
+    }),
+  result: z
+    .enum(BattleResultFilter)
+    .optional()
+    .meta({
+      description: "Only count battles this account won, lost or drew.",
+      "x-enum-source": "BATTLE_RESULT_FILTER",
+    } as EnumMeta),
+});
+
 /** How a player's sessions are bucketed. */
 export const playerSessionsQuery = z.object({
   // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below.

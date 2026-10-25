@@ -11,11 +11,8 @@ import { PlayerBattlesResponse } from "./schema.api";
 import { contentLanguage, interfaceLanguage } from "@/services/openapi/locale";
 import { pictureBattleRows } from "@/services/battles/rows";
 import { measured } from "@/services/perf";
-import {
-  playerBattleFacets,
-  type PlayerBattleFilter,
-} from "@unicum.gg/core/battles/filters";
-import { BattleResultFilter } from "@unicum.gg/shared";
+import { playerBattleFacets } from "@unicum.gg/core/battles/filters";
+import { battleFilterFrom } from "@/services/battles/filter";
 
 /**
  * Player battles
@@ -101,24 +98,4 @@ async function GET__perf(
     console.error(`[api/${region}/players/${decoded}/battles] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });
   }
-}
-
-/**
- * The filters a request names, each dropped rather than rejected when it does
- * not parse: a filter that reads as nothing gives the whole list, which is
- * what a hand-edited URL with a typo in it should get.
- */
-function battleFilterFrom(query: URLSearchParams): PlayerBattleFilter {
-  const filter: PlayerBattleFilter = {};
-  const mode = Number(query.get("mode"));
-  if (query.get("mode") && Number.isInteger(mode)) filter.battleType = mode;
-  const tank = Number(query.get("tank"));
-  if (query.get("tank") && Number.isInteger(tank)) filter.tank = tank;
-  const map = query.get("map");
-  if (map) filter.map = map;
-  const result = query.get("result");
-  if (Object.values(BattleResultFilter).includes(result as BattleResultFilter)) {
-    filter.result = result as BattleResultFilter;
-  }
-  return filter;
 }
