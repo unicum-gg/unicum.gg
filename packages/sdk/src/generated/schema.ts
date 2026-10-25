@@ -339,6 +339,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/battles/players": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Players met in battle
+         * @description Who this player keeps meeting in the battles we hold: the players most often on their team and the ones most often across from them, each with the battles shared, the wins and the last time. Counted over the battles shared through the unicum.gg mod, so it covers those and nothing else, and takes the battles list's own filters. Somebody met once is not listed. 404 when the nickname is unknown in this region.
+         */
+        get: operations["get-{region}-players-{nickname}-battles-players"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/clan": {
         parameters: {
             query?: never;
@@ -4800,6 +4820,41 @@ export interface components {
             /** @description What the battle earned this player, present only when it was this account's own client that reported it. The results carry an economy for the reporting client alone, so a battle somebody else uploaded has none for them at any price. */
             personal: components["schemas"]["BattleEconomy"] | null;
         };
+        /** @description Somebody this player keeps meeting in battle. */
+        PlayerBattleEncounter: {
+            accountId: number;
+            nickname: string;
+            clanTag: string | null;
+            clanColor: string | null;
+            tournamentWins: number;
+            tournamentFeaturedWins: number;
+            tournamentBestTitle: string | null;
+            isVerified?: boolean;
+            isSupporter?: boolean;
+            twitchLogin?: string | null;
+            onslaughtBestTier?: string | null;
+            onslaughtBestRank?: number | null;
+            onslaughtSeasons?: number;
+            /** @description Battles the two were in, on the side the list is about. */
+            battles: number;
+            /** @description Of those, the ones this player's team won: the record together beside an ally, the record against them across from an opponent. */
+            wins: number;
+            /** @description The wins this player would have taken from those same battles at their own win rate in each battle's mode, over the same filter. wins minus expected is the difference the other player made, net of which modes the two play together. */
+            expected: number;
+            /**
+             * Format: date-time
+             * @description The most recent of those battles.
+             */
+            lastAt: Date;
+        };
+        PlayerBattleEncountersResponse: {
+            accountId: number;
+            nickname: string;
+            /** @description Who this player has been on the same team as most often, at least twice, most battles first. */
+            allies: components["schemas"]["PlayerBattleEncounter"][];
+            /** @description Who this player has faced most often, at least twice, most battles first. */
+            opponents: components["schemas"]["PlayerBattleEncounter"][];
+        };
         /** @description What the battles list can be filtered to, counted over every battle we hold for the account rather than over the filtered page. */
         PlayerBattleFacets: {
             /** @description Modes by the game's own `bonusType`, most played first. */
@@ -8117,6 +8172,43 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerBattlesResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-battles-players": {
+        parameters: {
+            query?: {
+                /** @description Only count battles of this mode, by the game's own `bonusType` (1 is random battles). */
+                mode?: number;
+                /** @description Only count battles this account fought in this vehicle, by its tank id. */
+                tank?: number;
+                /** @description Only count battles on this arena, by the game's own map id (`05_prohorovka`). */
+                map?: string;
+                /** @description Only count battles this account won, lost or drew. */
+                result?: "win" | "loss" | "draw";
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerBattleEncountersResponse"];
                 };
             };
         };

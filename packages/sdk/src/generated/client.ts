@@ -109,6 +109,15 @@ class PlayerClient {
     );
   }
 
+  /** Players met in battle */
+  battlesPlayers(query?: QueryOf<"/{region}/players/{nickname}/battles/players">) {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/battles/players", path, query),
+      () => this.api.GET("/{region}/players/{nickname}/battles/players", { params: { path, query } }),
+    );
+  }
+
   /** Player vehicle record */
   tank(slug: string, language?: NonNullable<QueryOf<"/{region}/players/{nickname}/tanks/{slug}">>["language"]) {
     const path = { region: this.region, nickname: this.nickname, slug };
