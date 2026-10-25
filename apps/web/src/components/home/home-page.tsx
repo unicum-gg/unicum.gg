@@ -30,7 +30,12 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import APP from "@/constants/app";
-import { RATING_METRICS, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
+import {
+  RATING_METRICS,
+  RatingMetric,
+  type LiveStreamer,
+} from "@unicum.gg/shared";
+import { rankedByKey } from "@/components/home/ranked-by";
 import { getTranslation } from "@/lib/translations.server";
 import type {
   TopClansPeriod,
@@ -44,11 +49,6 @@ import { buildSafe, optional, unicum } from "@/services/sdk";
 import { type Region, REGIONS } from "@unicum.gg/wargaming";
 
 const TOP_LIMIT = 9;
-const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {
-  [RatingMetric.Wn7]: "wn7",
-  [RatingMetric.Wn8]: "wn8",
-  [RatingMetric.Wnx]: "wnx",
-};
 
 // The home consumes its own public API through the SDK: one `/top` call per
 // (region, metric, period), all precomputed leaderboards server-side, plus
@@ -63,7 +63,7 @@ async function playersTopByRegions(
         () =>
           unicum
             .region(region)
-            .players.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT }),
+            .players.top({ metric, period, limit: TOP_LIMIT }),
         { results: [], computed_at: null },
       );
       return [
@@ -88,7 +88,7 @@ async function clansTopByRegions(
         () =>
           unicum
             .region(region)
-            .clans.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT }),
+            .clans.top({ metric, period, limit: TOP_LIMIT }),
         { results: [], computed_at: null },
       );
       return [
@@ -128,6 +128,9 @@ export async function HomePage({
     topPlayersMonthByMetric,
     liveStreamers,
   ] = await Promise.all([
+    // Every board ranks every metric. PR and WTR have no value over a window
+    // (see `RatingMetric`), so a recent board ranks the accounts active inside
+    // it by their current figure, and says so.
     Promise.all(RATING_METRICS.map((m) => clansTopByRegions(m, "overall"))),
     Promise.all(RATING_METRICS.map((m) => clansTopByRegions(m, "30d"))),
     Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "24h"))),
@@ -155,11 +158,11 @@ export async function HomePage({
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             {RATING_METRICS.map((m, i) => (
-              <div key={m} data-rating-col={RATING_COL[m]}>
+              <div key={m} data-rating-col={m}>
                 <TopPlayers
                   description={
                     <Interpolate
-                      template={tRanked("day")}
+                      template={tRanked(rankedByKey("day", m))}
                       values={{ metric: <RatingMetricInlineSelect /> }}
                     />
                   }
@@ -181,11 +184,11 @@ export async function HomePage({
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             {RATING_METRICS.map((m, i) => (
-              <div key={m} data-rating-col={RATING_COL[m]}>
+              <div key={m} data-rating-col={m}>
                 <TopPlayers
                   description={
                     <Interpolate
-                      template={tRanked("week")}
+                      template={tRanked(rankedByKey("week", m))}
                       values={{ metric: <RatingMetricInlineSelect /> }}
                     />
                   }

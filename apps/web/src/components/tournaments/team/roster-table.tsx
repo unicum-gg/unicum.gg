@@ -15,12 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
 import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
+  type TournamentMetric,
+  useTournamentMetric,
+} from "@/components/tournaments/detail/team-rating";
+import {
   RATING_COLOR_CLASS,
   RATING_METRIC_LABEL,
   RatingMetric,
@@ -62,14 +62,15 @@ export type RosterEntry = {
   wnx: number | null;
 };
 
-/** WN7 has no column of its own here, so a reader on it sees WN8: the roster is
- * a scouting table, and a blank column would read as "no data" rather than as
- * "not one of the two we cache per account". */
-function ratingOf(entry: RosterEntry, metric: RatingMetric): number | null {
+/** WN7 has no column of its own here, so a reader on it sees WN8, and PR or WTR
+ * see WNX (`tournamentMetric`): the roster is a scouting table, and a blank
+ * column would read as "no data" rather than as "not one of the two we cache
+ * per account". */
+function ratingOf(entry: RosterEntry, metric: TournamentMetric): number | null {
   return metric === RatingMetric.Wnx ? entry.wnx : entry.wn8;
 }
 
-function ratingColor(value: number, metric: RatingMetric): string {
+function ratingColor(value: number, metric: TournamentMetric): string {
   return RATING_COLOR_CLASS[
     metric === RatingMetric.Wnx ? wnxColor(value) : wn8Color(value)
   ];
@@ -94,8 +95,7 @@ export function TeamRosterTable({
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/tournaments/team/roster-table");
-  const [stored] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
-  const metric = isRatingMetric(stored) ? stored : DEFAULT_RATING_METRIC;
+  const metric = useTournamentMetric();
   // Best first, and everyone we have no rating for last: an unsampled account
   // sorted as a zero would read as the worst player on the team.
   const ordered = players

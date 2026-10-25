@@ -3,8 +3,14 @@
 import { InfoIcon } from "@phosphor-icons/react";
 import { PanelContent } from "@/components/panel";
 import { useTranslation } from "@/hooks/use-translation";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
 
-/** Where the rows of a battles list come from, said above them. */
+/**
+ * Where the rows of a battles list come from, said above them, and which
+ * rating they carry: a battle has no PR or WTR, so a reader who picked one
+ * reads the WN fallback (see `RatingMetric`).
+ */
 export function PlayerBattlesProvenance() {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -18,6 +24,7 @@ export function PlayerBattlesProvenance() {
         <InfoIcon className="mt-0.5 size-4 shrink-0" weight="fill" />
         <span>{t("provenance")}</span>
       </p>
+      <RatingFallbackNote reason={RatingFallbackReason.Battle} className="mt-2" />
     </PanelContent>
   );
 }

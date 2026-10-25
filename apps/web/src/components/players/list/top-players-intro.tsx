@@ -6,10 +6,12 @@ import { useStatsPeriod } from "@/hooks/use-period";
 import { useTierFloor } from "@/hooks/use-tier-floor";
 import { useTranslation } from "@/hooks/use-translation";
 import { useFormat } from "@/hooks/use-format";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import {
   RATING_METRICS,
   StrongholdPeriod,
   TOP_PLAYERS_MIN_BATTLES,
+  isWnRatingMetric,
 } from "@unicum.gg/shared";
 
 /** The metric named in a sentence, one span per metric, CSS showing one. */
@@ -49,10 +51,14 @@ export function TopPlayersIntro({
   const { num } = useFormat();
   const [period] = useStatsPeriod();
   const [tier] = useTierFloor();
+  const { metric } = useRatingMetric();
+  // A WN rating is the window's own, PR and WTR are the current figure of the
+  // players active inside it (see `RatingMetric`), so the two read differently.
+  const recentKey = isWnRatingMetric(metric) ? "intro-period" : "intro-period-account";
   const template =
     period === StrongholdPeriod.Overall
       ? t(`intro.${variant}`, { region, language })
-      : t(`intro-period.${variant}`, {
+      : t(`${recentKey}.${variant}`, {
           region,
           language,
           period: tGame(`stronghold-periods.${period}`),
@@ -63,5 +69,12 @@ export function TopPlayersIntro({
         });
   // The metric is a picker, not a word, so it rides the sentence as a node:
   // half the languages we publish put it somewhere else.
-  return <Interpolate template={template} values={{ metric: <MetricInline /> }} />;
+  return (
+    <Interpolate
+      template={template}
+      values={{
+        metric: <MetricInline />,
+      }}
+    />
+  );
 }

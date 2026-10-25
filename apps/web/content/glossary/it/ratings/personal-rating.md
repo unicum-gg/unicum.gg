@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 La valutazione di Wargaming, mostrata nel client di gioco e sul portale, che cresce con il numero di battaglie giocate e con le prestazioni.

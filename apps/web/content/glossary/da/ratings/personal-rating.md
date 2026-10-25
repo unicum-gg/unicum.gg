@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargamings egen rating, vist i spilklienten og på portalen, som vokser med antallet af spillede kampe samt med præstationen.

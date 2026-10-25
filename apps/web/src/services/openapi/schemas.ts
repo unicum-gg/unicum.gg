@@ -523,7 +523,8 @@ export const clanPeriodField = z.enum(TopClansPeriod).meta({
 } as EnumMeta);
 
 export const metricField = z.enum(RatingMetric).meta({
-  description: "Rating metric the leaderboard is ranked by.",
+  description:
+    "Rating metric the leaderboard is ranked by. `pr` (Personal Rating) and `wtr` (World of Tanks Rating) are Wargaming's account figures and exist on lifetime boards only: a recent period or a per-vehicle board asked for either answers with its `wnx` ranking.",
   "x-enum-source": "METRIC",
 } as EnumMeta);
 

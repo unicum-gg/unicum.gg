@@ -19,9 +19,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type ClanVehicleRow, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { RATING_METRIC_LABEL, RatingMetric, type ClanVehicleRow, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
 import { useRegion } from "@/hooks/use-region";
 import { TablePager, usePagination } from "@/components/table-pager";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
@@ -177,13 +178,9 @@ export function ClanVehiclesTable({
   const { t } = useTranslation("components/clans/detail/tanks/table");
   const { t: tCol } = useTranslation("components/columns");
   const { region } = useRegion();
-  const [storedRating] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric: RatingMetric = isRatingMetric(storedRating)
-    ? storedRating
-    : DEFAULT_RATING_METRIC;
+  // Per vehicle, so WN only: a PR or WTR reader reads WNX (see
+  // `RatingMetric`).
+  const { wnMetric: metric } = useRatingMetric();
   const [sort, setSort] = useState<SortState>({
     column: SortColumn.Battles,
     direction: SortDirection.Desc,
@@ -257,6 +254,10 @@ export function ClanVehiclesTable({
     <>
       <div className="p-4">
         <TankFilterBar filters={filters} searchNoun={FilterSubject.Tanks} />
+        <RatingFallbackNote
+          reason={RatingFallbackReason.Vehicle}
+          className="mt-2"
+        />
       </div>
       <div className="border-t border-fd-border">
         {sorted.length === 0 ? (

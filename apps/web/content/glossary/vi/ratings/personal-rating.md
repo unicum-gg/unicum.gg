@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Xếp hạng của Wargaming, hiển thị trong client game và trên cổng thông tin, tăng lên với số trận đấu đã chơi cũng như với hiệu suất.

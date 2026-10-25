@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargaming 自己的评级，在游戏客户端和门户网站上显示，随着参与战斗的数量以及表现而增长。

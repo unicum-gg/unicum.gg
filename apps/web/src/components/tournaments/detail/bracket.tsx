@@ -20,7 +20,6 @@ import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
 import type { PoolMapRef } from "@/components/tournaments/detail/map-pool";
 import { BracketType, type Region } from "@unicum.gg/wargaming";
-import type { RatingMetric } from "@unicum.gg/shared";
 import type {
   TournamentGroup,
   TournamentMatch,
@@ -32,7 +31,8 @@ import {
   clansByTeam,
   ratingColor,
   ratingsByTeam,
-  useRatingMetric,
+  type TournamentMetric,
+  useTournamentMetric,
 } from "./team-rating";
 import {
   CARD_H,
@@ -97,7 +97,7 @@ function Side({
   /** The team's average rating, or null for an unfilled slot and for a roster
    * we hold no stats on. */
   rating: number | null;
-  metric: RatingMetric;
+  metric: TournamentMetric;
   score: number | null;
   won: boolean;
   decided: boolean;
@@ -238,7 +238,7 @@ function MatchCard({
   teamNames: Map<number, string>;
   teamRatings: Map<number, number>;
   teamClans: Map<number, { tag: string; color: string | null }>;
-  metric: RatingMetric;
+  metric: TournamentMetric;
   mapLinks: Map<string, PoolMapRef>;
 }) {
   const decided = match.winnerTeamId !== null;
@@ -311,7 +311,7 @@ function KnockoutBracket({
   teamNames: Map<number, string>;
   teamRatings: Map<number, number>;
   teamClans: Map<number, { tag: string; color: string | null }>;
-  metric: RatingMetric;
+  metric: TournamentMetric;
   mapLinks: Map<string, PoolMapRef>;
 }) {
   const { t: tLayout } = useTranslation("components/tournaments/detail/layout");
@@ -502,7 +502,7 @@ export function TournamentBracket({
   mapLinks: Map<string, PoolMapRef>;
 }) {
   const { t } = useTranslation("components/tournaments/detail/bracket");
-  const metric = useRatingMetric();
+  const metric = useTournamentMetric();
   const teamNames = useMemo(
     () => new Map(teams.map((team) => [team.id, team.title])),
     [teams],

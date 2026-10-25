@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargaming の独自のレーティングで、ゲームクライアントとポータルに表示され、プレイしたバトル数やパフォーマンスによって成長します。

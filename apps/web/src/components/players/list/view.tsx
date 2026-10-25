@@ -22,7 +22,11 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { RatingMetric, languageToCountryCode } from "@unicum.gg/shared";
+import {
+  RATING_METRICS,
+  RatingMetric,
+  languageToCountryCode,
+} from "@unicum.gg/shared";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
 import { languageDisplayName } from "@/lib/language-name";
@@ -40,7 +44,7 @@ const LIMIT = 1000;
  * for /players/lang/<language>. `strict` narrows to players whose
  * inferred language set is exactly the requested one (no co-dominance).
  *
- * The view renders all three metric variants in parallel and gates them
+ * The view renders every metric variant in parallel and gates them
  * via `data-rating-col` so the same HTML serves every visitor. The
  * cookie picks which is visible via CSS (rule lives in `globals.css`).
  */
@@ -72,25 +76,31 @@ export async function PlayersLandingView({
   // populations for the chips.
   const { t } = await getTranslation("components/players/list/view", locale);
   const api = unicum.region(region).players;
-  const topQuery = (metric: "wn7" | "wn8" | "wnx") => ({
+  const topQuery = (metric: RatingMetric) => ({
     metric,
     limit: LIMIT,
     ...(language ? { lang: language } : { languages: "true" as const }),
     ...(strict ? { strict: "true" as const } : {}),
   });
   const EMPTY_TOP = { results: [], computed_at: null };
-  const [wn7Top, wn8Top, wnxTop, languageStats] = await Promise.all([
-    buildSafe(() => api.top(topQuery("wn7")), EMPTY_TOP),
-    buildSafe(() => api.top(topQuery("wn8")), EMPTY_TOP),
-    buildSafe(() => api.top(topQuery("wnx")), EMPTY_TOP),
+  const [tops, languageStats] = await Promise.all([
+    Promise.all(
+      RATING_METRICS.map((metric) =>
+        buildSafe(() => api.top(topQuery(metric)), EMPTY_TOP),
+      ),
+    ),
     buildSafe(() => api.languages(), { results: [] }),
   ]);
-  const wn7Results = wn7Top.results as TopPlayerByLanguageResult[];
-  const wn8Results = wn8Top.results as TopPlayerByLanguageResult[];
-  const wnxResults = wnxTop.results as TopPlayerByLanguageResult[];
-  // All three metrics rank the same eligible set, so their lengths agree; the
+  const results = Object.fromEntries(
+    RATING_METRICS.map((metric, i) => [
+      metric,
+      tops[i].results as TopPlayerByLanguageResult[],
+    ]),
+  ) as Record<RatingMetric, TopPlayerByLanguageResult[]>;
+  const top = (metric: RatingMetric) => tops[RATING_METRICS.indexOf(metric)];
+  // Every metric ranks the same eligible set, so their lengths agree; the
   // longest is what bounds the pages either way.
-  const pagedRows = Math.max(wn7Results.length, wn8Results.length, wnxResults.length);
+  const pagedRows = Math.max(...Object.values(results).map((r) => r.length));
   assertPageInRange(page, pagedRows, PAGINATION.SIZE.LEADERBOARD);
   const stats = languageStats.results;
   const langName = language ? languageDisplayName(language, locale) : null;
@@ -161,7 +171,9 @@ export async function PlayersLandingView({
               strict={strict}
             />
           </div>
-          <BoardUpdated at={wnxTop.computed_at ?? wn8Top.computed_at} />
+          <BoardUpdated
+            at={top(RatingMetric.Wnx).computed_at ?? top(RatingMetric.Wn8).computed_at}
+          />
         </PanelContent>
       </Panel>
 
@@ -176,11 +188,7 @@ export async function PlayersLandingView({
       <TopPlayersPanel
         region={region}
         page={page}
-        initial={{
-          [RatingMetric.Wn7]: wn7Results,
-          [RatingMetric.Wn8]: wn8Results,
-          [RatingMetric.Wnx]: wnxResults,
-        }}
+        initial={results}
         title={{
           key: language ? (strict ? "board.strict" : "board.language") : "board.all",
           language: langName ?? undefined,

@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, prColor, winrateColor, wn7Color, wn8Color, wnxColor, wtrColor } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { clanRoleName } from "@/components/game-name";
 import { useTranslation } from "@/hooks/use-translation";
@@ -46,6 +46,8 @@ enum SortColumn {
   WN830d = "wn8_30d",
   WNX = "wnx",
   WNX30d = "wnx_30d",
+  PR = "pr",
+  WTR = "wtr",
   WR = "wr",
   Battles = "battles",
   Joined = "joined",
@@ -81,6 +83,11 @@ function getSortValue(
       return m.wnx ?? -1;
     case SortColumn.WNX30d:
       return m.wnx30d ?? -1;
+    // Optional on the member: absent from a roster cached before they were served.
+    case SortColumn.PR:
+      return m.pr ?? -1;
+    case SortColumn.WTR:
+      return m.wtr ?? -1;
     case SortColumn.WR:
       return m.overall?.winsPercentage ?? -1;
     case SortColumn.Battles:
@@ -126,6 +133,7 @@ function SortableHead({
    * keyed by. */
   term,
   ratingCol,
+  wnCol,
   hideOnMobile,
   headClassName,
   children,
@@ -135,7 +143,11 @@ function SortableHead({
   onToggle: (col: SortColumn) => void;
   align?: "start" | "end";
   term?: string;
+  /** Shown when this is the reader's metric (`data-rating-col`). */
   ratingCol?: string;
+  /** Shown when this is the reader's WN fallback (`data-rating-wn-col`): the
+   * 30-day columns, which have no PR or WTR. */
+  wnCol?: string;
   hideOnMobile?: boolean;
   headClassName?: string;
   children: React.ReactNode;
@@ -170,6 +182,7 @@ function SortableHead({
   return (
     <TableHead
       data-rating-col={ratingCol}
+      data-rating-wn-col={wnCol}
       className={cn(
         "p-0",
         hideOnMobile && "hidden sm:table-cell",
@@ -189,16 +202,22 @@ function RatingCell({
   value,
   color,
   ratingCol,
+  wnCol,
+  integer = false,
 }: {
   value: number | null;
   color: RatingColor | null;
   ratingCol?: string;
+  wnCol?: string;
+  /** Wargaming's ratings are whole numbers and read wrong with two decimals. */
+  integer?: boolean;
 }) {
   const { num } = useFormat();
   if (value === null) {
     return (
       <TableCell
         data-rating-col={ratingCol}
+        data-rating-wn-col={wnCol}
         className="text-right text-muted-foreground tabular-nums"
       >
         —
@@ -208,17 +227,18 @@ function RatingCell({
   return (
     <TableCell
       data-rating-col={ratingCol}
+      data-rating-wn-col={wnCol}
       className={cn(
         "text-right tabular-nums",
         color && RATING_COLOR_CLASS[color],
       )}
     >
-      {num(DEC_FORMAT).format(value)}
+      {num(integer ? INT_FORMAT : DEC_FORMAT).format(value)}
     </TableCell>
   );
 }
 
-// One placeholder row matching the 12 columns (same alignment + rating-column
+// One placeholder row matching the columns (same alignment + rating-column
 // tags, so the rating-column toggle keeps the skeleton aligned with the header).
 // Each bar sits in an h-6 line-box so the row matches the real 24px content
 // height (name line-height / LiveBadge) instead of collapsing to the bar height.
@@ -233,6 +253,11 @@ function MemberRowSkeleton() {
       {bar("w-10")}
     </TableCell>
   );
+  const recent = (col: string) => (
+    <TableCell key={col} data-rating-wn-col={col}>
+      {bar("w-10")}
+    </TableCell>
+  );
   return (
     <TableRow>
       <TableCell>{bar("w-4")}</TableCell>
@@ -241,12 +266,14 @@ function MemberRowSkeleton() {
         {bar("w-16", "justify-start")}
       </TableCell>
       {rating("wn7")}
-      {rating("wn7-30d")}
+      {recent("wn7-30d")}
       {rating("wn8")}
-      {rating("wn8-30d")}
+      {recent("wn8-30d")}
       <TableCell className="max-[480px]:hidden">{bar("w-10")}</TableCell>
       {rating("wnx")}
-      {rating("wnx-30d")}
+      {rating("pr")}
+      {rating("wtr")}
+      {recent("wnx-30d")}
       <TableCell className="hidden sm:table-cell">{bar("w-12")}</TableCell>
       <TableCell className="hidden sm:table-cell">{bar("w-16")}</TableCell>
     </TableRow>
@@ -319,7 +346,7 @@ export function ClanMembersTable(
             state={sort}
             onToggle={toggleSort}
             align="end"
-            ratingCol="wn7-30d"
+            wnCol="wn7-30d"
           >
             {t("period", { metric: "WN7" })}
           </SortableHead>
@@ -336,7 +363,7 @@ export function ClanMembersTable(
             state={sort}
             onToggle={toggleSort}
             align="end"
-            ratingCol="wn8-30d"
+            wnCol="wn8-30d"
           >
             {t("period", { metric: "WN8" })}
           </SortableHead>
@@ -356,12 +383,32 @@ export function ClanMembersTable(
             ratingCol="wnx"
           >
             {t("wnx")}</SortableHead>
+          {/* Wargaming's two, before the 30-day column so a reader who picked
+              one reads it beside the WNX 30 days that stand in for it. */}
+          <SortableHead
+            column={SortColumn.PR}
+            term="PR"
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="pr"
+          >
+            {t("pr")}</SortableHead>
+          <SortableHead
+            column={SortColumn.WTR}
+            term="WTR"
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wtr"
+          >
+            {t("wtr")}</SortableHead>
           <SortableHead
             column={SortColumn.WNX30d}
             state={sort}
             onToggle={toggleSort}
             align="end"
-            ratingCol="wnx-30d"
+            wnCol="wnx-30d"
           >
             {t("period", { metric: "WNX" })}
           </SortableHead>
@@ -430,7 +477,7 @@ export function ClanMembersTable(
               <RatingCell
                 value={m.wn730d ?? (m.battles30d === 0 ? 0 : null)}
                 color={m.wn730d != null ? wn7Color(m.wn730d) : null}
-                ratingCol="wn7-30d"
+                wnCol="wn7-30d"
               />
               <RatingCell
                 value={
@@ -442,7 +489,7 @@ export function ClanMembersTable(
               <RatingCell
                 value={m.wn830d ?? (m.battles30d === 0 ? 0 : null)}
                 color={m.wn830d != null ? wn8Color(m.wn830d) : null}
-                ratingCol="wn8-30d"
+                wnCol="wn8-30d"
               />
               <TableCell
                 className={cn(
@@ -464,9 +511,21 @@ export function ClanMembersTable(
                 ratingCol="wnx"
               />
               <RatingCell
+                value={m.pr ?? null}
+                color={m.pr != null ? prColor(m.pr) : null}
+                ratingCol="pr"
+                integer
+              />
+              <RatingCell
+                value={m.wtr ?? null}
+                color={m.wtr != null ? wtrColor(m.wtr) : null}
+                ratingCol="wtr"
+                integer
+              />
+              <RatingCell
                 value={m.wnx30d ?? (m.battles30d === 0 ? 0 : null)}
                 color={m.wnx30d != null ? wnxColor(m.wnx30d) : null}
-                ratingCol="wnx-30d"
+                wnCol="wnx-30d"
               />
               <TableCell className="hidden text-right tabular-nums sm:table-cell">
                 {m.overall ? num(INT_FORMAT).format(m.overall.battles) : "—"}

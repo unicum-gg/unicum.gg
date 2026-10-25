@@ -40,11 +40,13 @@ import {
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
+  prColor,
   rosterBoostRatio,
   winrateColor,
   wn7Color,
   wn8Color,
   wnxColor,
+  wtrColor,
 } from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 
@@ -67,6 +69,9 @@ type MetricSet = {
   wnx: MetricCell;
 };
 
+/** The lifetime set adds Wargaming's two, which have no 30-day value. */
+type LifetimeMetricSet = MetricSet & { pr: MetricCell; wtr: MetricCell };
+
 function metricCell(
   num: NumberFormatter,
   label: string,
@@ -85,7 +90,7 @@ function computeMetrics(
   r: ClanRatings,
 ): {
   recent: MetricSet;
-  lifetime: MetricSet;
+  lifetime: LifetimeMetricSet;
   avgWinrate: MetricCell;
 } {
   return {
@@ -98,6 +103,9 @@ function computeMetrics(
       wn7: metricCell(num, "Avg WN7", r.lifetime.wn7, wn7Color),
       wn8: metricCell(num, "Avg WN8", r.lifetime.wn8, wn8Color),
       wnx: metricCell(num, "Avg WNX", r.lifetime.wnx, wnxColor),
+      // `?? null`: a payload cached before the two were served lacks them.
+      pr: metricCell(num, "Avg PR", r.lifetime.pr ?? null, prColor),
+      wtr: metricCell(num, "Avg WTR", r.lifetime.wtr ?? null, wtrColor),
     },
     avgWinrate: {
       label: "Avg winrate",
@@ -243,12 +251,16 @@ export function ClanHeader(
         flagWrapperClassName="h-6 self-end"
       />
       <div className="flex border-t border-fd-border sm:contents sm:border-t-0">
-        <MetricColumn metric={metrics.recent.wn7} ratingCol="wn7" />
-        <MetricColumn metric={metrics.recent.wn8} ratingCol="wn8" />
-        <MetricColumn metric={metrics.recent.wnx} ratingCol="wnx" />
+        {/* The 30-day column is WN only and follows the reader's WN fallback:
+            a clan's PR or WTR has no 30-day value. */}
+        <MetricColumn metric={metrics.recent.wn7} wnCol="wn7" />
+        <MetricColumn metric={metrics.recent.wn8} wnCol="wn8" />
+        <MetricColumn metric={metrics.recent.wnx} wnCol="wnx" />
         <MetricColumn metric={metrics.lifetime.wn7} ratingCol="wn7" />
         <MetricColumn metric={metrics.lifetime.wn8} ratingCol="wn8" />
         <MetricColumn metric={metrics.lifetime.wnx} ratingCol="wnx" />
+        <MetricColumn metric={metrics.lifetime.pr} ratingCol="pr" />
+        <MetricColumn metric={metrics.lifetime.wtr} ratingCol="wtr" />
         <MetricColumn metric={metrics.avgWinrate} />
       </div>
     </header>
@@ -258,14 +270,17 @@ export function ClanHeader(
 function MetricColumn({
   metric,
   ratingCol,
+  wnCol,
 }: {
   metric: MetricCell;
   ratingCol?: string;
+  wnCol?: string;
 }) {
   const { t: tStats } = useStatLabels();
   return (
     <div
       data-rating-col={ratingCol}
+      data-rating-wn-col={wnCol}
       className="flex flex-1 flex-col border-l border-fd-border max-sm:first:border-l-0 sm:w-32 sm:flex-none sm:shrink-0"
     >
       <div className="px-4 py-2 text-center text-xs text-muted-foreground">
@@ -382,13 +397,24 @@ function InfoRow({
   );
 }
 
-/** The loading twin: real [tag] + the same emblem / meta / 7 metric columns as
+/** The loading twin: real [tag] + the same emblem / meta / metric columns as
  * placeholders. The size-24 emblem and the h1 row set the header height, so it
  * matches the loaded header. */
 function ClanHeaderSkeleton({ tag, color }: { tag: string; color: string }) {
-  // The seven metric columns, tagged for the rating-column toggle like the real
-  // ones (recent wn7/8/x, lifetime wn7/8/x, avg winrate).
-  const ratingCols = ["wn7", "wn8", "wnx", "wn7", "wn8", "wnx", undefined];
+  // The metric columns, tagged for the rating-column toggle like the real ones
+  // (recent wn7/8/x on the WN fallback, lifetime wn7/8/x/pr/wtr on the
+  // reader's pick, avg winrate untagged).
+  const ratingCols: { ratingCol?: string; wnCol?: string }[] = [
+    { wnCol: "wn7" },
+    { wnCol: "wn8" },
+    { wnCol: "wnx" },
+    { ratingCol: "wn7" },
+    { ratingCol: "wn8" },
+    { ratingCol: "wnx" },
+    { ratingCol: "pr" },
+    { ratingCol: "wtr" },
+    {},
+  ];
   const metaRow = (className: string) => (
     <div className={cn("border-t border-fd-border", className)}>
       <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2 px-4 py-1 text-xs sm:py-0">
@@ -426,7 +452,8 @@ function ClanHeaderSkeleton({ tag, color }: { tag: string; color: string }) {
         {ratingCols.map((c, i) => (
           <div
             key={i}
-            data-rating-col={c}
+            data-rating-col={c.ratingCol}
+            data-rating-wn-col={c.wnCol}
             className="flex flex-1 flex-col border-l border-fd-border max-sm:first:border-l-0 sm:w-32 sm:flex-none sm:shrink-0"
           >
             <div className="flex justify-center px-4 py-2">

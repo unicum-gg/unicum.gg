@@ -30,6 +30,10 @@ export type RatingWindow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  /** Wargaming's Personal Rating and WTR: account figures, so present on
+   * `total` and always null on `recent`, where no window of them exists. */
+  pr: number | null;
+  wtr: number | null;
   battles: number | null;
   /** Percentage, 0..100, as the site shows it. Null when no battles fell in the
    * window, which is not the same as a win rate of zero. */
@@ -232,6 +236,8 @@ async function loadPlayers(
       wn7: players.wn7,
       wn8: players.wn8,
       wnx: players.wnx,
+      pr: players.pr,
+      wtr: players.wtr,
       battles: players.battles,
       winrate: players.winrate,
       wn730d: players.wn730d,
@@ -272,6 +278,8 @@ async function loadPlayers(
           wn7: r.wn7,
           wn8: r.wn8,
           wnx: r.wnx,
+          pr: r.pr,
+          wtr: r.wtr,
           battles: r.battles,
           winrate: r.winrate == null ? null : r.winrate * 100,
         },
@@ -279,6 +287,8 @@ async function loadPlayers(
           wn7: r.wn730d,
           wn8: r.wn830d,
           wnx: r.wnx30d,
+          pr: null,
+          wtr: null,
           battles: r.battles30d,
           winrate: ratio(r.wins30d, r.battles30d),
         },
@@ -317,9 +327,11 @@ async function loadClans(
     sql`, `,
   );
 
+  // The product in float8: PR and WTR are integer columns, and their product
+  // with a career's battles overflows int4.
   const weighted = (value: string, weight: string) =>
     sql.raw(
-      `(SUM(p."${value}" * cm."${weight}") FILTER (WHERE p."${value}" IS NOT NULL AND cm."${weight}" > 0)` +
+      `(SUM(p."${value}"::float8 * cm."${weight}") FILTER (WHERE p."${value}" IS NOT NULL AND cm."${weight}" > 0)` +
         ` / NULLIF(SUM(cm."${weight}") FILTER (WHERE p."${value}" IS NOT NULL AND cm."${weight}" > 0), 0))::float8`,
     );
   // The recent window weighs by what the member played in it, which lives on the
@@ -337,6 +349,8 @@ async function loadClans(
         ${weighted("wn7", "overall_battles")} AS wn7,
         ${weighted("wn8", "overall_battles")} AS wn8,
         ${weighted("wnx", "overall_battles")} AS wnx,
+        ${weighted("pr", "overall_battles")} AS pr,
+        ${weighted("wtr", "overall_battles")} AS wtr,
         SUM(cm.overall_battles)::bigint AS battles,
         ${weighted("winrate", "overall_battles")} AS winrate,
         ${weightedRecent("wn7_30d")} AS wn7_30d,
@@ -357,7 +371,7 @@ async function loadClans(
     )
     SELECT
       c.id, c.tag, c.name, c.color, c.members_count, c.last_refreshed_at,
-      r.wn7, r.wn8, r.wnx, r.battles, r.winrate,
+      r.wn7, r.wn8, r.wnx, r.pr, r.wtr, r.battles, r.winrate,
       r.wn7_30d, r.wn8_30d, r.wnx_30d, r.battles_30d, r.wins_30d, r.wins_battles_30d
     FROM ${clans} c
     LEFT JOIN roster r ON r.clan_id = c.id
@@ -379,6 +393,8 @@ async function loadClans(
           wn7: r.wn7,
           wn8: r.wn8,
           wnx: r.wnx,
+          pr: r.pr,
+          wtr: r.wtr,
           battles: r.battles == null ? null : Number(r.battles),
           winrate: r.winrate == null ? null : r.winrate * 100,
         },
@@ -386,6 +402,8 @@ async function loadClans(
           wn7: r.wn7_30d,
           wn8: r.wn8_30d,
           wnx: r.wnx_30d,
+          pr: null,
+          wtr: null,
           battles: r.battles_30d == null ? null : Number(r.battles_30d),
           // Over the battles of the members the wins are known for, not over
           // the roster's whole recent battle count.
@@ -421,6 +439,8 @@ type ClanRow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  pr: number | null;
+  wtr: number | null;
   battles: number | string | null;
   winrate: number | null;
   wn7_30d: number | null;

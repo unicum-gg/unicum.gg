@@ -38,6 +38,11 @@ export type TierWinrateSample = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  /** Wargaming's Personal Rating and WTR, account figures like the three above,
+   * which is all a band needs: the grid files a PLAYER under a band and reads
+   * their vehicles' records, it never rates a vehicle. */
+  pr: number | null;
+  wtr: number | null;
   /** The player's lifetime battles, which is what gates them into the
    * population rather than their record on this one vehicle. */
   playerBattles: number | null;
@@ -120,6 +125,8 @@ export function createTierWinrateAccumulator(
       [RatingMetric.Wn7]: sample.wn7,
       [RatingMetric.Wn8]: sample.wn8,
       [RatingMetric.Wnx]: sample.wnx,
+      [RatingMetric.Pr]: sample.pr,
+      [RatingMetric.Wtr]: sample.wtr,
     };
     for (const metric of RATING_METRICS) {
       const value = values[metric];

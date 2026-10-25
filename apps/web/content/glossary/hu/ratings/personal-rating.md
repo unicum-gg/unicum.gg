@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 A Wargaming saját értékelése, amely a játék kliensében és a portálon látható, és a játszott csaták számával, valamint a teljesítménnyel növekszik.

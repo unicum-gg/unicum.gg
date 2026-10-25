@@ -154,6 +154,8 @@ export async function recomputeTopPlayersByTank(
       wn7: row.player_wn7 == null ? null : Number(row.player_wn7),
       wn8: row.player_wn8 == null ? null : Number(row.player_wn8),
       wnx: row.player_wnx == null ? null : Number(row.player_wnx),
+      pr: row.player_pr == null ? null : Number(row.player_pr),
+      wtr: row.player_wtr == null ? null : Number(row.player_wtr),
       playerBattles:
         row.player_battles == null ? null : Number(row.player_battles),
       tier: meta.tier,
@@ -288,6 +290,7 @@ export async function recomputeTopPlayersByTank(
            s.marks_on_gun AS marks_on_gun, s.mark_of_mastery AS mark_of_mastery,
            p.winrate AS player_winrate, p.wn7 AS player_wn7,
            p.wn8 AS player_wn8, p.wnx AS player_wnx,
+           p.pr AS player_pr, p.wtr AS player_wtr,
            p.battles AS player_battles
     FROM ${snapshots} s
     INNER JOIN ${players} p ON p.id = s.player_id

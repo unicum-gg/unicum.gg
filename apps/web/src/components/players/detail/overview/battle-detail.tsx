@@ -13,12 +13,8 @@ import {
   StarIcon,
 } from "@phosphor-icons/react";
 import {
-  RATING_COLOR_CLASS,
   RatingMetric,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-  type RatingColor,
+  ratingColorClass,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { TranslateFunction } from "@onruntime/translations";
@@ -82,11 +78,6 @@ const LAST_GUTTER = "last:ps-4";
 const NAME_WIDTH = "w-[11rem] max-w-[11rem]";
 const VEHICLE_WIDTH = "w-[10rem] max-w-[10rem]";
 
-const RATING_COLOR: Record<RatingMetric, (value: number) => RatingColor> = {
-  [RatingMetric.Wn7]: wn7Color,
-  [RatingMetric.Wn8]: wn8Color,
-  [RatingMetric.Wnx]: wnxColor,
-};
 
 /**
  * One column of the roster, which is also one way of asking who did what.
@@ -705,7 +696,7 @@ function TeamTable({
                       rated &&
                         cn(
                           "font-medium",
-                          RATING_COLOR_CLASS[RATING_COLOR[metric](value)],
+                          ratingColorClass(metric, value),
                         ),
                       c.className,
                     )}

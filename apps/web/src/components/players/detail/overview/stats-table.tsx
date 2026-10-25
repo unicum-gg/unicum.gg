@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useStatsPeriod } from "@/hooks/use-period";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { StrongholdPeriod, type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { StrongholdPeriod, type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, RatingMetric, prColor, winrateColor, wn7Color, wn8Color, wnxColor, wtrColor } from "@unicum.gg/shared";
 import { useTranslation } from "@/hooks/use-translation";
 
 const INTEGER_FORMAT = { maximumFractionDigits: 0 } as const;
@@ -58,7 +58,9 @@ type RowDef = {
   /** The term to look up, when the row's wording is not the term's own: this
    * table's "Tier" is the average tier of the battles played, not a vehicle's. */
   term?: string;
-  ratingRow?: "wn7" | "wn8" | "wnx";
+  /** The metric this row is the value of, so the one the reader picked is
+   * set in bold (`html[data-rating-metric]` in `globals.css`). */
+  ratingRow?: RatingMetric;
   /** Takes the reader's number formatting rather than reading a hook: a row
    * definition is data at module scope. */
   cells: (input: RowInput, num: NumberFormatter) => PeriodCellSet;
@@ -102,10 +104,12 @@ function statRow(
   label: string,
   render: (s: Stats, num: NumberFormatter) => Cell,
   renderDelta?: (s: Stats, num: NumberFormatter) => Cell,
+  options: { ratingRow?: RatingMetric } = {},
 ): RowDef {
   return {
     id,
     label,
+    ratingRow: options.ratingRow,
     cells: ({ current, periods }, num) => {
       const delta = renderDelta ?? render;
       return {
@@ -196,7 +200,12 @@ const ROWS: RowDef[] = [
   statRow(
     "personal-rating",
     "Personal rating",
-    (s, num) => ({ primary: num(INTEGER_FORMAT).format(s.globalRating) }),
+    // Only the lifetime figure is coloured: the period columns are the change
+    // in a career figure, not a rating of those battles (see `RatingMetric`).
+    (s, num) => ({
+      primary: num(INTEGER_FORMAT).format(s.globalRating),
+      color: prColor(s.globalRating),
+    }),
     (s, num) => ({
       primary: num(SIGNED_INTEGER_FORMAT).format(s.globalRating),
       className:
@@ -206,11 +215,15 @@ const ROWS: RowDef[] = [
             ? "text-red-500"
             : undefined,
     }),
+    { ratingRow: RatingMetric.Pr },
   ),
   statRow(
     "wtr",
     "World of Tanks Rating",
-    (s, num) => ({ primary: s.wtr === null ? "—" : num(INTEGER_FORMAT).format(s.wtr) }),
+    (s, num) =>
+      s.wtr === null
+        ? EMPTY_CELL
+        : { primary: num(INTEGER_FORMAT).format(s.wtr), color: wtrColor(s.wtr) },
     (s, num) => ({
       primary: s.wtr === null ? "—" : num(SIGNED_INTEGER_FORMAT).format(s.wtr),
       className:
@@ -222,10 +235,11 @@ const ROWS: RowDef[] = [
               ? "text-red-500"
               : undefined,
     }),
+    { ratingRow: RatingMetric.Wtr },
   ),
-  derivedRow("wn7", "WN7", (d) => d.wn7, { color: wn7Color, ratingRow: "wn7" }),
-  derivedRow("wn8", "WN8", (d) => d.wn8, { color: wn8Color, ratingRow: "wn8" }),
-  derivedRow("wnx", "WNX", (d) => d.wnx, { color: wnxColor, ratingRow: "wnx" }),
+  derivedRow("wn7", "WN7", (d) => d.wn7, { color: wn7Color, ratingRow: RatingMetric.Wn7 }),
+  derivedRow("wn8", "WN8", (d) => d.wn8, { color: wn8Color, ratingRow: RatingMetric.Wn8 }),
+  derivedRow("wnx", "WNX", (d) => d.wnx, { color: wnxColor, ratingRow: RatingMetric.Wnx }),
 ];
 
 function PeriodCells({

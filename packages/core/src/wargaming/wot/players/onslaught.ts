@@ -84,12 +84,14 @@ export type OnslaughtRow = {
   // for the handful already ranked when the capture began (see
   // `getAccountsRankedAtFirstCapture`), whose first row is a state, not an entry.
   entryBattles?: number;
-  // The account's own rating, all three metrics, so the reader's chosen one is
+  // The account's own rating, every metric, so the reader's chosen one is
   // served rather than one being picked for them. Null for an account we do not
   // track yet, or that has none.
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  pr: number | null;
+  wtr: number | null;
 };
 
 // One entry of the season selector. The list mirrors the game's own history (the
@@ -225,12 +227,14 @@ export async function getOnslaughtLeaderboard(
       rating: ratings.rating,
       battles: ratings.battles,
       // The account's own rating, carried so the board can say what a Legend or
-      // a Champion typically is. All three metrics, like every other payload
-      // that shows one, since the choice is the reader's and is made in the
-      // navbar. A nested loop of a few hundred index lookups, ~33ms on EU.
+      // a Champion typically is. Every metric, like every other payload that
+      // shows one, since the choice is the reader's and is made in the navbar.
+      // A nested loop of a few hundred index lookups, ~33ms on EU.
       wn7: players.wn7,
       wn8: players.wn8,
       wnx: players.wnx,
+      pr: players.pr,
+      wtr: players.wtr,
     })
     .from(ratings)
     .leftJoin(players, eq(players.accountId, ratings.accountId))
@@ -413,6 +417,8 @@ export async function getOnslaughtLeaderboard(
         wn7: r.wn7,
         wn8: r.wn8,
         wnx: r.wnx,
+        pr: r.pr,
+        wtr: r.wtr,
       };
     }),
   };

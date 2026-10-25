@@ -36,12 +36,9 @@ import {
   MARKS_SORT_TOTAL,
   markCountAtTier,
   marksSortForTier,
-  RATING_COLOR_CLASS,
   RATING_METRICS,
-  RatingMetric,
-  wn7Color,
-  wn8Color,
-  wnxColor,
+  ratingColorClass,
+  WN_RATING_METRICS,
 } from "@unicum.gg/shared";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
@@ -72,6 +69,9 @@ export type MarksRow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  /** Optional: absent on a response cached before the two were served. */
+  pr?: number | null;
+  wtr?: number | null;
   wn7_30d: number | null;
   wn8_30d: number | null;
   wnx_30d: number | null;
@@ -95,7 +95,7 @@ export type MarksRow = {
 };
 
 /**
- * The reader's rating, as three cells of which CSS shows one.
+ * The reader's rating, as one cell per metric of which CSS shows one.
  *
  * The rating boards mount themselves once per metric and let `data-rating-col`
  * pick, which is what keeps their prerendered HTML the same for every visitor
@@ -117,14 +117,12 @@ export type MarksRow = {
  */
 function RatingCells({ row }: { row: MarksRow }) {
   const { num } = useFormat();
-  const values: Array<[RatingMetric, number | null, (v: number) => string]> = [
-    [RatingMetric.Wn7, row.wn7, (v) => RATING_COLOR_CLASS[wn7Color(v)]],
-    [RatingMetric.Wn8, row.wn8, (v) => RATING_COLOR_CLASS[wn8Color(v)]],
-    [RatingMetric.Wnx, row.wnx, (v) => RATING_COLOR_CLASS[wnxColor(v)]],
-  ];
   return (
     <>
-      {values.map(([metric, value, colorOf]) => (
+      {RATING_METRICS.map((metric) => {
+        // Absent on a response cached before PR and WTR were served.
+        const value = row[metric] ?? null;
+        return (
         <TableCell
           key={metric}
           data-rating-col={metric}
@@ -134,18 +132,22 @@ function RatingCells({ row }: { row: MarksRow }) {
             // cell in the markup, which is one the CSS may be hiding. On a
             // phone the 30-day column is hidden and this one is the edge.
             "text-right font-semibold tabular-nums max-sm:pr-4!",
-            value == null ? "text-muted-foreground" : colorOf(value),
+            value == null
+              ? "text-muted-foreground"
+              : ratingColorClass(metric, value),
           )}
         >
           {value == null ? "—" : num(INT_FORMAT).format(value)}
         </TableCell>
-      ))}
+        );
+      })}
       {/* The rating as the player plays it now, beside the career, as on the
-          clan members table: the board ranks by marks either way. */}
-      {RATING_METRICS.map((metric) => (
+          clan members table: the board ranks by marks either way. WN only, on
+          the reader's WN fallback: PR and WTR have no 30-day value. */}
+      {WN_RATING_METRICS.map((metric) => (
         <RecentRatingCell
           key={`${metric}-30d`}
-          ratingCol
+          wnCol
           metric={metric}
           value={row[`${metric}_30d`]}
           battles={row.battles_30d}
@@ -364,19 +366,19 @@ export function MarksBoard({
               {/* One heading per metric, hidden by the same rule as the cells
                   under it, so the column that shows always has its own name
                   above it. */}
-              <TableHead data-rating-col="wn7" className="w-20 text-right! max-sm:pr-4!">
-                {tView("wn7")}
-              </TableHead>
-              <TableHead data-rating-col="wn8" className="w-20 text-right! max-sm:pr-4!">
-                {tView("wn8")}
-              </TableHead>
-              <TableHead data-rating-col="wnx" className="w-20 text-right! max-sm:pr-4!">
-                {tView("wnx")}
-              </TableHead>
               {RATING_METRICS.map((metric) => (
+                <TableHead
+                  key={metric}
+                  data-rating-col={metric}
+                  className="w-20 text-right! max-sm:pr-4!"
+                >
+                  {tView(metric)}
+                </TableHead>
+              ))}
+              {WN_RATING_METRICS.map((metric) => (
                 <RecentRatingHead
                   key={metric}
-                  ratingCol
+                  wnCol
                   metric={metric}
                   className="hidden w-20 pr-4! sm:table-cell"
                 />

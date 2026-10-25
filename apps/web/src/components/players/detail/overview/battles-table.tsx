@@ -15,12 +15,8 @@ import {
   gameplayLabel,
   minimapUrl,
   modeLabel,
-  RATING_COLOR_CLASS,
   RatingMetric,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-  type RatingColor,
+  ratingColorClass,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import Link from "@/components/link";
@@ -139,12 +135,6 @@ export type PlayerBattleRow = {
 
 /** What `deathReason` says when nobody killed them. Not 0: 0 is a real reason. */
 const SURVIVED = -1;
-
-const RATING_COLOR: Record<RatingMetric, (value: number) => RatingColor> = {
-  [RatingMetric.Wn7]: wn7Color,
-  [RatingMetric.Wn8]: wn8Color,
-  [RatingMetric.Wnx]: wnxColor,
-};
 
 /** How long the battle lasted, as the game shows it: `5:44`. */
 function clock(seconds: number | null): string | null {
@@ -437,7 +427,7 @@ export function PlayerBattlesTable({
                     className={cn(
                       "rounded px-1.5 py-0.5 text-sm font-semibold tabular-nums",
                       "bg-foreground/5",
-                      RATING_COLOR_CLASS[RATING_COLOR[metric](rating)],
+                      ratingColorClass(metric, rating),
                     )}
                   >
                     {count.format(rating)}

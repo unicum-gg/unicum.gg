@@ -5,7 +5,7 @@ import {
   VehicleRow,
   VehicleRowSkeleton,
 } from "@/components/tanks/vehicle-row";
-import { RatingMetric, type LiftDrag, type LiftDragRow, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RatingMetric, type LiftDrag, type LiftDragRow, ratingColorClass } from "@unicum.gg/shared";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
@@ -14,12 +14,6 @@ const DEC_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 } as const;
-
-function ratingColorClass(metric: RatingMetric, value: number): string {
-  if (metric === RatingMetric.Wn7) return RATING_COLOR_CLASS[wn7Color(value)];
-  if (metric === RatingMetric.Wn8) return RATING_COLOR_CLASS[wn8Color(value)];
-  return RATING_COLOR_CLASS[wnxColor(value)];
-}
 
 // Rows arrive pre-computed from the server (see services/players/lift-drag);
 // this component only renders them.

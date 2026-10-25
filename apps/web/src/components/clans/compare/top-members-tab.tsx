@@ -15,10 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RATING_COLOR_OF, RATING_METRIC_LABEL, RatingMetric, type ClanMemberStats, RATING_COLOR_CLASS } from "@unicum.gg/shared";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import { PlayerName } from "@/components/entity/player-name";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { DEC2_FORMAT } from "@/components/compare/cells";
@@ -34,10 +33,21 @@ type Row = {
   } | null)[];
 };
 
+// The 30-day figure where there is one, the career otherwise. PR and WTR have
+// no 30-day value (see `RatingMetric`), so they rank the career figure alone.
 function pickRating(member: ClanMemberStats, metric: RatingMetric): number | null {
-  if (metric === RatingMetric.Wn7) return member.wn730d ?? member.wn7;
-  if (metric === RatingMetric.Wn8) return member.wn830d ?? member.wn8;
-  return member.wnx30d ?? member.wnx;
+  switch (metric) {
+    case RatingMetric.Wn7:
+      return member.wn730d ?? member.wn7;
+    case RatingMetric.Wn8:
+      return member.wn830d ?? member.wn8;
+    case RatingMetric.Wnx:
+      return member.wnx30d ?? member.wnx;
+    case RatingMetric.Pr:
+      return member.pr ?? null;
+    case RatingMetric.Wtr:
+      return member.wtr ?? null;
+  }
 }
 
 export function TopMembersTab({
@@ -49,20 +59,9 @@ export function TopMembersTab({
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/clans/compare/top-members-tab");
-  const [storedRating] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric: RatingMetric = isRatingMetric(storedRating)
-    ? storedRating
-    : DEFAULT_RATING_METRIC;
+  const { metric } = useRatingMetric();
   const metricLabel = RATING_METRIC_LABEL[metric];
-  const ratingColor: (v: number) => RatingColor =
-    metric === RatingMetric.Wn7
-      ? wn7Color
-      : metric === RatingMetric.Wn8
-        ? wn8Color
-        : wnxColor;
+  const ratingColor = RATING_COLOR_OF[metric];
 
   const rows: Row[] = useMemo(() => {
     const slotTops = slots.map((s) => {

@@ -65,6 +65,10 @@ export type LanguageCount = { code: string; total: number; strict: number };
  * the top of the board, so a recent window always counts from a floor. The
  * lifetime board has no floor and shows no segments.
  *
+ * PR and WTR are account figures with no value over a window (see
+ * `RatingMetric`), so on a recent window they rank the players who cleared its
+ * floors by their current figure, and the intro sentence says so.
+ *
  * The language filter works on every window. Its chips and the strict toggle
  * count the pool of the window on screen (the lifetime counts arrive with the
  * page, a recent window's are fetched beside its rows), and picking a language
@@ -117,7 +121,7 @@ export function TopPlayersPanel({
       );
       return Object.fromEntries(
         RATING_METRICS.map((m, i) => [m, lists[i]]),
-      ) as TopPlayersByMetric;
+      ) as Partial<TopPlayersByMetric>;
     },
     { keepPreviousData: true },
   );
@@ -130,7 +134,7 @@ export function TopPlayersPanel({
         .then((res) => res.results as LanguageCount[]),
     { keepPreviousData: true },
   );
-  const boards = overall ? initial : (data ?? initial);
+  const boards: Partial<TopPlayersByMetric> = overall ? initial : (data ?? initial);
   const stats = overall ? languageStats : (periodStats ?? languageStats);
   const loading = !overall && (isLoading || data === undefined);
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
@@ -162,7 +166,7 @@ export function TopPlayersPanel({
     if (raw && isStrongholdPeriod(raw)) setPeriodCookie(raw);
   }, [setPeriodCookie]);
 
-  const count = boards[RatingMetric.Wnx].length;
+  const count = boards[RatingMetric.Wnx]?.length ?? 0;
 
   return (
     <Panel>
@@ -175,7 +179,9 @@ export function TopPlayersPanel({
             })}
             values={{
               metric: (
-                <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
+                <RatingMetricInlineSelect
+                  className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4"
+                />
               ),
             }}
           />{" "}
@@ -231,7 +237,7 @@ export function TopPlayersPanel({
             <TopPlayersBoard
               region={region}
               metric={metric}
-              results={boards[metric]}
+              results={boards[metric] ?? []}
               page={page}
               // The lifetime board prints the recent figure beside the career
               // one; a recent window already ranks by it.

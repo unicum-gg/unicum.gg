@@ -31,6 +31,8 @@ export type OnslaughtRow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  pr?: number | null;
+  wtr?: number | null;
   is_verified: boolean;
   is_supporter: boolean;
   twitch_login: string | null;

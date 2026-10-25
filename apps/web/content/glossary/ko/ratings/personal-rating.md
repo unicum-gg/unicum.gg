@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargaming의 자체 등급으로 게임 클라이언트와 포털에서 보여지며 배틀 수와 성과에 따라 증가합니다.

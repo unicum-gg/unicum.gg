@@ -3,10 +3,7 @@
 import { useFormat } from "@/hooks/use-format";
 import {
   RatingMetric,
-  RATING_COLOR_CLASS,
-  wn7Color,
-  wn8Color,
-  wnxColor,
+  ratingColorClass,
   type LiveStreamer,
 } from "@unicum.gg/shared";
 import { Period } from "@/hooks/use-period";
@@ -14,30 +11,36 @@ import { ClanTag } from "@/components/entity/clan-tag";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-// Rank on either lifetime or 30-day WN*, driven by the header's period toggle
-// (shared with the "Top players" / "Top clans" panels). 30-day reflects who is
-// playing well right now rather than career averages.
-export const METRIC_VALUE: Record<
-  Period,
-  Record<RatingMetric, (s: LiveStreamer) => number | null>
-> = {
-  [Period.Overall]: {
-    [RatingMetric.Wn7]: (s) => s.wn7,
-    [RatingMetric.Wn8]: (s) => s.wn8,
-    [RatingMetric.Wnx]: (s) => s.wnx,
-  },
-  [Period.Month]: {
-    [RatingMetric.Wn7]: (s) => s.wn730d,
-    [RatingMetric.Wn8]: (s) => s.wn830d,
-    [RatingMetric.Wnx]: (s) => s.wnx30d,
-  },
+// Rank on either the lifetime rating or the 30-day one, driven by the header's
+// period toggle (shared with the "Top players" / "Top clans" panels). 30-day
+// reflects who is playing well right now rather than career averages. PR and
+// WTR have no value over a window, so on those two the rail keeps the current
+// figure: every streamer on it is active by definition.
+const LIFETIME_VALUE: Record<RatingMetric, (s: LiveStreamer) => number | null> = {
+  [RatingMetric.Wn7]: (s) => s.wn7,
+  [RatingMetric.Wn8]: (s) => s.wn8,
+  [RatingMetric.Wnx]: (s) => s.wnx,
+  // Absent on a payload cached before the two were added.
+  [RatingMetric.Pr]: (s) => s.pr ?? null,
+  [RatingMetric.Wtr]: (s) => s.wtr ?? null,
 };
 
-const METRIC_COLOR: Record<RatingMetric, (v: number) => string> = {
-  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
-  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
-  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
+const MONTH_VALUE: Record<RatingMetric, (s: LiveStreamer) => number | null> = {
+  [RatingMetric.Wn7]: (s) => s.wn730d,
+  [RatingMetric.Wn8]: (s) => s.wn830d,
+  [RatingMetric.Wnx]: (s) => s.wnx30d,
+  [RatingMetric.Pr]: LIFETIME_VALUE[RatingMetric.Pr],
+  [RatingMetric.Wtr]: LIFETIME_VALUE[RatingMetric.Wtr],
 };
+
+/** A streamer's rating in the reader's pick over a period. */
+export function streamValue(
+  s: LiveStreamer,
+  metric: RatingMetric,
+  period: Period,
+): number | null {
+  return (period === Period.Month ? MONTH_VALUE : LIFETIME_VALUE)[metric](s);
+}
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
@@ -56,7 +59,7 @@ export function StreamRow({
   onSelect: () => void;
 }) {
   const { num } = useFormat();
-  const value = METRIC_VALUE[period][metric](streamer);
+  const value = streamValue(streamer, metric, period);
   return (
     <TableRow
       onClick={onSelect}
@@ -88,7 +91,8 @@ export function StreamRow({
       <TableCell
         className={cn(
           "pr-4 text-right font-semibold tabular-nums",
-          value != null && METRIC_COLOR[metric](value),
+          value != null &&
+            ratingColorClass(metric, value),
         )}
       >
         {value != null ? num(INT_FORMAT).format(value) : "—"}

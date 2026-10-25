@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Ratingul Wargaming, afișat în clientul jocului și pe portal, care crește odată cu numărul de bătălii jucate, precum și cu performanța.

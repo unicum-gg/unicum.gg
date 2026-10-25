@@ -13,9 +13,10 @@ export function makeTopPlayersTable(region: string) {
   return pgTable(
     `${region}_top_players`,
     {
-      // 'wn7' | 'wn8' | 'wnx' — the rating used to rank this row. Each
+      // A `RatingMetric` value: the rating used to rank this row. Each
       // period has its own ranking per metric, so (metric, period, rank)
-      // is the natural primary key.
+      // is the natural primary key. PR and WTR are ranked on the lifetime
+      // period only, since neither has a value over a window.
       metric: text("metric").notNull(),
       period: text("period").notNull(),
       rank: integer("rank").notNull(),

@@ -4,7 +4,7 @@ import { numberFormat } from "@/lib/format";
 
 import { useLocale } from "@onruntime/translations/react";
 import { useMemo } from "react";
-import { type VehicleMeta, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
+import { type VehicleMeta, computeWN7, computeWN8, computeWNX, prColor, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor, wtrColor } from "@unicum.gg/shared";
 import {
   avgCell,
   bestIndex,
@@ -105,9 +105,12 @@ export function OverallTab({
         kind: "higher",
         cells: wnxValues.map((v) => ratingCell(v, wnxColor, locale)),
       },
-      statRow("WTR", "higher", (s) => numCell(s.latest!.wtr, locale, INT_FORMAT)),
+      // Coloured on their own scales now that both are selectable ratings.
+      statRow("WTR", "higher", (s) =>
+        ratingCell(s.latest!.wtr, wtrColor, locale, INT_FORMAT),
+      ),
       statRow("Personal Rating", "higher", (s) =>
-        numCell(s.latest!.globalRating, locale, INT_FORMAT),
+        ratingCell(s.latest!.globalRating, prColor, locale, INT_FORMAT),
       ),
       statRow("Avg damage", "higher", (s) =>
         avgCell(s.latest!.damageDealt, s.latest!.battles, locale),

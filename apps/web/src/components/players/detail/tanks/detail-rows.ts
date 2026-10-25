@@ -27,7 +27,8 @@ export type DetailRow = {
   /** Colour for the value, currently the rating tier of a WN row. */
   color?: string;
   /** Set on a rating line. All three are rendered and the site's
-   * `html[data-rating-metric]` rule hides the two the reader did not pick, so
+   * `html[data-rating-wn]` rule hides the two the reader did not pick (a
+   * vehicle has no PR or WTR, so those readers see WNX), so
    * one cached page serves every metric. */
   metric?: RatingMetric;
   /** A breakdown of the line above it, indented and dimmed like the tank

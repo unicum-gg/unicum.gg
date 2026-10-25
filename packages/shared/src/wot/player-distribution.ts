@@ -1,6 +1,13 @@
 import type { Region, VehicleType } from "@unicum.gg/wargaming";
 import { RatingMetric } from "../constants/rating";
-import { type RatingColor, wn7Color, wn8Color, wnxColor } from "./ratings";
+import {
+  RATING_COLOR_CLASS,
+  type RatingColor,
+  wn7Color,
+  wn8Color,
+  wnxColor,
+} from "./ratings";
+import { prColor, wtrColor } from "./account-ratings";
 
 /**
  * How the region's tracked players are spread across win rate and WNX, and how
@@ -34,6 +41,10 @@ export const WINRATE_RANGE = { min: 0.3, max: 0.7, steps: 40 } as const;
  * EU), so every range holds all but a rounding error of the population and its
  * last bucket stays a tail rather than a wall. WN7 is a shorter scale than the
  * other two and gets a shorter axis rather than thirty columns of nothing.
+ *
+ * PR and WTR are Wargaming's scales and run about four times longer (99th
+ * percentile 9587 and 9199 on EU), so their steps are 250 wide: the same
+ * forty-odd columns over the part of the scale real players sit in.
  */
 export const RATING_RANGES: Record<
   RatingMetric,
@@ -42,6 +53,8 @@ export const RATING_RANGES: Record<
   [RatingMetric.Wn7]: { min: 0, max: 2000, steps: 20 },
   [RatingMetric.Wn8]: { min: 0, max: 3000, steps: 30 },
   [RatingMetric.Wnx]: { min: 0, max: 3000, steps: 30 },
+  [RatingMetric.Pr]: { min: 0, max: 11_000, steps: 44 },
+  [RatingMetric.Wtr]: { min: 0, max: 11_000, steps: 44 },
 };
 
 /** The band a value of each metric wears, so a histogram can be coloured by
@@ -53,7 +66,20 @@ export const RATING_COLOR_OF: Record<
   [RatingMetric.Wn7]: wn7Color,
   [RatingMetric.Wn8]: wn8Color,
   [RatingMetric.Wnx]: wnxColor,
+  [RatingMetric.Pr]: prColor,
+  [RatingMetric.Wtr]: wtrColor,
 };
+
+/** The colour band a value of `metric` wears. */
+export function ratingColorOf(metric: RatingMetric, value: number): RatingColor {
+  return RATING_COLOR_OF[metric](value);
+}
+
+/** The cell classes a value of `metric` is painted with, the one lookup every
+ * rating column on the site makes. */
+export function ratingColorClass(metric: RatingMetric, value: number): string {
+  return RATING_COLOR_CLASS[RATING_COLOR_OF[metric](value)];
+}
 
 /** The domain a value can take at all, so the two edge buckets have real edges
  * to be measured against rather than an infinity. */
@@ -64,8 +90,21 @@ export const WINRATE_DOMAIN = { min: 0, max: 1 } as const;
  * (1,699 EU accounts do, down to -316), so a domain starting at zero left the
  * underflow bucket spanning nothing, and those players were dropped from the
  * histogram while still counted in the population it is measured against.
+ *
+ * The ceiling is per metric. PR and WTR run about four times longer than the
+ * WN ratings, so their histogram range ends at 11,000 and a ceiling of 10,000
+ * would make their overflow bucket end below where it started: 30,000 is the
+ * ceiling `ratingScale` already searches those two scales up to. The WN ratings
+ * keep 10,000, since `percentileOf` interpolates inside the overflow bucket
+ * and stretching it would move every WN reading above the 99th percentile.
  */
-export const RATING_DOMAIN = { min: -2000, max: 10_000 } as const;
+export const RATING_DOMAINS: Record<RatingMetric, { min: number; max: number }> = {
+  [RatingMetric.Wn7]: { min: -2000, max: 10_000 },
+  [RatingMetric.Wn8]: { min: -2000, max: 10_000 },
+  [RatingMetric.Wnx]: { min: -2000, max: 10_000 },
+  [RatingMetric.Pr]: { min: -2000, max: 30_000 },
+  [RatingMetric.Wtr]: { min: -2000, max: 30_000 },
+};
 
 /**
  * One column of a histogram, half-open: `from` included, `to` excluded. The

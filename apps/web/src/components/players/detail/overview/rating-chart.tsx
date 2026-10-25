@@ -9,7 +9,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { RatingMetric, type RatingHistoryPoint, RATING_COLOR_HEX, type RatingColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RatingMetric, type RatingHistoryPoint, RATING_COLOR_HEX, RATING_COLOR_OF, ratingBands } from "@unicum.gg/shared";
 
 const DAY_PATTERN = "d MMM";
 
@@ -17,28 +17,22 @@ const TOOLTIP_DAY_PATTERN = "EEE d MMM";
 
 const VALUE_FORMAT = { maximumFractionDigits: 0 } as const;
 
-// Tier thresholds per metric, mirroring the buckets in
-// src/services/wargaming/wot/ratings.ts. Used to place gradient stops where
-// the colored line should "jump" from one tier to the next.
-const TIER_THRESHOLDS: Record<RatingMetric, readonly number[]> = {
-  [RatingMetric.Wn7]: [500, 700, 900, 1100, 1350, 1550, 1850, 2050],
-  [RatingMetric.Wn8]: [300, 600, 900, 1250, 1600, 1900, 2350, 2900],
-  [RatingMetric.Wnx]: [200, 400, 800, 1200, 1600, 1800, 2200, 2800],
-};
-
-const COLOR_FN: Record<RatingMetric, (v: number) => RatingColor> = {
-  [RatingMetric.Wn7]: wn7Color,
-  [RatingMetric.Wn8]: wn8Color,
-  [RatingMetric.Wnx]: wnxColor,
-};
+// Where the coloured line should "jump" from one tier to the next: the band
+// edges of each metric's scale, read off its colour function by `ratingBands`
+// rather than kept here as a second copy of the thresholds.
+function tierThresholds(metric: RatingMetric): number[] {
+  return ratingBands(metric)
+    .map((band) => band.to)
+    .filter((to): to is number => to !== null);
+}
 
 function buildGradientStops(
   minVal: number,
   maxVal: number,
   metric: RatingMetric,
 ): { offset: number; color: string }[] {
-  const colorFn = COLOR_FN[metric];
-  const thresholds = TIER_THRESHOLDS[metric];
+  const colorFn = RATING_COLOR_OF[metric];
+  const thresholds = tierThresholds(metric);
   if (minVal === maxVal) {
     const color = RATING_COLOR_HEX[colorFn(minVal)];
     return [
@@ -90,8 +84,9 @@ export function PlayerRatingChart({
   // integer values. The chart doesn't need sub-unit precision and the
   // default tooltip formatter prints every decimal otherwise.
   const chartData: ChartDatum[] = data.map((d) => {
-    const lifetime = d.lifetime[metric];
-    const session = d.session[metric];
+    // `?? null`: a payload cached before PR and WTR joined the series lacks them.
+    const lifetime = d.lifetime[metric] ?? null;
+    const session = d.session[metric] ?? null;
     return {
       day: d.day,
       lifetime: lifetime === null ? null : Math.round(lifetime),
@@ -99,7 +94,7 @@ export function PlayerRatingChart({
     };
   });
   const { t } = useTranslation("components/players/detail/overview/rating-chart");
-  const colorFn = COLOR_FN[metric];
+  const colorFn = RATING_COLOR_OF[metric];
   const sessionValues = chartData
     .map((d) => d.session)
     .filter((v): v is number => v !== null);

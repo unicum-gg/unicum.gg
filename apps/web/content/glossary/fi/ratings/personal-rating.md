@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargamingin oma arvio, joka näkyy pelin asiakasohjelmassa ja portaalissa, ja joka kasvaa pelattujen taistelujen määrän sekä suorituskyvyn myötä.

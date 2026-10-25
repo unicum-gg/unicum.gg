@@ -1,5 +1,5 @@
 import type { Region } from "@unicum.gg/wargaming";
-import { RatingMetric } from "../constants/rating";
+import { RATING_METRICS, RatingMetric } from "../constants/rating";
 import type { RatingColor } from "./ratings";
 
 /**
@@ -187,11 +187,9 @@ export function emptyActivity(
     region,
     window,
     minBattles,
-    metrics: {
-      [RatingMetric.Wn7]: [],
-      [RatingMetric.Wn8]: [],
-      [RatingMetric.Wnx]: [],
-    },
+    metrics: Object.fromEntries(
+      RATING_METRICS.map((metric) => [metric, [] as ActivityBand[]]),
+    ) as Record<RatingMetric, ActivityBand[]>,
     computedAt: null,
   };
 }

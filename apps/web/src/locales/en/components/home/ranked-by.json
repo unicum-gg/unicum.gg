@@ -1,6 +1,9 @@
 {
   "day": "Ranked by {metric} over the past 24 hours, tier VI and up (min. 20 battles).",
+  "day-account": "Ranked by {metric} among the players with 20 battles at tier VI and up over the past 24 hours.",
   "week": "Ranked by {metric} over the past 7 days, tier VI and up (min. 140 battles).",
+  "week-account": "Ranked by {metric} among the players with 140 battles at tier VI and up over the past 7 days.",
   "month": "Ranked by {metric} over the past 30 days, tier VI and up (min. 600 battles).",
+  "month-account": "Ranked by {metric} among the players with 600 battles at tier VI and up over the past 30 days.",
   "overall": "Ranked by all-time {metric} (min. 20,000 battles)."
 }

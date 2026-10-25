@@ -83,6 +83,8 @@ export const PlayerActivityResponse = z
         wn7: z.array(band),
         wn8: z.array(band),
         wnx: z.array(band),
+        pr: z.array(band),
+        wtr: z.array(band),
       })
       .meta({
         id: "ActivityMetrics",

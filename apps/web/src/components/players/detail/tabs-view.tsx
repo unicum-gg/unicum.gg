@@ -49,6 +49,7 @@ import {
   DEFAULT_TANK_BATTLE_MODE,
   SessionGranularity,
   modeWinrateColor,
+  wnRatingMetric,
 } from "@unicum.gg/shared";
 import type {
   PlayerAchievements,
@@ -292,7 +293,8 @@ export function PlayerTabsView({
     current: detail.current,
     periods: detail.periods,
     derived: detail.derived,
-    liftDrag: detail.liftDrag[metric],
+    // Per vehicle, so WN only: a PR or WTR reader reads the WNX breakdown.
+    liftDrag: detail.liftDrag[wnRatingMetric(metric)],
     ratingData: detail.ratingHistory,
     metric,
     metricLabel,
@@ -391,7 +393,8 @@ export function PlayerTabsView({
         <BattlesTab
           region={region}
           nickname={nickname}
-          metric={metric}
+          // A battle has no PR or WTR (see `RatingMetric`).
+          metric={wnRatingMetric(metric)}
           battleCount={detail.battleCount ?? 0}
           initialBattles={initialBattles}
         />

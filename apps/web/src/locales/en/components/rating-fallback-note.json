@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} is an account rating and cannot score a single battle, so {shown} is shown here.",
+  "vehicle": "{metric} is an account rating with no value per vehicle, so {shown} is shown here.",
+  "window": "{metric} is an account rating with no value over a period, so {shown} is shown here."
+}

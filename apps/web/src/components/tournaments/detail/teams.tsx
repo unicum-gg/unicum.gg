@@ -37,7 +37,7 @@ import {
   ratingColor,
   ratingOf,
   recentRatingOf,
-  useRatingMetric,
+  useTournamentMetric,
 } from "./team-rating";
 import {
   nextSort,
@@ -128,7 +128,7 @@ export function TournamentTeams({
 }) {
   const { num } = useFormat();
   const { t } = useTranslation("components/tournaments/detail/teams");
-  const metric = useRatingMetric();
+  const metric = useTournamentMetric();
   const [sort, setSort] = useState<TeamSortState>(null);
 
   // Resolved once over the WHOLE field, not the filtered page: which place a

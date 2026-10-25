@@ -4,10 +4,9 @@ import { metricLabel } from "@/components/tanks/perf-columns";
 import {
   RATING_COLOR_CLASS,
   RatingMetric,
+  ratingColorClass,
   winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
+  wnRatingMetric,
   type SessionStats,
 } from "@unicum.gg/shared";
 
@@ -65,16 +64,10 @@ export type SessionColumn = {
   has?: (s: SessionStats) => boolean;
 };
 
+// A session is a window, so it carries the three WN ratings and a PR or WTR
+// reader reads its WNX (see `RatingMetric`).
 function ratingOf(s: SessionStats, metric: RatingMetric): number | null {
-  if (metric === RatingMetric.Wn7) return s.wn7;
-  if (metric === RatingMetric.Wn8) return s.wn8;
-  return s.wnx;
-}
-
-function ratingColorClass(value: number, metric: RatingMetric): string {
-  if (metric === RatingMetric.Wn7) return RATING_COLOR_CLASS[wn7Color(value)];
-  if (metric === RatingMetric.Wn8) return RATING_COLOR_CLASS[wn8Color(value)];
-  return RATING_COLOR_CLASS[wnxColor(value)];
+  return s[wnRatingMetric(metric)];
 }
 
 const num = (
@@ -95,7 +88,7 @@ export const SESSION_COLUMNS: SessionColumn[] = [
       const v = ratingOf(s, metric);
       return {
         node: v == null ? DASH : numberFormat(locale, INT_FORMAT).format(v),
-        className: v == null ? undefined : ratingColorClass(v, metric),
+        className: v == null ? undefined : ratingColorClass(wnRatingMetric(metric), v),
       };
     },
   },

@@ -1,6 +1,6 @@
 import type { Region } from "@unicum.gg/wargaming";
 import { RatingMetric } from "../constants/rating";
-import { RATING_COLOR_OF, RATING_DOMAIN } from "./player-distribution";
+import { RATING_COLOR_OF, RATING_DOMAINS } from "./player-distribution";
 import type { RatingColor } from "./ratings";
 
 /**
@@ -107,12 +107,13 @@ export function ratingBands(metric: RatingMetric): RatingBand[] {
   if (cached) return cached;
 
   const colorOf = RATING_COLOR_OF[metric];
+  const domain = RATING_DOMAINS[metric];
   const bands: RatingBand[] = [];
-  let color = colorOf(RATING_DOMAIN.min);
+  let color = colorOf(domain.min);
   let from: number | null = null;
   // Whole steps, because every threshold in those functions is an integer, so a
   // unit walk lands exactly on each of them.
-  for (let value = RATING_DOMAIN.min + 1; value <= RATING_DOMAIN.max; value++) {
+  for (let value = domain.min + 1; value <= domain.max; value++) {
     const next = colorOf(value);
     if (next === color) continue;
     bands.push({ color, from, to: value });

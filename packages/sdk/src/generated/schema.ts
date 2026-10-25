@@ -2906,7 +2906,7 @@ export interface components {
             total: number;
             strict: number;
         };
-        /** @description A clan member with cached WN7/WN8/WNX ratings. */
+        /** @description A clan member with cached WN7/WN8/WNX ratings and Wargaming's Personal Rating (`pr`) and WTR. */
         ClanMember: {
             accountId: number;
             name: string;
@@ -2922,6 +2922,8 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            pr?: number | null;
+            wtr?: number | null;
             wn730d: number | null;
             wn830d: number | null;
             wnx30d: number | null;
@@ -2986,9 +2988,9 @@ export interface components {
             board: "advances" | "t10" | "t8" | "t6";
             rank: number;
         };
-        /** @description The clan's battle-weighted aggregate ratings: lifetime and 30-day WN7/WN8/WNX (weighted by lifetime and recent battles), plus the lifetime average win rate. */
+        /** @description The clan's battle-weighted aggregate ratings: lifetime WN7/WN8/WNX/PR/WTR weighted by lifetime battles, the 30-day WN7/WN8/WNX weighted by recent battles (PR and WTR have no window), plus the lifetime average win rate. */
         ClanRatings: {
-            lifetime: components["schemas"]["ratingTriplet"];
+            lifetime: components["schemas"]["lifetimeRatings"];
             recent: components["schemas"]["ratingTriplet"];
             avgWinrate: number | null;
         };
@@ -3631,6 +3633,13 @@ export interface components {
             /** @description Players/clans whose clan declares only this language. */
             strict: number;
         };
+        lifetimeRatings: {
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+            pr: number | null;
+            wtr: number | null;
+        };
         liftDragByMetricEntry: {
             lift: components["schemas"]["LiftDragRow"][];
             drag: components["schemas"]["LiftDragRow"][];
@@ -3663,6 +3672,8 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            pr?: number | null;
+            wtr?: number | null;
             wn730d: number | null;
             wn830d: number | null;
             wnx30d: number | null;
@@ -4319,6 +4330,10 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            /** @description Personal Rating, Wargaming's own account figure. */
+            pr: number | null;
+            /** @description World of Tanks Rating, Wargaming's own account figure. */
+            wtr: number | null;
             /** @description WN7 over the last 30 days. Null for an account with no battle inside that window. */
             wn7_30d: number | null;
             /** @description WN8 over the last 30 days. Null for an account with no battle inside that window. */
@@ -4679,6 +4694,8 @@ export interface components {
                 wn7: components["schemas"]["ActivityBand"][];
                 wn8: components["schemas"]["ActivityBand"][];
                 wnx: components["schemas"]["ActivityBand"][];
+                pr: components["schemas"]["ActivityBand"][];
+                wtr: components["schemas"]["ActivityBand"][];
             };
             /**
              * Format: date-time
@@ -4705,6 +4722,8 @@ export interface components {
                 wn7: components["schemas"]["ActivityBand"][];
                 wn8: components["schemas"]["ActivityBand"][];
                 wnx: components["schemas"]["ActivityBand"][];
+                pr: components["schemas"]["ActivityBand"][];
+                wtr: components["schemas"]["ActivityBand"][];
             };
             /**
              * Format: date-time
@@ -4950,6 +4969,8 @@ export interface components {
                 wn7: components["schemas"]["DistributionBucket"][];
                 wn8: components["schemas"]["DistributionBucket"][];
                 wnx: components["schemas"]["DistributionBucket"][];
+                pr: components["schemas"]["DistributionBucket"][];
+                wtr: components["schemas"]["DistributionBucket"][];
             };
             byTier: components["schemas"]["TierShare"][];
             byType: components["schemas"]["TypeShare"][];
@@ -4976,6 +4997,8 @@ export interface components {
                 wn7: components["schemas"]["DistributionBucket"][];
                 wn8: components["schemas"]["DistributionBucket"][];
                 wnx: components["schemas"]["DistributionBucket"][];
+                pr: components["schemas"]["DistributionBucket"][];
+                wtr: components["schemas"]["DistributionBucket"][];
             };
             byTier: components["schemas"]["TierShare"][];
             byType: components["schemas"]["TypeShare"][];
@@ -5548,7 +5571,7 @@ export interface components {
          * @enum {string}
          */
         ratingConsensusField: "agreed" | "mixed" | "divisive";
-        /** @description Daily rating sample: lifetime and per-session values, each carrying all three metrics (wn7/wn8/wnx) so the client can switch metric without a refetch. */
+        /** @description Daily rating sample: lifetime and per-session values, each carrying every metric so the client can switch metric without a refetch. `pr` and `wtr` are Wargaming's account figures as they stood at the end of the day, so they are null on `session`. */
         RatingHistoryPoint: {
             day: string;
             lifetime: components["schemas"]["ratingMetricValues"];
@@ -5558,6 +5581,8 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            pr?: number | null;
+            wtr?: number | null;
         };
         ratings: {
             wn7: number | null;
@@ -5584,7 +5609,7 @@ export interface components {
              * @description Which quantity this scale paints.
              * @enum {string}
              */
-            scale: "wn7" | "wn8" | "wnx" | "winrate" | "mr" | "rampageWinrate" | "strongholdRating" | "strongholdRatingBattles" | "strongholdWinrate" | "starRating";
+            scale: "wn7" | "wn8" | "wnx" | "pr" | "wtr" | "winrate" | "mr" | "rampageWinrate" | "strongholdRating" | "strongholdRatingBattles" | "strongholdWinrate" | "starRating";
             /**
              * @description How its numbers are written: `ratio` runs 0 to 1, `points` and `stars` are the value as shown. A caller holding a win rate as a percentage has to divide before comparing it to a `ratio` scale.
              * @enum {string}
@@ -5605,6 +5630,10 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            /** @description Personal Rating, Wargaming's own account figure. Always null on `recent`: an account figure has no 30-day window. */
+            pr: number | null;
+            /** @description World of Tanks Rating, Wargaming's own account figure. Always null on `recent`, for the same reason. */
+            wtr: number | null;
             battles: number | null;
             /** @description Percentage, 0 to 100, on the same scale `/ratings/scales` publishes. Null when the window holds no battles, which is not a win rate of zero, and null on `recent` for an account whose wins over the window have not been computed yet: that figure is written on an account's next refresh and was introduced after the ratings beside it, so a recent `battles` with a null `winrate` means not yet rather than none. */
             winrate: number | null;
@@ -7023,6 +7052,8 @@ export interface components {
                 wn7: components["schemas"]["TierWinrateCell"][];
                 wn8: components["schemas"]["TierWinrateCell"][];
                 wnx: components["schemas"]["TierWinrateCell"][];
+                pr: components["schemas"]["TierWinrateCell"][];
+                wtr: components["schemas"]["TierWinrateCell"][];
             };
             /**
              * Format: date-time
@@ -7063,6 +7094,8 @@ export interface components {
                 wn7: components["schemas"]["TierWinrateCell"][];
                 wn8: components["schemas"]["TierWinrateCell"][];
                 wnx: components["schemas"]["TierWinrateCell"][];
+                pr: components["schemas"]["TierWinrateCell"][];
+                wtr: components["schemas"]["TierWinrateCell"][];
             };
             /**
              * Format: date-time
@@ -7661,7 +7694,7 @@ export interface operations {
                 min_tier?: components["schemas"]["minTierField"];
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
-                metric?: "wn7" | "wn8" | "wnx";
+                metric?: "wn7" | "wn8" | "wnx" | "pr" | "wtr";
                 lang?: components["schemas"]["playerLangField"];
                 /** @deprecated */
                 language?: components["schemas"]["deprecatedLangField"];
@@ -8412,7 +8445,7 @@ export interface operations {
                 period?: components["schemas"]["clanPeriodField"];
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
-                metric?: "wn7" | "wn8" | "wnx";
+                metric?: "wn7" | "wn8" | "wnx" | "pr" | "wtr";
                 lang?: components["schemas"]["langField"];
                 /** @deprecated */
                 language?: components["schemas"]["deprecatedLangField"];

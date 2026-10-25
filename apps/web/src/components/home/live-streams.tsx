@@ -14,7 +14,7 @@ import { useLocale } from "@onruntime/translations/react";
 import { languageDisplayName } from "@/lib/language-name";
 import Image from "next/image";
 import { useMemo, useState, useSyncExternalStore } from "react";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer, languageToCountryCode } from "@unicum.gg/shared";
+import { RATING_METRIC_LABEL, type LiveStreamer, languageToCountryCode } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
 import { StreamSurface } from "@/components/home/stream-surface";
 import { usePeriod } from "@/hooks/use-period";
@@ -22,7 +22,10 @@ import { useTranslation } from "@/hooks/use-translation";
 import { PeriodSelect } from "@/components/home/period-select";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
-import { METRIC_VALUE, StreamRow } from "@/components/home/stream-row";
+import {
+  StreamRow,
+  streamValue,
+} from "@/components/home/stream-row";
 import {
   Panel,
   PanelContent,
@@ -44,8 +47,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import APP from "@/constants/app";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import { useLiveStreamers } from "@/hooks/use-live-streamers";
 import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
@@ -68,21 +70,20 @@ export function LiveStreams({
   // rail paints without a flash.
   const streamers = useLiveStreamers(initial);
 
-  const [storedMetric] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric: RatingMetric = isRatingMetric(storedMetric)
-    ? storedMetric
-    : DEFAULT_RATING_METRIC;
+  const { metric } = useRatingMetric();
+  const [period, setPeriod] = usePeriod();
+  // Over the 30 days a PR or WTR pick reads WNX, which the heading names.
   const metricLabel = RATING_METRIC_LABEL[metric];
 
-  const [period, setPeriod] = usePeriod();
-
-  const sorted = useMemo(() => {
-    const value = METRIC_VALUE[period][metric];
-    return [...streamers].sort((a, b) => (value(b) ?? -1) - (value(a) ?? -1));
-  }, [streamers, metric, period]);
+  const sorted = useMemo(
+    () =>
+      [...streamers].sort(
+        (a, b) =>
+          (streamValue(b, metric, period) ?? -1) -
+          (streamValue(a, metric, period) ?? -1),
+      ),
+    [streamers, metric, period],
+  );
 
   // The featured stream follows the top of the current sort (metric + period)
   // until the visitor explicitly picks one in the table; their pick then

@@ -39,6 +39,10 @@ export function makePlayerPeriodRatingsTable(region: string) {
       wn7: real("wn7"),
       wn8: real("wn8"),
       wnx: real("wnx"),
+      // The account's current PR and WTR, copied off the player row. Neither
+      // exists over a window, so on these the board ranks who was active in it.
+      pr: real("pr"),
+      wtr: real("wtr"),
       // Same inference and same semantics as `player_ratings.languages`, but
       // empty for an account with no clan history rather than absent.
       languages: text("languages").array().notNull().default([]),
@@ -64,6 +68,8 @@ export function makePlayerPeriodRatingsTable(region: string) {
       index(`${region}_player_period_ratings_wn7_idx`).on(t.period, t.minTier, t.wn7.desc()),
       index(`${region}_player_period_ratings_wn8_idx`).on(t.period, t.minTier, t.wn8.desc()),
       index(`${region}_player_period_ratings_wnx_idx`).on(t.period, t.minTier, t.wnx.desc()),
+      index(`${region}_player_period_ratings_pr_idx`).on(t.period, t.minTier, t.pr.desc()),
+      index(`${region}_player_period_ratings_wtr_idx`).on(t.period, t.minTier, t.wtr.desc()),
     ],
   );
 }

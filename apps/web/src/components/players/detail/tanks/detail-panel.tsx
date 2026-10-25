@@ -9,10 +9,8 @@ import dynamic from "next/dynamic";
 import Link from "@/components/link";
 import { toRoman } from "roman-numerals";
 import {
-  DEFAULT_RATING_METRIC,
   RATING_METRIC_LABEL,
   DEFAULT_TANK_BATTLE_MODE,
-  isRatingMetric,
   type PlayerAchievement,
   type PlayerTankDetail,
   type PlayerTankModeRecord,
@@ -23,8 +21,7 @@ import { MountOnVisible } from "@/components/mount-on-visible";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { TankAwards } from "./awards";
 import { TankModeSelect } from "./mode-select";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import type { Region } from "@unicum.gg/wargaming";
 import { PanelHeader } from "@/components/panel";
 import { NationFlag } from "@/components/tanks/nation-flag";
@@ -119,13 +116,9 @@ export function PlayerTankDetailPanel({
   // `TankRecordStats` was split out. `detail` stands in only while the record
   // predates the breakdown being collected, which fills in on the next refresh.
   const shown: TankRecordStats = modeRecord ?? detail;
-  const [storedMetric] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric = isRatingMetric(storedMetric)
-    ? storedMetric
-    : DEFAULT_RATING_METRIC;
+  // Per vehicle, so WN only: a PR or WTR reader reads WNX (see
+  // `RatingMetric`).
+  const { wnMetric: metric } = useRatingMetric();
   // A day with no battle on this tank carries no session value, so a vehicle
   // parked for the window charts as a flat line with nothing on it. Below two
   // points there is no line at all, and the panel says so instead.
@@ -271,7 +264,7 @@ export function PlayerTankDetailPanel({
           <h4 className="mb-1.5 text-sm font-semibold">
             <Interpolate
               template={t("metric-progression")}
-              values={{ metric: <RatingMetricInlineSelect /> }}
+              values={{ metric: <RatingMetricInlineSelect wnOnly /> }}
             />
           </h4>
           {chartable >= 2 ? (
@@ -341,7 +334,7 @@ function Block({
         {rows.map((r) => (
           <div
             key={r.label}
-            data-rating-col={r.metric}
+            data-rating-wn-col={r.metric}
             className={cn("flex items-baseline gap-2 text-sm", r.sub && "pl-3")}
           >
             <dt
@@ -354,7 +347,7 @@ function Block({
                   metric's name, so making it the control costs no room and puts
                   the switch on the number it changes. All three rows carry one,
                   and the CSS shows the one whose metric is selected. */}
-              {r.metric ? <RatingMetricInlineSelect /> : statLabel(r.label, tStats)}
+              {r.metric ? <RatingMetricInlineSelect wnOnly /> : statLabel(r.label, tStats)}
             </dt>
             <span
               aria-hidden

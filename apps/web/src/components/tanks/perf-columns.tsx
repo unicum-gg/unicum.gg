@@ -7,7 +7,7 @@ import type { TranslateFunction } from "@onruntime/translations";
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TankStatsRow } from "@/components/tanks/list";
 import { useCookie } from "@/hooks/use-cookie";
-import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, ratingColorClass as metricColorClass, winrateColor, wnRatingMetric } from "@unicum.gg/shared";
 import { useTranslation } from "@/hooks/use-translation";
 
 const COLS_COOKIE = "unicum.perf_columns";
@@ -35,22 +35,18 @@ export enum PerfGroup {
 }
 export const PERF_GROUP_ORDER: PerfGroup[] = [PerfGroup.General, PerfGroup.Combat];
 
+// A vehicle carries the three WN ratings only, so a PR or WTR reader reads its
+// WNX (see `RatingMetric`).
 function ratingValue(s: TankStatsRow, metric: RatingMetric): number | null {
-  if (metric === RatingMetric.Wn7) return s.wn7;
-  if (metric === RatingMetric.Wn8) return s.wn8;
-  return s.wnx;
+  return s[wnRatingMetric(metric)];
 }
 function ratingColorClass(value: number, metric: RatingMetric): string {
-  if (metric === RatingMetric.Wn7) return RATING_COLOR_CLASS[wn7Color(value)];
-  if (metric === RatingMetric.Wn8) return RATING_COLOR_CLASS[wn8Color(value)];
-  return RATING_COLOR_CLASS[wnxColor(value)];
+  return metricColorClass(wnRatingMetric(metric), value);
 }
+/** The label of the rating a per-vehicle column shows for the reader's pick:
+ * WNX for PR and WTR, which have no value per vehicle (see `RatingMetric`). */
 export function metricLabel(metric: RatingMetric): string {
-  return metric === RatingMetric.Wn7
-    ? "WN7"
-    : metric === RatingMetric.Wn8
-      ? "WN8"
-      : "WNX";
+  return RATING_METRIC_LABEL[wnRatingMetric(metric)];
 }
 
 export type PerfCell = { node: ReactNode; className?: string };

@@ -293,29 +293,35 @@
 
 }
 
-/* Rating metric: bold the selected row in 3-row metric tables (player stats),
-   hide the non-selected columns in 3-column metric tables (clan members),
-   hide the non-selected variants in single-metric cells (clan header).
-   Driven by html[data-rating-metric] painted from the cookie. Kept outside
-   @layer base on purpose so it wins over Tailwind utilities like font-medium
-   on the label cell. */
+/* Rating metric: bold the selected row in metric tables (player stats), hide
+   the non-selected columns in metric tables (clan members), hide the
+   non-selected variants in single-metric cells (clan header). Driven by
+   html[data-rating-metric] painted from the cookie. Kept outside @layer base on
+   purpose so it wins over Tailwind utilities like font-medium on the label
+   cell.
+
+   Two attributes, because the five metrics are not all available everywhere.
+   `data-rating-col` gates a surface that carries every metric (an account
+   figure: the player row, the clan average). `data-rating-wn-col` gates one
+   that only has the three WN ratings (a vehicle, a window), and follows
+   html[data-rating-wn], which is the reader's metric or WNX when they picked PR
+   or WTR. Each is matched as a prefix, so a column keyed `wnx-30d` follows
+   `wnx`. */
 html[data-rating-metric="wn7"] [data-rating-row="wn7"] td,
 html[data-rating-metric="wn8"] [data-rating-row="wn8"] td,
-html[data-rating-metric="wnx"] [data-rating-row="wnx"] td {
+html[data-rating-metric="wnx"] [data-rating-row="wnx"] td,
+html[data-rating-metric="pr"] [data-rating-row="pr"] td,
+html[data-rating-metric="wtr"] [data-rating-row="wtr"] td {
   font-weight: 700;
 }
-html[data-rating-metric="wn7"] [data-rating-col="wn8"],
-html[data-rating-metric="wn7"] [data-rating-col="wnx"],
-html[data-rating-metric="wn8"] [data-rating-col="wn7"],
-html[data-rating-metric="wn8"] [data-rating-col="wnx"],
-html[data-rating-metric="wnx"] [data-rating-col="wn7"],
-html[data-rating-metric="wnx"] [data-rating-col="wn8"],
-html[data-rating-metric="wn7"] [data-rating-col="wn8-30d"],
-html[data-rating-metric="wn7"] [data-rating-col="wnx-30d"],
-html[data-rating-metric="wn8"] [data-rating-col="wn7-30d"],
-html[data-rating-metric="wn8"] [data-rating-col="wnx-30d"],
-html[data-rating-metric="wnx"] [data-rating-col="wn7-30d"],
-html[data-rating-metric="wnx"] [data-rating-col="wn8-30d"] {
+html[data-rating-metric="wn7"] [data-rating-col]:not([data-rating-col^="wn7"]),
+html[data-rating-metric="wn8"] [data-rating-col]:not([data-rating-col^="wn8"]),
+html[data-rating-metric="wnx"] [data-rating-col]:not([data-rating-col^="wnx"]),
+html[data-rating-metric="pr"] [data-rating-col]:not([data-rating-col^="pr"]),
+html[data-rating-metric="wtr"] [data-rating-col]:not([data-rating-col^="wtr"]),
+html[data-rating-wn="wn7"] [data-rating-wn-col]:not([data-rating-wn-col^="wn7"]),
+html[data-rating-wn="wn8"] [data-rating-wn-col]:not([data-rating-wn-col^="wn8"]),
+html[data-rating-wn="wnx"] [data-rating-wn-col]:not([data-rating-wn-col^="wnx"]) {
   display: none !important;
 }
 /* Global route-transition progress bar (components/navigation-progress.tsx).

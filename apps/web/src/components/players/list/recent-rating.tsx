@@ -1,12 +1,10 @@
 "use client";
 
 import {
-  RATING_COLOR_CLASS,
   RATING_METRIC_LABEL,
   RatingMetric,
-  wn7Color,
-  wn8Color,
-  wnxColor,
+  ratingColorClass,
+  wnRatingMetric,
 } from "@unicum.gg/shared";
 import { TableCell, TableHead } from "@/components/ui/table";
 import { useFormat } from "@/hooks/use-format";
@@ -25,47 +23,60 @@ const INT_FORMAT = { maximumFractionDigits: 0 } as const;
  */
 const RECENT_MIN_BATTLES = 100;
 
-const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
-  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
-  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
-  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
-};
-
 /**
  * The heading of a leaderboard's 30-day rating column, printed beside the
  * lifetime one the way the clan members table does, so a career and the form
  * the player is in today read side by side.
+ *
+ * `metric` is the BOARD's metric, which is what the column is gated on. What it
+ * prints is `wnRatingMetric(metric)`: a PR or WTR board has no 30-day figure
+ * (see `RatingMetric`), so its column carries WNX and its heading says so.
  */
 export function RecentRatingHead({
   metric,
   className,
   ratingCol,
+  wnCol,
 }: {
   metric: RatingMetric;
   className?: string;
   /** For a board that mounts every metric and lets CSS pick one. */
   ratingCol?: boolean;
+  /** For a table that mounts this column once per WN metric only, gated on
+   * the reader's WN fallback (`data-rating-wn-col`) rather than on their pick. */
+  wnCol?: boolean;
 }) {
   const { t } = useTranslation("components/players/list/recent-rating");
-  const label = RATING_METRIC_LABEL[metric];
+  const shown = wnRatingMetric(metric);
+  const label = RATING_METRIC_LABEL[shown];
   return (
     <TableHead
       data-rating-col={ratingCol ? metric : undefined}
+      data-rating-wn-col={wnCol ? metric : undefined}
       className={cn("w-24 text-right!", className)}
-      title={t("head-hint", { metric: label })}
+      title={
+        shown === metric
+          ? t("head-hint", { metric: label })
+          : t("head-hint-fallback", {
+              metric: RATING_METRIC_LABEL[metric],
+              shown: label,
+            })
+      }
     >
       {t("head", { metric: label })}
     </TableHead>
   );
 }
 
-/** One row's 30-day rating, null when the player has not played inside it. */
+/** One row's 30-day rating, null when the player has not played inside it.
+ * WNX on a PR or WTR board, for the reason the heading gives. */
 export function RecentRatingCell({
   metric,
   value,
   battles,
   className,
   ratingCol,
+  wnCol,
 }: {
   metric: RatingMetric;
   value: number | null | undefined;
@@ -73,6 +84,8 @@ export function RecentRatingCell({
   className?: string;
   /** For a board that mounts every metric and lets CSS pick one. */
   ratingCol?: boolean;
+  /** See `RecentRatingHead`. */
+  wnCol?: boolean;
 }) {
   const { t } = useTranslation("components/players/list/recent-rating");
   const { num } = useFormat();
@@ -80,6 +93,7 @@ export function RecentRatingCell({
     return (
       <TableCell
         data-rating-col={ratingCol ? metric : undefined}
+        data-rating-wn-col={wnCol ? metric : undefined}
         className={cn("text-right text-muted-foreground tabular-nums", className)}
         title={t("none")}
       >
@@ -89,16 +103,18 @@ export function RecentRatingCell({
   }
   const count = battles ?? 0;
   const banded = count >= RECENT_MIN_BATTLES;
+  const shown = wnRatingMetric(metric);
   return (
     <TableCell
       data-rating-col={ratingCol ? metric : undefined}
+      data-rating-wn-col={wnCol ? metric : undefined}
       className={cn(
         "text-right font-semibold tabular-nums",
-        banded ? COLOR_FOR_METRIC[metric](value) : "text-muted-foreground",
+        banded ? ratingColorClass(shown, value) : "text-muted-foreground",
         className,
       )}
       title={t("hint", {
-        metric: RATING_METRIC_LABEL[metric],
+        metric: RATING_METRIC_LABEL[shown],
         battles: num(INT_FORMAT).format(count),
       })}
     >

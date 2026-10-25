@@ -1,10 +1,7 @@
 "use client";
 
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
   RATING_COLOR_CLASS,
   RatingMetric,
   wn8Color,
@@ -12,18 +9,31 @@ import {
 } from "@unicum.gg/shared";
 import type { TournamentTeam } from "./record";
 
-/** The metric the reader picked in the top bar, as every table on the site
- * reads it. */
-export function useRatingMetric(): RatingMetric {
-  const [stored] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
-  return isRatingMetric(stored) ? stored : DEFAULT_RATING_METRIC;
+/** The two ratings a team and its roster carry. */
+export type TournamentMetric = RatingMetric.Wn8 | RatingMetric.Wnx;
+
+/**
+ * Which of the two a reader's pick is shown as: WN7 reads WN8, the roster
+ * table's long-standing fallback, and PR and WTR read WNX, the site's own
+ * fallback for a surface that does not carry them (see `RatingMetric`).
+ */
+export function tournamentMetric(metric: RatingMetric): TournamentMetric {
+  return metric === RatingMetric.Wn7 || metric === RatingMetric.Wn8
+    ? RatingMetric.Wn8
+    : RatingMetric.Wnx;
+}
+
+/** The rating the tournament views show for the metric the reader picked in
+ * the top bar. Its label is what every heading must print, so a reader on WN7
+ * is not shown WN8 figures under a WN7 heading. */
+export function useTournamentMetric(): TournamentMetric {
+  return tournamentMetric(useRatingMetric().metric);
 }
 
 /**
  * A team's average rating on the reader's metric.
  *
- * WN7 has no per-account column, so a reader on it sees WN8, the same fallback
- * the roster table makes.
+ * Takes the metric as `useTournamentMetric` resolves it.
  *
  * Guarded rather than trusted, even though the type says `number | null`: the
  * endpoint sends `cache-control: max-age=300`, so for five minutes after these
@@ -32,7 +42,7 @@ export function useRatingMetric(): RatingMetric {
  */
 export function ratingOf(
   team: TournamentTeam,
-  metric: RatingMetric,
+  metric: TournamentMetric,
 ): number | null {
   const value = metric === RatingMetric.Wnx ? team.avgWnx : team.avgWn8;
   return Number.isFinite(value) ? value : null;
@@ -49,13 +59,13 @@ export function ratingOf(
  */
 export function recentRatingOf(
   team: TournamentTeam,
-  metric: RatingMetric,
+  metric: TournamentMetric,
 ): number | null {
   const value = metric === RatingMetric.Wnx ? team.avgWnx30d : team.avgWn830d;
   return Number.isFinite(value) ? value : null;
 }
 
-export function ratingColor(value: number, metric: RatingMetric): string {
+export function ratingColor(value: number, metric: TournamentMetric): string {
   return RATING_COLOR_CLASS[
     metric === RatingMetric.Wnx ? wnxColor(value) : wn8Color(value)
   ];
@@ -65,7 +75,7 @@ export function ratingColor(value: number, metric: RatingMetric): string {
  * bracket names a tie's sides by team id, not by team). */
 export function ratingsByTeam(
   teams: TournamentTeam[],
-  metric: RatingMetric,
+  metric: TournamentMetric,
 ): Map<number, number> {
   const out = new Map<number, number>();
   for (const team of teams) {

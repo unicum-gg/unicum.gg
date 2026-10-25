@@ -80,10 +80,12 @@ export function ratingCell(
   value: number | null,
   color: (v: number) => RatingColor,
   locale: string,
+  /** Wargaming's ratings are whole numbers and read wrong with two decimals. */
+  format: Intl.NumberFormatOptions = DEC2_FORMAT,
 ): MetricCell {
   if (value === null) return dashCell();
   return {
-    display: numberFormat(locale, DEC2_FORMAT).format(value),
+    display: numberFormat(locale, format).format(value),
     numeric: value,
     color: color(value),
   };

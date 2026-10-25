@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 El índice personal de Wargaming, mostrado en el cliente del juego y en el portal, que crece con el número de batallas jugadas así como con el rendimiento.

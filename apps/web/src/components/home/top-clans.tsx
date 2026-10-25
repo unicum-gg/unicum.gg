@@ -8,8 +8,9 @@ import { clanIdentityFromRow } from "@/components/entity/clan-identity";
 import { Period } from "@/hooks/use-period";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
-import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RATING_METRIC_LABEL, RatingMetric, ratingColorClass } from "@unicum.gg/shared";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
+import { rankedByKey } from "@/components/home/ranked-by";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useTranslation } from "@/hooks/use-translation";
@@ -25,11 +26,6 @@ import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { TopClanResult } from "@unicum.gg/core/wargaming/wot/clans/top";
 
-const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
-  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
-  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
-  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
-};
 import {
   isRegion,
   Region,
@@ -68,7 +64,7 @@ export function TopClans({
         <Interpolate
           template={t(
             period === Period.Month
-              ? "description.month"
+              ? `description.${rankedByKey("month", metric)}`
               : "description.overall",
           )}
           values={{
@@ -138,7 +134,7 @@ function ClanRow({
   metric: RatingMetric;
 }) {
   const { num } = useFormat();
-  const colorClass = COLOR_FOR_METRIC[metric](clan.avg_wnx);
+  const colorClass = ratingColorClass(metric, clan.avg_wnx);
   return (
     <TableRow>
       <TableCell className="px-2! text-center font-mono tabular-nums text-muted-foreground">

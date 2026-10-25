@@ -41,6 +41,14 @@ const ratingWindow = z
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    pr: z.number().nullable().meta({
+      description:
+        "Personal Rating, Wargaming's own account figure. Always null on `recent`: an account figure has no 30-day window.",
+    }),
+    wtr: z.number().nullable().meta({
+      description:
+        "World of Tanks Rating, Wargaming's own account figure. Always null on `recent`, for the same reason.",
+    }),
     battles: z.number().nullable(),
     winrate: z.number().nullable().meta({
       description:

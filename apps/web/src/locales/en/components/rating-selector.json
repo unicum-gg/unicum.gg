@@ -1,3 +1,7 @@
 {
-  "label": "Rating metric"
+  "label": "Rating metric",
+  "group": {
+    "community": "Community",
+    "wargaming": "Wargaming"
+  }
 }

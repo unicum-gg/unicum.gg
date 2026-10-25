@@ -1,5 +1,5 @@
-import { and, asc, eq } from "drizzle-orm";
-import { RatingMetric, tankSnapshotsByRegion, computeAvgTier, type WN8Expected, type WNXExpected, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type RatingHistory, type RatingHistoryPoint, type RatingHistoryMetricValues } from "@unicum.gg/shared";
+import { and, asc, desc, eq, gte, lt } from "drizzle-orm";
+import { RatingMetric, type WnRatingMetric, playerSnapshotsByRegion, tankSnapshotsByRegion, computeAvgTier, type WN8Expected, type WNXExpected, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type RatingHistory, type RatingHistoryPoint, type RatingHistoryMetricValues } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import type { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
@@ -100,6 +100,14 @@ export async function getRatingHistory(
   ]);
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
 
+  // Wargaming's two account ratings, for the whole-player series only: a
+  // vehicle has neither. Read from the lookback's start, plus the last reading
+  // before it so the first day carries the value standing at the time.
+  const accountRatings =
+    tankId === undefined
+      ? await readAccountRatings(region, playerId, startDay)
+      : [];
+
   const points: RatingHistoryPoint[] = [];
   let prevCumulative: Map<number, TankStats> | null = null;
 
@@ -120,10 +128,16 @@ export async function getRatingHistory(
       wnxExpected,
     );
 
+    const account = findLatestAtOrBefore(accountRatings, currentMs);
+    lifetime.pr = account?.pr ?? null;
+    lifetime.wtr = account?.wtr ?? null;
+
     let session: RatingHistoryMetricValues = {
       wn7: null,
       wn8: null,
       wnx: null,
+      pr: null,
+      wtr: null,
     };
     if (prevCumulative !== null) {
       const sessionDelta: TankStats[] = [];
@@ -172,9 +186,44 @@ export async function getRatingHistory(
   return { points };
 }
 
-// All three metrics from one tank set (the DB scan + day bucketing is the
+type AccountRatingRow = { takenAt: Date; pr: number | null; wtr: number | null };
+
+/**
+ * The player's PR and WTR readings from `fromMs` on, ascending, preceded by the
+ * last reading before it. One indexed range read on `(player_id, taken_at)`.
+ */
+async function readAccountRatings(
+  region: Region,
+  playerId: number,
+  fromMs: number,
+): Promise<AccountRatingRow[]> {
+  const snapshots = playerSnapshotsByRegion[region];
+  const columns = {
+    takenAt: snapshots.takenAt,
+    pr: snapshots.globalRating,
+    wtr: snapshots.wtr,
+  };
+  const from = new Date(fromMs);
+  const [before, inRange] = await Promise.all([
+    db
+      .select(columns)
+      .from(snapshots)
+      .where(and(eq(snapshots.playerId, playerId), lt(snapshots.takenAt, from)))
+      .orderBy(desc(snapshots.takenAt))
+      .limit(1),
+    db
+      .select(columns)
+      .from(snapshots)
+      .where(and(eq(snapshots.playerId, playerId), gte(snapshots.takenAt, from)))
+      .orderBy(asc(snapshots.takenAt)),
+  ]);
+  return [...before, ...inRange];
+}
+
+// The three WN metrics from one tank set (the DB scan + day bucketing is the
 // expensive part and shared; computing three ratings per day instead of one is
-// cheap in-memory, and makes the payload metric-agnostic / cacheable).
+// cheap in-memory, and makes the payload metric-agnostic / cacheable). PR and
+// WTR are filled in by the caller from the player snapshots.
 function computeAllMetrics(
   tanks: TankStats[],
   encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
@@ -186,11 +235,13 @@ function computeAllMetrics(
     wn7: computeMetric(RatingMetric.Wn7, tanks, encyclopedia, wn8Expected, wn8Fallback, wnxExpected),
     wn8: computeMetric(RatingMetric.Wn8, tanks, encyclopedia, wn8Expected, wn8Fallback, wnxExpected),
     wnx: computeMetric(RatingMetric.Wnx, tanks, encyclopedia, wn8Expected, wn8Fallback, wnxExpected),
+    pr: null,
+    wtr: null,
   };
 }
 
 function computeMetric(
-  metric: RatingMetric,
+  metric: WnRatingMetric,
   tanks: TankStats[],
   encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
   wn8Expected: Map<number, WN8Expected>,

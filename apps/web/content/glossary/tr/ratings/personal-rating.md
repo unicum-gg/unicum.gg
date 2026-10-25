@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargaming'in kendi derecelendirmesi, oyun istemcisinde ve portaldaki gösterim ile birlikte, oynanan savaş sayısı ve performansa göre artar.

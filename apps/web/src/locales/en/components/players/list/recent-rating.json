@@ -2,5 +2,6 @@
   "head": "30d {metric}",
   "head-hint": "{metric} over the last 30 days. The order of the board does not change.",
   "hint": "{metric} over the last 30 days, from {battles} battles",
-  "none": "No battle in the last 30 days"
+  "none": "No battle in the last 30 days",
+  "head-hint-fallback": "{metric} has no 30-day value, so this column shows {shown} over the last 30 days. The order of the board does not change."
 }

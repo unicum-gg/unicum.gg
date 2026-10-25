@@ -4,8 +4,7 @@ import { Interpolate } from "@/components/interpolate";
 import type { ReactNode } from "react";
 import {
   RATING_METRIC_LABEL,
-  RATING_METRICS,
-  RatingMetric,
+  WN_RATING_METRICS,
   type VehicleMeta,
   RATING_COLOR_CLASS,
   winrateColor,
@@ -21,6 +20,8 @@ import type {
   TopTankPlayersByMetric,
 } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
 import { TankTopPlayers } from "./top-players";
 import {
   Panel,
@@ -30,12 +31,6 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { cn } from "@/lib/utils";
-
-const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {
-  [RatingMetric.Wn7]: "wn7",
-  [RatingMetric.Wn8]: "wn8",
-  [RatingMetric.Wnx]: "wnx",
-};
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const DEC_FORMAT = {
@@ -122,10 +117,11 @@ export async function Performances({
                   }
                 />
                 {/* Only the card matching the active rating metric shows, via
-                    the html[data-rating-metric] cookie-painted CSS toggle. */}
-                <div className="contents" data-rating-col="wn7">
+                    the html[data-rating-wn] cookie-painted CSS toggle: a
+                    vehicle has no PR or WTR, so those show the WNX card. */}
+                <div className="contents" data-rating-wn-col="wn7">
                   <Stat
-                    label={<RatingMetricInlineSelect />}
+                    label={<RatingMetricInlineSelect wnOnly />}
                     value={
                       serverStats.wn7 !== null
                         ? numberFormat(locale, INT_FORMAT).format(serverStats.wn7)
@@ -138,9 +134,9 @@ export async function Performances({
                     }
                   />
                 </div>
-                <div className="contents" data-rating-col="wn8">
+                <div className="contents" data-rating-wn-col="wn8">
                   <Stat
-                    label={<RatingMetricInlineSelect />}
+                    label={<RatingMetricInlineSelect wnOnly />}
                     value={
                       serverStats.wn8 !== null
                         ? numberFormat(locale, INT_FORMAT).format(serverStats.wn8)
@@ -153,9 +149,9 @@ export async function Performances({
                     }
                   />
                 </div>
-                <div className="contents" data-rating-col="wnx">
+                <div className="contents" data-rating-wn-col="wnx">
                   <Stat
-                    label={<RatingMetricInlineSelect />}
+                    label={<RatingMetricInlineSelect wnOnly />}
                     value={
                       serverStats.wnx !== null
                         ? numberFormat(locale, INT_FORMAT).format(serverStats.wnx)
@@ -240,16 +236,21 @@ export async function Performances({
                 by: (
                   <span className="text-fd-muted-foreground">{t("by")}</span>
                 ),
-                metric: <RatingMetricInlineSelect />,
+                metric: <RatingMetricInlineSelect wnOnly />,
               }}
             />
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <div className="px-4 py-3 text-sm text-fd-muted-foreground">
-            {t("best-players-on-ranked-by", { shortName: meta.shortName, region: REGION_LABEL[region] })}</div>
-          {RATING_METRICS.map((m) => (
-            <div key={m} data-rating-col={RATING_COL[m]}>
+            {t("best-players-on-ranked-by", { shortName: meta.shortName, region: REGION_LABEL[region] })}
+            <RatingFallbackNote
+              reason={RatingFallbackReason.Vehicle}
+              className="mt-1"
+            />
+          </div>
+          {WN_RATING_METRICS.map((m) => (
+            <div key={m} data-rating-wn-col={m}>
               <TankTopPlayers
                 players={topByMetric[m]}
                 metric={m}

@@ -4,12 +4,8 @@ import { XIcon } from "@phosphor-icons/react";
 import { toRoman } from "roman-numerals";
 import type { TranslateFunction } from "@onruntime/translations";
 import {
-  RATING_COLOR_CLASS,
   RatingMetric,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-  type RatingColor,
+  ratingColorClass,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { BattleLoadout } from "./battle-loadout";
@@ -21,12 +17,6 @@ import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { Participant } from "./battle-types";
-
-const RATING_COLOR: Record<RatingMetric, (value: number) => RatingColor> = {
-  [RatingMetric.Wn7]: wn7Color,
-  [RatingMetric.Wn8]: wn8Color,
-  [RatingMetric.Wnx]: wnxColor,
-};
 
 /** What `deathReason` says when nobody killed them. Not 0: 0 is a real reason. */
 const SURVIVED = -1;
@@ -197,7 +187,7 @@ export function BattlePlayerPanel({
               <span
                 className={cn(
                   "rounded px-1.5 text-sm font-semibold tabular-nums",
-                  RATING_COLOR_CLASS[RATING_COLOR[metric](rating)],
+                  ratingColorClass(metric, rating),
                 )}
               >
                 {count.format(rating)}

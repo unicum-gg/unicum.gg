@@ -1,6 +1,5 @@
 import { sql, type SQL } from "drizzle-orm";
-
-export type RecentRatingMetric = "wn7" | "wn8" | "wnx";
+import { type RatingMetric, wnRatingMetric } from "@unicum.gg/shared";
 
 /**
  * A player's rating over the last 30 days, read off the `*_players` row, for a
@@ -15,11 +14,14 @@ export type RecentRatingMetric = "wn7" | "wn8" | "wnx";
  * withheld once that battle is older than the window itself: a player idle for
  * a year must read as having no recent rating, not as last year's.
  *
+ * PR and WTR have no value over a window (see `RatingMetric`), so a board
+ * ranked by either prints the WNX of those 30 days, and says so.
+ *
  * `alias` is the SQL alias the `*_players` table carries in the caller's query.
  */
-export function recentRatingSql(metric: RecentRatingMetric, alias = "p"): SQL {
+export function recentRatingSql(metric: RatingMetric, alias = "p"): SQL {
   return sql.raw(
-    `CASE WHEN ${alias}.last_battle_at >= now() - interval '30 days' THEN ${alias}."${metric}_30d" END`,
+    `CASE WHEN ${alias}.last_battle_at >= now() - interval '30 days' THEN ${alias}."${wnRatingMetric(metric)}_30d" END`,
   );
 }
 

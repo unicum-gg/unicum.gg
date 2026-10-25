@@ -6,7 +6,7 @@ import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
 import { identityFromRow } from "@/components/entity/player-identity";
 import { RankMedal } from "@/components/rank-medal";
-import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RatingMetric, ratingColorClass } from "@unicum.gg/shared";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -19,12 +19,6 @@ import {
 import { cn } from "@/lib/utils";
 import type { TopTankPlayer } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import { Region } from "@unicum.gg/wargaming";
-
-const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
-  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
-  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
-  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
-};
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 const PCT_FORMAT = {
@@ -100,7 +94,7 @@ function PlayerRow({
   metric: RatingMetric;
 }) {
   const { num } = useFormat();
-  const colorClass = COLOR_FOR_METRIC[metric](player.value);
+  const colorClass = ratingColorClass(metric, player.value);
   return (
     <TableRow>
       <TableCell className="px-2! text-center font-mono tabular-nums text-muted-foreground">

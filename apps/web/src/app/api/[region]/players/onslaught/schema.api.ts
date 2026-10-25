@@ -56,6 +56,12 @@ export const onslaughtSummary = z
     }),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    pr: z.number().nullable().optional().meta({
+      description: "The account's Personal Rating, Wargaming's own figure.",
+    }),
+    wtr: z.number().nullable().optional().meta({
+      description: "The account's World of Tanks Rating, Wargaming's own figure.",
+    }),
     is_verified: z.boolean().optional(),
     tournament_wins: z.number().optional().meta({
       description:

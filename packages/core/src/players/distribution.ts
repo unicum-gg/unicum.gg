@@ -10,7 +10,7 @@ import {
   tankStatsByRegion,
   type TypeShare,
   vehiclesByRegion,
-  RATING_DOMAIN,
+  RATING_DOMAINS,
   RATING_RANGES,
   type RatingDistributions,
   RATING_METRICS,
@@ -103,14 +103,32 @@ function toBuckets(
  * permissive and less true, since the percentile a player reads would then be
  * measured against a population that differs per metric. Costs nothing today
  * either way (no EU account with a win rate is missing a rating).
+ *
+ * PR and WTR are the exception, deliberately: they are counted inside that same
+ * sample but only where present, rather than being a fifth and sixth gate on
+ * it. Wargaming withholds a WTR until an account has fifty random battles, and
+ * both columns are empty on any row nothing has rewritten since migration 0135,
+ * so gating the sample on them would shrink every histogram on the page to
+ * follow two that are still filling. Their histograms therefore describe a
+ * subset of the sample, measured at 99.5% of it on EU once backfilled.
  * `MATERIALIZED` is load-bearing: without it the
  * planner inlines the CTE into each branch of the union and scans the player
  * table twice for an answer that only needs reading it once. */
 async function readHistograms(region: Region): Promise<BucketRow[]> {
   const t = playersByRegion[region];
+  const branches = RATING_METRICS.map((metric) => {
+    const col = sql.raw(`"${metric}"`);
+    const range = RATING_RANGES[metric];
+    // Inlined rather than bound: a bare parameter in a UNION branch has no type
+    // Postgres can infer, and the values are our own enum.
+    return sql`SELECT ${sql.raw(`'${metric}'`)} AS metric,
+               width_bucket(${col}, ${range.min}, ${range.max}, ${range.steps})::int AS bucket,
+               count(*)::int AS n
+        FROM sample WHERE ${col} IS NOT NULL GROUP BY 2`;
+  });
   return db.execute<BucketRow>(
     sql`WITH sample AS MATERIALIZED (
-          SELECT winrate, wn7, wn8, wnx
+          SELECT winrate, wn7, wn8, wnx, pr, wtr
           FROM ${t}
           WHERE battles >= ${DISTRIBUTION_MIN_BATTLES}
             AND winrate IS NOT NULL
@@ -123,20 +141,7 @@ async function readHistograms(region: Region): Promise<BucketRow[]> {
                count(*)::int AS n
         FROM sample GROUP BY 2
         UNION ALL
-        SELECT 'wn7',
-               width_bucket(wn7, ${RATING_RANGES[RatingMetric.Wn7].min}, ${RATING_RANGES[RatingMetric.Wn7].max}, ${RATING_RANGES[RatingMetric.Wn7].steps})::int,
-               count(*)::int
-        FROM sample GROUP BY 2
-        UNION ALL
-        SELECT 'wn8',
-               width_bucket(wn8, ${RATING_RANGES[RatingMetric.Wn8].min}, ${RATING_RANGES[RatingMetric.Wn8].max}, ${RATING_RANGES[RatingMetric.Wn8].steps})::int,
-               count(*)::int
-        FROM sample GROUP BY 2
-        UNION ALL
-        SELECT 'wnx',
-               width_bucket(wnx, ${RATING_RANGES[RatingMetric.Wnx].min}, ${RATING_RANGES[RatingMetric.Wnx].max}, ${RATING_RANGES[RatingMetric.Wnx].steps})::int,
-               count(*)::int
-        FROM sample GROUP BY 2`,
+        ${sql.join(branches, sql` UNION ALL `)}`,
   );
 }
 
@@ -196,7 +201,7 @@ async function recomputeNow(region: Region): Promise<void> {
   const ratings = Object.fromEntries(
     RATING_METRICS.map((metric) => [
       metric,
-      toBuckets(histograms, metric, RATING_RANGES[metric], RATING_DOMAIN),
+      toBuckets(histograms, metric, RATING_RANGES[metric], RATING_DOMAINS[metric]),
     ]),
   ) as RatingDistributions;
   const players = winrate.reduce((sum, b) => sum + b.count, 0);
@@ -228,6 +233,8 @@ async function recomputeNow(region: Region): Promise<void> {
       wn7: ratings[RatingMetric.Wn7],
       wn8: ratings[RatingMetric.Wn8],
       wnx: ratings[RatingMetric.Wnx],
+      pr: ratings[RatingMetric.Pr],
+      wtr: ratings[RatingMetric.Wtr],
       byTier,
       byType,
     });
@@ -251,6 +258,9 @@ export async function loadPlayerDistribution(
       [RatingMetric.Wn7]: row.wn7,
       [RatingMetric.Wn8]: row.wn8,
       [RatingMetric.Wnx]: row.wnx,
+      // Null on the row written before migration 0135, until the next pass.
+      [RatingMetric.Pr]: row.pr ?? [],
+      [RatingMetric.Wtr]: row.wtr ?? [],
     },
     byTier: row.byTier,
     byType: row.byType,

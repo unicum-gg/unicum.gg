@@ -1,5 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
+  RATING_METRICS,
+  type RatingMetric,
   type ClanRatingsTable,
   clanMembersByRegion,
   clanRatingsByRegion,
@@ -28,12 +30,6 @@ const INSERT_CHUNK = 2000;
 
 type RatingRow = {
   clan_id: string | number;
-  wn7_rated: number;
-  wn7_avg: number | null;
-  wn8_rated: number;
-  wn8_avg: number | null;
-  wnx_rated: number;
-  wnx_avg: number | null;
   winrate_avg: number | null;
   tag: string;
   name: string;
@@ -41,20 +37,23 @@ type RatingRow = {
   emblem: string | null;
   languages: string[] | null;
   members_count: number;
-};
+} & Record<`${RatingMetric}_rated`, number> &
+  Record<`${RatingMetric}_avg`, number | null>;
 
-type MetricKey = "wn7" | "wn8" | "wnx";
-const METRIC_KEYS: MetricKey[] = ["wn7", "wn8", "wnx"];
+// The row reads `${metric}_rated` / `${metric}_avg` off the aggregate below,
+// which is built from the same list, so a metric added to the enum is
+// materialized without this file being touched.
+const METRIC_KEYS = RATING_METRICS;
 
 type InsertValue = ClanRatingsTable["$inferInsert"];
 
 /**
- * Recompute the materialized per-clan ratings for a region (all three metrics
+ * Recompute the materialized per-clan ratings for a region (every metric
  * in a single scan) and replace the region's `clan_ratings` table. This is the
  * expensive part (~8s: the clan_members x players battle-weighted aggregate)
  * paid once per hour in the background so the by-language boards can serve from
  * a cheap indexed read. The average and rated-member logic mirrors exactly the
- * per-metric SQL in `computeTopClansByMetric` / `getTopClansByLanguage`.
+ * SQL in `computeTopClansOverall` / `getTopClansByLanguage`.
  */
 export async function recomputeClanRatings(region: Region): Promise<number> {
   const players = playersByRegion[region];
@@ -63,22 +62,35 @@ export async function recomputeClanRatings(region: Region): Promise<number> {
   const table = clanRatingsByRegion[region];
 
   // Battle-weighted mean of a metric column over rated members with battles.
+  // The product is taken in float8: PR and WTR are integer columns, and a
+  // rating near ten thousand times a career of two hundred thousand battles
+  // overflows int4 (`int4mul`), which the real-typed WN columns never did.
   const avg = (col: string) =>
     sql.raw(
-      `(SUM(p."${col}" * cm.overall_battles) ` +
+      `(SUM(p."${col}"::float8 * cm.overall_battles) ` +
         `FILTER (WHERE p."${col}" IS NOT NULL AND cm.overall_battles > 0) ` +
         `/ NULLIF(SUM(cm.overall_battles) ` +
         `FILTER (WHERE p."${col}" IS NOT NULL AND cm.overall_battles > 0), 0)` +
         `)::float8`,
     );
 
+  const perMetric = sql.join(
+    RATING_METRICS.map(
+      (m) =>
+        sql`COUNT(p.${sql.raw(`"${m}"`)})::int AS ${sql.raw(`${m}_rated`)}, ${avg(m)} AS ${sql.raw(`${m}_avg`)}`,
+    ),
+    sql`, `,
+  );
+  const selectMetrics = sql.join(
+    RATING_METRICS.map((m) => sql.raw(`cs.${m}_rated, cs.${m}_avg`)),
+    sql`, `,
+  );
+
   const rows = (await db.execute(sql`
     WITH clan_stats AS (
       SELECT
         cm.clan_id,
-        COUNT(p."wn7")::int AS wn7_rated, ${avg("wn7")} AS wn7_avg,
-        COUNT(p."wn8")::int AS wn8_rated, ${avg("wn8")} AS wn8_avg,
-        COUNT(p."wnx")::int AS wnx_rated, ${avg("wnx")} AS wnx_avg,
+        ${perMetric},
         ${avg("winrate")} AS winrate_avg
       FROM ${clanMembers} cm
       INNER JOIN ${players} p ON p.account_id = cm.account_id
@@ -86,9 +98,7 @@ export async function recomputeClanRatings(region: Region): Promise<number> {
     )
     SELECT
       cs.clan_id,
-      cs.wn7_rated, cs.wn7_avg,
-      cs.wn8_rated, cs.wn8_avg,
-      cs.wnx_rated, cs.wnx_avg,
+      ${selectMetrics},
       cs.winrate_avg,
       c.tag, c.name, c.color, c.emblem, c.languages, c.members_count
     FROM clan_stats cs

@@ -31,13 +31,7 @@ import { TanksTable } from "@/components/tanks/list/performances";
 import { Panel, PanelContent } from "@/components/panel";
 import { TankCompareBar } from "@/components/tanks/list/compare-bar";
 import { useTankSelection } from "@/hooks/use-compare-selection";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
-import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
-  RatingMetric,
-} from "@unicum.gg/shared";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import { Region } from "@unicum.gg/wargaming";
 import useSWR from "swr";
 import { TableSkeleton, type SkeletonColumn } from "@/components/table-skeleton";
@@ -126,10 +120,9 @@ export function TanksIndex({
   // Next unaware and freeze them on the tab the page was loaded with.
   const tab = activeTab;
 
-  const [storedRating] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
-  const rangeMetric: RatingMetric = isRatingMetric(storedRating)
-    ? storedRating
-    : DEFAULT_RATING_METRIC;
+  // Per vehicle, so WN only: a PR or WTR reader reads WNX (see
+  // `RatingMetric`).
+  const { wnMetric: rangeMetric } = useRatingMetric();
 
   // Only the active tab's data group ships in the page (`tanks`); the others
   // load on first open. SWR keys on the group's request URL and caches per key,

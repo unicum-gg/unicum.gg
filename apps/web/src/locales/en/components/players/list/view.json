@@ -13,6 +13,11 @@
     "language": "{region} players whose inferred clan-history language set includes {language}, ranked by {metric} over the battles fought at tier {tier} and above. {period}, minimum {battles} battles.",
     "strict": "{region} players whose inferred clan-history language is exclusively {language}, ranked by {metric} over the battles fought at tier {tier} and above. {period}, minimum {battles} battles."
   },
+  "intro-period-account": {
+    "all": "{region} leaderboard, ranked by {metric} among the players with {battles} battles at tier {tier} and above. {period}.",
+    "language": "{region} players whose inferred clan-history language set includes {language}, ranked by {metric} among those with {battles} battles at tier {tier} and above. {period}.",
+    "strict": "{region} players whose inferred clan-history language is exclusively {language}, ranked by {metric} among those with {battles} battles at tier {tier} and above. {period}."
+  },
   "board": {
     "all": "Top {count} players by {metric}",
     "language": "Top {count} {language} players by {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Tier {tier}+"
 }

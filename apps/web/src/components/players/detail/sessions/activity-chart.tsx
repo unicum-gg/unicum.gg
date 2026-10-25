@@ -7,13 +7,10 @@ import { useMemo } from "react";
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 import {
   RATING_COLOR_HEX,
-  RatingMetric,
+  RATING_COLOR_OF,
   SessionGranularity,
-  wn7Color,
-  wn8Color,
-  wnxColor,
   type PlayerSession,
-  type RatingColor,
+  type WnRatingMetric,
 } from "@unicum.gg/shared";
 import {
   GRANULARITY_NOUN,
@@ -28,12 +25,6 @@ import {
 } from "@/components/ui/chart";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
-
-const COLOR_FN: Record<RatingMetric, (v: number) => RatingColor> = {
-  [RatingMetric.Wn7]: wn7Color,
-  [RatingMetric.Wn8]: wn8Color,
-  [RatingMetric.Wnx]: wnxColor,
-};
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -64,7 +55,8 @@ export function PlayerActivityChart({
 }: {
   sessions: PlayerSession[];
   granularity: SessionGranularity;
-  metric: RatingMetric;
+  /** A session is a window, so WN only (see `RatingMetric`). */
+  metric: WnRatingMetric;
   metricLabel: string;
 }) {
   const { num } = useFormat();
@@ -75,7 +67,7 @@ export function PlayerActivityChart({
   // where the same nouns are already read from beside this chart.
   const { t: tSessions } = useTranslation("components/players/detail/sessions/index");
   const { locale } = useLocale();
-  const colorFn = COLOR_FN[metric];
+  const colorFn = RATING_COLOR_OF[metric];
 
   const data = useMemo(() => {
     const played = new Map(sessions.map((s) => [s.period, s]));

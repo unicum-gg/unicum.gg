@@ -1,5 +1,6 @@
 import { and, asc, desc, eq, gte, inArray, isNotNull, sql } from "drizzle-orm";
 import {
+  RATING_METRICS,
   RatingMetric,
   StrongholdPeriod,
   TOP_PLAYERS_MIN_BATTLES,
@@ -82,11 +83,17 @@ export type TopPlayerResult = {
   wnx: number;
 } & PlayerBadgeFlags;
 
-export type TopPlayersAllMetrics = {
-  [RatingMetric.Wn7]: TopPlayerResult[];
-  [RatingMetric.Wn8]: TopPlayerResult[];
-  [RatingMetric.Wnx]: TopPlayerResult[];
-};
+/**
+ * One board per metric. PR and WTR have no value over a window, so a recent
+ * window ranks the accounts active inside it by their current figure.
+ */
+export type TopPlayersAllMetrics = Record<RatingMetric, TopPlayerResult[]>;
+
+function emptyBoards(): TopPlayersAllMetrics {
+  return Object.fromEntries(
+    RATING_METRICS.map((m) => [m, [] as TopPlayerResult[]]),
+  ) as TopPlayersAllMetrics;
+}
 
 export async function computeTopPlayersAllMetrics(
   region: Region,
@@ -105,15 +112,9 @@ export async function computeTopPlayersAllMetrics(
     period,
     MIN_BATTLES[period],
   );
-  if (ratings.length === 0) {
-    return {
-      [RatingMetric.Wn7]: [],
-      [RatingMetric.Wn8]: [],
-      [RatingMetric.Wnx]: [],
-    };
-  }
+  if (ratings.length === 0) return emptyBoards();
 
-  function topByScore(field: "wn7" | "wn8" | "wnx"): TopPlayerResult[] {
+  function topByScore(field: RatingMetric): TopPlayerResult[] {
     return ratings
       .filter(
         (s): s is PlayerPeriodRating & { [K in typeof field]: number } =>
@@ -131,11 +132,8 @@ export async function computeTopPlayersAllMetrics(
       }));
   }
 
-  const out: TopPlayersAllMetrics = {
-    [RatingMetric.Wn7]: topByScore("wn7"),
-    [RatingMetric.Wn8]: topByScore("wn8"),
-    [RatingMetric.Wnx]: topByScore("wnx"),
-  };
+  const out = emptyBoards();
+  for (const metric of RATING_METRICS) out[metric] = topByScore(metric);
   await attachClans(region, out);
   return out;
 }
@@ -156,6 +154,10 @@ export type PlayerPeriodRating = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  /** The account's current PR and WTR. Neither exists over a window, so a
+   * window ranks the accounts active inside it by their career figure. */
+  pr: number | null;
+  wtr: number | null;
 };
 
 export async function computePlayerPeriodRatings(
@@ -208,6 +210,8 @@ export async function computePlayerPeriodRatings(
       wn7: cols.wn7,
       wn8: cols.wn8,
       wnx: cols.wnx,
+      pr: players.pr,
+      wtr: players.wtr,
     })
     .from(players)
     .where(
@@ -231,14 +235,16 @@ export async function computePlayerPeriodRatings(
     wn7: r.wn7,
     wn8: r.wn8,
     wnx: r.wnx,
+    pr: r.pr,
+    wtr: r.wtr,
   }));
 }
 
 /**
  * Overall ranking fast path: the players row holds the cached lifetime
- * wn7/wn8/wnx (refreshed by snapshot-cron) plus `battles`. So the lifetime
- * top N is a single typed Drizzle query per metric, no raw SQL, no
- * DISTINCT-ON scan of any snapshot table.
+ * wn7/wn8/wnx and Wargaming's pr/wtr (refreshed by snapshot-cron) plus
+ * `battles`. So the lifetime top N is a single typed Drizzle query per metric,
+ * no raw SQL, no DISTINCT-ON scan of any snapshot table.
  */
 async function computeOverallFromCache(
   region: Region,
@@ -247,8 +253,16 @@ async function computeOverallFromCache(
   const minBattles = MIN_BATTLES[TopPlayersPeriod.Overall];
   const players = playersByRegion[region];
 
+  const columns = {
+    [RatingMetric.Wn7]: players.wn7,
+    [RatingMetric.Wn8]: players.wn8,
+    [RatingMetric.Wnx]: players.wnx,
+    [RatingMetric.Pr]: players.pr,
+    [RatingMetric.Wtr]: players.wtr,
+  } satisfies Record<RatingMetric, unknown>;
+
   const fetchTop = async (
-    column: typeof players.wn7 | typeof players.wn8 | typeof players.wnx,
+    column: (typeof columns)[RatingMetric],
   ): Promise<TopPlayerResult[]> => {
     const rows = await db
       .select({
@@ -271,17 +285,12 @@ async function computeOverallFromCache(
     }));
   };
 
-  const [wn7, wn8, wnx] = await Promise.all([
-    fetchTop(players.wn7),
-    fetchTop(players.wn8),
-    fetchTop(players.wnx),
-  ]);
-
-  const out: TopPlayersAllMetrics = {
-    [RatingMetric.Wn7]: wn7,
-    [RatingMetric.Wn8]: wn8,
-    [RatingMetric.Wnx]: wnx,
-  };
+  const boards = await Promise.all(
+    RATING_METRICS.map((metric) => fetchTop(columns[metric])),
+  );
+  const out = Object.fromEntries(
+    RATING_METRICS.map((metric, i) => [metric, boards[i]]),
+  ) as TopPlayersAllMetrics;
   await attachClans(region, out);
   return out;
 }
@@ -335,7 +344,10 @@ export async function getTopPlayersByMetric(
     .from(topPlayers)
     .leftJoin(players, eq(players.accountId, topPlayers.accountId))
     .where(
-      and(eq(topPlayers.metric, metric), eq(topPlayers.period, period)),
+      and(
+        eq(topPlayers.metric, metric),
+        eq(topPlayers.period, period),
+      ),
     )
     .orderBy(asc(topPlayers.rank))
     .limit(limit);

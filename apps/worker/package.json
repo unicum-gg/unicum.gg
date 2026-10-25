@@ -18,6 +18,7 @@
     "refresh-vehicles": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-vehicles.ts",
     "seed-tournaments": "tsx --env-file-if-exists=../web/.env.local src/scripts/seed-tournaments.ts",
     "enumerate-tournaments": "tsx --env-file-if-exists=../web/.env.local src/scripts/enumerate-tournaments.ts",
+    "backfill-account-ratings": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-account-ratings.ts",
     "backfill-player-marks": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-player-marks.ts",
     "backfill-tier-window-ratings": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-tier-window-ratings.ts",
     "backfill-team-clans": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-team-clans.ts",

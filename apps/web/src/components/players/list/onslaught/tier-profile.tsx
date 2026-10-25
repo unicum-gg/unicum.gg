@@ -46,6 +46,11 @@ function ratingOf(row: OnslaughtRow, metric: RatingMetric): number | null {
       return row.wn8;
     case RatingMetric.Wnx:
       return row.wnx;
+    // Optional on the row: absent from a response cached before they were served.
+    case RatingMetric.Pr:
+      return row.pr ?? null;
+    case RatingMetric.Wtr:
+      return row.wtr ?? null;
   }
 }
 

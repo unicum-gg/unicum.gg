@@ -38,6 +38,10 @@ export function makePlayerDistributionTable(region: string) {
     wn7: jsonb("wn7").$type<DistributionBucket[]>().notNull(),
     wn8: jsonb("wn8").$type<DistributionBucket[]>().notNull(),
     wnx: jsonb("wnx").$type<DistributionBucket[]>().notNull(),
+    // Nullable only because the singleton row predates them (migration 0135):
+    // every pass since writes both.
+    pr: jsonb("pr").$type<DistributionBucket[]>(),
+    wtr: jsonb("wtr").$type<DistributionBucket[]>(),
     byTier: jsonb("by_tier").$type<TierShare[]>().notNull(),
     byType: jsonb("by_type").$type<TypeShare[]>().notNull(),
     computedAt: timestamp("computed_at", { withTimezone: true })

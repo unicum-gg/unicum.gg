@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Vlastní hodnocení společnosti Wargaming zobrazované v herním klientovi a na portálu, které roste jak s počtem odehraných bitev, tak s výkony.

@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Il s’agit de la cote propre à Wargaming, affichée dans le client du jeu et sur le portail, qui augmente aussi bien avec le nombre de batailles jouées qu’avec les performances.

@@ -46,6 +46,8 @@ type RawPlayer = {
   wn7_7d: number | null;
   wn8_7d: number | null;
   wnx_7d: number | null;
+  pr?: number | null;
+  wtr?: number | null;
   battles: number | null;
   battles_30d: number | null;
   battles_24h: number | null;
@@ -293,6 +295,10 @@ function playerFromRaw(r: RawPlayer): Player {
     wn77d: r.wn7_7d,
     wn87d: r.wn8_7d,
     wnx7d: r.wnx_7d,
+    // Null on a row the migration added the columns to and nothing has written
+    // since (`?? null` rather than trusting the `SELECT *` to carry them).
+    pr: r.pr ?? null,
+    wtr: r.wtr ?? null,
     battles: r.battles,
     battles30d: r.battles_30d,
     battles24h: r.battles_24h,

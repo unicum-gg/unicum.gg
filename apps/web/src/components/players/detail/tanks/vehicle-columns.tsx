@@ -26,7 +26,7 @@ import { MoMIcon } from "@/components/tanks/mom-icon";
 import { Hint } from "@/components/hint";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { useCookie } from "@/hooks/use-cookie";
-import { markBar, MarkWindow, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type PlayerTankRow } from "@unicum.gg/shared";
+import { markBar, MarkWindow, RatingMetric, RATING_COLOR_CLASS, ratingColorClass as metricColorClass, winrateColor, wnRatingMetric, type PlayerTankRow } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.player_vehicle_columns";
@@ -53,19 +53,17 @@ const PCT1_FORMAT = {
 } as const;
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
+/** A vehicle carries the three WN ratings only, so a PR or WTR reader reads its
+ * WNX (see `RatingMetric`). */
 export function ratingForMetric(
   row: PlayerTankRow,
   metric: RatingMetric,
 ): number | null {
-  if (metric === RatingMetric.Wn7) return row.wn7;
-  if (metric === RatingMetric.Wn8) return row.wn8;
-  return row.wnx;
+  return row[wnRatingMetric(metric)];
 }
 
 function ratingColorClass(value: number, metric: RatingMetric): string {
-  if (metric === RatingMetric.Wn7) return RATING_COLOR_CLASS[wn7Color(value)];
-  if (metric === RatingMetric.Wn8) return RATING_COLOR_CLASS[wn8Color(value)];
-  return RATING_COLOR_CLASS[wnxColor(value)];
+  return metricColorClass(wnRatingMetric(metric), value);
 }
 
 /** What a column needs to answer for a row beyond the row itself: the reader's

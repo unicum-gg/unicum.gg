@@ -41,8 +41,15 @@ import type {
   RatingHistoryPoint,
   Stats,
 } from "@unicum.gg/shared";
-// A value, not just a type: the percentile panel is keyed by the metric enum.
-import { RatingMetric } from "@unicum.gg/shared";
+// Values, not just types: the percentile panel is keyed by the metric enum.
+import {
+  RATING_METRIC_LABEL,
+  RatingMetric,
+  isWnRatingMetric,
+  wnRatingMetric,
+} from "@unicum.gg/shared";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
 import type { Region } from "@unicum.gg/wargaming";
 import { Interpolate } from "@/components/interpolate";
 import { useTranslation } from "@/hooks/use-translation";
@@ -119,7 +126,7 @@ export function OverallTab({
   // a snapshot carrying no value for the current metric draws nothing, so what
   // matters is the points that would actually be plotted.
   const chartable = ratingData.filter(
-    (point) => point.lifetime[metric] !== null,
+    (point) => (point.lifetime[metric] ?? null) !== null,
   ).length;
 
   return (
@@ -152,9 +159,11 @@ export function OverallTab({
               current.battles > 0 ? current.wins / current.battles : null
             }
             ratings={{
-              [RatingMetric.Wn7]: derived.wn7,
-              [RatingMetric.Wn8]: derived.wn8,
-              [RatingMetric.Wnx]: derived.wnx,
+              [RatingMetric.Wn7]: derived.wn7.total,
+              [RatingMetric.Wn8]: derived.wn8.total,
+              [RatingMetric.Wnx]: derived.wnx.total,
+              [RatingMetric.Pr]: current.globalRating,
+              [RatingMetric.Wtr]: current.wtr,
             }}
           />
         </PanelContent>
@@ -165,11 +174,13 @@ export function OverallTab({
           about an account -- what they did in the last ten battles, against
           what they have done in twenty thousand -- and it was the last thing
           anyone would scroll to. It draws its own separator, and nothing at all
-          for an account nobody has shared a battle for, which is most of them. */}
+          for an account nobody has shared a battle for, which is most of them.
+          A battle has no PR or WTR, so it reads the WN rating the reader would
+          fall back to (see `RatingMetric`). */}
       <PlayerBattlesPanel
         region={region}
         nickname={nickname}
-        metric={metric}
+        metric={wnRatingMetric(metric)}
         initialBattles={initialBattles}
       />
 
@@ -188,7 +199,12 @@ export function OverallTab({
           {chartable >= 2 ? (
             <>
               <div className={`p-4 ${styles.mutedDescription}`}>
-                {t("progression-blurb", { metric: metricLabel })}
+                {t(
+                  isWnRatingMetric(metric)
+                    ? "progression-blurb"
+                    : "progression-blurb-account",
+                  { metric: metricLabel },
+                )}
               </div>
               <MountOnVisible
                 className="px-4 pb-4"
@@ -229,12 +245,16 @@ export function OverallTab({
           <PanelTitle>{t("lift-drag-title", { nickname })}</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
+          <RatingFallbackNote
+            reason={RatingFallbackReason.Vehicle}
+            className="px-4 pt-3"
+          />
           <TanksLiftDrag
             region={region}
             nickname={nickname}
             liftDrag={liftDrag}
-            metric={metric}
-            metricLabel={metricLabel}
+            metric={wnRatingMetric(metric)}
+            metricLabel={RATING_METRIC_LABEL[wnRatingMetric(metric)]}
           />
         </PanelContent>
       </Panel>

@@ -14,14 +14,13 @@ import { SegmentedControl } from "@/components/segmented-control";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { SESSIONS_SKELETON_COLUMNS } from "./skeleton-columns";
 import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
   RATING_METRIC_LABEL,
   SessionGranularity,
   type PlayerSession,
 } from "@unicum.gg/shared";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
@@ -60,13 +59,9 @@ export function SessionsTab({
 }) {
   const { t } = useTranslation("components/players/detail/sessions/index");
   const { locale } = useLocale();
-  const [storedMetric] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric = isRatingMetric(storedMetric)
-    ? storedMetric
-    : DEFAULT_RATING_METRIC;
+  // A session is a window of battles, so it is rated in WN only: a reader who
+  // picked PR or WTR reads WNX here, and the note under the chart says why.
+  const { wnMetric: metric } = useRatingMetric();
 
   return (
     <>
@@ -122,6 +117,10 @@ export function SessionsTab({
                     granularity: t(GRANULARITY_NOUN[granularity]),
                     metric: RATING_METRIC_LABEL[metric],
                   })}</p>
+                <RatingFallbackNote
+                  reason={RatingFallbackReason.Window}
+                  className="px-4 pb-4"
+                />
               </div>
               <PlayerSessionsTable
                 region={region}

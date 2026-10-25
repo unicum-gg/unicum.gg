@@ -29,6 +29,8 @@ export function makePlayerRatingsTable(region: string) {
       wn7: real("wn7"),
       wn8: real("wn8"),
       wnx: real("wnx"),
+      pr: real("pr"),
+      wtr: real("wtr"),
       // Inferred from the account's clan history (time-weighted language
       // scores). Always non-empty for stored rows. Board filters
       // `$lang = ANY(languages)`; strict = `languages = ARRAY[$lang]`.

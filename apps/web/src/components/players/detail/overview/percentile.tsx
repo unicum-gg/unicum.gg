@@ -5,9 +5,6 @@ import { numberFormat } from "@/lib/format";
 
 import useSWR from "swr";
 import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
-  type PeriodValues,
   type PlayerDistribution,
   percentileOf,
   RATING_COLOR_HEX,
@@ -17,8 +14,7 @@ import {
   winrateColor,
 } from "@unicum.gg/shared";
 import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import { useTranslation } from "@/hooks/use-translation";
 import { unicum } from "@/services/sdk";
 
@@ -41,18 +37,15 @@ export function PlayerPercentile({
   winrate: number | null;
   /** The account's lifetime value for each rating metric, so the panel can
    * follow the one the reader picked rather than naming one for them. */
-  ratings: Record<RatingMetric, PeriodValues>;
+  ratings: Record<RatingMetric, number | null>;
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation(
     "components/players/detail/overview/percentile",
   );
   // The same cookie the navbar selector writes.
-  const [stored] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
-  const metric: RatingMetric = isRatingMetric(stored)
-    ? stored
-    : DEFAULT_RATING_METRIC;
-  const rating = ratings[metric]?.total ?? null;
+  const { metric } = useRatingMetric();
+  const rating = ratings[metric] ?? null;
   const { data } = useSWR(
     `player-distribution:${region}`,
     async () =>

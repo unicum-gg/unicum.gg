@@ -15,30 +15,59 @@ import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
 import {
   RATING_COLOR_CLASS,
+  RATING_METRICS,
   RatingColor,
+  RatingMetric,
+  RatingScale as Scale,
+  type RatingScaleBand,
+  ratingScale,
 } from "@unicum.gg/shared";
 
-type TierRow = {
-  color: RatingColor;
-  /** The band's key in `components/home/rating-scale`, not its wording. */
-  id: string;
-  wr: string;
-  wn7: string;
-  wn8: string;
-  wnx: string;
+/** The bands top first, each with its key in `components/home/rating-scale`. */
+const BANDS: { color: RatingColor; id: string }[] = [
+  { color: RatingColor.Top, id: "top" },
+  { color: RatingColor.Excellent, id: "excellent" },
+  { color: RatingColor.Super, id: "super" },
+  { color: RatingColor.VeryGood, id: "very-good" },
+  { color: RatingColor.Good, id: "good" },
+  { color: RatingColor.Average, id: "average" },
+  { color: RatingColor.BelowAvg, id: "below-avg" },
+  { color: RatingColor.Bad, id: "bad" },
+  { color: RatingColor.VeryBad, id: "very-bad" },
+];
+
+/** The published scale behind each metric's column. */
+const METRIC_SCALE: Record<RatingMetric, Scale> = {
+  [RatingMetric.Wn7]: Scale.Wn7,
+  [RatingMetric.Wn8]: Scale.Wn8,
+  [RatingMetric.Wnx]: Scale.Wnx,
+  [RatingMetric.Pr]: Scale.Pr,
+  [RatingMetric.Wtr]: Scale.Wtr,
 };
 
-const TIERS: TierRow[] = [
-  { color: RatingColor.Top,       id: "top",        wr: "≥65%",   wn7: "≥2050",     wn8: "≥2900",     wnx: "≥2800" },
-  { color: RatingColor.Excellent, id: "excellent",  wr: "60–64%", wn7: "1850–2049", wn8: "2350–2899", wnx: "2200–2799" },
-  { color: RatingColor.Super,     id: "super",      wr: "56–59%", wn7: "1550–1849", wn8: "1900–2349", wnx: "1800–2199" },
-  { color: RatingColor.VeryGood,  id: "very-good",  wr: "54–55%", wn7: "1350–1549", wn8: "1600–1899", wnx: "1600–1799" },
-  { color: RatingColor.Good,      id: "good",       wr: "52–53%", wn7: "1100–1349", wn8: "1250–1599", wnx: "1200–1599" },
-  { color: RatingColor.Average,   id: "average",    wr: "49–51%", wn7: "900–1099",  wn8: "900–1249",  wnx: "800–1199" },
-  { color: RatingColor.BelowAvg,  id: "below-avg",  wr: "47–48%", wn7: "700–899",   wn8: "600–899",   wnx: "400–799" },
-  { color: RatingColor.Bad,       id: "bad",        wr: "45–46%", wn7: "500–699",   wn8: "300–599",   wnx: "200–399" },
-  { color: RatingColor.VeryBad,   id: "very-bad",   wr: "<45%",   wn7: "<500",      wn8: "<300",      wnx: "<200" },
-];
+/**
+ * One band's range as the table prints it: "≥2900", "<300", "1900–2349".
+ *
+ * Read off the published scale (`ratingScale`) rather than typed out here,
+ * which is what this table used to be: a second copy of every threshold on the
+ * site, waiting for one of them to move. Every edge is a whole number on every
+ * scale shown, so a band's last value is the next band's edge minus one.
+ */
+function rangeOf(band: RatingScaleBand | undefined, unit = ""): string {
+  if (!band) return "—";
+  if (band.to === null) return `≥${band.from}${unit}`;
+  if (band.from === null || band.from <= 0) return `<${band.to}${unit}`;
+  return `${band.from}–${band.to - 1}${unit}`;
+}
+
+function bandsByColor(scale: Scale): Map<RatingColor, RatingScaleBand> {
+  return new Map(ratingScale(scale).bands.map((band) => [band.color, band]));
+}
+
+const WINRATE_BANDS = bandsByColor(Scale.Winrate);
+const METRIC_BANDS = new Map(
+  RATING_METRICS.map((metric) => [metric, bandsByColor(METRIC_SCALE[metric])]),
+);
 
 /**
  * A Client Component although it fetches nothing: it is a static table rendered
@@ -71,19 +100,19 @@ export function RatingScale() {
               <TableHead className="text-right!">
                 <GlossaryLabel>{t("wr")}</GlossaryLabel>
               </TableHead>
-              <TableHead data-rating-col="wn7" className="text-right!">
-                <GlossaryLabel>{t("wn7")}</GlossaryLabel>
-              </TableHead>
-              <TableHead data-rating-col="wn8" className="text-right!">
-                <GlossaryLabel>{t("wn8")}</GlossaryLabel>
-              </TableHead>
-              <TableHead data-rating-col="wnx" className="pr-4 text-right!">
-                <GlossaryLabel>{t("wnx")}</GlossaryLabel>
-              </TableHead>
+              {RATING_METRICS.map((metric) => (
+                <TableHead
+                  key={metric}
+                  data-rating-col={metric}
+                  className="pr-4 text-right!"
+                >
+                  <GlossaryLabel>{t(metric)}</GlossaryLabel>
+                </TableHead>
+              ))}
             </TableRow>
           </TableHeader>
           <TableBody>
-            {TIERS.map((row) => {
+            {BANDS.map((row) => {
               const colorClass = RATING_COLOR_CLASS[row.color];
               return (
                 <TableRow key={row.color}>
@@ -102,26 +131,17 @@ export function RatingScale() {
                     <RatingBandName color={row.color}>{t(`tiers.${row.id}`)}</RatingBandName>
                   </TableCell>
                   <TableCell className="text-right tabular-nums text-muted-foreground whitespace-nowrap">
-                    {row.wr}
+                    {rangeOf(WINRATE_BANDS.get(row.color), "%")}
                   </TableCell>
-                  <TableCell
-                    data-rating-col="wn7"
-                    className="text-right tabular-nums text-muted-foreground whitespace-nowrap"
-                  >
-                    {row.wn7}
-                  </TableCell>
-                  <TableCell
-                    data-rating-col="wn8"
-                    className="text-right tabular-nums text-muted-foreground whitespace-nowrap"
-                  >
-                    {row.wn8}
-                  </TableCell>
-                  <TableCell
-                    data-rating-col="wnx"
-                    className="pr-4 text-right tabular-nums text-muted-foreground whitespace-nowrap"
-                  >
-                    {row.wnx}
-                  </TableCell>
+                  {RATING_METRICS.map((metric) => (
+                    <TableCell
+                      key={metric}
+                      data-rating-col={metric}
+                      className="pr-4 text-right tabular-nums text-muted-foreground whitespace-nowrap"
+                    >
+                      {rangeOf(METRIC_BANDS.get(metric)?.get(row.color))}
+                    </TableCell>
+                  ))}
                 </TableRow>
               );
             })}

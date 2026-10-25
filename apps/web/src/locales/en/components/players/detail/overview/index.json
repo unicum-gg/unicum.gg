@@ -5,5 +5,6 @@
   "progression-blurb": "Solid line is overall {metric} (matches the Total column above), drifting slowly as new battles accumulate. Dashed line is per-session {metric}, computed from the battles played since the previous snapshot. It shows hot and cold streaks. Line color follows the rating tier.",
   "progression-empty-title": "Not enough history yet",
   "progression-empty": "The curve is drawn from this account’s own history, and we hold none of it yet. It appears once two snapshots have landed.",
-  "progression-single": "A curve needs two points and this account has one so far. It appears once the next snapshot lands."
+  "progression-single": "A curve needs two points and this account has one so far. It appears once the next snapshot lands.",
+  "progression-blurb-account": "Overall {metric} as Wargaming reports it, read at the end of each day (matches the Total column above). It is an account rating with no value for a single session, so there is no per-session line. Line color follows the rating tier."
 }

@@ -438,6 +438,8 @@ export async function recordCurrentSnapshot(
       lastBattleAt,
       clanId: info.clan_id,
       dueAt: computeDueAt(lastBattleAt),
+      pr: info.global_rating,
+      wtr,
     })
     .onConflictDoUpdate({
       target: players.accountId,
@@ -449,6 +451,13 @@ export async function recordCurrentSnapshot(
         lastSeenAt: new Date(),
         // Fresh last_battle_at ⇒ recompute the next-due time in lockstep.
         dueAt: computeDueAt(lastBattleAt),
+        // Wargaming's two account ratings, written here rather than with the
+        // WN ones in `updatePlayerRatings` because they need no tanks: every
+        // path that reads `account/info` lands here, including the ones that
+        // skip `tanks/stats`. A failed WTR call (null) keeps the last one read
+        // instead of blanking a rating that has not stopped existing.
+        pr: info.global_rating,
+        wtr: wtr ?? sql`${players.wtr}`,
       },
     })
     .returning();

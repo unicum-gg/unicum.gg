@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargamingova lastna ocena, prikazana v igri in na portalu, ki raste s številom odigranih bitk ter s predstavitvijo.

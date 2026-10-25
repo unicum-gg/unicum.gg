@@ -26,10 +26,15 @@ export type PeriodBoardRow = {
 /** A window's board and when the hourly cron last rewrote it. */
 export type PeriodBoard = { results: PeriodBoardRow[]; computedAt: Date | null };
 
+// PR and WTR are the account's current figure on every row (a window has
+// neither, see `RatingMetric`), so on those two the board ranks the accounts
+// active inside the window.
 const METRIC_COLUMN: Record<RatingMetric, string> = {
   [RatingMetric.Wn7]: "wn7",
   [RatingMetric.Wn8]: "wn8",
   [RatingMetric.Wnx]: "wnx",
+  [RatingMetric.Pr]: "pr",
+  [RatingMetric.Wtr]: "wtr",
 };
 
 /**

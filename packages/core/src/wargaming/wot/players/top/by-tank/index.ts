@@ -1,5 +1,5 @@
 import { and, asc, eq } from "drizzle-orm";
-import { RATING_METRICS, RatingMetric, tankStatsByRegion, topPlayersByTankByRegion } from "@unicum.gg/shared";
+import { RatingMetric, WN_RATING_METRICS, isRatingMetric, tankStatsByRegion, topPlayersByTankByRegion, wnRatingMetric } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { type Region } from "@unicum.gg/wargaming";
 
@@ -28,10 +28,13 @@ export async function getTopPlayersByTank(
   limit: number,
 ): Promise<{ results: TopTankPlayer[]; computedAt: Date | null }> {
   const table = topPlayersByTankByRegion[region];
+  // A vehicle has no PR or WTR, so those two read the WNX board (see
+  // `RatingMetric`) rather than answering empty.
+  const stored = isRatingMetric(metric) ? wnRatingMetric(metric) : metric;
   const rows = await db
     .select()
     .from(table)
-    .where(and(eq(table.tankId, tankId), eq(table.metric, metric)))
+    .where(and(eq(table.tankId, tankId), eq(table.metric, stored)))
     .orderBy(asc(table.rank))
     .limit(limit);
   return {
@@ -133,16 +136,17 @@ export async function getAllTankStats(
   return new Map(rows.map((r) => [r.tankId, toTankServerStats(r)]));
 }
 
-/** All three metric leaderboards for one tank, for the tank page. */
+/** The three WN leaderboards for one tank, for the tank page. PR and WTR are
+ * account ratings and have none. */
 export async function getTopPlayersByTankAllMetrics(
   region: Region,
   tankId: number,
   limit: number,
 ): Promise<TopTankPlayersByMetric> {
   const perMetric = await Promise.all(
-    RATING_METRICS.map((m) => getTopPlayersByTank(region, tankId, m, limit)),
+    WN_RATING_METRICS.map((m) => getTopPlayersByTank(region, tankId, m, limit)),
   );
-  const byMetric = new Map(RATING_METRICS.map((m, i) => [m, perMetric[i]]));
+  const byMetric = new Map(WN_RATING_METRICS.map((m, i) => [m, perMetric[i]]));
   return {
     [RatingMetric.Wn7]: byMetric.get(RatingMetric.Wn7)?.results ?? [],
     [RatingMetric.Wn8]: byMetric.get(RatingMetric.Wn8)?.results ?? [],

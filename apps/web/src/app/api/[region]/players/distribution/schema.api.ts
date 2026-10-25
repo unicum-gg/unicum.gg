@@ -64,6 +64,8 @@ export const PlayerDistributionResponse = z
         wn7: z.array(bucket),
         wn8: z.array(bucket),
         wnx: z.array(bucket),
+        pr: z.array(bucket),
+        wtr: z.array(bucket),
       })
       .meta({
         id: "RatingDistributions",

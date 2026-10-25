@@ -33,12 +33,11 @@ import {
   TankCompareHead,
 } from "@/components/tanks/list/compare-cell";
 import type { TankSelection } from "@/hooks/use-compare-selection";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
 import { cn } from "@/lib/utils";
 import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
   RatingMetric,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -79,10 +78,9 @@ export function TanksTable({
   const { num } = useFormat();
   const { t } = useTranslation("components/tanks/perf-columns");
   const { t: tTable } = useTranslation("components/tanks/table");
-  const [storedRating] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
-  const metric: RatingMetric = isRatingMetric(storedRating)
-    ? storedRating
-    : DEFAULT_RATING_METRIC;
+  // Per vehicle, so WN only: a PR or WTR reader reads WNX (see
+  // `RatingMetric`).
+  const { wnMetric: metric } = useRatingMetric();
 
   const [selected] = usePerfColumns();
   const visible: PerfColumn[] = useMemo(
@@ -134,6 +132,10 @@ export function TanksTable({
 
   return (
     <TooltipProvider delayDuration={150}>
+      <RatingFallbackNote
+        reason={RatingFallbackReason.Vehicle}
+        className="border-b border-fd-border px-4 py-2"
+      />
       <div className="overflow-x-auto">
         <Table className="my-0! [&_td]:py-1.5! [&_th]:whitespace-nowrap [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-4!">
           <TableHeader>

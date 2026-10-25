@@ -46,7 +46,7 @@ async function GET__perf(
       Number(limitParam) || S.TOP_DEFAULT_LIMIT,
     ),
   );
-  // Caller may pin a metric via ?metric=wn7|wn8|wnx; otherwise default.
+  // Caller may pin a metric via ?metric= (any RatingMetric); otherwise default.
   const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 
   // `lang` on the wire, because `language` elsewhere in the API asks for the

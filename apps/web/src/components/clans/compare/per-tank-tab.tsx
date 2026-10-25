@@ -28,9 +28,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type VehicleMeta, type RatingColor, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { RATING_COLOR_OF, RATING_METRIC_LABEL, type VehicleMeta, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
 import type { ClanTankAggregate } from "@unicum.gg/core/clans/repository/tanks";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { bestIndex } from "@/components/compare/cells";
@@ -106,13 +107,8 @@ export function PerTankTab({
   const { locale } = useLocale();
   const { t } = useTranslation("components/clans/compare/per-tank-tab");
   const [sort, setSort] = useState<SortState<SortMetric>>(null);
-  const [storedRating] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric: RatingMetric = isRatingMetric(storedRating)
-    ? storedRating
-    : DEFAULT_RATING_METRIC;
+  // Per vehicle, so WN only: a PR or WTR reader reads WNX here.
+  const { wnMetric: metric } = useRatingMetric();
   const metricLabel = RATING_METRIC_LABEL[metric];
 
   const ctx = useMemo(
@@ -120,12 +116,7 @@ export function PerTankTab({
     [encyclopedia, wn8Expected, wn8Fallback, wnxExpected],
   );
 
-  const ratingColor: (v: number) => RatingColor =
-    metric === RatingMetric.Wn7
-      ? wn7Color
-      : metric === RatingMetric.Wn8
-        ? wn8Color
-        : wnxColor;
+  const ratingColor = RATING_COLOR_OF[metric];
 
   const rows: TankRow[] = useMemo(() => {
     const seen = new Map<number, TankRow>();
@@ -220,6 +211,10 @@ export function PerTankTab({
 
   return (
     <div className="overflow-x-auto">
+      <RatingFallbackNote
+        reason={RatingFallbackReason.Vehicle}
+        className="border-b border-fd-border px-4 py-2"
+      />
       <Table className={TABLE_CLASSNAME}>
         <TableHeader>
           <TableRow>

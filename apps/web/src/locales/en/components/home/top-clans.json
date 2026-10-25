@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Showing top {region} clans with more than 50 members with battles, ranked by average {metric}.",
-    "month": "Showing top {region} clans with more than 50 members with battles, ranked by {metric} over the past 30 days (min. 15 active)."
+    "month": "Showing top {region} clans with more than 50 members with battles, ranked by {metric} over the past 30 days (min. 15 active).",
+    "month-account": "Showing top {region} clans with more than 50 members with battles, ranked by the average {metric} of the members active over the past 30 days (min. 15 active)."
   },
   "updated": "Updated {when}.",
   "empty": "No clan data available yet for this region.",

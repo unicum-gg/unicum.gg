@@ -83,6 +83,12 @@ export function makePlayersTable(region: string) {
       wn77d: real("wn7_7d"),
       wn87d: real("wn8_7d"),
       wnx7d: real("wnx_7d"),
+      // Wargaming's own two account ratings, copied from the latest snapshot's
+      // `global_rating` (Personal Rating) and `wtr` by the same pass, for the
+      // same reason as the three above. Account figures only: neither has a
+      // value per vehicle or per window, so there are no `_30d` siblings.
+      pr: integer("pr"),
+      wtr: integer("wtr"),
       // Lifetime battle count, copied from the latest snapshot's `battles`
       // field at every snapshot-cron tick. Lets the Overall top-players
       // ranking apply the 20k-battle minimum without DISTINCT-ON-scanning

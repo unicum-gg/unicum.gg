@@ -162,6 +162,8 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
       wn7: player.wn7,
       wn8: player.wn8,
       wnx: player.wnx,
+      pr: player.pr,
+      wtr: player.wtr,
       wn730d: player.wn730d,
       wn830d: player.wn830d,
       wnx30d: player.wnx30d,

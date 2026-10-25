@@ -1,11 +1,14 @@
 import type { PortalClanMember } from "@unicum.gg/wargaming";
 import { type WeightedDataPoint, weightedAverage } from "../lib/stats";
 
-/** Per-member computed ratings (WN7/WN8/WNX). */
+/** Per-member account ratings: our WN7/WN8/WNX and Wargaming's PR/WTR, all
+ * read off the member's player row. */
 export type MemberRatings = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  pr: number | null;
+  wtr: number | null;
 };
 
 // Enriched clan member: raw WG portal data (from the SDK) + our WNX/WN8
@@ -102,10 +105,17 @@ export function d30Points(
 
 /** A clan's battle-weighted aggregate ratings over its members. Single source
  * for the clan page header, the `/{tag}` overview endpoint and the Discord bot:
- * lifetime WN7/WN8/WNX weighted by lifetime battles, the same over the 30-day
- * window weighted by recent battles, and the lifetime average win rate. */
+ * every lifetime rating weighted by lifetime battles, the three WN ratings over
+ * the 30-day window weighted by recent battles (PR and WTR have no window), and
+ * the lifetime average win rate. */
 export type ClanRatings = {
-  lifetime: { wn7: number | null; wn8: number | null; wnx: number | null };
+  lifetime: {
+    wn7: number | null;
+    wn8: number | null;
+    wnx: number | null;
+    pr: number | null;
+    wtr: number | null;
+  };
   recent: { wn7: number | null; wn8: number | null; wnx: number | null };
   avgWinrate: number | null;
 };
@@ -116,6 +126,10 @@ export function computeClanRatings(members: ClanMemberStats[]): ClanRatings {
       wn7: weightedAverage(overallPoints(members, (m) => m.wn7)),
       wn8: weightedAverage(overallPoints(members, (m) => m.wn8)),
       wnx: weightedAverage(overallPoints(members, (m) => m.wnx)),
+      // `?? null`: a roster cached before the two were served lacks them, and
+      // `overallPoints` only skips null, so undefined would average to NaN.
+      pr: weightedAverage(overallPoints(members, (m) => m.pr ?? null)),
+      wtr: weightedAverage(overallPoints(members, (m) => m.wtr ?? null)),
     },
     recent: {
       wn7: weightedAverage(d30Points(members, (m) => m.wn730d)),

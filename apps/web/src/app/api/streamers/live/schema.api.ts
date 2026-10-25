@@ -11,6 +11,8 @@ const liveStreamer = z
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    pr: z.number().nullable().optional(),
+    wtr: z.number().nullable().optional(),
     wn730d: z.number().nullable(),
     wn830d: z.number().nullable(),
     wnx30d: z.number().nullable(),

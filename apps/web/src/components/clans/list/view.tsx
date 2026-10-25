@@ -14,7 +14,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { RatingMetric, languageToCountryCode } from "@unicum.gg/shared";
+import { RATING_METRICS, RatingMetric, languageToCountryCode } from "@unicum.gg/shared";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
 import {
@@ -28,8 +28,8 @@ import { languageDisplayName } from "@/lib/language-name";
 
 const LIMIT = 100;
 /**
- * Inline metric label gated by `html[data-rating-metric]` CSS. All three
- * variants ship in the HTML, only the matching one shows. Keeps the page
+ * Inline metric label gated by `html[data-rating-metric]` CSS. Every
+ * variant ships in the HTML, only the matching one shows. Keeps the page
  * output identical regardless of the user's rating cookie so the
  * response can be cached without varying.
  */
@@ -37,9 +37,11 @@ async function MetricInline({ locale }: { locale: string }) {
   const { t } = await getTranslation("components/clans/list/view", locale);
   return (
     <>
-      <span data-rating-col="wn7">{t("wn7")}</span>
-      <span data-rating-col="wn8">{t("wn8")}</span>
-      <span data-rating-col="wnx">{t("wnx")}</span>
+      {RATING_METRICS.map((metric) => (
+        <span key={metric} data-rating-col={metric}>
+          {t(metric)}
+        </span>
+      ))}
     </>
   );
 }
@@ -50,7 +52,7 @@ async function MetricInline({ locale }: { locale: string }) {
  * /clans/lang/<language>. `strict` narrows to clans that declared ONLY
  * the requested language.
  *
- * The view renders all three metric variants in parallel and gates them
+ * The view renders every metric variant in parallel and gates them
  * via `data-rating-col` so the same HTML serves every visitor. The
  * cookie picks which is visible via CSS (rule lives in `globals.css`).
  */
@@ -69,30 +71,32 @@ export async function ClansLandingView({
   // The landing consumes its own public API through the SDK (see the players
   // landing for the same pattern).
   const api = unicum.region(region).clans;
-  const topQuery = (metric: "wn7" | "wn8" | "wnx") => ({
+  const topQuery = (metric: RatingMetric) => ({
     metric,
     limit: LIMIT,
     ...(language ? { lang: language } : { languages: "true" as const }),
     ...(strict ? { strict: "true" as const } : {}),
   });
   const EMPTY_TOP = { results: [], computed_at: null };
-  const [wn7Top, wn8Top, wnxTop, languageStats] = await Promise.all([
-    buildSafe(() => api.top(topQuery("wn7")), EMPTY_TOP),
-    buildSafe(() => api.top(topQuery("wn8")), EMPTY_TOP),
-    buildSafe(() => api.top(topQuery("wnx")), EMPTY_TOP),
+  const [tops, languageStats] = await Promise.all([
+    Promise.all(
+      RATING_METRICS.map((metric) =>
+        buildSafe(() => api.top(topQuery(metric)), EMPTY_TOP),
+      ),
+    ),
     buildSafe(() => api.languages(), { results: [] }),
   ]);
-  const wn7Results = wn7Top.results as unknown as TopClanByLanguageResult[];
-  const wn8Results = wn8Top.results as unknown as TopClanByLanguageResult[];
-  const wnxResults = wnxTop.results as unknown as TopClanByLanguageResult[];
+  const resultsOf = (metric: RatingMetric) =>
+    tops[RATING_METRICS.indexOf(metric)]
+      .results as unknown as TopClanByLanguageResult[];
   const stats = languageStats.results;
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language, locale) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
-  // All three metrics use the same eligibility filter, so the row count
-  // is identical across them in practice. Pick one as the canonical
-  // count for the panel title.
-  const totalCount = wnxResults.length;
+  // Every metric uses the same eligibility filter, so the row count is
+  // identical across them in practice. Pick one as the canonical count for
+  // the panel title.
+  const totalCount = resultsOf(RatingMetric.Wnx).length;
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -156,7 +160,8 @@ export async function ClansLandingView({
               strict={strict}
             />
           </div>
-          <BoardUpdated at={wnxTop.computed_at ?? wn8Top.computed_at} />
+          <BoardUpdated at={tops[RATING_METRICS.indexOf(RatingMetric.Wnx)].computed_at ??
+              tops[RATING_METRICS.indexOf(RatingMetric.Wn8)].computed_at} />
         </PanelContent>
       </Panel>
 
@@ -218,27 +223,15 @@ export async function ClansLandingView({
               placings, which this table is not one of. The rating board had its
               own crest and had to be hidden on its own page; it no longer
               exists. */}
-          <div data-rating-col="wn7">
-            <TopClansBoard
-              region={region}
-              results={wn7Results}
-              metric={RatingMetric.Wn7}
-            />
-          </div>
-          <div data-rating-col="wn8">
-            <TopClansBoard
-              region={region}
-              results={wn8Results}
-              metric={RatingMetric.Wn8}
-            />
-          </div>
-          <div data-rating-col="wnx">
-            <TopClansBoard
-              region={region}
-              results={wnxResults}
-              metric={RatingMetric.Wnx}
-            />
-          </div>
+          {RATING_METRICS.map((metric) => (
+            <div key={metric} data-rating-col={metric}>
+              <TopClansBoard
+                region={region}
+                results={resultsOf(metric)}
+                metric={metric}
+              />
+            </div>
+          ))}
         </PanelContent>
       </Panel>
     </div>

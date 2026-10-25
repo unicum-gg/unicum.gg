@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
+  wnRatingMetric,
 } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -15,6 +16,10 @@ import { useCookie } from "@/hooks/use-cookie";
  * value shown in the clan header). No table needs to be a Client Component
  * just to read the cookie.
  *
+ * It also mirrors `html[data-rating-wn]`, what a per-vehicle or per-window
+ * surface shows: the same metric when it is a WN rating, WNX when the reader
+ * picked PR or WTR, which exist for neither (see `RatingMetric`).
+ *
  * The initial value is also painted server-side from the cookie inside the
  * root layout, so the first client render does not flash the default.
  */
@@ -23,6 +28,7 @@ export function RatingMetricRoot() {
   const metric = isRatingMetric(stored) ? stored : DEFAULT_RATING_METRIC;
   useEffect(() => {
     document.documentElement.dataset.ratingMetric = metric;
+    document.documentElement.dataset.ratingWn = wnRatingMetric(metric);
   }, [metric]);
   return null;
 }

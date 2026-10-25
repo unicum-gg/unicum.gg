@@ -1,11 +1,10 @@
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion, playerRatingsByRegion, playersByRegion, type PlayerBadgeFlags } from "@unicum.gg/shared";
+import { RatingMetric, clansByRegion, playerRatingsByRegion, playersByRegion, type PlayerBadgeFlags } from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 import {
   recentBattlesSql,
   recentRatingSql,
-  type RecentRatingMetric,
 } from "@unicum.gg/core/players/recent-rating";
 
 export type TopPlayerByLanguageResult = {
@@ -19,7 +18,8 @@ export type TopPlayerByLanguageResult = {
   /**
    * The ranked metric over the last 30 days, printed beside the lifetime one,
    * null when the player has not played inside the window. Named after `wnx`
-   * for the same reason `wnx` is: it carries whichever metric was asked for.
+   * for the same reason `wnx` is: it carries whichever metric was asked for,
+   * or WNX on a PR or WTR board, which have no 30-day figure.
    * Present on the lifetime boards only.
    */
   wnx_30d?: number | null;
@@ -44,15 +44,17 @@ export type TopPlayersByLanguage = {
 // the materialization pool floor in `players/top/ratings.ts`.
 const MIN_BATTLES = 10000;
 
-const VALID_METRIC_COLUMNS: Record<string, RecentRatingMetric> = {
-  wn7: "wn7",
-  wn8: "wn8",
-  wnx: "wnx",
+const VALID_METRIC_COLUMNS: Record<string, RatingMetric> = {
+  wn7: RatingMetric.Wn7,
+  wn8: RatingMetric.Wn8,
+  wnx: RatingMetric.Wnx,
+  pr: RatingMetric.Pr,
+  wtr: RatingMetric.Wtr,
 };
 
 async function getTopPlayersGlobal(
   region: Region,
-  col: RecentRatingMetric,
+  col: RatingMetric,
   limit: number,
 ): Promise<TopPlayersByLanguage> {
   // No language filter: just the top N by metric straight off the players

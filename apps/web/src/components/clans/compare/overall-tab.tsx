@@ -5,7 +5,7 @@ import { useFormat } from "@/hooks/use-format";
 import { useMemo } from "react";
 import { LanguageFlags } from "@/components/language-flags";
 import type { Region } from "@unicum.gg/wargaming";
-import { weightedAverage, type WeightedDataPoint, type ClanMemberStats, wn7Color, wn8Color, wnxColor, LanguageSource } from "@unicum.gg/shared";
+import { weightedAverage, type WeightedDataPoint, type ClanMemberStats, prColor, wn7Color, wn8Color, wnxColor, wtrColor, LanguageSource } from "@unicum.gg/shared";
 import {
   bestIndex,
   dashCell,
@@ -135,6 +135,35 @@ export function OverallTab({
                 wnxColor,
               locale,
             )
+            : dashCell(),
+        ),
+      },
+      // Wargaming's two, lifetime only: neither has a 30-day value.
+      {
+        label: "Avg PR",
+        kind: "higher",
+        cells: slots.map((s) =>
+          s.clan
+            ? ratingCell(
+                weightedAverage(overallPoints(s.members, (m) => m.pr ?? null)),
+                prColor,
+                locale,
+                INT_FORMAT,
+              )
+            : dashCell(),
+        ),
+      },
+      {
+        label: "Avg WTR",
+        kind: "higher",
+        cells: slots.map((s) =>
+          s.clan
+            ? ratingCell(
+                weightedAverage(overallPoints(s.members, (m) => m.wtr ?? null)),
+                wtrColor,
+                locale,
+                INT_FORMAT,
+              )
             : dashCell(),
         ),
       },

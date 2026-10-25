@@ -5,7 +5,7 @@ import { identityFromRow } from "@/components/entity/player-identity";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
 import { RecentRatingCell, RecentRatingHead } from "@/components/players/list/recent-rating";
-import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, LanguageSource } from "@unicum.gg/shared";
+import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, winrateColor, ratingColorClass, LanguageSource } from "@unicum.gg/shared";
 import {
   Table,
   TableBody,
@@ -25,12 +25,6 @@ const PCT_FORMAT = {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 } as const;
-
-const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
-  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
-  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
-  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
-};
 
 export function TopPlayersList({
   region,
@@ -62,7 +56,7 @@ export function TopPlayersList({
         {tOwn("no-players-match-this-filter")}</div>
     );
   }
-  const colorFor = COLOR_FOR_METRIC[metric];
+  const colorFor = (v: number) => ratingColorClass(metric, v);
   return (
     <Table
       className={cn(

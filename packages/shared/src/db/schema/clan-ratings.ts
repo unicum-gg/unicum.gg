@@ -20,7 +20,7 @@ export function makeClanRatingsTable(region: string) {
   return pgTable(
     `${region}_clan_ratings`,
     {
-      // 'wn7' | 'wn8' | 'wnx' — the rating this row's avg_value/rated count is
+      // A `RatingMetric` value: the rating this row's avg_value/rated count is
       // for. A clan has one row per metric it has rated members for.
       metric: text("metric").notNull(),
       clanId: bigint("clan_id", { mode: "number" }).notNull(),

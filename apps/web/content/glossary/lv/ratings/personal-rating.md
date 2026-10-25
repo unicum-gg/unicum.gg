@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargaming paša reitings, kas redzams spēles klientā un portālā, aug ar izspēlēto cīņu skaitu un izpildījumu.

@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargamings eigene Wertung, die im Spielclient und auf dem Portal angezeigt wird und sowohl mit der Anzahl der Gefechte als auch mit der Leistung steigt.

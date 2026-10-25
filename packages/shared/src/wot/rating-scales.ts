@@ -14,6 +14,7 @@ import {
   wnxColor,
 } from "./ratings";
 import { starRatingColor } from "./tank-ratings";
+import { prColor, wtrColor } from "./account-ratings";
 
 /**
  * Every colour scale the site paints a number with.
@@ -27,6 +28,8 @@ export enum RatingScale {
   Wn7 = "wn7",
   Wn8 = "wn8",
   Wnx = "wnx",
+  Pr = "pr",
+  Wtr = "wtr",
   Winrate = "winrate",
   Mr = "mr",
   RampageWinrate = "rampageWinrate",
@@ -99,6 +102,8 @@ const SCALES: Record<
   [RatingScale.Wn7]: { colorOf: wn7Color, unit: RatingScaleUnit.Points, min: -2000, max: 10_000, precision: 1 },
   [RatingScale.Wn8]: { colorOf: wn8Color, unit: RatingScaleUnit.Points, min: -2000, max: 10_000, precision: 1 },
   [RatingScale.Wnx]: { colorOf: wnxColor, unit: RatingScaleUnit.Points, min: -2000, max: 10_000, precision: 1 },
+  [RatingScale.Pr]: { bounded: true, colorOf: prColor, unit: RatingScaleUnit.Points, min: 0, max: 30_000, precision: 1 },
+  [RatingScale.Wtr]: { bounded: true, colorOf: wtrColor, unit: RatingScaleUnit.Points, min: 0, max: 30_000, precision: 1 },
   [RatingScale.Winrate]: { colorOf: winrateColor, unit: RatingScaleUnit.Percent, min: 0, max: 1, precision: 0.0001, scaleBy: 100, bounded: true },
   [RatingScale.Mr]: { bounded: true, colorOf: mrColor, unit: RatingScaleUnit.Points, min: 0, max: 5000, precision: 1 },
   // One ladder serves MR in every mode (see `mrColor`), so only the win rate

@@ -9,17 +9,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import ROUTES from "@/constants/routes";
 import {
-  DEFAULT_RATING_METRIC,
   DEFAULT_TANK_BATTLE_MODE,
   isRatedTankMode,
-  isRatingMetric,
-  RatingMetric,
   type PlayerTankRow,
   type TankBattleMode,
 } from "@unicum.gg/shared";
 import { withTankMode } from "@/hooks/use-tank-mode";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import {
   Table,
   TableBody,
@@ -140,13 +136,9 @@ export function PlayerTanksTable({
     "components/players/detail/tanks/vehicle-columns",
   );
   const router = useRouter();
-  const [storedRating] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric: RatingMetric = isRatingMetric(storedRating)
-    ? storedRating
-    : DEFAULT_RATING_METRIC;
+  // Per vehicle, so WN only: a PR or WTR reader reads WNX (see
+  // `RatingMetric`).
+  const { wnMetric: metric } = useRatingMetric();
   const [sort, setSort] = useState<SortState>({
     key: "battles",
     direction: SortDirection.Desc,

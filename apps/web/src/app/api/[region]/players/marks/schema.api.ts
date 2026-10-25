@@ -22,6 +22,8 @@ export const marksSummary = z
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    pr: z.number().nullable().meta({ description: "Personal Rating, Wargaming's own account figure." }),
+    wtr: z.number().nullable().meta({ description: "World of Tanks Rating, Wargaming's own account figure." }),
     wn7_30d: z.number().nullable().meta({
       description:
         "WN7 over the last 30 days. Null for an account with no battle inside that window.",

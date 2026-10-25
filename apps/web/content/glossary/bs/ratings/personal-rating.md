@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Rejting koji je napravio Wargaming, prikazan u klijentu igre i na portalu, koji raste sa brojem odigranih bitaka kao i sa izvedbom.

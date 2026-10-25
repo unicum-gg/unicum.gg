@@ -16,7 +16,7 @@ import {
   ratingColor,
   ratingOf,
   recentRatingOf,
-  useRatingMetric,
+  useTournamentMetric,
 } from "@/components/tournaments/detail/team-rating";
 import type {
   TournamentRecord,
@@ -123,7 +123,7 @@ export function TeamMetrics({
   const { num } = useFormat();
   const { t } = useTranslation("components/tournaments/team/result");
   const ord = useOrdinal();
-  const metric = useRatingMetric();
+  const metric = useTournamentMetric();
   const rating = ratingOf(team, metric);
   const recent = recentRatingOf(team, metric);
   // A reader on a tournament that has not settled is scouting; one on an

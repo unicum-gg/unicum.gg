@@ -249,6 +249,8 @@ const ratingMetricValues = z.object({
   wn7: z.number().nullable(),
   wn8: z.number().nullable(),
   wnx: z.number().nullable(),
+  pr: z.number().nullable().optional(),
+  wtr: z.number().nullable().optional(),
 });
 
 const ratingHistoryPoint = z
@@ -260,7 +262,7 @@ const ratingHistoryPoint = z
   .meta({
     id: "RatingHistoryPoint",
     description:
-      "Daily rating sample: lifetime and per-session values, each carrying all three metrics (wn7/wn8/wnx) so the client can switch metric without a refetch.",
+      "Daily rating sample: lifetime and per-session values, each carrying every metric so the client can switch metric without a refetch. `pr` and `wtr` are Wargaming's account figures as they stood at the end of the day, so they are null on `session`.",
   });
 
 const clanStint = z

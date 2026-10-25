@@ -18,7 +18,13 @@ import {
   type Locale,
 } from "@/lib/translations";
 import { getDictionaries } from "@/lib/translations.server";
-import { DEFAULT_RATING_METRIC } from "@unicum.gg/shared";
+import {
+  DEFAULT_RATING_METRIC,
+  RATING_METRICS,
+  WN_FALLBACK_METRIC,
+  WN_RATING_METRICS,
+  wnRatingMetric,
+} from "@unicum.gg/shared";
 import "@/app/globals.css";
 
 const figtree = Figtree({
@@ -33,7 +39,13 @@ const figtree = Figtree({
 // opt every page out of static generation), so the value is hydrated
 // from the cookie client-side. `RatingMetricRoot` keeps the attribute
 // in sync after cookie changes during the session.
-const INITIAL_METRIC_SCRIPT = `(function(){try{var m=document.cookie.match(/(?:^|;\\s*)${STORAGE.COOKIES.RATING.replace(/\./g, "\\.")}=([^;]+)/);var v=m?decodeURIComponent(m[1]):${JSON.stringify(DEFAULT_RATING_METRIC)};if(v==='wn7'||v==='wn8'||v==='wnx'){document.documentElement.dataset.ratingMetric=v;}else{document.documentElement.dataset.ratingMetric=${JSON.stringify(DEFAULT_RATING_METRIC)};}}catch(e){document.documentElement.dataset.ratingMetric=${JSON.stringify(DEFAULT_RATING_METRIC)};}})();`;
+//
+// It also paints `html[data-rating-wn]`, the metric a per-vehicle or
+// per-window surface shows (`wnRatingMetric`): the reader's own when it is a
+// WN rating, WNX when they picked PR or WTR, which exist for neither. The two
+// lists are written out from the enum so a metric added there is accepted here
+// without anyone remembering this string.
+const INITIAL_METRIC_SCRIPT = `(function(){var d=document.documentElement.dataset,all=${JSON.stringify(RATING_METRICS)},wn=${JSON.stringify(WN_RATING_METRICS)},v=${JSON.stringify(DEFAULT_RATING_METRIC)};try{var m=document.cookie.match(/(?:^|;\\s*)${STORAGE.COOKIES.RATING.replace(/\./g, "\\.")}=([^;]+)/);if(m&&all.indexOf(decodeURIComponent(m[1]))>=0){v=decodeURIComponent(m[1]);}}catch(e){}d.ratingMetric=v;d.ratingWn=wn.indexOf(v)>=0?v:${JSON.stringify(WN_FALLBACK_METRIC)};})();`;
 
 // Ran before paint for the same reason as the one above, on the home page's
 // live-streamers rail. The rail is what the server renders, so a visitor who
@@ -99,6 +111,7 @@ export async function Document({
       lang={locale}
       dir={localeDir(locale)}
       data-rating-metric={DEFAULT_RATING_METRIC}
+      data-rating-wn={wnRatingMetric(DEFAULT_RATING_METRIC)}
       className={`${figtree.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >

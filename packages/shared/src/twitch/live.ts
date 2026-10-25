@@ -11,6 +11,8 @@ export type LiveStreamer = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  pr: number | null;
+  wtr: number | null;
   wn730d: number | null;
   wn830d: number | null;
   wnx30d: number | null;

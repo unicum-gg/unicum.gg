@@ -2,14 +2,13 @@
 
 import { useTranslation } from "@/hooks/use-translation";
 import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
   RATING_METRIC_LABEL,
   RATING_METRICS,
   RatingMetric,
+  WN_RATING_METRICS,
+  isRatingMetric,
 } from "@unicum.gg/shared";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import {
   Select,
   SelectContent,
@@ -26,25 +25,33 @@ const DEFAULT_TRIGGER_CLASS =
 
 export function RatingMetricInlineSelect({
   className,
+  wnOnly = false,
 }: {
   className?: string;
+  /**
+   * For a surface that rates a vehicle or a window, where PR and WTR do not
+   * exist (see `RatingMetric`): offers the three WN ratings only and shows the
+   * one actually displayed, which is WNX for a reader who picked PR or WTR.
+   * Without it the chip would name a rating the figure beside it is not.
+   */
+  wnOnly?: boolean;
 }) {
   const { t } = useTranslation("components/rating-metric-inline-select");
-  const [stored, setStored] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
-  const metric: RatingMetric = isRatingMetric(stored)
-    ? stored
-    : DEFAULT_RATING_METRIC;
+  const { metric, wnMetric, setMetric } = useRatingMetric();
+  const shown = wnOnly ? wnMetric : metric;
+  const options: RatingMetric[] = wnOnly ? WN_RATING_METRICS : RATING_METRICS;
 
   return (
     <Select
+      // The reader's own pick, not the one shown: on a `wnOnly` surface a PR
+      // reader sees WNX, and a value of WNX would make clicking WNX a no-op, so
+      // that reader could never actually switch to it from here. The trigger
+      // prints `shown` either way.
       value={metric}
       // See `rating-selector` for why there is no `router.refresh()` here.
       onValueChange={(v) => {
         if (!isRatingMetric(v)) return;
-        setStored(v);
+        setMetric(v);
       }}
     >
       <SelectTrigger
@@ -52,10 +59,10 @@ export function RatingMetricInlineSelect({
         aria-label={t("rating-metric")}
         className={className ?? DEFAULT_TRIGGER_CLASS}
       >
-        <SelectValue>{RATING_METRIC_LABEL[metric]}</SelectValue>
+        <SelectValue>{RATING_METRIC_LABEL[shown]}</SelectValue>
       </SelectTrigger>
       <SelectContent>
-        {RATING_METRICS.map((m) => (
+        {options.map((m) => (
           <SelectItem key={m} value={m}>
             {RATING_METRIC_LABEL[m]}
           </SelectItem>

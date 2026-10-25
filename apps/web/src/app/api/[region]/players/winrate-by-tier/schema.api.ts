@@ -50,6 +50,8 @@ export const TierWinrateResponse = z
         wn7: z.array(cell),
         wn8: z.array(cell),
         wnx: z.array(cell),
+        pr: z.array(cell),
+        wtr: z.array(cell),
       })
       .meta({
         id: "TierWinrateMetrics",

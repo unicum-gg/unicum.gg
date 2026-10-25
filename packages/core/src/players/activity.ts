@@ -125,7 +125,10 @@ function windowCounters(index: number, window: ActivityWindow): SQL {
  *
  * The population is the histograms' own (`battles >= DISTRIBUTION_MIN_BATTLES`
  * and all four figures present), so the two panels describe the same accounts
- * rather than two populations that happen to sit on one page. `MATERIALIZED` is
+ * rather than two populations that happen to sit on one page. PR and WTR are
+ * banded where present inside it, which is also how the histograms count them,
+ * and the branch has to say so: a null falls through every WHEN of `bandCase`
+ * to its ELSE, which is the top band. `MATERIALIZED` is
  * load-bearing exactly as it is there: without it the planner inlines the CTE
  * into each metric's branch and scans the player table three times.
  *
@@ -145,7 +148,7 @@ async function readBandActivity(region: Region): Promise<BandRow[]> {
              ${bandCase(metric, ratingBands(metric))} AS band,
              count(*)::int AS players,
              ${counters}
-      FROM sample GROUP BY 3`,
+      FROM sample WHERE ${sql.identifier(metric)} IS NOT NULL GROUP BY 3`,
   );
   const flags = sql.join(
     ACTIVITY_WINDOWS.map((window, i) => windowFlags(i, window)),
@@ -153,7 +156,7 @@ async function readBandActivity(region: Region): Promise<BandRow[]> {
   );
   return db.execute<BandRow>(
     sql`WITH sample AS MATERIALIZED (
-          SELECT wn7, wn8, wnx,
+          SELECT wn7, wn8, wnx, pr, wtr,
                  battles_24h, battles_7d, battles_30d,
                  ${flags}
           FROM ${players}

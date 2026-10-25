@@ -40,7 +40,11 @@ const LANGUAGES_TTL = "24 hours";
 const HOURLY_INFER_CAP = 15000;
 
 /**
- * Who a window ranks: its battle floor counted over the battles at or above
+ * Who a window ranks, and on what. The WN ratings are the window's own; PR and
+ * WTR are the account's current figure, since neither exists over a window, so
+ * on those two the board ranks the accounts active inside it.
+ *
+ * Who it ranks: its battle floor counted over the battles at or above
  * each tier floor, played inside it, not deleted.
  *
  * The per-floor ratings are written by the snapshot path, which already drops
@@ -58,7 +62,8 @@ function poolFor(region: Region, period: RecentPeriod): SQL {
       ${players.accountId} AS account_id,
       ${players.nickname} AS nickname, ${players.clanId} AS clan_id,
       ${tier.battles} AS battles, ${tier.wins} AS wins,
-      ${tier.wn7} AS wn7, ${tier.wn8} AS wn8, ${tier.wnx} AS wnx
+      ${tier.wn7} AS wn7, ${tier.wn8} AS wn8, ${tier.wnx} AS wnx,
+      ${players.pr} AS pr, ${players.wtr} AS wtr
     FROM ${tier}
     INNER JOIN ${players} ON ${players.accountId} = ${tier.accountId}
     WHERE ${tier.period} = ${period}
@@ -122,7 +127,7 @@ export async function recomputePlayerPeriodRatings(
       ),
       ${languageInferenceCtes(region, sql`SELECT account_id FROM todo`)}
       SELECT p.period, p.min_tier, p.account_id, p.nickname, p.battles, p.wins,
-        p.wn7, p.wn8, p.wnx,
+        p.wn7, p.wn8, p.wnx, p.pr, p.wtr,
         COALESCE(
           CASE WHEN t.account_id IS NOT NULL THEN l.languages ELSE prev.languages END,
           '{}'::text[]
@@ -139,10 +144,10 @@ export async function recomputePlayerPeriodRatings(
     const inserted = await tx.execute(sql`
       INSERT INTO ${table} (
         period, min_tier, account_id, nickname, battles, wins, wn7, wn8, wnx,
-        languages, languages_at, clan_tag, clan_color
+        pr, wtr, languages, languages_at, clan_tag, clan_color
       )
       SELECT period, min_tier, account_id, nickname, battles, wins, wn7, wn8, wnx,
-        languages, languages_at, clan_tag, clan_color
+        pr, wtr, languages, languages_at, clan_tag, clan_color
       FROM next_period_ratings
     `);
     return inserted.count;

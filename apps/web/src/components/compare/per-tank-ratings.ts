@@ -1,4 +1,4 @@
-import { RatingMetric, type VehicleMeta, computeWN7, computeWN8, computeWNX, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
+import { RatingMetric, type VehicleMeta, type WnRatingMetric, computeWN7, computeWN8, computeWNX, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export type RatingContext = {
@@ -8,8 +8,9 @@ export type RatingContext = {
   wnxExpected: Map<number, WNXExpected>;
 };
 
+/** A vehicle has no PR or WTR (see `RatingMetric`), so these take a WN metric. */
 export function computeTankRating(
-  metric: RatingMetric,
+  metric: WnRatingMetric,
   tank: TankStats,
   ctx: RatingContext,
 ): number | null {
@@ -34,7 +35,7 @@ export function computeTankRating(
 }
 
 export function computeSlotAggRating(
-  metric: RatingMetric,
+  metric: WnRatingMetric,
   tanks: TankStats[],
   ctx: RatingContext,
 ): number | null {

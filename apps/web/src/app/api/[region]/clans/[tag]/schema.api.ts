@@ -42,6 +42,8 @@ export const clanMember = z
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    pr: z.number().nullable().optional(),
+    wtr: z.number().nullable().optional(),
     wn730d: z.number().nullable(),
     wn830d: z.number().nullable(),
     wnx30d: z.number().nullable(),
@@ -56,7 +58,8 @@ export const clanMember = z
   .loose()
   .meta({
     id: "ClanMember",
-    description: "A clan member with cached WN7/WN8/WNX ratings.",
+    description:
+      "A clan member with cached WN7/WN8/WNX ratings and Wargaming's Personal Rating (`pr`) and WTR.",
   });
 
 export const previousClan = z
@@ -121,16 +124,21 @@ const ratingTriplet = z.object({
   wnx: z.number().nullable(),
 });
 
+const lifetimeRatings = ratingTriplet.extend({
+  pr: z.number().nullable(),
+  wtr: z.number().nullable(),
+});
+
 const clanRatings = z
   .object({
-    lifetime: ratingTriplet,
+    lifetime: lifetimeRatings,
     recent: ratingTriplet,
     avgWinrate: z.number().nullable(),
   })
   .meta({
     id: "ClanRatings",
     description:
-      "The clan's battle-weighted aggregate ratings: lifetime and 30-day WN7/WN8/WNX (weighted by lifetime and recent battles), plus the lifetime average win rate.",
+      "The clan's battle-weighted aggregate ratings: lifetime WN7/WN8/WNX/PR/WTR weighted by lifetime battles, the 30-day WN7/WN8/WNX weighted by recent battles (PR and WTR have no window), plus the lifetime average win rate.",
   });
 
 /**

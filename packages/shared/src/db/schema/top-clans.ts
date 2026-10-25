@@ -13,9 +13,10 @@ export function makeTopClansTable(region: string) {
   return pgTable(
     `${region}_top_clans`,
     {
-      // 'wn7' | 'wn8' | 'wnx' — the rating used to rank this row. Each
+      // A `RatingMetric` value: the rating used to rank this row. Each
       // period has its own ranking per metric, so (metric, period, rank)
-      // is the natural primary key.
+      // is the natural primary key. PR and WTR are ranked on the lifetime
+      // period only, since neither has a value over a window.
       metric: text("metric").notNull(),
       // 'overall' | '30d' — 'overall' ranks by members' lifetime rating,
       // '30d' by their last-30-days form (snapshot-diffed).

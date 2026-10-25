@@ -13,6 +13,7 @@ anchors:
   labels:
     - Personal rating
     - Global rating
+    - PR
 ---
 
 Wargaming sukurtas reitingas, rodytas žaidimo kliente ir portale, kuris auga su sužaistų mūšių skaičiumi bei pasiekimais.
