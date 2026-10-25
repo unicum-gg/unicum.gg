@@ -1,5 +1,6 @@
 # Writes every language but English, from the English files, and commits the
-# result.
+# result: the interface strings (`src/locales`) and the glossary entries
+# (`content/glossary`), each by its own generator.
 #
 # English is the only locale anyone edits. The other 35 exist because this ran,
 # which is what makes adding a string a one-file change rather than a
@@ -34,6 +35,12 @@ on:
       # also means deleting the strings it produced, and only a run refills a
       # missing key, so the edit has to bring its own repair with it.
       - "apps/web/src/locales/terms.json"
+      # The glossary's English entries and their translator. Its own generator
+      # rather than the one above, since an entry is a page of markdown whose
+      # structure has to survive the round trip, not a dictionary of labels.
+      - "apps/web/content/glossary/en/**"
+      - "apps/web/scripts/generate-glossary-translations.ts"
+      - "apps/web/scripts/glossary-terms.ts"
   workflow_dispatch:
 
 concurrency:
@@ -94,6 +101,21 @@ jobs:
           TRANSLATE_BASE_URL: ${{ secrets.TRANSLATE_BASE_URL }}
         run: pnpm --filter @unicum.gg/web translate
 
+      # Only what is missing or stale, like the step above, so a push that
+      # touched no entry costs nothing here. The ceiling is a guard against a
+      # run that would re-translate the whole tree (a hashing change, a moved
+      # folder): about four times one full pass on the default model, and a
+      # halted run resumes on the next push since only the settled entries are
+      # stamped. `!cancelled()` so a failed interface run does not also cost the
+      # glossary its turn, the two write different files.
+      - name: Fill in the missing glossary translations
+        if: ${{ !cancelled() }}
+        env:
+          TRANSLATE_API_KEY: ${{ secrets.TRANSLATE_API_KEY }}
+          OPENAI_API_KEY_TRANSLATIONS: ${{ secrets.OPENAI_API_KEY_TRANSLATIONS }}
+          TRANSLATE_BASE_URL: ${{ secrets.TRANSLATE_BASE_URL }}
+        run: pnpm --filter @unicum.gg/web glossary:translate --budget-tokens 30000000
+
       # BEFORE the check, not after, and the order is the whole point. The
       # generator writes after every request precisely so a run that stops early
       # is salvageable, and a failing check between the writing and the commit
@@ -102,10 +124,11 @@ jobs:
       # Committing first keeps what was paid for; the check below still fails
       # the job, so nothing ships unnoticed.
       - name: Commit
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add apps/web/src/locales/
+          git add apps/web/src/locales/ apps/web/content/glossary/
           if ! git diff --staged --quiet; then
             COUNT=$(git diff --staged --name-only | wc -l | tr -d ' ')
             git commit -m "🌐 add ${COUNT} generated translation files"

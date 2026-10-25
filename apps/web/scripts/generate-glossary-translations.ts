@@ -11,7 +11,10 @@
 // the reader that walks the English one keeps throwing on a directory that is
 // not a category.
 //
-//   pnpm --filter @unicum.gg/web glossary:translate [locale] [--limit N]
+//   pnpm --filter @unicum.gg/web glossary:translate [locale] [--limit N] [--budget-tokens N]
+//
+// `.github/workflows/translations.yml` runs it on every push to main touching
+// an English entry, beside the interface translator, and commits the result.
 //
 // Like the JSON translator it only writes what is missing or stale, and it
 // keeps its own hash of the English it last read, so an edited entry
@@ -56,10 +59,31 @@ const SOURCE_DIR = join(webRoot, "content", "glossary", DEFAULT_LOCALE);
 const OUT_DIR = join(webRoot, "content", "glossary");
 const HASHES_PATH = join(OUT_DIR, "source-hashes.json");
 
-const MODEL = process.env.TRANSLATE_MODEL ?? "gpt-4o-mini";
+// The interface translator's prose model on the interface translator's
+// endpoint, so the workflow that runs both needs one key and one bill. An entry
+// is prose from top to bottom, which is what `TRANSLATE_PROSE_MODEL` names.
+const MODEL =
+  process.env.TRANSLATE_PROSE_MODEL ?? process.env.TRANSLATE_MODEL ?? "gpt-5.6-luna";
 const openai = createOpenAI({
-  apiKey: process.env.OPENAI_API_KEY_TRANSLATIONS ?? process.env.OPENAI_API_KEY,
+  apiKey:
+    process.env.TRANSLATE_API_KEY ??
+    process.env.OPENAI_API_KEY_TRANSLATIONS ??
+    process.env.OPENAI_API_KEY,
+  baseURL: process.env.TRANSLATE_BASE_URL,
 });
+/**
+ * How long one entry may take before it is treated as dead, and how many times
+ * it is asked again.
+ *
+ * The marketplace endpoint hangs rather than rate-limits (see the interface
+ * translator's `REQUEST_TIMEOUT_MS`): a socket that is open and silent never
+ * errors, so without a deadline one hung entry holds its slot until the job's
+ * own timeout. Longer than the interface's deadline because an entry is a page
+ * of prose, in scripts that cost several tokens a character. A hung request is
+ * never billed, so the attempts cost wall-clock only.
+ */
+const REQUEST_TIMEOUT_MS = 180 * 1000;
+const REQUEST_ATTEMPTS = 10;
 // Lower than the JSON translator's: an entry is a page of prose rather than a
 // dozen labels, so each request is far longer and the burst is what a rate
 // limit notices.
@@ -200,11 +224,7 @@ term: ${JSON.stringify(source.term ?? entry.slug)}
 aliases: ${JSON.stringify(source.aliases ?? [])}
 
 ${content.trim()}`;
-  const first = await generateText({
-    model: openai(MODEL),
-    output: Output.object({ schema: OUTPUT }),
-    prompt,
-  });
+  const first = await ask(prompt);
   const { output } = first;
   // A title that IS one of the game's names is the catalogue's, not the
   // model's: there is one right answer and it is written down.
@@ -231,15 +251,47 @@ ${content.trim()}`;
     );
   };
   if (!echoed(output.body)) return settle(output);
-  const retry = await generateText({
-    model: openai(MODEL),
-    output: Output.object({ schema: OUTPUT }),
-    prompt: `${prompt}\n\nOne or more paragraphs came back in English. Translate all of them.`,
-  });
+  const retry = await ask(
+    `${prompt}\n\nOne or more paragraphs came back in English. Translate all of them.`,
+  );
   usage.calls++;
   usage.input += retry.usage?.inputTokens ?? 0;
   usage.output += retry.usage?.outputTokens ?? 0;
   return settle(retry.output);
+}
+
+/**
+ * One request, retried when it answered nothing at all.
+ *
+ * An abort is not an API error, so the SDK's own `maxRetries` rethrows it: the
+ * deadline only turns a hung request into a failure, and this loop turns that
+ * failure back into an answer. Each attempt gets a signal of its own, since a
+ * fired one stays fired. `.chat()` because an OpenAI-compatible endpoint is
+ * stateless and refuses the Responses API's `store: true`.
+ */
+async function ask(prompt: string) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await generateText({
+        model: openai.chat(MODEL),
+        output: Output.object({ schema: OUTPUT }),
+        prompt,
+        maxRetries: 6,
+        abortSignal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        // Explicit, since an answer cut off by a provider default is not an
+        // error anyone sees until the JSON fails to parse.
+        maxOutputTokens: 16000,
+      });
+    } catch (error) {
+      const timedOut =
+        error instanceof Error &&
+        (error.name === "TimeoutError" || error.name === "AbortError");
+      if (!timedOut || attempt >= REQUEST_ATTEMPTS) throw error;
+      console.warn(
+        `[glossary-translate] no answer in ${REQUEST_TIMEOUT_MS / 1000}s, attempt ${attempt + 1}/${REQUEST_ATTEMPTS}`,
+      );
+    }
+  }
 }
 
 /**
