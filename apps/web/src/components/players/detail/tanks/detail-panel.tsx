@@ -354,8 +354,10 @@ function Block({
               className="mb-1 flex-1 self-end border-b border-dotted border-fd-border"
             />
             <dd
-              className="font-medium whitespace-nowrap tabular-nums"
-              style={r.color ? { color: r.color } : undefined}
+              className={cn(
+                "font-medium whitespace-nowrap tabular-nums",
+                r.color && cn("rounded px-1.5 font-semibold", r.color),
+              )}
             >
               {r.value}
             </dd>

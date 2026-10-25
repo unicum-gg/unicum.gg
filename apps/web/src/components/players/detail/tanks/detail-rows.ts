@@ -1,6 +1,6 @@
 import { numberFormat } from "@/lib/format";
 import {
-  RATING_COLOR_HEX,
+  RATING_COLOR_CLASS,
   RatingColor,
   RatingMetric,
   winrateColor,
@@ -24,7 +24,7 @@ const PCT_FORMAT = {
 export type DetailRow = {
   label: string;
   value: string;
-  /** Colour for the value, currently the rating tier of a WN row. */
+  /** Badge colour for the value, the rating tier of a WN or win rate row. */
   color?: string;
   /** Set on a rating line. All three are rendered and the site's
    * `html[data-rating-wn]` rule hides the two the reader did not pick (a
@@ -50,24 +50,20 @@ function row(
   return value === null ? [] : [{ label, value, sub, color, metric }];
 }
 
-/** A percentage in the colour of the tier it falls in. Same rule as a rating
- * line, and the same reason the darkest tier keeps the inherited colour. */
+/** A percentage on a badge in the colour of the tier it falls in, like a
+ * rating line. */
 function coloredPct(
   value: number | null,
   tier: (v: number) => RatingColor,
 ): string | undefined {
-  if (value === null) return undefined;
-  const color = tier(value);
-  return color === RatingColor.VeryBad ? undefined : RATING_COLOR_HEX[color];
+  return value === null ? undefined : RATING_COLOR_CLASS[tier(value)];
 }
 
 /**
- * A rating line: the number in the colour of the tier it falls in.
- *
- * The hex rather than `RATING_COLOR_CLASS`, which paints a background and is
- * built for table cells. On a plain line the colour belongs to the text, and
- * the darkest tier is `#000000`, invisible on a dark page, so it keeps the
- * inherited colour instead.
+ * A rating line: the number on a badge in the colour of the tier it falls in,
+ * the same pill the battle rows and the lift/drag panel draw. The darkest tier
+ * is a black badge with white text, so unlike a coloured text it stays
+ * readable on a dark page.
  */
 function ratingRow(
   metric: RatingMetric,
@@ -75,12 +71,11 @@ function ratingRow(
   tier: (v: number) => RatingColor, locale: string,
 ): DetailRow[] {
   if (value === null) return [];
-  const color = tier(value);
   return row(
     metric.toUpperCase(),
     numberFormat(locale, INT_FORMAT).format(value),
     false,
-    color === RatingColor.VeryBad ? undefined : RATING_COLOR_HEX[color],
+    RATING_COLOR_CLASS[tier(value)],
     metric,
   );
 }
