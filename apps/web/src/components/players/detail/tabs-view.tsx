@@ -22,6 +22,7 @@ import {
   type OverallData,
 } from "@/components/players/detail/overview";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
+import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import {
   StrongholdTab,
   type StrongholdData,
@@ -131,6 +132,8 @@ export type PlayerTabsViewProps = {
   /** Battles shared through the mod, server-rendered under Overview (its last
    * ten) and on the Battles tab (its first page). */
   initialBattles: PlayerBattlesPayload | null;
+  /** Who the player meets in those battles, server-rendered on the Battles tab. */
+  initialEncounters: PlayerBattleEncounters | null;
 };
 
 export function PlayerTabsView({
@@ -151,6 +154,7 @@ export function PlayerTabsView({
   initialTournaments,
   initialOnslaught,
   initialBattles,
+  initialEncounters,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -397,6 +401,7 @@ export function PlayerTabsView({
           metric={wnRatingMetric(metric)}
           battleCount={detail.battleCount ?? 0}
           initialBattles={initialBattles}
+          initialEncounters={initialEncounters}
         />
       ) : onTournaments ? (
         <TournamentsTab

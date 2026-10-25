@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Most often beside {nickname}",
+    "description": "The players who have been on {nickname}’s team in at least two of the battles we hold, most often first. From ten battles together, the wins {nickname} took beside them against what {nickname} usually wins in the same modes: a clan plays its Skirmishes together, so a raw win rate would blame clanmates for the mode. Over a few dozen battles, a couple of wins either way is still chance.",
+    "caption": "battles, {delta} wins vs usual"
+  },
+  "opponents": {
+    "title": "Most often against {nickname}",
+    "description": "The players who have been on the other team in at least two of the battles we hold, most often first. From ten battles, the wins {nickname} took against them compared with what {nickname} usually wins in the same modes. Over a few dozen battles, a couple of wins either way is still chance.",
+    "caption": "battles, {delta} wins vs usual"
+  },
+  "caption-few": "battles"
+}

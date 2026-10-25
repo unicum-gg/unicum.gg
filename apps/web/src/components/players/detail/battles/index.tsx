@@ -23,6 +23,8 @@ import type { PlayerBattlesPayload } from "@/components/players/detail/overview/
 import { PlayerBattlesOffer } from "@/components/players/detail/overview/battles-offer";
 import { PlayerBattlesProvenance } from "@/components/players/detail/overview/battles-provenance";
 import { PlayerBattlesTable } from "@/components/players/detail/overview/battles-table";
+import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
+import { BattleEncounters } from "./encounters";
 import { BattleFilters } from "./filters";
 import { useBattleFilter } from "./use-battle-filter";
 
@@ -44,6 +46,7 @@ export function BattlesTab({
   metric,
   battleCount,
   initialBattles,
+  initialEncounters,
 }: {
   region: Region;
   nickname: string;
@@ -53,6 +56,8 @@ export function BattlesTab({
   battleCount: number;
   /** The first page, server-rendered when the visitor landed on this tab. */
   initialBattles: PlayerBattlesPayload | null;
+  /** Who the player meets in their battles, server-rendered with that page. */
+  initialEncounters: PlayerBattleEncounters | null;
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -155,6 +160,14 @@ export function BattlesTab({
           </>
         )}
       </Panel>
+      {total > 0 ? (
+        <BattleEncounters
+          region={region}
+          nickname={nickname}
+          filter={filter}
+          initial={filtered ? null : initialEncounters}
+        />
+      ) : null}
     </>
   );
 }

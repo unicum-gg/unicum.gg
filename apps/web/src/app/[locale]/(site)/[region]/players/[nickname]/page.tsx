@@ -17,6 +17,7 @@ import { AccountLockedView } from "@/components/players/detail/account-locked";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
+import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -347,6 +348,18 @@ async function PlayerProfileServer({
         .then((r) => r as unknown as PlayerBattlesPayload)
         .catch(() => null)
     : Promise.resolve(null);
+  // Who the player meets in those battles, drawn under the Battles tab's list.
+  // Started alongside it for the same reason: fetched after hydration, the two
+  // panels popped in late under a list that was already there.
+  const encountersPromise: Promise<PlayerBattleEncounters | null> =
+    section === PlayerSection.Battles
+      ? unicum
+          .region(region)
+          .players(decoded)
+          .battlesPlayers()
+          .then((r) => r as unknown as PlayerBattleEncounters)
+          .catch(() => null)
+      : Promise.resolve(null);
   const detail = await loadDetail(region, decoded);
   if (detail && "locked" in detail) {
     return <AccountLockedView
@@ -510,6 +523,7 @@ async function PlayerProfileServer({
   );
 
   const initialBattles = await battlesPromise;
+  const initialEncounters = await encountersPromise;
 
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
@@ -558,6 +572,7 @@ async function PlayerProfileServer({
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
         initialBattles={initialBattles}
+        initialEncounters={initialEncounters}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side
           borders run down to the footer instead of stopping at the last panel,

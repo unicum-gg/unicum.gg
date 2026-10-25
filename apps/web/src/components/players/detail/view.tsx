@@ -13,6 +13,7 @@ import { PlayerTabsView } from "@/components/players/detail/tabs-view";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
+import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import { useCookie } from "@/hooks/use-cookie";
 import STORAGE from "@/constants/storage";
 import { unicum } from "@/services/sdk";
@@ -52,6 +53,7 @@ export function PlayerProfile({
   initialTournaments,
   initialOnslaught,
   initialBattles,
+  initialEncounters,
 }: {
   region: Region;
   nickname: string;
@@ -84,6 +86,8 @@ export function PlayerProfile({
   initialOnslaught: PlayerOnslaughtData | null;
   /** Battles shared through the mod, server-rendered under Overview. */
   initialBattles: PlayerBattlesPayload | null;
+  /** Who the player meets in those battles, server-rendered on the Battles tab. */
+  initialEncounters: PlayerBattleEncounters | null;
 }) {
   // The active metric is client state (the cookie), not a server prop: the page
   // is statically cached and metric-agnostic (the payload carries all three
@@ -206,6 +210,7 @@ export function PlayerProfile({
         initialTournaments={initialTournaments}
         initialOnslaught={initialOnslaught}
         initialBattles={initialBattles}
+        initialEncounters={initialEncounters}
       />
     </>
   );
