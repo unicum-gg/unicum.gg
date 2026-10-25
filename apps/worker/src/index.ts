@@ -187,6 +187,32 @@ async function startWgRateMeter(): Promise<void> {
   }, 60_000).unref();
 }
 
+/**
+ * The health endpoint rides the crons process, which is the singleton: binding a
+ * port from the pipeline would mean N processes fighting over it, and the crons
+ * are what an outside probe needs to know about anyway.
+ *
+ * Off by default outside production so `pnpm dev` does not claim a port a
+ * worktree's web server may want, and reachable by setting WORKER_HEALTH_PORT
+ * when a local run really has to be probed.
+ */
+function startHealth(role: WorkerRole): void {
+  const configured = process.env.WORKER_HEALTH_PORT;
+  if (!configured && process.env.NODE_ENV !== "production") {
+    console.log("[health] not production and no WORKER_HEALTH_PORT, skipping");
+    return;
+  }
+  const port = Number(configured || 3000);
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    console.error(`[health] invalid WORKER_HEALTH_PORT "${configured}"`);
+    return;
+  }
+  void import("./health").then(({ startHealthServer }) => {
+    startHealthServer(port);
+    console.log(`[health] serving the ${role} role`);
+  });
+}
+
 async function main(): Promise<void> {
   // The worker is background-only: route every DB access to the background pool.
   globalThis.__dbContext = "background";
@@ -210,6 +236,7 @@ async function main(): Promise<void> {
 
   if (role !== WorkerRole.Pipeline) {
     await startCrons();
+    startHealth(role);
   }
 
   await startWgRateMeter();

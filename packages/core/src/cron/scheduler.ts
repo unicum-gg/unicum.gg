@@ -1,4 +1,9 @@
 import cron from "node-cron";
+import {
+  recordCronBeat,
+  recordCronCompleted,
+  recordCronFailed,
+} from "./heartbeat";
 import { tryAcquireLease } from "./lease";
 
 // Local dev: skip the leader election so `pnpm dev` actually runs crons
@@ -36,10 +41,17 @@ export function scheduleCron(
     inFlight = true;
     const start = Date.now();
     try {
-      if (!SKIP_LEASE && !(await tryAcquireLease())) return;
+      const leader = SKIP_LEASE || (await tryAcquireLease());
+      // Stamped on the lease ANSWER rather than on the win, so the heartbeat
+      // reads "the scheduler fired and Postgres replied" and cannot be turned
+      // red by another instance legitimately holding the lease.
+      recordCronBeat();
+      if (!leader) return;
       await fn();
+      recordCronCompleted(name);
       console.log(`[${name}] tick completed in ${Date.now() - start}ms`);
     } catch (err) {
+      recordCronFailed();
       console.error(
         `[${name}] tick failed after ${Date.now() - start}ms:`,
         err,
