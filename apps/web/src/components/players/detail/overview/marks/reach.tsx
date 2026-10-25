@@ -73,7 +73,7 @@ export function MarksReach({
             >
               <span
                 className={cn(
-                  "px-2 py-0.5 text-xs",
+                  "rounded px-2 py-0.5 text-xs",
                   MARK_CELL_CLASS[e.playingAt as 1 | 2 | 3],
                 )}
               >

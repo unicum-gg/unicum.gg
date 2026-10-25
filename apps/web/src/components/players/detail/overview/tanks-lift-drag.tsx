@@ -196,7 +196,7 @@ function Row({
       badge={
         <span
           className={cn(
-            "px-2 py-0.5 text-xs",
+            "rounded px-2 py-0.5 text-xs",
             ratingColorClass(metric, row.rating),
           )}
         >
