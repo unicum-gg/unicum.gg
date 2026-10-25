@@ -11,6 +11,8 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import { RatingFallbackNote } from "@/components/rating-fallback-note";
+import { RatingFallbackReason } from "@/components/rating-fallback-reason";
 import { getTranslation } from "@/lib/translations.server";
 import { buildViews } from "./build-views";
 import { LoadoutsEmpty } from "./empty";
@@ -106,7 +108,13 @@ export async function LoadoutsTab({
           label: modeName,
           players: view.stats.sample,
           note: (
-            <SampleNote stats={view.stats} modeName={modeName} locale={locale} />
+            <>
+              <SampleNote stats={view.stats} modeName={modeName} locale={locale} />
+              <RatingFallbackNote
+                reason={RatingFallbackReason.Vehicle}
+                className="mt-1"
+              />
+            </>
           ),
           panel: (
             <ModePanels

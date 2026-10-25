@@ -4593,6 +4593,10 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            /** @description The account's Personal Rating, Wargaming's own figure. */
+            pr?: number | null;
+            /** @description The account's World of Tanks Rating, Wargaming's own figure. */
+            wtr?: number | null;
             is_verified?: boolean;
             /** @description Tournaments this account was on the winning roster of, for the winner's crest. */
             tournament_wins?: number;

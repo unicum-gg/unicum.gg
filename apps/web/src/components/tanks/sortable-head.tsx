@@ -37,6 +37,7 @@ export function SortableHead({
   headClassName,
   tooltip,
   ratingCol,
+  ratingWnCol,
   children,
 }: {
   col: string;
@@ -49,6 +50,9 @@ export function SortableHead({
   /** Tags the column with the rating metric it shows, so the site's
    * cookie-painted CSS hides it unless that metric is the one selected. */
   ratingCol?: string;
+  /** The same for a column carrying a WN rating only (a vehicle's, a
+   * battle's), which follows the WN fallback of the reader's pick. */
+  ratingWnCol?: string;
   children: React.ReactNode;
 }) {
   const active = state?.key === col;
@@ -82,6 +86,7 @@ export function SortableHead({
   return (
     <TableHead
       data-rating-col={ratingCol}
+      data-rating-wn-col={ratingWnCol}
       className={cn(
         "p-0",
         hideOnMobile && styles.hiddenColumn,

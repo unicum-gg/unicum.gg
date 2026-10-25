@@ -3,7 +3,7 @@ import {
   clansByRegion,
   loadoutPrivacy,
   MIN_BATTLES_TO_RATE,
-  RATING_METRICS,
+  WN_RATING_METRICS,
   tankSnapshotsByRegion,
   type LoadoutMode,
   type LoadoutCrewMember,
@@ -139,9 +139,10 @@ export async function topTankPlayers(
     };
   });
 
-  // The top of every metric, together: the page picks the metric.
+  // The top of every WN metric, together: the page picks the metric (a
+  // vehicle has no PR or WTR, see `RatingMetric`).
   const kept = new Set<(typeof rated)[number]>();
-  for (const metric of RATING_METRICS) {
+  for (const metric of WN_RATING_METRICS) {
     [...rated]
       .filter((entry) => entry.rating[metric] != null)
       .sort((a, b) => b.rating[metric]! - a.rating[metric]!)

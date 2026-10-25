@@ -5,7 +5,7 @@ import {
   PlayerBattlesTable,
   type PlayerBattleRow,
 } from "@/components/players/detail/overview/battles-table";
-import { useRatingMetric } from "@/components/tournaments/detail/team-rating";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import ROUTES from "@/constants/routes";
 
 /**
@@ -33,7 +33,8 @@ export function TopBattles({
   slug: string;
   rows: PlayerBattleRow[];
 }) {
-  const metric = useRatingMetric();
+  // A battle has no PR or WTR, so a reader on either reads the WN fallback.
+  const { wnMetric: metric } = useRatingMetric();
   if (rows.length === 0) return null;
   // Each name leads to that player's page on this vehicle, as the best players
   // board above does, rather than to their profile.

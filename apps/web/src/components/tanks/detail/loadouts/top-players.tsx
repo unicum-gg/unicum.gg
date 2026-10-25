@@ -6,6 +6,7 @@ import {
   RATING_COLOR_CLASS,
   RATING_METRIC_LABEL,
   RatingMetric,
+  type WnRatingMetric,
   wn7Color,
   wn8Color,
   wnxColor,
@@ -20,7 +21,7 @@ import {
 } from "@/components/players/detail/tanks/loadout-boxes";
 import { RankMedal } from "@/components/rank-medal";
 import ROUTES from "@/constants/routes";
-import { useRatingMetric } from "@/components/tournaments/detail/team-rating";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import {
   Table,
   TableBody,
@@ -58,7 +59,7 @@ const SHOWN = 10;
 /** The box edge: the largest that sits inside the board's 44px row. */
 const BOX = 28;
 
-const RATING_COLOR: Record<RatingMetric, (value: number) => string> = {
+const RATING_COLOR: Record<WnRatingMetric, (value: number) => string> = {
   [RatingMetric.Wn7]: (value) => RATING_COLOR_CLASS[wn7Color(value)],
   [RatingMetric.Wn8]: (value) => RATING_COLOR_CLASS[wn8Color(value)],
   [RatingMetric.Wnx]: (value) => RATING_COLOR_CLASS[wnxColor(value)],
@@ -80,7 +81,8 @@ export function TopPlayers({
   const { num } = useFormat();
   // One open at a time, like the battle cards: two open crews is a wall.
   const [open, setOpen] = useState<string | null>(null);
-  const metric = useRatingMetric();
+  // A vehicle has no PR or WTR, so a reader on either reads the WN fallback.
+  const { wnMetric: metric } = useRatingMetric();
   const ranked = rows
     .filter((row) => row.rating[metric] != null)
     .sort((a, b) => b.rating[metric]! - a.rating[metric]!)

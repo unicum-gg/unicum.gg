@@ -5,15 +5,16 @@ import {
   MIN_ROW_PERFORMANCE_SAMPLE,
   RATING_COLOR_CLASS,
   RATING_METRIC_LABEL,
-  RATING_METRICS,
+  WN_RATING_METRICS,
   RatingMetric,
+  type WnRatingMetric,
   winrateColor,
   wn7Color,
   wn8Color,
   wnxColor,
 } from "@unicum.gg/shared";
 import { Hint } from "@/components/hint";
-import { useRatingMetric } from "@/components/tournaments/detail/team-rating";
+import { useRatingMetric } from "@/hooks/use-rating-metric";
 import {
   LoadoutSlotBox,
   LoadoutTooltips,
@@ -70,10 +71,10 @@ enum Column {
 }
 
 /** The sort keys of one rating metric's three columns. */
-const ratingKey = (metric: RatingMetric, part: "value" | "usual" | "delta") =>
+const ratingKey = (metric: WnRatingMetric, part: "value" | "usual" | "delta") =>
   `${metric}:${part}`;
 
-const RATING_COLOR: Record<RatingMetric, (value: number) => string> = {
+const RATING_COLOR: Record<WnRatingMetric, (value: number) => string> = {
   [RatingMetric.Wn7]: (value) => RATING_COLOR_CLASS[wn7Color(value)],
   [RatingMetric.Wn8]: (value) => RATING_COLOR_CLASS[wn8Color(value)],
   [RatingMetric.Wnx]: (value) => RATING_COLOR_CLASS[wnxColor(value)],
@@ -99,7 +100,7 @@ const gap = (value: number | null, usual: number | null) =>
 function sortValue(row: LoadoutTableRow, key: string): number {
   const p = row.performance;
   const or = (value: number | null) => value ?? -Infinity;
-  const [metric, part] = key.split(":") as [RatingMetric, string | undefined];
+  const [metric, part] = key.split(":") as [WnRatingMetric, string | undefined];
   if (part) {
     const value = p.rating[metric];
     const usual = p.playerRating[metric];
@@ -152,7 +153,8 @@ export function LoadoutTable({
   >;
 }) {
   const { num } = useFormat();
-  const metric = useRatingMetric();
+  // A vehicle has no PR or WTR, so a reader on either reads the WN fallback.
+  const { wnMetric: metric } = useRatingMetric();
   // Null until the reader clicks a heading. The default is the question the
   // table is for, which setup does best, read on the metric picked in the
   // navbar, so it follows that pick rather than being frozen at first render.
@@ -193,7 +195,7 @@ export function LoadoutTable({
     );
 
   if (rows.length === 0) return null;
-  const usualLabel = (metric: RatingMetric) =>
+  const usualLabel = (metric: WnRatingMetric) =>
     labels.playerRating.replace("{metric}", RATING_METRIC_LABEL[metric]);
   const head = (
     col: string,
@@ -219,7 +221,7 @@ export function LoadoutTable({
     ratingCol?: string,
   ) => (
     <TableCell
-      data-rating-col={ratingCol}
+      data-rating-wn-col={ratingCol}
       className={cn(
         "text-right font-medium tabular-nums whitespace-nowrap",
         className,
@@ -253,18 +255,18 @@ export function LoadoutTable({
             {/* One trio per rating metric, all three rendered and only the
                 one picked in the navbar shown, by the site's own
                 cookie-painted CSS, as every other rating column does. */}
-            {RATING_METRICS.map((metric) => (
+            {WN_RATING_METRICS.map((metric) => (
               <Fragment key={metric}>
                 {head(ratingKey(metric, "value"), RATING_METRIC_LABEL[metric], {
-                  ratingCol: metric,
+                  ratingWnCol: metric,
                 })}
                 {head(ratingKey(metric, "usual"), usualLabel(metric), {
-                  ratingCol: metric,
+                  ratingWnCol: metric,
                   hideOnMobile: true,
                   tooltip: labels.playerRatingTip,
                 })}
                 {head(ratingKey(metric, "delta"), labels.delta, {
-                  ratingCol: metric,
+                  ratingWnCol: metric,
                   tooltip: labels.deltaTip,
                   headClassName: "w-px whitespace-nowrap pr-4",
                 })}
@@ -329,7 +331,7 @@ export function LoadoutTable({
                   hideOnMobile
                 />
                 {delta(gap(p.winrate, p.playerWinrate), PCT_DELTA)}
-                {RATING_METRICS.map((metric) => {
+                {WN_RATING_METRICS.map((metric) => {
                   const value = p.rating[metric];
                   const usual = p.playerRating[metric];
                   return (
@@ -375,7 +377,7 @@ function Figure({
   const { num } = useFormat();
   return (
     <TableCell
-      data-rating-col={ratingCol}
+      data-rating-wn-col={ratingCol}
       className={cn(
         "text-right tabular-nums whitespace-nowrap text-fd-muted-foreground",
         hideOnMobile && styles.hiddenColumn,
@@ -402,7 +404,7 @@ function Painted({
 }) {
   return (
     <TableCell
-      data-rating-col={ratingCol}
+      data-rating-wn-col={ratingCol}
       className={cn(
         "text-right font-semibold tabular-nums whitespace-nowrap",
         hideOnMobile && styles.hiddenColumn,

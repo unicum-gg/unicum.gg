@@ -1,4 +1,4 @@
-import { RatingMetric } from "../constants/rating";
+import type { WnRatingMetric } from "../constants/rating";
 import { BattleMode } from "./battle-modes";
 
 /**
@@ -162,7 +162,8 @@ export interface LoadoutPerformance {
 }
 
 /** One value per rating metric, null where the vehicle has no expected values. */
-export type LoadoutRatings = Record<RatingMetric, number | null>;
+// A vehicle has no PR or WTR (see `RatingMetric`), so the WN ratings only.
+export type LoadoutRatings = Record<WnRatingMetric, number | null>;
 
 /** One fitted item, how many ran it, and how those battles went. */
 export interface LoadoutItemUsage {
