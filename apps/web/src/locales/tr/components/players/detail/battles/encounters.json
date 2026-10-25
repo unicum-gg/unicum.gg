@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "En sık {nickname} yanında",
+    "description": "Tuttuğumuz savaşların en az ikisinde {nickname} ile aynı takımda yer alan oyuncular, en sık görülenler önce. Birlikte on savaştan itibaren, {nickname} yanında alınan zaferler, aynı modlarda normal kazanılan zaferlerle karşılaştırılır. Bir klan Çatışmalarını birlikte oynanış olarak gerçekleştirdiğinden, ham zafer değerlendirmesi mod için klan arkadaşlarını suçlardı. Birkaç düzine savaşta, herhangi bir taraftaki birkaç zafer hâlâ şanstır.",
+    "caption": "savaşlar, normale kıyasla {delta} zaferler"
+  },
+  "opponents": {
+    "title": "En sık {nickname} ile karşı karşıya",
+    "description": "Tuttuğumuz savaşların en az ikisinde karşı takımda yer alan oyuncular, en sık görülenler önce. On savaştan itibaren, {nickname} karşı kazanılan zaferler, aynı modlarda normal kazanılan zaferlerle karşılaştırılır. Birkaç düzine savaşta, herhangi bir taraftaki birkaç zafer hâlâ şanstır.",
+    "caption": "savaşlar, normale kıyasla {delta} zaferler"
+  },
+  "caption-few": "savaşlar"
+}

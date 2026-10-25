@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Am häufigsten neben {nickname}",
+    "description": "Die Spieler, die in mindestens zwei der von uns gehaltenen Gefechte im Team von {nickname} waren, zuerst die häufigsten. Von zehn gemeinsamen Gefechten an werden die Siege, die {nickname} neben ihnen errungen hat, mit den Siegen verglichen, die {nickname} in denselben Modi üblich erzielt. Ein Clan spielt seine Scharmützel gemeinsam, daher würden die Teamkameraden bei einer bloßen Siegquote für den Modus verantwortlich gemacht. Über einige Dutzend Gefechte hinweg sind ein paar Siege in die eine oder andere Richtung weiterhin Zufall.",
+    "caption": "Gefechte, {delta} Siege im Vergleich zum Üblichen"
+  },
+  "opponents": {
+    "title": "Am häufigsten gegen {nickname}",
+    "description": "Die Spieler, die in mindestens zwei der von uns gehaltenen Gefechte im gegnerischen Team waren, zuerst die häufigsten. Von zehn Gefechten an werden die Siege, die {nickname} gegen sie errungen hat, mit den Siegen verglichen, die {nickname} in denselben Modi üblich erzielt. Über einige Dutzend Gefechte hinweg sind ein paar Siege in die eine oder andere Richtung weiterhin Zufall.",
+    "caption": "Gefechte, {delta} Siege im Vergleich zum Üblichen"
+  },
+  "caption-few": "Gefechte"
+}

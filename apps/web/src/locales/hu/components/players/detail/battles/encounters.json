@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Leggyakrabban {nickname} mellett",
+    "description": "Azok a játékosok, akik legalább két általunk nyilvántartott csatában {nickname} csapatában voltak, elöl azokkal, akik a leggyakrabban. Tíz közös csatától kezdve a {nickname} által mellettük szerzett győzelmeket azzal hasonlítjuk össze, amit {nickname} ugyanazokban a játékmódokban szokásosan elér. Egy klán együtt játssza a Csatározásokat, ezért a nyers győzelmi értékelés a játékmód miatt a klántársakat hibáztatná. Néhány tucat csata alatt pár győzelem bármelyik irányban továbbra is csak esély.",
+    "caption": "csaták, {delta} győzelmek a szokásoshoz képest"
+  },
+  "opponents": {
+    "title": "Leggyakrabban {nickname} ellen",
+    "description": "Azok a játékosok, akik legalább két általunk nyilvántartott csatában a másik csapatban voltak, elöl azokkal, akik a leggyakrabban. Tíz csatától kezdve a {nickname} által ellenük szerzett győzelmeket összehasonlítjuk azzal, amit {nickname} ugyanazokban a játékmódokban szokásosan elér. Néhány tucat csata alatt pár győzelem bármelyik irányban továbbra is csak esély.",
+    "caption": "csaták, {delta} győzelmek a szokásoshoz képest"
+  },
+  "caption-few": "csaták"
+}

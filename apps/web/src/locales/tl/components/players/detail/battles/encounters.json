@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Pinakamadalas na katabi ni {nickname}",
+    "description": "Mga manlalaro na naging nasa koponan ni {nickname} sa hindi bababa sa dalawa sa mga laban na hawak namin, unang ipinapakita ang pinakamadalas. Mula sa sampung laban na magkasama, ang mga panalong nakuha ni {nickname} katabi nila kumpara sa karaniwang mga panalo ni {nickname} sa parehong mga mode. Ang isang klano ay naglalaro ng mga Skirmishes nito nang magkakasama, kaya sana sisihin ng payak na rate ng panalo ang mga kasamahan sa klano para sa mode. Sa ilang dosenang laban, ang isa o dalawang panalo sa alinman sa panig ay pagkakataon pa rin.",
+    "caption": "mga laban, {delta} mga panalo laban sa karaniwan"
+  },
+  "opponents": {
+    "title": "Pinakamadalas na laban sa {nickname}",
+    "description": "Mga manlalaro na naging nasa kabilang koponan sa hindi bababa sa dalawa sa mga laban na hawak namin, unang ipinapakita ang pinakamadalas. Mula sa sampung laban, ang mga panalo ni {nickname} laban sa kanila kumpara sa karaniwang mga panalo ni {nickname} sa parehong mga mode. Sa ilang dosenang laban, ang isa o dalawang panalo sa alinman sa panig ay pagkakataon pa rin.",
+    "caption": "mga laban, {delta} mga panalo laban sa karaniwan"
+  },
+  "caption-few": "mga laban"
+}

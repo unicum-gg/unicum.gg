@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Oftest ved siden av {nickname}",
+    "description": "Spillerne som har vært på laget til {nickname} i minst to av kampene vi har lagret, oftest først. Fra ti kamper sammen, seirene {nickname} tok ved siden av dem sammenlignet med det {nickname} vanligvis vinner i de samme modusene. En klan spiller Trefningene sine sammen, så en rå seiersrate ville legge skylden på klanmedlemmene for modusen. Over noen dusin kamper er et par seire hver vei fortsatt sjanse.",
+    "caption": "kamper, {delta} seire mot vanlig"
+  },
+  "opponents": {
+    "title": "Oftest mot {nickname}",
+    "description": "Spillerne som har vært på det andre laget i minst to av kampene vi har lagret, oftest først. Fra ti kamper, seirene {nickname} tok mot dem sammenlignet med det {nickname} vanligvis vinner i de samme modusene. Over noen dusin kamper er et par seire hver vei fortsatt sjanse.",
+    "caption": "kamper, {delta} seire mot vanlig"
+  },
+  "caption-few": "kamper"
+}

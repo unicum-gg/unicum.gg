@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Useimmiten nimimerkin {nickname} vieressä",
+    "description": "Pelaajat, jotka ovat olleet nimimerkin {nickname} joukkueessa vähintään kahdessa taistelussa, useimmiten ensimmäisinä. Alkaen kymmenestä yhteisestä taistelusta, nimimerkin {nickname} heidän vieressään ottamat voitot verrattuna siihen, mitä nimimerkki {nickname} tavallisesti voittaa samoissa pelimuodoissa. Klaani pelaa Kahakat yhdessä, joten pelkkä voittoarvio syyttäisi klaanitovereita pelimuodosta. Muutaman kymmenen taistelun aikana pari voittoa kumpi tahansa suuntaan on edelleen mahdollisuus.",
+    "caption": "taistelut, {delta} voittoa verrattuna tavalliseen"
+  },
+  "opponents": {
+    "title": "Useimmiten nimimerkkiä {nickname} vastaan",
+    "description": "Pelaajat, jotka ovat olleet toisessa joukkueessa vähintään kahdessa taistelussa, useimmiten ensimmäisinä. Alkaen kymmenestä taistelusta, nimimerkin {nickname} heitä vastaan saamat voitot verrattuna siihen, mitä nimimerkki {nickname} tavallisesti voittaa samoissa pelimuodoissa. Muutaman kymmenen taistelun aikana pari voittoa kumpi tahansa suuntaan on edelleen mahdollisuus.",
+    "caption": "taistelut, {delta} voittoa verrattuna tavalliseen"
+  },
+  "caption-few": "taistelut"
+}

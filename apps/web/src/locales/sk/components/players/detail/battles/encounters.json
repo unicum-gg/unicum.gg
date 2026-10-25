@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Najčastejšie poleg {nickname}",
+    "description": "Hráči, ktorí boli v tíme {nickname} aspoň v dvoch z bitiek, ktoré držíme, zoradení podľa toho, ako často sa objavujú. Od desiatich spoločných bitiek porovnávame zmage, ktoré {nickname} získal poleg nich, s počtom zmage, ktoré {nickname} običajno dosahuje v rovnakých režimoch. Klan igra svoje Šarvátky spoločne, takže surová miera zmage by obviňovala spoluhráčov z režimu. Po niekoľkých desiatkach bitiek sú pár zmage na kateri koli strane stále len šanca.",
+    "caption": "bitky, {delta} zmage proti tomu, čo je običajno"
+  },
+  "opponents": {
+    "title": "Najčastejšie proti {nickname}",
+    "description": "Hráči, ktorí boli v druhom tíme aspoň v dvoch z bitiek, ktoré držíme, zoradení podľa toho, ako často sa objavujú. Od desiatich bitiek porovnávame zmage, ktoré {nickname} získal proti nim, s počtom zmage, ktoré {nickname} običajno dosahuje v rovnakých režimoch. Po niekoľkých desiatkach bitiek sú pár zmage na kateri koli strane stále len šanca.",
+    "caption": "bitky, {delta} zmage proti tomu, čo je običajno"
+  },
+  "caption-few": "bitky"
+}

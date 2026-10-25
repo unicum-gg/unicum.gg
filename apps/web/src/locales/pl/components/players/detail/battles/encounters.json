@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Najczęściej obok {nickname}",
+    "description": "Gracze, którzy byli w drużynie {nickname} w co najmniej dwóch bitwach objętych naszym utrzymaniem, uporządkowani od najczęściej spotykanych. Od dziesięciu wspólnych bitew porównujemy zwycięstwa odniesione przez {nickname} obok nich ze standardowymi zwycięstwami {nickname} w tych samych trybach. Klan rozgrywa wspólnie swoje Potyczki, więc surowa ocena zwycięstw obciążałaby członków klanu winą za tryb. Przy kilkudziesięciu bitwach kilka zwycięstw w dowolną stronę to nadal szansa.",
+    "caption": "bitwy, {delta} zwycięstw względem standardowych"
+  },
+  "opponents": {
+    "title": "Najczęściej przeciwko {nickname}",
+    "description": "Gracze, którzy byli w przeciwnej drużynie w co najmniej dwóch bitwach objętych naszym utrzymaniem, uporządkowani od najczęściej spotykanych. Od dziesięciu bitew porównujemy zwycięstwa odniesione przez {nickname} przeciwko nim ze standardowymi zwycięstwami {nickname} w tych samych trybach. Przy kilkudziesięciu bitwach kilka zwycięstw w dowolną stronę to nadal szansa.",
+    "caption": "bitwy, {delta} zwycięstw względem standardowych"
+  },
+  "caption-few": "bitwy"
+}

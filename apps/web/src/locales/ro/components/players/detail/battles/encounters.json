@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Cel mai des lângă {nickname}",
+    "description": "Jucătorii care au fost în aceeași echipă cu {nickname} în cel puțin două dintre bătăliile pe care le menținem, cu cei mai frecvenți primii. De la zece bătălii împreună, victoriile obținute de {nickname} lângă ei, comparate cu victoriile pe care {nickname} le obține de obicei în aceleași moduri: un clan își joacă Raidurile împreună, așa că o rată brută a victoriilor i-ar învinovăți pe membrii clanului pentru mod. În câteva zeci de bătălii, câteva victorii în oricare direcție sunt în continuare doar o șansă.",
+    "caption": "bătălii, {delta} victorii față de obișnuit"
+  },
+  "opponents": {
+    "title": "Cel mai des împotriva {nickname}",
+    "description": "Jucătorii care au fost în cealaltă echipă în cel puțin două dintre bătăliile pe care le menținem, cu cei mai frecvenți primii. De la zece bătălii, victoriile obținute de {nickname} împotriva lor, comparate cu victoriile pe care {nickname} le obține de obicei în aceleași moduri. În câteva zeci de bătălii, câteva victorii în oricare direcție sunt în continuare doar o șansă.",
+    "caption": "bătălii, {delta} victorii față de obișnuit"
+  },
+  "caption-few": "bătălii"
+}

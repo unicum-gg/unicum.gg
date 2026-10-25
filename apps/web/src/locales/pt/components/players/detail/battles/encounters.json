@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Mais frequentemente ao lado de {nickname}",
+    "description": "Os jogadores que estiveram na equipe de {nickname} em pelo menos duas das batalhas que conseguimos manter, listados primeiro pela maior frequência. De dez batalhas juntos, as vitórias que {nickname} obteve ao lado deles contra as vitórias habituais de {nickname} nos mesmos modos. Um clã joga suas Escaramuças junto, então uma taxa de vitórias bruta culparia os companheiros de clã pelo modo. Ao longo de algumas dezenas de batalhas, um par de vitórias para qualquer lado ainda é probabilidade.",
+    "caption": "batalhas, {delta} vitórias contra o habitual"
+  },
+  "opponents": {
+    "title": "Mais frequentemente contra {nickname}",
+    "description": "Os jogadores que estiveram na outra equipe em pelo menos duas das batalhas que conseguimos manter, listados primeiro pela maior frequência. De dez batalhas, o número de vitórias de {nickname} contra eles, comparado com o número habitual de vitórias de {nickname} nos mesmos modos. Ao longo de algumas dezenas de batalhas, um par de vitórias para qualquer lado ainda é probabilidade.",
+    "caption": "batalhas, {delta} vitórias contra o habitual"
+  },
+  "caption-few": "batalhas"
+}

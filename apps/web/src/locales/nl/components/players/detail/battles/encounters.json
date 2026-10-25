@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Het vaakst naast {nickname}",
+    "description": "De spelers die in minstens twee van de gevechten die we vasthouden in het team van {nickname} hebben gezeten, meestal eerst. Vanaf tien gevechten samen worden de overwinningen die {nickname} naast hen behaalde vergeleken met de gebruikelijke overwinningen van {nickname} in dezelfde speltypen. Een clan speelt zijn Schermutselingen samen, dus een ruwe winstbeoordeling zou clanleden de schuld geven van het speltype. Over enkele tientallen gevechten blijven een paar overwinningen aan een van beide kanten nog steeds een kwestie van kans.",
+    "caption": "gevechten, {delta} overwinningen vergeleken met gebruikelijk"
+  },
+  "opponents": {
+    "title": "Het vaakst tegen {nickname}",
+    "description": "De spelers die in minstens twee van de gevechten die we vasthouden in het andere team hebben gezeten, meestal eerst. Vanaf tien gevechten worden de overwinningen die {nickname} tegen hen behaalde vergeleken met de gebruikelijke overwinningen van {nickname} in dezelfde speltypen. Over enkele tientallen gevechten blijven een paar overwinningen aan een van beide kanten nog steeds een kwestie van kans.",
+    "caption": "gevechten, {delta} overwinningen vergeleken met gebruikelijk"
+  },
+  "caption-few": "gevechten"
+}

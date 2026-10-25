@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Dažniausiai šalia {nickname}",
+    "description": "Žaidėjai, kurie bent dvejuose mūsų laikomuose mūšiuose buvo vienoje komandoje su {nickname}, dažniausiai rodomi pirmiausia. Iš dešimties kartu vykusių mūšių, {nickname} pasiektos pergalės šalia jų, palyginti su tuo, kiek {nickname} įprastai laimi tuose pačiuose režimuose. Klano žaidėjai kartu žaidžia savo Išpuolius, todėl paprastas pergalių rodiklis apkaltintų klano draugus dėl režimo. Per kelias dešimtis mūšių pora pergalių į vieną ar kitą pusę vis dar tėra tikimybė.",
+    "caption": "mūšiai, {delta} pergalės, palyginti su įprastu rodikliu"
+  },
+  "opponents": {
+    "title": "Dažniausiai prieš {nickname}",
+    "description": "Žaidėjai, kurie bent dvejuose mūsų laikomuose mūšiuose buvo kitoje komandoje nei {nickname}, dažniausiai rodomi pirmiausia. Iš dešimties mūšių, {nickname} pasiektos pergalės prieš juos, palyginti su tuo, kiek {nickname} įprastai laimi tuose pačiuose režimuose. Per kelias dešimtis mūšių pora pergalių į vieną ar kitą pusę vis dar tėra tikimybė.",
+    "caption": "mūšiai, {delta} pergalės, palyginti su įprastu rodikliu"
+  },
+  "caption-few": "mūšiai"
+}

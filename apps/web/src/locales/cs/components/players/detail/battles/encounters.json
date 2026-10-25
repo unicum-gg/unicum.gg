@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Nejčastěji vedle {nickname}",
+    "description": "Hráči, kteří byli v týmu vedle {nickname} alespoň ve dvou bitvách, které se nám podařilo udržet v záznamech, řazeni od nejčastějších. Od deseti společných bitev porovnáváme vítězství, která {nickname} získal vedle nich, s obvyklými vítězstvími {nickname} ve stejných režimech. Klan hraje své Šarvátky společně, takže by prosté hodnocení vítězství obviňovalo spoluhráče z klanu z daného režimu. Po několika desítkách bitev je pár vítězství navíc nebo méně stále jen šance.",
+    "caption": "bitvy, {delta} vítězství proti obvyklé hodnotě"
+  },
+  "opponents": {
+    "title": "Nejčastěji proti {nickname}",
+    "description": "Hráči, kteří byli proti {nickname} v opačném týmu alespoň ve dvou bitvách, které se nám podařilo udržet v záznamech, řazeni od nejčastějších. Od deseti bitev porovnáváme vítězství, která {nickname} získal proti nim, s obvyklými vítězstvími {nickname} ve stejných režimech. Po několika desítkách bitev je pár vítězství navíc nebo méně stále jen šance.",
+    "caption": "bitvy, {delta} vítězství proti obvyklé hodnotě"
+  },
+  "caption-few": "bitvy"
+}

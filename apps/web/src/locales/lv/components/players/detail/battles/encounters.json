@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Visbiežāk blakus {nickname}",
+    "description": "Spēlētāji, kuri vismaz divās no mūsu turētajām kaujām ir bijuši {nickname} komandā, visbiežāk sastopamie vispirms. No desmit kopīgām kaujām {nickname} kopā ar viņiem gūtās uzvaras salīdzina pret {nickname} parasto uzvaru skaitu tajos pašos režīmos. Klans spēlē savas Sadursmes kopā, tāpēc neapstrādāts uzvaru vērtējums vainotu klana biedrus par režīmu. Dažos desmitos kauju pāris uzvaru vai nu vienā, vai otrā virzienā joprojām ir tikai iespēja.",
+    "caption": "kaujas, {delta} uzvaras pret parasto"
+  },
+  "opponents": {
+    "title": "Visbiežāk pret {nickname}",
+    "description": "Spēlētāji, kuri vismaz divās no mūsu turētajām kaujām ir bijuši otrā komandā, visbiežāk sastopamie vispirms. No desmit kaujām {nickname} pret viņiem gūtās uzvaras salīdzina ar {nickname} parasto uzvaru skaitu tajos pašos režīmos. Dažos desmitos kauju pāris uzvaru vai nu vienā, vai otrā virzienā joprojām ir tikai iespēja.",
+    "caption": "kaujas, {delta} uzvaras pret parasto"
+  },
+  "caption-few": "kaujas"
+}

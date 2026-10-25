@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Più spesso accanto a {nickname}",
+    "description": "I giocatori che sono stati nella squadra di {nickname} in almeno due delle battaglie che manteniamo stabili, ordinati con quelli più frequenti per primi. Da dieci battaglie insieme in poi, le vittorie ottenute da {nickname} accanto a loro, contro quelle che {nickname} ottiene di solito nelle stesse modalità. Un clan gioca le proprie Schermaglie insieme, quindi un tasso grezzo di vittorie incolperebbe i compagni di clan per la modalità. Su alcune decine di battaglie, un paio di vittorie da entrambi i lati è comunque una probabilità.",
+    "caption": "battaglie, {delta} vittorie contro il solito"
+  },
+  "opponents": {
+    "title": "Più spesso contro {nickname}",
+    "description": "I giocatori che sono stati nella squadra avversaria in almeno due delle battaglie che manteniamo stabili, ordinati con quelli più frequenti per primi. Da dieci battaglie in poi, le vittorie ottenute da {nickname} contro di loro, confrontate con quelle che {nickname} ottiene di solito nelle stesse modalità. Su alcune decine di battaglie, un paio di vittorie da entrambi i lati è comunque una probabilità.",
+    "caption": "battaglie, {delta} vittorie contro il solito"
+  },
+  "caption-few": "battaglie"
+}

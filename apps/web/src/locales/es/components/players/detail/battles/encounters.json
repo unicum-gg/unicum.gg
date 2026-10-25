@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Más a menudo junto a {nickname}",
+    "description": "Los jugadores que han estado en el equipo de {nickname} en al menos dos de las batallas que mantenemos, ordenados primero por frecuencia. Desde diez batallas juntos, las victorias que {nickname} logró junto a ellos se comparan con lo habitual que {nickname} gana en los mismos modos. En un clan, las Escaramuzas se juegan juntas, por lo que una tasa de victorias sin ajustar culparía a los compañeros de clan por el modo. Tras unas pocas docenas de batallas, un par de victorias en cualquiera de las dos direcciones sigue siendo cuestión de probabilidad.",
+    "caption": "batallas, {delta} victorias contra lo habitual"
+  },
+  "opponents": {
+    "title": "Más a menudo contra {nickname}",
+    "description": "Los jugadores que han estado en el equipo contrario en al menos dos de las batallas que mantenemos, ordenados primero por frecuencia. Desde diez batallas, se comparan las victorias que {nickname} logró contra ellos con lo habitual que {nickname} gana en los mismos modos. Tras unas pocas docenas de batallas, un par de victorias en cualquiera de las dos direcciones sigue siendo cuestión de probabilidad.",
+    "caption": "batallas, {delta} victorias contra lo habitual"
+  },
+  "caption-few": "batallas"
+}

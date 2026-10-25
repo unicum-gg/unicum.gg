@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Thường xuyên nhất bên cạnh {nickname}",
+    "description": "Những người chơi đã ở cùng đội với {nickname} trong ít nhất hai trong số các trận đấu chúng tôi giữ, được xếp theo mức độ thường xuyên, người thường xuyên nhất ở trước. Từ mười trận đấu cùng nhau, số trận thắng {nickname} giành được bên cạnh họ được so sánh với số trận thắng {nickname} thông thường giành được trong cùng các chế độ. Một Clan thực hiện các lượt chơi Tranh chấp cùng nhau, vì vậy tỷ lệ trận thắng thô sẽ đổ lỗi cho các thành viên Clan về chế độ này. Qua vài chục trận đấu, thêm hoặc bớt một trong hai trận thắng vẫn chỉ là xác suất.",
+    "caption": "trận đấu, {delta} trận thắng so với thông thường"
+  },
+  "opponents": {
+    "title": "Thường xuyên nhất đối đầu với {nickname}",
+    "description": "Những người chơi đã ở bên đội kia trong ít nhất hai trong số các trận đấu chúng tôi giữ, được xếp theo mức độ thường xuyên, người thường xuyên nhất ở trước. Từ mười trận đấu, số trận thắng {nickname} giành được khi đối đầu với họ được so sánh với số trận thắng {nickname} thông thường giành được trong cùng các chế độ. Qua vài chục trận đấu, thêm hoặc bớt một trong hai trận thắng vẫn chỉ là xác suất.",
+    "caption": "trận đấu, {delta} trận thắng so với thông thường"
+  },
+  "caption-few": "trận đấu"
+}

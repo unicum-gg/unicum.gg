@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Oftast bredvid {nickname}",
+    "description": "Spelarna som har varit i {nickname}s lag i minst två av de strider vi håller, oftast först. Från tio strider tillsammans jämförs vinsterna {nickname} tog bredvid dem med vad {nickname} vanligtvis vinner i samma lägen. En klan spelar sina Skärmytslingar tillsammans, så en rå vinstgrad skulle skylla på klanmedlemmarna för läget. Över några dussin strider är ett par vinster åt endera hållet fortfarande chans.",
+    "caption": "strider, {delta} vinster mot vanligt"
+  },
+  "opponents": {
+    "title": "Oftast mot {nickname}",
+    "description": "Spelarna som har varit i det andra laget i minst två av de strider vi håller, oftast först. Från tio strider jämförs vinsterna {nickname} tog mot dem med vad {nickname} vanligtvis vinner i samma lägen. Över några dussin strider är ett par vinster åt endera hållet fortfarande chans.",
+    "caption": "strider, {delta} vinster mot vanligt"
+  },
+  "caption-few": "strider"
+}

@@ -795,7 +795,11 @@
     "WTR": "WTR",
     "includes": "يتضمن",
     "session": "جلسة",
-    "value": "قيمة"
+    "value": "قيمة",
+    "compared": "مقارنة",
+    "either": "إما",
+    "usual": "المعتاد",
+    "wins": "انتصارات"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1594,7 +1598,11 @@
     "WTR": "WTR",
     "includes": "уключае",
     "session": "сесія",
-    "value": "значэнне"
+    "value": "значэнне",
+    "compared": "параўнаныя",
+    "either": "любы",
+    "usual": "звычайны",
+    "wins": "перамогі"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2608,7 +2616,11 @@
     "WTR": "WTR",
     "includes": "включва",
     "session": "сесия",
-    "value": "стойност"
+    "value": "стойност",
+    "compared": "сравнени",
+    "either": "или",
+    "usual": "обичайни",
+    "wins": "победи"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3414,7 +3426,11 @@
     "WTR": "WTR",
     "includes": "uključuje",
     "session": "sesija",
-    "value": "vrijednost"
+    "value": "vrijednost",
+    "compared": "upoređeno",
+    "either": "bilo koji",
+    "usual": "uobičajeno",
+    "wins": "pobjede"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4439,7 +4455,11 @@
     "WTR": "WTR",
     "includes": "obsahuje",
     "session": "relace",
-    "value": "hodnota"
+    "value": "hodnota",
+    "compared": "porovnáno",
+    "either": "buď",
+    "usual": "obvyklé",
+    "wins": "vítězství"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5470,7 +5490,11 @@
     "WTR": "WTR",
     "includes": "inkluderer",
     "session": "session",
-    "value": "værdi"
+    "value": "værdi",
+    "compared": "sammenlignet",
+    "either": "enten",
+    "usual": "sædvanlig",
+    "wins": "sejre"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6494,7 +6518,11 @@
     "WTR": "WTR",
     "includes": "enthält",
     "session": "Session",
-    "value": "Wert"
+    "value": "Wert",
+    "compared": "verglichen",
+    "either": "entweder",
+    "usual": "üblich",
+    "wins": "siege"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7524,7 +7552,11 @@
     "WTR": "WTR",
     "includes": "περιλαμβάνει",
     "session": "συνεδρία",
-    "value": "τιμή"
+    "value": "τιμή",
+    "compared": "σε σύγκριση",
+    "either": "είτε",
+    "usual": "συνήθης",
+    "wins": "νίκες"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8534,7 +8566,11 @@
     "WTR": "WTR",
     "includes": "incluye",
     "session": "sesión",
-    "value": "valor"
+    "value": "valor",
+    "compared": "comparados",
+    "either": "cualquiera",
+    "usual": "habitual",
+    "wins": "victorias"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9568,7 +9604,11 @@
     "WTR": "WTR",
     "includes": "sisältää",
     "session": "pelisessio",
-    "value": "arvo"
+    "value": "arvo",
+    "compared": "verrattuna",
+    "either": "kumpi tahansa",
+    "usual": "tavallinen",
+    "wins": "voitot"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10582,7 +10622,11 @@
     "WTR": "WTR",
     "includes": "comprend",
     "session": "session",
-    "value": "valeur"
+    "value": "valeur",
+    "compared": "comparé",
+    "either": "soit",
+    "usual": "habituel",
+    "wins": "victoires"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11382,7 +11426,11 @@
     "WTR": "WTR",
     "includes": "शामिल हैं",
     "session": "सत्र",
-    "value": "मान"
+    "value": "मान",
+    "compared": "तुलना किए गए",
+    "either": "दोनों में से कोई भी",
+    "usual": "सामान्य",
+    "wins": "जीत"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12410,7 +12458,11 @@
     "WTR": "WTR",
     "includes": "uključuje",
     "session": "sesija",
-    "value": "vrijednost"
+    "value": "vrijednost",
+    "compared": "uspoređeno",
+    "either": "bilo koji",
+    "usual": "uobičajeno",
+    "wins": "pobjede"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13440,7 +13492,11 @@
     "WTR": "WTR",
     "includes": "tartalmazza",
     "session": "munkamenet",
-    "value": "érték"
+    "value": "érték",
+    "compared": "összehasonlítva",
+    "either": "bármelyik",
+    "usual": "szokásos",
+    "wins": "győzelmek"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14466,7 +14522,11 @@
     "WTR": "WTR",
     "includes": "include",
     "session": "sessione",
-    "value": "valore"
+    "value": "valore",
+    "compared": "confrontati",
+    "either": "entrambi",
+    "usual": "solito",
+    "wins": "vittorie"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15499,7 +15559,11 @@
     "WTR": "WTR",
     "includes": "含む",
     "session": "セッション",
-    "value": "値"
+    "value": "値",
+    "compared": "比較",
+    "either": "どちらか",
+    "usual": "通常",
+    "wins": "勝利数"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16301,7 +16365,11 @@
     "WTR": "WTR",
     "includes": "қамтиды",
     "session": "сессия",
-    "value": "мәні"
+    "value": "мәні",
+    "compared": "салыстырылған",
+    "either": "екеуінің бірі",
+    "usual": "әдеттегі",
+    "wins": "жеңістер"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17338,7 +17406,11 @@
     "WTR": "WTR",
     "includes": "포함",
     "session": "세션",
-    "value": "값"
+    "value": "값",
+    "compared": "비교",
+    "either": "어느 쪽이든",
+    "usual": "평소",
+    "wins": "승리"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18371,7 +18443,11 @@
     "WTR": "WTR",
     "includes": "apima",
     "session": "sesija",
-    "value": "vertė"
+    "value": "vertė",
+    "compared": "palyginta",
+    "either": "bet kuris",
+    "usual": "įprastas",
+    "wins": "pergalės"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -19390,7 +19466,11 @@
     "WTR": "WTR",
     "includes": "ietver",
     "session": "sesija",
-    "value": "vērtība"
+    "value": "vērtība",
+    "compared": "salīdzināts",
+    "either": "vai nu",
+    "usual": "parastais",
+    "wins": "uzvaras"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20425,7 +20505,11 @@
     "WTR": "WTR",
     "includes": "inclusief",
     "session": "sessie",
-    "value": "waarde"
+    "value": "waarde",
+    "compared": "vergeleken",
+    "either": "een van beide",
+    "usual": "gebruikelijk",
+    "wins": "overwinningen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -21451,7 +21535,11 @@
     "WTR": "WTR",
     "includes": "inkluderer",
     "session": "økt",
-    "value": "verdi"
+    "value": "verdi",
+    "compared": "sammenlignet",
+    "either": "enten",
+    "usual": "vanlig",
+    "wins": "seire"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -22474,7 +22562,11 @@
     "WTR": "WTR",
     "includes": "zawiera",
     "session": "sesja",
-    "value": "wartość"
+    "value": "wartość",
+    "compared": "porównane",
+    "either": "dowolny",
+    "usual": "standardowe",
+    "wins": "zwycięstwa"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -23490,7 +23582,11 @@
     "WTR": "WTR",
     "includes": "inclui",
     "session": "sessão",
-    "value": "valor"
+    "value": "valor",
+    "compared": "comparado",
+    "either": "qualquer",
+    "usual": "habitual",
+    "wins": "vitórias"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -24506,7 +24602,11 @@
     "WTR": "WTR",
     "includes": "include",
     "session": "sesiune",
-    "value": "valoare"
+    "value": "valoare",
+    "compared": "comparat",
+    "either": "oricare",
+    "usual": "obișnuit",
+    "wins": "victorii"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -25510,7 +25610,11 @@
     "WTR": "WTR",
     "includes": "включает",
     "session": "сессия",
-    "value": "значение"
+    "value": "значение",
+    "compared": "сравнено",
+    "either": "любой",
+    "usual": "обычный",
+    "wins": "победы"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -26313,7 +26417,11 @@
     "WTR": "WTR",
     "includes": "vključuje",
     "session": "seja",
-    "value": "vrednost"
+    "value": "vrednost",
+    "compared": "primerjano",
+    "either": "kateri koli",
+    "usual": "običajno",
+    "wins": "zmage"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -27343,7 +27451,11 @@
     "WTR": "WTR",
     "includes": "укључује",
     "session": "сесија",
-    "value": "вредност"
+    "value": "вредност",
+    "compared": "упоређено",
+    "either": "било који",
+    "usual": "уобичајено",
+    "wins": "победе"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -28378,7 +28490,11 @@
     "WTR": "WTR",
     "includes": "inkluderar",
     "session": "session",
-    "value": "värde"
+    "value": "värde",
+    "compared": "jämförda",
+    "either": "antingen",
+    "usual": "vanligt",
+    "wins": "vinster"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -29409,7 +29525,11 @@
     "WTR": "WTR",
     "includes": "รวม",
     "session": "เซสชัน",
-    "value": "ค่า"
+    "value": "ค่า",
+    "compared": "เปรียบเทียบ",
+    "either": "อย่างใดอย่างหนึ่ง",
+    "usual": "ปกติ",
+    "wins": "ชนะ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -30213,7 +30333,10 @@
     "WTR": "WTR",
     "includes": "kasama",
     "session": "sesyon",
-    "value": "halaga"
+    "value": "halaga",
+    "compared": "kumpara",
+    "either": "alinman",
+    "usual": "karaniwan"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -31240,7 +31363,11 @@
     "WTR": "WTR",
     "includes": "içerir",
     "session": "oturum",
-    "value": "değer"
+    "value": "değer",
+    "compared": "karşılaştırılan",
+    "either": "herhangi biri",
+    "usual": "normal",
+    "wins": "zaferler"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -32260,7 +32387,11 @@
     "WTR": "WTR",
     "includes": "містить",
     "session": "сесія",
-    "value": "значення"
+    "value": "значення",
+    "compared": "порівняно",
+    "either": "будь-який",
+    "usual": "звичайні",
+    "wins": "перемоги"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -33269,7 +33400,11 @@
     "WTR": "WTR",
     "includes": "bao gồm",
     "session": "phiên",
-    "value": "giá trị"
+    "value": "giá trị",
+    "compared": "so sánh",
+    "either": "một trong hai",
+    "usual": "thông thường",
+    "wins": "trận thắng"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -34300,6 +34435,10 @@
     "WTR": "WTR",
     "includes": "包含",
     "session": "会话",
-    "value": "值"
+    "value": "值",
+    "compared": "对比",
+    "either": "任一",
+    "usual": "常规",
+    "wins": "胜场"
   }
 }

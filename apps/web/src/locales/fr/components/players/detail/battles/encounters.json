@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Le plus souvent à côté de {nickname}",
+    "description": "Les joueurs qui ont été dans l’équipe de {nickname} dans au moins deux des batailles que nous maintenons, le plus souvent en premier. À partir de dix batailles ensemble, les victoires que {nickname} a remportées à côté d’eux, comparées à celles que {nickname} remporte habituellement dans les mêmes modes. Un clan joue ses Escarmouches ensemble, donc un taux de victoires brut ferait porter le blâme du mode aux membres du clan. Sur quelques dizaines de batailles, quelques victoires soit d’un côté soit de l’autre restent dues à la chance.",
+    "caption": "batailles, {delta} victoires contre l’habituel"
+  },
+  "opponents": {
+    "title": "Le plus souvent contre {nickname}",
+    "description": "Les joueurs qui ont été dans l’équipe adverse dans au moins deux des batailles que nous maintenons, le plus souvent en premier. À partir de dix batailles, les victoires que {nickname} a remportées contre eux, comparées à celles que {nickname} remporte habituellement dans les mêmes modes. Sur quelques dizaines de batailles, quelques victoires soit d’un côté soit de l’autre restent dues à la chance.",
+    "caption": "batailles, {delta} victoires contre l’habituel"
+  },
+  "caption-few": "batailles"
+}

@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Oftest ved siden af {nickname}",
+    "description": "Spillerne, der har været på samme hold som {nickname} i mindst to af de kampe, vi holder, vises oftest øverst. Fra ti kampe sammenlignes de sejre, {nickname} tog ved siden af dem, med det, {nickname} sædvanligvis vinder i de samme spiltilstande. En klan spiller sine Træfninger sammen, så en rå bedømmelse af sejre ville bebrejde klanmedlemmerne spiltilstanden. Over et par dusin kampe er et par sejre, enten den ene eller den anden vej, stadig chance.",
+    "caption": "kampe, {delta} sejre mod sædvanlig"
+  },
+  "opponents": {
+    "title": "Oftest mod {nickname}",
+    "description": "Spillerne, der har været på det andet hold i mindst to af de kampe, vi holder, vises oftest øverst. Fra ti kampe sammenlignes de sejre, {nickname} tog mod dem, med det, {nickname} sædvanligvis vinder i de samme spiltilstande. Over et par dusin kampe er et par sejre, enten den ene eller den anden vej, stadig chance.",
+    "caption": "kampe, {delta} sejre mod sædvanlig"
+  },
+  "caption-few": "kampe"
+}

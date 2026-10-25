@@ -1,0 +1,13 @@
+{
+  "allies": {
+    "title": "Najčešće pored {nickname}",
+    "description": "Igrači koji su bili u istom timu kao {nickname} u najmanje dvije bitke koje držimo, najčešće na prvom mjestu. Od deset zajedničkih bitaka, pobjede koje je {nickname} ostvario pored njih protiv onoga što {nickname} uobičajeno ostvaruje u istim načinima. Klan igra svoje Okršaje zajedno, pa bi sirova stopa pobjeda krivila članove klana za način. Nakon nekoliko desetaka bitaka, nekoliko pobjeda bilo na jednu ili drugu stranu i dalje je šansa.",
+    "caption": "bitke, {delta} pobjede protiv uobičajenog"
+  },
+  "opponents": {
+    "title": "Najčešće protiv {nickname}",
+    "description": "Igrači koji su bili u drugom timu u najmanje dvije bitke koje držimo, najčešće na prvom mjestu. Od deset bitaka, pobjede koje je {nickname} ostvario protiv njih, uspoređeno s onime što {nickname} uobičajeno ostvaruje u istim načinima. Nakon nekoliko desetaka bitaka, nekoliko pobjeda bilo na jednu ili drugu stranu i dalje je šansa.",
+    "caption": "bitke, {delta} pobjede protiv uobičajenog"
+  },
+  "caption-few": "bitke"
+}
