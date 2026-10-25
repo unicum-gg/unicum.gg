@@ -19,7 +19,7 @@
     "usage-tip": "Jucătorii care au folosit-o în cel puțin o bătălie contabilizată, raportat la numărul jucătorilor contabilizați.",
     "player-rating": "Jucător {metric}",
     "player-rating-tip": "Evaluarea generală a acelorași jucători, în toate bătăliile contului lor, ponderată în funcție de bătăliile jucate cu această configurație.",
-    "battles": "Bătălii",
+    "battles": "Lupte",
     "skill": "Abilitate"
   },
   "crew-skills": "Abilitățile echipajului",

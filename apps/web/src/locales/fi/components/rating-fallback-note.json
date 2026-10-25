@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} on tilin arvosana, eikä se voi antaa tulosta yksittäisestä taistelusta, joten tässä näytetään {shown}.",
+  "vehicle": "{metric} on tilin arvosana, jolla ei ole ajoneuvokohtaista arvoa, joten tässä näytetään {shown}.",
+  "window": "{metric} on tilin arvosana, jolla ei ole arvoa ajanjaksolle, joten tässä näytetään {shown}."
+}

@@ -1,3 +1,7 @@
 {
-  "label": "Metrika oceny"
+  "label": "Metrika oceny",
+  "group": {
+    "community": "Społeczność",
+    "wargaming": "Wargaming"
+  }
 }

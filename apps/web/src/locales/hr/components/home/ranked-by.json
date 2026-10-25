@@ -1,6 +1,9 @@
 {
   "day": "Rangirano prema {metric} za prošla 24 sata, razina VI i više (min. 20 bitaka).",
+  "day-account": "Rangirano prema {metric} među igračima s 20 bitaka na razini VI i višoj tijekom prošla 24 sata.",
   "week": "Rangirano prema {metric} za prošlo 7 dana, razina VI i više (min. 140 bitaka).",
+  "week-account": "Rangirano prema {metric} među igračima sa 140 bitaka na razini VI i višoj tijekom prošlih 7 dana.",
   "month": "Rangirano prema {metric} za prošlo 30 dana, razina VI i više (min. 600 bitaka).",
+  "month-account": "Rangirano prema {metric} među igračima sa 600 bitaka na razini VI i višoj tijekom prošlih 30 dana.",
   "overall": "Rangirano prema parametru {metric} za cijelo vrijeme (min. 20 000 bitaka)."
 }

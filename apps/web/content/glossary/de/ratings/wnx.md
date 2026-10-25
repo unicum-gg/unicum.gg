@@ -15,15 +15,15 @@ anchors:
     - WNX
 ---
 
-Eine moderne fahrzeugspezifische Wertung, die Unterstützungsschaden zusätzlich zum verursachten Schaden berücksichtigt und die Siegrate vollständig aus der Berechnung entfernt.
+Eine moderne Wertung pro Fahrzeug, die Unterstützungsschaden zusammen mit verursachtem Schaden zählt und den Begriff Siegesrate vollständig weglässt.
 
-WNX behält die Struktur von WN8 und die Verhältnisse zu den fahrzeugspezifischen Erwartungswerten bei, ändert aber, was berücksichtigt wird. Unterstützungsschaden durch Immobilisierung und Funkaufklärung wird zu zwei Dritteln seines Wertes zum Schaden addiert, sodass das Aufklären für einen Verbündeten und das Zerstören einer Kette als tatsächlicher Beitrag gewertet und nicht ignoriert werden.
+WNX behält die Struktur von WN8, Verhältnisse im Vergleich zu fahrzeugspezifischen Erwartungswerten und ändert, was gezählt wird. Tracking- und Funkunterstützung werden zu zwei Dritteln ihres Wertes zum Schaden addiert, sodass das Aufklären für einen Verbündeten und das Blockieren einer Kette als der Beitrag gewertet werden, der sie sind, statt ignoriert zu werden.
 
-Die Siegrate fließt nicht in die Wertung ein. Auf dem Gefechtsausgang basierende Faktoren belohnen Zugspiel und Konten mit vielen Gefechten stärker, als dass sie die Leistung des Spielers messen. Daher bewertet WNX nur, was der Spieler im Gefecht geleistet hat: Schaden plus Unterstützungsschaden, Abschüsse und aufgeklärte Gegner im Verhältnis zu den Erwartungswerten des Fahrzeugs.
+Sie enthält keine Komponente für die Siegesrate. Ergebnisbasierte Begriffe belohnen Zugfahren und lange bestehende Konten stärker, als sie den Spieler messen, daher bewertet WNX nur, was der Spieler im Gefecht getan hat: Schaden plus Unterstützung, Abschüsse und Aufklärung im Vergleich zu dem, was vom Fahrzeug erwartet wird.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-Der Exponent am oberen Ende streckt den Spitzenbereich der Skala, sodass der Abstand zwischen einem guten und einem außergewöhnlichen Konto sichtbar bleibt, statt gestaucht zu werden. ```
+Der Exponent am Ende streckt den oberen Bereich der Skala, sodass der Abstand zwischen einem guten und einem außergewöhnlichen Konto sichtbar bleibt, anstatt zusammengedrückt zu werden. ```
 
-Die Erwartungswerte werden anhand einer großen Stichprobe erfasster Konten neu berechnet. Dies ist die Standardwertung auf unicum.gg, da sie am schnellsten darauf reagiert, wie ein Fahrzeug aktuell tatsächlich gespielt wird.
+Die Erwartungswerte werden aus einer großen Stichprobe erfasster Konten neu berechnet. Dies ist die Standardwertung auf unicum.gg, weil sie am schnellsten darauf reagiert, wie ein Fahrzeug heute tatsächlich gespielt wird.

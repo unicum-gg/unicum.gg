@@ -1,6 +1,9 @@
 {
   "day": "Rangirano prema {metric} tokom prošlo 24 sata, nivo VI i viši (min. 20 bitki).",
+  "day-account": "Rangirano prema {metric} među igračima s 20 bitki na nivou VI i višem tokom protekla 24 sata.",
   "week": "Rangirano prema {metric} tokom prošlo 7 dana, nivo VI i viši (min. 140 bitki).",
+  "week-account": "Rangirano prema {metric} među igračima sa 140 bitki na nivou VI i višem tokom proteklih 7 dana.",
   "month": "Rangirano prema {metric} tokom prošlo 30 dana, nivo VI i viši (min. 600 bitki).",
+  "month-account": "Rangirano prema {metric} među igračima sa 600 bitki na nivou VI i višem tokom proteklih 30 dana.",
   "overall": "Rangirano po ukupnom {metric}, najmanje 20.000 bitki."
 }

@@ -1,3 +1,7 @@
 {
-  "label": "Betygsmetrisk"
+  "label": "Betygsmetrisk",
+  "group": {
+    "community": "Community",
+    "wargaming": "Wargaming"
+  }
 }

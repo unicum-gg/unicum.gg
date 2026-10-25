@@ -13,6 +13,11 @@
     "language": "Spelare i {region} vars härledda uppsättning av språk från klanhistoriken inkluderar {language}, rankade efter {metric} baserat på strider spelade på nivå {tier} och högre. {period}, minimum {battles} strider.",
     "strict": "Spelare i {region} med {language} som enda härledda språk från klanhistoriken, rankade efter {metric} baserat på strider spelade på nivå {tier} och högre. {period}, minimum {battles} strider."
   },
+  "intro-period-account": {
+    "all": "{region}-topplista, rankad efter {metric} bland spelare med {battles} strider på nivå {tier} och uppåt. {period}.",
+    "language": "{region}-spelare vars härledda språkuppsättning från klanhistoriken inkluderar {language}, rankade efter {metric} bland de med {battles} strider på nivå {tier} och uppåt. {period}.",
+    "strict": "{region}-spelare vars härledda språk från klanhistoriken endast är {language}, rankade efter {metric} bland de med {battles} strider på nivå {tier} och uppåt. {period}."
+  },
   "board": {
     "all": "Topp {count} spelare efter {metric}",
     "language": "Topp {count} spelare ({language}) efter {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Nivå {tier}+"
 }

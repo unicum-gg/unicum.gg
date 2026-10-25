@@ -2,5 +2,6 @@
   "head": "30 gün {metric}",
   "head-hint": "Son 30 gündeki {metric}. Tablo sırası değişmez.",
   "hint": "Son 30 gündeki {metric}, {battles} savaştan.",
-  "none": "Son 30 günde savaş yok"
+  "none": "Son 30 günde savaş yok",
+  "head-hint-fallback": "{metric} için 30 günlük değer yok, bu nedenle bu sütunda son 30 gün boyunca {shown} gösterildi. Tablo sırası değişmez."
 }

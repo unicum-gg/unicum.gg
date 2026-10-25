@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} ist eine Kontowertung und kann ein einzelnes Gefecht nicht bewerten, daher wird hier {shown} angezeigt.",
+  "vehicle": "{metric} ist eine Kontowertung ohne Wert pro Fahrzeug, daher wird hier {shown} angezeigt.",
+  "window": "{metric} ist eine Kontowertung ohne Wert für einen Zeitraum, daher wird hier {shown} angezeigt."
+}

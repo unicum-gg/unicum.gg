@@ -5,5 +5,6 @@
   "progression-blurb": "Düz satır genel {metric} değeridir, yukarıdaki Toplam sütunuyla eşleşir ve yeni savaşlar biriktikçe yavaşça değişir. Kesikli satır, önceki anlık görüntüden bu yana oynanan savaşlardan hesaplanan savaş başına {metric} değeridir. İyi ve kötü serileri gösterir. Satır rengi puan kademesini izler.",
   "progression-empty-title": "Henüz yeterli geçmiş yok",
   "progression-empty": "Eğri, bu hesabın kendi geçmişinden oluşturulur ve henüz hiçbir anlık görüntü bizde yok. İki anlık görüntü alındığında görünür.",
-  "progression-single": "Bir eğrinin iki puana ihtiyacı var ve bu hesapta şu ana kadar yalnızca bir tane var. Bir sonraki anlık görüntü alındığında görünür."
+  "progression-single": "Bir eğrinin iki puana ihtiyacı var ve bu hesapta şu ana kadar yalnızca bir tane var. Bir sonraki anlık görüntü alındığında görünür.",
+  "progression-blurb-account": "Wargaming’in bildirdiği Genel {metric}, her günün sonunda okunur ve yukarıdaki Toplam sütunuyla eşleşir. Bu, tek bir oturum için değeri olmayan bir hesap puanıdır, bu nedenle oturum başına satır yoktur. Satır rengi puan kademesini takip eder."
 }

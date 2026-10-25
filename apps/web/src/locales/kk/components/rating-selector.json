@@ -1,3 +1,7 @@
 {
-  "label": "Рейтинг өлшемі"
+  "label": "Рейтинг өлшемі",
+  "group": {
+    "community": "Қауымдастық",
+    "wargaming": "Wargaming"
+  }
 }

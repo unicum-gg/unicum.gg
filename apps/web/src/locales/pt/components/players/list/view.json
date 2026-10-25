@@ -13,6 +13,11 @@
     "language": "Jogadores de {region} cujo conjunto inferido de idiomas do histórico do clã inclui {language}, em ordem classificatória por {metric}, com base nas batalhas no nível {tier} e acima. {period}, mínimo de {battles} batalhas.",
     "strict": "Jogadores de {region} cujo idioma inferido do histórico do clã é exclusivamente {language}, em ordem classificatória por {metric}, com base nas batalhas no nível {tier} e acima. {period}, mínimo de {battles} batalhas."
   },
+  "intro-period-account": {
+    "all": "Classificação de {region}, com os jogadores classificados por {metric} entre aqueles com {battles} batalhas no nível {tier} e acima. {period}.",
+    "language": "Jogadores de {region} cujo conjunto de idiomas inferido do histórico do clã inclui {language}, classificados por {metric} entre aqueles com {battles} batalhas no nível {tier} e acima. {period}.",
+    "strict": "Jogadores de {region} cujo idioma inferido do histórico do clã é exclusivamente {language}, classificados por {metric} entre aqueles com {battles} batalhas no nível {tier} e acima. {period}."
+  },
   "board": {
     "all": "Top {count} jogadores por {metric}",
     "language": "Top {count} jogadores ({language}) por {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Nível {tier}+"
 }

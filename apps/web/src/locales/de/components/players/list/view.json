@@ -13,6 +13,11 @@
     "language": "{region}-spieler, deren abgeleitete Clanverlauf-Sprachengruppe {language} umfasst, nach {metric} gewertet anhand der Gefechte, die auf Stufe {tier} und höher gespielt wurden. {period}, Minimum {battles} Gefechte.",
     "strict": "{region}-spieler, deren aus dem Clanverlauf abgeleitete Sprache ausschließlich {language} ist, nach {metric} gewertet anhand der Gefechte, die auf Stufe {tier} und höher gespielt wurden. {period}, Minimum {battles} Gefechte."
   },
+  "intro-period-account": {
+    "all": "Rangliste für {region}, gewertet nach {metric} unter Spielern mit {battles} Gefechten auf Stufe {tier} und höher. {period}.",
+    "language": "Spieler aus {region}, deren aus dem Clanverlauf abgeleitete Sprachmenge {language} enthält, gewertet nach {metric} unter den Spielern mit {battles} Gefechten auf Stufe {tier} und höher. {period}.",
+    "strict": "Spieler aus {region}, deren aus dem Clanverlauf abgeleitete Sprache ausschließlich {language} ist, gewertet nach {metric} unter den Spielern mit {battles} Gefechten auf Stufe {tier} und höher. {period}."
+  },
   "board": {
     "all": "Top {count} Spieler nach {metric}",
     "language": "Top {count} Spieler ({language}) nach {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Stufe {tier}+"
 }

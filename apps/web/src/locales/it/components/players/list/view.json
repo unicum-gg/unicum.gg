@@ -13,6 +13,11 @@
     "language": "Giocatori della regione {region} il cui insieme di lingue dedotto dalla cronologia del clan include {language}, classificati per {metric} nelle battaglie combattute al livello {tier} o superiore. {period}, minimo {battles} battaglie.",
     "strict": "Giocatori della regione {region} la cui lingua dedotta dalla cronologia del clan è esclusivamente {language}, classificati per {metric} nelle battaglie combattute al livello {tier} o superiore. {period}, minimo {battles} battaglie."
   },
+  "intro-period-account": {
+    "all": "Classifica dei giocatori nella regione {region}, classificati in base a {metric} tra quelli con {battles} battaglie al livello {tier} e superiore. {period}.",
+    "language": "Giocatori nella regione {region} il cui insieme di lingue dedotto dalla cronologia del clan include {language}, classificati in base a {metric} tra quelli con {battles} battaglie al livello {tier} e superiore. {period}.",
+    "strict": "Giocatori nella regione {region} la cui lingua dedotta dalla cronologia del clan è esclusivamente {language}, classificati in base a {metric} tra quelli con {battles} battaglie al livello {tier} e superiore. {period}."
+  },
   "board": {
     "all": "Top {count} giocatori per {metric}",
     "language": "Top {count} giocatori ({language}) per {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Livello {tier}+"
 }

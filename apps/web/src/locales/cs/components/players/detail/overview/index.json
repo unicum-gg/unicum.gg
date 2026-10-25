@@ -5,5 +5,6 @@
   "progression-blurb": "Plná čára zobrazuje celkovou hodnotu {metric} (odpovídá sloupci Celkem výše), která se s rostoucím počtem Bitev pomalu mění. Přerušovaná čára zobrazuje hodnotu {metric} za každou herní relaci, vypočítanou z Bitev odehraných od předchozího snímku dat. Ukazuje série dobrých i špatných výkonů. Barva čáry odpovídá úrovni Hodnocení.",
   "progression-empty-title": "Zatím není dostatek historie",
   "progression-empty": "Křivka se vykresluje z vlastní historie tohoto účtu a zatím z ní nemáme žádná data. Zobrazuje se, jakmile dorazí dva snímky.",
-  "progression-single": "K vykreslení křivky jsou potřeba dva body a tento účet má zatím jeden. Zobrazuje se, jakmile dorazí další snímek."
+  "progression-single": "K vykreslení křivky jsou potřeba dva body a tento účet má zatím jeden. Zobrazuje se, jakmile dorazí další snímek.",
+  "progression-blurb-account": "Celkové {metric} podle údajů Wargamingu, načtené na konci každého dne, odpovídá sloupci Celkem výše. Jde o hodnocení účtu bez hodnoty pro jednotlivou relaci, proto zde není řádek pro jednotlivé relace. Barva řádku sleduje úroveň hodnocení."
 }

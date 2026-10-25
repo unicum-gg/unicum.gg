@@ -1,6 +1,9 @@
 {
   "day": "Rangert etter {metric} i løpet av tidligere 24 timer, nivå 6 og oppover (min. 20 kamper).",
+  "day-account": "Rangert etter {metric} blant spillerne med 20 kamper på nivå 6 og høyere i løpet av de tidligere 24 timene.",
   "week": "Rangert etter {metric} i løpet av tidligere 7 dager, nivå 6 og oppover (min. 140 kamper).",
+  "week-account": "Rangert etter {metric} blant spillerne med 140 kamper på nivå 6 og høyere i løpet av de tidligere 7 dagene.",
   "month": "Rangert etter {metric} i løpet av tidligere 30 dager, nivå 6 og oppover (min. 600 kamper).",
+  "month-account": "Rangert etter {metric} blant spillerne med 600 kamper på nivå 6 og høyere i løpet av de tidligere 30 dagene.",
   "overall": "Rangert etter {metric} totalt (min. 20 000 kamper)."
 }

@@ -1,0 +1,5 @@
+{
+  "battle": "{metric}是账号评分，无法为单场战斗评分，因此此处显示{shown}。",
+  "vehicle": "{metric}是账号评分，没有按车辆计算的值，因此此处显示{shown}。",
+  "window": "{metric}是账号评分，没有按时间段计算的值，因此此处显示{shown}。"
+}

@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} este un rating al contului și nu poate calcula scorul unei singure bătălii, așa că {shown} este afișat aici.",
+  "vehicle": "{metric} este un rating al contului fără valoare pentru fiecare tanc, așa că {shown} este afișat aici.",
+  "window": "{metric} este un rating al contului fără valoare pentru o perioadă, așa că {shown} este afișat aici."
+}

@@ -5,5 +5,6 @@
   "progression-blurb": "Linia continuă reprezintă {metric} general, corespunzător coloanei Total de mai sus, și se modifică lent pe măsură ce se adună bătălii noi. Linia întreruptă reprezintă {metric} per sesiune, calculat din bătăliile jucate de la instantaneul anterior. Aceasta arată perioadele bune și slabe. Culoarea liniei urmează nivelul de rating.",
   "progression-empty-title": "Nu există încă suficient istoric",
   "progression-empty": "Curba este trasată pe baza istoricului propriu al acestui cont și încă nu avem nicio captură. Apare după ce au fost înregistrate două capturi.",
-  "progression-single": "O curbă are nevoie de două puncte, iar acest cont are până acum unul singur. Apare după ce este înregistrată următoarea captură."
+  "progression-single": "O curbă are nevoie de două puncte, iar acest cont are până acum unul singur. Apare după ce este înregistrată următoarea captură.",
+  "progression-blurb-account": "Valoarea generală a {metric}, așa cum o raportează Wargaming, citită la sfârșitul fiecărei zile, corespunde coloanei Total de mai sus. Este un rating al contului fără valoare pentru o singură sesiune, așa că nu există o linie per sesiune. Culoarea liniei urmărește nivelul ratingului."
 }

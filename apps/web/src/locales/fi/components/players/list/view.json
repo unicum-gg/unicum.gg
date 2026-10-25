@@ -13,6 +13,11 @@
     "language": "Alueen {region} pelaajat, joiden päätelty klaanihistorian kielijoukko sisältää kielen {language}, rankattuina arvon {metric} perusteella tasolla {tier} tai sitä korkeammilla tasoilla taistelluissa taisteluissa. {period}, vähimmäismäärä {battles} taistelua.",
     "strict": "Alueen {region} pelaajat, joiden klaanihistoriasta päätelty kieli on vain {language}, rankattuina arvon {metric} perusteella tasolla {tier} tai sitä korkeammilla tasoilla taistelluissa taisteluissa. {period}, vähimmäismäärä {battles} taistelua."
   },
+  "intro-period-account": {
+    "all": "Alueen {region} tulostaulukko, rankattu {metric}-arvon mukaan niiden pelaajien joukossa, joilla on {battles} taistelua tasolla {tier} ja sitä ylemmillä tasoilla. {period}.",
+    "language": "Pelaajat alueelta {region}, joiden päätelty klaanihistorian kielijoukko sisältää kielen {language}, rankattuna {metric}-arvon mukaan niiden joukossa, joilla on {battles} taistelua tasolla {tier} ja sitä ylemmillä tasoilla. {period}.",
+    "strict": "Pelaajat alueelta {region}, joiden päätelty klaanihistorian kieli on vain {language}, rankattuna {metric}-arvon mukaan niiden joukossa, joilla on {battles} taistelua tasolla {tier} ja sitä ylemmillä tasoilla. {period}."
+  },
   "board": {
     "all": "Top {count} pelaajaa mittarilla {metric}",
     "language": "Top {count} pelaajaa ({language}) mittarilla {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Taso {tier}+"
 }

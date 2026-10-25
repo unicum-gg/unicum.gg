@@ -1,3 +1,7 @@
 {
-  "label": "Sukatin ng Rating"
+  "label": "Sukatin ng Rating",
+  "group": {
+    "community": "Komunidad",
+    "wargaming": "Wargaming"
+  }
 }

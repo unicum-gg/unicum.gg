@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} bir hesap puanıdır ve tek bir savaşı skorlayamaz, bu nedenle burada {shown} gösterildi.",
+  "vehicle": "{metric}, araç başına değeri olmayan bir hesap puanıdır, bu nedenle burada {shown} gösterildi.",
+  "window": "{metric}, bir dönem boyunca değeri olmayan bir hesap puanıdır, bu nedenle burada {shown} gösterildi."
+}

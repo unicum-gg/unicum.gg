@@ -1,6 +1,9 @@
 {
   "day": "Uvrščeno po {metric} za minulé 24 ur, úroveň VI in višje (najmanj 20 bitk).",
+  "day-account": "Uvrščeno podľa {metric} med hráčmi s 20 bitkami na úrovni VI a vyššej počas minulých 24 ur.",
   "week": "Uvrščeno po {metric} za minulé 7 dni, úroveň VI in višje (najmanj 140 bitk).",
+  "week-account": "Uvrščeno podľa {metric} med hráčmi so 140 bitkami na úrovni VI a vyššej počas minulých 7 dní.",
   "month": "Uvrščeno po {metric} za minulé 30 dni, úroveň VI in višje (najmanj 600 bitk).",
+  "month-account": "Uvrščeno podľa {metric} med hráčmi so 600 bitkami na úrovni VI a vyššej počas minulých 30 dní.",
   "overall": "Zoradené podľa {metric} za celé obdobie (min. 20 000 bitiek)."
 }

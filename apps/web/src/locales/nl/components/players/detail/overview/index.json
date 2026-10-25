@@ -5,5 +5,6 @@
   "progression-blurb": "De ononderbroken lijn toont de totale {metric} (komt overeen met de kolom Totaal hierboven) en verandert langzaam naarmate er nieuwe Gevechten bijkomen. De stippellijn toont de {metric} per sessie, berekend op basis van de Gevechten die sinds de vorige momentopname zijn gespeeld. Zo worden sterke en zwakke reeksen zichtbaar. De kleur van de lijn volgt het niveau van de Beoordeling.",
   "progression-empty-title": "Nog niet genoeg geschiedenis",
   "progression-empty": "De curve wordt getekend op basis van de eigen geschiedenis van dit account, en we hebben er nog geen. De curve verschijnt zodra er twee momentopnamen zijn binnengekomen.",
-  "progression-single": "Een curve heeft twee punten nodig en dit account heeft er tot nu toe één. De curve verschijnt zodra de volgende momentopname binnenkomt."
+  "progression-single": "Een curve heeft twee punten nodig en dit account heeft er tot nu toe één. De curve verschijnt zodra de volgende momentopname binnenkomt.",
+  "progression-blurb-account": "Totaal {metric} zoals Wargaming het rapporteert, gelezen aan het einde van elke dag, overeenkomstig de kolom Totaal hierboven. Het is een accountbeoordeling zonder waarde voor een enkel gevecht, dus er is geen regel per sessie. De kleur van de regel volgt het beoordelingsniveau."
 }

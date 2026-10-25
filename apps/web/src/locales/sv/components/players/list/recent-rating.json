@@ -2,5 +2,6 @@
   "head": "30 d {metric}",
   "head-hint": "{metric} under de senaste 30 dagarna. Topplistans ordning ändras inte.",
   "hint": "{metric} under de senaste 30 dagarna, från {battles} strider",
-  "none": "Ingen strid under de senaste 30 dagarna"
+  "none": "Ingen strid under de senaste 30 dagarna",
+  "head-hint-fallback": "{metric} har inget värde för 30 dagar, så denna kolumn visar {shown} under de tidigare 30 dagarna. Ingen förändring sker i topplistans ordning."
 }

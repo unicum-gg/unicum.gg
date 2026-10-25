@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Ipinapakita ang mga nangungunang klano sa {region} na may mahigit 50 miyembrong may mga laban, niranggo ayon sa karaniwang {metric}.",
-    "month": "Ipinapakita ang mga nangungunang klano sa {region} na may mahigit 50 miyembrong may mga laban, niranggo ayon sa {metric} sa nakaraang 30 mga araw, hindi bababa sa 15 aktibo."
+    "month": "Ipinapakita ang mga nangungunang klano sa {region} na may mahigit 50 miyembrong may mga laban, niranggo ayon sa {metric} sa nakaraang 30 mga araw, hindi bababa sa 15 aktibo.",
+    "month-account": "Ipinapakita ang mga nangungunang clan sa {region} na may higit sa 50 mga miyembrong may mga laban, niranggo ayon sa karaniwang {metric} ng mga miyembrong aktibo sa nakalipas na 30 araw (min. 15 aktibo)."
   },
   "updated": "Na-update {when}.",
   "empty": "Wala pang magagamit na datos ng klano para sa rehiyong ito.",

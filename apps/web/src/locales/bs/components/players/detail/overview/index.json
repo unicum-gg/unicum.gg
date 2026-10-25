@@ -5,5 +5,6 @@
   "progression-blurb": "Puna linija prikazuje ukupni {metric}, što odgovara koloni Ukupno iznad, i polako se mijenja kako se dodaju nove bitke. Isprekidana linija prikazuje {metric} po sesiji, izračunat iz bitki odigranih od prethodnog snimka. Prikazuje nizove dobre i loše forme. Boja linije prati nivo rejtinga.",
   "progression-empty-title": "Još nema dovoljno historije",
   "progression-empty": "Kriva se crta na osnovu historije ovog računa, a mi je još nemamo. Pojavljuje se čim stignu dva snimka.",
-  "progression-single": "Za krivu su potrebna dva boda, a ovaj račun zasad ima jedan. Pojavljuje se čim stigne sljedeći snimak."
+  "progression-single": "Za krivu su potrebna dva boda, a ovaj račun zasad ima jedan. Pojavljuje se čim stigne sljedeći snimak.",
+  "progression-blurb-account": "Sveukupno {metric} prema izvještaju Wargaminga, pročitano na kraju svakog dana, odgovara koloni Ukupno iznad. To je rejting računa bez vrijednosti za pojedinačnu sesiju, zato nema linije po sesiji. Boja linije prati nivo rejtinga."
 }

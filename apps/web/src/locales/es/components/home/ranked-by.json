@@ -1,6 +1,9 @@
 {
   "day": "Clasificado por {metric} durante las 24 horas pasadas, nivel VI y superior (mín. 20 batallas).",
+  "day-account": "Clasificado por {metric} entre los jugadores con 20 batallas en nivel VI o superior durante las últimas 24 horas.",
   "week": "Clasificado por {metric} durante los 7 días pasados, nivel VI y superior (mín. 140 batallas).",
+  "week-account": "Clasificado por {metric} entre los jugadores con 140 batallas en nivel VI o superior durante los últimos 7 días.",
   "month": "Clasificado por {metric} durante los 30 días pasados, nivel VI y superior (mín. 600 batallas).",
+  "month-account": "Clasificado por {metric} entre los jugadores con 600 batallas en nivel VI o superior durante los últimos 30 días.",
   "overall": "Clasificación histórica según {metric} (mín. 20 000 batallas)."
 }

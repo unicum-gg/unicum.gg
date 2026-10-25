@@ -1,8 +1,8 @@
 ---
 term: WNX
 aliases:
+  - WNX rating
   - ocena WNX
-  - ranking WNX
 related:
   - wn8
   - expected-values
@@ -15,15 +15,15 @@ anchors:
     - WNX
 ---
 
-Nowoczesna ocena dla poszczególnych pojazdów, która uwzględnia uszkodzenia z asysty obok zadanych uszkodzeń i całkowicie pomija współczynnik zwycięstw.
+Nowoczesna ocena dla każdego pojazdu, która uwzględnia obrażenia z asysty obok zadanych obrażeń i całkowicie pomija współczynnik zwycięstw.
 
-WNX zachowuje strukturę WN8 i proporcje względem oczekiwanych wartości dla poszczególnych pojazdów, ale zmienia uwzględniane elementy. Uszkodzenia z asysty przy unieruchomieniu i przez radio są dodawane do zadanych uszkodzeń w wysokości dwóch trzecich ich wartości, dzięki czemu wykrycie przeciwnika dla sojusznika i zerwanie gąsienicy są oceniane jako rzeczywisty wkład, zamiast być pomijane.
+WNX zachowuje strukturę WN8 i stosunek wyników do oczekiwanych wartości dla każdego pojazdu, ale zmienia zakres uwzględnianych statystyk. Pomoc w uszkadzaniu gąsienic i asysta radiowa są dodawane do obrażeń z wagą dwóch trzecich, dzięki czemu wykrywanie przeciwnika dla sojusznika i blokowanie gąsienic jest oceniane jako rzeczywisty wkład gracza, a nie pomijane.
 
-Ocena nie zawiera współczynnika zwycięstw. Elementy oparte na wyniku bardziej nagradzają grę w plutonie i długo istniejące konta, niż mierzą umiejętności gracza, dlatego WNX ocenia wyłącznie to, co gracz zrobił w bitwie: zadane uszkodzenia wraz z uszkodzeniami z asysty, zniszczenia i wykrycia w porównaniu z oczekiwanymi osiągami pojazdu.
+Nie zawiera współczynnika zwycięstw. Wskaźniki oparte na wyniku nagradzają grę w plutonach i starsze konta bardziej, niż mierzą umiejętności gracza, dlatego WNX ocenia wyłącznie działania gracza w bitwie: obrażenia oraz asystę, zniszczone pojazdy i wykrycia w porównaniu z tym, czego oczekuje się od danego pojazdu.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-Wykładnik końcowy rozciąga górną część skali, dzięki czemu różnica między dobrym a wybitnym kontem pozostaje widoczna, zamiast ulegać spłaszczeniu. ```
+Wykładnik końcowy rozciąga górną część skali, dzięki czemu różnica między dobrym a wyjątkowym kontem pozostaje widoczna zamiast się zacierać. ```
 
-Oczekiwane wartości są przeliczane na podstawie dużej próby śledzonych kont. Jest to domyślna ocena na unicum.gg, ponieważ najszybciej reaguje na to, jak danym pojazdem faktycznie gra się obecnie.
+Oczekiwane wartości są ponownie obliczane na podstawie dużej próby śledzonych kont. Jest to domyślna ocena na unicum.gg, ponieważ najszybciej reaguje na sposób, w jaki dany pojazd jest faktycznie obecnie używany.

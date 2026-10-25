@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Visar de främsta klanerna i {region} med fler än 50 medlemmar som deltagit i strider, rankade efter genomsnittet för {metric}.",
-    "month": "Visar de främsta klanerna i {region} med fler än 50 medlemmar som deltagit i strider, rankade efter {metric} under de senaste 30 dagarna (minst 15 aktiva)."
+    "month": "Visar de främsta klanerna i {region} med fler än 50 medlemmar som deltagit i strider, rankade efter {metric} under de senaste 30 dagarna (minst 15 aktiva).",
+    "month-account": "Visar de bästa {region}-klanerna med fler än 50 medlemmar med strider, rankade efter medlemmarnas genomsnittliga {metric} bland de som varit aktiva under de tidigare 30 dagarna, med minst 15 aktiva."
   },
   "updated": "Uppdaterad {when}.",
   "empty": "Det finns ännu ingen klanstatistik för den här regionen.",

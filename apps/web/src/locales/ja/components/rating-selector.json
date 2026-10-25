@@ -1,3 +1,7 @@
 {
-  "label": "評価メトリック"
+  "label": "評価メトリック",
+  "group": {
+    "community": "コミュニティ",
+    "wargaming": "Wargaming"
+  }
 }

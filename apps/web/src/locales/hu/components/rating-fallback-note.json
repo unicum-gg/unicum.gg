@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} fiókértékelés, amely nem adható meg egyetlen csata pontszámaként, ezért itt {shown} jelenik meg.",
+  "vehicle": "{metric} fiókértékelés, amelynek nincs járművenkénti értéke, ezért itt {shown} jelenik meg.",
+  "window": "{metric} fiókértékelés, amelynek nincs időszakra vonatkozó értéke, ezért itt {shown} jelenik meg."
+}

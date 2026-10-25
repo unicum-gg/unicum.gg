@@ -1,3 +1,7 @@
 {
-  "label": "Métrique de notation"
+  "label": "Métrique de notation",
+  "group": {
+    "community": "Communauté",
+    "wargaming": "Wargaming"
+  }
 }

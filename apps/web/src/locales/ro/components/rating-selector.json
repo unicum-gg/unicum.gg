@@ -1,3 +1,7 @@
 {
-  "label": "Metoda de rating"
+  "label": "Metoda de rating",
+  "group": {
+    "community": "Comunitate",
+    "wargaming": "Wargaming"
+  }
 }

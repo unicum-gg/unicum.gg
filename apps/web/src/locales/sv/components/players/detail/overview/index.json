@@ -5,5 +5,6 @@
   "progression-blurb": "Den heldragna linjen visar {metric} totalt (motsvarar kolumnen Totalt ovan) och förändras långsamt när nya Strider tillkommer. Den streckade linjen visar {metric} per session. Beräkningen baseras på de Strider som spelats sedan föregående mätpunkt. Den visar perioder med med- och motgångar. Linjens färg följer nivån i Rankning.",
   "progression-empty-title": "Inte tillräckligt med historik ännu",
   "progression-empty": "Kurvan ritas från det här kontots egen historik, och vi har ännu inget av den. Den visas när två ögonblicksbilder har kommit in.",
-  "progression-single": "En kurva behöver två poäng, och det här kontot har hittills en. Den visas när nästa ögonblicksbild har kommit in."
+  "progression-single": "En kurva behöver två poäng, och det här kontot har hittills en. Den visas när nästa ögonblicksbild har kommit in.",
+  "progression-blurb-account": "Övergripande {metric} enligt rapporteringen från Wargaming, läst i slutet av varje dag, vilket matchar kolumnen Totalt ovan. Det är ett betyg för kontot utan värde för en enskild session, så det finns ingen rad per session. Radens färg följer betygsnivån."
 }

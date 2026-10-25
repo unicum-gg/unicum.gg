@@ -1,7 +1,8 @@
 ---
 term: WNX
 aliases:
-  - WNX rejting
+  - WNX rating
+  - WNX оцена
 related:
   - wn8
   - expected-values
@@ -14,15 +15,15 @@ anchors:
     - WNX
 ---
 
-Savremeni rejting po vozilima koji računa asistencijsku štetu pored štete nanošene i potpuno uklanja termin procenta pobeda.
+Модерна оцена по возилу која уз унету штету рачуна и штету од асистенције, а у потпуности изоставља компоненту стопе победа.
 
-WNX zadržava oblik WN8, odnos prema očekivanim vrednostima po vozilu i menja ono što računa. Praćenje i radio pomoć dodaju se šteti sa dve trećine svoje vrednosti, tako da otkrivanje neprijatelja za saveznika i blokiranje gusenice se boduju kao doprinos koji jesu umesto da budu ignorisani.
+WNX задржава структуру WN8, односе према очекиваним вредностима за свако возило и мења оно што се рачуна. Помоћ при оштећивању гусеница и радио-асистенција додају се штети са две трећине своје вредности, па се извиђање за савезника и блокирање гусенице оцењују као допринос који заиста представљају, уместо да се занемарују.
 
-Ne sadrži komponentu procenta pobeda. Izrazi zasnovani na ishodu nagrađuju platoone i duge naloge više nego što mere igrača, tako da WNX boduje samo ono što je igrač učinio u bitci: šteta plus pomoć, fragovi i spotovi u odnosu na ono što se od vozila očekuje da proizvede.
+Нема компоненту стопе победа. Термини засновани на исходу више награђују играње у воду и старе налоге него што мере играча, па WNX оцењује само оно што је играч урадио у битки: штету плус асистенцију, уништена возила и откривања у односу на оно што се очекује да возило оствари.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-Ekspozent na kraju rasteže vrh skale, tako da razlika između dobrog i izuzetnog naloga ostaje vidljiva umesto da se kompresuje. ```
+Експонент на крају растеже врх скале, па разлика између доброг и изузетног налога остаје видљива уместо да се сажме. ```
 
-Očekivane vrednosti se preračunavaju na osnovu velikog uzorka praćenih naloga. Ovo je podrazumevani rejting na unicum.gg jer najbrže reaguje na to kako se vozilo zapravo igra danas.
+Очекиване вредности се поново израчунавају на основу великог узорка праћених налога. Ово је подразумевана оцена на unicum.gg јер најбрже реагује на начин на који се возило заправо игра данас.

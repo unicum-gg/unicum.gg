@@ -1,3 +1,7 @@
 {
-  "label": "평가 지표"
+  "label": "평가 지표",
+  "group": {
+    "community": "커뮤니티",
+    "wargaming": "워게이밍"
+  }
 }

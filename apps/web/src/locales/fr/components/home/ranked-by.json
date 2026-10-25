@@ -1,6 +1,9 @@
 {
   "day": "Classé par {metric} au cours des 24 dernières heures, rang VI et plus (20 batailles min.).",
+  "day-account": "Classé selon {metric} parmi les joueurs ayant disputé 20 batailles au rang VI et supérieur au cours des dernières 24 heures.",
   "week": "Classé par {metric} au cours des 7 derniers jours, rang VI et plus (140 batailles min.).",
+  "week-account": "Classé selon {metric} parmi les joueurs ayant disputé 140 batailles au rang VI et supérieur au cours des 7 derniers jours.",
   "month": "Classé par {metric} au cours des 30 derniers jours, rang VI et plus (600 batailles min.).",
+  "month-account": "Classé selon {metric} parmi les joueurs ayant disputé 600 batailles au rang VI et supérieur au cours des 30 derniers jours.",
   "overall": "Classement par {metric} sur l’ensemble de la carrière (min. 20 000 batailles)."
 }

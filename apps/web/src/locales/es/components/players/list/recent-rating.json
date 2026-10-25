@@ -2,5 +2,6 @@
   "head": "30 d {metric}",
   "head-hint": "{metric} durante los últimos 30 días. El orden de la clasificación no experimenta ningún cambio.",
   "hint": "{metric} durante los últimos 30 días, a partir de {battles} batallas",
-  "none": "No hay ninguna batalla en los últimos 30 días"
+  "none": "No hay ninguna batalla en los últimos 30 días",
+  "head-hint-fallback": "{metric} no tiene un valor de 30 días, por lo que esta columna muestra {shown} durante los últimos 30 días. El orden de la clasificación no cambia."
 }

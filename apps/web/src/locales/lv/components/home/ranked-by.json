@@ -1,6 +1,9 @@
 {
   "day": "Ranga pēc {metric} par pagājušajām 24 stundām, VI līmenis un augstāks, vismaz 20 kaujas.",
+  "day-account": "Ranžēts pēc {metric} starp spēlētājiem, kuriem ir vismaz 20 kaujas VI līmenī un augstāk pagājušo 24 stundu laikā.",
   "week": "Ranga pēc {metric} par pagājušajām 7 dienām, VI līmenis un augstāks, vismaz 140 kaujas.",
+  "week-account": "Ranžēts pēc {metric} starp spēlētājiem, kuriem ir vismaz 140 kaujas VI līmenī un augstāk pagājušo 7 dienu laikā.",
   "month": "Ranga pēc {metric} par pagājušajām 30 dienām, VI līmenis un augstāks, vismaz 600 kaujas.",
+  "month-account": "Ranžēts pēc {metric} starp spēlētājiem, kuriem ir vismaz 600 kaujas VI līmenī un augstāk pagājušo 30 dienu laikā.",
   "overall": "Rangs pēc visa laika {metric} (vismaz 20 000 kaujas)."
 }

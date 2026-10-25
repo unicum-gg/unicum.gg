@@ -15,15 +15,15 @@ anchors:
     - WNX
 ---
 
-Isang modernong rating para sa bawat sasakyan na binibilang ang assistance damage kasama ang damage dealt at tuluyang inaalis ang win rate na termino.
+Isang makabagong rating bawat sasakyan na binibilang ang damage mula sa assistance kasama ng direktang damage at tuluyang inaalis ang bahagi para sa win rate.
 
-Ang WNX ay nagpapanatili ng anyo ng WN8, ang mga ratio laban sa mga inaasahang halaga para sa bawat sasakyan, at binabago ang mga binibilang na. Ang tracking at radio assistance ay idinadagdag sa damage sa dalawang ikatlong bahagi ng kanilang halaga, kaya ang pagpapansin para sa isang kasamahan at pag-block sa isang track ay binibigyang halaga bilang kontribusyon na nararapat sa halip na pabayaan.
+Pinananatili ng WNX ang estruktura ng WN8 at ang mga ratio laban sa inaasahang halaga bawat sasakyan, pero binabago nito ang binibilang. Idinadagdag ang tracking at radio assistance sa damage sa dalawang-katlo ng halaga ng mga ito, kaya ang pag-spot para sa kakampi at pagharang sa track ay binibigyan ng puntos ayon sa tunay na ambag ng mga ito sa halip na hindi isama.
 
-Wala itong bahagi ng win rate. Ang mga outcome-based na termino ay pahalagahan ang platooning at mga mahabang account higit sa pagsukat sa player, kaya ang WNX ay nag-i-score lamang sa ginawa ng player sa laban: damage kasama ang assistance, frags at spots laban sa inaasahang produksyon ng sasakyan.
+Wala itong bahagi para sa win rate. Mas napapaboran ng mga terminong batay sa resulta ang paglalaro sa platoon at matatagal nang account kaysa sa aktuwal na pagsukat sa manlalaro, kaya binibigyan lamang ng WNX ng puntos ang ginawa ng manlalaro sa labanan: damage kasama ang assistance, mga frag at mga spot kumpara sa inaasahang kayang gawin ng sasakyan.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-Ang tail exponent ay nagpapahaba sa itaas ng scale, kaya ang agwat sa pagitan ng isang magandang account at isang pambihirang account ay nananatiling nakikita sa halip na kumikilos. ```
+Pinapahaba ng exponent sa dulo ang itaas na bahagi ng scale, kaya nananatiling kapansin-pansin ang agwat ng isang mahusay at isang pambihirang account sa halip na lumiit. ```
 
-Ang mga inaasahang halaga ay muling kinukuwenta mula sa isang malaking sample ng mga sinusubaybayang account. Ito ang default na rating sa unicum.gg dahil ito ay mabilis na tumutugon sa kung paano talaga nilalaro ang isang sasakyan sa ngayon.
+Muling kinakalkula ang mga inaasahang halaga mula sa malaking sample ng mga account na sinusubaybayan. Ito ang default na rating sa unicum.gg dahil pinakamabilis itong tumugon sa aktuwal na paraan ng paggamit sa isang sasakyan sa kasalukuyan.

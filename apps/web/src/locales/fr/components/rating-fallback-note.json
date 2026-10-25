@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} est une notation de compte et ne peut pas évaluer une seule bataille, donc {shown} est affiché ici.",
+  "vehicle": "{metric} est une notation de compte sans valeur par véhicule, donc {shown} est affiché ici.",
+  "window": "{metric} est une notation de compte sans valeur sur une période, donc {shown} est affiché ici."
+}

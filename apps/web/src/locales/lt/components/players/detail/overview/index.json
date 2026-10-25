@@ -5,5 +5,6 @@
   "progression-blurb": "Ištisinė eilutė rodo bendrą {metric}, atitinkantį aukščiau esantį stulpelį „Iš viso“, ir pamažu kintantį kaupiantis naujiems mūšiams. Brūkšninė eilutė rodo vieno seanso {metric}, apskaičiuotą pagal mūšius, žaistus nuo ankstesnės momentinės kopijos. Ji parodo gerus ir blogus žaidimo ruožus. Eilutės spalva priklauso nuo reitingo lygio.",
   "progression-empty-title": "Kol kas istorijos nepakanka",
   "progression-empty": "Kreivė sudaroma remiantis šios paskyros istorija, o kol kas jos dar neturime. Ji rodoma, kai gaunamos dvi momentinės kopijos.",
-  "progression-single": "Kreivei reikia dviejų taškų, o kol kas ši paskyra turi tik vieną. Ji rodoma, kai gaunama kita momentinė kopija."
+  "progression-single": "Kreivei reikia dviejų taškų, o kol kas ši paskyra turi tik vieną. Ji rodoma, kai gaunama kita momentinė kopija.",
+  "progression-blurb-account": "Bendrai {metric} pagal tai, kaip ją pateikia Wargaming, nuskaitoma kiekvienos dienos pabaigoje, tai atitinka pirmiau esantį stulpelį „Viso“. Tai paskyros reitingas, neturintis vertės vienai sesijai, todėl nėra sesijos eilutės. Eilutės spalva seka reitingo pakopą."
 }

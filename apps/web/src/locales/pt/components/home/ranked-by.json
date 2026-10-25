@@ -1,6 +1,9 @@
 {
   "day": "Classificado por {metric} no período passado de 24 horas, nível VI e acima (mín. 20 batalhas).",
+  "day-account": "Classificação por {metric} entre os jogadores com 20 batalhas no nível VI e acima nas últimas 24 horas.",
   "week": "Classificado por {metric} no período passado de 7 dias, nível VI e acima (mín. 140 batalhas).",
+  "week-account": "Classificação por {metric} entre os jogadores com 140 batalhas no nível VI e acima nos últimos 7 dias.",
   "month": "Classificado por {metric} no período passado de 30 dias, nível VI e acima (mín. 600 batalhas).",
+  "month-account": "Classificação por {metric} entre os jogadores com 600 batalhas no nível VI e acima nos últimos 30 dias.",
   "overall": "Classificação geral por {metric} (mín. 20 000 batalhas)."
 }

@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Hiển thị các Clan hàng đầu trong {region} có hơn 50 thành viên từng tham gia trận đấu, xếp hạng theo {metric} trung bình.",
-    "month": "Hiển thị các Clan hàng đầu trong {region} có hơn 50 thành viên từng tham gia trận đấu, xếp hạng theo {metric} trong 30 ngày trước đây, tối thiểu 15 thành viên hoạt động."
+    "month": "Hiển thị các Clan hàng đầu trong {region} có hơn 50 thành viên từng tham gia trận đấu, xếp hạng theo {metric} trong 30 ngày trước đây, tối thiểu 15 thành viên hoạt động.",
+    "month-account": "Hiển thị Các Clan hàng đầu tại {region} với hơn 50 thành viên có trận đấu, xếp hạng theo chỉ số {metric} trung bình của các thành viên đang hoạt động trong 30 ngày qua, tối thiểu 15 thành viên đang hoạt động."
   },
   "updated": "Cập nhật {when}.",
   "empty": "Chưa có dữ liệu Clan cho khu vực này.",

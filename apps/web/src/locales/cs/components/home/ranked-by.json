@@ -1,6 +1,9 @@
 {
   "day": "Hodnocené podle {metric} za minulých 24 hodin, úroveň VI a vyšší (min. 20 bitev).",
+  "day-account": "Hodnocení podle {metric} mezi hráči s 20 bitvami na úrovni VI a vyšší během minulých 24 hodin.",
   "week": "Hodnocené podle {metric} za minulých 7 dní, úroveň VI a vyšší (min. 140 bitev).",
+  "week-account": "Hodnocení podle {metric} mezi hráči se 140 bitvami na úrovni VI a vyšší během minulých 7 dní.",
   "month": "Hodnocené podle {metric} za minulých 30 dní, úroveň VI a vyšší (min. 600 bitev).",
+  "month-account": "Hodnocení podle {metric} mezi hráči se 600 bitvami na úrovni VI a vyšší během minulých 30 dní.",
   "overall": "Seřazeno podle {metric} za celou dobu (min. 20 000 bitev)."
 }

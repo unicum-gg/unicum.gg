@@ -5,5 +5,6 @@
   "progression-blurb": "Heltrukken linje er {metric} totalt (samsvarer med Totalt-kolonnen ovenfor), og endres sakte etter hvert som nye kamper samles inn. Stiplet linje er {metric} per økt, beregnet fra kampene som er spilt siden forrige øyeblikksbilde. Den viser varme og kalde perioder. Linjefargen følger vurderingsnivået.",
   "progression-empty-title": "Ikke nok historikk ennå",
   "progression-empty": "Kurven tegnes ut fra kontoens egen historikk, som vi ennå ikke har noe av. Den vises når to øyeblikksbilder er registrert.",
-  "progression-single": "A kurve har behov for to poeng, og denne kontoen har foreløpig ett. Den vises når neste øyeblikksbilde kommer."
+  "progression-single": "A kurve har behov for to poeng, og denne kontoen har foreløpig ett. Den vises når neste øyeblikksbilde kommer.",
+  "progression-blurb-account": "Totalt {metric} slik Wargaming rapporterer det, lest ved slutten av hver dag, og tilsvarer Totalt-kolonnen ovenfor. Det er en vurdering av kontoen uten verdi for en enkelt økt, så det finnes ingen linje per økt. Linjefargen følger vurderingsnivået."
 }

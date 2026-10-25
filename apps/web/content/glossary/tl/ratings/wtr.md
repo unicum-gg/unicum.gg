@@ -3,6 +3,7 @@ term: Rating ng World of Tanks
 aliases:
   - WTR
   - wot rating
+  - rating ng World of Tanks
 related:
   - personal-rating
   - wn8
@@ -15,10 +16,18 @@ anchors:
     - World of Tanks Rating
 ---
 
-Ang kasalukuyang rating ng Wargaming, na kinakalkula bawat sasakyan batay sa ginagawa ng isang manlalaro sa labanan at sadyang hindi isinasaalang-alang kung ang labanan ay nanalo.
+Ang kasalukuyang rating ng Wargaming, na kinakalkula sa bawat sasakyan batay sa ginagawa ng manlalaro sa laban at sadyang hindi isinasaalang-alang kung nanalo ang laban.
 
-Nagrarate ang WTR sa bawat sasakyan nang hiwalay, pagkatapos ay pinagsasama ang mga score na iyon sa isang numero ng account. Depende sa papel ng sasakyan, ito ay nagbabasa ng hanggang sa apat na bagay: pinsalang naiparating at na-assist, pinsalang naharang, mga sasakyang nawasak, at kaligtasan. Ang isang heavy ay nasusuri sa bahagi batay sa kung ano ang nasisipsip nito, ang isang scout naman sa kung ano ang nagiging posible, kaya ang parehong account ay maaaring makakuha ng napakalaking pagkakaiba sa score sa dalawang sasakyan na pantay na mahusay ang laro.
+Sinusukat ng WTR ang bawat sasakyan nang magkahiwalay, pagkatapos ay pinagsasama ang mga score na iyon sa isang score para sa buong account. Depende sa papel ng sasakyan, sinusuri nito ang hanggang apat na bagay: pinsalang naidulot at naitulong maidulot, pinsalang napigilan, mga sasakyang nawasak, at pagkaligtas. Bahagyang sinusukat ang heavy batay sa dami ng pinsalang nasalo nito, habang ang scout ay batay sa mga pagkakataong nalikha nito, kaya maaaring magkaiba nang malaki ang score ng iisang account sa dalawang sasakyang pareho nitong mahusay na ginagamit.
 
-Ang mga panalo at pagkatalo ay hindi bahagi nito. Iyan ang sadyang pagkakaiba sa Personal Rating, na binibilang ang mga laban at mga panalo at samakatuwid ay patuloy na tumataas hangga't ang isang account ay patuloy na naglalaro.
+May dalawang bahagi ang score ng bawat sasakyan. Ang isang-kapat nito ay nakabatay sa puwesto ng manlalaro kumpara sa lahat ng nasa server na gumagamit ng parehong sasakyan, pamantayan kada pamantayan, na may sariling bigat ayon sa sasakyan. Ang natitirang tatlong-kapat ay nakabatay sa kung gaano kataas sa average ng server para sa sasakyang iyon ang performance ng manlalaro, at hindi kasama rito ang pagkaligtas. Sa alinmang paraan, ang batayan ay ang sariling populasyon ng sasakyan, hindi isang takdang target, kaya mas nakapagpapataas ng score ang isang mahusay na laro sa sasakyang kakaunti ang mahusay gumamit kaysa sa parehong laro sa isang sikat na sasakyan.
 
-Ipinapakita ng laro ito bilang isang band (Bronze hanggang Legend) sa halip na bilang isang numero, at tanging kapag ang isang account ay may hindi bababa sa 50 random na laban. Pinapalitan nito ang Personal Rating bilang rating na ipinapakita ng client.
+Ang score ng account ay average ng mga score ng sasakyan, na tinitimbang ayon sa dami ng laban sa bawat isa, tier, at papel. Bukod dito, ang account na may napakataas na score, humigit-kumulang 5,300 pataas, sa kahit isang sasakyan at sa sapat na dami ng laban ay nakatatanggap ng bonus sa kabuuang rating nito.
+
+Dalawang praktikal na epekto ang sumusunod. Ang sasakyang may isang libong laban ay halos hindi na gumagalaw ang score: ang isang daang napakahusay na laro bukod sa mahinang rekord ay makapagpapataas sa score ng sasakyang iyon nang ilang daang puntos lamang. Samantala, ang mga sasakyang wala pa sa ilang daang laban ang pinakamadaling ayusin kapag mababa ang score.
+
+Inilalathala ng Wargaming ang estruktura ng formula ngunit hindi ang mga constant nito: kung aling mga pamantayan ang ginagamit ng bawat sasakyan, ang mga bigat ng mga ito, at ang scaling. Kapag isinama rito na ang bawat score ay sinusukat laban sa buong server, nangangahulugan itong hindi maaaring muling kalkulahin ang WTR mula sa labas ng laro, sa bawat sasakyan man o sa isang kamakailang saklaw ng panahon. Mababasá lamang ito ayon sa inilalathala ng Wargaming.
+
+Hindi bahagi nito ang mga panalo at talo. Iyan ang sinadyang kaibahan nito sa Personal na Ranggo, na binibilang ang mga laban at panalo kaya patuloy itong tumataas hangga't patuloy na naglalaro ang isang account.
+
+Ipinapakita ito ng laro bilang isang antas, mula Bronze hanggang Legend, sa halip na bilang isang numero, at ipinapakita lamang kapag ang account ay mayroon nang hindi bababa sa 50 random na laban. Pinapalitan nito ang Personal na Ranggo bilang rating na ipinapakita ng client.

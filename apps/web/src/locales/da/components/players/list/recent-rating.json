@@ -2,5 +2,6 @@
   "head": "30d {metric}",
   "head-hint": "{metric} i de seneste 30 dage. Der er ingen ændring i ranglistens rækkefølge.",
   "hint": "{metric} i de seneste 30 dage, baseret på {battles} kampe",
-  "none": "Nej, der er ingen kamp i de seneste 30 dage"
+  "none": "Nej, der er ingen kamp i de seneste 30 dage",
+  "head-hint-fallback": "{metric} har ingen værdi for 30 dage, så denne kolonne viser {shown} over de sidste 30 dage. Ranglistens rækkefølge ændres ikke."
 }

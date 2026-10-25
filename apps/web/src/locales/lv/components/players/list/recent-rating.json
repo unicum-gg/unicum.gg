@@ -2,5 +2,6 @@
   "head": "30 d {metric}",
   "head-hint": "{metric} pēdējo 30 dienu laikā. Tabulas secība nemainās.",
   "hint": "{metric} pēdējo 30 dienu laikā, no {battles} kaujām",
-  "none": "Pēdējo 30 dienu laikā nav bijusi neviena kauja"
+  "none": "Pēdējo 30 dienu laikā nav bijusi neviena kauja",
+  "head-hint-fallback": "{metric} nav 30 dienu vērtības, tāpēc šajā kolonnā parādīts {shown} par pēdējām 30 dienām. Tabulas secība nemainās."
 }

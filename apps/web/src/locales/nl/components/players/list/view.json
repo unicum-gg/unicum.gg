@@ -13,6 +13,11 @@
     "language": "Spelers uit {region} bij wie op basis van hun clanverleden {language} tot de talen behoort, gerangschikt op {metric} voor de gevechten op niveau {tier} en hoger. {period}, minimaal {battles} gevechten.",
     "strict": "Spelers uit {region} wier op basis van hun clanverleden vastgestelde taal uitsluitend {language} is, gerangschikt op {metric} voor de gevechten op niveau {tier} en hoger. {period}, minimaal {battles} gevechten."
   },
+  "intro-period-account": {
+    "all": "Klassement van {region}, gerangschikt op {metric} onder de spelers met {battles} gevechten op niveau {tier} en hoger. {period}.",
+    "language": "Spelers uit {region} bij wie de afgeleide taalset van de clangeschiedenis inclusief {language} is, gerangschikt op {metric} onder diegenen met {battles} gevechten op niveau {tier} en hoger. {period}.",
+    "strict": "Spelers uit {region} bij wie de afgeleide taal van de clangeschiedenis uitsluitend {language} is, gerangschikt op {metric} onder diegenen met {battles} gevechten op niveau {tier} en hoger. {period}."
+  },
   "board": {
     "all": "Top {count} spelers op basis van {metric}",
     "language": "Top {count} spelers ({language}) op basis van {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Niveau {tier}+"
 }

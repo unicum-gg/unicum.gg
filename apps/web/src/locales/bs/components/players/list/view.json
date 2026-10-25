@@ -13,6 +13,11 @@
     "language": "Igrači iz regije {region} čiji skup jezika utvrđen na osnovu istorije klana uključuje {language}, rangirani prema {metric} na osnovu odigranih bitaka na nivou {tier} i višem. {period}, najmanje {battles} bitaka.",
     "strict": "Igrači iz regije {region} čiji je jezik, utvrđen na osnovu istorije klana, isključivo {language}, rangirani prema {metric} na osnovu odigranih bitaka na nivou {tier} i višem. {period}, najmanje {battles} bitaka."
   },
+  "intro-period-account": {
+    "all": "Ljestvica igrača iz regije {region}, rangirana prema {metric} među igračima s {battles} bitki na nivou {tier} i višem. {period}.",
+    "language": "Igrači iz regije {region} kod kojih je, na osnovu historije klana, zaključeno da skup jezika uključuje {language}, rangirani prema {metric} među onima s {battles} bitki na nivou {tier} i višem. {period}.",
+    "strict": "Igrači iz regije {region} kod kojih je, na osnovu historije klana, zaključeno da je jezik isključivo {language}, rangirani prema {metric} među onima s {battles} bitki na nivou {tier} i višem. {period}."
+  },
   "board": {
     "all": "Top {count} igrača prema {metric}",
     "language": "Top {count} igrača ({language}) prema {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Nivo {tier}+"
 }

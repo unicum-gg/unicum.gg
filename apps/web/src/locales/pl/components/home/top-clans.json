@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Wyświetlamy najlepsze klany w regionie {region}, mające ponad 50 członków z rozegranymi bitwami, uszeregowane według średniej wartości wskaźnika {metric}.",
-    "month": "Wyświetlamy najlepsze klany w regionie {region}, mające ponad 50 członków z rozegranymi bitwami, uszeregowane według wartości wskaźnika {metric} z ostatnich 30 dni (min. 15 aktywnych graczy)."
+    "month": "Wyświetlamy najlepsze klany w regionie {region}, mające ponad 50 członków z rozegranymi bitwami, uszeregowane według wartości wskaźnika {metric} z ostatnich 30 dni (min. 15 aktywnych graczy).",
+    "month-account": "Pokazuje najlepsze klany z regionu {region}, mające ponad 50 członków z bitwami, uszeregowane według średniej {metric} aktywnych członków w okresie obejmującym ostatnie 30 dni, minimum 15 aktywnych."
   },
   "updated": "Zaktualizowano {when}.",
   "empty": "Brak jeszcze danych o klanach dla tego regionu.",

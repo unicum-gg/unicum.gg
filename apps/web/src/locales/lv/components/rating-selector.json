@@ -1,3 +1,7 @@
 {
-  "label": "Vērtēšanas metrika"
+  "label": "Vērtēšanas metrika",
+  "group": {
+    "community": "Kopiena",
+    "wargaming": "Wargaming"
+  }
 }

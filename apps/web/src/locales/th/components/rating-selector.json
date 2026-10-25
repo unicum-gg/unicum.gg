@@ -1,3 +1,7 @@
 {
-  "label": "เมตริกการจัดอันดับ"
+  "label": "เมตริกการจัดอันดับ",
+  "group": {
+    "community": "ชุมชน",
+    "wargaming": "Wargaming"
+  }
 }

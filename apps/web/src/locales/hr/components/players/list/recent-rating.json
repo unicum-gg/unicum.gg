@@ -2,5 +2,6 @@
   "head": "30 dana {metric}",
   "head-hint": "{metric} u posljednjih 30 dana. Redoslijed ljestvice se ne mijenja.",
   "hint": "{metric} u posljednjih 30 dana, na temelju {battles} bitke",
-  "none": "Nema bitke u posljednjih 30 dana"
+  "none": "Nema bitke u posljednjih 30 dana",
+  "head-hint-fallback": "{metric} nema vrijednost za 30 dana, pa ovaj stupac prikazuje {shown} za prošlih 30 dana. Poredak ljestvice se ne mijenja."
 }

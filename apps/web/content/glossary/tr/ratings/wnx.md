@@ -2,7 +2,7 @@
 term: WNX
 aliases:
   - WNX rating
-  - WNX derecelendirmesi
+  - WNX puanı
 related:
   - wn8
   - expected-values
@@ -15,17 +15,15 @@ anchors:
     - WNX
 ---
 
-Bir yardım hasarını birlikte sayan ve tamamen galibiyet oranı terimini bırakan modern bir araç başına derecelendirmedir.
+Modern bir araç başına performans puanı olan WNX, verilen hasarın yanı sıra yardım hasarını da hesaba katar ve galibiyet oranı bileşenini tamamen çıkarır.
 
-WNX, WN8'in biçimini ve her aracın beklenen değerlerine karşı oranlarını korur ve neyi saydığına değişiklikler yapar. İzleme ve radyo yardımı, değerlerinin üçte iki kadar hasara eklenir, bu nedenle bir müttefiğe ışık açmak veya bir paletin engellenmesi, yok sayılmak yerine katkı olarak puanlanır.
+WNX, WN8'in yapısını ve araç başına beklenen değerlere oranları korur, ancak hesaba kattığı şeyleri değiştirir. Keşif ve telsiz yardımı, değerlerinin üçte ikisi oranında hasara eklenir, böylece bir müttefik için tespit yapmak ve palet kırmak göz ardı edilmek yerine, gerçekte oldukları katkı olarak puanlanır.
 
-Galibiyet oranı bileşeni yoktur. Sonuca dayalı terimler, platoon oluşturmayı ve uzun hesapları, oyuncuyu ölçmekten daha fazla ödüllendirir, bu nedenle WNX yalnızca oyuncunun savaşta yaptıklarını puanlar: hasar artı yardım, öldürmeler ve görülmeler, aracın üretmesi beklenen değerlerle karşılaştırıldığında.
+Galibiyet oranı bileşeni yoktur. Sonuç temelli ölçütler, oyuncuyu ölçmekten çok müfreze kurmayı ve eski hesapları ödüllendirir, bu nedenle WNX yalnızca oyuncunun savaşta yaptıklarını puanlar: aracın üretmesi beklenen değere kıyasla hasar artı yardım hasarı, imha edilen araçlar ve tespitler.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-Not: Yukarıdaki formülle çözümleyin ve elde edilen sonucu kesirli veya tam sayı gösterebilirsiniz.
+Üstteki üs, ölçeğin üst kısmını genişletir, böylece iyi ve olağanüstü bir hesap arasındaki fark sıkışmak yerine görünür kalır. ```
 
-Sonuç üssü ölçek üstünü genişletir, bu nedenle iyi ve olağanüstü hesaplar arasındaki fark görünür kalır, sıkışmaz. ```
-
-Beklenen değerler, izlenen hesaplardan oluşan büyük bir örneklemden yeniden hesaplanır. Bu, unicum.gg'deki varsayılan derecelendirmedir çünkü bir aracın bugün nasıl oynandığına en hızlı tepki verir.
+Beklenen değerler, takip edilen hesaplardan oluşan büyük bir örneklem kullanılarak yeniden hesaplanır. WNX, bir aracın bugün gerçekte nasıl oynandığına en hızlı tepki verdiği için unicum.gg üzerindeki varsayılan puandır.

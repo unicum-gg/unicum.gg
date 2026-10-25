@@ -13,6 +13,11 @@
     "language": "Jucători din {region} a căror listă de limbi dedusă din istoricul clanului include {language}, clasați în funcție de {metric} pe baza bătăliilor jucate la nivelul {tier} și mai sus. {period}, minim {battles} bătălii.",
     "strict": "Jucători din {region} a căror limbă dedusă din istoricul clanului este exclusiv {language}, clasați în funcție de {metric} pe baza bătăliilor jucate la nivelul {tier} și mai sus. {period}, minim {battles} bătălii."
   },
+  "intro-period-account": {
+    "all": "Clasament pentru {region}, clasat după {metric} printre jucătorii cu {battles} bătălii la nivelul {tier} și mai sus. {period}.",
+    "language": "Jucătorii din {region} al căror set de limbi dedus din istoricul clanului include {language}, clasificați după {metric} dintre cei cu {battles} bătălii la nivelul {tier} și mai sus. {period}.",
+    "strict": "Jucătorii din {region} a căror limbă dedusă din istoricul clanului este exclusiv {language}, clasificați după {metric} dintre cei cu {battles} bătălii la nivelul {tier} și mai sus. {period}."
+  },
   "board": {
     "all": "Top {count} jucători după {metric}",
     "language": "Top {count} jucători ({language}) după {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "nivel {tier}+"
 }

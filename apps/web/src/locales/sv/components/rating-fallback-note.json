@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} är ett betyg för kontot och kan inte ge poäng för en enskild strid, så {shown} visas här.",
+  "vehicle": "{metric} är ett betyg för kontot utan värde per fordon, så {shown} visas här.",
+  "window": "{metric} är ett betyg för kontot utan värde över en period, så {shown} visas här."
+}

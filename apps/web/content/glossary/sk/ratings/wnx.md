@@ -15,15 +15,15 @@ anchors:
     - WNX
 ---
 
-Moderni ocena za posamezen tank, ki šteje pomoč škodo poleg povzročene škode in popolnoma opusti termin o zmagi.
+Sodobna ocena za posamezno vozilo, ki poleg povzročene škode upošteva tudi škodo s pomočjo in popolnoma izloči komponento stopnje zmag.
 
-WNX ohranja obliko WN8, razmerja do pričakovanih vrednosti za posamezne tanke, in spremeni, kaj šteje. Sledenje in radijska pomoč sta dodana škodi v dveh tretjinah njune vrednosti, tako da se zaznavanje sovražnikovega tanka za zavezništvo in blokiranje sledi ocenita kot prispevek, ki sta, namesto da bi ju zanemarili.
+WNX ohranja zasnovo WN8 in razmerja glede na pričakovane vrednosti za posamezno vozilo, spreminja pa to, kar šteje. Škoda zaradi odkrivanja in radijske podpore se k škodi prišteje v višini dveh tretjin svoje vrednosti, zato se odkrivanje nasprotnikov za zaveznika in onemogočanje gosenic ocenjujeta kot dejanski prispevek, namesto da bi bila prezrta.
 
-Nima komponente zmage. Izraz na osnovi rezultata nagrajuje platoonanje in dolgotrajne račune bolj, kot meri igralca, zato WNX oceni le tisto, kar je igralec storil v bitki: škoda plus pomoč, ubijanja in opažanja v primerjavi s tistim, kar se od tanka pričakuje, da bo proizvedel.
+Ne vsebuje komponente stopnje zmag. Kazalniki, ki temeljijo na izidu, nagrajujejo igranje v vodih in dolgo aktivne račune bolj, kot merijo igralca, zato WNX ocenjuje samo to, kar je igralec naredil v bitki: škodo in škodo s pomočjo, uničenja ter odkrivanja glede na to, kar naj bi vozilo doseglo.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-Opomba: Ta formula je zasnovana tako, da nagrajuje večji doseg med dobrim in izjemnim računom. ```
+Eksponent na koncu raztegne vrh lestvice, zato razlika med dobrim in izjemnim računom ostane vidna, namesto da bi se skrčila. ```
 
-Očakávané hodnoty sa prepočítavajú z veľkej vzorky sledovaných účtov. To je privzet ocena na unicum.gg, ker se najhitreje odzove na način, kako se tank danes dejansko igra.
+Pričakovane vrednosti se ponovno izračunajo na podlagi velikega vzorca spremljanih računov. To je privzeta ocena na unicum.gg, ker se najhitreje odziva na to, kako se vozilo dejansko igra danes.

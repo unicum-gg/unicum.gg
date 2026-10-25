@@ -1,6 +1,9 @@
 {
   "day": "Gerangschikt op {metric} in de afgelopen 24 uur, niveau VI en hoger (min. 20 gevechten).",
+  "day-account": "Gerangschikt op {metric} onder de spelers met 20 gevechten op niveau VI en hoger gedurende de afgelopen 24 uur.",
   "week": "Gerangschikt op {metric} in de afgelopen 7 dagen, niveau VI en hoger (min. 140 gevechten).",
+  "week-account": "Gerangschikt op {metric} onder de spelers met 140 gevechten op niveau VI en hoger gedurende de afgelopen 7 dagen.",
   "month": "Gerangschikt op {metric} in de afgelopen 30 dagen, niveau VI en hoger (min. 600 gevechten).",
+  "month-account": "Gerangschikt op {metric} onder de spelers met 600 gevechten op niveau VI en hoger gedurende de afgelopen 30 dagen.",
   "overall": "Gerangschikt op basis van {metric} over de gehele periode (min. 20.000 gevechten)."
 }

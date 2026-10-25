@@ -2,5 +2,6 @@
   "head": "{metric} za 30 dana",
   "head-hint": "{metric} u posljednjih 30 dana. Redoslijed rang-liste se ne mijenja.",
   "hint": "{metric} u posljednjih 30 dana, na osnovu {battles} bitki",
-  "none": "Nema bitki u posljednjih 30 dana"
+  "none": "Nema bitki u posljednjih 30 dana",
+  "head-hint-fallback": "{metric} nema vrijednost za 30 dana, zato ova kolona prikazuje {shown} tokom 30 dana. Redoslijed rang-liste se ne mijenja."
 }

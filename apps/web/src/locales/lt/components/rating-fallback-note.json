@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} yra paskyros reitingas ir negali įvertinti vieno mūšio, todėl čia rodoma {shown}.",
+  "vehicle": "{metric} yra paskyros reitingas, neturintis kiekvienos transporto priemonės vertės, todėl čia rodoma {shown}.",
+  "window": "{metric} yra paskyros reitingas, neturintis vertės per laikotarpį, todėl čia rodoma {shown}."
+}

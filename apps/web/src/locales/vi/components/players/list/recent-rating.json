@@ -2,5 +2,6 @@
   "head": "30ng {metric}",
   "head-hint": "{metric} trong 30 ngày qua. Thứ tự của bảng xếp hạng không thay đổi.",
   "hint": "{metric} trong 30 ngày qua, dựa trên {battles} trận đấu",
-  "none": "Không có trận đấu nào trong 30 ngày qua"
+  "none": "Không có trận đấu nào trong 30 ngày qua",
+  "head-hint-fallback": "{metric} không có giá trị trong 30 ngày, vì vậy cột này hiển thị {shown} trong 30 ngày qua. Thứ tự của bảng xếp hạng không thay đổi."
 }

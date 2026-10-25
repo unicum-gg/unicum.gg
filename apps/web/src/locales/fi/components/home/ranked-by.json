@@ -1,6 +1,9 @@
 {
   "day": "Rankattu mittarin {metric} perusteella aiemman 24 tunnin ajalta, taso VI ja sitä korkeammat (vähintään 20 taistelua).",
+  "day-account": "Rankattu {metric}-arvon mukaan niiden pelaajien joukossa, jotka ovat pelanneet vähintään 20 taistelua tasolla VI ja sitä ylemmillä tasoilla aiempien 24 tuntia aikana.",
   "week": "Rankattu mittarin {metric} perusteella aiempien 7 päivän ajalta, taso VI ja sitä korkeammat (vähintään 140 taistelua).",
+  "week-account": "Rankattu {metric}-arvon mukaan niiden pelaajien joukossa, jotka ovat pelanneet vähintään 140 taistelua tasolla VI ja sitä ylemmillä tasoilla aiempien 7 päivää aikana.",
   "month": "Rankattu mittarin {metric} perusteella aiempien 30 päivän ajalta, taso VI ja sitä korkeammat (vähintään 600 taistelua).",
+  "month-account": "Rankattu {metric}-arvon mukaan niiden pelaajien joukossa, jotka ovat pelanneet vähintään 600 taistelua tasolla VI ja sitä ylemmillä tasoilla aiempien 30 päivää aikana.",
   "overall": "Järjestetty kaikkien aikojen mittarin {metric} mukaan (vähintään 20 000 taistelua)."
 }

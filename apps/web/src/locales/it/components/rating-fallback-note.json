@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} è una valutazione dell’account e non può assegnare un punteggio a una singola battaglia, quindi qui viene mostrato {shown}.",
+  "vehicle": "{metric} è una valutazione dell’account senza valore per veicolo, quindi qui viene mostrato {shown}.",
+  "window": "{metric} è una valutazione dell’account senza valore per un periodo, quindi qui viene mostrato {shown}."
+}

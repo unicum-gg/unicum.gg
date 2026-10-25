@@ -5,5 +5,6 @@
   "progression-blurb": "A linha contínua mostra {metric} geral (corresponde à coluna Total acima), que varia lentamente à medida que se acumulam novas batalhas. A linha tracejada mostra {metric} por sessão, com base nas batalhas disputadas desde o registo anterior. Mostra séries de bons e maus resultados. A cor da linha corresponde ao patamar da classificação.",
   "progression-empty-title": "Ainda não há histórico suficiente",
   "progression-empty": "A curva é traçada com base no histórico próprio desta conta, e ainda não temos nada dele. Ela aparece assim que dois instantâneos estiverem disponíveis.",
-  "progression-single": "Uma curva tem necessidade de dois pontos, e esta conta tem um até agora. Ela aparece assim que o próximo instantâneo estiver disponível."
+  "progression-single": "Uma curva tem necessidade de dois pontos, e esta conta tem um até agora. Ela aparece assim que o próximo instantâneo estiver disponível.",
+  "progression-blurb-account": "Classificação geral de {metric}, conforme reportada pela Wargaming, lida no fim de cada dia (corresponde à coluna Total acima). É uma classificação de conta sem valor para uma única sessão, portanto não há uma linha por sessão. A cor da linha segue o nível da classificação."
 }

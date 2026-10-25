@@ -13,6 +13,11 @@
     "language": "{region} játékosai, akiknek a klántörténetükből kikövetkeztetett nyelvi készletében szerepel: {language}, a(z) {metric} alapján rangsorolva, a {tier}. szinttől felfelé vívott csaták alapján. {period}, legalább {battles} csata.",
     "strict": "{region} játékosai, akiknek a klántörténetükből kikövetkeztetett nyelve kizárólag {language}, a(z) {metric} alapján rangsorolva, a {tier}. szinttől felfelé vívott csaták alapján. {period}, legalább {battles} csata."
   },
+  "intro-period-account": {
+    "all": "Ranglista a következő régióban: {region}, {metric} szerint rangsorolt játékosok között, akik legalább {battles} csatát vívtak {tier} szinten és afelett. {period}.",
+    "language": "A következő régióban: {region}, olyan játékosok ranglistája, akiknek a következtetett klántörténeti nyelvhalmaza tartalmazza a következő nyelvet: {language}, {metric} szerint rangsorolva azok között, akik legalább {battles} csatát vívtak {tier} szinten és afelett. {period}.",
+    "strict": "A következő régióban: {region}, olyan játékosok ranglistája, akiknek a következtetett klántörténeti nyelve kizárólag a következő: {language}, {metric} szerint rangsorolva azok között, akik legalább {battles} csatát vívtak {tier} szinten és afelett. {period}."
+  },
   "board": {
     "all": "Top {count} játékos {metric} alapján",
     "language": "Top {count} játékos ({language}) {metric} alapján",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "{tier}. szint vagy magasabb"
 }

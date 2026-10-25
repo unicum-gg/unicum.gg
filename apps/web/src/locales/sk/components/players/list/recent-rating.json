@@ -2,5 +2,6 @@
   "head": "30 dni {metric}",
   "head-hint": "{metric} za posledných 30 dni. Poradie lestvice sa nemení.",
   "hint": "{metric} za posledných 30 dni, z {battles} bitky",
-  "none": "Žiadna bitka za posledných 30 dni"
+  "none": "Žiadna bitka za posledných 30 dni",
+  "head-hint-fallback": "{metric} nemá hodnotu za 30 dní, takže tento stĺpec zobrazuje {shown} počas minulých 30 dní. Poradie lestvice sa nemení."
 }

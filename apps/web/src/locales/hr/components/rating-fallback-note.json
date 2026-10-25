@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} je ocjena računa i ne može ostvariti rezultat za pojedinačnu bitku, stoga je ovdje prikazano {shown}.",
+  "vehicle": "{metric} je ocjena računa bez vrijednosti po vozilu, stoga je ovdje prikazano {shown}.",
+  "window": "{metric} je ocjena računa bez vrijednosti za razdoblje, stoga je ovdje prikazano {shown}."
+}

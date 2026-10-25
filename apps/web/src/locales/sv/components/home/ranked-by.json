@@ -1,6 +1,9 @@
 {
   "day": "Rankad efter {metric} under tidigare 24 timmar, nivå VI och uppåt (min. 20 strider).",
+  "day-account": "Rankad efter {metric} bland spelare med 20 strider på nivå VI och uppåt under de tidigare 24 timmarna.",
   "week": "Rankad efter {metric} under tidigare 7 dagar, nivå VI och uppåt (min. 140 strider).",
+  "week-account": "Rankad efter {metric} bland spelare med 140 strider på nivå VI och uppåt under de tidigare 7 dagarna.",
   "month": "Rankad efter {metric} under tidigare 30 dagar, nivå VI och uppåt (min. 600 strider).",
+  "month-account": "Rankad efter {metric} bland spelare med 600 strider på nivå VI och uppåt under de tidigare 30 dagarna.",
   "overall": "Rankning efter {metric} genom tiderna (min. 20 000 strider)."
 }

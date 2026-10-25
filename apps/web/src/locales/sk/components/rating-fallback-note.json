@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} je hodnotenie účtu a nie je možné skórovať jednotlivú bitku, takže je tu zobrazené {shown}.",
+  "vehicle": "{metric} je hodnotenie účtu bez hodnoty pre vozidlo, takže je tu zobrazené {shown}.",
+  "window": "{metric} je hodnotenie účtu bez hodnoty za určité obdobie, takže je tu zobrazené {shown}."
+}

@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Tiek rādīti labākie {region} klani ar vairāk nekā 50 dalībniekiem, kuriem ir kaujas, sarindoti pēc vidējā {metric}.",
-    "month": "Tiek rādīti labākie {region} klani ar vairāk nekā 50 dalībniekiem, kuriem ir kaujas, sarindoti pēc {metric} pēdējo 30 dienu laikā (vismaz 15 aktīvi)."
+    "month": "Tiek rādīti labākie {region} klani ar vairāk nekā 50 dalībniekiem, kuriem ir kaujas, sarindoti pēc {metric} pēdējo 30 dienu laikā (vismaz 15 aktīvi).",
+    "month-account": "Rāda labākos {region} klanus ar vairāk nekā 50 biedriem, kuriem ir kaujas, ranžētus pēc aktīvo biedru vidējā {metric} pagājušajās 30 dienās, ar vismaz 15 aktīviem biedriem."
   },
   "updated": "Atjaunināts {when}.",
   "empty": "Šim reģionam vēl nav pieejamu klanu datu.",

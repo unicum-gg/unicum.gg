@@ -1,3 +1,7 @@
 {
-  "label": "Hodnotiaca metrika"
+  "label": "Hodnotiaca metrika",
+  "group": {
+    "community": "Skupnosť",
+    "wargaming": "Wargaming"
+  }
 }

@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Zobrazujú sa najlepšie klany v regióne {region} s viac ako 50 členmi, ktorí odohrali bitky, zoradené podľa priemernej hodnoty {metric}.",
-    "month": "Zobrazujú sa najlepšie klany v regióne {region} s viac ako 50 členmi, ktorí odohrali bitky, zoradené podľa hodnoty {metric} za posledných 30 dní (min. 15 aktívnych členov)."
+    "month": "Zobrazujú sa najlepšie klany v regióne {region} s viac ako 50 členmi, ktorí odohrali bitky, zoradené podľa hodnoty {metric} za posledných 30 dní (min. 15 aktívnych členov).",
+    "month-account": "Zobrazenie najlepších klanov regióna {region} s viac ako 50 členmi s bitkami, uvrštených podľa priemerného {metric} členov aktívnych počas minulých 30 dní, minimálne 15 aktívnych."
   },
   "updated": "Aktualizované {when}.",
   "empty": "Pre tento región zatiaľ nie sú k dispozícii žiadne údaje o klanoch.",

@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Näytetään alueen {region} parhaat klaanit, joissa on yli 50 taisteluita pelannutta jäsentä, järjestettynä keskimääräisen mittarin {metric} mukaan.",
-    "month": "Näytetään alueen {region} parhaat klaanit, joissa on yli 50 taisteluita pelannutta jäsentä, järjestettynä mittarin {metric} mukaan viimeisten 30 päivän ajalta (vähintään 15 aktiivista)."
+    "month": "Näytetään alueen {region} parhaat klaanit, joissa on yli 50 taisteluita pelannutta jäsentä, järjestettynä mittarin {metric} mukaan viimeisten 30 päivän ajalta (vähintään 15 aktiivista).",
+    "month-account": "Näytetään alueelta {region} parhaat klaanit, joissa on yli 50 taisteluita pelannutta jäsentä, rankattuna viimeisten 30 päivää aikana aktiivisten jäsenten {metric}-arvon keskiarvon mukaan, vähintään 15 aktiivista jäsentä."
   },
   "updated": "Päivitetty {when}.",
   "empty": "Tästä alueesta ei ole vielä saatavilla klaanitietoja.",

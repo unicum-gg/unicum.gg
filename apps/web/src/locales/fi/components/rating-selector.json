@@ -1,3 +1,7 @@
 {
-  "label": "Luokitusmittari"
+  "label": "Luokitusmittari",
+  "group": {
+    "community": "Yhteisö",
+    "wargaming": "Wargaming"
+  }
 }

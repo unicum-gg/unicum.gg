@@ -5,5 +5,6 @@
   "progression-blurb": "A folytonos sor az összesített {metric}, amely megfelel a fenti Total oszlopnak, és lassan változik az új csaták hozzáadásával. A szaggatott sor munkamenetenkénti {metric}, amelyet az előző pillanatfelvétel óta lejátszott csatákból számítunk. Megmutatja a jó és rossz sorozatokat. A sor színe az értékelési szintet követi.",
   "progression-empty-title": "Az előzmények még nem elegendők",
   "progression-empty": "A görbe ennek a fióknak a saját előzményeiből készül, és egyelőre egyetlen sincs belőlük nálunk. Megjelenik, amint két pillanatkép beérkezik.",
-  "progression-single": "A görbe szükséglete két pont, ennek a fióknak pedig egyelőre csak egy van. Megjelenik, amint beérkezik a következő pillanatkép."
+  "progression-single": "A görbe szükséglete két pont, ennek a fióknak pedig egyelőre csak egy van. Megjelenik, amint beérkezik a következő pillanatkép.",
+  "progression-blurb-account": "Összesen {metric} a Wargaming jelentése szerint, minden nap végén olvasott értékként, a fenti Összesen oszloppal egyezően. Ez fiókértékelés, amelynek nincs értéke egyetlen munkamenetre, ezért nincs munkamenetenkénti sor. A sor színe az értékelési szintet követi."
 }

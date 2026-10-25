@@ -1,6 +1,9 @@
 {
   "day": "Classificate per {metric} nelle 24 ore passate, livello VI e superiore (min. 20 battaglie).",
+  "day-account": "Classificati in base a {metric} tra i giocatori con 20 battaglie al livello VI e superiore nelle ultime 24 ore.",
   "week": "Classificate per {metric} nei 7 giorni passati, livello VI e superiore (min. 140 battaglie).",
+  "week-account": "Classificati in base a {metric} tra i giocatori con 140 battaglie al livello VI e superiore negli ultimi 7 giorni.",
   "month": "Classificate per {metric} nei 30 giorni passati, livello VI e superiore (min. 600 battaglie).",
+  "month-account": "Classificati in base a {metric} tra i giocatori con 600 battaglie al livello VI e superiore negli ultimi 30 giorni.",
   "overall": "Classifica in base al valore {metric} di tutti i tempi (min. 20.000 battaglie)."
 }

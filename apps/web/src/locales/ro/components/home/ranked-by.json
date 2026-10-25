@@ -1,6 +1,9 @@
 {
   "day": "Clasat după {metric} în ultimele 24 de ore, nivel VI și mai mare, minimum 20 de bătălii.",
+  "day-account": "Clasat după {metric} printre jucătorii cu 20 de bătălii la nivelul VI și mai sus în ultimele 24 de ore.",
   "week": "Clasat după {metric} în ultimele 7 zile, nivel VI și mai mare, minimum 140 de bătălii.",
+  "week-account": "Clasat după {metric} printre jucătorii cu 140 de bătălii la nivelul VI și mai sus în ultimele 7 zile.",
   "month": "Clasat după {metric} în ultimele 30 de zile, nivel VI și mai mare, minimum 600 de bătălii.",
+  "month-account": "Clasat după {metric} printre jucătorii cu 600 de bătălii la nivelul VI și mai sus în ultimele 30 de zile.",
   "overall": "Clasat după {metric} din toate timpurile, minimum 20.000 de bătălii."
 }

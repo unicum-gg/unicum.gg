@@ -1,3 +1,7 @@
 {
-  "label": "Biện pháp xếp hạng"
+  "label": "Biện pháp xếp hạng",
+  "group": {
+    "community": "Cộng đồng",
+    "wargaming": "Wargaming"
+  }
 }

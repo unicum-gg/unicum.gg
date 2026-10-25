@@ -1,7 +1,8 @@
 {
   "description": {
     "overall": "Zeigt die besten Clans aus {region} mit mehr als 50 Mitgliedern, die Gefechte bestritten haben, sortiert nach dem Durchschnittswert für {metric}.",
-    "month": "Zeigt die besten Clans aus {region} mit mehr als 50 Mitgliedern, die Gefechte bestritten haben, sortiert nach dem Wert für {metric} in den vergangenen 30 Tagen (mind. 15 Aktive)."
+    "month": "Zeigt die besten Clans aus {region} mit mehr als 50 Mitgliedern, die Gefechte bestritten haben, sortiert nach dem Wert für {metric} in den vergangenen 30 Tagen (mind. 15 Aktive).",
+    "month-account": "Anzeigen der besten Clans in {region} mit mehr als 50 Mitgliedern mit Gefechten, gewertet nach dem Durchschnitt von {metric} der in den vergangenen 30 Tagen aktiven Mitglieder, mindestens 15 aktiv."
   },
   "updated": "Aktualisiert {when}.",
   "empty": "Für diese Region sind noch keine Clan-Daten verfügbar.",

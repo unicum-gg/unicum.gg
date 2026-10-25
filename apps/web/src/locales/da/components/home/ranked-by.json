@@ -1,6 +1,9 @@
 {
   "day": "Rangliste efter {metric} i de tidligere 24 timer, niveau VI og opefter (min. 20 kampe).",
+  "day-account": "Rangeret efter {metric} blandt spillerne med 20 kampe på niveau VI og derover i de tidligere 24 timer.",
   "week": "Rangliste efter {metric} i de tidligere 7 dage, niveau VI og opefter (min. 140 kampe).",
+  "week-account": "Rangeret efter {metric} blandt spillerne med 140 kampe på niveau VI og derover i de tidligere 7 dage.",
   "month": "Rangliste efter {metric} i de tidligere 30 dage, niveau VI og opefter (min. 600 kampe).",
+  "month-account": "Rangeret efter {metric} blandt spillerne med 600 kampe på niveau VI og derover i de tidligere 30 dage.",
   "overall": "Rangeret efter {metric} gennem hele historikken (min. 20.000 kampe)."
 }

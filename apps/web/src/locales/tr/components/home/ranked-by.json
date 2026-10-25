@@ -1,6 +1,9 @@
 {
   "day": "Geçmiş 24 saatte {metric} değerine göre sıralamalı, seviye VI ve üzeri (en az 20 savaş).",
+  "day-account": "Geçmiş 24 saat içinde VI ve üzeri seviyede 20 savaş yapan oyuncular arasında {metric} puanına göre dereceli.",
   "week": "Geçmiş 7 gün içinde {metric} değerine göre sıralamalı, seviye VI ve üzeri (en az 140 savaş).",
+  "week-account": "Geçmiş 7 gün içinde VI ve üzeri seviyede 140 savaş yapan oyuncular arasında {metric} puanına göre dereceli.",
   "month": "Geçmiş 30 gün içinde {metric} değerine göre sıralamalı, seviye VI ve üzeri (en az 600 savaş).",
+  "month-account": "Geçmiş 30 gün içinde VI ve üzeri seviyede 600 savaş yapan oyuncular arasında {metric} puanına göre dereceli.",
   "overall": "Tüm zamanlardaki {metric} değerine göre sıralanır (en az 20.000 savaş)."
 }

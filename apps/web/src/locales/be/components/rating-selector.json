@@ -1,3 +1,7 @@
 {
-  "label": "Рэйтынгавы паказчык"
+  "label": "Рэйтынгавы паказчык",
+  "group": {
+    "community": "Супольнасць",
+    "wargaming": "Wargaming"
+  }
 }

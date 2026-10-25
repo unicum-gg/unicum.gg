@@ -1,6 +1,9 @@
 {
   "day": "Niranggo ayon sa {metric} sa nakaraan na 24 na oras, tier VI pataas (min. 20 mga laban).",
+  "day-account": "Niranggo ayon sa {metric} sa mga manlalaro na may 20 mga laban sa tier VI at pataas sa nakalipas na 24 na oras.",
   "week": "Niranggo ayon sa {metric} sa nakaraan na 7 araw, tier VI pataas (min. 140 mga laban).",
+  "week-account": "Niranggo ayon sa {metric} sa mga manlalaro na may 140 mga laban sa tier VI at pataas sa nakalipas na 7 araw.",
   "month": "Niranggo ayon sa {metric} sa nakaraan na 30 araw, tier VI pataas (min. 600 mga laban).",
+  "month-account": "Niranggo ayon sa {metric} sa mga manlalaro na may 600 mga laban sa tier VI at pataas sa nakalipas na 30 araw.",
   "overall": "Niranggo ayon sa pangkalahatang {metric} sa lahat ng oras, hindi bababa sa 20,000 mga laban."
 }

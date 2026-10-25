@@ -1,3 +1,7 @@
 {
-  "label": "Vurderingsmetode"
+  "label": "Vurderingsmetode",
+  "group": {
+    "community": "Fellesskap",
+    "wargaming": "Wargaming"
+  }
 }

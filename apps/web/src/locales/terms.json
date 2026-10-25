@@ -791,7 +791,11 @@
     "figures": "الأرقام",
     "fitted": "مجهّزة",
     "performs": "الأداء",
-    "skills": "المهارات"
+    "skills": "المهارات",
+    "WTR": "WTR",
+    "includes": "يتضمن",
+    "session": "جلسة",
+    "value": "قيمة"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1586,7 +1590,11 @@
     "fitted": "усталяванае",
     "performance": "эфектыўнасць",
     "performs": "паказвае сябе",
-    "skills": "навыкі"
+    "skills": "навыкі",
+    "WTR": "WTR",
+    "includes": "уключае",
+    "session": "сесія",
+    "value": "значэнне"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2596,7 +2604,11 @@
     "fitted": "монтирано",
     "performance": "ефективност",
     "performs": "представя се",
-    "skills": "умения"
+    "skills": "умения",
+    "WTR": "WTR",
+    "includes": "включва",
+    "session": "сесия",
+    "value": "стойност"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3398,7 +3410,11 @@
     "fitted": "ugrađeno",
     "performance": "učinak",
     "performs": "se ponaša",
-    "skills": "vještine"
+    "skills": "vještine",
+    "WTR": "WTR",
+    "includes": "uključuje",
+    "session": "sesija",
+    "value": "vrijednost"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4419,7 +4435,11 @@
     "fitted": "osazeno",
     "performance": "výkon",
     "performs": "výkony",
-    "skills": "dovednosti"
+    "skills": "dovednosti",
+    "WTR": "WTR",
+    "includes": "obsahuje",
+    "session": "relace",
+    "value": "hodnota"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5446,7 +5466,11 @@
     "fitted": "monteret",
     "performance": "præstation",
     "performs": "præsterer",
-    "skills": "færdigheder"
+    "skills": "færdigheder",
+    "WTR": "WTR",
+    "includes": "inkluderer",
+    "session": "session",
+    "value": "værdi"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6466,7 +6490,11 @@
     "fitted": "eingebaut",
     "performance": "Leistung",
     "performs": "Leistungen",
-    "skills": "Fertigkeiten"
+    "skills": "Fertigkeiten",
+    "WTR": "WTR",
+    "includes": "enthält",
+    "session": "Session",
+    "value": "Wert"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7492,7 +7520,11 @@
     "fitted": "τοποθετημένα",
     "performance": "απόδοση",
     "performs": "αποδίδει",
-    "skills": "δεξιότητες"
+    "skills": "δεξιότητες",
+    "WTR": "WTR",
+    "includes": "περιλαμβάνει",
+    "session": "συνεδρία",
+    "value": "τιμή"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8498,7 +8530,11 @@
     "fitted": "equipado",
     "performance": "rendimiento",
     "performs": "rinde",
-    "skills": "habilidades"
+    "skills": "habilidades",
+    "WTR": "WTR",
+    "includes": "incluye",
+    "session": "sesión",
+    "value": "valor"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9528,7 +9564,11 @@
     "fitted": "asennettu",
     "performance": "suorituskyky",
     "performs": "suoriutuu",
-    "skills": "taidot"
+    "skills": "taidot",
+    "WTR": "WTR",
+    "includes": "sisältää",
+    "session": "pelisessio",
+    "value": "arvo"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10538,7 +10578,11 @@
     "fitted": "montés",
     "performance": "performance",
     "performs": "performe",
-    "skills": "compétences"
+    "skills": "compétences",
+    "WTR": "WTR",
+    "includes": "comprend",
+    "session": "session",
+    "value": "valeur"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11334,7 +11378,11 @@
     "fitted": "सुसज्जित",
     "performance": "प्रदर्शन",
     "performs": "प्रदर्शन करता है",
-    "skills": "कौशल"
+    "skills": "कौशल",
+    "WTR": "WTR",
+    "includes": "शामिल हैं",
+    "session": "सत्र",
+    "value": "मान"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12358,7 +12406,11 @@
     "fitted": "ugrađeno",
     "performance": "učinak",
     "performs": "učinak",
-    "skills": "vještine"
+    "skills": "vještine",
+    "WTR": "WTR",
+    "includes": "uključuje",
+    "session": "sesija",
+    "value": "vrijednost"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13384,7 +13436,11 @@
     "fitted": "felszerelt",
     "performance": "teljesítmény",
     "performs": "teljesít",
-    "skills": "képességek"
+    "skills": "képességek",
+    "WTR": "WTR",
+    "includes": "tartalmazza",
+    "session": "munkamenet",
+    "value": "érték"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14406,7 +14462,11 @@
     "fitted": "installato",
     "performance": "prestazioni",
     "performs": "rende",
-    "skills": "abilità"
+    "skills": "abilità",
+    "WTR": "WTR",
+    "includes": "include",
+    "session": "sessione",
+    "value": "valore"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15435,7 +15495,11 @@
     "fitted": "搭載済み",
     "performance": "性能",
     "performs": "活躍する",
-    "skills": "スキル"
+    "skills": "スキル",
+    "WTR": "WTR",
+    "includes": "含む",
+    "session": "セッション",
+    "value": "値"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16233,7 +16297,11 @@
     "figures": "көрсеткіштер",
     "fitted": "орнатылған",
     "performs": "көрсеткіштері",
-    "skills": "дағдылар"
+    "skills": "дағдылар",
+    "WTR": "WTR",
+    "includes": "қамтиды",
+    "session": "сессия",
+    "value": "мәні"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17266,7 +17334,11 @@
     "fitted": "장착",
     "performance": "성능",
     "performs": "활약",
-    "skills": "기술"
+    "skills": "기술",
+    "WTR": "WTR",
+    "includes": "포함",
+    "session": "세션",
+    "value": "값"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18295,7 +18367,11 @@
     "fitted": "sumontuota",
     "performance": "našumas",
     "performs": "pasirodo",
-    "skills": "įgūdžiai"
+    "skills": "įgūdžiai",
+    "WTR": "WTR",
+    "includes": "apima",
+    "session": "sesija",
+    "value": "vertė"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -19310,7 +19386,11 @@
     "fitted": "uzstādīts",
     "performance": "sniegums",
     "performs": "darbojas",
-    "skills": "prasmes"
+    "skills": "prasmes",
+    "WTR": "WTR",
+    "includes": "ietver",
+    "session": "sesija",
+    "value": "vērtība"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20341,7 +20421,11 @@
     "fitted": "gemonteerd",
     "performance": "prestatie",
     "performs": "presteert",
-    "skills": "vaardigheden"
+    "skills": "vaardigheden",
+    "WTR": "WTR",
+    "includes": "inclusief",
+    "session": "sessie",
+    "value": "waarde"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -21363,7 +21447,11 @@
     "fitted": "montert",
     "performance": "prestasjon",
     "performs": "presterer",
-    "skills": "ferdigheter"
+    "skills": "ferdigheter",
+    "WTR": "WTR",
+    "includes": "inkluderer",
+    "session": "økt",
+    "value": "verdi"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -22382,7 +22470,11 @@
     "fitted": "zamontowane",
     "performance": "osiągi",
     "performs": "spisuje się",
-    "skills": "umiejętności"
+    "skills": "umiejętności",
+    "WTR": "WTR",
+    "includes": "zawiera",
+    "session": "sesja",
+    "value": "wartość"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -23394,7 +23486,11 @@
     "fitted": "equipado",
     "performance": "desempenho",
     "performs": "tem desempenho",
-    "skills": "habilidades"
+    "skills": "habilidades",
+    "WTR": "WTR",
+    "includes": "inclui",
+    "session": "sessão",
+    "value": "valor"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -24406,7 +24502,11 @@
     "fitted": "echipate",
     "performance": "performanță",
     "performs": "performanțe",
-    "skills": "aptitudini"
+    "skills": "aptitudini",
+    "WTR": "WTR",
+    "includes": "include",
+    "session": "sesiune",
+    "value": "valoare"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -25406,7 +25506,11 @@
     "fitted": "установленные",
     "performance": "эффективность",
     "performs": "показывает себя",
-    "skills": "умения"
+    "skills": "умения",
+    "WTR": "WTR",
+    "includes": "включает",
+    "session": "сессия",
+    "value": "значение"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -26205,7 +26309,11 @@
     "figures": "podatki",
     "fitted": "nameščeno",
     "performs": "zmogljivosti",
-    "skills": "spretnosti"
+    "skills": "spretnosti",
+    "WTR": "WTR",
+    "includes": "vključuje",
+    "session": "seja",
+    "value": "vrednost"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -27231,7 +27339,11 @@
     "fitted": "opremljeno",
     "performance": "učinak",
     "performs": "ponaša se",
-    "skills": "veštine"
+    "skills": "veštine",
+    "WTR": "WTR",
+    "includes": "укључује",
+    "session": "сесија",
+    "value": "вредност"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -28262,7 +28374,11 @@
     "fitted": "monterad",
     "performance": "prestanda",
     "performs": "presterar",
-    "skills": "färdigheter"
+    "skills": "färdigheter",
+    "WTR": "WTR",
+    "includes": "inkluderar",
+    "session": "session",
+    "value": "värde"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -29289,7 +29405,11 @@
     "fitted": "ติดตั้งแล้ว",
     "performance": "ประสิทธิภาพ",
     "performs": "ทำผลงาน",
-    "skills": "ทักษะ"
+    "skills": "ทักษะ",
+    "WTR": "WTR",
+    "includes": "รวม",
+    "session": "เซสชัน",
+    "value": "ค่า"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -30089,7 +30209,11 @@
     "figures": "mga bilang",
     "fitted": "nakakabit",
     "performs": "pagganap",
-    "skills": "mga kasanayan"
+    "skills": "mga kasanayan",
+    "WTR": "WTR",
+    "includes": "kasama",
+    "session": "sesyon",
+    "value": "halaga"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -31112,7 +31236,11 @@
     "fitted": "takılı",
     "performance": "performans",
     "performs": "performans gösterir",
-    "skills": "beceriler"
+    "skills": "beceriler",
+    "WTR": "WTR",
+    "includes": "içerir",
+    "session": "oturum",
+    "value": "değer"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -32128,7 +32256,11 @@
     "fitted": "встановлено",
     "performance": "результативність",
     "performs": "показує",
-    "skills": "навички"
+    "skills": "навички",
+    "WTR": "WTR",
+    "includes": "містить",
+    "session": "сесія",
+    "value": "значення"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -33133,7 +33265,11 @@
     "fitted": "đã lắp",
     "performance": "hiệu suất",
     "performs": "thể hiện",
-    "skills": "kỹ năng"
+    "skills": "kỹ năng",
+    "WTR": "WTR",
+    "includes": "bao gồm",
+    "session": "phiên",
+    "value": "giá trị"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -34160,6 +34296,10 @@
     "fitted": "已安装",
     "performance": "表现",
     "performs": "表现",
-    "skills": "技能"
+    "skills": "技能",
+    "WTR": "WTR",
+    "includes": "包含",
+    "session": "会话",
+    "value": "值"
   }
 }

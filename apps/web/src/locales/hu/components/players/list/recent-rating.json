@@ -2,5 +2,6 @@
   "head": "30 napos {metric}",
   "head-hint": "{metric} az elmúlt 30 napban. A ranglista sorrendje nem változik.",
   "hint": "{metric} az elmúlt 30 napban, {battles} csatából",
-  "none": "Az elmúlt 30 napban nem volt csata"
+  "none": "Az elmúlt 30 napban nem volt csata",
+  "head-hint-fallback": "A {metric} értékének nincs 30 napos értéke, ezért ez az oszlop az elmúlt 30 napban mért {shown} értéket jeleníti meg. A ranglista sorrendje nem változik."
 }

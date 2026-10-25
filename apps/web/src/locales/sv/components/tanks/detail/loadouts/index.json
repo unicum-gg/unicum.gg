@@ -2,11 +2,11 @@
   "title": "Vad spelare monterar på {tank}",
   "what-they-fit": "Utrustningsuppsättningar",
   "equipment": "Utrustning",
-  "consumables": "Förbrukningsartiklar",
+  "consumables": "Förnödenheter",
   "directives": "Anvisningar",
   "field-mods": "Fältmodifieringar",
   "col": {
-    "build": "Konfiguration",
+    "build": "konfiguration",
     "player": "Spelare",
     "usage": "Användning",
     "damage": "Skada",

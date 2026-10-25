@@ -1,0 +1,5 @@
+{
+  "battle": "Ang {metric} ay rating ng account at hindi ito maaaring magbigay ng score sa iisang labanan, kaya ipinapakita rito ang {shown}.",
+  "vehicle": "Ang {metric} ay rating ng account na walang halaga para sa bawat sasakyan, kaya ipinapakita rito ang {shown}.",
+  "window": "Ang {metric} ay rating ng account na walang halaga para sa isang yugto, kaya ipinapakita rito ang {shown}."
+}

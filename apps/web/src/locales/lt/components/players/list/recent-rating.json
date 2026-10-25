@@ -2,5 +2,6 @@
   "head": "30 d. {metric}",
   "head-hint": "{metric} per paskutines 30 dienų. Lentelės vieta nesikeičia.",
   "hint": "{metric} per paskutines 30 dienų, iš {battles} mūšių",
-  "none": "Per paskutines 30 dienų nebuvo mūšių"
+  "none": "Per paskutines 30 dienų nebuvo mūšių",
+  "head-hint-fallback": "{metric} neturi 30 dienų vertės, todėl šiame stulpelyje rodoma {shown} per praėjusias 30 dienų. Lentelės tvarka nesikeičia."
 }

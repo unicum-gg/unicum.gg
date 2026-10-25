@@ -1,6 +1,9 @@
 {
   "day": "Nach {metric} in den vergangenen 24 Stunden gewertet, Stufe VI und höher (mind. 20 Gefechte).",
+  "day-account": "Gewertet nach {metric} unter Spielern mit 20 Gefechten auf Stufe VI und höher in den vergangenen 24 Stunden.",
   "week": "Nach {metric} in den vergangenen 7 Tagen gewertet, Stufe VI und höher (mind. 140 Gefechte).",
+  "week-account": "Gewertet nach {metric} unter Spielern mit 140 Gefechten auf Stufe VI und höher in den vergangenen 7 Tagen.",
   "month": "Nach {metric} in den vergangenen 30 Tagen gewertet, Stufe VI und höher (mind. 600 Gefechte).",
+  "month-account": "Gewertet nach {metric} unter Spielern mit 600 Gefechten auf Stufe VI und höher in den vergangenen 30 Tagen.",
   "overall": "Rangliste nach {metric} über alle Gefechte hinweg (mind. 20.000 Gefechte)."
 }

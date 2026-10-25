@@ -9,7 +9,7 @@
     "build": "Kokoonpano",
     "player": "Pelaaja",
     "usage": "Käyttö",
-    "damage": "Vahinko",
+    "damage": "Vahinkoa aiheutettu",
     "winrate": "WR",
     "player-winrate": "Pelaajan WR",
     "player-winrate-tip": "Samojen pelaajien kokonaisuutena laskettu voittoprosentti koko tilillä, painotettuna tällä kokoonpanolla pelattujen taisteluiden mukaan.",
@@ -19,7 +19,7 @@
     "usage-tip": "Pelaajat, jotka käyttivät tätä vähintään yhdessä lasketussa taistelussa, jaettuna laskettujen pelaajien määrällä.",
     "player-rating": "Pelaajan {metric}",
     "player-rating-tip": "Samojen pelaajien kokonaisuutena laskettu arvosana koko tilillä, painotettuna tällä kokoonpanolla pelattujen taisteluiden mukaan.",
-    "battles": "Taistelut",
+    "battles": "Taisteluita",
     "skill": "Taito"
   },
   "crew-skills": "Miehistön taidot",

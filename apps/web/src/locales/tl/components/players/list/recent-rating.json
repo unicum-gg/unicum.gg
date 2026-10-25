@@ -2,5 +2,6 @@
   "head": "30 araw {metric}",
   "head-hint": "{metric} sa nakalipas na 30 araw. Walang pagbabago sa ayos ng talahanayan ng ranggo.",
   "hint": "{metric} sa nakalipas na 30 araw, mula sa {battles} mga laban",
-  "none": "Walang labanan sa nakalipas na 30 araw"
+  "none": "Walang labanan sa nakalipas na 30 araw",
+  "head-hint-fallback": "Walang halaga ang {metric} para sa 30 araw, kaya ipinapakita ng kolum na ito ang {shown} sa nakalipas na 30 araw. Hindi nagbabago ang pagkakasunod-sunod ng talahanayan ng ranggo."
 }

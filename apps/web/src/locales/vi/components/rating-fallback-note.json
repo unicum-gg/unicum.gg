@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} là chỉ số đánh giá tài khoản và không thể tính điểm cho một trận đấu đơn lẻ, vì vậy {shown} được hiển thị ở đây.",
+  "vehicle": "{metric} là chỉ số đánh giá tài khoản không có giá trị cho từng xe tăng, vì vậy {shown} được hiển thị ở đây.",
+  "window": "{metric} là chỉ số đánh giá tài khoản không có giá trị trong một khoảng thời gian, vì vậy {shown} được hiển thị ở đây."
+}

@@ -2,5 +2,6 @@
   "head": "30 T {metric}",
   "head-hint": "{metric} über die letzten 30 Tage. Keine Änderung an der Reihenfolge der Rangliste.",
   "hint": "{metric} über die letzten 30 Tage, aus {battles} Gefechten",
-  "none": "Kein Gefecht in den letzten 30 Tagen"
+  "none": "Kein Gefecht in den letzten 30 Tagen",
+  "head-hint-fallback": "Für {metric} gibt es keinen Wert für 30 Tage, daher wird in dieser Spalte {shown} für die vergangenen 30 Tage angezeigt. Die Reihenfolge der Rangliste ändert sich nicht."
 }

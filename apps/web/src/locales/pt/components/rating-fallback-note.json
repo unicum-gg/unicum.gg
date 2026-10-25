@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} é uma classificação de conta e não pode pontuar uma única batalha, então {shown} é exibido aqui.",
+  "vehicle": "{metric} é uma classificação de conta sem valor por veículo, então {shown} é exibido aqui.",
+  "window": "{metric} é uma classificação de conta sem valor ao longo de um período, então {shown} é exibido aqui."
+}

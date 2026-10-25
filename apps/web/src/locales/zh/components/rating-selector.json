@@ -1,3 +1,7 @@
 {
-  "label": "评分标准"
+  "label": "评分标准",
+  "group": {
+    "community": "社区",
+    "wargaming": "默认"
+  }
 }

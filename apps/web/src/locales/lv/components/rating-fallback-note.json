@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} ir konta vērtējums un nevar noteikt atsevišķas kaujas rezultātu, tāpēc šeit parādīts {shown}.",
+  "vehicle": "{metric} ir konta vērtējums bez vērtības katram transportlīdzeklim, tāpēc šeit parādīts {shown}.",
+  "window": "{metric} ir konta vērtējums bez vērtības noteiktā laika posmā, tāpēc šeit parādīts {shown}."
+}

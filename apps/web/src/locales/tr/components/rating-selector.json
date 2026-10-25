@@ -1,3 +1,7 @@
 {
-  "label": "Derecelendirme ölçütü"
+  "label": "Derecelendirme ölçütü",
+  "group": {
+    "community": "Topluluk",
+    "wargaming": "Wargaming"
+  }
 }

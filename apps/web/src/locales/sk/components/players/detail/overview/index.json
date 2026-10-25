@@ -5,5 +5,6 @@
   "progression-blurb": "Plná čiara znázorňuje celkovú hodnotu {metric} (zodpovedá stĺpcu Celkom vyššie), ktorá sa s pribúdajúcimi novými bitkami pomaly mení. Prerušovaná čiara znázorňuje hodnotu {metric} za jednotlivé herné relácie, vypočítanú z bitiek odohraných od predchádzajúcej snímky. Ukazuje série dobrých a zlých výsledkov. Farba čiary zodpovedá úrovni hodnotenia.",
   "progression-empty-title": "Zatiaľ nie je dosť histórie",
   "progression-empty": "Krivka sa vykresľuje z vlastnej histórie tohto računa a zatiaľ z nej nemáme nič. Prikaže sa, keď dorazia dve snímky.",
-  "progression-single": "Krivka potrebuje dva body a tento račun má zatiaľ jeden. Prikaže sa, keď dorazí ďalšia snímka."
+  "progression-single": "Krivka potrebuje dva body a tento račun má zatiaľ jeden. Prikaže sa, keď dorazí ďalšia snímka.",
+  "progression-blurb-account": "Celkovo {metric}, ako ho uvádza Wargaming, načítané na konci každého dňa, zodpovedá stĺpcu Celkom vyššie. Ide o hodnotenie účtu bez hodnoty pre jednotlivú seju, takže neexistuje riadok pre jednotlivú seju. Farba riadku sa riadi úrovňou hodnotenia."
 }

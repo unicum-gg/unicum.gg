@@ -5,5 +5,6 @@
   "progression-blurb": "Yhtenäinen rivi näyttää {metric} kokonaisuutena ja vastaa yllä olevaa Kaikkiaan-saraketta. Se muuttuu hitaasti uusien taistelujen kertyessä. Katkoviiva näyttää istuntokohtaisen arvon {metric}, joka on laskettu edellisen tilannekuvan jälkeen pelatuista taisteluista. Se näyttää kuumat ja kylmät putket. Rivin väri noudattaa arvosanan tasoa.",
   "progression-empty-title": "Historiaa ei ole vielä riittävästi",
   "progression-empty": "Käyrä piirretään tämän tilin omasta historiasta, eikä meillä ole siitä vielä mitään. Se näkyy, kun kaksi tilannekuvaa on saatu.",
-  "progression-single": "Käyrä tarvitsee kaksi pistettä, ja tällä tilillä on toistaiseksi yksi. Se näkyy, kun seuraava tilannekuva saapuu."
+  "progression-single": "Käyrä tarvitsee kaksi pistettä, ja tällä tilillä on toistaiseksi yksi. Se näkyy, kun seuraava tilannekuva saapuu.",
+  "progression-blurb-account": "Yhteensä {metric} Wargamingin raportoimana, luettu jokaisen päivän lopussa, vastaa yllä olevaa Kaikkiaan-saraketta. Kyseessä on tilin arvosana, jolla ei ole arvoa yksittäiselle pelisessiolle, joten pelisessiokohtaista riviä ei ole. Rivin väri seuraa arvosanan tasoa."
 }

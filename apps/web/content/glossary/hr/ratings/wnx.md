@@ -1,6 +1,7 @@
 ---
 term: WNX
 aliases:
+  - WNX rating
   - WNX ocjena
 related:
   - wn8
@@ -14,15 +15,15 @@ anchors:
     - WNX
 ---
 
-Moderna ocjena po vozilima koja računa štetu pomoći uz štetu koju je igrač nanio i potpuno isključuje termin postotka pobjeda.
+Moderna ocjena po vozilu koja uračunava štetu uz pomoć uz nanesenu štetu i potpuno izostavlja komponentu postotka pobjeda.
 
-WNX zadržava oblik WN8, omjere prema očekivanim vrijednostima po vozilu i mijenja što se broji. Praćenje i radio pomoć dodaju se u štetu u dvije trećine njihove vrijednosti, tako da procjena za saveznika i blokiranje gusjenice imaju svoj doprinos umjesto da budu ignorirani.
+WNX zadržava strukturu WN8, omjere prema očekivanim vrijednostima po vozilu i mijenja ono što se uračunava. Pomoć pri praćenju i radijska pomoć dodaju se šteti s dvije trećine svoje vrijednosti, pa se otkrivanje vozila za saveznika i onesposobljavanje gusjenica vrednuju kao doprinos koji doista jesu, umjesto da se zanemaruju.
 
-Nema komponentu postotka pobjeda. Izrazi koji se temelje na ishodu nagrađuju platoonanje i dugačke račune više nego što mjere igrača, pa WNX ocjenjuje samo ono što je igrač učinio u bitci: šteta plus pomoć, fragovi i procjene u odnosu na ono što se od vozila očekuje.
+Nema komponentu postotka pobjeda. Pojmovi utemeljeni na ishodu više nagrađuju igranje u vodu i dugotrajno aktivne račune nego što mjere igrača, pa WNX boduje samo ono što je igrač napravio u bitci: štetu plus pomoć, uništena vozila i otkrivanja u odnosu na ono što se očekuje da će vozilo ostvariti.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-Eksponent na kraju širi vrh ljestvice, tako da razlika između dobrog i izvanrednog računa ostaje vidljiva umjesto da se komprimira. ```
+Eksponent na kraju rasteže gornji dio ljestvice, pa razlika između dobrog i iznimnog računa ostaje vidljiva umjesto da se smanji. ```
 
-Očekivane vrijednosti preračunavaju se iz velikog uzorka praćenih računa. Ovo je defaultna ocjena na unicum.gg jer najbrže reagira na to kako se vozilo zapravo igra danas.
+Očekivane vrijednosti ponovno se izračunavaju na temelju velikog uzorka praćenih računa. Ovo je zadana ocjena na stranici unicum.gg jer najbrže reagira na to kako se vozilo danas doista igra.

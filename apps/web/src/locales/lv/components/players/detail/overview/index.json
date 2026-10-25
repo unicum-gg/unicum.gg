@@ -5,5 +5,6 @@
   "progression-blurb": "Nepārtrauktā līnija ir kopējais {metric} (atbilst iepriekš redzamajai kopējai kolonnai), kas lēnām mainās, uzkrājoties jaunām kaujām. Pārtrauktā līnija ir vienas sesijas {metric}, aprēķināts no kaujām, kas spēlētas kopš iepriekšējā momentuzņēmuma. Tā parāda veiksmju un neveiksmju sērijas. Līnijas krāsa atbilst vērtējuma līmenim.",
   "progression-empty-title": "Pagaidām nav pietiekami daudz vēstures",
   "progression-empty": "Līkne tiek veidota no šī konta paša vēstures, un pagaidām mums tās nav. Tā parādās, tiklīdz ir saņemti divi momentuzņēmumi.",
-  "progression-single": "Līknei vajadzīgi divi punkti, bet šim kontam pagaidām ir tikai viens. Tā parādās, tiklīdz būs pieejams nākamais momentuzņēmums."
+  "progression-single": "Līknei vajadzīgi divi punkti, bet šim kontam pagaidām ir tikai viens. Tā parādās, tiklīdz būs pieejams nākamais momentuzņēmums.",
+  "progression-blurb-account": "Kopējā {metric}, kā to ziņo Wargaming, nolasīta katras dienas beigās, atbilst iepriekš redzamajai kolonnai Kopā. Tas ir konta vērtējums bez vērtības atsevišķai sesijai, tāpēc nav rindas par katru sesiju. Rindas krāsa seko vērtējuma līmenim."
 }

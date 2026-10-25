@@ -1,6 +1,9 @@
 {
   "day": "Rangirano prema {metric} za прошли 24 часа, ниво VI i više (min. 20 bitke).",
+  "day-account": "Рангиране према {metric} међу играчима са 20 битке на нивоу VI и више током прошлих 24 часа.",
   "week": "Rangirano prema {metric} za прошли 7 dana, ниво VI i više (min. 140 bitke).",
+  "week-account": "Рангиране према {metric} међу играчима са 140 битке на нивоу VI и више током прошлих 7 dana.",
   "month": "Rangirano prema {metric} za прошли 30 dana, ниво VI i više (min. 600 bitke).",
+  "month-account": "Рангиране према {metric} међу играчима са 600 битке на нивоу VI и више током прошлих 30 dana.",
   "overall": "Rangirano по параметру {metric} за све време (минимум 20.000 bitke)."
 }

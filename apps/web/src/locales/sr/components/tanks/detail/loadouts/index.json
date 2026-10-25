@@ -19,7 +19,7 @@
     "usage-tip": "Igrači koji su je koristili u najmanje jednoj uračunatoj bitci, u odnosu na broj uračunatih igrača.",
     "player-rating": "Rejting igrača {metric}",
     "player-rating-tip": "Ukupan rejting istih igrača, na celom njihovom nalogu, ponderisan prema njihovim bitkama sa ovom konfiguracijom.",
-    "battles": "Bitke",
+    "battles": "Borbi",
     "skill": "Veština"
   },
   "crew-skills": "Veštine posade",

@@ -5,5 +5,6 @@
   "progression-blurb": "Puna crta prikazuje ukupni parametar {metric} i odgovara stupcu Ukupno iznad, a polako se mijenja kako se dodaju nove bitke. Isprekidana crta prikazuje parametar {metric} po sesiji, izračunat iz bitaka odigranih od prethodne snimke. Prikazuje nizove dobrih i loših rezultata. Boja crte prati razinu ocjene.",
   "progression-empty-title": "Još nema dovoljno povijesti",
   "progression-empty": "Krivulja se iscrtava iz vlastite povijesti ovog računa, a zasad nemamo ništa od nje. Pojavljuje se nakon što stignu dvije snimke.",
-  "progression-single": "Krivulji su potrebna dva boda, a ovaj račun zasad ima jedan. Pojavljuje se kada stigne sljedeća snimka."
+  "progression-single": "Krivulji su potrebna dva boda, a ovaj račun zasad ima jedan. Pojavljuje se kada stigne sljedeća snimka.",
+  "progression-blurb-account": "Sveukupno {metric} kako ga Wargaming prijavljuje, pročitano na kraju svakog dana, podudara se sa stupcem Ukupno iznad. To je ocjena računa bez vrijednosti za pojedinačnu sesiju, stoga nema retka po sesiji. Boja retka prati razinu ocjene."
 }

@@ -13,6 +13,11 @@
     "language": "{region} spēlētāji, kuru secinātais klana vēstures valodu kopums ietver {language}, ranžēti pēc {metric} kaujās, kas izspēlētas līmenī {tier} un augstāk. {period}, minimums {battles} kaujas.",
     "strict": "{region} spēlētāji, kuru secinātā klana vēstures valoda ir tikai {language}, ranžēti pēc {metric} kaujās, kas izspēlētas līmenī {tier} un augstāk. {period}, minimums {battles} kaujas."
   },
+  "intro-period-account": {
+    "all": "{region} līderu saraksts, ranžēts pēc {metric} starp spēlētājiem ar {battles} kaujām {tier} līmenī un augstāk. {period}.",
+    "language": "{region} spēlētāji, kuru secinātā klana vēstures valodu kopa ietver {language}, ranžēti pēc {metric} starp tiem, kuriem ir {battles} kaujas {tier} līmenī un augstāk. {period}.",
+    "strict": "{region} spēlētāji, kuru secinātā klana vēstures valoda ir tikai {language}, ranžēti pēc {metric} starp tiem, kuriem ir {battles} kaujas {tier} līmenī un augstāk. {period}."
+  },
   "board": {
     "all": "Top {count} spēlētāji pēc {metric}",
     "language": "Top {count} spēlētāji ({language}) pēc {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Līmenis {tier}+"
 }

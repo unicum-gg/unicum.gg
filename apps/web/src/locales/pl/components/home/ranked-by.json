@@ -1,6 +1,9 @@
 {
   "day": "Rankingowe według {metric}, przeszłość: 24 godziny, poziom VI i wyżej (min. 20 bitew).",
+  "day-account": "Ranking według {metric} wśród graczy mających 20 bitew na poziomie VI i wyższym w okresie obejmującym ostatnie 24 godziny.",
   "week": "Rankingowe według {metric}, przeszłość: 7 dni, poziom VI i wyżej (min. 140 bitew).",
+  "week-account": "Ranking według {metric} wśród graczy mających 140 bitew na poziomie VI i wyższym w okresie obejmującym ostatnie 7 dni.",
   "month": "Rankingowe według {metric}, przeszłość: 30 dni, poziom VI i wyżej (min. 600 bitew).",
+  "month-account": "Ranking według {metric} wśród graczy mających 600 bitew na poziomie VI i wyższym w okresie obejmującym ostatnie 30 dni.",
   "overall": "Ranking według {metric} z całego okresu (min. 20 000 bitew)."
 }

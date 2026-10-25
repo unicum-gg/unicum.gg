@@ -13,6 +13,11 @@
     "language": "Người chơi ở khu vực {region} có tập hợp ngôn ngữ lịch sử Clan được suy đoán bao gồm {language}, xếp hạng theo {metric} dựa trên các trận đấu đã tham chiến ở cấp {tier} trở lên. {period}, tối thiểu {battles} trận đấu.",
     "strict": "Người chơi ở khu vực {region} có ngôn ngữ lịch sử Clan được suy đoán chỉ bao gồm {language}, xếp hạng theo {metric} dựa trên các trận đấu đã tham chiến ở cấp {tier} trở lên. {period}, tối thiểu {battles} trận đấu."
   },
+  "intro-period-account": {
+    "all": "Bảng xếp hạng {region}, xếp hạng theo {metric} trong số những người chơi có {battles} trận đấu ở cấp {tier} trở lên. {period}.",
+    "language": "Những người chơi tại {region} có tập ngôn ngữ lịch sử Clan được suy đoán bao gồm {language}, xếp hạng theo {metric} trong số những người có {battles} trận đấu ở cấp {tier} trở lên. {period}.",
+    "strict": "Những người chơi tại {region} có ngôn ngữ lịch sử Clan được suy đoán chỉ là {language}, xếp hạng theo {metric} trong số những người có {battles} trận đấu ở cấp {tier} trở lên. {period}."
+  },
   "board": {
     "all": "Top {count} người chơi theo {metric}",
     "language": "Top {count} người chơi ({language}) theo {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Cấp {tier}+"
 }

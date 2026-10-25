@@ -1,3 +1,7 @@
 {
-  "label": "रेटिंग मेट्रिक"
+  "label": "रेटिंग मेट्रिक",
+  "group": {
+    "community": "कम्युनिटी",
+    "wargaming": "Wargaming"
+  }
 }

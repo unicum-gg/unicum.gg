@@ -1,3 +1,7 @@
 {
-  "label": "Hodnoticí metrika"
+  "label": "Hodnoticí metrika",
+  "group": {
+    "community": "Komunita",
+    "wargaming": "Wargaming"
+  }
 }

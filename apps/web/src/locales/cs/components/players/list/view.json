@@ -13,6 +13,11 @@
     "language": "Hráči z regionu {region}, jejichž odvozená sada jazyků z historie klanu zahrnuje {language}, hodnocení podle {metric} za bitvy odehrané na úrovni {tier} a vyšší. {period}, minimum {battles} bitev.",
     "strict": "Hráči z regionu {region}, jejichž jazyk odvozený z historie klanu je výhradně {language}, hodnocení podle {metric} za bitvy odehrané na úrovni {tier} a vyšší. {period}, minimum {battles} bitev."
   },
+  "intro-period-account": {
+    "all": "Žebříček regionu {region}, hodnocený podle {metric} mezi hráči s {battles} bitvami na úrovni {tier} a vyšší. {period}.",
+    "language": "Hráči regionu {region}, jejichž odvozená sada jazyků historie klanu obsahuje {language}, hodnocení podle {metric} mezi těmi s {battles} bitvami na úrovni {tier} a vyšší. {period}.",
+    "strict": "Hráči regionu {region}, jejichž odvozený jazyk historie klanu je výhradně {language}, hodnocení podle {metric} mezi těmi s {battles} bitvami na úrovni {tier} a vyšší. {period}."
+  },
   "board": {
     "all": "Top {count} hráčů podle {metric}",
     "language": "Top {count} hráčů ({language}) podle {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Úroveň {tier}+"
 }

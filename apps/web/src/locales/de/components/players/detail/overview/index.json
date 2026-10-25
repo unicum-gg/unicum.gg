@@ -5,5 +5,6 @@
   "progression-blurb": "Die durchgezogene Linie zeigt den Gesamtwert für {metric} und entspricht der Spalte „Gesamt“ oben. Sie verändert sich langsam, während neue Gefechte hinzukommen. Die gestrichelte Linie zeigt {metric} pro Sitzung, berechnet anhand der seit dem vorherigen Datenstand gespielten Gefechte. Sie macht starke und schwache Phasen sichtbar. Die Linienfarbe entspricht der Bewertungsstufe.",
   "progression-empty-title": "Noch nicht genug Verlauf",
   "progression-empty": "Die Kurve wird aus dem eigenen Verlauf dieses Kontos erstellt, und uns liegt davon noch nichts vor. Sie erscheint, sobald zwei Momentaufnahmen eingegangen sind.",
-  "progression-single": "Eine Kurve braucht zwei Punkte, und dieses Konto hat bisher einen. Sie erscheint, sobald die nächste Momentaufnahme eingegangen ist."
+  "progression-single": "Eine Kurve braucht zwei Punkte, und dieses Konto hat bisher einen. Sie erscheint, sobald die nächste Momentaufnahme eingegangen ist.",
+  "progression-blurb-account": "Insgesamt {metric}, wie von Wargaming gemeldet und am Ende jedes Tages abgelesen, entspricht der Spalte Gesamt oben. Es handelt sich um eine Kontowertung ohne Wert für eine einzelne Session, daher gibt es keine Zeile pro Session. Die Farbe der Zeile folgt der Wertungsstufe."
 }

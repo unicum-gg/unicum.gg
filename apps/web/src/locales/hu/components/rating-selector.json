@@ -1,3 +1,7 @@
 {
-  "label": "Értékelési metrika"
+  "label": "Értékelési metrika",
+  "group": {
+    "community": "Közösség",
+    "wargaming": "Wargaming"
+  }
 }

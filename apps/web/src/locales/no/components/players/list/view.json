@@ -13,6 +13,11 @@
     "language": "Spillere fra {region} hvis utledet språksett fra klanhistorikk inkluderer {language}, rangert etter {metric} basert på kamper kjempet på nivå {tier} og høyere. {period}, minimum {battles} kamper.",
     "strict": "Spillere fra {region} hvis utledede språk fra klanhistorikk utelukkende er {language}, rangert etter {metric} basert på kamper kjempet på nivå {tier} og høyere. {period}, minimum {battles} kamper."
   },
+  "intro-period-account": {
+    "all": "{region}-rangering, rangert etter {metric} blant spillerne med {battles} kamper på nivå {tier} og høyere. {period}.",
+    "language": "Spillere i {region} hvis utledede språksett fra klanhistorikken inkluderer {language}, rangert etter {metric} blant dem med {battles} kamper på nivå {tier} og høyere. {period}.",
+    "strict": "Spillere i {region} hvis utledede språk fra klanhistorikken utelukkende er {language}, rangert etter {metric} blant dem med {battles} kamper på nivå {tier} og høyere. {period}."
+  },
   "board": {
     "all": "Topp {count} spillere etter {metric}",
     "language": "Topp {count} spillere ({language}) etter {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Nivå {tier}+"
 }

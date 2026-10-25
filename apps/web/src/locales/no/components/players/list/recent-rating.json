@@ -2,5 +2,6 @@
   "head": "30 d {metric}",
   "head-hint": "{metric} de siste 30 dager. Rekkefølgen på tavlen endres ikke.",
   "hint": "{metric} de siste 30 dager, fra {battles} kamper",
-  "none": "Ingen kamper de siste 30 dager"
+  "none": "Ingen kamper de siste 30 dager",
+  "head-hint-fallback": "{metric} har ingen verdi for 30 dager, så denne kolonnen viser {shown} over 30 dager. Rekkefølgen på tavlen endres ikke."
 }

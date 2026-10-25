@@ -1,3 +1,7 @@
 {
-  "label": "Reitingo metrika"
+  "label": "Reitingo metrika",
+  "group": {
+    "community": "Bendruomenė",
+    "wargaming": "Wargaming"
+  }
 }

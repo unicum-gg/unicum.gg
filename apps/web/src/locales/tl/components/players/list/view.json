@@ -13,6 +13,11 @@
     "language": "Mga manlalaro sa {region} na ang mga wikang tinataya batay sa kasaysayan ng clan ay kinabibilangan ng {language}, niranggo ayon sa {metric} sa mga laban na nilaro sa tier {tier} pataas. {period}, minimum na {battles} laban.",
     "strict": "Mga manlalaro sa {region} na ang tinatayang wika batay sa kasaysayan ng clan ay {language} lamang, niranggo ayon sa {metric} sa mga laban na nilaro sa tier {tier} pataas. {period}, minimum na {battles} laban."
   },
+  "intro-period-account": {
+    "all": "Talaan ng ranggo ng {region}, niranggo ayon sa {metric} sa mga manlalarong may {battles} mga laban sa tier {tier} at pataas. {period}.",
+    "language": "Mga manlalaro sa {region} na kabilang ang {language} sa nahinuhang hanay ng wika ng kasaysayan ng clan, niranggo ayon sa {metric} sa mga may {battles} mga laban sa tier {tier} at pataas. {period}.",
+    "strict": "Mga manlalaro sa {region} na ang nahinuhang wika sa kasaysayan ng clan ay eksklusibong {language}, niranggo ayon sa {metric} sa mga may {battles} mga laban sa tier {tier} at pataas. {period}."
+  },
   "board": {
     "all": "Nangungunang {count} manlalaro ayon sa {metric}",
     "language": "Nangungunang {count} manlalaro ({language}) ayon sa {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Antas {tier}+"
 }

@@ -5,5 +5,6 @@
   "progression-blurb": "La ligne pleine est le {metric} général (correspond à la colonne Total ci-dessus), dérivant lentement à mesure que de nouvelles batailles s’accumulent. La ligne pointillée est le {metric} par session, calculé à partir des batailles jouées depuis la capture précédente. Elle montre les séries chaudes et froides. La couleur de la ligne suit le niveau de notation.",
   "progression-empty-title": "Pas encore assez d’historique",
   "progression-empty": "La courbe est tracée à partir de l’historique propre à ce compte, et nous n’en avons encore aucune donnée. Elle apparaît une fois que deux captures sont disponibles.",
-  "progression-single": "Une courbe a besoin de deux points et ce compte n’en possède qu’un pour l’instant. Elle apparaît dès que la prochaine capture est disponible."
+  "progression-single": "Une courbe a besoin de deux points et ce compte n’en possède qu’un pour l’instant. Elle apparaît dès que la prochaine capture est disponible.",
+  "progression-blurb-account": "Notation globale de {metric} telle que Wargaming la communique, lue à la fin de chaque journée, ce qui correspond à la colonne Total ci-dessus. Il s’agit d’une notation de compte sans valeur pour une seule session, il n’y a donc pas de ligne par session. La couleur de la ligne suit le rang de notation."
 }

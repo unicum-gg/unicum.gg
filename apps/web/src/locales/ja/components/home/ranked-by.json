@@ -1,6 +1,9 @@
 {
   "day": "過去24時間の{metric}によるランク、Tier VI以上（最低20戦闘）",
+  "day-account": "過去24時間にTier VI以上で20戦闘を行ったプレイヤーの中で、{metric}によるランク戦。",
   "week": "過去7 日間の{metric}によるランク、Tier VI以上（最低140戦闘）",
+  "week-account": "過去7日間にTier VI以上で140戦闘を行ったプレイヤーの中で、{metric}によるランク戦。",
   "month": "過去30 日間の{metric}によるランク、Tier VI以上（最低600戦闘）",
+  "month-account": "過去30日間にTier VI以上で600戦闘を行ったプレイヤーの中で、{metric}によるランク戦。",
   "overall": "全期間の{metric}によるランキング（最低20,000戦闘）。"
 }

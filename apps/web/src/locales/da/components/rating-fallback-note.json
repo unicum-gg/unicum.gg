@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} er en kontovurdering og kan ikke score en enkelt kamp, så {shown} er vist her.",
+  "vehicle": "{metric} er en kontovurdering uden værdi pr. køretøj, så {shown} er vist her.",
+  "window": "{metric} er en kontovurdering uden værdi over en periode, så {shown} er vist her."
+}

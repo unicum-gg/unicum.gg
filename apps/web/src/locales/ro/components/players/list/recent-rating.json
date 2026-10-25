@@ -2,5 +2,6 @@
   "head": "30z {metric}",
   "head-hint": "{metric} în ultimele 30 de zile. Ordinea clasamentului nu se schimbă.",
   "hint": "{metric} în ultimele 30 de zile, din {battles} bătălii",
-  "none": "Nicio bătălie în ultimele 30 de zile"
+  "none": "Nicio bătălie în ultimele 30 de zile",
+  "head-hint-fallback": "{metric} nu are o valoare pentru 30 de zile, așa că această coloană afișează {shown} pentru ultimele 30 de zile. Ordinea clasamentului nu se schimbă."
 }

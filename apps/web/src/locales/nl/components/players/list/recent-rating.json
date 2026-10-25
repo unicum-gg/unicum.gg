@@ -2,5 +2,6 @@
   "head": "30d {metric}",
   "head-hint": "{metric} over de afgelopen 30 dagen. De volgorde van het klassement ondergaat geen wijziging.",
   "hint": "{metric} over de afgelopen 30 dagen, op basis van {battles} gevechten",
-  "none": "Geen gevecht in de afgelopen 30 dagen"
+  "none": "Geen gevecht in de afgelopen 30 dagen",
+  "head-hint-fallback": "{metric} heeft geen waarde over 30 dagen, dus deze kolom toont {shown} over de afgelopen 30 dagen. De volgorde van het klassement verandert niet."
 }

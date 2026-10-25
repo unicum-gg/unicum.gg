@@ -1,3 +1,7 @@
 {
-  "label": "معيار التقييم"
+  "label": "معيار التقييم",
+  "group": {
+    "community": "المجتمع",
+    "wargaming": "Wargaming"
+  }
 }

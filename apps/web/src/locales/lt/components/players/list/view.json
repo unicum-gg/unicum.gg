@@ -13,6 +13,11 @@
     "language": "Regiono {region} žaidėjai, kieno klano istorijos numanoma kalbų aibė apima {language}, reitinguojami pagal {metric} per mūšius, vykusius esant {tier} lygiui arba aukštesniam. {period}, minimumas: {battles} mūšių.",
     "strict": "Regiono {region} žaidėjai, kieno klano istorijos numanoma kalba yra išskirtinai {language}, reitinguojami pagal {metric} per mūšius, vykusius esant {tier} lygiui arba aukštesniam. {period}, minimumas: {battles} mūšių."
   },
+  "intro-period-account": {
+    "all": "{region} lyderių lentelė, reitinguojama pagal {metric} tarp žaidėjų, turinčių {battles} mūšių {tier} lygiu ir aukštesniais lygiais. {period}.",
+    "language": "Žaidėjai iš regiono {region}, kurių numanomas klano istorijos kalbų rinkinys apima {language}, reitinguojami pagal {metric} tarp tų, kurie turi {battles} mūšių {tier} lygiu ir aukštesniais lygiais. {period}.",
+    "strict": "Žaidėjai iš regiono {region}, kurių numanoma klano istorijos kalba yra išskirtinai {language}, reitinguojami pagal {metric} tarp tų, kurie turi {battles} mūšių {tier} lygiu ir aukštesniais lygiais. {period}."
+  },
   "board": {
     "all": "Top {count} žaidėjų pagal {metric}",
     "language": "Top {count} žaidėjų ({language}) pagal {metric}",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "lygis {tier}+"
 }

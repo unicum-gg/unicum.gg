@@ -13,6 +13,11 @@
     "language": "Çıkarılan klan geçmişi dil kümesinde {language} bulunan {region} oyuncuları, {tier} ve üzeri seviyede yapılan savaşlarda {metric} ölçütüne göre dereceli. {period}, minimum {battles} savaş.",
     "strict": "Çıkarılan klan geçmişi dili sadece {language} olan {region} oyuncuları, {tier} ve üzeri seviyede yapılan savaşlarda {metric} ölçütüne göre dereceli. {period}, minimum {battles} savaş."
   },
+  "intro-period-account": {
+    "all": "{region} liderlik tablosu, seviye {tier} ve üzeri seviyede {battles} savaş yapan oyuncular arasında {metric} puanına göre sıralanır. {period}.",
+    "language": "Çıkarılan klan geçmişi dil kümesinde {language} bulunan {region} oyuncuları, seviye {tier} ve üzeri seviyede {battles} savaş yapanlar arasında {metric} puanına göre sıralanır. {period}.",
+    "strict": "Çıkarılan klan geçmişi dili sadece {language} olan {region} oyuncuları, seviye {tier} ve üzeri seviyede {battles} savaş yapanlar arasında {metric} puanına göre sıralanır. {period}."
+  },
   "board": {
     "all": "{metric} değerine göre en iyi {count} oyuncu",
     "language": "{metric} değerine göre en iyi {count} oyuncu ({language})",
@@ -31,5 +36,7 @@
   "wn7": "WN7",
   "wn8": "WN8",
   "wnx": "WNX",
+  "pr": "PR",
+  "wtr": "WTR",
   "tier-floor": "Seviye {tier}+"
 }

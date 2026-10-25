@@ -1,6 +1,9 @@
 {
   "day": "Rangsorolt {metric} szerint a múltbeli 24 óra során, VI-os szinttől felfelé (min. 20 csata).",
+  "day-account": "{metric} szerint rangsorolva a VI-os szinten vagy afelett 20 csatával rendelkező játékosok között a múltbeli 24 óra során.",
   "week": "Rangsorolt {metric} szerint a múltbeli 7 nap során, VI-os szinttől felfelé (min. 140 csata).",
+  "week-account": "{metric} szerint rangsorolva a VI-os szinten vagy afelett 140 csatával rendelkező játékosok között a múltbeli 7 nap során.",
   "month": "Rangsorolt {metric} szerint a múltbeli 30 nap során, VI-os szinttől felfelé (min. 600 csata).",
+  "month-account": "{metric} szerint rangsorolva a VI-os szinten vagy afelett 600 csatával rendelkező játékosok között a múltbeli 30 nap során.",
   "overall": "Rangsor az összesített {metric} alapján (min. 20 000 csata)."
 }

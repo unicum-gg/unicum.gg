@@ -2,8 +2,8 @@
 term: Hodnocení World of Tanks
 aliases:
   - WTR
-  - hodnocení WoT
   - wot rating
+  - hodnocení WoT
 related:
   - personal-rating
   - wn8
@@ -16,10 +16,18 @@ anchors:
     - World of Tanks Rating
 ---
 
-Aktuální hodnocení od Wargamingu, které se počítá pro každé vozidlo podle výkonu hráče v bitvě a záměrně nezohledňuje, zda byla bitva vyhrána.
+Aktuální hodnocení Wargamingu, vypočítávané pro každé vozidlo z toho, co hráč dělá v bitvě, a záměrně ignorující, zda byla bitva vyhrána.
 
-WTR hodnotí každé vozidlo samostatně a poté tato hodnocení slučuje do jednoho hodnocení účtu. V závislosti na roli vozidla zohledňuje až čtyři věci: způsobené poškození a poškození za asistenci, zablokované poškození, zničená vozidla a přežití. Těžký tank je částečně hodnocen podle toho, kolik poškození odrazí, průzkumný tank podle toho, co umožní spoluhráčům, takže stejný účet může získat velmi odlišné hodnocení se dvěma vozidly, se kterými hraje stejně dobře.
+WTR hodnotí každé vozidlo zvlášť a poté tato hodnocení spojí do jednoho čísla za účet. Podle role vozidla zohledňuje až čtyři údaje: způsobené a asistované poškození, zablokované poškození, zničená vozidla a přežití. Těžký tank se částečně posuzuje podle toho, kolik poškození absorbuje, zatímco průzkumný tank podle toho, co umožní, takže stejný účet může získat na dvou vozidlech, se kterými hráč hraje stejně dobře, velmi odlišné hodnocení.
 
-Vítězství ani porážky se do něj nezapočítávají. To je záměrný rozdíl oproti Osobnímu hodnocení, které započítává bitvy a vítězství, a proto neustále roste, dokud účet pokračuje v hraní.
+Hodnocení každého vozidla má dvě části. Čtvrtina vyjadřuje, jak si hráč stojí mezi všemi hráči na serveru, kteří hrají stejné vozidlo, a to u každého kritéria zvlášť, přičemž každé kritérium má váhu podle daného vozidla. Zbývající tři čtvrtiny vyjadřují, o kolik hráč překonává průměr serveru pro dané vozidlo, přičemž přežití se nezapočítává. V obou případech se porovnává s vlastní populací vozidla, nikoli s pevně stanoveným cílem, proto silná hra s vozidlem, se kterým si dobře poradí jen málokdo, zvýší hodnocení více než stejná hra s oblíbeným vozidlem.
 
-Hra jej zobrazuje jako úroveň od bronzové po legendární, nikoli jako číslo, a to až poté, co účet odehraje alespoň 50 náhodných bitev. Nahrazuje Osobní hodnocení jako hodnocení zobrazované v herním klientu.
+Hodnocení účtu je průměrem hodnocení vozidel, váženým podle počtu bitev odehraných s každým z nich, úrovně a role. Kromě toho účet, který má alespoň na jednom vozidle při dostatečném počtu bitev velmi vysoké hodnocení, přibližně 5,300 a více, získá bonus k celkovému hodnocení.
+
+Z toho plynou dva praktické důsledky. Vozidlo s tisícem bitev se už téměř nehýbe: sto vynikajících her na slabém dosavadním výsledku zvýší jeho hodnocení nejvýše o několik set bodů. Vozidla s méně než několika stovkami bitev jsou naopak místem, kde se slabé hodnocení napravuje nejlevněji.
+
+Wargaming zveřejňuje strukturu vzorce, nikoli však jeho konstanty: která kritéria jednotlivá vozidla zohledňují, jejich váhy a škálování. Ve spojení s tím, že se každé hodnocení měří proti celému serveru, to znamená, že WTR nelze přepočítat mimo hru, ani pro jednotlivá vozidla, ani za nedávné období. Lze ho pouze přebírat tak, jak ho zveřejňuje Wargaming.
+
+Vítězství ani porážky nejsou jeho součástí. To je záměrný rozdíl oproti Osobnímu hodnocení, které započítává bitvy a vítězství, a proto stále roste, dokud účet dál hraje.
+
+Hra ho zobrazuje jako pásmo od Bronze po Legend, nikoli jako číslo, a to až poté, co má účet alespoň 50 náhodných bitev. Nahrazuje Osobní hodnocení jako hodnocení zobrazované klientem.

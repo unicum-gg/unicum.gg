@@ -1,3 +1,7 @@
 {
-  "label": "Vurderingsmetrik"
+  "label": "Vurderingsmetrik",
+  "group": {
+    "community": "Fællesskab",
+    "wargaming": "Wargaming"
+  }
 }

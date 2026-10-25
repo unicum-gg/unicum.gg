@@ -5,5 +5,6 @@
   "progression-blurb": "La línea continua muestra {metric} global (coincide con la columna Total de arriba) y cambia lentamente a medida que se acumulan nuevas batallas. La línea discontinua muestra {metric} por sesión. El valor se calcula a partir de las batallas jugadas desde la instantánea anterior y muestra las rachas buenas y malas. El color de la línea corresponde al nivel de clasificación.",
   "progression-empty-title": "Aún no hay suficiente historial",
   "progression-empty": "La curva se traza a partir del historial propio de esta cuenta, y todavía no tenemos nada de él. Aparece cuando llegan dos instantáneas.",
-  "progression-single": "Una curva necesita dos puntos y esta cuenta solo tiene uno por ahora. Aparece cuando llegue la siguiente instantánea."
+  "progression-single": "Una curva necesita dos puntos y esta cuenta solo tiene uno por ahora. Aparece cuando llegue la siguiente instantánea.",
+  "progression-blurb-account": "General {metric} según lo informa Wargaming, leído al final de cada día, coincide con la columna Total anterior. Es una valoración de cuenta sin valor para una sesión individual, por lo que no hay una línea por sesión. El color de la línea sigue el nivel de valoración."
 }

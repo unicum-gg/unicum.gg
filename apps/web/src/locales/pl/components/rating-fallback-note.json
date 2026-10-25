@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} to ocena konta i nie można obliczyć wyniku pojedynczej bitwy, więc wyświetlono tutaj {shown}.",
+  "vehicle": "{metric} to ocena konta bez wartości dla pojazdu, więc wyświetlono tutaj {shown}.",
+  "window": "{metric} to ocena konta bez wartości w danym okresie, więc wyświetlono tutaj {shown}."
+}

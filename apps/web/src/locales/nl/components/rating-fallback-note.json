@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} is een accountbeoordeling en kan niet één enkel gevecht beoordelen, dus {shown} wordt hier weergegeven.",
+  "vehicle": "{metric} is een accountbeoordeling zonder waarde per voertuig, dus {shown} wordt hier weergegeven.",
+  "window": "{metric} is een accountbeoordeling zonder waarde over een periode, dus {shown} wordt hier weergegeven."
+}

@@ -1,6 +1,7 @@
 ---
 term: WNX
 aliases:
+  - WNX rating
   - WNX értékelés
 related:
   - wn8
@@ -14,15 +15,15 @@ anchors:
     - WNX
 ---
 
-A modern jármű-alapú értékelés, amely számításba veszi a segítő sebzést a járművet terhelő sebzés mellett, és teljesen elhagyja a győzelmi arány kifejezést.
+Modern, járművenkénti értékelés, amely a támogatási sebzést is beleszámítja az okozott sebzés mellett, és teljesen elhagyja a győzelmi arány összetevőjét.
 
-A WNX megtartja a WN8 szerkezetét, az arányokat a járművet terhelő várható értékekhez, és megváltoztatja, hogy mit számít. A nyomozás és a rádiós segítség a sebzéshez két harmad értékükön hozzáadódik, tehát az, hogy egy szövetségesnek segítesz a nyomozásban vagy egy lánctalpat blokkolsz, hozzájárulásként van értékelve, nem pedig figyelmen kívül hagyva.
+A WNX megőrzi a WN8 felépítését és a járművenkénti elvárt értékekhez viszonyított arányokat, de megváltoztatja, hogy mit számít bele. A láncolási és rádiós támogatás az értékük kétharmadával hozzáadódik a sebzéshez, így a szövetséges felderítése és egy lánctalp blokkolása valódi hozzájárulásként jelenik meg az értékelésben, nem pedig figyelmen kívül hagyott teljesítményként.
 
-Nincs győzelmi arány komponense. Az eredményalapú kifejezések a platoonokká való jutalmazás miatt és a hosszú távú fiókokra nagyobb hangsúlyt fektetnek, mint a játékos értékelésére, így a WNX csak azt az eredményt méri, amit a játékos a csatában végzett: sebzés plusz segítség, fragok és nyomozások a jármű által várhatóan produkált vs. értékhez képest.
+Nincs benne győzelmi arány. Az eredményalapú mutatók jobban jutalmazzák a szakaszozást és a régebbi fiókokat, mint amennyire a játékost mérik, ezért a WNX csak azt értékeli, amit a játékos a csatában végzett: a sebzést és a támogatást, valamint a kilövéseket és a felderítéseket ahhoz képest, amit az adott járműtől elvárnak.
 
 ```formula
 raw = 750 x rDAMAGE + 200 x rFRAG + 50 x rSPOT, then raw x (raw / 1000) ^ 0.45 x 1.65
 
-A kifejezés szorzója meghosszabbítja a skála tetejét, így a különbség egy jó és egy kivételes teljesítmény között látható marad a tömörítés helyett. ```
+A kitevő a skála felső részét széthúzza, így egy jó és egy kivételes fiók közötti különbség látható marad ahelyett, hogy összesűrűsödne. ```
 
-A várható értékeket nyilvántartott fiókok nagy mintája alapján számítják újra. Ez a default értékelés az unicum.gg-n, mert a leggyorsabban reagál arra, ahogy egy járműt valójában ma játszanak.
+Az elvárt értékeket követett fiókok nagy mintája alapján számítják újra. Ez az alapértelmezett értékelés az unicum.gg oldalon, mert ez reagál a leggyorsabban arra, hogyan játsszák ténylegesen az adott járművet napjainkban.

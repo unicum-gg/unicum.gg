@@ -1,0 +1,5 @@
+{
+  "battle": "{metric} je rejting računa i ne može dati skor za pojedinačnu bitku, zato je ovdje prikazano {shown}.",
+  "vehicle": "{metric} je rejting računa bez vrijednosti po vozilu, zato je ovdje prikazano {shown}.",
+  "window": "{metric} je rejting računa bez vrijednosti tokom određenog perioda, zato je ovdje prikazano {shown}."
+}
