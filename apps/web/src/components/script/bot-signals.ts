@@ -15,6 +15,12 @@ enum BotSignal {
   NoChrome = "nochrome",
   /** A user agent claiming Chrome desktop with an empty plugin list. */
   NoPlugins = "noplugins",
+  /** The browser resolves its own timezone to UTC, GMT or an `Etc/*` zone. */
+  UtcTimezone = "tzutc",
+  /** Chrome desktop with no browser chrome above the viewport. */
+  NoWindowFrame = "noframe",
+  /** Chrome desktop reporting two logical cores or fewer. */
+  FewCores = "fewcores",
 }
 
 /**
@@ -80,6 +86,49 @@ const DROP_SIGNALS: BotSignal[] = [
  * alone, so they label and never cancel, and the tag names every signal that
  * fired rather than reducing them to one verdict.
  *
+ * THE SECOND FLEET, AND WHY NONE OF THE FIVE ABOVE SEES IT. On 2026-10-26 the
+ * Cloudflare managed challenge came off the site at 15:55 CET, and Umami went
+ * from 218 visitors on the day before to 5,733 by 20:30. The arrivals are one
+ * population: 93% on 1920x1080, 97% Windows 10, 91% declaring `en` while the
+ * addresses are Brazilian, Colombian, Ecuadorian and Venezuelan, 2.8% mobile
+ * against the real audience's 28%, 1.88 pages a visit against 3.0, and the most
+ * read page carrying 162 of 11,574 pageviews, which is a walk of the catalogue
+ * rather than a visit. It fired `noplugins` 106 times and nothing else: it has
+ * hardware WebGL, keeps `navigator.webdriver` false and carries plugins.
+ *
+ * It is NOT a new arrival, and that is the part worth keeping. Measured at the
+ * edge on the same user agent either side of the removal, its volume did not
+ * move (Chrome 151 on Windows: 74,781 then 76,471 requests from the US, 14,790
+ * then 14,371 from Brazil). It was always hitting us at that rate. What changed
+ * is that it now receives the page instead of a 403, so it runs JavaScript and
+ * reaches the tracker. The challenge was never keeping it out, it was keeping
+ * it out of the dashboard, which is the worse of the two because it reads as an
+ * audience we did not have.
+ *
+ * So `tzutc`, `noframe` and `fewcores` are three independent guesses at what
+ * separates it, and all three only ever LABEL. The resolution and the user
+ * agent cannot be used: 1920x1080 under Chrome on Windows is also what a real
+ * reader runs, so a signal drawn on it would cost readers. These three are each
+ * something a containerised fleet pays for and a desktop does not. A browser
+ * resolves its own zone to an IANA city, so UTC or `Etc/*` is a container with
+ * no zone set, the one case strict fingerprint-protection modes also produce.
+ * A real Chrome window has a tab strip and an address bar above the viewport,
+ * so `outerHeight` exceeds `innerHeight` unless the page is in fullscreen or
+ * kiosk. And a machine presenting a desktop browser rarely has two cores. The
+ * two that read window geometry and core counts are gated on the Chrome
+ * desktop user agent like `nochrome` and `noplugins`, because on a phone
+ * `outerHeight === innerHeight` is simply what a browser looks like.
+ *
+ * Which of them is worth dropping is a question for the dashboard, in a week,
+ * the same way `nogl` was decided. Until then they cost a reader nothing.
+ *
+ * ONE CONSTRAINT ON ADDING MORE. The tag is truncated at 50 characters, and a
+ * truncated name is worse than an absent one because it still reads as a tag.
+ * What keeps it inside the cap is that a `DROP_SIGNALS` hit returns before the
+ * tag is built, so the string is only ever assembled from the signals that do
+ * not cancel: those five come to 45 characters with the prefix. A sixth
+ * labelling signal needs a short name or the cap needs raising.
+ *
  * It is evaluated ONCE per page and memoised. Building a WebGL context on every
  * pageview would cost a real reader more than the measurement is worth, and the
  * context is handed back immediately through `WEBGL_lose_context` rather than
@@ -117,6 +166,12 @@ if(lose)lose.loseContext();
 }catch(e){}
 try{if(/Chrome\\//.test(u)&&!W.chrome)out.push("${BotSignal.NoChrome}")}catch(e){}
 try{if(/Chrome\\//.test(u)&&navigator.plugins&&navigator.plugins.length===0)out.push("${BotSignal.NoPlugins}")}catch(e){}
+try{
+var tz=(W.Intl&&W.Intl.DateTimeFormat)?(W.Intl.DateTimeFormat().resolvedOptions().timeZone||""):"";
+if(!tz||/^(?:utc|gmt|etc\\/)/i.test(tz))out.push("${BotSignal.UtcTimezone}");
+}catch(e){}
+try{if(/Chrome\\//.test(u)&&typeof W.outerHeight==="number"&&W.innerHeight>0&&W.outerHeight<=W.innerHeight)out.push("${BotSignal.NoWindowFrame}")}catch(e){}
+try{if(/Chrome\\//.test(u)&&navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=2)out.push("${BotSignal.FewCores}")}catch(e){}
 cached=out;
 return out;
 }
