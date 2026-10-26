@@ -6,7 +6,7 @@
     "extermination": "Komanda sunaikinta",
     "base": "Bazė užimta",
     "timeout": "Baigėsi laikas",
-    "other": "Kita"
+    "other": "Kitas"
   },
   "spawns": "Pergalės pagal atsiradimo vietą",
   "team": "Komanda {n}",

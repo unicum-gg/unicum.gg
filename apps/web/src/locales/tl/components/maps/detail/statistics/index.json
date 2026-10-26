@@ -10,14 +10,14 @@
   "top-battles-hint": "Ang pinakamahusay na labanan ng bawat manlalaro sa mapang ito batay sa naidulot na pinsala. Buksan ang isang labanan para sa kumpletong ulat nito.",
   "col": {
     "class": "Klase",
-    "tier": "Tier",
+    "tier": "Antas",
     "records": "Mga labanan",
     "records-tip": "Mga labanan sa klaseng ito o tier na ito sa mapang ito, isang tala para sa bawat manlalaro sa bawat labanan.",
     "winrate": "WR",
     "damage": "Pinsala",
     "assisted": "Tulong",
     "kills": "Mga frags",
-    "spotted": "Mga nakita",
+    "spotted": "Spots",
     "survival": "Nakaligtas",
     "xp": "XP",
     "baseline-tip": "Sa ilalim ng bawat bilang: ang agwat kumpara sa parehong mga sasakyan sa bawat ibang mapa ng mode."

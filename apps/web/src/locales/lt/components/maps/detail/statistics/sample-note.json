@@ -1,5 +1,5 @@
 {
   "counted-from": "Apskaičiuota pagal {battles} mūšius režimu {mode} šiame žemėlapyje per pastarąsias 90 dienų: {records} transporto priemonės, {players} žaidėjai, užfiksuota per {mod}. Paskutinis žaistas",
-  "the-mod": "unicum.gg modą",
+  "the-mod": "unicum.gg modas",
   "against-everywhere": "Kiekvienas mūšis mus pasiekia su visomis trisdešimčia jame dalyvavusių transporto priemonių, neįtraukiant botų. Mūšis vieną kartą įskaičiuojamas pagal trukmę, baigtį ir laimėtoją, o pagal klases ir transporto priemones įskaičiuojamas trisdešimt kartų, todėl pirmajam blokui reikia gerokai daugiau mūšių nei toliau pateiktoms lentelėms, kad jis ką nors parodytų."
 }

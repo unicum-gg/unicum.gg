@@ -1,5 +1,5 @@
 {
   "counted-from": "Uračunato iz {battles} bitaka u režimu {mode} na ovoj mapi tokom poslednjih 90 дана: {records} возила, {players} igrača, zabeleženo putem moda {mod}. Poslednja odigrana bitka",
-  "the-mod": "mod unicum.gg",
+  "the-mod": "unicum.gg mod",
   "against-everywhere": "Svaka bitka do nas stiže sa svih trideset vozila u njoj, bez botova. Jedna bitka se računa jednom za trajanje, završetak i pobednika, a trideset puta za klase i возила, pa je prvom bloku potrebno mnogo više bitaka nego tabelama ispod da bi pokazao bilo šta."
 }

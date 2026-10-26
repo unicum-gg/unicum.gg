@@ -9,15 +9,15 @@
   "top-battles": "Najlepšie odigraných bitiek na mape {map} v režime {mode}",
   "top-battles-hint": "Najlepšia bitka každého hráča na tejto mape podľa spôsobeného poškodenia. Odpri bitku a zobraz úplné poročilo.",
   "col": {
-    "class": "Trieda",
-    "tier": "Úroveň",
+    "class": "Razred",
+    "tier": "Stopnja",
     "records": "Bitky",
     "records-tip": "Bitky odigranih v tejto triede alebo úrovni na tejto mape, jeden záznam na hráča a bitku.",
     "winrate": "WR",
     "damage": "Poškodenie",
     "assisted": "Asistenca",
     "kills": "Zničené vozidlá",
-    "spotted": "Odhalené",
+    "spotted": "Zasadenia",
     "survival": "Prežitie",
     "xp": "XP",
     "baseline-tip": "Pod každou slika: rozdiel oproti rovnakým vozidlám na všetkých ostatných mapách režimu."
