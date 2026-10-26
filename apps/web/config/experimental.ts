@@ -45,4 +45,14 @@ export const experimental: NextConfig["experimental"] = {
   // one response, so a link costs one round trip instead of three or four.
   // Ships default-off in 16.2 and default-on in 16.3.
   prefetchInlining: true,
+  // Collect unreachable work out of Turbopack's memory and disk caches.
+  //
+  // The dev filesystem cache (`.next/dev/cache/turbopack`, on by default since
+  // 16.1) is append-only without it: ~20 GB a day of dev, and with one `.next`
+  // per agent worktree it filled a 460 GB disk three times between August and
+  // October 2026. 16.3's memory eviction fixed the RAM side (a single dev
+  // server reached 12 GB on 16.2.6) but needs that cache, so turning the cache
+  // off is no longer the answer; collecting it is. Default TTL (3 days) for
+  // roots nothing reaches any more.
+  turbopackGc: true,
 };
