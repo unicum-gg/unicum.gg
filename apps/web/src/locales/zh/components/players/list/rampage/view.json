@@ -8,7 +8,7 @@
     "battles": "战斗场次",
     "survival": "生存",
     "survival-percent": "生存 %",
-    "damage": "平均伤害"
+    "damage": "平均损伤"
   },
   "scale-description": "{mode}排行榜的颜色阈值，根据至少进行过100场{mode}战斗的玩家群体校准。"
 }

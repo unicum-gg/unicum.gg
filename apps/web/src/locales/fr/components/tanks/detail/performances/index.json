@@ -1,7 +1,7 @@
 {
   "assists": "Assists",
   "avg-battles": "Batailles moyennes",
-  "avg-damage": "Dommage moyen",
+  "avg-damage": "Dégâts moyens",
   "best-players-on-ranked-by": "Meilleurs joueurs avec {shortName} sur {region}, classés selon leur évaluation sur ce seul char (min. 100 batailles avec ce char).",
   "blocked": "Bloqués",
   "by": "par",

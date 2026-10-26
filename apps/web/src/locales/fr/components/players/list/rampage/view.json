@@ -8,7 +8,7 @@
     "battles": "Batailles",
     "survival": "Survie",
     "survival-percent": "Taux de survie",
-    "damage": "Dommage moyen"
+    "damage": "Dégâts moyens"
   },
   "scale-description": "Seuils de couleur du classement du mode {mode}, calibrés sur la population des joueurs ayant disputé au moins 100 batailles dans ce mode."
 }

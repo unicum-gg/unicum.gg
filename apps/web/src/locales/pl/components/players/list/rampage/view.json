@@ -8,7 +8,7 @@
     "battles": "Bitwy",
     "survival": "Przeżycie",
     "survival-percent": "Przeżycie %",
-    "damage": "Średnie obrażenia"
+    "damage": "Średnie uszkodzenia"
   },
   "scale-description": "Progi kolorystyczne rankingu trybu {mode}, skalibrowane na podstawie populacji graczy, którzy rozegrali co najmniej 100 bitew w trybie {mode}."
 }

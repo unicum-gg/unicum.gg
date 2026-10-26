@@ -8,7 +8,7 @@
     "tip": "해당 전투의 승률"
   },
   "avgDamage": {
-    "label": "평균 피해"
+    "label": "평균 공격력"
   },
   "avgFrags": {
     "label": "평균 처치",

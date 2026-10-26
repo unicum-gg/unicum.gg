@@ -8,7 +8,7 @@
     "battles": "Bitvy",
     "survival": "Životnost",
     "survival-percent": "Životnost %",
-    "damage": "Průměrná poškození"
+    "damage": "Průměrné poškození"
   },
   "scale-description": "Barevné prahové hodnoty pro žebříček režimu {mode}, kalibrované podle populace hráčů s alespoň 100 bitvami v režimu {mode}."
 }

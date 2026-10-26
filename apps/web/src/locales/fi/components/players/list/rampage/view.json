@@ -8,7 +8,7 @@
     "battles": "Taisteluita",
     "survival": "Selviytyminen",
     "survival-percent": "Selviytyminen %",
-    "damage": "Keskiv. vaurio"
+    "damage": "Keskimääräinen vahinko"
   },
   "scale-description": "Pelimuodon {mode} tulostaulukon värirajat, kalibroitu vähintään 100 {mode}-taistelua pelanneiden pelaajien perusteella."
 }

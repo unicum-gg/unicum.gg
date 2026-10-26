@@ -8,7 +8,7 @@
     "tip": "这些战斗的胜率"
   },
   "avgDamage": {
-    "label": "平均伤害"
+    "label": "平均损伤"
   },
   "avgFrags": {
     "label": "平均击杀",

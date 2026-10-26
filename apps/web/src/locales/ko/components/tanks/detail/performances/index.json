@@ -1,7 +1,7 @@
 {
   "assists": "도움",
   "avg-battles": "평균 전투",
-  "avg-damage": "평균 피해",
+  "avg-damage": "평균 공격력",
   "best-players-on-ranked-by": "{region}의 최고 {shortName} 플레이어, 단일 전차 평점순으로 정렬됨. 해당 전차에서 최소 100회 전투 필요.",
   "blocked": "차단",
   "by": "기준",

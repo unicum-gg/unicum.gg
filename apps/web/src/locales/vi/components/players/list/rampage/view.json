@@ -8,7 +8,7 @@
     "battles": "Số trận",
     "survival": "Tồn tại",
     "survival-percent": "Tồn tại %",
-    "damage": "Thiệt hại trung bình"
+    "damage": "Sát thương Trung bình"
   },
   "scale-description": "Các ngưỡng màu cho bảng {mode}, được hiệu chỉnh theo nhóm người chơi có ít nhất 100 trận đấu {mode}."
 }

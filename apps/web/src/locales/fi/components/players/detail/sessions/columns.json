@@ -8,7 +8,7 @@
     "tip": "Voittoprosentti näistä taisteluista"
   },
   "avgDamage": {
-    "label": "Keskiv. vaurio"
+    "label": "Keskimääräinen vahinko"
   },
   "avgFrags": {
     "label": "Keskimääräiset tappot",
