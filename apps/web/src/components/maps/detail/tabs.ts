@@ -19,8 +19,13 @@
 // section under them lists the random battles people have linked, and a tab
 // called Tactics was telling a reader the five random-battle videos below were
 // not there.
+//
+// Statistics sits second because it is the other tab built from battles rather
+// than from opinions, and it comes and goes like History: a map nobody running
+// the mod has played in the window has no figure to show.
 export enum MapDetailTab {
   Videos = "videos",
+  Statistics = "statistics",
   Community = "community",
   History = "history",
 }
@@ -30,6 +35,7 @@ export const MAP_DETAIL_TABS: {
   segment: string | null;
 }[] = [
   { id: MapDetailTab.Videos, segment: null },
+  { id: MapDetailTab.Statistics, segment: "statistics" },
   { id: MapDetailTab.Community, segment: "community" },
   { id: MapDetailTab.History, segment: "history" },
 ];

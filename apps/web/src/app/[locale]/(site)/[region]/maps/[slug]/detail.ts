@@ -1,8 +1,17 @@
 import { UnicumError } from "@unicum.gg/sdk";
-import type { MapDetail, MapRatingSummary } from "@unicum.gg/shared";
+import {
+  LOADOUT_MODES,
+  LoadoutMode,
+  type MapDetail,
+  type MapRatingSummary,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { MapDetailTab } from "@/components/maps/detail/tabs";
 import type { MapHistoryData } from "@/components/maps/detail/history/data";
+import type {
+  MapStatisticsModeView,
+  MapStatisticsPayload,
+} from "@/components/maps/detail/statistics/view";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { EMPTY_MAP_RATING_SUMMARY } from "@/components/maps/detail/community/empty";
 import { buildSafe, unicum } from "@/services/sdk";
@@ -107,6 +116,72 @@ export async function loadMapRatings(
 }
 
 /**
+ * One mode of the map's recorded battles. Null when the endpoint could not be
+ * read: the tab is then absent rather than drawn on figures that are missing.
+ *
+ * The layout asks for the default mode with the same arguments the tab does,
+ * so Next serves both from one request within a render pass.
+ */
+function askMapStatistics(
+  region: Region,
+  slug: string,
+  mode: LoadoutMode,
+  locale: string,
+): Promise<MapStatisticsPayload | null> {
+  return buildSafe(
+    () =>
+      unicum
+        .region(region)
+        .maps(slug)
+        .statistics({ mode, language: locale })
+        .then((r) => r as unknown as MapStatisticsPayload),
+    null,
+  );
+}
+
+/** The default mode, which carries every mode's sample: what the layout reads
+ * to decide whether this map has a Statistics tab and what number it wears. */
+export function loadMapStatisticsSummary(
+  region: Region,
+  slug: string,
+  locale: string,
+): Promise<MapStatisticsPayload | null> {
+  return askMapStatistics(region, slug, LoadoutMode.Random, locale);
+}
+
+/** Every mode that holds battles on this map, for the Statistics tab. */
+export async function loadMapStatistics(
+  region: Region,
+  slug: string,
+  locale: string,
+): Promise<MapStatisticsModeView[]> {
+  const first = await loadMapStatisticsSummary(region, slug, locale);
+  if (!first) return [];
+  const held = new Set(
+    first.modes.filter((entry) => entry.battles > 0).map((entry) => entry.mode),
+  );
+  const views = await Promise.all(
+    LOADOUT_MODES.filter((mode) => held.has(mode)).map(async (mode) => ({
+      mode,
+      stats:
+        mode === LoadoutMode.Random
+          ? first
+          : await askMapStatistics(region, slug, mode, locale),
+    })),
+  );
+  return views.filter(
+    (view): view is MapStatisticsModeView => view.stats !== null,
+  );
+}
+
+/** Battles recorded on the map across every counted mode. */
+export function mapStatisticsBattles(
+  statistics: MapStatisticsPayload | null,
+): number {
+  return (statistics?.modes ?? []).reduce((n, entry) => n + entry.battles, 0);
+}
+
+/**
  * The tabs this map has something to show for.
  *
  * Tactics and Community are always there, even empty, because that is where
@@ -115,10 +190,18 @@ export async function loadMapRatings(
  * the one that comes and goes, since a map we have never recorded a version of
  * has nothing to put under it, and an empty changes tab says something false
  * (that the map has never been touched) rather than nothing.
+ *
+ * Statistics comes and goes the same way: with no recorded battle in the
+ * window there is no figure to draw, and an empty tab would only say that
+ * nobody running the mod played there lately, which is no fact about the map.
  */
-export function availableMapTabs(history: MapHistoryData): MapDetailTab[] {
+export function availableMapTabs(
+  history: MapHistoryData,
+  statistics: MapStatisticsPayload | null,
+): MapDetailTab[] {
   return [
     MapDetailTab.Videos,
+    ...(mapStatisticsBattles(statistics) > 0 ? [MapDetailTab.Statistics] : []),
     MapDetailTab.Community,
     ...(history?.tracked ? [MapDetailTab.History] : []),
   ];
@@ -140,6 +223,9 @@ export function availableMapTabs(history: MapHistoryData): MapDetailTab[] {
  * their own heading, and a count that excluded them would be smaller than what
  * the page shows.
  *
+ * Statistics counts the battles recorded across every mode, which is what the
+ * tab's own mode switch adds up to.
+ *
  * Votes come off the detail payload rather than the ratings endpoint. The bar
  * renders on every tab of every map, and asking for the full verdict to print
  * one number is the second SSR self-fetch the vehicle layout refuses for the
@@ -151,12 +237,14 @@ export function mapTabCounts(
   detail: MapDetailPayload,
   videos: TankVideoCardData[],
   history: MapHistoryData,
+  statistics: MapStatisticsPayload | null,
 ): Partial<Record<MapDetailTab, number>> {
   const changes =
     (history?.versions ?? []).reduce((n, v) => n + v.changes.length, 0) +
     (history?.testChanges.length ?? 0);
   return {
     [MapDetailTab.Videos]: new Set(videos.map((v) => v.videoId)).size,
+    [MapDetailTab.Statistics]: mapStatisticsBattles(statistics),
     [MapDetailTab.Community]: detail.rating?.votes ?? 0,
     [MapDetailTab.History]: changes,
   };

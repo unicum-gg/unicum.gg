@@ -170,6 +170,7 @@ export function PlayerBattlesTable({
   metric,
   accountId,
   battles,
+  withVehicle = false,
 }: {
   region: Region;
   /** Whose list this is. Absent on a list of different players' battles,
@@ -179,6 +180,10 @@ export function PlayerBattlesTable({
   /** Whose page this is, so their own row stands out in the roster. */
   accountId?: number;
   battles: PlayerBattleRow[];
+  /** Name the vehicle beside a row's `player`. A vehicle's own list leaves it
+   * out, since every row shares it; a map's list shares the map instead, and
+   * the vehicle is then the half worth reading. */
+  withVehicle?: boolean;
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -269,11 +274,40 @@ export function PlayerBattlesTable({
             <span className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-2">
               <span className="flex min-w-0 items-center gap-1.5">
                 {battle.player ? (
-                  <PlayerName
-                    region={region}
-                    player={battle.player.identity}
-                    href={battle.player.href}
-                  />
+                  <>
+                    <PlayerName
+                      region={region}
+                      player={battle.player.identity}
+                      href={battle.player.href}
+                    />
+                    {withVehicle && battle.tank ? (
+                      <span className="text-fd-muted-foreground flex min-w-0 items-center gap-1.5 text-xs">
+                        <span className="shrink-0">{toRoman(battle.tank.tier)}</span>
+                        <TankIcon
+                          region={region}
+                          tag={battle.tank.tag}
+                          type={battle.tank.type}
+                          className="h-3 w-auto shrink-0 object-contain"
+                        />
+                        {battle.tank.slug ? (
+                          <Link
+                            href={ROUTES.PLAYER_TANK(
+                              region,
+                              battle.player.identity.nickname,
+                              battle.tank.slug,
+                            )}
+                            className="truncate hover:underline"
+                          >
+                            {battle.tank.shortName || battle.tank.name}
+                          </Link>
+                        ) : (
+                          <span className="truncate">
+                            {battle.tank.shortName || battle.tank.name}
+                          </span>
+                        )}
+                      </span>
+                    ) : null}
+                  </>
                 ) : battle.tank ? (
                   <>
                     <VehicleTypeIcon type={battle.tank.type} />

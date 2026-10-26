@@ -47,7 +47,7 @@ import type { TankLoadoutModeView, TankLoadoutsPayload } from "./view";
  */
 /** Where each mode's name is read in `game/vocabulary`: the game's own words,
  * in the reader's language, as the profile's mode tabs already name them. */
-const MODE_NAME_KEY: Record<LoadoutMode, string> = {
+export const LOADOUT_MODE_NAME_KEY: Record<LoadoutMode, string> = {
   [LoadoutMode.Random]: "player-modes.overall",
   [LoadoutMode.Onslaught]: "player-modes.onslaught",
   [LoadoutMode.Skirmish]: "player-modes.skirmish",
@@ -103,7 +103,7 @@ export async function LoadoutsTab({
       title={t("title", { tank: tankName })}
       initial={initial}
       modes={held.map((view) => {
-        const modeName = tGame(MODE_NAME_KEY[view.mode]);
+        const modeName = tGame(LOADOUT_MODE_NAME_KEY[view.mode]);
         return {
           label: modeName,
           players: view.stats.sample,
@@ -123,6 +123,7 @@ export async function LoadoutsTab({
               slug={slug}
               naming={naming}
               stats={view.stats}
+              heading={(key) => t(key, { tank: tankName, mode: modeName })}
               t={t}
             />
           ),
@@ -139,12 +140,15 @@ async function ModePanels({
   slug,
   naming,
   stats,
+  heading,
   t,
 }: {
   region: Region;
   slug: string;
   naming: LoadoutNaming;
   stats: TankLoadoutsPayload;
+  /** A heading key, filled with this vehicle and this mode. */
+  heading: (key: string) => string;
   t: Awaited<ReturnType<typeof getTranslation>>["t"];
 }) {
   const views = buildViews(stats, naming);
@@ -170,7 +174,7 @@ async function ModePanels({
   return (
     <>
       <LoadoutFamilies
-        title={t("what-they-fit")}
+        title={heading("what-they-fit")}
         families={[
           {
             id: "equipment",
@@ -206,7 +210,7 @@ async function ModePanels({
         <>
           <PanelSeparator />
           <LoadoutFamilies
-            title={t("crew-skills")}
+            title={heading("crew-skills")}
             families={views.crew.map((seat) => ({
               id: seat.role,
               label: seat.roleLabel,
@@ -227,7 +231,7 @@ async function ModePanels({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>{t("top-players")}</PanelTitle>
+              <PanelTitle>{heading("top-players")}</PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <p className="px-4 py-3 text-sm text-fd-muted-foreground">
@@ -256,7 +260,7 @@ async function ModePanels({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>{t("top-battles")}</PanelTitle>
+              <PanelTitle>{heading("top-battles")}</PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <p className="border-b border-fd-border px-4 py-3 text-sm text-fd-muted-foreground">

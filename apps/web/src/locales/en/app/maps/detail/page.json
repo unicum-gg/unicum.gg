@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks map ({region})",
   "description": "{map}: a {width} × {height} m World of Tanks map.",
   "description-modes": "{map}: a {width} × {height} m World of Tanks map playing {modes}.",
+  "statistics": {
+    "title": "{map} statistics ({region}): spawn win rate, classes and best tanks",
+    "description": "How battles on {map} actually go, counted from recorded battles: average length, how they end, which spawn wins, how each vehicle class and tier does there against the same tanks on other maps, and the best tanks and battles on it."
+  },
   "community": {
     "title": "{map} player reviews and community rating ({region})",
     "description": "What players think of {map}: the community’s rating out of five, split by how well the voters play, with written verdicts from accounts that have the battles behind them. Balance, variety, flow and whether every vehicle class has a job there."

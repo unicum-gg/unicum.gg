@@ -35,6 +35,7 @@ import {
   LoadoutItemKind,
   LoadoutMode,
 } from "@unicum.gg/shared/wot/loadout-stats";
+import { MapFinishReason } from "@unicum.gg/shared/wot/maps/statistics";
 import { TankBattleMode } from "@unicum.gg/shared/wot/tank-modes";
 import { LanguageSource } from "@unicum.gg/shared/wot/language-flags";
 import { TankAxis } from "@unicum.gg/shared/wot/tank-spec-fields";
@@ -105,6 +106,7 @@ export const OPENAPI_ENUM_SOURCES = {
   PAINT_LOCK: Object.values(PaintLock),
   LOADOUT_ITEM_KIND: Object.values(LoadoutItemKind),
   LOADOUT_MODE: Object.values(LoadoutMode),
+  MAP_FINISH_REASON: Object.values(MapFinishReason),
   LANGUAGE_SOURCE: Object.values(LanguageSource),
   TANK_AXIS: Object.values(TankAxis),
   TANK_BATTLE_MODE: Object.values(TankBattleMode),

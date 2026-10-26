@@ -1,0 +1,17 @@
+{
+  "duration": "Average length",
+  "duration-hint": "Minutes and seconds, from the countdown’s end to the result.",
+  "ending": "How it ends",
+  "finish": {
+    "extermination": "A team destroyed",
+    "base": "Base captured",
+    "timeout": "Time ran out",
+    "other": "Other"
+  },
+  "spawns": "Wins by spawn",
+  "team": "Team {n}",
+  "draws": "Draws",
+  "count-of": "{count} of {total}",
+  "spawns-hint": "Teams are assigned at random, so a lasting gap here is about the map.",
+  "spawns-small": "Too few battles yet to tell a balanced map from a lopsided one."
+}

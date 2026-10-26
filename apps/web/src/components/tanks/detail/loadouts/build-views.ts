@@ -139,7 +139,9 @@ function crewRows(
  * The identity is built literally rather than through `identityFromRow`: the
  * payload is camelCase, and that helper reads snake_case on purpose.
  */
-function topBattleRows(stats: TankLoadoutsPayload): PlayerBattleRow[] {
+export function topBattleRows(
+  stats: Pick<TankLoadoutsPayload, "topBattles">,
+): PlayerBattleRow[] {
   return stats.topBattles.map(({ player, battle }) => ({
     ...battle,
     player: {

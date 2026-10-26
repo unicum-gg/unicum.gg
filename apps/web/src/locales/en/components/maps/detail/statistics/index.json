@@ -1,0 +1,25 @@
+{
+  "title": "{map} in numbers",
+  "overview": "How a battle unfolds on {map} in {mode}",
+  "by-class": "Which classes do well on {map} in {mode}",
+  "by-class-hint": "How each class does on this map. Under each figure, the gap to the same vehicles on every other map of the mode, weighted the same way, so it says something about the map rather than about which tanks were sent to it.",
+  "by-tier": "How each tier fares on {map} in {mode}",
+  "by-vehicle": "The best vehicles on {map} in {mode}",
+  "by-vehicle-hint": "Ranked on their rating on this map, with the vehicles fewer than five players took here listed after the others. Beside it, the same vehicle on every map of the mode: the gap is what says the map suits it.",
+  "top-battles": "The best battles fought on {map} in {mode}",
+  "top-battles-hint": "Each player’s best battle on this map by damage dealt. Open a battle for its full report.",
+  "col": {
+    "class": "Class",
+    "tier": "Tier",
+    "records": "Battles",
+    "records-tip": "Battles fought in this class or tier on this map, one per player per battle.",
+    "winrate": "WR",
+    "damage": "Damage",
+    "assisted": "Assist",
+    "kills": "Frags",
+    "spotted": "Spots",
+    "survival": "Survived",
+    "xp": "XP",
+    "baseline-tip": "Under each figure: the gap to the same vehicles on every other map of the mode."
+  }
+}

@@ -13,3 +13,4 @@ export * from "./history-snapshot";
 export * from "./history-fields";
 export * from "./history-diff";
 export * from "./ratings";
+export * from "./statistics";

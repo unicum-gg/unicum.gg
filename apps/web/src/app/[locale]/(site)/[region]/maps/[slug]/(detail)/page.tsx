@@ -13,6 +13,7 @@ import {
   loadMapDetail,
   loadMapHistory,
   loadMapRatings,
+  loadMapStatisticsSummary,
   loadMapVideos,
   type MapDetailPayload,
 } from "@/app/[locale]/(site)/[region]/maps/[slug]/detail";
@@ -114,7 +115,7 @@ export async function mapMetadata(
  * legacy arena-id (or non-canonical) URL goes to the readable slug with a 308,
  * carrying the tab, and a tab this map has nothing for falls back to the first
  * one it does have. The second is not permanent: a map we have recorded no
- * version of today can have one next update.
+ * version or no battle of today can have one tomorrow.
  */
 export async function loadMapTab(
   region: Region,
@@ -132,7 +133,11 @@ export async function loadMapTab(
       ),
     );
 
-  const available = availableMapTabs(await loadMapHistory(region, detail.slug));
+  const [history, statistics] = await Promise.all([
+    loadMapHistory(region, detail.slug),
+    loadMapStatisticsSummary(region, detail.slug, locale),
+  ]);
+  const available = availableMapTabs(history, statistics);
   if (!available.includes(tab))
     redirect(
       localizePath(

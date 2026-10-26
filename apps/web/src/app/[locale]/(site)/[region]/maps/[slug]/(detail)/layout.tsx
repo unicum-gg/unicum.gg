@@ -7,6 +7,7 @@ import {
   availableMapTabs,
   loadMapDetail,
   loadMapHistory,
+  loadMapStatisticsSummary,
   loadMapVideos,
   mapTabCounts,
 } from "@/app/[locale]/(site)/[region]/maps/[slug]/detail";
@@ -38,13 +39,15 @@ export default async function MapLayout({
   const detail = await loadMapDetail(region, slug);
   if (!detail) notFound();
 
-  // Both are read for the tab bar: `tracked` decides whether this map has a
-  // History tab at all, and the two payloads carry the numbers beside the tab
-  // names. The tabs themselves read the same calls, and Next memoizes them
-  // within a render pass, so on the tab that needs one it is the same request.
-  const [history, videos] = await Promise.all([
+  // All three are read for the tab bar: `tracked` decides whether this map has
+  // a History tab at all, the recorded battles whether it has a Statistics
+  // one, and the payloads carry the numbers beside the tab names. The tabs
+  // themselves read the same calls, and Next memoizes them within a render
+  // pass, so on the tab that needs one it is the same request.
+  const [history, videos, statistics] = await Promise.all([
     loadMapHistory(region, detail.slug),
     loadMapVideos(region, detail.slug),
+    loadMapStatisticsSummary(region, detail.slug, locale),
   ]);
 
   // Resolved on the server: the blurbs are 20 KB the browser would otherwise
@@ -60,8 +63,8 @@ export default async function MapLayout({
         description: mapDescription(detail.arenaId, detail.description, tBlurbs),
       }}
       region={region}
-      available={availableMapTabs(history)}
-      counts={mapTabCounts(detail, videos, history)}
+      available={availableMapTabs(history, statistics)}
+      counts={mapTabCounts(detail, videos, history, statistics)}
     >
       {children}
     </MapShell>
