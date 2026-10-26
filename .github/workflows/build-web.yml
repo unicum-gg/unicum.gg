@@ -96,15 +96,34 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # The build prerenders pages against the live database, and a runner cannot
-      # open 5432 on the host: something upstream of the machine drops it, with
-      # tcpdump seeing no SYN arrive at all, while 22, 80 and 443 answer in
-      # milliseconds. So Postgres is reached through SSH rather than exposed on
-      # another port.
+      # open 5432 on the host. Two separate reasons, and only the second is ours.
+      # Measured from a runner on 2026-08-21: no SYN arrived at all, tcpdump on
+      # the host seeing nothing while 22, 80 and 443 answered in milliseconds, so
+      # something between GitHub's ranges and the machine was dropping it. That
+      # observation was specific to those ranges and was never true in general,
+      # which the header used to imply. Since 2026-10-26 it is true in general
+      # and because we made it so: 5432 and 6379 are closed to everything but one
+      # address, after 19,999 authentication failures in 24 hours from three
+      # hosts, so no runner is ever getting a direct connection again.
+      #
+      # So Postgres is reached through SSH rather than exposed on another port,
+      # which is now the only way in rather than a workaround for one network.
       #
       # The key is restricted on the server side to exactly this and nothing more
-      # (`restrict,permitopen="127.0.0.1:5432",command="/bin/false"`): it cannot
-      # open a shell, and it cannot forward anywhere except Postgres. That makes
-      # this stricter than the public port it replaces, not looser.
+      # (`restrict,port-forwarding,permitopen="127.0.0.1:5432",command="/bin/false"`):
+      # it cannot open a shell, and it cannot forward anywhere except Postgres.
+      # That makes this stricter than the public port it replaces, not looser.
+      #
+      # `port-forwarding` is not redundant beside `permitopen`, which is the one
+      # thing here that cannot be read off the manual and has to be measured.
+      # `restrict` disables forwarding outright and `permitopen` only narrows
+      # which targets a key that may forward is allowed to reach, so it does not
+      # grant back what `restrict` took: without it the channel is refused for
+      # Postgres too. The refusal is also the shape that misleads, since the
+      # listener is local and binds whatever the server decides, so `nc -z`
+      # reports a tunnel that is up and the connection resets on the first byte.
+      # Verified on the host on 2026-10-26: Postgres answers an SSLRequest
+      # through the forward, 6379 resets, and `id` returns nothing at all.
       - name: Tunnel to postgres
         env:
           CI_TUNNEL_KEY: ${{ secrets.CI_TUNNEL_KEY }}
