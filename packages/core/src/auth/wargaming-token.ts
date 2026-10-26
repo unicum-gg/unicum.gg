@@ -12,7 +12,7 @@ import { Region } from "@unicum.gg/wargaming";
 const PROVIDER_ID = "wargaming";
 // Refresh the token when it has less than this left, so a daily workflow
 // never runs into a mid-window expiry. WG tokens live ~2 weeks.
-const PROLONGATE_WHEN_UNDER_MS = 3 * 24 * 60 * 60 * 1000;
+export const PROLONGATE_WHEN_UNDER_MS = 3 * 24 * 60 * 60 * 1000;
 
 export type WargamingTokenResult =
   | { ok: true; token: string; accountId: number; region: Region }

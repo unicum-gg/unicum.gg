@@ -6,6 +6,7 @@ import {
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { refreshPlayerGarage } from "@unicum.gg/core/players/garage";
+import { PROLONGATE_WHEN_UNDER_MS } from "@unicum.gg/core/auth/wargaming-token";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { Region } from "@unicum.gg/wargaming";
 
@@ -15,9 +16,15 @@ import { Region } from "@unicum.gg/wargaming";
  * A week, because a garage moves when its owner buys or sells something and
  * neither is an hourly event, while the cost of being wrong is small and
  * visible: the profile publishes the date it was verified, so a week-old
- * reading reads as a week-old reading. The tokens themselves live about two
- * weeks and are prolongated once under three days remain, so this cadence also
- * keeps every linked account's token alive on its own.
+ * reading reads as a week-old reading.
+ *
+ * This age alone does NOT keep the token alive, which it was once believed to.
+ * A token lives about two weeks and is only prolongated once under three days
+ * remain, so a reading taken with four to seven days left skips the
+ * prolongation, the next one falls due after the expiry, and the account is
+ * frozen until its owner signs in again (observed 2026-10: read on the 12th
+ * with six days left, expired on the 18th, re-read never). `isDue` therefore
+ * also claims every account whose token is inside that window.
  */
 const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -25,7 +32,12 @@ const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
  * this is a ceiling against a future where it is not, rather than a batch. */
 const BATCH = 200;
 
-type LinkedAccount = { userId: string; region: Region; accountId: number };
+type LinkedAccount = {
+  userId: string;
+  region: Region;
+  accountId: number;
+  tokenExpiresAt: Date;
+};
 
 /**
  * Every account signed in with Wargaming.net ID whose token has not already
@@ -40,6 +52,7 @@ async function listLinkedAccounts(): Promise<LinkedAccount[]> {
     .select({
       userId: accountTable.userId,
       key: accountTable.accountId,
+      tokenExpiresAt: accountTable.accessTokenExpiresAt,
     })
     .from(accountTable)
     .where(
@@ -53,7 +66,13 @@ async function listLinkedAccounts(): Promise<LinkedAccount[]> {
   const out: LinkedAccount[] = [];
   for (const row of rows) {
     const identity = wgIdentityFromAccountKey(row.key);
-    if (identity) out.push({ userId: row.userId, ...identity });
+    if (identity && row.tokenExpiresAt) {
+      out.push({
+        userId: row.userId,
+        ...identity,
+        tokenExpiresAt: row.tokenExpiresAt,
+      });
+    }
   }
   return out;
 }
@@ -105,13 +124,20 @@ export async function syncLinkedGarages(
 
   const accounts = await listLinkedAccounts();
   const verifiedAt = await loadVerifiedAt(accounts);
-  const cutoff = Date.now() - maxAge;
+  const now = Date.now();
+  const cutoff = now - maxAge;
+
+  // A stale garage, or a token close enough to its expiry that reading the
+  // garage now is what prolongates it. The pass is daily and the window three
+  // days, so every token crosses it at least twice before it can lapse.
+  const isDue = (a: LinkedAccount): boolean => {
+    const seen = verifiedAt.get(`${a.region}-${a.accountId}`);
+    if (!seen || seen.getTime() < cutoff) return true;
+    return a.tokenExpiresAt.getTime() - now < PROLONGATE_WHEN_UNDER_MS;
+  };
 
   const due = accounts
-    .filter((a) => {
-      const seen = verifiedAt.get(`${a.region}-${a.accountId}`);
-      return !seen || seen.getTime() < cutoff;
-    })
+    .filter(isDue)
     // Never read first, then the oldest reading. A player who has just signed
     // in is already covered by the callback, so this ordering puts the accounts
     // nothing else will reach at the front.
