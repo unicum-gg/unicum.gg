@@ -38,10 +38,31 @@ name: Build web image
 # off is /dev/shm pressure from ~24 concurrent prerenders on the deploy host, and
 # with two workers here that pressure is not the same problem.
 #
-# Restore the push trigger below once a build comes out with zero
-# "prerendering empty" in its log.
+# The push trigger is on as of 2026-10-26, after two consecutive runs came out
+# with zero "prerendering empty": 482/482 pages, no ECONNRESET, 18 min on a cold
+# layer cache and 9 on a warm one. It had been dispatch-only since 2026-08-22.
+#
+# It BUILDS on every push and deploys nothing. The host still builds and still
+# deploys, exactly as before, so this changes nothing about how production is
+# served: it publishes an image beside it and makes the pipeline visible on real
+# commits rather than on the dispatches of whoever remembers to run one. That is
+# the whole point of turning it on before the switch, because the failure this
+# pipeline actually had was nobody noticing it was broken for two months.
+#
+# The paths mirror the Coolify app's own `watch_paths`, so the two cannot
+# disagree about what counts as a change to the web app.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      # The recipe itself, which neither Coolify nor the app tree covers.
+      - ".github/workflows/build-web.yml"
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}-web
