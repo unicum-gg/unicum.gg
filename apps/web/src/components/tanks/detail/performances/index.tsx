@@ -69,7 +69,7 @@ export async function Performances({
         <>
           <Panel>
             <PanelHeader>
-              <PanelTitle>{t("server-average", { name: meta.name })}</PanelTitle>
+              <PanelTitle>{t("server-average", { tank: meta.name })}</PanelTitle>
             </PanelHeader>
             <PanelContent className="space-y-3 p-4">
               <p className="text-sm text-fd-muted-foreground">
@@ -267,7 +267,7 @@ export async function Performances({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>{t("expected-values", { name: meta.name })}</PanelTitle>
+              <PanelTitle>{t("expected-values", { tank: meta.name })}</PanelTitle>
             </PanelHeader>
             <PanelContent className="space-y-4 p-4">
               <p className="text-sm text-fd-muted-foreground">

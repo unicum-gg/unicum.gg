@@ -1,6 +1,5 @@
 {
   "title": "Mitä pelaajat asentavat panssarivaunuun nimeltä {tank}",
-  "what-they-fit": "Varustukset",
   "equipment": "Varusteet",
   "consumables": "Kulutustarvikkeet",
   "directives": "Direktiivit",
@@ -22,7 +21,6 @@
     "battles": "Taisteluita",
     "skill": "Taito"
   },
-  "crew-skills": "Miehistön taidot",
   "crew-skills-hint": "Kukin taito, jonka {role} oli kouluttanut, laskettuna niiden pelaajien joukossa, joiden miehistössä on kyseinen paikka, sekä vieressä taisteluiden tulokset sen kanssa.",
   "counted": {
     "equipment": "Lasketaan kokonaisina kolmen laitteen sarjoina, kuten pelaajat ne asentavat, niiden pelaajien joukossa, jotka käyttivät kutakin sarjaa.",
@@ -30,10 +28,8 @@
     "directives": "Lasketaan yksi direktiivi kerrallaan niiden pelaajien joukossa, jotka käyttivät sitä.",
     "field-mods": "Lasketaan kokonaisina kenttämodifikaatiopuina, jokainen pari sellaisena kuin pelaaja sen valitsi, niiden pelaajien joukossa, jotka käyttivät kutakin puuta."
   },
-  "top-battles": "Parhaat taistelut",
   "top-battles-hint": "Kunkin pelaajan paras taistelu tällä panssarivaunulla aiheutetun vahingon perusteella sekä täsmälleen se, mitä hän siihen asensi. Avaa taistelu nähdäksesi sen täydellisen raportin.",
   "thin-row": "Alle {count} pelaajaa käytti tätä, joten nämä luvut kertovat enemmän heistä kuin kokoonpanosta.",
-  "top-players": "Parhaat pelaajat",
   "top-players-hint": "Parhaat pelaajat tällä panssarivaunulla niiden joukosta, joiden taistelut on tallennettu, rankattuna heidän koko ennätyksensä perusteella tällä panssarivaunulla ja varustettuna tiedoilla heidän viimeisimmän tallennetun taistelunsa kokoonpanosta. Avaa rivi nähdäksesi heidän miehistönsä.",
   "crew": "Miehistö",
   "show-crew": "Näytä miehistö"

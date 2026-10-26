@@ -5,7 +5,7 @@
   "every-server-one-average": "Every server, one average",
   "n-shown": ", {count} shown",
   "opinion": "{count, plural, one {# opinion} other {# opinions}}",
-  "rate-the": "Rate {mapName}",
+  "rate-the": "What do you think of {mapName}?",
   "same-map-different-metas": "Same ground, different metas",
   "the-same-map-by-how": "The same map, by how well the voter plays",
   "what-players-wrote": "What players wrote",

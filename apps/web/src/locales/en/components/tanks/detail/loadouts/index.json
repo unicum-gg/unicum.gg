@@ -1,6 +1,6 @@
 {
   "title": "What players fit to the {tank}",
-  "what-they-fit": "Loadouts",
+  "what-they-fit": "The setups players run on the {tank} in {mode}",
   "equipment": "Equipment",
   "consumables": "Consumables",
   "directives": "Directives",
@@ -22,7 +22,7 @@
     "battles": "Battles",
     "skill": "Skill"
   },
-  "crew-skills": "Crew skills",
+  "crew-skills": "The crew skills trained on the {tank} in {mode}",
   "crew-skills-hint": "Each skill the {role} had trained, counted in players whose crew has that seat, beside how the battles fought with it went.",
   "counted": {
     "equipment": "Counted as whole sets of three devices, the way players fit them, in players who ran each set.",
@@ -30,10 +30,10 @@
     "directives": "Counted one directive at a time, in players who ran it.",
     "field-mods": "Counted as whole field modification trees, every pair as the player took it, in players who ran each tree."
   },
-  "top-battles": "Best battles",
+  "top-battles": "The best battles fought in the {tank} in {mode}",
   "top-battles-hint": "Each player’s best battle in this tank by damage dealt, and exactly what they fitted for it. Open a battle for its full report.",
   "thin-row": "Fewer than {count} players ran this, so these figures say more about them than about the setup.",
-  "top-players": "Best players",
+  "top-players": "The best {tank} players in {mode}",
   "top-players-hint": "The best players in this tank among those whose battles are recorded, ranked on their whole record in it, with what they fitted in their latest recorded battle. Open a row for their crew.",
   "crew": "Crew",
   "show-crew": "Show the crew"

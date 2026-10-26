@@ -1,6 +1,5 @@
 {
   "title": "Što igrači ugrađuju u tenk {tank}",
-  "what-they-fit": "Konfiguracije",
   "equipment": "Oprema",
   "consumables": "Potrošni materijal",
   "directives": "Smjernice",
@@ -22,7 +21,6 @@
     "battles": "Bitke",
     "skill": "Vještina"
   },
-  "crew-skills": "Vještine posade",
   "crew-skills-hint": "Svaka vještina koju je član posade za ulogu {role} imao uvježbanu, brojano među igračima čija posada ima to mjesto, uz podatak kako su prošle bitke odigrane s njom.",
   "counted": {
     "equipment": "Brojano kao cijeli setovi od tri uređaja, na način na koji ih igrači ugrađuju, među igračima koji su koristili svaki set.",
@@ -30,10 +28,8 @@
     "directives": "Brojano po jednoj smjernici, među igračima koji su je koristili.",
     "field-mods": "Brojano kao cijela stabla modifikacija polja, svaki par onako kako ga je igrač odabrao, među igračima koji su koristili svako stablo."
   },
-  "top-battles": "Najbolje bitke",
   "top-battles-hint": "Najbolja bitka svakog igrača u ovom tenku prema nanesenoj šteti i točno ono što je za nju ugradio. Otvori bitku za njezino potpuno izvješće.",
   "thin-row": "Manje od {count} igrača koristilo je ovo, pa ove brojke više govore o njima nego o konfiguraciji.",
-  "top-players": "Najbolji igrači",
   "top-players-hint": "Najbolji igrači u ovom tenku među onima čije su bitke zabilježene, rangirani prema ukupnom rekordu u njemu, uz ono što su ugradili u svojoj posljednjoj zabilježenoj bitci. Otvori redak za njihovu posadu.",
   "crew": "Posada",
   "show-crew": "Prikaži posadu"

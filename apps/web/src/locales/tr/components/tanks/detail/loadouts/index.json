@@ -1,6 +1,5 @@
 {
   "title": "Oyuncuların {tank} tankına taktıkları",
-  "what-they-fit": "Donanımlar",
   "equipment": "Donanım",
   "consumables": "Sarf Malzemeleri",
   "directives": "Yönergeler",
@@ -22,7 +21,6 @@
     "battles": "Savaşlar",
     "skill": "Beceri"
   },
-  "crew-skills": "Mürettebat becerileri",
   "crew-skills-hint": "Mürettebatında bu koltuğun bulunduğu oyuncular arasında, {role} için eğitilmiş her beceri ve bu beceriyle yapılan savaşların sonuçları.",
   "counted": {
     "equipment": "Oyuncuların taktığı şekilde, üç cihazdan oluşan tüm setler olarak, her seti kullanan oyuncular arasında sayılmıştır.",
@@ -30,10 +28,8 @@
     "directives": "Her yönerge, onu kullanan oyuncular arasında tek tek sayılmıştır.",
     "field-mods": "Oyuncuların seçtiği her ikili olacak şekilde, tüm alan modifikasyonu ağaçları olarak, her ağacı kullanan oyuncular arasında sayılmıştır."
   },
-  "top-battles": "En iyi savaşlar",
   "top-battles-hint": "Her oyuncunun bu tanktaki, verilen hasara göre en iyi savaşı ve o savaş için tam olarak ne taktığı. Tam raporu açmak için bir savaşı açın.",
   "thin-row": "Bunu {count} değerinden az oyuncu oynadı. Bu nedenle bu değerler kurulumdan çok onlar hakkında bilgi verir.",
-  "top-players": "En iyi oyuncular",
   "top-players-hint": "Savaşları kaydedilen oyuncular arasından bu tanktaki en iyi oyuncular, tanktaki tüm rekorlarına göre derecelendirilmiştir. En son kaydedilen savaşlarında taktıkları da gösterilir. Mürettebatlarını görmek için bir satırı açın.",
   "crew": "Mürettebat",
   "show-crew": "Mürettebatı göster"

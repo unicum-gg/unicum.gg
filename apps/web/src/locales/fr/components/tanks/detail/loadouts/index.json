@@ -1,6 +1,5 @@
 {
   "title": "Configurations montées par les joueurs sur {tank}",
-  "what-they-fit": "Configurations",
   "equipment": "Équipement",
   "consumables": "Consommables",
   "directives": "Directives",
@@ -22,7 +21,6 @@
     "battles": "Batailles",
     "skill": "Compétence"
   },
-  "crew-skills": "Compétences de l’équipage",
   "crew-skills-hint": "Chaque compétence entraînée par l’équipage au poste de {role}, comptabilisée chez les joueurs dont l’équipage dispose de ce poste, à côté du déroulement des batailles menées avec celle-ci.",
   "counted": {
     "equipment": "Comptabilisés par ensembles complets de trois équipements, comme les joueurs les montent, chez les joueurs qui utilisent chaque ensemble.",
@@ -30,10 +28,8 @@
     "directives": "Comptabilisés directive par directive, chez les joueurs qui l’utilisent.",
     "field-mods": "Comptabilisés comme des arbres complets de modifications de terrain, chaque paire telle que le joueur l’a choisie, chez les joueurs qui utilisent chaque arbre."
   },
-  "top-battles": "Meilleures batailles",
   "top-battles-hint": "La meilleure bataille de chaque joueur avec ce char en fonction des dégâts infligés, ainsi que tout ce qu’il y avait monté. Ouvrez une bataille pour consulter son rapport complet.",
   "thin-row": "Moins de {count} joueurs ont utilisé cette configuration, ces chiffres en disent donc davantage sur eux que sur la configuration.",
-  "top-players": "Meilleurs joueurs",
   "top-players-hint": "Les meilleurs joueurs dans ce char parmi ceux dont les batailles sont enregistrées, classés selon leur record complet avec ce char, avec ce qu’ils ont monté lors de leur dernière bataille enregistrée. Ouvrez une ligne pour leur équipage.",
   "crew": "Équipage",
   "show-crew": "Afficher l’équipage"

@@ -1,6 +1,5 @@
 {
   "title": "O que os jogadores equiparam no tanque {tank}",
-  "what-they-fit": "Configurações",
   "equipment": "Equipamento",
   "consumables": "Consumíveis",
   "directives": "Directivas",
@@ -22,7 +21,6 @@
     "battles": "Batalhas",
     "skill": "Habilidade"
   },
-  "crew-skills": "Habilidades da tripulação",
   "crew-skills-hint": "Cada habilidade que a função {role} tinha treinado, contabilizada nos jogadores cuja tripulação tem esse posto, ao lado de como decorreram as batalhas jogadas com ela.",
   "counted": {
     "equipment": "Contabilizado como conjuntos inteiros de três equipamentos, da forma como os jogadores os equipam, nos jogadores que utilizaram cada conjunto.",
@@ -30,10 +28,8 @@
     "directives": "Contabilizado uma Directiva de cada vez, nos jogadores que a utilizaram.",
     "field-mods": "Contabilizado como árvores inteiras de modificações de campo, cada par conforme o jogador o escolheu, nos jogadores que utilizaram cada árvore."
   },
-  "top-battles": "Melhores batalhas",
   "top-battles-hint": "A melhor batalha de cada jogador com este tanque pelo dano causado, e exatamente o que equiparam nela. Abrir uma batalha para ver o relatório completo.",
   "thin-row": "Menos de {count} jogadores utilizaram isto, por isso estes valores dizem mais sobre eles do que sobre a configuração.",
-  "top-players": "Melhores jogadores",
   "top-players-hint": "Os melhores jogadores neste tanque entre aqueles cujas batalhas estão registradas, classificados pelo seu recorde geral nele, com o que equiparam na sua batalha registrada mais recente. Abrir uma linha para ver a sua tripulação.",
   "crew": "Tripulação",
   "show-crew": "Mostrar a tripulação"

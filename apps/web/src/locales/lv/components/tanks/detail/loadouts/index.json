@@ -1,6 +1,5 @@
 {
   "title": "Ko spēlētāji uzstāda tankam {tank}",
-  "what-they-fit": "Komplektācijas",
   "equipment": "Moduļi",
   "consumables": "Aprīkojums",
   "directives": "Direktīvas",
@@ -22,7 +21,6 @@
     "battles": "Kaujas",
     "skill": "Prasme"
   },
-  "crew-skills": "Apkalpes prasmes",
   "crew-skills-hint": "Katra prasme, ko loma {role} bija apguvusi, uzskaitīta pie spēlētājiem, kuru apkalpei ir šī vieta, blakus tam, kā veicās ar to izspēlētajās kaujās.",
   "counted": {
     "equipment": "Uzskaitīts kā veseli trīs ierīču komplekti, tā, kā spēlētāji tos uzstādīja, pie spēlētājiem, kuri izmantoja katru komplektu.",
@@ -30,10 +28,8 @@
     "directives": "Uzskaitīts pa vienai direktīvai pie spēlētājiem, kuri to izmantoja.",
     "field-mods": "Uzskaitīts kā veseli lauka modifikāciju koki, katrs pāris tā, kā spēlētājs to izvēlējās, pie spēlētājiem, kuri izmantoja katru koku."
   },
-  "top-battles": "Labākās kaujas",
   "top-battles-hint": "Katra spēlētāja labākā kauja ar šo tanku pēc nodarītajiem bojājumiem un precīzi tas, ko viņš tai uzstādīja. Atveriet kauju, lai skatītu pilnu pārskatu.",
   "thin-row": "To izmantoja mazāk nekā {count} spēlētāji, tāpēc šie rādītāji vairāk raksturo viņus, nevis konfigurāciju.",
-  "top-players": "Labākie spēlētāji",
   "top-players-hint": "Labākie spēlētāji ar šo tanku starp tiem, kuru kaujas ir reģistrētas, ranžēti pēc visa viņu rekorda ar to, norādot, ko viņi uzstādīja savā pēdējā reģistrētajā kaujā. Atveriet rindu, lai skatītu viņu apkalpi.",
   "crew": "Apkalpe",
   "show-crew": "Rādīt apkalpi"

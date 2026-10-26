@@ -4,7 +4,7 @@
     "hide": "Hide chat",
     "show-streamers": "Show streamers"
   },
-  "heading": "{name}: World of Tanks player, clan and tank stats",
+  "heading": "World of Tanks player, clan and tank stats on {name}",
   "hide": "Hide streamers",
   "player": "Player",
   "stream-language": "Stream language · {name}",

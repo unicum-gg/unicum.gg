@@ -150,7 +150,7 @@ function MapVideos({
           <Panel>
             <VideoSection
               region={region}
-              title={t("random-battles")}
+              title={t("random-battles", { map: map.name })}
               countLabel={(count) =>
                 t(
                   count === 1

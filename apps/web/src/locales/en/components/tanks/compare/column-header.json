@@ -9,7 +9,7 @@
   "duplicate-tank": "Compare {tank} against itself",
   "highest-overall-score": "Highest overall score",
   "highest-overall-score-of-this": "Highest overall score of this comparison",
-  "is-the-reference": "{tank} is the reference",
+  "is-the-reference": "Compared against the {tank}",
   "overall": "Overall",
   "reference-column": "Reference column",
   "remove-tank": "Remove {tank}",
@@ -17,7 +17,7 @@
   "setup": "Setup",
   "setup-n": "Setup {n}",
   "stock": "Stock",
-  "tank-setup": "{tank} setup",
+  "tank-setup": "Setup of the {tank}",
   "the-same-vehicle-under-a-setup": "The same vehicle under a setup of its own",
   "top": "Top",
   "where-this-vehicle-sits-across": "Where this vehicle sits across the whole catalogue, out of {MAXSCORE}: the average of its four category scores, as configured here. A summary, not a verdict, a scout and a heavy reach the same number by being good at different things."

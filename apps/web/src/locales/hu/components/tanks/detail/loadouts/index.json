@@ -1,6 +1,5 @@
 {
   "title": "Mit szereltek fel a játékosok a(z) {tank} esetében",
-  "what-they-fit": "Felszerelések",
   "equipment": "Felszerelés",
   "consumables": "Fogyócikkek",
   "directives": "Direktívák",
@@ -22,7 +21,6 @@
     "battles": "Csaták",
     "skill": "Képesség"
   },
-  "crew-skills": "Legénységi készségek",
   "crew-skills-hint": "Minden képesség, amelyet a(z) {role} betanult, a legénység ezen posztját betöltő játékosoknál számítva, a vele lejátszott csaták eredménye mellett.",
   "counted": {
     "equipment": "Egész, három eszközből álló készletekként számítva, úgy, ahogy a játékosok felszerelték őket, minden készletet használó játékosnál.",
@@ -30,10 +28,8 @@
     "directives": "Direktívánként számítva, minden azt használó játékosnál.",
     "field-mods": "Egész mezőmódosítási fákként számítva, minden párt úgy véve, ahogy a játékos választotta, minden fát használó játékosnál."
   },
-  "top-battles": "Legjobb csaták",
   "top-battles-hint": "Minden játékos legjobb csatája ebben a tankban az okozott sebzés alapján, pontosan megmutatva, mit szerelt fel hozzá. Nyiss meg egy csatát a teljes jelentéséhez.",
   "thin-row": "Kevesebb mint {count} játékos használta ezt, ezért ezek az adatok inkább róluk, mint az összeállításról árulkodnak.",
-  "top-players": "Legjobb játékosok",
   "top-players-hint": "A legjobb játékosok ebben a tankban azok közül, akiknek a csatái rögzítve vannak, a teljes rekordjuk alapján rangsorolva, és megmutatva, mit szereltek fel a legutóbbi rögzített csatájukban. Nyiss meg egy sort a legénységükhöz.",
   "crew": "Legénység",
   "show-crew": "Legénység megjelenítése"
