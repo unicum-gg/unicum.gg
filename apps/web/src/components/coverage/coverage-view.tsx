@@ -13,7 +13,7 @@ import {
 import { RelativeTime } from "@/components/relative-time";
 import APP from "@/constants/app";
 import { cn } from "@/lib/utils";
-import { unicum } from "@/services/sdk";
+import { buildSafe, unicum } from "@/services/sdk";
 import {
   formatCadence,
 } from "@unicum.gg/shared";
@@ -53,11 +53,36 @@ function formatBytes(bytes: number, locale: string): string {
   return `${numberFormat(locale, DEC_FORMAT).format(value)} ${units[unitIndex]}`;
 }
 
+/**
+ * What the coverage endpoint resolves to. Derived rather than imported: the SDK
+ * infers its response types from the served OpenAPI document and exports no
+ * name for this one, and the alias exists only so the fallback below can be
+ * `null` without widening what the component then reads.
+ */
+type CoverageStats = Awaited<ReturnType<ReturnType<typeof unicum.region>["coverage"]>>;
+
 export async function CoverageView({ region, locale }: { region: Region; locale: string }) {
   const { t: tLabel } = await getTranslation("components/labels", locale);
   const { t: tr } = await getTranslation("components/coverage/coverage-view", locale);
-  const stats = await unicum.region(region).coverage();
-  const { sources } = await unicum.sources();
+  // Both calls go through `buildSafe` because this page is where a build used to
+  // die rather than degrade. On 2026-08-21 a single `ECONNRESET` on
+  // `SELECT COUNT(*) FROM "<region>_players"`, through the SSH tunnel the CI
+  // image build reaches Postgres with, ended the export: "Export encountered an
+  // error on /[region]/coverage/page: /na/coverage, exiting the build". Every
+  // other page logged `prerendering empty` and carried on, because every other
+  // page's SDK calls were already wrapped and these two were the last bare ones
+  // on a prerendered route. A reset is not a reason to ship no image at all.
+  //
+  // `stats` is what the page is ABOUT, so there is no honest empty value for it
+  // and the fallback is null: the route prerenders as a shell and heals on its
+  // first revalidation, an hour later. `sources` is one panel near the bottom,
+  // so it degrades to nothing on its own.
+  const stats = await buildSafe<CoverageStats | null>(
+    () => unicum.region(region).coverage(),
+    null,
+  );
+  const { sources } = await buildSafe(() => unicum.sources(), { sources: [] });
+  if (!stats) return null;
 
   // How many tracked players already have at least one snapshot, which is what
   // `firstSnapshotsDaily` accumulates to. The refresh-policy breakdown already
