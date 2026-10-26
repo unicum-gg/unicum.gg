@@ -1,11 +1,20 @@
 # Builds the web image and publishes it to ghcr.io, so the production host never
 # builds again.
 #
-# The host used to run Railpack on the same 8 cores that serve the site, for
-# about 30 minutes per deploy. On 2026-08-21 that build filled the machine's swap
-# and the kernel's OOM killer took Traefik and then Redis with it. Building here
-# costs nothing (Actions is unmetered on public repositories) and leaves the host
-# with a pull.
+# The host runs Railpack on the same 8 cores that serve the site. On 2026-08-21
+# that build filled the machine's swap and the kernel's OOM killer took Traefik
+# and then Redis with it. Building here costs nothing (Actions is unmetered on
+# public repositories) and leaves the host with a pull.
+#
+# Measured on the host on 2026-10-23, since the 30 minutes this was written
+# against is no longer the figure: a deploy is 13m57, of which 13m04 is the image
+# and 53s is everything else. The codegen inside it is 1m44 and a local
+# `next build` with dependencies already installed is 3m46, so the hour-long
+# deploys are not the build. Two things make them: `concurrent_builds: 1` on the
+# server, which serialises the three services a push triggers, and the empty
+# builder cache this workflow's `type=gha` exists to fix. Two consecutive builds
+# of adjacent commits, the second starting 39 seconds after the first finished
+# with an identical lockfile, took 13m42 and 13m36, a difference of 0.7%.
 name: Build web image
 
 # Manual only, until the last problem is solved.
@@ -36,6 +45,24 @@ on:
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}-web
+  # The production host, which the build tunnels to Postgres through.
+  #
+  # A secret rather than a literal, because this repository is public and the
+  # origin answers the site directly on its address: everything Cloudflare does
+  # for us is optional for whoever knows it. That it is already discoverable
+  # through the `*.sslip.io` certificates Coolify mints, and therefore in the
+  # Certificate Transparency logs for good, is a reason to lock the origin down,
+  # never a reason to publish it once more ourselves.
+  #
+  # Declared once because it had been written twice and both were left behind:
+  # this workflow was parked on 2026-08-22 and the host moved from OVH to Netcup
+  # on 2026-08-30, eight days later, so the address under it changed while
+  # nothing ran to notice. Any run since died in its first minute on an SSH that
+  # could not resolve, which looks nothing like the problem it is actually parked
+  # on and reads as the tunnel approach itself not working. `CI_TUNNEL_KEY` has
+  # to carry the matching restricted entry on whatever host this names, which is
+  # the other half of a move and lives outside the repository.
+  CI_TUNNEL_HOST: ${{ secrets.CI_TUNNEL_HOST }}
 
 jobs:
   build:
@@ -82,15 +109,20 @@ jobs:
         env:
           CI_TUNNEL_KEY: ${{ secrets.CI_TUNNEL_KEY }}
         run: |
+          # An absent secret would otherwise become `root@`, which fails with
+          # a message about the local user rather than about the missing host.
+          if [ -z "$CI_TUNNEL_HOST" ]; then
+            echo "CI_TUNNEL_HOST is not set: add it as a repository secret"; exit 1
+          fi
           install -m 700 -d ~/.ssh
           printf '%s\n' "$CI_TUNNEL_KEY" > ~/.ssh/ci_tunnel
           chmod 600 ~/.ssh/ci_tunnel
-          ssh-keyscan -H 51.255.193.62 >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -H "$CI_TUNNEL_HOST" >> ~/.ssh/known_hosts 2>/dev/null
           # ExitOnForwardFailure so a refused forward fails here, loudly, instead
           # of surfacing 20 minutes later as a build that cannot resolve its data.
           ssh -i ~/.ssh/ci_tunnel -o IdentitiesOnly=yes -o BatchMode=yes \
               -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 \
-              -f -N -L 5432:127.0.0.1:5432 root@51.255.193.62
+              -f -N -L 5432:127.0.0.1:5432 "root@$CI_TUNNEL_HOST"
           for i in $(seq 1 10); do
             nc -z 127.0.0.1 5432 && echo "tunnel up" && exit 0
             sleep 1
