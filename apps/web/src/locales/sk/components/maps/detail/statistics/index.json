@@ -1,0 +1,25 @@
+{
+  "title": "Mapa {map} v číslach",
+  "overview": "Ako prebieha bitka na mape {map} v režime {mode}",
+  "by-class": "Ktorým triedam sa darí na mape {map} v režime {mode}",
+  "by-class-hint": "Ako sa darí jednotlivým triedam na tejto mape. Pod každou slika je rozdiel oproti rovnakým vozidlám na všetkých ostatných mapách režimu, vážený rovnakým spôsobom, takže uvádza niečo o mape, nie o tom, ktoré tanky na ňu boli poslané.",
+  "by-tier": "Ako sa darí jednotlivým úrovniam na mape {map} v režime {mode}",
+  "by-vehicle": "Najlepší vozidlá na mape {map} v režime {mode}",
+  "by-vehicle-hint": "Uvrščeno podľa ich hodnotenia na tejto mape, pričom vozidlá, ktoré tu hralo menej ako päť hráčov, sú uvedené až po ostatných. Vedľa je rovnaké vozidlo na každej mape režimu. Rozdiel uvádza, ako mu mapa vyhovuje.",
+  "top-battles": "Najlepšie odigraných bitiek na mape {map} v režime {mode}",
+  "top-battles-hint": "Najlepšia bitka každého hráča na tejto mape podľa spôsobeného poškodenia. Odpri bitku a zobraz úplné poročilo.",
+  "col": {
+    "class": "Trieda",
+    "tier": "Úroveň",
+    "records": "Bitky",
+    "records-tip": "Bitky odigranih v tejto triede alebo úrovni na tejto mape, jeden záznam na hráča a bitku.",
+    "winrate": "WR",
+    "damage": "Poškodenie",
+    "assisted": "Asistenca",
+    "kills": "Zničené vozidlá",
+    "spotted": "Odhalené",
+    "survival": "Prežitie",
+    "xp": "XP",
+    "baseline-tip": "Pod každou slika: rozdiel oproti rovnakým vozidlám na všetkých ostatných mapách režimu."
+  }
+}

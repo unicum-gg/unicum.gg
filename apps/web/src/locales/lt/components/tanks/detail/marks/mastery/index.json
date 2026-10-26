@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# žaidėjas} few {# žaidėjai} other {# žaidėjai}}",
   "rolling-average-combined-damage-to": "Slenkamasis bendros žalos vidurkis, reikalingas įveikti 65 / 85 / 95% žaidėjų.",
   "single-battle-xp-to-beat": "Vieno mūšio XP, reikalinga įveikti 50 / 80 / 95 / 99% žaidėjų.",
-  "tank-marks-of-excellence": "Meistriškumo žymos naudojant {tank}",
-  "tank-marks-of-mastery": "Meistriškumo ženklai naudojant {tank}"
+  "tank-marks-of-excellence": "Meistriškumo žymos, uždirbtos su tanku {tank}",
+  "tank-marks-of-mastery": "Meistriškumo ženklai, uždirbti su tanku {tank}"
 }

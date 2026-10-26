@@ -3,5 +3,5 @@
   "cumulative": "Kumulatiivinen",
   "daily": "Päivittäinen",
   "heading-cumulative": "{title} (kumulatiivinen)",
-  "heading-daily": "{title} päivässä"
+  "heading-daily": "{title}, päivä päivältä"
 }

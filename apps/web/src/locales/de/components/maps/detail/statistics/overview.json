@@ -1,0 +1,17 @@
+{
+  "duration": "Durchschnittliche Dauer",
+  "duration-hint": "Minuten und Sekunden, vom Ende des Countdowns bis zum Ergebnis.",
+  "ending": "Wie es endet",
+  "finish": {
+    "extermination": "Ein Team zerstört",
+    "base": "Basis erobert",
+    "timeout": "Zeit abgelaufen",
+    "other": "Sonstiges"
+  },
+  "spawns": "Siege nach Spawn",
+  "team": "Team {n}",
+  "draws": "Unentschieden",
+  "count-of": "{count} von {total}",
+  "spawns-hint": "Teams werden zufällig zugewiesen. Ein anhaltender Abstand hier geht daher auf die Karte zurück.",
+  "spawns-small": "Noch zu wenige Gefechte, um eine ausgeglichene von einer unausgewogenen Karte zu unterscheiden."
+}

@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Kamper kjempet med dette kjøretøyet på dette kartet.",
+  "rating-tip": "Kjøretøyets vurdering på kampene på dette kartet, beregnet med nettstedets egne formler.",
+  "everywhere": "{metric} overalt",
+  "everywhere-tip": "Det samme kjøretøyets vurdering på alle kart i modusen.",
+  "gap-tip": "Kjøretøyets vurdering på dette kartet minus vurderingen på alle kart. Over null betyr at kartet passer det.",
+  "thin-row": "Færre enn {count} spillere tok dette kjøretøyet her, så disse tallene sier mer om dem enn om kjøretøyet på dette kartet."
+}

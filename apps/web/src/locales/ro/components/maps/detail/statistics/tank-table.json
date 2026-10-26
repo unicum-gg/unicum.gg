@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Bătălii jucate cu acest vehicul pe această hartă.",
+  "rating-tip": "Ratingul său în bătăliile de pe această hartă, calculat cu formulele proprii ale site-ului.",
+  "everywhere": "{metric} peste tot",
+  "everywhere-tip": "Ratingul aceluiași vehicul pe toate hărțile modului.",
+  "gap-tip": "Ratingul său pe această hartă minus ratingul său pe fiecare hartă, o valoare peste zero înseamnă că harta i se potrivește.",
+  "thin-row": "Mai puțin de {count} jucători au folosit acest vehicul aici, așa că aceste cifre spun mai multe despre ei decât despre vehicul pe această hartă."
+}

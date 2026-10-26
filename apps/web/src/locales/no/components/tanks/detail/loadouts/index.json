@@ -1,5 +1,6 @@
 {
   "title": "Hva spillere monterer på {tank}",
+  "what-they-fit": "Oppsettene spillerne bruker for {tank} i {mode}",
   "equipment": "Utstyr",
   "consumables": "Forbruksmateriell",
   "directives": "Direktiver",
@@ -21,6 +22,7 @@
     "battles": "Kamper",
     "skill": "Ferdighet"
   },
+  "crew-skills": "Mannskapsferdighetene som er trent på {tank} i {mode}",
   "crew-skills-hint": "Hver ferdighet trent av {role}, telt blant spillere hvis mannskap har denne plassen, ved siden av hvordan kampene med den gikk.",
   "counted": {
     "equipment": "Telt som hele sett på tre enheter, slik spillerne monterte dem, blant spillere som brukte hvert sett.",
@@ -28,8 +30,10 @@
     "directives": "Telt ett direktiv om gangen, blant spillere som brukte det.",
     "field-mods": "Telt som hele trær av feltmodifikasjoner, med hvert par slik spilleren valgte det, blant spillere som brukte hvert tre."
   },
+  "top-battles": "De beste kampene kjempet med {tank} i {mode}",
   "top-battles-hint": "Hver spillers beste kamp med denne stridsvognen etter utdelt skade, og nøyaktig hva de monterte til den. Åpne en kamp for den fullstendige rapporten.",
   "thin-row": "Færre enn {count} spillere brukte dette, så disse tallene sier mer om dem enn om oppsettet.",
+  "top-players": "De beste spillerne som bruker {tank} i {mode}",
   "top-players-hint": "De beste spillerne med denne stridsvognen blant dem hvis kamper er registrert, rangert etter hele rekorden deres med den, med det de monterte i sin siste registrerte kamp. Åpne en rad for mannskapet deres.",
   "crew": "Besetning",
   "show-crew": "Vis mannskapet"

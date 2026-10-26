@@ -3,6 +3,6 @@
   "live-many": "{count} турнира је тренутно отворено или се игра на {region},",
   "live-one": "{count} турнир је тренутно отворен или се игра на {region},",
   "no-live": "Turniri se svakog dana održavaju na {region},",
-  "title": "World of Tanks {tournaments}",
+  "title": "{tournaments} u igri World of Tanks",
   "what-you-find": "од 1v1 ранг-листа за које се игра за злато до кланских шампионата за које се игра за новац. Комплетни костури и резултати, сваки тим са својим саставом и страном на којој је почео, мапу по мапу."
 }

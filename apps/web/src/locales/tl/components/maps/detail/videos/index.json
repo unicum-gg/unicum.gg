@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Wala pang naka-link na taktika sa mapang ito. Magmungkahi ng isa at lilitaw ito rito kapag nasuri na ng moderator.",
-  "random-battle-videos-many": "{count} random na mga video ng labanan",
-  "random-battle-videos-one": "{count} random na video ng labanan",
-  "tactic-videos-many": "{count} mga video ng taktika",
-  "tactic-videos-one": "{count} video ng taktika",
-  "tactics": "Taktika sa {map}"
+  "random-battle-videos-many": "{count} Randong Labanan",
+  "random-battle-videos-one": "{count} Randong Labanan",
+  "random-battles": "Randong Labanan sa {map}, tangke bawat tangke",
+  "tactic-videos-many": "{count} mapagkumpitensyang video",
+  "tactic-videos-one": "{count} mapagkumpitensyang video",
+  "tactics": "Mapagkumpitensyang paglalaro sa {map}"
 }

@@ -3,6 +3,6 @@
   "live-many": "{count} turneringer åbne eller i gang på {region} lige nu,",
   "live-one": "{count} turnering åben eller i gang på {region} lige nu,",
   "no-live": "Turneringer afholdes på {region} hver dag,",
-  "title": "World of Tanks {tournaments}",
+  "title": "{tournaments} i World of Tanks",
   "what-you-find": "fra 1-mod-1-ranglister om guld til klanmesterskaber om penge. Fuld bracket og resultater, hvert hold med sin opstilling og den side, det startede på, kort for kort."
 }

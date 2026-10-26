@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Ainda não há nenhuma tática associada a este mapa. Sugere uma e aparecerá aqui assim que um moderador a analisar.",
-  "random-battle-videos-many": "{count} vídeos de Batalha Aleatória",
-  "random-battle-videos-one": "{count} vídeo de Batalha Aleatória",
-  "tactic-videos-many": "{count} vídeos de tática",
-  "tactic-videos-one": "{count} vídeo de tática",
-  "tactics": "Táticas em {map}"
+  "random-battle-videos-many": "{count} batalhas aleatórias",
+  "random-battle-videos-one": "{count} batalha aleatória",
+  "random-battles": "Batalhas aleatórias em {map}, tanque por tanque",
+  "tactic-videos-many": "{count} vídeos competitivos",
+  "tactic-videos-one": "{count} vídeo competitivo",
+  "tactics": "Jogar competitivamente em {map}"
 }

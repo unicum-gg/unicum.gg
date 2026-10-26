@@ -1,0 +1,25 @@
+{
+  "title": "Mapa {map} u brojkama",
+  "overview": "Kako se bitka odvija na mapi {map} u načinu {mode}",
+  "by-class": "Koje klase dobro prolaze na mapi {map} u načinu {mode}",
+  "by-class-hint": "Kako se svaka klasa nosi na ovoj mapi. Ispod svake brojke nalazi se razlika u odnosu na ista vozila na svim drugim mapama tog načina, ponderirana na isti način, pa govori nešto o mapi, a ne o tome koji su tenkovi poslani na nju.",
+  "by-tier": "Kako se svaka razina nosi na mapi {map} u načinu {mode}",
+  "by-vehicle": "Najbolja vozila na mapi {map} u načinu {mode}",
+  "by-vehicle-hint": "Rangirano prema njihovoj ocjeni na ovoj mapi, pri čemu su vozila koja je ovdje koristilo manje od pet igrača navedena nakon ostalih. Pokraj toga nalazi se isto vozilo na svakoj mapi tog načina, a razlika pokazuje odgovara li mu mapa.",
+  "top-battles": "Najbolje bitke odigrane na mapi {map} u načinu {mode}",
+  "top-battles-hint": "Najbolja bitka svakog igrača na ovoj mapi prema nanesenoj šteti. Otvori bitku za njezin potpuni izvještaj.",
+  "col": {
+    "class": "Klasa",
+    "tier": "Razina",
+    "records": "Bitke",
+    "records-tip": "Bitke odigrane u ovoj klasi ili razini na ovoj mapi, jedna po igraču u svakoj bitci.",
+    "winrate": "WR",
+    "damage": "Šteta",
+    "assisted": "Asistencija",
+    "kills": "Uništenja",
+    "spotted": "Otkriveni",
+    "survival": "Preživjeli",
+    "xp": "XP",
+    "baseline-tip": "Ispod svake brojke nalazi se razlika u odnosu na ista vozila na svim drugim mapama tog načina."
+  }
+}

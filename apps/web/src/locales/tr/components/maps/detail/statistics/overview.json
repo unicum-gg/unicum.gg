@@ -1,0 +1,17 @@
+{
+  "duration": "Ortalama süre",
+  "duration-hint": "Geri sayımın sona ermesinden sonuca kadar geçen dakika ve saniyeler.",
+  "ending": "Nasıl sona eriyor",
+  "finish": {
+    "extermination": "Bir ekip imha edildi",
+    "base": "Üs ele geçirildi",
+    "timeout": "Süre doldu",
+    "other": "Diğer"
+  },
+  "spawns": "Başlangıç noktalarına göre galibiyetler",
+  "team": "{n}. Ekip",
+  "draws": "Beraberlikler",
+  "count-of": "{total} içinde {count}",
+  "spawns-hint": "Ekipler rastgele atanır, bu nedenle buradaki kalıcı fark haritayla ilgilidir.",
+  "spawns-small": "Dengeli bir haritayı dengesiz bir haritadan ayırt etmek için henüz çok az savaş var."
+}

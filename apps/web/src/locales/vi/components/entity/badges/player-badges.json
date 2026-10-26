@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · xem {name} trên Twitch",
   "tournament": {
-    "one": "Danh sách chiến thắng của {title}",
-    "many": "Trong {count} danh sách chiến thắng, giải đấu hay nhất {title}",
+    "one": "Chiến thắng {title}",
+    "many": "Chiến thắng {count} giải đấu, trong đó tốt nhất là {title}",
     "featured": "{text} · sự kiện nổi bật",
     "unnamed": "một giải đấu Wargaming"
   },

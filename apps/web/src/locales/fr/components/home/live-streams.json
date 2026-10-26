@@ -4,7 +4,7 @@
     "hide": "Masquer le chat",
     "show-streamers": "Afficher les streamers"
   },
-  "heading": "Statistiques des joueurs, des clans et des chars de World of Tanks : {name}",
+  "heading": "Statistiques des joueurs, clans et chars de World of Tanks sur {name}",
   "hide": "Masquer les streamers",
   "player": "Joueur",
   "stream-language": "Langue du stream · {name}",

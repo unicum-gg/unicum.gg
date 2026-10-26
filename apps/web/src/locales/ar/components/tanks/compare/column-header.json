@@ -9,7 +9,7 @@
   "duplicate-tank": "مقارنة {tank} ضد نفسه",
   "highest-overall-score": "أعلى نتيجة إجمالية",
   "highest-overall-score-of-this": "أعلى نتيجة إجمالية في هذه المقارنة",
-  "is-the-reference": "المرجع: {tank}",
+  "is-the-reference": "مقارنةً بـ {tank}",
   "overall": "بشكل عام",
   "reference-column": "عمود المرجع",
   "remove-tank": "إزالة {tank}",
@@ -17,7 +17,7 @@
   "setup": "الإعداد",
   "setup-n": "التجهيز {n}",
   "stock": "مخزون",
-  "tank-setup": "تجميعة {tank}",
+  "tank-setup": "إعداد {tank}",
   "the-same-vehicle-under-a-setup": "المركبة نفسها مع التجهيز الخاص بها",
   "top": "الأفضل",
   "where-this-vehicle-sits-across": "موضع هذه المركبة عبر الكتالوج الكامل، من أصل {MAXSCORE}: متوسط نتائج فئاتها الأربع، وفق الإعداد هنا. هذا ملخص، وليس حكمًا، إذ تصل دبابة كشافة ودبابة ثقيلة إلى النتيجة نفسها بكون كل منهما جيدًا في أشياء مختلفة."

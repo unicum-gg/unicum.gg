@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks-kart ({region})",
   "description": "{map}: et {width} × {height} m World of Tanks-kart.",
   "description-modes": "{map}: et {width} × {height} m World of Tanks-kart med {modes}.",
+  "statistics": {
+    "title": "Statistikk for {map} ({region}): seiersrate etter gytepunkt, klasser og beste stridsvogner",
+    "description": "Slik går kamper på {map} faktisk, basert på registrerte kamper: gjennomsnittlig lengde, hvordan de ender, hvilket gytepunkt som vinner, hvordan hver kjøretøyklasse og hvert nivå gjør det der sammenlignet med de samme kjøretøyene på andre kart, samt de beste kjøretøyene og kampene på kartet."
+  },
   "community": {
     "title": "Spillernes anmeldelser og fellesskapets vurdering av {map} ({region})",
     "description": "Dette synes spillerne om {map}: fellesskapets vurdering på en skala fra én til fem, delt inn etter hvor godt velgerne spiller, med skriftlige dommer fra kontoer som har kampene bak seg. Balanse, variasjon, flyt og om hver kjøretøyklasse har en oppgave der."

@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Auf dieser Karte ist noch keine Taktik verlinkt. Schlage eine vor. Sie erscheint hier, sobald ein Moderator sie geprüft hat.",
-  "random-battle-videos-many": "{count} Videos zu Zufallsgefechten",
-  "random-battle-videos-one": "{count} Video zu Zufallsgefechten",
-  "tactic-videos-many": "{count} Taktik-Videos",
-  "tactic-videos-one": "{count} Taktik-Video",
-  "tactics": "Taktiken auf {map}"
+  "random-battle-videos-many": "{count} Zufallsgefechte",
+  "random-battle-videos-one": "{count} Zufallsgefecht",
+  "random-battles": "Zufallsgefechte auf {map}, Panzer für Panzer",
+  "tactic-videos-many": "{count} kompetitive Videos",
+  "tactic-videos-one": "{count} kompetitives Video",
+  "tactics": "Kompetitives Spielen auf {map}"
 }

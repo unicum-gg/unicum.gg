@@ -9,7 +9,7 @@
   "duplicate-tank": "Compară {tank} împotriva lui în sine",
   "highest-overall-score": "Cel mai mare scor general",
   "highest-overall-score-of-this": "Cel mai mare scor general al acestei comparații",
-  "is-the-reference": "Referință: {tank}",
+  "is-the-reference": "Comparat cu {tank}",
   "overall": "General",
   "reference-column": "Coloană de referință",
   "remove-tank": "Elimină {tank}",
@@ -17,7 +17,7 @@
   "setup": "Configurație",
   "setup-n": "Configurația {n}",
   "stock": "Stoc",
-  "tank-setup": "Configurație: {tank}",
+  "tank-setup": "Configurația pentru {tank}",
   "the-same-vehicle-under-a-setup": "Același vehicul cu propria configurație",
   "top": "Cei mai buni",
   "where-this-vehicle-sits-across": "Poziția acestui vehicul în întregul catalog, din {MAXSCORE}: media celor patru scoruri de categorie, configurate aici. Un rezumat, nu un verdict, un cercetaș și un tanc greu pot ajunge la același număr fiind buni la lucruri diferite."

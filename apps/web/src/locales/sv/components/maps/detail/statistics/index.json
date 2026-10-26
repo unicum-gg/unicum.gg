@@ -1,0 +1,25 @@
+{
+  "title": "{map} i siffror",
+  "overview": "Så utvecklas en strid på {map} i {mode}",
+  "by-class": "Vilka klasser lyckas på {map} i {mode}",
+  "by-class-hint": "Så presterar varje klass på den här kartan. Under varje figur visas skillnaden jämfört med samma fordon på alla andra kartor i läget, viktad på samma sätt, så att den säger något om kartan snarare än om vilka vagnar som skickades dit.",
+  "by-tier": "Så presterar varje nivå på {map} i {mode}",
+  "by-vehicle": "De bästa fordonen på {map} i {mode}",
+  "by-vehicle-hint": "Rankade efter sitt betyg på den här kartan. Fordon som färre än fem spelare tog hit visas efter de andra. Bredvid visas samma fordon på alla kartor i läget. Skillnaden visar hur väl kartan passar det.",
+  "top-battles": "De bästa striderna som spelades på {map} i {mode}",
+  "top-battles-hint": "Varje spelares bästa strid på den här kartan, baserat på utdelad skada. Öppna en strid för den fullständiga rapporten.",
+  "col": {
+    "class": "Typ",
+    "tier": "Nivå",
+    "records": "Strider",
+    "records-tip": "Strider som spelades i den här klassen eller på den här nivån på kartan, en per spelare och strid.",
+    "winrate": "WR",
+    "damage": "Skada",
+    "assisted": "Assistans",
+    "kills": "Förstörelser",
+    "spotted": "Upptäckta",
+    "survival": "Överlevde",
+    "xp": "XP",
+    "baseline-tip": "Under varje figur visas skillnaden jämfört med samma fordon på alla andra kartor i läget."
+  }
+}

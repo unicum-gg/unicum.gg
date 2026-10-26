@@ -6,7 +6,7 @@
   "n-shown": ", {count} gösteriliyor",
   "opinion": "{count, plural, one {# görüş} other {# görüşler}}",
   "opinion-next-to-win-rate": "Seviye {tier} içinde kazanma oranının yanında görüş",
-  "rate-the": "{tankName} için puan ver",
+  "rate-the": "{tankName} hakkında ne düşünüyorsunuz?",
   "reputation-against-results": "İtibar ve sonuçlar",
   "same-tank-different-metas": "Aynı tank, farklı metalar",
   "the-same-tank-by-how": "Aynı tank, oy veren oyuncunun ne kadar iyi oynadığına göre",

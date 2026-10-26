@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks-kaart ({region})",
   "description": "{map}: een World of Tanks-kaart van {width} × {height} m.",
   "description-modes": "{map}: een World of Tanks-kaart van {width} × {height} m met {modes} als spelmodi.",
+  "statistics": {
+    "title": "Statistieken van {map} ({region}): winstpercentage per spawn, klassen en beste tanks",
+    "description": "Hoe gevechten op {map} eigenlijk verlopen, geteld uit geregistreerde gevechten: gemiddelde duur, hoe ze eindigen, welke spawn wint, hoe elke voertuigklasse en elk niveau het daar doet tegen dezelfde tanks op andere kaarten, en de beste tanks en gevechten op deze kaart."
+  },
   "community": {
     "title": "Beoordelingen van spelers voor {map} en beoordeling van de community ({region})",
     "description": "Wat spelers van {map} denken: de beoordeling van de community op een schaal van vijf, uitgesplitst naar hoe goed de stemmers spelen, met geschreven oordelen van accounts die de gevechten achter de rug hebben. Balans, variatie, verloop en of elke klasse voertuigen er een taak heeft."

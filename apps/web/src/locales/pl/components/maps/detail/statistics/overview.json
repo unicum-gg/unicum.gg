@@ -1,0 +1,17 @@
+{
+  "duration": "Średnia długość",
+  "duration-hint": "Minuty i sekundy, od końca odliczania do wyniku.",
+  "ending": "Jak się kończy",
+  "finish": {
+    "extermination": "Drużyna zniszczona",
+    "base": "Baza przejęta",
+    "timeout": "Upłynął czas",
+    "other": "Inne"
+  },
+  "spawns": "Zwycięstwa według odrodzenia",
+  "team": "Drużyna {n}",
+  "draws": "Remisy",
+  "count-of": "{count} z {total}",
+  "spawns-hint": "Drużyny są przydzielane losowo, więc utrzymująca się różnica mówi coś o mapie.",
+  "spawns-small": "Na razie rozegrano zbyt mało bitew, aby odróżnić zrównoważoną mapę od jednostronnej."
+}

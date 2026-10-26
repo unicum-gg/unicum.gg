@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# гулец} few {# гульцы} many {# гульцоў} other {# гульцы}}",
   "rolling-average-combined-damage-to": "Слізгальныя сярэднія сумарных страт, каб пераўзыходзіць 65 / 85 / 95% гульцоў.",
   "single-battle-xp-to-beat": "XP за адзін бой, каб пераўзыходзіць 50 / 80 / 95 / 99% гульцоў.",
-  "tank-marks-of-excellence": "Знакі выдатнасці для танка {tank}",
-  "tank-marks-of-mastery": "Знакі майстэрства на {tank}"
+  "tank-marks-of-excellence": "Знакі выдатнасці, заробленыя на танку {tank}",
+  "tank-marks-of-mastery": "Знакі майстэрства, заробленыя на танку {tank}"
 }

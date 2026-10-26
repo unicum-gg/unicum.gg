@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# spiller} other {# spillere}}",
   "rolling-average-combined-damage-to": "Rullende gennemsnitlig samlet skade for at slå 65 / 85 / 95 % af spillerne.",
   "single-battle-xp-to-beat": "XP i én kamp for at slå 50 / 80 / 95 / 99 % af spillerne.",
-  "tank-marks-of-excellence": "Fortræffelighedsmærker for {tank}",
-  "tank-marks-of-mastery": "Mærker for Mesterlighed for {tank}"
+  "tank-marks-of-excellence": "Fortræffelighedsmærker optjent på {tank}",
+  "tank-marks-of-mastery": "Mærker for Mesterlighed optjent på {tank}"
 }

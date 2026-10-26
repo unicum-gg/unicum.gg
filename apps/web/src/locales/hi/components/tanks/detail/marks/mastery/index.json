@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# खिलाड़ी} other {# खिलाड़ी}}",
   "rolling-average-combined-damage-to": "65 / 85 / 95% खिलाड़ियों को हराने के लिए चलायमान औसत संयुक्त क्षति।",
   "single-battle-xp-to-beat": "50 / 80 / 95 / 99% खिलाड़ियों को हराने के लिए एकल-युद्ध XP।",
-  "tank-marks-of-excellence": "टैंक {tank} के उच्चता के मार्क्स",
-  "tank-marks-of-mastery": "टैंक {tank} के कौशल के मार्क्स"
+  "tank-marks-of-excellence": "{tank} पर अर्जित उच्चता के मार्क्स",
+  "tank-marks-of-mastery": "{tank} पर अर्जित कौशल के मार्क्स"
 }

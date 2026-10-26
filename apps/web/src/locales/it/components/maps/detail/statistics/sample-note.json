@@ -1,0 +1,5 @@
+{
+  "counted-from": "Conteggiate a partire da {battles} battaglie di {mode} su questa mappa negli ultimi 90 giorni: {records} veicoli, {players} giocatori, registrate tramite {mod}. Ultima giocata",
+  "the-mod": "il mod di unicum.gg",
+  "against-everywhere": "Ogni battaglia ci arriva con tutti i trenta veicoli presenti, escludendo i bot. Una battaglia viene conteggiata una volta per la sua durata, il suo esito e il vincitore, e trenta volte per le classi e i veicoli, quindi il primo blocco ha bisogno di molte più battaglie rispetto alle tabelle sottostanti prima di fornire risultati significativi."
+}

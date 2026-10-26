@@ -6,8 +6,8 @@
   },
   "streamer": "ストリーマー · Twitchで{name}を見る",
   "tournament": {
-    "one": "{title}の優勝ロスター",
-    "many": "優勝ロスター{count}件で、{title}の最高成績",
+    "one": "{title}で勝利",
+    "many": "{count}件のトーナメントで勝利。最高の成績は{title}",
     "featured": "{text} · 注目イベント",
     "unnamed": "Wargamingのトーナメント"
   },

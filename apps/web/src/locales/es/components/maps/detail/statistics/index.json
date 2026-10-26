@@ -1,0 +1,25 @@
+{
+  "title": "{map} en cifras",
+  "overview": "Cómo se desarrolla una batalla en {map} en {mode}",
+  "by-class": "Qué clases rinden bien en {map} en {mode}",
+  "by-class-hint": "Cómo rinde cada clase en este mapa. Debajo de cada figura aparece la diferencia con los mismos vehículos en todos los demás mapas del modo, ponderados de la misma forma, así que dice algo sobre el mapa y no sobre qué tanques fueron enviados a él.",
+  "by-tier": "Cómo rinde cada nivel en {map} en {mode}",
+  "by-vehicle": "Los mejores vehículos en {map} en {mode}",
+  "by-vehicle-hint": "Clasificados según su valoración en este mapa, con los vehículos que usaron menos de cinco jugadores aquí listados después de los demás. Al lado aparece el mismo vehículo en todos los mapas del modo, y la diferencia indica cuánto se adapta el mapa a él.",
+  "top-battles": "Las mejores batallas libradas en {map} en {mode}",
+  "top-battles-hint": "La mejor batalla de cada jugador en este mapa, según el daño infligido. Abre una batalla para consultar su informe completo.",
+  "col": {
+    "class": "Clase",
+    "tier": "Nivel",
+    "records": "Batallas",
+    "records-tip": "Batallas libradas en esta clase o nivel en este mapa, una por jugador y batalla.",
+    "winrate": "WR",
+    "damage": "Daño",
+    "assisted": "Asistencia",
+    "kills": "Bajas",
+    "spotted": "Avistamientos",
+    "survival": "Sobrevivió",
+    "xp": "XP",
+    "baseline-tip": "Debajo de cada figura: la diferencia con los mismos vehículos en todos los demás mapas del modo."
+  }
+}

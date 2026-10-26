@@ -1,0 +1,5 @@
+{
+  "counted-from": "Được tính từ {battles} trận đấu trong {mode} trên bản đồ này trong 90 ngày qua: {records} xe tăng, {players} người chơi, được ghi nhận thông qua {mod}. Trận gần nhất đã chơi",
+  "the-mod": "mod unicum.gg",
+  "against-everywhere": "Mỗi trận đấu đến với chúng tôi cùng đủ ba mươi xe tăng trong đó, không tính bot. Một trận đấu được tính một lần cho thời lượng, kết quả và bên chiến thắng, và ba mươi lần cho các hạng và xe tăng, vì vậy khối đầu tiên cần nhiều trận đấu hơn hẳn các bảng bên dưới trước khi có thể nói lên bất kỳ điều gì."
+}

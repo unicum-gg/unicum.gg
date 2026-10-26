@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# игрок} few {# игрока} many {# игроков} other {# игрока}}",
   "rolling-average-combined-damage-to": "Скользящий средний совокупный урон для превосходства над 65 / 85 / 95% игроков.",
   "single-battle-xp-to-beat": "Опыт за один бой для превосходства над 50 / 80 / 95 / 99% игроков.",
-  "tank-marks-of-excellence": "Отличительные отметки для {tank}",
-  "tank-marks-of-mastery": "Знаки мастерства для {tank}"
+  "tank-marks-of-excellence": "Отличительные отметки, заработанные на танке {tank}",
+  "tank-marks-of-mastery": "Знаки мастерства, заработанные на танке {tank}"
 }

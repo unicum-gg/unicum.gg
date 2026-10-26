@@ -9,7 +9,7 @@
   "duplicate-tank": "将 {tank} 与本身对抗对比",
   "highest-overall-score": "最高总体分数",
   "highest-overall-score-of-this": "本次对比中的最高总体分数",
-  "is-the-reference": "参考坦克：{tank}",
+  "is-the-reference": "与{tank}对比",
   "overall": "总体",
   "reference-column": "参考列",
   "remove-tank": "移除{tank}",
@@ -17,7 +17,7 @@
   "setup": "配置",
   "setup-n": "配置 {n}",
   "stock": "库存",
-  "tank-setup": "{tank}配置",
+  "tank-setup": "{tank}的配置",
   "the-same-vehicle-under-a-setup": "使用自身配置的同一车辆",
   "top": "最佳",
   "where-this-vehicle-sits-across": "这辆战车在整个目录中的位置，满分为 {MAXSCORE}：这是其四项类别分数的平均值，计算方式如这里所配置。这只是总结，不是结论。侦察型战车和重型战车可能因为擅长不同方面而达到相同分数。"

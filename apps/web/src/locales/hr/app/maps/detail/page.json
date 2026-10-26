@@ -2,6 +2,10 @@
   "title": "{map}, karta igre World of Tanks ({region})",
   "description": "{map}: karta igre World of Tanks veličine {width} × {height} m.",
   "description-modes": "{map}: karta igre World of Tanks veličine {width} × {height} m, s igranjem načina {modes}.",
+  "statistics": {
+    "title": "Statistika mape {map} ({region}): stopa pobjeda početnih pozicija, klase i najbolji tenkovi",
+    "description": "Kako se bitke na mapi {map} zapravo odvijaju, izračunano iz zabilježenih bitaka: prosječno trajanje, kako završavaju, koja početna pozicija pobjeđuje, kako se svaka klasa vozila i razina tamo nose u usporedbi s istim tenkovima na drugim mapama te koji su najbolji tenkovi i bitke na toj mapi."
+  },
   "community": {
     "title": "Recenzije igrača i ocjena zajednice za mapu {map} u regiji {region}",
     "description": "Što igrači misle o mapi {map}: ocjena zajednice od jedan do pet, podijeljena prema tome koliko dobro glasači igraju, uz pisane presude računa koji iza sebe imaju bitke. Ravnoteža, raznolikost, tijek i ima li svaka klasa vozila svoju ulogu na toj mapi."

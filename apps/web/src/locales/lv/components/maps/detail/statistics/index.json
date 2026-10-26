@@ -1,0 +1,25 @@
+{
+  "title": "{map} skaitļos",
+  "overview": "Kā norisinās kauja kartē {map}, režīmā {mode}",
+  "by-class": "Kuras klases labi darbojas kartē {map}, režīmā {mode}",
+  "by-class-hint": "Kā katrai klasei klājas šajā kartē. Zem katra skaitļa ir atšķirība no tiem pašiem transportlīdzekļiem visās pārējās režīma kartēs, ar tādu pašu svērumu, tāpēc tā raksturo karti, nevis to, kuri tanki tajā tika nosūtīti.",
+  "by-tier": "Kā katram līmenim klājas kartē {map}, režīmā {mode}",
+  "by-vehicle": "Labākie transportlīdzekļi kartē {map}, režīmā {mode}",
+  "by-vehicle-hint": "Sarindoti pēc vērtējuma šajā kartē, transportlīdzekļi, kurus šeit izvēlējās mazāk nekā pieci spēlētāji, uzskaitīti pēc pārējiem. Blakus ir tā paša transportlīdzekļa vērtējums visās režīma kartēs, un atšķirība parāda, cik labi karte tam ir piemērota.",
+  "top-battles": "Labākās kaujas kartē {map}, režīmā {mode}",
+  "top-battles-hint": "Katra spēlētāja labākā kauja šajā kartē pēc nodarītajiem bojājumiem. Atveriet kauju, lai skatītu tās pilno pārskatu.",
+  "col": {
+    "class": "Klase",
+    "tier": "Līmenis",
+    "records": "Kaujas",
+    "records-tip": "Kaujas, kas izspēlētas ar šo klasi vai līmeni šajā kartē, viena kauja uz spēlētāju.",
+    "winrate": "WR",
+    "damage": "Bojājumi",
+    "assisted": "Atbalsts",
+    "kills": "Likvidētie pretinieki",
+    "spotted": "Atklātie pretinieki",
+    "survival": "Izdzīvoja",
+    "xp": "XP",
+    "baseline-tip": "Zem katra skaitļa ir atšķirība no tiem pašiem transportlīdzekļiem visās pārējās režīma kartēs."
+  }
+}

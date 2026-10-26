@@ -5,6 +5,6 @@
   "n-players": "{count, plural, other {#명 플레이어들}}",
   "rolling-average-combined-damage-to": "플레이어의 65 / 85 / 95%를 격파하기 위한 이동 평균 합산 피해입니다.",
   "single-battle-xp-to-beat": "플레이어의 50 / 80 / 95 / 99%를 격파하기 위한 단일 전투 XP입니다.",
-  "tank-marks-of-excellence": "전차 {tank}의 화력의 증표",
-  "tank-marks-of-mastery": "전차 {tank}의 숙련도 마크"
+  "tank-marks-of-excellence": "전차 {tank}에서 획득한 화력의 증표",
+  "tank-marks-of-mastery": "전차 {tank}에서 획득한 숙련도 마크"
 }

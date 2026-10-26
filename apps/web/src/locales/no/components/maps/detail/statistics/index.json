@@ -1,0 +1,25 @@
+{
+  "title": "{map} i tall",
+  "overview": "Slik utspiller en kamp seg på {map} i {mode}",
+  "by-class": "Hvilke klasser gjør det bra på {map} i {mode}",
+  "by-class-hint": "Slik gjør hver klasse det på dette kartet. Under hvert tall vises forskjellen mot de samme kjøretøyene på alle andre kart i modusen, vektet på samme måte, slik at det sier noe om kartet og ikke om hvilke stridsvogner som ble sendt dit.",
+  "by-tier": "Slik gjør hvert nivå det på {map} i {mode}",
+  "by-vehicle": "De beste kjøretøyene på {map} i {mode}",
+  "by-vehicle-hint": "Rangert etter vurderingen deres på dette kartet, med kjøretøy som færre enn fem spillere tok med hit, oppført etter de andre. Ved siden av vises det samme kjøretøyet på alle kart i modusen. Forskjellen viser hvor godt kartet passer det.",
+  "top-battles": "De beste kampene kjempet på {map} i {mode}",
+  "top-battles-hint": "Hver spillers beste kamp på dette kartet etter utdelt skade. Åpne en kamp for den fullstendige rapporten.",
+  "col": {
+    "class": "Klasse",
+    "tier": "Nivå",
+    "records": "Kamper",
+    "records-tip": "Kamper kjempet i denne klassen eller på dette nivået på kartet, én per spiller per kamp.",
+    "winrate": "WR",
+    "damage": "Skade",
+    "assisted": "Assistanse",
+    "kills": "Frags",
+    "spotted": "Oppdaget",
+    "survival": "Overlevde",
+    "xp": "XP",
+    "baseline-tip": "Under hvert tall vises forskjellen mot de samme kjøretøyene på alle andre kart i modusen."
+  }
+}

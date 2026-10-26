@@ -1,5 +1,6 @@
 {
   "title": "Vad spelare monterar på {tank}",
+  "what-they-fit": "Konfigurationerna som spelare använder för {tank} i {mode}",
   "equipment": "Utrustning",
   "consumables": "Förnödenheter",
   "directives": "Anvisningar",
@@ -21,6 +22,7 @@
     "battles": "Strider",
     "skill": "Skicklighet"
   },
+  "crew-skills": "Besättningens färdigheter på {tank} i {mode}",
   "crew-skills-hint": "Varje färdighet som {role} hade tränat, räknad bland spelare vars besättning har den platsen, bredvid hur striderna som spelades med den gick.",
   "counted": {
     "equipment": "Räknas som hela uppsättningar med tre enheter, på det sätt spelare monterar dem, bland spelare som använde varje uppsättning.",
@@ -28,8 +30,10 @@
     "directives": "Räknas som en anvisning i taget, bland spelare som använde den.",
     "field-mods": "Räknas som hela träd av fältmodifieringar, med varje par exakt som spelaren tog det, bland spelare som använde varje träd."
   },
+  "top-battles": "De bästa striderna som spelades i {tank} i {mode}",
   "top-battles-hint": "Varje spelares bästa strid med den här vagnen efter utdelad skada, och exakt vad de monterade inför den. Öppna en strid för dess fullständiga rapport.",
   "thin-row": "Färre än {count} spelare använde detta, så dessa siffror säger mer om dem än om konfigurationen.",
+  "top-players": "De bästa spelarna med {tank} i {mode}",
   "top-players-hint": "De bästa spelarna med den här vagnen bland dem vars strider är registrerade, rankade efter hela deras rekord med den, med vad de monterade i sin senaste registrerade strid. Öppna en rad för deras besättning.",
   "crew": "Besättning",
   "show-crew": "Visa besättningen"

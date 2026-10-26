@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "K této mapě zatím není přiřazena žádná taktika. Navrhněte nějakou a po kontrole moderátorem se zobrazí zde.",
-  "random-battle-videos-many": "{count} videa z náhodných bitev",
-  "random-battle-videos-one": "{count} video z náhodné bitvy",
-  "tactic-videos-many": "{count} taktická videa",
-  "tactic-videos-one": "{count} taktické video",
-  "tactics": "Taktika na mapě {map}"
+  "random-battle-videos-many": "{count} náhodných bitev",
+  "random-battle-videos-one": "{count} náhodná bitva",
+  "random-battles": "Náhodné bitvy na mapě {map}, tank po tanku",
+  "tactic-videos-many": "{count} soutěžních videí",
+  "tactic-videos-one": "{count} soutěžní video",
+  "tactics": "Soutěžní hraní na mapě {map}"
 }

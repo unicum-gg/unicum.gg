@@ -4,7 +4,7 @@
     "hide": "Piilota keskustelu",
     "show-streamers": "Näytä striimaajat"
   },
-  "heading": "{name}: World of Tanks -pelaajien, klaanien ja panssarivaunujen tilastot",
+  "heading": "World of Tanks -pelaajan, klaanin ja panssarivaunun tilastot: {name}",
   "hide": "Piilota striimaajat",
   "player": "Pelaaja",
   "stream-language": "Lähetyksen kieli · {name}",

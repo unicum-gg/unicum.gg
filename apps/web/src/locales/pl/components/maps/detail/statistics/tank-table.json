@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Bitwy rozegrane tym pojazdem na tej mapie.",
+  "rating-tip": "Jego ocena na podstawie bitew rozegranych tym pojazdem na tej mapie, według własnych wzorów serwisu.",
+  "everywhere": "{metric} wszędzie",
+  "everywhere-tip": "Ocena tego samego pojazdu na każdej mapie trybu.",
+  "gap-tip": "Jego ocena na tej mapie minus jego ocena na każdej mapie, wartość powyżej zera oznacza, że mapa mu odpowiada.",
+  "thin-row": "Mniej niż {count} graczy użyło tego pojazdu na tej mapie, więc te statystyki mówią więcej o nich niż o pojeździe na tej mapie."
+}

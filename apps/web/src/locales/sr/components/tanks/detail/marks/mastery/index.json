@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# играч} few {# igrači} other {# igrači}}",
   "rolling-average-combined-damage-to": "Klizni prosek kombinovane štete potreban za prestizanje 65 / 85 / 95% igrača.",
   "single-battle-xp-to-beat": "XP iz jedne bitke potreban za prestizanje 50 / 80 / 95 / 99% igrača.",
-  "tank-marks-of-excellence": "Ocene Izvrsnosti za {tank}",
-  "tank-marks-of-mastery": "Marke majstorstva za {tank}"
+  "tank-marks-of-excellence": "Ocene Izvrsnosti zarađene na tenku {tank}",
+  "tank-marks-of-mastery": "Marke majstorstva zarađene na tenku {tank}"
 }

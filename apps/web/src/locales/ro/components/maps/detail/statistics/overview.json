@@ -1,0 +1,17 @@
+{
+  "duration": "Durata medie",
+  "duration-hint": "Minute și secunde, de la sfârșitul numărătorii inverse până la rezultat.",
+  "ending": "Cum se încheie",
+  "finish": {
+    "extermination": "O echipă distrusă",
+    "base": "Bază capturată",
+    "timeout": "Timpul a expirat",
+    "other": "Altele"
+  },
+  "spawns": "Victorii în funcție de apariție",
+  "team": "Echipa {n}",
+  "draws": "Remize",
+  "count-of": "{count} din {total}",
+  "spawns-hint": "Echipele sunt repartizate aleatoriu, așa că o diferență persistentă aici ține de hartă.",
+  "spawns-small": "Sunt încă prea puține bătălii pentru a deosebi o hartă echilibrată de una dezechilibrată."
+}

@@ -4,7 +4,7 @@
     "hide": "チャットを非表示",
     "show-streamers": "配信者を表示"
   },
-  "heading": "{name}：World of Tanksのプレイヤー、クラン、戦車の戦績",
+  "heading": "{name}のWorld of Tanksプレイヤー、クラン、戦車の統計",
   "hide": "配信者を非表示",
   "player": "プレイヤー",
   "stream-language": "配信言語 · {name}",

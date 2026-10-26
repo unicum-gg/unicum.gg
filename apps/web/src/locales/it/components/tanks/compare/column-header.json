@@ -9,7 +9,7 @@
   "duplicate-tank": "Confronta {tank} con lo stesso veicolo",
   "highest-overall-score": "Punteggio complessivo più alto",
   "highest-overall-score-of-this": "Punteggio complessivo più alto di questo confronto",
-  "is-the-reference": "{tank} è il riferimento",
+  "is-the-reference": "Confrontato con {tank}",
   "overall": "Globale",
   "reference-column": "Colonna di riferimento",
   "remove-tank": "Rimuovi {tank}",

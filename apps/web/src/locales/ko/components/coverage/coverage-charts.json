@@ -3,5 +3,5 @@
   "cumulative": "누적",
   "daily": "일일",
   "heading-cumulative": "{title} (누적)",
-  "heading-daily": "일일 {title}"
+  "heading-daily": "{title}, 일별"
 }

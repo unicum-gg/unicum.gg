@@ -6,7 +6,7 @@
   "n-shown": ", {count} vist",
   "opinion": "{count, plural, one {# mening} other {# meninger}}",
   "opinion-next-to-win-rate": "Mening ved siden af sejrsrate på niveau {tier}",
-  "rate-the": "Bedøm {tankName}",
+  "rate-the": "Hvad synes du om {tankName}?",
   "reputation-against-results": "Omdømme mod resultater",
   "same-tank-different-metas": "Samme kampvogn, forskellige metaer",
   "the-same-tank-by-how": "Den samme kampvogn efter, hvor godt vælgeren spiller",

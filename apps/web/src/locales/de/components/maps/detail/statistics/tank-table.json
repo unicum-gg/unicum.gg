@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Auf dieser Karte mit diesem Fahrzeug gespielte Gefechte.",
+  "rating-tip": "Seine Wertung über seine Gefechte auf dieser Karte, berechnet mit den eigenen Formeln der Website.",
+  "everywhere": "{metric} überall",
+  "everywhere-tip": "Die Wertung desselben Fahrzeugs auf jeder Karte des Modus.",
+  "gap-tip": "Seine Wertung auf dieser Karte abzüglich seiner Wertung auf jeder Karte. Über null bedeutet, dass die Karte gut zu ihm passt.",
+  "thin-row": "Weniger als {count} Spieler haben dieses Fahrzeug hier benötigt, daher sagen diese Werte mehr über sie als über das Fahrzeug auf dieser Karte aus."
+}

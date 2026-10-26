@@ -5,7 +5,7 @@
   "every-server-one-average": "Jeder Server, ein Durchschnitt",
   "n-shown": ", {count} angezeigt",
   "opinion": "{count, plural, one {# Meinung} other {# Meinungen}}",
-  "rate-the": "Wertung für {mapName}",
+  "rate-the": "Wie findest du {mapName}?",
   "same-map-different-metas": "Gleicher Boden, unterschiedliche Metas",
   "the-same-map-by-how": "Dieselbe Karte, nach der Spielstärke der abstimmenden Spieler",
   "what-players-wrote": "Was Spieler geschrieben haben",

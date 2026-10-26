@@ -1,0 +1,17 @@
+{
+  "duration": "평균 전투 시간",
+  "duration-hint": "카운트다운 종료부터 결과가 나올 때까지의 시간으로, 분과 초로 표시됩니다.",
+  "ending": "전투 결과",
+  "finish": {
+    "extermination": "팀 격파",
+    "base": "기지 점령",
+    "timeout": "시간 초과",
+    "other": "기타"
+  },
+  "spawns": "스폰별 승리",
+  "team": "팀 {n}",
+  "draws": "무승부",
+  "count-of": "{count} / {total}",
+  "spawns-hint": "팀은 무작위로 배정되므로 이 차이가 지속된다면 지도에 원인이 있을 수 있습니다.",
+  "spawns-small": "아직 전투 수가 너무 적어 균형 잡힌 지도와 한쪽으로 치우친 지도를 구분할 수 없습니다."
+}

@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks 지도 ({region})",
   "description": "{map}: {width} × {height}m 크기의 World of Tanks 지도입니다.",
   "description-modes": "{map}: {width} × {height}m 크기이며 {modes} 모드를 플레이할 수 있는 World of Tanks 지도입니다.",
+  "statistics": {
+    "title": "{map} 통계({region}): 스폰별 승률, 병과 및 최고 전차",
+    "description": "기록된 전투를 집계해 확인한 {map} 전투의 실제 양상: 평균 전투 시간, 전투 결과, 승리하는 스폰, 다른 지도에서 같은 전차와 비교한 각 차량 병과 및 단계의 성과, 그리고 이 지도에서의 최고 전차와 전투입니다."
+  },
   "community": {
     "title": "{map}에 대한 플레이어 리뷰 및 커뮤니티 평점 ({region})",
     "description": "플레이어들이 {map}에 대해 어떻게 생각하는지 확인하세요. 투표자의 플레이 실력에 따라 나눈 커뮤니티 5점 만점 평점과, 실제 전투 경험이 있는 계정들의 서면 판정을 제공합니다. 균형, 다양성, 흐름, 모든 차량 병과에 역할이 있는지를 다룹니다."

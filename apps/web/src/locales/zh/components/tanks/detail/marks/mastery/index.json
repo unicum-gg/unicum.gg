@@ -5,6 +5,6 @@
   "n-players": "{count, plural, other {# 玩家}}",
   "rolling-average-combined-damage-to": "滚动平均综合伤害，用于击败65 / 85 / 95%的玩家。",
   "single-battle-xp-to-beat": "单场战斗经验，用于击败50 / 80 / 95 / 99%的玩家。",
-  "tank-marks-of-excellence": "坦克 {tank} 的特级标识",
-  "tank-marks-of-mastery": "坦克 {tank} 的掌握标记"
+  "tank-marks-of-excellence": "在{tank}上获得的特级标识",
+  "tank-marks-of-mastery": "在{tank}上获得的掌握标记"
 }

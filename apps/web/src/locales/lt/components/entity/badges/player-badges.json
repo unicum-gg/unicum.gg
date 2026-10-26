@@ -6,8 +6,8 @@
   },
   "streamer": "Transliuotojas · žiūrėti {name} per Twitch",
   "tournament": {
-    "one": "Laimėjusi {title} sudėtis",
-    "many": "{count} laimėjusiose sudėtyse, geriausias {title}",
+    "one": "Laimėta {title}",
+    "many": "Laimėta {count} turnyrų, geriausias iš jų: {title}",
     "featured": "{text} · išskirtinis renginys",
     "unnamed": "Wargaming turnyras"
   },

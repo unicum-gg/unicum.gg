@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · panoorin si {name} sa Twitch",
   "tournament": {
-    "one": "Talaan ng nanalong torneo ng {title}",
-    "many": "Kasama sa {count} nanalong talaan, ang pinakamahusay na {title}",
+    "one": "Nanalo sa {title}",
+    "many": "Nanalo sa {count} mga torneo, at ang pinakamahusay ay {title}",
     "featured": "{text} · isang tampok na event",
     "unnamed": "isang torneo ng Wargaming"
   },

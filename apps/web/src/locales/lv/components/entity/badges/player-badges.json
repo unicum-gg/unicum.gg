@@ -6,8 +6,8 @@
   },
   "streamer": "Straumētājs · skatīties {name} Twitch",
   "tournament": {
-    "one": "Uzvarētāju sastāvs turnīrā {title}",
-    "many": "{count} uzvarētāju sastāvos, labākais turnīrā {title}",
+    "one": "Uzvarēts: {title}",
+    "many": "Uzvarēti {count} turnīri, labākais no tiem ir {title}",
     "featured": "{text} · īpaši izcelts pasākums",
     "unnamed": "Wargaming turnīrs"
   },

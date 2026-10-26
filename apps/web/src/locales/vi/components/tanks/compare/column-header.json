@@ -9,7 +9,7 @@
   "duplicate-tank": "So sánh xe tăng {tank} đối đầu với chính nó",
   "highest-overall-score": "Điểm số tổng thể cao nhất",
   "highest-overall-score-of-this": "Điểm số tổng thể cao nhất trong phép so sánh này",
-  "is-the-reference": "{tank} là xe tham chiếu",
+  "is-the-reference": "So sánh với {tank}",
   "overall": "Tổng thể",
   "reference-column": "Cột tham chiếu",
   "remove-tank": "Xóa {tank}",
@@ -17,7 +17,7 @@
   "setup": "Thiết lập",
   "setup-n": "Cấu hình {n}",
   "stock": "Dự trữ",
-  "tank-setup": "Cấu hình {tank}",
+  "tank-setup": "Cấu hình của {tank}",
   "the-same-vehicle-under-a-setup": "Cùng một xe tăng với một cấu hình riêng",
   "top": "Hàng đầu",
   "where-this-vehicle-sits-across": "Vị trí của xe tăng này trong toàn bộ danh mục, trên tổng số {MAXSCORE}: trung bình của bốn điểm số theo danh mục, được cấu hình tại đây. Đây là bản tóm tắt, không phải phán quyết. Một xe trinh sát và một xe tăng hạng nặng có thể đạt cùng một con số nhờ giỏi ở những khía cạnh khác nhau."

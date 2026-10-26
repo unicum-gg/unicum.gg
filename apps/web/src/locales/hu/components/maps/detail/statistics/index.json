@@ -1,0 +1,25 @@
+{
+  "title": "{map} számokban",
+  "overview": "Hogyan zajlik egy csata {map} pályán, {mode} játékmódban",
+  "by-class": "Melyik osztály teljesít jól {map} pályán, {mode} játékmódban",
+  "by-class-hint": "Hogyan teljesít az egyes osztály ezen a pályán. Minden ábra alatt az eltérés ugyanazon járművekhez képest a játékmód minden más pályáján, azonos súlyozással, így az eredmény a pályáról mond valamit, nem arról, hogy mely tankokat küldték oda.",
+  "by-tier": "Hogyan teljesít az egyes szint {map} pályán, {mode} játékmódban",
+  "by-vehicle": "A legjobb járművek {map} pályán, {mode} játékmódban",
+  "by-vehicle-hint": "A pályán elért értékelésük alapján rangsorolva, az itt ötnél kevesebb játékos által használt járművek a többiek után listázva. Mellette ugyanaz a jármű a játékmód minden pályáján látható. Az eltérés mutatja meg, hogy mennyire illik hozzá a pálya.",
+  "top-battles": "A legjobb lejátszott csaták {map} pályán, {mode} játékmódban",
+  "top-battles-hint": "Minden játékos legjobb, ezen a pályán lejátszott csatája az okozott sebzés alapján. A teljes jelentéshez nyisd meg a csatát.",
+  "col": {
+    "class": "Osztály",
+    "tier": "Szint",
+    "records": "Csaták",
+    "records-tip": "Ebben az osztályban vagy szinten, ezen a pályán lejátszott csaták, játékosonként és csatánként egy.",
+    "winrate": "WR",
+    "damage": "Sebzés",
+    "assisted": "Segítség",
+    "kills": "Fragek",
+    "spotted": "Felderítések",
+    "survival": "Túlélte",
+    "xp": "XP",
+    "baseline-tip": "Minden ábra alatt az eltérés ugyanazon járművekhez képest a játékmód minden más pályáján."
+  }
+}

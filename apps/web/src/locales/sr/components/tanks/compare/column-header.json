@@ -9,7 +9,7 @@
   "duplicate-tank": "Poredi {tank} protiv samo sebe",
   "highest-overall-score": "Najviši ukupni rezultat",
   "highest-overall-score-of-this": "Najviši ukupni rezultat ovog poređenja",
-  "is-the-reference": "{tank} je referenca",
+  "is-the-reference": "Upoređeno sa tenkom {tank}",
   "overall": "Ukupno",
   "reference-column": "Referentna kolona",
   "remove-tank": "Ukloni {tank}",
@@ -17,7 +17,7 @@
   "setup": "Postavka",
   "setup-n": "Konfiguracija {n}",
   "stock": "Zaliha",
-  "tank-setup": "Konfiguracija za {tank}",
+  "tank-setup": "Konfiguracija tenka {tank}",
   "the-same-vehicle-under-a-setup": "Isto возило sa sopstvenom konfiguracija",
   "top": "Najbolji",
   "where-this-vehicle-sits-across": "Gde se ovo vozilo nalazi u celom katalogu, od {MAXSCORE}: prosečna vrednost njegova četiri kategorijska rezultata, prema ovde podešenim opcijama. Sažetak, a ne presuda. Izviđač i teški tenk mogu doći do istog broja tako što su dobri u različitim stvarima."

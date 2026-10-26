@@ -1,5 +1,6 @@
 {
   "title": "Mitä pelaajat asentavat panssarivaunuun nimeltä {tank}",
+  "what-they-fit": "Kokoonpanot, joita pelaajat käyttävät panssarivaunulla {tank} pelimuodossa {mode}",
   "equipment": "Varusteet",
   "consumables": "Kulutustarvikkeet",
   "directives": "Direktiivit",
@@ -14,13 +15,14 @@
     "player-winrate-tip": "Samojen pelaajien kokonaisuutena laskettu voittoprosentti koko tilillä, painotettuna tällä kokoonpanolla pelattujen taisteluiden mukaan.",
     "delta": "±",
     "delta-tip": "Tämän kokoonpanon luku vähennettynä samojen pelaajien kokonaisuutena lasketulla luvulla koko tilillä.",
-    "assisted": "Avustettu",
+    "assisted": "Avustus",
     "usage-tip": "Pelaajat, jotka käyttivät tätä vähintään yhdessä lasketussa taistelussa, jaettuna laskettujen pelaajien määrällä.",
     "player-rating": "Pelaajan {metric}",
     "player-rating-tip": "Samojen pelaajien kokonaisuutena laskettu arvosana koko tilillä, painotettuna tällä kokoonpanolla pelattujen taisteluiden mukaan.",
     "battles": "Taisteluita",
     "skill": "Taito"
   },
+  "crew-skills": "Panssarivaunun {tank} miehistölle pelimuodossa {mode} koulutetut taidot",
   "crew-skills-hint": "Kukin taito, jonka {role} oli kouluttanut, laskettuna niiden pelaajien joukossa, joiden miehistössä on kyseinen paikka, sekä vieressä taisteluiden tulokset sen kanssa.",
   "counted": {
     "equipment": "Lasketaan kokonaisina kolmen laitteen sarjoina, kuten pelaajat ne asentavat, niiden pelaajien joukossa, jotka käyttivät kutakin sarjaa.",
@@ -28,8 +30,10 @@
     "directives": "Lasketaan yksi direktiivi kerrallaan niiden pelaajien joukossa, jotka käyttivät sitä.",
     "field-mods": "Lasketaan kokonaisina kenttämodifikaatiopuina, jokainen pari sellaisena kuin pelaaja sen valitsi, niiden pelaajien joukossa, jotka käyttivät kutakin puuta."
   },
+  "top-battles": "Parhaat taistelut, jotka on taisteltu panssarivaunulla {tank} pelimuodossa {mode}",
   "top-battles-hint": "Kunkin pelaajan paras taistelu tällä panssarivaunulla aiheutetun vahingon perusteella sekä täsmälleen se, mitä hän siihen asensi. Avaa taistelu nähdäksesi sen täydellisen raportin.",
   "thin-row": "Alle {count} pelaajaa käytti tätä, joten nämä luvut kertovat enemmän heistä kuin kokoonpanosta.",
+  "top-players": "Panssarivaunulla {tank} pelimuodossa {mode} pelaavat parhaat pelaajat",
   "top-players-hint": "Parhaat pelaajat tällä panssarivaunulla niiden joukosta, joiden taistelut on tallennettu, rankattuna heidän koko ennätyksensä perusteella tällä panssarivaunulla ja varustettuna tiedoilla heidän viimeisimmän tallennetun taistelunsa kokoonpanosta. Avaa rivi nähdäksesi heidän miehistönsä.",
   "crew": "Miehistö",
   "show-crew": "Näytä miehistö"

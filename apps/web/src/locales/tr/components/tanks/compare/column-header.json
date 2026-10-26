@@ -9,7 +9,7 @@
   "duplicate-tank": "Karşılaştır: {tank} adlı tankı kendisiyle",
   "highest-overall-score": "En yüksek genel skor",
   "highest-overall-score-of-this": "Bu karşılaştırmanın en yüksek genel skoru",
-  "is-the-reference": "Referans: {tank}",
+  "is-the-reference": "{tank} ile karşılaştırılıyor",
   "overall": "Genel",
   "reference-column": "Referans sütunu",
   "remove-tank": "{tank} kaldır",

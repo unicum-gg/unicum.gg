@@ -1,0 +1,17 @@
+{
+  "duration": "Thời lượng trung bình",
+  "duration-hint": "Phút và giây, tính từ khi đồng hồ đếm ngược kết thúc đến khi có kết quả.",
+  "ending": "Cách trận đấu kết thúc",
+  "finish": {
+    "extermination": "Một đội đã bị phá hủy",
+    "base": "Căn cứ đã bị chiếm",
+    "timeout": "Hết thời gian",
+    "other": "Khác"
+  },
+  "spawns": "Chiến thắng theo điểm xuất hiện",
+  "team": "Đội {n}",
+  "draws": "Trận hòa",
+  "count-of": "{count} trên {total}",
+  "spawns-hint": "Các đội được phân công ngẫu nhiên, vì vậy chênh lệch kéo dài ở đây là do bản đồ.",
+  "spawns-small": "Chưa có đủ trận đấu để phân biệt bản đồ cân bằng với bản đồ lệch về một phía."
+}

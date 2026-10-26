@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks -kartta ({region})",
   "description": "{map}: {width} × {height} m:n World of Tanks -kartta.",
   "description-modes": "{map}: {width} × {height} m:n World of Tanks -kartta, jolla pelataan pelimuotoja {modes}.",
+  "statistics": {
+    "title": "Kartan {map} tilastot ({region}): lähtöpaikkojen voittoprosentit, luokat ja parhaat panssarivaunut",
+    "description": "Miten taistelut kartalla {map} itse asiassa etenevät tallennettujen taisteluiden perusteella laskettuna: keskimääräinen kesto, miten ne päättyvät, mikä lähtöpaikka voittaa, miten kukin ajoneuvoluokka ja taso suoriutuu siellä verrattuna samoihin ajoneuvoihin muilla kartoilla sekä parhaat panssarivaunut ja taistelut siellä."
+  },
   "community": {
     "title": "Pelaajien arvostelut kartasta {map} ja yhteisön arvosana ({region})",
     "description": "Mitä pelaajat ajattelevat kartasta {map}: yhteisön arvosana viidestä, jaoteltuna äänestäjien pelitaidon mukaan, sekä kirjalliset tuomiot tileiltä, joiden taustalla on taisteluita. Tasapaino, monipuolisuus, sujuvuus ja se, onko jokaisella ajoneuvoluokalla siellä tehtävä."

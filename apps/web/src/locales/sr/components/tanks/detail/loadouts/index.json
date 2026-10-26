@@ -1,5 +1,6 @@
 {
   "title": "Šta igrači opremaju na tenku {tank}",
+  "what-they-fit": "Konfiguracije koje igrači koriste na tenku {tank} u režimu {mode}",
   "equipment": "Oprema",
   "consumables": "Potrošna roba",
   "directives": "Direktive",
@@ -21,6 +22,7 @@
     "battles": "Borbi",
     "skill": "Veština"
   },
+  "crew-skills": "Veštine posade obučene na tenku {tank} u režimu {mode}",
   "crew-skills-hint": "Svaka veština koju je {role} imao obučenu, računajući igrače čija posada ima to mesto, uz podatak kako su protekle bitke odigrane s njom.",
   "counted": {
     "equipment": "Brojano kao celi kompleti od tri uređaja, onako kako ih igrači opremaju, među igračima koji su koristili svaki komplet.",
@@ -28,8 +30,10 @@
     "directives": "Brojano jednu po jednu direktivu, među igračima koji su je koristili.",
     "field-mods": "Brojano kao cela stabla modifikacija polja, svaki par onako kako ga je igrač izabrao, među igračima koji su koristili svako stablo."
   },
+  "top-battles": "Najbolje bitke vođene u tenku {tank} u režimu {mode}",
   "top-battles-hint": "Najbolja bitka svakog igrača u ovom tenku prema nanetoj šteti i tačno ono što je za nju opremio. Otvori bitku za njen potpuni izveštaj.",
   "thin-row": "Manje od {count} igrača je koristilo ovo, zato ove brojke više govore o njima nego o konfiguraciji.",
+  "top-players": "Najbolje rangirani igrači tenka {tank} u režimu {mode}",
   "top-players-hint": "Najbolji igrači u ovom tenku među onima čije su bitke zabeležene, rangirani prema celokupnom rekordu u njemu, sa onim što su opremili u svojoj poslednjoj zabeleženoj bitci. Otvori red za njihovu posadu.",
   "crew": "Posada",
   "show-crew": "Prikaži posadu"

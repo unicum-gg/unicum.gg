@@ -6,8 +6,8 @@
   },
   "streamer": "Strømmer · se {name} på Twitch",
   "tournament": {
-    "one": "Vinnerlagoppstilling i {title}",
-    "many": "På {count} vinnerlagoppstillinger, det beste i {title}",
+    "one": "Vunnet {title}",
+    "many": "Vunnet {count} turneringer, der {title} er den beste",
     "featured": "{text} · et fremhevet arrangement",
     "unnamed": "en Wargaming-turnering"
   },

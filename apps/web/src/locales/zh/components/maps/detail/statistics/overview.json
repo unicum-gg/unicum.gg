@@ -1,0 +1,17 @@
+{
+  "duration": "平均时长",
+  "duration-hint": "从倒计时结束到结果出现的分钟和秒数。",
+  "ending": "战斗如何结束",
+  "finish": {
+    "extermination": "一支队伍被击毁",
+    "base": "基地已占领",
+    "timeout": "时间耗尽",
+    "other": "其他"
+  },
+  "spawns": "各出生点的胜场",
+  "team": "队伍{n}",
+  "draws": "平局",
+  "count-of": "{count} / {total}",
+  "spawns-hint": "队伍是随机分配的，因此这里持续存在的差距与地图有关。",
+  "spawns-small": "目前战斗场次太少，无法判断地图是否平衡。"
+}

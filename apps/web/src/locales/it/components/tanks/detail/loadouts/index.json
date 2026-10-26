@@ -1,5 +1,6 @@
 {
   "title": "Configurazioni dei giocatori con {tank}",
+  "what-they-fit": "Configurazioni che i giocatori usano per {tank} in {mode}",
   "equipment": "Equipaggiamento",
   "consumables": "Consumabili",
   "directives": "Direttive",
@@ -21,6 +22,7 @@
     "battles": "Battaglie",
     "skill": "Abilità"
   },
+  "crew-skills": "Abilità dell’equipaggio addestrate per {tank} in {mode}",
   "crew-skills-hint": "Ogni abilità che {role} aveva addestrato, conteggiata tra i giocatori il cui equipaggio ha quel ruolo, accanto alle prestazioni delle battaglie combattute con essa.",
   "counted": {
     "equipment": "Conteggiato come interi set di tre dispositivi, nel modo in cui i giocatori li installano, tra i giocatori che hanno usato ogni set.",
@@ -28,8 +30,10 @@
     "directives": "Conteggiato una direttiva alla volta, tra i giocatori che l’hanno usata.",
     "field-mods": "Conteggiato come interi alberi di modifiche sul campo, con ogni coppia così come l’ha scelta il giocatore, tra i giocatori che hanno usato ogni albero."
   },
+  "top-battles": "Le migliori battaglie combattute con {tank} in {mode}",
   "top-battles-hint": "La migliore battaglia di ogni giocatore con questo carro armato, in base al danno inflitto, e tutto ciò che vi ha installato. Apri una battaglia per il rapporto completo.",
   "thin-row": "Meno di {count} giocatori l’hanno usata, quindi questi valori dicono più su di loro che sulla configurazione.",
+  "top-players": "I migliori giocatori di {tank} in {mode}",
   "top-players-hint": "I migliori giocatori con questo carro armato tra quelli le cui battaglie sono registrate, classificati in base al loro record complessivo con esso, con ciò che hanno installato nella loro battaglia registrata più recente. Apri una riga per il loro equipaggio.",
   "crew": "Equipaggio",
   "show-crew": "Mostra l’equipaggio"

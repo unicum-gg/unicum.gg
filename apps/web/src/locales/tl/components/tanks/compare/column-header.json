@@ -9,7 +9,7 @@
   "duplicate-tank": "Ihambing ang sasakyan na tinatawag na {tank} laban sa sarili mismo",
   "highest-overall-score": "Pinakamataas na pangkalahatang score",
   "highest-overall-score-of-this": "Pinakamataas na pangkalahatang score ng paghahambing na ito",
-  "is-the-reference": "Reference ang {tank}",
+  "is-the-reference": "Kumpara laban sa {tank}",
   "overall": "Pangkalahatan",
   "reference-column": "Reference na kolum",
   "remove-tank": "Alisin ang {tank}",
@@ -17,7 +17,7 @@
   "setup": "Konpigurasyon",
   "setup-n": "Configurasyon {n}",
   "stock": "Stock",
-  "tank-setup": "Setup ng {tank}",
+  "tank-setup": "Konpigurasyon ng {tank}",
   "the-same-vehicle-under-a-setup": "Ang parehong sasakyan sa ilalim ng sariling configurasyon nito",
   "top": "Nangungunang",
   "where-this-vehicle-sits-across": "Kung saan nakapuwesto ang sasakyang ito sa buong katalogo, mula sa {MAXSCORE}: ang average ng apat nitong category score, ayon sa pagkaka-configure rito. Buod ito, hindi hatol. Maaaring makakuha ng parehong numero ang scout at heavy dahil mahusay sila sa magkakaibang bagay."

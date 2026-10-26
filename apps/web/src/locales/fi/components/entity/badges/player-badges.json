@@ -6,8 +6,8 @@
   },
   "streamer": "Striimaaja · katso pelaajan {name} lähetystä Twitchissä",
   "tournament": {
-    "one": "Turnauksen {title} voittajakokoonpano",
-    "many": "{count} voittajakokoonpanossa, turnauksen {title} paras",
+    "one": "Voitettu: {title}",
+    "many": "Voitettu {count} turnausta, joista paras on {title}",
     "featured": "{text} · esillä oleva tapahtuma",
     "unnamed": "Wargaming-turnaus"
   },

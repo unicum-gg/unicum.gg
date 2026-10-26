@@ -3,6 +3,6 @@
   "live-many": "目前{region}有{count}场锦标赛开放或正在进行，",
   "live-one": "目前{region}有{count}场锦标赛开放或正在进行，",
   "no-live": "赛事每天在{region}举行，",
-  "title": "World of Tanks {tournaments}",
+  "title": "World of Tanks中的{tournaments}",
   "what-you-find": "从争夺金币的 1v1 排行赛到争夺现金的军团锦标赛。完整对阵表和比分，每支队伍及其阵容，以及每队开始时所在的侧，逐地图显示。"
 }

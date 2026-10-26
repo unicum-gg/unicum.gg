@@ -1,0 +1,5 @@
+{
+  "counted-from": "Talt ud fra {battles} kampe i {mode} på dette kort i løbet af de seneste 90 dage: {records} køretøjer, {players} spillere, registreret gennem {mod}. Sidst spillet",
+  "the-mod": "unicum.gg-moddet",
+  "against-everywhere": "Hver kamp når os med alle tredive køretøjer i den, bots ikke medregnet. En kamp tæller én gang for sin varighed, sin afslutning og sin vinder, og tredive gange for klasserne og køretøjerne, så den første blok kræver langt flere kampe end tabellerne nedenfor, før den siger noget."
+}

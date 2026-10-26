@@ -2,6 +2,10 @@
   "title": "Carte World of Tanks : {map} ({region})",
   "description": "Carte de World of Tanks : {map} ({width} × {height} m).",
   "description-modes": "Carte de World of Tanks : {map} ({width} × {height} m), disponible dans les modes {modes}.",
+  "statistics": {
+    "title": "Statistiques de {map} ({region}) : taux de victoire selon l’apparition, classes et meilleurs chars",
+    "description": "Comment se déroulent réellement les batailles sur {map}, comptabilisées à partir des batailles enregistrées : durée moyenne, façon dont elles se terminent, apparition gagnante, résultats de chaque classe et de chaque rang avec les mêmes véhicules sur les autres cartes, ainsi que les meilleurs chars et les meilleures batailles sur cette carte."
+  },
   "community": {
     "title": "Avis des joueurs sur {map} et notation de la communauté ({region})",
     "description": "Ce que les joueurs pensent de {map} : la notation de la communauté sur cinq, répartie selon le niveau de jeu des votants, avec des verdicts écrits par des comptes qui ont les batailles derrière eux. Équilibre, variété, fluidité et utilité de chaque classe de véhicule."

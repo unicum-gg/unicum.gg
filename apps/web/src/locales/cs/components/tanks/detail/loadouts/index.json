@@ -1,5 +1,6 @@
 {
   "title": "Co hráči osazují na tanku {tank}",
+  "what-they-fit": "Konfigurace, které hráči používají na tanku {tank} v režimu {mode}",
   "equipment": "Vybavení",
   "consumables": "Spotřební doplňky",
   "directives": "Směrnice",
@@ -21,6 +22,7 @@
     "battles": "Bitvy",
     "skill": "Dovednost"
   },
+  "crew-skills": "Dovednosti posádky vycvičené na tanku {tank} v režimu {mode}",
   "crew-skills-hint": "Každá dovednost, kterou měl daný {role} vycvičenou, započítaná u hráčů, jejichž posádka má toto místo, spolu s tím, jak dopadly bitvy odehrané s ní.",
   "counted": {
     "equipment": "Započítáno jako celé sady tří zařízení, tak jak je hráči osazují, u hráčů, kteří použili každou sadu.",
@@ -28,8 +30,10 @@
     "directives": "Započítáno po jedné směrnici u hráčů, kteří ji použili.",
     "field-mods": "Započítáno jako celé stromy úprav pole, každý pár tak, jak ho hráč zvolil, u hráčů, kteří použili každý strom."
   },
+  "top-battles": "Nejlepší bitvy odehrané v tanku {tank} v režimu {mode}",
   "top-battles-hint": "Nejlepší bitva každého hráče s tímto tankem podle způsobeného poškození a přesně to, čím ji osadil. Otevřete bitvu pro její úplný záznam.",
   "thin-row": "Tuto konfiguraci použilo méně než {count} hráčů, takže tyto údaje vypovídají více o nich než o konfiguraci.",
+  "top-players": "Nejlepší hráči tanku {tank} v režimu {mode}",
   "top-players-hint": "Nejlepší hráči s tímto tankem z těch, jejichž bitvy jsou zaznamenané, seřazení podle celého svého záznamu s tímto tankem, včetně toho, co osadili ve své poslední zaznamenané bitvě. Otevřete řádek pro jejich posádku.",
   "crew": "Posádka",
   "show-crew": "Zobrazit posádku"

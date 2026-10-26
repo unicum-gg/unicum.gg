@@ -9,7 +9,7 @@
   "duplicate-tank": "{tank} gegen sich selbst vergleichen",
   "highest-overall-score": "Höchste Wertung insgesamt",
   "highest-overall-score-of-this": "Insgesamt höchste Wertung in diesem Vergleich",
-  "is-the-reference": "{tank} ist die Referenz",
+  "is-the-reference": "Gegen {tank} verglichen",
   "overall": "Insgesamt",
   "reference-column": "Referenzspalte",
   "remove-tank": "{tank} entfernen",
@@ -17,7 +17,7 @@
   "setup": "Konfiguration",
   "setup-n": "Konfiguration {n}",
   "stock": "Stock",
-  "tank-setup": "{tank}-Setup",
+  "tank-setup": "Konfiguration für {tank}",
   "the-same-vehicle-under-a-setup": "Dasselbe Fahrzeug mit einer eigenen Konfiguration",
   "top": "Beste",
   "where-this-vehicle-sits-across": "Wo dieses Fahrzeug im gesamten Katalog steht, bei maximal {MAXSCORE} Punkten: der Durchschnitt seiner vier Kategoriewertungen mit der hier gewählten Konfiguration. Eine Zusammenfassung, kein Urteil. Ein Aufklärer und ein schwerer Panzer erreichen dieselbe Punktzahl, weil sie in unterschiedlichen Bereichen gut sind."

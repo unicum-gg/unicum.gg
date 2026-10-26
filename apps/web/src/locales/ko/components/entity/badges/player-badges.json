@@ -6,8 +6,8 @@
   },
   "streamer": "스트리머 · Twitch에서 {name} 시청",
   "tournament": {
-    "one": "{title} 우승 명단",
-    "many": "우승 명단 {count}개에 포함, 최고의 {title}",
+    "one": "{title}에서 승리",
+    "many": "{count}개 토너먼트에서 승리, 그중 최고는 {title}",
     "featured": "{text} · 주요 이벤트",
     "unnamed": "워게이밍 토너먼트"
   },

@@ -1,0 +1,5 @@
+{
+  "counted-from": "Laskettu tämän kartan viimeisten 90 päivän {battles} pelimuodossa {mode} taistelusta: {records} ajoneuvoa, {players} pelaajaa, tallennettu modilla {mod}. Viimeksi pelattu",
+  "the-mod": "unicum.gg-modilla",
+  "against-everywhere": "Jokainen taistelu saapuu meille kaikkien kolmenkymmenen ajoneuvon kanssa, botit poistettuina. Taistelu vastaa kerran kestostaan, päättymisestään ja voittajastaan sekä kolmekymmentä kertaa luokista ja ajoneuvoista, joten ensimmäinen osio tarvitsee paljon enemmän taisteluita kuin alla olevat taulukot ennen kuin se sanoo mitään."
+}

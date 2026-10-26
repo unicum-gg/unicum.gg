@@ -1,0 +1,25 @@
+{
+  "title": "{map} w liczbach",
+  "overview": "Jak przebiega bitwa na mapie {map} w trybie {mode}",
+  "by-class": "Które klasy dobrze radzą sobie na mapie {map} w trybie {mode}",
+  "by-class-hint": "Jak radzi sobie każda klasa na tej mapie. Pod każdą liczbą znajduje się różnica względem tych samych pojazdów na każdej innej mapie trybu, ważona w ten sam sposób, dzięki czemu mówi coś o mapie, a nie o tym, jakie czołgi na nią wysłano.",
+  "by-tier": "Jak radzi sobie każdy poziom na mapie {map} w trybie {mode}",
+  "by-vehicle": "Najlepsze pojazdy na mapie {map} w trybie {mode}",
+  "by-vehicle-hint": "Ranking na podstawie ich oceny na tej mapie, przy czym pojazdy, którymi zagrało tu mniej niż pięciu graczy, wymieniono po pozostałych. Obok pokazano ten sam pojazd na każdej mapie trybu, a różnica mówi, czy mapa mu odpowiada.",
+  "top-battles": "Najlepsze bitwy rozegrane na mapie {map} w trybie {mode}",
+  "top-battles-hint": "Najlepsza bitwa każdego gracza na tej mapie pod względem zadanych uszkodzeń. Otwórz bitwę, aby zobaczyć jej pełny raport.",
+  "col": {
+    "class": "Klasa",
+    "tier": "Poziom",
+    "records": "Bitwy",
+    "records-tip": "Bitwy rozegrane tą klasą lub na tym poziomie na tej mapie, po jednej na gracza i bitwę.",
+    "winrate": "WR",
+    "damage": "Zadane uszkodzenia",
+    "assisted": "Asysta",
+    "kills": "Zniszczenia",
+    "spotted": "Wykrycia",
+    "survival": "Przetrwanie",
+    "xp": "XP",
+    "baseline-tip": "Pod każdą liczbą znajduje się różnica względem tych samych pojazdów na każdej innej mapie trybu."
+  }
+}

@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks haritası ({region})",
   "description": "{map}: {width} × {height} m boyutunda bir World of Tanks haritası.",
   "description-modes": "{map}: {width} × {height} m boyutunda, {modes} oynanan bir World of Tanks haritası.",
+  "statistics": {
+    "title": "{map} istatistikleri ({region}): başlangıç noktası galibiyet oranı, sınıflar ve en iyi tanklar",
+    "description": "Kaydedilen savaşlardan sayılan verilere göre {map} üzerindeki savaşların aslında nasıl geçtiği: ortalama süre, nasıl sona erdikleri, hangi başlangıç noktasının kazandığı, her araç sınıfının ve seviyesinin aynı moddaki diğer haritalardaki aynı tanklara karşı nasıl performans gösterdiği ve buradaki en iyi tanklar ile savaşlar."
+  },
   "community": {
     "title": "{map} oyuncu incelemeleri ve topluluk puanı ({region})",
     "description": "Oyuncular {map} hakkında ne düşünüyor: oy verenlerin ne kadar iyi oynadığına göre ayrılmış, topluluğun beş üzerinden puanı ve savaşları geride bırakmış hesaplardan yazılı kararlar. Denge, çeşitlilik, akış ve her araç sınıfının orada bir görevi olup olmadığı."

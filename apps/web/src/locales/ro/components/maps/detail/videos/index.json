@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Încă nu există nicio tactică asociată acestei hărți. Sugerează una și va apărea aici după ce un moderator o verifică.",
-  "random-battle-videos-many": "{count} videoclipuri cu bătălii aleatorii",
-  "random-battle-videos-one": "{count} videoclip cu o bătălie aleatorie",
-  "tactic-videos-many": "{count} videoclipuri cu tactici",
-  "tactic-videos-one": "{count} videoclip cu o tactică",
-  "tactics": "Tactici pe {map}"
+  "random-battle-videos-many": "{count} bătălii aleatorii",
+  "random-battle-videos-one": "{count} bătălie standard",
+  "random-battles": "Bătălii aleatorii pe {map}, tanc cu tanc",
+  "tactic-videos-many": "{count} videoclipuri competitive",
+  "tactic-videos-one": "{count} videoclip competitiv",
+  "tactics": "Joacă competitivă pe {map}"
 }

@@ -3,6 +3,6 @@
   "live-many": "Er zijn momenteel {count} Toernooien op {region} waarvoor de inschrijving open is of die worden gespeeld,",
   "live-one": "Er is momenteel {count} Toernooi op {region} waarvoor de inschrijving open is of dat wordt gespeeld,",
   "no-live": "Elke dag zijn er Toernooien op {region},",
-  "title": "World of Tanks {tournaments}",
+  "title": "{tournaments} in World of Tanks",
   "what-you-find": "van 1-tegen-1-ladders om Goud tot clankampioenschappen om geldprijzen. Volledige toernooischema’s en scores, elk team met zijn spelerslijst en per map de zijde waarop het begon."
 }

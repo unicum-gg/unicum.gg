@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Šia transporto priemone šiame žemėlapyje vykę mūšiai.",
+  "rating-tip": "Jos reitingas pagal šiame žemėlapyje vykusius mūšius, apskaičiuotas pagal svetainės formules.",
+  "everywhere": "{metric} visur",
+  "everywhere-tip": "Tos pačios transporto priemonės reitingas visuose režimo žemėlapiuose.",
+  "gap-tip": "Jos reitingas šiame žemėlapyje minus jos reitingas visuose žemėlapiuose. Jei skirtumas didesnis už nulį, žemėlapis jai tinka.",
+  "thin-row": "Mažiau nei {count} žaidėjų čia užėmė šią transporto priemonę, todėl šie rodikliai daugiau pasako apie juos nei apie transporto priemonę šiame žemėlapyje."
+}

@@ -6,7 +6,7 @@
   "n-shown": ", rodoma: {count}",
   "opinion": "{count, plural, one {# nuomonė} few {# nuomonės} other {# nuomonės}}",
   "opinion-next-to-win-rate": "Nuomonė šalia pergalių rodiklio, {tier} lygyje",
-  "rate-the": "Įvertinkite {tankName}",
+  "rate-the": "Ką manote apie tanką {tankName}?",
   "reputation-against-results": "Reputacija prieš rezultatus",
   "same-tank-different-metas": "Tas pats tankas, skirtingos metos",
   "the-same-tank-by-how": "Tas pats tankas pagal tai, kaip gerai žaidžia balsuotojas",

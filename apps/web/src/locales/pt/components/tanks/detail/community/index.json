@@ -6,7 +6,7 @@
   "n-shown": ", {count} exibidos",
   "opinion": "{count, plural, one {# opinião} other {# opiniões}}",
   "opinion-next-to-win-rate": "Opinião comparada com a taxa de vitórias, no nível {tier}",
-  "rate-the": "Avaliar: {tankName}",
+  "rate-the": "O que você acha do {tankName}?",
   "reputation-against-results": "Reputação comparada com os resultados",
   "same-tank-different-metas": "O mesmo tanque, diferentes metajogos",
   "the-same-tank-by-how": "O mesmo tanque, por nível de desempenho de quem vota",

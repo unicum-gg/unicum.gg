@@ -1,0 +1,17 @@
+{
+  "duration": "Vidējais ilgums",
+  "duration-hint": "Minūtes un sekundes no atskaites beigām līdz rezultātam.",
+  "ending": "Kā tā beidzas",
+  "finish": {
+    "extermination": "Komanda iznīcināta",
+    "base": "Bāze ieņemta",
+    "timeout": "Laiks beidzās",
+    "other": "Cits"
+  },
+  "spawns": "Uzvaras pēc sākumpunkta",
+  "team": "Komanda {n}",
+  "draws": "Neizšķirti",
+  "count-of": "{count} no {total}",
+  "spawns-hint": "Komandas tiek piešķirtas nejauši, tāpēc ilgstoša atšķirība šeit ir saistīta ar karti.",
+  "spawns-small": "Pagaidām ir pārāk maz kauju, lai atšķirtu līdzsvarotu karti no nevienmērīgas."
+}

@@ -6,8 +6,8 @@
   },
   "streamer": "主播 · 在 Twitch 上观看 {name}",
   "tournament": {
-    "one": "{title} 的获胜名单成员",
-    "many": "加入过 {count} 个获胜名单，最佳成绩为 {title}",
+    "one": "在{title}中获胜",
+    "many": "赢得了{count}场锦标赛，其中最佳的是{title}",
     "featured": "{text} · 特色活动",
     "unnamed": "一场默认锦标赛"
   },

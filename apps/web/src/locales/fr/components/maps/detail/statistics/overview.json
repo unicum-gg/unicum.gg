@@ -1,0 +1,17 @@
+{
+  "duration": "Durée moyenne",
+  "duration-hint": "Minutes et secondes, de la fin du compte à rebours au résultat.",
+  "ending": "Comment se termine la bataille",
+  "finish": {
+    "extermination": "Une équipe détruite",
+    "base": "Base capturée",
+    "timeout": "Temps écoulé",
+    "other": "Autre"
+  },
+  "spawns": "Victoires selon l’apparition",
+  "team": "Équipe {n}",
+  "draws": "Égalités",
+  "count-of": "{count} sur {total}",
+  "spawns-hint": "Les équipes sont réparties de façon aléatoire, donc un écart persistant ici concerne la carte.",
+  "spawns-small": "Pas encore assez de batailles pour distinguer une carte équilibrée d’une carte déséquilibrée."
+}

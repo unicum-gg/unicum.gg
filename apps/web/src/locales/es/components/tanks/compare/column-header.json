@@ -9,7 +9,7 @@
   "duplicate-tank": "Comparar {tank} contra sí mismo",
   "highest-overall-score": "Puntuación General más alta",
   "highest-overall-score-of-this": "Puntuación General más alta de esta comparación",
-  "is-the-reference": "{tank} es la referencia",
+  "is-the-reference": "Comparado con {tank}",
   "overall": "General",
   "reference-column": "Columna de referencia",
   "remove-tank": "Eliminar {tank}",
@@ -17,7 +17,7 @@
   "setup": "Configuración",
   "setup-n": "Configuración {n}",
   "stock": "Stock",
-  "tank-setup": "Configuración: {tank}",
+  "tank-setup": "Configuración para {tank}",
   "the-same-vehicle-under-a-setup": "El mismo vehículo con una configuración propia",
   "top": "Mejores",
   "where-this-vehicle-sits-across": "Posición de este vehículo en todo el catálogo, sobre {MAXSCORE}: la media de las puntuaciones de sus cuatro categorías, según la configuración elegida aquí. Es un resumen, no un veredicto: un ligero y un pesado pueden alcanzar la misma puntuación por rendir bien en aspectos distintos."

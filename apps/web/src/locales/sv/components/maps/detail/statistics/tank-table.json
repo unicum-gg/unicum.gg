@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Strider som spelades med det här fordonet på kartan.",
+  "rating-tip": "Dess betyg över striderna på kartan, beräknat med webbplatsens egna formler.",
+  "everywhere": "{metric} överallt",
+  "everywhere-tip": "Samma fordons betyg över alla kartor i läget.",
+  "gap-tip": "Dess betyg på kartan minus betyget på alla kartor. Över noll betyder att kartan passar fordonet.",
+  "thin-row": "Färre än {count} spelare tog det här fordonet, så dessa siffror säger mer om dem än om fordonet på den här kartan."
+}

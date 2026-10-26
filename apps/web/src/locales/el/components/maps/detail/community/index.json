@@ -5,7 +5,7 @@
   "every-server-one-average": "Κάθε διακομιστής, ένας μέσος όρος",
   "n-shown": ", {count} εμφανιζόμενα",
   "opinion": "{count, plural, one {# άποψη} other {# απόψεις}}",
-  "rate-the": "Αξιολόγηση {mapName}",
+  "rate-the": "Ποια είναι η γνώμη σας για το {mapName};",
   "same-map-different-metas": "Ίδιο έδαφος, διαφορετικά meta",
   "the-same-map-by-how": "Ο ίδιος χάρτης, ανάλογα με το πόσο καλά παίζει αυτός που ψηφίζει",
   "what-players-wrote": "Τι έγραψαν οι παίκτες",

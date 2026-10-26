@@ -6,7 +6,7 @@
   "n-shown": ", {count} weergegeven",
   "opinion": "{count, plural, one {# mening} other {# meningen}}",
   "opinion-next-to-win-rate": "Mening naast winstpercentage, binnen tier {tier}",
-  "rate-the": "Beoordeel {tankName}",
+  "rate-the": "Wat vind je van {tankName}?",
   "reputation-against-results": "Reputatie vergeleken met resultaten",
   "same-tank-different-metas": "Dezelfde tank, verschillende meta’s",
   "the-same-tank-by-how": "Dezelfde tank, uitgesplitst naar het speelniveau van de stemmer",

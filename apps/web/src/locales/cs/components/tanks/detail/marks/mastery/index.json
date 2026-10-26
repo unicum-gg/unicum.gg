@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# hráč} few {# hráči} many {# hráčů} other {# hráčů}}",
   "rolling-average-combined-damage-to": "Klouzavý průměr kombinovaného poškození potřebný k tomu, aby za vámi skončili hráči tvořící 65 / 85 / 95 % hodnocených.",
   "single-battle-xp-to-beat": "Počet ZK za jednu bitvu potřebný k tomu, aby za vámi skončili hráči tvořící 50 / 80 / 95 / 99 % hodnocených.",
-  "tank-marks-of-excellence": "Vítězné znaky tanku {tank}",
-  "tank-marks-of-mastery": "Záplaty mistrovství tanku {tank}"
+  "tank-marks-of-excellence": "Vítězné znaky získané na tanku {tank}",
+  "tank-marks-of-mastery": "Záplaty mistrovství získané na tanku {tank}"
 }

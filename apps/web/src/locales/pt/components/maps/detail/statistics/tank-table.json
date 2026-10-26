@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Batalhas disputadas com este veículo neste mapa.",
+  "rating-tip": "Sua classificação nas batalhas com ele neste mapa, usando as próprias fórmulas do site.",
+  "everywhere": "{metric} em todo lugar",
+  "everywhere-tip": "A classificação do mesmo veículo em todos os mapas do modo.",
+  "gap-tip": "Sua classificação neste mapa menos sua classificação em todos os mapas, acima de zero significa que o mapa combina com ele.",
+  "thin-row": "Menos de {count} jogadores levaram este veículo para cá, então estes valores dizem mais sobre eles do que sobre o veículo neste mapa."
+}

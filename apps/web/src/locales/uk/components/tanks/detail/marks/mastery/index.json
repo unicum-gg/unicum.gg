@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# гравець} few {# гравці} many {# гравців} other {# гравців}}",
   "rolling-average-combined-damage-to": "Ковзна середня сумарної шкоди, щоб перевершити 65 / 85 / 95% гравців.",
   "single-battle-xp-to-beat": "Досвід за один бій, щоб перевершити 50 / 80 / 95 / 99% гравців.",
-  "tank-marks-of-excellence": "Відмітні позначки для танка {tank}",
-  "tank-marks-of-mastery": "Мітки майстерності для танка {tank}"
+  "tank-marks-of-excellence": "Відмітні позначки, зароблені на танку {tank}",
+  "tank-marks-of-mastery": "Мітки майстерності, зароблені на танку {tank}"
 }

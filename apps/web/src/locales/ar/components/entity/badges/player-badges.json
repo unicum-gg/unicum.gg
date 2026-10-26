@@ -6,8 +6,8 @@
   },
   "streamer": "بث مباشر · شاهد {name} على Twitch",
   "tournament": {
-    "one": "التشكيلة الفائزة في {title}",
-    "many": "ضمن {count} تشكيلات فائزة، أفضل {title}",
+    "one": "فاز بـ {title}",
+    "many": "فاز بـ {count} من البطولات، وأفضلها {title}",
     "featured": "{text} · فعالية مميزة",
     "unnamed": "بطولة Wargaming"
   },

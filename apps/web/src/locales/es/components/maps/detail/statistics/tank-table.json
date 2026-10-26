@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Batallas libradas con este vehículo en este mapa.",
+  "rating-tip": "Su valoración a lo largo de sus batallas en este mapa, según las fórmulas propias del sitio.",
+  "everywhere": "{metric} en todas partes",
+  "everywhere-tip": "La valoración del mismo vehículo en todos los mapas del modo.",
+  "gap-tip": "Su valoración en este mapa menos su valoración en todos los mapas, por encima de cero el mapa le conviene.",
+  "thin-row": "Menos de {count} jugadores usaron este vehículo aquí, así que estas cifras dicen más sobre ellos que sobre el vehículo en este mapa."
+}

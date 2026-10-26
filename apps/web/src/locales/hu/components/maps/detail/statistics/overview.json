@@ -1,0 +1,17 @@
+{
+  "duration": "Átlagos hossz",
+  "duration-hint": "Percek és másodpercek a visszaszámlálás végétől az eredményig.",
+  "ending": "Hogyan ér véget",
+  "finish": {
+    "extermination": "Egy csapat megsemmisítve",
+    "base": "Bázis elfoglalva",
+    "timeout": "Lejárt az idő",
+    "other": "Egyéb"
+  },
+  "spawns": "Győzelmek kezdőpont szerint",
+  "team": "{n}. csapat",
+  "draws": "Döntetlenek",
+  "count-of": "{count} / {total}",
+  "spawns-hint": "A csapatokat véletlenszerűen osztják be, ezért a tartós eltérés itt a pályáról mond valamit.",
+  "spawns-small": "Még túl kevés csata áll rendelkezésre ahhoz, hogy meg lehessen különböztetni a kiegyensúlyozott pályát az egyoldalútól."
+}

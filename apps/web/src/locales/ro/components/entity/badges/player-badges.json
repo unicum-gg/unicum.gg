@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · urmărește-l pe {name} pe Twitch",
   "tournament": {
-    "one": "Lista câștigătoare a turneului {title}",
-    "many": "În {count} liste câștigătoare, cel mai bun {title}",
+    "one": "Câștigat {title}",
+    "many": "Câștigate {count} turnee, cel mai bun fiind {title}",
     "featured": "{text} · eveniment recomandat",
     "unnamed": "un turneu Wargaming"
   },

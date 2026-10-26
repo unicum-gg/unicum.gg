@@ -1,5 +1,6 @@
 {
   "title": "Lo que los jugadores equipan en el tanque {tank}",
+  "what-they-fit": "Configuraciones que usan los jugadores con {tank} en {mode}",
   "equipment": "Equipamiento",
   "consumables": "Consumibles",
   "directives": "Directivas",
@@ -21,6 +22,7 @@
     "battles": "Batallas",
     "skill": "Habilidad"
   },
+  "crew-skills": "Habilidades de tripulación entrenadas con {tank} en {mode}",
   "crew-skills-hint": "Cada habilidad que tenía entrenada el rol {role}, contabilizada entre los jugadores cuya tripulación tiene ese puesto, junto al resultado de las batallas libradas con ella.",
   "counted": {
     "equipment": "Contabilizados como conjuntos completos de tres dispositivos, tal como los equipan los jugadores, entre los jugadores que usaron cada conjunto.",
@@ -28,8 +30,10 @@
     "directives": "Contabilizados de una directiva en una, entre los jugadores que la usaron.",
     "field-mods": "Contabilizados como árboles completos de modificaciones de campo, con cada pareja tal como la eligió el jugador, entre los jugadores que usaron cada árbol."
   },
+  "top-battles": "Mejores batallas libradas con {tank} en {mode}",
   "top-battles-hint": "La mejor batalla de cada jugador con este tanque según el daño infligido, y exactamente lo que equipó en ella. Abre una batalla para ver su informe completo.",
   "thin-row": "Menos de {count} jugadores usaron esto, así que estas cifras dicen más sobre ellos que sobre la configuración.",
+  "top-players": "Mejores jugadores de {tank} en {mode}",
   "top-players-hint": "Los mejores jugadores con este tanque entre aquellos cuyas batallas están registradas, clasificados según su récord completo con él, con lo que equiparon en su última batalla registrada. Abre una fila para ver su tripulación.",
   "crew": "Tripulación",
   "show-crew": "Mostrar la tripulación"

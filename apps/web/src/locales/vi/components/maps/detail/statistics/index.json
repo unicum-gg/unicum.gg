@@ -1,0 +1,25 @@
+{
+  "title": "Số liệu về {map}",
+  "overview": "Diễn biến một trận đấu trên {map} trong {mode}",
+  "by-class": "Các hạng hoạt động tốt trên {map} trong {mode}",
+  "by-class-hint": "Hiệu quả của từng hạng trên bản đồ này. Bên dưới mỗi hình là chênh lệch so với cùng những xe tăng trên mọi bản đồ khác của chế độ, được tính theo cùng cách, vì vậy số liệu nói lên điều gì đó về bản đồ thay vì về việc những xe tăng nào được đưa vào đó.",
+  "by-tier": "Hiệu quả của từng cấp trên {map} trong {mode}",
+  "by-vehicle": "Những xe tăng tốt nhất trên {map} trong {mode}",
+  "by-vehicle-hint": "Được xếp hạng theo chỉ số đánh giá trên bản đồ này, những xe tăng được ít hơn năm người chơi sử dụng ở đây được liệt kê sau các xe khác. Bên cạnh đó là cùng xe tăng trên mọi bản đồ của chế độ, chênh lệch này cho biết bản đồ có phù hợp với xe tăng đó hay không.",
+  "top-battles": "Những trận đấu tốt nhất diễn ra trên {map} trong {mode}",
+  "top-battles-hint": "Trận đấu tốt nhất của mỗi người chơi trên bản đồ này, tính theo sát thương đã gây ra. Mở một trận đấu để xem báo cáo đầy đủ.",
+  "col": {
+    "class": "Loại",
+    "tier": "Cấp",
+    "records": "Số trận",
+    "records-tip": "Các trận đấu đã tham chiến ở hạng hoặc cấp này trên bản đồ này, mỗi người chơi một trận đấu.",
+    "winrate": "WR",
+    "damage": "Sát thương",
+    "assisted": "Hỗ trợ",
+    "kills": "Hạ gục",
+    "spotted": "Phát hiện",
+    "survival": "Sống sót",
+    "xp": "XP",
+    "baseline-tip": "Bên dưới mỗi hình là chênh lệch so với cùng những xe tăng trên mọi bản đồ khác của chế độ."
+  }
+}

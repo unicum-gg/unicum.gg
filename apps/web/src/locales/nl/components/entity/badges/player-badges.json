@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · bekijk {name} op Twitch",
   "tournament": {
-    "one": "Winnende selectie van {title}",
-    "many": "Deel van {count} winnende selecties, met {title} als beste resultaat",
+    "one": "{title} gewonnen",
+    "many": "{count} toernooien gewonnen, waarvan {title} de beste was",
     "featured": "{text} · een uitgelicht evenement",
     "unnamed": "een Wargaming-toernooi"
   },

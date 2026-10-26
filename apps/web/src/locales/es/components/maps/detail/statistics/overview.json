@@ -1,0 +1,17 @@
+{
+  "duration": "Duración promedio",
+  "duration-hint": "Minutos y segundos, desde el final de la cuenta atrás hasta el resultado.",
+  "ending": "Cómo termina",
+  "finish": {
+    "extermination": "Un equipo destruido",
+    "base": "Base capturada",
+    "timeout": "Se agotó el tiempo",
+    "other": "Otro"
+  },
+  "spawns": "Victorias por aparición",
+  "team": "Equipo {n}",
+  "draws": "Empates",
+  "count-of": "{count} de {total}",
+  "spawns-hint": "Los equipos se asignan de forma aleatoria, así que una diferencia persistente aquí se debe al mapa.",
+  "spawns-small": "Todavía hay muy pocas batallas para distinguir un mapa equilibrado de uno desigual."
+}

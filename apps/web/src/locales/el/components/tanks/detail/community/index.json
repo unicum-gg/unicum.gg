@@ -6,7 +6,7 @@
   "n-shown": ", εμφανίζονται {count}",
   "opinion": "{count, plural, one {# γνώμη} other {# γνώμες}}",
   "opinion-next-to-win-rate": "Άποψη δίπλα στο ποσοστό νικών, στο επίπεδο {tier}",
-  "rate-the": "Αξιολογήστε το {tankName}",
+  "rate-the": "Τι πιστεύετε για το άρμα {tankName};",
   "reputation-against-results": "Φήμη εναντίον αποτελεσμάτων",
   "same-tank-different-metas": "Ίδιο άρμα, διαφορετικά meta",
   "the-same-tank-by-how": "Το ίδιο άρμα, ανάλογα με το πόσο καλά παίζει ο ψηφοφόρος",

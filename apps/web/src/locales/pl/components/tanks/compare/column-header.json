@@ -9,7 +9,7 @@
   "duplicate-tank": "Porównaj {tank} przeciwko samo",
   "highest-overall-score": "Najwyższy wynik w kategorii Ogółem",
   "highest-overall-score-of-this": "Najwyższy wynik w kategorii Ogółem w tym porównaniu",
-  "is-the-reference": "{tank} jest punktem odniesienia",
+  "is-the-reference": "Porównane z czołgiem {tank}",
   "overall": "Ogółem",
   "reference-column": "Kolumna odniesienia",
   "remove-tank": "Usuń {tank}",
@@ -17,7 +17,7 @@
   "setup": "Konfiguracja",
   "setup-n": "Konfiguracja {n}",
   "stock": "Stockowy",
-  "tank-setup": "Konfiguracja: {tank}",
+  "tank-setup": "Konfiguracja czołgu {tank}",
   "the-same-vehicle-under-a-setup": "Ten sam pojazd w ramach własnej konfiguracji",
   "top": "Najlepsi",
   "where-this-vehicle-sits-across": "Pozycja tego pojazdu na tle całego katalogu w skali do {MAXSCORE}: średnia jego wyników w czterech kategoriach przy wybranej tutaj konfiguracji. To podsumowanie, a nie werdykt. Zwiadowca i czołg ciężki mogą osiągnąć ten sam wynik dzięki mocnym stronom w różnych obszarach."

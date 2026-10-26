@@ -1,0 +1,17 @@
+{
+  "duration": "Pangkaraniwang tagal",
+  "duration-hint": "Mga minuto at segundo, mula sa pagtatapos ng countdown hanggang sa resulta.",
+  "ending": "Kung paano ito nagtatapos",
+  "finish": {
+    "extermination": "Nawasak ang isang koponan",
+    "base": "Nasakop ang base",
+    "timeout": "Naubos ang oras",
+    "other": "Iba pa"
+  },
+  "spawns": "Mga panalo ayon sa paglitaw",
+  "team": "Koponan {n}",
+  "draws": "Tabla",
+  "count-of": "{count} sa {total}",
+  "spawns-hint": "Random na itinatalaga ang mga koponan, kaya ang patuloy na agwat dito ay tungkol sa mapa.",
+  "spawns-small": "Masyado pang kakaunti ang mga laban para matukoy kung balanse ang mapa o pabor sa isang panig."
+}

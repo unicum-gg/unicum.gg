@@ -6,7 +6,7 @@
   "n-shown": ", parādīti {count}",
   "opinion": "{count, plural, zero {# viedokļu} one {# viedoklis} other {# viedokļi}}",
   "opinion-next-to-win-rate": "Viedoklis blakus uzvaru biežumam {tier}. līmeņa ietvaros",
-  "rate-the": "Novērtēt {tankName}",
+  "rate-the": "Ko jūs domājat par {tankName}?",
   "reputation-against-results": "Reputācija pret rezultātiem",
   "same-tank-different-metas": "Tas pats tanks, atšķirīgas metas",
   "the-same-tank-by-how": "Tas pats tanks, pēc tā, cik labi spēlē balsotājs",

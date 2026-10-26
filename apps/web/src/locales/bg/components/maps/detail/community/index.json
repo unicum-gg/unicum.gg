@@ -5,7 +5,7 @@
   "every-server-one-average": "Всеки сървър, един среден резултат",
   "n-shown": ", показан брой: {count}",
   "opinion": "{count, plural, one {# мнение} other {# мнения}}",
-  "rate-the": "Оценете {mapName}",
+  "rate-the": "Какво мислите за {mapName}?",
   "same-map-different-metas": "Същата карта, различни мета стратегии",
   "the-same-map-by-how": "Същата карта, според това колко добре играе гласувалият",
   "what-players-wrote": "Какво са написали играчите",

@@ -6,8 +6,8 @@
   },
   "streamer": "Стример · {name} ойыншысын Twitch-те көру",
   "tournament": {
-    "one": "{title} турнирінің жеңімпаз құрамы",
-    "many": "{count} жеңімпаз құрамда, үздік нәтиже: {title}",
+    "one": "{title} жеңген",
+    "many": "{count} турнир жеңген, олардың ішіндегі үздігі: {title}",
     "featured": "{text} · таңдаулы оқиға",
     "unnamed": "Wargaming турнирі"
   },

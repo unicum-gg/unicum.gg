@@ -2,6 +2,10 @@
   "title": "Mapa {map} do World of Tanks ({region})",
   "description": "Mapa {map}: um mapa do World of Tanks com {width} × {height} m.",
   "description-modes": "Mapa {map}: um mapa do World of Tanks com {width} × {height} m, disponível nos modos {modes}.",
+  "statistics": {
+    "title": "Estatísticas de {map} ({region}): taxa de vitórias por surgimento, classes e melhores tanques",
+    "description": "Como as batalhas em {map} realmente acontecem, contabilizado a partir de batalhas registradas: duração média, como terminam, qual surgimento vence, como cada classe e nível de veículo se sai ali em comparação com os mesmos tanques em outros mapas, além dos melhores tanques e batalhas nele."
+  },
   "community": {
     "title": "Avaliações dos jogadores sobre {map} e classificação da comunidade ({region})",
     "description": "O que os jogadores pensam de {map}: a classificação da comunidade de zero a cinco, dividida por quão bem os eleitores jogam, com vereditos escritos de contas que têm as batalhas atrás de si. Equilíbrio, variedade, fluxo e se cada classe de veículo tem uma função ali."

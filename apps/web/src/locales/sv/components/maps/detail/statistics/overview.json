@@ -1,0 +1,17 @@
+{
+  "duration": "Genomsnittlig längd",
+  "duration-hint": "Minuter och sekunder från nedräkningens slut till resultatet.",
+  "ending": "Så slutar den",
+  "finish": {
+    "extermination": "Ett lag förstört",
+    "base": "Bas erövrad",
+    "timeout": "Tiden tog slut",
+    "other": "Övrigt"
+  },
+  "spawns": "Vinster per startpunkt",
+  "team": "Lag {n}",
+  "draws": "Oavgjorda",
+  "count-of": "{count} av {total}",
+  "spawns-hint": "Lagen tilldelas slumpmässigt, så en bestående skillnad här beror på kartan.",
+  "spawns-small": "Än så länge är det för få strider för att skilja en balanserad karta från en ensidig."
+}

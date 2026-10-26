@@ -4,7 +4,7 @@
     "hide": "ซ่อนแชต",
     "show-streamers": "แสดงสตรีมเมอร์"
   },
-  "heading": "สถิติผู้เล่น แคลน และรถถัง World of Tanks ของ {name}",
+  "heading": "สถิติผู้เล่น แคลน และรถถังใน World of Tanks บน {name}",
   "hide": "ซ่อนสตรีมเมอร์",
   "player": "ผู้เล่น",
   "stream-language": "ภาษาสตรีม · {name}",

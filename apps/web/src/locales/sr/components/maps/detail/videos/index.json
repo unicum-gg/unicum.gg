@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "На овој мапи још нема повезане тактике. Предложи је и појавиће се овде када је модератор прегледа.",
-  "random-battle-videos-many": "{count} случајне bitka видеа",
-  "random-battle-videos-one": "{count} случајне bitka видео",
-  "tactic-videos-many": "{count} тактика видеа",
-  "tactic-videos-one": "{count} тактика видео",
-  "tactics": "Taktika na mapi {map}"
+  "random-battle-videos-many": "{count} nasumičnih videa bitaka",
+  "random-battle-videos-one": "{count} video nasumične bitke",
+  "random-battles": "Nasumične bitke na mapi {map}, tenk po tenk",
+  "tactic-videos-many": "{count} takmičarskih videa",
+  "tactic-videos-one": "{count} takmičarski video",
+  "tactics": "Takmičarska igra na mapi {map}"
 }

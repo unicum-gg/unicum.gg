@@ -2,6 +2,10 @@
   "title": "World of Tanks-karta: {map} ({region})",
   "description": "{map}: en {width} × {height} m stor World of Tanks-karta.",
   "description-modes": "{map}: en {width} × {height} m stor World of Tanks-karta för {modes}.",
+  "statistics": {
+    "title": "Statistik för {map} ({region}): vinstfrekvens per startpunkt, klasser och bästa vagnar",
+    "description": "Så här går strider på {map} faktiskt till, räknade från registrerade strider: genomsnittlig längd, hur de slutar, vilken startpunkt som vinner, hur varje fordonsklass och nivå presterar där jämfört med samma vagnar på andra kartor, samt de bästa vagnarna och striderna där."
+  },
   "community": {
     "title": "Spelarrecensioner och communitybetyg för {map} ({region})",
     "description": "Vad spelarna tycker om {map}: communityts betyg från ett till fem, uppdelat efter hur väl de som röstar spelar, med skriftliga omdömen från konton som har striderna bakom sig. Balans, variation, flöde och om varje fordonsklass har en uppgift där."

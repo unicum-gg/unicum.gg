@@ -6,8 +6,8 @@
   },
   "streamer": "Yayıncı · {name} adlı oyuncuyu Twitch’te izle",
   "tournament": {
-    "one": "{title} turnuvasının kazanan kadrosu",
-    "many": "{count} kazanan kadroda, en iyi {title}",
+    "one": "{title} kazandı",
+    "many": "{count} turnuva kazandı, en iyisi {title} oldu",
     "featured": "{text} · öne çıkan etkinlik",
     "unnamed": "bir Wargaming turnuvası"
   },

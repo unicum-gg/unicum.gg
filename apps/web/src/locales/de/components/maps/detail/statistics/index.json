@@ -1,0 +1,25 @@
+{
+  "title": "{map} in Zahlen",
+  "overview": "Wie sich ein Gefecht auf {map} im Modus {mode} entwickelt",
+  "by-class": "Welche Klassen auf {map} im Modus {mode} gut abschneiden",
+  "by-class-hint": "Wie sich jede Klasse auf dieser Karte schlägt. Unter jeder Zahl steht der Abstand zu denselben Fahrzeugen auf jeder anderen Karte des Modus, auf die gleiche Weise gewichtet. So sagt der Wert etwas über die Karte aus und nicht darüber, welche Panzer auf ihr eingesetzt wurden.",
+  "by-tier": "Wie sich jede Stufe auf {map} im Modus {mode} schlägt",
+  "by-vehicle": "Die besten Fahrzeuge auf {map} im Modus {mode}",
+  "by-vehicle-hint": "Nach ihrer Wertung auf dieser Karte geordnet. Fahrzeuge, die hier von weniger als fünf Spielern gefahren wurden, stehen hinter den anderen. Daneben steht dasselbe Fahrzeug auf jeder Karte des Modus. Der Abstand zeigt, wie gut die Karte zu ihm passt.",
+  "top-battles": "Die besten auf {map} im Modus {mode} gespielten Gefechte",
+  "top-battles-hint": "Das beste Gefecht jedes Spielers auf dieser Karte, gemessen am verursachten Schaden. Öffne ein Gefecht für den vollständigen Bericht.",
+  "col": {
+    "class": "Klasse",
+    "tier": "Stufe",
+    "records": "Gefechte",
+    "records-tip": "Auf dieser Karte in dieser Klasse oder Stufe gespielte Gefechte, einmal pro Spieler und Gefecht.",
+    "winrate": "WR",
+    "damage": "Schaden",
+    "assisted": "Unterstützung",
+    "kills": "Abschüsse",
+    "spotted": "Aufgedeckt",
+    "survival": "Überlebt",
+    "xp": "XP",
+    "baseline-tip": "Unter jeder Zahl steht der Abstand zu denselben Fahrzeugen auf jeder anderen Karte des Modus."
+  }
+}

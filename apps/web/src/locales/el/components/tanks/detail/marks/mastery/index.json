@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# παίκτης} other {# παίκτες}}",
   "rolling-average-combined-damage-to": "Κυλιόμενος μέσος όρος συνδυασμένης ζημιάς για να ξεπεράσετε το 65 / 85 / 95% των παικτών.",
   "single-battle-xp-to-beat": "XP μίας μάχης για να ξεπεράσετε το 50 / 80 / 95 / 99% των παικτών.",
-  "tank-marks-of-excellence": "Διακριτικά Υπεροχής για το άρμα {tank}",
-  "tank-marks-of-mastery": "Σημάδια Δεξιοτεχνίας για το άρμα {tank}"
+  "tank-marks-of-excellence": "Διακριτικά Υπεροχής που κερδίστηκαν με το άρμα {tank}",
+  "tank-marks-of-mastery": "Σημάδια Δεξιοτεχνίας που κερδίστηκαν με το άρμα {tank}"
 }

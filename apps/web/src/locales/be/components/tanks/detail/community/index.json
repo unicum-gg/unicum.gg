@@ -6,7 +6,7 @@
   "n-shown": ", паказана {count}",
   "opinion": "{count, plural, one {# меркаванне} few {# меркаванні} many {# меркаванняў} other {# меркаванні}}",
   "opinion-next-to-win-rate": "Меркаванне побач з пераможнасцю для ўзроўню {tier}",
-  "rate-the": "Ацаніць {tankName}",
+  "rate-the": "Што вы думаеце пра {tankName}?",
   "reputation-against-results": "Рэпутацыя супраць вынікаў",
   "same-tank-different-metas": "Той жа танк, розныя метагульні",
   "the-same-tank-by-how": "Той жа танк, з улікам таго, наколькі добра гуляе той, хто галасуе",

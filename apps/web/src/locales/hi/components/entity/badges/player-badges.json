@@ -6,8 +6,8 @@
   },
   "streamer": "स्ट्रीमर · Twitch पर {name} देखें",
   "tournament": {
-    "one": "{title} का विजेता रोस्टर",
-    "many": "{count} विजेता रोस्टर में, सर्वश्रेष्ठ {title}",
+    "one": "{title} जीते",
+    "many": "{count} टूर्नामेंट जीते, जिनमें सर्वश्रेष्ठ {title} था",
     "featured": "{text} · एक विशेष कार्यक्रम",
     "unnamed": "एक Wargaming टूर्नामेंट"
   },

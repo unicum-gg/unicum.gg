@@ -1,0 +1,17 @@
+{
+  "duration": "Vidutinė trukmė",
+  "duration-hint": "Minutės ir sekundės nuo atgalinio skaičiavimo pabaigos iki rezultato.",
+  "ending": "Kaip baigiasi",
+  "finish": {
+    "extermination": "Komanda sunaikinta",
+    "base": "Bazė užimta",
+    "timeout": "Baigėsi laikas",
+    "other": "Kita"
+  },
+  "spawns": "Pergalės pagal atsiradimo vietą",
+  "team": "Komanda {n}",
+  "draws": "Lygiosios",
+  "count-of": "{count} iš {total}",
+  "spawns-hint": "Komandos paskiriamos atsitiktinai, todėl ilgalaikis skirtumas čia priklauso nuo žemėlapio.",
+  "spawns-small": "Kol kas per mažai mūšių, kad būtų galima atskirti subalansuotą žemėlapį nuo nepalankaus vienai pusei."
+}

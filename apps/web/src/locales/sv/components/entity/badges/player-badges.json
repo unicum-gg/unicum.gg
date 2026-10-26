@@ -6,8 +6,8 @@
   },
   "streamer": "Streamare · titta på {name} på Twitch",
   "tournament": {
-    "one": "Vinnande laguppställning i {title}",
-    "many": "Med i {count} vinnande laguppställningar, bäst i {title}",
+    "one": "Vunnit {title}",
+    "many": "Vunnit {count} turneringar, där den bästa är {title}",
     "featured": "{text} · ett utvalt evenemang",
     "unnamed": "en Wargaming-turnering"
   },

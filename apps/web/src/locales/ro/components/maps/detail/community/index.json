@@ -5,7 +5,7 @@
   "every-server-one-average": "Fiecare server, o singură medie",
   "n-shown": ", {count} afișate",
   "opinion": "{count, plural, one {# opinie} few {# opinii} other {# opinii}}",
-  "rate-the": "Rată pentru {mapName}",
+  "rate-the": "Ce părere ai despre {mapName}?",
   "same-map-different-metas": "Același teren, meta diferite",
   "the-same-map-by-how": "Aceeași hartă, după cât de bine joacă cel care votează",
   "what-players-wrote": "Ce au scris jucătorii",

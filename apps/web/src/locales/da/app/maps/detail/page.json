@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks-kort ({region})",
   "description": "{map}: et {width} × {height} m World of Tanks-kort.",
   "description-modes": "{map}: et {width} × {height} m World of Tanks-kort med {modes}.",
+  "statistics": {
+    "title": "Statistik for {map} ({region}): sejrsrate efter startposition, klasser og bedste kampvogne",
+    "description": "Sådan foregår kampe på {map} faktisk, talt ud fra registrerede kampe: gennemsnitlig varighed, hvordan de ender, hvilken startposition der vinder, hvordan hver køretøjsklasse og hvert niveau klarer sig dér sammenlignet med de samme kampvogne på andre kort, samt de bedste kampvogne og kampe på kortet."
+  },
   "community": {
     "title": "Spilleranmeldelser af {map} og fællesskabets vurdering ({region})",
     "description": "Hvad spillerne synes om {map}: fællesskabets vurdering på en skala fra en til fem, opdelt efter hvor godt dem, der stemmer, spiller, med skrevne bedømmelser fra konti, der har kampene bagved sig. Balance, variation, flow og om hver køretøjsklasse har en opgave der."

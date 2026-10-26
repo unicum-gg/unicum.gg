@@ -1,0 +1,25 @@
+{
+  "title": "{map} i tal",
+  "overview": "Sådan forløber en kamp på {map} i {mode}",
+  "by-class": "Hvilke klasser klarer sig godt på {map} i {mode}",
+  "by-class-hint": "Sådan klarer hver klasse sig på dette kort. Under hvert tal vises forskellen i forhold til de samme køretøjer på alle andre kort i spiltilstanden, vægtet på samme måde, så tallet siger noget om kortet og ikke om, hvilke kampvogne der blev sendt dertil.",
+  "by-tier": "Sådan klarer hvert niveau sig på {map} i {mode}",
+  "by-vehicle": "De bedste køretøjer på {map} i {mode}",
+  "by-vehicle-hint": "Rangeret efter deres vurdering på dette kort, hvor køretøjer, som færre end fem spillere tog med hertil, står efter de andre. Ved siden af vises det samme køretøj på alle kort i spiltilstanden, og forskellen viser, hvor godt kortet passer til det.",
+  "top-battles": "De bedste kampe spillet på {map} i {mode}",
+  "top-battles-hint": "Hver spillers bedste kamp på dette kort efter uddelt skade. Åbn en kamp for at se den fulde rapport.",
+  "col": {
+    "class": "Klasse",
+    "tier": "Niveau",
+    "records": "Kampe",
+    "records-tip": "Kampe spillet i denne klasse eller på dette niveau på kortet, én pr. spiller pr. kamp.",
+    "winrate": "WR",
+    "damage": "Skade",
+    "assisted": "Assistance",
+    "kills": "Nedkæmpelser",
+    "spotted": "Opdagelser",
+    "survival": "Overlevede",
+    "xp": "XP",
+    "baseline-tip": "Under hvert tal vises forskellen i forhold til de samme køretøjer på alle andre kort i spiltilstanden."
+  }
+}

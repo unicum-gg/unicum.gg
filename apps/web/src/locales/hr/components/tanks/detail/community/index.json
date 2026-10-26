@@ -6,7 +6,7 @@
   "n-shown": ", prikazano {count}",
   "opinion": "{count, plural, one {# mišljenje} few {# mišljenja} other {# mišljenja}}",
   "opinion-next-to-win-rate": "Mišljenje uz stopu pobjeda, unutar razine {tier}",
-  "rate-the": "Ocijenite {tankName}",
+  "rate-the": "Što mislite o tenku {tankName}?",
   "reputation-against-results": "Ugled nasuprot rezultatima",
   "same-tank-different-metas": "Isti tenk, različite mete",
   "the-same-tank-by-how": "Isti tenk, prema tome koliko dobro glasač igra",

@@ -5,7 +5,7 @@
   "every-server-one-average": "Әр сервер, бір орташа мән",
   "n-shown": ", {count} көрсетілді",
   "opinion": "{count, plural, one {# пікір} other {# пікірлер}}",
-  "rate-the": "{mapName} бағалау",
+  "rate-the": "{mapName} туралы пікіріңіз қандай?",
   "same-map-different-metas": "Бір жер, әртүрлі мета",
   "the-same-map-by-how": "Бір карта, дауыс берушінің қаншалықты жақсы ойнайтыны бойынша",
   "what-players-wrote": "Ойыншылар не жазды",

@@ -4,7 +4,7 @@
     "hide": "Скрыть чат",
     "show-streamers": "Показать стримеров"
   },
-  "heading": "{name}: статистика игрока, клана и танков World of Tanks",
+  "heading": "Статистика игроков, кланов и танков World of Tanks на {name}",
   "hide": "Скрыть стримеров",
   "player": "Игрок",
   "stream-language": "Язык стрима · {name}",

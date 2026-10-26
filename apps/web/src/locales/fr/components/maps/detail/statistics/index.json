@@ -1,0 +1,25 @@
+{
+  "title": "{map} en chiffres",
+  "overview": "Comment se déroule une bataille sur {map} en {mode}",
+  "by-class": "Quelles classes réussissent sur {map} en {mode}",
+  "by-class-hint": "Résultats de chaque classe sur cette carte. Sous chaque chiffre, l’écart avec les mêmes véhicules sur toutes les autres cartes du mode, pondéré de la même façon, indique ce qui relève de la carte plutôt que des chars qui y ont été envoyés.",
+  "by-tier": "Résultats de chaque rang sur {map} en {mode}",
+  "by-vehicle": "Les meilleurs véhicules sur {map} en {mode}",
+  "by-vehicle-hint": "Classés selon leur note sur cette carte, les véhicules utilisés ici par moins de cinq joueurs étant répertoriés après les autres. À côté, le même véhicule sur toutes les cartes du mode, l’écart indique dans quelle mesure la carte lui convient.",
+  "top-battles": "Les meilleures batailles combattues sur {map} en {mode}",
+  "top-battles-hint": "La meilleure bataille de chaque joueur sur cette carte, classée selon les dégâts infligés. Ouvrir une bataille pour consulter son rapport complet.",
+  "col": {
+    "class": "Classe",
+    "tier": "Rang",
+    "records": "Batailles",
+    "records-tip": "Batailles combattues dans cette classe ou à ce rang sur cette carte, une par joueur et par bataille.",
+    "winrate": "WR",
+    "damage": "Dégâts",
+    "assisted": "Assistance",
+    "kills": "Éliminations",
+    "spotted": "Repérages",
+    "survival": "Survie",
+    "xp": "XP",
+    "baseline-tip": "Sous chaque chiffre : l’écart avec les mêmes véhicules sur toutes les autres cartes du mode."
+  }
+}

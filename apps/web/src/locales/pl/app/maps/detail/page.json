@@ -2,6 +2,10 @@
   "title": "Mapa {map} w World of Tanks ({region})",
   "description": "Mapa {map} w World of Tanks ma wymiary {width} × {height} m.",
   "description-modes": "Mapa {map} w World of Tanks ma wymiary {width} × {height} m i jest dostępna w trybach {modes}.",
+  "statistics": {
+    "title": "Statystyki mapy {map} ({region}): współczynnik zwycięstw z odrodzeń, klasy i najlepsze czołgi",
+    "description": "Jak rzeczywiście przebiegają bitwy na mapie {map}, na podstawie zarejestrowanych bitew: średnia długość, sposób zakończenia, które odrodzenie wygrywa, jak radzi sobie każda klasa pojazdów i poziom na tej mapie w porównaniu z tymi samymi czołgami na innych mapach, a także najlepsze czołgi i bitwy na tej mapie."
+  },
   "community": {
     "title": "Recenzje graczy i ocena społeczności mapy {map} ({region})",
     "description": "Co gracze myślą o mapie {map}: ocena społeczności w skali od jednego do pięciu, z podziałem według tego, jak dobrze grają głosujący, oraz pisemne werdykty kont, za którymi stoją bitwy. Równowaga, różnorodność, płynność rozgrywki i to, czy każda klasa pojazdów ma tu swoje zadanie."

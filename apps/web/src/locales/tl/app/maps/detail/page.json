@@ -2,6 +2,10 @@
   "title": "{map}, mapa ng World of Tanks ({region})",
   "description": "{map}: isang {width} × {height} m na mapa ng World of Tanks.",
   "description-modes": "{map}: isang {width} × {height} m na mapa ng World of Tanks na may mga mode na {modes}.",
+  "statistics": {
+    "title": "Mga istatistika ng {map} ({region}): panalong rate ng paglitaw, mga klase at pinakamahusay na mga tangke",
+    "description": "Kung paano talaga nagaganap ang mga laban sa {map}, batay sa mga naitalang laban: karaniwang tagal, kung paano nagtatapos ang mga ito, kung aling paglitaw ang nananalo, kung paano gumaganap ang bawat klase at tier doon laban sa parehong mga tangke sa ibang mapa, at ang pinakamahusay na mga tangke at laban dito."
+  },
   "community": {
     "title": "Mga pagsusuri ng mga manlalaro sa {map} at rating ng komunidad ({region})",
     "description": "Palagay ng mga manlalaro tungkol sa {map}: rating ng komunidad mula isa hanggang lima, na hinati ayon sa kung gaano kaayos maglaro ang mga bumoto, kasama ang mga nakasulat na hatol mula sa mga account na may mga laban sa likod nila. Balanse, pagkakaiba-iba, daloy at kung may gawain ang bawat klase ng sasakyan doon."

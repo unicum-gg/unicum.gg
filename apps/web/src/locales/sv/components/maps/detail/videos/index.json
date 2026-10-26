@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Ingen taktik är länkad till den här kartan ännu. Föreslå en, så visas den här när en moderator har granskat den.",
-  "random-battle-videos-many": "{count} slumpmässiga stridsvideor",
-  "random-battle-videos-one": "{count} slumpmässig stridsvideo",
-  "tactic-videos-many": "{count} taktikvideor",
-  "tactic-videos-one": "{count} taktikvideo",
-  "tactics": "Taktik på {map}"
+  "random-battle-videos-many": "{count} slumpmässiga strider",
+  "random-battle-videos-one": "{count} slumpmässig strid",
+  "random-battles": "Slumptävlingar på {map}, vagn för vagn",
+  "tactic-videos-many": "{count} tävlingsinriktade videor",
+  "tactic-videos-one": "{count} tävlingsinriktad video",
+  "tactics": "Tävlingsinriktat spel på {map}"
 }

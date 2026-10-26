@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Šiame žemėlapyje dar nėra susietos taktikos. Pasiūlykite ją, ir ji čia pasirodys, kai moderatorius ją peržiūrės.",
-  "random-battle-videos-many": "{count} atsitiktinių mūšių vaizdo įrašai",
-  "random-battle-videos-one": "{count} atsitiktinio mūšio vaizdo įrašas",
-  "tactic-videos-many": "{count} taktikos vaizdo įrašai",
-  "tactic-videos-one": "{count} taktikos vaizdo įrašas",
-  "tactics": "Taktika žemėlapyje {map}"
+  "random-battle-videos-many": "{count} atsitiktinių mūšių",
+  "random-battle-videos-one": "{count} atsitiktinis mūšis",
+  "random-battles": "Atsitiktinės kovos žemėlapyje {map}, tankas po tanko",
+  "tactic-videos-many": "{count} varžybinių vaizdo įrašų",
+  "tactic-videos-one": "{count} varžybinis vaizdo įrašas",
+  "tactics": "Varžybinis žaidimas žemėlapyje {map}"
 }

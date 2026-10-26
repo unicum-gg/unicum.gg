@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Šai kartei vēl nav piesaistīta taktika. Ieteikt vienu, un tā šeit parādīsies, kad moderators to būs pārskatījis.",
-  "random-battle-videos-many": "{count} nejaušu kauju video",
-  "random-battle-videos-one": "{count} nejaušas kaujas video",
-  "tactic-videos-many": "{count} taktiku video",
-  "tactic-videos-one": "{count} taktikas video",
-  "tactics": "Taktika kartē {map}"
+  "random-battle-videos-many": "{count} nejaušas kaujas",
+  "random-battle-videos-one": "{count} nejauša kauja",
+  "random-battles": "Nejaušas kaujas kartē {map}, katram tankam atsevišķi",
+  "tactic-videos-many": "{count} sacensību video",
+  "tactic-videos-one": "{count} sacensību video",
+  "tactics": "Sacensību spēle kartē {map}"
 }

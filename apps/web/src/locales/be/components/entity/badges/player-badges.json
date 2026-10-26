@@ -6,8 +6,8 @@
   },
   "streamer": "Стрымер · глядзець {name} на Twitch",
   "tournament": {
-    "one": "Пераможны склад турніру {title}",
-    "many": "У {count} пераможных складах, найлепшы вынік у {title}",
+    "one": "Перамога ў {title}",
+    "many": "Перамогі ў {count} турнірах, лепшы з якіх: {title}",
     "featured": "{text} · рэкамендаванае падзея",
     "unnamed": "турнір Wargaming"
   },

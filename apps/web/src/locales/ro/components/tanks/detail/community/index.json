@@ -6,7 +6,7 @@
   "n-shown": ", {count} afișate",
   "opinion": "{count, plural, one {# opinie} few {# opinii} other {# de opinii}}",
   "opinion-next-to-win-rate": "Opinia alături de rata de victorii, în cadrul nivelului {tier}",
-  "rate-the": "Evaluează {tankName}",
+  "rate-the": "Ce credeți despre {tankName}?",
   "reputation-against-results": "Reputația comparată cu rezultatele",
   "same-tank-different-metas": "Același tanc, meta diferită",
   "the-same-tank-by-how": "Același tanc, în funcție de cât de bine joacă alegătorul",

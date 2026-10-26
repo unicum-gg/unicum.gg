@@ -5,7 +5,7 @@
   "every-server-one-average": "Jokaisella palvelimella yksi keskiarvo",
   "n-shown": ", {count} näytetty",
   "opinion": "{count, plural, one {# mielipide} other {# mielipidettä}}",
-  "rate-the": "Arvioi {mapName}",
+  "rate-the": "Mitä mieltä olet kartasta {mapName}?",
   "same-map-different-metas": "Sama maasto, erilaiset metat",
   "the-same-map-by-how": "Sama kartta äänestäjän pelitaidon mukaan",
   "what-players-wrote": "Mitä pelaajat kirjoittivat",

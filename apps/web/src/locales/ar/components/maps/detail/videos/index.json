@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "لا يوجد تكتيك مرتبط بهذه الخريطة بعد. اقترح واحدًا وسيظهر هنا بعد أن يراجعه أحد المشرفين.",
-  "random-battle-videos-many": "{count} فيديوهات معارك عشوائية",
-  "random-battle-videos-one": "{count} فيديو معركة عشوائية",
-  "tactic-videos-many": "{count} فيديوهات التكتيك",
-  "tactic-videos-one": "{count} فيديو التكتيك",
-  "tactics": "التكتيكات على الخريطة {map}"
+  "random-battle-videos-many": "{count} معارك عشوائية",
+  "random-battle-videos-one": "{count} معركة عشوائية",
+  "random-battles": "المعارك العشوائية على {map}، دبابةً بعد دبابة",
+  "tactic-videos-many": "{count} فيديوهات تنافسية",
+  "tactic-videos-one": "{count} فيديو تنافسي",
+  "tactics": "اللعب التنافسي على {map}"
 }

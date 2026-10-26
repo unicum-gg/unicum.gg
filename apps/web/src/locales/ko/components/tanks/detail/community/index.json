@@ -6,7 +6,7 @@
   "n-shown": ", {count}개 표시",
   "opinion": "{count, plural, other {#개 의견}}",
   "opinion-next-to-win-rate": "단계 {tier} 내 의견과 승률 비교",
-  "rate-the": "{tankName} 평가",
+  "rate-the": "전차 {tankName}에 대해 어떻게 생각하시나요?",
   "reputation-against-results": "평판과 결과 비교",
   "same-tank-different-metas": "같은 전차, 다른 메타",
   "the-same-tank-by-how": "투표자의 플레이 실력에 따른 같은 전차의 평가",

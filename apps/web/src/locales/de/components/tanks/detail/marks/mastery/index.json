@@ -5,6 +5,6 @@
   "n-players": "{count, plural, one {# Spieler} other {# spieler}}",
   "rolling-average-combined-damage-to": "Gleitender Durchschnitt des kombinierten Schadens, um 65 / 85 / 95 % der spieler zu übertreffen.",
   "single-battle-xp-to-beat": "EP in einem einzelnen Gefecht, um 50 / 80 / 95 / 99 % der spieler zu übertreffen.",
-  "tank-marks-of-excellence": "Erfolgsmarkierungen für {tank}",
-  "tank-marks-of-mastery": "Meisterschaftsmarken für {tank}"
+  "tank-marks-of-excellence": "Mit {tank} verdiente Erfolgsmarkierungen",
+  "tank-marks-of-mastery": "Mit {tank} verdiente Meisterschaftsmarken"
 }

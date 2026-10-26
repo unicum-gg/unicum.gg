@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "このマップにはまだ戦術がリンクされていません。提案すると、モデレーターの確認後にここへ表示されます。",
-  "random-battle-videos-many": "{count}本のランダム戦闘動画",
-  "random-battle-videos-one": "{count}本のランダム戦闘動画",
-  "tactic-videos-many": "{count}本の戦術動画",
-  "tactic-videos-one": "{count}本の戦術動画",
-  "tactics": "{map}での戦術"
+  "random-battle-videos-many": "{count}回のランダムバトル",
+  "random-battle-videos-one": "{count}回のランダム戦",
+  "random-battles": "{map}での戦車別ランダムバトル",
+  "tactic-videos-many": "{count}本の競技動画",
+  "tactic-videos-one": "{count}本の競技動画",
+  "tactics": "{map}での競技プレイ"
 }

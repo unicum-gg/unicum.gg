@@ -1,5 +1,6 @@
 {
   "title": "Čo hráči používajú v tanku {tank}",
+  "what-they-fit": "Postavenia, ktoré hráči používajú na tanku {tank} v režime {mode}",
   "equipment": "Výbava",
   "consumables": "Spotrebný materiál",
   "directives": "Direktívy",
@@ -14,13 +15,14 @@
     "player-winrate-tip": "Celková miera víťazstiev tých istých hráčov po celom ich účte, vážená podľa ich bitiek s touto postavitvė.",
     "delta": "±",
     "delta-tip": "Údaj tejto postavitve mínus celkový údaj tých istých hráčov po celom ich účte.",
-    "assisted": "Asistencia",
+    "assisted": "Asistenca",
     "usage-tip": "Hráči, ktorí túto postavitve použili aspoň v jednej štetej bitke, v pomere k počtu štetých hráčov.",
     "player-rating": "Hráč {metric}",
     "player-rating-tip": "Celkové hodnotenie tých istých hráčov po celom ich účte, vážené podľa ich bitiek s touto postavitve.",
     "battles": "Bitky",
     "skill": "Zručnosť"
   },
+  "crew-skills": "Spretnosti posádky vycvičené na tanku {tank} v režime {mode}",
   "crew-skills-hint": "Každá zručnosť, ktorú mal {role} vycvičenú, sa počíta u hráčov, ktorých posádka má toto miesto, spolu s tým, ako dopadli bitky odohrané s ňou.",
   "counted": {
     "equipment": "Počíta sa ako celý súbor troch zariadení, tak ako ich hráči používajú, u hráčov, ktorí použili každý súbor.",
@@ -28,8 +30,10 @@
     "directives": "Počíta sa po jednej direktíve u hráčov, ktorí ju použili.",
     "field-mods": "Počíta sa ako celý strom úprav poľa, pričom každá dvojica sa počíta tak, ako ju hráč zvolil, u hráčov, ktorí použili každý strom."
   },
+  "top-battles": "Najlepšie odigrané bitky s tankom {tank} v režime {mode}",
   "top-battles-hint": "Najlepšia bitka každého hráča v tomto tanku podľa spôsobeného poškodenia a presne to, čo mal v nej nameščeno. Otvor bitku a zobraz jej úplný záznam.",
   "thin-row": "Túto postavitve použilo menej ako {count} hráčov, takže tieto podatki hovoria viac o nich než o postavitve.",
+  "top-players": "Najlepší hráči tanku {tank} v režime {mode}",
   "top-players-hint": "Najlepší hráči v tomto tanku spomedzi tých, ktorých bitky sú zaznamenané, hodnotení podľa celého svojho záznamu v ňom, spolu s tým, čo mali nameščeno v poslednej zaznamenanej bitke. Otvor riadok a zobraz ich posádku.",
   "crew": "Posadka",
   "show-crew": "Prikaži posádku"

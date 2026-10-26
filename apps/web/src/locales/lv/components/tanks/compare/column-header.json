@@ -9,7 +9,7 @@
   "duplicate-tank": "Salīdzināt {tank} pret pašu",
   "highest-overall-score": "Augstākais kopējais rezultāts",
   "highest-overall-score-of-this": "Šī salīdzinājuma augstākais kopējais rezultāts",
-  "is-the-reference": "Atsauce: {tank}",
+  "is-the-reference": "Salīdzināts pret tanku {tank}",
   "overall": "Kopējā",
   "reference-column": "Atsauces kolonna",
   "remove-tank": "Noņemt {tank}",
@@ -17,7 +17,7 @@
   "setup": "Iestatījums",
   "setup-n": "Konfigurācija {n}",
   "stock": "Standarta",
-  "tank-setup": "{tank} konfigurācija",
+  "tank-setup": "Tanka {tank} iestatījums",
   "the-same-vehicle-under-a-setup": "Tas pats transportlīdzeklis ar savu konfigurāciju",
   "top": "Labākie",
   "where-this-vehicle-sits-across": "Šī transportlīdzekļa vieta visā katalogā no {MAXSCORE}: tā četru kategoriju rezultātu vidējais, konfigurēts šeit. Tas ir kopsavilkums, nevis spriedums, skauts un smagais tanks var sasniegt vienādu skaitli, būdami labi dažādās jomās."

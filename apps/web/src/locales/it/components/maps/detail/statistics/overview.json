@@ -1,0 +1,17 @@
+{
+  "duration": "Durata media",
+  "duration-hint": "Minuti e secondi, dalla fine del conto alla rovescia al risultato.",
+  "ending": "Come finisce",
+  "finish": {
+    "extermination": "Una squadra distrutta",
+    "base": "Base catturata",
+    "timeout": "Tempo scaduto",
+    "other": "Altro"
+  },
+  "spawns": "Vittorie per spawn",
+  "team": "Squadra {n}",
+  "draws": "Pareggi",
+  "count-of": "{count} di {total}",
+  "spawns-hint": "Le squadre vengono assegnate in modo casuale, quindi una differenza persistente qui dipende dalla mappa.",
+  "spawns-small": "Le battaglie sono ancora troppo poche per distinguere una mappa equilibrata da una sbilanciata."
+}

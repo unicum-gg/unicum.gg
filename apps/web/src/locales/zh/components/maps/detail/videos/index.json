@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "这张地图暂时还没有关联战术。建议一个战术，审核员查看后它就会显示在这里。",
-  "random-battle-videos-many": "{count} 随机战斗视频",
-  "random-battle-videos-one": "{count} 随机战斗视频",
-  "tactic-videos-many": "{count} 战术视频",
-  "tactic-videos-one": "{count} 战术视频",
-  "tactics": "{map}上的战术"
+  "random-battle-videos-many": "{count} 场随机战斗",
+  "random-battle-videos-one": "{count} 场随机战斗",
+  "random-battles": "{map} 上按坦克分类的随机战斗",
+  "tactic-videos-many": "{count} 个竞技视频",
+  "tactic-videos-one": "{count} 个竞技视频",
+  "tactics": "{map} 上的竞技对战"
 }

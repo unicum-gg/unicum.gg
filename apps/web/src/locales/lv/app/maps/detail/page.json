@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks karte ({region})",
   "description": "{map}: {width} × {height} mm World of Tanks karte.",
   "description-modes": "{map}: {width} × {height} mm World of Tanks karte, kurā tiek spēlēti {modes}.",
+  "statistics": {
+    "title": "{map} statistika ({region}): sākumpunkta uzvaru īpatsvars, klases un labākie tanki",
+    "description": "Kā kaujas kartē {map} patiesībā norisinās, uzskaitīts no reģistrētām kaujām: vidējais ilgums, kā tās beidzas, kurš sākumpunkts uzvar, kā katrai transportlīdzekļu klasei un līmenim tur klājas salīdzinājumā ar tiem pašiem tankiem citās kartēs, kā arī labākie tanki un kaujas tajā."
+  },
   "community": {
     "title": "{map} spēlētāju apskati un kopienas vērtējums ({region})",
     "description": "Ko spēlētāji domā par {map}: kopienas vērtējums piecu punktu skalā, sadalīts pēc tā, cik labi balsotāji spēlē, ar rakstiskiem spriedumiem no kontiem, kuriem aiz muguras ir kaujas. Līdzsvars, daudzveidība, kaujas plūsma un tas, vai katrai transportlīdzekļu klasei tur ir savs uzdevums."

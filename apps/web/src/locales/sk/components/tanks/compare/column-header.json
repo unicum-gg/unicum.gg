@@ -9,7 +9,7 @@
   "duplicate-tank": "Porovnať vozidlo {tank} proti samému sebe",
   "highest-overall-score": "Najvyššie celkové skóre",
   "highest-overall-score-of-this": "Najvyššie celkové skóre v tomto porovnaní",
-  "is-the-reference": "Referenčný tank: {tank}",
+  "is-the-reference": "Porovnané proti tanku {tank}",
   "overall": "Celkovo",
   "reference-column": "Referenčný stĺpec",
   "remove-tank": "Odstrániť tank {tank}",
@@ -17,7 +17,7 @@
   "setup": "Nastavitev",
   "setup-n": "Postavitev {n}",
   "stock": "Zásoby",
-  "tank-setup": "Zostava tanku {tank}",
+  "tank-setup": "Nastavenie tanku {tank}",
   "the-same-vehicle-under-a-setup": "To isté vozidlo s vlastnou postavitev",
   "top": "Najboljši",
   "where-this-vehicle-sits-across": "Umiestnenie tohto vozidla v rámci celého katalógu z {MAXSCORE}: priemer skóre v jeho štyroch kategóriách pri tomto nastavení. Je to súhrn, nie verdikt. Prieskumník aj ťažký tank môžu dosiahnuť rovnaké skóre, pretože každý vyniká v niečom inom."

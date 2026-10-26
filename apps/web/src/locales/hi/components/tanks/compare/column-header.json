@@ -9,7 +9,7 @@
   "duplicate-tank": "{tank} की स्वयं के विरुद्ध तुलना करें",
   "highest-overall-score": "सर्वाधिक कुल स्कोर",
   "highest-overall-score-of-this": "इस तुलना का सर्वाधिक कुल स्कोर",
-  "is-the-reference": "संदर्भ: {tank}",
+  "is-the-reference": "{tank} के विरुद्ध तुलना",
   "overall": "कुल मिलाकर",
   "reference-column": "संदर्भ कॉलम",
   "remove-tank": "{tank} हटाएँ",

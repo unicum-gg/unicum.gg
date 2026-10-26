@@ -3,5 +3,5 @@
   "cumulative": "Kumulált",
   "daily": "Napi",
   "heading-cumulative": "{title} (cumulative)",
-  "heading-daily": "Napi {title}"
+  "heading-daily": "{title}, napról napra"
 }

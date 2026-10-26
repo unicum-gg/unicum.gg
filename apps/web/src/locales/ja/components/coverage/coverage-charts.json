@@ -3,5 +3,5 @@
   "cumulative": "累積",
   "daily": "デイリー",
   "heading-cumulative": "{title}（累積）",
-  "heading-daily": "1日あたりの{title}"
+  "heading-daily": "{title}、日ごと"
 }

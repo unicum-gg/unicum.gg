@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Бұл картаға әлі тактика байланыстырылмаған. Біреуін ұсыныңыз, модератор қарап шыққаннан кейін ол осында пайда болады.",
-  "random-battle-videos-many": "{count} кездейсоқ шайқас бейнелері",
-  "random-battle-videos-one": "{count} кездейсоқ шайқас бейне",
-  "tactic-videos-many": "{count} тактика бейнелері",
-  "tactic-videos-one": "{count} тактика бейне",
-  "tactics": "Тактика {map} картасында"
+  "random-battle-videos-many": "{count} кездейсоқ шайқас",
+  "random-battle-videos-one": "{count} кездейсоқ шайқас",
+  "random-battles": "{map} картасындағы танктер бойынша кездейсоқ шайқастар",
+  "tactic-videos-many": "{count} бәсекелі бейне",
+  "tactic-videos-one": "{count} бәсекелі бейне",
+  "tactics": "{map} картасында бәсекелі ойнау"
 }

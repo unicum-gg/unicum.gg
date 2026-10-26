@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Ingen taktik er knyttet til dette kort endnu. Foreslå en, så vises den her, når en moderator har set på den.",
-  "random-battle-videos-many": "{count} tilfældige kampvideoer",
-  "random-battle-videos-one": "{count} tilfældig kampvideo",
-  "tactic-videos-many": "{count} taktikvideoer",
-  "tactic-videos-one": "{count} taktikvideo",
-  "tactics": "Taktik på {map}"
+  "random-battle-videos-many": "{count} tilfældige kampe",
+  "random-battle-videos-one": "{count} tilfældig kamp",
+  "random-battles": "Tilfældige kampe på {map}, kampvogn for kampvogn",
+  "tactic-videos-many": "{count} konkurrenceprægede videoer",
+  "tactic-videos-one": "{count} konkurrencepræget video",
+  "tactics": "Konkurrencepræget spil på {map}"
 }

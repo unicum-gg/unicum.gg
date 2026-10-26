@@ -1,0 +1,25 @@
+{
+  "title": "{map} in numeri",
+  "overview": "Come si svolge una battaglia su {map} in {mode}",
+  "by-class": "Quali classi ottengono buoni risultati su {map} in {mode}",
+  "by-class-hint": "Come se la cava ogni classe su questa mappa. Sotto ogni dato, la differenza rispetto agli stessi veicoli su tutte le altre mappe della modalità, con la stessa ponderazione, così il risultato dice qualcosa sulla mappa e non sui carri armati che vi sono stati schierati.",
+  "by-tier": "Come se la cava ogni livello su {map} in {mode}",
+  "by-vehicle": "I migliori veicoli su {map} in {mode}",
+  "by-vehicle-hint": "Classificate in base alla loro valutazione su questa mappa, con i veicoli usati qui da meno di cinque giocatori elencati dopo gli altri. Accanto, lo stesso veicolo su tutte le mappe della modalità: la differenza dice quanto la mappa gli si addice.",
+  "top-battles": "Le migliori battaglie combattute su {map} in {mode}",
+  "top-battles-hint": "La migliore battaglia di ogni giocatore su questa mappa, in base al danno inflitto. Apri una battaglia per il rapporto completo.",
+  "col": {
+    "class": "Classe",
+    "tier": "Livello",
+    "records": "Battaglie",
+    "records-tip": "Battaglie combattute con questa classe o questo livello su questa mappa, una per giocatore per battaglia.",
+    "winrate": "WR",
+    "damage": "Danno",
+    "assisted": "Assistenza",
+    "kills": "Eliminazioni",
+    "spotted": "Avvistamenti",
+    "survival": "Sopravvivenza",
+    "xp": "XP",
+    "baseline-tip": "Sotto ogni dato: la differenza rispetto agli stessi veicoli su tutte le altre mappe della modalità."
+  }
+}

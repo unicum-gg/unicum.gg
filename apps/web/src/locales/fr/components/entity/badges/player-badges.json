@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · regarder {name} sur Twitch",
   "tournament": {
-    "one": "Membre de l’équipe gagnante : {title}",
-    "many": "Membre de {count} équipes gagnantes, meilleure victoire : {title}",
+    "one": "Gagné : {title}",
+    "many": "Gagné {count} tournois, dont le meilleur était {title}",
     "featured": "Événement à la une · {text}",
     "unnamed": "un tournoi Wargaming"
   },

@@ -4,7 +4,7 @@
     "hide": "चैट छिपाएँ",
     "show-streamers": "स्ट्रीमर्स दिखाएँ"
   },
-  "heading": "World of Tanks के खिलाड़ी, क्लान और टैंक के आँकड़े: {name}",
+  "heading": "{name} पर World of Tanks के खिलाड़ी, क्लान और टैंक के आंकड़े",
   "hide": "स्ट्रीमर्स छिपाएँ",
   "player": "खिलाड़ी",
   "stream-language": "स्ट्रीम भाषा · {name}",

@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Bitky odigraných s týmto vozidlom na tejto mape.",
+  "rating-tip": "Jeho hodnotenie za bitky na tejto mape podľa vlastných vzorcov stránky.",
+  "everywhere": "{metric} povšade",
+  "everywhere-tip": "Hodnotenie toho istého vozidla na všetkých mapách režimu.",
+  "gap-tip": "Jeho hodnotenie na tejto mape mínus hodnotenie na všetkých ostatných mapách. Hodnota nad nulou znamená, že mu mapa vyhovuje.",
+  "thin-row": "Menej ako {count} hráčov hralo na tomto vozidle na tomto mape, takže tieto údaje vypovedajú viac o nich než o vozidle na tejto mape."
+}

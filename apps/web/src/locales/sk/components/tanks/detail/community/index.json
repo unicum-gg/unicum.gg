@@ -6,7 +6,7 @@
   "n-shown": ", zobrazených: {count}",
   "opinion": "{count, plural, one {# názor} few {# názory} other {# názorov}}",
   "opinion-next-to-win-rate": "Hodnotenie a miera víťazstiev v rámci úrovne {tier}",
-  "rate-the": "Ohodnoťte tank {tankName}",
+  "rate-the": "Čo si myslíte o tanku {tankName}?",
   "reputation-against-results": "Povesť verzus výsledky",
   "same-tank-different-metas": "Rovnaký tank, rôzne mety",
   "the-same-tank-by-how": "Ten istý tank podľa toho, ako dobre hrá hlasujúci",

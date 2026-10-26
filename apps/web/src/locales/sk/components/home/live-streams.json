@@ -4,7 +4,7 @@
     "hide": "Skryť chat",
     "show-streamers": "Zobraziť streamerov"
   },
-  "heading": "Štatistiky hráčov, klanov a tankov v hre World of Tanks: {name}",
+  "heading": "Štatistiky hráčov, klanov a tankov World of Tanks na {name}",
   "hide": "Skryť streamerov",
   "player": "Hráč",
   "stream-language": "Jazyk streamu · {name}",

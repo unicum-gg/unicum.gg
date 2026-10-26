@@ -1,0 +1,17 @@
+{
+  "duration": "Prosečno trajanje",
+  "duration-hint": "Minuti i sekunde, od završetka odbrojavanja do rezultata.",
+  "ending": "Kako se završava",
+  "finish": {
+    "extermination": "Uništen je tim",
+    "base": "Osvojena baza",
+    "timeout": "Vreme je isteklo",
+    "other": "Drugo"
+  },
+  "spawns": "Pobede po mestu pojavljivanja",
+  "team": "Tim {n}",
+  "draws": "Nerešeno",
+  "count-of": "{count} od {total}",
+  "spawns-hint": "Timovi se dodeljuju slučajno, pa je trajna razlika ovde posledica mape.",
+  "spawns-small": "Još nema dovoljno bitaka da bi se uravnotežena mapa razlikovala od one koja daje veliku prednost jednoj strani."
+}

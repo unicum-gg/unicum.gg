@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "На цій карті ще немає пов’язаної тактики. Запропонуйте її, і вона з’явиться тут після перевірки модератором.",
-  "random-battle-videos-many": "{count} відео випадкових боїв",
-  "random-battle-videos-one": "{count} відео випадкового бою",
-  "tactic-videos-many": "{count} відео з тактики",
-  "tactic-videos-one": "{count} відео з тактики",
-  "tactics": "Тактика на {map}"
+  "random-battle-videos-many": "{count} випадкових боїв",
+  "random-battle-videos-one": "{count} випадковий бій",
+  "random-battles": "Випадкові бої на мапі {map}, танк за танком",
+  "tactic-videos-many": "{count} змагальних відео",
+  "tactic-videos-one": "{count} змагальне відео",
+  "tactics": "Змагальна гра на мапі {map}"
 }

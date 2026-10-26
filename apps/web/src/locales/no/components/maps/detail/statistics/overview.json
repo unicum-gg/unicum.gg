@@ -1,0 +1,17 @@
+{
+  "duration": "Gjennomsnittlig lengde",
+  "duration-hint": "Minutter og sekunder fra nedtellingen er over til resultatet foreligger.",
+  "ending": "Slik ender det",
+  "finish": {
+    "extermination": "Et lag ble ødelagt",
+    "base": "Base tatt",
+    "timeout": "Tiden løp ut",
+    "other": "Annet"
+  },
+  "spawns": "Seire etter gytepunkt",
+  "team": "Lag {n}",
+  "draws": "Uavgjort",
+  "count-of": "{count} av {total}",
+  "spawns-hint": "Lagene tildeles tilfeldig, så en varig forskjell her handler om kartet.",
+  "spawns-small": "For få kamper foreløpig til å skille et balansert kart fra et skjevt kart."
+}

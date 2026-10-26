@@ -1,0 +1,25 @@
+{
+  "title": "Mapa {map} v číslech",
+  "overview": "Jak probíhá bitva na mapě {map} v režimu {mode}",
+  "by-class": "Kterým třídám se daří na mapě {map} v režimu {mode}",
+  "by-class-hint": "Jak si na této mapě vede každá třída. Pod každým údajem je rozdíl oproti stejným vozidlům na všech ostatních mapách režimu, vážený stejným způsobem, takže říká něco o mapě, nikoli o tom, které tanky na ni byly nasazeny.",
+  "by-tier": "Jak si vede každá úroveň na mapě {map} v režimu {mode}",
+  "by-vehicle": "Nejlepší vozidla na mapě {map} v režimu {mode}",
+  "by-vehicle-hint": "Seřazeno podle jejich hodnocení na této mapě, přičemž vozidla, se kterými zde hrálo méně než pět hráčů, jsou uvedena až za ostatními. Vedle toho je stejné vozidlo na každé mapě režimu. Rozdíl říká, jak mu mapa vyhovuje.",
+  "top-battles": "Nejlepší bitvy odehrané na mapě {map} v režimu {mode}",
+  "top-battles-hint": "Nejlepší bitva každého hráče na této mapě podle způsobeného poškození. Otevřete bitvu a zobrazte její úplný report.",
+  "col": {
+    "class": "Třída",
+    "tier": "Úroveň",
+    "records": "Bitvy",
+    "records-tip": "Bitvy odehrané s touto třídou nebo úrovní na této mapě, jedna za hráče v každé bitvě.",
+    "winrate": "WR",
+    "damage": "Poškození",
+    "assisted": "Asistence",
+    "kills": "Zničení",
+    "spotted": "Odhalení",
+    "survival": "Přežití",
+    "xp": "XP",
+    "baseline-tip": "Pod každým údajem je rozdíl oproti stejným vozidlům na všech ostatních mapách režimu."
+  }
+}

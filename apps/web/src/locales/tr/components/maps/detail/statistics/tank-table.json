@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Bu araçla bu haritada yapılan savaşlar.",
+  "rating-tip": "Bu haritadaki savaşları boyunca, sitenin kendi formülleriyle hesaplanan puanı.",
+  "everywhere": "Her yerde {metric}",
+  "everywhere-tip": "Aynı aracın moddaki tüm haritalardaki puanı.",
+  "gap-tip": "Bu haritadaki puanı eksi tüm haritalardaki puanı, sıfırın üzerindeyse harita araç için uygundur.",
+  "thin-row": "Bu araçla burada savaşan oyuncu sayısı {count}’ten az, bu yüzden bu değerler araçtan çok onların bu haritadaki performansı hakkında bilgi verir."
+}

@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Bitke odigrane ovim vozilom na ovoj mapi.",
+  "rating-tip": "Rejting vozila kroz njegove bitke na ovoj mapi, prema formulama ove stranice.",
+  "everywhere": "{metric} svuda",
+  "everywhere-tip": "Rejting istog vozila na svakoj mapi ovog režima.",
+  "gap-tip": "Rejting vozila na ovoj mapi umanjen za njegov rejting na svakoj mapi: iznad nule znači da mu mapa odgovara.",
+  "thin-row": "Manje od {count} igrača je ovdje učestvovalo ovim vozilom, pa ove brojke više govore o njima nego o vozilu na ovoj mapi."
+}

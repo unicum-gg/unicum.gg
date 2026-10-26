@@ -1,0 +1,25 @@
+{
+  "title": "{map} skaičiais",
+  "overview": "Kaip vyksta mūšis žemėlapyje {map}, žaidžiant režimu {mode}",
+  "by-class": "Kurioms klasėms sekasi žemėlapyje {map}, žaidžiant režimu {mode}",
+  "by-class-hint": "Kaip kiekvienai klasei sekasi šiame žemėlapyje. Po kiekvienu skaičiumi pateikiamas skirtumas nuo tų pačių transporto priemonių visuose kituose režimo žemėlapiuose, apskaičiuotas tuo pačiu būdu, todėl jis ką nors sako apie žemėlapį, o ne apie tai, kurie tankai buvo į jį išsiųsti.",
+  "by-tier": "Kaip kiekvienam lygiui sekasi žemėlapyje {map}, žaidžiant režimu {mode}",
+  "by-vehicle": "Geriausios transporto priemonės žemėlapyje {map}, žaidžiant režimu {mode}",
+  "by-vehicle-hint": "Išrikiuota pagal jų reitingą šiame žemėlapyje. Transporto priemonės, kurias čia pasirinko mažiau nei penki žaidėjai, pateikiamos po kitų. Šalia rodoma tos pačios transporto priemonės statistika visuose režimo žemėlapiuose, o skirtumas parodo, ar jai tinka šis žemėlapis.",
+  "top-battles": "Geriausi mūšiai, vykę žemėlapyje {map}, žaidžiant režimu {mode}",
+  "top-battles-hint": "Geriausias kiekvieno žaidėjo mūšis šiame žemėlapyje pagal padarytą žalą. Atidarykite mūšį, kad pamatytumėte visą ataskaitą.",
+  "col": {
+    "class": "Klasė",
+    "tier": "Lygis",
+    "records": "Mūšiai",
+    "records-tip": "Šios klasės arba lygio transporto priemonėmis šiame žemėlapyje vykę mūšiai, po vieną kiekvienam žaidėjui per mūšį.",
+    "winrate": "WR",
+    "damage": "Žala",
+    "assisted": "Pagalba",
+    "kills": "Sunaikinimai",
+    "spotted": "Aptikimai",
+    "survival": "Išgyveno",
+    "xp": "XP",
+    "baseline-tip": "Po kiekvienu skaičiumi pateikiamas skirtumas nuo tų pačių transporto priemonių visuose kituose režimo žemėlapiuose."
+  }
+}

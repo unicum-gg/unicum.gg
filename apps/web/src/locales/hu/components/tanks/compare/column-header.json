@@ -9,7 +9,7 @@
   "duplicate-tank": "Összehasonlít: {tank} tankot maga ellen",
   "highest-overall-score": "Legmagasabb összesített pontszám",
   "highest-overall-score-of-this": "Az összehasonlítás legmagasabb összesített pontszáma",
-  "is-the-reference": "Referencia: {tank}",
+  "is-the-reference": "Összehasonlítva {tank} ellen",
   "overall": "Összesen",
   "reference-column": "Referenciaoszlop",
   "remove-tank": "{tank} eltávolítása",
@@ -17,7 +17,7 @@
   "setup": "Összeállítás",
   "setup-n": "Összeállítás {n}",
   "stock": "Alapállapot",
-  "tank-setup": "{tank} összeállítása",
+  "tank-setup": "{tank} tank összeállítása",
   "the-same-vehicle-under-a-setup": "Ugyanaz a jármű a saját összeállítása szerint",
   "top": "Legjobb",
   "where-this-vehicle-sits-across": "A jármű helye a teljes katalógusban, {MAXSCORE} közül. Az itt beállított négy kategóriapontszám átlaga. Összefoglaló, nem ítélet, egy felderítő és egy nehéz tank is elérheti ugyanazt a számot különböző erősségekkel."

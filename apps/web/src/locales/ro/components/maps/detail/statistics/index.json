@@ -1,0 +1,25 @@
+{
+  "title": "{map} în cifre",
+  "overview": "Cum se desfășoară o bătălie pe {map} în {mode}",
+  "by-class": "Ce clase se descurcă bine pe {map} în {mode}",
+  "by-class-hint": "Cum se descurcă fiecare clasă pe această hartă. Sub fiecare cifră se află diferența față de aceleași vehicule de pe fiecare altă hartă a modului, ponderată în același fel, astfel încât să spună ceva despre hartă, nu despre tancurile trimise pe ea.",
+  "by-tier": "Cum se descurcă fiecare nivel pe {map} în {mode}",
+  "by-vehicle": "Cele mai bune vehicule de pe {map} în {mode}",
+  "by-vehicle-hint": "Clasate după ratingul lor pe această hartă, vehiculele folosite aici de mai puțin de cinci jucători fiind listate după celelalte. Alături este același vehicul pe fiecare hartă a modului, iar diferența arată cât de bine i se potrivește harta.",
+  "top-battles": "Cele mai bune bătălii jucate pe {map} în {mode}",
+  "top-battles-hint": "Cea mai bună bătălie a fiecărui jucător pe această hartă, în funcție de daunele provocate. Deschide o bătălie pentru raportul complet.",
+  "col": {
+    "class": "Clasă",
+    "tier": "Nivel",
+    "records": "Bătălii",
+    "records-tip": "Bătălii jucate cu această clasă sau la acest nivel pe hartă, câte una pentru fiecare jucător și bătălie.",
+    "winrate": "WR",
+    "damage": "Daune produse",
+    "assisted": "Asistență",
+    "kills": "Distrugeri",
+    "spotted": "Detectări",
+    "survival": "Supraviețuire",
+    "xp": "XP",
+    "baseline-tip": "Sub fiecare cifră se află diferența față de aceleași vehicule de pe fiecare altă hartă a modului."
+  }
+}

@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · παρακολουθήστε τον {name} στο Twitch",
   "tournament": {
-    "one": "Νικηφόρο ρόστερ του {title}",
-    "many": "Σε {count} νικηφόρα ρόστερ, το καλύτερο {title}",
+    "one": "Νίκησε το {title}",
+    "many": "Νίκησε {count} τουρνουά, με καλύτερο το {title}",
     "featured": "{text} · επιλεγμένη διοργάνωση",
     "unnamed": "ένα τουρνουά Wargaming"
   },

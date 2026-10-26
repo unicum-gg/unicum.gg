@@ -6,7 +6,7 @@
   "n-shown": ", แสดง {count} รายการ",
   "opinion": "{count, plural, other {# ความคิดเห็น}}",
   "opinion-next-to-win-rate": "ความคิดเห็นเทียบกับอัตราชนะในระดับ {tier}",
-  "rate-the": "ประเมิน {tankName}",
+  "rate-the": "คุณคิดอย่างไรกับ {tankName}?",
   "reputation-against-results": "ชื่อเสียงเทียบกับผลงานจริง",
   "same-tank-different-metas": "รถถังคันเดียวกัน เมตาต่างกัน",
   "the-same-tank-by-how": "รถถังคันเดียวกัน แยกตามฝีมือการเล่นของผู้โหวต",

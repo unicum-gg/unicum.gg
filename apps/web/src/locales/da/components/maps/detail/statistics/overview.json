@@ -1,0 +1,17 @@
+{
+  "duration": "Gennemsnitlig varighed",
+  "duration-hint": "Minutter og sekunder fra nedtællingen slutter, til resultatet foreligger.",
+  "ending": "Sådan ender den",
+  "finish": {
+    "extermination": "Et hold blev ødelagt",
+    "base": "Base erobret",
+    "timeout": "Tiden løb ud",
+    "other": "Andet"
+  },
+  "spawns": "Sejre efter startposition",
+  "team": "Hold {n}",
+  "draws": "Uafgjorte",
+  "count-of": "{count} af {total}",
+  "spawns-hint": "Holdene tildeles tilfældigt, så en vedvarende forskel her skyldes kortet.",
+  "spawns-small": "Der er endnu for få kampe til at skelne et balanceret kort fra et skævt kort."
+}

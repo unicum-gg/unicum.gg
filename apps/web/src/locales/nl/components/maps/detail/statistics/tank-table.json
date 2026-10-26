@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Gevechten die met dit voertuig op deze kaart zijn gevochten.",
+  "rating-tip": "De beoordeling ervan over de gevechten met dit voertuig op deze kaart, volgens de eigen formules van de site.",
+  "everywhere": "{metric} overal",
+  "everywhere-tip": "De beoordeling van hetzelfde voertuig over elke kaart van het speltype.",
+  "gap-tip": "De beoordeling op deze kaart min de beoordeling op elke andere kaart: boven nul betekent dat deze kaart erbij past.",
+  "thin-row": "Minder dan {count} spelers namen dit voertuig hier mee, dus deze cijfers zeggen meer over hen dan over het voertuig op deze kaart."
+}

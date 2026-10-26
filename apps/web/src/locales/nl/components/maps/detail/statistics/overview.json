@@ -1,0 +1,17 @@
+{
+  "duration": "Gemiddelde duur",
+  "duration-hint": "Minuten en seconden, vanaf het einde van het aftellen tot het resultaat.",
+  "ending": "Hoe het eindigt",
+  "finish": {
+    "extermination": "Een team vernietigd",
+    "base": "Basis veroverd",
+    "timeout": "De tijd is verstreken",
+    "other": "Overig"
+  },
+  "spawns": "Overwinningen per spawn",
+  "team": "Team {n}",
+  "draws": "Gelijkspel",
+  "count-of": "{count} van {total}",
+  "spawns-hint": "Teams worden willekeurig toegewezen, dus een blijvend verschil hier gaat over de kaart.",
+  "spawns-small": "Er zijn nog te weinig gevechten om een gebalanceerde kaart van een scheve kaart te onderscheiden."
+}

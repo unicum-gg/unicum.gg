@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Все още няма свързана тактика за тази карта. Предложи тактика и тя ще се появи тук, след като модератор я прегледа.",
-  "random-battle-videos-many": "{count} видеа от случайни битки",
-  "random-battle-videos-one": "{count} видео от случайна битка",
-  "tactic-videos-many": "{count} видеа за тактика",
-  "tactic-videos-one": "{count} видео за тактика",
-  "tactics": "Тактики на {map}"
+  "random-battle-videos-many": "{count} Случайни битки",
+  "random-battle-videos-one": "{count} Случайна битка",
+  "random-battles": "Случайни битки на {map}, танк по танк",
+  "tactic-videos-many": "{count} състезателни видеа",
+  "tactic-videos-one": "{count} състезателно видео",
+  "tactics": "Състезателна игра на {map}"
 }

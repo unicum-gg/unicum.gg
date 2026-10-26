@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · sledujte na Twitchi: {name}",
   "tournament": {
-    "one": "Víťazná zostava, podujatie: {title}",
-    "many": "Člen {count} víťazných zostáv, najvýznamnejšie podujatie: {title}",
+    "one": "Vyhrané: {title}",
+    "many": "Vyhrané turnaje ({count}), najlepší bol {title}",
     "featured": "{text} · vybrané podujatie",
     "unnamed": "turnaj spoločnosti Wargaming"
   },

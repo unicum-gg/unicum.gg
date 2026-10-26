@@ -2,6 +2,10 @@
   "title": "Mappa di World of Tanks: {map} ({region})",
   "description": "{map}: una mappa di World of Tanks di {width} × {height} m.",
   "description-modes": "{map}: una mappa di World of Tanks di {width} × {height} m, disponibile nelle modalità {modes}.",
+  "statistics": {
+    "title": "Statistiche di {map} ({region}): percentuale di vittorie allo spawn, classi e migliori carri armati",
+    "description": "Come si svolgono effettivamente le battaglie su {map}, conteggiate a partire dalle battaglie registrate: durata media, come finiscono, quale spawn vince, come se la cava ogni classe e livello lì rispetto agli stessi carri armati sulle altre mappe, e i migliori carri armati e le migliori battaglie su questa mappa."
+  },
   "community": {
     "title": "Recensioni dei giocatori su {map} e valutazione della community ({region})",
     "description": "Cosa pensano i giocatori di {map}: la valutazione della community da uno a cinque, suddivisa in base a quanto bene giocano i votanti, con verdetti scritti da account che hanno le battaglie alle spalle. Equilibrio, varietà, fluidità e possibilità che ogni classe di veicoli abbia un ruolo."

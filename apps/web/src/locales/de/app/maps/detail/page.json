@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks-Karte ({region})",
   "description": "Karte {map} in World of Tanks: {width} × {height} m groß.",
   "description-modes": "Karte {map} in World of Tanks: {width} × {height} m groß, mit den Spielmodi {modes}.",
+  "statistics": {
+    "title": "Statistiken zu {map} ({region}): Siegquote nach Spawn, Klassen und beste Panzer",
+    "description": "Wie Gefechte auf {map} tatsächlich verlaufen, gezählt aus aufgezeichneten Gefechten: durchschnittliche Dauer, wie sie enden, welcher Spawn gewinnt, wie sich jede Fahrzeugklasse und Stufe dort im Vergleich zu denselben Panzern auf anderen Karten schlägt, sowie die besten Panzer und Gefechte auf dieser Karte."
+  },
   "community": {
     "title": "Spielerbewertungen und Community-Wertung für {map} ({region})",
     "description": "Was Spieler über {map} denken: die Wertung der Community bis fünf, aufgeschlüsselt nach der Spielstärke der abstimmenden Spieler, mit schriftlichen Urteilen von Konten, die die Gefechte hinter sich haben. Balance, Vielfalt, Spielfluss und die Frage, ob jede Fahrzeugklasse dort eine Aufgabe hat."

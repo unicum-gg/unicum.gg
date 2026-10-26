@@ -9,7 +9,7 @@
   "duplicate-tank": "Vergelijken van {tank} tegen zichzelf",
   "highest-overall-score": "Hoogste score voor Totaal",
   "highest-overall-score-of-this": "Hoogste score voor Totaal in deze vergelijking",
-  "is-the-reference": "Referentie: {tank}",
+  "is-the-reference": "Vergeleken met {tank}",
   "overall": "Totaal",
   "reference-column": "Referentiekolom",
   "remove-tank": "{tank} verwijderen",

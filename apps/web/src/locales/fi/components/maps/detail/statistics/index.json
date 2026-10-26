@@ -1,0 +1,25 @@
+{
+  "title": "Kartta {map} lukuina",
+  "overview": "Miten taistelu etenee kartalla {map} pelimuodossa {mode}",
+  "by-class": "Mitkä luokat menestyvät kartalla {map} pelimuodossa {mode}",
+  "by-class-hint": "Miten kukin luokka suoriutuu tällä kartalla. Kunkin luvun alla on ero samoihin ajoneuvoihin kaikilla muilla pelimuodon kartoilla samalla painotuksella, joten se kertoo kartasta eikä siitä, mitkä panssarivaunut sinne lähetettiin.",
+  "by-tier": "Miten kukin taso suoriutuu kartalla {map} pelimuodossa {mode}",
+  "by-vehicle": "Parhaat ajoneuvot kartalla {map} pelimuodossa {mode}",
+  "by-vehicle-hint": "Sijoitettu niiden arvosanan perusteella tällä kartalla. Ajoneuvot, joilla täällä pelasi alle viisi pelaajaa, on listattu muiden jälkeen. Sen vieressä on saman ajoneuvon arvosana kaikilla pelimuodon kartoilla. Ero kertoo, sopiiko kartta sille.",
+  "top-battles": "Parhaat kartalla {map} taistellut taistelut pelimuodossa {mode}",
+  "top-battles-hint": "Kunkin pelaajan paras tällä kartalla taisteltu taistelu aiheutetun vahingon perusteella. Avaa taistelu nähdäksesi sen täyden raportin.",
+  "col": {
+    "class": "Luokka",
+    "tier": "Taso",
+    "records": "Taisteluita",
+    "records-tip": "Tässä luokassa tai tällä tasolla kartalla taistellut taistelut, yksi pelaajaa ja taistelua kohden.",
+    "winrate": "WR",
+    "damage": "Vahinkoa aiheutettu",
+    "assisted": "Avustus",
+    "kills": "Tuhot",
+    "spotted": "Havaitsemiset",
+    "survival": "Selviytyneet",
+    "xp": "XP",
+    "baseline-tip": "Jokaisen luvun alla on ero samaan ajoneuvoon kaikilla muilla pelimuodon kartoilla."
+  }
+}

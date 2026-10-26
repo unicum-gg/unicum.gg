@@ -9,7 +9,7 @@
   "duplicate-tank": "Vertaile {tank} itseään vastaan",
   "highest-overall-score": "Korkein kokonaistulos",
   "highest-overall-score-of-this": "Tämän vertailun korkein kokonaistulos",
-  "is-the-reference": "Panssarivaunu {tank} on vertailukohta",
+  "is-the-reference": "Verrattuna panssarivaunuun {tank}",
   "overall": "Yhteensä",
   "reference-column": "Vertailukohtasarake",
   "remove-tank": "Poista panssarivaunu {tank}",

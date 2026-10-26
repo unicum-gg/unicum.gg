@@ -4,7 +4,7 @@
     "hide": "Skjul chat",
     "show-streamers": "Vis strømmere"
   },
-  "heading": "{name}: statistikk for World of Tanks-spiller, klan og stridsvogn",
+  "heading": "Spiller-, klan- og stridsvognstatistikk i World of Tanks på {name}",
   "hide": "Skjul strømmere",
   "player": "Spiller",
   "stream-language": "Strømmespråk · {name}",

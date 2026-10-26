@@ -6,7 +6,7 @@
   "n-shown": ", hiển thị {count}",
   "opinion": "{count, plural, other {# ý kiến}}",
   "opinion-next-to-win-rate": "Ý kiến cạnh tỷ lệ thắng, trong cấp {tier}",
-  "rate-the": "Đánh giá {tankName}",
+  "rate-the": "Bạn nghĩ gì về {tankName}?",
   "reputation-against-results": "Danh tiếng so với kết quả",
   "same-tank-different-metas": "Cùng một xe tăng, các meta khác nhau",
   "the-same-tank-by-how": "Cùng một xe tăng, xét theo mức độ người bình chọn chơi tốt",

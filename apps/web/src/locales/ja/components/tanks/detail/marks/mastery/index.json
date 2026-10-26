@@ -5,6 +5,6 @@
   "n-players": "{count, plural, other {#人のプレイヤー}}",
   "rolling-average-combined-damage-to": "プレイヤーの 65 / 85 / 95% を上回るために必要な移動平均合計ダメージ",
   "single-battle-xp-to-beat": "プレイヤーの 50 / 80 / 95 / 99% を上回るために必要な 1 戦あたりの XP",
-  "tank-marks-of-excellence": "{tank} の優等マーク",
-  "tank-marks-of-mastery": "{tank}のマスターマーク"
+  "tank-marks-of-excellence": "{tank}で獲得済みの優等マーク",
+  "tank-marks-of-mastery": "{tank}で獲得済みのマスターマーク"
 }

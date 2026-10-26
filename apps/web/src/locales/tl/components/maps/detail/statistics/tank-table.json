@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Mga laban sa sasakyang ito sa mapang ito.",
+  "rating-tip": "Ang rating nito sa mga laban nito sa mapang ito, gamit ang sariling mga formula ng site.",
+  "everywhere": "{metric} kahit saan",
+  "everywhere-tip": "Ang rating ng parehong sasakyan sa bawat mapa ng mode.",
+  "gap-tip": "Ang rating nito sa mapang ito bawas ang rating nito sa bawat mapa, kung higit sa zero, nababagay rito ang mapa.",
+  "thin-row": "Mas kaunti sa {count} mga manlalaro ang kumuha ng sasakyang ito dito, kaya mas marami itong sinasabi tungkol sa kanila kaysa sa sasakyan sa mapang ito."
+}

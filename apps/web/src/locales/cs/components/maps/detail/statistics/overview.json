@@ -1,0 +1,17 @@
+{
+  "duration": "Průměrná délka",
+  "duration-hint": "Minuty a sekundy od konce odpočítávání do výsledku.",
+  "ending": "Jak bitva končí",
+  "finish": {
+    "extermination": "Tým zničen",
+    "base": "Základna obsazena",
+    "timeout": "Vypršel čas",
+    "other": "Jiný"
+  },
+  "spawns": "Vítězství podle spawnu",
+  "team": "Tým {n}",
+  "draws": "Remízy",
+  "count-of": "{count} z {total}",
+  "spawns-hint": "Týmy jsou přiřazovány náhodně, takže trvalý rozdíl zde souvisí s mapou.",
+  "spawns-small": "Zatím je odehráno příliš málo bitev na rozlišení vyvážené mapy od jednostranné."
+}

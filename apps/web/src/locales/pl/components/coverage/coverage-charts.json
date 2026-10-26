@@ -3,5 +3,5 @@
   "cumulative": "Skumulowany",
   "daily": "Codzienny",
   "heading-cumulative": "{title} (skumulowane)",
-  "heading-daily": "Dziennie: {title}"
+  "heading-daily": "{title}, dzień po dniu"
 }

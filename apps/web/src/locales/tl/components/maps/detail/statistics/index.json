@@ -1,0 +1,25 @@
+{
+  "title": "{map} sa mga numero",
+  "overview": "Kung paano nagaganap ang isang labanan sa {map} sa {mode}",
+  "by-class": "Aling mga klase ang mahusay sa {map} sa {mode}",
+  "by-class-hint": "Kung paano gumaganap ang bawat klase sa mapang ito. Sa ilalim ng bawat bilang ay ang agwat kumpara sa parehong mga sasakyan sa bawat ibang mapa ng mode, na tinimbang sa parehong paraan, kaya may sinasabi ito tungkol sa mapa at hindi tungkol sa kung aling mga tangke ang ipinadala rito.",
+  "by-tier": "Kung paano gumaganap ang bawat tier sa {map} sa {mode}",
+  "by-vehicle": "Ang pinakamahusay na mga sasakyan sa {map} sa {mode}",
+  "by-vehicle-hint": "Niranggo batay sa kanilang rating sa mapang ito, at nakalista pagkatapos ng iba ang mga sasakyang ginamit dito ng wala pang lima mga manlalaro. Sa tabi nito ay ang parehong sasakyan sa bawat mapa ng mode. Ang agwat ang nagsasabi kung nababagay rito ang mapa.",
+  "top-battles": "Ang pinakamahusay na mga laban na nilabanan sa {map} sa {mode}",
+  "top-battles-hint": "Ang pinakamahusay na labanan ng bawat manlalaro sa mapang ito batay sa naidulot na pinsala. Buksan ang isang labanan para sa kumpletong ulat nito.",
+  "col": {
+    "class": "Klase",
+    "tier": "Tier",
+    "records": "Mga labanan",
+    "records-tip": "Mga labanan sa klaseng ito o tier na ito sa mapang ito, isang tala para sa bawat manlalaro sa bawat labanan.",
+    "winrate": "WR",
+    "damage": "Pinsala",
+    "assisted": "Tulong",
+    "kills": "Mga frags",
+    "spotted": "Mga nakita",
+    "survival": "Nakaligtas",
+    "xp": "XP",
+    "baseline-tip": "Sa ilalim ng bawat bilang: ang agwat kumpara sa parehong mga sasakyan sa bawat ibang mapa ng mode."
+  }
+}

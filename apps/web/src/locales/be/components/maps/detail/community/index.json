@@ -5,7 +5,7 @@
   "every-server-one-average": "Кожны сервер, адзін сярэдні вынік",
   "n-shown": ", паказана: {count}",
   "opinion": "{count, plural, one {# меркаванне} few {# меркаванні} many {# меркаванняў} other {# меркавання}}",
-  "rate-the": "Ацаніць {mapName}",
+  "rate-the": "Што вы думаеце пра {mapName}?",
   "same-map-different-metas": "Тая самая мясцовасць, розныя мета",
   "the-same-map-by-how": "Тая самая карта, паводле таго, наколькі добра гуляе той, хто аддаў голас",
   "what-players-wrote": "Што напісалі гульцы",

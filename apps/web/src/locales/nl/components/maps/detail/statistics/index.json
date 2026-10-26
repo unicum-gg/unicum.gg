@@ -1,0 +1,25 @@
+{
+  "title": "{map} in cijfers",
+  "overview": "Hoe een gevecht zich ontvouwt op {map} in {mode}",
+  "by-class": "Welke klassen goed presteren op {map} in {mode}",
+  "by-class-hint": "Hoe elke klasse het doet op deze kaart. Onder elk cijfer staat het verschil met dezelfde voertuigen op elke andere kaart van het speltype, op dezelfde manier gewogen. Zo zegt het iets over de kaart en niet over welke tanks ernaartoe zijn gestuurd.",
+  "by-tier": "Hoe elk niveau het doet op {map} in {mode}",
+  "by-vehicle": "De beste voertuigen op {map} in {mode}",
+  "by-vehicle-hint": "Gerangschikt op hun beoordeling op deze kaart, waarbij de voertuigen die hier door minder dan vijf spelers zijn gebruikt na de anderen worden vermeld. Daarnaast staat hetzelfde voertuig op elke kaart van het speltype. Het verschil zegt hoe goed de kaart erbij past.",
+  "top-battles": "De beste gevechten die op {map} in {mode} zijn gevochten",
+  "top-battles-hint": "Het beste gevecht van elke speler op deze kaart, gerangschikt op toegebrachte schade. Open een gevecht voor het volledige rapport.",
+  "col": {
+    "class": "Klasse",
+    "tier": "Niveau",
+    "records": "Gevechten",
+    "records-tip": "Gevechten die in deze klasse of op dit niveau op deze kaart zijn gevochten, één per speler per gevecht.",
+    "winrate": "WR",
+    "damage": "Beschadig",
+    "assisted": "Assistentie",
+    "kills": "Uitschakelingen",
+    "spotted": "Gespot",
+    "survival": "Overleefd",
+    "xp": "XP",
+    "baseline-tip": "Onder elk cijfer staat het verschil met dezelfde voertuigen op elke andere kaart van het speltype."
+  }
+}

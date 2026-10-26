@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "ยังไม่มีลิงก์กลยุทธ์บนแผนที่นี้ แนะนำกลยุทธ์ แล้วกลยุทธ์นั้นจะแสดงที่นี่เมื่อผู้ดูแลตรวจสอบแล้ว",
-  "random-battle-videos-many": "{count} วิดีโอการรบแบบสุ่ม",
-  "random-battle-videos-one": "{count} วิดีโอการรบแบบสุ่ม",
-  "tactic-videos-many": "{count} วิดีโอกลยุทธ์",
-  "tactic-videos-one": "{count} วิดีโอกลยุทธ์",
-  "tactics": "กลยุทธ์บน {map}"
+  "random-battle-videos-many": "{count} การต่อสู้แบบสุ่ม",
+  "random-battle-videos-one": "{count} การต่อสู้แบบสุ่ม",
+  "random-battles": "การต่อสู้แบบสุ่มบน {map} แยกตามรถถัง",
+  "tactic-videos-many": "{count} วิดีโอการแข่งขัน",
+  "tactic-videos-one": "{count} วิดีโอการแข่งขัน",
+  "tactics": "การเล่นแบบการแข่งขันบน {map}"
 }

@@ -1,0 +1,5 @@
+{
+  "counted-from": "Az elmúlt 90 napban ezen a pályán, {mode} játékmódban lejátszott {battles} csata alapján: {records} jármű, {players} játékos, rögzítve ezen keresztül: {mod}. Utolsó lejátszott",
+  "the-mod": "az unicum.gg mod",
+  "against-everywhere": "Minden csata mind a harminc járművel érkezik hozzánk, a botokat kihagyva. Egy csata egyszer számít a hosszához, a végkimeneteléhez és a győzteséhez, valamint harmincszor az osztályokhoz és a járművekhez, ezért az első blokk sokkal több csatát igényel, mint az alábbi táblázatok, mielőtt bármit is mondana."
+}

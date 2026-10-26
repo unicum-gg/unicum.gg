@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks-térkép ({region})",
   "description": "{map}: egy {width} × {height} m méretű World of Tanks-térkép.",
   "description-modes": "{map}: egy {width} × {height} m méretű World of Tanks-térkép, ahol ezek a játékmódok játszhatók: {modes}.",
+  "statistics": {
+    "title": "{map} statisztikái ({region}): kezdőpontok győzelmi aránya, osztályok és legjobb tankok",
+    "description": "Hogyan zajlanak valójában a csaták {map} pályán, rögzített csaták alapján számítva: átlagos hossz, hogyan érnek véget, melyik kezdőpont nyer, hogyan teljesít ott az egyes járműosztály és szint ugyanazokkal a tankokkal más pályákon, valamint a legjobb tankok és csaták rajta."
+  },
   "community": {
     "title": "{map} játékosértékelései és közösségi értékelése ({region})",
     "description": "Mit gondolnak a játékosok a(z) {map} pályáról: a közösség ötös skálán adott értékelése, a szavazók játéktudása szerint csoportosítva, valamint írásos verdiktek olyan fiókoktól, amelyek mögött valódi csaták állnak. Egyensúly, változatosság, játékmenet és az, hogy minden járműosztálynak jut-e feladat."

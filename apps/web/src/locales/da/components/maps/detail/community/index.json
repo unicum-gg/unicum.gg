@@ -5,7 +5,7 @@
   "every-server-one-average": "Hver server, ét gennemsnit",
   "n-shown": ", {count} vist",
   "opinion": "{count, plural, one {# mening} other {# meninger}}",
-  "rate-the": "Vurder {mapName}",
+  "rate-the": "Hvad synes du om {mapName}?",
   "same-map-different-metas": "Samme terræn, forskellige metaer",
   "the-same-map-by-how": "Det samme kort, efter hvor godt stemmeren spiller",
   "what-players-wrote": "Hvad spillerne skrev",

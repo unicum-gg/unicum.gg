@@ -1,0 +1,17 @@
+{
+  "duration": "Keskimääräinen kesto",
+  "duration-hint": "Minuutit ja sekunnit lähtölaskennan päättymisestä tulokseen.",
+  "ending": "Miten se päättyy",
+  "finish": {
+    "extermination": "Joukkue tuhottu",
+    "base": "Tukikohta vallattu",
+    "timeout": "Aika loppui",
+    "other": "Muut"
+  },
+  "spawns": "Lähtöpaikkojen voitot",
+  "team": "Joukkue {n}",
+  "draws": "Tasapelit",
+  "count-of": "{count} / {total}",
+  "spawns-hint": "Joukkueet määrätään satunnaisesti, joten pysyvä ero tässä liittyy karttaan.",
+  "spawns-small": "Taisteluita on vielä liian vähän tasapainoisen kartan erottamiseksi yksipuolisesta."
+}

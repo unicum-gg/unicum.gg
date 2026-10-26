@@ -5,7 +5,7 @@
   "every-server-one-average": "Katram serverim savs vidējais",
   "n-shown": ", parādīts: {count}",
   "opinion": "{count, plural, one {# viedoklis} other {# viedokļi}}",
-  "rate-the": "Novērtēt {mapName}",
+  "rate-the": "Kā jūs vērtējat {mapName}?",
   "same-map-different-metas": "Tā pati karte, atšķirīgas metaspēles",
   "the-same-map-by-how": "Tā pati karte, pēc tā, cik labi balsotājs spēlē",
   "what-players-wrote": "Ko rakstīja spēlētāji",

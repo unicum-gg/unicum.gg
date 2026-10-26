@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Batailles combattues avec ce véhicule sur cette carte.",
+  "rating-tip": "Sa notation sur ses batailles sur cette carte, selon les propres formules du site.",
+  "everywhere": "{metric} partout",
+  "everywhere-tip": "La notation du même véhicule sur toutes les cartes du mode.",
+  "gap-tip": "Sa notation sur cette carte moins sa notation sur toutes les cartes, au-dessus de zéro, la carte lui convient.",
+  "thin-row": "Moins de {count} joueurs ont participé ici avec ce véhicule, ces chiffres en disent donc davantage sur eux que sur le véhicule sur cette carte."
+}

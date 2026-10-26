@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Kaujas, kas izspēlētas ar šo transportlīdzekli šajā kartē.",
+  "rating-tip": "Tā vērtējums kaujās šajā kartē, izmantojot vietnes formulas.",
+  "everywhere": "{metric} visur",
+  "everywhere-tip": "Tā paša transportlīdzekļa vērtējums visās režīma kartēs.",
+  "gap-tip": "Tā vērtējums šajā kartē mīnus tā vērtējums visās kartēs, virs nulles nozīmē, ka karte tam ir piemērota.",
+  "thin-row": "Mazāk nekā {count} spēlētāju šeit spēlēja ar šo transportlīdzekli, tāpēc šie rādītāji vairāk raksturo viņus nekā transportlīdzekli šajā kartē."
+}

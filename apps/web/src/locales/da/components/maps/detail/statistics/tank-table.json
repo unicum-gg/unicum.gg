@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Kampe spillet i dette køretøj på dette kort.",
+  "rating-tip": "Dets vurdering på baggrund af kampene i det pågældende køretøj på dette kort, beregnet med webstedets egne formler.",
+  "everywhere": "{metric} overalt",
+  "everywhere-tip": "Det samme køretøjs vurdering på alle kort i spiltilstanden.",
+  "gap-tip": "Dets vurdering på dette kort minus dets vurdering på alle kort, over nul betyder, at kortet passer til det.",
+  "thin-row": "Færre end {count} spillere tog dette køretøj her, så disse tal siger mere om dem end om køretøjet på dette kort."
+}

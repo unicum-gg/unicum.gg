@@ -6,7 +6,7 @@
   "n-shown": "，显示{count}条",
   "opinion": "{count, plural, other {# 意见}}",
   "opinion-next-to-win-rate": "{tier}等级内，评价与胜率并列显示",
-  "rate-the": "评价{tankName}",
+  "rate-the": "你对{tankName}有什么想法？",
   "reputation-against-results": "声誉与结果对比",
   "same-tank-different-metas": "同一辆坦克，不同环境",
   "the-same-tank-by-how": "根据投票者的对战水平查看同一辆坦克",

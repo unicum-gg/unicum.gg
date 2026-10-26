@@ -6,7 +6,7 @@
   "n-shown": ", {count} visas",
   "opinion": "{count, plural, one {# åsikt} other {# åsikter}}",
   "opinion-next-to-win-rate": "Omdöme och segerfrekvens inom nivå {tier}",
-  "rate-the": "Betygsätt {tankName}",
+  "rate-the": "Vad tycker du om {tankName}?",
   "reputation-against-results": "Anseende jämfört med resultat",
   "same-tank-different-metas": "Samma stridsvagn, olika metaspel",
   "the-same-tank-by-how": "Samma stridsvagn, uppdelad efter de röstandes skicklighet",

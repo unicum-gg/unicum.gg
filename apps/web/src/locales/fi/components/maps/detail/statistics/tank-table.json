@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Tällä ajoneuvolla tällä kartalla taistellut taistelut.",
+  "rating-tip": "Sen arvosana tällä kartalla taisteltujen taisteluiden perusteella, sivuston omilla kaavoilla.",
+  "everywhere": "{metric} kaikkialla",
+  "everywhere-tip": "Saman ajoneuvon arvosana kaikilla pelimuodon kartoilla.",
+  "gap-tip": "Sen arvosana tällä kartalla miinus sen arvosana kaikilla kartoilla. Jos tulos on yli nollan, kartta sopii sille.",
+  "thin-row": "Alle {count} pelaajaa käytti tätä ajoneuvoa täällä, joten nämä luvut kertovat enemmän heistä kuin ajoneuvosta tällä kartalla."
+}

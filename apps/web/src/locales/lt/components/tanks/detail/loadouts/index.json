@@ -1,5 +1,6 @@
 {
   "title": "Ką žaidėjai sumontavo tankui {tank}",
+  "what-they-fit": "Žaidėjų naudojamos sąrankos su tanku {tank} režime {mode}",
   "equipment": "Įranga",
   "consumables": "Ekipuotė",
   "directives": "Instrukcijos",
@@ -21,6 +22,7 @@
     "battles": "Mūšiai",
     "skill": "Įgūdis"
   },
+  "crew-skills": "Tanke {tank} režime {mode} išugdyti įgulos įgūdžiai",
   "crew-skills-hint": "Kiekvienas įgūdis, kurį buvo išmokęs vaidmens {role} narys, tarp žaidėjų, kurių įgula turi šią vietą, ir kaip sekėsi mūšiuose su juo.",
   "counted": {
     "equipment": "Įskaičiuota kaip visos trijų įrenginių komplektacijos, taip, kaip žaidėjai jas sumontavo, tarp žaidėjų, kurie naudojo kiekvieną komplektaciją.",
@@ -28,8 +30,10 @@
     "directives": "Įskaičiuota po vieną instrukciją, tarp žaidėjų, kurie ją naudojo.",
     "field-mods": "Įskaičiuota kaip visi lauko modifikacijų medžiai, kiekviena pora taip, kaip ją pasirinko žaidėjas, tarp žaidėjų, kurie naudojo kiekvieną medį."
   },
+  "top-battles": "Geriausi mūšiai su tanku {tank} režime {mode}",
   "top-battles-hint": "Geriausias kiekvieno žaidėjo mūšis su šiuo tanku pagal padarytą žalą ir tiksliai tai, ką jis jame sumontavo. Atidarykite mūšį, kad pamatytumėte pilną ataskaitą.",
   "thin-row": "Šią sąranką naudojo mažiau nei {count} žaidėjų, todėl šie rodikliai daugiau pasako apie juos nei apie sąranką.",
+  "top-players": "Geriausi žaidėjai su tanku {tank} režime {mode}",
   "top-players-hint": "Geriausi šio tanko žaidėjai tarp tų, kurių mūšiai užfiksuoti, reitinguojami pagal visą jų rekordą su šiuo tanku, nurodant, ką jie sumontavo paskutiniame užfiksuotame mūšyje. Atidarykite eilutę, kad pamatytumėte jų įgulą.",
   "crew": "Įgula",
   "show-crew": "Rodyti įgulą"

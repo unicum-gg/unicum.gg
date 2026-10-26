@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Nessuna tattica è ancora associata a questa mappa. Suggeriscine una e comparirà qui dopo essere stata esaminata da un moderatore.",
-  "random-battle-videos-many": "{count} video di battaglia casuale",
-  "random-battle-videos-one": "{count} video di battaglia casuale",
-  "tactic-videos-many": "{count} video di tattica",
-  "tactic-videos-one": "{count} video di tattica",
-  "tactics": "Tattiche su {map}"
+  "random-battle-videos-many": "{count} battaglie casuali",
+  "random-battle-videos-one": "{count} battaglia casuale",
+  "random-battles": "Battaglie casuali su {map}, carro armato per carro armato",
+  "tactic-videos-many": "{count} video competitivi",
+  "tactic-videos-one": "{count} video competitivo",
+  "tactics": "Gioco competitivo su {map}"
 }

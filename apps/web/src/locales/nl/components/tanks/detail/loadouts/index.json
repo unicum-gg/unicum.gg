@@ -1,5 +1,6 @@
 {
   "title": "Wat spelers op {tank} monteren",
+  "what-they-fit": "De configuraties die spelers voor {tank} gebruiken in {mode}",
   "equipment": "Uitrusting",
   "consumables": "Verbruiksartikelen",
   "directives": "Gevechtsbevelen",
@@ -21,6 +22,7 @@
     "battles": "Gevechten",
     "skill": "Vaardigheid"
   },
+  "crew-skills": "De vaardigheden die de bemanning van {tank} heeft getraind in {mode}",
   "crew-skills-hint": "Elke vaardigheid die door {role} was getraind, geteld bij spelers van wie de bemanning die positie bezet, naast hoe de gevechten ermee verliepen.",
   "counted": {
     "equipment": "Geteld als gehelen van drie apparaten, zoals spelers ze monteren, bij spelers die elke set gebruikten.",
@@ -28,8 +30,10 @@
     "directives": "Per gevechtsbevel geteld, bij spelers die het gebruikten.",
     "field-mods": "Geteld als volledige bomen voor veldmodificaties, elk paar zoals de speler het nam, bij spelers die elke boom gebruikten."
   },
+  "top-battles": "De beste gevechten die spelers in {tank} hebben gevochten in {mode}",
   "top-battles-hint": "Het beste gevecht van elke speler met deze tank op basis van toegebrachte schade, en precies wat die speler daarvoor monteerde. Openen een gevecht voor het volledige rapport.",
   "thin-row": "Minder dan {count} spelers gebruikten dit, dus deze cijfers zeggen meer over hen dan over de configuratie.",
+  "top-players": "De beste spelers van {tank} in {mode}",
   "top-players-hint": "De beste spelers met deze tank onder degenen van wie de gevechten zijn geregistreerd, gerangschikt op hun volledige record ermee, met wat ze in hun laatste geregistreerde gevecht monteerden. Openen een rij voor hun bemanning.",
   "crew": "Bemanning",
   "show-crew": "De bemanning tonen"

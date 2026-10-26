@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Bu haritaya henüz taktik bağlanmadı. Bir tane öner, moderatör inceledikten sonra burada görünsün.",
-  "random-battle-videos-many": "{count} rastgele savaş videosu",
-  "random-battle-videos-one": "{count} rastgele savaş videosu",
-  "tactic-videos-many": "{count} taktik videosu",
-  "tactic-videos-one": "{count} taktik videosu",
-  "tactics": "Taktikler {map} haritasında"
+  "random-battle-videos-many": "{count} rastgele savaşlar",
+  "random-battle-videos-one": "{count} rastgele savaş",
+  "random-battles": "{map} haritasında tank bazında rastgele savaşlar",
+  "tactic-videos-many": "{count} rekabetçi videolar",
+  "tactic-videos-one": "{count} rekabetçi video",
+  "tactics": "{map} haritasında rekabetçi oyun"
 }

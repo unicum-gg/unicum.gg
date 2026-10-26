@@ -9,7 +9,7 @@
   "duplicate-tank": "Сравни {tank} срещу самата себе си",
   "highest-overall-score": "Най-висок общ резултат",
   "highest-overall-score-of-this": "Най-висок общ резултат в това сравнение",
-  "is-the-reference": "{tank} е еталонът",
+  "is-the-reference": "Сравнение срещу {tank}",
   "overall": "Общо",
   "reference-column": "Еталонна колона",
   "remove-tank": "Премахни {tank}",

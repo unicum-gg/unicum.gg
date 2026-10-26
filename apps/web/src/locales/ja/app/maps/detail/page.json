@@ -2,6 +2,10 @@
   "title": "{map}、World of Tanksマップ（{region}地域）",
   "description": "{map}：幅{width} × 高さ{height} mのWorld of Tanksマップ。",
   "description-modes": "{map}：幅{width} × 高さ{height} mで、{modes}をプレイするWorld of Tanksマップ。",
+  "statistics": {
+    "title": "{map}の統計（{region}）：スポーン別勝率、クラス、最高の戦車",
+    "description": "記録済みの戦闘から集計した、{map}での戦闘の実際の展開です。平均戦闘時間、戦闘の終了結果、どのスポーンが勝つか、各車両クラスとTierが同じモードの他のマップで同じ戦車と比べてどのような成績を上げるか、そしてこのマップでの最高の戦車と戦闘を確認できます。"
+  },
   "community": {
     "title": "{map}のプレイヤーレビューとコミュニティレーティング（{region}）",
     "description": "プレイヤーは{map}をどう評価しているか。コミュニティによる5点満点のレーティングを、投票したプレイヤーのプレイの良し悪しで分けています。実際の戦闘を経験したアカウントによる、文章での判定も掲載しています。バランス、多様性、流れ、そしてすべての車両クラスに役割があるかを確認できます。"

@@ -9,7 +9,7 @@
   "duplicate-tank": "{tank}自体を対比較",
   "highest-overall-score": "最高総合スコア",
   "highest-overall-score-of-this": "この比較での最高総合スコア",
-  "is-the-reference": "基準車両: {tank}",
+  "is-the-reference": "{tank}との比較",
   "overall": "総合",
   "reference-column": "基準列",
   "remove-tank": "{tank} を削除",
@@ -17,7 +17,7 @@
   "setup": "セットアップ",
   "setup-n": "セットアップ {n}",
   "stock": "ストック",
-  "tank-setup": "{tank} のセットアップ",
+  "tank-setup": "{tank}のセットアップ",
   "the-same-vehicle-under-a-setup": "独自のセットアップを適用した同じ車両",
   "top": "トップ",
   "where-this-vehicle-sits-across": "この車両が全カタログ全体の中でどの位置にあるかを、{MAXSCORE}点満点で示します。ここで設定された4カテゴリのスコアの平均です。要約であり判定ではありません。偵察車両と重戦車は、異なる長所によって同じ数値に到達できます。"

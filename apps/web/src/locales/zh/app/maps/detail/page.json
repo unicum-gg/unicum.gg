@@ -2,6 +2,10 @@
   "title": "{map}，World of Tanks 地图（{region}）",
   "description": "{map}：一张{width} × {height}米的 World of Tanks 地图。",
   "description-modes": "{map}：一张{width} × {height}米的 World of Tanks 地图，可进行{modes}。",
+  "statistics": {
+    "title": "{map}数据（{region}）：出生点胜率、类型和最佳坦克",
+    "description": "根据已记录的战斗场次统计{map}上的战斗实际情况：平均时长、战斗如何结束、哪个出生点获胜，以及各车辆类型和等级在这里对抗相同坦克时与其他地图相比的表现，还有在这里表现最佳的坦克和战斗场次。"
+  },
   "community": {
     "title": "{map} 玩家评价和社区评分（{region}）",
     "description": "玩家对 {map} 的看法：社区五分制评分，并按投票者的对战水平划分，同时展示来自经历过相关战斗场次的账号的文字结论。评估平衡性、多样性、战斗节奏，以及每种车辆类型是否都有自己的职责。"

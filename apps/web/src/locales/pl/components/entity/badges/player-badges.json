@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · oglądaj na Twitchu: {name}",
   "tournament": {
-    "one": "Zwycięski skład · {title}",
-    "many": "W {count} zwycięskich składach, najlepszy wynik: {title}",
+    "one": "Wygrane: {title}",
+    "many": "Wygrane turnieje: {count}, najlepszy z nich to {title}",
     "featured": "{text} · wyróżnione wydarzenie",
     "unnamed": "turniej Wargaming"
   },

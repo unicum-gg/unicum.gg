@@ -5,7 +5,7 @@
   "every-server-one-average": "Cada servidor, uma média",
   "n-shown": ", {count} exibidos",
   "opinion": "{count, plural, one {# opinião} other {# opiniões}}",
-  "rate-the": "Taxa {mapName}",
+  "rate-the": "O que você acha de {mapName}?",
   "same-map-different-metas": "O mesmo terreno, metas diferentes",
   "the-same-map-by-how": "O mesmo mapa, por quão bem o eleitor joga",
   "what-players-wrote": "O que os jogadores escreveram",

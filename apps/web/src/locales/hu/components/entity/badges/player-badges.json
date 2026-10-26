@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · {name}: Nézd a Twitchen!",
   "tournament": {
-    "one": "Torna · győztes keret: {title}",
-    "many": "Torna · {count} győztes keret, közülük a legjobb: {title}",
+    "one": "Nyert {title}",
+    "many": "Nyert {count} versenyt, amelyek közül a legjobb: {title}",
     "featured": "{text} · Kiemelt esemény",
     "unnamed": "A Wargaming Torna"
   },

@@ -2,6 +2,10 @@
   "title": "{map}, bản đồ World of Tanks ({region})",
   "description": "{map}: bản đồ World of Tanks kích thước {width} × {height} m.",
   "description-modes": "{map}: bản đồ World of Tanks kích thước {width} × {height} m, có các chế độ {modes}.",
+  "statistics": {
+    "title": "Thống kê {map} ({region}): tỷ lệ thắng theo điểm xuất hiện, hạng và xe tăng tốt nhất",
+    "description": "Các trận đấu trên {map} thực sự diễn ra thế nào, được tính từ những trận đấu đã ghi nhận: thời lượng trung bình, cách chúng kết thúc, điểm xuất hiện nào thắng, từng hạng và cấp xe tăng hoạt động ra sao ở đó so với cùng những xe tăng trên các bản đồ khác, cùng những xe tăng và trận đấu tốt nhất trên bản đồ này."
+  },
   "community": {
     "title": "Đánh giá của người chơi và chỉ số đánh giá của cộng đồng về {map} ({region})",
     "description": "Người chơi nghĩ gì về {map}: chỉ số đánh giá của cộng đồng trên thang năm, phân theo khả năng chơi tốt của người bình chọn, cùng những kết luận bằng văn bản từ các tài khoản đã trải qua các trận đấu đó. Sự cân bằng, tính đa dạng, nhịp độ và việc mọi hạng xe tăng có vai trò tại đó hay không."

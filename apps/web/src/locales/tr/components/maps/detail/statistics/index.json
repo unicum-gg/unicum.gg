@@ -1,0 +1,25 @@
+{
+  "title": "{map} sayılarla",
+  "overview": "{mode} modunda {map} üzerindeki bir savaş nasıl gelişiyor",
+  "by-class": "{mode} modunda {map} üzerinde hangi sınıflar başarılı",
+  "by-class-hint": "Her sınıfın bu haritadaki performansı. Her sayının altında, aynı moddaki diğer tüm haritalarda aynı araçlarla arasındaki fark yer alır. Değerler aynı şekilde ağırlıklandırılır, böylece sonuç hangi tankların buraya gönderildiğini değil, haritanın etkisini gösterir.",
+  "by-tier": "{mode} modunda {map} üzerindeki her seviyenin performansı",
+  "by-vehicle": "{mode} modunda {map} üzerindeki en iyi araçlar",
+  "by-vehicle-hint": "Bu haritadaki puanlarına göre sıralanırlar. Burada beşten az oyuncunun kullandığı araçlar diğerlerinden sonra listelenir. Yanında, aynı araç modun diğer tüm haritalarında gösterilir. Fark, haritanın araca ne kadar uygun olduğunu gösterir.",
+  "top-battles": "{mode} modunda {map} üzerinde yapılan en iyi savaşlar",
+  "top-battles-hint": "Her oyuncunun bu haritadaki hasarına göre en iyi savaşı. Tam raporunu açmak için bir savaş açın.",
+  "col": {
+    "class": "Sınıf",
+    "tier": "Seviye",
+    "records": "Savaşlar",
+    "records-tip": "Bu haritada bu sınıf veya seviyede yapılan savaşlar, oyuncu başına savaş başına bir tane.",
+    "winrate": "WR",
+    "damage": "Hasar",
+    "assisted": "Destek",
+    "kills": "İmha",
+    "spotted": "Tespit",
+    "survival": "Hayatta kaldı",
+    "xp": "XP",
+    "baseline-tip": "Her sayının altında, aynı moddaki diğer tüm haritalarda aynı araçlarla arasındaki fark yer alır."
+  }
+}

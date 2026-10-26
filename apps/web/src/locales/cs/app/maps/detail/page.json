@@ -2,6 +2,10 @@
   "title": "Mapa {map} ve World of Tanks ({region})",
   "description": "Mapa {map} ve World of Tanks má rozměry {width} × {height} m.",
   "description-modes": "Mapa {map} ve World of Tanks má rozměry {width} × {height} m a je dostupná v režimech {modes}.",
+  "statistics": {
+    "title": "Statistiky mapy {map} ({region}): poměr vítězství podle spawnu, třídy a nejlepší tanky",
+    "description": "Jak bitvy na mapě {map} ve skutečnosti probíhají, započítáno ze zaznamenaných bitev: průměrná délka, jak končí, který spawn vítězí, jak si tam vedou jednotlivé třídy vozidel a úrovně ve srovnání se stejnými tanky na ostatních mapách a které jsou nejlepší tanky a bitvy na této mapě."
+  },
   "community": {
     "title": "Recenze hráčů a hodnocení komunity mapy {map} ({region})",
     "description": "Co si hráči myslí o mapě {map}: hodnocení komunity na stupnici od jedné do pěti, rozdělené podle toho, jak dobře hlasující hrají, s písemnými verdikty od účtů, které mají bitvy za sebou. Rovnováha, rozmanitost, plynulost a to, zda tam má každá třída vozidel svou úlohu."

@@ -1,0 +1,5 @@
+{
+  "counted-from": "Šteto z {battles} bitiek v režime {mode} na tejto mape za posledných 90 dní: {records} vozidiel, {players} hráčov, zaznamenané cez {mod}. Posledná odohraná bitka",
+  "the-mod": "mod unicum.gg",
+  "against-everywhere": "Každá bitka k nám dorazí so všetkými tridsiatimi vozidlami, pričom boty sú vynechané. Bitka sa započíta raz podľa svojej dĺžky, konca a víťaza a tridsaťkrát podľa tried a vozidiel, takže prvý blok potrebuje oveľa viac bitiek než tabuľky nižšie, aby uvádzal čokoľvek."
+}

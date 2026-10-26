@@ -1,8 +1,9 @@
 {
   "no-tactic-yet": "Tälle kartalle ei ole vielä linkitetty taktiikkaa. Ehdota sellaista, niin se näkyy täällä, kun moderaattori on tarkistanut sen.",
-  "random-battle-videos-many": "{count} satunnaistaisteluvideot",
-  "random-battle-videos-one": "{count} satunnaistaisteluvideo",
-  "tactic-videos-many": "{count} taktiikkavideot",
-  "tactic-videos-one": "{count} taktiikkavideo",
-  "tactics": "Taktiikka {map}-kartalla"
+  "random-battle-videos-many": "{count} satunnaistaistelua",
+  "random-battle-videos-one": "{count} satunnaistaistelu",
+  "random-battles": "Satunnaistaistelut kartalla {map}, panssarivaunu kerrallaan",
+  "tactic-videos-many": "{count} kilpailullista videota",
+  "tactic-videos-one": "{count} kilpailullinen video",
+  "tactics": "Kilpailullinen pelaaminen kartalla {map}"
 }

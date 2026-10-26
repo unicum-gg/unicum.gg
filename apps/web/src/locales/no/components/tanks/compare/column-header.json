@@ -9,7 +9,7 @@
   "duplicate-tank": "Sammenlikn {tank} mot seg selv",
   "highest-overall-score": "Høyeste totale poengsum",
   "highest-overall-score-of-this": "Høyeste totale poengsum i denne sammenlikningen",
-  "is-the-reference": "{tank} er referansen",
+  "is-the-reference": "Sammenlignet med {tank}",
   "overall": "Totalt",
   "reference-column": "Referansekolonne",
   "remove-tank": "Fjern {tank}",
@@ -17,7 +17,7 @@
   "setup": "Oppsett",
   "setup-n": "Oppsett {n}",
   "stock": "Standard",
-  "tank-setup": "Oppsett: {tank}",
+  "tank-setup": "Oppsett for {tank}",
   "the-same-vehicle-under-a-setup": "Det samme kjøretøyet med sitt eget oppsett",
   "top": "Topp",
   "where-this-vehicle-sits-across": "Hvor dette kjøretøyet ligger i hele katalogen, av {MAXSCORE}: gjennomsnittet av de fire kategoripoengsummene, slik de er konfigurert her. En oppsummering, ikke en dom. En speider og en tungvogn kan nå samme tall ved å være gode på forskjellige ting."

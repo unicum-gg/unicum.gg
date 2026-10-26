@@ -6,7 +6,7 @@
   "n-shown": ", {count} ang ipinapakita",
   "opinion": "{count, plural, one {# opinyon} other {# mga opinyon}}",
   "opinion-next-to-win-rate": "Opinyon katabi ng rate ng panalo, sa loob ng tier {tier}",
-  "rate-the": "I-rate ang {tankName}",
+  "rate-the": "Ano ang palagay mo sa {tankName}?",
   "reputation-against-results": "Reputasyon laban sa mga resulta",
   "same-tank-different-metas": "Parehong tank, magkakaibang meta",
   "the-same-tank-by-how": "Ang parehong tank, ayon sa galing ng bumoto na manlalaro",

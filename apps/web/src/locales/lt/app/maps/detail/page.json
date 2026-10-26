@@ -2,6 +2,10 @@
   "title": "{map}, World of Tanks žemėlapis ({region})",
   "description": "{map}: World of Tanks žemėlapis, {width} × {height} m.",
   "description-modes": "{map}: World of Tanks žemėlapis, {width} × {height} m, kuriame žaidžiama režimais {modes}.",
+  "statistics": {
+    "title": "{map} statistika ({region}): atsiradimo vietų pergalių rodiklis, klasės ir geriausi tankai",
+    "description": "Kaip iš tikrųjų vyksta mūšiai žemėlapyje {map}, apskaičiuota pagal užfiksuotus mūšius: vidutinė trukmė, kaip jie baigiasi, kuri atsiradimo vieta laimi, kaip ten sekasi kiekvienai transporto priemonių klasei ir lygiui, palyginti su tais pačiais tankais kituose žemėlapiuose, taip pat geriausi tankai ir mūšiai šiame žemėlapyje."
+  },
   "community": {
     "title": "Žaidėjų apžvalgos apie {map} ir bendruomenės reitingas ({region})",
     "description": "Žaidėjų nuomonė apie {map}: bendruomenės reitingas iš penkių, suskirstytas pagal tai, kaip gerai žaidžia balsuojantys žaidėjai, su rašytiniais verdiktais iš paskyrų, kurių mūšiai atsilieka. Balansas, įvairovė, eiga ir tai, ar kiekviena transporto priemonių klasė čia turi savo paskirtį."

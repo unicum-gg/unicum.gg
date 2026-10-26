@@ -4,7 +4,7 @@
     "hide": "Сховати чат",
     "show-streamers": "Показати стримерів"
   },
-  "heading": "{name}: статистика гравців, кланів і танків World of Tanks",
+  "heading": "Статистика гравця, клану та танка World of Tanks на {name}",
   "hide": "Сховати стримерів",
   "player": "Гравець",
   "stream-language": "Мова трансляції · {name}",

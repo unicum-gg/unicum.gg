@@ -6,8 +6,8 @@
   },
   "streamer": "Streamer · gledaj igrača {name} na Twitchu",
   "tournament": {
-    "one": "Pobjednička postava turnira {title}",
-    "many": "U {count} pobjedničkih postava, najbolji na turniru {title}",
+    "one": "Pobjeda: {title}",
+    "many": "Pobjeda na {count} turnira, najbolji je bio {title}",
     "featured": "{text} · istaknuti događaj",
     "unnamed": "Wargamingov turnir"
   },

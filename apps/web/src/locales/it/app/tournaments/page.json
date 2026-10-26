@@ -3,6 +3,6 @@
   "live-many": "{count} tornei aperti o in corso su {region} proprio ora,",
   "live-one": "{count} torneo aperto o in corso su {region} proprio ora,",
   "no-live": "I tornei si svolgono ogni giorno su {region},",
-  "title": "World of Tanks: {tournaments}",
+  "title": "{tournaments} in World of Tanks",
   "what-you-find": "dalle classifiche 1v1 con oro in palio ai campionati tra clan con premi in denaro. Tabelloni e punteggi completi, ogni squadra con la propria formazione e il lato da cui ha iniziato, mappa per mappa."
 }

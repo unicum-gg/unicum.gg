@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Số trận đấu đã tham chiến bằng xe tăng này trên bản đồ này.",
+  "rating-tip": "Chỉ số đánh giá của xe tăng này qua các trận đấu trên bản đồ này, theo công thức riêng của trang web.",
+  "everywhere": "{metric} ở mọi nơi",
+  "everywhere-tip": "Chỉ số đánh giá của cùng xe tăng đó trên mọi bản đồ của chế độ.",
+  "gap-tip": "Chỉ số đánh giá của xe tăng này trên bản đồ này trừ chỉ số đánh giá trên mọi bản đồ, nếu lớn hơn 0 thì bản đồ phù hợp với xe tăng đó.",
+  "thin-row": "Có ít hơn {count} người chơi đã chơi xe tăng này ở đây, vì vậy những số liệu này nói về họ nhiều hơn là về xe tăng trên bản đồ này."
+}

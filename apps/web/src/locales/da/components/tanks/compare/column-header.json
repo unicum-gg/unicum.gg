@@ -9,7 +9,7 @@
   "duplicate-tank": "Sammenlign {tank} mod sig selv",
   "highest-overall-score": "Højeste samlede score",
   "highest-overall-score-of-this": "Højeste samlede score i denne sammenligning",
-  "is-the-reference": "Reference: {tank}",
+  "is-the-reference": "Sammenlignet med {tank}",
   "overall": "Samlet",
   "reference-column": "Referencekolonne",
   "remove-tank": "Fjern {tank}",
@@ -17,7 +17,7 @@
   "setup": "Opsætning",
   "setup-n": "Opsætning {n}",
   "stock": "Standard",
-  "tank-setup": "Opsætning: {tank}",
+  "tank-setup": "Opsætning til {tank}",
   "the-same-vehicle-under-a-setup": "Det samme køretøj med sin egen opsætning",
   "top": "Bedste",
   "where-this-vehicle-sits-across": "Hvor dette køretøj ligger i hele kataloget, ud af {MAXSCORE}: gennemsnittet af dets fire kategoriscores, som konfigureret her. En oversigt, ikke en dom, en spejder og en tung kampvogn når samme tal ved at være gode til forskellige ting."

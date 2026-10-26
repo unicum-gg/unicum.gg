@@ -1,0 +1,8 @@
+{
+  "battles-tip": "Ezzel a járművel ezen a pályán lejátszott csaták.",
+  "rating-tip": "A jármű értékelése az ezen a pályán lejátszott csatái alapján, a webhely saját képleteivel.",
+  "everywhere": "{metric} mindenhol",
+  "everywhere-tip": "Ugyanazon jármű értékelése a játékmód minden pályáján.",
+  "gap-tip": "A jármű értékelése ezen a pályán mínusz az értékelése minden pályán. Nulla felett a pálya kedvez neki.",
+  "thin-row": "Kevesebb mint {count} játékos kapott ezzel a járművel itt, ezért ezek az adatok többet mondanak róluk, mint a járműről ezen a pályán."
+}
