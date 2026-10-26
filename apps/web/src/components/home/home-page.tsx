@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/home/card";
 import { FeatureBlock } from "@/components/home/feature-block";
+import { FeaturedOn } from "@/components/home/featured-on";
 import {
   RatingScale,
   RatingScaleTitle,
@@ -305,6 +306,10 @@ export async function HomePage({
           </div>
         </PanelContent>
       </Panel>
+
+      <PanelSeparator />
+
+      <FeaturedOn title={t("featured-on")} locale={locale} />
 
       <PanelSeparator />
 
