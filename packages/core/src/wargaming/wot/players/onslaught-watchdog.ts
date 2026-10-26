@@ -11,11 +11,13 @@ import { REGIONS, type Region } from "@unicum.gg/wargaming";
 /**
  * Watches that the Onslaught capture is still capturing.
  *
- * The capture runs in a separate service that serves no HTTP, so there is
- * nothing to probe, and probing it would answer the wrong question anyway: a
- * process can be perfectly alive while writing nothing, because the database
- * moved, the board started erroring, or the loop wedged. What matters is
- * whether rows are still landing, so that is what this measures.
+ * The capture runs in a separate service (husk), which since 2026-10-26 does
+ * serve a health endpoint at husk.unicum.gg, watched from Checkmate. That is
+ * complementary rather than redundant, because it answers a different
+ * question: a process can be perfectly alive, with its database reachable,
+ * while writing nothing worth keeping, because the board started erroring or
+ * the source stopped moving. What matters here is whether rows are still
+ * landing, so that is what this measures.
  *
  * It matters because the data is unrecoverable. The source publishes the
  * current instant and keeps no history, so an hour nobody recorded is an hour
@@ -53,8 +55,8 @@ export type CaptureFreshness = {
   eventId: string | null;
   /**
    * Whether a season is being played right now. Outside that window the source
-   * publishes no board at all, so nothing landing is the correct state rather
-   * than a stall.
+   * stops RECOMPUTING, so nothing landing here is the correct state rather
+   * than a stall. It does not stop serving: see `checkCaptureFreshness`.
    */
   live: boolean;
   lastCapture: Date | null;
@@ -131,13 +133,23 @@ function minutes(ms: number): number {
  * Reports on the EDGES only, so an incident is one message and its recovery is
  * another, rather than a line every twenty minutes for as long as it lasts.
  *
- * A region is only judged while its season is being played. Outside that
- * window the source serves no board, so the capture correctly writes nothing,
- * and reading that as a stall is a false alarm that cannot clear itself: a
- * finished season stays finished for weeks, so every redeploy replayed the
- * same three warnings (observed over 2026-10-11/12, with the season having
- * ended on the 10th and 11th). An open alert is dropped silently when the
- * season ends rather than announced as a recovery, since nothing recovered.
+ * A region is only judged while its season is being played, and the reason is
+ * narrower than "the source goes quiet". It goes on serving the final board
+ * for weeks, and the capture goes on committing it: measured on all three
+ * regions on 2026-10-26, fifteen days after the last season ended, with
+ * `*_onslaught_ratings` rewritten every pass. What stops is the RECOMPUTATION.
+ * `captured_at` is the source's own `last_leaderboard_recalculation_ts` rather
+ * than our clock, precisely so a pass that learns nothing new is absorbed by
+ * the primary key, so a frozen stamp means every later pass writes the row we
+ * already hold and the series correctly stops growing. The three stamps sit on
+ * the season's last second to prove it (eu 2026-10-11 02:45:03, na 08:45:00,
+ * asia 2026-10-10 19:45:00, each equal to its newest snapshot to the second).
+ *
+ * Read as a stall, that is a false alarm which cannot clear itself: a finished
+ * season stays finished for weeks, so every redeploy replayed the same three
+ * warnings (observed over 2026-10-11/12, with the season having ended on the
+ * 10th and 11th). An open alert is dropped silently when the season ends
+ * rather than announced as a recovery, since nothing recovered.
  */
 export async function checkCaptureFreshness(): Promise<CaptureFreshness[]> {
   const readings = await Promise.all(REGIONS.map(readCaptureFreshness));
