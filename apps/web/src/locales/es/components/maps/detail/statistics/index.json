@@ -10,7 +10,7 @@
   "top-battles-hint": "La mejor batalla de cada jugador en este mapa, según el daño infligido. Abre una batalla para consultar su informe completo.",
   "col": {
     "class": "Clase",
-    "tier": "Nivel",
+    "tier": "nivel",
     "records": "Batallas",
     "records-tip": "Batallas libradas en esta clase o nivel en este mapa, una por jugador y batalla.",
     "winrate": "WR",
