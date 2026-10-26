@@ -8,11 +8,14 @@ import {
 
 type Mention = {
   name: string;
-  /** Where they wrote about us, keyed by our locale when they wrote it in several. */
+  /** Where they mention us, keyed by our locale when they wrote it in several. */
   href: string;
   hrefByLocale?: Partial<Record<string, string>>;
-  /** Greyscale and light on transparent, so one file serves both themes (inverted on light). */
-  logo: { src: string; width: number; height: number };
+  /**
+   * Greyscale and light on transparent, so one file serves both themes (inverted on light).
+   * Absent when theirs cannot be drawn in one colour, and the name stands alone.
+   */
+  logo?: { src: string; width: number; height: number };
   /** A wordmark already spells the name, a square mark does not. */
   wordmark: boolean;
 };
@@ -37,10 +40,15 @@ const MENTIONS: Mention[] = [
     logo: { src: "/press/battle-conquest-white.png", width: 80, height: 82 },
     wordmark: false,
   },
+  {
+    name: "wotportal.cz",
+    href: "https://wotportal.cz/",
+    wordmark: false,
+  },
 ];
 
 /**
- * The community sites that wrote about us, each linking to what they wrote.
+ * The community sites that mention us, each linking to where they do.
  *
  * Plain followed links rendered on the server, like `ListedOn`: they linked to
  * us first, and a link back is the thanks.
@@ -67,15 +75,19 @@ export function FeaturedOn({
             rel="noopener"
             className="flex items-center gap-3 opacity-80 transition-opacity hover:opacity-100"
           >
-            <Image
-              src={mention.logo.src}
-              alt={mention.name}
-              width={mention.logo.width}
-              height={mention.logo.height}
-              className={`${mention.wordmark ? "h-7" : "h-9"} w-auto invert dark:invert-0`}
-            />
+            {mention.logo ? (
+              <Image
+                src={mention.logo.src}
+                alt={mention.name}
+                width={mention.logo.width}
+                height={mention.logo.height}
+                className={`${mention.wordmark ? "h-7" : "h-9"} w-auto invert dark:invert-0`}
+              />
+            ) : null}
             {mention.wordmark ? null : (
-              <span className="text-xl font-extrabold uppercase tracking-tight text-fd-foreground">
+              <span
+                className={`${mention.logo ? "text-xl" : "text-[2rem] leading-none"} font-extrabold uppercase tracking-tight text-fd-foreground`}
+              >
                 {mention.name}
               </span>
             )}
