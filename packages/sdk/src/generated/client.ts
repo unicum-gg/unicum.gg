@@ -437,6 +437,15 @@ class MapClient {
     );
   }
 
+  /** Map statistics */
+  statistics(query?: QueryOf<"/{region}/maps/{slug}/statistics">) {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/statistics", path, query),
+      () => this.api.GET("/{region}/maps/{slug}/statistics", { params: { path, query } }),
+    );
+  }
+
   /** Map videos */
   videos() {
     const path = { region: this.region, slug: this.slug };

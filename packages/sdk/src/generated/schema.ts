@@ -2199,6 +2199,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/{slug}/statistics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map statistics
+         * @description What the battles recorded on a map say about it, one battle mode at a time (random by default, never pooled), over the last 90 days: how long a battle lasts, how it ends, which spawn wins, how each vehicle class, each tier and each vehicle does there against the same vehicles on every other map, and the best battles fought on it. Counted from the battles uploaded through the unicum.gg mod, each of which carries all thirty vehicles in it, bots excluded. Wargaming publishes no per-map record for anyone, so this is the only source for any of it. Battles and vehicle records are two different units and each block states its own sample: the spawn balance needs far more battles before it says anything than the class rows do. 404 when the slug maps to no map on the region.
+         */
+        get: operations["get-{region}-maps-{slug}-statistics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/maps/{slug}/videos": {
         parameters: {
             query?: never;
@@ -3980,6 +4000,12 @@ export interface components {
                 reviewCount: number;
             };
         };
+        MapGroupStats: {
+            /** @description The vehicle class (heavyTank, AT-SPG...) or the tier, as a string. */
+            key: string;
+            stats: components["schemas"]["MapRecordStats"];
+            baseline: components["schemas"]["MapRecordBaseline"];
+        };
         MapHistoryResponse: {
             arenaId: string;
             slug: string;
@@ -4199,6 +4225,40 @@ export interface components {
             /** @description Published written opinions in total. Not the length of `reviews`, which is capped. */
             reviewCount: number;
         };
+        /** @description The same vehicles over every map of the mode, each weighted by its records on this map, so the difference with the row says something about the map rather than about which vehicles were sent to it. */
+        MapRecordBaseline: {
+            /** @description Records on the winning side over records, 0 to 1. A draw is not a win. */
+            winrate: number | null;
+            /** @description Damage dealt per record. */
+            avgDamage: number | null;
+            /** @description Damage dealt by others on this vehicle's spotting or tracking, per record. */
+            avgAssist: number | null;
+            avgKills: number | null;
+            avgSpotted: number | null;
+            /** @description Records still alive when the battle ended, over records, 0 to 1. */
+            survival: number | null;
+            /** @description Experience earned per record, before any bonus. */
+            avgXp: number | null;
+        };
+        /** @description How the vehicle records behind a row went. Bots are not counted. */
+        MapRecordStats: {
+            /** @description Different accounts among the records. */
+            players: number;
+            /** @description Vehicle records: one account's part in one battle. */
+            records: number;
+            /** @description Records on the winning side over records, 0 to 1. A draw is not a win. */
+            winrate: number | null;
+            /** @description Damage dealt per record. */
+            avgDamage: number | null;
+            /** @description Damage dealt by others on this vehicle's spotting or tracking, per record. */
+            avgAssist: number | null;
+            avgKills: number | null;
+            avgSpotted: number | null;
+            /** @description Records still alive when the battle ended, over records, 0 to 1. */
+            survival: number | null;
+            /** @description Experience earned per record, before any bonus. */
+            avgXp: number | null;
+        };
         /** @description Map row (additional fields may be present). */
         MapResolved: {
             arena_id: string;
@@ -4245,6 +4305,66 @@ export interface components {
         MapsListResponse: {
             results: components["schemas"]["MapSummary"][];
         };
+        mapStatisticsQueryOutput: {
+            /**
+             * @description Which battle mode to count, random by default. Modes are never pooled: each has its own team size, length and idea of a good result, so every figure in the response belongs to the one asked for. The modes field says which ones hold battles on this map.
+             * @enum {string}
+             */
+            mode?: "random" | "onslaught" | "skirmish" | "advance";
+            language?: Record<string, never>;
+        };
+        MapStatisticsResponse: {
+            arenaId: string;
+            /**
+             * @description The battle mode every figure below was counted in.
+             * @enum {string}
+             */
+            mode: "random" | "onslaught" | "skirmish" | "advance";
+            /** @description Every mode's own battles on this map, whichever mode was asked for, so a caller can pick one that holds something. */
+            modes: {
+                /**
+                 * @description A battle mode the map can be counted in.
+                 * @enum {string}
+                 */
+                mode: "random" | "onslaught" | "skirmish" | "advance";
+                battles: number;
+            }[];
+            /** @description Battles counted. The unit of the duration, the endings and the spawn balance. */
+            battles: number;
+            players: number;
+            /** @description Vehicle records across those battles, which every class, tier and vehicle row is counted over. */
+            records: number;
+            /** @description Seconds. */
+            avgDuration: number | null;
+            finish: {
+                /**
+                 * @description How the battle ended: a team destroyed, a base captured, the clock run out, or anything else.
+                 * @enum {string}
+                 */
+                reason: "extermination" | "base" | "timeout" | "other";
+                battles: number;
+            }[];
+            /** @description Battles each team won, the game's team 1 being the one that starts at base 1. Assignment is random, so a large and lasting gap is about the map. */
+            spawns: {
+                team1: number;
+                team2: number;
+                draws: number;
+            };
+            classes: components["schemas"]["MapGroupStats"][];
+            tiers: components["schemas"]["MapGroupStats"][];
+            tanks: components["schemas"]["MapTankStats"][];
+            topBattles: components["schemas"]["MapTopBattle"][];
+            /**
+             * Format: date-time
+             * @description Newest battle counted, so a reader can see how current this is.
+             */
+            updatedAt: Date | null;
+        };
+        mapStatsRatings: {
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+        };
         /** @description A battle map's gallery summary. */
         MapSummary: {
             arenaId: string;
@@ -4264,6 +4384,48 @@ export interface components {
             commonTest: boolean;
             /** @description The arenas the client ships under this map's name for a mode of their own (Waffenträger, Last Stand, Story Mode, Onslaught night), each a view of this map rather than a map. */
             variants: components["schemas"]["MapVariantSummary"][];
+        };
+        MapTankStats: {
+            tankId: number;
+            /** @description Null for a vehicle the catalogue does not know yet. */
+            vehicle: {
+                slug: string | null;
+                name: string;
+                shortName: string;
+                tag: string;
+                type: string;
+                tier: number;
+                nation: string;
+                role: string | null;
+                isPremium: boolean;
+                isReward: boolean;
+            } | null;
+            stats: components["schemas"]["MapRecordStats"];
+            /** @description WN7, WN8 and WNX over its records on this map, with the site's own formulas. */
+            rating: components["schemas"]["mapStatsRatings"];
+            /** @description The same vehicle's ratings over every map of the mode. */
+            baselineRating: components["schemas"]["mapStatsRatings"];
+        };
+        /** @description One player's best battle on this map by damage dealt. One battle per player. Players who asked not to be shown are absent here while still counting towards every figure above. */
+        MapTopBattle: {
+            player: components["schemas"]["MapTopBattlePlayer"];
+            /** @description The battle, exactly as the player's own Battles tab answers it, loadout included. */
+            battle: components["schemas"]["PlayerBattle"];
+        };
+        MapTopBattlePlayer: {
+            nickname: string;
+            accountId: number;
+            clanTag: string | null;
+            clanColor: string | null;
+            isVerified: boolean;
+            isSupporter: boolean;
+            twitchLogin: string | null;
+            tournamentWins: number;
+            tournamentFeaturedWins: number;
+            tournamentBestTitle: string | null;
+            onslaughtBestTier: string | null;
+            onslaughtBestRank: number | null;
+            onslaughtSeasons: number;
         };
         /** @description One variant of a map, as the gallery reads it. */
         mapVariantLayout: {
@@ -10609,6 +10771,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MapRatingMeResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-statistics": {
+        parameters: {
+            query?: {
+                /** @description Which battle mode to count, random by default. Modes are never pooled: each has its own team size, length and idea of a good result, so every figure in the response belongs to the one asked for. The modes field says which ones hold battles on this map. */
+                mode?: "random" | "onslaught" | "skirmish" | "advance";
+                language?: components["schemas"]["answerLanguageField"];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapStatisticsResponse"];
                 };
             };
         };
