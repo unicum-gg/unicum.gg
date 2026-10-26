@@ -178,6 +178,7 @@ const DIRECTORIES: Directory[] = [
   { name: "Top.gg", href: "https://top.gg/bot/1526167806025138246" },
   { name: "discord.bots.gg", href: "https://discord.bots.gg/bots/1526167806025138246" },
   { name: "Void Bots", href: "https://voidbots.net/bot/1526167806025138246" },
+  { name: "Discord Bot List", href: "https://discordbotlist.com/bots/unicumgg" },
 ];
 
 export default async function BotPage({
