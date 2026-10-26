@@ -11,13 +11,12 @@ import { REGIONS, type Region } from "@unicum.gg/wargaming";
 /**
  * Watches that the Onslaught capture is still capturing.
  *
- * The capture runs in a separate service (husk), which since 2026-10-26 does
- * serve a health endpoint at husk.unicum.gg, watched from Checkmate. That is
- * complementary rather than redundant, because it answers a different
- * question: a process can be perfectly alive, with its database reachable,
- * while writing nothing worth keeping, because the board started erroring or
- * the source stopped moving. What matters here is whether rows are still
- * landing, so that is what this measures.
+ * The capture runs in a separate service, which has its own liveness probe
+ * watched from Checkmate. That is complementary rather than redundant,
+ * because it answers a different question: a process can be perfectly alive,
+ * with its database reachable, while writing nothing worth keeping, because
+ * the board started erroring or the source stopped moving. What matters here
+ * is whether rows are still landing, so that is what this measures.
  *
  * It matters because the data is unrecoverable. The source publishes the
  * current instant and keeps no history, so an hour nobody recorded is an hour
@@ -137,13 +136,14 @@ function minutes(ms: number): number {
  * narrower than "the source goes quiet". It goes on serving the final board
  * for weeks, and the capture goes on committing it: measured on all three
  * regions on 2026-10-26, fifteen days after the last season ended, with
- * `*_onslaught_ratings` rewritten every pass. What stops is the RECOMPUTATION.
- * `captured_at` is the source's own `last_leaderboard_recalculation_ts` rather
+ * `*_onslaught_ratings` rewritten every pass. What stops is the RECOMPUTATION
+ * upstream, and `captured_at` is the source's own recalculation stamp rather
  * than our clock, precisely so a pass that learns nothing new is absorbed by
- * the primary key, so a frozen stamp means every later pass writes the row we
- * already hold and the series correctly stops growing. The three stamps sit on
- * the season's last second to prove it (eu 2026-10-11 02:45:03, na 08:45:00,
- * asia 2026-10-10 19:45:00, each equal to its newest snapshot to the second).
+ * the primary key. A frozen stamp therefore means every later pass rewrites
+ * the row we already hold, and the series correctly stops growing while the
+ * capture keeps working. Each region's stamp sits on the second of its own
+ * newest snapshot, which is what proves it (eu 2026-10-11 02:45:03, na
+ * 08:45:00, asia 2026-10-10 19:45:00).
  *
  * Read as a stall, that is a false alarm which cannot clear itself: a finished
  * season stays finished for weeks, so every redeploy replayed the same three
