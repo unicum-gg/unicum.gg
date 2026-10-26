@@ -23,6 +23,18 @@ const liveStreamer = z
     startedAt: z.string().meta({ description: "Stream start, ISO 8601." }),
     language: z.string().meta({ description: "Stream language, ISO 639-1." }),
     thumbnailUrl: z.string(),
+    accounts: z
+      .array(
+        z.object({
+          region: z.enum(["eu", "na", "asia"]),
+          accountId: z.number(),
+        }),
+      )
+      .optional()
+      .meta({
+        description:
+          "Every WoT account linked to this channel. The fields above describe the one the card shows, which is the most active of them. Absent from a snapshot published before this field existed.",
+      }),
   })
   .meta({
     id: "LiveStreamer",

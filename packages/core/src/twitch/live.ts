@@ -1,6 +1,11 @@
 import { inArray } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion, streamers, type LiveStreamer } from "@unicum.gg/shared";
+import {
+  clansByRegion,
+  streamers,
+  type LiveStreamer,
+  type LiveStreamerAccount,
+} from "@unicum.gg/shared";
 import { getPlayersByAccounts } from "@unicum.gg/core/players";
 import type { PlayerClanInfo } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { isRegion, Region } from "@unicum.gg/wargaming";
@@ -83,6 +88,16 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
     (r) => byLogin.has(r.twitchLogin) && isRegion(r.region),
   );
   if (liveRows.length === 0) return [];
+
+  // Every account behind each live channel, gathered BEFORE the collapse below
+  // and from `liveRows` rather than from the resolved set, so an account we
+  // track whose player row is still cold is badged on its own page too.
+  const accountsByLogin = new Map<string, LiveStreamerAccount[]>();
+  for (const r of liveRows) {
+    const list = accountsByLogin.get(r.twitchLogin) ?? [];
+    list.push({ region: r.region as Region, accountId: r.accountId });
+    accountsByLogin.set(r.twitchLogin, list);
+  }
 
   // Batch the player + clan lookups per region (both are keyed by region).
   const regions = [...new Set(liveRows.map((r) => r.region as Region))];
@@ -174,6 +189,9 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
       startedAt: stream.startedAt,
       language: stream.language,
       thumbnailUrl: stream.thumbnailUrl,
+      accounts: accountsByLogin.get(row.twitchLogin) ?? [
+        { region, accountId: row.accountId },
+      ],
     });
   }
 

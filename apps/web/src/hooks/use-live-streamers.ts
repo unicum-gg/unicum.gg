@@ -36,7 +36,17 @@ export function useLiveStreamer(
   region: Region,
   accountId: number,
 ): LiveStreamer | undefined {
-  return useLiveStreamers().find(
-    (s) => s.region === region && s.accountId === accountId,
+  // Matched against every account behind the channel, not just the one the
+  // card shows: a streamer linking several accounts is live on all of their
+  // pages at once, and the entry's own `accountId` is only the representative
+  // the rail collapsed to.
+  //
+  // Falls back to that representative when the snapshot predates the field,
+  // which is what the SSE relays while the worker still runs the previous
+  // build. Reading `accounts` as given threw on every render of the home rail.
+  return useLiveStreamers().find((s) =>
+    s.accounts
+      ? s.accounts.some((a) => a.region === region && a.accountId === accountId)
+      : s.region === region && s.accountId === accountId,
   );
 }
