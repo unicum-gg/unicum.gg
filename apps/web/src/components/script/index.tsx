@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import STORAGE from "@/constants/storage";
 import UMAMI from "@/constants/umami";
 import { BOT_SIGNALS_SCRIPT } from "./bot-signals";
+import { ENGAGEMENT_SCRIPT } from "./engagement";
 
 /**
  * Two-tier analytics loading:
@@ -59,6 +60,12 @@ export default function Script() {
           has to already be there. It cancels a payload on the signals measured
           to carry no readers and labels the rest, see `bot-signals`. */}
       <script dangerouslySetInnerHTML={{ __html: BOT_SIGNALS_SCRIPT }} />
+      {/* The first human gesture of the page, reported as one custom event. It
+          answers the question the probes above cannot, since the fleet they
+          miss runs a real browser and is told apart by what it does rather
+          than by what it is, see `engagement`. Inline and ahead of the tracker
+          so a gesture made while the tracker is still loading is not lost. */}
+      <script dangerouslySetInnerHTML={{ __html: ENGAGEMENT_SCRIPT }} />
       <NextScript
         defer
         src="https://cloud.umami.is/script.js"
