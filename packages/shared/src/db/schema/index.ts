@@ -13,6 +13,7 @@ export * from "./onslaught-ratings";
 export * from "./cron-leader";
 export * from "./changelog-state";
 export * from "./players";
+export * from "./battle-positions";
 export * from "./battle-loadouts";
 export * from "./battles";
 export * from "./player-achievements";

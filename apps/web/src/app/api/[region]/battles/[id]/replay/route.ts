@@ -5,6 +5,7 @@ import {
   readLoadouts,
   readMotion,
   readReplay,
+  replayClockOffset,
   type ChatLine,
   type ReplayLoadout,
 } from "@unicum.gg/shared";
@@ -39,14 +40,6 @@ const TICKS = 100;
  * replaced on the next request.
  */
 const FORMAT = 13;
-
-/**
- * The largest countdown worth believing, in seconds.
- *
- * Two minutes. The real one is tens of seconds, and anything past this is a
- * sign the survivors' tracks are not anchoring anything, not a long wait.
- */
-const MAX_OFFSET = 120;
 
 /**
  * Always revalidate, and the ETag decides.
@@ -95,50 +88,6 @@ type Track = {
    */
   health: [number, number][];
 };
-
-/**
- * How far the recording's clock runs ahead of the battle's, in seconds.
- *
- * A replay starts recording during the countdown, so its clock is not battle
- * time. The vehicles that survived are what pins the two together: they lived
- * exactly as long as the battle, so the gap between where their track ends and
- * their own `lifeTime` is the offset, and they all agree on it (measured on a
- * real battle: 52.6 s for every survivor, against 57 to 69 for the dead, whose
- * wrecks keep reporting for a while after they stop being alive).
- *
- * The median rather than any one of them, so a single odd track cannot move
- * it. Null when nobody survived, and the caller then greys nothing rather than
- * guessing.
- */
-function clockOffset(
-  tracks: { id: number; last: number }[],
-  vehicles: { id: number; lifeTime: number; died: boolean }[],
-): number | null {
-  const gaps: number[] = [];
-  for (const vehicle of vehicles) {
-    if (vehicle.died || vehicle.lifeTime <= 0) continue;
-    const track = tracks.find((t) => t.id === vehicle.id);
-    if (!track) continue;
-    const gap = track.last - vehicle.lifeTime;
-    // A survivor's track cannot end BEFORE the battle it survived, so a
-    // negative gap is not a measurement of the countdown, it is a track that
-    // stopped early: a training room where somebody left and came back, a
-    // vehicle the recording client lost for the rest of the battle. Dropped
-    // rather than averaged in, because one of them drags the median under
-    // zero and a negative offset puts every death before the recording
-    // starts, which draws a full team as wrecks on the first frame. Seen on a
-    // real battle: an offset of -86.8s and a tank dead at -57.9s.
-    if (gap < 0) continue;
-    gaps.push(gap);
-  }
-  if (gaps.length === 0) return null;
-  gaps.sort((a, b) => a - b);
-  const median = gaps[Math.floor(gaps.length / 2)];
-  // And a last net on the other side. The countdown is tens of seconds; an
-  // offset of several minutes means the anchor is wrong whatever its sign, and
-  // greying nothing is better than greying the wrong things.
-  return median > MAX_OFFSET ? null : median;
-}
 
 /**
  * Every `stride` ticks at most, keeping the ends.
@@ -256,7 +205,7 @@ async function GET__perf(
     });
   }
 
-  const offset = clockOffset(built, battle.vehicles);
+  const offset = replayClockOffset(built, battle.vehicles);
   const died = new Map(
     battle.vehicles
       .filter((v) => v.died && v.lifeTime > 0)

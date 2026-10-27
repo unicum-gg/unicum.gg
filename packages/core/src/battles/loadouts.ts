@@ -9,6 +9,7 @@ import {
   premiumShellShare,
   shellsLoaded,
   type NewBattleLoadoutRow,
+  type ReplayContainer,
   type ReplayLoadout,
 } from "@unicum.gg/shared";
 import {
@@ -327,7 +328,24 @@ export async function storeLoadoutsFromReplay(
   startedAt: Date,
   bytes: Uint8Array,
 ): Promise<number> {
-  const { blocks, stream } = await readReplay(bytes);
+  return storeLoadoutsFromContainer(
+    region,
+    arenaUniqueId,
+    startedAt,
+    await readReplay(bytes),
+  );
+}
+
+/**
+ * The same, out of a recording already read, so the upload route can decode
+ * the file once for the loadouts and the map heatmap together.
+ */
+export async function storeLoadoutsFromContainer(
+  region: Region,
+  arenaUniqueId: string,
+  startedAt: Date,
+  { blocks, stream }: ReplayContainer,
+): Promise<number> {
   const loadouts = stream.length === 0 ? [] : readLoadouts(stream);
   const header = blocks[0] as { clientVersionFromXml?: unknown } | null;
   const version =

@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import * as z from "zod";
 import {
   battleIdIn,
+  readReplay,
   readReplayHeader,
   ReplayError,
 } from "@unicum.gg/shared";
@@ -15,7 +16,8 @@ import {
   ReplayStoreError,
   storeReplay,
 } from "@unicum.gg/core/battles/replays";
-import { storeLoadoutsFromReplay } from "@unicum.gg/core/battles/loadouts";
+import { storeLoadoutsFromContainer } from "@unicum.gg/core/battles/loadouts";
+import { storePositionsFromContainer } from "@unicum.gg/core/maps/positions";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
 import { provenAccount } from "@/services/game/proven-account";
 
@@ -216,7 +218,8 @@ export async function POST(
     // their own vehicle's, which the first could not see; and a file stored
     // before this was collected at all has none, so an offer of it backfills.
     // The insert ignores conflicts, so offering the same one twice is free.
-    await writeLoadouts(account.region, arenaUniqueId, startedAt, bytes);
+    // The positions are rewritten whole, so a second offer is free too.
+    await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
     return refuse(ReplayRefusal.AlreadyStored);
   }
 
@@ -248,7 +251,11 @@ export async function POST(
   // on, so a fault in reading the loadout out of it must not turn a stored
   // file into a failed upload. A loadout that could not be read is a null
   // column; a replay refused for that reason would be a file the mod deletes.
-  await writeLoadouts(account.region, arenaUniqueId, startedAt, bytes);
+  //
+  // And where the recorder's team set up and dealt its damage from, for the
+  // map's minimap, out of the same decode: the positions are in the packets
+  // this already reads.
+  await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
 
   return Response.json(
     { stored: key },
@@ -257,28 +264,50 @@ export async function POST(
 }
 
 /**
- * Decode the recorder's loadout and store it, swallowing any fault.
+ * Decode the file once and store what it says, swallowing any fault.
  *
- * The decode is the expensive half -- a decryption and an inflate over about a
- * megabyte -- and it happens here rather than on the read path for exactly that
- * reason. A recording from a client this cannot read simply yields nothing,
- * which is a battle with no loadout rather than an error: coverage is a thing
- * to measure, not to fail on.
+ * Two things come out of it: the loadouts the recording carries, and where
+ * the recorder's team set up and dealt its damage from, for the map's
+ * minimap. The decode is the expensive half -- a decryption and an inflate
+ * over about a megabyte -- and it happens here rather than on the read path
+ * for exactly that reason, once for both. A
+ * recording from a client this cannot read simply yields nothing, which is a
+ * battle with no loadout and no positions rather than an error: coverage is a
+ * thing to measure, not to fail on.
  *
- * The reading itself lives in `core` because the backfill does the same work on
+ * Each write is guarded on its own, so a fault in one never costs the other.
+ * The reading itself lives in `core` because the backfills do the same work on
  * the same files, and the two must not drift.
  */
-async function writeLoadouts(
-  region: Parameters<typeof storeLoadoutsFromReplay>[0],
+async function writeDerived(
+  region: Parameters<typeof storeLoadoutsFromContainer>[0],
   arenaUniqueId: string,
   startedAt: Date,
   bytes: Uint8Array,
 ): Promise<void> {
+  let container;
   try {
-    await storeLoadoutsFromReplay(region, arenaUniqueId, startedAt, bytes);
+    container = await readReplay(bytes);
+  } catch (error) {
+    console.error(
+      `[api/game/battles/replay] ${region}/${arenaUniqueId}: unreadable`,
+      error,
+    );
+    return;
+  }
+  try {
+    await storeLoadoutsFromContainer(region, arenaUniqueId, startedAt, container);
   } catch (error) {
     console.error(
       `[api/game/battles/replay] ${region}/${arenaUniqueId}: loadout not stored`,
+      error,
+    );
+  }
+  try {
+    await storePositionsFromContainer(region, arenaUniqueId, startedAt, container);
+  } catch (error) {
+    console.error(
+      `[api/game/battles/replay] ${region}/${arenaUniqueId}: positions not stored`,
       error,
     );
   }

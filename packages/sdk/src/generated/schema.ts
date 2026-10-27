@@ -2119,6 +2119,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/{slug}/positions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map positions
+         * @description Where players set up on a map and where they deal their damage from, over the last 90 days, read out of the replays archived through the unicum.gg mod, in every counted battle mode and grouped by the layout each battle was played on (Standard, Encounter, Assault, Onslaught's reduced area). Spots: the first place each vehicle held for twenty seconds in the first four minutes, with how its battle went (damage, kills, survived, won). Damage: every shot that landed, summed where it was fired from. Kills: each killing shot, placed where it was fired from. Only the recording player's team is placed, since a replay knows an enemy's position only while it is spotted and an enemy firing unseen is exactly the position worth knowing. 404 when the slug maps to no map on the region.
+         */
+        get: operations["get-{region}-maps-{slug}-positions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/maps/{slug}/rate": {
         parameters: {
             query?: never;
@@ -3216,6 +3236,8 @@ export interface components {
                 d30: components["schemas"]["ClanGlobalMapStats"] | null;
             };
         };
+        /** @description The client's class tag: heavyTank, mediumTank, lightTank, AT-SPG or SPG. */
+        classField: string;
         CommunityVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];
         };
@@ -3964,6 +3986,16 @@ export interface components {
             capturedAt: Date;
             maps: components["schemas"]["ChangedMap"][];
         };
+        MapDamageSlice: {
+            team: number;
+            vehicleClass: components["schemas"]["classField"];
+            /** @description 0 for the first three minutes of battle time, 1 for three to seven, 2 past seven. */
+            phase: number;
+            /** @description Cells of the damage grid as row * grid + column, row 0 at the top. */
+            cells: number[];
+            /** @description Damage dealt from each of the cells above, summed over the battles. */
+            damage: number[];
+        };
         /** @description A battle map's gallery summary. */
         MapDetailResponse: {
             arenaId: string;
@@ -4034,6 +4066,15 @@ export interface components {
             capturedAt: Date;
             changes: components["schemas"]["MapChange"][];
         };
+        /** @description One killing shot, placed where it was fired from. */
+        MapKill: {
+            team: number;
+            vehicleClass: components["schemas"]["classField"];
+            left: number;
+            top: number;
+            /** @description Seconds of battle time. */
+            at: number;
+        };
         mapMarker: {
             left: number;
             top: number;
@@ -4092,6 +4133,26 @@ export interface components {
                 marker: components["schemas"]["marker"];
                 type: number;
             }[];
+        };
+        MapPositionLayout: {
+            /** @description The arena: the map, or a variant folded into it. */
+            arenaId: string;
+            /** @description The layout: ctf (Standard), domination (Encounter), assault, comp7. Positions are on that layout's own minimap. */
+            gameplayId: string;
+            /** @enum {string} */
+            mode: "random" | "onslaught" | "skirmish" | "advance";
+            /** @description Battles counted. */
+            battles: number;
+            spots: components["schemas"]["MapSpot"][];
+            damage: components["schemas"]["MapDamageSlice"][];
+            kills: components["schemas"]["MapKill"][];
+        };
+        MapPositionsResponse: {
+            arenaId: string;
+            /** @description Cells per side of the damage grid. */
+            grid: number;
+            /** @description Most battles first. */
+            layouts: components["schemas"]["MapPositionLayout"][];
         };
         /** @description An event that might fire on the map mid-battle, with the minimap art of its danger area and of its aftermath. */
         MapRandomEvent: {
@@ -4304,6 +4365,23 @@ export interface components {
         };
         MapsListResponse: {
             results: components["schemas"]["MapSummary"][];
+        };
+        /** @description The first place one vehicle held for twenty seconds within the first four minutes, and how its battle went. */
+        MapSpot: {
+            /** @description The spawn the vehicle left, 1 or 2. */
+            team: number;
+            vehicleClass: components["schemas"]["classField"];
+            /** @description Minimap position, percent from the left edge. */
+            left: number;
+            /** @description Minimap position, percent from the top edge. */
+            top: number;
+            /** @description When it settled there, in seconds of battle time. */
+            settledAt: number;
+            /** @description Its damage over the whole battle. */
+            damage: number;
+            kills: number;
+            survived: boolean;
+            won: boolean;
         };
         mapStatisticsQueryOutput: {
             /**
@@ -10655,6 +10733,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MapHistoryResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-positions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapPositionsResponse"];
                 };
             };
         };

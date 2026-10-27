@@ -8,7 +8,13 @@ import {
   type MapDetail,
 } from "@unicum.gg/shared";
 import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
-import { cn } from "@/lib/utils";
+import {
+  ClockCounterClockwiseIcon,
+  GridFourIcon,
+  LightningIcon,
+} from "@phosphor-icons/react/dist/ssr";
+import { Group, Mark } from "@/components/tanks/detail/viewer/control-group";
+import { SegmentedControl } from "@/components/segmented-control";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { MinimapLayers } from "@/components/maps/detail/minimap-layers";
@@ -21,14 +27,29 @@ import {
   poiUrl,
   spawnUrl,
 } from "@/components/maps/detail/minimap-overlay";
+import {
+  GuideLegend,
+  GuideOverlay,
+  GuideToggle,
+  type GuideState,
+  type GuideView,
+} from "@/components/maps/detail/minimap-guide";
 import { buildViews, teamSide } from "@/components/maps/detail/views";
 import { useTranslation } from "@/hooks/use-translation";
 
 export function MinimapViewer({
   detail,
+  guideState,
+  guide,
+  guideAvailable,
   onActiveViewChange,
 }: {
   detail: MapDetail;
+  /** The positioning guide, held by the page so its ranking can sit beside the map. */
+  guideState: GuideState;
+  guide: GuideView;
+  /** Whether the selected view's mode holds recorded battles on this map. */
+  guideAvailable: boolean;
   /** Reports the selected view's key (mode or "onslaught") so the page can sync
    * its stats sidebar to the active battle context. */
   onActiveViewChange?: (key: string) => void;
@@ -141,60 +162,54 @@ export function MinimapViewer({
   const eventLayers = drawnEvents.flatMap((e) =>
     afterOnly ? e.afterUrls : e.zoneUrls,
   );
-  const pill =
-    "rounded-full border border-fd-border px-3 py-1 text-sm text-fd-muted-foreground transition-colors hover:text-fd-foreground data-[active=true]:border-brand data-[active=true]:bg-brand/10 data-[active=true]:text-brand";
-
   return (
     <div className="flex flex-col">
+      {/* The vehicle viewer's band, reused: the views in one box, the layers
+          in another, so a reader sees which buttons change the picture and
+          which draw over it. */}
       <div className="flex flex-wrap items-center gap-2 px-4 pt-4 pb-3">
-        {views.length > 1 &&
-          views.map((v, i) => (
-            <button
-              key={v.key}
-              type="button"
-              onClick={() => setViewIndex(i)}
-              data-active={i === viewIndex}
-              // The pill is a plain text button, so the badge needs it to become
-              // a flex row: without that the gap does nothing and the crest sits
-              // on the text's baseline instead of beside it.
-              className={cn(
-                pill,
-                v.variant && v.commonTest && "inline-flex items-center gap-1.5",
-              )}
-            >
-              {v.label}
-              {v.variant && v.commonTest && <MapCommonTestBadge />}
-            </button>
-          ))}
-        <div className="ml-auto flex flex-wrap items-center gap-2">
+        {views.length > 1 && (
+          <SegmentedControl
+            active={view?.key ?? ""}
+            onSelect={(key) => setViewIndex(views.findIndex((v) => v.key === key))}
+            segments={views.map((v) => ({
+              id: v.key,
+              label: v.label,
+              icon: v.variant && v.commonTest ? <MapCommonTestBadge /> : undefined,
+            }))}
+          />
+        )}
+        <Group>
+          <GuideToggle state={guideState} available={guideAvailable} />
+          {guideAvailable && <GuideLegend state={guideState} guide={guide} />}
           {canShowEvents && (
-            <button
-              type="button"
+            <Mark
+              on={eventsOn}
               onClick={() => setShowEvents((s) => !s)}
-              data-active={eventsOn}
-              className={pill}
+              says={t("random-events")}
             >
-              {t("random-events")}</button>
+              <LightningIcon className="size-4" weight={eventsOn ? "fill" : "regular"} />
+            </Mark>
           )}
           {eventsOn && hasZones && (
-            <button
-              type="button"
+            <Mark
+              on={showAfter}
               onClick={() => setShowAfter((s) => !s)}
-              data-active={showAfter}
-              className={pill}
+              says={t("after-the-event")}
             >
-              {t("after-the-event")}</button>
+              <ClockCounterClockwiseIcon className="size-4" />
+            </Mark>
           )}
           {hasGrid && (
-            <button
-              type="button"
+            <Mark
+              on={showGrid}
               onClick={() => setShowGrid((s) => !s)}
-              data-active={showGrid}
-              className={pill}
+              says={t("grid")}
             >
-              {t("grid")}</button>
+              <GridFourIcon className="size-4" />
+            </Mark>
           )}
-        </div>
+        </Group>
       </div>
 
       <div className="relative aspect-square w-full overflow-hidden border-y border-fd-border bg-fd-muted">
@@ -220,6 +235,7 @@ export function MinimapViewer({
             mapHeight={height}
           />
         )}
+        <GuideOverlay state={guideState} guide={guide} />
       </div>
 
       {view && (

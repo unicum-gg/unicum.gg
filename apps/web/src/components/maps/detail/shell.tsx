@@ -17,10 +17,13 @@ import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
 import { CAMO_META } from "@/components/maps/meta";
 import { MinimapViewer } from "@/components/maps/detail/minimap-viewer";
 import {
+  buildViews,
   ONSLAUGHT_VIEW,
   variantForKey,
   variantViewKey,
 } from "@/components/maps/detail/views";
+import { useGuide, useGuideView } from "@/components/maps/detail/minimap-guide";
+import { GuidePanel } from "@/components/maps/detail/minimap-guide-panel";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { MapDetailTabs } from "@/components/maps/detail/tab-bar";
 import type { MapDetailTab } from "@/components/maps/detail/tabs";
@@ -29,6 +32,7 @@ import {
   BattleType,
   TEAM_SIZE_BATTLE_TYPES,
   type MapDetail,
+  type MapPositions,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
@@ -80,12 +84,15 @@ function Stat({
 export function MapShell({
   detail: rawDetail,
   region,
+  positions,
   available,
   counts,
   children,
 }: {
   detail: MapDetail;
   region: Region;
+  /** The guide's recorded battles, read with the page; null without any. */
+  positions: MapPositions | null;
   /** The tabs this map has something to show for. */
   available: MapDetailTab[];
   /** How much each of them holds, for the number beside its name. */
@@ -137,6 +144,17 @@ export function MapShell({
   // Onslaught runs on a reduced area and is always 7v7, wherever it is played:
   // on the map's own arena or on a variant's.
   const variant = variantForKey(detail, activeKey);
+  // The positioning guide is held here rather than in the viewer so its
+  // ranking can take the sidebar's place beside the map.
+  const views = useMemo(() => buildViews(detail, tGame), [detail, tGame]);
+  const activeView = views.find((each) => each.key === activeKey);
+  const guideState = useGuide(positions);
+  const guide = useGuideView(guideState, activeView);
+  // Offered only where this very layout has battles: a map recorded in
+  // Standard has nothing to say about its Encounter, and a guide of zeroes
+  // would take the map's own facts' place to say so.
+  const guideAvailable = (guide.layout?.battles ?? 0) > 0;
+  const guideOpen = guideState.open && guideAvailable;
   const onslaught =
     activeKey === ONSLAUGHT_VIEW ? detail.onslaught : (variant?.onslaught ?? null);
   // A variant is its own arena, so its play area is its own too.
@@ -223,9 +241,21 @@ export function MapShell({
       <Panel>
         <PanelContent className="p-0">
           <div className="grid lg:grid-cols-[minmax(0,1fr)_22rem]">
-            <MinimapViewer detail={detail} onActiveViewChange={setActiveKey} />
+            <MinimapViewer
+              detail={detail}
+              guideState={guideState}
+              guide={guide}
+              guideAvailable={guideAvailable}
+              onActiveViewChange={setActiveKey}
+            />
 
             <aside className="flex flex-col divide-y divide-fd-border border-t border-fd-border lg:border-t-0 lg:border-l">
+              {guideOpen && (
+                <GuidePanel state={guideState} guide={guide} view={activeView} />
+              )}
+              {/* The map's own facts stay under the guide rather than giving
+                  way to it: the guide is open by default, and hiding them
+                  would leave them on no page at all. */}
               {hasAnyStat && (
                 <div className="flex flex-col gap-4 p-4">
                   {hasSize && (

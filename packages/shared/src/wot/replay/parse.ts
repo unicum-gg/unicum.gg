@@ -258,6 +258,20 @@ export type Kill = {
   damage: number;
 };
 
+/** One shot that took hit points off a vehicle, as the recording client heard it. */
+export type Hit = {
+  /** Seconds on the replay's own clock. */
+  at: number;
+  /** The vehicle that lost the hit points, keyed like the tracks. */
+  victim: number;
+  /** Who did it. Damage with no author (fire, a fall, drowning) is not a hit. */
+  by: number;
+  /** The hit points it took. */
+  damage: number;
+  /** Whether it was the last shot. */
+  fatal: boolean;
+};
+
 export type ReplayMotion = {
   tracks: Track[];
   /**
@@ -282,6 +296,14 @@ export type ReplayMotion = {
    * positions have, and the reason the results stay the authority on WHO died.
    */
   kills: Kill[];
+  /**
+   * Every authored hit this client heard about, in order.
+   *
+   * The same health packets the kills come from, each one carrying the shot's
+   * author, so it says who dealt damage when. Heard about under the same fog of
+   * war: a vehicle the recording side cannot see does not report its health.
+   */
+  hits: Hit[];
   /** Every packet type seen and how often, which is what makes a gap findable. */
   seen: Record<number, number>;
 };
@@ -560,6 +582,7 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
   const health = new Map<number, [number, number][]>();
   const chat: ChatLine[] = [];
   const kills: Kill[] = [];
+  const hits: Hit[] = [];
   const commandAt = new Map<string, number>();
   const headings = new Map<number, number>();
   const seen: Record<number, number> = {};
@@ -651,6 +674,15 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
           if (hp === 0 && was > 0) {
             kills.push({ at: clock, victim: id, by: by || null, damage: was });
           }
+          if (by && was > hp) {
+            hits.push({
+              at: clock,
+              victim: id,
+              by,
+              damage: was - hp,
+              fatal: hp === 0,
+            });
+          }
         }
       }
     }
@@ -694,6 +726,7 @@ export function readMotion(stream: Uint8Array): ReplayMotion {
     health: [...health].map(([id, points]) => ({ id, points })),
     chat,
     kills,
+    hits,
     duration,
     seen,
   };

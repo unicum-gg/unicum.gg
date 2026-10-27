@@ -419,6 +419,15 @@ class MapClient {
     );
   }
 
+  /** Map positions */
+  positions() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/positions", path),
+      () => this.api.GET("/{region}/maps/{slug}/positions", { params: { path } }),
+    );
+  }
+
   /** Rate a map */
   rate(body: BodyOf<"/{region}/maps/{slug}/rate">) {
     const path = { region: this.region, slug: this.slug };

@@ -9,6 +9,7 @@
 import type { TranslateFunction } from "@onruntime/translations";
 import {
   BattleType,
+  LoadoutMode,
   SPAWN_DIRECTION_LABEL,
   spawnDirection,
   type MapDetail,
@@ -79,6 +80,14 @@ export type MapView = ViewGeometry & {
   minimapUrl: string;
   widthMeters: number;
   heightMeters: number;
+  /**
+   * The layout the view is drawn for (a `MapGameMode` for the random views,
+   * `comp7` for an Onslaught area) and the mode whose recorded battles are
+   * played on it, which is what the kills and
+   * deaths layer reads under it. Null for a view no counted mode is played on
+   * (a Waffenträger variant, a Story Mode chapter).
+   */
+  battles: { gameplayId: string; mode: LoadoutMode } | null;
 };
 
 export function buildViews(
@@ -95,6 +104,7 @@ export function buildViews(
     minimapUrl: detail.minimapUrl,
     widthMeters: detail.widthMeters,
     heightMeters: detail.heightMeters,
+    battles: { gameplayId: g.mode, mode: LoadoutMode.Random },
     bases: g.bases,
     spawns: g.spawns,
     controlPoint: g.controlPoint,
@@ -111,6 +121,7 @@ export function buildViews(
       minimapUrl: detail.onslaught.minimapUrl,
       widthMeters: detail.onslaught.widthMeters,
       heightMeters: detail.onslaught.heightMeters,
+      battles: { gameplayId: "comp7", mode: LoadoutMode.Onslaught },
       bases: { team1: [], team2: [] },
       spawns: detail.onslaught.spawns,
       controlPoint: detail.onslaught.controlPoint,
@@ -132,6 +143,11 @@ export function buildViews(
       minimapUrl: variant.minimapUrl,
       widthMeters: variant.onslaught?.widthMeters ?? variant.widthMeters,
       heightMeters: variant.onslaught?.heightMeters ?? variant.heightMeters,
+      // A variant's random modes are its own event rules, never counted; its
+      // Onslaught layout (the night versions) is.
+      battles: variant.onslaught
+        ? { gameplayId: "comp7", mode: LoadoutMode.Onslaught }
+        : null,
       bases: geo?.bases ?? { team1: [], team2: [] },
       spawns: variant.onslaught?.spawns ?? geo?.spawns ?? { team1: [], team2: [] },
       controlPoint: variant.onslaught?.controlPoint ?? geo?.controlPoint ?? null,

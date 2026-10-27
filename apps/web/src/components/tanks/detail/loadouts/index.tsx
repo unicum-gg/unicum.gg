@@ -1,9 +1,9 @@
 import {
   isConfidentSample,
-  LoadoutMode,
   MIN_ROW_PERFORMANCE_SAMPLE,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { LOADOUT_MODE_NAME_KEY } from "@/components/tanks/detail/loadouts/mode-names";
 import {
   Panel,
   PanelContent,
@@ -23,6 +23,8 @@ import { TopBattles } from "./top-battles";
 import { TopPlayers } from "./top-players";
 import { LoadoutsSwitch } from "./view-switch";
 import type { TankLoadoutModeView, TankLoadoutsPayload } from "./view";
+
+export { LOADOUT_MODE_NAME_KEY };
 
 /**
  * The Loadouts tab: what this vehicle's owners have actually put on it.
@@ -45,15 +47,6 @@ import type { TankLoadoutModeView, TankLoadoutsPayload } from "./view";
  * battles with exactly what was fitted for each, which is the part worth
  * reading once the averages have been.
  */
-/** Where each mode's name is read in `game/vocabulary`: the game's own words,
- * in the reader's language, as the profile's mode tabs already name them. */
-export const LOADOUT_MODE_NAME_KEY: Record<LoadoutMode, string> = {
-  [LoadoutMode.Random]: "player-modes.overall",
-  [LoadoutMode.Onslaught]: "player-modes.onslaught",
-  [LoadoutMode.Skirmish]: "player-modes.skirmish",
-  [LoadoutMode.Advance]: "player-modes.advances",
-};
-
 export async function LoadoutsTab({
   region,
   slug,

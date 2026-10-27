@@ -10,7 +10,7 @@ const GRID_LETTERS = "ABCDEFGHJKLMNOPQRSTUVWXYZ"; // A-Z without "I"
 const gridLabel =
   "absolute font-mono text-[9px] font-bold leading-none text-white/80 [text-shadow:0_1px_2px_rgba(0,0,0,0.9)]";
 
-function rowLabel(i: number): string {
+export function rowLabel(i: number): string {
   if (i < GRID_LETTERS.length) return GRID_LETTERS[i];
   const j = i - GRID_LETTERS.length;
   return (
@@ -19,7 +19,7 @@ function rowLabel(i: number): string {
   );
 }
 
-function colLabel(i: number, count: number): string {
+export function colLabel(i: number, count: number): string {
   // The classic 10-wide grid numbers its last column "0" (the game's quirk);
   // wider grids just count up.
   return count === 10 ? String((i + 1) % 10) : String(i + 1);

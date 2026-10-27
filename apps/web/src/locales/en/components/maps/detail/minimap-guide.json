@@ -1,0 +1,46 @@
+{
+  "toggle": "Positioning guide",
+  "spawn": "Spawn {n}",
+  "side": {
+    "north": "North",
+    "south": "South",
+    "east": "East",
+    "west": "West"
+  },
+  "phase": {
+    "opening": "0 to 3 min",
+    "middle": "3 to 7 min",
+    "late": "7 min +"
+  },
+  "title": {
+    "opening": "Where to set up at the start",
+    "middle": "Where the fight is held in the middle",
+    "late": "Where the battle is finished"
+  },
+  "subtitle": "{vehicle} starting from the {side}.",
+  "sample": {
+    "battles": "Replays analysed",
+    "players": "{vehicle} players placed"
+  },
+  "few-battles": "Few battles have been recorded on this layout so far: read these positions as a first idea, they will firm up as more replays come in.",
+  "players-share": "{share} of players set up here",
+  "damage-share": "{share} of the damage is dealt from here",
+  "opening-detail": "{damage} damage per battle on average, {kills} kills made from here",
+  "later-detail": "{damage} damage dealt, {kills} kills made from here",
+  "thin": "only {players} players so far",
+  "empty": "No battle has been recorded yet for this side and class on this layout.",
+  "note": "Read from the replays shared through the unicum.gg mod. Only the team of the player who recorded is placed, since an enemy is only seen while spotted.",
+  "legend": {
+    "open": "What the colours and numbers mean",
+    "colours": "Colours: damage dealt from each place",
+    "little": "A little",
+    "a-lot": "A lot",
+    "colours-opening": "In the first three minutes, by players of the chosen side and class. The redder a place, the more damage they dealt from it.",
+    "colours-middle": "Between three and seven minutes, by players of the chosen side and class. The redder a place, the more damage they dealt from it.",
+    "colours-late": "After seven minutes, by players of the chosen side and class. The redder a place, the more damage they dealt from it.",
+    "numbers-opening": "The squares where most of these players set up after the opening rush, ranked on the right.",
+    "numbers-middle": "The squares the most damage was dealt from at this moment, ranked on the right.",
+    "numbers-late": "The squares the most damage was dealt from at this moment, ranked on the right.",
+    "grid": "Squares are named like the in-game minimap grid (F6), so they can be called out in battle."
+  }
+}

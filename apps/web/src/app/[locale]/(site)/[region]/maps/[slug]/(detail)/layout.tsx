@@ -7,6 +7,7 @@ import {
   availableMapTabs,
   loadMapDetail,
   loadMapHistory,
+  loadMapPositions,
   loadMapStatisticsSummary,
   loadMapVideos,
   mapTabCounts,
@@ -56,6 +57,15 @@ export default async function MapLayout({
   // kilobytes and the gallery's search box matches on it.
   const { t: tBlurbs } = await getTranslation("game/map-descriptions", locale);
 
+  // The modes with recorded battles, which is what offers the positioning
+  // guide. Its data is read here only when there is some, so a map nobody has
+  // recorded costs no request.
+  const recordedModes = (statistics?.modes ?? [])
+    .filter((entry) => entry.battles > 0)
+    .map((entry) => entry.mode);
+  const positions =
+    recordedModes.length > 0 ? await loadMapPositions(region, detail.slug) : null;
+
   return (
     <MapShell
       detail={{
@@ -63,6 +73,7 @@ export default async function MapLayout({
         description: mapDescription(detail.arenaId, detail.description, tBlurbs),
       }}
       region={region}
+      positions={positions}
       available={availableMapTabs(history, statistics)}
       counts={mapTabCounts(detail, videos, history, statistics)}
     >

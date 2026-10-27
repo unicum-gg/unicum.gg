@@ -3,6 +3,7 @@ import {
   LOADOUT_MODES,
   LoadoutMode,
   type MapDetail,
+  type MapPositions,
   type MapRatingSummary,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -147,6 +148,33 @@ export function loadMapStatisticsSummary(
   locale: string,
 ): Promise<MapStatisticsPayload | null> {
   return askMapStatistics(region, slug, LoadoutMode.Random, locale);
+}
+
+/**
+ * The positioning guide's recorded battles, read with the page rather than
+ * after it: the guide is open by default, so fetching it from the browser drew
+ * a second loading state under a page that had just finished loading.
+ */
+export async function loadMapPositions(
+  region: Region,
+  slug: string,
+): Promise<MapPositions | null> {
+  // An extra on the page, never a reason to lose it: a failed read leaves the
+  // map without its guide rather than answering an error page.
+  try {
+    return await buildSafe(
+      () =>
+        unicum
+          .region(region)
+          .maps(slug)
+          .positions()
+          .then((r) => r as unknown as MapPositions),
+      null,
+    );
+  } catch (error) {
+    console.error(`[maps] positions for ${region}/${slug} failed`, error);
+    return null;
+  }
 }
 
 /** Every mode that holds battles on this map, for the Statistics tab. */
