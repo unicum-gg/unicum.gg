@@ -210,6 +210,12 @@ export async function POST(
     if (piece.length === 0 || piece.length > MAX_REPLAY_BYTES) {
       return Response.json({ error: "body_too_large" }, { status: 413 });
     }
+    // The first piece of a set clears whatever an earlier attempt left here.
+    // A sender that stopped halfway leaves pieces nothing will ever assemble,
+    // and the only moment anything knows they are stale is when the same
+    // battle is offered again: there is no sweep that could find them
+    // otherwise, since the bucket cannot be listed through this signer.
+    if (split.index === 0) await discardReplayParts(key, MAX_PARTS);
     const kept = await storeReplay(replayPartKey(key, split.index), piece);
     if (!kept.ok) {
       if (kept.error === ReplayStoreError.Full) return refuse(ReplayRefusal.ArchiveFull);
