@@ -108,24 +108,63 @@ export function bustPlayerDetailCache(region: Region, nickname: string): void {
 const inFlight = new Map<string, Promise<unknown>>();
 
 /**
+ * How many DIFFERENT players one process will assemble at a time.
+ *
+ * Sharing the assembly stopped the orphans multiplying, and left the other half
+ * of 2026-10-27 untouched: nothing bounded how many distinct players were being
+ * assembled at once. At about eight new players a second against assemblies
+ * that outlive their own deadline, roughly six hundred ran in parallel over
+ * five render threads, so each one took sixty to ninety seconds to do two and a
+ * half seconds of work, every caller timed out, and the payload cache behind
+ * them could never fill because nothing ever finished. Adding threads does not
+ * touch that: measured on the night, going from three workers to five raised
+ * throughput by about forty per cent, took the host from seven idle cores to
+ * none, and left the share of callers hitting the deadline at ninety-three per
+ * cent exactly where it was.
+ *
+ * An assembly is about 1.8s of database time and half a second of CPU, so a
+ * handful in flight per thread is enough to keep one busy through its waits,
+ * and anything past that buys nothing and costs memory. Sixteen is that handful
+ * with room to spare: it holds throughput near seven assemblies a second per
+ * process, above what the traffic needs, while capping what a worker can be
+ * holding at sixteen payloads instead of a queue with no end.
+ *
+ * What overflow gets is the answer it was already getting, a 503 asking it to
+ * come back, except in a millisecond rather than after a thirty second wait
+ * that ends the same way. Nobody is turned away who would otherwise have been
+ * served: this is the queue refusing to grow past the point where growing it
+ * makes everybody slower, which is what turned a busy night into an outage.
+ */
+const MAX_CONCURRENT_ASSEMBLIES = 16;
+
+/** Returned instead of starting an assembly when this process is already full. */
+export const ASSEMBLY_REFUSED = Symbol("assembly-refused");
+
+/**
  * Assemble a player's detail at most once per process at a time, publishing the
  * serialized payload to the shared cache as soon as it lands.
  *
  * `serialize` returns null for a result that must not be cached (an unknown or
  * locked account), and its string is handed back so the caller that is still
  * waiting does not serialize the same payload a second time.
+ *
+ * Answers {@link ASSEMBLY_REFUSED} when this process already holds
+ * {@link MAX_CONCURRENT_ASSEMBLIES} different players and this is one more.
  */
 export function assemblePlayerDetailOnce<T>(
   region: Region,
   nickname: string,
   assemble: () => Promise<T>,
   serialize: (result: T) => string | null,
-): Promise<{ result: T; json: string | null }> {
+): Promise<{ result: T; json: string | null }> | typeof ASSEMBLY_REFUSED {
   const cacheKey = key(region, nickname);
   const pending = inFlight.get(cacheKey) as
     | Promise<{ result: T; json: string | null }>
     | undefined;
+  // Joining one already running is always allowed: it costs nothing and is the
+  // whole point of sharing them. Only a NEW player is held against the ceiling.
   if (pending) return pending;
+  if (inFlight.size >= MAX_CONCURRENT_ASSEMBLIES) return ASSEMBLY_REFUSED;
 
   const promise = assemble()
     .then((result) => {

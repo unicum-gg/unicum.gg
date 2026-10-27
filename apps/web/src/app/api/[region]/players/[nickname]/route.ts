@@ -3,6 +3,7 @@ import {
   loadPlayerDetailLive,
 } from "@unicum.gg/core/players/detail";
 import {
+  ASSEMBLY_REFUSED,
   assemblePlayerDetailOnce,
   getCachedPlayerDetailJson,
 } from "@unicum.gg/core/players/detail-cache";
@@ -65,19 +66,27 @@ export async function GET(
       // cache when it lands rather than when a caller is still there to receive
       // it. Both halves are what turned a slow page into an outage on
       // 2026-10-27, see `assemblePlayerDetailOnce`.
+      const shared = assemblePlayerDetailOnce(
+        region,
+        decoded,
+        () => loadPlayerDetailLive(region, decoded),
+        (r) =>
+          r.status === PlayerDetailLiveStatus.Found
+            ? tracedSync("serialize", () => JSON.stringify(r.detail))
+            : null,
+      );
+      // Refused because this process is already assembling as many different
+      // players as it can finish quickly. Answered at once with the same 503
+      // the deadline would have produced, since waiting thirty seconds to say
+      // it is what made every assembly slow enough to need saying.
+      if (shared === ASSEMBLY_REFUSED) {
+        return Response.json(
+          { error: "still_loading" },
+          { status: 503, headers: { "retry-after": "5" } },
+        );
+      }
       const assembled = await traced("loadPlayerDetailLive", () =>
-        withDeadline(
-          assemblePlayerDetailOnce(
-            region,
-            decoded,
-            () => loadPlayerDetailLive(region, decoded),
-            (r) =>
-              r.status === PlayerDetailLiveStatus.Found
-                ? tracedSync("serialize", () => JSON.stringify(r.detail))
-                : null,
-          ),
-          COLD_DEADLINE_MS,
-        ),
+        withDeadline(shared, COLD_DEADLINE_MS),
       );
       // Not an error state: the assembly is still running and will store what it
       // fetches. 503 + Retry-After says "ask again", where 504 would read as a
