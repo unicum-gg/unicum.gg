@@ -131,7 +131,9 @@ function NavigationProgressInner() {
     const origPush = history.pushState;
     const origReplace = history.replaceState;
     history.pushState = function (...args) {
-      start();
+      // Deferred: the App Router calls `pushState` from a `useInsertionEffect`,
+      // where React refuses a state update outright.
+      queueMicrotask(start);
       return origPush.apply(this, args);
     };
     history.replaceState = function (...args) {
