@@ -11,6 +11,28 @@ import { getRedisClient } from "@unicum.gg/core/redis";
  * rows on the single render thread. Measured in prod: that flood alone pins the
  * web JS thread at ~1.2 cores with essentially no real traffic.
  *
+ * An hour, and the length is the point rather than an accident. It was sixty
+ * seconds, chosen when the TTL was the only thing bounding staleness; the bust
+ * below has since made it a pure safety net, and sixty seconds of it turned out
+ * to be the difference between a reader being served and being handed an error.
+ * Measured on 2026-10-27, a crawl asked for about 113 DISTINCT players a second
+ * against a machine that can assemble five or six, so whatever is not cached is
+ * refused, and at sixty seconds the cache held about eight hundred players at a
+ * time. Nothing about a ceiling fixes a shortfall that size: raised, every
+ * assembly slows until they all pass their deadline and none is ever published,
+ * and lowered, they publish briskly while almost every caller is turned away.
+ * The cache is the only part of this that can hold more than the machine can
+ * make, so it is the part that was too small. An hour of the same five or six a
+ * second covers about twenty thousand players, and every hit it serves is a
+ * thread freed to assemble somebody else.
+ *
+ * Staleness does not grow with it, which is the reason this is safe rather than
+ * a trade: the entry is dropped the moment a fresh snapshot lands, so what a
+ * long TTL extends is only how long we keep a payload for a player who has not
+ * played since. The one thing it does cost is a player whose data changed
+ * through a path that does not commit a snapshot, who now waits up to an hour
+ * instead of a minute.
+ *
  * The TTL is only a safety net. Freshness comes from {@link bustPlayerDetailCache},
  * called wherever a fresh snapshot is committed (`recordCurrentSnapshot`), so a
  * completed refresh — background pipeline, on-demand cron, or cold-DB live fetch
@@ -18,7 +40,9 @@ import { getRedisClient } from "@unicum.gg/core/redis";
  * That fires on the same event as the LiveSync publish, so the cache and the SSE
  * push stay in lockstep.
  */
-export const PLAYER_DETAIL_TTL_SECONDS = 60;
+export const PLAYER_DETAIL_TTL_SECONDS = Number(
+  process.env.PLAYER_DETAIL_TTL_SECONDS || 3600,
+);
 
 function key(region: Region, nickname: string): string {
   return `pdetail:${region}:${nickname.toLowerCase()}`;
