@@ -148,6 +148,61 @@ export async function fetchReplay(key: string): Promise<Uint8Array | null> {
   return response.body;
 }
 
+/**
+ * Where one piece of a replay waits while its siblings arrive.
+ *
+ * Pieces exist because the game cannot put more than 8000000 bytes of body on
+ * the wire at once -- measured, and it does not truncate, it sends the request
+ * with no body at all -- while a replay plus the base64 it has to travel as
+ * can be twice that. A long battle was simply unsendable.
+ *
+ * Parked as ordinary objects beside the replay rather than held in memory or
+ * in a row: the key says everything about what a piece is and which whole it
+ * belongs to, so nothing has to be remembered between two requests and two
+ * instances of the app answer them identically.
+ */
+export function replayPartKey(key: string, index: number): string {
+  return `${key}.part${index}`;
+}
+
+/**
+ * The whole file from its pieces, or null when one of them is missing.
+ *
+ * Missing is an ordinary state, not a fault: pieces arrive one request at a
+ * time and the last one is what asks for this.
+ */
+export async function assembleReplay(
+  key: string,
+  parts: number,
+): Promise<Uint8Array | null> {
+  const pieces: Uint8Array[] = [];
+  for (let index = 0; index < parts; index += 1) {
+    const piece = await fetchReplay(replayPartKey(key, index));
+    if (!piece) return null;
+    pieces.push(piece);
+  }
+  const whole = new Uint8Array(pieces.reduce((size, one) => size + one.length, 0));
+  let at = 0;
+  for (const piece of pieces) {
+    whole.set(piece, at);
+    at += piece.length;
+  }
+  return whole;
+}
+
+/**
+ * Drop every piece of a replay.
+ *
+ * Called once the whole is stored, and also when a piece is refused: what is
+ * left behind otherwise is a few megabytes nothing will ever read, under a key
+ * nothing will ever look for.
+ */
+export async function discardReplayParts(key: string, parts: number): Promise<void> {
+  for (let index = 0; index < parts; index += 1) {
+    await deleteReplay(replayPartKey(key, index));
+  }
+}
+
 /** What the row says about a battle somebody is offering a replay for. */
 export type ReplayTarget = {
   /** Already stored, so the sender can stop holding the file. */

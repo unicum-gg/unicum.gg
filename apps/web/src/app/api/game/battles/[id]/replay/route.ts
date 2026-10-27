@@ -8,9 +8,12 @@ import {
 } from "@unicum.gg/shared";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import {
+  assembleReplay,
   attachReplay,
+  discardReplayParts,
   replayExists,
   replayKey,
+  replayPartKey,
   replayStore,
   replayTargetOf,
   ReplayStoreError,
@@ -81,6 +84,27 @@ const replayBody = z.object({
   replay: z.string().min(1),
   sha256: z.string().regex(/^[0-9a-fA-F]{64}$/),
 });
+
+/**
+ * The most pieces one replay may arrive in.
+ *
+ * A piece is bounded by what the game can put on the wire at once, 8000000
+ * bytes of body, which is about 6 MB of file once base64 has taken its third.
+ * Four covers the 12 MB a replay is allowed to be twice over, and it bounds
+ * what one request can ask this to read back out of the bucket.
+ */
+const MAX_PARTS = 4;
+
+/** `part` and `parts` off the query, or null when this is a whole file. */
+function pieceOf(url: URL): { index: number; count: number } | null {
+  const raw = url.searchParams.get("parts");
+  if (raw === null) return null;
+  const count = Number(raw);
+  const index = Number(url.searchParams.get("part") ?? "");
+  if (!Number.isInteger(count) || count < 2 || count > MAX_PARTS) return null;
+  if (!Number.isInteger(index) || index < 0 || index >= count) return null;
+  return { index, count };
+}
 
 /**
  * Where the game mod sends the `.wotreplay` file of a battle already reported.
@@ -174,8 +198,45 @@ export async function POST(
     return Response.json({ error: "invalid_body" }, { status: 400 });
   }
 
-  const bytes = new Uint8Array(Buffer.from(body.data.replay, "base64"));
+  const piece = new Uint8Array(Buffer.from(body.data.replay, "base64"));
+  const key = replayKey(account.region, startedAt, arenaUniqueId);
+  const split = pieceOf(new URL(req.url));
+
+  // A replay too long to travel in one request arrives in pieces, each one
+  // parked beside the replay until the last turns up. The hash in the body is
+  // the WHOLE file's, so it is only checked once there is a whole file.
+  let bytes: Uint8Array<ArrayBufferLike> = piece;
+  if (split) {
+    if (piece.length === 0 || piece.length > MAX_REPLAY_BYTES) {
+      return Response.json({ error: "body_too_large" }, { status: 413 });
+    }
+    const kept = await storeReplay(replayPartKey(key, split.index), piece);
+    if (!kept.ok) {
+      if (kept.error === ReplayStoreError.Full) return refuse(ReplayRefusal.ArchiveFull);
+      if (kept.error === ReplayStoreError.NotConfigured) {
+        return refuse(ReplayRefusal.NotCollected);
+      }
+      console.error(`[api/game/battles/replay] part store failed: ${kept.detail}`);
+      return Response.json({ error: "store_failed" }, { status: 502 });
+    }
+    if (split.index < split.count - 1) {
+      return Response.json(
+        { part: split.index, parts: split.count },
+        { headers: { "cache-control": "no-store" } },
+      );
+    }
+    const whole = await assembleReplay(key, split.count);
+    if (!whole) {
+      // A piece never arrived, or was swept. Nothing here can mend that, and
+      // leaving the others costs the quota, so the sender starts again.
+      await discardReplayParts(key, split.count);
+      return Response.json({ error: "missing_part" }, { status: 422 });
+    }
+    bytes = whole;
+  }
+
   if (bytes.length === 0 || bytes.length > MAX_REPLAY_BYTES) {
+    if (split) await discardReplayParts(key, split.count);
     return Response.json({ error: "body_too_large" }, { status: 413 });
   }
 
@@ -184,6 +245,7 @@ export async function POST(
   // replay would be archived looking perfectly well.
   const digest = createHash("sha256").update(bytes).digest("hex");
   if (digest !== body.data.sha256.toLowerCase()) {
+    if (split) await discardReplayParts(key, split.count);
     // Not a refusal, deliberately: refusals are final and make the mod delete
     // its copy, and a body that arrived damaged is the one case where the copy
     // is still good and the next attempt may well work.
@@ -205,8 +267,6 @@ export async function POST(
     if (err instanceof ReplayError) return refuse(ReplayRefusal.NotThisBattle);
     throw err;
   }
-
-  const key = replayKey(account.region, startedAt, arenaUniqueId);
 
   // Between the row check above and here, another of the thirty clients may
   // have placed the same file. Cheap to ask, and it saves writing a megabyte
@@ -256,6 +316,8 @@ export async function POST(
   // map's minimap, out of the same decode: the positions are in the packets
   // this already reads.
   await writeDerived(account.region, arenaUniqueId, startedAt, bytes);
+  // The pieces have nothing left to say once the whole is stored.
+  if (split) await discardReplayParts(key, split.count);
 
   return Response.json(
     { stored: key },
