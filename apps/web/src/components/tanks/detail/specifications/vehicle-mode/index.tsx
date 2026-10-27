@@ -101,7 +101,7 @@ export function VehicleModeToggle({
   const glyph = compact ? "size-3" : "size-3.5";
   return (
     <TooltipProvider delayDuration={100}>
-      <SegmentedControl compact={compact}>
+      <SegmentedControl>
         <Segment
           compact={compact}
           label={travelLabel(mechanic)}

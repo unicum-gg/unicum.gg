@@ -202,7 +202,7 @@ export function OnslaughtBoard({
   }, [results, hasRates, reference]);
 
   const rankChips = (
-    <ChipRow className="h-7">
+    <ChipRow>
       {TIERS.map((rank) => (
         <Chip
           key={rank}
@@ -231,7 +231,7 @@ export function OnslaughtBoard({
   // Absent rather than inert on a season with no captures behind it, like the
   // Common Test chip on the tanks catalogue.
   const activityChips = hasRates ? (
-    <ChipRow className="h-7">
+    <ChipRow>
       {ACTIVITY_BUCKETS.map((bucket) => (
         <Chip
           key={bucket}

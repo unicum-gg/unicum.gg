@@ -56,7 +56,7 @@ export function ClanLanguageSelect({
     <Select value={active ?? ALL} onValueChange={onChange}>
       <SelectTrigger
         size="sm"
-        className="h-8 w-48 bg-transparent text-xs dark:bg-transparent"
+        className="w-48 rounded-md bg-transparent py-0 text-xs data-[size=sm]:h-7 dark:bg-transparent"
       >
         <SelectValue />
       </SelectTrigger>

@@ -12,7 +12,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { ChartMode } from "@/components/coverage/chart-mode";
-import { cn } from "@/lib/utils";
+import { SegmentedControl } from "@/components/segmented-control";
 import type { DailyPoint } from "@/services/coverage";
 
 const DAY_TICK = "d MMM";
@@ -136,18 +136,15 @@ export function CoverageAreaChart({
           )}
         </div>
         {allowCumulative && (
-          <div className="flex items-center gap-0.5 text-[10px] font-medium uppercase tracking-wider">
-            <ModeButton
-              active={mode === ChartMode.Daily}
-              onClick={() => setMode(ChartMode.Daily)}
-            >
-              {t("daily")}</ModeButton>
-            <ModeButton
-              active={mode === ChartMode.Cumulative}
-              onClick={() => setMode(ChartMode.Cumulative)}
-            >
-              {t("cumulative")}</ModeButton>
-          </div>
+          <SegmentedControl
+            compact
+            active={mode}
+            onSelect={setMode}
+            segments={[
+              { id: ChartMode.Daily, label: t("daily") },
+              { id: ChartMode.Cumulative, label: t("cumulative") },
+            ]}
+          />
         )}
       </div>
       <ChartContainer
@@ -216,30 +213,5 @@ export function CoverageAreaChart({
         </AreaChart>
       </ChartContainer>
     </div>
-  );
-}
-
-function ModeButton({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "cursor-pointer rounded px-1.5 py-0.5 transition-colors",
-        active
-          ? "bg-fd-accent text-fd-accent-foreground"
-          : "text-fd-muted-foreground hover:text-fd-foreground",
-      )}
-    >
-      {children}
-    </button>
   );
 }

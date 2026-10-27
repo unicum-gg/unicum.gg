@@ -3,12 +3,7 @@
 import type { PaintLock } from "@unicum.gg/shared";
 import type { MirrorStyle } from "@unicum.gg/wargaming";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import {
   CameraControls,
   SizeControls,
@@ -17,6 +12,7 @@ import type { Cinematic } from "@/components/tanks/detail/viewer/cinematic";
 import { Group } from "@/components/tanks/detail/viewer/control-group";
 import { DressingControls } from "@/components/tanks/detail/viewer/dressing";
 import { ArmourLegend } from "@/components/tanks/detail/viewer/legend";
+import { SegmentedControl } from "@/components/segmented-control";
 import type { Presentation } from "@/components/tanks/detail/viewer/presentation";
 import { ShotPicker } from "@/components/tanks/detail/viewer/shot";
 import type { SkinFace } from "@/services/tank-viewer/styles";
@@ -171,37 +167,20 @@ export function ViewerControls({
           collision for can answer one question, and a control with one position
           is a label pretending to be a control.
 
-          **Drawn here rather than with the page's segmented control**, which is
-          a shorter thing: its segments are 24 pixels where a mark on this band
-          is 28, so the box around them came out eight pixels under its
-          neighbours and the row of groups no longer had one baseline. Changing
-          the shared control would have moved the two beside the characteristics
-          title, which are the right size where they sit.
+          The site's one switch, in the band's own box style, so it glides like
+          every other.
         */}
         {views.length > 1 ? (
-          <Group>
-            {views.map((one) => (
-              <Tooltip key={one}>
-                <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    onClick={() => onView(one)}
-                    aria-pressed={view === one}
-                    className={`rounded-md px-2.5 py-1.5 text-xs font-medium leading-4 transition-colors ${
-                      view === one
-                        ? "bg-brand/10 text-brand ring-1 ring-brand/60"
-                        : "text-fd-muted-foreground hover:bg-fd-secondary/60 hover:text-fd-foreground"
-                    }`}
-                  >
-                    {tView(`views.${one}`)}
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  {tView(`view-tooltips.${one}`)}
-                </TooltipContent>
-              </Tooltip>
-            ))}
-          </Group>
+          <SegmentedControl
+            active={view}
+            onSelect={onView}
+            className="pointer-events-auto bg-fd-background/70 backdrop-blur"
+            segments={views.map((one) => ({
+              id: one,
+              label: tView(`views.${one}`),
+              tooltip: tView(`view-tooltips.${one}`),
+            }))}
+          />
         ) : null}
         <CameraControls
           centred={centred}

@@ -49,6 +49,7 @@ import { TankClient } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { Hint } from "@/components/hint";
+import { SegmentedControl } from "@/components/segmented-control";
 
 /** The two configurations the game itself offers per column, and all a reader
  * needs before opening the full setup: what the vehicle ships with, and what it
@@ -62,30 +63,17 @@ function ModulePreset({ build }: { build: TankBuild }) {
   // stay, since it is the way back to either preset.
   if (!build.interactive || !build.hasModuleChoice) return null;
   return (
-    <div className="inline-flex overflow-hidden rounded-md border border-fd-border text-[0.6875rem]">
-      <button
-        type="button"
-        onClick={build.selectStockModules}
-        className={cn(
-          "cursor-pointer px-1.5 py-0.5 transition-colors",
-          build.isStockModules
-            ? "bg-fd-secondary text-fd-foreground"
-            : "text-fd-muted-foreground hover:bg-fd-secondary/50",
-        )}
-      >
-        {t("stock")}</button>
-      <button
-        type="button"
-        onClick={build.selectTopModules}
-        className={cn(
-          "cursor-pointer border-l border-fd-border px-1.5 py-0.5 transition-colors",
-          build.isTopModules
-            ? "bg-fd-secondary text-fd-foreground"
-            : "text-fd-muted-foreground hover:bg-fd-secondary/50",
-        )}
-      >
-        {t("top")}</button>
-    </div>
+    <SegmentedControl
+      compact
+      active={build.isStockModules ? "stock" : build.isTopModules ? "top" : ""}
+      onSelect={(next) =>
+        next === "stock" ? build.selectStockModules() : build.selectTopModules()
+      }
+      segments={[
+        { id: "stock", label: t("stock") },
+        { id: "top", label: t("top") },
+      ]}
+    />
   );
 }
 

@@ -5,10 +5,14 @@ import { Slot } from "radix-ui";
 
 import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
+import { SEGMENTED_BOX, segmentClass } from "@/components/segmented-control";
 
 // A segmented row of pills: the site's filter control, used by the tank and
 // map galleries, the leaderboards and the glossary index. A primitive rather
 // than part of any one of them, which is also where the Radix import belongs.
+// Drawn with the site's one switch look (`SEGMENTED_BOX`, `segmentClass`): a
+// filter row and a view switch are the same object to a reader, and they had
+// grown three different ideas of what "selected" looks like.
 
 /**
  * The row itself, which scrolls rather than wraps and says so with the rail's
@@ -35,7 +39,8 @@ export function ChipRow({
     <ScrollRail
       compact
       containerClassName={cn(
-        "w-fit max-w-full overflow-hidden rounded-md border border-fd-border",
+        SEGMENTED_BOX,
+        "w-fit max-w-full",
         className,
       )}
       className="flex"
@@ -67,10 +72,8 @@ export const Chip = forwardRef<
         // default, so eleven nation flags in a phone-width row were squeezed to
         // under half their width instead of scrolling, and a flag whose height
         // is fixed and whose width is squeezed is simply the wrong picture.
-        "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap border-r border-fd-border px-3 py-1.5 font-medium transition-colors last:border-r-0",
-        active
-          ? "bg-fd-secondary/50 text-fd-foreground"
-          : "text-fd-muted-foreground hover:bg-fd-secondary/25 hover:text-fd-foreground",
+        segmentClass(active),
+        "shrink-0 cursor-pointer justify-center whitespace-nowrap",
         className,
       )}
     >

@@ -1,6 +1,5 @@
-import Link from "@/components/link";
+import { SegmentedControl } from "@/components/segmented-control";
 import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { getTranslation } from "@/lib/translations.server";
 
@@ -34,42 +33,12 @@ export async function LeaderboardTabs({
     ? ROUTES.PLAYERS_BY_LANGUAGE(region, language, strict)
     : ROUTES.PLAYERS(region);
   return (
-    <div className="inline-flex items-center rounded-md border border-fd-border bg-fd-card p-0.5 text-xs font-medium">
-      <Segment
-        href={playersHref}
-        active={current === "players"}
-        label={t("players")}
-      />
-      <Segment href={clansHref} active={current === "clans"} label={t("clans")} />
-    </div>
-  );
-}
-
-function Segment({
-  href,
-  active,
-  label,
-}: {
-  href: string;
-  active: boolean;
-  label: string;
-}) {
-  return (
-    <Link
-      href={href}
-      // A tab bar is a row of whole pages. Nothing in this tree draws a
-      // loading boundary, so each one Next prefetched on sight was the
-      // destination in full: measured on the tanks index, 1.8 MB of them.
-      // See `prefetch` in `@/components/link`.
-      prefetch="intent"
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded px-2 py-1 transition-colors",
-        active
-          ? "bg-brand/15 text-fd-foreground"
-          : "text-fd-muted-foreground hover:text-fd-foreground",
-      )}
-    >
-      <span>{label}</span>
-    </Link>
+    <SegmentedControl
+      active={current}
+      segments={[
+        { id: "players", label: t("players"), href: playersHref },
+        { id: "clans", label: t("clans"), href: clansHref },
+      ]}
+    />
   );
 }

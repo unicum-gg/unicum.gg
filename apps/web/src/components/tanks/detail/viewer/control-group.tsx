@@ -5,17 +5,19 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { SEGMENTED_BOX } from "@/components/segmented-control";
 
 /**
  * The one look every control on the picture shares.
  *
- * **A mark, not a box.** It carries no border and no ground of its own: the
- * group it sits in does. Given one each, a row of them is a row of rectangles
- * with nothing to say about which belong together, which is what the band under
- * this picture was.
+ * **A cell, not a box.** The group draws the frame and each mark is a cell of
+ * it, divided by a rule as the switches' segments are (`segmentClass`), so a
+ * row of tools and a switch beside it read as the same object. Given a frame
+ * each, a row of them is a row of rectangles with nothing to say about which
+ * belong together, which is what the band under this picture was.
  */
 export const CONTROL =
-  "rounded-md p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary/60 hover:text-fd-foreground aria-pressed:text-brand";
+  "flex h-[26px] items-center justify-center border-r border-fd-border px-2 text-fd-muted-foreground transition-colors last:border-r-0 hover:bg-fd-secondary/25 hover:text-fd-foreground aria-pressed:text-brand";
 
 /**
  * One family of controls, boxed together.
@@ -29,7 +31,7 @@ export const CONTROL =
  */
 export function Group({ children }: { children: React.ReactNode }) {
   return (
-    <div className="pointer-events-auto flex items-center gap-0.5 rounded-lg border border-fd-border/60 bg-fd-background/70 p-1 backdrop-blur">
+    <div className={`${SEGMENTED_BOX} pointer-events-auto bg-fd-background/70 backdrop-blur`}>
       {children}
     </div>
   );

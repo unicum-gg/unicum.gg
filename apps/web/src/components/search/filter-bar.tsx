@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+import { SegmentedControl } from "@/components/segmented-control";
 import { type Region, REGIONS } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
 
@@ -46,21 +46,12 @@ export function FilterBar({
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-3 py-2 text-xs">
       <div className="flex items-center gap-2">
         <span className="text-fd-muted-foreground">{tOwn("region")}</span>
-        {REGIONS.map((r) => (
-          <button
-            type="button"
-            key={r}
-            onClick={() => onRegionChange(r)}
-            className={cn(
-              "rounded px-2 py-1 font-medium uppercase transition-colors",
-              r === region
-                ? "bg-fd-primary text-fd-primary-foreground"
-                : "text-fd-muted-foreground hover:text-fd-foreground",
-            )}
-          >
-            {r}
-          </button>
-        ))}
+        <SegmentedControl
+          compact
+          active={region}
+          onSelect={onRegionChange}
+          segments={REGIONS.map((r) => ({ id: r, label: r.toUpperCase() }))}
+        />
       </div>
       <div className="flex items-center gap-2">
         <span className="text-fd-muted-foreground">{tOwn("show")}</span>

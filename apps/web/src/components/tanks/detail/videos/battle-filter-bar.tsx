@@ -6,38 +6,8 @@ import {
   BattleResult,
   SpawnDirection,
 } from "@unicum.gg/shared";
-import { cn } from "@/lib/utils";
+import { SegmentedControl } from "@/components/segmented-control";
 import type { useBattleFilters } from "./battle-filters";
-
-/** One value, with how many rows it would leave. */
-function Chip({
-  label,
-  count,
-  active,
-  onClick,
-}: {
-  label: string;
-  count: number;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={cn(
-        "flex cursor-pointer items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition-colors",
-        active
-          ? "border-brand bg-brand/10 text-fd-foreground"
-          : "border-fd-border text-fd-muted-foreground hover:bg-fd-muted hover:text-fd-foreground",
-      )}
-    >
-      {label}
-      <span className="tabular-nums opacity-60">{count}</span>
-    </button>
-  );
-}
 
 function Group({
   label,
@@ -80,17 +50,17 @@ export function BattleFilterBar({
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
       {counts.formats.size > 1 && (
         <Group label={t("format")}>
-          {Object.values(BattleFormat)
-            .filter((f) => counts.formats.has(f))
-            .map((f) => (
-              <Chip
-                key={f}
-                label={tGame(`battle-formats.${f}`)}
-                count={counts.formats.get(f) ?? 0}
-                active={filters.format === f}
-                onClick={() => toggle("format", f)}
-              />
-            ))}
+          <SegmentedControl
+            active={filters.format ?? ""}
+            onSelect={(value) => toggle("format", value as BattleFormat)}
+            segments={Object.values(BattleFormat)
+              .filter((value) => counts.formats.has(value))
+              .map((value) => ({
+                id: value,
+                label: tGame(`battle-formats.${value}`),
+                count: counts.formats.get(value) ?? 0,
+              }))}
+          />
         </Group>
       )}
 
@@ -98,33 +68,33 @@ export function BattleFilterBar({
         // The side, which on a tactic is the whole point: a plan for the west
         // spawn is not a plan for the east one.
         <Group label={t("spawn")}>
-          {Object.values(SpawnDirection)
-            .filter((d) => counts.directions.has(d))
-            .map((d) => (
-              <Chip
-                key={d}
-                label={tGame(`spawn-directions.${d}`)}
-                count={counts.directions.get(d) ?? 0}
-                active={filters.direction === d}
-                onClick={() => toggle("direction", d)}
-              />
-            ))}
+          <SegmentedControl
+            active={filters.direction ?? ""}
+            onSelect={(value) => toggle("direction", value as SpawnDirection)}
+            segments={Object.values(SpawnDirection)
+              .filter((value) => counts.directions.has(value))
+              .map((value) => ({
+                id: value,
+                label: tGame(`spawn-directions.${value}`),
+                count: counts.directions.get(value) ?? 0,
+              }))}
+          />
         </Group>
       )}
 
       {counts.results.size > 1 && (
         <Group label={t("result")}>
-          {Object.values(BattleResult)
-            .filter((r) => counts.results.has(r))
-            .map((r) => (
-              <Chip
-                key={r}
-                label={tGame(`battle-results.${r}`)}
-                count={counts.results.get(r) ?? 0}
-                active={filters.result === r}
-                onClick={() => toggle("result", r)}
-              />
-            ))}
+          <SegmentedControl
+            active={filters.result ?? ""}
+            onSelect={(value) => toggle("result", value as BattleResult)}
+            segments={Object.values(BattleResult)
+              .filter((value) => counts.results.has(value))
+              .map((value) => ({
+                id: value,
+                label: tGame(`battle-results.${value}`),
+                count: counts.results.get(value) ?? 0,
+              }))}
+          />
         </Group>
       )}
 
