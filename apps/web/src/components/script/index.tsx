@@ -60,11 +60,13 @@ export default function Script() {
           has to already be there. It cancels a payload on the signals measured
           to carry no readers and labels the rest, see `bot-signals`. */}
       <script dangerouslySetInnerHTML={{ __html: BOT_SIGNALS_SCRIPT }} />
-      {/* The first human gesture of the page, reported as one custom event. It
-          answers the question the probes above cannot, since the fleet they
-          miss runs a real browser and is told apart by what it does rather
-          than by what it is, see `engagement`. Inline and ahead of the tracker
-          so a gesture made while the tracker is still loading is not lost. */}
+      {/* The page's first gesture of each kind, a pointer movement and a real
+          input, reported as one custom event per kind. It answers the question
+          the probes above cannot, since the fleet they miss runs a real browser
+          and is told apart by what it does rather than by what it is, and the
+          two kinds are reported apart because the fleet makes the first one and
+          not the second, see `engagement`. Inline and ahead of the tracker so a
+          gesture made while the tracker is still loading is not lost. */}
       <script dangerouslySetInnerHTML={{ __html: ENGAGEMENT_SCRIPT }} />
       <NextScript
         defer
