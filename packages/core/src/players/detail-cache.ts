@@ -135,7 +135,30 @@ const inFlight = new Map<string, Promise<unknown>>();
  * served: this is the queue refusing to grow past the point where growing it
  * makes everybody slower, which is what turned a busy night into an outage.
  */
-const MAX_CONCURRENT_ASSEMBLIES = 16;
+const MAX_CONCURRENT_ASSEMBLIES = Number(
+  process.env.PLAYER_ASSEMBLY_CONCURRENCY || 40,
+);
+
+/**
+ * How long a refused caller waits for a slot before being turned away.
+ *
+ * A refusal is cheap for the server and expensive for the reader: the SDK
+ * raises a non-2xx as an error, so a page whose detail call is refused renders
+ * a 500 rather than a slow page. Measured on the night this was written, with
+ * the ceiling at sixteen, two requests for the SAME player seconds apart came
+ * back 500 and 200: whoever asked while the slots were full simply lost, and
+ * nothing about them said they deserved to.
+ *
+ * So a refused caller waits for a slot instead of being refused outright. What
+ * it holds while it waits is a connection and a closure, never an assembly,
+ * which is the whole difference: six hundred waiters cost nothing measurable,
+ * where six hundred assemblies are what took the site down. Three seconds is
+ * well inside the thirty the caller would otherwise have spent, and the cache
+ * is re-read first, since the player may have been published by another process
+ * while this one was full.
+ */
+const ADMISSION_WAIT_MS = 3_000;
+const ADMISSION_POLL_MS = 100;
 
 /** Returned instead of starting an assembly when this process is already full. */
 export const ASSEMBLY_REFUSED = Symbol("assembly-refused");
@@ -178,4 +201,21 @@ export function assemblePlayerDetailOnce<T>(
 
   inFlight.set(cacheKey, promise);
   return promise;
+}
+
+/**
+ * Resolves true once this process has room to assemble another player, or false
+ * if it still has none after {@link ADMISSION_WAIT_MS}.
+ *
+ * Polled rather than notified: a slot frees on a promise settling somewhere
+ * else entirely, and a hundred milliseconds of latency on a wait that exists to
+ * replace a thirty second one does not justify wiring a notifier through it.
+ */
+export async function waitForAssemblySlot(): Promise<boolean> {
+  const until = Date.now() + ADMISSION_WAIT_MS;
+  while (Date.now() < until) {
+    if (inFlight.size < MAX_CONCURRENT_ASSEMBLIES) return true;
+    await new Promise((r) => setTimeout(r, ADMISSION_POLL_MS));
+  }
+  return inFlight.size < MAX_CONCURRENT_ASSEMBLIES;
 }

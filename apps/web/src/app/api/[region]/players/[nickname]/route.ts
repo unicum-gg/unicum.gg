@@ -6,6 +6,7 @@ import {
   ASSEMBLY_REFUSED,
   assemblePlayerDetailOnce,
   getCachedPlayerDetailJson,
+  waitForAssemblySlot,
 } from "@unicum.gg/core/players/detail-cache";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
@@ -66,19 +67,32 @@ export async function GET(
       // cache when it lands rather than when a caller is still there to receive
       // it. Both halves are what turned a slow page into an outage on
       // 2026-10-27, see `assemblePlayerDetailOnce`.
-      const shared = assemblePlayerDetailOnce(
-        region,
-        decoded,
-        () => loadPlayerDetailLive(region, decoded),
-        (r) =>
-          r.status === PlayerDetailLiveStatus.Found
-            ? tracedSync("serialize", () => JSON.stringify(r.detail))
-            : null,
-      );
+      const start = () =>
+        assemblePlayerDetailOnce(
+          region,
+          decoded,
+          () => loadPlayerDetailLive(region, decoded),
+          (r) =>
+            r.status === PlayerDetailLiveStatus.Found
+              ? tracedSync("serialize", () => JSON.stringify(r.detail))
+              : null,
+        );
+      let shared = start();
       // Refused because this process is already assembling as many different
-      // players as it can finish quickly. Answered at once with the same 503
-      // the deadline would have produced, since waiting thirty seconds to say
-      // it is what made every assembly slow enough to need saying.
+      // players as it can finish quickly. A refusal costs the reader a 500, so
+      // wait briefly for a slot rather than losing a race nobody entered: first
+      // re-read the cache, since another process may have published this player
+      // while we were full, then hold for a slot. The wait holds a connection
+      // and never an assembly, which is why it is safe to let it queue.
+      if (shared === ASSEMBLY_REFUSED) {
+        const republished = await getCachedPlayerDetailJson(region, decoded);
+        if (republished) {
+          return new Response(republished, { headers: JSON_HEADERS });
+        }
+        if (await traced("await slot", () => waitForAssemblySlot())) {
+          shared = start();
+        }
+      }
       if (shared === ASSEMBLY_REFUSED) {
         return Response.json(
           { error: "still_loading" },
