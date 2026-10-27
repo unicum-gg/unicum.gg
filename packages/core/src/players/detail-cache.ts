@@ -68,3 +68,75 @@ export function bustPlayerDetailCache(region: Region, nickname: string): void {
   if (!redis) return;
   void redis.del(key(region, nickname)).catch(() => {});
 }
+
+/**
+ * Assemblies running in THIS process, keyed exactly as the cache above is.
+ *
+ * WHY. `withDeadline` bounds how long a caller waits and deliberately does not
+ * cancel the work, which is right: the assembly records what it fetched, so the
+ * retry it invites lands on warm data. What was missing is that nothing joined
+ * those retries to the assembly already running, and nothing published its
+ * payload once every caller had walked away. Both halves failed together on
+ * 2026-10-27, and the shape is worth keeping because it is self-amplifying.
+ *
+ * Measured over five minutes of the incident: 13,651 `still_loading` answers,
+ * 45 a second, against 13,421 completed assemblies whose median was 30,125 ms,
+ * which is the deadline to the millisecond. So essentially every request gave
+ * up, answered 503 with `retry-after: 5`, and the client came back five seconds
+ * later to start a SECOND assembly of the same player, then a third. Each one
+ * kept running and kept holding its payload, so the orphans accrued at the rate
+ * of the retries and never at the rate anything drained them. Worker RSS grew
+ * about 10 MiB a second, PM2 killed each worker at its 3,400 MiB threshold
+ * every three and a half minutes, and a restarted worker is cold, which made
+ * the next death arrive sooner.
+ *
+ * The second half is what kept it from ever recovering. The payload cache was
+ * written by the HANDLER, so an assembly that outran the deadline had its
+ * result discarded by the one piece of code that would have published it: the
+ * work was done, nobody stored it, and the next request assembled it again. A
+ * 60-second cache in front of a 90-second assembly is a cache that can never
+ * hold anything.
+ *
+ * So the assembly is now shared and publishes itself. A second caller for a
+ * player already being assembled attaches to it instead of starting another,
+ * and the payload reaches Redis when the work lands rather than when a caller
+ * is still there to receive it. The dedup is per process, so a cluster of N
+ * workers can still run N assemblies of one player: that is a ceiling where
+ * there was none, and the published payload closes the rest, since the next
+ * request finds it warm whichever worker it reaches.
+ */
+const inFlight = new Map<string, Promise<unknown>>();
+
+/**
+ * Assemble a player's detail at most once per process at a time, publishing the
+ * serialized payload to the shared cache as soon as it lands.
+ *
+ * `serialize` returns null for a result that must not be cached (an unknown or
+ * locked account), and its string is handed back so the caller that is still
+ * waiting does not serialize the same payload a second time.
+ */
+export function assemblePlayerDetailOnce<T>(
+  region: Region,
+  nickname: string,
+  assemble: () => Promise<T>,
+  serialize: (result: T) => string | null,
+): Promise<{ result: T; json: string | null }> {
+  const cacheKey = key(region, nickname);
+  const pending = inFlight.get(cacheKey) as
+    | Promise<{ result: T; json: string | null }>
+    | undefined;
+  if (pending) return pending;
+
+  const promise = assemble()
+    .then((result) => {
+      const json = serialize(result);
+      if (json !== null) void setCachedPlayerDetailJson(region, nickname, json);
+      return { result, json };
+    })
+    .finally(() => {
+      inFlight.delete(cacheKey);
+    });
+
+  inFlight.set(cacheKey, promise);
+  return promise;
+}

@@ -3,8 +3,8 @@ import {
   loadPlayerDetailLive,
 } from "@unicum.gg/core/players/detail";
 import {
+  assemblePlayerDetailOnce,
   getCachedPlayerDetailJson,
-  setCachedPlayerDetailJson,
 } from "@unicum.gg/core/players/detail-cache";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
@@ -59,18 +59,36 @@ export async function GET(
       // parsing with the shared `PlayerDetailResponse` schema (z.coerce.date).
       // Traced so the Server-Timing header separates the assembly (a cache miss)
       // from a bare cache hit.
-      const result = await traced("loadPlayerDetailLive", () =>
-        withDeadline(loadPlayerDetailLive(region, decoded), COLD_DEADLINE_MS),
+      //
+      // Shared per player: a retry joins the assembly already running instead
+      // of starting a second one, and that assembly publishes its payload to the
+      // cache when it lands rather than when a caller is still there to receive
+      // it. Both halves are what turned a slow page into an outage on
+      // 2026-10-27, see `assemblePlayerDetailOnce`.
+      const assembled = await traced("loadPlayerDetailLive", () =>
+        withDeadline(
+          assemblePlayerDetailOnce(
+            region,
+            decoded,
+            () => loadPlayerDetailLive(region, decoded),
+            (r) =>
+              r.status === PlayerDetailLiveStatus.Found
+                ? tracedSync("serialize", () => JSON.stringify(r.detail))
+                : null,
+          ),
+          COLD_DEADLINE_MS,
+        ),
       );
       // Not an error state: the assembly is still running and will store what it
       // fetches. 503 + Retry-After says "ask again", where 504 would read as a
       // dead upstream and 404 would be a lie that the client could cache.
-      if (result === null) {
+      if (assembled === null) {
         return Response.json(
           { error: "still_loading" },
           { status: 503, headers: { "retry-after": "5" } },
         );
       }
+      const { result, json } = assembled;
       if (result.status === PlayerDetailLiveStatus.Unknown) {
         return Response.json({ error: "not_found" }, { status: 404 });
       }
@@ -84,14 +102,15 @@ export async function GET(
           { status: 403 },
         );
       }
-      // Response.json serializes identically; stringify once to both cache and
-      // return, keeping jsonResponse's dev-only schema-drift check on the miss.
-      const json = tracedSync("serialize", () => JSON.stringify(result.detail));
-      void setCachedPlayerDetailJson(region, decoded, json);
+      // The shared assembly already serialized this payload and cached it;
+      // the fallback only covers a serializer that declined, which Found never
+      // does. jsonResponse keeps its dev-only schema-drift check on the miss.
       if (process.env.NODE_ENV !== "production") {
         jsonResponse(PlayerDetailResponse, result.detail);
       }
-      return new Response(json, { headers: JSON_HEADERS });
+      return new Response(json ?? JSON.stringify(result.detail), {
+        headers: JSON_HEADERS,
+      });
     } catch (err) {
       console.error(`[api/${region}/players/${decoded}] failed:`, err);
       return Response.json({ error: "upstream_failure" }, { status: 502 });
