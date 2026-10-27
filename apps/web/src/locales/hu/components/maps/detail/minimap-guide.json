@@ -1,0 +1,46 @@
+{
+  "toggle": "Pozicionálási útmutató",
+  "spawn": "{n}. Megjelenés",
+  "side": {
+    "north": "Észak",
+    "south": "Dél",
+    "east": "Kelet",
+    "west": "Nyugat"
+  },
+  "phase": {
+    "opening": "0-tól 3 percig",
+    "middle": "3-tól 7 percig",
+    "late": "7 perc felett"
+  },
+  "title": {
+    "opening": "Hol állj fel a kezdéskor",
+    "middle": "Hol zajlik a harc a középső szakaszban",
+    "late": "Hol fejeződik be a csata"
+  },
+  "subtitle": "Kezdőpont: {vehicle}, {side} oldal",
+  "sample": {
+    "battles": "Elemzett visszajátszások",
+    "players": "Elhelyezett játékosok {vehicle} esetén"
+  },
+  "few-battles": "Eddig kevés rögzített csata van ezen az elrendezésen. Ezeket a helyeket első támpontként olvasd, az újabb visszajátszásokkal egyre pontosabbá válnak.",
+  "players-share": "A játékosok megosztása, akik itt állnak fel: {share}",
+  "damage-share": "Az innen okozott sebzés megosztása: {share}",
+  "opening-detail": "Csatánként átlagosan {damage} sebzés, innen elért {kills} megsemmisítés",
+  "later-detail": "{damage} okozott sebzés, innen elért {kills} megsemmisítés",
+  "thin": "eddig csak {players} játékos",
+  "empty": "Eddig nincs ezen az elrendezésen ehhez az oldalhoz és osztályhoz tartozó rögzített csata.",
+  "note": "Az unicum.gg mod által megosztott visszajátszásokból származó adatok. Csak a rögzített játékos csapata van elhelyezve, mivel az ellenség csak felderített állapotban látható.",
+  "legend": {
+    "open": "Mit jelentenek a színek és a számok",
+    "colours": "Színek: az egyes helyekről okozott sebzés",
+    "little": "Kevés",
+    "a-lot": "Sok",
+    "colours-opening": "Az első három percben a kiválasztott oldal és osztály játékosai által okozott sebzés. Minél vörösebb egy hely, annál több sebzést okoztak onnan.",
+    "colours-middle": "Három és hét perc között a kiválasztott oldal és osztály játékosai által okozott sebzés. Minél vörösebb egy hely, annál több sebzést okoztak onnan.",
+    "colours-late": "Hét perc után a kiválasztott oldal és osztály játékosai által okozott sebzés. Minél vörösebb egy hely, annál több sebzést okoztak onnan.",
+    "numbers-opening": "A négyzetek, ahol a legtöbb játékos a kezdőroham után felállt, a jobb oldalon rangsorolva.",
+    "numbers-middle": "A négyzetek, ahonnan ebben a pillanatban a legtöbb sebzést okozták, a jobb oldalon rangsorolva.",
+    "numbers-late": "A négyzetek, ahonnan ebben a pillanatban a legtöbb sebzést okozták, a jobb oldalon rangsorolva.",
+    "grid": "A négyzetek neve a játékbeli minitérkép rácsához hasonló, például F6, így csata közben be lehet mondani őket."
+  }
+}

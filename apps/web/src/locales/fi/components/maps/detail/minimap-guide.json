@@ -1,0 +1,46 @@
+{
+  "toggle": "Sijoitteluopas",
+  "spawn": "Lähtöpaikka {n}",
+  "side": {
+    "north": "Pohjoinen",
+    "south": "Etelä",
+    "east": "Itä",
+    "west": "Länsi"
+  },
+  "phase": {
+    "opening": "0–3 minuutin aikana",
+    "middle": "3–7 minuutin aikana",
+    "late": "Yli 7 minuutin jälkeen"
+  },
+  "title": {
+    "opening": "Mihin asettua alussa",
+    "middle": "Missä taistelu on hallussa keskivaiheilla",
+    "late": "Missä taistelu on valmis"
+  },
+  "subtitle": "{vehicle} aloittaa {side}-puolelta.",
+  "sample": {
+    "battles": "Analysoidut uusinnat",
+    "players": "{vehicle}-pelaajaa sijoitettu"
+  },
+  "few-battles": "Tällä kartalla on toistaiseksi tallennettu vain vähän taisteluita. Lue nämä sijoitukset ensimmäisenä ideana, ne vakiintuvat, kun lisää uusintoja saapuu.",
+  "players-share": "{share} pelaajista asettuu tähän",
+  "damage-share": "{share} vahingosta aiheutetaan tästä",
+  "opening-detail": "{damage} vahinkoa taistelua kohden keskiarvona, {kills} tappoa tästä",
+  "later-detail": "{damage} vahinkoa aiheutettu, {kills} tappoa tästä",
+  "thin": "vain {players} pelaajaa tähän mennessä",
+  "empty": "Tällä kartalla ei ole vielä tallennettu yhtään taistelua tälle puolelle ja luokalle.",
+  "note": "Lue unicum.gg-modin kautta jaetuista uusintapeleistä. Vain tallennuksen tehneen pelaajan joukkue on sijoitettu, koska vihollinen nähdään vain havaittuna.",
+  "legend": {
+    "open": "Mitä värit ja numerot tarkoittavat",
+    "colours": "Värit: kustakin sijoituksesta aiheutettu vahinko",
+    "little": "Vähän",
+    "a-lot": "Paljon",
+    "colours-opening": "Kolmen ensimmäisen minuutin aikana valitun puolen ja luokan pelaajilla. Mitä punaisempi sijoitus, sitä enemmän vahinkoa he aiheuttivat siitä.",
+    "colours-middle": "Kolmen ja seitsemän minuutin välillä valitun puolen ja luokan pelaajilla. Mitä punaisempi sijoitus, sitä enemmän vahinkoa he aiheuttivat siitä.",
+    "colours-late": "Seitsemän minuutin jälkeen valitun puolen ja luokan pelaajilla. Mitä punaisempi sijoitus, sitä enemmän vahinkoa he aiheuttivat siitä.",
+    "numbers-opening": "Ruudut, joihin suurin osa näistä pelaajista asettui alun rynnäkön jälkeen, rankattu oikealla.",
+    "numbers-middle": "Ruudut, joista aiheutettiin eniten vahinkoa tällä hetkellä, rankattu oikealla.",
+    "numbers-late": "Ruudut, joista aiheutettiin eniten vahinkoa tällä hetkellä, rankattu oikealla.",
+    "grid": "Ruudut nimetään kuten pelin minikartan ruudukossa (F6), joten niihin voidaan viitata taistelussa."
+  }
+}

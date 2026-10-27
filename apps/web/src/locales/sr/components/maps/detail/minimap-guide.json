@@ -1,0 +1,46 @@
+{
+  "toggle": "Vodič za pozicioniranje",
+  "spawn": "Mesto pojavljivanja {n}",
+  "side": {
+    "north": "Sever",
+    "south": "Jug",
+    "east": "Istok",
+    "west": "Zapad"
+  },
+  "phase": {
+    "opening": "Od 0 do 3 minuta",
+    "middle": "Od 3 do 7 minuta",
+    "late": "7 minuta i više"
+  },
+  "title": {
+    "opening": "Gde se postaviti na početku",
+    "middle": "Gde se bitka vodi u sredini",
+    "late": "Gde se bitka završava"
+  },
+  "subtitle": "Početak za {vehicle}: {side}.",
+  "sample": {
+    "battles": "Analizirane bitke",
+    "players": "Igrači vozila {vehicle} koji su se pozicionirali"
+  },
+  "few-battles": "Do sada je na ovom rasporedu zabeleženo malo bitaka. Pročitajte ove pozicije kao prvu ideju, a one će se učvrstiti kako bude pristizalo više snimaka bitaka.",
+  "players-share": "{share} igrača se postavlja ovde",
+  "damage-share": "{share} štete je naneto odavde",
+  "opening-detail": "U proseku {damage} štete po bitki, {kills} uništenja ostvareno odavde",
+  "later-detail": "{damage} štete je naneto, {kills} uništenja ostvareno odavde",
+  "thin": "do sada samo {players} igrača",
+  "empty": "Još nije zabeležena nijedna bitka za ovu stranu i klasu na ovom rasporedu.",
+  "note": "Pročitano iz snimaka bitaka podeljenih putem unicum.gg mod-a. Postavljen je samo tim igrača koji je napravio snimak, jer je neprijatelj vidljiv samo dok je otkriven.",
+  "legend": {
+    "open": "Šta znače boje i brojevi",
+    "colours": "Boje: šteta naneta sa svakog mesta",
+    "little": "Malo",
+    "a-lot": "Mnogo",
+    "colours-opening": "U prve tri minute, od igrača izabrane strane i klase. Što je mesto crvenije, to je više štete naneto sa njega.",
+    "colours-middle": "Između trećeg i sedmog minuta, od igrača izabrane strane i klase. Što je mesto crvenije, to je više štete naneto sa njega.",
+    "colours-late": "Posle sedmog minuta, od igrača izabrane strane i klase. Što je mesto crvenije, to je više štete naneto sa njega.",
+    "numbers-opening": "Polja na kojima se većina ovih igrača postavila posle početnog naleta, rangirana su desno.",
+    "numbers-middle": "Polja sa kojih je u ovom trenutku naneto najviše štete, rangirana su desno.",
+    "numbers-late": "Polja sa kojih je u ovom trenutku naneto najviše štete, rangirana su desno.",
+    "grid": "Polja su imenovana poput mreže mini-mape u igri (F6), pa mogu da se prozovu u bitki."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "toggle": "站位指南",
+  "spawn": "出生点 {n}",
+  "side": {
+    "north": "北",
+    "south": "南",
+    "east": "东",
+    "west": "西"
+  },
+  "phase": {
+    "opening": "0 至 3 分钟",
+    "middle": "3 至 7 分钟",
+    "late": "7 分钟以上"
+  },
+  "title": {
+    "opening": "开始时在哪里部署",
+    "middle": "中期在哪里交战",
+    "late": "战斗在哪里结束"
+  },
+  "subtitle": "{vehicle} 从{side}侧出发。",
+  "sample": {
+    "battles": "已分析的回放",
+    "players": "{vehicle} 玩家站位"
+  },
+  "few-battles": "目前该布局已记录的战斗场次较少：请将这些位置作为初步参考，随着更多回放加入，结果会更加稳定。",
+  "players-share": "{share} 的玩家在此部署",
+  "damage-share": "{share} 的伤害从这里造成",
+  "opening-detail": "平均每场战斗造成 {damage} 伤害，从这里击杀 {kills} 名玩家",
+  "later-detail": "造成 {damage} 伤害，从这里击杀 {kills} 名玩家",
+  "thin": "目前仅有 {players} 名玩家",
+  "empty": "该布局下，此侧和类型尚未记录任何战斗。",
+  "note": "数据来自通过 unicum.gg 模组共享的回放。由于敌人只有在被发现时才可见，因此仅标记记录玩家所在的队伍。",
+  "legend": {
+    "open": "颜色和数字代表什么",
+    "colours": "颜色：各位置造成的伤害",
+    "little": "少量",
+    "a-lot": "大量",
+    "colours-opening": "开场的前 3 分钟内，由所选侧和类型的玩家造成。某处颜色越红，他们从该处造成的伤害越多。",
+    "colours-middle": "3 至 7 分钟内，由所选侧和类型的玩家造成。某处颜色越红，他们从该处造成的伤害越多。",
+    "colours-late": "7 分钟后，由所选侧和类型的玩家造成。某处颜色越红，他们从该处造成的伤害越多。",
+    "numbers-opening": "这些玩家在开场冲锋后主要部署的方格，按右侧排位。",
+    "numbers-middle": "此时造成伤害最多的方格，按右侧排位。",
+    "numbers-late": "此时造成伤害最多的方格，按右侧排位。",
+    "grid": "方格名称类似游戏内的小地图网格（F6），因此可以在战斗中报点。"
+  }
+}

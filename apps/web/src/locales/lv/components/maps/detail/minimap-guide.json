@@ -1,0 +1,46 @@
+{
+  "toggle": "Pozicionēšanās ceļvedis",
+  "spawn": "Ierašanās punkts {n}",
+  "side": {
+    "north": "Ziemeļi",
+    "south": "Dienvidi",
+    "east": "Austrumi",
+    "west": "Rietumi"
+  },
+  "phase": {
+    "opening": "0 līdz 3 minūtes",
+    "middle": "3 līdz 7 minūtes",
+    "late": "7 minūtes+"
+  },
+  "title": {
+    "opening": "Kur izvietoties sākumā",
+    "middle": "Kur notiek cīņa vidū",
+    "late": "Kur kauja tiek pabeigta"
+  },
+  "subtitle": "{vehicle}, sākot no {side} puses.",
+  "sample": {
+    "battles": "Analizētās kaujas",
+    "players": "Ar {vehicle} izvietotie spēlētāji"
+  },
+  "few-battles": "Šajā izkārtojumā līdz šim ir reģistrētas tikai dažas kaujas: lasiet šīs pozīcijas kā pirmo ideju, tās nostiprināsies, kad tiks saņemts vairāk kauju ierakstu.",
+  "players-share": "{share} spēlētāju izvietojas šeit",
+  "damage-share": "Šeit tiek nodarīti {share} bojājumu",
+  "opening-detail": "Vidēji {damage} bojājumi kaujā, no šejienes veiktas {kills} iznīcināšanas",
+  "later-detail": "Nodarīti {damage} bojājumi, no šejienes veiktas {kills} iznīcināšanas",
+  "thin": "līdz šim tikai {players} spēlētāji",
+  "empty": "Šajā izkārtojumā šai pusei un klasei vēl nav reģistrēta neviena kauja.",
+  "note": "Lasīts no atkārtojumiem, kas koplietoti, izmantojot unicum.gg mod. Tiek izvietota tikai ierakstu veikušā spēlētāja komanda, jo ienaidnieks ir redzams tikai tad, kad tas ir atklāts.",
+  "legend": {
+    "open": "Ko nozīmē krāsas un skaitļi",
+    "colours": "Krāsas: no katras vietas nodarītie bojājumi",
+    "little": "Nedaudz",
+    "a-lot": "Daudz",
+    "colours-opening": "Pirmajās trīs minūtēs, pēc izvēlētās puses un klases spēlētājiem. Jo sarkanāka vieta, jo vairāk bojājumu viņi no tās nodarīja.",
+    "colours-middle": "No trim līdz septiņām minūtēm, pēc izvēlētās puses un klases spēlētājiem. Jo sarkanāka vieta, jo vairāk bojājumu viņi no tās nodarīja.",
+    "colours-late": "Pēc septiņām minūtēm, pēc izvēlētās puses un klases spēlētājiem. Jo sarkanāka vieta, jo vairāk bojājumu viņi no tās nodarīja.",
+    "numbers-opening": "Kvadrāti, kuros pēc sākotnējā uzbrukuma izvietojās visvairāk šo spēlētāju, labajā pusē ranžēti.",
+    "numbers-middle": "Kvadrāti, no kuriem šajā brīdī tika nodarīts visvairāk bojājumu, labajā pusē ranžēti.",
+    "numbers-late": "Kvadrāti, no kuriem šajā brīdī tika nodarīts visvairāk bojājumu, labajā pusē ranžēti.",
+    "grid": "Kvadrāti tiek nosaukti tāpat kā spēles minikartes režģī (F6), tāpēc tos var nosaukt kaujā."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "toggle": "Poradnik dotyczący zajmowania pozycji",
+  "spawn": "Odrodzenie {n}",
+  "side": {
+    "north": "Północ",
+    "south": "Południe",
+    "east": "Wschód",
+    "west": "Zachód"
+  },
+  "phase": {
+    "opening": "0 do 3 min",
+    "middle": "3 do 7 min",
+    "late": "7 min i więcej"
+  },
+  "title": {
+    "opening": "Gdzie ustawić się na początku",
+    "middle": "Gdzie toczy się walka w środku",
+    "late": "Gdzie kończy się bitwa"
+  },
+  "subtitle": "Pojazd {vehicle} rozpoczyna po stronie {side}.",
+  "sample": {
+    "battles": "Przeanalizowane powtórki",
+    "players": "Gracze korzystający z pojazdu {vehicle}, którzy zajęli pozycję"
+  },
+  "few-battles": "Jak dotąd zarejestrowano niewiele bitew na tym układzie. Czytaj te pozycje jako pierwszy punkt odniesienia, uściślą się wraz z napływem kolejnych powtórek.",
+  "players-share": "{share} graczy ustawia się tutaj",
+  "damage-share": "{share} uszkodzenia zadano z tego miejsca",
+  "opening-detail": "Średnio {damage} uszkodzenia na bitwę, {kills} eliminacji z tego miejsca",
+  "later-detail": "{damage} uszkodzenia zadane, {kills} eliminacji z tego miejsca",
+  "thin": "jak dotąd tylko {players} graczy",
+  "empty": "Nie zarejestrowano jeszcze żadnej bitwy dla tej strony i klasy na tym układzie.",
+  "note": "Odczytano ze wspólnych powtórek za pośrednictwem mod unicum.gg. Umieszczono tylko drużynę gracza, który dokonał nagrania, ponieważ przeciwnik jest widoczny tylko po wykryciu.",
+  "legend": {
+    "open": "Co oznaczają kolory i liczby",
+    "colours": "Kolory: uszkodzenia zadane z każdego miejsca",
+    "little": "Niewiele",
+    "a-lot": "Dużo",
+    "colours-opening": "W ciągu pierwszych trzech minut przez graczy wybranej strony i klasy. Im bardziej czerwone miejsce, tym więcej zadanych z niego uszkodzeń.",
+    "colours-middle": "Między trzecią a siódmą minutą przez graczy wybranej strony i klasy. Im bardziej czerwone miejsce, tym więcej zadanych z niego uszkodzeń.",
+    "colours-late": "Po upływie siedmiu minut przez graczy wybranej strony i klasy. Im bardziej czerwone miejsce, tym więcej zadanych z niego uszkodzeń.",
+    "numbers-opening": "Kwadraty, na których większość tych graczy ustawiła się po początkowym natarciu, uszeregowane po prawej.",
+    "numbers-middle": "Kwadraty, z których w tym momencie zadano najwięcej uszkodzeń, uszeregowane po prawej.",
+    "numbers-late": "Kwadraty, z których w tym momencie zadano najwięcej uszkodzeń, uszeregowane po prawej.",
+    "grid": "Kwadraty mają nazwy jak siatka minimapy w grze (F6), dzięki czemu można je wskazywać w bitwie."
+  }
+}

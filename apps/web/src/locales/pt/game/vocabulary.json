@@ -98,7 +98,7 @@
   "spawn-directions": {
     "north": "Norte",
     "south": "Sul",
-    "east": "Este",
+    "east": "Leste",
     "west": "Oeste"
   },
   "shells": {

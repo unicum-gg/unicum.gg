@@ -96,10 +96,10 @@
     "draw": "Uafgjort"
   },
   "spawn-directions": {
-    "north": "Nord",
-    "south": "Syd",
-    "east": "Øst",
-    "west": "Vest"
+    "north": "nord",
+    "south": "syd",
+    "east": "øst",
+    "west": "vest"
   },
   "shells": {
     "ARMOR_PIERCING": "AP",

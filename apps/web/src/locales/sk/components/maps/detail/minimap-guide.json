@@ -1,0 +1,46 @@
+{
+  "toggle": "Sprievodca umiestnením",
+  "spawn": "Spawn {n}",
+  "side": {
+    "north": "sever",
+    "south": "juh",
+    "east": "východ",
+    "west": "západ"
+  },
+  "phase": {
+    "opening": "0 až 3 minúty",
+    "middle": "3 až 7 minút",
+    "late": "7 minút a viac"
+  },
+  "title": {
+    "opening": "Kam sa umiestniť na začiatku",
+    "middle": "Kde sa bitka odohráva uprostred",
+    "late": "Kde sa bitka končí"
+  },
+  "subtitle": "Vozidlo {vehicle} začínajúce na strane {side}.",
+  "sample": {
+    "battles": "Analyzované záznamy",
+    "players": "Umiestnení hráči s vozidlom {vehicle}"
+  },
+  "few-battles": "Na tomto rozložení bolo zatiaľ zaznamenaných len málo bitiek. Tieto pozície berte ako prvý odhad, ktorý sa spresní s pribúdajúcimi záznamami.",
+  "players-share": "{share} hráčov sa umiestňuje tu",
+  "damage-share": "{share} poškodenia je spôsobené odtiaľto",
+  "opening-detail": "{damage} poškodenia na bitku povprečno, {kills} vyradení odtiaľto",
+  "later-detail": "{damage} poškodenia spôsobené, {kills} vyradení odtiaľto",
+  "thin": "zatiaľ iba {players} hráčov",
+  "empty": "Na tomto rozložení zatiaľ nebola zaznamenaná žiadna bitka pre túto stranu a triedu.",
+  "note": "Prečítať zo záznamov zdieľaných prostredníctvom mod unicum.gg. Umiestnený je iba tím hráča, ktorý záznam zaznamenal, pretože nepriateľ je viditeľný iba počas odhalenia.",
+  "legend": {
+    "open": "Čo znamenajú farby a čísla",
+    "colours": "Farby: poškodenie spôsobené z každého miesta",
+    "little": "Málo",
+    "a-lot": "Veľa",
+    "colours-opening": "Počas prvých troch minút hráčmi vybranej strany a triedy. Čím červenšie je miesto, tým viac poškodenia z neho spôsobili.",
+    "colours-middle": "Medzi treťou a siedmou minútou hráčmi vybranej strany a triedy. Čím červenšie je miesto, tým viac poškodenia z neho spôsobili.",
+    "colours-late": "Po siedmej minúte hráčmi vybranej strany a triedy. Čím červenšie je miesto, tým viac poškodenia z neho spôsobili.",
+    "numbers-opening": "Štvorce, v ktorých sa po úvodnom návale umiestnilo najviac týchto hráčov, sú hodnotené vpravo.",
+    "numbers-middle": "Štvorce, z ktorých bolo v tomto okamihu spôsobené najviac poškodenia, sú hodnotené vpravo.",
+    "numbers-late": "Štvorce, z ktorých bolo v tomto okamihu spôsobené najviac poškodenia, sú hodnotené vpravo.",
+    "grid": "Štvorce sú pomenované ako mriežka minizemljevida v hre (F6), aby sa dali v bitke označiť."
+  }
+}

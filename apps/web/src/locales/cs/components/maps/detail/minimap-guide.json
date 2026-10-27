@@ -1,0 +1,46 @@
+{
+  "toggle": "Průvodce umístěním",
+  "spawn": "Zarovnání {n}",
+  "side": {
+    "north": "Sever",
+    "south": "Jih",
+    "east": "Východ",
+    "west": "Západ"
+  },
+  "phase": {
+    "opening": "0 až 3 minut",
+    "middle": "3 až 7 minut",
+    "late": "7 minut +"
+  },
+  "title": {
+    "opening": "Kde začít na začátku",
+    "middle": "Kde se bitva odehrává uprostřed",
+    "late": "Kde bitva skončila"
+  },
+  "subtitle": "{vehicle} začíná ze strany {side}.",
+  "sample": {
+    "battles": "Analyzované záznamy",
+    "players": "Umístění hráčů ve vozidle {vehicle}"
+  },
+  "few-battles": "Na tomto rozložení bylo zatím zaznamenáno jen málo bitev. Přečtěte si tato umístění jako první představu, s příchodem dalších záznamů se zpřesní.",
+  "players-share": "{share} hráčů se umisťuje zde",
+  "damage-share": "{share} poškození je udělené odsud",
+  "opening-detail": "Průměrně {damage} poškození na bitvu, odsud dosaženo {kills} zabití",
+  "later-detail": "Udělené poškození: {damage}, odsud {kills} zabití",
+  "thin": "zatím jen {players} hráčů",
+  "empty": "Na tomto rozložení zatím nebyla zaznamenána žádná bitva pro tuto stranu a třídu.",
+  "note": "Přečíst ze záznamů sdílených prostřednictvím mod unicum.gg. Umisťuje se pouze tým hráče, který záznam zaznamenal, protože nepřítel je vidět pouze, když je odhalený.",
+  "legend": {
+    "open": "Co znamenají barvy a čísla",
+    "colours": "Barvy: poškození udělené z každého umístění",
+    "little": "Málo",
+    "a-lot": "Hodně",
+    "colours-opening": "V prvních třech minutách podle hráčů vybrané strany a třídy. Čím červenější je umístění, tím více poškození z něj bylo udělené.",
+    "colours-middle": "Mezi třetí a sedmou minutou podle hráčů vybrané strany a třídy. Čím červenější je umístění, tím více poškození z něj bylo udělené.",
+    "colours-late": "Po sedmé minutě podle hráčů vybrané strany a třídy. Čím červenější je umístění, tím více poškození z něj bylo udělené.",
+    "numbers-opening": "Čtverce, kde se po úvodním náporu umístilo nejvíce těchto hráčů, jsou seřazené podle pořadí vpravo.",
+    "numbers-middle": "Čtverce, z nichž bylo v tomto okamžiku uděleno nejvíce poškození, jsou seřazené podle pořadí vpravo.",
+    "numbers-late": "Čtverce, z nichž bylo v tomto okamžiku uděleno nejvíce poškození, jsou seřazené podle pořadí vpravo.",
+    "grid": "Čtverce jsou pojmenované jako mřížka herní minimapy (F6), takže na ně lze v bitvě upozornit."
+  }
+}

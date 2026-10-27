@@ -1,0 +1,46 @@
+{
+  "toggle": "Hướng dẫn chọn vị trí",
+  "spawn": "Điểm xuất hiện {n}",
+  "side": {
+    "north": "Bắc",
+    "south": "Nam",
+    "east": "Đông",
+    "west": "Tây"
+  },
+  "phase": {
+    "opening": "0 đến 3 phút",
+    "middle": "3 đến 7 phút",
+    "late": "7 phút trở lên"
+  },
+  "title": {
+    "opening": "Nơi chọn vị trí khi bắt đầu",
+    "middle": "Nơi trận đấu diễn ra ở giữa trận",
+    "late": "Nơi trận đấu kết thúc"
+  },
+  "subtitle": "Xe tăng {vehicle} bắt đầu từ bên {side}.",
+  "sample": {
+    "battles": "Các bản phát lại được phân tích",
+    "players": "Người chơi với xe tăng {vehicle} đã chọn vị trí"
+  },
+  "few-battles": "Cho đến nay, chỉ có một vài trận đấu được ghi nhận trên bố cục này: hãy đọc các vị trí này như ý tưởng ban đầu, chúng sẽ được củng cố khi có thêm bản phát lại.",
+  "players-share": "{share} người chơi chọn vị trí tại đây",
+  "damage-share": "{share} sát thương được gây ra từ đây",
+  "opening-detail": "Trung bình {damage} sát thương mỗi trận đấu, {kills} lượt hạ gục từ đây",
+  "later-detail": "{damage} sát thương được gây ra, {kills} lượt hạ gục từ đây",
+  "thin": "chỉ có {players} người chơi cho đến nay",
+  "empty": "Chưa có trận đấu nào được ghi nhận cho bên và hạng này trên bố cục này.",
+  "note": "Đọc từ các bản phát lại chung thông qua mod unicum.gg. Chỉ đội của người chơi đã ghi nhận mới được đặt vị trí, vì kẻ địch chỉ được nhìn thấy khi bị phát hiện.",
+  "legend": {
+    "open": "Ý nghĩa của màu sắc và số liệu",
+    "colours": "Màu sắc: sát thương được gây ra từ mỗi vị trí",
+    "little": "Một ít",
+    "a-lot": "Nhiều",
+    "colours-opening": "Trong ba phút đầu, bởi người chơi của bên và hạng đã chọn. Một vị trí càng đỏ thì họ gây ra càng nhiều sát thương từ đó.",
+    "colours-middle": "Từ phút thứ ba đến phút thứ bảy, bởi người chơi của bên và hạng đã chọn. Một vị trí càng đỏ thì họ gây ra càng nhiều sát thương từ đó.",
+    "colours-late": "Sau bảy phút, bởi người chơi của bên và hạng đã chọn. Một vị trí càng đỏ thì họ gây ra càng nhiều sát thương từ đó.",
+    "numbers-opening": "Các ô nơi phần lớn những người chơi này chọn vị trí sau đợt xung phong mở đầu, được xếp hạng ở bên phải.",
+    "numbers-middle": "Các ô gây ra nhiều sát thương nhất vào khoảnh khắc này, được xếp hạng ở bên phải.",
+    "numbers-late": "Các ô gây ra nhiều sát thương nhất vào khoảnh khắc này, được xếp hạng ở bên phải.",
+    "grid": "Các ô được đặt tên giống lưới bản đồ nhỏ trong trò chơi (F6), để có thể gọi vị trí trong trận đấu."
+  }
+}

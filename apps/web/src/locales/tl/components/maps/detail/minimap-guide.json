@@ -1,0 +1,46 @@
+{
+  "toggle": "Gabay sa pagpoposisyon",
+  "spawn": "Spawn {n}",
+  "side": {
+    "north": "Hilaga",
+    "south": "Timog",
+    "east": "Silangan",
+    "west": "Kanluran"
+  },
+  "phase": {
+    "opening": "0 hanggang 3 minuto",
+    "middle": "3 hanggang 7 minuto",
+    "late": "7 minuto pataas"
+  },
+  "title": {
+    "opening": "Saan magposisyon sa simula",
+    "middle": "Saan taglay ang labanan sa gitna",
+    "late": "Saan natatapos ang labanan"
+  },
+  "subtitle": "Nagsisimula ang {vehicle} sa panig na {side}.",
+  "sample": {
+    "battles": "Mga replay na sinuri",
+    "players": "Mga manlalarong gumamit ng {vehicle} na nagposisyon"
+  },
+  "few-battles": "Ilang mga laban pa lamang ang naitala sa layout na ito: basahin ang mga posisyong ito bilang unang ideya, at magiging mas tiyak ang mga ito habang dumarami ang mga replay.",
+  "players-share": "{share} ng mga manlalaro ay nagposisyon dito",
+  "damage-share": "{share} ng pinsala ay naidulot mula rito",
+  "opening-detail": "Karaniwang {damage} pinsala bawat labanan, {kills} pagpatay na ginawa mula rito",
+  "later-detail": "{damage} pinsala naidulot, {kills} pagpatay na ginawa mula rito",
+  "thin": "{players} mga manlalaro pa lamang sa ngayon",
+  "empty": "Wala pang naitalang labanan para sa panig at klaseng ito sa layout na ito.",
+  "note": "Basahin mula sa mga replay na magkasamang ibinahagi sa pamamagitan ng ang mod ng unicum.gg. Tanging ang koponan ng manlalarong nagtala ng rekord ang inilalagay, dahil nakikita lamang ang kalaban kapag nakita.",
+  "legend": {
+    "open": "Ano ang average ng mga kulay at mga numero",
+    "colours": "Mga kulay: pinsalang naidulot mula sa bawat lugar",
+    "little": "Kaunti",
+    "a-lot": "Marami",
+    "colours-opening": "Sa unang tatlong minuto, ng mga manlalaro ng napiling panig at klase. Kung mas mapula ang isang lugar, mas maraming pinsala ang naidulot mula rito.",
+    "colours-middle": "Sa pagitan ng tatlo at pitong minuto, ng mga manlalaro ng napiling panig at klase. Kung mas mapula ang isang lugar, mas maraming pinsala ang naidulot mula rito.",
+    "colours-late": "Pagkalipas ng pitong minuto, ng mga manlalaro ng napiling panig at klase. Kung mas mapula ang isang lugar, mas maraming pinsala ang naidulot mula rito.",
+    "numbers-opening": "Ang mga parisukat kung saan nagposisyon ang karamihan sa mga manlalarong ito pagkatapos ng unang paglusob, na ranked sa kanan.",
+    "numbers-middle": "Ang mga parisukat kung saan naidulot ang pinakamaraming pinsala sa sandaling ito, na ranked sa kanan.",
+    "numbers-late": "Ang mga parisukat kung saan naidulot ang pinakamaraming pinsala sa sandaling ito, na ranked sa kanan.",
+    "grid": "Ang mga parisukat ay pinapangalanan tulad ng grid ng minimapa sa laro (F6), kaya maaari silang banggitin sa labanan."
+  }
+}

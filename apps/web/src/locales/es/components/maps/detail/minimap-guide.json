@@ -1,0 +1,46 @@
+{
+  "toggle": "Guía de posicionamiento",
+  "spawn": "Aparición {n}",
+  "side": {
+    "north": "Norte",
+    "south": "Sur",
+    "east": "Este",
+    "west": "Oeste"
+  },
+  "phase": {
+    "opening": "De 0 a 3 minutos",
+    "middle": "De 3 a 7 minutos",
+    "late": "7 minutos o más"
+  },
+  "title": {
+    "opening": "Dónde colocarse al empezar",
+    "middle": "Dónde se celebra la batalla en la mitad",
+    "late": "Dónde termina la batalla"
+  },
+  "subtitle": "{vehicle} empezando desde el lado {side}.",
+  "sample": {
+    "battles": "Repeticiones analizadas",
+    "players": "Jugadores con {vehicle} posicionados"
+  },
+  "few-battles": "Hasta ahora se han registrado pocas batallas en este mapa. Lee estas posiciones como una primera referencia, se consolidarán a medida que lleguen más repeticiones.",
+  "players-share": "{share} de los jugadores se colocan aquí",
+  "damage-share": "{share} del daño se inflige desde aquí",
+  "opening-detail": "Un promedio de {damage} de daño por batalla, {kills} bajas conseguidas desde aquí",
+  "later-detail": "{damage} de daño infligido, {kills} bajas conseguidas desde aquí",
+  "thin": "solo {players} jugadores hasta ahora",
+  "empty": "Todavía no se ha registrado ninguna batalla para este lado y clase en este mapa.",
+  "note": "Leído de las repeticiones compartidas mediante el mod de unicum.gg. Solo se coloca al equipo del jugador que ha registrado la repetición, ya que a un enemigo solo se lo ve mientras está detectado.",
+  "legend": {
+    "open": "Qué significan los colores y los números",
+    "colours": "Colores: daño infligido desde cada posición",
+    "little": "Un poco",
+    "a-lot": "Mucho",
+    "colours-opening": "Durante los primeros tres minutos, por jugadores del lado y la clase elegidos. Cuanto más roja sea una posición, más daño se infligió desde ella.",
+    "colours-middle": "Entre los tres y los siete minutos, por jugadores del lado y la clase elegidos. Cuanto más roja sea una posición, más daño se infligió desde ella.",
+    "colours-late": "Después de siete minutos, por jugadores del lado y la clase elegidos. Cuanto más roja sea una posición, más daño se infligió desde ella.",
+    "numbers-opening": "Las casillas donde se colocaron la mayoría de estos jugadores tras el avance inicial, clasificadas a la derecha.",
+    "numbers-middle": "Las casillas desde las que se infligió la mayor parte del daño en este momento, clasificadas a la derecha.",
+    "numbers-late": "Las casillas desde las que se infligió la mayor parte del daño en este momento, clasificadas a la derecha.",
+    "grid": "Las casillas tienen un nombre como las de la cuadrícula del minimapa del juego (F6), para poder indicarlas en batalla."
+  }
+}

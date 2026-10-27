@@ -1,0 +1,46 @@
+{
+  "toggle": "Konuşlanma rehberi",
+  "spawn": "Doğ {n}",
+  "side": {
+    "north": "Kuzey",
+    "south": "Güney",
+    "east": "Doğu",
+    "west": "Batı"
+  },
+  "phase": {
+    "opening": "0 ila 3 dakika",
+    "middle": "3 ila 7 dakika",
+    "late": "7 dakika ve sonrası"
+  },
+  "title": {
+    "opening": "Başlangıçta konuşlanılacak yer",
+    "middle": "Savaşın ortasında çatışmanın sürdüğü yer",
+    "late": "Savaşın bittiği yer"
+  },
+  "subtitle": "{side} tarafından başlayan {vehicle}.",
+  "sample": {
+    "battles": "Analiz edilen tekrarlar",
+    "players": "{vehicle} kullanan oyuncular"
+  },
+  "few-battles": "Şimdiye kadar bu yerleşimde az sayıda savaş kaydedildi: bu konumları ilk fikir olarak okuyun, daha fazla tekrar geldikçe netleşecekler.",
+  "players-share": "Oyuncuların {share} kadarı burada konuşlanıyor",
+  "damage-share": "Hasarın {share} kadarı buradan veriliyor",
+  "opening-detail": "Savaş başına ortalama {damage} hasar, buradan {kills} öldürme",
+  "later-detail": "{damage} verilen hasar, buradan {kills} öldürme",
+  "thin": "şimdiye kadar yalnızca {players} oyuncu",
+  "empty": "Bu yerleşimde bu taraf ve sınıf için henüz savaş kaydedilmedi.",
+  "note": "unicum.gg moduyla paylaşılan tekrarlardan okunur. Yalnızca kaydı yapan oyuncunun takımı yerleştirilir, çünkü düşman yalnızca tespit edildiğinde görülür.",
+  "legend": {
+    "open": "Renklerin ve sayıların anlamı",
+    "colours": "Renkler: her yerden verilen hasar",
+    "little": "Az",
+    "a-lot": "Çok",
+    "colours-opening": "İlk üç dakikada, seçilen taraf ve sınıftaki oyuncular tarafından. Bir yer ne kadar kırmızıysa, oradan o kadar fazla hasar vermişlerdir.",
+    "colours-middle": "Üç ila yedi dakika arasında, seçilen taraf ve sınıftaki oyuncular tarafından. Bir yer ne kadar kırmızıysa, oradan o kadar fazla hasar vermişlerdir.",
+    "colours-late": "Yedi dakikadan sonra, seçilen taraf ve sınıftaki oyuncular tarafından. Bir yer ne kadar kırmızıysa, oradan o kadar fazla hasar vermişlerdir.",
+    "numbers-opening": "Bu oyuncuların çoğunun açılış hücumundan sonra konuşlandığı kareler, sağda dereceli.",
+    "numbers-middle": "Bu anda en fazla hasarın verildiği kareler, sağda dereceli.",
+    "numbers-late": "Bu anda en fazla hasarın verildiği kareler, sağda dereceli.",
+    "grid": "Kareler, oyun içi mini harita ızgarasındaki gibi adlandırılır (F6), böylece savaşta konumları bildirilebilir."
+  }
+}

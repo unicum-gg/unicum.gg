@@ -1,0 +1,46 @@
+{
+  "toggle": "Positionshilfe",
+  "spawn": "Einstieg {n}",
+  "side": {
+    "north": "Norden",
+    "south": "Süden",
+    "east": "Osten",
+    "west": "Westen"
+  },
+  "phase": {
+    "opening": "0 bis 3 Min.",
+    "middle": "3 bis 7 Min.",
+    "late": "7 Min. und mehr"
+  },
+  "title": {
+    "opening": "Wo man sich am Start aufstellt",
+    "middle": "Wo das Gefecht in der Mitte ausgetragen wird",
+    "late": "Wo das Gefecht beendet wird"
+  },
+  "subtitle": "Aufstellung von {vehicle} aus Richtung {side}.",
+  "sample": {
+    "battles": "Analysierte Replays",
+    "players": "Platzierte Spieler von {vehicle}"
+  },
+  "few-battles": "Bisher wurden nur wenige Gefechte auf diesem Layout aufgezeichnet. Lesen Sie diese Positionen als erste Orientierung, sie werden genauer, sobald weitere Replays eingehen.",
+  "players-share": "{share} der Spieler stellen sich hier auf",
+  "damage-share": "{share} des Schadens wird von hier verursacht",
+  "opening-detail": "{damage} Schaden pro Gefecht im Durchschnitt, {kills} Abschüsse von hier",
+  "later-detail": "{damage} Schaden verursacht, {kills} Abschüsse von hier",
+  "thin": "bisher nur {players} Spieler",
+  "empty": "Für diese Seite und Klasse auf diesem Layout wurde noch kein Gefecht aufgezeichnet.",
+  "note": "Aus den über den unicum.gg-Mod geteilten Replays gelesen. Nur das Team des aufzeichnenden Spielers wird platziert, da ein Gegner nur gesehen wird, solange er aufgeklärt ist.",
+  "legend": {
+    "open": "Was die Farben und Zahlen bedeuten",
+    "colours": "Farben: Von jedem Platz verursachter Schaden",
+    "little": "Wenig",
+    "a-lot": "Viel",
+    "colours-opening": "In den ersten drei Minuten, von Spielern der gewählten Seite und Klasse. Je röter ein Platz ist, desto mehr Schaden wurde von dort verursacht.",
+    "colours-middle": "Zwischen drei und sieben Minuten, von Spielern der gewählten Seite und Klasse. Je röter ein Platz ist, desto mehr Schaden wurde von dort verursacht.",
+    "colours-late": "Nach sieben Minuten, von Spielern der gewählten Seite und Klasse. Je röter ein Platz ist, desto mehr Schaden wurde von dort verursacht.",
+    "numbers-opening": "Die Quadrate, in denen sich die meisten dieser Spieler nach dem Eröffnungsansturm aufgestellt haben, rechts gewertet.",
+    "numbers-middle": "Die Quadrate, von denen in diesem Moment der meiste Schaden verursacht wurde, rechts gewertet.",
+    "numbers-late": "Die Quadrate, von denen in diesem Moment der meiste Schaden verursacht wurde, rechts gewertet.",
+    "grid": "Quadrate werden wie das Minikartenraster im Spiel bezeichnet (F6), damit sie im Gefecht genannt werden können."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "toggle": "Positiegids",
+  "spawn": "Spawnen {n}",
+  "side": {
+    "north": "Noord",
+    "south": "Zuid",
+    "east": "Oost",
+    "west": "West"
+  },
+  "phase": {
+    "opening": "0 tot 3 min",
+    "middle": "3 tot 7 min",
+    "late": "7 min +"
+  },
+  "title": {
+    "opening": "Waar je je opstelt bij de start",
+    "middle": "Waar het gevecht in het midden wordt uitgevochten",
+    "late": "Waar het gevecht afgelopen is"
+  },
+  "subtitle": "Start van {vehicle} vanaf {side}.",
+  "sample": {
+    "battles": "Geanalyseerde herhalingen",
+    "players": "Spelers met {vehicle} die zich hebben opgesteld"
+  },
+  "few-battles": "Er zijn tot nu toe weinig gevechten geregistreerd op deze lay-out. Lees deze posities als een eerste idee, ze worden nauwkeuriger naarmate er meer herhalingen binnenkomen.",
+  "players-share": "{share} van de spelers stelt zich hier op",
+  "damage-share": "{share} van de schade wordt hier toegebracht",
+  "opening-detail": "Gemiddeld {damage} schade per gevecht, {kills} uitschakelingen vanaf hier",
+  "later-detail": "{damage} schade toegebracht, {kills} uitschakelingen vanaf hier",
+  "thin": "tot nu toe slechts {players} spelers",
+  "empty": "Er is nog geen gevecht geregistreerd voor deze kant en klasse op deze lay-out.",
+  "note": "Afgelezen uit de herhalingen die via de unicum.gg-mod zijn gedeeld. Alleen het team van de speler die de opname heeft gemaakt, wordt geplaatst, omdat een vijand alleen wordt gezien zolang die gespot is.",
+  "legend": {
+    "open": "Wat de kleuren en aantallen betekenen",
+    "colours": "Kleuren: schade toegebracht vanaf elke plaats",
+    "little": "Weinig",
+    "a-lot": "Veel",
+    "colours-opening": "In de eerste drie minuten, door spelers van de gekozen kant en klasse. Hoe roder een plaats, hoe meer schade ze daar hebben toegebracht.",
+    "colours-middle": "Tussen drie en zeven minuten, door spelers van de gekozen kant en klasse. Hoe roder een plaats, hoe meer schade ze daar hebben toegebracht.",
+    "colours-late": "Na zeven minuten, door spelers van de gekozen kant en klasse. Hoe roder een plaats, hoe meer schade ze daar hebben toegebracht.",
+    "numbers-opening": "De vakken waar de meeste van deze spelers zich na de openingsaanval hebben opgesteld, rechts gerangschikt.",
+    "numbers-middle": "De vakken waar op dit moment de meeste schade werd toegebracht, rechts gerangschikt.",
+    "numbers-late": "De vakken waar op dit moment de meeste schade werd toegebracht, rechts gerangschikt.",
+    "grid": "Vakken krijgen een naam zoals op het in-game minimap-raster (F6), zodat ze in het gevecht kunnen worden genoemd."
+  }
+}

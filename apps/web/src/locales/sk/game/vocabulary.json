@@ -96,10 +96,10 @@
     "draw": "Remíza"
   },
   "spawn-directions": {
-    "north": "Sever",
-    "south": "Juh",
-    "east": "Východ",
-    "west": "Západ"
+    "north": "sever",
+    "south": "juh",
+    "east": "východ",
+    "west": "západ"
   },
   "shells": {
     "ARMOR_PIERCING": "AP",

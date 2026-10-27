@@ -810,7 +810,16 @@
     "something": "شيء ما",
     "spawn": "نقطة الظهور",
     "the unicum.gg mod": "مود unicum.gg",
-    "took": "أخذ"
+    "took": "أخذ",
+    "East": "الشرق",
+    "North": "الشمال",
+    "South": "الجنوب",
+    "West": "الغرب",
+    "colours": "الألوان",
+    "dealt": "المُلحَق",
+    "mean": "المتوسط",
+    "minutes": "الدقائق",
+    "numbers": "الأرقام"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1625,7 +1634,16 @@
     "spawn": "спаўн",
     "statistics": "статыстыка",
     "the unicum.gg mod": "мод unicum.gg",
-    "took": "заняў"
+    "took": "заняў",
+    "East": "Усход",
+    "North": "Поўнач",
+    "South": "Поўдзень",
+    "West": "Захад",
+    "colours": "колеры",
+    "dealt": "нанесены",
+    "mean": "сярэдняе",
+    "minutes": "хвіліны",
+    "numbers": "лічбы"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2655,7 +2673,16 @@
     "spawn": "поява",
     "statistics": "статистика",
     "the unicum.gg mod": "модът на unicum.gg",
-    "took": "отне"
+    "took": "отне",
+    "East": "Изток",
+    "North": "Север",
+    "South": "Юг",
+    "West": "Запад",
+    "colours": "цветове",
+    "dealt": "нанесени",
+    "mean": "средно",
+    "minutes": "минути",
+    "numbers": "числа"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3477,7 +3504,16 @@
     "spawn": "početna pozicija",
     "statistics": "statistika",
     "the unicum.gg mod": "mod unicum.gg",
-    "took": "učestvovao"
+    "took": "učestvovao",
+    "East": "Istok",
+    "North": "Sjever",
+    "South": "Jug",
+    "West": "Zapad",
+    "colours": "boje",
+    "dealt": "naneseno",
+    "mean": "prosjek",
+    "minutes": "minute",
+    "numbers": "brojevi"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4518,7 +4554,16 @@
     "spawn": "spawn",
     "statistics": "statistiky",
     "the unicum.gg mod": "mod unicum.gg",
-    "took": "zabralo"
+    "took": "zabralo",
+    "East": "Východ",
+    "North": "Sever",
+    "South": "Jih",
+    "West": "Západ",
+    "colours": "barvy",
+    "dealt": "udělené",
+    "mean": "průměr",
+    "minutes": "minut",
+    "numbers": "čísla"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5565,7 +5610,16 @@
     "spawn": "startposition",
     "statistics": "statistik",
     "the unicum.gg mod": "unicum.gg-moddet",
-    "took": "tog"
+    "took": "tog",
+    "East": "øst",
+    "North": "nord",
+    "South": "syd",
+    "West": "vest",
+    "colours": "farver",
+    "dealt": "uddelt",
+    "mean": "gennemsnit",
+    "minutes": "minutter",
+    "numbers": "tal"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6605,7 +6659,16 @@
     "spawn": "Spawn",
     "statistics": "Statistiken",
     "the unicum.gg mod": "der unicum.gg-Mod",
-    "took": "benötigte"
+    "took": "benötigte",
+    "East": "Osten",
+    "North": "Norden",
+    "South": "Süden",
+    "West": "Westen",
+    "colours": "Farben",
+    "dealt": "verursacht",
+    "mean": "Durchschnitt",
+    "minutes": "Minuten",
+    "numbers": "Zahlen"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7651,7 +7714,16 @@
     "spawn": "εμφάνιση",
     "statistics": "στατιστικά",
     "the unicum.gg mod": "το mod του unicum.gg",
-    "took": "χρειάστηκε"
+    "took": "χρειάστηκε",
+    "East": "Ανατολή",
+    "North": "Βορράς",
+    "South": "Νότος",
+    "West": "Δύση",
+    "colours": "χρώματα",
+    "dealt": "προκληθείσα",
+    "mean": "μέσος όρος",
+    "minutes": "λεπτά",
+    "numbers": "αριθμοί"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8677,7 +8749,16 @@
     "spawn": "aparición",
     "statistics": "estadísticas",
     "the unicum.gg mod": "el mod de unicum.gg",
-    "took": "tardó"
+    "took": "tardó",
+    "East": "Este",
+    "North": "Norte",
+    "South": "Sur",
+    "West": "Oeste",
+    "colours": "colores",
+    "dealt": "infligido",
+    "mean": "media",
+    "minutes": "minutos",
+    "numbers": "números"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9728,7 +9809,16 @@
     "statistics": "tilastot",
     "the unicum.gg mod": "unicum.gg-modi",
     "took": "vei",
-    "Average damage": "Keskimääräinen vahinko"
+    "Average damage": "Keskimääräinen vahinko",
+    "East": "Itä",
+    "North": "Pohjoinen",
+    "South": "Etelä",
+    "West": "Länsi",
+    "colours": "värit",
+    "dealt": "aiheutettu",
+    "mean": "keskiarvo",
+    "minutes": "minuutit",
+    "numbers": "numerot"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10758,7 +10848,16 @@
     "spawn": "apparition",
     "statistics": "statistiques",
     "the unicum.gg mod": "le mod unicum.gg",
-    "took": "a participé"
+    "took": "a participé",
+    "East": "Est",
+    "North": "Nord",
+    "South": "Sud",
+    "West": "Ouest",
+    "colours": "couleurs",
+    "dealt": "dégâts infligés",
+    "mean": "moyenne",
+    "minutes": "minutes",
+    "numbers": "nombres"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11574,7 +11673,16 @@
     "spawn": "स्पॉन",
     "statistics": "आंकड़े",
     "the unicum.gg mod": "unicum.gg मॉड",
-    "took": "लिया"
+    "took": "लिया",
+    "East": "पूर्व",
+    "North": "उत्तर",
+    "South": "दक्षिण",
+    "West": "पश्चिम",
+    "colours": "रंग",
+    "dealt": "पहुँचाया गया",
+    "mean": "औसत",
+    "minutes": "मिनट",
+    "numbers": "संख्याएँ"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12618,7 +12726,16 @@
     "spawn": "početna pozicija",
     "statistics": "statistika",
     "the unicum.gg mod": "mod unicum.gg",
-    "took": "uzeo"
+    "took": "uzeo",
+    "East": "Istok",
+    "North": "Sjever",
+    "South": "Jug",
+    "West": "Zapad",
+    "colours": "boje",
+    "dealt": "nanesena šteta",
+    "mean": "prosjek",
+    "minutes": "minute",
+    "numbers": "brojevi"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13664,7 +13781,16 @@
     "spawn": "kezdőpont",
     "statistics": "statisztikák",
     "the unicum.gg mod": "az unicum.gg mod",
-    "took": "kapott"
+    "took": "kapott",
+    "East": "Kelet",
+    "North": "Észak",
+    "South": "Dél",
+    "West": "Nyugat",
+    "colours": "színek",
+    "dealt": "okozott",
+    "mean": "átlag",
+    "minutes": "perc",
+    "numbers": "számok"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14706,7 +14832,16 @@
     "spawn": "spawn",
     "statistics": "statistiche",
     "the unicum.gg mod": "la mod di unicum.gg",
-    "took": "ha richiesto"
+    "took": "ha richiesto",
+    "East": "Est",
+    "North": "Nord",
+    "South": "Sud",
+    "West": "Ovest",
+    "colours": "colori",
+    "dealt": "inflitto",
+    "mean": "media",
+    "minutes": "minuti",
+    "numbers": "numeri"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15755,7 +15890,16 @@
     "spawn": "スポーン",
     "statistics": "統計",
     "the unicum.gg mod": "unicum.gg mod",
-    "took": "かかった"
+    "took": "かかった",
+    "East": "東",
+    "North": "北",
+    "South": "南",
+    "West": "西",
+    "colours": "色",
+    "dealt": "与ダメージ",
+    "mean": "平均",
+    "minutes": "分",
+    "numbers": "数値"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16572,7 +16716,16 @@
     "something": "бірдеңе",
     "spawn": "пайда болу нүктесі",
     "the unicum.gg mod": "unicum.gg моды",
-    "took": "алды"
+    "took": "алды",
+    "East": "Шығыс",
+    "North": "Солтүстік",
+    "South": "Оңтүстік",
+    "West": "Батыс",
+    "colours": "түстер",
+    "dealt": "келтірілген",
+    "mean": "орташа",
+    "minutes": "минут",
+    "numbers": "сандар"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17625,7 +17778,16 @@
     "spawn": "스폰",
     "statistics": "통계",
     "the unicum.gg mod": "the unicum.gg 모드",
-    "took": "걸린"
+    "took": "걸린",
+    "East": "동쪽",
+    "North": "북쪽",
+    "South": "남쪽",
+    "West": "서쪽",
+    "colours": "색상",
+    "dealt": "피해량",
+    "mean": "평균",
+    "minutes": "분",
+    "numbers": "숫자"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18674,7 +18836,16 @@
     "spawn": "atsiradimo vieta",
     "statistics": "statistika",
     "the unicum.gg mod": "unicum.gg modas",
-    "took": "užėmė"
+    "took": "užėmė",
+    "East": "Rytai",
+    "North": "Šiaurė",
+    "South": "Pietūs",
+    "West": "Vakarai",
+    "colours": "spalvos",
+    "dealt": "padaryta žala",
+    "mean": "vidurkis",
+    "minutes": "minutės",
+    "numbers": "skaičiai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -19709,7 +19880,16 @@
     "spawn": "sākumpunkts",
     "statistics": "statistika",
     "the unicum.gg mod": "unicum.gg mod",
-    "took": "saņēma"
+    "took": "saņēma",
+    "East": "Austrumi",
+    "North": "Ziemeļi",
+    "South": "Dienvidi",
+    "West": "Rietumi",
+    "colours": "krāsas",
+    "dealt": "nodarītie bojājumi",
+    "mean": "vidējais",
+    "minutes": "minūtes",
+    "numbers": "skaitļi"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20760,7 +20940,16 @@
     "spawn": "spawn",
     "statistics": "statistieken",
     "the unicum.gg mod": "de unicum.gg-mod",
-    "took": "duurde"
+    "took": "duurde",
+    "East": "Oost",
+    "North": "Noord",
+    "South": "Zuid",
+    "West": "West",
+    "colours": "kleuren",
+    "dealt": "toegebracht",
+    "mean": "gemiddelde",
+    "minutes": "minuten",
+    "numbers": "aantallen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -21802,7 +21991,16 @@
     "spawn": "gytepunkt",
     "statistics": "statistikk",
     "the unicum.gg mod": "unicum.gg-modden",
-    "took": "tok"
+    "took": "tok",
+    "East": "øst",
+    "North": "nord",
+    "South": "sør",
+    "West": "vest",
+    "colours": "farger",
+    "dealt": "utdelt",
+    "mean": "gjennomsnitt",
+    "minutes": "minutter",
+    "numbers": "tall"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -22841,7 +23039,16 @@
     "spawn": "odrodzenie",
     "statistics": "statystyki",
     "the unicum.gg mod": "mod unicum.gg",
-    "took": "zajęło"
+    "took": "zajęło",
+    "East": "Wschód",
+    "North": "Północ",
+    "South": "Południe",
+    "West": "Zachód",
+    "colours": "kolory",
+    "dealt": "zadane",
+    "mean": "średnia",
+    "minutes": "minuty",
+    "numbers": "liczby"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -23873,7 +24080,16 @@
     "spawn": "surgimento",
     "statistics": "estatísticas",
     "the unicum.gg mod": "o mod unicum.gg",
-    "took": "levou"
+    "took": "levou",
+    "East": "Leste",
+    "North": "Norte",
+    "South": "Sul",
+    "West": "Oeste",
+    "colours": "cores",
+    "dealt": "dano causado",
+    "mean": "média",
+    "minutes": "minutos",
+    "numbers": "números"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -24905,7 +25121,16 @@
     "spawn": "apariție",
     "statistics": "statistici",
     "the unicum.gg mod": "modul unicum.gg",
-    "took": "a necesitat"
+    "took": "a necesitat",
+    "East": "Est",
+    "North": "Nord",
+    "South": "Sud",
+    "West": "Vest",
+    "colours": "culori",
+    "dealt": "provocate",
+    "mean": "medie",
+    "minutes": "minute",
+    "numbers": "numere"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -25925,7 +26150,16 @@
     "spawn": "появление",
     "statistics": "статистика",
     "the unicum.gg mod": "мод unicum.gg",
-    "took": "получил"
+    "took": "получил",
+    "East": "Восток",
+    "North": "Север",
+    "South": "Юг",
+    "West": "Запад",
+    "colours": "цвета",
+    "dealt": "нанесённый",
+    "mean": "среднее",
+    "minutes": "минуты",
+    "numbers": "числа"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -26743,7 +26977,16 @@
     "something": "nekaj",
     "spawn": "izhodišče",
     "the unicum.gg mod": "mod unicum.gg",
-    "took": "trajalo"
+    "took": "trajalo",
+    "East": "východ",
+    "North": "sever",
+    "South": "juh",
+    "West": "západ",
+    "colours": "farby",
+    "dealt": "spôsobené",
+    "mean": "priemer",
+    "minutes": "minúty",
+    "numbers": "čísla"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -27789,7 +28032,16 @@
     "spawn": "mesto pojavljivanja",
     "statistics": "statistika",
     "the unicum.gg mod": "unicum.gg mod",
-    "took": "trebalo je"
+    "took": "trebalo je",
+    "East": "Istok",
+    "North": "Sever",
+    "South": "Jug",
+    "West": "Zapad",
+    "colours": "boje",
+    "dealt": "naneta",
+    "mean": "prosek",
+    "minutes": "minuti",
+    "numbers": "brojevi"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -28840,7 +29092,16 @@
     "spawn": "startpunkt",
     "statistics": "statistik",
     "the unicum.gg mod": "unicum.gg-modden",
-    "took": "tog"
+    "took": "tog",
+    "East": "Öst",
+    "North": "Norr",
+    "South": "Söder",
+    "West": "Väst",
+    "colours": "färger",
+    "dealt": "utdelad",
+    "mean": "genomsnitt",
+    "minutes": "minuter",
+    "numbers": "tal"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -29887,7 +30148,16 @@
     "spawn": "จุดเกิด",
     "statistics": "สถิติ",
     "the unicum.gg mod": "ม็อด unicum.gg",
-    "took": "ใช้ไป"
+    "took": "ใช้ไป",
+    "East": "ทิศตะวันออก",
+    "North": "ทิศเหนือ",
+    "South": "ทิศใต้",
+    "West": "ทิศตะวันตก",
+    "colours": "สี",
+    "dealt": "ความเสียหายที่ทำได้",
+    "mean": "ค่าเฉลี่ย",
+    "minutes": "นาที",
+    "numbers": "ตัวเลข"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -30705,7 +30975,16 @@
     "something": "isang bagay",
     "spawn": "paglitaw",
     "the unicum.gg mod": "ang mod ng unicum.gg",
-    "took": "kinuha"
+    "took": "kinuha",
+    "East": "Silangan",
+    "North": "Hilaga",
+    "South": "Timog",
+    "West": "Kanluran",
+    "colours": "mga kulay",
+    "dealt": "naidulot",
+    "mean": "average",
+    "minutes": "mga minuto",
+    "numbers": "mga numero"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -31748,7 +32027,16 @@
     "spawn": "başlangıç noktası",
     "statistics": "istatistikler",
     "the unicum.gg mod": "unicum.gg modu",
-    "took": "aldı"
+    "took": "aldı",
+    "East": "Doğu",
+    "North": "Kuzey",
+    "South": "Güney",
+    "West": "Batı",
+    "colours": "renkler",
+    "dealt": "verilen",
+    "mean": "ortalama",
+    "minutes": "dakika",
+    "numbers": "sayılar"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -32784,7 +33072,16 @@
     "spawn": "поява",
     "statistics": "статистика",
     "the unicum.gg mod": "мод unicum.gg",
-    "took": "отримано"
+    "took": "отримано",
+    "East": "Схід",
+    "North": "Північ",
+    "South": "Південь",
+    "West": "Захід",
+    "colours": "кольори",
+    "dealt": "завдано",
+    "mean": "середнє",
+    "minutes": "хвилини",
+    "numbers": "числа"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -33809,7 +34106,16 @@
     "spawn": "điểm xuất hiện",
     "statistics": "thống kê",
     "the unicum.gg mod": "mod unicum.gg",
-    "took": "mất"
+    "took": "mất",
+    "East": "Đông",
+    "North": "Bắc",
+    "South": "Nam",
+    "West": "Tây",
+    "colours": "màu sắc",
+    "dealt": "gây ra",
+    "mean": "trung bình",
+    "minutes": "phút",
+    "numbers": "số liệu"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -34856,6 +35162,15 @@
     "spawn": "出生点",
     "statistics": "统计数据",
     "the unicum.gg mod": "unicum.gg 模组",
-    "took": "花费了"
+    "took": "花费了",
+    "East": "东",
+    "North": "北",
+    "South": "南",
+    "West": "西",
+    "colours": "颜色",
+    "dealt": "造成的伤害",
+    "mean": "平均值",
+    "minutes": "分钟",
+    "numbers": "数字"
   }
 }

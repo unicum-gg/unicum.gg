@@ -1,0 +1,46 @@
+{
+  "toggle": "Posisjoneringsguide",
+  "spawn": "Spawning {n}",
+  "side": {
+    "north": "Nord",
+    "south": "Sør",
+    "east": "Øst",
+    "west": "Vest"
+  },
+  "phase": {
+    "opening": "0 til 3 minutter",
+    "middle": "3 til 7 minutter",
+    "late": "7 minutter eller mer"
+  },
+  "title": {
+    "opening": "Hvor du skal posisjonere deg ved start",
+    "middle": "Hvor kampen holdes i midtfasen",
+    "late": "Hvor kampen blir avsluttet"
+  },
+  "subtitle": "{vehicle} med start fra {side}.",
+  "sample": {
+    "battles": "Analyserte repriser",
+    "players": "Plasserte spillere med {vehicle}"
+  },
+  "few-battles": "Få kamper er registrert på dette kartoppsettet så langt. Les disse posisjonene som en første idé, de blir sikrere etter hvert som flere repriser kommer inn.",
+  "players-share": "{share} av spillerne posisjonerer seg her",
+  "damage-share": "{share} av skaden blir utdelt herfra",
+  "opening-detail": "{damage} skade per kamp i gjennomsnitt, {kills} drap herfra",
+  "later-detail": "{damage} skade utdelt, {kills} drap herfra",
+  "thin": "bare {players} spillere så langt",
+  "empty": "Ingen kamp er registrert ennå for denne siden og klassen på dette kartoppsettet.",
+  "note": "Basert på repriser delt via unicum.gg-modden. Bare laget til spilleren som registrerte reprisen, er plassert, siden en fiende bare sees mens den er oppdaget.",
+  "legend": {
+    "open": "Hva fargene og tallene betyr",
+    "colours": "Farger: skade utdelt fra hver plass",
+    "little": "Litt",
+    "a-lot": "Mye",
+    "colours-opening": "I løpet av de første tre minuttene, av spillere på valgt side og i valgt klasse. Jo rødere en plass er, desto mer skade ble utdelt derfra.",
+    "colours-middle": "Mellom tre og sju minutter, av spillere på valgt side og i valgt klasse. Jo rødere en plass er, desto mer skade ble utdelt derfra.",
+    "colours-late": "Etter sju minutter, av spillere på valgt side og i valgt klasse. Jo rødere en plass er, desto mer skade ble utdelt derfra.",
+    "numbers-opening": "Rutene der flest av disse spillerne posisjonerte seg etter åpningsrushet, rangert til høyre.",
+    "numbers-middle": "Rutene der mest skade ble utdelt på dette tidspunktet, rangert til høyre.",
+    "numbers-late": "Rutene der mest skade ble utdelt på dette tidspunktet, rangert til høyre.",
+    "grid": "Rutene navngis som rutenettet på minikartet i spillet (F6), slik at de kan angis i kamp."
+  }
+}

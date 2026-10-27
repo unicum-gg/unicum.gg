@@ -1,0 +1,46 @@
+{
+  "toggle": "Placeringsguide",
+  "spawn": "Spawne {n}",
+  "side": {
+    "north": "nord",
+    "south": "syd",
+    "east": "øst",
+    "west": "vest"
+  },
+  "phase": {
+    "opening": "0 til 3 minutter",
+    "middle": "3 til 7 minutter",
+    "late": "7 minutter +"
+  },
+  "title": {
+    "opening": "Hvor man skal placere sig ved starten",
+    "middle": "Hvor kampen afholdes midtvejs",
+    "late": "Hvor kampen er færdiggjort"
+  },
+  "subtitle": "Starter fra {side}: {vehicle}.",
+  "sample": {
+    "battles": "Analyserede genafspilninger",
+    "players": "{vehicle}-spillere placeret"
+  },
+  "few-battles": "Der er hidtil registreret få kampe på dette layout: Læs disse placeringer som en første idé, de bliver mere sikre, efterhånden som flere genafspilninger kommer ind.",
+  "players-share": "{share} af spillerne placerer sig her",
+  "damage-share": "{share} af skaden uddeles herfra",
+  "opening-detail": "{damage} skade pr. kamp i gennemsnit, {kills} drab herfra",
+  "later-detail": "{damage} skade uddelt, {kills} drab herfra",
+  "thin": "kun {players} spillere indtil videre",
+  "empty": "Ingen kamp er endnu registreret for denne side og klasse på dette layout.",
+  "note": "Læs fra genafspilninger delt via unicum.gg-moddet. Kun holdet til den spiller, der registrerede genafspilningen, er placeret, da en fjende kun ses, mens den er opdaget.",
+  "legend": {
+    "open": "Hvad farverne og tallene betyder",
+    "colours": "Farver: skade uddelt fra hver placering",
+    "little": "Lidt",
+    "a-lot": "Meget",
+    "colours-opening": "I de første tre minutter, af spillere på den valgte side og i den valgte klasse. Jo rødere en placering er, desto mere skade uddelte de derfra.",
+    "colours-middle": "Mellem tre og syv minutter, af spillere på den valgte side og i den valgte klasse. Jo rødere en placering er, desto mere skade uddelte de derfra.",
+    "colours-late": "Efter syv minutter, af spillere på den valgte side og i den valgte klasse. Jo rødere en placering er, desto mere skade uddelte de derfra.",
+    "numbers-opening": "De felter, hvor de fleste af disse spillere placerede sig efter åbningsrushet, rangeret til højre.",
+    "numbers-middle": "De felter, hvorfra der blev uddelt mest skade i dette øjeblik, rangeret til højre.",
+    "numbers-late": "De felter, hvorfra der blev uddelt mest skade i dette øjeblik, rangeret til højre.",
+    "grid": "Felter navngives som gitteret på spillets minikort (F6), så de kan angives i kamp."
+  }
+}

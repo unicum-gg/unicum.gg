@@ -96,10 +96,10 @@
     "draw": "Nerešeno"
   },
   "spawn-directions": {
-    "north": "Север",
-    "south": "Југ",
-    "east": "Исток",
-    "west": "Запад"
+    "north": "Sever",
+    "south": "Jug",
+    "east": "Istok",
+    "west": "Zapad"
   },
   "shells": {
     "ARMOR_PIERCING": "AP",

@@ -96,10 +96,10 @@
     "draw": "تعادل"
   },
   "spawn-directions": {
-    "north": "شمال",
-    "south": "جنوب",
-    "east": "شرق",
-    "west": "غرب"
+    "north": "الشمال",
+    "south": "الجنوب",
+    "east": "الشرق",
+    "west": "الغرب"
   },
   "shells": {
     "ARMOR_PIERCING": "AP",

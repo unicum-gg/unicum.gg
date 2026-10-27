@@ -1,0 +1,46 @@
+{
+  "toggle": "Guia de posicionamento",
+  "spawn": "Spawn {n}",
+  "side": {
+    "north": "Norte",
+    "south": "Sul",
+    "east": "Leste",
+    "west": "Oeste"
+  },
+  "phase": {
+    "opening": "0 a 3 minutos",
+    "middle": "3 a 7 minutos",
+    "late": "7 minutos ou mais"
+  },
+  "title": {
+    "opening": "Onde se posicionar no começo",
+    "middle": "Onde a batalha é conquistada no meio",
+    "late": "Onde a batalha é terminada"
+  },
+  "subtitle": "{vehicle} começando pelo lado {side}.",
+  "sample": {
+    "battles": "Replays analisados",
+    "players": "Jogadores de {vehicle} posicionados"
+  },
+  "few-battles": "Poucas batalhas foram registradas neste mapa até agora. Leia estas posições como uma primeira ideia, pois elas ficarão mais precisas à medida que mais replays forem registrados.",
+  "players-share": "{share} dos jogadores se posicionam aqui",
+  "damage-share": "{share} do dano é causado daqui",
+  "opening-detail": "{damage} de dano por batalha, em média, {kills} eliminações feitas daqui",
+  "later-detail": "{damage} de dano causado, {kills} eliminações feitas daqui",
+  "thin": "apenas {players} jogadores até agora",
+  "empty": "Nenhuma batalha foi registrada ainda para este lado e classe neste mapa.",
+  "note": "Ler com base nos replays compartilhados usando o mod unicum.gg. Apenas a equipe do jogador que registrou a batalha é posicionada, pois um inimigo só é visto enquanto está detectado.",
+  "legend": {
+    "open": "O que as cores e os números significam",
+    "colours": "Cores: dano causado de cada lugar",
+    "little": "Pouco",
+    "a-lot": "Muito",
+    "colours-opening": "Nos primeiros três minutos, por jogadores do lado e da classe escolhidos. Quanto mais vermelho um lugar, mais dano eles causaram dali.",
+    "colours-middle": "Entre três e sete minutos, por jogadores do lado e da classe escolhidos. Quanto mais vermelho um lugar, mais dano eles causaram dali.",
+    "colours-late": "Após sete minutos, por jogadores do lado e da classe escolhidos. Quanto mais vermelho um lugar, mais dano eles causaram dali.",
+    "numbers-opening": "Os quadrados onde a maioria desses jogadores se posicionou após a corrida inicial, em ordem classificatória à direita.",
+    "numbers-middle": "Os quadrados de onde foi causado mais dano neste momento, em ordem classificatória à direita.",
+    "numbers-late": "Os quadrados de onde foi causado mais dano neste momento, em ordem classificatória à direita.",
+    "grid": "Os quadrados são nomeados como a grade do minimapa do jogo (F6), para que possam ser indicados na batalha."
+  }
+}

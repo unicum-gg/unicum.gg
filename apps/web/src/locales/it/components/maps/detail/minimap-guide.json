@@ -1,0 +1,46 @@
+{
+  "toggle": "Guida al posizionamento",
+  "spawn": "Spawn {n}",
+  "side": {
+    "north": "Nord",
+    "south": "Sud",
+    "east": "Est",
+    "west": "Ovest"
+  },
+  "phase": {
+    "opening": "Da 0 a 3 minuti",
+    "middle": "Da 3 a 7 minuti",
+    "late": "7 minuti+"
+  },
+  "title": {
+    "opening": "Dove posizionarsi all’inizio",
+    "middle": "Dove si svolge lo scontro nella fase centrale",
+    "late": "Dove termina la battaglia"
+  },
+  "subtitle": "Il veicolo {vehicle} parte dal lato {side}.",
+  "sample": {
+    "battles": "Replay analizzati",
+    "players": "Giocatori con {vehicle} posizionati"
+  },
+  "few-battles": "Finora sono state registrate poche battaglie su questa configurazione: considera queste posizioni come una prima indicazione, diventeranno più precise con l’arrivo di altri replay.",
+  "players-share": "{share} dei giocatori si posizionano qui",
+  "damage-share": "Da qui viene inflitto {share} del danno",
+  "opening-detail": "{damage} di danno per battaglia in media, {kills} uccisioni effettuate da qui",
+  "later-detail": "{damage} di danno inflitto, {kills} uccisioni effettuate da qui",
+  "thin": "solo {players} giocatori finora",
+  "empty": "Non è stata ancora registrata alcuna battaglia per questo lato e questa classe su questa configurazione.",
+  "note": "Dati ricavati dai replay condivisi tramite la mod di unicum.gg. Viene posizionata solo la squadra del giocatore che ha registrato, poiché un nemico è visibile solo quando viene avvistato.",
+  "legend": {
+    "open": "Cosa significano i colori e i numeri",
+    "colours": "Colori: danno inflitto da ogni posto",
+    "little": "Poco",
+    "a-lot": "Molto",
+    "colours-opening": "Nei primi tre minuti, dai giocatori del lato e della classe scelti. Più un posto è rosso, più danno è stato inflitto da lì.",
+    "colours-middle": "Tra il terzo e il settimo minuto, dai giocatori del lato e della classe scelti. Più un posto è rosso, più danno è stato inflitto da lì.",
+    "colours-late": "Dopo sette minuti, dai giocatori del lato e della classe scelti. Più un posto è rosso, più danno è stato inflitto da lì.",
+    "numbers-opening": "I quadrati in cui la maggior parte di questi giocatori si è posizionata dopo l’assalto iniziale, classificati sulla destra.",
+    "numbers-middle": "I quadrati da cui è stato inflitto più danno in questo momento, classificati sulla destra.",
+    "numbers-late": "I quadrati da cui è stato inflitto più danno in questo momento, classificati sulla destra.",
+    "grid": "I quadrati sono denominati come la griglia della minimappa nel gioco (F6), così possono essere indicati in battaglia."
+  }
+}

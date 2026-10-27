@@ -1,0 +1,46 @@
+{
+  "toggle": "Positioneringsguide",
+  "spawn": "Startpunkt {n}",
+  "side": {
+    "north": "Norr",
+    "south": "Söder",
+    "east": "Öst",
+    "west": "Väst"
+  },
+  "phase": {
+    "opening": "0 till 3 minuter",
+    "middle": "3 till 7 minuter",
+    "late": "7 minuter och framåt"
+  },
+  "title": {
+    "opening": "Var du ska positionera dig i början",
+    "middle": "Var striden hålls i mitten",
+    "late": "Var striden slutförs"
+  },
+  "subtitle": "Start från {vehicle}, från {side}.",
+  "sample": {
+    "battles": "Analyserade repriser",
+    "players": "Spelare med {vehicle} placerade"
+  },
+  "few-battles": "Få strider har registrerats på den här layouten hittills. Läs dessa positioner som en första idé, de blir säkrare när fler repriser kommer in.",
+  "players-share": "{share} av spelarna positionerar sig här",
+  "damage-share": "{share} av skadan utdelas härifrån",
+  "opening-detail": "{damage} skada per strid i genomsnitt, {kills} dödanden härifrån",
+  "later-detail": "{damage} utdelad skada, {kills} dödanden härifrån",
+  "thin": "endast {players} spelare hittills",
+  "empty": "Ingen strid har ännu registrerats för den här sidan och klassen på denna layout.",
+  "note": "Läs från repriser delade via unicum.gg-modden. Endast laget för spelaren som spelade in är placerat, eftersom en fiende bara syns när den är upptäckt.",
+  "legend": {
+    "open": "Vad färgerna och talen betyder",
+    "colours": "Färger: skada utdelad från varje plats",
+    "little": "Lite",
+    "a-lot": "Mycket",
+    "colours-opening": "Under de första tre minuterna, av spelare på vald sida och i vald klass. Ju rödare en plats är, desto mer skada utdelade de därifrån.",
+    "colours-middle": "Mellan tre och sju minuter, av spelare på vald sida och i vald klass. Ju rödare en plats är, desto mer skada utdelade de därifrån.",
+    "colours-late": "Efter sju minuter, av spelare på vald sida och i vald klass. Ju rödare en plats är, desto mer skada utdelade de därifrån.",
+    "numbers-opening": "Rutorna där flest av dessa spelare positionerade sig efter öppningsrusningen, rankade till höger.",
+    "numbers-middle": "Rutorna där mest skada utdelades i detta ögonblick, rankade till höger.",
+    "numbers-late": "Rutorna där mest skada utdelades i detta ögonblick, rankade till höger.",
+    "grid": "Rutorna namnges som rutnätet på spelminikartan (F6), så att de kan anges i strid."
+  }
+}

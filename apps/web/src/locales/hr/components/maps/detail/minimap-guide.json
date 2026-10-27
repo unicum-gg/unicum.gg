@@ -1,0 +1,46 @@
+{
+  "toggle": "Vodič za pozicioniranje",
+  "spawn": "Spavn {n}",
+  "side": {
+    "north": "Sjever",
+    "south": "Jug",
+    "east": "Istok",
+    "west": "Zapad"
+  },
+  "phase": {
+    "opening": "0 do 3 minute",
+    "middle": "3 do 7 minute",
+    "late": "7 minuta +"
+  },
+  "title": {
+    "opening": "Gdje se postaviti na početku",
+    "middle": "Gdje se bitka održava u sredini",
+    "late": "Gdje se bitka završava"
+  },
+  "subtitle": "Početak za {vehicle} sa strane {side}.",
+  "sample": {
+    "battles": "Analizirane bitke",
+    "players": "Igrači s vozilom {vehicle}"
+  },
+  "few-battles": "Dosad je zabilježeno malo bitki na ovom rasporedu: pročitajte ove pozicije kao prvu ideju, a one će se učvrstiti kako bude pristizalo više snimki bitki.",
+  "players-share": "Ovdje se postavlja {share} igrača",
+  "damage-share": "Ovdje je naneseno {share} štete",
+  "opening-detail": "{damage} štete po bitci u prosjeku, odavde je ostvareno {kills} ubojstava",
+  "later-detail": "Naneseno je {damage} štete, odavde je ostvareno {kills} ubojstava",
+  "thin": "zasad samo {players} igrača",
+  "empty": "Još nije zabilježena nijedna bitka za ovu stranu i klasu na ovom rasporedu.",
+  "note": "Pročitaj iz snimki bitki podijeljenih putem mod unicum.gg. Postavlja se samo tim igrača koji je snimao, jer se neprijatelj vidi samo dok je otkriven.",
+  "legend": {
+    "open": "Što znače boje i brojevi",
+    "colours": "Boje: šteta nanesena sa svakog mjesta",
+    "little": "Malo",
+    "a-lot": "Puno",
+    "colours-opening": "U prve tri minute, od igrača odabrane strane i klase. Što je mjesto crvenije, s njega je naneseno više štete.",
+    "colours-middle": "Između treće i sedme minute, od igrača odabrane strane i klase. Što je mjesto crvenije, s njega je naneseno više štete.",
+    "colours-late": "Nakon sedam minuta, od igrača odabrane strane i klase. Što je mjesto crvenije, s njega je naneseno više štete.",
+    "numbers-opening": "Kvadrati na kojima se većina ovih igrača postavila nakon početnog juriša, rangirano desno.",
+    "numbers-middle": "Kvadrati s kojih je u ovom trenutku naneseno najviše štete, rangirano desno.",
+    "numbers-late": "Kvadrati s kojih je u ovom trenutku naneseno najviše štete, rangirano desno.",
+    "grid": "Kvadrati su imenovani kao mreža minimape u igri (F6), kako bi ih se moglo prozvati u bitci."
+  }
+}

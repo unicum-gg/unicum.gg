@@ -96,10 +96,10 @@
     "draw": "เสมอ"
   },
   "spawn-directions": {
-    "north": "เหนือ",
-    "south": "ใต้",
-    "east": "ตะวันออก",
-    "west": "ตะวันตก"
+    "north": "ทิศเหนือ",
+    "south": "ทิศใต้",
+    "east": "ทิศตะวันออก",
+    "west": "ทิศตะวันตก"
   },
   "shells": {
     "ARMOR_PIERCING": "AP",

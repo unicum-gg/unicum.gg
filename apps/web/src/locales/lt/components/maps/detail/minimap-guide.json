@@ -1,0 +1,46 @@
+{
+  "toggle": "Pozicionavimo vadovas",
+  "spawn": "Gimimas {n}",
+  "side": {
+    "north": "Šiaurė",
+    "south": "Pietūs",
+    "east": "Rytai",
+    "west": "Vakarai"
+  },
+  "phase": {
+    "opening": "Nuo 0 iki 3 min.",
+    "middle": "Nuo 3 iki 7 min.",
+    "late": "7 min. ir daugiau"
+  },
+  "title": {
+    "opening": "Kur įsitaisyti pradžioje",
+    "middle": "Kur vyksta kova viduryje",
+    "late": "Kur baigiasi mūšis"
+  },
+  "subtitle": "Mūšis pradedamas iš {side}, naudojant {vehicle}.",
+  "sample": {
+    "battles": "Išanalizuoti pakartojimai",
+    "players": "Su {vehicle} žaidžiančių žaidėjų pozicijos"
+  },
+  "few-battles": "Šiame žemėlapio išdėstyme kol kas užfiksuota nedaug mūšių: šias pozicijas vertinkite kaip pirmąją idėją, jos taps tikslesnės, kai bus įkelta daugiau pakartojimų.",
+  "players-share": "Čia įsitaiso {share} žaidėjų",
+  "damage-share": "Iš čia padaroma {share} žalos",
+  "opening-detail": "Vidutiniškai {damage} žalos per mūšį, iš čia atlikta {kills} sunaikinimų",
+  "later-detail": "Padaryta {damage} žalos, iš čia atlikta {kills} sunaikinimų",
+  "thin": "kol kas tik {players} žaidėjų",
+  "empty": "Šiame išdėstyme šiai pusei ir klasei dar neužfiksuotas nė vienas mūšis.",
+  "note": "Skaityti iš per unicum.gg modą bendrinamų pakartojimų. Pateikiama tik pakartojimą įrašiusio žaidėjo komanda, nes priešas matomas tik tada, kai yra aptiktas.",
+  "legend": {
+    "open": "Ką reiškia spalvos ir skaičiai",
+    "colours": "Spalvos: iš kiekvienos vietos padaryta žala",
+    "little": "Nedaug",
+    "a-lot": "Daug",
+    "colours-opening": "Per pirmąsias tris minutes, pagal pasirinktos pusės ir klasės žaidėjus. Kuo vieta raudonesnė, tuo daugiau žalos iš jos padaryta.",
+    "colours-middle": "Nuo trečios iki septintos minutės, pagal pasirinktos pusės ir klasės žaidėjus. Kuo vieta raudonesnė, tuo daugiau žalos iš jos padaryta.",
+    "colours-late": "Po septintos minutės, pagal pasirinktos pusės ir klasės žaidėjus. Kuo vieta raudonesnė, tuo daugiau žalos iš jos padaryta.",
+    "numbers-opening": "Langeliuose, kuriuose po pradinio šturmo įsitaisė daugiausia šių žaidėjų, dešinėje pateikiamas reitingas.",
+    "numbers-middle": "Langeliuose, iš kurių šią akimirką padaryta daugiausia žalos, dešinėje pateikiamas reitingas.",
+    "numbers-late": "Langeliuose, iš kurių šią akimirką padaryta daugiausia žalos, dešinėje pateikiamas reitingas.",
+    "grid": "Langelių pavadinimai atitinka žaidimo minižemėlapio tinklelį (F6), todėl juos galima nurodyti mūšyje."
+  }
+}

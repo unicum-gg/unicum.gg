@@ -1,0 +1,46 @@
+{
+  "toggle": "Guide de positionnement",
+  "spawn": "Apparition {n}",
+  "side": {
+    "north": "Nord",
+    "south": "Sud",
+    "east": "Est",
+    "west": "Ouest"
+  },
+  "phase": {
+    "opening": "0 à 3 minutes",
+    "middle": "3 à 7 minutes",
+    "late": "7 minutes et plus"
+  },
+  "title": {
+    "opening": "Où se positionner au début",
+    "middle": "Où la bataille se déroule au milieu",
+    "late": "Où la bataille se termine"
+  },
+  "subtitle": "{vehicle} au départ du côté {side}.",
+  "sample": {
+    "battles": "Replays analysés",
+    "players": "Joueurs de {vehicle} positionnés"
+  },
+  "few-battles": "Peu de batailles ont été enregistrées sur cette carte jusqu’à présent. Considérez ces positions comme une première indication, elles s’affineront à mesure que d’autres replays seront disponibles.",
+  "players-share": "{share} des joueurs se positionnent ici",
+  "damage-share": "{share} des dégâts sont infligés depuis cet endroit",
+  "opening-detail": "{damage} dégâts par bataille en moyenne, {kills} éliminations effectuées depuis cet endroit",
+  "later-detail": "{damage} dégâts infligés, {kills} éliminations effectuées depuis cet endroit",
+  "thin": "seulement {players} joueurs jusqu’à présent",
+  "empty": "Aucune bataille n’a encore été enregistrée pour ce côté et cette classe sur cette carte.",
+  "note": "Données issues des replays partagés via le mod unicum.gg. Seule l’équipe du joueur qui a enregistré la partie est positionnée, car un ennemi n’est visible que lorsqu’il est détecté.",
+  "legend": {
+    "open": "Signification des couleurs et des nombres",
+    "colours": "Couleurs : dégâts infligés depuis chaque place",
+    "little": "Un peu",
+    "a-lot": "Beaucoup",
+    "colours-opening": "Pendant les trois premières minutes, par les joueurs du côté et de la classe choisis. Plus une place est rouge, plus les dégâts qui y sont infligés sont importants.",
+    "colours-middle": "Entre trois et sept minutes, par les joueurs du côté et de la classe choisis. Plus une place est rouge, plus les dégâts qui y sont infligés sont importants.",
+    "colours-late": "Après sept minutes, par les joueurs du côté et de la classe choisis. Plus une place est rouge, plus les dégâts qui y sont infligés sont importants.",
+    "numbers-opening": "Les cases où la plupart de ces joueurs se sont positionnés après la ruée initiale, classées à droite.",
+    "numbers-middle": "Les cases depuis lesquelles le plus de dégâts ont été infligés à ce moment, classées à droite.",
+    "numbers-late": "Les cases depuis lesquelles le plus de dégâts ont été infligés à ce moment, classées à droite.",
+    "grid": "Les cases sont nommées comme celles de la grille de la minicarte en jeu, par exemple F6, afin de pouvoir les indiquer pendant la bataille."
+  }
+}

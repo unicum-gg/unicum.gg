@@ -98,8 +98,8 @@
   "spawn-directions": {
     "north": "Norr",
     "south": "Söder",
-    "east": "Öster",
-    "west": "Väster"
+    "east": "Öst",
+    "west": "Väst"
   },
   "shells": {
     "ARMOR_PIERCING": "AP",

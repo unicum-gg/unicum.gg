@@ -1,0 +1,46 @@
+{
+  "toggle": "Ghid de poziționare",
+  "spawn": "Reaparitie {n}",
+  "side": {
+    "north": "Nord",
+    "south": "Sud",
+    "east": "Est",
+    "west": "Vest"
+  },
+  "phase": {
+    "opening": "De la 0 la 3 minute",
+    "middle": "De la 3 la 7 minute",
+    "late": "7 minute sau mai mult"
+  },
+  "title": {
+    "opening": "Unde să te poziționezi la început",
+    "middle": "Unde se desfășoară bătălia la mijloc",
+    "late": "Unde se încheie bătălia"
+  },
+  "subtitle": "{vehicle} pornește din partea de {side}.",
+  "sample": {
+    "battles": "Replay-uri analizate",
+    "players": "Jucători cu {vehicle} poziționați"
+  },
+  "few-battles": "Până acum au fost înregistrate puține bătălii pe această hartă. Citește aceste poziții ca pe o primă idee, ele se vor contura mai bine pe măsură ce sunt adăugate mai multe replay-uri.",
+  "players-share": "{share} dintre jucători se poziționează aici",
+  "damage-share": "{share} din daune sunt provocate de aici",
+  "opening-detail": "{damage} daune pe bătălie în medie, {kills} eliminări realizate de aici",
+  "later-detail": "{damage} daune provocate, {kills} eliminări realizate de aici",
+  "thin": "doar {players} jucători până acum",
+  "empty": "Nu a fost înregistrată încă nicio bătălie pentru această parte și clasă pe această hartă.",
+  "note": "Citește informațiile din replay-urile partajate prin modul unicum.gg. Este poziționată doar echipa jucătorului care a înregistrat replay-ul, deoarece un inamic este vizibil doar când are detectări.",
+  "legend": {
+    "open": "Ce înseamnă culorile și numerele",
+    "colours": "Culori: daune provocate din fiecare loc",
+    "little": "Puține",
+    "a-lot": "Multe",
+    "colours-opening": "În primele trei minute, de către jucătorii de pe partea și din clasa alese. Cu cât un loc este mai roșu, cu atât au provocat mai multe daune de acolo.",
+    "colours-middle": "Între trei și șapte minute, de către jucătorii de pe partea și din clasa alese. Cu cât un loc este mai roșu, cu atât au provocat mai multe daune de acolo.",
+    "colours-late": "După șapte minute, de către jucătorii de pe partea și din clasa alese. Cu cât un loc este mai roșu, cu atât au provocat mai multe daune de acolo.",
+    "numbers-opening": "Pătratele în care s-au poziționat cei mai mulți dintre acești jucători după atacul inițial, clasate în dreapta.",
+    "numbers-middle": "Pătratele din care au fost provocate cele mai multe daune în acest moment, clasate în dreapta.",
+    "numbers-late": "Pătratele din care au fost provocate cele mai multe daune în acest moment, clasate în dreapta.",
+    "grid": "Pătratele au aceleași denumiri ca grila mini-hărții din joc, de exemplu F6, astfel încât pot fi indicate în bătălie."
+  }
+}
