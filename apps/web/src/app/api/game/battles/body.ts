@@ -47,8 +47,22 @@ const vehicle = z.object({
     .max(Number.MAX_SAFE_INTEGER)
     .optional(),
   team: z.number().int().min(0).max(32),
-  /** `typeCompDescr`, the vehicle the account brought. */
-  tank: z.number().int().positive(),
+  /**
+   * `typeCompDescr`, the vehicle the account brought, when the client had it.
+   *
+   * Not `positive()`, for the reason `account` above is optional: the client
+   * does not always have the descriptor, and a vehicle that arrives with a 0
+   * is still a real participant with an account, a team, damage dealt and a
+   * time of death. Refusing it would delete a player from the battle and
+   * leave the roster saying thirteen where fourteen played, which is a worse
+   * answer than one unfilled field. `toRow` turns anything unusable into
+   * `null`, and every reader already treats an unknown tank as unnamed.
+   *
+   * This was found the hard way: one such vehicle, in one skirmish, refused
+   * one upload, and because the whole batch was validated as a unit it took
+   * thirty-five innocent battles down with it, every garage, for a day.
+   */
+  tank: z.number().int().nullish(),
   damage: counter,
   radio: counter,
   track: counter,
@@ -222,12 +236,28 @@ export const battleBody = z.object({
   personal: economy.optional(),
 });
 
-export const battlesUploadBody = z.object({
+/**
+ * The upload's envelope, whose battles are checked one at a time.
+ *
+ * `battles` holds unknowns here, and that is the whole point. A lot validated
+ * as a unit fails as a unit: one battle the schema dislikes refuses every
+ * battle travelling with it, under a 400 that names none of them. The mod
+ * cannot act on that answer. It keeps its queue, sends the same lot at the
+ * next garage, and is refused again, every garage, for as long as the bad
+ * battle sits at the head of the queue. Measured: one vehicle missing its
+ * `typeCompDescr`, in one skirmish, held thirty-five other battles off the
+ * site for a day.
+ *
+ * The route already refuses battle by battle, naming each one and its reason,
+ * and answers 200 so the mod can drop exactly what will never be accepted.
+ * Validating here one at a time lets the schema's own refusals take that same
+ * path instead of cancelling it.
+ */
+export const battlesUploadEnvelope = z.object({
   // No `region` field. The region comes from the proven account, and a copy of
   // it in the body would be a claim nobody reads: `loadoutsUploadBody` carries
   // one and its route ignores it.
-  battles: z.array(battleBody).min(1).max(MAX_BATTLES_PER_UPLOAD),
+  battles: z.array(z.unknown()).min(1).max(MAX_BATTLES_PER_UPLOAD),
 });
 
 export type BattleBody = z.infer<typeof battleBody>;
-export type BattlesUploadBody = z.infer<typeof battlesUploadBody>;

@@ -7,7 +7,11 @@ import {
 } from "@unicum.gg/core/battles/ingest";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
 import { provenAccount } from "@/services/game/proven-account";
-import { battlesUploadBody, type BattleBody } from "./body";
+import {
+  battleBody,
+  battlesUploadEnvelope,
+  type BattleBody,
+} from "./body";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +27,15 @@ export enum BattleRefusal {
   WrongRegion = "wrong_region",
   /** The database would not take it. The reason rides along. */
   Refused = "database_refused",
+  /**
+   * The schema would not take it, so no retry will ever help.
+   *
+   * Named rather than answered with a 400, because a 400 refuses the whole
+   * lot and names nothing: the mod would keep the battle, send it again, and
+   * block every battle queued behind it. This way the one battle is dropped
+   * and the rest of its lot is stored.
+   */
+  Malformed = "malformed",
 }
 
 /**
@@ -98,22 +111,52 @@ export async function POST(req: Request): Promise<Response> {
     return Response.json({ error: "not_authenticated" }, { status: 401 });
   }
 
-  const parsed = battlesUploadBody.safeParse(
+  // Only the envelope. A 400 here means the request is not an upload at all,
+  // which is the one case where refusing everything is the right answer.
+  const envelope = battlesUploadEnvelope.safeParse(
     await req.json().catch(() => null),
   );
-  if (!parsed.success) {
+  if (!envelope.success) {
     return Response.json({ error: "invalid_body" }, { status: 400 });
   }
 
-  // Charged before anything is written, and by the battle rather than by the
-  // call. Refusing the whole request rather than trimming it: a partial
-  // acceptance the mod cannot predict is worse than a retry it can.
-  const quota = await consumeQuota(
-    `battles:${account.region}:${account.accountId}`,
-    UPLOAD_QUOTA,
-    parsed.data.battles.length,
-  );
-  if (!quota.allowed) {
+  // Named back to the mod so a battle it can never store stops being retried.
+  const rejected: { arenaUniqueId: string; reason: string }[] = [];
+  const refuse = (id: string, reason: BattleRefusal) =>
+    rejected.push({ arenaUniqueId: id, reason });
+
+  // Each battle on its own, so one the schema dislikes is refused by name
+  // while the others in the lot are stored.
+  const battles: BattleBody[] = [];
+  let unnamed = 0;
+  for (const candidate of envelope.data.battles) {
+    const checked = battleBody.safeParse(candidate);
+    if (checked.success) {
+      battles.push(checked.data);
+      continue;
+    }
+    const id = idOf(candidate);
+    if (id === null) {
+      // No id to answer with, so nothing the mod could drop on our word. It
+      // is counted and logged below: unanswerable, but findable.
+      unnamed += 1;
+      continue;
+    }
+    refuse(id, BattleRefusal.Malformed);
+  }
+
+  // Charged before anything is written, by the battle rather than by the call,
+  // and only for the battles that could still be stored: a malformed one costs
+  // the sender nothing, since no quota would ever let it through.
+  const quota =
+    battles.length > 0
+      ? await consumeQuota(
+          `battles:${account.region}:${account.accountId}`,
+          UPLOAD_QUOTA,
+          battles.length,
+        )
+      : null;
+  if (quota && !quota.allowed) {
     return Response.json(
       { error: "too_many_uploads" },
       { status: 429, headers: { "retry-after": String(quota.resetSeconds) } },
@@ -122,12 +165,8 @@ export async function POST(req: Request): Promise<Response> {
 
   const now = new Date();
   const rows: NewBattleRow[] = [];
-  // Named back to the mod so a battle it can never store stops being retried.
-  const rejected: { arenaUniqueId: string; reason: string }[] = [];
-  const refuse = (id: string, reason: BattleRefusal) =>
-    rejected.push({ arenaUniqueId: id, reason });
 
-  for (const battle of parsed.data.battles) {
+  for (const battle of battles) {
     const id = normaliseBattleId(battle.arenaUniqueId);
     const players = accountsIn(battle);
     if (!players.includes(account.accountId)) {
@@ -168,11 +207,13 @@ export async function POST(req: Request): Promise<Response> {
         reason: `${BattleRefusal.Refused}: ${reason}`,
       });
     }
-    if (rejected.length > 0) {
+    if (rejected.length > 0 || unnamed > 0) {
       // The clearest abuse signal this endpoint has, and the first version
-      // answered it and forgot it.
+      // answered it and forgot it. `unnamed` rides along because those are
+      // the only refusals the answer cannot carry, so the log is the only
+      // place they exist.
       console.warn(
-        `[api/game/battles] ${account.region}/${account.accountId}: refused ${rejected.length} of ${parsed.data.battles.length} (${rejected.map((r) => r.reason).join(", ")})`,
+        `[api/game/battles] ${account.region}/${account.accountId}: refused ${rejected.length} of ${envelope.data.battles.length}${unnamed > 0 ? `, ${unnamed} with no usable id` : ""} (${rejected.map((r) => r.reason).join(", ")})`,
       );
     }
     return Response.json(
@@ -217,6 +258,27 @@ function accountsIn(battle: BattleBody): number[] {
   return [...accounts].sort((a, b) => a - b);
 }
 
+/**
+ * The id of a battle the schema refused, when it carries a usable one.
+ *
+ * Deliberately permissive, and it has to be: this reads a battle that failed
+ * validation, so nothing about it can be assumed. The id is the only field
+ * that matters here, because it is the only thing the mod can act on. Without
+ * one there is no way to tell it which battle to stop sending, and the battle
+ * stays in its queue whatever we answer.
+ */
+function idOf(battle: unknown): string | null {
+  if (!battle || typeof battle !== "object") return null;
+  const raw = (battle as { arenaUniqueId?: unknown }).arenaUniqueId;
+  if (typeof raw === "string" && /^[0-9]{1,20}$/.test(raw)) return raw;
+  // A number is out of spec, and a long id does not survive as one, but the
+  // short ones do and answering for them costs nothing.
+  if (typeof raw === "number" && Number.isSafeInteger(raw) && raw >= 0) {
+    return String(raw);
+  }
+  return null;
+}
+
 function toRow(
   battle: BattleBody,
   arenaUniqueId: string,
@@ -237,7 +299,15 @@ function toRow(
     server: battle.server ?? null,
     playerIds,
     reportedBy: [reporter],
-    vehicles: battle.vehicles.map((vehicle) => ({ ...vehicle })),
+    // `tank` is normalised here rather than in the schema so the one place
+    // that builds a stored row is the one place that decides what an unknown
+    // vehicle looks like in the column. Never 0: the filters read
+    // `(v->>'tank')::int`, and a zero would gather every unidentified
+    // vehicle in the game under one fictional tank.
+    vehicles: battle.vehicles.map((vehicle) => ({
+      ...vehicle,
+      tank: vehicle.tank && vehicle.tank > 0 ? vehicle.tank : null,
+    })),
     // Stored on the first write only: the conflict path updates `reported_by`
     // and nothing else, so a second reporter's economy never overwrites the
     // first's. It belongs to whoever created the row, which is what
