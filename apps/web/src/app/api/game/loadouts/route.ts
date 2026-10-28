@@ -5,6 +5,7 @@ import {
   listLoadoutStamps,
   saveTankLoadouts,
 } from "@unicum.gg/core/tanks/loadouts";
+import { recordModGarage } from "@unicum.gg/core/players/garage";
 import { consumeQuota } from "@unicum.gg/core/lib/request-quota";
 import { provenAccount } from "@/services/game/proven-account";
 import { loadoutsUploadBody } from "./body";
@@ -57,7 +58,7 @@ export async function POST(req: Request): Promise<Response> {
   if (!parsed.success) {
     return Response.json({ error: "invalid_body" }, { status: 400 });
   }
-  const { loadouts, sold, marks } = parsed.data;
+  const { loadouts, sold, marks, garage } = parsed.data;
 
   try {
     // The marks LAST, and that order is the whole point: `sold` clears the
@@ -73,8 +74,16 @@ export async function POST(req: Request): Promise<Response> {
       account.accountId,
       marks,
     );
+    // The inventory, which touches a different table and no row the three
+    // above wrote. It replaces only the mod's own rows there, so the token
+    // reading of the same garage is left alone.
+    const held = await recordModGarage(
+      account.region,
+      account.accountId,
+      garage,
+    );
     return Response.json(
-      { saved, forgotten, marked },
+      { saved, forgotten, marked, garage: held ? garage.length : 0 },
       { headers: { "cache-control": "no-store" } },
     );
   } catch (err) {

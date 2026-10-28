@@ -1,6 +1,7 @@
 import { and, eq, gt, isNotNull, sql } from "drizzle-orm";
 import {
   account as accountTable,
+  GARAGE_SOURCE,
   playerGarageByRegion,
   wgIdentityFromAccountKey,
 } from "@unicum.gg/shared";
@@ -94,6 +95,13 @@ async function loadVerifiedAt(
         verifiedAt: sql<string | Date>`max(${table.verifiedAt})`,
       })
       .from(table)
+      // The token's own rows only. This decides whether to spend a token read,
+      // so it has to be the age of the last token read: a player running the
+      // mod restamps their garage at every hangar visit, and counting that as
+      // freshness here would mean never reading the token again. The token is
+      // the only source that can see a sale, so losing it would quietly leave
+      // sold vehicles in the garage for good.
+      .where(eq(table.source, GARAGE_SOURCE.token))
       .groupBy(table.accountId);
     for (const row of rows) {
       out.set(`${region}-${row.accountId}`, new Date(row.verifiedAt));

@@ -1,5 +1,9 @@
 import { and, eq, notInArray } from "drizzle-orm";
-import { playerGarageByRegion } from "@unicum.gg/shared";
+import {
+  GARAGE_SOURCE,
+  playerGarageByRegion,
+  type GarageSource,
+} from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { getWargamingAccessToken } from "@unicum.gg/core/auth/wargaming-token";
 import { wg } from "@unicum.gg/core/wargaming/client";
@@ -62,32 +66,73 @@ async function fetchGarageTankIds(
   return { owned, sold, unplayed };
 }
 
-/** Replace an account's stored garage with what the token just reported. */
+/**
+ * Replace one source's reading of an account's garage.
+ *
+ * Only its own rows: the delete is scoped to the source, so a token read
+ * cannot remove what the mod reported, or the other way round. That is what
+ * `GARAGE_SOURCE` is for, and it is not a precaution. Neither source contains
+ * the other (80 vehicles the mod sees are absent from Wargaming entirely, 2
+ * that Wargaming calls held have no row in the mod's sweep), so a replace
+ * across both would delete real vehicles every time either one wrote.
+ */
 async function writePlayerGarage(
   region: Region,
   accountId: number,
   tankIds: number[],
+  source: GarageSource,
 ): Promise<void> {
   const table = playerGarageByRegion[region];
   const verifiedAt = new Date();
   await db.transaction(async (tx) => {
-    // A vehicle sold since the last reading leaves the table, so the stored
-    // garage is a replacement rather than an accumulation.
+    // A vehicle this source no longer reports leaves its rows, so one
+    // source's reading is a replacement rather than an accumulation.
     await tx
       .delete(table)
       .where(
-        and(eq(table.accountId, accountId), notInArray(table.tankId, tankIds)),
+        and(
+          eq(table.accountId, accountId),
+          eq(table.source, source),
+          notInArray(table.tankId, tankIds),
+        ),
       );
-    // Restamp every vehicle, so the newest stamp on the account is the age of
-    // the whole reading rather than of its most recent purchase.
+    // Restamp every vehicle, so the newest stamp of this source is the age of
+    // its whole reading rather than of its most recent purchase.
     await tx
       .insert(table)
-      .values(tankIds.map((tankId) => ({ accountId, tankId, verifiedAt })))
+      .values(
+        tankIds.map((tankId) => ({ accountId, tankId, source, verifiedAt })),
+      )
       .onConflictDoUpdate({
-        target: [table.accountId, table.tankId],
+        target: [table.accountId, table.tankId, table.source],
         set: { verifiedAt },
       });
   });
+}
+
+/**
+ * Store the inventory the mod swept out of the player's own client.
+ *
+ * The only reading that can see a vehicle bought and never driven, which on a
+ * real account is about 40% of the garage and the half nothing else here can
+ * reach.
+ *
+ * An empty list is refused for the reason the token read refuses one: the game
+ * hands every player a starter tank, so nobody holds nothing, and writing it
+ * would wipe a good reading. The mod already declines to send an empty sweep;
+ * this is the second lock on that door.
+ */
+export async function recordModGarage(
+  region: Region,
+  accountId: number,
+  tankIds: number[],
+): Promise<boolean> {
+  const owned = [...new Set(tankIds)].filter(
+    (id) => Number.isSafeInteger(id) && id > 0,
+  );
+  if (owned.length === 0) return false;
+  await writePlayerGarage(region, accountId, owned, GARAGE_SOURCE.mod);
+  return true;
 }
 
 /**
@@ -113,7 +158,12 @@ export async function syncPlayerGarage(params: {
   // would wipe a good garage.
   if (read.owned.length === 0) return { ok: false, reason: "empty" };
 
-  await writePlayerGarage(params.region, params.accountId, read.owned);
+  await writePlayerGarage(
+    params.region,
+    params.accountId,
+    read.owned,
+    GARAGE_SOURCE.token,
+  );
   return {
     ok: true,
     owned: read.owned.length,
@@ -156,6 +206,10 @@ export async function loadPlayerGarage(
     .where(eq(table.accountId, accountId));
   if (rows.length === 0) return null;
 
+  // Every source's rows, which is the union by construction: a vehicle both
+  // of them hold is two rows and one entry in the set, and the stamp reported
+  // is the freshest of them. No ranking, because neither source contains the
+  // other; see `GARAGE_SOURCE`.
   let verifiedAt = rows[0].verifiedAt;
   const tankIds = new Set<number>();
   for (const row of rows) {

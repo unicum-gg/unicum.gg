@@ -162,6 +162,27 @@ export const loadoutsUploadBody = z.object({
     )
     .max(2000)
     .default([]),
+  /**
+   * Every vehicle the account HOLDS, as the client's own inventory lists it.
+   *
+   * A third set again, and the one nothing else here can obtain.
+   * `wot/tanks/stats` only has a row for a vehicle with a stats record, so a
+   * tank bought and never taken into a battle does not exist for Wargaming,
+   * token or not. Measured on one verified account: 80 of about 206 vehicles,
+   * and they are the collection pieces, which are the expensive ones.
+   *
+   * Sent whole or not at all, with the first batch, and only when it changed
+   * since the server last took it. The mod never sends an empty list: nobody
+   * holds nothing, so an empty one would be a failed read, and storing it
+   * would wipe a good garage.
+   *
+   * It does not replace the token reading, it joins it. Neither contains the
+   * other, so both are kept; see `GARAGE_SOURCE`.
+   */
+  garage: z
+    .array(z.number().int())
+    .max(MAX_LOADOUTS_PER_UPLOAD)
+    .default([]),
 });
 
 export type LoadoutsUploadBody = z.infer<typeof loadoutsUploadBody>;
