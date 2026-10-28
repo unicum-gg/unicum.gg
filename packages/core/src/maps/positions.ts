@@ -123,7 +123,9 @@ export async function storePositionsFromContainer(
     box,
     await vehicleClasses(
       region,
-      battle.vehicles.map((vehicle) => vehicle.tank),
+      battle.vehicles
+        .map((vehicle) => vehicle.tank)
+        .filter((id): id is number => id !== null),
     ),
   );
   if ("skipped" in built) return built;
@@ -187,12 +189,18 @@ export function positionRowsOf(
   }));
   const tracks = new Map(motion.tracks.map((track) => [track.id, track]));
   // Team mates with an account and a known class: bots are not players, the
-  // rule every other figure on the map follows.
+  // rule every other figure on the map follows. A vehicle whose tank the
+  // client never reported has no class either, so it was already left out
+  // here; the narrowing only says so to the compiler, which is what lets the
+  // rows below name a tank without a fallback.
   const mates = new Map(
     roster
       .filter(
-        (vehicle) =>
-          vehicle.team === team && vehicle.account && classes.has(vehicle.tank),
+        (vehicle): vehicle is (typeof roster)[number] & { tank: number } =>
+          vehicle.team === team &&
+          Boolean(vehicle.account) &&
+          vehicle.tank !== null &&
+          classes.has(vehicle.tank),
       )
       .map((vehicle) => [vehicle.id, vehicle]),
   );

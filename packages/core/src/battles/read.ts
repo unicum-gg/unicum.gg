@@ -495,7 +495,13 @@ async function assembleBattles(
  */
 function asCareer(own: BattleVehicle, won: boolean): TankStats {
   return {
-    tank_id: own.tank,
+    // `TankStats` comes from Wargaming, where a career always names its
+    // vehicle, so the type has no room for an unknown one. 0 is not stored
+    // anywhere and matches no entry in the encyclopedia or the expected
+    // tables, which is exactly what is wanted here: a vehicle nobody can name
+    // gets no rating, the same answer `rateOne` gives a tank the expected
+    // values have not caught up with.
+    tank_id: own.tank ?? 0,
     all: {
       battles: 1,
       wins: won ? 1 : 0,
@@ -542,10 +548,13 @@ function rateOne(
 
 function namedTank(
   meta: VehicleMeta | undefined,
-  id: number,
+  id: number | null,
   slugs: Map<number, string | null>,
 ): BattleTank | null {
-  if (!meta) return null;
+  // Two ways to have no tank to name, answered the same way: the client never
+  // reported which vehicle it was, or the catalogue has no entry for the one
+  // it did report, which happens to a tank released since the last import.
+  if (!meta || id === null) return null;
   return {
     id,
     name: meta.name,
@@ -739,7 +748,11 @@ export async function battleDetail(
   // lookup on the same partition key the battle itself was found by.
   const fitted = await loadoutsOf(region, arenaUniqueId, battle.startedAt);
   const slugs = new Map<number, string | null>();
-  for (const id of new Set(battle.vehicles.map((vehicle) => vehicle.tank))) {
+  for (const id of new Set(
+    battle.vehicles
+      .map((vehicle) => vehicle.tank)
+      .filter((id): id is number => id !== null),
+  )) {
     slugs.set(id, await getTankSlug(region, id));
   }
 

@@ -17,8 +17,23 @@ export type BattleVehicle = {
   /** Wargaming account id, absent for a bot. */
   account?: number;
   team: number;
-  /** `typeCompDescr`, the vehicle the account brought. */
-  tank: number;
+  /**
+   * `typeCompDescr`, the vehicle the account brought, `null` when unknown.
+   *
+   * The client does not always have it. A real participant, with an account,
+   * a team, damage dealt and a time of death, can still arrive with a
+   * `typeCompDescr` of 0, and refusing that vehicle would delete a player
+   * from the battle and leave the roster saying thirteen where fourteen
+   * played. So the vehicle is kept and the one field nobody can fill is
+   * `null`, which is what every reader here already treats an unknown tank
+   * as: `namedTank` answers null for an id it has no meta for, exactly as it
+   * does for a tank too new to be in the catalogue.
+   *
+   * Never 0. A zero would be a tank id in the filters, which read
+   * `(v->>'tank')::int`, and would gather every unidentified vehicle in the
+   * game under one fictional vehicle.
+   */
+  tank: number | null;
   damage: number;
   /** Assisted damage, split the way the game splits it. */
   radio: number;

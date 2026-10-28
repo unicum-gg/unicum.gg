@@ -15,8 +15,9 @@ const battleVehicle = z
       description: "Wargaming account id, absent for a bot.",
     }),
     team: z.number(),
-    tank: z.number().meta({
-      description: "`typeCompDescr` of the vehicle the account brought.",
+    tank: z.number().nullable().meta({
+      description:
+        "`typeCompDescr` of the vehicle the account brought, null when the client did not report it. The vehicle is still a real participant, with its account, team and counters; only the tank is unnamed, and `tank` on the battle row is then null too.",
     }),
     damage: z.number(),
     radio: z.number().meta({ description: "Damage assisted by spotting." }),

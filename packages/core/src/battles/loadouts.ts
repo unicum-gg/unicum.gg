@@ -269,12 +269,18 @@ function columnKey(
   throw new Error(`no property on battle_loadouts for column ${column.name}`);
 }
 
-/** The account and tank the battle's own results name for each vehicle. */
+/**
+ * The account and tank the battle's own results name for each vehicle.
+ *
+ * Both can be missing, and for the same kind of reason: a bot has no account,
+ * and a vehicle the client had no descriptor for has no tank. Its two callers
+ * already write `?? null` into the column, so neither needed a change.
+ */
 async function vehiclesOf(
   region: Region,
   arenaUniqueId: string,
   startedAt: Date,
-): Promise<Map<number, { account?: number; tank: number }>> {
+): Promise<Map<number, { account?: number; tank: number | null }>> {
   const table = battlesByRegion[region];
   const [row] = await db
     .select({ vehicles: table.vehicles })
@@ -287,7 +293,7 @@ async function vehiclesOf(
     )
     .limit(1);
 
-  const out = new Map<number, { account?: number; tank: number }>();
+  const out = new Map<number, { account?: number; tank: number | null }>();
   for (const vehicle of row?.vehicles ?? []) {
     out.set(vehicle.id, {
       ...(vehicle.account ? { account: vehicle.account } : {}),

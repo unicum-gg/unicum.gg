@@ -32,11 +32,15 @@ export async function pictureBattleRows(
   // a vehicle's whole profile; asking once per row would have made the list
   // pay for the preview twenty times over to draw the same three pictures.
   // Nothing is read at all for a page whose battles carry no loadout.
+  // A vehicle the client never named has no catalogue entry to read, so it is
+  // left out of every lookup below rather than guessed at. The row still
+  // draws: it shows the loadout without the pictures a tank would have named.
   const tanks = [
     ...new Set(
       battles
         .filter((battle) => battle.devices?.length || battle.consumables?.length)
-        .map((battle) => battle.own.tank),
+        .map((battle) => battle.own.tank)
+        .filter((tank): tank is number => tank !== null),
     ),
   ];
   // The dictionaries that name equipment, so the preview boxes can carry a
@@ -54,18 +58,15 @@ export async function pictureBattleRows(
   await Promise.all(
     [
       ...new Map(
-        battles
-          .filter((battle) => battle.fieldModsPacked?.length)
-          .map((battle) => [
-            `${battle.own.tank}:${battle.fieldModsPacked!.join(",")}`,
-            battle,
-          ]),
+        battles.flatMap((battle) => {
+          const tank = battle.own.tank;
+          const packed = battle.fieldModsPacked;
+          if (!packed?.length || tank === null) return [];
+          return [[`${tank}:${packed.join(",")}`, { tank, packed }] as const];
+        }),
       ).entries(),
-    ].map(async ([key, battle]) => {
-      mods.set(
-        key,
-        await fieldModSlots(region, battle.own.tank, battle.fieldModsPacked ?? []),
-      );
+    ].map(async ([key, { tank, packed }]) => {
+      mods.set(key, await fieldModSlots(region, tank, packed));
     }),
   );
   // How many pairs each vehicle's tree offers, for the rows that carry a
@@ -82,7 +83,8 @@ export async function pictureBattleRows(
               (battle.devices?.length || battle.consumables?.length) &&
               !battle.fieldModsPacked?.length,
           )
-          .map((battle) => battle.own.tank),
+          .map((battle) => battle.own.tank)
+          .filter((tank): tank is number => tank !== null),
       ),
     ].map(async (tank) => {
       const tree = await getTankFieldMods(region, tank).catch(() => null);
@@ -98,7 +100,11 @@ export async function pictureBattleRows(
 
   return battles.map(
     ({ devices, boosters, consumables, shells, fieldModsPacked, ...battle }) => {
-      const icons = pictures.get(battle.own.tank);
+      // Both lookups are keyed on a tank, so an unnamed one has neither
+      // pictures nor a tree: the loadout is drawn with what the row carries.
+      const tank = battle.own.tank;
+      const icons = tank === null ? undefined : pictures.get(tank);
+      const slots = tank === null ? 0 : (pairs.get(tank) ?? 0);
       const name = namer(tEquipment, icons);
       return {
         ...battle,
@@ -147,9 +153,9 @@ export async function pictureBattleRows(
                 };
               }),
             }
-          : (pairs.get(battle.own.tank) ?? 0) > 0
+          : slots > 0
             ? {
-                fieldMods: Array.from({ length: pairs.get(battle.own.tank)! }, () => ({
+                fieldMods: Array.from({ length: slots }, () => ({
                   filled: false,
                   name: null,
                   image: null,
