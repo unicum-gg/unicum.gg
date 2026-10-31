@@ -134,6 +134,8 @@ export type PlayerTabsViewProps = {
   initialBattles: PlayerBattlesPayload | null;
   /** Who the player meets in those battles, server-rendered on the Battles tab. */
   initialEncounters: PlayerBattleEncounters | null;
+  /** The signed-in reader is this player. */
+  isOwnProfile: boolean;
 };
 
 export function PlayerTabsView({
@@ -155,6 +157,7 @@ export function PlayerTabsView({
   initialOnslaught,
   initialBattles,
   initialEncounters,
+  isOwnProfile,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -400,6 +403,8 @@ export function PlayerTabsView({
           // A battle has no PR or WTR (see `RatingMetric`).
           metric={wnRatingMetric(metric)}
           battleCount={detail.battleCount ?? 0}
+          battlesHidden={detail.battlesHidden ?? false}
+          isOwnProfile={isOwnProfile}
           initialBattles={initialBattles}
           initialEncounters={initialEncounters}
         />

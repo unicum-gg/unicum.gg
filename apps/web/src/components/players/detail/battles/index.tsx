@@ -26,6 +26,7 @@ import { PlayerBattlesTable } from "@/components/players/detail/overview/battles
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
 import { BattleEncounters } from "./encounters";
 import { BattleFilters } from "./filters";
+import { BattlesPrivateNotice, BattlesPrivateOwnerNote } from "./privacy";
 import { useBattleFilter } from "./use-battle-filter";
 
 /** The row counts a page can hold. The endpoint serves a hundred at most, and
@@ -45,6 +46,8 @@ export function BattlesTab({
   nickname,
   metric,
   battleCount,
+  battlesHidden,
+  isOwnProfile,
   initialBattles,
   initialEncounters,
 }: {
@@ -54,6 +57,10 @@ export function BattlesTab({
   /** From the profile payload, so the pager has its last page before the
    * first page has arrived. The answer's own total takes over once it has. */
   battleCount: number;
+  /** From the profile payload: the owner keeps this list to themselves. */
+  battlesHidden: boolean;
+  /** The signed-in reader is this player, and is shown their own list. */
+  isOwnProfile: boolean;
   /** The first page, server-rendered when the visitor landed on this tab. */
   initialBattles: PlayerBattlesPayload | null;
   /** Who the player meets in their battles, server-rendered with that page. */
@@ -91,7 +98,7 @@ export function BattlesTab({
       });
   const firstPage =
     page === 1 && pageSize === PAGINATION.SIZE.FEED && !filtered;
-  const { data, isLoading } = useSWR(
+  const { data, isLoading, isValidating } = useSWR(
     request().url(),
     () => request().then((r) => r as unknown as PlayerBattlesPayload),
     {
@@ -107,13 +114,25 @@ export function BattlesTab({
   if (data && data.total !== knownTotal) setKnownTotal(data.total);
   const total = data?.total ?? knownTotal;
 
+  // The answer says so when it can, and the profile's flag covers the moment
+  // before it arrives. A visitor's answer is the refusal itself, and the
+  // owner's is their own list, carrying the flag.
+  const hidden = data?.hidden ?? battlesHidden;
+  const refused = hidden && !isOwnProfile;
+  // The page itself is cached for everybody, so what it was rendered with is
+  // the visitor's answer even when the owner is the one reading it. Theirs is
+  // on its way, and until then an empty list is not one.
+  const awaitingOwn =
+    isOwnProfile && hidden && !!data?.hidden && data.battles.length === 0 &&
+    isValidating;
+
   return (
     <>
       <PanelSeparator />
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {total > 0
+            {total > 0 && !refused
               ? t("title-count", {
                   nickname,
                   count: numberFormat(locale).format(total),
@@ -121,7 +140,10 @@ export function BattlesTab({
               : t("title", { nickname })}
           </PanelTitle>
         </PanelHeader>
-        {!data && isLoading ? (
+        {isOwnProfile && hidden ? <BattlesPrivateOwnerNote /> : null}
+        {refused ? (
+          <BattlesPrivateNotice nickname={nickname} />
+        ) : (!data && isLoading) || awaitingOwn ? (
           <PanelContent className="flex justify-center py-8">
             <Spinner />
           </PanelContent>
@@ -160,7 +182,9 @@ export function BattlesTab({
           </>
         )}
       </Panel>
-      {total > 0 ? (
+      {/* Who they met stays public when the list is private: it says who they
+          played beside, not what was played. */}
+      {total > 0 || refused ? (
         <BattleEncounters
           region={region}
           nickname={nickname}

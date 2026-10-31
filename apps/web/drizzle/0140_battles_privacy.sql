@@ -1,0 +1,13 @@
+-- A player can take their battle list off their own profile.
+--
+-- Asked for by players who train in team modes (Stronghold, Advances, 7v7
+-- Onslaught, 15v15): their whole practice used to be one profile tab away from
+-- whoever they play against next. The battles keep arriving and keep counting
+-- in every aggregate, so the datasets stay whole; only the profile's Battles
+-- tab answers to its owner alone.
+--
+-- A column on `loadout_privacy` rather than a table of its own, because both
+-- are one person's choice about what is shown, keyed the same way, and the
+-- read paths already join this table. Independent of `hidden`: the default
+-- keeps every existing row exactly as it was.
+ALTER TABLE loadout_privacy ADD COLUMN IF NOT EXISTS battles_hidden boolean NOT NULL DEFAULT false;

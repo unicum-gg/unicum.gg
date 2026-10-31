@@ -316,6 +316,10 @@ export const PlayerBattlesResponse = z
     facets: playerBattleFacets.optional().meta({
       description: "Present when `facets=true` was asked for.",
     }),
+    hidden: z.boolean().optional().meta({
+      description:
+        "The player keeps their battle list to themselves. Anyone else then gets an empty list and a zero total; the player, signed in, gets their own battles as usual.",
+    }),
   })
   .meta({
     id: "PlayerBattlesResponse",

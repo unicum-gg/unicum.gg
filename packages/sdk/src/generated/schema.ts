@@ -328,7 +328,7 @@ export interface paths {
         };
         /**
          * Player battles
-         * @description A player's most recent battles: the map, the mode, the vehicle they brought and what it did, newest first. Wargaming publishes an account's running totals and nothing about a single battle, so every battle here exists only because somebody who was in it runs the unicum.gg mod and shares them. A player's history therefore begins the day someone in their battles started sharing, and an empty list means nobody has, not that they have not played. 404 when the nickname is unknown in this region.
+         * @description A player's most recent battles: the map, the mode, the vehicle they brought and what it did, newest first. Wargaming publishes an account's running totals and nothing about a single battle, so every battle here exists only because somebody who was in it runs the unicum.gg mod and shares them. A player's history therefore begins the day someone in their battles started sharing, and an empty list means nobody has, not that they have not played. A player may keep this list to themselves: it then answers `hidden: true` with no battles to anyone but them, signed in. 404 when the nickname is unknown in this region.
          */
         get: operations["get-{region}-players-{nickname}-battles"];
         put?: never;
@@ -2845,8 +2845,8 @@ export interface components {
             /** @description Wargaming account id, absent for a bot. */
             account?: number;
             team: number;
-            /** @description `typeCompDescr` of the vehicle the account brought. */
-            tank: number;
+            /** @description `typeCompDescr` of the vehicle the account brought, null when the client did not report it. The vehicle is still a real participant, with its account, team and counters; only the tank is unnamed, and `tank` on the battle row is then null too. */
+            tank: number | null;
             damage: number;
             /** @description Damage assisted by spotting. */
             radio: number;
@@ -3748,6 +3748,12 @@ export interface components {
             /** @description Stream language, ISO 639-1. */
             language: string;
             thumbnailUrl: string;
+            /** @description Every WoT account linked to this channel. The fields above describe the one the card shows, which is the most active of them. Absent from a snapshot published before this field existed. */
+            accounts?: {
+                /** @enum {string} */
+                region: "eu" | "na" | "asia";
+                accountId: number;
+            }[];
         };
         LiveStreamersResponse: {
             results: components["schemas"]["LiveStreamer"][];
@@ -5134,6 +5140,8 @@ export interface components {
             total: number;
             /** @description Present when `facets=true` was asked for. */
             facets?: components["schemas"]["PlayerBattleFacets"];
+            /** @description The player keeps their battle list to themselves. Anyone else then gets an empty list and a zero total; the player, signed in, gets their own battles as usual. */
+            hidden?: boolean;
         };
         /** @description A player's current clan, from cached data only (no live Wargaming call). `clan` is null when the player is not in a clan or is not yet cached. */
         PlayerClan: {
@@ -5210,8 +5218,10 @@ export interface components {
             tankCount: number;
             achievementCount: number;
             tournamentCount: number;
-            /** @description Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed. */
+            /** @description Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed, and when the player keeps their battles private. */
             battleCount?: number;
+            /** @description The player keeps their battle list to themselves: the battles endpoint answers them alone, and `battleCount` is withheld. */
+            battlesHidden?: boolean;
             /** @description What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it. `verifiedAt` is when the account's own owner last confirmed their garage by signing in with Wargaming.net ID, and it is what separates a figure from an estimate: null means this prices every vehicle the account has ever DRIVEN, because `in_garage` is null for any caller but the account itself, so vehicles sold years ago are still counted and vehicles bought and never driven are missing entirely. */
             valuation: {
                 account: {

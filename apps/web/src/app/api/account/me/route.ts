@@ -10,6 +10,12 @@ import {
   setLoadoutHidden,
 } from "@unicum.gg/core/tanks/loadouts";
 import { isTwitchEnabled } from "@unicum.gg/core/twitch";
+import {
+  isBattlesHidden,
+  setBattlesHidden,
+} from "@unicum.gg/core/battles/privacy";
+import { isRegion } from "@unicum.gg/wargaming";
+import { revalidatePlayerProfile } from "@/services/players/revalidate";
 
 // Per-session account state; not cacheable.
 export const dynamic = "force-dynamic";
@@ -30,7 +36,8 @@ export const dynamic = "force-dynamic";
  *
  * `supporter` rides along for the same reason `/api/game/me` carries it: the
  * loadout switch is a supporter's, and a switch offered to somebody who may
- * not use it, or one whose position is guessed, is worse than none.
+ * not use it, or one whose position is guessed, is worse than none. The battle
+ * list switch beside it is everybody's.
  */
 export async function GET(): Promise<Response> {
   const available = {
@@ -47,6 +54,7 @@ export async function GET(): Promise<Response> {
       discord: null,
       supporter: false,
       loadoutsHidden: false,
+      battlesHidden: false,
     });
   }
   const [connections, supporter, wargaming] = await Promise.all([
@@ -60,22 +68,30 @@ export async function GET(): Promise<Response> {
     ...connections,
     supporter,
     loadoutsHidden: wargaming ? await isLoadoutHidden(wargaming) : false,
+    battlesHidden: wargaming ? await isBattlesHidden(wargaming) : false,
   });
 }
 
 /**
- * Hide this player's loadouts from their public page, or show them again.
+ * Change one of this account's privacy switches: `loadoutsHidden`,
+ * `battlesHidden`, or both in one body.
  *
- * The same switch as `PATCH /api/game/me`, from the other side: that one is
+ * The same switches as `PATCH /api/game/me`, from the other side: that one is
  * drawn by the mod's own settings window and acts for a game client's secret,
  * this one is drawn by the settings dialog and acts for a signed-in session.
- * Both end at `setLoadoutHidden`, so the two can never disagree on what the
+ * Both end at the same setters, so the two can never disagree on what the
  * player asked for, and the gates are repeated rather than shared because each
  * side resolves its account differently.
  *
- * Distinct from unticking "share my loadouts" in the mod, which stops the
- * uploads and deletes what was sent. This one keeps contributing to the
- * population figures and only takes the panel off the player's own page.
+ * Hiding the loadouts is a supporter's switch. Distinct from unticking "share
+ * my loadouts" in the mod, which stops the uploads and deletes what was sent:
+ * this one keeps contributing to the population figures and only takes the
+ * panel off the player's own page.
+ *
+ * Hiding the battles is everybody's: it is asked for by players whose team
+ * practice would otherwise be readable by whoever they face next, and charging
+ * for it would put a price on keeping that quiet. The battles keep arriving;
+ * only the profile's Battles tab answers its owner alone.
  */
 export async function PATCH(req: Request): Promise<Response> {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -84,25 +100,45 @@ export async function PATCH(req: Request): Promise<Response> {
   }
   const body = (await req.json().catch(() => null)) as {
     loadoutsHidden?: unknown;
+    battlesHidden?: unknown;
   } | null;
-  if (typeof body?.loadoutsHidden !== "boolean") {
+  const loadoutsHidden = body?.loadoutsHidden;
+  const battlesHidden = body?.battlesHidden;
+  const valid =
+    (loadoutsHidden === undefined || typeof loadoutsHidden === "boolean") &&
+    (battlesHidden === undefined || typeof battlesHidden === "boolean") &&
+    (loadoutsHidden !== undefined || battlesHidden !== undefined);
+  if (!valid) {
     return NextResponse.json({ error: "invalid_body" }, { status: 400 });
   }
   const [supporter, wargaming] = await Promise.all([
-    isSupporter(session.user.id),
+    loadoutsHidden === undefined ? true : isSupporter(session.user.id),
     wargamingAccountOf(session.user.id),
   ]);
   if (!supporter) {
     return NextResponse.json({ error: "not_a_supporter" }, { status: 403 });
   }
   if (!wargaming) {
-    // Nothing to hide: the loadouts are keyed by the Wargaming account, and
+    // Nothing to hide: both switches are keyed by the Wargaming account, and
     // this session has none bound to it.
     return NextResponse.json(
       { error: "no_wargaming_account" },
       { status: 409 },
     );
   }
-  await setLoadoutHidden(wargaming, session.user.id, body.loadoutsHidden);
-  return NextResponse.json({ loadoutsHidden: body.loadoutsHidden });
+  if (typeof loadoutsHidden === "boolean") {
+    await setLoadoutHidden(wargaming, session.user.id, loadoutsHidden);
+  }
+  if (typeof battlesHidden === "boolean") {
+    await setBattlesHidden(wargaming, session.user.id, battlesHidden);
+    // The account key is `<region>-<account id>`, and the session's user
+    // carries the nickname the Wargaming sign-in gave it, which is the
+    // profile's. Dropped now rather than when the day-long cache runs out.
+    const region = wargaming.split("-")[0];
+    if (isRegion(region)) revalidatePlayerProfile(region, session.user.name);
+  }
+  return NextResponse.json({
+    loadoutsHidden: await isLoadoutHidden(wargaming),
+    battlesHidden: await isBattlesHidden(wargaming),
+  });
 }

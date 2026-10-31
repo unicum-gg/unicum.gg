@@ -68,6 +68,7 @@ import type { Region } from "@unicum.gg/wargaming";
 import { countEarnedAchievements } from "@unicum.gg/core/players/achievements";
 import { countPlayerTournaments } from "@unicum.gg/core/tournaments/read";
 import { countPlayerBattles } from "@unicum.gg/core/battles/read";
+import { isBattlesHidden } from "@unicum.gg/core/battles/privacy";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import {
@@ -123,6 +124,7 @@ export async function buildPlayerDetail(args: {
     battleCount,
     moeThresholds,
     garage,
+    battlesHidden,
   ] = await Promise.all([
     withDisbandedFlags(region, args.clanHistory),
     getVehicleEncyclopedia(region),
@@ -156,6 +158,10 @@ export async function buildPlayerDetail(args: {
     // verified account, so it rides this batch rather than costing the profile
     // a round trip, and it answers null for everybody else.
     loadPlayerGarage(region, accountId),
+    // The owner may keep their battle list to themselves, and then the count
+    // goes too: "Battles (312)" on a tab that refuses to list them would still
+    // say how much they play the modes they asked to keep quiet.
+    isBattlesHidden(`${region}-${accountId}`),
   ]);
   // Lite economics map for the vehicle rows' account-value fields.
   const economics = new Map<number, TankEconomics>();
@@ -337,7 +343,7 @@ export async function buildPlayerDetail(args: {
     tankCount: vehicles.length,
     achievementCount,
     tournamentCount,
-    battleCount,
+    ...(battlesHidden ? { battlesHidden } : { battleCount }),
     valuation: computePlayerValuation(vehicles, region, garage?.verifiedAt),
     markProgress,
     liftDrag: tracedSync("liftDrag", () => ({

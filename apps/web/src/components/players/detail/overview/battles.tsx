@@ -31,6 +31,9 @@ export type PlayerBattlesPayload = {
   total: number;
   /** What the filters can offer, when the request asked for it. */
   facets?: BattleFacets;
+  /** The owner keeps the list to themselves. A visitor then gets no battles,
+   * the owner gets their own. */
+  hidden?: boolean;
 };
 
 /**
@@ -95,6 +98,9 @@ export function PlayerBattlesPanel({
   // paint, so this only waits when the server could not read the list, and a
   // request that failed says nothing either way about who has shared.
   if (!data) return null;
+  // A private list has nothing to offer a visitor, not even the mod pitch the
+  // empty state carries: it is not empty, it is not theirs to read.
+  if (data.hidden && data.battles.length === 0) return null;
   const empty = data.battles.length === 0;
 
   return (

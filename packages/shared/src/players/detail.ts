@@ -126,6 +126,11 @@ export type PlayerDetailData = {
    * and an entry written before this field existed is served without it.
    */
   battleCount?: number;
+  /**
+   * The owner keeps their battle list to themselves. `battleCount` is then
+   * absent, and the Battles tab answers its owner alone.
+   */
+  battlesHidden?: boolean;
   // What the garage would cost to rebuild at the official store, computed from
   // the vehicle rows. See `./valuation`.
   valuation: PlayerValuation;

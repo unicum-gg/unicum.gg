@@ -173,6 +173,11 @@ export function makeTankLoadoutsTable(region: string) {
  * on the unicum.gg user, so the read path can check it without resolving an
  * account back to a login it may not have. `userId` records who set it, which
  * is who signed in to do so.
+ *
+ * It also carries the player's other privacy choice, `battlesHidden`, which is
+ * why a row can exist with `hidden` false. The two are independent on purpose:
+ * taking one's battle list off one's profile says nothing about whether one's
+ * loadouts may be attributed, and the reverse.
  */
 export const loadoutPrivacy = pgTable("loadout_privacy", {
   /** `<region>-<account id>`, as the Wargaming sign-in stores it. */
@@ -181,6 +186,14 @@ export const loadoutPrivacy = pgTable("loadout_privacy", {
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
   hidden: boolean("hidden").notNull().default(true),
+  /**
+   * The player's battle list is shown to them alone. Collection is untouched:
+   * the battles are still received, still counted in every aggregate, still
+   * reachable from the other players who were in them. What it governs is the
+   * profile's own Battles tab, which is the one place a reader goes to read
+   * this player's games one after another.
+   */
+  battlesHidden: boolean("battles_hidden").notNull().default(false),
   updatedAt: timestamp("updated_at", { withTimezone: true })
     .notNull()
     .defaultNow(),

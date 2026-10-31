@@ -412,7 +412,11 @@ export const PlayerDetailResponse = z.object({
   tournamentCount: z.number(),
   battleCount: z.number().optional().meta({
     description:
-      "Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed.",
+      "Battles shared through the unicum.gg mod that this account fought. Absent from a payload cached before the field existed, and when the player keeps their battles private.",
+  }),
+  battlesHidden: z.boolean().optional().meta({
+    description:
+      "The player keeps their battle list to themselves: the battles endpoint answers them alone, and `battleCount` is withheld.",
   }),
   valuation: z
     .object({

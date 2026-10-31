@@ -1,4 +1,7 @@
+import { headers } from "next/headers";
 import { isRegion } from "@unicum.gg/wargaming";
+import { auth } from "@unicum.gg/core/auth";
+import { isBattlesHidden } from "@unicum.gg/core/battles/privacy";
 import {
   MAX_RECENT_BATTLES,
   RECENT_BATTLES,
@@ -13,10 +16,11 @@ import { pictureBattleRows } from "@/services/battles/rows";
 import { measured } from "@/services/perf";
 import { playerBattleFacets } from "@unicum.gg/core/battles/filters";
 import { battleFilterFrom } from "@/services/battles/filter";
+import { wgIdentityFromEmail } from "@/lib/wg-session";
 
 /**
  * Player battles
- * @description A player's most recent battles: the map, the mode, the vehicle they brought and what it did, newest first. Wargaming publishes an account's running totals and nothing about a single battle, so every battle here exists only because somebody who was in it runs the unicum.gg mod and shares them. A player's history therefore begins the day someone in their battles started sharing, and an empty list means nobody has, not that they have not played. 404 when the nickname is unknown in this region.
+ * @description A player's most recent battles: the map, the mode, the vehicle they brought and what it did, newest first. Wargaming publishes an account's running totals and nothing about a single battle, so every battle here exists only because somebody who was in it runs the unicum.gg mod and shares them. A player's history therefore begins the day someone in their battles started sharing, and an empty list means nobody has, not that they have not played. A player may keep this list to themselves: it then answers `hidden: true` with no battles to anyone but them, signed in. 404 when the nickname is unknown in this region.
  * @pathParams playerLiveParams
  * @queryParams playerBattlesQuery
  * @response PlayerBattlesResponse
@@ -52,6 +56,29 @@ async function GET__perf(
     if (!account) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
+    // The resolver answers null when it found the account without a name to
+    // go with it, which a rename history lookup can. The asked-for name is
+    // then the only one there is, and it is the one the reader typed.
+    const nicknameNow = account.nickname ?? decoded;
+
+    // A private list is answered per reader, so neither of its two answers may
+    // sit in a shared cache: the owner's would be served to the next visitor,
+    // and the refusal would be served to the owner.
+    const hidden = await isBattlesHidden(`${region}-${account.accountId}`);
+    if (hidden && !(await isOwner(region, account.accountId))) {
+      return jsonResponse(
+        PlayerBattlesResponse,
+        {
+          accountId: account.accountId,
+          nickname: nicknameNow,
+          total: 0,
+          battles: [],
+          hidden,
+        },
+        { headers: { "cache-control": "private, no-store" } },
+      );
+    }
+
     const [battles, total, facets] = await Promise.all([
       recentBattlesOf(
         region,
@@ -78,12 +105,10 @@ async function GET__perf(
       PlayerBattlesResponse,
       {
         accountId: account.accountId,
-        // The resolver answers null when it found the account without a name
-        // to go with it, which a rename history lookup can. The asked-for name
-        // is then the only one there is, and it is the one the reader typed.
-        nickname: account.nickname ?? decoded,
+        nickname: nicknameNow,
         total,
         ...(facets ? { facets } : {}),
+        ...(hidden ? { hidden } : {}),
         // `devices` is pulled OUT of the spread rather than written over it:
         // the database layer hands back catalogue KEYS under that name and
         // this answer carries PICTURES, so spreading first would put both
@@ -91,11 +116,20 @@ async function GET__perf(
         battles: pictured,
       },
       contentLanguage(served, {
-        headers: { "cache-control": "public, max-age=60" },
+        headers: {
+          "cache-control": hidden ? "private, no-store" : "public, max-age=60",
+        },
       }),
     );
   } catch (err) {
     console.error(`[api/${region}/players/${decoded}/battles] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });
   }
+}
+
+/** Whether the signed-in reader is this account, on this region. */
+async function isOwner(region: string, accountId: number): Promise<boolean> {
+  const session = await auth.api.getSession({ headers: await headers() });
+  const wg = wgIdentityFromEmail(session?.user?.email);
+  return !!wg && wg.region === region && wg.accountId === accountId;
 }

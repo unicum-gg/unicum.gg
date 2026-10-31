@@ -211,6 +211,7 @@ export function PlayerProfile({
         initialOnslaught={initialOnslaught}
         initialBattles={initialBattles}
         initialEncounters={initialEncounters}
+        isOwnProfile={isOwnProfile}
       />
     </>
   );

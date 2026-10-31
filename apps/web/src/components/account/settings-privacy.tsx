@@ -2,27 +2,40 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useSWRConfig } from "swr";
+import { useSession } from "@/lib/auth-client";
 import Link from "@/components/link";
 import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import ROUTES from "@/constants/routes";
 import { useTranslation } from "@/hooks/use-translation";
+import { wgIdentityFromEmail } from "@/lib/wg-session";
+import { applyBattlesPrivacy } from "@/services/swr/battles-privacy";
 import { SettingsRow } from "./settings-row";
 
 type PrivacyState = {
   loggedIn: boolean;
   supporter: boolean;
   loadoutsHidden: boolean;
+  battlesHidden: boolean;
 };
+
+/** The switches this section draws, named as `/api/account/me` names them. */
+type PrivacySwitch = "loadoutsHidden" | "battlesHidden";
 
 /**
  * What the account chooses to publish about itself.
  *
- * One switch today, the loadouts the game mod uploads. It had no control on the
- * site at all: the flag has existed in `loadout_privacy` since the mod shipped
- * and was reachable only from the mod's own settings window, so a player who
- * had uninstalled it, or who was simply sitting at their profile, could not
- * take their builds off the tables that quote them.
+ * The loadouts the game mod uploads, first. They had no control on the site at
+ * all: the flag has existed in `loadout_privacy` since the mod shipped and was
+ * reachable only from the mod's own settings window, so a player who had
+ * uninstalled it, or who was simply sitting at their profile, could not take
+ * their builds off the tables that quote them.
+ *
+ * Then the battle list, which everybody may hide: it was asked for by players
+ * whose team practice would otherwise be one profile tab away from whoever
+ * they face next, and most of them have never installed the mod at all, since
+ * a battle reaches us through whoever in it did.
  *
  * The switch is drawn for everybody and disabled for a non-supporter, rather
  * than hidden from them. Hiding it is what makes a feature invisible to exactly
@@ -47,30 +60,38 @@ export function SettingsPrivacy() {
     };
   }, []);
 
+  const { cache, mutate } = useSWRConfig();
+  const { data: session } = useSession();
+  const accountId = wgIdentityFromEmail(session?.user?.email)?.accountId;
+
   const toggle = useCallback(
-    (hidden: boolean) => {
+    (key: PrivacySwitch, hidden: boolean) => {
       // Moved before the request and put back if it fails, so the switch
       // answers the press rather than the round trip. A switch that waits reads
       // as a switch that did not take.
-      setState((prev) => (prev ? { ...prev, loadoutsHidden: hidden } : prev));
+      setState((prev) => (prev ? { ...prev, [key]: hidden } : prev));
       setSaving(true);
       fetch("/api/account/me", {
         method: "PATCH",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ loadoutsHidden: hidden }),
+        body: JSON.stringify({ [key]: hidden }),
       })
         .then((r) => {
           if (!r.ok) throw new Error(String(r.status));
+          // The profile under the dialog follows at once, rather than at the
+          // next reload: the battle list appears or disappears as the switch
+          // moves.
+          if (key === "battlesHidden" && accountId !== undefined) {
+            applyBattlesPrivacy(cache, mutate, accountId, hidden);
+          }
         })
         .catch(() => {
-          setState((prev) =>
-            prev ? { ...prev, loadoutsHidden: !hidden } : prev,
-          );
+          setState((prev) => (prev ? { ...prev, [key]: !hidden } : prev));
           toast.error(t("could-not-save"));
         })
         .finally(() => setSaving(false));
     },
-    [t],
+    [t, cache, mutate, accountId],
   );
 
   if (!state) {
@@ -84,6 +105,20 @@ export function SettingsPrivacy() {
 
   return (
     <div>
+      {/* First, as the one every player can use: the loadout switch below is
+          a supporter's, and its note about what keeps counting closes the
+          section because it is about that switch alone. */}
+      <SettingsRow
+        label={t("hide-battles")}
+        description={t("hide-battles-description")}
+      >
+        <Switch
+          checked={state.battlesHidden}
+          onCheckedChange={(hidden) => toggle("battlesHidden", hidden)}
+          disabled={saving}
+          aria-label={t("hide-battles")}
+        />
+      </SettingsRow>
       <SettingsRow
         label={t("hide-loadouts")}
         description={
@@ -104,7 +139,7 @@ export function SettingsPrivacy() {
       >
         <Switch
           checked={state.loadoutsHidden}
-          onCheckedChange={toggle}
+          onCheckedChange={(hidden) => toggle("loadoutsHidden", hidden)}
           disabled={!state.supporter || saving}
           aria-label={t("hide-loadouts")}
         />
