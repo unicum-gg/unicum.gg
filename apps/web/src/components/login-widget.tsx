@@ -1,11 +1,12 @@
 "use client";
 
-import { SignOutIcon } from "@phosphor-icons/react";
+import { GearSixIcon } from "@phosphor-icons/react";
 import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { useEffect, useState } from "react";
-import { signOut, useSession } from "@/lib/auth-client";
+import { useSession } from "@/lib/auth-client";
 import { LoginButton } from "@/components/login-button";
+import { SettingsDialog } from "@/components/account/settings-dialog";
 import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
 import { useTranslation } from "@/hooks/use-translation";
@@ -18,12 +19,20 @@ type UserClanTag = { tag: string; name: string; color: string };
  * Top-bar Wargaming.net ID login, styled after WG's own discreet top-right
  * link. Logged out: a "Log in" link that opens the region picker, which is
  * where the WG OpenID redirect is started from. Logged in: the nickname
- * (linking to the player's own profile, where account actions like connecting
- * Twitch live), their current clan tag, plus a log out.
+ * (linking to the player's own profile), their current clan tag, plus the way
+ * into the account's settings.
+ *
+ * Settings rather than the log out that used to sit here. Signing out is the
+ * one account action a reader performs deliberately and almost never, so it
+ * moved inside the dialog, and what takes its place opens everything the
+ * account can change. The dialog is deliberately NOT the one claiming the
+ * OAuth return flag: this widget is on every page, and two mounts claiming it
+ * would both open at once on the pages that already have their own.
  */
 export function LoginWidget() {
   const { t } = useTranslation("components/login-widget");
   const { data: session, isPending } = useSession();
+  const [settingsOpen, setSettingsOpen] = useState(false);
   // Keyed by user id so a stale tag from a previous session is never shown
   // (and so we never need a synchronous clear on logout).
   const [clan, setClan] = useState<{
@@ -100,23 +109,20 @@ export function LoginWidget() {
     return (
       <span className="flex min-w-0 items-center gap-2">
         {name}
-        <Hint content={t("logout")}>
+        <Hint content={t("settings")}>
           <button
             type="button"
-            onClick={() =>
-              signOut({
-                fetchOptions: { onSuccess: () => window.location.reload() },
-              })
-            }
-            aria-label={t("logout")}
+            onClick={() => setSettingsOpen(true)}
+            aria-label={t("settings")}
             className="shrink-0 cursor-pointer text-fd-muted-foreground transition-colors hover:text-fd-foreground"
           >
             {/* An icon on a phone, where the words would cost a third of the
                 strip. The label stays the accessible name either way. */}
-            <span className="hidden sm:inline">{t("logout")}</span>
-            <SignOutIcon className="size-4 sm:hidden" aria-hidden />
+            <span className="hidden sm:inline">{t("settings")}</span>
+            <GearSixIcon className="size-4 sm:hidden" aria-hidden />
           </button>
         </Hint>
+        <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
       </span>
     );
   }

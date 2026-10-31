@@ -1,0 +1,16 @@
+{
+  "title": "Settings",
+  "description": "The settings that belong to your account.",
+  "section-account": "Account",
+  "section-account-description": "Who you are here, and what you have connected to it.",
+  "section-privacy": "Privacy",
+  "section-privacy-description": "What your account publishes about itself.",
+  "log-out": "Log out",
+  "log-out-description": "Ends this session on this device. Nothing is deleted.",
+  "loading": "Reading your account",
+  "could-not-save": "Could not save that. Try again in a moment.",
+  "hide-loadouts": "Hide my loadouts",
+  "hide-loadouts-description": "Takes your builds off your own page and off the tables that name a player.",
+  "supporters-only": "Supporters only.",
+  "loadouts-still-counted": "Your battles still count towards the figures every vehicle’s loadouts tab is built from, with nothing naming you. To stop sending them at all, untick sharing in the game mod, which also deletes what it has already sent."
+}

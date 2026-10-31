@@ -1,10 +1,10 @@
 "use client";
 
-import { UserGearIcon } from "@phosphor-icons/react";
+import { GearSixIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { AuthProvider } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-import { ConnectionsDialog } from "@/components/account/connections-dialog";
+import { SettingsDialog } from "@/components/account/settings-dialog";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { useTranslation } from "@/hooks/use-translation";
 import { authClient, useSession } from "@/lib/auth-client";
@@ -12,12 +12,12 @@ import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { Hint } from "@/components/hint";
 
 /**
- * Connected accounts, on the one page a player already thinks of as theirs.
+ * The account's settings, on the one page a player already thinks of as theirs.
  *
  * A button beside Compare and the overflow menu rather than an entry inside the
  * menu, because connecting is already offered in several places across the site
  * and disconnecting was offered in none: a reader looking for it has to find it
- * without being told where, and a `⋯` is where things go that a reader is not
+ * without being told where, and a `...` is where things go that a reader is not
  * expected to look for. Same chrome as `CompareWithButton` next to it, so the
  * row stays one row of controls rather than one control and a special case.
  *
@@ -31,14 +31,14 @@ import { Hint } from "@/components/hint";
  * with a hydration error. `AddChannelCta` carries the same gate for the same
  * collision.
  */
-export function PlayerConnectionsButton({
+export function PlayerSettingsButton({
   region,
   accountId,
 }: {
   region: Region;
   accountId: number;
 }) {
-  const { t } = useTranslation("components/players/detail/connections-button");
+  const { t } = useTranslation("components/players/detail/settings-button");
   const { data: session } = useSession();
   const hydrated = useHydrated();
   const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ export function PlayerConnectionsButton({
 
   // The nudge: an orange dot while Twitch is unconnected, which is what used to
   // live on the overflow menu. `listAccounts` rather than `/api/account/me`,
-  // which this dialog reads when it opens: that one resolves the channel name
+  // which the dialog reads when it opens: that one resolves the channel name
   // and the Discord handle from their own APIs, and a dot needs neither.
   const [twitchLinked, setTwitchLinked] = useState<boolean | null>(null);
   useEffect(() => {
@@ -78,14 +78,14 @@ export function PlayerConnectionsButton({
           the tooltip never replaces: one describes, the other names. The
           overflow menu beside it carries the same pair, since the two are one
           row of controls and must not behave differently on hover. */}
-      <Hint content={t("connected-accounts")}>
+      <Hint content={t("settings")}>
         <button
           type="button"
           onClick={() => setOpen(true)}
-          aria-label={t("connected-accounts")}
+          aria-label={t("settings")}
           className="relative inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
         >
-          <UserGearIcon className="size-3.5" weight="bold" />
+          <GearSixIcon className="size-3.5" weight="bold" />
           {needsTwitch ? (
             <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-brand ring-2 ring-fd-background" />
           ) : null}
@@ -94,7 +94,7 @@ export function PlayerConnectionsButton({
 
       {/* This page is where a connect round trip comes back to, so this is the
           mount that reads the flag and reopens. */}
-      <ConnectionsDialog open={open} onOpenChange={setOpen} reopenOnReturn />
+      <SettingsDialog open={open} onOpenChange={setOpen} reopenOnReturn />
     </>
   );
 }

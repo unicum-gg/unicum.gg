@@ -16,7 +16,7 @@ import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
 import { PlayerActionsMenu } from "@/components/players/detail/actions-menu";
-import { PlayerConnectionsButton } from "@/components/players/detail/connections-button";
+import { PlayerSettingsButton } from "@/components/players/detail/settings-button";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import type { ClanStint } from "@unicum.gg/shared";
 import { Interpolate } from "@/components/interpolate";
@@ -123,7 +123,7 @@ export function PlayerHeader(
           </h1>
           <CompareWithButton region={region} current={nickname} />
           {/* Renders nothing on anybody else's profile. */}
-          <PlayerConnectionsButton region={region} accountId={accountId} />
+          <PlayerSettingsButton region={region} accountId={accountId} />
           <PlayerActionsMenu
             region={region}
             accountId={accountId}
