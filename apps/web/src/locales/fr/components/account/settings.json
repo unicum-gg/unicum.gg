@@ -12,5 +12,7 @@
   "hide-loadouts": "Masquer mes configurations",
   "hide-loadouts-description": "Retire vos configurations de votre propre page et des tableaux qui mentionnent un joueur.",
   "supporters-only": "Supporters uniquement.",
-  "loadouts-still-counted": "Vos batailles continuent de compter dans les chiffres sur lesquels est construit l’onglet des configurations de chaque véhicule, sans rien qui permette de vous identifier. Pour cesser totalement de les envoyer, décochez le partage dans le mod du jeu, ce qui supprime également les données déjà envoyées."
+  "loadouts-still-counted": "Vos batailles continuent de compter dans les chiffres sur lesquels est construit l’onglet des configurations de chaque véhicule, sans rien qui permette de vous identifier. Pour cesser totalement de les envoyer, décochez le partage dans le mod du jeu, ce qui supprime également les données déjà envoyées.",
+  "hide-battles": "Masquer mes batailles",
+  "hide-battles-description": "Vous seul pouvez voir l’onglet Batailles de votre profil. Vos batailles continuent d’être enregistrées, comptent toujours dans les statistiques du site et restent visibles sur les pages des autres joueurs qui y ont participé."
 }

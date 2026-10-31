@@ -12,5 +12,7 @@
   "hide-loadouts": "Skjul mine opsætninger",
   "hide-loadouts-description": "Fjerner dine opsætninger fra din egen side og fra de tabeller, der navngiver en spiller.",
   "supporters-only": "Kun for Supportere.",
-  "loadouts-still-counted": "Dine kampe tæller stadig med i de tal, som hver kampvogns fane med opsætninger er bygget ud fra, uden at noget navngiver dig. Hvis du vil stoppe med at sende dem helt, skal du fjerne markeringen for deling i spilmoddet, som også sletter det, der allerede er sendt."
+  "loadouts-still-counted": "Dine kampe tæller stadig med i de tal, som hver kampvogns fane med opsætninger er bygget ud fra, uden at noget navngiver dig. Hvis du vil stoppe med at sende dem helt, skal du fjerne markeringen for deling i spilmoddet, som også sletter det, der allerede er sendt.",
+  "hide-battles": "Skjul mine kampe",
+  "hide-battles-description": "Kun du kan se fanen Kampe på din profil. Dine kampe bliver fortsat registreret, tæller stadig med i webstedets statistik og forbliver synlige på siderne for de andre spillere, der deltog i dem."
 }

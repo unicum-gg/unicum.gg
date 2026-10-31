@@ -12,5 +12,7 @@
   "hide-loadouts": "Ascunde-mi configurațiile",
   "hide-loadouts-description": "Îți elimină configurațiile de pe propria pagină și din tabelele care numesc un jucător.",
   "supporters-only": "Doar pentru Suportatori.",
-  "loadouts-still-counted": "Bătăliile tale sunt în continuare luate în calcul pentru cifrele din care este construită fila de configurații a fiecărui vehicul, fără nimic care să te numească. Pentru a opri complet trimiterea lor, debifează partajarea din mod, care șterge și ceea ce a trimis deja."
+  "loadouts-still-counted": "Bătăliile tale sunt în continuare luate în calcul pentru cifrele din care este construită fila de configurații a fiecărui vehicul, fără nimic care să te numească. Pentru a opri complet trimiterea lor, debifează partajarea din mod, care șterge și ceea ce a trimis deja.",
+  "hide-battles": "Ascunde bătăliile mele",
+  "hide-battles-description": "Doar tu poți vedea fila Lupte a profilului tău. Bătăliile tale continuă să fie înregistrate, sunt în continuare luate în calcul în statisticile site-ului și rămân vizibile pe paginile celorlalți jucători care au participat la ele."
 }

@@ -12,5 +12,7 @@
   "hide-loadouts": "Skrýt moje sestavy",
   "hide-loadouts-description": "Odebere vaše sestavy z vaší stránky i z tabulek uvádějících hráče.",
   "supporters-only": "Pouze pro podporovatele.",
-  "loadouts-still-counted": "Vaše bitvy se stále započítávají do údajů, ze kterých se vytváří karta sestav každého vozidla, aniž by vás cokoli identifikovalo. Pokud chcete zcela zastavit jejich odesílání, zrušte zaškrtnutí sdílení v herním modu, který také smaže vše, co již odeslal."
+  "loadouts-still-counted": "Vaše bitvy se stále započítávají do údajů, ze kterých se vytváří karta sestav každého vozidla, aniž by vás cokoli identifikovalo. Pokud chcete zcela zastavit jejich odesílání, zrušte zaškrtnutí sdílení v herním modu, který také smaže vše, co již odeslal.",
+  "hide-battles": "Skrýt moje bitvy",
+  "hide-battles-description": "Pouze vy můžete vidět záložku Bitvy ve svém profilu. Vaše bitvy zůstávají zaznamenané, stále se započítávají do statistik webu a zůstávají viditelné na stránkách ostatních hráčů, kteří se jich zúčastnili."
 }

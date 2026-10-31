@@ -12,5 +12,7 @@
   "hide-loadouts": "Sakrij moje konfiguracije",
   "hide-loadouts-description": "Uklanja vaše konfiguracije s vaše stranice i iz tabela koje navode ime igrača.",
   "supporters-only": "Samo za podržavatelje.",
-  "loadouts-still-counted": "Vaše bitke se i dalje računaju prema brojkama na kojima se zasniva kartica konfiguracija svakog vozila, bez ičega što navodi vaše ime. Da biste ih potpuno prestali slati, isključite dijeljenje u modu igre, koji takođe briše podatke koje je već poslao."
+  "loadouts-still-counted": "Vaše bitke se i dalje računaju prema brojkama na kojima se zasniva kartica konfiguracija svakog vozila, bez ičega što navodi vaše ime. Da biste ih potpuno prestali slati, isključite dijeljenje u modu igre, koji takođe briše podatke koje je već poslao.",
+  "hide-battles": "Sakrij moje bitke",
+  "hide-battles-description": "Samo vi možete vidjeti karticu Bitke na svom profilu. Vaše bitke i dalje ostaju zabilježene, i dalje se broje u statistiku stranice i ostaju vidljive na stranicama drugih igrača koji su učestvovali u njima."
 }

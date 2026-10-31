@@ -12,5 +12,7 @@
   "hide-loadouts": "Slėpti mano komplektacijas",
   "hide-loadouts-description": "Pašalina jūsų sąrankas iš jūsų puslapio ir lentelių, kuriose nurodytas žaidėjo vardas.",
   "supporters-only": "Tik rėmėjams.",
-  "loadouts-still-counted": "Jūsų mūšiai vis dar įskaičiuojami į rodiklius, iš kurių sudaromas kiekvienos transporto priemonės komplektacijų skirtukas, tačiau jūsų vardas nenurodomas. Jei norite visiškai nustoti juos siųsti, žaidimo mode panaikinkite bendrinimo žymėjimą. Taip pat bus ištrinta tai, ką jis jau išsiuntė."
+  "loadouts-still-counted": "Jūsų mūšiai vis dar įskaičiuojami į rodiklius, iš kurių sudaromas kiekvienos transporto priemonės komplektacijų skirtukas, tačiau jūsų vardas nenurodomas. Jei norite visiškai nustoti juos siųsti, žaidimo mode panaikinkite bendrinimo žymėjimą. Taip pat bus ištrinta tai, ką jis jau išsiuntė.",
+  "hide-battles": "Slėpti mano mūšius",
+  "hide-battles-description": "Tik jūs galite matyti savo profilio Mūšių skirtuką. Jūsų mūšiai toliau yra užfiksuoti, vis dar įskaičiuojami į svetainės statistiką ir lieka matomi kitų juose dalyvavusių žaidėjų puslapiuose."
 }

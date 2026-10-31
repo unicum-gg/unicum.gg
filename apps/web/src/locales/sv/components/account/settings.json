@@ -12,5 +12,7 @@
   "hide-loadouts": "Dölj mina utrustningar",
   "hide-loadouts-description": "Tar bort dina byggen från din egen sida och från tabellerna som namnger en spelare.",
   "supporters-only": "Endast för Supporter.",
-  "loadouts-still-counted": "Dina strider räknas fortfarande mot de siffror som varje fordons utrustningsflik bygger på, utan något som namnger dig. Om du vill sluta skicka dem helt, avmarkera delning i spelmodden, vilket också raderar det som den redan har skickat."
+  "loadouts-still-counted": "Dina strider räknas fortfarande mot de siffror som varje fordons utrustningsflik bygger på, utan något som namnger dig. Om du vill sluta skicka dem helt, avmarkera delning i spelmodden, vilket också raderar det som den redan har skickat.",
+  "hide-battles": "Dölj mina strider",
+  "hide-battles-description": "Endast du kan se fliken Strider i din profil. Dina strider är fortfarande registrerade, räknas fortfarande i webbplatsens statistik och förblir synliga på sidorna för de andra spelarna som var med i dem."
 }

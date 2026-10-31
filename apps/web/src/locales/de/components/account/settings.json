@@ -12,5 +12,7 @@
   "hide-loadouts": "Meine Ausstattungen ausblenden",
   "hide-loadouts-description": "Entfernt deine Builds von deiner eigenen Seite und aus den Tabellen, in denen ein Spieler genannt wird.",
   "supporters-only": "Nur Unterstützer.",
-  "loadouts-still-counted": "Deine Gefechte zählen weiterhin zu den Werten, aus denen der Tab für die Ausstattungen jedes Fahrzeugs erstellt wird, ohne dass du genannt wirst. Um sie überhaupt nicht mehr zu senden, deaktiviere die Freigabe im Spiel-Mod. Dadurch wird auch gelöscht, was es bereits gesendet hat."
+  "loadouts-still-counted": "Deine Gefechte zählen weiterhin zu den Werten, aus denen der Tab für die Ausstattungen jedes Fahrzeugs erstellt wird, ohne dass du genannt wirst. Um sie überhaupt nicht mehr zu senden, deaktiviere die Freigabe im Spiel-Mod. Dadurch wird auch gelöscht, was es bereits gesendet hat.",
+  "hide-battles": "Meine Gefechte ausblenden",
+  "hide-battles-description": "Nur du kannst den Tab „Gefechte“ deines Profils sehen. Deine Gefechte werden weiterhin aufgezeichnet, zählen weiterhin in den Statistiken der Website und bleiben auf den Seiten der anderen Spieler sichtbar, die daran teilgenommen haben."
 }

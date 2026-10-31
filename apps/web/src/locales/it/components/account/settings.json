@@ -12,5 +12,7 @@
   "hide-loadouts": "Nascondi le mie configurazioni",
   "hide-loadouts-description": "Rimuove le tue configurazioni dalla tua pagina e dalle tabelle che riportano il nome di un giocatore.",
   "supporters-only": "Solo sostenitori.",
-  "loadouts-still-counted": "Le tue battaglie continuano a contribuire ai valori da cui viene creata la scheda delle configurazioni di ogni veicolo, senza che venga riportato alcun nome che ti identifichi. Per smettere del tutto di inviarle, disattiva la condivisione nel mod del gioco, che elimina anche ciò che ha già inviato."
+  "loadouts-still-counted": "Le tue battaglie continuano a contribuire ai valori da cui viene creata la scheda delle configurazioni di ogni veicolo, senza che venga riportato alcun nome che ti identifichi. Per smettere del tutto di inviarle, disattiva la condivisione nel mod del gioco, che elimina anche ciò che ha già inviato.",
+  "hide-battles": "Nascondi le mie battaglie",
+  "hide-battles-description": "Solo tu puoi vedere la scheda Battaglie del tuo profilo. Le tue battaglie continuano a essere registrate, continuano a contare nelle statistiche del sito e restano visibili nelle pagine degli altri giocatori che vi hanno partecipato."
 }

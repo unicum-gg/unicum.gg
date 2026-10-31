@@ -12,5 +12,7 @@
   "hide-loadouts": "Piilota varustukseni",
   "hide-loadouts-description": "Poistaa kokoonpanosi omalta sivultasi ja taulukoista, joissa pelaajan nimi näkyy.",
   "supporters-only": "Vain tukijoille.",
-  "loadouts-still-counted": "Taistelusi lasketaan edelleen mukaan lukuihin, joista jokaisen ajoneuvon varustukset-välilehti muodostetaan, eikä niissä ole mitään, mikä nimeäisi sinut. Jos haluat lopettaa niiden lähettämisen kokonaan, poista jakamisen valinta pelin modissa. Se poistaa myös sen, minkä se on jo lähettänyt."
+  "loadouts-still-counted": "Taistelusi lasketaan edelleen mukaan lukuihin, joista jokaisen ajoneuvon varustukset-välilehti muodostetaan, eikä niissä ole mitään, mikä nimeäisi sinut. Jos haluat lopettaa niiden lähettämisen kokonaan, poista jakamisen valinta pelin modissa. Se poistaa myös sen, minkä se on jo lähettänyt.",
+  "hide-battles": "Piilota taisteluni",
+  "hide-battles-description": "Vain sinä voit nähdä profiilisi Taisteluita-välilehden. Taistelusi tallennetaan edelleen, ne lasketaan yhä sivuston tilastoihin, ja ne pysyvät näkyvissä muiden niihin osallistuneiden pelaajien sivuilla."
 }

@@ -824,7 +824,9 @@
     "Settings": "الإعدادات",
     "loadouts": "التجهيزات",
     "save": "حفظ",
-    "towards": "نحو"
+    "towards": "نحو",
+    "list": "قائمة",
+    "settings": "الإعدادات"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1652,7 +1654,9 @@
     "Reading your account": "Чытанне вашага акаўнта",
     "loadouts": "камплектацыі",
     "save": "захаваць",
-    "towards": "да"
+    "towards": "да",
+    "list": "спіс",
+    "settings": "налады"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2696,7 +2700,9 @@
     "Reading your account": "Преглед на акаунта ви",
     "loadouts": "конфигурации",
     "save": "запазване",
-    "towards": "към"
+    "towards": "към",
+    "list": "списък",
+    "settings": "настройки"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3532,7 +3538,9 @@
     "Settings": "Postavke",
     "loadouts": "konfiguracije",
     "save": "sačuvaj",
-    "towards": "prema"
+    "towards": "prema",
+    "list": "lista",
+    "settings": "postavke"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4587,7 +4595,9 @@
     "Reading your account": "Načítání vašeho účtu",
     "loadouts": "sestavy",
     "save": "uložit",
-    "towards": "vůči"
+    "towards": "vůči",
+    "list": "seznam",
+    "settings": "nastavení"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5648,7 +5658,9 @@
     "Reading your account": "Læser din konto",
     "loadouts": "opsætninger",
     "save": "gem",
-    "towards": "mod"
+    "towards": "mod",
+    "list": "liste",
+    "settings": "indstillinger"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6702,7 +6714,9 @@
     "Reading your account": "Dein Konto wird ausgelesen",
     "loadouts": "Ausstattungen",
     "save": "speichern",
-    "towards": "gegenüber"
+    "towards": "gegenüber",
+    "list": "Liste",
+    "settings": "Einstellungen"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7762,7 +7776,9 @@
     "Reading your account": "Ανάγνωση του λογαριασμού σας",
     "loadouts": "διατάξεις",
     "save": "αποθήκευση",
-    "towards": "προς"
+    "towards": "προς",
+    "list": "λίστα",
+    "settings": "ρυθμίσεις"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8802,7 +8818,9 @@
     "Reading your account": "Leyendo tu cuenta",
     "loadouts": "configuraciones",
     "save": "guardar",
-    "towards": "hacia"
+    "towards": "hacia",
+    "list": "lista",
+    "settings": "configuración"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9867,7 +9885,9 @@
     "Reading your account": "Tilisi lukeminen",
     "loadouts": "varustukset",
     "save": "tallenna",
-    "towards": "kohti"
+    "towards": "kohti",
+    "list": "lista",
+    "settings": "asetukset"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10911,7 +10931,9 @@
     "Reading your account": "Lecture de votre compte",
     "loadouts": "configurations",
     "save": "enregistrer",
-    "towards": "vers"
+    "towards": "vers",
+    "list": "liste",
+    "settings": "paramètres"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11740,7 +11762,9 @@
     "Reading your account": "आपका अकाउंट पढ़ा जा रहा है",
     "loadouts": "लोडआउट्स",
     "save": "सहेजें",
-    "towards": "की ओर"
+    "towards": "की ओर",
+    "list": "सूची",
+    "settings": "सेटिंग्स"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12798,7 +12822,9 @@
     "Reading your account": "Čitanje vašeg računa",
     "loadouts": "konfiguracije",
     "save": "spremi",
-    "towards": "prema"
+    "towards": "prema",
+    "list": "popis",
+    "settings": "postavke"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13858,7 +13884,9 @@
     "Reading your account": "Fiókod olvasása",
     "loadouts": "felszerelések",
     "save": "mentés",
-    "towards": "felé"
+    "towards": "felé",
+    "list": "lista",
+    "settings": "beállítások"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14914,7 +14942,9 @@
     "Reading your account": "Lettura del tuo account",
     "loadouts": "configurazioni",
     "save": "salva",
-    "towards": "verso"
+    "towards": "verso",
+    "list": "lista",
+    "settings": "impostazioni"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15977,7 +16007,9 @@
     "Reading your account": "アカウントを読み込み中",
     "loadouts": "ロードアウト",
     "save": "保存",
-    "towards": "に対して"
+    "towards": "に対して",
+    "list": "リスト",
+    "settings": "設定"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16808,7 +16840,8 @@
     "Settings": "Баптаулар",
     "loadouts": "Жиынтықтар",
     "save": "Сақтау",
-    "towards": "қарай"
+    "towards": "қарай",
+    "list": "тізім"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17875,7 +17908,9 @@
     "Reading your account": "계정 읽는 중",
     "loadouts": "장비 구성",
     "save": "저장",
-    "towards": "향해"
+    "towards": "향해",
+    "list": "목록",
+    "settings": "설정"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18938,7 +18973,9 @@
     "Reading your account": "Paskyros duomenų skaitymas",
     "loadouts": "komplektacijos",
     "save": "išsaugoti",
-    "towards": "link"
+    "towards": "link",
+    "list": "sąrašas",
+    "settings": "nustatymai"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -19987,7 +20024,9 @@
     "Reading your account": "Jūsu konta nolasīšana",
     "loadouts": "komplektācijas",
     "save": "saglabāt",
-    "towards": "attiecībā uz"
+    "towards": "attiecībā uz",
+    "list": "saraksts",
+    "settings": "iestatījumi"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21052,7 +21091,9 @@
     "Reading your account": "Je account lezen",
     "loadouts": "uitrustingen",
     "save": "opslaan",
-    "towards": "naar"
+    "towards": "naar",
+    "list": "lijst",
+    "settings": "instellingen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22108,7 +22149,9 @@
     "Reading your account": "Leser kontoen din",
     "loadouts": "oppsett",
     "save": "lagre",
-    "towards": "mot"
+    "towards": "mot",
+    "list": "liste",
+    "settings": "innstillinger"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23161,7 +23204,9 @@
     "Reading your account": "Odczytywanie twojego konta",
     "loadouts": "konfiguracje",
     "save": "zapisz",
-    "towards": "w kierunku"
+    "towards": "w kierunku",
+    "list": "lista",
+    "settings": "ustawienia"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24207,7 +24252,9 @@
     "Reading your account": "Lendo sua conta",
     "loadouts": "configurações",
     "save": "salvar",
-    "towards": "para"
+    "towards": "para",
+    "list": "lista",
+    "settings": "configurações"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25253,7 +25300,9 @@
     "Reading your account": "Citirea contului",
     "loadouts": "configurații",
     "save": "salvează",
-    "towards": "către"
+    "towards": "către",
+    "list": "listă",
+    "settings": "setări"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26287,7 +26336,9 @@
     "Reading your account": "Просмотр аккаунта",
     "loadouts": "сборки",
     "save": "сохранить",
-    "towards": "к"
+    "towards": "к",
+    "list": "список",
+    "settings": "настройки"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27119,7 +27170,9 @@
     "Settings": "Nastavitve",
     "loadouts": "kompleti opreme",
     "save": "shrani",
-    "towards": "proti"
+    "towards": "proti",
+    "list": "seznam",
+    "settings": "nastavitve"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28179,7 +28232,9 @@
     "Reading your account": "Учитавање вашег налога",
     "loadouts": "поставке",
     "save": "сачувај",
-    "towards": "према"
+    "towards": "према",
+    "list": "lista",
+    "settings": "podešavanja"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29244,7 +29299,9 @@
     "Reading your account": "Läser ditt konto",
     "loadouts": "utrustningar",
     "save": "spara",
-    "towards": "mot"
+    "towards": "mot",
+    "list": "lista",
+    "settings": "inställningar"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30305,7 +30362,9 @@
     "Reading your account": "กำลังอ่านข้อมูลบัญชีของคุณ",
     "loadouts": "ชุดอุปกรณ์",
     "save": "บันทึก",
-    "towards": "สู่"
+    "towards": "สู่",
+    "list": "รายการ",
+    "settings": "การตั้งค่า"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -31137,7 +31196,9 @@
     "Settings": "Mga setting",
     "loadouts": "mga loadout",
     "save": "i-save",
-    "towards": "tungo sa"
+    "towards": "tungo sa",
+    "list": "listahan",
+    "settings": "mga setting"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -32194,7 +32255,9 @@
     "Reading your account": "Hesabınız okunuyor",
     "loadouts": "donanımlar",
     "save": "kaydet",
-    "towards": "doğru"
+    "towards": "doğru",
+    "list": "liste",
+    "settings": "ayarlar"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33244,7 +33307,9 @@
     "Reading your account": "Читання вашого облікового запису",
     "loadouts": "комплектації",
     "save": "зберегти",
-    "towards": "до"
+    "towards": "до",
+    "list": "список",
+    "settings": "налаштування"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34283,7 +34348,9 @@
     "Reading your account": "Đang đọc tài khoản của bạn",
     "loadouts": "bộ trang bị",
     "save": "lưu",
-    "towards": "hướng đến"
+    "towards": "hướng đến",
+    "list": "danh sách",
+    "settings": "cài đặt"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35344,6 +35411,8 @@
     "Reading your account": "读取你的账号",
     "loadouts": "配装",
     "save": "保存",
-    "towards": "向"
+    "towards": "向",
+    "list": "列表",
+    "settings": "设置"
   }
 }
