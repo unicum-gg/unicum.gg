@@ -1,0 +1,16 @@
+{
+  "title": "Instellingen",
+  "description": "De instellingen die bij je account horen.",
+  "section-account": "Account",
+  "section-account-description": "Wie je hier bent en wat je ermee hebt verbonden.",
+  "section-privacy": "Privacy",
+  "section-privacy-description": "Wat je account over zichzelf publiceert.",
+  "log-out": "Uitloggen",
+  "log-out-description": "Beëindigt deze sessie op dit apparaat. Niets wordt verwijderd.",
+  "loading": "Je account lezen",
+  "could-not-save": "Dat kon niet worden opgeslagen. Probeer het over een moment opnieuw.",
+  "hide-loadouts": "Mijn uitrustingen verbergen",
+  "hide-loadouts-description": "Verwijdert je configuraties van je eigen pagina en uit de tabellen waarin een speler wordt genoemd.",
+  "supporters-only": "Alleen voor Supporter.",
+  "loadouts-still-counted": "Je gevechten tellen nog steeds mee voor de cijfers waarop het tabblad Uitrustingen van elk voertuig is gebaseerd, zonder dat iets je naam noemt. Als je helemaal wilt stoppen met het verzenden ervan, schakel je delen uit in de spelmod. Daarmee wordt ook verwijderd wat deze al heeft verzonden."
+}

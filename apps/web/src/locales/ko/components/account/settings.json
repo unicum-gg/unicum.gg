@@ -1,0 +1,16 @@
+{
+  "title": "설정",
+  "description": "계정에 해당하는 설정입니다.",
+  "section-account": "계정",
+  "section-account-description": "여기서 누구인지, 계정에 무엇이 연결되어 있는지 보여 줍니다.",
+  "section-privacy": "개인정보 보호",
+  "section-privacy-description": "계정 자체에 대해 게시하는 내용입니다.",
+  "log-out": "로그아웃",
+  "log-out-description": "이 기기에서 이 세션을 종료합니다. 삭제되는 항목은 없음.",
+  "loading": "계정 읽는 중",
+  "could-not-save": "저장할 수 없습니다. 잠시 후 다시 시도하세요.",
+  "hide-loadouts": "내 장비 구성 숨기기",
+  "hide-loadouts-description": "내 페이지와 플레이어 이름을 표시하는 표에서 내 빌드를 숨깁니다.",
+  "supporters-only": "후원자만.",
+  "loadouts-still-counted": "모든 차량의 장비 구성 탭이 기반으로 삼는 수치에는 전투가 계속 집계되지만, 나를 이름으로 식별하는 정보는 없음. 전송을 완전히 중지하려면 게임 클라이언트 모드에서 공유 체크를 해제하세요. 그러면 이미 전송된 내용도 삭제됩니다."
+}

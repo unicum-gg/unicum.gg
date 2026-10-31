@@ -1,0 +1,16 @@
+{
+  "title": "Einstellungen",
+  "description": "Die Einstellungen für dein Konto.",
+  "section-account": "Konto",
+  "section-account-description": "Wer du hier bist und was du damit verbunden hast.",
+  "section-privacy": "Datenschutz",
+  "section-privacy-description": "Was dein Konto über sich selbst veröffentlicht.",
+  "log-out": "Abmelden",
+  "log-out-description": "Beendet diese Session auf diesem Gerät. Nichts wird gelöscht.",
+  "loading": "Dein Konto wird ausgelesen",
+  "could-not-save": "Das konnte nicht gespeichert werden. Versuche es in einem Moment erneut.",
+  "hide-loadouts": "Meine Ausstattungen ausblenden",
+  "hide-loadouts-description": "Entfernt deine Builds von deiner eigenen Seite und aus den Tabellen, in denen ein Spieler genannt wird.",
+  "supporters-only": "Nur Unterstützer.",
+  "loadouts-still-counted": "Deine Gefechte zählen weiterhin zu den Werten, aus denen der Tab für die Ausstattungen jedes Fahrzeugs erstellt wird, ohne dass du genannt wirst. Um sie überhaupt nicht mehr zu senden, deaktiviere die Freigabe im Spiel-Mod. Dadurch wird auch gelöscht, was es bereits gesendet hat."
+}

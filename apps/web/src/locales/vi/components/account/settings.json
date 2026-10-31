@@ -1,0 +1,16 @@
+{
+  "title": "Thiết lập",
+  "description": "Các thiết lập thuộc tài khoản của bạn.",
+  "section-account": "Tài khoản",
+  "section-account-description": "Bạn là ai ở đây và những gì bạn đã kết nối với tài khoản này.",
+  "section-privacy": "Quyền riêng tư",
+  "section-privacy-description": "Những gì tài khoản của bạn đăng về chính nó.",
+  "log-out": "Đăng xuất",
+  "log-out-description": "Kết thúc phiên này trên thiết bị này. Không có gì bị xóa.",
+  "loading": "Đang đọc tài khoản của bạn",
+  "could-not-save": "Có thể không lưu được. Hãy thử lại sau một khoảnh khắc.",
+  "hide-loadouts": "Ẩn bộ trang bị của tôi",
+  "hide-loadouts-description": "Gỡ các cấu hình của bạn khỏi trang riêng và khỏi các bảng có tên người chơi.",
+  "supporters-only": "Chỉ dành cho Người hỗ trợ.",
+  "loadouts-still-counted": "Các trận đấu của bạn vẫn được tính vào số liệu mà tab bộ trang bị của từng xe tăng được xây dựng từ đó, không có gì có tên bạn. Để ngừng gửi chúng hoàn toàn, hãy bỏ chọn tùy chọn chia sẻ trong mod trò chơi, thao tác này cũng xóa những gì mod đã gửi."
+}

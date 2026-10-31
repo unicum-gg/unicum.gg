@@ -1,0 +1,16 @@
+{
+  "title": "游戏设置",
+  "description": "属于你的账号的设置。",
+  "section-account": "账号",
+  "section-account-description": "你在这里的身份，以及与你的账号已连接的内容。",
+  "section-privacy": "隐私",
+  "section-privacy-description": "你的账号发布的关于本身的信息。",
+  "log-out": "退出登录",
+  "log-out-description": "结束此设备上的会话。无内容会被删除。",
+  "loading": "读取你的账号",
+  "could-not-save": "不可以保存该内容，请稍后再试。",
+  "hide-loadouts": "隐藏我的配装",
+  "hide-loadouts-description": "将你的配置从你自己的页面和列出玩家名称的表格中隐藏。",
+  "supporters-only": "仅限支持者。",
+  "loadouts-still-counted": "你的战斗场次仍会计入构成每辆车辆配装页面的数值中，其中不会标注你的名称。若要完全停止发送这些内容，请在游戏模组中取消勾选共享选项，这也会删除它已经发送的内容。"
+}

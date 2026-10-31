@@ -819,7 +819,12 @@
     "dealt": "المُلحَق",
     "mean": "المتوسط",
     "minutes": "الدقائق",
-    "numbers": "الأرقام"
+    "numbers": "الأرقام",
+    "Reading your account": "قراءة حسابك",
+    "Settings": "الإعدادات",
+    "loadouts": "التجهيزات",
+    "save": "حفظ",
+    "towards": "نحو"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1643,7 +1648,11 @@
     "dealt": "нанесены",
     "mean": "сярэдняе",
     "minutes": "хвіліны",
-    "numbers": "лічбы"
+    "numbers": "лічбы",
+    "Reading your account": "Чытанне вашага акаўнта",
+    "loadouts": "камплектацыі",
+    "save": "захаваць",
+    "towards": "да"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2682,7 +2691,12 @@
     "dealt": "нанесени",
     "mean": "средно",
     "minutes": "минути",
-    "numbers": "числа"
+    "numbers": "числа",
+    "Settings": "Настройки",
+    "Reading your account": "Преглед на акаунта ви",
+    "loadouts": "конфигурации",
+    "save": "запазване",
+    "towards": "към"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3513,7 +3527,12 @@
     "dealt": "naneseno",
     "mean": "prosjek",
     "minutes": "minute",
-    "numbers": "brojevi"
+    "numbers": "brojevi",
+    "Reading your account": "Čitanje vašeg naloga",
+    "Settings": "Postavke",
+    "loadouts": "konfiguracije",
+    "save": "sačuvaj",
+    "towards": "prema"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4563,7 +4582,12 @@
     "dealt": "udělené",
     "mean": "průměr",
     "minutes": "minut",
-    "numbers": "čísla"
+    "numbers": "čísla",
+    "Settings": "Nastavení",
+    "Reading your account": "Načítání vašeho účtu",
+    "loadouts": "sestavy",
+    "save": "uložit",
+    "towards": "vůči"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5619,7 +5643,12 @@
     "dealt": "uddelt",
     "mean": "gennemsnit",
     "minutes": "minutter",
-    "numbers": "tal"
+    "numbers": "tal",
+    "Settings": "Indstillinger",
+    "Reading your account": "Læser din konto",
+    "loadouts": "opsætninger",
+    "save": "gem",
+    "towards": "mod"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6668,7 +6697,12 @@
     "dealt": "verursacht",
     "mean": "Durchschnitt",
     "minutes": "Minuten",
-    "numbers": "Zahlen"
+    "numbers": "Zahlen",
+    "Settings": "Einstellungen",
+    "Reading your account": "Dein Konto wird ausgelesen",
+    "loadouts": "Ausstattungen",
+    "save": "speichern",
+    "towards": "gegenüber"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7723,7 +7757,12 @@
     "dealt": "προκληθείσα",
     "mean": "μέσος όρος",
     "minutes": "λεπτά",
-    "numbers": "αριθμοί"
+    "numbers": "αριθμοί",
+    "Settings": "Ρυθμίσεις",
+    "Reading your account": "Ανάγνωση του λογαριασμού σας",
+    "loadouts": "διατάξεις",
+    "save": "αποθήκευση",
+    "towards": "προς"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8758,7 +8797,12 @@
     "dealt": "infligido",
     "mean": "media",
     "minutes": "minutos",
-    "numbers": "números"
+    "numbers": "números",
+    "Settings": "Ajustes",
+    "Reading your account": "Leyendo tu cuenta",
+    "loadouts": "configuraciones",
+    "save": "guardar",
+    "towards": "hacia"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9818,7 +9862,12 @@
     "dealt": "aiheutettu",
     "mean": "keskiarvo",
     "minutes": "minuutit",
-    "numbers": "numerot"
+    "numbers": "numerot",
+    "Settings": "Asetukset",
+    "Reading your account": "Tilisi lukeminen",
+    "loadouts": "varustukset",
+    "save": "tallenna",
+    "towards": "kohti"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10857,7 +10906,12 @@
     "dealt": "dégâts infligés",
     "mean": "moyenne",
     "minutes": "minutes",
-    "numbers": "nombres"
+    "numbers": "nombres",
+    "Settings": "Paramètres",
+    "Reading your account": "Lecture de votre compte",
+    "loadouts": "configurations",
+    "save": "enregistrer",
+    "towards": "vers"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11682,7 +11736,11 @@
     "dealt": "पहुँचाया गया",
     "mean": "औसत",
     "minutes": "मिनट",
-    "numbers": "संख्याएँ"
+    "numbers": "संख्याएँ",
+    "Reading your account": "आपका अकाउंट पढ़ा जा रहा है",
+    "loadouts": "लोडआउट्स",
+    "save": "सहेजें",
+    "towards": "की ओर"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12735,7 +12793,12 @@
     "dealt": "nanesena šteta",
     "mean": "prosjek",
     "minutes": "minute",
-    "numbers": "brojevi"
+    "numbers": "brojevi",
+    "Settings": "Postavke",
+    "Reading your account": "Čitanje vašeg računa",
+    "loadouts": "konfiguracije",
+    "save": "spremi",
+    "towards": "prema"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13790,7 +13853,12 @@
     "dealt": "okozott",
     "mean": "átlag",
     "minutes": "perc",
-    "numbers": "számok"
+    "numbers": "számok",
+    "Settings": "Beállítások",
+    "Reading your account": "Fiókod olvasása",
+    "loadouts": "felszerelések",
+    "save": "mentés",
+    "towards": "felé"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14841,7 +14909,12 @@
     "dealt": "inflitto",
     "mean": "media",
     "minutes": "minuti",
-    "numbers": "numeri"
+    "numbers": "numeri",
+    "Settings": "Impostazioni",
+    "Reading your account": "Lettura del tuo account",
+    "loadouts": "configurazioni",
+    "save": "salva",
+    "towards": "verso"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -15899,7 +15972,12 @@
     "dealt": "与ダメージ",
     "mean": "平均",
     "minutes": "分",
-    "numbers": "数値"
+    "numbers": "数値",
+    "Settings": "設定",
+    "Reading your account": "アカウントを読み込み中",
+    "loadouts": "ロードアウト",
+    "save": "保存",
+    "towards": "に対して"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16725,7 +16803,12 @@
     "dealt": "келтірілген",
     "mean": "орташа",
     "minutes": "минут",
-    "numbers": "сандар"
+    "numbers": "сандар",
+    "Reading your account": "Аккаунтыңызды оқу",
+    "Settings": "Баптаулар",
+    "loadouts": "Жиынтықтар",
+    "save": "Сақтау",
+    "towards": "қарай"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17787,7 +17870,12 @@
     "dealt": "피해량",
     "mean": "평균",
     "minutes": "분",
-    "numbers": "숫자"
+    "numbers": "숫자",
+    "Settings": "설정",
+    "Reading your account": "계정 읽는 중",
+    "loadouts": "장비 구성",
+    "save": "저장",
+    "towards": "향해"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18845,7 +18933,12 @@
     "dealt": "padaryta žala",
     "mean": "vidurkis",
     "minutes": "minutės",
-    "numbers": "skaičiai"
+    "numbers": "skaičiai",
+    "Settings": "Nustatymai",
+    "Reading your account": "Paskyros duomenų skaitymas",
+    "loadouts": "komplektacijos",
+    "save": "išsaugoti",
+    "towards": "link"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -19889,7 +19982,12 @@
     "dealt": "nodarītie bojājumi",
     "mean": "vidējais",
     "minutes": "minūtes",
-    "numbers": "skaitļi"
+    "numbers": "skaitļi",
+    "Settings": "Iestatījumi",
+    "Reading your account": "Jūsu konta nolasīšana",
+    "loadouts": "komplektācijas",
+    "save": "saglabāt",
+    "towards": "attiecībā uz"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -20949,7 +21047,12 @@
     "dealt": "toegebracht",
     "mean": "gemiddelde",
     "minutes": "minuten",
-    "numbers": "aantallen"
+    "numbers": "aantallen",
+    "Settings": "Instellingen",
+    "Reading your account": "Je account lezen",
+    "loadouts": "uitrustingen",
+    "save": "opslaan",
+    "towards": "naar"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22000,7 +22103,12 @@
     "dealt": "utdelt",
     "mean": "gjennomsnitt",
     "minutes": "minutter",
-    "numbers": "tall"
+    "numbers": "tall",
+    "Settings": "Innstillinger",
+    "Reading your account": "Leser kontoen din",
+    "loadouts": "oppsett",
+    "save": "lagre",
+    "towards": "mot"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23048,7 +23156,12 @@
     "dealt": "zadane",
     "mean": "średnia",
     "minutes": "minuty",
-    "numbers": "liczby"
+    "numbers": "liczby",
+    "Settings": "Ustawienia",
+    "Reading your account": "Odczytywanie twojego konta",
+    "loadouts": "konfiguracje",
+    "save": "zapisz",
+    "towards": "w kierunku"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24089,7 +24202,12 @@
     "dealt": "dano causado",
     "mean": "média",
     "minutes": "minutos",
-    "numbers": "números"
+    "numbers": "números",
+    "Settings": "Configurações",
+    "Reading your account": "Lendo sua conta",
+    "loadouts": "configurações",
+    "save": "salvar",
+    "towards": "para"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25130,7 +25248,12 @@
     "dealt": "provocate",
     "mean": "medie",
     "minutes": "minute",
-    "numbers": "numere"
+    "numbers": "numere",
+    "Settings": "Setări",
+    "Reading your account": "Citirea contului",
+    "loadouts": "configurații",
+    "save": "salvează",
+    "towards": "către"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26159,7 +26282,12 @@
     "dealt": "нанесённый",
     "mean": "среднее",
     "minutes": "минуты",
-    "numbers": "числа"
+    "numbers": "числа",
+    "Settings": "Настройки",
+    "Reading your account": "Просмотр аккаунта",
+    "loadouts": "сборки",
+    "save": "сохранить",
+    "towards": "к"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -26986,7 +27114,12 @@
     "dealt": "spôsobené",
     "mean": "priemer",
     "minutes": "minúty",
-    "numbers": "čísla"
+    "numbers": "čísla",
+    "Reading your account": "Branje vašega računa",
+    "Settings": "Nastavitve",
+    "loadouts": "kompleti opreme",
+    "save": "shrani",
+    "towards": "proti"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28041,7 +28174,12 @@
     "dealt": "naneta",
     "mean": "prosek",
     "minutes": "minuti",
-    "numbers": "brojevi"
+    "numbers": "brojevi",
+    "Settings": "Podešavanja",
+    "Reading your account": "Учитавање вашег налога",
+    "loadouts": "поставке",
+    "save": "сачувај",
+    "towards": "према"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29101,7 +29239,12 @@
     "dealt": "utdelad",
     "mean": "genomsnitt",
     "minutes": "minuter",
-    "numbers": "tal"
+    "numbers": "tal",
+    "Settings": "Inställningar",
+    "Reading your account": "Läser ditt konto",
+    "loadouts": "utrustningar",
+    "save": "spara",
+    "towards": "mot"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30157,7 +30300,12 @@
     "dealt": "ความเสียหายที่ทำได้",
     "mean": "ค่าเฉลี่ย",
     "minutes": "นาที",
-    "numbers": "ตัวเลข"
+    "numbers": "ตัวเลข",
+    "Settings": "การตั้งค่า",
+    "Reading your account": "กำลังอ่านข้อมูลบัญชีของคุณ",
+    "loadouts": "ชุดอุปกรณ์",
+    "save": "บันทึก",
+    "towards": "สู่"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -30984,7 +31132,12 @@
     "dealt": "naidulot",
     "mean": "average",
     "minutes": "mga minuto",
-    "numbers": "mga numero"
+    "numbers": "mga numero",
+    "Reading your account": "Pagbasa sa iyong account",
+    "Settings": "Mga setting",
+    "loadouts": "mga loadout",
+    "save": "i-save",
+    "towards": "tungo sa"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -32036,7 +32189,12 @@
     "dealt": "verilen",
     "mean": "ortalama",
     "minutes": "dakika",
-    "numbers": "sayılar"
+    "numbers": "sayılar",
+    "Settings": "Ayarlar",
+    "Reading your account": "Hesabınız okunuyor",
+    "loadouts": "donanımlar",
+    "save": "kaydet",
+    "towards": "doğru"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33081,7 +33239,12 @@
     "dealt": "завдано",
     "mean": "середнє",
     "minutes": "хвилини",
-    "numbers": "числа"
+    "numbers": "числа",
+    "Settings": "Налаштування",
+    "Reading your account": "Читання вашого облікового запису",
+    "loadouts": "комплектації",
+    "save": "зберегти",
+    "towards": "до"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34115,7 +34278,12 @@
     "dealt": "gây ra",
     "mean": "trung bình",
     "minutes": "phút",
-    "numbers": "số liệu"
+    "numbers": "số liệu",
+    "Settings": "Thiết lập",
+    "Reading your account": "Đang đọc tài khoản của bạn",
+    "loadouts": "bộ trang bị",
+    "save": "lưu",
+    "towards": "hướng đến"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35171,6 +35339,11 @@
     "dealt": "造成的伤害",
     "mean": "平均值",
     "minutes": "分钟",
-    "numbers": "数字"
+    "numbers": "数字",
+    "Settings": "游戏设置",
+    "Reading your account": "读取你的账号",
+    "loadouts": "配装",
+    "save": "保存",
+    "towards": "向"
   }
 }

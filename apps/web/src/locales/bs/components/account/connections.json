@@ -1,7 +1,7 @@
 {
   "title": "Povezani računi",
   "description": "Svaki od njih otključava nešto na stranici. Prekid veze to uzima nazad i predaje autorizaciju usluzi.",
-  "loading": "Učitavanje vašeg računa",
+  "loading": "Čitanje vašeg naloga",
   "log-in-first": "Prijavi se svojim Wargaming.net ID-jem da vidiš račune povezane s njim.",
   "log-in": "Prijavi se",
   "connect": "Poveži",

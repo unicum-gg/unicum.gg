@@ -1,7 +1,7 @@
 {
   "title": "Połączone konta",
   "description": "Każde z nich odblokowuje coś w witrynie. Odłączenie odbiera te uprawnienia i przekazuje autoryzację usłudze.",
-  "loading": "Odczytywanie Twojego konta",
+  "loading": "Odczytywanie twojego konta",
   "log-in-first": "Zaloguj się przy użyciu identyfikatora Wargaming.net, aby zobaczyć połączone z nim konta.",
   "log-in": "Zaloguj się",
   "connect": "Połącz",

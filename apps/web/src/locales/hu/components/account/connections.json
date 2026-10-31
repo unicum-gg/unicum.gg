@@ -1,7 +1,7 @@
 {
   "title": "Csatlakoztatott fiókok",
   "description": "Mindegyik felold valamit a webhelyen. A kapcsolat bontása ezt visszavonja, és az engedélyezést visszaadja a szolgáltatásnak.",
-  "loading": "A fiókod adatainak beolvasása",
+  "loading": "Fiókod olvasása",
   "log-in-first": "A hozzá csatlakoztatott fiókok megtekintéséhez jelentkezz be a Wargaming.net ID-ddel.",
   "log-in": "Bejelentkezés",
   "connect": "Csatlakozás",

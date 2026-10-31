@@ -38,5 +38,5 @@
   "tool": "Құрал",
   "tools": "Құралдар",
   "tools-are-derived-from-the-public-openapi-sp": "Құралдар құрастыру кезінде жалпыға қолжетімді OpenAPI спецификациясынан жасалады. Жаңа endpoint-тер автоматты түрде жаңа құралдарға айналады, ештеңе үйлесімсіз қалмайды.",
-  "use-the-button-below-or-settings-connectors-": "Төмендегі түймені пайдаланыңыз немесе Settings, Connectors, Create тармағына өтіңіз"
+  "use-the-button-below-or-settings-connectors-": "Төмендегі батырманы пайдаланыңыз немесе Баптаулар, Коннекторлар, Жасау бөлімдеріне өтіңіз"
 }

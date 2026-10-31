@@ -1,7 +1,7 @@
 {
   "title": "Susietos paskyros",
   "description": "Kiekviena iš jų svetainėje suteikia prieigą prie tam tikrų funkcijų. Atsiejus ši prieiga panaikinama, o autorizacija perduodama paslaugai.",
-  "loading": "Nuskaitoma jūsų paskyra",
+  "loading": "Paskyros duomenų skaitymas",
   "log-in-first": "Prisijunkite naudodami savo Wargaming.net ID, kad pamatytumėte su juo susietas paskyras.",
   "log-in": "Prisijungti",
   "connect": "Prisijungti",

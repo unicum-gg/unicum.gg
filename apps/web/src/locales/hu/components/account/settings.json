@@ -1,0 +1,16 @@
+{
+  "title": "Beállítások",
+  "description": "A fiókodhoz tartozó beállítások.",
+  "section-account": "Fiók",
+  "section-account-description": "Ki vagy itt, és mi van ehhez csatlakoztatva.",
+  "section-privacy": "Adatvédelem",
+  "section-privacy-description": "Mit tesz közzé magáról a fiókod.",
+  "log-out": "Kijelentkezés",
+  "log-out-description": "Lezárja ezt a munkamenetet ezen az eszközön. Semmi sem törlődik.",
+  "loading": "Fiókod olvasása",
+  "could-not-save": "Tudnál egy pillanat múlva újra próbálkozni? A mentés nem sikerült.",
+  "hide-loadouts": "Felszereléseim elrejtése",
+  "hide-loadouts-description": "Eltávolítja az összeállításaidat a saját oldaladról és azokról a táblázatokról, amelyeken egy játékos neve szerepel.",
+  "supporters-only": "Csak támogatóknak.",
+  "loadouts-still-counted": "A csatáid továbbra is beleszámítanak azokba az adatokba, amelyek alapján minden jármű felszereléseinek lapja készül, úgy, hogy semmi sem nevezi meg, hogy te vagy. Ha teljesen le szeretnéd állítani az elküldésüket, szüntesd meg a megosztás kijelölését a játékmodban, amely a már elküldött adatokat is törli."
+}

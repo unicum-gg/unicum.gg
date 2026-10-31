@@ -1,0 +1,16 @@
+{
+  "title": "Mga setting",
+  "description": "Ang mga setting na nauukol sa iyong account.",
+  "section-account": "Account",
+  "section-account-description": "Kung sino ka rito, at kung ano ang nakakonekta rito.",
+  "section-privacy": "Privacy",
+  "section-privacy-description": "Ang ipinapa-publish ng iyong account tungkol sa sarili nito.",
+  "log-out": "Mag-log out",
+  "log-out-description": "Tinatapos nito ang sesyon na ito sa device na ito. Wala itong dine-delete.",
+  "loading": "Pagbasa sa iyong account",
+  "could-not-save": "Maaaring hindi ma-i-save iyon. Subukan muli pagkalipas ng sandali.",
+  "hide-loadouts": "Itago ang mga loadout ko",
+  "hide-loadouts-description": "Inaalis nito ang iyong mga build sa sarili mong pahina at sa mga talahanayang naglalaman ng pangalan ng manlalaro.",
+  "supporters-only": "Mga sumusuporta lamang.",
+  "loadouts-still-counted": "Binibilang pa rin ang iyong mga laban tungo sa mga bilang na pinagbabatayan ng tab na mga loadout ng bawat sasakyan, nang walang pangalan mo. Para tuluyang ihinto ang pagpapadala ng mga ito, alisin ang check sa pagbabahagi sa mod ng laro, na nagde-delete rin ng ipinadala na nito."
+}

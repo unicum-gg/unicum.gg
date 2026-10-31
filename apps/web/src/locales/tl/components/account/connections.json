@@ -1,7 +1,7 @@
 {
   "title": "Mga nakakonektang account",
   "description": "Bawat isa ay nagbubukas ng isang feature sa website. Kapag diniskonekta, babawiin ang access na iyon at ibabalik ang awtorisasyon sa serbisyo.",
-  "loading": "Binabasa ang iyong account",
+  "loading": "Pagbasa sa iyong account",
   "log-in-first": "Mag-log in gamit ang iyong Wargaming.net ID para makita ang mga account na nakakonekta rito.",
   "log-in": "Mag-log in",
   "connect": "Kumonekta",

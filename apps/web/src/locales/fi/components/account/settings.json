@@ -1,0 +1,16 @@
+{
+  "title": "Asetukset",
+  "description": "Tiliisi liittyvät asetukset.",
+  "section-account": "Tili",
+  "section-account-description": "Kuka olet täällä ja mitä siihen on yhdistetty.",
+  "section-privacy": "Yksityisyys",
+  "section-privacy-description": "Mitä tilisi julkaisee itsestään.",
+  "log-out": "Kirjaudu ulos",
+  "log-out-description": "Päättää tämän pelisession tällä laitteella. Ei mitään poisteta.",
+  "loading": "Tilisi lukeminen",
+  "could-not-save": "Voisi olla, ettei sitä voitu tallentaa. Yritä hetken kuluttua uudelleen.",
+  "hide-loadouts": "Piilota varustukseni",
+  "hide-loadouts-description": "Poistaa kokoonpanosi omalta sivultasi ja taulukoista, joissa pelaajan nimi näkyy.",
+  "supporters-only": "Vain tukijoille.",
+  "loadouts-still-counted": "Taistelusi lasketaan edelleen mukaan lukuihin, joista jokaisen ajoneuvon varustukset-välilehti muodostetaan, eikä niissä ole mitään, mikä nimeäisi sinut. Jos haluat lopettaa niiden lähettämisen kokonaan, poista jakamisen valinta pelin modissa. Se poistaa myös sen, minkä se on jo lähettänyt."
+}

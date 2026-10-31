@@ -1,0 +1,16 @@
+{
+  "title": "Nastavení",
+  "description": "Nastavení vašeho účtu.",
+  "section-account": "Účet",
+  "section-account-description": "Kdo zde jste a co máte k účtu připojené.",
+  "section-privacy": "Soukromí",
+  "section-privacy-description": "Co o sobě váš účet zveřejňuje.",
+  "log-out": "Odhlásit se",
+  "log-out-description": "Ukončí tuto relaci na tomto zařízení. Nic se nesmaže.",
+  "loading": "Načítání vašeho účtu",
+  "could-not-save": "Mohlo by se to nepodařit uložit. Zkuste to za okamžik znovu.",
+  "hide-loadouts": "Skrýt moje sestavy",
+  "hide-loadouts-description": "Odebere vaše sestavy z vaší stránky i z tabulek uvádějících hráče.",
+  "supporters-only": "Pouze pro podporovatele.",
+  "loadouts-still-counted": "Vaše bitvy se stále započítávají do údajů, ze kterých se vytváří karta sestav každého vozidla, aniž by vás cokoli identifikovalo. Pokud chcete zcela zastavit jejich odesílání, zrušte zaškrtnutí sdílení v herním modu, který také smaže vše, co již odeslal."
+}

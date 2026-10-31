@@ -38,5 +38,5 @@
   "tool": "เครื่องมือ",
   "tools": "เครื่องมือ",
   "tools-are-derived-from-the-public-openapi-sp": "เครื่องมือสร้างจากสเปก OpenAPI สาธารณะในเวลาบิลด์ เอนด์พอยต์ใหม่จะกลายเป็นเครื่องมือใหม่โดยอัตโนมัติ ไม่มีข้อมูลคลาดเคลื่อน",
-  "use-the-button-below-or-settings-connectors-": "ใช้ปุ่มด้านล่าง หรือไปที่ Settings, Connectors, Create"
+  "use-the-button-below-or-settings-connectors-": "ใช้ปุ่มด้านล่าง (หรือ การตั้งค่า, ตัวเชื่อมต่อ, สร้าง)"
 }

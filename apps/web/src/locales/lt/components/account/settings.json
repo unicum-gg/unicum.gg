@@ -1,0 +1,16 @@
+{
+  "title": "Nustatymai",
+  "description": "Su paskyra susiję nustatymai.",
+  "section-account": "Paskyra",
+  "section-account-description": "Kas jūs esate čia ir kas su ja susieta.",
+  "section-privacy": "Privatumas",
+  "section-privacy-description": "Ką jūsų paskyra skelbia apie save.",
+  "log-out": "Atsijungti",
+  "log-out-description": "Užbaigia šio įrenginio sesiją. Nieko neištrinama.",
+  "loading": "Paskyros duomenų skaitymas",
+  "could-not-save": "Galėtų nepavykti to išsaugoti. Po akimirkos bandykite dar kartą.",
+  "hide-loadouts": "Slėpti mano komplektacijas",
+  "hide-loadouts-description": "Pašalina jūsų sąrankas iš jūsų puslapio ir lentelių, kuriose nurodytas žaidėjo vardas.",
+  "supporters-only": "Tik rėmėjams.",
+  "loadouts-still-counted": "Jūsų mūšiai vis dar įskaičiuojami į rodiklius, iš kurių sudaromas kiekvienos transporto priemonės komplektacijų skirtukas, tačiau jūsų vardas nenurodomas. Jei norite visiškai nustoti juos siųsti, žaidimo mode panaikinkite bendrinimo žymėjimą. Taip pat bus ištrinta tai, ką jis jau išsiuntė."
+}

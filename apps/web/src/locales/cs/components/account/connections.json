@@ -1,7 +1,7 @@
 {
   "title": "Propojené účty",
   "description": "Každý z nich na webu něco odemkne. Odpojením se tato možnost zruší a oprávnění se předá službě.",
-  "loading": "Probíhá načítání vašeho účtu",
+  "loading": "Načítání vašeho účtu",
   "log-in-first": "Přihlaste se pomocí svého Wargaming.net ID, abyste viděli účty připojené k tomuto ID.",
   "log-in": "Přihlásit se",
   "connect": "Připojit",

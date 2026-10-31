@@ -38,5 +38,5 @@
   "tool": "Công cụ",
   "tools": "Công cụ",
   "tools-are-derived-from-the-public-openapi-sp": "Các công cụ được tạo từ đặc tả OpenAPI công khai trong quá trình build. Endpoint mới tự động trở thành công cụ mới, không có gì bị lệch.",
-  "use-the-button-below-or-settings-connectors-": "Sử dụng nút bên dưới hoặc vào Settings, Connectors, Create"
+  "use-the-button-below-or-settings-connectors-": "Dùng nút bên dưới (hoặc Thiết lập, Kết nối, Tạo)"
 }

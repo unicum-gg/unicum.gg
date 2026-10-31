@@ -38,5 +38,5 @@
   "tool": "Tool",
   "tools": "Tools",
   "tools-are-derived-from-the-public-openapi-sp": "De tools worden tijdens het bouwen afgeleid van de openbare OpenAPI-specificatie. Nieuwe endpoints worden automatisch als nieuwe tools toegevoegd, zodat alles synchroon blijft.",
-  "use-the-button-below-or-settings-connectors-": "Gebruik de knop hieronder (of Settings, Connectors, Create)"
+  "use-the-button-below-or-settings-connectors-": "Gebruik de onderstaande knop (of Instellingen, Connectors, Maken)"
 }

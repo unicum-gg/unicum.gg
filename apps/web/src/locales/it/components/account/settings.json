@@ -1,0 +1,16 @@
+{
+  "title": "Impostazioni",
+  "description": "Le impostazioni associate al tuo account.",
+  "section-account": "Account",
+  "section-account-description": "Chi sei qui e cosa hai collegato a questo account.",
+  "section-privacy": "Privacy",
+  "section-privacy-description": "Ciò che il tuo account pubblica su se stesso.",
+  "log-out": "Esci",
+  "log-out-description": "Termina questa sessione su questo dispositivo. Niente viene eliminato.",
+  "loading": "Lettura del tuo account",
+  "could-not-save": "Potrebbe non essere stato possibile salvare. Riprova tra un momento.",
+  "hide-loadouts": "Nascondi le mie configurazioni",
+  "hide-loadouts-description": "Rimuove le tue configurazioni dalla tua pagina e dalle tabelle che riportano il nome di un giocatore.",
+  "supporters-only": "Solo sostenitori.",
+  "loadouts-still-counted": "Le tue battaglie continuano a contribuire ai valori da cui viene creata la scheda delle configurazioni di ogni veicolo, senza che venga riportato alcun nome che ti identifichi. Per smettere del tutto di inviarle, disattiva la condivisione nel mod del gioco, che elimina anche ciò che ha già inviato."
+}

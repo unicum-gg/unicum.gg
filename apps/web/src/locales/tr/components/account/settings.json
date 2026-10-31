@@ -1,0 +1,16 @@
+{
+  "title": "Ayarlar",
+  "description": "Hesabınıza ait ayarlar.",
+  "section-account": "Hesap",
+  "section-account-description": "Buradaki kimliğiniz ve hesabınıza bağlı olanlar.",
+  "section-privacy": "Gizlilik",
+  "section-privacy-description": "Hesabınızın kendisi hakkında yayınladıkları.",
+  "log-out": "Oturumu kapat",
+  "log-out-description": "Bu cihazdaki oturumu sona erdirir. Hiçbir şey silinmez.",
+  "loading": "Hesabınız okunuyor",
+  "could-not-save": "Bu kaydedilemedi. Bir an sonra tekrar deneyin.",
+  "hide-loadouts": "Donanımlarımı gizle",
+  "hide-loadouts-description": "Kurulumlarınızı kendi sayfanızdan ve bir oyuncunun adını veren tablolardan kaldırır.",
+  "supporters-only": "Yalnızca Destekçiler.",
+  "loadouts-still-counted": "Savaşlarınız, sizi adlandıran hiçbir şey olmadan, her aracın donanımlar sekmesinin temel aldığı değerlere sayılmaya devam eder. Bunları göndermeyi tamamen durdurmak için oyun modundaki paylaşım seçeneğinin işaretini kaldırın. Bu işlem, onun zaten gönderdiği verileri de siler."
+}

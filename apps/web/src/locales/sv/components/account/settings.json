@@ -1,0 +1,16 @@
+{
+  "title": "Inställningar",
+  "description": "Inställningarna som hör till ditt konto.",
+  "section-account": "Konto",
+  "section-account-description": "Vem du är här och vad du är ansluten till.",
+  "section-privacy": "Sekretess",
+  "section-privacy-description": "Vad ditt konto publicerar om sig själv.",
+  "log-out": "Logga ut",
+  "log-out-description": "Avslutar den här sessionen på den här enheten. Inget raderas.",
+  "loading": "Läser ditt konto",
+  "could-not-save": "Kunde inte spara det. Försök igen om ett ögonblick.",
+  "hide-loadouts": "Dölj mina utrustningar",
+  "hide-loadouts-description": "Tar bort dina byggen från din egen sida och från tabellerna som namnger en spelare.",
+  "supporters-only": "Endast för Supporter.",
+  "loadouts-still-counted": "Dina strider räknas fortfarande mot de siffror som varje fordons utrustningsflik bygger på, utan något som namnger dig. Om du vill sluta skicka dem helt, avmarkera delning i spelmodden, vilket också raderar det som den redan har skickat."
+}

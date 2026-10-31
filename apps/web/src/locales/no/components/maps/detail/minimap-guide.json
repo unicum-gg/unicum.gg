@@ -2,10 +2,10 @@
   "toggle": "Posisjoneringsguide",
   "spawn": "Spawning {n}",
   "side": {
-    "north": "Nord",
-    "south": "Sør",
-    "east": "Øst",
-    "west": "Vest"
+    "north": "nord",
+    "south": "sør",
+    "east": "øst",
+    "west": "vest"
   },
   "phase": {
     "opening": "0 til 3 minutter",

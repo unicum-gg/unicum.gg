@@ -1,7 +1,7 @@
 {
   "title": "已连接的账号",
   "description": "每个账号都会在网站上解锁某些功能。断开连接会收回这些权限，并将授权交还给服务方。",
-  "loading": "正在读取你的账号",
+  "loading": "读取你的账号",
   "log-in-first": "使用你的 Wargaming.net ID 登录，以查看与其关联的账号。",
   "log-in": "登录",
   "connect": "连接",

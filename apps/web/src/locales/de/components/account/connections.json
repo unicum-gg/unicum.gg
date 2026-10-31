@@ -1,7 +1,7 @@
 {
   "title": "Verbundene Konten",
   "description": "Jedes Konto schaltet etwas auf der Website frei. Beim Trennen wird dies zurückgenommen und die Autorisierung an den Dienst übergeben.",
-  "loading": "Konto wird gelesen",
+  "loading": "Dein Konto wird ausgelesen",
   "log-in-first": "Melde dich mit deiner Wargaming.net-ID an, um die damit verbundenen Konten zu sehen.",
   "log-in": "Anmelden",
   "connect": "Verbinden",

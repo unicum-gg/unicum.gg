@@ -38,5 +38,5 @@
   "tool": "Alat",
   "tools": "Alati",
   "tools-are-derived-from-the-public-openapi-sp": "Алатке се током конфигурације изводе из јавне OpenAPI спецификације. Нове крајње тачке аутоматски постају нове алатке, без разилажења.",
-  "use-the-button-below-or-settings-connectors-": "Користите дугме испод или Settings, Connectors, Create"
+  "use-the-button-below-or-settings-connectors-": "Koristite дугме ispod (ili Podešavanja, Connectors, Create)"
 }

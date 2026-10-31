@@ -1,0 +1,16 @@
+{
+  "title": "Indstillinger",
+  "description": "De indstillinger, der hører til din konto.",
+  "section-account": "Konto",
+  "section-account-description": "Hvem du er her, og hvad du har tilknyttet den.",
+  "section-privacy": "Privatliv",
+  "section-privacy-description": "Hvad din konto udgiver om sig selv.",
+  "log-out": "Log ud",
+  "log-out-description": "Afslutter denne session på denne enhed. Intet slettes.",
+  "loading": "Læser din konto",
+  "could-not-save": "Kunne ikke gemme det. Prøv igen om et øjeblik.",
+  "hide-loadouts": "Skjul mine opsætninger",
+  "hide-loadouts-description": "Fjerner dine opsætninger fra din egen side og fra de tabeller, der navngiver en spiller.",
+  "supporters-only": "Kun for Supportere.",
+  "loadouts-still-counted": "Dine kampe tæller stadig med i de tal, som hver kampvogns fane med opsætninger er bygget ud fra, uden at noget navngiver dig. Hvis du vil stoppe med at sende dem helt, skal du fjerne markeringen for deling i spilmoddet, som også sletter det, der allerede er sendt."
+}

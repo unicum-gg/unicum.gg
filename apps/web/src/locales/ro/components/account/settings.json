@@ -1,0 +1,16 @@
+{
+  "title": "Setări",
+  "description": "Setările care aparțin contului tău.",
+  "section-account": "Cont",
+  "section-account-description": "Cine ești aici și ce ai conectat la cont.",
+  "section-privacy": "Confidențialitate",
+  "section-privacy-description": "Ce publică contul tău despre el însuși.",
+  "log-out": "Deconectare",
+  "log-out-description": "Încheie această sesiune pe acest dispozitiv. Nimic nu este șters.",
+  "loading": "Citirea contului",
+  "could-not-save": "Ar putea să nu salveze acest lucru. Încearcă din nou peste un moment.",
+  "hide-loadouts": "Ascunde-mi configurațiile",
+  "hide-loadouts-description": "Îți elimină configurațiile de pe propria pagină și din tabelele care numesc un jucător.",
+  "supporters-only": "Doar pentru Suportatori.",
+  "loadouts-still-counted": "Bătăliile tale sunt în continuare luate în calcul pentru cifrele din care este construită fila de configurații a fiecărui vehicul, fără nimic care să te numească. Pentru a opri complet trimiterea lor, debifează partajarea din mod, care șterge și ceea ce a trimis deja."
+}

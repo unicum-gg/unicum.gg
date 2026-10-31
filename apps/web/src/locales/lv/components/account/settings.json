@@ -1,0 +1,16 @@
+{
+  "title": "Iestatījumi",
+  "description": "Iestatījumi, kas pieder jūsu kontam.",
+  "section-account": "Konts",
+  "section-account-description": "Kas jūs šeit esat un kas ar to ir savienots.",
+  "section-privacy": "Privātums",
+  "section-privacy-description": "Ko jūsu konts par sevi publicē.",
+  "log-out": "Izrakstīties",
+  "log-out-description": "Beidz šo sesiju šajā ierīcē. Nekas netiek dzēsts.",
+  "loading": "Jūsu konta nolasīšana",
+  "could-not-save": "Neizdevās to saglabāt. Mēģiniet vēlreiz pēc brīža.",
+  "hide-loadouts": "Paslēpt manas komplektācijas",
+  "hide-loadouts-description": "Noņem jūsu konfigurācijas no jūsu lapas un tabulām, kurās tiek norādīts spēlētāja nosaukums.",
+  "supporters-only": "Tikai atbalstītāji.",
+  "loadouts-still-counted": "Jūsu kaujas joprojām tiek ieskaitītas rādītājos, no kuriem tiek veidota katra transportlīdzekļa komplektāciju cilne, un tajos nav jūsu nosaukuma. Lai pilnībā pārtrauktu to nosūtīšanu, noņemiet atzīmi pie kopīgošanas spēles modā, kas arī dzēš to, ko tas jau ir nosūtījis."
+}

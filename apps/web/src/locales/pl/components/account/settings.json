@@ -1,0 +1,16 @@
+{
+  "title": "Ustawienia",
+  "description": "Ustawienia dotyczące twojego konta.",
+  "section-account": "Konto",
+  "section-account-description": "Kim tutaj jesteś i co jest z nim połączone.",
+  "section-privacy": "Prywatność",
+  "section-privacy-description": "Co twoje konto publikuje o samym sobie.",
+  "log-out": "Wyloguj się",
+  "log-out-description": "Kończy tę sesję na tym urządzeniu. Nic nie zostaje usunięte.",
+  "loading": "Odczytywanie twojego konta",
+  "could-not-save": "Nie udało się tego zapisać. Spróbuj ponownie za moment.",
+  "hide-loadouts": "Ukryj moje konfiguracje",
+  "hide-loadouts-description": "Usuwa twoje konfiguracje z twojej strony oraz z tabel zawierających nazwę gracza.",
+  "supporters-only": "Tylko dla Supporterów.",
+  "loadouts-still-counted": "Twoje bitwy nadal są uwzględniane w statystykach, na podstawie których tworzona jest zakładka konfiguracji każdego pojazdu, bez niczego, co zawierałoby twoją nazwę. Aby całkowicie przestać je wysyłać, odznacz udostępnianie w modzie do gry, co usunie również dane, które już wysłano."
+}

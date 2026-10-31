@@ -38,5 +38,5 @@
   "tool": "Инструмент",
   "tools": "Инструменти",
   "tools-are-derived-from-the-public-openapi-sp": "Инструментите се извеждат по време на компилация от публичната OpenAPI спецификация. Новите крайни точки автоматично стават нови инструменти и нищо не се разминава.",
-  "use-the-button-below-or-settings-connectors-": "Използвайте бутона по-долу или Settings, Connectors, Create"
+  "use-the-button-below-or-settings-connectors-": "Използвайте бутона по-долу (или Настройки, Конектори, Създаване)"
 }

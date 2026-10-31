@@ -1,0 +1,16 @@
+{
+  "title": "設定",
+  "description": "アカウントに関する設定です。",
+  "section-account": "アカウント",
+  "section-account-description": "ここでのあなたの情報と、連携済みのサービス。",
+  "section-privacy": "プライバシー",
+  "section-privacy-description": "アカウント自体が公開する情報。",
+  "log-out": "ログアウト",
+  "log-out-description": "このデバイスでのセッションを終了します。削除されるものはありません。",
+  "loading": "アカウントを読み込み中",
+  "could-not-save": "保存できなかった可能性があります。しばらくしてからもう一度お試しください。",
+  "hide-loadouts": "ロードアウトを非表示",
+  "hide-loadouts-description": "自分のページと、プレイヤーの名前が表示される表から、あなたのビルドを非表示にします。",
+  "supporters-only": "サポーターのみ。",
+  "loadouts-still-counted": "あなたの戦闘は、各車両のロードアウトタブの基になる数値に、あなたの名前が付かない形で引き続き反映されます。送信を完全に停止するには、ゲームのmodで共有のチェックを外してください。すでに送信済みのデータも削除されます。"
+}

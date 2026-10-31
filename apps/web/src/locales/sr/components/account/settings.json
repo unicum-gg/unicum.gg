@@ -1,0 +1,16 @@
+{
+  "title": "Podešavanja",
+  "description": "Podešavanja za vaš nalog.",
+  "section-account": "Nalog",
+  "section-account-description": "Ko ste ovde i šta ste povezali sa njim.",
+  "section-privacy": "Privatnost",
+  "section-privacy-description": "Šta vaš nalog objavljuje o sebi.",
+  "log-out": "Odjavi se",
+  "log-out-description": "Ova сесија na ovom uređaju se završava. Ništa se ne briše.",
+  "loading": "Учитавање вашег налога",
+  "could-not-save": "Nije moguće sačuvati. Pokušajte ponovo za тренутак.",
+  "hide-loadouts": "Сакриј moje поставке",
+  "hide-loadouts-description": "Uklanja vaše поставке sa vaše странице i iz табела koje navode играч.",
+  "supporters-only": "Samo za Podržavalac.",
+  "loadouts-still-counted": "Vaše bitke se i dalje računaju u brojke na kojima se zasniva kartica поставке svakog возило, bez ijednog podatka koji vas imenuje. Da biste potpuno prestali da ih šaljete, isključite deljenje u modu igre, koji takođe briše ono što je već poslato."
+}

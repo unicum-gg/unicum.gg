@@ -1,0 +1,16 @@
+{
+  "title": "Innstillinger",
+  "description": "Innstillingene som hører til kontoen din.",
+  "section-account": "Konto",
+  "section-account-description": "Hvem du er her, og hva som er tilkoblet den.",
+  "section-privacy": "Personvern",
+  "section-privacy-description": "Hva kontoen din publiserer om seg selv.",
+  "log-out": "Logg ut",
+  "log-out-description": "Avslutter denne økten på denne enheten. Ingenting slettes.",
+  "loading": "Leser kontoen din",
+  "could-not-save": "Kunne ikke lagre dette. Prøv igjen om et øyeblikk.",
+  "hide-loadouts": "Skjul oppsettene mine",
+  "hide-loadouts-description": "Fjerner oppsettene dine fra din egen side og fra tabellene som viser navn på en spiller.",
+  "supporters-only": "Kun for Supporter.",
+  "loadouts-still-counted": "Kampene dine teller fortsatt mot tallene som fanen for oppsett for hvert kjøretøy bygger på, uten at du navngis. For å slutte å sende dem helt, fjern avmerkingen for deling i spillmodden, som også sletter det den allerede har sendt."
+}

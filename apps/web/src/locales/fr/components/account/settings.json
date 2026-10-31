@@ -1,0 +1,16 @@
+{
+  "title": "Paramètres",
+  "description": "Les paramètres associés à votre compte.",
+  "section-account": "Compte",
+  "section-account-description": "Qui vous êtes ici et ce que vous y avez connecté.",
+  "section-privacy": "Confidentialité",
+  "section-privacy-description": "Ce que votre compte publie à son sujet.",
+  "log-out": "Se déconnecter",
+  "log-out-description": "Met fin à cette session sur cet appareil. Rien n’est supprimé.",
+  "loading": "Lecture de votre compte",
+  "could-not-save": "Impossible d’enregistrer cela. Réessayez dans un moment.",
+  "hide-loadouts": "Masquer mes configurations",
+  "hide-loadouts-description": "Retire vos configurations de votre propre page et des tableaux qui mentionnent un joueur.",
+  "supporters-only": "Supporters uniquement.",
+  "loadouts-still-counted": "Vos batailles continuent de compter dans les chiffres sur lesquels est construit l’onglet des configurations de chaque véhicule, sans rien qui permette de vous identifier. Pour cesser totalement de les envoyer, décochez le partage dans le mod du jeu, ce qui supprime également les données déjà envoyées."
+}

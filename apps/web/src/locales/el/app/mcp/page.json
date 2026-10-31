@@ -38,5 +38,5 @@
   "tool": "Εργαλείο",
   "tools": "Εργαλεία",
   "tools-are-derived-from-the-public-openapi-sp": "Τα εργαλεία προκύπτουν κατά τη διαμόρφωση από τη δημόσια προδιαγραφή OpenAPI. Τα νέα endpoints γίνονται αυτόματα νέα εργαλεία, χωρίς αποκλίσεις.",
-  "use-the-button-below-or-settings-connectors-": "Χρησιμοποιήστε το παρακάτω κουμπί ή Settings, Connectors, Create"
+  "use-the-button-below-or-settings-connectors-": "Χρησιμοποιήστε το παρακάτω κουμπί ή Ρυθμίσεις, Συνδέσεις, Δημιουργία"
 }

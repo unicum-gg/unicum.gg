@@ -38,5 +38,5 @@
   "tool": "उपकरण",
   "tools": "उपकरण",
   "tools-are-derived-from-the-public-openapi-sp": "बिल्ड के समय सार्वजनिक OpenAPI स्पेक से टूल बनाए जाते हैं। नए एंडपॉइंट अपने आप नए टूल बन जाते हैं, कुछ भी असंगत नहीं होता।",
-  "use-the-button-below-or-settings-connectors-": "नीचे दिए बटन का उपयोग करें, या Settings, Connectors, Create चुनें"
+  "use-the-button-below-or-settings-connectors-": "नीचे दिए गए बटन का उपयोग करें (या सेटिंग्स, कनेक्टर्स, बनाएँ)"
 }
