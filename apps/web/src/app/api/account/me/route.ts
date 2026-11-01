@@ -57,18 +57,24 @@ export async function GET(): Promise<Response> {
       battlesHidden: false,
     });
   }
-  const [connections, supporter, wargaming] = await Promise.all([
-    listAccountConnections(session.user.id),
-    isSupporter(session.user.id),
-    wargamingAccountOf(session.user.id),
-  ]);
+  // The privacy flags hang off the Wargaming account, so they wait for it, but
+  // beside each other and beside the rest rather than one after the next: the
+  // settings dialog opens on this answer.
+  const wargamingRead = wargamingAccountOf(session.user.id);
+  const [connections, supporter, loadoutsHidden, battlesHidden] =
+    await Promise.all([
+      listAccountConnections(session.user.id),
+      isSupporter(session.user.id),
+      wargamingRead.then((w) => (w ? isLoadoutHidden(w) : false)),
+      wargamingRead.then((w) => (w ? isBattlesHidden(w) : false)),
+    ]);
   return NextResponse.json({
     loggedIn: true,
     ...available,
     ...connections,
     supporter,
-    loadoutsHidden: wargaming ? await isLoadoutHidden(wargaming) : false,
-    battlesHidden: wargaming ? await isBattlesHidden(wargaming) : false,
+    loadoutsHidden,
+    battlesHidden,
   });
 }
 

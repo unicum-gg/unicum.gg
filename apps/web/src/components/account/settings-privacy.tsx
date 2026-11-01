@@ -1,24 +1,19 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import { useSWRConfig } from "swr";
 import { useSession } from "@/lib/auth-client";
 import Link from "@/components/link";
-import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import ROUTES from "@/constants/routes";
 import { useTranslation } from "@/hooks/use-translation";
+import { ACCOUNT_KEY, useAccount, type AccountState } from "@/hooks/use-account";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { applyBattlesPrivacy } from "@/services/swr/battles-privacy";
 import { SettingsRow } from "./settings-row";
+import { SettingsSkeleton } from "./settings-skeleton";
 
-type PrivacyState = {
-  loggedIn: boolean;
-  supporter: boolean;
-  loadoutsHidden: boolean;
-  battlesHidden: boolean;
-};
 
 /** The switches this section draws, named as `/api/account/me` names them. */
 type PrivacySwitch = "loadoutsHidden" | "battlesHidden";
@@ -44,21 +39,8 @@ type PrivacySwitch = "loadoutsHidden" | "battlesHidden";
  */
 export function SettingsPrivacy() {
   const { t } = useTranslation("components/account/settings");
-  const [state, setState] = useState<PrivacyState | null>(null);
+  const { data: state, mutate: mutateAccount } = useAccount();
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    let alive = true;
-    fetch("/api/account/me")
-      .then((r) => r.json() as Promise<PrivacyState>)
-      .then((data) => {
-        if (alive) setState(data);
-      })
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, []);
 
   const { cache, mutate } = useSWRConfig();
   const { data: session } = useSession();
@@ -69,9 +51,15 @@ export function SettingsPrivacy() {
       // Moved before the request and put back if it fails, so the switch
       // answers the press rather than the round trip. A switch that waits reads
       // as a switch that did not take.
-      setState((prev) => (prev ? { ...prev, [key]: hidden } : prev));
+      const flip = (value: boolean) =>
+        void mutateAccount(
+          (prev: AccountState | undefined) =>
+            prev ? { ...prev, [key]: value } : prev,
+          { revalidate: false },
+        );
+      flip(hidden);
       setSaving(true);
-      fetch("/api/account/me", {
+      fetch(ACCOUNT_KEY, {
         method: "PATCH",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ [key]: hidden }),
@@ -86,22 +74,15 @@ export function SettingsPrivacy() {
           }
         })
         .catch(() => {
-          setState((prev) => (prev ? { ...prev, [key]: !hidden } : prev));
+          flip(!hidden);
           toast.error(t("could-not-save"));
         })
         .finally(() => setSaving(false));
     },
-    [t, cache, mutate, accountId],
+    [t, cache, mutate, mutateAccount, accountId],
   );
 
-  if (!state) {
-    return (
-      <div className="flex items-center gap-2 py-6 text-sm text-fd-muted-foreground">
-        <Spinner />
-        {t("loading")}
-      </div>
-    );
-  }
+  if (!state) return <SettingsSkeleton rows={2} />;
 
   return (
     <div>

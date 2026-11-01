@@ -5,29 +5,17 @@ import {
   GameControllerIcon,
   TwitchLogoIcon,
 } from "@phosphor-icons/react";
-import { useCallback, useEffect, useState } from "react";
 import { AuthProvider, type WgIdentity } from "@unicum.gg/shared";
 import { REGION_LABEL } from "@unicum.gg/wargaming";
 import { LoginButton } from "@/components/login-button";
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
 import { useTranslation } from "@/hooks/use-translation";
+import { useAccount } from "@/hooks/use-account";
 import { useSession } from "@/lib/auth-client";
 import { ConnectionRow } from "./connection-row";
 import { returnHere } from "./return-path";
+import { SettingsSkeleton } from "./settings-skeleton";
 
-type AccountState = {
-  loggedIn: boolean;
-  twitchAvailable: boolean;
-  discordAvailable: boolean;
-  wargaming: (WgIdentity & { connectedAt: string }) | null;
-  twitch: { login: string | null; connectedAt: string } | null;
-  discord: {
-    username: string | null;
-    globalName: string | null;
-    connectedAt: string;
-  } | null;
-};
 
 /**
  * The account's connected accounts, and the only place on the site that can
@@ -48,45 +36,14 @@ type AccountState = {
 export function Connections() {
   const { t } = useTranslation("components/account/connections");
   const { data: session, isPending } = useSession();
-  const [state, setState] = useState<AccountState | null>(null);
+  // Shared with the privacy section and preloaded by the dialog, so it is
+  // usually already here when the section opens. After a disconnect it is
+  // read again rather than trusted locally, since the server does more than
+  // delete a row (a Twitch disconnect also delists the channel).
+  const { data: state, mutate } = useAccount();
+  const refresh = () => void mutate();
 
-  // One read, two callers: the effect below on open, and `refresh` after a
-  // disconnect. It returns the payload rather than writing the state itself, so
-  // the write happens in each caller's own callback (the effect must not call
-  // setState in its body, which is what `react-hooks/set-state-in-effect` is
-  // about, and only the effect has an "is this still mounted" answer).
-  const read = useCallback(
-    (): Promise<AccountState> =>
-      fetch("/api/account/me").then((r) => r.json() as Promise<AccountState>),
-    [],
-  );
-
-  const refresh = useCallback(() => {
-    read()
-      .then(setState)
-      .catch(() => {});
-  }, [read]);
-
-  useEffect(() => {
-    let alive = true;
-    read()
-      .then((data) => {
-        if (alive) setState(data);
-      })
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, [read, session?.user?.id]);
-
-  if (isPending || !state) {
-    return (
-      <div className="flex items-center gap-2 py-6 text-sm text-fd-muted-foreground">
-        <Spinner />
-        {t("loading")}
-      </div>
-    );
-  }
+  if (isPending || !state) return <SettingsSkeleton rows={3} />;
 
   if (!state.loggedIn) {
     return (

@@ -16,7 +16,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useTranslation } from "@/hooks/use-translation";
-import { signOut } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
+import { preloadAccount } from "@/hooks/use-account";
 import { cn } from "@/lib/utils";
 import { Connections } from "./connections";
 import { consumeConnectionsFlag } from "./return-path";
@@ -51,9 +52,11 @@ const SECTIONS: { section: SettingsSection; icon: Icon }[] = [
  * is a prompt to log in. It grew a rail because the connections stopped being
  * the whole of it.
  *
- * Only the active section is mounted. Each one reads `/api/account/me` when it
- * opens, so a reader who never leaves the first section never pays for the
- * second, and this dialog is reachable from the top bar of every page.
+ * Only the active section is mounted, and every section reads the same
+ * `/api/account/me` entry. It is preloaded as soon as a session exists, once
+ * the page has settled, so the dialog opens already filled rather than on a
+ * loading state: a settings panel that makes its owner wait reads as a slow
+ * site. The skeleton only shows for a reader quick enough to beat it.
  */
 export function SettingsDialog({
   open,
@@ -73,6 +76,16 @@ export function SettingsDialog({
 }) {
   const { t } = useTranslation("components/account/settings");
   const [section, setSection] = useState(SettingsSection.Account);
+  const { data: session } = useSession();
+  const signedIn = !!session?.user;
+
+  useEffect(() => {
+    if (!signedIn) return;
+    // Off the critical path: the page's own requests go first.
+    const idle = window.requestIdleCallback ?? ((cb) => window.setTimeout(cb, 1));
+    const handle = idle(() => preloadAccount());
+    return () => (window.cancelIdleCallback ?? window.clearTimeout)(handle);
+  }, [signedIn]);
 
   useEffect(() => {
     if (!reopenOnReturn) return;
