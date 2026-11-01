@@ -120,7 +120,9 @@ export function MinimapViewer({
     window.history.replaceState(
       null,
       "",
-      qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
+      // The hash is kept, as the shared param store keeps it: it can be
+      // carrying something else entirely, such as `#settings/billing`.
+      `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps -- views is stable per map
   }, [viewIndex, showEvents, showAfter]);
