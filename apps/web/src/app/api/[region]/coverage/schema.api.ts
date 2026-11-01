@@ -79,13 +79,13 @@ export const CoverageResponse = z
     refreshPolicy: z.array(refreshPolicyBucket),
     funFacts: z.object({
       oldestPlayerSnapshotAt: z.coerce.date().nullable(),
-      biggestClan: z
-        .object({
-          tag: z.string(),
-          name: z.string(),
-          membersCount: z.number(),
-        })
-        .nullable(),
+      modUsers: z.number().meta({
+        description:
+          "Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout.",
+      }),
+      modBattles: z.number().meta({
+        description: "Battles the mod has sent on this region.",
+      }),
       totalBattlesTracked: z.number(),
       discordServers: z.number().nullable().meta({
         description:

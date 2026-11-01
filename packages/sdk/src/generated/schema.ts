@@ -3281,11 +3281,10 @@ export interface components {
             funFacts: {
                 /** Format: date-time */
                 oldestPlayerSnapshotAt: Date | null;
-                biggestClan: {
-                    tag: string;
-                    name: string;
-                    membersCount: number;
-                } | null;
+                /** @description Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout. */
+                modUsers: number;
+                /** @description Battles the mod has sent on this region. */
+                modBattles: number;
                 totalBattlesTracked: number;
                 /** @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. */
                 discordServers: number | null;
@@ -3346,11 +3345,10 @@ export interface components {
             funFacts: {
                 /** Format: date-time */
                 oldestPlayerSnapshotAt: Date | null;
-                biggestClan: {
-                    tag: string;
-                    name: string;
-                    membersCount: number;
-                } | null;
+                /** @description Accounts on this region that have run the unicum.gg mod: every account that sent a battle or a garage loadout. */
+                modUsers: number;
+                /** @description Battles the mod has sent on this region. */
+                modBattles: number;
                 totalBattlesTracked: number;
                 /** @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. */
                 discordServers: number | null;

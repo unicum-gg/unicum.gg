@@ -3,6 +3,7 @@ import { unstable_cache } from "next/cache";
 import { db } from "@unicum.gg/core/db";
 import { countBotGuilds } from "@unicum.gg/core/discord";
 import {
+  battlesByRegion,
   buildExpenseLedger,
   type ExpenseLedger,
   clanMembersByRegion,
@@ -13,6 +14,7 @@ import {
   env,
   playerRefreshQueueByRegion,
   playersByRegion,
+  tankLoadoutsByRegion,
 } from "@unicum.gg/shared";
 import {
   ACTIVITY_BUCKET_ORDER,
@@ -65,11 +67,10 @@ export type CoverageStats = {
   refreshPolicy: RefreshPolicyBucket[];
   funFacts: {
     oldestPlayerSnapshotAt: Date | null;
-    biggestClan: {
-      tag: string;
-      name: string;
-      membersCount: number;
-    } | null;
+    /** Accounts that have run the mod on this region, and the battles they
+     * sent. See `getModUsage`. */
+    modUsers: number;
+    modBattles: number;
     totalBattlesTracked: number;
     /** Servers our bot is in. Global, not per region. `null` when Discord could
      * not be asked, so the page shows nothing rather than a false zero. */
@@ -164,6 +165,41 @@ const getDiscordServerCount = unstable_cache(
   { revalidate: 3600, tags: ["coverage"] },
 );
 
+// Who runs the mod, which replaced "biggest tracked clan": Wargaming caps a
+// clan at 100 members, so that cell was a full clan picked at random on NA and
+// Asia, and on EU one staff clan the cap does not apply to.
+//
+// Only the mod writes either table (`/api/game/*`, each upload proven by the
+// client's own token), so an account in one of them ran it. Both are read
+// because neither contains the other: the garage arrives on login, a battle
+// only once one is played and sent, and on 2026-10-31 EU held 20 accounts in
+// the first against 7 in the second.
+//
+// Its own hour rather than the payload's minute: `reported_by` has to be
+// unnested across every battle partition, a table that grows with each one the
+// mod sends, and a count of users moves on the order of days.
+const getModUsage = unstable_cache(
+  async (region: Region): Promise<{ users: number; battles: number }> => {
+    const battles = battlesByRegion[region];
+    const loadouts = tankLoadoutsByRegion[region];
+    const rows = await db.execute<{ users: string; battles: string }>(
+      sql`SELECT
+            (SELECT COUNT(*) FROM (
+               SELECT unnest(${battles.reportedBy}) FROM ${battles}
+               UNION
+               SELECT ${loadouts.accountId} FROM ${loadouts}
+             ) u)::text AS users,
+            (SELECT COUNT(*) FROM ${battles})::text AS battles`,
+    );
+    return {
+      users: Number(rows[0]?.users ?? 0),
+      battles: Number(rows[0]?.battles ?? 0),
+    };
+  },
+  ["coverage-mod-usage"],
+  { revalidate: 3600, tags: ["coverage"] },
+);
+
 // The three player_snapshots aggregates with no cheap `players`-table proxy (a
 // rolling 24h count and two 30-day daily histograms, the per-player MIN(taken_at)
 // CTE being the ~24s heaviest) are full seq-scans of a 10M+ row table. Rather
@@ -242,7 +278,7 @@ async function getCoverageStatsUncached(
     snapshotTrends,
     clansRefreshedLast24h,
     oldestSnapshot,
-    biggestClan,
+    modUsage,
     totalBattles,
     playersDiscoveredRows,
     clansDiscoveredRows,
@@ -323,22 +359,7 @@ async function getCoverageStatsUncached(
     snapshotBounds.then((r) =>
       r[0]?.oldest ? new Date(r[0].oldest) : null,
     ),
-    db
-      .execute<{ tag: string; name: string; members_count: number }>(
-        sql`SELECT tag, name, members_count
-            FROM ${clansTable}
-            ORDER BY members_count DESC
-            LIMIT 1`,
-      )
-      .then((r) => {
-        const row = r[0];
-        if (!row) return null;
-        return {
-          tag: row.tag,
-          name: row.name,
-          membersCount: Number(row.members_count),
-        };
-      }),
+    getModUsage(region),
     // `players.battles` is the latest snapshot's battle count, refreshed on every
     // snapshot-cron tick — so summing it is one scan of the (narrower) players
     // table instead of a DISTINCT ON over all 4.3M player_snapshots rows.
@@ -468,7 +489,8 @@ async function getCoverageStatsUncached(
     refreshPolicy: refreshPolicyReport.breakdown,
     funFacts: {
       oldestPlayerSnapshotAt: oldestSnapshot,
-      biggestClan,
+      modUsers: modUsage.users,
+      modBattles: modUsage.battles,
       totalBattlesTracked: totalBattles,
       discordServers,
     },
@@ -494,7 +516,9 @@ async function getCoverageStatsUncached(
 // callers keep the documented `Date | null` shape.
 const getCoverageStatsCached = unstable_cache(
   getCoverageStatsUncached,
-  ["coverage-stats"],
+  // Versioned: an entry cached before `modUsers` existed would otherwise be
+  // served without it until it turned over.
+  ["coverage-stats-v2"],
   // 60s: the live-monitoring figures (queue depths, last-snapshot time, backlog)
   // stay fresh. This is now cheap because every query on this path reads a small
   // indexed/`players` table — the newest/oldest snapshot come from `players`

@@ -362,20 +362,17 @@ export async function CoverageView({ region, locale }: { region: Region; locale:
             value={formatYear(stats.funFacts.oldestPlayerSnapshotAt, locale)}
           />
           <StatCell
-            label={tr("biggest-tracked-clan")}
+            label={tr("mod-users")}
             value={
-              stats.funFacts.biggestClan ? (
-                <span>
-                  [{stats.funFacts.biggestClan.tag}] ·{" "}
-                  {tr("n-members", {
-                    count: numberFormat(locale, INT_FORMAT).format(
-                      stats.funFacts.biggestClan.membersCount,
-                    ),
-                  })}
-                </span>
-              ) : (
-                "n/a"
-              )
+              <span>
+                {numberFormat(locale, INT_FORMAT).format(stats.funFacts.modUsers ?? 0)}
+                {" · "}
+                {tr("n-battles", {
+                  count: numberFormat(locale, INT_FORMAT).format(
+                    stats.funFacts.modBattles ?? 0,
+                  ),
+                })}
+              </span>
             }
           />
           <StatCell
