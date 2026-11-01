@@ -87,8 +87,7 @@ export function SettingsPrivacy() {
   return (
     <div>
       {/* First, as the one every player can use: the loadout switch below is
-          a supporter's, and its note about what keeps counting closes the
-          section because it is about that switch alone. */}
+          a supporter's. */}
       <SettingsRow
         label={t("hide-battles")}
         description={t("hide-battles-description")}
@@ -129,19 +128,17 @@ export function SettingsPrivacy() {
           from exists only there. Open to everybody signed in rather than to
           current supporters: a one-off donor is on the board too. */}
       {state.billing ? (
-        <div className="mt-4 border-t border-fd-border">
-          <SettingsRow
-            label={t("anonymous")}
-            description={t("anonymous-description")}
-          >
-            <Switch
-              checked={state.anonymous}
-              onCheckedChange={(hidden) => toggle("anonymous", hidden)}
-              disabled={saving}
-              aria-label={t("anonymous")}
-            />
-          </SettingsRow>
-        </div>
+        <SettingsRow
+          label={t("anonymous")}
+          description={t("anonymous-description")}
+        >
+          <Switch
+            checked={state.anonymous}
+            onCheckedChange={(hidden) => toggle("anonymous", hidden)}
+            disabled={saving}
+            aria-label={t("anonymous")}
+          />
+        </SettingsRow>
       ) : null}
     </div>
   );
