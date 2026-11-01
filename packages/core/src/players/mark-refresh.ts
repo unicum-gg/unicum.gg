@@ -123,6 +123,76 @@ export async function findStaleMarkHolders(
   return out;
 }
 
+/** How recently an account must have played to be worth discovering. A mark is
+ * scored on recent battles, so a garage idle for longer than this holds marks
+ * nobody is earning, and the board is read for who holds them now. */
+const DISCOVERY_ACTIVE_DAYS = 90;
+
+/**
+ * Accounts whose marks have never been read, most likely holders first.
+ *
+ * The board can only rank an account we have read, and outside the cron above
+ * the only read is a page view, so the board was a list of whoever had been
+ * looked up. That is invisible on EU and fatal on Asia, where the site has few
+ * readers: measured on 2026-10-31, 9% of the Asia accounts with 20,000 battles
+ * that played in the last 30 days had ever been read (EU 28%, NA 60%), and a
+ * Chinese reader reported the board as incomplete. Re-running the backfill
+ * cannot help, since it only folds marks some earlier read already stored (3 of
+ * 300 sampled unread Asia accounts had any).
+ *
+ * Ranked by battles times WN8, because a three-mark gun takes both volume and
+ * damage: of the Asia board's top thousand, 90% have over 14,500 battles and a
+ * WN8 over 1,950. An account the portal answers for gets a row, zero marks
+ * included, so it is never a candidate again; one it refuses waits out
+ * `RETRY_AFTER_MS` like a board account. One scan of the players table a pass
+ * (1.1s on EU, 0.24s on Asia).
+ */
+export async function findUnreadMarkCandidates(
+  region: Region,
+  limit: number,
+): Promise<StaleMarkHolder[]> {
+  if (limit <= 0) return [];
+  const marks = playerMarksByRegion[region];
+  const players = playersByRegion[region];
+  const now = Date.now();
+  // Over-fetch by the accounts sitting out a retry, so a run of refusals at the
+  // head of the ranking cannot starve the pass.
+  const skipped = [...failedUntil.entries()].filter(
+    ([key, until]) => until > now && key.startsWith(`${region}:`),
+  ).length;
+  const rows = (await db.execute(sql`
+    SELECT p.account_id, p.id AS player_id, p.nickname, p.battles
+    FROM ${players} p
+    WHERE p.battles >= ${MARKS_MIN_BATTLES}
+      AND p.soft_deleted_at IS NULL
+      AND p.last_battle_at > now() - make_interval(days => ${DISCOVERY_ACTIVE_DAYS})
+      AND NOT EXISTS (
+        SELECT 1 FROM ${marks} m WHERE m.account_id = p.account_id
+      )
+    ORDER BY p.battles::float8 * COALESCE(p.wn8, 0) DESC
+    LIMIT ${limit + skipped}
+  `)) as unknown as Array<{
+    account_id: number | string;
+    player_id: number;
+    nickname: string;
+    battles: number;
+  }>;
+
+  const out: StaleMarkHolder[] = [];
+  for (const r of rows) {
+    const accountId = Number(r.account_id);
+    if ((failedUntil.get(`${region}:${accountId}`) ?? 0) > now) continue;
+    out.push({
+      accountId,
+      playerId: Number(r.player_id),
+      nickname: r.nickname,
+      battles: Number(r.battles),
+    });
+    if (out.length >= limit) break;
+  }
+  return out;
+}
+
 /**
  * Read one account's marks from the portal and store them everywhere they show.
  *
