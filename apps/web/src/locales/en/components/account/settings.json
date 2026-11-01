@@ -14,5 +14,19 @@
   "supporters-only": "Supporters only.",
   "loadouts-still-counted": "Your battles still count towards the figures every vehicle’s loadouts tab is built from, with nothing naming you. To stop sending them at all, untick sharing in the game mod, which also deletes what it has already sent.",
   "hide-battles": "Hide my battles",
-  "hide-battles-description": "Only you can see the Battles tab of your profile. Your battles keep being recorded, still count in the site’s statistics, and stay visible on the pages of the other players who were in them."
+  "hide-battles-description": "Only you can see the Battles tab of your profile. Your battles keep being recorded, still count in the site’s statistics, and stay visible on the pages of the other players who were in them.",
+  "section-billing": "Billing",
+  "section-billing-description": "What you give to keep the site running, and where to change it.",
+  "billing-pledge": "{amount} a month",
+  "billing-renews": "Renews on {date}.",
+  "billing-ends": "Cancelled, ends on {date}.",
+  "billing-manage": "Manage subscription",
+  "billing-portal-failed": "Could not open the billing portal. Try again in a moment.",
+  "billing-none": "You do not support unicum.gg yet",
+  "billing-none-description": "The site has no ads and is paid for by its players.",
+  "billing-support": "Support us",
+  "billing-total": "Given so far",
+  "billing-total-description": "Everything you have given, one-off gifts included. Thank you.",
+  "anonymous": "Hide me on the supporters board",
+  "anonymous-description": "Your name and your supporter badge stay off the public board and your profile."
 }

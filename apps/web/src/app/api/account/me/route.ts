@@ -4,7 +4,15 @@ import { auth } from "@unicum.gg/core/auth";
 import { listAccountConnections } from "@unicum.gg/core/auth/connections";
 import { discordLinkEnabled } from "@unicum.gg/core/discord";
 import { wargamingAccountOf } from "@unicum.gg/core/game-link";
-import { isSupporter } from "@unicum.gg/core/subscription";
+import {
+  getContributedCents,
+  getSubscription,
+  getSupportProfile,
+  isActiveStatus,
+  isSupporter,
+  setAnonymous,
+} from "@unicum.gg/core/subscription";
+import { stripeConfigured } from "@unicum.gg/core/stripe";
 import {
   isLoadoutHidden,
   setLoadoutHidden,
@@ -55,19 +63,31 @@ export async function GET(): Promise<Response> {
       supporter: false,
       loadoutsHidden: false,
       battlesHidden: false,
+      anonymous: false,
+      billing: null,
     });
   }
   // The privacy flags hang off the Wargaming account, so they wait for it, but
   // beside each other and beside the rest rather than one after the next: the
-  // settings dialog opens on this answer.
+  // settings dialog opens on this answer, every section of it included.
   const wargamingRead = wargamingAccountOf(session.user.id);
-  const [connections, supporter, loadoutsHidden, battlesHidden] =
-    await Promise.all([
-      listAccountConnections(session.user.id),
-      isSupporter(session.user.id),
-      wargamingRead.then((w) => (w ? isLoadoutHidden(w) : false)),
-      wargamingRead.then((w) => (w ? isBattlesHidden(w) : false)),
-    ]);
+  const userId = session.user.id;
+  const [
+    connections,
+    sub,
+    profile,
+    contributedCents,
+    loadoutsHidden,
+    battlesHidden,
+  ] = await Promise.all([
+    listAccountConnections(userId),
+    getSubscription(userId),
+    getSupportProfile(userId),
+    stripeConfigured ? getContributedCents(userId) : 0,
+    wargamingRead.then((w) => (w ? isLoadoutHidden(w) : false)),
+    wargamingRead.then((w) => (w ? isBattlesHidden(w) : false)),
+  ]);
+  const supporter = sub ? isActiveStatus(sub.status) : false;
   return NextResponse.json({
     loggedIn: true,
     ...available,
@@ -75,12 +95,32 @@ export async function GET(): Promise<Response> {
     supporter,
     loadoutsHidden,
     battlesHidden,
+    anonymous: profile?.anonymous ?? false,
+    // Null when the site takes no money at all, so the dialog has no billing
+    // section to draw rather than one promising a portal that cannot open.
+    // `pledge` is the live monthly support, kept while it runs out its period
+    // after a cancellation so the dialog can say when it ends.
+    billing: stripeConfigured
+      ? {
+          contributedCents,
+          pledge:
+            sub && (supporter || sub.cancelAtPeriodEnd)
+              ? {
+                  amountCents: sub.amountCents,
+                  currency: sub.currency,
+                  status: sub.status,
+                  currentPeriodEnd: sub.currentPeriodEnd,
+                  cancelAtPeriodEnd: sub.cancelAtPeriodEnd,
+                }
+              : null,
+        }
+      : null,
   });
 }
 
 /**
  * Change one of this account's privacy switches: `loadoutsHidden`,
- * `battlesHidden`, or both in one body.
+ * `battlesHidden`, `anonymous`, or several in one body.
  *
  * The same switches as `PATCH /api/game/me`, from the other side: that one is
  * drawn by the mod's own settings window and acts for a game client's secret,
@@ -98,6 +138,11 @@ export async function GET(): Promise<Response> {
  * practice would otherwise be readable by whoever they face next, and charging
  * for it would put a price on keeping that quiet. The battles keep arriving;
  * only the profile's Battles tab answers its owner alone.
+ *
+ * Appearing anonymously on the supporters board is everybody's too, for the
+ * reason `/api/support/anonymous` gives: a one-off donor is on that board and
+ * has the same say over their name. It needs no Wargaming account, since it
+ * hangs off the login.
  */
 export async function PATCH(req: Request): Promise<Response> {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -107,15 +152,23 @@ export async function PATCH(req: Request): Promise<Response> {
   const body = (await req.json().catch(() => null)) as {
     loadoutsHidden?: unknown;
     battlesHidden?: unknown;
+    anonymous?: unknown;
   } | null;
   const loadoutsHidden = body?.loadoutsHidden;
   const battlesHidden = body?.battlesHidden;
+  const anonymous = body?.anonymous;
+  const flags = [loadoutsHidden, battlesHidden, anonymous];
   const valid =
-    (loadoutsHidden === undefined || typeof loadoutsHidden === "boolean") &&
-    (battlesHidden === undefined || typeof battlesHidden === "boolean") &&
-    (loadoutsHidden !== undefined || battlesHidden !== undefined);
+    flags.every((f) => f === undefined || typeof f === "boolean") &&
+    flags.some((f) => f !== undefined);
   if (!valid) {
     return NextResponse.json({ error: "invalid_body" }, { status: 400 });
+  }
+  if (typeof anonymous === "boolean") {
+    await setAnonymous(session.user.id, anonymous);
+  }
+  if (loadoutsHidden === undefined && battlesHidden === undefined) {
+    return NextResponse.json({ anonymous });
   }
   const [supporter, wargaming] = await Promise.all([
     loadoutsHidden === undefined ? true : isSupporter(session.user.id),

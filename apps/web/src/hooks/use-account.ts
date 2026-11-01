@@ -20,6 +20,21 @@ export type AccountState = {
   supporter: boolean;
   loadoutsHidden: boolean;
   battlesHidden: boolean;
+  /** Hidden from the supporters board, name and badge alike. */
+  anonymous: boolean;
+  /** Null when the site takes no payments at all. */
+  billing: {
+    /** Everything this account has given, one-off gifts included. */
+    contributedCents: number;
+    /** The monthly support, while it runs. */
+    pledge: {
+      amountCents: number;
+      currency: string;
+      status: string;
+      currentPeriodEnd: string | null;
+      cancelAtPeriodEnd: boolean;
+    } | null;
+  } | null;
 };
 
 /**
@@ -28,9 +43,11 @@ export type AccountState = {
  * One entry rather than a fetch per section, so moving between the dialog's
  * sections, or closing and reopening it, shows what is already known at once
  * and refreshes it behind the reader instead of starting from a spinner.
+ * `enabled` lets a component that is mounted on every page (the dialog itself)
+ * read it only once it is open, leaving the first read to the idle preload.
  */
-export function useAccount() {
-  return useSWR<AccountState>(ACCOUNT_KEY);
+export function useAccount(enabled = true) {
+  return useSWR<AccountState>(enabled ? ACCOUNT_KEY : null);
 }
 
 /**

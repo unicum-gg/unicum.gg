@@ -1,12 +1,13 @@
 "use client";
 
 import {
+  CreditCardIcon,
   ShieldIcon,
   SignOutIcon,
   UserIcon,
   type Icon,
 } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,10 +18,11 @@ import {
 } from "@/components/ui/dialog";
 import { useTranslation } from "@/hooks/use-translation";
 import { signOut, useSession } from "@/lib/auth-client";
-import { preloadAccount } from "@/hooks/use-account";
+import { preloadAccount, useAccount } from "@/hooks/use-account";
 import { cn } from "@/lib/utils";
 import { Connections } from "./connections";
 import { consumeConnectionsFlag } from "./return-path";
+import { SettingsBilling } from "./settings-billing";
 import { SettingsPrivacy } from "./settings-privacy";
 import { SettingsRow } from "./settings-row";
 
@@ -30,12 +32,33 @@ enum SettingsSection {
   Account = "account",
   /** What the account publishes about itself. */
   Privacy = "privacy",
+  /** What the account gives the site, and where to change it. */
+  Billing = "billing",
 }
 
 const SECTIONS: { section: SettingsSection; icon: Icon }[] = [
   { section: SettingsSection.Account, icon: UserIcon },
   { section: SettingsSection.Privacy, icon: ShieldIcon },
+  { section: SettingsSection.Billing, icon: CreditCardIcon },
 ];
+
+/** `#settings` opens the dialog, `#settings/<section>` opens it there. */
+const HASH_PREFIX = "#settings";
+
+/** The section an address asks for: null when it asks for no dialog at all. */
+function sectionFromHash(hash: string): SettingsSection | null {
+  if (hash !== HASH_PREFIX && !hash.startsWith(`${HASH_PREFIX}/`)) return null;
+  const asked = hash.slice(HASH_PREFIX.length + 1);
+  return (Object.values(SettingsSection) as string[]).includes(asked)
+    ? (asked as SettingsSection)
+    : SettingsSection.Account;
+}
+
+/** Rewrite the address's hash in place, keeping the router's own state. */
+function replaceHash(hash: string): void {
+  const { pathname, search } = window.location;
+  window.history.replaceState(window.history.state, "", `${pathname}${search}${hash}`);
+}
 
 /**
  * The account's settings, as one dialog with a rail of sections.
@@ -69,15 +92,70 @@ export function SettingsDialog({
    * return lands.
    */
   reopenOnReturn = false,
+  /**
+   * Open when the address asks for it (`#settings/privacy`), on arrival and
+   * whenever the hash changes. Like the flag above, only ONE mount on a page may
+   * read the address: the top bar's, which is on every page a signed-in reader
+   * sees. Every mount WRITES it while open, so the address always names the
+   * section on screen and can be pasted to somebody.
+   */
+  claimHash = false,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   reopenOnReturn?: boolean;
+  claimHash?: boolean;
 }) {
   const { t } = useTranslation("components/account/settings");
-  const [section, setSection] = useState(SettingsSection.Account);
+  // Started from the address, so a mount that arrives already open (the top
+  // bar's widget mounts once the session has been read) lands on the section
+  // the address names rather than on the default for a frame.
+  const [section, setSection] = useState(
+    () =>
+      (claimHash && typeof window !== "undefined"
+        ? sectionFromHash(window.location.hash)
+        : null) ?? SettingsSection.Account,
+  );
   const { data: session } = useSession();
   const signedIn = !!session?.user;
+
+  const { data: account } = useAccount(open);
+  // The billing section only exists where the site takes money. Offered while
+  // the answer is still on its way, since the rail must not shift under the
+  // reader for the common case.
+  const sections = SECTIONS.filter(
+    ({ section: key }) =>
+      key !== SettingsSection.Billing || account?.billing !== null,
+  );
+
+  useEffect(() => {
+    if (!claimHash) return;
+    const follow = () => {
+      const asked = sectionFromHash(window.location.hash);
+      if (!asked) return;
+      setSection(asked);
+      onOpenChange(true);
+    };
+    follow();
+    window.addEventListener("hashchange", follow);
+    return () => window.removeEventListener("hashchange", follow);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [claimHash]);
+
+  // Written in place rather than pushed: a section change is not a page the
+  // back button should step through. Only cleared by the mount that had it
+  // open, or a closed mount would wipe the address before the claiming one
+  // has read it.
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (open) {
+      replaceHash(`${HASH_PREFIX}/${section}`);
+      wasOpen.current = true;
+    } else if (wasOpen.current) {
+      wasOpen.current = false;
+      if (sectionFromHash(window.location.hash)) replaceHash("");
+    }
+  }, [open, section]);
 
   useEffect(() => {
     if (!signedIn) return;
@@ -117,7 +195,7 @@ export function SettingsDialog({
             aria-label={t("title")}
             className="flex shrink-0 gap-1 overflow-x-auto border-fd-border border-b p-2 sm:w-52 sm:flex-col sm:overflow-x-visible sm:overflow-y-auto sm:border-r sm:border-b-0"
           >
-            {SECTIONS.map(({ section: key, icon: SectionIcon }) => (
+            {sections.map(({ section: key, icon: SectionIcon }) => (
               <button
                 key={key}
                 type="button"
@@ -145,8 +223,10 @@ export function SettingsDialog({
             </p>
             {section === SettingsSection.Account ? (
               <AccountSection />
-            ) : (
+            ) : section === SettingsSection.Privacy ? (
               <SettingsPrivacy />
+            ) : (
+              <SettingsBilling />
             )}
           </div>
         </div>

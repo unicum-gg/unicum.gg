@@ -16,7 +16,7 @@ import { SettingsSkeleton } from "./settings-skeleton";
 
 
 /** The switches this section draws, named as `/api/account/me` names them. */
-type PrivacySwitch = "loadoutsHidden" | "battlesHidden";
+type PrivacySwitch = "loadoutsHidden" | "battlesHidden" | "anonymous";
 
 /**
  * What the account chooses to publish about itself.
@@ -133,6 +133,24 @@ export function SettingsPrivacy() {
       <p className="mt-4 text-xs text-fd-muted-foreground">
         {t("loadouts-still-counted")}
       </p>
+      {/* Only where the site takes money, since the board it hides a name
+          from exists only there. Open to everybody signed in rather than to
+          current supporters: a one-off donor is on the board too. */}
+      {state.billing ? (
+        <div className="mt-4 border-t border-fd-border">
+          <SettingsRow
+            label={t("anonymous")}
+            description={t("anonymous-description")}
+          >
+            <Switch
+              checked={state.anonymous}
+              onCheckedChange={(hidden) => toggle("anonymous", hidden)}
+              disabled={saving}
+              aria-label={t("anonymous")}
+            />
+          </SettingsRow>
+        </div>
+      ) : null}
     </div>
   );
 }

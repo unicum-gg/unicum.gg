@@ -122,7 +122,11 @@ export function LoginWidget() {
             <GearSixIcon className="size-4 sm:hidden" aria-hidden />
           </button>
         </Hint>
-        <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
+        <SettingsDialog
+          open={settingsOpen}
+          onOpenChange={setSettingsOpen}
+          claimHash
+        />
       </span>
     );
   }
