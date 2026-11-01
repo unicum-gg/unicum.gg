@@ -14,5 +14,19 @@
   "supporters-only": "Alleen voor Supporter.",
   "loadouts-still-counted": "Je gevechten tellen nog steeds mee voor de cijfers waarop het tabblad Uitrustingen van elk voertuig is gebaseerd, zonder dat iets je naam noemt. Als je helemaal wilt stoppen met het verzenden ervan, schakel je delen uit in de spelmod. Daarmee wordt ook verwijderd wat deze al heeft verzonden.",
   "hide-battles": "Mijn gevechten verbergen",
-  "hide-battles-description": "Alleen jij kunt het tabblad Gevechten van je profiel zien. Je gevechten blijven geregistreerd, tellen nog steeds mee in de statistieken van de site en blijven zichtbaar op de pagina’s van de andere spelers die eraan deelnamen."
+  "hide-battles-description": "Alleen jij kunt het tabblad Gevechten van je profiel zien. Je gevechten blijven geregistreerd, tellen nog steeds mee in de statistieken van de site en blijven zichtbaar op de pagina’s van de andere spelers die eraan deelnamen.",
+  "section-billing": "Betalingen",
+  "section-billing-description": "Wat je geeft om de site actief te houden en waar je dit kunt wijzigen.",
+  "billing-pledge": "{amount} per maand",
+  "billing-renews": "Wordt verlengd op {date}.",
+  "billing-ends": "Geannuleerd, eindigt op {date}.",
+  "billing-manage": "Abonnement beheren",
+  "billing-portal-failed": "Het betalingsportaal kon niet worden geopend. Probeer het over een moment opnieuw.",
+  "billing-none": "Je steunt unicum.gg nog niet",
+  "billing-none-description": "De site heeft geen advertenties en wordt betaald door zijn spelers.",
+  "billing-support": "Steun ons",
+  "billing-total": "Tot nu toe gegeven",
+  "billing-total-description": "Alles wat je hebt gegeven, inclusief eenmalige giften. Bedankt.",
+  "anonymous": "Verberg me op het supportersklassement",
+  "anonymous-description": "Je naam en je supporterbadge blijven buiten het openbare klassement en je profiel."
 }

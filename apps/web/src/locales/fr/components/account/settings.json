@@ -14,5 +14,19 @@
   "supporters-only": "Supporters uniquement.",
   "loadouts-still-counted": "Vos batailles continuent de compter dans les chiffres sur lesquels est construit l’onglet des configurations de chaque véhicule, sans rien qui permette de vous identifier. Pour cesser totalement de les envoyer, décochez le partage dans le mod du jeu, ce qui supprime également les données déjà envoyées.",
   "hide-battles": "Masquer mes batailles",
-  "hide-battles-description": "Vous seul pouvez voir l’onglet Batailles de votre profil. Vos batailles continuent d’être enregistrées, comptent toujours dans les statistiques du site et restent visibles sur les pages des autres joueurs qui y ont participé."
+  "hide-battles-description": "Vous seul pouvez voir l’onglet Batailles de votre profil. Vos batailles continuent d’être enregistrées, comptent toujours dans les statistiques du site et restent visibles sur les pages des autres joueurs qui y ont participé.",
+  "section-billing": "Facturation",
+  "section-billing-description": "Ce que vous donnez pour maintenir le site en fonctionnement, et où le modifier.",
+  "billing-pledge": "{amount} par mois",
+  "billing-renews": "Renouvellement le {date}.",
+  "billing-ends": "Annulée, prend fin le {date}.",
+  "billing-manage": "Gérer l’abonnement",
+  "billing-portal-failed": "Impossible d’ouvrir le portail de facturation. Réessayez dans un moment.",
+  "billing-none": "Vous ne soutenez pas encore unicum.gg",
+  "billing-none-description": "Le site n’a pas de publicités et est financé par ses joueurs.",
+  "billing-support": "Soutenez-nous",
+  "billing-total": "Total versé jusqu’à présent",
+  "billing-total-description": "Tout ce que vous avez donné, dons ponctuels inclus. Merci.",
+  "anonymous": "Masquer mon nom du classement des supporters",
+  "anonymous-description": "Votre nom et votre badge de supporter restent absents du classement public et de votre profil."
 }

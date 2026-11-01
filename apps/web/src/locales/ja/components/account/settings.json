@@ -14,5 +14,19 @@
   "supporters-only": "サポーターのみ。",
   "loadouts-still-counted": "あなたの戦闘は、各車両のロードアウトタブの基になる数値に、あなたの名前が付かない形で引き続き反映されます。送信を完全に停止するには、ゲームのmodで共有のチェックを外してください。すでに送信済みのデータも削除されます。",
   "hide-battles": "自分の戦闘を非表示",
-  "hide-battles-description": "自分だけがプロフィールの戦闘数タブを表示できます。自分の戦闘は記録済みのまま、サイトの統計で引き続き数えられ、その戦闘に参加した他のプレイヤーのページでは引き続き表示されます。"
+  "hide-battles-description": "自分だけがプロフィールの戦闘数タブを表示できます。自分の戦闘は記録済みのまま、サイトの統計で引き続き数えられ、その戦闘に参加した他のプレイヤーのページでは引き続き表示されます。",
+  "section-billing": "請求",
+  "section-billing-description": "サイトを維持するために提供しているものと、その変更方法。",
+  "billing-pledge": "月額 {amount}",
+  "billing-renews": "{date} に更新されます。",
+  "billing-ends": "キャンセル済みです。{date} に終了します。",
+  "billing-manage": "サブスクリプションを管理",
+  "billing-portal-failed": "請求ポータルを開けませんでした。しばらくしてからもう一度お試しください。",
+  "billing-none": "まだ unicum.gg を支援していません",
+  "billing-none-description": "サイトには広告がなく、プレイヤーの支払いによって運営されています。",
+  "billing-support": "サポートしてください",
+  "billing-total": "これまでの支援額",
+  "billing-total-description": "一度きりのギフトも含む、これまでに提供したすべてです。ありがとうございます。",
+  "anonymous": "支援者ランキングで自分を非表示にする",
+  "anonymous-description": "名前と支援者バッジは、公開ランキングとプロフィールに表示されないままになります。"
 }

@@ -14,5 +14,19 @@
   "supporters-only": "Chỉ dành cho Người hỗ trợ.",
   "loadouts-still-counted": "Các trận đấu của bạn vẫn được tính vào số liệu mà tab bộ trang bị của từng xe tăng được xây dựng từ đó, không có gì có tên bạn. Để ngừng gửi chúng hoàn toàn, hãy bỏ chọn tùy chọn chia sẻ trong mod trò chơi, thao tác này cũng xóa những gì mod đã gửi.",
   "hide-battles": "Ẩn các trận đấu của tôi",
-  "hide-battles-description": "Chỉ bạn có thể xem tab Số trận trong hồ sơ của mình. Các trận đấu của bạn vẫn được ghi nhận, vẫn được tính trong thống kê của trang web và vẫn hiển thị trên các trang của những người chơi khác đã tham gia chúng."
+  "hide-battles-description": "Chỉ bạn có thể xem tab Số trận trong hồ sơ của mình. Các trận đấu của bạn vẫn được ghi nhận, vẫn được tính trong thống kê của trang web và vẫn hiển thị trên các trang của những người chơi khác đã tham gia chúng.",
+  "section-billing": "Thanh toán",
+  "section-billing-description": "Những gì bạn đóng góp để duy trì trang web và nơi thay đổi khoản đóng góp đó.",
+  "billing-pledge": "{amount} mỗi tháng",
+  "billing-renews": "Gia hạn vào {date}.",
+  "billing-ends": "Đã hủy, kết thúc vào {date}.",
+  "billing-manage": "Quản lý gói đăng ký",
+  "billing-portal-failed": "Không thể mở cổng thanh toán. Hãy thử lại sau một khoảnh khắc.",
+  "billing-none": "Bạn chưa hỗ trợ unicum.gg",
+  "billing-none-description": "Trang web không có quảng cáo và được chi trả bởi người chơi.",
+  "billing-support": "Hỗ trợ chúng tôi",
+  "billing-total": "Tổng số đã đóng góp",
+  "billing-total-description": "Tất cả những gì bạn đã đóng góp, bao gồm cả các khoản tặng một lần. Cảm ơn bạn.",
+  "anonymous": "Ẩn tôi trên bảng xếp hạng người ủng hộ",
+  "anonymous-description": "Tên và huy hiệu người ủng hộ của bạn sẽ không xuất hiện trên bảng xếp hạng công khai và hồ sơ của bạn."
 }

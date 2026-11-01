@@ -14,5 +14,19 @@
   "supporters-only": "Samo za podržavatelje.",
   "loadouts-still-counted": "Vaše bitke se i dalje računaju prema brojkama na kojima se zasniva kartica konfiguracija svakog vozila, bez ičega što navodi vaše ime. Da biste ih potpuno prestali slati, isključite dijeljenje u modu igre, koji takođe briše podatke koje je već poslao.",
   "hide-battles": "Sakrij moje bitke",
-  "hide-battles-description": "Samo vi možete vidjeti karticu Bitke na svom profilu. Vaše bitke i dalje ostaju zabilježene, i dalje se broje u statistiku stranice i ostaju vidljive na stranicama drugih igrača koji su učestvovali u njima."
+  "hide-battles-description": "Samo vi možete vidjeti karticu Bitke na svom profilu. Vaše bitke i dalje ostaju zabilježene, i dalje se broje u statistiku stranice i ostaju vidljive na stranicama drugih igrača koji su učestvovali u njima.",
+  "section-billing": "Naplata",
+  "section-billing-description": "Ono što dajete da bi stranica ostala u toku i gdje možete promijeniti iznos.",
+  "billing-pledge": "{amount} na mjesec",
+  "billing-renews": "Obnavlja se {date}.",
+  "billing-ends": "Otkazano, završava se {date}.",
+  "billing-manage": "Upravljaj pretplatom",
+  "billing-portal-failed": "Moglo bi biti da portal za naplatu nije moguće otvoriti. Pokušajte ponovo za trenutak.",
+  "billing-none": "Još ne podržavate unicum.gg",
+  "billing-none-description": "Stranica nema oglase i plaćaju je njeni igrači.",
+  "billing-support": "Podržite nas",
+  "billing-total": "Ukupno dato",
+  "billing-total-description": "Sve što ste dali, uključeno je i jednokratno darivanje. Hvala vam.",
+  "anonymous": "Sakrij me na rang-listi podržavalaca",
+  "anonymous-description": "Vaše ime i značka podržavaoca ostaju izvan javne rang-liste i vašeg profila."
 }

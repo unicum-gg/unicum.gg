@@ -14,5 +14,19 @@
   "supporters-only": "Samo za Podpornike.",
   "loadouts-still-counted": "Vaše bitke še vedno štejejo proti podatkom, na katerih temelji zavihek kompletov opreme vsakega vozila, brez navedbe vašega imena. Če jih želite popolnoma prenehati pošiljati, v modu igre odznačite deljenje, s čimer se izbriše tudi to, kar je že poslal.",
   "hide-battles": "Skrij moje bitky",
-  "hide-battles-description": "Záložku Bitky vo svojom profile môžete vidieť iba vy. Vaše bitky sa naďalej zaznamenávajú, stále sa započítavajú do štatistiky stránky a zostávajú viditeľné na stránkach ostatných hráčov, ktorí v nich bojovali."
+  "hide-battles-description": "Záložku Bitky vo svojom profile môžete vidieť iba vy. Vaše bitky sa naďalej zaznamenávajú, stále sa započítavajú do štatistiky stránky a zostávajú viditeľné na stránkach ostatných hráčov, ktorí v nich bojovali.",
+  "section-billing": "Fakturácia",
+  "section-billing-description": "Čím prispievate na udržanie stránky v prevádzke a kde vykonať zmenu.",
+  "billing-pledge": "{amount} mesačne",
+  "billing-renews": "Obnoví sa {date}.",
+  "billing-ends": "Prekličené, končí {date}.",
+  "billing-manage": "Spravovať predplatné",
+  "billing-portal-failed": "Lahko sa fakturačný portál nepodarilo otvoriť. Skúste to znova o okamih.",
+  "billing-none": "Zatiaľ nepodporujete unicum.gg",
+  "billing-none-description": "Stránka nemá reklamy a platia ju jej hráči.",
+  "billing-support": "Podporte nás",
+  "billing-total": "Doteraz poskytnuté",
+  "billing-total-description": "Všetko, čo ste poskytli, jednorazové dary sú zahrnuté. Ďakujeme.",
+  "anonymous": "Skry ma na lestvici podporovateľov",
+  "anonymous-description": "Vaše meno a značka podporovateľa zostanú mimo javno dostupnej lestvice a profilu."
 }

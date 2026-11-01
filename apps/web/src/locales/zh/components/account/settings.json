@@ -14,5 +14,19 @@
   "supporters-only": "仅限支持者。",
   "loadouts-still-counted": "你的战斗场次仍会计入构成每辆车辆配装页面的数值中，其中不会标注你的名称。若要完全停止发送这些内容，请在游戏模组中取消勾选共享选项，这也会删除它已经发送的内容。",
   "hide-battles": "隐藏我的战斗场次",
-  "hide-battles-description": "只有您可以看到个人资料中的战斗场次标签页。您的战斗场次仍会被记录，仍会计入网站的统计数据，并继续显示在参与这些战斗场次的其他玩家的页面上。"
+  "hide-battles-description": "只有您可以看到个人资料中的战斗场次标签页。您的战斗场次仍会被记录，仍会计入网站的统计数据，并继续显示在参与这些战斗场次的其他玩家的页面上。",
+  "section-billing": "账单",
+  "section-billing-description": "您为维持网站运行中所付出的费用，以及变更方式。",
+  "billing-pledge": "每月 {amount}",
+  "billing-renews": "将于 {date} 续订。",
+  "billing-ends": "已取消，将于 {date} 结束。",
+  "billing-manage": "管理订阅",
+  "billing-portal-failed": "未能打开账单门户。请稍后再试。",
+  "billing-none": "您尚未支持 unicum.gg",
+  "billing-none-description": "网站没有广告，由玩家付费维持。",
+  "billing-support": "支持我们",
+  "billing-total": "目前累计支持金额",
+  "billing-total-description": "您付费的全部金额，包含一次性赠款。谢谢。",
+  "anonymous": "在支持者榜单中隐藏我",
+  "anonymous-description": "您的名称和支持者徽章会留在公开榜单和个人资料之外。"
 }

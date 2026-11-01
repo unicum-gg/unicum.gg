@@ -14,5 +14,19 @@
   "supporters-only": "후원자만.",
   "loadouts-still-counted": "모든 차량의 장비 구성 탭이 기반으로 삼는 수치에는 전투가 계속 집계되지만, 나를 이름으로 식별하는 정보는 없음. 전송을 완전히 중지하려면 게임 클라이언트 모드에서 공유 체크를 해제하세요. 그러면 이미 전송된 내용도 삭제됩니다.",
   "hide-battles": "내 전투 숨기기",
-  "hide-battles-description": "프로필의 전투 탭은 본인만 볼 수 있습니다. 전투 기록은 계속 유지되며, 사이트 통계의 전투 수에 계속 포함되고, 해당 전투에 참여했던 다른 플레이어들의 페이지에는 계속 표시됩니다."
+  "hide-battles-description": "프로필의 전투 탭은 본인만 볼 수 있습니다. 전투 기록은 계속 유지되며, 사이트 통계의 전투 수에 계속 포함되고, 해당 전투에 참여했던 다른 플레이어들의 페이지에는 계속 표시됩니다.",
+  "section-billing": "결제",
+  "section-billing-description": "사이트를 실행 중으로 유지하기 위해 제공하는 금액과 변경 위치입니다.",
+  "billing-pledge": "월 {amount}",
+  "billing-renews": "{date}에 갱신됩니다.",
+  "billing-ends": "취소됨, {date}에 종료됩니다.",
+  "billing-manage": "구독 관리",
+  "billing-portal-failed": "결제 포털을 열 수 없습니다. 잠시 후 다시 시도해 주세요.",
+  "billing-none": "아직 unicum.gg를 후원하지 않고 있습니다",
+  "billing-none-description": "사이트에는 광고가 없으며 플레이어들의 후원으로 유료 운영됩니다.",
+  "billing-support": "후원해 주세요",
+  "billing-total": "지금까지 후원한 금액",
+  "billing-total-description": "지금까지 제공한 모든 금액이 포함됨, 일회성 선물도 포함됨입니다. 감사합니다.",
+  "anonymous": "리더보드에서 나를 숨기기",
+  "anonymous-description": "이름과 후원자 배지는 공개 리더보드와 프로필에 계속 표시되지 않습니다."
 }

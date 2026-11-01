@@ -14,5 +14,19 @@
   "supporters-only": "Somente apoiadores.",
   "loadouts-still-counted": "Suas batalhas ainda contam para os valores a partir dos quais é criada a aba de configurações de cada veículo, sem nada que informe seu nome. Para interromper totalmente o envio, desmarque o compartilhamento no mod do jogo, que também exclui o que já foi enviado.",
   "hide-battles": "Ocultar minhas batalhas",
-  "hide-battles-description": "Somente você pode ver a aba Batalhas do seu perfil. Suas batalhas continuam sendo registradas, ainda fazem parte da contagem das estatísticas do site e permanecem visíveis nas páginas dos outros jogadores que participaram delas."
+  "hide-battles-description": "Somente você pode ver a aba Batalhas do seu perfil. Suas batalhas continuam sendo registradas, ainda fazem parte da contagem das estatísticas do site e permanecem visíveis nas páginas dos outros jogadores que participaram delas.",
+  "section-billing": "Faturação",
+  "section-billing-description": "O que dá para manter o site em andamento e onde fazer a alteração.",
+  "billing-pledge": "{amount} por mês",
+  "billing-renews": "Renova em {date}.",
+  "billing-ends": "Cancelada, termina em {date}.",
+  "billing-manage": "Gerir subscrição",
+  "billing-portal-failed": "Poderia não abrir o portal de faturação. Tente novamente dentro de um momento.",
+  "billing-none": "Você ainda não apoia o unicum.gg",
+  "billing-none-description": "O site não tem anúncios e é pago pelos seus jogadores.",
+  "billing-support": "Apoie-nos",
+  "billing-total": "Total oferecido até agora",
+  "billing-total-description": "Tudo o que você ofereceu, com o valor dos presentes únicos incluído. Obrigado.",
+  "anonymous": "Ocultar-me na classificação de apoiadores",
+  "anonymous-description": "O seu nome e o seu distintivo de apoiador ficam fora da classificação pública e do seu perfil."
 }

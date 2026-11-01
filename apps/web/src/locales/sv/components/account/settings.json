@@ -14,5 +14,19 @@
   "supporters-only": "Endast för Supporter.",
   "loadouts-still-counted": "Dina strider räknas fortfarande mot de siffror som varje fordons utrustningsflik bygger på, utan något som namnger dig. Om du vill sluta skicka dem helt, avmarkera delning i spelmodden, vilket också raderar det som den redan har skickat.",
   "hide-battles": "Dölj mina strider",
-  "hide-battles-description": "Endast du kan se fliken Strider i din profil. Dina strider är fortfarande registrerade, räknas fortfarande i webbplatsens statistik och förblir synliga på sidorna för de andra spelarna som var med i dem."
+  "hide-battles-description": "Endast du kan se fliken Strider i din profil. Dina strider är fortfarande registrerade, räknas fortfarande i webbplatsens statistik och förblir synliga på sidorna för de andra spelarna som var med i dem.",
+  "section-billing": "Fakturering",
+  "section-billing-description": "Vad du ger för att hålla webbplatsen pågående och var du ändrar det.",
+  "billing-pledge": "{amount} per månad",
+  "billing-renews": "Förnyas den {date}.",
+  "billing-ends": "Avbruten, upphör den {date}.",
+  "billing-manage": "Hantera prenumeration",
+  "billing-portal-failed": "Kunde inte öppna faktureringsportalen. Försök igen om ett ögonblick.",
+  "billing-none": "Du har ännu inte stöttat unicum.gg",
+  "billing-none-description": "Webbplatsen har inga annonser och betalas av sina spelare.",
+  "billing-support": "Stöd oss",
+  "billing-total": "Givet hittills",
+  "billing-total-description": "Allt du har gett, med en engångsgåva inkluderad. Tack.",
+  "anonymous": "Dölj mig på supporters topplista",
+  "anonymous-description": "Ditt namn och ditt supportersmärke stannar kvar utanför den offentliga topplistan och din profil."
 }

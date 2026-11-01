@@ -14,5 +14,19 @@
   "supporters-only": "Pouze pro podporovatele.",
   "loadouts-still-counted": "Vaše bitvy se stále započítávají do údajů, ze kterých se vytváří karta sestav každého vozidla, aniž by vás cokoli identifikovalo. Pokud chcete zcela zastavit jejich odesílání, zrušte zaškrtnutí sdílení v herním modu, který také smaže vše, co již odeslal.",
   "hide-battles": "Skrýt moje bitvy",
-  "hide-battles-description": "Pouze vy můžete vidět záložku Bitvy ve svém profilu. Vaše bitvy zůstávají zaznamenané, stále se započítávají do statistik webu a zůstávají viditelné na stránkách ostatních hráčů, kteří se jich zúčastnili."
+  "hide-battles-description": "Pouze vy můžete vidět záložku Bitvy ve svém profilu. Vaše bitvy zůstávají zaznamenané, stále se započítávají do statistik webu a zůstávají viditelné na stránkách ostatních hráčů, kteří se jich zúčastnili.",
+  "section-billing": "Platby",
+  "section-billing-description": "Co poskytujete, aby web mohl dál fungovat, a kde provést změnu.",
+  "billing-pledge": "{amount} za měsíc",
+  "billing-renews": "Obnovuje se {date}.",
+  "billing-ends": "Storno, končí {date}.",
+  "billing-manage": "Spravovat předplatné",
+  "billing-portal-failed": "Mohlo by se nepodařit otevřít platební portál. Zkuste to znovu za okamžik.",
+  "billing-none": "Zatím nejste podporovatelem unicum.gg",
+  "billing-none-description": "Web nemá reklamy a je placené svými hráči.",
+  "billing-support": "Podpořte nás",
+  "billing-total": "Poskytnuto dosud",
+  "billing-total-description": "Vše, co jste poskytli, včetně jednorázových darů, je zahrnuto. Děkujeme.",
+  "anonymous": "Skrýt mě na žebříčku podporovatelů",
+  "anonymous-description": "Váš název a odznak podporovatele nebudou zobrazeny na veřejném žebříčku ani ve vašem profilu."
 }

@@ -14,5 +14,19 @@
   "supporters-only": "Kun for Supportere.",
   "loadouts-still-counted": "Dine kampe tæller stadig med i de tal, som hver kampvogns fane med opsætninger er bygget ud fra, uden at noget navngiver dig. Hvis du vil stoppe med at sende dem helt, skal du fjerne markeringen for deling i spilmoddet, som også sletter det, der allerede er sendt.",
   "hide-battles": "Skjul mine kampe",
-  "hide-battles-description": "Kun du kan se fanen Kampe på din profil. Dine kampe bliver fortsat registreret, tæller stadig med i webstedets statistik og forbliver synlige på siderne for de andre spillere, der deltog i dem."
+  "hide-battles-description": "Kun du kan se fanen Kampe på din profil. Dine kampe bliver fortsat registreret, tæller stadig med i webstedets statistik og forbliver synlige på siderne for de andre spillere, der deltog i dem.",
+  "section-billing": "Fakturering",
+  "section-billing-description": "Det, du giver for at holde webstedet kørende, og hvor du kan foretage en ændring.",
+  "billing-pledge": "{amount} pr. måned",
+  "billing-renews": "Fornyes den {date}.",
+  "billing-ends": "Opsagt, slutter den {date}.",
+  "billing-manage": "Administrer abonnement",
+  "billing-portal-failed": "Kunne ikke åbne faktureringsportalen. Prøv igen om et øjeblik.",
+  "billing-none": "Du er endnu ikke bidragyder til unicum.gg",
+  "billing-none-description": "Webstedet har ingen annoncer og er betalt af sine spillere.",
+  "billing-support": "Støt os",
+  "billing-total": "Givet indtil videre",
+  "billing-total-description": "Alt, hvad du har givet, inklusive engangsgaver. Tak.",
+  "anonymous": "Skjul mig på ranglisten over bidragydere",
+  "anonymous-description": "Dit navn og dit mærke som bidragyder forbliver skjult på den offentlige rangliste og i din profil."
 }

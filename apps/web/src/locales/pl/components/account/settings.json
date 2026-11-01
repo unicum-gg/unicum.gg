@@ -14,5 +14,19 @@
   "supporters-only": "Tylko dla Supporterów.",
   "loadouts-still-counted": "Twoje bitwy nadal są uwzględniane w statystykach, na podstawie których tworzona jest zakładka konfiguracji każdego pojazdu, bez niczego, co zawierałoby twoją nazwę. Aby całkowicie przestać je wysyłać, odznacz udostępnianie w modzie do gry, co usunie również dane, które już wysłano.",
   "hide-battles": "Ukryj moje bitwy",
-  "hide-battles-description": "Tylko Ty możesz zobaczyć zakładkę Bitwy na swoim profilu. Twoje bitwy nadal są rejestrowane, wciąż są uwzględniane w statystykach witryny i pozostają widoczne na stronach innych graczy, którzy brali w nich udział."
+  "hide-battles-description": "Tylko Ty możesz zobaczyć zakładkę Bitwy na swoim profilu. Twoje bitwy nadal są rejestrowane, wciąż są uwzględniane w statystykach witryny i pozostają widoczne na stronach innych graczy, którzy brali w nich udział.",
+  "section-billing": "Rozliczenia",
+  "section-billing-description": "Co przekazujesz, aby utrzymać działanie witryny, i gdzie dokonać zmiany.",
+  "billing-pledge": "{amount} na miesiąc",
+  "billing-renews": "Odnawia się {date}.",
+  "billing-ends": "Anulowano, kończy się {date}.",
+  "billing-manage": "Zarządzaj subskrypcją",
+  "billing-portal-failed": "Mógłby nie otworzyć się portal płatności. Spróbuj ponownie za moment.",
+  "billing-none": "Nie wspierasz jeszcze unicum.gg",
+  "billing-none-description": "Witryna nie ma reklam i jest opłacana przez swoich graczy.",
+  "billing-support": "Wspieraj nas",
+  "billing-total": "Przekazano do tej pory",
+  "billing-total-description": "Wszystko, co przekazałeś, w tym jednorazowe prezenty, zostało uwzględnione. Dziękujemy.",
+  "anonymous": "Ukryj mnie w tabeli wspierających",
+  "anonymous-description": "Twoja nazwa i odznaka wspierającego pozostaną poza publiczną tabelą i Twoim profilem."
 }

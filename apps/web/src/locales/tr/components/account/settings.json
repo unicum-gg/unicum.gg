@@ -14,5 +14,19 @@
   "supporters-only": "Yalnızca Destekçiler.",
   "loadouts-still-counted": "Savaşlarınız, sizi adlandıran hiçbir şey olmadan, her aracın donanımlar sekmesinin temel aldığı değerlere sayılmaya devam eder. Bunları göndermeyi tamamen durdurmak için oyun modundaki paylaşım seçeneğinin işaretini kaldırın. Bu işlem, onun zaten gönderdiği verileri de siler.",
   "hide-battles": "Savaşlarımı Gizle",
-  "hide-battles-description": "Profilinizin Savaşlar sekmesini yalnızca siz görebilirsiniz. Savaşlarınız kaydedilmeye devam eder, sitenin istatistiklerinde hâlâ sayılır ve bu savaşlarda yer alan diğer oyuncuların sayfalarında görünür olmaya devam eder."
+  "hide-battles-description": "Profilinizin Savaşlar sekmesini yalnızca siz görebilirsiniz. Savaşlarınız kaydedilmeye devam eder, sitenin istatistiklerinde hâlâ sayılır ve bu savaşlarda yer alan diğer oyuncuların sayfalarında görünür olmaya devam eder.",
+  "section-billing": "Faturalandırma",
+  "section-billing-description": "Siteyi devam ettirmek için verdiğiniz destek ve bunu değiştirebileceğiniz yer.",
+  "billing-pledge": "Aylık {amount}",
+  "billing-renews": "{date} tarihinde yenilenir.",
+  "billing-ends": "İptal edildi, {date} tarihinde sona erer.",
+  "billing-manage": "Aboneliği yönet",
+  "billing-portal-failed": "Faturalandırma portalı açılamadı. Biraz sonra tekrar deneyin.",
+  "billing-none": "Henüz unicum.gg’yi desteklemiyorsunuz",
+  "billing-none-description": "Sitede reklam yok ve masrafları oyuncular tarafından karşılanıyor.",
+  "billing-support": "Bizi destekle",
+  "billing-total": "Şimdiye kadar verilen",
+  "billing-total-description": "Verdiğiniz her şey, tek seferlik hediyeler dahil. Teşekkürler.",
+  "anonymous": "Destekçiler tablosunda beni gizle",
+  "anonymous-description": "Adınız ve destekçi rozetiniz herkese açık tabloda ve profilinizde görünmez."
 }

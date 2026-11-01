@@ -14,5 +14,19 @@
   "supporters-only": "Mga sumusuporta lamang.",
   "loadouts-still-counted": "Binibilang pa rin ang iyong mga laban tungo sa mga bilang na pinagbabatayan ng tab na mga loadout ng bawat sasakyan, nang walang pangalan mo. Para tuluyang ihinto ang pagpapadala ng mga ito, alisin ang check sa pagbabahagi sa mod ng laro, na nagde-delete rin ng ipinadala na nito.",
   "hide-battles": "Itago ang mga laban ko",
-  "hide-battles-description": "Ikaw lamang ang makakakita sa tab na Mga labanan ng iyong profile. Patuloy na naitala ang iyong mga laban, kasama pa rin sa bilang ng mga istatistika ng website, at nananatiling nakikita sa mga pahina ng ibang mga manlalaro na kasama sa mga ito."
+  "hide-battles-description": "Ikaw lamang ang makakakita sa tab na Mga labanan ng iyong profile. Patuloy na naitala ang iyong mga laban, kasama pa rin sa bilang ng mga istatistika ng website, at nananatiling nakikita sa mga pahina ng ibang mga manlalaro na kasama sa mga ito.",
+  "section-billing": "Pagsingil",
+  "section-billing-description": "Ang ibinibigay mo para panatilihing tumatakbo ang website, at kung saan gagawin ang pagbabago.",
+  "billing-pledge": "{amount} bawat buwan",
+  "billing-renews": "Nire-renew sa {date}.",
+  "billing-ends": "Kinansela, magtatapos sa {date}.",
+  "billing-manage": "Pamahalaan ang subscription",
+  "billing-portal-failed": "Hindi mabuksan ang portal ng pagsingil. Subukan muli pagkalipas ng sandali.",
+  "billing-none": "Hindi mo pa sinusuportahan ang unicum.gg",
+  "billing-none-description": "Walang mga ad ang website at binabayaran ito ng mga manlalaro nito.",
+  "billing-support": "Suportahan kami",
+  "billing-total": "Naibigay sa ngayon",
+  "billing-total-description": "Lahat ng naibigay mo, kasama ang mga minsanang regalo. Salamat.",
+  "anonymous": "Itago ako sa talahanayan ng ranggo ng mga tagasuporta",
+  "anonymous-description": "Mananatiling wala sa pampublikong talahanayan ng ranggo at profile mo ang iyong pangalan at insignia ng tagasuporta."
 }

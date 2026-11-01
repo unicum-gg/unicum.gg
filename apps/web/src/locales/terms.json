@@ -826,7 +826,10 @@
     "save": "حفظ",
     "towards": "نحو",
     "list": "قائمة",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "Manage subscription": "إدارة الاشتراك",
+    "paid": "مدفوع",
+    "stay": "البقاء"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1656,7 +1659,10 @@
     "save": "захаваць",
     "towards": "да",
     "list": "спіс",
-    "settings": "налады"
+    "settings": "налады",
+    "Manage subscription": "Кіраваць падпіскай",
+    "paid": "платны",
+    "stay": "застацца"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2702,7 +2708,10 @@
     "save": "запазване",
     "towards": "към",
     "list": "списък",
-    "settings": "настройки"
+    "settings": "настройки",
+    "Manage subscription": "Управление на абонамента",
+    "paid": "платен",
+    "stay": "остани"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3540,7 +3549,10 @@
     "save": "sačuvaj",
     "towards": "prema",
     "list": "lista",
-    "settings": "postavke"
+    "settings": "postavke",
+    "Manage subscription": "Upravljaj pretplatom",
+    "paid": "plaćeno",
+    "stay": "ostani"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4597,7 +4609,10 @@
     "save": "uložit",
     "towards": "vůči",
     "list": "seznam",
-    "settings": "nastavení"
+    "settings": "nastavení",
+    "Manage subscription": "Spravovat předplatné",
+    "paid": "placené",
+    "stay": "zůstat"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5660,7 +5675,10 @@
     "save": "gem",
     "towards": "mod",
     "list": "liste",
-    "settings": "indstillinger"
+    "settings": "indstillinger",
+    "Manage subscription": "Administrer abonnement",
+    "paid": "betalt",
+    "stay": "bliv"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6716,7 +6734,10 @@
     "save": "speichern",
     "towards": "gegenüber",
     "list": "Liste",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "Manage subscription": "Abonnement verwalten",
+    "paid": "bezahlt",
+    "stay": "bleiben"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7778,7 +7799,10 @@
     "save": "αποθήκευση",
     "towards": "προς",
     "list": "λίστα",
-    "settings": "ρυθμίσεις"
+    "settings": "ρυθμίσεις",
+    "Manage subscription": "Διαχείριση συνδρομής",
+    "paid": "επί πληρωμή",
+    "stay": "παραμονή"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8820,7 +8844,10 @@
     "save": "guardar",
     "towards": "hacia",
     "list": "lista",
-    "settings": "configuración"
+    "settings": "configuración",
+    "Manage subscription": "Gestionar suscripción",
+    "paid": "de pago",
+    "stay": "permanecer"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9887,7 +9914,10 @@
     "save": "tallenna",
     "towards": "kohti",
     "list": "lista",
-    "settings": "asetukset"
+    "settings": "asetukset",
+    "Manage subscription": "Hallitse tilausta",
+    "paid": "maksullinen",
+    "stay": "pysy"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10933,7 +10963,10 @@
     "save": "enregistrer",
     "towards": "vers",
     "list": "liste",
-    "settings": "paramètres"
+    "settings": "paramètres",
+    "Manage subscription": "Gérer l’abonnement",
+    "paid": "payant",
+    "stay": "rester"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11764,7 +11797,10 @@
     "save": "सहेजें",
     "towards": "की ओर",
     "list": "सूची",
-    "settings": "सेटिंग्स"
+    "settings": "सेटिंग्स",
+    "Manage subscription": "सदस्यता प्रबंधित करें",
+    "paid": "सशुल्क",
+    "stay": "रहें"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12824,7 +12860,10 @@
     "save": "spremi",
     "towards": "prema",
     "list": "popis",
-    "settings": "postavke"
+    "settings": "postavke",
+    "Manage subscription": "Upravljanje pretplatom",
+    "paid": "plaćeno",
+    "stay": "ostani"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13886,7 +13925,10 @@
     "save": "mentés",
     "towards": "felé",
     "list": "lista",
-    "settings": "beállítások"
+    "settings": "beállítások",
+    "Manage subscription": "Előfizetés kezelése",
+    "paid": "fizetős",
+    "stay": "marad"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14944,7 +14986,10 @@
     "save": "salva",
     "towards": "verso",
     "list": "lista",
-    "settings": "impostazioni"
+    "settings": "impostazioni",
+    "Manage subscription": "Gestisci abbonamento",
+    "paid": "a pagamento",
+    "stay": "rimani"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16009,7 +16054,10 @@
     "save": "保存",
     "towards": "に対して",
     "list": "リスト",
-    "settings": "設定"
+    "settings": "設定",
+    "Manage subscription": "サブスクリプションを管理",
+    "paid": "有料",
+    "stay": "滞在"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16841,7 +16889,10 @@
     "loadouts": "Жиынтықтар",
     "save": "Сақтау",
     "towards": "қарай",
-    "list": "тізім"
+    "list": "тізім",
+    "Manage subscription": "Жазылымды басқару",
+    "paid": "ақылы",
+    "stay": "қалу"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17910,7 +17961,10 @@
     "save": "저장",
     "towards": "향해",
     "list": "목록",
-    "settings": "설정"
+    "settings": "설정",
+    "Manage subscription": "구독 관리",
+    "paid": "유료",
+    "stay": "계속"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -18975,7 +19029,10 @@
     "save": "išsaugoti",
     "towards": "link",
     "list": "sąrašas",
-    "settings": "nustatymai"
+    "settings": "nustatymai",
+    "Manage subscription": "Tvarkyti prenumeratą",
+    "paid": "mokama",
+    "stay": "likti"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20026,7 +20083,10 @@
     "save": "saglabāt",
     "towards": "attiecībā uz",
     "list": "saraksts",
-    "settings": "iestatījumi"
+    "settings": "iestatījumi",
+    "Manage subscription": "Pārvaldīt abonementu",
+    "paid": "maksas",
+    "stay": "palikt"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21093,7 +21153,10 @@
     "save": "opslaan",
     "towards": "naar",
     "list": "lijst",
-    "settings": "instellingen"
+    "settings": "instellingen",
+    "Manage subscription": "Abonnement beheren",
+    "paid": "betaald",
+    "stay": "blijven"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22151,7 +22214,10 @@
     "save": "lagre",
     "towards": "mot",
     "list": "liste",
-    "settings": "innstillinger"
+    "settings": "innstillinger",
+    "Manage subscription": "Administrer abonnement",
+    "paid": "betalt",
+    "stay": "bli"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23206,7 +23272,10 @@
     "save": "zapisz",
     "towards": "w kierunku",
     "list": "lista",
-    "settings": "ustawienia"
+    "settings": "ustawienia",
+    "Manage subscription": "Zarządzaj subskrypcją",
+    "paid": "płatny",
+    "stay": "pozostań"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24254,7 +24323,10 @@
     "save": "salvar",
     "towards": "para",
     "list": "lista",
-    "settings": "configurações"
+    "settings": "configurações",
+    "Manage subscription": "Gerir subscrição",
+    "paid": "pago",
+    "stay": "ficar"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25302,7 +25374,10 @@
     "save": "salvează",
     "towards": "către",
     "list": "listă",
-    "settings": "setări"
+    "settings": "setări",
+    "Manage subscription": "Gestionează abonamentul",
+    "paid": "plătit",
+    "stay": "rămâi"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26338,7 +26413,10 @@
     "save": "сохранить",
     "towards": "к",
     "list": "список",
-    "settings": "настройки"
+    "settings": "настройки",
+    "Manage subscription": "Управление подпиской",
+    "paid": "оплачено",
+    "stay": "остаться"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27172,7 +27250,10 @@
     "save": "shrani",
     "towards": "proti",
     "list": "seznam",
-    "settings": "nastavitve"
+    "settings": "nastavitve",
+    "Manage subscription": "Spravovať predplatné",
+    "paid": "platené",
+    "stay": "zostať"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28234,7 +28315,10 @@
     "save": "сачувај",
     "towards": "према",
     "list": "lista",
-    "settings": "podešavanja"
+    "settings": "podešavanja",
+    "Manage subscription": "Upravljaj pretplatom",
+    "paid": "plaćeno",
+    "stay": "ostani"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29301,7 +29385,10 @@
     "save": "spara",
     "towards": "mot",
     "list": "lista",
-    "settings": "inställningar"
+    "settings": "inställningar",
+    "Manage subscription": "Hantera prenumeration",
+    "paid": "betald",
+    "stay": "stanna kvar"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30364,7 +30451,10 @@
     "save": "บันทึก",
     "towards": "สู่",
     "list": "รายการ",
-    "settings": "การตั้งค่า"
+    "settings": "การตั้งค่า",
+    "Manage subscription": "จัดการการสมัครสมาชิก",
+    "paid": "ชำระเงินแล้ว",
+    "stay": "อยู่ต่อ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -31198,7 +31288,10 @@
     "save": "i-save",
     "towards": "tungo sa",
     "list": "listahan",
-    "settings": "mga setting"
+    "settings": "mga setting",
+    "Manage subscription": "Pamahalaan ang subscription",
+    "paid": "bayad",
+    "stay": "manatili"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -32257,7 +32350,10 @@
     "save": "kaydet",
     "towards": "doğru",
     "list": "liste",
-    "settings": "ayarlar"
+    "settings": "ayarlar",
+    "Manage subscription": "Aboneliği yönet",
+    "paid": "ücretli",
+    "stay": "kal"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33309,7 +33405,10 @@
     "save": "зберегти",
     "towards": "до",
     "list": "список",
-    "settings": "налаштування"
+    "settings": "налаштування",
+    "Manage subscription": "Керувати підпискою",
+    "paid": "оплачено",
+    "stay": "залишатися"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34350,7 +34449,10 @@
     "save": "lưu",
     "towards": "hướng đến",
     "list": "danh sách",
-    "settings": "cài đặt"
+    "settings": "cài đặt",
+    "Manage subscription": "Quản lý gói đăng ký",
+    "paid": "đã thanh toán",
+    "stay": "ở lại"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35413,6 +35515,9 @@
     "save": "保存",
     "towards": "向",
     "list": "列表",
-    "settings": "设置"
+    "settings": "设置",
+    "Manage subscription": "管理订阅",
+    "paid": "付费",
+    "stay": "留下"
   }
 }

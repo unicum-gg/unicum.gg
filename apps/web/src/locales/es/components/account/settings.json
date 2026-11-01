@@ -14,5 +14,19 @@
   "supporters-only": "Solo para Soportes.",
   "loadouts-still-counted": "Tus batallas siguen contando para las cifras a partir de las cuales se crea la pestaña de configuraciones de cada vehículo, sin nada que incluya tu nombre. Para dejar de enviarlas por completo, desmarca la opción de compartir en el mod del juego, que también elimina lo que ya ha enviado.",
   "hide-battles": "Ocultar mis batallas",
-  "hide-battles-description": "Solo tú puedes ver la pestaña Batallas de tu perfil. Tus batallas se mantienen registradas, siguen contando en el recuento de estadísticas del sitio y siguen siendo visibles en las páginas de los otros jugadores que participaron en ellas."
+  "hide-battles-description": "Solo tú puedes ver la pestaña Batallas de tu perfil. Tus batallas se mantienen registradas, siguen contando en el recuento de estadísticas del sitio y siguen siendo visibles en las páginas de los otros jugadores que participaron en ellas.",
+  "section-billing": "Facturación",
+  "section-billing-description": "Lo que aportas para mantener el sitio en ejecución y dónde cambiarlo.",
+  "billing-pledge": "{amount} al mes",
+  "billing-renews": "Se renueva el {date}.",
+  "billing-ends": "Cancelado, finaliza el {date}.",
+  "billing-manage": "Gestionar suscripción",
+  "billing-portal-failed": "No se pudo abrir el portal de facturación. Inténtalo de nuevo dentro de un momento.",
+  "billing-none": "Todavía no eres colaborador de unicum.gg",
+  "billing-none-description": "El sitio no tiene anuncios y lo pagan sus jugadores.",
+  "billing-support": "Apóyanos",
+  "billing-total": "Aportado hasta ahora",
+  "billing-total-description": "Todo lo que has aportado, incluido cualquier regalo puntual. Gracias.",
+  "anonymous": "Ocultar mi nombre en la clasificación de colaboradores",
+  "anonymous-description": "Tu nombre y tu insignia de colaborador permanecerán fuera de la clasificación pública y de tu perfil."
 }

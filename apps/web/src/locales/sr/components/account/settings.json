@@ -14,5 +14,19 @@
   "supporters-only": "Samo za Podržavalac.",
   "loadouts-still-counted": "Vaše bitke se i dalje računaju u brojke na kojima se zasniva kartica поставке svakog возило, bez ijednog podatka koji vas imenuje. Da biste potpuno prestali da ih šaljete, isključite deljenje u modu igre, koji takođe briše ono što je već poslato.",
   "hide-battles": "Сакриј moje bitke",
-  "hide-battles-description": "Само ви можете да видите картицу Borbi у okviru вашег профил. Ваше bitke zadrži бити забележено, и даље се рачунају у број statistika на сајт, а остају видљиве на странице других igrači који су учествовали у њима."
+  "hide-battles-description": "Само ви можете да видите картицу Borbi у okviru вашег профил. Ваше bitke zadrži бити забележено, и даље се рачунају у број statistika на сајт, а остају видљиве на странице других igrači који су учествовали у њима.",
+  "section-billing": "Наплата",
+  "section-billing-description": "Оно што дајете да би сајт остао у току и где то можете променити.",
+  "billing-pledge": "{amount} за месец",
+  "billing-renews": "Обнавља се {date}.",
+  "billing-ends": "Отказано, завршава се {date}.",
+  "billing-manage": "Upravljaj pretplatom",
+  "billing-portal-failed": "Nisam mogao da otvorim портал за наплату. Покушајте поново за тренутак.",
+  "billing-none": "Још не подржавате уникум.gg",
+  "billing-none-description": "Сајт нема огласе и plaćeno је захваљујући играчима.",
+  "billing-support": "Podržite nas",
+  "billing-total": "До сада дато",
+  "billing-total-description": "Све што сте дали, једнократни поклони укључено. Хвала вам.",
+  "anonymous": "Сакриј ме на табели подржавалаца",
+  "anonymous-description": "Ваше име и ваша značka подржаваоца ostani ван јавне табеле и вашег профила."
 }

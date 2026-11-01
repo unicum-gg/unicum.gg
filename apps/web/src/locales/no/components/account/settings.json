@@ -14,5 +14,19 @@
   "supporters-only": "Kun for Supporter.",
   "loadouts-still-counted": "Kampene dine teller fortsatt mot tallene som fanen for oppsett for hvert kjøretøy bygger på, uten at du navngis. For å slutte å sende dem helt, fjern avmerkingen for deling i spillmodden, som også sletter det den allerede har sendt.",
   "hide-battles": "Skjul mine kamper",
-  "hide-battles-description": "Bare du kan se fanen Kamper i profilen din. Kampene dine fortsetter å være registrert, teller fortsatt med i nettstedets statistikk og forblir synlige på sidene til de andre spillerne som var med i dem."
+  "hide-battles-description": "Bare du kan se fanen Kamper i profilen din. Kampene dine fortsetter å være registrert, teller fortsatt med i nettstedets statistikk og forblir synlige på sidene til de andre spillerne som var med i dem.",
+  "section-billing": "Fakturering",
+  "section-billing-description": "Hva du gir for å holde nettstedet i gang, og hvor du kan endre det.",
+  "billing-pledge": "{amount} per måned",
+  "billing-renews": "Fornyes {date}.",
+  "billing-ends": "Avbrutt, avsluttes {date}.",
+  "billing-manage": "Administrer abonnement",
+  "billing-portal-failed": "Kunne ikke åpne betalingsportalen. Prøv igjen om et øyeblikk.",
+  "billing-none": "Du støtter ikke unicum.gg ennå",
+  "billing-none-description": "Nettstedet har ingen annonser og betales av spillerne.",
+  "billing-support": "Støtt oss",
+  "billing-total": "Gitt så langt",
+  "billing-total-description": "Alt du har gitt, inkludert engangsgaver. Takk.",
+  "anonymous": "Skjul meg på tavlen for støttespillere",
+  "anonymous-description": "Navnet ditt og støttespillermerket ditt blir ikke vist på den offentlige tavlen eller profilen din."
 }

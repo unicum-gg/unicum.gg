@@ -14,5 +14,19 @@
   "supporters-only": "Tik rėmėjams.",
   "loadouts-still-counted": "Jūsų mūšiai vis dar įskaičiuojami į rodiklius, iš kurių sudaromas kiekvienos transporto priemonės komplektacijų skirtukas, tačiau jūsų vardas nenurodomas. Jei norite visiškai nustoti juos siųsti, žaidimo mode panaikinkite bendrinimo žymėjimą. Taip pat bus ištrinta tai, ką jis jau išsiuntė.",
   "hide-battles": "Slėpti mano mūšius",
-  "hide-battles-description": "Tik jūs galite matyti savo profilio Mūšių skirtuką. Jūsų mūšiai toliau yra užfiksuoti, vis dar įskaičiuojami į svetainės statistiką ir lieka matomi kitų juose dalyvavusių žaidėjų puslapiuose."
+  "hide-battles-description": "Tik jūs galite matyti savo profilio Mūšių skirtuką. Jūsų mūšiai toliau yra užfiksuoti, vis dar įskaičiuojami į svetainės statistiką ir lieka matomi kitų juose dalyvavusių žaidėjų puslapiuose.",
+  "section-billing": "Atsiskaitymas",
+  "section-billing-description": "Ką duodate, kad svetainė būtų vykdoma, ir kur atlikti pakeitimą.",
+  "billing-pledge": "{amount} per mėnesį",
+  "billing-renews": "Atnaujinama {date}.",
+  "billing-ends": "Atšaukta, baigiasi {date}.",
+  "billing-manage": "Tvarkyti prenumeratą",
+  "billing-portal-failed": "Galėtų nepavykti atidaryti atsiskaitymo portalo. Pabandykite dar kartą po akimirkos.",
+  "billing-none": "Kol kas nepalaikote unicum.gg",
+  "billing-none-description": "Svetainėje nėra reklamų, ją apmoka žaidėjai.",
+  "billing-support": "Palaikykite mus",
+  "billing-total": "Paaukota iki šiol",
+  "billing-total-description": "Visa, ką skyrėte, vienkartinės dovanos įtrauktos. Ačiū.",
+  "anonymous": "Slėpti mane rėmėjų lentelėje",
+  "anonymous-description": "Jūsų vardas ir rėmėjo ženklelis liks nerodomi viešoje lentelėje ir jūsų profilyje."
 }

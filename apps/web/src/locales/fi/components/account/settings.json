@@ -14,5 +14,19 @@
   "supporters-only": "Vain tukijoille.",
   "loadouts-still-counted": "Taistelusi lasketaan edelleen mukaan lukuihin, joista jokaisen ajoneuvon varustukset-välilehti muodostetaan, eikä niissä ole mitään, mikä nimeäisi sinut. Jos haluat lopettaa niiden lähettämisen kokonaan, poista jakamisen valinta pelin modissa. Se poistaa myös sen, minkä se on jo lähettänyt.",
   "hide-battles": "Piilota taisteluni",
-  "hide-battles-description": "Vain sinä voit nähdä profiilisi Taisteluita-välilehden. Taistelusi tallennetaan edelleen, ne lasketaan yhä sivuston tilastoihin, ja ne pysyvät näkyvissä muiden niihin osallistuneiden pelaajien sivuilla."
+  "hide-battles-description": "Vain sinä voit nähdä profiilisi Taisteluita-välilehden. Taistelusi tallennetaan edelleen, ne lasketaan yhä sivuston tilastoihin, ja ne pysyvät näkyvissä muiden niihin osallistuneiden pelaajien sivuilla.",
+  "section-billing": "Laskutus",
+  "section-billing-description": "Mitä annat sivuston pitämiseksi käynnissä ja missä voit tehdä muutoksen.",
+  "billing-pledge": "{amount} kuukaudessa",
+  "billing-renews": "Uusitaan {date}.",
+  "billing-ends": "Peruutettu, päättyy {date}.",
+  "billing-manage": "Hallitse tilausta",
+  "billing-portal-failed": "Laskutusportaalia ei voisi avata. Yritä uudelleen hetken kuluttua.",
+  "billing-none": "Et vielä tue unicum.gg:tä",
+  "billing-none-description": "Sivustolla ei ole mainoksia, ja pelaajat maksavat sen.",
+  "billing-support": "Tukee meitä",
+  "billing-total": "Annettu tähän mennessä",
+  "billing-total-description": "Kaikki antamasi, kertalahjoitukset sisällytetty. Kiitos.",
+  "anonymous": "Piilota minut tukijoiden tulostaulukosta",
+  "anonymous-description": "Nimesi ja tukijan merkkisi pysyvät poissa julkisesta tulostaulukosta ja profiilistasi."
 }

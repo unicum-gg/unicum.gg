@@ -14,5 +14,19 @@
   "supporters-only": "Csak támogatóknak.",
   "loadouts-still-counted": "A csatáid továbbra is beleszámítanak azokba az adatokba, amelyek alapján minden jármű felszereléseinek lapja készül, úgy, hogy semmi sem nevezi meg, hogy te vagy. Ha teljesen le szeretnéd állítani az elküldésüket, szüntesd meg a megosztás kijelölését a játékmodban, amely a már elküldött adatokat is törli.",
   "hide-battles": "Saját csaták elrejtése",
-  "hide-battles-description": "A profilod Csaták lapját csak te láthatod. A csaták továbbra is rögzítésre kerülnek, továbbra is beleszámítanak a webhely statisztikáinak darabszámába, és láthatók maradnak azoknak a játékosoknak az oldalain, akik részt vettek bennük."
+  "hide-battles-description": "A profilod Csaták lapját csak te láthatod. A csaták továbbra is rögzítésre kerülnek, továbbra is beleszámítanak a webhely statisztikáinak darabszámába, és láthatók maradnak azoknak a játékosoknak az oldalain, akik részt vettek bennük.",
+  "section-billing": "Számlázás",
+  "section-billing-description": "Amit azért adsz, hogy a webhely futó maradjon, és ahol változtathatsz rajta.",
+  "billing-pledge": "{amount} havonta",
+  "billing-renews": "Megújul ekkor: {date}.",
+  "billing-ends": "Mégse, ekkor ér véget: {date}.",
+  "billing-manage": "Előfizetés kezelése",
+  "billing-portal-failed": "Nem sikerült megnyitni a számlázási portált. Próbáld meg újra egy pillanat múlva.",
+  "billing-none": "Még nem támogatod az unicum.gg-t",
+  "billing-none-description": "A webhelyen nincsenek hirdetések, a működését a játékosok finanszírozzák.",
+  "billing-support": "Támogass minket",
+  "billing-total": "Eddig adott összeg",
+  "billing-total-description": "Minden, amit eddig adtál, az egyszeri ajándékokat is tartalmazta. Köszönjük.",
+  "anonymous": "Elrejtés a támogatói ranglistáról",
+  "anonymous-description": "A neved és a támogatói jelvényed a nyilvános ranglistán és a profilodon kívül marad."
 }

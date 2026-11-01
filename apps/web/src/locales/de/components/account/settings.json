@@ -14,5 +14,19 @@
   "supporters-only": "Nur Unterstützer.",
   "loadouts-still-counted": "Deine Gefechte zählen weiterhin zu den Werten, aus denen der Tab für die Ausstattungen jedes Fahrzeugs erstellt wird, ohne dass du genannt wirst. Um sie überhaupt nicht mehr zu senden, deaktiviere die Freigabe im Spiel-Mod. Dadurch wird auch gelöscht, was es bereits gesendet hat.",
   "hide-battles": "Meine Gefechte ausblenden",
-  "hide-battles-description": "Nur du kannst den Tab „Gefechte“ deines Profils sehen. Deine Gefechte werden weiterhin aufgezeichnet, zählen weiterhin in den Statistiken der Website und bleiben auf den Seiten der anderen Spieler sichtbar, die daran teilgenommen haben."
+  "hide-battles-description": "Nur du kannst den Tab „Gefechte“ deines Profils sehen. Deine Gefechte werden weiterhin aufgezeichnet, zählen weiterhin in den Statistiken der Website und bleiben auf den Seiten der anderen Spieler sichtbar, die daran teilgenommen haben.",
+  "section-billing": "Abrechnung",
+  "section-billing-description": "Was du gibst, damit die Website läuft, und wo du die Änderung vornehmen kannst.",
+  "billing-pledge": "{amount} pro Monat",
+  "billing-renews": "Wird am {date} verlängert.",
+  "billing-ends": "Gekündigt, endet am {date}.",
+  "billing-manage": "Abonnement verwalten",
+  "billing-portal-failed": "Das Abrechnungsportal konnte nicht geöffnet werden. Versuche es in einem Moment erneut.",
+  "billing-none": "Du unterstützt unicum.gg noch nicht",
+  "billing-none-description": "Die Website hat keine Werbung und wird durch Spieler bezahlt.",
+  "billing-support": "Unterstütze uns",
+  "billing-total": "Bisher gegeben",
+  "billing-total-description": "Alles, was du gegeben hast, einschließlich einmaliger Geschenke. Danke.",
+  "anonymous": "Mich auf der Unterstützer-Rangliste ausblenden",
+  "anonymous-description": "Dein Name und dein Unterstützer-Abzeichen bleiben von der öffentlichen Rangliste und deinem Profil fern."
 }

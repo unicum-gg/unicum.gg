@@ -14,5 +14,19 @@
   "supporters-only": "Tikai atbalstītāji.",
   "loadouts-still-counted": "Jūsu kaujas joprojām tiek ieskaitītas rādītājos, no kuriem tiek veidota katra transportlīdzekļa komplektāciju cilne, un tajos nav jūsu nosaukuma. Lai pilnībā pārtrauktu to nosūtīšanu, noņemiet atzīmi pie kopīgošanas spēles modā, kas arī dzēš to, ko tas jau ir nosūtījis.",
   "hide-battles": "Paslēpt manas kaujas",
-  "hide-battles-description": "Tikai jūs varat redzēt sava profila cilni “Kaujas”. Jūsu kaujas turpina tikt reģistrētas, to skaits joprojām tiek ņemts vērā vietnes statistikā, un tās paliek redzamas pārējo spēlētāju lapās, kuri tajās piedalījās."
+  "hide-battles-description": "Tikai jūs varat redzēt sava profila cilni “Kaujas”. Jūsu kaujas turpina tikt reģistrētas, to skaits joprojām tiek ņemts vērā vietnes statistikā, un tās paliek redzamas pārējo spēlētāju lapās, kuri tajās piedalījās.",
+  "section-billing": "Norēķini",
+  "section-billing-description": "Ko jūs dodat, lai vietne darbotos, un kur veikt izmaiņas.",
+  "billing-pledge": "{amount} mēnesī",
+  "billing-renews": "Atjaunojas {date}.",
+  "billing-ends": "Atcelts, beidzas {date}.",
+  "billing-manage": "Pārvaldīt abonementu",
+  "billing-portal-failed": "Varētu neizdoties atvērt norēķinu portālu. Mēģiniet vēlreiz pēc brīža.",
+  "billing-none": "Jūs vēl neatbalstāt unicum.gg",
+  "billing-none-description": "Vietnē nav reklāmu, un to apmaksā spēlētāji.",
+  "billing-support": "Atbalstiet mūs",
+  "billing-total": "Līdz šim sniegts",
+  "billing-total-description": "Viss, ko esat sniedzis, vienreizējie ziedojumi ir iekļauti. Paldies.",
+  "anonymous": "Paslēpt mani atbalstītāju tabulā",
+  "anonymous-description": "Jūsu nosaukums un atbalstītāja nozīmīte paliks ārpus publiskās tabulas un jūsu profila."
 }
