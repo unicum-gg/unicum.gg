@@ -125,14 +125,6 @@ export function SettingsPrivacy() {
           aria-label={t("hide-loadouts")}
         />
       </SettingsRow>
-      {/* Said in the section rather than in the row above, because it is about
-          what the switch does NOT do: the uploads carry on and the figures keep
-          their sample, which is the half a reader would otherwise assume they
-          had just turned off. Unticking the mod's own sharing is the other
-          thing, and it deletes. */}
-      <p className="mt-4 text-xs text-fd-muted-foreground">
-        {t("loadouts-still-counted")}
-      </p>
       {/* Only where the site takes money, since the board it hides a name
           from exists only there. Open to everybody signed in rather than to
           current supporters: a one-off donor is on the board too. */}

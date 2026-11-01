@@ -12,7 +12,6 @@
   "hide-loadouts": "Ukryj moje konfiguracje",
   "hide-loadouts-description": "Usuwa twoje konfiguracje z twojej strony oraz z tabel zawierających nazwę gracza.",
   "supporters-only": "Tylko dla Supporterów.",
-  "loadouts-still-counted": "Twoje bitwy nadal są uwzględniane w statystykach, na podstawie których tworzona jest zakładka konfiguracji każdego pojazdu, bez niczego, co zawierałoby twoją nazwę. Aby całkowicie przestać je wysyłać, odznacz udostępnianie w modzie do gry, co usunie również dane, które już wysłano.",
   "hide-battles": "Ukryj moje bitwy",
   "hide-battles-description": "Tylko Ty możesz zobaczyć zakładkę Bitwy na swoim profilu. Twoje bitwy nadal są rejestrowane, wciąż są uwzględniane w statystykach witryny i pozostają widoczne na stronach innych graczy, którzy brali w nich udział.",
   "section-billing": "Rozliczenia",

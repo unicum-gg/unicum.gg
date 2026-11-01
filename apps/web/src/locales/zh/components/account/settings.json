@@ -12,7 +12,6 @@
   "hide-loadouts": "隐藏我的配装",
   "hide-loadouts-description": "将你的配置从你自己的页面和列出玩家名称的表格中隐藏。",
   "supporters-only": "仅限支持者。",
-  "loadouts-still-counted": "你的战斗场次仍会计入构成每辆车辆配装页面的数值中，其中不会标注你的名称。若要完全停止发送这些内容，请在游戏模组中取消勾选共享选项，这也会删除它已经发送的内容。",
   "hide-battles": "隐藏我的战斗场次",
   "hide-battles-description": "只有您可以看到个人资料中的战斗场次标签页。您的战斗场次仍会被记录，仍会计入网站的统计数据，并继续显示在参与这些战斗场次的其他玩家的页面上。",
   "section-billing": "账单",
