@@ -1,6 +1,6 @@
 {
   "badge": "Hidden",
-  "heading": "{nickname} keeps this battle list private",
+  "heading": "{nickname} keeps this battle list hidden",
   "blurb": "Only {nickname} can open this list. Every battle in it still counts in the site’s statistics, and the players met in those battles stay public.",
   "see-teammates": "See the teammates",
   "private-owner": "Only you can see this list. You can change that in your account settings."
