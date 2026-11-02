@@ -13,6 +13,18 @@
     "story_mode": "Story Mode",
     "training": "Training"
   },
+  "vehicle-modes": {
+    "travel": "Travel",
+    "siege": "Siege",
+    "rapid": "Rapid",
+    "single": "Single",
+    "salvo": "Salvo",
+    "standard": "Standard",
+    "calibrated": "Calibrated",
+    "full": "Full",
+    "single-charge": "Single-Charge",
+    "turbine": "Turbine"
+  },
   "player-modes": {
     "overall": "Random Battles",
     "skirmish": "Skirmish",

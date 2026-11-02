@@ -26,6 +26,10 @@ config({ path: webRoot });
 // env validation (the package declares `env.ts` as its one side effect), and a
 // build script that only wants fourteen words has no business demanding every
 // Wargaming application id be set.
+// The deep path rather than the barrel: the barrel reaches the client, whose
+// `env.ts` validates at import, and an import is evaluated before the
+// `config()` below has loaded the file that would satisfy it.
+import { MECHANIC_STATES } from "@unicum.gg/wargaming/source/wot/specs/mechanic";
 import { CLAN_BOARD_LABEL } from "@unicum.gg/shared/clans/badges";
 import { SHELL_LABEL } from "@unicum.gg/shared/wot/tank-spec-fields";
 import { ACTIVITY_BUCKET_LABEL } from "@unicum.gg/shared/players/refresh-policy";
@@ -71,6 +75,7 @@ import { SPAWN_DIRECTION_LABEL } from "@unicum.gg/shared/wot/tanks/videos";
 import { TOURNAMENT_GAME_MODE_LABEL } from "@unicum.gg/shared/wot/tournaments";
 import { TANK_MODE_VOCABULARY } from "@unicum.gg/shared/wot/tank-modes";
 import { PLAYER_MODE_LABEL } from "../src/components/players/detail/modes";
+import { vehicleModeKey } from "../src/lib/vehicle-mode-key";
 import { WARGAMING_LANGUAGE } from "../src/lib/game-vocabulary";
 import { DEFAULT_LOCALE, type Locale } from "../src/lib/translations";
 
@@ -187,6 +192,16 @@ function englishVocabulary(): Json {
       ...BATTLE_TYPE_LABEL,
       [BattleType.OnslaughtNight]: "{onslaught} Night",
     },
+    // Every distinct word the client uses for the two states of a vehicle that
+    // has a second one, taken from the strings it ships rather than named here.
+    // Deduped on the word, since three mechanics leave a state called Travel
+    // and two fire a Salvo, and one thing the game has one name for must not be
+    // asked for twice and come back as two.
+    "vehicle-modes": Object.fromEntries(
+      Object.values(MECHANIC_STATES)
+        .flatMap((states) => [states.travel, states.engaged])
+        .map((word) => [vehicleModeKey(word), word]),
+    ),
     // Maneuvers is named under `battle-formats` already, which the profile tab
     // reads through `playerModeName`: one name, one cell.
     "player-modes": Object.fromEntries(

@@ -69,5 +69,22 @@
   "paint-locked": {
     "factory": "Wears its own factory livery: the game paints nothing over it",
     "locked": "The game allows no customization on this vehicle"
+  },
+  "deploy-tooltips": {
+    "engaged": "{mode}: {meaning}. Back to {travel}",
+    "travel": "{mode}: the vehicle before the switch. Show it {meaning}"
+  },
+  "deploy-meaning": {
+    "siege": "planted, where its gun and its hull both aim",
+    "wheeled": "wheels locked down, for the road rather than the fight",
+    "dualGun": "both guns fired as one",
+    "shellParamsSwitcher": "the gun’s extra chambers open, trading damage for penetrating power",
+    "lowChargeShot": "a partial charge, fired without waiting",
+    "turboshaftEngine": "the turbine spun up",
+    "twinGun": "both barrels fired as one"
+  },
+  "mechanism": {
+    "says": "Work the {mode} mechanism",
+    "tooltip": "Run the gun through its {mode} cycle, as the game plays it on a shot"
   }
 }

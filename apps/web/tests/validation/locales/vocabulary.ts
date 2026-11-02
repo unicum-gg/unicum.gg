@@ -238,8 +238,11 @@ export function vocabularyTests() {
           const own = valueAt(target, key);
           if (english === undefined || own === undefined) continue;
           if (english.includes("{")) continue;
+          // Keyed by the normalised rendering, so one name spelled two ways is
+          // one rendering: what this is looking for is the catalogue calling
+          // one thing by two WORDS, not by two encodings of a word.
           const held = renderings.get(english) ?? new Map<string, string>();
-          held.set(own, key);
+          held.set(straight(own), key);
           renderings.set(english, held);
         }
         for (const [english, held] of renderings) {
@@ -315,9 +318,23 @@ function clientTerms(): Record<string, Record<string, string>> {
   >;
 }
 
-/** One spelling of the apostrophe, so two house styles read as one word. */
+/**
+ * One spelling of a word, so two renderings of it read as one.
+ *
+ * Two things differ without the word differing. The apostrophe: ours is U+2019
+ * everywhere outside `game/` and the client writes the ASCII quote, so
+ * "Traqueur d’acier" and "Traqueur d'acier" are one name spelled to two house
+ * styles. And the composition: the client's Vietnamese arrives with its
+ * diacritics as separate combining marks where ours carries the precomposed
+ * letters, which is the same text in two encodings and compares unequal
+ * character by character while reading identically on the page. And the space:
+ * the client holds "Cường kích" together with a non-breaking one, which is its
+ * typography rather than a different word, so it is read here as the space it
+ * is. Normalised for the COMPARISON only, never in the file: that space is
+ * deliberate where the client wrote it.
+ */
 const straight = (value: string): string =>
-  value.replace(/\u2019/g, "'").trim();
+  value.normalize("NFC").replace(/\u2019/g, "'").replace(/\u00a0/g, " ").trim();
 
 /** One locale's `game/vocabulary`, or nothing where it has none yet. */
 function vocabularyOf(locale: string): Record<string, unknown> {

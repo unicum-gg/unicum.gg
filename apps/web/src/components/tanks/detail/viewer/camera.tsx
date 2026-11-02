@@ -26,10 +26,11 @@ import { Group, Mark } from "@/components/tanks/detail/viewer/control-group";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   engagedLabel,
-  engagedMeaning,
+  knownMechanic,
   travelLabel,
   ModeIcon,
 } from "@/components/tanks/detail/mode-marks";
+import { vehicleModeName } from "@/components/game-name";
 import {
   Presentation,
 } from "@/components/tanks/detail/viewer/presentation";
@@ -112,6 +113,9 @@ export function CameraControls({
   onRolling: () => void;
 }) {
   const { t: tView } = useTranslation("components/tanks/detail/viewer");
+  // The game's own words for the two states, which are a catalogue of
+  // Wargaming's rather than prose of ours.
+  const { t: tGame } = useTranslation("game/vocabulary");
   const CinematicMark = CINEMATIC_ICON[cinematic];
   return (
     <Group>
@@ -185,12 +189,22 @@ export function CameraControls({
         <Mark
           on={deployed}
           onClick={() => onDeploy(!deployed)}
-          says={deployed ? engagedLabel(mechanic) : travelLabel(mechanic)}
-          tooltip={
+          says={
             deployed
-              ? `${engagedLabel(mechanic)}: ${engagedMeaning(mechanic)}. Back to ${travelLabel(mechanic).toLowerCase()}`
-              : `${travelLabel(mechanic)}: the vehicle before the switch. Show it ${engagedMeaning(mechanic)}`
+              ? vehicleModeName(engagedLabel(mechanic), tGame)
+              : vehicleModeName(travelLabel(mechanic), tGame)
           }
+          tooltip={tView(
+            deployed ? "deploy-tooltips.engaged" : "deploy-tooltips.travel",
+            {
+              mode: vehicleModeName(
+                deployed ? engagedLabel(mechanic) : travelLabel(mechanic),
+                tGame,
+              ),
+              travel: vehicleModeName(travelLabel(mechanic), tGame),
+              meaning: tView(`deploy-meaning.${knownMechanic(mechanic)}`),
+            },
+          )}
         >
           <ModeIcon mechanic={mechanic} engaged={deployed} />
         </Mark>
@@ -209,8 +223,12 @@ export function CameraControls({
       {works ? (
         <Mark
           onClick={onWork}
-          says={`Work the ${engagedLabel(mechanic).toLowerCase()} mechanism`}
-          tooltip={`Run the gun through its ${engagedLabel(mechanic).toLowerCase()} cycle, as the game plays it on a shot`}
+          says={tView("mechanism.says", {
+            mode: vehicleModeName(engagedLabel(mechanic), tGame),
+          })}
+          tooltip={tView("mechanism.tooltip", {
+            mode: vehicleModeName(engagedLabel(mechanic), tGame),
+          })}
         >
           <Cog className="size-4" aria-hidden />
         </Mark>
