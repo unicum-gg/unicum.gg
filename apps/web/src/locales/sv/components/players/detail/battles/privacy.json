@@ -1,3 +1,7 @@
 {
+  "badge": "Menig",
+  "heading": "{nickname} behåller sina strider privata",
+  "blurb": "Endast {nickname} kan öppna denna lista. Deras strider räknas fortfarande in i webbplatsens statistik, och spelarna de spelade bredvid stannar kvar offentliga.",
+  "see-teammates": "Se vilka de spelar med",
   "private-owner": "Endast du kan se den här listan. Du kan göra den förändringen i dina kontoinställningar."
 }

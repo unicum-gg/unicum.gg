@@ -1,3 +1,7 @@
 {
+  "badge": "Binh nhì",
+  "heading": "{nickname} đang giữ các trận đấu của họ ở chế độ Binh nhì",
+  "blurb": "Chỉ {nickname} có thể mở danh sách này. Các trận đấu của họ vẫn được tính vào số lượng thống kê của trang web, và những người chơi đã tham chiến bên cạnh họ vẫn công khai.",
+  "see-teammates": "Xem họ chơi cùng ai",
   "private-owner": "Chỉ bạn có thể xem danh sách này. Bạn có thể thay đổi điều đó trong cài đặt tài khoản của mình."
 }

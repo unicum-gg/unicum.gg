@@ -1,3 +1,7 @@
 {
+  "badge": "Soldato",
+  "heading": "{nickname} mantiene private le sue battaglie",
+  "blurb": "Solo {nickname} può aprire questa lista. Il numero delle sue battaglie viene ancora incluso nelle statistiche del sito, e i giocatori che hanno combattuto accanto a lui restano pubblici.",
+  "see-teammates": "Vedi i loro compagni di gioco",
   "private-owner": "Solo tu puoi vedere questa lista. Puoi modificare questa impostazione nelle impostazioni del tuo account."
 }

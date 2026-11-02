@@ -9,5 +9,6 @@
     "value": "Valor"
   },
   "section-count": "{section} ({count})",
-  "beta": "beta"
+  "beta": "beta",
+  "battles-private": "Lista do Soldado"
 }

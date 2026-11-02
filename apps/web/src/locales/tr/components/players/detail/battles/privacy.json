@@ -1,3 +1,7 @@
 {
+  "badge": "Er",
+  "heading": "{nickname} savaşlarını Er tutuyor",
+  "blurb": "Bu listeyi yalnızca {nickname} açabilir. Savaşları yine de sitenin istatistiklerinde sayı olarak yer alır ve yanında savaştığı oyuncular herkese açık kalır.",
+  "see-teammates": "Kiminle oynadığını gör",
   "private-owner": "Bu listeyi yalnızca siz görebilirsiniz. Bunu hesap ayarlarınızdan değiştirebilirsiniz."
 }

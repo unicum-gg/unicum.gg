@@ -1,3 +1,7 @@
 {
+  "badge": "Zasebno",
+  "heading": "Bitky hráča {nickname} zostávajú Zasebno",
+  "blurb": "Tento seznam môže otvoriť iba {nickname}. Počet ich bitiek sa stále započítava do štatistiky na stránke a hráči, ktorí odigrali bitky poleg nich, zostávajú javno.",
+  "see-teammates": "Pozrite sa, s kým hrajú",
   "private-owner": "Iba vy môžete vidieť tento seznam. Môžete to zmeniť v nastaveniach svojho računa."
 }

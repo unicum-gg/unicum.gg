@@ -829,7 +829,8 @@
     "settings": "الإعدادات",
     "Manage subscription": "إدارة الاشتراك",
     "paid": "مدفوع",
-    "stay": "البقاء"
+    "stay": "البقاء",
+    "Private": "خاص"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1662,7 +1663,8 @@
     "settings": "налады",
     "Manage subscription": "Кіраваць падпіскай",
     "paid": "платны",
-    "stay": "застацца"
+    "stay": "застацца",
+    "Private": "Прыватны"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -3552,7 +3554,8 @@
     "settings": "postavke",
     "Manage subscription": "Upravljaj pretplatom",
     "paid": "plaćeno",
-    "stay": "ostani"
+    "stay": "ostani",
+    "Private": "Privatno"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -11800,7 +11803,8 @@
     "settings": "सेटिंग्स",
     "Manage subscription": "सदस्यता प्रबंधित करें",
     "paid": "सशुल्क",
-    "stay": "रहें"
+    "stay": "रहें",
+    "Private": "निजी"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -16892,7 +16896,8 @@
     "list": "тізім",
     "Manage subscription": "Жазылымды басқару",
     "paid": "ақылы",
-    "stay": "қалу"
+    "stay": "қалу",
+    "Private": "Жеке"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -27253,7 +27258,8 @@
     "settings": "nastavitve",
     "Manage subscription": "Spravovať predplatné",
     "paid": "platené",
-    "stay": "zostať"
+    "stay": "zostať",
+    "Private": "Zasebno"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -31291,7 +31297,8 @@
     "settings": "mga setting",
     "Manage subscription": "Pamahalaan ang subscription",
     "paid": "bayad",
-    "stay": "manatili"
+    "stay": "manatili",
+    "Private": "Pribado"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",

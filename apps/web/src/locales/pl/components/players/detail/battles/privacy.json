@@ -1,3 +1,7 @@
 {
+  "badge": "Szeregowy",
+  "heading": "Bitwy {nickname} posiada jako „Szeregowy”",
+  "blurb": "Tylko {nickname} może użyć opcji „otwórz” dla tej listy. Liczba ich rozegranych bitew nadal jest uwzględniana w statystykach witryny, a gracze z bitew rozegranych obok {nickname} pozostają publiczni.",
+  "see-teammates": "Zobacz, z kim można grać",
   "private-owner": "Tylko Ty możesz zobaczyć tę listę. Możesz wprowadzić tę zmianę w ustawieniach konta."
 }

@@ -1,3 +1,7 @@
 {
+  "badge": "Gefreiter",
+  "heading": "Die Gefechte von {nickname} bleiben privat",
+  "blurb": "Nur {nickname} kann diese Liste öffnen. Die Gefechte von {nickname} zählen weiterhin zu den Statistiken der Website, und die Spieler, neben denen {nickname} gespielt hat, bleiben öffentlich.",
+  "see-teammates": "Sehen, mit wem sie Spielen",
   "private-owner": "Nur du kannst diese Liste sehen. Du kannst das in deinen Kontoeinstellungen ändern."
 }
