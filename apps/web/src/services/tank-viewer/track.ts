@@ -22,6 +22,8 @@ import { switched } from "./switches";
  * revisiting.
  */
 export const linkFacing = () => (switched("links") === "flip" ? 1 : -1);
+/** How much of a link's own thickness its plate has to be to be believed. */
+const SEAT_SHARE = 0.2;
 /**
  * The path a belt follows: the client's own polygon, joined end to end.
  *
@@ -97,6 +99,7 @@ export function layTrack(
   linkLength: number,
   start = 0,
   links?: number,
+  standoff?: number,
 ) {
   let { curve, total } = pathOf(points);
   // A chassis that counts its own links is the better authority than any
@@ -122,6 +125,33 @@ export function layTrack(
   // Read here rather than at import: the module must not touch the window to
   // be loaded, and one belt's links all face the same way anyway.
   const facing = linkFacing();
+  // **A link is modelled from the tip of its centre guide, not from the face
+  // that seats on a wheel.** The band is where the belt touches the wheels, so
+  // dropping a link onto it by its origin pushes the whole belt out by the
+  // guide's height all the way round: the shoes sink into the ground along the
+  // bottom run and rise through the fender along the top one, 86 mm on the
+  // median vehicle and 192 at the worst. Nothing in the mesh says which of its
+  // faces is the seat, so the mirror reads it off the chassis's own ribbon and
+  // publishes how far the belt's outer face stands outside the band. Laid to
+  // that, both runs land on the shape the game draws itself: measured on the
+  // Crusher, the top run goes from 59 mm over the ribbon to 0 along its whole
+  // length.
+  //
+  // **Refused when it is too thin to be this plate**, which is the one way it
+  // can be read wrong. The mirror measures it as the gap between the band's
+  // bottom run and the ribbon under it, so a vehicle whose wheels declare a
+  // wrap bigger than the circle the belt really seats on reads as a plate of
+  // no thickness: the T-54 reads zero, and laid to it the whole link would go
+  // inside its own band and its road wheels would come out through the track.
+  // A plate under a fifth of the link it belongs to is the band being wrong
+  // rather than the plate being thin, and 54 of the catalogue's 971 belts are
+  // in that state. They keep their origin on the band, which is where they
+  // have always been laid, as does a belt the mirror said nothing about.
+  const outer = facing < 0 ? (box?.max.y ?? 0) : (box?.min.y ?? 0);
+  const thickness = box ? box.max.y - box.min.y : 0;
+  const seated =
+    standoff !== undefined && thickness > 0 && standoff >= thickness * SEAT_SHARE;
+  const lift = seated ? -facing * standoff! - outer : 0;
   /** Back onto the loop, since a link's ends read past either end of it. */
   const loop = (u: number) => ((u % 1) + 1) % 1;
   // Sliding every link by the same distance is how the game runs a track: the
@@ -145,6 +175,7 @@ export function layTrack(
       // whether the guide rides between the road wheels or sticks out into the
       // air. The client ships no reference for it: its own ribbon is flat.
       outward.set(0, along.z * facing, -along.y * facing).normalize();
+      at.addScaledVector(outward, lift);
       side.crossVectors(outward, along);
       basis.makeBasis(side, outward, along).setPosition(at);
       mesh.setMatrixAt(i, basis);
