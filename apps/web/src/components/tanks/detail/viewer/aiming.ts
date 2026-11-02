@@ -74,7 +74,39 @@ export type Aimed = {
   gun: Three.Object3D;
   turret: Three.Object3D;
   pivot: Three.Object3D;
+  /** The whole tank, which turns on the spot for what the gun cannot reach. */
+  vehicle: Three.Object3D;
 };
+
+/**
+ * How a bearing is shared between the gun and the vehicle under it.
+ *
+ * **A gun that cannot reach a bearing does not mean the vehicle cannot.** The
+ * client publishes the arc the gun itself sweeps, three degrees either way on
+ * the Strv 103B and ten on the ISU-130, and past that the player turns the
+ * tank. Left to the gun alone the dial accepted a bearing of ninety degrees and
+ * the picture did not move at all, which is the viewer refusing to show the one
+ * mechanism those vehicles aim with.
+ *
+ * A turret that goes all the way round takes the whole bearing and leaves the
+ * vehicle nothing, so this is the same answer it always gave for everything
+ * else.
+ *
+ * Exported because the dial draws the same two angles: what turns on the glyph
+ * has to be what turns in the picture.
+ */
+export function yawShare(
+  bearing: number,
+  arc: [number, number] | number[] | null | undefined,
+): { gun: number; body: number } {
+  // Normalised into degrees either side of straight ahead first: the dial
+  // counts a whole turn from zero, so the last few degrees before it comes
+  // round are a small negative angle rather than a large positive one, and
+  // clamping the raw fraction pinned every gun to one end of its arc.
+  const asked = ((((bearing * 360) % 360) + 540) % 360) - 180;
+  const gun = arc ? Math.max(arc[0]!, Math.min(arc[1]!, asked)) : asked;
+  return { gun, body: asked - gun };
+}
 
 /**
  * Point the vehicle where the dial says, within what it can actually do.
@@ -117,10 +149,21 @@ export function aimAt(
   const here = limits.sweep
     ? reachAt(limits.sweep, pointed.bearing)
     : { lo: -own[1], hi: -own[0] };
-  const byGun = Math.max(
-    (-here.hi * Math.PI) / 180,
-    Math.min((-here.lo * Math.PI) / 180, wanted),
-  );
+  const reachable = (angle: number) =>
+    Math.max((-here.hi * Math.PI) / 180, Math.min((-here.lo * Math.PI) / 180, angle));
+  const tips = limits.hull;
+  const tipped = (angle: number) =>
+    tips
+      ? Math.max((-tips[1] * Math.PI) / 180, Math.min((-tips[0] * Math.PI) / 180, angle))
+      : 0;
+  // **The gun takes what it can reach, and a bolted-on gun reaches nothing.**
+  // A deployed Kunze Panzer elevates its own fifteen degrees and its body adds
+  // five, and giving the whole twenty to the body tips it four times as far as
+  // it can go. The Strv 103B's gun is published with no range of its own at
+  // all, so the same line clamps it to zero and the suspension does every
+  // degree: no branch, because the two are the same rule read off the same
+  // numbers.
+  const byGun = reachable(wanted);
   // The joint the turret hangs the gun on, which is what keeps it level
   // at rest on a ring that is not.
   parts.gun.rotation.x = limits.joint + byGun;
@@ -132,35 +175,23 @@ export function aimAt(
   // Clamped to what the suspension actually travels. Left open it took
   // whatever the gun could not, which on a vehicle with a real gun is
   // most of the aim.
-  const tips = limits.hull;
-  const kneeling = tips
-    ? Math.max(
-        (-tips[1] * Math.PI) / 180,
-        Math.min((-tips[0] * Math.PI) / 180, wanted - byGun),
-      )
-    : 0;
+  const kneeling = tipped(wanted - byGun);
   parts.pivot.rotation.x = kneeling;
   // And the arms it kneels on swing to keep the wheels where they are.
   if (kneel) kneel(kneeling, parts.pivot.position);
-  // **The gun swings, the vehicle never does.**
+  // **The gun swings as far as it can, and the vehicle turns for the rest.**
   //
-  // A tank destroyer with a fixed casemate was being turned bodily to
-  // follow the dial, which is not what the game does and not what the
-  // client describes: it publishes the arc the gun itself sweeps, ten
-  // degrees either way on the ISU-130 and five on the SDP wz. 58T, and
-  // past that the gun simply stops. Turning the hull instead answered
-  // a question nobody asked, since a player who wants to look further
-  // drives the tank round themselves.
+  // That is the mechanism those vehicles aim with: the client publishes the
+  // arc the gun itself sweeps, three degrees either way on the Strv 103B and
+  // ten on the ISU-130, and past that the player turns the tank. Refusing the
+  // rest was tried and is worse than it sounds: the dial accepted a bearing of
+  // ninety degrees, reported it, and the picture was identical to the one
+  // before, because the three degrees the gun could give are invisible.
   //
-  // Normalised into degrees either side of straight ahead first: the
-  // dial counts a whole turn from zero, so the last few degrees before
-  // it comes round are a small negative angle rather than a large
-  // positive one, and clamping the raw fraction pinned every gun to one
-  // end of its arc.
-  const asked = ((((pointed.bearing * 360) % 360) + 540) % 360) - 180;
-  const swing = limits.arc;
-  const swept = swing
-    ? Math.max(swing[0], Math.min(swing[1], asked))
-    : asked;
+  // The vehicle rather than the hull, so the running gear and the belt come
+  // round with it rather than being left behind, and on its own group rather
+  // than on the one that kneels, so a turn and a kneel stay independent.
+  const { gun: swept, body: turned } = yawShare(pointed.bearing, limits.arc);
   parts.turret.rotation.y = (swept * Math.PI) / 180;
+  parts.vehicle.rotation.y = (turned * Math.PI) / 180;
 }

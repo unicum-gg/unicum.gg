@@ -305,6 +305,7 @@ export async function openStage(
       turret,
       gun,
       pivot,
+      vehicle,
       wake,
       awake,
     },
