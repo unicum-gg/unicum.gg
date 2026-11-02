@@ -16,6 +16,7 @@ import {
   ModeIcon,
   travelLabel,
 } from "@/components/tanks/detail/mode-marks";
+import { vehicleModeName } from "@/components/game-name";
 
 // The switch-time and gun-arc rows are shown alongside the ratio factors so the
 // tooltip is a complete picture of what engaging the mode does, not just the
@@ -31,10 +32,14 @@ function ModeTooltip({
   const { t: tEffects } = useTranslation(
     "components/tanks/detail/specifications/field-mods/index",
   );
+  // The mode's name is the game's own word, not ours to translate.
+  const { t: tGame } = useTranslation("game/vocabulary");
   return (
     <div className="w-56 space-y-2 text-xs">
       <div className="font-medium">
-        {t("mode-heading", { mode: modeLabel(mechanic, mode.kind) })}
+        {t("mode-heading", {
+          mode: vehicleModeName(modeLabel(mechanic, mode.kind), tGame),
+        })}
       </div>
       <div className="space-y-0.5 border-t border-background/20 pt-1.5 tabular-nums">
         {mode.factors.map((e, i) => (
@@ -97,14 +102,16 @@ export function VehicleModeToggle({
   compact?: boolean;
   onToggle: (kind: VehicleModeKind) => void;
 }) {
-  if (modes.length === 0) return null;
+  // Read before the early return, since a hook cannot be called conditionally.
+  const { t: tGame } = useTranslation("game/vocabulary");
   const glyph = compact ? "size-3" : "size-3.5";
+  if (modes.length === 0) return null;
   return (
     <TooltipProvider delayDuration={100}>
       <SegmentedControl compact={compact}>
         <Segment
           compact={compact}
-          label={travelLabel(mechanic)}
+          label={vehicleModeName(travelLabel(mechanic), tGame)}
           icon={
             <ModeIcon mechanic={mechanic} engaged={false} className={glyph} />
           }
@@ -116,7 +123,7 @@ export function VehicleModeToggle({
           <Segment
             key={mode.kind}
             compact={compact}
-            label={modeLabel(mechanic, mode.kind)}
+            label={vehicleModeName(modeLabel(mechanic, mode.kind), tGame)}
             icon={<ModeIcon mechanic={mechanic} engaged className={glyph} />}
             active={active === mode.kind}
             onClick={() => onToggle(mode.kind)}

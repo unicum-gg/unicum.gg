@@ -1,5 +1,6 @@
 import type { TranslateFunction } from "@onruntime/translations";
 import { BattleType, resolveMapMode } from "@unicum.gg/shared";
+import { vehicleModeKey } from "@/lib/vehicle-mode-key";
 
 /**
  * A battle type's name in the reader's language.
@@ -188,4 +189,26 @@ export function masteryBadgeName(
 ): string {
   const key = (["class3", "class2", "class1", "ace"] as const)[mastery - 1];
   return tGame(`mastery-badges.${key}`);
+}
+
+/**
+ * What the game calls one of a vehicle's two states, in the reader's language.
+ *
+ * These are Wargaming's own words, taken from the strings the client ships
+ * (`MECHANIC_STATES`), so a French player reads what their own battle interface
+ * says rather than a translation of our English. The word is passed in rather
+ * than the mechanic because that is what every caller already holds, and it is
+ * the one source both sides key off.
+ *
+ * **Never lowercased by a caller.** It used to be, inside a sentence, which is
+ * a guess the moment the language is not English: German capitalises its nouns
+ * and Greek drops its accents on the way down.
+ */
+export function vehicleModeName(
+  word: string,
+  tGame: TranslateFunction,
+): string {
+  const key = `vehicle-modes.${vehicleModeKey(word)}`;
+  const name = tGame(key);
+  return name === key ? word : name;
 }

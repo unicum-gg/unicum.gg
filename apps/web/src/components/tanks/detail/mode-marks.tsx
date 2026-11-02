@@ -89,25 +89,18 @@ export function modeLabel(mechanic: string | null, kind: VehicleModeKind): strin
   return kind === modeKindFor(mechanic) ? engagedLabel(mechanic) : KIND_LABEL[kind];
 }
 
-/** What engaging it does, for the sentence behind the mark. */
-const MECHANIC_MEANING: Record<VehicleMechanic, string> = {
-  [VehicleMechanic.Siege]: "planted, where its gun and its hull both aim",
-  [VehicleMechanic.Wheeled]:
-    "wheels locked down, for the road rather than the fight",
-  [VehicleMechanic.DualGun]: "both guns fired as one",
-  [VehicleMechanic.ShellSwitcher]:
-    "the gun's extra chambers open, trading damage for penetrating power",
-  [VehicleMechanic.LowCharge]: "a partial charge, fired without waiting",
-  [VehicleMechanic.Turboshaft]: "the turbine spun up",
-  [VehicleMechanic.TwinGun]: "both barrels fired as one",
-};
-
-/** And the words for it, which say what the switch actually does. */
-export function engagedMeaning(mechanic: string | null): string {
-  return (
-    MECHANIC_MEANING[mechanic as VehicleMechanic] ??
-    MECHANIC_MEANING[VehicleMechanic.Siege]
-  );
+/**
+ * Which mechanic's words apply to this vehicle, named rather than assumed.
+ *
+ * The sentence that says what engaging the switch actually does is ours rather
+ * than the game's, so it lives in the locale tree keyed by the mechanic, and a
+ * caller needs the key. A vehicle whose mechanic we do not recognise is read as
+ * a siege, which is what the client's own tag says when it says nothing else.
+ */
+export function knownMechanic(mechanic: string | null): VehicleMechanic {
+  return (mechanic as VehicleMechanic) in MECHANIC_STATES
+    ? (mechanic as VehicleMechanic)
+    : VehicleMechanic.Siege;
 }
 
 /**
@@ -150,10 +143,7 @@ export function ModeIcon({
   engaged: boolean;
   className?: string;
 }): ReactNode {
-  const known =
-    (mechanic as VehicleMechanic) in ENGAGED_ICON
-      ? (mechanic as VehicleMechanic)
-      : VehicleMechanic.Siege;
+  const known = knownMechanic(mechanic);
   const Glyph = engaged
     ? ENGAGED_ICON[known]
     : HULL_MECHANICS.has(known)
