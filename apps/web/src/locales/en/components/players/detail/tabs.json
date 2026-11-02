@@ -9,5 +9,6 @@
     "value": "Value"
   },
   "section-count": "{section} ({count})",
-  "beta": "beta"
+  "beta": "beta",
+  "battles-private": "Private list"
 }

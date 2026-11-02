@@ -1,4 +1,7 @@
 {
-  "private": "{nickname} keeps their battles private.",
+  "badge": "Private",
+  "heading": "{nickname} keeps their battles private",
+  "blurb": "Only {nickname} can open this list. Their battles still count in the site’s statistics, and the players they fought beside stay public.",
+  "see-teammates": "See who they play with",
   "private-owner": "Only you can see this list. You can change that in your account settings."
 }

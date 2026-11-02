@@ -142,7 +142,11 @@ export function BattlesTab({
         </PanelHeader>
         {isOwnProfile && hidden ? <BattlesPrivateOwnerNote /> : null}
         {refused ? (
-          <BattlesPrivateNotice nickname={nickname} />
+          <BattlesPrivateNotice
+            region={region}
+            nickname={nickname}
+            metric={metric}
+          />
         ) : (!data && isLoading) || awaitingOwn ? (
           <PanelContent className="flex justify-center py-8">
             <Spinner />

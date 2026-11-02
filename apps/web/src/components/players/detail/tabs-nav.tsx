@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale } from "@onruntime/translations/react";
+import { LockSimpleIcon } from "@phosphor-icons/react";
 import { numberFormat } from "@/lib/format";
 
 import Link from "@/components/link";
@@ -72,6 +73,7 @@ export function PlayerSectionNav({
   achievementCount,
   tournamentCount,
   battleCount,
+  battlesHidden = false,
   onSelect,
 }: {
   basePath: string;
@@ -91,6 +93,9 @@ export function PlayerSectionNav({
   // Battles shared through the mod, shown as "Battles (N)". Omitted at zero
   // like the tournaments, and for the same reason: most accounts have none.
   battleCount: number;
+  // The owner keeps the list to themselves: a lock where the count would be,
+  // so the tab does not read as the bare "Battles" of a player with none.
+  battlesHidden?: boolean;
   onSelect: (section: PlayerSection) => void;
 }) {
   const { locale } = useLocale();
@@ -130,6 +135,13 @@ export function PlayerSectionNav({
                 count: numberFormat(locale).format(counts[s]!),
               })
             : t(`sections.${s}`)}
+          {s === PlayerSection.Battles && battlesHidden ? (
+            <LockSimpleIcon
+              weight="fill"
+              className="ml-1.5 inline size-3 align-[-1px] text-fd-muted-foreground"
+              aria-label={t("battles-private")}
+            />
+          ) : null}
           {beta.has(s) && (
             <span className="ml-1.5 rounded-sm bg-fd-secondary px-1 py-0.5 align-middle text-[10px] font-semibold tracking-wide text-fd-muted-foreground uppercase">
               {t("beta")}

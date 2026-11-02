@@ -18,6 +18,7 @@ import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
 import { numberFormat } from "@/lib/format";
 import { PlayerSection, playerSectionHref } from "@/components/players/detail/tabs";
+import { BattlesPrivateNotice } from "@/components/players/detail/battles/privacy";
 import { PlayerBattlesOffer } from "./battles-offer";
 import { PlayerBattlesProvenance } from "./battles-provenance";
 import { PlayerBattlesTable, type PlayerBattleRow } from "./battles-table";
@@ -98,9 +99,9 @@ export function PlayerBattlesPanel({
   // paint, so this only waits when the server could not read the list, and a
   // request that failed says nothing either way about who has shared.
   if (!data) return null;
-  // A private list has nothing to offer a visitor, not even the mod pitch the
-  // empty state carries: it is not empty, it is not theirs to read.
-  if (data.hidden && data.battles.length === 0) return null;
+  // A private list is not an empty one, so it never gets the mod pitch the
+  // empty state carries: it says it is closed, and by whom.
+  const refused = !!data.hidden && data.battles.length === 0;
   const empty = data.battles.length === 0;
 
   return (
@@ -112,7 +113,14 @@ export function PlayerBattlesPanel({
             {t("title", { nickname, count: data.battles.length })}
           </PanelTitle>
         </PanelHeader>
-        {empty ? (
+        {refused ? (
+          <BattlesPrivateNotice
+            region={region}
+            nickname={nickname}
+            metric={metric}
+            linkToTab
+          />
+        ) : empty ? (
           <PlayerBattlesOffer
             region={region}
             nickname={nickname}

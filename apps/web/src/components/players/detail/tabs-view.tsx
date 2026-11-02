@@ -373,6 +373,7 @@ export function PlayerTabsView({
             tournamentCount={detail.tournamentCount}
             // Absent from a profile cached before the field existed.
             battleCount={detail.battleCount ?? 0}
+            battlesHidden={detail.battlesHidden ?? false}
             onSelect={selectSection}
           />
         </PanelHeader>
