@@ -34,6 +34,8 @@ export type Stage = {
   turret: Three.Group;
   gun: Three.Group;
   pivot: Three.Group;
+  /** The whole tank, which turns on the spot past what the gun can sweep. */
+  vehicle: Three.Group;
   /** Keep painting for a moment: something has changed, or is about to. */
   wake: (ms?: number) => void;
   /** Until when it keeps painting, which the loop reads every frame. */
@@ -44,6 +46,7 @@ export type Stage = {
 /** The handles the page keeps on the picture, and what it wants told back. */
 export type Page = {
   arc: RefObject<[number, number] | null>;
+  /** Whether the gun is bolted to the hull, so the suspension aims first. */
   gunRange: RefObject<[number, number]>;
   held: RefObject<HTMLElement | null>;
   hullDownRef: RefObject<boolean>;
@@ -97,6 +100,7 @@ export function runStage(
     turret,
     gun,
     pivot,
+    vehicle,
     wake,
     awake: awakeUntil,
   } = stage;
@@ -285,7 +289,7 @@ export function runStage(
           joint: page.joint.current,
           arc: page.arc.current,
         },
-        { gun, turret, pivot },
+        { gun, turret, pivot, vehicle },
         built.kneels ? built.kneel : undefined,
       );
     }

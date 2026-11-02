@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { type Sweep, reachAt } from "@/components/tanks/detail/viewer/aiming";
+import { type Sweep, reachAt, yawShare } from "@/components/tanks/detail/viewer/aiming";
 
 /** Where the gun is pointed: bearing in turns, pitch in degrees up from level. */
 export type Aim = (bearing: number, pitch: number) => void;
@@ -83,6 +83,8 @@ export function AimDial({
   onAim: Aim;
 }) {
   const dial = useRef<SVGSVGElement>(null);
+  /** The whole vehicle seen from above, which is what turns on a casemate. */
+  const body = useRef<SVGGElement>(null);
   const tower = useRef<SVGGElement>(null);
   const barrel = useRef<SVGRectElement>(null);
   const sight = useRef<SVGLineElement>(null);
@@ -147,9 +149,19 @@ export function AimDial({
     if (!shape) return;
     aimRef.current = (bearing, pitch) => {
       const degrees = bearing * 360;
+      // **What turns on the glyph is what turns in the picture.** The dial drew
+      // a turret swinging on a hull that held still, for every vehicle, which
+      // is a drawing of a mechanism the Strv 103B does not have: its gun sweeps
+      // three degrees and the tank itself turns for the rest. Shared from the
+      // same function the vehicle is aimed with, so the two cannot disagree.
+      const { gun: swept, body: turned } = yawShare(bearing, arc);
+      body.current?.setAttribute(
+        "transform",
+        `rotate(${turned.toFixed(2)} ${CENTRE} ${CENTRE})`,
+      );
       tower.current?.setAttribute(
         "transform",
-        `rotate(${degrees.toFixed(2)} ${CENTRE} ${CENTRE})`,
+        `rotate(${swept.toFixed(2)} ${CENTRE} ${CENTRE})`,
       );
       // Seen from above a tilted barrel is shorter than a level one, and the
       // muzzle it carries moves in with it.
@@ -182,7 +194,7 @@ export function AimDial({
     return () => {
       aimRef.current = null;
     };
-  }, [aimRef, shape]);
+  }, [aimRef, arc, shape]);
 
   useEffect(() => {
     watchRef.current = (bearing) => {
@@ -283,8 +295,10 @@ export function AimDial({
           strokeWidth={1}
           strokeDasharray="2 3"
         />
-        {/* The hull, which cannot turn, and the turret, which does. */}
-        <g className="fill-current opacity-55">
+        {/* The vehicle, and the turret on it. Both turn: the turret through
+            the arc its gun sweeps, the vehicle for whatever is left, which on
+            a casemate or a hull-aimer is nearly all of it. */}
+        <g ref={body} className="fill-current opacity-55">
           <rect x={CENTRE - 9} y={CENTRE - 10} width={18} height={28} rx={2.5} />
           <g ref={tower}>
             <rect

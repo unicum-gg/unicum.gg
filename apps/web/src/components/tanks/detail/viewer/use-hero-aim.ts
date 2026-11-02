@@ -26,6 +26,52 @@ const AIM_SETTLE = 250;
 // all have to agree on which set is in force, so the answer is kept once, here,
 // rather than derived three times.
 
+/**
+ * How wide a travelling gun's range may be and still count as bolted on.
+ *
+ * Measured: of the 28 vehicles that aim with their hull, the six whose gun has
+ * no mechanism publish a travelling range of 0 or 1 degree, and the 22 with a
+ * real one publish 13 at the narrowest. A degree of slack sits between two
+ * families that are an order of magnitude apart.
+ */
+const FIXED_GUN_SLACK = 1;
+
+/**
+ * What a bolted-on gun reaches on its own, which is nothing, at every bearing.
+ *
+ * **The few degrees it is booked for once planted are the suspension's
+ * overshoot, not a mechanism.** The Strv 103B's gun is pinned at a single angle
+ * in the client's travelling definition and is given six degrees in the
+ * deployed one, and the suspension's own travel (eleven degrees either way)
+ * already covers everything Wargaming publishes the vehicle as reaching in that
+ * state, nine up and two down. So the window costs the reader no reach, and
+ * spending it on the gun is a rigid barrel bending against its own hull.
+ *
+ * Published as a flat run rather than as a flag the aiming reads, so the one
+ * answer reaches the picture, the dial's band and the readout at once: a gun
+ * with no reach is clamped to nothing by the same arithmetic as any other, and
+ * the dial draws the suspension's band with nothing added on top.
+ */
+const BOLTED: Sweep = { up: [[0, 0], [1, 0]], down: [[0, 0], [1, 0]] };
+
+/**
+ * And what it swings through, which is nothing either, for the same reason.
+ *
+ * **One mounting, both axes.** A gun pinned in elevation is pinned in traverse:
+ * it is bolted into the hull, so the body turns for a bearing exactly as it
+ * tips for a pitch. The client books the same three degrees either side on all
+ * seven of these as it books the six of pitch, and it is the same slack.
+ *
+ * The arc is not what says so, which is why this hangs off the pitch reading
+ * rather than off a narrow arc: the SU-122V, the KanJpz 2 and the Object Kust
+ * publish exactly three degrees too, on a gun that has twenty-three to
+ * twenty-five of real elevation. Theirs traverses and keeps its arc.
+ *
+ * Zero rather than absent, since absent means a turret that goes all the way
+ * round, which is the opposite thing.
+ */
+const WELDED: [number, number] = [0, 0];
+
 export function useHeroAim({
   deployed,
   mechanic,
@@ -103,19 +149,28 @@ export function useHeroAim({
     if (!both) return;
     const now = (deployedRef.current && both.siege) || both.travel;
     const gun = both.gun;
-    gunRange.current = (now?.pitch?.[gun] as [number, number] | undefined) ?? [
-      0, 0,
-    ];
-    runs.current = now?.sweep?.[gun] as Sweep | undefined;
+    // **A gun that only has a range once the vehicle is planted has none.**
+    // Read from the TRAVELLING definition whichever stance is being shown,
+    // since that is the one that says what the gun itself can do: the Strv
+    // 103B's is pinned at a single angle there and six degrees wide once
+    // deployed, and those six are the suspension's overshoot rather than a
+    // barrel that moves. Only where there is a suspension doing the aiming,
+    // since nothing else can take what the gun is not given.
+    const resting = both.travel?.pitch?.[gun] as [number, number] | undefined;
+    const bolted =
+      now?.hullPitch != null &&
+      !!resting &&
+      resting[1] - resting[0] <= FIXED_GUN_SLACK;
+    gunRange.current = bolted
+      ? [0, 0]
+      : ((now?.pitch?.[gun] as [number, number] | undefined) ?? [0, 0]);
+    const sweep = bolted ? BOLTED : (now?.sweep?.[gun] as Sweep | undefined);
+    runs.current = sweep;
     hullRange.current = now?.hullPitch ?? null;
     kneels.current = now?.hullPitch != null;
-    const swing = now?.yaw?.[gun];
-    arc.current = (swing as [number, number] | undefined) ?? null;
-    setReach({
-      sweep: now?.sweep?.[gun] as Sweep | undefined,
-      arc: swing,
-      hullPitch: now?.hullPitch ?? null,
-    });
+    const swing = bolted ? WELDED : (now?.yaw?.[gun] as [number, number] | undefined);
+    arc.current = swing ?? null;
+    setReach({ sweep, arc: swing, hullPitch: now?.hullPitch ?? null });
   }, []);
   /** Plant the vehicle, or pick it back up. */
   const setDeploy = useCallback(
