@@ -1,5 +1,4 @@
 {
-  "badge": "Közlegény",
   "heading": "{nickname} csatái megtartott Közlegény státuszban maradnak",
   "blurb": "Csak {nickname} számára nyitott ez a lista. A csaták darabszáma továbbra is beleszámít a webhely statisztikáiba, és a mellettük lejátszott csaták játékosai továbbra is nyilvánosak maradnak.",
   "see-teammates": "Nézd meg, kikkel játszik",
