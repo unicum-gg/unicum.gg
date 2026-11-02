@@ -12,6 +12,7 @@ import * as THREE from "three";
 import { switched } from "./switches";
 import type { MirrorModel } from "@unicum.gg/wargaming";
 import { bandAround, type layTrack } from "./track";
+import { holdDown, tipCeiling } from "./ceiling";
 
 /** `Object3D` carries no discriminant, so the renderer's own flag narrows a traversal. */
 const isBone = (o: THREE.Object3D): o is THREE.Bone =>
@@ -21,7 +22,17 @@ const isBone = (o: THREE.Object3D): o is THREE.Bone =>
 const turnWheels = () => switched("wheels") !== "off";
 
 /** A belt already laid along a path, tagged with the line it runs down. */
-export type LaidBelt = ReturnType<typeof layTrack> & { at: number };
+export type LaidBelt = ReturnType<typeof layTrack> & {
+  /** The plane it runs in, which is where its own wheels are. */
+  at: number;
+  /**
+   * The wheels it runs around, by bone, where the mirror names them.
+   *
+   * Only a vehicle wearing two belts a side publishes these, and only there do
+   * they say anything the plane does not.
+   */
+  wheels?: string[];
+};
 
 type Wheel = {
   bone: THREE.Bone;
@@ -184,21 +195,37 @@ export function runningGear({
   // the side the wheel is on: checked over the catalogue, not one wheel of the
   // 968 two-line vehicles lands in a different group than the sign put it in,
   // so none of them moves.
+  //
+  // **And a line is not enough where two belts share one.** The AE Phase I
+  // wears a belt fore and a belt aft and runs both down the same line, 0.3 mm
+  // apart, so grouping by the line fits each of them to the whole wheelbase
+  // and the two come out as one long belt. The mirror names a belt's own
+  // wheels wherever that can happen, which is the 23 vehicles wearing two a
+  // side, and the line still answers for everything else.
   const lines = [...new Set(belts.map((belt) => belt.at))];
   const lineFor = (x: number) =>
     lines.reduce((best, line) =>
       Math.abs(line - x) < Math.abs(best - x) ? line : best,
     );
 
-  const bandFor = (line: number) => {
-    const side = wheels.filter((w) => lineFor(w.axle.x) === line);
+  const bandFor = (belt: LaidBelt) => {
+    const named = belt.wheels;
+    const side = named
+      ? wheels.filter((w) => named.includes(w.bone.name))
+      : wheels.filter((w) => lineFor(w.axle.x) === belt.at);
     if (side.length < 2) return null;
     // The belt rides on the road wheels, so their plane is its plane.
     const widest = side.reduce((big, w) => (w.wrap > big.wrap ? w : big));
-    return bandAround(
-      side.map((w) => ({ axle: standing(w), wrap: w.wrap })),
-      widest.axle.x,
-    );
+    const seats = side.map((w) => ({ axle: standing(w), wrap: w.wrap }));
+    const band = bandAround(seats, widest.axle.x);
+    // **And held down to where the hull carries it.** The band is what the
+    // wheels make of a belt, which is the whole shape only where the wheels
+    // are what it rests on. The mirror publishes the rest off the chassis's
+    // own ribbon, per side, and the ceiling travels with the body because the
+    // guides that make it are bolted to the body.
+    const profile = model.tracks?.ceilings?.[belt.at >= 0 ? "left" : "right"];
+    if (!profile || profile.length < 2 || band.length < 3) return band;
+    return holdDown(band, tipCeiling(profile, kneelAt, kneelCentre), seats);
   };
 
   const swing = new THREE.Matrix4();
@@ -297,12 +324,16 @@ export function runningGear({
     // links along a band that has not changed.
     if (banded !== kneelAt) {
       banded = kneelAt;
-      const bands = new Map<number, number[][]>();
+      // Two runs of one belt share its wheels, so the band is built once per
+      // belt rather than once per run.
+      const bands = new Map<string, number[][]>();
+      const keyOf = (belt: LaidBelt) => belt.wheels?.join(" ") ?? String(belt.at);
       for (const belt of belts) {
-        if (!bands.has(belt.at)) bands.set(belt.at, bandFor(belt.at) ?? []);
+        const key = keyOf(belt);
+        if (!bands.has(key)) bands.set(key, bandFor(belt) ?? []);
       }
       for (const belt of belts) {
-        const band = bands.get(belt.at);
+        const band = bands.get(keyOf(belt));
         if (band && band.length >= 3) belt.reshape(band, 0);
       }
     }

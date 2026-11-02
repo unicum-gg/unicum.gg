@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import type { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import type { MirrorModel } from "@unicum.gg/wargaming";
+import type { MirrorBeltRun, MirrorModel } from "@unicum.gg/wargaming";
 import { layTrack } from "./track";
 import type { LaidBelt } from "./running-gear";
 import type { Brush, MaterialShop } from "./materials";
@@ -53,22 +53,6 @@ export async function layBelts({
   let triangles = 0;
   const tracks = model.tracks;
   if (tracks && model.pieces[tracks.segment]) {
-    // **A belt is one or two runs, and the chassis says which.** It names a
-    // second link model and gives each run its own start along the path, half a
-    // pitch apart, so what reads as one belt is two interleaved. A vehicle that
-    // names only one is laid as one.
-    // **Two runs only where there are two links to lay.** The client's belt is
-    // two different link models interleaved half a pitch apart, and the pitch it
-    // declares is the pitch of one run: 300 mm on the E 100, a link every 150
-    // once both are down. Laying the one model we carry at that half step
-    // instead overlaps each 205 mm link with the next by 55, which is worse
-    // than the honest single run. So the declared pitch is used only when the
-    // second link is there to justify it.
-    //
-    // `segment2Offset` is measured from the first run rather than from the
-    // path, which is how the client reads it.
-    const twin = tracks.segment2 ? model.pieces[tracks.segment2] : undefined;
-    const opening = tracks.segmentOffset ?? 0;
     // **Each side gets the link the chassis put on it.** A shoe plate is not
     // symmetric, so 58 vehicles name a different file for the right, and laying
     // the left one down both sides reads as a track fitted backwards.
@@ -76,27 +60,63 @@ export async function layBelts({
     // right side that names no second link still lays the second run.
     const held = (piece: string | undefined, instead: string) =>
       piece && model.pieces[piece] ? piece : instead;
-    const runs: { piece: string; start: number; side: string }[] = [];
+    const runs: {
+      piece: string;
+      start: number;
+      side: string;
+      /** The pitch to step at, or nothing where the mesh's own length does. */
+      pitch?: number;
+      /** The wheels this run goes around, where the mirror names them. */
+      wheels?: string[];
+    }[] = [];
+    // **Every run the chassis authored, laid where it was authored.** A vehicle
+    // wears one belt a side almost always and two on 23 of them: fore and aft
+    // on the AE Phase I and the ST-66, inboard and outboard on the FV4025
+    // Contriver and the Object 279 (e). The client declares a `trackPair` per
+    // belt and the mirror publishes a path for each, so there is nothing here
+    // to choose between. What is published is what the game draws.
     for (const side of Object.keys(tracks.paths)) {
       // **Any run down the right, not only the first.** A vehicle with more
       // than one belt a side names the outer ones `right1`, `right2`, and the
-      // link a shoe plate puts on the right belongs on all of them: the Object
-      // 279 (e) carries two a side. Matched on the prefix, which is what the
-      // mirror keys them by.
+      // link a shoe plate puts on the right belongs on all of them. Matched on
+      // the prefix, which is what the mirror keys them by.
       const right = side.startsWith("right");
-      runs.push({
-        piece: held(right ? tracks.segmentRight : undefined, tracks.segment),
-        start: opening,
-        side,
-      });
-      if (twin)
+      // What this run does differently from the belt as a whole, which is
+      // nothing at all on a vehicle that declares one belt.
+      const own: MirrorBeltRun = tracks.belts?.[side] ?? {};
+      const first = held(
+        right ? (own.segmentRight ?? tracks.segmentRight) : undefined,
+        own.segment ?? tracks.segment,
+      );
+      // **A belt is one or two runs, and the chassis says which.** It names a
+      // second link model and gives each run its own start along the path, half
+      // a pitch apart, so what reads as one belt is two interleaved. A vehicle
+      // that names only one is laid as one.
+      const second = own.segment2 ?? tracks.segment2;
+      const twin = second ? model.pieces[second] : undefined;
+      // **The declared pitch, but only where the links interleave.** The client
+      // lays two models half a pitch apart, and the pitch it declares is the
+      // pitch of one run: 300 mm on the E 100, a link every 150 once both are
+      // down. Laying the one model we carry at that half step instead overlaps
+      // each 205 mm link with the next by 55, which is worse than the honest
+      // single run, so a lone run falls back to the mesh's own length.
+      const pitch = twin
+        ? (own.segmentLength ?? tracks.segmentLength)
+        : undefined;
+      // `segment2Offset` is measured from the first run rather than from the
+      // path, which is how the client reads it.
+      const opening = own.segmentOffset ?? tracks.segmentOffset ?? 0;
+      runs.push({ piece: first, start: opening, side, pitch, wheels: own.wheels });
+      if (twin && second)
         runs.push({
           piece: held(
-            right ? tracks.segment2Right : undefined,
-            tracks.segment2!,
+            right ? (own.segment2Right ?? tracks.segment2Right) : undefined,
+            second,
           ),
-          start: opening + (tracks.segment2Offset ?? 0),
+          start: opening + (own.segment2Offset ?? tracks.segment2Offset ?? 0),
           side,
+          pitch,
+          wheels: own.wheels,
         });
     }
     brush.part = "chassis";
@@ -126,7 +146,7 @@ export async function layBelts({
         o.geometry.computeBoundingBox();
         const box = o.geometry.boundingBox;
         if (!box) return;
-        // **The declared pitch, but only where the link can take it.**
+        // **The link's own length, where no declared pitch can be used.**
         //
         // A link overlaps its neighbour at the pin, so its own length is not
         // the step: the E 100's mesh is 205 mm long and its belt steps 150.
@@ -140,19 +160,16 @@ export async function layBelts({
         // scaled and canted. The client lays that pitch on a mesh we do not
         // have, and guessing which is not something the mirror can answer yet.
         //
-        // So the pitch is taken where the links interleave, which is a belt of
-        // two models, and the mesh's own length is what puts a single run end
-        // to end. That is the honest reading of what the mirror carries.
         // A chained belt sidesteps all of this: the chassis counts its links
         // rather than describing a step, so the count is laid as given and the
         // pitch falls out of the path. The Strv 103B's link is 173 mm long and
         // its chassis counts 86 of them round an 11.2 m band, a 130 mm step, so
         // its plates overlap as they do in the game instead of standing apart.
-        const length =
-          twin && tracks.segmentLength
-            ? tracks.segmentLength
-            : box.max.z - box.min.z;
-        // The client's own path for this side, which is where the belt runs.
+        const length = run.pitch ?? box.max.z - box.min.z;
+        // The client's own path for this side, which is where the belt runs,
+        // and how far outside it the belt's own body stands: a link is
+        // modelled from the tip of its centre guide, so laid by its origin the
+        // whole belt sits a guide's height too far out.
         const laid = layTrack(
           o.geometry,
           material(model.materials[order[i] ?? -1]),
@@ -160,6 +177,7 @@ export async function layBelts({
           length,
           run.start,
           tracks.segments,
+          tracks.standoffs?.[run.side],
         );
         laid.mesh.castShadow = true;
         laid.mesh.receiveShadow = true;
@@ -168,7 +186,9 @@ export async function layBelts({
         // Assigned onto the belt rather than spread into a copy: `total` is a
         // getter that follows a reshaped path, and a spread would freeze it at
         // the length the belt happened to have when it was laid.
-        belts.push(Object.assign(laid, { at: path[0]![0]! }));
+        belts.push(
+          Object.assign(laid, { at: path[0]![0]!, wheels: run.wheels }),
+        );
         links += laid.count;
         triangles += ((o.geometry.index?.count ?? 0) / 3) * laid.count;
       });

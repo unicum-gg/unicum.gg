@@ -105,8 +105,77 @@ export type MirrorTracks = {
   segmentOffset?: number;
   /** Where the second run starts along the path, in metres. */
   segment2Offset?: number;
+  /**
+   * What each run is, where a side carries more than one belt.
+   *
+   * **A side can carry two belts, and the client says which is which.** It
+   * declares a `trackPair` per belt, naming that belt's own path for each
+   * side, its own link models and its own phase along the path: the AE Phase I
+   * wears one fore and one aft on each side and starts them 271 mm and 311 mm
+   * along, and the FV4025 Contriver lays a different link inboard from
+   * outboard. Keyed exactly as `paths` is, and carrying only what this run
+   * does differently, so a field absent here is the belt's own above.
+   *
+   * Absent on every vehicle but the 23 that wear two belts a side.
+   */
+  belts?: Record<string, MirrorBeltRun>;
+  /**
+   * Where the hull holds each side's belt down, as `z, y` pairs in metres.
+   *
+   * Read off the ribbon the chassis bakes, which is the belt the game draws
+   * for itself at distance. A reader rebuilds the band from wherever the
+   * wheels have ended up, and the wheels alone cannot say that a return roller
+   * nobody declared, a guide rail or the hull roof is carrying the top run, so
+   * the band comes out as the taut tangent over the tallest wheels and goes
+   * through whatever is above it. On the Crusher that is 383 mm over the belt
+   * and a quarter of a metre inside the fender.
+   *
+   * Keyed by side alone (`left`, `right`), since two belts down one side are
+   * held by the same hull. **In the hull's own frame**, so a reader tipping a
+   * vehicle carries these with the body exactly as it carries a wheel bolted
+   * to it. Absent for a side whose ribbon says nothing.
+   */
+  ceilings?: Record<string, number[][]>;
+  /**
+   * How far each run's belt stands outside the band it is laid on, in metres.
+   *
+   * **A link is modelled from the tip of its centre guide, not from the face
+   * that seats on a wheel.** The band is where the belt touches the wheels, so
+   * laying a link with its origin on it draws the whole belt a guide's height
+   * too far out all the way round: the shoes sink into the ground along the
+   * bottom run and come up through the fender along the top one, by 86 mm on
+   * the median vehicle and 192 at the worst. Nothing in the link model says
+   * which of its faces is the seat, so the mirror reads it off the ribbon the
+   * chassis bakes and says so here.
+   *
+   * Keyed exactly as `paths` is, since two belts down one side are two link
+   * models and nothing says they are the same plate. Absent for a run whose
+   * ribbon said nothing, where a reader has no better answer than the origin.
+   */
+  standoffs?: Record<string, number>;
   /** Closed paths in the vehicle's space, by side, in metres. */
   paths: Record<string, number[][]>;
+};
+
+/** What one run of a two-belt chassis is, where it differs from the belt. */
+export type MirrorBeltRun = {
+  segment?: string;
+  segmentRight?: string;
+  segment2?: string;
+  segment2Right?: string;
+  segmentLength?: number;
+  segmentOffset?: number;
+  segment2Offset?: number;
+  /**
+   * The wheels this run goes around, by bone.
+   *
+   * **Neither the side nor the line can stand in for it.** A vehicle that
+   * wears a belt fore and a belt aft runs both of them down one line, 0.3 mm
+   * apart on the AE Phase I, so anything rebuilding a belt from the wheels
+   * under it has to be told which wheels those are or it fits each belt to
+   * the whole wheelbase and the two come out as one.
+   */
+  wheels?: string[];
 };
 
 /** How a piece stretches a camouflage, which the tiling divides by. */
