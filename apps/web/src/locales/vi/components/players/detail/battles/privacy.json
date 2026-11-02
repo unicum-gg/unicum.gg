@@ -1,6 +1,6 @@
 {
   "badge": "Bị ẩn",
-  "heading": "{nickname} đang giữ danh sách trận đấu này ở chế độ riêng tư",
+  "heading": "{nickname} đang giữ danh sách trận đấu này ở chế độ ẩn",
   "blurb": "Chỉ {nickname} có thể mở danh sách này. Mỗi trận đấu trong đó vẫn được tính vào thống kê của trang web, và những người chơi đã gặp trong những trận đấu đó vẫn ở chế độ công khai.",
   "see-teammates": "Xem những người chơi cùng đội",
   "private-owner": "Chỉ bạn có thể xem danh sách này. Bạn có thể thay đổi điều đó trong cài đặt tài khoản của mình."

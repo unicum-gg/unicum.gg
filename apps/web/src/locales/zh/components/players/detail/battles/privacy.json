@@ -1,6 +1,6 @@
 {
   "badge": "隐藏",
-  "heading": "{nickname} 保留此战斗列表为私密",
+  "heading": "{nickname} 保留此战斗列表为隐藏",
   "blurb": "只有 {nickname} 可以打开此列表。其中的每场战斗仍会计入网站的统计数据，在这些战斗中遇到的玩家仍保持公开。",
   "see-teammates": "查看队友",
   "private-owner": "只有您可以看到此列表。您可以在账号设置中变更此设置。"

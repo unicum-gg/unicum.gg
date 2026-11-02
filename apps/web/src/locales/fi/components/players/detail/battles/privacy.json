@@ -1,6 +1,6 @@
 {
   "badge": "Piilotettu",
-  "heading": "{nickname} pitää tämän taistelulistan yksityisenä",
+  "heading": "Käyttäjä {nickname} säilyttää tämän taistelulistan piilossa",
   "blurb": "Vain {nickname} voi avata tämän listan. Jokainen siinä oleva taistelu lasketaan edelleen sivuston tilastoihin, ja näissä taisteluissa kohdatut pelaajat pysyvät julkisina.",
   "see-teammates": "Näytä joukkueen jäsenet",
   "private-owner": "Vain sinä voit nähdä tämän listan. Voit muuttaa tämän tilisi asetuksissa."

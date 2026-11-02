@@ -1,6 +1,6 @@
 {
   "badge": "Dold",
-  "heading": "{nickname} behåller den här stridslistan privat",
+  "heading": "{nickname} behåller den här listan över strider dold",
   "blurb": "Endast {nickname} kan öppna den här listan. Varje strid i den räknas fortfarande in i webbplatsens statistik, och spelarna som möttes i de striderna förblir offentliga.",
   "see-teammates": "Se lagkamraterna",
   "private-owner": "Endast du kan se den här listan. Du kan göra den förändringen i dina kontoinställningar."

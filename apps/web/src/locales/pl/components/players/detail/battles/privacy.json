@@ -1,6 +1,6 @@
 {
   "badge": "Ukryte",
-  "heading": "Prywatną listę bitew posiada {nickname}",
+  "heading": "Nick {nickname} posiada ukrytą listę bitew",
   "blurb": "Tylko {nickname} może wybrać „otwórz”, aby otworzyć tę listę. Każda bitwa na tej liście nadal wpływa na liczby w statystykach witryny, a publiczny status graczy spotkanych w tych bitwach pozostaje bez zmian.",
   "see-teammates": "Zobacz graczy z drużyny",
   "private-owner": "Tylko Ty możesz zobaczyć tę listę. Możesz wprowadzić tę zmianę w ustawieniach konta."

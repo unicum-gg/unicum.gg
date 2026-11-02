@@ -1,6 +1,6 @@
 {
   "badge": "Paslėpta",
-  "heading": "{nickname} išlaiko šį mūšių sąrašą privatų",
+  "heading": "{nickname} išlaiko šį mūšių sąrašą paslėptą",
   "blurb": "Šį sąrašą gali atidaryti tik {nickname}. Kiekvienas jame esantis mūšis vis tiek įskaičiuojamas į svetainės statistiką, o tuose mūšiuose sutikti žaidėjai lieka vieši.",
   "see-teammates": "Peržiūrėti komandos draugus",
   "private-owner": "Tik jūs galite matyti šį sąrašą. Šį pakeitimą galite atlikti paskyros nustatymuose."
