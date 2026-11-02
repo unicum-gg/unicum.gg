@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} mantém suas batalhas privadas",
-  "blurb": "Somente {nickname} pode abrir esta lista. Suas batalhas ainda entram na contagem das estatísticas do site, e os jogadores ao lado de quem jogou continuam públicos.",
-  "see-teammates": "Veja com quem joga",
+  "badge": "Oculto",
+  "heading": "{nickname} mantém esta lista de batalhas privada",
+  "blurb": "Apenas {nickname} pode abrir esta lista. Cada batalha nela ainda entra na contagem das estatísticas do site, e os jogadores encontrados nessas batalhas continuam públicos.",
+  "see-teammates": "Ver os companheiros de equipe",
   "private-owner": "Somente você pode ver esta lista. Você pode fazer essa alteração nas configurações da sua conta."
 }

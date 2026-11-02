@@ -9,5 +9,6 @@
     "value": "价值"
   },
   "section-count": "{section}（{count}）",
-  "beta": "测试版"
+  "beta": "测试版",
+  "battles-private": "隐藏列表"
 }

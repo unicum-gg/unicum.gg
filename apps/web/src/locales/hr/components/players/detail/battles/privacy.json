@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} zadržava bitke privatnima",
-  "blurb": "Samo {nickname} može otvoriti ovaj popis. Njihove bitke i dalje ulaze u statistiku web-mjesta, a igrači pored kojih se borio i dalje ostaju javno dostupni.",
-  "see-teammates": "Pogledaj s kim igraju",
+  "badge": "Skriveno",
+  "heading": "{nickname} zadržava ovaj popis bitaka privatnim",
+  "blurb": "Samo {nickname} može otvoriti ovaj popis. Svaka bitka u njemu i dalje se ubraja u brojeve statistike web-mjesta, a igrači susretnuti u tim bitkama ostaju javno dostupni.",
+  "see-teammates": "Pogledaj suigrače",
   "private-owner": "Samo vi možete vidjeti ovaj popis. To možete promijeniti u postavkama računa."
 }

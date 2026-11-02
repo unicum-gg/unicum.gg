@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} säilyttää taistelunsa Sotilas-tilassa",
-  "blurb": "Vain {nickname} voi avata tämän listan. Heidän taistelujensa määrä näkyy edelleen sivuston tilastoissa, ja pelaajat, joiden vieressä he taistelivat, pysyvät julkisina.",
-  "see-teammates": "Näe, kenen vieressä hän pelaa",
+  "badge": "Piilotettu",
+  "heading": "{nickname} pitää tämän taistelulistan yksityisenä",
+  "blurb": "Vain {nickname} voi avata tämän listan. Jokainen siinä oleva taistelu lasketaan edelleen sivuston tilastoihin, ja näissä taisteluissa kohdatut pelaajat pysyvät julkisina.",
+  "see-teammates": "Näytä joukkueen jäsenet",
   "private-owner": "Vain sinä voit nähdä tämän listan. Voit muuttaa tämän tilisi asetuksissa."
 }

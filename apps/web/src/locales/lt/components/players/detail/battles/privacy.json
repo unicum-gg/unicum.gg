@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} išlaiko savo mūšius Eilinius",
-  "blurb": "Tik {nickname} gali atidaryti šį sąrašą. Jų mūšių skaičius vis tiek įtraukiamas į svetainės statistiką, o žaidėjai, su kuriais jų mūšiai vyko šalia, lieka vieši.",
-  "see-teammates": "Žiūrėti, su kuo jie žaidžia",
+  "badge": "Paslėpta",
+  "heading": "{nickname} išlaiko šį mūšių sąrašą privatų",
+  "blurb": "Šį sąrašą gali atidaryti tik {nickname}. Kiekvienas jame esantis mūšis vis tiek įskaičiuojamas į svetainės statistiką, o tuose mūšiuose sutikti žaidėjai lieka vieši.",
+  "see-teammates": "Peržiūrėti komandos draugus",
   "private-owner": "Tik jūs galite matyti šį sąrašą. Šį pakeitimą galite atlikti paskyros nustatymuose."
 }

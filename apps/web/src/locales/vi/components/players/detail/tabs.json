@@ -9,5 +9,6 @@
     "value": "Giá trị"
   },
   "section-count": "{section} ({count})",
-  "beta": "beta"
+  "beta": "beta",
+  "battles-private": "Danh sách bị ẩn"
 }

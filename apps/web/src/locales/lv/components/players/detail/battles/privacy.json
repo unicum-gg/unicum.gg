@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} patur savas kaujas kā Kareivis",
-  "blurb": "Tikai {nickname} var atvērt šo sarakstu. Viņu kauju skaits joprojām tiek ņemts vērā vietnes statistikā, un spēlētāji, ar kuriem kaujas tika izspēlētas blakus, paliek publiski.",
-  "see-teammates": "Skatīt, ar ko viņi spēlē",
+  "badge": "Slēpts",
+  "heading": "{nickname} patur šo kauju sarakstu kā “Kareivis”",
+  "blurb": "Šo sarakstu var atvērt tikai {nickname}. Katra kauja tajā joprojām tiek iekļauta vietnes statistikā, un spēlētāji, kurus viņi satikuši šajās kaujās, paliek publiski.",
+  "see-teammates": "Skatīt komandas biedrus",
   "private-owner": "Tikai jūs varat redzēt šo sarakstu. To varat izmainīt sava konta iestatījumos."
 }

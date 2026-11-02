@@ -9,5 +9,6 @@
     "value": "Værdi"
   },
   "section-count": "{section} ({count})",
-  "beta": "beta"
+  "beta": "beta",
+  "battles-private": "Skjult liste"
 }

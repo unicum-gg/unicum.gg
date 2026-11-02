@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} beholder kampene sine som Menig",
-  "blurb": "Bare {nickname} kan åpne denne listen. Antallet kamper deres inngår fortsatt i nettstedets statistikk, og spillerne de kjempet ved siden av, forblir offentlige.",
-  "see-teammates": "Se hvem de spiller ved siden av",
+  "badge": "Skjult",
+  "heading": "{nickname} beholder denne listen over kamper privat",
+  "blurb": "Bare {nickname} kan åpne denne listen. Antallet kamper i den inngår fortsatt i nettstedets statistikk, og spillerne som ble møtt i disse kampene, forblir offentlige.",
+  "see-teammates": "Se lagkameratene",
   "private-owner": "Bare du kan se denne listen. Du kan gjøre denne endringen i kontoinnstillingene dine."
 }

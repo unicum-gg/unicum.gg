@@ -9,5 +9,6 @@
     "value": "値"
   },
   "section-count": "{section}（{count}）",
-  "beta": "β"
+  "beta": "β",
+  "battles-private": "非公開リスト"
 }

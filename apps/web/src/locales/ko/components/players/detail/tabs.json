@@ -9,5 +9,6 @@
     "value": "값"
   },
   "section-count": "{section} ({count})",
-  "beta": "베타"
+  "beta": "베타",
+  "battles-private": "숨김 목록"
 }

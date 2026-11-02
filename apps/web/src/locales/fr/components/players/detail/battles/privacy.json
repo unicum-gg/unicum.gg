@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} conserve ses batailles privées",
-  "blurb": "Seul {nickname} peut ouvrir cette liste. Ses batailles comptent toujours dans les statistiques du site, et les joueurs qui ont combattu à ses côtés restent publics.",
-  "see-teammates": "Voir ses coéquipiers",
+  "badge": "Masqué",
+  "heading": "Cette liste de batailles reste privée pour {nickname}",
+  "blurb": "Seul {nickname} peut ouvrir cette liste. Chaque bataille qu’elle contient compte toujours dans les statistiques du site, et les joueurs rencontrés lors de ces batailles restent publics.",
+  "see-teammates": "Voir les équipiers",
   "private-owner": "Vous seul pouvez voir cette liste. Vous pouvez modifier ce paramètre dans les paramètres de votre compte."
 }

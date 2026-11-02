@@ -1,6 +1,7 @@
 {
-  "heading": "De gevechten van {nickname} zijn privé",
-  "blurb": "Alleen {nickname} kan deze lijst openen. De gevechten tellen nog steeds mee in de statistieken van de site en de spelers naast wie {nickname} heeft gevochten, blijven openbaar.",
-  "see-teammates": "Bekijk met wie ze spelen",
+  "badge": "Verborgen",
+  "heading": "{nickname} houdt deze lijst met gevechten privé",
+  "blurb": "Alleen {nickname} kan deze lijst openen. Elk gevecht hierin wordt nog steeds meegerekend in de aantallen van de statistieken van de site, en de spelers die je in die gevechten hebt ontmoet blijven openbaar.",
+  "see-teammates": "Bekijk de teamgenoten",
   "private-owner": "Alleen jij kunt deze lijst zien. Je kunt dit wijzigen in je accountinstellingen."
 }

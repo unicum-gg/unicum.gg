@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} beholder sine kampe menige",
-  "blurb": "Kun {nickname} kan åbne denne liste. Deres kampe tæller stadig med i webstedets statistik, og spillerne, de kæmpede ved siden af, forbliver offentlige.",
-  "see-teammates": "Se, hvem de spiller med",
+  "badge": "Skjult",
+  "heading": "Denne liste over kampe er privat for {nickname}",
+  "blurb": "Kun {nickname} kan åbne denne liste. Hver kamp i den tæller stadig med i webstedets statistik, og spillerne, der blev mødt i de kampe, forbliver offentlige.",
+  "see-teammates": "Se spillerne på holdet",
   "private-owner": "Kun du kan se denne liste. Du kan ændre det i dine kontoindstillinger."
 }

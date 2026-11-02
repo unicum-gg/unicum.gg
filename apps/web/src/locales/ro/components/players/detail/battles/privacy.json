@@ -1,6 +1,7 @@
 {
-  "heading": "{nickname} păstrează bătăliile private",
-  "blurb": "Doar {nickname} poate deschide această listă. Bătăliile lor încă se numără în statisticile site-ului, iar jucătorii lângă care au jucat rămân publici.",
-  "see-teammates": "Vezi cu cine joacă",
+  "badge": "Ascuns",
+  "heading": "{nickname} păstrează privată această listă de bătălii",
+  "blurb": "Doar {nickname} poate deschide această listă. Fiecare bătălie din ea contribuie în continuare la numărările din statisticile site-ului, iar jucătorii întâlniți în acele bătălii rămân publici.",
+  "see-teammates": "Vezi coechipierii",
   "private-owner": "Doar tu poți vedea această listă. Poți face această schimbare din setările contului tău."
 }
