@@ -380,7 +380,14 @@ export function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except Next internals + static assets
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    // Match all paths except Next internals + static assets.
+    //
+    // `models` is in there because a developer reading the vehicle geometry off
+    // a local tree serves it out of `public/models`, and everything here is
+    // prefixed with a language: the viewer asked for `/models/vehicles.json`,
+    // was sent to `/fr/models/vehicles.json`, and got a 404. Nothing is served
+    // from there in production, where the geometry is read from the mirror's
+    // own CDN, so this costs the site nothing.
+    "/((?!_next/static|_next/image|models/|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };
