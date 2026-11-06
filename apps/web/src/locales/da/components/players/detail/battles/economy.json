@@ -1,0 +1,19 @@
+{
+  "ammo": "Ammunition",
+  "battles": "Kampe",
+  "duration": "Kampens varighed",
+  "earned": "Optjent",
+  "event-vehicles": "Køretøjer fra begivenheder",
+  "explanation": "Talt ud fra de {battles} kampe, som denne spiller uploadede gennem unicum.gg-moddet i løbet af de seneste {days} dage, og det er de eneste resultater, der har deres egne kreditter, i alle spiltilstande, der betalte dem, inklusive begivenheder. Alle tal er pr. kamp, bortset fra tallene pr. minut. Overskud er det, der var tilbage på kontoen: alt, hvad kampen betalte dem, inklusive premium-konto og reserver, minus regningerne for reparation, ammunition og forbrugsstoffer, hvor ammunition kun tæller det, der blev betalt i credits. Pr. minut af kampen er tempoet for en spiller, der spiller hver kamp til ende, mens pr. minut i live er tempoet for en spiller, der forlader kampen for at gå videre til den næste, når vedkommende er blevet ødelagt, hver især ved siden af den tid, som tallet blev divideret med. Spiltilstanden i farve betalte mest pr. minut af kampen på dette niveau.",
+  "lifetime": "Tid i live",
+  "mode": "Tilstand",
+  "mode-at-tier": "Tilstand, niveau {tier}",
+  "net": "Overskud / kamp",
+  "net-per-minute": "Overskud / minut af kampen",
+  "net-per-minute-alive": "Overskud / minut i live",
+  "repair": "Reparation",
+  "supplies": "Forbrugsvarer",
+  "thin": "Færre end {min} kampe: læs denne række som en anekdote.",
+  "tier": "Niveau {tier}",
+  "title": "Hvad {nickname} fik betalt i hver spiltilstand"
+}

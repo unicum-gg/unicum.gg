@@ -1,0 +1,17 @@
+{
+  "battle-length": "Trajanje bitke",
+  "battles": "Borbi",
+  "credits-per-battle": "Kredita / bitka",
+  "credits-per-minute": "Kredita / minut",
+  "explanation": "Uračunato iz bitki otpremljenih putem unicum.gg mod-a tokom poslednjih {days} дана, ukupno {records} zapisa o vozilima: svaka otpremljena bitka nosi ono što je plaćeno svakom od svojih trideset učesnika, bez botova. Krediti i искуство pripadaju samoj bitci, pre premium naloga, резерви, misija i troškova, tako da ih ništa na nalogu igrača ne menja. Minut je minut bitke, odnosno njena sopstvena dužina. Wargaming ne objavljuje kredite po režimu ni za koga.",
+  "mode": "Mod",
+  "net-explanation": "Neto je ono što je stiglo na nalog pošto su plaćeni поправка, municija i potrošni materijali, uključujući premium i bonuse. Nose ga samo sopstveni rezultati otpremljivača, pa zavisi samo od igrača koji koriste mod i prikazuje se kada iza režima stoji najmanje {min} njih. U njega ulaze i njihove navike, poput premium naloga ili premium granata.",
+  "net-pending": "Ono što stiže na nalog pošto su plaćeni поправка, municija i potrošni materijali nose samo sopstveni rezultati otpremljivača, pa zavisi samo od igrača koji koriste mod. Pojavljuje se ovde kada najmanje {min} njih odigra režim na ovom nivou.",
+  "net-per-battle": "Neto / bitka",
+  "net-sample": "{battles} bitke od {players} igrača koji koriste mod",
+  "players": "Igrači",
+  "tier": "Ниво {tier}",
+  "title": "Koji režim najbolje plaća na mapi {label}",
+  "xp-per-battle": "XP / bitka",
+  "xp-per-minute": "XP / minut"
+}

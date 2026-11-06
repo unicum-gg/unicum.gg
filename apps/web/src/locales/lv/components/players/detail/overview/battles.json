@@ -124,9 +124,10 @@
     "free-xp": "Brīvā pieredze",
     "crew-xp": "Apkalpes pieredze",
     "with-premium": "Šim kontam bija premium.",
+    "other-bonuses": "Premium konts un citi bonusi",
     "with-bonuses": "Ar piemērotajiem bonusiem",
     "credited": "Ieskaitīts kontā",
-    "not-a-sum": "Katra rinda ir atsevišķs skaitlis, ko spēle ziņo pati par sevi, tie savā starpā nesummējas.",
+    "not-a-sum": "Kredīti veido secīgu kopumu no tā, ko samaksāja kauja, līdz tam, kas nonāca kontā. Pieredzes rindas ir atsevišķi spēles ziņoti rādītāji, un tās neveido vienu kopējo summu.",
     "marks": "Izcilības atzīme",
     "mark-of-excellence": "Progress",
     "mark-movement": "Šī kauja"

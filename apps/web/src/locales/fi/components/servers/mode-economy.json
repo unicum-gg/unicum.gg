@@ -1,0 +1,17 @@
+{
+  "battle-length": "Taistelun kesto",
+  "battles": "Taisteluita",
+  "credits-per-battle": "Krediitit / taistelu",
+  "credits-per-minute": "Krediitit / minuutti",
+  "explanation": "Laskettu viimeisten {days} aikana unicum.gg-modin kautta ladatuista taisteluista, yhteensä {records} ajoneuvotietuetta. Jokainen ladattu taistelu sisältää sen, mitä taistelu maksoi kullekin sen kolmestakymmenestä osallistujasta, botit pois lukien. Krediitit ja kokemuspisteet ovat taistelun omia arvoja ennen premium-tiliä, reservejä, tehtäviä ja kuluja, joten mikään pelaajan tilillä oleva ei muuta niitä. Minuutti tarkoittaa taistelun minuutin, taistelun oman pituuden mukaan. Wargaming ei julkaise krediittejä pelimuodoittain kenellekään.",
+  "mode": "Tila",
+  "net-explanation": "Nettotulos on se, mikä osui tilille, kun korjaukset, ammukset ja kulutustarvikkeet oli maksettu, premium ja bonukset sisällytettyinä. Sen sisältävät vain lataajan omat tulokset, joten se perustuu yksin modin pelaajiin. Nettotulos näytetään, kun vähintään {min} pelaajaa on tämän pelimuodon takana. Se sisältää myös heidän tapansa, kuten premium-tilin tai premium-ammukset.",
+  "net-pending": "Se, mikä osuu tilille korjausten, ammusten ja kulutustarvikkeiden maksamisen jälkeen, perustuu yksin lataajan omiin tuloksiin, joten se nojaa vain modin pelaajiin. Se näkyy tässä, kun vähintään {min} pelaajaa on pelannut pelimuotoa tällä tasolla.",
+  "net-per-battle": "Nettotulos / taistelu",
+  "net-sample": "{battles} taistelua {players} pelaajalta, jotka käyttävät modia",
+  "players": "Pelaajat",
+  "tier": "Taso {tier}",
+  "title": "Mikä pelimuoto maksaa parhaiten palvelimella {label}",
+  "xp-per-battle": "Kokemuspisteet / taistelu",
+  "xp-per-minute": "Kokemuspisteet / minuutti"
+}

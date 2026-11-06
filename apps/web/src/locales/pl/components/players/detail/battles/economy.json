@@ -1,0 +1,19 @@
+{
+  "ammo": "Amunicja",
+  "battles": "Bitwy",
+  "duration": "Długość bitwy",
+  "earned": "Zdobyte",
+  "event-vehicles": "Pojazdy wydarzeń",
+  "explanation": "Uwzględniono {battles} bitew przesłanych przez tego gracza za pomocą moda unicum.gg w ciągu ostatnich {days} dni, wyłącznie wyniki z własnymi kredytami, ze wszystkich trybów, które je wypłacały, w tym z wydarzeń. Wszystkie statystyki podano na bitwę, z wyjątkiem statystyk na minutę. Zysk to kwota, która pozostała na koncie, czyli wszystko, co bitwa wypłaciła graczowi, wraz z kontem premium i rezerwami, pomniejszone o koszty naprawy, amunicji i materiałów eksploatacyjnych. W przypadku amunicji uwzględniono tylko tę opłaconą kredytami. Zysk na minutę bitwy pokazuje tempo gracza, który rozgrywa każdą bitwę do końca, a zysk na minutę życia pokazuje tempo gracza, który po zniszczeniu opuszcza bitwę, by przejść do kolejnej. Obok każdej wartości podano czas, przez który ją podzielono. Tryb oznaczony kolorem wypłacał najwięcej na minutę bitwy na tym poziomie.",
+  "lifetime": "Czas przeżycia",
+  "mode": "Tryb",
+  "mode-at-tier": "Tryb, poziom {tier}",
+  "net": "Zysk / bitwa",
+  "net-per-minute": "Zysk / min bitwy",
+  "net-per-minute-alive": "Zysk / min życia",
+  "repair": "Naprawa",
+  "supplies": "Mat. eksploatacyjne",
+  "thin": "Mniej niż {min} bitew, potraktuj ten wiersz jako anegdotę.",
+  "tier": "Poziom {tier}",
+  "title": "Wypłaty z każdego trybu dla {nickname}"
+}

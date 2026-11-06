@@ -1,0 +1,17 @@
+{
+  "battle-length": "Délka bitvy",
+  "battles": "Bitvy",
+  "credits-per-battle": "Kredity / bitva",
+  "credits-per-minute": "Kredity / minuta",
+  "explanation": "Započítáno z bitev nahraných přes mod unicum.gg za posledních {days} dní, celkem {records} záznamů vozidel. Každá nahraná bitva obsahuje částku, kterou získal každý z jejích třiceti účastníků, s výjimkou botů. Kredity a zkušenosti jsou vlastní údaje bitvy před započtením prémiového účtu, záloh, misí a nákladů, takže je nic na účtu hráče nemění. Minuta znamená minutu bitvy, tedy vlastní délku bitvy. Wargaming nezveřejňuje údaje o kreditech podle režimů pro nikoho.",
+  "mode": "Režim",
+  "net-explanation": "Čistý zisk je částka, která přistane na účtu po zaplacení oprav, munice a spotřebních doplňků, včetně prémiového účtu a bonusů. Nesou ho pouze vlastní výsledky hráče, který bitvu nahrál, takže závisí jen na hráčích používajících mod. Zobrazuje se, jakmile za režim stojí alespoň {min} z nich. Odráží také jejich návyky, například používání prémiového účtu nebo prémiových granátů.",
+  "net-pending": "Částku, která přistane na účtu po zaplacení oprav, munice a spotřebních doplňků, nesou pouze vlastní výsledky hráče, který bitvu nahrál, takže závisí jen na hráčích používajících mod. Zobrazuje se zde, jakmile alespoň {min} z nich odehraje režim na této úrovni.",
+  "net-per-battle": "Čistý zisk / bitva",
+  "net-sample": "{battles} bitev od {players} hráčů používajících mod",
+  "players": "Hráči",
+  "tier": "Úroveň {tier}",
+  "title": "Který režim platí nejlépe na {label}",
+  "xp-per-battle": "Zkušenosti / bitva",
+  "xp-per-minute": "Zkušenosti / minuta"
+}

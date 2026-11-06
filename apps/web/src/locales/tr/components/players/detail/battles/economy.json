@@ -1,0 +1,19 @@
+{
+  "ammo": "Mühimmat",
+  "battles": "Savaşlar",
+  "duration": "Savaş süresi",
+  "earned": "Kazanılan",
+  "event-vehicles": "Etkinlik araçları",
+  "explanation": "Son {days} gün içinde oyuncunun unicum.gg moduyla yüklediği {battles} savaştan hesaplanır. Yalnızca kendi kredilerini taşıyan sonuçlar, etkinlikler dahil kredi ödeyen tüm modlarda hesaba katılır. Savaş başına ve dakika başına olanlar dışında tüm değerler savaş başınadır. Kâr, hesaba kalan miktardır: savaşın ödediği her şeyden, premium hesap ve rezervler dahil, onarım, mühimmat ve sarf malzemeleri maliyetleri çıkarılır. Mühimmat için yalnızca krediyle ödenen miktar sayılır. Savaşın dakikası başına değer, her savaşı sonuna kadar sürdüren oyuncunun temposudur. Hayatta kalınan dakika başına değer ise imha edildikten sonra bir sonraki savaşa ayrılan oyuncunun temposudur. Her değer, bölündüğü süreyle birlikte gösterilir. Renkli mod, bu seviyede savaş dakikası başına en fazla ödeme yapan moddur.",
+  "lifetime": "Hayatta kalma süresi",
+  "mode": "Mod",
+  "mode-at-tier": "Mod, {tier} seviyesi",
+  "net": "Kâr / savaş",
+  "net-per-minute": "Savaş dakikası başına kâr",
+  "net-per-minute-alive": "Hayatta kalınan dakika başına kâr",
+  "repair": "Onarım",
+  "supplies": "Sarf Malzemeleri",
+  "thin": "{min} savaştan az: Bu satırı yalnızca bir anekdot olarak değerlendirin.",
+  "tier": "{tier} seviyesi",
+  "title": "Her modun {nickname} için ödediği miktar"
+}

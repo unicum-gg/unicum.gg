@@ -124,9 +124,10 @@
     "free-xp": "Slobodno iskustvo",
     "crew-xp": "Iskustvo posade",
     "with-premium": "Na ovom računu je bio premium.",
+    "other-bonuses": "Premium račun i drugi bonusi",
     "with-bonuses": "Uz primijenjene bonuse",
     "credited": "Pripisano računu",
-    "not-a-sum": "Svaka linija je vrijednost koju igra prijavljuje zasebno, ne zbrajaju se međusobno.",
+    "not-a-sum": "Krediti se zbrajaju od iznosa koji je bitka isplatila do iznosa koji je stigao na račun. Redovi s iskustvom predstavljaju zasebne brojke koje igra prijavljuje i ne zbrajaju se međusobno.",
     "marks": "Oznaka izvrsnosti",
     "mark-of-excellence": "Napredak",
     "mark-movement": "Ova bitka"

@@ -1,0 +1,19 @@
+{
+  "ammo": "Municija",
+  "battles": "Borbi",
+  "duration": "Trajanje bitke",
+  "earned": "Зарађено",
+  "event-vehicles": "Vozila za догађаје",
+  "explanation": "Uračunato iz {battles} bitke koje je ovaj igrač otpremio putem unicum.gg mod-a tokom poslednjih {days} дана, jedinih rezultata koji nose sopstvene kredite, u svakom režimu koji ih je plaćao, uključujući догађаје. Sve brojke su po bitci, osim onih po minutu. Dobit je ono što je ostalo na nalogu: sve što je bitka plaćala igraču, uključujući premium nalog i резерве, umanjeno za račune za поправку, municiju i potrošne materijale, pri čemu se za municiju računaju samo krediti. Po minutu bitke je tempo za igrača koji odigra svaku bitku do kraja, a po minutu živ je tempo za igrača koji napusti bitku i pređe u sledeću čim bude уништено vozilo, pri čemu se svaki podatak prikazuje uz vreme kojim je podeljen. Režim u boji plaćao je najviše po minutu bitke na ovom nivou.",
+  "lifetime": "Vreme živ",
+  "mode": "Mod",
+  "mode-at-tier": "Režim, ниво {tier}",
+  "net": "Dobit / bitka",
+  "net-per-minute": "Dobit / minut bitke",
+  "net-per-minute-alive": "Dobit / minut živ",
+  "repair": "Поправка",
+  "supplies": "Потрошни материјали",
+  "thin": "Manje od {min} bitki: čitaj ovaj red kao anegdotu.",
+  "tier": "Ниво {tier}",
+  "title": "Koliko je svaki režim platio {nickname}"
+}

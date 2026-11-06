@@ -830,7 +830,14 @@
     "Manage subscription": "إدارة الاشتراك",
     "paid": "مدفوع",
     "stay": "البقاء",
-    "Private": "خاص"
+    "Private": "خاص",
+    "Battle length": "مدة المعركة",
+    "Credits": "الائتمانات",
+    "alone": "فردي",
+    "ammunition": "الذخيرة",
+    "length": "المدة",
+    "ones": "الواحدات",
+    "premium": "مميز"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1664,7 +1671,14 @@
     "Manage subscription": "Кіраваць падпіскай",
     "paid": "платны",
     "stay": "застацца",
-    "Private": "Прыватны"
+    "Private": "Прыватны",
+    "Battle length": "Працягласць бою",
+    "Credits": "Крэдыты",
+    "alone": "адзін",
+    "ammunition": "боепрыпасы",
+    "length": "працягласць",
+    "ones": "адзінкі",
+    "premium": "прэміум"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2713,7 +2727,14 @@
     "settings": "настройки",
     "Manage subscription": "Управление на абонамента",
     "paid": "платен",
-    "stay": "остани"
+    "stay": "остани",
+    "Battle length": "Продължителност на битката",
+    "Credits": "Кредити",
+    "alone": "самостоятелно",
+    "ammunition": "боеприпаси",
+    "length": "продължителност",
+    "ones": "такива",
+    "premium": "премиум"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3555,7 +3576,14 @@
     "Manage subscription": "Upravljaj pretplatom",
     "paid": "plaćeno",
     "stay": "ostani",
-    "Private": "Privatno"
+    "Private": "Privatno",
+    "Battle length": "Trajanje bitke",
+    "Credits": "Krediti",
+    "alone": "solo",
+    "ammunition": "municija",
+    "length": "trajanje",
+    "ones": "oni",
+    "premium": "premium"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4615,7 +4643,14 @@
     "settings": "nastavení",
     "Manage subscription": "Spravovat předplatné",
     "paid": "placené",
-    "stay": "zůstat"
+    "stay": "zůstat",
+    "Battle length": "Délka bitvy",
+    "Credits": "Kredity",
+    "alone": "sólo",
+    "ammunition": "munice",
+    "length": "délka",
+    "ones": "jedničky",
+    "premium": "prémiové"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5681,7 +5716,14 @@
     "settings": "indstillinger",
     "Manage subscription": "Administrer abonnement",
     "paid": "betalt",
-    "stay": "bliv"
+    "stay": "bliv",
+    "Battle length": "Kampens varighed",
+    "Credits": "Kreditter",
+    "alone": "alene",
+    "ammunition": "ammunition",
+    "length": "længde",
+    "ones": "dem",
+    "premium": "premium"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6740,7 +6782,14 @@
     "settings": "Einstellungen",
     "Manage subscription": "Abonnement verwalten",
     "paid": "bezahlt",
-    "stay": "bleiben"
+    "stay": "bleiben",
+    "Battle length": "Gefechtsdauer",
+    "Credits": "Kreditpunkte",
+    "alone": "solo",
+    "ammunition": "Munition",
+    "length": "Länge",
+    "ones": "Gefechte",
+    "premium": "Premium"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7805,7 +7854,14 @@
     "settings": "ρυθμίσεις",
     "Manage subscription": "Διαχείριση συνδρομής",
     "paid": "επί πληρωμή",
-    "stay": "παραμονή"
+    "stay": "παραμονή",
+    "Battle length": "Διάρκεια μάχης",
+    "Credits": "Πιστώσεις",
+    "alone": "μόνος",
+    "ammunition": "πυρομαχικά",
+    "length": "διάρκεια",
+    "ones": "μονάδες",
+    "premium": "premium"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8850,7 +8906,14 @@
     "settings": "configuración",
     "Manage subscription": "Gestionar suscripción",
     "paid": "de pago",
-    "stay": "permanecer"
+    "stay": "permanecer",
+    "Battle length": "Duración de la batalla",
+    "Credits": "Créditos",
+    "alone": "solo",
+    "ammunition": "munición",
+    "length": "duración",
+    "ones": "unos",
+    "premium": "premium"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9920,7 +9983,14 @@
     "settings": "asetukset",
     "Manage subscription": "Hallitse tilausta",
     "paid": "maksullinen",
-    "stay": "pysy"
+    "stay": "pysy",
+    "Battle length": "Taistelun kesto",
+    "Credits": "Krediitit",
+    "alone": "yksin",
+    "ammunition": "ammukset",
+    "length": "pituus",
+    "ones": "kappaleet",
+    "premium": "premium"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -10969,7 +11039,14 @@
     "settings": "paramètres",
     "Manage subscription": "Gérer l’abonnement",
     "paid": "payant",
-    "stay": "rester"
+    "stay": "rester",
+    "Battle length": "Durée de la bataille",
+    "Credits": "Crédits",
+    "alone": "seul",
+    "ammunition": "munitions",
+    "length": "durée",
+    "ones": "ceux",
+    "premium": "premium"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11804,7 +11881,14 @@
     "Manage subscription": "सदस्यता प्रबंधित करें",
     "paid": "सशुल्क",
     "stay": "रहें",
-    "Private": "निजी"
+    "Private": "निजी",
+    "Battle length": "युद्ध की अवधि",
+    "Credits": "क्रेडिट्स",
+    "alone": "अकेले",
+    "ammunition": "गोला-बारूद",
+    "length": "अवधि",
+    "ones": "वाले",
+    "premium": "प्रीमियम"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12867,7 +12951,14 @@
     "settings": "postavke",
     "Manage subscription": "Upravljanje pretplatom",
     "paid": "plaćeno",
-    "stay": "ostani"
+    "stay": "ostani",
+    "Battle length": "Trajanje bitke",
+    "Credits": "Krediti",
+    "alone": "solo",
+    "ammunition": "streljivo",
+    "length": "trajanje",
+    "ones": "one",
+    "premium": "premium"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -13932,7 +14023,14 @@
     "settings": "beállítások",
     "Manage subscription": "Előfizetés kezelése",
     "paid": "fizetős",
-    "stay": "marad"
+    "stay": "marad",
+    "Battle length": "Csata hossza",
+    "Credits": "Kredit",
+    "alone": "egyedül",
+    "ammunition": "lőszer",
+    "length": "hossz",
+    "ones": "egyesek",
+    "premium": "prémium"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -14993,7 +15091,14 @@
     "settings": "impostazioni",
     "Manage subscription": "Gestisci abbonamento",
     "paid": "a pagamento",
-    "stay": "rimani"
+    "stay": "rimani",
+    "Battle length": "Durata della battaglia",
+    "Credits": "Crediti",
+    "alone": "solo",
+    "ammunition": "munizioni",
+    "length": "durata",
+    "ones": "quelli",
+    "premium": "premium"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16061,7 +16166,14 @@
     "settings": "設定",
     "Manage subscription": "サブスクリプションを管理",
     "paid": "有料",
-    "stay": "滞在"
+    "stay": "滞在",
+    "Battle length": "戦闘時間",
+    "Credits": "クレジット",
+    "alone": "ソロ",
+    "ammunition": "弾薬",
+    "length": "長さ",
+    "ones": "もの",
+    "premium": "プレミアム"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -16897,7 +17009,14 @@
     "Manage subscription": "Жазылымды басқару",
     "paid": "ақылы",
     "stay": "қалу",
-    "Private": "Жеке"
+    "Private": "Жеке",
+    "Battle length": "Шайқас ұзақтығы",
+    "Credits": "Кредиттер",
+    "alone": "Жеке",
+    "ammunition": "Оқ-дәрі",
+    "length": "Ұзақтығы",
+    "ones": "Бірліктер",
+    "premium": "Премиум"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -17969,7 +18088,14 @@
     "settings": "설정",
     "Manage subscription": "구독 관리",
     "paid": "유료",
-    "stay": "계속"
+    "stay": "계속",
+    "Battle length": "전투 시간",
+    "Credits": "크레딧",
+    "alone": "단독",
+    "ammunition": "탄약",
+    "length": "길이",
+    "ones": "것들",
+    "premium": "프리미엄"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19037,7 +19163,14 @@
     "settings": "nustatymai",
     "Manage subscription": "Tvarkyti prenumeratą",
     "paid": "mokama",
-    "stay": "likti"
+    "stay": "likti",
+    "Battle length": "Mūšio trukmė",
+    "Credits": "Kreditai",
+    "alone": "vienas",
+    "ammunition": "šaudmenys",
+    "length": "trukmė",
+    "ones": "vienetai",
+    "premium": "premium"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20091,7 +20224,14 @@
     "settings": "iestatījumi",
     "Manage subscription": "Pārvaldīt abonementu",
     "paid": "maksas",
-    "stay": "palikt"
+    "stay": "palikt",
+    "Battle length": "Kaujas ilgums",
+    "Credits": "Kredīti",
+    "alone": "solo",
+    "ammunition": "Munīcija",
+    "length": "ilgums",
+    "ones": "tie",
+    "premium": "premium"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21161,7 +21301,14 @@
     "settings": "instellingen",
     "Manage subscription": "Abonnement beheren",
     "paid": "betaald",
-    "stay": "blijven"
+    "stay": "blijven",
+    "Battle length": "Gevechtsduur",
+    "Credits": "Credits",
+    "alone": "alleen",
+    "ammunition": "munitie",
+    "length": "lengte",
+    "ones": "exemplaren",
+    "premium": "premium"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22222,7 +22369,14 @@
     "settings": "innstillinger",
     "Manage subscription": "Administrer abonnement",
     "paid": "betalt",
-    "stay": "bli"
+    "stay": "bli",
+    "Battle length": "Kampvarighet",
+    "Credits": "Kreditter",
+    "alone": "alene",
+    "ammunition": "ammunisjon",
+    "length": "lengde",
+    "ones": "enere",
+    "premium": "premium"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23280,7 +23434,14 @@
     "settings": "ustawienia",
     "Manage subscription": "Zarządzaj subskrypcją",
     "paid": "płatny",
-    "stay": "pozostań"
+    "stay": "pozostań",
+    "Battle length": "Długość bitwy",
+    "Credits": "Kredyty",
+    "alone": "solo",
+    "ammunition": "amunicja",
+    "length": "długość",
+    "ones": "te",
+    "premium": "premium"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24331,7 +24492,14 @@
     "settings": "configurações",
     "Manage subscription": "Gerir subscrição",
     "paid": "pago",
-    "stay": "ficar"
+    "stay": "ficar",
+    "Battle length": "Duração da batalha",
+    "Credits": "Créditos",
+    "alone": "solo",
+    "ammunition": "munição",
+    "length": "duração",
+    "ones": "uns",
+    "premium": "premium"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25382,7 +25550,14 @@
     "settings": "setări",
     "Manage subscription": "Gestionează abonamentul",
     "paid": "plătit",
-    "stay": "rămâi"
+    "stay": "rămâi",
+    "Battle length": "Durata bătăliei",
+    "Credits": "Credite",
+    "alone": "solo",
+    "ammunition": "muniție",
+    "length": "durată",
+    "ones": "cele",
+    "premium": "premium"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26421,7 +26596,14 @@
     "settings": "настройки",
     "Manage subscription": "Управление подпиской",
     "paid": "оплачено",
-    "stay": "остаться"
+    "stay": "остаться",
+    "Battle length": "Продолжительность боя",
+    "Credits": "Кредиты",
+    "alone": "в одиночку",
+    "ammunition": "Боеприпасы",
+    "length": "Длительность",
+    "ones": "те",
+    "premium": "премиум"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27259,7 +27441,14 @@
     "Manage subscription": "Spravovať predplatné",
     "paid": "platené",
     "stay": "zostať",
-    "Private": "Zasebno"
+    "Private": "Zasebno",
+    "Battle length": "Dolžina bitke",
+    "Credits": "Krediti",
+    "alone": "samostojno",
+    "ammunition": "strelivo",
+    "length": "dolžina",
+    "ones": "tisti",
+    "premium": "premium"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28324,7 +28513,14 @@
     "settings": "podešavanja",
     "Manage subscription": "Upravljaj pretplatom",
     "paid": "plaćeno",
-    "stay": "ostani"
+    "stay": "ostani",
+    "Battle length": "Trajanje bitke",
+    "Credits": "Krediti",
+    "alone": "solo",
+    "ammunition": "municija",
+    "length": "dužina",
+    "ones": "oni",
+    "premium": "premium"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29394,7 +29590,14 @@
     "settings": "inställningar",
     "Manage subscription": "Hantera prenumeration",
     "paid": "betald",
-    "stay": "stanna kvar"
+    "stay": "stanna kvar",
+    "Battle length": "Stridslängd",
+    "Credits": "Krediter",
+    "alone": "ensam",
+    "ammunition": "ammunition",
+    "length": "längd",
+    "ones": "ettor",
+    "premium": "premium"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30460,7 +30663,14 @@
     "settings": "การตั้งค่า",
     "Manage subscription": "จัดการการสมัครสมาชิก",
     "paid": "ชำระเงินแล้ว",
-    "stay": "อยู่ต่อ"
+    "stay": "อยู่ต่อ",
+    "Battle length": "ระยะเวลาการรบ",
+    "Credits": "เครดิต",
+    "alone": "เดี่ยว",
+    "ammunition": "กระสุน",
+    "length": "ความยาว",
+    "ones": "รายการ",
+    "premium": "พรีเมียม"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -31298,7 +31508,14 @@
     "Manage subscription": "Pamahalaan ang subscription",
     "paid": "bayad",
     "stay": "manatili",
-    "Private": "Pribado"
+    "Private": "Pribado",
+    "Battle length": "Tagal ng labanan",
+    "Credits": "Credits",
+    "alone": "solo",
+    "ammunition": "amunisyon",
+    "length": "haba",
+    "ones": "mga iyon",
+    "premium": "premium"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -32360,7 +32577,14 @@
     "settings": "ayarlar",
     "Manage subscription": "Aboneliği yönet",
     "paid": "ücretli",
-    "stay": "kal"
+    "stay": "kal",
+    "Battle length": "Savaş süresi",
+    "Credits": "Kredi",
+    "alone": "tek başına",
+    "ammunition": "mühimmat",
+    "length": "süre",
+    "ones": "olanlar",
+    "premium": "premium"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33415,7 +33639,14 @@
     "settings": "налаштування",
     "Manage subscription": "Керувати підпискою",
     "paid": "оплачено",
-    "stay": "залишатися"
+    "stay": "залишатися",
+    "Battle length": "Тривалість бою",
+    "Credits": "Кредити",
+    "alone": "соло",
+    "ammunition": "боєприпаси",
+    "length": "тривалість",
+    "ones": "ті",
+    "premium": "преміум"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34459,7 +34690,14 @@
     "settings": "cài đặt",
     "Manage subscription": "Quản lý gói đăng ký",
     "paid": "đã thanh toán",
-    "stay": "ở lại"
+    "stay": "ở lại",
+    "Battle length": "Thời lượng trận đấu",
+    "Credits": "Bạc",
+    "alone": "một mình",
+    "ammunition": "đạn dược",
+    "length": "thời lượng",
+    "ones": "các mục",
+    "premium": "premium"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35525,6 +35763,13 @@
     "settings": "设置",
     "Manage subscription": "管理订阅",
     "paid": "付费",
-    "stay": "留下"
+    "stay": "留下",
+    "Battle length": "战斗时长",
+    "Credits": "银币",
+    "alone": "单人",
+    "ammunition": "弹药",
+    "length": "时长",
+    "ones": "那些",
+    "premium": "高级"
   }
 }

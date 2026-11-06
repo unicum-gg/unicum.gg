@@ -1,0 +1,19 @@
+{
+  "ammo": "Munizioni",
+  "battles": "Battaglie",
+  "duration": "Durata della battaglia",
+  "earned": "Guadagnati",
+  "event-vehicles": "Veicoli dell’evento",
+  "explanation": "Conteggiate dalle {battles} battaglie caricate da questo giocatore tramite la mod di unicum.gg negli ultimi {days} giorni, le uniche con crediti propri, in ogni modalità che li ha pagati, eventi inclusi. Tutti i valori sono per battaglia, tranne quelli al minuto. Il profitto è ciò che è rimasto nell’account: tutto ciò che la battaglia ha pagato al giocatore, account premium e riserve incluse, meno le spese di riparazione, munizioni e consumabili, considerando per le munizioni solo ciò che è stato pagato in crediti. Per minuto di battaglia indica il ritmo di un giocatore che porta a termine ogni battaglia, mentre per minuto attivo indica il ritmo di chi abbandona per la battaglia successiva una volta distrutto, ciascuno accanto al tempo per cui è stato diviso. La modalità a colori ha pagato di più per minuto di battaglia a questo livello.",
+  "lifetime": "Tempo attivo",
+  "mode": "Modalità",
+  "mode-at-tier": "Modalità, livello {tier}",
+  "net": "Profitto / battaglia",
+  "net-per-minute": "Profitto / min di battaglia",
+  "net-per-minute-alive": "Profitto / min attivo",
+  "repair": "Riparazione",
+  "supplies": "Consumabili",
+  "thin": "Meno di {min} battaglie: considera questa riga un aneddoto.",
+  "tier": "Livello {tier}",
+  "title": "Quanto è stato a pagamento per {nickname} in ogni modalità"
+}

@@ -124,9 +124,10 @@
     "free-xp": "Fri Erfarenhet",
     "crew-xp": "Besättningserfarenhet",
     "with-premium": "Det här kontot hade premium.",
+    "other-bonuses": "Premiumkonto och andra bonusar",
     "with-bonuses": "Med bonusar tillämpade",
     "credited": "Krediterat till kontot",
-    "not-a-sum": "Varje rad är en siffra som spelet rapporterar för sig, de adderas inte till varandra.",
+    "not-a-sum": "Krediterna summeras från det striden betalade till det som nådde kontot. Erfarenhetsraderna är var och en en siffra som spelet rapporterar för sig och summeras inte till varandra.",
     "marks": "Märke för stridsutmärkelse",
     "mark-of-excellence": "Framsteg",
     "mark-movement": "Denna strid"

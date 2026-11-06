@@ -1,0 +1,17 @@
+{
+  "battle-length": "Tagal ng labanan",
+  "battles": "Mga labanan",
+  "credits-per-battle": "Credits / laban",
+  "credits-per-minute": "Credits / minuto",
+  "explanation": "Nabilang mula sa mga laban na in-upload sa pamamagitan ng ang mod ng unicum.gg sa nakalipas na {days} mga araw, {records} rekord ng sasakyan lahat: bawat in-upload na laban ay may nakatalang ibinayad nito sa bawat isa sa tatlumpung kalahok, hindi kasama ang mga bot. Ang credits at karanasan ay sariling bilang ng laban, bago ang premium account, mga reserba, mga misyon at mga gastos, kaya walang binabago ang mga ito sa account ng sinuman. Ang isang minuto ay isang minuto ng labanan, ang sariling haba ng laban. Walang pino-publish ang Wargaming na credits bawat mode para sa sinuman.",
+  "mode": "Mode",
+  "net-explanation": "Ang kita ay ang dumarating sa account kapag nabayaran na ang pagkukumpuni, amunisyon at mga consumable, kasama ang premium at mga bonus. Ang mga resulta lamang ng nag-upload ang may ganitong bilang, kaya nakabatay ito solo sa mga manlalaro ng mod at ipinapakita lamang kapag may {min} na manlalarong nakatayo sa likod ng isang mode. Kasama rin dito ang kanilang mga nakagawian, tulad ng premium account o premium shells.",
+  "net-pending": "Ang dumarating sa account kapag nabayaran na ang pagkukumpuni, amunisyon at mga consumable ay nakabatay lamang sa sariling mga resulta ng nag-upload, kaya nakasalalay ito solo sa mga manlalaro ng mod. Lumilitaw ito rito kapag may {min} na sa kanila ang naglaro ng isang mode sa tier na ito.",
+  "net-per-battle": "Kita / laban",
+  "net-sample": "{battles} mga laban mula sa {players} mga manlalarong gumagamit ng mod",
+  "players": "Mga manlalaro",
+  "tier": "Tier {tier}",
+  "title": "Aling mode ang may pinakamataas na bayad sa {label}",
+  "xp-per-battle": "XP / laban",
+  "xp-per-minute": "XP / minuto"
+}

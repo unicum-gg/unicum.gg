@@ -1,0 +1,19 @@
+{
+  "ammo": "Amunisyon",
+  "battles": "Mga labanan",
+  "duration": "Tagal ng labanan",
+  "earned": "Nakuha",
+  "event-vehicles": "Mga sasakyan sa mga kaganapan",
+  "explanation": "Nabilang mula sa {battles} mga laban na in-upload ng manlalarong ito sa pamamagitan ng ang mod ng unicum.gg sa nakalipas na {days} mga araw, ang tanging mga resulta na may sarili nilang credits, sa bawat mode na nagbigay ng bayad sa kanila, kasama ang mga kaganapan. Ang lahat ng bilang ay bawat laban maliban sa mga bilang bawat minuto. Ang kita ay ang natitira sa account: lahat ng ibinayad ng laban sa kanila, kasama ang premium account at mga reserba, bawas ang mga bayarin sa pagkukumpuni, amunisyon at mga consumable, kung saan ang amunisyon ay binibilang lamang ang binayaran gamit ang credits. Ang bawat minuto ng labanan ay ang bilis para sa manlalarong natatapos ang bawat laban, habang ang bawat minuto na buhay ay ang bilis para sa manlalarong umaalis para sa susunod na laban kapag nawasak, at ang bawat isa ay ipinapakita katabi ng oras na pinaghatian nito. Ang mode na may kulay ang nagbigay ng pinakamalaking bayad bawat minuto ng labanan sa tier na ito.",
+  "lifetime": "Oras na buhay",
+  "mode": "Mode",
+  "mode-at-tier": "Mode, tier {tier}",
+  "net": "Kita / laban",
+  "net-per-minute": "Kita / minuto ng labanan",
+  "net-per-minute-alive": "Kita / minuto na buhay",
+  "repair": "Pagkukumpuni",
+  "supplies": "Mga Consumable",
+  "thin": "Mas kaunti sa {min} mga laban: basahin ang row na ito bilang isang anekdota.",
+  "tier": "Tier {tier}",
+  "title": "Bayad ng bawat mode kay {nickname}"
+}

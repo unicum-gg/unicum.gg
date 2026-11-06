@@ -1,0 +1,17 @@
+{
+  "battle-length": "Durata bătăliei",
+  "battles": "Lupte",
+  "credits-per-battle": "Credite / bătălie",
+  "credits-per-minute": "Credite / minut",
+  "explanation": "Contorizat din bătăliile încărcate prin modul unicum.gg în ultimele {days} zile, în total {records} înregistrări de vehicule. Fiecare bătălie încărcată poartă ceea ce a plătit pentru fiecare dintre cei treizeci de participanți, cu excepția roboților. Creditele și experiența aparțin bătăliei, înainte de contul premium, rezerve, misiuni și costuri, astfel încât nimic legat de contul unui jucător nu le schimbă. Un minut este un minut de bătălie, adică durata bătăliei. Wargaming nu publică credite per mod pentru oricine.",
+  "mode": "Mod",
+  "net-explanation": "Profitul net este ceea ce a aterizat în cont după plata reparațiilor, muniției și consumabilelor, inclusiv premium și bonusuri. Doar rezultatele proprii ale celui care încarcă poartă această valoare, astfel încât se bazează doar pe jucătorii modului și este afișată odată ce {min} dintre ei susțin un mod. Valoarea poartă și obiceiurile lor, cum ar fi folosirea unui cont premium sau a proiectilelor premium.",
+  "net-pending": "Ceea ce aterizează în cont după plata reparațiilor, muniției și consumabilelor este susținut doar de rezultatele proprii ale celui care încarcă, astfel încât se bazează numai pe jucătorii modului. Apare aici după ce {min} dintre ei au jucat un mod la acest nivel.",
+  "net-per-battle": "Profit net / bătălie",
+  "net-sample": "{battles} bătălii de la {players} jucători care folosesc modul",
+  "players": "Jucători",
+  "tier": "Nivel {tier}",
+  "title": "Care mod plătește cel mai bine la {label}",
+  "xp-per-battle": "XP / bătălie",
+  "xp-per-minute": "XP / minut"
+}

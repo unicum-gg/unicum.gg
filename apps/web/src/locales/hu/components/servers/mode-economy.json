@@ -1,0 +1,17 @@
+{
+  "battle-length": "Csata hossza",
+  "battles": "Csaták",
+  "credits-per-battle": "Kredit / csata",
+  "credits-per-minute": "Kredit / perc",
+  "explanation": "Beleszámítva az elmúlt {days} nap során az unicum.gg modon keresztül feltöltött csaták, összesen {records} járműrekorddal. Minden feltöltött csata tartalmazza, hogy mennyit fizetett a harminc résztvevő mindegyikének, a botokat nem számítva. A kredit- és tapasztalati adatok magához a csatához tartoznak, a prémium fiók, a tartalékok, a küldetések és a költségek előtti állapotot mutatják, így semmi nem változtat rajtuk a játékos fiókjában. Egy perc a csata egy perce, vagyis a csata saját hossza. A Wargaming senkinek nem tesz közzé játékmódonkénti kreditadatokat.",
+  "mode": "Mód",
+  "net-explanation": "A nettó érték az, ami a javítás, a lőszer és a fogyócikkek kifizetése után érkezik a fiókba, a prémiumot és a bónuszokat is beleértve. Ezt csak a feltöltő saját eredményei tartalmazzák, ezért kizárólag a mod játékosain alapul, és akkor jelenik meg, ha legalább {min} játékos áll egy játékmód mögött. A játékosok szokásait is tükrözi, például azt, hogy van-e prémium fiókjuk vagy prémium lövedékeket használnak-e.",
+  "net-pending": "A javítás, a lőszer és a fogyócikkek kifizetése után a fiókba érkező összeget kizárólag a feltöltő saját eredményei tartalmazzák, ezért csak a mod játékosain alapul. Akkor jelenik meg itt, ha legalább {min} játékos játszott egy játékmódban ezen a szinten.",
+  "net-per-battle": "Nettó / csata",
+  "net-sample": "{battles} csata a modot használó {players} játékostól",
+  "players": "Játékosok",
+  "tier": "{tier}. szint",
+  "title": "Melyik játékmód fizet a legjobban {label} esetén",
+  "xp-per-battle": "Tapasztalat / csata",
+  "xp-per-minute": "Tapasztalat / perc"
+}

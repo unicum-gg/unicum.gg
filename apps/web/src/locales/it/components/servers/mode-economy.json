@@ -1,0 +1,17 @@
+{
+  "battle-length": "Durata della battaglia",
+  "battles": "Battaglie",
+  "credits-per-battle": "Crediti / battaglia",
+  "credits-per-minute": "Crediti / minuto",
+  "explanation": "Conteggiate dalle battaglie caricate tramite la mod di unicum.gg negli ultimi {days} giorni, {records} record di veicoli in tutto: ogni battaglia caricata contiene ciò che ha pagato a ciascuno dei suoi trenta partecipanti, bot esclusi. Crediti ed esperienza sono quelli propri della battaglia, prima dell’account premium, delle riserve, delle missioni e dei costi, quindi nulla relativo all’account di un giocatore li modifica. Un minuto è un minuto di battaglia, la durata propria della battaglia. Wargaming non pubblica i crediti per modalità per chiunque.",
+  "mode": "Modalità",
+  "net-explanation": "Il netto è ciò che approda sull’account dopo aver pagato riparazioni, munizioni e consumabili, inclusi account premium e bonus. Solo i risultati propri di chi carica la battaglia lo riportano, quindi si basa esclusivamente sui giocatori della mod e viene mostrato quando almeno {min} di loro supportano una modalità. Include anche le loro abitudini, come un account premium o proiettili premium.",
+  "net-pending": "Ciò che approda sull’account dopo aver pagato riparazioni, munizioni e consumabili è riportato solo dai risultati propri di chi carica la battaglia, quindi si basa esclusivamente sui giocatori della mod. Appare qui quando almeno {min} di loro hanno giocato una modalità a questo livello.",
+  "net-per-battle": "Netto / battaglia",
+  "net-sample": "{battles} battaglie di {players} giocatori che usano la mod",
+  "players": "Giocatori",
+  "tier": "Livello {tier}",
+  "title": "Quale modalità paga meglio su {label}",
+  "xp-per-battle": "PE / battaglia",
+  "xp-per-minute": "PE / minuto"
+}

@@ -9,7 +9,7 @@
       "tip": "Presyo ng pagbili sa gold, para sa mga premium na tangke"
     },
     "researchXp": {
-      "label": "Research XP",
+      "label": "XP sa Pananaliksik",
       "tip": "XP para ma-unlock, pinakamurang daan"
     },
     "totalFreeXp": {
@@ -36,7 +36,7 @@
   "selector": {
     "buyCredits": "Gastos (credits)",
     "buyGold": "Gastos (ginto)",
-    "researchXp": "Research XP",
+    "researchXp": "XP sa Pananaliksik",
     "totalFreeXp": "Libreng Karanasan",
     "shellCost": "Gastos ng bala",
     "ammoCost": "Buong gastos ng bala",

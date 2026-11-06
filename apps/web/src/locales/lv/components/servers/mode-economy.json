@@ -1,0 +1,17 @@
+{
+  "battle-length": "Kaujas ilgums",
+  "battles": "Kaujas",
+  "credits-per-battle": "Kredīti / kauja",
+  "credits-per-minute": "Kredīti / minūte",
+  "explanation": "Uzskaitīts, balstoties uz kaujām, kas pēdējo {days} dienu laikā augšupielādētas, izmantojot unicum.gg mod. Kopā ir {records} transportlīdzekļu ieraksti, un katrā augšupielādētajā kaujā ir norādīts, ko tā samaksāja katram no trīsdesmit dalībniekiem, neieskaitot botus. Kredīti un pieredze pieder pašai kaujai un ir norādīti pirms premium konta, rezervju, misiju un izmaksu ietekmes, tāpēc nekas spēlētāja kontā tos nemaina. Minūte ir kaujas minūte, tas ir, kaujas pašas ilgums. Wargaming nepublicē kredītus par režīmu nevienam.",
+  "mode": "Režīms",
+  "net-explanation": "Peļņa ir tas, kas nonāca kontā pēc remonta, munīcijas un patēriņa materiālu apmaksas, ieskaitot premium un bonusus. To nodrošina tikai augšupielādētāja paša rezultāti, tāpēc tā balstās tikai uz mod spēlētājiem un tiek parādīta, kad režīmu atbalsta {min} no viņiem. Tajā atspoguļojas arī viņu paradumi, piemēram, premium konta vai premium lādiņu izmantošana.",
+  "net-pending": "To, kas nonāk kontā pēc remonta, munīcijas un patēriņa materiālu apmaksas, nodrošina tikai augšupielādētāja paša rezultāti, tāpēc tas balstās tikai uz mod spēlētājiem. Tas parādās šeit, kad vismaz {min} no viņiem ir spēlējuši režīmā šajā līmenī.",
+  "net-per-battle": "Peļņa / kauja",
+  "net-sample": "{battles} kaujas no {players} spēlētājiem, kuri izmanto mod",
+  "players": "Spēlētāji",
+  "tier": "Līmenis {tier}",
+  "title": "Kurš režīms vislabāk maksā kategorijā {label}",
+  "xp-per-battle": "Pieredze / kauja",
+  "xp-per-minute": "Pieredze / minūte"
+}

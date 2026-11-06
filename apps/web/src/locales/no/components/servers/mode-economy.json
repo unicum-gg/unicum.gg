@@ -1,0 +1,17 @@
+{
+  "battle-length": "Kampvarighet",
+  "battles": "Kamper",
+  "credits-per-battle": "Credits / kamp",
+  "credits-per-minute": "Credits / minutt",
+  "explanation": "Medregnet fra kampene som ble lastet opp gjennom unicum.gg-modden i løpet av de siste {days} dagene, totalt {records} kjøretøyresultater: hver opplastede kamp bærer det den betalte til hver av sine tretti deltakere, unntatt botter. Credits og erfaring er kampens egne, før premiumkonto, reserver, oppdrag og kostnader, så ingenting ved en spillers konto endrer dem. Ett minutt er ett minutt av kampen, kampens egen lengde. Wargaming publiserer ingen credits per modus for noen.",
+  "mode": "Modus",
+  "net-explanation": "Netto er det som landet på kontoen etter at reparasjon, ammunisjon og forbruksvarer var betalt, inkludert premium og bonuser. Bare opplasterens egne resultater bærer dette, så det hviler på moddens spillere alene og vises når {min} av dem står bak en modus. Det bærer også vanene deres, som premiumkonto eller premiumsgranater.",
+  "net-pending": "Det som lander på kontoen etter at reparasjon, ammunisjon og forbruksvarer er betalt, bæres bare av opplasterens egne resultater, så det hviler kun på moddens spillere. Det vises her når {min} av dem har spilt en modus på dette nivået.",
+  "net-per-battle": "Netto / kamp",
+  "net-sample": "{battles} kamper fra {players} spillere som bruker modden",
+  "players": "Spillere",
+  "tier": "Nivå {tier}",
+  "title": "Hvilken modus betaler best på {label}",
+  "xp-per-battle": "XP / kamp",
+  "xp-per-minute": "XP / minutt"
+}

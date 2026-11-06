@@ -1,0 +1,17 @@
+{
+  "battle-length": "Gevechtsduur",
+  "battles": "Gevechten",
+  "credits-per-battle": "Credits / gevecht",
+  "credits-per-minute": "Credits / minuut",
+  "explanation": "Meegeteld op basis van de gevechten die in de afgelopen {days} dagen via de unicum.gg-mod zijn geüpload, in totaal {records} voertuigrecords: elk geüpload gevecht bevat wat het heeft betaald aan elk van de dertig deelnemers, bots uitgesloten. Credits en ervaring zijn die van het gevecht zelf, vóór het premium account, reserves, missies en kosten, dus niets aan het account van een speler verandert ze. Een minuut is een minuut gevecht, de eigen lengte van het gevecht. Wargaming publiceert voor niemand credits per speltype.",
+  "mode": "Modus",
+  "net-explanation": "Netto is wat op het account terechtkwam nadat reparatie, munitie en verbruiksartikelen waren betaald, inclusief premium en bonussen. Alleen de eigen resultaten van de uploader bevatten dit, dus het steunt alleen op de spelers van de mod en wordt weergegeven zodra {min} van hen achter een speltype staan. Het draagt ook hun gewoonten mee, zoals een premium account of premiumgranaten.",
+  "net-pending": "Wat op het account terechtkomt nadat reparatie, munitie en verbruiksartikelen zijn betaald, komt alleen uit de eigen resultaten van de uploader en steunt dus alleen op de spelers van de mod. Het verschijnt hier zodra {min} van hen op dit niveau een speltype hebben gespeeld.",
+  "net-per-battle": "Netto / gevecht",
+  "net-sample": "{battles} gevechten van {players} spelers die de mod gebruiken",
+  "players": "Spelers",
+  "tier": "Niveau {tier}",
+  "title": "Welk speltype betaalt het beste op {label}",
+  "xp-per-battle": "XP / gevecht",
+  "xp-per-minute": "XP / minuut"
+}

@@ -124,9 +124,10 @@
     "free-xp": "Wolne doświadczenie",
     "crew-xp": "Doświadczenie załogi",
     "with-premium": "To konto miało premium.",
+    "other-bonuses": "Konto premium i inne bonusy",
     "with-bonuses": "Po zastosowaniu bonusów",
     "credited": "Zaksięgowane na koncie",
-    "not-a-sum": "Każda linia to liczba raportowana przez grę osobno, nie sumują się.",
+    "not-a-sum": "Kredyty sumują się od tego, co wypłaciła bitwa, do tego, co trafiło na konto. Każda linia doświadczenia przedstawia osobną liczbę raportowaną przez grę i nie sumują się one ze sobą.",
     "marks": "Odznaka biegłości",
     "mark-of-excellence": "Postęp",
     "mark-movement": "Ta bitwa"

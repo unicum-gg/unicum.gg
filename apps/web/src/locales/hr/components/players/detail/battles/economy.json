@@ -1,0 +1,19 @@
+{
+  "ammo": "Streljivo",
+  "battles": "Bitke",
+  "duration": "Trajanje bitke",
+  "earned": "Zarađeno",
+  "event-vehicles": "Vozila događaja",
+  "explanation": "Uračunato iz {battles} bitaka koje je ovaj igrač prenio putem moda unicum.gg tijekom posljednjih {days} dana, jedinih rezultata koji nose vlastite kredite, u svakom načinu koji ih je isplatio, uključujući događaje. Sve brojke odnose se na jednu bitku, osim onih po minuti. Dobit je ono što je ostalo na računu: sve što im je bitka isplatila, uključujući premium račun i pričuve, umanjeno za troškove popravka, streljiva i potrošnih materijala, pri čemu se za streljivo računa samo ono plaćeno kreditima. Dobit po minuti bitke tempo je za igrača koji odigra svaku bitku do kraja, a dobit po minuti aktivnog sudjelovanja tempo je za igrača koji nakon uništenja napusti bitku kako bi ušao u sljedeću, pri čemu je uz svaku prikazano vrijeme s kojim je podijeljena. Način označen bojom isplatio je najviše po minuti bitke na ovoj razini.",
+  "lifetime": "Vrijeme aktivnog sudjelovanja",
+  "mode": "Način",
+  "mode-at-tier": "Način, razina {tier}",
+  "net": "Dobit / bitka",
+  "net-per-minute": "Dobit / minuta bitke",
+  "net-per-minute-alive": "Dobit / minuta aktivnog sudjelovanja",
+  "repair": "Popravak",
+  "supplies": "Potrošni materijal",
+  "thin": "Manje od {min} bitaka, ovaj redak čitajte kao anegdotu.",
+  "tier": "Razina {tier}",
+  "title": "Zarada po načinima za {nickname}"
+}

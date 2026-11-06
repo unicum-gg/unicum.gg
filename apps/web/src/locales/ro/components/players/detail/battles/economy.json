@@ -1,0 +1,19 @@
+{
+  "ammo": "Muniție",
+  "battles": "Lupte",
+  "duration": "Durata bătăliei",
+  "earned": "Câștigate",
+  "event-vehicles": "Vehicule de eveniment",
+  "explanation": "Contorizat din cele {battles} bătălii încărcate de acest jucător prin modul unicum.gg în ultimele {days} zile, singurele rezultate care poartă propriile credite, în fiecare mod care le-a plătit, inclusiv evenimentele. Toate cifrele sunt per bătălie, cu excepția celor per minut. Profitul este ceea ce a rămas în cont, adică tot ce a plătit bătălia, inclusiv contul premium și rezervele, minus costurile pentru reparație, muniție și consumabile, muniția fiind calculată doar pentru ceea ce a fost plătit în credite. Pe minut de bătălie este ritmul unui jucător care vede fiecare bătălie până la capăt, iar pe minut activ este ritmul unuia care părăsește bătălia pentru următoarea odată ce este distrus, fiecare fiind raportat lângă durata la care a fost împărțit. Modul colorat a plătit cel mai mult pe minut de bătălie la acest nivel.",
+  "lifetime": "Timp activ",
+  "mode": "Mod",
+  "mode-at-tier": "Mod, nivel {tier}",
+  "net": "Profit / bătălie",
+  "net-per-minute": "Profit / minut de bătălie",
+  "net-per-minute-alive": "Profit / minut activ",
+  "repair": "Reparație",
+  "supplies": "Consumabile",
+  "thin": "Mai puțin de {min} bătălii, citește acest rând ca pe o anecdotă.",
+  "tier": "Nivel {tier}",
+  "title": "Cât a plătit fiecare mod pentru {nickname}"
+}

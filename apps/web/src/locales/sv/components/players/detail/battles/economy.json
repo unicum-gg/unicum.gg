@@ -1,0 +1,19 @@
+{
+  "ammo": "Ammunition",
+  "battles": "Strider",
+  "duration": "Stridslängd",
+  "earned": "Intjänat",
+  "event-vehicles": "Evenemangsfordon",
+  "explanation": "Räknade från de {battles} strider som denna spelare laddade upp genom unicum.gg-modden under de senaste {days} dagarna, de enda resultaten som har egna krediter, i alla lägen som betalade dem, inklusive evenemang. Alla siffror gäller per strid utom siffrorna per minut. Vinsten är det som blev kvar på kontot: allt som striden betalade dem, inklusive premiumkonto och reserver, minus kostnaderna för reparation, ammunition och förbrukningsartiklar. Ammunition räknas bara när den betalades med krediter. Per minut av striden är tempot för en spelare som ser varje strid till slut, medan per minut vid liv är tempot för en spelare som lämnar för nästa strid när den förstörts, bredvid tiden som tempot dividerades med. Läget i färg betalade mest per minut av striden på denna nivå.",
+  "lifetime": "Tid vid liv",
+  "mode": "Läge",
+  "mode-at-tier": "Läge, nivå {tier}",
+  "net": "Vinst / strid",
+  "net-per-minute": "Vinst / minut av striden",
+  "net-per-minute-alive": "Vinst / minut vid liv",
+  "repair": "Reparation",
+  "supplies": "Förbrukningsartiklar",
+  "thin": "Färre än {min} strider: läs denna rad som en anekdot.",
+  "tier": "Nivå {tier}",
+  "title": "Vad varje läge betalade {nickname}"
+}

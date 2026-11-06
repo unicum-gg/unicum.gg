@@ -124,9 +124,10 @@
     "free-xp": "Laisvoji patirtis",
     "crew-xp": "Įgulos patirtis",
     "with-premium": "Ši paskyra turėjo premium statusą.",
+    "other-bonuses": "Premium paskyra ir kitos premijos",
     "with-bonuses": "Su pritaikytais priedais",
     "credited": "Įskaityta į paskyrą",
-    "not-a-sum": "Kiekviena eilutė yra atskiras žaidimo pateikiamas skaičius, šie skaičiai nesumuojami tarpusavyje.",
+    "not-a-sum": "Kreditai susideda nuo to, ką sumokėjo mūšis, iki to, kas pasiekė paskyrą. Patirties eilutės yra atskiri žaidimo pateikiami rodikliai ir tarpusavyje nesumuojamos.",
     "marks": "Meistriškumo ženklas",
     "mark-of-excellence": "Progresas",
     "mark-movement": "Šis mūšis"

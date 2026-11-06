@@ -1,0 +1,19 @@
+{
+  "ammo": "Munição",
+  "battles": "Batalhas",
+  "duration": "Duração da batalha",
+  "earned": "Obtida",
+  "event-vehicles": "Veículos de evento",
+  "explanation": "Contado a partir das {battles} batalhas que este jogador carregou através do mod unicum.gg nos últimos {days} dias, os únicos resultados que carregam os seus próprios créditos, em todos os modos que lhes pagaram, incluindo eventos. Todos os valores são por batalha, exceto os valores por minuto. O lucro é o que restou na conta, tudo o que a batalha lhes pagou, incluindo a conta premium e as reservas, menos os custos de reparação, munição e consumíveis, contando a munição apenas quando foi paga em créditos. Por minuto de batalha é o ritmo de um jogador que assiste a cada batalha até ao fim, enquanto por minuto vivo é o ritmo de um jogador que sai para a batalha seguinte assim que é destruído, cada um ao lado do tempo pelo qual foi dividido. O modo a cores pagou mais por minuto de batalha neste nível.",
+  "lifetime": "Tempo vivo",
+  "mode": "Modo",
+  "mode-at-tier": "Modo, nível {tier}",
+  "net": "Lucro / batalha",
+  "net-per-minute": "Lucro / min de batalha",
+  "net-per-minute-alive": "Lucro / min vivo",
+  "repair": "Reparação",
+  "supplies": "Consumíveis",
+  "thin": "Menos de {min} batalhas: leia esta linha como uma anedota.",
+  "tier": "Nível {tier}",
+  "title": "O que cada modo pagou a {nickname}"
+}

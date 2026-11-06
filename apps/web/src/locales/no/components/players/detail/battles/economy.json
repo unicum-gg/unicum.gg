@@ -1,0 +1,19 @@
+{
+  "ammo": "Ammunisjon",
+  "battles": "Kamper",
+  "duration": "Kampvarighet",
+  "earned": "Opptjent",
+  "event-vehicles": "Kjøretøy for hendelser",
+  "explanation": "Medregnet fra de {battles} kampene denne spilleren lastet opp gjennom unicum.gg-modden i løpet av de siste {days} dagene, de eneste resultatene som bærer sine egne credits, i alle modi som betalte dem, inkludert hendelser. Alle tall er per kamp, bortsett fra tallene per minutt. Overskudd er det som ble igjen på kontoen: alt kampen betalte dem, inkludert premiumkonto og reserver, minus regningene for reparasjon, ammunisjon og forbruksvarer, der ammunisjon bare teller det som ble betalt med credits. Per minutt av kampen er tempoet for en spiller som ser hver kamp ferdig, mens per minutt live er tempoet for en som forlater kampen for neste kamp når spilleren blir ødelagt, begge ved siden av tiden de ble delt på. Modusen i farge betalte mest per minutt av kampen på dette nivået.",
+  "lifetime": "Tid live",
+  "mode": "Modus",
+  "mode-at-tier": "Modus, nivå {tier}",
+  "net": "Overskudd / kamp",
+  "net-per-minute": "Overskudd / minutt av kampen",
+  "net-per-minute-alive": "Overskudd / minutt live",
+  "repair": "Reparasjon",
+  "supplies": "Forbruksmateriell",
+  "thin": "Færre enn {min} kamper: les denne raden som en anekdote.",
+  "tier": "Nivå {tier}",
+  "title": "Hva hver modus betalte til {nickname}"
+}

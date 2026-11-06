@@ -1,0 +1,19 @@
+{
+  "ammo": "Munitions",
+  "battles": "Batailles",
+  "duration": "Durée de la bataille",
+  "earned": "Gagné",
+  "event-vehicles": "Véhicules d’événement",
+  "explanation": "Comptabilisé à partir des {battles} batailles que ce joueur a envoyées via le mod unicum.gg au cours des {days} derniers jours, les seuls résultats qui portent leurs propres crédits, dans chaque mode qui les a payés, événements inclus. Tous les chiffres sont par bataille, à l’exception de ceux par minute. Le bénéfice correspond à ce qui restait sur le compte, soit tout ce que la bataille leur a rapporté, compte premium et réserves inclus, moins les coûts de réparation, de munitions et de consommables, les munitions ne comptant que ce qui a été payé en crédits. Par minute de bataille indique le rythme d’un joueur qui termine toutes ses batailles, tandis que par minute actif indique le rythme d’un joueur qui passe à la bataille suivante une fois détruit, chacun étant rapporté à la durée sur laquelle il est calculé. Le mode en couleur a rapporté le plus par minute de bataille à ce rang.",
+  "lifetime": "Temps actif",
+  "mode": "Mode",
+  "mode-at-tier": "Mode, rang {tier}",
+  "net": "Bénéfice / bataille",
+  "net-per-minute": "Bénéfice / minute de bataille",
+  "net-per-minute-alive": "Bénéfice / minute actif",
+  "repair": "Réparation",
+  "supplies": "Consommables",
+  "thin": "Moins de {min} batailles : considérez cette ligne comme une anecdote.",
+  "tier": "Rang {tier}",
+  "title": "Ce que chaque mode a rapporté à {nickname}"
+}

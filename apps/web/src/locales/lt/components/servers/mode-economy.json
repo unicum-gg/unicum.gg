@@ -1,0 +1,17 @@
+{
+  "battle-length": "Mūšio trukmė",
+  "battles": "Mūšiai",
+  "credits-per-battle": "Kreditai / mūšis",
+  "credits-per-minute": "Kreditai / minutė",
+  "explanation": "Įskaičiuota iš mūšių, įkeltų naudojant unicum.gg modą per pastarąsias {days}, iš viso {records} transporto priemonių įrašų. Kiekviename įkeltame mūšyje nurodyta, kiek jis sumokėjo kiekvienam iš trisdešimties dalyvių, neįskaitant botų. Kreditai ir patirtis yra paties mūšio rodikliai, apskaičiuoti prieš premium paskyrą, atsargas, misijas ir išlaidas, todėl žaidėjo paskyrai jie niekaip nesikeičia. Minutė yra mūšio minutė, tai yra paties mūšio trukmė. Wargaming niekam neskelbia kreditų pagal režimą.",
+  "mode": "Režimas",
+  "net-explanation": "Grynasis pelnas yra tai, kas pateko į paskyrą sumokėjus už remontą, šaudmenis ir eksploatacines medžiagas, įskaitant premium ir premijas. Šis rodiklis pateikiamas tik pagal įkėlėjo rezultatus, todėl priklauso vien nuo modą naudojančių žaidėjų. Jis rodomas, kai režimą pagrindžia bent {min} jų žaidėjų, ir taip pat atspindi jų įpročius, pavyzdžiui, premium paskyrą ar premium sviedinius.",
+  "net-pending": "Tai, kas patenka į paskyrą sumokėjus už remontą, šaudmenis ir eksploatacines medžiagas, nustatoma tik pagal įkėlėjo rezultatus, todėl rodiklis priklauso vien nuo modą naudojančių žaidėjų. Jis čia pasirodo, kai šiame lygyje režimą yra žaidę bent {min} jų.",
+  "net-per-battle": "Grynasis pelnas / mūšis",
+  "net-sample": "{battles} mūšių iš {players} žaidėjų, naudojančių modą",
+  "players": "Žaidėjai",
+  "tier": "Lygis {tier}",
+  "title": "Kuris režimas geriausiai moka serveryje {label}",
+  "xp-per-battle": "Patirtis / mūšis",
+  "xp-per-minute": "Patirtis / minutė"
+}

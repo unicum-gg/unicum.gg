@@ -1,0 +1,17 @@
+{
+  "battle-length": "Długość bitwy",
+  "battles": "Bitwy",
+  "credits-per-battle": "Kredyty / bitwa",
+  "credits-per-minute": "Kredyty / minuta",
+  "explanation": "Uwzględniono bitwy przesłane przez mod unicum.gg w ciągu ostatnich {days} dni, łącznie {records} rekordów pojazdów. Każda przesłana bitwa zawiera informację o tym, ile otrzymało każde z trzydziestu uczestników, z pominięciem botów. Kredyty i doświadczenie pochodzą bezpośrednio z bitwy, przed uwzględnieniem konta premium, rezerw, misji i kosztów, więc nic na koncie gracza ich nie zmienia. Minuta oznacza minutę bitwy, czyli jej własną długość. Wargaming nie publikuje danych o kredytach dla żadnego trybu.",
+  "mode": "Tryb",
+  "net-explanation": "Zysk netto to kwota, która trafiła na konto po opłaceniu naprawy, amunicji i materiałów eksploatacyjnych, z uwzględnieniem konta premium i bonusów. Wartość przenoszą wyłącznie wyniki osoby przesyłającej, dlatego opiera się tylko na graczach korzystających z moda i jest wyświetlana, gdy za trybem stoi co najmniej {min} z nich. Uwzględnia również ich zwyczaje, takie jak konto premium lub pociski premium.",
+  "net-pending": "To, co trafia na konto po opłaceniu naprawy, amunicji i materiałów eksploatacyjnych, przenoszą wyłącznie wyniki osoby przesyłającej, dlatego wartość opiera się tylko na graczach korzystających z moda. Pojawia się tutaj, gdy co najmniej {min} z nich rozegrało tryb na tym poziomie.",
+  "net-per-battle": "Zysk netto / bitwa",
+  "net-sample": "{battles} bitew od {players} graczy korzystających z moda",
+  "players": "Graczy",
+  "tier": "Poziom {tier}",
+  "title": "Który tryb najlepiej płaci na {label}",
+  "xp-per-battle": "Doświadczenie / bitwa",
+  "xp-per-minute": "Doświadczenie / minuta"
+}

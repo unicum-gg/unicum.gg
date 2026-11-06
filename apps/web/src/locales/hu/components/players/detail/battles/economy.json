@@ -1,0 +1,19 @@
+{
+  "ammo": "Lőszer",
+  "battles": "Csaták",
+  "duration": "Csata hossza",
+  "earned": "megszerzett",
+  "event-vehicles": "Eseményjárművek",
+  "explanation": "Beleszámítva az a {battles} csata, amelyet a játékos az elmúlt {days} nap során az unicum.gg modon keresztül töltött fel, és amelyekhez saját kreditadatok tartoznak, minden olyan játékmódban, amely fizetett nekik, az eseményeket is beleértve. Minden adat csatánként értendő, kivéve a percenkénti adatokat. A profit az, ami a fiókban maradt: minden, amit a csata fizetett, beleértve a prémium fiókot és a tartalékokat is, levonva a javítás, a lőszer és a fogyócikkek költségeit, ahol a lőszer esetében csak a kreditben fizetett mennyiség számít. A csata percenkénti értéke annak a játékosnak a tempója, aki minden csatát végigjátszik, az élő percenkénti érték pedig annak a tempója, aki megsemmisítés után kilép a következő csatába. Mindkettő mellett az az idő szerepel, amellyel elosztottuk. Az adott szinten a színes játékmód fizetett a legtöbbet a csata minden percében.",
+  "lifetime": "Élőben töltött idő",
+  "mode": "Mód",
+  "mode-at-tier": "Mód, {tier}. szint",
+  "net": "Profit / csata",
+  "net-per-minute": "Profit / csata percenként",
+  "net-per-minute-alive": "Profit / élő percenként",
+  "repair": "Javítás",
+  "supplies": "Fogyócikkek",
+  "thin": "Kevesebb mint {min} csata esetén ezt a sort csak érdekességként olvasd.",
+  "tier": "{tier}. szint",
+  "title": "Mit fizetnek az egyes játékmódok {nickname} számára"
+}

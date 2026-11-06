@@ -1,0 +1,17 @@
+{
+  "battle-length": "Stridslängd",
+  "battles": "Strider",
+  "credits-per-battle": "Krediter / strid",
+  "credits-per-minute": "Krediter / minut",
+  "explanation": "Räknade från strider som laddats upp genom unicum.gg-modden under de senaste {days} dagarna, totalt {records} fordonsresultat: varje uppladdad strid bär det som betalades till var och en av dess trettio deltagare, bottar undantagna. Krediter och erfarenhet är stridens egna, före premiumkonto, reserver, uppdrag och kostnader, så inget på en spelares konto förändrar dem. En minut är en minut av striden, stridens egen längd. Wargaming publicerar inga krediter per läge för vem som helst.",
+  "mode": "Läge",
+  "net-explanation": "Vinst är det som landade på kontot när reparation, ammunition och förbrukningsartiklar var betalda, inklusive premium och bonusar. Bara uppladdarens egna resultat bär den, så den vilar enbart på moddens spelare och visas när {min} av dem står bakom ett läge. Den bär också deras vanor, som premiumkonto eller premiumgranater.",
+  "net-pending": "Det som landar på kontot när reparation, ammunition och förbrukningsartiklar är betalda bärs enbart av uppladdarens egna resultat, så det vilar endast på moddens spelare. Det visas här när {min} av dem har spelat ett läge på denna nivå.",
+  "net-per-battle": "Vinst / strid",
+  "net-sample": "{battles} strider från {players} spelare som använder modden",
+  "players": "Spelare",
+  "tier": "Nivå {tier}",
+  "title": "Vilket läge betalar bäst för {label}",
+  "xp-per-battle": "XP / strid",
+  "xp-per-minute": "XP / minut"
+}

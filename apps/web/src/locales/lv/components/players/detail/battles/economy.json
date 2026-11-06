@@ -1,0 +1,19 @@
+{
+  "ammo": "Munīcija",
+  "battles": "Kaujas",
+  "duration": "Kaujas ilgums",
+  "earned": "Nopelnīts",
+  "event-vehicles": "Notikumu transportlīdzekļi",
+  "explanation": "Uzskaitīts, balstoties uz {battles} kaujām, ko šis spēlētājs pēdējo {days} dienu laikā augšupielādēja, izmantojot unicum.gg mod. Ņemti vērā tikai rezultāti, kuriem ir savi kredīti, visos režīmos, kuros tie tika nopelnīti, ieskaitot notikumus. Visi rādītāji, izņemot rādītājus minūtē, ir norādīti par kauju. Peļņa ir tas, kas palika kontā, proti, viss, ko kauja samaksāja, ieskaitot premium kontu un rezerves, atskaitot remonta, munīcijas un patēriņa materiālu izmaksas. Munīcijā tiek ieskaitīts tikai tas, par ko maksāts kredītos. Rādītājs par kaujas minūti parāda tempu spēlētājam, kurš pabeidz katru kauju, bet rādītājs par aktīvo minūti parāda tempu spēlētājam, kurš pēc iznīcināšanas dodas uz nākamo kauju. Katrs rādītājs ir norādīts blakus laikam, ar kuru tas dalīts. Krāsainais režīms šajā līmenī maksāja visvairāk par kaujas minūti.",
+  "lifetime": "Aktīvais laiks",
+  "mode": "Režīms",
+  "mode-at-tier": "Režīms, līmenis {tier}",
+  "net": "Peļņa / kauja",
+  "net-per-minute": "Peļņa / kaujas minūte",
+  "net-per-minute-alive": "Peļņa / aktīvā minūte",
+  "repair": "Remonts",
+  "supplies": "Aprīkojums",
+  "thin": "Mazāk nekā {min} kaujas, uztveriet šo rindu kā atsevišķu piemēru.",
+  "tier": "Līmenis {tier}",
+  "title": "Ko katrs režīms maksāja spēlētājam ar segvārdu {nickname}"
+}

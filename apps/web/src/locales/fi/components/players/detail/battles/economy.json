@@ -1,0 +1,19 @@
+{
+  "ammo": "Ammukset",
+  "battles": "Taisteluita",
+  "duration": "Taistelun kesto",
+  "earned": "Ansaitut",
+  "event-vehicles": "Tapahtumien ajoneuvot",
+  "explanation": "Laskettu {battles} taistelusta, jotka tämä pelaaja latasi unicum.gg-modin kautta viimeisten {days} aikana. Mukana ovat vain tulokset, jotka sisältävät omat krediittinsä, kaikista niistä pelimuodoista, joissa krediittejä maksettiin, tapahtumat sisällytettyinä. Kaikki luvut ovat taistelukohtaisia, paitsi minuuttiluvut. Voitto on se, mitä tilille jäi: kaikki, mitä taistelu maksoi pelaajalle, premium-tili ja reservit sisällytettyinä, vähennettynä korjaus-, ammus- ja kulutustarvikelaskuilla. Ammuksissa huomioidaan vain krediiteillä maksettu osuus. Taistelun minuuttikohtainen luku kertoo tahdin pelaajalle, joka pelaa jokaisen taistelun loppuun. Elossaoloajan minuuttikohtainen luku kertoo tahdin pelaajalle, joka poistuu seuraavaan taisteluun heti tultuaan tuhotuksi. Kummankin luvun vieressä näkyy aika, jolla se on jaettu. Tällä tasolla värillinen pelimuoto maksoi eniten taistelun minuuttia kohden.",
+  "lifetime": "Aika elossa",
+  "mode": "Tila",
+  "mode-at-tier": "Tila, taso {tier}",
+  "net": "Voitto / taistelu",
+  "net-per-minute": "Voitto / taistelun minuutti",
+  "net-per-minute-alive": "Voitto / elossaolon minuutti",
+  "repair": "Korjaus",
+  "supplies": "Kulutustarvikkeet",
+  "thin": "Alle {min} taistelua: lue tämä rivi anekdoottina.",
+  "tier": "Taso {tier}",
+  "title": "Mitä kukin pelimuoto maksoi nimimerkille {nickname}"
+}

@@ -1,0 +1,17 @@
+{
+  "battle-length": "Thời lượng trận đấu",
+  "battles": "Số trận",
+  "credits-per-battle": "Bạc / trận đấu",
+  "credits-per-minute": "Bạc / phút",
+  "explanation": "Được tính từ các trận đấu được tải lên thông qua mod unicum.gg trong {days} ngày qua, tổng cộng {records} bản ghi xe tăng, trong đó mỗi trận đấu được tải lên chứa số bạc đã thanh toán cho từng người trong số 30 người tham gia, không tính bot. Bạc và kinh nghiệm là số liệu riêng của trận đấu, trước tài khoản premium, dự trữ, nhiệm vụ và chi phí, vì vậy không có gì trong tài khoản của người chơi thay đổi chúng. Một phút là một phút của trận đấu, tức thời lượng riêng của trận đấu. Wargaming không công bố số bạc theo chế độ cho bất kỳ ai.",
+  "mode": "Chế độ",
+  "net-explanation": "Lợi nhuận là số bạc đổ bộ vào tài khoản sau khi đã thanh toán sửa chữa, đạn dược và vật tư tiêu hao, bao gồm premium và các phần thưởng. Chỉ kết quả riêng của người tải lên mới có lợi nhuận này, vì vậy số liệu chỉ dựa trên người chơi của mod và được hiển thị khi có {min} người chơi đứng phía sau một chế độ. Số liệu này cũng mang theo thói quen của họ, chẳng hạn như tài khoản premium hoặc đạn premium.",
+  "net-pending": "Số bạc đổ bộ vào tài khoản sau khi đã thanh toán sửa chữa, đạn dược và vật tư tiêu hao chỉ được lấy từ kết quả riêng của người tải lên, vì vậy số liệu chỉ dựa trên người chơi của mod. Số liệu xuất hiện ở đây khi có {min} người chơi đã chơi một chế độ ở cấp này.",
+  "net-per-battle": "Lợi nhuận / trận đấu",
+  "net-sample": "{battles} trận đấu từ {players} người chơi sử dụng mod",
+  "players": "Người chơi",
+  "tier": "Cấp {tier}",
+  "title": "Chế độ nào thanh toán tốt nhất trên {label}",
+  "xp-per-battle": "XP / trận đấu",
+  "xp-per-minute": "XP / phút"
+}

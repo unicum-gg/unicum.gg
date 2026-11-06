@@ -1,0 +1,19 @@
+{
+  "ammo": "Amunicija",
+  "battles": "Mūšiai",
+  "duration": "Mūšio trukmė",
+  "earned": "uždirbta",
+  "event-vehicles": "Įvykių transporto priemonės",
+  "explanation": "Įskaičiuota iš {battles} mūšių, kuriuos šis žaidėjas per pastarąsias {days} įkėlė naudodamas unicum.gg modą. Tai vieninteliai rezultatai, kuriuose pateikiami jų pačių kreditai, iš visų režimų, kuriuose jie buvo mokami, įskaitant įvykius. Visi rodikliai nurodyti vienam mūšiui, išskyrus rodiklius per minutę. Pelnas yra tai, kas liko paskyroje: viskas, ką mūšis jiems sumokėjo, įskaitant premium paskyrą ir atsargas, atėmus remonto, šaudmenų ir eksploatacinių medžiagų išlaidas. Skaičiuojami tik už kreditus įsigyti šaudmenys. Pelnas per mūšio minutę rodo tempą žaidėjui, kuris išgyvena kiekvieną mūšį, o pelnas per gyvavimo minutę rodo tempą žaidėjui, kuris, sunaikintas, išeina į kitą mūšį. Kiekvienas rodiklis pateikiamas šalia laiko, iš kurio jis apskaičiuotas. Spalva pažymėtas režimas šiame lygyje mokėjo daugiausia už mūšio minutę.",
+  "lifetime": "Išgyvenimo laikas",
+  "mode": "Režimas",
+  "mode-at-tier": "Režimas, {tier} lygis",
+  "net": "Pelnas / mūšis",
+  "net-per-minute": "Pelnas / mūšio min.",
+  "net-per-minute-alive": "Pelnas / gyvavimo min.",
+  "repair": "Remontas",
+  "supplies": "Ekipuotė",
+  "thin": "Mažiau nei {min} mūšių, vertinkite šią eilutę kaip atskirą atvejį.",
+  "tier": "Lygis {tier}",
+  "title": "Kiekvieno režimo išmokėta suma žaidėjui {nickname}"
+}

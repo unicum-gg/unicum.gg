@@ -1,0 +1,17 @@
+{
+  "battle-length": "Gefechtsdauer",
+  "battles": "Gefechte",
+  "credits-per-battle": "Kreditpunkte / Gefecht",
+  "credits-per-minute": "Kreditpunkte / Minute",
+  "explanation": "Gezählt aus den Gefechten, die in den letzten {days} Tagen über den unicum.gg-Mod hochgeladen wurden, insgesamt {records} Fahrzeugdatensätze. Jedes hochgeladene Gefecht enthält, was es jedem seiner 30 Teilnehmer bezahlt hat, Bots ausgenommen. Kreditpunkte und erfahrung stammen direkt aus dem Gefecht und werden vor Premium-Konto, Reserven, Aufträgen und Kosten erfasst, sodass sie das Konto eines Spielers nicht verändern. Eine Minute ist eine Minute Gefecht, also die eigene Länge des Gefechts. Wargaming veröffentlicht für niemanden Kreditpunkte pro Modus.",
+  "mode": "Modus",
+  "net-explanation": "Der Nettowert ist das, was auf dem Konto landet, nachdem Reparatur, Munition und Verbrauchsmaterial bezahlt wurden, einschließlich Premium und Boni. Nur die eigenen Ergebnisse des Uploader tragen ihn, daher basiert er allein auf den Spielern des Mods. Er wird angezeigt, sobald mindestens {min} dieser Spieler hinter einem Modus stehen. Dadurch fließen auch ihre Gewohnheiten ein, etwa ein Premium-Konto oder Premiumgranaten.",
+  "net-pending": "Was nach der Bezahlung von Reparatur, Munition und Verbrauchsmaterial auf dem Konto landet, wird allein von den eigenen Ergebnissen des Uploaders getragen und basiert daher nur auf den Spielern des Mods. Es erscheint hier, sobald mindestens {min} Spieler diesen Modus auf dieser Stufe gespielt haben.",
+  "net-per-battle": "Netto / Gefecht",
+  "net-sample": "{battles} Gefechte von {players} Spielern mit dem Mod",
+  "players": "Spieler",
+  "tier": "Stufe {tier}",
+  "title": "Welcher Modus auf {label} am besten bezahlt",
+  "xp-per-battle": "EP / Gefecht",
+  "xp-per-minute": "EP / Minute"
+}

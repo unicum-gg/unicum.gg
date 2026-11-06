@@ -1,0 +1,17 @@
+{
+  "battle-length": "Savaş süresi",
+  "battles": "Savaşlar",
+  "credits-per-battle": "Savaş başına kredi",
+  "credits-per-minute": "Dakika başına kredi",
+  "explanation": "Son {days} gün içinde unicum.gg moduyla yüklenen savaşlardan, toplam {records} araç kaydına göre hesaplanır. Her yüklenen savaş, botlar hariç otuz katılımcının her birine ödediği miktarı taşır. Kredi ve deneyim, premium hesap, rezervler, görevler ve maliyetlerden önce savaşın kendi değerleridir. Bu nedenle oyuncunun hesabında hiçbir değişiklik oluşturmazlar. Bir dakika, savaşın kendi süresi olan bir savaş dakikasıdır. Wargaming hiçbir mod için kişi başına kredi verisi yayımlamaz.",
+  "mode": "Mod",
+  "net-explanation": "Net değer, onarım, mühimmat ve sarf malzemeleri ödendikten, premium ve bonuslar dahil edildikten sonra hesaba ulaşan miktardır. Yalnızca yükleyenin kendi sonuçları bunu taşır. Bu nedenle yalnızca modun oyuncularına dayanır ve bir modun arkasında en az {min} oyuncu olduğunda gösterilir. Ayrıca premium hesap veya premium mermi gibi oyuncu alışkanlıklarını da taşır.",
+  "net-pending": "Onarım, mühimmat ve sarf malzemeleri ödendikten sonra hesaba ulaşan miktar yalnızca yükleyenin kendi sonuçlarıyla taşınır. Bu nedenle yalnızca modun oyuncularına dayanır. Bu seviyede en az {min} oyuncu bir mod oynadığında burada görünür.",
+  "net-per-battle": "Savaş başına net kazanç",
+  "net-sample": "Modu kullanan {players} oyuncudan {battles} savaş",
+  "players": "Oyuncular",
+  "tier": "{tier} seviyesi",
+  "title": "{label} üzerinde en iyi ödeyen mod hangisi",
+  "xp-per-battle": "Savaş başına DP",
+  "xp-per-minute": "Dakika başına DP"
+}

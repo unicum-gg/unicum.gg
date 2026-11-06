@@ -124,9 +124,10 @@
     "free-xp": "Experiență liberă",
     "crew-xp": "Experienţă echipaj",
     "with-premium": "Acest cont a avut premium.",
+    "other-bonuses": "Cont premium și alte bonusuri",
     "with-bonuses": "Cu bonusurile aplicate",
     "credited": "Acreditate în cont",
-    "not-a-sum": "Fiecare linie este o cifră raportată de joc în mod individual, nu se adună una la alta.",
+    "not-a-sum": "Creditele se adună de la ceea ce a plătit bătălia până la ceea ce a ajuns în cont. Rândurile de experiență reprezintă fiecare câte o cifră raportată separat de joc și nu se adună între ele.",
     "marks": "Semn de excelență",
     "mark-of-excellence": "Progres",
     "mark-movement": "Această bătălie"

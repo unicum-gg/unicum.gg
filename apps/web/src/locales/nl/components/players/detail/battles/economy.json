@@ -1,0 +1,19 @@
+{
+  "ammo": "Munitie",
+  "battles": "Gevechten",
+  "duration": "Gevechtsduur",
+  "earned": "Verdiend",
+  "event-vehicles": "Evenementvoertuigen",
+  "explanation": "Meegeteld op basis van de {battles} gevechten die deze speler in de afgelopen {days} dagen via de unicum.gg-mod heeft geüpload, de enige resultaten die hun eigen credits bevatten, in elk speltype dat credits heeft betaald, inclusief evenementen. Alle cijfers zijn per gevecht, behalve de cijfers per minuut. Winst is wat er op het account overbleef: alles wat het gevecht heeft betaald, inclusief premium account en reserves, min de kosten voor reparatie, munitie en verbruiksartikelen, waarbij voor munitie alleen wordt geteld wat met credits is betaald. Per minuut gevecht is het tempo voor een speler die elk gevecht volledig uitzit, per minuut in leven het tempo voor iemand die na vernietiging vertrekt voor het volgende gevecht, telkens naast de tijd waardoor het is gedeeld. Het speltype in kleur heeft op dit niveau het meest per minuut gevecht betaald.",
+  "lifetime": "Tijd in leven",
+  "mode": "Speltype",
+  "mode-at-tier": "Speltype, niveau {tier}",
+  "net": "Winst / gevecht",
+  "net-per-minute": "Winst / minuut gevecht",
+  "net-per-minute-alive": "Winst / minuut in leven",
+  "repair": "Reparatie",
+  "supplies": "Verbruiksartikelen",
+  "thin": "Minder dan {min} gevechten: lees deze rij als een anekdote.",
+  "tier": "Niveau {tier}",
+  "title": "Wat elk speltype aan {nickname} heeft betaald"
+}

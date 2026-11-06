@@ -124,9 +124,10 @@
     "free-xp": "Experiencia libre",
     "crew-xp": "Experiencia de la tripulación",
     "with-premium": "Esta cuenta tenía premium.",
+    "other-bonuses": "Cuenta premium y otras bonificaciones",
     "with-bonuses": "Con bonificaciones aplicadas",
     "credited": "Abonado a la cuenta",
-    "not-a-sum": "Cada línea es una cifra que el juego comunica por derecho propio, no se suman entre sí.",
+    "not-a-sum": "Los créditos cuadran, desde lo que pagó la batalla hasta lo que llegó a la cuenta. Las líneas de experiencia son, cada una, una cifra que el juego informa por separado y no suman un total entre ellas.",
     "marks": "Marca de excelencia",
     "mark-of-excellence": "Progreso",
     "mark-movement": "Esta batalla"

@@ -1,0 +1,19 @@
+{
+  "ammo": "Đạn",
+  "battles": "Số trận",
+  "duration": "Thời lượng trận đấu",
+  "earned": "Đã kiếm được",
+  "event-vehicles": "Xe tăng sự kiện",
+  "explanation": "Được tính từ {battles} trận đấu mà người chơi này đã tải lên thông qua mod unicum.gg trong {days} ngày qua, đây là những kết quả duy nhất có số bạc riêng, trong mọi chế độ đã thanh toán cho họ, bao gồm cả các sự kiện. Tất cả số liệu đều tính theo trận đấu, ngoại trừ các số liệu theo phút. Lợi nhuận là số bạc còn lại trong tài khoản, bao gồm mọi khoản trận đấu đã thanh toán cho họ, kể cả tài khoản premium và dự trữ, trừ chi phí sửa chữa, đạn dược và vật tư tiêu hao, trong đó đạn dược chỉ tính phần được thanh toán bằng bạc. Số bạc mỗi phút trận đấu là tốc độ của người chơi theo dõi trọn vẹn mọi trận đấu, còn số bạc mỗi phút sống sót là tốc độ của người chơi rời khỏi trận đấu để chơi trận tiếp theo ngay khi đã bị phá hủy, mỗi số liệu đều được đặt cạnh thời lượng mà nó được chia cho. Chế độ được tô màu đã thanh toán nhiều bạc nhất mỗi phút trận đấu ở cấp này.",
+  "lifetime": "Thời gian sống sót",
+  "mode": "Chế độ",
+  "mode-at-tier": "Chế độ, cấp {tier}",
+  "net": "Lợi nhuận / trận đấu",
+  "net-per-minute": "Lợi nhuận / phút trận đấu",
+  "net-per-minute-alive": "Lợi nhuận / phút sống sót",
+  "repair": "Sửa chữa",
+  "supplies": "Vật phẩm",
+  "thin": "Ít hơn {min} trận đấu, hãy xem dòng này như một giai thoại.",
+  "tier": "Cấp {tier}",
+  "title": "Mỗi chế độ đã thanh toán bao nhiêu cho {nickname}"
+}

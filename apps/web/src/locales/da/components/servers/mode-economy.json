@@ -1,0 +1,17 @@
+{
+  "battle-length": "Kampens varighed",
+  "battles": "Kampe",
+  "credits-per-battle": "credits / kamp",
+  "credits-per-minute": "credits / minut",
+  "explanation": "Talt ud fra kampe, der blev uploadet gennem unicum.gg-moddet i løbet af de seneste {days} dage, i alt {records} køretøjsresultater: hver uploadet kamp indeholder det, den betalte til hver af sine tredive deltagere, bots ikke medregnet. Kreditter og erfaring er kampens egne, før premium-konto, reserver, missioner og omkostninger, så intet ved en spillers konto ændrer dem. Et minut er ét minut af kampen, kampens egen varighed. Wargaming offentliggør ingen credits pr. spiltilstand for nogen.",
+  "mode": "Tilstand",
+  "net-explanation": "Netto er det, der landede på kontoen, når reparation, ammunition og forbrugsstoffer var betalt, inklusive premium og bonusser. Kun uploaderens egne resultater har det, så det hviler alene på moddets spillere og vises, når {min} af dem står bag en spiltilstand. Det bærer også deres vaner, som f.eks. en premium-konto eller premiumgranater.",
+  "net-pending": "Det, der lander på kontoen, når reparation, ammunition og forbrugsstoffer er betalt, bæres alene af uploaderens egne resultater, så det hviler kun på moddets spillere. Det vises her, når {min} af dem har spillet en spiltilstand på dette niveau.",
+  "net-per-battle": "Netto / kamp",
+  "net-sample": "{battles} kampe fra {players} spillere, der bruger moddet",
+  "players": "Spillere",
+  "tier": "Niveau {tier}",
+  "title": "Hvilken spiltilstand betaler bedst på {label}",
+  "xp-per-battle": "XP / kamp",
+  "xp-per-minute": "XP / minut"
+}

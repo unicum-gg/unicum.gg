@@ -1,0 +1,19 @@
+{
+  "ammo": "Munícia",
+  "battles": "Bitky",
+  "duration": "Dĺžka bitky",
+  "earned": "Získané",
+  "event-vehicles": "Vozidlá z udalostí",
+  "explanation": "Šteto z {battles} bitiek, ktoré tento hráč nahral cez mod unicum.gg za posledných {days} dní, teda z jediných výsledkov s vlastnými kreditmi, vo všetkých režimoch, ktoré ich vyplatili, vrátane udalostí. Všetky údaje sú na bitku, okrem údajov na minútu. Zisk je to, čo zostalo na účte: všetko, čo bitka vyplatila, vrátane prémiového účtu a záloh, mínus účty za opravu, strelivo a spotrebný materiál, pričom pri strelive sa počíta iba to, čo bolo zaplatené kreditmi. Údaj na minútu bitky vyjadruje tempo hráča, ktorý zostane až do konca každej bitky. Údaj na minútu nažive vyjadruje tempo hráča, ktorý po zničení opustí bitku a ide do ďalšej, pričom pri každom údaji je uvedený čas, ktorým sa delil. Režim farebne zvýraznený vyplatil na tejto úrovni najviac kreditov na minútu bitky.",
+  "lifetime": "Čas nažive",
+  "mode": "Mód",
+  "mode-at-tier": "Mód, úroveň {tier}",
+  "net": "Zisk / bitka",
+  "net-per-minute": "Zisk / minúta bitky",
+  "net-per-minute-alive": "Zisk / minúta nažive",
+  "repair": "Oprava",
+  "supplies": "Spotrebný materiál",
+  "thin": "Menej než {min} bitiek: tento riadok čítajte ako anekdotu.",
+  "tier": "Úroveň {tier}",
+  "title": "Koľko každý režim zaplatil hráčovi {nickname}"
+}

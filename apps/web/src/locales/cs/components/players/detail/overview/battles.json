@@ -124,9 +124,10 @@
     "free-xp": "Volné zkušenosti",
     "crew-xp": "Zkušenosti posádky",
     "with-premium": "Na tomto účtu byl aktivní prémiový účet.",
+    "other-bonuses": "Prémiový účet a další bonusy",
     "with-bonuses": "Po uplatnění bonusů",
     "credited": "Připsáno na účet",
-    "not-a-sum": "Každý řádek je samostatná hodnota, kterou hra uvádí, jednotlivé řádky se nesčítají.",
+    "not-a-sum": "Kredity na sebe navazují od částky, kterou bitva vyplatila, až po částku, která dorazila na účet. Řádky se zkušenostmi představují každý samostatný údaj hlášený hrou a jejich součet nedává jeden společný výsledek.",
     "marks": "Známka výbornosti",
     "mark-of-excellence": "Pokrok",
     "mark-movement": "Tato bitva"

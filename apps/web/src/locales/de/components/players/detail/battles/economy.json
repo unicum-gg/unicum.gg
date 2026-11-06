@@ -1,0 +1,19 @@
+{
+  "ammo": "Munition",
+  "battles": "Gefechte",
+  "duration": "Gefechtsdauer",
+  "earned": "Verdient",
+  "event-vehicles": "Fahrzeuge für Ereignisse",
+  "explanation": "Gezählt aus den {battles} Gefechten, die dieser Spieler in den letzten {days} Tagen über den unicum.gg-Mod hochgeladen hat. Berücksichtigt werden nur Ergebnisse mit eigenen Kreditpunkten, in jedem Modus, der sie bezahlt hat, einschließlich Ereignissen. Alle Werte gelten pro Gefecht, außer den Werten pro Minute. Der Gewinn ist der Rest, der auf dem Konto verblieben ist: alles, was das Gefecht bezahlt hat, einschließlich Premium-Konto und Reserven, abzüglich der Rechnungen für Reparatur, Munition und Verbrauchsmaterial. Bei der Munition zählen nur die mit Kreditpunkten bezahlten Kosten. Pro Minute des Gefechts zeigt das Tempo eines Spielers, der jedes Gefecht bis zum Ende erlebt, pro Minute aktiv das Tempo eines Spielers, der das Gefecht nach seiner Zerstörung für das nächste Gefecht verlässt. Beide Werte stehen neben der Zeit, durch die sie geteilt wurden. Der farblich markierte Modus hat auf dieser Stufe pro Gefechtsminute am meisten bezahlt.",
+  "lifetime": "Zeit aktiv",
+  "mode": "Modus",
+  "mode-at-tier": "Modus, Stufe {tier}",
+  "net": "Gewinn / Gefecht",
+  "net-per-minute": "Gewinn / Gefechtsminute",
+  "net-per-minute-alive": "Gewinn / Minute aktiv",
+  "repair": "Reparatur",
+  "supplies": "Verbrauchsmaterial",
+  "thin": "Weniger als {min} Gefechte: Lies diese Zeile als Anekdote.",
+  "tier": "Stufe {tier}",
+  "title": "Was jeder Modus für {nickname} bezahlt hat"
+}

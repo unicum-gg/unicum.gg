@@ -1,0 +1,17 @@
+{
+  "battle-length": "Duración de la batalla",
+  "battles": "Batallas",
+  "credits-per-battle": "Créditos / batalla",
+  "credits-per-minute": "Créditos / minuto",
+  "explanation": "Contabilizado a partir de las batallas subidas mediante el mod de unicum.gg durante los últimos {days} días, {records} registros de vehículos en total: cada batalla subida lleva lo que pagó a cada uno de sus treinta participantes, sin bots. Los créditos y la experiencia son propios de la batalla, antes de la cuenta premium, las reservas, las misiones y los costes, por lo que nada de la cuenta de un jugador cambia sus valores. Un minuto es un minuto de batalla, la duración propia de la batalla. Wargaming no publica créditos por modo para nadie.",
+  "mode": "Modo",
+  "net-explanation": "El beneficio es lo que llegó a la cuenta una vez pagadas las reparaciones, la munición y los consumibles, incluida la cuenta premium y las bonificaciones. Solo los resultados del jugador que subió la batalla llevan este dato, por lo que depende únicamente de los jugadores del mod y se muestra una vez que {min} de ellos respaldan un modo. También refleja sus hábitos, como tener una cuenta premium o usar proyectiles premium.",
+  "net-pending": "Lo que llega a la cuenta una vez pagadas las reparaciones, la munición y los consumibles depende únicamente de los resultados del jugador que subió la batalla, por lo que se basa solo en los jugadores del mod. Aparece aquí una vez que {min} de ellos han jugado un modo en este nivel.",
+  "net-per-battle": "Beneficio / batalla",
+  "net-sample": "{battles} batallas de {players} jugadores que usan el mod",
+  "players": "Jugadores",
+  "tier": "Nivel {tier}",
+  "title": "Qué modo paga mejor en {label}",
+  "xp-per-battle": "XP / batalla",
+  "xp-per-minute": "XP / minuto"
+}
