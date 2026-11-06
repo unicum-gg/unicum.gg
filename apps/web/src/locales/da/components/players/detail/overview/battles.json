@@ -153,5 +153,12 @@
     "deaths-yet": "Alle er stadig i live.",
     "deaths-unknown": "et køretøj",
     "deaths-destroyed": "Ødelagt"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Der blev kæmpet i {count} køretøjer. Tallene på rækken gælder hele kampen.",
+    "heading": "Køretøjer i denne kamp",
+    "kills": "Ødelagt",
+    "time": "Tid"
   }
 }

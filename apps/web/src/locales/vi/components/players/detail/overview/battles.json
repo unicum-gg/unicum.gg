@@ -153,5 +153,12 @@
     "deaths-yet": "Mọi người vẫn còn sống sót.",
     "deaths-unknown": "một xe tăng",
     "deaths-destroyed": "Đã phá hủy"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Đã chiến đấu trong {count} xe tăng. Số liệu trên hàng là toàn bộ trận đấu.",
+    "heading": "Xe trong trận đấu này",
+    "kills": "Đã phá hủy",
+    "time": "Thời gian"
   }
 }

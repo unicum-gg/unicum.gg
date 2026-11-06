@@ -153,5 +153,12 @@
     "deaths-yet": "所有人仍然存活。",
     "deaths-unknown": "一辆车辆",
     "deaths-destroyed": "击毁"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "使用{count}辆车辆进行战斗。该行的数值是整个战斗的数据。",
+    "heading": "本场战斗中的坦克",
+    "kills": "击毁",
+    "time": "时间"
   }
 }

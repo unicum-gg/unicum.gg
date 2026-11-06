@@ -153,5 +153,12 @@
     "deaths-yet": "Všichni jsou stále aktivní.",
     "deaths-unknown": "vozidlo",
     "deaths-destroyed": "Zničeno"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Počet použitých vozidel: {count}. Údaje na řádku jsou za celou bitvu.",
+    "heading": "Vozidla v této bitvě",
+    "kills": "Zničeno",
+    "time": "Čas"
   }
 }

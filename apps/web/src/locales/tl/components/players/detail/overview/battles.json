@@ -153,5 +153,12 @@
     "deaths-yet": "Buhay pa ang lahat.",
     "deaths-unknown": "isang sasakyan",
     "deaths-destroyed": "Nawasak"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Nakipaglaban gamit ang {count} mga sasakyan. Ang mga bilang sa hanay ay para sa buong labanan.",
+    "heading": "Mga sasakyan sa labanang ito",
+    "kills": "nawasak",
+    "time": "Oras"
   }
 }

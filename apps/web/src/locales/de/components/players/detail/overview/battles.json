@@ -153,5 +153,12 @@
     "deaths-yet": "Alle Fahrzeuge sind noch aktiv.",
     "deaths-unknown": "ein Fahrzeug",
     "deaths-destroyed": "Zerstört"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "In {count} Fahrzeuge gekämpft. Die Werte in der Zeile beziehen sich auf das ganze Gefecht.",
+    "heading": "Fahrzeuge in diesem Gefecht",
+    "kills": "Zerstört",
+    "time": "Zeit"
   }
 }

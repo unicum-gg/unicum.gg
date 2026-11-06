@@ -153,5 +153,12 @@
     "deaths-yet": "全員がまだ生存しています。",
     "deaths-unknown": "車両",
     "deaths-destroyed": "撃破数"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "戦闘に使用した車両数は{count}です。行の数値は戦闘全体のものです。",
+    "heading": "この戦闘の車輌",
+    "kills": "撃破数",
+    "time": "時間"
   }
 }

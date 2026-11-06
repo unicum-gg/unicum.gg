@@ -153,5 +153,12 @@
     "deaths-yet": "Herkes hâlâ hayatta.",
     "deaths-unknown": "bir araç",
     "deaths-destroyed": "İmha edilen"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "{count} araçla savaşıldı. Satırdaki değerler tüm savaşa aittir.",
+    "heading": "Bu savaştaki araçlar",
+    "kills": "İmha edilen",
+    "time": "Süre"
   }
 }

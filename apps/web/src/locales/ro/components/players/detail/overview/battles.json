@@ -153,5 +153,12 @@
     "deaths-yet": "Toată lumea este încă activă.",
     "deaths-unknown": "un vehicul",
     "deaths-destroyed": "Distrus"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Jucate cu {count} vehicule. Cifrele de pe rând reprezintă bătălia în întregime.",
+    "heading": "Vehicule în această bătălie",
+    "kills": "Distruse",
+    "time": "Timp"
   }
 }

@@ -153,5 +153,12 @@
     "deaths-yet": "Iedereen is nog in leven.",
     "deaths-unknown": "een voertuig",
     "deaths-destroyed": "Vernietigd"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Gevochten in {count} voertuigen. De cijfers op de rij zijn voor het gehele gevecht.",
+    "heading": "Voertuigen in dit gevecht",
+    "kills": "Vernietigd",
+    "time": "Tijd"
   }
 }

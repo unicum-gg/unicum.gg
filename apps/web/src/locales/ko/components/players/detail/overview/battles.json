@@ -153,5 +153,12 @@
     "deaths-yet": "모두 생존 중입니다.",
     "deaths-unknown": "차량",
     "deaths-destroyed": "격파"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "{count}대의 차량으로 전투했습니다. 행의 수치는 전체 전투 기준입니다.",
+    "heading": "이 전투의 전차",
+    "kills": "격파",
+    "time": "시간"
   }
 }

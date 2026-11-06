@@ -153,5 +153,12 @@
     "deaths-yet": "Visi joprojām ir aktīvi.",
     "deaths-unknown": "transportlīdzeklis",
     "deaths-destroyed": "Iznīcināts"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Kaujā piedalījās {count} transportlīdzekļi. Rindas rādītāji atspoguļo visu kauju.",
+    "heading": "Bruņutehnika šajā kaujā",
+    "kills": "Iznīcināts",
+    "time": "Laiks"
   }
 }

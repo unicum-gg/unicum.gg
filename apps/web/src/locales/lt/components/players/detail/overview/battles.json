@@ -153,5 +153,12 @@
     "deaths-yet": "Visa technika vis dar gyva.",
     "deaths-unknown": "transporto priemonė",
     "deaths-destroyed": "Sunaikinta"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Kovota su {count} transporto priemonėmis. Eilutėje pateikti rodikliai apima visą mūšį.",
+    "heading": "Šio mūšio technika",
+    "kills": "Sunaikinta",
+    "time": "Laikas"
   }
 }

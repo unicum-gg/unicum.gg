@@ -153,5 +153,12 @@
     "deaths-yet": "Todos ainda estão vivos.",
     "deaths-unknown": "um veículo",
     "deaths-destroyed": "Destruídos"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Disputada com {count} veículos. Os valores na linha correspondem à batalha inteira.",
+    "heading": "Veículos nesta batalha",
+    "kills": "Destruídos",
+    "time": "Tempo"
   }
 }

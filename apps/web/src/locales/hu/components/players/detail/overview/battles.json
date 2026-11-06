@@ -153,5 +153,12 @@
     "deaths-yet": "Még mindenki élő.",
     "deaths-unknown": "egy jármű",
     "deaths-destroyed": "Megsemmisítve"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "A csatát {count} járművel vívták. A sorban szereplő adatok az egész csatára vonatkoznak.",
+    "heading": "Járművek ebben a csatában",
+    "kills": "Megsemmisítve",
+    "time": "Idő"
   }
 }

@@ -153,5 +153,12 @@
     "deaths-yet": "Wszyscy są nadal żywi.",
     "deaths-unknown": "pojazd",
     "deaths-destroyed": "Zniszczony"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Stoczono bitwę w {count} pojazdach. Statystyki w wierszu dotyczą całej bitwy.",
+    "heading": "Pojazdy w tej bitwie",
+    "kills": "Zniszczony",
+    "time": "Czas"
   }
 }

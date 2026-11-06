@@ -153,5 +153,12 @@
     "deaths-yet": "Сви су још живи.",
     "deaths-unknown": "возило",
     "deaths-destroyed": "Uništeno"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Borbe vođene u {count} vozila. Brojke u redu odnose se na celu bitku.",
+    "heading": "Vozila u ovoj bitki",
+    "kills": "Uništeno",
+    "time": "Vreme"
   }
 }

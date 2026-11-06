@@ -153,5 +153,12 @@
     "deaths-yet": "Alla är fortfarande vid liv.",
     "deaths-unknown": "ett fordon",
     "deaths-destroyed": "Förstörda"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Strid med {count} fordon. Siffrorna på raden gäller hela striden.",
+    "heading": "Vagnar i denna strid",
+    "kills": "Förstörda",
+    "time": "Tid"
   }
 }

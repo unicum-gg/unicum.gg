@@ -153,5 +153,12 @@
     "deaths-yet": "Kaikki ovat yhä elossa.",
     "deaths-unknown": "ajoneuvo",
     "deaths-destroyed": "Tuhottu"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Taisteltu {count} ajoneuvolla. Rivillä näkyvät luvut koskevat koko taistelua.",
+    "heading": "Tämän taistelun Vaunut",
+    "kills": "Tuhottu",
+    "time": "Aika"
   }
 }

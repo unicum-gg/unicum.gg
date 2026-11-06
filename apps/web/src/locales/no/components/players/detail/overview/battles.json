@@ -153,5 +153,12 @@
     "deaths-yet": "Alle er fortsatt live.",
     "deaths-unknown": "et kjøretøy",
     "deaths-destroyed": "Bekjempet"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Kjempet i {count} kjøretøy. Tallene på raden gjelder hele kampen.",
+    "heading": "Kjøretøy i denne kampen",
+    "kills": "Bekjempet",
+    "time": "Tid"
   }
 }
