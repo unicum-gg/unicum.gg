@@ -201,26 +201,40 @@ export async function buildPlayerDetail(args: {
   // same column. Treat such a period as "= lifetime" for the tanks too (return
   // the full `tanks`), keeping the column internally consistent. Legit players
   // always have battles > 0 at first fetch, so this only fires on that artifact.
+  //
+  // A window the account diff says holds no battle holds none on the tanks
+  // either. Wargaming's `statistics.all` can lag `tanks/stats` by hours, and
+  // until `recordCurrentSnapshot` learned to refuse it, a tank row landed
+  // without the account row it belonged to. Diffed against the account's, it
+  // put a battle in a column whose Battles row read 0: an average tier, a
+  // combined damage and a WN8 under nothing at all (okuni on EU, 2026-11-03).
+  // Both `all` blocks count random, clan and company alike, so the account is
+  // the side that decides. Rows already stored keep that shape, hence this.
   function periodTankDiff(
     baseline: PlayerSnapshot | null,
     baselineTanks: (typeof initial.periodTankSnapshots)["d30"],
+    accountDiff: PeriodStats["d30"],
   ): typeof tanks | null {
     if (!baseline) return null;
     if (baseline.battles === 0) return tanks;
+    if (accountDiff?.battles === 0) return [];
     return baselineTanks.size > 0 ? diffTanks(tanks, baselineTanks) : null;
   }
   const periodTanks = {
     h24: periodTankDiff(
       initial.periodSnapshots.h24,
       initial.periodTankSnapshots.h24,
+      periods.h24,
     ),
     d7: periodTankDiff(
       initial.periodSnapshots.d7,
       initial.periodTankSnapshots.d7,
+      periods.d7,
     ),
     d30: periodTankDiff(
       initial.periodSnapshots.d30,
       initial.periodTankSnapshots.d30,
+      periods.d30,
     ),
   };
 
