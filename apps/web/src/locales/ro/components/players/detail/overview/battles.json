@@ -137,7 +137,7 @@
     "report": "Raport detaliat",
     "replay": "Reluare"
   },
-  "destroyed-list": "Distruse: {names}",
+  "destroyed-list": "A distrus {names}",
   "replay": {
     "no-bounds": "Această arenă nu are dimensiuni în catalog, astfel că pozițiile nu pot fi plasate pe mini-hartă.",
     "play": "Joacă",

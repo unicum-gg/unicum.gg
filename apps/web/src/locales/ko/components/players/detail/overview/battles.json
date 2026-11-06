@@ -137,7 +137,7 @@
     "report": "세부 전투 기록",
     "replay": "리플레이"
   },
-  "destroyed-list": "격파한 {names}",
+  "destroyed-list": "{names} 격파됨",
   "replay": {
     "no-bounds": "이 전투 지역은 카탈로그에 범위 정보가 없어 위치를 미니맵에 배치할 수 없습니다.",
     "play": "플레이",

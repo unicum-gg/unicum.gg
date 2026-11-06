@@ -137,7 +137,7 @@
     "report": "Detaljna statistika",
     "replay": "Snimka"
   },
-  "destroyed-list": "Uništen {names}",
+  "destroyed-list": "Uništeno: {names}",
   "replay": {
     "no-bounds": "Ovo borilište nema opseg u katalogu, pa se pozicije ne mogu smjestiti na njegovu minimapu.",
     "play": "Igraj",

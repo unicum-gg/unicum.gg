@@ -137,7 +137,7 @@
     "report": "详细战绩",
     "replay": "回放"
   },
-  "destroyed-list": "击毁 {names}",
+  "destroyed-list": "已击毁 {names}",
   "replay": {
     "no-bounds": "此战场在目录中没有范围，因此无法将这些位置放置在其小地图上。",
     "play": "播放",

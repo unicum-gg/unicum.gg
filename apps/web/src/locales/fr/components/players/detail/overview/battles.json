@@ -75,7 +75,7 @@
   },
   "close": "Fermer",
   "survived-the-battle": "A survécu à la bataille",
-  "destroyed": "Détruit",
+  "destroyed": "Détruits",
   "destroyed-by": "Détruit par {nickname}",
   "report": {
     "statistics": "Statistiques",
@@ -137,7 +137,7 @@
     "report": "Rapport détaillé",
     "replay": "Replay"
   },
-  "destroyed-list": "Détruits {names}",
+  "destroyed-list": "A détruit {names}",
   "replay": {
     "no-bounds": "Cette arène n’a pas d’étendue dans le catalogue, les positions ne peuvent donc pas être placées sur sa minicarte.",
     "play": "Jouer",

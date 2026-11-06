@@ -137,7 +137,7 @@
     "report": "詳細レポート",
     "replay": "リプレイ"
   },
-  "destroyed-list": "撃破数: {names}",
+  "destroyed-list": "{names}を破壊",
   "replay": {
     "no-bounds": "このアリーナにはカタログ上の範囲がありません。そのため、位置情報をミニマップ上に配置できません。",
     "play": "プレイ",

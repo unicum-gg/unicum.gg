@@ -137,7 +137,7 @@
     "report": "Detaylı Rapor",
     "replay": "Tekrar oynatma"
   },
-  "destroyed-list": "İmha edilen {names}",
+  "destroyed-list": "İmha edilenler: {names}",
   "replay": {
     "no-bounds": "Bu arenanın katalogda bir kapsamı yok, bu nedenle konumlar mini haritaya yerleştirilemez.",
     "play": "Oyna",

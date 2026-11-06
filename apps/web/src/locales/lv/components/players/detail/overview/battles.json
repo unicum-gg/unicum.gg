@@ -137,7 +137,7 @@
     "report": "Detalizēta atskaite",
     "replay": "Atkārtojums"
   },
-  "destroyed-list": "Iznīcināti {names}",
+  "destroyed-list": "Iznīcināts: {names}",
   "replay": {
     "no-bounds": "Šai arēnai katalogā nav noteiktas robežas, tāpēc pozīcijas nevar izvietot tās minikartē.",
     "play": "Spēlēt",

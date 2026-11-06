@@ -137,7 +137,7 @@
     "report": "Detaljan izveštaj",
     "replay": "Snimak bitke"
   },
-  "destroyed-list": "Uništeno {names}",
+  "destroyed-list": "Уништено {names}",
   "replay": {
     "no-bounds": "Ova arena nema granice u katalogu, pa mesta ne mogu da se postave na mini-mapa.",
     "play": "Igraj",

@@ -137,7 +137,7 @@
     "report": "Relatório Detalhado",
     "replay": "Replay"
   },
-  "destroyed-list": "Destruídos: {names}",
+  "destroyed-list": "Destruiu {names}",
   "replay": {
     "no-bounds": "Esta arena não tem extensão no catálogo, portanto o minimapa não pode exibir as posições.",
     "play": "Jogar",

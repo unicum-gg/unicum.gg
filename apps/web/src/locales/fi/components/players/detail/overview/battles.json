@@ -137,7 +137,7 @@
     "report": "Yksityiskohtainen raportti",
     "replay": "Uusinta"
   },
-  "destroyed-list": "Tuhotut: {names}",
+  "destroyed-list": "Tuhottu: {names}",
   "replay": {
     "no-bounds": "Tällä areenalla ei ole laajuutta luettelossa, joten sijainteja ei voi sijoittaa sen minikartalle.",
     "play": "Pelaa",

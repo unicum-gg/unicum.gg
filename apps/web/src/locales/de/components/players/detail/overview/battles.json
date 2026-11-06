@@ -137,7 +137,7 @@
     "report": "Detaillierter Bericht",
     "replay": "Replay"
   },
-  "destroyed-list": "Zerstört: {names}",
+  "destroyed-list": "Hat {names} zerstört",
   "replay": {
     "no-bounds": "Für diese Arena ist im Katalog keine Ausdehnung hinterlegt, daher können die Positionen nicht auf ihrer Minikarte platziert werden.",
     "play": "Spielen",

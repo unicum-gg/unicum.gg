@@ -137,7 +137,7 @@
     "report": "Raport szczegółowy",
     "replay": "Powtórka"
   },
-  "destroyed-list": "Zniszczony: {names}",
+  "destroyed-list": "Zniszczone przez niego: {names}",
   "replay": {
     "no-bounds": "Ta arena nie ma określonego zasięgu w katalogu, więc nie można znaleźć dla pozycji miejsca na jej minimapie.",
     "play": "Graj",

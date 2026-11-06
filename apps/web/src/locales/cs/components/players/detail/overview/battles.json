@@ -137,7 +137,7 @@
     "report": "Podrobná zpráva",
     "replay": "Záznam"
   },
-  "destroyed-list": "Zničeno {names}",
+  "destroyed-list": "Zničeno: {names}",
   "replay": {
     "no-bounds": "Tato aréna nemá v katalogu uvedený rozsah, takže pozice nelze umístit na její minimapu.",
     "play": "Přehrát",

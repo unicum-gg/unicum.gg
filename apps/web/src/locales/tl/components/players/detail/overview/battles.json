@@ -137,7 +137,7 @@
     "report": "Detalyadong ulat",
     "replay": "Replay"
   },
-  "destroyed-list": "Mga nawasak na {names}",
+  "destroyed-list": "Nawasak na niya ang {names}",
   "replay": {
     "no-bounds": "Walang extent ang arena na ito sa katalogo, kaya hindi maaari na mailagay ang mga posisyon sa minimapa nito.",
     "play": "Maglaro",

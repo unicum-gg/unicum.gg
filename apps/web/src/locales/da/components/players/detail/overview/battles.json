@@ -137,7 +137,7 @@
     "report": "Detaljeret rapport",
     "replay": "Replay"
   },
-  "destroyed-list": "Ødelagt {names}",
+  "destroyed-list": "Har ødelagt {names}",
   "replay": {
     "no-bounds": "Denne arena har ingen udstrækning i kataloget, så placeringerne kan ikke placeres på dens minikort.",
     "play": "Spil",

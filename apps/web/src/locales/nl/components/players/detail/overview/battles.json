@@ -137,7 +137,7 @@
     "report": "Gedetailleerd rapport",
     "replay": "Replay"
   },
-  "destroyed-list": "Vernietigd: {names}",
+  "destroyed-list": "Heeft {names} vernietigd",
   "replay": {
     "no-bounds": "Deze arena heeft geen omvang in de catalogus, dus de posities kunnen niet op de minimap worden geplaatst.",
     "play": "Spelen",

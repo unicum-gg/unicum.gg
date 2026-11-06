@@ -137,7 +137,7 @@
     "report": "Detaljerad rapport",
     "replay": "Återuppspelning"
   },
-  "destroyed-list": "Förstörda {names}",
+  "destroyed-list": "Har förstört {names}",
   "replay": {
     "no-bounds": "Den här arenan har ingen utsträckning i katalogen, så positionerna kan inte få plats på dess minikarta.",
     "play": "Spela",

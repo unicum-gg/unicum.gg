@@ -137,7 +137,7 @@
     "report": "Podrobná správa",
     "replay": "Replay"
   },
-  "destroyed-list": "Zničené {names}",
+  "destroyed-list": "Zničené: {names}",
   "replay": {
     "no-bounds": "Táto aréna nemá v katalógu rozsah, takže nie je možné umiestniť pozície na jej minizemljevid.",
     "play": "Igraj",

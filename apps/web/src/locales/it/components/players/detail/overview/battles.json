@@ -137,7 +137,7 @@
     "report": "Report dettagliato",
     "replay": "Replay"
   },
-  "destroyed-list": "Distrutti: {names}",
+  "destroyed-list": "Ha distrutti {names}",
   "replay": {
     "no-bounds": "Questa arena non ha un’estensione nel catalogo, quindi il lettore non può collocare le posizioni sulla sua minimappa.",
     "play": "Gioca",

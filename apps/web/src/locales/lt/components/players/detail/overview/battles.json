@@ -137,7 +137,7 @@
     "report": "Detali ataskaita",
     "replay": "Pakartojimas"
   },
-  "destroyed-list": "Sunaikinta {names}",
+  "destroyed-list": "Sunaikinta: {names}",
   "replay": {
     "no-bounds": "Ši arena kataloge neturi ribų, todėl minižemėlapis negali atvaizduoti pozicijų.",
     "play": "Žaisti",

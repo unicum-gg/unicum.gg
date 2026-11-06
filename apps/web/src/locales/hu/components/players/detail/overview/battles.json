@@ -137,7 +137,7 @@
     "report": "Részletes jelentés",
     "replay": "Visszajátszás"
   },
-  "destroyed-list": "Megsemmisítve: {names}",
+  "destroyed-list": "Megsemmisített: {names}",
   "replay": {
     "no-bounds": "Ennek az arénának nincs kiterjedése a katalógusban, ezért a pozíciókat nem lehet a minitérképre helyezni.",
     "play": "Lejátszás",
