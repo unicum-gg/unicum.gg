@@ -43,6 +43,17 @@ export type BattleVehicle = {
   account?: number;
   team: number;
   /**
+   * Their platoon's number within their team, from 1, absent when they went in
+   * alone.
+   *
+   * Decided by the client's own squad finder for the battle's mode, never by a
+   * shared `prebattleID`: a training room hands the whole room one id, so
+   * three players there would read as a platoon and five would not. The game
+   * shows no platoon in a training room, and neither does a battle here.
+   * Absent too on every battle recorded before the mod sent it.
+   */
+  squad?: number;
+  /**
    * `typeCompDescr`, the vehicle the account brought, `null` when unknown.
    *
    * The client does not always have it. A real participant, with an account,

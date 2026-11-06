@@ -612,6 +612,8 @@ export type BattleParticipant = {
    */
   player: BattlePlayer | null;
   team: number;
+  /** Their platoon's number within their team, absent when they went in alone. */
+  squad?: number;
   tank: BattleTank | null;
   /** Every tank they fought in, when it was more than one. */
   lineup?: BattleLineupTank[];
@@ -790,6 +792,7 @@ export async function battleDetail(
             }
           : null,
       team: vehicle.team,
+      ...(vehicle.squad ? { squad: vehicle.squad } : {}),
       tank: namedTank(book[String(vehicle.tank)], vehicle.tank, slugs),
       ...lineupOf(vehicle, book, slugs),
       // Without the medals, which ride as their own field: `own` is a bag of

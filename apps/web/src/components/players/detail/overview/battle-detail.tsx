@@ -33,6 +33,7 @@ import {
 } from "./battle-types";
 import { BattleShare } from "./battle-share";
 import { useBattleView } from "./use-battle-view";
+import { SquadBadge } from "./battle-squad";
 import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
@@ -524,6 +525,12 @@ function TeamTable({
     if (vb === null) return -1;
     return sort.desc ? vb - va : va - vb;
   });
+  // Only a battle that had platoons gives the names a slot for them; the
+  // reader's own platoon is the one the game picks out.
+  const squads = participants.some((p) => p.squad);
+  const mySquad = participants.find(
+    (p) => p.account !== undefined && p.account === highlightAccount,
+  )?.squad;
   const totals = {
     kills: participants.reduce((sum, p) => sum + (p.own.kills ?? 0), 0),
     damage: participants.reduce((sum, p) => sum + (p.own.damage ?? 0), 0),
@@ -641,6 +648,13 @@ function TeamTable({
             >
               <TableCell className={cn(gutter, NAME_WIDTH)}>
                 <span className="flex items-center gap-1.5 overflow-hidden whitespace-nowrap">
+                  {squads ? (
+                    <SquadBadge
+                      squad={p.squad}
+                      own={mySquad !== undefined && p.squad === mySquad}
+                      t={t}
+                    />
+                  ) : null}
                   {p.player ? (
                     // The site's one format for naming a player, given a
                     // deliberately thin identity: the name and the clan, and

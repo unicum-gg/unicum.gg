@@ -77,6 +77,7 @@
   "survived-the-battle": "Survived the battle",
   "destroyed": "Destroyed",
   "destroyed-by": "Destroyed by {nickname}",
+  "squad": "Platoon {number}",
   "report": {
     "statistics": "Statistics",
     "time": "Time",

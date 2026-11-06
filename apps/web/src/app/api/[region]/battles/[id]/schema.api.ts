@@ -113,6 +113,10 @@ const battleParticipant = z
         "How the site names this player: the nickname, the clan they wear and the crests they have earned. Null for a bot, or for an account nobody has ever looked up here.",
     }),
     team: z.number(),
+    squad: z.number().optional().meta({
+      description:
+        "Their platoon's number within their team, from 1, as the game's own results screen numbers it. Absent when they went in alone, in a mode with no platoons (a training room among them), and on battles recorded before platoons were reported.",
+    }),
     tank: z
       .object({
         id: z.number(),

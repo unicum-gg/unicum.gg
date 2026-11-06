@@ -6,6 +6,7 @@ export * from "./loadouts";
 export * from "./loadout-stats";
 export * from "./vehicle-modes";
 export * from "./battle-modes";
+export * from "./battle-squads";
 export * from "./replay/blowfish";
 export * from "./replay/clock";
 export * from "./replay/death-messages";

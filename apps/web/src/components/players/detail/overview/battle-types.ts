@@ -55,6 +55,8 @@ export type Participant = {
   account?: number;
   player: PlayerIdentity | null;
   team: number;
+  /** Their platoon's number within their team, absent when they went in alone. */
+  squad?: number;
   tank: {
     id: number;
     shortName: string;

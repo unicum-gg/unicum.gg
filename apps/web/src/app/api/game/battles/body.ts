@@ -69,6 +69,12 @@ const vehicle = z.object({
     .optional(),
   team: z.number().int().min(0).max(32),
   /**
+   * Their platoon's number, absent when they went in alone. The mod asks the
+   * client's own squad finder, which is what keeps a training room, where
+   * everyone shares one prebattle id, from reading as a platoon.
+   */
+  squad: z.number().int().min(1).max(32).optional(),
+  /**
    * `typeCompDescr`, the vehicle the account brought, when the client had it.
    *
    * Not `positive()`, for the reason `account` above is optional: the client
