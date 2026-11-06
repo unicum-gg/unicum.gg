@@ -1,4 +1,4 @@
-import { and, desc, eq, getTableName, gte, inArray, lt, sql } from "drizzle-orm";
+import { and, desc, eq, getTableName, gte, inArray, lt, ne, sql } from "drizzle-orm";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   battleLoadoutsByRegion,
@@ -888,13 +888,6 @@ async function loadoutsOf(
   return out;
 }
 
-/**
- * The nicknames we hold for these accounts.
- *
- * A miss is ordinary rather than an error: our players table is everyone the
- * site has ever been asked about, which is a large slice of each region and
- * not all of it. An unnamed participant still has a vehicle and a line.
- */
 /** A vehicle's line as a bag of numbers, which is how every reader takes it. */
 function withoutMedals(vehicle: BattleVehicle): Record<string, number> {
   const out: Record<string, number> = {};
@@ -910,6 +903,18 @@ type KnownPlayer = {
   clanColor: string | null;
 };
 
+/**
+ * The nicknames we hold for these accounts.
+ *
+ * A miss is ordinary rather than an error: our players table is everyone the
+ * site has ever been asked about, which is a large slice of each region and
+ * not all of it. An unnamed participant still has a vehicle and a line.
+ *
+ * A row with an empty nickname is a miss too: discovery inserts an account
+ * before anything has read its name, and handing that on as a player made
+ * every reader print an empty string where the vehicle should have stood in
+ * (a kill list reading "Destroyed , MeneerZilla").
+ */
 async function nicknamesOf(
   region: Region,
   accounts: number[],
@@ -929,7 +934,7 @@ async function nicknamesOf(
     })
     .from(players)
     .leftJoin(clans, eq(players.clanId, clans.id))
-    .where(inArray(players.accountId, accounts));
+    .where(and(inArray(players.accountId, accounts), ne(players.nickname, "")));
   for (const row of rows) {
     out.set(row.accountId, {
       nickname: row.nickname,
