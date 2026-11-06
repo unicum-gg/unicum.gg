@@ -279,6 +279,10 @@ function idOf(battle: unknown): string | null {
   return null;
 }
 
+function knownTank(tank: number | null | undefined): number | null {
+  return tank && tank > 0 ? tank : null;
+}
+
 function toRow(
   battle: BattleBody,
   arenaUniqueId: string,
@@ -304,9 +308,12 @@ function toRow(
     // vehicle looks like in the column. Never 0: the filters read
     // `(v->>'tank')::int`, and a zero would gather every unidentified
     // vehicle in the game under one fictional tank.
-    vehicles: battle.vehicles.map((vehicle) => ({
+    vehicles: battle.vehicles.map(({ tanks, ...vehicle }) => ({
       ...vehicle,
-      tank: vehicle.tank && vehicle.tank > 0 ? vehicle.tank : null,
+      tank: knownTank(vehicle.tank),
+      ...(tanks
+        ? { tanks: tanks.map((one) => ({ ...one, tank: knownTank(one.tank) })) }
+        : {}),
     })),
     // Stored on the first write only: the conflict path updates `reported_by`
     // and nothing else, so a second reporter's economy never overwrites the

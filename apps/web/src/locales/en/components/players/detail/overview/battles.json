@@ -153,5 +153,12 @@
     "deaths-yet": "Everyone is still alive.",
     "deaths-unknown": "a vehicle",
     "deaths-destroyed": "Destroyed"
+  },
+  "lineup": {
+    "more": "+{count}",
+    "hint": "Fought in {count} vehicles. The figures on the row are the whole battle.",
+    "heading": "Vehicles in this battle",
+    "kills": "Destroyed",
+    "time": "Time"
   }
 }

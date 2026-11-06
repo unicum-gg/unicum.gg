@@ -48,7 +48,13 @@ export function playerBattlesWhere(
     parts.push(sql`${table.mapName} = ${filter.map}`);
   }
   if (filter.tank !== undefined) {
-    parts.push(sql`(${ownLine(table, accountId)}->>'tank')::int = ${filter.tank}`);
+    // Any tank of the lineup, not only the first: a Frontline battle fought
+    // in three tanks is a battle in each of them, and `tank` alone names the
+    // first one (see `BattleVehicle["tanks"]`).
+    const own = ownLine(table, accountId);
+    parts.push(
+      sql`((${own}->>'tank')::int = ${filter.tank} OR ${own}->'tanks' @> jsonb_build_array(jsonb_build_object('tank', ${filter.tank}::int)))`,
+    );
   }
   const ownTeam = sql`(${ownLine(table, accountId)}->>'team')::int`;
   if (filter.result === BattleResultFilter.Win) {
@@ -100,6 +106,7 @@ export async function playerBattleFacets(
       battleType: table.battleType,
       map: table.mapName,
       tank: sql<number | null>`(${own}->>'tank')::int`,
+      lineup: sql<{ tank: number | null }[] | null>`${own}->'tanks'`,
       team: sql<number | null>`(${own}->>'team')::int`,
       winner: table.winnerTeam,
     })
@@ -115,7 +122,12 @@ export async function playerBattleFacets(
   for (const row of rows) {
     bump(modes, row.battleType);
     bump(maps, row.map);
-    if (row.tank !== null) bump(tanks, row.tank);
+    // Every tank of a Frontline lineup counts once, which is what picking it
+    // in the filter above gives back.
+    const fought = row.lineup?.length
+      ? new Set(row.lineup.map((one) => one.tank))
+      : new Set([row.tank]);
+    for (const tank of fought) if (tank !== null) bump(tanks, tank);
     // A battle that named no winner is not a result anybody can filter on.
     if (row.winner === null || row.team === null) continue;
     bump(

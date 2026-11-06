@@ -70,6 +70,35 @@ const battleTank = z
   })
   .meta({ id: "BattleTank", description: "A vehicle as a battle row names it." });
 
+/** One tank of a vehicle that fought in several, named, with its own share. */
+export const battleLineupTank = z
+  .object({
+    tank: battleTank.nullable().meta({
+      description:
+        "The tank, named. Null for one the catalogue does not carry, or one the client did not report.",
+    }),
+    tankId: z.number().nullable().meta({
+      description: "`typeCompDescr`, kept when the catalogue cannot name it.",
+    }),
+    damage: z.number(),
+    radio: z.number(),
+    track: z.number(),
+    stun: z.number(),
+    blocked: z.number(),
+    spotted: z.number(),
+    kills: z.number(),
+    xp: z.number(),
+    lifeTime: z.number().meta({ description: "Seconds this tank was on the field." }),
+    deathReason: z.number().meta({
+      description: "`-1` when it survived, otherwise the game's own reason code.",
+    }),
+  })
+  .meta({
+    id: "BattleLineupTank",
+    description:
+      "One tank of a vehicle that fought in several. Frontline lets a player respawn in another tank, and the results carry one record per tank.",
+  });
+
 /** What a battle earned the account that reported it. */
 const battleEconomy = z
   .object({
@@ -202,8 +231,16 @@ export const playerBattle = z
       description:
         "The vehicle they brought, named. Null for one the catalogue does not carry, which is what an unreleased or withdrawn vehicle looks like.",
     }),
+    lineup: z
+      .array(battleLineupTank)
+      .optional()
+      .meta({
+        description:
+          "Every tank they fought in, when it was more than one, in the order the results listed them. Only the respawn modes (Frontline) produce one. When present, `tank` is only the first of them and `own` and `rating` cover all of them. Absent on a Frontline battle recorded before the mod reported the other tanks.",
+      }),
     own: battleVehicle.meta({
-      description: "This player's own line through the battle.",
+      description:
+        "This player's own line through the battle, summed over every tank in `lineup` when there is one.",
     }),
     rating: z
       .record(z.string(), z.number().nullable())

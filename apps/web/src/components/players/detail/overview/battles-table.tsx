@@ -40,6 +40,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { BattleDetail } from "./battle-detail";
+import { LineupMore, type LineupTank } from "./battle-lineup";
 import { PlayerName } from "@/components/entity/player-name";
 import type { PlayerIdentity } from "@/components/entity/player-identity";
 import type { BattleEconomy, MapOverlay } from "./battle-types";
@@ -78,6 +79,11 @@ export type PlayerBattleRow = {
     tag: string;
     slug: string | null;
   } | null;
+  /**
+   * Every tank they fought in, when it was more than one (Frontline). `tank`
+   * is then only the first, and `own` and `rating` are the whole battle.
+   */
+  lineup?: LineupTank[];
   /**
    * The optional devices this account had fitted, by slot, as pictures.
    *
@@ -305,6 +311,12 @@ export function PlayerBattlesTable({
                             {battle.tank.shortName || battle.tank.name}
                           </span>
                         )}
+                        <LineupMore
+                          region={region}
+                          lineup={battle.lineup}
+                          t={t}
+                          count={count}
+                        />
                       </span>
                     ) : null}
                   </>
@@ -338,6 +350,12 @@ export function PlayerBattlesTable({
                         {battle.tank.shortName || battle.tank.name}
                       </span>
                     )}
+                    <LineupMore
+                      region={region}
+                      lineup={battle.lineup}
+                      t={t}
+                      count={count}
+                    />
                     {survived ? null : (
                       <SkullIcon
                         className="text-muted-foreground size-3.5 shrink-0"

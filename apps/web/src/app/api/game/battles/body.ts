@@ -24,6 +24,27 @@ import { MAX_BATTLES_PER_UPLOAD } from "@unicum.gg/core/battles/ingest";
 /** A counter the game reports per vehicle: never negative, never absurd. */
 const counter = z.number().int().min(0).max(1_000_000);
 
+/**
+ * One tank's share of a vehicle that fought in several (Frontline respawns).
+ *
+ * The same counters as the vehicle's own, for the subset the game's Frontline
+ * report breaks down per tank. `tank` is nullish for the reason the vehicle's
+ * own is.
+ */
+const vehicleTank = z.object({
+  tank: z.number().int().nullish(),
+  damage: counter,
+  radio: counter,
+  track: counter,
+  stun: counter,
+  blocked: counter,
+  spotted: counter,
+  kills: z.number().int().min(0).max(60),
+  xp: counter,
+  lifeTime: counter,
+  deathReason: z.number().int().min(-1).max(255),
+});
+
 const vehicle = z.object({
   /** Battle-scoped vehicle id, the key the client's results are mapped by. */
   id: z.number().int(),
@@ -131,6 +152,14 @@ const vehicle = z.object({
    * each carry a field saying nothing.
    */
   marks: z.number().int().min(1).max(3).optional(),
+  /**
+   * Every tank the vehicle fought in, sent only when it was more than one.
+   *
+   * Frontline lets a player respawn in another tank; the mod used to name the
+   * first one alone and the whole battle was drawn under it. The cap is well
+   * above the handful of tanks a Frontline lineup holds.
+   */
+  tanks: z.array(vehicleTank).min(2).max(16).optional(),
 });
 
 /**

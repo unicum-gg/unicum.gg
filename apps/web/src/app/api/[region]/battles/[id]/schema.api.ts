@@ -1,7 +1,10 @@
 // Co-located response schema. The `.api.ts` suffix is required so
 // next-openapi-gen scans it.
 import { z } from "zod";
-import { mapOverlay } from "@/app/api/[region]/players/[nickname]/battles/schema.api";
+import {
+  battleLineupTank,
+  mapOverlay,
+} from "@/app/api/[region]/players/[nickname]/battles/schema.api";
 
 /** One slot, named and pictured, or empty. */
 export const BattleLoadoutSlot = z.object({
@@ -123,6 +126,13 @@ const battleParticipant = z
       })
       .nullable()
       .meta({ id: "BattleParticipantTank" }),
+    lineup: z
+      .array(battleLineupTank)
+      .optional()
+      .meta({
+        description:
+          "Every tank this vehicle fought in, when it was more than one (Frontline respawns). `tank` is then only the first, and `own` and `rating` cover all of them.",
+      }),
     own: z.record(z.string(), z.number()).meta({
       description:
         "Their whole line, exactly as the client's results reported it: damage, radio, track, stun, blocked, received, shots, hits, piercings, spotted, kills, lifeTime, deathReason, capturePoints, xp, credits, health, maxHealth.",

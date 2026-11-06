@@ -21,6 +21,7 @@ import type { TranslateFunction } from "@onruntime/translations";
 import { PlayerName } from "@/components/entity/player-name";
 import { SegmentedControl } from "@/components/segmented-control";
 import { BattlePlayerPanel } from "./battle-player";
+import { LineupMore } from "./battle-lineup";
 import { BattleReport } from "./battle-report";
 import { BattleReplay } from "./battle-replay";
 import {
@@ -673,6 +674,12 @@ function TeamTable({
                     <span className="truncate">
                       {p.tank.shortName || p.tank.name}
                     </span>
+                    <LineupMore
+                      region={region}
+                      lineup={p.lineup}
+                      t={t}
+                      count={count}
+                    />
                   </span>
                 ) : (
                   <span className="text-muted-foreground italic">

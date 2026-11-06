@@ -9,6 +9,7 @@ import {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { BattleLoadout } from "./battle-loadout";
+import { LineupBreakdown } from "./battle-lineup";
 import Link from "@/components/link";
 import { PlayerName } from "@/components/entity/player-name";
 import { TankIcon } from "@/components/tanks/tank-icon";
@@ -292,6 +293,12 @@ export function BattlePlayerPanel({
           means the player who recorded it and any team mate they followed
           after dying, so for most rows this draws nothing at all.
         */}
+        <LineupBreakdown
+          region={region}
+          lineup={participant.lineup}
+          t={t}
+          count={count}
+        />
         <BattleLoadout loadouts={participant.loadouts} />
       </div>
     </div>

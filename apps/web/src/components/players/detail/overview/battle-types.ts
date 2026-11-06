@@ -1,6 +1,7 @@
 import type { MapMarker } from "@unicum.gg/shared";
 import type { BattleEconomy } from "@unicum.gg/shared";
 import type { PlayerIdentity } from "@/components/entity/player-identity";
+import type { LineupTank } from "./battle-lineup";
 
 export type MapOverlay = {
   bounds: {
@@ -52,6 +53,8 @@ export type Participant = {
     tag: string;
     slug: string | null;
   } | null;
+  /** Every tank they fought in, when it was more than one (Frontline). */
+  lineup?: LineupTank[];
   /**
    * Their whole line as a bag of numbers.
    *

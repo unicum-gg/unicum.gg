@@ -19,7 +19,7 @@ import {
   wnxAccZero,
   wnxFinalize,
   type BattleVehicle,
-  type TankStats,
+  type BattleVehicleTank,
   type VehicleMeta,
   type WN8Expected,
   type WNXExpected,
@@ -37,6 +37,11 @@ import {
   type ArenaOverlay,
 } from "@unicum.gg/core/wargaming/wot/maps";
 import { resolvePlayerBadges } from "@unicum.gg/core/players/badges";
+import {
+  battleCareers,
+  vehicleTankIds,
+  withoutTanks,
+} from "@unicum.gg/core/battles/lineup";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
@@ -123,7 +128,15 @@ export type PlayerBattle = {
    * row still has a battle worth showing.
    */
   tank: BattleTank | null;
-  /** Their own line: damage, assists, and the rest, exactly as stored. */
+  /**
+   * Every tank they fought in, when it was more than one, in the order the
+   * results listed them. See `BattleLineupTank`.
+   */
+  lineup?: BattleLineupTank[];
+  /**
+   * Their own line: damage, assists, and the rest, exactly as stored. The
+   * whole battle, summed over every tank in `lineup` when there is one.
+   */
   own: BattleVehicle;
   /**
    * What this one battle scored, per metric.
@@ -191,6 +204,18 @@ export type PlayerBattle = {
    * anything.
    */
   personal: BattleEconomy | null;
+};
+
+/**
+ * One tank of a vehicle that fought in several, named, with its own share.
+ *
+ * Frontline lets a player respawn in another tank. `tank` on the row is then
+ * only the first of them, and the row's figures belong to all of them.
+ */
+export type BattleLineupTank = Omit<BattleVehicleTank, "tank"> & {
+  tank: BattleTank | null;
+  /** The game's own id, kept when the catalogue cannot name it. */
+  tankId: number | null;
 };
 
 /** A vehicle as a battle row needs it: enough to draw and to link. */
@@ -421,7 +446,7 @@ async function assembleBattles(
   ]);
   const slugs = new Map<number, string | null>();
   for (const id of new Set(
-    rows.map((row) => row.own?.tank).filter((id): id is number => Boolean(id)),
+    rows.flatMap((row) => (row.own ? vehicleTankIds(row.own) : [])),
   )) {
     slugs.set(id, await getTankSlug(region, id));
   }
@@ -448,7 +473,8 @@ async function assembleBattles(
       team: row.own.team,
       outcome: outcomeOf(row.own.team, row.winnerTeam),
       tank: namedTank(book[String(row.own.tank)], row.own.tank, slugs),
-      own: row.own,
+      ...lineupOf(row.own, book, slugs),
+      own: withoutTanks(row.own),
       rating: rateOne(row.own, row.winnerTeam, book, wn8Expected, wnxExpected),
       ...(row.loadout
         ? {
@@ -485,37 +511,6 @@ async function assembleBattles(
   return out;
 }
 
-/**
- * One battle shaped as the career record the rating accumulators read.
- *
- * Not a trick: the ratings are defined on battle counters and only ever
- * averaged, so a career of one battle is the metric at its own grain. Every
- * term maps straight across, `dropped_capture_points` included, which the
- * results call `capturePoints` on the vehicle that took them back.
- */
-function asCareer(own: BattleVehicle, won: boolean): TankStats {
-  return {
-    // `TankStats` comes from Wargaming, where a career always names its
-    // vehicle, so the type has no room for an unknown one. 0 is not stored
-    // anywhere and matches no entry in the encyclopedia or the expected
-    // tables, which is exactly what is wanted here: a vehicle nobody can name
-    // gets no rating, the same answer `rateOne` gives a tank the expected
-    // values have not caught up with.
-    tank_id: own.tank ?? 0,
-    all: {
-      battles: 1,
-      wins: won ? 1 : 0,
-      damage_dealt: own.damage,
-      spotted: own.spotted,
-      frags: own.kills,
-      dropped_capture_points: own.capturePoints,
-      radio_assisted_damage: own.radio,
-      track_assisted_damage: own.track,
-      xp: own.xp,
-    },
-  } as TankStats;
-}
-
 function rateOne(
   own: BattleVehicle,
   winnerTeam: number | null,
@@ -523,7 +518,7 @@ function rateOne(
   wn8Expected: Map<number, WN8Expected>,
   wnxExpected: Map<number, WNXExpected>,
 ): Partial<Record<RatingMetric, number | null>> {
-  const one = asCareer(own, winnerTeam === own.team);
+  const careers = battleCareers(own, winnerTeam === own.team);
   // No (tier, type) fallback: on a career it rescues a vehicle the expected
   // tables have not caught up with, and on a single battle it would quietly
   // rate one vehicle against another's expectations. A missing rating is the
@@ -531,18 +526,34 @@ function rateOne(
   const noFallback = new Map<string, WN8Expected>();
 
   const wn7 = wn7AccZero();
-  wn7AccAdd(wn7, one, book);
-
   const wn8 = wn8AccZero();
-  wn8AccAdd(wn8, one, wn8Expected, book, noFallback);
-
   const wnx = wnxAccZero();
-  wnxAccAdd(wnx, one, wnxExpected);
+  for (const one of careers) {
+    wn7AccAdd(wn7, one, book);
+    wn8AccAdd(wn8, one, wn8Expected, book, noFallback);
+    wnxAccAdd(wnx, one, wnxExpected);
+  }
 
   return {
     [RatingMetric.Wn7]: wn7Finalize(wn7),
     [RatingMetric.Wn8]: wn8Finalize(wn8),
     [RatingMetric.Wnx]: wnxFinalize(wnx),
+  };
+}
+
+/** The lineup field of a row, present only for a vehicle that had one. */
+function lineupOf(
+  vehicle: BattleVehicle,
+  book: Record<string, VehicleMeta>,
+  slugs: Map<number, string | null>,
+): { lineup?: BattleLineupTank[] } {
+  if (!vehicle.tanks?.length) return {};
+  return {
+    lineup: vehicle.tanks.map(({ tank, ...share }) => ({
+      ...share,
+      tank: namedTank(book[String(tank)], tank, slugs),
+      tankId: tank,
+    })),
   };
 }
 
@@ -602,6 +613,8 @@ export type BattleParticipant = {
   player: BattlePlayer | null;
   team: number;
   tank: BattleTank | null;
+  /** Every tank they fought in, when it was more than one. */
+  lineup?: BattleLineupTank[];
   /** Their whole line's figures, exactly as the results reported them. */
   own: Record<string, number>;
   /** The medals this battle awarded them, by the game's own ids. */
@@ -748,11 +761,7 @@ export async function battleDetail(
   // lookup on the same partition key the battle itself was found by.
   const fitted = await loadoutsOf(region, arenaUniqueId, battle.startedAt);
   const slugs = new Map<number, string | null>();
-  for (const id of new Set(
-    battle.vehicles
-      .map((vehicle) => vehicle.tank)
-      .filter((id): id is number => id !== null),
-  )) {
+  for (const id of new Set(battle.vehicles.flatMap(vehicleTankIds))) {
     slugs.set(id, await getTankSlug(region, id));
   }
 
@@ -782,6 +791,7 @@ export async function battleDetail(
           : null,
       team: vehicle.team,
       tank: namedTank(book[String(vehicle.tank)], vehicle.tank, slugs),
+      ...lineupOf(vehicle, book, slugs),
       // Without the medals, which ride as their own field: `own` is a bag of
       // numbers everywhere it is read, and one array in it would make every
       // reader handle a type it has no use for.

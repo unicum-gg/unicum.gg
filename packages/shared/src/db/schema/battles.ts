@@ -10,6 +10,31 @@ import {
 } from "drizzle-orm/pg-core";
 import { Region } from "@unicum.gg/wargaming";
 
+/**
+ * One tank's share of a vehicle that fought in several.
+ *
+ * Frontline lets a player respawn in another tank, and the results then carry
+ * one record per tank under the same battle vehicle id. The vehicle's own
+ * fields are the whole battle, summed; this says which tank did what, which
+ * is what the game's own Frontline report draws.
+ */
+export type BattleVehicleTank = {
+  /** `typeCompDescr`, `null` when the client did not have it. Never 0. */
+  tank: number | null;
+  damage: number;
+  radio: number;
+  track: number;
+  stun: number;
+  blocked: number;
+  spotted: number;
+  kills: number;
+  xp: number;
+  /** Seconds this tank was on the field. */
+  lifeTime: number;
+  /** `-1` when it survived, otherwise the game's own reason code. */
+  deathReason: number;
+};
+
 /** One vehicle's whole battle, as the client's own results report it. */
 export type BattleVehicle = {
   /** Battle-scoped vehicle id, the key the client's own results are mapped by. */
@@ -103,6 +128,17 @@ export type BattleVehicle = {
    * why a single report can say what the whole team was carrying.
    */
   marks?: number;
+  /**
+   * Every tank this vehicle fought in, when it was more than one.
+   *
+   * Absent on every battle where a player keeps one tank, which is every mode
+   * but the respawn ones. When present, `tank` above is only the first of
+   * them and the totals belong to all of them: read `tank` alone and a
+   * Frontline battle played in three tanks draws its whole damage under one.
+   * Absent too on a Frontline battle recorded before the mod sent it, where
+   * the other tanks were never reported and cannot be recovered.
+   */
+  tanks?: BattleVehicleTank[];
 };
 
 /**
