@@ -11,7 +11,7 @@
   "net": "Voitto / taistelu",
   "net-per-minute": "Voitto / taistelun minuutti",
   "net-per-minute-alive": "Voitto / elossaolon minuutti",
-  "repair": "Korjaus",
+  "repair": "Korjaa",
   "supplies": "Kulutustarvikkeet",
   "thin": "Alle {min} taistelua: lue tämä rivi anekdoottina.",
   "tier": "Taso {tier}",

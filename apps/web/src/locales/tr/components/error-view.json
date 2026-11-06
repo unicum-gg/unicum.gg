@@ -2,5 +2,6 @@
   "title": "Bir şeyler yanlış gitti",
   "description": "Wargaming API düzgün yanıt vermedi. Bu genellikle onların tarafındaki geçici bir sorundur.",
   "try-again": "Tekrar dene",
-  "back": "Ana sayfaya dön"
+  "back": "Ana sayfaya dön",
+  "reference": "Hata referansı: {digest}"
 }

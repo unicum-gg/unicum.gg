@@ -1,5 +1,5 @@
 {
-  "ammo": "Amunisyon",
+  "ammo": "Ammunisyon",
   "battles": "Mga labanan",
   "duration": "Tagal ng labanan",
   "earned": "Nakuha",
@@ -14,6 +14,6 @@
   "repair": "Pagkukumpuni",
   "supplies": "Mga Consumable",
   "thin": "Mas kaunti sa {min} mga laban: basahin ang row na ito bilang isang anekdota.",
-  "tier": "Tier {tier}",
+  "tier": "Antas {tier}",
   "title": "Bayad ng bawat mode kay {nickname}"
 }

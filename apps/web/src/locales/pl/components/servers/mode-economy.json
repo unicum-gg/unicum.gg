@@ -9,7 +9,7 @@
   "net-pending": "To, co trafia na konto po opłaceniu naprawy, amunicji i materiałów eksploatacyjnych, przenoszą wyłącznie wyniki osoby przesyłającej, dlatego wartość opiera się tylko na graczach korzystających z moda. Pojawia się tutaj, gdy co najmniej {min} z nich rozegrało tryb na tym poziomie.",
   "net-per-battle": "Zysk netto / bitwa",
   "net-sample": "{battles} bitew od {players} graczy korzystających z moda",
-  "players": "Graczy",
+  "players": "Gracze",
   "tier": "Poziom {tier}",
   "title": "Który tryb najlepiej płaci na {label}",
   "xp-per-battle": "Doświadczenie / bitwa",

@@ -11,7 +11,7 @@
   "net": "Overskudd / kamp",
   "net-per-minute": "Overskudd / minutt av kampen",
   "net-per-minute-alive": "Overskudd / minutt live",
-  "repair": "Reparasjon",
+  "repair": "Reparér",
   "supplies": "Forbruksmateriell",
   "thin": "Færre enn {min} kamper: les denne raden som en anekdote.",
   "tier": "Nivå {tier}",

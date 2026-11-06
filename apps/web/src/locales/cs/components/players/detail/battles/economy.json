@@ -11,7 +11,7 @@
   "net": "Zisk / bitva",
   "net-per-minute": "Zisk / minutu bitvy",
   "net-per-minute-alive": "Zisk / minutu v aktivním stavu",
-  "repair": "Oprava",
+  "repair": "Opravit",
   "supplies": "Spotřební doplňky",
   "thin": "Méně než {min} bitev, berte tento řádek jen jako anekdotu.",
   "tier": "Úroveň {tier}",

@@ -2,5 +2,6 @@
   "title": "Noget gik galt",
   "description": "Wargaming API’en svarede ikke korrekt. Det er normalt et midlertidigt problem på deres side.",
   "try-again": "Prøv igen",
-  "back": "Tilbage til hjem"
+  "back": "Tilbage til hjem",
+  "reference": "Fejlreference: {digest}"
 }

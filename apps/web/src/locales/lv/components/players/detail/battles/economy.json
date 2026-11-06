@@ -11,7 +11,7 @@
   "net": "Peļņa / kauja",
   "net-per-minute": "Peļņa / kaujas minūte",
   "net-per-minute-alive": "Peļņa / aktīvā minūte",
-  "repair": "Remonts",
+  "repair": "Remontēt",
   "supplies": "Aprīkojums",
   "thin": "Mazāk nekā {min} kaujas, uztveriet šo rindu kā atsevišķu piemēru.",
   "tier": "Līmenis {tier}",

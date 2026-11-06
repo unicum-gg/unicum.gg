@@ -2,5 +2,6 @@
   "title": "Coś poszło nie tak",
   "description": "API Wargaming nie odpowiedziało prawidłowo. Zwykle jest to tymczasowy problem po stronie Wargaming.",
   "try-again": "Spróbuj ponownie",
-  "back": "Powrót do domu"
+  "back": "Powrót do domu",
+  "reference": "Odwołanie do błędu: {digest}"
 }

@@ -2,5 +2,6 @@
   "title": "Нешто није у реду",
   "description": "Wargaming API није исправно одговорио. Ово је обично привремени проблем на њиховој страни.",
   "try-again": "Pokušajte ponovo",
-  "back": "Povratak na početnu"
+  "back": "Povratak na početnu",
+  "reference": "Referenca greške: {digest}"
 }

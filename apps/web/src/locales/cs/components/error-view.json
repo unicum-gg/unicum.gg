@@ -2,5 +2,6 @@
   "title": "Něco se pokazilo",
   "description": "API Wargaming neodpovědělo správně. Obvykle jde o dočasný problém na jejich straně.",
   "try-again": "Zkuste to znovu",
-  "back": "Zpět na domovskou stránku"
+  "back": "Zpět na domovskou stránku",
+  "reference": "Reference chyby: {digest}"
 }

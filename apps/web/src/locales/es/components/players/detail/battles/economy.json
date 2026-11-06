@@ -11,7 +11,7 @@
   "net": "Beneficio / batalla",
   "net-per-minute": "Beneficio / minuto de batalla",
   "net-per-minute-alive": "Beneficio / minuto vivo",
-  "repair": "Reparación",
+  "repair": "Reparar",
   "supplies": "Consumibles",
   "thin": "Menos de {min} batallas: lee esta fila como una anécdota.",
   "tier": "Nivel {tier}",

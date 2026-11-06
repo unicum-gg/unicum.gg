@@ -11,8 +11,8 @@
   "net": "Dobit / bitka",
   "net-per-minute": "Dobit / minut bitke",
   "net-per-minute-alive": "Dobit / minut živ",
-  "repair": "Поправка",
-  "supplies": "Потрошни материјали",
+  "repair": "Popravi",
+  "supplies": "Potrošna roba",
   "thin": "Manje od {min} bitki: čitaj ovaj red kao anegdotu.",
   "tier": "Ниво {tier}",
   "title": "Koliko je svaki režim platio {nickname}"

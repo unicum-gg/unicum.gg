@@ -2,5 +2,6 @@
   "title": "Jokin meni pieleen",
   "description": "Wargaming API ei vastannut oikein. Kyseessä on yleensä heidän puolellaan oleva väliaikainen ongelma.",
   "try-again": "Yritä uudelleen",
-  "back": "Takaisin kotiin"
+  "back": "Takaisin kotiin",
+  "reference": "Virheen viite: {digest}"
 }

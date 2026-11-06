@@ -11,7 +11,7 @@
   "net": "每场战斗收益",
   "net-per-minute": "每战斗分钟收益",
   "net-per-minute-alive": "每存活分钟收益",
-  "repair": "修理",
+  "repair": "修  复",
   "supplies": "给养",
   "thin": "少于 {min} 场战斗，仅应将此行视为个例。",
   "tier": "{tier}级",

@@ -2,5 +2,6 @@
   "title": "Kaut kas nogāja greizi",
   "description": "Wargaming API neatbildēja pareizi. Parasti tā ir īslaicīga problēma viņu pusē.",
   "try-again": "Mēģināt vēlreiz",
-  "back": "Atgriezties sākumā"
+  "back": "Atgriezties sākumā",
+  "reference": "Kļūdas atsauce: {digest}"
 }

@@ -11,7 +11,7 @@
   "net": "Pelnas / mūšis",
   "net-per-minute": "Pelnas / mūšio min.",
   "net-per-minute-alive": "Pelnas / gyvavimo min.",
-  "repair": "Remontas",
+  "repair": "Remontuoti",
   "supplies": "Ekipuotė",
   "thin": "Mažiau nei {min} mūšių, vertinkite šią eilutę kaip atskirą atvejį.",
   "tier": "Lygis {tier}",
