@@ -87,6 +87,15 @@ export async function generateMetadata({
 const DIRECTORIES: Directory[] = [
   { name: "Free Public APIs", href: "https://www.freepublicapis.com/unicum-api" },
   { name: "DevShelf", href: "https://devshelf.ritualdev.in/tools/unicumgg.html" },
+  { name: "API Tracker", href: "https://apitracker.io/a/unicum-gg" },
+  {
+    name: "Context7",
+    href: "https://context7.com/openapi/unicum_gg_api_openapi_json",
+  },
+  {
+    name: "Track Awesome List",
+    href: "https://www.trackawesomelist.com/public-apis/public-apis/",
+  },
 ];
 
 type Crumb = { name: string; href: string };
