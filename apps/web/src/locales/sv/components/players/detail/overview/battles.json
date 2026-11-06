@@ -77,6 +77,7 @@
   "survived-the-battle": "Överlevde striden",
   "destroyed": "Förstörda",
   "destroyed-by": "Förstörd av {nickname}",
+  "squad": "Pluton {number}",
   "report": {
     "statistics": "Statistik",
     "time": "Tid",

@@ -77,6 +77,7 @@
   "survived-the-battle": "在战斗中存活",
   "destroyed": "击毁",
   "destroyed-by": "被{nickname}击毁",
+  "squad": "组队模式 {number}",
   "report": {
     "statistics": "统计",
     "time": "时间",

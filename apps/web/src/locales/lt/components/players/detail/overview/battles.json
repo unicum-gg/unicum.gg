@@ -77,6 +77,7 @@
   "survived-the-battle": "Išgyveno mūšį",
   "destroyed": "Sunaikinta",
   "destroyed-by": "Sunaikino {nickname}",
+  "squad": "Būrys {number}",
   "report": {
     "statistics": "Statistika",
     "time": "Laikas",

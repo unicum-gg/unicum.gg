@@ -77,6 +77,7 @@
   "survived-the-battle": "Sobreviveu à batalha",
   "destroyed": "Destruídos",
   "destroyed-by": "Destruídos por {nickname}",
+  "squad": "Pelotão {number}",
   "report": {
     "statistics": "Estatísticas",
     "time": "Tempo",

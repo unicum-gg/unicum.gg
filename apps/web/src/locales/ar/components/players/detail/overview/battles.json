@@ -77,6 +77,7 @@
   "survived-the-battle": "نجا من المعركة",
   "destroyed": "مدمّرة",
   "destroyed-by": "تم تدميرها بواسطة {nickname}",
+  "squad": "الفصيلة رقم {number}",
   "report": {
     "statistics": "الإحصائيات",
     "time": "الوقت",

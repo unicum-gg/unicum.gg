@@ -77,6 +77,7 @@
   "survived-the-battle": "戦闘を生き残った",
   "destroyed": "撃破数",
   "destroyed-by": "{nickname}に撃破された",
+  "squad": "小隊 {number}",
   "report": {
     "statistics": "成績",
     "time": "時間",

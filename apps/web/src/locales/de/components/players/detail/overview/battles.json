@@ -77,6 +77,7 @@
   "survived-the-battle": "Gefecht überlebt",
   "destroyed": "Zerstört",
   "destroyed-by": "Zerstört von {nickname}",
+  "squad": "Zug {number}",
   "report": {
     "statistics": "Statistik",
     "time": "Zeit",

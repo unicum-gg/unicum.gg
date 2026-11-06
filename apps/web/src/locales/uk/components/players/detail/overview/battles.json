@@ -77,6 +77,7 @@
   "survived-the-battle": "Вижив у бою",
   "destroyed": "Знищено",
   "destroyed-by": "Знищено гравцем {nickname}",
+  "squad": "Взвод {number}",
   "report": {
     "statistics": "Статистика",
     "time": "Час",

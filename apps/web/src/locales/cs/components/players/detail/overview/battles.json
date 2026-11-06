@@ -77,6 +77,7 @@
   "survived-the-battle": "Přežil bitvu",
   "destroyed": "Zničeno",
   "destroyed-by": "Zničeno hráčem {nickname}",
+  "squad": "Četa číslo {number}",
   "report": {
     "statistics": "Statistiky",
     "time": "Čas",

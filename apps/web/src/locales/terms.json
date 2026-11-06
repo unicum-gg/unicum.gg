@@ -2734,7 +2734,8 @@
     "ammunition": "боеприпаси",
     "length": "продължителност",
     "ones": "такива",
-    "premium": "премиум"
+    "premium": "премиум",
+    "Platoon": "Взвод"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -4650,7 +4651,8 @@
     "ammunition": "munice",
     "length": "délka",
     "ones": "jedničky",
-    "premium": "prémiové"
+    "premium": "prémiové",
+    "Platoon": "Četa"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5723,7 +5725,8 @@
     "ammunition": "ammunition",
     "length": "længde",
     "ones": "dem",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Deling"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6789,7 +6792,8 @@
     "ammunition": "Munition",
     "length": "Länge",
     "ones": "Gefechte",
-    "premium": "Premium"
+    "premium": "Premium",
+    "Platoon": "Zug"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7861,7 +7865,8 @@
     "ammunition": "πυρομαχικά",
     "length": "διάρκεια",
     "ones": "μονάδες",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Ουλαμός"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8913,7 +8918,8 @@
     "ammunition": "munición",
     "length": "duración",
     "ones": "unos",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Pelotón"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9990,7 +9996,8 @@
     "ammunition": "ammukset",
     "length": "pituus",
     "ones": "kappaleet",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Osasto"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11046,7 +11053,8 @@
     "ammunition": "munitions",
     "length": "durée",
     "ones": "ceux",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Peloton"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -12958,7 +12966,8 @@
     "ammunition": "streljivo",
     "length": "trajanje",
     "ones": "one",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Vod"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14030,7 +14039,8 @@
     "ammunition": "lőszer",
     "length": "hossz",
     "ones": "egyesek",
-    "premium": "prémium"
+    "premium": "prémium",
+    "Platoon": "Szakasz"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15098,7 +15108,8 @@
     "ammunition": "munizioni",
     "length": "durata",
     "ones": "quelli",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Plotone"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16173,7 +16184,8 @@
     "ammunition": "弾薬",
     "length": "長さ",
     "ones": "もの",
-    "premium": "プレミアム"
+    "premium": "プレミアム",
+    "Platoon": "小隊"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -18095,7 +18107,8 @@
     "ammunition": "탄약",
     "length": "길이",
     "ones": "것들",
-    "premium": "프리미엄"
+    "premium": "프리미엄",
+    "Platoon": "소대"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19170,7 +19183,8 @@
     "ammunition": "šaudmenys",
     "length": "trukmė",
     "ones": "vienetai",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Būrys"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20231,7 +20245,8 @@
     "ammunition": "Munīcija",
     "length": "ilgums",
     "ones": "tie",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Vads"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21308,7 +21323,8 @@
     "ammunition": "munitie",
     "length": "lengte",
     "ones": "exemplaren",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Peloton"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22376,7 +22392,8 @@
     "ammunition": "ammunisjon",
     "length": "lengde",
     "ones": "enere",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Tropp"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23441,7 +23458,8 @@
     "ammunition": "amunicja",
     "length": "długość",
     "ones": "te",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Pluton"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24499,7 +24517,8 @@
     "ammunition": "munição",
     "length": "duração",
     "ones": "uns",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Pelotão"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25557,7 +25576,8 @@
     "ammunition": "muniție",
     "length": "durată",
     "ones": "cele",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Pluton"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26603,7 +26623,8 @@
     "ammunition": "Боеприпасы",
     "length": "Длительность",
     "ones": "те",
-    "premium": "премиум"
+    "premium": "премиум",
+    "Platoon": "Взвод"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -28520,7 +28541,8 @@
     "ammunition": "municija",
     "length": "dužina",
     "ones": "oni",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Vod"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29597,7 +29619,8 @@
     "ammunition": "ammunition",
     "length": "längd",
     "ones": "ettor",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Pluton"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30670,7 +30693,8 @@
     "ammunition": "กระสุน",
     "length": "ความยาว",
     "ones": "รายการ",
-    "premium": "พรีเมียม"
+    "premium": "พรีเมียม",
+    "Platoon": "หมวดรถถัง"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -32584,7 +32608,8 @@
     "ammunition": "mühimmat",
     "length": "süre",
     "ones": "olanlar",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Takım"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33646,7 +33671,8 @@
     "ammunition": "боєприпаси",
     "length": "тривалість",
     "ones": "ті",
-    "premium": "преміум"
+    "premium": "преміум",
+    "Platoon": "Взвод"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34697,7 +34723,8 @@
     "ammunition": "đạn dược",
     "length": "thời lượng",
     "ones": "các mục",
-    "premium": "premium"
+    "premium": "premium",
+    "Platoon": "Trung đội"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35770,6 +35797,7 @@
     "ammunition": "弹药",
     "length": "时长",
     "ones": "那些",
-    "premium": "高级"
+    "premium": "高级",
+    "Platoon": "组队模式"
   }
 }

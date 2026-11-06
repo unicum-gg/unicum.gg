@@ -77,6 +77,7 @@
   "survived-the-battle": "युद्ध में जीवित बचा",
   "destroyed": "नष्ट",
   "destroyed-by": "{nickname} द्वारा नष्ट किया गया",
+  "squad": "प्लाटून {number}",
   "report": {
     "statistics": "आँकड़े",
     "time": "समय",

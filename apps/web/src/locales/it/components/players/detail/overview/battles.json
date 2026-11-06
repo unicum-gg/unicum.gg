@@ -77,6 +77,7 @@
   "survived-the-battle": "Sopravvissuto alla battaglia",
   "destroyed": "Distrutto",
   "destroyed-by": "Distrutto da {nickname}",
+  "squad": "Plotone {number}",
   "report": {
     "statistics": "Statistiche",
     "time": "Tempo",

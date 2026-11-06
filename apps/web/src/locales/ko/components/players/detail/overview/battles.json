@@ -77,6 +77,7 @@
   "survived-the-battle": "전투에서 생존",
   "destroyed": "격파",
   "destroyed-by": "{nickname}에게 격파됨",
+  "squad": "소대 {number}",
   "report": {
     "statistics": "전적",
     "time": "시간",

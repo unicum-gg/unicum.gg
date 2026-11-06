@@ -1597,6 +1597,7 @@
   "components/players/detail/overview/battles:survived-the-battle": "b375297017bc",
   "components/players/detail/overview/battles:destroyed": "86fd480dbadc",
   "components/players/detail/overview/battles:destroyed-by": "fce23f73af1d",
+  "components/players/detail/overview/battles:squad": "f51cc010fd23",
   "components/players/detail/overview/battles:report.statistics": "2086b21f8f49",
   "components/players/detail/overview/battles:report.time": "6c82e6dd8680",
   "components/players/detail/overview/battles:report.earned": "257f305b043a",
