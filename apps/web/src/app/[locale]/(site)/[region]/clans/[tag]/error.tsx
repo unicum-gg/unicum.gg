@@ -5,14 +5,14 @@ import { useEffect } from "react";
 
 export default function ClanError({
   error,
-  reset,
+  retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  retry: () => void;
 }) {
   useEffect(() => {
     console.error("[clan page] error:", error);
   }, [error]);
 
-  return <ErrorView reset={reset} />;
+  return <ErrorView retry={retry} digest={error.digest} />;
 }

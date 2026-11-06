@@ -2,5 +2,6 @@
   "title": "Something went wrong",
   "description": "The Wargaming API didn’t respond properly. This is usually a temporary issue on their side.",
   "try-again": "Try again",
-  "back": "Back to home"
+  "back": "Back to home",
+  "reference": "Error reference: {digest}"
 }

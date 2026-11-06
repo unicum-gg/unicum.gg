@@ -5,14 +5,14 @@ import { useEffect } from "react";
 
 export default function PlayerError({
   error,
-  reset,
+  retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  retry: () => void;
 }) {
   useEffect(() => {
     console.error("[player page] error:", error);
   }, [error]);
 
-  return <ErrorView reset={reset} />;
+  return <ErrorView retry={retry} digest={error.digest} />;
 }

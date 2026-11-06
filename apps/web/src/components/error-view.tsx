@@ -8,7 +8,21 @@ import { styles } from "@/lib/styles";
 // Shared "something went wrong" card, the error twin of `NotFoundView`. Every
 // entity boundary (clan, player) renders the same two lines and the same pair
 // of buttons, so they say it once here rather than four times in English.
-export function ErrorView({ reset }: { reset: () => void }) {
+//
+// The button takes Next's `retry`, never `reset`: `reset` re-renders the
+// segment from what the client already holds, so an error thrown while the
+// server rendered it comes straight back and the button does nothing (a player
+// reported exactly that). `retry` asks the server for the segment again.
+//
+// The digest is what the server logged the error under, so a reader who
+// reports it hands us something to match in the logs rather than a screenshot.
+export function ErrorView({
+  retry,
+  digest,
+}: {
+  retry: () => void;
+  digest?: string;
+}) {
   const { t } = useTranslation("components/error-view");
 
   return (
@@ -23,7 +37,7 @@ export function ErrorView({ reset }: { reset: () => void }) {
         <div className="flex gap-3">
           <button
             type="button"
-            onClick={reset}
+            onClick={retry}
             className={`${buttonVariants({ variant: "primary" })} cursor-pointer`}
           >
             {t("try-again")}
@@ -32,6 +46,11 @@ export function ErrorView({ reset }: { reset: () => void }) {
             {t("back")}
           </Link>
         </div>
+        {digest && (
+          <p className="font-mono text-xs text-fd-muted-foreground">
+            {t("reference", { digest })}
+          </p>
+        )}
       </div>
     </div>
   );
