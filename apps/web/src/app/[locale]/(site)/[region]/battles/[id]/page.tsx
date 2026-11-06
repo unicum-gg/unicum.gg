@@ -4,7 +4,7 @@ import { RatingMetric } from "@unicum.gg/shared";
 import { battleDetail } from "@unicum.gg/core/battles/read";
 import { normaliseBattleId } from "@unicum.gg/core/battles/ingest";
 import { BattleDetail } from "@/components/players/detail/overview/battle-detail";
-import { ShareButton } from "@/components/share-button";
+import { BattlePageShare } from "@/components/players/detail/overview/battle-share";
 import { BattleTab } from "@/components/players/detail/overview/battle-types";
 import {
   Panel,
@@ -14,7 +14,6 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { getTranslation } from "@/lib/translations.server";
-import APP from "@/constants/app";
 
 /**
  * One battle, on a page of its own.
@@ -34,20 +33,22 @@ export default async function BattlePage({
   searchParams,
 }: {
   params: Promise<{ locale: string; region: string; id: string }>;
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; player?: string }>;
 }) {
   const { locale, region, id } = await params;
   // The view a shared link names, so a replay sent to somebody opens on the
   // replay rather than on the rosters above it. Anything else is the rosters.
-  const { tab } = await searchParams;
+  // The player it names is opened on them.
+  const { tab, player } = await searchParams;
   const initialTab = tab === BattleTab.Replay ? BattleTab.Replay : BattleTab.Teams;
+  const initialPlayer =
+    player && /^[0-9]{1,15}$/.test(player) ? Number(player) : null;
   if (!isRegion(region)) notFound();
   if (!/^[0-9]{1,20}$/.test(id)) notFound();
 
   const battle = await battleDetail(region, normaliseBattleId(id));
   if (!battle) notFound();
 
-  const url = `${APP.URL}/${locale}/${region}/battles/${battle.id}`;
   // The map and the date, which are facts about the battle rather than a label
   // to translate. The list's own heading reads "Battles of <nickname>", and
   // borrowing it here left the placeholder unfilled on a page that belongs to
@@ -63,11 +64,12 @@ export default async function BattlePage({
       <Panel>
         <PanelHeader className="flex flex-wrap items-center justify-between gap-2">
           <PanelTitle as="h1">{heading}</PanelTitle>
-          <ShareButton
-            title={heading}
-            url={url}
-            shareText={url}
-            nativeShareTitle={heading}
+          <BattlePageShare
+            region={region as Region}
+            battleId={battle.id}
+            arenaId={battle.map}
+            initialTab={initialTab}
+            initialPlayer={initialPlayer}
           />
         </PanelHeader>
         <PanelContent className="p-0">
@@ -87,6 +89,8 @@ export default async function BattlePage({
             personal={null}
             metric={RatingMetric.Wnx}
             initialTab={initialTab}
+            initialPlayer={initialPlayer}
+            syncUrl
             // The title above already carries one.
             shareable={false}
           />

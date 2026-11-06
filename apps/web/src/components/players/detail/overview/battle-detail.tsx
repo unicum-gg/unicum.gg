@@ -32,6 +32,7 @@ import {
   type MapOverlay,
 } from "./battle-types";
 import { BattleShare } from "./battle-share";
+import { useBattleView } from "./use-battle-view";
 import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
@@ -176,6 +177,8 @@ export function BattleDetail({
   metric,
   highlightAccount,
   initialTab = BattleTab.Teams,
+  initialPlayer = null,
+  syncUrl = false,
   shareable = true,
 }: {
   region: Region;
@@ -205,6 +208,11 @@ export function BattleDetail({
   /** The view to open on, which a shared link names. A view this battle
    * cannot offer falls back to the rosters. */
   initialTab?: BattleTab;
+  /** The player to open on, by battle-scoped vehicle id. */
+  initialPlayer?: number | null;
+  /** Keep the view and the opened player in the URL. Only where one battle
+   * owns the page: a player's list can hold several open at once. */
+  syncUrl?: boolean;
   /** Whether to offer the share button. Off on the battle's own page, whose
    * title already carries one. */
   shareable?: boolean;
@@ -217,9 +225,12 @@ export function BattleDetail({
   // The battle's own start, to the second: the game's Detailed Report opens on
   // it, and two battles in an evening are told apart by the clock.
   const time = date("HH:mm:ss");
-  // The row a reader has opened, by its battle-scoped vehicle id.
-  const [opened, setOpened] = useState<number | null>(null);
-  const [tab, setTab] = useState<BattleTab>(initialTab);
+  // The view, and the row a reader has opened by its battle-scoped vehicle id.
+  const { tab, setTab, opened, setOpened } = useBattleView({
+    syncUrl,
+    initialTab,
+    initialPlayer,
+  });
   // Experience, which is how the game's own results screen orders a team: it
   // is the one figure that already folds damage, assists, defence and the win
   // together, and a reader arriving from the end-of-battle screen finds the
@@ -373,6 +384,7 @@ export function BattleDetail({
                 battleId={battleId}
                 arenaId={arenaId}
                 replay={tab === BattleTab.Replay && data.hasReplay}
+                player={tab === BattleTab.Teams ? open?.id : undefined}
               />
             ) : null}
           </span>

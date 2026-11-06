@@ -32,6 +32,18 @@ export enum BattleTab {
 }
 
 /**
+ * The query params a battle's own page keeps its view in, so a link names the
+ * view and the player it was copied from. Here for the reason `BattleTab` is:
+ * the page reads them on the server.
+ */
+export enum BattleParam {
+  Tab = "tab",
+  /** The opened player, by battle-scoped vehicle id rather than nickname:
+   * a bot or an account we never named has a vehicle and no name. */
+  Player = "player",
+}
+
+/**
  * What the battle endpoint hands over, as the roster and its panel read it.
  *
  * Kept apart from both so the panel and the table agree by construction rather
