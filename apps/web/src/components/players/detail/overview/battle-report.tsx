@@ -160,12 +160,34 @@ export function BattleReport({
         },
   ];
 
-  // The breakdown when the economy is there, the flat total when it is not.
-  // The vehicle line always carries what the battle paid and earned, so a
-  // report that showed nothing at all until the mod started sending the
-  // breakdown would be hiding a figure it has.
+  // The breakdown when the economy is there, the flat figure when it is not.
+  // The vehicle line always carries what the battle itself paid (the public
+  // results' `credits` is the uploader's `creditsBase`), so a report that
+  // showed nothing at all until the mod started sending the breakdown would be
+  // hiding a figure it has.
+  //
+  // `money.credits` is the GROSS, before the bills: it sits above
+  // `creditsSubtotal` on nearly every battle and never equals it less the
+  // costs. So it is the "with bonuses" line, what the listed bonuses do not
+  // account for (the premium account, reserves the results do not itemise) is
+  // its own line, and what reached the account is computed. Printing the gross
+  // as credited turned a battle that cost 90,000 into one that paid 38,000.
+  const costs =
+    (money.repairCost ?? 0) + (money.ammoCost ?? 0) + (money.suppliesCost ?? 0);
+  const listed =
+    (money.creditsBase ?? 0) +
+    (money.creditsBooster ?? 0) +
+    (money.creditsEvent ?? 0) +
+    (money.creditsOrder ?? 0) +
+    (money.creditsWotPlus ?? 0) +
+    (money.creditsCompensation ?? 0) -
+    (money.creditsPenalty ?? 0);
+  const unlisted =
+    money.credits !== undefined && money.creditsBase !== undefined
+      ? money.credits - listed
+      : undefined;
   const credits: (Row | null)[] = money.credits === undefined
-    ? [line(t("report.credited"), own.credits)]
+    ? [line(t("report.earned-for-battle"), own.credits)]
     : [
     line(t("report.earned-for-battle"), money.creditsBase),
     line(t("report.reserves"), money.creditsBooster, { under: true }),
@@ -174,11 +196,18 @@ export function BattleReport({
     line(t("report.wot-plus"), money.creditsWotPlus, { under: true }),
     line(t("report.ally-fine"), money.creditsPenalty, { cost: true, under: true }),
     line(t("report.compensation"), money.creditsCompensation, { under: true }),
-    line(t("report.with-bonuses"), money.creditsSubtotal),
+    line(t("report.other-bonuses"), unlisted !== undefined && unlisted > 0 ? unlisted : undefined, {
+      under: true,
+    }),
+    line(t("report.with-bonuses"), money.credits),
     line(t("report.repair"), money.repairCost, { cost: true, under: true }),
     line(t("report.ammo"), money.ammoCost, { cost: true, under: true }),
     line(t("report.supplies"), money.suppliesCost, { cost: true, under: true }),
-    line(t("report.credited"), money.credits),
+    line(t("report.credited"), money.credits - costs, {
+      // A battle that cost more than it paid reads as a cost.
+      cost: money.credits < costs,
+      render: (v) => (v < 0 ? `-${count.format(-v)}` : count.format(v)),
+    }),
     line(t("report.piggy-bank"), money.piggyBank),
   ];
 

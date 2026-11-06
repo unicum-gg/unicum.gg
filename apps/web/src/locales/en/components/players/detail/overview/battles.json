@@ -124,9 +124,10 @@
     "free-xp": "Free Experience",
     "crew-xp": "Crew experience",
     "with-premium": "This account had premium.",
+    "other-bonuses": "Premium account and other bonuses",
     "with-bonuses": "With bonuses applied",
     "credited": "Credited to the account",
-    "not-a-sum": "Each line is a figure the game reports in its own right; they do not add up to one another.",
+    "not-a-sum": "The credits add up, from what the battle paid to what reached the account. The experience lines are each a figure the game reports in its own right and do not add up to one another.",
     "marks": "Mark of Excellence",
     "mark-of-excellence": "Progress",
     "mark-movement": "This battle"
