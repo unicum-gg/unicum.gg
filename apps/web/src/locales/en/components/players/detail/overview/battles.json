@@ -137,7 +137,7 @@
     "report": "Detailed report",
     "replay": "Replay"
   },
-  "destroyed-list": "Destroyed {names}",
+  "destroyed-list": "Has destroyed {names}",
   "replay": {
     "no-bounds": "This arena has no extent in the catalogue, so the positions cannot be placed on its minimap.",
     "play": "Play",
