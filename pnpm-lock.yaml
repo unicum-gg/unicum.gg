@@ -295,6 +295,19 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  apps/wgmods:
+    dependencies:
+      playwright-core:
+        specifier: 1.65.0
+        version: 1.65.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.5
+        version: 22.20.0
+      tsx:
+        specifier: ^4.19.2
+        version: 4.22.4
+
   apps/worker:
     dependencies:
       '@unicum.gg/core':
@@ -6136,6 +6149,11 @@ packages:
   pkce-challenge@5.0.1:
     resolution: {integrity: sha512-wQ0b/W4Fr01qtpHlqSqspcj3EhBvimsdh0KlHhH8HRZnMsEa0ea2fTULOXOS9ccQr3om+GcGRk4e+isrZWV8qQ==}
     engines: {node: '>=16.20.0'}
+
+  playwright-core@1.65.0:
+    resolution: {integrity: sha512-vNSKgH6YqtN7cdT/L334zo0a+YwkrpicyrHJlWWPIm/Q+Nn2SWInil01oT0mbu96U4GgoRtCYQD9CzJQgju+lA==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
@@ -13476,6 +13494,8 @@ snapshots:
       safe-buffer: 5.2.1
 
   pkce-challenge@5.0.1: {}
+
+  playwright-core@1.65.0: {}
 
   pluralize@8.0.0: {}
 

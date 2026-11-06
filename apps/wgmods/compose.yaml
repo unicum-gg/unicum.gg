@@ -1,0 +1,35 @@
+# Coolify "Docker Compose" resource: publishes unicum.gg-mod's GitHub releases
+# to wgmods.net (see src/index.ts), from a browser that stays logged in.
+#
+# /data is the whole point of the service: it holds the browser profile, which
+# IS the Wargaming session, and the state file. Losing the volume means one more
+# login through the remote browser, nothing worse.
+#
+# Set in the Coolify resource env:
+#   PUBLISH_WEBHOOK_SECRET   shared with the mod repo's release.yml, which signs
+#                            each request with it (HMAC-SHA256)
+#   LOGIN_TOKEN              opens the remote browser; long and random, since
+#                            whoever has it can use a logged-in Wargaming session
+#   PUBLIC_URL               this service's public address (the login link)
+#   DISCORD_WEBHOOK_URL      where alerts go; a PRIVATE channel, because the
+#                            login-needed alert carries LOGIN_TOKEN in its link
+#
+# No healthcheck: a 503 from a dead session is for a person to act on, and a
+# restart would not log anybody in.
+services:
+  wgmods:
+    build:
+      context: apps/wgmods
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    # Chromium wants more than Docker's 64 MB default /dev/shm.
+    shm_size: "512m"
+    volumes:
+      - wgmods-data:/data
+    environment:
+      PUBLISH_WEBHOOK_SECRET: ${PUBLISH_WEBHOOK_SECRET}
+      LOGIN_TOKEN: ${LOGIN_TOKEN}
+      PUBLIC_URL: ${PUBLIC_URL}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+volumes:
+  wgmods-data:
