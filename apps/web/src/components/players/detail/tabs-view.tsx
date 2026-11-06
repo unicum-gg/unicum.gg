@@ -23,6 +23,7 @@ import {
 } from "@/components/players/detail/overview";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
+import type { PlayerModeEconomy } from "@unicum.gg/shared";
 import {
   StrongholdTab,
   type StrongholdData,
@@ -136,6 +137,8 @@ export type PlayerTabsViewProps = {
   initialEncounters: PlayerBattleEncounters | null;
   /** The signed-in reader is this player. */
   isOwnProfile: boolean;
+  /** What each mode paid the player, server-rendered on the Battles tab. */
+  initialEconomy: PlayerModeEconomy | null;
 };
 
 export function PlayerTabsView({
@@ -158,6 +161,7 @@ export function PlayerTabsView({
   initialBattles,
   initialEncounters,
   isOwnProfile,
+  initialEconomy,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -408,6 +412,7 @@ export function PlayerTabsView({
           isOwnProfile={isOwnProfile}
           initialBattles={initialBattles}
           initialEncounters={initialEncounters}
+          initialEconomy={initialEconomy}
         />
       ) : onTournaments ? (
         <TournamentsTab

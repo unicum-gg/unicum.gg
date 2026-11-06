@@ -1,6 +1,4 @@
-import { headers } from "next/headers";
 import { isRegion } from "@unicum.gg/wargaming";
-import { auth } from "@unicum.gg/core/auth";
 import { isBattlesHidden } from "@unicum.gg/core/battles/privacy";
 import {
   MAX_RECENT_BATTLES,
@@ -16,7 +14,7 @@ import { pictureBattleRows } from "@/services/battles/rows";
 import { measured } from "@/services/perf";
 import { playerBattleFacets } from "@unicum.gg/core/battles/filters";
 import { battleFilterFrom } from "@/services/battles/filter";
-import { wgIdentityFromEmail } from "@/lib/wg-session";
+import { isOwner } from "@/services/battles/owner";
 
 /**
  * Player battles
@@ -125,11 +123,4 @@ async function GET__perf(
     console.error(`[api/${region}/players/${decoded}/battles] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });
   }
-}
-
-/** Whether the signed-in reader is this account, on this region. */
-async function isOwner(region: string, accountId: number): Promise<boolean> {
-  const session = await auth.api.getSession({ headers: await headers() });
-  const wg = wgIdentityFromEmail(session?.user?.email);
-  return !!wg && wg.region === region && wg.accountId === accountId;
 }

@@ -14,6 +14,7 @@ import type { PlayerTournamentRecord } from "@/components/players/detail/tournam
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
+import type { PlayerModeEconomy } from "@unicum.gg/shared";
 import { useCookie } from "@/hooks/use-cookie";
 import STORAGE from "@/constants/storage";
 import { unicum } from "@/services/sdk";
@@ -54,6 +55,7 @@ export function PlayerProfile({
   initialOnslaught,
   initialBattles,
   initialEncounters,
+  initialEconomy,
 }: {
   region: Region;
   nickname: string;
@@ -88,6 +90,8 @@ export function PlayerProfile({
   initialBattles: PlayerBattlesPayload | null;
   /** Who the player meets in those battles, server-rendered on the Battles tab. */
   initialEncounters: PlayerBattleEncounters | null;
+  /** What each mode paid the player, server-rendered on the Battles tab. */
+  initialEconomy: PlayerModeEconomy | null;
 }) {
   // The active metric is client state (the cookie), not a server prop: the page
   // is statically cached and metric-agnostic (the payload carries all three
@@ -212,6 +216,7 @@ export function PlayerProfile({
         initialBattles={initialBattles}
         initialEncounters={initialEncounters}
         isOwnProfile={isOwnProfile}
+        initialEconomy={initialEconomy}
       />
     </>
   );

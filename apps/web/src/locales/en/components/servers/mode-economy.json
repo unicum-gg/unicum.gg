@@ -1,0 +1,17 @@
+{
+  "battle-length": "Battle length",
+  "battles": "Battles",
+  "credits-per-battle": "Credits / battle",
+  "credits-per-minute": "Credits / minute",
+  "explanation": "Counted from the battles uploaded through the unicum.gg mod over the last {days} days, {records} vehicle records in all: each uploaded battle carries what it paid every one of its thirty participants, bots excluded. Credits and experience are the battle’s own, before the premium account, reserves, missions and costs, so nothing about a player’s account changes them. A minute is a minute of battle, the battle’s own length. Wargaming publishes no credits per mode for anyone.",
+  "mode": "Mode",
+  "net-explanation": "Net is what landed in the account once repairs, ammunition and consumables were paid, premium and bonuses included. Only the uploader’s own results carry it, so it rests on the mod’s players alone and is shown once {min} of them stand behind a mode: it also carries their habits, like a premium account or premium shells.",
+  "net-pending": "What lands in the account once repairs, ammunition and consumables are paid is carried by the uploader’s own results alone, so it rests on the mod’s players only. It appears here once {min} of them have played a mode at this tier.",
+  "net-per-battle": "Net / battle",
+  "net-sample": "{battles} battles from {players} players using the mod",
+  "players": "Players",
+  "tier": "Tier {tier}",
+  "title": "Which mode pays best on {label}",
+  "xp-per-battle": "XP / battle",
+  "xp-per-minute": "XP / minute"
+}

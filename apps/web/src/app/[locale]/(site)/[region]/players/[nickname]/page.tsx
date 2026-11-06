@@ -18,6 +18,7 @@ import type { PlayerTournamentRecord } from "@/components/players/detail/tournam
 import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import type { PlayerBattlesPayload } from "@/components/players/detail/overview/battles";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
+import type { PlayerModeEconomy } from "@unicum.gg/shared";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -360,6 +361,16 @@ async function PlayerProfileServer({
           .then((r) => r as unknown as PlayerBattleEncounters)
           .catch(() => null)
       : Promise.resolve(null);
+  // What each mode paid the player, the panel between those two. Same reason.
+  const economyPromise: Promise<PlayerModeEconomy | null> =
+    section === PlayerSection.Battles
+      ? unicum
+          .region(region)
+          .players(decoded)
+          .battlesEconomy()
+          .then((r) => r as unknown as PlayerModeEconomy)
+          .catch(() => null)
+      : Promise.resolve(null);
   const detail = await loadDetail(region, decoded);
   if (detail && "locked" in detail) {
     return <AccountLockedView
@@ -524,6 +535,7 @@ async function PlayerProfileServer({
 
   const initialBattles = await battlesPromise;
   const initialEncounters = await encountersPromise;
+  const initialEconomy = await economyPromise;
 
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
@@ -573,6 +585,7 @@ async function PlayerProfileServer({
         initialOnslaught={initialOnslaught}
         initialBattles={initialBattles}
         initialEncounters={initialEncounters}
+        initialEconomy={initialEconomy}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side
           borders run down to the footer instead of stopping at the last panel,

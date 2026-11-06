@@ -46,6 +46,8 @@ export enum BattleMode {
   Winback = 44,
   RandomNp2 = 46,
   TournamentOnslaught = 47,
+  /** Onslaught's training rooms (`TRAINING_COMP7`). */
+  OnslaughtTraining = 48,
   OnslaughtLight = 49,
   /** The Halloween event, by difficulty. Injected by the event's own
    * scripts rather than declared with the rest, and reused from one year's
@@ -86,6 +88,7 @@ export const BATTLE_MODE_LABEL: Record<BattleMode, string> = {
   [BattleMode.Winback]: "Winback",
   [BattleMode.RandomNp2]: "Random Battle",
   [BattleMode.TournamentOnslaught]: "Tournament",
+  [BattleMode.OnslaughtTraining]: "Training",
   [BattleMode.OnslaughtLight]: "Onslaught",
   [BattleMode.Halloween]: "Halloween",
   [BattleMode.HalloweenMedium]: "Halloween (Medium)",

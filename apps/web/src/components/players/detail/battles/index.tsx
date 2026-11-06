@@ -24,6 +24,8 @@ import { PlayerBattlesOffer } from "@/components/players/detail/overview/battles
 import { PlayerBattlesProvenance } from "@/components/players/detail/overview/battles-provenance";
 import { PlayerBattlesTable } from "@/components/players/detail/overview/battles-table";
 import type { PlayerBattleEncounters } from "@unicum.gg/core/battles/met";
+import type { PlayerModeEconomy } from "@unicum.gg/shared";
+import { BattleEconomy } from "./economy";
 import { BattleEncounters } from "./encounters";
 import { BattleFilters } from "./filters";
 import { BattlesPrivateNotice, BattlesPrivateOwnerNote } from "./privacy";
@@ -50,6 +52,7 @@ export function BattlesTab({
   isOwnProfile,
   initialBattles,
   initialEncounters,
+  initialEconomy,
 }: {
   region: Region;
   nickname: string;
@@ -65,6 +68,8 @@ export function BattlesTab({
   initialBattles: PlayerBattlesPayload | null;
   /** Who the player meets in their battles, server-rendered with that page. */
   initialEncounters: PlayerBattleEncounters | null;
+  /** What each mode paid the player, server-rendered with that page. */
+  initialEconomy: PlayerModeEconomy | null;
 }) {
   const { t } = useTranslation(
     "components/players/detail/overview/battles",
@@ -186,6 +191,10 @@ export function BattlesTab({
           </>
         )}
       </Panel>
+      {/* What each mode paid is read off the list, so it is private with it. */}
+      {total > 0 && !refused ? (
+        <BattleEconomy region={region} nickname={nickname} initial={initialEconomy} />
+      ) : null}
       {/* Who they met stays public when the list is private: it says who they
           played beside, not what was played. */}
       {total > 0 || refused ? (

@@ -1,0 +1,19 @@
+{
+  "ammo": "Ammunition",
+  "battles": "Battles",
+  "duration": "Battle length",
+  "earned": "Earned",
+  "event-vehicles": "Event vehicles",
+  "explanation": "Counted from the {battles} battles this player uploaded through the unicum.gg mod over the last {days} days, the only results that carry their own credits, in every mode that paid them, events included. All figures are per battle except the per-minute ones. Profit is what was left in the account: everything the battle paid them (premium account and reserves included) less the repair, ammunition and consumable bills, ammunition counting only what was paid in credits. Per minute of battle is the pace for a player who sees every battle out, per minute alive the pace for one who leaves for the next battle once destroyed, each beside the time it was divided by. The mode in colour paid the most per minute of battle at this tier.",
+  "lifetime": "Time alive",
+  "mode": "Mode",
+  "mode-at-tier": "Mode, tier {tier}",
+  "net": "Profit / battle",
+  "net-per-minute": "Profit / min of battle",
+  "net-per-minute-alive": "Profit / min alive",
+  "repair": "Repair",
+  "supplies": "Consumables",
+  "thin": "Fewer than {min} battles: read this row as an anecdote.",
+  "tier": "Tier {tier}",
+  "title": "What each mode paid {nickname}"
+}

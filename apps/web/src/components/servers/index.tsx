@@ -2,6 +2,7 @@ import { Interpolate } from "@/components/interpolate";
 import { getTranslation } from "@/lib/translations.server";
 import {
   DEFAULT_ACTIVITY_WINDOW,
+  type ModeEconomy,
   type PlayerActivity,
   type PlayerDistribution,
   type ServerComparison,
@@ -24,6 +25,7 @@ import { ServersDashboard } from "./dashboard";
 import { DistributionPanel } from "./distribution-panel";
 import { formatMoment } from "./format";
 import { ServersLiveHeader } from "./live-header";
+import { ModeEconomyPanel } from "./mode-economy";
 import { TierWinratePanel } from "./tier-winrate";
 
 /**
@@ -61,7 +63,7 @@ function emptyStats(region: Region): ServerStats {
 
 export async function ServersView({ region, locale }: { region: Region; locale: string }) {
   const { t } = await getTranslation("components/servers/index", locale);
-  const [stats, comparison, distribution, tierWinrate, activity] =
+  const [stats, comparison, distribution, tierWinrate, activity, modeEconomy] =
     await Promise.all([
       buildSafe(
         () => unicum.region(region).server.stats(DEFAULT_RANGE),
@@ -94,6 +96,14 @@ export async function ServersView({ region, locale }: { region: Region; locale: 
         .region(region)
         .players.activity(DEFAULT_ACTIVITY_WINDOW)
         .then((a) => a as unknown as PlayerActivity)
+        .catch(() => null),
+      // Same deal once more: 404 until the hourly pass has aggregated this
+      // region's recorded battles, and a region with too few of them has no
+      // row worth reading, which leaves the panel out too.
+      unicum
+        .region(region)
+        .modesEconomy()
+        .then((e) => e as unknown as ModeEconomy)
         .catch(() => null),
     ]);
 
@@ -170,6 +180,14 @@ export async function ServersView({ region, locale }: { region: Region; locale: 
           <PanelSeparator />
 
           <ActivityPanel activity={activity} region={region} />
+        </>
+      ) : null}
+
+      {modeEconomy && modeEconomy.rows.length > 0 ? (
+        <>
+          <PanelSeparator />
+
+          <ModeEconomyPanel economy={modeEconomy} region={region} />
         </>
       ) : null}
 

@@ -109,6 +109,15 @@ class PlayerClient {
     );
   }
 
+  /** Player profit by mode */
+  battlesEconomy() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/battles/economy", path),
+      () => this.api.GET("/{region}/players/{nickname}/battles/economy", { params: { path } }),
+    );
+  }
+
   /** Players met in battle */
   battlesPlayers(query?: QueryOf<"/{region}/players/{nickname}/battles/players">) {
     const path = { region: this.region, nickname: this.nickname };
@@ -1019,6 +1028,14 @@ class RegionClient {
       new BattleClient(this.api, this.baseUrl, this.region, id)) as BattlesNamespace;
 
     return ns;
+  }
+
+  /** Credits and experience by battle mode */
+  modesEconomy() {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/modes/economy", { region: this.region }),
+      () => this.api.GET("/{region}/modes/economy", { params: { path: { region: this.region } } }),
+    );
   }
 
   /** Coverage */

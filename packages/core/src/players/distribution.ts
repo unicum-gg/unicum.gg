@@ -21,6 +21,7 @@ import {
 import { REGIONS, type Region, type VehicleType } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
+import { recomputeModeEconomy } from "@unicum.gg/core/battles/mode-economy";
 import { recordPlayerActivity } from "./activity";
 
 /**
@@ -278,6 +279,10 @@ export async function loadPlayerDistribution(
  * cadence and in the same sequence, where it cannot land beside one of these
  * scans. It is recorded in its own try, since the two answers are independent
  * and a failure to record a day must not cost the histograms their hour.
+ *
+ * The mode economy rides it for the same reason: one more region-wide
+ * aggregate feeding the servers page, read off `*_battles` rather than the
+ * player table, in a try of its own.
  */
 export async function refreshPlayerDistributions(): Promise<number> {
   let ok = 0;
@@ -301,6 +306,18 @@ export async function refreshPlayerDistributions(): Promise<number> {
     } catch (err) {
       console.error(
         `[player-distribution-cron] ${region} activity failed:`,
+        err,
+      );
+    }
+    try {
+      const start = Date.now();
+      const rows = await recomputeModeEconomy(region);
+      console.log(
+        `[player-distribution-cron] ${region} mode economy: ${rows} rows in ${Date.now() - start}ms`,
+      );
+    } catch (err) {
+      console.error(
+        `[player-distribution-cron] ${region} mode economy failed:`,
         err,
       );
     }

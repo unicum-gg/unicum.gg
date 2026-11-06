@@ -339,6 +339,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/battles/economy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player profit by mode
+         * @description What each battle mode paid this player at each tier over the last 90 days: credits earned per battle, the repair, ammunition and consumable bills, and what landed in the account, per battle and per minute of battle. Wargaming publishes no credits for anyone, so this is read from the battles the player uploaded themselves through the unicum.gg mod, the only results that carry their own wallet; battles somebody else uploaded are not counted. Empty rows when they have uploaded none. A player who keeps their battle list to themselves keeps this too: it then answers `hidden: true` with no rows to anyone but them, signed in. 404 when the nickname is unknown in this region.
+         */
+        get: operations["get-{region}-players-{nickname}-battles-economy"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/battles/players": {
         parameters: {
             query?: never;
@@ -1491,6 +1511,26 @@ export interface paths {
          * @description Every badge a chat message in this Twitch channel can carry, with its images: Twitch's global badges, with the channel's own subscriber and bits images in place of the global ones they replace. A chat client receives only `set/version` pairs with each message (the IRC `badges` tag), which this resolves. 404 when the login is not a Twitch channel. Cached one hour.
          */
         get: operations["get-twitch-{login}-badges"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/modes/economy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Credits and experience by battle mode
+         * @description What each battle mode pays at each tier over the last 90 days: credits and experience per battle and per minute of battle, battle length, and, for the mod's own players, what landed in the account once repairs, ammunition and consumables were paid. Wargaming publishes no credits per mode for anyone, so every figure is counted from the battles uploaded through the unicum.gg mod, each of which carries the battle's own credits for all thirty participants. Rebuilt hourly. 404 until the first run. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-modes-economy"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4660,6 +4700,72 @@ export interface components {
          * @enum {string}
          */
         minTierField: "6" | "8" | "10";
+        /** @description What each battle mode pays, tier by tier, read from the recorded battles. */
+        ModeEconomy: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            /** @description How far back the battles are counted. */
+            windowDays: number;
+            /** @description One row per (mode, tier) holding enough records to read, highest tier first. Compare modes within a tier: a vehicle earns by its tier and the modes do not share one. */
+            rows: components["schemas"]["ModeEconomyRow"][];
+            /**
+             * Format: date-time
+             * @description When the rows were last rebuilt (hourly).
+             */
+            computedAt: Date | null;
+        };
+        /** @description What each battle mode pays, tier by tier, read from the recorded battles. */
+        ModeEconomyResponse: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            /** @description How far back the battles are counted. */
+            windowDays: number;
+            /** @description One row per (mode, tier) holding enough records to read, highest tier first. Compare modes within a tier: a vehicle earns by its tier and the modes do not share one. */
+            rows: components["schemas"]["ModeEconomyRow"][];
+            /**
+             * Format: date-time
+             * @description When the rows were last rebuilt (hourly).
+             */
+            computedAt: Date | null;
+        };
+        /** @description What one battle mode pays at one tier. */
+        ModeEconomyRow: {
+            /**
+             * @description The battle mode this row was counted in.
+             * @enum {string}
+             */
+            mode: "random" | "onslaught" | "skirmish" | "advance";
+            tier: number;
+            battles: number;
+            /** @description Vehicle records: one account's part in one battle, every participant of each recorded battle, bots excluded. */
+            records: number;
+            players: number;
+            /** @description Credits the battle itself paid, per record: before the premium account, reserves, missions and every cost, so nothing about a player's account leaks into it. */
+            creditsPerBattle: number;
+            /** @description The same credits per minute of battle (the battle's own length). */
+            creditsPerMinute: number;
+            xpPerBattle: number;
+            xpPerMinute: number;
+            /** @description Mean battle length, in seconds. */
+            avgDuration: number;
+            /** @description Share of records on the winning side, 0..1. */
+            winrate: number;
+            /** @description Battles behind the net figures: the uploader's own economy, which only the uploader's results carry. */
+            netRecords: number;
+            netPlayers: number;
+            /** @description What an uploader earned per battle, premium and bonuses included, before repairs, ammunition and consumables. Null with no record. */
+            grossPerBattle: number | null;
+            /** @description Repairs, ammunition and consumables per battle. Null with no record. */
+            costsPerBattle: number | null;
+            /** @description Gross minus costs: what landed in the account. A small sample of the mod's own players, carrying their habits (premium account, gold shells), so read it with netPlayers. */
+            netPerBattle: number | null;
+        };
         moduleShell: {
             type: string;
             damage: number;
@@ -5348,6 +5454,56 @@ export interface components {
             tiers: number[];
             languages: components["schemas"]["MarksLanguageStats"][];
             coverage: components["schemas"]["MarksCoverage"];
+        };
+        /** @description What each battle mode paid one player, tier by tier. */
+        PlayerModeEconomy: {
+            accountId: number;
+            nickname: string;
+            /** @description How far back the battles are counted. */
+            windowDays: number;
+            /** @description One row per (mode, tier) the player has uploaded battles in, highest tier first. Empty when they have uploaded none. */
+            rows: components["schemas"]["PlayerModeEconomyRow"][];
+            /** @description The player keeps their battle list to themselves, and this with it. Anyone else then gets no rows; the player, signed in, gets their own as usual. */
+            hidden?: boolean;
+        };
+        /** @description What each battle mode paid one player, tier by tier. */
+        PlayerModeEconomyResponse: {
+            accountId: number;
+            nickname: string;
+            /** @description How far back the battles are counted. */
+            windowDays: number;
+            /** @description One row per (mode, tier) the player has uploaded battles in, highest tier first. Empty when they have uploaded none. */
+            rows: components["schemas"]["PlayerModeEconomyRow"][];
+            /** @description The player keeps their battle list to themselves, and this with it. Anyone else then gets no rows; the player, signed in, gets their own as usual. */
+            hidden?: boolean;
+        };
+        /** @description What one battle mode paid this player at one tier. */
+        PlayerModeEconomyRow: {
+            /** @description The game's bonusType this row is named after. Every mode the player was paid in counts, events included; variants the game names alike (the Random Battle economies) are folded into one row. */
+            battleType: number;
+            /** @description The vehicle's tier, or 0 for an event vehicle the vehicle catalogue does not hold. */
+            tier: number;
+            battles: number;
+            /** @description Share of those battles won, 0..1. */
+            winrate: number;
+            /** @description Mean battle length, in seconds. */
+            avgDuration: number;
+            /** @description Mean time the player stayed alive, in seconds (the battle's length when they survived). */
+            avgLifetime: number;
+            /** @description Credits earned per battle, premium account and bonuses included, before repairs, ammunition and consumables. */
+            grossPerBattle: number;
+            repairPerBattle: number;
+            /** @description The credits spent on ammunition per battle. Gold spent on shells is not in it. */
+            ammoPerBattle: number;
+            suppliesPerBattle: number;
+            /** @description Gross less repairs, ammunition and consumables: what landed in the account. */
+            netPerBattle: number;
+            /** @description The same per minute of battle (the battle's own length): the pace for a player who sees every battle out. */
+            netPerMinute: number;
+            /** @description The same per minute alive: the pace for a player who leaves for the next battle once destroyed. */
+            netPerMinuteAlive: number;
+            /** @description Share of those battles played with a premium account, 0..1. */
+            premiumShare: number;
         };
         /** @description A player's standing at one instant. */
         PlayerOnslaughtPoint: {
@@ -8424,6 +8580,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-players-{nickname}-battles-economy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerModeEconomy"];
+                };
+            };
+        };
+    };
     "get-{region}-players-{nickname}-battles-players": {
         parameters: {
             query?: {
@@ -9991,6 +10175,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TwitchChatBadgesResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-modes-economy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModeEconomy"];
                 };
             };
         };

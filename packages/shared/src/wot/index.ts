@@ -22,6 +22,7 @@ export * from "./server-stats";
 export * from "./player-activity";
 export * from "./player-distribution";
 export * from "./tier-winrate";
+export * from "./mode-economy";
 export * from "./tank-ratings";
 export * from "./tank-modes";
 export * from "./tank-stats";
