@@ -18,7 +18,7 @@ import Link from "@/components/link";
 import ROUTES from "@/constants/routes";
 import { numberFormat } from "@/lib/format";
 import { PlayerSection, playerSectionHref } from "@/components/players/detail/tabs";
-import { BattlesPrivateNotice } from "@/components/players/detail/battles/privacy";
+import { BattlesPrivateNotice, BattlesPrivateOwnerNote } from "@/components/players/detail/battles/privacy";
 import { PlayerBattlesOffer } from "./battles-offer";
 import { PlayerBattlesProvenance } from "./battles-provenance";
 import { PlayerBattlesTable, type PlayerBattleRow } from "./battles-table";
@@ -128,6 +128,8 @@ export function PlayerBattlesPanel({
           />
         ) : (
           <>
+            {/* Only the owner is handed rows under the flag. */}
+            {data.hidden ? <BattlesPrivateOwnerNote /> : null}
             <PlayerBattlesProvenance />
             <PanelContent className="p-0">
               <PlayerBattlesTable
