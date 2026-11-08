@@ -11,7 +11,7 @@ import {
 import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { SegmentedControl } from "@/components/segmented-control";
-import { LOADOUT_MODE_NAME_KEY } from "@/components/tanks/detail/loadouts/mode-names";
+import { economyModeName } from "@/components/game-name";
 import { useTierParam } from "@/hooks/use-tier-param";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
@@ -20,7 +20,7 @@ import { formatPlayers, formatPlayersCompact } from "./format";
 /**
  * Which battle mode pays best, one tier at a time.
  *
- * A table rather than a chart: four modes and six figures each, read across a
+ * A table rather than a chart: a handful of modes and six figures each, read across a
  * row, and the one comparison everyone comes for (credits per minute) carries a
  * bar inside its own cell so it still reads at a glance. Rows are ranked on it,
  * since a player farming credits is buying time, and per battle a short mode
@@ -37,10 +37,12 @@ function tierLabel(tier: number): string {
 }
 
 /** The tier the panel opens on: the one most modes are measured at, the
- * highest on a tie, since that is where the comparison is the fullest. */
+ * highest on a tie, since that is where the comparison is the fullest. The
+ * event vehicles (tier 0) only open it when nothing else was measured. */
 function defaultTier(rows: ModeEconomyRow[]): number | null {
+  const tiered = rows.some((row) => row.tier > 0) ? rows.filter((row) => row.tier > 0) : rows;
   const modes = new Map<number, number>();
-  for (const row of rows) modes.set(row.tier, (modes.get(row.tier) ?? 0) + 1);
+  for (const row of tiered) modes.set(row.tier, (modes.get(row.tier) ?? 0) + 1);
   let best: number | null = null;
   for (const [tier, count] of modes) {
     if (best === null || count > modes.get(best)! || (count === modes.get(best)! && tier > best)) {
@@ -64,6 +66,9 @@ export function ModeEconomyPanel({
 }) {
   const { locale } = useLocale();
   const { t } = useTranslation("components/servers/mode-economy");
+  const { t: tPlayerEconomy } = useTranslation("components/players/detail/battles/economy");
+  const tierName = (each: number) =>
+    each === 0 ? tPlayerEconomy("event-vehicles") : t("tier", { tier: tierLabel(each) });
 
   const tiers = useMemo(
     () => [...new Set(economy.rows.map((row) => row.tier))].sort((a, b) => b - a),
@@ -82,7 +87,7 @@ export function ModeEconomyPanel({
           onSelect={(next) => setTier(Number(next))}
           segments={tiers.map((each) => ({
             id: String(each),
-            label: t("tier", { tier: tierLabel(each) }),
+            label: tierName(each),
           }))}
         />
       </PanelHeader>
@@ -94,7 +99,7 @@ export function ModeEconomyPanel({
           <TierTable
             key={each}
             rows={economy.rows.filter((row) => row.tier === each)}
-            caption={t("tier", { tier: tierLabel(each) })}
+            caption={tierName(each)}
             hidden={each !== tier}
           />
         ))}
@@ -172,7 +177,7 @@ function TierTable({
                       index === 0 && "text-brand",
                     )}
                   >
-                    {tGame(LOADOUT_MODE_NAME_KEY[row.mode])}
+                    {economyModeName(row.mode, tGame)}
                   </td>
                   <td className="px-4 py-2.5 text-right tabular-nums">
                     {formatPlayers(row.battles, locale)}

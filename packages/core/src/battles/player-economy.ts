@@ -1,12 +1,12 @@
 import { sql } from "drizzle-orm";
 import {
   battlesByRegion,
+  economyModeKey,
   loadoutModeOf,
   LOADOUT_MODES,
   MODE_ECONOMY_WINDOW_DAYS,
   type PlayerModeEconomy,
   type PlayerModeEconomyRow,
-  playerEconomyModeKey,
   vehiclesByRegion,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -92,7 +92,7 @@ export async function playerModeEconomy(
   // named after the variant that holds the most battles.
   const folded = new Map<string, Totals & { lead: number }>();
   for (const row of rows) {
-    const key = `${playerEconomyModeKey(row.battle_type)}:${row.tier}`;
+    const key = `${economyModeKey(row.battle_type)}:${row.tier}`;
     const held = folded.get(key);
     const totals = held ?? {
       battleType: row.battle_type,

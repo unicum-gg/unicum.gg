@@ -1,10 +1,14 @@
 import type { TranslateFunction } from "@onruntime/translations";
 import {
+  BATTLE_MODE_LABEL,
+  BattleMode,
   BattleType,
+  type LoadoutMode,
   TANK_MODE_VOCABULARY_KEY,
   resolveMapMode,
   type TankBattleMode,
 } from "@unicum.gg/shared";
+import { LOADOUT_MODE_NAME_KEY } from "@/components/tanks/detail/loadouts/mode-names";
 
 /**
  * A battle type's name in the reader's language.
@@ -26,6 +30,26 @@ export function battleTypeName(
   return tGame(`battle-types.${type}`, {
     onslaught: tGame(`battle-types.${BattleType.Onslaught}`),
   });
+}
+
+/** The economy modes the vocabulary also names, keyed on their English name. */
+const ECONOMY_MODE_BATTLE_TYPE: Record<string, BattleType> = {
+  [BATTLE_MODE_LABEL[BattleMode.Frontline]]: BattleType.Frontline,
+  [BATTLE_MODE_LABEL[BattleMode.SteelHunterSolo]]: BattleType.BattleRoyale,
+  [BATTLE_MODE_LABEL[BattleMode.StoryMode]]: BattleType.StoryMode,
+};
+
+/**
+ * An `economyModeKey` as the reader should see it: the game's own word where
+ * the vocabulary has one, else the English name the game gives the mode, so a
+ * mode nobody catalogued still arrives on the table under its name.
+ */
+export function economyModeName(mode: string, tGame: TranslateFunction): string {
+  const loadout = LOADOUT_MODE_NAME_KEY[mode as LoadoutMode];
+  if (loadout) return tGame(loadout);
+  const type = ECONOMY_MODE_BATTLE_TYPE[mode];
+  if (type) return battleTypeName(type, tGame);
+  return mode.startsWith("type-") ? `#${mode.slice("type-".length)}` : mode;
 }
 
 /**

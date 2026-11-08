@@ -2,16 +2,17 @@
 // safe (only zod plus the shared param schemas), so the servers page can import
 // it too.
 import { z } from "zod";
-import { LoadoutMode } from "@unicum.gg/shared";
-import { type EnumMeta, regionPath } from "@/services/openapi/schemas";
+import { regionPath } from "@/services/openapi/schemas";
 
 const modeEconomyRow = z
   .object({
-    mode: z.enum(LoadoutMode).meta({
-      description: "The battle mode this row was counted in.",
-      "x-enum-source": "LOADOUT_MODE",
-    } as EnumMeta),
-    tier: z.number().int(),
+    mode: z.string().meta({
+      description:
+        "The battle mode this row was counted in: random, onslaught, skirmish or advance, else the game's own English name for the mode (Frontline, Halloween...). Open-ended: every mode that paid credits in the window has rows.",
+    }),
+    tier: z.number().int().meta({
+      description: "The vehicle's tier, or 0 for an event vehicle the vehicle catalogue does not hold.",
+    }),
     battles: z.number().int(),
     records: z.number().int().meta({
       description:

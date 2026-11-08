@@ -8,7 +8,6 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 import { Region } from "@unicum.gg/wargaming";
-import type { LoadoutMode } from "../../wot/loadout-stats";
 
 /**
  * What each battle mode pays at each tier, over the recorded battles of the
@@ -27,7 +26,7 @@ export function makeModeEconomyTable(region: string) {
   return pgTable(
     `${region}_mode_economy`,
     {
-      mode: text("mode").$type<LoadoutMode>().notNull(),
+      mode: text("mode").notNull(),
       tier: smallint("tier").notNull(),
       windowDays: integer("window_days").notNull(),
       battles: integer("battles").notNull(),

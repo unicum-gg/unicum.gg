@@ -1,6 +1,6 @@
 import type { Region } from "@unicum.gg/wargaming";
-import { modeLabel } from "./battle-modes";
-import { LOADOUT_WINDOW_DAYS, loadoutModeOf, type LoadoutMode } from "./loadout-stats";
+import { BATTLE_MODE_LABEL, modeLabel } from "./battle-modes";
+import { LOADOUT_WINDOW_DAYS, loadoutModeOf } from "./loadout-stats";
 
 /**
  * What each battle mode pays, tier by tier, read from the recorded battles.
@@ -69,7 +69,8 @@ export const MODE_ECONOMY_MIN_RECORDS = 50;
 
 /** One mode at one tier. */
 export type ModeEconomyRow = {
-  mode: LoadoutMode;
+  /** What `economyModeKey` counts the battles under. */
+  mode: string;
   tier: number;
   /** Battles counted. */
   battles: number;
@@ -162,15 +163,24 @@ export type PlayerModeEconomy = {
  * more than an anecdote; thinner rows are still shown, faded. */
 export const PLAYER_MODE_ECONOMY_MIN_BATTLES = 5;
 
+/** The first `bonusType` the game gives each name: objects iterate integer
+ * keys in ascending order, so the Random Battle economies lead with Random. */
+const FIRST_MODE_NAMED = new Map<string, number>();
+for (const [type, label] of Object.entries(BATTLE_MODE_LABEL)) {
+  if (!FIRST_MODE_NAMED.has(label)) FIRST_MODE_NAMED.set(label, Number(type));
+}
+
 /**
- * What a player's battle is counted under on their own profit panel: one of
- * the four modes the region compares, else the name the game gives the mode.
+ * What a battle is counted under on both economy tables: one of the loadouts'
+ * modes, else the name the game gives the mode, so a mode reaches the tables
+ * by having been played and nobody keeps a list of them.
  *
- * Every mode counts here, events included, since the question is what each
- * mode paid THIS player; only the region's table needs modes comparable
- * between players. Keyed on the name so the game's variants of one mode (the
- * Random Battle economies) are one row rather than three rows named alike.
+ * Keyed on the name so the game's variants of one mode (the Random Battle
+ * economies, Onslaught's lighter queue) are one row rather than several rows
+ * named alike.
  */
-export function playerEconomyModeKey(battleType: number): string {
-  return loadoutModeOf(battleType) ?? modeLabel(battleType) ?? `type-${battleType}`;
+export function economyModeKey(battleType: number): string {
+  const label = modeLabel(battleType);
+  if (label === null) return `type-${battleType}`;
+  return loadoutModeOf(FIRST_MODE_NAMED.get(label)!) ?? label;
 }

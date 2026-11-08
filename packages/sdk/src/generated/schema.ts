@@ -4736,11 +4736,9 @@ export interface components {
         };
         /** @description What one battle mode pays at one tier. */
         ModeEconomyRow: {
-            /**
-             * @description The battle mode this row was counted in.
-             * @enum {string}
-             */
-            mode: "random" | "onslaught" | "skirmish" | "advance";
+            /** @description The battle mode this row was counted in: random, onslaught, skirmish or advance, else the game's own English name for the mode (Frontline, Halloween...). Open-ended: every mode that paid credits in the window has rows. */
+            mode: string;
+            /** @description The vehicle's tier, or 0 for an event vehicle the vehicle catalogue does not hold. */
             tier: number;
             battles: number;
             /** @description Vehicle records: one account's part in one battle, every participant of each recorded battle, bots excluded. */

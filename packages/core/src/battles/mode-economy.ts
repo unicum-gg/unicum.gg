@@ -1,9 +1,9 @@
 import { sql } from "drizzle-orm";
 import {
+  BATTLE_MODE_LABEL,
   battlesByRegion,
-  LOADOUT_MODE_BATTLES,
+  economyModeKey,
   LOADOUT_MODES,
-  type LoadoutMode,
   MODE_ECONOMY_MIN_RECORDS,
   MODE_ECONOMY_WINDOW_DAYS,
   type ModeEconomy,
@@ -25,7 +25,7 @@ import { db } from "@unicum.gg/core/db";
  */
 
 type AggregateRow = {
-  mode: LoadoutMode;
+  mode: string;
   tier: number;
   battles: number;
   records: number;
@@ -40,25 +40,25 @@ type AggregateRow = {
   net_costs: string | number;
 };
 
-/** The `bonusType` each counted mode is read from, as one SQL `CASE` over
- * a battles row aliased `b`. */
+/** `economyModeKey` as one SQL `CASE` over a battles row aliased `b`. The
+ * accounts behind a row are counted distinct, so the game's variants of a mode
+ * have to be folded before the aggregate rather than summed after it. */
 export function modeOfBattleType() {
-  const branches = LOADOUT_MODES.map(
-    (mode) =>
-      sql`WHEN b.battle_type IN (${sql.join(
-        LOADOUT_MODE_BATTLES[mode].map((type) => sql`${type}`),
-        sql`, `,
-      )}) THEN ${mode}`,
+  const branches = Object.keys(BATTLE_MODE_LABEL).map(Number).map(
+    (type) => sql`WHEN ${type} THEN ${economyModeKey(type)}`,
   );
-  return sql`CASE ${sql.join(branches, sql` `)} END`;
+  return sql`CASE b.battle_type ${sql.join(branches, sql` `)} ELSE 'type-' || b.battle_type END`;
 }
 
 /**
  * One pass over the window's battles, grouped by (mode, tier).
  *
- * A record is one account's vehicle in one battle; bots (no account) are left
- * out, and so is a vehicle the catalogue cannot place at a tier, since a row is
- * only ever read inside one. The uploader's own economy is joined onto their
+ * Every mode that paid anything counts: a (mode, tier) whose credits sum to
+ * nothing (training rooms, Fun Random) is left out by the `HAVING` rather than
+ * by a list of modes. A record is one account's vehicle in one battle, the
+ * whole battle for a player who respawned in several; bots (no account) are
+ * left out, and a vehicle the catalogue does not hold (an event's) sits at
+ * tier 0. The uploader's own economy is joined onto their
  * record alone: `personal` belongs to the first id in `reported_by`, and its
  * `credits` is the gross (premium and bonuses in, bills not yet paid), so the
  * three bills are subtracted here to get what landed in the account.
@@ -68,7 +68,6 @@ export function modeOfBattleType() {
 export async function aggregateModeEconomy(region: Region): Promise<AggregateRow[]> {
   const battles = battlesByRegion[region];
   const vehicles = vehiclesByRegion[region];
-  const types = LOADOUT_MODES.flatMap((mode) => LOADOUT_MODE_BATTLES[mode]);
   return db.execute<AggregateRow>(sql`
     WITH b AS (
       SELECT b.arena_unique_id, b.duration, b.winner_team, b.vehicles,
@@ -76,11 +75,10 @@ export async function aggregateModeEconomy(region: Region): Promise<AggregateRow
              ${modeOfBattleType()} AS mode
       FROM ${battles} b
       WHERE b.started_at >= now() - make_interval(days => ${MODE_ECONOMY_WINDOW_DAYS})
-        AND b.battle_type IN (${sql.join(types.map((type) => sql`${type}`), sql`, `)})
         AND b.duration > 0
     ),
     records AS (
-      SELECT b.mode, veh.tier, b.arena_unique_id, b.duration,
+      SELECT b.mode, coalesce(veh.tier, 0)::int AS tier, b.arena_unique_id, b.duration,
              (v->>'account')::bigint AS account,
              (v->>'credits')::bigint AS credits,
              (v->>'xp')::bigint AS xp,
@@ -90,7 +88,7 @@ export async function aggregateModeEconomy(region: Region): Promise<AggregateRow
                   THEN b.personal END AS personal
       FROM b
       CROSS JOIN LATERAL jsonb_array_elements(b.vehicles) v
-      JOIN ${vehicles} veh ON veh.tank_id = (v->>'tank')::int
+      LEFT JOIN ${vehicles} veh ON veh.tank_id = (v->>'tank')::int
       WHERE v ? 'account'
     )
     SELECT mode, tier,
@@ -110,7 +108,8 @@ export async function aggregateModeEconomy(region: Region): Promise<AggregateRow
              + coalesce((personal->>'suppliesCost')::bigint, 0)
            ) FILTER (WHERE personal IS NOT NULL), 0) AS net_costs
     FROM records
-    GROUP BY mode, tier`);
+    GROUP BY mode, tier
+    HAVING coalesce(sum(credits), 0) > 0`);
 }
 
 /** Recompute one region and replace its rows. Returns how many were written. */
@@ -152,7 +151,8 @@ export async function loadModeEconomy(region: Region): Promise<ModeEconomy | nul
   if (stored.length === 0) return null;
 
   const per = (value: number, whole: number) => (whole > 0 ? value / whole : 0);
-  const order = new Map(LOADOUT_MODES.map((mode, index) => [mode, index]));
+  const order = new Map<string, number>(LOADOUT_MODES.map((mode, index) => [mode, index]));
+  const rank = (mode: string) => order.get(mode) ?? LOADOUT_MODES.length;
   const rows: ModeEconomyRow[] = stored
     .filter((row) => row.records >= MODE_ECONOMY_MIN_RECORDS)
     .map((row) => {
@@ -178,7 +178,7 @@ export async function loadModeEconomy(region: Region): Promise<ModeEconomy | nul
     })
     .sort(
       (a, b) =>
-        b.tier - a.tier || (order.get(a.mode) ?? 0) - (order.get(b.mode) ?? 0),
+        b.tier - a.tier || rank(a.mode) - rank(b.mode),
     );
 
   return {

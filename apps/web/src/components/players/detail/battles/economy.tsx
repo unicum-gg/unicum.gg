@@ -4,8 +4,7 @@ import useSWR from "swr";
 import { useLocale } from "@onruntime/translations/react";
 import { toRoman } from "roman-numerals";
 import {
-  loadoutModeOf,
-  modeLabel,
+  economyModeKey,
   PLAYER_MODE_ECONOMY_MIN_BATTLES,
   type PlayerModeEconomy,
   type PlayerModeEconomyRow,
@@ -18,8 +17,8 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import { economyModeName } from "@/components/game-name";
 import { SegmentedControl } from "@/components/segmented-control";
-import { LOADOUT_MODE_NAME_KEY } from "@/components/tanks/detail/loadouts/mode-names";
 import { useTierParam } from "@/hooks/use-tier-param";
 import { useTranslation } from "@/hooks/use-translation";
 import { numberFormat } from "@/lib/format";
@@ -37,14 +36,6 @@ function clock(seconds: number): string {
 
 function tierLabel(tier: number): string {
   return tier > 0 ? toRoman(tier) : String(tier);
-}
-
-/** A row's mode: the four compared modes in the reader's language, the rest
- * by the name the battle list gives them. */
-function modeName(battleType: number, tGame: (key: string) => string): string {
-  const mode = loadoutModeOf(battleType);
-  if (mode) return tGame(LOADOUT_MODE_NAME_KEY[mode]);
-  return modeLabel(battleType) ?? `#${battleType}`;
 }
 
 /** Whether a row holds enough battles for its figures to be read as more than
@@ -246,7 +237,7 @@ function TierTable({
                   row === best && "text-brand",
                 )}
               >
-                {modeName(row.battleType, tGame)}
+                {economyModeName(economyModeKey(row.battleType), tGame)}
               </td>
               <td className={cell}>{int.format(row.battles)}</td>
               <td className={cell}>{int.format(row.grossPerBattle)}</td>
