@@ -519,14 +519,31 @@ const getCoverageStatsCached = unstable_cache(
   // Versioned: an entry cached before `modUsers` existed would otherwise be
   // served without it until it turned over.
   ["coverage-stats-v2"],
-  // 60s: the live-monitoring figures (queue depths, last-snapshot time, backlog)
-  // stay fresh. This is now cheap because every query on this path reads a small
-  // indexed/`players` table — the newest/oldest snapshot come from `players`
-  // (~20ms) and the only remaining player_snapshots seq-scans (24h count + the
-  // two growth histograms) sit behind their own 1h `getSnapshotTrends` cache, so
-  // the 20-40s scans that used to run four-per-minute-per-region no longer touch
-  // this window.
-  { revalidate: 60, tags: ["coverage"] },
+  // 1h, matching both coverage pages' own `revalidate`. It was 60s, which could
+  // never make either page fresher than its own segment window and only bought
+  // the scans below one more chance to run: the page revalidates in the
+  // background, finds this window expired every single time, and pays for them
+  // again. The shared ISR store runs a key cap, so this page's entry is evicted
+  // well inside an hour and the page is re-rendered far more often than hourly,
+  // which turned "every revalidation" into "about every minute, per region".
+  //
+  // The claim this comment used to make was half true, and that is what hid it.
+  // The `player_snapshots` seq-scans really did move behind the hourly
+  // `getSnapshotTrends` cache, but `players` and `clans` are still scanned HERE,
+  // several of them inside one `Promise.all`: `MIN(first_seen_at)` over players,
+  // `SUM(battles)`, the two 30-day `first_seen_at` histograms and the
+  // activity-bucket breakdown. That is ~2M rows a scan on EU, times three
+  // regions, and no in-flight dedup across the PM2 cluster.
+  //
+  // Measured 2026-11-08 at 17:22 CET with this window at 60s: a dozen of those
+  // scans active at once at 14 to 22s each, present in every one of twelve
+  // samples taken over 96s, Postgres at 544% of twelve cores, and every endpoint
+  // on the site averaging 43 to 77s because they were all queued behind it.
+  // `/coverage` itself answered in 31s while a warm `/eu/tanks` answered in 60ms.
+  //
+  // Anything needing these figures sooner invalidates `revalidateTag`
+  // ("coverage") rather than shortening the window again.
+  { revalidate: 3600, tags: ["coverage"] },
 );
 
 function toDate(v: Date | string | null): Date | null {
@@ -535,10 +552,9 @@ function toDate(v: Date | string | null): Date | null {
 }
 
 /**
- * Cached coverage stats: 60s fresh, then revalidate in background. The heavy
- * per-player aggregates (two ~100s scans) were replaced with cached `players`
- * columns and a shared MIN/MAX scan, so the 60s window is cheap to sustain and
- * the live-monitoring figures stay fresh.
+ * Cached coverage stats: 1h, then revalidated in the background, matching both
+ * coverage pages' own segment window. The cache above says what a shorter window
+ * cost and why it could never have bought anything.
  */
 export async function getCoverageStats(region: Region): Promise<CoverageStats> {
   const c = (await getCoverageStatsCached(region)) as CoverageStats & {

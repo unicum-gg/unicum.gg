@@ -36,9 +36,10 @@ export default async function Page({
 
 // ISR: prerendered and revalidated in the background, so the (expensive)
 // coverage computation never blocks a visitor. The SDK loopback handles the
-// build-time fetch, so a build no longer depends on a running API. The window
-// matches the coverage stats' own 60s cache (live-monitoring figures must stay
-// fresh) rather than relying on that cache to implicitly lower the segment.
+// build-time fetch, so a build no longer depends on a running API. The coverage
+// stats' own cache window matches this one, because an inner window shorter than
+// the segment's can never make the page fresher: it only re-runs the scans on
+// every background revalidation. See `services/coverage` for what that cost.
 export const dynamic = "force-static";
 // 1h, not 60s: the queries are ~24s full seq-scans of the 10M+ row snapshot
 // table, so a 60s window paid that scan every minute (and stormed the DB from a
