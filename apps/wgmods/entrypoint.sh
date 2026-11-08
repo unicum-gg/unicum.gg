@@ -4,6 +4,10 @@
 # to the screen from outside is remote.ts, which checks the login token.
 set -eu
 rm -f /tmp/.X99-lock
+# The profile outlives the container, and so does the lock Chromium keeps in it.
+# It names the previous container's hostname, so a redeploy would otherwise find
+# the profile "in use on another computer" and Chromium would refuse to start.
+rm -f /data/profile/SingletonLock /data/profile/SingletonCookie /data/profile/SingletonSocket
 Xvfb :99 -screen 0 1280x800x24 -nolisten tcp &
 sleep 1
 x11vnc -display :99 -localhost -forever -shared -nopw -quiet &
