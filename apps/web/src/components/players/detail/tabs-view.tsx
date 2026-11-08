@@ -2,6 +2,7 @@
 
 import { useLocale } from "@onruntime/translations/react";
 import { useRouter } from "@/hooks/use-router";
+import { useAccount } from "@/hooks/use-account";
 import { useState } from "react";
 
 import useSWR from "swr";
@@ -172,6 +173,14 @@ export function PlayerTabsView({
   const mode = activeMode;
   const router = useRouter();
   const { locale } = useLocale();
+
+  // The owner reads their own switch rather than the profile's flag. The
+  // profile is never revalidated on mount, so it is absent from the SWR cache
+  // the switch writes to, and the page around it can be a day old: on the
+  // flag alone the tab kept its old state after the switch moved, and again
+  // after a reload.
+  const { data: account } = useAccount(isOwnProfile);
+  const battlesHidden = account?.battlesHidden ?? detail.battlesHidden ?? false;
 
   // The per-tank list lives on its own endpoint and is fetched on demand
   // through the SDK. SWR keys on the URL and only runs when the Tanks section is
@@ -376,8 +385,8 @@ export function PlayerTabsView({
             achievementCount={detail.achievementCount}
             tournamentCount={detail.tournamentCount}
             // Absent from a profile cached before the field existed.
-            battleCount={detail.battleCount ?? 0}
-            battlesHidden={detail.battlesHidden ?? false}
+            battleCount={battlesHidden ? 0 : (detail.battleCount ?? 0)}
+            battlesHidden={battlesHidden}
             onSelect={selectSection}
           />
         </PanelHeader>
@@ -408,7 +417,7 @@ export function PlayerTabsView({
           // A battle has no PR or WTR (see `RatingMetric`).
           metric={wnRatingMetric(metric)}
           battleCount={detail.battleCount ?? 0}
-          battlesHidden={detail.battlesHidden ?? false}
+          battlesHidden={battlesHidden}
           isOwnProfile={isOwnProfile}
           initialBattles={initialBattles}
           initialEncounters={initialEncounters}
