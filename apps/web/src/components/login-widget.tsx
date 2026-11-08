@@ -116,10 +116,7 @@ export function LoginWidget() {
             aria-label={t("settings")}
             className="shrink-0 cursor-pointer text-fd-muted-foreground transition-colors hover:text-fd-foreground"
           >
-            {/* An icon on a phone, where the words would cost a third of the
-                strip. The label stays the accessible name either way. */}
-            <span className="hidden sm:inline">{t("settings")}</span>
-            <GearSixIcon className="size-4 sm:hidden" aria-hidden />
+            <GearSixIcon className="size-4" aria-hidden />
           </button>
         </Hint>
         <SettingsDialog
