@@ -55,8 +55,11 @@ export function serveRemote(request: IncomingMessage, response: ServerResponse, 
       response.writeHead(403).end("forbidden");
       return true;
     }
+    // Lax, not Strict: the link is opened from Discord, and a redirect keeps the
+    // cross-site origin of the click that started it, so a Strict cookie set
+    // here is withheld from the very page this redirects to.
     response.writeHead(302, {
-      "Set-Cookie": `${COOKIE}=${cookieValue().toString("hex")}; Path=${PREFIX}; HttpOnly; Secure; SameSite=Strict; Max-Age=3600`,
+      "Set-Cookie": `${COOKIE}=${cookieValue().toString("hex")}; Path=${PREFIX}; HttpOnly; Secure; SameSite=Lax; Max-Age=3600`,
       Location: `${PREFIX}/vnc.html?autoconnect=1&resize=scale&path=${PREFIX.slice(1)}/websockify`,
       "Cache-Control": "no-store",
     });
