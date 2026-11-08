@@ -3,5 +3,6 @@
   "heading": "{nickname} conserva oculta esta lista de batallas",
   "blurb": "Solo {nickname} puede abrir esta lista. Todas las batallas de esta lista siguen apareciendo en los recuentos de estadísticas del sitio, y los jugadores que participaron en esas batallas permanecen públicos.",
   "see-teammates": "Ver a los compañeros de equipo",
-  "private-owner": "Solo tú puedes ver esta lista. Puedes hacer ese cambio en la configuración de tu cuenta."
+  "private-owner": "Solo tú puedes ver esta lista.",
+  "private-owner-change": "Cambio en la configuración de tu cuenta"
 }

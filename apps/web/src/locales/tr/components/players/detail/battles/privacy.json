@@ -3,5 +3,6 @@
   "heading": "{nickname} bu savaş listesini gizli tutuyor",
   "blurb": "Bu listeyi yalnızca {nickname} açabilir. İçindeki her savaş yine de sitenin istatistiklerindeki sayılara dahil olur ve bu savaşlarda karşılaşılan oyuncular herkese açık kalır.",
   "see-teammates": "Takım arkadaşlarını gör",
-  "private-owner": "Bu listeyi yalnızca siz görebilirsiniz. Bunu hesap ayarlarınızdan değiştirebilirsiniz."
+  "private-owner": "Bu listeyi yalnızca siz görebilirsiniz.",
+  "private-owner-change": "Bunu hesap ayarlarınızdan değiştirin."
 }

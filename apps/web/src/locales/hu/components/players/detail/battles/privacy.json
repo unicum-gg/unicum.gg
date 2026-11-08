@@ -3,5 +3,6 @@
   "heading": "Rejtve marad a {nickname} által megtartott csata lista",
   "blurb": "Csak {nickname} számára nyitott ez a lista. Minden benne lévő csata továbbra is a webhely statisztikáinak darabszámaiban szerepel, és az azokban a csatákban megismert játékosok nyilvánosak maradnak.",
   "see-teammates": "Csapattársak megtekintése",
-  "private-owner": "Ezt a listát csak te láthatod. Ezt a fiókod beállításaiban változtathatod meg."
+  "private-owner": "Csak te láthatod ezt a listát.",
+  "private-owner-change": "Módosítás a fiók beállításaiban"
 }

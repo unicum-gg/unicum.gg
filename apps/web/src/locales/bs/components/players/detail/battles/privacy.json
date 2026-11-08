@@ -3,5 +3,6 @@
   "heading": "{nickname} zadržava ovu listu bitaka skrivenom",
   "blurb": "Samo {nickname} može otvoriti ovu listu. Svaka bitka u njoj i dalje ulazi u statistiku stranice, a igrači s kojima se igralo u tim bitkama ostaju javni.",
   "see-teammates": "Pogledaj igrače iz tima",
-  "private-owner": "Samo vi možete vidjeti ovu listu. To možete promijeniti u postavkama svog računa."
+  "private-owner": "Samo vi možete vidjeti ovu listu.",
+  "private-owner-change": "Promijeni ovo u postavkama računa"
 }

@@ -3,5 +3,6 @@
   "heading": "{nickname} beholder denne kamplisten skjult",
   "blurb": "Bare {nickname} kan åpne denne listen. Antallet kamper i den inngår fortsatt i nettstedets statistikk, og spillerne som ble møtt i disse kampene, forblir offentlige.",
   "see-teammates": "Se lagkameratene",
-  "private-owner": "Bare du kan se denne listen. Du kan gjøre denne endringen i kontoinnstillingene dine."
+  "private-owner": "Bare du kan se denne listen.",
+  "private-owner-change": "Endre dette i kontoinnstillingene dine"
 }

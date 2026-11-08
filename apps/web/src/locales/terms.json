@@ -837,7 +837,8 @@
     "ammunition": "الذخيرة",
     "length": "المدة",
     "ones": "الواحدات",
-    "premium": "مميز"
+    "premium": "مميز",
+    "Change": "تغيير"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1678,7 +1679,8 @@
     "ammunition": "боепрыпасы",
     "length": "працягласць",
     "ones": "адзінкі",
-    "premium": "прэміум"
+    "premium": "прэміум",
+    "Change": "Змена"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2735,7 +2737,8 @@
     "length": "продължителност",
     "ones": "такива",
     "premium": "премиум",
-    "Platoon": "Взвод"
+    "Platoon": "Взвод",
+    "Change": "Промяна"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -3584,7 +3587,8 @@
     "ammunition": "municija",
     "length": "trajanje",
     "ones": "oni",
-    "premium": "premium"
+    "premium": "premium",
+    "Change": "Promijeni"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -4652,7 +4656,8 @@
     "length": "délka",
     "ones": "jedničky",
     "premium": "prémiové",
-    "Platoon": "Četa"
+    "Platoon": "Četa",
+    "Change": "Změnit"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -5726,7 +5731,8 @@
     "length": "længde",
     "ones": "dem",
     "premium": "premium",
-    "Platoon": "Deling"
+    "Platoon": "Deling",
+    "Change": "Ændring"
   },
   "de": {
     "(optional)": "(optional)",
@@ -6793,7 +6799,8 @@
     "length": "Länge",
     "ones": "Gefechte",
     "premium": "Premium",
-    "Platoon": "Zug"
+    "Platoon": "Zug",
+    "Change": "Änderung"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -7866,7 +7873,8 @@
     "length": "διάρκεια",
     "ones": "μονάδες",
     "premium": "premium",
-    "Platoon": "Ουλαμός"
+    "Platoon": "Ουλαμός",
+    "Change": "Αλλαγή"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -8919,7 +8927,8 @@
     "length": "duración",
     "ones": "unos",
     "premium": "premium",
-    "Platoon": "Pelotón"
+    "Platoon": "Pelotón",
+    "Change": "Cambio"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -9997,7 +10006,8 @@
     "length": "pituus",
     "ones": "kappaleet",
     "premium": "premium",
-    "Platoon": "Osasto"
+    "Platoon": "Osasto",
+    "Change": "Muutos"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -11054,7 +11064,8 @@
     "length": "durée",
     "ones": "ceux",
     "premium": "premium",
-    "Platoon": "Peloton"
+    "Platoon": "Peloton",
+    "Change": "Changement"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -11896,7 +11907,8 @@
     "ammunition": "गोला-बारूद",
     "length": "अवधि",
     "ones": "वाले",
-    "premium": "प्रीमियम"
+    "premium": "प्रीमियम",
+    "Change": "बदलाव"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -12967,7 +12979,8 @@
     "length": "trajanje",
     "ones": "one",
     "premium": "premium",
-    "Platoon": "Vod"
+    "Platoon": "Vod",
+    "Change": "Promijeni"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -14040,7 +14053,8 @@
     "length": "hossz",
     "ones": "egyesek",
     "premium": "prémium",
-    "Platoon": "Szakasz"
+    "Platoon": "Szakasz",
+    "Change": "Módosítás"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -15109,7 +15123,8 @@
     "length": "durata",
     "ones": "quelli",
     "premium": "premium",
-    "Platoon": "Plotone"
+    "Platoon": "Plotone",
+    "Change": "Modifica"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -16185,7 +16200,8 @@
     "length": "長さ",
     "ones": "もの",
     "premium": "プレミアム",
-    "Platoon": "小隊"
+    "Platoon": "小隊",
+    "Change": "変更"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -17028,7 +17044,8 @@
     "ammunition": "Оқ-дәрі",
     "length": "Ұзақтығы",
     "ones": "Бірліктер",
-    "premium": "Премиум"
+    "premium": "Премиум",
+    "Change": "Өзгерту"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -18108,7 +18125,8 @@
     "length": "길이",
     "ones": "것들",
     "premium": "프리미엄",
-    "Platoon": "소대"
+    "Platoon": "소대",
+    "Change": "변경"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -19184,7 +19202,8 @@
     "length": "trukmė",
     "ones": "vienetai",
     "premium": "premium",
-    "Platoon": "Būrys"
+    "Platoon": "Būrys",
+    "Change": "Keisti"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -20246,7 +20265,8 @@
     "length": "ilgums",
     "ones": "tie",
     "premium": "premium",
-    "Platoon": "Vads"
+    "Platoon": "Vads",
+    "Change": "Mainīt"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -21324,7 +21344,8 @@
     "length": "lengte",
     "ones": "exemplaren",
     "premium": "premium",
-    "Platoon": "Peloton"
+    "Platoon": "Peloton",
+    "Change": "Wijziging"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -22393,7 +22414,8 @@
     "length": "lengde",
     "ones": "enere",
     "premium": "premium",
-    "Platoon": "Tropp"
+    "Platoon": "Tropp",
+    "Change": "Endre"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -23459,7 +23481,8 @@
     "length": "długość",
     "ones": "te",
     "premium": "premium",
-    "Platoon": "Pluton"
+    "Platoon": "Pluton",
+    "Change": "Zmień"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -24518,7 +24541,8 @@
     "length": "duração",
     "ones": "uns",
     "premium": "premium",
-    "Platoon": "Pelotão"
+    "Platoon": "Pelotão",
+    "Change": "Alteração"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -25577,7 +25601,8 @@
     "length": "durată",
     "ones": "cele",
     "premium": "premium",
-    "Platoon": "Pluton"
+    "Platoon": "Pluton",
+    "Change": "Schimbare"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -26624,7 +26649,8 @@
     "length": "Длительность",
     "ones": "те",
     "premium": "премиум",
-    "Platoon": "Взвод"
+    "Platoon": "Взвод",
+    "Change": "Изменить"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -27469,7 +27495,8 @@
     "ammunition": "strelivo",
     "length": "dolžina",
     "ones": "tisti",
-    "premium": "premium"
+    "premium": "premium",
+    "Change": "Zmena"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -28542,7 +28569,8 @@
     "length": "dužina",
     "ones": "oni",
     "premium": "premium",
-    "Platoon": "Vod"
+    "Platoon": "Vod",
+    "Change": "Promena"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -29620,7 +29648,8 @@
     "length": "längd",
     "ones": "ettor",
     "premium": "premium",
-    "Platoon": "Pluton"
+    "Platoon": "Pluton",
+    "Change": "Ändra"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -30694,7 +30723,8 @@
     "length": "ความยาว",
     "ones": "รายการ",
     "premium": "พรีเมียม",
-    "Platoon": "หมวดรถถัง"
+    "Platoon": "หมวดรถถัง",
+    "Change": "เปลี่ยน"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -31539,7 +31569,8 @@
     "ammunition": "amunisyon",
     "length": "haba",
     "ones": "mga iyon",
-    "premium": "premium"
+    "premium": "premium",
+    "Change": "Pagbabago"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -32609,7 +32640,8 @@
     "length": "süre",
     "ones": "olanlar",
     "premium": "premium",
-    "Platoon": "Takım"
+    "Platoon": "Takım",
+    "Change": "Değiştir"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -33672,7 +33704,8 @@
     "length": "тривалість",
     "ones": "ті",
     "premium": "преміум",
-    "Platoon": "Взвод"
+    "Platoon": "Взвод",
+    "Change": "Зміна"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -34724,7 +34757,8 @@
     "length": "thời lượng",
     "ones": "các mục",
     "premium": "premium",
-    "Platoon": "Trung đội"
+    "Platoon": "Trung đội",
+    "Change": "Thay đổi"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -35798,6 +35832,7 @@
     "length": "时长",
     "ones": "那些",
     "premium": "高级",
-    "Platoon": "组队模式"
+    "Platoon": "组队模式",
+    "Change": "更改"
   }
 }

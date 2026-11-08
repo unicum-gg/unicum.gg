@@ -3,5 +3,6 @@
   "heading": "{nickname} ponechává tento seznam bitev skrytý",
   "blurb": "Tento seznam může otevřít pouze {nickname}. Každá bitva v něm se stále započítává do statistik webu a hráči, se kterými se v těchto bitvách bojovalo, zůstávají veřejní.",
   "see-teammates": "Zobrazit spoluhráče",
-  "private-owner": "Pouze vy můžete vidět tento seznam. To můžete změnit v nastavení svého účtu."
+  "private-owner": "Tento seznam vidíte pouze vy.",
+  "private-owner-change": "Změnit v nastavení účtu"
 }

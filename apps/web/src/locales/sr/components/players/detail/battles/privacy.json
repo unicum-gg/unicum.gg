@@ -3,5 +3,6 @@
   "heading": "{nickname} задржава ову листу битака скривеном",
   "blurb": "Само {nickname} може да отвори ову lista. Свака bitka у њој и даље улази у бројеве statistika на сајту, а igrači с којима сте се сусрели у они bitke остају javno.",
   "see-teammates": "Погледај саиграче",
-  "private-owner": "Само ви можете да видите ову lista. То можете promena у својим podešavanja nalog."
+  "private-owner": "Samo vi možete da vidite ovu listu.",
+  "private-owner-change": "Promena ovoga u podešavanjima naloga"
 }

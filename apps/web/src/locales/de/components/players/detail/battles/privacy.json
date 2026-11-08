@@ -3,5 +3,6 @@
   "heading": "Die Gefechtsliste von {nickname} bleibt verborgen",
   "blurb": "Nur {nickname} kann diese Liste öffnen. Jedes Gefecht darin wird weiterhin zu den Anzahlen in den Statistiken der Website gezählt, und die Spieler, denen man in diesen Gefechten begegnet ist, bleiben öffentlich.",
   "see-teammates": "Teammitglieder ansehen",
-  "private-owner": "Nur du kannst diese Liste sehen. Du kannst das in deinen Kontoeinstellungen ändern."
+  "private-owner": "Nur du kannst diese Liste sehen.",
+  "private-owner-change": "Ändere dies in deinen Kontoeinstellungen"
 }

@@ -3,5 +3,6 @@
   "heading": "{nickname} behoudt deze lijst met gevechten verborgen",
   "blurb": "Alleen {nickname} kan deze lijst openen. Elk gevecht hierin wordt nog steeds meegerekend in de aantallen van de statistieken van de site, en de spelers die je in die gevechten hebt ontmoet blijven openbaar.",
   "see-teammates": "Bekijk de teamgenoten",
-  "private-owner": "Alleen jij kunt deze lijst zien. Je kunt dit wijzigen in je accountinstellingen."
+  "private-owner": "Alleen jij kunt deze lijst zien.",
+  "private-owner-change": "Wijziging hiervan in je accountinstellingen"
 }

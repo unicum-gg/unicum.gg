@@ -3,5 +3,6 @@
   "heading": "{nickname} patur šo kauju sarakstu slēptu",
   "blurb": "Šo sarakstu var atvērt tikai {nickname}. Katra kauja tajā joprojām tiek iekļauta vietnes statistikā, un spēlētāji, kurus viņi satikuši šajās kaujās, paliek publiski.",
   "see-teammates": "Skatīt komandas biedrus",
-  "private-owner": "Tikai jūs varat redzēt šo sarakstu. To varat izmainīt sava konta iestatījumos."
+  "private-owner": "Tikai jūs varat redzēt šo sarakstu.",
+  "private-owner-change": "Mainīt to sava konta iestatījumos"
 }

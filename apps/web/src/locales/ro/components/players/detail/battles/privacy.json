@@ -3,5 +3,6 @@
   "heading": "Lista de bătălii este păstrată ascunsă de {nickname}",
   "blurb": "Doar {nickname} poate deschide această listă. Fiecare bătălie din ea contribuie în continuare la numărările din statisticile site-ului, iar jucătorii întâlniți în acele bătălii rămân publici.",
   "see-teammates": "Vezi coechipierii",
-  "private-owner": "Doar tu poți vedea această listă. Poți face această schimbare din setările contului tău."
+  "private-owner": "Doar tu poți vedea această listă.",
+  "private-owner-change": "Schimbare în setările contului tău"
 }
