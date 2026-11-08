@@ -121,8 +121,11 @@ export function BattlesTab({
 
   // The answer says so when it can, and the profile's flag covers the moment
   // before it arrives. A visitor's answer is the refusal itself, and the
-  // owner's is their own list, carrying the flag.
-  const hidden = data?.hidden ?? battlesHidden;
+  // owner's is their own list, carrying the flag. A public list carries no
+  // flag at all, so an answer without one means public: falling back to the
+  // profile's flag there kept a list made public again reading as private for
+  // as long as the cached page said it was.
+  const hidden = data ? data.hidden === true : battlesHidden;
   const refused = hidden && !isOwnProfile;
   // The page itself is cached for everybody, so what it was rendered with is
   // the visitor's answer even when the owner is the one reading it. Theirs is
