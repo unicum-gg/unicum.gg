@@ -50,10 +50,10 @@ import {
   type RatingHistoryPoint,
 } from "@unicum.gg/core/players/rating-history";
 import {
-  diffTanks,
   tankSnapshotsToTankStats,
   type TankSnapshotMap,
 } from "@unicum.gg/core/players/tanks";
+import { tankPeriod } from "@unicum.gg/core/players/tank-periods";
 import {
   loadPlayerClanHistoryFromWG,
   storePlayerClanHistory,
@@ -174,68 +174,47 @@ export async function buildPlayerDetail(args: {
   }
 
   const current = statsFromSnapshot(latest);
-  // Account-stat diff for a period. An empty first fetch (battles === 0, the
-  // poisoned snapshot where WG's aggregate lagged) means the whole period is
-  // "everything since we started tracking" = the lifetime total, so return
-  // `current`. This keeps the rating-delta rows honest too: the poisoned
-  // baseline carried a non-zero wtr (e.g. 8313) even with battles 0, so a naive
-  // diff showed a partial change (wtr 10072 - 8313 = +1759) instead of the real
-  // +10072. Legit players have battles > 0 at first fetch, so this only fires on
-  // the artifact.
-  function periodDiff(baseline: PlayerSnapshot | null): typeof current | null {
+  // The account's own diff, kept for the two figures only the account carries
+  // (PR and WTR). An empty first fetch (battles === 0, the poisoned snapshot
+  // where WG's aggregate lagged) means the whole period is "everything since
+  // we started tracking", so its ratings are the lifetime ones: that baseline
+  // carried a non-zero wtr (e.g. 8313) even with battles 0, and a naive diff
+  // showed +1759 instead of the real +10072.
+  function accountDiff(baseline: PlayerSnapshot | null): typeof current | null {
     if (!baseline) return null;
     if (baseline.battles === 0) return current;
     return diffStats(current, statsFromSnapshot(baseline));
   }
-  const periods: PeriodStats = {
-    h24: periodDiff(initial.periodSnapshots.h24),
-    d7: periodDiff(initial.periodSnapshots.d7),
-    d30: periodDiff(initial.periodSnapshots.d30),
-  };
-  // Per-tank diff for a period. When the account baseline is an *empty* first
-  // fetch (battles === 0 — a poisoned snapshot where WG's `statistics.all`
-  // aggregate lagged the per-tank data at first sight), the account rows already
-  // read as the lifetime total (subtracting zero), but the per-tank baseline
-  // caught a battle or two, so a naive tank diff would drop them and make the
-  // derived stats (combined dmg, WN8, WNX) disagree with the account rows for the
-  // same column. Treat such a period as "= lifetime" for the tanks too (return
-  // the full `tanks`), keeping the column internally consistent. Legit players
-  // always have battles > 0 at first fetch, so this only fires on that artifact.
-  //
-  // A window the account diff says holds no battle holds none on the tanks
-  // either. Wargaming's `statistics.all` can lag `tanks/stats` by hours, and
-  // until `recordCurrentSnapshot` learned to refuse it, a tank row landed
-  // without the account row it belonged to. Diffed against the account's, it
-  // put a battle in a column whose Battles row read 0: an average tier, a
-  // combined damage and a WN8 under nothing at all (okuni on EU, 2026-11-03).
-  // Both `all` blocks count random, clan and company alike, so the account is
-  // the side that decides. Rows already stored keep that shape, hence this.
-  function periodTankDiff(
-    baseline: PlayerSnapshot | null,
-    baselineTanks: (typeof initial.periodTankSnapshots)["d30"],
-    accountDiff: PeriodStats["d30"],
-  ): typeof tanks | null {
-    if (!baseline) return null;
-    if (baseline.battles === 0) return tanks;
-    if (accountDiff?.battles === 0) return [];
-    return baselineTanks.size > 0 ? diffTanks(tanks, baselineTanks) : null;
-  }
-  const periodTanks = {
-    h24: periodTankDiff(
-      initial.periodSnapshots.h24,
+  // Every other counter of a period column, and the per-vehicle breakdown its
+  // tier, damage and ratings are computed from, is one diff of the vehicles
+  // (see `tankPeriod`): Wargaming refreshes the account only at logout, so the
+  // vehicles are the side that is current during a session.
+  const windows = {
+    h24: tankPeriod(
+      tanks,
       initial.periodTankSnapshots.h24,
-      periods.h24,
+      accountDiff(initial.periodSnapshots.h24),
     ),
-    d7: periodTankDiff(
-      initial.periodSnapshots.d7,
+    d7: tankPeriod(
+      tanks,
       initial.periodTankSnapshots.d7,
-      periods.d7,
+      accountDiff(initial.periodSnapshots.d7),
     ),
-    d30: periodTankDiff(
-      initial.periodSnapshots.d30,
+    d30: tankPeriod(
+      tanks,
       initial.periodTankSnapshots.d30,
-      periods.d30,
+      accountDiff(initial.periodSnapshots.d30),
     ),
+  };
+  const periods: PeriodStats = {
+    h24: windows.h24?.stats ?? null,
+    d7: windows.d7?.stats ?? null,
+    d30: windows.d30?.stats ?? null,
+  };
+  const periodTanks = {
+    h24: windows.h24?.tanks ?? null,
+    d7: windows.d7?.tanks ?? null,
+    d30: windows.d30?.tanks ?? null,
   };
 
   /**
@@ -301,11 +280,7 @@ export async function buildPlayerDetail(args: {
   // bars, attached to the rows rather than computed twice: the panel's reach
   // list and the Tanks tab's mark column are the same arithmetic asked of
   // different subsets, and two of it is two answers waiting to disagree.
-  const recent = recentTankStats(
-    tanks,
-    initial.periodSnapshots.d30,
-    initial.periodTankSnapshots.d30,
-  );
+  const recent = recentTankStats(tanks, initial.periodTankSnapshots.d30);
   const vehicles = tracedSync("tankRows", () =>
     withTankMarkReach(
       buildPlayerTankRows(
@@ -433,20 +408,16 @@ export async function loadPlayerDetail(
  *
  * What the mark estimate compares against: Wargaming scores a mark on a rolling
  * window of recent battles, so a 30-day average is the closer analogue of it
- * than a career one. Null is returned rather than the lifetime array, in three
- * cases that all mean the same thing: no baseline, a baseline holding no tanks,
- * and the poisoned first snapshot (`battles === 0`, where WG's aggregate lagged
- * the per-tank data at first sight) whose diff IS the lifetime total. Labelling
- * a career average as 30-day form is the one mistake here that cannot be seen
- * in the output.
+ * than a career one. The same diff as the profile's 30-day column, so the two
+ * cannot disagree, and null rather than the lifetime array when there is no
+ * baseline: labelling a career average as 30-day form is the one mistake here
+ * that cannot be seen in the output.
  */
 export function recentTankStats(
   tanks: TankStats[],
-  baseline: PlayerSnapshot | null,
   baselineTanks: TankSnapshotMap,
 ): TankStats[] | null {
-  if (!baseline || baseline.battles === 0) return null;
-  return baselineTanks.size > 0 ? diffTanks(tanks, baselineTanks) : null;
+  return tankPeriod(tanks, baselineTanks, null)?.tanks ?? null;
 }
 export enum PlayerDetailLiveStatus {
   /** Full detail payload available. */

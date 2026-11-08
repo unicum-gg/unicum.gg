@@ -33,7 +33,32 @@ const playerStats = z
   .meta({
     id: "PlayerStats",
     description:
-      "Random-battles totals (or a period diff of them) from a snapshot.",
+      "Random-battles totals from the account's latest snapshot.",
+  });
+
+const playerPeriodStats = z
+  .object({
+    battles: z.number(),
+    wins: z.number(),
+    losses: z.number().nullable(),
+    draws: z.number().nullable(),
+    survivedBattles: z.number().nullable(),
+    frags: z.number(),
+    damageDealt: z.number(),
+    xp: z.number(),
+    spotted: z.number(),
+    capturePoints: z.number().nullable(),
+    droppedCapturePoints: z.number(),
+    hits: z.number().nullable(),
+    shots: z.number().nullable(),
+    globalRating: z.number().nullable(),
+    wtr: z.number().nullable(),
+  })
+  .loose()
+  .meta({
+    id: "PlayerPeriodStats",
+    description:
+      "Random-battles counters over a window, summed from the per-vehicle diffs, which Wargaming updates after every battle while the account totals wait for the player to log out. A counter is null when a vehicle played in the window has no stored value for it at the window's start. globalRating and wtr are the change in the account's own figures, null when no account snapshot is that old.",
   });
 
 const periodValues = z
@@ -402,9 +427,9 @@ export const PlayerDetailResponse = z.object({
   }),
   current: playerStats,
   periods: z.object({
-    h24: playerStats.nullable(),
-    d7: playerStats.nullable(),
-    d30: playerStats.nullable(),
+    h24: playerPeriodStats.nullable(),
+    d7: playerPeriodStats.nullable(),
+    d30: playerPeriodStats.nullable(),
   }),
   derived: playerDerivedStats,
   tankCount: z.number(),

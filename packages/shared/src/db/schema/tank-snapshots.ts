@@ -89,6 +89,13 @@ export function makeTankSnapshotsTable(
       // has no column here.
       maxXp: integer("max_xp"),
       maxFrags: integer("max_frags"),
+      // Draws, which the profile's 24h/7d/30d columns need now that they are
+      // diffed from the vehicles rather than from the account (Wargaming only
+      // refreshes the account record when the player logs out). Losses are
+      // battles minus wins minus draws, so they need no column. Null on every
+      // row written before migration 0142: a period whose baseline is such a
+      // row has no draws to report, rather than a zero.
+      draws: integer("draws"),
     },
     (t) => [
       index(`${region}_tank_snapshots_player_taken_idx`).on(

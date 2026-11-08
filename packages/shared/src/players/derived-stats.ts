@@ -1,4 +1,4 @@
-import type { Stats } from "./stats";
+import type { PlayerPeriodStats, Stats } from "./stats";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -13,12 +13,12 @@ import {
   type VehicleMeta,
 } from "../wot/tanks/meta";
 
-// The period diffs feeding the stats table: lifetime stats minus the snapshot
-// taken at each cutoff, null when no snapshot that old exists yet.
+// The period diffs feeding the stats table, summed from the per-vehicle diffs
+// (see `PlayerPeriodStats`), null when no snapshot that old exists yet.
 export type PeriodStats = {
-  h24: Stats | null;
-  d7: Stats | null;
-  d30: Stats | null;
+  h24: PlayerPeriodStats | null;
+  d7: PlayerPeriodStats | null;
+  d30: PlayerPeriodStats | null;
 };
 
 // Same idea for the per-tank breakdown (each entry is a diffTanks result).
@@ -94,7 +94,7 @@ export function buildPlayerDerivedStats(
 
   const tier = perColumn((t) => (t ? computeAvgTier(t, encyclopedia) : null));
 
-  function wn7For(stats: Stats | null, periodTier: number | null): number | null {
+  function wn7For(stats: PlayerPeriodStats | null, periodTier: number | null): number | null {
     if (!stats) return null;
     return computeWN7(stats, periodTier);
   }

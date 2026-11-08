@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useStatsPeriod } from "@/hooks/use-period";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { StrongholdPeriod, type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, RatingMetric, prColor, winrateColor, wn7Color, wn8Color, wnxColor, wtrColor } from "@unicum.gg/shared";
+import { StrongholdPeriod, type Stats, type PeriodStats, type PlayerPeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, RatingMetric, prColor, winrateColor, wn7Color, wn8Color, wnxColor, wtrColor } from "@unicum.gg/shared";
 import { useTranslation } from "@/hooks/use-translation";
 
 const INTEGER_FORMAT = { maximumFractionDigits: 0 } as const;
@@ -74,6 +74,18 @@ function avgOrDash(num: NumberFormatter, n: number, d: number): string {
   return d <= 0 ? "—" : num(DECIMAL_FORMAT).format(n / d);
 }
 
+// A count with its share or per-battle average beside it, or the empty cell
+// when the window cannot answer it.
+function countCell(
+  num: NumberFormatter,
+  n: number | null,
+  battles: number,
+  ratio: (num: NumberFormatter, n: number, d: number) => string,
+): Cell {
+  if (n === null) return EMPTY_CELL;
+  return { primary: num(INTEGER_FORMAT).format(n), secondary: ratio(num, n, battles) };
+}
+
 // Turns the server-computed numeric values into display cells, optionally
 // color-coding them with the matching rating scale.
 function cellsFrom(
@@ -96,14 +108,16 @@ function cellsFrom(
   };
 }
 
-// A row whose cells come from the raw account `Stats` (Total from `current`, the
-// period columns from the diffs). `renderDelta` formats the period cells when it
-// differs from the total (signed values for ratings).
+// A row whose cells come from the counters (Total from the account's `current`,
+// the period columns from the vehicle diffs). A period counter can be null (see
+// `PlayerPeriodStats`), hence the wider type, which `Stats` satisfies.
+// `renderDelta` formats the period cells when it differs from the total
+// (signed values for ratings).
 function statRow(
   id: string,
   label: string,
-  render: (s: Stats, num: NumberFormatter) => Cell,
-  renderDelta?: (s: Stats, num: NumberFormatter) => Cell,
+  render: (s: PlayerPeriodStats, num: NumberFormatter) => Cell,
+  renderDelta?: (s: PlayerPeriodStats, num: NumberFormatter) => Cell,
   options: { ratingRow?: RatingMetric } = {},
 ): RowDef {
   return {
@@ -153,25 +167,20 @@ const ROWS: RowDef[] = [
     secondary: pctOrDash(num, s.wins, s.battles),
     color: s.battles > 0 ? winrateColor(s.wins / s.battles) : undefined,
   })),
-  statRow("losses", "Losses", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.losses),
-    secondary: pctOrDash(num, s.losses, s.battles),
-  })),
-  statRow("draws", "Draws", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.draws),
-    secondary: pctOrDash(num, s.draws, s.battles),
-  })),
-  statRow("survived", "Battles survived", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.survivedBattles),
-    secondary: pctOrDash(num, s.survivedBattles, s.battles),
-  })),
+  statRow("losses", "Losses", (s, num) => countCell(num, s.losses, s.battles, pctOrDash)),
+  statRow("draws", "Draws", (s, num) => countCell(num, s.draws, s.battles, pctOrDash)),
+  statRow("survived", "Battles survived", (s, num) =>
+    countCell(num, s.survivedBattles, s.battles, pctOrDash),
+  ),
   statRow("destroyed", "Tanks destroyed", (s, num) => ({
     primary: num(INTEGER_FORMAT).format(s.frags),
     secondary: avgOrDash(num, s.frags, s.battles),
   })),
-  statRow("destruction-ratio", "Destruction ratio", (s, num) => ({
-    primary: avgOrDash(num, s.frags, s.battles - s.survivedBattles),
-  })),
+  statRow("destruction-ratio", "Destruction ratio", (s, num) =>
+    s.survivedBattles === null
+      ? EMPTY_CELL
+      : { primary: avgOrDash(num, s.frags, s.battles - s.survivedBattles) },
+  ),
   statRow("spotted", "Tanks spotted", (s, num) => ({
     primary: num(INTEGER_FORMAT).format(s.spotted),
     secondary: avgOrDash(num, s.spotted, s.battles),
@@ -183,10 +192,9 @@ const ROWS: RowDef[] = [
   derivedRow("spotting-damages", "Spotting damages", (d) => d.spottingDamage),
   derivedRow("assisting-damages", "Assisting damages", (d) => d.assistingDamage),
   derivedRow("combined-damages", "Combined damages", (d) => d.combinedDamage),
-  statRow("base-capture", "Base capture", (s, num) => ({
-    primary: num(INTEGER_FORMAT).format(s.capturePoints),
-    secondary: avgOrDash(num, s.capturePoints, s.battles),
-  })),
+  statRow("base-capture", "Base capture", (s, num) =>
+    countCell(num, s.capturePoints, s.battles, avgOrDash),
+  ),
   statRow("base-defense", "Base defense", (s, num) => ({
     primary: num(INTEGER_FORMAT).format(s.droppedCapturePoints),
     secondary: avgOrDash(num, s.droppedCapturePoints, s.battles),
@@ -194,27 +202,35 @@ const ROWS: RowDef[] = [
   statRow("experience", "Experience", (s, num) => ({
     primary: avgOrDash(num, s.xp, s.battles),
   })),
-  statRow("hit-rate", "Hit rate", (s, num) => ({
-    primary: pctOrDash(num, s.hits, s.shots),
-  })),
+  statRow("hit-rate", "Hit rate", (s, num) =>
+    s.hits === null || s.shots === null
+      ? EMPTY_CELL
+      : { primary: pctOrDash(num, s.hits, s.shots) },
+  ),
   statRow(
     "personal-rating",
     "Personal rating",
     // Only the lifetime figure is coloured: the period columns are the change
     // in a career figure, not a rating of those battles (see `RatingMetric`).
-    (s, num) => ({
-      primary: num(INTEGER_FORMAT).format(s.globalRating),
-      color: prColor(s.globalRating),
-    }),
-    (s, num) => ({
-      primary: num(SIGNED_INTEGER_FORMAT).format(s.globalRating),
-      className:
-        s.globalRating > 0
-          ? "text-emerald-500"
-          : s.globalRating < 0
-            ? "text-red-500"
-            : undefined,
-    }),
+    (s, num) =>
+      s.globalRating === null
+        ? EMPTY_CELL
+        : {
+            primary: num(INTEGER_FORMAT).format(s.globalRating),
+            color: prColor(s.globalRating),
+          },
+    (s, num) =>
+      s.globalRating === null
+        ? EMPTY_CELL
+        : {
+            primary: num(SIGNED_INTEGER_FORMAT).format(s.globalRating),
+            className:
+              s.globalRating > 0
+                ? "text-emerald-500"
+                : s.globalRating < 0
+                  ? "text-red-500"
+                  : undefined,
+          },
     { ratingRow: RatingMetric.Pr },
   ),
   statRow(

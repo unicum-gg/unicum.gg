@@ -2646,6 +2646,25 @@ export interface components {
          * @enum {string}
          */
         battleFormatField: "random" | "clan_wars" | "advances" | "skirmish" | "maneuvers" | "onslaught" | "tournament";
+        /** @description One tank of a vehicle that fought in several. Frontline lets a player respawn in another tank, and the results carry one record per tank. */
+        BattleLineupTank: {
+            /** @description The tank, named. Null for one the catalogue does not carry, or one the client did not report. */
+            tank: components["schemas"]["BattleTank"] | null;
+            /** @description `typeCompDescr`, kept when the catalogue cannot name it. */
+            tankId: number | null;
+            damage: number;
+            radio: number;
+            track: number;
+            stun: number;
+            blocked: number;
+            spotted: number;
+            kills: number;
+            xp: number;
+            /** @description Seconds this tank was on the field. */
+            lifeTime: number;
+            /** @description `-1` when it survived, otherwise the game's own reason code. */
+            deathReason: number;
+        };
         BattleLoadoutCrew: {
             /** @description The seat, in the reader's language: commander, gunner, driver… */
             role: string;
@@ -2689,6 +2708,8 @@ export interface components {
             /** @description How the site names this player: the nickname, the clan they wear and the crests they have earned. Null for a bot, or for an account nobody has ever looked up here. */
             player: components["schemas"]["BattlePlayer"] | null;
             team: number;
+            /** @description Their platoon's number within their team, from 1, as the game's own results screen numbers it. Absent when they went in alone, in a mode with no platoons (a training room among them), and on battles recorded before platoons were reported. */
+            squad?: number;
             tank: {
                 id: number;
                 name: string;
@@ -2699,6 +2720,8 @@ export interface components {
                 tag: string;
                 slug: string | null;
             } | null;
+            /** @description Every tank this vehicle fought in, when it was more than one (Frontline respawns). `tank` is then only the first, and `own` and `rating` cover all of them. */
+            lineup?: components["schemas"]["BattleLineupTank"][];
             /** @description Their whole line, exactly as the client's results reported it: damage, radio, track, stun, blocked, received, shots, hits, piercings, spotted, kills, lifeTime, deathReason, capturePoints, xp, credits, health, maxHealth. */
             own: {
                 [key: string]: number;
@@ -5141,7 +5164,9 @@ export interface components {
             outcome: string;
             /** @description The vehicle they brought, named. Null for one the catalogue does not carry, which is what an unreleased or withdrawn vehicle looks like. */
             tank: components["schemas"]["BattleTank"] | null;
-            /** @description This player's own line through the battle. */
+            /** @description Every tank they fought in, when it was more than one, in the order the results listed them. Only the respawn modes (Frontline) produce one. When present, `tank` is only the first of them and `own` and `rating` cover all of them. Absent on a Frontline battle recorded before the mod reported the other tanks. */
+            lineup?: components["schemas"]["BattleLineupTank"][];
+            /** @description This player's own line through the battle, summed over every tank in `lineup` when there is one. */
             own: components["schemas"]["BattleVehicle"];
             /** @description What this one battle scored, keyed by metric (`wn7`, `wn8`, `wnx`). The same accumulators the lifetime figures use, fed a single battle: the ratings are defined per battle and only ever averaged. Null for a metric whose expected values do not carry this vehicle. */
             rating: {
@@ -5312,9 +5337,9 @@ export interface components {
             onslaughtSeasons: number;
             current: components["schemas"]["PlayerStats"];
             periods: {
-                h24: components["schemas"]["PlayerStats"] | null;
-                d7: components["schemas"]["PlayerStats"] | null;
-                d30: components["schemas"]["PlayerStats"] | null;
+                h24: components["schemas"]["PlayerPeriodStats"] | null;
+                d7: components["schemas"]["PlayerPeriodStats"] | null;
+                d30: components["schemas"]["PlayerPeriodStats"] | null;
             };
             derived: components["schemas"]["PlayerDerivedStats"];
             tankCount: number;
@@ -5550,6 +5575,24 @@ export interface components {
             /** @description Unix seconds of the last capture that still had them on the board. Only on a place they have lost. */
             lastSeenAt?: number;
         };
+        /** @description Random-battles counters over a window, summed from the per-vehicle diffs, which Wargaming updates after every battle while the account totals wait for the player to log out. A counter is null when a vehicle played in the window has no stored value for it at the window's start. globalRating and wtr are the change in the account's own figures, null when no account snapshot is that old. */
+        PlayerPeriodStats: {
+            battles: number;
+            wins: number;
+            losses: number | null;
+            draws: number | null;
+            survivedBattles: number | null;
+            frags: number;
+            damageDealt: number;
+            xp: number;
+            spotted: number;
+            capturePoints: number | null;
+            droppedCapturePoints: number;
+            hits: number | null;
+            shots: number | null;
+            globalRating: number | null;
+            wtr: number | null;
+        };
         /** @description Inputs for a side-by-side player comparison: each player's row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and WN8/WNX expected-value tables. */
         PlayersCompare: {
             slots: components["schemas"]["compareSlot"][];
@@ -5650,7 +5693,7 @@ export interface components {
             granularity: string;
             sessions: components["schemas"]["PlayerSession"][];
         };
-        /** @description Random-battles totals (or a period diff of them) from a snapshot. */
+        /** @description Random-battles totals from the account's latest snapshot. */
         PlayerStats: {
             battles: number;
             wins: number;

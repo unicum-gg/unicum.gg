@@ -53,6 +53,7 @@ const TANK_STATS_FIELDS = [
   "all.frags",
   "all.dropped_capture_points",
   "all.wins",
+  "all.draws",
   "all.radio_assisted_damage",
   "all.track_assisted_damage",
   "all.xp",

@@ -86,6 +86,8 @@ export type TankStats = {
     // the block above: a tank with no random battles reports none of them.
     damage_received?: number;
     capture_points?: number;
+    /** What the profile's period columns derive losses from, with `wins`. */
+    draws?: number;
     stun_number?: number;
     stun_assisted_damage?: number;
     /** Wargaming's armor use efficiency. A ratio, so it neither sums across

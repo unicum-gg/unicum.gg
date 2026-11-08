@@ -204,6 +204,11 @@ type RawTankSnapshot = {
   mark_of_mastery: number | null;
   marks_on_gun: number | null;
   mark_percent: number | null;
+  survived_battles: number | null;
+  hits: number | null;
+  shots: number | null;
+  capture_points: number | null;
+  draws: number | null;
 };
 
 type RawClanHistory = {
@@ -447,6 +452,10 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
   };
 }
 
+function nullableNumber(v: number | string | null): number | null {
+  return v == null ? null : Number(v);
+}
+
 function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
   return {
     playerId: Number(r.player_id),
@@ -464,14 +473,15 @@ function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
     markOfMastery: r.mark_of_mastery == null ? null : Number(r.mark_of_mastery),
     marksOnGun: r.marks_on_gun == null ? null : Number(r.marks_on_gun),
     markPercent: r.mark_percent == null ? null : Number(r.mark_percent),
-    // Unused by the player page's period rating diff.
-    survivedBattles: null,
-    hits: null,
-    shots: null,
+    survivedBattles: nullableNumber(r.survived_battles),
+    hits: nullableNumber(r.hits),
+    shots: nullableNumber(r.shots),
+    capturePoints: nullableNumber(r.capture_points),
+    draws: nullableNumber(r.draws),
+    // Unused by the player page.
     piercings: null,
     damageBlocked: null,
     damageReceived: null,
-    capturePoints: null,
     stunNumber: null,
     stunAssistedDamage: null,
     tankingFactor: null,
@@ -536,31 +546,44 @@ export async function loadPlayerInitialData(
   // per tank, the latest row plus each period's baseline via row_number() ranks
   // instead of four separate DISTINCT ON scans of the same partition. Measured
   // ~42% faster than the four-scan form (one heap scan, not four). It is a clear
-  // win only because tank_scan projects the fourteen columns the page actually
+  // win only because tank_scan projects the twenty columns the page actually
   // reads: carrying `SELECT *` (~40 cols) through the four window sorts was a
   // net loss, as was stripping rank columns with `to_jsonb - key` per row.
   //
-  // Baseline rule (same as the player snaps above): rows older than `interval`
-  // rank first, newest of them winning; a player tracked for less than the window
-  // falls through to their oldest snapshot (`rn = 1` on the tie-broken ASC tail),
-  // never a blank column. rn_latest ranks by battles (monotonic per tank), so it
-  // is the current per-tank row.
+  // Baseline rule: per tank, the newest row older than `interval`, or, for a
+  // player tracked for less than that, the newest row of their first fetch
+  // (everything within a minute of their oldest tank row, since one fetch
+  // writes in chunks). Put as one predicate, `in_base`: a row is a baseline
+  // candidate when it is older than the later of the cutoff and the first
+  // fetch. A tank with no candidate has NO baseline, and that is a statement:
+  // it was first played after the baseline was taken, so `tankPeriod` counts
+  // all of its battles. The old rule fell through to each tank's own oldest
+  // row instead, which for a vehicle bought inside the window is the row
+  // recording its first battles, so those battles vanished from every period
+  // figure. rn_latest ranks by battles (monotonic per tank), so it is the
+  // current per-tank row.
+  const inBase = (interval: string) => sql`(
+      taken_at < NOW() - ${interval}::interval
+      OR taken_at <= first_at + interval '1 minute'
+    )`;
   const tankRank = (interval: string) => sql`
       row_number() OVER (
         PARTITION BY tank_id
-        ORDER BY
-          (taken_at < NOW() - ${interval}::interval) DESC,
-          CASE WHEN taken_at < NOW() - ${interval}::interval THEN taken_at END DESC,
-          taken_at ASC
+        ORDER BY ${inBase(interval)} DESC, taken_at DESC, battles DESC
       )`;
   // The exact columns tankSnapshotFromRaw consumes; keep in sync with it.
   const tankCols = sql`
       player_id, tank_id, taken_at, battles, wins, damage_dealt, spotted, frags,
       dropped_capture_points, radio_assisted_damage, track_assisted_damage, xp,
-      mark_of_mastery, marks_on_gun, mark_percent`;
-  const pickTanks = (rank: string) => sql`
+      mark_of_mastery, marks_on_gun, mark_percent, survived_battles, hits,
+      shots, capture_points, draws`;
+  const pickTanks = (rank: string, interval?: string) => sql`
       (SELECT json_agg(row_to_json(t))
-       FROM (SELECT ${tankCols} FROM tank_scan WHERE ${sql.raw(rank)} = 1) t)`;
+       FROM (
+         SELECT ${tankCols} FROM tank_scan
+         WHERE ${sql.raw(rank)} = 1
+         ${interval ? sql`AND ${inBase(interval)}` : sql``}
+       ) t)`;
 
   const rows = (await traced("db loadPlayerInitialData", () => db.execute(sql`
     WITH p AS (
@@ -575,14 +598,18 @@ export async function loadPlayerInitialData(
       ORDER BY taken_at DESC, id DESC
       LIMIT 1
     ),
+    tank_rows AS (
+      SELECT ${tankCols}, min(taken_at) OVER () AS first_at
+      FROM ${tankSnapshots}
+      WHERE player_id = (SELECT id FROM p)
+    ),
     tank_scan AS (
-      SELECT ${tankCols},
+      SELECT ${tankCols}, first_at,
         row_number() OVER (PARTITION BY tank_id ORDER BY taken_at DESC, battles DESC) AS rn_latest,
         ${tankRank("24 hours")} AS rn_24h,
         ${tankRank("7 days")} AS rn_7d,
         ${tankRank("30 days")} AS rn_30d
-      FROM ${tankSnapshots}
-      WHERE player_id = (SELECT id FROM p)
+      FROM tank_rows
     ),
     snap_24h AS (${playerPeriodCte("24 hours")}),
     snap_7d AS (${playerPeriodCte("7 days")}),
@@ -604,9 +631,9 @@ export async function loadPlayerInitialData(
       (SELECT row_to_json(snap_24h.*) FROM snap_24h) AS snap_24h,
       (SELECT row_to_json(snap_7d.*) FROM snap_7d) AS snap_7d,
       (SELECT row_to_json(snap_30d.*) FROM snap_30d) AS snap_30d,
-      ${pickTanks("rn_24h")} AS tanks_24h,
-      ${pickTanks("rn_7d")} AS tanks_7d,
-      ${pickTanks("rn_30d")} AS tanks_30d
+      ${pickTanks("rn_24h", "24 hours")} AS tanks_24h,
+      ${pickTanks("rn_7d", "7 days")} AS tanks_7d,
+      ${pickTanks("rn_30d", "30 days")} AS tanks_30d
   `))) as unknown as Array<{
     player: RawPlayer | null;
     latest_snapshot: RawPlayerSnapshot | null;

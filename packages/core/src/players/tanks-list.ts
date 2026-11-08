@@ -133,11 +133,7 @@ export async function loadPlayerTanks(
         mode === null || isRatedTankMode(mode),
       ),
       overall,
-      recentTankStats(
-        overall,
-        initial.periodSnapshots.d30,
-        initial.periodTankSnapshots.d30,
-      ),
+      recentTankStats(overall, initial.periodTankSnapshots.d30),
       moeThresholds,
     ),
     mode,

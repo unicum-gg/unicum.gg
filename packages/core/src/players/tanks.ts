@@ -42,6 +42,7 @@ function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot 
         : null,
     damageReceived: a.damage_received ?? null,
     capturePoints: a.capture_points ?? null,
+    draws: a.draws ?? null,
     stunNumber: a.stun_number ?? null,
     stunAssistedDamage: a.stun_assisted_damage ?? null,
     // A ratio, not a counter: stored as WG reports it (see the schema).
@@ -91,6 +92,9 @@ export async function bulkInsertTankSnapshots(
           damageBlocked: sql`EXCLUDED.damage_blocked`,
           damageReceived: sql`EXCLUDED.damage_received`,
           capturePoints: sql`EXCLUDED.capture_points`,
+          // COALESCE because the snapshot pipeline's batched fetch is not the
+          // only writer: a row must never lose a value it already holds.
+          draws: sql`COALESCE(EXCLUDED.draws, ${table.draws})`,
           stunNumber: sql`EXCLUDED.stun_number`,
           stunAssistedDamage: sql`EXCLUDED.stun_assisted_damage`,
           tankingFactor: sql`EXCLUDED.tanking_factor`,
@@ -170,6 +174,7 @@ export async function getLatestTankSnapshotsByAccounts(
       tankingFactor: null,
       maxXp: null,
       maxFrags: null,
+      draws: null,
     });
     out.set(accountId, arr);
   }
@@ -254,6 +259,7 @@ export async function getTankSnapshotsByAccountsBefore(
       tankingFactor: null,
       maxXp: null,
       maxFrags: null,
+      draws: null,
     });
     out.set(accountId, arr);
   }
@@ -278,6 +284,14 @@ export function tankSnapshotsToTankStats(
       radio_assisted_damage: s.radioAssistedDamage,
       track_assisted_damage: s.trackAssistedDamage,
       xp: Number.isFinite(s.xp) ? (s.xp as number) : 0,
+      // The counters later migrations added, carried only where the row holds
+      // them: absent is what `TankStats` says for "not known", and the period
+      // columns refuse to sum a counter some vehicle cannot answer.
+      ...(s.survivedBattles != null && { survived_battles: s.survivedBattles }),
+      ...(s.hits != null && { hits: s.hits }),
+      ...(s.shots != null && { shots: s.shots }),
+      ...(s.capturePoints != null && { capture_points: s.capturePoints }),
+      ...(s.draws != null && { draws: s.draws }),
     },
   }));
 }

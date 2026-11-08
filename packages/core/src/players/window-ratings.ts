@@ -171,6 +171,7 @@ async function windowDiff(
         tankingFactor: null,
         maxXp: null,
         maxFrags: null,
+        draws: null,
       },
     ]),
   );

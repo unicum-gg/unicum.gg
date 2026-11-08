@@ -18,7 +18,6 @@ import {
 import type { TankStats, TankStatsWithModes } from "@unicum.gg/core/wargaming/wot/tanks";
 import { writePlayerMarkCounts } from "./mark-counts";
 import { fetchPlayerMarksOnGun } from "./marks";
-import { tanksAheadOfAccount } from "./account-lag";
 import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
 import { bulkUpsertTankModes } from "./tank-modes";
 import { upsertPlayerArchivedModes } from "./archived-modes";
@@ -483,19 +482,11 @@ export async function recordCurrentSnapshot(
     Date.now() - latest.takenAt.getTime() > SNAPSHOT_THROTTLE_MS ||
     latest.battles !== info.statistics.all.battles;
 
-  // Decided against the snapshot read above, before the insert below can move
-  // it: the account total either moved or it did not.
-  const holdTanks =
-    tanks.length > 0 &&
-    (await tanksAheadOfAccount(region, player.id, latest, info));
-
   if (!stale) {
     if (tanks.length > 0) {
-      if (!holdTanks) {
-        await bulkInsertTankSnapshots(region, player.id, tanks);
-        await updatePlayerRatings(region, player.id, info, tanks);
-      }
+      await bulkInsertTankSnapshots(region, player.id, tanks);
       await bulkUpsertTankModes(region, player.id, tanks);
+      await updatePlayerRatings(region, player.id, info, tanks);
     }
     await upsertPlayerArchivedModes(region, player.id, info);
     return { player, latest: await backfillWtr(region, latest, wtr) };
@@ -646,11 +637,9 @@ export async function recordCurrentSnapshot(
     // somebody visits; the garage sweep gives the whole fleet at once, with
     // the percent the portal has never carried. Applied last so it wins.
     await applyGarageMarks(region, info.account_id, tanks);
-    if (!holdTanks) {
-      await bulkInsertTankSnapshots(region, player.id, tanks);
-      await updatePlayerRatings(region, player.id, info, tanks);
-    }
+    await bulkInsertTankSnapshots(region, player.id, tanks);
     await bulkUpsertTankModes(region, player.id, tanks);
+    await updatePlayerRatings(region, player.id, info, tanks);
   }
   // Off the same `account/info` this snapshot was built from, so it costs no
   // call: the five blocks come back whether or not anything asked for them.
