@@ -97,8 +97,13 @@ export async function ensureLoggedIn(context: BrowserContext): Promise<boolean> 
 
 /** When the WG ID security token expires, in epoch seconds, if there is one. */
 export async function securityTokenExpiry(context: BrowserContext): Promise<number | undefined> {
-  const cookies = await context.cookies(`https://${config.realm}.wargaming.net/`);
+  // Every cookie rather than one URL's, which would also filter on domain and path.
+  const cookies = await context.cookies();
   const token = cookies.find((cookie) => cookie.name === SECURITY_TOKEN);
+  if (!token) {
+    const seen = cookies.filter((cookie) => cookie.domain.includes("wargaming")).map((cookie) => `${cookie.domain}${cookie.path} ${cookie.name}`);
+    console.log(`[wgmods] no ${SECURITY_TOKEN} among: ${seen.join(", ") || "nothing on wargaming"}`);
+  }
   return token && token.expires > 0 ? token.expires : undefined;
 }
 
