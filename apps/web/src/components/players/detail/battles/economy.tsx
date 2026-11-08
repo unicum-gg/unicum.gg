@@ -19,6 +19,7 @@ import {
 } from "@/components/panel";
 import { economyModeName } from "@/components/game-name";
 import { SegmentedControl } from "@/components/segmented-control";
+import { Spinner } from "@/components/ui/spinner";
 import { useTierParam } from "@/hooks/use-tier-param";
 import { useTranslation } from "@/hooks/use-translation";
 import { numberFormat } from "@/lib/format";
@@ -77,17 +78,21 @@ export function BattleEconomy({
   region,
   nickname,
   initial,
+  ownPrivate,
 }: {
   region: Region;
   nickname: string;
   /** Server-rendered with the tab, so the panel is there on arrival. */
   initial: PlayerModeEconomy | null;
+  /** The reader is this player and keeps their battles private, so what the
+   * page was rendered with is the visitor's answer and theirs is on its way. */
+  ownPrivate: boolean;
 }) {
   const { t } = useTranslation("components/players/detail/battles/economy");
   const { locale } = useLocale();
 
   const request = () => unicum.region(region).players(nickname).battlesEconomy();
-  const { data } = useSWR(
+  const { data, isValidating } = useSWR(
     request().url(),
     () => request().then((r) => r as unknown as PlayerModeEconomy),
     { fallbackData: initial ?? undefined, revalidateOnFocus: false },
@@ -95,6 +100,25 @@ export function BattleEconomy({
   const all = data?.rows ?? [];
   const tiers = [...new Set(all.map((row) => row.tier))].sort((a, b) => b - a);
   const [tier, setTier] = useTierParam(tiers, defaultTier(all));
+  // The page is cached for everybody, so a private list arrives with the
+  // visitor's refusal and the owner's own answer only after it. The panel
+  // keeps its place meanwhile, as the list above it does, rather than
+  // appearing from nothing and pushing everything under it down.
+  if (ownPrivate && (!data || data.hidden) && all.length === 0 && isValidating) {
+    return (
+      <>
+        <PanelSeparator />
+        <Panel>
+          <PanelHeader>
+            <PanelTitle>{t("title", { nickname })}</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex min-h-72 items-center justify-center">
+            <Spinner />
+          </PanelContent>
+        </Panel>
+      </>
+    );
+  }
   if (!data || all.length === 0) return null;
 
   const int = numberFormat(locale, INT);

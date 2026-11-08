@@ -194,13 +194,20 @@ export function BattlesTab({
           </>
         )}
       </Panel>
-      {/* What each mode paid is read off the list, so it is private with it. */}
-      {total > 0 && !refused ? (
-        <BattleEconomy region={region} nickname={nickname} initial={initialEconomy} />
+      {/* What each mode paid is read off the list, so it is private with it.
+          The owner of a private list holds a zero total until their own
+          answer lands, so their panels are kept in place from the start. */}
+      {(total > 0 || hidden) && !refused ? (
+        <BattleEconomy
+          region={region}
+          nickname={nickname}
+          initial={initialEconomy}
+          ownPrivate={isOwnProfile && hidden}
+        />
       ) : null}
       {/* Who they met stays public when the list is private: it says who they
           played beside, not what was played. */}
-      {total > 0 || refused ? (
+      {total > 0 || hidden ? (
         <BattleEncounters
           region={region}
           nickname={nickname}
