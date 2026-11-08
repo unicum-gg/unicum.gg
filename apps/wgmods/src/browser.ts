@@ -97,7 +97,7 @@ export async function ensureLoggedIn(context: BrowserContext): Promise<boolean> 
 
 /** When the WG ID security token expires, in epoch seconds, if there is one. */
 export async function securityTokenExpiry(context: BrowserContext): Promise<number | undefined> {
-  const cookies = await context.cookies("https://wargaming.net/");
+  const cookies = await context.cookies(`https://${config.realm}.wargaming.net/`);
   const token = cookies.find((cookie) => cookie.name === SECURITY_TOKEN);
   return token && token.expires > 0 ? token.expires : undefined;
 }
