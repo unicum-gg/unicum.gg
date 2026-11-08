@@ -109,7 +109,16 @@ export function BattlesPrivateOwnerNote() {
     <PanelContent className="border-fd-border border-t">
       <p className="text-fd-muted-foreground inline-flex items-center gap-1.5 text-xs">
         <LockSimpleIcon weight="fill" className="size-3" />
-        {t("private-owner")}
+        {t("private-owner")}{" "}
+        {/* The whole sentence is the link, since one word of a sentence cannot
+            be picked out across 36 languages. The top bar's dialog follows
+            this address and opens on the switch. */}
+        <a
+          href="#settings/privacy"
+          className="text-fd-foreground underline underline-offset-2"
+        >
+          {t("private-owner-change")}
+        </a>
       </p>
     </PanelContent>
   );
