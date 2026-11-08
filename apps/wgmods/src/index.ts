@@ -8,7 +8,7 @@
 import http from "node:http";
 import fs from "node:fs";
 import { config } from "./config.js";
-import { ensureLoggedIn, securityTokenExpiry, showLogin, withBrowser } from "./browser.js";
+import { ensureLoggedIn, loggedIn, securityTokenExpiry, showLogin, withBrowser } from "./browser.js";
 import { readRelease, verifySignature } from "./github.js";
 import { addVersion, hasVersion } from "./hub.js";
 import { loginLink, notify } from "./notify.js";
@@ -105,7 +105,9 @@ function watchLogin(): void {
   const until = Date.now() + LOGIN_WATCH_MS;
   watching = setInterval(() => {
     if (Date.now() > until) return clearInterval(watching);
-    void withBrowser(ensureLoggedIn)
+    // Only asks: ensureLoggedIn navigates, which would reload the login page
+    // under whoever is typing in it.
+    void withBrowser(loggedIn)
       .then(async (ok) => {
         if (!ok) return;
         clearInterval(watching);
