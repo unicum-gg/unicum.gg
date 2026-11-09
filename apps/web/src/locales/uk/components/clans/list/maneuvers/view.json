@@ -1,7 +1,6 @@
 {
   "heading": "Топ клани в <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} — регулярна кланова подія Укріпрайону у World of Tanks. Рейтинг кланів регіону {region}, складений за Очками слави безпосередньо з таблиці гри.",
-  "see-players": "Рейтинг гравців →",
   "window": "Від {from} до {to}.",
   "no-edition": "Для цього сервера ще не записано жодної редакції.",
   "not-started": "Таблицю буде відкрито {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Поріг золота",
   "clan-cutoff-hint": "Очки слави, наявні у клану на місці {places}.",
   "ranked-clans": "Рейтингові клани",
-  "recomputed": "Перераховано о {at}"
+  "recomputed": "Перераховано о {at}",
+  "board": "Топ {count} кланів",
+  "place": "#",
+  "clan": "Клан",
+  "fame-points": "Очки слави"
 }

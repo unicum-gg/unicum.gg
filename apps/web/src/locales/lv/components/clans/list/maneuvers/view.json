@@ -1,7 +1,6 @@
 {
   "heading": "Top klani: <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} ir World of Tanks periodiskais Stronghold klanu notikums. {region} klanu klasifikācija, ranžēta pēc Slavas punktiem, taisni no spēles tabulas.",
-  "see-players": "Spēlētāju klasifikācija →",
   "window": "No {from} līdz {to}.",
   "no-edition": "Šim serverim vēl nav reģistrēts neviens izlaidums.",
   "not-started": "Tabula atveras {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Zelta slieksnis",
   "clan-cutoff-hint": "Klana iegūtie Slavas punkti {places}. vietā.",
   "ranked-clans": "Ranžētie klani",
-  "recomputed": "Atkārtoti aprēķināts {at}"
+  "recomputed": "Atkārtoti aprēķināts {at}",
+  "board": "Top {count} klani",
+  "place": "#",
+  "clan": "Klans",
+  "fame-points": "Slavas punkti"
 }

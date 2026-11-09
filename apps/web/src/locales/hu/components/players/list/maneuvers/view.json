@@ -1,7 +1,6 @@
 {
   "heading": "Legjobb játékosok, <accent>{maneuvers}</accent> szerint",
   "intro": "{maneuvers} a World of Tanks visszatérő Erődítmény-kláneseménye. A {region} régió játékosranglistája Dicsőségpontok szerint rangsorolva, egyenesen a játék saját ranglistájáról.",
-  "see-clans": "Klánok ranglistája →",
   "window": "{from} és {to} között.",
   "no-edition": "Ezen a szerveren még nincs rögzített kiadás.",
   "not-started": "A ranglista ekkor nyílik meg: {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Járműküszöbérték",
   "tank-cutoff-hint": "A {places}. helyen álló játékos által megszerzett Dicsőségpontok.",
   "ranked-players": "Rangsorolt játékosok",
-  "recomputed": "Újraszámítva: {at}"
+  "recomputed": "Újraszámítva: {at}",
+  "board": "Legjobb {count} játékos",
+  "place": "#",
+  "player": "Játékos",
+  "fame-points": "Dicsőségpontok"
 }

@@ -1,7 +1,6 @@
 {
   "heading": "Top jogadores em <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} é o evento recorrente de clãs da Fortaleza de World of Tanks. A classificação de jogadores da {region}, classificada por Pontos de fama, direto da própria classificação do jogo.",
-  "see-clans": "Classificação de clãs →",
   "window": "De {from} a {to}.",
   "no-edition": "Nenhuma edição foi registrada para este servidor até o momento.",
   "not-started": "A classificação abre em {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Limite de veículos",
   "tank-cutoff-hint": "Pontos de fama conquistados pelo jogador no lugar {places}.",
   "ranked-players": "Jogadores classificados",
-  "recomputed": "Recalculado em {at}"
+  "recomputed": "Recalculado em {at}",
+  "board": "Top {count} jogadores",
+  "place": "#",
+  "player": "Jogador",
+  "fame-points": "Pontos de fama"
 }

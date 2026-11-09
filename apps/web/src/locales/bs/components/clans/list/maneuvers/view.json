@@ -1,7 +1,6 @@
 {
   "heading": "Najbolji klanovi u <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je ponavljajući klanski događaj Utvrde u igri World of Tanks. Poredak klanova u regiji {region}, rangiran prema Bodovima slave, pravo sa rang-liste iz igre.",
-  "see-players": "Poredak igrača →",
   "window": "{from} do {to}.",
   "no-edition": "Za ovaj server još nije zabilježeno nijedno izdanje.",
   "not-started": "Rang-lista se otvara {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Prag za zlato",
   "clan-cutoff-hint": "Bodovi slave koje zadržava klan na {places}. mjestu.",
   "ranked-clans": "Rangirani klanovi",
-  "recomputed": "Ponovo izračunato u {at}"
+  "recomputed": "Ponovo izračunato u {at}",
+  "board": "Najbolji klanovi ({count})",
+  "place": "#",
+  "clan": "Klana",
+  "fame-points": "Bodovi slave"
 }

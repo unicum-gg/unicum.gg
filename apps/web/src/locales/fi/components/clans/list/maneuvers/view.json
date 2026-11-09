@@ -1,7 +1,6 @@
 {
   "heading": "Parhaat klaanit tapahtumassa <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} on World of Tanksin toistuva Linnoitus-klaanitapahtuma. {region}-alueen klaanisijoitukset, rankattuina Mainepisteiden mukaan, suoraan pelin omasta tulostaulukosta.",
-  "see-players": "Pelaajien sijoitukset →",
   "window": "{from} - {to}.",
   "no-edition": "Tälle palvelimelle ei ole vielä tallennettu versiota.",
   "not-started": "Tulostaulukko avautuu {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Kullan raja",
   "clan-cutoff-hint": "Sijalla {places} olevan klaanin hallussa olevat Mainepisteet.",
   "ranked-clans": "Rankatut klaanit",
-  "recomputed": "Laskettu uudelleen ajankohtana {at}"
+  "recomputed": "Laskettu uudelleen ajankohtana {at}",
+  "board": "Parhaat {count} klaania",
+  "place": "#",
+  "clan": "Klaani",
+  "fame-points": "Mainepisteet"
 }

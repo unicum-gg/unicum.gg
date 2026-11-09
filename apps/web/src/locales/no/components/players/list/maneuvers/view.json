@@ -1,7 +1,6 @@
 {
   "heading": "Topp spillere i <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} er World of Tanks’ tilbakevendende klanhendelse i Festning. Rangeringen for spillere i {region}, rangert etter Berømmelsespoeng, rett fra spillets egen tavle.",
-  "see-clans": "Klanrangering →",
   "window": "{from} til {to}.",
   "no-edition": "Ingen utgave er registrert for denne serveren ennå.",
   "not-started": "Tavlen åpner {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Kjøretøygrense",
   "tank-cutoff-hint": "Berømmelsespoeng spilleren hadde på {places}. plass.",
   "ranked-players": "Rangerte spillere",
-  "recomputed": "Beregnet på nytt {at}"
+  "recomputed": "Beregnet på nytt {at}",
+  "board": "Topp {count} spillere",
+  "place": "#",
+  "player": "Spiller",
+  "fame-points": "Berømmelsespoeng"
 }

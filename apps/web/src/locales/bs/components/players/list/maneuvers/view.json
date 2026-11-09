@@ -1,7 +1,6 @@
 {
   "heading": "Najbolji igrači u <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je ponavljajući klanski događaj Utvrde u igri World of Tanks. Poredak igrača u regiji {region}, rangiran prema Bodovima slave, pravo sa rang-liste iz igre.",
-  "see-clans": "Poredak klanova →",
   "window": "{from} do {to}.",
   "no-edition": "Za ovaj server još nije zabilježeno nijedno izdanje.",
   "not-started": "Rang-lista se otvara {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Prag vozila",
   "tank-cutoff-hint": "Bodovi slave koje igrač ima na {places}. mjestu.",
   "ranked-players": "Rangirani igrači",
-  "recomputed": "Ponovo izračunato u {at}"
+  "recomputed": "Ponovo izračunato u {at}",
+  "board": "Najbolji igrači ({count})",
+  "place": "#",
+  "player": "Igrač",
+  "fame-points": "Bodovi slave"
 }

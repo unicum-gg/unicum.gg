@@ -1,7 +1,6 @@
 {
   "heading": "상위 플레이어들 <accent>{maneuvers}</accent>",
   "intro": "{maneuvers}는 World of Tanks의 반복되는 요새 클랜 이벤트입니다. 게임 자체 리더보드에서 직접 가져온 {region} 지역 플레이어 순위이며, 명예 점수 순으로 정렬되어 있습니다.",
-  "see-clans": "클랜 순위 →",
   "window": "{from}부터 {to}까지.",
   "no-edition": "이 서버에는 아직 기록된 회차가 없습니다.",
   "not-started": "리더보드는 {date}에 열립니다.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "차량 컷오프",
   "tank-cutoff-hint": "{places}위 플레이어가 보유한 명예 점수입니다.",
   "ranked-players": "순위권 플레이어",
-  "recomputed": "{at}에 다시 계산됨"
+  "recomputed": "{at}에 다시 계산됨",
+  "board": "상위 {count} 플레이어들",
+  "place": "#",
+  "player": "플레이어",
+  "fame-points": "명예 점수"
 }

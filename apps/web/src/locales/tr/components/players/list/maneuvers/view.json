@@ -1,7 +1,6 @@
 {
   "heading": "<accent>{maneuvers}</accent> içindeki en iyi oyuncular",
   "intro": "{maneuvers}, World of Tanks’ın düzenli olarak tekrarlanan Tahkimat klan etkinliğidir. Şöhret Puanlarına göre sıralanmış {region} bölgesindeki oyuncu sıralamaları, doğrudan oyunun kendi tablosundan.",
-  "see-clans": "Klan sıralamaları →",
   "window": "{from} ile {to} arası.",
   "no-edition": "Bu sunucuda henüz hiçbir sürüm kaydedilmedi.",
   "not-started": "Tablo {date} tarihinde açılır.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Araç eşiği",
   "tank-cutoff-hint": "{places}. sıradaki oyuncunun sahip olduğu Şöhret Puanları.",
   "ranked-players": "Sıralamadaki oyuncular",
-  "recomputed": "{at} itibarıyla yeniden hesaplandı"
+  "recomputed": "{at} itibarıyla yeniden hesaplandı",
+  "board": "En iyi {count} oyuncu",
+  "place": "#",
+  "player": "Oyuncu",
+  "fame-points": "Şöhret Puanları"
 }

@@ -1,13 +1,16 @@
 {
   "heading": "أفضل اللاعبين في <accent>{maneuvers}</accent>",
   "intro": "‏{maneuvers} هو حدث المعقل المتكرر لعشائر World of Tanks. ترتيب لاعبي {region}، مصنّف حسب نقاط الشهرة، مباشرةً من لوحة المتصدرين الخاصة باللعبة.",
-  "see-clans": "ترتيب العشائر ←",
   "window": "من {from} إلى {to}.",
   "no-edition": "لم يُسجَّل أي إصدار لهذا الخادم حتى الآن.",
   "not-started": "تُفتح لوحة المتصدرين في {date}.",
   "not-started-undated": "لم تُفتح لوحة المتصدرين بعد.",
   "tank-cutoff": "الحد الفاصل للمركبة",
   "tank-cutoff-hint": "نقاط الشهرة المُحتفَظ بها لدى اللاعب في المركز {places}.",
-  "ranked-players": "اللاعبون المصنّفون",
-  "recomputed": "أُعيد حسابه في {at}"
+  "ranked-players": "اللاعبون المصنفون",
+  "recomputed": "أُعيد حسابه في {at}",
+  "board": "أفضل {count} من اللاعبين",
+  "place": "#",
+  "player": "لاعب",
+  "fame-points": "نقاط الشهرة"
 }

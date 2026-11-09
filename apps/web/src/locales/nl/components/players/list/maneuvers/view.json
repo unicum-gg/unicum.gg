@@ -1,7 +1,6 @@
 {
   "heading": "<accent>Top spelers</accent> in {maneuvers}",
   "intro": "{maneuvers} is het terugkerende clan-evenement Bolwerk van World of Tanks. De klassementen van spelers in {region}, gerangschikt op Roempunten, rechtstreeks uit het eigen klassement van het spel.",
-  "see-clans": "Klassementen van clans →",
   "window": "{from} tot {to}.",
   "no-edition": "Er is nog geen editie voor deze server geregistreerd.",
   "not-started": "Het klassement opent op {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Voertuiggrens",
   "tank-cutoff-hint": "Roempunten die de speler op plaats {places} heeft behaald.",
   "ranked-players": "Gerangschikte spelers",
-  "recomputed": "Opnieuw berekend om {at}"
+  "recomputed": "Opnieuw berekend om {at}",
+  "board": "Top {count} spelers",
+  "place": "#",
+  "player": "Speler",
+  "fame-points": "Roempunten"
 }

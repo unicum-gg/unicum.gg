@@ -1,7 +1,6 @@
 {
   "heading": "Najbolji klanovi u <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je периодични klanski događaj Утврђење у игри World of Tanks. Пласман кланова у {region}, рангиран према Poeni slave, директно са табеле саме игре.",
-  "see-players": "Пласман igrača →",
   "window": "Од {from} до {to}.",
   "no-edition": "За овај сервер још није забележено ниједно издање.",
   "not-started": "Отварање табеле је {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Prag za Zlato",
   "clan-cutoff-hint": "Poeni slave које је клан имао на {places}. месту.",
   "ranked-clans": "Rangirani кланови",
-  "recomputed": "Поново израчунато у {at}"
+  "recomputed": "Поново израчунато у {at}",
+  "board": "Najboljih {count} klanova",
+  "place": "#",
+  "clan": "Klan",
+  "fame-points": "Poeni slave"
 }

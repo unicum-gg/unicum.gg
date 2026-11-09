@@ -1,7 +1,6 @@
 {
   "heading": "Top giocatori in <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} è l’evento clan ricorrente della Roccaforte di World of Tanks. La classifica dei giocatori della regione {region}, classificata per Punti fama, dritto dalla classifica del gioco.",
-  "see-clans": "Classifiche dei clan →",
   "window": "Dal {from} al {to}.",
   "no-edition": "Nessuna edizione è ancora stata registrata per questo server.",
   "not-started": "La classifica apre il {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Soglia veicolo",
   "tank-cutoff-hint": "Punti fama posseduti dal giocatore al posto {places}.",
   "ranked-players": "Giocatori classificati",
-  "recomputed": "Ricalcolato alle {at}"
+  "recomputed": "Ricalcolato alle {at}",
+  "board": "Top {count} giocatori",
+  "place": "#",
+  "player": "Giocatore",
+  "fame-points": "Punti fama"
 }

@@ -1,7 +1,6 @@
 {
   "heading": "Top klaner i <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} er World of Tanks’ tilbagevendende Højborg-begivenhed for klaner. Klanplaceringerne i {region}, rangeret efter Berømmelsespoint, lige fra spillets egen rangliste.",
-  "see-players": "Spillerplaceringer →",
   "window": "{from} til {to}.",
   "no-edition": "Ingen udgave er endnu registreret for denne server.",
   "not-started": "Ranglisten åbner den {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Guldgrænse",
   "clan-cutoff-hint": "Berømmelsespoint afholdt af klanen på {places}. placering.",
   "ranked-clans": "Rangerede klaner",
-  "recomputed": "Beregnet igen kl. {at}"
+  "recomputed": "Beregnet igen kl. {at}",
+  "board": "Top {count} klaner",
+  "place": "#",
+  "clan": "Klan",
+  "fame-points": "Berømmelsespoint"
 }

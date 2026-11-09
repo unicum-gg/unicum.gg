@@ -1,7 +1,6 @@
 {
   "heading": "Nejlepší klany v <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je opakující se klanová událost Pevnost ve World of Tanks. Pořadí klanů v regionu {region}, seřazené podle Bodů slávy, přímo z vlastního žebříčku hry.",
-  "see-players": "Pořadí hráčů →",
   "window": "Od {from} do {to}.",
   "no-edition": "Na tomto serveru zatím nebyla zaznamenána žádná edice.",
   "not-started": "Žebříček se otevírá {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Hranice zlaťáků",
   "clan-cutoff-hint": "Body slávy vlastněné klanem na {places}. místě.",
   "ranked-clans": "Hodnocené klany",
-  "recomputed": "Přepočítáno v {at}"
+  "recomputed": "Přepočítáno v {at}",
+  "board": "Nejlepších {count} klanů",
+  "place": "#",
+  "clan": "Klan",
+  "fame-points": "Body slávy"
 }

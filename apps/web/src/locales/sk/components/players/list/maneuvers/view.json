@@ -1,7 +1,6 @@
 {
   "heading": "Najlepší hráči v <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je opakujúca sa klanová udalosť Pevnosť v hre World of Tanks. Poradie hráčov v regióne {region}, zoradené podľa Bodov slávy, priamo z vlastnej hernej lestvice.",
-  "see-clans": "Poradie klanov →",
   "window": "Od {from} do {to}.",
   "no-edition": "Pre tento server zatiaľ nebola zaznamenaná žiadna edícia.",
   "not-started": "Lestvica bude otvorená {date}.",
@@ -9,5 +8,9 @@
   "tank-cutoff": "Prag vozidla",
   "tank-cutoff-hint": "Body slávy v lasti hráča na {places}. mieste.",
   "ranked-players": "Hodnotení hráči",
-  "recomputed": "Znova vypočítané o {at}"
+  "recomputed": "Znova vypočítané o {at}",
+  "board": "Najlepších {count} hráčov",
+  "place": "#",
+  "player": "Hráč",
+  "fame-points": "Body slávy"
 }

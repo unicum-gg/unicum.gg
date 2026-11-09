@@ -1,7 +1,6 @@
 {
   "heading": "Najlepšie clany v <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} je opakujúca sa klanová udalosť Pevnosť v hre World of Tanks. Poradie klanov v regióne {region}, zoradené podľa Bodov slávy, priamo z vlastnej hernej lestvice.",
-  "see-players": "Poradie hráčov →",
   "window": "Od {from} do {to}.",
   "no-edition": "Pre tento server zatiaľ nebola zaznamenaná žiadna edícia.",
   "not-started": "Lestvica bude otvorená {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Prag zlata",
   "clan-cutoff-hint": "Body slávy v lasti klanu na {places}. mieste.",
   "ranked-clans": "Uvrštené klany",
-  "recomputed": "Znova vypočítané o {at}"
+  "recomputed": "Znova vypočítané o {at}",
+  "board": "Najlepších {count} klanov",
+  "place": "#",
+  "clan": "Clan",
+  "fame-points": "Body slávy"
 }

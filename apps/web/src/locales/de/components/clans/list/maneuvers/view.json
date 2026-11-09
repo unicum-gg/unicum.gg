@@ -1,7 +1,6 @@
 {
   "heading": "Top-Clans in <accent>{maneuvers}</accent>",
   "intro": "{maneuvers} ist das wiederkehrende Festungs-Clanereignis von World of Tanks. Die {region}-Clanrangliste, nach Ruhmpunkten gewertet, gerade aus der Rangliste des Spiels.",
-  "see-players": "Spielerrangliste →",
   "window": "{from} bis {to}.",
   "no-edition": "Für diesen Server wurde noch keine Ausgabe aufgezeichnet.",
   "not-started": "Die Rangliste öffnet am {date}.",
@@ -9,5 +8,9 @@
   "clan-cutoff": "Gold-Schwellenwert",
   "clan-cutoff-hint": "Ruhmpunkte, die der Clan auf Platz {places} ausgetragen hat.",
   "ranked-clans": "Gewertete Clans",
-  "recomputed": "Neu berechnet: {at}"
+  "recomputed": "Neu berechnet: {at}",
+  "board": "Top-{count}-Clans",
+  "place": "#",
+  "clan": "Clan",
+  "fame-points": "Ruhmpunkte"
 }
