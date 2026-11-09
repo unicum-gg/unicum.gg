@@ -1,6 +1,8 @@
 // Adding a version to the mod on wgmods.net, through the same two views its own
 // edit page uses. A port of unicum.gg-mod's tools/publish_hub.py, which found
 // every one of these the hard way: read its comments before changing a call.
+import fs from "node:fs";
+import path from "node:path";
 import type { BrowserContext } from "playwright-core";
 import { config } from "./config.js";
 import { HUB, hubHeaders } from "./browser.js";
@@ -25,6 +27,8 @@ export type Release = {
   notes: string;
   archive: { name: string; bytes: Buffer };
 };
+
+export type ReleaseNotes = { version: string; body: string };
 
 async function json(context: BrowserContext, url: string): Promise<any> {
   const response = await context.request.get(url, {
@@ -72,6 +76,74 @@ export async function reviewReport(context: BrowserContext): Promise<string[]> {
   lines.push(`change log list: ${(mod.change_log ?? []).map((entry: { version?: unknown }) => entry.version).join(", ")}`);
   lines.push(`comments: ${JSON.stringify(comments).slice(0, 6000)}`);
   return lines;
+}
+
+const newestFirst = (a: { version: string }, b: { version: string }) =>
+  b.version.localeCompare(a.version, undefined, { numeric: true });
+
+/** Everything on the mod a save must leave as it found it. */
+function untouched(mod: any): string {
+  return JSON.stringify({
+    author: mod.author_name,
+    status: mod.status,
+    tags: mod.tags,
+    screenshots: (mod.screenshots ?? []).map((entry: { source: string }) => entry.source),
+    localizations: mod.localizations,
+    versions: (mod.versions ?? []).map((entry: { id: number; status: number }) => [entry.id, entry.status]),
+  });
+}
+
+/**
+ * Add the releases missing from the mod's own change log, which is what its
+ * page lists. A version's `change_log` does not reach that list: only saving
+ * the whole mod does, so this sends what the edit page's Save sends, built from
+ * the mod as it stands. Returns the versions added and whether anything else
+ * on the mod moved, which is checked rather than assumed.
+ */
+export async function syncChangeLog(
+  context: BrowserContext,
+  releases: ReleaseNotes[],
+): Promise<{ added: string[]; moved: boolean }> {
+  const before = await json(context, OWNER());
+  // A draft or a refused mod saves its version along with it, which this does not.
+  if ([0, 2].includes(before.state)) throw new Error(`the mod is in state ${before.state}, not saved from here`);
+  const listed = new Set((before.change_log ?? []).map((entry: { version: string }) => entry.version));
+  const missing = releases.filter((release) => !listed.has(release.version));
+  if (!missing.length) return { added: [], moved: false };
+
+  fs.writeFileSync(path.join(config.dataDir, `mod-before-${Date.now()}.json`), JSON.stringify(before));
+  const saved = await context.request.put(`${HUB}/api/mods/${config.modId}/`, {
+    headers: { ...(await hubHeaders(context)), "Content-Type": "application/json", "X-API-Version": "2" },
+    data: {
+      status: before.status,
+      tags: before.tags,
+      author_name: before.author_name || null,
+      change_log: [...(before.change_log ?? []), ...missing.map((release) => ({ ...release, date: "" }))].sort(newestFirst),
+      screenshots: (before.screenshots ?? []).map((entry: { id: number; source: string }, position: number) => ({
+        screenshot: entry.id,
+        source: entry.source,
+        position,
+      })),
+      localizations: (before.localizations ?? []).map((entry: any) => ({
+        lang: entry.lang.id,
+        title: entry.title,
+        description: entry.description,
+        installation_guide: entry.installation_guide,
+      })),
+      versions: [],
+    },
+    failOnStatusCode: false,
+  });
+  if (saved.status() !== 200) throw new Error(`saving the mod: HTTP ${saved.status()} ${(await saved.text()).slice(0, 600)}`);
+
+  const after = await json(context, OWNER());
+  const now = new Set((after.change_log ?? []).map((entry: { version: string }) => entry.version));
+  const lost = missing.filter((release) => !now.has(release.version)).map((release) => release.version);
+  if (lost.length) throw new Error(`saved, but the change log still lacks ${lost.join(", ")}`);
+  return {
+    added: missing.map((release) => release.version),
+    moved: untouched(before) !== untouched(after) || before.state !== after.state,
+  };
 }
 
 /** Upload the archive and create the version. Wargaming reviews it before it shows. */

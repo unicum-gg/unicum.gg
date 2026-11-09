@@ -4,7 +4,8 @@
 // hub check turns into a no-op.
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { config } from "./config.js";
-import type { Release } from "./hub.js";
+import type { Release, ReleaseNotes } from "./hub.js";
+import { plainNotes } from "./notes.js";
 
 const API = "https://api.github.com";
 const ZIP = /^unicum\.gg_(\d+\.\d+\.\d+)\.zip$/;
@@ -47,7 +48,20 @@ export async function readRelease(tag: string): Promise<Release> {
   return {
     version: tag.slice(1),
     client: clientOf(bytes),
-    notes: String(release.body ?? "").trim(),
+    notes: plainNotes(String(release.body ?? "")),
     archive: { name: asset.name, bytes },
   };
+}
+
+/** Every published release's notes, which is what the hub's change log should list. */
+export async function readAllNotes(): Promise<ReleaseNotes[]> {
+  const releases = (await (await get(`${API}/repos/${config.repository}/releases?per_page=100`)).json()) as {
+    draft: boolean;
+    tag_name: string;
+    body: string | null;
+  }[];
+  return releases
+    .filter((release) => !release.draft && /^v\d+\.\d+\.\d+$/.test(release.tag_name))
+    .map((release) => ({ version: release.tag_name.slice(1), body: plainNotes(String(release.body ?? "")) }))
+    .filter((release) => release.body);
 }

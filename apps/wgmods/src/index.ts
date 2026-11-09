@@ -9,8 +9,8 @@ import http from "node:http";
 import fs from "node:fs";
 import { config } from "./config.js";
 import { ensureLoggedIn, loggedIn, securityTokenExpiry, showLogin, withBrowser } from "./browser.js";
-import { readRelease, verifySignature } from "./github.js";
-import { addVersion, hasVersion, reviewReport } from "./hub.js";
+import { readAllNotes, readRelease, verifySignature } from "./github.js";
+import { addVersion, hasVersion, reviewReport, syncChangeLog } from "./hub.js";
 import { loginLink, notify } from "./notify.js";
 import { serveRemote, upgradeRemote } from "./remote.js";
 import { readState, updateState } from "./state.js";
@@ -46,10 +46,23 @@ async function publish(tag: string): Promise<void> {
     state.published = tag;
     if (state.pending === tag) delete state.pending;
   });
+  await updateChangeLog();
   if (outcome === "sent") {
     await notify(`${tag} sent to wgmods; Wargaming reviews it before it shows on the hub.`);
   } else {
     log(`${tag} is already on the hub`);
+  }
+}
+
+/** The mod's change log, brought up to the releases. A failure costs nothing else. */
+async function updateChangeLog(): Promise<void> {
+  try {
+    const notes = await readAllNotes();
+    const { added, moved } = await withBrowser((context) => syncChangeLog(context, notes));
+    if (added.length) log(`change log: added ${added.join(", ")}`);
+    if (moved) await notify(`Saving the wgmods change log (${added.join(", ")}) also changed something else on the mod. The previous state is kept in the data volume.`);
+  } catch (error) {
+    console.error("[wgmods] updating the change log failed", error);
   }
 }
 
@@ -98,6 +111,7 @@ async function keepAlive(): Promise<void> {
   await withBrowser(reviewReport)
     .then((lines) => lines.forEach((line) => log(`hub: ${line}`)))
     .catch((error) => console.error("[wgmods] reading the review state failed", error));
+  await updateChangeLog();
   if (state.pending) await publish(state.pending);
 }
 
