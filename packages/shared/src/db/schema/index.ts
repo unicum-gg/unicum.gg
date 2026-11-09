@@ -9,6 +9,7 @@ export * from "./clans";
 export * from "./clan-ratings";
 export * from "./coverage-trends";
 export * from "./stronghold-ratings";
+export * from "./maneuvers";
 export * from "./onslaught-ratings";
 export * from "./cron-leader";
 export * from "./changelog-state";
